@@ -92,7 +92,7 @@ void Asteroid::UpdateInfo()
 	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(data_planet.speed*100)));
 }     
 
-void Asteroid::Render_NEW(const vec2f& scroll_coords)
+void Asteroid::Render_NEW(const Vec2<float>& scroll_coords)
 {
 	UpdateRenderAnimation();
 	RenderMesh(scroll_coords);

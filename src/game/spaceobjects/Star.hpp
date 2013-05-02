@@ -33,7 +33,7 @@ class Star : public BasePlanet
     		Star(int);
     		virtual ~Star();
                 
-		const Color4f& GetColor() const { return color; }
+		const Color4<float>& GetColor() const { return color; }
 		int GetColorId()           const { return textureOb->color_id; }
 		float GetBrightThreshold() const { return textureOb->brightThreshold; }
 		float GetDColor() const { return d_color; }
@@ -53,7 +53,7 @@ class Star : public BasePlanet
 		void ResolveData();
                 
         private:
-        	Color4f color;
+        	Color4<float> color;
         	float d_color;
         	
         	bool spark_active;

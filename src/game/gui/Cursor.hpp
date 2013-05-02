@@ -37,7 +37,7 @@ class Cursor : public BaseGui
 		void SetLeftMouseButtonClick(bool left_click) 		{ data_mouse.left_click = left_click; };
 		void SetRightMouseButtonClick(bool right_click) 	{ data_mouse.right_click = right_click; };
 		void SetFocusedObject(Base* focused_ob) { this->focused_ob = focused_ob; };
-		//void SetFocusedObject(Base* focused_ob, const vec2f& offset) { this->focused_ob = focused_ob; this->offset = offset; };
+		//void SetFocusedObject(Base* focused_ob, const Vec2<float>& offset) { this->focused_ob = focused_ob; this->offset = offset; };
 						
 		const MouseData& GetMouseData() { return data_mouse; };
 		ItemSlot* GetItemSlot() const { return item_slot; };
@@ -51,7 +51,7 @@ class Cursor : public BaseGui
 		void RenderFocusedObjectInfo();
 				
         private:
-        	//vec2f offset;
+        	//Vec2<float> offset;
         	
         	ItemSlot* item_slot;  
         	Rect rect;      	

@@ -19,13 +19,13 @@
 #ifndef ANIMATIONEFFECT2D_H
 #define ANIMATIONEFFECT2D_H
 
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 class Rect;
 
 class AnimationEffect2D
 {
 	public:
-		AnimationEffect2D(const vec2f& scale_min, const vec2f& scale_max, const vec2f& d_scale, float angle_min, float angle_max, float d_angle):
+		AnimationEffect2D(const Vec2<float>& scale_min, const Vec2<float>& scale_max, const Vec2<float>& d_scale, float angle_min, float angle_max, float d_angle):
 		scale_min(scale_min), 
 		scale_max(scale_max), 
 		d_scale(d_scale), 
@@ -37,17 +37,17 @@ class AnimationEffect2D
 		
 		~AnimationEffect2D() {};
 	
-		const vec2f& GetScale() const { return scale; };
+		const Vec2<float>& GetScale() const { return scale; };
 		float GetAngle() const { return angle; };
 		
 		void Update(Rect&);
 		void Reset();
 		
 	private:
-		vec2f scale;
-		vec2f scale_min;
-		vec2f scale_max;
-		vec2f d_scale;
+		Vec2<float> scale;
+		Vec2<float> scale_min;
+		Vec2<float> scale_max;
+		Vec2<float> d_scale;
 		
 		float angle;
 		float angle_min;

@@ -19,7 +19,7 @@
 #ifndef ANIMATIONBASE_H
 #define ANIMATIONBASE_H
 
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 
 class AnimationBase
 {  
@@ -30,7 +30,7 @@ class AnimationBase
 			{}
         	virtual ~AnimationBase() {};
 
-        	virtual void Update(vec3f&) = 0;
+        	virtual void Update(Vec3<float>&) = 0;
 
         protected:       
         	bool clockwise;

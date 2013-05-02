@@ -27,7 +27,7 @@ class AnimationConstantRotationAxisX : public AnimationBase
         	AnimationConstantRotationAxisX(float);
         	virtual ~AnimationConstantRotationAxisX();
 
-        	virtual void Update(vec3f&);
+        	virtual void Update(Vec3<float>&);
       
 };
 

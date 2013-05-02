@@ -38,7 +38,7 @@ BaseButton::BaseButton(TextureOb* textureOb, int subtype_id, const std::string& 
 	lock  = false;
 	pressed = false;
 	
-	animation_scale = new AnimationEffect2D(vec2f(0.7, 0.7), vec2f(1.3, 1.3), vec2f(0.02, 0.02), 0, 0, 0);
+	animation_scale = new AnimationEffect2D(Vec2<float>(0.7, 0.7), Vec2<float>(1.3, 1.3), Vec2<float>(0.02, 0.02), 0, 0, 0);
 }
 
 BaseButton::~BaseButton()
@@ -89,8 +89,8 @@ void BaseButton::SetCenter(int x, int y)
 
 void BaseButton::RenderInfo(int gui_offset_x, int gui_offset_y) const
 {
-	vec2f pos(rect.GetBottomLeft().x+gui_offset_x, rect.GetBottomLeft().y+gui_offset_y);
-	drawSimpleColoredTextWithBackground(info, 12, pos, Color4i());
+	Vec2<float> pos(rect.GetBottomLeft().x+gui_offset_x, rect.GetBottomLeft().y+gui_offset_y);
+	drawSimpleColoredTextWithBackground(info, 12, pos, Color4<int>());
 }
 
 void BaseButton::Render(int offset_x, int offset_y) const
@@ -116,7 +116,7 @@ void BaseButton::Render(int offset_x, int offset_y) const
    		
 	if (label != "")
 	{
-		vec2f pos(rect.GetBottomLeft().x + offset_x, rect.GetBottomLeft().y + rect.GetHeight() + offset_y);
+		Vec2<float> pos(rect.GetBottomLeft().x + offset_x, rect.GetBottomLeft().y + rect.GetHeight() + offset_y);
 		Screen::Instance().DrawText(label, 12, pos);
 	}
 }

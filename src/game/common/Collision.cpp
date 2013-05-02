@@ -30,7 +30,7 @@ bool collisionBetweenCenters(const Points& points1, const Points& points2, float
     	return true;
 }
 
-bool collisionBetweenCenters(const Points& points1, const vec2f& point2, float collision_radius)
+bool collisionBetweenCenters(const Points& points1, const Vec2<float>& point2, float collision_radius)
 {
     	if(std::fabs(points1.GetCenter().x - point2.x) > collision_radius)
        		return false;

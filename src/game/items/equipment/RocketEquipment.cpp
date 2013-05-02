@@ -150,7 +150,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 {
 	int num = 0;
 
-	vec2f start_pos;
+	Vec2<float> start_pos;
 	float angle_inD;
 			
 	if (fire_atOnce>=1)

@@ -21,7 +21,7 @@
 
 #include <boost/property_tree/ptree.hpp>
 #include "../resources/textureOb.hpp"
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 
 class BaseBackGroundEffect
 {
@@ -29,10 +29,10 @@ class BaseBackGroundEffect
 	        BaseBackGroundEffect();
 	        ~BaseBackGroundEffect();
 
-		void SetTextureOb(TextureOb* textureOb, const vec3f& scale_factor = vec3f(1.0, 1.0, 1.0));
+		void SetTextureOb(TextureOb* textureOb, const Vec3<float>& scale_factor = Vec3<float>(1.0, 1.0, 1.0));
 
-		void SetScale(const vec3f& scale) 		{ this->scale = scale; }
-	        void SetCenter(const vec3f& center)		{ this->center = center; }
+		void SetScale(const Vec3<float>& scale) 		{ this->scale = scale; }
+	        void SetCenter(const Vec3<float>& center)		{ this->center = center; }
 	        void SetParallaxRate(float parallax_rate) 	{ this->parallax_rate = parallax_rate; } 
       		        	
         protected:
@@ -43,8 +43,8 @@ class BaseBackGroundEffect
        	       	TextureOb* textureOb;
        	       	std::string textureOb_path;
        	       	
-        	vec3f center;
-		vec3f scale;		
+        	Vec3<float> center;
+		Vec3<float> scale;		
 
 		float parallax_rate;
         	

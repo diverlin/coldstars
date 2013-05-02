@@ -35,7 +35,7 @@ class Galaxy : public Base
                 
                 virtual void PutChildsToGarbage() const;
                 
-     		void Add(StarSystem*, const vec2f&);
+     		void Add(StarSystem*, const Vec2<float>&);
      		
      		StarSystem* GetRandomStarSystem(int condition_id = NONE_ID);
                 StarSystem* GetClosestStarSystemTo(StarSystem*, int condition_id = NONE_ID);

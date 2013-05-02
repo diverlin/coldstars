@@ -19,45 +19,45 @@
 #ifndef RECT_H
 #define RECT_H
 
-#include "myVector.hpp"
+#include "../math/myVector.hpp"
 
 class Rect
 {  
 	public:
 	    	Rect();
 	    	Rect(float, float, float, float);
-      		Rect(const vec2f&, float, float);
+      		Rect(const Vec2<float>&, float, float);
       		Rect(const Rect&);
       		~Rect();
 	
 		void Scale(float);
-		void Scale(const vec2f&);
+		void Scale(const Vec2<float>&);
 		
       		bool CheckInteraction(int, int) const;
       		       		
       		void Set(float, float, float, float);
-      		void Set(const vec2f&, float, float);
+      		void Set(const Vec2<float>&, float, float);
       		void Set(const Rect&);
       			
-      		void SetCenter(const vec2f&);
+      		void SetCenter(const Vec2<float>&);
       		void SetCenter(float, float);
       		void SetBottomLeftX(float);
-      		void SetBottomLeft(const vec2f&);
+      		void SetBottomLeft(const Vec2<float>&);
       		void SetBottomLeft(float, float);
       		      		
-		const vec2f& GetCenter() const     { return center; }
-		const vec2f& GetBottomLeft() const { return bottomLeft; }
-		const vec2f& GetTopRight() const { return topRight; }
+		const Vec2<float>& GetCenter() const     { return center; }
+		const Vec2<float>& GetBottomLeft() const { return bottomLeft; }
+		const Vec2<float>& GetTopRight() const { return topRight; }
 		float GetWidth() const 	    { return w; }
 		float GetHeight() const     { return h; }  
       
       		void SetSize(float, float);
-      		void MovingBy(const vec2f&);
+      		void MovingBy(const Vec2<float>&);
       		      		
       	private:
-      		vec2f bottomLeft;    
-      		vec2f center;  
-      		vec2f topRight;
+      		Vec2<float> bottomLeft;    
+      		Vec2<float> center;  
+      		Vec2<float> topRight;
       		
       		float w, h;
 

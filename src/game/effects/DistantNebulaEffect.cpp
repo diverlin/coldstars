@@ -40,7 +40,7 @@ void DistantNebulaEffect::Render(float vx, float vy)
 { 
    	drawQuad_inXYPlane(textureOb, 
    			   scale, 
-   			   vec3f(center.x - vx*parallax_rate, center.y - vy*parallax_rate, center.z),
+   			   Vec3<float>(center.x - vx*parallax_rate, center.y - vy*parallax_rate, center.z),
    			   angle_inD);
 }
               
@@ -100,7 +100,7 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
     		d_angle_inD = getRandInt(8,12)*0.001 * getRandSign();    	
 	   	
 	   	
-   	vec3f center((float)getRandInt(0, 1000), (float)getRandInt(0, 1000), -999.0);
+   	Vec3<float> center((float)getRandInt(0, 1000), (float)getRandInt(0, 1000), -999.0);
         
         DistantNebulaEffect* dn = new DistantNebulaEffect();
         dn->SetTextureOb(textureOb);

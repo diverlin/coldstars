@@ -38,7 +38,7 @@ bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 }
 
 bool collisionBetweenCenters(const Points& points1, const Points& points2, float collision_radius);
-bool collisionBetweenCenters(const Points& points1, const vec2f& point2, float collision_radius);
+bool collisionBetweenCenters(const Points& points1, const Vec2<float>& point2, float collision_radius);
 bool collisionBetweenCenters(const Points& points1, float center2_x, float center2_y, float collision_radius);
 
 #endif 

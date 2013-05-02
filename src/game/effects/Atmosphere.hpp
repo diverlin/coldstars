@@ -22,7 +22,7 @@
 
 class BaseSpaceEntity;
 class TextureOb;
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 
 class Atmosphere
 {
@@ -31,14 +31,14 @@ class Atmosphere
 		~Atmosphere();
 			
 		void SetParent(BaseSpaceEntity* parent) { this->parent = parent; }
-		void Render(const vec2f&);
+		void Render(const Vec2<float>&);
 		
 	private:
 		BaseSpaceEntity* parent;
 		TextureOb* textureOb;
 		
-		vec3f angle;
-		vec3f d_angle;
+		Vec3<float> angle;
+		Vec3<float> d_angle;
 }; 
 
 #endif 

@@ -348,7 +348,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 enable_CULLFACE();
 	int w = Screen::Instance().GetWidth();
 	int h = Screen::Instance().GetHeight();
-	vec2f world_coord(Screen::Instance().GetRect().GetBottomLeft());
+	Vec2<float> world_coord(Screen::Instance().GetRect().GetBottomLeft());
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -574,7 +574,7 @@ disable_CULLFACE();
     
 void Player::RenderInSpace_OLD(StarSystem* starsystem)
 {
-	vec2f world_coord(Screen::Instance().GetRect().GetBottomLeft());
+	Vec2<float> world_coord(Screen::Instance().GetRect().GetBottomLeft());
 	   
 	glLoadIdentity();
         starsystem->DrawBackground(world_coord);
@@ -1070,7 +1070,7 @@ void Player::MouseNavigation(const MouseData& data_mouse) const
 	if (data_mouse.left_click == true)
 	{
 		ForceStateMachineReset();
-		npc->GetVehicle()->GetDriveComplex().SetStaticTargetCoords(vec2f(data_mouse.mxvp, data_mouse.myvp));  
+		npc->GetVehicle()->GetDriveComplex().SetStaticTargetCoords(Vec2<float>(data_mouse.mxvp, data_mouse.myvp));  
 	}
 }
 
@@ -1213,7 +1213,7 @@ bool isObjectOnScreen(const Points& points)
         return true;
 }
 
-bool isObjectOnScreen(const vec2f& ob_center, float sizeInPixels)
+bool isObjectOnScreen(const Vec2<float>& ob_center, float sizeInPixels)
 {       
         if (ob_center.x < (Screen::Instance().GetRect().GetBottomLeft().x - sizeInPixels))
                 return false;
@@ -1227,7 +1227,7 @@ bool isObjectOnScreen(const vec2f& ob_center, float sizeInPixels)
         return true;
 }
 
-bool isPointOnScreen(const vec2f& p)
+bool isPointOnScreen(const Vec2<float>& p)
 {       
         if (p.x < (Screen::Instance().GetRect().GetBottomLeft().x))
                 return false;

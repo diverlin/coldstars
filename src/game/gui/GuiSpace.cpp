@@ -164,7 +164,7 @@ void GuiSpace::EnterGuiScan()
 	
         int screen_w = Screen::Instance().GetWidth();
         int screen_h = Screen::Instance().GetHeight();
-	vec2f center_screen(screen_w/2, screen_h/2);
+	Vec2<float> center_screen(screen_w/2, screen_h/2);
         
         bool allow_full_control = player->IsAbleToGetFullControlOnScanedVehicle();
         gui_vehicle_scan_shared->BindVehicle(player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
@@ -252,10 +252,10 @@ void GuiSpace::RenderBar() const
 }
 
 
-void GuiSpace::RenderText(const vec2f& scroll_coords) const
+void GuiSpace::RenderText(const Vec2<float>& scroll_coords) const
 {
 	const std::string _coord_str = "date:"+ GameDate::Instance().GetDate().GetStr()+" world coord: " + int2str(scroll_coords.x) + "," + int2str(scroll_coords.y);
-	vec2f pos(Screen::Instance().GetWidth() - 400, Screen::Instance().GetHeight() - 5);
+	Vec2<float> pos(Screen::Instance().GetWidth() - 400, Screen::Instance().GetHeight() - 5);
 
 	Screen::Instance().DrawText(_coord_str, 12, pos);    
 }
@@ -266,7 +266,7 @@ bool GuiSpace::Update(const MouseData& data_mouse)
 	int screen_w = Screen::Instance().GetWidth();
         int screen_h = Screen::Instance().GetHeight();
         Rect screen_rect(0, 0, screen_w, screen_h);   
-	vec2f center_screen(screen_w/2, screen_h/2);
+	Vec2<float> center_screen(screen_w/2, screen_h/2);
                             
        	UserInput::Instance().UpdateInSpace(player, player->GetGuiManager());
      	player->GetCursor().Update();  

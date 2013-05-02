@@ -20,7 +20,7 @@
 #ifndef SHOCKWAVEEFFECT_H
 #define SHOCKWAVEEFFECT_H
  
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 
 class ShockWaveEffect
 {
@@ -28,14 +28,14 @@ class ShockWaveEffect
 		bool is_alive;
           	bool is_alreadyInRemoveQueue;
 
-          	vec2f center;
+          	Vec2<float> center;
           	          	
-          	vec3f parameter;
-          	vec3f d_parameter;
+          	Vec3<float> parameter;
+          	Vec3<float> d_parameter;
           	float time, d_time;
           	
-          	void SetCenter(vec2f center) { this->center = center; };
-          	const vec2f& GetCenter() const { return center; };
+          	void SetCenter(Vec2<float> center) { this->center = center; };
+          	const Vec2<float>& GetCenter() const { return center; };
 
       		ShockWaveEffect(float _x, float _y, float _z, float _time, float _d_x, float _d_y, float _d_z, float d_time);
       		~ShockWaveEffect();

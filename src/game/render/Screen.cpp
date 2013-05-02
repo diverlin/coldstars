@@ -77,7 +77,7 @@ void Screen::DrawFps()
 	}
 	
       	std::string fps_str = "FPS:" + int2str(fps) + " / game_speed: x" + int2str(Config::Instance().GAME_SPEED);
-	DrawText(fps_str, 14, vec2f(100, GetHeight()-5));
+	DrawText(fps_str, 14, Vec2<float>(100, GetHeight()-5));
 }
     
     
@@ -106,7 +106,7 @@ void Screen::ResizePostEffects(int width, int height)
 	bloom.Resize(width, height);
 }
 
-void Screen::MovingBy(const vec2f& delta)
+void Screen::MovingBy(const Vec2<float>& delta)
 {
 	rect.MovingBy(delta);
 }
@@ -115,7 +115,7 @@ void Screen::UpdateInSpace()
 {	
 	if (auto_scroll == true)
 	{
-		vec2f d_pos;
+		Vec2<float> d_pos;
 		float speed = 15.0;
 		get_dPos_ToPoint(rect.GetCenter(), target_center, speed, d_pos);
 		MovingBy(d_pos);

@@ -72,10 +72,10 @@ void Container::UpdateInfo()
     	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
 }        
        	
-void Container::RenderInfoInSpace(const vec2f& scroll_coords)
+void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 {
 	UpdateInfo();
-	vec2f pos(points.GetCenter().x - scroll_coords.x - 200, points.GetCenter().y - scroll_coords.y);
+	Vec2<float> pos(points.GetCenter().x - scroll_coords.x - 200, points.GetCenter().y - scroll_coords.y);
      	drawInfoIn2Column(info.title_list, info.value_list, pos);
      	item_slot->GetItem()->RenderInfo(points.GetCenter(), scroll_coords.x, scroll_coords.y);
 }
@@ -102,7 +102,7 @@ void Container::UpdateInSpace(int time, bool show_effect)
 		
 	if (time > 0)
 	{
-		vec2f d_pos2;
+		Vec2<float> d_pos2;
      		if (fabs(velocity) > 0.2f)
      		{
 			velocity -= 0.1f;
@@ -154,7 +154,7 @@ void Container::ResolveDataUniqueContainer()
 	Logger::Instance().Log(" Container("+int2str(GetId())+")::ResolveDataUniqueContainer", SAVELOAD_LOG_DIP);
 	#endif
 	
-	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddContainer(this, vec2f(data_unresolved_BaseSpaceEntity.center.x, data_unresolved_BaseSpaceEntity.center.y)); 
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddContainer(this, Vec2<float>(data_unresolved_BaseSpaceEntity.center.x, data_unresolved_BaseSpaceEntity.center.y)); 
 }		
 
 /*virtual*/

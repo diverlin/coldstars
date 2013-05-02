@@ -72,7 +72,7 @@ void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textu
         data_life.armor = 1;
         data_life.dying_time = 30;
         
-        vec3f d_angle;
+        Vec3<float> d_angle;
         d_angle.z = -getRandInt(10, 100)*0.01;      
         
         container->SetLifeData(data_life);

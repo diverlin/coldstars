@@ -21,7 +21,7 @@
 #include "../common/constants.hpp"
 #include "../render/Render.hpp"
 
-LazerTraceEffect::LazerTraceEffect(TextureOb* _texOb, vec2f* _pTo_start_pos, vec2f* _pTo_end_pos)
+LazerTraceEffect::LazerTraceEffect(TextureOb* _texOb, Vec2<float>* _pTo_start_pos, Vec2<float>* _pTo_end_pos)
 {
         is_alive = true;
         is_alreadyInRemoveQueue = false; 

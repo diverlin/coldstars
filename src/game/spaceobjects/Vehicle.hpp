@@ -61,7 +61,7 @@ class Vehicle : public BaseSpaceEntity
 		void SetSpecialActionId(int special_action_id) { this->special_action_id = special_action_id; };
 		void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { this->parent_vehicleslot = parent_vehicleslot; };
 		
-        	void SetColor(const Color4f& color) { this->color = color; }
+        	void SetColor(const Color4<float>& color) { this->color = color; }
         	void SetLand(BaseLand* land) { this->land = land; };
         	        
                 void SetKorpusData(const VehicleKorpusData&);
@@ -151,8 +151,8 @@ class Vehicle : public BaseSpaceEntity
 		void UpdateSpecialEffect();
         	void UpdateLockedItems();
                 
-        	void RenderInfoInSpace(const vec2f&);
-        	void RenderInfo(const vec2f&, int, int);
+        	void RenderInfoInSpace(const Vec2<float>&);
+        	void RenderInfo(const Vec2<float>&, int, int);
         	        	
         	void RenderRadarRange();
         	void RenderGrappleRange();        
@@ -202,7 +202,7 @@ class Vehicle : public BaseSpaceEntity
                 
    	     	BaseLand* land;
    	     	
-                Color4f color;
+                Color4<float> color;
                                 
                 VehicleSlot* parent_vehicleslot;
                                         

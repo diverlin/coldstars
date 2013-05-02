@@ -23,8 +23,8 @@
 #include "../../common/constants.hpp"
 #include "../../resources/TextureManager.hpp"
 
-DriveEffect::DriveEffect(vec2f* pTo_start_pos, 
-			 vec2f* pTo_target_pos)
+DriveEffect::DriveEffect(Vec2<float>* pTo_start_pos, 
+			 Vec2<float>* pTo_target_pos)
 {
     	this->pTo_start_pos  = pTo_start_pos;      //ob.points.midLeft
      	this->pTo_target_pos = pTo_target_pos;     //ob.points.midFarLeft
@@ -110,7 +110,7 @@ void DriveEffect::Render(float parent_d_alpha)
 
 
 
-DriveEffect* GetNewDriveEffect(int size_id, vec2f* pTo_pos, vec2f* pTo_target_pos)
+DriveEffect* GetNewDriveEffect(int size_id, Vec2<float>* pTo_pos, Vec2<float>* pTo_target_pos)
 {
    	ParticleData data_particle;        
                        

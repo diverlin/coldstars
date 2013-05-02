@@ -47,7 +47,7 @@ void Galaxy::PutChildsToGarbage() const
 	}
 }
 
-void Galaxy::Add(StarSystem* starsystem, const vec2f& center) 
+void Galaxy::Add(StarSystem* starsystem, const Vec2<float>& center) 
 { 
 	starsystem->SetGalaxy(this);
         starsystem->GetPoints().SetCenter(center);

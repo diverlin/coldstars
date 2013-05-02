@@ -280,7 +280,7 @@ void Npc::UpdateInfo()
     	}
 }
 
-void Npc::RenderInfo(const vec2f& center)
+void Npc::RenderInfo(const Vec2<float>& center)
 {
 	UpdateInfo();
      	drawInfoIn2Column(info.title_list, info.value_list, center);

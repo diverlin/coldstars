@@ -36,14 +36,14 @@ void SFML_Wrapper::wrDrawSpecific()
   	window.display();
 }
 
-void SFML_Wrapper::DrawText(const std::string& str, int font_size, const vec2f& pos)
+void SFML_Wrapper::DrawText(const std::string& str, int font_size, const Vec2<float>& pos)
 {
 
-     	Color4i color(255, 255, 255, 255);
+     	Color4<int> color(255, 255, 255, 255);
      	DrawText(str, font_size, pos, color);
 }
 		
-void SFML_Wrapper::DrawText(const std::string& str, int font_size, const vec2f& pos, const Color4i& color)
+void SFML_Wrapper::DrawText(const std::string& str, int font_size, const Vec2<float>& pos, const Color4<int>& color)
 {
      	sf::Text text(str, font, font_size);
         text.setColor(sf::Color(color.r, color.g, color.b));

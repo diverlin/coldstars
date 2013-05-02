@@ -137,7 +137,7 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
 	if (mesh != NULL)
 	{
 		float scale_comp = getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
-		vec3f scale(scale_comp, scale_comp, scale_comp);
+		Vec3<float> scale(scale_comp, scale_comp, scale_comp);
 		
 		float step = getRandInt(10, 20)*0.01;
 		float threshold = 10;

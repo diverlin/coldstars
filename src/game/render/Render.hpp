@@ -32,7 +32,7 @@ void clearScreen();
 void resetRenderTransformation();
 
 void camera(float x, float y);
-void setColor4f(const Color4f&);	
+void setColor4f(const Color4<float>&);	
 void setColor4f(float, float, float, float);
 
 void enable_CULLFACE();
@@ -48,24 +48,24 @@ void enable_POINTSPRITE();
 void disable_POINTSPRITE();
 
 //void drawFlatQuadPerVertexIn2D(TextureOb* texOb,
-			         //const vec2f& bottomLeft, 
-			         //const vec2f& bottomRight, 
-			         //const vec2f& topRight, 
-			         //const vec2f& topLeft, 
+			         //const Vec2<float>& bottomLeft, 
+			         //const Vec2<float>& bottomRight, 
+			         //const Vec2<float>& topRight, 
+			         //const Vec2<float>& topLeft, 
 			         //float z_pos);
 			       
 void drawQuad_inXYPlane(TextureOb* texOb, 
-		 const vec3f& scale,
-		 const vec3f& center, 
+		 const Vec3<float>& scale,
+		 const Vec3<float>& center, 
 		 float angleInDegree);
 
 //void drawRect(const Rect& rect, float z_pos); // the drawrect function was inverted by Y axis
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
 
-void drawTexturedPoint(GLuint texture, const vec2f& _center, float size, float pos_z);
+void drawTexturedPoint(GLuint texture, const Vec2<float>& _center, float size, float pos_z);
 
 void drawLine(TextureOb* texOb, 
-              const vec2f& start_pos, 
+              const Vec2<float>& start_pos, 
               float z_pos, 
               float len, 
               float angle_inD, 
@@ -73,13 +73,13 @@ void drawLine(TextureOb* texOb,
 
 void drawSimpleColoredTextWithBackground(const std::string&, 
 			   int,
-			   const vec2f&, 
-			   const Color4i&);
+			   const Vec2<float>&, 
+			   const Color4<int>&);
 			   
 void drawInfoIn2Column(
                 const std::vector<std::string>& pnfo_title_list, 
                 const std::vector<std::string>& info_value_list, 
-                const vec2f& pos);
+                const Vec2<float>& pos);
 
 void drawFullScreenQuad(int w, int h, float pos_z);
 
@@ -89,13 +89,13 @@ void drawFullScreenTexturedQuad(GLuint texture, int w, int h, float pos_z);
 
 void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z, GLuint program_blur);
 
-void renderMesh(Mesh* mesh, const vec3f& center, const vec3f& angle, const vec3f& scale, bool ZYX);
-void rotateZYX(const vec3f&);
-void rotateXYZ(const vec3f&);
+void renderMesh(Mesh* mesh, const Vec3<float>& center, const Vec3<float>& angle, const Vec3<float>& scale, bool ZYX);
+void rotateZYX(const Vec3<float>&);
+void rotateXYZ(const Vec3<float>&);
 
-void drawParticle(float, float r, float g, float b, float a, const vec2f&);
-void drawParticle(float, const Color4f&, const vec2f&);
-void drawParticle(float, const vec2f&);
+void drawParticle(float, float r, float g, float b, float a, const Vec2<float>&);
+void drawParticle(float, const Color4<float>&, const Vec2<float>&);
+void drawParticle(float, const Vec2<float>&);
 
 #endif 
 

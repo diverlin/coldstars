@@ -118,7 +118,7 @@ class ItemSlot : public BaseSlot
                 
 		void UpdateVehiclePropetries() const;
                 
-		virtual void Render(const Rect&, const vec2f&, bool draw_text = true) const;
+		virtual void Render(const Rect&, const Vec2<float>&, bool draw_text = true) const;
 		void RenderMark(const Rect&, TextureOb*) const;
                 
                 void DropItemToSpace(Vehicle*);
@@ -126,7 +126,7 @@ class ItemSlot : public BaseSlot
                 bool SwapItem(ItemSlot*);
                 
                 void UpdateRange(TextureOb*);
-           	void DrawRange(const vec2f&);
+           	void DrawRange(const Vec2<float>&);
            	
            	bool CheckSubTarget(ItemSlot*) const;
            	bool CheckTarget(BaseSpaceEntity*) const;

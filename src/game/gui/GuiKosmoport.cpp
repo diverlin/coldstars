@@ -165,7 +165,7 @@ void GuiKosmoport::EnterGuiScanInAngar()
 
         int screen_w = Screen::Instance().GetWidth();
         int screen_h = Screen::Instance().GetHeight();
-	vec2f center_screen(screen_w/2, screen_h/2);
+	Vec2<float> center_screen(screen_w/2, screen_h/2);
         
         bool allow_full_control = player->IsAbleToGetFullControlOnScanedVehicle();
         gui_vehicle_scan_shared->BindVehicle(player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
@@ -217,7 +217,7 @@ void GuiKosmoport::EnterGuiStoreScreen()
 	
         int screen_w = Screen::Instance().GetWidth();
         int screen_h = Screen::Instance().GetHeight();
-	vec2f center_screen(screen_w/2, screen_h/2);
+	Vec2<float> center_screen(screen_w/2, screen_h/2);
         
         gui_store.SetGuiOffset(center_screen + GUI_STORE_OFFSET);
 
@@ -463,7 +463,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 void GuiKosmoport::Render(const MouseData& data_mouse)
 {    	
 	Rect screen_rect(0, 0, Screen::Instance().GetWidth(), Screen::Instance().GetHeight());   
-	vec2f center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);
+	Vec2<float> center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);
 
 	switch(active_screen_id)
 	{
@@ -502,7 +502,7 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
 	        		RenderButtons(); 
 				RenderFocusedButtonInfo(data_mouse); 
 			disable_BLEND();
-			Screen::Instance().DrawText("credits:"+int2str(player->GetNpc()->GetCredits()), 12, vec2f(600, 200));
+			Screen::Instance().DrawText("credits:"+int2str(player->GetNpc()->GetCredits()), 12, Vec2<float>(600, 200));
 
 			break;
 		}

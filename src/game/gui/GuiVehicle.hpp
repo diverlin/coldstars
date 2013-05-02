@@ -35,7 +35,7 @@ class GuiVehicle : public BaseGui
                 bool GetBlockManualExit() const { return block_manual_exit; };
                 bool GetAllowFullControl() const { return allow_full_control; };
                                 
-		void BindVehicle(Vehicle*, const vec2f& offset, bool full_control_on, bool block_manual_closing = false, float scale = 1.0f);
+		void BindVehicle(Vehicle*, const Vec2<float>& offset, bool full_control_on, bool block_manual_closing = false, float scale = 1.0f);
         	void UnbindVehicle();
                 
      		bool UpdateMouseInteraction(const MouseData&);   

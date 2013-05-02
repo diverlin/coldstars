@@ -39,7 +39,7 @@ BaseParticleSystem::~BaseParticleSystem()
      	}
 }
                 
-vec2f BaseParticleSystem::GetRandomVelocity()
+Vec2<float> BaseParticleSystem::GetRandomVelocity()
 {
      	if (getRandBool() == true)
      	{
@@ -51,12 +51,12 @@ vec2f BaseParticleSystem::GetRandomVelocity()
         }
 }
 
-vec2f BaseParticleSystem::GetRandomDirtyVelocity()
+Vec2<float> BaseParticleSystem::GetRandomDirtyVelocity()
 {
     	float dx_n = getRandFloat(0.1, 1.0)*getRandSign();
     	float dy_n = getRandFloat(0.1, 1.0)*getRandSign();
 
-        vec2f d_pos;
+        Vec2<float> d_pos;
     	d_pos.x = dx_n * data_particle.velocity_start;
     	d_pos.y = dy_n * data_particle.velocity_start;
         
@@ -64,7 +64,7 @@ vec2f BaseParticleSystem::GetRandomDirtyVelocity()
 }
 
 
-vec2f BaseParticleSystem::GetRandomAccurateVelocity()
+Vec2<float> BaseParticleSystem::GetRandomAccurateVelocity()
 {
     	float _len   = getRandInt(50, 100);
     	float _angle = getRandInt(0, 360)/RADIAN_TO_DEGREE_RATE;
@@ -75,7 +75,7 @@ vec2f BaseParticleSystem::GetRandomAccurateVelocity()
     	float dx_n = target_x/_len;
     	float dy_n = target_y/_len;
 
-        vec2f d_pos;
+        Vec2<float> d_pos;
     	d_pos.x = dx_n * data_particle.velocity_start;
     	d_pos.y = dy_n * data_particle.velocity_start;
         
@@ -83,12 +83,12 @@ vec2f BaseParticleSystem::GetRandomAccurateVelocity()
 }  
 
 
-//void BaseParticleSystem::calcAccurateRandomVelocity2(vec2f center)
+//void BaseParticleSystem::calcAccurateRandomVelocity2(Vec2<float> center)
 //{
     	//float _len   = getRandInt(50, 100);
     	//float _angle = getRandInt(0, 360)/RADIAN_TO_DEGREE_RATE;
 
-	//vec2f target;
+	//Vec2<float> target;
 	//target = center;
 	
     	//pos.x = center.x + sin(_angle) * _len;

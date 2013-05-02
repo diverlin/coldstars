@@ -39,7 +39,7 @@ int getObjectSize(int w, int h)
 
 
 
-bool get_dPos_ToPoint(const vec2f& p1, const vec2f& p2, float velocity, vec2f& d_pos)
+bool get_dPos_ToPoint(const Vec2<float>& p1, const Vec2<float>& p2, float velocity, Vec2<float>& d_pos)
 {    
     	float lx = p2.x - p1.x;
     	float ly = p2.y - p1.y;
@@ -63,7 +63,7 @@ bool get_dPos_ToPoint(const vec2f& p1, const vec2f& p2, float velocity, vec2f& d
 }
 
 
-bool get_dPos_ToPoint(const vec2f& p1, const vec2f& p2, float velocity, vec2f& d_pos, float& rTo_angle_inD)
+bool get_dPos_ToPoint(const Vec2<float>& p1, const Vec2<float>& p2, float velocity, Vec2<float>& d_pos, float& rTo_angle_inD)
 {
     	float lx = p2.x - p1.x;
     	float ly = p2.y - p1.y;
@@ -88,9 +88,9 @@ bool get_dPos_ToPoint(const vec2f& p1, const vec2f& p2, float velocity, vec2f& d
     	}    	
 }
 
-Color4f getColor4fById(int color_id)
+Color4<float> getColor4fById(int color_id)
 {
-	Color4f color;
+	Color4<float> color;
         switch(color_id)
         {	
         	case COLOR::YELLOW_ID:

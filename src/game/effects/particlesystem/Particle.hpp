@@ -28,8 +28,8 @@ class Particle
       		Particle(ParticleData);       
       		~Particle();
 
-                void SetPosition(const vec2f& pos) { this->pos = pos; };      		
-      		void SetVelocity(const vec2f& _velocity) { d_pos = _velocity; };
+                void SetPosition(const Vec2<float>& pos) { this->pos = pos; };      		
+      		void SetVelocity(const Vec2<float>& _velocity) { d_pos = _velocity; };
       		
       		bool GetAlive()       const { return is_alive; };
       		float GetAlpha()      const { return color.a; };
@@ -47,10 +47,10 @@ class Particle
       	private:
       	      	bool is_alive;
  		
-      		vec2f pos;
-      		vec2f d_pos;
+      		Vec2<float> pos;
+      		Vec2<float> d_pos;
       		
-                Color4f color;
+                Color4<float> color;
                                                 
       		float size;
 

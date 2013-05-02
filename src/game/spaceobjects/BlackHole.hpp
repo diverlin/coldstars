@@ -30,13 +30,13 @@ class BlackHole : public BasePlanet
         	virtual ~BlackHole();
 
 		void BindShockWaveEffect(ShockWaveEffect* shockwave) { this->shockwave = shockwave; };
-		void SetCenter(const vec2f&);
+		void SetCenter(const Vec2<float>&);
 		
 		ShockWaveEffect* GetShockWaveEffect() const { return shockwave; };
 		
 		void UpdateInSpace(int, bool);
         	
-        	void Render_NEW(const vec2f& scroll_coords);	
+        	void Render_NEW(const Vec2<float>& scroll_coords);	
 		void Render_OLD() const;
 		
         	virtual void SaveData(boost::property_tree::ptree&) const;

@@ -124,15 +124,15 @@ void BaseItem::UpdateInfo()
     	AddCommonInfo();
 }
 
-void BaseItem::RenderInfo(const vec2f& pos, float offset_x, float offset_y)
+void BaseItem::RenderInfo(const Vec2<float>& pos, float offset_x, float offset_y)
 {  
 	UpdateInfo();
-	vec2f pos2(pos.x - offset_x, pos.y - offset_y);
+	Vec2<float> pos2(pos.x - offset_x, pos.y - offset_y);
      	drawInfoIn2Column(info.title_list, info.value_list, pos2);
 }
 
 /* virtual */
-void BaseItem::Render(const Rect& rect, const vec2f& gui_offset, bool draw_text)
+void BaseItem::Render(const Rect& rect, const Vec2<float>& gui_offset, bool draw_text)
 {
     	drawTexturedRect(textureOb, rect, -1.0);
 }

@@ -77,7 +77,7 @@ void GuiVehicle2::CreateFunctionalItemSlotsCircleGeometry(Vehicle* vehicle, floa
         int angle = 0;
         for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
-        	vec2f pos = getVec2f(160, angle);
+        	Vec2<float> pos = getVec2f(160, angle);
 		rect.SetCenter(pos);
 		rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		    			   
         	rect.Scale(scale);	

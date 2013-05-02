@@ -75,7 +75,7 @@ void StarBuilder::CreateNewInternals(Star* star) const
         data_life.armor = 1000000; 
 
  	PlanetData star_data;
-    	star_data.orbit_center  = vec2f(0, 0); 
+    	star_data.orbit_center  = Vec2<float>(0, 0); 
     	star_data.radius_A      = 50;
     	star_data.radius_B      = 50; 
     	star_data.orbit_phi_inD = 0;
@@ -86,7 +86,7 @@ void StarBuilder::CreateNewInternals(Star* star) const
     	star->SetPlanetData(star_data);
 	star->SetLifeData(data_life);
 	float scale_comp = getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX); 
-	vec3f scale(scale_comp, scale_comp, scale_comp);
+	Vec3<float> scale(scale_comp, scale_comp, scale_comp);
 	star->BindData3D(mesh, texOb, scale);	
  
 	star->CalcColor();

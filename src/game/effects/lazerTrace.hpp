@@ -25,15 +25,15 @@ class LazerTraceEffect
 { 
     	public:
        		LazerTraceEffect(TextureOb* _texOb, 
-       				 vec2f* _pTo_start_pos, 
-       				 vec2f* _pTo_end_pos);
+       				 Vec2<float>* _pTo_start_pos, 
+       				 Vec2<float>* _pTo_end_pos);
        		~LazerTraceEffect();
 
 		void setDamageEffect(DamageEffect* _damage_effect) { damage_effect = _damage_effect; };
 		bool GetAlive() const { return is_alive; };
 		
-		const vec2f& GetStartPos() const { return *pTo_start_pos; };
-		const vec2f& GetEndPos() const { return *pTo_end_pos; };
+		const Vec2<float>& GetStartPos() const { return *pTo_start_pos; };
+		const Vec2<float>& GetEndPos() const { return *pTo_end_pos; };
 				
        		void update();
        		void Render();
@@ -52,8 +52,8 @@ class LazerTraceEffect
        		
        		int existance_time;
        		       		
-       		vec2f* pTo_start_pos;
-       		vec2f* pTo_end_pos;
+       		Vec2<float>* pTo_start_pos;
+       		Vec2<float>* pTo_end_pos;
        		       		
        		DamageEffect* damage_effect;
  	       		

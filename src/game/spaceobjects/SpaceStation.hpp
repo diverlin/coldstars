@@ -40,7 +40,7 @@ class SpaceStation : public Vehicle
         	virtual void UpdateInfo();  
         	
         	void RenderInSpace_2D();
-        	void RenderInSpace_3D(const vec2f&);     	
+        	void RenderInSpace_3D(const Vec2<float>&);     	
         			
         	void SaveData(boost::property_tree::ptree&) const;
     		void LoadData(const boost::property_tree::ptree&);

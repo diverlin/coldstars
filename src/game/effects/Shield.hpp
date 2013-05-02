@@ -19,7 +19,7 @@
 #ifndef SHIELD_H
 #define SHIELD_H
 
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 class TextureOb;
 class BaseSpaceEntity;
 
@@ -37,8 +37,8 @@ class ShieldEffect
         	void Render(float) const;            
 
         private:       
-        	Color4f color;
-        	vec3f scale;
+        	Color4<float> color;
+        	Vec3<float> scale;
         	
         	float alpha_start;
         	float d_alpha;

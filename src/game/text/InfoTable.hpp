@@ -20,7 +20,7 @@
 #define INFOTABLE_H
 
 #include "../common/gameStruct.hpp"
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 
 class InfoTable
 {

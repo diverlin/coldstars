@@ -28,7 +28,7 @@ Points::Points():is_updated(false), angle_inD(0.0), pos_z(-500.0)
 Points::~Points()
 {}              
                 
-void Points::Add(vec2f* point, vec2f* point_orig)
+void Points::Add(Vec2<float>* point, Vec2<float>* point_orig)
 { 
         vector_orig.push_back(point_orig);
         vector.push_back(point);
@@ -90,7 +90,7 @@ void Points::Update()
 {
     	if (is_updated == false)
     	{   
-        	vec2f pos = center;
+        	Vec2<float> pos = center;
 
        		float angle_radian = angle_inD/RADIAN_TO_DEGREE_RATE;
          

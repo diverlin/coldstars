@@ -37,11 +37,11 @@ Atmosphere::~Atmosphere()
 	#endif	
 }
 	 		
-void Atmosphere::Render(const vec2f& scroll_coords)
+void Atmosphere::Render(const Vec2<float>& scroll_coords)
 {     	
 	angle += d_angle;
 	
-     	const Color4f& color = parent->GetStarSystem()->GetColor4f(); 
+     	const Color4<float>& color = parent->GetStarSystem()->GetColor4f(); 
      	float ambient_factor = 0.25;
 	
      	glUseProgram(ShaderCollector::Instance().light);
@@ -56,7 +56,7 @@ void Atmosphere::Render(const vec2f& scroll_coords)
      		glBindTexture(GL_TEXTURE_2D, textureOb->texture);
      		glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
 		float scale_rate = 1.1;
-		vec3f scale = vec3f(parent->GetPoints().GetScale().x*scale_rate, 
+		Vec3<float> scale = Vec3<float>(parent->GetPoints().GetScale().x*scale_rate, 
 				    parent->GetPoints().GetScale().y*scale_rate, 
 				    parent->GetPoints().GetScale().z*scale_rate);
 		
