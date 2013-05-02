@@ -277,7 +277,7 @@ void ItemSlot::UpdateVehiclePropetries() const
 }
    
 /* virtual */
-void ItemSlot::Render(const Rect& rect, const vec2f& gui_offset, bool draw_text) const
+void ItemSlot::Render(const Rect& rect, const Vec2<float>& gui_offset, bool draw_text) const
 {
        	drawTexturedRect(textureOb, rect, -1.5);    
        	if (item != NULL)
@@ -419,7 +419,7 @@ void ItemSlot::UpdateRange(TextureOb* _texOb)
         range_visual.FillData(_texOb, radius, size);
 }
 
-void ItemSlot::DrawRange(const vec2f& offset)
+void ItemSlot::DrawRange(const Vec2<float>& offset)
 { 
     	range_visual.Draw(offset);
 }

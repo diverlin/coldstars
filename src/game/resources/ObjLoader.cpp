@@ -32,14 +32,14 @@ ObjLoader::ObjLoader(const std::string& path)
         	{
         		if (type_str == "v")
 	        	{
-	            		vec3f pos;
+	            		Vec3<float> pos;
 	            		line_stream >> pos.x >> pos.y >> pos.z;
 	            		positions.push_back(pos);
 	        	}
 	        	
         		else if (type_str == "vt")
 	        	{
-	            		vec2f tex;
+	            		Vec2<float> tex;
 	            		line_stream >> tex.x >> tex.y;
 	            		tex.y = 1 - tex.y; // this is needed for correct texture mapping in opengl 
 	            		texcoords.push_back(tex);
@@ -47,7 +47,7 @@ ObjLoader::ObjLoader(const std::string& path)
 	        	
         		else if (type_str == "vn")
 	        	{
-	            		vec3f nor;
+	            		Vec3<float> nor;
 	            		line_stream >> nor.x >> nor.y >> nor.z;
 	            		normals.push_back(nor);
 	        	}
@@ -91,9 +91,9 @@ void ObjLoader::NormalizePositions()
 	
 }
 
-vec3f ObjLoader::GetBoundaryBox()
+Vec3<float> ObjLoader::GetBoundaryBox()
 {
-	vec3f boundary_box;
+	Vec3<float> boundary_box;
 	for (unsigned int i=0; i<positions.size(); i++)
 	{
 		if (boundary_box.x < fabs(positions[i].x)) boundary_box.x = fabs(positions[i].x);

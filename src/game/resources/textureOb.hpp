@@ -24,7 +24,7 @@
 #include <vector>
 #include "GL/glew.h"
 
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 
 class TextureOb
 {
@@ -49,10 +49,10 @@ class TextureOb
         	std::string path;
         	bool use_alpha; 
 		
-		std::vector<vec2f> texCoord_bottomLeft_vec;
-        	std::vector<vec2f> texCoord_bottomRight_vec;
-        	std::vector<vec2f> texCoord_topLeft_vec;
-        	std::vector<vec2f> texCoord_topRight_vec;
+		std::vector<Vec2<float>> texCoord_bottomLeft_vec;
+        	std::vector<Vec2<float>> texCoord_bottomRight_vec;
+        	std::vector<Vec2<float>> texCoord_topLeft_vec;
+        	std::vector<Vec2<float>> texCoord_topRight_vec;
 
         	GLuint texture;
 

@@ -77,12 +77,12 @@ void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy, const GalaxyDescription& 
         int segment_w = ENTITY::GALAXY::PARSEC /((float)ENTITY::GALAXY::STARSYSTEM_SEGMENTS_NUM_INWIDTH + 1);
 	int segment_h = ENTITY::GALAXY::PARSEC * h_div_w_rate/((float)ENTITY::GALAXY::STARSYSTEM_SEGMENTS_NUM_INHEIGHT + 1);
 		
-	std::vector<vec2f> starsystem_segment_vec;
+	std::vector<Vec2<float>> starsystem_segment_vec;
 	for (int i=1; i<=ENTITY::GALAXY::STARSYSTEM_SEGMENTS_NUM_INWIDTH; i++)
 	{
 		for (int j=1; j<=ENTITY::GALAXY::STARSYSTEM_SEGMENTS_NUM_INHEIGHT; j++)
 		{
-			starsystem_segment_vec.push_back(vec2f(i*segment_w/2, j*segment_h/2));
+			starsystem_segment_vec.push_back(Vec2<float>(i*segment_w/2, j*segment_h/2));
 		}		
 	}
 	
@@ -92,7 +92,7 @@ void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy, const GalaxyDescription& 
     		int starsystem_insegment_num = getRandInt(ENTITY::GALAXY::STARSYSTEM_INSEGMENT_NUM_MIN, ENTITY::GALAXY::STARSYSTEM_INSEGMENT_NUM_MAX);
                 for (int j=0; (j<starsystem_insegment_num) and (starsystem_counter<galaxy_description.starsystem_num); j++)
                 {
-                	vec2f center = starsystem_segment_vec[i] + getRandVec2f(getMax(segment_w, segment_h)/7, getMax(segment_w, segment_h)/3);
+                	Vec2<float> center = starsystem_segment_vec[i] + getRandVec2f(getMax(segment_w, segment_h)/7, getMax(segment_w, segment_h)/3);
                 	                
         		StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem();
         		galaxy->Add(starsystem, center); 

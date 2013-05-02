@@ -45,7 +45,7 @@ struct UnresolvedDataUniquePlayer
 {
 	int npc_id;
 	int starsystem_id;
-	vec2f screen_pos;
+	Vec2<float> screen_pos;
 };
 
 
@@ -153,8 +153,8 @@ class Player : public Base
 };
 
 bool isObjectOnScreen(const Points&);
-bool isObjectOnScreen(const vec2f&, float);
-bool isPointOnScreen(const vec2f&);
+bool isObjectOnScreen(const Vec2<float>&, float);
+bool isPointOnScreen(const Vec2<float>&);
 
 bool isObjectWithinRadarRange(BaseParticleSystem*, Vehicle*);		                              
 bool isObjectWithinRadarRange(ShockWaveEffect*, Vehicle*);

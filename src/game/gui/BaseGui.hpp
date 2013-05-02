@@ -35,8 +35,8 @@ class BaseGui
 
        		BaseButton* GetButton(int) const;  
        		
-  		void SetGuiOffset(const vec2f& gui_offset) { this->gui_offset = gui_offset; };
-  		const vec2f& GetGuiOffset() const { return gui_offset; };
+  		void SetGuiOffset(const Vec2<float>& gui_offset) { this->gui_offset = gui_offset; };
+  		const Vec2<float>& GetGuiOffset() const { return gui_offset; };
   		
   		void SetPlayer(Player* player) { this->player = player; };
   		
@@ -52,7 +52,7 @@ class BaseGui
        		std::map<int, BaseButton*> button_map;
        	
        	private:       				
-		vec2f gui_offset;
+		Vec2<float> gui_offset;
 };
 
 

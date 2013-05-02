@@ -20,7 +20,7 @@
 #define GAMESTRUCT_H
 
 #include "../render/Mesh.hpp"
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 #include "../common/constants.hpp"
 
 class RaceInformationCollector
@@ -56,7 +56,7 @@ class RaceInformationCollector
 
 struct PlanetData
 {
-	vec2f orbit_center; 
+	Vec2<float> orbit_center; 
 	int radius_A;
 	int radius_B; 
 	float orbit_phi_inD;
@@ -64,7 +64,7 @@ struct PlanetData
 	bool clockwise;
 
 	PlanetData():
-	orbit_center(vec2f(0, 0)),
+	orbit_center(Vec2<float>(0, 0)),
 	radius_A(0),
     	radius_B(0), 
     	orbit_phi_inD(0.0),
@@ -123,9 +123,9 @@ struct ParticleData
 	float velocity_end;
 	float d_velocity;
 
-	Color4f color_start;
-	Color4f color_end;
-	Color4f color_delta;
+	Color4<float> color_start;
+	Color4<float> color_end;
+	Color4<float> color_delta;
 
 	int frame;
 };
@@ -136,8 +136,8 @@ struct AngleData
 {
 	AngleData();
 
-	vec3f angle;
-	vec3f d_angle;
+	Vec3<float> angle;
+	Vec3<float> d_angle;
 };
 
 #endif

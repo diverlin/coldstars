@@ -27,7 +27,7 @@ AnimationConstantRotationAxisZ::~AnimationConstantRotationAxisZ()
 {}
 
 /* virtual */
-void AnimationConstantRotationAxisZ::Update(vec3f& angle)
+void AnimationConstantRotationAxisZ::Update(Vec3<float>& angle)
 {
 	if (clockwise)
 	{

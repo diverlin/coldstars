@@ -2,7 +2,7 @@
 #define WINDOWWRAPPER_H
 
 #include <SFML/Graphics.hpp>
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 
 class SFML_Wrapper
 {
@@ -24,8 +24,8 @@ class SFML_Wrapper
 
 		void wrDrawSpecific();
 		
-		void DrawText(const std::string& str, int font_size, const vec2f& pos);
-		void DrawText(const std::string& str, int font_size, const vec2f& pos, const Color4i& color);
+		void DrawText(const std::string& str, int font_size, const Vec2<float>& pos);
+		void DrawText(const std::string& str, int font_size, const Vec2<float>& pos, const Color4<int>& color);
 
     	private:
       		int bpp;

@@ -32,7 +32,7 @@ DistantStarEffect::~DistantStarEffect()
 void DistantStarEffect::Render(float vx, float vy)
 {   
     	glPointSize(scale.x);
-    	//glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+    	//glColor4<float>(1.0f, 1.0f, 1.0f, 1.0f);
     	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
     	
     	glBegin(GL_POINTS);
@@ -81,8 +81,8 @@ DistantStarEffect* GetNewDistantStarEffect(int color_id)
 	else    	    	 textureOb = TextureManager::Instance().GetTexObByColorId(TEXTURE::DISTANTSTAR_ID, color_id);
         
         float size = (float)getRandInt(ENTITY::GALAXY::DISTANTSTAR_SIZE_MIN, ENTITY::GALAXY::DISTANTSTAR_SIZE_MAX);
-        vec3f scale(size, size, 1.0);
-        vec3f center(getRandInt(0, 1000), getRandInt(0, 1000), -2.0);        
+        Vec3<float> scale(size, size, 1.0);
+        Vec3<float> center(getRandInt(0, 1000), getRandInt(0, 1000), -2.0);        
             	
         DistantStarEffect* ds = new DistantStarEffect();
         ds->SetTextureOb(textureOb);

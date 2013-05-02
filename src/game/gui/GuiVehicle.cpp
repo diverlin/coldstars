@@ -43,7 +43,7 @@ GuiVehicle::~GuiVehicle()
 	delete gate_slot;
 }
 
-void GuiVehicle::BindVehicle(Vehicle* vehicle, const vec2f& gui_offset, bool allow_full_control, bool block_manual_exit, float scale)
+void GuiVehicle::BindVehicle(Vehicle* vehicle, const Vec2<float>& gui_offset, bool allow_full_control, bool block_manual_exit, float scale)
 {      
         this->vehicle = vehicle;  
        	SetGuiOffset(gui_offset);

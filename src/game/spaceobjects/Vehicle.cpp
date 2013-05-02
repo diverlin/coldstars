@@ -184,7 +184,7 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
                         float pos_x = getRandFloat(border_start, border_end) - 0.5;
                         float pos_y = getRandFloat(border_start, border_end) - 0.5;
                                         
-			slot->GetTurrel()->GetPoints().SetParentCenter(vec2f(pos_x, pos_y));
+			slot->GetTurrel()->GetPoints().SetParentCenter(Vec2<float>(pos_x, pos_y));
                  	points.Add(slot->GetTurrel()->GetPoints().GetpCenter(), slot->GetTurrel()->GetPoints().GetpParentCenter()); 
                 	weapon_complex.AddSlot(slot); 
 
@@ -675,7 +675,7 @@ void Vehicle::LaunchingEvent()
 			case ENTITY::ANGAR_ID:
 			{
 				int angleInD = getRandInt(0, 360);
-				vec2f offset_pos = getRandVec2f(40, 100);
+				Vec2<float> offset_pos = getRandVec2f(40, 100);
 	
 			     	starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetPoints().GetCenter() + offset_pos, angleInD, NULL);
 				land->RemoveVehicle(this);
@@ -693,7 +693,7 @@ void Vehicle::LaunchingEvent()
 	else
 	{
 		int angleInD = getRandInt(0, 360);
-		vec2f offset_pos = getRandVec2f(40, 100);
+		Vec2<float> offset_pos = getRandVec2f(40, 100);
 
 	     	starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetPoints().GetCenter() + offset_pos, angleInD, NULL);
 		land->RemoveVehicle(this); 
@@ -1201,27 +1201,27 @@ void Vehicle::UpdateArtefactInfluence()
 	}
 }
                
-void Vehicle::RenderInfoInSpace(const vec2f& scroll_coords)
+void Vehicle::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 {  
 	UpdateInfo(); // virtual
-	vec2f pos(points.GetCenter().x - scroll_coords.x, points.GetCenter().y - scroll_coords.y);
+	Vec2<float> pos(points.GetCenter().x - scroll_coords.x, points.GetCenter().y - scroll_coords.y);
      	drawInfoIn2Column(info.title_list, info.value_list, pos);
      	
      	if (owner_npc != NULL)
      	{
-     		owner_npc->RenderInfo(vec2f(points.GetCenter().x + 190 - scroll_coords.x, points.GetCenter().y - scroll_coords.y));
+     		owner_npc->RenderInfo(Vec2<float>(points.GetCenter().x + 190 - scroll_coords.x, points.GetCenter().y - scroll_coords.y));
      	}
 }
 
-void Vehicle::RenderInfo(const vec2f& center, int offset_x, int offset_y)
+void Vehicle::RenderInfo(const Vec2<float>& center, int offset_x, int offset_y)
 {  
 	UpdateInfo(); // virtual
-	vec2f pos(center.x - offset_x, center.y - offset_y);
+	Vec2<float> pos(center.x - offset_x, center.y - offset_y);
      	drawInfoIn2Column(info.title_list, info.value_list, pos);
 
      	if (owner_npc != NULL)
      	{
-     		owner_npc->RenderInfo(vec2f(center.x + 190 - offset_x, center.y - offset_y));
+     		owner_npc->RenderInfo(Vec2<float>(center.x + 190 - offset_x, center.y - offset_y));
      	}
 }
 

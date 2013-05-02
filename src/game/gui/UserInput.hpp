@@ -45,7 +45,7 @@ class UserInput
         
         	sf::Event event;
         	
-        	vec2f scroll_accel; 
+        	Vec2<float> scroll_accel; 
         	        	
         	bool next_turn_ready;
 

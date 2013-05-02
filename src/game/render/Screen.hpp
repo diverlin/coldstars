@@ -21,7 +21,7 @@
 
 #include <GL/glew.h>
 
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 #include "../render/Fbo.hpp"
 #include "../render/Bloom.hpp"
 #include "../common/rect.hpp"
@@ -44,8 +44,8 @@ class Screen : public SFML_Wrapper
 		Fbo& GetFbo4() { return fbo4; }
 		BloomEffect& GetBloom() { return bloom; };	
 		
-		void MovingBy(const vec2f&);
-		void InitiateScrollTo(const vec2f& scroll_coord) { target_center = scroll_coord; auto_scroll = true; };
+		void MovingBy(const Vec2<float>&);
+		void InitiateScrollTo(const Vec2<float>& scroll_coord) { target_center = scroll_coord; auto_scroll = true; };
 		void UpdateInSpace();
 		
         	void Resize(int, int);   
@@ -72,7 +72,7 @@ class Screen : public SFML_Wrapper
 		BloomEffect bloom;
       		
       		Rect rect;
-      		vec2f target_center;
+      		Vec2<float> target_center;
       				
       		void ResizePostEffects(int, int);
 		

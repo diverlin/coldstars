@@ -36,7 +36,7 @@ struct UnresolvedDataUniqueBaseSpaceEntity
 	std::string textureOb_path;
 	int parent_id;
 	int starsystem_id;
-	vec2f center;
+	Vec2<float> center;
 	float angle;
 };
 
@@ -48,7 +48,7 @@ class BaseSpaceEntity : public Base
 		virtual ~BaseSpaceEntity();
 
 		void SetLifeData(const LifeData& data_life) { this->data_life = data_life; }
-		void BindData3D(Mesh*, TextureOb*, const vec3f&);
+		void BindData3D(Mesh*, TextureOb*, const Vec3<float>&);
 		void BindData2D(TextureOb*);    
 		void SetRenderAnimation(AnimationBase* animation_program) { this->animation_program = animation_program; }
 		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
@@ -56,12 +56,12 @@ class BaseSpaceEntity : public Base
 		void SetMass(int mass) 			    { this->mass = mass; }
 		
 		bool Is3D() const { return (mesh != NULL); }
-		const vec3f& GetBoundaryBox() const { return mesh->GetBoundaryBox(); }
+		const Vec3<float>& GetBoundaryBox() const { return mesh->GetBoundaryBox(); }
 		Mesh* GetMesh() const { return mesh; }
 				
 		int SetGivenExpirience(int given_expirience) { this->given_expirience = given_expirience; }
                 
-		void SetAngle(const vec3f& angle)            { this->angle = angle; }
+		void SetAngle(const Vec3<float>& angle)            { this->angle = angle; }
 		void SetZYX(bool ZYX)    { this->ZYX = ZYX; }
 		
 		void SetParent(BaseSpaceEntity* parent)     { this->parent = parent; }
@@ -81,21 +81,21 @@ class BaseSpaceEntity : public Base
 
 		BaseSpaceEntity* GetParent() const { return parent; }
 
-		void MovingByExternalForce(const vec2f&, float);
+		void MovingByExternalForce(const Vec2<float>&, float);
 
 		virtual void TakeIntoAccountAgressor(Vehicle*) {};
 		virtual void Hit(int, bool);
 		void SilentKill();
 		
-		void RenderInfoInSpace(const vec2f&);		
-		void RenderInfo(const vec2f&);
+		void RenderInfoInSpace(const Vec2<float>&);		
+		void RenderInfo(const Vec2<float>&);
 		void virtual UpdateInfo() {};		
 				
 	protected:
 		LifeData data_life;
 		
-		vec3f angle;
-		vec2f d_pos;
+		Vec3<float> angle;
+		Vec2<float> d_pos;
 		bool ZYX;
 		
 		float collision_radius;
@@ -120,7 +120,7 @@ class BaseSpaceEntity : public Base
 		virtual void PostDeathUniqueEvent(bool) {};
 
 		void UpdateRenderAnimation();
-		void RenderMesh(const vec2f&) const;
+		void RenderMesh(const Vec2<float>&) const;
 
 		UnresolvedDataUniqueBaseSpaceEntity data_unresolved_BaseSpaceEntity;
 		void SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree&, const std::string&) const;

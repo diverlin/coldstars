@@ -21,7 +21,7 @@
 
 #include <string>
 #include <cstdint>
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 
 #define LOG_ENABLED 1
 #if LOG_ENABLED == 1
@@ -130,13 +130,13 @@ const int SHOCKWAVES_MAX_NUM = 10;
 
 const int PRICE_FUEL = 10;
 
-const vec2f GUI_VEHICLE_INSPACE_OFFSET(-180, 0);
-const vec2f GUI_VEHICLE_INANGAR_OFFSET(-180, 0);
-const vec2f GUI_VEHICLE_INSTORE_OFFSET(-180, -200);
+const Vec2<float> GUI_VEHICLE_INSPACE_OFFSET(-180, 0);
+const Vec2<float> GUI_VEHICLE_INANGAR_OFFSET(-180, 0);
+const Vec2<float> GUI_VEHICLE_INSTORE_OFFSET(-180, -200);
 
-const vec2f GUI_SKILLS_INSPACE_OFFSET(100, 0);
-const vec2f GUI_SKILLS_INANGAR_OFFSET(100, 0);
-const vec2f GUI_STORE_OFFSET(-200, 200);
+const Vec2<float> GUI_SKILLS_INSPACE_OFFSET(100, 0);
+const Vec2<float> GUI_SKILLS_INANGAR_OFFSET(100, 0);
+const Vec2<float> GUI_STORE_OFFSET(-200, 200);
 
 const int NATURELAND_ITEM_SLOT_MIN = 2;
 const int NATURELAND_ITEM_SLOT_MAX = 4;
@@ -200,8 +200,8 @@ namespace LOG
 // trigonomerty
 const float PI = 3.141592653589797;
 const float HALF_PI = PI/2;
-const float RADIAN_TO_DEGREE_RATE = 180 / PI; 
-const float DEGREE_TO_RADIAN_RATE = 1/RADIAN_TO_DEGREE_RATE; 
+//const float RADIAN_TO_DEGREE_RATE = 180 / PI; 
+//const float DEGREE_TO_RADIAN_RATE = 1/RADIAN_TO_DEGREE_RATE; 
 //
 
 const float FLOAT_EPSILON = 0.1;    
@@ -292,10 +292,10 @@ namespace COLOR
 		RED_ID=1, GREEN_ID, BLUE_ID, YELLOW_ID, GREY_ID
 	};
 	
-	const Color4f COLOR4F_WHITE(1.0, 1.0, 1.0, 1.0);
-	const Color4i COLOR4I_WHITE(255, 255, 255, 255);	
-	const Color4i COLOR4I_RED_LIGHT(255, 128, 128, 255);
-	const Color4i COLOR4I_BLUE_LIGHT(128, 128, 255, 255); 	
+	const Color4<float> COLOR4F_WHITE(1.0, 1.0, 1.0, 1.0);
+	const Color4<int> COLOR4I_WHITE(255, 255, 255, 255);	
+	const Color4<int> COLOR4I_RED_LIGHT(255, 128, 128, 255);
+	const Color4<int> COLOR4I_BLUE_LIGHT(128, 128, 255, 255); 	
 		
 
 }

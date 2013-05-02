@@ -20,20 +20,20 @@
 #define VERTICALFLOWTEXT_H
 
 #include "../common/gameStruct.hpp"
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 
 class VerticalFlowText
 {
         public:
-                VerticalFlowText(const std::string&, int, const vec2f&, const Color4i&, float);                                   
+                VerticalFlowText(const std::string&, int, const Vec2<float>&, const Color4<int>&, float);                                   
                 ~VerticalFlowText();
 
 		bool GetAlive() const { return is_alive; };
 		
-		const vec2f& GetPos() const { return pos; };
+		const Vec2<float>& GetPos() const { return pos; };
 
                 void update();
-                void Render(const vec2f&) const;
+                void Render(const Vec2<float>&) const;
  
         private:
                 bool is_alive;
@@ -42,10 +42,10 @@ class VerticalFlowText
 		int font_size;
 		
                 std::string str;
-                Color4i color;
+                Color4<int> color;
 
-                vec2f offset;
-                vec2f pos;
+                Vec2<float> offset;
+                Vec2<float> pos;
                 
                 float speed;
 };

@@ -80,7 +80,7 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill)
 	if (player->GetCursor().GetItemSlot()->GetItem() != NULL)
 	{
        		gui_vehicle_scan->RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId());
-		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), vec2f(0, 0));		
+		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), Vec2<float>(0, 0));		
 	}
 	else
 	{
@@ -132,7 +132,7 @@ bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 {    	
 	Rect screen_rect(0, 0, Screen::Instance().GetWidth(), Screen::Instance().GetHeight());   
-	vec2f center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);       			
+	Vec2<float> center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);       			
         			
  	UserInput::Instance().UpdateInKosmoport(player, *this);
      	player->GetCursor().Update(); 

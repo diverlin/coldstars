@@ -21,7 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define FBO_H
 
 #include <GL/glew.h>
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 
 class Fbo
 {

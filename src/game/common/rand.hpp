@@ -20,7 +20,7 @@
 #define RAND_H
 
 #include <vector>
-#include "myVector.hpp"
+#include "../math/myVector.hpp"
 
 int getRandIntFromVec(const std::vector<int>&);
 
@@ -35,6 +35,6 @@ const std::vector<int>& getAllowedSubTypesByRaceId(int);
 int getRandNpcSubTypeId(int);
 int getRandNpcSubSubTypeId(int);
 
-vec2f getRandVec2f(int radius_min, int radius_max);
+Vec2<float> getRandVec2f(int radius_min, int radius_max);
 
 #endif

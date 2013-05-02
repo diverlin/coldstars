@@ -29,7 +29,7 @@
 
 GuiShop::GuiShop():shop(NULL)
 {
-	vec2f center(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);
+	Vec2<float> center(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);
                 
        	TextureOb* _texOb = GuiTextureObCollector::Instance().text_background; 
 

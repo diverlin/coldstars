@@ -62,10 +62,10 @@ class StarSystem : public BaseSpaceEntity
 		virtual void PutChildsToGarbage() const;
 
 		void SetGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy; };
-		void SetColor(const Color4f& color)  { this->color = color; };
-		const Color4f& GetColor4f()  { return color; };
+		void SetColor(const Color4<float>& color)  { this->color = color; };
+		const Color4<float>& GetColor4f()  { return color; };
 										
-		const Color4f& GetColor() const { return color; };
+		const Color4<float>& GetColor() const { return color; };
 		//bool GetDetailedSimulationFlag() const { return detalied_simulation; };
 		int GetConditionId()     const { return condition_id; };
 		int GetRaceId()          const { return race_id; };
@@ -79,16 +79,16 @@ class StarSystem : public BaseSpaceEntity
 		void CreateGroupAndShareTask(Npc*, StarSystem*, int) const;
 		
 		//// TRANSITION
-		void AddVehicle(Vehicle*, const vec2f&, float, BaseSpaceEntity* parent = NULL);
-		void AddBullet(RocketBullet*, const vec2f&, float);
+		void AddVehicle(Vehicle*, const Vec2<float>&, float, BaseSpaceEntity* parent = NULL);
+		void AddBullet(RocketBullet*, const Vec2<float>&, float);
 								
 		void Add(BasePlanet*, BaseSpaceEntity* parent = NULL, int it = 0);
-		void AddContainer(Container*, const vec2f&);
-		void Add(BlackHole*, const vec2f&);
+		void AddContainer(Container*, const Vec2<float>&);
+		void Add(BlackHole*, const Vec2<float>&);
 
 		// effects
 		void Add(BaseParticleSystem*);
-		void Add(ShockWaveEffect*, const vec2f&);
+		void Add(ShockWaveEffect*, const Vec2<float>&);
 		void Add(LazerTraceEffect*);
 
 		void Add(DistantNebulaEffect*);
@@ -107,7 +107,7 @@ class StarSystem : public BaseSpaceEntity
 
     		void RestoreDefaultColor();
     		void RestoreSceneColor();
-    		void DrawBackground(vec2f);
+    		void DrawBackground(Vec2<float>);
                 void DrawOrbits();
                 void DrawPath();
                 
@@ -116,7 +116,7 @@ class StarSystem : public BaseSpaceEntity
 		void ResolveData();
 				                                           		    		    		
 		// poor
-		Planet* GetClosestInhabitedPlanet(const vec2f&) const;
+		Planet* GetClosestInhabitedPlanet(const Vec2<float>&) const;
 		Planet* GetRandomInhabitedPlanet() const;
 		Planet* GetRandomPlanet() const;
 		Vehicle* GetRandomVehicle() const;
@@ -135,7 +135,7 @@ class StarSystem : public BaseSpaceEntity
     		int condition_id;
     		
     		Galaxy* galaxy;
-    		Color4f color;
+    		Color4<float> color;
     	
     		// ENTITY VECTORS
 		//std::vector<Player*> 	   PLAYER_vec;
@@ -170,7 +170,7 @@ class StarSystem : public BaseSpaceEntity
     		
     		void UpdateStates();
     		
-    		void DamageEventInsideCircle(const vec2f&, float, int, bool);
+    		void DamageEventInsideCircle(const Vec2<float>&, float, int, bool);
     		
     		void PostDeathUniqueEvent(bool);
 

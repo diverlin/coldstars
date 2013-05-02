@@ -45,7 +45,7 @@ void MicroScenarioExploration::UpdateInStaticInSpace(Npc* npc) const
 {
 	if (npc->GetVehicle()->GetDriveComplex().PathExists() == false)
 	{
-		vec2f target_pos = getRandVec2f(100, 1500);
+		Vec2<float> target_pos = getRandVec2f(100, 1500);
 	        npc->GetVehicle()->GetDriveComplex().SetStaticTargetCoords(target_pos); 
 	}
 }

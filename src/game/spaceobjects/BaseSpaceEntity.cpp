@@ -55,7 +55,7 @@ BaseSpaceEntity::~BaseSpaceEntity()
 	delete animation_program;
 }
 
-void BaseSpaceEntity::BindData3D(Mesh* mesh, TextureOb* textureOb, const vec3f& scale)
+void BaseSpaceEntity::BindData3D(Mesh* mesh, TextureOb* textureOb, const Vec3<float>& scale)
 {
 	this->mesh = mesh;
 	this->textureOb = textureOb; 
@@ -70,7 +70,7 @@ void BaseSpaceEntity::BindData2D(TextureOb* textureOb)
 	collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight()) / 3.0;
 } 
 
-void BaseSpaceEntity::MovingByExternalForce(const vec2f& _target_pos, float force)
+void BaseSpaceEntity::MovingByExternalForce(const Vec2<float>& _target_pos, float force)
 {
 	get_dPos_ToPoint(points.GetCenter(), _target_pos, force, d_pos);
 }
@@ -115,14 +115,14 @@ void BaseSpaceEntity::CheckDeath(bool show_effect)
 	}  
 }
 
-void BaseSpaceEntity::RenderInfoInSpace(const vec2f& scroll_coords)
+void BaseSpaceEntity::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 { 
 	UpdateInfo();
-	vec2f pos(points.GetCenter().x - scroll_coords.x, points.GetCenter().y - scroll_coords.y);
+	Vec2<float> pos(points.GetCenter().x - scroll_coords.x, points.GetCenter().y - scroll_coords.y);
      	drawInfoIn2Column(info.title_list, info.value_list, pos);
 }
 
-void BaseSpaceEntity::RenderInfo(const vec2f& center)
+void BaseSpaceEntity::RenderInfo(const Vec2<float>& center)
 { 
 	UpdateInfo();
      	drawInfoIn2Column(info.title_list, info.value_list, center);
@@ -136,9 +136,9 @@ void BaseSpaceEntity::UpdateRenderAnimation()
 	}
 }
 
-void BaseSpaceEntity::RenderMesh(const vec2f& scroll_coords) const
+void BaseSpaceEntity::RenderMesh(const Vec2<float>& scroll_coords) const
 {
-     	const Color4f& color = starsystem->GetColor4f(); float ambient_factor = 0.25;
+     	const Color4<float>& color = starsystem->GetColor4f(); float ambient_factor = 0.25;
      	
      	glUseProgram(ShaderCollector::Instance().light);
 

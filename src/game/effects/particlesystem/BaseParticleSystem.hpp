@@ -35,12 +35,12 @@ class BaseParticleSystem
       		void SetDying() { is_dying = true; };
 		void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
                 void SetParent(BaseSpaceEntity* parent) { this->parent = parent; };
-                void SetCenter(const vec2f& center) { this->center = center; };
+                void SetCenter(const Vec2<float>& center) { this->center = center; };
                 void SetParticlesNum(int num_particles)  { this->num_particles = num_particles; };
                 void SetParticleData(const ParticleData& data_particle) { this->data_particle = data_particle; };
                 
 		bool GetAlive() const { return is_alive; };
-		const vec2f& GetCenter() const { return center; };
+		const Vec2<float>& GetCenter() const { return center; };
 		
        		virtual void Update() = 0;
        		virtual void Render() = 0;
@@ -51,17 +51,17 @@ class BaseParticleSystem
        		
        		TextureOb* textureOb;
        		ParticleData data_particle;
-       		vec2f center;
+       		Vec2<float> center;
                 BaseSpaceEntity* parent;
                 
        	    	bool is_alive, is_dying;
    
           	std::vector<Particle*> particles_vec;  
                 
-                vec2f GetRandomVelocity();            
-		vec2f GetRandomAccurateVelocity();
-                vec2f GetRandomDirtyVelocity();
-		//void calcAccurateRandomVelocity2(vec2f);
+                Vec2<float> GetRandomVelocity();            
+		Vec2<float> GetRandomAccurateVelocity();
+                Vec2<float> GetRandomDirtyVelocity();
+		//void calcAccurateRandomVelocity2(Vec2<float>);
 };
 
 

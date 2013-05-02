@@ -45,7 +45,7 @@ BlackHole::~BlackHole()
 	delete shockwave; 
 } 
  
-void BlackHole::SetCenter(const vec2f& center) { points.SetCenter(center); shockwave->SetCenter(center); }
+void BlackHole::SetCenter(const Vec2<float>& center) { points.SetCenter(center); shockwave->SetCenter(center); }
  		
 void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
@@ -80,7 +80,7 @@ void BlackHole::UpdateInfo()
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 }
       
-void BlackHole::Render_NEW(const vec2f& scroll_coords)
+void BlackHole::Render_NEW(const Vec2<float>& scroll_coords)
 {
 	UpdateRenderAnimation();
 	RenderMesh(scroll_coords);

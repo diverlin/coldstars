@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 #include <GL/glew.h>
 
 class ObjLoader;
@@ -13,9 +13,9 @@ class TextureOb;
 
 struct MeshVertexData
 {
-	vec3f position;
-	vec2f texcoord;
-	vec3f normal;
+	Vec3<float> position;
+	Vec2<float> texcoord;
+	Vec3<float> normal;
 };
 
 struct MeshFaceData
@@ -31,7 +31,7 @@ class Mesh
 
 		int GetTypeId() const { return type_id; };
 		TextureOb* GetTextureOb() const { return textureOb; };
-		const vec3f& GetBoundaryBox() const { return boundary_box; };
+		const Vec3<float>& GetBoundaryBox() const { return boundary_box; };
 						
 		void Draw() const;
 	
@@ -40,7 +40,7 @@ class Mesh
 		
 		TextureOb* textureOb;
 		std::vector<MeshFaceData> faces; 
-		vec3f boundary_box;
+		Vec3<float> boundary_box;
 
 		GLuint glList; 
 		GLuint vbo_id;

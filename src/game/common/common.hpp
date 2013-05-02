@@ -20,12 +20,12 @@
 #define COMMON_H
 
 #include <string>
-#include "myVector.hpp"
+#include "../math/myVector.hpp"
 
 int getObjectSize(int w, int h); 
 
-bool get_dPos_ToPoint(const vec2f&, const vec2f&, float, vec2f&);
-bool get_dPos_ToPoint(const vec2f&, const vec2f&, float, vec2f&, float&);
+bool get_dPos_ToPoint(const Vec2<float>&, const Vec2<float>&, float, Vec2<float>&);
+bool get_dPos_ToPoint(const Vec2<float>&, const Vec2<float>&, float, Vec2<float>&, float&);
 
 template <typename T>
 inline T getMin(T val1, T val2)
@@ -48,7 +48,7 @@ inline T getMin(T val1, T val2, T val3)
 	return getMin(min2, val3);
 }
 
-Color4f getColor4fById(int);
+Color4<float> getColor4fById(int);
 
 //template <typename T>
 //void copyArray(T* src, T* res, int size)

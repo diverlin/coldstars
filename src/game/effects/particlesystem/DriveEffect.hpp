@@ -25,7 +25,7 @@
 class DriveEffect : public BaseParticleSystem
 {
    	public:
-       		DriveEffect(vec2f*, vec2f*);
+       		DriveEffect(Vec2<float>*, Vec2<float>*);
        		virtual ~DriveEffect();
        
        		virtual void Update();
@@ -37,16 +37,16 @@ class DriveEffect : public BaseParticleSystem
        		void PutParticlesToInitPos();
                                 
        	private:
-       		vec2f* pTo_start_pos;      //ob.points.midLeft
-       		vec2f* pTo_target_pos;     //ob.points.midFarLeft
+       		Vec2<float>* pTo_start_pos;      //ob.points.midLeft
+       		Vec2<float>* pTo_target_pos;     //ob.points.midFarLeft
 
-       		vec2f velocity;
+       		Vec2<float> velocity;
 
 
        	
        	
 };  
 
-DriveEffect* GetNewDriveEffect(int, vec2f*, vec2f*);
+DriveEffect* GetNewDriveEffect(int, Vec2<float>*, Vec2<float>*);
 
 #endif

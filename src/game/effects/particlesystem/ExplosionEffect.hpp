@@ -37,7 +37,7 @@ class ExplosionEffect : public BaseParticleSystem
 };
 
 
-void createExplosion(StarSystem*, vec2f, int obSize);
+void createExplosion(StarSystem*, Vec2<float>, int obSize);
 
 
 #endif 

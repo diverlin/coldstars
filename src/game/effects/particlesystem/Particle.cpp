@@ -50,7 +50,7 @@ void Particle::Randomize_d_alpha(float val1_f, float val2_f)
 }            	
       		
 
-//void Particle::reborn(vec2f center)
+//void Particle::reborn(Vec2<float> center)
 //{       	 
 	//is_alive = true;
        			

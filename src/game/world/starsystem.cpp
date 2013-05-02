@@ -20,7 +20,7 @@
 #include "galaxy.hpp"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 #include "../builder/AsteroidBuilder.hpp"
@@ -164,7 +164,7 @@ void StarSystem::CreateGroupAndShareTask(Npc* npc_leader, StarSystem* target_sta
 	}
 }
 		
-void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, BaseSpaceEntity* parent)
+void StarSystem::AddVehicle(Vehicle* vehicle, const Vec2<float>& center, float angle, BaseSpaceEntity* parent)
 {
 	#if ENTITY_TRANSACTION_LOG_ENABLED == 1
 	Logger::Instance().Log(" StarSystem(" + int2str(GetId()) + ")::AddVehicle(" + int2str(vehicle->GetId())+")", ENTITY_TRANSACTION_LOG_DIP);
@@ -198,7 +198,7 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const vec2f& center, float angle, 
 }
 
 
-void StarSystem::AddBullet(RocketBullet* rocket, const vec2f& center, float angle)
+void StarSystem::AddBullet(RocketBullet* rocket, const Vec2<float>& center, float angle)
 {
      	rocket->SetPlaceTypeId(ENTITY::SPACE_ID);
      	rocket->SetStarSystem(this);  
@@ -243,7 +243,7 @@ void StarSystem::Add(BasePlanet* object, BaseSpaceEntity* parent, int it)
 	}
 }
                 
-void StarSystem::AddContainer(Container* container, const vec2f& center)
+void StarSystem::AddContainer(Container* container, const Vec2<float>& center)
 {
 	#if ENTITY_TRANSACTION_LOG_ENABLED == 1
 	Logger::Instance().Log(" StarSystem(" + int2str(GetId()) + ")::AddVehicle(" + int2str(container->GetId()) + ")", ENTITY_TRANSACTION_LOG_DIP);
@@ -267,7 +267,7 @@ void StarSystem::AddContainer(Container* container, const vec2f& center)
         CONTAINER_vec.push_back(container);
 }
 
-void StarSystem::Add(BlackHole* blackhole, const vec2f& center)
+void StarSystem::Add(BlackHole* blackhole, const Vec2<float>& center)
 {
 	blackhole->SetStarSystem(this);
         blackhole->SetPlaceTypeId(ENTITY::SPACE_ID);
@@ -275,7 +275,7 @@ void StarSystem::Add(BlackHole* blackhole, const vec2f& center)
 	BLACKHOLE_vec.push_back(blackhole);
 }    
     		
-void StarSystem::Add(ShockWaveEffect* shockwave, const vec2f& center)           { shockwave->SetCenter(center); effect_SHOCKWAVE_vec.push_back(shockwave); }
+void StarSystem::Add(ShockWaveEffect* shockwave, const Vec2<float>& center)           { shockwave->SetCenter(center); effect_SHOCKWAVE_vec.push_back(shockwave); }
 void StarSystem::Add(LazerTraceEffect* lazerTraceEffect)     { effect_LAZERTRACE_vec.push_back(lazerTraceEffect); }
 void StarSystem::Add(BaseParticleSystem* ps)                 { effect_PARTICLESYSTEM_vec.push_back(ps); }
 void StarSystem::Add(VerticalFlowText* text)                 { text_DAMAGE_vec.push_back(text); }
@@ -284,7 +284,7 @@ void StarSystem::Add(DistantStarEffect* ds)                  { distantStarEffect
 //// ******* TRANSITION ******* 
   		           
 // poor                
-Planet* StarSystem::GetClosestInhabitedPlanet(const vec2f& _pos) const
+Planet* StarSystem::GetClosestInhabitedPlanet(const Vec2<float>& _pos) const
 {    	
      	Planet* requested_planet = NULL;
      	
@@ -742,7 +742,7 @@ void StarSystem::RestoreDefaultColor()
 	setColor4f(COLOR::COLOR4F_WHITE);
 }
 
-void StarSystem::DrawBackground(vec2f scroll_coords)
+void StarSystem::DrawBackground(Vec2<float> scroll_coords)
 {   
 	// HACK for point sprites
     	enable_POINTSPRITE();
@@ -827,7 +827,7 @@ void StarSystem::ShipManager_s(unsigned int num)
         
         	new_pship->BindOwnerNpc(new_pnpc);
 
-		vec2f pos = getRandVec2f(100, 800);
+		Vec2<float> pos = getRandVec2f(100, 800);
 		int angle = getRandInt(0, 360);
                 AddVehicle(new_pship, pos, angle);
         	//break;
@@ -947,7 +947,7 @@ void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
 {
 	float radius = ((Bomb*)container->GetItemSlot()->GetItem())->GetRadius();
 	float damage = ((Bomb*)container->GetItemSlot()->GetItem())->GetDamage(); 
-	vec2f center = container->GetPoints().GetCenter();
+	Vec2<float> center = container->GetPoints().GetCenter();
 	
 	DamageEventInsideCircle(center, radius, damage, show_effect);
 		
@@ -971,7 +971,7 @@ void StarSystem::StarSparkEvent(float radius) const
     	}
 }
 
-void StarSystem::DamageEventInsideCircle(const vec2f& center, float radius, int damage, bool show_effect)
+void StarSystem::DamageEventInsideCircle(const Vec2<float>& center, float radius, int damage, bool show_effect)
 {
 	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     	{

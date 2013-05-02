@@ -116,7 +116,7 @@ void GuiGalaxyMap::Render()
 
        		if (galaxy->STARSYSTEM_vec[i]->GetConditionId() == ENTITY::STARSYSTEM::CONDITION::WAR_ID)
         	{
-        		drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_war->texture, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter()*scale_parsec2screencoord + vec2f(0.0,-13.0), 20.0, -2.0);
+        		drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_war->texture, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter()*scale_parsec2screencoord + Vec2<float>(0.0,-13.0), 20.0, -2.0);
         	}        		
            	
     	}	 
@@ -142,7 +142,7 @@ void GuiGalaxyMap::Render()
         int font_size = 10;     
         for (unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
     	{
-    		vec2f pos(galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter().x*scale_parsec2screencoord - 20, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter().y*scale_parsec2screencoord - 20);
+    		Vec2<float> pos(galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter().x*scale_parsec2screencoord - 20, galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter().y*scale_parsec2screencoord - 20);
 		Screen::Instance().DrawText(int2str(galaxy->STARSYSTEM_vec[i]->GetId()), font_size, pos);
    	} 
 }

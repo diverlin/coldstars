@@ -73,7 +73,7 @@ void ExplosionEffect::Render()
                  
 
 
-void  createExplosion(StarSystem* starsystem, vec2f center, int obSize)
+void  createExplosion(StarSystem* starsystem, Vec2<float> center, int obSize)
 {
 	//obSize = getRandInt(1,9); // DEBUG
 	ExplosionEffect* explosion;

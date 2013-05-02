@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 
 struct MeshFaceIndexesData
 {
@@ -22,14 +22,14 @@ class ObjLoader
 	
 	private:
 		/** The data readed directly from file */
-		std::vector<vec3f> positions;
-		std::vector<vec2f> texcoords;
-		std::vector<vec3f> normals;		
+		std::vector<Vec3<float>> positions;
+		std::vector<Vec2<float>> texcoords;
+		std::vector<Vec3<float>> normals;		
 		std::vector<MeshFaceIndexesData> faces_indexes;
 		/** */
 		
       		void NormalizePositions();
-      		vec3f GetBoundaryBox();
+      		Vec3<float> GetBoundaryBox();
 		
 	friend class Mesh;
 };

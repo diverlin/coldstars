@@ -28,7 +28,7 @@ Rect::Rect(float _bottomLeft_x, float _bottomLeft_y, float _w, float _h)
 	Set(_bottomLeft_x, _bottomLeft_y, _w, _h);
 }
 
-Rect::Rect(const vec2f& _bottomLeft, float _w, float _h)
+Rect::Rect(const Vec2<float>& _bottomLeft, float _w, float _h)
 {
 	Set(_bottomLeft.x, _bottomLeft.y, _w, _h);
 }
@@ -50,7 +50,7 @@ void Rect::Scale(float scale)
 	bottomLeft.y = center.y - h/2; 
 }
      	
-void Rect::Scale(const vec2f& scale)
+void Rect::Scale(const Vec2<float>& scale)
 {
       	w *= scale.x;
       	h *= scale.y; 
@@ -84,7 +84,7 @@ void Rect::Set(float _bottomLeft_x, float _bottomLeft_y, float _w, float _h)
 	UpdateTopRight();
 }
 
-void Rect::Set(const vec2f& vbl, float _w, float _h)
+void Rect::Set(const Vec2<float>& vbl, float _w, float _h)
 {
 	Set(vbl.x, vbl.y, _w , _h);
 }
@@ -94,7 +94,7 @@ void Rect::Set(const Rect& rect)
 	Set(rect.GetBottomLeft(), rect.GetWidth(), rect.GetHeight());
 }
 	
-void Rect::SetCenter(const vec2f& _center)
+void Rect::SetCenter(const Vec2<float>& _center)
 {
 	SetCenter(_center.x, _center.y);
 }
@@ -113,7 +113,7 @@ void Rect::SetCenter(float _center_x, float _center_y)
 	UpdateTopRight();
 }
 
-void Rect::SetBottomLeft(const vec2f& _bottomLeft)
+void Rect::SetBottomLeft(const Vec2<float>& _bottomLeft)
 {
 	SetBottomLeft(_bottomLeft.x, _bottomLeft.y);
 }
@@ -146,7 +146,7 @@ void Rect::SetSize(float w, float h)
 	UpdateTopRight();
 }
 
-void Rect::MovingBy(const vec2f& d_pos)
+void Rect::MovingBy(const Vec2<float>& d_pos)
 {
 	bottomLeft += d_pos;
 	UpdateCenter();

@@ -86,7 +86,7 @@ void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
 	blackhole->SetLifeData(data_life);
 	
 	float scale_comp = 30;
-	vec3f scale(scale_comp, scale_comp, scale_comp);	
+	Vec3<float> scale(scale_comp, scale_comp, scale_comp);	
 	blackhole->BindData3D(mesh, texOb, scale);	
 	
 	float step = 10;

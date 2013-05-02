@@ -37,7 +37,7 @@ BaseEquipment::BaseEquipment()
 
     	price = 0;
     	
-    	animation_notfunctioning = new AnimationEffect2D(vec2f(0.8, 0.8), vec2f(1.2, 1.2), vec2f(0.02, 0.02), 0, 0, 0);
+    	animation_notfunctioning = new AnimationEffect2D(Vec2<float>(0.8, 0.8), Vec2<float>(1.2, 1.2), Vec2<float>(0.02, 0.02), 0, 0, 0);
 }
 
 /*virtual */
@@ -97,7 +97,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 } 
 
 /* virtual */
-void BaseEquipment::Render(const Rect& rect1, const vec2f& gui_offset, bool draw_text)
+void BaseEquipment::Render(const Rect& rect1, const Vec2<float>& gui_offset, bool draw_text)
 {
 	Rect rect(rect1);
 	if (GetFunctioning() == false)
@@ -128,7 +128,7 @@ void BaseEquipment::Render(const Rect& rect1, const vec2f& gui_offset, bool draw
 	{
 		int font_size = 12;		
     		drawTexturedRect(GuiTextureObCollector::Instance().slot_mark_accept, rect, -1.0f);
-    		vec2f pos(rect.GetCenter().x - font_size/2 + gui_offset.x, rect.GetTopRight().y - font_size + gui_offset.y);
+    		Vec2<float> pos(rect.GetCenter().x - font_size/2 + gui_offset.x, rect.GetTopRight().y - font_size + gui_offset.y);
     		Screen::Instance().DrawText(int2str(locked_turns), font_size, pos);	
 	}
 
@@ -136,7 +136,7 @@ void BaseEquipment::Render(const Rect& rect1, const vec2f& gui_offset, bool draw
 	{
     		if (data_id.subtype_id == ENTITY::ROCKET_EQUIPMENT_ID)
         	{
-        		vec2f pos(rect.GetCenter().x - rect.GetWidth()/2 + gui_offset.x, rect.GetCenter().y + gui_offset.y);
+        		Vec2<float> pos(rect.GetCenter().x - rect.GetWidth()/2 + gui_offset.x, rect.GetCenter().y + gui_offset.y);
         		Screen::Instance().DrawText(int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
 		}
 	}

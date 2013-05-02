@@ -27,7 +27,7 @@ class AnimationWiggleAxisX : public AnimationBase
         	AnimationWiggleAxisX(float, float);
         	virtual ~AnimationWiggleAxisX();
 
-        	virtual void Update(vec3f&);
+        	virtual void Update(Vec3<float>&);
         
         private:
         	float threshold;

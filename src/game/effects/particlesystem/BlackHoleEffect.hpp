@@ -34,7 +34,7 @@ class BlackHoleEffect : public BaseParticleSystem
 };
 
 
-void getNewBlackHoleEffect(StarSystem*, vec2f, int obSize);
+void getNewBlackHoleEffect(StarSystem*, Vec2<float>, int obSize);
 
 
 #endif 

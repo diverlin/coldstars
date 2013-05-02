@@ -23,8 +23,8 @@
 
 VerticalFlowText::VerticalFlowText(const std::string& str, 
 					int font_size,
-                                        const vec2f& center, 
-                                        const Color4i& color, 
+                                        const Vec2<float>& center, 
+                                        const Color4<int>& color, 
                                         float collision_radius)
 {
         is_alive = true;
@@ -65,11 +65,11 @@ void VerticalFlowText::update()
         }
 }
                 
-void VerticalFlowText::Render(const vec2f& scroll_coords) const
+void VerticalFlowText::Render(const Vec2<float>& scroll_coords) const
 {
         if (is_alive == true)
         {
-        	vec2f npos(pos.x-scroll_coords.x, pos.y+scroll_coords.y);
+        	Vec2<float> npos(pos.x-scroll_coords.x, pos.y+scroll_coords.y);
                 Screen::Instance().DrawText(str, font_size, npos, color);
         }
 }

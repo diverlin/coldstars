@@ -24,7 +24,7 @@
 
 #include "../slots/ItemSlot.hpp"
 
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 #include "../common/Collision.hpp"
 #include "../common/constants.hpp"
 #include "../common/Logger.hpp"
@@ -85,7 +85,7 @@ void DriveComplex::ResetTarget()
 	direction_list_END = true;
 }
       
-void DriveComplex::SetStaticTargetCoords(const vec2f& target_pos)
+void DriveComplex::SetStaticTargetCoords(const Vec2<float>& target_pos)
 {	
     	ResetTarget();
     	has_target = true;
@@ -249,7 +249,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
     	}
 
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + vec2f2str(target_pos) + " target_center=" + vec2f2str(target->GetPoints().GetCenter()) + " target_offset=" + vec2f2str(target_offset) + "target_distance=" + int2str(target_distance), DRIVECOMPLEX_LOG_DIP); 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + Vec2<float>2str(target_pos) + " target_center=" + Vec2<float>2str(target->GetPoints().GetCenter()) + " target_offset=" + Vec2<float>2str(target_offset) + "target_distance=" + int2str(target_distance), DRIVECOMPLEX_LOG_DIP); 
 	#endif 
 }
 
@@ -348,14 +348,14 @@ bool DriveComplex::CalcRoundPath()
         	float cosa = cos(angle_radian);
         	float sina = sin(angle_radian);
         	
-    		vec2f delta_step(step*cosa, step*sina);
+    		Vec2<float> delta_step(step*cosa, step*sina);
     		 
        		////// rotation around center
-       		vec2f midleft_orig(owner_vehicle->GetPoints().GetMidLeftOrig());
-       		vec2f midleft_rotated(midleft_orig.x * cosa - midleft_orig.y * sina, midleft_orig.x * sina + midleft_orig.y * cosa);
+       		Vec2<float> midleft_orig(owner_vehicle->GetPoints().GetMidLeftOrig());
+       		Vec2<float> midleft_rotated(midleft_orig.x * cosa - midleft_orig.y * sina, midleft_orig.x * sina + midleft_orig.y * cosa);
      	        	
         	vehicle_basis.p += delta_step;
-       		vec2f midleft_trans(midleft_rotated + vehicle_basis.p);
+       		Vec2<float> midleft_trans(midleft_rotated + vehicle_basis.p);
        		
         	vehicle_basis.p0(midleft_trans);        
         	target_basis.p0(midleft_trans);        	
@@ -379,7 +379,7 @@ bool DriveComplex::CalcRoundPath()
 
 void DriveComplex::CalcDirectPath() 
 {   
-	vec2f start_pos;
+	Vec2<float> start_pos;
 	if (path_center_vec.size() == 0)
 	{
     		start_pos(owner_vehicle->GetPoints().GetCenter());
@@ -389,16 +389,16 @@ void DriveComplex::CalcDirectPath()
 		start_pos(path_center_vec[path_center_vec.size()-1]);
     	}
     	
-    	vec2f ll(target_pos - start_pos);
-    	vec2f new_pos(start_pos);
+    	Vec2<float> ll(target_pos - start_pos);
+    	Vec2<float> new_pos(start_pos);
 
         if ( (owner_vehicle->GetProperties().speed > FLOAT_EPSILON) and (ll.IsNull() == false) )
     	{
     		float step = owner_vehicle->GetProperties().speed/100.0;  // remove from here    
        		    		
-		vec2f vstep = ll.GetNorm() * step;
+		Vec2<float> vstep = ll.GetNormalized() * step;
 
-       		unsigned int it = ll.GetLen() / step;
+       		unsigned int it = ll.GetLength() / step;
        		for (unsigned int i=0; i<it; i++)
        		{
             		new_pos += vstep;
@@ -416,15 +416,15 @@ void DriveComplex::CalcDirectPath()
 	
 	//float angleInD = owner_vehicle->GetPoints().GetAngleDegree();
 
-	//vec2f start_pos(owner_vehicle->GetPoints().GetCenter());
+	//Vec2<float> start_pos(owner_vehicle->GetPoints().GetCenter());
     	
-    	//vec2f ll(getVec2f(100, angleInD) - start_pos);
+    	//Vec2<float> ll(getVec2f(100, angleInD) - start_pos);
     	
-    	//vec2f new_pos(start_pos);
+    	//Vec2<float> new_pos(start_pos);
     	//for (unsigned int i=0; i<500; i++)
 	//{
 	    	//float step = owner_vehicle->GetProperties().speed/100.0 + i*10;  // remove from here      		    		
-		//vec2f vstep = ll.GetNorm() * step;
+		//Vec2<float> vstep = ll.GetNorm() * step;
 	
         	//new_pos += vstep;
 

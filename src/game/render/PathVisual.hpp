@@ -22,7 +22,7 @@
 #include <vector>
 #include <GL/glew.h>
 class TextureOb;
-class vec2f;
+#include "../math/myVector.hpp"
 
 class PathVisual
 {
@@ -30,12 +30,12 @@ class PathVisual
 		PathVisual();
 		~PathVisual();
 
-		void FillData(TextureOb*, const std::vector<vec2f>&, int step, int point_size);
-		void FillData(const std::vector<vec2f>&, int step, int point_size);
+		void FillData(TextureOb*, const std::vector<Vec2<float>>&, int step, int point_size);
+		void FillData(const std::vector<Vec2<float>>&, int step, int point_size);
 		void FillData(TextureOb*, int radius, int point_size);	
-		void FillData(TextureOb*, const vec2f&, const vec2f&, int step, int point_size);																																																																																																																																																																														
+		void FillData(TextureOb*, const Vec2<float>&, const Vec2<float>&, int step, int point_size);																																																																																																																																																																														
 		
-		void Draw(const vec2f&) const;
+		void Draw(const Vec2<float>&) const;
 		void Draw() const;
 		
 	private:

@@ -30,11 +30,11 @@ class Container : public BaseSpaceEntity
         	
         	virtual void PutChildsToGarbage() const;
         	
-        	void SetTargetPos(const vec2f& target_pos, float velocity) { this->target_pos = target_pos; this->velocity = velocity; };
+        	void SetTargetPos(const Vec2<float>& target_pos, float velocity) { this->target_pos = target_pos; this->velocity = velocity; };
         	void BindItemSlot(ItemSlot*);
         	ItemSlot* GetItemSlot() const { return item_slot; };
 
-        	void RenderInfoInSpace(const vec2f&);
+        	void RenderInfoInSpace(const Vec2<float>&);
         	
         	virtual void PostDeathUniqueEvent(bool);
             	
@@ -50,7 +50,7 @@ class Container : public BaseSpaceEntity
                 ItemSlot* item_slot;        
         	void UpdateInfo();  
                 
-                vec2f target_pos;    	
+                Vec2<float> target_pos;    	
         	float velocity;
         	
         	void SaveDataUniqueContainer(boost::property_tree::ptree&, const std::string&) const;		

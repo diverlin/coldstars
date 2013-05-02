@@ -53,7 +53,7 @@ class GuiSpace : public BaseGui
        		void Resize(int, int);
        		void ButtonsAction(Player*) const;
      		
-       		void RenderText(const vec2f&) const;
+       		void RenderText(const Vec2<float>&) const;
        		void RenderBar() const;
                 
                 void EnterGalaxyMap();

@@ -175,7 +175,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
 					satellite->BindOwnerNpc(npc);
 				}
 			
-				planet->GetStarSystem()->AddVehicle(satellite, vec2f(0, 0), 0, planet);
+				planet->GetStarSystem()->AddVehicle(satellite, Vec2<float>(0, 0), 0, planet);
 			}
 		}
 		
@@ -234,7 +234,7 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
                 Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         	spacestation->BindOwnerNpc(npc);
 
-		vec2f center = getRandVec2f(700, 1500);
+		Vec2<float> center = getRandVec2f(700, 1500);
 		float angle = getRandInt(0, 360);  
                 
         	starsystem->AddVehicle(spacestation, center, angle, NULL);
@@ -246,7 +246,7 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
                 Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
                 satellite->BindOwnerNpc(new_npc);
                 
-                starsystem->AddVehicle(satellite, vec2f(0, 0), 0, spacestation);
+                starsystem->AddVehicle(satellite, Vec2<float>(0, 0), 0, spacestation);
     		}
     	}        
 }
@@ -280,7 +280,7 @@ void God::CreateShipsInSpace(StarSystem* starsystem, int ship_num, int npc_race_
         	Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         	new_ship->BindOwnerNpc(new_npc);
 
-		vec2f center = getRandVec2f(300, 1200);
+		Vec2<float> center = getRandVec2f(300, 1200);
 		float angle = getRandInt(0, 360);  
 		
         	starsystem->AddVehicle(new_ship, center, angle, NULL);

@@ -22,7 +22,7 @@
 
 #include <vector>
 #include <cmath>
-#include "myVector.hpp"
+#include "../math/myVector.hpp"
 
 class Points
 {
@@ -38,16 +38,16 @@ class Points
         ******************************************/
         
         public:
-                void SetParentCenter(vec2f parent_center) { this->parent_center.Set(parent_center); };
+                void SetParentCenter(Vec2<float> parent_center) { this->parent_center.Set(parent_center); };
                 
                 void SetCenter(float x, float y)	{ center.Set(x, y); 		is_updated = false; };
-                void SetCenter(const vec2f& center) { this->center = center;  	is_updated = false; };
+                void SetCenter(const Vec2<float>& center) { this->center = center;  	is_updated = false; };
                 void SetAngle(float angle_inD) 	{ this->angle_inD = angle_inD; 	is_updated = false; };
 
                 void SetPosZ(float pos_z) { this->pos_z = pos_z; }
                 
                 void SetScale(float x, float y, float z) { scale.Set(x,y,z); };
-                void SetScale(const vec3f scale) { this->scale = scale; };
+                void SetScale(const Vec3<float> scale) { this->scale = scale; };
                                         
         	float GetWidth() const  { return scale.x; };
         	float GetHeight() const { return scale.y; };
@@ -57,29 +57,29 @@ class Points
                         
                 float GetPosZ() const { return pos_z; };
                         
-                const vec2f& GetCenter()  const { return center; };   
-                const vec3f GetCenter3f() const { return vec3f(center.x, center.y, pos_z); }; 
-                const vec3f GetScale() 	  const { return scale; }; 
+                const Vec2<float>& GetCenter()  const { return center; };   
+                const Vec3<float> GetCenter3f() const { return Vec3<float>(center.x, center.y, pos_z); }; 
+                const Vec3<float> GetScale() 	  const { return scale; }; 
                 
-                vec2f* GetpCenter() { return &center; };  
-                vec2f* GetpParentCenter() { return &parent_center; };   
+                Vec2<float>* GetpCenter() { return &center; };  
+                Vec2<float>* GetpParentCenter() { return &parent_center; };   
                       
-                const vec2f& GetBottomLeft()  const { return bottomLeft; };  
-                const vec2f& GetBottomRight() const { return bottomRight; }; 
-                const vec2f& GetTopRight()    const { return topRight; };    
-                const vec2f& GetTopLeft()     const { return topLeft; };
+                const Vec2<float>& GetBottomLeft()  const { return bottomLeft; };  
+                const Vec2<float>& GetBottomRight() const { return bottomRight; }; 
+                const Vec2<float>& GetTopRight()    const { return topRight; };    
+                const Vec2<float>& GetTopLeft()     const { return topLeft; };
 
-                const vec2f& GetMidLeftOrig()    { return midLeft_origin; };	// used in path calc              
-                const vec2f& GetMidLeft()    { return midLeft; };	// used in path calc                
-                vec2f* GetpMidLeft()    { return &midLeft; };	     	// used in drive jet
-                vec2f* GetpMidFarLeft() { return &midFarLeft; };
+                const Vec2<float>& GetMidLeftOrig()    { return midLeft_origin; };	// used in path calc              
+                const Vec2<float>& GetMidLeft()    { return midLeft; };	// used in path calc                
+                Vec2<float>* GetpMidLeft()    { return &midLeft; };	     	// used in drive jet
+                Vec2<float>* GetpMidFarLeft() { return &midFarLeft; };
                    
                 Points();
                 ~Points();
 
                 void addMainQuadPoints();
 
-                void Add(vec2f*, vec2f*);
+                void Add(Vec2<float>*, Vec2<float>*);
 
                 void addMidLeftPoint();
                 void addMidFarLeftPoint();
@@ -89,35 +89,35 @@ class Points
         private:
                 bool is_updated;
                 
-                vec3f scale;
+                Vec3<float> scale;
                 float angle_inD;
                 float pos_z;
             
-                vec2f center;     
-                vec2f parent_center; 
+                Vec2<float> center;     
+                Vec2<float> parent_center; 
               
-                std::vector<vec2f*> vector_orig;
-                std::vector<vec2f*> vector;
+                std::vector<Vec2<float>*> vector_orig;
+                std::vector<Vec2<float>*> vector;
                                              
                 // Origin entity rect (for rotation only transformation)
-                vec2f bottomLeft_origin;  
-                vec2f bottomRight_origin; 
-                vec2f topRight_origin;    
-                vec2f topLeft_origin;    
+                Vec2<float> bottomLeft_origin;  
+                Vec2<float> bottomRight_origin; 
+                Vec2<float> topRight_origin;    
+                Vec2<float> topLeft_origin;    
 
 		// jet normilized
-		vec2f midLeft_origin;
-		vec2f midFarLeft_origin;
+		Vec2<float> midLeft_origin;
+		Vec2<float> midFarLeft_origin;
                 
                 // Actual entity rect                       
-                vec2f bottomLeft;  
-                vec2f bottomRight; 
-                vec2f topRight;    
-                vec2f topLeft;
+                Vec2<float> bottomLeft;  
+                Vec2<float> bottomRight; 
+                Vec2<float> topRight;    
+                Vec2<float> topLeft;
                 
                 // jet actual
-                vec2f midLeft;
-                vec2f midFarLeft;
+                Vec2<float> midLeft;
+                Vec2<float> midFarLeft;
 };
 
 #endif 

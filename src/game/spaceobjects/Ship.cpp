@@ -143,7 +143,7 @@ void Ship::RenderInSpace_2D() const
 	starsystem->RestoreSceneColor();
 }
 
-void Ship::RenderInSpace_3D(const vec2f& scroll_coords)
+void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords)
 {
 	UpdateRenderAnimation();
 	RenderMesh(scroll_coords);
@@ -158,7 +158,7 @@ void Ship::RenderInSpace_3D(const vec2f& scroll_coords)
 	starsystem->RestoreSceneColor();
 }
 
-void Ship::RenderAtPlanet(const vec2f& center)
+void Ship::RenderAtPlanet(const Vec2<float>& center)
 {
        	points.SetCenter(center);
         points.SetAngle(0);

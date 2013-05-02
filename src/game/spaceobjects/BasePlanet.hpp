@@ -21,7 +21,7 @@
 #define BASEPLANET_H
 
 #include "BaseSpaceEntity.hpp"
-#include "../common/myVector.hpp"
+#include "../math/myVector.hpp"
 #include "../parts/orbit.hpp"
 
 struct UnresolvedDataBasePlanet
