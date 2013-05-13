@@ -28,6 +28,5 @@ void load3DModels();
 void loadShaders();
 void loadImages();
 
-std::string getStringFromFile(const std::string&);
 
 #endif

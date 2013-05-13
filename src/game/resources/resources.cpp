@@ -20,7 +20,7 @@
 #include "../common/constants.hpp"
 #include "../config/config.hpp"
 #include "ShaderCollector.hpp"
-#include "GlslLoader.hpp"
+#include "../render/ShaderLoader.hpp"
 #include "../render/Screen.hpp"
 #include "MeshCollector.hpp"
 #include "../render/Mesh.hpp"
@@ -1302,112 +1302,93 @@ void loadImages()
 
 void loadShaders()
 {
-	//{
-	//boost::filesystem::path full_pv = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/black2alpha.vert")); 
-	//boost::filesystem::path full_pf = boost::filesystem3::absolute(boost::filesystem::path("src/resources/shaders/black2alpha.frag")); 
-	//ShaderCollector::Instance().black2alpha = glCreateProgram();
-	//compile_program(getStringFromFile(full_pv.string()).c_str(), getStringFromFile(full_pf.string()).c_str(), ShaderCollector::Instance().black2alpha);
-	//}
-
 	{
-	const std::string pv = "data/shaders/black2alpha.vert"; 
-	const std::string pf = "data/shaders/black2alpha.frag"; 
+	const std::string path_vert = "data/shaders/black2alpha.vert"; 
+	const std::string path_frag = "data/shaders/black2alpha.frag";
 	
 	ShaderCollector::Instance().black2alpha = glCreateProgram();
-	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().black2alpha);
+	 	
+	compileProgram(path_vert, path_frag, ShaderCollector::Instance().black2alpha);
 	}
 	
 	{
-	const std::string pv = "data/shaders/shockwave.vert"; 
-	const std::string pf = "data/shaders/shockwave.frag"; 
+	const std::string path_vert = "data/shaders/shockwave.vert"; 
+	const std::string path_frag = "data/shaders/shockwave.frag"; 
 
 	ShaderCollector::Instance().shockwave = glCreateProgram();
-	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().shockwave);
+	
+	compileProgram(path_vert, path_frag, ShaderCollector::Instance().shockwave);
 	}
 
 	{
-	const std::string pv = "data/shaders/volumetricLight.vert"; 
-	const std::string pf = "data/shaders/volumetricLight.frag"; 
+	const std::string path_vert = "data/shaders/volumetricLight.vert"; 
+	const std::string path_frag = "data/shaders/volumetricLight.frag"; 
 
 	ShaderCollector::Instance().volumetriclight = glCreateProgram();
-	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().volumetriclight);
+	
+	compileProgram(path_vert, path_frag, ShaderCollector::Instance().volumetriclight);
 	}
 
 	{
-	const std::string pv = "data/shaders/light.vert"; 
-	const std::string pf = "data/shaders/light.frag"; 
+	const std::string path_vert = "data/shaders/light.vert"; 
+	const std::string path_frag = "data/shaders/light.frag"; 
 
 	ShaderCollector::Instance().light = glCreateProgram();
-	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().light);
+	
+	compileProgram(path_vert, path_frag, ShaderCollector::Instance().light);
 	}
 
 	{
-	const std::string pv = "data/shaders/blur.vert"; 
-	const std::string pf = "data/shaders/blur.frag"; 
-
+	const std::string path_vert = "data/shaders/blur.vert"; 
+	const std::string path_frag = "data/shaders/blur.frag"; 
+	
 	ShaderCollector::Instance().blur = glCreateProgram();
-	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().blur);
+
+	compileProgram(path_vert, path_frag, ShaderCollector::Instance().blur);
 	}
 
 	{
-	const std::string pv = "data/shaders/extractBright.vert"; 
-	const std::string pf = "data/shaders/extractBright.frag"; 
+	const std::string path_vert = "data/shaders/extractBright.vert"; 
+	const std::string path_frag = "data/shaders/extractBright.frag"; 
 
 	ShaderCollector::Instance().extractbright = glCreateProgram();
-	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().extractbright);
+	
+	compileProgram(path_vert, path_frag, ShaderCollector::Instance().extractbright);
 	}
 
 	{
-	const std::string pv = "data/shaders/combine.vert"; 
-	const std::string pf = "data/shaders/combine.frag"; 
+	const std::string path_vert = "data/shaders/combine.vert"; 
+	const std::string path_frag = "data/shaders/combine.frag"; 
 
 	ShaderCollector::Instance().combine = glCreateProgram();
-	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().combine);
+	
+	compileProgram(path_vert, path_frag, ShaderCollector::Instance().combine);
 	}
 
 	{
-	const std::string pv = "data/shaders/multitex.vert"; 
-	const std::string pf = "data/shaders/multitex.frag"; 
+	const std::string path_vert = "data/shaders/multitex.vert"; 
+	const std::string path_frag = "data/shaders/multitex.frag"; 
 
 	ShaderCollector::Instance().multitexturing = glCreateProgram();
-	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().multitexturing);
+	
+	compileProgram(path_vert, path_frag, ShaderCollector::Instance().multitexturing);
 	}
 
 	{
-	const std::string pv = "data/shaders/blank.vert"; 
-	const std::string pf = "data/shaders/blank.frag"; 
+	const std::string path_vert = "data/shaders/blank.vert"; 
+	const std::string path_frag = "data/shaders/blank.frag"; 
 
 	ShaderCollector::Instance().blank = glCreateProgram();
-	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().blank);
+	
+	compileProgram(path_vert, path_frag, ShaderCollector::Instance().blank);
 	}
 
 	{
-	const std::string pv = "data/shaders/fogwarspark.vert"; 
-	const std::string pf = "data/shaders/fogwarspark.frag"; 
+	const std::string path_vert = "data/shaders/fogwarspark.vert"; 
+	const std::string path_frag = "data/shaders/fogwarspark.frag"; 
 
 	ShaderCollector::Instance().fogwarspark = glCreateProgram();
-	compile_program(getStringFromFile(pv).c_str(), getStringFromFile(pf).c_str(), ShaderCollector::Instance().fogwarspark);
+	
+	compileProgram(path_vert, path_frag, ShaderCollector::Instance().fogwarspark);
 	}
-}
-
-
-std::string getStringFromFile(const std::string& fpath)
-{
-	std::ifstream file(fpath.c_str());
-	if (!file.is_open())
-	{
-		std::cout<<"Failed to open "<<fpath<<std::endl;
-		file.close();
-		return " ";
-	}
-
-	std::string line;
-	std::string result;
-	while(getline(file, line))
-	{
-		result += line;
-	}
-
-	file.close();
-	return result;
 }

@@ -1,10 +1,10 @@
-/* shaders are taken from http://www.geeks3d.com/20091116/shader-library-2d-shockwave-post-processing-filter-glsl/ */
+/* shaders are taken from www.geeks3d.com/20091116/shader-library-2d-shockwave-post-processing-filter-glsl/ */
 
 uniform sampler2D sceneTex;     /* texture unit 0 */
 uniform vec2 center[10];        
 uniform vec3 shockParams[10];   /* 10.0, 0.8, 0.1 */ 
 uniform float time[10];         /* effect elapsed time */
-uniform int distortion_num;               /* how many shaders */
+uniform int distortion_num;     /* how many shaders */
  
 void main()
 {
