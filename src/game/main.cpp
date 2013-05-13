@@ -24,6 +24,7 @@
 #include "world/EntityManager.hpp"
 
 #include "render/Screen.hpp"
+#include "render/GlErrorHelper.hpp"
 #include "gui/UserInput.hpp"
 
 #include "common/TurnTimer.hpp"
@@ -127,12 +128,7 @@ int main()
 			}
 		}
 
-		int glErr = glGetError();
-		if (glErr != 0)
-		{
-			std::cout<<"GL_ERROR="<<glErr<<std::endl;
-			return EXIT_FAILURE;
-		}
+		checkOpenglErrors(__FILE__,__LINE__);
 	}
 
 	return EXIT_SUCCESS;
