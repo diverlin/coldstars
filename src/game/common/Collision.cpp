@@ -29,3 +29,7 @@ bool collisionDotCircle_FAST(const Vec2<float>& center1, const Vec2<float>& cent
     	return true;
 }
 
+bool collisionDotCircle_FAST(const Vec2<float>& center1, float center2_x, float center2_y, float collision_radius)
+{
+	return collisionDotCircle_FAST(center1, Vec2<float>(center2_x, center2_y), collision_radius);
+}

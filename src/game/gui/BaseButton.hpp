@@ -30,23 +30,31 @@ class BaseButton
        		BaseButton(TextureOb*, int, const std::string&);       		       
        		virtual ~BaseButton();  
 
-		void SetSubTypeId(int subtype_id) { this->subtype_id = subtype_id; }; 
-		void SetInfo(const std::string& info) { this->info = info; };
-		void SetLabel(const std::string& label) { this->label = label; };
-						
-		void SetTextureObAdditional(TextureOb* textureOb_additional) { this->textureOb_additional = textureOb_additional; };
-		void SetTextureObMask(TextureOb* textureOb_mask) { this->textureOb_mask = textureOb_mask; };
-		void SetRect(const Rect& rect) { this->rect.Set(rect); };
+		void SetSubTypeId(int subtype_id) { this->subtype_id = subtype_id; } 
+		void SetInfo(const std::string& info) { this->info = info; }
+		void SetLabel(const std::string& label) { this->label = label; }
+		
+		void SetCenter(const Vec2<float> center) { this->center = center; }	
+		void SetCenter(float center_x, float center_y) { center.Set(center_x, center_y); }
+		
+		void SetSize(const Vec2<float> size) { this->size = size; }	
+		void SetSize(float size_x, float size_y) { size.Set(size_x, size_y); }	
+									
+		void SetTextureObAdditional(TextureOb* textureOb_additional) { this->textureOb_additional = textureOb_additional; }
+		void SetTextureObMask(TextureOb* textureOb_mask) { this->textureOb_mask = textureOb_mask; }
 
-       		TextureOb* GetTextureOb() const { return textureOb; };       		
-       		Rect& GetRect() { return rect; };
-       		int GetTypeId() const { return type_id; };
-       		int GetSubTypeId() const { return subtype_id; };
+       		TextureOb* GetTextureOb() const { return textureOb; }
+
+		const Vec2<float>& GetCenter() { return center; }
+		const Vec2<float>& GetSize() { return size; }
+		
+       		int GetTypeId() const { return type_id; }
+       		int GetSubTypeId() const { return subtype_id; }
       		
-       		bool GetLock() const { return lock; };
-       		bool GetPressed() const { return pressed; };
+       		bool GetLock() const { return lock; }
+       		bool GetPressed() const { return pressed; }
 
-		virtual void PressEvent() {};
+		virtual void PressEvent() {}
 		
        		void LockOn();
        		void LockOff();
@@ -54,8 +62,8 @@ class BaseButton
 
 		void Reset();
 
-       		void SetCenter(int, int);
-
+		bool CheckInteraction(float, float) const;
+		
        		void RenderInfo(int offset_x = 0, int offset_y = 0) const;        		
        		void Render(int offset_x = 0, int offset_y = 0) const;   
        		        
@@ -70,7 +78,9 @@ class BaseButton
                	TextureOb* textureOb;
                	TextureOb* textureOb_additional;
                	TextureOb* textureOb_mask;
-       		Rect rect;
+
+       		Vec2<float> center;
+       		Vec2<float> size;
        		
        		std::string info; 
        		std::string label; 

@@ -123,6 +123,16 @@ void drawQuad_inXYPlane(TextureOb* texOb,
     	glPopMatrix();
 }
 
+void drawQuad_inXYPlane(TextureOb* texOb,
+		 const Vec2<float>& scale,
+		 const Vec2<float>& center, 
+		 float angleInDegree)
+{
+	Vec3<float> scale3(scale.x, scale.y, 1); 
+	Vec3<float> center3(center.x, center.y, -1); 
+	drawQuad_inXYPlane(texOb, scale3, center3, angleInDegree);
+}
+
 
 //void drawRect(const Rect& rect, float z_pos) // the drawrect function was inverted by Y axis
 //{

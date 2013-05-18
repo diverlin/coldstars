@@ -60,40 +60,40 @@ slider_shared(NULL)
 	
         TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
 
+	{
     	ButtonSingle* angar_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::ANGAR_ID, "angar"); 
-    	angar_screen_button->SetRect(Rect(screen_w - 1 * (GUI::ICON_SIZE + 5), 
-    					  GUI::ICON_SIZE, 
-    					  GUI::ICON_SIZE,  
-    					  GUI::ICON_SIZE));   					     
+    	angar_screen_button->SetCenter(screen_w - 1 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE);
+    	angar_screen_button->SetSize(GUI::ICON_SIZE, GUI::ICON_SIZE);   					     
     	button_map.insert(std::make_pair(GUI::BUTTON::ANGAR_ID, angar_screen_button));
+    	}
     	
+    	{
     	ButtonSingle* store_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::STORE_ID, "store");
-    	store_screen_button->SetRect(Rect(screen_w - 2 * (GUI::ICON_SIZE + 5),
-    					  GUI::ICON_SIZE, 
-    					  GUI::ICON_SIZE,  
-    					  GUI::ICON_SIZE));		     
+    	store_screen_button->SetCenter(screen_w - 2 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE); 
+    	store_screen_button->SetSize(GUI::ICON_SIZE, GUI::ICON_SIZE);		     
     	button_map.insert(std::make_pair(GUI::BUTTON::STORE_ID, store_screen_button));
-    					        	
+    	}
+    		
+    	{			        	
     	ButtonSingle* shop_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::SHOP_ID, "shop");
-    	shop_screen_button->SetRect(Rect(screen_w - 3 * (GUI::ICON_SIZE + 5), 
-    					 GUI::ICON_SIZE, 
-    					 GUI::ICON_SIZE,  
-    					 GUI::ICON_SIZE));
+    	shop_screen_button->SetCenter(screen_w - 3 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE);
+    	shop_screen_button->SetSize(GUI::ICON_SIZE, GUI::ICON_SIZE);
     	button_map.insert(std::make_pair(GUI::BUTTON::SHOP_ID, shop_screen_button));
-    					     
+    	}
+    	
+    	{				     
     	ButtonSingle* galaxymap_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::GALAXYMAP_ID, "galaxymap");
-   	galaxymap_screen_button->SetRect(Rect(screen_w - 4 * (GUI::ICON_SIZE + 5), 
-    					      GUI::ICON_SIZE, 
-    					      GUI::ICON_SIZE,  
-    					      GUI::ICON_SIZE));
+   	galaxymap_screen_button->SetCenter(screen_w - 4 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE); 
+    	galaxymap_screen_button->SetSize(GUI::ICON_SIZE, GUI::ICON_SIZE);
    	button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP_ID, galaxymap_screen_button));
-    					     
+    	}
+    	
+    	{				     
     	ButtonSingle* goverment_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::GOVERMENT_ID, "goverment");
-    	goverment_screen_button->SetRect(Rect(screen_w - 5 * (GUI::ICON_SIZE + 5), 
-    					      GUI::ICON_SIZE,
-    					      GUI::ICON_SIZE,  
-    					      GUI::ICON_SIZE));
+    	goverment_screen_button->SetCenter(screen_w - 5 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE);
+    	goverment_screen_button->SetSize(GUI::ICON_SIZE, GUI::ICON_SIZE);
    	button_map.insert(std::make_pair(GUI::BUTTON::GOVERMENT_ID, goverment_screen_button));
+	}
 }
 
 
