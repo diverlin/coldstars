@@ -71,7 +71,7 @@ class BaseSpaceEntity : public Base
 		Points& GetPoints()          { return points; }
 
 		virtual int GetGivenExpirience() const { return given_expirience; }
-		int GetCollisionRadius() const { return collision_radius; }   
+		float GetCollisionRadius() const { return collision_radius; }   
 		bool GetAlive()          const { return data_life.is_alive; }
 		bool GetGarbageReady()   const { return data_life.garbage_ready; }             
 
@@ -89,7 +89,9 @@ class BaseSpaceEntity : public Base
 		
 		void RenderInfoInSpace(const Vec2<float>&);		
 		void RenderInfo(const Vec2<float>&);
-		void virtual UpdateInfo() {};		
+		void virtual UpdateInfo() {};	
+		
+		void RenderCollisionRadius() const;
 				
 	protected:
 		LifeData data_life;

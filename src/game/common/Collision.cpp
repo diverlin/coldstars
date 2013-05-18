@@ -19,32 +19,11 @@
 #include <cmath>
 #include "Collision.hpp"
 
-
-bool collisionBetweenCenters(const Points& points1, const Points& points2, float collision_radius)
+bool collisionDotCircle_FAST(const Vec2<float>& center1, const Vec2<float>& center2, float collision_radius)
 {
-    	if (std::fabs(points1.GetCenter().x - points2.GetCenter().x) > collision_radius)
+    	if (std::fabs(center1.x - center2.x) > collision_radius/2)
        		return false;
-    	if (std::fabs(points1.GetCenter().y - points2.GetCenter().y) > collision_radius)
-       		return false;
-
-    	return true;
-}
-
-bool collisionBetweenCenters(const Points& points1, const Vec2<float>& point2, float collision_radius)
-{
-    	if(std::fabs(points1.GetCenter().x - point2.x) > collision_radius)
-       		return false;
-    	if(std::fabs(points1.GetCenter().y - point2.y) > collision_radius)
-       		return false;
-
-    	return true;
-}
-
-bool collisionBetweenCenters(const Points& points1, float center2_x, float center2_y, float collision_radius)
-{
-    	if(std::fabs(points1.GetCenter().x - center2_x) > collision_radius)
-      		return false;
-    	if(std::fabs(points1.GetCenter().y - center2_y) > collision_radius)
+    	if (std::fabs(center1.y - center2.y) > collision_radius/2)
        		return false;
 
     	return true;

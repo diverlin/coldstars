@@ -19,6 +19,7 @@
 #include "BaseSpaceEntity.hpp"
 #include "../resources/MeshCollector.hpp"
 #include "../resources/TextureManager.hpp"
+#include "../resources/GuiTextureObCollector.hpp"
 #include "../common/constants.hpp"
 #include "../common/rand.hpp"
 #include "../common/common.hpp"
@@ -115,6 +116,12 @@ void BaseSpaceEntity::CheckDeath(bool show_effect)
 	}  
 }
 
+void BaseSpaceEntity::RenderCollisionRadius() const
+{
+	TextureOb* collision_radius_texOb =  GuiTextureObCollector::Instance().radar_range;
+	drawQuad_inXYPlane(collision_radius_texOb, Vec3<float>(collision_radius, collision_radius, collision_radius), points.GetCenter3f(), 0);
+}
+		
 void BaseSpaceEntity::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 { 
 	UpdateInfo();

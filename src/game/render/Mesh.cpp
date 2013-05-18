@@ -1,7 +1,8 @@
 #include "Mesh.hpp"
+
 #include <sstream>
 #include <fstream>
-#include "../common/Logger.hpp"
+
 #include "../common/myStr.hpp"
 #include "../resources/ObjLoader.hpp"
   

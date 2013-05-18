@@ -1233,13 +1233,6 @@ void Vehicle::RenderGrabTrail() const
 void Vehicle::RenderKorpus() const
 {
     	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter3f(), points.GetAngleDegree());
-    	
-    	//drawFlatQuadPerVertexIn2D(textureOb,
-    				  //points.GetBottomLeft(), 
-                                  //points.GetBottomRight(), 
-                                  //points.GetTopRight(), 
-                                  //points.GetTopLeft(), 
-				  //points.GetPosZ());
 }
 
 void Vehicle::RenderDriveEffect(float parent_d_alpha) const
