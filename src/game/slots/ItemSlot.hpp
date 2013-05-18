@@ -53,6 +53,7 @@ class Bomb;
 class GoodsPack; 
 #include "../render/PathVisual.hpp"
 #include "../common/constants.hpp"
+class Quad;
 
 struct UnresolvedDataUniqueItemSlot
 {
@@ -118,9 +119,9 @@ class ItemSlot : public BaseSlot
                 
 		void UpdateVehiclePropetries() const;
                 
-		virtual void Render(const Rect&, const Vec2<float>&, bool draw_text = true) const;
-		void RenderMark(const Rect&, TextureOb*) const;
-                
+		virtual void Render(const Quad&, const Vec2<float>&, bool draw_text = true) const;
+		void RenderMark(const Quad&, TextureOb*) const;
+		                
                 void DropItemToSpace(Vehicle*);
                                                 
                 bool SwapItem(ItemSlot*);

@@ -272,17 +272,17 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
 
 void GuiAngar::RenderVehicleAndItemSlots() const
 {
-	glPushMatrix();
-		glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
-        	for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
-        	{
-                	rect_vehicleslot_vec[i].second->Render(rect_vehicleslot_vec[i].first);
-        	}
-        	for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
-        	{
-                	rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetGuiOffset());
-        	}
-        glPopMatrix();
+	//glPushMatrix();
+		//glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
+        	//for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
+        	//{
+                	//rect_vehicleslot_vec[i].second->Render(rect_vehicleslot_vec[i].first);
+        	//}
+        	//for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
+        	//{
+                	//rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetGuiOffset());
+        	//}
+        //glPopMatrix();
 }
 
            

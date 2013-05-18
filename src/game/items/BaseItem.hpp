@@ -23,7 +23,7 @@
 #include "../text/InfoTable.hpp"
 class ItemSlot; 
 class TextureOb; 
-class Rect;
+class Quad;
 
 struct ItemCommonData 
 {
@@ -91,7 +91,7 @@ class BaseItem : public Base
                 
 		void UpdateInfo();
 
-      		virtual void Render(const Rect&, const Vec2<float>&, bool draw_text = true);
+      		virtual void Render(const Quad&, const Vec2<float>&, bool draw_text = true);
       		void RenderInfo(const Vec2<float>&, float offset_x = 0, float offset_y = 0); 
 
 	protected:

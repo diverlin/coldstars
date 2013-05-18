@@ -277,18 +277,18 @@ void ItemSlot::UpdateVehiclePropetries() const
 }
    
 /* virtual */
-void ItemSlot::Render(const Rect& rect, const Vec2<float>& gui_offset, bool draw_text) const
-{
-       	drawTexturedRect(textureOb, rect, -1.5);    
+void ItemSlot::Render(const Quad& quad, const Vec2<float>& gui_offset, bool draw_text) const
+{ 
+       	drawQuad_inXYPlane(textureOb, quad); 
        	if (item != NULL)
        	{
-       		item->Render(rect, gui_offset, draw_text);	
+       		item->Render(quad, gui_offset, draw_text);	
         }
 }
 
-void ItemSlot::RenderMark(const Rect& rect, TextureOb* textureOb_mark) const
+void ItemSlot::RenderMark(const Quad& quad, TextureOb* textureOb_mark) const
 {
-	drawTexturedRect(textureOb_mark, rect, -1.0);
+       	drawQuad_inXYPlane(textureOb_mark, quad); 
 }      
         
 int ItemSlot::GetItemRadius() const

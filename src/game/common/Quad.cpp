@@ -18,6 +18,7 @@
 
 #include "Quad.hpp"
 #include "Collision.hpp"
+#include "rect.hpp"
 
 Quad::Quad()
 :angle(0.0)
@@ -47,6 +48,12 @@ Quad::Quad(const Quad& rhs)
 :angle(0.0)
 {
 	Set(rhs);
+}
+
+Quad::Quad(const Rect& rect)
+:angle(0.0)
+{
+	Set(rect.GetCenter(), rect.GetWidth(), rect.GetHeight());
 }
 
 Quad::~Quad()

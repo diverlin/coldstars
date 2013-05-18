@@ -131,30 +131,30 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
 
 void GuiStore::RenderSlots(int credits) const
 {      
-	glPushMatrix();
-		glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
-        	for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
-        	{
-                	rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetGuiOffset());
-                	if (rect_itemslot_vec[i].second->GetItem() != NULL)
-                	{
-                		if (rect_itemslot_vec[i].second->GetItem()->GetPrice() > credits)
-                		{
-                			rect_itemslot_vec[i].second->RenderMark(rect_itemslot_vec[i].first, GuiTextureObCollector::Instance().slot_mark_reject);
-               			}
-               		}                	
-        	}
-
-        	for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
-        	{
-                	rect_vehicleslot_vec[i].second->Render(rect_vehicleslot_vec[i].first);
-                	if (rect_vehicleslot_vec[i].second->GetVehicle() != NULL)
-                	{
-                		//if (rect_vehicleslot_vec[i].second->GetItem()->GetPrice() > credits)
+	//glPushMatrix();
+		//glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
+        	//for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
+        	//{
+                	//rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetGuiOffset());
+                	//if (rect_itemslot_vec[i].second->GetItem() != NULL)
+                	//{
+                		//if (rect_itemslot_vec[i].second->GetItem()->GetPrice() > credits)
                 		//{
-                			//rect_vehicleslot_vec[i].second->RenderMark(rect_vehicleslot_vec[i].first, GuiTextureObCollector::Instance().slot_mark_reject);
+                			//rect_itemslot_vec[i].second->RenderMark(rect_itemslot_vec[i].first, GuiTextureObCollector::Instance().slot_mark_reject);
                			//}
-               		}                	
-        	}
-	glPopMatrix();
+               		//}                	
+        	//}
+
+        	//for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
+        	//{
+                	//rect_vehicleslot_vec[i].second->Render(rect_vehicleslot_vec[i].first);
+                	//if (rect_vehicleslot_vec[i].second->GetVehicle() != NULL)
+                	//{
+                		////if (rect_vehicleslot_vec[i].second->GetItem()->GetPrice() > credits)
+                		////{
+                			////rect_vehicleslot_vec[i].second->RenderMark(rect_vehicleslot_vec[i].first, GuiTextureObCollector::Instance().slot_mark_reject);
+               			////}
+               		//}                	
+        	//}
+	//glPopMatrix();
 }

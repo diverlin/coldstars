@@ -20,6 +20,7 @@
 #define QUAD_H
 
 #include "../math/Vec2.hpp"
+class Rect; //tmp  hack
 
 class Quad
 {  
@@ -29,6 +30,7 @@ class Quad
       		Quad(const Vec2<float>&, float, float);
 	    	Quad(float, float, float, float);
       		Quad(const Quad&);
+      		Quad(const Rect&); // tmp hack
       		~Quad();
 
       		void Set(const Vec2<float>&, const Vec2<float>&);

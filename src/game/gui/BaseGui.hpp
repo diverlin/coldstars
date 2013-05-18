@@ -33,20 +33,22 @@ class BaseGui
     	public:
        		BaseGui();
        		~BaseGui();
-
-       		BaseButton* GetButton(int) const;  
        		
   		void SetGuiOffset(const Vec2<float>& gui_offset) { this->gui_offset = gui_offset; };
-  		const Vec2<float>& GetGuiOffset() const { return gui_offset; };
-  		
+  		void SetQuad(const Quad& quad) { this->quad = quad; }
   		void SetPlayer(Player* player) { this->player = player; };
-  		
+  		  		
+  		const Vec2<float>& GetGuiOffset() const { return gui_offset; };
+  		const Quad& GetQuad() const { return quad; }
+       		BaseButton* GetButton(int) const;  
+       		  		
   		bool UpdateMouseInteractionWithButtons(const MouseData&);
   		
        		void RenderButtons() const;
        		void RenderFocusedButtonInfo(const MouseData&) const;  
               	
        	protected:
+       		Quad quad;
       		Player* player;
        		int button_w, button_h;
        		

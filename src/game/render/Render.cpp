@@ -133,6 +133,16 @@ void drawQuad_inXYPlane(TextureOb* texOb,
 	drawQuad_inXYPlane(texOb, scale3, center3, angle);
 }
 
+void drawQuad_inXYPlane(TextureOb* texOb, const Quad& quad)
+{
+	Vec2<float> size  = quad.GetSize();
+	Vec2<float> center = quad.GetCenter();
+	float angle = quad.GetAngle();
+	Vec3<float> size3(size.x, size.y, 1); 
+	Vec3<float> center3(center.x, center.y, -1); 
+	drawQuad_inXYPlane(texOb, size3, center3, angle);
+}
+
 
 //void drawRect(const Rect& rect, float z_pos) // the drawrect function was inverted by Y axis
 //{

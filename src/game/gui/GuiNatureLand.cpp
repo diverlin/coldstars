@@ -123,14 +123,14 @@ void GuiNatureLand::RenderBackground(const Rect& rect) const
 
 void GuiNatureLand::RenderEquipedItemSlots() const
 {
-	glPushMatrix();
-		glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
-        	for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
-        	{
-        		if (rect_itemslot_vec[i].second->GetItem() != NULL)
-        		{
-                		rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetGuiOffset());
-        		}
-        	}
-        glPopMatrix();
+	//glPushMatrix();
+		//glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
+        	//for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
+        	//{
+        		//if (rect_itemslot_vec[i].second->GetItem() != NULL)
+        		//{
+                		//rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetGuiOffset());
+        		//}
+        	//}
+        //glPopMatrix();
 }

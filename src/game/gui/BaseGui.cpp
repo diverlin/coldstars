@@ -19,7 +19,8 @@
 #include "BaseGui.hpp"
 #include "MouseData.hpp"
 
-BaseGui::BaseGui()
+BaseGui::BaseGui():
+player(NULL)
 {}
 
 BaseGui::~BaseGui()
