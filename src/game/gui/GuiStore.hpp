@@ -24,6 +24,7 @@
 class Store;
 class ItemSlot;
 class VehicleSlot;
+#include "../common/rect.hpp"
 
 class GuiStore : public BaseGui
 {

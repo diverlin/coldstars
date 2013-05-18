@@ -104,14 +104,14 @@ void disable_POINTSPRITE() { glDisable(GL_POINT_SPRITE); }
 void drawQuad_inXYPlane(TextureOb* texOb,
 		 const Vec3<float>& scale,
 		 const Vec3<float>& center, 
-		 float angleInDegree)
+		 float angle)
 {
     	glBindTexture(GL_TEXTURE_2D, texOb->texture);
 	int frame = texOb->updateAnimationFrame();
 	
     	glPushMatrix();
     		glTranslatef(center.x, center.y, center.z);
-    		glRotatef(angleInDegree, 0.0, 0.0, 1.0);
+    		glRotatef(angle, 0.0, 0.0, 1.0);
     	    	glScalef(scale.x, scale.y, scale.z);
     	    	    		    	    	
     		glBegin(GL_QUADS);
@@ -126,11 +126,11 @@ void drawQuad_inXYPlane(TextureOb* texOb,
 void drawQuad_inXYPlane(TextureOb* texOb,
 		 const Vec2<float>& scale,
 		 const Vec2<float>& center, 
-		 float angleInDegree)
+		 float angle)
 {
 	Vec3<float> scale3(scale.x, scale.y, 1); 
 	Vec3<float> center3(center.x, center.y, -1); 
-	drawQuad_inXYPlane(texOb, scale3, center3, angleInDegree);
+	drawQuad_inXYPlane(texOb, scale3, center3, angle);
 }
 
 

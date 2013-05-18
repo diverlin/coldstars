@@ -23,6 +23,7 @@
 class NatureLand;
 class ItemSlot;
 #include "GuiPair.hpp"
+#include "../common/rect.hpp"
 
 class GuiNatureLand : public BaseGui
 {

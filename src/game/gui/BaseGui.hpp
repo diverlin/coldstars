@@ -25,7 +25,8 @@
 #include "BaseButton.hpp"
 #include "MouseData.hpp"
 class Player;
-
+#include "../common/Quad.hpp" // to be removed
+#include "../common/rect.hpp" // to be removed
 
 class BaseGui
 {
