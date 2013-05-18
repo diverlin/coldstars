@@ -21,7 +21,7 @@
 
 #include "BaseGui.hpp"
 #include "../docking/Store.hpp"
-#include "GuiPair.hpp"
+#include "GuiItemSlot.hpp"
 #include "../common/constants.hpp"
 class Vehicle;
 
@@ -53,7 +53,7 @@ class GuiVehicle : public BaseGui
                 ItemSlot* gate_slot;
                 Vehicle* vehicle;
                                 
-      		std::vector<GuiPair<Rect, ItemSlot*>> rect_slot_vec;
+      		std::vector<GuiItemSlot> gui_itemslot_vec;
       		      	
       		void RenderSlots() const;
       		void RenderMarksForEmptySlots(const MouseData&, int) const;  

@@ -58,7 +58,7 @@ void GuiVehicle::BindVehicle(Vehicle* vehicle, const Vec2<float>& gui_offset, bo
 
 void GuiVehicle::UnbindVehicle()
 {
-        rect_slot_vec.clear();
+        gui_itemslot_vec.clear();
         vehicle = NULL;
 }
 
@@ -92,12 +92,13 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
         	{        
         		case ENTITY::WEAPON_SLOT_ID:
         		{
-        		       	Rect rect(-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP + 1.1*weapon_slot_counter*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+        		       	Quad quad(-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP + 1.1*weapon_slot_counter*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
                                           -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 2*1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
        			                  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP); 
        			     
-       			     	rect.Scale(scale);
-       			     	rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, vehicle->slot_total_vec[i]));
+       			     	//quad.Scale(scale);
+       			     	GuiItemSlot gui_itemslot(vehicle->slot_total_vec[i], quad);
+       			     	gui_itemslot_vec.push_back(gui_itemslot);
         			weapon_slot_counter++;	
         			
         			break;
@@ -105,120 +106,130 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
         		
         		case ENTITY::RADAR_SLOT_ID:
         		{
-        		        Rect rect(0*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+        		        Quad quad(0*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			  -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
 		    			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 		           		
-		           	rect.Scale(scale);	     	
-        			rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, vehicle->slot_total_vec[i]));
+		           	//quad.Scale(scale);
+       			     	GuiItemSlot gui_itemslot(vehicle->slot_total_vec[i], quad);
+       			     	gui_itemslot_vec.push_back(gui_itemslot);
         			
         			break;
         		}
 
         		case ENTITY::SCANER_SLOT_ID:
         		{
-				Rect rect(0*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+				Quad quad(0*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			  -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
 		    			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 		           	
-		           	rect.Scale(scale);		     	
-        			rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, vehicle->slot_total_vec[i]));
+		           	//quad.Scale(scale);
+       			     	GuiItemSlot gui_itemslot(vehicle->slot_total_vec[i], quad);
+       			     	gui_itemslot_vec.push_back(gui_itemslot);
         			
         			break;
         		}
 
         		case ENTITY::ENERGIZER_SLOT_ID:
         		{
-				Rect rect(-2*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+				Quad quad(-2*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			  -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
 		    			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 		           	
-		           	rect.Scale(scale);		     	
-        			rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, vehicle->slot_total_vec[i]));
+		           	//quad.Scale(scale);
+       			     	GuiItemSlot gui_itemslot(vehicle->slot_total_vec[i], quad);
+       			     	gui_itemslot_vec.push_back(gui_itemslot);
         			
         			break;
         		}
 
         		case ENTITY::GRAPPLE_SLOT_ID:
         		{
-				Rect rect(-2.5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+				Quad quad(-2.5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
                                           -GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
                                           GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 		           		
-		           	rect.Scale(scale);	     	
-        			rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, vehicle->slot_total_vec[i]));
+		           	//quad.Scale(scale);
+       			     	GuiItemSlot gui_itemslot(vehicle->slot_total_vec[i], quad);
+       			     	gui_itemslot_vec.push_back(gui_itemslot);
         			
         			break;
         		}
 
         		case ENTITY::DROID_SLOT_ID:
         		{
-				Rect rect(-1.5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+				Quad quad(-1.5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			  -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
 		    			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);	
 		           		
-		           	rect.Scale(scale);	     	
-        			rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, vehicle->slot_total_vec[i]));
+		           	//quad.Scale(scale);
+       			     	GuiItemSlot gui_itemslot(vehicle->slot_total_vec[i], quad);
+       			     	gui_itemslot_vec.push_back(gui_itemslot);
         			
         			break;
         		}
 
         		case ENTITY::FREEZER_SLOT_ID:
         		{
-				Rect rect(-1.5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+				Quad quad(-1.5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			  -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
 		    			  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		
 		           		
-		           	rect.Scale(scale);	     	
-        			rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, vehicle->slot_total_vec[i]));
+		           	//quad.Scale(scale);
+       			     	GuiItemSlot gui_itemslot(vehicle->slot_total_vec[i], quad);
+       			     	gui_itemslot_vec.push_back(gui_itemslot);
         			
         			break;
         		}
         		
         		case ENTITY::PROTECTOR_SLOT_ID:
         		{
-				Rect rect(-2.5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+				Quad quad(-2.5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			  -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
 		                          GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);	 		
 		           	
-		           	rect.Scale(scale);		     	
-        			rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, vehicle->slot_total_vec[i]));
+		           	//quad.Scale(scale);
+       			     	GuiItemSlot gui_itemslot(vehicle->slot_total_vec[i], quad);
+       			     	gui_itemslot_vec.push_back(gui_itemslot);
         			
         			break;
         		}
 
         		case ENTITY::DRIVE_SLOT_ID:
         		{
-				Rect rect(-4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+				Quad quad(-4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			   -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
                     			   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP); 		
 		           		
-		           	rect.Scale(scale);	     	
-        			rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, vehicle->slot_total_vec[i]));
+		           	//quad.Scale(scale);
+       			     	GuiItemSlot gui_itemslot(vehicle->slot_total_vec[i], quad);
+       			     	gui_itemslot_vec.push_back(gui_itemslot);
         			
         			break;
         		}
 
         		case ENTITY::BAK_SLOT_ID:
         		{
-				Rect rect(-4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+				Quad quad(-4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
 		    			   -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
 		    			   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
 		    			   		
-		           	rect.Scale(scale);		     	
-        			rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, vehicle->slot_total_vec[i]));
+		           	//quad.Scale(scale);
+       			     	GuiItemSlot gui_itemslot(vehicle->slot_total_vec[i], quad);
+       			     	gui_itemslot_vec.push_back(gui_itemslot);
         			
         			break;
         		}
         		
         		case ENTITY::CARGO_SLOT_ID:
         		{
-         			Rect rect((otsec_slot_counter-6)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+         			Quad quad((otsec_slot_counter-6)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
          		  		   -3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
          		  		   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);  		
 		           	
-		           	rect.Scale(scale);		   
-        			rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, vehicle->slot_total_vec[i]));
+		           	//quad.Scale(scale);
+       			     	GuiItemSlot gui_itemslot(vehicle->slot_total_vec[i], quad);
+       			     	gui_itemslot_vec.push_back(gui_itemslot);
         			otsec_slot_counter++;
         			
         			break;
@@ -226,12 +237,13 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
 
         		case ENTITY::ARTEFACT_SLOT_ID:
         		{
-   				Rect rect(0*GUI::ITEMSLOT::WIDTH_FOR_SHIP + artef_slot_counter*GUI::ITEMSLOT::WIDTH_FOR_SHIP/2, 
+   				Quad quad(0*GUI::ITEMSLOT::WIDTH_FOR_SHIP + artef_slot_counter*GUI::ITEMSLOT::WIDTH_FOR_SHIP/2, 
     	        	    		  -1.7*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
     		   	    		  GUI::ITEMSLOT::WIDTH_FOR_SHIP/2, GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2);	
 		           		
-		           	rect.Scale(scale);	   
-        			rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, vehicle->slot_total_vec[i]));
+		           	//quad.Scale(scale);
+       			     	GuiItemSlot gui_itemslot(vehicle->slot_total_vec[i], quad);
+       			     	gui_itemslot_vec.push_back(gui_itemslot);
         			artef_slot_counter++;
         			
         			break;
@@ -240,30 +252,33 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
         }
         
         // GATE SLOT
-   	Rect rect(-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+        {
+   	Quad quad(-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
     		   3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
     		   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		
 		
-	rect.Scale(scale);           			   
-	rect_slot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, gate_slot));    		
+	//quad.Scale(scale);       
+       	GuiItemSlot gui_gate(gate_slot, quad);	   			   
+	gui_itemslot_vec.push_back(gui_gate);    		
+	}
 } 
 
 bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 {
-	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
+	for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
 	{ 
-		if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
+		if (gui_itemslot_vec[i].GetQuad().CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
 		{  
-			if ( (rect_slot_vec[i].second->GetItem() != NULL) and (player->GetCursor().GetItemSlot()->GetItem() == NULL) )
+			if ( (gui_itemslot_vec[i].GetItemSlot()->GetItem() != NULL) and (player->GetCursor().GetItemSlot()->GetItem() == NULL) )
 			{
-				player->GetCursor().SetFocusedObject(rect_slot_vec[i].second->GetItem());
+				player->GetCursor().SetFocusedObject(gui_itemslot_vec[i].GetItemSlot()->GetItem());
 			}
 						
 			if ( (data_mouse.left_click == true) and (allow_full_control == true) )
 			{
-				if (rect_slot_vec[i].second->GetSubTypeId() != ENTITY::GATE_SLOT_ID)
+				if (gui_itemslot_vec[i].GetItemSlot()->GetSubTypeId() != ENTITY::GATE_SLOT_ID)
 				{
-					player->GetCursor().GetItemSlot()->SwapItem(rect_slot_vec[i].second); 
+					player->GetCursor().GetItemSlot()->SwapItem(gui_itemslot_vec[i].GetItemSlot()); 
 				}
 				else
 				{
@@ -287,18 +302,18 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 				{
 					case 1:
 					{
-						if (rect_slot_vec[i].second->GetItem() != NULL)
+						if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != NULL)
 						{
 							if (data_mouse.right_click == true)
 							{
 								std::cout<<"DEBUG ACTION in GuiVehicle::UpdateMouseInteractionInSpace, ItemLOck testing"<<std::endl;
-								if (rect_slot_vec[i].second->GetItem()->GetFunctioning() == true)
+								if (gui_itemslot_vec[i].GetItemSlot()->GetItem()->GetFunctioning() == true)
 								{
-									rect_slot_vec[i].second->GetItem()->LockEvent(2);
+									gui_itemslot_vec[i].GetItemSlot()->GetItem()->LockEvent(2);
 								}
 								else
 								{
-									rect_slot_vec[i].second->GetItem()->LockEvent(0);
+									gui_itemslot_vec[i].GetItemSlot()->GetItem()->LockEvent(0);
 								}
 							}
 						}
@@ -308,18 +323,18 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 					
 					case 2:
 					{						
-						if (rect_slot_vec[i].second->GetItem() != NULL)
+						if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != NULL)
 						{
 							if (data_mouse.right_click == true)
 							{
 								std::cout<<"DEBUG ACTION in GuiVehicle::UpdateMouseInteractionInSpace, Item Damage testing"<<std::endl;
-								if (rect_slot_vec[i].second->GetItem()->GetFunctioning() == true)
+								if (gui_itemslot_vec[i].GetItemSlot()->GetItem()->GetFunctioning() == true)
 								{
-									rect_slot_vec[i].second->GetItem()->SetCondition(0);
+									gui_itemslot_vec[i].GetItemSlot()->GetItem()->SetCondition(0);
 								}
 								else
 								{
-									rect_slot_vec[i].second->GetItem()->SetCondition(1000);
+									gui_itemslot_vec[i].GetItemSlot()->GetItem()->SetCondition(1000);
 								}
 							}
 						}
@@ -339,17 +354,17 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 
 bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Store* store)
 {
-	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
+	for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
 	{ 
-		if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
+		if (gui_itemslot_vec[i].GetQuad().CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
 		{  
-			if (rect_slot_vec[i].second->GetItem() != NULL)
+			if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != NULL)
 			{
-				player->GetCursor().SetFocusedObject(rect_slot_vec[i].second->GetItem());
+				player->GetCursor().SetFocusedObject(gui_itemslot_vec[i].GetItemSlot()->GetItem());
 							
 				if (data_mouse.left_click == true)
 				{
-					vehicle->SellItem(rect_slot_vec[i].second->GetItem());
+					vehicle->SellItem(gui_itemslot_vec[i].GetItemSlot()->GetItem());
             			}
 			} 
 			
@@ -375,29 +390,29 @@ void GuiVehicle::RenderVehicle(const MouseData& data_mouse, int mark_slot_subtyp
 
 void GuiVehicle::RenderSlots() const
 {	
-	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
+	for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
 	{
-		rect_slot_vec[i].second->Render(rect_slot_vec[i].first, GetGuiOffset());
+		gui_itemslot_vec[i].GetItemSlot()->Render(gui_itemslot_vec[i].GetQuad(), GetGuiOffset());
 	}
 }
 
 void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, int mark_slot_subtype_id) const
 {
-	for(unsigned int i=0; i<rect_slot_vec.size(); i++)
+	for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
 	{
-		if (rect_slot_vec[i].second->GetItem() == NULL) 
+		if (gui_itemslot_vec[i].GetItemSlot()->GetItem() == NULL) 
 		{
-			if ( (rect_slot_vec[i].second->GetSubTypeId() != ENTITY::CARGO_SLOT_ID) and (rect_slot_vec[i].second->GetSubTypeId() != ENTITY::GATE_SLOT_ID) )
+			if ( (gui_itemslot_vec[i].GetItemSlot()->GetSubTypeId() != ENTITY::CARGO_SLOT_ID) and (gui_itemslot_vec[i].GetItemSlot()->GetSubTypeId() != ENTITY::GATE_SLOT_ID) )
                		{
-               			if (mark_slot_subtype_id == rect_slot_vec[i].second->GetSubTypeId())  
+               			if (mark_slot_subtype_id == gui_itemslot_vec[i].GetItemSlot()->GetSubTypeId())  
                			{
-               				rect_slot_vec[i].second->RenderMark(rect_slot_vec[i].first, GuiTextureObCollector::Instance().slot_mark_accept);
+               				gui_itemslot_vec[i].GetItemSlot()->RenderMark(gui_itemslot_vec[i].GetQuad(), GuiTextureObCollector::Instance().slot_mark_accept);
                			}
                			else
                			{
-               				if (rect_slot_vec[i].first.CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
+               				if (gui_itemslot_vec[i].GetQuad().CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
 	               			{
-	               				rect_slot_vec[i].second->RenderMark(rect_slot_vec[i].first, GuiTextureObCollector::Instance().slot_mark_reject);
+	               				gui_itemslot_vec[i].GetItemSlot()->RenderMark(gui_itemslot_vec[i].GetQuad(), GuiTextureObCollector::Instance().slot_mark_reject);
 	               			}
                			}
                		}

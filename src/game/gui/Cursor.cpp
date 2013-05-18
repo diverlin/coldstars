@@ -40,7 +40,8 @@
 
 #include "../render/Render.hpp"
 
-Cursor::Cursor():focused_ob(NULL)
+Cursor::Cursor():
+focused_ob(NULL)
 {
      	item_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::CARGO_SLOT_ID);
      	rect.Set(0, 0, GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);

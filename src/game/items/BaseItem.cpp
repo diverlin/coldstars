@@ -132,9 +132,9 @@ void BaseItem::RenderInfo(const Vec2<float>& pos, float offset_x, float offset_y
 }
 
 /* virtual */
-void BaseItem::Render(const Rect& rect, const Vec2<float>& gui_offset, bool draw_text)
+void BaseItem::Render(const Quad& quad, const Vec2<float>& gui_offset, bool draw_text)
 {
-    	drawTexturedRect(textureOb, rect, -1.0);
+       	drawQuad_inXYPlane(textureOb, quad); 
 }
 
 void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, const std::string& root) const

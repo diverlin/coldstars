@@ -23,6 +23,7 @@
 #include <GL/glew.h>
 #include "../resources/textureOb.hpp"
 #include "../common/rect.hpp"
+#include "../common/Quad.hpp"
 class Mesh;
 
 void initGl(int, int);
@@ -63,7 +64,9 @@ void drawQuad_inXYPlane(TextureOb* texOb,
 		 const Vec2<float>& scale,
 		 const Vec2<float>& center, 
 		 float angle);
-		 		 
+
+void drawQuad_inXYPlane(TextureOb*, const Quad&);
+		 		 		 
 //void drawRect(const Rect& rect, float z_pos); // the drawrect function was inverted by Y axis
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
 

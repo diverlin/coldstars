@@ -32,14 +32,9 @@ class BaseButton
 
 		void SetSubTypeId(int subtype_id) { this->subtype_id = subtype_id; } 
 		void SetInfo(const std::string& info) { this->info = info; }
-		void SetLabel(const std::string& label) { this->label = label; }
-		
+		void SetLabel(const std::string& label) { this->label = label; }		
 
 		void SetQuad(const Quad& quad) { this->quad = quad; }	
-		//void SetCenter(float center_x, float center_y) { quad.SetCenter(center_x, center_y); }
-		
-		//void SetSize(const Vec2<float>& size) { quad.SetSize(size); }
-		//void SetSize(float size_x, float size_y) { quad.SetSize(size_x, size_y); }
 													
 		void SetTextureObAdditional(TextureOb* textureOb_additional) { this->textureOb_additional = textureOb_additional; }
 		void SetTextureObMask(TextureOb* textureOb_mask) { this->textureOb_mask = textureOb_mask; }
