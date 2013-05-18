@@ -33,29 +33,47 @@ GuiShop::GuiShop():shop(NULL)
                 
        	TextureOb* _texOb = GuiTextureObCollector::Instance().text_background; 
 
+	{
         ButtonSingle* minerals_button = new ButtonSingle(_texOb, GUI::BUTTON::MINERALS_ID, "minerals");  
-     	minerals_button->SetRect(Rect(center.x, center.y - 1*(GUI::ICON_SIZE + 5), 10*GUI::ICON_SIZE, GUI::ICON_SIZE));
+     	minerals_button->SetCenter(center.x, center.y - 1*(GUI::ICON_SIZE + 5));
+     	minerals_button->SetSize(10*GUI::ICON_SIZE, GUI::ICON_SIZE);
      	button_map.insert(std::make_pair(GUI::BUTTON::MINERALS_ID, minerals_button));
+     	}
      	
+     	{
      	ButtonSingle* food_button = new ButtonSingle(_texOb, GUI::BUTTON::FOOD_ID, "food");  
-     	food_button->SetRect(Rect(center.x, center.y - 2*(GUI::ICON_SIZE + 5), 10*GUI::ICON_SIZE, GUI::ICON_SIZE));
+     	food_button->SetCenter(center.x, center.y - 2*(GUI::ICON_SIZE + 5));
+     	food_button->SetSize(10*GUI::ICON_SIZE, GUI::ICON_SIZE);
      	button_map.insert(std::make_pair(GUI::BUTTON::FOOD_ID, food_button));
-
+	}
+	
+	{
      	ButtonSingle* medicine_button = new ButtonSingle(_texOb, GUI::BUTTON::MEDICINE_ID, "medicine");  
-     	medicine_button->SetRect(Rect(center.x, center.y - 3*(GUI::ICON_SIZE + 5), 10*GUI::ICON_SIZE, GUI::ICON_SIZE));
+     	medicine_button->SetCenter(center.x, center.y - 3*(GUI::ICON_SIZE + 5));
+     	medicine_button->SetSize(10*GUI::ICON_SIZE, GUI::ICON_SIZE);
      	button_map.insert(std::make_pair(GUI::BUTTON::MEDICINE_ID, medicine_button));
-
+	}
+	
+	{
      	ButtonSingle* military_button = new ButtonSingle(_texOb, GUI::BUTTON::MILITARY_ID, "military");  
-     	military_button->SetRect(Rect(center.x, center.y - 4*(GUI::ICON_SIZE + 5), 10*GUI::ICON_SIZE, GUI::ICON_SIZE));
+     	military_button->SetCenter(center.x, center.y - 4*(GUI::ICON_SIZE + 5));
+     	military_button->SetSize(10*GUI::ICON_SIZE, GUI::ICON_SIZE);
      	button_map.insert(std::make_pair(GUI::BUTTON::MILITARY_ID, military_button));
+     	}
      	     	
+     	{
      	ButtonSingle* drug_button = new ButtonSingle(_texOb, GUI::BUTTON::DRUG_ID, "drug");  
-     	drug_button->SetRect(Rect(center.x, center.y - 5*(GUI::ICON_SIZE + 5), 10*GUI::ICON_SIZE, GUI::ICON_SIZE));
+     	drug_button->SetCenter(center.x, center.y - 5*(GUI::ICON_SIZE + 5));
+     	drug_button->SetSize(10*GUI::ICON_SIZE, GUI::ICON_SIZE);
      	button_map.insert(std::make_pair(GUI::BUTTON::DRUG_ID, drug_button));  
-
+	}
+	
+	{
      	ButtonSingle* exclusive_button = new ButtonSingle(_texOb, GUI::BUTTON::EXCLUSIVE_ID, "exclusive");  
-     	exclusive_button->SetRect(Rect(center.x, center.y - 6*(GUI::ICON_SIZE + 5), 10*GUI::ICON_SIZE, GUI::ICON_SIZE));
+     	exclusive_button->SetCenter(center.x, center.y - 6*(GUI::ICON_SIZE + 5));
+     	exclusive_button->SetSize(10*GUI::ICON_SIZE, GUI::ICON_SIZE);
      	button_map.insert(std::make_pair(GUI::BUTTON::EXCLUSIVE_ID, exclusive_button));  
+	}
 }
 
 GuiShop::~GuiShop()

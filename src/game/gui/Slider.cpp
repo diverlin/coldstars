@@ -66,9 +66,9 @@ void Slider::Configure(int ammount_total, int price_for_one)
 	rect.Set(0, 0, GUI::SLIDER_WIDTH, 3*GUI::ICON_SIZE);
 	rect_slide.Set(0, rect.GetCenter().y - GUI::ICON_SIZE/2, GUI::SLIDER_WIDTH, GUI::ICON_SIZE);
 	
-	GetButton(GUI::BUTTON::SLIDE_ID)->GetRect().Set(0, rect_slide.GetBottomLeft().y, GUI::ICON_SIZE, GUI::ICON_SIZE);
-	GetButton(GUI::BUTTON::ACCEPT_ID)->GetRect().Set(0, 0, 20, 20);
-	GetButton(GUI::BUTTON::DECLINE_ID)->GetRect().Set(rect.GetWidth() - GUI::ICON_SIZE, 0, GUI::ICON_SIZE, GUI::ICON_SIZE);
+	//GetButton(GUI::BUTTON::SLIDE_ID)->GetRect().Set(0, rect_slide.GetBottomLeft().y, GUI::ICON_SIZE, GUI::ICON_SIZE);
+	//GetButton(GUI::BUTTON::ACCEPT_ID)->GetRect().Set(0, 0, 20, 20);
+	//GetButton(GUI::BUTTON::DECLINE_ID)->GetRect().Set(rect.GetWidth() - GUI::ICON_SIZE, 0, GUI::ICON_SIZE, GUI::ICON_SIZE);
 }
 
 void Slider::UpdateSlidePosition(const MouseData& data_mouse)
@@ -78,11 +78,11 @@ void Slider::UpdateSlidePosition(const MouseData& data_mouse)
 	{
 		if (data_mouse.left_press == true)
 		{
-			slide_button->GetRect().SetBottomLeftX(data_mouse.mx - slide_button->GetRect().GetWidth()/2 - GetGuiOffset().x);
+			//slide_button->GetRect().SetBottomLeftX(data_mouse.mx - slide_button->GetRect().GetWidth()/2 - GetGuiOffset().x);
 		}
 	}
 	
-	ammount_selected = ammount_total * slide_button->GetRect().GetCenter().x / (float)rect.GetWidth();
+	//ammount_selected = ammount_total * slide_button->GetRect().GetCenter().x / (float)rect.GetWidth();
 	price_selected = price_for_one * ammount_selected;
 }
 		

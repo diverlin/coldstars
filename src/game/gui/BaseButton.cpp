@@ -19,6 +19,7 @@
 
 #include "BaseButton.hpp"
 #include "../common/constants.hpp"
+#include "../common/Collision.hpp"
 #include "../render/Render.hpp"
 #include "../render/Screen.hpp"
 #include "../render/AnimationEffect2D.hpp"
@@ -79,44 +80,44 @@ void BaseButton::FullShadeOn()
 void BaseButton::ShadeOff() 
 {
 	alpha = 1.0f; 
-}       		
-         
-         
-void BaseButton::SetCenter(int x, int y)
-{        
-     	rect.SetCenter((float)x, (float)y);
+}      
+       
+bool BaseButton::CheckInteraction(float x, float y) const
+{
+	return collisionDotCircle_FAST(center, x, y, size.x);
 }
-
+       		    
 void BaseButton::RenderInfo(int gui_offset_x, int gui_offset_y) const
 {
-	Vec2<float> pos(rect.GetBottomLeft().x+gui_offset_x, rect.GetBottomLeft().y+gui_offset_y);
+	Vec2<float> pos(center.x+gui_offset_x, center.y+gui_offset_y);
 	drawSimpleColoredTextWithBackground(info, 12, pos, Color4<int>());
 }
 
 void BaseButton::Render(int offset_x, int offset_y) const
 {
-	Rect rect1(rect);
-	if (textureOb_mask != NULL)
-   	{
-   		animation_scale->Update(rect1);
-   	}
+	//if (textureOb_mask != NULL)
+   	//{
+   		//animation_scale->Update(rect1);
+   	//}
    	
 	setColor4f(1.0f, 1.0f, 1.0f, alpha);
-   	drawTexturedRect(textureOb, rect, -1);
+
+   	drawQuad_inXYPlane(textureOb, size, center);
+   	
    	if (textureOb_additional != NULL)
    	{
-   		drawTexturedRect(textureOb_additional, rect1, -1);   	
+   	   	drawQuad_inXYPlane(textureOb_additional, size, center);
    	}
 	setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
    	if (textureOb_mask != NULL)
    	{
-   		drawTexturedRect(textureOb_mask, rect1, -1);   	
+   	   	drawQuad_inXYPlane(textureOb_mask, size, center);
    	}
    		
 	if (label != "")
 	{
-		Vec2<float> pos(rect.GetBottomLeft().x + offset_x, rect.GetBottomLeft().y + rect.GetHeight() + offset_y);
+		Vec2<float> pos(center.x + offset_x, center.y + size.y + offset_y);
 		Screen::Instance().DrawText(label, 12, pos);
 	}
 }

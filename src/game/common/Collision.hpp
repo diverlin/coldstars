@@ -38,6 +38,7 @@ bool checkCollision2D(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 }
 
 bool collisionDotCircle_FAST(const Vec2<float>& center1, const Vec2<float>& center2, float collision_radius);
+bool collisionDotCircle_FAST(const Vec2<float>& center1, float center2_x, float center2_y, float collision_radius);
 
 #endif 
 

@@ -38,27 +38,27 @@ GuiAngar::GuiAngar():angar(NULL)
 	
         TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
 
+	{
     	ButtonSingle* repair_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYARMOR_ID, "buy_repair");
-        repair_button->SetRect(Rect(screen_w - 1 * (GUI::ICON_SIZE + 5),
-    				    screen_h - 2 * GUI::ICON_SIZE, 
-    				    GUI::ICON_SIZE,  
-    				    GUI::ICON_SIZE));
+        repair_button->SetCenter(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 2 * GUI::ICON_SIZE); 
+    	repair_button->SetSize(GUI::ICON_SIZE, GUI::ICON_SIZE);
     	button_map.insert(std::make_pair(GUI::BUTTON::BUYARMOR_ID, repair_button));
-    				   
+    	}
+    	
+    	{			   
     	ButtonSingle* fuel_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYFUEL_ID, "buy fuel");  
-        fuel_button->SetRect(Rect(screen_w - 1 * (GUI::ICON_SIZE + 5),
-    	 			  screen_h - 3*GUI::ICON_SIZE, 
-    	 			  GUI::ICON_SIZE,  
-    	 			  GUI::ICON_SIZE));
+        fuel_button->SetCenter(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 3*GUI::ICON_SIZE); 
+    	fuel_button->SetSize(GUI::ICON_SIZE, GUI::ICON_SIZE);
     	button_map.insert(std::make_pair(GUI::BUTTON::BUYFUEL_ID, fuel_button));
-    	 			   
+    	}
+    		
+    	{		   
     	ButtonSingle* launch_button = new ButtonSingle(texOb_button, GUI::BUTTON::GETLAUNCH_ID, "launch");
-        launch_button->SetRect(Rect(screen_w - 1 * (GUI::ICON_SIZE + 5), 
-    				    screen_h - 4*GUI::ICON_SIZE, 
-    				    GUI::ICON_SIZE,  
-    				    GUI::ICON_SIZE));
+        launch_button->SetCenter(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 4*GUI::ICON_SIZE); 
+    	launch_button->SetSize(GUI::ICON_SIZE, GUI::ICON_SIZE);
     	button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH_ID, launch_button));
-
+	}
+	
 	repair_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::REPAIR_SLOT_ID);
         charge_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::CHARGE_SLOT_ID);
 }

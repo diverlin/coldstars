@@ -53,27 +53,27 @@ init_done(false)
     	int screen_w = Screen::Instance().GetWidth();
     	int screen_h = Screen::Instance().GetHeight();
     	
+    	{
     	ButtonTrigger* galaxymap_button = new ButtonTrigger(GuiTextureObCollector::Instance().icon_map, GUI::BUTTON::GALAXYMAP_ID, "galaxy map");    
-    	galaxymap_button->SetRect(Rect(screen_w - (GUI::ICON_SIZE + 5),
-    				       screen_h - (GUI::ICON_SIZE + 5), 
-    				       GUI::ICON_SIZE,  
-    				       GUI::ICON_SIZE));		     								     
+    	galaxymap_button->SetCenter(screen_w - (GUI::ICON_SIZE + 5), screen_h - (GUI::ICON_SIZE + 5));
+    	galaxymap_button->SetSize(GUI::ICON_SIZE, GUI::ICON_SIZE);		     								     
     	button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP_ID, galaxymap_button));
-
+	}
+	
+	{
     	ButtonSingle* load_button = new ButtonSingle(GuiTextureObCollector::Instance().icon_plus, GUI::BUTTON::LOAD_ID, "load");    
-    	load_button->SetRect(Rect(screen_w - 2*(GUI::ICON_SIZE + 5),
-    			          screen_h - (GUI::ICON_SIZE + 5), 
-    			          GUI::ICON_SIZE,  
-    			          GUI::ICON_SIZE));					     
+    	load_button->SetCenter(screen_w - 2*(GUI::ICON_SIZE + 5), screen_h - (GUI::ICON_SIZE + 5)); 
+   	load_button->SetSize(GUI::ICON_SIZE, GUI::ICON_SIZE);					     
     	button_map.insert(std::make_pair(GUI::BUTTON::LOAD_ID, load_button));
+    	}
     	
+    	{
     	ButtonSingle* save_button = new ButtonSingle(GuiTextureObCollector::Instance().icon_minus, GUI::BUTTON::SAVE_ID, "save");    
-        save_button->SetRect(Rect(screen_w - 3*(GUI::ICON_SIZE + 5),
-    				  screen_h - (GUI::ICON_SIZE + 5), 
-    				  GUI::ICON_SIZE,  
-    				  GUI::ICON_SIZE));					     
+        save_button->SetCenter(screen_w - 3*(GUI::ICON_SIZE + 5), screen_h - (GUI::ICON_SIZE + 5)); 
+    	save_button->SetSize(GUI::ICON_SIZE, GUI::ICON_SIZE);					     
     	button_map.insert(std::make_pair(GUI::BUTTON::SAVE_ID, save_button));
-    	    		
+    	}
+    	   		
        	textureOb_bar_top 	= GuiTextureObCollector::Instance().bar_bottom;
        	textureOb_bar_bottom 	= GuiTextureObCollector::Instance().bar_bottom;
 
