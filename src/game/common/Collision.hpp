@@ -22,9 +22,9 @@
 #include "points.hpp"
 
 template <typename AGRESSOR, typename VICTIM>
-bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
+bool checkCollision2D(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 {
-	if (collisionBetweenCenters(agressor->GetPoints(), victim->GetPoints(), victim->GetCollisionRadius()) == true)
+	if (collisionDotCircle_FAST(agressor->GetPoints().GetCenter(), victim->GetPoints().GetCenter(), victim->GetCollisionRadius()) == true)
         {
         	victim->Hit(agressor->GetDamage(), show_effect);
                 agressor->CollisionEvent(show_effect);
@@ -37,9 +37,7 @@ bool checkCollision(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
         }
 }
 
-bool collisionBetweenCenters(const Points& points1, const Points& points2, float collision_radius);
-bool collisionBetweenCenters(const Points& points1, const Vec2<float>& point2, float collision_radius);
-bool collisionBetweenCenters(const Points& points1, float center2_x, float center2_y, float collision_radius);
+bool collisionDotCircle_FAST(const Vec2<float>& center1, const Vec2<float>& center2, float collision_radius);
 
 #endif 
 

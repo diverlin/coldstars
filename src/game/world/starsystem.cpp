@@ -579,7 +579,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
                 		{
                         		if (ROCKET_vec[ri]->GetOwnerId() != VEHICLE_vec[vi]->GetId())
                         		{                        
-                        			collide = checkCollision(ROCKET_vec[ri], VEHICLE_vec[vi], show_effect);
+                        			collide = checkCollision2D(ROCKET_vec[ri], VEHICLE_vec[vi], show_effect);
                         			if (collide == true) { break; }                        
                         		}
                 		}
@@ -592,7 +592,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
                 	{
                         	for (unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
                         	{
-                        		collide = checkCollision(ROCKET_vec[ri], ASTEROID_vec[ai], show_effect);
+                        		collide = checkCollision2D(ROCKET_vec[ri], ASTEROID_vec[ai], show_effect);
                         		if (collide == true) { break; }
                         	}
                 	}
@@ -603,7 +603,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
                 	{
                         	for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
                         	{
-                        		collide = checkCollision(ROCKET_vec[ri], CONTAINER_vec[ci], show_effect);
+                        		collide = checkCollision2D(ROCKET_vec[ri], CONTAINER_vec[ci], show_effect);
                         		if (collide == true) { 	break; }
                         	}
                 	}
@@ -629,7 +629,7 @@ void StarSystem::asteroidCollision_s(bool show_effect)
                 	{
                         	for (unsigned int vi = 0; vi < VEHICLE_vec.size(); vi++)
                         	{
-                                	collide = checkCollision(ASTEROID_vec[ai], VEHICLE_vec[vi], show_effect);
+                                	collide = checkCollision2D(ASTEROID_vec[ai], VEHICLE_vec[vi], show_effect);
                         		if (collide == true) { break; }
                         	}                        	
                 	}
@@ -639,7 +639,7 @@ void StarSystem::asteroidCollision_s(bool show_effect)
                 	{
                         	for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
                         	{
-                                	collide = checkCollision(ASTEROID_vec[ai], PLANET_vec[pi], show_effect);
+                                	collide = checkCollision2D(ASTEROID_vec[ai], PLANET_vec[pi], show_effect);
                         		if (collide == true) { break; }
                         	}                        	
                 	}
@@ -651,7 +651,7 @@ void StarSystem::asteroidCollision_s(bool show_effect)
                 	{
                         	for (unsigned int si = 0; si < STAR_vec.size(); si++)
                         	{
-                                	collide = checkCollision(ASTEROID_vec[ai], STAR_vec[si], show_effect);
+                                	collide = checkCollision2D(ASTEROID_vec[ai], STAR_vec[si], show_effect);
                         		if (collide == true) { break; }
                         	}                        	
                 	}

@@ -465,8 +465,11 @@ enable_CULLFACE();
        				visible_ROCKET_vec[i]->RenderInSpace(); 
        				starsystem->RestoreSceneColor();
     			}    	
-		disable_BLEND();
+
+		RenderCollisionRadiusOfVisibleObjects();
 		
+		disable_BLEND();
+			
     	Screen::Instance().GetFbo2().Deactivate();
 
 
@@ -559,7 +562,7 @@ enable_CULLFACE();
 
 		drawFullScreenQuad(w, h, -999.0);
 	glUseProgram(0); 	    	
-	    	
+		    	
 	// render text
 	camera(world_coord.x, world_coord.y);
     	for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
@@ -1132,7 +1135,25 @@ void Player::RunSession(const TurnTimer& turn_timer)
 void Player::ForceStateMachineReset() const
 {
 	npc->GetStateMachine().ForceReset();
-}     		
+}    
+
+void Player::RenderCollisionRadiusOfVisibleObjects() const
+{
+        enable_BLEND();        
+		for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 		{ visible_STAR_vec[i]->RenderCollisionRadius(); }
+    		for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 	{ visible_PLANET_vec[i]->RenderCollisionRadius(); }
+    		for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)	{ visible_SPACESTATION_vec[i]->RenderCollisionRadius(); }    		
+    		for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)		{ visible_SHIP_vec[i]->RenderCollisionRadius(); } 
+    		for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)	{ visible_ASTEROID_vec[i]->RenderCollisionRadius(); } 
+           	for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)	{ visible_BLACKHOLE_vec[i]->RenderCollisionRadius(); } 
+                for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++) 	{ visible_SPACESTATION_vec[i]->RenderCollisionRadius(); } 
+    		for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)	{ visible_CONTAINER_vec[i]->RenderCollisionRadius(); } 
+    		for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)		{ visible_SHIP_vec[i]->RenderCollisionRadius(); } 
+		for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)	{ visible_SATELLITE_vec[i]->RenderCollisionRadius(); } 
+    		for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)		{ visible_ROCKET_vec[i]->RenderCollisionRadius(); }
+    	disable_BLEND();
+}
+ 		
 
 void Player::SaveData(boost::property_tree::ptree& save_ptree) const
 {

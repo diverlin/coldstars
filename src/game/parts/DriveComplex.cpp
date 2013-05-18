@@ -258,7 +258,7 @@ bool DriveComplex::CheckTargetEchievement()
 {
 	if (target != NULL)
 	{	
-     		if (collisionBetweenCenters(owner_vehicle->GetPoints(), target_pos, target_distance) == true)
+     		if (collisionDotCircle_FAST(owner_vehicle->GetPoints().GetCenter(), target_pos, target_distance) == true)
      		{
         		return true;
         	}

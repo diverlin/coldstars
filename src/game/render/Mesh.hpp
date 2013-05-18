@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "../math/myVector.hpp"
-#include <GL/glew.h>
+#include "MyGl.hpp"
 
 class ObjLoader;
 class TextureOb;

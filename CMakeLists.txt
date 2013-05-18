@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 2.8)
 
-set(PROJECT coldstars)
+set(PROJECT run)
 
 project (${PROJECT})
 set(BIN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bin/ )

@@ -1,10 +1,16 @@
 #include "ObjLoader.hpp"
+
+#include <iostream>
 #include <sstream>
 #include <fstream>
+
 #include <cmath>
 
-#include "../common/Logger.hpp"
 #include "../common/myStr.hpp"
+
+#if OBJLOADER_LOG_ENABLED == 1
+#include "../common/Logger.hpp"
+#endif
   
 ObjLoader::ObjLoader(const std::string& path)
 {
