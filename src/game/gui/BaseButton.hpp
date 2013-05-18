@@ -21,7 +21,7 @@
 #define BASEBUTTON_H
 
 #include "../resources/textureOb.hpp"
-#include "../common/rect.hpp"
+#include "../common/Quad.hpp"
 class AnimationEffect2D;
 
 class BaseButton
@@ -34,19 +34,19 @@ class BaseButton
 		void SetInfo(const std::string& info) { this->info = info; }
 		void SetLabel(const std::string& label) { this->label = label; }
 		
-		void SetCenter(const Vec2<float> center) { this->center = center; }	
-		void SetCenter(float center_x, float center_y) { center.Set(center_x, center_y); }
+
+		void SetQuad(const Quad& quad) { this->quad = quad; }	
+		//void SetCenter(float center_x, float center_y) { quad.SetCenter(center_x, center_y); }
 		
-		void SetSize(const Vec2<float> size) { this->size = size; }	
-		void SetSize(float size_x, float size_y) { size.Set(size_x, size_y); }	
-									
+		//void SetSize(const Vec2<float>& size) { quad.SetSize(size); }
+		//void SetSize(float size_x, float size_y) { quad.SetSize(size_x, size_y); }
+													
 		void SetTextureObAdditional(TextureOb* textureOb_additional) { this->textureOb_additional = textureOb_additional; }
 		void SetTextureObMask(TextureOb* textureOb_mask) { this->textureOb_mask = textureOb_mask; }
 
        		TextureOb* GetTextureOb() const { return textureOb; }
 
-		const Vec2<float>& GetCenter() { return center; }
-		const Vec2<float>& GetSize() { return size; }
+		const Quad& GetQuad() { return quad; }
 		
        		int GetTypeId() const { return type_id; }
        		int GetSubTypeId() const { return subtype_id; }
@@ -61,8 +61,6 @@ class BaseButton
        		virtual void Update() {};
 
 		void Reset();
-
-		bool CheckInteraction(float, float) const;
 		
        		void RenderInfo(int offset_x = 0, int offset_y = 0) const;        		
        		void Render(int offset_x = 0, int offset_y = 0) const;   
@@ -74,13 +72,11 @@ class BaseButton
         	bool pressed;
         	
         	float alpha;
+        	Quad quad;
         	        	
                	TextureOb* textureOb;
                	TextureOb* textureOb_additional;
                	TextureOb* textureOb_mask;
-
-       		Vec2<float> center;
-       		Vec2<float> size;
        		
        		std::string info; 
        		std::string label; 

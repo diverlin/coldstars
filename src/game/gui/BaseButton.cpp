@@ -81,15 +81,10 @@ void BaseButton::ShadeOff()
 {
 	alpha = 1.0f; 
 }      
-       
-bool BaseButton::CheckInteraction(float x, float y) const
-{
-	return collisionDotCircle_FAST(center, x, y, size.x);
-}
        		    
 void BaseButton::RenderInfo(int gui_offset_x, int gui_offset_y) const
 {
-	Vec2<float> pos(center.x+gui_offset_x, center.y+gui_offset_y);
+	Vec2<float> pos(quad.GetCenter().x+gui_offset_x, quad.GetCenter().y+gui_offset_y);
 	drawSimpleColoredTextWithBackground(info, 12, pos, Color4<int>());
 }
 
@@ -102,22 +97,22 @@ void BaseButton::Render(int offset_x, int offset_y) const
    	
 	setColor4f(1.0f, 1.0f, 1.0f, alpha);
 
-   	drawQuad_inXYPlane(textureOb, size, center);
+   	drawQuad_inXYPlane(textureOb, quad.GetSize(), quad.GetCenter(), quad.GetAngle());
    	
    	if (textureOb_additional != NULL)
    	{
-   	   	drawQuad_inXYPlane(textureOb_additional, size, center);
+   	   	drawQuad_inXYPlane(textureOb_additional, quad.GetSize(), quad.GetCenter(), quad.GetAngle());
    	}
 	setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
    	if (textureOb_mask != NULL)
    	{
-   	   	drawQuad_inXYPlane(textureOb_mask, size, center);
+   	   	drawQuad_inXYPlane(textureOb_mask, quad.GetSize(), quad.GetCenter(), quad.GetAngle());
    	}
    		
 	if (label != "")
 	{
-		Vec2<float> pos(center.x + offset_x, center.y + size.y + offset_y);
+		Vec2<float> pos(quad.GetCenter().x + offset_x, quad.GetCenter().y + quad.GetSize().y + offset_y);
 		Screen::Instance().DrawText(label, 12, pos);
 	}
 }

@@ -57,12 +57,12 @@ void disable_POINTSPRITE();
 void drawQuad_inXYPlane(TextureOb* texOb, 
 		 const Vec3<float>& scale,
 		 const Vec3<float>& center, 
-		 float angleInDegree);
+		 float angle);
 
 void drawQuad_inXYPlane(TextureOb* texOb, 
 		 const Vec2<float>& scale,
 		 const Vec2<float>& center, 
-		 float angleInDegree = 180.0);
+		 float angle);
 		 		 
 //void drawRect(const Rect& rect, float z_pos); // the drawrect function was inverted by Y axis
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   

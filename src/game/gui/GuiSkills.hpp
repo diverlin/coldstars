@@ -22,6 +22,7 @@
 
 #include "BaseGui.hpp"
 #include "../pilots/Skills.hpp"
+#include "../common/rect.hpp"
 
 class GuiSkills : public BaseGui
 {

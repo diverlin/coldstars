@@ -24,6 +24,7 @@ class Angar;
 class ItemSlot;
 class VehicleSlot;
 #include "GuiPair.hpp"
+#include "../common/rect.hpp"
 
 class GuiAngar : public BaseGui
 {

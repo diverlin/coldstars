@@ -22,6 +22,7 @@
 #include "BaseGui.hpp"
 class Galaxy;
 #include "../render/PathVisual.hpp"
+#include "../common/rect.hpp"
 
 class GuiGalaxyMap : public BaseGui
 {
