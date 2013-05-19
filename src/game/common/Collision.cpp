@@ -33,18 +33,3 @@ bool collisionDotCircle2D_FAST(const Vec2<float>& center1, float center2_x, floa
 {
 	return collisionDotCircle2D_FAST(center1, Vec2<float>(center2_x, center2_y), collision_radius);
 }
-
-bool collisionDotCircle2D_FAST(const Vec3<float>& center1, const Vec3<float>& center2, float collision_radius)
-{
-    	if (std::fabs(center1.x - center2.x) > collision_radius/2)
-       		return false;
-    	if (std::fabs(center1.y - center2.y) > collision_radius/2)
-       		return false;
-
-    	return true;
-}
-
-bool collisionDotCircle2D_FAST(const Vec3<float>& center1, float center2_x, float center2_y, float collision_radius)
-{
-	return collisionDotCircle2D_FAST(center1, Vec3<float>(center2_x, center2_y, -1.0), collision_radius);
-}

@@ -77,8 +77,8 @@ int main()
         bool player2space = true;
         if (player2space == true)
         {
-                Vec2<float> center(1400, 1400);
-                float angle = 0;  
+                Vec3<float> center(1400, 1400, DEFAULT_ENTITY_ZPOS);
+                Vec3<float> angle(0,0,0);  
                 galaxy->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, NULL);
 	}
         else

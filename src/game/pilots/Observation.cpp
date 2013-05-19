@@ -39,7 +39,7 @@ void Observation::FindEchievableStarSystems(Galaxy* galaxy)
 
         for (unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
         {    
-        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetStarSystem()->GetPoints().GetCenter(),  galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenter());
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetStarSystem()->GetPoints().GetCenterXY(),  galaxy->STARSYSTEM_vec[i]->GetPoints().GetCenterXY());
                 //if (dist < npc_owner->getShip()->propetries.hyper)
                 {
                 	visible_STARSYSTEM_pair_vec.push_back( Pair<StarSystem*>(galaxy->STARSYSTEM_vec[i], dist) );
@@ -153,7 +153,7 @@ void Observation::FindVisibleAsteroidsInSpaceInStatic()
 
         for (unsigned int i=0; i<asteroid_vec.size(); i++)
         {    
-        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), asteroid_vec[i]->GetPoints().GetCenter());
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenterXY(), asteroid_vec[i]->GetPoints().GetCenterXY());
                 if (dist < npc_owner->GetVehicle()->GetProperties().radar)
                 {
                 	visible_ASTEROID_pair_vec.push_back( Pair<Asteroid*>(asteroid_vec[i], dist) );
@@ -176,7 +176,7 @@ void Observation::FindVisibleContainersInSpaceInStatic()
         
         for (unsigned int i=0; i<container_vec.size(); i++)
         {    
-        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), container_vec[i]->GetPoints().GetCenter());
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenterXY(), container_vec[i]->GetPoints().GetCenterXY());
                 if (dist < npc_owner->GetVehicle()->GetProperties().radar)
                 {
                 	visible_CONTAINER_pair_vec.push_back( Pair<Container*>(container_vec[i], dist) );
@@ -205,7 +205,7 @@ void Observation::FindVisibleVehiclesInSpaceInStatic()
 
         for (unsigned int i=0; i<vehicle_vec.size(); i++)
         {    
-        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenter(), vehicle_vec[i]->GetPoints().GetCenter());
+        	float dist = distBetweenPoints(npc_owner->GetVehicle()->GetPoints().GetCenterXY(), vehicle_vec[i]->GetPoints().GetCenterXY());
         	//std::cout<<"dist, radius = "<<dist<<", "<<npc_owner->GetVehicle()->propetries.radius<<std::endl;
                 if (dist < npc_owner->GetVehicle()->GetProperties().radar)
                 {

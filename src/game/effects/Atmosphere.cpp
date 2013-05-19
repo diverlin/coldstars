@@ -60,7 +60,7 @@ void Atmosphere::Render(const Vec2<float>& scroll_coords)
 				    parent->GetPoints().GetScale().y*scale_rate, 
 				    parent->GetPoints().GetScale().z*scale_rate);
 		
-		renderMesh(parent->GetMesh(), parent->GetPoints().GetCenter3f(), angle, scale, false);
+		renderMesh(parent->GetMesh(), parent->GetPoints().GetCenter(), angle, scale, false);
 	glDisable(GL_BLEND);
 	
      	glUseProgram(0);

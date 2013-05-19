@@ -61,8 +61,8 @@ void ShieldEffect::Render(float parent_d_alpha) const
 
 	drawQuad_inXYPlane(textureOb,
 		    scale,  
-		    parent->GetPoints().GetCenter3f(), 
-		    parent->GetPoints().GetAngleDegree());
+		    parent->GetPoints().GetCenter(), 
+		    parent->GetPoints().GetAngle().z);
 }
 
 

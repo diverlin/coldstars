@@ -112,9 +112,9 @@ void GrappleEquipment::UpdateGrabScenarioProgram()
         {
         	if (item_slot->CheckTarget(*it) == true)
         	{
-               		(*it)->MovingByExternalForce(item_slot->GetOwnerVehicle()->GetPoints().GetCenter(), GetStrength());        	
+               		(*it)->MovingByExternalForce(item_slot->GetOwnerVehicle()->GetPoints().GetCenterXY(), GetStrength());        	
        	
-       			float dist = distBetweenPoints(item_slot->GetOwnerVehicle()->GetPoints().GetCenter(), (*it)->GetPoints().GetCenter()); 
+       			float dist = distBetweenPoints(item_slot->GetOwnerVehicle()->GetPoints().GetCenterXY(), (*it)->GetPoints().GetCenterXY()); 
        			if (dist < item_slot->GetOwnerVehicle()->GetCollisionRadius()/2.0f)
        			{
        				switch((*it)->GetTypeId())
@@ -162,8 +162,8 @@ void GrappleEquipment::RenderGrabTrail() const
 {
         for (unsigned int i=0; i<target_vec.size(); i++)
         {
-               	float xl = target_vec[i]->GetPoints().GetCenter().x - item_slot->GetOwnerVehicle()->GetPoints().GetCenter().x;
-                float yl = target_vec[i]->GetPoints().GetCenter().y - item_slot->GetOwnerVehicle()->GetPoints().GetCenter().y;
+               	float xl = target_vec[i]->GetPoints().GetCenterXY().x - item_slot->GetOwnerVehicle()->GetPoints().GetCenterXY().x;
+                float yl = target_vec[i]->GetPoints().GetCenterXY().y - item_slot->GetOwnerVehicle()->GetPoints().GetCenterXY().y;
 
                 float len = sqrt((xl*xl) + (yl*yl));
 
@@ -172,8 +172,8 @@ void GrappleEquipment::RenderGrabTrail() const
                 float angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
         
                 drawLine(GuiTextureObCollector::Instance().grapple_trail, 
-                         item_slot->GetOwnerVehicle()->GetPoints().GetCenter(), 
-                         item_slot->GetOwnerVehicle()->GetPoints().GetPosZ(), 
+                         item_slot->GetOwnerVehicle()->GetPoints().GetCenterXY(), 
+                         item_slot->GetOwnerVehicle()->GetPoints().GetCenter().z, 
                          len, 
                          angle_inD, 
                          8);

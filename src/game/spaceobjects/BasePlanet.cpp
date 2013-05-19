@@ -55,14 +55,14 @@ void BasePlanet::UpdatePosition()
 	}
 	else
 	{
-		points.SetCenter(parent->GetPoints().GetCenter() + orbit->GetPosition());
+		points.SetCenter(parent->GetPoints().GetCenterXY() + orbit->GetPosition());
 	}
 }
 
 void BasePlanet::RenderMesh_OLD() const
 {   	
 	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-	renderMesh(mesh, points.GetCenter3f(), angle, points.GetScale(), ZYX);
+	renderMesh(mesh, points.GetCenter(), points.GetAngle(), points.GetScale(), ZYX);
 }
 
 

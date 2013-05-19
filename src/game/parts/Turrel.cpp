@@ -46,14 +46,14 @@ void Turrel::Render(float _tur_angle_inD)
 {        
         if (slot->GetTarget() != NULL)
         {
-        	float _tur_xl = slot->GetTarget()->GetPoints().GetCenter().x - points.GetCenter().x;
-        	float _tur_yl = slot->GetTarget()->GetPoints().GetCenter().y - points.GetCenter().y;
+        	float _tur_xl = slot->GetTarget()->GetPoints().GetCenterXY().x - points.GetCenterXY().x;
+        	float _tur_yl = slot->GetTarget()->GetPoints().GetCenterXY().y - points.GetCenterXY().y;
 
         	float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
         	_tur_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
         }     
 
-    	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter3f(), _tur_angle_inD);
+    	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter(), _tur_angle_inD);
     	//drawFlatQuadPerVertexIn2D(textureOb,
     				  //points.GetBottomLeft(), 
                                   //points.GetBottomRight(), 

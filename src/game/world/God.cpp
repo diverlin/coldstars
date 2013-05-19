@@ -175,7 +175,9 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
 					satellite->BindOwnerNpc(npc);
 				}
 			
-				planet->GetStarSystem()->AddVehicle(satellite, Vec2<float>(0, 0), 0, planet);
+				Vec3<float> orbit_center(0, 0, -500);
+				Vec3<float> angle(0,0,0);
+				planet->GetStarSystem()->AddVehicle(satellite, orbit_center, angle, planet);
 			}
 		}
 		
@@ -235,9 +237,10 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
         	spacestation->BindOwnerNpc(npc);
 
 		Vec2<float> center = getRandVec2f(700, 1500);
-		float angle = getRandInt(0, 360);  
-                
-        	starsystem->AddVehicle(spacestation, center, angle, NULL);
+                Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
+		Vec3<float> angle(0,0,getRandInt(0, 360));  
+		                
+        	starsystem->AddVehicle(spacestation, center3, angle, NULL);
         	
         	{  
                 Satellite* satellite = SatelliteBuilder::Instance().GetNewSatellite();
@@ -246,7 +249,10 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
                 Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
                 satellite->BindOwnerNpc(new_npc);
                 
-                starsystem->AddVehicle(satellite, Vec2<float>(0, 0), 0, spacestation);
+                Vec3<float> center(0, 0, DEFAULT_ENTITY_ZPOS);
+                Vec3<float> angle(0, 0, 0);
+                                
+                starsystem->AddVehicle(satellite, center, angle, spacestation);
     		}
     	}        
 }
@@ -281,9 +287,9 @@ void God::CreateShipsInSpace(StarSystem* starsystem, int ship_num, int npc_race_
         	new_ship->BindOwnerNpc(new_npc);
 
 		Vec2<float> center = getRandVec2f(300, 1200);
-		float angle = getRandInt(0, 360);  
-		
-        	starsystem->AddVehicle(new_ship, center, angle, NULL);
+		Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
+		Vec3<float> angle(0,0,getRandInt(0, 360));		
+        	starsystem->AddVehicle(new_ship, center3, angle, NULL);
     	}
 }
 

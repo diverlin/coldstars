@@ -138,7 +138,7 @@ void Star::Render_NEW() const
         
 	glUniform2f(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "displ"), texture_offset1, texture_offset2);
 
-	renderMesh(mesh, points.GetCenter3f(), angle, points.GetScale(), false);
+	renderMesh(mesh, points.GetCenter(), points.GetAngle(), points.GetScale(), false);
 
         glUseProgram(0);
         glActiveTexture(GL_TEXTURE0);
@@ -147,7 +147,7 @@ void Star::Render_NEW() const
 void Star::Render_OLD() const
 {    
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);      		
-	renderMesh(mesh, points.GetCenter3f(), angle, points.GetScale(), ZYX);
+	renderMesh(mesh, points.GetCenter(), points.GetAngle(), points.GetScale(), ZYX);
 }
 
 void Star::UpdateInfo()

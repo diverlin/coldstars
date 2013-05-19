@@ -51,7 +51,7 @@ bool Box::CheckInteraction(const Vec2<float>& point) const
      	
 bool Box::CheckInteraction(float x, float y) const
 {       	
-	return collisionDotCircle2D_FAST(center, x, y, (size.x + size.y)/2);
+	return collisionDotCircle2D_FAST(center.GetXY(), x, y, (size.x + size.y)/2);
 }
 
 void Box::Set(const Vec3<float>& center, const Vec3<float>& size)

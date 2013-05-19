@@ -280,8 +280,8 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 	
 	if (starsystem->GetId() != npc->GetVehicle()->GetStarSystem()->GetId())
 	{
-		//Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());
-		Screen::Instance().GetRect().SetCenter(npc->GetVehicle()->GetPoints().GetCenter());
+		//Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenterXY());
+		Screen::Instance().GetRect().SetCenter(npc->GetVehicle()->GetPoints().GetCenterXY());
 		starsystem = npc->GetVehicle()->GetStarSystem();
 	}
 	
@@ -294,7 +294,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 			//{
 				//if (turn_timer.GetTurnEnded() == true)
 				//{
-					//Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());	
+					//Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenterXY());	
 				//}
 			//}
 			
@@ -320,7 +320,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 			{
 				if (turn_timer.GetTurnEnded() == true)
 				{
-					Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());
+					Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenterXY());
 					turn_timer.NextTurn();				
 				}
 			}
@@ -332,7 +332,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 		{
 			if (turn_timer.GetTurnEnded() == true)
 			{
-				Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenter());
+				Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetPoints().GetCenterXY());
 				turn_timer.NextTurn();				
 			}
 			
@@ -554,7 +554,7 @@ enable_CULLFACE();
 		glUniform1i (glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "sceneTex"), 0);
 
 		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "resolution"), w, h);
-		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "center"), npc->GetVehicle()->GetPoints().GetCenter().x/w, npc->GetVehicle()->GetPoints().GetCenter().y/h);
+		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "center"), npc->GetVehicle()->GetPoints().GetCenterXY().x/w, npc->GetVehicle()->GetPoints().GetCenterXY().y/h);
 		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "radius"), (float)npc->GetVehicle()->GetProperties().radar/h);
 		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "world_coord"), world_coord.x/w, world_coord.y/h);
 
@@ -747,7 +747,7 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
 {
 	for (unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
        	{ 
-            	float object_cursor_dist = distBetweenPoints(visible_ROCKET_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
+            	float object_cursor_dist = distBetweenPoints(visible_ROCKET_vec[i]->GetPoints().GetCenterXY(), data_mouse.mxvp, data_mouse.myvp);
             	if (object_cursor_dist < visible_ROCKET_vec[i]->GetCollisionRadius())
             	{ 
             		cursor.SetFocusedObject(visible_ROCKET_vec[i]);
@@ -776,7 +776,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
 {
        	for (unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
        	{ 
-       		float object_cursor_dist = distBetweenPoints(visible_CONTAINER_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
+       		float object_cursor_dist = distBetweenPoints(visible_CONTAINER_vec[i]->GetPoints().GetCenterXY(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_CONTAINER_vec[i]->GetCollisionRadius())
             	{   
 			cursor.SetFocusedObject(visible_CONTAINER_vec[i]);
@@ -816,7 +816,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 {
 	for (unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
 	{ 
-            	float object_cursor_dist = distBetweenPoints(visible_SATELLITE_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
+            	float object_cursor_dist = distBetweenPoints(visible_SATELLITE_vec[i]->GetPoints().GetCenterXY(), data_mouse.mxvp, data_mouse.myvp);
             	if (object_cursor_dist < visible_SATELLITE_vec[i]->GetCollisionRadius())
             	{ 
             	       	cursor.SetFocusedObject(visible_SATELLITE_vec[i]);
@@ -866,7 +866,7 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 {
        	for (unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
        	{ 
-       		float object_cursor_dist = distBetweenPoints(visible_ASTEROID_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
+       		float object_cursor_dist = distBetweenPoints(visible_ASTEROID_vec[i]->GetPoints().GetCenterXY(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_ASTEROID_vec[i]->GetCollisionRadius())
        		{   
                         cursor.SetFocusedObject(visible_ASTEROID_vec[i]);        
@@ -897,7 +897,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 {
 	for (unsigned int i=0; i<visible_SHIP_vec.size(); i++)
 	{ 
-        	float object_cursor_dist = distBetweenPoints(visible_SHIP_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
+        	float object_cursor_dist = distBetweenPoints(visible_SHIP_vec[i]->GetPoints().GetCenterXY(), data_mouse.mxvp, data_mouse.myvp);
         	if (object_cursor_dist < visible_SHIP_vec[i]->GetCollisionRadius())
         	{ 
                		cursor.SetFocusedObject(visible_SHIP_vec[i]);    
@@ -966,7 +966,7 @@ bool Player::MouseInteractionWithBlackHoles(const MouseData& data_mouse)
 {
        	for (unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
        	{ 
-       		float cursor_dist = distBetweenPoints(visible_BLACKHOLE_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
+       		float cursor_dist = distBetweenPoints(visible_BLACKHOLE_vec[i]->GetPoints().GetCenterXY(), data_mouse.mxvp, data_mouse.myvp);
        		if (cursor_dist < visible_BLACKHOLE_vec[i]->GetCollisionRadius())
        		{   
        			cursor.SetFocusedObject(visible_BLACKHOLE_vec[i]); 
@@ -982,7 +982,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 {
 	for (unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
 	{ 
-       		float object_cursor_dist = distBetweenPoints(visible_SPACESTATION_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
+       		float object_cursor_dist = distBetweenPoints(visible_SPACESTATION_vec[i]->GetPoints().GetCenterXY(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
             	{ 
                 	cursor.SetFocusedObject(visible_SPACESTATION_vec[i]); 
@@ -1032,7 +1032,7 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
 {
        	for (unsigned int i=0; i<visible_PLANET_vec.size(); i++)
        	{ 
-       		float object_cursor_dist = distBetweenPoints(visible_PLANET_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
+       		float object_cursor_dist = distBetweenPoints(visible_PLANET_vec[i]->GetPoints().GetCenterXY(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_PLANET_vec[i]->GetCollisionRadius())
             	{   
                 	cursor.SetFocusedObject(visible_PLANET_vec[i]); 
@@ -1056,7 +1056,7 @@ bool Player::MouseInteractionWithStars(const MouseData& data_mouse)
 {
        	for (unsigned int i=0; i<visible_STAR_vec.size(); i++)
        	{ 
-      		float object_cursor_dist = distBetweenPoints(visible_STAR_vec[i]->GetPoints().GetCenter(), data_mouse.mxvp, data_mouse.myvp);
+      		float object_cursor_dist = distBetweenPoints(visible_STAR_vec[i]->GetPoints().GetCenterXY(), data_mouse.mxvp, data_mouse.myvp);
        		if (object_cursor_dist < visible_STAR_vec[i]->GetCollisionRadius())
        		{   
                 	cursor.SetFocusedObject(visible_STAR_vec[i]); 
@@ -1209,7 +1209,7 @@ void Player::ResolveDataUniquePlayer()
 
 bool isObjectWithinRadarRange(BaseParticleSystem* effect, Vehicle* vehicle)
 {
-        float dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetCenter());
+        float dist = distBetweenPoints(vehicle->GetPoints().GetCenterXY(), effect->GetCenter());
         if (dist < vehicle->GetProperties().radar)
         {
                	return true;
@@ -1222,13 +1222,13 @@ bool isObjectWithinRadarRange(BaseParticleSystem* effect, Vehicle* vehicle)
 
 bool isObjectOnScreen(const Points& points)
 {      
-        if (points.GetCenter().x < (Screen::Instance().GetRect().GetBottomLeft().x - points.GetWidth()))
+        if (points.GetCenterXY().x < (Screen::Instance().GetRect().GetBottomLeft().x - points.GetWidth()))
                 return false;
-        if (points.GetCenter().x > (Screen::Instance().GetRect().GetTopRight().x   + points.GetWidth()))
+        if (points.GetCenterXY().x > (Screen::Instance().GetRect().GetTopRight().x   + points.GetWidth()))
                 return false;
-        if (points.GetCenter().y < (Screen::Instance().GetRect().GetBottomLeft().y - points.GetHeight()))
+        if (points.GetCenterXY().y < (Screen::Instance().GetRect().GetBottomLeft().y - points.GetHeight()))
                 return false;
-        if (points.GetCenter().y > (Screen::Instance().GetRect().GetTopRight().y   + points.GetHeight()))
+        if (points.GetCenterXY().y > (Screen::Instance().GetRect().GetTopRight().y   + points.GetHeight()))
                 return false;
 
         return true;
@@ -1264,7 +1264,7 @@ bool isPointOnScreen(const Vec2<float>& p)
 
 bool isObjectWithinRadarRange(ShockWaveEffect* effect, Vehicle* vehicle)
 {
-        float dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetCenter());
+        float dist = distBetweenPoints(vehicle->GetPoints().GetCenterXY(), effect->GetCenter());
         if (dist < vehicle->GetProperties().radar)
         {
                	return true;
@@ -1275,13 +1275,13 @@ bool isObjectWithinRadarRange(ShockWaveEffect* effect, Vehicle* vehicle)
 
 bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
 {
-        float dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetStartPos());
+        float dist = distBetweenPoints(vehicle->GetPoints().GetCenterXY(), effect->GetStartPos());
         if (dist < vehicle->GetProperties().radar)
         {
                	return true;
         }
         
-        dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetEndPos());
+        dist = distBetweenPoints(vehicle->GetPoints().GetCenterXY(), effect->GetEndPos());
         if (dist < vehicle->GetProperties().radar)
         {
                	return true;
@@ -1292,7 +1292,7 @@ bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
 
 bool isObjectWithinRadarRange(VerticalFlowText* effect, Vehicle* vehicle)
 {
-        float dist = distBetweenPoints(vehicle->GetPoints().GetCenter(), effect->GetPos());
+        float dist = distBetweenPoints(vehicle->GetPoints().GetCenterXY(), effect->GetPos());
         if (dist < vehicle->GetProperties().radar)
         {
                	return true;

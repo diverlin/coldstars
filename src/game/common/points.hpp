@@ -40,28 +40,27 @@ class Points
         public:
                 void SetParentCenter(Vec2<float> parent_center) { this->parent_center.Set(parent_center); };
                 
-                void SetCenter(float x, float y)	{ center.Set(x, y); 		is_updated = false; };
-                void SetCenter(const Vec2<float>& center) { this->center = center;  	is_updated = false; };
-                void SetAngle(float angle_inD) 	{ this->angle_inD = angle_inD; 	is_updated = false; };
-
-                void SetPosZ(float pos_z) { this->pos_z = pos_z; }
-                
+                void SetCenter(float x, float y, float z)	{ center.Set(x, y, z); center2.Set(center.GetXY());		is_updated = false; };
+                void SetCenter(const Vec3<float>& center)       { this->center = center; center2.Set(center.GetXY()); 	is_updated = false; };
+                void SetCenter(const Vec2<float>& center2)       { this->center2 = center2; center.Set(center2.x, center2.y, -500.0); 	is_updated = false; }; // to be removed
+                void SetAngleZ(float angle_z) 	{ this->angle.z = angle_z; 	is_updated = false; };
+                void SetAngle(Vec3<float> angle) { this->angle = angle; is_updated = false; };
+                               
                 void SetScale(float x, float y, float z) { scale.Set(x,y,z); };
                 void SetScale(const Vec3<float> scale) { this->scale = scale; };
                                         
         	float GetWidth() const  { return scale.x; };
         	float GetHeight() const { return scale.y; };
-        
-                float GetAngleDegree() const { return angle_inD; }  ;
-                float* GetpAngleDegree() { return &angle_inD; };
+
+                const Vec3<float>& GetAngle() const { return angle; };        
+                Vec3<float>& GetAngle() { return angle; };
+                float* GetpAngleZ() { return &angle.z; };
                         
-                float GetPosZ() const { return pos_z; };
-                        
-                const Vec2<float>& GetCenter()  const { return center; };   
-                const Vec3<float> GetCenter3f() const { return Vec3<float>(center.x, center.y, pos_z); }; 
-                const Vec3<float> GetScale() 	  const { return scale; }; 
+                const Vec2<float>& GetCenterXY()  const { return center2; };   
+                const Vec3<float>& GetCenter() const { return center; }; 
+                const Vec3<float>& GetScale()  const { return scale; }; 
                 
-                Vec2<float>* GetpCenter() { return &center; };  
+                Vec2<float>* GetpCenter() { return &center2; };  
                 Vec2<float>* GetpParentCenter() { return &parent_center; };   
                       
                 const Vec2<float>& GetBottomLeft()  const { return bottomLeft; };  
@@ -70,8 +69,8 @@ class Points
                 const Vec2<float>& GetTopLeft()     const { return topLeft; };
 
                 const Vec2<float>& GetMidLeftOrig()    { return midLeft_origin; };	// used in path calc              
-                const Vec2<float>& GetMidLeft()    { return midLeft; };	// used in path calc                
-                Vec2<float>* GetpMidLeft()    { return &midLeft; };	     	// used in drive jet
+                const Vec2<float>& GetMidLeft()    { return midLeft; };	                // used in path calc                
+                Vec2<float>* GetpMidLeft()    { return &midLeft; };	     	        // used in drive jet
                 Vec2<float>* GetpMidFarLeft() { return &midFarLeft; };
                    
                 Points();
@@ -88,12 +87,12 @@ class Points
                 
         private:
                 bool is_updated;
-                
+
+                Vec3<float> center;                  
                 Vec3<float> scale;
-                float angle_inD;
-                float pos_z;
-            
-                Vec2<float> center;     
+                Vec3<float> angle;
+          
+                Vec2<float> center2;     
                 Vec2<float> parent_center; 
               
                 std::vector<Vec2<float>*> vector_orig;

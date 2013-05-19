@@ -164,7 +164,7 @@ void StarSystem::CreateGroupAndShareTask(Npc* npc_leader, StarSystem* target_sta
 	}
 }
 		
-void StarSystem::AddVehicle(Vehicle* vehicle, const Vec2<float>& center, float angle, BaseSpaceEntity* parent)
+void StarSystem::AddVehicle(Vehicle* vehicle, const Vec3<float>& center, const Vec3<float>& angle, BaseSpaceEntity* parent)
 {
 	#if ENTITY_TRANSACTION_LOG_ENABLED == 1
 	Logger::Instance().Log(" StarSystem(" + int2str(GetId()) + ")::AddVehicle(" + int2str(vehicle->GetId())+")", ENTITY_TRANSACTION_LOG_DIP);
@@ -198,7 +198,7 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const Vec2<float>& center, float a
 }
 
 
-void StarSystem::AddBullet(RocketBullet* rocket, const Vec2<float>& center, float angle)
+void StarSystem::AddBullet(RocketBullet* rocket, const Vec3<float>& center, const Vec3<float>& angle)
 {
      	rocket->SetPlaceTypeId(ENTITY::SPACE_ID);
      	rocket->SetStarSystem(this);  
@@ -243,7 +243,7 @@ void StarSystem::Add(BasePlanet* object, BaseSpaceEntity* parent, int it)
 	}
 }
                 
-void StarSystem::AddContainer(Container* container, const Vec2<float>& center)
+void StarSystem::AddContainer(Container* container, const Vec3<float>& center)
 {
 	#if ENTITY_TRANSACTION_LOG_ENABLED == 1
 	Logger::Instance().Log(" StarSystem(" + int2str(GetId()) + ")::AddVehicle(" + int2str(container->GetId()) + ")", ENTITY_TRANSACTION_LOG_DIP);
@@ -262,12 +262,12 @@ void StarSystem::AddContainer(Container* container, const Vec2<float>& center)
 	container->SetStarSystem(this);
         container->SetPlaceTypeId(ENTITY::SPACE_ID);
     	container->GetPoints().SetCenter(center);
-    	container->SetTargetPos(center+getRandVec2f(60, 100), 4.0);
+    	container->SetTargetPos(center.GetXY()+getRandVec2f(60, 100), 4.0);
         
         CONTAINER_vec.push_back(container);
 }
 
-void StarSystem::Add(BlackHole* blackhole, const Vec2<float>& center)
+void StarSystem::Add(BlackHole* blackhole, const Vec3<float>& center)
 {
 	blackhole->SetStarSystem(this);
         blackhole->SetPlaceTypeId(ENTITY::SPACE_ID);
@@ -300,12 +300,12 @@ Planet* StarSystem::GetClosestInhabitedPlanet(const Vec2<float>& _pos) const
 	if (tmp_planet_vec.size() >= 1)
 	{
 		requested_planet = tmp_planet_vec[0];
-		float dist_min = distBetweenPoints(_pos, tmp_planet_vec[0]->GetPoints().GetCenter());
+		float dist_min = distBetweenPoints(_pos, tmp_planet_vec[0]->GetPoints().GetCenterXY());
 		if (tmp_planet_vec.size() > 1)
 		{
 			for (unsigned int i=1; i<tmp_planet_vec.size(); i++)
 			{
-				float dist = distBetweenPoints(_pos, tmp_planet_vec[i]->GetPoints().GetCenter());
+				float dist = distBetweenPoints(_pos, tmp_planet_vec[i]->GetPoints().GetCenterXY());
 				if (dist < dist_min)
 				{
 					requested_planet = tmp_planet_vec[i];
@@ -434,7 +434,11 @@ void StarSystem::UpdateStates()
 		
 		if (BLACKHOLE_vec.size() < 5)
 		{
-			Add(BlackHoleBuilder::Instance().GetNewBlackHole(), getRandVec2f(200, 1200));
+			Vec2<float> center = getRandVec2f(200, 1200);
+		
+			
+			Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
+			Add(BlackHoleBuilder::Instance().GetNewBlackHole(), center3);
 		}
 	}
 	
@@ -827,9 +831,11 @@ void StarSystem::ShipManager_s(unsigned int num)
         
         	new_pship->BindOwnerNpc(new_pnpc);
 
-		Vec2<float> pos = getRandVec2f(100, 800);
-		int angle = getRandInt(0, 360);
-                AddVehicle(new_pship, pos, angle);
+		Vec2<float> center = getRandVec2f(100, 800);
+		Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
+		Vec3<float> angle(0,0,getRandInt(0, 360));
+		
+                AddVehicle(new_pship, center3, angle);
         	//break;
         }
 }
@@ -947,13 +953,13 @@ void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
 {
 	float radius = ((Bomb*)container->GetItemSlot()->GetItem())->GetRadius();
 	float damage = ((Bomb*)container->GetItemSlot()->GetItem())->GetDamage(); 
-	Vec2<float> center = container->GetPoints().GetCenter();
+	Vec2<float> center = container->GetPoints().GetCenterXY();
 	
 	DamageEventInsideCircle(center, radius, damage, show_effect);
 		
 	if (show_effect == true)
 	{
-		createExplosion(this, container->GetPoints().GetCenter(), 9);
+		createExplosion(this, container->GetPoints().GetCenterXY(), 9);
 	}
 }
 
@@ -961,7 +967,7 @@ void StarSystem::StarSparkEvent(float radius) const
 {
 	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     	{
-       	        if ( distBetweenPoints(VEHICLE_vec[i]->GetPoints().GetCenter(), GetStar()->GetPoints().GetCenter()) < radius )
+       	        if ( distBetweenPoints(VEHICLE_vec[i]->GetPoints().GetCenterXY(), GetStar()->GetPoints().GetCenterXY()) < radius )
                	{
                		if (VEHICLE_vec[i]->GetRadarSlot()->GetItem() != NULL)
                		{
@@ -975,7 +981,7 @@ void StarSystem::DamageEventInsideCircle(const Vec2<float>& center, float radius
 {
 	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     	{
-       	        if ( distBetweenPoints(VEHICLE_vec[i]->GetPoints().GetCenter(), center) < radius )
+       	        if ( distBetweenPoints(VEHICLE_vec[i]->GetPoints().GetCenterXY(), center) < radius )
                	{
        			VEHICLE_vec[i]->Hit(damage, show_effect); 
        		}

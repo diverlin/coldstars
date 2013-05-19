@@ -2,6 +2,7 @@
 #define VEC3_HPP
 
 #include <cmath>
+#include "Vec2.hpp"
 
 template<typename VARTYPE>
 class Vec3
@@ -56,6 +57,18 @@ class Vec3
                 {
                 	Vec3<VARTYPE> result(x*val, y*val, z*val);
 			return result;
+                }
+                
+                Vec3<VARTYPE> operator+(const Vec3<VARTYPE>& rhs) const
+                {
+                	Vec3<VARTYPE> result(x+rhs.x, y+rhs.y, z+rhs.z);	
+			return result;
+                }
+                
+                Vec2<VARTYPE> GetXY() const
+                {
+                	Vec2<VARTYPE> result(x, y);
+                	return result;
                 }
   
 };

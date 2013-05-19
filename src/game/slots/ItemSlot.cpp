@@ -500,7 +500,7 @@ bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* _target) const
 		return true;
 	}
 	
-        float dist = distBetweenPoints(GetOwnerVehicle()->GetPoints().GetCenter(), _target->GetPoints().GetCenter());                                               
+        float dist = distBetweenPoints(GetOwnerVehicle()->GetPoints().GetCenterXY(), _target->GetPoints().GetCenterXY());                                               
         if (dist < GetItemRadius())
         {
                 return true;

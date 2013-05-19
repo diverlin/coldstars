@@ -133,7 +133,7 @@ bool Cursor::UpdateInSpace()
 						//Ship* ship = (Ship*)focused_ob;
 						//if (ship->GetId() != player->GetNpc()->GetVehicle()->GetId())
 						//{
-							//SetOffset(ship->GetPoints().GetCenter() - Screen::Instance().GetRect().GetBottomLeft());	
+							//SetOffset(ship->GetPoints().GetCenterXY() - Screen::Instance().GetRect().GetBottomLeft());	
 							//return UpdateMouseInteractionWithButtons(data_mouse);
 					        //}
 					        //else

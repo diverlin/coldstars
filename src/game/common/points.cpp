@@ -19,11 +19,8 @@
 #include "points.hpp"
 #include "constants.hpp"
 
-Points::Points():is_updated(false), angle_inD(0.0), pos_z(-500.0)
-{
-        center.Set(0, 0);     
-        parent_center.Set(0, 0);       
-}
+Points::Points():is_updated(false)
+{}
 
 Points::~Points()
 {}              
@@ -90,9 +87,9 @@ void Points::Update()
 {
     	if (is_updated == false)
     	{   
-        	Vec2<float> pos = center;
+        	Vec2<float> pos = center2;
 
-       		float angle_radian = angle_inD/RADIAN_TO_DEGREE_RATE;
+       		float angle_radian = angle.z/RADIAN_TO_DEGREE_RATE;
          
         	float cosa = cos(angle_radian);
         	float sina = sin(angle_radian);

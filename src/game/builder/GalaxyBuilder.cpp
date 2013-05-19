@@ -93,9 +93,10 @@ void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy, const GalaxyDescription& 
                 for (int j=0; (j<starsystem_insegment_num) and (starsystem_counter<galaxy_description.starsystem_num); j++)
                 {
                 	Vec2<float> center = starsystem_segment_vec[i] + getRandVec2f(getMax(segment_w, segment_h)/7, getMax(segment_w, segment_h)/3);
+                	Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);                	                
                 	                
         		StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem();
-        		galaxy->Add(starsystem, center); 
+        		galaxy->Add(starsystem, center3); 
         		
         		starsystem_counter++;
  		}

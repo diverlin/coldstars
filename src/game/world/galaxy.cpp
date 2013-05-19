@@ -47,7 +47,7 @@ void Galaxy::PutChildsToGarbage() const
 	}
 }
 
-void Galaxy::Add(StarSystem* starsystem, const Vec2<float>& center) 
+void Galaxy::Add(StarSystem* starsystem, const Vec3<float>& center) 
 { 
 	starsystem->SetGalaxy(this);
         starsystem->GetPoints().SetCenter(center);
@@ -94,7 +94,7 @@ StarSystem* Galaxy::GetClosestStarSystemTo(StarSystem* starsystem, int condition
                 {                        
                         if ( (STARSYSTEM_vec[i]->GetConditionId() == condition_id) or (condition_id == NONE_ID) )
                         {                                
-                                float dist = distBetweenPoints(starsystem->GetPoints().GetCenter(), STARSYSTEM_vec[i]->GetPoints().GetCenter());
+                                float dist = distBetweenPoints(starsystem->GetPoints().GetCenterXY(), STARSYSTEM_vec[i]->GetPoints().GetCenterXY());
                                 
                                 if ( (dist < dist_min) or (dist == 0) )
                                 {
