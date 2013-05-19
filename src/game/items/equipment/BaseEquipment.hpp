@@ -33,7 +33,7 @@ class BaseEquipment : public BaseItem
 
       		bool InsertModule(BaseModule*);
       		
-       		virtual void Render(const Quad&, const Vec2<float>&, bool draw_text = true);
+       		virtual void Render(const Box&, const Vec2<float>&, bool draw_text = true);
       		      		
      	protected:
 		std::vector<BaseModule*> modules_vec;    // needs for inserted modules drawing

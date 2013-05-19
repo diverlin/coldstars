@@ -21,7 +21,7 @@
 #define BASEBUTTON_H
 
 #include "../resources/textureOb.hpp"
-#include "../common/Quad.hpp"
+#include "../common/Box.hpp"
 class AnimationEffect2D;
 
 class BaseButton
@@ -34,14 +34,14 @@ class BaseButton
 		void SetInfo(const std::string& info) { this->info = info; }
 		void SetLabel(const std::string& label) { this->label = label; }		
 
-		void SetQuad(const Quad& quad) { this->quad = quad; }	
+		void SetBox(const Box& box) { this->box = box; }	
 													
 		void SetTextureObAdditional(TextureOb* textureOb_additional) { this->textureOb_additional = textureOb_additional; }
 		void SetTextureObMask(TextureOb* textureOb_mask) { this->textureOb_mask = textureOb_mask; }
 
        		TextureOb* GetTextureOb() const { return textureOb; }
 
-		const Quad& GetQuad() { return quad; }
+		const Box& GetBox() { return box; }
 		
        		int GetTypeId() const { return type_id; }
        		int GetSubTypeId() const { return subtype_id; }
@@ -67,7 +67,7 @@ class BaseButton
         	bool pressed;
         	
         	float alpha;
-        	Quad quad;
+        	Box box;
         	        	
                	TextureOb* textureOb;
                	TextureOb* textureOb_additional;

@@ -53,30 +53,33 @@ init_done(false)
     	int screen_w = Screen::Instance().GetWidth();
     	int screen_h = Screen::Instance().GetHeight();
     	
+    	float zpos = -1;
+    	float zsize = 1;
+    	
     	{
     	ButtonTrigger* galaxymap_button = new ButtonTrigger(GuiTextureObCollector::Instance().icon_map, GUI::BUTTON::GALAXYMAP_ID, "galaxy map");    
-    	Vec2<float> center(screen_w - (GUI::ICON_SIZE + 5), screen_h - (GUI::ICON_SIZE + 5));
-    	Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);
-    	Quad quad(center, size);		
-    	galaxymap_button->SetQuad(quad);		     								     
+    	Vec3<float> center(screen_w - (GUI::ICON_SIZE + 5), screen_h - (GUI::ICON_SIZE + 5), zpos);
+    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+    	Box box(center, size);		
+    	galaxymap_button->SetBox(box);		     								     
     	button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP_ID, galaxymap_button));
 	}
 	
 	{
     	ButtonSingle* load_button = new ButtonSingle(GuiTextureObCollector::Instance().icon_plus, GUI::BUTTON::LOAD_ID, "load");    
-    	Vec2<float> center(screen_w - 2*(GUI::ICON_SIZE + 5), screen_h - (GUI::ICON_SIZE + 5)); 
-   	Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);	
-   	Quad quad(center, size);		
-    	load_button->SetQuad(quad);				     
+    	Vec3<float> center(screen_w - 2*(GUI::ICON_SIZE + 5), screen_h - (GUI::ICON_SIZE + 5), zpos); 
+   	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
+   	Box box(center, size);		
+    	load_button->SetBox(box);				     
     	button_map.insert(std::make_pair(GUI::BUTTON::LOAD_ID, load_button));
     	}
     	
     	{
     	ButtonSingle* save_button = new ButtonSingle(GuiTextureObCollector::Instance().icon_minus, GUI::BUTTON::SAVE_ID, "save");    
-        Vec2<float> center(screen_w - 3*(GUI::ICON_SIZE + 5), screen_h - (GUI::ICON_SIZE + 5)); 
-    	Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);	
-    	Quad quad(center, size);		
-    	save_button->SetQuad(quad);				     
+        Vec3<float> center(screen_w - 3*(GUI::ICON_SIZE + 5), screen_h - (GUI::ICON_SIZE + 5), zpos); 
+    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
+    	Box box(center, size);		
+    	save_button->SetBox(box);				     
     	button_map.insert(std::make_pair(GUI::BUTTON::SAVE_ID, save_button));
     	}
     	   		

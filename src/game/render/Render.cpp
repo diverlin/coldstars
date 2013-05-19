@@ -82,7 +82,7 @@ void disable_DEPTH() { glDisable(GL_DEPTH_TEST); }
 void enable_POINTSPRITE()  { glEnable(GL_POINT_SPRITE);  }
 void disable_POINTSPRITE() { glDisable(GL_POINT_SPRITE); }
 
-//void drawFlatQuadPerVertexIn2D(TextureOb* texOb, 
+//void drawFlatBoxPerVertexIn2D(TextureOb* texOb, 
 			        //const Vec2<float>& bottomLeft, 
 			        //const Vec2<float>& bottomRight, 
 			        //const Vec2<float>& topRight, 
@@ -133,14 +133,9 @@ void drawQuad_inXYPlane(TextureOb* texOb,
 	drawQuad_inXYPlane(texOb, scale3, center3, angle);
 }
 
-void drawQuad_inXYPlane(TextureOb* texOb, const Quad& quad)
+void drawQuad_inXYPlane(TextureOb* texOb, const Box& quad)
 {
-	Vec2<float> size  = quad.GetSize();
-	Vec2<float> center = quad.GetCenter();
-	float angle = quad.GetAngle();
-	Vec3<float> size3(size.x, size.y, 1); 
-	Vec3<float> center3(center.x, center.y, -1); 
-	drawQuad_inXYPlane(texOb, size3, center3, angle);
+	drawQuad_inXYPlane(texOb, quad.GetSize(), quad.GetCenter(), quad.GetAngle().z);
 }
 
 

@@ -20,8 +20,9 @@
 #ifndef ORIENTATION_H
 #define ORIENTATION_H
 
-#include "../common/Base.hpp"
-#include "../common/points.hpp"
+#include "Base.hpp"
+#include "points.hpp"
+#include "Box.hpp"
 
 struct UnresolvedDataUniqueOrientation
 {	

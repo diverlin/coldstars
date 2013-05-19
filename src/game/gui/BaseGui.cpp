@@ -49,7 +49,7 @@ bool BaseGui::UpdateMouseInteractionWithButtons(const MouseData& data_mouse)
 	for (std::map<int, BaseButton*>::iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
 		iterator->second->Update();
-        	if (iterator->second->GetQuad().CheckInteraction(data_mouse.mx - gui_offset.x, data_mouse.my - gui_offset.y))
+        	if (iterator->second->GetBox().CheckInteraction(data_mouse.mx - gui_offset.x, data_mouse.my - gui_offset.y))
         	{
            		if (data_mouse.left_click == true)
            		{
@@ -79,7 +79,7 @@ void BaseGui::RenderFocusedButtonInfo(const MouseData& data_mouse) const
 {
 	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{	
-                if (iterator->second->GetQuad().CheckInteraction(data_mouse.mx - gui_offset.x, data_mouse.my - gui_offset.y))
+                if (iterator->second->GetBox().CheckInteraction(data_mouse.mx - gui_offset.x, data_mouse.my - gui_offset.y))
                 {
         		iterator->second->RenderInfo(gui_offset.x, gui_offset.y);
         		return; break;

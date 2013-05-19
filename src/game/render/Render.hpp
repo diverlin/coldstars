@@ -23,7 +23,7 @@
 #include <GL/glew.h>
 #include "../resources/textureOb.hpp"
 #include "../common/rect.hpp"
-#include "../common/Quad.hpp"
+#include "../common/Box.hpp"
 class Mesh;
 
 void initGl(int, int);
@@ -47,14 +47,7 @@ void disable_DEPTH();
 
 void enable_POINTSPRITE();
 void disable_POINTSPRITE();
-
-//void drawFlatQuadPerVertexIn2D(TextureOb* texOb,
-			         //const Vec2<float>& bottomLeft, 
-			         //const Vec2<float>& bottomRight, 
-			         //const Vec2<float>& topRight, 
-			         //const Vec2<float>& topLeft, 
-			         //float z_pos);
-			       
+ 
 void drawQuad_inXYPlane(TextureOb* texOb, 
 		 const Vec3<float>& scale,
 		 const Vec3<float>& center, 
@@ -65,7 +58,7 @@ void drawQuad_inXYPlane(TextureOb* texOb,
 		 const Vec2<float>& center, 
 		 float angle);
 
-void drawQuad_inXYPlane(TextureOb*, const Quad&);
+void drawQuad_inXYPlane(TextureOb*, const Box&);
 		 		 		 
 //void drawRect(const Rect& rect, float z_pos); // the drawrect function was inverted by Y axis
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
