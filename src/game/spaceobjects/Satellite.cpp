@@ -119,36 +119,6 @@ void Satellite::RenderAtPlanet() const
 }		
 
 
-
-
-/*virtual*/
-void Satellite::SaveData(boost::property_tree::ptree& save_ptree) const
-{
-	const std::string root = "satellite."+int2str(data_id.id)+".";
-        SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
-	SaveDataUniqueVehicle(save_ptree, root);
-	SaveDataUniqueSatellite(save_ptree, root);
-}
-
-/*virtual*/
-void Satellite::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-        LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueBaseSpaceEntity(load_ptree);
-	LoadDataUniqueVehicle(load_ptree);
-	LoadDataUniqueSatellite(load_ptree);
-}
-
-/*virtual*/
-void Satellite::ResolveData()
-{
-        ResolveDataUniqueBase();
-	ResolveDataUniqueBaseSpaceEntity();
-	ResolveDataUniqueVehicle();
-	ResolveDataUniqueSatellite();
-}
-
 void Satellite::SaveDataUniqueSatellite(boost::property_tree::ptree&, const std::string&) const
 {
 	#if SAVELOAD_LOG_ENABLED == 1
@@ -170,5 +140,37 @@ void Satellite::ResolveDataUniqueSatellite()
 	#endif
 }
 
+/*virtual*/
+void Satellite::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	const std::string root = "satellite."+int2str(data_id.id)+".";
+        SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueOrientation(save_ptree, root);
+	SaveDataUniqueBaseDrawable(save_ptree, root);
+	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
+	SaveDataUniqueVehicle(save_ptree, root);
+	SaveDataUniqueSatellite(save_ptree, root);
+}
 
+/*virtual*/
+void Satellite::LoadData(const boost::property_tree::ptree& load_ptree)
+{
+        LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueOrientation(load_ptree);
+	LoadDataUniqueBaseDrawable(load_ptree);
+	LoadDataUniqueBaseSpaceEntity(load_ptree);
+	LoadDataUniqueVehicle(load_ptree);
+	LoadDataUniqueSatellite(load_ptree);
+}
+
+/*virtual*/
+void Satellite::ResolveData()
+{
+        ResolveDataUniqueBase();
+        ResolveDataUniqueOrientation();
+	ResolveDataUniqueBaseDrawable();
+	ResolveDataUniqueBaseSpaceEntity();
+	ResolveDataUniqueVehicle();
+	ResolveDataUniqueSatellite();
+}
 

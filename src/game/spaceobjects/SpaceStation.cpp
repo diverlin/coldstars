@@ -125,34 +125,6 @@ void SpaceStation::RenderInSpace_3D(const Vec2<float>& scroll_coords)
 	RenderMesh(scroll_coords, starsystem->GetColor4f());
 }
 
-/*virtual*/
-void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const
-{
-	const std::string root = "spacestation."+int2str(data_id.id)+".";
-        SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
-	SaveDataUniqueVehicle(save_ptree, root);
-	SaveDataUniqueSpaceStation(save_ptree, root);
-}
-
-/*virtual*/
-void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-        LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueBaseSpaceEntity(load_ptree);
-	LoadDataUniqueVehicle(load_ptree);
-	LoadDataUniqueSpaceStation(load_ptree);
-}
-
-/*virtual*/
-void SpaceStation::ResolveData()
-{
-        ResolveDataUniqueBase();
-	ResolveDataUniqueBaseSpaceEntity();
-	ResolveDataUniqueVehicle();
-	ResolveDataUniqueSpaceStation();
-}
-
 void SpaceStation::SaveDataUniqueSpaceStation(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	#if SAVELOAD_LOG_ENABLED == 1
@@ -172,4 +144,39 @@ void SpaceStation::ResolveDataUniqueSpaceStation()
 	#if SAVELOAD_LOG_ENABLED == 1
 	Logger::Instance().Log(" SpaceStation("+int2str(GetId())+")::ResolveDataUniqueSpaceStation", SAVELOAD_LOG_DIP);
 	#endif
+}
+
+
+/*virtual*/
+void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	const std::string root = "spacestation."+int2str(data_id.id)+".";
+        SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueOrientation(save_ptree, root);
+	SaveDataUniqueBaseDrawable(save_ptree, root);
+	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
+	SaveDataUniqueVehicle(save_ptree, root);
+	SaveDataUniqueSpaceStation(save_ptree, root);
+}
+
+/*virtual*/
+void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
+{
+        LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueOrientation(load_ptree);
+	LoadDataUniqueBaseDrawable(load_ptree);
+	LoadDataUniqueBaseSpaceEntity(load_ptree);
+	LoadDataUniqueVehicle(load_ptree);
+	LoadDataUniqueSpaceStation(load_ptree);
+}
+
+/*virtual*/
+void SpaceStation::ResolveData()
+{
+        ResolveDataUniqueBase();
+        ResolveDataUniqueOrientation();
+	ResolveDataUniqueBaseDrawable();
+	ResolveDataUniqueBaseSpaceEntity();
+	ResolveDataUniqueVehicle();
+	ResolveDataUniqueSpaceStation();
 }

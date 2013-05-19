@@ -191,27 +191,35 @@ void Star::ResolveDataUniqueStar()
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this); 	
 }
 
-
+/*virtual*/
 void Star::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "star." + int2str(GetId())+".";
 	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueOrientation(save_ptree, root);
+	SaveDataUniqueBaseDrawable(save_ptree, root);
 	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
 	SaveDataUniqueBasePlanet(save_ptree, root);
 	SaveDataUniqueStar(save_ptree, root);
 }
 
+/*virtual*/
 void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueOrientation(load_ptree);
+	LoadDataUniqueBaseDrawable(load_ptree);
 	LoadDataUniqueBaseSpaceEntity(load_ptree);
 	LoadDataUniqueBasePlanet(load_ptree);
 	LoadDataUniqueStar(load_ptree);
 }
 
+/*virtual*/
 void Star::ResolveData()
 {
 	ResolveDataUniqueBase();
+	ResolveDataUniqueOrientation();
+	ResolveDataUniqueBaseDrawable();
 	ResolveDataUniqueBaseSpaceEntity();
 	ResolveDataUniqueBasePlanet();
 	ResolveDataUniqueStar();
