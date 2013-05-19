@@ -23,6 +23,8 @@ class Vec3
                 	this->z = z; 
                 }
 		
+		void Set(const Vec3<VARTYPE>& v) { *this = v; };
+		                
 		const Vec3<VARTYPE>& operator+=(const Vec3<VARTYPE>& rhs)
 		{
 			x += rhs.x;
@@ -49,6 +51,12 @@ class Vec3
 			
 			return *this;
 		}
+		
+		Vec3<VARTYPE> operator*(VARTYPE val) const
+                {
+                	Vec3<VARTYPE> result(x*val, y*val, z*val);
+			return result;
+                }
   
 };
 

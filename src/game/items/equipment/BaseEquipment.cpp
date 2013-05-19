@@ -97,7 +97,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 } 
 
 /* virtual */
-void BaseEquipment::Render(const Quad& quad, const Vec2<float>& gui_offset, bool draw_text)
+void BaseEquipment::Render(const Box& box, const Vec2<float>& gui_offset, bool draw_text)
 {
 	//Rect rect(rect1);
 	//if (GetFunctioning() == false)
@@ -109,12 +109,12 @@ void BaseEquipment::Render(const Quad& quad, const Vec2<float>& gui_offset, bool
     		//animation_notfunctioning->Reset();
     	//}
     	
-    	drawQuad_inXYPlane(textureOb, quad);
+    	drawQuad_inXYPlane(textureOb, box);
     
     	for (unsigned int i=0; i<modules_vec.size(); i++)
     	{
-        	Rect module_rect(quad.GetCenter().x + (1.1 * GUI::INSERTED_MODULE_SIZE) * (i), 
-        		         quad.GetCenter().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
+        	Rect module_rect(box.GetCenter().x + (1.1 * GUI::INSERTED_MODULE_SIZE) * (i), 
+        		         box.GetCenter().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
         			 GUI::INSERTED_MODULE_SIZE, 
         			 GUI::INSERTED_MODULE_SIZE);
         	drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1.0f);
@@ -122,14 +122,14 @@ void BaseEquipment::Render(const Quad& quad, const Vec2<float>& gui_offset, bool
     	
     	if (condition == 0)
 	{
-	    	drawQuad_inXYPlane(GuiTextureObCollector::Instance().slot_mark_reject, quad);
+	    	drawQuad_inXYPlane(GuiTextureObCollector::Instance().slot_mark_reject, box);
 	}
 	if (GetLocked() == true)
 	{
 		int font_size = 12;	
-		drawQuad_inXYPlane(GuiTextureObCollector::Instance().slot_mark_accept, quad);
+		drawQuad_inXYPlane(GuiTextureObCollector::Instance().slot_mark_accept, box);
 
-    		Vec2<float> pos(quad.GetCenter().x - font_size/2 + gui_offset.x, quad.GetCenter().y - font_size + gui_offset.y);
+    		Vec2<float> pos(box.GetCenter().x - font_size/2 + gui_offset.x, box.GetCenter().y - font_size + gui_offset.y);
     		Screen::Instance().DrawText(int2str(locked_turns), font_size, pos);	
 	}
 
@@ -137,7 +137,7 @@ void BaseEquipment::Render(const Quad& quad, const Vec2<float>& gui_offset, bool
 	{
     		if (data_id.subtype_id == ENTITY::ROCKET_EQUIPMENT_ID)
         	{
-        		Vec2<float> pos(quad.GetCenter().x - quad.GetSize().x/2 + gui_offset.x, quad.GetCenter().y + gui_offset.y);
+        		Vec2<float> pos(box.GetCenter().x - box.GetSize().x/2 + gui_offset.x, box.GetCenter().y + gui_offset.y);
         		Screen::Instance().DrawText(int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
 		}
 	}

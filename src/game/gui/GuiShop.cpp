@@ -33,57 +33,59 @@ GuiShop::GuiShop():shop(NULL)
                 
        	TextureOb* _texOb = GuiTextureObCollector::Instance().text_background; 
 
+	float zpos = -1;
+	float zsize = 1;
 	{
         ButtonSingle* minerals_button = new ButtonSingle(_texOb, GUI::BUTTON::MINERALS_ID, "minerals");  
-     	Vec2<float> center(center.x, center.y - 1*(GUI::ICON_SIZE + 5));
-     	Vec2<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE);
-     	Quad quad(center, size);		
-    	minerals_button->SetQuad(quad);
+     	Vec3<float> center(center.x, center.y - 1*(GUI::ICON_SIZE + 5), zpos);
+     	Vec3<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+     	Box box(center, size);		
+    	minerals_button->SetBox(box);
      	button_map.insert(std::make_pair(GUI::BUTTON::MINERALS_ID, minerals_button));
      	}
      	
      	{
      	ButtonSingle* food_button = new ButtonSingle(_texOb, GUI::BUTTON::FOOD_ID, "food");  
-     	Vec2<float> center(center.x, center.y - 2*(GUI::ICON_SIZE + 5));
-     	Vec2<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE);
-     	Quad quad(center, size);		
-    	food_button->SetQuad(quad);
+     	Vec3<float> center(center.x, center.y - 2*(GUI::ICON_SIZE + 5), zpos);
+     	Vec3<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+     	Box box(center, size);		
+    	food_button->SetBox(box);
      	button_map.insert(std::make_pair(GUI::BUTTON::FOOD_ID, food_button));
 	}
 	
 	{
      	ButtonSingle* medicine_button = new ButtonSingle(_texOb, GUI::BUTTON::MEDICINE_ID, "medicine");  
-     	Vec2<float> center(center.x, center.y - 3*(GUI::ICON_SIZE + 5));
-     	Vec2<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE);
-     	Quad quad(center, size);		
-    	medicine_button->SetQuad(quad);
+     	Vec3<float> center(center.x, center.y - 3*(GUI::ICON_SIZE + 5), zpos);
+     	Vec3<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+     	Box box(center, size);		
+    	medicine_button->SetBox(box);
      	button_map.insert(std::make_pair(GUI::BUTTON::MEDICINE_ID, medicine_button));
 	}
 	
 	{
      	ButtonSingle* military_button = new ButtonSingle(_texOb, GUI::BUTTON::MILITARY_ID, "military");  
-     	Vec2<float> center(center.x, center.y - 4*(GUI::ICON_SIZE + 5));
-     	Vec2<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE);
-     	Quad quad(center, size);		
-    	military_button->SetQuad(quad);
+     	Vec3<float> center(center.x, center.y - 4*(GUI::ICON_SIZE + 5), zpos);
+     	Vec3<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+     	Box box(center, size);		
+    	military_button->SetBox(box);
      	button_map.insert(std::make_pair(GUI::BUTTON::MILITARY_ID, military_button));
      	}
      	     	
      	{
      	ButtonSingle* drug_button = new ButtonSingle(_texOb, GUI::BUTTON::DRUG_ID, "drug");  
-     	Vec2<float> center(center.x, center.y - 5*(GUI::ICON_SIZE + 5));
-     	Vec2<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE);
-     	Quad quad(center, size);		
-    	drug_button->SetQuad(quad);
+     	Vec3<float> center(center.x, center.y - 5*(GUI::ICON_SIZE + 5), zpos);
+     	Vec3<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+     	Box box(center, size);		
+    	drug_button->SetBox(box);
      	button_map.insert(std::make_pair(GUI::BUTTON::DRUG_ID, drug_button));  
 	}
 	
 	{
      	ButtonSingle* exclusive_button = new ButtonSingle(_texOb, GUI::BUTTON::EXCLUSIVE_ID, "exclusive");  
-     	Vec2<float> center(center.x, center.y - 6*(GUI::ICON_SIZE + 5));
-     	Vec2<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE);
-     	Quad quad(center, size);		
-    	exclusive_button->SetQuad(quad);
+     	Vec3<float> center(center.x, center.y - 6*(GUI::ICON_SIZE + 5), zpos);
+     	Vec3<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+     	Box box(center, size);		
+    	exclusive_button->SetBox(box);
      	button_map.insert(std::make_pair(GUI::BUTTON::EXCLUSIVE_ID, exclusive_button));  
 	}
 }

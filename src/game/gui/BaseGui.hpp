@@ -25,7 +25,7 @@
 #include "BaseButton.hpp"
 #include "MouseData.hpp"
 class Player;
-#include "../common/Quad.hpp" // to be removed
+#include "../common/Box.hpp" // to be removed
 #include "../common/rect.hpp" // to be removed
 
 class BaseGui
@@ -35,11 +35,11 @@ class BaseGui
        		~BaseGui();
        		
   		void SetGuiOffset(const Vec2<float>& gui_offset) { this->gui_offset = gui_offset; };
-  		void SetQuad(const Quad& quad) { this->quad = quad; }
+  		void SetBox(const Box& box) { this->box = box; }
   		void SetPlayer(Player* player) { this->player = player; };
   		  		
   		const Vec2<float>& GetGuiOffset() const { return gui_offset; };
-  		const Quad& GetQuad() const { return quad; }
+  		const Box& GetBox() const { return box; }
        		BaseButton* GetButton(int) const;  
        		  		
   		bool UpdateMouseInteractionWithButtons(const MouseData&);
@@ -48,7 +48,7 @@ class BaseGui
        		void RenderFocusedButtonInfo(const MouseData&) const;  
               	
        	protected:
-       		Quad quad;
+       		Box box;
       		Player* player;
        		int button_w, button_h;
        		

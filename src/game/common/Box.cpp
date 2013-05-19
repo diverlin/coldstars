@@ -16,81 +16,61 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Quad.hpp"
+#include "Box.hpp"
 #include "Collision.hpp"
 #include "rect.hpp"
 
-Quad::Quad()
-:angle(0.0)
+Box::Box()
 {
-	Set(0.0f, 0.0f, 0.0f, 0.0f);
+	Set(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 }
 
-Quad::Quad(const Vec2<float>& center, const Vec2<float>& size)
-:angle(0.0)
+Box::Box(const Vec3<float>& center, const Vec3<float>& size)
 {
 	Set(center, size);
 }
 
-Quad::Quad(const Vec2<float>& center, float size_x, float size_y)
-:angle(0.0)
-{
-	Set(center, size_x, size_y);
-}
-
-Quad::Quad(float center_x, float center_y, float size_x, float size_y)
-:angle(0.0)
-{
-	Set(center_x, center_y, size_x, size_y);
-}
-
-Quad::Quad(const Quad& rhs)
-:angle(0.0)
+Box::Box(const Box& rhs)
 {
 	Set(rhs);
 }
 
-Quad::Quad(const Rect& rect)
-:angle(0.0)
+Box::Box(const Rect& rect)
 {
-	Set(rect.GetCenter(), rect.GetWidth(), rect.GetHeight());
+	Set(rect.GetCenter().x, rect.GetCenter().y, -1.0, rect.GetWidth(), rect.GetHeight(), 1.0);
 }
 
-Quad::~Quad()
+Box::~Box()
 {}
 
 
-bool Quad::CheckInteraction(const Vec2<float>& point) const
+bool Box::CheckInteraction(const Vec2<float>& point) const
 {       	
 	return CheckInteraction(point.x, point.y);
 }
      	
-bool Quad::CheckInteraction(float x, float y) const
+bool Box::CheckInteraction(float x, float y) const
 {       	
-	return collisionDotCircle_FAST(center, x, y, (size.x + size.y)/2);
+	return collisionDotCircle2D_FAST(center, x, y, (size.x + size.y)/2);
 }
 
-void Quad::Set(const Vec2<float>& center, const Vec2<float>& size)
+void Box::Set(const Vec3<float>& center, const Vec3<float>& size)
 {
 	this->center.Set(center);
 	this->size.Set(size);
 }
-
-void Quad::Set(const Vec2<float>& center, float size_x, float size_y)
-{
-	this->center.Set(center);
-	size.Set(size_x, size_y);
-}
         
-void Quad::Set(float center_x, float center_y, float size_x, float size_y)
+void Box::Set(float center_x, float center_y, float center_z, float size_x, float size_y, float size_z)
 {
-	center.Set(center_x, center_y);
-	size.Set(size_x, size_y);
+	center.Set(center_x, center_y, center_z);
+	size.Set(size_x, size_y, size_z);
 }
       	
-void Quad::Set(const Quad& quad)
+void Box::Set(const Box& quad)
 {
 	center.Set(quad.GetCenter());
 	size.Set(quad.GetSize());
+	
+	angle = quad.GetAngle();
 }
 

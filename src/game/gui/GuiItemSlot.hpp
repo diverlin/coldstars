@@ -26,7 +26,7 @@ class ItemSlot;
 class GuiItemSlot : public BaseGui
 {
     	public:
-       		GuiItemSlot(ItemSlot*, const Quad&);
+       		GuiItemSlot(ItemSlot*, const Box&);
        		~GuiItemSlot();   
        		
        		ItemSlot* GetItemSlot() const { return itemslot; }   

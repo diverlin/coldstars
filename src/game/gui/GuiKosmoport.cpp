@@ -60,48 +60,51 @@ slider_shared(NULL)
 	
         TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
 
+	float zpos = -1;
+	float zsize = 1;
+	
 	{
     	ButtonSingle* angar_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::ANGAR_ID, "angar"); 
-    	Vec2<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE);
-    	Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);   
-    	Quad quad(center, size);		
-    	angar_screen_button->SetQuad(quad);					     
+    	Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
+    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);   
+    	Box box(center, size);		
+    	angar_screen_button->SetBox(box);					     
     	button_map.insert(std::make_pair(GUI::BUTTON::ANGAR_ID, angar_screen_button));
     	}
     	
     	{
     	ButtonSingle* store_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::STORE_ID, "store");
-    	Vec2<float> center(screen_w - 2 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE); 
-    	Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);	
-    	Quad quad(center, size);		
-    	store_screen_button->SetQuad(quad);	     
+    	Vec3<float> center(screen_w - 2 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos); 
+    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
+    	Box box(center, size);		
+    	store_screen_button->SetBox(box);	     
     	button_map.insert(std::make_pair(GUI::BUTTON::STORE_ID, store_screen_button));
     	}
     		
     	{			        	
     	ButtonSingle* shop_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::SHOP_ID, "shop");
-    	Vec2<float> center(screen_w - 3 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE);
-    	Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);
-    	Quad quad(center, size);		
-    	shop_screen_button->SetQuad(quad);
+    	Vec3<float> center(screen_w - 3 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
+    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+    	Box box(center, size);		
+    	shop_screen_button->SetBox(box);
     	button_map.insert(std::make_pair(GUI::BUTTON::SHOP_ID, shop_screen_button));
     	}
     	
     	{				     
     	ButtonSingle* galaxymap_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::GALAXYMAP_ID, "galaxymap");
-   	Vec2<float> center(screen_w - 4 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE); 
-    	Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);
-    	Quad quad(center, size);		
-    	galaxymap_screen_button->SetQuad(quad);
+   	Vec3<float> center(screen_w - 4 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos); 
+    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+    	Box box(center, size);		
+    	galaxymap_screen_button->SetBox(box);
    	button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP_ID, galaxymap_screen_button));
     	}
     	
     	{				     
     	ButtonSingle* goverment_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::GOVERMENT_ID, "goverment");
-    	Vec2<float> center(screen_w - 5 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE);
-    	Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);
-    	Quad quad(center, size);		
-    	goverment_screen_button->SetQuad(quad);
+    	Vec3<float> center(screen_w - 5 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
+    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+    	Box box(center, size);		
+    	goverment_screen_button->SetBox(box);
    	button_map.insert(std::make_pair(GUI::BUTTON::GOVERMENT_ID, goverment_screen_button));
 	}
 }

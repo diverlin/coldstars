@@ -38,13 +38,16 @@ GuiNatureLand::GuiNatureLand():natureland(NULL)
 	int screen_h = Config::Instance().SCREEN_HEIGHT;
 	
         TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
-    	 	
+    	
+    	float zpos = -1;
+    	float zsize = 1;	
+    	
     	{		   
     	ButtonSingle* launch_button = new ButtonSingle(texOb_button, GUI::BUTTON::GETLAUNCH_ID, "launch");
-        Vec2<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 4*GUI::ICON_SIZE);
-        Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);
-        Quad quad(center, size);		
-    	launch_button->SetQuad(quad);
+        Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 4*GUI::ICON_SIZE, zpos);
+        Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+        Box box(center, size);		
+    	launch_button->SetBox(box);
     	button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH_ID, launch_button));
 	}
 }
