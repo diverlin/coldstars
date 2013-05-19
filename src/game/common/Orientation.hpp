@@ -26,8 +26,8 @@
 
 struct UnresolvedDataUniqueOrientation
 {	
-	Vec2<float> center;
-	float angle; 
+	Vec3<float> center;
+	Vec3<float> angle; 
 };
 
 class Orientation : public Base
@@ -36,7 +36,7 @@ class Orientation : public Base
 		Orientation();
 		virtual ~Orientation();
                 
-		void SetAngle(const Vec3<float>& angle)		{ this->angle = angle; }
+		void SetAngle(const Vec3<float>& angle)		{ points.SetAngle(angle); }
 						
    		Points& GetPoints()          { return points; }
    				
@@ -44,7 +44,6 @@ class Orientation : public Base
 				
 	protected:
 		Vec3<float> scale;
-		Vec3<float> angle;
 			
 		float collision_radius;
 			

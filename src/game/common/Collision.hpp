@@ -24,7 +24,7 @@
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision2D(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 {
-	if (collisionDotCircle2D_FAST(agressor->GetPoints().GetCenter(), victim->GetPoints().GetCenter(), victim->GetCollisionRadius()) == true)
+	if (collisionDotCircle2D_FAST(agressor->GetPoints().GetCenterXY(), victim->GetPoints().GetCenterXY(), victim->GetCollisionRadius()) == true)
         {
         	victim->Hit(agressor->GetDamage(), show_effect);
                 agressor->CollisionEvent(show_effect);
@@ -39,9 +39,6 @@ bool checkCollision2D(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 
 bool collisionDotCircle2D_FAST(const Vec2<float>& center1, const Vec2<float>& center2, float collision_radius);
 bool collisionDotCircle2D_FAST(const Vec2<float>& center1, float center2_x, float center2_y, float collision_radius);
-
-bool collisionDotCircle2D_FAST(const Vec3<float>& center1, const Vec2<float>& center2, float collision_radius);
-bool collisionDotCircle2D_FAST(const Vec3<float>& center1, float center2_x, float center2_y, float collision_radius);
 
 #endif 
 

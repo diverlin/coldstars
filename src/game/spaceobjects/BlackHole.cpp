@@ -45,7 +45,7 @@ BlackHole::~BlackHole()
 	delete shockwave; 
 } 
  
-void BlackHole::SetCenter(const Vec2<float>& center) { points.SetCenter(center); shockwave->SetCenter(center); }
+void BlackHole::SetCenter(const Vec3<float>& center) { points.SetCenter(center); shockwave->SetCenter(center.GetXY()); }
  		
 void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
@@ -53,8 +53,8 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
 
 	if (time > 0)
 	{
-		points.SetCenter(points.GetCenter()+getRandVec2f(1, 2));
-		shockwave->SetCenter(points.GetCenter());
+		points.SetCenter(points.GetCenterXY()+getRandVec2f(1, 2));
+		shockwave->SetCenter(points.GetCenterXY());
 	
 		data_life.life_time--;
 		if (data_life.life_time < 0)

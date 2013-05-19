@@ -150,7 +150,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 {
 	int num = 0;
 
-	Vec2<float> start_pos;
+	Vec3<float> start_pos;
 	float angle_inD;
 			
 	if (fire_atOnce>=1)
@@ -161,18 +161,18 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 		if (item_slot->GetOwnerVehicle()->GetKorpusData().draw_turrels == true)
     		{
         		start_pos = item_slot->GetTurrel()->GetPoints().GetCenter(); 
-        		angle_inD = item_slot->GetTurrel()->GetPoints().GetAngleDegree();
+        		angle_inD = item_slot->GetTurrel()->GetPoints().GetAngle().z;
         	}
         	else
     		{
          		start_pos = item_slot->GetOwnerVehicle()->GetPoints().GetCenter();
-         		angle_inD = item_slot->GetOwnerVehicle()->GetPoints().GetAngleDegree();
+         		angle_inD = item_slot->GetOwnerVehicle()->GetPoints().GetAngle().z;
     		}  
         
                 rocket_bullet->SetOwnerId(item_slot->GetOwnerVehicle()->GetId());
         	rocket_bullet->SetTarget(item_slot->GetTarget());
         
-    		item_slot->GetOwnerVehicle()->GetStarSystem()->AddBullet(rocket_bullet, start_pos, angle_inD);
+    		item_slot->GetOwnerVehicle()->GetStarSystem()->AddBullet(rocket_bullet, start_pos, Vec3<float>(0, 0, angle_inD));
     		num++;
     	}
     	

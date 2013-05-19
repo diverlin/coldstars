@@ -215,7 +215,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
 	{
 		case ENTITY::STARSYSTEM_ID:
 		{
-			float angleInD = 90-getAngleInD(target->GetPoints().GetCenter(), owner_vehicle->GetStarSystem()->GetPoints().GetCenter()); //??
+			float angleInD = 90-getAngleInD(target->GetPoints().GetCenterXY(), owner_vehicle->GetStarSystem()->GetPoints().GetCenterXY()); //??
 		    	target_pos = getVec2f(ENTITY::STARSYSTEM::JUMPRADIUS, angleInD);
 			target_distance = COLLISION_RADIUS_FOR_STATIC_COORD;
 			
@@ -225,7 +225,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
     		case ENTITY::PLANET_ID:
     		{ 
         		//target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;         	
-        		target_pos = ((Planet*)target)->GetPoints().GetCenter() + target_offset; 
+        		target_pos = ((Planet*)target)->GetPoints().GetCenterXY() + target_offset; 
 		       	break;		       	
     		} 
 
@@ -237,19 +237,19 @@ void DriveComplex::UpdateDynamicTargetCoord()
     	     
     		case ENTITY::VEHICLE_ID:
     		{ 
-			target_pos = target->GetPoints().GetCenter() + target_offset;  
+			target_pos = target->GetPoints().GetCenterXY() + target_offset;  
         		break;    
     		}
 
     		case ENTITY::CONTAINER_ID:
     		{ 
-			target_pos = target->GetPoints().GetCenter() + target_offset;  
+			target_pos = target->GetPoints().GetCenterXY() + target_offset;  
         		break;    
     		}
     	}
 
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
-	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + Vec2<float>2str(target_pos) + " target_center=" + Vec2<float>2str(target->GetPoints().GetCenter()) + " target_offset=" + Vec2<float>2str(target_offset) + "target_distance=" + int2str(target_distance), DRIVECOMPLEX_LOG_DIP); 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + Vec2<float>2str(target_pos) + " target_center=" + Vec2<float>2str(target->GetPoints().GetCenterXY()) + " target_offset=" + Vec2<float>2str(target_offset) + "target_distance=" + int2str(target_distance), DRIVECOMPLEX_LOG_DIP); 
 	#endif 
 }
 
@@ -258,7 +258,7 @@ bool DriveComplex::CheckTargetEchievement()
 {
 	if (target != NULL)
 	{	
-     		if (collisionDotCircle2D_FAST(owner_vehicle->GetPoints().GetCenter(), target_pos, target_distance) == true)
+     		if (collisionDotCircle2D_FAST(owner_vehicle->GetPoints().GetCenterXY(), target_pos, target_distance) == true)
      		{
         		return true;
         	}
@@ -320,12 +320,12 @@ void DriveComplex::CalcPath()
 
 bool DriveComplex::CalcRoundPath()
 {  	
-    	Vector2f vehicle_basis(owner_vehicle->GetPoints().GetMidLeft(), owner_vehicle->GetPoints().GetCenter());
+    	Vector2f vehicle_basis(owner_vehicle->GetPoints().GetMidLeft(), owner_vehicle->GetPoints().GetCenterXY());
     	Vector2f target_basis(owner_vehicle->GetPoints().GetMidLeft(),  target_pos);
     	    	    	
     	float target_angle_diff = getAngle(vehicle_basis, target_basis);
     	float target_angle_diff_start = target_angle_diff;    	
-    	float angle_inD = owner_vehicle->GetPoints().GetAngleDegree();
+    	float angle_inD = owner_vehicle->GetPoints().GetAngle().z;
        
     	float step = owner_vehicle->GetProperties().speed/100.0;  // remove from here 
     	float d_angle = 1.0f*step;
@@ -382,7 +382,7 @@ void DriveComplex::CalcDirectPath()
 	Vec2<float> start_pos;
 	if (path_center_vec.size() == 0)
 	{
-    		start_pos(owner_vehicle->GetPoints().GetCenter());
+    		start_pos(owner_vehicle->GetPoints().GetCenterXY());
     	}
     	else
     	{
@@ -416,7 +416,7 @@ void DriveComplex::CalcDirectPath()
 	
 	//float angleInD = owner_vehicle->GetPoints().GetAngleDegree();
 
-	//Vec2<float> start_pos(owner_vehicle->GetPoints().GetCenter());
+	//Vec2<float> start_pos(owner_vehicle->GetPoints().GetCenterXY());
     	
     	//Vec2<float> ll(getVec2f(100, angleInD) - start_pos);
     	
@@ -447,7 +447,7 @@ void DriveComplex::UpdatePosition()
         	if (move_it < path_center_vec.size())
         	{
            		owner_vehicle->GetPoints().SetCenter(path_center_vec[move_it]);
-           		owner_vehicle->GetPoints().SetAngle(angle_inD_vec[move_it]);
+           		owner_vehicle->GetPoints().SetAngleZ(angle_inD_vec[move_it]);
            		move_it++;
         	}
         	else

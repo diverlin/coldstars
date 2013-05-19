@@ -75,9 +75,9 @@ void Container::UpdateInfo()
 void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 {
 	UpdateInfo();
-	Vec2<float> pos(points.GetCenter().x - scroll_coords.x - 200, points.GetCenter().y - scroll_coords.y);
+	Vec2<float> pos(points.GetCenterXY().x - scroll_coords.x - 200, points.GetCenterXY().y - scroll_coords.y);
      	drawInfoIn2Column(info.title_list, info.value_list, pos);
-     	item_slot->GetItem()->RenderInfo(points.GetCenter(), scroll_coords.x, scroll_coords.y);
+     	item_slot->GetItem()->RenderInfo(points.GetCenterXY(), scroll_coords.x, scroll_coords.y);
 }
  
 /* virtual */    
@@ -91,7 +91,7 @@ void Container::PostDeathUniqueEvent(bool show_effect)
         {
         	if (show_effect == true)
         	{
-        		createExplosion(starsystem, points.GetCenter(), textureOb->size_id);  
+        		createExplosion(starsystem, points.GetCenterXY(), textureOb->size_id);  
         	}
         }
 }
@@ -106,7 +106,7 @@ void Container::UpdateInSpace(int time, bool show_effect)
      		if (fabs(velocity) > 0.2f)
      		{
 			velocity -= 0.1f;
-        		get_dPos_ToPoint(points.GetCenter(), target_pos, velocity, d_pos2);
+        		get_dPos_ToPoint(points.GetCenterXY(), target_pos, velocity, d_pos2);
 
      		}  
      		//else
@@ -114,14 +114,14 @@ void Container::UpdateInSpace(int time, bool show_effect)
      			//d_pos2.Set(0.0f, 0.0f);
      		//}
 
-		points.SetCenter(points.GetCenter() + d_pos + d_pos2);
+		points.SetCenter(points.GetCenterXY() + d_pos + d_pos2);
      	}
 }
        		
 void Container::Render2D()
 { 
 	UpdateRenderAnimation();
-    	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter3f(), angle.z);
+    	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter(), points.GetAngle().z);
 }
 
 void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const	

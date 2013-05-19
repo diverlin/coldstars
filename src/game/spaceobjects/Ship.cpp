@@ -101,7 +101,6 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 	
 		owner_npc->UpdateInSpace(time, show_effect);
 		points.Update();   
-		angle.z = points.GetAngleDegree();
 		weapon_complex.Fire(time, owner_npc->GetSkills().GetAttackNormalized(), show_effect);
 
     		if (properties.speed > 0) 
@@ -161,7 +160,7 @@ void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords)
 void Ship::RenderAtPlanet(const Vec2<float>& center)
 {
        	points.SetCenter(center);
-        points.SetAngle(0);
+        points.SetAngleZ(0);
         points.Update();
         
 	RenderKorpus();

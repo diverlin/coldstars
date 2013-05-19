@@ -73,15 +73,15 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
                 
 		if (target != NULL)
     		{ 
-        		get_dPos_ToPoint(points.GetCenter(), target->GetPoints().GetCenter(), speed/100.0, d_pos, angle_inD);
+        		get_dPos_ToPoint(points.GetCenterXY(), target->GetPoints().GetCenterXY(), speed/100.0, d_pos, angle_inD);
     		
                         if (CheckTarget() == false)
                         {
                                 target = NULL;
                         }
                 }      
-    		points.SetAngle(angle_inD);
-    		points.SetCenter(points.GetCenter() + d_pos);    
+    		points.SetAngleZ(angle_inD);
+    		points.SetCenter(points.GetCenterXY() + d_pos);    
 
     		data_bullet.live_time -= 1;
     	}
@@ -135,7 +135,7 @@ void RocketBullet::Hit(int damage, bool show_effect)
 	if (show_effect == true)
 	{
        		// improove
-       		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, points.GetCenter(), COLOR::COLOR4I_RED_LIGHT, collision_radius);
+       		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, points.GetCenterXY(), COLOR::COLOR4I_RED_LIGHT, collision_radius);
        		starsystem->Add(text); 
        	}
 }
@@ -145,7 +145,7 @@ void RocketBullet::PostDeathUniqueEvent(bool show_effect)
 {
 	if (show_effect == true)
      	{
-        	createExplosion(starsystem, points.GetCenter(), textureOb->size_id);        		
+        	createExplosion(starsystem, points.GetCenterXY(), textureOb->size_id);        		
         }
 }
 
@@ -156,7 +156,7 @@ void RocketBullet::UpdateRenderStuff()
 
 void RocketBullet::RenderInSpace() const
 {
-    	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter3f(), points.GetAngleDegree());
+    	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter(), points.GetAngle().z);
 				  
 	drive_effect->Update();
 	drive_effect->Render(0.0f);
