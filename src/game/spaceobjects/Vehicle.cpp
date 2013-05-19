@@ -1518,7 +1518,7 @@ void Vehicle::ResolveDataUniqueVehicle()
         {
         	case ENTITY::SPACE_ID: 
         	{
-			starsystem->AddVehicle(this, data_unresolved_BaseSpaceEntity.center, data_unresolved_BaseSpaceEntity.angle, parent); 
+			starsystem->AddVehicle(this, data_unresolved_Orientation.center, data_unresolved_Orientation.angle, parent); 
 			break;
 		}
 		

@@ -20,7 +20,7 @@
 #ifndef BASEGAMEENTITY_H
 #define BASEGAMEENTITY_H
 
-#include "../common/Base.hpp"
+#include "../common/BaseDrawable.hpp"
 
 class StarSystem;
 class Mesh;
@@ -32,51 +32,37 @@ class AnimationBase;
 
 struct UnresolvedDataUniqueBaseSpaceEntity
 {
-	int mesh_type_id;
-	std::string textureOb_path;
 	int parent_id;
 	int starsystem_id;
-	Vec2<float> center;
-	float angle;
+	
 };
 
 
-class BaseSpaceEntity : public Base
+class BaseSpaceEntity : public BaseDrawable
 {
 	public:      
 		BaseSpaceEntity();
 		virtual ~BaseSpaceEntity();
 
 		void SetLifeData(const LifeData& data_life) { this->data_life = data_life; }
-		void BindData3D(Mesh*, TextureOb*, const Vec3<float>&);
-		void BindData2D(TextureOb*);    
-		void SetRenderAnimation(AnimationBase* animation_program) { this->animation_program = animation_program; }
+
 		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
 		void SetPlaceTypeId(int place_type_id)      { this->place_type_id = place_type_id;  }
 		void SetMass(int mass) 			    { this->mass = mass; }
-		
-		bool Is3D() const { return (mesh != NULL); }
-		const Vec3<float>& GetBoundaryBox() const { return mesh->GetBoundaryBox(); }
-		Mesh* GetMesh() const { return mesh; }
 				
-		int SetGivenExpirience(int given_expirience) { this->given_expirience = given_expirience; }
-                
-		void SetAngle(const Vec3<float>& angle)            { this->angle = angle; }
-		void SetZYX(bool ZYX)    { this->ZYX = ZYX; }
-		
+		int SetGivenExpirience(int given_expirience) { this->given_expirience = given_expirience; }                
+	
 		void SetParent(BaseSpaceEntity* parent)     { this->parent = parent; }
 
 		StarSystem* GetStarSystem() const { return starsystem; }           
 		int GetPlaceTypeId()        const { return place_type_id; }
-		Points& GetPoints()          { return points; }
 
 		virtual int GetGivenExpirience() const { return given_expirience; }
-		float GetCollisionRadius() const { return collision_radius; }   
+ 
 		bool GetAlive()          const { return data_life.is_alive; }
 		bool GetGarbageReady()   const { return data_life.garbage_ready; }             
 
 		int GetMass()         const { return mass; }
-		TextureOb* GetTextureOb() const { return textureOb; }
 		int GetArmor()        const { return data_life.armor; }
 
 		BaseSpaceEntity* GetParent() const { return parent; }
@@ -90,24 +76,14 @@ class BaseSpaceEntity : public Base
 		void RenderInfoInSpace(const Vec2<float>&);		
 		void RenderInfo(const Vec2<float>&);
 		void virtual UpdateInfo() {};	
-		
-		void RenderCollisionRadius() const;
 				
 	protected:
-		LifeData data_life;
-		
-		Vec3<float> angle;
+		LifeData data_life;		
+
 		Vec2<float> d_pos;
-		bool ZYX;
-		
-		float collision_radius;
-	
-		TextureOb* textureOb;
-		Mesh* mesh; 
 
 		StarSystem* starsystem;
 		int place_type_id;
-		Points points;
 
 		InfoTable info;
 
@@ -115,21 +91,16 @@ class BaseSpaceEntity : public Base
 		int given_expirience;
 
 		BaseSpaceEntity* parent;
-		
-		AnimationBase* animation_program;
 
 		void CheckDeath(bool);
 		virtual void PostDeathUniqueEvent(bool) {};
-
-		void UpdateRenderAnimation();
-		void RenderMesh(const Vec2<float>&) const;
 
 		UnresolvedDataUniqueBaseSpaceEntity data_unresolved_BaseSpaceEntity;
 		void SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueBaseSpaceEntity(const boost::property_tree::ptree&);
 		void ResolveDataUniqueBaseSpaceEntity();
 				
-		friend class BaseVehicleBuilder;
+	friend class BaseVehicleBuilder;
 };
 
 #endif 

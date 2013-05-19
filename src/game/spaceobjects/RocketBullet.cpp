@@ -224,6 +224,6 @@ void RocketBullet::ResolveDataUniqueRocketBullet()
         	target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_RocketBullet_target_id);
         }
         
-        ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddBullet(this, data_unresolved_BaseSpaceEntity.center, data_unresolved_BaseSpaceEntity.angle); 
+        ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddBullet(this, data_unresolved_Orientation.center, data_unresolved_Orientation.angle); 
 }
 

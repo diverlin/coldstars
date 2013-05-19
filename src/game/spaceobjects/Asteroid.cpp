@@ -95,7 +95,7 @@ void Asteroid::UpdateInfo()
 void Asteroid::Render_NEW(const Vec2<float>& scroll_coords)
 {
 	UpdateRenderAnimation();
-	RenderMesh(scroll_coords);
+	RenderMesh(scroll_coords, starsystem->GetColor4f());
 }
 	
 void Asteroid::Render_OLD() const
