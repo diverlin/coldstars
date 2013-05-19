@@ -157,6 +157,8 @@ void Planet::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "planet." + int2str(GetId())+".";
 	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueOrientation(save_ptree, root);
+	SaveDataUniqueBaseDrawable(save_ptree, root);
 	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
 	SaveDataUniqueBasePlanet(save_ptree, root);
 	SaveDataUniquePlanet(save_ptree, root);
@@ -165,6 +167,8 @@ void Planet::SaveData(boost::property_tree::ptree& save_ptree) const
 void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueOrientation(load_ptree);
+	LoadDataUniqueBaseDrawable(load_ptree);
 	LoadDataUniqueBaseSpaceEntity(load_ptree);
 	LoadDataUniqueBasePlanet(load_ptree);
 	LoadDataUniquePlanet(load_ptree);
@@ -173,6 +177,8 @@ void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
 void Planet::ResolveData()
 {
 	ResolveDataUniqueBase();
+	ResolveDataUniqueOrientation();
+	ResolveDataUniqueBaseDrawable();
 	ResolveDataUniqueBaseSpaceEntity();
 	ResolveDataUniqueBasePlanet();
 	ResolveDataUniquePlanet();

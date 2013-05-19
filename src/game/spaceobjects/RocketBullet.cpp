@@ -157,43 +157,11 @@ void RocketBullet::UpdateRenderStuff()
 void RocketBullet::RenderInSpace() const
 {
     	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter3f(), points.GetAngleDegree());
-    	//drawFlatQuadPerVertexIn2D(textureOb,
-    				  //points.GetBottomLeft(), 
-                                  //points.GetBottomRight(), 
-                                  //points.GetTopRight(), 
-                                  //points.GetTopLeft(), 
-				  //points.GetPosZ());
 				  
 	drive_effect->Update();
 	drive_effect->Render(0.0f);
 }
 
-
-
-/*virtual*/
-void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
-{
-	const std::string root = "rocketbullet."+int2str(data_id.id)+".";
-        SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
-	SaveDataUniqueRocketBullet(save_ptree, root);
-}
-
-/*virtual*/
-void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-        LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueBaseSpaceEntity(load_ptree);
-	LoadDataUniqueRocketBullet(load_ptree);
-}
-
-/*virtual*/
-void RocketBullet::ResolveData()
-{
-        ResolveDataUniqueBase();
-	ResolveDataUniqueBaseSpaceEntity();
-	ResolveDataUniqueRocketBullet();
-}
 
 void RocketBullet::SaveDataUniqueRocketBullet(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
@@ -227,3 +195,34 @@ void RocketBullet::ResolveDataUniqueRocketBullet()
         ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddBullet(this, data_unresolved_Orientation.center, data_unresolved_Orientation.angle); 
 }
 
+
+/*virtual*/
+void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	const std::string root = "rocketbullet."+int2str(data_id.id)+".";
+        SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueOrientation(save_ptree, root);
+	SaveDataUniqueBaseDrawable(save_ptree, root);
+	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
+	SaveDataUniqueRocketBullet(save_ptree, root);
+}
+
+/*virtual*/
+void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
+{
+        LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueOrientation(load_ptree);
+	LoadDataUniqueBaseDrawable(load_ptree);
+	LoadDataUniqueBaseSpaceEntity(load_ptree);
+	LoadDataUniqueRocketBullet(load_ptree);
+}
+
+/*virtual*/
+void RocketBullet::ResolveData()
+{
+        ResolveDataUniqueBase();
+        ResolveDataUniqueOrientation();
+	ResolveDataUniqueBaseDrawable();
+	ResolveDataUniqueBaseSpaceEntity();
+	ResolveDataUniqueRocketBullet();
+}

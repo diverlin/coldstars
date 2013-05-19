@@ -172,34 +172,6 @@ void Ship::RenderAtPlanet(const Vec2<float>& center)
         }
 }		
 
-/*virtual*/
-void Ship::SaveData(boost::property_tree::ptree& save_ptree) const
-{
-	const std::string root = "ship."+int2str(data_id.id)+".";
-        SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
-	SaveDataUniqueVehicle(save_ptree, root);
-	SaveDataUniqueShip(save_ptree, root);
-}
-
-/*virtual*/
-void Ship::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-        LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueBaseSpaceEntity(load_ptree);
-	LoadDataUniqueVehicle(load_ptree);
-	LoadDataUniqueShip(load_ptree);
-}
-
-/*virtual*/
-void Ship::ResolveData()
-{
-        ResolveDataUniqueBase();
-	ResolveDataUniqueBaseSpaceEntity();
-	ResolveDataUniqueVehicle();
-	ResolveDataUniqueShip();
-}
-
 void Ship::SaveDataUniqueShip(boost::property_tree::ptree&, const std::string&) const
 {
 	#if SAVELOAD_LOG_ENABLED == 1
@@ -219,4 +191,38 @@ void Ship::ResolveDataUniqueShip()
 	#if SAVELOAD_LOG_ENABLED == 1
 	Logger::Instance().Log(" Ship("+int2str(GetId())+")::ResolveDataUniqueShip", SAVELOAD_LOG_DIP);
 	#endif
+}
+
+/*virtual*/
+void Ship::SaveData(boost::property_tree::ptree& save_ptree) const
+{
+	const std::string root = "ship."+int2str(data_id.id)+".";
+        SaveDataUniqueBase(save_ptree, root);
+        SaveDataUniqueOrientation(save_ptree, root);
+	SaveDataUniqueBaseDrawable(save_ptree, root);
+	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
+	SaveDataUniqueVehicle(save_ptree, root);
+	SaveDataUniqueShip(save_ptree, root);
+}
+
+/*virtual*/
+void Ship::LoadData(const boost::property_tree::ptree& load_ptree)
+{
+        LoadDataUniqueBase(load_ptree);
+        LoadDataUniqueOrientation(load_ptree);
+	LoadDataUniqueBaseDrawable(load_ptree);
+	LoadDataUniqueBaseSpaceEntity(load_ptree);
+	LoadDataUniqueVehicle(load_ptree);
+	LoadDataUniqueShip(load_ptree);
+}
+
+/*virtual*/
+void Ship::ResolveData()
+{
+        ResolveDataUniqueBase();
+        ResolveDataUniqueOrientation();
+	ResolveDataUniqueBaseDrawable();
+	ResolveDataUniqueBaseSpaceEntity();
+	ResolveDataUniqueVehicle();
+	ResolveDataUniqueShip();
 }
