@@ -1043,7 +1043,7 @@ void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& loa
 
 void StarSystem::ResolveDataUniqueStarSystem()
 {
-	((Galaxy*)EntityManager::Instance().GetEntityById(data_unresolved_StarSystem.galaxy_id))->Add(this, data_unresolved_BaseSpaceEntity.center);
+	((Galaxy*)EntityManager::Instance().GetEntityById(data_unresolved_StarSystem.galaxy_id))->Add(this, data_unresolved_Orientation.center);
 }
 
 void StarSystem::SaveData(boost::property_tree::ptree& save_ptree) const

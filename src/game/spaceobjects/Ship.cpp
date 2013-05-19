@@ -146,7 +146,7 @@ void Ship::RenderInSpace_2D() const
 void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords)
 {
 	UpdateRenderAnimation();
-	RenderMesh(scroll_coords);
+	RenderMesh(scroll_coords, starsystem->GetColor4f());
 
 	setColor4f(color);
 	enable_BLEND();

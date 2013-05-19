@@ -154,7 +154,7 @@ void Container::ResolveDataUniqueContainer()
 	Logger::Instance().Log(" Container("+int2str(GetId())+")::ResolveDataUniqueContainer", SAVELOAD_LOG_DIP);
 	#endif
 	
-	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddContainer(this, Vec2<float>(data_unresolved_BaseSpaceEntity.center.x, data_unresolved_BaseSpaceEntity.center.y)); 
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddContainer(this, data_unresolved_Orientation.center); 
 }		
 
 /*virtual*/
