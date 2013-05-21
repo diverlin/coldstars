@@ -56,7 +56,8 @@
 
 #define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click
 
-const float DEFAULT_ENTITY_ZPOS = -500.0;
+const float DEFAULT_ENTITY_ZPOS = 0.0;
+const float CAMERA_POS_Z = 500.0;
 
 const int POPULATION_MIN = 1000;
 const int POPULATION_MAX = 4000;

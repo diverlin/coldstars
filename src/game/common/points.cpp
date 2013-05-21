@@ -20,7 +20,10 @@
 #include "constants.hpp"
 
 Points::Points():is_updated(false)
-{}
+{
+        
+        uOrient.Set(1.0, 0.0, 0.0); // -> (0 degree)
+}
 
 Points::~Points()
 {}              
@@ -31,10 +34,10 @@ void Points::Add(Vec3<float>* point, Vec3<float>* point_orig)
         vector.push_back(point);
 }
           
-void Points :: addMidLeftPoint()
+void Points::addMidLeftPoint()
 {
-     	midLeft_origin.Set(-0.5, 0.0, 0.0);
-     	midLeft.Set(-0.5, 0.0, 0.0);
+     	midLeft_origin.Set(-0.5, 0.0, DEFAULT_ENTITY_ZPOS);
+     	midLeft.Set(-0.5, 0.0, DEFAULT_ENTITY_ZPOS);
      	
      	vector_orig.push_back(&midLeft_origin);
      	vector.push_back(&midLeft);
@@ -42,8 +45,8 @@ void Points :: addMidLeftPoint()
 
 void Points::addMidFarLeftPoint()
 {
-     	midFarLeft_origin.Set(-1.0, 0.0, 0.0);
-     	midFarLeft.Set(-1.0, 0.0, 0.0);
+     	midFarLeft_origin.Set(-1.0, 0.0, DEFAULT_ENTITY_ZPOS);
+     	midFarLeft.Set(-1.0, 0.0, DEFAULT_ENTITY_ZPOS);
      	
      	vector_orig.push_back(&midFarLeft_origin);
      	vector.push_back(&midFarLeft);
@@ -58,9 +61,12 @@ void Points::Update()
 
        		float angle_radian = angle.z/RADIAN_TO_DEGREE_RATE;
          
-        	float cosa = cos(angle_radian);
-        	float sina = sin(angle_radian);
- 
+        	uOrient.x = cos(angle_radian);
+        	uOrient.y = sin(angle_radian);
+ 		uOrient.z = 0.0;
+ 		
+ 		float cosa = uOrient.x;
+ 		float sina = uOrient.y; 		 
         	for (unsigned int i=0; i<vector.size(); i++)
         	{   
            		////// rotation around center
@@ -69,6 +75,8 @@ void Points::Update()
             		////// moving to position
             		vector[i]->x += pos.x;
             		vector[i]->y += pos.y;
+            		
+            		vector[i]->z = vector_orig[i]->z;
         	}   
         	is_updated = true;
     	}

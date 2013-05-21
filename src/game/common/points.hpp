@@ -89,6 +89,8 @@ class Points
                 Vec3<float> scale;
                 Vec3<float> angle;
           
+          	Vec3<float> uOrient;
+          		
                 Vec3<float> parent_center; 
               
                 std::vector<Vec3<float>*> vector_orig;

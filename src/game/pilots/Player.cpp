@@ -356,7 +356,7 @@ enable_CULLFACE();
 	Screen::Instance().GetFbo0().Activate(w, h);
    
         	starsystem->DrawBackground(world_coord);           
-		camera(world_coord.x, world_coord.y);    
+		camera(world_coord.x, world_coord.y, CAMERA_POS_Z);    
 
 		starsystem->RestoreDefaultColor();
 		enable_BLEND();
@@ -394,7 +394,7 @@ enable_CULLFACE();
 	Screen::Instance().GetFbo2().Activate(w, h);
 		drawFullScreenTexturedQuad(Screen::Instance().GetFbo1().GetTexture(), w, h, -999.0);
            
-          	camera(world_coord.x, world_coord.y);    
+          	camera(world_coord.x, world_coord.y, CAMERA_POS_Z);    
         
 		enable_DEPTH();  
     			for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
@@ -523,7 +523,7 @@ enable_CULLFACE();
 	Screen::Instance().GetFbo4().Activate(w, h);
 		drawFullScreenTexturedQuad(Screen::Instance().GetFbo3().GetTexture(), w, h, -999.0);
 		
-		camera(world_coord.x, world_coord.y);
+		camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
 		
 		enable_BLEND();
 			for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
@@ -564,7 +564,7 @@ enable_CULLFACE();
 	glUseProgram(0); 	    	
 		    	
 	// render text
-	camera(world_coord.x, world_coord.y);
+	camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
     	for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     	{ 
         	visible_text_DAMAGE_vec[i]->Render(world_coord); 
@@ -582,7 +582,7 @@ void Player::RenderInSpace_OLD(StarSystem* starsystem)
 	glLoadIdentity();
         starsystem->DrawBackground(world_coord);
 	
-        camera(world_coord.x, world_coord.y);
+        camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
         
         disable_BLEND();
         enable_DEPTH();

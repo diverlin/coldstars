@@ -32,7 +32,7 @@ void resizeGl(int, int);
 void clearScreen();
 void resetRenderTransformation();
 
-void camera(float x, float y);
+void camera(float x, float y, float z);
 void setColor4f(const Color4<float>&);	
 void setColor4f(float, float, float, float);
 

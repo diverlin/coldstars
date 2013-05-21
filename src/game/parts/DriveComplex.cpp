@@ -301,11 +301,29 @@ void DriveComplex::CalcPath()
 	#endif   
 	
 	ClearPath();
-                        
-        if (CalcRoundPath() == true)
-	{        
-		CalcDirectPath();
+
+	//std::cout<<str(target_pos - owner_vehicle->GetPoints().GetCenter())<<std::endl;
+	Vec3<float> new_pos(owner_vehicle->GetPoints().GetCenter());
+	Vec3<float> way(target_pos - new_pos);
+	Vec3<float> target_dir;
+	while (way.GetLength() > 1.1)
+	{
+		target_dir.Set(way.GetNormalized());
+		new_pos += target_dir;
+
+        	//target_angle_diff = getAngle(vehicle_basis, target_basis);
+        	
+		path_center_vec.push_back(new_pos);
+            	angle_inD_vec.push_back(0);		
+
+						
+		way.Set(target_pos - new_pos);
 	}
+                     
+        //if (CalcRoundPath() == true)
+	//{        
+		//CalcDirectPath();
+	//}
 
 	if (path_center_vec.size() > 1)
 	{

@@ -184,7 +184,7 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
                         float pos_x = getRandFloat(border_start, border_end) - 0.5;
                         float pos_y = getRandFloat(border_start, border_end) - 0.5;
                                         
-			slot->GetTurrel()->GetPoints().SetParentCenter(Vec3<float>(pos_x, pos_y, -2.0));
+			slot->GetTurrel()->GetPoints().SetParentCenter(Vec3<float>(pos_x, pos_y, DEFAULT_ENTITY_ZPOS));
                  	points.Add(slot->GetTurrel()->GetPoints().GetpCenter(), slot->GetTurrel()->GetPoints().GetpParentCenter()); 
                 	weapon_complex.AddSlot(slot); 
 

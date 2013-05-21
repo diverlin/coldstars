@@ -50,6 +50,5 @@ void Turrel::Render(float turrel_angle_inD)
         }     
 
     	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter(), turrel_angle_inD);
-    	std::cout<<str(points.GetCenter())<<std::endl;
 }        
                 
