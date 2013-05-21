@@ -73,7 +73,15 @@ float getAngle(const Vector2p& v1, const Vector2p& v2)
     	return angle;
 }
 
+float getAngleBetweenUnits(const Vec3<float>& v1, const Vec3<float>& v2)
+{
+	return acos(dotUnits(v1, v2)) * RADIAN_TO_DEGREE_RATE;
+}
 
+float dotUnits(const Vec3<float>& v1, const Vec3<float>& v2)
+{
+	return (v1.x*v2.x + v1.y*v2.y + v1.z*v2.z);
+}
 
 Vec2<float> getRandVec2f(int radius_min, int radius_max)
 {

@@ -65,7 +65,7 @@ void clearScreen() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 void resetRenderTransformation() { glLoadIdentity(); }
 
 
-void camera(float x, float y) { glTranslatef(-x, -y, 0.0); }
+void camera(float x, float y, float z) { glTranslatef(-x, -y, -z); }
 
 void setColor4f(const Color4<float>& color) { glColor4f(color.r, color.g, color.b, color.a); }
 void setColor4f(float r, float g, float b, float a) { glColor4f(r, g, b, a); }

@@ -38,6 +38,8 @@ class Vector2p
 };
 
 float getAngle(const Vector2p& v1, const Vector2p& v2);
+float getAngleBetweenUnits(const Vec3<float>&, const Vec3<float>&);
+float dotUnits(const Vec3<float>& v1, const Vec3<float>& v2);
 
 Vec2<float> getRandVec2f(int radius_min, int radius_max);
 Vec3<float> getRandXYVec3f(int radius_min, int radius_max, float z);

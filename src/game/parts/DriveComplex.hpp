@@ -73,7 +73,7 @@ class DriveComplex
 		DriveEffect* drive_effect; 
 
 		Vec3<float> target_pos;
-
+		
 		int action_id;
 		float target_distance;   
 		Vec3<float> target_offset;
