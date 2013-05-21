@@ -24,9 +24,7 @@
 #include "../common/myStr.hpp"
 
 BasePlanet::BasePlanet()
-{
-	orbit = new Orbit();
-}
+{}
 
 /* virtual */
 BasePlanet::~BasePlanet()
@@ -34,13 +32,11 @@ BasePlanet::~BasePlanet()
 	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("___::~BasePlanet("+int2str(GetId())+")");
 	#endif
-	
-	delete orbit;
 }
 
 void BasePlanet::CreateOrbit()
 {
-	orbit->CalcPath(data_planet.radius_A, data_planet.radius_B, data_planet.speed, data_planet.orbit_phi_inD, data_planet.clockwise);
+	orbit.CalcPath(data_planet.radius_A, data_planet.radius_B, data_planet.speed, data_planet.orbit_phi_inD, data_planet.clockwise);
 }
 
 void BasePlanet::PostDeathUniqueEvent(bool)  /* virtual */
@@ -48,14 +44,14 @@ void BasePlanet::PostDeathUniqueEvent(bool)  /* virtual */
 	
 void BasePlanet::UpdatePosition()
 {
-	orbit->UpdatePosition();  
+	orbit.UpdatePosition();  
 	if (parent == NULL)
 	{
-		points.SetCenter(orbit->GetPosition());
+		points.SetCenter(orbit.GetPosition());
 	}
 	else
 	{
-		points.SetCenter(parent->GetPoints().GetCenter() + orbit->GetPosition());
+		points.SetCenter(parent->GetPoints().GetCenter() + orbit.GetPosition());
 	}
 }
 
@@ -80,7 +76,7 @@ void BasePlanet::SaveDataUniqueBasePlanet(boost::property_tree::ptree& save_ptre
 	save_ptree.put(root+"data.speed", data_planet.speed);
 	save_ptree.put(root+"data.clockwise", data_planet.clockwise);
 	
-	save_ptree.put(root+"unresolved.orbit_it", orbit->GetIt());
+	save_ptree.put(root+"unresolved.orbit_it", orbit.GetIt());
 }
 
 void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& load_ptree)
