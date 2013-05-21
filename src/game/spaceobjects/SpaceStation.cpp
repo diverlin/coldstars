@@ -86,6 +86,7 @@ void SpaceStation::UpdateInfo()
     	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
     	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
+	info.addNameStr("pos:");       		info.addValueStr( str(points.GetCenter()) );
 } 
 
 void SpaceStation::UpdateRenderStuff_2D()

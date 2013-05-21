@@ -76,7 +76,7 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
       	
     	PlanetData planet_data;
 	
-    	planet_data.orbit_center  = Vec2<float>(0, 0); 
+    	planet_data.orbit_center.Set(0, 0, DEFAULT_ENTITY_ZPOS); 
     	planet_data.radius_A      = getRandInt(300, 1200);
     	planet_data.radius_B      = getRandInt(300, 1200); 
     	planet_data.orbit_phi_inD = getRandInt(0, 360);

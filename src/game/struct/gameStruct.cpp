@@ -16,25 +16,45 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef INFOTABLE_H
-#define INFOTABLE_H
+#include "gameStruct.hpp"
+#include "../common/constants.hpp"
+#include "../common/rand.hpp"
 
-#include "../struct/gameStruct.hpp"
-#include "../math/myVector.hpp"
-
-class InfoTable
+RaceInformationCollector& RaceInformationCollector::Instance()
 {
-	public:
-            	std::vector<std::string> title_list;        
-        	std::vector<std::string> value_list;
-        	
-		InfoTable();
-		~InfoTable();
+	static RaceInformationCollector instance;
+	return instance;
+}
 
-		void clear();
-		void addTitleStr(std::string);
-		void addNameStr(std::string);
-		void addValueStr(std::string);
-};
+bool RaceInformationCollector::IsGood(int race_id) const
+{
+	for (unsigned int i=0; i<RACES_GOOD_vec.size(); i++)
+	{
+		if (race_id == RACES_GOOD_vec[i])
+		{
+			return true;
+		}
+	}
+	
+	return false;
+}		
+		
 
-#endif 
+ParticleData::ParticleData()
+{	
+      	size_start = 0.0;
+      	size_end   = 0.0;
+        d_size     = 0.0;
+
+      	velocity_start = 0.0;
+      	velocity_end   = 0.0;
+	d_velocity     = 0.0;
+        
+        frame = 0;
+}
+	
+
+
+
+AngleData::AngleData()
+{}

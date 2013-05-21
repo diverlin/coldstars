@@ -21,7 +21,7 @@
 #include <cmath>
 
 #include "constants.hpp"
-#include "gameStruct.hpp"
+#include "../struct/gameStruct.hpp"
 
 int getRandIntFromVec(const std::vector<int>& vec)
 {

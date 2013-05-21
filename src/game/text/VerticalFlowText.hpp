@@ -19,7 +19,7 @@
 #ifndef VERTICALFLOWTEXT_H
 #define VERTICALFLOWTEXT_H
 
-#include "../common/gameStruct.hpp"
+#include "../struct/gameStruct.hpp"
 #include "../math/myVector.hpp"
 
 class VerticalFlowText

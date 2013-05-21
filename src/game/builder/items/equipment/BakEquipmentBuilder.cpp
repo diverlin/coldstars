@@ -22,7 +22,7 @@
 #include "../../../common/Logger.hpp"
 #include "../../../world/EntityManager.hpp"
 #include "../../../common/rand.hpp"
-#include "../../../common/gameStruct.hpp"
+#include "../../../struct/gameStruct.hpp"
 #include "../../../resources/TextureManager.hpp"
 
 BakEquipmentBuilder& BakEquipmentBuilder::Instance()

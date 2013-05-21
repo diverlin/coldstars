@@ -53,26 +53,6 @@ class RaceInformationCollector
 }; 
 
 
-
-struct PlanetData
-{
-	Vec2<float> orbit_center; 
-	int radius_A;
-	int radius_B; 
-	float orbit_phi_inD;
-	float speed;
-	bool clockwise;
-
-	PlanetData():
-	orbit_center(Vec2<float>(0, 0)),
-	radius_A(0),
-    	radius_B(0), 
-    	orbit_phi_inD(0.0),
-    	speed(0.0),
-    	clockwise(false)
-    	{};
-};
-
 struct LifeData
 {
 	bool is_alive;

@@ -90,6 +90,7 @@ void Asteroid::UpdateInfo()
     	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(data_planet.speed*100)));
+	info.addNameStr("pos:");       		info.addValueStr( str(points.GetCenter()) );
 }     
 
 void Asteroid::Render_NEW(const Vec2<float>& scroll_coords)

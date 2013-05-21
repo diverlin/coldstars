@@ -133,4 +133,5 @@ std::string str(Vec3<VARTYPE> v)
 	ss<<v.x<<","<<v.y<<","<<v.z<<".";
 	return ss.str();
 }
+
 #endif

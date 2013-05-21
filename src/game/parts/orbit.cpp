@@ -59,6 +59,7 @@ void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_ph
      	{ 
          	new_coord.x = radius_A * cos(angleInRad) * cos(orbitPhiInRad) - radius_B * sin(angleInRad) * sin(orbitPhiInRad);
          	new_coord.y = radius_A * cos(angleInRad) * sin(orbitPhiInRad) + radius_B * sin(angleInRad) * cos(orbitPhiInRad);
+         	new_coord.z = DEFAULT_ENTITY_ZPOS;         	
          	coords_vec.push_back(new_coord);
      	}
         len = coords_vec.size();
@@ -77,8 +78,8 @@ void Orbit::CalcPath(float radius, float speed, bool clockwise)
      	Vec3<float> new_coord;
      	for(float angleInRad=0; fabs(angleInRad)<2*PI; angleInRad+=d_angleInRad) 
      	{ 
-         	new_coord.x = radius * cos(angleInRad)  - radius * sin(angleInRad);
-         	new_coord.y = radius * cos(angleInRad)  + radius * sin(angleInRad);
+         	new_coord.x = radius*(cos(angleInRad) - sin(angleInRad));
+         	new_coord.y = radius*(cos(angleInRad) + sin(angleInRad));
          	new_coord.z = DEFAULT_ENTITY_ZPOS;
          	coords_vec.push_back(new_coord);
      	}

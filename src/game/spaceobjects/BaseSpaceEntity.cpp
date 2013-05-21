@@ -96,14 +96,14 @@ void BaseSpaceEntity::CheckDeath(bool show_effect)
 		
 void BaseSpaceEntity::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 { 
-	UpdateInfo();
+	UpdateInfo(); // virtual
 	Vec2<float> pos(points.GetCenter().x - scroll_coords.x, points.GetCenter().y - scroll_coords.y);
      	drawInfoIn2Column(info.title_list, info.value_list, pos);
 }
 
 void BaseSpaceEntity::RenderInfo(const Vec2<float>& center)
 { 
-	UpdateInfo();
+	UpdateInfo(); // virtual
      	drawInfoIn2Column(info.title_list, info.value_list, center);
 }
 	

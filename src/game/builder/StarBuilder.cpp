@@ -75,7 +75,7 @@ void StarBuilder::CreateNewInternals(Star* star) const
         data_life.armor = 1000000; 
 
  	PlanetData star_data;
-    	star_data.orbit_center  = Vec2<float>(0, 0); 
+    	star_data.orbit_center.Set(0, 0, DEFAULT_ENTITY_ZPOS); 
     	star_data.radius_A      = 50;
     	star_data.radius_B      = 50; 
     	star_data.orbit_phi_inD = 0;
