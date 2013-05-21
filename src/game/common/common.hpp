@@ -24,8 +24,8 @@
 
 int getObjectSize(int w, int h); 
 
-bool get_dPos_ToPoint(const Vec2<float>&, const Vec2<float>&, float, Vec2<float>&);
-bool get_dPos_ToPoint(const Vec2<float>&, const Vec2<float>&, float, Vec2<float>&, float&);
+bool get_dPos_ToPoint(const Vec3<float>&, const Vec3<float>&, float, Vec3<float>&);
+bool get_dPos_ToPoint(const Vec3<float>&, const Vec3<float>&, float, Vec3<float>&, float&);
 
 template <typename T>
 inline T getMin(T val1, T val2)

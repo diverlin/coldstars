@@ -11,7 +11,3 @@ include_directories(dependencies/SFML2/include/)
 
 add_subdirectory(src/game)
 
-
-
-
-

@@ -57,9 +57,10 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
 		//printf("sat orbit =%f,%f\n", orbit->getPosition().x, orbit->getPosition().y);
 		//if (parent != NULL)
 		//{		
-			Vec2<float> new_pos;
-			new_pos.x = parent->GetPoints().GetCenterXY().x + orbit->GetPosition().x;
-			new_pos.y = parent->GetPoints().GetCenterXY().y + orbit->GetPosition().y;
+			Vec3<float> new_pos;
+			new_pos.x = parent->GetPoints().GetCenter().x + orbit->GetPosition().x;
+			new_pos.y = parent->GetPoints().GetCenter().y + orbit->GetPosition().y;
+			new_pos.z = parent->GetPoints().GetCenter().z;
 			points.SetCenter(new_pos);
 			points.Update();
 		//}

@@ -94,7 +94,7 @@ StarSystem* Galaxy::GetClosestStarSystemTo(StarSystem* starsystem, int condition
                 {                        
                         if ( (STARSYSTEM_vec[i]->GetConditionId() == condition_id) or (condition_id == NONE_ID) )
                         {                                
-                                float dist = distBetweenPoints(starsystem->GetPoints().GetCenterXY(), STARSYSTEM_vec[i]->GetPoints().GetCenterXY());
+                                float dist = distanceBetween(starsystem->GetPoints().GetCenter(), STARSYSTEM_vec[i]->GetPoints().GetCenter());
                                 
                                 if ( (dist < dist_min) or (dist == 0) )
                                 {

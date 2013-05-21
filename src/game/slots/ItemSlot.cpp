@@ -419,7 +419,7 @@ void ItemSlot::UpdateRange(TextureOb* _texOb)
         range_visual.FillData(_texOb, radius, size);
 }
 
-void ItemSlot::DrawRange(const Vec2<float>& offset)
+void ItemSlot::DrawRange(const Vec3<float>& offset)
 { 
     	range_visual.Draw(offset);
 }
@@ -500,7 +500,7 @@ bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* _target) const
 		return true;
 	}
 	
-        float dist = distBetweenPoints(GetOwnerVehicle()->GetPoints().GetCenterXY(), _target->GetPoints().GetCenterXY());                                               
+        float dist = distanceBetween(GetOwnerVehicle()->GetPoints().GetCenter(), _target->GetPoints().GetCenter());                                               
         if (dist < GetItemRadius())
         {
                 return true;

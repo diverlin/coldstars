@@ -2,6 +2,7 @@
 #define VEC2_HPP
 
 #include <cmath>
+#include "Vec3.hpp"
 
 template<typename VARTYPE>
 class Vec2
@@ -13,6 +14,7 @@ class Vec2
                 Vec2():x(0), y(0) {};
                 Vec2(VARTYPE x, VARTYPE y)   { Set(x, y); };
                 Vec2(const Vec2<VARTYPE>& v) { Set(v); };
+                Vec2(const Vec3<VARTYPE>& v) { Set(v.x, v.y); };
                 ~Vec2() {};
                                                 
                 bool IsNull() const 
@@ -92,6 +94,23 @@ class Vec2
                 {
                 	Set(v);
                 }
+                
+                
+                //float GetDistanceTo(const Vec2<VARTYPE> v) const
+                //{
+                        //float lx = v.x - x;
+        		//float ly = v.y - y;
+        		    
+        		//return sqrt(lx*lx + ly*ly);
+                //}
+
+                //float GetDistanceTo(float x, float y) const
+                //{
+                        //float lx = x - this->x;
+        		//float ly = y - this->y;
+        		    
+        		//return sqrt(lx*lx + ly*ly);
+                //}
 };
 
 #endif

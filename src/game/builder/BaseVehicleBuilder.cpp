@@ -89,9 +89,7 @@ BaseVehicleBuilder& BaseVehicleBuilder::Instance()
 }	
 
 void BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle) const
-{
-    	vehicle->GetPoints().addMainQuadPoints();
-}
+{}
        
 void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
 {     

@@ -74,7 +74,8 @@ void VehicleSlot::Render(const Rect& rect) const
      	drawTexturedRect(textureOb, rect, -1);
      	if (vehicle != NULL)
      	{
-     	       	((Ship*)vehicle)->RenderAtPlanet(rect.GetCenter());
+     		Vec3<float> center(rect.GetCenter().x, rect.GetCenter().y, -2.0);
+     	       	((Ship*)vehicle)->RenderAtPlanet(center);
 	}
 }
 

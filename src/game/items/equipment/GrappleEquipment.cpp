@@ -108,13 +108,15 @@ std::string GrappleEquipment::GetTargetStr() const
         
 void GrappleEquipment::UpdateGrabScenarioProgram()
 {               
+       	const Vec3<float>& grapple_pos = item_slot->GetOwnerVehicle()->GetPoints().GetCenter(); // shortcut
+       			
         for (std::vector<BaseSpaceEntity*>::iterator it = target_vec.begin(); it != target_vec.end(); ++it)
         {
         	if (item_slot->CheckTarget(*it) == true)
         	{
-               		(*it)->MovingByExternalForce(item_slot->GetOwnerVehicle()->GetPoints().GetCenterXY(), GetStrength());        	
-       	
-       			float dist = distBetweenPoints(item_slot->GetOwnerVehicle()->GetPoints().GetCenterXY(), (*it)->GetPoints().GetCenterXY()); 
+               		(*it)->MovingByExternalForce(item_slot->GetOwnerVehicle()->GetPoints().GetCenter(), GetStrength());        	
+
+       			float dist = distanceBetween(grapple_pos, (*it)->GetPoints().GetCenter()); 
        			if (dist < item_slot->GetOwnerVehicle()->GetCollisionRadius()/2.0f)
        			{
        				switch((*it)->GetTypeId())
@@ -162,8 +164,8 @@ void GrappleEquipment::RenderGrabTrail() const
 {
         for (unsigned int i=0; i<target_vec.size(); i++)
         {
-               	float xl = target_vec[i]->GetPoints().GetCenterXY().x - item_slot->GetOwnerVehicle()->GetPoints().GetCenterXY().x;
-                float yl = target_vec[i]->GetPoints().GetCenterXY().y - item_slot->GetOwnerVehicle()->GetPoints().GetCenterXY().y;
+               	float xl = target_vec[i]->GetPoints().GetCenter().x - item_slot->GetOwnerVehicle()->GetPoints().GetCenter().x;
+                float yl = target_vec[i]->GetPoints().GetCenter().y - item_slot->GetOwnerVehicle()->GetPoints().GetCenter().y;
 
                 float len = sqrt((xl*xl) + (yl*yl));
 
@@ -172,8 +174,7 @@ void GrappleEquipment::RenderGrabTrail() const
                 float angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
         
                 drawLine(GuiTextureObCollector::Instance().grapple_trail, 
-                         item_slot->GetOwnerVehicle()->GetPoints().GetCenterXY(), 
-                         item_slot->GetOwnerVehicle()->GetPoints().GetCenter().z, 
+                         item_slot->GetOwnerVehicle()->GetPoints().GetCenter(), 
                          len, 
                          angle_inD, 
                          8);

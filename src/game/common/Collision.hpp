@@ -24,7 +24,7 @@
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision2D(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 {
-	if (collisionDotCircle2D_FAST(agressor->GetPoints().GetCenterXY(), victim->GetPoints().GetCenterXY(), victim->GetCollisionRadius()) == true)
+	if (collisionDotCircle2D_FAST(agressor->GetPoints().GetCenter(), victim->GetPoints().GetCenter(), victim->GetCollisionRadius()) == true)
         {
         	victim->Hit(agressor->GetDamage(), show_effect);
                 agressor->CollisionEvent(show_effect);

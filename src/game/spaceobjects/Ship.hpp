@@ -35,7 +35,7 @@ class Ship : public Vehicle
 
         	void RenderInSpace_2D() const;        	
         	void RenderInSpace_3D(const Vec2<float>&);
-		void RenderAtPlanet(const Vec2<float>&);       
+		void RenderAtPlanet(const Vec3<float>&);       
 		
     		virtual void SaveData(boost::property_tree::ptree&) const;
     		virtual void LoadData(const boost::property_tree::ptree&);

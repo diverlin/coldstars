@@ -157,7 +157,7 @@ void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords)
 	starsystem->RestoreSceneColor();
 }
 
-void Ship::RenderAtPlanet(const Vec2<float>& center)
+void Ship::RenderAtPlanet(const Vec3<float>& center)
 {
        	points.SetCenter(center);
         points.SetAngleZ(0);

@@ -17,16 +17,12 @@
 */
 
 #include "Turrel.hpp"
-#include "../items/equipment/RocketEquipment.hpp"
-#include "../items/equipment/LazerEquipment.hpp"
-#include "../slots/ItemSlot.hpp"
-#include "../spaceobjects/Vehicle.hpp"
-#include "../common/myStr.hpp"
-#include "../common/Logger.hpp"
 
-#include "../world/starsystem.hpp"
+#include "../slots/ItemSlot.hpp"
 #include "../render/Render.hpp"
-#include "../pilots/Npc.hpp"
+#include "../spaceobjects/BaseSpaceEntity.hpp"
+
+#include "../common/Logger.hpp"
 
 Turrel::Turrel(ItemSlot* slot)
 {
@@ -42,23 +38,18 @@ void Turrel::SetTextureOb(TextureOb* textureOb)
 	points.SetScale(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0); 
 }
 
-void Turrel::Render(float _tur_angle_inD)
+void Turrel::Render(float turrel_angle_inD)
 {        
         if (slot->GetTarget() != NULL)
         {
-        	float _tur_xl = slot->GetTarget()->GetPoints().GetCenterXY().x - points.GetCenterXY().x;
-        	float _tur_yl = slot->GetTarget()->GetPoints().GetCenterXY().y - points.GetCenterXY().y;
+        	float _tur_xl = slot->GetTarget()->GetPoints().GetCenter().x - points.GetCenter().x;
+        	float _tur_yl = slot->GetTarget()->GetPoints().GetCenter().y - points.GetCenter().y;
 
         	float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
-        	_tur_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
+        	turrel_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
         }     
 
-    	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter(), _tur_angle_inD);
-    	//drawFlatQuadPerVertexIn2D(textureOb,
-    				  //points.GetBottomLeft(), 
-                                  //points.GetBottomRight(), 
-                                  //points.GetTopRight(), 
-                                  //points.GetTopLeft(), 
-                                  //points.GetPosZ());
+    	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter(), turrel_angle_inD);
+    	std::cout<<str(points.GetCenter())<<std::endl;
 }        
                 

@@ -21,7 +21,7 @@
 #include "../common/constants.hpp"
 #include "../render/Render.hpp"
 
-LazerTraceEffect::LazerTraceEffect(TextureOb* _texOb, Vec2<float>* _pTo_start_pos, Vec2<float>* _pTo_end_pos)
+LazerTraceEffect::LazerTraceEffect(TextureOb* _texOb, Vec3<float>* _pTo_start_pos, Vec3<float>* _pTo_end_pos)
 {
         is_alive = true;
         is_alreadyInRemoveQueue = false; 
@@ -101,7 +101,6 @@ void LazerTraceEffect::Render()
 	{
      	    	 drawLine(texOb, 
     		 *pTo_start_pos, 
-    		 -2, 
     		 len, 
     		 angle_inD, 
     		 texOb->GetFrameHeight()/4);	
