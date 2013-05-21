@@ -1391,4 +1391,14 @@ void loadShaders()
 	
 	compileProgram(path_vert, path_frag, ShaderCollector::Instance().fogwarspark);
 	}
+
+	{
+	const std::string path_vert = "data/shaders/flash.vert"; 
+	const std::string path_frag = "data/shaders/flash.frag"; 
+
+	ShaderCollector::Instance().flash = glCreateProgram();
+	
+	compileProgram(path_vert, path_frag, ShaderCollector::Instance().flash);
+	}
+
 }

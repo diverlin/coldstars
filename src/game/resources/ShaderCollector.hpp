@@ -37,7 +37,8 @@ class ShaderCollector
 		GLuint multitexturing;
 		GLuint blank;
 		GLuint fogwarspark;
-		
+		GLuint flash;
+				
 	private:
 		ShaderCollector() {};
 		~ShaderCollector() {};

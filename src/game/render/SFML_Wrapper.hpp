@@ -19,7 +19,7 @@ class SFML_Wrapper
       		sf::RenderWindow& GetWindow() { return window; };
       		
 		float GetElapsedTimeInSeconds() { return clock.getElapsedTime().asSeconds(); };
-		
+				
 		void wrResizeSpecific(int width, int height);
 
 		void wrDrawSpecific();
