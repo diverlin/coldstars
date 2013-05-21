@@ -31,9 +31,9 @@ class BaseEquipment;
 #include "../parts/WeaponComplex.hpp"
 #include "../parts/DriveComplex.hpp"
 #include "../parts/ProtectionComplex.hpp"
-#include "../parts/VehicleKorpusData.hpp"
-#include "../parts/VehiclePropetries.hpp"
-#include "../parts/VehicleNeeds.hpp"
+#include "../struct/VehicleKorpusData.hpp"
+#include "../struct/VehiclePropetries.hpp"
+#include "../struct/VehicleNeeds.hpp"
 
 class BaseParticleSystem;
 class ShockWaveEffect;

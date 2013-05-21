@@ -16,45 +16,29 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "gameStruct.hpp"
-#include "constants.hpp"
-#include "rand.hpp"
+#ifndef PLANETDATA_H
+#define PLANETDATA_H
 
-RaceInformationCollector& RaceInformationCollector::Instance()
+#include "../math/Vec3.hpp"
+#include "../common/constants.hpp"
+
+struct PlanetData
 {
-	static RaceInformationCollector instance;
-	return instance;
-}
+	Vec3<float> orbit_center; 
+	int radius_A;
+	int radius_B; 
+	float orbit_phi_inD;
+	float speed;
+	bool clockwise;
 
-bool RaceInformationCollector::IsGood(int race_id) const
-{
-	for (unsigned int i=0; i<RACES_GOOD_vec.size(); i++)
-	{
-		if (race_id == RACES_GOOD_vec[i])
-		{
-			return true;
-		}
-	}
-	
-	return false;
-}		
-		
+	PlanetData():
+	orbit_center(Vec3<float>(0, 0, DEFAULT_ENTITY_ZPOS)),
+	radius_A(0),
+    	radius_B(0), 
+    	orbit_phi_inD(0.0),
+    	speed(0.0),
+    	clockwise(false)
+    	{};
+};
 
-ParticleData::ParticleData()
-{	
-      	size_start = 0.0;
-      	size_end   = 0.0;
-        d_size     = 0.0;
-
-      	velocity_start = 0.0;
-      	velocity_end   = 0.0;
-	d_velocity     = 0.0;
-        
-        frame = 0;
-}
-	
-
-
-
-AngleData::AngleData()
-{}
+#endif

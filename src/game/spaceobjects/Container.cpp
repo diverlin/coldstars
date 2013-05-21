@@ -70,6 +70,7 @@ void Container::UpdateInfo()
     	info.addTitleStr("CONTAINER");
     	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
     	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
+    	info.addNameStr("pos:");       		info.addValueStr( str(points.GetCenter()) );
 }        
        	
 void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords)

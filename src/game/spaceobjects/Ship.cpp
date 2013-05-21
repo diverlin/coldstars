@@ -76,7 +76,8 @@ void Ship::UpdateInfo()
     	info.addNameStr("repair:");        	info.addValueStr( int2str(properties.repair) );
     	info.addNameStr("scan:");        	info.addValueStr( int2str(properties.scan) );
 	info.addNameStr("price:");       	info.addValueStr( int2str(data_korpus.price) );
-	
+	info.addNameStr("pos:");       		info.addValueStr( str(points.GetCenter()) );
+		
 	if (properties.grab_radius > 0)
 	{
 		std::string grab_str = GetGrappleSlot()->GetGrappleEquipment()->GetTargetStr();

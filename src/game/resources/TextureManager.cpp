@@ -19,7 +19,7 @@
 #include "TextureManager.hpp"
 #include "../common/constants.hpp"
 #include "../common/rand.hpp"
-#include "../common/gameStruct.hpp"
+#include "../struct/gameStruct.hpp"
 #include "../common/Logger.hpp"
 #include "../resources/textureOb.hpp"
 

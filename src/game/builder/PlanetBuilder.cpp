@@ -78,7 +78,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 
 	PlanetData planet_data;
 
-	planet_data.orbit_center.Set(0, 0); 
+	planet_data.orbit_center.Set(0, 0, DEFAULT_ENTITY_ZPOS); 
 	planet_data.radius_A      = orbit_radius;
 	planet_data.radius_B      = orbit_radius; 
 	planet_data.orbit_phi_inD = 0;

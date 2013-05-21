@@ -78,6 +78,7 @@ void BlackHole::UpdateInfo()
 
     	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
+    	info.addNameStr("pos:");       		info.addValueStr( str(points.GetCenter()) );
 }
       
 void BlackHole::Render_NEW(const Vec2<float>& scroll_coords)

@@ -21,7 +21,7 @@
 #define BASE_H
 
 #include <boost/property_tree/ptree.hpp>
-#include "../common/gameStruct.hpp"
+#include "../struct/gameStruct.hpp"
 
 class Base
 {

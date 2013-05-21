@@ -23,6 +23,7 @@
 #include "BaseSpaceEntity.hpp"
 #include "../math/myVector.hpp"
 #include "../parts/orbit.hpp"
+#include "../struct/PlanetData.hpp"
 
 struct UnresolvedDataBasePlanet
 {
