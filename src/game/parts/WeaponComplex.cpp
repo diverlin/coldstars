@@ -179,7 +179,7 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 
 void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 {                          
-        float dist = distBetweenPoints(owner_vehicle->GetPoints().GetCenterXY(), target->GetPoints().GetCenterXY());
+        float dist = distanceBetween(owner_vehicle->GetPoints().GetCenter(), target->GetPoints().GetCenter());
         
         #if WEAPONSTARGET_LOG_ENABLED == 1 
         if (item_slot == NULL)
@@ -299,7 +299,7 @@ void WeaponComplex::RenderWeaponsRange()
        		if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
                	{
                		slot_weapon_reloaded_vec[i]->UpdateRange(GuiTextureObCollector::Instance().dot_red);
-       			slot_weapon_reloaded_vec[i]->DrawRange(owner_vehicle->GetPoints().GetCenterXY());
+       			slot_weapon_reloaded_vec[i]->DrawRange(owner_vehicle->GetPoints().GetCenter());
         	}
 	}
 }
@@ -312,7 +312,7 @@ void WeaponComplex::RenderWeaponIcons() const
                 {  
 	                if (slot_weapon_vec[i]->GetTarget() != NULL )
 	                {       
-	                        Rect _rect(slot_weapon_vec[i]->GetTarget()->GetPoints().GetCenterXY().x - 40/2 + 23*i, slot_weapon_vec[i]->GetTarget()->GetPoints().GetCenterXY().y + 40/2, 20, 20);
+	                        Rect _rect(slot_weapon_vec[i]->GetTarget()->GetPoints().GetCenter().x - 40/2 + 23*i, slot_weapon_vec[i]->GetTarget()->GetPoints().GetCenter().y + 40/2, 20, 20);
 	                        drawTexturedRect(slot_weapon_vec[i]->GetItem()->GetTextureOb(), _rect, -2.0);
 	                }        
         	}

@@ -66,8 +66,7 @@ void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);
 void drawTexturedPoint(GLuint texture, const Vec2<float>& _center, float size, float pos_z);
 
 void drawLine(TextureOb* texOb, 
-              const Vec2<float>& start_pos, 
-              float z_pos, 
+              const Vec3<float>& start_pos, 
               float len, 
               float angle_inD, 
               int half_h);

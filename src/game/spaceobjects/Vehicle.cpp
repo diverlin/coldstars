@@ -184,7 +184,7 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
                         float pos_x = getRandFloat(border_start, border_end) - 0.5;
                         float pos_y = getRandFloat(border_start, border_end) - 0.5;
                                         
-			slot->GetTurrel()->GetPoints().SetParentCenter(Vec2<float>(pos_x, pos_y));
+			slot->GetTurrel()->GetPoints().SetParentCenter(Vec3<float>(pos_x, pos_y, -2.0));
                  	points.Add(slot->GetTurrel()->GetPoints().GetpCenter(), slot->GetTurrel()->GetPoints().GetpParentCenter()); 
                 	weapon_complex.AddSlot(slot); 
 
@@ -515,7 +515,7 @@ void Vehicle::BindOwnerNpc(Npc* owner_npc)
 
 bool Vehicle::IsObjectWithinRadarRange(BaseSpaceEntity* object) const
 {
-        float dist = distBetweenPoints(points.GetCenterXY(), object->GetPoints().GetCenterXY());
+        float dist = distanceBetween(points.GetCenter(), object->GetPoints().GetCenter());
         if (dist < properties.radar)
         {
                	return true;
@@ -746,7 +746,7 @@ void Vehicle::Hit(int damage, bool show_effect)
        			protection_complex.GetShieldEffect()->SetAlpha(1.0);
        		}       	
        		
-       		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, points.GetCenterXY(), COLOR::COLOR4I_RED_LIGHT, collision_radius);
+       		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, points.GetCenter(), COLOR::COLOR4I_RED_LIGHT, collision_radius);
        		starsystem->Add(text); 
        	}
        	
@@ -764,7 +764,7 @@ void Vehicle::PostDeathUniqueEvent(bool show_effect)
 	
 	if (show_effect == true)
      	{
-        	createExplosion(starsystem, points.GetCenterXY(), textureOb->size_id);        		
+        	createExplosion(starsystem, points.GetCenter(), textureOb->size_id);        		
         }
 }
 
@@ -1206,12 +1206,12 @@ void Vehicle::UpdateArtefactInfluence()
 void Vehicle::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 {  
 	UpdateInfo(); // virtual
-	Vec2<float> pos(points.GetCenterXY().x - scroll_coords.x, points.GetCenterXY().y - scroll_coords.y);
+	Vec2<float> pos(points.GetCenter().x - scroll_coords.x, points.GetCenter().y - scroll_coords.y);
      	drawInfoIn2Column(info.title_list, info.value_list, pos);
      	
      	if (owner_npc != NULL)
      	{
-     		owner_npc->RenderInfo(Vec2<float>(points.GetCenterXY().x + 190 - scroll_coords.x, points.GetCenterXY().y - scroll_coords.y));
+     		owner_npc->RenderInfo(Vec2<float>(points.GetCenter().x + 190 - scroll_coords.x, points.GetCenter().y - scroll_coords.y));
      	}
 }
 
@@ -1254,7 +1254,7 @@ void Vehicle::RenderRadarRange()
 	if (properties.radar > VISIBLE_DISTANCE_WITHOUT_RADAR)
 	{
 		radar_slot->UpdateRange(GuiTextureObCollector::Instance().dot_yellow);
-       		radar_slot->DrawRange(points.GetCenterXY());
+       		radar_slot->DrawRange(points.GetCenter());
 	}
 }
 
@@ -1263,13 +1263,13 @@ void Vehicle::RenderGrappleRange()
 	if (properties.grab_radius > 0)
 	{
 		grapple_slot->UpdateRange(GuiTextureObCollector::Instance().dot_blue);
-       		grapple_slot->DrawRange(points.GetCenterXY());
+       		grapple_slot->DrawRange(points.GetCenter());
 	}
 }
 
 bool Vehicle::IsAbleToJumpTo(StarSystem* target_starsystem) const
 {
- 	float dist = distBetweenPoints(starsystem->GetPoints().GetCenterXY(), target_starsystem->GetPoints().GetCenterXY());
+ 	float dist = distanceBetween(starsystem->GetPoints().GetCenter(), target_starsystem->GetPoints().GetCenter());
 	if (dist < properties.hyper)
 	{
 		return true;

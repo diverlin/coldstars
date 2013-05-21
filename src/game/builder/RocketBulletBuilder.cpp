@@ -84,6 +84,4 @@ void RocketBulletBuilder::CreateNewInternals(RocketBullet* rocket_bullet, const 
 }
 
 void RocketBulletBuilder::CreateKorpusGeometry(RocketBullet* rocket_bullet) const
-{
-    	rocket_bullet->GetPoints().addMainQuadPoints();
-}
+{}

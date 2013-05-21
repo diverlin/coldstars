@@ -25,49 +25,16 @@ Points::Points():is_updated(false)
 Points::~Points()
 {}              
                 
-void Points::Add(Vec2<float>* point, Vec2<float>* point_orig)
+void Points::Add(Vec3<float>* point, Vec3<float>* point_orig)
 { 
         vector_orig.push_back(point_orig);
         vector.push_back(point);
 }
           
-void Points::addMainQuadPoints()
-{ 
-	//float w = 1.0;
-	//float h = 1.0;
-	
-        //////// Origin entity rect (for rotation only transformation)
-        //bottomLeft_origin.Set(-w/2.0, -h/2.0);
-        //bottomRight_origin.Set(+w/2.0, -h/2.0);
-        //topRight_origin.Set(+w/2.0, +h/2.0);
-        //topLeft_origin.Set(-w/2.0, +h/2.0);
-      
-        /////////////////////////////////////////////
-        //////// Actual entity rect
-        //bottomLeft.Set(-w/2.0, -h/2.0);
-        //bottomRight.Set(+w/2.0, -h/2.0);
-        //topRight.Set(+w/2.0, +h/2.0);
-        //topLeft.Set(-w/2.0, +h/2.0);
-        
-      	///////////////////////////////////////////////////////////////
-      	//////// Origin entity rect (for rotation only transformation)
-      	//vector_orig.push_back(&bottomLeft_origin);
-      	//vector_orig.push_back(&bottomRight_origin);
-      	//vector_orig.push_back(&topRight_origin);
-      	//vector_orig.push_back(&topLeft_origin);
-      
-      	/////////////////////////////////////////////
-      	//////// Actual entity rect
-      	//vector.push_back(&bottomLeft);     
-      	//vector.push_back(&bottomRight);      
-      	//vector.push_back(&topRight);                 
-      	//vector.push_back(&topLeft);
-}
-
 void Points :: addMidLeftPoint()
 {
-     	midLeft_origin.Set(-0.5, 0.0);
-     	midLeft.Set(-0.5, 0.0);
+     	midLeft_origin.Set(-0.5, 0.0, 0.0);
+     	midLeft.Set(-0.5, 0.0, 0.0);
      	
      	vector_orig.push_back(&midLeft_origin);
      	vector.push_back(&midLeft);
@@ -75,8 +42,8 @@ void Points :: addMidLeftPoint()
 
 void Points::addMidFarLeftPoint()
 {
-     	midFarLeft_origin.Set(-1.0, 0.0);
-     	midFarLeft.Set(-1.0, 0.0);
+     	midFarLeft_origin.Set(-1.0, 0.0, 0.0);
+     	midFarLeft.Set(-1.0, 0.0, 0.0);
      	
      	vector_orig.push_back(&midFarLeft_origin);
      	vector.push_back(&midFarLeft);
@@ -87,7 +54,7 @@ void Points::Update()
 {
     	if (is_updated == false)
     	{   
-        	Vec2<float> pos = center2;
+        	Vec3<float> pos = center;
 
        		float angle_radian = angle.z/RADIAN_TO_DEGREE_RATE;
          

@@ -127,7 +127,7 @@ class ItemSlot : public BaseSlot
                 bool SwapItem(ItemSlot*);
                 
                 void UpdateRange(TextureOb*);
-           	void DrawRange(const Vec2<float>&);
+           	void DrawRange(const Vec3<float>&);
            	
            	bool CheckSubTarget(ItemSlot*) const;
            	bool CheckTarget(BaseSpaceEntity*) const;

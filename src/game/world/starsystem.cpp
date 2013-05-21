@@ -262,7 +262,7 @@ void StarSystem::AddContainer(Container* container, const Vec3<float>& center)
 	container->SetStarSystem(this);
         container->SetPlaceTypeId(ENTITY::SPACE_ID);
     	container->GetPoints().SetCenter(center);
-    	container->SetTargetPos(center.GetXY()+getRandVec2f(60, 100), 4.0);
+    	container->SetTargetPos(center+getRandXYVec3f(60, 100, 0.0), 4.0);
         
         CONTAINER_vec.push_back(container);
 }
@@ -300,12 +300,12 @@ Planet* StarSystem::GetClosestInhabitedPlanet(const Vec2<float>& _pos) const
 	if (tmp_planet_vec.size() >= 1)
 	{
 		requested_planet = tmp_planet_vec[0];
-		float dist_min = distBetweenPoints(_pos, tmp_planet_vec[0]->GetPoints().GetCenterXY());
+		float dist_min = distanceBetween(_pos, tmp_planet_vec[0]->GetPoints().GetCenter());
 		if (tmp_planet_vec.size() > 1)
 		{
 			for (unsigned int i=1; i<tmp_planet_vec.size(); i++)
 			{
-				float dist = distBetweenPoints(_pos, tmp_planet_vec[i]->GetPoints().GetCenterXY());
+				float dist = distanceBetween(_pos, tmp_planet_vec[i]->GetPoints().GetCenter());
 				if (dist < dist_min)
 				{
 					requested_planet = tmp_planet_vec[i];
@@ -953,13 +953,13 @@ void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
 {
 	float radius = ((Bomb*)container->GetItemSlot()->GetItem())->GetRadius();
 	float damage = ((Bomb*)container->GetItemSlot()->GetItem())->GetDamage(); 
-	Vec2<float> center = container->GetPoints().GetCenterXY();
+	Vec2<float> center = container->GetPoints().GetCenter();
 	
 	DamageEventInsideCircle(center, radius, damage, show_effect);
 		
 	if (show_effect == true)
 	{
-		createExplosion(this, container->GetPoints().GetCenterXY(), 9);
+		createExplosion(this, container->GetPoints().GetCenter(), 9);
 	}
 }
 
@@ -967,7 +967,7 @@ void StarSystem::StarSparkEvent(float radius) const
 {
 	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     	{
-       	        if ( distBetweenPoints(VEHICLE_vec[i]->GetPoints().GetCenterXY(), GetStar()->GetPoints().GetCenterXY()) < radius )
+       	        if ( distanceBetween(VEHICLE_vec[i]->GetPoints().GetCenter(), GetStar()->GetPoints().GetCenter()) < radius )
                	{
                		if (VEHICLE_vec[i]->GetRadarSlot()->GetItem() != NULL)
                		{
@@ -981,7 +981,7 @@ void StarSystem::DamageEventInsideCircle(const Vec2<float>& center, float radius
 {
 	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     	{
-       	        if ( distBetweenPoints(VEHICLE_vec[i]->GetPoints().GetCenterXY(), center) < radius )
+       	        if ( distanceBetween(VEHICLE_vec[i]->GetPoints().GetCenter(), center) < radius )
                	{
        			VEHICLE_vec[i]->Hit(damage, show_effect); 
        		}

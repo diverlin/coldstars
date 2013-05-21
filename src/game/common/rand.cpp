@@ -107,13 +107,3 @@ int getRandNpcSubSubTypeId(int subtype_id)
                 return subtype_id;
         }
 }
-
-Vec2<float> getRandVec2f(int radius_min, int radius_max)
-{
-    	float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
-    	int len = getRandInt(radius_min, radius_max);
-   
- 	Vec2<float> vec(sin(alpha) * len, cos(alpha) * len);
-    	
-    	return vec;
-}

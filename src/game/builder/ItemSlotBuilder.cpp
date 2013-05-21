@@ -62,7 +62,6 @@ ItemSlot* GetNewItemSlot(int subtype_id, unsigned long int id)
         	}
         
                 turrel->SetTextureOb(texOb_turrel);       
-                turrel->GetPoints().addMainQuadPoints();
                 item_slot->SetTurrel(turrel);
         }
         

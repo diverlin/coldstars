@@ -33,7 +33,7 @@ PathVisual::~PathVisual()
 	glDeleteLists(gl_list, sizeof(gl_list));
 }
 
-void PathVisual::FillData(TextureOb* textureOb, const std::vector<Vec2<float>>& vec, int step, int point_size)
+void PathVisual::FillData(TextureOb* textureOb, const std::vector<Vec3<float>>& vec, int step, int point_size)
 {  
 	glDeleteLists(gl_list, sizeof(gl_list));
  
@@ -54,7 +54,7 @@ void PathVisual::FillData(TextureOb* textureOb, const std::vector<Vec2<float>>& 
         glEndList();
 }
 
-void PathVisual::FillData(const std::vector<Vec2<float>>& vec, int step, int point_size)
+void PathVisual::FillData(const std::vector<Vec3<float>>& vec, int step, int point_size)
 {   
 	glDeleteLists(gl_list, sizeof(gl_list));
 
@@ -107,7 +107,7 @@ void PathVisual::FillData(TextureOb* textureOb, int radius, int point_size)
         glEndList();
 }
 
-void PathVisual::FillData(TextureOb* textureOb, const Vec2<float>& start_pos, const Vec2<float>& target_pos, int step, int point_size)
+void PathVisual::FillData(TextureOb* textureOb, const Vec3<float>& start_pos, const Vec3<float>& target_pos, int step, int point_size)
 {
 	glDeleteLists(gl_list, sizeof(gl_list));
        	

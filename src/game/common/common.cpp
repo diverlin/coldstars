@@ -39,50 +39,40 @@ int getObjectSize(int w, int h)
 
 
 
-bool get_dPos_ToPoint(const Vec2<float>& p1, const Vec2<float>& p2, float velocity, Vec2<float>& d_pos)
-{    
-    	float lx = p2.x - p1.x;
-    	float ly = p2.y - p1.y;
-    
-    	float l = sqrt(lx*lx + ly*ly);
+bool get_dPos_ToPoint(const Vec3<float>& p1, const Vec3<float>& p2, float velocity, Vec3<float>& d_pos)
+{   	    
+    	Vec3<float> dir(p2-p1);
 
-    	if (l != 0.0f)
+    	if (!dir.IsNull())
     	{
-    	       	d_pos.x = lx/l * velocity;
-       		d_pos.y = ly/l * velocity;
-       		
+    	    	dir.Normalize();
+    	       	d_pos.Set(dir * velocity);       		
        		return true;
     	}
     	else
     	{
-    	    	d_pos.x = 0.0f;
-       		d_pos.y = 0.0f;
-       		
+    	    	d_pos.Set(0.0, 0.0, 0.0);       		
        		return false;
     	}
 }
 
 
-bool get_dPos_ToPoint(const Vec2<float>& p1, const Vec2<float>& p2, float velocity, Vec2<float>& d_pos, float& rTo_angle_inD)
+bool get_dPos_ToPoint(const Vec3<float>& p1, const Vec3<float>& p2, float velocity, Vec3<float>& d_pos, float& rTo_angle_inD)
 {
-    	float lx = p2.x - p1.x;
-    	float ly = p2.y - p1.y;
-    
-    	float l = sqrt(lx*lx + ly*ly);
+    	Vec3<float> dir(p2-p1);
 
-    	if (l != 0.0f)
-    	{
-    	       	d_pos.x = lx/l * velocity;
-       		d_pos.y = ly/l * velocity;
-       		rTo_angle_inD = atan2(ly, lx) * RADIAN_TO_DEGREE_RATE;
+    	if (!dir.IsNull())
+    	{ 	    	
+    	    	dir.Normalize();
+    	       	d_pos.Set(dir * velocity);   
+       		rTo_angle_inD = atan2(dir.x, dir.y) * RADIAN_TO_DEGREE_RATE;
        		
        		return true;
     	}
     	else
     	{
-    	    	d_pos.x = 0.0f;
-       		d_pos.y = 0.0f;
-       		rTo_angle_inD = atan2(ly, lx) * RADIAN_TO_DEGREE_RATE;
+    	    	d_pos.Set(0.0, 0.0, 0.0); 
+       		rTo_angle_inD = atan2(0.0, 0.0) * RADIAN_TO_DEGREE_RATE;
        		
        		return false;
     	}    	

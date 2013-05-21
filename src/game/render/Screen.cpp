@@ -113,17 +113,17 @@ void Screen::MovingBy(const Vec2<float>& delta)
 
 void Screen::UpdateInSpace()
 {	
-	if (auto_scroll == true)
-	{
-		Vec2<float> d_pos;
-		float speed = 15.0;
-		get_dPos_ToPoint(rect.GetCenter(), target_center, speed, d_pos);
-		MovingBy(d_pos);
-		if ( ( fabs(rect.GetCenter().x - target_center.x) < speed ) and ( fabs(rect.GetCenter().y - target_center.y) < speed ) )
-		{
-			auto_scroll = false;
-		}
-	}
+	//if (auto_scroll == true)
+	//{
+		//Vec2<float> d_pos;
+		//float speed = 15.0;
+		//get_dPos_ToPoint(rect.GetCenter(), target_center, speed, d_pos);
+		//MovingBy(d_pos);
+		//if ( ( fabs(rect.GetCenter().x - target_center.x) < speed ) and ( fabs(rect.GetCenter().y - target_center.y) < speed ) )
+		//{
+			//auto_scroll = false;
+		//}
+	//}
 }
 		
 void Screen::Draw()

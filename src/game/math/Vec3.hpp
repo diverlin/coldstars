@@ -2,6 +2,7 @@
 #define VEC3_HPP
 
 #include <cmath>
+#include <sstream>
 #include "Vec2.hpp"
 
 template<typename VARTYPE>
@@ -26,6 +27,28 @@ class Vec3
 		
 		void Set(const Vec3<VARTYPE>& v) { *this = v; };
 		                
+		bool IsNull() const 
+                {
+			if ((x == 0) and (y == 0) and (z == 0)) return true;
+			else    		   		return false;
+		}
+                
+                float GetLength() const { return sqrt(x*x+y*y+z*z); }
+                
+                Vec3<VARTYPE> GetNormalized() const 
+                {
+                	float length = GetLength();
+			return Vec3<VARTYPE>(x/length, y/length, z/length);
+                }
+
+                void Normalize() 
+                {
+                	float length = GetLength();
+			x /= length;
+			y /= length;
+			z /= length;
+                }
+                                
 		const Vec3<VARTYPE>& operator+=(const Vec3<VARTYPE>& rhs)
 		{
 			x += rhs.x;
@@ -64,13 +87,50 @@ class Vec3
                 	Vec3<VARTYPE> result(x+rhs.x, y+rhs.y, z+rhs.z);	
 			return result;
                 }
-                
-                Vec2<VARTYPE> GetXY() const
+
+                Vec3<VARTYPE> operator-(const Vec3<VARTYPE>& rhs) const
                 {
-                	Vec2<VARTYPE> result(x, y);
-                	return result;
+                	Vec3<VARTYPE> result(x-rhs.x, y-rhs.y, z-rhs.z);	
+			return result;
                 }
+                
+                //Vec3<VARTYPE> operator+(const Vec2<VARTYPE>& rhs) const
+                //{
+                	//Vec3<VARTYPE> result(x+rhs.x, y+rhs.y, z);	
+			//return result;
+                //}
+                                
+                //float GetDistanceTo(const Vec3<VARTYPE> v) const
+                //{
+                        //float lx = v.x - x;
+        		//float ly = v.y - y;
+        		//float lz = v.z - z;
+        		    
+        		//return sqrt(lx*lx + ly*ly + lz*lz);
+                //}
+
+                //float GetDistanceTo(float x, float y, float z) const
+                //{
+                        //float lx = x - this->x;
+        		//float ly = y - this->y;
+        		//float lz = z - this->z;
+        		    
+        		//return sqrt(lx*lx + ly*ly + lz*lz);
+                //}
+                                
+                //Vec2<VARTYPE> GetXY() const
+                //{
+                	//Vec2<VARTYPE> result(x, y);
+                	//return result;
+                //}
   
 };
 
+template<typename VARTYPE>
+std::string str(Vec3<VARTYPE> v)
+{
+	std::stringstream ss;
+	ss<<v.x<<","<<v.y<<","<<v.z<<".";
+	return ss.str();
+}
 #endif

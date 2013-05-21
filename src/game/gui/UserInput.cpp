@@ -326,7 +326,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 
 		case sf::Keyboard::C:   
 		{
-			Screen::Instance().InitiateScrollTo(player->GetNpc()->GetVehicle()->GetPoints().GetCenterXY());
+			Screen::Instance().InitiateScrollTo(player->GetNpc()->GetVehicle()->GetPoints().GetCenter());
 			break;
 		}
 				

@@ -55,7 +55,7 @@ void BasePlanet::UpdatePosition()
 	}
 	else
 	{
-		points.SetCenter(parent->GetPoints().GetCenterXY() + orbit->GetPosition());
+		points.SetCenter(parent->GetPoints().GetCenter() + orbit->GetPosition());
 	}
 }
 

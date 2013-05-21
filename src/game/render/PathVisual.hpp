@@ -30,10 +30,10 @@ class PathVisual
 		PathVisual();
 		~PathVisual();
 
-		void FillData(TextureOb*, const std::vector<Vec2<float>>&, int step, int point_size);
-		void FillData(const std::vector<Vec2<float>>&, int step, int point_size);
+		void FillData(TextureOb*, const std::vector<Vec3<float>>&, int step, int point_size);
+		void FillData(const std::vector<Vec3<float>>&, int step, int point_size);
 		void FillData(TextureOb*, int radius, int point_size);	
-		void FillData(TextureOb*, const Vec2<float>&, const Vec2<float>&, int step, int point_size);																																																																																																																																																																														
+		void FillData(TextureOb*, const Vec3<float>&, const Vec3<float>&, int step, int point_size);																																																																																																																																																																														
 		
 		void Draw(const Vec2<float>&) const;
 		void Draw() const;

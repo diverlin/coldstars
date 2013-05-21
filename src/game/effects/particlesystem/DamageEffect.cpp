@@ -56,7 +56,7 @@ void DamageEffect::Update()
             	{
             		if (is_dying == false)
             		{
-                                particles_vec[i]->SetPosition(parent->GetPoints().GetCenterXY());
+                                particles_vec[i]->SetPosition(parent->GetPoints().GetCenter());
             			particles_vec[i]->Reborn();
             		}
             	}
@@ -113,7 +113,7 @@ DamageEffect* getNewDamageEffect(int color_id, BaseSpaceEntity* parent)
         damage->SetParticlesNum(particles_num);
                 
         damage->SetParent(parent);
-        damage->SetCenter(parent->GetPoints().GetCenterXY());
+        damage->SetCenter(parent->GetPoints().GetCenter());
                 
         damage->CreateParticles();
                 

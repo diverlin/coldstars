@@ -178,8 +178,7 @@ void drawTexturedPoint(GLuint texture, const Vec2<float>& center, float size, fl
 
 
 void drawLine(TextureOb* texOb, 
-              const Vec2<float>& start_pos, 
-              float z_pos, 
+              const Vec3<float>& start_pos, 
               float len, 
               float angle_inD, 
               int half_h)
@@ -188,14 +187,14 @@ void drawLine(TextureOb* texOb,
     	int frame = texOb->updateAnimationFrame();
     		
     	glPushMatrix();
-    		glTranslatef(start_pos.x, start_pos.y, 0.0);
+    		glTranslatef(start_pos.x, start_pos.y, start_pos.z);
     		glRotatef(angle_inD, 0.0, 0.0, 1.0);
 
     		glBegin(GL_QUADS);
-      			glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(0,   -half_h, z_pos);
-      			glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f(len, -half_h, z_pos);
-      			glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f(len,  half_h, z_pos);
-      			glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(0,    half_h, z_pos);
+      			glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(0,   -half_h, 0.0);
+      			glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f(len, -half_h, 0.0);
+      			glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f(len,  half_h, 0.0);
+      			glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(0,    half_h, 0.0);
     		glEnd();
     	glPopMatrix();
 }
