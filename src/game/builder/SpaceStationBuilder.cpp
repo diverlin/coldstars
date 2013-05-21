@@ -112,11 +112,16 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
         data_life.dying_time = 10*texOb->size_id;
         
         int size_threshold = 2; 
-    	if ( (texOb->size_id < size_threshold) or (mesh != NULL) )
+    	//if ( (texOb->size_id < size_threshold) or (mesh != NULL) )
+       		//data_korpus.draw_turrels = false; 
+    	//else
+       		//data_korpus.draw_turrels = true; 
+              
+        if (texOb->size_id < size_threshold)
        		data_korpus.draw_turrels = false; 
     	else
        		data_korpus.draw_turrels = true; 
-                           
+       		             
     	spacestation->SetSubSubTypeId(ENTITY::TYPE::SPACESTATION_MILITARY_ID);
     	spacestation->SetKorpusData(data_korpus);
 	spacestation->SetLifeData(data_life);

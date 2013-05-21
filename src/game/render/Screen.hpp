@@ -50,6 +50,8 @@ class Screen : public SFML_Wrapper
 		
         	void Resize(int, int);   
 		void Draw();
+		
+		int GetFramesCounter() const { return frames_counter; }
 
     	private:
       		Screen();

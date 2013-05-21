@@ -20,6 +20,8 @@
 #include "../common/rand.hpp"
 #include "../common/constants.hpp"
 #include "../render/Render.hpp"
+#include "../render/Screen.hpp"
+#include "../resources/ShaderCollector.hpp"
 
 LazerTraceEffect::LazerTraceEffect(TextureOb* _texOb, Vec3<float>* _pTo_start_pos, Vec3<float>* _pTo_end_pos)
 {
@@ -98,12 +100,18 @@ void LazerTraceEffect::updateAngleAndLen()
 void LazerTraceEffect::Render()
 {
 	if (is_alive == true)
-	{
-     	    	 drawLine(texOb, 
-    		 *pTo_start_pos, 
-    		 len, 
-    		 angle_inD, 
-    		 texOb->GetFrameHeight()/4);	
+	{		 
+		glUseProgram(ShaderCollector::Instance().flash);
+		
+		glUniform1i(glGetUniformLocation(ShaderCollector::Instance().flash, "iTexture_0"), 0);
+		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().flash, "iTime"), Screen::Instance().GetElapsedTimeInSeconds()*10.0);
+		
+		glActiveTexture(GL_TEXTURE0);		
+		
+		drawLine(texOb, *pTo_start_pos, len, angle_inD, texOb->GetFrameHeight()/4);			
+		
+		glUseProgram(0);
+		glActiveTexture(GL_TEXTURE0);
 	}
 }
 
