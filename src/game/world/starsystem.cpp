@@ -218,7 +218,7 @@ void StarSystem::Add(BasePlanet* object, BaseSpaceEntity* parent, int it)
         object->SetStarSystem(this);
         object->SetPlaceTypeId(ENTITY::SPACE_ID);
         
-        object->GetOrbit()->SetIt(it);
+        object->GetOrbit().SetIt(it);
         object->UpdatePosition();
         
 	switch(object->GetTypeId())
@@ -781,12 +781,12 @@ void StarSystem::DrawOrbits()
 {
         for(unsigned int i = 0; i < PLANET_vec.size(); i++) 
 	{ 
-		PLANET_vec[i]->GetOrbit()->DrawPath(); 
+		PLANET_vec[i]->GetOrbit().DrawPath(); 
 	}
 
 	for(unsigned int i = 0; i < ASTEROID_vec.size(); i++)
 	{ 
-		ASTEROID_vec[i]->GetOrbit()->DrawPath(); 
+		ASTEROID_vec[i]->GetOrbit().DrawPath(); 
 	}
 }
  

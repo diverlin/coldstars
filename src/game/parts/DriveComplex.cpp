@@ -231,7 +231,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
 
     		case ENTITY::ASTEROID_ID:
     		{ 
-        		target_pos = ((Asteroid*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;         	
+        		target_pos = ((Asteroid*)target)->GetOrbit().GetNextTurnPosition() + target_offset;         	
         		break;
     		} 
     	     

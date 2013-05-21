@@ -39,7 +39,7 @@ class BasePlanet : public BaseSpaceEntity
       		virtual void PutChildsToGarbage() const {};
       		
 		void SetPlanetData(PlanetData data_planet) { this->data_planet = data_planet; };
-		Orbit* GetOrbit() const { return orbit; };
+		Orbit& GetOrbit() { return orbit; };
 
 		void CreateOrbit();
 		
@@ -47,7 +47,7 @@ class BasePlanet : public BaseSpaceEntity
 				
 	protected:
 		PlanetData data_planet;   
-		Orbit* orbit;  	
+		Orbit orbit;  	
 				
 		virtual void PostDeathUniqueEvent(bool);
 		void UpdatePosition();

@@ -270,7 +270,7 @@ void Cursor::RenderFocusedObjectStuff() const
 
 			case ENTITY::ASTEROID_ID:
 			{
-				((Asteroid*)focused_ob)->GetOrbit()->DrawPath();
+				((Asteroid*)focused_ob)->GetOrbit().DrawPath();
 								
 				break;
 			}
@@ -282,7 +282,7 @@ void Cursor::RenderFocusedObjectStuff() const
 									
 			case ENTITY::PLANET_ID:
 			{
-				((Planet*)focused_ob)->GetOrbit()->DrawPath();
+				((Planet*)focused_ob)->GetOrbit().DrawPath();
 								
 				break;
 			}
