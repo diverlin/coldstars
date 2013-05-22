@@ -66,7 +66,8 @@ void GuiVehicle2::CreateFunctionalItemSlotsCircleGeometry(Vehicle* vehicle, floa
         			button_subtype_id = vehicle->slot_total_vec[i]->GetSubSubTypeId();
         		}
 			           			  
-          		ButtonTrigger* button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_purple, button_subtype_id, getTypeStr(button_subtype_id));  
+			TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;
+          		ButtonTrigger* button = new ButtonTrigger(textureOb, button_subtype_id, getTypeStr(button_subtype_id));  
 			button_slot_vec.push_back(GuiPair<BaseButton*, ItemSlot*>(button, vehicle->slot_total_vec[i]));
 			button_map.insert(std::make_pair(button->GetSubTypeId(), button));
 		}

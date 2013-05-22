@@ -89,6 +89,7 @@ class BaseItem : public BaseDrawable
 		void UpdateInfo();
 
       		virtual void Render(const Box&, const Vec2<float>&, bool draw_text = true);
+      		void RenderKorpus(const Box&);
       		void RenderInfo(const Vec2<float>&, float offset_x = 0, float offset_y = 0); 
 
 	protected:
