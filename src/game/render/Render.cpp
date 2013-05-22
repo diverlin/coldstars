@@ -31,7 +31,6 @@ void initGl(int width, int height)
 
   	// Enable Z-buffer read and write
   	//glEnable(GL_DEPTH_TEST);
-  	//glDepthMask(GL_TRUE);
   	glDepthMask(GL_TRUE);
     	glClearDepth(1.f);
     
@@ -55,7 +54,7 @@ void resizeGl(int width, int height)
   	glMatrixMode(GL_PROJECTION);
   	glLoadIdentity();
 
-  	//gluPerspective(90.f, 1.f, 1.f, 500.f);
+  	//gluPerspective(60.f, 4./3., 1.f, 1000.f);
   	glOrtho(0, width, 0, height, 0.1f, 1000.0f);
   	
   	glMatrixMode(GL_MODELVIEW);
