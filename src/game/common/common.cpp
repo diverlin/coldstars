@@ -65,7 +65,7 @@ bool get_dPos_ToPoint(const Vec3<float>& p1, const Vec3<float>& p2, float veloci
     	{ 	    	
     	    	dir.Normalize();
     	       	d_pos.Set(dir * velocity);   
-       		rTo_angle_inD = atan2(dir.x, dir.y) * RADIAN_TO_DEGREE_RATE;
+       		rTo_angle_inD = atan2(dir.y, dir.x) * RADIAN_TO_DEGREE_RATE;
        		
        		return true;
     	}

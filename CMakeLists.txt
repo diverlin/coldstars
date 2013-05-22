@@ -9,7 +9,7 @@ add_definitions(-Wall -pedantic -std=c++0x -std=gnu++0x -pedantic-errors -Wextra
 
 find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
-#add_definitions(-DGL_GLEXT_PROTOTYPES -DGL3_PROTOTYPES)
+#add_definitions(-DGL_GLEXT_PRO                    TOTYPES -DGL3_PROTOTYPES)
 
 include_directories(dependencies/SFML2/include/)
 include_directories(dependencies/glew/include/)
