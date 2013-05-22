@@ -25,25 +25,24 @@ class TextureOb;
 
 #include "../common/points.hpp"
 #include "../common/constants.hpp"
+#include "../common/BaseDrawable.hpp"
 
-class Turrel
+class Turrel : public BaseDrawable
 {
         public:
                 Turrel(ItemSlot*);
                 ~Turrel();
-
-                void SetTextureOb(TextureOb* textureOb);
-                
-                Points& GetPoints() { return points; }
                 
                 void Render(float);                 
-               
-        private:
-                TextureOb* textureOb;
-                        
+
+       		virtual void PutChildsToGarbage() const {};
+       		
+		virtual void SaveData(boost::property_tree::ptree&) const {};
+		virtual void LoadData(const boost::property_tree::ptree&) {};
+		virtual void ResolveData() {};
+		               
+        private:                       
                 ItemSlot* slot;
-               
-                Points points;         
 }; 
 
 #endif 

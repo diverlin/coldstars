@@ -45,7 +45,7 @@ BlackHole::~BlackHole()
 	delete shockwave; 
 } 
  
-void BlackHole::SetCenter(const Vec3<float>& center) { points.SetCenter(center); shockwave->SetCenter(center); }
+void BlackHole::SetCenter(const Vec3<float>& center) { SetCenter(center); shockwave->SetCenter(center); }
  		
 void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
@@ -53,8 +53,8 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
 
 	if (time > 0)
 	{
-		points.SetCenter(points.GetCenter()+getRandXYVec3f(1, 2, 0));
-		shockwave->SetCenter(points.GetCenter());
+		SetCenter(GetCenter()+getRandXYVec3f(1, 2, 0));
+		shockwave->SetCenter(GetCenter());
 	
 		data_life.life_time--;
 		if (data_life.life_time < 0)
@@ -78,7 +78,7 @@ void BlackHole::UpdateInfo()
 
     	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
-    	info.addNameStr("pos:");       		info.addValueStr( str(points.GetCenter()) );
+    	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 }
       
 void BlackHole::Render_NEW(const Vec2<float>& scroll_coords)

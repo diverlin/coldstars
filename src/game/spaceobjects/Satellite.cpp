@@ -58,11 +58,11 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
 		//if (parent != NULL)
 		//{		
 			Vec3<float> new_pos;
-			new_pos.x = parent->GetPoints().GetCenter().x + orbit->GetPosition().x;
-			new_pos.y = parent->GetPoints().GetCenter().y + orbit->GetPosition().y;
-			new_pos.z = parent->GetPoints().GetCenter().z;
-			points.SetCenter(new_pos);
-			points.Update();
+			new_pos.x = parent->GetCenter().x + orbit->GetPosition().x;
+			new_pos.y = parent->GetCenter().y + orbit->GetPosition().y;
+			new_pos.z = parent->GetCenter().z;
+			SetCenter(new_pos);
+			UpdateOrientation();
 		//}
 		//else
 		//{
@@ -82,14 +82,14 @@ void Satellite::UpdateInfo()
     	//info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
     	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
-	info.addNameStr("pos:");       		info.addValueStr( str(points.GetCenter()) );
+	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 }
             
 void Satellite::UpdateRenderStuff()
 {
     	protection_complex.GetShieldEffect()->Update();
     	
-    	points.Update();
+    	UpdateOrientation();
 }
 
 void Satellite::RenderInSpace()

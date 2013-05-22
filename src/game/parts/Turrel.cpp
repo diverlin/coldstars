@@ -32,23 +32,17 @@ Turrel::Turrel(ItemSlot* slot)
 Turrel::~Turrel()
 {}
 
-void Turrel::SetTextureOb(TextureOb* textureOb)	
-{ 
-	this->textureOb = textureOb; 
-	points.SetScale(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0); 
-}
-
 void Turrel::Render(float turrel_angle_inD)
 {        
         if (slot->GetTarget() != NULL)
         {
-        	float _tur_xl = slot->GetTarget()->GetPoints().GetCenter().x - points.GetCenter().x;
-        	float _tur_yl = slot->GetTarget()->GetPoints().GetCenter().y - points.GetCenter().y;
+        	float _tur_xl = slot->GetTarget()->GetCenter().x - GetCenter().x;
+        	float _tur_yl = slot->GetTarget()->GetCenter().y - GetCenter().y;
 
         	float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
         	turrel_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
         }     
 
-    	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter(), turrel_angle_inD);
+    	drawQuad_inXYPlane(textureOb, GetScale(), GetCenter(), turrel_angle_inD);
 }        
                 

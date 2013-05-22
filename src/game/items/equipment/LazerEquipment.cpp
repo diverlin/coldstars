@@ -127,14 +127,14 @@ void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, flo
 	    		if (item_slot->GetOwnerVehicle()->GetKorpusData().draw_turrels == true)
 	    		{
 	        		_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-	                        	                             	      item_slot->GetTurrel()->GetPoints().GetpCenter(), 
-	                                	                              item_slot->GetTarget()->GetPoints().GetpCenter());
+	                        	                             	      item_slot->GetTurrel()->GetpCenter(), 
+	                                	                              item_slot->GetTarget()->GetpCenter());
 	        	}
 	    		else
 	    		{
 	        		_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-	                        	                                      item_slot->GetOwnerVehicle()->GetPoints().GetpCenter(), 
-	                                	                              item_slot->GetTarget()->GetPoints().GetpCenter());
+	                        	                                      item_slot->GetOwnerVehicle()->GetpCenter(), 
+	                                	                              item_slot->GetTarget()->GetpCenter());
 	        	}
 	    		item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_lazer_trace_effect);
 	    	    

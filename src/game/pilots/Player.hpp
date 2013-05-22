@@ -153,7 +153,7 @@ class Player : public Base
     		friend class UserInput;
 };
 
-bool isObjectOnScreen(const Points&);
+bool isObjectOnScreen(const Vec3<float>&, const Vec3<float>&);
 bool isObjectOnScreen(const Vec2<float>&, float);
 bool isPointOnScreen(const Vec2<float>&);
 

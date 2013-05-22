@@ -43,7 +43,7 @@ void ShieldEffect::SetParent(BaseSpaceEntity* parent)
 	this->parent = parent; 
 	
 	float rate = 1.3; 
-	scale.Set(rate*parent->GetPoints().GetScale().x, rate*parent->GetPoints().GetScale().y, rate*parent->GetPoints().GetScale().z); 
+	scale.Set(rate*parent->GetScale().x, rate*parent->GetScale().y, rate*parent->GetScale().z); 
 }
 
 
@@ -61,8 +61,8 @@ void ShieldEffect::Render(float parent_d_alpha) const
 
 	drawQuad_inXYPlane(textureOb,
 		    scale,  
-		    parent->GetPoints().GetCenter(), 
-		    parent->GetPoints().GetAngle().z);
+		    parent->GetCenter(), 
+		    parent->GetAngle().z);
 }
 
 

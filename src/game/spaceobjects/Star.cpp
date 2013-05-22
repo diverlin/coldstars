@@ -138,7 +138,7 @@ void Star::Render_NEW() const
         
 	glUniform2f(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "displ"), texture_offset1, texture_offset2);
 
-	renderMesh(mesh, points.GetCenter(), points.GetAngle(), points.GetScale(), false);
+	renderMesh(mesh, GetCenter(), GetAngle(), GetScale(), false);
 
         glUseProgram(0);
         glActiveTexture(GL_TEXTURE0);
@@ -147,7 +147,7 @@ void Star::Render_NEW() const
 void Star::Render_OLD() const
 {    
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);      		
-	renderMesh(mesh, points.GetCenter(), points.GetAngle(), points.GetScale(), ZYX);
+	renderMesh(mesh, GetCenter(), GetAngle(), GetScale(), ZYX);
 }
 
 void Star::UpdateInfo()
@@ -156,7 +156,7 @@ void Star::UpdateInfo()
     	info.addTitleStr("STAR");
     	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
     	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
-	info.addNameStr("pos:");       		info.addValueStr( str(points.GetCenter()) );
+	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 }
 
 void Star::PostDeathUniqueEvent(bool)

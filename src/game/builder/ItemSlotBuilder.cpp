@@ -61,7 +61,7 @@ ItemSlot* GetNewItemSlot(int subtype_id, unsigned long int id)
         		Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         	}
         
-                turrel->SetTextureOb(texOb_turrel);       
+                turrel->BindData2D(texOb_turrel);       
                 item_slot->SetTurrel(turrel);
         }
         

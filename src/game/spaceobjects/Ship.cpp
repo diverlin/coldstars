@@ -76,7 +76,7 @@ void Ship::UpdateInfo()
     	info.addNameStr("repair:");        	info.addValueStr( int2str(properties.repair) );
     	info.addNameStr("scan:");        	info.addValueStr( int2str(properties.scan) );
 	info.addNameStr("price:");       	info.addValueStr( int2str(data_korpus.price) );
-	info.addNameStr("pos:");       		info.addValueStr( str(points.GetCenter()) );
+	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 		
 	if (properties.grab_radius > 0)
 	{
@@ -101,7 +101,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 		UpdateSpecialAction();
 	
 		owner_npc->UpdateInSpace(time, show_effect);
-		points.Update();   
+		UpdateOrientation();   
 		weapon_complex.Fire(time, owner_npc->GetSkills().GetAttackNormalized(), show_effect);
 
     		if (properties.speed > 0) 
@@ -160,9 +160,9 @@ void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords)
 
 void Ship::RenderAtPlanet(const Vec3<float>& center)
 {
-       	points.SetCenter(center);
-        points.SetAngleZ(0);
-        points.Update();
+       	SetCenter(center);
+        SetAngleZ(0);
+        UpdateOrientation();
         
 	RenderKorpus();
 	
