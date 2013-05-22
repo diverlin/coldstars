@@ -19,10 +19,9 @@
 #ifndef BASEITEM_H
 #define BASEITEM_H
 
-#include "../common/Base.hpp"
+#include "../common/BaseDrawable.hpp"
 #include "../text/InfoTable.hpp"
 class ItemSlot; 
-class TextureOb; 
 class Box;
 
 struct ItemCommonData 
@@ -50,7 +49,7 @@ struct UnresolvedDataUniqueBaseItem
         int item_slot_id;
 };
 
-class BaseItem : public Base
+class BaseItem : public BaseDrawable
 {
     	public:
       		BaseItem();
@@ -58,7 +57,6 @@ class BaseItem : public Base
 
       		virtual void PutChildsToGarbage() const {};
       		
-		void SetTextureOb(TextureOb* textureOb)  { this->textureOb = textureOb; };
 		void SetParentSubTypeId(int parent_subtype_id) { this->parent_subtype_id = parent_subtype_id; };
 		void SetItemCommonData(const ItemCommonData& data_item) { this->data_item = data_item; deterioration = data_item.deterioration_normal; };
                 void SetItemSlot(ItemSlot* item_slot)  { this->item_slot = item_slot; };
@@ -66,7 +64,6 @@ class BaseItem : public Base
 
                 ItemSlot* GetItemSlot() const { return item_slot; };
                                                 
-            	TextureOb* GetTextureOb()   	const { return textureOb; };
 		unsigned int GetMass()      	const { return data_item.mass; };
 		unsigned int GetCondition() 	const { return condition; };
 		int GetPrice()              	const { return price; };
@@ -95,8 +92,6 @@ class BaseItem : public Base
       		void RenderInfo(const Vec2<float>&, float offset_x = 0, float offset_y = 0); 
 
 	protected:
-     		TextureOb* textureOb;
-
                 int race_id;
                 int locked_turns;
 		int condition;

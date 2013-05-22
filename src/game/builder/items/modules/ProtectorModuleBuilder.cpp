@@ -70,7 +70,7 @@ void ProtectorModuleBuilder::CreateNewInternals(ProtectorModule* protector_modul
     	protection_add = getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
     
         protector_module->SetParentSubTypeId(ENTITY::PROTECTOR_EQUIPMENT_ID);    
-        protector_module->SetTextureOb(texOb);
+        protector_module->BindData2D(texOb);
         protector_module->SetProtectionAdd(protection_add);
 }
 

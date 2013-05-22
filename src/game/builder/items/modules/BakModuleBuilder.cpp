@@ -70,7 +70,7 @@ void BakModuleBuilder::CreateNewInternals(BakModule* bak_module, int fuel_max_ad
     	fuel_max_add = getRandInt(MODULE::BAK::FUEL_MIN, MODULE::BAK::FUEL_MAX);
 
         bak_module->SetParentSubTypeId(ENTITY::BAK_EQUIPMENT_ID);    
-        bak_module->SetTextureOb(texOb);
+        bak_module->BindData2D(texOb);
     	bak_module->SetFuelMaxAdd(fuel_max_add);
 }
 

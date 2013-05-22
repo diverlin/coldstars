@@ -89,7 +89,7 @@ void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipmen
     	common_data.deterioration_normal = 1;
         
         scaner_equipment->SetScanOrig(scan_orig);  
-        scaner_equipment->SetTextureOb(texOb_item);    	
+        scaner_equipment->BindData2D(texOb_item);    	
         scaner_equipment->SetParentSubTypeId(ENTITY::SCANER_SLOT_ID);
         scaner_equipment->SetItemCommonData(common_data);
         scaner_equipment->SetCondition(common_data.condition_max);

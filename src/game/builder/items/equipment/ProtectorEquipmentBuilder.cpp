@@ -89,7 +89,7 @@ void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector
     	common_data.deterioration_normal = 1;
 
         protector_equipment->SetProtectionOrig(protection_orig);  
-        protector_equipment->SetTextureOb(texOb_item);
+        protector_equipment->BindData2D(texOb_item);
         protector_equipment->SetParentSubTypeId(ENTITY::PROTECTOR_SLOT_ID);
         protector_equipment->SetItemCommonData(common_data);
         protector_equipment->SetCondition(common_data.condition_max);

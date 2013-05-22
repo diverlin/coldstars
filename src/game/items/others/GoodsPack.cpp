@@ -123,7 +123,7 @@ GoodsPack* GetNewGoodsPack(int subtype_id, unsigned long int id)
 	
 	GoodsPack* goodsPack = new GoodsPack(id);
 	goodsPack->SetSubTypeId(subtype_id);
-	goodsPack->SetTextureOb(texOb);
+	goodsPack->BindData2D(texOb);
 	
 	EntityManager::Instance().RegisterEntity(goodsPack);
 	        

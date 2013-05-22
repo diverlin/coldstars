@@ -90,7 +90,7 @@ void BakEquipmentBuilder::CreateNewInternals(BakEquipment* bak_equipment, int te
 
         bak_equipment->SetFuelMaxOrig(fuel_max_orig);
         bak_equipment->SetFuel(fuel_max_orig);
-        bak_equipment->SetTextureOb(texOb_item);    	
+        bak_equipment->BindData2D(texOb_item);    	
         bak_equipment->SetParentSubTypeId(ENTITY::BAK_SLOT_ID);
         bak_equipment->SetItemCommonData(common_data);
         bak_equipment->SetCondition(common_data.condition_max);

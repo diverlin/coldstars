@@ -73,7 +73,7 @@ void GravityArtefactBuilder::CreateNewInternals(GravityArtefact* gravity_artefac
     	common_data.deterioration_normal = 1;
 
         gravity_artefact->SetGravity(gravity);
-        gravity_artefact->SetTextureOb(texOb_item);    	
+        gravity_artefact->BindData2D(texOb_item);    	
         gravity_artefact->SetParentSubTypeId(ENTITY::ARTEFACT_SLOT_ID);
         gravity_artefact->SetItemCommonData(common_data);
         gravity_artefact->SetCondition(common_data.condition_max);
