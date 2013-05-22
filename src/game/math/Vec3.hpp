@@ -14,6 +14,7 @@ class Vec3
                 VARTYPE z;
                 
                 Vec3():x(0), y(0), z(0) {}
+                Vec3(float val):x(val), y(val), z(val) {}
                 Vec3(VARTYPE x, VARTYPE y, VARTYPE z):x(x), y(y), z(z) {}
                 Vec3(const Vec3<VARTYPE>& v) { *this = v; }
                 ~Vec3() {};

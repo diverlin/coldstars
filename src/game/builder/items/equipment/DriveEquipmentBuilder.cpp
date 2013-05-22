@@ -23,6 +23,8 @@
 #include "../../../world/EntityManager.hpp"
 #include "../../../common/rand.hpp"
 #include "../../../resources/TextureManager.hpp"
+#include "../../../resources/MeshCollector.hpp"
+#include "../../../animations/AnimationConstantRotationAxisX.hpp"
 
 DriveEquipmentBuilder& DriveEquipmentBuilder::Instance()
 {
@@ -74,8 +76,19 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
        		tech_level = 1; 
 	}
 
-        TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::DRIVE_EQUIPMENT_ID);   
-        //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 
+	Mesh* mesh = NULL;
+	TextureOb* texOb = NULL;
+	if (0)
+	{
+		texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::DRIVE_EQUIPMENT_ID); 
+       	}
+       	else
+       	{	
+       		mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
+		texOb = mesh->GetTextureOb(); 
+	}
+	
+        //texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 
 
         speed_orig      = getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * (1 + EQUIPMENT::DRIVE::SPEED_TECHLEVEL_RATE*tech_level);
         hyper_orig      = getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX) * (1 + EQUIPMENT::DRIVE::HYPER_TECHLEVEL_RATE*tech_level);
@@ -88,9 +101,24 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
     	common_data.deterioration_normal = 1;
     	common_data.deterioration_overload_rate = EQUIPMENT::DRIVE::OVERLOAD_DETERIORATION_RATE;
     
+    	if (mesh != NULL)
+	{
+		Vec3<float> scale(50);
+		drive_equipment->BindData3D(mesh, mesh->GetTextureOb(), scale);
+		
+		float step = getRandInt(10, 40)*0.01;
+		AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);
+		drive_equipment->SetRenderAnimation(animation_program);
+		drive_equipment->SetAngle(Vec3<float>(0, getRandInt(10, 45), getRandInt(10, 45)));	
+		drive_equipment->SetZYX(true);		
+    	}
+    	else
+    	{
+		drive_equipment->BindData2D(texOb);    		
+    	}
+            
         drive_equipment->SetSpeedOrig(speed_orig);  
         drive_equipment->SetHyperOrig(hyper_orig);
-        drive_equipment->BindData2D(texOb_item);    	
         drive_equipment->SetParentSubTypeId(ENTITY::DRIVE_SLOT_ID);
         drive_equipment->SetItemCommonData(common_data);
         drive_equipment->SetCondition(common_data.condition_max);

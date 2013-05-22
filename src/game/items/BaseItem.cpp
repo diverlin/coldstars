@@ -134,7 +134,27 @@ void BaseItem::RenderInfo(const Vec2<float>& pos, float offset_x, float offset_y
 /* virtual */
 void BaseItem::Render(const Box& box, const Vec2<float>& gui_offset, bool draw_text)
 {
-       	drawQuad_inXYPlane(textureOb, box); 
+	RenderKorpus(box);
+}
+
+void BaseItem::RenderKorpus(const Box& box)
+{
+	if (Is3D())
+	{
+		disable_BLEND();
+		Vec3<float> v(0.0);
+		Color4<float> c(1.0, 1.0, 1.0, 1.0);
+		SetCenter(box.GetCenter());
+		//SetAngle(box.GetAngle());
+		UpdateRenderAnimation();
+		//SetScale(box.GetSize());
+		RenderMesh(v, c);
+		enable_BLEND();
+	}
+	else
+	{
+       		drawQuad_inXYPlane(textureOb, box); 
+	}
 }
 
 void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, const std::string& root) const

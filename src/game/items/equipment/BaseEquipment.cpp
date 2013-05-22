@@ -98,18 +98,8 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 
 /* virtual */
 void BaseEquipment::Render(const Box& box, const Vec2<float>& gui_offset, bool draw_text)
-{
-	//Rect rect(rect1);
-	//if (GetFunctioning() == false)
-	//{
-		//animation_notfunctioning->Update(rect);
-    	//}
-    	//else
-    	//{
-    		//animation_notfunctioning->Reset();
-    	//}
-    	
-    	drawQuad_inXYPlane(textureOb, box);
+{    	
+    	RenderKorpus(box);
     
     	for (unsigned int i=0; i<modules_vec.size(); i++)
     	{
