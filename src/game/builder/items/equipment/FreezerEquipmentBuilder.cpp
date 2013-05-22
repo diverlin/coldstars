@@ -88,7 +88,7 @@ void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equip
     	common_data.deterioration_normal = 1;
         
         freezer_equipment->SetFreezeOrig(freeze_orig);  
-        freezer_equipment->SetTextureOb(texOb_item);    	
+        freezer_equipment->BindData2D(texOb_item);    	
         freezer_equipment->SetParentSubTypeId(ENTITY::FREEZER_SLOT_ID);
         freezer_equipment->SetItemCommonData(common_data);
         freezer_equipment->SetCondition(common_data.condition_max);

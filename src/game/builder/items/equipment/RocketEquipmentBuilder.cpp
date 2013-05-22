@@ -106,7 +106,7 @@ void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipmen
 	rocket_equipment->SetRadiusOrig(radius_orig);   
         rocket_equipment->SetBulletData(data_bullet); 
     	rocket_equipment->SetAmmo(ammo_max_orig*0.6);                
-        rocket_equipment->SetTextureOb(texOb_item);    	
+        rocket_equipment->BindData2D(texOb_item);    	
         rocket_equipment->SetParentSubTypeId(ENTITY::WEAPON_SLOT_ID);
         rocket_equipment->SetItemCommonData(common_data);
         rocket_equipment->SetCondition(common_data.condition_max);

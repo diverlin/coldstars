@@ -72,7 +72,7 @@ void RocketModuleBuilder::CreateNewInternals(RocketModule* rocket_module, int am
     	radius_add = getRandInt(MODULE::ROCKET::RADIUS_MIN, MODULE::ROCKET::RADIUS_MAX);
     
         rocket_module->SetParentSubTypeId(ENTITY::ROCKET_EQUIPMENT_ID);    
-        rocket_module->SetTextureOb(texOb);
+        rocket_module->BindData2D(texOb);
         rocket_module->SetAmmoMaxAdd(ammo_max_add);
         rocket_module->SetDamageAdd(damage_add);
         rocket_module->SetRadiusAdd(radius_add);

@@ -71,7 +71,7 @@ void LazerModuleBuilder::CreateNewInternals(LazerModule* lazer_module, int damag
     	radius_add = getRandInt(MODULE::LAZER::RADIUS_MIN, MODULE::LAZER::RADIUS_MAX);
     
         lazer_module->SetParentSubTypeId(ENTITY::LAZER_EQUIPMENT_ID);    
-        lazer_module->SetTextureOb(texOb);
+        lazer_module->BindData2D(texOb);
         lazer_module->SetDamageAdd(damage_add);
         lazer_module->SetRadiusAdd(radius_add);
 }

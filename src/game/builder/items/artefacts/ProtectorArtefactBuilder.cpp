@@ -73,7 +73,7 @@ void ProtectorArtefactBuilder::CreateNewInternals(ProtectorArtefact* protector_a
     	common_data.deterioration_normal = 1;
 
         protector_artefact->SetProtection(protection);
-        protector_artefact->SetTextureOb(texOb_item);    	
+        protector_artefact->BindData2D(texOb_item);    	
         protector_artefact->SetParentSubTypeId(ENTITY::ARTEFACT_SLOT_ID);
         protector_artefact->SetItemCommonData(common_data);
         protector_artefact->SetCondition(common_data.condition_max);
