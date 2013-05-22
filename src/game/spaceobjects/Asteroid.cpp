@@ -70,12 +70,12 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
                 goods_pack->Increase(4);
 
                 Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb, goods_pack);
-		starsystem->AddContainer(container, points.GetCenter());
+		starsystem->AddContainer(container, GetCenter());
    	}
    	
    	if (show_effect == true)
      	{
-        	createExplosion(starsystem, points.GetCenter(), collision_radius/2);        		
+        	createExplosion(starsystem, GetCenter(), collision_radius/2);        		
         }
         			
 }    
@@ -90,7 +90,7 @@ void Asteroid::UpdateInfo()
     	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(data_planet.speed*100)));
-	info.addNameStr("pos:");       		info.addValueStr( str(points.GetCenter()) );
+	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 }     
 
 void Asteroid::Render_NEW(const Vec2<float>& scroll_coords)

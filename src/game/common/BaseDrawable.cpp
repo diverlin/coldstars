@@ -51,14 +51,14 @@ void BaseDrawable::BindData3D(Mesh* mesh, TextureOb* textureOb, const Vec3<float
 {
 	this->mesh = mesh;
 	this->textureOb = textureOb; 
-	points.SetScale(scale);
+	SetScale(scale);
 	collision_radius = (scale.x + scale.y) / 3.0;
 }
 
 void BaseDrawable::BindData2D(TextureOb* textureOb)
 {
 	this->textureOb = textureOb; 
-	points.SetScale(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0);
+	SetScale(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0);
 	collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight()) / 3.0;
 } 
 
@@ -66,14 +66,14 @@ void BaseDrawable::BindData2D(TextureOb* textureOb)
 void BaseDrawable::RenderCollisionRadius() const
 {
 	TextureOb* collision_radius_texOb =  GuiTextureObCollector::Instance().radar_range;
-	drawQuad_inXYPlane(collision_radius_texOb, Vec3<float>(collision_radius, collision_radius, collision_radius), points.GetCenter(), 0);
+	drawQuad_inXYPlane(collision_radius_texOb, Vec3<float>(collision_radius, collision_radius, collision_radius), GetCenter(), 0);
 }
 
 void BaseDrawable::UpdateRenderAnimation()
 {
 	if (animation_program != NULL)
 	{
-		animation_program->Update(points.GetAngle());
+		animation_program->Update(GetAngle());
 	}
 }
 
@@ -92,7 +92,7 @@ void BaseDrawable::RenderMesh(const Vec2<float>& scroll_coords, const Color4<flo
      	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
      	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "iTexture_0"), 0);
      	
-	renderMesh(mesh, points.GetCenter(), points.GetAngle(), points.GetScale(), ZYX);
+	renderMesh(mesh, GetCenter(), GetAngle(), GetScale(), ZYX);
 		
      	glUseProgram(0);
      	glActiveTexture(GL_TEXTURE0);

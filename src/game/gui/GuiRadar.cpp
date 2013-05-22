@@ -87,7 +87,7 @@ void GuiRadar::Render() const
 {
 	float range_diameter = 2*player->GetNpc()->GetVehicle()->GetProperties().radar;
 	Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
-	range_rect.SetCenter(rect.GetCenter() + player->GetNpc()->GetVehicle()->GetPoints().GetCenter() * scale);
+	range_rect.SetCenter(rect.GetCenter() + player->GetNpc()->GetVehicle()->GetCenter() * scale);
 	
 	drawTexturedRect(textureOb_background, rect, -2.0);
 	drawTexturedRect(textureOb_bar, rect, -2.0);
@@ -132,7 +132,7 @@ void GuiRadar::Render() const
 				}
 			}
 			
-			drawParticle(size, rect.GetCenter() + entity_vec[i]->GetPoints().GetCenter()*scale);			
+			drawParticle(size, rect.GetCenter() + entity_vec[i]->GetCenter()*scale);			
 		}
 	disable_POINTSPRITE(); 
 }

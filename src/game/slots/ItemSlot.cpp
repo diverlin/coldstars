@@ -354,7 +354,7 @@ void ItemSlot::DropItemToSpace(Vehicle* vehicle)
          
         Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, item);
         
-	vehicle->GetStarSystem()->AddContainer(container, vehicle->GetPoints().GetCenter());
+	vehicle->GetStarSystem()->AddContainer(container, vehicle->GetCenter());
 }
         
 bool ItemSlot::SwapItem(ItemSlot* slot)
@@ -500,7 +500,7 @@ bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* _target) const
 		return true;
 	}
 	
-        float dist = distanceBetween(GetOwnerVehicle()->GetPoints().GetCenter(), _target->GetPoints().GetCenter());                                               
+        float dist = distanceBetween(GetOwnerVehicle()->GetCenter(), _target->GetCenter());                                               
         if (dist < GetItemRadius())
         {
                 return true;

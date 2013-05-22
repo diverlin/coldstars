@@ -19,8 +19,10 @@
 #include "Orientation.hpp"
 #include "../common/Logger.hpp"
 
-Orientation::Orientation()
-{}
+Orientation::Orientation():is_updated(false)
+{
+        uOrient.Set(1.0, 0.0, 0.0); // -> (0 degree)
+}
 
 /* virtual */
 Orientation::~Orientation()
@@ -30,19 +32,36 @@ Orientation::~Orientation()
 	#endif
 }
 
+void Orientation::UpdateOrientation()
+{
+	if (is_updated == false)
+    	{   
+    	       	float angle_radian = angle.z/RADIAN_TO_DEGREE_RATE;
+         
+        	uOrient.x = cos(angle_radian);
+        	uOrient.y = sin(angle_radian);
+ 		uOrient.z = 0.0; 
+ 		
+ 		points.Update(center, angle, scale, uOrient);
+ 		
+    		is_updated = true;
+    	}
+    		
+}		
+
 void Orientation::SaveDataUniqueOrientation(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	#if SAVELOAD_LOG_ENABLED == 1
 	Logger::Instance().Log(" Orientation("+int2str(GetId())+")::SaveDataUniqueOrientation", SAVELOAD_LOG_DIP);
 	#endif
 		
-	save_ptree.put(root+"data_unresolved_Orientation.center.x", points.GetCenter().x);
-	save_ptree.put(root+"data_unresolved_Orientation.center.y", points.GetCenter().y);
-	save_ptree.put(root+"data_unresolved_Orientation.center.z", points.GetCenter().z);
+	save_ptree.put(root+"data_unresolved_Orientation.center.x", GetCenter().x);
+	save_ptree.put(root+"data_unresolved_Orientation.center.y", GetCenter().y);
+	save_ptree.put(root+"data_unresolved_Orientation.center.z", GetCenter().z);
 	
-	save_ptree.put(root+"data_unresolved_Orientation.angle.x", points.GetAngle().x);
-	save_ptree.put(root+"data_unresolved_Orientation.angle.y", points.GetAngle().y);
-	save_ptree.put(root+"data_unresolved_Orientation.angle.z", points.GetAngle().z);
+	save_ptree.put(root+"data_unresolved_Orientation.angle.x", GetAngle().x);
+	save_ptree.put(root+"data_unresolved_Orientation.angle.y", GetAngle().y);
+	save_ptree.put(root+"data_unresolved_Orientation.angle.z", GetAngle().z);
 		
 }
 

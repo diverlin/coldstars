@@ -19,11 +19,8 @@
 #include "points.hpp"
 #include "constants.hpp"
 
-Points::Points():is_updated(false)
-{
-        
-        uOrient.Set(1.0, 0.0, 0.0); // -> (0 degree)
-}
+Points::Points()
+{}
 
 Points::~Points()
 {}              
@@ -53,32 +50,20 @@ void Points::addMidFarLeftPoint()
 }
 
 
-void Points::Update()
+void Points::Update(const Vec3<float>& center, const Vec3<float>& angle, const Vec3<float>& scale, const Vec3<float>& uOrient)
 {
-    	if (is_updated == false)
-    	{   
-        	Vec3<float> pos = center;
+       	Vec3<float> pos = center;
 
-       		float angle_radian = angle.z/RADIAN_TO_DEGREE_RATE;
-         
-        	uOrient.x = cos(angle_radian);
-        	uOrient.y = sin(angle_radian);
- 		uOrient.z = 0.0;
- 		
- 		float cosa = uOrient.x;
- 		float sina = uOrient.y; 		 
-        	for (unsigned int i=0; i<vector.size(); i++)
-        	{   
-           		////// rotation around center
-            		vector[i]->x = cosa*scale.x*vector_orig[i]->x - sina*scale.y*vector_orig[i]->y;
-            		vector[i]->y = sina*scale.x*vector_orig[i]->x + cosa*scale.y*vector_orig[i]->y;  
-            		////// moving to position
-            		vector[i]->x += pos.x;
-            		vector[i]->y += pos.y;
-            		
-            		vector[i]->z = vector_orig[i]->z;
-        	}   
-        	is_updated = true;
+       	for (unsigned int i=0; i<vector.size(); i++)
+       	{   
+       		////// rotation around center
+       		vector[i]->x = uOrient.x*scale.x*vector_orig[i]->x - uOrient.y*scale.y*vector_orig[i]->y;
+		vector[i]->y = uOrient.y*scale.x*vector_orig[i]->x + uOrient.x*scale.y*vector_orig[i]->y;  
+		////// moving to position
+		vector[i]->x += pos.x;
+		vector[i]->y += pos.y;
+		
+		vector[i]->z = vector_orig[i]->z;
     	}
 }        
          

@@ -70,15 +70,15 @@ void Container::UpdateInfo()
     	info.addTitleStr("CONTAINER");
     	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
     	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
-    	info.addNameStr("pos:");       		info.addValueStr( str(points.GetCenter()) );
+    	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 }        
        	
 void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 {
 	UpdateInfo();
-	Vec2<float> pos(points.GetCenter().x - scroll_coords.x - 200, points.GetCenter().y - scroll_coords.y);
+	Vec2<float> pos(GetCenter().x - scroll_coords.x - 200, GetCenter().y - scroll_coords.y);
      	drawInfoIn2Column(info.title_list, info.value_list, pos);
-     	item_slot->GetItem()->RenderInfo(points.GetCenter(), scroll_coords.x, scroll_coords.y);
+     	item_slot->GetItem()->RenderInfo(GetCenter(), scroll_coords.x, scroll_coords.y);
 }
  
 /* virtual */    
@@ -92,7 +92,7 @@ void Container::PostDeathUniqueEvent(bool show_effect)
         {
         	if (show_effect == true)
         	{
-        		createExplosion(starsystem, points.GetCenter(), textureOb->size_id);  
+        		createExplosion(starsystem, GetCenter(), textureOb->size_id);  
         	}
         }
 }
@@ -107,7 +107,7 @@ void Container::UpdateInSpace(int time, bool show_effect)
      		if (fabs(velocity) > 0.2f)
      		{
 			velocity -= 0.1f;
-        		get_dPos_ToPoint(points.GetCenter(), target_pos, velocity, d_pos2);
+        		get_dPos_ToPoint(GetCenter(), target_pos, velocity, d_pos2);
 
      		}  
      		//else
@@ -115,14 +115,14 @@ void Container::UpdateInSpace(int time, bool show_effect)
      			//d_pos2.Set(0.0f, 0.0f);
      		//}
 
-		points.SetCenter(points.GetCenter() + d_pos + d_pos2);
+		SetCenter(GetCenter() + d_pos + d_pos2);
      	}
 }
        		
 void Container::Render2D()
 { 
 	UpdateRenderAnimation();
-    	drawQuad_inXYPlane(textureOb, points.GetScale(), points.GetCenter(), points.GetAngle().z);
+    	drawQuad_inXYPlane(textureOb, GetScale(), GetCenter(), GetAngle().z);
 }
 
 void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const	

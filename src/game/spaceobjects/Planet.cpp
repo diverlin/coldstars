@@ -104,7 +104,7 @@ void Planet::UpdateInfo()
 	info.addNameStr("armor:");  	 info.addValueStr(int2str(data_life.armor));
 	info.addNameStr("population:");  info.addValueStr(int2str(population));
 	info.addNameStr("dock_veh:");    info.addValueStr(land->GetDockVehicleStr());
-	info.addNameStr("pos:");       		info.addValueStr( str(points.GetCenter()) );
+	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 }
 
 void Planet::PostDeathUniqueEvent(bool)

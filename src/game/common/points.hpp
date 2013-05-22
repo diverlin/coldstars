@@ -37,31 +37,7 @@ class Points
         The points with prefix <<_origin>> are used internally in the class for rotation calculation.
         ******************************************/
         
-        public:
-                void SetParentCenter(Vec3<float> parent_center) { this->parent_center.Set(parent_center); };
-                
-                void SetCenter(float x, float y, float z)	{ center.Set(x, y, z); is_updated = false; };
-                void SetCenter(const Vec3<float>& center)       { this->center = center; is_updated = false; };
-
-                void SetAngleZ(float angle_z) 	{ this->angle.z = angle_z; is_updated = false; };
-                void SetAngle(Vec3<float> angle) { this->angle = angle; is_updated = false; };
-                               
-                void SetScale(float x, float y, float z) { scale.Set(x,y,z); };
-                void SetScale(const Vec3<float> scale) { this->scale = scale; };
-                                        
-        	float GetWidth() const  { return scale.x; };
-        	float GetHeight() const { return scale.y; };
-
-                const Vec3<float>& GetAngle() const { return angle; };        
-                Vec3<float>& GetAngle() { return angle; };
-                float* GetpAngleZ() { return &angle.z; };
-                        
-                const Vec3<float>& GetCenter() const { return center; }; 
-                const Vec3<float>& GetScale()  const { return scale; }; 
-                
-                Vec3<float>* GetpCenter() { return &center; };  
-                Vec3<float>* GetpParentCenter() { return &parent_center; };   
-                      
+        public:       
                 const Vec3<float>& GetBottomLeft()  const { return bottomLeft; };  
                 const Vec3<float>& GetBottomRight() const { return bottomRight; }; 
                 const Vec3<float>& GetTopRight()    const { return topRight; };    
@@ -80,19 +56,9 @@ class Points
                 void addMidLeftPoint();
                 void addMidFarLeftPoint();
 
-                void Update();                
+                void Update(const Vec3<float>& center, const Vec3<float>& angle, const Vec3<float>& scale, const Vec3<float>& uOrient);              
                 
         private:
-                bool is_updated;
-
-                Vec3<float> center;                  
-                Vec3<float> scale;
-                Vec3<float> angle;
-          
-          	Vec3<float> uOrient;
-          		
-                Vec3<float> parent_center; 
-              
                 std::vector<Vec3<float>*> vector_orig;
                 std::vector<Vec3<float>*> vector;
                                              

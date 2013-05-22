@@ -160,13 +160,13 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 
 		if (item_slot->GetOwnerVehicle()->GetKorpusData().draw_turrels == true)
     		{
-        		start_pos = item_slot->GetTurrel()->GetPoints().GetCenter(); 
-        		angle_inD = item_slot->GetTurrel()->GetPoints().GetAngle().z;
+        		start_pos = item_slot->GetTurrel()->GetCenter(); 
+        		angle_inD = item_slot->GetTurrel()->GetAngle().z;
         	}
         	else
     		{
-         		start_pos = item_slot->GetOwnerVehicle()->GetPoints().GetCenter();
-         		angle_inD = item_slot->GetOwnerVehicle()->GetPoints().GetAngle().z;
+         		start_pos = item_slot->GetOwnerVehicle()->GetCenter();
+         		angle_inD = item_slot->GetOwnerVehicle()->GetAngle().z;
     		}  
         
                 rocket_bullet->SetOwnerId(item_slot->GetOwnerVehicle()->GetId());

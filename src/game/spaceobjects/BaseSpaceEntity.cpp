@@ -51,7 +51,7 @@ BaseSpaceEntity::~BaseSpaceEntity()
 
 void BaseSpaceEntity::MovingByExternalForce(const Vec3<float>& _target_pos, float force)
 {
-	get_dPos_ToPoint(points.GetCenter(), _target_pos, force, d_pos);
+	get_dPos_ToPoint(GetCenter(), _target_pos, force, d_pos);
 }
 
 /* virtual */
@@ -66,7 +66,7 @@ void BaseSpaceEntity::Hit(int damage, bool show_effect)
 
 	if (show_effect == true)
 	{	
-		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, points.GetCenter(), COLOR::COLOR4I_RED_LIGHT, collision_radius);
+		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, GetCenter(), COLOR::COLOR4I_RED_LIGHT, collision_radius);
 		starsystem->Add(text); 
 	}
 
@@ -97,7 +97,7 @@ void BaseSpaceEntity::CheckDeath(bool show_effect)
 void BaseSpaceEntity::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 { 
 	UpdateInfo(); // virtual
-	Vec2<float> pos(points.GetCenter().x - scroll_coords.x, points.GetCenter().y - scroll_coords.y);
+	Vec2<float> pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
      	drawInfoIn2Column(info.title_list, info.value_list, pos);
 }
 
