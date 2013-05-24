@@ -174,7 +174,7 @@ class Vehicle : public BaseSpaceEntity
                 bool TryToGenerateEnergy(int);
                                 		
 		void TEST_DamageAndLockRandItems();
-
+        	
 	protected:
 		int special_action_id;
 	
@@ -224,8 +224,9 @@ class Vehicle : public BaseSpaceEntity
              	void RenderDriveEffect(float parent_d_alpha = 0.0) const;
           	void RenderShieldEffect(float parent_d_alpha = 0.0) const;
         	                
-        	void UpdateGrappleMicroProgram();       
-        	                                
+  
+        	void UpdateGrappleMicroProgram_inDynamic();
+        	        	                                
                 UnresolvedDataUniqueVehicle data_unresolved_Vehicle;
                 
                 void SaveDataUniqueVehicle(boost::property_tree::ptree&, const std::string&) const;		

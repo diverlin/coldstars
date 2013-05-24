@@ -45,7 +45,7 @@ class GrappleEquipment : public BaseEquipment
                                 
 		std::string GetTargetStr() const;
 
-		void UpdateGrabScenarioProgram();
+		void UpdateGrabScenarioProgram_inDynamic();
 		void RenderGrabTrail() const;
 				              
       		virtual void UpdateProperties();  

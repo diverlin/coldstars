@@ -96,6 +96,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 {   
 	CheckDeath(show_effect);
 	protection_complex.GetShieldEffect()->Update();
+    		
 	if (time > 0)
 	{
 		UpdateSpecialAction();
@@ -109,10 +110,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
        			drive_complex.UpdatePosition();
     		}
     
-    		if (properties.grab_radius > 0)
-    		{
-    			UpdateGrappleMicroProgram();
-    		}
+		UpdateGrappleMicroProgram_inDynamic();
     	}
 }
 
@@ -146,7 +144,7 @@ void Ship::RenderInSpace_2D() const
 void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords)
 {
 	UpdateRenderAnimation();
-	RenderMesh(scroll_coords, starsystem->GetColor4f());
+	RenderMeshLight(scroll_coords, starsystem->GetColor4f());
 
 	setColor4f(color);
 	enable_BLEND();

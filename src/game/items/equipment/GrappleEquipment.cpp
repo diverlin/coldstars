@@ -105,26 +105,28 @@ std::string GrappleEquipment::GetTargetStr() const
         return str;
 }
  
-        
-void GrappleEquipment::UpdateGrabScenarioProgram()
-{               
-       	const Vec3<float>& grapple_pos = item_slot->GetOwnerVehicle()->GetCenter(); // shortcut
+void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
+{              		
+       	Vehicle& vehicle = *item_slot->GetOwnerVehicle(); // shortcut
        			
         for (std::vector<BaseSpaceEntity*>::iterator it = target_vec.begin(); it != target_vec.end(); ++it)
         {
         	if (item_slot->CheckTarget(*it) == true)
         	{
-               		(*it)->MovingByExternalForce(item_slot->GetOwnerVehicle()->GetCenter(), GetStrength());        	
-
-       			float dist = distanceBetween(grapple_pos, (*it)->GetCenter()); 
-       			if (dist < item_slot->GetOwnerVehicle()->GetCollisionRadius()/2.0f)
+        	        Vec3<float> impulse_dir(vehicle.GetCenter() - (*it)->GetCenter());
+        		impulse_dir.Normalize();
+        	
+               		(*it)->ApplyImpulse(impulse_dir, 0.001* GetStrength());
+               		
+        		float dist = distanceBetween(vehicle.GetCenter(), (*it)->GetCenter()); 
+       			if (dist < 0.5*vehicle.GetCollisionRadius())
        			{
        				switch((*it)->GetTypeId())
        				{
       					case ENTITY::CONTAINER_ID:
        					{
        						Container* container = (Container*)(*it);
-       						if (item_slot->GetOwnerVehicle()->UnpackContainerItemToCargoSlot(container) == true)
+       						if (vehicle.UnpackContainerItemToCargoSlot(container) == true)
 						{
                                                         it = target_vec.erase(it);
                                                         return; // hack

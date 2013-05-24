@@ -60,8 +60,9 @@ class BaseDrawable : public Orientation
 		AnimationBase* animation_program;
 
 		void UpdateRenderAnimation();
-		void RenderMesh(const Vec2<float>&, const Color4<float>&) const;
-
+		void RenderMeshLight(const Vec2<float>&, const Color4<float>&) const;
+		void RenderMeshLightNormalMap(const Vec2<float>&, const Color4<float>&) const;
+		
 		UnresolvedDataUniqueBaseDrawable data_unresolved_BaseDrawable;
 		void SaveDataUniqueBaseDrawable(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueBaseDrawable(const boost::property_tree::ptree&);

@@ -67,7 +67,7 @@ class BaseSpaceEntity : public BaseDrawable
 
 		BaseSpaceEntity* GetParent() const { return parent; }
 
-		void MovingByExternalForce(const Vec3<float>&, float);
+		void ApplyImpulse(const Vec3<float>&, float);
 
 		virtual void TakeIntoAccountAgressor(Vehicle*) {};
 		virtual void Hit(int, bool);
@@ -80,7 +80,7 @@ class BaseSpaceEntity : public BaseDrawable
 	protected:
 		LifeData data_life;		
 
-		Vec3<float> d_pos;
+		Vec3<float> force;
 
 		StarSystem* starsystem;
 		int place_type_id;

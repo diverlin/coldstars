@@ -148,7 +148,7 @@ void BaseItem::RenderKorpus(const Box& box)
 		//SetAngle(box.GetAngle());
 		UpdateRenderAnimation();
 		//SetScale(box.GetSize());
-		RenderMesh(v, c);
+		RenderMeshLight(v, c);
 		enable_BLEND();
 	}
 	else

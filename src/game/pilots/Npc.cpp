@@ -115,7 +115,7 @@ void Npc::UpdateInSpaceInStatic()
 
         vehicle->UpdateAllFunctionalItemsInStatic();
 	vehicle->GetWeaponComplex().PrepareWeapons();
-        
+	        
 	if (player == NULL)
 	{
         	vehicle->CheckNeedsInStatic();

@@ -77,7 +77,8 @@ void BaseDrawable::UpdateRenderAnimation()
 	}
 }
 
-void BaseDrawable::RenderMesh(const Vec2<float>& scroll_coords, const Color4<float>& color) const
+
+void BaseDrawable::RenderMeshLight(const Vec2<float>& scroll_coords, const Color4<float>& color) const
 {
      	float ambient_factor = 0.25;
      	
@@ -98,6 +99,31 @@ void BaseDrawable::RenderMesh(const Vec2<float>& scroll_coords, const Color4<flo
      	glActiveTexture(GL_TEXTURE0);
 }
 		
+void BaseDrawable::RenderMeshLightNormalMap(const Vec2<float>& scroll_coords, const Color4<float>& color) const
+{
+     	float ambient_factor = 0.25;
+     	
+     	glUseProgram(ShaderCollector::Instance().light_normalmap);
+
+     	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_lightPos"), -scroll_coords.x, -scroll_coords.y, 0.0);
+     	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_eyePos"), -scroll_coords.x, -scroll_coords.y, 0.0);
+     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_diffColor"), color.r, color.g, color.b, color.a);
+     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
+     	     	
+     	glActiveTexture(GL_TEXTURE0);
+     	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+     	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_texture"), 0);
+
+     	glActiveTexture(GL_TEXTURE1);
+     	glBindTexture(GL_TEXTURE_2D, textureOb->normalmap);
+     	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_normalmap"), 1);
+     	     	
+	renderMesh(mesh, GetCenter(), GetAngle(), GetScale(), ZYX);
+		
+     	glUseProgram(0);
+     	glActiveTexture(GL_TEXTURE0);
+}
+
 void BaseDrawable::SaveDataUniqueBaseDrawable(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 	#if SAVELOAD_LOG_ENABLED == 1

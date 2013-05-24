@@ -103,19 +103,8 @@ void Container::UpdateInSpace(int time, bool show_effect)
 		
 	if (time > 0)
 	{
-		Vec3<float> d_pos2;
-     		if (fabs(velocity) > 0.2f)
-     		{
-			velocity -= 0.1f;
-        		get_dPos_ToPoint(GetCenter(), target_pos, velocity, d_pos2);
-
-     		}  
-     		//else
-     		//{
-     			//d_pos2.Set(0.0f, 0.0f);
-     		//}
-
-		SetCenter(GetCenter() + d_pos + d_pos2);
+		SetCenter(GetCenter() + force);
+		force *= 0.99;
      	}
 }
        		

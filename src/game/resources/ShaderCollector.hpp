@@ -31,6 +31,7 @@ class ShaderCollector
 		GLuint shockwave;
 		GLuint volumetriclight;
 		GLuint light;
+		GLuint light_normalmap;
 		GLuint blur;
 		GLuint extractbright;
 		GLuint combine;

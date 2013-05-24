@@ -84,7 +84,7 @@ void BlackHole::UpdateInfo()
 void BlackHole::Render_NEW(const Vec2<float>& scroll_coords)
 {
 	UpdateRenderAnimation();
-	RenderMesh(scroll_coords, starsystem->GetColor4f());
+	RenderMeshLight(scroll_coords, starsystem->GetColor4f());
 }
 	
 void BlackHole::Render_OLD() const
