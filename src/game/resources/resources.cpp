@@ -744,31 +744,31 @@ void loadImages()
 {
 	std::vector<int> arg; 
 	arg.push_back(ENTITY::PLANET_MIXED_ID); arg.push_back(5);
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_0000.png", false, &arg) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_0000.png", "data/planet/p_0000_nm.png", false, &arg) );
 }
 
 {
 	std::vector<int> arg; 
 	arg.push_back(ENTITY::PLANET_WATER_ID); arg.push_back(5);
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_1000.png", false, &arg) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_1000.png", "data/planet/p_1000_nm.png", false, &arg) );
 }
 
 {
 	std::vector<int> arg; 
 	arg.push_back(ENTITY::PLANET_VULCANIC_ID); arg.push_back(5);
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_2000.png", false, &arg) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_2000.png", "data/planet/p_2000_nm.png", false, &arg) );
 }
 
 {
 	std::vector<int> arg; 
 	arg.push_back(ENTITY::PLANET_ICE_ID); arg.push_back(5);
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_3000.png", false, &arg) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_3000.png", "data/planet/p_3000_nm.png", false, &arg) );
 }
 
 {
 	std::vector<int> arg; 
 	arg.push_back(ENTITY::PLANET_GAS_ID); arg.push_back(5);
-	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_4000.png", false, &arg) );
+	TextureManager::Instance().Add( new TextureOb(TEXTURE::PLANET_ID, "data/planet/p_4000.png", "data/planet/p_4000_nm.png", false, &arg) );
 }
 
 //################################ ATMOSPHERE_TEXTURE ####################################
@@ -1338,6 +1338,15 @@ void loadShaders()
 	compileProgram(path_vert, path_frag, ShaderCollector::Instance().light);
 	}
 
+	{
+	const std::string path_vert = "data/shaders/light_normalmap.vert"; 
+	const std::string path_frag = "data/shaders/light_normalmap.frag"; 
+
+	ShaderCollector::Instance().light_normalmap = glCreateProgram();
+	
+	compileProgram(path_vert, path_frag, ShaderCollector::Instance().light_normalmap);
+	}
+	
 	{
 	const std::string path_vert = "data/shaders/blur.vert"; 
 	const std::string path_frag = "data/shaders/blur.frag"; 

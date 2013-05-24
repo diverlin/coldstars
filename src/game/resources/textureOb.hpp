@@ -55,16 +55,17 @@ class TextureOb
         	std::vector<Vec2<float>> texCoord_topRight_vec;
 
         	GLuint texture;
-
+        	GLuint normalmap;
+        	
         	bool is_loaded, is_shared;
         
         	TextureOb();
-        	TextureOb(int type_id, const std::string& path, bool use_alpha, std::vector<int>* pTo_arg = NULL, int columns_num = 1, int rows_num = 1, int fps = 0);
-
+        	TextureOb(int type_id, const std::string& path, bool use_alpha, std::vector<int>* args = NULL, int columns_num = 1, int rows_num = 1, int fps = 0);
+        	TextureOb(int type_id, const std::string& path, const std::string& path_normalmap, bool use_alpha, std::vector<int>* args = NULL, int columns_num = 1, int rows_num = 1, int fps = 0);
+        	
         	int GetFrameWidth() const;
         	int GetFrameHeight() const;
         	
-        	void loadToVRAM();
         	void removeFromVRAM();
 
         	int updateAnimationFrame();
@@ -84,6 +85,8 @@ class TextureOb
         	float last_update_time;
         	float delay; 
         	
+        	void Manage(int type_id, const std::string& path, const std::string& path_normalmap, bool use_alpha, std::vector<int>* args, int columns_num, int rows_num, int fps);
+        	        	
         	void createTextureCoords(int _rows_num, int _columns_num, int _fps);
              	void addTexCoordQuad(float _w_start, float _h_start, float _w_offset, float _h_offset);
              	        	
@@ -137,4 +140,6 @@ class TextureOb
         	void shieldEffectArgManager(std::vector<int>*); 
 };
 
+void loadToVRAM(const std::string&, GLuint&, int&, int&);
+        	
 #endif 

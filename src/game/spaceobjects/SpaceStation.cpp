@@ -123,7 +123,7 @@ void SpaceStation::RenderInSpace_2D()
 void SpaceStation::RenderInSpace_3D(const Vec2<float>& scroll_coords)
 {     	
 	UpdateRenderAnimation();	
-	RenderMesh(scroll_coords, starsystem->GetColor4f());        
+	RenderMeshLight(scroll_coords, starsystem->GetColor4f());        
 }
 
 void SpaceStation::SaveDataUniqueSpaceStation(boost::property_tree::ptree& save_ptree, const std::string& root) const

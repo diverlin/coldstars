@@ -1410,9 +1410,12 @@ void Vehicle::DropRandomItemToSpace()
 	}		
 }
 
-void Vehicle::UpdateGrappleMicroProgram()
+void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 {
-        grapple_slot->GetGrappleEquipment()->UpdateGrabScenarioProgram();  
+	if (properties.grab_radius > 0)
+	{
+		grapple_slot->GetGrappleEquipment()->UpdateGrabScenarioProgram_inDynamic();
+	}     
 }
 				
 void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, const std::string& root) const

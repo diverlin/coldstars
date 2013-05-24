@@ -28,7 +28,18 @@
 TextureOb::TextureOb()
 {}
 
-TextureOb::TextureOb(int type_id, const std::string& path, bool use_alpha, std::vector<int>* pTo_arg, int columns_num, int rows_num, int fps)
+TextureOb::TextureOb(int type_id, const std::string& path, bool use_alpha, std::vector<int>* args, int columns_num, int rows_num, int fps)
+{
+	const std::string path_normalmap = "";
+	Manage(type_id, path, path_normalmap, use_alpha, args, columns_num, rows_num, fps);
+}
+
+TextureOb::TextureOb(int type_id, const std::string& path, const std::string& path_normalmap, bool use_alpha, std::vector<int>* args, int columns_num, int rows_num, int fps)
+{
+	Manage(type_id, path, path_normalmap, use_alpha, args, columns_num, rows_num, fps);
+}
+
+void TextureOb::Manage(int type_id, const std::string& path, const std::string& path_normalmap, bool use_alpha, std::vector<int>* args, int columns_num, int rows_num, int fps)
 {
     	// textureOb attributes INIT
     	race_id = NONE_ID;
@@ -54,7 +65,11 @@ TextureOb::TextureOb(int type_id, const std::string& path, bool use_alpha, std::
         	is_animated = true;
    	}   
     	
-    	loadToVRAM(); 
+    	if (path_normalmap != "")
+    	{
+    		loadToVRAM(path_normalmap, normalmap, w, h); 
+    	}
+    	loadToVRAM(path, texture, w, h); 
         createTextureCoords(columns_num, rows_num, fps); 
         //removeFromVRAM();     
        
@@ -65,85 +80,65 @@ TextureOb::TextureOb(int type_id, const std::string& path, bool use_alpha, std::
 
 	switch(type_id)
 	{
-    		case TEXTURE::ITEM_SLOT_ID:   { itemslotArgManager(pTo_arg);   break; }
-    		case TEXTURE::VEHICLE_SLOT_ID: { vehicleslotArgManager(pTo_arg);   break; }
-    		case TEXTURE::TURREL_ID: { turrelArgManager(pTo_arg); break; }
+    		case TEXTURE::ITEM_SLOT_ID:   { itemslotArgManager(args);   break; }
+    		case TEXTURE::VEHICLE_SLOT_ID: { vehicleslotArgManager(args);   break; }
+    		case TEXTURE::TURREL_ID: { turrelArgManager(args); break; }
 
-    		case TEXTURE::NEBULA_BACKGROUND_ID: { nebulaArgManager(pTo_arg); break; }          
-    		case TEXTURE::STAR_ID:   { starArgManager(pTo_arg); break; } 
- 		case TEXTURE::PLANET_ID: { planetArgManager(pTo_arg); break; }
+    		case TEXTURE::NEBULA_BACKGROUND_ID: { nebulaArgManager(args); break; }          
+    		case TEXTURE::STAR_ID:   { starArgManager(args); break; } 
+ 		case TEXTURE::PLANET_ID: { planetArgManager(args); break; }
          
-    		case TEXTURE::ATMOSPHERE_ID: { atmosphereArgManager(pTo_arg); break; }
+    		case TEXTURE::ATMOSPHERE_ID: { atmosphereArgManager(args); break; }
  
-    		case TEXTURE::NATURELAND_BACKGROUND_ID: { landBgArgManager(pTo_arg); break; }
+    		case TEXTURE::NATURELAND_BACKGROUND_ID: { landBgArgManager(args); break; }
     		
     		// KOSMOPORT
-    		case TEXTURE::ANGAR_BACKGROUND_ID: { angarBgArgManager(pTo_arg); break; }
-   		case TEXTURE::STORE_BACKGROUND_ID: { storeBgArgManager(pTo_arg); break; }
-		case TEXTURE::SHOP_BACKGROUND_ID:  { shopBgArgManager(pTo_arg);  break; }
-    		case TEXTURE::GOVERMENT_BACKGROUND_ID: { govermentBgArgManager(pTo_arg); break; }
-    		case TEXTURE::FACE_ID:         { loadToVRAM(); faceArgManager(pTo_arg); break; }
+    		case TEXTURE::ANGAR_BACKGROUND_ID: { angarBgArgManager(args); break; }
+   		case TEXTURE::STORE_BACKGROUND_ID: { storeBgArgManager(args); break; }
+		case TEXTURE::SHOP_BACKGROUND_ID:  { shopBgArgManager(args);  break; }
+    		case TEXTURE::GOVERMENT_BACKGROUND_ID: { govermentBgArgManager(args); break; }
+    		case TEXTURE::FACE_ID:         { faceArgManager(args); break; }
  		
-    		case TEXTURE::SPACESTATION_ID:   { loadToVRAM(); spacestationArgManager(pTo_arg); break; }    	
-    		case TEXTURE::SATELLITE_ID:  { loadToVRAM(); satelliteArgManager(pTo_arg); break; }
-		case TEXTURE::SHIP_ID:     { loadToVRAM(); shipArgManager(pTo_arg); break; }
-          	case TEXTURE::PARTICLE_EFFECT_ID: { loadToVRAM(); particleArgManager(pTo_arg); break; }
+    		case TEXTURE::SPACESTATION_ID:   { spacestationArgManager(args); break; }    	
+    		case TEXTURE::SATELLITE_ID:  { satelliteArgManager(args); break; }
+		case TEXTURE::SHIP_ID:     { shipArgManager(args); break; }
+          	case TEXTURE::PARTICLE_EFFECT_ID: { particleArgManager(args); break; }
 
-		case TEXTURE::DISTANTSTAR_ID:   { loadToVRAM(); distStarArgManager(pTo_arg); break; }
-    		case TEXTURE::SHIELD_EFFECT_ID: { loadToVRAM(); shieldEffectArgManager(pTo_arg); break; }
+		case TEXTURE::DISTANTSTAR_ID:   { distStarArgManager(args); break; }
+    		case TEXTURE::SHIELD_EFFECT_ID: { shieldEffectArgManager(args); break; }
 
     		// ITEMS
-    		case TEXTURE::DRIVE_EQUIPMENT_ID:  { loadToVRAM(); DriveEquipmentArgManager(pTo_arg); break; }
-		case TEXTURE::LAZER_EQUIPMENT_ID:  { loadToVRAM(); LazerEquipmentArgManager(pTo_arg); break; }
-    		case TEXTURE::ROCKET_EQUIPMENT_ID: { loadToVRAM(); RocketEquipmentArgManager(pTo_arg); break; }
-		case TEXTURE::PROTECTOR_EQUIPMENT_ID: { loadToVRAM(); ProtectorEquipmentArgManager(pTo_arg); break; }
-   		case TEXTURE::DROID_EQUIPMENT_ID:  { loadToVRAM(); DroidEquipmentArgManager(pTo_arg); break; }
-		case TEXTURE::GRAPPLE_EQUIPMENT_ID: { loadToVRAM(); GrappleEquipmentArgManager(pTo_arg); break; }
-		case TEXTURE::BAK_EQUIPMENT_ID:     { loadToVRAM(); BakEquipmentArgManager(pTo_arg); break; }
-		case TEXTURE::ENERGIZER_EQUIPMENT_ID: { loadToVRAM(); energyBlockItemArgManager(pTo_arg); break; }
-     		case TEXTURE::FREEZER_EQUIPMENT_ID: { loadToVRAM(); FreezerEquipmentArgManager(pTo_arg);  break; }
-    		case TEXTURE::RADAR_EQUIPMENT_ID:   { loadToVRAM(); RadarEquipmentArgManager(pTo_arg); break; }
-		case TEXTURE::SCANER_EQUIPMENT_ID:  { loadToVRAM(); ScanerEquipmentArgManager(pTo_arg); break; }
+    		case TEXTURE::DRIVE_EQUIPMENT_ID:  { DriveEquipmentArgManager(args); break; }
+		case TEXTURE::LAZER_EQUIPMENT_ID:  { LazerEquipmentArgManager(args); break; }
+    		case TEXTURE::ROCKET_EQUIPMENT_ID: { RocketEquipmentArgManager(args); break; }
+		case TEXTURE::PROTECTOR_EQUIPMENT_ID: { ProtectorEquipmentArgManager(args); break; }
+   		case TEXTURE::DROID_EQUIPMENT_ID:  { DroidEquipmentArgManager(args); break; }
+		case TEXTURE::GRAPPLE_EQUIPMENT_ID: { GrappleEquipmentArgManager(args); break; }
+		case TEXTURE::BAK_EQUIPMENT_ID:     { BakEquipmentArgManager(args); break; }
+		case TEXTURE::ENERGIZER_EQUIPMENT_ID: { energyBlockItemArgManager(args); break; }
+     		case TEXTURE::FREEZER_EQUIPMENT_ID: { FreezerEquipmentArgManager(args);  break; }
+    		case TEXTURE::RADAR_EQUIPMENT_ID:   { RadarEquipmentArgManager(args); break; }
+		case TEXTURE::SCANER_EQUIPMENT_ID:  { ScanerEquipmentArgManager(args); break; }
 		
 		// BULLETS
-    		case TEXTURE::ROCKET_BULLET_ID: { loadToVRAM(); rocketBulletArgManager(pTo_arg); break; }
-    		case TEXTURE::LAZER_EFFECT_ID:  { loadToVRAM(); lazerEffectArgManager(pTo_arg); break; }
+    		case TEXTURE::ROCKET_BULLET_ID: { rocketBulletArgManager(args); break; }
+    		case TEXTURE::LAZER_EFFECT_ID:  { lazerEffectArgManager(args); break; }
 
 		// ASTEROIDS/MINERALS
-    		case TEXTURE::ASTEROID_ID: { loadToVRAM(); asteroidArgManager(pTo_arg); break; }
-		case TEXTURE::MINERAL_ID:  { loadToVRAM(); mineralArgManager(pTo_arg); break; }
-    		case TEXTURE::CONTAINER_ID: { loadToVRAM(); containerArgManager(pTo_arg); break; }
-		case TEXTURE::BOMB_ID: { loadToVRAM(); bombArgManager(pTo_arg); break; }
-		case TEXTURE::BLACKHOLE_ID: { loadToVRAM(); blackholeArgManager(pTo_arg); break; }
+    		case TEXTURE::ASTEROID_ID: { asteroidArgManager(args); break; }
+		case TEXTURE::MINERAL_ID:  { mineralArgManager(args); break; }
+    		case TEXTURE::CONTAINER_ID: { containerArgManager(args); break; }
+		case TEXTURE::BOMB_ID: { bombArgManager(args); break; }
+		case TEXTURE::BLACKHOLE_ID: { blackholeArgManager(args); break; }
 
-		case TEXTURE::NOTYPE_ID: { loadToVRAM(); break; }
+		case TEXTURE::NOTYPE_ID: { break; }
 		
 	}
 }  
 
 int TextureOb::GetFrameWidth() const  { return w_slice; }
 int TextureOb::GetFrameHeight() const { return h_slice;}
-        	
-void TextureOb::loadToVRAM()
-{
-     	sf::Image image;
-     	if (!image.loadFromFile(path))
- 	{
- 		std::cout<<"FAULT: Not abe to open file:"<<path;
- 		exit(EXIT_FAILURE);
- 	}
-     	
-     	w = image.getSize().x;
-     	h = image.getSize().y;
-
-     	glGenTextures(1, &texture);
-     	glBindTexture(GL_TEXTURE_2D, texture);
-     	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, w, h, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
-        
-     	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NICEST);
-     	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NICEST);
-}         
-
+ 
 void TextureOb::removeFromVRAM()
 {}         
 
@@ -420,6 +415,29 @@ void TextureOb::shieldEffectArgManager(std::vector<int>* arg)
 
 
 
+
+
+
+       	
+void loadToVRAM(const std::string& path, GLuint& texture, int& w, int& h)
+{
+     	sf::Image image;
+     	if (!image.loadFromFile(path))
+ 	{
+ 		std::cout<<"FAULT: Not abe to open file:"<<path;
+ 		exit(EXIT_FAILURE);
+ 	}
+     	
+     	w = image.getSize().x;
+     	h = image.getSize().y;
+
+     	glGenTextures(1, &texture);
+     	glBindTexture(GL_TEXTURE_2D, texture);
+     	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, w, h, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
+        
+     	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NICEST);
+     	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NICEST);
+}         
 
 
 

@@ -73,7 +73,7 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
                 
 		if (target != NULL)
     		{ 
-        		get_dPos_ToPoint(GetCenter(), target->GetCenter(), speed/100.0, d_pos, angle_inD);
+        		get_dPos_ToPoint(GetCenter(), target->GetCenter(), speed/100.0, force, angle_inD);
     		
                         if (CheckTarget() == false)
                         {
@@ -81,7 +81,7 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
                         }
                 }      
     		SetAngleZ(angle_inD);
-    		SetCenter(GetCenter() + d_pos);    
+    		SetCenter(GetCenter() + force);    
 
     		data_bullet.live_time -= 1;
     	}

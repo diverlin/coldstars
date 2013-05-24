@@ -56,6 +56,9 @@ int main()
 	for (unsigned int i=0; i<galaxy_description.starsystem_num; i++)
 	{
 		StarSystemDescription starsystem_description;
+		starsystem_description.planet_num_min = 50;
+		starsystem_description.planet_num_max = 50;
+				
 		starsystem_description.spacestation_num_min = 10;
 		starsystem_description.spacestation_num_max = 10;
 		starsystem_description.allow_satellites = false;

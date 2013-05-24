@@ -49,9 +49,9 @@ BaseSpaceEntity::~BaseSpaceEntity()
 	#endif
 }
 
-void BaseSpaceEntity::MovingByExternalForce(const Vec3<float>& _target_pos, float force)
+void BaseSpaceEntity::ApplyImpulse(const Vec3<float>& force_dir, float strength)
 {
-	get_dPos_ToPoint(GetCenter(), _target_pos, force, d_pos);
+	force += force_dir * strength;
 }
 
 /* virtual */
