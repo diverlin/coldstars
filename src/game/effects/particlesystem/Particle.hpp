@@ -40,6 +40,12 @@ class Particle
             	void RandomizeLifeTime(float, float);
             	void Randomize_d_alpha(float, float);
 
+                
+                void CalcRandomVelocity();            
+		void CalcRandomAccurateVelocity();
+                void CalcRandomDirtyVelocity();
+		//void calcAccurateRandomVelocity2(Vec2<float>);
+		
       		void Update();
       		void Render() const;
       		void Render(float) const;

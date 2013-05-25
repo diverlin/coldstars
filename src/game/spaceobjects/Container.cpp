@@ -92,7 +92,8 @@ void Container::PostDeathUniqueEvent(bool show_effect)
         {
         	if (show_effect == true)
         	{
-        		createExplosion(starsystem, GetCenter(), textureOb->size_id);  
+        		ExplosionEffect* explosion = getNewExplosion(textureOb->size_id);
+        		starsystem->Add(explosion, GetCenter()); 
         	}
         }
 }

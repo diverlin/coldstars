@@ -57,11 +57,6 @@ class BaseParticleSystem
        	    	bool is_alive, is_dying;
    
           	std::vector<Particle*> particles_vec;  
-                
-                Vec2<float> GetRandomVelocity();            
-		Vec2<float> GetRandomAccurateVelocity();
-                Vec2<float> GetRandomDirtyVelocity();
-		//void calcAccurateRandomVelocity2(Vec2<float>);
 };
 
 

@@ -41,6 +41,7 @@ class DistantNebulaEffect;
 class DistantStarEffect;
 class BaseParticleSystem;
 class ShockWaveEffect;
+class ExplosionEffect;
 class LazerTraceEffect;
 
 #include "../garbage/garbageEffects.hpp"
@@ -89,6 +90,8 @@ class StarSystem : public BaseSpaceEntity
 		// effects
 		void Add(BaseParticleSystem*);
 		void Add(ShockWaveEffect*, const Vec2<float>&);
+		void Add(ExplosionEffect*, const Vec3<float>&, float, float);
+		void Add(ExplosionEffect*, const Vec3<float>&);
 		void Add(LazerTraceEffect*);
 
 		void Add(DistantNebulaEffect*);
@@ -170,7 +173,7 @@ class StarSystem : public BaseSpaceEntity
     		
     		void UpdateStates();
     		
-    		void DamageEventInsideCircle(const Vec2<float>&, float, int, bool);
+    		void DamageEventInsideCircle(const Vec3<float>&, float, int, bool);
     		
     		void PostDeathUniqueEvent(bool);
 
@@ -183,6 +186,7 @@ class StarSystem : public BaseSpaceEntity
 
 		void rocketCollision_s(bool);
 		void asteroidCollision_s(bool);
+		void ExternalForcesAffection_s(bool);
 		
 		void SaveDataUniqueStarSystem(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueStarSystem(const boost::property_tree::ptree&);

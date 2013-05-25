@@ -97,3 +97,10 @@ Vec3<float> getRandXYVec3f(int radius_min, int radius_max, float z)
     	return v;
 }
 
+Vec3<float> getRandXYVec3Unit()
+{
+    	float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
+	Vec3<float> v(sin(alpha), cos(alpha), 0.0);
+    	
+    	return v;
+}

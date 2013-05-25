@@ -31,12 +31,11 @@ DamageEffect::~DamageEffect()
 
 void DamageEffect::CreateParticles()
 {
-	for(int i = 0; i < num_particles; i++)
+	for(int i=0; i<num_particles; i++)
     	{  
        		Particle* particle = new Particle(data_particle);
-                particle->SetPosition(center);
        		particle->Randomize_d_alpha(0.003, 0.006); //   ??
-       		particle->SetVelocity(GetRandomVelocity());
+       		particle->CalcRandomVelocity();
        		particles_vec.push_back(particle);
     	}
 }
@@ -44,8 +43,7 @@ void DamageEffect::CreateParticles()
 void DamageEffect::Update()
 {
      	is_alive = false;
-
-        for (unsigned int i = 0; i < num_particles; i++)
+        for (unsigned int i=0; i<num_particles; i++)
         {
                 if (particles_vec[i]->GetAlive() == true)
         	{
@@ -56,7 +54,6 @@ void DamageEffect::Update()
             	{
             		if (is_dying == false)
             		{
-                                particles_vec[i]->SetPosition(parent->GetCenter());
             			particles_vec[i]->Reborn();
             		}
             	}
@@ -65,11 +62,14 @@ void DamageEffect::Update()
 
 void DamageEffect::Render()
 {
-     	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-	for (unsigned int i = 0; i < num_particles; i++)
-	{
-       		particles_vec[i]->Render();
-       	}
+	glPushMatrix();
+		glTranslatef(parent->GetCenter().x, parent->GetCenter().y, 0.0);
+	     	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+		for (unsigned int i=0; i<num_particles; i++)
+		{
+	       		particles_vec[i]->Render();
+	       	}
+	glPopMatrix(); 
 }
 
 

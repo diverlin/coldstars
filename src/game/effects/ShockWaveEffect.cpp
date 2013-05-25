@@ -57,7 +57,7 @@ void ShockWaveEffect::Update()
 }
              
         
-ShockWaveEffect* GetNewShockWave(int obSize, bool dynamic)
+ShockWaveEffect* getNewShockWave(int obSize, bool dynamic)
 {       
 	float x = 10;
 	float y = 1.8;
