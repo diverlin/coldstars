@@ -24,33 +24,27 @@
 #include "../../common/rand.hpp"
 #include "../../world/starsystem.hpp"
 
-ExplosionEffect::ExplosionEffect()
-{  
-	//subtype_id = EXPLOSION_EFFECT_ID;
-}
+ExplosionSlice::ExplosionSlice()
+{}
  
 /* virtual */
-ExplosionEffect::~ExplosionEffect()
+ExplosionSlice::~ExplosionSlice()
 {}
 
-
-void ExplosionEffect::CreateParticles()
+void ExplosionSlice::CreateParticles()
 {
 	for(int i=0; i<num_particles; i++)
     	{  
                 Particle* particle = new Particle(data_particle);
-                particle->SetPosition(center);
-       		particle->SetVelocity(GetRandomVelocity());
+       		particle->CalcRandomVelocity();
        		particles_vec.push_back(particle);
     	}
 }
 
-
-
-void ExplosionEffect::Update()
+void ExplosionSlice::Update()
 {
     	is_alive = false;
-    	for (unsigned int i = 0; i < num_particles; i++)
+    	for (unsigned int i=0; i<num_particles; i++)
     	{
         	if (particles_vec[i]->GetAlive() == true)
         	{
@@ -59,25 +53,25 @@ void ExplosionEffect::Update()
         	}
     	}  
 }     
-    
 
-void ExplosionEffect::Render()
+void ExplosionSlice::Render()
 {
 	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-    	for(unsigned int i = 0; i < num_particles; i++)
+    	for(unsigned int i=0; i<num_particles; i++)
     	{
 		particles_vec[i]->Render();
-    	}            
+    	}  
 }  
 
-                 
 
 
-void  createExplosion(StarSystem* starsystem, Vec2<float> center, int obSize)
+
+
+
+
+ExplosionEffect::ExplosionEffect(int obSize):
+obSize(obSize)
 {
-	//obSize = getRandInt(1,9); // DEBUG
-	ExplosionEffect* explosion;
-	
 	TextureOb* texOb_particle; 
 	ParticleData  data_particle;
 	int particles_num;
@@ -115,15 +109,14 @@ void  createExplosion(StarSystem* starsystem, Vec2<float> center, int obSize)
 
                 texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
 
-		explosion = new ExplosionEffect();
-                explosion->SetTextureOb(texOb_particle);
-                explosion->SetCenter(center);
-                explosion->SetParticleData(data_particle);
-                explosion->SetParticlesNum(particles_num);
+		ExplosionSlice* explosion_slice = new ExplosionSlice();
+                explosion_slice->SetTextureOb(texOb_particle);
+                explosion_slice->SetParticleData(data_particle);
+                explosion_slice->SetParticlesNum(particles_num);
                 
-                explosion->CreateParticles();
+                explosion_slice->CreateParticles();
                 
-		starsystem->Add(explosion);
+		Add(explosion_slice);
 	}
     	else    
 	{
@@ -133,15 +126,14 @@ void  createExplosion(StarSystem* starsystem, Vec2<float> center, int obSize)
 
                 texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
 		
-		explosion = new ExplosionEffect();
-                explosion->SetTextureOb(texOb_particle);
-                explosion->SetCenter(center);
-                explosion->SetParticleData(data_particle);
-                explosion->SetParticlesNum(particles_num);
+		ExplosionSlice* explosion_slice = new ExplosionSlice();
+                explosion_slice->SetTextureOb(texOb_particle);
+                explosion_slice->SetParticleData(data_particle);
+                explosion_slice->SetParticlesNum(particles_num);
                 
-                explosion->CreateParticles();
+                explosion_slice->CreateParticles();
                 
-		starsystem->Add(explosion);
+		Add(explosion_slice);
                 }
 
                 {
@@ -150,15 +142,14 @@ void  createExplosion(StarSystem* starsystem, Vec2<float> center, int obSize)
 
                 texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::YELLOW_ID);
 
-		explosion = new ExplosionEffect();
-                explosion->SetTextureOb(texOb_particle);
-                explosion->SetCenter(center);
-                explosion->SetParticleData(data_particle);
-                explosion->SetParticlesNum(particles_num);
+		ExplosionSlice* explosion_slice = new ExplosionSlice();
+                explosion_slice->SetTextureOb(texOb_particle);
+                explosion_slice->SetParticleData(data_particle);
+                explosion_slice->SetParticlesNum(particles_num);
                 
-                explosion->CreateParticles();
+                explosion_slice->CreateParticles();
                 
-		starsystem->Add(explosion);
+		Add(explosion_slice);
                 }
         
                 {
@@ -167,21 +158,53 @@ void  createExplosion(StarSystem* starsystem, Vec2<float> center, int obSize)
 
                 texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
 		
-		explosion = new ExplosionEffect();
-                explosion->SetTextureOb(texOb_particle);
-                explosion->SetCenter(center);
-                explosion->SetParticleData(data_particle);
-                explosion->SetParticlesNum(particles_num);
+		ExplosionSlice* explosion_slice = new ExplosionSlice();
+                explosion_slice->SetTextureOb(texOb_particle);
+                explosion_slice->SetParticleData(data_particle);
+                explosion_slice->SetParticlesNum(particles_num);
                 
-                explosion->CreateParticles();
+                explosion_slice->CreateParticles();
                 
-		starsystem->Add(explosion);
+		Add(explosion_slice);
                 }
-	} 	       
+	} 	    
+
+
+}
  
- 	if ( (obSize > 3) && (starsystem->GetShockWaveNum() < SHOCKWAVES_MAX_NUM) )
-	{
-		starsystem->Add(GetNewShockWave(obSize), center);
-	}
-	//explosion.play()
+/* virtual */
+ExplosionEffect::~ExplosionEffect()
+{}
+
+
+void ExplosionEffect::Update()
+{
+    	is_alive = false;
+    	for (unsigned int i=0; i<slice_vec.size(); i++)
+    	{
+    		if (slice_vec[i]->GetAlive() == true)
+        	{
+           		slice_vec[i]->Update();
+           		is_alive = true;
+        	}        	
+    	}  
+}     
+    
+
+void ExplosionEffect::Render()
+{
+	glPushMatrix();
+		glTranslatef(center.x, center.y, 0.0);
+	    	for (unsigned int i=0; i<slice_vec.size(); i++)
+	    	{
+	    		slice_vec[i]->Render();
+	    	}         
+    	glPopMatrix();  
+}  
+
+ExplosionEffect* getNewExplosion(int obSize)
+{
+	//obSize = getRandInt(1,9); // DEBUG
+	ExplosionEffect* explosion = new ExplosionEffect(obSize);
+	return explosion;
 } 

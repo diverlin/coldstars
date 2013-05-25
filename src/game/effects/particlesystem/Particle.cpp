@@ -49,27 +49,73 @@ void Particle::Randomize_d_alpha(float val1_f, float val2_f)
 	data_particle.color_delta.a = getRandInt(val1_i, val2_i)/1000.0;
 }            	
       		
+                
+void Particle::CalcRandomVelocity()
+{
+     	if (getRandBool() == true)
+     	{
+        	CalcRandomDirtyVelocity();
+        }
+     	else
+     	{
+        	CalcRandomAccurateVelocity();
+        }
+}
 
-//void Particle::reborn(Vec2<float> center)
-//{       	 
-	//is_alive = true;
-       			
-	//alpha = data_particle.alpha_start;
-	//size  = data_particle.size_start;
+void Particle::CalcRandomDirtyVelocity()
+{
+    	float dx_n = getRandFloat(0.1, 1.0)*getRandSign();
+    	float dy_n = getRandFloat(0.1, 1.0)*getRandSign();
 
-       	////calcRandomVelocity(center);
-//}
+    	d_pos.x = dx_n * data_particle.velocity_start;
+    	d_pos.y = dy_n * data_particle.velocity_start;
+}
 
+
+void Particle::CalcRandomAccurateVelocity()
+{
+    	float _len   = getRandInt(50, 100);
+    	float _angle = getRandInt(0, 360)/RADIAN_TO_DEGREE_RATE;
+
+    	float target_x = cos(_angle) * _len;
+    	float target_y = sin(_angle) * _len;
+
+    	float dx_n = target_x/_len;
+    	float dy_n = target_y/_len;
+
+    	d_pos.x = dx_n * data_particle.velocity_start;
+    	d_pos.y = dy_n * data_particle.velocity_start;
+}  
+
+
+//void Particle::calcAccurateRandomVelocity2(Vec2<float> center)
+//{
+    	//float _len   = getRandInt(50, 100);
+    	//float _angle = getRandInt(0, 360)/RADIAN_TO_DEGREE_RATE;
+
+	//Vec2<float> target;
+	//target = center;
+	
+    	//pos.x = center.x + sin(_angle) * _len;
+    	//pos.y = center.y + cos(_angle) * _len;
+
+    	//float xl = (target.x - pos.x);
+    	//float yl = (target.y - pos.y);
+
+    	//float dx_n = xl/_len;
+    	//float dy_n = yl/_len;
+
+    	//d_pos.x = dx_n * data_particle.velocity_start;
+    	//d_pos.y = dy_n * data_particle.velocity_start;
+//}  
 
 void Particle::Reborn()
-{       	 
+{       	
+	pos.Set(0.0, 0.0); 
 	is_alive = true;
-       	//pos = _new_pos_start;  
        			
 	color = data_particle.color_start;
 	size  = data_particle.size_start;
-
-       	//d_pos = _d_pos;
 }
       		
 

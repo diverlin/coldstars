@@ -47,6 +47,6 @@ class ShockWaveEffect
       	
 };
 
-ShockWaveEffect* GetNewShockWave(int, bool dynamic = true);          
+ShockWaveEffect* getNewShockWave(int, bool dynamic = true);          
     
 #endif

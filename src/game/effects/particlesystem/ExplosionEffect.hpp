@@ -22,11 +22,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "BaseParticleSystem.hpp"
 
-class ExplosionEffect : public BaseParticleSystem
+class ExplosionSlice : public BaseParticleSystem
 { 
     	public:
-       		ExplosionEffect();       
-       		virtual ~ExplosionEffect();
+       		ExplosionSlice();       
+       		virtual ~ExplosionSlice();
 		
        		virtual void Update();
        		virtual void Render();
@@ -36,8 +36,25 @@ class ExplosionEffect : public BaseParticleSystem
 
 };
 
+class ExplosionEffect : public BaseParticleSystem
+{ 
+    	public:
+       		ExplosionEffect(int);       
+       		virtual ~ExplosionEffect();
+		
+		bool GetObSize() const { return obSize; }
+		void Add(ExplosionSlice* explosion_slice) { slice_vec.push_back(explosion_slice); }
+		
+       		virtual void Update();
+       		virtual void Render();
+       	private:
+       		int obSize;
+       		std::vector<ExplosionSlice*> slice_vec;
 
-void createExplosion(StarSystem*, Vec2<float>, int obSize);
+};
+
+
+ExplosionEffect* getNewExplosion(int);
 
 
 #endif 
