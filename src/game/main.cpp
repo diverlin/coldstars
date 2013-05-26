@@ -45,6 +45,15 @@
 
 int main()
 {
+	//std::cout<<0<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(0)<<std::endl;
+	//std::cout<<5<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(5)<<std::endl;
+	//std::cout<<10<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(10)<<std::endl;
+	//std::cout<<150<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(150)<<std::endl;
+	//std::cout<<250<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(250)<<std::endl;
+	//std::cout<<350<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(350)<<std::endl;
+	//std::cout<<500<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(500)<<std::endl;
+	//std::cout<<1000<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(1000)<<std::endl;
+					
 	init();  
         
 	GameDate::Instance().SetDate(1,1,4000);

@@ -17,6 +17,7 @@
 */
 
 #include "ShockWaveEffect.hpp"
+#include "../common/constants.hpp"
 
 ShockWaveEffect::ShockWaveEffect(float x, float y, float z, float time, 
  				     float d_x, float d_y, float d_z, float d_time)
@@ -57,8 +58,9 @@ void ShockWaveEffect::Update()
 }
              
         
-ShockWaveEffect* getNewShockWave(int obSize, bool dynamic)
+ShockWaveEffect* getNewShockWave(float radius, bool dynamic)
 {       
+	int size_id = CONVERTER::SIZE2SIZEID.GetEquivalent(radius);
 	float x = 10;
 	float y = 1.8;
 	float z = 0.13;
@@ -66,7 +68,7 @@ ShockWaveEffect* getNewShockWave(int obSize, bool dynamic)
 	float dx = 0;
 	float dy = 0.02;
 	float dz = 0.0005;
-	float dtime = -(0.001 + obSize * 0.0003);     // 10, 1.8, 0.13, 0.0,  0,  0.02, 0.0005, -0.004 
+	float dtime = -(0.001 + size_id * 0.0005);     // 10, 1.8, 0.13, 0.0,  0,  0.02, 0.0005, -0.004 
 	//float dtime = -(0.0001*obSize + obSize * 0.0003);     // 10, 1.8, 0.13, 0.0,  0,  0.02, 0.0005, -0.004 
 		
         if (dynamic == false)

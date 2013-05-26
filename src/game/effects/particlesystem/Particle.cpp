@@ -20,15 +20,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "../../common/rand.hpp"
 #include "../../render/Render.hpp"
 
-Particle::Particle(ParticleData _data_particle)
+Particle::Particle(const ParticleData& data_particle)
 {
 	is_alive = true;
   
-	data_particle = _data_particle;
+	this->data_particle = data_particle;
 
-        color = _data_particle.color_start;
+        color = data_particle.color_start;
                 
-      	size  = _data_particle.size_start;
+      	size  = data_particle.size_start;
 } 
       
 Particle::~Particle()
@@ -121,9 +121,8 @@ void Particle::Reborn()
 
 void Particle::Update()
 {
-    	pos.x += d_pos.x;
-    	pos.y += d_pos.y; 
-    	
+    	pos += d_pos;
+     	
     	color.a -= data_particle.color_delta.a;
     	size  -= data_particle.d_size;
           

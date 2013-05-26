@@ -101,7 +101,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 	planet->SetRenderAnimation(animation_program);
 	planet->SetZYX(false);
 	
-	if (getRandBool()) 
+	//if (getRandBool()) 
 	{
 	        TextureOb* textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID); 
 		Atmosphere* atmosphere = new Atmosphere(textureOb_atmosphere);

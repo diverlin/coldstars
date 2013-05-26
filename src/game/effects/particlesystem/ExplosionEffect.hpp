@@ -39,22 +39,22 @@ class ExplosionSlice : public BaseParticleSystem
 class ExplosionEffect : public BaseParticleSystem
 { 
     	public:
-       		ExplosionEffect(int);       
+       		ExplosionEffect(float);       
        		virtual ~ExplosionEffect();
 		
-		bool GetObSize() const { return obSize; }
+		float GetRadius() const { return radius; }
 		void Add(ExplosionSlice* explosion_slice) { slice_vec.push_back(explosion_slice); }
 		
        		virtual void Update();
        		virtual void Render();
        	private:
-       		int obSize;
+       		float radius;
        		std::vector<ExplosionSlice*> slice_vec;
 
 };
 
 
-ExplosionEffect* getNewExplosion(int);
+ExplosionEffect* getNewExplosion1(float);
 
 
 #endif 

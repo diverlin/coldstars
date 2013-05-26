@@ -354,6 +354,10 @@ void ItemSlot::DropItemToSpace(Vehicle* vehicle)
          
         Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, item);
         
+        float impulse_strength = 0.5;
+        Vec3<float> impulse_dir(getRandXYVec3Unit());
+    	container->ApplyImpulse(impulse_dir, impulse_strength);
+        
 	vehicle->GetStarSystem()->AddContainer(container, vehicle->GetCenter());
 }
         

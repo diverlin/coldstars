@@ -23,6 +23,14 @@
 #include <cstdint>
 #include "../math/myVector.hpp"
 
+#include "Converter.hpp"
+
+namespace CONVERTER
+{
+	const Converter<float> RADIUS2FORCE(Vec2<float>(10, 500), Vec2<float>(1.0, 0.0), 1000);
+	const Converter<float> SIZE2SIZEID(Vec2<float>(0, 200), Vec2<float>(1.0, 10.0), 1000);
+};
+
 #define LOG_ENABLED 1
 #if LOG_ENABLED == 1
 	#define GRAPPLE_QUEUE_LOG_ENABLED 0

@@ -104,3 +104,11 @@ Vec3<float> getRandXYVec3Unit()
     	
     	return v;
 }
+
+Vec3<float> getXYVec3Unit(float alpha)
+{	
+	alpha *= DEGREE_TO_RADIAN_RATE;
+	Vec3<float> v(sin(alpha), cos(alpha), 0.0);
+    	
+    	return v;
+}

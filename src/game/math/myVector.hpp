@@ -27,4 +27,6 @@ Vec2<float> getRandVec2f(int radius_min, int radius_max);
 Vec3<float> getRandXYVec3f(int radius_min, int radius_max, float z);
 Vec3<float> getRandXYVec3Unit();
 
+Vec3<float> getXYVec3Unit(float);
+
 #endif
