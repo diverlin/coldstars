@@ -145,7 +145,7 @@ void RocketBullet::PostDeathUniqueEvent(bool show_effect)
 {
 	if (show_effect == true)
      	{
-     		ExplosionEffect* explosion = getNewExplosion(textureOb->size_id);
+     		ExplosionEffect* explosion = getNewExplosion1(GetCollisionRadius());
         	starsystem->Add(explosion, GetCenter());        		
         }
 }

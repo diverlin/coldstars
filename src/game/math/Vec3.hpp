@@ -39,15 +39,25 @@ class Vec3
                 Vec3<VARTYPE> GetNormalized() const 
                 {
                 	float length = GetLength();
-			return Vec3<VARTYPE>(x/length, y/length, z/length);
+                	if (length > 0)
+                	{
+				return Vec3<VARTYPE>(x/length, y/length, z/length);
+                	}
+                	else
+                	{
+                		return *this;
+                	}
                 }
 
                 void Normalize() 
                 {
                 	float length = GetLength();
-			x /= length;
-			y /= length;
-			z /= length;
+                	if (length > 0)
+                	{
+				x /= length;
+				y /= length;
+				z /= length;
+			}
                 }
                                 
 		const Vec3<VARTYPE>& operator+=(const Vec3<VARTYPE>& rhs)

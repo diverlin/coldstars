@@ -17,12 +17,10 @@
 */
 
 #include "ExplosionEffect.hpp"
-#include "../ShockWaveEffect.hpp"
 
 #include "../../common/constants.hpp"
 #include "../../resources/TextureManager.hpp"
 #include "../../common/rand.hpp"
-#include "../../world/starsystem.hpp"
 
 ExplosionSlice::ExplosionSlice()
 {}
@@ -69,15 +67,19 @@ void ExplosionSlice::Render()
 
 
 
-ExplosionEffect::ExplosionEffect(int obSize):
-obSize(obSize)
+ExplosionEffect::ExplosionEffect(float radius):
+radius(radius)
 {
 	TextureOb* texOb_particle; 
 	ParticleData  data_particle;
 	int particles_num;
-
+	
+	this->radius = radius;
+	
+	int size_id = CONVERTER::SIZE2SIZEID.GetEquivalent(this->radius);
+	 
 	//data_particle.velocity_start = getRandInt(13,17) * 0.1;   
-	data_particle.velocity_start = (float)obSize*0.1f + getRandInt(40,90) * 0.01;
+	data_particle.velocity_start = (float)size_id*0.1f + getRandInt(40,90) * 0.01;
 	data_particle.velocity_end   = data_particle.velocity_start;
 	data_particle.d_velocity     = 0;
 
@@ -94,18 +96,17 @@ obSize(obSize)
 	data_particle.color_delta.r    = 0.0;
 	data_particle.color_delta.g    = 0.0;
 	data_particle.color_delta.b    = 0.0;
-        data_particle.color_delta.a    = getRandInt(5,8) * 0.001;
+        data_particle.color_delta.a    = getRandInt(20,30) * 0.0005;
 
 	
 	//data_particle.size_start
-	data_particle.size_end 	     = 0.1;		
-	data_particle.d_size 	     = (float)obSize*0.1f + getRandInt(30,50) * 0.01;  
-	//data_particle.d_size 	     = getRandInt(60,80) * 0.01 * obSize/3;  
+	data_particle.size_end 	     = 2.0;		
+	data_particle.d_size 	     = (float)size_id*0.2f + getRandInt(30,50) * 0.02;  
         
-	if (obSize < 4)
+	if (size_id == 1)
 	{
-		particles_num = getRandInt(10 * obSize, 15 * obSize);    
-		data_particle.size_start  = 25 * obSize;                                 
+		particles_num = size_id * getRandInt(10, 15);    
+		data_particle.size_start  = 50 * size_id;                                         
 
                 texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
 
@@ -122,7 +123,7 @@ obSize(obSize)
 	{
                 {
 		particles_num = 40;
-		data_particle.size_start  = 25 * obSize;
+		data_particle.size_start  = 50 * size_id;
 
                 texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
 		
@@ -138,7 +139,7 @@ obSize(obSize)
 
                 {
 		particles_num = 50;
-		data_particle.size_start  = 25 * (obSize-1);
+		data_particle.size_start  = 40 * size_id;
 
                 texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::YELLOW_ID);
 
@@ -153,8 +154,8 @@ obSize(obSize)
                 }
         
                 {
-		particles_num = 100;                              
-		data_particle.size_start  = 25 * (obSize-2);
+		particles_num = 60;                              
+		data_particle.size_start  = 30 * size_id;
 
                 texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
 		
@@ -174,7 +175,12 @@ obSize(obSize)
  
 /* virtual */
 ExplosionEffect::~ExplosionEffect()
-{}
+{
+    	for (unsigned int i=0; i<slice_vec.size(); i++)
+    	{
+    		delete slice_vec[i];
+    	}
+}
 
 
 void ExplosionEffect::Update()
@@ -202,9 +208,9 @@ void ExplosionEffect::Render()
     	glPopMatrix();  
 }  
 
-ExplosionEffect* getNewExplosion(int obSize)
+ExplosionEffect* getNewExplosion1(float radius)
 {
-	//obSize = getRandInt(1,9); // DEBUG
-	ExplosionEffect* explosion = new ExplosionEffect(obSize);
+	//size_id = getRandInt(1,9); // DEBUG
+	ExplosionEffect* explosion = new ExplosionEffect(radius);
 	return explosion;
 } 

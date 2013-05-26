@@ -117,8 +117,8 @@ DriveEffect* GetNewDriveEffect(int size_id, Vec3<float>* pTo_pos, Vec3<float>* p
 {
    	ParticleData data_particle;        
                        
-   	data_particle.size_start = 15.0 + size_id;
-   	data_particle.size_end   = 0.1;
+   	data_particle.size_start = 15.0 + 2*size_id;
+   	data_particle.size_end   = 2.0;
    	data_particle.d_size     = 0.0;
    	   	
    	data_particle.velocity_start = 1.2;

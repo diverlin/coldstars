@@ -28,7 +28,14 @@ class Vec2
                 Vec2<VARTYPE> GetNormalized() const 
                 {
                 	float length = GetLength();
-			return Vec2<VARTYPE>(x/length, y/length);
+                	if (length > 0)
+                	{
+				return Vec2<VARTYPE>(x/length, y/length);
+                	}
+                	else
+                	{
+                		return *this;
+                	}
                 }
                 
 		void Set(VARTYPE x, VARTYPE y) 	{ this->x = x; this->y = y; }

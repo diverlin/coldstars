@@ -55,7 +55,7 @@ void Atmosphere::Render(const Vec2<float>& scroll_coords)
      		glActiveTexture(GL_TEXTURE0);                                
      		glBindTexture(GL_TEXTURE_2D, textureOb->texture);
      		glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
-		float scale_rate = 1.1;
+		float scale_rate = 1.05;
 		Vec3<float> scale(parent->GetScale()*scale_rate);
 		
 		renderMesh(parent->GetMesh(), parent->GetCenter(), angle, scale, false);

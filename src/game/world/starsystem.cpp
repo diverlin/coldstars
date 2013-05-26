@@ -262,9 +262,6 @@ void StarSystem::AddContainer(Container* container, const Vec3<float>& center)
 	container->SetStarSystem(this);
         container->SetPlaceTypeId(ENTITY::SPACE_ID);
     	container->SetCenter(center);
-    	Vec3<float> dir(getRandXYVec3Unit());
-    	float strength = 0.5;
-    	container->ApplyImpulse(dir, strength);
         
         CONTAINER_vec.push_back(container);
 }
@@ -283,29 +280,31 @@ void StarSystem::Add(ShockWaveEffect* shockwave, const Vec2<float>& center)
 	effect_SHOCKWAVE_vec.push_back(shockwave); 
 }
 
-void StarSystem::Add(ExplosionEffect* explosion, const Vec3<float>& center, float damage, float radius)           
+void StarSystem::Add(ExplosionEffect* explosion, const Vec3<float>& center, float damage, float radius_damage)           
 { 
 	explosion->SetCenter(center);
 	effect_PARTICLESYSTEM_vec.push_back(explosion); 
 	
-	int obSize = explosion->GetObSize();
-	if ((obSize > 3) && (GetShockWaveNum() < SHOCKWAVES_MAX_NUM))
+	float radius_effect = explosion->GetRadius();
+	if ((radius_effect > 75) && (GetShockWaveNum() < SHOCKWAVES_MAX_NUM))
 	{
-		ShockWaveEffect* shockwave = getNewShockWave(obSize);
+		ShockWaveEffect* shockwave = getNewShockWave(radius_effect);
 		Add(shockwave, center);
 	}
-
-	DamageEventInsideCircle(center, radius, damage, true);
 	
+	if (radius_effect > 25)
+	{
+		DamageEventInsideCircle(center, radius_damage, damage, true);
+	}
 	//explosion.play()
 }
 
 void StarSystem::Add(ExplosionEffect* explosion, const Vec3<float>& center)           
 { 
-	int obSize = explosion->GetObSize();
+	float radius_effect = explosion->GetRadius();
+	float radius_damage = radius_effect;
 	float damage = 0;
-	float radius = obSize*100;
-	Add(explosion, center, damage, radius);
+	Add(explosion, center, damage, radius_damage);
 }
 
 void StarSystem::Add(LazerTraceEffect* lazerTraceEffect)     { effect_LAZERTRACE_vec.push_back(lazerTraceEffect); }
@@ -456,7 +455,7 @@ void StarSystem::UpdateStates()
 {
 	if (CONTAINER_vec.size() < 100)
 	{
-		AsteroidManager_s(3);
+		AsteroidManager_s(30);
 	}
 	     	
 	if (Config::Instance().GetGameMode() == GAME_MODE::CRASH_TEST)
@@ -1003,7 +1002,7 @@ void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
 	float damage = ((Bomb*)container->GetItemSlot()->GetItem())->GetDamage(); 
 	Vec3<float> center(container->GetCenter());
 	
-	ExplosionEffect* explosion = getNewExplosion(9);
+	ExplosionEffect* explosion = getNewExplosion1(radius);
 	Add(explosion, center, radius, damage);
 }
 
@@ -1033,11 +1032,15 @@ void StarSystem::DamageEventInsideCircle(const Vec3<float>& center, float radius
     	
     	for (unsigned int i=0; i<CONTAINER_vec.size(); i++)       	
      	{
-     		if ( distanceBetween(CONTAINER_vec[i]->GetCenter(), center) < radius )
-     		{ 
-     			Vec3<float> dir(CONTAINER_vec[i]->GetCenter() - center);
-     			dir.Normalize();
-     			CONTAINER_vec[i]->ApplyImpulse(dir, 3.0); 
+     		float dist = distanceBetween(CONTAINER_vec[i]->GetCenter(), center);
+     		if ( dist < radius )
+     		{
+     		     	Vec3<float> force_dir(CONTAINER_vec[i]->GetCenter() - center);
+     			force_dir.Normalize();
+     		     	float force_power = CONVERTER::RADIUS2FORCE.GetEquivalent(dist); 
+     		     	std::cout<<dist<<" "<<force_power<<" "<<str(force_dir)<<std::endl;      		     	
+
+     			CONTAINER_vec[i]->ApplyImpulse(force_dir, force_power); 
      		}
      	}
      	

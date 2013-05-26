@@ -52,7 +52,7 @@ void BaseDrawable::BindData3D(Mesh* mesh, TextureOb* textureOb, const Vec3<float
 	this->mesh = mesh;
 	this->textureOb = textureOb; 
 	SetScale(scale);
-	collision_radius = (scale.x + scale.y) / 3.0;
+	collision_radius = (scale.x + scale.y) / 2.0;
 }
 
 void BaseDrawable::BindData2D(TextureOb* textureOb)

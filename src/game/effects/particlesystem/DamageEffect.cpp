@@ -82,8 +82,8 @@ DamageEffect* getNewDamageEffect(int color_id, BaseSpaceEntity* parent)
    
     	ParticleData data_particle;
         data_particle.size_start = 25;
-        data_particle.size_end = 0.1;
-        data_particle.d_size = 0.01; 
+        data_particle.size_end = 2.0;
+        data_particle.d_size = 0.02; 
         
         data_particle.velocity_start = 1.3;
         data_particle.velocity_end   = 1.3;        

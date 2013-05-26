@@ -27,6 +27,8 @@
 #include "../world/starsystem.hpp"
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 
+#include "../spaceobjects/Container.hpp"
+
 #include "../common/Logger.hpp"
 
 Asteroid::Asteroid(int id)
@@ -63,19 +65,27 @@ void Asteroid::CollisionEvent(bool show_effect)
     
 void Asteroid::PostDeathUniqueEvent(bool show_effect)
 {
-       	for (int i = 0; i<3; i++)
+	int _angleZ = getRandInt(0, 360);
+    	float impulse_strength = 0.5;
+       	for (int i=0; i<3; i++)
 	{      
                 TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MINERAL_ID);   
                 GoodsPack* goods_pack = GetNewGoodsPack(ENTITY::MINERALS_ID);
                 goods_pack->Increase(4);
 
                 Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb, goods_pack);
+                
+                Vec3<float> impulse_dir(getXYVec3Unit(_angleZ));
+    		container->ApplyImpulse(impulse_dir, impulse_strength);
+    	
 		starsystem->AddContainer(container, GetCenter());
+		
+		_angleZ += 120;
    	}
    	
    	if (show_effect == true)
      	{
-     		ExplosionEffect* explosion = getNewExplosion(collision_radius/2);
+     		ExplosionEffect* explosion = getNewExplosion1(GetCollisionRadius());
         	starsystem->Add(explosion, GetCenter());        		
         }
         			
