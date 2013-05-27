@@ -42,18 +42,7 @@
 #include "../builder/ItemSlotBuilder.hpp"
 #include "../builder/VehicleSlotBuilder.hpp"
 
-#include "../builder/items/equipment/BakEquipmentBuilder.hpp"
-#include "../builder/items/equipment/DriveEquipmentBuilder.hpp"
-#include "../builder/items/equipment/GrappleEquipmentBuilder.hpp"
-#include "../builder/items/equipment/LazerEquipmentBuilder.hpp"
-#include "../builder/items/equipment/ProtectorEquipmentBuilder.hpp"
-#include "../builder/items/equipment/RocketEquipmentBuilder.hpp"
-#include "../builder/items/equipment/ScanerEquipmentBuilder.hpp"
-#include "../builder/items/equipment/DroidEquipmentBuilder.hpp"
-#include "../builder/items/equipment/RadarEquipmentBuilder.hpp"
-#include "../builder/items/equipment/FreezerEquipmentBuilder.hpp"
-#include "../builder/items/equipment/EnergizerEquipmentBuilder.hpp"
-
+#include "../builder/items/IncludeItemBuilders.hpp"
 #include "../builder/spaceobjects/ShipBuilder.hpp"
 
 StoreBuilder& StoreBuilder::Instance()

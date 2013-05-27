@@ -17,26 +17,21 @@
 */
 
 #include "StarSystemBuilder.hpp"
+#include "../CommonBuilderHeaders.hpp"
+#include "../NpcBuilder.hpp"
 
-#include "NpcBuilder.hpp"
-#include "spaceobjects/StarBuilder.hpp"
-#include "spaceobjects/PlanetBuilder.hpp"
-#include "spaceobjects/SpaceStationBuilder.hpp"
-#include "spaceobjects/SatelliteBuilder.hpp"
-#include "spaceobjects/ShipBuilder.hpp"
-#include "../spaceobjects/BlackHole.hpp"
-#include "../spaceobjects/Planet.hpp"
-#include "../spaceobjects/Star.hpp"
 
-#include "../common/IdGenerator.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/Logger.hpp"
-#include "../common/rand.hpp"
+#include "../spaceobjects/IncludeSpaceObjectBuilders.hpp"
 
-#include "../world/starsystem.hpp"
 
-#include "../effects/DistantNebulaEffect.hpp"
-#include "../effects/DistantStarEffect.hpp"
+#include "../../spaceobjects/BlackHole.hpp"
+#include "../../spaceobjects/Planet.hpp"
+#include "../../spaceobjects/Star.hpp"
+
+#include "../../world/starsystem.hpp"
+
+#include "../../effects/DistantNebulaEffect.hpp"
+#include "../../effects/DistantStarEffect.hpp"
 
 
 StarSystemBuilder& StarSystemBuilder::Instance()

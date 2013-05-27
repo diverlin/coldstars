@@ -18,18 +18,13 @@
 
 #include "GalaxyBuilder.hpp"
 #include "StarSystemBuilder.hpp"
-#include "../world/galaxy.hpp"
-#include "../world/starsystem.hpp"
+#include "../CommonBuilderHeaders.hpp"
+#include "../../world/galaxy.hpp"
+#include "../../world/starsystem.hpp"
 
-#include "../config/config.hpp"
+#include "../../config/config.hpp"
 
-#include "../common/IdGenerator.hpp"
-#include "../common/Logger.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/rand.hpp"
-#include "../common/common.hpp"
-
-#include "../struct/GalaxyDescription.hpp"
+#include "../../struct/GalaxyDescription.hpp"
 
 GalaxyBuilder& GalaxyBuilder::Instance()
 {
