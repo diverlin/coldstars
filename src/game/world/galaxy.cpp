@@ -17,13 +17,11 @@
 */
 
 #include "galaxy.hpp"
-#include "starsystem.hpp"
+#include "Sector.hpp"
 #include "../common/constants.hpp"
 #include "../world/EntityManager.hpp"
 #include "../common/rand.hpp"
 #include "../common/myStr.hpp"
-#include "../pilots/Player.hpp"
-#include "../pilots/Npc.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
 #include "../struct/StarSystemsConditionData.hpp"
@@ -41,105 +39,71 @@ Galaxy::~Galaxy()
 /* virtual */
 void Galaxy::PutChildsToGarbage() const
 {
-	for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
+	for (unsigned int i=0; i<SECTOR_vec.size(); i++)
 	{	
-		EntityGarbage::Instance().Add(STARSYSTEM_vec[i]);
+		EntityGarbage::Instance().Add(SECTOR_vec[i]);
 	}
 }
 
-void Galaxy::Add(StarSystem* starsystem, const Vec3<float>& center) 
+void Galaxy::Add(Sector* sector, const Vec3<float>& center) 
 { 
-	starsystem->SetGalaxy(this);
-        starsystem->SetCenter(center);
+	sector->SetGalaxy(this);
+        sector->SetCenter(center);
         
-	STARSYSTEM_vec.push_back(starsystem); 
+	SECTOR_vec.push_back(sector); 
 }
      		
-StarSystem* Galaxy::GetRandomStarSystem(int condition_id)
+Sector* Galaxy::GetRandomSector()
 {
-	if (condition_id == NONE_ID)
-	{
-		return STARSYSTEM_vec[getRandInt(0, STARSYSTEM_vec.size()-1)];
-	}
-	else
-	{
-		std::vector<StarSystem*> ss_vec;	
-		for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
-		{
-			if (STARSYSTEM_vec[i]->GetConditionId() == condition_id)
-			{
-				ss_vec.push_back(STARSYSTEM_vec[i]);
-			}
-		}
-	
-		if (ss_vec.size() > 0)
-		{
-			return ss_vec[getRandInt(0, ss_vec.size()-1)];
-		}
-	}
-
-	return NULL;
+	return SECTOR_vec[getRandInt(0, SECTOR_vec.size()-1)];
 }
 
  
     		
-StarSystem* Galaxy::GetClosestStarSystemTo(StarSystem* starsystem, int condition_id)
+Sector* Galaxy::GetClosestSectorTo(Sector* sector)
 {
-        float dist_min = 0;
+        float dist_min = INCREDIBLY_MAX_FLOAT;
         int index_min = -1;
         
-        for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
+        for (unsigned int i=0; i<SECTOR_vec.size(); i++)
         {
-                if (STARSYSTEM_vec[i]->GetId() != starsystem->GetId())
-                {                        
-                        if ( (STARSYSTEM_vec[i]->GetConditionId() == condition_id) or (condition_id == NONE_ID) )
-                        {                                
-                                float dist = distanceBetween(starsystem->GetCenter(), STARSYSTEM_vec[i]->GetCenter());
-                                
-                                if ( (dist < dist_min) or (dist == 0) )
-                                {
-                                        dist_min = dist;
-                                        index_min = i;                                        
-                                }
-                        }
+		float dist = distanceBetween(sector->GetCenter(), SECTOR_vec[i]->GetCenter());                                
+                if (dist < dist_min)
+                {
+                	dist_min = dist;
+                        index_min = i;
                 }
         }
 
         if (index_min != -1)
         {
-                return STARSYSTEM_vec[index_min];
+                return SECTOR_vec[index_min];
         }
         
         return NULL;
 }
      		
-void Galaxy::Update(Player* player, int time)
+void Galaxy::Update(int time)
 {
-	for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
-     	{
-     		bool simulation_detalied = false;
-     		if (player->GetNpc()->GetVehicle()->GetStarSystem()->GetId() == STARSYSTEM_vec[i]->GetId())
-		{
-			simulation_detalied = true;
-		}
-		 
-     		STARSYSTEM_vec[i]->Update(time, simulation_detalied);
+	for (unsigned int i=0; i<SECTOR_vec.size(); i++)
+     	{		 
+     		SECTOR_vec[i]->Update(time);
      	}
 }
 
 void Galaxy::FillStarSystemsCondition(StarSystemsConditionData& data_starsystems_condition) const
 {
-	data_starsystems_condition.Reset();
+	//data_starsystems_condition.Reset();
 	
-	for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
-	{
-		switch (STARSYSTEM_vec[i]->GetConditionId())
-		{
-			case ENTITY::STARSYSTEM::CONDITION::SAFE_ID: 		{ data_starsystems_condition.safe_num++; break; }
-			case ENTITY::STARSYSTEM::CONDITION::WAR_ID: 		{ data_starsystems_condition.war_num++; break; }
-			case ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID: 	{ data_starsystems_condition.captured_num++; break; }
-		}
-	}
+	//for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
+	//{
+		//switch (STARSYSTEM_vec[i]->GetConditionId())
+		//{
+			//case ENTITY::STARSYSTEM::CONDITION::SAFE_ID: 		{ data_starsystems_condition.safe_num++; break; }
+			//case ENTITY::STARSYSTEM::CONDITION::WAR_ID: 		{ data_starsystems_condition.war_num++; break; }
+			//case ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID: 	{ data_starsystems_condition.captured_num++; break; }
+		//}
+	//}
 }
 		
 void Galaxy::SaveDataUniqueGalaxy(boost::property_tree::ptree& save_ptree, const std::string& root) const

@@ -22,9 +22,7 @@
 
 #include "../common/Base.hpp"
 #include "../common/constants.hpp"
-class StarSystem;
-class Player;
-
+class Sector;
 class StarSystemsConditionData;
 
 class Galaxy : public Base
@@ -35,12 +33,12 @@ class Galaxy : public Base
                 
                 virtual void PutChildsToGarbage() const;
                 
-     		void Add(StarSystem*, const Vec3<float>&);
+     		void Add(Sector*, const Vec3<float>&);
      		
-     		StarSystem* GetRandomStarSystem(int condition_id = NONE_ID);
-                StarSystem* GetClosestStarSystemTo(StarSystem*, int condition_id = NONE_ID);
+     		Sector* GetRandomSector();
+                Sector* GetClosestSectorTo(Sector*);
                      
-    		void Update(Player*, int);
+    		void Update(int);
 
 		void FillStarSystemsCondition(StarSystemsConditionData&) const;
 
@@ -49,7 +47,7 @@ class Galaxy : public Base
     		void ResolveData();
 
      	private:
-  	     	std::vector<StarSystem*> STARSYSTEM_vec;
+  	     	std::vector<Sector*> SECTOR_vec;
 		
     		void SaveDataUniqueGalaxy(boost::property_tree::ptree&, const std::string&) const;
     		void LoadDataUniqueGalaxy(const boost::property_tree::ptree&);
@@ -59,6 +57,5 @@ class Galaxy : public Base
   	     	friend class Observation;
                 friend class God;
 };
-
 
 #endif 

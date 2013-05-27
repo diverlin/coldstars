@@ -17,16 +17,13 @@
 */
 
 #include "StarSystemBuilder.hpp"
+#include "../../struct/StarSystemDescription.hpp"
 #include "../CommonBuilderHeaders.hpp"
 #include "../NpcBuilder.hpp"
 
 
 #include "../spaceobjects/IncludeSpaceObjectBuilders.hpp"
-
-
-#include "../../spaceobjects/BlackHole.hpp"
-#include "../../spaceobjects/Planet.hpp"
-#include "../../spaceobjects/Star.hpp"
+#include "../../spaceobjects/IncludeSpaceObjects.hpp"
 
 #include "../../world/starsystem.hpp"
 
@@ -66,15 +63,15 @@ StarSystem* StarSystemBuilder::GetNewStarSystemTemplate(unsigned long int id) co
         return starsystem;
 } 
 
-StarSystem* StarSystemBuilder::GetNewStarSystem() const
+StarSystem* StarSystemBuilder::GetNewStarSystem(const StarSystemDescription& starsystem_description) const
 {
 	StarSystem* starsystem = GetNewStarSystemTemplate();
-	CreateNewInternals(starsystem);
+	CreateNewInternals(starsystem, starsystem_description);
         
         return starsystem;
 } 
         	
-void StarSystemBuilder::CreateNewInternals(StarSystem* starsystem) const
+void StarSystemBuilder::CreateNewInternals(StarSystem* starsystem, const StarSystemDescription& starsystem_description) const
 {
         CreateStar(starsystem);
         
@@ -82,8 +79,7 @@ void StarSystemBuilder::CreateNewInternals(StarSystem* starsystem) const
         int distStar_num = getRandInt(ENTITY::STARSYSTEM::DISTANT_STAR_MIN, ENTITY::STARSYSTEM::DISTANT_STAR_MAX);
         CreateBackground(starsystem, distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
           
-        int planet_num = 10*getRandInt(ENTITY::STARSYSTEM::PLANET_NUM_MIN, ENTITY::STARSYSTEM::PLANET_NUM_MAX);
-        CreatePlanets(starsystem, planet_num);
+        CreatePlanets(starsystem, starsystem_description.planet_num);
 }
  
 void StarSystemBuilder::CreateBackground(StarSystem* starsystem, int distNebula_num, int distStar_num, int color_id) const

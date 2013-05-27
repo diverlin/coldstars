@@ -26,8 +26,7 @@ struct StarSystemDescription
 	public:
 		int race_id;
 		
-		int planet_num_min;
-		int planet_num_max;
+		int planet_num;
 		int spacestation_num_min;
 		int spacestation_num_max;
 
@@ -43,8 +42,7 @@ struct StarSystemDescription
 														
 		StarSystemDescription():
 		race_id(RACE::R0_ID),
-		planet_num_min(ENTITY::STARSYSTEM::PLANET_NUM_MIN),
-		planet_num_max(ENTITY::STARSYSTEM::PLANET_NUM_MAX),		
+		planet_num(ENTITY::STARSYSTEM::PLANET_NUM_MIN),
 		spacestation_num_min(ENTITY::STARSYSTEM::SPACESTATION_NUM_MIN),
 		spacestation_num_max(ENTITY::STARSYSTEM::SPACESTATION_NUM_MAX),
 		allow_ships(true),

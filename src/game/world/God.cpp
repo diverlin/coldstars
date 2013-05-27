@@ -36,6 +36,7 @@
 #include "../common/Date.hpp"
 
 #include "../world/galaxy.hpp"
+#include "../world/Sector.hpp"
 #include "../world/starsystem.hpp"
 
 #include "../ai/Task.hpp"
@@ -72,20 +73,23 @@ void God::Init(Galaxy* galaxy, const GalaxyDescription& galaxy_description)
 
 void God::CreateLife(const GalaxyDescription& galaxy_description) const
 {
-        for(unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
+        for(unsigned int i=0; i<galaxy->SECTOR_vec.size(); i++)
         {
-     		const StarSystemDescription& starsystem_description = galaxy_description.starsystems[i];
-		StarSystem* starsystem = galaxy->STARSYSTEM_vec[i];
-		
-	        for(int j=0; j<starsystem->PLANET_vec.size(); j++)
-	        {        
-	                CreateLifeAtPlanet(starsystem->PLANET_vec[j], starsystem_description);
-	        }
-
-		if (starsystem_description.allow_spacestations == true)
-		{
-			int spacestation_num = getRandInt(starsystem_description.spacestation_num_min, starsystem_description.spacestation_num_max);
-        		CreateSpaceStations(starsystem, spacestation_num);
+        	for(unsigned int j=0; j<galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
+        	{	        
+	     		const StarSystemDescription& starsystem_description = galaxy_description.sector_descriptions[i].starsystem_descriptions[j];
+			StarSystem* starsystem = galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j];
+			
+		        for(int j=0; j<starsystem->PLANET_vec.size(); j++)
+		        {        
+		                CreateLifeAtPlanet(starsystem->PLANET_vec[j], starsystem_description);
+		        }
+	
+			if (starsystem_description.allow_spacestations == true)
+			{
+				int spacestation_num = getRandInt(starsystem_description.spacestation_num_min, starsystem_description.spacestation_num_max);
+	        		CreateSpaceStations(starsystem, spacestation_num);
+	        	}
         	}
         }
 }
@@ -94,22 +98,22 @@ void God::CreateInvasion(const GalaxyDescription& galaxy_description) const
 {
 	for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++)
 	{
-		StarSystem* starsystem = galaxy->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+		StarSystem* starsystem = galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
 		int race_id = getRandInt(RACE::R6_ID, RACE::R7_ID);
         	int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
-        	CreateShipsInSpace(starsystem, ship_num, race_id);   ;
+        	CreateShipsInSpace(starsystem, ship_num, race_id);
 	}
 }
 
 void God::ProceedInvasion() const
 {
-	StarSystem* starsystem_invade_from = galaxy->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
+	StarSystem* starsystem_invade_from = galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
 	if (starsystem_invade_from == NULL)
 	{
 		return;
 	}
 	
-	StarSystem* starsystem_invade_to   = galaxy->GetClosestStarSystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+	StarSystem* starsystem_invade_to   = galaxy->GetClosestSectorTo(starsystem_invade_from->GetSector())->GetClosestStarSystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
 	if (starsystem_invade_to == NULL)
 	{
 		return;

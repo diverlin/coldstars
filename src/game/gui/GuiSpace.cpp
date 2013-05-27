@@ -40,6 +40,7 @@
 #include "../pilots/Npc.hpp"
 
 #include "../world/starsystem.hpp"
+#include "../world/Sector.hpp"
 
 #include "../slots/ItemSlot.hpp"
 
@@ -152,7 +153,7 @@ void GuiSpace::EnterGalaxyMap()
         }
 
         show_gui_radar = false;          
-        gui_galaxymap_shared->BindGalaxy(player->GetNpc()->GetStarSystem()->GetGalaxy());
+        gui_galaxymap_shared->BindGalaxy(player->GetNpc()->GetStarSystem()->GetSector()->GetGalaxy());
 }
 
 void GuiSpace::ExitGalaxyMap()

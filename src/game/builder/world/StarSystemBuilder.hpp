@@ -20,6 +20,7 @@
 #define STARSYSTEMBUILDER_H
 
 class StarSystem;
+class StarSystemDescription;
 #include "../../common/constants.hpp"
 
 class StarSystemBuilder
@@ -29,14 +30,14 @@ class StarSystemBuilder
 		~StarSystemBuilder();
 
         	StarSystem* GetNewStarSystemTemplate(unsigned long int id = NONE_ID) const; 
-                StarSystem* GetNewStarSystem() const;
+                StarSystem* GetNewStarSystem(const StarSystemDescription&) const;
                        	 		                
         private:
 		StarSystemBuilder() {};
 		StarSystemBuilder(const StarSystemBuilder&) = delete;
 		StarSystemBuilder& operator=(const StarSystemBuilder&) = delete;
 		
-		void CreateNewInternals(StarSystem*) const;
+		void CreateNewInternals(StarSystem*, const StarSystemDescription&) const;
                 
                 void CreateBackground(StarSystem*, int, int, int) const;
         	void CreateStar(StarSystem*) const;

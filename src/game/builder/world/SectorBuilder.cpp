@@ -16,28 +16,28 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "GalaxyBuilder.hpp"
 #include "SectorBuilder.hpp"
+#include "StarSystemBuilder.hpp"
 #include "../CommonBuilderHeaders.hpp"
-#include "../../world/galaxy.hpp"
 #include "../../world/Sector.hpp"
+#include "../../world/starsystem.hpp"
 
 #include "../../config/config.hpp"
 
 #include "../../struct/GalaxyDescription.hpp"
 
-GalaxyBuilder& GalaxyBuilder::Instance()
+SectorBuilder& SectorBuilder::Instance()
 {
-	static GalaxyBuilder instance;
+	static SectorBuilder instance;
 	return instance;
 }
 
-GalaxyBuilder::~GalaxyBuilder()
+SectorBuilder::~SectorBuilder()
 {}
 
-Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(unsigned long int id) const
+Sector* SectorBuilder::GetNewSectorTemplate(unsigned long int id) const
 {
-	Galaxy* galaxy = NULL;
+	Sector* sector = NULL;
 	if (id == NONE_ID)
 	{
 		id = EntityIdGenerator::Instance().GetNextId();
@@ -45,41 +45,35 @@ Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(unsigned long int id) const
 
         try 
         { 
-        	galaxy = new Galaxy(id);
+        	sector = new Sector(id);
         }
         catch(std::bad_alloc)
         {
         	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
-        EntityManager::Instance().RegisterEntity(galaxy);
+        EntityManager::Instance().RegisterEntity(sector);
         
-        return galaxy;
+        return sector;
 } 
 
-Galaxy* GalaxyBuilder::GetNewGalaxy(const GalaxyDescription& galaxy_description) const
+Sector* SectorBuilder::GetNewSector(const SectorDescription& sector_description) const
 {
-	Galaxy* galaxy = GetNewGalaxyTemplate();
-        CreateNewInternals(galaxy, galaxy_description);
+	Sector* sector = GetNewSectorTemplate();
+        CreateNewInternals(sector, sector_description);
         
-	return galaxy;
+	return sector;
 } 
 
 
         	
-void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy, const GalaxyDescription& galaxy_description) const
-{     
-	Vec3<float> pos;
-    	for(int i=0; i<galaxy_description.sector_descriptions.size(); i++)
+void SectorBuilder::CreateNewInternals(Sector* sector, const SectorDescription& sector_description) const
+{
+    	for(unsigned int i=0; i<sector_description.starsystem_descriptions.size(); i++)
     	{  
-    		Vec3<float> offset = getRandXYVec3f(2, 20, 0);
-    		pos.x += 20;
-    		pos.y = 200;
-    		pos.z = DEFAULT_ENTITY_ZPOS;
-    		    		    		
-               	Vec3<float> center(pos+offset);                	                
+               	Vec3<float> center(getRandXYVec3f(10, 40, DEFAULT_ENTITY_ZPOS));                	                
                 	                
-       		Sector* sector = SectorBuilder::Instance().GetNewSector(galaxy_description.sector_descriptions[i]);
-       		galaxy->Add(sector, center); 
+       		StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem(sector_description.starsystem_descriptions[i]);
+       		sector->Add(starsystem, center); 
  	}
 }
 

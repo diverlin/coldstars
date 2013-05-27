@@ -16,26 +16,27 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GALAXYDESCRIPTION_H
-#define GALAXYDESCRIPTION_H
+#ifndef SECTORDESCRIPTION_H
+#define SECTORDESCRIPTION_H
+
+#include <vector>
 
 #include "../common/constants.hpp"
-#include <vector>
-#include "SectorDescription.hpp"
+#include "StarSystemDescription.hpp"
 
-struct GalaxyDescription
+struct SectorDescription
 {
 	public:
-		int sector_num;
+		int starsystem_num;
 		bool allow_invasion;
-		std::vector<SectorDescription> sector_descriptions;
+		std::vector<StarSystemDescription> starsystem_descriptions;
 		
-		GalaxyDescription():
-		sector_num(ENTITY::GALAXY::SECTOR_NUM),
+		SectorDescription():
+		starsystem_num(ENTITY::GALAXY::STARSYSTEM_NUM_MIN),
 		allow_invasion(true)
 		{};
 		
-		~GalaxyDescription() {};
+		~SectorDescription() {};
 }; 
 
 #endif 
