@@ -50,9 +50,7 @@ class Cursor : public BaseGui
 		void RenderFocusedObjectStuff() const;
 		void RenderFocusedObjectInfo();
 				
-        private:
-        	//Vec2<float> offset;
-        	
+        private:       	
         	ItemSlot* item_slot;  
         	Rect rect;      	
         	

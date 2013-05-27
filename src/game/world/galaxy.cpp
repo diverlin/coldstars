@@ -26,7 +26,7 @@
 #include "../pilots/Npc.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
-#include "StarSystemsConditionData.hpp"
+#include "../struct/StarSystemsConditionData.hpp"
 
 Galaxy::Galaxy(int id)
 {
