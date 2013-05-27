@@ -70,7 +70,7 @@ class Sector : public BaseSpaceEntity
     		void LoadDataUniqueSector(const boost::property_tree::ptree&);
     		void ResolveDataUniqueSector();
     		  	     	
-  	     	friend class GuiSectorMap;
+  	     	friend class GuiGalaxyMap;
   	     	friend class Observation;
                 friend class God;
 };
