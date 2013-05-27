@@ -19,6 +19,7 @@
 #include "Npc.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../world/starsystem.hpp"
+#include "../world/Sector.hpp"
 #include "../common/myStr.hpp"
 #include "../common/rand.hpp"
 #include "../world/EntityManager.hpp"
@@ -225,7 +226,7 @@ Planet* Npc::GetPlanetForDocking()
 
 StarSystem* Npc::GetClosestStarSystem(int requested_condition_id)
 {
-       	observation.FindEchievableStarSystems(GetStarSystem()->GetGalaxy());
+       	observation.FindEchievableStarSystems(GetStarSystem()->GetSector()->GetGalaxy());
         	
        	StarSystem* _target_starsystem = observation.GetClosestStarSystem(requested_condition_id);   
 	return _target_starsystem;

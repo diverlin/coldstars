@@ -16,27 +16,32 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GALAXYDESCRIPTION_H
-#define GALAXYDESCRIPTION_H
 
-#include "../common/constants.hpp"
-#include <vector>
-#include "SectorDescription.hpp"
+#ifndef SECTORBUILDER_H
+#define SECTORBUILDER_H
 
-struct GalaxyDescription
+class Sector;
+class SectorDescription;
+#include "../../common/constants.hpp"
+
+class SectorBuilder
 {
 	public:
-		int sector_num;
-		bool allow_invasion;
-		std::vector<SectorDescription> sector_descriptions;
-		
-		GalaxyDescription():
-		sector_num(ENTITY::GALAXY::SECTOR_NUM),
-		allow_invasion(true)
-		{};
-		
-		~GalaxyDescription() {};
+		static SectorBuilder& Instance();
+		~SectorBuilder();
+
+        	Sector* GetNewSectorTemplate(unsigned long int id = NONE_ID) const; 
+        	Sector* GetNewSector(const SectorDescription&) const; 
+        	        	        	 		                
+        private:
+		SectorBuilder() {};
+		SectorBuilder(const SectorBuilder&) = delete;
+		SectorBuilder& operator=(const SectorBuilder&) = delete;
+
+                void CreateNewInternals(Sector*, const SectorDescription&) const;
 }; 
+
+
 
 #endif 
     

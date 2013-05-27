@@ -32,6 +32,7 @@
 #include "spaceobjects/Planet.hpp"
 
 #include "world/galaxy.hpp"
+#include "world/Sector.hpp"
 #include "world/starsystem.hpp"
 
 #include "garbage/EntityGarbage.hpp"
@@ -60,25 +61,33 @@ int main()
 
 	GalaxyDescription galaxy_description;
 	galaxy_description.allow_invasion = false;
-	galaxy_description.starsystem_num = 2;
+	galaxy_description.sector_num = 2;
 	
-	for (unsigned int i=0; i<galaxy_description.starsystem_num; i++)
+	for (unsigned int i=0; i<galaxy_description.sector_num; i++)
 	{
-		StarSystemDescription starsystem_description;
-		starsystem_description.planet_num_min = 50;
-		starsystem_description.planet_num_max = 50;
-				
-		starsystem_description.spacestation_num_min = 10;
-		starsystem_description.spacestation_num_max = 10;
-		starsystem_description.allow_satellites = false;
-		starsystem_description.allow_spacestations = true;
+		SectorDescription sector_description;
+		sector_description.starsystem_num = 2;
 		
-		starsystem_description.allow_ship_ranger   = false;
-		starsystem_description.allow_ship_warrior  = false;
-		starsystem_description.allow_ship_trader   = true;
-		starsystem_description.allow_ship_pirat    = false;
-		starsystem_description.allow_ship_diplomat = false;
-		galaxy_description.starsystems.push_back(starsystem_description);
+		for (unsigned int j=0; j<sector_description.starsystem_num; j++)		
+		{
+			StarSystemDescription starsystem_description;
+			starsystem_description.planet_num = 5;
+					
+			starsystem_description.spacestation_num_min = 10;
+			starsystem_description.spacestation_num_max = 10;
+			starsystem_description.allow_satellites = false;
+			starsystem_description.allow_spacestations = true;
+			
+			starsystem_description.allow_ship_ranger   = false;
+			starsystem_description.allow_ship_warrior  = false;
+			starsystem_description.allow_ship_trader   = true;
+			starsystem_description.allow_ship_pirat    = false;
+			starsystem_description.allow_ship_diplomat = false;
+			sector_description.starsystem_descriptions.push_back(starsystem_description);
+		}
+	
+		
+		galaxy_description.sector_descriptions.push_back(sector_description);			
 	}
 	
 	Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
@@ -91,11 +100,11 @@ int main()
         {
                 Vec3<float> center(500, 500, DEFAULT_ENTITY_ZPOS);
                 Vec3<float> angle(0,0,0);  
-                galaxy->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, NULL);
+                galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, NULL);
 	}
         else
         {
-                galaxy->GetRandomStarSystem()->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
+                galaxy->GetRandomSector()->GetRandomStarSystem()->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
         }
         
         player->GetNpc()->GetVehicle()->SetGodMode(true);
@@ -112,7 +121,7 @@ int main()
 		God::Instance().Update(GameDate::Instance().GetDate());
 		for (int i=0; i<Config::Instance().GAME_SPEED; i++)  // fake implementation (static ai should not be run several times at once)
 		{
-			galaxy->Update(player, TurnTimer::Instance().GetTurnTick());
+			galaxy->Update(TurnTimer::Instance().GetTurnTick());
 		}
 
 		if ((TurnTimer::Instance().GetTurnEnded() == true) and (UserInput::Instance().GetNextTurnReady()))
@@ -136,7 +145,7 @@ int main()
 			if (load_event == true)
 			{
 				player = EntityManager::Instance().GetPlayer();
-				galaxy = player->GetNpc()->GetVehicle()->GetStarSystem()->GetGalaxy();
+				galaxy = player->GetNpc()->GetVehicle()->GetStarSystem()->GetSector()->GetGalaxy();
 			}
 		}
 

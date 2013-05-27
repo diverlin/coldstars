@@ -32,6 +32,7 @@
 
 #include "../spaceobjects/Vehicle.hpp"
 #include "../world/starsystem.hpp"
+#include "../world/Sector.hpp"
 
 #include "../docking/Kosmoport.hpp"
 #include "../slots/ItemSlot.hpp"
@@ -273,7 +274,7 @@ void GuiKosmoport::EnterGuiGalaxyMapScreen()
 	#endif	
 	
         active_screen_id = GUI::SCREEN::GALAXYMAP_ID;        
-        gui_galaxymap_shared->BindGalaxy(player->GetNpc()->GetVehicle()->GetStarSystem()->GetGalaxy());
+        gui_galaxymap_shared->BindGalaxy(player->GetNpc()->GetVehicle()->GetStarSystem()->GetSector()->GetGalaxy());
 }
 
 void GuiKosmoport::ExitGuiGalaxyMapScreen()

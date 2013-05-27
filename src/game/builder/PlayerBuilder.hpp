@@ -16,27 +16,30 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GALAXYDESCRIPTION_H
-#define GALAXYDESCRIPTION_H
+#ifndef PLAYERBUILDER_H
+#define PLAYERBUILDER_H
 
+class Player;
 #include "../common/constants.hpp"
-#include <vector>
-#include "SectorDescription.hpp"
 
-struct GalaxyDescription
+class PlayerBuilder
 {
 	public:
-		int sector_num;
-		bool allow_invasion;
-		std::vector<SectorDescription> sector_descriptions;
-		
-		GalaxyDescription():
-		sector_num(ENTITY::GALAXY::SECTOR_NUM),
-		allow_invasion(true)
-		{};
-		
-		~GalaxyDescription() {};
+		static PlayerBuilder& Instance();
+		~PlayerBuilder();
+
+        	Player* GetNewPlayerTemplate(unsigned long int id = NONE_ID) const;
+        	Player* GetNewPlayer() const;
+        	 		                
+        private:               
+		PlayerBuilder() {};
+		PlayerBuilder(const PlayerBuilder&) = delete;
+		PlayerBuilder& operator=(const PlayerBuilder&) = delete;
+        	        	 
+                void CreateNewInternals(Player*) const;		
 }; 
+
+
 
 #endif 
     

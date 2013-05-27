@@ -33,7 +33,7 @@ class Vehicle;
 class SpaceStation;
 class Satellite; 
 class Ship; 
-class Galaxy;
+class Sector;
 class Container;
 class Player;
 
@@ -50,7 +50,7 @@ class Npc;
 
 struct UnresolvedDataUniqueStarSystem
 {
-	int galaxy_id;
+	int sector_id;
 };
 
 
@@ -62,7 +62,7 @@ class StarSystem : public BaseSpaceEntity
 		
 		virtual void PutChildsToGarbage() const;
 
-		void SetGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy; };
+		void SetSector(Sector* sector)  { this->sector = sector; };
 		void SetColor(const Color4<float>& color)  { this->color = color; };
 		const Color4<float>& GetColor4f()  { return color; };
 										
@@ -72,7 +72,7 @@ class StarSystem : public BaseSpaceEntity
 		int GetRaceId()          const { return race_id; };
 		int GetConquerorRaceId() const { return conqueror_race_id; };  
 		Star* GetStar()          const { return STAR_vec[0]; };		
-		Galaxy* GetGalaxy()      const { return galaxy; };
+		Sector* GetSector()      const { return sector; };
 		int GetShockWaveNum()    const { return effect_SHOCKWAVE_vec.size(); };
 		HyperSpace& GetHyperSpace() { return hyperspace; };
 		
@@ -106,7 +106,7 @@ class StarSystem : public BaseSpaceEntity
 		void FindRenderVisibleEntities_c(Player*);  
 		void FindRadarVisibleEntities_c(Player*);  
 		
-		void Update(int, bool);
+		void Update(int);
 
     		void RestoreDefaultColor();
     		void RestoreSceneColor();
@@ -137,7 +137,7 @@ class StarSystem : public BaseSpaceEntity
     		
     		int condition_id;
     		
-    		Galaxy* galaxy;
+    		Sector* sector;
     		Color4<float> color;
     	
     		// ENTITY VECTORS

@@ -17,7 +17,7 @@
 */
 
 #include "starsystem.hpp"
-#include "galaxy.hpp"
+#include "Sector.hpp"
 #include <boost/property_tree/ptree.hpp>
 #include <boost/foreach.hpp>
 #include "../math/myVector.hpp"
@@ -55,7 +55,8 @@ int StarSystem::counter = 0;
                 
 StarSystem::StarSystem(int id):
 unique_update_inDymanic_done(false),
-unique_update_inStatic_done(false)
+unique_update_inStatic_done(false),
+sector(NULL)
 { 
     	data_id.id = id;
     	data_id.type_id = ENTITY::STARSYSTEM_ID;
@@ -66,8 +67,7 @@ unique_update_inStatic_done(false)
     	
     	race_id = RACE::R0_ID;
     	conqueror_race_id = NONE_ID;
-
-    	galaxy = NULL;    	
+   	
     	this->SetStarSystem(this);
         
         counter++;
@@ -550,8 +550,10 @@ void StarSystem::UpdateStates()
 }
 
 
-void StarSystem::Update(int time, bool detalied_simulation)
+void StarSystem::Update(int time)
 {                
+	bool detalied_simulation = true;
+
 	UpdateEntities_s(time, detalied_simulation);
         ManageUnavaliableObjects_s();
         ManageDeadObjects_s();         // no need to update so frequently, pri /6
@@ -1040,7 +1042,7 @@ void StarSystem::PostDeathUniqueEvent(bool)
 
 void StarSystem::SaveDataUniqueStarSystem(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	save_ptree.put(root+"galaxy_id", galaxy->GetId());
+	save_ptree.put(root+"sector_id", sector->GetId());
 	
 	save_ptree.put(root+"color.r", color.r);
 	save_ptree.put(root+"color.g", color.g);
@@ -1061,7 +1063,7 @@ void StarSystem::SaveDataUniqueStarSystem(boost::property_tree::ptree& save_ptre
 
 void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& load_ptree)
 {
-	data_unresolved_StarSystem.galaxy_id = load_ptree.get<int>("galaxy_id");
+	data_unresolved_StarSystem.sector_id = load_ptree.get<int>("sector_id");
 	
 	color.r = load_ptree.get<float>("color.r");
 	color.g = load_ptree.get<float>("color.g");
@@ -1094,7 +1096,7 @@ void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& loa
 
 void StarSystem::ResolveDataUniqueStarSystem()
 {
-	((Galaxy*)EntityManager::Instance().GetEntityById(data_unresolved_StarSystem.galaxy_id))->Add(this, data_unresolved_Orientation.center);
+	((Sector*)EntityManager::Instance().GetEntityById(data_unresolved_StarSystem.sector_id))->Add(this, data_unresolved_Orientation.center);
 }
 
 void StarSystem::SaveData(boost::property_tree::ptree& save_ptree) const

@@ -35,17 +35,17 @@ Observation::~Observation()
     
 void Observation::FindEchievableStarSystems(Galaxy* galaxy)
 {
-        visible_STARSYSTEM_pair_vec.clear();
+        //visible_STARSYSTEM_pair_vec.clear();
 
-        for (unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
-        {    
-        	const Vec3<float>& starsystem_pos = npc_owner->GetVehicle()->GetStarSystem()->GetCenter();
-        	float dist = distanceBetween(starsystem_pos, galaxy->STARSYSTEM_vec[i]->GetCenter());
-                //if (dist < npc_owner->getShip()->propetries.hyper)
-                {
-                	visible_STARSYSTEM_pair_vec.push_back( Pair<StarSystem*>(galaxy->STARSYSTEM_vec[i], dist) );
-                } 
-        }
+        //for (unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
+        //{    
+        	//const Vec3<float>& starsystem_pos = npc_owner->GetVehicle()->GetStarSystem()->GetCenter();
+        	//float dist = distanceBetween(starsystem_pos, galaxy->STARSYSTEM_vec[i]->GetCenter());
+                ////if (dist < npc_owner->getShip()->propetries.hyper)
+                //{
+                	//visible_STARSYSTEM_pair_vec.push_back( Pair<StarSystem*>(galaxy->STARSYSTEM_vec[i], dist) );
+                //} 
+        //}
         
         //Sort(&visible_STARSYSTEM_vec);
 }
