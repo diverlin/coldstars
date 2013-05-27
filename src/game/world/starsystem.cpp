@@ -36,11 +36,7 @@
 
 #include "../items/others/Bomb.hpp"
 
-#include "../spaceobjects/SpaceStation.hpp"
-#include "../spaceobjects/Satellite.hpp"
-#include "../spaceobjects/Ship.hpp"
-#include "../spaceobjects/Planet.hpp"
-#include "../spaceobjects/BlackHole.hpp"
+#include "../spaceobjects/IncludeSpaceObjects.hpp"
 
 #include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
@@ -50,15 +46,6 @@
 #include "../text/VerticalFlowText.hpp" 
 #include "../effects/lazerTrace.hpp"
 
-#include "../spaceobjects/RocketBullet.hpp"
-#include "../spaceobjects/Container.hpp"
-#include "../spaceobjects/Star.hpp"
-#include "../spaceobjects/Planet.hpp"
-#include "../spaceobjects/BlackHole.hpp"
-#include "../spaceobjects/Asteroid.hpp"
-#include "../spaceobjects/SpaceStation.hpp"
-#include "../spaceobjects/Satellite.hpp"
-#include "../spaceobjects/Ship.hpp"
 
 #include "../common/Logger.hpp"
 

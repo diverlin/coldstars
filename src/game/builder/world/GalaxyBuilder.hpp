@@ -16,32 +16,32 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef STARSYSTEMBUILDER_H
-#define STARSYSTEMBUILDER_H
 
-class StarSystem;
-#include "../common/constants.hpp"
+#ifndef GALAXYBUILDER_H
+#define GALAXYBUILDER_H
 
-class StarSystemBuilder
+class Galaxy;
+class GalaxyDescription;
+#include "../../common/constants.hpp"
+
+class GalaxyBuilder
 {
 	public:
-		static StarSystemBuilder& Instance();
-		~StarSystemBuilder();
+		static GalaxyBuilder& Instance();
+		~GalaxyBuilder();
 
-        	StarSystem* GetNewStarSystemTemplate(unsigned long int id = NONE_ID) const; 
-                StarSystem* GetNewStarSystem() const;
-                       	 		                
+        	Galaxy* GetNewGalaxyTemplate(unsigned long int id = NONE_ID) const; 
+        	Galaxy* GetNewGalaxy(const GalaxyDescription&) const; 
+        	        	        	 		                
         private:
-		StarSystemBuilder() {};
-		StarSystemBuilder(const StarSystemBuilder&) = delete;
-		StarSystemBuilder& operator=(const StarSystemBuilder&) = delete;
-		
-		void CreateNewInternals(StarSystem*) const;
-                
-                void CreateBackground(StarSystem*, int, int, int) const;
-        	void CreateStar(StarSystem*) const;
-        	void CreatePlanets(StarSystem*, int) const;
+		GalaxyBuilder() {};
+		GalaxyBuilder(const GalaxyBuilder&) = delete;
+		GalaxyBuilder& operator=(const GalaxyBuilder&) = delete;
+
+                void CreateNewInternals(Galaxy*, const GalaxyDescription&) const;
 }; 
+
+
 
 #endif 
     

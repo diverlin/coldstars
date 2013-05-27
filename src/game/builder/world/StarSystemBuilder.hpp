@@ -16,30 +16,32 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef PLAYERBUILDER_H
-#define PLAYERBUILDER_H
+#ifndef STARSYSTEMBUILDER_H
+#define STARSYSTEMBUILDER_H
 
-class Player;
-#include "../common/constants.hpp"
+class StarSystem;
+#include "../../common/constants.hpp"
 
-class PlayerBuilder
+class StarSystemBuilder
 {
 	public:
-		static PlayerBuilder& Instance();
-		~PlayerBuilder();
+		static StarSystemBuilder& Instance();
+		~StarSystemBuilder();
 
-        	Player* GetNewPlayerTemplate(unsigned long int id = NONE_ID) const;
-        	Player* GetNewPlayer() const;
-        	 		                
-        private:               
-		PlayerBuilder() {};
-		PlayerBuilder(const PlayerBuilder&) = delete;
-		PlayerBuilder& operator=(const PlayerBuilder&) = delete;
-        	        	 
-                void CreateNewInternals(Player*) const;		
+        	StarSystem* GetNewStarSystemTemplate(unsigned long int id = NONE_ID) const; 
+                StarSystem* GetNewStarSystem() const;
+                       	 		                
+        private:
+		StarSystemBuilder() {};
+		StarSystemBuilder(const StarSystemBuilder&) = delete;
+		StarSystemBuilder& operator=(const StarSystemBuilder&) = delete;
+		
+		void CreateNewInternals(StarSystem*) const;
+                
+                void CreateBackground(StarSystem*, int, int, int) const;
+        	void CreateStar(StarSystem*) const;
+        	void CreatePlanets(StarSystem*, int) const;
 }; 
-
-
 
 #endif 
     

@@ -16,32 +16,20 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#ifndef INCLUDESPACEOBJECTBUILDERS_HPP
+#define INCLUDESPACEOBJECTBUILDERS_HPP
 
-#ifndef GALAXYBUILDER_H
-#define GALAXYBUILDER_H
+#include "StarBuilder.hpp"
+#include "PlanetBuilder.hpp"
+#include "AsteroidBuilder.hpp"
+#include "BlackHoleBuilder.hpp"
 
-class Galaxy;
-class GalaxyDescription;
-#include "../common/constants.hpp"
+#include "SpaceStationBuilder.hpp"
+#include "SatelliteBuilder.hpp"
+#include "ShipBuilder.hpp"
 
-class GalaxyBuilder
-{
-	public:
-		static GalaxyBuilder& Instance();
-		~GalaxyBuilder();
-
-        	Galaxy* GetNewGalaxyTemplate(unsigned long int id = NONE_ID) const; 
-        	Galaxy* GetNewGalaxy(const GalaxyDescription&) const; 
-        	        	        	 		                
-        private:
-		GalaxyBuilder() {};
-		GalaxyBuilder(const GalaxyBuilder&) = delete;
-		GalaxyBuilder& operator=(const GalaxyBuilder&) = delete;
-
-                void CreateNewInternals(Galaxy*, const GalaxyDescription&) const;
-}; 
-
-
+#include "ContainerBuilder.hpp"
+#include "RocketBulletBuilder.hpp"
 
 #endif 
     

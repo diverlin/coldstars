@@ -19,6 +19,7 @@
 #ifndef COMMONBUILDERHEADERS_HPP
 #define COMMONBUILDERHEADERS_HPP
 
+#include "../common/common.hpp"
 #include "../common/rand.hpp"
 #include "../common/IdGenerator.hpp"
 #include "../common/Logger.hpp"

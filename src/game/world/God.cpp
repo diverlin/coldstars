@@ -18,9 +18,7 @@
 
 #include "God.hpp"
 
-#include "../spaceobjects/Ship.hpp"
-#include "../spaceobjects/Planet.hpp"
-#include "../spaceobjects/BlackHole.hpp"
+#include "../spaceobjects/IncludeSpaceObjects.hpp"
 
 #include "../docking/Kosmoport.hpp"
 #include "../docking/NatureLand.hpp"

@@ -16,30 +16,20 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef NPCBUILDER_H
-#define NPCBUILDER_H
+#ifndef INCLUDESPACEOBJECTS_HPP
+#define INCLUDESPACEOBJECTS_HPP
 
-class Npc;
-#include "../common/constants.hpp"
+#include "Star.hpp"
+#include "Planet.hpp"
+#include "Asteroid.hpp"
+#include "BlackHole.hpp"
 
-class NpcBuilder
-{
-	public:
-		static NpcBuilder& Instance();
-		~NpcBuilder();
+#include "SpaceStation.hpp"
+#include "Satellite.hpp"
+#include "Ship.hpp"
 
-        	Npc* GetNewNpcTemplate(unsigned long int id = NONE_ID) const; 
-                Npc* GetNewNpc(int, int, int) const;
-                                       
-        private:            
-		NpcBuilder() {};
-		NpcBuilder(const NpcBuilder&) = delete;
-		NpcBuilder& operator=(const NpcBuilder&) = delete;
-                
-                void CreateNewInternals(Npc*, int, int, int) const;
-}; 
-
-
+#include "Container.hpp"
+#include "RocketBullet.hpp"
 
 #endif 
     
