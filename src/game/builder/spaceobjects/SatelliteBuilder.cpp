@@ -17,15 +17,8 @@
 */
 
 #include "SatelliteBuilder.hpp"
-
-#include "../common/IdGenerator.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/Logger.hpp"
-#include "../common/rand.hpp"
-#include "../resources/TextureManager.hpp"
-#include "../resources/textureOb.hpp"
-
-#include "../animations/AnimationConstantRotationAxisZ.hpp"
+#include "../CommonBuilderHeaders.hpp"
+#include "../../spaceobjects/Satellite.hpp"
 
 SatelliteBuilder& SatelliteBuilder::Instance()
 {	

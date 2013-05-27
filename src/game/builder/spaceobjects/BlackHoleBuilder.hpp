@@ -16,37 +16,27 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef STARBUILDER_H
-#define STARBUILDER_H
+#ifndef BLACKHOLEBUILDER_H
+#define BLACKHOLEBUILDER_H
 
-class Star;
-#include "../common/constants.hpp"
+class BlackHole;
+#include "../../common/constants.hpp"
 
-
-namespace ENTITY
-{
-	namespace STAR
-	{ 
-		const int SCALE_MIN = 200;
-		const int SCALE_MAX = 300;
-	}
-}
-
-class StarBuilder
+class BlackHoleBuilder
 {
 	public:
-		static StarBuilder& Instance();
-		~StarBuilder();
+		static BlackHoleBuilder& Instance();
+		~BlackHoleBuilder();
 
-        	Star* GetNewStarTemplate(unsigned long int id = NONE_ID) const; 
-                Star* GetNewStar() const;
+        	BlackHole* GetNewBlackHoleTemplate(unsigned long int id = NONE_ID) const; 
+                BlackHole* GetNewBlackHole() const;
         	 		                
         private:
-		StarBuilder() {};
-		StarBuilder(const StarBuilder&) = delete;
-		StarBuilder& operator=(const StarBuilder&) = delete;
+		BlackHoleBuilder() {};
+		BlackHoleBuilder(const BlackHoleBuilder&) = delete;
+		BlackHoleBuilder& operator=(const BlackHoleBuilder&) = delete;
 
-                void CreateNewInternals(Star*) const;
+                void CreateNewInternals(BlackHole*) const;
 }; 
 
 

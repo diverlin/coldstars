@@ -18,7 +18,7 @@
 
 #include "PlayerBuilder.hpp"
 #include "NpcBuilder.hpp"
-#include "ShipBuilder.hpp"
+#include "spaceobjects/ShipBuilder.hpp"
 
 #include "../common/IdGenerator.hpp"
 #include "../common/Logger.hpp"

@@ -16,41 +16,44 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SPACESTATIONBUILDER_H
-#define SPACESTATIONBUILDER_H
+#ifndef PLANETBUILDER_H
+#define PLANETBUILDER_H
 
-#include "BaseVehicleBuilder.hpp"
-#include "../spaceobjects/SpaceStation.hpp"
-#include "../common/constants.hpp"
-	
+class Planet;
+#include "../../common/constants.hpp"
+
 namespace ENTITY
 {
-	namespace SPACESTATION
+	namespace PLANET
 	{
-		const int SCALE_MIN = 200;
-		const int SCALE_MAX = 300;
-		
-		const int MASS_MIN = 1000;
-		const int MASS_MAX = 2000;
+		const int DISTANCE_MIN = 400;
+		const int DISTANCE_MAX = 500;
+		const int SCALE_MIN = 100;
+		const int SCALE_MAX = 190;
+		const int SPEED_MIN = 40;
+		const int SPEED_MAX = 50;
+		const int POPULATION_MIN = 6000;
+		const int POPULATION_MAX = 20000;
 	}
-}
-
-class SpaceStationBuilder : public BaseVehicleBuilder
+}	
+	
+class PlanetBuilder
 {
 	public:
-		static SpaceStationBuilder& Instance();
-		~SpaceStationBuilder();
-		
-		SpaceStation* GetNewSpaceStationTemplate(unsigned long int id = NONE_ID) const;							
-		SpaceStation* GetNewSpaceStation() const;         
-       
-        private:
-        	SpaceStationBuilder() {};   	
-        	SpaceStationBuilder(const SpaceStationBuilder&) = delete; 
-        	SpaceStationBuilder& operator=(const SpaceStationBuilder&) = delete;
+		static PlanetBuilder& Instance();
+		~PlanetBuilder();
 
-		void CreateNewInternals(SpaceStation*) const;   
+        	Planet* GetNewPlanetTemplate(unsigned long int id = NONE_ID) const; 
+                Planet* GetNewPlanet(float) const;
+        	 		                
+        private:
+		PlanetBuilder() {};
+		PlanetBuilder(const PlanetBuilder&) = delete;
+		PlanetBuilder& operator=(const PlanetBuilder&) = delete;
+
+                void CreateNewInternals(Planet*, float) const;
 }; 
+
 
 
 #endif 

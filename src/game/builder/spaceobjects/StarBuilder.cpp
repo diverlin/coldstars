@@ -17,15 +17,9 @@
 */
 
 #include "StarBuilder.hpp"
+#include "../CommonBuilderHeaders.hpp"
+#include "../../spaceobjects/Star.hpp"
 
-#include "../spaceobjects/Star.hpp"
-
-#include "../common/IdGenerator.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/Logger.hpp"
-#include "../common/rand.hpp"
-#include "../resources/TextureManager.hpp"
-#include "../resources/MeshCollector.hpp"
 	
 StarBuilder& StarBuilder::Instance()
 {

@@ -54,7 +54,7 @@
 #include "../builder/items/equipment/FreezerEquipmentBuilder.hpp"
 #include "../builder/items/equipment/EnergizerEquipmentBuilder.hpp"
 
-#include "../builder/ShipBuilder.hpp"
+#include "../builder/spaceobjects/ShipBuilder.hpp"
 
 StoreBuilder& StoreBuilder::Instance()
 {

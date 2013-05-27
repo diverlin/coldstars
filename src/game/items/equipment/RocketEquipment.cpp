@@ -22,7 +22,7 @@
 #include "../../common/myStr.hpp"
 #include "../../common/Logger.hpp"
 #include "../../items/modules/RocketModule.hpp"
-#include "../../builder/RocketBulletBuilder.hpp"
+#include "../../builder/spaceobjects/RocketBulletBuilder.hpp"
 #include "../../world/starsystem.hpp"
 #include "../../parts/Turrel.hpp"
 #include "../../slots/ItemSlot.hpp"

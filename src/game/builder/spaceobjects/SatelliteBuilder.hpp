@@ -16,41 +16,29 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ASTEROIDBUILDER_H
-#define ASTEROIDBUILDER_H
+#ifndef SATELLITEBUILDER_H
+#define SATELLITEBUILDER_H
 
-class Asteroid;
-#include "../common/constants.hpp"
+#include "BaseVehicleBuilder.hpp"
+class Satellite;
+#include "../../common/constants.hpp"
 
-
-namespace ENTITY
-{
-	namespace ASTEROID
-	{
-		const int SCALE_MIN = 20;
-		const int SCALE_MAX = 40;
-		
-		const int GIVEN_EXPIRIENCE = 100;
-	}
-}
-
-class AsteroidBuilder
+class SatelliteBuilder : public BaseVehicleBuilder
 {
 	public:
-		static AsteroidBuilder& Instance();
-		~AsteroidBuilder();
-
-        	Asteroid* GetNewAsteroidTemplate(unsigned long int id = NONE_ID) const; 
-                Asteroid* GetNewAsteroid() const;
-        	 		                
+		static SatelliteBuilder& Instance();
+		~SatelliteBuilder();
+		
+		Satellite* GetNewSatelliteTemplate(unsigned long int id = NONE_ID) const;							
+		Satellite* GetNewSatellite() const;
+       
         private:
-		AsteroidBuilder() {};
-		AsteroidBuilder(const AsteroidBuilder&) = delete;
-		AsteroidBuilder& operator=(const AsteroidBuilder&) = delete;
-
-                void CreateNewInternals(Asteroid*) const;
+        	SatelliteBuilder() {};   	
+        	SatelliteBuilder(const SatelliteBuilder&) = delete; 
+        	SatelliteBuilder& operator=(const SatelliteBuilder&) = delete;
+        	
+		void CreateNewInternals(Satellite*) const; 
 }; 
-
 
 
 #endif 

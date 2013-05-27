@@ -17,15 +17,8 @@
 */
 
 #include "BlackHoleBuilder.hpp"
-#include "../spaceobjects/BlackHole.hpp"
-#include "../common/IdGenerator.hpp"
-#include "../common/Logger.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/rand.hpp"
-#include "../resources/TextureManager.hpp"
-#include "../resources/MeshCollector.hpp"
-
-#include "../animations/AnimationConstantRotationAxisZ.hpp"
+#include "../CommonBuilderHeaders.hpp"
+#include "../../spaceobjects/BlackHole.hpp"
 
 BlackHoleBuilder& BlackHoleBuilder::Instance()
 {

@@ -27,7 +27,7 @@
 
 #include "../resources/TextureManager.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
-#include "../builder/BaseVehicleBuilder.hpp"
+#include "../builder/spaceobjects/BaseVehicleBuilder.hpp"
 
 #include "../common/Logger.hpp"
 

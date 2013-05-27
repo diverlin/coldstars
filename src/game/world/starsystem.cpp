@@ -23,9 +23,9 @@
 #include "../math/myVector.hpp"
 
 #include "../effects/particlesystem/ExplosionEffect.hpp"
-#include "../builder/AsteroidBuilder.hpp"
-#include "../builder/BlackHoleBuilder.hpp"
-#include "../builder/ShipBuilder.hpp"
+#include "../builder/spaceobjects/AsteroidBuilder.hpp"
+#include "../builder/spaceobjects/BlackHoleBuilder.hpp"
+#include "../builder/spaceobjects/ShipBuilder.hpp"
 #include "../builder/NpcBuilder.hpp"
 #include "../common/Collision.hpp"
 #include "../world/EntityManager.hpp"
