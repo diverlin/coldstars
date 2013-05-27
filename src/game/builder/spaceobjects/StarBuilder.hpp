@@ -16,29 +16,39 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SATELLITEBUILDER_H
-#define SATELLITEBUILDER_H
+#ifndef STARBUILDER_H
+#define STARBUILDER_H
 
-#include "BaseVehicleBuilder.hpp"
-#include "../spaceobjects/Satellite.hpp"
-#include "../common/constants.hpp"
+class Star;
+#include "../../common/constants.hpp"
 
-class SatelliteBuilder : public BaseVehicleBuilder
+
+namespace ENTITY
+{
+	namespace STAR
+	{ 
+		const int SCALE_MIN = 200;
+		const int SCALE_MAX = 300;
+	}
+}
+
+class StarBuilder
 {
 	public:
-		static SatelliteBuilder& Instance();
-		~SatelliteBuilder();
-		
-		Satellite* GetNewSatelliteTemplate(unsigned long int id = NONE_ID) const;							
-		Satellite* GetNewSatellite() const;
-       
+		static StarBuilder& Instance();
+		~StarBuilder();
+
+        	Star* GetNewStarTemplate(unsigned long int id = NONE_ID) const; 
+                Star* GetNewStar() const;
+        	 		                
         private:
-        	SatelliteBuilder() {};   	
-        	SatelliteBuilder(const SatelliteBuilder&) = delete; 
-        	SatelliteBuilder& operator=(const SatelliteBuilder&) = delete;
-        	
-		void CreateNewInternals(Satellite*) const; 
+		StarBuilder() {};
+		StarBuilder(const StarBuilder&) = delete;
+		StarBuilder& operator=(const StarBuilder&) = delete;
+
+                void CreateNewInternals(Star*) const;
 }; 
+
 
 
 #endif 

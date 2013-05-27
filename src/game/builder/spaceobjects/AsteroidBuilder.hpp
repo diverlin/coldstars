@@ -16,39 +16,42 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SHIPBUILDER_H
-#define SHIPBUILDER_H
+#ifndef ASTEROIDBUILDER_H
+#define ASTEROIDBUILDER_H
 
-#include "BaseVehicleBuilder.hpp"
-#include "../common/constants.hpp"
-class Ship;
+class Asteroid;
+#include "../../common/constants.hpp"
+
 
 namespace ENTITY
 {
-	namespace SHIP
+	namespace ASTEROID
 	{
-		const int SCALE_MIN = 100;
-		const int SCALE_MAX = 200;
+		const int SCALE_MIN = 20;
+		const int SCALE_MAX = 40;
+		
+		const int GIVEN_EXPIRIENCE = 100;
 	}
 }
 
-class ShipBuilder : public BaseVehicleBuilder
+class AsteroidBuilder
 {
 	public:
-		static ShipBuilder& Instance();
-		~ShipBuilder();
-		
-		Ship* GetNewShipTemplate(unsigned long int id = NONE_ID) const;
-                Ship* GetNewShip(int, int, int, int) const;        
-                Ship* GetNewShip() const;   
-                       
+		static AsteroidBuilder& Instance();
+		~AsteroidBuilder();
+
+        	Asteroid* GetNewAsteroidTemplate(unsigned long int id = NONE_ID) const; 
+                Asteroid* GetNewAsteroid() const;
+        	 		                
         private:
-        	ShipBuilder() {};
-        	ShipBuilder(const ShipBuilder&) = delete; 
-        	ShipBuilder& operator=(const ShipBuilder&) = delete;
-                
-                void CreateNewInternals(Ship*, int, int, int, int) const;  
+		AsteroidBuilder() {};
+		AsteroidBuilder(const AsteroidBuilder&) = delete;
+		AsteroidBuilder& operator=(const AsteroidBuilder&) = delete;
+
+                void CreateNewInternals(Asteroid*) const;
 }; 
+
+
 
 #endif 
     

@@ -16,29 +16,41 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BLACKHOLEBUILDER_H
-#define BLACKHOLEBUILDER_H
+#ifndef SPACESTATIONBUILDER_H
+#define SPACESTATIONBUILDER_H
 
-class BlackHole;
-#include "../common/constants.hpp"
+#include "BaseVehicleBuilder.hpp"
+class SpaceStation;
+#include "../../common/constants.hpp"
+	
+namespace ENTITY
+{
+	namespace SPACESTATION
+	{
+		const int SCALE_MIN = 200;
+		const int SCALE_MAX = 300;
+		
+		const int MASS_MIN = 1000;
+		const int MASS_MAX = 2000;
+	}
+}
 
-class BlackHoleBuilder
+class SpaceStationBuilder : public BaseVehicleBuilder
 {
 	public:
-		static BlackHoleBuilder& Instance();
-		~BlackHoleBuilder();
-
-        	BlackHole* GetNewBlackHoleTemplate(unsigned long int id = NONE_ID) const; 
-                BlackHole* GetNewBlackHole() const;
-        	 		                
+		static SpaceStationBuilder& Instance();
+		~SpaceStationBuilder();
+		
+		SpaceStation* GetNewSpaceStationTemplate(unsigned long int id = NONE_ID) const;							
+		SpaceStation* GetNewSpaceStation() const;         
+       
         private:
-		BlackHoleBuilder() {};
-		BlackHoleBuilder(const BlackHoleBuilder&) = delete;
-		BlackHoleBuilder& operator=(const BlackHoleBuilder&) = delete;
+        	SpaceStationBuilder() {};   	
+        	SpaceStationBuilder(const SpaceStationBuilder&) = delete; 
+        	SpaceStationBuilder& operator=(const SpaceStationBuilder&) = delete;
 
-                void CreateNewInternals(BlackHole*) const;
+		void CreateNewInternals(SpaceStation*) const;   
 }; 
-
 
 
 #endif 

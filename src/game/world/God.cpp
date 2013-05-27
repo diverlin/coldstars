@@ -28,9 +28,9 @@
 #include "../builder/KosmoportBuilder.hpp"
 #include "../builder/NatureLandBuilder.hpp"
 #include "../builder/NpcBuilder.hpp"
-#include "../builder/ShipBuilder.hpp"
-#include "../builder/SpaceStationBuilder.hpp"
-#include "../builder/SatelliteBuilder.hpp"
+#include "../builder/spaceobjects/ShipBuilder.hpp"
+#include "../builder/spaceobjects/SpaceStationBuilder.hpp"
+#include "../builder/spaceobjects/SatelliteBuilder.hpp"
 
 #include "../common/Logger.hpp"
 #include "../common/rand.hpp"

@@ -17,15 +17,10 @@
 */
 
 #include "ContainerBuilder.hpp"
-#include "../spaceobjects/Container.hpp"
-#include "../common/Logger.hpp"
-#include "../builder/ItemSlotBuilder.hpp"
-#include "../common/IdGenerator.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/Logger.hpp"
-#include "../common/rand.hpp"
+#include "../CommonBuilderHeaders.hpp"
+#include "../ItemSlotBuilder.hpp"
+#include "../../spaceobjects/Container.hpp"
 
-#include "../animations/AnimationConstantRotationAxisZ.hpp"
 
 ContainerBuilder& ContainerBuilder::Instance()
 {

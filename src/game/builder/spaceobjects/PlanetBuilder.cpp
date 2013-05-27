@@ -17,17 +17,9 @@
 */
 
 #include "PlanetBuilder.hpp"
-#include "../spaceobjects/Planet.hpp"
-
-#include "../common/IdGenerator.hpp"
-#include "../common/Logger.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/rand.hpp"
-#include "../resources/TextureManager.hpp"
-#include "../resources/MeshCollector.hpp"
-
-#include "../animations/AnimationConstantRotationAxisZ.hpp"
-#include "../effects/Atmosphere.hpp"
+#include "../CommonBuilderHeaders.hpp"
+#include "../../spaceobjects/Planet.hpp"
+#include "../../effects/Atmosphere.hpp"
 
 PlanetBuilder& PlanetBuilder::Instance()
 {

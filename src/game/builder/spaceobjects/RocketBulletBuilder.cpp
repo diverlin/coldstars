@@ -17,14 +17,8 @@
 */
 
 #include "RocketBulletBuilder.hpp"
-#include "../spaceobjects/RocketBullet.hpp"
-
-#include "../common/IdGenerator.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/Logger.hpp"
-#include "../common/rand.hpp"
-#include "../resources/TextureManager.hpp"
-#include "../resources/textureOb.hpp"
+#include "../CommonBuilderHeaders.hpp"
+#include "../../spaceobjects/RocketBullet.hpp"
 
 RocketBulletBuilder& RocketBulletBuilder::Instance()
 {	

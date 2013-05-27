@@ -17,17 +17,10 @@
 */
 
 #include "SpaceStationBuilder.hpp"
-#include "KosmoportBuilder.hpp"
-#include "../docking/Kosmoport.hpp"
-
-#include "../common/IdGenerator.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/Logger.hpp"
-#include "../common/rand.hpp"
-#include "../resources/TextureManager.hpp"
-#include "../resources/textureOb.hpp"
-#include "../resources/MeshCollector.hpp"
-#include "../animations/AnimationConstantRotationAxisX.hpp"
+#include "../CommonBuilderHeaders.hpp"
+#include "../KosmoportBuilder.hpp"
+#include "../../spaceobjects/SpaceStation.hpp"
+#include "../../docking/Kosmoport.hpp"
 
 SpaceStationBuilder& SpaceStationBuilder::Instance()
 {	

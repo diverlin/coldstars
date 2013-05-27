@@ -17,30 +17,32 @@
 */
 
 
-#ifndef CONTAINERBUILDER_H
-#define CONTAINERBUILDER_H
+#ifndef ROCKETBULLETBUILDER_H
+#define ROCKETBULLETBUILDER_H
 
-class Container;
-class TextureOb;
-class BaseItem;
-#include "../common/constants.hpp"
+class RocketBullet;
+class BulletData;
+#include "../../common/constants.hpp"
 
-class ContainerBuilder
+class RocketBulletBuilder
 {
 	public:
-		static ContainerBuilder& Instance();
-		~ContainerBuilder();
-
-        	Container* GetNewContainerTemplate(unsigned long int id = NONE_ID) const; 
-                Container* GetNewContainer(TextureOb*, BaseItem*) const;
-        	 		                
+		static RocketBulletBuilder& Instance();
+		~RocketBulletBuilder();
+		
+		RocketBullet* GetNewRocketBulletTemplate(unsigned long int id = NONE_ID) const;							
+		RocketBullet* GetNewRocketBullet(const BulletData&) const;   
+		
+		void CreateKorpusGeometry(RocketBullet*) const;   
+        	       
         private:
-		ContainerBuilder() {};
-		ContainerBuilder(const ContainerBuilder&) = delete;
-		ContainerBuilder& operator=(const ContainerBuilder&) = delete;
-
-                void CreateNewInternals(Container*, TextureOb*, BaseItem*) const;
+        	RocketBulletBuilder() {};   	
+        	RocketBulletBuilder(const RocketBulletBuilder&) = delete; 
+        	RocketBulletBuilder& operator=(const RocketBulletBuilder&) = delete;
+        	
+        	void CreateNewInternals(RocketBullet*, const BulletData&) const; 
 }; 
+
 
 #endif 
     

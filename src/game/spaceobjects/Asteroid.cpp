@@ -23,7 +23,7 @@
 #include "../world/EntityManager.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../items/others/GoodsPack.hpp"
-#include "../builder/ContainerBuilder.hpp"
+#include "../builder/spaceobjects/ContainerBuilder.hpp"
 #include "../world/starsystem.hpp"
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 

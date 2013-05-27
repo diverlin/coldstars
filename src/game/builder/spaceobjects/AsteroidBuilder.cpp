@@ -17,16 +17,9 @@
 */
 
 #include "AsteroidBuilder.hpp"
-#include "../spaceobjects/Asteroid.hpp"
-#include "../common/IdGenerator.hpp"
-#include "../common/Logger.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/rand.hpp"
-#include "../resources/TextureManager.hpp"
-#include "../resources/MeshCollector.hpp"
+#include "../CommonBuilderHeaders.hpp"
+#include "../../spaceobjects/Asteroid.hpp"
 
-#include "../animations/AnimationConstantRotationAxisZ.hpp"
-	
 AsteroidBuilder& AsteroidBuilder::Instance()
 {
 	static AsteroidBuilder instance;

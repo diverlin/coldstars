@@ -16,33 +16,39 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#ifndef SHIPBUILDER_H
+#define SHIPBUILDER_H
 
-#ifndef ROCKETBULLETBUILDER_H
-#define ROCKETBULLETBUILDER_H
+#include "BaseVehicleBuilder.hpp"
+#include "../../common/constants.hpp"
+class Ship;
 
-class RocketBullet;
-class BulletData;
-#include "../common/constants.hpp"
+namespace ENTITY
+{
+	namespace SHIP
+	{
+		const int SCALE_MIN = 100;
+		const int SCALE_MAX = 200;
+	}
+}
 
-class RocketBulletBuilder
+class ShipBuilder : public BaseVehicleBuilder
 {
 	public:
-		static RocketBulletBuilder& Instance();
-		~RocketBulletBuilder();
+		static ShipBuilder& Instance();
+		~ShipBuilder();
 		
-		RocketBullet* GetNewRocketBulletTemplate(unsigned long int id = NONE_ID) const;							
-		RocketBullet* GetNewRocketBullet(const BulletData&) const;   
-		
-		void CreateKorpusGeometry(RocketBullet*) const;   
-        	       
+		Ship* GetNewShipTemplate(unsigned long int id = NONE_ID) const;
+                Ship* GetNewShip(int, int, int, int) const;        
+                Ship* GetNewShip() const;   
+                       
         private:
-        	RocketBulletBuilder() {};   	
-        	RocketBulletBuilder(const RocketBulletBuilder&) = delete; 
-        	RocketBulletBuilder& operator=(const RocketBulletBuilder&) = delete;
-        	
-        	void CreateNewInternals(RocketBullet*, const BulletData&) const; 
+        	ShipBuilder() {};
+        	ShipBuilder(const ShipBuilder&) = delete; 
+        	ShipBuilder& operator=(const ShipBuilder&) = delete;
+                
+                void CreateNewInternals(Ship*, int, int, int, int) const;  
 }; 
-
 
 #endif 
     

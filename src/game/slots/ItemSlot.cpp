@@ -18,7 +18,7 @@
 
 #include "ItemSlot.hpp"
 
-#include "../builder/ContainerBuilder.hpp"
+#include "../builder/spaceobjects/ContainerBuilder.hpp"
 #include "../common/myStr.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../spaceobjects/Container.hpp"

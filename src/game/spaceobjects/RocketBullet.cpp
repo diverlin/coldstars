@@ -24,7 +24,7 @@
 #include "../common/Logger.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../world/starsystem.hpp"
-#include "../builder/RocketBulletBuilder.hpp"
+#include "../builder/spaceobjects/RocketBulletBuilder.hpp"
 #include "../resources/textureOb.hpp"
 #include "../effects/particlesystem/DriveEffect.hpp"
 #include "../render/Render.hpp"

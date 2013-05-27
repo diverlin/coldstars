@@ -17,17 +17,9 @@
 */
 
 #include "ShipBuilder.hpp"
-#include "../common/IdGenerator.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/Logger.hpp"
-#include "../common/rand.hpp"
+#include "../CommonBuilderHeaders.hpp"
+#include "../../spaceobjects/Ship.hpp"
 
-#include "../resources/TextureManager.hpp"
-#include "../resources/textureOb.hpp"
-#include "../spaceobjects/Ship.hpp"
-
-#include "../resources/MeshCollector.hpp"
-#include "../animations/AnimationWiggleAxisX.hpp"
 
 ShipBuilder& ShipBuilder::Instance()
 {	
