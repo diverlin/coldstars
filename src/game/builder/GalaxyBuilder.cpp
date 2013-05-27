@@ -29,7 +29,7 @@
 #include "../common/rand.hpp"
 #include "../common/common.hpp"
 
-#include "../world/GalaxyDescription.hpp"
+#include "../struct/GalaxyDescription.hpp"
 
 GalaxyBuilder& GalaxyBuilder::Instance()
 {

@@ -707,6 +707,7 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
         		{
                 		starsystem->DrawPath();
         		}
+        		
        	 		npc->GetVehicle()->GetDriveComplex().DrawPath();
        			npc->GetVehicle()->GetWeaponComplex().RenderWeaponsRange();
        			npc->GetVehicle()->GetWeaponComplex().RenderWeaponIcons(); 
@@ -722,7 +723,7 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
         		}
 		}
 	
-		//cursor.RenderFocusedObjectStuff();
+		cursor.RenderFocusedObjectStuff();
 		
 	disable_BLEND();  
 } 
@@ -1128,8 +1129,8 @@ void Player::RunSession(const TurnTimer& turn_timer)
        		case ENTITY::HYPER_SPACE_ID: 	{ SessionInSpace((StarSystem*)npc->GetVehicle()->GetDriveComplex().GetTarget(), turn_timer); break; }
        		case ENTITY::KOSMOPORT_ID:  	{ SessionInKosmoport(); break; }
        		case ENTITY::NATURELAND_ID:  	{ SessionInNatureLand(); break; }
-       	}        	
-       	
+       	}       
+  	
        	cursor.RenderFocusedObjectInfo();
        	Screen::Instance().Draw();
 }
