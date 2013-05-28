@@ -73,6 +73,7 @@ StarSystem* StarSystemBuilder::GetNewStarSystem(const StarSystemDescription& sta
         	
 void StarSystemBuilder::CreateNewInternals(StarSystem* starsystem, const StarSystemDescription& starsystem_description) const
 {
+	starsystem->GetAsteroidManager().Parameterize(starsystem_description.asteroid_num);
         CreateStar(starsystem);
         
         int distNebula_num = getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);

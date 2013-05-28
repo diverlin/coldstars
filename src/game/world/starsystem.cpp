@@ -23,7 +23,6 @@
 #include "../math/myVector.hpp"
 
 #include "../effects/particlesystem/ExplosionEffect.hpp"
-#include "../builder/spaceobjects/AsteroidBuilder.hpp"
 #include "../builder/spaceobjects/BlackHoleBuilder.hpp"
 #include "../builder/spaceobjects/ShipBuilder.hpp"
 #include "../builder/NpcBuilder.hpp"
@@ -51,12 +50,14 @@
 
 #include "../garbage/EntityGarbage.hpp"
 
+
 int StarSystem::counter = 0;
                 
 StarSystem::StarSystem(int id):
 unique_update_inDymanic_done(false),
 unique_update_inStatic_done(false),
-sector(NULL)
+sector(NULL),
+container_num_max(CONTAINER_NUM_MAX_DEFAULT)
 { 
     	data_id.id = id;
     	data_id.type_id = ENTITY::STARSYSTEM_ID;
@@ -267,13 +268,20 @@ void StarSystem::Add(ShockWaveEffect* shockwave, const Vec2<float>& center)
 	effect_SHOCKWAVE_vec.push_back(shockwave); 
 }
 
+void StarSystem::Add(ExplosionEffect* explosion, const Vec3<float>& center)           
+{ 
+	float radius_damage = explosion->GetRadius();
+	float damage = 0;
+	Add(explosion, center, damage, radius_damage);
+}
+
 void StarSystem::Add(ExplosionEffect* explosion, const Vec3<float>& center, float damage, float radius_damage)           
 { 
 	explosion->SetCenter(center);
 	effect_PARTICLESYSTEM_vec.push_back(explosion); 
 	
 	float radius_effect = explosion->GetRadius();
-	if ((radius_effect > 75) && (GetShockWaveNum() < SHOCKWAVES_MAX_NUM))
+	if ((radius_effect > 75) && (GetShockWaveEffectNum() < SHOCKWAVES_MAX_NUM))
 	{
 		ShockWaveEffect* shockwave = getNewShockWave(radius_effect);
 		Add(shockwave, center);
@@ -284,14 +292,6 @@ void StarSystem::Add(ExplosionEffect* explosion, const Vec3<float>& center, floa
 		DamageEventInsideCircle(center, radius_damage, damage, true);
 	}
 	//explosion.play()
-}
-
-void StarSystem::Add(ExplosionEffect* explosion, const Vec3<float>& center)           
-{ 
-	float radius_effect = explosion->GetRadius();
-	float radius_damage = radius_effect;
-	float damage = 0;
-	Add(explosion, center, damage, radius_damage);
 }
 
 void StarSystem::Add(LazerTraceEffect* lazerTraceEffect)     { effect_LAZERTRACE_vec.push_back(lazerTraceEffect); }
@@ -442,12 +442,12 @@ void StarSystem::UpdateStates()
 {
 	if (CONTAINER_vec.size() < 100)
 	{
-		AsteroidManager_s(30);
+		asteroid_manager.Update(this);
 	}
 	     	
 	if (Config::Instance().GetGameMode() == GAME_MODE::CRASH_TEST)
 	{
-		AsteroidManager_s(50);
+		asteroid_manager.Update(this);
 		ShipManager_s(50);
 		
 		if (BLACKHOLE_vec.size() < 5)
@@ -574,9 +574,10 @@ void StarSystem::Update(int time)
     		ExternalForcesAffection_s(detalied_simulation); // pri/2
     		//phisics
     		
-    		if (CONTAINER_vec.size() > 200)
+    		if (CONTAINER_vec.size() > container_num_max)
         	{
-               		CONTAINER_vec[getRandInt(0, 199)]->Hit(100, true);
+        		unsigned int index = getRandInt(0, container_num_max-1);
+               		CONTAINER_vec[index]->Hit(100, true);
         	}
 	}
 	else
@@ -834,18 +835,6 @@ void StarSystem::DrawPath()
 	}
 }
      
-    
-
-
-void StarSystem::AsteroidManager_s(unsigned int num)
-{
-        while (ASTEROID_vec.size() < num)
-        {
-                Add(AsteroidBuilder::Instance().GetNewAsteroid());
-                //break;
-        }
-}
-
 void StarSystem::ShipManager_s(unsigned int num)
 {
         while (VEHICLE_vec.size() < num)
@@ -991,7 +980,7 @@ void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
 	float damage = ((Bomb*)container->GetItemSlot()->GetItem())->GetDamage(); 
 	Vec3<float> center(container->GetCenter());
 	
-	ExplosionEffect* explosion = getNewExplosion1(radius);
+	ExplosionEffect* explosion = getNewExplosionEffect(radius);
 	Add(explosion, center, radius, damage);
 }
 
@@ -1022,7 +1011,7 @@ void StarSystem::DamageEventInsideCircle(const Vec3<float>& center, float radius
     	for (unsigned int i=0; i<CONTAINER_vec.size(); i++)       	
      	{
      		float dist = distanceBetween(CONTAINER_vec[i]->GetCenter(), center);
-     		if ( dist < radius )
+     		if (dist < radius)
      		{
      		     	Vec3<float> force_dir(CONTAINER_vec[i]->GetCenter() - center);
      			force_dir.Normalize();
@@ -1035,6 +1024,19 @@ void StarSystem::DamageEventInsideCircle(const Vec3<float>& center, float radius
      	
 }
 
+bool StarSystem::IsAnyActiveParticlesEffectPresent(int request_type_id) const
+{
+	for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++)
+	{
+		if (effect_PARTICLESYSTEM_vec[i]->GetTypeId() == request_type_id)
+		{
+			return true;
+		}
+	} 
+	
+	return false;
+}
+		
 
 /*virtual */
 void StarSystem::PostDeathUniqueEvent(bool) 

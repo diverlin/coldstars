@@ -44,74 +44,36 @@
 
 #include <iostream>
 
+#include "run_scenario/NormalRunScenario.hpp"
+#include "run_scenario/TestParticlesRunScenario.hpp"
+
+enum { NORMAL_RUNSCENARIO, TEST_PARTICLES_RUNSCENARIO};
+
 int main()
 {
-	//std::cout<<0<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(0)<<std::endl;
-	//std::cout<<5<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(5)<<std::endl;
-	//std::cout<<10<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(10)<<std::endl;
-	//std::cout<<150<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(150)<<std::endl;
-	//std::cout<<250<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(250)<<std::endl;
-	//std::cout<<350<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(350)<<std::endl;
-	//std::cout<<500<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(500)<<std::endl;
-	//std::cout<<1000<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(1000)<<std::endl;
-					
-	init();  
-        
+	init();        
 	GameDate::Instance().SetDate(1,1,4000);
-
-	GalaxyDescription galaxy_description;
-	galaxy_description.allow_invasion = false;
-	galaxy_description.sector_num = 2;
-	
-	for (unsigned int i=0; i<galaxy_description.sector_num; i++)
-	{
-		SectorDescription sector_description;
-		sector_description.starsystem_num = 2;
-		
-		for (unsigned int j=0; j<sector_description.starsystem_num; j++)		
-		{
-			StarSystemDescription starsystem_description;
-			starsystem_description.planet_num = 5;
-					
-			starsystem_description.spacestation_num_min = 10;
-			starsystem_description.spacestation_num_max = 10;
-			starsystem_description.allow_satellites = false;
-			starsystem_description.allow_spacestations = true;
-			
-			starsystem_description.allow_ship_ranger   = false;
-			starsystem_description.allow_ship_warrior  = false;
-			starsystem_description.allow_ship_trader   = true;
-			starsystem_description.allow_ship_pirat    = false;
-			starsystem_description.allow_ship_diplomat = false;
-			sector_description.starsystem_descriptions.push_back(starsystem_description);
-		}
-	
-		
-		galaxy_description.sector_descriptions.push_back(sector_description);			
-	}
-	
-	Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
-	God::Instance().Init(galaxy, galaxy_description);
         
 	Player* player = PlayerBuilder::Instance().GetNewPlayer();
-
-        bool player2space = true;
-        if (player2space == true)
-        {
-                Vec3<float> center(500, 500, DEFAULT_ENTITY_ZPOS);
-                Vec3<float> angle(0,0,0);  
-                galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, NULL);
+	
+	int scenario_type = TEST_PARTICLES_RUNSCENARIO;
+	BaseRunScenario* run_scenario = NULL;
+	switch(scenario_type)
+	{
+		case NORMAL_RUNSCENARIO: { run_scenario = new NormalRunScenario(); break; }
+		case TEST_PARTICLES_RUNSCENARIO: { run_scenario = new TestParticlesRunScenario(); break; }	
+		default: { std::cout<<"INVALID_RUNSCENARIO"<<std::endl; return EXIT_FAILURE; break; }	
 	}
-        else
-        {
-                galaxy->GetRandomSector()->GetRandomStarSystem()->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
-        }
+	run_scenario->Init(player);
+	
+	Galaxy* galaxy = player->GetNpc()->GetVehicle()->GetStarSystem()->GetSector()->GetGalaxy();       
+
         
         player->GetNpc()->GetVehicle()->SetGodMode(true);
         //player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
 
 	//Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
-
+	
 	// GAME LOOP
 	while (Screen::Instance().GetWindow().isOpen())
 	{    
@@ -149,6 +111,11 @@ int main()
 			}
 		}
 
+		if (TurnTimer::Instance().GetTurnTick() > 1) // hack
+		{
+			run_scenario->Update_inDynamic(player);
+		}
+		
 		checkOpenglErrors(__FILE__,__LINE__);
 	}
 

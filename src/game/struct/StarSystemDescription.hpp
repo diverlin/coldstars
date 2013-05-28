@@ -19,21 +19,19 @@
 #ifndef STARSYSTEMDESCRIPTION_H
 #define STARSYSTEMDESCRIPTION_H
 
-#include "../common/constants.hpp"
-
 struct StarSystemDescription
 {
 	public:
 		int race_id;
 		
 		int planet_num;
-		int spacestation_num_min;
-		int spacestation_num_max;
-
-		bool allow_ships;		
-		bool allow_satellites;
+		int spacestation_num;
+		int asteroid_num;
+		int asteroid_delay;
+		
+		bool allow_satellites;		
 		bool allow_spacestations;
-
+		bool allow_ships;	
 		bool allow_ship_ranger;
 		bool allow_ship_warrior;
 		bool allow_ship_trader;
@@ -41,13 +39,14 @@ struct StarSystemDescription
 		bool allow_ship_diplomat;
 														
 		StarSystemDescription():
-		race_id(RACE::R0_ID),
-		planet_num(ENTITY::STARSYSTEM::PLANET_NUM_MIN),
-		spacestation_num_min(ENTITY::STARSYSTEM::SPACESTATION_NUM_MIN),
-		spacestation_num_max(ENTITY::STARSYSTEM::SPACESTATION_NUM_MAX),
-		allow_ships(true),
+		race_id(0),
+		planet_num(0),
+		spacestation_num(0),
+		asteroid_num(0),
+		asteroid_delay(0),
 		allow_satellites(true),
-		allow_spacestations(true),			
+		allow_ships(true),
+		allow_spacestations(true),
 		allow_ship_ranger(true),
 		allow_ship_warrior(true),
 		allow_ship_trader(true),

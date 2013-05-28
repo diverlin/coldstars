@@ -46,6 +46,8 @@ class LazerTraceEffect;
 
 #include "../garbage/garbageEffects.hpp"
 #include "HyperSpace.hpp"
+#include "AsteroidManager.hpp"
+
 class Npc;
 
 struct UnresolvedDataUniqueStarSystem
@@ -62,18 +64,24 @@ class StarSystem : public BaseSpaceEntity
 		
 		virtual void PutChildsToGarbage() const;
 
-		void SetSector(Sector* sector)  { this->sector = sector; };
-		void SetColor(const Color4<float>& color)  { this->color = color; };
-		const Color4<float>& GetColor4f()  { return color; };
-										
-		const Color4<float>& GetColor() const { return color; };
-		//bool GetDetailedSimulationFlag() const { return detalied_simulation; };
-		int GetConditionId()     const { return condition_id; };
-		int GetRaceId()          const { return race_id; };
-		int GetConquerorRaceId() const { return conqueror_race_id; };  
-		Star* GetStar()          const { return STAR_vec[0]; };		
-		Sector* GetSector()      const { return sector; };
-		int GetShockWaveNum()    const { return effect_SHOCKWAVE_vec.size(); };
+		void SetContainerNumMax(int container_num_max) { this->container_num_max = container_num_max; }
+		void SetSector(Sector* sector)  { this->sector = sector; }
+		void SetColor(const Color4<float>& color)  { this->color = color; }
+		const Color4<float>& GetColor4f()  { return color; }
+		AsteroidManager& GetAsteroidManager()  { return asteroid_manager; }
+												
+		const Color4<float>& GetColor() const { return color; }
+		//bool GetDetailedSimulationFlag() const { return detalied_simulation; }
+		int GetConditionId()     const { return condition_id; }
+		int GetRaceId()          const { return race_id; }
+		int GetConquerorRaceId() const { return conqueror_race_id; } 
+		Star* GetStar()          const { return STAR_vec[0]; }	
+		Sector* GetSector()      const { return sector; }
+		int GetShockWaveEffectNum()    const { return effect_SHOCKWAVE_vec.size(); }
+		int GetAsteroidNum()     const { return ASTEROID_vec.size(); }
+		int GetExplosionEffectNum()     const { return effect_PARTICLESYSTEM_vec.size(); }
+		bool IsAnyActiveParticlesEffectPresent(int) const; 
+						
 		HyperSpace& GetHyperSpace() { return hyperspace; };
 		
 		Npc* GetFreeLeaderByRaceId(int) const;
@@ -99,7 +107,7 @@ class StarSystem : public BaseSpaceEntity
 		
 		void Add(VerticalFlowText*);
 		//
-
+		
 		void BombExplosionEvent(Container*, bool);
 		void StarSparkEvent(float) const;
 		
@@ -136,9 +144,12 @@ class StarSystem : public BaseSpaceEntity
     		bool unique_update_inStatic_done;
     		
     		int condition_id;
+    		int container_num_max;
     		
     		Sector* sector;
     		Color4<float> color;
+    	
+    		AsteroidManager asteroid_manager;
     	
     		// ENTITY VECTORS
 		//std::vector<Player*> 	   PLAYER_vec;
@@ -177,8 +188,6 @@ class StarSystem : public BaseSpaceEntity
     		
     		void PostDeathUniqueEvent(bool);
 
-
-		void AsteroidManager_s(unsigned int);
 		void ShipManager_s(unsigned int);
 		
 		void ManageUnavaliableObjects_s();

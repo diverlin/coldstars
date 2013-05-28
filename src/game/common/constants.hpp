@@ -64,6 +64,8 @@ namespace CONVERTER
 
 #define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click
 
+const int CONTAINER_NUM_MAX_DEFAULT = 400;
+
 const float DEFAULT_ENTITY_ZPOS = 0.0;
 const float CAMERA_POS_Z = 500.0;
 
@@ -313,6 +315,13 @@ namespace COLOR
 
 }
 
+namespace EFFECT 
+{
+	enum TYPE
+	{
+		EXPLOSION_ID
+	};
+}
 
 namespace ENTITY 
 {
@@ -345,7 +354,7 @@ namespace ENTITY
 		
 		RANGER_ID, WARRIOR_ID, PIRAT_ID, TRADER_ID, DIPLOMAT_ID,
 
-		PLANET_MIXED_ID, PLANET_WATER_ID, PLANET_VULCANIC_ID, PLANET_ICE_ID, PLANET_GAS_ID, PLANET_ROCK_ID,		
+		PLANET_MIXED_ID, PLANET_WATER_ID, PLANET_VULCANIC_ID, PLANET_ICE_ID, PLANET_GAS_ID, PLANET_ROCK_ID,	
 				
 		ENUM_END
 	};

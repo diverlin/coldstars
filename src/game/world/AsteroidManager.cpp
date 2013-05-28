@@ -16,26 +16,22 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <cmath>
+#include "AsteroidManager.hpp"
+#include "../common/TurnTimer.hpp"
+#include "starsystem.hpp"
+#include "../builder/spaceobjects/AsteroidBuilder.hpp"
+#include "../spaceobjects/Asteroid.hpp"
 
-#include "BaseParticleSystem.hpp"
-#include "../../common/rand.hpp"
-#include "../../common/constants.hpp"
-
-BaseParticleSystem::BaseParticleSystem():
-type_id(NONE_ID),
-is_alive(true),
-is_dying(false),
-parent(NULL)
-{}
- 
-/* virtual */
-BaseParticleSystem::~BaseParticleSystem()
+void AsteroidManager::Update(StarSystem* starsystem)
 {
-	for (unsigned int i=0; i<particles_vec.size(); i++) 
-     	{
-  		delete particles_vec[i];
-     	}
+        while (starsystem->GetAsteroidNum() < asteroid_num)
+        {
+                starsystem->Add(AsteroidBuilder::Instance().GetNewAsteroid());
+                int current_turn_counter = TurnTimer::Instance().GetTurnCounter();
+                asteroid_last_turn_created = current_turn_counter;
+                if ((asteroid_last_turn_created + asteroid_delay) > current_turn_counter)
+                {
+                	break;
+                }
+        }
 }
-
-
