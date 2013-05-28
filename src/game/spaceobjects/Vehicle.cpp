@@ -764,7 +764,7 @@ void Vehicle::PostDeathUniqueEvent(bool show_effect)
 	
 	if (show_effect == true)
      	{
-     		ExplosionEffect* explosion = getNewExplosion1(GetCollisionRadius());
+     		ExplosionEffect* explosion = getNewExplosionEffect(GetCollisionRadius());
         	starsystem->Add(explosion, GetCenter());        		
         }
 }

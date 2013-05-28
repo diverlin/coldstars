@@ -20,7 +20,7 @@
 #include "../CommonBuilderHeaders.hpp"
 #include "../ItemSlotBuilder.hpp"
 #include "../../spaceobjects/Container.hpp"
-
+#include "../../items/others/GoodsPack.hpp"
 
 ContainerBuilder& ContainerBuilder::Instance()
 {
@@ -57,6 +57,17 @@ Container* ContainerBuilder::GetNewContainer(TextureOb* textureOb, BaseItem* ite
 {
 	Container* container = GetNewContainerTemplate();
 	CreateNewInternals(container, textureOb, item);
+        
+        return container;
+} 
+
+Container* ContainerBuilder::GetNewMineralContainer(int mineral_ammount) const
+{
+	TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MINERAL_ID);   
+        GoodsPack* goods_pack = GetNewGoodsPack(ENTITY::MINERALS_ID);
+        goods_pack->Increase(mineral_ammount);
+
+        Container* container = GetNewContainer(textureOb, goods_pack);
         
         return container;
 } 

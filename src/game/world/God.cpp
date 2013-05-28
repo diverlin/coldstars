@@ -85,11 +85,7 @@ void God::CreateLife(const GalaxyDescription& galaxy_description) const
 		                CreateLifeAtPlanet(starsystem->PLANET_vec[j], starsystem_description);
 		        }
 	
-			if (starsystem_description.allow_spacestations == true)
-			{
-				int spacestation_num = getRandInt(starsystem_description.spacestation_num_min, starsystem_description.spacestation_num_max);
-	        		CreateSpaceStations(starsystem, spacestation_num);
-	        	}
+        		CreateSpaceStations(starsystem, starsystem_description.spacestation_num);
         	}
         }
 }

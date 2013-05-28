@@ -70,6 +70,8 @@ void ExplosionSlice::Render()
 ExplosionEffect::ExplosionEffect(float radius):
 radius(radius)
 {
+	type_id = EFFECT::EXPLOSION_ID;
+	
 	TextureOb* texOb_particle; 
 	ParticleData  data_particle;
 	int particles_num;
@@ -96,16 +98,16 @@ radius(radius)
 	data_particle.color_delta.r    = 0.0;
 	data_particle.color_delta.g    = 0.0;
 	data_particle.color_delta.b    = 0.0;
-        data_particle.color_delta.a    = getRandInt(20,30) * 0.0005;
+        data_particle.color_delta.a    = getRandInt(20,30) * 0.0004;
 
 	
 	//data_particle.size_start
 	data_particle.size_end 	     = 2.0;		
-	data_particle.d_size 	     = (float)size_id*0.2f + getRandInt(30,50) * 0.02;  
+	data_particle.d_size 	     = (float)size_id*0.4f + getRandInt(30,50) * 0.02;  
         
 	if (size_id == 1)
 	{
-		particles_num = size_id * getRandInt(10, 15);    
+		particles_num = 30;    
 		data_particle.size_start  = 50 * size_id;                                         
 
                 texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
@@ -208,7 +210,7 @@ void ExplosionEffect::Render()
     	glPopMatrix();  
 }  
 
-ExplosionEffect* getNewExplosion1(float radius)
+ExplosionEffect* getNewExplosionEffect(float radius)
 {
 	//size_id = getRandInt(1,9); // DEBUG
 	ExplosionEffect* explosion = new ExplosionEffect(radius);

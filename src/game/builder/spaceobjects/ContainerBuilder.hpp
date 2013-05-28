@@ -33,7 +33,8 @@ class ContainerBuilder
 
         	Container* GetNewContainerTemplate(unsigned long int id = NONE_ID) const; 
                 Container* GetNewContainer(TextureOb*, BaseItem*) const;
-        	 		                
+                Container* GetNewMineralContainer(int) const;
+                        	 		                
         private:
 		ContainerBuilder() {};
 		ContainerBuilder(const ContainerBuilder&) = delete;

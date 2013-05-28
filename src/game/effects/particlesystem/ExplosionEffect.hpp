@@ -54,7 +54,7 @@ class ExplosionEffect : public BaseParticleSystem
 };
 
 
-ExplosionEffect* getNewExplosion1(float);
+ExplosionEffect* getNewExplosionEffect(float);
 
 
 #endif 
