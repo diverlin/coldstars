@@ -8,9 +8,6 @@ uniform int distortion_num;     /* how many shaders */
  
 void main()
 {
-	float diffTime = 0;
-	vec2 diffUV;
-	
   	vec2 uv = gl_TexCoord[0].xy;
   	vec2 texCoord = uv; 
    	for(int i=0; i<distortion_num; i++)
@@ -20,11 +17,11 @@ void main()
 		{
            		float diff = dist - time[i];
               		float powDiff = 1.0 - pow(abs(diff*shockParams[i].x), shockParams[i].y);
-              		diffTime += diff  * powDiff;
-              		diffUV += normalize(uv - center[i]);
+              		float diffTime = diff  * powDiff;
+              		vec2 diffUV = normalize(uv - center[i]);
+              		texCoord = uv + (diffUV * diffTime);
          	}  	
 	}
-        
-        texCoord = uv + (diffTime * diffUV); 
+ 
   	gl_FragColor = texture2D(sceneTex, texCoord);
 }

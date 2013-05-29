@@ -61,7 +61,8 @@ class BaseButton
        		void Render(int offset_x = 0, int offset_y = 0) const;   
        		        
         protected:
-        	int type_id, subtype_id;
+        	int type_id;
+        	int subtype_id;
         	
         	bool lock;
         	bool pressed;

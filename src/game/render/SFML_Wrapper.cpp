@@ -49,9 +49,9 @@ void SFML_Wrapper::DrawText(const std::string& str, int font_size, const Vec2<fl
         text.setColor(sf::Color(color.r, color.g, color.b));
         text.setPosition(pos.x, GetHeight() - pos.y); 
                                                 
-	window.pushGLStates();
-	window.draw(text);
-	window.popGLStates();	     	
+	//window.pushGLStates();
+	//window.draw(text);
+	//window.popGLStates();	     	
 }
 
    
