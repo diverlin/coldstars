@@ -4,6 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include "../math/myVector.hpp"
 
+#include "MyGl.hpp"
+#include "FreeType.h"
+
 class SFML_Wrapper
 {
 	public:
@@ -31,6 +34,9 @@ class SFML_Wrapper
       		int bpp;
       		bool vert_sync;
 
+		freetype::font_data ftfont;
+
+		sf::Text text12;
       		sf::Clock clock;
       		sf::Font font;
       		sf::View view;

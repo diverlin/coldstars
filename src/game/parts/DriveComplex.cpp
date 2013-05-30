@@ -294,7 +294,7 @@ void DriveComplex::ClearPath()
 	angle_inD_vec.clear();
 }
 
-void DriveComplex::CalcPath()
+void DriveComplex::CalcPath2()
 {
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
 	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::CalcPath " + "target_pos(int, int)=" + int2str((int)target_pos.x) + "," + int2str((int)target_pos.y), DRIVECOMPLEX_LOG_DIP); 
@@ -387,6 +387,101 @@ void DriveComplex::CalcPath()
 		way.Set(target_pos - new_center);
 	}
              
+
+	if (path_center_vec.size() > 1)
+	{
+		direction_list_END = false;
+       		move_it = 0;
+       	}
+        else
+        {
+                ClearPath();    
+        }
+}
+
+
+void DriveComplex::CalcPath()
+{
+	#if DRIVECOMPLEX_LOG_ENABLED == 1 
+	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::CalcPath " + "target_pos(int, int)=" + int2str((int)target_pos.x) + "," + int2str((int)target_pos.y), DRIVECOMPLEX_LOG_DIP); 
+	#endif   
+	
+	ClearPath();
+        
+        float speed_base = owner_vehicle->GetProperties().speed;
+        
+        Vec3<float> new_center(owner_vehicle->GetCenter());
+	Vec3<float> target_dir(target_pos - owner_vehicle->GetCenter());
+	target_dir.Normalize();
+	float az = owner_vehicle->GetAngle().z;
+	Vec3<float> orient(cos(az*DEGREE_TO_RADIAN_RATE), sin(az*DEGREE_TO_RADIAN_RATE), 0.0);
+
+	Vec3<float> gravity;
+	const StarSystem& starsystem = *owner_vehicle->GetStarSystem();
+	int mass = owner_vehicle->GetMass();
+	
+	int sign = 1;
+	float angle_step = 3.0;
+	int round_counter = 0;
+	int round_counter_max = 3 + 360/angle_step;
+	while((new_center-target_pos).GetLength() > 5*speed_base)
+	{
+		target_dir.Set(target_pos - new_center);
+		target_dir.Normalize();
+			
+		float cosa = dotUnits(orient, target_dir);
+		if (std::fabs(cosa) < 0.999 or (cosa < 0)) // cosa <0 condition works if the orient and target vector is straigforward opposite (dot ~ -1)
+		{
+			if (round_counter == 0)
+			{
+				float prob_az1 = az+1;
+				float prob_az2 = az-1;
+				
+				Vec3<float> prob_orient1(cos(prob_az1*DEGREE_TO_RADIAN_RATE), sin(prob_az1*DEGREE_TO_RADIAN_RATE), 0.0);
+				Vec3<float> prob_orient2(cos(prob_az2*DEGREE_TO_RADIAN_RATE), sin(prob_az2*DEGREE_TO_RADIAN_RATE), 0.0);
+				
+				float prob_cosa1 = dotUnits(prob_orient1, target_dir);		
+				float prob_cosa2 = dotUnits(prob_orient2, target_dir);
+						
+				if (prob_cosa1 > 0)
+				{
+					if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1)) 	{ sign = -1; }
+					else 							{ sign = 1; }
+				}
+				else
+				{
+					if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1)) 	{ sign = 1; }
+					else							{ sign = -1; }
+				}
+			}
+		
+			az += sign*angle_step;
+			orient.x = cos(az*DEGREE_TO_RADIAN_RATE);
+			orient.y = sin(az*DEGREE_TO_RADIAN_RATE);
+		
+			cosa = dotUnits(orient, target_dir);
+			
+			round_counter++;
+			if (round_counter>round_counter_max) // target_pos is not reachable (within circle)
+			{
+				ClearPath();
+				return;
+			}		
+		}
+		else
+		{
+			round_counter = 0;
+		}
+
+if (path_center_vec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<<owner_vehicle->GetId()<<std::endl; break; }
+
+		float gravity_rate = starsystem.CalcResultGravityForce(new_center, orient, mass);		
+		
+		new_center += orient*speed_base*gravity_rate;
+				
+		path_center_vec.push_back(new_center);
+		angle_inD_vec.push_back(az);
+	}           
 
 	if (path_center_vec.size() > 1)
 	{

@@ -17,7 +17,6 @@
 */
 
 #include "../builder/world/GalaxyBuilder.hpp"
-#include "../builder/spaceobjects/ContainerBuilder.hpp"
 
 #include "../pilots/Npc.hpp"
 #include "../pilots/Player.hpp"
@@ -31,23 +30,14 @@
 #include "../garbage/EntityGarbage.hpp"
 
 #include "../struct/GalaxyDescription.hpp"
-#include "../effects/particlesystem/ExplosionEffect.hpp"
+#include "../text/VerticalFlowText.hpp"
 
 #include <iostream>
-
-	//std::cout<<0<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(0)<<std::endl;
-	//std::cout<<5<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(5)<<std::endl;
-	//std::cout<<10<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(10)<<std::endl;
-	//std::cout<<150<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(150)<<std::endl;
-	//std::cout<<250<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(250)<<std::endl;
-	//std::cout<<350<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(350)<<std::endl;
-	//std::cout<<500<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(500)<<std::endl;
-	//std::cout<<1000<<" "<<CONVERTER::RADIUS2FORCE.GetEquivalent(1000)<<std::endl;
 	
-#include "TestParticlesRunScenario.hpp"
+#include "TestTextRunScenario.hpp"
 
 /* virtual */
-void TestParticlesRunScenario::Init(Player* player)
+void TestTextRunScenario::Init(Player* player)
 {
 	GalaxyDescription galaxy_description;
 	galaxy_description.allow_invasion = false;
@@ -85,44 +75,25 @@ void TestParticlesRunScenario::Init(Player* player)
         Vec3<float> angle(0,0,0); 
          
         galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, NULL);
-        
-	StarSystem* starsystem = player->GetNpc()->GetVehicle()->GetStarSystem(); // shortcut        
-        for (int i=0; i<200; i++)
-	{
-		Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
+}
 
-		Vec3<float> center(10*i, 200+20, 0);    	
-		starsystem->AddContainer(container, center);
-	}
-
-        for (int i=0; i<200; i++)
-	{
-		Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
-
-		Vec3<float> center(10*i, 200-20, 0);    	
-		starsystem->AddContainer(container, center);
+/* virtual */
+void TestTextRunScenario::Update_inDynamic(Player* player)
+{
+	StarSystem* starsystem = player->GetNpc()->GetVehicle()->GetStarSystem(); // shortcut
+			
+	Color4<int> color(255, 0, 0, 255);
+	while (starsystem->GetTextDamageNum() < 200)
+	{	
+		Vec2<float> center(getRandVec2f(100, 600));
+		VerticalFlowText* flow_text = new VerticalFlowText("1", 12, center, color, 10);
+                                        
+		starsystem->Add(flow_text);
 	}
 }
 
 /* virtual */
-void TestParticlesRunScenario::Update_inDynamic(Player* player)
+void TestTextRunScenario::Update_inStatic(Player* player)
 {
-	StarSystem* starsystem = player->GetNpc()->GetVehicle()->GetStarSystem(); // shortcut
-			
-	if (starsystem->IsAnyActiveParticlesEffectPresent(EFFECT::EXPLOSION_ID) == false)
-	{	
-		float offset = 0;
-		for (int i=0; i<10; i++)
-		{
-			float radius = 20*i;
-			
-			Vec3<float> center(offset, 200, 0);
-			ExplosionEffect* explosion = getNewExplosionEffect(radius);
-			starsystem->Add(explosion, center);
-			
-			offset += 2.5*radius;
-		}
-
-	}
+	Update_inDynamic(player);
 }
-

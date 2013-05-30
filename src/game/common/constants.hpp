@@ -29,6 +29,7 @@ namespace CONVERTER
 {
 	const Converter<float> RADIUS2FORCE(Vec2<float>(10, 500), Vec2<float>(1.0, 0.0), 1000);
 	const Converter<float> SIZE2SIZEID(Vec2<float>(0, 200), Vec2<float>(1.0, 10.0), 1000);
+	const Converter<float> DIST2GRAVITY(Vec2<float>(0, 600), Vec2<float>(1.0, 0.0), 1000);
 };
 
 #define LOG_ENABLED 1

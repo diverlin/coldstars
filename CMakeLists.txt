@@ -14,6 +14,7 @@ include_directories(${OPENGL_INCLUDE_DIR})
 include_directories(dependencies/SFML2/include/)
 include_directories(dependencies/glew/include/)
 include_directories(dependencies/glm-0.9.4.0/)
+include_directories(dependencies/freetype2/)
 
 add_subdirectory(dependencies/SFML2)
 set(GLEW_STATIC 1)

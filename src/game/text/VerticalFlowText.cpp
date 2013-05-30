@@ -69,8 +69,7 @@ void VerticalFlowText::Render(const Vec2<float>& scroll_coords) const
 {
         if (is_alive == true)
         {
-        	Vec2<float> npos(pos.x-scroll_coords.x, pos.y+scroll_coords.y);
-                Screen::Instance().DrawText(str, font_size, npos, color);
+                Screen::Instance().DrawText(str, font_size, pos-scroll_coords, color);
         }
 }
  
