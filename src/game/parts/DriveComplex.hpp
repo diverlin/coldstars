@@ -92,6 +92,7 @@ class DriveComplex
 
 		void ClearPath();
    		void CalcPath();      
+   		void CalcPath2();  
                 bool ValidateTarget() const;
 	
 	        void UpdateDynamicTargetCoord();

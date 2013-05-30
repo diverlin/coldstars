@@ -77,7 +77,8 @@ void Screen::DrawFps()
 	}
 	
       	std::string fps_str = "FPS:" + int2str(fps) + " / game_speed: x" + int2str(Config::Instance().GAME_SPEED);
-	DrawText(fps_str, 14, Vec2<float>(100, GetHeight()-5));
+	DrawText(fps_str, 14, Vec2<float>(100, GetHeight()-10));
+	//std::cout<<fps<<std::endl; 
 }
     
     

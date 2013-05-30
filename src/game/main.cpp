@@ -46,8 +46,9 @@
 
 #include "run_scenario/NormalRunScenario.hpp"
 #include "run_scenario/TestParticlesRunScenario.hpp"
+#include "run_scenario/TestTextRunScenario.hpp"
 
-enum { NORMAL_RUNSCENARIO, TEST_PARTICLES_RUNSCENARIO};
+enum { NORMAL_RUNSCENARIO, TEST_PARTICLES_RUNSCENARIO, TEST_TEXT_RUNSCENARIO };
 
 int main()
 {
@@ -56,12 +57,13 @@ int main()
         
 	Player* player = PlayerBuilder::Instance().GetNewPlayer();
 	
-	int scenario_type = TEST_PARTICLES_RUNSCENARIO;
 	BaseRunScenario* run_scenario = NULL;
+	int scenario_type = NORMAL_RUNSCENARIO;
 	switch(scenario_type)
 	{
 		case NORMAL_RUNSCENARIO: { run_scenario = new NormalRunScenario(); break; }
 		case TEST_PARTICLES_RUNSCENARIO: { run_scenario = new TestParticlesRunScenario(); break; }	
+		case TEST_TEXT_RUNSCENARIO: { run_scenario = new TestTextRunScenario(); break; }
 		default: { std::cout<<"INVALID_RUNSCENARIO"<<std::endl; return EXIT_FAILURE; break; }	
 	}
 	run_scenario->Init(player);
@@ -114,6 +116,10 @@ int main()
 		if (TurnTimer::Instance().GetTurnTick() > 1) // hack
 		{
 			run_scenario->Update_inDynamic(player);
+		}
+		else
+		{
+			run_scenario->Update_inStatic(player);		
 		}
 		
 		checkOpenglErrors(__FILE__,__LINE__);

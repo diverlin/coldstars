@@ -8,7 +8,14 @@
 
     
 SFML_Wrapper::SFML_Wrapper()
-{}
+{
+	text12.setFont(font);
+	text12.setCharacterSize(12);
+	text12.setColor(sf::Color(255,0,0,255));
+	
+	ftfont.init("data/font/font.ttf", 20);
+	    
+}
 
 SFML_Wrapper::~SFML_Wrapper()
 {}
@@ -45,13 +52,20 @@ void SFML_Wrapper::DrawText(const std::string& str, int font_size, const Vec2<fl
 		
 void SFML_Wrapper::DrawText(const std::string& str, int font_size, const Vec2<float>& pos, const Color4<int>& color)
 {
-     	sf::Text text(str, font, font_size);
-        text.setColor(sf::Color(color.r, color.g, color.b));
-        text.setPosition(pos.x, GetHeight() - pos.y); 
+     	//text12.setString(str);
+        //text12.setPosition(pos.x, GetHeight() - pos.y); 
                                                 
-	//window.pushGLStates();
-	//window.draw(text);
-	//window.popGLStates();	     	
+	////window.pushGLStates();
+	//window.draw(text12);
+	////window.popGLStates();	     	
+
+	glPushMatrix();
+		glLoadIdentity();
+		glColor4ub(color.r, color.g, color.b, color.a);
+		glScalef(0.5, 0.5, 0.5);
+		freetype::print(ftfont, pos.x, pos.y, str.c_str());
+	glPopMatrix();
+		
 }
 
    

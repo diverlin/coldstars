@@ -77,7 +77,7 @@ class Vec3
 			
 			return *this;
 		}
-		
+
 		const Vec3<VARTYPE>& operator/=(VARTYPE val)
 		{
 			x /= val;
@@ -103,8 +103,8 @@ class Vec3
                 {
                 	Vec3<VARTYPE> result(x-rhs.x, y-rhs.y, z-rhs.z);	
 			return result;
-                }
-                
+                }                
+	
                 //Vec3<VARTYPE> operator+(const Vec2<VARTYPE>& rhs) const
                 //{
                 	//Vec3<VARTYPE> result(x+rhs.x, y+rhs.y, z);	

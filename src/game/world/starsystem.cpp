@@ -549,7 +549,41 @@ void StarSystem::UpdateStates()
 	}
 }
 
+float StarSystem::CalcResultGravityForce(const Vec3<float>& center, const Vec3<float>& orient, float mass) const
+{
+	float rate = 1; 
+	for (unsigned int i=0; i<STAR_vec.size(); i++)
+	{
+		float dist = distanceBetween(center, STAR_vec[i]->GetCenter());
+		if (dist < 5*STAR_vec[i]->GetCollisionRadius())
+		{
+			Vec3<float> force_dir(STAR_vec[i]->GetCenter() - center);
+			force_dir.Normalize();
+			float power1 = dotUnits(force_dir, orient);
+			float power2 = CONVERTER::DIST2GRAVITY.GetEquivalent(dist);
+				
+			rate += power1*power2;
+		}
+	}
 
+	for (unsigned int i=0; i<PLANET_vec.size(); i++)
+	{
+		float dist = distanceBetween(center, PLANET_vec[i]->GetCenter());
+		if (dist < 5*PLANET_vec[i]->GetCollisionRadius())
+		{
+			Vec3<float> force_dir(PLANET_vec[i]->GetCenter() - center);
+			force_dir.Normalize();
+			float power1 = dotUnits(force_dir, orient);
+			float power2 = CONVERTER::DIST2GRAVITY.GetEquivalent(dist);
+			
+			rate += power1*power2;
+		}		
+	}
+	
+	return rate;
+}
+
+		
 void StarSystem::Update(int time)
 {                
 	bool detalied_simulation = true;
