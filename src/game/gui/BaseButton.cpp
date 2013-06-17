@@ -85,7 +85,7 @@ void BaseButton::ShadeOff()
 void BaseButton::RenderInfo(int gui_offset_x, int gui_offset_y) const
 {
 	Vec2<float> pos(box.GetCenter().x+gui_offset_x, box.GetCenter().y+gui_offset_y);
-	drawSimpleColoredTextWithBackground(info, 12, pos, Color4<int>());
+	drawSimpleColoredTextWithBackground(info, 12, pos, Color4<int>(255, 255, 255, 255));
 }
 
 void BaseButton::Render(int offset_x, int offset_y) const
