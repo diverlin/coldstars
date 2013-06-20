@@ -26,7 +26,7 @@ BaseParticleSystem::BaseParticleSystem():
 type_id(NONE_ID),
 is_alive(true),
 is_dying(false),
-parent(NULL)
+parent(nullptr)
 {}
  
 /* virtual */

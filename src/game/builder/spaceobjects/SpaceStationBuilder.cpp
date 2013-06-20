@@ -32,7 +32,7 @@ SpaceStationBuilder::~SpaceStationBuilder() {}
 
 SpaceStation* SpaceStationBuilder::GetNewSpaceStationTemplate(unsigned long int id) const
 {
-	SpaceStation* spacestation = NULL;
+	SpaceStation* spacestation = nullptr;
 	if (id == NONE_ID)
 	{
 		id = EntityIdGenerator::Instance().GetNextId();
@@ -62,8 +62,8 @@ SpaceStation* SpaceStationBuilder::GetNewSpaceStation() const
 
 void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 {
-	Mesh* mesh = NULL;
-	TextureOb* texOb = NULL;
+	Mesh* mesh = nullptr;
+	TextureOb* texOb = nullptr;
 	if (getRandInt(0, 1))
 	{
 		texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
@@ -105,7 +105,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
         data_life.dying_time = 10*texOb->size_id;
         
         int size_threshold = 2; 
-    	//if ( (texOb->size_id < size_threshold) or (mesh != NULL) )
+    	//if ( (texOb->size_id < size_threshold) or (mesh != nullptr) )
        		//data_korpus.draw_turrels = false; 
     	//else
        		//data_korpus.draw_turrels = true; 
@@ -119,7 +119,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     	spacestation->SetKorpusData(data_korpus);
 	spacestation->SetLifeData(data_life);
 
-	if (mesh != NULL)
+	if (mesh != nullptr)
 	{
 		float scale_comp = getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX);
 		Vec3<float> scale(scale_comp, scale_comp, scale_comp);

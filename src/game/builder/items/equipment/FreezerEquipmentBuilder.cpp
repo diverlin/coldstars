@@ -35,7 +35,7 @@ FreezerEquipmentBuilder::~FreezerEquipmentBuilder()
 
 FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipmentTemplate(unsigned long int id) const
 {
-	FreezerEquipment* freezer_equipment = NULL;
+	FreezerEquipment* freezer_equipment = nullptr;
 
 	if (id == NONE_ID)
 	{

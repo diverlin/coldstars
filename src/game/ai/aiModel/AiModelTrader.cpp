@@ -30,7 +30,7 @@ AiModelTrader::~AiModelTrader()
 
 void AiModelTrader::UpdateInStatic(Npc* npc) const
 {
-	if (npc->GetStateMachine().GetMacroTaskManager().GetScenario() == NULL)
+	if (npc->GetStateMachine().GetMacroTaskManager().GetScenario() == nullptr)
         {
         	Task macrotask(MACROSCENARIO::GOODSTRADING_ID);
 	        npc->GetStateMachine().SetCurrentMacroTask(macrotask);

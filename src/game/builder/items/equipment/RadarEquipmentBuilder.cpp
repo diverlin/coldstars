@@ -35,7 +35,7 @@ RadarEquipmentBuilder::~RadarEquipmentBuilder()
 
 RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipmentTemplate(unsigned long int id) const
 {
-	RadarEquipment* radar_equipment = NULL;
+	RadarEquipment* radar_equipment = nullptr;
 	
 	if (id == NONE_ID)
 	{

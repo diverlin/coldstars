@@ -42,7 +42,7 @@ StarSystemBuilder::~StarSystemBuilder()
 
 StarSystem* StarSystemBuilder::GetNewStarSystemTemplate(unsigned long int id) const
 {
-	StarSystem* starsystem = NULL;
+	StarSystem* starsystem = nullptr;
 	
 	if (id == NONE_ID)
 	{

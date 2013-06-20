@@ -22,7 +22,7 @@
 
 unsigned long int BaseBackGroundEffect::counter;
 
-BaseBackGroundEffect::BaseBackGroundEffect():textureOb(NULL), parallax_rate(1.f)
+BaseBackGroundEffect::BaseBackGroundEffect():textureOb(nullptr), parallax_rate(1.f)
 {
 	counter++;
 	id = counter;

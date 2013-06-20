@@ -32,7 +32,7 @@
 
 #include "../render/Render.hpp"
 
-GuiNatureLand::GuiNatureLand():natureland(NULL)
+GuiNatureLand::GuiNatureLand():natureland(nullptr)
 {
 	int screen_w = Config::Instance().SCREEN_WIDTH;
 	int screen_h = Config::Instance().SCREEN_HEIGHT;
@@ -101,7 +101,7 @@ bool GuiNatureLand::UpdateMouseInteractionWithEquipedItemSlots(const MouseData& 
        	for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
        	{
 		BaseItem* item = rect_itemslot_vec[i].second->GetItem();
-		if (item != NULL)
+		if (item != nullptr)
 		{	 
 	                if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.mx, data_mouse.my) == true)
 	                {	
@@ -130,7 +130,7 @@ void GuiNatureLand::RenderEquipedItemSlots() const
 		//glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
         	//for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
         	//{
-        		//if (rect_itemslot_vec[i].second->GetItem() != NULL)
+        		//if (rect_itemslot_vec[i].second->GetItem() != nullptr)
         		//{
                 		//rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetGuiOffset());
         		//}

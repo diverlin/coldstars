@@ -45,7 +45,7 @@ NatureLandBuilder::~NatureLandBuilder()
 
 NatureLand* NatureLandBuilder::GetNewNatureLandTemplate(unsigned long int id) const
 {
-	NatureLand* natureland = NULL;
+	NatureLand* natureland = nullptr;
 	
 	if (id == NONE_ID)
 	{

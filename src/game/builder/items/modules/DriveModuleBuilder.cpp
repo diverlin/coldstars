@@ -35,7 +35,7 @@ DriveModuleBuilder::~DriveModuleBuilder()
 
 DriveModule* DriveModuleBuilder::GetNewDriveModuleTemplate(unsigned long int id) const
 {
-	DriveModule* drive_module = NULL;
+	DriveModule* drive_module = nullptr;
 
 	if (id == NONE_ID)
 	{

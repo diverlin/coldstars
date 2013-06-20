@@ -35,7 +35,7 @@ ProtectorEquipmentBuilder::~ProtectorEquipmentBuilder()
 
 ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipmentTemplate(unsigned long int id) const
 {
-	ProtectorEquipment* protector_equipment = NULL;
+	ProtectorEquipment* protector_equipment = nullptr;
 
 	if (id == NONE_ID)
 	{

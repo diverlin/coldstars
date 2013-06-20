@@ -36,7 +36,7 @@ ShopBuilder::~ShopBuilder()
 
 Shop* ShopBuilder::GetNewShopTemplate(unsigned long int id) const
 {
-	Shop* shop = NULL;
+	Shop* shop = nullptr;
 	
 	if (id == NONE_ID)
 	{

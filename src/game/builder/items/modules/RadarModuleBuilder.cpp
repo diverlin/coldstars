@@ -35,7 +35,7 @@ RadarModuleBuilder::~RadarModuleBuilder()
 
 RadarModule* RadarModuleBuilder::GetNewRadarModuleTemplate(unsigned long int id) const
 {
-	RadarModule* radar_module = NULL;
+	RadarModule* radar_module = nullptr;
 	
 	if (id == NONE_ID)
 	{

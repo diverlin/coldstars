@@ -34,7 +34,7 @@ Turrel::~Turrel()
 
 void Turrel::Render(float turrel_angle_inD)
 {        
-        if (slot->GetTarget() != NULL)
+        if (slot->GetTarget() != nullptr)
         {
         	float _tur_xl = slot->GetTarget()->GetCenter().x - GetCenter().x;
         	float _tur_yl = slot->GetTarget()->GetCenter().y - GetCenter().y;

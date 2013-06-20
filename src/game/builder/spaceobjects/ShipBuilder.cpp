@@ -31,7 +31,7 @@ ShipBuilder::~ShipBuilder() {}
 
 Ship* ShipBuilder::GetNewShipTemplate(unsigned long int id) const
 {
-	Ship* ship = NULL;
+	Ship* ship = nullptr;
 
 	if (id == NONE_ID)
 	{
@@ -75,8 +75,8 @@ Ship* ShipBuilder::GetNewShip() const
 
 void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id, int size_id, int weapons_num) const
 {
-	Mesh* mesh = NULL;
-	TextureOb* texOb = NULL;
+	Mesh* mesh = nullptr;
+	TextureOb* texOb = nullptr;
 	//if (getRandBool() == true)
 	//{
 		texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
@@ -116,7 +116,7 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
         
         int size_threshold = 2; 
         data_korpus.draw_turrels = false;
-    	if (mesh == NULL)
+    	if (mesh == nullptr)
     	{
     		if (texOb->size_id > size_threshold)
 		{
@@ -126,7 +126,7 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
 
 	ship->SetSubSubTypeId(subsubtype_id);
 	ship->SetKorpusData(data_korpus);
-	if (mesh != NULL)
+	if (mesh != nullptr)
 	{
 		float scale_comp = getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
 		Vec3<float> scale(scale_comp, scale_comp, scale_comp);

@@ -35,10 +35,10 @@ Kosmoport::Kosmoport(int id)
 	data_id.type_id = ENTITY::KOSMOPORT_ID;
 	race_id = RACE::R0_ID; //wrong
 	
-	angar     = NULL;
-        store     = NULL;
-        shop      = NULL;
-        goverment = NULL;
+	angar     = nullptr;
+        store     = nullptr;
+        shop      = nullptr;
+        goverment = nullptr;
 }
 
 /* virtual */
@@ -96,7 +96,7 @@ bool Kosmoport::AddVehicle(Vehicle* vehicle)
         angar->AddVehicle(vehicle);  
         
         vehicle->SetLand(this);        
-        if (vehicle->GetStarSystem() == NULL) // used if vehicle added directly after creation
+        if (vehicle->GetStarSystem() == nullptr) // used if vehicle added directly after creation
         {
                 vehicle->SetStarSystem(owner->GetStarSystem());
         }

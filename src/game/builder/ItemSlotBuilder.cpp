@@ -32,7 +32,7 @@ ItemSlot* GetNewItemSlot(int subtype_id, unsigned long int id)
 		id = EntityIdGenerator::Instance().GetNextId();
 	} 
 
-	ItemSlot* item_slot = NULL;
+	ItemSlot* item_slot = nullptr;
         try 
         { 
         	item_slot = new ItemSlot(id);
@@ -50,7 +50,7 @@ ItemSlot* GetNewItemSlot(int subtype_id, unsigned long int id)
         
         if (subtype_id == ENTITY::WEAPON_SLOT_ID)
         {
-        	Turrel* turrel = NULL;
+        	Turrel* turrel = nullptr;
                 TextureOb* texOb_turrel = TextureManager::Instance().GetRandomTextureOb(TEXTURE::TURREL_ID); 
                 try 
         	{ 
@@ -70,7 +70,7 @@ ItemSlot* GetNewItemSlot(int subtype_id, unsigned long int id)
 
 ItemSlot* GetNewItemSlotWithoutSaveAbility(int subtype_id)
 {
-	ItemSlot* item_slot = NULL;
+	ItemSlot* item_slot = nullptr;
         try 
         { 
         	item_slot = new ItemSlot(NONE_ID);

@@ -57,7 +57,7 @@ int main()
         
 	Player* player = PlayerBuilder::Instance().GetNewPlayer();
 	
-	BaseRunScenario* run_scenario = NULL;
+	BaseRunScenario* run_scenario = nullptr;
 	int scenario_type = NORMAL_RUNSCENARIO;
 	switch(scenario_type)
 	{
@@ -69,7 +69,6 @@ int main()
 	run_scenario->Init(player);
 	
 	Galaxy* galaxy = player->GetNpc()->GetVehicle()->GetStarSystem()->GetSector()->GetGalaxy();       
-
         
         player->GetNpc()->GetVehicle()->SetGodMode(true);
         //player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
@@ -79,6 +78,9 @@ int main()
 	// GAME LOOP
 	while (Screen::Instance().GetWindow().isOpen())
 	{    
+		//std::cout<<player->GetNpc()->GetVehicle()->GetCenter().x<<std::endl;
+		//std::cout<<player->GetNpc()->GetVehicle()->GetProperties().radar<<std::endl;
+				
 		/* server code start */
 		TurnTimer::Instance().Update();
 

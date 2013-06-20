@@ -32,7 +32,7 @@ RocketBulletBuilder::~RocketBulletBuilder() {}
 
 RocketBullet* RocketBulletBuilder::GetNewRocketBulletTemplate(unsigned long int id) const
 {
-	RocketBullet* rocket_bullet = NULL;
+	RocketBullet* rocket_bullet = nullptr;
 
 	if (id == NONE_ID)
 	{

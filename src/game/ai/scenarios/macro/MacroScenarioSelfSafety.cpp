@@ -45,7 +45,7 @@ void MacroScenarioSelfSafety::UpdateInStaticInSpace(Npc* npc) const
 	{
 		//if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->GetTypeId() != ENTITY::STARSYSTEM_ID)
 		//{
-                        //if (npc->GetVehicle()->GetFailBackStarSystem() != NULL)
+                        //if (npc->GetVehicle()->GetFailBackStarSystem() != nullptr)
                         //{
                                 //Task microtask(MICROSCENARIO::JUMP_ID, npc->GetVehicle()->GetFailBackStarSystem()->GetId());
                                 //npc->GetStateMachine().SetCurrentMicroTask(microtask);

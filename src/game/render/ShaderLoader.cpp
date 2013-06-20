@@ -33,7 +33,7 @@ void compileProgram(const std::string& fname_vert, const std::string& fname_frag
 GLuint compileShader(const GLchar* source, GLenum shader_type)
 {
     	GLuint shader = glCreateShader(shader_type);
-    	glShaderSource(shader, 1, &source, NULL);
+    	glShaderSource(shader, 1, &source, nullptr);
 
     	glCompileShader(shader);
     	checkShaderErrors(shader, source);

@@ -35,7 +35,7 @@ EnergizerEquipmentBuilder::~EnergizerEquipmentBuilder()
 
 EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipmentTemplate(unsigned long int id) const
 {
-	EnergizerEquipment* energizer_equipment = NULL;
+	EnergizerEquipment* energizer_equipment = nullptr;
 
 	if (id == NONE_ID)
 	{

@@ -31,7 +31,7 @@
 
 #include "../render/Render.hpp"
 
-GuiAngar::GuiAngar():angar(NULL)
+GuiAngar::GuiAngar():angar(nullptr)
 {
 	int screen_w = Config::Instance().SCREEN_WIDTH;
 	int screen_h = Config::Instance().SCREEN_HEIGHT;
@@ -133,7 +133,7 @@ void GuiAngar::BindAngar(Angar* angar)
 
 void GuiAngar::UnbindAngar()
 {
-	angar = NULL;
+	angar = nullptr;
 	
 	rect_vehicleslot_vec.clear();
 	rect_itemslot_vec.clear();
@@ -209,7 +209,7 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                                 return true;
                         }
                         
-                        if (rect_vehicleslot_vec[i].second->GetVehicle() != NULL)
+                        if (rect_vehicleslot_vec[i].second->GetVehicle() != nullptr)
                         {       
                         	player->GetCursor().SetFocusedObject(rect_vehicleslot_vec[i].second->GetVehicle());
                         }           
@@ -227,7 +227,7 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                                 {
                                         case ENTITY::REPAIR_SLOT_ID:
                                         {        
-                                                if (player->GetCursor().GetItemSlot()->GetItem() != NULL)
+                                                if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
                                                 {                                        
                                                         angar->RepairItem(player->GetNpc(), player->GetCursor().GetItemSlot()->GetItem());
                                                 }
@@ -237,7 +237,7 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                                         
                                         case ENTITY::CHARGE_SLOT_ID:
                                         {
-                                                if (player->GetCursor().GetItemSlot()->GetItem() != NULL)
+                                                if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
                                                 {
                                                         switch (player->GetCursor().GetItemSlot()->GetItem()->GetSubTypeId())
                                                         {
@@ -263,7 +263,7 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                         	
                         }
                         	
-                        if (rect_itemslot_vec[i].second->GetItem() != NULL)
+                        if (rect_itemslot_vec[i].second->GetItem() != nullptr)
                         {                         
                 		player->GetCursor().SetFocusedObject(rect_itemslot_vec[i].second->GetItem());
                 	}

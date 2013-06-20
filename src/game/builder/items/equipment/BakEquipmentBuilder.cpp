@@ -36,7 +36,7 @@ BakEquipmentBuilder::~BakEquipmentBuilder()
 
 BakEquipment* BakEquipmentBuilder::GetNewBakEquipmentTemplate(unsigned long int id) const
 {
-	BakEquipment* bak_equipment = NULL;
+	BakEquipment* bak_equipment = nullptr;
 	
 	if (id == NONE_ID)
 	{

@@ -27,7 +27,7 @@ BaseModule::BaseModule()
 {
         data_id.type_id = ENTITY::MODULE_ID;
         
-        equipment_owner = NULL;
+        equipment_owner = nullptr;
 }
 
 /* virtual */

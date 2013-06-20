@@ -31,7 +31,7 @@ BlackHoleBuilder::~BlackHoleBuilder()
 
 BlackHole* BlackHoleBuilder::GetNewBlackHoleTemplate(unsigned long int id) const
 {
-	BlackHole* blackhole = NULL;
+	BlackHole* blackhole = nullptr;
 	
 	if (id == NONE_ID)
 	{

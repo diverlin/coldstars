@@ -35,7 +35,7 @@ GravityArtefactBuilder::~GravityArtefactBuilder()
 
 GravityArtefact* GravityArtefactBuilder::GetNewGravityArtefactTemplate(unsigned long int id) const
 {
-	GravityArtefact* gravity_artefact = NULL;
+	GravityArtefact* gravity_artefact = nullptr;
 
 	if (id == NONE_ID)
 	{

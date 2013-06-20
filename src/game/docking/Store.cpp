@@ -77,7 +77,7 @@ bool Store::AddVehicle(Vehicle* vehicle)
 	if (vehicle_slot) 
 	{
 		//vehicle->SetLand(GetOwnerKosmoport());        
-        	//if (vehicle->GetStarSystem() == NULL) // used if vehicle added directly after creation
+        	//if (vehicle->GetStarSystem() == nullptr) // used if vehicle added directly after creation
         	//{
                 	//vehicle->SetStarSystem(GetOwnerKosmoport()->GetOwner()->GetStarSystem());
         	//}        
@@ -92,32 +92,32 @@ ItemSlot* Store::GetEmptyItemSlot() const
 {
         for (unsigned int i=0; i<item_slot_vec.size(); i++)
         {
-                if (item_slot_vec[i]->GetItem() == NULL)
+                if (item_slot_vec[i]->GetItem() == nullptr)
                 {
                         return item_slot_vec[i];
         	}
         }
       
-        return NULL;
+        return nullptr;
 }
 
 VehicleSlot* Store::GetEmptyVehicleSlot() const
 {
         for (unsigned int i=0; i<vehicle_slot_vec.size(); i++)
         {
-                if (vehicle_slot_vec[i]->GetVehicle() == NULL)
+                if (vehicle_slot_vec[i]->GetVehicle() == nullptr)
                 {
                         return vehicle_slot_vec[i];
         	}
         }
       
-        return NULL;
+        return nullptr;
 }
 
 int Store::BuyItem(BaseItem* item)
 {
 	ItemSlot* item_slot = GetEmptyItemSlot();	
-	if (item_slot != NULL)
+	if (item_slot != nullptr)
 	{
 		if (item_slot->InsertItem(item) == true)
 		{

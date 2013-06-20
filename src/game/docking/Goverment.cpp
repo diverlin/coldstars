@@ -29,7 +29,7 @@ Goverment::Goverment(int id)
 	data_id.type_id = ENTITY::GOVERMENT_ID;
 	data_id.subtype_id = NONE_ID;
 
-        textureOb_face = NULL;   
+        textureOb_face = nullptr;   
 }
 
 Goverment::~Goverment()

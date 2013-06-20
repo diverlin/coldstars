@@ -31,8 +31,8 @@ ShieldEffect::ShieldEffect()
         color.b = 1.0;
         color.a = alpha_start;
         
-        textureOb = NULL;
-        parent = NULL;
+        textureOb = nullptr;
+        parent = nullptr;
 }
 
 ShieldEffect::~ShieldEffect()

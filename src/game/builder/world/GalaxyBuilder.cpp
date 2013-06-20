@@ -37,7 +37,7 @@ GalaxyBuilder::~GalaxyBuilder()
 
 Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(unsigned long int id) const
 {
-	Galaxy* galaxy = NULL;
+	Galaxy* galaxy = nullptr;
 	if (id == NONE_ID)
 	{
 		id = EntityIdGenerator::Instance().GetNextId();

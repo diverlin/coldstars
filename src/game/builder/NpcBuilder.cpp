@@ -42,7 +42,7 @@ NpcBuilder::~NpcBuilder()
 
 Npc* NpcBuilder::GetNewNpcTemplate(unsigned long int id) const
 {
-	Npc* npc = NULL;
+	Npc* npc = nullptr;
 	
 	if (id == NONE_ID)
 	{

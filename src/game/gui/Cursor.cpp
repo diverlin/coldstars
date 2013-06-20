@@ -41,7 +41,7 @@
 #include "../render/Render.hpp"
 
 Cursor::Cursor():
-focused_ob(NULL)
+focused_ob(nullptr)
 {
      	item_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::CARGO_SLOT_ID);
      	rect.Set(0, 0, GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
@@ -103,7 +103,7 @@ void Cursor::Update()
 
 bool Cursor::UpdateInSpace()
 {
-     	if (focused_ob != NULL)
+     	if (focused_ob != nullptr)
 	{
 		switch(focused_ob->GetTypeId())
 		{
@@ -198,7 +198,7 @@ bool Cursor::UpdateInSpace()
 
 void Cursor::RenderFocusedObjectStuff() const
 {
-	if (focused_ob != NULL)
+	if (focused_ob != nullptr)
 	{
 		enable_BLEND();
 	
@@ -322,7 +322,7 @@ void Cursor::RenderFocusedObjectStuff() const
 
 void Cursor::RenderFocusedObjectInfo()
 {
-	if (focused_ob != NULL)
+	if (focused_ob != nullptr)
 	{
 		enable_BLEND();
 	
@@ -451,5 +451,5 @@ void Cursor::RenderFocusedObjectInfo()
 	
 	}
 	
-	focused_ob = NULL;
+	focused_ob = nullptr;
 }

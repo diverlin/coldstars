@@ -34,7 +34,7 @@ VehicleSlot::VehicleSlot(int id)
 	data_id.id = id;
 	data_id.type_id = ENTITY::VEHICLE_SLOT_ID;
 	
-    	vehicle = NULL;
+    	vehicle = nullptr;
 }
    
 VehicleSlot::~VehicleSlot()
@@ -59,7 +59,7 @@ void VehicleSlot::InsertVehicle(Vehicle* vehicle)
 
 void VehicleSlot::Release()
 {
-        vehicle = NULL;
+        vehicle = nullptr;
 } 
 
 void VehicleSlot::SwapVehicle(VehicleSlot* vehicle_slot)
@@ -72,7 +72,7 @@ void VehicleSlot::SwapVehicle(VehicleSlot* vehicle_slot)
 void VehicleSlot::Render(const Rect& rect) const
 {
      	drawTexturedRect(textureOb, rect, -1);
-     	if (vehicle != NULL)
+     	if (vehicle != nullptr)
      	{
      		Vec3<float> center(rect.GetCenter().x, rect.GetCenter().y, -2.0);
      	       	((Ship*)vehicle)->RenderAtPlanet(center);

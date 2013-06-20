@@ -45,7 +45,7 @@ Mesh* MeshCollector::GetMeshByTypeId(int type_id) const
 	if (result.size() == 0) 
 	{
 		throw "mesh with request type is not found";
-		return NULL;
+		return nullptr;
 	}
 	else
 	{

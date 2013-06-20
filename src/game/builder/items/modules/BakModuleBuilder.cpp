@@ -35,7 +35,7 @@ BakModuleBuilder::~BakModuleBuilder()
 
 BakModule* BakModuleBuilder::GetNewBakModuleTemplate(unsigned long int id) const
 {
-	BakModule* bak_module = NULL;
+	BakModule* bak_module = nullptr;
 
 	if (id == NONE_ID)
 	{

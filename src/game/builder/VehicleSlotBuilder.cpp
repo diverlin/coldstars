@@ -33,7 +33,7 @@ VehicleSlot* GetNewVehicleSlot(unsigned long int id)
 		id = EntityIdGenerator::Instance().GetNextId();
 	} 
 
-	VehicleSlot* vehicle_slot = NULL;
+	VehicleSlot* vehicle_slot = nullptr;
         try 
         { 
         	vehicle_slot = new VehicleSlot(id);

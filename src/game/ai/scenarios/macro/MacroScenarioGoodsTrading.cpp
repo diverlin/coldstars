@@ -60,7 +60,7 @@ void MacroScenarioGoodsTrading::Enter(Npc* npc) const
 /* virtual */
 bool MacroScenarioGoodsTrading::Validation(Npc* npc) const
 {
-	if (npc->GetVehicle()->GetGoodsPack() == NULL)
+	if (npc->GetVehicle()->GetGoodsPack() == nullptr)
 	{
 		return IsAbleToBuyGoods(npc);
 	}
@@ -78,7 +78,7 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 	bool see_pickable_container = npc->GetObservation().GetVisionStatus().pickable_CONTAINER;
 	bool able_buy      = IsAbleToBuyGoods(npc);
 	bool has_goods     = false;
-	if (npc->GetVehicle()->GetGoodsPack() != NULL)
+	if (npc->GetVehicle()->GetGoodsPack() != nullptr)
 	{
 		has_goods = true;
 	}
@@ -144,7 +144,7 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
 void MacroScenarioGoodsTrading::UpdateInStaticInDock(Npc* npc) const
 {
 	GoodsPack* goods_pack = npc->GetVehicle()->GetGoodsPack(); 
-	while(goods_pack != NULL)
+	while(goods_pack != nullptr)
 	{
 		npc->GetVehicle()->SellItem(goods_pack);
 		goods_pack = npc->GetVehicle()->GetGoodsPack(); 

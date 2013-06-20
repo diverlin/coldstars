@@ -35,7 +35,7 @@ BombBuilder::~BombBuilder()
 
 Bomb* BombBuilder::GetNewBombTemplate(unsigned long int id) const
 {
-	Bomb* bomb = NULL;
+	Bomb* bomb = nullptr;
 	
 	if (id == NONE_ID)
 	{

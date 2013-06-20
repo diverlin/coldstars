@@ -35,7 +35,7 @@ ScanerModuleBuilder::~ScanerModuleBuilder()
 
 ScanerModule* ScanerModuleBuilder::GetNewScanerModuleTemplate(unsigned long int id) const
 {
-	ScanerModule* scaner_module = NULL;
+	ScanerModule* scaner_module = nullptr;
 	
 	if (id == NONE_ID)
 	{

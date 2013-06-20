@@ -32,7 +32,7 @@ AiModelConqueror::~AiModelConqueror()
 
 void AiModelConqueror::UpdateInStatic(Npc* npc) const
 {
-	if (npc->GetStateMachine().GetMacroTaskManager().GetScenario() != NULL)
+	if (npc->GetStateMachine().GetMacroTaskManager().GetScenario() != nullptr)
 	{
 		if (npc->GetStateMachine().GetMacroTaskManager().GetScenario()->GetTypeId() == MACROSCENARIO::WARRIORRECRUTE_ID) 
 		{

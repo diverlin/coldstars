@@ -52,15 +52,15 @@ Npc::Npc(int id)
 
     	credits = 1000;
 
-        player = NULL;
-        vehicle = NULL;
+        player = nullptr;
+        vehicle = nullptr;
 
-    	vehicle_to_scan = NULL;
+    	vehicle_to_scan = nullptr;
 
         observation.SetNpcOwner(this);
         state_machine.SetNpcOwner(this);   
         
-        ai_model = NULL;     
+        ai_model = nullptr;     
 }
     
 /* virtual */
@@ -91,7 +91,7 @@ void Npc::UpdateInKosmoportInStatic()
 	
 	// if all things are DONE
 	//((Planet*)vehicle->GetDriveComplex()->GetTarget())->GetLand()->AddToLaunchingQueue(this); // improove by adding spacestation
-	if (player == NULL)
+	if (player == nullptr)
 	{
         	//if (ai_model)
         	//{
@@ -117,7 +117,7 @@ void Npc::UpdateInSpaceInStatic()
         vehicle->UpdateAllFunctionalItemsInStatic();
 	vehicle->GetWeaponComplex().PrepareWeapons();
 	        
-	if (player == NULL)
+	if (player == nullptr)
 	{
         	vehicle->CheckNeedsInStatic();
                 
@@ -250,7 +250,7 @@ bool Npc::CheckPossibilityToScan(Vehicle* vehicle)
 }
 
 
-void Npc::ResetScanTarget() { vehicle_to_scan = NULL; }
+void Npc::ResetScanTarget() { vehicle_to_scan = nullptr; }
 //// *********** SCANNING ***********
 
 
@@ -270,12 +270,12 @@ void Npc::UpdateInfo()
 	
         info.addNameStr("npc_agress:"); info.addValueStr( GetAgressorSetString() );
         
-    	if (state_machine.GetMacroTaskManager().GetScenario() != NULL)
+    	if (state_machine.GetMacroTaskManager().GetScenario() != nullptr)
     	{ 	
     	info.addNameStr("macro_task:");   info.addValueStr( state_machine.GetMacroTaskManager().GetScenario()->GetDescription(this) ); 
     	}
     	
-    	if (state_machine.GetMicroTaskManager().GetScenario() != NULL)
+    	if (state_machine.GetMicroTaskManager().GetScenario() != nullptr)
     	{ 	
     	info.addNameStr("micro_task:");   info.addValueStr( state_machine.GetMicroTaskManager().GetScenario()->GetDescription(this) ); 
     	}
@@ -331,13 +331,13 @@ void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::
         save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
         save_ptree.put(root+"unresolved.aiModel_id", ai_model->GetTypeId());
 	skills.SaveData(save_ptree, root);
-	if (state_machine.GetMacroTaskManager().GetScenario() != NULL)
+	if (state_machine.GetMacroTaskManager().GetScenario() != nullptr)
 	{
 		const std::string child_root = root + "macrotask.";
 		state_machine.GetMacroTaskManager().GetTask().SaveData(save_ptree, child_root);
 	}
 	
-	if (state_machine.GetMicroTaskManager().GetScenario() != NULL)	
+	if (state_machine.GetMicroTaskManager().GetScenario() != nullptr)	
 	{
 		const std::string child_root = root + "microtask.";
 		state_machine.GetMicroTaskManager().GetTask().SaveData(save_ptree, child_root);

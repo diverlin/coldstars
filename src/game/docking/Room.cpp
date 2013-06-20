@@ -23,8 +23,8 @@
  
 Room::Room()
 {	
-	owner_kosmoport = NULL;
-        textureOb_background = NULL;
+	owner_kosmoport = nullptr;
+        textureOb_background = nullptr;
 }
 
 Room::~Room()

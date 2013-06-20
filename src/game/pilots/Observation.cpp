@@ -26,7 +26,7 @@
 #include "../spaceobjects/Vehicle.hpp"
 #include "../spaceobjects/Container.hpp"
 
-Observation::Observation():npc_owner(NULL)
+Observation::Observation():npc_owner(nullptr)
 {}
     
 Observation::~Observation()
@@ -62,7 +62,7 @@ Container* Observation::GetRandomPickableContainer() const
                     	
 StarSystem* Observation::GetClosestStarSystem(int requested_consdition_id) const
 {
-	StarSystem* _target_starsystem = NULL;	
+	StarSystem* _target_starsystem = nullptr;	
  	for (unsigned int i=0; i<visible_STARSYSTEM_pair_vec.size(); i++)
  	{
  		if (visible_STARSYSTEM_pair_vec[i].object->GetConditionId() == requested_consdition_id)
@@ -89,7 +89,7 @@ Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<int>& rVec_race
              	}
         }
         
-	return NULL;	
+	return nullptr;	
 }
 
 Vehicle* Observation::GetRandVisibleVehicle(const std::vector<int>& rVec_race_id) const
@@ -111,7 +111,7 @@ Vehicle* Observation::GetRandVisibleVehicle(const std::vector<int>& rVec_race_id
         	return tmp_vehicle[getRandInt(0, tmp_vehicle.size()-1)];
         }
 	
-	return NULL;	
+	return nullptr;	
 }
 
 void Observation::ObserveAllInSpace()

@@ -25,7 +25,7 @@ class GalaxyDescription;
 class StarSystem;
 class StarSystemDescription;
 class Planet;
-#include "../common/Date.hpp";
+#include "../common/Date.hpp"
 #include "../struct/StarSystemsConditionData.hpp"
 
 class God

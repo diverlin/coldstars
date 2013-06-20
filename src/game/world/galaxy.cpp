@@ -80,7 +80,7 @@ Sector* Galaxy::GetClosestSectorTo(Sector* sector)
                 return SECTOR_vec[index_min];
         }
         
-        return NULL;
+        return nullptr;
 }
      		
 void Galaxy::Update(int time)

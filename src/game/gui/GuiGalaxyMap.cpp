@@ -35,7 +35,7 @@
 #include "../spaceobjects/Star.hpp"
 #include "../pilots/Npc.hpp"
 
-GuiGalaxyMap::GuiGalaxyMap():galaxy(NULL)
+GuiGalaxyMap::GuiGalaxyMap():galaxy(nullptr)
 { 
     	rect.Set(GUI::MAP::BORDER_X, 
     		 GUI::MAP::BORDER_Y, 
@@ -56,7 +56,7 @@ void GuiGalaxyMap::BindGalaxy(Galaxy* galaxy)
                 
 void GuiGalaxyMap::UnbindGalaxy()
 {
-        galaxy = NULL;
+        galaxy = nullptr;
 }
                 
 bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse)

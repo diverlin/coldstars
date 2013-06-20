@@ -39,7 +39,7 @@ AngarBuilder::~AngarBuilder()
 
 Angar* AngarBuilder::GetNewAngarTemplate(unsigned long int id) const
 {
-	Angar* angar = NULL;
+	Angar* angar = nullptr;
 	
 	if (id == NONE_ID) 
 	{

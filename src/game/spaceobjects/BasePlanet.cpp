@@ -45,7 +45,7 @@ void BasePlanet::PostDeathUniqueEvent(bool)  /* virtual */
 void BasePlanet::UpdatePosition()
 {
 	orbit.UpdatePosition();  
-	if (parent == NULL)
+	if (parent == nullptr)
 	{
 		SetCenter(orbit.GetPosition());
 	}

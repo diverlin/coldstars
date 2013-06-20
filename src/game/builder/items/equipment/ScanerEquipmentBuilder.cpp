@@ -35,7 +35,7 @@ ScanerEquipmentBuilder::~ScanerEquipmentBuilder()
 
 ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipmentTemplate(unsigned long int id) const
 {
-	ScanerEquipment* scaner_equipment = NULL;
+	ScanerEquipment* scaner_equipment = nullptr;
 
 	if (id == NONE_ID)
 	{

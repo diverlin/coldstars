@@ -35,7 +35,7 @@ GrappleEquipmentBuilder::~GrappleEquipmentBuilder()
 
 GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipmentTemplate(unsigned long int id) const
 {
-	GrappleEquipment* grapple_equipment = NULL;
+	GrappleEquipment* grapple_equipment = nullptr;
 	
 	if (id == NONE_ID)
 	{

@@ -37,7 +37,7 @@ SectorBuilder::~SectorBuilder()
 
 Sector* SectorBuilder::GetNewSectorTemplate(unsigned long int id) const
 {
-	Sector* sector = NULL;
+	Sector* sector = nullptr;
 	if (id == NONE_ID)
 	{
 		id = EntityIdGenerator::Instance().GetNextId();

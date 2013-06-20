@@ -39,7 +39,7 @@ KosmoportBuilder::~KosmoportBuilder()
 
 Kosmoport* KosmoportBuilder::GetNewKosmoportTemplate(unsigned long int id) const
 {
-	Kosmoport* kosmoport = NULL;
+	Kosmoport* kosmoport = nullptr;
 	
 	if (id == NONE_ID)
 	{

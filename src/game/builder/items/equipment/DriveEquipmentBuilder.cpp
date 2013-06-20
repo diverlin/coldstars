@@ -37,7 +37,7 @@ DriveEquipmentBuilder::~DriveEquipmentBuilder()
 
 DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipmentTemplate(unsigned long int id) const
 {
-	DriveEquipment* drive_equipment = NULL;
+	DriveEquipment* drive_equipment = nullptr;
 	if (id == NONE_ID)
 	{
 		id = EntityIdGenerator::Instance().GetNextId();
@@ -76,8 +76,8 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
        		tech_level = 1; 
 	}
 
-	Mesh* mesh = NULL;
-	TextureOb* texOb = NULL;
+	Mesh* mesh = nullptr;
+	TextureOb* texOb = nullptr;
 	if (0)
 	{
 		texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::DRIVE_EQUIPMENT_ID); 
@@ -101,7 +101,7 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
     	common_data.deterioration_normal = 1;
     	common_data.deterioration_overload_rate = EQUIPMENT::DRIVE::OVERLOAD_DETERIORATION_RATE;
     
-    	if (mesh != NULL)
+    	if (mesh != nullptr)
 	{
 		Vec3<float> scale(50);
 		drive_equipment->BindData3D(mesh, mesh->GetTextureOb(), scale);

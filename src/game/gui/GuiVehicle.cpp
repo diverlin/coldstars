@@ -30,8 +30,8 @@
 
 GuiVehicle::GuiVehicle()
 {
-	textureOb_korpus = NULL;
-        vehicle = NULL;
+	textureOb_korpus = nullptr;
+        vehicle = nullptr;
 	gate_slot   = GetNewItemSlotWithoutSaveAbility(ENTITY::GATE_SLOT_ID);
 	
 	allow_full_control = false;
@@ -50,7 +50,7 @@ void GuiVehicle::BindVehicle(Vehicle* vehicle, const Vec2<float>& gui_offset, bo
         this->allow_full_control = allow_full_control;
         this->block_manual_exit = block_manual_exit;
                 
-	textureOb_korpus = NULL;
+	textureOb_korpus = nullptr;
 
 	CreateKorpusGui(vehicle, scale);
 	CreateItemSlotsGeometry(vehicle, scale);
@@ -59,7 +59,7 @@ void GuiVehicle::BindVehicle(Vehicle* vehicle, const Vec2<float>& gui_offset, bo
 void GuiVehicle::UnbindVehicle()
 {
         gui_itemslot_vec.clear();
-        vehicle = NULL;
+        vehicle = nullptr;
 }
 
 void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
@@ -286,7 +286,7 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 	{ 
 		if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
 		{  
-			if ( (gui_itemslot_vec[i].GetItemSlot()->GetItem() != NULL) and (player->GetCursor().GetItemSlot()->GetItem() == NULL) )
+			if ( (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr) and (player->GetCursor().GetItemSlot()->GetItem() == nullptr) )
 			{
 				player->GetCursor().SetFocusedObject(gui_itemslot_vec[i].GetItemSlot()->GetItem());
 			}
@@ -299,7 +299,7 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 				}
 				else
 				{
-					if (player->GetCursor().GetItemSlot()->GetItem() != NULL)
+					if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
 					{
 						if (player->GetNpc()->GetVehicle()->GetPlaceTypeId() == ENTITY::SPACE_ID)
 						{
@@ -319,7 +319,7 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 				{
 					case 1:
 					{
-						if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != NULL)
+						if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr)
 						{
 							if (data_mouse.right_click == true)
 							{
@@ -340,7 +340,7 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 					
 					case 2:
 					{						
-						if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != NULL)
+						if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr)
 						{
 							if (data_mouse.right_click == true)
 							{
@@ -375,7 +375,7 @@ bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Stor
 	{ 
 		if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
 		{  
-			if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != NULL)
+			if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr)
 			{
 				player->GetCursor().SetFocusedObject(gui_itemslot_vec[i].GetItemSlot()->GetItem());
 							
@@ -417,7 +417,7 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, int mark_
 {
 	for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
 	{
-		if (gui_itemslot_vec[i].GetItemSlot()->GetItem() == NULL) 
+		if (gui_itemslot_vec[i].GetItemSlot()->GetItem() == nullptr) 
 		{
 			if ( (gui_itemslot_vec[i].GetItemSlot()->GetSubTypeId() != ENTITY::CARGO_SLOT_ID) and (gui_itemslot_vec[i].GetItemSlot()->GetSubTypeId() != ENTITY::GATE_SLOT_ID) )
                		{

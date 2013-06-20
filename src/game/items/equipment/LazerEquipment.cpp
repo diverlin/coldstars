@@ -107,7 +107,7 @@ void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, flo
 { 
 	if (item_slot->GetOwnerVehicle()->TryToConsumeEnergy(damage) == true)
 	{
-		if (subtarget != NULL) // precise fire
+		if (subtarget != nullptr) // precise fire
 		{
 			//if (getRandInt(1, 2) == 1)
 			{

@@ -22,8 +22,8 @@
 
 MicroTaskManager::MicroTaskManager()
 {
-	scenario = NULL;
-	target = NULL;
+	scenario = nullptr;
+	target = nullptr;
 }
 
 MicroTaskManager::~MicroTaskManager()
@@ -41,7 +41,7 @@ void MicroTaskManager::SetTask(const Task& microtask)
 
 void MicroTaskManager::Reset()
 {
-	scenario  = NULL;
-	target = NULL;
+	scenario  = nullptr;
+	target = nullptr;
 	microtask.Reset();
 }	

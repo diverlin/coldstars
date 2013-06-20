@@ -35,7 +35,7 @@ LazerEquipmentBuilder::~LazerEquipmentBuilder()
 
 LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipmentTemplate(unsigned long int id) const
 {
-	LazerEquipment* lazer_equipment = NULL; 
+	LazerEquipment* lazer_equipment = nullptr; 
 	
 	if (id == NONE_ID)
 	{

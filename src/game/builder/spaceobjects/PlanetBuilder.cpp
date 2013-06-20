@@ -32,7 +32,7 @@ PlanetBuilder::~PlanetBuilder()
 
 Planet* PlanetBuilder::GetNewPlanetTemplate(unsigned long int id) const
 {
-	Planet* planet = NULL;
+	Planet* planet = nullptr;
 	
 	if (id == NONE_ID)
 	{

@@ -124,7 +124,7 @@ void make_dlist ( FT_Face face, char ch, GLuint list_base, GLuint * tex_base ) {
 
 	//increment the raster position as if we were a bitmap font.
 	//(only needed if you want to calculate text length)
-	//glBitmap(0,0,0,0,face->glyph->advance.x >> 6,0,NULL);
+	//glBitmap(0,0,0,0,face->glyph->advance.x >> 6,0,nullptr);
 
 	//Finnish the display list
 	glEndList();
@@ -219,7 +219,7 @@ void print(const font_data &ft_font, float x, float y, const char *fmt, ...)  {
 	char		text[256];								// Holds Our String
 	va_list		ap;										// Pointer To List Of Arguments
 
-	if (fmt == NULL)									// If There's No Text
+	if (fmt == nullptr)									// If There's No Text
 		*text=0;											// Do Nothing
 
 	else {

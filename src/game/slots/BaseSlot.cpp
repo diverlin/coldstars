@@ -26,8 +26,8 @@
 
 BaseSlot::BaseSlot():
 selected(false),
-owner(NULL),
-textureOb(NULL)
+owner(nullptr),
+textureOb(nullptr)
 {}
 
 /* virtual */

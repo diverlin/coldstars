@@ -39,7 +39,7 @@ Container::Container(int id)
 	
     	mass = 1;
 
-   	item_slot = NULL;
+   	item_slot = nullptr;
     	
     	velocity = getRandInt(40, 42) / 100.0;
 }
