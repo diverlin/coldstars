@@ -35,7 +35,7 @@ DroidEquipmentBuilder::~DroidEquipmentBuilder()
 
 DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipmentTemplate(unsigned long int id) const
 {
-	DroidEquipment* droid_equipment = NULL;
+	DroidEquipment* droid_equipment = nullptr;
 	if (id == NONE_ID)
 	{
 		id = EntityIdGenerator::Instance().GetNextId();

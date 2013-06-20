@@ -58,8 +58,8 @@ Player::Player(int id)
     	data_id.type_id    = ENTITY::PLAYER_ID;
         data_id.subtype_id = NONE_ID;
    	
-    	npc  = NULL;
-    	starsystem = NULL;
+    	npc  = nullptr;
+    	starsystem = nullptr;
     	
     	cursor.SetPlayer(this);
     	gui_manager.SetPlayer(this);
@@ -273,7 +273,7 @@ void Player::UpdatePostTransaction()
 
 void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 {       
-	if (starsystem == NULL) //hack
+	if (starsystem == nullptr) //hack
 	{
 		starsystem = npc->GetVehicle()->GetStarSystem();
 	}
@@ -717,7 +717,7 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
         			npc->GetVehicle()->RenderRadarRange();
         		}
 
-			if ( (npc->GetVehicle()->GetGrappleSlot()->GetItem() != NULL) and (npc->GetVehicle()->GetGrappleSlot()->GetSelected() == true) )
+			if ( (npc->GetVehicle()->GetGrappleSlot()->GetItem() != nullptr) and (npc->GetVehicle()->GetGrappleSlot()->GetSelected() == true) )
         		{
         			npc->GetVehicle()->RenderGrappleRange();
         		}
@@ -839,7 +839,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 
                		if (data_mouse.right_click == true)
                		{
-               			if ( (npc->GetVehicle()->GetGrappleSlot()->GetItem() != NULL) and (npc->GetVehicle()->GetGrappleSlot()->GetSelected() == true) )
+               			if ( (npc->GetVehicle()->GetGrappleSlot()->GetItem() != nullptr) and (npc->GetVehicle()->GetGrappleSlot()->GetSelected() == true) )
                			{
        					//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
        					//{
@@ -922,7 +922,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 
                			if (data_mouse.right_click == true)
                			{
-               				if ( (npc->GetVehicle()->GetGrappleSlot()->GetItem() != NULL) and (npc->GetVehicle()->GetGrappleSlot()->GetSelected() == true) )
+               				if ( (npc->GetVehicle()->GetGrappleSlot()->GetItem() != nullptr) and (npc->GetVehicle()->GetGrappleSlot()->GetSelected() == true) )
                				{
 						//if (npc->GetVehicle()->ableTo.GRAB == true)
 		       				//{
@@ -1006,7 +1006,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 
                		if (data_mouse.right_click == true)
                		{
-               			if ( (npc->GetVehicle()->GetGrappleSlot()->GetItem() != NULL) and (npc->GetVehicle()->GetGrappleSlot()->GetSelected() == true) )
+               			if ( (npc->GetVehicle()->GetGrappleSlot()->GetItem() != nullptr) and (npc->GetVehicle()->GetGrappleSlot()->GetSelected() == true) )
                			{
 					//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
 					//{
@@ -1093,7 +1093,7 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 	{    	
 		if (turn_timer.GetTurnEnded() == true)  
 		{
-			if ( (gui_manager.GetGuiVehicleScan()->GetVehicle() == NULL) && (gui_manager.GetGuiGalaxyMap()->GetGalaxy() == NULL) )
+			if ( (gui_manager.GetGuiVehicleScan()->GetVehicle() == nullptr) && (gui_manager.GetGuiGalaxyMap()->GetGalaxy() == nullptr) )
 			{
 				mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(cursor.GetMouseData());  
 				if (mouse_interaction == false)

@@ -43,7 +43,7 @@ LazerTraceEffect::LazerTraceEffect(TextureOb* _texOb, Vec3<float>* _pTo_start_po
        	pTo_start_pos = _pTo_start_pos;
        	pTo_end_pos   = _pTo_end_pos;
 
-       	damage_effect = NULL;
+       	damage_effect = nullptr;
        
        	updateAngleAndLen();
 }

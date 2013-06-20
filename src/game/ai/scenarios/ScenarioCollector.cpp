@@ -37,5 +37,5 @@ BaseScenario* ScenarioCollector::GetScenario(int type_id) const
 	if (type_id != NONE_ID)
 		return (scenario_map.find(type_id))->second;
 
-	return NULL;
+	return nullptr;
 }

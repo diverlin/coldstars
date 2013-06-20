@@ -35,7 +35,7 @@ GrappleModuleBuilder::~GrappleModuleBuilder()
 
 GrappleModule* GrappleModuleBuilder::GetNewGrappleModuleTemplate(unsigned long int id) const
 {
-	GrappleModule* grapple_module = NULL;
+	GrappleModule* grapple_module = nullptr;
 
 	if (id == NONE_ID)
 	{

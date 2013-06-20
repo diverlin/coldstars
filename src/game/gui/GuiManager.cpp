@@ -34,7 +34,7 @@
 
 GuiManager::GuiManager()
 {
-	player = NULL;
+	player = nullptr;
         
         gui_vehicle_scan = new GuiVehicle();
         gui_skills       = new GuiSkills();
@@ -77,7 +77,7 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 
 void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill) const
 {	
-	if (player->GetCursor().GetItemSlot()->GetItem() != NULL)
+	if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
 	{
        		gui_vehicle_scan->RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId());
 		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), Vec2<float>(0, 0));		
@@ -87,7 +87,7 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill)
 		gui_vehicle_scan->RenderVehicle(data_mouse, NONE_ID);
 	}
 					
-	if ( (show_skill == true) and (gui_vehicle_scan->GetVehicle()->GetOwnerNpc() != NULL) )
+	if ( (show_skill == true) and (gui_vehicle_scan->GetVehicle()->GetOwnerNpc() != nullptr) )
 	{
 		gui_skills->RenderButtons();
 		gui_skills->RenderSkills(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());

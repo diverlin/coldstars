@@ -35,7 +35,7 @@ ProtectorModuleBuilder::~ProtectorModuleBuilder()
 
 ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModuleTemplate(unsigned long int id) const
 {
-	ProtectorModule* protector_module = NULL;
+	ProtectorModule* protector_module = nullptr;
 	
 	if (id == NONE_ID)
 	{

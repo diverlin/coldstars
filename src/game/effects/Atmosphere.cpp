@@ -25,7 +25,7 @@
 
 #include "../common/Logger.hpp"
 
-Atmosphere::Atmosphere(TextureOb* textureOb):textureOb(textureOb), parent(NULL)
+Atmosphere::Atmosphere(TextureOb* textureOb):textureOb(textureOb), parent(nullptr)
 {   		
 	d_angle.Set(0.0, 0.0, -0.4);
 }

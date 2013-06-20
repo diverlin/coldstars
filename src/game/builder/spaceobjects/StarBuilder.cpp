@@ -32,7 +32,7 @@ StarBuilder::~StarBuilder()
 
 Star* StarBuilder::GetNewStarTemplate(unsigned long int id) const
 {
-	Star* star = NULL;
+	Star* star = nullptr;
 	
 	if (id == NONE_ID)
 	{

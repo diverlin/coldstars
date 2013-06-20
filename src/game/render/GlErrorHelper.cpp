@@ -44,7 +44,7 @@ void checkShaderErrors(GLuint shader, const GLchar* source)
 		return;
 	}
 	GLchar InfoLog[1024];
-	glGetShaderInfoLog(shader, sizeof(InfoLog), NULL, InfoLog);
+	glGetShaderInfoLog(shader, sizeof(InfoLog), nullptr, InfoLog);
 	
 	std::ostringstream oss;
 	oss<<"checkShaderError:"<<InfoLog<<" source="<<source;
@@ -61,7 +61,7 @@ void checkProgramErrors(GLuint program)
 	}
 	
 	GLchar InfoLog[1024];	
-	glGetProgramInfoLog(program, sizeof(InfoLog), NULL, InfoLog);
+	glGetProgramInfoLog(program, sizeof(InfoLog), nullptr, InfoLog);
 	
 	std::ostringstream oss;
 	oss<<"checkProgramError:"<<InfoLog<<std::endl;

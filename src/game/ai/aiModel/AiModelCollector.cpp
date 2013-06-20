@@ -40,5 +40,5 @@ BaseAiModel* AiModelCollector::GetAiModel(int type_id) const
 		return (aimodel_map.find(type_id))->second;
 	}
 	
-	return NULL;
+	return nullptr;
 }

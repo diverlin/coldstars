@@ -31,7 +31,7 @@ AsteroidBuilder::~AsteroidBuilder()
 
 Asteroid* AsteroidBuilder::GetNewAsteroidTemplate(unsigned long int id) const
 {
-	Asteroid* asteroid = NULL;
+	Asteroid* asteroid = nullptr;
 	
 	if (id == NONE_ID)
 	{

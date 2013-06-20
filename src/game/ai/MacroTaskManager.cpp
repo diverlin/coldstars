@@ -22,8 +22,8 @@
 
 MacroTaskManager::MacroTaskManager()
 {
-	scenario  = NULL;
-	target = NULL;
+	scenario  = nullptr;
+	target = nullptr;
 }
 
 MacroTaskManager::~MacroTaskManager()
@@ -41,8 +41,8 @@ void MacroTaskManager::SetTask(const Task& macrotask)
 
 void MacroTaskManager::Reset()
 {
-	scenario = NULL;
-	target = NULL;
+	scenario = nullptr;
+	target = nullptr;
 	macrotask.Reset();
 }	
 

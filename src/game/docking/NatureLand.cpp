@@ -57,7 +57,7 @@ bool NatureLand::CanAcceptNewItem() const
 {
 	for (unsigned int i=0; i<item_slot_vec.size(); i++)
 	{
-		if (item_slot_vec[i]->GetItem() == NULL)
+		if (item_slot_vec[i]->GetItem() == nullptr)
 		{
 			return true;
 		}
@@ -76,7 +76,7 @@ bool NatureLand::AddItem(BaseItem* item)
 {
 	for (unsigned int i=0; i<item_slot_vec.size(); i++)
 	{
-		if (item_slot_vec[i]->GetItem() == NULL)
+		if (item_slot_vec[i]->GetItem() == nullptr)
 		{
 			item_slot_vec[i]->InsertItem(item);
 			item_slot_vec[i]->SetPosition(Vec2<float>(getRandInt(0, 100), getRandInt(0, 100)));
@@ -97,7 +97,7 @@ bool NatureLand::AddVehicle(Vehicle* vehicle)
        	
         VEHICLE_vec.push_back(vehicle);
         
-        if (vehicle->GetStarSystem() == NULL) // used if vehicle added directly after creation
+        if (vehicle->GetStarSystem() == nullptr) // used if vehicle added directly after creation
         {
                 vehicle->SetStarSystem(owner->GetStarSystem());
         }

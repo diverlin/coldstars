@@ -43,7 +43,11 @@
 #include "../garbage/EntityGarbage.hpp"
 #include "../world/EntityManager.hpp"
 
-ItemSlot::ItemSlot(int id)
+ItemSlot::ItemSlot(int id):
+turrel(nullptr),	      
+target(nullptr),
+subtarget(nullptr),	     
+item(nullptr)
 {
 	/* 
                 The class provides implementation to insert/hold/remove all game items (equipments, modules and so on)
@@ -53,13 +57,6 @@ ItemSlot::ItemSlot(int id)
 
 	data_id.id         = id;
         data_id.type_id    = ENTITY::ITEM_SLOT_ID;
-                        
-        turrel     = NULL;   
-                      
-        target    = NULL;
-        subtarget = NULL;
-                     
-        item   	   = NULL;
 }
 
 /* virtual */
@@ -73,7 +70,7 @@ ItemSlot::~ItemSlot()
 /* virtual */  
 void ItemSlot::PutChildsToGarbage() const
 {
-	if (item != NULL)
+	if (item != nullptr)
 	{
 		EntityGarbage::Instance().Add(item);
 	}
@@ -95,11 +92,11 @@ bool ItemSlot::ValidateTarget()
 	Log("ValidateTarget");
 	#endif   
 	
-	if (subtarget != NULL)
+	if (subtarget != nullptr)
 	{
 		if (CheckSubTarget(subtarget) == false)
 		{
-			subtarget = NULL; // reseting only subtarget, firemode for target will be used
+			subtarget = nullptr; // reseting only subtarget, firemode for target will be used
 		}
 	}
 	
@@ -112,8 +109,8 @@ void ItemSlot::ResetTarget()
 	Log("ResetTarget");
 	#endif   
 		
-	target    = NULL; 
-	subtarget = NULL;		
+	target    = nullptr; 
+	subtarget = nullptr;		
 }
 
 bool ItemSlot::CheckAmmo() const
@@ -175,7 +172,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	if (data_id.subtype_id == ENTITY::CARGO_SLOT_ID) 
 	{           
 		this->item = item;
-		if (item->GetItemSlot() != NULL)
+		if (item->GetItemSlot() != nullptr)
 		{
 			item->GetItemSlot()->RemoveItem();
 		}
@@ -187,7 +184,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 	if (data_id.subtype_id == item->GetParentSubTypeId())
 	{                                     
 		this->item = item;
-		if (item->GetItemSlot() != NULL)
+		if (item->GetItemSlot() != nullptr)
 		{
 			item->GetItemSlot()->RemoveItem();
 		}
@@ -202,7 +199,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 
 void ItemSlot::RemoveItem()
 {	
-        item = NULL;
+        item = nullptr;
     	ResetTarget();
     	
     	if (data_id.subtype_id != ENTITY::CARGO_SLOT_ID) 
@@ -280,7 +277,7 @@ void ItemSlot::UpdateVehiclePropetries() const
 void ItemSlot::Render(const Box& box, const Vec2<float>& gui_offset, bool draw_text) const
 { 
        	drawQuad_inXYPlane(textureOb, box); 
-       	if (item != NULL)
+       	if (item != nullptr)
        	{
        		item->Render(box, gui_offset, draw_text);	
         }
@@ -344,7 +341,7 @@ int ItemSlot::GetItemDamage() const
 
 void ItemSlot::DropItemToSpace(Vehicle* vehicle)
 {
-        TextureOb* textureOb_ = NULL;  
+        TextureOb* textureOb_ = nullptr;  
                 
         switch (item->GetTypeId())
         {
@@ -363,7 +360,7 @@ void ItemSlot::DropItemToSpace(Vehicle* vehicle)
         
 bool ItemSlot::SwapItem(ItemSlot* slot)
 {
-       	if ( (item == NULL) and (slot->GetItem() != NULL) )
+       	if ( (item == nullptr) and (slot->GetItem() != nullptr) )
        	{      
        		if (InsertItem(slot->GetItem()) == true) 
        		{  			
@@ -371,7 +368,7 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
        		}             
 	}
 	
-	if ( (item != NULL) and (slot->GetItem() == NULL) )
+	if ( (item != nullptr) and (slot->GetItem() == nullptr) )
        	{ 
 		if (slot->InsertItem(GetItem()) == true)
 		{			
@@ -379,7 +376,7 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
 		}
 	}
 
-	if ( (item != NULL) and (slot->GetItem() != NULL) )
+	if ( (item != nullptr) and (slot->GetItem() != nullptr) )
        	{        
        		if (item->GetTypeId() == slot->GetItem()->GetTypeId())
        		{
@@ -387,7 +384,7 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
        			if ( (slot->CheckItemInsertion(item) == true) and (CheckItemInsertion(tmp_item) == true) )
        			{       				
        				slot->InsertItem(item);
-       				tmp_item->SetItemSlot(NULL);
+       				tmp_item->SetItemSlot(nullptr);
        				InsertItem(tmp_item);
        			
        				return true;
@@ -434,7 +431,7 @@ bool ItemSlot::CheckSubTarget(ItemSlot* _subtarget) const
         Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckSubTarget");
 	#endif     
 	
-	if (_subtarget->GetItem() != NULL)
+	if (_subtarget->GetItem() != nullptr)
 	{
 		return true;
 	}
@@ -544,10 +541,10 @@ void ItemSlot::SaveDataUniqueItemSlot(boost::property_tree::ptree& save_ptree, c
 	Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::SaveDataUniqueItemSlot", SAVELOAD_LOG_DIP);
 	#endif
 	
-        if (target != NULL) { save_ptree.put(root+"unresolved_ItemSlot.target_id", target->GetId()); }
+        if (target != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.target_id", target->GetId()); }
         else                { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE_ID); }
 
-        if (subtarget != NULL) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", subtarget->GetId()); }
+        if (subtarget != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", subtarget->GetId()); }
         else          	       { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE_ID); }
 }
 
@@ -591,22 +588,22 @@ void ItemSlot::Log(const std::string& func_name) const
 {
 	Logger::Instance().Log("ItemSlot("+int2str(GetId())+")::"+func_name+getBaseInfoStr(this));
 	
-	if (owner != NULL)
+	if (owner != nullptr)
 	{
 		Logger::Instance().Log(" owner="+getBaseInfoStr(owner), WEAPONSTARGET_LOG_DIP); 
 	}
 	
-	if (item != NULL)
+	if (item != nullptr)
 	{
 		Logger::Instance().Log("item="+getBaseInfoStr(item), WEAPONSTARGET_LOG_DIP); 
 	}
 	
-	if (target != NULL)
+	if (target != nullptr)
 	{
 		Logger::Instance().Log("target="+getBaseInfoStr(target), WEAPONSTARGET_LOG_DIP); 		
 	}
 	
-	if (subtarget != NULL)
+	if (subtarget != nullptr)
 	{
 		Logger::Instance().Log("subtarget="+getBaseInfoStr(subtarget), WEAPONSTARGET_LOG_DIP); 	
 	}

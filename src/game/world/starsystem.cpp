@@ -56,7 +56,7 @@ int StarSystem::counter = 0;
 StarSystem::StarSystem(int id):
 unique_update_inDymanic_done(false),
 unique_update_inStatic_done(false),
-sector(NULL),
+sector(nullptr),
 container_num_max(CONTAINER_NUM_MAX_DEFAULT)
 { 
     	data_id.id = id;
@@ -127,7 +127,7 @@ Npc* StarSystem::GetFreeLeaderByRaceId(int race_id) const
 		return tmp_npc_vec[index_max];
 	}
 	
-	return NULL;
+	return nullptr;
 }
 
 void StarSystem::CreateGroupAndShareTask(Npc* npc_leader, StarSystem* target_starsystem, int num_max) const
@@ -304,7 +304,7 @@ void StarSystem::Add(DistantStarEffect* ds)                  { distantStarEffect
 // poor                
 Planet* StarSystem::GetClosestInhabitedPlanet(const Vec2<float>& _pos) const
 {    	
-     	Planet* requested_planet = NULL;
+     	Planet* requested_planet = nullptr;
      	
      	std::vector<Planet*> tmp_planet_vec;     	
 	for(unsigned int i=0; i<PLANET_vec.size(); i++)
@@ -338,7 +338,7 @@ Planet* StarSystem::GetClosestInhabitedPlanet(const Vec2<float>& _pos) const
 }
 Planet* StarSystem::GetRandomInhabitedPlanet() const
 {
-	Planet* requested_planet = NULL;
+	Planet* requested_planet = nullptr;
 
 	std::vector<Planet*> tmp_planet_vec;
 	for(unsigned int i=0; i<PLANET_vec.size(); i++)
@@ -368,11 +368,11 @@ Vehicle* StarSystem::GetRandomVehicle() const
 Vehicle* StarSystem::GetRandomVehicleExcludingNpcRaceId(int _race_id) const
 {
         std::vector<Vehicle*> _vehicle_vec;
-        Vehicle* requested_vehicle = NULL;
+        Vehicle* requested_vehicle = nullptr;
         
         for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
         {
-        	if (VEHICLE_vec[i]->GetOwnerNpc() != NULL)
+        	if (VEHICLE_vec[i]->GetOwnerNpc() != nullptr)
                 {
                 	if (VEHICLE_vec[i]->GetOwnerNpc()->GetRaceId() != _race_id)
                 	{
@@ -392,11 +392,11 @@ Vehicle* StarSystem::GetRandomVehicleExcludingNpcRaceId(int _race_id) const
 Vehicle* StarSystem::GetRandomVehicleByNpcRaceId(int _race_id) const
 {
         std::vector<Vehicle*> _vehicle_vec;
-        Vehicle* requested_vehicle = NULL;
+        Vehicle* requested_vehicle = nullptr;
         
         for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
         {
-        	if (VEHICLE_vec[i]->GetOwnerNpc() != NULL)
+        	if (VEHICLE_vec[i]->GetOwnerNpc() != nullptr)
                 {
                 	if (VEHICLE_vec[i]->GetOwnerNpc()->GetRaceId() == _race_id)
                 	{
@@ -416,7 +416,7 @@ Vehicle* StarSystem::GetRandomVehicleByNpcRaceId(int _race_id) const
 Vehicle* StarSystem::GetRandomVehicle(const std::vector<int>& rVec_race_id) const
 {
 	std::vector<Vehicle*> tmp_vehicle_vec;
-	Vehicle* requested_vehicle = NULL;
+	Vehicle* requested_vehicle = nullptr;
 
         for (unsigned int i=0; i<rVec_race_id.size(); i++)
         {	
@@ -473,13 +473,13 @@ void StarSystem::UpdateStates()
 	bool friendly_is_here = false; 
 	
 	Vehicle* _vehicle_evil = GetRandomVehicle(RaceInformationCollector::Instance().RACES_EVIL_vec);
-	if (_vehicle_evil != NULL)
+	if (_vehicle_evil != nullptr)
 	{
 		enemy_is_here = true;
 	}
 	
 	Vehicle* _vehicle_good = GetRandomVehicle(RaceInformationCollector::Instance().RACES_GOOD_vec);
-	if (_vehicle_good != NULL)
+	if (_vehicle_good != nullptr)
 	{
 		friendly_is_here = true;
 	}
@@ -497,12 +497,12 @@ void StarSystem::UpdateStates()
 				else
 				{
 					condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID;
-					if (GetRandomVehicleByNpcRaceId(RACE::R6_ID) != NULL)
+					if (GetRandomVehicleByNpcRaceId(RACE::R6_ID) != nullptr)
 					{
 						conqueror_race_id = RACE::R6_ID;
 					}
 				
-					if (GetRandomVehicleByNpcRaceId(RACE::R7_ID) != NULL)
+					if (GetRandomVehicleByNpcRaceId(RACE::R7_ID) != nullptr)
 					{
 						conqueror_race_id = RACE::R7_ID;
 					}
@@ -1024,7 +1024,7 @@ void StarSystem::StarSparkEvent(float radius) const
     	{
        	        if ( distanceBetween(VEHICLE_vec[i]->GetCenter(), GetStar()->GetCenter()) < radius )
                	{
-               		if (VEHICLE_vec[i]->GetRadarSlot()->GetItem() != NULL)
+               		if (VEHICLE_vec[i]->GetRadarSlot()->GetItem() != nullptr)
                		{
        				VEHICLE_vec[i]->GetRadarSlot()->GetItem()->LockEvent(2); 
        			}

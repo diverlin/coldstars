@@ -35,7 +35,7 @@ RocketEquipmentBuilder::~RocketEquipmentBuilder()
 
 RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipmentTemplate(unsigned long int id) const
 {
-	RocketEquipment* rocket_equipment = NULL;
+	RocketEquipment* rocket_equipment = nullptr;
 
 	if (id == NONE_ID)
 	{

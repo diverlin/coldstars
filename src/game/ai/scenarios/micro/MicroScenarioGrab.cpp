@@ -56,7 +56,7 @@ bool MicroScenarioGrab::Validate(Npc* npc) const
         
         // check if equipment is able to perform current task
         bool euipment_is_ok = false;
-        if (npc->GetVehicle()->GetGrappleSlot()->GetItem() != NULL)
+        if (npc->GetVehicle()->GetGrappleSlot()->GetItem() != nullptr)
         {
                 if (npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->GetFunctioning() == true)
                 {

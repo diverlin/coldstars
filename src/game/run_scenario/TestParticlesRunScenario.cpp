@@ -84,7 +84,7 @@ void TestParticlesRunScenario::Init(Player* player)
         Vec3<float> center(500, 500, DEFAULT_ENTITY_ZPOS);
         Vec3<float> angle(0,0,0); 
          
-        galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, NULL);
+        galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
         
 	StarSystem* starsystem = player->GetNpc()->GetVehicle()->GetStarSystem(); // shortcut        
         for (int i=0; i<200; i++)

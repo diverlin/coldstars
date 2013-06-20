@@ -18,7 +18,7 @@
 
 #include "GuiGoverment.hpp"
 
-GuiGoverment::GuiGoverment():goverment(NULL)
+GuiGoverment::GuiGoverment():goverment(nullptr)
 {}
 
 
@@ -32,6 +32,6 @@ void GuiGoverment::BindGoverment(Goverment* goverment)
 
 void GuiGoverment::UnbindGoverment()
 {
-	goverment = NULL;
+	goverment = nullptr;
 }
 

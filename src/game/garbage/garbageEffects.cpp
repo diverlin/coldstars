@@ -17,6 +17,11 @@
 */
 
 #include "garbageEffects.hpp"
+#include "../effects/lazerTrace.hpp"
+#include "../effects/ShockWaveEffect.hpp"
+#include "../text/VerticalFlowText.hpp"
+#include "../effects/particlesystem/BaseParticleSystem.hpp"
+
 
 GarbageEffects::GarbageEffects()
 {}

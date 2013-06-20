@@ -76,7 +76,7 @@ void DistantStarEffect::ResolveDataUniqueDistantStarEffect()
    
 DistantStarEffect* GetNewDistantStarEffect(int color_id)
 {
-	TextureOb* textureOb = NULL;
+	TextureOb* textureOb = nullptr;
 	if (color_id == NONE_ID) textureOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::DISTANTSTAR_ID);
 	else    	    	 textureOb = TextureManager::Instance().GetTexObByColorId(TEXTURE::DISTANTSTAR_ID, color_id);
         

@@ -35,7 +35,7 @@ DroidModuleBuilder::~DroidModuleBuilder()
 
 DroidModule* DroidModuleBuilder::GetNewDroidModuleTemplate(unsigned long int id) const
 {
-	DroidModule* droid_module = NULL;
+	DroidModule* droid_module = nullptr;
 
 	if (id == NONE_ID)
 	{

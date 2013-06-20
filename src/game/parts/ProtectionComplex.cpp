@@ -24,13 +24,13 @@
 
 ProtectionComplex::ProtectionComplex()
 {        
-        owner_vehicle = NULL;
+        owner_vehicle = nullptr;
         
  	shield_effect = new ShieldEffect();
         TextureOb* texOb_shield = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SHIELD_EFFECT_ID); 
         shield_effect->SetTextureOb(texOb_shield);
      
-        protector_slot = NULL;
+        protector_slot = nullptr;
 }
 
 ProtectionComplex::~ProtectionComplex() 

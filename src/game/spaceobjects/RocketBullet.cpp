@@ -37,7 +37,7 @@ RocketBullet::RocketBullet(int id)
 	data_id.type_id    = ENTITY::BULLET_ID;
 	data_id.subtype_id = ENTITY::ROCKETBULLET_ID;
 
-	target = NULL;
+	target = nullptr;
 }
 
 /* virtual */
@@ -71,13 +71,13 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
        			speed += data_bullet.d_speed; 
     		} 
                 
-		if (target != NULL)
+		if (target != nullptr)
     		{ 
         		get_dPos_ToPoint(GetCenter(), target->GetCenter(), speed/100.0, force, angle_inD);
     		
                         if (CheckTarget() == false)
                         {
-                                target = NULL;
+                                target = nullptr;
                         }
                 }      
     		SetAngleZ(angle_inD);
@@ -116,7 +116,7 @@ void RocketBullet::UpdateInfo()
     	info.addTitleStr("ROCKET");
     	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) );
     	info.addNameStr("armor:");     		info.addValueStr( int2str(data_life.armor) );
-    	if (target != NULL) 
+    	if (target != nullptr) 
     	{ 
     	info.addNameStr("target_id:");   	info.addValueStr(int2str(target->GetId())); 
 	}
@@ -168,7 +168,7 @@ void RocketBullet::SaveDataUniqueRocketBullet(boost::property_tree::ptree& save_
 {
         save_ptree.put(root+"speed", speed);
         save_ptree.put(root+"owner_id", owner_id);
-        if (target != NULL) 	{ save_ptree.put(root+"target_id", target->GetId()); }
+        if (target != nullptr) 	{ save_ptree.put(root+"target_id", target->GetId()); }
 	else                	{ save_ptree.put(root+"target_id", NONE_ID); }
 	
 	data_bullet.SaveData(save_ptree, root);

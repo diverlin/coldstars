@@ -32,10 +32,11 @@
 #include "../common/rand.hpp"
 
 #include "../world/starsystem.hpp"
+#include "../effects/particlesystem/DriveEffect.hpp"
 
 DriveComplex::DriveComplex()
 {      
-	owner_vehicle = NULL;
+	owner_vehicle = nullptr;
     			
 	target_distance = 0.0;
 	action_id = NAVIGATOR_ACTION::NONE_ID;
@@ -43,11 +44,11 @@ DriveComplex::DriveComplex()
         has_target = false;
 	direction_list_END = true;
 
-	target = NULL;
-	drive_effect = NULL; 
+	target = nullptr;
+	drive_effect = nullptr; 
         
-        drive_slot = NULL;
-        bak_slot   = NULL;
+        drive_slot = nullptr;
+        bak_slot   = nullptr;
 }
 
 DriveComplex::~DriveComplex()
@@ -68,13 +69,13 @@ bool DriveComplex::PathExists() const
 void DriveComplex::ResetTarget()
 {
 	#if DRIVECOMPLEX_LOG_ENABLED == 1 
-	if (target == NULL)
+	if (target == nullptr)
 	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::ResetTarget", DRIVECOMPLEX_LOG_DIP); 
 	else
 	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::ResetTarget" + getBaseInfoStr(target), DRIVECOMPLEX_LOG_DIP); 
 	#endif    
 	
-	target = NULL;
+	target = nullptr;
     		
 	target_distance = 0.0;
 	target_offset.Set(0.0, 0.0, 0.0);
@@ -175,7 +176,7 @@ void DriveComplex::DefineDistance()
                   
 void DriveComplex::UpdatePath()
 {
-	if (target != NULL)
+	if (target != nullptr)
 	{
 		if (ValidateTarget() == true)
 		{
@@ -256,7 +257,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
 
 bool DriveComplex::CheckTargetEchievement()
 {
-	if (target != NULL)
+	if (target != nullptr)
 	{	
      		if (collisionDotCircle2D_FAST(owner_vehicle->GetCenter(), target_pos, target_distance) == true)
      		{

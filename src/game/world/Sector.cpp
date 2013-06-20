@@ -30,7 +30,7 @@
 #include "../struct/StarSystemsConditionData.hpp"
 
 Sector::Sector(int id):
-galaxy(NULL)
+galaxy(nullptr)
 {
 	data_id.id = id;
 	data_id.type_id =  ENTITY::SECTOR_ID;
@@ -80,7 +80,7 @@ StarSystem* Sector::GetRandomStarSystem(int condition_id)
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
  
@@ -112,7 +112,7 @@ StarSystem* Sector::GetClosestStarSystemTo(StarSystem* starsystem, int condition
                 return STARSYSTEM_vec[index_min];
         }
         
-        return NULL;
+        return nullptr;
 }
      		
 void Sector::Update(int time)

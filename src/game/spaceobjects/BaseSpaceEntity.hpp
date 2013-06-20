@@ -50,7 +50,7 @@ class BaseSpaceEntity : public BaseDrawable
 		void SetPlaceTypeId(int place_type_id)      { this->place_type_id = place_type_id;  }
 		void SetMass(int mass) 			    { this->mass = mass; }
 				
-		int SetGivenExpirience(int given_expirience) { this->given_expirience = given_expirience; }                
+		void SetGivenExpirience(int given_expirience) { this->given_expirience = given_expirience; }                
 	
 		void SetParent(BaseSpaceEntity* parent)     { this->parent = parent; }
 

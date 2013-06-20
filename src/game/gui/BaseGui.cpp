@@ -20,7 +20,7 @@
 #include "MouseData.hpp"
 
 BaseGui::BaseGui():
-player(NULL)
+player(nullptr)
 {}
 
 BaseGui::~BaseGui()
@@ -41,7 +41,7 @@ BaseButton* BaseGui::GetButton(int request_subtype_id) const
 		}
 	}
 	
-	return NULL;
+	return nullptr;
 }       
 
 bool BaseGui::UpdateMouseInteractionWithButtons(const MouseData& data_mouse)

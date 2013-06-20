@@ -55,7 +55,7 @@ God::God()
 	last_update_date.month = 0;
 	last_update_date.year = 0;
 	
-	galaxy = NULL;
+	galaxy = nullptr;
 }
 		
 God::~God()
@@ -104,13 +104,13 @@ void God::CreateInvasion(const GalaxyDescription& galaxy_description) const
 void God::ProceedInvasion() const
 {
 	StarSystem* starsystem_invade_from = galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
-	if (starsystem_invade_from == NULL)
+	if (starsystem_invade_from == nullptr)
 	{
 		return;
 	}
 	
 	StarSystem* starsystem_invade_to   = galaxy->GetClosestSectorTo(starsystem_invade_from->GetSector())->GetClosestStarSystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
-	if (starsystem_invade_to == NULL)
+	if (starsystem_invade_to == nullptr)
 	{
 		return;
 	}
@@ -148,7 +148,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
 	getRandBool() ? population = getRandInt(POPULATION_MIN, POPULATION_MAX) : population = 0;
 	planet->SetPopulation(population);
 	
-	BaseLand* land = NULL;
+	BaseLand* land = nullptr;
 	if (population > 0) { land = KosmoportBuilder::Instance().GetNewKosmoport(); }
 	else                { land = NatureLandBuilder::Instance().GetNewNatureLand(); }
 		
@@ -238,7 +238,7 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
                 Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
 		Vec3<float> angle(0,0,getRandInt(0, 360));  
 		                
-        	starsystem->AddVehicle(spacestation, center3, angle, NULL);
+        	starsystem->AddVehicle(spacestation, center3, angle, nullptr);
         	
         	{  
                 Satellite* satellite = SatelliteBuilder::Instance().GetNewSatellite();
@@ -287,7 +287,7 @@ void God::CreateShipsInSpace(StarSystem* starsystem, int ship_num, int npc_race_
 		Vec2<float> center = getRandVec2f(300, 1200);
 		Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
 		Vec3<float> angle(0,0,getRandInt(0, 360));		
-        	starsystem->AddVehicle(new_ship, center3, angle, NULL);
+        	starsystem->AddVehicle(new_ship, center3, angle, nullptr);
     	}
 }
 

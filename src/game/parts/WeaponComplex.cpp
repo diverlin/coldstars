@@ -30,7 +30,7 @@
 
 WeaponComplex::WeaponComplex()
 { 
-        owner_vehicle = NULL;
+        owner_vehicle = nullptr;
 }
 
 WeaponComplex::~WeaponComplex()
@@ -46,26 +46,26 @@ TextureOb* WeaponComplex::GetItemTextureOb(int index) const
 	index--;
 	if (index < slot_weapon_vec.size())
 	{
-		if (slot_weapon_vec[index]->GetItem() != NULL)
+		if (slot_weapon_vec[index]->GetItem() != nullptr)
                 {
                      	return slot_weapon_vec[index]->GetItem()->GetTextureOb();   
                 }
 	}
 
-	return NULL;	
+	return nullptr;	
 }
                        	
 ItemSlot* WeaponComplex::GetEmptyWeaponSlot() const
 {
         for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
-                if (slot_weapon_vec[i]->GetItem() == NULL)
+                if (slot_weapon_vec[i]->GetItem() == nullptr)
                 {
                     	return slot_weapon_vec[i];
                 }
         }
         
-        return NULL;
+        return nullptr;
 }
 
 ItemSlot* WeaponComplex::GetEquipedWeakestWeaponSlot() const
@@ -75,7 +75,7 @@ ItemSlot* WeaponComplex::GetEquipedWeakestWeaponSlot() const
 		
 	for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
 	{
-		if (slot_weapon_vec[i]->GetItem() != NULL)
+		if (slot_weapon_vec[i]->GetItem() != nullptr)
 		{
 			int price = slot_weapon_vec[i]->GetItem()->GetPrice();
 			if ((min_price > price) or (min_price == 0))
@@ -92,7 +92,7 @@ ItemSlot* WeaponComplex::GetEquipedWeakestWeaponSlot() const
 	}
 	else
 	{
-		return NULL;
+		return nullptr;
 	}
 }
                 
@@ -108,7 +108,7 @@ void WeaponComplex::ReloadAllWeapons()
      	slot_weapon_reloaded_vec.clear();
      	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
-                if (slot_weapon_vec[i]->GetItem() != NULL)
+                if (slot_weapon_vec[i]->GetItem() != nullptr)
         	{
            		if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
            		{
@@ -182,7 +182,7 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
         float dist = distanceBetween(owner_vehicle->GetCenter(), target->GetCenter());
         
         #if WEAPONSTARGET_LOG_ENABLED == 1 
-        if (item_slot == NULL)
+        if (item_slot == nullptr)
 	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP); 
 	else
 	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " item_subtype_id=" + getTypeStr(item_slot->GetItem()->GetSubTypeId()) + " id=" + int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
@@ -194,11 +194,11 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
         {
                 if (slot_weapon_vec[i]->GetSelected() == true )
         	{
-	                if (slot_weapon_vec[i]->GetItem() != NULL)
+	                if (slot_weapon_vec[i]->GetItem() != nullptr)
 	        	{
 	           		if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
 	           		{
-	     	      	   		if ( slot_weapon_vec[i]->GetTarget() == NULL )
+	     	      	   		if ( slot_weapon_vec[i]->GetTarget() == nullptr )
            				{
 	           				if (slot_weapon_vec[i]->CheckTarget(target) == true)
 	         				{
@@ -217,12 +217,12 @@ void WeaponComplex::Fire(int timer, float attack_rate, bool show_effect)
      	{
         	for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); ++it)
         	{	
-        		if ((*it)->GetTarget() != NULL)
+        		if ((*it)->GetTarget() != nullptr)
         		{
 	                        if ((*it)->ValidateTarget() == true)
 	                        {
 	      				(*it)->FireEvent(attack_rate, show_effect);
-					if ((*it)->GetSubTarget() == NULL)
+					if ((*it)->GetSubTarget() == nullptr)
 	           			{
 	           				fire_delay += d_fire_delay;
 	           				slot_weapon_reloaded_vec.erase(it);
@@ -244,7 +244,7 @@ void WeaponComplex::ValidateAllWeaponsTarget()
 {
 	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
-               	if (slot_weapon_vec[i]->GetTarget() != NULL) 
+               	if (slot_weapon_vec[i]->GetTarget() != nullptr) 
                	{
       			if (slot_weapon_vec[i]->ValidateTarget() == false)
        			{
@@ -262,7 +262,7 @@ void WeaponComplex::UpdateFireAbility()
 	
      	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
      	{
-     		if (slot_weapon_vec[i]->GetItem() != NULL)
+     		if (slot_weapon_vec[i]->GetItem() != nullptr)
 		{ 
 			if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
 			{		
@@ -282,7 +282,7 @@ void WeaponComplex::RenderTurrels() const
 {
     	for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
     	{
-    	     	if (slot_weapon_vec[i]->GetItem() != NULL)
+    	     	if (slot_weapon_vec[i]->GetItem() != nullptr)
 		{ 
 			if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
 			{	
@@ -308,9 +308,9 @@ void WeaponComplex::RenderWeaponIcons() const
 {       
         for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
         {
-                if (slot_weapon_vec[i]->GetItem() != NULL ) //?? ideally this is not needed, if item == NULL< the target set to NULL
+                if (slot_weapon_vec[i]->GetItem() != nullptr ) //?? ideally this is not needed, if item == nullptr< the target set to nullptr
                 {  
-	                if (slot_weapon_vec[i]->GetTarget() != NULL )
+	                if (slot_weapon_vec[i]->GetTarget() != nullptr )
 	                {       
 	                        Rect _rect(slot_weapon_vec[i]->GetTarget()->GetCenter().x - 40/2 + 23*i, slot_weapon_vec[i]->GetTarget()->GetCenter().y + 40/2, 20, 20);
 	                        drawTexturedRect(slot_weapon_vec[i]->GetItem()->GetTextureOb(), _rect, -2.0);

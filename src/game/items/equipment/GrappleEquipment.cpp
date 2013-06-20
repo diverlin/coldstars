@@ -139,7 +139,7 @@ void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
        					//{
        						//ItemSlot* _slot = GetEmptyOtsecSlot();
                                         	//Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];
-       				        	//if (_slot != NULL)
+       				        	//if (_slot != nullptr)
        						//{
        							////_slot->InsertItem(_vehicle);
        							//starsystem->AddToRemoveFromOuterSpaceQueue(_vehicle);

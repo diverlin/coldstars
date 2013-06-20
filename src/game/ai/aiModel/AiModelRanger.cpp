@@ -32,16 +32,16 @@ AiModelRanger::~AiModelRanger()
 
 void AiModelRanger::UpdateInStatic(Npc* npc) const
 {
-	if (npc->GetStateMachine().GetMacroTaskManager().GetScenario() == NULL)
+	if (npc->GetStateMachine().GetMacroTaskManager().GetScenario() == nullptr)
         {
-        	StarSystem* target_starsystem = NULL;
+        	StarSystem* target_starsystem = nullptr;
        		target_starsystem = npc->GetClosestStarSystem(ENTITY::STARSYSTEM::CONDITION::WAR_ID);
-		if (target_starsystem == NULL)
+		if (target_starsystem == nullptr)
 		{
 			target_starsystem = npc->GetClosestStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
 		}
         	
-        	if (target_starsystem != NULL)
+        	if (target_starsystem != nullptr)
         	{
         	        Task macrotask(MACROSCENARIO::STARSYSTEMLIBERATION_ID, target_starsystem->GetId());
         		npc->GetStateMachine().SetCurrentMacroTask(macrotask);        			

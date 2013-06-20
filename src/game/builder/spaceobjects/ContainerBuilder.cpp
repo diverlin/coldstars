@@ -33,7 +33,7 @@ ContainerBuilder::~ContainerBuilder()
 
 Container* ContainerBuilder::GetNewContainerTemplate(unsigned long int id) const
 {
-	Container* container = NULL;
+	Container* container = nullptr;
 	
 	if (id == NONE_ID)
 	{

@@ -17,21 +17,15 @@
 */
 
 
-#include "BaseButton.hpp"
+#include "BaseButton2.hpp"
 #include "../common/constants.hpp"
 #include "../common/Collision.hpp"
 #include "../render/Render.hpp"
 #include "../render/Screen.hpp"
 #include "../render/AnimationEffect2D.hpp"
 
-BaseButton::BaseButton(TextureOb* textureOb, int subtype_id, const std::string& info)
+BaseButton2::BaseButton2(int subtype_id, const std::string& info, TextureOb* textureOb):BaseGuiElement(subtype_id, info, textureOb)
 {
-	type_id = GUI::BUTTON::BUTTON_ID;
-	
-    	this->textureOb = textureOb;
-	this->subtype_id = subtype_id;
-    	this->info = info; 
-
 	textureOb_additional = nullptr;
 	textureOb_mask = nullptr;
 		
@@ -42,53 +36,53 @@ BaseButton::BaseButton(TextureOb* textureOb, int subtype_id, const std::string& 
 	animation_scale = new AnimationEffect2D(Vec2<float>(0.7, 0.7), Vec2<float>(1.3, 1.3), Vec2<float>(0.02, 0.02), 0, 0, 0);
 }
 
-BaseButton::~BaseButton()
+BaseButton2::~BaseButton2()
 {
 	delete animation_scale;
 }
 
 
-void BaseButton::Reset()
+void BaseButton2::Reset()
 {
 	pressed = false;
 	lock = false;
 	ShadeOff();
 }
 
-void BaseButton::LockOn() 
+void BaseButton2::LockOn() 
 { 
 	lock = true; 
 	FullShadeOn();  
 };
 
-void BaseButton::LockOff() 
+void BaseButton2::LockOff() 
 { 
 	lock = false; 
 	ShadeOff();
 };
 
-void BaseButton::ShadeOn() 
+void BaseButton2::ShadeOn() 
 {
 	alpha = 0.4f; 
 }
 
-void BaseButton::FullShadeOn() 
+void BaseButton2::FullShadeOn() 
 {
 	alpha = 0.05f; 
 }
 
-void BaseButton::ShadeOff() 
+void BaseButton2::ShadeOff() 
 {
 	alpha = 1.0f; 
 }      
        		    
-void BaseButton::RenderInfo(int gui_offset_x, int gui_offset_y) const
+void BaseButton2::RenderInfo(int gui_offset_x, int gui_offset_y) const
 {
 	Vec2<float> pos(box.GetCenter().x+gui_offset_x, box.GetCenter().y+gui_offset_y);
 	drawSimpleColoredTextWithBackground(info, 12, pos, Color4<int>(255, 255, 255, 255));
 }
 
-void BaseButton::Render(int offset_x, int offset_y) const
+void BaseButton2::Render(int offset_x, int offset_y) const
 {
 	//if (textureOb_mask != nullptr)
    	//{

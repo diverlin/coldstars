@@ -35,7 +35,7 @@ RocketModuleBuilder::~RocketModuleBuilder()
 
 RocketModule* RocketModuleBuilder::GetNewRocketModuleTemplate(unsigned long int id) const
 {
-	RocketModule* rocket_module = NULL;
+	RocketModule* rocket_module = nullptr;
 	
 	if (id == NONE_ID)
 	{

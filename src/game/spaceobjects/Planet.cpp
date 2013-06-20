@@ -32,14 +32,14 @@
 #include "../garbage/EntityGarbage.hpp"
 #include "../common/Logger.hpp"
 
-Planet::Planet(int id):atmosphere(NULL)
+Planet::Planet(int id):atmosphere(nullptr)
 {    
 	data_id.id = id;
 	data_id.type_id = ENTITY::PLANET_ID;
 	
 	population  = 0;
 		      	
-	land = NULL;
+	land = nullptr;
 }
 
 /* virtual */
@@ -73,7 +73,7 @@ void Planet::BindLand(BaseLand* land)
 	
 void Planet::AddVehicle(Vehicle* vehicle) const
 {
-	if (vehicle->GetStarSystem() == NULL)
+	if (vehicle->GetStarSystem() == nullptr)
 	{
 		vehicle->SetStarSystem(starsystem);
 	}
@@ -114,7 +114,7 @@ void Planet::Render_NEW(const Vec2<float>& scroll_coords)
 {
 	UpdateRenderAnimation();
 	RenderMeshLightNormalMap(scroll_coords, starsystem->GetColor4f());
-	if (atmosphere != NULL)
+	if (atmosphere != nullptr)
 	{
 		atmosphere->Render(scroll_coords);
 	}

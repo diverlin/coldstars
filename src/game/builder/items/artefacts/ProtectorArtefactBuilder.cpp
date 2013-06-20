@@ -35,7 +35,7 @@ ProtectorArtefactBuilder::~ProtectorArtefactBuilder()
 
 ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefactTemplate(unsigned long int id) const
 {
-	ProtectorArtefact* protector_artefact = NULL;
+	ProtectorArtefact* protector_artefact = nullptr;
 	
 	if (id == NONE_ID)
 	{

@@ -36,7 +36,7 @@ GovermentBuilder::~GovermentBuilder()
 
 Goverment* GovermentBuilder::GetNewGovermentTemplate(unsigned long int id) const
 {
-	Goverment* goverment = NULL;
+	Goverment* goverment = nullptr;
 	
 	if (id == NONE_ID)
 	{

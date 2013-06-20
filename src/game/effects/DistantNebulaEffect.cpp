@@ -84,7 +84,7 @@ void DistantNebulaEffect::ResolveDataUniqueDistantNebulaEffect()
 
 DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
 {
-	TextureOb* textureOb = NULL;
+	TextureOb* textureOb = nullptr;
 	if (color_id == NONE_ID) textureOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::NEBULA_BACKGROUND_ID);
 	else    	    	 textureOb = TextureManager::Instance().GetTexObByColorId(TEXTURE::NEBULA_BACKGROUND_ID, color_id);	
 	   	

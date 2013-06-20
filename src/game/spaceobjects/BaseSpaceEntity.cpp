@@ -34,8 +34,8 @@
 
 
 BaseSpaceEntity::BaseSpaceEntity():
-starsystem(NULL), 
-parent(NULL),
+starsystem(nullptr), 
+parent(nullptr),
 place_type_id(NONE_ID), 
 mass(0), 
 given_expirience(0)

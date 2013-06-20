@@ -5,7 +5,8 @@ set(PROJECT run)
 project (${PROJECT})
 set(BIN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bin/ )
 
-add_definitions(-Wall -pedantic -std=c++0x -std=gnu++0x -pedantic-errors -Wextra -w -Waddress -Wc++0x-compat)
+#add_definitions(-Wall -Wextra -std=c++11 -std=gnu++11)
+add_definitions(-std=c++11 -std=gnu++11)
 
 find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})

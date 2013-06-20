@@ -56,7 +56,7 @@ StoreBuilder::~StoreBuilder()
 
 Store* StoreBuilder::GetNewStoreTemplate(unsigned long int id) const
 {
-	Store* store = NULL;
+	Store* store = nullptr;
 	
 	if (id == NONE_ID)
 	{

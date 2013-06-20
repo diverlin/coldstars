@@ -35,7 +35,7 @@
 #include "../resources/ShaderCollector.hpp"
 #include "../render/Render.hpp"
 
-SpaceStation::SpaceStation(int id): land(NULL)
+SpaceStation::SpaceStation(int id): land(nullptr)
 {      
 	data_id.id         = id;
 	data_id.type_id    = ENTITY::VEHICLE_ID;
@@ -111,7 +111,7 @@ void SpaceStation::RenderInSpace_2D()
         	weapon_complex.RenderTurrels();
         }
     	
-    	if (protection_complex.GetProtectorSlot()->GetItem() != NULL)
+    	if (protection_complex.GetProtectorSlot()->GetItem() != nullptr)
     	{
         	RenderShieldEffect(1.0 - color.a); 
         }

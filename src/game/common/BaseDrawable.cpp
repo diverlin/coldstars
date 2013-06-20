@@ -31,9 +31,9 @@
 
 
 BaseDrawable::BaseDrawable():
-mesh(NULL), 
-textureOb(NULL), 
-animation_program(NULL),
+mesh(nullptr), 
+textureOb(nullptr), 
+animation_program(nullptr),
 ZYX(false)
 {}
 
@@ -71,7 +71,7 @@ void BaseDrawable::RenderCollisionRadius() const
 
 void BaseDrawable::UpdateRenderAnimation()
 {
-	if (animation_program != NULL)
+	if (animation_program != nullptr)
 	{
 		animation_program->Update(GetAngle());
 	}

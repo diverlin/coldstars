@@ -27,7 +27,7 @@
 
 BaseItem::BaseItem()
 {
-        item_slot = NULL;
+        item_slot = nullptr;
         
         parent_subtype_id = NONE_ID;
         race_id = NONE_ID;
@@ -37,7 +37,7 @@ BaseItem::BaseItem()
         
         locked_turns = 0;
         
-        textureOb = NULL;
+        textureOb = nullptr;
 }
 
 /* virtual */
@@ -217,7 +217,7 @@ void BaseItem::ResolveDataUniqueBaseItem()
 	UseNormalDeterioration();	
 	UpdateProperties(); // this function must be performed before inserting to slot!!!
 		
-	if(data_unresolved_BaseItem.item_slot_id != NONE_ID) // item_slot can be NULL in case of inserted module
+	if(data_unresolved_BaseItem.item_slot_id != NONE_ID) // item_slot can be nullptr in case of inserted module
 	{
 		((ItemSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseItem.item_slot_id))->InsertItem(this);
 	}

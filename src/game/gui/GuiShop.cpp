@@ -27,7 +27,7 @@
 #include "../common/myStr.hpp"
 #include "../common/constants.hpp"
 
-GuiShop::GuiShop():shop(NULL)
+GuiShop::GuiShop():shop(nullptr)
 {
 	Vec2<float> center(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);
                 
@@ -100,7 +100,7 @@ void GuiShop::BindShop(Shop* shop)
 
 void GuiShop::UnbindShop()
 {
-        shop = NULL;
+        shop = nullptr;
 }
         
 void GuiShop::UpdateLables() const

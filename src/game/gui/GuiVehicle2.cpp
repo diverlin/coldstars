@@ -26,7 +26,7 @@
 #include "../slots/ItemSlot.hpp"
 #include "../render/Screen.hpp"
 
-GuiVehicle2::GuiVehicle2():vehicle(NULL)
+GuiVehicle2::GuiVehicle2():vehicle(nullptr)
 {}
 
 GuiVehicle2::~GuiVehicle2()
@@ -41,7 +41,7 @@ void GuiVehicle2::Reset()
 	button_slot_vec.clear();
 	button_map.clear();
 	
-	vehicle = NULL;
+	vehicle = nullptr;
 }
 
 void GuiVehicle2::BindVehicle(Vehicle* vehicle, float scale)
@@ -93,10 +93,10 @@ void GuiVehicle2::UpdateEquipmentIcons() const
 {
 	for (unsigned int i=0; i<button_slot_vec.size(); i++)
 	{
-		if (button_slot_vec[i].second->GetItem() != NULL)
+		if (button_slot_vec[i].second->GetItem() != nullptr)
 		{
 			button_slot_vec[i].first->SetTextureObAdditional(button_slot_vec[i].second->GetItem()->GetTextureOb());
-			button_slot_vec[i].first->SetTextureObMask(NULL);
+			button_slot_vec[i].first->SetTextureObMask(nullptr);
 			if (button_slot_vec[i].second->GetItem()->GetCondition() == 0)
 			{
 				button_slot_vec[i].first->SetTextureObMask(GuiTextureObCollector::Instance().slot_mark_reject);
@@ -110,8 +110,8 @@ void GuiVehicle2::UpdateEquipmentIcons() const
 		}
 		else
 		{
-			button_slot_vec[i].first->SetTextureObAdditional(NULL);
-			button_slot_vec[i].first->SetTextureObMask(NULL);
+			button_slot_vec[i].first->SetTextureObAdditional(nullptr);
+			button_slot_vec[i].first->SetTextureObMask(nullptr);
 			button_slot_vec[i].first->Reset();
 		}
 	}
@@ -151,7 +151,7 @@ ItemSlot* GuiVehicle2::GetInreactedItemSlot(const MouseData& data_mouse)
        		}
         }  
         
-        return NULL;                     
+        return nullptr;                     
 }
 
 void GuiVehicle2::UpdateOffset()

@@ -25,7 +25,7 @@
 #include "../slots/VehicleSlot.hpp"
 #include "../pilots/Npc.hpp"
 
-GuiStore::GuiStore():store(NULL)
+GuiStore::GuiStore():store(nullptr)
 {}
 
 GuiStore::~GuiStore()
@@ -75,7 +75,7 @@ void GuiStore::BindStore(Store* store)
 
 void GuiStore::UnbindStore()
 {
-        store = NULL;
+        store = nullptr;
                 
         rect_itemslot_vec.clear();
 	rect_vehicleslot_vec.clear();
@@ -85,7 +85,7 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
 {
         for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
         { 
-                if (rect_itemslot_vec[i].second->GetItem() != NULL)
+                if (rect_itemslot_vec[i].second->GetItem() != nullptr)
                 {
                 	if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
                 	{
@@ -105,7 +105,7 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
 
         for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
         { 
-                if (rect_vehicleslot_vec[i].second->GetVehicle() != NULL)
+                if (rect_vehicleslot_vec[i].second->GetVehicle() != nullptr)
                 {
                 	if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
                 	{
@@ -136,7 +136,7 @@ void GuiStore::RenderSlots(int credits) const
         	//for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
         	//{
                 	//rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetGuiOffset());
-                	//if (rect_itemslot_vec[i].second->GetItem() != NULL)
+                	//if (rect_itemslot_vec[i].second->GetItem() != nullptr)
                 	//{
                 		//if (rect_itemslot_vec[i].second->GetItem()->GetPrice() > credits)
                 		//{
@@ -148,7 +148,7 @@ void GuiStore::RenderSlots(int credits) const
         	//for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
         	//{
                 	//rect_vehicleslot_vec[i].second->Render(rect_vehicleslot_vec[i].first);
-                	//if (rect_vehicleslot_vec[i].second->GetVehicle() != NULL)
+                	//if (rect_vehicleslot_vec[i].second->GetVehicle() != nullptr)
                 	//{
                 		////if (rect_vehicleslot_vec[i].second->GetItem()->GetPrice() > credits)
                 		////{

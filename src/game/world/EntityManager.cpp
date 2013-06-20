@@ -149,7 +149,7 @@ Player* EntityManager::GetPlayer() const
 		}
 	}
 
-	return NULL;
+	return nullptr;
 }
 
 void EntityManager::RemoveEntity(Base* entity)

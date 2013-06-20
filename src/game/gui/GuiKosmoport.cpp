@@ -50,11 +50,11 @@
 
 GuiKosmoport::GuiKosmoport():
 init_done(false), 
-kosmoport(NULL),
-gui_galaxymap_shared(NULL),
-gui_vehicle_scan_shared(NULL),
-gui_skills_shared(NULL),
-slider_shared(NULL)
+kosmoport(nullptr),
+gui_galaxymap_shared(nullptr),
+gui_vehicle_scan_shared(nullptr),
+gui_skills_shared(nullptr),
+slider_shared(nullptr)
 {
 	int screen_w = Screen::Instance().GetWidth();
 	int screen_h = Screen::Instance().GetHeight();
@@ -144,7 +144,7 @@ void GuiKosmoport::UnbindKosmoport()
 {
         ExitCurrentScreen();
         
-        kosmoport = NULL;
+        kosmoport = nullptr;
         
         gui_angar.UnbindAngar();
         gui_store.UnbindStore();
@@ -165,10 +165,10 @@ void GuiKosmoport::BindSharedGuis(GuiGalaxyMap* gui_galaxymap_shared, GuiVehicle
 
 void GuiKosmoport::UnbindSharedGuis()
 {
-        gui_galaxymap_shared    = NULL;
-        gui_vehicle_scan_shared = NULL;
-        gui_skills_shared       = NULL;
-        slider_shared           = NULL;
+        gui_galaxymap_shared    = nullptr;
+        gui_vehicle_scan_shared = nullptr;
+        gui_skills_shared       = nullptr;
+        slider_shared           = nullptr;
 }
 
 void GuiKosmoport::EnterGuiScanInAngar()
@@ -216,7 +216,7 @@ void GuiKosmoport::ExitGuiAngarScreen()
 	Logger::Instance().Log("GuiKosmoport::ExitGuiAngarScreen", GUI_LOG_DIP);
 	#endif	
 	
-	if (gui_vehicle_scan_shared->GetVehicle() != NULL)
+	if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
 	{
 		ExitGuiScan();
 	}
@@ -398,7 +398,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 				gui_angar.ButtonsAction();
 			    	if (interaction == false)
 			    	{
-					if (gui_vehicle_scan_shared->GetVehicle() != NULL) 
+					if (gui_vehicle_scan_shared->GetVehicle() != nullptr) 
 					{ 
 						interaction = player->GetGuiManager().UpdateMouseInteractionWithScanVehicle(data_mouse);
 					}
@@ -488,7 +488,7 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
 			enable_BLEND();   
 	        		gui_angar.RenderVehicleAndItemSlots();
 	        		
-				if (gui_vehicle_scan_shared->GetVehicle() != NULL)
+				if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
 				{ 
 					player->GetGuiManager().RenderScanVehicle(data_mouse, gui_vehicle_scan_shared); 
 				}

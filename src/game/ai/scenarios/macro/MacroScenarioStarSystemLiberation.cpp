@@ -63,7 +63,7 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
 			if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != MICROSCENARIO::DESTROY_ID)
 			{
 				Vehicle* target_vehicle = npc->GetObservation().GetRandVisibleVehicle(RaceInformationCollector::Instance().RACES_EVIL_vec);
-				if (target_vehicle != NULL)
+				if (target_vehicle != nullptr)
 				{
 					Task microtask(MICROSCENARIO::DESTROY_ID, target_vehicle->GetId());
 					npc->GetStateMachine().SetCurrentMicroTask(microtask);

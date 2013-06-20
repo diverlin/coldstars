@@ -41,7 +41,7 @@ class BaseDrawable : public Orientation
 		void BindData2D(TextureOb*);    
 		void SetRenderAnimation(AnimationBase* animation_program) { this->animation_program = animation_program; }
 		
-		bool Is3D() const 				{ return (mesh != NULL); }
+		bool Is3D() const 				{ return (mesh != nullptr); }
 		const Vec3<float>& GetBoundaryBox() const 	{ return mesh->GetBoundaryBox(); }
 		Mesh* GetMesh() const 				{ return mesh; }
                 

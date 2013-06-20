@@ -47,7 +47,7 @@ class WeaponComplex
         	
                	void PrepareWeapons();
                      
-                void SetTarget(BaseSpaceEntity*, ItemSlot* item_slot = NULL);     
+                void SetTarget(BaseSpaceEntity*, ItemSlot* item_slot = nullptr);     
                        
         	void Fire(int, float, bool);
         	

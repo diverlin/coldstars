@@ -77,22 +77,22 @@ Vehicle::Vehicle()
 	
 	special_action_id = NONE_ID;
 	
-	owner_npc  = NULL;
-       	starsystem = NULL; 
+	owner_npc  = nullptr;
+       	starsystem = nullptr; 
 
     	weapon_complex.SetOwnerVehicle(this);
     	drive_complex.SetOwnerVehicle(this);
     	protection_complex.SetOwnerVehicle(this);
 
-    	radar_slot     = NULL;
-        scaner_slot    = NULL;
-        energizer_slot = NULL;
-        grapple_slot   = NULL;
-        droid_slot     = NULL;
-        freezer_slot   = NULL;
+    	radar_slot     = nullptr;
+        scaner_slot    = nullptr;
+        energizer_slot = nullptr;
+        grapple_slot   = nullptr;
+        droid_slot     = nullptr;
+        freezer_slot   = nullptr;
         
-        parent_vehicleslot = NULL;
-        land  = NULL;
+        parent_vehicleslot = nullptr;
+        land  = nullptr;
 }
 
 /*virtual*/
@@ -139,7 +139,7 @@ GoodsPack* Vehicle::GetGoodsPack() const
 {
 	for(unsigned int i=0; i<slot_cargo_vec.size(); i++)
 	{
-		if (slot_cargo_vec[i]->GetItem() != NULL)
+		if (slot_cargo_vec[i]->GetItem() != nullptr)
 		{
 			if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
 			{
@@ -148,7 +148,7 @@ GoodsPack* Vehicle::GetGoodsPack() const
 		}
 	}	
 	
-	return NULL;
+	return nullptr;
 }
         
 /* virtual */
@@ -226,7 +226,7 @@ bool Vehicle::GetAllItemsFromVehicle(Vehicle* vehicle)
 	bool result = true;
 	for(unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
 	{ 
-		if (vehicle->slot_total_vec[i]->GetItem() != NULL)
+		if (vehicle->slot_total_vec[i]->GetItem() != nullptr)
 		{
 			if (vehicle->slot_total_vec[i]->GetSubTypeId() == ENTITY::CARGO_SLOT_ID)
 			{
@@ -265,14 +265,14 @@ bool Vehicle::ManageFunctionEquipment(BaseItem* item)
 	if (item->GetParentSubTypeId() == ENTITY::WEAPON_SLOT_ID)
 	{
 		ItemSlot* item_slot = weapon_complex.GetEmptyWeaponSlot();
-		if (item_slot != NULL)
+		if (item_slot != nullptr)
 		{
 			return item_slot->SwapItem(item->GetItemSlot());
 		}
 		else
 		{
 			ItemSlot* item_slot = weapon_complex.GetEquipedWeakestWeaponSlot();
-			if (item_slot != NULL)
+			if (item_slot != nullptr)
 			{
 				if (item->GetPrice() > item_slot->GetItem()->GetPrice())
 				{
@@ -284,7 +284,7 @@ bool Vehicle::ManageFunctionEquipment(BaseItem* item)
 	else
 	{
 		ItemSlot* item_slot = GetFuctionalSlot(item->GetParentSubTypeId());
-		if (item_slot->GetItem() == NULL)
+		if (item_slot->GetItem() == nullptr)
 		{
 			return item_slot->SwapItem(item->GetItemSlot());
 		}
@@ -304,7 +304,7 @@ bool Vehicle::ManageFunctionModule(BaseItem* item)
 {
 	for (unsigned int i=0; i<slot_funct_vec.size(); i++)
 	{
-		if (slot_funct_vec[i]->GetItem() != NULL)
+		if (slot_funct_vec[i]->GetItem() != nullptr)
 		{
 			if (slot_funct_vec[i]->GetItem()->GetSubTypeId() == item->GetParentSubTypeId())
 			{
@@ -319,7 +319,7 @@ bool Vehicle::ManageFunctionModule(BaseItem* item)
 bool Vehicle::ManageFunctionArtefact(BaseItem* item)
 {
 	ItemSlot* artef_slot = GetEmptyArtefactSlot();
-	if (artef_slot != NULL)
+	if (artef_slot != nullptr)
 	{
 		return artef_slot->SwapItem(item->GetItemSlot());
 	}
@@ -342,33 +342,33 @@ ItemSlot* Vehicle::GetEmptyArtefactSlot() const
 {
 	for(unsigned int i=0; i<slot_artef_vec.size(); i++)
         {
-        	if (slot_artef_vec[i]->GetItem() == NULL)
+        	if (slot_artef_vec[i]->GetItem() == nullptr)
         	{
         		return slot_artef_vec[i];
         	}
         }
                		
-        return NULL;
+        return nullptr;
 }
                 	
 ItemSlot* Vehicle::GetEmptyCargoSlot()
 {
       	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
-      	{
-          	if (!slot_cargo_vec[i]->GetItem() != NULL)
+      	{      			
+          	if (slot_cargo_vec[i]->GetItem() == nullptr)
           	{
              		return slot_cargo_vec[i];
              	}
         }
         
-      	return NULL;
+      	return nullptr;
 }
 
 ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
 {
       	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
       	{
-          	if (slot_cargo_vec[i]->GetItem() != NULL)
+          	if (slot_cargo_vec[i]->GetItem() != nullptr)
           	{
           		if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
           		{
@@ -380,7 +380,7 @@ ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
           	}             		
         }
         
-      	return NULL;
+      	return nullptr;
 }
 
 bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
@@ -407,7 +407,7 @@ bool Vehicle::AddItemToCargoSlot(BaseItem* item)
 	}
 	
 	ItemSlot* cargo_slot = GetEmptyCargoSlot();
-	if (cargo_slot != NULL)
+	if (cargo_slot != nullptr)
 	{
 		return cargo_slot->InsertItem(item);
 	}
@@ -418,6 +418,7 @@ bool Vehicle::AddItemToCargoSlot(BaseItem* item)
 bool Vehicle::AddAndManageItem(BaseItem* item)
 {
 	bool result = AddItemToCargoSlot(item);
+	                        
 	if (result == true)
 	{
 		ManageItem(item);
@@ -430,7 +431,7 @@ void Vehicle::ManageItemsInCargo()
 {
 	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
 	{
-		if (slot_cargo_vec[i]->GetItem() != NULL)
+		if (slot_cargo_vec[i]->GetItem() != nullptr)
 		{
 			ManageItem(slot_cargo_vec[i]->GetItem());
 		}
@@ -441,7 +442,7 @@ void Vehicle::SellItemsInCargo()
 {
 	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
 	{
-		if (slot_cargo_vec[i]->GetItem() != NULL)
+		if (slot_cargo_vec[i]->GetItem() != nullptr)
 		{
 			SellItem(slot_cargo_vec[i]->GetItem());
 		}
@@ -497,7 +498,7 @@ bool Vehicle::BuyItem(BaseItem* item)
 bool Vehicle::MergeIdenticalGoods(BaseItem* item)
 {
 	ItemSlot* item_slot = GetCargoSlotWithGoods(item->GetSubTypeId());
-	if (item_slot != NULL)
+	if (item_slot != nullptr)
 	{
 		item_slot->GetGoodsPack()->Increase(item->GetMass());
 		// delete item; dangerrr
@@ -668,7 +669,7 @@ void Vehicle::LaunchingEvent()
 	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::LaunchingEvent", ENTITY_TRANSACTION_LOG_DIP); 
 	#endif
 	
-	if (parent_vehicleslot != NULL)
+	if (parent_vehicleslot != nullptr)
 	{
 		switch(parent_vehicleslot->GetOwner()->GetTypeId())
 		{
@@ -678,7 +679,7 @@ void Vehicle::LaunchingEvent()
 				Vec2<float> offset_pos = getRandVec2f(40, 100);
 				Vec3<float> offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
 				Vec3<float> angle(0,0,angleInD);
-			     	starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetCenter() + offset_pos3, angle, NULL);
+			     	starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetCenter() + offset_pos3, angle, nullptr);
 				land->RemoveVehicle(this);
 	
 				break;
@@ -697,7 +698,7 @@ void Vehicle::LaunchingEvent()
 		Vec2<float> offset_pos = getRandVec2f(40, 100);
 		Vec3<float> offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
 		Vec3<float> angle(0,0,angleInD);
-	     	starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetCenter() + offset_pos3, angle, NULL);
+	     	starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetCenter() + offset_pos3, angle, nullptr);
 		land->RemoveVehicle(this); 
 	}
 
@@ -741,7 +742,7 @@ void Vehicle::Hit(int damage, bool show_effect)
 
 	if (show_effect == true)
 	{
-    		if (protection_complex.GetProtectorSlot()->GetItem() != NULL)
+    		if (protection_complex.GetProtectorSlot()->GetItem() != nullptr)
     		{
        			protection_complex.GetShieldEffect()->SetAlpha(1.0);
        		}       	
@@ -780,7 +781,7 @@ void Vehicle::CheckNeedsInStatic()
         needs.repair_equipment = false;
         for (unsigned int i=0; i<slot_funct_vec.size(); i++)
         {
-                if (slot_funct_vec[i]->GetItem() != NULL)
+                if (slot_funct_vec[i]->GetItem() != nullptr)
                 {
                         if (slot_funct_vec[i]->GetItem()->GetDamaged() == true)
                         {
@@ -793,7 +794,7 @@ void Vehicle::CheckNeedsInStatic()
         needs.get_ammo = false;
         for (unsigned int i=0; i<slot_funct_vec.size(); i++)
         {
-                if (slot_funct_vec[i]->GetItem() != NULL)
+                if (slot_funct_vec[i]->GetItem() != nullptr)
                 {
                         if (slot_funct_vec[i]->GetItem()->GetSubTypeId() == ENTITY::ROCKET_EQUIPMENT_ID) 
                         {
@@ -807,9 +808,9 @@ void Vehicle::CheckNeedsInStatic()
         
         // check fuel
         needs.get_fuel = false;
-        if (drive_complex.GetBakSlot() != NULL)
+        if (drive_complex.GetBakSlot() != nullptr)
         {
-                if (drive_complex.GetBakSlot()->GetItem() != NULL)
+                if (drive_complex.GetBakSlot()->GetItem() != nullptr)
                 {
                         if (drive_complex.GetBakSlot()->GetBakEquipment()->GetFuel() < 0.8*drive_complex.GetBakSlot()->GetBakEquipment()->GetFuelMax())
                         {
@@ -839,7 +840,7 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
         {
                 for (unsigned int i=0; i<slot_funct_vec.size(); i++)
                 {
-                        if (slot_funct_vec[i]->GetItem() != NULL)
+                        if (slot_funct_vec[i]->GetItem() != nullptr)
                         {
                                 if (slot_funct_vec[i]->GetItem()->GetDamaged() == true)
                                 {
@@ -854,7 +855,7 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
         {
                 for (unsigned int i=0; i<slot_funct_vec.size(); i++)
                 {
-                        if (slot_funct_vec[i]->GetItem() != NULL)
+                        if (slot_funct_vec[i]->GetItem() != nullptr)
                         {
                                 if (slot_funct_vec[i]->GetItem()->GetSubTypeId() == ENTITY::ROCKET_EQUIPMENT_ID)
                                 {
@@ -879,7 +880,7 @@ void Vehicle::UpdateAllFunctionalItemsInStatic()
 {
 	for (unsigned int i=0; i<slot_funct_vec.size(); i++)
 	{
-		if (slot_funct_vec[i]->GetItem() != NULL)
+		if (slot_funct_vec[i]->GetItem() != nullptr)
 		{
 			slot_funct_vec[i]->GetItem()->UpdateInStatic();
 		}
@@ -887,7 +888,7 @@ void Vehicle::UpdateAllFunctionalItemsInStatic()
 
 	for (unsigned int i=0; i<slot_artef_vec.size(); i++)
 	{
-		if (slot_artef_vec[i]->GetItem() != NULL)
+		if (slot_artef_vec[i]->GetItem() != nullptr)
 		{
 			slot_artef_vec[i]->GetItem()->UpdateInStatic();
 		}
@@ -925,9 +926,9 @@ void Vehicle::UpdatePropertiesSpeed()
      	// speed calculation ////
      	properties.speed = 0;
 
-     	if (drive_complex.GetDriveSlot() != NULL) 
+     	if (drive_complex.GetDriveSlot() != nullptr) 
      	{
-                if (drive_complex.GetDriveSlot()->GetItem() != NULL) 
+                if (drive_complex.GetDriveSlot()->GetItem() != nullptr) 
                 {
                         if (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)  
                         {
@@ -982,7 +983,7 @@ void Vehicle::UpdatePropertiesRadar()
         properties.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
         properties.equipment_radar = false;
 	
-   	if (radar_slot->GetItem() != NULL) 
+   	if (radar_slot->GetItem() != nullptr) 
    	{
       		if (radar_slot->GetRadarEquipment()->GetFunctioning() == true)  
       		{
@@ -1000,15 +1001,15 @@ void Vehicle::UpdatePropertiesJump()
 	    
 	properties.hyper = 0;
 
-        if (drive_complex.GetDriveSlot() != NULL)
+        if (drive_complex.GetDriveSlot() != nullptr)
         {
-                if (drive_complex.GetDriveSlot()->GetItem() != NULL)
+                if (drive_complex.GetDriveSlot()->GetItem() != nullptr)
                 {
                         if (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)
                         {
-                                if (drive_complex.GetBakSlot() != NULL)
+                                if (drive_complex.GetBakSlot() != nullptr)
                                 {
-                                        if (drive_complex.GetBakSlot()->GetItem() != NULL)
+                                        if (drive_complex.GetBakSlot()->GetItem() != nullptr)
                                         {
                                                 if (drive_complex.GetBakSlot()->GetBakEquipment()->GetFunctioning() == true)
                                                 {
@@ -1033,7 +1034,7 @@ void Vehicle::UpdatePropertiesEnergy()
      	properties.energy = 0;
 	properties.hibernate_mode_enabled = true;
 
-     	if (energizer_slot->GetItem() != NULL)
+     	if (energizer_slot->GetItem() != nullptr)
      	{
         	if (energizer_slot->GetEnergizerEquipment()->GetFunctioning() == true)
         	{
@@ -1056,7 +1057,7 @@ void Vehicle::UpdatePropertiesProtection()
 
 	if (properties.hibernate_mode_enabled == false)
 	{
-     		if (protection_complex.GetProtectorSlot()->GetItem() != NULL)
+     		if (protection_complex.GetProtectorSlot()->GetItem() != nullptr)
      		{
         		if (protection_complex.GetProtectorSlot()->GetProtectorEquipment()->GetFunctioning() == true)
         		{
@@ -1080,7 +1081,7 @@ void Vehicle::UpdatePropertiesRepair()
 	
      	properties.repair = 0;
 
-     	if (droid_slot->GetItem() != NULL)
+     	if (droid_slot->GetItem() != nullptr)
      	{
         	if (droid_slot->GetDroidEquipment()->GetFunctioning() == true)
         	{
@@ -1112,7 +1113,7 @@ void Vehicle::UpdatePropertiesFreeze()
 	
      	properties.freeze = 0;
 
-     	if (freezer_slot->GetItem() != NULL)
+     	if (freezer_slot->GetItem() != nullptr)
      	{
         	if (freezer_slot->GetFreezerEquipment()->GetFunctioning() == true)
         	{
@@ -1129,7 +1130,7 @@ void Vehicle::UpdatePropertiesScan()
 	
      	properties.scan = 0;
 
-     	if (scaner_slot->GetItem() != NULL)
+     	if (scaner_slot->GetItem() != nullptr)
      	{
         	if (scaner_slot->GetScanerEquipment()->GetFunctioning() == true)
         	{
@@ -1149,7 +1150,7 @@ void Vehicle::UpdatePropertiesGrab()
                       			      			
      	if (data_korpus.slot_grapple_num != 0)
      	{
-        	if (grapple_slot->GetItem() != NULL)
+        	if (grapple_slot->GetItem() != nullptr)
            	{
            		if (grapple_slot->GetGrappleEquipment()->GetFunctioning() == true)
               		{
@@ -1171,7 +1172,7 @@ void Vehicle::UpdateArtefactInfluence()
 	
 	for (unsigned int i=0; i<slot_artef_vec.size(); i++)
 	{
-		if (slot_artef_vec[i]->GetItem() != NULL)
+		if (slot_artef_vec[i]->GetItem() != nullptr)
 		{
 		        if (slot_artef_vec[i]->GetItem()->GetFunctioning() == true)
               		{
@@ -1210,7 +1211,7 @@ void Vehicle::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 	Vec2<float> pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
      	drawInfoIn2Column(info.title_list, info.value_list, pos);
      	
-     	if (owner_npc != NULL)
+     	if (owner_npc != nullptr)
      	{
      		owner_npc->RenderInfo(Vec2<float>(GetCenter().x + 190 - scroll_coords.x, GetCenter().y - scroll_coords.y));
      	}
@@ -1222,7 +1223,7 @@ void Vehicle::RenderInfo(const Vec2<float>& center, int offset_x, int offset_y)
 	Vec2<float> pos(center.x - offset_x, center.y - offset_y);
      	drawInfoIn2Column(info.title_list, info.value_list, pos);
 
-     	if (owner_npc != NULL)
+     	if (owner_npc != nullptr)
      	{
      		owner_npc->RenderInfo(Vec2<float>(center.x + 190 - offset_x, center.y - offset_y));
      	}
@@ -1305,7 +1306,7 @@ int Vehicle::GetArmorMiss() const
 
 bool Vehicle::IsFuelFull() const
 {
-	if (drive_complex.GetBakSlot()->GetItem() == NULL)
+	if (drive_complex.GetBakSlot()->GetItem() == nullptr)
 	{
 		return true;
 	}
@@ -1330,7 +1331,7 @@ void Vehicle::LockRandomItem(int locked_turns)
 	
 	for (unsigned int i=0; i<slot_funct_vec.size(); i++)
 	{
-		if (slot_funct_vec[i]->GetItem() != NULL)
+		if (slot_funct_vec[i]->GetItem() != nullptr)
 		{
 			_equiped_slot_vec.push_back(slot_funct_vec[i]);
 		}
@@ -1399,7 +1400,7 @@ void Vehicle::DropRandomItemToSpace()
 	
 	for (unsigned int i=0; i<slot_total_vec.size(); i++)
 	{
-		if (slot_total_vec[i]->GetItem() != NULL)
+		if (slot_total_vec[i]->GetItem() != nullptr)
 		{
 			_equiped_slot_vec.push_back(slot_total_vec[i]);
 		}
@@ -1442,7 +1443,7 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        	save_ptree.put(root+"data_korpus.slot_weapon_num", data_korpus.slot_weapon_num);       	
        	
 
-       	if (drive_complex.GetTarget() != NULL) 
+       	if (drive_complex.GetTarget() != nullptr) 
        	{
        		save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", drive_complex.GetTarget()->GetId());
        		save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_action_id", drive_complex.GetActionId());
@@ -1453,10 +1454,10 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        		save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_action_id", NONE_ID);
 	}
 	       	
-       	if (land != NULL) { save_ptree.put(root+"data_unresolved_Vehicle.land_id", land->GetId()); }
+       	if (land != nullptr) { save_ptree.put(root+"data_unresolved_Vehicle.land_id", land->GetId()); }
 	else 	          { save_ptree.put(root+"data_unresolved_Vehicle.land_id", NONE_ID); }
 	
-       	if (parent_vehicleslot != NULL) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); }
+       	if (parent_vehicleslot != nullptr) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); }
        	else  			       	{ save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }
       
        	if (place_type_id == ENTITY::HYPER_SPACE_ID) 
@@ -1556,14 +1557,14 @@ void Vehicle::ResolveDataUniqueVehicle()
 void Vehicle::TEST_DamageAndLockRandItems()
 {
 	int rand_index1 = getRandInt(0, slot_funct_vec.size()-1);
-	while (slot_funct_vec[rand_index1]->GetItem() == NULL)
+	while (slot_funct_vec[rand_index1]->GetItem() == nullptr)
 	{
 		rand_index1 = getRandInt(0, slot_funct_vec.size()-1);	
 	}
 	slot_funct_vec[rand_index1]->GetItem()->LockEvent(3);
 
 	int rand_index2 = getRandInt(0, slot_funct_vec.size()-1);
-	while (slot_funct_vec[rand_index2]->GetItem() == NULL)
+	while (slot_funct_vec[rand_index2]->GetItem() == nullptr)
 	{
 		rand_index2 = getRandInt(0, slot_funct_vec.size()-1);	
 	}

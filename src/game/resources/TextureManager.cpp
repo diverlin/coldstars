@@ -214,7 +214,7 @@ void TextureManager::Add(TextureOb* texOb)
 
 TextureOb* TextureManager::GetRandomTextureObFromVec(const std::vector<TextureOb*>& textureOb_vec)
 {
-	TextureOb* requested_texOb = NULL;
+	TextureOb* requested_texOb = nullptr;
      	
      	if (textureOb_vec.size() == 1)
 	{
@@ -226,7 +226,7 @@ TextureOb* TextureManager::GetRandomTextureObFromVec(const std::vector<TextureOb
      	}
      	
      	#if TEXTURE_MANAGER_LOG_ENABLED == 1
-     	if (requested_texOb == NULL) Logger::Instance().Log("TextureManager::GetRandomTextureObFromVec returns NULL, fix that", TEXTURE_MANAGER_LOG_DIP);
+     	if (requested_texOb == nullptr) Logger::Instance().Log("TextureManager::GetRandomTextureObFromVec returns nullptr, fix that", TEXTURE_MANAGER_LOG_DIP);
      	#endif
      	
      	return requested_texOb;
@@ -239,7 +239,7 @@ TextureOb* TextureManager::GetShipTexObByClosestSizeFromVec(const std::vector<Te
         int sign = 1;
         int i = 1;
 
-	while (requested_texOb == NULL)
+	while (requested_texOb == nullptr)
 	{
 		sign *= sign_base;
 		size_id += sign*i;
@@ -252,7 +252,7 @@ TextureOb* TextureManager::GetShipTexObByClosestSizeFromVec(const std::vector<Te
 	}
 	             
 	#if TEXTURE_MANAGER_LOG_ENABLED == 1
-     	if (requested_texOb == NULL) Logger::Instance().Log("TextureManager::GetShipTexObByClosestSizeFromVec returns NULL, fix that", TEXTURE_MANAGER_LOG_DIP);
+     	if (requested_texOb == nullptr) Logger::Instance().Log("TextureManager::GetShipTexObByClosestSizeFromVec returns nullptr, fix that", TEXTURE_MANAGER_LOG_DIP);
      	#endif
      	                                                                                                                
         return requested_texOb;
@@ -261,7 +261,7 @@ TextureOb* TextureManager::GetShipTexObByClosestSizeFromVec(const std::vector<Te
 
 TextureOb* TextureManager::GetShipTexObBySizeFromVec(const std::vector<TextureOb*>& textureOb_vec, int size_id)
 {  
-	TextureOb* requested_texOb = NULL;
+	TextureOb* requested_texOb = nullptr;
 	for (unsigned int i=0; i<textureOb_vec.size(); i++)
        	{
        		if (textureOb_vec[i]->size_id == size_id)
@@ -277,7 +277,7 @@ TextureOb* TextureManager::GetShipTexObBySizeFromVec(const std::vector<TextureOb
 
 TextureOb* TextureManager::GetRandomFaceTexObWithFolloingAttributes(int race_id)
 {
-	TextureOb* requested_texOb = NULL;
+	TextureOb* requested_texOb = nullptr;
 	switch(race_id)
 	{
 		case RACE::R0_ID: { requested_texOb = GetRandomTextureObFromVec(face_race0_texOb_vec); break; }
@@ -291,7 +291,7 @@ TextureOb* TextureManager::GetRandomFaceTexObWithFolloingAttributes(int race_id)
 	}
 	
 	#if TEXTURE_MANAGER_LOG_ENABLED == 1
-     	if (requested_texOb == NULL) Logger::Instance().Log("TextureManager::GetRandomFaceTexObWithFolloingAttributes returns NULL, fix that", TEXTURE_MANAGER_LOG_DIP);
+     	if (requested_texOb == nullptr) Logger::Instance().Log("TextureManager::GetRandomFaceTexObWithFolloingAttributes returns nullptr, fix that", TEXTURE_MANAGER_LOG_DIP);
      	#endif
      	
 	return requested_texOb;
@@ -299,7 +299,7 @@ TextureOb* TextureManager::GetRandomFaceTexObWithFolloingAttributes(int race_id)
 
 TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(int race_id, int subtype_id, int size_id)
 {
-	TextureOb* requested_texOb = NULL;
+	TextureOb* requested_texOb = nullptr;
 
         switch(race_id)
         {	
@@ -406,7 +406,7 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(int race_id
         }
        
        	#if TEXTURE_MANAGER_LOG_ENABLED == 1
-     	if (requested_texOb == NULL) Logger::Instance().Log("TextureManager::GetRandomShipTexObWithFollowingAtrributes returns NULL, fix that", TEXTURE_MANAGER_LOG_DIP);
+     	if (requested_texOb == nullptr) Logger::Instance().Log("TextureManager::GetRandomShipTexObWithFollowingAtrributes returns nullptr, fix that", TEXTURE_MANAGER_LOG_DIP);
      	#endif
      	
         return requested_texOb;
@@ -415,8 +415,8 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(int race_id
 
 TextureOb* TextureManager::GetTexObByColorId(int _type_id, int _color_id)
 {
-	TextureOb* requested_texOb = NULL;     
-	std::vector<TextureOb*>* requested_vec = NULL;
+	TextureOb* requested_texOb = nullptr;     
+	std::vector<TextureOb*>* requested_vec = nullptr;
 	
 	switch(_type_id)
 	{
@@ -435,7 +435,7 @@ TextureOb* TextureManager::GetTexObByColorId(int _type_id, int _color_id)
 	}
 	
 	#if TEXTURE_MANAGER_LOG_ENABLED == 1
-     	if (requested_texOb == NULL) Logger::Instance().Log("TextureManager::GetTexObByColorId returns NULL, fix that", TEXTURE_MANAGER_LOG_DIP);
+     	if (requested_texOb == nullptr) Logger::Instance().Log("TextureManager::GetTexObByColorId returns nullptr, fix that", TEXTURE_MANAGER_LOG_DIP);
      	#endif
      	
      	return requested_texOb;
@@ -443,7 +443,7 @@ TextureOb* TextureManager::GetTexObByColorId(int _type_id, int _color_id)
                 
 TextureOb* TextureManager::GetRandomTextureOb(int texture_type_id)
 {
-	TextureOb* requested_texOb = NULL;
+	TextureOb* requested_texOb = nullptr;
 	switch(texture_type_id)
 	{
 		case TEXTURE::SPACESTATION_ID:     { requested_texOb = GetRandomTextureObFromVec(spacestation_texOb_vec);             break; }
@@ -492,7 +492,7 @@ TextureOb* TextureManager::GetRandomTextureOb(int texture_type_id)
 	}
 
 	#if TEXTURE_MANAGER_LOG_ENABLED == 1
-     	if (requested_texOb == NULL) Logger::Instance().Log("TextureManager::GetTexObByColorId returns NULL, fix that", TEXTURE_MANAGER_LOG_DIP);
+     	if (requested_texOb == nullptr) Logger::Instance().Log("TextureManager::GetTexObByColorId returns nullptr, fix that", TEXTURE_MANAGER_LOG_DIP);
      	#endif
      	
      	return requested_texOb;
@@ -546,7 +546,7 @@ void TextureManager::FillShipSubTypeList()
 
 TextureOb* TextureManager::GetTextureObByPath(const std::string& path)
 {
-	TextureOb* requested_texOb = NULL;
+	TextureOb* requested_texOb = nullptr;
 	for (unsigned int i = 0; i<textureOb_total_vec.size(); i++)
 	{
 		if (textureOb_total_vec[i]->path == path)
@@ -557,7 +557,7 @@ TextureOb* TextureManager::GetTextureObByPath(const std::string& path)
 	}
 	
 	#if TEXTURE_MANAGER_LOG_ENABLED == 1
-     	if (requested_texOb == NULL) Logger::Instance().Log("TextureManager::GetTextureObByPath returns NULL, fix that", TEXTURE_MANAGER_LOG_DIP);
+     	if (requested_texOb == nullptr) Logger::Instance().Log("TextureManager::GetTextureObByPath returns nullptr, fix that", TEXTURE_MANAGER_LOG_DIP);
      	#endif
      	
 	return requested_texOb;

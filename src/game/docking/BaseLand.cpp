@@ -22,7 +22,7 @@
 #include "../spaceobjects/Planet.hpp"
 #include "../spaceobjects/SpaceStation.hpp"
 
-BaseLand::BaseLand():owner(NULL)
+BaseLand::BaseLand():owner(nullptr)
 {}
 
 /* virtual */

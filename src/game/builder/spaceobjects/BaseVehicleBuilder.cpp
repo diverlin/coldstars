@@ -68,7 +68,7 @@ void BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle) const
 void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
 {     
         // WEAPON SLOTS
-        int slot_weapon_num = vehicle->GetKorpusData().slot_weapon_num;
+        unsigned int slot_weapon_num = vehicle->GetKorpusData().slot_weapon_num;
         for (unsigned int i=0; i<slot_weapon_num; i++)
         {
         	ItemSlot* weapon_slot = GetNewItemSlot(ENTITY::WEAPON_SLOT_ID);  
@@ -174,7 +174,7 @@ void BaseVehicleBuilder::EquipEquipment(Vehicle* vehicle, int tech_level) const
         {
                 RadarEquipment* radar_equipment = RadarEquipmentBuilder::Instance().GetNewRadarEquipment(tech_level);
                 if (vehicle->AddAndManageItem(radar_equipment) == false)
-                {
+                {	
                         EntityGarbage::Instance().Add(radar_equipment); 
                 }
         }
@@ -256,7 +256,7 @@ void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, int tech_level) const
 {
     	for (unsigned int i=0; i<4; i++) 
     	{     
-                if (vehicle->GetEmptyCargoSlot() == NULL)
+                if (vehicle->GetEmptyCargoSlot() == nullptr)
                 {
                         return;
                 }
@@ -283,7 +283,7 @@ void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, int tech_level) const
 {
     	for (unsigned int i=0; i<2; i++) 
     	{
-                if (vehicle->GetEmptyCargoSlot() == NULL)
+                if (vehicle->GetEmptyCargoSlot() == nullptr)
                 {
                         return;
                 }
@@ -293,7 +293,7 @@ void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, int tech_level) const
 
     	for (unsigned int i=0; i<2; i++) 
     	{        
-                if (vehicle->GetEmptyCargoSlot() == NULL)
+                if (vehicle->GetEmptyCargoSlot() == nullptr)
                 {
                         return;
                 }

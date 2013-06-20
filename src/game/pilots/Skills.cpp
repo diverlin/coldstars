@@ -268,7 +268,7 @@ const int* getArrayDependingOnClassTypeId(int class_type_id)
                 case ENTITY::DIPLOMAT_ID:  { return SKILLS_STRATEGY_DIPLOMAT; break; }
         }
         
-        return NULL;
+        return nullptr;
 }
 
 const int* getArrayDependingOnRaceId(int race_id)
@@ -284,5 +284,5 @@ const int* getArrayDependingOnRaceId(int race_id)
                 case RACE::R7_ID: { return SKILLS_STRATEGY_RACE7; break; }
         }
         
-        return NULL;
+        return nullptr;
 }

@@ -155,9 +155,9 @@ void Angar::UpdateInStatic() const
 {
         for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++)
         {
-                if (vehicle_visitors_slot_vec[i]->GetVehicle() != NULL)
+                if (vehicle_visitors_slot_vec[i]->GetVehicle() != nullptr)
                 {
-                	if (vehicle_visitors_slot_vec[i]->GetVehicle()->GetOwnerNpc() != NULL)
+                	if (vehicle_visitors_slot_vec[i]->GetVehicle()->GetOwnerNpc() != nullptr)
                 	{
                         	vehicle_visitors_slot_vec[i]->GetVehicle()->GetOwnerNpc()->UpdateInKosmoportInStatic();
                 	}
@@ -170,7 +170,7 @@ int Angar::GetFreeVehicleSlotTotalNum() const
         int sum_free = 0;
         for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++)
         {
-                if (vehicle_visitors_slot_vec[i]->GetVehicle() == NULL)
+                if (vehicle_visitors_slot_vec[i]->GetVehicle() == nullptr)
                 {
                         sum_free++;
                 }
@@ -184,7 +184,7 @@ bool Angar::AddVehicle(Vehicle* vehicle)
         {        
                 for (unsigned int i=0; i<vehicle_military_slot_vec.size(); i++)
                 {
-                        if (vehicle_military_slot_vec[i]->GetVehicle() == NULL)
+                        if (vehicle_military_slot_vec[i]->GetVehicle() == nullptr)
                         {
                                 vehicle_military_slot_vec[i]->InsertVehicle(vehicle);
                                 return true;
@@ -195,7 +195,7 @@ bool Angar::AddVehicle(Vehicle* vehicle)
         {        
                 for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++)
                 {
-                        if (vehicle_visitors_slot_vec[i]->GetVehicle() == NULL)
+                        if (vehicle_visitors_slot_vec[i]->GetVehicle() == nullptr)
                         {
                                 vehicle_visitors_slot_vec[i]->InsertVehicle(vehicle);
                                 return true;
@@ -211,7 +211,7 @@ std::string Angar::GetDockVehicleStr() const
 	std::string str;
         for (unsigned int i=0; i<vehicle_military_slot_vec.size(); i++)
         {
-                if (vehicle_military_slot_vec[i]->GetVehicle() != NULL)
+                if (vehicle_military_slot_vec[i]->GetVehicle() != nullptr)
                 {
                 	str += "_m" + int2str(vehicle_military_slot_vec[i]->GetVehicle()->GetId());
                 }
@@ -219,7 +219,7 @@ std::string Angar::GetDockVehicleStr() const
         
         for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++)
         {
-                if (vehicle_visitors_slot_vec[i]->GetVehicle() != NULL)
+                if (vehicle_visitors_slot_vec[i]->GetVehicle() != nullptr)
                 {
                 	str += "_v" + int2str(vehicle_visitors_slot_vec[i]->GetVehicle()->GetId());
                 }

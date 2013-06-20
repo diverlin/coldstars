@@ -55,7 +55,7 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
 		orbit->UpdatePosition();
 
 		//printf("sat orbit =%f,%f\n", orbit->getPosition().x, orbit->getPosition().y);
-		//if (parent != NULL)
+		//if (parent != nullptr)
 		//{		
 			Vec3<float> new_pos;
 			new_pos.x = parent->GetCenter().x + orbit->GetPosition().x;
@@ -103,7 +103,7 @@ void Satellite::RenderInSpace()
         	weapon_complex.RenderTurrels();
         }
 
-        if (protection_complex.GetProtectorSlot()->GetItem() != NULL)
+        if (protection_complex.GetProtectorSlot()->GetItem() != nullptr)
     	{
         	RenderShieldEffect(1.0 - color.a); 
         }

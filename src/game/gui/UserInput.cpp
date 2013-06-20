@@ -59,7 +59,7 @@ bool UserInput::KeyPressedCommon(Player* player, GuiManager& gui_manager)
         {
         	case sf::Keyboard::Escape:
         	{
-        		if (player->GetGuiManager().GetGuiVehicleScan()->GetVehicle() != NULL)
+        		if (player->GetGuiManager().GetGuiVehicleScan()->GetVehicle() != nullptr)
 			{
 				if (player->GetGuiManager().GetGuiVehicleScan()->GetBlockManualExit() == false)
 				{
@@ -74,7 +74,7 @@ bool UserInput::KeyPressedCommon(Player* player, GuiManager& gui_manager)
 				}
 			}
 			
-			if (player->GetGuiManager().GetGuiSpace().GetGuiVehicleTarget().GetVehicle() != NULL)
+			if (player->GetGuiManager().GetGuiSpace().GetGuiVehicleTarget().GetVehicle() != nullptr)
 			{
 				player->GetGuiManager().GetGuiSpace().GetGuiVehicleTarget().Reset();
 			}
@@ -223,7 +223,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 		{ 
 			if (player->GetNpc()->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == true)
 			{
-				BaseButton* button = NULL;
+				BaseButton* button = nullptr;
 				
 				button = gui_manager.GetGuiSpace().GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT1_ID);
 				if (button)
@@ -273,7 +273,7 @@ void UserInput::KeyPressedInSpace(Player* player, GuiManager& gui_manager)
 			}
 			else
 			{
-				BaseButton* button = NULL;
+				BaseButton* button = nullptr;
 				
 				button = gui_manager.GetGuiSpace().GetGuiVehiclePlayer().GetButton(ENTITY::WEAPON_SLOT1_ID);
 				if (button)

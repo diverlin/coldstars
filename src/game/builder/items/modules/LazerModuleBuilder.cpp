@@ -35,7 +35,7 @@ LazerModuleBuilder::~LazerModuleBuilder()
 
 LazerModule* LazerModuleBuilder::GetNewLazerModuleTemplate(unsigned long int id) const
 {
-	LazerModule* lazer_module = NULL;
+	LazerModule* lazer_module = nullptr;
 
 	if (id == NONE_ID)
 	{
