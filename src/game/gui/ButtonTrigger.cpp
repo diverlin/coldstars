@@ -19,9 +19,11 @@
 
 #include "ButtonTrigger.hpp"
     
-/*virtual*/
-void ButtonTrigger::PressEvent()
+/*virtual final*/
+void ButtonTrigger::PressEvent(Player* player)
 {
+	pAction(player);
+	
 	if (lock == false)
 	{
 		if (pressed == false)

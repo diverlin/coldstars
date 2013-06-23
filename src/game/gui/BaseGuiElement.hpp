@@ -31,47 +31,47 @@ class Player;
 
 class BaseGuiElement
 {
-    	public:
+	public:
        		BaseGuiElement(int, const std::string&, TextureOb*);
        		~BaseGuiElement();
        		
-       		void SetSubTypeId(int subtype_id) { this->subtype_id = subtype_id; } 
-       		
-       		void SetInfo(const std::string& info) { this->info = info; }
-		void SetLabel(const std::string& label) { this->label = label; }
-		
-  		void SetCenter(const Vec2<float>& center) { this->center = center; }
-  		void SetBox(const Box& box) { this->box = box; }
-  		
-  		int GetTypeId() const { return type_id; }
-       		int GetSubTypeId() const { return subtype_id; }
-       		  		
-  		const Vec2<float>& GetCenter() const { return center; }
-  		const Box& GetBox() const { return box; }
-       		TextureOb* GetTextureOb() const { return textureOb; }
-       		  		       		
-  		bool UpdateMouseInteraction(const MouseData&);
-  		
-  		virtual void Update() {}
-  		virtual void PressEvent() {}
- 		  		
-       		void Render() const;
-       		void RenderInfo(const MouseData&) const;  
+			void SetSubTypeId(int subtype_id) { this->subtype_id = subtype_id; } 
+			
+			void SetInfo(const std::string& info) { this->info = info; }
+			void SetLabel(const std::string& label) { this->label = label; }
+			
+			void SetCenter(const Vec2<float>& center) { this->center = center; }
+			void SetBox(const Box& box) { this->box = box; }
+			
+			int GetTypeId() const { return type_id; }
+			int GetSubTypeId() const { return subtype_id; }
+						
+			const Vec2<float>& GetCenter() const { return center; }
+			const Box& GetBox() const { return box; }
+			TextureOb* GetTextureOb() const { return textureOb; }
+								
+			bool UpdateMouseInteraction(const MouseData&);
+			
+			virtual void Update() {}
+			virtual void PressEvent(Player*) {}
+				
+			void Render() const;
+			void RenderInfo(const MouseData&) const;  
               	
-       	protected:
-       	        int type_id;
-        	int subtype_id;
-        	
-       		Box box;
-       		
-       		TextureOb* textureOb;	
-       		std::string info; 
-       		std::string label; 
-       		
-       		std::vector<BaseGuiElement*> child_vec;
+	protected:
+			int type_id;
+			int subtype_id;
+			
+			Box box;
+			
+			TextureOb* textureOb;	
+			std::string info; 
+			std::string label; 
+			
+			std::vector<BaseGuiElement*> child_vec;
        		       	
-       	private:       				
-		Vec2<float> center;
+	private:       				
+			Vec2<float> center;
 };
 
 

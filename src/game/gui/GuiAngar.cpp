@@ -36,40 +36,40 @@ GuiAngar::GuiAngar():angar(nullptr)
 	int screen_w = Config::Instance().SCREEN_WIDTH;
 	int screen_h = Config::Instance().SCREEN_HEIGHT;
 	
-        TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
-
+	TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
+	
 	float zpos = -1;
 	float zsize = 1;
 	
 	{
-    	ButtonSingle* repair_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYARMOR_ID, "buy_repair");
-        Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 2 * GUI::ICON_SIZE, zpos); 
-    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
-        Box box(center, size);		
-    	repair_button->SetBox(box);
-    	button_map.insert(std::make_pair(GUI::BUTTON::BUYARMOR_ID, repair_button));
-    	}
-    	
-    	{			   
-    	ButtonSingle* fuel_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYFUEL_ID, "buy fuel");  
-        Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 3*GUI::ICON_SIZE, zpos); 
-    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
-    	Box box(center, size);		
-    	fuel_button->SetBox(box);
-    	button_map.insert(std::make_pair(GUI::BUTTON::BUYFUEL_ID, fuel_button));
-    	}
-    		
-    	{		   
-    	ButtonSingle* launch_button = new ButtonSingle(texOb_button, GUI::BUTTON::GETLAUNCH_ID, "launch");
-        Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 4*GUI::ICON_SIZE, zpos); 
-    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
-    	Box box(center, size);		
-    	launch_button->SetBox(box);
-    	button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH_ID, launch_button));
+		//ButtonSingle* repair_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYARMOR_ID, "buy_repair");
+		//Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 2 * GUI::ICON_SIZE, zpos); 
+		//Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+		//Box box(center, size);		
+		//repair_button->SetBox(box);
+		//button_map.insert(std::make_pair(GUI::BUTTON::BUYARMOR_ID, repair_button));
+	}
+	
+	{			   
+		//ButtonSingle* fuel_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYFUEL_ID, "buy fuel");  
+		//Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 3*GUI::ICON_SIZE, zpos); 
+		//Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+		//Box box(center, size);		
+		//fuel_button->SetBox(box);
+		//button_map.insert(std::make_pair(GUI::BUTTON::BUYFUEL_ID, fuel_button));
+	}
+		
+	{		   
+		//ButtonSingle* launch_button = new ButtonSingle(texOb_button, GUI::BUTTON::GETLAUNCH_ID, "launch");
+		//Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 4*GUI::ICON_SIZE, zpos); 
+		//Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+		//Box box(center, size);		
+		//launch_button->SetBox(box);
+		//button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH_ID, launch_button));
 	}
 	
 	repair_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::REPAIR_SLOT_ID);
-        charge_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::CHARGE_SLOT_ID);
+	charge_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::CHARGE_SLOT_ID);
 }
 
 
@@ -161,10 +161,10 @@ void GuiAngar::ButtonsAction() const
 	   			{
 	   				if (button->GetLock() == false)
 	   				{  			
-	   				      	button->PressEvent();
-	   					
-	   					angar->RepairVehicle(player->GetNpc()->GetVehicle());
-	   					return; 
+						button->PressEvent(player);
+						
+						angar->RepairVehicle(player->GetNpc()->GetVehicle());
+						return; 
 	   				}
 	   						
 	   				break;
@@ -174,10 +174,10 @@ void GuiAngar::ButtonsAction() const
 	   			{
 	   				if (button->GetLock() == false)
 	   				{
-	   		       			button->PressEvent();
-	   		        		
-                                                angar->TankUpVehicle(player->GetNpc()->GetVehicle());
-	   					return; 
+						button->PressEvent(player);
+						
+						angar->TankUpVehicle(player->GetNpc()->GetVehicle());
+						return; 
 	   				}
                         
 	   				break;

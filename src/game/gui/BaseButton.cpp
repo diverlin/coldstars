@@ -24,14 +24,8 @@
 #include "../render/Screen.hpp"
 #include "../render/AnimationEffect2D.hpp"
 
-BaseButton::BaseButton(TextureOb* textureOb, int subtype_id, const std::string& info)
+BaseButton::BaseButton(int subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb):BaseGuiElement(subtype_id, info, textureOb)
 {
-	type_id = GUI::BUTTON::BUTTON_ID;
-	
-    	this->textureOb = textureOb;
-	this->subtype_id = subtype_id;
-    	this->info = info; 
-
 	textureOb_additional = nullptr;
 	textureOb_mask = nullptr;
 		
@@ -40,6 +34,8 @@ BaseButton::BaseButton(TextureOb* textureOb, int subtype_id, const std::string& 
 	pressed = false;
 	
 	animation_scale = new AnimationEffect2D(Vec2<float>(0.7, 0.7), Vec2<float>(1.3, 1.3), Vec2<float>(0.02, 0.02), 0, 0, 0);
+	
+	this->pAction = pAction;
 }
 
 BaseButton::~BaseButton()

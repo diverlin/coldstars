@@ -17,68 +17,47 @@
 */
 
 
-#ifndef BASEBUTTON_H
-#define BASEBUTTON_H
+#ifndef BaseButton_HPP
+#define BaseButton_HPP
 
-#include "../resources/textureOb.hpp"
-#include "../common/Box.hpp"
+#include "BaseGuiElement.hpp"
 class AnimationEffect2D;
 
-class BaseButton
+class BaseButton : public BaseGuiElement
 {
-    	public:
-       		BaseButton(TextureOb*, int, const std::string&);       		       
+	public:
+       		BaseButton(int, const std::string&,void (*pAction)(Player*), TextureOb* textureOb = nullptr);       		       
        		virtual ~BaseButton();  
 
-		void SetSubTypeId(int subtype_id) { this->subtype_id = subtype_id; } 
-		void SetInfo(const std::string& info) { this->info = info; }
-		void SetLabel(const std::string& label) { this->label = label; }		
-
-		void SetBox(const Box& box) { this->box = box; }	
-													
-		void SetTextureObAdditional(TextureOb* textureOb_additional) { this->textureOb_additional = textureOb_additional; }
-		void SetTextureObMask(TextureOb* textureOb_mask) { this->textureOb_mask = textureOb_mask; }
-
-       		TextureOb* GetTextureOb() const { return textureOb; }
-
-		const Box& GetBox() { return box; }
-		
-       		int GetTypeId() const { return type_id; }
-       		int GetSubTypeId() const { return subtype_id; }
+			void SetTextureObAdditional(TextureOb* textureOb_additional) { this->textureOb_additional = textureOb_additional; }
+			void SetTextureObMask(TextureOb* textureOb_mask) { this->textureOb_mask = textureOb_mask; }
+      		
+      		//void SetCallBack(void (*funcp)()) { this->pAction = pAction; }
       		
        		bool GetLock() const { return lock; }
        		bool GetPressed() const { return pressed; }
-
-		virtual void PressEvent() {}
 		
        		void LockOn();
        		void LockOff();
-       		virtual void Update() {};
 
-		void Reset();
+			void Reset();
 		
        		void RenderInfo(int offset_x = 0, int offset_y = 0) const;        		
        		void Render(int offset_x = 0, int offset_y = 0) const;   
        		        
-        protected:
-        	int type_id;
-        	int subtype_id;
-        	
+	protected:        	
         	bool lock;
         	bool pressed;
         	
-        	float alpha;
-        	Box box;
-        	        	
-               	TextureOb* textureOb;
-               	TextureOb* textureOb_additional;
-               	TextureOb* textureOb_mask;
-       		
-       		std::string info; 
-       		std::string label; 
+        	float alpha;        	        	
+
+			TextureOb* textureOb_additional;
+			TextureOb* textureOb_mask;
        		
        		AnimationEffect2D* animation_scale;
        		
+       		void (*pAction)(Player*);
+       		 
      		void FullShadeOn();
      		void ShadeOn();
      		void ShadeOff();

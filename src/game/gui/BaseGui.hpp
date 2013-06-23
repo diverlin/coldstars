@@ -30,31 +30,31 @@ class Player;
 
 class BaseGui
 {
-    	public:
-       		BaseGui();
-       		~BaseGui();
-       		
-  		void SetGuiOffset(const Vec2<float>& gui_offset) { this->gui_offset = gui_offset; };
-  		void SetBox(const Box& box) { this->box = box; }
-  		void SetPlayer(Player* player) { this->player = player; };
-  		  		
-  		const Vec2<float>& GetGuiOffset() const { return gui_offset; };
-  		const Box& GetBox() const { return box; }
-       		BaseButton* GetButton(int) const;  
-       		  		
-  		bool UpdateMouseInteractionWithButtons(const MouseData&);
-  		
-       		void RenderButtons() const;
-       		void RenderFocusedButtonInfo(const MouseData&) const;  
-              	
-       	protected:
-       		Box box;
-      		Player* player;
-       		int button_w, button_h;
-       		
-       		std::map<int, BaseButton*> button_map;
-       	
-       	private:       				
+	public:
+		BaseGui();
+		~BaseGui();
+		
+		void SetGuiOffset(const Vec2<float>& gui_offset) { this->gui_offset = gui_offset; };
+		void SetBox(const Box& box) { this->box = box; }
+		void SetPlayer(Player* player) { this->player = player; };
+			
+		const Vec2<float>& GetGuiOffset() const { return gui_offset; };
+		const Box& GetBox() const { return box; }
+		BaseButton* GetButton(int) const;  
+				
+		bool UpdateMouseInteractionWithButtons(const MouseData&);
+		
+		void RenderButtons() const;
+		void RenderFocusedButtonInfo(const MouseData&) const;  
+		
+	protected:
+		Box box;
+		Player* player;
+		int button_w, button_h;
+		
+		std::map<int, BaseButton*> button_map;
+	
+	private:       				
 		Vec2<float> gui_offset;
 };
 

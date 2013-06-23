@@ -59,54 +59,54 @@ slider_shared(nullptr)
 	int screen_w = Screen::Instance().GetWidth();
 	int screen_h = Screen::Instance().GetHeight();
 	
-        TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
-
+	TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
+	
 	float zpos = -1;
 	float zsize = 1;
 	
 	{
-    	ButtonSingle* angar_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::ANGAR_ID, "angar"); 
-    	Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
-    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);   
-    	Box box(center, size);		
-    	angar_screen_button->SetBox(box);					     
-    	button_map.insert(std::make_pair(GUI::BUTTON::ANGAR_ID, angar_screen_button));
-    	}
-    	
-    	{
-    	ButtonSingle* store_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::STORE_ID, "store");
-    	Vec3<float> center(screen_w - 2 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos); 
-    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
-    	Box box(center, size);		
-    	store_screen_button->SetBox(box);	     
-    	button_map.insert(std::make_pair(GUI::BUTTON::STORE_ID, store_screen_button));
-    	}
-    		
-    	{			        	
-    	ButtonSingle* shop_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::SHOP_ID, "shop");
-    	Vec3<float> center(screen_w - 3 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
-    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
-    	Box box(center, size);		
-    	shop_screen_button->SetBox(box);
-    	button_map.insert(std::make_pair(GUI::BUTTON::SHOP_ID, shop_screen_button));
-    	}
-    	
-    	{				     
-    	ButtonSingle* galaxymap_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::GALAXYMAP_ID, "galaxymap");
-   	Vec3<float> center(screen_w - 4 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos); 
-    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
-    	Box box(center, size);		
-    	galaxymap_screen_button->SetBox(box);
-   	button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP_ID, galaxymap_screen_button));
-    	}
-    	
-    	{				     
-    	ButtonSingle* goverment_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::GOVERMENT_ID, "goverment");
-    	Vec3<float> center(screen_w - 5 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
-    	Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
-    	Box box(center, size);		
-    	goverment_screen_button->SetBox(box);
-   	button_map.insert(std::make_pair(GUI::BUTTON::GOVERMENT_ID, goverment_screen_button));
+		//ButtonSingle* angar_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::ANGAR_ID, "angar"); 
+		//Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
+		//Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);   
+		//Box box(center, size);		
+		//angar_screen_button->SetBox(box);					     
+		//button_map.insert(std::make_pair(GUI::BUTTON::ANGAR_ID, angar_screen_button));
+	}
+	
+	{
+		//ButtonSingle* store_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::STORE_ID, "store");
+		//Vec3<float> center(screen_w - 2 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos); 
+		//Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
+		//Box box(center, size);		
+		//store_screen_button->SetBox(box);	     
+		//button_map.insert(std::make_pair(GUI::BUTTON::STORE_ID, store_screen_button));
+	}
+		
+	{			        	
+		//ButtonSingle* shop_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::SHOP_ID, "shop");
+		//Vec3<float> center(screen_w - 3 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
+		//Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+		//Box box(center, size);		
+		//shop_screen_button->SetBox(box);
+		//button_map.insert(std::make_pair(GUI::BUTTON::SHOP_ID, shop_screen_button));
+	}
+	
+	{				     
+		//ButtonSingle* galaxymap_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::GALAXYMAP_ID, "galaxymap");
+		//Vec3<float> center(screen_w - 4 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos); 
+		//Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+		//Box box(center, size);		
+		//galaxymap_screen_button->SetBox(box);
+		//button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP_ID, galaxymap_screen_button));
+	}
+	
+	{				     
+		//ButtonSingle* goverment_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::GOVERMENT_ID, "goverment");
+		//Vec3<float> center(screen_w - 5 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
+		//Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+		//Box box(center, size);		
+		//goverment_screen_button->SetBox(box);
+		//button_map.insert(std::make_pair(GUI::BUTTON::GOVERMENT_ID, goverment_screen_button));
 	}
 }
 
@@ -326,45 +326,45 @@ void GuiKosmoport::ButtonsAction()
 	   		{
 	   			case GUI::BUTTON::ANGAR_ID: 
 	   			{
-   				      	button->PressEvent();   
-                                        ExitCurrentScreen();
-                                        EnterGuiAngarScreen();
+   				      	//button->PressEvent(player);   
+                                        //ExitCurrentScreen();
+                                        //EnterGuiAngarScreen();
                                         
    					return; break;
 	  	 		}
 
 	   			case GUI::BUTTON::STORE_ID: 
 	   			{
-   				      	button->PressEvent();
-                                        ExitCurrentScreen();
-                                        EnterGuiStoreScreen();
+   				      	//button->PressEvent(player);
+                                        //ExitCurrentScreen();
+                                        //EnterGuiStoreScreen();
                                         
    					return; break;
 	  	 		}
 
 	   			case GUI::BUTTON::SHOP_ID: 
 	   			{
-   				      	button->PressEvent();
-                                        ExitCurrentScreen();
-                                        EnterGuiShopScreen();
+   				      	//button->PressEvent(player);
+                                        //ExitCurrentScreen();
+                                        //EnterGuiShopScreen();
                                         
    					return; break;
 	  	 		}
 
 	   			case GUI::BUTTON::GALAXYMAP_ID: 
 	   			{
-   				      	button->PressEvent();
-                                        ExitCurrentScreen();                                                                                
-                                        EnterGuiGalaxyMapScreen();
+   				      	//button->PressEvent(player);
+                                        //ExitCurrentScreen();                                                                                
+                                        //EnterGuiGalaxyMapScreen();
                                         
    					return; break;
 	  	 		}
 
 	   			case GUI::BUTTON::GOVERMENT_ID: 
 	   			{
-   				      	button->PressEvent();
-                                        ExitCurrentScreen();
-                                        EnterGuiGovermentScreen();
+   				      	//button->PressEvent(player);
+                                        //ExitCurrentScreen();
+                                        //EnterGuiGovermentScreen();
                                         
    					return; break;
 	  	 		}

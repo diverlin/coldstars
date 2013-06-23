@@ -16,6 +16,7 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <iostream>
 #include "resources/init.hpp"
 
 #include "builder/world/GalaxyBuilder.hpp"
@@ -42,11 +43,12 @@
 #include "struct/GalaxyDescription.hpp"
 #include "docking/BaseLand.hpp"
 
-#include <iostream>
-
 #include "run_scenario/NormalRunScenario.hpp"
 #include "run_scenario/TestParticlesRunScenario.hpp"
 #include "run_scenario/TestTextRunScenario.hpp"
+
+#include "gui/ButtonTrigger.hpp"
+#include "gui/GuiActions.hpp"
 
 enum { NORMAL_RUNSCENARIO, TEST_PARTICLES_RUNSCENARIO, TEST_TEXT_RUNSCENARIO };
 
@@ -70,10 +72,19 @@ int main()
 	
 	Galaxy* galaxy = player->GetNpc()->GetVehicle()->GetStarSystem()->GetSector()->GetGalaxy();       
         
-        player->GetNpc()->GetVehicle()->SetGodMode(true);
-        //player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
+	player->GetNpc()->GetVehicle()->SetGodMode(true);
+	//player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
 
 	//Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
+	
+	/** */
+	ButtonTrigger* button = new ButtonTrigger(/*subtype_id=*/1, /*info*/"info", /*pAction=*/GuiActions::Test, /*textureOb*/NULL);
+	button->PressEvent(player);
+	button->PressEvent(player);
+
+	ButtonTrigger* button2 = new ButtonTrigger(/*subtype_id=*/2, /*info*/"info", /*pAction=*/GuiActions::Test2, /*textureOb*/NULL);
+	button2->PressEvent(player);
+	/** */
 	
 	// GAME LOOP
 	while (Screen::Instance().GetWindow().isOpen())

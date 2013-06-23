@@ -1204,102 +1204,96 @@ void Player::ResolveDataUniquePlayer()
 
 
 
-
-
-
-
-
-
 bool isObjectWithinRadarRange(BaseParticleSystem* effect, Vehicle* vehicle)
 {
-        float dist = distanceBetween(vehicle->GetCenter(), effect->GetCenter());
-        if (dist < vehicle->GetProperties().radar)
-        {
-               	return true;
-        }
-        
-        return false;
+	float dist = distanceBetween(vehicle->GetCenter(), effect->GetCenter());
+	if (dist < vehicle->GetProperties().radar)
+	{
+		return true;
+	}
+	
+	return false;
 }
 
 
 
 bool isObjectOnScreen(const Vec3<float>& center, const Vec3<float>& size)
 {      
-        if (center.x < (Screen::Instance().GetRect().GetBottomLeft().x - size.x))
-                return false;
-        if (center.x > (Screen::Instance().GetRect().GetTopRight().x   + size.x))
-                return false;
-        if (center.y < (Screen::Instance().GetRect().GetBottomLeft().y - size.y))
-                return false;
-        if (center.y > (Screen::Instance().GetRect().GetTopRight().y   + size.y))
-                return false;
-
-        return true;
+	if (center.x < (Screen::Instance().GetRect().GetBottomLeft().x - size.x))
+		return false;
+	if (center.x > (Screen::Instance().GetRect().GetTopRight().x   + size.x))
+		return false;
+	if (center.y < (Screen::Instance().GetRect().GetBottomLeft().y - size.y))
+		return false;
+	if (center.y > (Screen::Instance().GetRect().GetTopRight().y   + size.y))
+		return false;
+	
+	return true;
 }
 
 bool isObjectOnScreen(const Vec2<float>& ob_center, float sizeInPixels)
 {       
-        if (ob_center.x < (Screen::Instance().GetRect().GetBottomLeft().x - sizeInPixels))
-                return false;
-        if (ob_center.x > (Screen::Instance().GetRect().GetTopRight().x + sizeInPixels))
-                return false;
-        if (ob_center.y < (Screen::Instance().GetRect().GetBottomLeft().y - sizeInPixels))
-                return false;
-        if (ob_center.y > (Screen::Instance().GetRect().GetTopRight().y + sizeInPixels))
-                return false;
-
-        return true;
+	if (ob_center.x < (Screen::Instance().GetRect().GetBottomLeft().x - sizeInPixels))
+		return false;
+	if (ob_center.x > (Screen::Instance().GetRect().GetTopRight().x + sizeInPixels))
+		return false;
+	if (ob_center.y < (Screen::Instance().GetRect().GetBottomLeft().y - sizeInPixels))
+		return false;
+	if (ob_center.y > (Screen::Instance().GetRect().GetTopRight().y + sizeInPixels))
+		return false;
+	
+	return true;
 }
 
 bool isPointOnScreen(const Vec2<float>& p)
 {       
-        if (p.x < (Screen::Instance().GetRect().GetBottomLeft().x))
-                return false;
-        if (p.x > (Screen::Instance().GetRect().GetTopRight().x))
-                return false;
-        if (p.y < (Screen::Instance().GetRect().GetBottomLeft().y))
-                return false;
-        if (p.y > (Screen::Instance().GetRect().GetTopRight().y))
-                return false;
-
-        return true;
+	if (p.x < (Screen::Instance().GetRect().GetBottomLeft().x))
+		return false;
+	if (p.x > (Screen::Instance().GetRect().GetTopRight().x))
+		return false;
+	if (p.y < (Screen::Instance().GetRect().GetBottomLeft().y))
+		return false;
+	if (p.y > (Screen::Instance().GetRect().GetTopRight().y))
+		return false;
+	
+	return true;
 }
 
 bool isObjectWithinRadarRange(ShockWaveEffect* effect, Vehicle* vehicle)
 {
-        float dist = distanceBetween(vehicle->GetCenter(), effect->GetCenter());
-        if (dist < vehicle->GetProperties().radar)
-        {
-               	return true;
-        }
-        
-        return false;
+	float dist = distanceBetween(vehicle->GetCenter(), effect->GetCenter());
+	if (dist < vehicle->GetProperties().radar)
+	{
+		return true;
+	}
+	
+	return false;
 }
 
 bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
 {
-        float dist = distanceBetween(vehicle->GetCenter(), effect->GetStartPos());
-        if (dist < vehicle->GetProperties().radar)
-        {
-               	return true;
-        }
-        
-        dist = distanceBetween(vehicle->GetCenter(), effect->GetEndPos());
-        if (dist < vehicle->GetProperties().radar)
-        {
-               	return true;
-        }
-        
-        return false;
+	float dist = distanceBetween(vehicle->GetCenter(), effect->GetStartPos());
+	if (dist < vehicle->GetProperties().radar)
+	{
+		return true;
+	}
+	
+	dist = distanceBetween(vehicle->GetCenter(), effect->GetEndPos());
+	if (dist < vehicle->GetProperties().radar)
+	{
+		return true;
+	}
+	
+	return false;
 }
 
 bool isObjectWithinRadarRange(VerticalFlowText* effect, Vehicle* vehicle)
 {
-        float dist = distanceBetween(vehicle->GetCenter(), effect->GetPos());
-        if (dist < vehicle->GetProperties().radar)
-        {
-               	return true;
-        }
-        
-        return false;
+	float dist = distanceBetween(vehicle->GetCenter(), effect->GetPos());
+	if (dist < vehicle->GetProperties().radar)
+	{
+		return true;
+	}
+	
+	return false;
 }

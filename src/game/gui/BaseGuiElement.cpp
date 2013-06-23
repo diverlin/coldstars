@@ -43,17 +43,17 @@ bool BaseGuiElement::UpdateMouseInteraction(const MouseData& data_mouse)
 	{
 		BaseGuiElement gui_element = **it;
 		gui_element.Update();
-        	if (gui_element.GetBox().CheckInteraction(data_mouse.mx - center.x, data_mouse.my - center.y))
-        	{
-           		if (data_mouse.left_click == true)
-           		{
-       				gui_element.PressEvent();
-           		}
-           		return true;
-        	}
-     	}
+		if (gui_element.GetBox().CheckInteraction(data_mouse.mx - center.x, data_mouse.my - center.y))
+		{
+			if (data_mouse.left_click == true)
+			{
+				//gui_element.PressEvent();
+			}
+			return true;
+		}
+	}
      	
-     	return false;
+	return false;
 }
 		       		
 void BaseGuiElement::Render() const
@@ -65,9 +65,9 @@ void BaseGuiElement::Render() const
 		{
 			BaseGuiElement gui_element = **it;
 			gui_element.Render();
-       		}
-       	}
-       	glPopMatrix();
+		}
+	}
+	glPopMatrix();
 }
 
 void BaseGuiElement::RenderInfo(const MouseData& data_mouse) const
@@ -76,10 +76,10 @@ void BaseGuiElement::RenderInfo(const MouseData& data_mouse) const
 	{	
 		BaseGuiElement gui_element = **it;
 		if (gui_element.GetBox().CheckInteraction(data_mouse.mx - center.x, data_mouse.my - center.y))
-                {
-        		//gui_element.RenderInfo(center.x, center.y);
-        		return; break;
-        	}
-        }
+		{
+			//gui_element.RenderInfo(center.x, center.y);
+			return; break;
+		}
+	}
 }
 
