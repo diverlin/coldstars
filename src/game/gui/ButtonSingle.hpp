@@ -23,15 +23,15 @@
 
 class ButtonSingle : public BaseButton
 {
-    	public:
-       		ButtonSingle(TextureOb* textureOb, int subtype_id, const std::string& info):BaseButton(textureOb, subtype_id, info) {};
-       		       
-       		virtual ~ButtonSingle() {};  
+	public:
+		ButtonSingle(int subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb):BaseButton(subtype_id, info, pAction, textureOb) {};
+			   
+		virtual ~ButtonSingle() {};  
 
-		virtual void PressEvent();
-       		virtual void Update();
+		virtual void PressEvent(Player*) final;
+		virtual void Update() final;
         
-        private:
+	private:
 
 };
 

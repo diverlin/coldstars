@@ -16,22 +16,22 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BUTTONTRIGGER_H
-#define BUTTONTRIGGER_H
+#ifndef ButtonTrigger_H
+#define ButtonTrigger_H
 
 #include "BaseButton.hpp"
 
 class ButtonTrigger : public BaseButton
 {
-    	public:
-       		ButtonTrigger(TextureOb* textureOb, int subtype_id, const std::string& info):BaseButton(textureOb, subtype_id, info) {};
+	public:
+       		ButtonTrigger(int subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb):BaseButton(subtype_id, info, pAction, textureOb) {};
        		       
-       		virtual ~ButtonTrigger() {};  
+       		virtual ~ButtonTrigger() final {};  
 
-		virtual void PressEvent();
-       		virtual void Update();
+			virtual void PressEvent(Player*) final;
+       		virtual void Update() final;
         
-        private:
+	private:
 };
 
 #endif

@@ -32,56 +32,56 @@ class Slider;
 
 class GuiSpace : public BaseGui
 {
-    	public:
-      		GuiSpace();
-       		~GuiSpace();
-
-                void SetPlayer(Player*);
-
-                bool GetInitDone() const { return init_done; };
-                
+	public:
+		GuiSpace();
+		~GuiSpace();
+		
+		void SetPlayer(Player*);
+		
+		bool GetInitDone() const { return init_done; };
+		
 		GuiRadar& GetGuiRadar() { return gui_radar; };
-                GuiVehicle2& GetGuiVehiclePlayer() { return gui_vehicle_player; };
+		GuiVehicle2& GetGuiVehiclePlayer() { return gui_vehicle_player; };
 		GuiVehicle2& GetGuiVehicleTarget() { return gui_vehicle_target; };
-                
-                void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
-                void UnbindSharedGuis();
-                
+		
+		void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
+		void UnbindSharedGuis();
+		
 		bool Update(const MouseData&);
 		void Render(const MouseData&);
-                
-       		void Resize(int, int);
-       		void ButtonsAction(Player*) const;
-     		
-       		void RenderText(const Vec2<float>&) const;
-       		void RenderBar() const;
-                
-                void EnterGalaxyMap();
-                void ExitGalaxyMap();
-                
-                void EnterGuiScan();
-                void ExitGuiScan();
-       		
-       	private:
-                bool init_done;
-                bool show_gui_radar;
-                        
-       		Rect rect_bar_top;
-       		Rect rect_bar_bottom;
-       		
-       		TextureOb* textureOb_bar_top;
-       		TextureOb* textureOb_bar_bottom;
-                
-                GuiVehicle2 	gui_vehicle_player;
-      		GuiVehicle2 	gui_vehicle_target;
-       		GuiRadar 	gui_radar;
-                
-                GuiGalaxyMap* gui_galaxymap_shared;  
-                GuiVehicle*   gui_vehicle_scan_shared;
-                GuiSkills*    gui_skills_shared;
-                Slider*       slider_shared;
-                
-     		bool UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData&);  
+		
+		void Resize(int, int);
+		void ButtonsAction(Player*) const;
+		
+		void RenderText(const Vec2<float>&) const;
+		void RenderBar() const;
+		
+		void EnterGalaxyMap();
+		void ExitGalaxyMap();
+		
+		void EnterGuiScan();
+		void ExitGuiScan();
+		
+	private:
+		bool init_done;
+		bool show_gui_radar;
+				
+		Rect rect_bar_top;
+		Rect rect_bar_bottom;
+		
+		TextureOb* textureOb_bar_top;
+		TextureOb* textureOb_bar_bottom;
+		
+		GuiVehicle2 	gui_vehicle_player;
+		GuiVehicle2 	gui_vehicle_target;
+		GuiRadar 	gui_radar;
+		
+		GuiGalaxyMap* gui_galaxymap_shared;  
+		GuiVehicle*   gui_vehicle_scan_shared;
+		GuiSkills*    gui_skills_shared;
+		Slider*       slider_shared;
+		
+		bool UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData&);  
 };
 
 #endif

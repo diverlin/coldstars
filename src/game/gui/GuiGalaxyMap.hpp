@@ -26,28 +26,28 @@ class Galaxy;
 
 class GuiGalaxyMap : public BaseGui
 {
-  	public:
-     		GuiGalaxyMap();
-     		~GuiGalaxyMap();
-                
-                void BindGalaxy(Galaxy* galaxy);
-                void UnbindGalaxy();
-                   
-                Galaxy* GetGalaxy() const { return galaxy; };
-                   
-     		bool UpdateMouseInteraction(const MouseData&);
-     		void Render();
+	public:
+		GuiGalaxyMap();
+		~GuiGalaxyMap();
+		
+		void BindGalaxy(Galaxy* galaxy);
+		void UnbindGalaxy();
+		   
+		Galaxy* GetGalaxy() const { return galaxy; };
+		   
+		bool UpdateMouseInteraction(const MouseData&);
+		void Render();
 
-     	private:
-     		float scale_parsec2screencoord;
-     		
-                Galaxy* galaxy;
-                
-     		Rect rect;
-     		
-     		TextureOb* texOb_background;
-     		
-     		PathVisual visual_hyperjump_range;
+	private:
+		float scale_parsec2screencoord;
+		
+		Galaxy* galaxy;
+		
+		Rect rect;
+		
+		TextureOb* texOb_background;
+		
+		PathVisual visual_hyperjump_range;
 		PathVisual visual_hyperjump_path;
 };
      		

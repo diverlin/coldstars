@@ -40,14 +40,14 @@ Slider::Slider()
 	textureOb = GuiTextureObCollector::Instance().text_background;
 	textureOb_scale = TextureManager::Instance().GetRandomTextureOb(TEXTURE::LAZER_EFFECT_ID);
 	
-	BaseButton* slide_button = new BaseButton(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::SLIDE_ID, "slide");  
-     	button_map.insert(std::make_pair(GUI::BUTTON::SLIDE_ID, slide_button));
-
-	ButtonTrigger* accept_button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_green, GUI::BUTTON::ACCEPT_ID, "accept");  
-     	button_map.insert(std::make_pair(GUI::BUTTON::ACCEPT_ID, accept_button));
-     	
-	ButtonTrigger* decline_button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::DECLINE_ID, "decline");  
-     	button_map.insert(std::make_pair(GUI::BUTTON::DECLINE_ID, decline_button));
+	//BaseButton* slide_button = new BaseButton(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::SLIDE_ID, "slide");  
+	//button_map.insert(std::make_pair(GUI::BUTTON::SLIDE_ID, slide_button));
+	
+	//ButtonTrigger* accept_button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_green, GUI::BUTTON::ACCEPT_ID, "accept");  
+	//button_map.insert(std::make_pair(GUI::BUTTON::ACCEPT_ID, accept_button));
+	
+	//ButtonTrigger* decline_button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::DECLINE_ID, "decline");  
+	//button_map.insert(std::make_pair(GUI::BUTTON::DECLINE_ID, decline_button));
 }
 
 Slider::~Slider()

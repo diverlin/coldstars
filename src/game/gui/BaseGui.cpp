@@ -18,6 +18,7 @@
 
 #include "BaseGui.hpp"
 #include "MouseData.hpp"
+#include "../render/Render.hpp"
 
 BaseGui::BaseGui():
 player(nullptr)
@@ -49,17 +50,17 @@ bool BaseGui::UpdateMouseInteractionWithButtons(const MouseData& data_mouse)
 	for (std::map<int, BaseButton*>::iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
 		iterator->second->Update();
-        	if (iterator->second->GetBox().CheckInteraction(data_mouse.mx - gui_offset.x, data_mouse.my - gui_offset.y))
-        	{
-           		if (data_mouse.left_click == true)
-           		{
-       				iterator->second->PressEvent();
-           		}
-           		return true;
-        	}
-     	}
-     	
-     	return false;
+		if (iterator->second->GetBox().CheckInteraction(data_mouse.mx - gui_offset.x, data_mouse.my - gui_offset.y))
+		{
+			if (data_mouse.left_click == true)
+			{
+				iterator->second->PressEvent(player);
+			}
+			return true;
+		}
+	}
+	
+	return false;
 }
 		       		
 void BaseGui::RenderButtons() const
@@ -70,20 +71,20 @@ void BaseGui::RenderButtons() const
 		for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 		{
 			iterator->second->Render();
-       		}
-       	}
-       	glPopMatrix();
+		}
+	}
+	glPopMatrix();
 }
 
 void BaseGui::RenderFocusedButtonInfo(const MouseData& data_mouse) const
 {
 	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{	
-                if (iterator->second->GetBox().CheckInteraction(data_mouse.mx - gui_offset.x, data_mouse.my - gui_offset.y))
-                {
-        		iterator->second->RenderInfo(gui_offset.x, gui_offset.y);
-        		return; break;
-        	}
-        }
+		if (iterator->second->GetBox().CheckInteraction(data_mouse.mx - gui_offset.x, data_mouse.my - gui_offset.y))
+		{
+			iterator->second->RenderInfo(gui_offset.x, gui_offset.y);
+			return; break;
+		}
+	}
 }
 

@@ -55,35 +55,35 @@ void GuiVehicle2::CreateFunctionalItemSlotsCircleGeometry(Vehicle* vehicle, floa
 {        
 	Reset();
 	
-        for (unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
-        {	
-        	int slot_subtype_id = vehicle->slot_total_vec[i]->GetSubTypeId();
-                if ( (slot_subtype_id != ENTITY::CARGO_SLOT_ID) and (slot_subtype_id != ENTITY::ARTEFACT_SLOT_ID) )
-        	{  
-        		int button_subtype_id = slot_subtype_id;
-        		if (slot_subtype_id == ENTITY::WEAPON_SLOT_ID)
-        		{
-        			button_subtype_id = vehicle->slot_total_vec[i]->GetSubSubTypeId();
-        		}
-			           			  
+	for (unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
+	{	
+		int slot_subtype_id = vehicle->slot_total_vec[i]->GetSubTypeId();
+		if ( (slot_subtype_id != ENTITY::CARGO_SLOT_ID) and (slot_subtype_id != ENTITY::ARTEFACT_SLOT_ID) )
+		{  
+			int button_subtype_id = slot_subtype_id;
+			if (slot_subtype_id == ENTITY::WEAPON_SLOT_ID)
+			{
+				button_subtype_id = vehicle->slot_total_vec[i]->GetSubSubTypeId();
+			}
+						  
 			TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;
-          		ButtonTrigger* button = new ButtonTrigger(textureOb, button_subtype_id, getTypeStr(button_subtype_id));  
-			button_slot_vec.push_back(GuiPair<BaseButton*, ItemSlot*>(button, vehicle->slot_total_vec[i]));
-			button_map.insert(std::make_pair(button->GetSubTypeId(), button));
+			//ButtonTrigger* button = new ButtonTrigger(textureOb, button_subtype_id, getTypeStr(button_subtype_id));  
+			//button_slot_vec.push_back(GuiPair<BaseButton*, ItemSlot*>(button, vehicle->slot_total_vec[i]));
+			//button_map.insert(std::make_pair(button->GetSubTypeId(), button));
 		}
-        }    	
+	}    	
         
-        int angle = 0;
-        for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+	int angle = 0;
+	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
 	{
-        	Vec2<float> center = getVec2f(160, angle);
-        	float zpos = -1;
-        	float zsize = 1;
-        	Vec3<float> center3(center.x, center.y, zpos);
+		Vec2<float> center = getVec2f(160, angle);
+		float zpos = -1;
+		float zsize = 1;
+		Vec3<float> center3(center.x, center.y, zpos);
 		Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
 		Box box(center3*scale, size*scale);
-   		iterator->second->SetBox(box);
-
+		iterator->second->SetBox(box);
+		
 		//angle += 360/button_map.size();
 		angle += 20;
 	}
@@ -148,10 +148,10 @@ ItemSlot* GuiVehicle2::GetInreactedItemSlot(const MouseData& data_mouse)
 			{
 				return button_slot_vec[i].second;
 			}
-       		}
-        }  
+		}
+	}  
         
-        return nullptr;                     
+	return nullptr;                     
 }
 
 void GuiVehicle2::UpdateOffset()
