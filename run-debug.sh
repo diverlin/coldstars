@@ -1,4 +1,4 @@
 #!/bin/bash 
 cd bin
-gdb run < gdb-actions
+gdb run < ../gdb-actions
 

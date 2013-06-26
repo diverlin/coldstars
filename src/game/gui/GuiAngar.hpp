@@ -19,14 +19,14 @@
 #ifndef GUIANGAR_H
 #define GUIANGAR_H
 
-#include "BaseGui.hpp"
+#include "BaseGuiElement.hpp"
 class Angar;
 class ItemSlot;
 class VehicleSlot;
 #include "GuiPair.hpp"
 #include "../common/rect.hpp"
 
-class GuiAngar : public BaseGui
+class GuiAngar : public BaseGuiElement
 {
     	public:
        		GuiAngar();

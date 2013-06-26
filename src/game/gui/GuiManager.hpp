@@ -28,43 +28,49 @@ class GuiGalaxyMap;
 
 class GuiManager
 {
-   	public:
-      		GuiManager();
-      		~GuiManager();
-
+	public:
+		static GuiManager& Instance();
+		~GuiManager();
+		
 		void SetPlayer(Player*);
-
-                GuiKosmoport& GetGuiKosmoport() { return gui_kosmoport; };
-                GuiSpace& GetGuiSpace() { return gui_space; };
-                
+		
+		GuiKosmoport& GetGuiKosmoport() { return gui_kosmoport; };
+		GuiSpace& GetGuiSpace() { return gui_space; };
+		
 		GuiVehicle* GetGuiVehicleScan() const { return gui_vehicle_scan; };
-                GuiGalaxyMap* GetGuiGalaxyMap() const { return gui_galaxymap; };
-
-                bool RunSessionInSpace(const MouseData&);                                
-                bool RunSessionInKosmoport(const MouseData&);
+		GuiGalaxyMap* GetGuiGalaxyMap() const { return gui_galaxymap; };
+				
+		bool RunSessionInSpace(const MouseData&);                                
+		bool RunSessionInKosmoport(const MouseData&);
 		bool RunSessionInNatureLand(const MouseData&);
-                
-                void EnterGuiKosmoport();
-                void ExitGuiKosmoport();                
-               
-                void EnterGuiSpace();
-                void ExitGuiSpace(); 
-                
-                bool UpdateMouseInteractionWithScanVehicle(const MouseData&);     		
-     		void RenderScanVehicle(const MouseData&, bool show_skill = true) const;  
-                                
-      	private:
-      		Player* player;
-                
-      		GuiKosmoport 	gui_kosmoport;
-      		GuiSpace     	gui_space;
-       		GuiNatureLand 	gui_natureland;
-
-                // shared guis
-      		GuiVehicle* 	gui_vehicle_scan;
-                GuiSkills*   	gui_skills;
-                GuiGalaxyMap*   gui_galaxymap;
-       		Slider*         slider;  
+		
+		void EnterGuiKosmoport();
+		void ExitGuiKosmoport();                
+		
+		void EnterGuiSpace();
+		void ExitGuiSpace(); 
+		
+		bool UpdateMouseInteractionWithScanVehicle(const MouseData&);     		
+		void RenderScanVehicle(const MouseData&, bool show_skill = true) const;  
+					
+	private:
+		GuiManager();
+		GuiManager(const GuiManager&) = delete;
+		GuiManager& operator=(const GuiManager&) = delete;
+		
+		std::vector<int> command_vec;
+		
+		Player* player;
+		
+		GuiKosmoport 	gui_kosmoport;
+		GuiSpace     	gui_space;
+		GuiNatureLand 	gui_natureland;
+		
+		// shared guis
+		GuiVehicle* 	gui_vehicle_scan;
+		GuiSkills*   	gui_skills;
+		GuiGalaxyMap*   gui_galaxymap;
+		Slider*         slider;  
 };
 
 

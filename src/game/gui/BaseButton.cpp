@@ -43,7 +43,7 @@ BaseButton::~BaseButton()
 	delete animation_scale;
 }
 
-
+/* virtual */
 void BaseButton::Reset()
 {
 	pressed = false;

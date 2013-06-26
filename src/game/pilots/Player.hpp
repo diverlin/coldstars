@@ -21,15 +21,18 @@
 
 #include <vector>
 
-#include "../gui/GuiManager.hpp"
+#include "../common/Base.hpp"
 #include "../gui/Cursor.hpp"
 #include "../pilots/Show.hpp"
 class TurnTimer;
 
+class StarSystem;
 class Star;
 class Planet;
 class BlackHole;
 class Asteroid;
+class Vehicle;
+class Npc;
 class SpaceStation;
 class Satellite;
 class Ship;
@@ -58,8 +61,7 @@ class Player : public Base
 		virtual void PutChildsToGarbage() const {};
 		
 		Show& GetShow() { return show; };
-		GuiManager& GetGuiManager() { return gui_manager; };
-		          	
+				          	
 		Npc* GetNpc() const { return npc; }
 		Cursor& GetCursor() { return cursor; }
 		
@@ -118,9 +120,7 @@ class Player : public Base
 		std::vector<BaseParticleSystem*> visible_effect_PARTICLESYSTEM_vec;  		
 		std::vector<VerticalFlowText*>   visible_text_DAMAGE_vec;
 		//  
-		
-		GuiManager gui_manager;    
-		
+	
 		void RenderInSpace(StarSystem*, bool, bool, bool); 
 			void RenderInSpace_NEW(StarSystem*);
 			void RenderInSpace_OLD(StarSystem*);

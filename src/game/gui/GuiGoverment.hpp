@@ -19,10 +19,10 @@
 #ifndef GUIGOVERMENT_H
 #define GUIGOVERMENT_H
 
-#include "BaseGui.hpp"
+#include "BaseGuiElement.hpp"
 class Goverment;
 
-class GuiGoverment : public BaseGui
+class GuiGoverment : public BaseGuiElement
 {
     	public:
        		GuiGoverment();

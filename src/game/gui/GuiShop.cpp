@@ -105,43 +105,43 @@ void GuiShop::UnbindShop()
         
 void GuiShop::UpdateLables() const
 {
-	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+	for (auto &gui_element : child_vec)
 	{	
-		switch(iterator->second->GetSubTypeId())
+		switch(gui_element->GetSubTypeId())
 		{
 			case GUI::BUTTON::MINERALS_ID:
 			{
-	                	iterator->second->SetLabel("mineral:" + int2str(shop->GetMineralsAmount()) + " price:" + int2str(shop->GetMineralsPrice()));	                
+	                	gui_element->SetLabel("mineral:" + int2str(shop->GetMineralsAmount()) + " price:" + int2str(shop->GetMineralsPrice()));	                
 	                	break;
         		}
         	
 			case GUI::BUTTON::FOOD_ID:
 			{
-	                	iterator->second->SetLabel("food:" + int2str(shop->GetFoodAmount()) + " price:" + int2str(shop->GetFoodPrice()));	                
+	                	gui_element->SetLabel("food:" + int2str(shop->GetFoodAmount()) + " price:" + int2str(shop->GetFoodPrice()));	                
 	                	break;
         		}
 
 			case GUI::BUTTON::MEDICINE_ID:
 			{
-	                	iterator->second->SetLabel("medicine:" + int2str(shop->GetMedicineAmount()) + " price:" + int2str(shop->GetMedicinePrice()));	                
+	                	gui_element->SetLabel("medicine:" + int2str(shop->GetMedicineAmount()) + " price:" + int2str(shop->GetMedicinePrice()));	                
 	                	break;
         		}
 
 			case GUI::BUTTON::MILITARY_ID:
 			{
-	                	iterator->second->SetLabel("military:" + int2str(shop->GetMilitaryAmount()) + " price:" + int2str(shop->GetMilitaryPrice()));	                
+	                	gui_element->SetLabel("military:" + int2str(shop->GetMilitaryAmount()) + " price:" + int2str(shop->GetMilitaryPrice()));	                
 	                	break;
         		}
 
 			case GUI::BUTTON::DRUG_ID:
 			{
-	                	iterator->second->SetLabel("drug:" + int2str(shop->GetDrugAmount()) + " price:" + int2str(shop->GetDrugPrice()));	                
+	                	gui_element->SetLabel("drug:" + int2str(shop->GetDrugAmount()) + " price:" + int2str(shop->GetDrugPrice()));	                
 	                	break;
         		}
         		
         		case GUI::BUTTON::EXCLUSIVE_ID:
 			{
-	                	iterator->second->SetLabel("exclusive:" + int2str(shop->GetExclusiveAmount()) + " price:" + int2str(shop->GetExclusivePrice()));	                
+	                	gui_element->SetLabel("exclusive:" + int2str(shop->GetExclusiveAmount()) + " price:" + int2str(shop->GetExclusivePrice()));	                
 	                	break;
         		}
         	}
@@ -150,22 +150,22 @@ void GuiShop::UpdateLables() const
         
 void GuiShop::ButtonsAction(Slider& slider)
 {
-	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
-	{
-		BaseButton* button = iterator->second;
-		if (button->GetPressed() == true)
-		{
-		       	slider.SetSubTypeId(button->GetSubTypeId());
-        		switch(button->GetSubTypeId())
-        		{
-        			case GUI::BUTTON::MINERALS_ID: 		{ slider.Configure(shop->GetMineralsAmount(), shop->GetMineralsPrice()); break; }
-        			case GUI::BUTTON::FOOD_ID: 		{ slider.Configure(shop->GetFoodAmount(), shop->GetFoodPrice()); break; }
-        			case GUI::BUTTON::MEDICINE_ID: 		{ slider.Configure(shop->GetMedicineAmount(), shop->GetMedicinePrice()); break; }
-        			case GUI::BUTTON::MILITARY_ID: 		{ slider.Configure(shop->GetMilitaryAmount(), shop->GetMilitaryPrice()); break; }
-        			case GUI::BUTTON::DRUG_ID: 		{ slider.Configure(shop->GetDrugAmount(), shop->GetDrugPrice()); break; }
-        			case GUI::BUTTON::EXCLUSIVE_ID: 	{ slider.Configure(shop->GetExclusiveAmount(), shop->GetExclusivePrice()); break; }
-           		}  		   	
-		}
-	}
+	//for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+	//{
+		//BaseButton* button = iterator->second;
+		//if (button->GetPressed() == true)
+		//{
+		       	//slider.SetSubTypeId(button->GetSubTypeId());
+        		//switch(button->GetSubTypeId())
+        		//{
+        			//case GUI::BUTTON::MINERALS_ID: 		{ slider.Configure(shop->GetMineralsAmount(), shop->GetMineralsPrice()); break; }
+        			//case GUI::BUTTON::FOOD_ID: 		{ slider.Configure(shop->GetFoodAmount(), shop->GetFoodPrice()); break; }
+        			//case GUI::BUTTON::MEDICINE_ID: 		{ slider.Configure(shop->GetMedicineAmount(), shop->GetMedicinePrice()); break; }
+        			//case GUI::BUTTON::MILITARY_ID: 		{ slider.Configure(shop->GetMilitaryAmount(), shop->GetMilitaryPrice()); break; }
+        			//case GUI::BUTTON::DRUG_ID: 		{ slider.Configure(shop->GetDrugAmount(), shop->GetDrugPrice()); break; }
+        			//case GUI::BUTTON::EXCLUSIVE_ID: 	{ slider.Configure(shop->GetExclusiveAmount(), shop->GetExclusivePrice()); break; }
+           		//}  		   	
+		//}
+	//}
 }	
 

@@ -19,14 +19,14 @@
 #ifndef GUISTORE_H
 #define GUISTORE_H
 
-#include "BaseGui.hpp"
+#include "BaseGuiElement.hpp"
 #include "GuiPair.hpp"
 class Store;
 class ItemSlot;
 class VehicleSlot;
 #include "../common/rect.hpp"
 
-class GuiStore : public BaseGui
+class GuiStore : public BaseGuiElement
 {
         public:
                 GuiStore();                      

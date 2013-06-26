@@ -20,10 +20,10 @@
 #ifndef GUIITEMSLOT_H
 #define GUIITEMSLOT_H
 
-#include "BaseGui.hpp"
+#include "BaseGuiElement.hpp"
 class ItemSlot;
 
-class GuiItemSlot : public BaseGui
+class GuiItemSlot : public BaseGuiElement
 {
     	public:
        		GuiItemSlot(ItemSlot*, const Box&);

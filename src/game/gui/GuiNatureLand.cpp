@@ -26,6 +26,7 @@
 #include "../common/rand.hpp"
 
 #include "../pilots/Npc.hpp"
+#include "../spaceobjects/Vehicle.hpp"
 //#include "../builder/ItemSlotBuilder.hpp"
 
 #include "../docking/NatureLand.hpp"
@@ -76,24 +77,22 @@ void GuiNatureLand::BindNatureLand(NatureLand* natureland)
 
 void GuiNatureLand::ButtonsAction() const     
 {
-	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
-	{
-		BaseButton* button = iterator->second;
-		if (button->GetPressed() == true)
-		{
-			switch(button->GetSubTypeId())	   		
-			{
-	   			
-	   			case GUI::BUTTON::GETLAUNCH_ID:
-	   			{      					
-       					player->GetNpc()->GetVehicle()->LaunchingEvent();
-       		   			return; 
+	//for (auto &button : child_vec)
+	//{
+		//if (button->GetPressed() == true)
+		//{
+			//switch(button->GetSubTypeId())	   		
+			//{	   			
+	   			//case GUI::BUTTON::GETLAUNCH_ID:
+	   			//{      					
+       					//player->GetNpc()->GetVehicle()->LaunchingEvent();
+       		   			//return; 
        		   				      		   			
-       		   			break;
-       		   		}
-       			}
-        	}
-        }
+       		   			//break;
+       		   		//}
+       			//}
+        	//}
+        //}
 }
 
 bool GuiNatureLand::UpdateMouseInteractionWithEquipedItemSlots(const MouseData& data_mouse)
