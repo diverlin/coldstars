@@ -17,8 +17,8 @@
 */
 
 
-#ifndef BaseButton_HPP
-#define BaseButton_HPP
+#ifndef BASEBUTTON_HPP
+#define BASEBUTTON_HPP
 
 #include "BaseGuiElement.hpp"
 class AnimationEffect2D;
@@ -40,15 +40,12 @@ class BaseButton : public BaseGuiElement
        		void LockOn();
        		void LockOff();
 
-			void Reset();
+			virtual void Reset();
 		
        		void RenderInfo(int offset_x = 0, int offset_y = 0) const;        		
        		void Render(int offset_x = 0, int offset_y = 0) const;   
        		        
-	protected:        	
-        	bool lock;
-        	bool pressed;
-        	
+	protected:      	
         	float alpha;        	        	
 
 			TextureOb* textureOb_additional;

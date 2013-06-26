@@ -16,35 +16,14 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUINATURELAND_H
-#define GUINATURELAND_H
+#include "BarFlat.hpp"
 
-#include "BaseGuiElement.hpp"
-class NatureLand;
-class ItemSlot;
-#include "GuiPair.hpp"
-#include "../common/rect.hpp"
-
-class GuiNatureLand : public BaseGuiElement
-{
-    	public:
-       		GuiNatureLand();
-       		~GuiNatureLand();
-		
-		void BindNatureLand(NatureLand*);
-		
-       		bool UpdateMouseInteractionWithEquipedItemSlots(const MouseData&);
-
-       		void ButtonsAction() const;   
-         	
-         	void RenderBackground(const Rect& rect) const;
-                void RenderEquipedItemSlots() const;
-         	                
-       	private:
-       	        NatureLand* natureland;
-       	                
-       	      	std::vector<GuiPair<Rect, ItemSlot*>> rect_itemslot_vec;
-};
+#include "../resources/GuiTextureObCollector.hpp"
 
 
-#endif 
+BarFlat::BarFlat()
+{}
+
+/* virtual */
+BarFlat::~BarFlat()
+{}

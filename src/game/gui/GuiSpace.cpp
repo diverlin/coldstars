@@ -25,6 +25,10 @@
 #include "ButtonTrigger.hpp"
 #include "ButtonSingle.hpp"
 
+#include "GuiManager.hpp"
+
+#include "BarFlat.hpp"
+
 #include "../common/myStr.hpp"
 #include "../common/constants.hpp"
 #include "../common/GameDate.hpp"
@@ -57,38 +61,70 @@ init_done(false)
 	float zsize = 1;
 	
 	{
-		TextureOb* texOb = GuiTextureObCollector::Instance().icon_map;  
-		ButtonTrigger* galaxymap_button = new ButtonTrigger(GUI::BUTTON::GALAXYMAP_ID, "galaxy map", GuiActions::GalaxyMapGuiTransition, texOb);
-		Vec3<float> center(screen_w - (GUI::ICON_SIZE + 5), screen_h - (GUI::ICON_SIZE + 5), zpos);
-		Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
-		Box box(center, size);		
-		galaxymap_button->SetBox(box);		     								     
-		button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP_ID, galaxymap_button));
+		Vec3<float> center;		
+		Vec3<float> size(screen_w, screen_h, 1);
+		Box box(center, size);
+		this->SetBox(box);
+		
+		this->SetOffset(Vec3<float>(screen_w/2, screen_h/2, zpos));
 	}
 	
 	{
-		TextureOb* texOb = GuiTextureObCollector::Instance().icon_plus;
-		ButtonSingle* load_button = new ButtonSingle(GUI::BUTTON::LOAD_ID, "load", GuiActions::Load, texOb);    
-		Vec3<float> center(screen_w - 2*(GUI::ICON_SIZE + 5), screen_h - (GUI::ICON_SIZE + 5), zpos); 
-		Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
-		Box box(center, size);		
-		load_button->SetBox(box);				     
-		button_map.insert(std::make_pair(GUI::BUTTON::LOAD_ID, load_button));
-	}
+		/* TOP BAR */
+		BarFlat* bar_top = new BarFlat();
+		{
+			TextureOb* textureOb_bar_top = GuiTextureObCollector::Instance().bar_bottom;	
+			bar_top->SetTextureOb(textureOb_bar_top);
+			Vec3<float> center;
+			Vec3<float> size(screen_w*0.9, GUI::BAR_HEIGHT, 1);
+			Box box(center, size);
+			bar_top->SetBox(box);
 	
-	{
-		TextureOb* texOb = GuiTextureObCollector::Instance().icon_minus;
-		ButtonSingle* save_button = new ButtonSingle(GUI::BUTTON::SAVE_ID, "save", GuiActions::Save, texOb);    
-		Vec3<float> center(screen_w - 3*(GUI::ICON_SIZE + 5), screen_h - (GUI::ICON_SIZE + 5), zpos); 
-		Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
-		Box box(center, size);		
-		save_button->SetBox(box);				     
-		button_map.insert(std::make_pair(GUI::BUTTON::SAVE_ID, save_button));
-	}
+			Vec3<float> offset(0, screen_h/2-GUI::BAR_HEIGHT/2, 0);
+			this->AddChild(bar_top, offset);	
+		}
+
+		{
+			TextureOb* texOb = GuiTextureObCollector::Instance().icon_map;  
+			ButtonTrigger* galaxymap_button = new ButtonTrigger(GUI::BUTTON::GALAXYMAP_ID, "galaxy map", GuiActions::GalaxyMapGuiTransition, texOb);
+			Vec3<float> center;
+			Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+			Box box(center, size);		
+			galaxymap_button->SetBox(box);		
 			
-	textureOb_bar_top 	= GuiTextureObCollector::Instance().bar_bottom;
-	textureOb_bar_bottom = GuiTextureObCollector::Instance().bar_bottom;
+			Vec3<float> offset(1*1.1*GUI::ICON_SIZE, 0, 0);
+			bar_top->AddChild(galaxymap_button, offset);
+		}
+		
+		{
+			TextureOb* texOb = GuiTextureObCollector::Instance().icon_plus;
+			ButtonSingle* load_button = new ButtonSingle(GUI::BUTTON::LOAD_ID, "load", GuiActions::Load, texOb);    
+			Vec3<float> center; 
+			Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
+			Box box(center, size);		
+			load_button->SetBox(box);
+			
+			Vec3<float> offset(2*1.1*GUI::ICON_SIZE, 0, 0);
+			bar_top->AddChild(load_button, offset);				     
+		}
+		
+		{
+			TextureOb* texOb = GuiTextureObCollector::Instance().icon_minus;
+			ButtonSingle* save_button = new ButtonSingle(GUI::BUTTON::SAVE_ID, "save", GuiActions::Save, texOb);    
+			Vec3<float> center; 
+			Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
+			Box box(center, size);		
+			save_button->SetBox(box);	
+			
+			Vec3<float> offset(3*1.1*GUI::ICON_SIZE, 0, 0);				     
+			bar_top->AddChild(save_button, offset);	
+		}
+	}
 	
+	
+			
+	textureOb_bar_bottom = GuiTextureObCollector::Instance().bar_bottom;
+		
 	Resize(screen_w, screen_h);
 	
 	show_gui_radar = true;
@@ -180,7 +216,7 @@ void GuiSpace::EnterGuiScan()
 	
 	bool allow_full_control = player->IsAbleToGetFullControlOnScanedVehicle();
 	gui_vehicle_scan_shared->BindVehicle(player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
-	gui_skills_shared->SetGuiOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
+	gui_skills_shared->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
 					
 	show_gui_radar = false;
 }
@@ -208,14 +244,6 @@ void GuiSpace::ButtonsAction(Player* player) const
 void GuiSpace::Resize(int screen_w, int screen_h)
 {
 	rect_bar_bottom.Set(0, 0, screen_w, GUI::BAR_HEIGHT);
-	rect_bar_top.Set(0, screen_h, screen_w, -GUI::BAR_HEIGHT);
-}
-
-
-void GuiSpace::RenderBar() const
-{	
-	drawTexturedRect(textureOb_bar_bottom, rect_bar_bottom, -1.5);
-	drawTexturedRect(textureOb_bar_top, rect_bar_top, -1.5);
 }
 
 
@@ -230,18 +258,20 @@ void GuiSpace::RenderText(const Vec2<float>& scroll_coords) const
                                             
 bool GuiSpace::Update(const MouseData& data_mouse)
 {
+	UpdateGeometry(Vec3<float>(0,0,0));
+	
 	int screen_w = Screen::Instance().GetWidth();
 	int screen_h = Screen::Instance().GetHeight();
 	Rect screen_rect(0, 0, screen_w, screen_h);   
 	Vec2<float> center_screen(screen_w/2, screen_h/2);
 					
-	UserInput::Instance().UpdateInSpace(player, player->GetGuiManager());
+	UserInput::Instance().UpdateInSpace(player);
 	player->GetCursor().Update();  
 	
 	if (gui_vehicle_player.GetVehicle() == nullptr)
 	{
 		gui_vehicle_player.BindVehicle(player->GetNpc()->GetVehicle(), 0.6f);
-		gui_vehicle_player.SetGuiOffset(gui_radar.GetRect().GetCenter());                        
+		gui_vehicle_player.SetOffset(gui_radar.GetRect().GetCenter());                        
 	}
 	gui_vehicle_player.UpdateEquipmentIcons();
 	
@@ -251,7 +281,7 @@ bool GuiSpace::Update(const MouseData& data_mouse)
 	}
 
 	//update
-	bool interaction = UpdateMouseInteractionWithButtons(data_mouse);
+	bool interaction = UpdateMouseInteraction(data_mouse);
 	ButtonsAction(player);   
                                                
 	if (gui_galaxymap_shared->GetGalaxy() != nullptr)  
@@ -266,16 +296,16 @@ bool GuiSpace::Update(const MouseData& data_mouse)
 	{	
 		if (interaction == false)
 		{
-			interaction = player->GetGuiManager().UpdateMouseInteractionWithScanVehicle(data_mouse);
+			interaction = GuiManager::Instance().UpdateMouseInteractionWithScanVehicle(data_mouse);
 		}
 	}
 
-	gui_vehicle_player.ButtonsAction(player);
+	//gui_vehicle_player.ButtonsAction(player);
 	if (show_gui_radar == true)
 	{
 		if (interaction == false)
 		{
-			interaction = gui_vehicle_player.UpdateMouseInteractionWithButtons(data_mouse);
+			interaction = gui_vehicle_player.UpdateMouseInteraction(data_mouse);
 		}
 	
 		gui_radar.Update();                                
@@ -291,20 +321,21 @@ bool GuiSpace::Update(const MouseData& data_mouse)
 	if (gui_vehicle_target.GetVehicle() != nullptr)
 	{
 		interaction = UpdateMouseInteractionWithPreciseWeaponTarget(data_mouse);
-	}	
-	
+	}		
+
 	return interaction;
 }
 
-void GuiSpace::Render(const MouseData& data_mouse)
+/* virtual final */
+void GuiSpace::RenderUnique() const
 {
 	resetRenderTransformation();
 	enable_BLEND();    
 	if (show_gui_radar == true)  
 	{
 		gui_radar.Render();
-		gui_vehicle_player.RenderButtons();
-		gui_vehicle_player.RenderFocusedButtonInfo(data_mouse);    
+		gui_vehicle_player.Render();
+		//gui_vehicle_player.RenderInfo(data_mouse);    
 	}
 	
 	if (gui_galaxymap_shared->GetGalaxy() != nullptr)  
@@ -314,18 +345,17 @@ void GuiSpace::Render(const MouseData& data_mouse)
 	                                
 	if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
 	{
-		player->GetGuiManager().RenderScanVehicle(data_mouse, player->GetNpc()->GetScanTarget()); 				                 
+		//GuiManager::Instance().RenderScanVehicle(data_mouse, player->GetNpc()->GetScanTarget()); 				                 
 	}
 	
 	if (gui_vehicle_target.GetVehicle() != nullptr)
 	{
-		gui_vehicle_target.RenderButtons();
-		gui_vehicle_target.RenderFocusedButtonInfo(data_mouse); 
+		gui_vehicle_target.Render();
+		//gui_vehicle_target.RenderInfo(data_mouse); 
 	}
 
-	RenderBar();
-	RenderButtons();
-	RenderFocusedButtonInfo(data_mouse);
+	//Render();
+	//RenderChildInfo(data_mouse);
 	disable_BLEND();
 	
 	RenderText(Screen::Instance().GetRect().GetBottomLeft());

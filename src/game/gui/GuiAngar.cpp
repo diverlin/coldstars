@@ -30,6 +30,7 @@
 #include "../builder/ItemSlotBuilder.hpp"
 
 #include "../render/Render.hpp"
+#include "../gui/GuiManager.hpp"
 
 GuiAngar::GuiAngar():angar(nullptr)
 {
@@ -141,59 +142,59 @@ void GuiAngar::UnbindAngar()
 
 void GuiAngar::CheckButtonsLock()
 {    	   	
-	if (player->GetNpc()->GetVehicle()->IsFuelFull() == true) 	{ GetButton(GUI::BUTTON::BUYFUEL_ID)->LockOn(); }
-	else								{ GetButton(GUI::BUTTON::BUYFUEL_ID)->LockOff(); }
+	//if (player->GetNpc()->GetVehicle()->IsFuelFull() == true) 	{ GetButton(GUI::BUTTON::BUYFUEL_ID)->LockOn(); }
+	//else								{ GetButton(GUI::BUTTON::BUYFUEL_ID)->LockOff(); }
 
-	if (player->GetNpc()->GetVehicle()->IsArmorFull() == true) 	{ GetButton(GUI::BUTTON::BUYARMOR_ID)->LockOn(); }
-	else								{ GetButton(GUI::BUTTON::BUYARMOR_ID)->LockOff(); }
+	//if (player->GetNpc()->GetVehicle()->IsArmorFull() == true) 	{ GetButton(GUI::BUTTON::BUYARMOR_ID)->LockOn(); }
+	//else								{ GetButton(GUI::BUTTON::BUYARMOR_ID)->LockOff(); }
 }
 
 void GuiAngar::ButtonsAction() const     
 {
-	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
-	{
-		BaseButton* button = iterator->second;
-		if (button->GetPressed() == true)
-		{
-			switch(button->GetSubTypeId())
-	   		{
-	   			case GUI::BUTTON::BUYARMOR_ID: 
-	   			{
-	   				if (button->GetLock() == false)
-	   				{  			
-						button->PressEvent(player);
+	//for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+	//{
+		//BaseButton* button = iterator->second;
+		//if (button->GetPressed() == true)
+		//{
+			//switch(button->GetSubTypeId())
+	   		//{
+	   			//case GUI::BUTTON::BUYARMOR_ID: 
+	   			//{
+	   				//if (button->GetLock() == false)
+	   				//{  			
+						//button->PressEvent(player);
 						
-						angar->RepairVehicle(player->GetNpc()->GetVehicle());
-						return; 
-	   				}
+						//angar->RepairVehicle(player->GetNpc()->GetVehicle());
+						//return; 
+	   				//}
 	   						
-	   				break;
-	  	 		}
+	   				//break;
+	  	 		//}
 	   		
-	   			case GUI::BUTTON::BUYFUEL_ID:
-	   			{
-	   				if (button->GetLock() == false)
-	   				{
-						button->PressEvent(player);
+	   			//case GUI::BUTTON::BUYFUEL_ID:
+	   			//{
+	   				//if (button->GetLock() == false)
+	   				//{
+						//button->PressEvent(player);
 						
-						angar->TankUpVehicle(player->GetNpc()->GetVehicle());
-						return; 
-	   				}
+						//angar->TankUpVehicle(player->GetNpc()->GetVehicle());
+						//return; 
+	   				//}
                         
-	   				break;
-	   			}
+	   				//break;
+	   			//}
 	   			
-	   			case GUI::BUTTON::GETLAUNCH_ID:
-	   			{
-       					player->GetNpc()->GetVehicle()->LaunchingEvent();
+	   			//case GUI::BUTTON::GETLAUNCH_ID:
+	   			//{
+       					//player->GetNpc()->GetVehicle()->LaunchingEvent();
 
-       		   			return; 
+       		   			//return; 
  
-       		   			break;
-       		   		}
-       			}
-        	}
-        }
+       		   			//break;
+       		   		//}
+       			//}
+        	//}
+        //}
 }
 
 bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mouse)
@@ -205,7 +206,7 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                        	if (data_mouse.right_click == true)
                        	{
                  		player->GetNpc()->SetScanTarget(rect_vehicleslot_vec[i].second->GetVehicle());
-                                player->GetGuiManager().GetGuiKosmoport().EnterGuiScanInAngar();
+                                GuiManager::Instance().GetGuiKosmoport().EnterGuiScanInAngar();
                                 return true;
                         }
                         

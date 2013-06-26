@@ -19,7 +19,7 @@
 #ifndef GUIKOSMOPORT_H
 #define GUIKOSMOPORT_H
 
-#include "BaseGui.hpp"
+#include "BaseGuiElement.hpp"
 #include "../gui/GuiAngar.hpp"
 #include "../gui/GuiStore.hpp"
 #include "../gui/GuiShop.hpp"
@@ -30,7 +30,7 @@ class GuiSkills;
 class GuiGalaxyMap;
 class Slider;
 
-class GuiKosmoport : public BaseGui
+class GuiKosmoport : public BaseGuiElement
 {
     	public:
        		GuiKosmoport();

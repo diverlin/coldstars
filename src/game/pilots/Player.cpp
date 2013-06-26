@@ -51,6 +51,7 @@
 #include "../pilots/Npc.hpp"
 
 #include "../gui/GuiGalaxyMap.hpp"
+#include "../gui/GuiManager.hpp"
 
 Player::Player(int id)
 { 
@@ -62,7 +63,7 @@ Player::Player(int id)
     	starsystem = nullptr;
     	
     	cursor.SetPlayer(this);
-    	gui_manager.SetPlayer(this);
+    	GuiManager::Instance().SetPlayer(this);
 }
     
 Player::~Player()
@@ -236,14 +237,14 @@ void Player::UpdatePostTransaction()
         {
                 case ENTITY::KOSMOPORT_ID:
                 {
-                        if (gui_manager.GetGuiKosmoport().GetInitDone() == false)
+                        if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == false)
                         {
-                               gui_manager.EnterGuiKosmoport(); 
+                               GuiManager::Instance().EnterGuiKosmoport(); 
                         }
                         
-                        if (gui_manager.GetGuiSpace().GetInitDone() == true)
+                        if (GuiManager::Instance().GetGuiSpace().GetInitDone() == true)
                         {
-                                gui_manager.ExitGuiSpace();
+                                GuiManager::Instance().ExitGuiSpace();
                         }
                         
                         break;
@@ -256,14 +257,14 @@ void Player::UpdatePostTransaction()
                 
                 case ENTITY::SPACE_ID:
                 {
-                        if (gui_manager.GetGuiKosmoport().GetInitDone() == true)
+                        if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == true)
                         {
-                                gui_manager.ExitGuiKosmoport(); 
+                                GuiManager::Instance().ExitGuiKosmoport(); 
                         }
                         
-                        if (gui_manager.GetGuiSpace().GetInitDone() == false)
+                        if (GuiManager::Instance().GetGuiSpace().GetInitDone() == false)
                         {
-                                gui_manager.EnterGuiSpace();
+                                GuiManager::Instance().EnterGuiSpace();
                         }
                         
                         break;
@@ -852,7 +853,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
                			        if ( npc->CheckPossibilityToScan(visible_SATELLITE_vec[i]) == true )
                				{
                       				npc->SetScanTarget(visible_SATELLITE_vec[i]);
-                      				gui_manager.GetGuiSpace().EnterGuiScan();
+                      				GuiManager::Instance().GetGuiSpace().EnterGuiScan();
                				}
 
       				}
@@ -939,11 +940,11 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 	                				if (npc->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == false)
 	                				{
 	                      					npc->SetScanTarget(visible_SHIP_vec[i]);
-	                      					gui_manager.GetGuiSpace().EnterGuiScan();
+	                      					GuiManager::Instance().GetGuiSpace().EnterGuiScan();
 	                				}            
 	                				else
 	                				{
-	               						gui_manager.GetGuiSpace().GetGuiVehicleTarget().BindVehicle(visible_SHIP_vec[i], 0.6f);
+	               						GuiManager::Instance().GetGuiSpace().GetGuiVehicleTarget().BindVehicle(visible_SHIP_vec[i], 0.6f);
 	                				}
 	                			}
 	       				}
@@ -954,7 +955,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
        				if (data_mouse.right_click == true)
                			{
                				npc->SetScanTarget(visible_SHIP_vec[i]);
-                                        gui_manager.GetGuiSpace().EnterGuiScan();
+                                        GuiManager::Instance().GetGuiSpace().EnterGuiScan();
                			}
        			}
 						
@@ -1019,7 +1020,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
                			        if ( npc->CheckPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
                				{
                       				npc->SetScanTarget(visible_SPACESTATION_vec[i]);
-                      				gui_manager.GetGuiSpace().EnterGuiScan();
+                      				GuiManager::Instance().GetGuiSpace().EnterGuiScan();
                				}
        				}
        			}
@@ -1088,12 +1089,12 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 		starsystem->FindRadarVisibleEntities_c(this);
 	}
 	
-	bool mouse_interaction = gui_manager.GetGuiSpace().Update(cursor.GetMouseData());
+	bool mouse_interaction = GuiManager::Instance().GetGuiSpace().Update(cursor.GetMouseData());
 	if (mouse_interaction == false)
 	{    	
 		if (turn_timer.GetTurnEnded() == true)  
 		{
-			if ( (gui_manager.GetGuiVehicleScan()->GetVehicle() == nullptr) && (gui_manager.GetGuiGalaxyMap()->GetGalaxy() == nullptr) )
+			if ( (GuiManager::Instance().GetGuiVehicleScan()->GetVehicle() == nullptr) && (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr) )
 			{
 				mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(cursor.GetMouseData());  
 				if (mouse_interaction == false)
@@ -1105,18 +1106,19 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 	}
 
 	RenderInSpace(starsystem, turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath()); 
- 	gui_manager.GetGuiSpace().Render(cursor.GetMouseData()); 
+ 	//GuiManager::Instance().GetGuiSpace().Render(cursor.GetMouseData()); 
+ 	GuiManager::Instance().GetGuiSpace().Render(); 
 }
 
 
 void Player::SessionInKosmoport()
 {   	
-	gui_manager.RunSessionInKosmoport(cursor.GetMouseData());
+	GuiManager::Instance().RunSessionInKosmoport(cursor.GetMouseData());
 }
 
 void Player::SessionInNatureLand()
 {   	
-	gui_manager.RunSessionInNatureLand(cursor.GetMouseData());        
+	GuiManager::Instance().RunSessionInNatureLand(cursor.GetMouseData());        
 }
 
 void Player::RunSession(const TurnTimer& turn_timer)

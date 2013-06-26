@@ -28,9 +28,16 @@
 #include "../items/BaseItem.hpp"
 
 #include "../pilots/Npc.hpp"
+#include "../pilots/Player.hpp"
 
 #include "../gui/GuiSkills.hpp"
 #include "../gui/GuiGalaxyMap.hpp"
+
+GuiManager& GuiManager::Instance()
+{
+	static GuiManager instance;
+	return instance;
+}
 
 GuiManager::GuiManager()
 {
@@ -49,7 +56,7 @@ GuiManager::~GuiManager()
         delete gui_galaxymap;
        	delete slider;  
 }
-
+		
 void GuiManager::SetPlayer(Player* player)
 {	
 	this->player = player;
@@ -68,7 +75,7 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 	bool interaction = gui_vehicle_scan->UpdateMouseInteraction(data_mouse);        
 	if ( (interaction == true) and (gui_vehicle_scan->GetAllowFullControl() == true) )
 	{
-		interaction = gui_skills->UpdateMouseInteractionWithButtons(data_mouse);
+		interaction = gui_skills->UpdateMouseInteraction(data_mouse);
 		gui_skills->ButtonsAction(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());
 	}
 
@@ -89,9 +96,9 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill)
 					
 	if ( (show_skill == true) and (gui_vehicle_scan->GetVehicle()->GetOwnerNpc() != nullptr) )
 	{
-		gui_skills->RenderButtons();
+		//gui_skills->RenderButtons();
 		gui_skills->RenderSkills(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());
-		gui_skills->RenderFocusedButtonInfo(data_mouse);
+		//gui_skills->RenderFocusedButtonInfo(data_mouse);
 	}   					                 
 }
 
@@ -120,7 +127,7 @@ void GuiManager::ExitGuiSpace()
 bool GuiManager::RunSessionInSpace(const MouseData& data_mouse)
 {
         gui_space.Update(data_mouse);
-        gui_space.Render(data_mouse);
+        gui_space.Render();
 }
    
 bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
@@ -134,7 +141,7 @@ bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 	Rect screen_rect(0, 0, Screen::Instance().GetWidth(), Screen::Instance().GetHeight());   
 	Vec2<float> center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);       			
         			
- 	UserInput::Instance().UpdateInKosmoport(player, *this);
+ 	UserInput::Instance().UpdateInKosmoport(player);
      	player->GetCursor().Update(); 
      	    	       	
 	//bool interaction = gui_kosmoport.UpdateMouseInteractionWithButtons(data_mouse);
@@ -145,7 +152,7 @@ bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 	gui_natureland.BindNatureLand(natureland);
 
 	//update  
-	bool interaction = gui_natureland.UpdateMouseInteractionWithButtons(data_mouse);
+	bool interaction = gui_natureland.UpdateMouseInteraction(data_mouse);
 	if (interaction == false)
 	{
 		interaction = gui_natureland.UpdateMouseInteractionWithEquipedItemSlots(data_mouse);
@@ -157,7 +164,7 @@ bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 	gui_natureland.RenderBackground(screen_rect);
 	enable_BLEND();   
 		gui_natureland.RenderEquipedItemSlots();
-		gui_natureland.RenderButtons();
-		gui_natureland.RenderFocusedButtonInfo(data_mouse); 
+		//gui_natureland.RenderButtons();
+		//gui_natureland.RenderFocusedButtonInfo(data_mouse); 
 	disable_BLEND(); 
 }

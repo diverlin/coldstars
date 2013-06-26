@@ -58,7 +58,7 @@ void Slider::Configure(int ammount_total, int price_for_one)
 	this->ammount_total = ammount_total;
 	this->price_for_one  = price_for_one;
 
-	SetGuiOffset(Vec2<float>(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2));
+	SetOffset(Vec2<float>(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2));
 
 	ammount_selected = 0;
 	price_selected = 0;
@@ -73,12 +73,12 @@ void Slider::Configure(int ammount_total, int price_for_one)
 
 void Slider::UpdateSlidePosition(const MouseData& data_mouse)
 {
-	ButtonSingle* slide_button = (ButtonSingle*)GetButton(GUI::BUTTON::SLIDE_ID);
-	if (rect_slide.CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
+	ButtonSingle* slide_button = (ButtonSingle*)GetGuiElement(GUI::BUTTON::SLIDE_ID);
+	if (rect_slide.CheckInteraction(data_mouse.mx - GetOffset().x, data_mouse.my - GetOffset().y) == true)
 	{
 		if (data_mouse.left_press == true)
 		{
-			//slide_button->GetRect().SetBottomLeftX(data_mouse.mx - slide_button->GetRect().GetWidth()/2 - GetGuiOffset().x);
+			//slide_button->GetRect().SetBottomLeftX(data_mouse.mx - slide_button->GetRect().GetWidth()/2 - GetOffset().x);
 		}
 	}
 	
@@ -88,79 +88,79 @@ void Slider::UpdateSlidePosition(const MouseData& data_mouse)
 		
 void Slider::ButtonsAction(Shop* shop)
 {
-	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
-	{
-		BaseButton* button = iterator->second;
-		if (button->GetLock() == false)
-		{
-			if (button->GetPressed() == true)
-			{
-        			switch(button->GetSubTypeId())
-        			{
-        				case GUI::BUTTON::ACCEPT_ID: 
-        				{ 
-        					int goods_subtype_id;
-        					switch(subtype_id)
-        					{
-        						case GUI::BUTTON::MINERALS_ID: 		{ goods_subtype_id = ENTITY::MINERALS_ID; break; }
-        						case GUI::BUTTON::FOOD_ID: 		{ goods_subtype_id = ENTITY::FOOD_ID; break; }
-        						case GUI::BUTTON::MEDICINE_ID: 		{ goods_subtype_id = ENTITY::MEDICINE_ID; break; }
-        						case GUI::BUTTON::MILITARY_ID: 		{ goods_subtype_id = ENTITY::MILITARY_ID; break; }
-        						case GUI::BUTTON::DRUG_ID: 		{ goods_subtype_id = ENTITY::DRUG_ID; break; }
-        						case GUI::BUTTON::EXCLUSIVE_ID: 	{ goods_subtype_id = ENTITY::EXCLUSIVE_ID; break; }
-        					}
+	//for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+	//{
+		//BaseButton* button = iterator->second;
+		//if (button->GetLock() == false)
+		//{
+			//if (button->GetPressed() == true)
+			//{
+        			//switch(button->GetSubTypeId())
+        			//{
+        				//case GUI::BUTTON::ACCEPT_ID: 
+        				//{ 
+        					//int goods_subtype_id;
+        					//switch(subtype_id)
+        					//{
+        						//case GUI::BUTTON::MINERALS_ID: 		{ goods_subtype_id = ENTITY::MINERALS_ID; break; }
+        						//case GUI::BUTTON::FOOD_ID: 		{ goods_subtype_id = ENTITY::FOOD_ID; break; }
+        						//case GUI::BUTTON::MEDICINE_ID: 		{ goods_subtype_id = ENTITY::MEDICINE_ID; break; }
+        						//case GUI::BUTTON::MILITARY_ID: 		{ goods_subtype_id = ENTITY::MILITARY_ID; break; }
+        						//case GUI::BUTTON::DRUG_ID: 		{ goods_subtype_id = ENTITY::DRUG_ID; break; }
+        						//case GUI::BUTTON::EXCLUSIVE_ID: 	{ goods_subtype_id = ENTITY::EXCLUSIVE_ID; break; }
+        					//}
         					
         					
-						shop->SellGoods(player->GetNpc(), goods_subtype_id, ammount_selected);
+						//shop->SellGoods(player->GetNpc(), goods_subtype_id, ammount_selected);
 						
-        					SetSubTypeId(NONE_ID);
-        					button->Reset(); //untrigger        				
-        					break; 
-        				}
+        					//SetSubTypeId(NONE_ID);
+        					//button->Reset(); //untrigger        				
+        					//break; 
+        				//}
 
-        				case GUI::BUTTON::DECLINE_ID: 
-        				{	 
-        					SetSubTypeId(NONE_ID);  
-        					button->Reset(); //untrigger        				
-        					break; 
-        				}
-           			}
-           		}  		   	
-		}
-	}
+        				//case GUI::BUTTON::DECLINE_ID: 
+        				//{	 
+        					//SetSubTypeId(NONE_ID);  
+        					//button->Reset(); //untrigger        				
+        					//break; 
+        				//}
+           			//}
+           		//}  		   	
+		//}
+	//}
 }
        	
 void Slider::CheckButtonsLock()
 {    	   	
-	if (player->GetNpc()->GetCredits() < price_selected) 	{ GetButton(GUI::BUTTON::ACCEPT_ID)->LockOn(); }
-	else							{ GetButton(GUI::BUTTON::ACCEPT_ID)->LockOff(); }
+	//if (player->GetNpc()->GetCredits() < price_selected) 	{ GetButton(GUI::BUTTON::ACCEPT_ID)->LockOn(); }
+	//else							{ GetButton(GUI::BUTTON::ACCEPT_ID)->LockOff(); }
 }
 	  		
 void Slider::Render() const
 {
 	glPushMatrix();
 	{
-		glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
+		glTranslatef(GetOffset().x, GetOffset().y, 0);
 		drawTexturedRect(textureOb, rect, -1);
 		drawTexturedRect(textureOb_scale, rect_slide, -1);
 	}
 	glPopMatrix();
 	
 	{
-		Vec2<float> pos(rect.GetBottomLeft().x + GetGuiOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetGuiOffset().y);
+		Vec2<float> pos(rect.GetBottomLeft().x + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
 		Screen::Instance().DrawText("0", 12, pos);
 	}
 
 	{
-		Vec2<float> pos(rect.GetBottomLeft().x + rect.GetWidth()/2 - 20 + GetGuiOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetGuiOffset().y);
+		Vec2<float> pos(rect.GetBottomLeft().x + rect.GetWidth()/2 - 20 + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
 		Screen::Instance().DrawText(int2str(ammount_selected)+" :"+int2str(price_selected) + "$", 12, pos);		
 	}
 
 	{
-		Vec2<float> pos(rect.GetBottomLeft().x + rect.GetWidth() - 20 + GetGuiOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetGuiOffset().y);
+		Vec2<float> pos(rect.GetBottomLeft().x + rect.GetWidth() - 20 + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
 		Screen::Instance().DrawText(int2str(ammount_total), 12, pos);	
 	}	
 	
-	RenderButtons();
+	//RenderButtons();
 }
 

@@ -32,47 +32,71 @@ class Player;
 class BaseGuiElement
 {
 	public:
-       		BaseGuiElement(int, const std::string&, TextureOb*);
-       		~BaseGuiElement();
-       		
-			void SetSubTypeId(int subtype_id) { this->subtype_id = subtype_id; } 
+		BaseGuiElement(int subtype_id=0, const std::string info="", TextureOb* textureOb=nullptr, BaseGuiElement* parent=nullptr);
+		~BaseGuiElement();
+		
+		//void SetSubTypeId(int subtype_id) { this->subtype_id = subtype_id; } 
+		
+		//void SetInfo(const std::string& info) { this->info = info; }
+		void SetLabel(const std::string& label) { this->label = label; }
+
+		void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; } 		
+		void SetPlayer(Player* player) { this->player = player; } // depr
+		
+		void SetOffset(const Vec3<float>& offset) { this->offset = offset; }	// depr				
+		void SetOffset(const Vec2<float>& offset) { this->offset.Set(offset.x, offset.y, 0); }	// depr	
+		
+		void SetParent(BaseGuiElement* parent) { this->parent = parent; }
+		
+		void SetBox(const Box& box) { this->box = box; }
+		
+		int GetTypeId() const { return type_id; }
+		int GetSubTypeId() const { return subtype_id; }
+					
+		const Vec3<float>& GetOffset() const { return offset; } // depr
+		const Box& GetBox() const { return box; }
+		TextureOb* GetTextureOb() const { return textureOb; }
 			
-			void SetInfo(const std::string& info) { this->info = info; }
-			void SetLabel(const std::string& label) { this->label = label; }
-			
-			void SetCenter(const Vec2<float>& center) { this->center = center; }
-			void SetBox(const Box& box) { this->box = box; }
-			
-			int GetTypeId() const { return type_id; }
-			int GetSubTypeId() const { return subtype_id; }
-						
-			const Vec2<float>& GetCenter() const { return center; }
-			const Box& GetBox() const { return box; }
-			TextureOb* GetTextureOb() const { return textureOb; }
-								
-			bool UpdateMouseInteraction(const MouseData&);
-			
-			virtual void Update() {}
-			virtual void PressEvent(Player*) {}
+		BaseGuiElement* GetGuiElement(int request_subtype_id) const;
+		
+		void UpdateGeometry(const Vec3<float>&);					
+		bool UpdateMouseInteraction(const MouseData&);
+		
+		void AddChild(BaseGuiElement* child, const Vec3<float>& offset);
 				
-			void Render() const;
-			void RenderInfo(const MouseData&) const;  
-              	
+		virtual void Update() {}
+		virtual void PressEvent(Player*) {}
+		virtual void Reset();
+
+		void Render() const;		
+		virtual void RenderInfo(const MouseData&) const {} 
+						
+		void RenderChildInfo(const MouseData&) const;  
+			
 	protected:
-			int type_id;
-			int subtype_id;
-			
-			Box box;
-			
-			TextureOb* textureOb;	
-			std::string info; 
-			std::string label; 
-			
-			std::vector<BaseGuiElement*> child_vec;
+		int type_id;
+		int subtype_id;
+		
+		bool lock;
+		bool pressed;
+		
+		Box box;
+		Player* player; // depr
+				
+		TextureOb* textureOb;	
+		std::string info; 
+		std::string label; 
+		
+		BaseGuiElement* parent;
+		std::vector<BaseGuiElement*> child_vec;
+
+		virtual void RenderUnique() const;		
+		void RenderCommon() const;
        		       	
 	private:       				
-			Vec2<float> center;
+		Vec3<float> offset;
+		
+		static std::map<int, BaseGuiElement*> static_gui_element_map;
 };
-
 
 #endif 

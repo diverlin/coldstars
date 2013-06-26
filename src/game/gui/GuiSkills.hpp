@@ -20,11 +20,11 @@
 #ifndef GUISKILLS_H
 #define GUISKILLS_H
 
-#include "BaseGui.hpp"
+#include "BaseGuiElement.hpp"
 #include "../pilots/Skills.hpp"
 #include "../common/rect.hpp"
 
-class GuiSkills : public BaseGui
+class GuiSkills : public BaseGuiElement
 {
    	public:
       		GuiSkills();

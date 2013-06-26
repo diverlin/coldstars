@@ -19,12 +19,13 @@
 #ifndef GUIVEHICLE2_H
 #define GUIVEHICLE2_H
 
-#include "BaseGui.hpp"
+#include "BaseGuiElement.hpp"
+#include "BaseButton.hpp"
 #include "../docking/Store.hpp"
 #include "GuiPair.hpp"
 class Vehicle;
 
-class GuiVehicle2 : public BaseGui
+class GuiVehicle2 : public BaseGuiElement
 {
    	public:
       		GuiVehicle2();

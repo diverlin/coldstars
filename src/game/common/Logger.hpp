@@ -32,7 +32,7 @@ class Logger
 		
 		void Log(const std::string&, int dip = 0);
                       	 		                
-        private:
+	private:
 		Logger();
 		Logger(const Logger&) = delete;
 		Logger& operator=(const Logger&) = delete;

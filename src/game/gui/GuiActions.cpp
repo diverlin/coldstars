@@ -19,21 +19,26 @@
 #include "GuiActions.hpp"
 #include "GuiGalaxyMap.hpp"
 #include "../pilots/Player.hpp"
+#include "../pilots/Npc.hpp"
+#include "../spaceobjects/Vehicle.hpp"
+
 
 #include "../world/EntityManager.hpp"
+#include "../gui/GuiManager.hpp"
 
 /* static */
 void GuiActions::GalaxyMapGuiTransition(Player* player) 
 { 
-	if (player->GetGuiManager().GetGuiGalaxyMap()->GetGalaxy() == nullptr)
+	if (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr)
 	{
-		player->GetGuiManager().GetGuiSpace().EnterGalaxyMap();
+		GuiManager::Instance().GetGuiSpace().EnterGalaxyMap();
+
 	}
 	else
 	{
-		player->GetGuiManager().GetGuiSpace().ExitGalaxyMap();
+		GuiManager::Instance().GetGuiSpace().ExitGalaxyMap();
 	}
-	
+
 	std::cout<<"GuiActions::GalaxyMapGuiTransition"<<std::endl;
 }
 

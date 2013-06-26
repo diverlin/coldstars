@@ -20,11 +20,11 @@
 #ifndef GUISHOP_H
 #define GUISHOP_H
 
-#include "../gui/BaseGui.hpp"
+#include "../gui/BaseGuiElement.hpp"
 #include "../gui/Slider.hpp"
 class Shop;
 
-class GuiShop : public BaseGui
+class GuiShop : public BaseGuiElement
 {
         public:
                 GuiShop();                      

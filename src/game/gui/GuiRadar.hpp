@@ -19,11 +19,11 @@
 #ifndef GUIRADAR_H
 #define GUIRADAR_H
 
-#include "../gui/BaseGui.hpp"
+#include "../gui/BaseGuiElement.hpp"
 #include "../spaceobjects/BaseSpaceEntity.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 
-class GuiRadar : public BaseGui
+class GuiRadar : public BaseGuiElement
 {
    	public:
       		GuiRadar();

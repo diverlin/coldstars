@@ -22,45 +22,47 @@
 
 #include <GL/glew.h>
 #include <SFML/Window.hpp>
-#include "../pilots/Player.hpp"
+#include "../math/Vec2.hpp"
+class Player;
+class GuiManager;
 
 class UserInput
 {
-    	public:
+	public:
 		static UserInput& Instance();
-        	~UserInput();
+		~UserInput();
 		
 		bool GetNextTurnReady() const { return next_turn_ready; };
-
-		void UpdateInKosmoport(Player*, GuiManager&);
-		void UpdateInSpace(Player*, GuiManager&);
+		
+		void UpdateInKosmoport(Player*);
+		void UpdateInSpace(Player*);
 
 	private:
 		UserInput();
 		UserInput(const UserInput&) = delete;
 		UserInput& operator=(const UserInput&) = delete;
 		
-	        int moveCamera_axis_x;
-        	int moveCamera_axis_y;
-        
-        	sf::Event event;
-        	
-        	Vec2<float> scroll_accel; 
-        	        	
-        	bool next_turn_ready;
-
-        	void ResetFlags(Player*);
-        	        	
-        	void ManageInputsInSpace(Player*, GuiManager&);
-        	void ManageInputsInKosmoport(Player*, GuiManager&);
-        	
-        	bool KeyPressedCommon(Player*, GuiManager&);
-        	void KeyPressedInSpace(Player*, GuiManager&);
-        	void KeyPressedInKosmoport(Player*, GuiManager&);
-        	void MouseButtonPressed(Player*);
-        	        	
-        	void ManageRealTimeInputsInSpace(Player*);
-        	void ScrollCamera(Player*);
+		int moveCamera_axis_x;
+		int moveCamera_axis_y;
+		
+		sf::Event event;
+		
+		Vec2<float> scroll_accel; 
+					
+		bool next_turn_ready;
+		
+		void ResetFlags(Player*);
+					
+		void ManageInputsInSpace(Player*);
+		void ManageInputsInKosmoport(Player*);
+		
+		bool KeyPressedCommon(Player*);
+		void KeyPressedInSpace(Player*);
+		void KeyPressedInKosmoport(Player*);
+		void MouseButtonPressed(Player*);
+					
+		void ManageRealTimeInputsInSpace(Player*);
+		void ScrollCamera(Player*);
 };
 
 #endif 

@@ -18,11 +18,13 @@
 
 
 #include "ButtonTrigger.hpp"
+#include "../pilots/Player.hpp"
     
 /*virtual final*/
 void ButtonTrigger::PressEvent(Player* player)
 {
 	pAction(player);
+	//player->GetGuiManager().ReceiveCommand(subtype_id);
 	
 	if (lock == false)
 	{

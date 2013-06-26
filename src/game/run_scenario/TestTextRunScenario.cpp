@@ -20,8 +20,9 @@
 
 #include "../pilots/Npc.hpp"
 #include "../pilots/Player.hpp"
-#include "../world/God.hpp"
+#include "../spaceobjects/Vehicle.hpp"
 
+#include "../world/God.hpp"
 #include "../world/galaxy.hpp"
 #include "../world/Sector.hpp"
 #include "../world/starsystem.hpp"

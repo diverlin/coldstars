@@ -39,7 +39,7 @@ void GuiVehicle2::Reset()
 		delete button_slot_vec[i].first;
 	}
 	button_slot_vec.clear();
-	button_map.clear();
+	child_vec.clear();
 	
 	vehicle = nullptr;
 }
@@ -74,7 +74,7 @@ void GuiVehicle2::CreateFunctionalItemSlotsCircleGeometry(Vehicle* vehicle, floa
 	}    	
         
 	int angle = 0;
-	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+	for (auto &button : child_vec)
 	{
 		Vec2<float> center = getVec2f(160, angle);
 		float zpos = -1;
@@ -82,7 +82,7 @@ void GuiVehicle2::CreateFunctionalItemSlotsCircleGeometry(Vehicle* vehicle, floa
 		Vec3<float> center3(center.x, center.y, zpos);
 		Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
 		Box box(center3*scale, size*scale);
-		iterator->second->SetBox(box);
+		button->SetBox(box);
 		
 		//angle += 360/button_map.size();
 		angle += 20;
@@ -142,7 +142,7 @@ ItemSlot* GuiVehicle2::GetInreactedItemSlot(const MouseData& data_mouse)
 {
 	for(unsigned int i=0; i<button_slot_vec.size(); i++)
 	{ 
-		if (button_slot_vec[i].first->GetBox().CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y))
+		if (button_slot_vec[i].first->GetBox().CheckInteraction(data_mouse.mx - GetOffset().x, data_mouse.my - GetOffset().y))
 		{  
 			if (data_mouse.left_click == true)
 			{
@@ -157,5 +157,5 @@ ItemSlot* GuiVehicle2::GetInreactedItemSlot(const MouseData& data_mouse)
 void GuiVehicle2::UpdateOffset()
 {
 	Vec3<float> offset(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y, 0.0);
-	SetGuiOffset(vehicle->GetCenter() - offset);
+	SetOffset(vehicle->GetCenter() - offset);
 }

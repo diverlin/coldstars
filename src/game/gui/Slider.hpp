@@ -20,12 +20,12 @@
 #ifndef SLIDER_H
 #define SLIDER_H
 
-#include "BaseGui.hpp"
+#include "BaseGuiElement.hpp"
 #include "../resources/textureOb.hpp"
 #include "../common/rect.hpp"
 #include "../docking/Shop.hpp"
 
-class Slider : public BaseGui
+class Slider : public BaseGuiElement
 {
     	public:
     		Slider();		               		       

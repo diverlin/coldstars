@@ -27,11 +27,12 @@
 #include "../builder/ItemSlotBuilder.hpp"
 
 #include "../pilots/Npc.hpp"
+#include "../spaceobjects/Vehicle.hpp"
 
 GuiVehicle::GuiVehicle()
 {
 	textureOb_korpus = nullptr;
-        vehicle = nullptr;
+	vehicle = nullptr;
 	gate_slot   = GetNewItemSlotWithoutSaveAbility(ENTITY::GATE_SLOT_ID);
 	
 	allow_full_control = false;
@@ -45,10 +46,10 @@ GuiVehicle::~GuiVehicle()
 
 void GuiVehicle::BindVehicle(Vehicle* vehicle, const Vec2<float>& gui_offset, bool allow_full_control, bool block_manual_exit, float scale)
 {      
-        this->vehicle = vehicle;  
-       	SetGuiOffset(gui_offset);
-        this->allow_full_control = allow_full_control;
-        this->block_manual_exit = block_manual_exit;
+	this->vehicle = vehicle;  
+	SetOffset(gui_offset);
+	this->allow_full_control = allow_full_control;
+	this->block_manual_exit = block_manual_exit;
                 
 	textureOb_korpus = nullptr;
 
@@ -58,8 +59,8 @@ void GuiVehicle::BindVehicle(Vehicle* vehicle, const Vec2<float>& gui_offset, bo
 
 void GuiVehicle::UnbindVehicle()
 {
-        gui_itemslot_vec.clear();
-        vehicle = nullptr;
+	gui_itemslot_vec.clear();
+	vehicle = nullptr;
 }
 
 void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
@@ -284,7 +285,7 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 {
 	for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
 	{ 
-		if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
+		if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.mx - GetOffset().x, data_mouse.my - GetOffset().y) == true)
 		{  
 			if ( (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr) and (player->GetCursor().GetItemSlot()->GetItem() == nullptr) )
 			{
@@ -373,7 +374,7 @@ bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Stor
 {
 	for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
 	{ 
-		if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
+		if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.mx - GetOffset().x, data_mouse.my - GetOffset().y) == true)
 		{  
 			if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr)
 			{
@@ -395,7 +396,7 @@ bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Stor
 void GuiVehicle::RenderVehicle(const MouseData& data_mouse, int mark_slot_subtype_id) const
 {
 	glPushMatrix();
-		glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
+		glTranslatef(GetOffset().x, GetOffset().y, 0);
 		drawTexturedRect(textureOb_korpus, rect_korpus, -1.0);
 		RenderSlots();
 		if (mark_slot_subtype_id != NONE_ID)
@@ -409,7 +410,7 @@ void GuiVehicle::RenderSlots() const
 {	
 	for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
 	{
-		gui_itemslot_vec[i].GetItemSlot()->Render(gui_itemslot_vec[i].GetBox(), GetGuiOffset());
+		gui_itemslot_vec[i].GetItemSlot()->Render(gui_itemslot_vec[i].GetBox(), GetOffset());
 	}
 }
 
@@ -427,7 +428,7 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, int mark_
                			}
                			else
                			{
-               				if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
+               				if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.mx - GetOffset().x, data_mouse.my - GetOffset().y) == true)
 	               			{
 	               				gui_itemslot_vec[i].GetItemSlot()->RenderMark(gui_itemslot_vec[i].GetBox(), GuiTextureObCollector::Instance().slot_mark_reject);
 	               			}

@@ -33,8 +33,8 @@ diplomat_undo(0)
 	textureOb_skill = GuiTextureObCollector::Instance().skill;
 	textureOb_skill_transparent = GuiTextureObCollector::Instance().skill_transparent;     	     	
 	
-	button_w = GUI::BUTTON::SKILLS::BUTTON_WIDTH;  
-	button_h = GUI::BUTTON::SKILLS::BUTTON_HEIGHT; 
+	int button_w = GUI::BUTTON::SKILLS::BUTTON_WIDTH;  
+	int button_h = GUI::BUTTON::SKILLS::BUTTON_HEIGHT; 
 	
 	TextureOb* texOb_icon_plus  = GuiTextureObCollector::Instance().icon_plus;
 	TextureOb* texOb_icon_minus = GuiTextureObCollector::Instance().icon_minus;
@@ -169,235 +169,235 @@ void GuiSkills::Acknowledge()
 
 void GuiSkills::ButtonsAction(Skills& skills)
 {
-	for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
-	{
-		BaseButton* button = iterator->second;
-		if (button->GetPressed() == true)
-		{
-        		switch(button->GetSubTypeId())
-        		{
-        			case GUI::BUTTON::INCREMENT_ATTACK_ID:   
-                                {
-                                        if (skills.IncrementAttack() == true) 
-                                        {
-                                        	attack_undo++; 
-                                        }
+	//for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+	//{
+		//BaseButton* button = iterator->second;
+		//if (button->GetPressed() == true)
+		//{
+        		//switch(button->GetSubTypeId())
+        		//{
+        			//case GUI::BUTTON::INCREMENT_ATTACK_ID:   
+                                //{
+                                        //if (skills.IncrementAttack() == true) 
+                                        //{
+                                        	//attack_undo++; 
+                                        //}
                                                                         
-                                        break; 
-                                }        			
-                                case GUI::BUTTON::DECREMENT_ATTACK_ID:   
-                                {       
-                                        if (attack_undo > 0)
-                                        {
-                                                skills.DecrementAttack();
-                                                attack_undo--;
-                                        }
+                                        //break; 
+                                //}        			
+                                //case GUI::BUTTON::DECREMENT_ATTACK_ID:   
+                                //{       
+                                        //if (attack_undo > 0)
+                                        //{
+                                                //skills.DecrementAttack();
+                                                //attack_undo--;
+                                        //}
                                         
-                                        break; 
-                                }
+                                        //break; 
+                                //}
            		   	      	
-        			case GUI::BUTTON::INCREMENT_DEFENCE_ID:  
-                                { 
-                                        if (skills.IncrementDefence() == true) 
-                                        {
-                                        	defence_undo++;
-                                        }
+        			//case GUI::BUTTON::INCREMENT_DEFENCE_ID:  
+                                //{ 
+                                        //if (skills.IncrementDefence() == true) 
+                                        //{
+                                        	//defence_undo++;
+                                        //}
                                         
-                                        break; 
-                                }                                
-        			case GUI::BUTTON::DECREMENT_DEFENCE_ID:  
-                                { 
-                                        if (defence_undo > 0)
-                                        {
-                                                skills.DecrementDefence();
-                                                defence_undo--; 
-                                        }
+                                        //break; 
+                                //}                                
+        			//case GUI::BUTTON::DECREMENT_DEFENCE_ID:  
+                                //{ 
+                                        //if (defence_undo > 0)
+                                        //{
+                                                //skills.DecrementDefence();
+                                                //defence_undo--; 
+                                        //}
                                         
-                                        break; 
-                                }
+                                        //break; 
+                                //}
           		   	      	
-        			case GUI::BUTTON::INCREMENT_LEADER_ID:   
-                                { 
-                                        if (skills.IncrementLeader() == true) 
-                                        {
-                                        	leader_undo++;
-                                        }
+        			//case GUI::BUTTON::INCREMENT_LEADER_ID:   
+                                //{ 
+                                        //if (skills.IncrementLeader() == true) 
+                                        //{
+                                        	//leader_undo++;
+                                        //}
                                         
-                                        break; 
-                                }                                
-        			case GUI::BUTTON::DECREMENT_LEADER_ID:   
-                                { 
-                                        if (leader_undo > 0)
-                                        {
-                                                skills.DecrementLeader(); 
-                                                leader_undo--;
-                                        }
+                                        //break; 
+                                //}                                
+        			//case GUI::BUTTON::DECREMENT_LEADER_ID:   
+                                //{ 
+                                        //if (leader_undo > 0)
+                                        //{
+                                                //skills.DecrementLeader(); 
+                                                //leader_undo--;
+                                        //}
                                         
-                                        break; 
-                                }
+                                        //break; 
+                                //}
            		   	      	
-        			case GUI::BUTTON::INCREMENT_TRADER_ID:   
-                                { 
-                                        if (skills.IncrementTrader() == true)
-                                        {
-                                        	trader_undo++;
-                                        }
+        			//case GUI::BUTTON::INCREMENT_TRADER_ID:   
+                                //{ 
+                                        //if (skills.IncrementTrader() == true)
+                                        //{
+                                        	//trader_undo++;
+                                        //}
                                         
-                                        break; 
-                                }
-        			case GUI::BUTTON::DECREMENT_TRADER_ID:   
-                                { 
-                                        if (trader_undo > 0)
-                                        {
-                                                skills.DecrementTrader(); 
-                                                trader_undo--;
-                                        }
+                                        //break; 
+                                //}
+        			//case GUI::BUTTON::DECREMENT_TRADER_ID:   
+                                //{ 
+                                        //if (trader_undo > 0)
+                                        //{
+                                                //skills.DecrementTrader(); 
+                                                //trader_undo--;
+                                        //}
                                         
-                                        break; 
-                                }
+                                        //break; 
+                                //}
 
-        			case GUI::BUTTON::INCREMENT_TECHNIC_ID:  
-                                { 
-                                	if (skills.IncrementTechnic() == true) 
-                                        {
-                                        	technic_undo++;
-                                        }
+        			//case GUI::BUTTON::INCREMENT_TECHNIC_ID:  
+                                //{ 
+                                	//if (skills.IncrementTechnic() == true) 
+                                        //{
+                                        	//technic_undo++;
+                                        //}
                                         
-                                        break; 
-                                }
-                                case GUI::BUTTON::DECREMENT_TECHNIC_ID:  
-                                {
-                                        if (technic_undo > 0) 
-                                        {
-                                                skills.DecrementTechnic(); 
-                                                technic_undo--;
-                                        }
+                                        //break; 
+                                //}
+                                //case GUI::BUTTON::DECREMENT_TECHNIC_ID:  
+                                //{
+                                        //if (technic_undo > 0) 
+                                        //{
+                                                //skills.DecrementTechnic(); 
+                                                //technic_undo--;
+                                        //}
                                         
-                                        break; 
-                                }
+                                        //break; 
+                                //}
            		   	      	
-        			case GUI::BUTTON::INCREMENT_DIPLOMAT_ID: 
-                                { 
-                                        if (skills.IncrementDiplomat() == true) 
-                                        {
-                                        	diplomat_undo++;
-                                        }
+        			//case GUI::BUTTON::INCREMENT_DIPLOMAT_ID: 
+                                //{ 
+                                        //if (skills.IncrementDiplomat() == true) 
+                                        //{
+                                        	//diplomat_undo++;
+                                        //}
                                         
-                                        break; 
-                                }
-        			case GUI::BUTTON::DECREMENT_DIPLOMAT_ID: 
-                                {
-                                        if (diplomat_undo > 0)
-                                        {
-                                                skills.DecrementDiplomat(); 
-                                                diplomat_undo--;
-                                        }
-                                        break; 
-                                }        
-           		}
-		}
-	}
+                                        //break; 
+                                //}
+        			//case GUI::BUTTON::DECREMENT_DIPLOMAT_ID: 
+                                //{
+                                        //if (diplomat_undo > 0)
+                                        //{
+                                                //skills.DecrementDiplomat(); 
+                                                //diplomat_undo--;
+                                        //}
+                                        //break; 
+                                //}        
+           		//}
+		//}
+	//}
 }
 
 
 void GuiSkills::RenderSkills(const Skills& skills) const
 {
-	glPushMatrix();
-	{
-		glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
+	//glPushMatrix();
+	//{
+		//glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
 	
-		drawTexturedRect(textureOb_background, background_rect, -1.0);
-		for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
-		{
-			BaseButton* button = iterator->second;
-			switch(button->GetSubTypeId())
-			{
-				case GUI::BUTTON::INCREMENT_ATTACK_ID:
-				{  			
-		     			for (int i=0; i<SKILLS::ATTACK_MAX; i++) 
-     					{ 
-         					Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
-         		      				      button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
-         		      				      button_w, button_h);
+		//drawTexturedRect(textureOb_background, background_rect, -1.0);
+		//for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+		//{
+			//BaseButton* button = iterator->second;
+			//switch(button->GetSubTypeId())
+			//{
+				//case GUI::BUTTON::INCREMENT_ATTACK_ID:
+				//{  			
+		     			//for (int i=0; i<SKILLS::ATTACK_MAX; i++) 
+     					//{ 
+         					//Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
+         		      				      //button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
+         		      				      //button_w, button_h);
 
-     						if (i<skills.GetAttack()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
-     						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
-     					}
+     						//if (i<skills.GetAttack()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+     						//else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
+     					//}
  			
- 					break;
-				}
+ 					//break;
+				//}
 			
-				case GUI::BUTTON::INCREMENT_DEFENCE_ID:
-				{
-		     			for (int i=0; i<SKILLS::DEFENCE_MAX; i++) 
-     					{		 
-         					Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
-         		      				      button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
-         		      				      button_w, button_h);
-         					if (i<skills.GetDefence()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
-     						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
-     					}
+				//case GUI::BUTTON::INCREMENT_DEFENCE_ID:
+				//{
+		     			//for (int i=0; i<SKILLS::DEFENCE_MAX; i++) 
+     					//{		 
+         					//Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
+         		      				      //button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
+         		      				      //button_w, button_h);
+         					//if (i<skills.GetDefence()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+     						//else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
+     					//}
 				
-					break;
-				}
+					//break;
+				//}
 
-				case GUI::BUTTON::INCREMENT_LEADER_ID:
-				{
-	   		     		for (int i=0; i<SKILLS::LEADER_MAX; i++) 
-     					{ 
-         					Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
-         		      				      button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
-         		      				      button_w, button_h);
-         					if (i<skills.GetLeader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
-     						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
-     					}
+				//case GUI::BUTTON::INCREMENT_LEADER_ID:
+				//{
+	   		     		//for (int i=0; i<SKILLS::LEADER_MAX; i++) 
+     					//{ 
+         					//Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
+         		      				      //button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
+         		      				      //button_w, button_h);
+         					//if (i<skills.GetLeader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+     						//else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
+     					//}
 				
-					break;
-	   			}
+					//break;
+	   			//}
 
-	   			case GUI::BUTTON::INCREMENT_TRADER_ID:
-	   			{
-	   	     			for (int i=0; i<SKILLS::TRADER_MAX; i++) 
-     					{ 
-         					Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
-         		     				      button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
-         		     				      button_w, button_h);
-         					if (i<skills.GetTrader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
-     						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
-    					}
+	   			//case GUI::BUTTON::INCREMENT_TRADER_ID:
+	   			//{
+	   	     			//for (int i=0; i<SKILLS::TRADER_MAX; i++) 
+     					//{ 
+         					//Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
+         		     				      //button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
+         		     				      //button_w, button_h);
+         					//if (i<skills.GetTrader()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+     						//else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
+    					//}
 				
-					break;
-	   	   		}
+					//break;
+	   	   		//}
 			
-	   			case GUI::BUTTON::INCREMENT_TECHNIC_ID:
-	   			{
-	   	     			for (int i=0; i<SKILLS::TECHNIC_MAX; i++) 
-     					{ 
-         					Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
-         		      				      button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
-         		      				      button_w, button_h);
-         					if (i<skills.GetTechnic()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
-     						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
-     					}     
-	   				break;
-	   			}
+	   			//case GUI::BUTTON::INCREMENT_TECHNIC_ID:
+	   			//{
+	   	     			//for (int i=0; i<SKILLS::TECHNIC_MAX; i++) 
+     					//{ 
+         					//Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
+         		      				      //button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
+         		      				      //button_w, button_h);
+         					//if (i<skills.GetTechnic()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+     						//else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
+     					//}     
+	   				//break;
+	   			//}
 
-	   			case GUI::BUTTON::INCREMENT_DIPLOMAT_ID:
-	   			{
-	   				for (int i=0; i<SKILLS::DIPLOMAT_MAX; i++) 
-     					{ 
-         					Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
-         		      				      button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
-         		     				      button_w, button_h);
-         					if (i<skills.GetDiplomat()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
-     						else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
-     					}
-	   				break;
-	   			}
-	   		}
-		}
-	}
-	glPopMatrix();
+	   			//case GUI::BUTTON::INCREMENT_DIPLOMAT_ID:
+	   			//{
+	   				//for (int i=0; i<SKILLS::DIPLOMAT_MAX; i++) 
+     					//{ 
+         					//Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
+         		      				      //button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
+         		     				      //button_w, button_h);
+         					//if (i<skills.GetDiplomat()) 	{ drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }	
+     						//else 				{ drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
+     					//}
+	   				//break;
+	   			//}
+	   		//}
+		//}
+	//}
+	//glPopMatrix();
 }
 
 

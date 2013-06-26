@@ -22,18 +22,15 @@
 class ItemSlot;
 #include "../common/rect.hpp"
 #include "MouseData.hpp"
-class Player;
 class Base;
-#include "BaseGui.hpp"
+#include "BaseGuiElement.hpp"
 
-class Cursor : public BaseGui
+class Cursor : public BaseGuiElement
 {
   	public:
         	Cursor();
-        	~Cursor();
-		
-		void SetPlayer(Player* player) {this->player = player; };
-		
+        	~Cursor();		
+
 		void SetLeftMouseButtonClick(bool left_click) 		{ data_mouse.left_click = left_click; };
 		void SetRightMouseButtonClick(bool right_click) 	{ data_mouse.right_click = right_click; };
 		void SetFocusedObject(Base* focused_ob) { this->focused_ob = focused_ob; };

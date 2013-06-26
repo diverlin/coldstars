@@ -24,6 +24,8 @@
 #include "../slots/ItemSlot.hpp"
 #include "../slots/VehicleSlot.hpp"
 #include "../pilots/Npc.hpp"
+#include "../spaceobjects/Vehicle.hpp"
+#include "../gui/GuiManager.hpp"
 
 GuiStore::GuiStore():store(nullptr)
 {}
@@ -87,7 +89,7 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
         { 
                 if (rect_itemslot_vec[i].second->GetItem() != nullptr)
                 {
-                	if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
+                	if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.mx - GetOffset().x, data_mouse.my - GetOffset().y) == true)
                 	{
 				player->GetCursor().SetFocusedObject(rect_itemslot_vec[i].second->GetItem());
                 	
@@ -107,7 +109,7 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
         { 
                 if (rect_vehicleslot_vec[i].second->GetVehicle() != nullptr)
                 {
-                	if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.mx - GetGuiOffset().x, data_mouse.my - GetGuiOffset().y) == true)
+                	if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.mx - GetOffset().x, data_mouse.my - GetOffset().y) == true)
                 	{
 				player->GetCursor().SetFocusedObject(rect_vehicleslot_vec[i].second->GetVehicle());
                 	
@@ -117,8 +119,8 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
                         		if (player->GetNpc()->GetCredits() >= price)
                               		{
                               			store->SellVehicle(player->GetNpc(), rect_vehicleslot_vec[i].second, price);
-                                                player->GetGuiManager().GetGuiKosmoport().ExitGuiStoreScreen();                                                
-                                                player->GetGuiManager().GetGuiKosmoport().EnterGuiStoreScreen();
+                                                GuiManager::Instance().GetGuiKosmoport().ExitGuiStoreScreen();                                                
+                                                GuiManager::Instance().GetGuiKosmoport().EnterGuiStoreScreen();
                         		}
                         	} 
                         	return true; 
@@ -132,10 +134,10 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
 void GuiStore::RenderSlots(int credits) const
 {      
 	//glPushMatrix();
-		//glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
+		//glTranslatef(GetOffset().x, GetOffset().y, 0);
         	//for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
         	//{
-                	//rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetGuiOffset());
+                	//rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetOffset());
                 	//if (rect_itemslot_vec[i].second->GetItem() != nullptr)
                 	//{
                 		//if (rect_itemslot_vec[i].second->GetItem()->GetPrice() > credits)

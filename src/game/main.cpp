@@ -30,7 +30,9 @@
 
 #include "common/TurnTimer.hpp"
 #include "pilots/Npc.hpp"
+#include "pilots/Player.hpp"
 #include "spaceobjects/Planet.hpp"
+#include "spaceobjects/Vehicle.hpp"
 
 #include "world/galaxy.hpp"
 #include "world/Sector.hpp"
@@ -50,10 +52,14 @@
 #include "gui/ButtonTrigger.hpp"
 #include "gui/GuiActions.hpp"
 
+#include "../pureTest/threadTest.cpp"
+
 enum { NORMAL_RUNSCENARIO, TEST_PARTICLES_RUNSCENARIO, TEST_TEXT_RUNSCENARIO };
 
 int main()
 {
+	//runThreadTest();
+	
 	init();        
 	GameDate::Instance().SetDate(1,1,4000);
         
@@ -84,6 +90,10 @@ int main()
 
 	ButtonTrigger* button2 = new ButtonTrigger(/*subtype_id=*/2, /*info*/"info", /*pAction=*/GuiActions::Test2, /*textureOb*/NULL);
 	button2->PressEvent(player);
+	
+	//GuiActions::GalaxyMapGuiTransition(player);
+	//player->GetGuiManager().EnterGuiSpace();
+	//player->GetGuiManager().GetGuiSpace().EnterGalaxyMap();
 	/** */
 	
 	// GAME LOOP

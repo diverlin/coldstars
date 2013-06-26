@@ -19,12 +19,12 @@
 #ifndef GUIGALAXYMAP_H
 #define GUIGALAXYMAP_H
 
-#include "BaseGui.hpp"
+#include "BaseGuiElement.hpp"
 class Galaxy;
 #include "../render/PathVisual.hpp"
 #include "../common/rect.hpp"
 
-class GuiGalaxyMap : public BaseGui
+class GuiGalaxyMap : public BaseGuiElement
 {
 	public:
 		GuiGalaxyMap();

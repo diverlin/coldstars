@@ -34,6 +34,7 @@
 
 #include "../spaceobjects/Star.hpp"
 #include "../pilots/Npc.hpp"
+#include "../spaceobjects/Vehicle.hpp"
 
 GuiGalaxyMap::GuiGalaxyMap():galaxy(nullptr)
 { 

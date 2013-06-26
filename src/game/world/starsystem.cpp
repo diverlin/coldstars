@@ -50,6 +50,8 @@
 
 #include "../garbage/EntityGarbage.hpp"
 
+#include "../gui/GuiManager.hpp"
+#include "../gui/GuiRadar.hpp"
 
 int StarSystem::counter = 0;
                 
@@ -794,7 +796,7 @@ void StarSystem::FindRenderVisibleEntities_c(Player* player)
 
 void StarSystem::FindRadarVisibleEntities_c(Player* player)
 {	
-	GuiRadar& gui_radar = player->GetGuiManager().GetGuiSpace().GetGuiRadar();
+	GuiRadar& gui_radar = GuiManager::Instance().GetGuiSpace().GetGuiRadar();
 	const Vehicle& vehicle = *player->GetNpc()->GetVehicle();
 	gui_radar.Reset();
 		
