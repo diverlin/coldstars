@@ -46,7 +46,7 @@ class Box
       		const Vec3<float> GetAngle() const {return angle; }
 
       		bool CheckInteraction(const Vec2<float>&) const;		
-      		bool CheckInteraction(float, float) const;
+      		//bool CheckInteraction(float, float) const;
       		      		      		
       	private:
       		Vec3<float> center;  

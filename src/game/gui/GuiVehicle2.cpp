@@ -142,7 +142,7 @@ ItemSlot* GuiVehicle2::GetInreactedItemSlot(const MouseData& data_mouse)
 {
 	for(unsigned int i=0; i<button_slot_vec.size(); i++)
 	{ 
-		if (button_slot_vec[i].first->GetBox().CheckInteraction(data_mouse.mx - GetOffset().x, data_mouse.my - GetOffset().y))
+		if (button_slot_vec[i].first->GetBox().CheckInteraction(data_mouse.pos))
 		{  
 			if (data_mouse.left_click == true)
 			{

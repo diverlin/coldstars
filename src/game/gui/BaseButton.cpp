@@ -77,14 +77,16 @@ void BaseButton::ShadeOff()
 {
 	alpha = 1.0f; 
 }      
-       		    
-void BaseButton::RenderInfo(int gui_offset_x, int gui_offset_y) const
+   
+/* virtual override */   		    
+void BaseButton::RenderInfo() const
 {
-	Vec2<float> pos(box.GetCenter().x+gui_offset_x, box.GetCenter().y+gui_offset_y);
+	Vec2<float> pos(box.GetCenter().x, box.GetCenter().y);
 	drawSimpleColoredTextWithBackground(info, 12, pos, Color4<int>(255, 255, 255, 255));
 }
 
-void BaseButton::Render(int offset_x, int offset_y) const
+/* virtual override */
+void BaseButton::RenderUnique() const
 {
 	//if (textureOb_mask != nullptr)
    	//{
@@ -108,7 +110,7 @@ void BaseButton::Render(int offset_x, int offset_y) const
    		
 	if (label != "")
 	{
-		Vec2<float> pos(box.GetCenter().x + offset_x, box.GetCenter().y + box.GetSize().y + offset_y);
+		Vec2<float> pos(box.GetCenter().x, box.GetCenter().y + box.GetSize().y );
 		Screen::Instance().DrawText(label, 12, pos);
 	}
 }

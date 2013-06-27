@@ -24,6 +24,7 @@
 #include "../resources/textureOb.hpp"
 #include "../common/rect.hpp"
 #include "../docking/Shop.hpp"
+#include "MouseData.hpp"
 
 class Slider : public BaseGuiElement
 {

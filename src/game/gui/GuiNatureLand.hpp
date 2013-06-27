@@ -24,6 +24,7 @@ class NatureLand;
 class ItemSlot;
 #include "GuiPair.hpp"
 #include "../common/rect.hpp"
+#include "MouseData.hpp"
 
 class GuiNatureLand : public BaseGuiElement
 {

@@ -19,17 +19,23 @@
 #include <cmath>
 #include "Collision.hpp"
 
-bool collisionDotCircle2D_FAST(const Vec2<float>& center1, const Vec2<float>& center2, float collision_radius)
+bool checkCollisionDotWithCircle_DIRTY(const Vec2<float>& dot, const Vec2<float>& center, float radius)
 {
-    	if (std::fabs(center1.x - center2.x) > collision_radius/2)
-       		return false;
-    	if (std::fabs(center1.y - center2.y) > collision_radius/2)
-       		return false;
-
-    	return true;
+	if (std::fabs(dot.x - center.x) > radius/2)
+		return false;
+	if (std::fabs(dot.y - center.y) > radius/2)
+		return false;
+	
+	return true;
 }
 
-bool collisionDotCircle2D_FAST(const Vec2<float>& center1, float center2_x, float center2_y, float collision_radius)
+bool checkCollisionDotWithRectangle(const Vec2<float>& dot, const Vec2<float>& center, const Vec2<float>& size)
 {
-	return collisionDotCircle2D_FAST(center1, Vec2<float>(center2_x, center2_y), collision_radius);
+	if (std::fabs(dot.x - center.x) > size.x/2)
+		return false;
+	if (std::fabs(dot.y - center.y) > size.y/2)
+		return false;
+	
+	return true;		
 }
+

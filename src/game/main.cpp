@@ -84,16 +84,16 @@ int main()
 	//Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
 	
 	/** */
-	ButtonTrigger* button = new ButtonTrigger(/*subtype_id=*/1, /*info*/"info", /*pAction=*/GuiActions::Test, /*textureOb*/NULL);
-	button->PressEvent(player);
-	button->PressEvent(player);
+	//ButtonTrigger* button = new ButtonTrigger(/*subtype_id=*/1, /*info*/"info", /*pAction=*/GuiActions::Test, /*textureOb*/NULL);
+	//button->PressEvent(player);
+	//button->PressEvent(player);
 
-	ButtonTrigger* button2 = new ButtonTrigger(/*subtype_id=*/2, /*info*/"info", /*pAction=*/GuiActions::Test2, /*textureOb*/NULL);
-	button2->PressEvent(player);
+	//ButtonTrigger* button2 = new ButtonTrigger(/*subtype_id=*/2, /*info*/"info", /*pAction=*/GuiActions::Test2, /*textureOb*/NULL);
+	//button2->PressEvent(player);
 	
-	//GuiActions::GalaxyMapGuiTransition(player);
-	//player->GetGuiManager().EnterGuiSpace();
-	//player->GetGuiManager().GetGuiSpace().EnterGalaxyMap();
+	////GuiActions::GalaxyMapGuiTransition(player);
+	////player->GetGuiManager().EnterGuiSpace();
+	////player->GetGuiManager().GetGuiSpace().EnterGalaxyMap();
 	/** */
 	
 	// GAME LOOP

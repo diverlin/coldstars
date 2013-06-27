@@ -17,11 +17,10 @@
 */
 
 #include "BaseGuiElement.hpp"
-#include "MouseData.hpp"
 #include "../common/constants.hpp"
 #include "../render/MyGl.hpp"
 #include "../render/Render.hpp"
-#include "../pilots/Player.hpp"
+#include "../common/Logger.hpp"
 
 std::map<int, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
 
@@ -51,6 +50,37 @@ BaseGuiElement* BaseGuiElement::GetGuiElement(int request_subtype_id) const
 	return nullptr;
 }   
 	
+void BaseGuiElement::PressEventOnGuiElement(int subtype_id)
+{
+	BaseGuiElement* button = GetGuiElement(subtype_id);
+	if (button != nullptr)
+	{
+		button->PressEvent(player);
+	}
+	#if GUI_LOG_ENABLED == 1
+	else
+	{
+		Logger::Instance().Log("BaseGuiElement::PressEventOnGuiElement, unknown subtype_id", GUI_LOG_DIP);
+	}
+	#endif
+
+}	
+
+void BaseGuiElement::ResetEventOnGuiElement(int subtype_id)
+{
+	BaseGuiElement* button = GetGuiElement(subtype_id);
+	if (button != nullptr)
+	{
+		button->Reset();
+	}
+	#if GUI_LOG_ENABLED == 1
+	else
+	{
+		Logger::Instance().Log("BaseGuiElement::ResetEventOnGuiElement, unknown subtype_id", GUI_LOG_DIP);
+	}
+	#endif
+}	
+			
 /* virtual */
 void BaseGuiElement::Reset()
 {
@@ -67,42 +97,34 @@ void BaseGuiElement::AddChild(BaseGuiElement* child, const Vec3<float>& offset)
 	static_gui_element_map.insert(std::make_pair(child->GetSubTypeId(), child));
 }
 		
-bool BaseGuiElement::UpdateMouseInteraction(const MouseData& data_mouse)
+BaseGuiElement* BaseGuiElement::UpdateMouseInteraction(const Vec2<float>& mouse_pos)
 {
-	for (auto &gui_element : child_vec)
+	BaseGuiElement* child_element = nullptr;
+	for (auto &child : child_vec)
 	{
-		gui_element->Update();
-		if (gui_element->GetBox().CheckInteraction(data_mouse.mx, data_mouse.my))
+		child_element = child->UpdateMouseInteraction(mouse_pos);
+		if (child_element != nullptr)
 		{
-			bool child_interaction = false;
-			for (auto &child : child_vec)
-			{
-				child_interaction = child->UpdateMouseInteraction(data_mouse);
-			}
-		
-			if (child_interaction == false)
-			{
-				if (data_mouse.left_click == true)
-				{
-					gui_element->PressEvent(player);
-					return true;
-				}
-			}
+			return child_element;
 		}
 	}
+		
+	if (box.CheckInteraction(mouse_pos) == true)
+	{
+		return this;
+	}
      	
-	return false;
+	return nullptr;
 }
 
 void BaseGuiElement::UpdateGeometry(const Vec3<float>& parent_offset)
 {
 	Vec3<float> res_offset = offset + parent_offset;
 	box.SetCenter(res_offset);
-	//box.SetSize(parent->GetBox().GetSize());
 	
-	for (auto &gui_element : child_vec)
+	for (auto &child : child_vec)
 	{
-		gui_element->UpdateGeometry(res_offset);
+		child->UpdateGeometry(res_offset);
 	}
 }
  
@@ -130,17 +152,3 @@ void BaseGuiElement::RenderCommon() const
 		gui_element->Render();
 	}
 }
-
-void BaseGuiElement::RenderChildInfo(const MouseData& data_mouse) const
-{
-	for (auto &gui_element : child_vec)
-	{	
-		if (gui_element->GetBox().CheckInteraction(data_mouse.mx, data_mouse.my))
-		{
-			//gui_element->RenderInfo(center.x, center.y);
-			return; break;
-		}
-	}
-}
-
-	

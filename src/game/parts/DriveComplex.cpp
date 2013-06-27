@@ -259,7 +259,7 @@ bool DriveComplex::CheckTargetEchievement()
 {
 	if (target != nullptr)
 	{	
-     		if (collisionDotCircle2D_FAST(owner_vehicle->GetCenter(), target_pos, target_distance) == true)
+     		if (checkCollisionDotWithCircle_DIRTY(owner_vehicle->GetCenter(), target_pos, target_distance) == true)
      		{
         		return true;
         	}

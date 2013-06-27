@@ -23,7 +23,6 @@
 #include <map>
 #include <vector>
 
-#include "MouseData.hpp"
 class Player;
 #include "../common/Box.hpp" // to be removed
 #include "../common/rect.hpp" // to be removed
@@ -57,10 +56,9 @@ class BaseGuiElement
 		const Box& GetBox() const { return box; }
 		TextureOb* GetTextureOb() const { return textureOb; }
 			
-		BaseGuiElement* GetGuiElement(int request_subtype_id) const;
 		
 		void UpdateGeometry(const Vec3<float>&);					
-		bool UpdateMouseInteraction(const MouseData&);
+		BaseGuiElement* UpdateMouseInteraction(const Vec2<float>&);
 		
 		void AddChild(BaseGuiElement* child, const Vec3<float>& offset);
 				
@@ -69,10 +67,8 @@ class BaseGuiElement
 		virtual void Reset();
 
 		void Render() const;		
-		virtual void RenderInfo(const MouseData&) const {} 
-						
-		void RenderChildInfo(const MouseData&) const;  
-			
+		virtual void RenderInfo() const {};
+				
 	protected:
 		int type_id;
 		int subtype_id;
@@ -90,6 +86,10 @@ class BaseGuiElement
 		BaseGuiElement* parent;
 		std::vector<BaseGuiElement*> child_vec;
 
+		void PressEventOnGuiElement(int);
+		void ResetEventOnGuiElement(int);
+		BaseGuiElement* GetGuiElement(int request_subtype_id) const;
+		
 		virtual void RenderUnique() const;		
 		void RenderCommon() const;
        		       	
@@ -97,6 +97,8 @@ class BaseGuiElement
 		Vec3<float> offset;
 		
 		static std::map<int, BaseGuiElement*> static_gui_element_map;
+		
+	friend class GuiManager;
 };
 
 #endif 

@@ -75,7 +75,7 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 	bool interaction = gui_vehicle_scan->UpdateMouseInteraction(data_mouse);        
 	if ( (interaction == true) and (gui_vehicle_scan->GetAllowFullControl() == true) )
 	{
-		interaction = gui_skills->UpdateMouseInteraction(data_mouse);
+		interaction = gui_skills->UpdateMouseInteraction(data_mouse.pos);
 		gui_skills->ButtonsAction(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());
 	}
 
@@ -124,12 +124,14 @@ void GuiManager::ExitGuiSpace()
         gui_space.UnbindSharedGuis();
 }
              
-bool GuiManager::RunSessionInSpace(const MouseData& data_mouse)
-{
-        gui_space.Update(data_mouse);
-        gui_space.Render();
-}
-   
+//bool GuiManager::RunSessionInSpace(const MouseData& data_mouse)
+//{
+	//std::cout<<"RunSessionInSpace"<<std::endl;
+        //gui_space.Update(data_mouse);
+        //gui_space.Render();
+        //gui_space.RenderInfo(data_mouse);
+//}
+
 bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 {
         gui_kosmoport.Update(data_mouse);
@@ -152,7 +154,7 @@ bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 	gui_natureland.BindNatureLand(natureland);
 
 	//update  
-	bool interaction = gui_natureland.UpdateMouseInteraction(data_mouse);
+	bool interaction = gui_natureland.UpdateMouseInteraction(data_mouse.pos);
 	if (interaction == false)
 	{
 		interaction = gui_natureland.UpdateMouseInteractionWithEquipedItemSlots(data_mouse);
@@ -168,3 +170,14 @@ bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 		//gui_natureland.RenderFocusedButtonInfo(data_mouse); 
 	disable_BLEND(); 
 }
+
+
+void GuiManager::PressEventOnGuiElement(int subtype_id)
+{
+	gui_space.PressEventOnGuiElement(subtype_id); 
+}	
+
+void GuiManager::ResetEventOnGuiElement(int subtype_id)
+{
+	gui_space.ResetEventOnGuiElement(subtype_id);
+}	
