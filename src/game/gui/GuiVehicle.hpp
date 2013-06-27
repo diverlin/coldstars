@@ -24,6 +24,7 @@
 #include "GuiItemSlot.hpp"
 #include "../common/constants.hpp"
 class Vehicle;
+#include "MouseData.hpp"
 
 class GuiVehicle : public BaseGuiElement
 {

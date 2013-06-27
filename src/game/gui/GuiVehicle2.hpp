@@ -24,6 +24,7 @@
 #include "../docking/Store.hpp"
 #include "GuiPair.hpp"
 class Vehicle;
+#include "MouseData.hpp"
 
 class GuiVehicle2 : public BaseGuiElement
 {

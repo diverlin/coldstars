@@ -74,7 +74,7 @@ void Slider::Configure(int ammount_total, int price_for_one)
 void Slider::UpdateSlidePosition(const MouseData& data_mouse)
 {
 	ButtonSingle* slide_button = (ButtonSingle*)GetGuiElement(GUI::BUTTON::SLIDE_ID);
-	if (rect_slide.CheckInteraction(data_mouse.mx - GetOffset().x, data_mouse.my - GetOffset().y) == true)
+	if (rect_slide.CheckInteraction(data_mouse.pos.x, data_mouse.pos.y) == true)
 	{
 		if (data_mouse.left_press == true)
 		{

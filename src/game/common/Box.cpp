@@ -46,12 +46,9 @@ Box::~Box()
 
 bool Box::CheckInteraction(const Vec2<float>& point) const
 {       	
-	return CheckInteraction(point.x, point.y);
-}
-     	
-bool Box::CheckInteraction(float x, float y) const
-{       	
-	return collisionDotCircle2D_FAST(center, x, y, (size.x + size.y)/2);
+	return checkCollisionDotWithRectangle(point, center, size);
+	
+	
 }
 
 void Box::Set(const Vec3<float>& center, const Vec3<float>& size)

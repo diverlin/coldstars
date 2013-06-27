@@ -69,14 +69,14 @@ init_done(false)
 		this->SetOffset(Vec3<float>(screen_w/2, screen_h/2, zpos));
 	}
 	
+	/** Top bar */
 	{
-		/* TOP BAR */
 		BarFlat* bar_top = new BarFlat();
 		{
-			TextureOb* textureOb_bar_top = GuiTextureObCollector::Instance().bar_bottom;	
+			TextureOb* textureOb_bar_top = GuiTextureObCollector::Instance().bar_top;	
 			bar_top->SetTextureOb(textureOb_bar_top);
 			Vec3<float> center;
-			Vec3<float> size(screen_w*0.9, GUI::BAR_HEIGHT, 1);
+			Vec3<float> size(screen_w, GUI::BAR_HEIGHT, 1);
 			Box box(center, size);
 			bar_top->SetBox(box);
 	
@@ -92,38 +92,51 @@ init_done(false)
 			Box box(center, size);		
 			galaxymap_button->SetBox(box);		
 			
-			Vec3<float> offset(1*1.1*GUI::ICON_SIZE, 0, 0);
+			Vec3<float> offset(screen_w/2-1*1.1*GUI::ICON_SIZE, 0, 0);
 			bar_top->AddChild(galaxymap_button, offset);
 		}
 		
 		{
 			TextureOb* texOb = GuiTextureObCollector::Instance().icon_plus;
-			ButtonSingle* load_button = new ButtonSingle(GUI::BUTTON::LOAD_ID, "load", GuiActions::Load, texOb);    
+			ButtonSingle* load_button = new ButtonSingle(GUI::BUTTON::LOAD_ID, "load", GuiActions::LoadEvent, texOb);    
 			Vec3<float> center; 
 			Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
 			Box box(center, size);		
 			load_button->SetBox(box);
 			
-			Vec3<float> offset(2*1.1*GUI::ICON_SIZE, 0, 0);
+			Vec3<float> offset(screen_w/2-2*1.1*GUI::ICON_SIZE, 0, 0);
 			bar_top->AddChild(load_button, offset);				     
 		}
 		
 		{
 			TextureOb* texOb = GuiTextureObCollector::Instance().icon_minus;
-			ButtonSingle* save_button = new ButtonSingle(GUI::BUTTON::SAVE_ID, "save", GuiActions::Save, texOb);    
+			ButtonSingle* save_button = new ButtonSingle(GUI::BUTTON::SAVE_ID, "save", GuiActions::SaveEvent, texOb);    
 			Vec3<float> center; 
 			Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
 			Box box(center, size);		
 			save_button->SetBox(box);	
 			
-			Vec3<float> offset(3*1.1*GUI::ICON_SIZE, 0, 0);				     
+			Vec3<float> offset(screen_w/2-3*1.1*GUI::ICON_SIZE, 0, 0);				     
 			bar_top->AddChild(save_button, offset);	
 		}
 	}
+	/** */
 	
+	/** Bottom bar */
+	{
+		BarFlat* bar_bottom = new BarFlat();
+		{
+			TextureOb* textureOb_bar_bottom = GuiTextureObCollector::Instance().bar_bottom;	
+			bar_bottom->SetTextureOb(textureOb_bar_bottom);
+			Vec3<float> center;
+			Vec3<float> size(screen_w, GUI::BAR_HEIGHT, 1);
+			Box box(center, size);
+			bar_bottom->SetBox(box);
 	
-			
-	textureOb_bar_bottom = GuiTextureObCollector::Instance().bar_bottom;
+			Vec3<float> offset(0, -screen_h/2+GUI::BAR_HEIGHT/2, 0);
+			this->AddChild(bar_bottom, offset);	
+		}
+	}
 		
 	Resize(screen_w, screen_h);
 	
@@ -243,7 +256,7 @@ void GuiSpace::ButtonsAction(Player* player) const
 
 void GuiSpace::Resize(int screen_w, int screen_h)
 {
-	rect_bar_bottom.Set(0, 0, screen_w, GUI::BAR_HEIGHT);
+
 }
 
 
@@ -256,9 +269,13 @@ void GuiSpace::RenderText(const Vec2<float>& scroll_coords) const
 }
 
                                             
-bool GuiSpace::Update(const MouseData& data_mouse)
+BaseGuiElement* GuiSpace::Update(const MouseData& data_mouse)
 {
 	UpdateGeometry(Vec3<float>(0,0,0));
+	for (auto &child : child_vec)
+	{
+		child->Update();
+	}
 	
 	int screen_w = Screen::Instance().GetWidth();
 	int screen_h = Screen::Instance().GetHeight();
@@ -281,49 +298,50 @@ bool GuiSpace::Update(const MouseData& data_mouse)
 	}
 
 	//update
-	bool interaction = UpdateMouseInteraction(data_mouse);
-	ButtonsAction(player);   
+	BaseGuiElement* gui_element = nullptr;
+	gui_element = UpdateMouseInteraction(data_mouse.pos);
+	//ButtonsAction(player);   
                                                
-	if (gui_galaxymap_shared->GetGalaxy() != nullptr)  
-	{
-		if (interaction == false)
-		{
-			interaction = gui_galaxymap_shared->UpdateMouseInteraction(data_mouse);
-		}
-	}
+	//if (gui_galaxymap_shared->GetGalaxy() != nullptr)  
+	//{
+		//if (gui_element == nullptr)
+		//{
+			//gui_element = gui_galaxymap_shared->UpdateMouseInteraction(data_mouse);
+		//}
+	//}
 			
-	if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
-	{	
-		if (interaction == false)
-		{
-			interaction = GuiManager::Instance().UpdateMouseInteractionWithScanVehicle(data_mouse);
-		}
-	}
+	//if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
+	//{	
+		//if (gui_element == nullptr)
+		//{
+			//gui_element = GuiManager::Instance().UpdateMouseInteractionWithScanVehicle(data_mouse);
+		//}
+	//}
 
 	//gui_vehicle_player.ButtonsAction(player);
 	if (show_gui_radar == true)
 	{
-		if (interaction == false)
+		if (gui_element == nullptr)
 		{
-			interaction = gui_vehicle_player.UpdateMouseInteraction(data_mouse);
+			gui_element = gui_vehicle_player.UpdateMouseInteraction(data_mouse.pos);
 		}
 	
-		gui_radar.Update();                                
-		if (interaction == false)
-		{
-			if (interaction == false)
-			{
-				interaction = gui_radar.UpdateMouseInteraction(data_mouse);
-			}
-		}
+		//gui_radar.Update();                                
+		//if (gui_element == nullptr)
+		//{
+			//gui_element = gui_radar.UpdateMouseInteraction(data_mouse);
+		//}
 	}
                         
 	if (gui_vehicle_target.GetVehicle() != nullptr)
 	{
-		interaction = UpdateMouseInteractionWithPreciseWeaponTarget(data_mouse);
+		//if (gui_element == nullptr)
+		//{
+			//gui_element = UpdateMouseInteractionWithPreciseWeaponTarget(data_mouse);
+		//}
 	}		
 
-	return interaction;
+	return gui_element;
 }
 
 /* virtual final */
@@ -354,7 +372,6 @@ void GuiSpace::RenderUnique() const
 		//gui_vehicle_target.RenderInfo(data_mouse); 
 	}
 
-	//Render();
 	//RenderChildInfo(data_mouse);
 	disable_BLEND();
 	

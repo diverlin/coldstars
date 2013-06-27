@@ -28,11 +28,8 @@ class GuiActions
 		~GuiActions() {}
 
 		static void GalaxyMapGuiTransition(Player* player);
-		static void Save(Player* player);
-		static void Load(Player* player);
-								
-		static void Test(Player* player);
-		static void Test2(Player* player);
+		static void SaveEvent(Player* player);
+		static void LoadEvent(Player* player);
 };
 	  		
 #endif 

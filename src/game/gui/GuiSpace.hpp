@@ -47,7 +47,7 @@ class GuiSpace : public BaseGuiElement
 		void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
 		void UnbindSharedGuis();
 		
-		bool Update(const MouseData&);
+		BaseGuiElement* Update(const MouseData&);
 		
 		void Resize(int, int);
 		void ButtonsAction(Player*) const;
@@ -65,11 +65,7 @@ class GuiSpace : public BaseGuiElement
 	private:
 		bool init_done;
 		bool show_gui_radar;
-				
-		Rect rect_bar_bottom;
-
-		TextureOb* textureOb_bar_bottom;
-		
+	
 		GuiVehicle2 	gui_vehicle_player;
 		GuiVehicle2 	gui_vehicle_target;
 		GuiRadar 		gui_radar;

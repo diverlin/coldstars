@@ -23,6 +23,7 @@
 class Galaxy;
 #include "../render/PathVisual.hpp"
 #include "../common/rect.hpp"
+#include "MouseData.hpp"
 
 class GuiGalaxyMap : public BaseGuiElement
 {

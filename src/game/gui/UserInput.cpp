@@ -24,6 +24,7 @@
 #include "../parts/WeaponComplex.hpp"
 #include "../pilots/Npc.hpp"
 #include "../pilots/Player.hpp"
+
 #include "../gui/GuiManager.hpp"
 
 UserInput& UserInput::Instance()
@@ -108,251 +109,53 @@ void UserInput::KeyPressedInSpace(Player* player)
 		} 
 
 		//DRIVE SLOT
-		case sf::Keyboard::F: 
-		{ 
-			BaseGuiElement* button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::DRIVE_SLOT_ID);
-			if (button)
-			{
-				button->PressEvent(player); 
-			}
-			
-			break; 
-		
-		}	
+		case sf::Keyboard::F: { GuiManager::Instance().PressEventOnGuiElement(ENTITY::DRIVE_SLOT_ID); break; }	
 		
 		// WEAPON SLOTS
-		case sf::Keyboard::Num1: 
-		{ 
-			BaseGuiElement* button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT1_ID);
-			if (button)
-			{
-				button->PressEvent(player); 
-			}
-			
-			break; 
+		case sf::Keyboard::Num1: { GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT1_ID); break; }		
+		case sf::Keyboard::Num2: { GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT2_ID); break; }
+		case sf::Keyboard::Num3: { GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT3_ID); break; } 
+		case sf::Keyboard::Num4: { GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT4_ID); break; } 
+		case sf::Keyboard::Num5: { GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT5_ID); break; }
+		case sf::Keyboard::Num6: { GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT6_ID); break; }
+		case sf::Keyboard::Num7: { GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT7_ID); break; }
+		case sf::Keyboard::Num8: { GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT8_ID); break; }        		
+		case sf::Keyboard::Num9: { GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT9_ID); break; } 
 		
-		}		
-		case sf::Keyboard::Num2: 
-		{ 
-			BaseGuiElement* button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT2_ID);
-			if (button)
-			{
-				button->PressEvent(player); 
-			}
-			
-			break; 
-		
-		}
-		case sf::Keyboard::Num3: 
-		{ 
-			BaseGuiElement* button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT3_ID);
-			if (button)
-			{
-				button->PressEvent(player); 
-			}
-			
-			break; 
-		
-		}
-		case sf::Keyboard::Num4: 
-		{ 
-			BaseGuiElement* button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT4_ID);
-			if (button)
-			{
-				button->PressEvent(player); 
-			}
-			
-			break; 
-		
-		}
-		case sf::Keyboard::Num5: 
-		{ 
-			BaseGuiElement* button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT5_ID);
-			if (button)
-			{
-				button->PressEvent(player); 
-			}
-			
-			break; 
-		
-		}
-		case sf::Keyboard::Num6: 
-		{ 
-			BaseGuiElement* button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT6_ID);
-			if (button)
-			{
-				button->PressEvent(player); 
-			}
-			
-			break; 
-		
-		}
-		case sf::Keyboard::Num7: 
-		{ 
-			BaseGuiElement* button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT7_ID);
-			if (button)
-			{
-				button->PressEvent(player); 
-			}
-			
-			break; 
-		
-		}
-		case sf::Keyboard::Num8: 
-		{ 
-			BaseGuiElement* button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT8_ID);
-			if (button)
-			{
-				button->PressEvent(player); 
-			}
-			
-			break; 
-		
-		}        		
-		case sf::Keyboard::Num9: 
-		{ 
-			BaseGuiElement* button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT9_ID);
-			if (button)
-			{
-				button->PressEvent(player); 
-			}
-			
-			break; 
-		
-		} 
-										
 		case sf::Keyboard::A:
 		{ 
 			if (player->GetNpc()->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == true)
 			{
-				BaseGuiElement* button = nullptr;
-				
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT1_ID);
-				if (button)
-				{
-					button->Reset();
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT2_ID);
-				if (button)
-				{
-					button->Reset();
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT3_ID);
-				if (button)
-				{
-					button->Reset();
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT4_ID);
-				if (button)
-				{
-					button->Reset();
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT5_ID);
-				if (button)
-				{
-					button->Reset();
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT6_ID);
-				if (button)
-				{
-					button->Reset();
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT7_ID);
-				if (button)
-				{
-					button->Reset();
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT8_ID);
-				if (button)
-				{
-					button->Reset();
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT9_ID);
-				if (button)
-				{
-					button->Reset();
-				}
+				GuiManager::Instance().ResetEventOnGuiElement(ENTITY::WEAPON_SLOT1_ID);
+				GuiManager::Instance().ResetEventOnGuiElement(ENTITY::WEAPON_SLOT2_ID);
+				GuiManager::Instance().ResetEventOnGuiElement(ENTITY::WEAPON_SLOT3_ID);
+				GuiManager::Instance().ResetEventOnGuiElement(ENTITY::WEAPON_SLOT4_ID);
+				GuiManager::Instance().ResetEventOnGuiElement(ENTITY::WEAPON_SLOT5_ID);
+				GuiManager::Instance().ResetEventOnGuiElement(ENTITY::WEAPON_SLOT6_ID);
+				GuiManager::Instance().ResetEventOnGuiElement(ENTITY::WEAPON_SLOT7_ID);
+				GuiManager::Instance().ResetEventOnGuiElement(ENTITY::WEAPON_SLOT8_ID);
+				GuiManager::Instance().ResetEventOnGuiElement(ENTITY::WEAPON_SLOT9_ID);	
 			}
 			else
-			{
-				BaseGuiElement* button = nullptr;
-				
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT1_ID);
-				if (button)
-				{
-					button->PressEvent(player);
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT2_ID);
-				if (button)
-				{
-					button->PressEvent(player);
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT3_ID);
-				if (button)
-				{
-					button->PressEvent(player);
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT4_ID);
-				if (button)
-				{
-					button->PressEvent(player);
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT5_ID);
-				if (button)
-				{
-					button->PressEvent(player);
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT6_ID);
-				if (button)
-				{
-					button->PressEvent(player);
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT7_ID);
-				if (button)
-				{
-					button->PressEvent(player);
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT8_ID);
-				if (button)
-				{
-					button->PressEvent(player);
-				}
-				button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::WEAPON_SLOT9_ID);
-				if (button)
-				{
-					button->PressEvent(player);
-				}
-			}
-			break;
-		}
-
-		case sf::Keyboard::C:   
-		{
-			Screen::Instance().InitiateScrollTo(player->GetNpc()->GetVehicle()->GetCenter());
-			break;
-		}
-				
-		case sf::Keyboard::G: // Grapple
-		{
-			BaseGuiElement* button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(ENTITY::GRAPPLE_SLOT_ID);
-			if (button)
-			{
-				//button->PressEvent(player);
-			}
-
-			break;
-		}
-
-		case sf::Keyboard::M: // RADAR
-		{
-			BaseGuiElement* button = GuiManager::Instance().GetGuiSpace().GetGuiVehiclePlayer().GetGuiElement(GUI::BUTTON::GALAXYMAP_ID);
-			if (button)
-			{
-				button->PressEvent(player);
+			{		
+				GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT1_ID);
+				GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT2_ID);
+				GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT3_ID);
+				GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT4_ID);
+				GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT5_ID);
+				GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT6_ID);
+				GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT7_ID);
+				GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT8_ID);
+				GuiManager::Instance().PressEventOnGuiElement(ENTITY::WEAPON_SLOT9_ID);				
 			}
 			
 			break;
 		}
+
+		case sf::Keyboard::C: { Screen::Instance().InitiateScrollTo(player->GetNpc()->GetVehicle()->GetCenter()); break; }
+		case sf::Keyboard::G: { GuiManager::Instance().PressEventOnGuiElement(ENTITY::GRAPPLE_SLOT_ID); break; }	
+		
+		case sf::Keyboard::M: {	GuiManager::Instance().PressEventOnGuiElement(GUI::BUTTON::GALAXYMAP_ID); break; }
 		
 		case sf::Keyboard::R: // RADAR
 		{
@@ -391,11 +194,7 @@ void UserInput::KeyPressedInSpace(Player* player)
 			break;
 		}
 				
-		case sf::Keyboard::F5: // save event
-		{		
-			EntityManager::Instance().SaveRequest();			
-			break;
-		}
+		case sf::Keyboard::F5: { GuiManager::Instance().PressEventOnGuiElement(GUI::BUTTON::SAVE_ID); break; }
 		
 		case sf::Keyboard::F6: // slow down GAME SPEED 
 		{
@@ -421,11 +220,7 @@ void UserInput::KeyPressedInSpace(Player* player)
 			break;
 		}
 		
-		case sf::Keyboard::F9:
-		{
-			EntityManager::Instance().LoadRequest();
-			break;
-		}			
+		case sf::Keyboard::F9: { GuiManager::Instance().PressEventOnGuiElement(GUI::BUTTON::LOAD_ID); break; }		
 	}   
 }
         
@@ -491,8 +286,8 @@ void UserInput::ManageRealTimeInputsInSpace(Player* player)
         
         sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());
            
-        int mx = player->GetCursor().GetMouseData().mx;
-        int my = player->GetCursor().GetMouseData().my;
+        int mx = player->GetCursor().GetMouseData().pos.x;
+        int my = player->GetCursor().GetMouseData().pos.y;
 
         int screen_w = Screen::Instance().GetWidth();
         int screen_h = Screen::Instance().GetHeight();

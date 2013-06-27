@@ -22,6 +22,7 @@
 #include "../gui/BaseGuiElement.hpp"
 #include "../spaceobjects/BaseSpaceEntity.hpp"
 #include "../spaceobjects/Vehicle.hpp"
+#include "MouseData.hpp"
 
 class GuiRadar : public BaseGuiElement
 {

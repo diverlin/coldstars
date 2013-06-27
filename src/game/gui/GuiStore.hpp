@@ -25,6 +25,7 @@ class Store;
 class ItemSlot;
 class VehicleSlot;
 #include "../common/rect.hpp"
+#include "MouseData.hpp"
 
 class GuiStore : public BaseGuiElement
 {

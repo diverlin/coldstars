@@ -42,8 +42,8 @@ class BaseButton : public BaseGuiElement
 
 			virtual void Reset();
 		
-       		void RenderInfo(int offset_x = 0, int offset_y = 0) const;        		
-       		void Render(int offset_x = 0, int offset_y = 0) const;   
+       		virtual void RenderInfo() const override;        		
+       		virtual void RenderUnique() const override;   
        		        
 	protected:      	
         	float alpha;        	        	

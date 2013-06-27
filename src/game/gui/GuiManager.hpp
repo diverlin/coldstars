@@ -40,7 +40,7 @@ class GuiManager
 		GuiVehicle* GetGuiVehicleScan() const { return gui_vehicle_scan; };
 		GuiGalaxyMap* GetGuiGalaxyMap() const { return gui_galaxymap; };
 				
-		bool RunSessionInSpace(const MouseData&);                                
+		//bool RunSessionInSpace(const MouseData&);                                
 		bool RunSessionInKosmoport(const MouseData&);
 		bool RunSessionInNatureLand(const MouseData&);
 		
@@ -52,7 +52,10 @@ class GuiManager
 		
 		bool UpdateMouseInteractionWithScanVehicle(const MouseData&);     		
 		void RenderScanVehicle(const MouseData&, bool show_skill = true) const;  
-					
+			
+		void PressEventOnGuiElement(int);
+		void ResetEventOnGuiElement(int);
+				
 	private:
 		GuiManager();
 		GuiManager(const GuiManager&) = delete;
