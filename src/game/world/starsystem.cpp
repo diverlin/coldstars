@@ -796,16 +796,16 @@ void StarSystem::FindRenderVisibleEntities_c(Player* player)
 
 void StarSystem::FindRadarVisibleEntities_c(Player* player)
 {	
-	GuiRadar& gui_radar = GuiManager::Instance().GetGuiSpace().GetGuiRadar();
+	GuiRadar& gui_radar = *(GuiRadar*)GuiManager::Instance().GetGuiElement(GUI::BUTTON::GUI_RADAR_ID);
 	const Vehicle& vehicle = *player->GetNpc()->GetVehicle();
-	gui_radar.Reset();
-		
-        for (unsigned int i=0; i<STAR_vec.size(); i++)        { gui_radar.Add(STAR_vec[i]); }    
-        for (unsigned int i=0; i<PLANET_vec.size(); i++)      { gui_radar.Add(PLANET_vec[i]); } 
-    	for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++)   { gui_radar.Add(BLACKHOLE_vec[i]); } 
-    	                
-        for (unsigned int i=0; i<ASTEROID_vec.size(); i++)    { gui_radar.AddIfWithinRadarRange(ASTEROID_vec[i], vehicle); }         
-    	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)     { gui_radar.AddIfWithinRadarRange(VEHICLE_vec[i], vehicle); }    	
+	gui_radar.ResetData();
+	
+	for (unsigned int i=0; i<STAR_vec.size(); i++)        { gui_radar.Add(STAR_vec[i]); }    
+	for (unsigned int i=0; i<PLANET_vec.size(); i++)      { gui_radar.Add(PLANET_vec[i]); } 
+	for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++)   { gui_radar.Add(BLACKHOLE_vec[i]); } 
+				
+	for (unsigned int i=0; i<ASTEROID_vec.size(); i++)    { gui_radar.AddIfWithinRadarRange(ASTEROID_vec[i], vehicle); }         
+	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)     { gui_radar.AddIfWithinRadarRange(VEHICLE_vec[i], vehicle); }    	
 }
 
       

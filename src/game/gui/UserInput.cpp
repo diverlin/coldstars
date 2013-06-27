@@ -25,6 +25,8 @@
 #include "../pilots/Npc.hpp"
 #include "../pilots/Player.hpp"
 
+#include "../spaceobjects/Vehicle.hpp"
+
 #include "../gui/GuiManager.hpp"
 
 UserInput& UserInput::Instance()

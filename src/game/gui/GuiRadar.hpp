@@ -19,42 +19,41 @@
 #ifndef GUIRADAR_H
 #define GUIRADAR_H
 
-#include "../gui/BaseGuiElement.hpp"
-#include "../spaceobjects/BaseSpaceEntity.hpp"
-#include "../spaceobjects/Vehicle.hpp"
-#include "MouseData.hpp"
+#include "BaseGuiElement.hpp"
+class BaseSpaceEntity;
+class Vehicle;
 
 class GuiRadar : public BaseGuiElement
 {
-   	public:
-      		GuiRadar();
-      		~GuiRadar();
-      		
-      		const Rect& GetRect() const { return rect; };
-      		void Resize(int, int);
-     	
-     		void Reset();
+	public:
+		GuiRadar();
+		virtual ~GuiRadar() final;
+	
+		const Rect& GetRect() const { return rect; };
+		void Resize(int, int);
+		
+		void ResetData();
+		
+		void Update();
+		//bool UpdateMouseInteraction(const Vec2<float>&);
+		
+		void Add(BaseSpaceEntity*);
+		void AddIfWithinRadarRange(BaseSpaceEntity*, const Vehicle&);
      		
-     		void Update();
-     		bool UpdateMouseInteraction(const MouseData&);
-     		
-     		void Add(BaseSpaceEntity*);
-     		void AddIfWithinRadarRange(BaseSpaceEntity*, const Vehicle&);
-     		
-		void Render() const;
-		     			
-      	private:
-      		float scale;
-
-      		TextureOb* textureOb_background;
-      		TextureOb* textureOb_bar; 	
-      		TextureOb* textureOb_screenrect; 
-      		TextureOb* textureOb_range;
-      		      		
-      	       	Rect rect;
-      	       	Rect screenrect;
-      	       	      	       	      		
-      		std::vector<BaseSpaceEntity*> entity_vec;
+		virtual void RenderUnique() const final;
+			
+	private:
+		float scale;
+		
+		TextureOb* textureOb_background;
+		TextureOb* textureOb_bar; 	
+		TextureOb* textureOb_screenrect; 
+		TextureOb* textureOb_range;
+				
+		Rect rect;
+		Rect screenrect;
+									
+		std::vector<BaseSpaceEntity*> entity_vec;
 };
 
 #endif

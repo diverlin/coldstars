@@ -40,7 +40,6 @@ class GuiSpace : public BaseGuiElement
 		
 		bool GetInitDone() const { return init_done; };
 		
-		GuiRadar& GetGuiRadar() { return gui_radar; };
 		GuiVehicle2& GetGuiVehiclePlayer() { return gui_vehicle_player; };
 		GuiVehicle2& GetGuiVehicleTarget() { return gui_vehicle_target; };
 		
@@ -64,11 +63,9 @@ class GuiSpace : public BaseGuiElement
 		
 	private:
 		bool init_done;
-		bool show_gui_radar;
-	
+
 		GuiVehicle2 	gui_vehicle_player;
 		GuiVehicle2 	gui_vehicle_target;
-		GuiRadar 		gui_radar;
 		
 		GuiGalaxyMap* gui_galaxymap_shared;  
 		GuiVehicle*   gui_vehicle_scan_shared;

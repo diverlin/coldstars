@@ -91,30 +91,30 @@ void GuiVehicle2::CreateFunctionalItemSlotsCircleGeometry(Vehicle* vehicle, floa
 
 void GuiVehicle2::UpdateEquipmentIcons() const
 {
-	for (unsigned int i=0; i<button_slot_vec.size(); i++)
-	{
-		if (button_slot_vec[i].second->GetItem() != nullptr)
-		{
-			button_slot_vec[i].first->SetTextureObAdditional(button_slot_vec[i].second->GetItem()->GetTextureOb());
-			button_slot_vec[i].first->SetTextureObMask(nullptr);
-			if (button_slot_vec[i].second->GetItem()->GetCondition() == 0)
-			{
-				button_slot_vec[i].first->SetTextureObMask(GuiTextureObCollector::Instance().slot_mark_reject);
-				button_slot_vec[i].first->Reset();
-			}
-			if (button_slot_vec[i].second->GetItem()->GetLocked())
-			{
-				button_slot_vec[i].first->SetTextureObMask(GuiTextureObCollector::Instance().slot_mark_accept);
-				button_slot_vec[i].first->Reset();
-			}
-		}
-		else
-		{
-			button_slot_vec[i].first->SetTextureObAdditional(nullptr);
-			button_slot_vec[i].first->SetTextureObMask(nullptr);
-			button_slot_vec[i].first->Reset();
-		}
-	}
+	//for (unsigned int i=0; i<button_slot_vec.size(); i++)
+	//{
+		//if (button_slot_vec[i].second->GetItem() != nullptr)
+		//{
+			//button_slot_vec[i].first->SetTextureObAdditional(button_slot_vec[i].second->GetItem()->GetTextureOb());
+			//button_slot_vec[i].first->SetTextureObMask(nullptr);
+			//if (button_slot_vec[i].second->GetItem()->GetCondition() == 0)
+			//{
+				//button_slot_vec[i].first->SetTextureObMask(GuiTextureObCollector::Instance().slot_mark_reject);
+				//button_slot_vec[i].first->Reset();
+			//}
+			//if (button_slot_vec[i].second->GetItem()->GetLocked())
+			//{
+				//button_slot_vec[i].first->SetTextureObMask(GuiTextureObCollector::Instance().slot_mark_accept);
+				//button_slot_vec[i].first->Reset();
+			//}
+		//}
+		//else
+		//{
+			//button_slot_vec[i].first->SetTextureObAdditional(nullptr);
+			//button_slot_vec[i].first->SetTextureObMask(nullptr);
+			//button_slot_vec[i].first->Reset();
+		//}
+	//}
 }
 
 void GuiVehicle2::ButtonsAction(Player* player) const

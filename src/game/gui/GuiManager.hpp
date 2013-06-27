@@ -55,6 +55,7 @@ class GuiManager
 			
 		void PressEventOnGuiElement(int);
 		void ResetEventOnGuiElement(int);
+		BaseGuiElement* GetGuiElement(int) const;
 				
 	private:
 		GuiManager();

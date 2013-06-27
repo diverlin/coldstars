@@ -24,9 +24,12 @@
 #include "../slots/ItemSlot.hpp"
 #include "../items/BaseItem.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
-#include "../pilots/Player.hpp"
 
+#include "../spaceobjects/Vehicle.hpp"
+
+#include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
+
 #include "../builder/ItemSlotBuilder.hpp"
 
 #include "../render/Render.hpp"

@@ -47,6 +47,8 @@
 
 #include "../slots/ItemSlot.hpp"
 
+#include "../spaceobjects/Vehicle.hpp"
+
 GuiSpace::GuiSpace():
 gui_galaxymap_shared(nullptr),
 gui_vehicle_scan_shared(nullptr),
@@ -138,9 +140,18 @@ init_done(false)
 		}
 	}
 		
-	Resize(screen_w, screen_h);
+	//Resize(screen_w, screen_h);
+	{
+		GuiRadar* gui_radar = new GuiRadar();
+		Vec3<float> center;
+		Vec3<float> size(250, 250, 1);	
+		
+		Box box(center, size);
+		gui_radar->SetBox(box);
 	
-	show_gui_radar = true;
+		Vec3<float> offset(0, 0, 0);
+		this->AddChild(gui_radar, offset);	
+	}
 }
 
 /*virtual*/
@@ -151,7 +162,7 @@ void GuiSpace::SetPlayer(Player* player)
 {	
 	this->player = player;
 
-	gui_radar.SetPlayer(player); 
+	GetGuiElement(GUI::BUTTON::GUI_RADAR_ID)->SetPlayer(player); 
 }
 
 void GuiSpace::BindSharedGuis(GuiGalaxyMap* gui_galaxymap_shared, GuiVehicle* gui_vehicle_scan_shared, GuiSkills* gui_skills_shared, Slider* slider_shared)
@@ -203,7 +214,8 @@ void GuiSpace::EnterGalaxyMap()
 		ExitGuiScan();
 	}
 	
-	show_gui_radar = false;          
+	GetGuiElement(GUI::BUTTON::GUI_RADAR_ID)->Hide();
+	      
 	gui_galaxymap_shared->BindGalaxy(player->GetNpc()->GetStarSystem()->GetSector()->GetGalaxy());
 }
 
@@ -213,7 +225,7 @@ void GuiSpace::ExitGalaxyMap()
 	Logger::Instance().Log("GuiSpace::ExitGalaxyMap", GUI_LOG_DIP);
 	#endif
 	
-	show_gui_radar = true;       
+	GetGuiElement(GUI::BUTTON::GUI_RADAR_ID)->Show();    
 	gui_galaxymap_shared->UnbindGalaxy();
 }
     
@@ -231,7 +243,7 @@ void GuiSpace::EnterGuiScan()
 	gui_vehicle_scan_shared->BindVehicle(player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
 	gui_skills_shared->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
 					
-	show_gui_radar = false;
+	GetGuiElement(GUI::BUTTON::GUI_RADAR_ID)->Hide();
 }
 
 void GuiSpace::ExitGuiScan()
@@ -248,7 +260,7 @@ void GuiSpace::ExitGuiScan()
 	
 	player->GetNpc()->ResetScanTarget();
 	
-	show_gui_radar = true;
+	GetGuiElement(GUI::BUTTON::GUI_RADAR_ID)->Show();
 }
 
 void GuiSpace::ButtonsAction(Player* player) const
@@ -288,7 +300,7 @@ BaseGuiElement* GuiSpace::Update(const MouseData& data_mouse)
 	if (gui_vehicle_player.GetVehicle() == nullptr)
 	{
 		gui_vehicle_player.BindVehicle(player->GetNpc()->GetVehicle(), 0.6f);
-		gui_vehicle_player.SetOffset(gui_radar.GetRect().GetCenter());                        
+		//gui_vehicle_player.SetOffset(gui_radar->GetRect().GetCenter());                        
 	}
 	gui_vehicle_player.UpdateEquipmentIcons();
 	
@@ -319,19 +331,17 @@ BaseGuiElement* GuiSpace::Update(const MouseData& data_mouse)
 	//}
 
 	//gui_vehicle_player.ButtonsAction(player);
-	if (show_gui_radar == true)
+	if (gui_element == nullptr)
 	{
-		if (gui_element == nullptr)
-		{
-			gui_element = gui_vehicle_player.UpdateMouseInteraction(data_mouse.pos);
-		}
+		//gui_element = gui_vehicle_player.UpdateMouseInteraction(data_mouse.pos);
+	}
 	
 		//gui_radar.Update();                                
 		//if (gui_element == nullptr)
 		//{
 			//gui_element = gui_radar.UpdateMouseInteraction(data_mouse);
 		//}
-	}
+	//}
                         
 	if (gui_vehicle_target.GetVehicle() != nullptr)
 	{
@@ -349,10 +359,10 @@ void GuiSpace::RenderUnique() const
 {
 	resetRenderTransformation();
 	enable_BLEND();    
-	if (show_gui_radar == true)  
+	//if (show_gui_radar == true)  
 	{
-		gui_radar.Render();
-		gui_vehicle_player.Render();
+		//gui_radar->Render();
+		//gui_vehicle_player.Render();
 		//gui_vehicle_player.RenderInfo(data_mouse);    
 	}
 	
