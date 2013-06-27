@@ -43,8 +43,8 @@ BaseButton::~BaseButton()
 	delete animation_scale;
 }
 
-/* virtual */
-void BaseButton::Reset()
+/* virtual override */
+void BaseButton::ResetState()
 {
 	pressed = false;
 	lock = false;

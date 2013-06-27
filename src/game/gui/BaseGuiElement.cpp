@@ -28,7 +28,9 @@ BaseGuiElement::BaseGuiElement(int subtype_id, const std::string info, TextureOb
 subtype_id(subtype_id),
 info(info),
 textureOb(textureOb),
-parent(parent)
+parent(parent),
+show(true),
+root(true)
 {}
 
 BaseGuiElement::~BaseGuiElement()
@@ -66,12 +68,12 @@ void BaseGuiElement::PressEventOnGuiElement(int subtype_id)
 
 }	
 
-void BaseGuiElement::ResetEventOnGuiElement(int subtype_id)
+void BaseGuiElement::ResetStateEventOnGuiElement(int subtype_id)
 {
 	BaseGuiElement* button = GetGuiElement(subtype_id);
 	if (button != nullptr)
 	{
-		button->Reset();
+		button->ResetState();
 	}
 	#if GUI_LOG_ENABLED == 1
 	else
@@ -82,7 +84,7 @@ void BaseGuiElement::ResetEventOnGuiElement(int subtype_id)
 }	
 			
 /* virtual */
-void BaseGuiElement::Reset()
+void BaseGuiElement::ResetState()
 {
 	pressed = false;
 	lock = false;
@@ -92,13 +94,19 @@ void BaseGuiElement::AddChild(BaseGuiElement* child, const Vec3<float>& offset)
 { 
 	child->SetParent(this);
 	child->SetOffset(offset);
-
+	child->SetRoot(false);
+	
 	child_vec.push_back(child); 
 	static_gui_element_map.insert(std::make_pair(child->GetSubTypeId(), child));
 }
 		
 BaseGuiElement* BaseGuiElement::UpdateMouseInteraction(const Vec2<float>& mouse_pos)
 {
+	if (!show)
+	{
+		return nullptr;
+	}
+	
 	BaseGuiElement* child_element = nullptr;
 	for (auto &child : child_vec)
 	{
@@ -108,10 +116,13 @@ BaseGuiElement* BaseGuiElement::UpdateMouseInteraction(const Vec2<float>& mouse_
 			return child_element;
 		}
 	}
-		
-	if (box.CheckInteraction(mouse_pos) == true)
-	{
-		return this;
+	
+	if (!root)
+	{	
+		if (box.CheckInteraction(mouse_pos) == true)
+		{
+			return this;
+		}
 	}
      	
 	return nullptr;
@@ -119,9 +130,14 @@ BaseGuiElement* BaseGuiElement::UpdateMouseInteraction(const Vec2<float>& mouse_
 
 void BaseGuiElement::UpdateGeometry(const Vec3<float>& parent_offset)
 {
+	if (!show)
+	{
+		return;
+	}
+	
 	Vec3<float> res_offset = offset + parent_offset;
 	box.SetCenter(res_offset);
-	
+		
 	for (auto &child : child_vec)
 	{
 		child->UpdateGeometry(res_offset);
@@ -130,9 +146,16 @@ void BaseGuiElement::UpdateGeometry(const Vec3<float>& parent_offset)
  
 void BaseGuiElement::Render() const
 {
+	if (!show)
+	{
+		return;
+	}
+	
 	enable_BLEND();
+	{
 		RenderUnique();
 		RenderCommon();
+	}
 	disable_BLEND();
 }
 

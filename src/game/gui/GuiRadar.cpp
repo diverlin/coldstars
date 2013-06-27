@@ -20,21 +20,27 @@
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../render/Screen.hpp"
 #include "../render/Render.hpp"
-#include "../pilots/Player.hpp"
 
+#include "../spaceobjects/BaseSpaceEntity.hpp"
+#include "../spaceobjects/Vehicle.hpp"
+
+#include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
 
 GuiRadar::GuiRadar()
 {		
+
+	subtype_id = GUI::BUTTON::GUI_RADAR_ID;
+	
 	textureOb_background 	= GuiTextureObCollector::Instance().radar_background;
-	textureOb_bar	 	= GuiTextureObCollector::Instance().radar_bar;
+	textureOb_bar	 		= GuiTextureObCollector::Instance().radar_bar;
 	textureOb_screenrect	= GuiTextureObCollector::Instance().radar_screenrect;
-	textureOb_range		= GuiTextureObCollector::Instance().radar_range;
-			
+	textureOb_range			= GuiTextureObCollector::Instance().radar_range;
+		
 	scale = RADAR_SCALE;
 	int screen_w = Screen::Instance().GetWidth();
-    	int screen_h = Screen::Instance().GetHeight();
-    	Resize(screen_w, screen_h);
+	int screen_h = Screen::Instance().GetHeight();
+	Resize(screen_w, screen_h);
 }
 
 GuiRadar::~GuiRadar()
@@ -45,7 +51,7 @@ void GuiRadar::Resize(int screen_w, int screen_h)
 	rect.Set(0, 0, 250, 250);
 }
      	
-void GuiRadar::Reset()
+void GuiRadar::ResetData()
 {
 	entity_vec.clear();
 }
@@ -55,20 +61,20 @@ void GuiRadar::Update()
 	screenrect.Set(rect.GetCenter() + Screen::Instance().GetRect().GetBottomLeft() * scale, (int)(Screen::Instance().GetWidth() * scale), (int)(Screen::Instance().GetHeight() * scale));
 }
 
-bool GuiRadar::UpdateMouseInteraction(const MouseData& data_mouse)
-{		
-       	if (rect.CheckInteraction(data_mouse.pos.x, data_mouse.pos.y) == true)
-        {
-        	if (data_mouse.left_press == true)
-           	{
-           		Vec2<float> new_global_coord( (data_mouse.pos.x - rect.GetCenter().x - screenrect.GetWidth()/2)/scale, (data_mouse.pos.y - rect.GetCenter().y - screenrect.GetHeight()/2)/scale);
-           		Screen::Instance().GetRect().SetBottomLeft(new_global_coord);
-       			return true;
-        	}
-     	}
-     	
-     	return false;
-}
+//bool GuiRadar::UpdateMouseInteraction(const Vec2<float>& mouse_pos)
+//{		
+	//if (rect.CheckInteraction(mouse_pos.x, mouse_pos.y) == true)
+	//{
+		////if (data_mouse.left_press == true)
+		////{
+			////Vec2<float> new_global_coord( (data_mouse.pos.x - rect.GetCenter().x - screenrect.GetWidth()/2)/scale, (data_mouse.pos.y - rect.GetCenter().y - screenrect.GetHeight()/2)/scale);
+			////Screen::Instance().GetRect().SetBottomLeft(new_global_coord);
+			////return true;
+		////}
+	//}
+
+	//return false;
+//}
      		
 void GuiRadar::Add(BaseSpaceEntity* object)
 {
@@ -77,13 +83,14 @@ void GuiRadar::Add(BaseSpaceEntity* object)
 
 void GuiRadar::AddIfWithinRadarRange(BaseSpaceEntity* object, const Vehicle& vehicle)
 {
- 	if (vehicle.IsObjectWithinRadarRange(object) == true) 
-       	{    	
-       		Add(object); 
+	if (vehicle.IsObjectWithinRadarRange(object) == true) 
+	{    	
+		Add(object); 
 	}
 }     		
     		
-void GuiRadar::Render() const
+/* virtual final */
+void GuiRadar::RenderUnique() const
 {
 	float range_diameter = 2*player->GetNpc()->GetVehicle()->GetProperties().radar;
 	Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
@@ -95,7 +102,8 @@ void GuiRadar::Render() const
 	drawTexturedRect(textureOb_range, range_rect, -2.0);
 			
 	float size, size_base = 7;
-	enable_POINTSPRITE();       	
+	enable_POINTSPRITE();  
+	{     	
 		for (unsigned int i=0; i<entity_vec.size(); i++)
 		{
 			switch(entity_vec[i]->GetTypeId())
@@ -134,5 +142,6 @@ void GuiRadar::Render() const
 			
 			drawParticle(size, rect.GetCenter() + entity_vec[i]->GetCenter()*scale);			
 		}
+	}
 	disable_POINTSPRITE(); 
 }

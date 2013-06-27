@@ -1091,7 +1091,7 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 	
 	BaseGuiElement* gui_element = GuiManager::Instance().GetGuiSpace().Update(cursor.GetMouseData());
 	if (gui_element == nullptr)
-	{    	
+	{   
 		if (turn_timer.GetTurnEnded() == true)  
 		{
 			if ( (GuiManager::Instance().GetGuiVehicleScan()->GetVehicle() == nullptr) && (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr) )

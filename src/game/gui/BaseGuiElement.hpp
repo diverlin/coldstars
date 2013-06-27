@@ -39,6 +39,8 @@ class BaseGuiElement
 		//void SetInfo(const std::string& info) { this->info = info; }
 		void SetLabel(const std::string& label) { this->label = label; }
 
+		void SetRoot(bool root) { this->root = root; }
+		
 		void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; } 		
 		void SetPlayer(Player* player) { this->player = player; } // depr
 		
@@ -48,23 +50,25 @@ class BaseGuiElement
 		void SetParent(BaseGuiElement* parent) { this->parent = parent; }
 		
 		void SetBox(const Box& box) { this->box = box; }
-		
+	
 		int GetTypeId() const { return type_id; }
 		int GetSubTypeId() const { return subtype_id; }
 					
 		const Vec3<float>& GetOffset() const { return offset; } // depr
 		const Box& GetBox() const { return box; }
 		TextureOb* GetTextureOb() const { return textureOb; }
-			
-		
+				
 		void UpdateGeometry(const Vec3<float>&);					
 		BaseGuiElement* UpdateMouseInteraction(const Vec2<float>&);
 		
 		void AddChild(BaseGuiElement* child, const Vec3<float>& offset);
-				
+
+		void Show() { show = true; }
+		void Hide() { show = false; }
+								
 		virtual void Update() {}
 		virtual void PressEvent(Player*) {}
-		virtual void Reset();
+		virtual void ResetState();
 
 		void Render() const;		
 		virtual void RenderInfo() const {};
@@ -75,6 +79,8 @@ class BaseGuiElement
 		
 		bool lock;
 		bool pressed;
+		bool show;
+		bool root;
 		
 		Box box;
 		Player* player; // depr
@@ -87,9 +93,9 @@ class BaseGuiElement
 		std::vector<BaseGuiElement*> child_vec;
 
 		void PressEventOnGuiElement(int);
-		void ResetEventOnGuiElement(int);
+		void ResetStateEventOnGuiElement(int);			
 		BaseGuiElement* GetGuiElement(int request_subtype_id) const;
-		
+				
 		virtual void RenderUnique() const;		
 		void RenderCommon() const;
        		       	

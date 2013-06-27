@@ -30,6 +30,8 @@
 #include "../pilots/Npc.hpp"
 #include "../pilots/Player.hpp"
 
+#include "../spaceobjects/Vehicle.hpp"
+
 #include "../gui/GuiSkills.hpp"
 #include "../gui/GuiGalaxyMap.hpp"
 
@@ -179,5 +181,11 @@ void GuiManager::PressEventOnGuiElement(int subtype_id)
 
 void GuiManager::ResetEventOnGuiElement(int subtype_id)
 {
-	gui_space.ResetEventOnGuiElement(subtype_id);
+	gui_space.ResetStateEventOnGuiElement(subtype_id);
 }	
+
+BaseGuiElement* GuiManager::GetGuiElement(int request_subtype_id) const
+{
+	return gui_space.GetGuiElement(request_subtype_id);
+}
+		

@@ -40,7 +40,7 @@ class BaseButton : public BaseGuiElement
        		void LockOn();
        		void LockOff();
 
-			virtual void Reset();
+			virtual void ResetState() override;
 		
        		virtual void RenderInfo() const override;        		
        		virtual void RenderUnique() const override;   
