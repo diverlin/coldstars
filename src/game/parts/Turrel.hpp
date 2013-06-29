@@ -29,20 +29,20 @@ class TextureOb;
 
 class Turrel : public BaseDrawable
 {
-        public:
-                Turrel(ItemSlot*);
-                ~Turrel();
-                
-                void Render(float);                 
-
-       		virtual void PutChildsToGarbage() const {};
-       		
+	public:
+		Turrel(ItemSlot*);
+		~Turrel();
+		
+		void Render(float);                 
+		
+		virtual void PutChildsToGarbage() const {};
+		
 		virtual void SaveData(boost::property_tree::ptree&) const {};
 		virtual void LoadData(const boost::property_tree::ptree&) {};
 		virtual void ResolveData() {};
-		               
-        private:                       
-                ItemSlot* slot;
+		   
+	private:                       
+		ItemSlot* slot;
 }; 
 
 #endif 

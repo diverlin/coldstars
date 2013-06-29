@@ -31,13 +31,13 @@
 class Screen : public SFML_Wrapper
 {
 	public:
-      		static Screen& Instance();
-        	void InitBasic(int width, int height, int bpp, bool vert_sync, const std::string&);
-      		void InitPostEffects(int, int);
-       	     			
-        	Rect& GetRect() { return rect; };
-        	
-        	Fbo& GetFbo0() { return fbo0; };
+		static Screen& Instance();
+		void InitBasic(int width, int height, int bpp, bool vert_sync, const std::string&);
+		void InitPostEffects(int, int);
+		
+		Rect& GetRect() { return rect; };
+		
+		Fbo& GetFbo0() { return fbo0; };
 		Fbo& GetFbo1() { return fbo1; };
 		Fbo& GetFbo2() { return fbo2; };
 		Fbo& GetFbo3() { return fbo3; }
@@ -48,37 +48,42 @@ class Screen : public SFML_Wrapper
 		void InitiateScrollTo(const Vec2<float>& scroll_coord) { target_center = scroll_coord; auto_scroll = true; };
 		void UpdateInSpace();
 		
-        	void Resize(int, int);   
+		void Resize(int, int);   
 		void Draw();
 		
 		int GetFramesCounter() const { return frames_counter; }
-
-    	private:
-      		Screen();
-      		~Screen();
-      		Screen(const Screen&) = delete;
-      		Screen& operator=(const Screen&) = delete;
-      		
-      		bool auto_scroll;
-
+		
+		float GetScale() const { return scale; }
+		void IncreaseScale();
+		void DecreaseScale();
+			
+	private:
+		Screen();
+		~Screen();
+		Screen(const Screen&) = delete;
+		Screen& operator=(const Screen&) = delete;
+		
+		bool auto_scroll;
+		
 		int fps;
 		int frames_counter;		
 		float last_time;
-      		      		      		
-      		Fbo fbo0;
+		
+		Fbo fbo0;
 		Fbo fbo1;
 		Fbo fbo2;
 		Fbo fbo3;
 		Fbo fbo4;
 		
 		BloomEffect bloom;
-      		
-      		Rect rect;
-      		Vec2<float> target_center;
-      				
-      		void ResizePostEffects(int, int);
 		
-      		void DrawFps();
+		float scale;
+		Rect rect;
+		Vec2<float> target_center;
+		
+		void ResizePostEffects(int, int);
+		
+		void DrawFps();
 };
 
 

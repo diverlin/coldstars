@@ -53,7 +53,7 @@ void NormalRunScenario::Init(Player* player)
 		for (unsigned int j=0; j<sector_description.starsystem_num; j++)		
 		{
 			StarSystemDescription starsystem_description;
-			starsystem_description.planet_num = 5;
+			starsystem_description.planet_num = 50;
 			starsystem_description.spacestation_num = 3;
 			starsystem_description.asteroid_num = 3;
 						

@@ -34,9 +34,9 @@ BaseBackGroundEffect::~BaseBackGroundEffect()
 void BaseBackGroundEffect::SetTextureOb(TextureOb* textureOb, const Vec3<float>& scale_factor)
 {
 	this->textureOb = textureOb; 
-	scale.x = textureOb->GetFrameWidth()  * scale_factor.x;
-	scale.y = textureOb->GetFrameHeight() * scale_factor.y;
-	scale.z = 1.0 * scale_factor.z; 
+	size.x = textureOb->GetFrameWidth()  * scale_factor.x;
+	size.y = textureOb->GetFrameHeight() * scale_factor.y;
+	size.z = 1.0 * scale_factor.z; 
 };
 	        
 void BaseBackGroundEffect::SaveDataUniqueBaseBackGroundEffect(boost::property_tree::ptree& save_ptree, const std::string& root) const
@@ -47,9 +47,9 @@ void BaseBackGroundEffect::SaveDataUniqueBaseBackGroundEffect(boost::property_tr
 	save_ptree.put(root+"center.y", center.y);	
 	save_ptree.put(root+"center.z", center.z);
 
-	save_ptree.put(root+"scale.x", scale.x);
-	save_ptree.put(root+"scale.y", scale.y);	
-	save_ptree.put(root+"scale.z", scale.z);
+	save_ptree.put(root+"size.x", size.x);
+	save_ptree.put(root+"size.y", size.y);	
+	save_ptree.put(root+"size.z", size.z);
 }
 
 void BaseBackGroundEffect::LoadDataUniqueBaseBackGroundEffect(const boost::property_tree::ptree& load_ptree)
@@ -60,9 +60,9 @@ void BaseBackGroundEffect::LoadDataUniqueBaseBackGroundEffect(const boost::prope
 	center.y = load_ptree.get<float>("center.y");
 	center.z = load_ptree.get<float>("center.z");
 	
-	scale.x = load_ptree.get<float>("scale.x");
-	scale.y = load_ptree.get<float>("scale.y");
-	scale.z = load_ptree.get<float>("scale.z");
+	size.x = load_ptree.get<float>("size.x");
+	size.y = load_ptree.get<float>("size.y");
+	size.z = load_ptree.get<float>("size.z");
 }
 		
 void BaseBackGroundEffect::ResolveDataUniqueBaseBackGroundEffect()

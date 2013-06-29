@@ -25,30 +25,30 @@
 
 class BaseBackGroundEffect
 {
-    	public:
-	        BaseBackGroundEffect();
-	        ~BaseBackGroundEffect();
-
+	public:
+		BaseBackGroundEffect();
+		~BaseBackGroundEffect();
+		
 		void SetTextureOb(TextureOb* textureOb, const Vec3<float>& scale_factor = Vec3<float>(1.0, 1.0, 1.0));
-
-		void SetScale(const Vec3<float>& scale) 		{ this->scale = scale; }
-	        void SetCenter(const Vec3<float>& center)		{ this->center = center; }
-	        void SetParallaxRate(float parallax_rate) 	{ this->parallax_rate = parallax_rate; } 
-      		        	
-        protected:
-       		unsigned long int id;
-
-      		static unsigned long int counter;
-       		
-       	       	TextureOb* textureOb;
-       	       	std::string textureOb_path;
-       	       	
-        	Vec3<float> center;
-		Vec3<float> scale;		
-
+		
+		void SetSize(const Vec3<float>& size) 		{ this->size = size; }
+		void SetCenter(const Vec3<float>& center)		{ this->center = center; }
+		void SetParallaxRate(float parallax_rate) 	{ this->parallax_rate = parallax_rate; } 
+			
+	protected:
+		unsigned long int id;
+		
+		static unsigned long int counter;
+		
+		TextureOb* textureOb;
+		std::string textureOb_path;
+		
+		Vec3<float> center;
+		Vec3<float> size;		
+		
 		float parallax_rate;
-        	
-     		void SaveDataUniqueBaseBackGroundEffect(boost::property_tree::ptree&, const std::string&) const;		
+		
+		void SaveDataUniqueBaseBackGroundEffect(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueBaseBackGroundEffect(const boost::property_tree::ptree&);
 		void ResolveDataUniqueBaseBackGroundEffect();
     

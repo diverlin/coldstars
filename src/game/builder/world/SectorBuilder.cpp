@@ -42,25 +42,25 @@ Sector* SectorBuilder::GetNewSectorTemplate(unsigned long int id) const
 	{
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
-
-        try 
-        { 
-        	sector = new Sector(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        EntityManager::Instance().RegisterEntity(sector);
-        
-        return sector;
+	
+	try 
+	{ 
+		sector = new Sector(id);
+	}
+	catch(std::bad_alloc)
+	{
+		Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+	}
+	EntityManager::Instance().RegisterEntity(sector);
+	
+	return sector;
 } 
 
 Sector* SectorBuilder::GetNewSector(const SectorDescription& sector_description) const
 {
 	Sector* sector = GetNewSectorTemplate();
-        CreateNewInternals(sector, sector_description);
-        
+	CreateNewInternals(sector, sector_description);
+	
 	return sector;
 } 
 
@@ -68,13 +68,13 @@ Sector* SectorBuilder::GetNewSector(const SectorDescription& sector_description)
         	
 void SectorBuilder::CreateNewInternals(Sector* sector, const SectorDescription& sector_description) const
 {
-    	for(unsigned int i=0; i<sector_description.starsystem_descriptions.size(); i++)
-    	{  
-               	Vec3<float> center(getRandXYVec3f(10, 40, DEFAULT_ENTITY_ZPOS));                	                
-                	                
-       		StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem(sector_description.starsystem_descriptions[i]);
-       		sector->Add(starsystem, center); 
- 	}
+	for(unsigned int i=0; i<sector_description.starsystem_descriptions.size(); i++)
+	{  
+		Vec3<float> center(getRandXYVec3f(10, 40, DEFAULT_ENTITY_ZPOS));                	                
+		
+		StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem(sector_description.starsystem_descriptions[i]);
+		sector->Add(starsystem, center); 
+	}
 }
 
                 

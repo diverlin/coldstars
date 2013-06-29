@@ -93,7 +93,7 @@ init_done(false)
 			Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
 			Box box(center, size);		
 			galaxymap_button->SetBox(box);		
-			
+			galaxymap_button->SetScale(Vec3<float>(1.0, 2.0, 1.0));
 			Vec3<float> offset(screen_w/2-1*1.1*GUI::ICON_SIZE, 0, 0);
 			bar_top->AddChild(galaxymap_button, offset);
 		}
@@ -283,7 +283,7 @@ void GuiSpace::RenderText(const Vec2<float>& scroll_coords) const
                                             
 BaseGuiElement* GuiSpace::Update(const MouseData& data_mouse)
 {
-	UpdateGeometry(Vec3<float>(0,0,0));
+	UpdateGeometry(Vec3<float>(0,0,0), Vec3<float>(1,1,1));
 	for (auto &child : child_vec)
 	{
 		child->Update();

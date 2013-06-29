@@ -126,36 +126,36 @@ void Star::UpdateInSpace(int time, bool show_effect)
     
 void Star::Render_NEW() const
 {
-        glUseProgram(ShaderCollector::Instance().multitexturing);
-
-        glActiveTexture(GL_TEXTURE0);                                
-        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_0"), 0);
-
-        glActiveTexture(GL_TEXTURE1);                                
-        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_1"), 1);
-        
+	glUseProgram(ShaderCollector::Instance().multitexturing);
+	
+	glActiveTexture(GL_TEXTURE0);                                
+	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_0"), 0);
+	
+	glActiveTexture(GL_TEXTURE1);                                
+	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_1"), 1);
+	
 	glUniform2f(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "displ"), texture_offset1, texture_offset2);
-
-	renderMesh(mesh, GetCenter(), GetAngle(), GetScale(), false);
-
-        glUseProgram(0);
-        glActiveTexture(GL_TEXTURE0);
+	
+	renderMesh(mesh, GetCenter(), GetSize(), GetAngle(), false);
+	
+	glUseProgram(0);
+	glActiveTexture(GL_TEXTURE0);
 }
         
 void Star::Render_OLD() const
 {    
-     	glBindTexture(GL_TEXTURE_2D, textureOb->texture);      		
-	renderMesh(mesh, GetCenter(), GetAngle(), GetScale(), ZYX);
+	glBindTexture(GL_TEXTURE_2D, textureOb->texture);      		
+	renderMesh(mesh, GetCenter(),GetSize(), GetAngle(), ZYX);
 }
 
 void Star::UpdateInfo()
 { 
 	info.clear();
-    	info.addTitleStr("STAR");
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
-    	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
+	info.addTitleStr("STAR");
+	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
+	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
 	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 }
 

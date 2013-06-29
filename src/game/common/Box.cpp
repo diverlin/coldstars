@@ -21,13 +21,17 @@
 #include "rect.hpp"
 
 Box::Box()
+{}
+
+Box::Box(const Vec3<float>& size)
 {
-	Set(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+	SetSize(size);
 }
 
 Box::Box(const Vec3<float>& center, const Vec3<float>& size)
 {
-	Set(center, size);
+	SetCenter(center);
+	SetSize(size);	
 }
 
 Box::Box(const Box& rhs)
@@ -37,37 +41,21 @@ Box::Box(const Box& rhs)
 
 Box::Box(const Rect& rect)
 {
-	Set(rect.GetCenter().x, rect.GetCenter().y, -1.0, rect.GetWidth(), rect.GetHeight(), 1.0);
+	SetCenter(Vec3<float>(rect.GetCenter().x, rect.GetCenter().y, -1.0));
+	SetSize(Vec3<float>(rect.GetWidth(), rect.GetHeight(), 1.0));
 }
 
 Box::~Box()
 {}
 
-
 bool Box::CheckInteraction(const Vec2<float>& point) const
 {       	
-	return checkCollisionDotWithRectangle(point, center, size);
-	
-	
+	return checkCollisionDotWithRectangle(point, center, size*scale);
 }
-
-void Box::Set(const Vec3<float>& center, const Vec3<float>& size)
+           	
+void Box::Set(const Box& box)
 {
-	this->center.Set(center);
-	this->size.Set(size);
-}
-        
-void Box::Set(float center_x, float center_y, float center_z, float size_x, float size_y, float size_z)
-{
-	center.Set(center_x, center_y, center_z);
-	size.Set(size_x, size_y, size_z);
-}
-      	
-void Box::Set(const Box& quad)
-{
-	center.Set(quad.GetCenter());
-	size.Set(quad.GetSize());
-	
-	angle = quad.GetAngle();
+	SetCenter(box.GetCenter());
+	SetSize(box.GetSize());
 }
 

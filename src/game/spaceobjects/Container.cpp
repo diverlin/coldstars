@@ -35,13 +35,13 @@ Container::Container(int id)
 {
 	data_id.id         = id;
 	data_id.type_id    = ENTITY::CONTAINER_ID;
-        data_id.subtype_id = NONE_ID;
+	data_id.subtype_id = NONE_ID;
 	
-    	mass = 1;
-
-   	item_slot = nullptr;
-    	
-    	velocity = getRandInt(40, 42) / 100.0;
+	mass = 1;
+	
+	item_slot = nullptr;
+	
+	velocity = getRandInt(40, 42) / 100.0;
 }
 
 /* virtual */   
@@ -67,35 +67,35 @@ void Container::BindItemSlot(ItemSlot* item_slot)
 void Container::UpdateInfo()  
 {
 	info.clear();
-    	info.addTitleStr("CONTAINER");
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
-    	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
-    	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
+	info.addTitleStr("CONTAINER");
+	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
+	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
+	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 }        
        	
 void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 {
 	UpdateInfo();
 	Vec2<float> pos(GetCenter().x - scroll_coords.x - 200, GetCenter().y - scroll_coords.y);
-     	drawInfoIn2Column(info.title_list, info.value_list, pos);
-     	item_slot->GetItem()->RenderInfo(GetCenter(), scroll_coords.x, scroll_coords.y);
+	drawInfoIn2Column(info.title_list, info.value_list, pos);
+	item_slot->GetItem()->RenderInfo(GetCenter(), scroll_coords.x, scroll_coords.y);
 }
  
 /* virtual */    
 void Container::PostDeathUniqueEvent(bool show_effect)
 {
-        if (item_slot->GetItem()->GetTypeId() == ENTITY::BOMB_ID)
-        {
-        	starsystem->BombExplosionEvent(this, show_effect);  
-        }
-        else
-        {
-        	if (show_effect == true)
-        	{
-        		ExplosionEffect* explosion = getNewExplosionEffect(GetCollisionRadius());
-        		starsystem->Add(explosion, GetCenter()); 
-        	}
-        }
+	if (item_slot->GetItem()->GetTypeId() == ENTITY::BOMB_ID)
+	{
+		starsystem->BombExplosionEvent(this, show_effect);  
+	}
+	else
+	{
+		if (show_effect == true)
+		{
+			ExplosionEffect* explosion = getNewExplosionEffect(GetCollisionRadius());
+			starsystem->Add(explosion, GetCenter()); 
+		}
+	}
 }
 
 void Container::UpdateInSpace(int time, bool show_effect)
@@ -106,13 +106,13 @@ void Container::UpdateInSpace(int time, bool show_effect)
 	{
 		SetCenter(GetCenter() + force);
 		force *= 0.99;
-     	}
+	}
 }
        		
 void Container::Render2D()
 { 
 	UpdateRenderAnimation();
-    	drawQuad_inXYPlane(textureOb, GetScale(), GetCenter(), GetAngle().z);
+	drawQuad_inXYPlane(textureOb, GetCenter(), GetSize(), GetAngle().z);
 }
 
 void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const	

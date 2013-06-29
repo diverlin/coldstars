@@ -69,10 +69,10 @@ int main()
 	int scenario_type = NORMAL_RUNSCENARIO;
 	switch(scenario_type)
 	{
-		case NORMAL_RUNSCENARIO: { run_scenario = new NormalRunScenario(); break; }
-		case TEST_PARTICLES_RUNSCENARIO: { run_scenario = new TestParticlesRunScenario(); break; }	
-		case TEST_TEXT_RUNSCENARIO: { run_scenario = new TestTextRunScenario(); break; }
-		default: { std::cout<<"INVALID_RUNSCENARIO"<<std::endl; return EXIT_FAILURE; break; }	
+		case NORMAL_RUNSCENARIO: 			{ run_scenario = new NormalRunScenario(); break; }
+		case TEST_PARTICLES_RUNSCENARIO: 	{ run_scenario = new TestParticlesRunScenario(); break; }	
+		case TEST_TEXT_RUNSCENARIO: 		{ run_scenario = new TestTextRunScenario(); break; }
+		default: 							{ std::cout<<"INVALID_RUNSCENARIO"<<std::endl; return EXIT_FAILURE; break; }	
 	}
 	run_scenario->Init(player);
 	

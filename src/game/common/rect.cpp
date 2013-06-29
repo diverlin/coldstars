@@ -43,9 +43,9 @@ Rect::~Rect()
      	
 void Rect::Scale(float scale)
 {
-      	w *= scale;
-      	h *= scale;
-        center *= scale;
+	w *= scale;
+	h *= scale;
+	center *= scale;
 	bottomLeft.x = center.x - w/2; 
 	bottomLeft.y = center.y - h/2; 
 }
@@ -60,16 +60,16 @@ void Rect::Scale(const Vec2<float>& scale)
 	
 bool Rect::CheckInteraction(int x, int y) const
 {       	
-        if (x < bottomLeft.x)
-                return false;
-        if (x > bottomLeft.x + w)
-                return false;
-        if (y < bottomLeft.y)
-                return false;
-        if (y > bottomLeft.y + h)
-                return false;
-
-        return true;
+	if (x < bottomLeft.x)
+		return false;
+	if (x > bottomLeft.x + w)
+		return false;
+	if (y < bottomLeft.y)
+	return false;
+		if (y > bottomLeft.y + h)
+	return false;
+	
+	return true;
 }
         
 void Rect::Set(float _bottomLeft_x, float _bottomLeft_y, float _w, float _h)

@@ -38,10 +38,7 @@ void DistantNebulaEffect::Update()
 
 void DistantNebulaEffect::Render(float vx, float vy)
 { 
-   	drawQuad_inXYPlane(textureOb, 
-   			   scale, 
-   			   Vec3<float>(center.x - vx*parallax_rate, center.y - vy*parallax_rate, center.z),
-   			   angle_inD);
+   	drawQuad_inXYPlane(textureOb, Vec3<float>(center.x - vx*parallax_rate, center.y - vy*parallax_rate, center.z), size, 1.0, angle_inD);
 }
               
 void DistantNebulaEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

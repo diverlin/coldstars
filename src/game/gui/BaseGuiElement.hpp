@@ -43,7 +43,9 @@ class BaseGuiElement
 		
 		void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; } 		
 		void SetPlayer(Player* player) { this->player = player; } // depr
-		
+
+		void SetScale(const Vec3<float>& scale) { this->scale = scale; }		
+				
 		void SetOffset(const Vec3<float>& offset) { this->offset = offset; }	// depr				
 		void SetOffset(const Vec2<float>& offset) { this->offset.Set(offset.x, offset.y, 0); }	// depr	
 		
@@ -58,7 +60,7 @@ class BaseGuiElement
 		const Box& GetBox() const { return box; }
 		TextureOb* GetTextureOb() const { return textureOb; }
 				
-		void UpdateGeometry(const Vec3<float>&);					
+		void UpdateGeometry(const Vec3<float>&, const Vec3<float>&);					
 		BaseGuiElement* UpdateMouseInteraction(const Vec2<float>&);
 		
 		void AddChild(BaseGuiElement* child, const Vec3<float>& offset);
@@ -101,6 +103,7 @@ class BaseGuiElement
        		       	
 	private:       				
 		Vec3<float> offset;
+		Vec3<float> scale;
 		
 		static std::map<int, BaseGuiElement*> static_gui_element_map;
 		
