@@ -28,20 +28,20 @@ class StarSystemBuilder
 	public:
 		static StarSystemBuilder& Instance();
 		~StarSystemBuilder();
-
-        	StarSystem* GetNewStarSystemTemplate(unsigned long int id = NONE_ID) const; 
-                StarSystem* GetNewStarSystem(const StarSystemDescription&) const;
-                       	 		                
-        private:
+		
+		StarSystem* GetNewStarSystemTemplate(unsigned long int id = NONE_ID) const; 
+		StarSystem* GetNewStarSystem(const StarSystemDescription&) const;
+	
+	private:
 		StarSystemBuilder() {};
 		StarSystemBuilder(const StarSystemBuilder&) = delete;
 		StarSystemBuilder& operator=(const StarSystemBuilder&) = delete;
 		
 		void CreateNewInternals(StarSystem*, const StarSystemDescription&) const;
-                
-                void CreateBackground(StarSystem*, int, int, int) const;
-        	void CreateStar(StarSystem*) const;
-        	void CreatePlanets(StarSystem*, int) const;
+		
+		void CreateBackground(StarSystem*, int, int, int) const;
+		void CreateStar(StarSystem*) const;
+		void CreatePlanets(StarSystem*, int) const;
 }; 
 
 #endif 

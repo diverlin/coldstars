@@ -28,33 +28,33 @@ const float ZSIZE = 1;
 class Box
 {  
 	public:
-	    	Box();
-      		Box(const Vec3<float>&, const Vec3<float>&);
-      		Box(const Box&);
-      		Box(const Rect&); // tmp hack
-      		~Box();
-
-      		void Set(const Vec3<float>&, const Vec3<float>&); 		       		
-      		void Set(const Box&);
-
-      		void SetCenter(const Vec3<float>& center) { this->center = center; }      			
-      		void SetSize(const Vec3<float>& size) { this->size = size; } 		      
-      		void SetAngle(Vec3<float> angle) { this->angle = angle; }
-
-      		const Vec3<float> GetCenter() const { return center; }      		      
-      		const Vec3<float> GetSize() const { return size; }
-      		const Vec3<float> GetAngle() const {return angle; }
-
-      		bool CheckInteraction(const Vec2<float>&) const;		
-      		//bool CheckInteraction(float, float) const;
+		Box();
+		Box(const Vec3<float>&);
+		Box(const Vec3<float>&, const Vec3<float>&);
+		Box(const Box&);
+		Box(const Rect&); // tmp hack
+		~Box();
+		
+		void Set(const Box&);
+		
+		void SetCenter(const Vec3<float>& center)	{ this->center = center; } 
+		void SetSize(const Vec3<float>& size)		{ this->size = size; } 
+		void SetScale(const Vec3<float>& scale)		{ this->scale = scale; }
+		void SetAngle(const Vec3<float>& angle)		{ this->angle = angle; }
+		
+		const Vec3<float>& GetCenter() const	{ return center; }      		      
+		const Vec3<float>& GetSize() const		{ return size; }
+		const Vec3<float>& GetScale() const		{ return scale; }
+		const Vec3<float>& GetAngle() const		{ return angle; }
+		
+		bool CheckInteraction(const Vec2<float>&) const;	
       		      		      		
-      	private:
-      		Vec3<float> center;  
-      		Vec3<float> size;     		
-      		Vec3<float> angle;
-      		
-      		void Set(float, float, float, float, float, float);
-      		      		
+	private:
+		Vec3<float> center;  
+		Vec3<float> size;
+		Vec3<float> angle;
+		
+		Vec3<float> scale;      		      		
 };
 
 

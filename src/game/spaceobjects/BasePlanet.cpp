@@ -58,7 +58,7 @@ void BasePlanet::UpdatePosition()
 void BasePlanet::RenderMesh_OLD() const
 {   	
 	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-	renderMesh(mesh, GetCenter(), GetAngle(), GetScale(), ZYX);
+	renderMesh(mesh, GetCenter(), GetSize(), GetAngle(), ZYX);
 }
 
 

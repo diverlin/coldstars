@@ -43,24 +43,24 @@ Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(unsigned long int id) const
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	galaxy = new Galaxy(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        EntityManager::Instance().RegisterEntity(galaxy);
-        
-        return galaxy;
+	try 
+	{ 
+		galaxy = new Galaxy(id);
+	}
+	catch(std::bad_alloc)
+	{
+		Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+	}
+	EntityManager::Instance().RegisterEntity(galaxy);
+	
+	return galaxy;
 } 
 
 Galaxy* GalaxyBuilder::GetNewGalaxy(const GalaxyDescription& galaxy_description) const
 {
 	Galaxy* galaxy = GetNewGalaxyTemplate();
-        CreateNewInternals(galaxy, galaxy_description);
-        
+	CreateNewInternals(galaxy, galaxy_description);
+	
 	return galaxy;
 } 
 
@@ -69,18 +69,18 @@ Galaxy* GalaxyBuilder::GetNewGalaxy(const GalaxyDescription& galaxy_description)
 void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy, const GalaxyDescription& galaxy_description) const
 {     
 	Vec3<float> pos;
-    	for(int i=0; i<galaxy_description.sector_descriptions.size(); i++)
-    	{  
-    		Vec3<float> offset = getRandXYVec3f(2, 20, 0);
-    		pos.x += 20;
-    		pos.y = 200;
-    		pos.z = DEFAULT_ENTITY_ZPOS;
-    		    		    		
-               	Vec3<float> center(pos+offset);                	                
-                	                
-       		Sector* sector = SectorBuilder::Instance().GetNewSector(galaxy_description.sector_descriptions[i]);
-       		galaxy->Add(sector, center); 
- 	}
+	for(int i=0; i<galaxy_description.sector_descriptions.size(); i++)
+	{  
+		Vec3<float> offset = getRandXYVec3f(2, 20, 0);
+		pos.x += 20;
+		pos.y = 200;
+		pos.z = DEFAULT_ENTITY_ZPOS;
+		
+		Vec3<float> center(pos+offset);                	                
+		
+		Sector* sector = SectorBuilder::Instance().GetNewSector(galaxy_description.sector_descriptions[i]);
+		galaxy->Add(sector, center); 
+	}
 }
 
                 

@@ -31,13 +31,13 @@ DistantStarEffect::~DistantStarEffect()
 
 void DistantStarEffect::Render(float vx, float vy)
 {   
-    	glPointSize(scale.x);
-    	//glColor4<float>(1.0f, 1.0f, 1.0f, 1.0f);
-    	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-    	
-    	glBegin(GL_POINTS);
-    		glVertex3f(center.x - vx*parallax_rate, center.y - vy*parallax_rate , center.z);
-    	glEnd();
+	glPointSize(size.x);
+	//glColor4<float>(1.0f, 1.0f, 1.0f, 1.0f);
+	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+	
+	glBegin(GL_POINTS);
+		glVertex3f(center.x - vx*parallax_rate, center.y - vy*parallax_rate , center.z);
+	glEnd();
 }
 
    
@@ -80,15 +80,15 @@ DistantStarEffect* GetNewDistantStarEffect(int color_id)
 	if (color_id == NONE_ID) textureOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::DISTANTSTAR_ID);
 	else    	    	 textureOb = TextureManager::Instance().GetTexObByColorId(TEXTURE::DISTANTSTAR_ID, color_id);
         
-        float size = (float)getRandInt(ENTITY::GALAXY::DISTANTSTAR_SIZE_MIN, ENTITY::GALAXY::DISTANTSTAR_SIZE_MAX);
-        Vec3<float> scale(size, size, 1.0);
-        Vec3<float> center(getRandInt(0, 1000), getRandInt(0, 1000), -2.0);        
-            	
-        DistantStarEffect* ds = new DistantStarEffect();
-        ds->SetTextureOb(textureOb);
-        ds->SetCenter(center);
-        ds->SetScale(scale);
-        ds->SetParallaxRate(size/1000.f);
-        
-        return ds;
+	float size_x = (float)getRandInt(ENTITY::GALAXY::DISTANTSTAR_SIZE_MIN, ENTITY::GALAXY::DISTANTSTAR_SIZE_MAX);
+	Vec3<float> size(size_x, size_x, 1.0);
+	Vec3<float> center(getRandInt(0, 1000), getRandInt(0, 1000), -2.0);        
+			
+	DistantStarEffect* ds = new DistantStarEffect();
+	ds->SetTextureOb(textureOb);
+	ds->SetCenter(center);
+	ds->SetSize(size);
+	ds->SetParallaxRate(size_x/1000.f);
+	
+	return ds;
 }

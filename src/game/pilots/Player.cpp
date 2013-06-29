@@ -112,60 +112,60 @@ void Player::ClearVisibleEntities()
     		
 void Player::AddIfVisible(Star* star)
 {
-        if (isObjectOnScreen(star->GetCenter(), star->GetScale()))
-        {         
+	if (isObjectOnScreen(star->GetCenter(), star->GetSize()))
+	{         
 		visible_STAR_vec.push_back(star);
 	}
 }
 
 void Player::AddIfVisible(Planet* planet)
 {
-        if (isObjectOnScreen(planet->GetCenter(), planet->GetScale()))
-        {  
+	if (isObjectOnScreen(planet->GetCenter(), planet->GetSize()))
+	{  
 		visible_PLANET_vec.push_back(planet);
 	}
 }
 
 void Player::AddIfVisible(Asteroid* asteroid)     		
 {
-	if (isObjectOnScreen(asteroid->GetCenter(), asteroid->GetScale()))
-        {   	
-                if ( npc->GetVehicle()->IsObjectWithinRadarRange(asteroid) )
-                {
-                	visible_ASTEROID_vec.push_back(asteroid);
-                }
-        }
+	if (isObjectOnScreen(asteroid->GetCenter(), asteroid->GetSize()))
+	{   	
+		if (npc->GetVehicle()->IsObjectWithinRadarRange(asteroid))
+		{
+			visible_ASTEROID_vec.push_back(asteroid);
+		}
+	}
 }
 
 void Player::AddIfVisible(Container* container)     	
 {
-        if (isObjectOnScreen(container->GetCenter(), container->GetScale()))
-        {    
-                if ( npc->GetVehicle()->IsObjectWithinRadarRange(container) )
-                {
-                	visible_CONTAINER_vec.push_back(container);
-                }
+	if (isObjectOnScreen(container->GetCenter(), container->GetSize()))
+	{    
+		if (npc->GetVehicle()->IsObjectWithinRadarRange(container))
+		{
+			visible_CONTAINER_vec.push_back(container);
+		}
 	}
 }
 
 void Player::AddIfVisible(RocketBullet* rocket)  
 {
-        if (isObjectOnScreen(rocket->GetCenter(), rocket->GetScale()))  
-        {  
-                if ( npc->GetVehicle()->IsObjectWithinRadarRange(rocket) )
-                {
-        		visible_ROCKET_vec.push_back(rocket);
-        	}
-        }
+	if (isObjectOnScreen(rocket->GetCenter(), rocket->GetSize()))  
+	{  
+		if (npc->GetVehicle()->IsObjectWithinRadarRange(rocket))
+		{
+			visible_ROCKET_vec.push_back(rocket);
+		}
+	}
 }
 
 void Player::AddIfVisible(BlackHole* blackhole)  
 {
-        if (isObjectOnScreen(blackhole->GetCenter(), blackhole->GetScale()))  
-        {  
-                if ( npc->GetVehicle()->IsObjectWithinRadarRange(blackhole) )
-                {
-                	visible_BLACKHOLE_vec.push_back(blackhole);
+	if (isObjectOnScreen(blackhole->GetCenter(), blackhole->GetSize()))  
+	{  
+		if (npc->GetVehicle()->IsObjectWithinRadarRange(blackhole))
+		{
+			visible_BLACKHOLE_vec.push_back(blackhole);
 		}
 	}
 }
@@ -173,10 +173,10 @@ void Player::AddIfVisible(BlackHole* blackhole)
 
 void Player::AddIfVisible(Vehicle* vehicle) 
 {
-        if (isObjectOnScreen(vehicle->GetCenter(), vehicle->GetScale()))
-        {	  
-                if ( npc->GetVehicle()->IsObjectWithinRadarRange(vehicle) )
-                {
+	if (isObjectOnScreen(vehicle->GetCenter(), vehicle->GetSize()))
+	{	  
+		if ( npc->GetVehicle()->IsObjectWithinRadarRange(vehicle) )
+		{
 			switch(vehicle->GetSubTypeId())
 			{			
 				case ENTITY::SHIP_ID:        	{ 	visible_SHIP_vec.push_back((Ship*)vehicle); break; }
@@ -189,10 +189,10 @@ void Player::AddIfVisible(Vehicle* vehicle)
         
 void Player::AddIfVisible(ShockWaveEffect* effect)
 {
-        if (isObjectOnScreen(effect->GetCenter(), 600))
-        {
-                if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
-                {
+	if (isObjectOnScreen(effect->GetCenter(), 600))
+	{
+		if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
+		{
 			visible_effect_SHOCKWAVE_vec.push_back(effect);
 		}
 	}
@@ -546,6 +546,8 @@ enable_CULLFACE();
 	glEnable(GL_TEXTURE_2D);
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);      // unbind fbo
 	
+	float scale_render = Screen::Instance().GetScale();
+	
 	clearScreen();
 	resetRenderTransformation();	
 		
@@ -555,8 +557,8 @@ enable_CULLFACE();
 		glUniform1i (glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "sceneTex"), 0);
 
 		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "resolution"), w, h);
-		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "center"), npc->GetVehicle()->GetCenter().x/w, npc->GetVehicle()->GetCenter().y/h);
-		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "radius"), (float)npc->GetVehicle()->GetProperties().radar/h);
+		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "center"), scale_render*npc->GetVehicle()->GetCenter().x/w, scale_render*npc->GetVehicle()->GetCenter().y/h);
+		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "radius"), scale_render*(float)npc->GetVehicle()->GetProperties().radar/h);
 		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "world_coord"), world_coord.x/w, world_coord.y/h);
 
 		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "dcolor"), npc->GetVehicle()->GetStarSystem()->GetStar()->GetDColor());
@@ -1231,13 +1233,14 @@ bool isObjectWithinRadarRange(BaseParticleSystem* effect, Vehicle* vehicle)
 
 bool isObjectOnScreen(const Vec3<float>& center, const Vec3<float>& size)
 {      
-	if (center.x < (Screen::Instance().GetRect().GetBottomLeft().x - size.x))
+	float scale = Screen::Instance().GetScale();
+	if (center.x < (Screen::Instance().GetRect().GetBottomLeft().x - size.x)/scale)
 		return false;
-	if (center.x > (Screen::Instance().GetRect().GetTopRight().x   + size.x))
+	if (center.x > (Screen::Instance().GetRect().GetTopRight().x   + size.x)/scale)
 		return false;
-	if (center.y < (Screen::Instance().GetRect().GetBottomLeft().y - size.y))
+	if (center.y < (Screen::Instance().GetRect().GetBottomLeft().y - size.y)/scale)
 		return false;
-	if (center.y > (Screen::Instance().GetRect().GetTopRight().y   + size.y))
+	if (center.y > (Screen::Instance().GetRect().GetTopRight().y   + size.y)/scale)
 		return false;
 	
 	return true;

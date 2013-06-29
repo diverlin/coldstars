@@ -43,26 +43,20 @@ void ShieldEffect::SetParent(BaseSpaceEntity* parent)
 	this->parent = parent; 
 	
 	float rate = 1.3; 
-	scale.Set(rate*parent->GetScale().x, rate*parent->GetScale().y, rate*parent->GetScale().z); 
+	size.Set(parent->GetSize() * rate); 
 }
 
 
 void ShieldEffect::Update()
 {      
-    	if (color.a > alpha_start)
-       		color.a -= d_alpha;
-    	else
-       		color.a = alpha_start;
+	if (color.a > alpha_start) 	{ 	color.a -= d_alpha; }
+	else						{	color.a = alpha_start; }
 }
 
 void ShieldEffect::Render(float parent_d_alpha) const
 {
-    	setColor4f(color.r, color.g, color.b, color.a - parent_d_alpha);
-
-	drawQuad_inXYPlane(textureOb,
-		    scale,  
-		    parent->GetCenter(), 
-		    parent->GetAngle().z);
+	setColor4f(color.r, color.g, color.b, color.a - parent_d_alpha);	
+	drawQuad_inXYPlane(textureOb, parent->GetCenter(), size, parent->GetAngle().z);
 }
 
 

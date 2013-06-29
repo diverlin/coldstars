@@ -29,16 +29,16 @@ class GalaxyBuilder
 	public:
 		static GalaxyBuilder& Instance();
 		~GalaxyBuilder();
-
-        	Galaxy* GetNewGalaxyTemplate(unsigned long int id = NONE_ID) const; 
-        	Galaxy* GetNewGalaxy(const GalaxyDescription&) const; 
-        	        	        	 		                
-        private:
+		
+		Galaxy* GetNewGalaxyTemplate(unsigned long int id = NONE_ID) const; 
+		Galaxy* GetNewGalaxy(const GalaxyDescription&) const; 
+												
+	private:
 		GalaxyBuilder() {};
 		GalaxyBuilder(const GalaxyBuilder&) = delete;
 		GalaxyBuilder& operator=(const GalaxyBuilder&) = delete;
-
-                void CreateNewInternals(Galaxy*, const GalaxyDescription&) const;
+		
+		void CreateNewInternals(Galaxy*, const GalaxyDescription&) const;
 }; 
 
 

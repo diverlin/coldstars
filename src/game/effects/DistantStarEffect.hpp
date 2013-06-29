@@ -25,22 +25,20 @@
 
 class DistantStarEffect : public BaseBackGroundEffect
 {   
-    	public:
-       		DistantStarEffect();
-       		~DistantStarEffect();
-       		
-       		void Render(float, float);
-       		
-                void SaveData(boost::property_tree::ptree&, const std::string&) const;		
+	public:
+		DistantStarEffect();
+		~DistantStarEffect();
+		
+		void Render(float, float);
+		
+		void SaveData(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
-		
-       	private:
-     		void SaveDataUniqueDistantStarEffect(boost::property_tree::ptree&, const std::string&) const;		
+	
+	private:
+		void SaveDataUniqueDistantStarEffect(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueDistantStarEffect(const boost::property_tree::ptree&);
 		void ResolveDataUniqueDistantStarEffect();
-
-       	
 }; 
 
 DistantStarEffect* GetNewDistantStarEffect(int color_id = NONE_ID);

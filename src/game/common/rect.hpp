@@ -24,45 +24,45 @@
 class Rect
 {  
 	public:
-	    	Rect();
-	    	Rect(float, float, float, float);
-      		Rect(const Vec2<float>&, float, float);
-      		Rect(const Rect&);
-      		~Rect();
-	
+		Rect();
+		Rect(float, float, float, float);
+		Rect(const Vec2<float>&, float, float);
+		Rect(const Rect&);
+		~Rect();
+		
 		void Scale(float);
 		void Scale(const Vec2<float>&);
 		
-      		bool CheckInteraction(int, int) const;
-      		       		
-      		void Set(float, float, float, float);
-      		void Set(const Vec2<float>&, float, float);
-      		void Set(const Rect&);
-      			
-      		void SetCenter(const Vec2<float>&);
-      		void SetCenter(float, float);
-      		void SetBottomLeftX(float);
-      		void SetBottomLeft(const Vec2<float>&);
-      		void SetBottomLeft(float, float);
-      		      		
+		bool CheckInteraction(int, int) const;
+					
+		void Set(float, float, float, float);
+		void Set(const Vec2<float>&, float, float);
+		void Set(const Rect&);
+			
+		void SetCenter(const Vec2<float>&);
+		void SetCenter(float, float);
+		void SetBottomLeftX(float);
+		void SetBottomLeft(const Vec2<float>&);
+		void SetBottomLeft(float, float);
+					
 		const Vec2<float>& GetCenter() const     { return center; }
 		const Vec2<float>& GetBottomLeft() const { return bottomLeft; }
 		const Vec2<float>& GetTopRight() const { return topRight; }
 		float GetWidth() const 	    { return w; }
 		float GetHeight() const     { return h; }  
-      
-      		void SetSize(float, float);
-      		void MovingBy(const Vec2<float>&);
+		
+		void SetSize(float, float);
+		void MovingBy(const Vec2<float>&);
       		      		
-      	private:
-      		Vec2<float> bottomLeft;    
-      		Vec2<float> center;  
-      		Vec2<float> topRight;
-      		
-      		float w, h;
-
-      		void UpdateCenter();
-      		void UpdateTopRight();
+	private:
+		Vec2<float> bottomLeft;    
+		Vec2<float> center;  
+		Vec2<float> topRight;
+		
+		float w, h;
+		
+		void UpdateCenter();
+		void UpdateTopRight();
 };
 
 

@@ -41,27 +41,27 @@ void Atmosphere::Render(const Vec2<float>& scroll_coords)
 {     	
 	angle += d_angle;
 	
-     	const Color4<float>& color = parent->GetStarSystem()->GetColor4f(); 
-     	float ambient_factor = 0.25;
+	const Color4<float>& color = parent->GetStarSystem()->GetColor4f(); 
+	float ambient_factor = 0.25;
 	
-     	glUseProgram(ShaderCollector::Instance().light);
-
-     	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0);
-     	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0);
-     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "diffColor"), color.r, color.g, color.b, color.a);
-     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
-     	
-     	glEnable(GL_BLEND);
-     		glActiveTexture(GL_TEXTURE0);                                
-     		glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-     		glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
-		float scale_rate = 1.05;
-		Vec3<float> scale(parent->GetScale()*scale_rate);
-		
-		renderMesh(parent->GetMesh(), parent->GetCenter(), angle, scale, false);
+	glUseProgram(ShaderCollector::Instance().light);
+	
+	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0);
+	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0);
+	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "diffColor"), color.r, color.g, color.b, color.a);
+	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
+	
+	glEnable(GL_BLEND);
+	glActiveTexture(GL_TEXTURE0);                                
+	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
+	float scale_rate = 1.05;
+	Vec3<float> size(parent->GetSize()*scale_rate);
+	
+	renderMesh(parent->GetMesh(), parent->GetCenter(), size, angle, false);
 	glDisable(GL_BLEND);
 	
-     	glUseProgram(0);
-     	glActiveTexture(GL_TEXTURE0);
+	glUseProgram(0);
+	glActiveTexture(GL_TEXTURE0);
 }
 

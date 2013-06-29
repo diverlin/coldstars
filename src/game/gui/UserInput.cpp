@@ -223,6 +223,9 @@ void UserInput::KeyPressedInSpace(Player* player)
 		}
 		
 		case sf::Keyboard::F9: { GuiManager::Instance().PressEventOnGuiElement(GUI::BUTTON::LOAD_ID); break; }		
+
+		case sf::Keyboard::K: { Screen::Instance().IncreaseScale(); break; }	
+		case sf::Keyboard::L: { Screen::Instance().DecreaseScale(); break; }	
 	}   
 }
         
@@ -284,51 +287,51 @@ void UserInput::ManageInputsInKosmoport(Player* player)
 void UserInput::ManageRealTimeInputsInSpace(Player* player)
 {       
 	moveCamera_axis_x  = CAMERADIRECTION::NONE;
-        moveCamera_axis_y  = CAMERADIRECTION::NONE;
-        
-        sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());
-           
-        int mx = player->GetCursor().GetMouseData().pos.x;
-        int my = player->GetCursor().GetMouseData().pos.y;
-
-        int screen_w = Screen::Instance().GetWidth();
-        int screen_h = Screen::Instance().GetHeight();
-        
-        bool mouse_camera_scroll = Config::Instance().GetMouseCameraScroll();
+	moveCamera_axis_y  = CAMERADIRECTION::NONE;
+	
+	sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());
+	   
+	int mx = player->GetCursor().GetMouseData().pos.x;
+	int my = player->GetCursor().GetMouseData().pos.y;
+	
+	int screen_w = Screen::Instance().GetWidth();
+	int screen_h = Screen::Instance().GetHeight();
+	
+	bool mouse_camera_scroll = Config::Instance().GetMouseCameraScroll();
                  
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) == true)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) == true)
 	{	        	
 		moveCamera_axis_x = CAMERADIRECTION::LEFT;
 	}   		
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == true)
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == true)
 	{	        	
 		moveCamera_axis_x = CAMERADIRECTION::RIGHT;
 	}   
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == true)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == true)
 	{	        	
 		moveCamera_axis_y = CAMERADIRECTION::UP;
 	}   
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) == true)
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) == true)
 	{	        	
 		moveCamera_axis_y = CAMERADIRECTION::DOWN;
 	}   
 	                 	
-        if ((mouse_camera_scroll)and(mx < SCROLL_BORDER_OFFSET)) 
-        {
-      		moveCamera_axis_x = CAMERADIRECTION::LEFT;
-        }   
-        if ((mouse_camera_scroll)and(mx > (screen_w - SCROLL_BORDER_OFFSET)))
-        {
-        	moveCamera_axis_x = CAMERADIRECTION::RIGHT;
-        }   
-        if ((mouse_camera_scroll)and(my > (screen_h - SCROLL_BORDER_OFFSET)))
-        {
-       		moveCamera_axis_y = CAMERADIRECTION::UP;
-        }   
-        if ((mouse_camera_scroll)and(my < SCROLL_BORDER_OFFSET)) 
-        {
-        	moveCamera_axis_y = CAMERADIRECTION::DOWN;
-        }   
+	if ((mouse_camera_scroll)and(mx < SCROLL_BORDER_OFFSET)) 
+	{
+		moveCamera_axis_x = CAMERADIRECTION::LEFT;
+	}   
+	if ((mouse_camera_scroll)and(mx > (screen_w - SCROLL_BORDER_OFFSET)))
+	{
+		moveCamera_axis_x = CAMERADIRECTION::RIGHT;
+	}   
+	if ((mouse_camera_scroll)and(my > (screen_h - SCROLL_BORDER_OFFSET)))
+	{
+		moveCamera_axis_y = CAMERADIRECTION::UP;
+	}   
+	if ((mouse_camera_scroll)and(my < SCROLL_BORDER_OFFSET)) 
+	{
+		moveCamera_axis_y = CAMERADIRECTION::DOWN;
+	}   
 }
 
 void UserInput::ScrollCamera(Player* player)

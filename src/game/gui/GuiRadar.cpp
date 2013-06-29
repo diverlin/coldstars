@@ -101,6 +101,7 @@ void GuiRadar::RenderUnique() const
 	drawTexturedRect(textureOb_screenrect, screenrect, -2.0);
 	drawTexturedRect(textureOb_range, range_rect, -2.0);
 			
+	float scale_render = Screen::Instance().GetScale();
 	float size, size_base = 7;
 	enable_POINTSPRITE();  
 	{     	
@@ -140,7 +141,7 @@ void GuiRadar::RenderUnique() const
 				}
 			}
 			
-			drawParticle(size, rect.GetCenter() + entity_vec[i]->GetCenter()*scale);			
+			drawNonScaledParticle(size, rect.GetCenter()/scale_render + entity_vec[i]->GetCenter()*scale);			
 		}
 	}
 	disable_POINTSPRITE(); 

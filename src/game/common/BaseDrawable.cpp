@@ -47,18 +47,18 @@ BaseDrawable::~BaseDrawable()
 	delete animation_program;
 }
 
-void BaseDrawable::BindData3D(Mesh* mesh, TextureOb* textureOb, const Vec3<float>& scale)
+void BaseDrawable::BindData3D(Mesh* mesh, TextureOb* textureOb, const Vec3<float>& size)
 {
 	this->mesh = mesh;
 	this->textureOb = textureOb; 
-	SetScale(scale);
-	collision_radius = (scale.x + scale.y) / 2.0;
+	SetSize(size);
+	collision_radius = (size.x + size.y) / 2.0;
 }
 
 void BaseDrawable::BindData2D(TextureOb* textureOb)
 {
 	this->textureOb = textureOb; 
-	SetScale(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0);
+	SetSize(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0);
 	collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight()) / 3.0;
 } 
 
@@ -66,7 +66,7 @@ void BaseDrawable::BindData2D(TextureOb* textureOb)
 void BaseDrawable::RenderCollisionRadius() const
 {
 	TextureOb* collision_radius_texOb =  GuiTextureObCollector::Instance().radar_range;
-	drawQuad_inXYPlane(collision_radius_texOb, Vec3<float>(collision_radius, collision_radius, collision_radius), GetCenter(), 0);
+	drawQuad_inXYPlane(collision_radius_texOb, GetCenter(), Vec3<float>(collision_radius, collision_radius, collision_radius), 0);
 }
 
 void BaseDrawable::UpdateRenderAnimation()
@@ -80,48 +80,48 @@ void BaseDrawable::UpdateRenderAnimation()
 
 void BaseDrawable::RenderMeshLight(const Vec2<float>& scroll_coords, const Color4<float>& color) const
 {
-     	float ambient_factor = 0.25;
-     	
-     	glUseProgram(ShaderCollector::Instance().light);
-
-     	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "iLightPos"), -scroll_coords.x, -scroll_coords.y, -200.0);
-     	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "iEyePos"), -scroll_coords.x, -scroll_coords.y, -200.0);
-     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "iDiffColor"), color.r, color.g, color.b, color.a);
-     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "iAmbientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
-     	     	
-     	glActiveTexture(GL_TEXTURE0);
-     	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-     	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "iTexture_0"), 0);
-     	
-	renderMesh(mesh, GetCenter(), GetAngle(), GetScale(), ZYX);
-		
-     	glUseProgram(0);
-     	glActiveTexture(GL_TEXTURE0);
+	float ambient_factor = 0.25;
+	
+	glUseProgram(ShaderCollector::Instance().light);
+	
+	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "iLightPos"), -scroll_coords.x, -scroll_coords.y, -200.0);
+	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "iEyePos"), -scroll_coords.x, -scroll_coords.y, -200.0);
+	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "iDiffColor"), color.r, color.g, color.b, color.a);
+	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "iAmbientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
+	
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "iTexture_0"), 0);
+	
+	renderMesh(mesh, GetCenter(), GetSize(), GetAngle(), ZYX);
+	
+	glUseProgram(0);
+	glActiveTexture(GL_TEXTURE0);
 }
 		
 void BaseDrawable::RenderMeshLightNormalMap(const Vec2<float>& scroll_coords, const Color4<float>& color) const
 {
-     	float ambient_factor = 0.25;
-     	
-     	glUseProgram(ShaderCollector::Instance().light_normalmap);
-
-     	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_lightPos"), -scroll_coords.x, -scroll_coords.y, 0.0);
-     	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_eyePos"), -scroll_coords.x, -scroll_coords.y, 0.0);
-     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_diffColor"), color.r, color.g, color.b, color.a);
-     	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
-     	     	
-     	glActiveTexture(GL_TEXTURE0);
-     	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-     	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_texture"), 0);
-
-     	glActiveTexture(GL_TEXTURE1);
-     	glBindTexture(GL_TEXTURE_2D, textureOb->normalmap);
-     	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_normalmap"), 1);
-     	     	
-	renderMesh(mesh, GetCenter(), GetAngle(), GetScale(), ZYX);
-		
-     	glUseProgram(0);
-     	glActiveTexture(GL_TEXTURE0);
+	float ambient_factor = 0.25;
+	
+	glUseProgram(ShaderCollector::Instance().light_normalmap);
+	
+	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_lightPos"), -scroll_coords.x, -scroll_coords.y, 0.0);
+	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_eyePos"), -scroll_coords.x, -scroll_coords.y, 0.0);
+	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_diffColor"), color.r, color.g, color.b, color.a);
+	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
+			
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_texture"), 0);
+	
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, textureOb->normalmap);
+	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_normalmap"), 1);
+			
+	renderMesh(mesh, GetCenter(), GetSize(), GetAngle(), ZYX);
+	
+	glUseProgram(0);
+	glActiveTexture(GL_TEXTURE0);
 }
 
 void BaseDrawable::SaveDataUniqueBaseDrawable(boost::property_tree::ptree& save_ptree, const std::string& root) const

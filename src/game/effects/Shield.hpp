@@ -25,26 +25,26 @@ class BaseSpaceEntity;
 
 class ShieldEffect
 {  
-     	public:
-        	ShieldEffect();
-        	~ShieldEffect();
-
-                void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
+	public:
+		ShieldEffect();
+		~ShieldEffect();
+		
+		void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
 		void SetAlpha(float alpha) { color.a = alpha; };
-                void SetParent(BaseSpaceEntity*);
+		void SetParent(BaseSpaceEntity*);
+		
+		void Update();
+		void Render(float) const;            
 
-        	void Update();
-        	void Render(float) const;            
-
-        private:       
-        	Color4<float> color;
-        	Vec3<float> scale;
-        	
-        	float alpha_start;
-        	float d_alpha;
-                
-                TextureOb* textureOb;
-                BaseSpaceEntity* parent;
+	private:       
+		Color4<float> color;
+		Vec3<float> size;
+		
+		float alpha_start;
+		float d_alpha;
+		
+		TextureOb* textureOb;
+		BaseSpaceEntity* parent;
                 
 };
 

@@ -1236,7 +1236,7 @@ void Vehicle::RenderGrabTrail() const
 		
 void Vehicle::RenderKorpus() const
 {
-    	drawQuad_inXYPlane(textureOb, GetScale(), GetCenter(), GetAngle().z);
+	drawQuad_inXYPlane(textureOb, GetCenter(), GetSize(), GetAngle().z);
 }
 
 void Vehicle::RenderDriveEffect(float parent_d_alpha) const

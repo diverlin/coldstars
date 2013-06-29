@@ -49,18 +49,18 @@ void enable_POINTSPRITE();
 void disable_POINTSPRITE();
  
 void drawQuad_inXYPlane(TextureOb* texOb, 
-		 const Vec3<float>& scale,
-		 const Vec3<float>& center, 
+		 const Vec3<float>& center,
+		 const Vec3<float>& size, 
 		 float angle);
 
-//void drawQuad_inXYPlane(TextureOb* texOb, 
-		 //const Vec3<float>& scale,
-		 //const Vec3<float>& center, 
-		 //const Vec3<float>& orient);
-		 
+void drawQuad_inXYPlane(TextureOb* texOb, 
+		 const Vec3<float>& center,
+		 const Vec3<float>& size, 
+		 const Vec3<float>& scale,
+		 float angle);
+		 	 
 void drawQuad_inXYPlane(TextureOb*, const Box&);
 		 		 		 
-//void drawRect(const Rect& rect, float z_pos); // the drawrect function was inverted by Y axis
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
 
 void drawTexturedPoint(GLuint texture, const Vec2<float>& _center, float size, float pos_z);
@@ -89,13 +89,14 @@ void drawFullScreenTexturedQuad(GLuint texture, int w, int h, float pos_z);
 
 void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z, GLuint program_blur);
 
-void renderMesh(Mesh* mesh, const Vec3<float>& center, const Vec3<float>& angle, const Vec3<float>& scale, bool ZYX);
+void renderMesh(Mesh* mesh, const Vec3<float>& center, const Vec3<float>& size, const Vec3<float>& angle, bool ZYX);
 void rotateZYX(const Vec3<float>&);
 void rotateXYZ(const Vec3<float>&);
 
 void drawParticle(float, float r, float g, float b, float a, const Vec2<float>&);
 void drawParticle(float, const Color4<float>&, const Vec2<float>&);
 void drawParticle(float, const Vec2<float>&);
+void drawNonScaledParticle(float, const Vec2<float>&);
 
 #endif 
 

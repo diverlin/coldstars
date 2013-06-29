@@ -23,15 +23,18 @@
 #include "../render/Render.hpp"
 #include "../config/config.hpp"
 #include "../common/common.hpp"
+#include "../common/constants.hpp"
 #include "../common/rand.hpp"
+
+#include "../resources/GuiTextureObCollector.hpp"
 
 Screen& Screen::Instance()
 {
 	static Screen instance;
-      	return instance;
+	return instance;
 }
     
-Screen::Screen():fps(0), frames_counter(0), last_time(0.0)
+Screen::Screen():fps(0), frames_counter(0), last_time(0.0), scale(1.0)
 {}
 
 Screen::~Screen()
@@ -39,14 +42,14 @@ Screen::~Screen()
 
 void Screen::InitBasic(int width, int height, int bpp, bool vert_sync, const std::string& title)
 {	
-      	auto_scroll = false;
-      	
+	auto_scroll = false;
+	
 	wrCreateWindowSpecific(width, height, bpp, vert_sync, title);
-
-      	glewInit();    	 	
-      	initGl(width, height);
-      	
-      	rect.Set(0.0, 0.0, width, height);
+	
+	glewInit();    	 	
+	initGl(width, height);
+	
+	rect.Set(0.0, 0.0, width, height);
 }
 
 void Screen::InitPostEffects(int width, int height)
@@ -76,7 +79,7 @@ void Screen::DrawFps()
 		frames_counter++;
 	}
 	
-      	std::string fps_str = "FPS:" + int2str(fps) + " / game_speed: x" + int2str(Config::Instance().GAME_SPEED);
+	std::string fps_str = "FPS:" + int2str(fps) + " / game_speed: x" + int2str(Config::Instance().GAME_SPEED);
 	DrawText(fps_str, 14, Vec2<float>(100, GetHeight()-10));
 	//std::cout<<fps<<std::endl; 
 }
@@ -129,8 +132,38 @@ void Screen::UpdateInSpace()
 		
 void Screen::Draw()
 {
+	//TextureOb* texOb = GuiTextureObCollector::Instance().radar_screenrect;
+	//drawTexturedRect(texOb, rect, -2.0);
+
   	DrawFps();
   	wrDrawSpecific();
+}
+
+void  Screen::IncreaseScale() 
+{ 
+	float d_scale = 0.01;
+	if (scale < 3.0)
+	{
+		scale += d_scale;
+
+		Vec2<float> center = rect.GetCenter();
+		Vec2<float> dcenter = center*d_scale/scale;
+		rect.SetCenter(center+dcenter);
+	}
+	
+}
+
+void Screen::DecreaseScale() 
+{ 
+	float d_scale = 0.01;
+	if (scale > 1.1*d_scale) 
+	{
+		scale -= d_scale; 
+		
+		Vec2<float> center = rect.GetCenter();
+		Vec2<float> dcenter = center*d_scale/scale;
+		rect.SetCenter(center-dcenter);
+	}
 }
 
 

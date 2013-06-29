@@ -157,8 +157,8 @@ void RocketBullet::UpdateRenderStuff()
 
 void RocketBullet::RenderInSpace() const
 {
-    	drawQuad_inXYPlane(textureOb, GetScale(), GetCenter(), GetAngle().z);
-				  
+	drawQuad_inXYPlane(textureOb, GetCenter(), GetSize(), GetAngle().z);
+			  
 	drive_effect->Update();
 	drive_effect->Render(0.0f);
 }

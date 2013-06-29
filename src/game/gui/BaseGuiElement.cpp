@@ -31,7 +31,9 @@ textureOb(textureOb),
 parent(parent),
 show(true),
 root(true)
-{}
+{
+	scale.Set(1.0, 1.0, 1.0);
+}
 
 BaseGuiElement::~BaseGuiElement()
 {
@@ -128,19 +130,21 @@ BaseGuiElement* BaseGuiElement::UpdateMouseInteraction(const Vec2<float>& mouse_
 	return nullptr;
 }
 
-void BaseGuiElement::UpdateGeometry(const Vec3<float>& parent_offset)
+void BaseGuiElement::UpdateGeometry(const Vec3<float>& parent_offset, const Vec3<float>& parent_scale)
 {
 	if (!show)
 	{
 		return;
 	}
 	
-	Vec3<float> res_offset = offset + parent_offset;
-	box.SetCenter(res_offset);
-		
+	Vec3<float> next_offset = offset*scale + parent_offset*parent_scale;
+	Vec3<float> next_scale = parent_scale*scale;
+	box.SetCenter(next_offset);
+	//box.SetScale(next_scale);
+			
 	for (auto &child : child_vec)
 	{
-		child->UpdateGeometry(res_offset);
+		child->UpdateGeometry(next_offset, next_scale);
 	}
 }
  
@@ -164,7 +168,7 @@ void BaseGuiElement::RenderUnique() const
 {
 	if (textureOb != nullptr)
 	{
-		drawQuad_inXYPlane(textureOb, box.GetSize(), box.GetCenter(), box.GetAngle().z);
+		drawQuad_inXYPlane(textureOb, box);
    	}
 }
 

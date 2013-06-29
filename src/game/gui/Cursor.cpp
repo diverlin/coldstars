@@ -84,14 +84,16 @@ void Cursor::UpdateMouseStuff()
    	data_mouse.left_click = false;
    	data_mouse.right_click = false;
    	
-        sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());
-        
-        data_mouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
-        data_mouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
-
-        data_mouse.pos.Set(mouse_pos.x, Screen::Instance().GetHeight() - mouse_pos.y);
-                
-        data_mouse.pos_vp = data_mouse.pos+ Screen::Instance().GetRect().GetBottomLeft();
+	sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());
+	
+	data_mouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+	data_mouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
+	
+	data_mouse.pos.Set(mouse_pos.x/Screen::Instance().GetScale(), (Screen::Instance().GetHeight() - mouse_pos.y)/Screen::Instance().GetScale());
+			
+	Vec3<float>bottomleft3(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y, 0.0);
+	Vec3<float> world_offset = bottomleft3/Screen::Instance().GetScale();
+	data_mouse.pos_vp = data_mouse.pos + world_offset;
 }
 
 void Cursor::Update()

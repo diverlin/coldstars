@@ -20,6 +20,7 @@
 
 #include "DriveEffect.hpp"
 #include "../../render/Render.hpp"
+#include "../../render/Screen.hpp"
 #include "../../common/constants.hpp"
 #include "../../resources/TextureManager.hpp"
 
@@ -97,15 +98,18 @@ void DriveEffect::Update()
 
 void DriveEffect::Render(float parent_d_alpha)
 {
-       	enable_POINTSPRITE();      
-       		glPushMatrix();
-		glTranslatef(pTo_start_pos->x, pTo_start_pos->y, 0.0); 	
-	     		glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-	     		for (unsigned int i=0; i<particles_vec.size(); i++) 
-	     		{
-	         		particles_vec[i]->Render(parent_d_alpha);
-	     		}
-	     	glPopMatrix();
+	enable_POINTSPRITE();      
+	glPushMatrix();
+	{
+		float scale = Screen::Instance().GetScale();
+		glTranslatef(pTo_start_pos->x*scale, pTo_start_pos->y*scale, 0.0); 	
+		glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+		for (unsigned int i=0; i<particles_vec.size(); i++) 
+		{
+			particles_vec[i]->Render(parent_d_alpha);
+		}
+	}
+	glPopMatrix();
 	disable_POINTSPRITE();
 }
 

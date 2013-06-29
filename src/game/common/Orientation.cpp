@@ -35,17 +35,17 @@ Orientation::~Orientation()
 void Orientation::UpdateOrientation()
 {
 	if (is_updated == false)
-    	{   
-    	       	float angle_radian = angle.z/RADIAN_TO_DEGREE_RATE;
-         
-        	uOrient.x = cos(angle_radian);
-        	uOrient.y = sin(angle_radian);
- 		uOrient.z = 0.0; 
- 		
- 		points.Update(center, angle, scale, uOrient);
- 		
-    		is_updated = true;
-    	}
+	{   
+		float angle_radian = angle.z/RADIAN_TO_DEGREE_RATE;
+		
+		uOrient.x = cos(angle_radian);
+		uOrient.y = sin(angle_radian);
+		uOrient.z = 0.0; 
+		
+		points.Update(center, angle, size, uOrient);
+		
+		is_updated = true;
+	}
     		
 }		
 

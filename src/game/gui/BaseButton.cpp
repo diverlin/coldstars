@@ -95,17 +95,17 @@ void BaseButton::RenderUnique() const
    	
 	setColor4f(1.0f, 1.0f, 1.0f, alpha);
 
-   	drawQuad_inXYPlane(textureOb, box.GetSize(), box.GetCenter(), box.GetAngle().z);
+   	drawQuad_inXYPlane(textureOb, box);
    	
    	if (textureOb_additional != nullptr)
    	{
-   	   	drawQuad_inXYPlane(textureOb_additional, box.GetSize(), box.GetCenter(), box.GetAngle().z);
+   	   	drawQuad_inXYPlane(textureOb_additional, box);
    	}
 	setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
    	if (textureOb_mask != nullptr)
    	{
-   	   	drawQuad_inXYPlane(textureOb_mask, box.GetSize(), box.GetCenter(), box.GetAngle().z);
+   	   	drawQuad_inXYPlane(textureOb_mask, box);
    	}
    		
 	if (label != "")

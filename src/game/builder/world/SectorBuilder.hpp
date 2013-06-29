@@ -29,16 +29,16 @@ class SectorBuilder
 	public:
 		static SectorBuilder& Instance();
 		~SectorBuilder();
-
-        	Sector* GetNewSectorTemplate(unsigned long int id = NONE_ID) const; 
-        	Sector* GetNewSector(const SectorDescription&) const; 
-        	        	        	 		                
-        private:
+		
+		Sector* GetNewSectorTemplate(unsigned long int id = NONE_ID) const; 
+		Sector* GetNewSector(const SectorDescription&) const; 
+	
+	private:
 		SectorBuilder() {};
 		SectorBuilder(const SectorBuilder&) = delete;
 		SectorBuilder& operator=(const SectorBuilder&) = delete;
-
-                void CreateNewInternals(Sector*, const SectorDescription&) const;
+		
+		void CreateNewInternals(Sector*, const SectorDescription&) const;
 }; 
 
 
