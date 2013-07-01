@@ -311,7 +311,7 @@ BaseGuiElement* GuiSpace::Update(const MouseData& data_mouse)
 
 	//update
 	BaseGuiElement* gui_element = nullptr;
-	gui_element = UpdateMouseInteraction(data_mouse.pos);
+	gui_element = UpdateMouseInteraction(data_mouse.pos_screencoord);
 	//ButtonsAction(player);   
                                                
 	//if (gui_galaxymap_shared->GetGalaxy() != nullptr)  

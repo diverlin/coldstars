@@ -57,8 +57,13 @@ void Rect::Scale(const Vec2<float>& scale)
 	bottomLeft.x = center.x - w/2;    
 	bottomLeft.y = center.y - h/2; 
 }
+
+bool Rect::CheckInteraction(const Vec2<float>& point) const
+{
+	return CheckInteraction(point.x, point.y);
+}
 	
-bool Rect::CheckInteraction(int x, int y) const
+bool Rect::CheckInteraction(float x, float y) const
 {       	
 	if (x < bottomLeft.x)
 		return false;

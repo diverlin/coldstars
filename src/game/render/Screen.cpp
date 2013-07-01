@@ -34,7 +34,7 @@ Screen& Screen::Instance()
 	return instance;
 }
     
-Screen::Screen():fps(0), frames_counter(0), last_time(0.0), scale(1.0)
+Screen::Screen():fps(0), frames_counter(0), last_time(0.0), scale(1.0), d_scale(0.0)
 {}
 
 Screen::~Screen()
@@ -132,38 +132,43 @@ void Screen::UpdateInSpace()
 		
 void Screen::Draw()
 {
+	//glPushMatrix();
+	//glLoadIdentity();
+	//enable_BLEND();
 	//TextureOb* texOb = GuiTextureObCollector::Instance().radar_screenrect;
-	//drawTexturedRect(texOb, rect, -2.0);
-
+	//Rect rect2(rect);
+	////rect2.Scale(scale);
+	//drawTexturedRect(texOb, rect2, -2.0);
+	//glPopMatrix();
+	
   	DrawFps();
   	wrDrawSpecific();
 }
 
 void  Screen::IncreaseScale() 
 { 
-	float d_scale = 0.01;
-	if (scale < 3.0)
+	d_scale = 0.15;
+	if (scale < 30.0)
 	{
 		scale += d_scale;
-
+		
 		Vec2<float> center = rect.GetCenter();
-		Vec2<float> dcenter = center*d_scale/scale;
-		rect.SetCenter(center+dcenter);
-	}
-	
+		Vec2<float> dcenter = center*d_scale;
+		rect.SetCenter(center-dcenter);
+	} 
 }
 
 void Screen::DecreaseScale() 
 { 
-	float d_scale = 0.01;
-	if (scale > 0.3) 
+	d_scale = -0.15;
+	if (scale > 0.3)
 	{
-		scale -= d_scale; 
+		scale += d_scale;
 		
 		Vec2<float> center = rect.GetCenter();
-		Vec2<float> dcenter = center*d_scale/scale;
+		Vec2<float> dcenter = center*d_scale;
 		rect.SetCenter(center-dcenter);
-	}
+	} 
 }
 
 

@@ -33,8 +33,9 @@ class Rect
 		void Scale(float);
 		void Scale(const Vec2<float>&);
 		
-		bool CheckInteraction(int, int) const;
-					
+		bool CheckInteraction(float, float) const;
+		bool CheckInteraction(const Vec2<float>&) const;
+							
 		void Set(float, float, float, float);
 		void Set(const Vec2<float>&, float, float);
 		void Set(const Rect&);

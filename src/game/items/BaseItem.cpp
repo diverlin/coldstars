@@ -153,7 +153,7 @@ void BaseItem::RenderKorpus(const Box& box)
 	}
 	else
 	{
-       		drawNotScaledQuad(textureOb, box); 
+       		drawQuad(textureOb, box); 
 	}
 }
 

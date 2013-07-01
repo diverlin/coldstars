@@ -23,13 +23,13 @@ ShockWaveEffect::ShockWaveEffect(float x, float y, float z, float time,
  				     float d_x, float d_y, float d_z, float d_time)
 {
 	is_alive = true;
-        is_alreadyInRemoveQueue = false;
-	
-        parameter.Set(x, y, z);
-        this->time = time; 
+	is_alreadyInRemoveQueue = false;
 
-        d_parameter.Set(d_x, d_y, d_z);
-        this->d_time = d_time; 
+	parameter.Set(x, y, z);
+	this->time = time; 
+
+	d_parameter.Set(d_x, d_y, d_z);
+	this->d_time = d_time; 
 }
 
 ShockWaveEffect::~ShockWaveEffect()
@@ -42,18 +42,18 @@ void ShockWaveEffect::Update()
 	if (parameter.y > 0)
 		parameter.y -= d_parameter.y;
 	else
-            	is_alive = false;
+		is_alive = false;
 
-     	parameter.z -= d_parameter.z;
-      	time -= d_time;
-
-    	if (is_alive == false)
-      	{
-          	if (is_alreadyInRemoveQueue == false)
-            	{
-                	//pTo_starsystem.effect_SHOCKWAVE_remove_queue.append();
-                	is_alreadyInRemoveQueue = true;
-             	}   
+	parameter.z -= d_parameter.z;
+	time -= d_time;
+	
+	if (is_alive == false)
+		{
+		if (is_alreadyInRemoveQueue == false)
+		{
+			//pTo_starsystem.effect_SHOCKWAVE_remove_queue.append();
+			is_alreadyInRemoveQueue = true;
+		}   
 	}	         
 }
              

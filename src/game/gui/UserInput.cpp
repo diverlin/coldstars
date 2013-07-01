@@ -291,8 +291,8 @@ void UserInput::ManageRealTimeInputsInSpace(Player* player)
 	
 	sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());
 	   
-	int mx = player->GetCursor().GetMouseData().pos.x;
-	int my = player->GetCursor().GetMouseData().pos.y;
+	int mx = player->GetCursor().GetMouseData().pos_screencoord.x;
+	int my = player->GetCursor().GetMouseData().pos_screencoord.y;
 	
 	int screen_w = Screen::Instance().GetWidth();
 	int screen_h = Screen::Instance().GetHeight();

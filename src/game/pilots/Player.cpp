@@ -80,14 +80,14 @@ bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) cons
 {
 	if (force_full_control == false)
 	{
-        	if (npc->GetVehicle()->GetId() == npc->GetScanTarget()->GetId())
-    		{
-        		force_full_control = true;  
-        	    	// modify full control for friend ships         
-        	}
-        }
-        
-        return force_full_control;
+		if (npc->GetVehicle()->GetId() == npc->GetScanTarget()->GetId())
+		{
+			force_full_control = true;  
+			// modify full control for friend ships         
+		}
+	}
+	
+	return force_full_control;
 }
   		
 void Player::ClearVisibleEntities()
@@ -346,59 +346,75 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
      		
 void Player::RenderInSpace_NEW(StarSystem* starsystem)
 {   
-enable_CULLFACE();
+	float scale = Screen::Instance().GetScale();
 	int w = Screen::Instance().GetWidth();
 	int h = Screen::Instance().GetHeight();
 	Vec2<float> world_coord(Screen::Instance().GetBottomLeft());
-	float scale = Screen::Instance().GetScale();
+	
+	enable_CULLFACE();
+	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		// render background and star to FBO0
+		Screen::Instance().GetFbo0().Activate(w, h);
+		{
+			resizeGl(w*(1.0+scale*0.02), h*(1.0+scale*0.02));
+				
+	        starsystem->DrawBackground(world_coord);           
+			camera(world_coord.x, world_coord.y, CAMERA_POS_Z);    
+	
+			starsystem->RestoreDefaultColor();
 
-	// render background and star to FBO0
-	Screen::Instance().GetFbo0().Activate(w, h);
-   
-        	starsystem->DrawBackground(world_coord);           
-		camera(world_coord.x, world_coord.y, CAMERA_POS_Z);    
+			resizeGl(w*scale, h*scale);
+			enable_BLEND();
+			{
+				for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 
+				{ 
+					visible_STAR_vec[i]->Render_NEW();
+				}
+	    	}
+	    	disable_BLEND(); 	
+			starsystem->RestoreSceneColor();
+		}
+		Screen::Instance().GetFbo0().Deactivate();
 
-		starsystem->RestoreDefaultColor();
-		enable_BLEND();
-			for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 
-			{ 
-        			visible_STAR_vec[i]->Render_NEW();
-    			}
-    		disable_BLEND(); 	
-		starsystem->RestoreSceneColor();
-	Screen::Instance().GetFbo0().Deactivate();
+		// BLOOM background and star (uses many FBO)
+		resizeGl(w, h); 
+		Screen::Instance().GetBloom().Proceed(w, h, Screen::Instance().GetFbo0().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
 
-	// BLOOM background and star (uses many FBO)
-	Screen::Instance().GetBloom().Proceed(w, h, Screen::Instance().GetFbo0().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
-
-	// VOLUMETRIC LIGHT to FBO1
-	Screen::Instance().GetFbo1().Activate(w, h);
-		glUseProgram(ShaderCollector::Instance().volumetriclight);
-			glActiveTexture(GL_TEXTURE0);                                
-			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom().GetFboFinal().GetTexture());
-			glUniform1i(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "FullSampler"), 0);
-
-			glActiveTexture(GL_TEXTURE1);                                
-			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom().GetTextureBlured());
-			glUniform1i(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "BlurSampler"), 1);
-
-			glUniform4f(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "sun_pos"), -world_coord.x/w, -world_coord.y/h, -100.0, 1.0);
-          
+		// VOLUMETRIC LIGHT to FBO1
+		resizeGl(w, h); 
+		Screen::Instance().GetFbo1().Activate(w, h);
+		{
+			glUseProgram(ShaderCollector::Instance().volumetriclight);
+			{
+				glActiveTexture(GL_TEXTURE0);                                
+				glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom().GetFboFinal().GetTexture());
+				glUniform1i(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "FullSampler"), 0);
+		
+				glActiveTexture(GL_TEXTURE1);                                
+				glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom().GetTextureBlured());
+				glUniform1i(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "BlurSampler"), 1);
+		
+				glUniform4f(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "sun_pos"), -world_coord.x/(w*scale), -world_coord.y/(h*scale), -100.0, 1.0);
+		  
+				glActiveTexture(GL_TEXTURE0);
+				drawFullScreenQuad(w, h, -999.0);
+			}
+			glUseProgram(0);
 			glActiveTexture(GL_TEXTURE0);
-			drawFullScreenQuad(w, h, -999.0);
-		glUseProgram(0);
-		glActiveTexture(GL_TEXTURE0);
-	Screen::Instance().GetFbo1().Deactivate();	
+		}
+		Screen::Instance().GetFbo1().Deactivate();	
 	   	          	   
-	// render space entites to FBO2     	
-	Screen::Instance().GetFbo2().Activate(w, h);
-		drawFullScreenTexturedQuad(Screen::Instance().GetFbo1().GetTexture(), w, h, -999.0);
+		// render space entites to FBO2     
+		Screen::Instance().GetFbo2().Activate(w, h);
+		{
+			drawFullScreenTexturedQuad(Screen::Instance().GetFbo1().GetTexture(), w, h, -999.0);
            
+           	resizeGl(w*scale, h*scale); 	
           	camera(world_coord.x, world_coord.y, CAMERA_POS_Z);    
-        
-		enable_DEPTH();  
+        	enable_DEPTH();  
+			{
     			for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
     			{ 
        				visible_PLANET_vec[i]->Render_NEW(world_coord); 
@@ -426,15 +442,17 @@ enable_CULLFACE();
     			}
 
     			for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
-			{ 
+				{ 
         			visible_BLACKHOLE_vec[i]->Render_NEW(world_coord);         			
     			}  	
+    		}
     		disable_DEPTH();
 
-		enable_BLEND();		
+			enable_BLEND();	
+			{	
 		    	for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
     			{ 
-    			    	if(!visible_SPACESTATION_vec[i]->Is3D())
+					if(!visible_SPACESTATION_vec[i]->Is3D())
     				{
        					visible_SPACESTATION_vec[i]->RenderInSpace_2D(); 
     				}
@@ -454,7 +472,7 @@ enable_CULLFACE();
     				}
     			}
 
-			for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
+				for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
     			{ 
     				visible_SATELLITE_vec[i]->UpdateRenderStuff(); 
        				visible_SATELLITE_vec[i]->RenderInSpace(); 
@@ -463,112 +481,125 @@ enable_CULLFACE();
     			
     			for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
     			{ 
-    			    	visible_ROCKET_vec[i]->UpdateRenderStuff();
+					visible_ROCKET_vec[i]->UpdateRenderStuff();
        				visible_ROCKET_vec[i]->RenderInSpace(); 
        				starsystem->RestoreSceneColor();
-    			}    	
+    			} 
 
-		RenderCollisionRadiusOfVisibleObjects();
-		
-		disable_BLEND();
-			
+				RenderCollisionRadiusOfVisibleObjects();
+			}
+			disable_BLEND();
+		}
     	Screen::Instance().GetFbo2().Deactivate();
 
 
-	// SHOCKWAVE post process to Fbo3
-	Screen::Instance().GetFbo3().Activate(w, h);
-
-		float center_array[SHOCKWAVES_MAX_NUM][2];
-		float xyz_array[SHOCKWAVES_MAX_NUM][3];
-		float time_array[SHOCKWAVES_MAX_NUM];
-
-		unsigned int i=0;
-		for (i=0; ((i<visible_BLACKHOLE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); i++)
-		{         
-			ShockWaveEffect* shockwave = visible_BLACKHOLE_vec[i]->GetShockWaveEffect();
-			
-			center_array[i][0] = (shockwave->center.x - world_coord.x)/w;
-			center_array[i][1] = (shockwave->center.y - world_coord.y)/h;
-			xyz_array[i][0] = shockwave->parameter.x;
-			xyz_array[i][1] = shockwave->parameter.y;
-			xyz_array[i][2] = shockwave->parameter.z;
-				
-			time_array[i] = shockwave->time;
-		}
-		for (unsigned int j=0; ((j<visible_effect_SHOCKWAVE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
-		{         
-			center_array[i][0] = (visible_effect_SHOCKWAVE_vec[j]->center.x*scale - world_coord.x)/w;
-			center_array[i][1] = (visible_effect_SHOCKWAVE_vec[j]->center.y*scale - world_coord.y)/h;
-			xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[j]->parameter.x;
-			xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[j]->parameter.y;
-			xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[j]->parameter.z*scale;
-				
-			time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time*scale;
-		}
-       
-		glUseProgram(ShaderCollector::Instance().shockwave);
-			glActiveTexture(GL_TEXTURE0);                                
-			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetFbo2().GetTexture());
-			glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "sceneTex"), 0);
-
-			glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "distortion_num"), i);
-			glUniform2fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "center"),      i, *center_array);
-			glUniform3fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "shockParams"), i, *xyz_array);
-			glUniform1fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "time"),        i, time_array);
-
-			drawFullScreenQuad(w, h, -999.0);
-		glUseProgram(0);
+		// SHOCKWAVE post process to Fbo3
+		resizeGl(w, h); 
+		Screen::Instance().GetFbo3().Activate(w, h);
+		{
+			float center_array[SHOCKWAVES_MAX_NUM][2];
+			float xyz_array[SHOCKWAVES_MAX_NUM][3];
+			float time_array[SHOCKWAVES_MAX_NUM];
 	
-	Screen::Instance().GetFbo3().Deactivate();
+			unsigned int i=0;
+			for (i=0; ((i<visible_BLACKHOLE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); i++)
+			{         
+				ShockWaveEffect* shockwave = visible_BLACKHOLE_vec[i]->GetShockWaveEffect();
+				
+				center_array[i][0] = (shockwave->center.x - world_coord.x)/w;
+				center_array[i][1] = (shockwave->center.y - world_coord.y)/h;
+				xyz_array[i][0] = shockwave->parameter.x;
+				xyz_array[i][1] = shockwave->parameter.y;
+				xyz_array[i][2] = shockwave->parameter.z;
+					
+				time_array[i] = shockwave->time;
+			}
+			for (unsigned int j=0; ((j<visible_effect_SHOCKWAVE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
+			{         
+				center_array[i][0] = (visible_effect_SHOCKWAVE_vec[j]->center.x - world_coord.x)/(w*scale);
+				center_array[i][1] = (visible_effect_SHOCKWAVE_vec[j]->center.y - world_coord.y)/(h*scale);
+				xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[j]->parameter.x;
+				xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[j]->parameter.y;
+				xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[j]->parameter.z/scale;
+					
+				time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time;
+			}
+	       
+			glUseProgram(ShaderCollector::Instance().shockwave);
+			{
+				glActiveTexture(GL_TEXTURE0);                                
+				glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetFbo2().GetTexture());
+				glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "sceneTex"), 0);
+	
+				glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "distortion_num"), i);
+				glUniform2fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "center"),      i, *center_array);
+				glUniform3fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "shockParams"), i, *xyz_array);
+				glUniform1fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "time"),        i, time_array);
+	
+				drawFullScreenQuad(w, h, -999.0);
+			}
+			glUseProgram(0);
+		}
+		Screen::Instance().GetFbo3().Deactivate();
 
-	// render effects not distorted by SHOCKWAVE
-	Screen::Instance().GetFbo4().Activate(w, h);
-		drawFullScreenTexturedQuad(Screen::Instance().GetFbo3().GetTexture(), w, h, -999.0);
-		
-		camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
-		
-		enable_BLEND();
-			for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
+		// render effects not distorted by SHOCKWAVE
+		Screen::Instance().GetFbo4().Activate(w, h);
+		{
+			resizeGl(w, h); 
+			drawFullScreenTexturedQuad(Screen::Instance().GetFbo3().GetTexture(), w, h, -999.0);
+
+			resizeGl(w*scale, h*scale); 			
+			camera(world_coord.x, world_coord.y, CAMERA_POS_Z);			
+			enable_BLEND();
+			{
+				for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
 	    		{ 
 	        		visible_effect_LAZERTRACE_vec[i]->Render(); 
 	    		}
-	
+		
 	    		enable_POINTSPRITE();
+	    		{
 	    			for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
 	    			{ 
 	        			visible_effect_PARTICLESYSTEM_vec[i]->Render(); 
 	    			}
+	    		}
 	    		disable_POINTSPRITE();
-	    	disable_BLEND();
-	Screen::Instance().GetFbo4().Deactivate();
-		    	
-		    	
-	// FOGWAR and STARSPARK to final scene
-	glEnable(GL_TEXTURE_2D);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);      // unbind fbo
-	
-	float scale_render = Screen::Instance().GetScale();
-	
-	clearScreen();
-	resetRenderTransformation();	
+		    }
+		    disable_BLEND();
+		}
+		Screen::Instance().GetFbo4().Deactivate();
+		
+		
+		// FOGWAR and STARSPARK to final scene
+		resizeGl(w, h); 
+			
+		glEnable(GL_TEXTURE_2D);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);      // unbind fbo
+		
+		clearScreen();
+		resetRenderTransformation();	
 		
     	glUseProgram(ShaderCollector::Instance().fogwarspark);
-		glActiveTexture(GL_TEXTURE0);                                
-		glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetFbo4().GetTexture());
-		glUniform1i (glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "sceneTex"), 0);
-
-		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "resolution"), w, h);
-		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "center"), scale_render*npc->GetVehicle()->GetCenter().x/w, scale_render*npc->GetVehicle()->GetCenter().y/h);
-		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "radius"), scale_render*(float)npc->GetVehicle()->GetProperties().radar/h);
-		glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "world_coord"), world_coord.x/w, world_coord.y/h);
-
-		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "dcolor"), npc->GetVehicle()->GetStarSystem()->GetStar()->GetDColor());
-
-		drawFullScreenQuad(w, h, -999.0);
-	glUseProgram(0); 	    	
-		    	
-	// render text
-	camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
+    	{
+			glActiveTexture(GL_TEXTURE0);                                
+			glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetFbo4().GetTexture());
+			glUniform1i (glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "sceneTex"), 0);
+	
+			glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "resolution"), w, h);
+			glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "center"), npc->GetVehicle()->GetCenter().x/(w*scale), npc->GetVehicle()->GetCenter().y/(h*scale));
+			glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "radius"), (float)npc->GetVehicle()->GetProperties().radar/(h*scale));
+			glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "world_coord"), world_coord.x/(w*scale), world_coord.y/(h*scale));
+	
+			glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "dcolor"), npc->GetVehicle()->GetStarSystem()->GetStar()->GetDColor());
+	
+			drawFullScreenQuad(w, h, -999.0);
+		}
+		glUseProgram(0); 	    	
+   	
+		// render text
+		resizeGl(w*scale, h*scale); 
+		camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
     	for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     	{ 
         	visible_text_DAMAGE_vec[i]->Render(world_coord); 
@@ -576,108 +607,117 @@ enable_CULLFACE();
     		    	
     	starsystem->RestoreSceneColor();
     	
-disable_CULLFACE();
+	}
+	disable_CULLFACE();
+	
+	resizeGl(w, h); 
 }
     
 void Player::RenderInSpace_OLD(StarSystem* starsystem)
 {
 	Vec2<float> world_coord(Screen::Instance().GetBottomLeft());
 	   
-	glLoadIdentity();
-        starsystem->DrawBackground(world_coord);
+	//glLoadIdentity();
+	float scale = Screen::Instance().GetScale();
+	float w = Screen::Instance().GetWidth();
+	float h = Screen::Instance().GetHeight();
+		
+	resizeGl(w*scale, h*scale);
 	
-        camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
-        
-        disable_BLEND();
-        enable_DEPTH();
-		for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 
-		{ 
-        		visible_STAR_vec[i]->Render_OLD(); 
-    		}
+	starsystem->DrawBackground(world_coord);
+	
+	camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
+	
+	disable_BLEND();
+        //enable_DEPTH();
+		//for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 
+		//{ 
+        		//visible_STAR_vec[i]->Render_OLD(); 
+    		//}
 
-    		for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
-    		{ 
-       			visible_PLANET_vec[i]->Render_OLD(); 
-    		}
+    		//for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
+    		//{ 
+       			//visible_PLANET_vec[i]->Render_OLD(); 
+    		//}
 
-                for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
-    		{ 
-    		    	if (visible_SPACESTATION_vec[i]->Is3D())
-    			{
-    				visible_SPACESTATION_vec[i]->RenderInSpace_3D(world_coord); 
-    			}
-    		}
+                //for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
+    		//{ 
+    		    	//if (visible_SPACESTATION_vec[i]->Is3D())
+    			//{
+    				//visible_SPACESTATION_vec[i]->RenderInSpace_3D(world_coord); 
+    			//}
+    		//}
     		
-    		for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
-    		{ 
-    		    	if (visible_SHIP_vec[i]->Is3D())
-    			{    			
-       				visible_SHIP_vec[i]->RenderInSpace_3D(world_coord); 
-    			}
-    		}
+    		//for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
+    		//{ 
+    		    	//if (visible_SHIP_vec[i]->Is3D())
+    			//{    			
+       				//visible_SHIP_vec[i]->RenderInSpace_3D(world_coord); 
+    			//}
+    		//}
     		
-    		for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
-    		{ 
-       			visible_ASTEROID_vec[i]->Render_OLD(); 
-    		}
+    		//for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
+    		//{ 
+       			//visible_ASTEROID_vec[i]->Render_OLD(); 
+    		//}
 
-            	for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
-		{ 
-        		visible_BLACKHOLE_vec[i]->Render_OLD(); 
-    		}    		
-        disable_DEPTH();
+            	//for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
+		//{ 
+        		//visible_BLACKHOLE_vec[i]->Render_OLD(); 
+    		//}    		
+        //disable_DEPTH();
 
-        enable_BLEND();
-                for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
-    		{ 
-    		    	if (!visible_SPACESTATION_vec[i]->Is3D())
-    			{
-    				visible_SPACESTATION_vec[i]->RenderInSpace_2D(); 
-    			}
-    		}
+        //enable_BLEND();
+                //for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
+    		//{ 
+    		    	//if (!visible_SPACESTATION_vec[i]->Is3D())
+    			//{
+    				//visible_SPACESTATION_vec[i]->RenderInSpace_2D(); 
+    			//}
+    		//}
            
-    		for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
-    		{ 
-        		visible_CONTAINER_vec[i]->Render2D(); 
-    		} 	 
+    		//for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
+    		//{ 
+        		//visible_CONTAINER_vec[i]->Render2D(); 
+    		//} 	 
            
-    		for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
-    		{ 
-    		    	if (!visible_SHIP_vec[i]->Is3D())
-    			{    			
-       				visible_SHIP_vec[i]->RenderInSpace_2D(); 
-    			}
-    		}
+    		//for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
+    		//{ 
+    		    	//if (!visible_SHIP_vec[i]->Is3D())
+    			//{    			
+       				//visible_SHIP_vec[i]->RenderInSpace_2D(); 
+    			//}
+    		//}
 
-		for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
-    		{ 
-    			visible_SATELLITE_vec[i]->UpdateRenderStuff(); 
-       			visible_SATELLITE_vec[i]->RenderInSpace(); 
-        		starsystem->RestoreSceneColor();
-                }
+		//for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
+    		//{ 
+    			//visible_SATELLITE_vec[i]->UpdateRenderStuff(); 
+       			//visible_SATELLITE_vec[i]->RenderInSpace(); 
+        		//starsystem->RestoreSceneColor();
+                //}
                         
-    		for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
-    		{ 
-                        visible_ROCKET_vec[i]->UpdateRenderStuff();
-       			visible_ROCKET_vec[i]->RenderInSpace(); 
-                        starsystem->RestoreSceneColor();
-    		}
+    		//for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
+    		//{ 
+                        //visible_ROCKET_vec[i]->UpdateRenderStuff();
+       			//visible_ROCKET_vec[i]->RenderInSpace(); 
+                        //starsystem->RestoreSceneColor();
+    		//}
 
-    		for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
-    		{ 
-        		visible_effect_LAZERTRACE_vec[i]->Render(); 
-    		}
-    	disable_BLEND();
+    		//for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
+    		//{ 
+        		//visible_effect_LAZERTRACE_vec[i]->Render(); 
+    		//}
+    	//disable_BLEND();
 
 
-	enable_BLEND();
-        	enable_POINTSPRITE();
-    			for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
-    			{ 
-        			visible_effect_PARTICLESYSTEM_vec[i]->Render(); 
-    			}
-        	disable_POINTSPRITE();        	
-        disable_BLEND();
+	//enable_BLEND();
+        	//enable_POINTSPRITE();
+    			//for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
+    			//{ 
+        			//visible_effect_PARTICLESYSTEM_vec[i]->Render(); 
+    			//}
+        	//disable_POINTSPRITE();        	
+        //disable_BLEND();
 
 	// text
         for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
@@ -689,63 +729,70 @@ void Player::RenderInSpace_OLD(StarSystem* starsystem)
 
 
 void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
-{    	
-    	if (Config::Instance().MODERN_EFFECTS == true)
-    	{
-    		RenderInSpace_NEW(starsystem);
-    	}
-    	else
-    	{
-        	RenderInSpace_OLD(starsystem); 
-        }        
+{   
+	float scale = Screen::Instance().GetScale();
+	int w = Screen::Instance().GetWidth();
+	int h = Screen::Instance().GetHeight();
+	 	
+	if (Config::Instance().MODERN_EFFECTS == true)
+	{
+		RenderInSpace_NEW(starsystem);
+	}
+	else
+	{
+		RenderInSpace_OLD(starsystem); 
+	}        
 
-	enable_BLEND();              
-        	if (turn_ended == true)
-        	{
-        		if (forceDraw_orbits == true)
-        		{
-                		starsystem->DrawOrbits();
-        		}
-        
-        		if (forceDraw_path == true)
-        		{
-                		starsystem->DrawPath();
-        		}
-        		
-       	 		npc->GetVehicle()->GetDriveComplex().DrawPath();
-       			npc->GetVehicle()->GetWeaponComplex().RenderWeaponsRange();
-       			npc->GetVehicle()->GetWeaponComplex().RenderWeaponIcons(); 
-       	
-        		if (show.GetRangeRadar() == true)
-        		{
-        			npc->GetVehicle()->RenderRadarRange();
-        		}
-
+	resizeGl(w*scale, h*scale); 
+	enable_BLEND();   
+	{           
+		if (turn_ended == true)
+		{
+			if (forceDraw_orbits == true)
+			{
+				starsystem->DrawOrbits();
+			}
+			
+			if (forceDraw_path == true)
+			{
+				starsystem->DrawPath();
+			}
+			
+			npc->GetVehicle()->GetDriveComplex().DrawPath();
+			npc->GetVehicle()->GetWeaponComplex().RenderWeaponsRange();
+			npc->GetVehicle()->GetWeaponComplex().RenderWeaponIcons(); 
+		
+			if (show.GetRangeRadar() == true)
+			{
+				npc->GetVehicle()->RenderRadarRange();
+			}
+		
 			if ( (npc->GetVehicle()->GetGrappleSlot()->GetItem() != nullptr) and (npc->GetVehicle()->GetGrappleSlot()->GetSelected() == true) )
-        		{
-        			npc->GetVehicle()->RenderGrappleRange();
-        		}
+			{
+				npc->GetVehicle()->RenderGrappleRange();
+			}
 		}
 	
 		cursor.RenderFocusedObjectStuff();
-		
+	}
 	disable_BLEND();  
+	resizeGl(w, h); 
 } 
 
 bool Player::MouseInteractionWithSpaceObjectsInSpace(const MouseData& data_mouse) 
 {
 	/* NOTE: the intersection must be checked in order from small objects to huge */	
-    	if (MouseInteractionWithRockets(data_mouse)) { return true; }
-    	if (MouseInteractionWithContainers(data_mouse)) { return true; }
-    	if (MouseInteractionWithSatellites(data_mouse)) { return true; }
-    	if (MouseInteractionWithAsteroids(data_mouse)) { return true; }
-    	if (MouseInteractionWithShips(data_mouse)) { return true; }	
-    	if (MouseInteractionWithBlackHoles(data_mouse)) { return true; }	
-    	if (MouseInteractionWithSpaceStations(data_mouse)) { return true; }	
-    	if (MouseInteractionWithPlanets(data_mouse)) { return true; }    
-    	if (MouseInteractionWithStars(data_mouse)) { return true; }  
-    	
-    	return false;  
+	if (MouseInteractionWithRockets(data_mouse)) { return true; }
+	if (MouseInteractionWithContainers(data_mouse)) { return true; }
+	if (MouseInteractionWithSatellites(data_mouse)) { return true; }
+	if (MouseInteractionWithAsteroids(data_mouse)) { return true; }
+	if (MouseInteractionWithShips(data_mouse)) { return true; }	
+	if (MouseInteractionWithBlackHoles(data_mouse)) { return true; }	
+	if (MouseInteractionWithSpaceStations(data_mouse)) { return true; }	
+	if (MouseInteractionWithPlanets(data_mouse)) { return true; }    
+	if (MouseInteractionWithStars(data_mouse)) { return true; }  
+	
+	return false;  
 }
 
 bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
@@ -753,7 +800,7 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
 	for (unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
        	{ 
        		const Vec3<float> rocket_pos = visible_ROCKET_vec[i]->GetCenter(); // shortcut
-            	float object_cursor_dist = distanceBetween(rocket_pos, data_mouse.pos_vp.x, data_mouse.pos_vp.y, rocket_pos.z);
+            	float object_cursor_dist = distanceBetween(rocket_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, rocket_pos.z);
             	if (object_cursor_dist < visible_ROCKET_vec[i]->GetCollisionRadius())
             	{ 
             		cursor.SetFocusedObject(visible_ROCKET_vec[i]);
@@ -783,7 +830,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
        	for (unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
        	{ 
        		const Vec3<float> container_pos = visible_CONTAINER_vec[i]->GetCenter(); // shortcut
-            	float object_cursor_dist = distanceBetween(container_pos, data_mouse.pos_vp.x, data_mouse.pos_vp.y, container_pos.z);
+            	float object_cursor_dist = distanceBetween(container_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, container_pos.z);
        		if (object_cursor_dist < visible_CONTAINER_vec[i]->GetCollisionRadius())
             	{   
 			cursor.SetFocusedObject(visible_CONTAINER_vec[i]);
@@ -823,7 +870,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 {
 	for (unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
 	{ 
-            	float object_cursor_dist = distanceBetween(visible_SATELLITE_vec[i]->GetCenter(), data_mouse.pos_vp.x, data_mouse.pos_vp.y);
+            	float object_cursor_dist = distanceBetween(visible_SATELLITE_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
             	if (object_cursor_dist < visible_SATELLITE_vec[i]->GetCollisionRadius())
             	{ 
             	       	cursor.SetFocusedObject(visible_SATELLITE_vec[i]);
@@ -873,7 +920,7 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 {
        	for (unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
        	{ 
-       		float object_cursor_dist = distanceBetween(visible_ASTEROID_vec[i]->GetCenter(), data_mouse.pos_vp.x, data_mouse.pos_vp.y);
+       		float object_cursor_dist = distanceBetween(visible_ASTEROID_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
        		if (object_cursor_dist < visible_ASTEROID_vec[i]->GetCollisionRadius())
        		{   
                         cursor.SetFocusedObject(visible_ASTEROID_vec[i]);        
@@ -904,7 +951,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 {
 	for (unsigned int i=0; i<visible_SHIP_vec.size(); i++)
 	{ 
-        	float object_cursor_dist = distanceBetween(visible_SHIP_vec[i]->GetCenter(), data_mouse.pos_vp.x, data_mouse.pos_vp.y);
+        	float object_cursor_dist = distanceBetween(visible_SHIP_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         	if (object_cursor_dist < visible_SHIP_vec[i]->GetCollisionRadius())
         	{ 
                		cursor.SetFocusedObject(visible_SHIP_vec[i]);    
@@ -973,7 +1020,7 @@ bool Player::MouseInteractionWithBlackHoles(const MouseData& data_mouse)
 {
        	for (unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
        	{ 
-       		float cursor_dist = distanceBetween(visible_BLACKHOLE_vec[i]->GetCenter(), data_mouse.pos_vp.x, data_mouse.pos_vp.y);
+       		float cursor_dist = distanceBetween(visible_BLACKHOLE_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
        		if (cursor_dist < visible_BLACKHOLE_vec[i]->GetCollisionRadius())
        		{   
        			cursor.SetFocusedObject(visible_BLACKHOLE_vec[i]); 
@@ -989,7 +1036,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 {
 	for (unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
 	{ 
-       		float object_cursor_dist = distanceBetween(visible_SPACESTATION_vec[i]->GetCenter(), data_mouse.pos_vp.x, data_mouse.pos_vp.y);
+       		float object_cursor_dist = distanceBetween(visible_SPACESTATION_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
        		if (object_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
             	{ 
                 	cursor.SetFocusedObject(visible_SPACESTATION_vec[i]); 
@@ -1039,7 +1086,7 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
 {
        	for (unsigned int i=0; i<visible_PLANET_vec.size(); i++)
        	{ 
-       		float object_cursor_dist = distanceBetween(visible_PLANET_vec[i]->GetCenter(), data_mouse.pos_vp.x, data_mouse.pos_vp.y);
+       		float object_cursor_dist = distanceBetween(visible_PLANET_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
        		if (object_cursor_dist < visible_PLANET_vec[i]->GetCollisionRadius())
             	{   
                 	cursor.SetFocusedObject(visible_PLANET_vec[i]); 
@@ -1063,7 +1110,7 @@ bool Player::MouseInteractionWithStars(const MouseData& data_mouse)
 {
        	for (unsigned int i=0; i<visible_STAR_vec.size(); i++)
        	{ 
-      		float object_cursor_dist = distanceBetween(visible_STAR_vec[i]->GetCenter(), data_mouse.pos_vp.x, data_mouse.pos_vp.y);
+      		float object_cursor_dist = distanceBetween(visible_STAR_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
        		if (object_cursor_dist < visible_STAR_vec[i]->GetCollisionRadius())
        		{   
                 	cursor.SetFocusedObject(visible_STAR_vec[i]); 
@@ -1080,7 +1127,7 @@ void Player::MouseNavigation(const MouseData& data_mouse) const
 	if (data_mouse.left_click == true)
 	{
 		ForceStateMachineReset();
-		npc->GetVehicle()->GetDriveComplex().SetStaticTargetCoords(Vec3<float>(data_mouse.pos_vp.x, data_mouse.pos_vp.y, npc->GetVehicle()->GetCenter().z));  
+		npc->GetVehicle()->GetDriveComplex().SetStaticTargetCoords(Vec3<float>(data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, npc->GetVehicle()->GetCenter().z));  
 	}
 }
 
@@ -1157,19 +1204,21 @@ void Player::ForceStateMachineReset() const
 
 void Player::RenderCollisionRadiusOfVisibleObjects() const
 {
-        enable_BLEND();        
+	enable_BLEND(); 
+	{       
 		for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 		{ visible_STAR_vec[i]->RenderCollisionRadius(); }
-    		for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 	{ visible_PLANET_vec[i]->RenderCollisionRadius(); }
-    		for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)	{ visible_SPACESTATION_vec[i]->RenderCollisionRadius(); }    		
-    		for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)		{ visible_SHIP_vec[i]->RenderCollisionRadius(); } 
-    		for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)	{ visible_ASTEROID_vec[i]->RenderCollisionRadius(); } 
-           	for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)	{ visible_BLACKHOLE_vec[i]->RenderCollisionRadius(); } 
-                for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++) 	{ visible_SPACESTATION_vec[i]->RenderCollisionRadius(); } 
-    		for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)	{ visible_CONTAINER_vec[i]->RenderCollisionRadius(); } 
-    		for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)		{ visible_SHIP_vec[i]->RenderCollisionRadius(); } 
+		for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 	{ visible_PLANET_vec[i]->RenderCollisionRadius(); }
+		for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)	{ visible_SPACESTATION_vec[i]->RenderCollisionRadius(); }    		
+		for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)		{ visible_SHIP_vec[i]->RenderCollisionRadius(); } 
+		for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)	{ visible_ASTEROID_vec[i]->RenderCollisionRadius(); } 
+		for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)	{ visible_BLACKHOLE_vec[i]->RenderCollisionRadius(); } 
+		for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++) 	{ visible_SPACESTATION_vec[i]->RenderCollisionRadius(); } 
+		for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)	{ visible_CONTAINER_vec[i]->RenderCollisionRadius(); } 
+		for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)		{ visible_SHIP_vec[i]->RenderCollisionRadius(); } 
 		for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)	{ visible_SATELLITE_vec[i]->RenderCollisionRadius(); } 
-    		for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)		{ visible_ROCKET_vec[i]->RenderCollisionRadius(); }
-    	disable_BLEND();
+		for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)		{ visible_ROCKET_vec[i]->RenderCollisionRadius(); }
+	}
+	disable_BLEND();
 }
  		
 
@@ -1235,28 +1284,28 @@ bool isObjectWithinRadarRange(BaseParticleSystem* effect, Vehicle* vehicle)
 bool isObjectOnScreen(const Vec3<float>& center, const Vec3<float>& size)
 {      
 	float scale = Screen::Instance().GetScale();
-	if (center.x < (Screen::Instance().GetBottomLeftScreenWC().x - size.x/scale))
+	if (center.x < (Screen::Instance().GetBottomLeftScreenWC().x - size.x*scale))
 		return false;
-	if (center.x > (Screen::Instance().GetTopRightScreenWC().x   + size.x/scale))
+	if (center.x > (Screen::Instance().GetTopRightScreenWC().x   + size.x*scale))
 		return false;
-	if (center.y < (Screen::Instance().GetBottomLeftScreenWC().y - size.y/scale))
+	if (center.y < (Screen::Instance().GetBottomLeftScreenWC().y - size.y*scale))
 		return false;
-	if (center.y > (Screen::Instance().GetTopRightScreenWC().y   + size.y/scale))
+	if (center.y > (Screen::Instance().GetTopRightScreenWC().y   + size.y*scale))
 		return false;
 	
 	return true;
 }
 
-bool isObjectOnScreen(const Vec2<float>& ob_center, float sizeInPixels)
+bool isObjectOnScreen(const Vec2<float>& ob_center, const float sizeInPixels)
 {       
 	float scale = Screen::Instance().GetScale();
-	if (ob_center.x < (Screen::Instance().GetBottomLeftScreenWC().x - sizeInPixels/scale))
+	if (ob_center.x < (Screen::Instance().GetBottomLeftScreenWC().x - sizeInPixels*scale))
 		return false;
-	if (ob_center.x > (Screen::Instance().GetTopRightScreenWC().x + sizeInPixels/scale))
+	if (ob_center.x > (Screen::Instance().GetTopRightScreenWC().x + sizeInPixels*scale))
 		return false;
-	if (ob_center.y < (Screen::Instance().GetBottomLeftScreenWC().y - sizeInPixels/scale))
+	if (ob_center.y < (Screen::Instance().GetBottomLeftScreenWC().y - sizeInPixels*scale))
 		return false;
-	if (ob_center.y > (Screen::Instance().GetTopRightScreenWC().y + sizeInPixels/scale))
+	if (ob_center.y > (Screen::Instance().GetTopRightScreenWC().y + sizeInPixels*scale))
 		return false;
 	
 	return true;

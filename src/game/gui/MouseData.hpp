@@ -16,15 +16,15 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef MOUSEDATA_H
-#define MOUSEDATA_H
+#ifndef MOUSEDATA_HPP
+#define MOUSEDATA_HPP
 
 #include "../math/Vec2.hpp"
 
 struct MouseData
 {
-      	Vec2<float> pos;
-      	Vec2<float> pos_vp;
+      	Vec2<float> pos_screencoord;
+      	Vec2<float> pos_worldcoord;
       	
        	bool left_click;
        	bool right_click;

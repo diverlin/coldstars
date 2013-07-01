@@ -89,20 +89,18 @@ void Cursor::UpdateMouseStuff()
 	data_mouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 	data_mouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
 	
-	data_mouse.pos.Set(mouse_pos.x, Screen::Instance().GetHeight() - mouse_pos.y);
-	data_mouse.pos /= Screen::Instance().GetScale();
-			
-	data_mouse.pos_vp = data_mouse.pos + Screen::Instance().GetBottomLeftScreenWC();
+	data_mouse.pos_screencoord.Set(mouse_pos.x, Screen::Instance().GetHeight() - mouse_pos.y);
+	data_mouse.pos_worldcoord = data_mouse.pos_screencoord*Screen::Instance().GetScale() + Screen::Instance().GetBottomLeftScreenWC();
 }
 
 void Cursor::Update()
 {
-     	rect.SetCenter(data_mouse.pos.x, data_mouse.pos.y);     	
+     	rect.SetCenter(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y);     	
 }
 
 bool Cursor::UpdateInSpace()
 {
-     	if (focused_ob != nullptr)
+	if (focused_ob != nullptr)
 	{
 		switch(focused_ob->GetTypeId())
 		{

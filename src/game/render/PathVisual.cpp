@@ -36,57 +36,61 @@ PathVisual::~PathVisual()
 void PathVisual::FillData(TextureOb* textureOb, const std::vector<Vec3<float>>& vec, int step, int point_size)
 {  
 	glDeleteLists(gl_list, sizeof(gl_list));
- 
-        int i = 0;
-        int list_len = vec.size();              
-                                
-        glNewList(gl_list, GL_COMPILE);
-        {
-                enable_POINTSPRITE();
-                glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-                while (i < list_len)
-                {                    
-                        drawParticle(vec[i], point_size);
-                        i += step;
-                }
-                disable_POINTSPRITE();
-        }
-        glEndList();
+
+	int i = 0;
+	int list_len = vec.size();              
+							
+	glNewList(gl_list, GL_COMPILE);
+	{
+		enable_POINTSPRITE();
+		{
+			glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+			while (i < list_len)
+			{                    
+				drawParticle(vec[i], point_size);
+				i += step;
+			}
+		}
+		disable_POINTSPRITE();
+	}
+	glEndList();
 }
 
 void PathVisual::FillData(const std::vector<Vec3<float>>& vec, int step, int point_size)
 {   
 	glDeleteLists(gl_list, sizeof(gl_list));
 
-        int i = 0;
-        int list_len = vec.size();
-              
-        GLuint texture_green = GuiTextureObCollector::Instance().dot_green->texture;
-        GLuint texture_blue = GuiTextureObCollector::Instance().dot_blue->texture;
-        GLuint texture;
-                                
-        glNewList(gl_list, GL_COMPILE);
-        {
-                enable_POINTSPRITE();
-                while (i < list_len)
-                {
-                        if (i < TURN_TIME)
-                        {
-                                texture = texture_green;
-                        }
-                        else
-                        {
-                                texture = texture_blue;                                
-                        }
-                        
-                        glBindTexture(GL_TEXTURE_2D, texture);
-                        drawParticle( vec[i], point_size);
-
-                        i += step;
-                }
-                disable_POINTSPRITE();
-        }
-        glEndList();
+	int i = 0;
+	int list_len = vec.size();
+		  
+	GLuint texture_green = GuiTextureObCollector::Instance().dot_green->texture;
+	GLuint texture_blue = GuiTextureObCollector::Instance().dot_blue->texture;
+	GLuint texture;
+							
+	glNewList(gl_list, GL_COMPILE);
+	{
+		enable_POINTSPRITE();
+		{
+			while (i < list_len)
+			{
+				if (i < TURN_TIME)
+				{
+						texture = texture_green;
+				}
+				else
+				{
+						texture = texture_blue;                                
+				}
+				
+				glBindTexture(GL_TEXTURE_2D, texture);
+				drawParticle( vec[i], point_size);
+	
+				i += step;
+			}
+		}
+		disable_POINTSPRITE();
+	}
+	glEndList();
 }
 
 void PathVisual::FillData(TextureOb* textureOb, int radius, int point_size)	
@@ -132,9 +136,11 @@ void PathVisual::FillData(TextureOb* textureOb, const Vec3<float>& start_pos, co
 		
 void PathVisual::Draw(const Vec2<float>& offset) const
 {
-        glPushMatrix();
+	glPushMatrix();
+	{
 		glTranslatef(offset.x, offset.y, 0.0f);
-    		glCallList(gl_list);
+		glCallList(gl_list);
+	}
 	glPopMatrix();
 }
 

@@ -21,7 +21,6 @@
 #include "../../common/constants.hpp"
 #include "../../resources/TextureManager.hpp"
 #include "../../common/rand.hpp"
-#include "../../render/Screen.hpp"
 
 ExplosionSlice::ExplosionSlice()
 {}
@@ -204,8 +203,7 @@ void ExplosionEffect::Render()
 {
 	glPushMatrix();
 	{
-		float scale = Screen::Instance().GetScale();
-		glTranslatef(center.x*scale, center.y*scale, 0.0);
+		glTranslatef(center.x, center.y, 0.0);
 	
 	   	for (unsigned int i=0; i<slice_vec.size(); i++)
 	   	{

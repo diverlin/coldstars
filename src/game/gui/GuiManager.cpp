@@ -77,7 +77,7 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 	bool interaction = gui_vehicle_scan->UpdateMouseInteraction(data_mouse);        
 	if ( (interaction == true) and (gui_vehicle_scan->GetAllowFullControl() == true) )
 	{
-		interaction = gui_skills->UpdateMouseInteraction(data_mouse.pos);
+		interaction = gui_skills->UpdateMouseInteraction(data_mouse.pos_screencoord);
 		gui_skills->ButtonsAction(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());
 	}
 
@@ -156,7 +156,7 @@ bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 	gui_natureland.BindNatureLand(natureland);
 
 	//update  
-	bool interaction = gui_natureland.UpdateMouseInteraction(data_mouse.pos);
+	bool interaction = gui_natureland.UpdateMouseInteraction(data_mouse.pos_screencoord);
 	if (interaction == false)
 	{
 		interaction = gui_natureland.UpdateMouseInteractionWithEquipedItemSlots(data_mouse);
