@@ -35,8 +35,13 @@ class Screen : public SFML_Wrapper
 		void InitBasic(int width, int height, int bpp, bool vert_sync, const std::string&);
 		void InitPostEffects(int, int);
 		
-		Rect& GetRect() { return rect; };
-		
+		//Rect& GetRect() { return rect; };
+		Vec2<float> GetBottomLeftScreenWC()	{ return rect.GetBottomLeft()/scale; };
+		Vec2<float> GetTopRightScreenWC()	{ return rect.GetTopRight()/scale; };
+
+		const Vec2<float>& GetBottomLeft() const	{ return rect.GetBottomLeft(); };
+		const Vec2<float>& GetTopRight()	const	{ return rect.GetTopRight(); };
+						
 		Fbo& GetFbo0() { return fbo0; };
 		Fbo& GetFbo1() { return fbo1; };
 		Fbo& GetFbo2() { return fbo2; };

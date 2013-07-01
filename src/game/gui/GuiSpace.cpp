@@ -385,6 +385,6 @@ void GuiSpace::RenderUnique() const
 	//RenderChildInfo(data_mouse);
 	disable_BLEND();
 	
-	RenderText(Screen::Instance().GetRect().GetBottomLeft());
+	RenderText(Screen::Instance().GetBottomLeftScreenWC());
 }
 

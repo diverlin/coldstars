@@ -15,16 +15,16 @@ void main()
   	vec2 texCoord = uv; 
    	for(int i=0; i<distortion_num; i++)
   	{
-      		float dist = distance(uv, center[i]);
-      		if ( (dist <= (time[i] + shockParams[i].z)) && (dist >= (time[i] - shockParams[i].z)) )
+		float dist = distance(uv, center[i]);
+		if ( (dist <= (time[i] + shockParams[i].z)) && (dist >= (time[i] - shockParams[i].z)) )
 		{
-           		float diff = dist - time[i];
-              		float powDiff = 1.0 - pow(abs(diff*shockParams[i].x), shockParams[i].y);
-              		diffTime += diff  * powDiff;
-              		diffUV += normalize(uv - center[i]);
-         	}  	
+			float diff = dist - time[i];
+			float powDiff = 1.0 - pow(abs(diff*shockParams[i].x), shockParams[i].y);
+			diffTime += diff  * powDiff;
+			diffUV += normalize(uv - center[i]);
+		}  	
 	}
-        
-        texCoord = uv + (diffTime * diffUV); 
-  	gl_FragColor = texture2D(sceneTex, texCoord);
+	
+	texCoord = uv + (diffTime * diffUV); 
+	gl_FragColor = texture2D(sceneTex, texCoord);
 }

@@ -282,7 +282,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 	if (starsystem->GetId() != npc->GetVehicle()->GetStarSystem()->GetId())
 	{
 		//Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetCenter());
-		Screen::Instance().GetRect().SetCenter(npc->GetVehicle()->GetCenter());
+		//Screen::Instance().GetRect().SetCenter(npc->GetVehicle()->GetCenter());
 		starsystem = npc->GetVehicle()->GetStarSystem();
 	}
 	
@@ -349,7 +349,8 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 enable_CULLFACE();
 	int w = Screen::Instance().GetWidth();
 	int h = Screen::Instance().GetHeight();
-	Vec2<float> world_coord(Screen::Instance().GetRect().GetBottomLeft());
+	Vec2<float> world_coord(Screen::Instance().GetBottomLeft());
+	float scale = Screen::Instance().GetScale();
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -496,13 +497,13 @@ enable_CULLFACE();
 		}
 		for (unsigned int j=0; ((j<visible_effect_SHOCKWAVE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
 		{         
-			center_array[i][0] = (visible_effect_SHOCKWAVE_vec[j]->center.x - world_coord.x)/w;
-			center_array[i][1] = (visible_effect_SHOCKWAVE_vec[j]->center.y - world_coord.y)/h;
+			center_array[i][0] = (visible_effect_SHOCKWAVE_vec[j]->center.x*scale - world_coord.x)/w;
+			center_array[i][1] = (visible_effect_SHOCKWAVE_vec[j]->center.y*scale - world_coord.y)/h;
 			xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[j]->parameter.x;
 			xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[j]->parameter.y;
-			xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[j]->parameter.z;
+			xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[j]->parameter.z*scale;
 				
-			time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time;
+			time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time*scale;
 		}
        
 		glUseProgram(ShaderCollector::Instance().shockwave);
@@ -580,7 +581,7 @@ disable_CULLFACE();
     
 void Player::RenderInSpace_OLD(StarSystem* starsystem)
 {
-	Vec2<float> world_coord(Screen::Instance().GetRect().GetBottomLeft());
+	Vec2<float> world_coord(Screen::Instance().GetBottomLeft());
 	   
 	glLoadIdentity();
         starsystem->DrawBackground(world_coord);
@@ -1196,8 +1197,8 @@ void Player::SaveDataUniquePlayer(boost::property_tree::ptree& save_ptree, const
 {
         save_ptree.put(root+"unresolved.npc_id", npc->GetId());
         save_ptree.put(root+"unresolved.starsystem_id", starsystem->GetId());
-        save_ptree.put(root+"unresolved.screen_pos_x", Screen::Instance().GetRect().GetBottomLeft().x);
-        save_ptree.put(root+"unresolved.screen_pos_y", Screen::Instance().GetRect().GetBottomLeft().y);
+        save_ptree.put(root+"unresolved.screen_pos_x", Screen::Instance().GetBottomLeft().x);
+        save_ptree.put(root+"unresolved.screen_pos_y", Screen::Instance().GetBottomLeft().y);
 }
 
 void Player::LoadDataUniquePlayer(const boost::property_tree::ptree& load_ptree)
@@ -1212,7 +1213,7 @@ void Player::ResolveDataUniquePlayer()
 {
         BindNpc((Npc*)EntityManager::Instance().GetEntityById(data_unresolved_player.npc_id));
         starsystem = (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_player.starsystem_id);
-        Screen::Instance().GetRect().SetBottomLeft(data_unresolved_player.screen_pos);
+        //Screen::Instance().SetBottomLeft(data_unresolved_player.screen_pos);
 }		
 
 
@@ -1234,13 +1235,13 @@ bool isObjectWithinRadarRange(BaseParticleSystem* effect, Vehicle* vehicle)
 bool isObjectOnScreen(const Vec3<float>& center, const Vec3<float>& size)
 {      
 	float scale = Screen::Instance().GetScale();
-	if (center.x < (Screen::Instance().GetRect().GetBottomLeft().x - size.x)/scale)
+	if (center.x < (Screen::Instance().GetBottomLeftScreenWC().x - size.x/scale))
 		return false;
-	if (center.x > (Screen::Instance().GetRect().GetTopRight().x   + size.x)/scale)
+	if (center.x > (Screen::Instance().GetTopRightScreenWC().x   + size.x/scale))
 		return false;
-	if (center.y < (Screen::Instance().GetRect().GetBottomLeft().y - size.y)/scale)
+	if (center.y < (Screen::Instance().GetBottomLeftScreenWC().y - size.y/scale))
 		return false;
-	if (center.y > (Screen::Instance().GetRect().GetTopRight().y   + size.y)/scale)
+	if (center.y > (Screen::Instance().GetTopRightScreenWC().y   + size.y/scale))
 		return false;
 	
 	return true;
@@ -1248,13 +1249,14 @@ bool isObjectOnScreen(const Vec3<float>& center, const Vec3<float>& size)
 
 bool isObjectOnScreen(const Vec2<float>& ob_center, float sizeInPixels)
 {       
-	if (ob_center.x < (Screen::Instance().GetRect().GetBottomLeft().x - sizeInPixels))
+	float scale = Screen::Instance().GetScale();
+	if (ob_center.x < (Screen::Instance().GetBottomLeftScreenWC().x - sizeInPixels/scale))
 		return false;
-	if (ob_center.x > (Screen::Instance().GetRect().GetTopRight().x + sizeInPixels))
+	if (ob_center.x > (Screen::Instance().GetTopRightScreenWC().x + sizeInPixels/scale))
 		return false;
-	if (ob_center.y < (Screen::Instance().GetRect().GetBottomLeft().y - sizeInPixels))
+	if (ob_center.y < (Screen::Instance().GetBottomLeftScreenWC().y - sizeInPixels/scale))
 		return false;
-	if (ob_center.y > (Screen::Instance().GetRect().GetTopRight().y + sizeInPixels))
+	if (ob_center.y > (Screen::Instance().GetTopRightScreenWC().y + sizeInPixels/scale))
 		return false;
 	
 	return true;
@@ -1262,13 +1264,13 @@ bool isObjectOnScreen(const Vec2<float>& ob_center, float sizeInPixels)
 
 bool isPointOnScreen(const Vec2<float>& p)
 {       
-	if (p.x < (Screen::Instance().GetRect().GetBottomLeft().x))
+	if (p.x < (Screen::Instance().GetBottomLeftScreenWC().x))
 		return false;
-	if (p.x > (Screen::Instance().GetRect().GetTopRight().x))
+	if (p.x > (Screen::Instance().GetTopRightScreenWC().x))
 		return false;
-	if (p.y < (Screen::Instance().GetRect().GetBottomLeft().y))
+	if (p.y < (Screen::Instance().GetBottomLeftScreenWC().y))
 		return false;
-	if (p.y > (Screen::Instance().GetRect().GetTopRight().y))
+	if (p.y > (Screen::Instance().GetTopRightScreenWC().y))
 		return false;
 	
 	return true;

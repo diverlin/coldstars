@@ -142,18 +142,18 @@ void BaseItem::RenderKorpus(const Box& box)
 	if (Is3D())
 	{
 		disable_BLEND();
-		Vec3<float> v(0.0);
-		Color4<float> c(1.0, 1.0, 1.0, 1.0);
-		SetCenter(box.GetCenter());
-		//SetAngle(box.GetAngle());
-		UpdateRenderAnimation();
-		//SetScale(box.GetSize());
-		RenderMeshLight(v, c);
+			Vec3<float> v(0.0);
+			Color4<float> c(1.0, 1.0, 1.0, 1.0);
+			SetCenter(box.GetCenter());
+			//SetAngle(box.GetAngle());
+			UpdateRenderAnimation();
+			//SetScale(box.GetSize());
+			RenderMeshLight(v, c);
 		enable_BLEND();
 	}
 	else
 	{
-       		drawQuad_inXYPlane(textureOb, box); 
+       		drawNotScaledQuad(textureOb, box); 
 	}
 }
 

@@ -47,19 +47,24 @@ void disable_DEPTH();
 
 void enable_POINTSPRITE();
 void disable_POINTSPRITE();
- 
-void drawQuad_inXYPlane(TextureOb* texOb, 
-		 const Vec3<float>& center,
-		 const Vec3<float>& size, 
-		 float angle);
 
-void drawQuad_inXYPlane(TextureOb* texOb, 
+void drawQuad(TextureOb* texOb, 
 		 const Vec3<float>& center,
 		 const Vec3<float>& size, 
-		 const Vec3<float>& scale,
+		 float angle, 
+		 float scale);
+		 
+void drawScaledQuad(TextureOb* texOb, 
+		 const Vec3<float>& center,
+		 const Vec3<float>& size, 
 		 float angle);
 		 	 
-void drawQuad_inXYPlane(TextureOb*, const Box&);
+void drawNotScaledQuad(TextureOb*, const Box&);
+
+void drawNotScaledQuad(TextureOb* texOb, 
+		 const Vec3<float>& center,
+		 const Vec3<float>& size, 
+		 float angle);
 		 		 		 
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
 
@@ -93,10 +98,10 @@ void renderMesh(Mesh* mesh, const Vec3<float>& center, const Vec3<float>& size, 
 void rotateZYX(const Vec3<float>&);
 void rotateXYZ(const Vec3<float>&);
 
-void drawParticle(float, float r, float g, float b, float a, const Vec2<float>&);
-void drawParticle(float, const Color4<float>&, const Vec2<float>&);
-void drawParticle(float, const Vec2<float>&);
-void drawNonScaledParticle(float, const Vec2<float>&);
+void drawParticle(const Vec2<float>&, float, float r, float g, float b, float a);
+void drawParticle(const Vec2<float>&, float, const Color4<float>&);
+void drawParticle(const Vec2<float>&, float);
+void drawNonScaledSizeParticle(const Vec2<float>&, float);
 
 #endif 
 
