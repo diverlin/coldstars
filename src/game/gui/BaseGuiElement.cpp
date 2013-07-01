@@ -168,7 +168,7 @@ void BaseGuiElement::RenderUnique() const
 {
 	if (textureOb != nullptr)
 	{
-		drawNotScaledQuad(textureOb, box);
+		drawQuad(textureOb, box);
    	}
 }
 

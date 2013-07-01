@@ -1238,7 +1238,7 @@ void Vehicle::RenderGrabTrail() const
 		
 void Vehicle::RenderKorpus() const
 {
-	drawScaledQuad(textureOb, GetCenter(), GetSize(), GetAngle().z);
+	drawQuad(textureOb, GetCenter(), GetSize(), GetAngle().z);
 }
 
 void Vehicle::RenderDriveEffect(float parent_d_alpha) const
@@ -1250,7 +1250,7 @@ void Vehicle::RenderDriveEffect(float parent_d_alpha) const
 
 void Vehicle::RenderShieldEffect(float parent_d_alpha) const
 {
-     	protection_complex.GetShieldEffect()->Render(parent_d_alpha);
+	protection_complex.GetShieldEffect()->Render(parent_d_alpha);
 }
 
 void Vehicle::RenderRadarRange()
@@ -1258,7 +1258,7 @@ void Vehicle::RenderRadarRange()
 	if (properties.radar > VISIBLE_DISTANCE_WITHOUT_RADAR)
 	{
 		radar_slot->UpdateRange(GuiTextureObCollector::Instance().dot_yellow);
-       		radar_slot->DrawRange(GetCenter());
+		radar_slot->DrawRange(GetCenter());
 	}
 }
 
@@ -1267,7 +1267,7 @@ void Vehicle::RenderGrappleRange()
 	if (properties.grab_radius > 0)
 	{
 		grapple_slot->UpdateRange(GuiTextureObCollector::Instance().dot_blue);
-       		grapple_slot->DrawRange(GetCenter());
+		grapple_slot->DrawRange(GetCenter());
 	}
 }
 

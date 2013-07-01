@@ -276,7 +276,7 @@ void ItemSlot::UpdateVehiclePropetries() const
 /* virtual */
 void ItemSlot::Render(const Box& box, const Vec2<float>& gui_offset, bool draw_text) const
 { 
-       	drawNotScaledQuad(textureOb, box); 
+       	drawQuad(textureOb, box); 
        	if (item != nullptr)
        	{
        		item->Render(box, gui_offset, draw_text);	
@@ -285,7 +285,7 @@ void ItemSlot::Render(const Box& box, const Vec2<float>& gui_offset, bool draw_t
 
 void ItemSlot::RenderMark(const Box& box, TextureOb* textureOb_mark) const
 {
-       	drawNotScaledQuad(textureOb_mark, box); 
+       	drawQuad(textureOb_mark, box); 
 }      
         
 int ItemSlot::GetItemRadius() const

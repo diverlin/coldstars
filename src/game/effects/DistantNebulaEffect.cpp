@@ -38,7 +38,7 @@ void DistantNebulaEffect::Update()
 
 void DistantNebulaEffect::Render(float vx, float vy)
 { 
-   	drawNotScaledQuad(textureOb, Vec3<float>(center.x - vx*parallax_rate, center.y - vy*parallax_rate, center.z), size, angle_inD);
+   	drawQuad(textureOb, Vec3<float>(center.x - vx*parallax_rate, center.y - vy*parallax_rate, center.z), size, angle_inD);
 }
               
 void DistantNebulaEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
@@ -82,29 +82,29 @@ void DistantNebulaEffect::ResolveDataUniqueDistantNebulaEffect()
 DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
 {
 	TextureOb* textureOb = nullptr;
-	if (color_id == NONE_ID) textureOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::NEBULA_BACKGROUND_ID);
-	else    	    	 textureOb = TextureManager::Instance().GetTexObByColorId(TEXTURE::NEBULA_BACKGROUND_ID, color_id);	
+	if (color_id == NONE_ID) 	textureOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::NEBULA_BACKGROUND_ID);
+	else    	    	 		textureOb = TextureManager::Instance().GetTexObByColorId(TEXTURE::NEBULA_BACKGROUND_ID, color_id);	
 	   	
 	float parallax_rate;
 	if(textureOb->GetFrameWidth() * textureOb->GetFrameHeight() > 300000)
-     		parallax_rate =  1.0/getRandInt(50, 70); 
-    	else
-      		parallax_rate =  1.0/getRandInt(30, 50);
-
-        float angle_inD = getRandInt(0, 360);
-        float d_angle_inD = 0.0;
-        if(textureOb->is_rotated)
-    		d_angle_inD = getRandInt(8,12)*0.001 * getRandSign();    	
-	   	
-	   	
-   	Vec3<float> center((float)getRandInt(0, 1000), (float)getRandInt(0, 1000), -999.0);
-        
-        DistantNebulaEffect* dn = new DistantNebulaEffect();
-        dn->SetTextureOb(textureOb);
-        dn->SetCenter(center);
-        dn->SetParallaxRate(parallax_rate);
-        dn->SetAngle(angle_inD);
-        dn->SetDAngle(d_angle_inD);
-        
-        return dn;
+		parallax_rate =  1.0/getRandInt(50, 70); 
+	else
+		parallax_rate =  1.0/getRandInt(30, 50);
+	
+	float angle_inD = getRandInt(0, 360);
+	float d_angle_inD = 0.0;
+	if(textureOb->is_rotated)
+		d_angle_inD = getRandInt(8,12)*0.001 * getRandSign();    	
+	
+	
+	Vec3<float> center((float)getRandInt(0, 1000), (float)getRandInt(0, 1000), -999.0);
+	
+	DistantNebulaEffect* dn = new DistantNebulaEffect();
+	dn->SetTextureOb(textureOb);
+	dn->SetCenter(center);
+	dn->SetParallaxRate(parallax_rate);
+	dn->SetAngle(angle_inD);
+	dn->SetDAngle(d_angle_inD);
+	
+	return dn;
 }

@@ -110,14 +110,14 @@ void BaseEquipment::Render(const Box& box, const Vec2<float>& gui_offset, bool d
         	drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1.0f);
     	}
     	
-    	if (condition == 0)
+	if (condition == 0)
 	{
-	    	drawNotScaledQuad(GuiTextureObCollector::Instance().slot_mark_reject, box);
+	    	drawQuad(GuiTextureObCollector::Instance().slot_mark_reject, box);
 	}
 	if (GetLocked() == true)
 	{
 		int font_size = 12;	
-		drawNotScaledQuad(GuiTextureObCollector::Instance().slot_mark_accept, box);
+		drawQuad(GuiTextureObCollector::Instance().slot_mark_accept, box);
 
     		Vec2<float> pos(box.GetCenter().x - font_size/2 + gui_offset.x, box.GetCenter().y - font_size + gui_offset.y);
     		Screen::Instance().DrawText(int2str(locked_turns), font_size, pos);	

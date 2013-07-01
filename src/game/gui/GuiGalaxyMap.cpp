@@ -71,7 +71,7 @@ bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse)
 				
 				if (starsystem->GetId() != player->GetNpc()->GetVehicle()->GetStarSystem()->GetId())
 				{	            			
-					float ss_cursor_dist = distanceBetween(starsystem->GetCenter(), data_mouse.pos);
+					float ss_cursor_dist = distanceBetween(starsystem->GetCenter(), data_mouse.pos_screencoord);
 					if (ss_cursor_dist < 10)
 					{ 
 						int ss_ss_dist = distanceBetween(starsystem->GetCenter(), player->GetNpc()->GetStarSystem()->GetCenter());

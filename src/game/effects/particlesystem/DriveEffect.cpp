@@ -98,18 +98,19 @@ void DriveEffect::Update()
 
 void DriveEffect::Render(float parent_d_alpha)
 {
-	enable_POINTSPRITE();      
-	glPushMatrix();
-	{
-		float scale = Screen::Instance().GetScale();
-		glTranslatef(pTo_start_pos->x*scale, pTo_start_pos->y*scale, 0.0); 	
-		glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-		for (unsigned int i=0; i<particles_vec.size(); i++) 
+	enable_POINTSPRITE(); 
+	{     
+		glPushMatrix();
 		{
-			particles_vec[i]->Render(parent_d_alpha);
+			glTranslatef(pTo_start_pos->x, pTo_start_pos->y, 0.0); 	
+			glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+			for (unsigned int i=0; i<particles_vec.size(); i++) 
+			{
+				particles_vec[i]->Render(parent_d_alpha);
+			}
 		}
+		glPopMatrix();
 	}
-	glPopMatrix();
 	disable_POINTSPRITE();
 }
 
@@ -119,46 +120,46 @@ void DriveEffect::Render(float parent_d_alpha)
 
 DriveEffect* GetNewDriveEffect(int size_id, Vec3<float>* pTo_pos, Vec3<float>* pTo_target_pos)
 {
-   	ParticleData data_particle;        
-                       
-   	data_particle.size_start = 15.0 + 2*size_id;
-   	data_particle.size_end   = 2.0;
-   	data_particle.d_size     = 0.0;
-   	   	
-   	data_particle.velocity_start = 1.2;
-   	data_particle.velocity_end   = 1.2;   	
-   	data_particle.d_velocity     = 0.0; 
-        
-        data_particle.color_start.r    = 1.0;
+	ParticleData data_particle;        
+				   
+	data_particle.size_start = 15.0 + 2*size_id;
+	data_particle.size_end   = 2.0;
+	data_particle.d_size     = 0.0;
+	
+	data_particle.velocity_start = 1.2;
+	data_particle.velocity_end   = 1.2;   	
+	data_particle.d_velocity     = 0.0; 
+	
+	data_particle.color_start.r    = 1.0;
 	data_particle.color_start.g    = 1.0;
 	data_particle.color_start.b    = 1.0;
-        data_particle.color_start.a    = 0.9;
-
+	data_particle.color_start.a    = 0.9;
+	
 	data_particle.color_end.r    = 0.0;
 	data_particle.color_end.g    = 0.0;
 	data_particle.color_end.b    = 0.0;
-        data_particle.color_end.a    = 0.1;
-
+	data_particle.color_end.a    = 0.1;
+	
 	data_particle.color_delta.r    = 0.0;
 	data_particle.color_delta.g    = 0.0;
 	data_particle.color_delta.b    = 0.0;
-        data_particle.color_delta.a    = 0.1;
-        
-   	   	
-   	int particles_num = 5;                        
-                       
-        TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
-   	DriveEffect* drive_effect = new DriveEffect(pTo_pos, pTo_target_pos);
-        
-        drive_effect->SetTextureOb(texOb_particle);                                 
-        drive_effect->SetParticleData(data_particle);
-        drive_effect->SetParticlesNum(particles_num);
-        
-        drive_effect->UpdateVelocity();
-     	drive_effect->CreateParticles();
-     	drive_effect->PutParticlesToInitPos();
-                
-  	return drive_effect;
+	data_particle.color_delta.a    = 0.1;
+	
+	
+	int particles_num = 5;                        
+				   
+	TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
+	DriveEffect* drive_effect = new DriveEffect(pTo_pos, pTo_target_pos);
+	
+	drive_effect->SetTextureOb(texOb_particle);                                 
+	drive_effect->SetParticleData(data_particle);
+	drive_effect->SetParticlesNum(particles_num);
+	
+	drive_effect->UpdateVelocity();
+	drive_effect->CreateParticles();
+	drive_effect->PutParticlesToInitPos();
+			
+	return drive_effect;
 }
 
 

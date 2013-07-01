@@ -380,7 +380,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
  	UserInput::Instance().UpdateInKosmoport(player);
      	player->GetCursor().Update(); 
      	    	       	
-	bool interaction = UpdateMouseInteraction(data_mouse.pos);
+	bool interaction = UpdateMouseInteraction(data_mouse.pos_screencoord);
 	ButtonsAction();
 
 	switch(active_screen_id)
@@ -390,7 +390,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 			gui_angar.CheckButtonsLock();
 			if (interaction == false)
 			{					
-				interaction = gui_angar.UpdateMouseInteraction(data_mouse.pos);
+				interaction = gui_angar.UpdateMouseInteraction(data_mouse.pos_screencoord);
 				if (interaction == false)
 				{
 					interaction = gui_angar.UpdateMouseInteractionWithVehicleSlots(data_mouse);
@@ -435,13 +435,13 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 			
 			if (interaction == false)
 			{
-				interaction = gui_shop.UpdateMouseInteraction(data_mouse.pos);
+				interaction = gui_shop.UpdateMouseInteraction(data_mouse.pos_screencoord);
 				if (interaction == false)
 				{
 					if (slider_shared->GetSubTypeId() != NONE_ID)
 					{
 						slider_shared->UpdateSlidePosition(data_mouse);
-						interaction = slider_shared->UpdateMouseInteraction(data_mouse.pos);
+						interaction = slider_shared->UpdateMouseInteraction(data_mouse.pos_screencoord);
 					}
 				}
 	        	}

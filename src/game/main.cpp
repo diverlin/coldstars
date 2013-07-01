@@ -66,7 +66,7 @@ int main()
 	Player* player = PlayerBuilder::Instance().GetNewPlayer();
 	
 	BaseRunScenario* run_scenario = nullptr;
-	int scenario_type = TEST_TEXT_RUNSCENARIO;
+	int scenario_type = NORMAL_RUNSCENARIO;
 	switch(scenario_type)
 	{
 		case NORMAL_RUNSCENARIO: 			{ run_scenario = new NormalRunScenario(); break; }

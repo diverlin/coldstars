@@ -285,7 +285,7 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 {
 	for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
 	{ 
-		if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.pos) == true)
+		if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.pos_screencoord) == true)
 		{  
 			if ( (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr) and (player->GetCursor().GetItemSlot()->GetItem() == nullptr) )
 			{
@@ -374,7 +374,7 @@ bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Stor
 {
 	for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
 	{ 
-		if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.pos) == true)
+		if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.pos_screencoord) == true)
 		{  
 			if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr)
 			{
@@ -428,7 +428,7 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, int mark_
                			}
                			else
                			{
-               				if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.pos) == true)
+               				if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.pos_screencoord) == true)
 	               			{
 	               				gui_itemslot_vec[i].GetItemSlot()->RenderMark(gui_itemslot_vec[i].GetBox(), GuiTextureObCollector::Instance().slot_mark_reject);
 	               			}

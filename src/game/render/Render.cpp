@@ -56,7 +56,7 @@ void resizeGl(int width, int height)
   	glLoadIdentity();
 
   	//gluPerspective(60.f, 4./3., 1.f, 1000.f);
-  	glOrtho(0, width, 0, height, 0.1f, 1000.0f);
+   	glOrtho(0, width, 0, height, 0.1f, 1000.0f);
   	
   	glMatrixMode(GL_MODELVIEW);
 }
@@ -86,17 +86,16 @@ void disable_POINTSPRITE() { glDisable(GL_POINT_SPRITE); }
 void drawQuad(TextureOb* texOb,
 		 const Vec3<float>& center, 
 		 const Vec3<float>& size,
-		 float angle,
-		 float scale)
+		 float angle)
 {
 	glBindTexture(GL_TEXTURE_2D, texOb->texture);
 	int frame = texOb->updateAnimationFrame();
 	
 	glPushMatrix();
 	{
-		glTranslatef(center.x*scale, center.y*scale, center.z*scale);
+		glTranslatef(center.x, center.y, center.z);
 		glRotatef(angle, 0.0, 0.0, 1.0);
-		glScalef(size.x*scale, size.y*scale, size.z*scale);
+		glScalef(size.x, size.y, size.z);
 									
 		glBegin(GL_QUADS);
 			glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
@@ -108,29 +107,11 @@ void drawQuad(TextureOb* texOb,
 	glPopMatrix();
 }
 
-void drawScaledQuad(TextureOb* texOb,
-		 const Vec3<float>& center, 
-		 const Vec3<float>& size,
-		 float angle)
+void drawQuad(TextureOb* texOb, const Box& box)
 {
-	float scale = Screen::Instance().GetScale();
-	drawQuad(texOb, center, size, angle, scale);
+	drawQuad(texOb, box.GetCenter(), box.GetSize(), box.GetAngle().z);
 }
 
-void drawNotScaledQuad(TextureOb* texOb, const Box& box)
-{
-	float scale = 1.0;
-	drawQuad(texOb, box.GetCenter(), box.GetSize(), box.GetAngle().z, scale);
-}
-
-void drawNotScaledQuad(TextureOb* texOb,
-		 const Vec3<float>& center, 
-		 const Vec3<float>& size,
-		 float angle)
-{
-	float scale = 1.0;	
-	drawQuad(texOb, center, size, angle, scale);
-}
 
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos)
 {
@@ -230,10 +211,9 @@ void drawInfoIn2Column(
 
 	TextureOb* texOb_textBg = GuiTextureObCollector::Instance().text_background;
 									
-	float scale = Screen::Instance().GetScale();
 	glPushMatrix();
 	{
-		glTranslatef(pos.x*scale, pos.y*scale, 0.0);
+		glTranslatef(pos.x, pos.y, 0.0);
 	
 		drawTexturedRect(texOb_textBg, rect, -2);
 	
@@ -298,9 +278,8 @@ void renderMesh(Mesh* mesh, const Vec3<float>& center, const Vec3<float>& size, 
 {
 	glPushMatrix();
 	{
-		float scale = Screen::Instance().GetScale();
-		glTranslatef(center.x*scale, center.y*scale, center.z*scale);		
-		glScalef(size.x*scale, size.y*scale, size.z*scale); 
+		glTranslatef(center.x, center.y, center.z);		
+		glScalef(size.x, size.y, size.z); 
 		if (ZYX) 	{	rotateZYX(angle); } // animation rotation along axis X
 		else		{	rotateXYZ(angle); } // animation rotation along axis z
 						
@@ -325,65 +304,36 @@ void rotateXYZ(const Vec3<float>& angle)
 }
 
 void drawParticle(const Vec2<float>& center, float size, float r, float g, float b, float a)
-{
-	float scale = Screen::Instance().GetScale();
-		
-	glPointSize(size*scale);
+{		
+	glPointSize(size);
         	
 	glBegin(GL_POINTS);  
 	{         		
 		glColor4f(r, g, b, a);
-		glVertex3f(center.x*scale, center.y*scale, -2);
+		glVertex3f(center.x, center.y, -2);
 	}
 	glEnd();
 }
 
 void drawParticle(const Vec2<float>& center, float size, const Color4<float>& color)
-{
-	float scale = Screen::Instance().GetScale();
-	
-	glPointSize(size*scale);
+{	
+	glPointSize(size);
         	
 	glBegin(GL_POINTS);   
 	{        	
 		glColor4f(color.r, color.g, color.b, color.a);
-		glVertex3f(center.x*scale, center.y*scale, -2);
+		glVertex3f(center.x, center.y, -2);
 	}
 	glEnd();
 }
 
 void drawParticle(const Vec2<float>& center, float size)
 {
-	float scale = Screen::Instance().GetScale();	
-	glPointSize(size*scale);
-        	
-	glBegin(GL_POINTS); 
-	{          		
-		glVertex3f(center.x*scale, center.y*scale, -2);
-	}
-	glEnd();
-}
-
-void drawNonScaledSizeParticle(const Vec2<float>& center, float size)
-{
 	glPointSize(size);
         	
 	glBegin(GL_POINTS); 
-	{
-		float scale = Screen::Instance().GetScale();          		
-		glVertex3f(center.x*scale, center.y*scale, -2);
-	}
-	glEnd();
-}
-
-void drawNonScaledPositionParticle(float size, const Vec2<float>& center)
-{
-	float scale = Screen::Instance().GetScale(); 
-	glPointSize(size*scale);
-        	
-	glBegin(GL_POINTS); 
-	{
+	{          		
 		glVertex3f(center.x, center.y, -2);
 	}
 	glEnd();
-}			
+}

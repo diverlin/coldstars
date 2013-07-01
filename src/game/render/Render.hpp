@@ -51,20 +51,9 @@ void disable_POINTSPRITE();
 void drawQuad(TextureOb* texOb, 
 		 const Vec3<float>& center,
 		 const Vec3<float>& size, 
-		 float angle, 
-		 float scale);
-		 
-void drawScaledQuad(TextureOb* texOb, 
-		 const Vec3<float>& center,
-		 const Vec3<float>& size, 
-		 float angle);
+		 float angle=0);
 		 	 
-void drawNotScaledQuad(TextureOb*, const Box&);
-
-void drawNotScaledQuad(TextureOb* texOb, 
-		 const Vec3<float>& center,
-		 const Vec3<float>& size, 
-		 float angle);
+void drawQuad(TextureOb*, const Box&);
 		 		 		 
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
 
@@ -101,7 +90,6 @@ void rotateXYZ(const Vec3<float>&);
 void drawParticle(const Vec2<float>&, float, float r, float g, float b, float a);
 void drawParticle(const Vec2<float>&, float, const Color4<float>&);
 void drawParticle(const Vec2<float>&, float);
-void drawNonScaledSizeParticle(const Vec2<float>&, float);
 
 #endif 
 

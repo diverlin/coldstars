@@ -89,7 +89,7 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
         { 
                 if (rect_itemslot_vec[i].second->GetItem() != nullptr)
                 {
-                	if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.pos.x, data_mouse.pos.y) == true)
+                	if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y) == true)
                 	{
 				player->GetCursor().SetFocusedObject(rect_itemslot_vec[i].second->GetItem());
                 	
@@ -109,7 +109,7 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
         { 
                 if (rect_vehicleslot_vec[i].second->GetVehicle() != nullptr)
                 {
-                	if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.pos.x, data_mouse.pos.y) == true)
+                	if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y) == true)
                 	{
 				player->GetCursor().SetFocusedObject(rect_vehicleslot_vec[i].second->GetVehicle());
                 	

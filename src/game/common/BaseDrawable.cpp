@@ -52,21 +52,21 @@ void BaseDrawable::BindData3D(Mesh* mesh, TextureOb* textureOb, const Vec3<float
 	this->mesh = mesh;
 	this->textureOb = textureOb; 
 	SetSize(size);
-	collision_radius = (size.x + size.y) / 2.0;
+	collision_radius = (size.x + size.y) / 4.0;
 }
 
 void BaseDrawable::BindData2D(TextureOb* textureOb)
 {
 	this->textureOb = textureOb; 
 	SetSize(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0);
-	collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight()) / 3.0;
+	collision_radius = (textureOb->GetFrameWidth() + textureOb->GetFrameHeight()) / 4.0;
 } 
 
 
 void BaseDrawable::RenderCollisionRadius() const
 {
-	TextureOb* collision_radius_texOb =  GuiTextureObCollector::Instance().radar_range;
-	drawScaledQuad(collision_radius_texOb, GetCenter(), Vec3<float>(collision_radius, collision_radius, collision_radius), /*angle=*/0);
+	TextureOb* texOb_collision_radius =  GuiTextureObCollector::Instance().radar_range;
+	drawQuad(texOb_collision_radius, GetCenter(), Vec3<float>(2*collision_radius, 2*collision_radius, 2*collision_radius));
 }
 
 void BaseDrawable::UpdateRenderAnimation()

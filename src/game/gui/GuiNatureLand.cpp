@@ -102,7 +102,7 @@ bool GuiNatureLand::UpdateMouseInteractionWithEquipedItemSlots(const MouseData& 
 		BaseItem* item = rect_itemslot_vec[i].second->GetItem();
 		if (item != nullptr)
 		{	 
-	                if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.pos.x, data_mouse.pos.y) == true)
+	                if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y) == true)
 	                {	
                 		if (data_mouse.left_click == true)
                         	{
