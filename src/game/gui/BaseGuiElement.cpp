@@ -140,7 +140,7 @@ void BaseGuiElement::UpdateGeometry(const Vec3<float>& parent_offset, const Vec3
 	Vec3<float> next_offset = offset*scale + parent_offset*parent_scale;
 	Vec3<float> next_scale = parent_scale*scale;
 	box.SetCenter(next_offset);
-	//box.SetScale(next_scale);
+	box.SetScale(next_scale);
 			
 	for (auto &child : child_vec)
 	{
@@ -168,7 +168,7 @@ void BaseGuiElement::RenderUnique() const
 {
 	if (textureOb != nullptr)
 	{
-		drawQuad_inXYPlane(textureOb, box);
+		drawNotScaledQuad(textureOb, box);
    	}
 }
 

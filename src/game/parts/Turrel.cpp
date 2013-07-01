@@ -43,6 +43,6 @@ void Turrel::Render(float turrel_angle_inD)
         	turrel_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
         }     
 
-    	drawQuad_inXYPlane(textureOb, GetCenter(), GetSize(), turrel_angle_inD);
+    	drawScaledQuad(textureOb, GetCenter(), GetSize(), turrel_angle_inD);
 }        
                 

@@ -60,7 +60,6 @@ void SFML_Wrapper::DrawText(const std::string& str, int font_size, const Vec2<fl
 	////window.popGLStates();	     	
 
 	glPushMatrix();
-		glLoadIdentity();
 		glColor4ub(color.r, color.g, color.b, color.a);
 		glScalef(0.5, 0.5, 0.5);
 		freetype::print(ftfont, pos.x, pos.y, str.c_str());

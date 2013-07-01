@@ -19,14 +19,14 @@
 #ifndef INFOTABLE_H
 #define INFOTABLE_H
 
-#include "../struct/gameStruct.hpp"
-#include "../math/myVector.hpp"
+#include <vector>
+#include <string>
 
 class InfoTable
 {
 	public:
-            	std::vector<std::string> title_list;        
-        	std::vector<std::string> value_list;
+		std::vector<std::string> title_list;        
+		std::vector<std::string> value_list;
         	
 		InfoTable();
 		~InfoTable();

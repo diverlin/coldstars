@@ -24,32 +24,32 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class ExplosionSlice : public BaseParticleSystem
 { 
-    	public:
-       		ExplosionSlice();       
-       		virtual ~ExplosionSlice();
+	public:
+		ExplosionSlice();       
+		virtual ~ExplosionSlice();
 		
-       		virtual void Update();
-       		virtual void Render();
-       		
-                void CreateParticles();
-       	private:
+		virtual void Update();
+		virtual void Render();
+		
+		void CreateParticles();
+	private:
 
 };
 
 class ExplosionEffect : public BaseParticleSystem
 { 
-    	public:
-       		ExplosionEffect(float);       
-       		virtual ~ExplosionEffect();
+	public:
+		ExplosionEffect(float);       
+		virtual ~ExplosionEffect();
 		
 		float GetRadius() const { return radius; }
 		void Add(ExplosionSlice* explosion_slice) { slice_vec.push_back(explosion_slice); }
 		
-       		virtual void Update();
-       		virtual void Render();
-       	private:
-       		float radius;
-       		std::vector<ExplosionSlice*> slice_vec;
+		virtual void Update();
+		virtual void Render();
+		private:
+		float radius;
+		std::vector<ExplosionSlice*> slice_vec;
 
 };
 

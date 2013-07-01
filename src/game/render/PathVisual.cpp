@@ -46,7 +46,7 @@ void PathVisual::FillData(TextureOb* textureOb, const std::vector<Vec3<float>>& 
                 glBindTexture(GL_TEXTURE_2D, textureOb->texture);
                 while (i < list_len)
                 {                    
-                        drawParticle(point_size, vec[i]);
+                        drawParticle(vec[i], point_size);
                         i += step;
                 }
                 disable_POINTSPRITE();
@@ -80,7 +80,7 @@ void PathVisual::FillData(const std::vector<Vec3<float>>& vec, int step, int poi
                         }
                         
                         glBindTexture(GL_TEXTURE_2D, texture);
-                        drawParticle(point_size, vec[i]);
+                        drawParticle( vec[i], point_size);
 
                         i += step;
                 }
@@ -100,7 +100,7 @@ void PathVisual::FillData(TextureOb* textureOb, int radius, int point_size)
                 glBindTexture(GL_TEXTURE_2D, textureOb->texture);
                 for (float a=0.0f; a<=2*PI; a+=da)
       		{
-      			drawParticle(point_size, Vec2<float>(radius * cos(a), radius * sin(a)));
+      			drawParticle(Vec2<float>(radius * cos(a), radius * sin(a)), point_size);
 		}
                 disable_POINTSPRITE();
         }
@@ -110,22 +110,22 @@ void PathVisual::FillData(TextureOb* textureOb, int radius, int point_size)
 void PathVisual::FillData(TextureOb* textureOb, const Vec3<float>& start_pos, const Vec3<float>& target_pos, int step, int point_size)
 {
 	glDeleteLists(gl_list, sizeof(gl_list));
-       	
+	
 	Vec2<float> new_pos(start_pos);
-       	Vec2<float> ll(target_pos - start_pos);	    		
+	Vec2<float> ll(target_pos - start_pos);	    		
 	Vec2<float> vstep = ll.GetNormalized() * step;
-
+	
 	unsigned int it = ll.GetLength() / step;
 	glNewList(gl_list, GL_COMPILE);
-        {
-                enable_POINTSPRITE();
-                glBindTexture(GL_TEXTURE_2D, textureOb->texture);	
+	{
+		enable_POINTSPRITE();
+		glBindTexture(GL_TEXTURE_2D, textureOb->texture);	
 		for (unsigned int i=0; i<it; i++)
 		{
-       			new_pos += vstep;
-       			drawParticle(point_size, new_pos);
-    		}
-    		disable_POINTSPRITE();
+			new_pos += vstep;
+			drawParticle(new_pos, point_size);
+		}
+		disable_POINTSPRITE();
 	}
 	glEndList();
 }

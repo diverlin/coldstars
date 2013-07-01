@@ -66,7 +66,7 @@ void BaseDrawable::BindData2D(TextureOb* textureOb)
 void BaseDrawable::RenderCollisionRadius() const
 {
 	TextureOb* collision_radius_texOb =  GuiTextureObCollector::Instance().radar_range;
-	drawQuad_inXYPlane(collision_radius_texOb, GetCenter(), Vec3<float>(collision_radius, collision_radius, collision_radius), 0);
+	drawScaledQuad(collision_radius_texOb, GetCenter(), Vec3<float>(collision_radius, collision_radius, collision_radius), /*angle=*/0);
 }
 
 void BaseDrawable::UpdateRenderAnimation()

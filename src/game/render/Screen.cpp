@@ -156,7 +156,7 @@ void  Screen::IncreaseScale()
 void Screen::DecreaseScale() 
 { 
 	float d_scale = 0.01;
-	if (scale > 1.1*d_scale) 
+	if (scale > 0.3) 
 	{
 		scale -= d_scale; 
 		

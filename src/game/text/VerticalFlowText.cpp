@@ -22,26 +22,25 @@
 #include "../render/Screen.hpp"
 
 VerticalFlowText::VerticalFlowText(const std::string& str, 
-					int font_size,
-                                        const Vec2<float>& center, 
-                                        const Color4<int>& color, 
-                                        float collision_radius)
+									int font_size,
+									const Vec2<float>& center, 
+									const Color4<int>& color, 
+									float collision_radius)
 {
-        is_alive = true;
-        live_time = 70; //TEXT_EXISTANCE_TIME
-
-        this->str = str;
-        this->font_size = font_size;
-        this->color = color;
-
-
-        float kof1 = 0.1 * getRandInt(3, 18);
-        float kof2 = 0.1 * getRandInt(5, 15);
-
-        pos.x = center.x - collision_radius * kof1;
-        pos.y = center.y + collision_radius * kof2;
-        
-        speed = 2.0;
+	is_alive = true;
+	live_time = 70; //TEXT_EXISTANCE_TIME
+	
+	this->str = str;
+	this->font_size = font_size;
+	this->color = color;	
+	
+	float kof1 = 0.1 * getRandInt(3, 18);
+	float kof2 = 0.1 * getRandInt(5, 15);
+	
+	pos.x = center.x - collision_radius * kof1;
+	pos.y = center.y + collision_radius * kof2;
+	
+	speed = 2.0;
 }
 
 VerticalFlowText::~VerticalFlowText()
@@ -49,28 +48,32 @@ VerticalFlowText::~VerticalFlowText()
 
 void VerticalFlowText::update()
 {
-        if (is_alive == true)
-        {
-                pos.y += speed;
-                if (speed > 0.5)
-                {
-                        speed -= 0.1;
-                }
-
-                live_time -= 1;
-                if (live_time < 0)
-                {
-                        is_alive = false;
-                }
-        }
+	if (is_alive == true)
+	{
+		pos.y += speed;
+		if (speed > 0.5)
+		{
+			speed -= 0.1;
+		}
+		
+		live_time -= 1;
+		if (live_time < 0)
+		{
+			is_alive = false;
+		}
+	}
 }
                 
 void VerticalFlowText::Render(const Vec2<float>& scroll_coords) const
 {
-        if (is_alive == true)
-        {
-                Screen::Instance().DrawText(str, font_size, pos-scroll_coords, color);
-        }
+	if (is_alive == true)
+	{
+		float scale = Screen::Instance().GetScale();
+		glPushMatrix();
+			glLoadIdentity();
+			Screen::Instance().DrawText(str, font_size, pos*scale-scroll_coords, color);
+		glPopMatrix();
+	}
 }
  
 

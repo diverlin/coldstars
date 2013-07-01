@@ -95,17 +95,17 @@ void BaseButton::RenderUnique() const
    	
 	setColor4f(1.0f, 1.0f, 1.0f, alpha);
 
-   	drawQuad_inXYPlane(textureOb, box);
+   	drawNotScaledQuad(textureOb, box);
    	
    	if (textureOb_additional != nullptr)
    	{
-   	   	drawQuad_inXYPlane(textureOb_additional, box);
+   	   	drawNotScaledQuad(textureOb_additional, box);
    	}
 	setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
    	if (textureOb_mask != nullptr)
    	{
-   	   	drawQuad_inXYPlane(textureOb_mask, box);
+   	   	drawNotScaledQuad(textureOb_mask, box);
    	}
    		
 	if (label != "")

@@ -58,7 +58,7 @@ void GuiRadar::ResetData()
     
 void GuiRadar::Update()
 {
-	screenrect.Set(rect.GetCenter() + Screen::Instance().GetRect().GetBottomLeft() * scale, (int)(Screen::Instance().GetWidth() * scale), (int)(Screen::Instance().GetHeight() * scale));
+	//screenrect.Set(rect.GetCenter() + Screen::Instance().GetRect().GetBottomLeft() * scale, (int)(Screen::Instance().GetWidth() * scale), (int)(Screen::Instance().GetHeight() * scale));
 }
 
 //bool GuiRadar::UpdateMouseInteraction(const Vec2<float>& mouse_pos)
@@ -141,7 +141,7 @@ void GuiRadar::RenderUnique() const
 				}
 			}
 			
-			drawNonScaledParticle(size, rect.GetCenter()/scale_render + entity_vec[i]->GetCenter()*scale);			
+			drawNonScaledSizeParticle(rect.GetCenter()/scale_render + entity_vec[i]->GetCenter()*scale, size);			
 		}
 	}
 	disable_POINTSPRITE(); 

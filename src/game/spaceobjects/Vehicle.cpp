@@ -23,6 +23,7 @@
 #include "../common/myStr.hpp"
 #include "../docking/Kosmoport.hpp"
 #include "../render/Render.hpp"
+#include "../render/Screen.hpp"
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 
 #include "../resources/TextureManager.hpp"
@@ -78,21 +79,21 @@ Vehicle::Vehicle()
 	special_action_id = NONE_ID;
 	
 	owner_npc  = nullptr;
-       	starsystem = nullptr; 
-
-    	weapon_complex.SetOwnerVehicle(this);
-    	drive_complex.SetOwnerVehicle(this);
-    	protection_complex.SetOwnerVehicle(this);
-
-    	radar_slot     = nullptr;
-        scaner_slot    = nullptr;
-        energizer_slot = nullptr;
-        grapple_slot   = nullptr;
-        droid_slot     = nullptr;
-        freezer_slot   = nullptr;
-        
-        parent_vehicleslot = nullptr;
-        land  = nullptr;
+	starsystem = nullptr; 
+	
+	weapon_complex.SetOwnerVehicle(this);
+	drive_complex.SetOwnerVehicle(this);
+	protection_complex.SetOwnerVehicle(this);
+	
+	radar_slot     = nullptr;
+	scaner_slot    = nullptr;
+	energizer_slot = nullptr;
+	grapple_slot   = nullptr;
+	droid_slot     = nullptr;
+	freezer_slot   = nullptr;
+	
+	parent_vehicleslot = nullptr;
+	land  = nullptr;
 }
 
 /*virtual*/
@@ -117,8 +118,8 @@ void Vehicle::PutChildsToGarbage() const
 
 void Vehicle::CreateDriveComplexTextureDependedStuff()
 {
-    	GetPoints().addMidLeftPoint();
-    	GetPoints().addMidFarLeftPoint();
+	GetPoints().addMidLeftPoint();
+	GetPoints().addMidFarLeftPoint();
     	
 	DriveEffect* drive_effect = GetNewDriveEffect(GetTextureOb()->size_id, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
  	GetDriveComplex().SetDriveEffect(drive_effect);
@@ -126,13 +127,13 @@ void Vehicle::CreateDriveComplexTextureDependedStuff()
 
 void Vehicle::CreateProtectionComplexTextureDependedStuff()
 {
-     	protection_complex.GetShieldEffect()->SetParent(this);
+	protection_complex.GetShieldEffect()->SetParent(this);
 }
 
 void Vehicle::SetKorpusData(const VehicleKorpusData& data_korpus) 
 { 
-        this->data_korpus = data_korpus; 
-        properties.protection = data_korpus.protection;
+	this->data_korpus = data_korpus; 
+	properties.protection = data_korpus.protection;
 }
                 
 GoodsPack* Vehicle::GetGoodsPack() const
@@ -154,45 +155,45 @@ GoodsPack* Vehicle::GetGoodsPack() const
 /* virtual */
 int Vehicle::GetGivenExpirience() const
 {
-        return owner_npc->GetSkills().GetExpirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
+	return owner_npc->GetSkills().GetExpirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
 }
     
 bool Vehicle::CheckItemSlotPresenceBySubTypeId(int slot_subtype_id) const
 {
-        for (unsigned int i=0; i<slot_total_vec.size(); i++)
-        {
-                if (slot_total_vec[i]->GetSubTypeId() == slot_subtype_id)
-                {
-                        return true;
-                }
-        }
-        
-        return false;
+	for (unsigned int i=0; i<slot_total_vec.size(); i++)
+	{
+		if (slot_total_vec[i]->GetSubTypeId() == slot_subtype_id)
+		{
+			return true;
+		}
+	}
+	
+	return false;
 }
                     
 void Vehicle::AddItemSlot(ItemSlot* slot) 
 { 
-        slot->SetOwner(this); 
+	slot->SetOwner(this); 
                 
 	switch(slot->GetSubTypeId())
 	{
-                case ENTITY::WEAPON_SLOT_ID:    
-                {
-                        float border_start = 0.2;
-                        float border_end   = 0.8;
-
-                        float pos_x = getRandFloat(border_start, border_end) - 0.5;
-                        float pos_y = getRandFloat(border_start, border_end) - 0.5;
-                                        
+		case ENTITY::WEAPON_SLOT_ID:    
+		{
+			float border_start = 0.2;
+			float border_end   = 0.8;
+			
+			float pos_x = getRandFloat(border_start, border_end) - 0.5;
+			float pos_y = getRandFloat(border_start, border_end) - 0.5;
+							
 			slot->GetTurrel()->SetParentCenter(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
-                 	points.Add(slot->GetTurrel()->GetpCenter(), slot->GetTurrel()->GetpParentCenter()); 
-                	weapon_complex.AddSlot(slot); 
-
-                	break; 
-                }
-                case ENTITY::DRIVE_SLOT_ID:     { drive_complex.SetDriveSlot(slot); break; }
-                case ENTITY::BAK_SLOT_ID:       { drive_complex.SetBakSlot(slot); break; }
-                case ENTITY::PROTECTOR_SLOT_ID: { protection_complex.SetProtectorSlot(slot); break; }
+			points.Add(slot->GetTurrel()->GetpCenter(), slot->GetTurrel()->GetpParentCenter()); 
+			weapon_complex.AddSlot(slot); 
+			
+			break; 
+		}
+		case ENTITY::DRIVE_SLOT_ID:     { drive_complex.SetDriveSlot(slot); break; }
+		case ENTITY::BAK_SLOT_ID:       { drive_complex.SetBakSlot(slot); break; }
+		case ENTITY::PROTECTOR_SLOT_ID: { protection_complex.SetProtectorSlot(slot); break; }
 		case ENTITY::RADAR_SLOT_ID:     { radar_slot  = slot; break; }
 		case ENTITY::SCANER_SLOT_ID:    { scaner_slot = slot; break; }
 		
@@ -341,58 +342,58 @@ ItemSlot* Vehicle::GetFuctionalSlot(int functional_slot_subtype_id) const
 ItemSlot* Vehicle::GetEmptyArtefactSlot() const
 {
 	for(unsigned int i=0; i<slot_artef_vec.size(); i++)
-        {
-        	if (slot_artef_vec[i]->GetItem() == nullptr)
-        	{
-        		return slot_artef_vec[i];
-        	}
-        }
-               		
-        return nullptr;
+	{
+		if (slot_artef_vec[i]->GetItem() == nullptr)
+		{
+			return slot_artef_vec[i];
+		}
+	}
+	
+	return nullptr;
 }
                 	
 ItemSlot* Vehicle::GetEmptyCargoSlot()
 {
-      	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
-      	{      			
-          	if (slot_cargo_vec[i]->GetItem() == nullptr)
-          	{
-             		return slot_cargo_vec[i];
-             	}
-        }
-        
-      	return nullptr;
+	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
+	{      			
+		if (slot_cargo_vec[i]->GetItem() == nullptr)
+		{
+			return slot_cargo_vec[i];
+		}
+	}
+	
+	return nullptr;
 }
 
 ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
 {
-      	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
-      	{
-          	if (slot_cargo_vec[i]->GetItem() != nullptr)
-          	{
-          		if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
-          		{
-          			if (slot_cargo_vec[i]->GetItem()->GetSubTypeId() == requested_goods_subtype_id)
-          			{
-          				return slot_cargo_vec[i];
-          			}
-          		}
-          	}             		
-        }
-        
-      	return nullptr;
+	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
+	{
+		if (slot_cargo_vec[i]->GetItem() != nullptr)
+		{
+			if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
+			{
+				if (slot_cargo_vec[i]->GetItem()->GetSubTypeId() == requested_goods_subtype_id)
+				{
+					return slot_cargo_vec[i];
+				}
+			}
+		}             		
+	}
+	
+	return nullptr;
 }
 
 bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
 {	
  	if (AddItemToCargoSlot(container->GetItemSlot()->GetItem()) == true)
-       	{      
-       		container->SilentKill();
-       								
-       		return true;
-      	}
-      	
-      	return false;
+	{      
+		container->SilentKill();
+								
+		return true;
+	}
+	
+	return false;
 } 
 
 bool Vehicle::AddItemToCargoSlot(BaseItem* item)
@@ -1209,12 +1210,13 @@ void Vehicle::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 {  
 	UpdateInfo(); // virtual
 	Vec2<float> pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
-     	drawInfoIn2Column(info.title_list, info.value_list, pos);
-     	
-     	if (owner_npc != nullptr)
-     	{
-     		owner_npc->RenderInfo(Vec2<float>(GetCenter().x + 190 - scroll_coords.x, GetCenter().y - scroll_coords.y));
-     	}
+	drawInfoIn2Column(info.title_list, info.value_list, pos);
+	
+	if (owner_npc != nullptr)
+	{
+		float scale = Screen::Instance().GetScale();
+		owner_npc->RenderInfo(Vec2<float>(GetCenter().x + 190/scale - scroll_coords.x, GetCenter().y - scroll_coords.y));
+	}
 }
 
 void Vehicle::RenderInfo(const Vec2<float>& center, int offset_x, int offset_y)
@@ -1236,7 +1238,7 @@ void Vehicle::RenderGrabTrail() const
 		
 void Vehicle::RenderKorpus() const
 {
-	drawQuad_inXYPlane(textureOb, GetCenter(), GetSize(), GetAngle().z);
+	drawScaledQuad(textureOb, GetCenter(), GetSize(), GetAngle().z);
 }
 
 void Vehicle::RenderDriveEffect(float parent_d_alpha) const

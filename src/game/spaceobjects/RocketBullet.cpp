@@ -157,7 +157,7 @@ void RocketBullet::UpdateRenderStuff()
 
 void RocketBullet::RenderInSpace() const
 {
-	drawQuad_inXYPlane(textureOb, GetCenter(), GetSize(), GetAngle().z);
+	drawScaledQuad(textureOb, GetCenter(), GetSize(), GetAngle().z);
 			  
 	drive_effect->Update();
 	drive_effect->Render(0.0f);
@@ -166,9 +166,9 @@ void RocketBullet::RenderInSpace() const
 
 void RocketBullet::SaveDataUniqueRocketBullet(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-        save_ptree.put(root+"speed", speed);
-        save_ptree.put(root+"owner_id", owner_id);
-        if (target != nullptr) 	{ save_ptree.put(root+"target_id", target->GetId()); }
+	save_ptree.put(root+"speed", speed);
+	save_ptree.put(root+"owner_id", owner_id);
+	if (target != nullptr) 	{ save_ptree.put(root+"target_id", target->GetId()); }
 	else                	{ save_ptree.put(root+"target_id", NONE_ID); }
 	
 	data_bullet.SaveData(save_ptree, root);
@@ -176,24 +176,24 @@ void RocketBullet::SaveDataUniqueRocketBullet(boost::property_tree::ptree& save_
 
 void RocketBullet::LoadDataUniqueRocketBullet(const boost::property_tree::ptree& load_ptree)
 {
-        speed = load_ptree.get<float>("speed");  
-        owner_id = load_ptree.get<int>("owner_id");  
-        unresolved_RocketBullet_target_id = load_ptree.get<int>("target_id");  
-        
-        data_bullet.LoadData(load_ptree.get_child("data_bullet"));
+	speed = load_ptree.get<float>("speed");  
+	owner_id = load_ptree.get<int>("owner_id");  
+	unresolved_RocketBullet_target_id = load_ptree.get<int>("target_id");  
+	
+	data_bullet.LoadData(load_ptree.get_child("data_bullet"));
 }
 
 void RocketBullet::ResolveDataUniqueRocketBullet()
 {           
-       	RocketBulletBuilder::Instance().CreateKorpusGeometry(this);
-        CreateDriveComplexTextureDependedStuff();
-                    
-        if (unresolved_RocketBullet_target_id != NONE_ID)
-        {
-        	target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_RocketBullet_target_id);
-        }
-        
-        ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddBullet(this, data_unresolved_Orientation.center, data_unresolved_Orientation.angle); 
+	RocketBulletBuilder::Instance().CreateKorpusGeometry(this);
+	CreateDriveComplexTextureDependedStuff();
+				
+	if (unresolved_RocketBullet_target_id != NONE_ID)
+	{
+		target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_RocketBullet_target_id);
+	}
+	
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddBullet(this, data_unresolved_Orientation.center, data_unresolved_Orientation.angle); 
 }
 
 
@@ -201,8 +201,8 @@ void RocketBullet::ResolveDataUniqueRocketBullet()
 void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	const std::string root = "rocketbullet."+int2str(data_id.id)+".";
-        SaveDataUniqueBase(save_ptree, root);
-        SaveDataUniqueOrientation(save_ptree, root);
+	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueOrientation(save_ptree, root);
 	SaveDataUniqueBaseDrawable(save_ptree, root);
 	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
 	SaveDataUniqueRocketBullet(save_ptree, root);
@@ -211,8 +211,8 @@ void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/
 void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-        LoadDataUniqueBase(load_ptree);
-        LoadDataUniqueOrientation(load_ptree);
+	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueOrientation(load_ptree);
 	LoadDataUniqueBaseDrawable(load_ptree);
 	LoadDataUniqueBaseSpaceEntity(load_ptree);
 	LoadDataUniqueRocketBullet(load_ptree);
@@ -221,8 +221,8 @@ void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/
 void RocketBullet::ResolveData()
 {
-        ResolveDataUniqueBase();
-        ResolveDataUniqueOrientation();
+	ResolveDataUniqueBase();
+	ResolveDataUniqueOrientation();
 	ResolveDataUniqueBaseDrawable();
 	ResolveDataUniqueBaseSpaceEntity();
 	ResolveDataUniqueRocketBullet();

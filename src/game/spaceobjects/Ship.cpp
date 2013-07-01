@@ -58,23 +58,23 @@ void Ship::UpdateInfo()
 {
 	info.clear();
 
-    	info.addTitleStr("SHIP");
-    	if (starsystem) { info.addNameStr("id/ss_id:"); info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) ); }
-    	else     	{ info.addNameStr("id:");       info.addValueStr( int2str(data_id.id) ); }
-    	info.addNameStr("race:");   		info.addValueStr( getRaceStr(textureOb->race_id) ); 
-    	info.addNameStr("class:");   		info.addValueStr( getTypeStr(data_id.subsubtype_id) );     	
-    	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
-    	info.addNameStr("size id:");     	info.addValueStr( int2str(textureOb->size_id) );
-    	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(properties.free_space) );
-    	info.addNameStr("mass:");   		info.addValueStr( int2str(mass) );
-	info.addNameStr("speedx100:");       	info.addValueStr( int2str(properties.speed*100) );
-	info.addNameStr("speed dmx100:");     	info.addValueStr( int2str(mass*MASS_DECREASE_SPEED_RATE*100));
-    	info.addNameStr("energy:");            	info.addValueStr( int2str(properties.energy) );
+	info.addTitleStr("SHIP");
+	if (starsystem) { info.addNameStr("id/ss_id:"); info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) ); }
+	else     		{ info.addNameStr("id:");       info.addValueStr( int2str(data_id.id) ); }
+	info.addNameStr("race:");   		info.addValueStr( getRaceStr(textureOb->race_id) ); 
+	info.addNameStr("class:");   		info.addValueStr( getTypeStr(data_id.subsubtype_id) );     	
+	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
+	info.addNameStr("size id:");     	info.addValueStr( int2str(textureOb->size_id) );
+	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(properties.free_space) );
+	info.addNameStr("mass:");   		info.addValueStr( int2str(mass) );
+	info.addNameStr("speedx100:");      info.addValueStr( int2str(properties.speed*100) );
+	info.addNameStr("speed dmx100:");   info.addValueStr( int2str(mass*MASS_DECREASE_SPEED_RATE*100));
+	info.addNameStr("energy:");         info.addValueStr( int2str(properties.energy) );
 	info.addNameStr("temp.:");       	info.addValueStr( int2str(data_korpus.temperature) );
-        info.addNameStr("radar:");    		info.addValueStr( int2str(properties.radar) );
-    	info.addNameStr("protect:");        	info.addValueStr( int2str(properties.protection) );
-    	info.addNameStr("repair:");        	info.addValueStr( int2str(properties.repair) );
-    	info.addNameStr("scan:");        	info.addValueStr( int2str(properties.scan) );
+	info.addNameStr("radar:");    		info.addValueStr( int2str(properties.radar) );
+	info.addNameStr("protect:");        info.addValueStr( int2str(properties.protection) );
+	info.addNameStr("repair:");        	info.addValueStr( int2str(properties.repair) );
+	info.addNameStr("scan:");        	info.addValueStr( int2str(properties.scan) );
 	info.addNameStr("price:");       	info.addValueStr( int2str(data_korpus.price) );
 	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 		
@@ -100,44 +100,44 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 	if (time > 0)
 	{
 		UpdateSpecialAction();
-	
+		
 		owner_npc->UpdateInSpace(time, show_effect);
 		UpdateOrientation();   
 		weapon_complex.Fire(time, owner_npc->GetSkills().GetAttackNormalized(), show_effect);
-
-    		if (properties.speed > 0) 
-    		{ 
-       			drive_complex.UpdatePosition();
-    		}
-    
+		
+		if (properties.speed > 0) 
+		{ 
+			drive_complex.UpdatePosition();
+		}
+		
 		UpdateGrappleMicroProgram_inDynamic();
-    	}
+	}
 }
 
 void Ship::RenderInSpace_2D() const
 {   
 	setColor4f(color);
-        if (properties.grab_radius > 0)
-        {
-                RenderGrabTrail();
-        }
-        
-    	RenderKorpus();
-    	
-    	if (data_korpus.draw_turrels == true)
-    	{
-        	weapon_complex.RenderTurrels();
-        }
-
-    	if (properties.speed > 0)
-    	{
+	if (properties.grab_radius > 0)
+	{
+		RenderGrabTrail();
+	}
+	
+	RenderKorpus();
+	
+	if (data_korpus.draw_turrels == true)
+	{
+		weapon_complex.RenderTurrels();
+	}
+	
+	if (properties.speed > 0)
+	{
 		RenderDriveEffect(1.0 - color.a);
-    	}
-    	
-    	if (properties.shield_effect_enabled == true)
-    	{
-        	RenderShieldEffect(1.0 - color.a); 
-        }
+	}
+	
+	if (properties.shield_effect_enabled == true)
+	{
+		RenderShieldEffect(1.0 - color.a); 
+	}
 	starsystem->RestoreSceneColor();
 }
 
@@ -148,26 +148,26 @@ void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords)
 
 	setColor4f(color);
 	enable_BLEND();
-    	if (properties.shield_effect_enabled == true)
-    	{
-        	RenderShieldEffect(1.0 - color.a); 
-        }
-        disable_BLEND();
+	if (properties.shield_effect_enabled == true)
+	{
+		RenderShieldEffect(1.0 - color.a); 
+	}
+	disable_BLEND();
 	starsystem->RestoreSceneColor();
 }
 
 void Ship::RenderAtPlanet(const Vec3<float>& center)
 {
-       	SetCenter(center);
-        SetAngleZ(0);
-        UpdateOrientation();
-        
+	SetCenter(center);
+	SetAngleZ(0);
+	UpdateOrientation();
+	
 	RenderKorpus();
 	
 	if (data_korpus.draw_turrels == true)
-    	{
-        	weapon_complex.RenderTurrels();
-        }
+	{
+		weapon_complex.RenderTurrels();
+	}
 }		
 
 void Ship::SaveDataUniqueShip(boost::property_tree::ptree&, const std::string&) const

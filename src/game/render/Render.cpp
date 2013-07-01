@@ -33,7 +33,7 @@ void initGl(int width, int height)
   	// Enable Z-buffer read and write
   	//glEnable(GL_DEPTH_TEST);
   	glDepthMask(GL_TRUE);
-    	glClearDepth(1.f);
+	glClearDepth(1.f);
     
   	glEnable(GL_TEXTURE_2D);
   	glEnable(GL_BLEND);
@@ -41,12 +41,12 @@ void initGl(int width, int height)
 
   	glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
   
-      	glShadeModel(GL_SMOOTH);
-      	//glDisable(GL_LIGHTING); 
-      	
-      	resizeGl(width, height); 
-      	
-      	glCullFace(GL_BACK); 
+	glShadeModel(GL_SMOOTH);
+	//glDisable(GL_LIGHTING); 
+	
+	resizeGl(width, height); 
+	
+	glCullFace(GL_BACK); 
 }   
 
 void resizeGl(int width, int height)
@@ -83,42 +83,53 @@ void enable_POINTSPRITE()  { glEnable(GL_POINT_SPRITE);  }
 void disable_POINTSPRITE() { glDisable(GL_POINT_SPRITE); }
 
 
-void drawQuad_inXYPlane(TextureOb* texOb,
+void drawQuad(TextureOb* texOb,
 		 const Vec3<float>& center, 
 		 const Vec3<float>& size,
-		 float angle)
-{
-	drawQuad_inXYPlane(texOb, center, size, Screen::Instance().GetScale(), angle);
-}
-
-void drawQuad_inXYPlane(TextureOb* texOb,
-		 const Vec3<float>& center, 
-		 const Vec3<float>& size,
-		 const Vec3<float>& scale,
-		 float angle)
+		 float angle,
+		 float scale)
 {
 	glBindTexture(GL_TEXTURE_2D, texOb->texture);
 	int frame = texOb->updateAnimationFrame();
 	
 	glPushMatrix();
 	{
-		glTranslatef(center.x*scale.x, center.y*scale.y, center.z*scale.z);
+		glTranslatef(center.x*scale, center.y*scale, center.z*scale);
 		glRotatef(angle, 0.0, 0.0, 1.0);
-		glScalef(size.x*scale.x, size.y*scale.y, size.z*scale.z);
+		glScalef(size.x*scale, size.y*scale, size.z*scale);
 									
 		glBegin(GL_QUADS);
-		glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
-		glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
-		glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
-		glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);
+			glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
+			glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
+			glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
+			glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);
 		glEnd();
 	}
 	glPopMatrix();
 }
 
-void drawQuad_inXYPlane(TextureOb* texOb, const Box& box)
+void drawScaledQuad(TextureOb* texOb,
+		 const Vec3<float>& center, 
+		 const Vec3<float>& size,
+		 float angle)
 {
-	drawQuad_inXYPlane(texOb, box.GetCenter(), box.GetSize(), box.GetScale(), box.GetAngle().z);
+	float scale = Screen::Instance().GetScale();
+	drawQuad(texOb, center, size, angle, scale);
+}
+
+void drawNotScaledQuad(TextureOb* texOb, const Box& box)
+{
+	float scale = 1.0;
+	drawQuad(texOb, box.GetCenter(), box.GetSize(), box.GetAngle().z, scale);
+}
+
+void drawNotScaledQuad(TextureOb* texOb,
+		 const Vec3<float>& center, 
+		 const Vec3<float>& size,
+		 float angle)
+{
+	float scale = 1.0;	
+	drawQuad(texOb, center, size, angle, scale);
 }
 
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos)
@@ -203,38 +214,45 @@ void drawInfoIn2Column(
 		int title_length = info_title_list[i].length(); 
 	
 		if (total_length > max_info_total_str_size)
-				max_info_total_str_size = total_length;
+			max_info_total_str_size = total_length;
 	
 		if (title_length > max_info_title_str_size)
 			max_info_title_str_size = title_length;
 	}    
-	
+
 	float info_total_string_w = char_w * max_info_total_str_size;
 	float info_total_string_h = char_h * info_title_list.size();
+		
+	Rect rect(-char_w, -info_total_string_h, info_total_string_w, info_total_string_h + char_h/2);
 	
+	Color4<int> color_title(250, 250, 250, 255);
+	Color4<int> color_info(250, 250, 0, 255);
+
 	TextureOb* texOb_textBg = GuiTextureObCollector::Instance().text_background;
-	Rect rect(pos.x - char_w, pos.y - info_total_string_h, info_total_string_w, info_total_string_h + char_h/2);
-	
-	glLoadIdentity();
-	drawTexturedRect(texOb_textBg, rect, -2);
-	
-	Vec2<float> curpos(pos.x + info_total_string_w/3, pos.y); 
-	Screen::Instance().DrawText(info_title_list[0], font_size+1, curpos);
-	
-	for (unsigned int i=1; i<info_title_list.size(); i++)
+									
+	float scale = Screen::Instance().GetScale();
+	glPushMatrix();
 	{
-			Color4<int> color(250, 250, 250, 255);
-		Vec2<float> curpos(pos.x, pos.y - char_h*i); 
-		Screen::Instance().DrawText(info_title_list[i], font_size, curpos, color);
+		glTranslatef(pos.x*scale, pos.y*scale, 0.0);
 	
-	}       
+		drawTexturedRect(texOb_textBg, rect, -2);
 	
-	for (unsigned int i=0; i<info_value_list.size(); i++)
-	{
-		Color4<int> color(250, 250, 0, 255);
-		Vec2<float> curpos(pos.x + max_info_title_str_size * (char_w - 1.2), pos.y -(char_h*(i + 1))); 
-		Screen::Instance().DrawText(info_value_list[i], font_size, curpos, color);
+		Vec2<float> curpos(info_total_string_w/3, 0.0); 
+		Screen::Instance().DrawText(info_title_list[0], font_size+1, curpos);
+
+		for (unsigned int i=1; i<info_title_list.size(); i++)
+		{
+			Vec2<float> curpos(0.0, -char_h*i); 
+			Screen::Instance().DrawText(info_title_list[i], font_size, curpos, color_title);
+		
+		}		
+		for (unsigned int i=0; i<info_value_list.size(); i++)
+		{
+			Vec2<float> curpos(max_info_title_str_size * (char_w - 1.2), -(char_h*(i + 1))); 
+			Screen::Instance().DrawText(info_value_list[i], font_size, curpos, color_info);
+		}
 	}  
+	glPopMatrix();
 }
 
 void drawFullScreenQuad(int w, int h, float pos_z)
@@ -306,7 +324,7 @@ void rotateXYZ(const Vec3<float>& angle)
 	glRotatef(angle.z, 0.0, 0.0, 1.0); 
 }
 
-void drawParticle(float size, float r, float g, float b, float a, const Vec2<float>& center)
+void drawParticle(const Vec2<float>& center, float size, float r, float g, float b, float a)
 {
 	float scale = Screen::Instance().GetScale();
 		
@@ -320,7 +338,7 @@ void drawParticle(float size, float r, float g, float b, float a, const Vec2<flo
 	glEnd();
 }
 
-void drawParticle(float size, const Color4<float>& color, const Vec2<float>& center)
+void drawParticle(const Vec2<float>& center, float size, const Color4<float>& color)
 {
 	float scale = Screen::Instance().GetScale();
 	
@@ -334,10 +352,9 @@ void drawParticle(float size, const Color4<float>& color, const Vec2<float>& cen
 	glEnd();
 }
 
-void drawParticle(float size, const Vec2<float>& center)
+void drawParticle(const Vec2<float>& center, float size)
 {
-	float scale = Screen::Instance().GetScale();
-	
+	float scale = Screen::Instance().GetScale();	
 	glPointSize(size*scale);
         	
 	glBegin(GL_POINTS); 
@@ -347,15 +364,26 @@ void drawParticle(float size, const Vec2<float>& center)
 	glEnd();
 }
 
-void drawNonScaledParticle(float size, const Vec2<float>& center)
+void drawNonScaledSizeParticle(const Vec2<float>& center, float size)
 {
-	float scale = Screen::Instance().GetScale();
 	glPointSize(size);
         	
 	glBegin(GL_POINTS); 
-	{          		
+	{
+		float scale = Screen::Instance().GetScale();          		
 		glVertex3f(center.x*scale, center.y*scale, -2);
 	}
 	glEnd();
 }
-			
+
+void drawNonScaledPositionParticle(float size, const Vec2<float>& center)
+{
+	float scale = Screen::Instance().GetScale(); 
+	glPointSize(size*scale);
+        	
+	glBegin(GL_POINTS); 
+	{
+		glVertex3f(center.x, center.y, -2);
+	}
+	glEnd();
+}			

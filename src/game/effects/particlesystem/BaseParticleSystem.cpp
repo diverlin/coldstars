@@ -33,9 +33,9 @@ parent(nullptr)
 BaseParticleSystem::~BaseParticleSystem()
 {
 	for (unsigned int i=0; i<particles_vec.size(); i++) 
-     	{
-  		delete particles_vec[i];
-     	}
+	{
+		delete particles_vec[i];
+	}
 }
 
 

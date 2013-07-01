@@ -24,30 +24,30 @@
 
 class VerticalFlowText
 {
-        public:
-                VerticalFlowText(const std::string&, int, const Vec2<float>&, const Color4<int>&, float);                                   
-                ~VerticalFlowText();
-
+	public:
+		VerticalFlowText(const std::string&, int, const Vec2<float>&, const Color4<int>&, float);                                   
+		~VerticalFlowText();
+		
 		bool GetAlive() const { return is_alive; };
 		
 		const Vec2<float>& GetPos() const { return pos; };
-
-                void update();
-                void Render(const Vec2<float>&) const;
- 
-        private:
-                bool is_alive;
-                int live_time;
-
+		
+		void update();
+		void Render(const Vec2<float>&) const;
+	
+	private:
+		bool is_alive;
+		int live_time;
+		
 		int font_size;
 		
-                std::string str;
-                Color4<int> color;
-
-                Vec2<float> offset;
-                Vec2<float> pos;
-                
-                float speed;
+		std::string str;
+		Color4<int> color;
+		
+		Vec2<float> offset;
+		Vec2<float> pos;
+		
+		float speed;
 };
 
 #endif 

@@ -89,11 +89,10 @@ void Cursor::UpdateMouseStuff()
 	data_mouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 	data_mouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
 	
-	data_mouse.pos.Set(mouse_pos.x/Screen::Instance().GetScale(), (Screen::Instance().GetHeight() - mouse_pos.y)/Screen::Instance().GetScale());
+	data_mouse.pos.Set(mouse_pos.x, Screen::Instance().GetHeight() - mouse_pos.y);
+	data_mouse.pos /= Screen::Instance().GetScale();
 			
-	Vec3<float>bottomleft3(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y, 0.0);
-	Vec3<float> world_offset = bottomleft3/Screen::Instance().GetScale();
-	data_mouse.pos_vp = data_mouse.pos + world_offset;
+	data_mouse.pos_vp = data_mouse.pos + Screen::Instance().GetBottomLeftScreenWC();
 }
 
 void Cursor::Update()
@@ -111,7 +110,7 @@ bool Cursor::UpdateInSpace()
 			{
 				case ENTITY::ROCKETBULLET_ID:
 				{
-					//((RocketBullet*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
+					//((RocketBullet*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 						
 					break;
 				}
@@ -133,7 +132,7 @@ bool Cursor::UpdateInSpace()
 						//Ship* ship = (Ship*)focused_ob;
 						//if (ship->GetId() != player->GetNpc()->GetVehicle()->GetId())
 						//{
-							//SetOffset(ship->GetCenter() - Screen::Instance().GetRect().GetBottomLeft());	
+							//SetOffset(ship->GetCenter() - Screen::Instance().GetBottomLeftScreenWC());	
 							//return UpdateMouseInteractionWithButtons(data_mouse);
 					        //}
 					        //else
@@ -158,7 +157,7 @@ bool Cursor::UpdateInSpace()
 
 			case ENTITY::CONTAINER_ID:
 			{
-				//((Container*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
+				//((Container*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 				
 				break;
 			}
@@ -172,7 +171,7 @@ bool Cursor::UpdateInSpace()
 
 			case ENTITY::BLACKHOLE_ID:
 			{
-				//((BlackHole*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
+				//((BlackHole*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 				
 				break;
 			}
@@ -186,7 +185,7 @@ bool Cursor::UpdateInSpace()
 			
 			case ENTITY::STAR_ID:
 			{
-				//((Star*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
+				//((Star*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 
 				break;
 			}		
@@ -324,6 +323,8 @@ void Cursor::RenderFocusedObjectInfo()
 {
 	if (focused_ob != nullptr)
 	{
+		float scale = Screen::Instance().GetScale();
+		
 		enable_BLEND();
 	
 		switch(focused_ob->GetTypeId())
@@ -332,7 +333,7 @@ void Cursor::RenderFocusedObjectInfo()
 			{
 				case ENTITY::ROCKETBULLET_ID:
 				{
-					((RocketBullet*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
+					((RocketBullet*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 						
 					break;
 				}
@@ -344,7 +345,7 @@ void Cursor::RenderFocusedObjectInfo()
 				{
 					case ENTITY::SATELLITE_ID:
 					{
-						((Satellite*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
+						((Satellite*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 						                        
 						break;
 					}
@@ -354,7 +355,7 @@ void Cursor::RenderFocusedObjectInfo()
 						Ship* ship = (Ship*)focused_ob;
 						if (ship->GetPlaceTypeId() == ENTITY::SPACE_ID)
 						{
-							ship->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
+							ship->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 						}
 						else
 						{
@@ -365,7 +366,7 @@ void Cursor::RenderFocusedObjectInfo()
 
 					case ENTITY::SPACESTATION_ID:
 					{     
-        					((SpaceStation*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
+        					((SpaceStation*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
         					                
 						break;
 					}
@@ -377,35 +378,35 @@ void Cursor::RenderFocusedObjectInfo()
 
 			case ENTITY::CONTAINER_ID:
 			{
-				((Container*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
+				((Container*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 				
 				break;
 			}
 
 			case ENTITY::ASTEROID_ID:
 			{
-				((Asteroid*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
+				((Asteroid*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 								
 				break;
 			}
 
 			case ENTITY::BLACKHOLE_ID:
 			{
-				((BlackHole*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
+				((BlackHole*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 				
 				break;
 			}
 									
 			case ENTITY::PLANET_ID:
 			{
-				((Planet*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
+				((Planet*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 								
 				break;
 			}
 			
 			case ENTITY::STAR_ID:
 			{
-				((Star*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetRect().GetBottomLeft());
+				((Star*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 
 				break;
 			}		

@@ -56,7 +56,7 @@ void ShieldEffect::Update()
 void ShieldEffect::Render(float parent_d_alpha) const
 {
 	setColor4f(color.r, color.g, color.b, color.a - parent_d_alpha);	
-	drawQuad_inXYPlane(textureOb, parent->GetCenter(), size, parent->GetAngle().z);
+	drawScaledQuad(textureOb, parent->GetCenter(), size, parent->GetAngle().z);
 }
 
 

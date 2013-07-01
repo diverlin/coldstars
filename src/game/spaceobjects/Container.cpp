@@ -26,6 +26,7 @@
 #include "../world/EntityManager.hpp"
 #include "../world/starsystem.hpp"
 #include "../render/Render.hpp"
+#include "../render/Screen.hpp"
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
@@ -76,7 +77,8 @@ void Container::UpdateInfo()
 void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 {
 	UpdateInfo();
-	Vec2<float> pos(GetCenter().x - scroll_coords.x - 200, GetCenter().y - scroll_coords.y);
+	float scale = Screen::Instance().GetScale();
+	Vec2<float> pos(GetCenter().x - scroll_coords.x - 200/scale, GetCenter().y - scroll_coords.y);
 	drawInfoIn2Column(info.title_list, info.value_list, pos);
 	item_slot->GetItem()->RenderInfo(GetCenter(), scroll_coords.x, scroll_coords.y);
 }
@@ -112,7 +114,7 @@ void Container::UpdateInSpace(int time, bool show_effect)
 void Container::Render2D()
 { 
 	UpdateRenderAnimation();
-	drawQuad_inXYPlane(textureOb, GetCenter(), GetSize(), GetAngle().z);
+	drawScaledQuad(textureOb, GetCenter(), GetSize(), GetAngle().z);
 }
 
 void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const	
@@ -152,8 +154,8 @@ void Container::ResolveDataUniqueContainer()
 void Container::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	const std::string root = "container." + int2str(GetId()) + ".";
-        SaveDataUniqueBase(save_ptree, root);
-        SaveDataUniqueOrientation(save_ptree, root);
+	SaveDataUniqueBase(save_ptree, root);
+	SaveDataUniqueOrientation(save_ptree, root);
 	SaveDataUniqueBaseDrawable(save_ptree, root);
 	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
 	SaveDataUniqueContainer(save_ptree, root);
@@ -162,8 +164,8 @@ void Container::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/		
 void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-        LoadDataUniqueBase(load_ptree);
-        LoadDataUniqueOrientation(load_ptree);
+	LoadDataUniqueBase(load_ptree);
+	LoadDataUniqueOrientation(load_ptree);
 	LoadDataUniqueBaseDrawable(load_ptree);
 	LoadDataUniqueBaseSpaceEntity(load_ptree);
 	LoadDataUniqueContainer(load_ptree);
@@ -172,8 +174,8 @@ void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/	
 void Container::ResolveData()
 {
-        ResolveDataUniqueBase();
-        ResolveDataUniqueOrientation();
+	ResolveDataUniqueBase();
+	ResolveDataUniqueOrientation();
 	ResolveDataUniqueBaseDrawable();
 	ResolveDataUniqueBaseSpaceEntity();
 	ResolveDataUniqueContainer();

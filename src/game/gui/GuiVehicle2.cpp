@@ -156,6 +156,6 @@ ItemSlot* GuiVehicle2::GetInreactedItemSlot(const MouseData& data_mouse)
 
 void GuiVehicle2::UpdateOffset()
 {
-	Vec3<float> offset(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y, 0.0);
-	SetOffset(vehicle->GetCenter() - offset);
+	//Vec3<float> offset(Screen::Instance().GetRect().GetBottomLeft().x, Screen::Instance().GetRect().GetBottomLeft().y, 0.0);
+	//SetOffset(vehicle->GetCenter() - offset);
 }
