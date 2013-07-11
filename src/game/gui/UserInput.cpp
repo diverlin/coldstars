@@ -79,10 +79,10 @@ bool UserInput::KeyPressedCommon(Player* player)
 				}
 			}
 			
-			if (GuiManager::Instance().GetGuiSpace().GetGuiVehicleTarget().GetVehicle() != nullptr)
-			{
-				GuiManager::Instance().GetGuiSpace().GetGuiVehicleTarget().Reset();
-			}
+			//if (GuiManager::Instance().GetGuiSpace().GetGuiVehicleTarget().GetVehicle() != nullptr)
+			//{
+				//GuiManager::Instance().GetGuiSpace().GetGuiVehicleTarget().Reset();
+			//}
 			
 			return true; break;
 		}

@@ -40,8 +40,7 @@ class GuiSpace : public BaseGuiElement
 		
 		bool GetInitDone() const { return init_done; };
 		
-		GuiVehicle2& GetGuiVehiclePlayer() { return gui_vehicle_player; };
-		GuiVehicle2& GetGuiVehicleTarget() { return gui_vehicle_target; };
+		//GuiVehicle2& GetGuiVehicleTarget() { return gui_vehicle_target; };
 		
 		void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
 		void UnbindSharedGuis();
@@ -64,8 +63,7 @@ class GuiSpace : public BaseGuiElement
 	private:
 		bool init_done;
 
-		GuiVehicle2 	gui_vehicle_player;
-		GuiVehicle2 	gui_vehicle_target;
+		GuiVehicle2* 	gui_vehicle_target;
 		
 		GuiGalaxyMap* gui_galaxymap_shared;  
 		GuiVehicle*   gui_vehicle_scan_shared;

@@ -17,6 +17,8 @@ include_directories(dependencies/glew/include/)
 include_directories(dependencies/glm-0.9.4.0/)
 include_directories(dependencies/freetype2/)
 
+include_directories(src/game/)
+
 add_subdirectory(dependencies/SFML2)
 set(GLEW_STATIC 1)
 add_subdirectory(dependencies/glew)

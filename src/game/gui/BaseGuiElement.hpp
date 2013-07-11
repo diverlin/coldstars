@@ -37,36 +37,39 @@ class BaseGuiElement
 		//void SetSubTypeId(int subtype_id) { this->subtype_id = subtype_id; } 
 		
 		//void SetInfo(const std::string& info) { this->info = info; }
-		void SetLabel(const std::string& label) { this->label = label; }
+		void SetLabel(const std::string& label) { m_Label = label; }
 
-		void SetRoot(bool root) { this->root = root; }
+		void SetRoot(bool root) { m_Root = root; }
 		
-		void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; } 		
-		void SetPlayer(Player* player) { this->player = player; } // depr
+		void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; } 		
+		void SetPlayer(Player* player) { m_Player = player; } // depr
 
-		void SetScale(const Vec3<float>& scale) { this->scale = scale; }		
+		void SetScale(const Vec3<float>& scale) { m_Scale = scale; }		
 				
-		void SetOffset(const Vec3<float>& offset) { this->offset = offset; }	// depr				
-		void SetOffset(const Vec2<float>& offset) { this->offset.Set(offset.x, offset.y, 0); }	// depr	
+		void SetOffset(const Vec3<float>& offset) { m_Offset = offset; }	// depr				
+		void SetOffset(const Vec2<float>& offset) { m_Offset.Set(offset.x, offset.y, 0); }	// depr	
 		
-		void SetParent(BaseGuiElement* parent) { this->parent = parent; }
+		void SetParent(BaseGuiElement* parent) { m_Parent = parent; }
 		
-		void SetBox(const Box& box) { this->box = box; }
+		void SetBox(const Box& box) { m_Box = box; }
 	
-		int GetTypeId() const { return type_id; }
-		int GetSubTypeId() const { return subtype_id; }
+		int GetTypeId() const { return m_Type_id; }
+		int GetSubTypeId() const { return m_Subtype_id; }
 					
-		const Vec3<float>& GetOffset() const { return offset; } // depr
-		const Box& GetBox() const { return box; }
-		TextureOb* GetTextureOb() const { return textureOb; }
+		const Vec3<float>& GetOffset() const { return m_Offset; } // depr
+		const Box& GetBox() const { return m_Box; }
+		TextureOb* GetTextureOb() const { return m_TextureOb; }
 				
+        bool GetLock() const { return m_Lock; }
+        bool GetPressed() const { return m_Pressed; }
+            
 		void UpdateGeometry(const Vec3<float>&, const Vec3<float>&);					
 		BaseGuiElement* UpdateMouseInteraction(const Vec2<float>&);
 		
 		void AddChild(BaseGuiElement* child, const Vec3<float>& offset);
 
-		void Show() { show = true; }
-		void Hide() { show = false; }
+		void Show() { m_Show = true; }
+		void Hide() { m_Show = false; }
 								
 		virtual void Update() {}
 		virtual void PressEvent(Player*) {}
@@ -76,23 +79,23 @@ class BaseGuiElement
 		virtual void RenderInfo() const {};
 				
 	protected:
-		int type_id;
-		int subtype_id;
+		int m_Type_id;
+		int m_Subtype_id;
 		
-		bool lock;
-		bool pressed;
-		bool show;
-		bool root;
+		bool m_Lock;
+		bool m_Pressed;
+		bool m_Show;
+		bool m_Root;
 		
-		Box box;
-		Player* player; // depr
+		Box m_Box;
+		Player* m_Player; // depr
 				
-		TextureOb* textureOb;	
-		std::string info; 
-		std::string label; 
+		TextureOb* m_TextureOb;	
+		std::string m_Info; 
+		std::string m_Label; 
 		
-		BaseGuiElement* parent;
-		std::vector<BaseGuiElement*> child_vec;
+		BaseGuiElement* m_Parent;
+		std::vector<BaseGuiElement*> m_Child_vec;
 
 		void PressEventOnGuiElement(int);
 		void ResetStateEventOnGuiElement(int);			
@@ -102,8 +105,8 @@ class BaseGuiElement
 		void RenderCommon() const;
        		       	
 	private:       				
-		Vec3<float> offset;
-		Vec3<float> scale;
+		Vec3<float> m_Offset;
+		Vec3<float> m_Scale;
 		
 		static std::map<int, BaseGuiElement*> static_gui_element_map;
 		

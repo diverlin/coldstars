@@ -208,14 +208,14 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                 {         
                        	if (data_mouse.right_click == true)
                        	{
-                 		player->GetNpc()->SetScanTarget(rect_vehicleslot_vec[i].second->GetVehicle());
+                 		m_Player->GetNpc()->SetScanTarget(rect_vehicleslot_vec[i].second->GetVehicle());
                                 GuiManager::Instance().GetGuiKosmoport().EnterGuiScanInAngar();
                                 return true;
                         }
                         
                         if (rect_vehicleslot_vec[i].second->GetVehicle() != nullptr)
                         {       
-                        	player->GetCursor().SetFocusedObject(rect_vehicleslot_vec[i].second->GetVehicle());
+                        	m_Player->GetCursor().SetFocusedObject(rect_vehicleslot_vec[i].second->GetVehicle());
                         }           
                                    
                 }
@@ -231,9 +231,9 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                                 {
                                         case ENTITY::REPAIR_SLOT_ID:
                                         {        
-                                                if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
+                                                if (m_Player->GetCursor().GetItemSlot()->GetItem() != nullptr)
                                                 {                                        
-                                                        angar->RepairItem(player->GetNpc(), player->GetCursor().GetItemSlot()->GetItem());
+                                                        angar->RepairItem(m_Player->GetNpc(), m_Player->GetCursor().GetItemSlot()->GetItem());
                                                 }
                                                 
                                                 break;
@@ -241,13 +241,13 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                                         
                                         case ENTITY::CHARGE_SLOT_ID:
                                         {
-                                                if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
+                                                if (m_Player->GetCursor().GetItemSlot()->GetItem() != nullptr)
                                                 {
-                                                        switch (player->GetCursor().GetItemSlot()->GetItem()->GetSubTypeId())
+                                                        switch (m_Player->GetCursor().GetItemSlot()->GetItem()->GetSubTypeId())
                                                         {
                                                                 case ENTITY::ROCKET_EQUIPMENT_ID:
                                                                 {
-                                                                        angar->ChargeRocketEquipment(player->GetNpc(), (RocketEquipment*)player->GetCursor().GetItemSlot()->GetItem());
+                                                                        angar->ChargeRocketEquipment(m_Player->GetNpc(), (RocketEquipment*)m_Player->GetCursor().GetItemSlot()->GetItem());
                                                                         
                                                                         break;
                                                                 }
@@ -259,7 +259,7 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                                         
                                         default:
                                         {
-                                                player->GetCursor().GetItemSlot()->SwapItem(rect_itemslot_vec[i].second);
+                                                m_Player->GetCursor().GetItemSlot()->SwapItem(rect_itemslot_vec[i].second);
                                                 
                                                 break;
                                         }
@@ -269,7 +269,7 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                         	
                         if (rect_itemslot_vec[i].second->GetItem() != nullptr)
                         {                         
-                		player->GetCursor().SetFocusedObject(rect_itemslot_vec[i].second->GetItem());
+                		m_Player->GetCursor().SetFocusedObject(rect_itemslot_vec[i].second->GetItem());
                 	}
                 }
         }

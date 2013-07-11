@@ -91,13 +91,13 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
                 {
                 	if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y) == true)
                 	{
-				player->GetCursor().SetFocusedObject(rect_itemslot_vec[i].second->GetItem());
+				        m_Player->GetCursor().SetFocusedObject(rect_itemslot_vec[i].second->GetItem());
                 	
                         	if (data_mouse.left_click == true)
                         	{
-                        		if (player->GetNpc()->GetCredits() >= rect_itemslot_vec[i].second->GetItem()->GetPrice())
+                        		if (m_Player->GetNpc()->GetCredits() >= rect_itemslot_vec[i].second->GetItem()->GetPrice())
                               		{
-                        			player->GetNpc()->GetVehicle()->BuyItem(rect_itemslot_vec[i].second->GetItem());
+                        			m_Player->GetNpc()->GetVehicle()->BuyItem(rect_itemslot_vec[i].second->GetItem());
                         		}
                         	} 
                         	return true; 
@@ -111,14 +111,14 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
                 {
                 	if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y) == true)
                 	{
-				player->GetCursor().SetFocusedObject(rect_vehicleslot_vec[i].second->GetVehicle());
+				m_Player->GetCursor().SetFocusedObject(rect_vehicleslot_vec[i].second->GetVehicle());
                 	
                         	if (data_mouse.left_click == true)
                         	{
                         		int price = rect_vehicleslot_vec[i].second->GetVehicle()->GetKorpusData().price;
-                        		if (player->GetNpc()->GetCredits() >= price)
+                        		if (m_Player->GetNpc()->GetCredits() >= price)
                               		{
-                              			store->SellVehicle(player->GetNpc(), rect_vehicleslot_vec[i].second, price);
+                              			store->SellVehicle(m_Player->GetNpc(), rect_vehicleslot_vec[i].second, price);
                                                 GuiManager::Instance().GetGuiKosmoport().ExitGuiStoreScreen();                                                
                                                 GuiManager::Instance().GetGuiKosmoport().EnterGuiStoreScreen();
                         		}

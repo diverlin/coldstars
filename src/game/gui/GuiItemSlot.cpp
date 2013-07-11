@@ -22,7 +22,7 @@
 GuiItemSlot::GuiItemSlot(ItemSlot* itemslot, const Box& box):
 itemslot(itemslot)
 {
-	this->box = box;
+    this->m_Box = box;
 }
 
 GuiItemSlot::~GuiItemSlot()

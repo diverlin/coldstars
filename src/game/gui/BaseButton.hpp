@@ -26,17 +26,13 @@ class AnimationEffect2D;
 class BaseButton : public BaseGuiElement
 {
 	public:
-       		BaseButton(int, const std::string&,void (*pAction)(Player*), TextureOb* textureOb = nullptr);       		       
+       		BaseButton(int, const std::string&,void (*pAction)(Player*) = nullptr, TextureOb* textureOb = nullptr);       		       
        		virtual ~BaseButton();  
 
-			void SetTextureObAdditional(TextureOb* textureOb_additional) { this->textureOb_additional = textureOb_additional; }
-			void SetTextureObMask(TextureOb* textureOb_mask) { this->textureOb_mask = textureOb_mask; }
+			void SetTextureObAdditional(TextureOb* textureOb_additional) { m_TextureOb_additional = textureOb_additional; }
+			void SetTextureObMask(TextureOb* textureOb_mask) { m_TextureOb_mask = textureOb_mask; }
       		
-      		//void SetCallBack(void (*funcp)()) { this->pAction = pAction; }
-      		
-       		bool GetLock() const { return lock; }
-       		bool GetPressed() const { return pressed; }
-		
+      		//void SetCallBack(void (*funcp)()) { this->pAction = pAction; }      		
        		void LockOn();
        		void LockOff();
 
@@ -46,14 +42,14 @@ class BaseButton : public BaseGuiElement
        		virtual void RenderUnique() const override;   
        		        
 	protected:      	
-        	float alpha;        	        	
+        	float m_Alpha;        	        	
 
-			TextureOb* textureOb_additional;
-			TextureOb* textureOb_mask;
+			TextureOb* m_TextureOb_additional;
+			TextureOb* m_TextureOb_mask;
        		
-       		AnimationEffect2D* animation_scale;
+       		AnimationEffect2D* m_Animation_scale;
        		
-       		void (*pAction)(Player*);
+       		void (*m_pAction)(Player*);
        		 
      		void FullShadeOn();
      		void ShadeOn();

@@ -30,7 +30,7 @@
 GuiRadar::GuiRadar()
 {		
 
-	subtype_id = GUI::BUTTON::GUI_RADAR_ID;
+	m_Subtype_id = GUI::BUTTON::GUI_RADAR_ID;
 	
 	textureOb_background 	= GuiTextureObCollector::Instance().radar_background;
 	textureOb_bar	 		= GuiTextureObCollector::Instance().radar_bar;
@@ -92,9 +92,9 @@ void GuiRadar::AddIfWithinRadarRange(BaseSpaceEntity* object, const Vehicle& veh
 /* virtual final */
 void GuiRadar::RenderUnique() const
 {
-	float range_diameter = 2*player->GetNpc()->GetVehicle()->GetProperties().radar;
+	float range_diameter = 2*m_Player->GetNpc()->GetVehicle()->GetProperties().radar;
 	Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
-	range_rect.SetCenter(rect.GetCenter() + player->GetNpc()->GetVehicle()->GetCenter() * scale);
+	range_rect.SetCenter(rect.GetCenter() + m_Player->GetNpc()->GetVehicle()->GetCenter() * scale);
 	
 	drawTexturedRect(textureOb_background, rect, -2.0);
 	drawTexturedRect(textureOb_bar, rect, -2.0);
