@@ -23,19 +23,21 @@
 /*virtual final*/
 void ButtonTrigger::PressEvent(Player* player)
 {
-	pAction(player);
-	//player->GetGuiManager().ReceiveCommand(subtype_id);
-	
-	if (lock == false)
+    if (m_pAction)
 	{
-		if (pressed == false)
+        m_pAction(player);
+	}
+	
+	if (m_Lock == false)
+	{
+		if (m_Pressed == false)
 		{
-			pressed = true;
+			m_Pressed = true;
 			ShadeOn();
 		}
 		else
 		{
-			pressed = false;
+			m_Pressed = false;
 			ShadeOff();
 		}
 	}
@@ -44,15 +46,15 @@ void ButtonTrigger::PressEvent(Player* player)
 /*virtual*/	
 void ButtonTrigger::Update()
 {
-	if ( (lock == false) and (pressed == false) )
+	if ( (m_Lock == false) and (m_Pressed == false) )
 	{
-		if (alpha < 1.0f)
+		if (m_Alpha < 1.0f)
 		{
-			alpha += 0.01f;
+			m_Alpha += 0.01f;
 		}
 		else
 		{
-			alpha = 1.0f;
+			m_Alpha = 1.0f;
 		}
 	}
 }

@@ -287,28 +287,28 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 	{ 
 		if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.pos_screencoord) == true)
 		{  
-			if ( (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr) and (player->GetCursor().GetItemSlot()->GetItem() == nullptr) )
+			if ( (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr) and (m_Player->GetCursor().GetItemSlot()->GetItem() == nullptr) )
 			{
-				player->GetCursor().SetFocusedObject(gui_itemslot_vec[i].GetItemSlot()->GetItem());
+				m_Player->GetCursor().SetFocusedObject(gui_itemslot_vec[i].GetItemSlot()->GetItem());
 			}
 						
 			if ( (data_mouse.left_click == true) and (allow_full_control == true) )
 			{
 				if (gui_itemslot_vec[i].GetItemSlot()->GetSubTypeId() != ENTITY::GATE_SLOT_ID)
 				{
-					player->GetCursor().GetItemSlot()->SwapItem(gui_itemslot_vec[i].GetItemSlot()); 
+					m_Player->GetCursor().GetItemSlot()->SwapItem(gui_itemslot_vec[i].GetItemSlot()); 
 				}
 				else
 				{
-					if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
+					if (m_Player->GetCursor().GetItemSlot()->GetItem() != nullptr)
 					{
-						if (player->GetNpc()->GetVehicle()->GetPlaceTypeId() == ENTITY::SPACE_ID)
+						if (m_Player->GetNpc()->GetVehicle()->GetPlaceTypeId() == ENTITY::SPACE_ID)
 						{
-							player->GetCursor().GetItemSlot()->DropItemToSpace(player->GetNpc()->GetVehicle());
+							m_Player->GetCursor().GetItemSlot()->DropItemToSpace(m_Player->GetNpc()->GetVehicle());
 						}
 						else
 						{
-							player->GetNpc()->GetVehicle()->SellItem(player->GetCursor().GetItemSlot()->GetItem());
+							m_Player->GetNpc()->GetVehicle()->SellItem(m_Player->GetCursor().GetItemSlot()->GetItem());
 						}
 					}    
 				}
@@ -378,7 +378,7 @@ bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Stor
 		{  
 			if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr)
 			{
-				player->GetCursor().SetFocusedObject(gui_itemslot_vec[i].GetItemSlot()->GetItem());
+				m_Player->GetCursor().SetFocusedObject(gui_itemslot_vec[i].GetItemSlot()->GetItem());
 							
 				if (data_mouse.left_click == true)
 				{

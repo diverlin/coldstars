@@ -25,19 +25,21 @@
 std::map<int, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
 
 BaseGuiElement::BaseGuiElement(int subtype_id, const std::string info, TextureOb* textureOb, BaseGuiElement* parent):
-subtype_id(subtype_id),
-info(info),
-textureOb(textureOb),
-parent(parent),
-show(true),
-root(true)
+m_Subtype_id(subtype_id),
+m_Info(info),
+m_TextureOb(textureOb),
+m_Parent(parent),
+m_Show(true),
+m_Root(true),
+m_Lock(false),
+m_Pressed(false)
 {
-	scale.Set(1.0, 1.0, 1.0);
+	m_Scale.Set(1.0, 1.0, 1.0);
 }
 
 BaseGuiElement::~BaseGuiElement()
 {
-	for (std::vector<BaseGuiElement*>::iterator it = child_vec.begin(); it!=child_vec.end(); it++)
+	for (std::vector<BaseGuiElement*>::iterator it=m_Child_vec.begin(); it!=m_Child_vec.end(); it++)
 	{
 		delete *it;
 	}
@@ -59,7 +61,7 @@ void BaseGuiElement::PressEventOnGuiElement(int subtype_id)
 	BaseGuiElement* button = GetGuiElement(subtype_id);
 	if (button != nullptr)
 	{
-		button->PressEvent(player);
+		button->PressEvent(m_Player);
 	}
 	#if GUI_LOG_ENABLED == 1
 	else
@@ -88,8 +90,8 @@ void BaseGuiElement::ResetStateEventOnGuiElement(int subtype_id)
 /* virtual */
 void BaseGuiElement::ResetState()
 {
-	pressed = false;
-	lock = false;
+	m_Pressed = false;
+	m_Lock = false;
 }
 
 void BaseGuiElement::AddChild(BaseGuiElement* child, const Vec3<float>& offset) 
@@ -98,30 +100,30 @@ void BaseGuiElement::AddChild(BaseGuiElement* child, const Vec3<float>& offset)
 	child->SetOffset(offset);
 	child->SetRoot(false);
 	
-	child_vec.push_back(child); 
+	m_Child_vec.push_back(child); 
 	static_gui_element_map.insert(std::make_pair(child->GetSubTypeId(), child));
 }
 		
 BaseGuiElement* BaseGuiElement::UpdateMouseInteraction(const Vec2<float>& mouse_pos)
 {
-	if (!show)
+	if (!m_Show)
 	{
 		return nullptr;
 	}
 	
-	BaseGuiElement* child_element = nullptr;
-	for (auto &child : child_vec)
+	BaseGuiElement* child_interacted = nullptr;
+	for (const auto &child : m_Child_vec)
 	{
-		child_element = child->UpdateMouseInteraction(mouse_pos);
-		if (child_element != nullptr)
+		child_interacted = child->UpdateMouseInteraction(mouse_pos);
+		if (child_interacted)
 		{
-			return child_element;
+			return child_interacted;
 		}
 	}
 	
-	if (!root)
+	if (!m_Root)
 	{	
-		if (box.CheckInteraction(mouse_pos) == true)
+		if (m_Box.CheckInteraction(mouse_pos) == true)
 		{
 			return this;
 		}
@@ -132,17 +134,17 @@ BaseGuiElement* BaseGuiElement::UpdateMouseInteraction(const Vec2<float>& mouse_
 
 void BaseGuiElement::UpdateGeometry(const Vec3<float>& parent_offset, const Vec3<float>& parent_scale)
 {
-	if (!show)
+	if (!m_Show)
 	{
 		return;
 	}
 	
-	Vec3<float> next_offset = offset*scale + parent_offset*parent_scale;
-	Vec3<float> next_scale = parent_scale*scale;
-	box.SetCenter(next_offset);
-	box.SetScale(next_scale);
+	Vec3<float> next_offset = m_Offset*m_Scale + parent_offset*parent_scale;
+	Vec3<float> next_scale = parent_scale*m_Scale;
+	m_Box.SetCenter(next_offset);
+	m_Box.SetScale(next_scale);
 			
-	for (auto &child : child_vec)
+	for (auto &child : m_Child_vec)
 	{
 		child->UpdateGeometry(next_offset, next_scale);
 	}
@@ -150,7 +152,7 @@ void BaseGuiElement::UpdateGeometry(const Vec3<float>& parent_offset, const Vec3
  
 void BaseGuiElement::Render() const
 {
-	if (!show)
+	if (!m_Show)
 	{
 		return;
 	}
@@ -166,15 +168,15 @@ void BaseGuiElement::Render() const
 /* virtual */
 void BaseGuiElement::RenderUnique() const
 {
-	if (textureOb != nullptr)
+	if (m_TextureOb)
 	{
-		drawQuad(textureOb, box);
+		drawQuad(m_TextureOb, m_Box);
    	}
 }
 
 void BaseGuiElement::RenderCommon() const
 {
-   	for (auto &gui_element : child_vec)
+   	for (const auto &gui_element : m_Child_vec)
 	{
 		gui_element->Render();
 	}

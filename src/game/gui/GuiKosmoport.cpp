@@ -117,7 +117,7 @@ GuiKosmoport::~GuiKosmoport()
 	
 void GuiKosmoport::SetPlayer(Player* player)
 {	
-	this->player = player;
+	m_Player = player;
 	
 	gui_angar.SetPlayer(player);
 	gui_store.SetPlayer(player);
@@ -182,8 +182,8 @@ void GuiKosmoport::EnterGuiScanInAngar()
         int screen_h = Screen::Instance().GetHeight();
 	Vec2<float> center_screen(screen_w/2, screen_h/2);
         
-        bool allow_full_control = player->IsAbleToGetFullControlOnScanedVehicle();
-        gui_vehicle_scan_shared->BindVehicle(player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
+        bool allow_full_control = m_Player->IsAbleToGetFullControlOnScanedVehicle();
+        gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
         gui_skills_shared->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
 }
 
@@ -193,13 +193,13 @@ void GuiKosmoport::ExitGuiScan()
 	Logger::Instance().Log("GuiKosmoport::ExitGuiScan", GUI_LOG_DIP);
 	#endif	
 	
-        if (gui_vehicle_scan_shared->GetVehicle() == player->GetNpc()->GetVehicle())
+        if (gui_vehicle_scan_shared->GetVehicle() == m_Player->GetNpc()->GetVehicle())
        	{
                 gui_skills_shared->Acknowledge();
        	}
         gui_vehicle_scan_shared->UnbindVehicle();
 
-        player->GetNpc()->ResetScanTarget();
+        m_Player->GetNpc()->ResetScanTarget();
 }
                
 void GuiKosmoport::EnterGuiAngarScreen()
@@ -230,17 +230,17 @@ void GuiKosmoport::EnterGuiStoreScreen()
 	Logger::Instance().Log("GuiKosmoport::EnterGuiStoreScreen", GUI_LOG_DIP);
 	#endif	
 	
-        int screen_w = Screen::Instance().GetWidth();
-        int screen_h = Screen::Instance().GetHeight();
-	Vec2<float> center_screen(screen_w/2, screen_h/2);
-        
-        gui_store.SetOffset(center_screen + GUI_STORE_OFFSET);
-
-	player->GetNpc()->SetScanTarget(player->GetNpc()->GetVehicle()); //??
-        bool lock_gui_scan_vehicle = true;
-        gui_vehicle_scan_shared->BindVehicle(player->GetNpc()->GetVehicle(), center_screen + GUI_VEHICLE_INSTORE_OFFSET, lock_gui_scan_vehicle);
-        
-        active_screen_id = GUI::SCREEN::STORE_ID;
+    int screen_w = Screen::Instance().GetWidth();
+    int screen_h = Screen::Instance().GetHeight();
+    Vec2<float> center_screen(screen_w/2, screen_h/2);
+    
+    gui_store.SetOffset(center_screen + GUI_STORE_OFFSET);
+    
+    m_Player->GetNpc()->SetScanTarget(m_Player->GetNpc()->GetVehicle()); //??
+    bool lock_gui_scan_vehicle = true;
+    gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->GetVehicle(), center_screen + GUI_VEHICLE_INSTORE_OFFSET, lock_gui_scan_vehicle);
+    
+    active_screen_id = GUI::SCREEN::STORE_ID;
 }
 
 void GuiKosmoport::ExitGuiStoreScreen()
@@ -275,7 +275,7 @@ void GuiKosmoport::EnterGuiGalaxyMapScreen()
 	#endif	
 	
         active_screen_id = GUI::SCREEN::GALAXYMAP_ID;        
-        gui_galaxymap_shared->BindGalaxy(player->GetNpc()->GetVehicle()->GetStarSystem()->GetSector()->GetGalaxy());
+        gui_galaxymap_shared->BindGalaxy(m_Player->GetNpc()->GetVehicle()->GetStarSystem()->GetSector()->GetGalaxy());
 }
 
 void GuiKosmoport::ExitGuiGalaxyMapScreen()
@@ -377,8 +377,8 @@ void GuiKosmoport::ButtonsAction()
 
 bool GuiKosmoport::Update(const MouseData& data_mouse)
 {
- 	UserInput::Instance().UpdateInKosmoport(player);
-     	player->GetCursor().Update(); 
+ 	UserInput::Instance().UpdateInKosmoport(m_Player);
+    m_Player->GetCursor().Update(); 
      	    	       	
 	bool interaction = UpdateMouseInteraction(data_mouse.pos_screencoord);
 	ButtonsAction();

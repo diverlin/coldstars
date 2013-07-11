@@ -16,8 +16,8 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BUTTON_H
-#define BUTTON_H
+#ifndef BUTTONSINGLE_HPP
+#define BUTTONSINGLE_HPP
 
 #include "BaseButton.hpp"
 

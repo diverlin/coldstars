@@ -16,39 +16,26 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUIVEHICLE2_H
-#define GUIVEHICLE2_H
+#ifndef GUIVEHICLE2_HPP
+#define GUIVEHICLE2_HPP
 
 #include "BaseGuiElement.hpp"
-#include "BaseButton.hpp"
-#include "../docking/Store.hpp"
-#include "GuiPair.hpp"
 class Vehicle;
-#include "MouseData.hpp"
 
 class GuiVehicle2 : public BaseGuiElement
 {
    	public:
-      		GuiVehicle2();
-      		~GuiVehicle2();
+        GuiVehicle2(int subtype_id):BaseGuiElement(subtype_id), m_Vehicle(nullptr) {}
+        ~GuiVehicle2() {}
+        
+        void Update(Player*);
       		
-      		Vehicle* GetVehicle() const { return vehicle; }
+    private:
+        Vehicle* m_Vehicle;
 
 		void Reset();
-		void BindVehicle(Vehicle*, float scale = 1.0f);        	
-      		void UpdateEquipmentIcons() const;
-      		void ButtonsAction(Player*) const;
-      		
-      		ItemSlot* GetInreactedItemSlot(const MouseData&);   
-      		
-      		void UpdateOffset();
-      		
-      	private:
-      		std::vector<GuiPair<BaseButton*, ItemSlot*>> button_slot_vec;
-
-        	void CreateFunctionalItemSlotsCircleGeometry(Vehicle*, float);
-        	
-        	Vehicle* vehicle;
+		void BindVehicle(Vehicle*, float scale = 1.0f); 
+        void CreateFunctionalItemSlotsWithCircleGeometry(Vehicle*, float);
 };
 
 #endif

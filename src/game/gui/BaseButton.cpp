@@ -26,63 +26,61 @@
 
 BaseButton::BaseButton(int subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb):BaseGuiElement(subtype_id, info, textureOb)
 {
-	textureOb_additional = nullptr;
-	textureOb_mask = nullptr;
+	m_TextureOb_additional = nullptr;
+	m_TextureOb_mask = nullptr;
 		
-	alpha = 1.0f;
-	lock  = false;
-	pressed = false;
+	m_Alpha = 1.0f;
 	
-	animation_scale = new AnimationEffect2D(Vec2<float>(0.7, 0.7), Vec2<float>(1.3, 1.3), Vec2<float>(0.02, 0.02), 0, 0, 0);
+	m_Animation_scale = new AnimationEffect2D(Vec2<float>(0.7, 0.7), Vec2<float>(1.3, 1.3), Vec2<float>(0.02, 0.02), 0, 0, 0);
 	
-	this->pAction = pAction;
+	m_pAction = pAction;
 }
 
 BaseButton::~BaseButton()
 {
-	delete animation_scale;
+	delete m_Animation_scale;
 }
 
 /* virtual override */
 void BaseButton::ResetState()
 {
-	pressed = false;
-	lock = false;
+	m_Pressed = false;
+	m_Lock = false;
 	ShadeOff();
 }
 
 void BaseButton::LockOn() 
 { 
-	lock = true; 
+	m_Lock = true; 
 	FullShadeOn();  
 };
 
 void BaseButton::LockOff() 
 { 
-	lock = false; 
+	m_Lock = false; 
 	ShadeOff();
 };
 
 void BaseButton::ShadeOn() 
 {
-	alpha = 0.4f; 
+	m_Alpha = 0.4f; 
 }
 
 void BaseButton::FullShadeOn() 
 {
-	alpha = 0.05f; 
+	m_Alpha = 0.05f; 
 }
 
 void BaseButton::ShadeOff() 
 {
-	alpha = 1.0f; 
+	m_Alpha = 1.0f; 
 }      
    
 /* virtual override */   		    
 void BaseButton::RenderInfo() const
 {
-	Vec2<float> pos(box.GetCenter().x, box.GetCenter().y);
-	drawSimpleColoredTextWithBackground(info, 12, pos, Color4<int>(255, 255, 255, 255));
+	Vec2<float> pos(m_Box.GetCenter().x, m_Box.GetCenter().y);
+	drawSimpleColoredTextWithBackground(m_Info, 12, pos, Color4<int>(255, 255, 255, 255));
 }
 
 /* virtual override */
@@ -93,25 +91,28 @@ void BaseButton::RenderUnique() const
    		//animation_scale->Update(rect1);
    	//}
    	
-	setColor4f(1.0f, 1.0f, 1.0f, alpha);
+	setColor4f(1.0f, 1.0f, 1.0f, m_Alpha);
 
-   	drawQuad(textureOb, box);
-   	
-   	if (textureOb_additional != nullptr)
+    if (m_TextureOb)
+    {
+   	    drawQuad(m_TextureOb, m_Box);
+   	}
+    
+   	if (m_TextureOb_additional)
    	{
-   	   	drawQuad(textureOb_additional, box);
+   	   	drawQuad(m_TextureOb_additional, m_Box);
    	}
 	setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
-   	if (textureOb_mask != nullptr)
+   	if (m_TextureOb_mask)
    	{
-   	   	drawQuad(textureOb_mask, box);
+   	   	drawQuad(m_TextureOb_mask, m_Box);
    	}
    		
-	if (label != "")
+	if (m_Label != "")
 	{
-		Vec2<float> pos(box.GetCenter().x, box.GetCenter().y + box.GetSize().y );
-		Screen::Instance().DrawText(label, 12, pos);
+		Vec2<float> pos(m_Box.GetCenter().x, m_Box.GetCenter().y + m_Box.GetSize().y);
+		Screen::Instance().DrawText(m_Label, 12, pos);
 	}
 }
 		

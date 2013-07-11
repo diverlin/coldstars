@@ -106,10 +106,10 @@ bool GuiNatureLand::UpdateMouseInteractionWithEquipedItemSlots(const MouseData& 
 	                {	
                 		if (data_mouse.left_click == true)
                         	{
-                        		player->GetNpc()->GetVehicle()->AddItemToCargoSlot(item);
+                        		m_Player->GetNpc()->GetVehicle()->AddItemToCargoSlot(item);
                         	}
                      
-               			player->GetCursor().SetFocusedObject(item);
+               			m_Player->GetCursor().SetFocusedObject(item);
         		}
 		}
        	}

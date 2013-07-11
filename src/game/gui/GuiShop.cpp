@@ -105,7 +105,7 @@ void GuiShop::UnbindShop()
         
 void GuiShop::UpdateLables() const
 {
-	for (auto &gui_element : child_vec)
+	for (auto &gui_element : m_Child_vec)
 	{	
 		switch(gui_element->GetSubTypeId())
 		{

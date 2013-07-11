@@ -21,11 +21,14 @@
 /*virtual final*/
 void ButtonSingle::PressEvent(Player* player)
 {
-	pAction(player);
-		
-	if (lock == false)
+    if (m_pAction)
+    {
+	    m_pAction(player);
+    }
+    
+	if (m_Lock == false)
 	{
-		pressed = true;
+		m_Pressed = true;
 		ShadeOn();
 	}
 }
@@ -33,18 +36,18 @@ void ButtonSingle::PressEvent(Player* player)
 /*virtual*/   		
 void ButtonSingle::Update()
 {
-	if (lock == false)
+	if (m_Lock == false)
 	{
-		if (alpha < 1.0f)
+		if (m_Alpha < 1.0f)
 		{
-			alpha += 0.01f;
+			m_Alpha += 0.01f;
 		}
 		else
 		{
-			alpha = 1.0f;
+			m_Alpha = 1.0f;
 		}
 	}
 	
-	pressed = false;
+	m_Pressed = false;
 }
       

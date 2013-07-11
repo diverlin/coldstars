@@ -994,7 +994,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 	                				}            
 	                				else
 	                				{
-	               						GuiManager::Instance().GetGuiSpace().GetGuiVehicleTarget().BindVehicle(visible_SHIP_vec[i], 0.6f);
+	               						//GuiManager::Instance().GetGuiSpace().GetGuiVehicleTarget().BindVehicle(visible_SHIP_vec[i], 0.6f);
 	                				}
 	                			}
 	       				}
