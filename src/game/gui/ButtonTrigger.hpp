@@ -29,7 +29,7 @@ class ButtonTrigger : public BaseButton
         virtual ~ButtonTrigger() final {};  
 
         virtual void PressEvent(Player*) final;
-        virtual void Update() final;
+        virtual void UpdateUnique(Player*) final;
         
 	private:
 };

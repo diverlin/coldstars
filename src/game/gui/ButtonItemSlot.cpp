@@ -15,19 +15,28 @@
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-
-
-#include "ButtonTrigger.hpp"
-#include "../pilots/Player.hpp"
+             
+#include "ButtonItemSlot.hpp"
+#include <slots/ItemSlot.hpp>
     
 /*virtual final*/
-void ButtonTrigger::PressEvent(Player* player)
+void ButtonItemSlot::PressEvent(Player* player)
 {
-    if (m_pAction)
-	{
-        m_pAction(player);
-	}
-	
+    if (GetPressed() == true)
+    {
+        if (m_ItemSlot->GetSelected() == false)
+        {
+            m_ItemSlot->SelectEvent();
+        }
+    }
+    else
+    {
+        if (m_ItemSlot->GetSelected() == true)
+        {
+            m_ItemSlot->DeselectEvent();
+        }
+    }    
+        
 	if (m_Lock == false)
 	{
 		if (m_Pressed == false)
@@ -44,17 +53,16 @@ void ButtonTrigger::PressEvent(Player* player)
 }
 
 /*virtual final*/	
-void ButtonTrigger::UpdateUnique(Player* player)
+void ButtonItemSlot::UpdateUnique(Player* player)
 {
 	if ( (m_Lock == false) and (m_Pressed == false) )
 	{
-		if (m_Alpha < 1.0f)
-		{
-			m_Alpha += 0.01f;
-		}
-		else
-		{
-			m_Alpha = 1.0f;
-		}
+		m_Alpha < 1.0f ? m_Alpha += 0.01f : m_Alpha = 1.0f;
 	}
 }
+
+/*virtual final*/
+void ButtonItemSlot::RenderUnique() const 
+{
+       m_ItemSlot->Render(m_Box, Vec3<float>(0,0,0), false);
+}        

@@ -33,8 +33,8 @@ void ButtonSingle::PressEvent(Player* player)
 	}
 }
 
-/*virtual*/   		
-void ButtonSingle::Update()
+/*virtual final*/   		
+void ButtonSingle::UpdateUnique(Player* player)
 {
 	if (m_Lock == false)
 	{

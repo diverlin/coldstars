@@ -35,6 +35,7 @@ class Rect
 		
 		bool CheckInteraction(float, float) const;
 		bool CheckInteraction(const Vec2<float>&) const;
+        bool CheckRoundInteraction(const Vec2<float>&, float) const;
 							
 		void Set(float, float, float, float);
 		void Set(const Vec2<float>&, float, float);

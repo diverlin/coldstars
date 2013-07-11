@@ -76,6 +76,17 @@ bool Rect::CheckInteraction(float x, float y) const
 	
 	return true;
 }
+
+bool Rect::CheckRoundInteraction(const Vec2<float>& p, float radius) const
+{       	
+    float dist = (p-center).GetLength();
+    if (dist < radius)
+    {
+         return true;
+    }
+         
+    return false;
+}
         
 void Rect::Set(float _bottomLeft_x, float _bottomLeft_y, float _w, float _h)
 {

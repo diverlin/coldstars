@@ -79,7 +79,8 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
 	}    	
 }	
 
-void GuiVehicle2::Update(Player* player)
+/*virtual final*/
+void GuiVehicle2::UpdateUnique(Player* player)
 {
     bool need_update = false;
     if (m_Vehicle)        
@@ -96,6 +97,6 @@ void GuiVehicle2::Update(Player* player)
     
     if (need_update)
     {
-        BindVehicle(player->GetNpc()->GetVehicle());            
+        BindVehicle(player->GetNpc()->GetVehicle(), 0.6);            
     }
 }

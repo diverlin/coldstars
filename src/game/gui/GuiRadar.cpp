@@ -55,26 +55,21 @@ void GuiRadar::ResetData()
 {
 	entity_vec.clear();
 }
-    
-void GuiRadar::Update()
-{
-	//screenrect.Set(rect.GetCenter() + Screen::Instance().GetRect().GetBottomLeft() * scale, (int)(Screen::Instance().GetWidth() * scale), (int)(Screen::Instance().GetHeight() * scale));
+   
+/*virtual final*/ 
+void GuiRadar::UpdateUnique(Player* player)
+{		
+    screenrect.Set(rect.GetCenter() + Screen::Instance().GetBottomLeftScreenWC() * scale, (int)(Screen::Instance().GetWidth() * scale), (int)(Screen::Instance().GetHeight() * scale));
+    const MouseData& data_mouse = player->GetCursor().GetMouseData();
+	if (rect.CheckRoundInteraction(data_mouse.pos_screencoord, /*radius=*/70.0) == true)
+	{
+		if (data_mouse.left_press == true)
+		{
+			Vec2<float> new_global_coord( ( data_mouse.pos_screencoord.x - rect.GetCenter().x - screenrect.GetWidth()/2)/scale, ( data_mouse.pos_screencoord.y - rect.GetCenter().y - screenrect.GetHeight()/2)/scale);
+			Screen::Instance().SetBottomLeftScreenWC(new_global_coord);
+        }
+	}
 }
-
-//bool GuiRadar::UpdateMouseInteraction(const Vec2<float>& mouse_pos)
-//{		
-	//if (rect.CheckInteraction(mouse_pos.x, mouse_pos.y) == true)
-	//{
-		////if (data_mouse.left_press == true)
-		////{
-			////Vec2<float> new_global_coord( (data_mouse.pos.x - rect.GetCenter().x - screenrect.GetWidth()/2)/scale, (data_mouse.pos.y - rect.GetCenter().y - screenrect.GetHeight()/2)/scale);
-			////Screen::Instance().GetRect().SetBottomLeft(new_global_coord);
-			////return true;
-		////}
-	//}
-
-	//return false;
-//}
      		
 void GuiRadar::Add(BaseSpaceEntity* object)
 {
