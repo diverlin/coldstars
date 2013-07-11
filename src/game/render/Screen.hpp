@@ -16,8 +16,8 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef SCREEN_H
+#define SCREEN_H
 
 #include <GL/glew.h>
 
