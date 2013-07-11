@@ -153,8 +153,11 @@ void  Screen::IncreaseScale()
 		scale += d_scale;
 		
 		Vec2<float> center = rect.GetCenter();
-		Vec2<float> dcenter = center*d_scale;
-		rect.SetCenter(center-dcenter);
+        float rate = 0.5*d_scale;
+        float offset_x = rect.GetWidth()*rate;
+        float offset_y = rect.GetHeight()*rate;
+        Vec2<float> offset(offset_x, offset_y);
+		rect.SetCenter(center-offset);
 	} 
 }
 
@@ -166,8 +169,12 @@ void Screen::DecreaseScale()
 		scale += d_scale;
 		
 		Vec2<float> center = rect.GetCenter();
-		Vec2<float> dcenter = center*d_scale;
-		rect.SetCenter(center-dcenter);
+        float rate = 0.5*d_scale;
+        float offset_x = rect.GetWidth()*rate;
+        float offset_y = rect.GetHeight()*rate;
+        Vec2<float> offset(offset_x, offset_y);
+        
+		rect.SetCenter(center-offset);
 	} 
 }
 
