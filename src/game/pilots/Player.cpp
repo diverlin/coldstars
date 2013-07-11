@@ -1139,7 +1139,8 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 		starsystem->FindRadarVisibleEntities_c(this);
 	}
 	
-	BaseGuiElement* gui_element = GuiManager::Instance().GetGuiSpace().Update(cursor.GetMouseData());
+    GuiManager::Instance().GetGuiSpace().Update(this);
+	BaseGuiElement* gui_element = GuiManager::Instance().GetGuiSpace().UpdateMouseInteraction(cursor.GetMouseData().pos_screencoord);
 	if (gui_element == nullptr)
 	{   
 		if (turn_timer.GetTurnEnded() == true)  

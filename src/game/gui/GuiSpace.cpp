@@ -160,15 +160,9 @@ init_done(false)
 		Box box(center, size);
 		gui_vehicle_player->SetBox(box);
     
-		Vec3<float> offset(0, 0, 0);
+        Vec3<float> offset(-screen_w/2+125, -screen_h/2+125, 0);
 		this->AddChild(gui_vehicle_player, offset);	
-	}
-    
-    	//if (gui_vehicle_player->GetVehicle() == nullptr)
-	//{
-		//gui_vehicle_player->BindVehicle(player->GetNpc()->GetVehicle(), 0.6f);
-		////gui_vehicle_player.SetOffset(gui_radar->GetRect().GetCenter());                        
-	//}
+	}      
 }
 
 /*virtual*/
@@ -295,33 +289,30 @@ void GuiSpace::RenderText(const Vec2<float>& scroll_coords) const
 	Screen::Instance().DrawText(_coord_str, 12, pos);    
 }
 
-                                            
-BaseGuiElement* GuiSpace::Update(const MouseData& data_mouse)
+/*virtual final*/
+void GuiSpace::UpdateUnique(Player* player)
 {
-	UpdateGeometry(Vec3<float>(0,0,0), Vec3<float>(1,1,1));
-	for (auto &child : m_Child_vec)
-	{
-		child->Update();
-	}
-	
-	int screen_w = Screen::Instance().GetWidth();
+    int screen_w = Screen::Instance().GetWidth();
 	int screen_h = Screen::Instance().GetHeight();
 	Rect screen_rect(0, 0, screen_w, screen_h);   
 	Vec2<float> center_screen(screen_w/2, screen_h/2);
-					
-	UserInput::Instance().UpdateInSpace(m_Player);
-	m_Player->GetCursor().Update();  
-	
+    
+    UserInput::Instance().UpdateInSpace(player);
+	m_Player->GetCursor().Update(); 
+}
+                                                
+//BaseGuiElement* GuiSpace::CheckInteraction(const MouseData& data_mouse)
+//{
 	//if (gui_vehicle_target.GetVehicle() != nullptr)
 	//{
 		//gui_vehicle_target.UpdateOffset();
 	//}
 
 	//update
-    ((GuiVehicle2*)GetGuiElement(GUI::BUTTON::PLAYER_VEHICLE_ID))->Update(m_Player);
-	BaseGuiElement* gui_element = nullptr;
-	gui_element = UpdateMouseInteraction(data_mouse.pos_screencoord);
-	//ButtonsAction(player);   
+	//BaseGuiElement* gui_element = nullptr;
+	//gui_element = UpdateMouseInteraction(data_mouse.pos_screencoord);
+	
+    //ButtonsAction(player);   
                                                
 	//if (gui_galaxymap_shared->GetGalaxy() != nullptr)  
 	//{
@@ -348,15 +339,15 @@ BaseGuiElement* GuiSpace::Update(const MouseData& data_mouse)
 	//}
                         
 	//if (gui_vehicle_target.GetVehicle() != nullptr)
-	{
+	//{
 		//if (gui_element == nullptr)
 		//{
 			//gui_element = UpdateMouseInteractionWithPreciseWeaponTarget(data_mouse);
 		//}
-	}		
+	//}		
 
-	return gui_element;
-}
+	//return gui_element;
+//}
 
 /* virtual final */
 void GuiSpace::RenderUnique() const
@@ -365,21 +356,21 @@ void GuiSpace::RenderUnique() const
 	enable_BLEND(); 
     {   
         //if (show_gui_radar == true)  
-        {
+        //{
             //gui_radar->Render();
             //gui_vehicle_player.Render();
             //gui_vehicle_player.RenderInfo(data_mouse);    
-        }
+        //}
         
         if (gui_galaxymap_shared->GetGalaxy() != nullptr)  
         {
             gui_galaxymap_shared->Render();    
         }
                                         
-        if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
-        {
+        //if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
+        //{
             //GuiManager::Instance().RenderScanVehicle(data_mouse, player->GetNpc()->GetScanTarget()); 				                 
-        }
+        //}
         
         //if (gui_vehicle_target.GetVehicle() != nullptr)
         //{

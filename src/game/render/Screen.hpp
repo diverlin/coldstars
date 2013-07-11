@@ -39,6 +39,8 @@ class Screen : public SFML_Wrapper
 		//Vec2<float> GetBottomLeftScreenWC()	{ return rect.GetBottomLeft()*scale; }
 		//Vec2<float> GetTopRightScreenWC()	{ return rect.GetTopRight()*scale; }
 
+		void SetBottomLeftScreenWC(const Vec2<float>& bl)	{ rect.SetBottomLeft(bl); }
+        
 		Vec2<float> GetBottomLeftScreenWC()	{ return rect.GetBottomLeft(); }
 		Vec2<float> GetTopRightScreenWC()	{ return (rect.GetBottomLeft()+Vec2<float>(rect.GetWidth()*scale, rect.GetHeight()*scale)); }
 		

@@ -63,6 +63,8 @@ class BaseGuiElement
         bool GetLock() const { return m_Lock; }
         bool GetPressed() const { return m_Pressed; }
             
+        BaseGuiElement* GetGuiElement(int request_subtype_id) const;
+                    
 		void UpdateGeometry(const Vec3<float>&, const Vec3<float>&);					
 		BaseGuiElement* UpdateMouseInteraction(const Vec2<float>&);
 		
@@ -71,11 +73,11 @@ class BaseGuiElement
 		void Show() { m_Show = true; }
 		void Hide() { m_Show = false; }
 								
-		virtual void Update() {}
 		virtual void PressEvent(Player*) {}
 		virtual void ResetState();
 
-		void Render() const;		
+		void Update(Player*);
+        void Render() const;		
 		virtual void RenderInfo() const {};
 				
 	protected:
@@ -99,8 +101,10 @@ class BaseGuiElement
 
 		void PressEventOnGuiElement(int);
 		void ResetStateEventOnGuiElement(int);			
-		BaseGuiElement* GetGuiElement(int request_subtype_id) const;
-				
+
+		virtual void UpdateUnique(Player*);		
+		void UpdateCommon(Player*);
+        				
 		virtual void RenderUnique() const;		
 		void RenderCommon() const;
        		       	

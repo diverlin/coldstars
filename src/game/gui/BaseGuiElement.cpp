@@ -17,10 +17,9 @@
 */
 
 #include "BaseGuiElement.hpp"
-#include "../common/constants.hpp"
-#include "../render/MyGl.hpp"
-#include "../render/Render.hpp"
-#include "../common/Logger.hpp"
+#include <common/constants.hpp>
+#include <render/Render.hpp>
+#include <common/Logger.hpp>
 
 std::map<int, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
 
@@ -149,7 +148,35 @@ void BaseGuiElement::UpdateGeometry(const Vec3<float>& parent_offset, const Vec3
 		child->UpdateGeometry(next_offset, next_scale);
 	}
 }
+
+void BaseGuiElement::Update(Player* player)
+{
+	if (!m_Show)
+	{
+		return;
+	}
+    
+    if (m_Root)
+    {
+        UpdateGeometry(Vec3<float>(0,0,0), Vec3<float>(1,1,1));
+    }
+	
+    UpdateCommon(player);
+    UpdateUnique(player);
+}
  
+/* virtual */
+void BaseGuiElement::UpdateUnique(Player*)
+{}
+
+void BaseGuiElement::UpdateCommon(Player* player)
+{
+    for (auto &child : m_Child_vec)
+	{      
+        child->Update(player);
+	}
+}
+
 void BaseGuiElement::Render() const
 {
 	if (!m_Show)

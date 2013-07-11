@@ -16,45 +16,26 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#ifndef BUTTONITEMSLOT_HPP
+#define BUTTONITEMSLOT_HPP
 
-#include "ButtonTrigger.hpp"
-#include "../pilots/Player.hpp"
-    
-/*virtual final*/
-void ButtonTrigger::PressEvent(Player* player)
-{
-    if (m_pAction)
-	{
-        m_pAction(player);
-	}
-	
-	if (m_Lock == false)
-	{
-		if (m_Pressed == false)
-		{
-			m_Pressed = true;
-			ShadeOn();
-		}
-		else
-		{
-			m_Pressed = false;
-			ShadeOff();
-		}
-	}
-}
+#include "BaseButton.hpp"
+class ItemSlot;
 
-/*virtual final*/	
-void ButtonTrigger::UpdateUnique(Player* player)
+class ButtonItemSlot : public BaseButton
 {
-	if ( (m_Lock == false) and (m_Pressed == false) )
-	{
-		if (m_Alpha < 1.0f)
-		{
-			m_Alpha += 0.01f;
-		}
-		else
-		{
-			m_Alpha = 1.0f;
-		}
-	}
-}
+	public:
+        ButtonItemSlot(int subtype_id, const std::string& info, ItemSlot* itemslot):BaseButton(subtype_id, info) { m_ItemSlot = itemslot; }
+               
+        virtual ~ButtonItemSlot() final {};  
+
+        virtual void PressEvent(Player*) final;
+        virtual void UpdateUnique(Player*) final;
+        
+        virtual void RenderUnique() const final; 
+        
+	private:
+        ItemSlot* m_ItemSlot;
+};
+
+#endif

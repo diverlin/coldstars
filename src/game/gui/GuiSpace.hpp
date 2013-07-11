@@ -45,8 +45,8 @@ class GuiSpace : public BaseGuiElement
 		void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
 		void UnbindSharedGuis();
 		
-		BaseGuiElement* Update(const MouseData&);
-		
+        virtual void UpdateUnique(Player*) final;
+                                        
 		void Resize(int, int);
 		void ButtonsAction(Player*) const;
 		

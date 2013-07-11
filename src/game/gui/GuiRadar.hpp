@@ -34,12 +34,11 @@ class GuiRadar : public BaseGuiElement
 		
 		void ResetData();
 		
-		void Update();
-		//bool UpdateMouseInteraction(const Vec2<float>&);
-		
 		void Add(BaseSpaceEntity*);
 		void AddIfWithinRadarRange(BaseSpaceEntity*, const Vehicle&);
-     		
+
+        virtual void UpdateUnique(Player*) final;
+             		
 		virtual void RenderUnique() const final;
 			
 	private:
