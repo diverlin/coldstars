@@ -163,6 +163,18 @@ init_done(false)
         Vec3<float> offset(-screen_w/2+125, -screen_h/2+125, 0);
 		this->AddChild(gui_vehicle_player, offset);	
 	}      
+
+    {
+		GuiVehicle* gui_vehicle_target = new GuiVehicle();
+		Vec3<float> center;
+		Vec3<float> size(250, 250, 1);	
+		
+		Box box(center, size);
+		gui_vehicle_target->SetBox(box);
+    
+        Vec3<float> offset(screen_w/2, screen_h/2, 0);
+		this->AddChild(gui_vehicle_target, offset);	
+	} 
 }
 
 /*virtual*/

@@ -17,22 +17,22 @@
 */
 
 
-#ifndef GUIITEMSLOT_H
-#define GUIITEMSLOT_H
+#ifndef GUIITEMSLOT_HPP
+#define GUIITEMSLOT_HPP
 
 #include "BaseGuiElement.hpp"
 class ItemSlot;
 
 class GuiItemSlot : public BaseGuiElement
 {
-    	public:
-       		GuiItemSlot(ItemSlot*, const Box&);
-       		~GuiItemSlot();   
-       		
-       		ItemSlot* GetItemSlot() const { return itemslot; }   
-       	
-       	private:       				
-		ItemSlot* itemslot;		
+    public:
+        GuiItemSlot(ItemSlot*, const Box&);
+        ~GuiItemSlot();   
+        
+        ItemSlot* GetItemSlot() const { return itemslot; }   
+    
+        private:       				
+    ItemSlot* itemslot;		
 };
 
 #endif 

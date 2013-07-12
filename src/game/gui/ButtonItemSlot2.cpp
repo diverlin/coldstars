@@ -16,29 +16,53 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
              
-#include "ButtonItemSlot.hpp"
+#include "ButtonItemSlot2.hpp"
 #include <slots/ItemSlot.hpp>
-#include <pilots/Player.hpp>
     
 /*virtual final*/
-void ButtonItemSlot::PressEvent(Player* player)
+void ButtonItemSlot2::PressEvent(Player* player)
 {
-    if ((player->GetCursor().GetItemSlot()->GetItem() == nullptr) and (m_ItemSlot->GetItem() != nullptr))
+    if (GetPressed() == true)
     {
-        player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);
-        return;
+        if (m_ItemSlot->GetSelected() == false)
+        {
+            m_ItemSlot->SelectEvent();
+        }
     }
-
-    if ((player->GetCursor().GetItemSlot()->GetItem() != nullptr) and (m_ItemSlot->GetItem() == nullptr))
+    else
     {
-        player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);
-        return;
-    }
+        if (m_ItemSlot->GetSelected() == true)
+        {
+            m_ItemSlot->DeselectEvent();
+        }
+    }    
         
+	if (m_Lock == false)
+	{
+		if (m_Pressed == false)
+		{
+			m_Pressed = true;
+			ShadeOn();
+		}
+		else
+		{
+			m_Pressed = false;
+			ShadeOff();
+		}
+	}
+}
+
+/*virtual final*/	
+void ButtonItemSlot2::UpdateUnique(Player* player)
+{
+	if ( (m_Lock == false) and (m_Pressed == false) )
+	{
+		m_Alpha < 1.0f ? m_Alpha += 0.01f : m_Alpha = 1.0f;
+	}
 }
 
 /*virtual final*/
-void ButtonItemSlot::RenderUnique() const 
+void ButtonItemSlot2::RenderUnique() const 
 {
        m_ItemSlot->Render(m_Box, Vec3<float>(0,0,0), false);
 }        

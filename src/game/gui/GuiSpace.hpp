@@ -62,8 +62,6 @@ class GuiSpace : public BaseGuiElement
 		
 	private:
 		bool init_done;
-
-		GuiVehicle2* 	gui_vehicle_target;
 		
 		GuiGalaxyMap* gui_galaxymap_shared;  
 		GuiVehicle*   gui_vehicle_scan_shared;
