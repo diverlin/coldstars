@@ -21,7 +21,13 @@
 
 #include <string>
 #include "../math/myVector.hpp"
+#include <common/constants.hpp>
 
+namespace GUI
+{
+    eTYPE getEquivalent(int);
+}
+       
 int getObjectSize(int w, int h); 
 
 bool get_dPos_ToPoint(const Vec3<float>&, const Vec3<float>&, float, Vec3<float>&);

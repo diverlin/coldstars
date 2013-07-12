@@ -27,16 +27,16 @@ class BaseVehicleBuilder
 		static BaseVehicleBuilder& Instance();
 		virtual ~BaseVehicleBuilder() {};
 
-        	void EquipEquipment(Vehicle*, int tech_leve = 1) const; 
-                void EquipModules(Vehicle*, int tech_leve = 1) const; 
-                void EquipArtefacts(Vehicle*, int tech_leve = 1) const; 
-                void EquipBomb(Vehicle*, int tech_leve = 1) const; 
-                                                                
-                void CreateKorpusGeometry(Vehicle*) const;      
-           
-                void CreateItemSlots(Vehicle*) const;
+        void EquipEquipment(Vehicle*, int tech_leve = 1) const; 
+        void EquipModules(Vehicle*, int tech_leve = 1) const; 
+        void EquipArtefacts(Vehicle*, int tech_leve = 1) const; 
+        void EquipBomb(Vehicle*, int tech_leve = 1) const; 
+                                                        
+        void CreateKorpusGeometry(Vehicle*) const;      
+        
+        void CreateItemSlots(Vehicle*) const;
                 
-        protected:
+    protected:
 		BaseVehicleBuilder() {};
 		BaseVehicleBuilder(const BaseVehicleBuilder&) = delete;
 		BaseVehicleBuilder& operator=(const BaseVehicleBuilder&) = delete;

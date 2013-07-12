@@ -88,7 +88,7 @@ init_done(false)
 
 		{
 			TextureOb* texOb = GuiTextureObCollector::Instance().icon_map;  
-			ButtonTrigger* galaxymap_button = new ButtonTrigger(GUI::BUTTON::GALAXYMAP_ID, "galaxy map", GuiActions::GalaxyMapGuiTransition, texOb);
+			ButtonTrigger* galaxymap_button = new ButtonTrigger(GUI::eTYPE::GALAXYMAP_ID, "galaxy map", GuiActions::GalaxyMapGuiTransition, texOb);
 			Vec3<float> center;
 			Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
 			Box box(center, size);		
@@ -100,7 +100,7 @@ init_done(false)
 		
 		{
 			TextureOb* texOb = GuiTextureObCollector::Instance().icon_plus;
-			ButtonSingle* load_button = new ButtonSingle(GUI::BUTTON::LOAD_ID, "load", GuiActions::LoadEvent, texOb);    
+			ButtonSingle* load_button = new ButtonSingle(GUI::eTYPE::LOAD_ID, "load", GuiActions::LoadEvent, texOb);    
 			Vec3<float> center; 
 			Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
 			Box box(center, size);		
@@ -112,7 +112,7 @@ init_done(false)
 		
 		{
 			TextureOb* texOb = GuiTextureObCollector::Instance().icon_minus;
-			ButtonSingle* save_button = new ButtonSingle(GUI::BUTTON::SAVE_ID, "save", GuiActions::SaveEvent, texOb);    
+			ButtonSingle* save_button = new ButtonSingle(GUI::eTYPE::SAVE_ID, "save", GuiActions::SaveEvent, texOb);    
 			Vec3<float> center; 
 			Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
 			Box box(center, size);		
@@ -153,7 +153,7 @@ init_done(false)
 	}
     
     {
-		GuiVehicle2* gui_vehicle_player = new GuiVehicle2(GUI::BUTTON::PLAYER_VEHICLE_ID);
+		GuiVehicle2* gui_vehicle_player = new GuiVehicle2(GUI::eTYPE::PLAYER_VEHICLE_ID);
 		Vec3<float> center;
 		Vec3<float> size(250, 250, 1);	
 		
@@ -165,15 +165,15 @@ init_done(false)
 	}      
 
     {
-		GuiVehicle* gui_vehicle_target = new GuiVehicle();
+		GuiVehicle* gui_scan = new GuiVehicle(GUI::eTYPE::SCAN_VEHICLE_ID);
 		Vec3<float> center;
 		Vec3<float> size(250, 250, 1);	
 		
 		Box box(center, size);
-		gui_vehicle_target->SetBox(box);
+		gui_scan->SetBox(box);
     
         Vec3<float> offset(screen_w/2, screen_h/2, 0);
-		this->AddChild(gui_vehicle_target, offset);	
+		this->AddChild(gui_scan, offset);	
 	} 
 }
 
@@ -185,7 +185,7 @@ void GuiSpace::SetPlayer(Player* player)
 {	
 	m_Player = player;
         
-	GetGuiElement(GUI::BUTTON::GUI_RADAR_ID)->SetPlayer(player); 
+	GetGuiElement(GUI::eTYPE::GUI_RADAR_ID)->SetPlayer(player); 
 }
 
 void GuiSpace::BindSharedGuis(GuiGalaxyMap* gui_galaxymap_shared, GuiVehicle* gui_vehicle_scan_shared, GuiSkills* gui_skills_shared, Slider* slider_shared)
@@ -235,7 +235,7 @@ void GuiSpace::EnterGalaxyMap()
 		ExitGuiScan();
 	}
 	
-	GetGuiElement(GUI::BUTTON::GUI_RADAR_ID)->Hide();
+	GetGuiElement(GUI::eTYPE::GUI_RADAR_ID)->Hide();
 	      
 	gui_galaxymap_shared->BindGalaxy(m_Player->GetNpc()->GetStarSystem()->GetSector()->GetGalaxy());
 }
@@ -246,7 +246,7 @@ void GuiSpace::ExitGalaxyMap()
 	Logger::Instance().Log("GuiSpace::ExitGalaxyMap", GUI_LOG_DIP);
 	#endif
 	
-	GetGuiElement(GUI::BUTTON::GUI_RADAR_ID)->Show();    
+	GetGuiElement(GUI::eTYPE::GUI_RADAR_ID)->Show();    
 	gui_galaxymap_shared->UnbindGalaxy();
 }
     
@@ -256,15 +256,16 @@ void GuiSpace::EnterGuiScan()
 	Logger::Instance().Log("GuiSpace::EnterGuiScan", GUI_LOG_DIP);
 	#endif
 	
-	int screen_w = Screen::Instance().GetWidth();
-	int screen_h = Screen::Instance().GetHeight();
-	Vec2<float> center_screen(screen_w/2, screen_h/2);
+	//int screen_w = Screen::Instance().GetWidth();
+	//int screen_h = Screen::Instance().GetHeight();
+	//Vec2<float> center_screen(screen_w/2, screen_h/2);
 	
-	bool allow_full_control = m_Player->IsAbleToGetFullControlOnScanedVehicle();
-	gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
-	gui_skills_shared->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
-					
-	GetGuiElement(GUI::BUTTON::GUI_RADAR_ID)->Hide();
+	//bool allow_full_control = m_Player->IsAbleToGetFullControlOnScanedVehicle();
+	//gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
+	//gui_skills_shared->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
+			
+    //GetGuiElement(GUI::eTYPE::PLAYER_VEHICLE_ID)->Hide();		
+	//GetGuiElement(GUI::eTYPE::GUI_RADAR_ID)->Hide();
 }
 
 void GuiSpace::ExitGuiScan()
@@ -273,15 +274,16 @@ void GuiSpace::ExitGuiScan()
 	Logger::Instance().Log("GuiSpace::ExitGuiScan", GUI_LOG_DIP);
 	#endif
 	
-	if (gui_vehicle_scan_shared->GetVehicle() == m_Player->GetNpc()->GetVehicle())
-	{
-		gui_skills_shared->Acknowledge();
-	}
-	gui_vehicle_scan_shared->UnbindVehicle();
+	//if (gui_vehicle_scan_shared->GetVehicle() == m_Player->GetNpc()->GetVehicle())
+	//{
+		//gui_skills_shared->Acknowledge();
+	//}
+	//gui_vehicle_scan_shared->UnbindVehicle();
 	
-	m_Player->GetNpc()->ResetScanTarget();
+	//m_Player->GetNpc()->ResetScanTarget();
 	
-	GetGuiElement(GUI::BUTTON::GUI_RADAR_ID)->Show();
+	//GetGuiElement(GUI::eTYPE::GUI_RADAR_ID)->Show();
+    //GetGuiElement(GUI::eTYPE::PLAYER_VEHICLE_ID)->Show();	
 }
 
 void GuiSpace::ButtonsAction(Player* player) const
@@ -301,9 +303,9 @@ void GuiSpace::RenderText(const Vec2<float>& scroll_coords) const
 	Screen::Instance().DrawText(_coord_str, 12, pos);    
 }
 
-/*virtual final*/
+/*virtual override final*/
 void GuiSpace::UpdateUnique(Player* player)
-{
+{ 
     int screen_w = Screen::Instance().GetWidth();
 	int screen_h = Screen::Instance().GetHeight();
 	Rect screen_rect(0, 0, screen_w, screen_h);   

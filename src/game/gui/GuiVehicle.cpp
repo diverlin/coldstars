@@ -24,113 +24,52 @@
 #include "../items/BaseItem.hpp"
 #include "../slots/ItemSlot.hpp"
 #include "../common/myStr.hpp"
+#include "../common/common.hpp"
 #include "../builder/ItemSlotBuilder.hpp"
 
 #include "../pilots/Npc.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "ButtonItemSlot.hpp"
          
-GuiVehicle::GuiVehicle()
-{
-	textureOb_korpus = nullptr;
-	vehicle = nullptr;
-	gate_slot   = GetNewItemSlotWithoutSaveAbility(ENTITY::GATE_SLOT_ID);
-	
-	allow_full_control = false;
-	block_manual_exit  = false;
-}
-
-GuiVehicle::~GuiVehicle()
-{
-	delete gate_slot;
-}
-
-void GuiVehicle::BindVehicle(Vehicle* vehicle, const Vec2<float>& gui_offset, bool allow_full_control, bool block_manual_exit, float scale)
-{      
-	this->vehicle = vehicle;  
-	SetOffset(gui_offset);
-	this->allow_full_control = allow_full_control;
-	this->block_manual_exit = block_manual_exit;
-                
-	textureOb_korpus = nullptr;
-
-	CreateKorpusGui(vehicle, scale);
-	CreateItemSlotsGeometry(vehicle, scale);
-}
-
-void GuiVehicle::UnbindVehicle()
-{
-    for (unsigned int i=0; i<m_Child_vec.size(); i++)
-    {
-        delete m_Child_vec[i];
-    }
-	m_Child_vec.clear();
-	vehicle = nullptr;
-}
-
-void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
-{
-	textureOb_korpus = vehicle->GetTextureOb();
-
-    	float kontur_w, kontur_h;
-    	if (textureOb_korpus->GetFrameWidth() > textureOb_korpus->GetFrameHeight())
-    	{
-        	kontur_w = 500; 
-        	kontur_h = textureOb_korpus->GetFrameHeight() * kontur_w / (float)textureOb_korpus->GetFrameWidth();
-    	}
-    	else
-    	{
-        	kontur_h = 500; 
-        	kontur_w = textureOb_korpus->GetFrameWidth() * kontur_h / (float)textureOb_korpus->GetFrameHeight();
-    	}               
-
-    	rect_korpus.Set(-kontur_w/2 * scale, -kontur_h/2 * scale, kontur_w * scale, kontur_h * scale); 
-}      
-  
-void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
-{        
-	int weapon_slot_counter = 0;
-	int otsec_slot_counter = 0;
-	int artef_slot_counter = 0;
+GuiVehicle::GuiVehicle(GUI::eTYPE subtype_id)
+:
+BaseGuiElement(subtype_id),
+m_TextureOb_korpus(nullptr),
+m_Vehicle(nullptr)
+{   
+    int weapon_slot_max = WEAPON_SLOT_MAX_NUM;
+    int otsec_slot_max = OTSEC_SLOT_MAX_NUM;
 	
 	float zpos = -2;
 	float zsize = 1;
 	
-    for (const auto itemslot : vehicle->slot_total_vec)
+    for (int i=0; i<weapon_slot_max; i++)
     {
-        switch (itemslot->GetSubTypeId())
-        {        
-            case ENTITY::WEAPON_SLOT_ID:
-            {
-                Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
-                Box box(size*scale); 
-                 
-                ButtonItemSlot* button = new ButtonItemSlot(ENTITY::WEAPON_SLOT_ID, "ENTITY::WEAPON_SLOT_ID", itemslot);
-                button->SetBox(box);
-                Vec3<float> offset(-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP + 1.1*weapon_slot_counter*GUI::ITEMSLOT::WIDTH_FOR_SHIP,
-                                   -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 2*1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-                                   0);
-                               
-                AddChild(button, offset);
-                weapon_slot_counter++;	
-                
-                break;
-            } 
-            
-            case ENTITY::RADAR_SLOT_ID:
-            {
-                Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
-                Box box(size*scale);
-                    
-                ButtonItemSlot* button = new ButtonItemSlot(ENTITY::WEAPON_SLOT_ID, "ENTITY::RADAR_SLOT_ID", itemslot);
-                button->SetBox(box);
-                Vec3<float> offset( 0*GUI::ITEMSLOT::WIDTH_FOR_SHIP,
-                                   -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
-                                    0);
-                AddChild(button, offset);
-                
-                break;
-            }
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(ENTITY::WEAPON_SLOT1_ID+i), "ENTITY::WEAPON_SLOT_ID");
+        
+        Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
+        Box box(size); 
+        button->SetBox(box);
+
+        Vec3<float> offset((-5+1.1*i)*GUI::ITEMSLOT::WIDTH_FOR_SHIP,
+                           (-1/2+2*1.1)*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+                           0);
+                       
+        AddChild(button, offset);
+    } 
+    
+    {
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(ENTITY::RADAR_SLOT_ID), "ENTITY::RADAR_SLOT_ID");
+        
+        Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
+        Box box(size);
+        button->SetBox(box);
+        
+        Vec3<float> offset( 0*GUI::ITEMSLOT::WIDTH_FOR_SHIP,
+                            -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2,
+                            0);
+        AddChild(button, offset);
+    }
 
         		//case ENTITY::SCANER_SLOT_ID:
         		//{
@@ -244,24 +183,20 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
         			//break;
         		//}
         		
-            case ENTITY::CARGO_SLOT_ID:
-            {
+    for (int i=0; i<otsec_slot_max; i++)
+    {
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(ENTITY::CARGO_SLOT1_ID+i), "ENTITY::CARGO_SLOT_ID");
+        
+        Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
+        Box box(size);
+        button->SetBox(box);
 
-                Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
-                Box box(size*scale);
-                    
-                Vec3<float> offset((otsec_slot_counter-6)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-                                  -3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-                                  0);
-                                  
-                ButtonItemSlot* button = new ButtonItemSlot(ENTITY::CARGO_SLOT_ID, "ENTITY::CARGO_SLOT_ID", itemslot);
-                button->SetBox(box);
-                
-                AddChild(button, offset);
-                otsec_slot_counter++;
-                
-                break;
-            }
+        Vec3<float> offset((-6+i)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+                           -3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+                           0);        
+                           
+        AddChild(button, offset);
+    }
 
         		//case ENTITY::ARTEFACT_SLOT_ID:
         		//{
@@ -277,8 +212,8 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
         			
         			//break;
         		//}
-        }      
-    }
+       // }      
+    //}
         
         // GATE SLOT
         //{
@@ -291,6 +226,79 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
        	//GuiItemSlot gui_gate(gate_slot, quad);	   			   
 	//gui_itemslot_vec.push_back(gui_gate);    		
 	//}
+    
+    
+	gate_slot   = GetNewItemSlotWithoutSaveAbility(ENTITY::GATE_SLOT_ID);
+	
+	allow_full_control = false;
+	block_manual_exit  = false;
+}
+
+GuiVehicle::~GuiVehicle()
+{
+	delete gate_slot;
+}
+
+void GuiVehicle::BindVehicle(Vehicle* vehicle, const Vec2<float>& gui_offset, bool allow_full_control, bool block_manual_exit, float scale)
+{      
+	m_Vehicle = vehicle;  
+	SetOffset(gui_offset);
+	this->allow_full_control = allow_full_control;
+	this->block_manual_exit = block_manual_exit;
+                
+	m_TextureOb_korpus = nullptr;
+
+	CreateKorpusGui(vehicle, scale);
+	CreateItemSlotsGeometry(vehicle, scale);
+}
+
+void GuiVehicle::UnbindVehicle()
+{ 
+    for (auto child : m_Child_vec)
+    {  
+        child->Hide();
+        ((ButtonItemSlot*)child)->SetItemSlot(nullptr);
+    }
+    
+	m_Vehicle = nullptr;
+}
+
+void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
+{
+	m_TextureOb_korpus = vehicle->GetTextureOb();
+
+    float kontur_w, kontur_h;
+    if (m_TextureOb_korpus->GetFrameWidth() > m_TextureOb_korpus->GetFrameHeight())
+    {
+        kontur_w = 500; 
+        kontur_h = m_TextureOb_korpus->GetFrameHeight() * kontur_w / (float)m_TextureOb_korpus->GetFrameWidth();
+    }
+    else
+    {
+        kontur_h = 500; 
+        kontur_w = m_TextureOb_korpus->GetFrameWidth() * kontur_h / (float)m_TextureOb_korpus->GetFrameHeight();
+    }               
+
+    rect_korpus.Set(-kontur_w/2 * scale, -kontur_h/2 * scale, kontur_w * scale, kontur_h * scale); 
+}      
+  
+void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
+{
+    for (const auto itemslot : vehicle->slot_total_vec)
+    { 
+        int request = itemslot->GetSubTypeId();
+        if ((request == ENTITY::WEAPON_SLOT_ID) or (request == ENTITY::CARGO_SLOT_ID))
+        {
+            request = itemslot->GetSubSubTypeId(); 
+        }         
+    
+        BaseGuiElement* child = GetGuiElement(GUI::getEquivalent(request));
+        if (child)
+        {
+            child->Show();
+            ((ButtonItemSlot*)child)->SetItemSlot(itemslot);
+        }
+    }
 } 
 
 bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
@@ -411,7 +419,7 @@ void GuiVehicle::RenderVehicle(const MouseData& data_mouse, int mark_slot_subtyp
 {
 	glPushMatrix();
 		glTranslatef(GetOffset().x, GetOffset().y, 0);
-		drawTexturedRect(textureOb_korpus, rect_korpus, -1.0);
+		drawTexturedRect(m_TextureOb_korpus, rect_korpus, -1.0);
 		RenderSlots();
 		if (mark_slot_subtype_id != NONE_ID)
 		{
@@ -456,34 +464,10 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, int mark_
 }
 
 /*virtual final*/
-void GuiVehicle::UpdateUnique(Player* player)
-{
-    const BaseSpaceEntity* scan_target = player->GetNpc()->GetScanTarget();
-    if (vehicle == nullptr)
-    {    
-        if (scan_target)
-        {
-            if (scan_target->GetTypeId() == ENTITY::VEHICLE_ID)
-            {
-                BindVehicle((Vehicle*)scan_target, /*offset=*/Vec2<float>(0, 0), /*full_control_on*/true);
-                return;
-            }
-        }
-    }
-     
-    if (!scan_target)
-    {               
-        UnbindVehicle();
-    }
-}
-
-/*virtual final*/
 void GuiVehicle::RenderUnique() const
 {
-    if (vehicle != nullptr)
-    {
-        drawTexturedRect(textureOb_korpus, rect_korpus, -1.0);
-    }
+    //drawTexturedRect(m_TextureOb_korpus, rect_korpus, -1.0);
+
 	//RenderSlots();
 	//if (mark_slot_subtype_id != NONE_ID)
 	//{

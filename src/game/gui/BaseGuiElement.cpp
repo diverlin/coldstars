@@ -21,13 +21,13 @@
 #include <render/Render.hpp>
 #include <common/Logger.hpp>
 
-std::map<int, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
+std::map<GUI::eTYPE, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
 
-BaseGuiElement::BaseGuiElement(int subtype_id, const std::string info, TextureOb* textureOb, BaseGuiElement* parent):
+BaseGuiElement::BaseGuiElement(GUI::eTYPE subtype_id, const std::string info, TextureOb* textureOb, BaseGuiElement* parent):
 m_Subtype_id(subtype_id),
 m_Info(info),
 m_TextureOb(textureOb),
-m_Parent(parent),
+//m_Parent(parent),
 m_Show(true),
 m_Root(true),
 m_Lock(false),
@@ -44,9 +44,9 @@ BaseGuiElement::~BaseGuiElement()
 	}
 }	
       	
-BaseGuiElement* BaseGuiElement::GetGuiElement(int request_subtype_id) const
+BaseGuiElement* BaseGuiElement::GetGuiElement(GUI::eTYPE request_subtype_id) const
 {
-	std::map<int, BaseGuiElement*>::const_iterator it = static_gui_element_map.find(request_subtype_id);
+	std::map<GUI::eTYPE, BaseGuiElement*>::const_iterator it = static_gui_element_map.find(request_subtype_id);
 	if (it != static_gui_element_map.cend())
 	{
 		return it->second;
@@ -55,7 +55,7 @@ BaseGuiElement* BaseGuiElement::GetGuiElement(int request_subtype_id) const
 	return nullptr;
 }   
 	
-void BaseGuiElement::PressEventOnGuiElement(int subtype_id)
+void BaseGuiElement::PressEventOnGuiElement(GUI::eTYPE subtype_id)
 {
 	BaseGuiElement* button = GetGuiElement(subtype_id);
 	if (button != nullptr)
@@ -71,7 +71,7 @@ void BaseGuiElement::PressEventOnGuiElement(int subtype_id)
 
 }	
 
-void BaseGuiElement::ResetStateEventOnGuiElement(int subtype_id)
+void BaseGuiElement::ResetStateEventOnGuiElement(GUI::eTYPE subtype_id)
 {
 	BaseGuiElement* button = GetGuiElement(subtype_id);
 	if (button != nullptr)
@@ -95,7 +95,7 @@ void BaseGuiElement::ResetState()
 
 void BaseGuiElement::AddChild(BaseGuiElement* child, const Vec3<float>& offset) 
 { 
-	child->SetParent(this);
+	//child->SetParent(this);
 	child->SetOffset(offset);
 	child->SetRoot(false);
 	

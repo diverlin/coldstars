@@ -25,13 +25,15 @@ class ItemSlot;
 class ButtonItemSlot : public BaseButton
 {
 	public:
-        ButtonItemSlot(int subtype_id, const std::string& info, ItemSlot* itemslot)
+        ButtonItemSlot(GUI::eTYPE subtype_id, const std::string& info)
         :
         BaseButton(subtype_id, info), 
-        m_ItemSlot(itemslot) 
+        m_ItemSlot(nullptr) 
         {}
                
         virtual ~ButtonItemSlot() final {};  
+        
+        void SetItemSlot(ItemSlot* itemslot) { m_ItemSlot = itemslot; }
 
         virtual void PressEvent(Player*) final;
         

@@ -52,6 +52,7 @@
 #include "gui/ButtonTrigger.hpp"
 #include "gui/GuiActions.hpp"
 
+#include "../pureTest/pureTest.cpp"
 #include "../pureTest/threadTest.cpp"
 
 enum { NORMAL_RUNSCENARIO, TEST_PARTICLES_RUNSCENARIO, TEST_TEXT_RUNSCENARIO };
@@ -60,6 +61,8 @@ int main()
 {
 	//runThreadTest();
 	
+    //pureTest4();
+    
 	init();        
 	GameDate::Instance().SetDate(1,1,4000);
         

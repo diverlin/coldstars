@@ -142,7 +142,8 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
         int otsec_num = vehicle->GetKorpusData().slot_otsec_num;
     	for (int i=0; i<otsec_num; i++)
     	{
-         	ItemSlot* otsec_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);   
+         	ItemSlot* otsec_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID); 
+            otsec_slot->SetSubSubTypeId(ENTITY::CARGO_SLOT1_ID + i);   
          	vehicle->AddItemSlot(otsec_slot);         
     	}
 }

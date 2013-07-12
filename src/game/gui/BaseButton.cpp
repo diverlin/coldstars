@@ -24,7 +24,7 @@
 #include "../render/Screen.hpp"
 #include "../render/AnimationEffect2D.hpp"
 
-BaseButton::BaseButton(int subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb):BaseGuiElement(subtype_id, info, textureOb)
+BaseButton::BaseButton(GUI::eTYPE subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb):BaseGuiElement(subtype_id, info, textureOb)
 {
 	m_TextureOb_additional = nullptr;
 	m_TextureOb_mask = nullptr;

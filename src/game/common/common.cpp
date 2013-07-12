@@ -22,6 +22,62 @@
 #include "constants.hpp"
 #include "Logger.hpp"
 
+namespace GUI
+{
+    eTYPE getEquivalent(int val)
+    {
+        switch(val)
+        {
+            case ENTITY::CARGO_SLOT_ID:     { return eTYPE::CARGO_SLOT_ID; break; }
+            case ENTITY::CARGO_SLOT1_ID:    { return eTYPE::CARGO_SLOT1_ID; break; }             
+            case ENTITY::CARGO_SLOT2_ID:    { return eTYPE::CARGO_SLOT2_ID; break; }  
+            case ENTITY::CARGO_SLOT3_ID:    { return eTYPE::CARGO_SLOT3_ID; break; }  
+            case ENTITY::CARGO_SLOT4_ID:    { return eTYPE::CARGO_SLOT4_ID; break; }
+            case ENTITY::CARGO_SLOT5_ID:    { return eTYPE::CARGO_SLOT5_ID; break; }
+            case ENTITY::CARGO_SLOT6_ID:    { return eTYPE::CARGO_SLOT6_ID; break; }
+            case ENTITY::CARGO_SLOT7_ID:    { return eTYPE::CARGO_SLOT7_ID; break; }
+            case ENTITY::CARGO_SLOT8_ID:    { return eTYPE::CARGO_SLOT8_ID; break; }
+            case ENTITY::CARGO_SLOT9_ID:    { return eTYPE::CARGO_SLOT9_ID; break; }
+            case ENTITY::CARGO_SLOT10_ID:   { return eTYPE::CARGO_SLOT10_ID; break; }
+            case ENTITY::CARGO_SLOT11_ID:   { return eTYPE::CARGO_SLOT11_ID; break; }
+            case ENTITY::CARGO_SLOT12_ID:   { return eTYPE::CARGO_SLOT12_ID; break; }
+            case ENTITY::CARGO_SLOT13_ID:   { return eTYPE::CARGO_SLOT13_ID; break; }
+            case ENTITY::CARGO_SLOT14_ID:   { return eTYPE::CARGO_SLOT14_ID; break; }
+            case ENTITY::CARGO_SLOT15_ID:   { return eTYPE::CARGO_SLOT15_ID; break; }
+            case ENTITY::CARGO_SLOT16_ID:   { return eTYPE::CARGO_SLOT16_ID; break; }
+            case ENTITY::CARGO_SLOT17_ID:   { return eTYPE::CARGO_SLOT17_ID; break; }
+            case ENTITY::CARGO_SLOT18_ID:   { return eTYPE::CARGO_SLOT18_ID; break; }
+                                    
+            case ENTITY::WEAPON_SLOT_ID:    { return eTYPE::WEAPON_SLOT_ID; break; }
+            case ENTITY::WEAPON_SLOT1_ID:   { return eTYPE::WEAPON_SLOT1_ID; break; }
+            case ENTITY::WEAPON_SLOT2_ID:   { return eTYPE::WEAPON_SLOT2_ID; break; }
+            case ENTITY::WEAPON_SLOT3_ID:   { return eTYPE::WEAPON_SLOT3_ID; break; }
+            case ENTITY::WEAPON_SLOT4_ID:   { return eTYPE::WEAPON_SLOT4_ID; break; }
+            case ENTITY::WEAPON_SLOT5_ID:   { return eTYPE::WEAPON_SLOT5_ID; break; }
+            case ENTITY::WEAPON_SLOT6_ID:   { return eTYPE::WEAPON_SLOT6_ID; break; }
+            case ENTITY::WEAPON_SLOT7_ID:   { return eTYPE::WEAPON_SLOT7_ID; break; }
+            case ENTITY::WEAPON_SLOT8_ID:   { return eTYPE::WEAPON_SLOT8_ID; break; }    
+            case ENTITY::WEAPON_SLOT9_ID:   { return eTYPE::WEAPON_SLOT9_ID; break; }
+            
+            case ENTITY::DRIVE_SLOT_ID:   { return eTYPE::DRIVE_SLOT_ID; break; }
+            case ENTITY::RADAR_SLOT_ID:   { return eTYPE::RADAR_SLOT_ID; break; }
+            case ENTITY::BAK_SLOT_ID:   { return eTYPE::BAK_SLOT_ID; break; }
+            case ENTITY::ENERGIZER_SLOT_ID:   { return eTYPE::ENERGIZER_SLOT_ID; break; }
+            case ENTITY::PROTECTOR_SLOT_ID:   { return eTYPE::PROTECTOR_SLOT_ID; break; }
+            case ENTITY::DROID_SLOT_ID:   { return eTYPE::DROID_SLOT_ID; break; }
+            case ENTITY::FREEZER_SLOT_ID:   { return eTYPE::FREEZER_SLOT_ID; break; }
+            case ENTITY::GRAPPLE_SLOT_ID:   { return eTYPE::GRAPPLE_SLOT_ID; break; }
+            case ENTITY::SCANER_SLOT_ID:   { return eTYPE::SCANER_SLOT_ID; break; }
+
+            case ENTITY::ARTEFACT_SLOT_ID:   { return eTYPE::ARTEFACT_SLOT_ID; break; }
+
+            //case ENTITY::GATE_SLOT_ID:   { return eTYPE::GATE_SLOT_ID; break; }
+            //case ENTITY::REPAIR_SLOT_ID:   { return eTYPE::REPAIR_SLOT_ID; break; }
+            //case ENTITY::CHARGE_SLOT_ID:   { return eTYPE::CHARGE_SLOT_ID; break; }                        
+        }
+    }
+}
+    
 int getObjectSize(int w, int h)
 {
 	int area = w*h;

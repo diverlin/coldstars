@@ -28,9 +28,8 @@
 #include "../pilots/Npc.hpp"
 
 GuiRadar::GuiRadar()
-{		
-
-	m_Subtype_id = GUI::BUTTON::GUI_RADAR_ID;
+{
+	m_Subtype_id = GUI::eTYPE::GUI_RADAR_ID;
 	
 	textureOb_background 	= GuiTextureObCollector::Instance().radar_background;
 	textureOb_bar	 		= GuiTextureObCollector::Instance().radar_bar;

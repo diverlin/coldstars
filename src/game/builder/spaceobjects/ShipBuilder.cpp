@@ -113,6 +113,10 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
 	data_korpus.slot_weapon_num   = weapons_num;  
 	data_korpus.slot_artefact_num = getRandInt(0, 4);  
         data_korpus.slot_otsec_num    = getRandInt(6, 8) * otsec_rate;
+        if (data_korpus.slot_otsec_num > OTSEC_SLOT_MAX_NUM)
+        {
+            data_korpus.slot_otsec_num = OTSEC_SLOT_MAX_NUM;
+        }
         
         int size_threshold = 2; 
         data_korpus.draw_turrels = false;

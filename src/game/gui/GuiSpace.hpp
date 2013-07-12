@@ -45,12 +45,12 @@ class GuiSpace : public BaseGuiElement
 		void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
 		void UnbindSharedGuis();
 		
-        virtual void UpdateUnique(Player*) final;
+        virtual void UpdateUnique(Player*) override final;
                                         
 		void Resize(int, int);
 		void ButtonsAction(Player*) const;
 		
-		virtual void RenderUnique() const final;
+		virtual void RenderUnique() const override final;
 				
 		void RenderText(const Vec2<float>&) const;
 		

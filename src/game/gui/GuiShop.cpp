@@ -104,7 +104,7 @@ void GuiShop::UnbindShop()
 }
         
 void GuiShop::UpdateLables() const
-{
+{   /*
 	for (auto &gui_element : m_Child_vec)
 	{	
 		switch(gui_element->GetSubTypeId())
@@ -145,7 +145,7 @@ void GuiShop::UpdateLables() const
 	                	break;
         		}
         	}
-        }
+        }  */
 }
         
 void GuiShop::ButtonsAction(Slider& slider)
