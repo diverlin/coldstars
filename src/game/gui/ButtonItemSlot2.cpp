@@ -22,47 +22,57 @@
 /*virtual final*/
 void ButtonItemSlot2::PressEvent(Player* player)
 {
-    if (GetPressed() == true)
+    if (m_ItemSlot)
     {
-        if (m_ItemSlot->GetSelected() == false)
+        
+        if (GetPressed() == true)
         {
-            m_ItemSlot->SelectEvent();
+            if (m_ItemSlot->GetSelected() == false)
+            {
+                m_ItemSlot->SelectEvent();
+            }
+        }
+        else
+        {
+            if (m_ItemSlot->GetSelected() == true)
+            {
+                m_ItemSlot->DeselectEvent();
+            }
+        }    
+            
+        if (m_Lock == false)
+        {
+            if (m_Pressed == false)
+            {
+                m_Pressed = true;
+                ShadeOn();
+            }
+            else
+            {
+                m_Pressed = false;
+                ShadeOff();
+            }
         }
     }
-    else
-    {
-        if (m_ItemSlot->GetSelected() == true)
-        {
-            m_ItemSlot->DeselectEvent();
-        }
-    }    
-        
-	if (m_Lock == false)
-	{
-		if (m_Pressed == false)
-		{
-			m_Pressed = true;
-			ShadeOn();
-		}
-		else
-		{
-			m_Pressed = false;
-			ShadeOff();
-		}
-	}
 }
 
 /*virtual final*/	
 void ButtonItemSlot2::UpdateUnique(Player* player)
 {
-	if ( (m_Lock == false) and (m_Pressed == false) )
-	{
-		m_Alpha < 1.0f ? m_Alpha += 0.01f : m_Alpha = 1.0f;
-	}
+    if (m_ItemSlot)
+    {
+        if ( (m_Lock == false) and (m_Pressed == false) )
+        {
+            m_Alpha < 1.0f ? m_Alpha += 0.01f : m_Alpha = 1.0f;
+        }
+    }
 }
 
 /*virtual final*/
 void ButtonItemSlot2::RenderUnique() const 
 {
-       m_ItemSlot->Render(m_Box, Vec3<float>(0,0,0), false);
+    if (m_ItemSlot)
+    {
+        m_ItemSlot->Render(m_Box, Vec3<float>(0,0,0), false);
+    }
 }        

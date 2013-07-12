@@ -27,62 +27,62 @@
 
 ItemSlot* GetNewItemSlot(int subtype_id, unsigned long int id)
 {
-       	if (id == NONE_ID)
-	{
-		id = EntityIdGenerator::Instance().GetNextId();
-	} 
-
-	ItemSlot* item_slot = nullptr;
+    if (id == NONE_ID)
+    {
+        id = EntityIdGenerator::Instance().GetNextId();
+    } 
+    
+    ItemSlot* item_slot = nullptr;
+    try 
+    { 
+        item_slot = new ItemSlot(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(item_slot);
+    
+    TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEM_SLOT_ID);
+    item_slot->SetSubTypeId(subtype_id);
+    item_slot->SetTextureOb(texOb_slot);
+    
+    if (subtype_id == ENTITY::WEAPON_SLOT_ID)
+    {
+        Turrel* turrel = nullptr;
+        TextureOb* texOb_turrel = TextureManager::Instance().GetRandomTextureOb(TEXTURE::TURREL_ID); 
         try 
         { 
-        	item_slot = new ItemSlot(id);
+                turrel = new Turrel(item_slot); 
         }
         catch(std::bad_alloc)
         {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+            Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
-        
-       	EntityManager::Instance().RegisterEntity(item_slot);
-      	
-        TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEM_SLOT_ID);
-	item_slot->SetSubTypeId(subtype_id);
-    	item_slot->SetTextureOb(texOb_slot);
-        
-        if (subtype_id == ENTITY::WEAPON_SLOT_ID)
-        {
-        	Turrel* turrel = nullptr;
-                TextureOb* texOb_turrel = TextureManager::Instance().GetRandomTextureOb(TEXTURE::TURREL_ID); 
-                try 
-        	{ 
-                	turrel = new Turrel(item_slot); 
-        	}
-        	catch(std::bad_alloc)
-        	{
-        		Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        	}
-        
-                turrel->BindData2D(texOb_turrel);       
-                item_slot->SetTurrel(turrel);
-        }
-        
-        return item_slot;
+    
+            turrel->BindData2D(texOb_turrel);       
+            item_slot->SetTurrel(turrel);
+    }
+    
+    return item_slot;
 }
 
 ItemSlot* GetNewItemSlotWithoutSaveAbility(int subtype_id)
 {
 	ItemSlot* item_slot = nullptr;
-        try 
-        { 
-        	item_slot = new ItemSlot(NONE_ID);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-      	
-        TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEM_SLOT_ID);
-	item_slot->SetSubTypeId(subtype_id);
-    	item_slot->SetTextureOb(texOb_slot);
-      
-        return item_slot;
+    try 
+    { 
+        item_slot = new ItemSlot(NONE_ID);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation");
+    }
+    
+    TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEM_SLOT_ID);
+    item_slot->SetSubTypeId(subtype_id);
+    item_slot->SetTextureOb(texOb_slot);
+    
+    return item_slot;
 }

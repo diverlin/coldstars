@@ -796,7 +796,7 @@ void StarSystem::FindRenderVisibleEntities_c(Player* player)
 
 void StarSystem::FindRadarVisibleEntities_c(Player* player)
 {	
-	GuiRadar& gui_radar = *(GuiRadar*)GuiManager::Instance().GetGuiElement(GUI::BUTTON::GUI_RADAR_ID);
+	GuiRadar& gui_radar = *(GuiRadar*)GuiManager::Instance().GetGuiElement(GUI::eTYPE::GUI_RADAR_ID);
 	const Vehicle& vehicle = *player->GetNpc()->GetVehicle();
 	gui_radar.ResetData();
 	

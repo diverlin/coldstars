@@ -25,7 +25,7 @@ class Vehicle;
 class GuiVehicle2 : public BaseGuiElement
 {
    	public:
-        GuiVehicle2(int subtype_id):BaseGuiElement(subtype_id), m_Vehicle(nullptr) {}
+        GuiVehicle2(GUI::eTYPE subtype_id):BaseGuiElement(subtype_id), m_Vehicle(nullptr) {}
         ~GuiVehicle2() {}
         
         virtual void UpdateUnique(Player*) final;

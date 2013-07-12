@@ -24,14 +24,16 @@
 #include <vector>
 
 class Player;
-#include "../common/Box.hpp" // to be removed
-#include "../common/rect.hpp" // to be removed
-#include "../resources/TextureManager.hpp"
+#include <common/Box.hpp> // to be removed
+#include <common/rect.hpp> // to be removed
+#include <resources/TextureManager.hpp>
+#include <common/constants.hpp>
 
+          
 class BaseGuiElement
 {
 	public:
-		BaseGuiElement(int subtype_id=0, const std::string info="", TextureOb* textureOb=nullptr, BaseGuiElement* parent=nullptr);
+		BaseGuiElement(GUI::eTYPE subtype_id=GUI::eTYPE::NONE_ID, const std::string info="", TextureOb* textureOb=nullptr, BaseGuiElement* parent=nullptr);
 		~BaseGuiElement();
 		
 		//void SetSubTypeId(int subtype_id) { this->subtype_id = subtype_id; } 
@@ -49,12 +51,12 @@ class BaseGuiElement
 		void SetOffset(const Vec3<float>& offset) { m_Offset = offset; }	// depr				
 		void SetOffset(const Vec2<float>& offset) { m_Offset.Set(offset.x, offset.y, 0); }	// depr	
 		
-		void SetParent(BaseGuiElement* parent) { m_Parent = parent; }
+		//void SetParent(BaseGuiElement* parent) { m_Parent = parent; }
 		
 		void SetBox(const Box& box) { m_Box = box; }
 	
-		int GetTypeId() const { return m_Type_id; }
-		int GetSubTypeId() const { return m_Subtype_id; }
+		GUI::eTYPE GetTypeId() const { return m_Type_id; }
+		GUI::eTYPE GetSubTypeId() const { return m_Subtype_id; }
 					
 		const Vec3<float>& GetOffset() const { return m_Offset; } // depr
 		const Box& GetBox() const { return m_Box; }
@@ -63,11 +65,11 @@ class BaseGuiElement
         bool GetLock() const { return m_Lock; }
         bool GetPressed() const { return m_Pressed; }
             
-        BaseGuiElement* GetGuiElement(int request_subtype_id) const;                     
+        BaseGuiElement* GetGuiElement(GUI::eTYPE) const;                     
 			
 		BaseGuiElement* UpdateMouseInteraction(const Vec2<float>&);
 		
-		void AddChild(BaseGuiElement* child, const Vec3<float>& offset);
+		void AddChild(BaseGuiElement*, const Vec3<float>&);
 
 		void Show() { m_Show = true; }
 		void Hide() { m_Show = false; }
@@ -80,8 +82,8 @@ class BaseGuiElement
 		virtual void RenderInfo() const {};
 				
 	protected:
-		int m_Type_id;
-		int m_Subtype_id;
+		GUI::eTYPE m_Type_id;
+		GUI::eTYPE m_Subtype_id;
 		
 		bool m_Lock;
 		bool m_Pressed;
@@ -95,11 +97,11 @@ class BaseGuiElement
 		std::string m_Info; 
 		std::string m_Label; 
 		
-		BaseGuiElement* m_Parent;
+		//BaseGuiElement* m_Parent;
 		std::vector<BaseGuiElement*> m_Child_vec;
 
-		void PressEventOnGuiElement(int);
-		void ResetStateEventOnGuiElement(int);			
+		void PressEventOnGuiElement(GUI::eTYPE);
+		void ResetStateEventOnGuiElement(GUI::eTYPE);			
 
 		void UpdateGeometry(const Vec3<float>&, const Vec3<float>&);	
         
@@ -113,7 +115,7 @@ class BaseGuiElement
 		Vec3<float> m_Offset;
 		Vec3<float> m_Scale;
 		
-		static std::map<int, BaseGuiElement*> static_gui_element_map;
+		static std::map<GUI::eTYPE, BaseGuiElement*> static_gui_element_map;
 		
 	friend class GuiManager;
 };

@@ -23,16 +23,19 @@
 /*virtual final*/
 void ButtonItemSlot::PressEvent(Player* player)
 {
-    if ((player->GetCursor().GetItemSlot()->GetItem() == nullptr) and (m_ItemSlot->GetItem() != nullptr))
+    if (m_ItemSlot)
     {
-        player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);
-        return;
-    }
-
-    if ((player->GetCursor().GetItemSlot()->GetItem() != nullptr) and (m_ItemSlot->GetItem() == nullptr))
-    {
-        player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);
-        return;
+        if ((player->GetCursor().GetItemSlot()->GetItem() == nullptr) and (m_ItemSlot->GetItem() != nullptr))
+        {
+            player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);
+            return;
+        }
+    
+        if ((player->GetCursor().GetItemSlot()->GetItem() != nullptr) and (m_ItemSlot->GetItem() == nullptr))
+        {
+            player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);
+            return;
+        }
     }
         
 }
@@ -40,5 +43,9 @@ void ButtonItemSlot::PressEvent(Player* player)
 /*virtual final*/
 void ButtonItemSlot::RenderUnique() const 
 {
+    if (m_ItemSlot)
+    {
        m_ItemSlot->Render(m_Box, Vec3<float>(0,0,0), false);
-}        
+    }
+}
+        

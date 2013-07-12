@@ -20,18 +20,18 @@
 #define GUIVEHICLE_H
 
 #include "BaseGuiElement.hpp"
-#include "../docking/Store.hpp"
-#include "../common/constants.hpp"
+#include <docking/Store.hpp>
+#include <common/constants.hpp>
 class Vehicle;
-#include "MouseData.hpp"
+#include "MouseData.hpp" // to be removed
 
 class GuiVehicle : public BaseGuiElement
 {
     public:
-        GuiVehicle();
-        ~GuiVehicle();
+        GuiVehicle(GUI::eTYPE);
+        virtual ~GuiVehicle();
         
-        Vehicle* GetVehicle() const { return vehicle; };
+        Vehicle* GetVehicle() const { return m_Vehicle; };
         bool GetBlockManualExit() const { return block_manual_exit; };
         bool GetAllowFullControl() const { return allow_full_control; };
                         
@@ -41,8 +41,7 @@ class GuiVehicle : public BaseGuiElement
         bool UpdateMouseInteraction(const MouseData&);   
         bool UpdateMouseInteractionInStore(const MouseData&, Store*); 
         
-        virtual void UpdateUnique(Player*) final;
-        virtual void RenderUnique() const final;
+        virtual void RenderUnique() const override final;
         
         void RenderVehicle(const MouseData&, int mark_slot_subtype_id = NONE_ID) const;
     
@@ -51,10 +50,10 @@ class GuiVehicle : public BaseGuiElement
         bool allow_full_control;
         
         Rect rect_korpus; 
-        TextureOb* textureOb_korpus;
+        TextureOb* m_TextureOb_korpus;
             
         ItemSlot* gate_slot;
-        Vehicle* vehicle;
+        Vehicle* m_Vehicle;
             
         void RenderSlots() const;
         void RenderMarksForEmptySlots(const MouseData&, int) const;  

@@ -17,8 +17,9 @@
 */
 
 #include "GuiVehicle2.hpp"
-#include "ButtonItemSlot.hpp"
+#include "ButtonItemSlot2.hpp"
 #include "../common/myStr.hpp"
+#include "../common/common.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../slots/ItemSlot.hpp"
@@ -65,7 +66,7 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
             Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
             Box box(size*scale);
                                 
-			ButtonItemSlot* button = new ButtonItemSlot(button_subtype_id, getTypeStr(button_subtype_id), vehicle->slot_total_vec[i]);  
+			ButtonItemSlot2* button = new ButtonItemSlot2(GUI::getEquivalent(button_subtype_id), getTypeStr(button_subtype_id), vehicle->slot_total_vec[i]);  
             button->SetBox(box);
 
             float zpos = -2;
