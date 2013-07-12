@@ -25,12 +25,15 @@ class ItemSlot;
 class ButtonItemSlot : public BaseButton
 {
 	public:
-        ButtonItemSlot(int subtype_id, const std::string& info, ItemSlot* itemslot):BaseButton(subtype_id, info) { m_ItemSlot = itemslot; }
+        ButtonItemSlot(int subtype_id, const std::string& info, ItemSlot* itemslot)
+        :
+        BaseButton(subtype_id, info), 
+        m_ItemSlot(itemslot) 
+        {}
                
         virtual ~ButtonItemSlot() final {};  
 
         virtual void PressEvent(Player*) final;
-        virtual void UpdateUnique(Player*) final;
         
         virtual void RenderUnique() const final; 
         

@@ -15,30 +15,31 @@
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-             
-#include "ButtonItemSlot.hpp"
-#include <slots/ItemSlot.hpp>
-#include <pilots/Player.hpp>
-    
-/*virtual final*/
-void ButtonItemSlot::PressEvent(Player* player)
-{
-    if ((player->GetCursor().GetItemSlot()->GetItem() == nullptr) and (m_ItemSlot->GetItem() != nullptr))
-    {
-        player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);
-        return;
-    }
 
-    if ((player->GetCursor().GetItemSlot()->GetItem() != nullptr) and (m_ItemSlot->GetItem() == nullptr))
-    {
-        player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);
-        return;
-    }
+#ifndef BUTTONITEMSLOT2_HPP
+#define BUTTONITEMSLOT2_HPP
+
+#include "BaseButton.hpp"
+class ItemSlot;
+
+class ButtonItemSlot2 : public BaseButton
+{
+	public:
+        ButtonItemSlot2(int subtype_id, const std::string& info, ItemSlot* itemslot)
+        :
+        BaseButton(subtype_id, info), 
+        m_ItemSlot(itemslot) 
+        {}
+               
+        virtual ~ButtonItemSlot2() final {};  
+
+        virtual void PressEvent(Player*) final;
+        virtual void UpdateUnique(Player*) final;
         
-}
+        virtual void RenderUnique() const final; 
+        
+	private:
+        ItemSlot* m_ItemSlot;
+};
 
-/*virtual final*/
-void ButtonItemSlot::RenderUnique() const 
-{
-       m_ItemSlot->Render(m_Box, Vec3<float>(0,0,0), false);
-}        
+#endif

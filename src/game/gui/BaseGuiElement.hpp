@@ -63,9 +63,8 @@ class BaseGuiElement
         bool GetLock() const { return m_Lock; }
         bool GetPressed() const { return m_Pressed; }
             
-        BaseGuiElement* GetGuiElement(int request_subtype_id) const;
-                    
-		void UpdateGeometry(const Vec3<float>&, const Vec3<float>&);					
+        BaseGuiElement* GetGuiElement(int request_subtype_id) const;                     
+			
 		BaseGuiElement* UpdateMouseInteraction(const Vec2<float>&);
 		
 		void AddChild(BaseGuiElement* child, const Vec3<float>& offset);
@@ -102,6 +101,8 @@ class BaseGuiElement
 		void PressEventOnGuiElement(int);
 		void ResetStateEventOnGuiElement(int);			
 
+		void UpdateGeometry(const Vec3<float>&, const Vec3<float>&);	
+        
 		virtual void UpdateUnique(Player*);		
 		void UpdateCommon(Player*);
         				
