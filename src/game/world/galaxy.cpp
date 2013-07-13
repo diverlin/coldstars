@@ -28,8 +28,8 @@
 
 Galaxy::Galaxy(int id)
 {
-	data_id.id = id;
-	data_id.type_id =  ENTITY::eTYPE::GALAXY_ID;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::GALAXY_ID);  
 }
 
 Galaxy::~Galaxy()

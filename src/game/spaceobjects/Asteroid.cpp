@@ -32,8 +32,8 @@
 
 Asteroid::Asteroid(int id)
 {   
-	data_id.id = id;
-	data_id.type_id = ENTITY::eTYPE::ASTEROID_ID;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::ASTEROID_ID);
 	
    	mass  = getRandInt(10, 30);
 }
@@ -90,10 +90,10 @@ void Asteroid::UpdateInfo()
 {   
 	info.clear();
 
-    	info.addTitleStr("ASTEROID");
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
-    	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
-    	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
+    info.addTitleStr("ASTEROID");
+    info.addNameStr("id/ss_id:");    info.addValueStr(int2str(GetId()) + " / " + int2str(starsystem->GetId()));
+    info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
+    info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 	info.addNameStr("speed x 100:"); info.addValueStr(int2str(int(data_planet.speed*100)));
 	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 }     

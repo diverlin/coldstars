@@ -37,8 +37,8 @@ store(nullptr),
 shop(nullptr),
 goverment(nullptr)    
 {
-	data_id.id = id;
-	data_id.type_id = ENTITY::eTYPE::KOSMOPORT_ID;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::KOSMOPORT_ID);
 }
 
 /* virtual */
@@ -92,16 +92,16 @@ bool Kosmoport::GetPermissionToLand() const
 /* virtual */
 bool Kosmoport::AddVehicle(Vehicle* vehicle)
 {        
-        vehicle->SetPlaceTypeId(data_id.type_id); 
-        angar->AddVehicle(vehicle);  
-        
-        vehicle->SetLand(this);        
-        if (vehicle->GetStarSystem() == nullptr) // used if vehicle added directly after creation
-        {
-                vehicle->SetStarSystem(owner->GetStarSystem());
-        }
-              
-        return true;
+    vehicle->SetPlaceTypeId(GetTypeId()); 
+    angar->AddVehicle(vehicle);  
+    
+    vehicle->SetLand(this);        
+    if (vehicle->GetStarSystem() == nullptr) // used if vehicle added directly after creation
+    {
+            vehicle->SetStarSystem(owner->GetStarSystem());
+    }
+          
+    return true;
 }
 
 //* virtual */

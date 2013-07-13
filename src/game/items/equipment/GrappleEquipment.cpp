@@ -28,13 +28,14 @@
 #include "../../render/Render.hpp"
 
 GrappleEquipment::GrappleEquipment(int id)
+:
+strength_orig(0),
+radius_orig(0),
+speed_orig(0)
 {
-        data_id.id         = id;
-        data_id.subtype_id = ENTITY::eTYPE::GRAPPLE_EQUIPMENT_ID;
-        
-    	strength_orig   = 0;
-    	radius_orig     = 0;
-        speed_orig      = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID);  
+    SetSubTypeId(ENTITY::eTYPE::GRAPPLE_EQUIPMENT_ID);
 }
 
 /* virtual */

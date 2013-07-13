@@ -58,11 +58,11 @@ Player::Player(int id)
 npc(nullptr),
 starsystem(nullptr)        
 { 
-    	data_id.id         = id;
-    	data_id.type_id    = ENTITY::eTYPE::PLAYER_ID;
-    	
-    	cursor.SetPlayer(this);
-    	GuiManager::Instance().SetPlayer(this);
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::PLAYER_ID);
+    
+    cursor.SetPlayer(this);
+    GuiManager::Instance().SetPlayer(this);
 }
     
 Player::~Player()
@@ -1226,7 +1226,7 @@ void Player::RenderCollisionRadiusOfVisibleObjects() const
 
 void Player::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	std::string root = "player."+int2str(data_id.id)+".";
+	std::string root = "player."+int2str(GetId())+".";
 	
 	SaveDataUniqueBase(save_ptree, root);
 	SaveDataUniquePlayer(save_ptree, root);	

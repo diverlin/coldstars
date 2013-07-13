@@ -16,7 +16,6 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #ifndef BASE_HPP
 #define BASE_HPP
 
@@ -30,14 +29,16 @@ class Base
 		virtual ~Base();
 
 		virtual void PutChildsToGarbage() const = 0;
-
-		void SetSubTypeId(ENTITY::eTYPE subtype_id)       { data_id.subtype_id = subtype_id; }
-		void SetSubSubTypeId(ENTITY::eTYPE subsubtype_id) { data_id.subsubtype_id = subsubtype_id; }
+    
+        void SetId(unsigned long int id)                    { data_id.id = id; }
+        void SetTypeId(ENTITY::eTYPE type_id)               { data_id.type_id = type_id; }
+		void SetSubTypeId(ENTITY::eTYPE subtype_id)         { data_id.subtype_id = subtype_id; }
+		void SetSubSubTypeId(ENTITY::eTYPE subsubtype_id)   { data_id.subsubtype_id = subsubtype_id; }
 		
-		unsigned long int GetId()        	const { return data_id.id; }   
+		unsigned long int GetId()       const { return data_id.id; }   
 		ENTITY::eTYPE GetTypeId()   	const { return data_id.type_id; }
 		ENTITY::eTYPE GetSubTypeId() 	const { return data_id.subtype_id; }
-		ENTITY::eTYPE GetSubSubTypeId() 	const { return data_id.subsubtype_id; }
+		ENTITY::eTYPE GetSubSubTypeId() const { return data_id.subsubtype_id; }
 					
         std::string GetDataTypeString() const;
 
@@ -46,11 +47,12 @@ class Base
 		virtual void ResolveData() = 0;
 		
 	protected:
-		IdData data_id;
-		
 		void SaveDataUniqueBase(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueBase(const boost::property_tree::ptree&);
 		void ResolveDataUniqueBase();
+
+    private:
+		IdData data_id;    
 };
 
 #endif 

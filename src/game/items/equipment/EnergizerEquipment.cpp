@@ -25,15 +25,14 @@
 #include "../../slots/ItemSlot.hpp"
 #include "../../spaceobjects/Vehicle.hpp"
 
-EnergizerEquipment::EnergizerEquipment(int id)
+EnergizerEquipment::EnergizerEquipment(int id):
+energy_max_orig(0),
+restoration_orig(0),
+energy(0)    
 {
-        data_id.id         = id;
-        data_id.subtype_id = ENTITY::eTYPE::ENERGIZER_EQUIPMENT_ID;
-               
-    	energy_max_orig  = 0;
-        restoration_orig = 0;
-
-    	energy = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID);           
+    SetSubTypeId(ENTITY::eTYPE::ENERGIZER_EQUIPMENT_ID);
 }
 
 /* virtual */

@@ -32,9 +32,9 @@
 
 Shop::Shop(int id)
 {
-	data_id.id = id;
-	data_id.type_id = ENTITY::eTYPE::SHOP_ID;
-	data_id.subtype_id = ENTITY::eTYPE::SHOP_ID;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::SHOP_ID);
+	SetSubTypeId(ENTITY::eTYPE::SHOP_ID);    
 	
 	minerals_amount  = getRandInt(MINERALS_STARTAMOUNT_MIN, MINERALS_STARTAMOUNT_MAX);
     food_amount      = getRandInt(FOOD_STARTAMOUNT_MIN, FOOD_STARTAMOUNT_MAX);

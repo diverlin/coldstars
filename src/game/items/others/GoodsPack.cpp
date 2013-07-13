@@ -27,8 +27,8 @@
 
 GoodsPack::GoodsPack(int id)
 {
-        data_id.id         = id; 
-        data_id.type_id    = ENTITY::eTYPE::GOODS_ID;
+    SetId(id); 
+    SetTypeId(ENTITY::eTYPE::GOODS_ID);
 }
 
 /* virtual */

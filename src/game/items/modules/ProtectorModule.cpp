@@ -22,11 +22,12 @@
 #include "../../common/Logger.hpp"
 
 ProtectorModule::ProtectorModule(int id)
+:
+protection_add(0)
 {
-        data_id.id    	   = id;
-        data_id.subtype_id = ENTITY::eTYPE::PROTECTOR_MODULE_ID;
-        
-     	protection_add = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::MODULE_ID);
+    SetSubTypeId(ENTITY::eTYPE::PROTECTOR_MODULE_ID);
 }
 
 /* virtual */

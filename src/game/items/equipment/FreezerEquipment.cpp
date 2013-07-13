@@ -23,11 +23,12 @@
 #include "../../items/modules/FreezerModule.hpp"
 
 FreezerEquipment::FreezerEquipment(int id)
+:
+freeze_orig(0)
 {
-        data_id.id         = id;
-        data_id.subtype_id = ENTITY::eTYPE::FREEZER_EQUIPMENT_ID; 
-         
-    	freeze_orig = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID);  
+    SetSubTypeId(ENTITY::eTYPE::FREEZER_EQUIPMENT_ID); 
 }
 
 /* virtual */

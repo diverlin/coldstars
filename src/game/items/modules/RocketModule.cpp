@@ -22,13 +22,14 @@
 #include "../../common/Logger.hpp"
 
 RocketModule::RocketModule(int id)
+:
+ammo_max_add(0),
+damage_add(0),
+radius_add(0)
 {
-        data_id.id	   = id;
-        data_id.subtype_id = ENTITY::eTYPE::ROCKET_MODULE_ID;  
-        
-     	ammo_max_add = 0;
-     	damage_add   = 0;
-     	radius_add   = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::MODULE_ID);
+    SetSubTypeId(ENTITY::eTYPE::ROCKET_MODULE_ID);  
 }
        
 /* virtual */

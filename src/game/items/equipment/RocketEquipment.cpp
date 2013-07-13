@@ -60,16 +60,17 @@ void BulletData::ResolveData()
 
 
 RocketEquipment::RocketEquipment(int id)
+:
+ammo_max_orig(0),
+damage_orig(0),
+radius_orig(0),
+ammo(0)
 {
-        data_id.id         = id;
-        data_id.subtype_id = ENTITY::eTYPE::ROCKET_EQUIPMENT_ID;     
-        
-        ammo_max_orig = 0;
-        damage_orig   = 0;
-        radius_orig   = 0;
-        
-        ammo   = 0;
-        fire_atOnce = getRandInt(1, 3);
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID); 
+    SetSubTypeId(ENTITY::eTYPE::ROCKET_EQUIPMENT_ID);     
+
+    fire_atOnce = getRandInt(1, 3);
 }
 
 /* virtual */

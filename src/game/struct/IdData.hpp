@@ -16,10 +16,10 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef IDDATA_H
-#define IDDATA_H
+#ifndef IDDATA_HPP
+#define IDDATA_HPP
 
-#include <common/constants.hpp>
+#include <common/TypesEntity.hpp>
 
 struct IdData  
 {
@@ -29,7 +29,7 @@ struct IdData
 	ENTITY::eTYPE subsubtype_id;
 
 	IdData():
-    id(NONE_ID),
+    id(0),
     type_id(ENTITY::eTYPE::NONE_ID),
     subtype_id(ENTITY::eTYPE::NONE_ID),
     subsubtype_id(ENTITY::eTYPE::NONE_ID)

@@ -32,12 +32,8 @@
 
 BaseEquipment::BaseEquipment()
 {
-        data_id.type_id = ENTITY::eTYPE::EQUIPMENT_ID;
-        race_id         = RACE::R0_ID;
-
-    	price = 0;
-    	
-    	animation_notfunctioning = new AnimationEffect2D(Vec2<float>(0.8, 0.8), Vec2<float>(1.2, 1.2), Vec2<float>(0.02, 0.02), 0, 0, 0);
+    race_id         = RACE::R0_ID;
+    animation_notfunctioning = new AnimationEffect2D(Vec2<float>(0.8, 0.8), Vec2<float>(1.2, 1.2), Vec2<float>(0.02, 0.02), 0, 0, 0);
 }
 
 /*virtual */
@@ -74,7 +70,7 @@ void BaseEquipment::AddCommonInfo()
 
 bool BaseEquipment::InsertModule(BaseModule* module)
 {
-	if (module->GetParentSubTypeId() == data_id.subtype_id)
+	if (module->GetParentSubTypeId() == GetSubTypeId())
 	{
 		if (modules_vec.size() < data_item.modules_num_max)
     		{
@@ -125,7 +121,7 @@ void BaseEquipment::Render(const Box& box, const Vec2<float>& gui_offset, bool d
 
 	if (draw_text == true)
 	{
-    		if (data_id.subtype_id == ENTITY::eTYPE::ROCKET_EQUIPMENT_ID)
+    		if (GetSubTypeId() == ENTITY::eTYPE::ROCKET_EQUIPMENT_ID)
         	{
         		Vec2<float> pos(box.GetCenter().x - box.GetSize().x/2 + gui_offset.x, box.GetCenter().y + gui_offset.y);
         		Screen::Instance().DrawText(int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);

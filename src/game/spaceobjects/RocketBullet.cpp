@@ -32,12 +32,12 @@
 #include "../effects/particlesystem/ExplosionEffect.hpp"
 
 RocketBullet::RocketBullet(int id)
+:
+target(nullptr)
 {
-	data_id.id = id;
-	data_id.type_id    = ENTITY::eTYPE::BULLET_ID;
-	data_id.subtype_id = ENTITY::eTYPE::ROCKETBULLET_ID;
-
-	target = nullptr;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::BULLET_ID);
+	SetSubTypeId(ENTITY::eTYPE::ROCKETBULLET_ID);
 }
 
 /* virtual */
@@ -114,7 +114,7 @@ void RocketBullet::UpdateInfo()
 	info.clear();
 
     	info.addTitleStr("ROCKET");
-    	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) );
+    	info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(GetId()) + " / " + int2str(starsystem->GetId()) );
     	info.addNameStr("armor:");     		info.addValueStr( int2str(data_life.armor) );
     	if (target != nullptr) 
     	{ 
@@ -200,7 +200,7 @@ void RocketBullet::ResolveDataUniqueRocketBullet()
 /*virtual*/
 void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	const std::string root = "rocketbullet."+int2str(data_id.id)+".";
+	const std::string root = "rocketbullet."+int2str(GetId())+".";
 	SaveDataUniqueBase(save_ptree, root);
 	SaveDataUniqueOrientation(save_ptree, root);
 	SaveDataUniqueBaseDrawable(save_ptree, root);

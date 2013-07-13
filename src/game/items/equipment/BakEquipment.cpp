@@ -23,12 +23,13 @@
 #include "../../items//modules/BakModule.hpp"
 
 BakEquipment::BakEquipment(int id)
+:
+fuel_max_orig(0),  
+fuel(0)
 {
-        data_id.id         = id;
-        data_id.subtype_id = ENTITY::eTYPE::BAK_EQUIPMENT_ID;
-        
-    	fuel_max_orig = 0;  
-    	fuel          = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID);
+    SetSubTypeId(ENTITY::eTYPE::BAK_EQUIPMENT_ID);
 }
    
 /* virtual */

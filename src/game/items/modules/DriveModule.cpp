@@ -22,12 +22,13 @@
 #include "../../common/Logger.hpp"
 
 DriveModule::DriveModule(int id)
+:
+speed_add(0),
+hyper_add(0)
 {
-	data_id.id         = id;
-	data_id.subtype_id = ENTITY::eTYPE::DRIVE_MODULE_ID;
-	
-     	speed_add = 0;
-     	hyper_add = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::MODULE_ID);
+	SetSubTypeId(ENTITY::eTYPE::DRIVE_MODULE_ID);
 }
 
 /* virtual */

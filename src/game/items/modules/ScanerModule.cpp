@@ -22,11 +22,12 @@
 #include "../../common/Logger.hpp"
 
 ScanerModule::ScanerModule(int id)
+:
+scan_add(0)
 {
-        data_id.id         = id;
-        data_id.subtype_id = ENTITY::eTYPE::SCANER_MODULE_ID;
-        
-    	scan_add = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::MODULE_ID);
+    SetSubTypeId(ENTITY::eTYPE::SCANER_MODULE_ID);   
 }
 
 /* virtual */

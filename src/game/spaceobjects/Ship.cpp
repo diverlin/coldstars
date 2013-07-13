@@ -39,9 +39,9 @@
 
 Ship::Ship(int id)
 {
-	data_id.id = id;
-	data_id.type_id = ENTITY::eTYPE::VEHICLE_ID;
-	data_id.subtype_id = ENTITY::eTYPE::SHIP_ID;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::VEHICLE_ID);
+	SetSubTypeId(ENTITY::eTYPE::SHIP_ID);
 }
 
 /* virtual */
@@ -59,10 +59,10 @@ void Ship::UpdateInfo()
 	info.clear();
 
 	info.addTitleStr("SHIP");
-	if (starsystem) { info.addNameStr("id/ss_id:"); info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) ); }
-	else     		{ info.addNameStr("id:");       info.addValueStr( int2str(data_id.id) ); }
+	if (starsystem) { info.addNameStr("id/ss_id:"); info.addValueStr( int2str(GetId()) + " / " + int2str(starsystem->GetId()) ); }
+	else     		{ info.addNameStr("id:");       info.addValueStr( int2str(GetId()) ); }
 	info.addNameStr("race:");   		info.addValueStr( getRaceStr(textureOb->race_id) ); 
-	info.addNameStr("class:");   		info.addValueStr( getEntityTypeStr(data_id.subsubtype_id) );     	
+	info.addNameStr("class:");   		info.addValueStr( getEntityTypeStr(GetSubSubTypeId()) );     	
 	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
 	info.addNameStr("size id:");     	info.addValueStr( int2str(textureOb->size_id) );
 	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(properties.free_space) );
@@ -194,9 +194,9 @@ void Ship::ResolveDataUniqueShip()
 /*virtual*/
 void Ship::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	const std::string root = "ship."+int2str(data_id.id)+".";
-        SaveDataUniqueBase(save_ptree, root);
-        SaveDataUniqueOrientation(save_ptree, root);
+	const std::string root = "ship."+int2str(GetId())+".";
+    SaveDataUniqueBase(save_ptree, root);
+    SaveDataUniqueOrientation(save_ptree, root);
 	SaveDataUniqueBaseDrawable(save_ptree, root);
 	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
 	SaveDataUniqueVehicle(save_ptree, root);

@@ -31,20 +31,18 @@
 
    
 Star::Star(int id)
+:
+texture_offset1(0.0),
+texture_offset2(0.0),
+d_color(0.0),
+spark_active(false),
+spark_grows(false),
+turn_since_last_spark_counter(0)
 { 
-	data_id.id = id;
-	data_id.type_id = ENTITY::eTYPE::STAR_ID;
-	
-   	texture_offset1 = 0.0;
-    	texture_offset2 = 0.0;
-    	
-    	d_color = 0.0;
-    	
-    	spark_active = false;
-    	spark_grows = false;
-    	
-    	turn_since_last_spark_counter = 0;
-    	turn_spark_threshold = getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::STAR_ID);
+
+    turn_spark_threshold = getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
 }
   
 /* virtual */  
@@ -154,7 +152,7 @@ void Star::UpdateInfo()
 { 
 	info.clear();
 	info.addTitleStr("STAR");
-	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
+	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(GetId()) + " / " + int2str(starsystem->GetId()));
 	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
 	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 }

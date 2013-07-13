@@ -32,9 +32,9 @@
 VehicleSlot::VehicleSlot(int id)
 :
 vehicle(nullptr)
-{   
-	data_id.id = id;
-	data_id.type_id = ENTITY::eTYPE::VEHICLE_SLOT_ID;
+{ 
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::VEHICLE_SLOT_ID);  
 }
    
 VehicleSlot::~VehicleSlot()
