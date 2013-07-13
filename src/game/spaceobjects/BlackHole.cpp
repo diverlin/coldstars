@@ -29,8 +29,8 @@
 
 BlackHole::BlackHole(int id)
 {        
-	data_id.id = id;
-	data_id.type_id = ENTITY::eTYPE::BLACKHOLE_ID;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::BLACKHOLE_ID);
 	
     mass = getRandInt(1000, 4000);
 }
@@ -76,9 +76,9 @@ void BlackHole::UpdateInfo()
 
     	info.addTitleStr("BLACKHOLE");
 
-    	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
+    	info.addNameStr("id:");          info.addValueStr(int2str(GetId()));
     	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
-    	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
+    	info.addNameStr("pos:");       	 info.addValueStr( str(GetCenter()) );
 }
       
 void BlackHole::Render_NEW(const Vec2<float>& scroll_coords)

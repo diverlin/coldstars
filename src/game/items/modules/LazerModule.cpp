@@ -22,12 +22,13 @@
 #include "../../common/Logger.hpp"
 
 LazerModule::LazerModule(int id)
+:
+damage_add(0),
+radius_add(0)
 {
-        data_id.id    	   = id;
-        data_id.subtype_id = ENTITY::eTYPE::LAZER_MODULE_ID;  
-        
-     	damage_add = 0;
-     	radius_add = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::MODULE_ID);
+    SetSubTypeId(ENTITY::eTYPE::LAZER_MODULE_ID);  
 }
 
 /* virtual */

@@ -23,11 +23,12 @@
 #include "../../items/modules/ProtectorModule.hpp"
 
 ProtectorEquipment::ProtectorEquipment(int id)
+:
+protection_orig(0)
 {
-        data_id.id         = id;
-        data_id.subtype_id = ENTITY::eTYPE::PROTECTOR_EQUIPMENT_ID;
-        
-    	protection_orig = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID);
+    SetSubTypeId(ENTITY::eTYPE::PROTECTOR_EQUIPMENT_ID);
 }
 
 /* virtual */

@@ -23,12 +23,13 @@
 #include "../../items//modules/DriveModule.hpp"
 
 DriveEquipment::DriveEquipment(int id)
+:
+speed_orig(0),
+hyper_orig(0)
 {
-        data_id.id         = id;
-        data_id.subtype_id = ENTITY::eTYPE::DRIVE_EQUIPMENT_ID;
-        
-     	speed_orig = 0;
-     	hyper_orig = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID);  
+    SetSubTypeId(ENTITY::eTYPE::DRIVE_EQUIPMENT_ID);
 }
 
 /* virtual */

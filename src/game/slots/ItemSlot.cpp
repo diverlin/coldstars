@@ -49,8 +49,8 @@ target(nullptr),
 subtarget(nullptr),	     
 item(nullptr)
 {
-	data_id.id         = id;
-    data_id.type_id    = ENTITY::eTYPE::ITEM_SLOT_ID;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::ITEM_SLOT_ID);
 }
 
 /* virtual */
@@ -148,12 +148,12 @@ void ItemSlot::FireEvent(float attack_rate, bool show_effect)
 
 bool ItemSlot::CheckItemInsertion(BaseItem* item) const
 {
-	if (data_id.subtype_id == ENTITY::eTYPE::CARGO_SLOT_ID) 
+	if (GetSubTypeId() == ENTITY::eTYPE::CARGO_SLOT_ID) 
 	{
 		return true;
 	}
 
-	if (data_id.subtype_id == item->GetParentSubTypeId())
+	if (GetSubTypeId() == item->GetParentSubTypeId())
 	{                                     
                 return true;
 	}
@@ -163,7 +163,7 @@ bool ItemSlot::CheckItemInsertion(BaseItem* item) const
     		        
 bool ItemSlot::InsertItem(BaseItem* item)
 {	
-	if (data_id.subtype_id == ENTITY::eTYPE::CARGO_SLOT_ID) 
+	if (GetSubTypeId() == ENTITY::eTYPE::CARGO_SLOT_ID) 
 	{           
 		this->item = item;
 		if (item->GetItemSlot() != nullptr)
@@ -175,7 +175,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 		return true;
 	}
 
-	if (data_id.subtype_id == item->GetParentSubTypeId())
+	if (GetSubTypeId() == item->GetParentSubTypeId())
 	{                                     
 		this->item = item;
 		if (item->GetItemSlot() != nullptr)
@@ -196,7 +196,7 @@ void ItemSlot::RemoveItem()
         item = nullptr;
     	ResetTarget();
     	
-    	if (data_id.subtype_id != ENTITY::eTYPE::CARGO_SLOT_ID) 
+    	if (GetSubTypeId() != ENTITY::eTYPE::CARGO_SLOT_ID) 
 	{    
                 UpdateVehiclePropetries(); 
 	}    	 
@@ -208,7 +208,7 @@ void ItemSlot::SelectEvent()
         
         if (owner->GetTypeId() == ENTITY::eTYPE::VEHICLE_ID)
 	{ 	
-		switch(data_id.subtype_id)
+		switch(GetSubTypeId())
 		{
 			case ENTITY::eTYPE::DRIVE_SLOT_ID: { GetOwnerVehicle()->UpdatePropertiesSpeed(); break; }
 		}
@@ -221,7 +221,7 @@ void ItemSlot::DeselectEvent()
 	
 	if (owner->GetTypeId() == ENTITY::eTYPE::VEHICLE_ID)
 	{ 	
-		switch(data_id.subtype_id)
+		switch(GetSubTypeId())
 		{
 			case ENTITY::eTYPE::WEAPON_SLOT_ID: 	{ 	ResetTarget(); break; }
             case ENTITY::eTYPE::DRIVE_SLOT_ID: 	
@@ -237,9 +237,9 @@ void ItemSlot::DeselectEvent()
         	
 void ItemSlot::UpdateVehiclePropetries() const
 {
-	if (data_id.subtype_id != ENTITY::eTYPE::CARGO_SLOT_ID)
+	if (GetSubTypeId() != ENTITY::eTYPE::CARGO_SLOT_ID)
 	{ 	
-		switch(data_id.subtype_id)
+		switch(GetSubTypeId())
 		{
 			case ENTITY::eTYPE::WEAPON_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesFire(); break; }
 			case ENTITY::eTYPE::SCANER_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesScan(); break; }

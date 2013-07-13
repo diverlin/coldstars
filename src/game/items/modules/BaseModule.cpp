@@ -25,9 +25,7 @@
 
 BaseModule::BaseModule():
 equipment_owner(nullptr)
-{
-        data_id.type_id = ENTITY::eTYPE::MODULE_ID;
-}
+{}
 
 /* virtual */
 BaseModule::~BaseModule ()

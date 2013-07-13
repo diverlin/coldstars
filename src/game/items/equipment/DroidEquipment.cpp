@@ -25,11 +25,12 @@
 #include "../../slots/ItemSlot.hpp"
 
 DroidEquipment::DroidEquipment(int id)
+:
+repair_orig(0)
 {
-        data_id.id         = id;
-        data_id.subtype_id = ENTITY::eTYPE::DROID_EQUIPMENT_ID; 
-        
-    	repair_orig = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID); 
+    SetSubTypeId(ENTITY::eTYPE::DROID_EQUIPMENT_ID); 
 }
 
 /* virtual */

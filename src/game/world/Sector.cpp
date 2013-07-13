@@ -29,11 +29,12 @@
 #include "../garbage/EntityGarbage.hpp"
 #include "../struct/StarSystemsConditionData.hpp"
 
-Sector::Sector(int id):
+Sector::Sector(int id)
+:
 galaxy(nullptr)
 {
-	data_id.id = id;
-	data_id.type_id =  ENTITY::eTYPE::SECTOR_ID;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::SECTOR_ID);  
 }
 
 Sector::~Sector()

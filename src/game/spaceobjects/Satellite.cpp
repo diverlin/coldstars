@@ -29,9 +29,9 @@
 
 Satellite::Satellite(int id)
 {        
-	data_id.id = id;
-	data_id.type_id = ENTITY::eTYPE::VEHICLE_ID;
-	data_id.subtype_id = ENTITY::eTYPE::SATELLITE_ID;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::VEHICLE_ID);
+	SetSubTypeId(ENTITY::eTYPE::SATELLITE_ID);
 	
     mass = getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX);
     orbit = new Orbit();
@@ -77,11 +77,11 @@ void Satellite::UpdateInfo()
 {
 	info.clear();
 
-    	info.addTitleStr("SATELLITE");
+    info.addTitleStr("SATELLITE");
 
-    	//info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
-    	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
-    	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
+    //info.addNameStr("id/ss_id:");    info.addValueStr(int2str(GetId()) + " / " + int2str(starsystem->GetId()));
+    info.addNameStr("id:");          info.addValueStr(int2str(GetId()));
+    info.addNameStr("mass:");        info.addValueStr(int2str(mass));
 	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 }
             
@@ -144,9 +144,9 @@ void Satellite::ResolveDataUniqueSatellite()
 /*virtual*/
 void Satellite::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	const std::string root = "satellite."+int2str(data_id.id)+".";
-        SaveDataUniqueBase(save_ptree, root);
-        SaveDataUniqueOrientation(save_ptree, root);
+	const std::string root = "satellite."+int2str(GetId())+".";
+    SaveDataUniqueBase(save_ptree, root);
+    SaveDataUniqueOrientation(save_ptree, root);
 	SaveDataUniqueBaseDrawable(save_ptree, root);
 	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
 	SaveDataUniqueVehicle(save_ptree, root);

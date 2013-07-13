@@ -22,11 +22,12 @@
 #include "../../common/Logger.hpp"
 
 FreezerModule::FreezerModule(int id)
+:
+freeze_add(0)
 {
-        data_id.id 	   = id;
-        data_id.subtype_id = ENTITY::eTYPE::FREEZER_MODULE_ID; 
-        
-     	freeze_add = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::MODULE_ID);
+    SetSubTypeId(ENTITY::eTYPE::FREEZER_MODULE_ID); 
 }
 
 /* virtual */

@@ -23,11 +23,12 @@
 #include "../../items//modules/RadarModule.hpp"
 
 RadarEquipment::RadarEquipment(int id)
+:
+radius_orig(0)
 {
-        data_id.id         = id;
-        data_id.subtype_id = ENTITY::eTYPE::RADAR_EQUIPMENT_ID;
-        
-    	radius_orig = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID);
+    SetSubTypeId(ENTITY::eTYPE::RADAR_EQUIPMENT_ID);
 }
 
 /* virtual */

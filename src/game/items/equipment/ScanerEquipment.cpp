@@ -23,11 +23,12 @@
 #include "../../items/modules/ScanerModule.hpp"
 
 ScanerEquipment::ScanerEquipment(int id)
+:
+scan_orig(0)
 {
-        data_id.id         = id;
-        data_id.subtype_id = ENTITY::eTYPE::SCANER_EQUIPMENT_ID; 
-        
-    	scan_orig = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID); 
+    SetSubTypeId(ENTITY::eTYPE::SCANER_EQUIPMENT_ID); 
 }
 
 /* virtual */

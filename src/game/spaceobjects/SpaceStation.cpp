@@ -35,11 +35,13 @@
 #include "../resources/ShaderCollector.hpp"
 #include "../render/Render.hpp"
 
-SpaceStation::SpaceStation(int id): land(nullptr)
+SpaceStation::SpaceStation(int id)
+: 
+land(nullptr)
 {      
-	data_id.id         = id;
-	data_id.type_id    = ENTITY::eTYPE::VEHICLE_ID;
-	data_id.subtype_id = ENTITY::eTYPE::SPACESTATION_ID;  
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::VEHICLE_ID);
+	SetSubTypeId(ENTITY::eTYPE::SPACESTATION_ID);
 }
 
 /* virtual */
@@ -81,10 +83,10 @@ void SpaceStation::UpdateInfo()
 {
 	info.clear();
 
-    info.addTitleStr("StarBase" + getEntityTypeStr(data_id.subtype_id));
+    info.addTitleStr("StarBase" + getEntityTypeStr(GetSubTypeId()));
 
-    info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
-    info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
+    info.addNameStr("id/ss_id:");    info.addValueStr(int2str(GetId()) + " / " + int2str(starsystem->GetId()));
+    info.addNameStr("id:");          info.addValueStr(int2str(GetId()));
     info.addNameStr("mass:");        info.addValueStr(int2str(mass));
     info.addNameStr("pos:");       	 info.addValueStr( str(GetCenter()) );
 } 
@@ -151,9 +153,9 @@ void SpaceStation::ResolveDataUniqueSpaceStation()
 /*virtual*/
 void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	const std::string root = "spacestation."+int2str(data_id.id)+".";
-        SaveDataUniqueBase(save_ptree, root);
-        SaveDataUniqueOrientation(save_ptree, root);
+    const std::string root = "spacestation."+int2str(GetId())+".";
+    SaveDataUniqueBase(save_ptree, root);
+    SaveDataUniqueOrientation(save_ptree, root);
 	SaveDataUniqueBaseDrawable(save_ptree, root);
 	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
 	SaveDataUniqueVehicle(save_ptree, root);
@@ -163,8 +165,8 @@ void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/
 void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-        LoadDataUniqueBase(load_ptree);
-        LoadDataUniqueOrientation(load_ptree);
+    LoadDataUniqueBase(load_ptree);
+    LoadDataUniqueOrientation(load_ptree);
 	LoadDataUniqueBaseDrawable(load_ptree);
 	LoadDataUniqueBaseSpaceEntity(load_ptree);
 	LoadDataUniqueVehicle(load_ptree);

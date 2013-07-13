@@ -22,11 +22,12 @@
 #include "../../common/Logger.hpp"
 
 BakModule::BakModule(int id)
+:
+fuel_max_add(0)
 {
-	data_id.id         = id;
-	data_id.subtype_id = ENTITY::eTYPE::BAK_MODULE_ID;
-	
-    fuel_max_add = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::MODULE_ID);
+	SetSubTypeId(ENTITY::eTYPE::BAK_MODULE_ID);
 }
 
 /* virtual */

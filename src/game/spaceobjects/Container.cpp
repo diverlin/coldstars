@@ -36,10 +36,9 @@ Container::Container(int id)
 :
 item_slot(nullptr)    
 {
-	data_id.id         = id;
-	data_id.type_id    = ENTITY::eTYPE::CONTAINER_ID;
-
-    mass = 1;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::VEHICLE_ID);
+	SetSubTypeId(ENTITY::eTYPE::CONTAINER_ID);
 	
 	velocity = getRandInt(40, 42) / 100.0;
 }
@@ -68,7 +67,7 @@ void Container::UpdateInfo()
 {
 	info.clear();
 	info.addTitleStr("CONTAINER");
-	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
+	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(GetId()) + " / " + int2str(starsystem->GetId()));
 	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
 	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 }        

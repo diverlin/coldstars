@@ -22,11 +22,12 @@
 #include "../../common/Logger.hpp"
 
 DroidModule::DroidModule(int id)
+:
+repair_add(0)        
 {
-	data_id.id         = id;
-	data_id.subtype_id = ENTITY::eTYPE::DROID_MODULE_ID;
-	
-     	repair_add = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::MODULE_ID);
+	SetSubTypeId(ENTITY::eTYPE::DROID_MODULE_ID);
 }
 
 /* virtual */

@@ -22,12 +22,12 @@
 #include "../../common/Logger.hpp"
 
 Bomb::Bomb(int id)
+:
+damage(0),
+radius(0)
 { 
-        data_id.id         = id;
-    	data_id.type_id    = ENTITY::eTYPE::BOMB_ID;
-        
-        damage = 0;
-    	radius = 0;
+    SetId(id);
+    SetTypeId(ENTITY::eTYPE::BOMB_ID);
 }
 
  /* virtual */
@@ -50,7 +50,7 @@ void Bomb::AddUniqueInfo()
     	info.addTitleStr("BOMB");
 
     	//info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
-    	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
+    	info.addNameStr("id:");          info.addValueStr(int2str(GetId()));
     	info.addNameStr("damage:");      info.addValueStr(int2str(damage));
     	//info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
 } 		

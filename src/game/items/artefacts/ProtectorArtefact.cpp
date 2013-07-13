@@ -22,12 +22,12 @@
 #include "../../common/Logger.hpp"
 
 ProtectorArtefact::ProtectorArtefact(int id)
+:
+protection(0)
 {
-	data_id.id = id;
-    data_id.type_id = ENTITY::eTYPE::ARTEFACT_ID;
-    data_id.subtype_id = ENTITY::eTYPE::PROTECTOR_ARTEFACT_ID;
-                            
-    protection = 0;
+	SetId(id);
+    SetTypeId(ENTITY::eTYPE::ARTEFACT_ID);
+    SetSubTypeId(ENTITY::eTYPE::PROTECTOR_ARTEFACT_ID);
 }
 
 /* virtual */
@@ -37,8 +37,8 @@ ProtectorArtefact::~ProtectorArtefact ()
 /* virtual */
 void ProtectorArtefact::AddUniqueInfo()
 {
-    	info.addTitleStr("protector artefact");
-    	info.addNameStr("protection:");      info.addValueStr( int2str(protection) );
+    info.addTitleStr("protector artefact");
+    info.addNameStr("protection:");      info.addValueStr( int2str(protection) );
 }
 
 /* virtual */

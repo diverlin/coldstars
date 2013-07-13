@@ -29,8 +29,8 @@
 
 NatureLand::NatureLand(int id)
 {
-	data_id.id = id;
-	data_id.type_id = ENTITY::eTYPE::NATURELAND_ID;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::NATURELAND_ID);
 }
 
 /* virtual */
@@ -92,16 +92,16 @@ bool NatureLand::AddItem(BaseItem* item)
 /* virtual */
 bool NatureLand::AddVehicle(Vehicle* vehicle)
 {
-       	vehicle->SetPlaceTypeId(data_id.type_id); 
-       	vehicle->SetLand(this);
-       	
-        VEHICLE_vec.push_back(vehicle);
-        
-        if (vehicle->GetStarSystem() == nullptr) // used if vehicle added directly after creation
-        {
-                vehicle->SetStarSystem(owner->GetStarSystem());
-        }
-        return true;
+    vehicle->SetPlaceTypeId(GetTypeId()); 
+    vehicle->SetLand(this);
+    
+    VEHICLE_vec.push_back(vehicle);
+    
+    if (vehicle->GetStarSystem() == nullptr) // used if vehicle added directly after creation
+    {
+            vehicle->SetStarSystem(owner->GetStarSystem());
+    }
+    return true;
 }
 
 /*virtual */
@@ -145,8 +145,8 @@ std::string NatureLand::GetDockVehicleStr() const
 /*virtual*/
 void NatureLand::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	const std::string root = "natureland."+int2str(data_id.id)+".";
-        SaveDataUniqueBase(save_ptree, root);
+	const std::string root = "natureland."+int2str(GetId())+".";
+    SaveDataUniqueBase(save_ptree, root);
 	SaveDataUniqueBaseLand(save_ptree, root);
 	SaveDataUniqueNatureLand(save_ptree, root);
 }
@@ -154,7 +154,7 @@ void NatureLand::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/
 void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-        LoadDataUniqueBase(load_ptree);
+    LoadDataUniqueBase(load_ptree);
 	LoadDataUniqueBaseLand(load_ptree);
 	LoadDataUniqueNatureLand(load_ptree);
 }
@@ -162,7 +162,7 @@ void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/
 void NatureLand::ResolveData()
 {
-        ResolveDataUniqueBase();
+    ResolveDataUniqueBase();
 	ResolveDataUniqueBaseLand();
 	ResolveDataUniqueNatureLand();
 }

@@ -23,12 +23,13 @@
 #include "../../items/equipment/BaseEquipment.hpp"
 
 EnergizerModule::EnergizerModule(int id)
+:
+energy_max_add(0),
+restoration_add(0)
 {
-    data_id.id         = id;
-    data_id.subtype_id = ENTITY::eTYPE::ENERGIZER_MODULE_ID;
-    
-    energy_max_add  = 0;
-    restoration_add = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::MODULE_ID);
+    SetSubTypeId(ENTITY::eTYPE::ENERGIZER_MODULE_ID);
 }
 
 /* virtual */

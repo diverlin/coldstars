@@ -32,11 +32,11 @@
 #include "../items/equipment/RocketEquipment.hpp"
 
 Angar::Angar(int id)
+:
+price_fuel(PRICE_FUEL)
 {
-	data_id.id = id;
-	data_id.type_id = ENTITY::eTYPE::ANGAR_ID;
-	
-	price_fuel = PRICE_FUEL;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::ANGAR_ID);
 }
 
 Angar::~Angar()

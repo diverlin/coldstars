@@ -22,12 +22,12 @@
 #include "../../common/Logger.hpp"
 
 GravityArtefact::GravityArtefact(int id)
+:
+gravity(0)
 {
-	data_id.id = id;
-    data_id.type_id = ENTITY::eTYPE::ARTEFACT_ID;
-    data_id.subtype_id = ENTITY::eTYPE::GRAVITY_ARTEFACT_ID;
-                    
-    gravity = 0;
+	SetId(id);
+    SetTypeId(ENTITY::eTYPE::ARTEFACT_ID);
+    SetSubTypeId(ENTITY::eTYPE::GRAVITY_ARTEFACT_ID);
 }
 
 /* virtual */

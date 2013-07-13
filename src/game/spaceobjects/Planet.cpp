@@ -32,14 +32,14 @@
 #include "../garbage/EntityGarbage.hpp"
 #include "../common/Logger.hpp"
 
-Planet::Planet(int id):atmosphere(nullptr)
+Planet::Planet(int id)
+:
+atmosphere(nullptr),
+land(nullptr),
+population(0)
 {    
-	data_id.id = id;
-	data_id.type_id = ENTITY::eTYPE::PLANET_ID;
-	
-	population  = 0;
-		      	
-	land = nullptr;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::PLANET_ID);
 }
 
 /* virtual */
@@ -100,7 +100,7 @@ void Planet::UpdateInfo()
 	info.clear();
 
 	info.addTitleStr("PLANET");
-	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
+	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(GetId()) + " / " + int2str(starsystem->GetId()));
 	info.addNameStr("armor:");  	 info.addValueStr(int2str(data_life.armor));
 	info.addNameStr("population:");  info.addValueStr(int2str(population));
 	info.addNameStr("dock_veh:");    info.addValueStr(land->GetDockVehicleStr());

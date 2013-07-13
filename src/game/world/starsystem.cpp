@@ -61,19 +61,19 @@ unique_update_inStatic_done(false),
 sector(nullptr),
 container_num_max(CONTAINER_NUM_MAX_DEFAULT)
 { 
-    	data_id.id = id;
-    	data_id.type_id = ENTITY::eTYPE::STARSYSTEM_ID;
-    	
-    	place_type_id = ENTITY::eTYPE::SPACE_ID;
-    	
-    	condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
-    	
-    	race_id = RACE::R0_ID;
-    	conqueror_race_id = NONE_ID;
-   	
-    	this->SetStarSystem(this);
-        
-        counter++;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::STARSYSTEM_ID); 
+    
+    place_type_id = ENTITY::eTYPE::SPACE_ID;
+    
+    condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
+    
+    race_id = RACE::R0_ID;
+    conqueror_race_id = NONE_ID;
+
+    this->SetStarSystem(this);
+    
+    counter++;
 }
 
 StarSystem::~StarSystem()

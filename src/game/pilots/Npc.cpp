@@ -43,21 +43,22 @@
 
 #include "../common/GameDate.hpp" 
 
-Npc::Npc(int id):
+Npc::Npc(int id)
+:
 race_id(NONE_ID),
 credits(1000),
 player(nullptr),
 vehicle(nullptr),
-vehicle_to_scan(nullptr)
+vehicle_to_scan(nullptr),
+ai_model(nullptr)
 { 
 	is_alive = true;
-	data_id.id      = id;
-    data_id.type_id = ENTITY::eTYPE::NPC_ID;
+    
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::NPC_ID);
 
     observation.SetNpcOwner(this);
     state_machine.SetNpcOwner(this);   
-        
-    ai_model = nullptr;     
 }
     
 /* virtual */
@@ -256,10 +257,10 @@ void Npc::UpdateInfo()
 	info.clear();
 
     	info.addTitleStr("NPC");
-    	info.addNameStr("id:");           info.addValueStr( int2str(data_id.id)  );
+    	info.addNameStr("id:");           info.addValueStr( int2str(GetId())  );
     	info.addNameStr("race:");   	  info.addValueStr( getRaceStr(race_id) ); 
-    	info.addNameStr("subype_id:");    info.addValueStr( getEntityTypeStr(data_id.subtype_id) );  
-        info.addNameStr("subsubype_id:"); info.addValueStr( getEntityTypeStr(data_id.subsubtype_id) );  
+    	info.addNameStr("subype_id:");    info.addValueStr( getEntityTypeStr(GetSubTypeId()) );  
+        info.addNameStr("subsubype_id:"); info.addValueStr( getEntityTypeStr(GetSubSubTypeId()) );  
     	info.addNameStr("model_ai:");     info.addValueStr( getAiModelStr(ai_model->GetTypeId()) );  
     	info.addNameStr("credits:");   	  info.addValueStr( int2str(credits) );	
     	info.addNameStr("expirience:");   info.addValueStr( int2str(skills.GetExpirience()) + " / " + int2str(skills.GetExpirienceNextLevel()) );	
@@ -304,7 +305,7 @@ bool Npc::BuyGoods()
   
 void Npc::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	std::string root = "npc."+int2str(data_id.id)+".";
+	std::string root = "npc."+int2str(GetId())+".";
 	SaveDataUniqueBase(save_ptree, root);
 	SaveDataUniqueNpc(save_ptree, root);	
 }		

@@ -22,14 +22,15 @@
 #include "../../common/Logger.hpp"
 
 GrappleModule::GrappleModule(int id)
+:
+strength_add(0),
+radius_add(0),    
+speed_add(0),     
+maxNumItem_add(0)
 {
-        data_id.id 	   = id;
-        data_id.subtype_id = ENTITY::eTYPE::GRAPPLE_MODULE_ID;  
-        
-        strength_add   = 0;
-        radius_add     = 0;
-        speed_add      = 0;
-        maxNumItem_add = 0;
+	SetId(id);
+	SetTypeId(ENTITY::eTYPE::MODULE_ID);
+    SetSubTypeId(ENTITY::eTYPE::GRAPPLE_MODULE_ID);  
 }
 
 /* virtual */

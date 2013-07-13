@@ -22,11 +22,12 @@
 #include "../../common/Logger.hpp"
 
 RadarModule::RadarModule(int id)
+:
+radius_add(0)
 {
-        data_id.id = id;
-        data_id.subtype_id = ENTITY::eTYPE::RADAR_MODULE_ID; 
-        
-     	radius_add = 0;
+    SetId(id);
+    SetTypeId(ENTITY::eTYPE::MODULE_ID);
+    SetSubTypeId(ENTITY::eTYPE::RADAR_MODULE_ID); 
 }
 
 /* virtual */
