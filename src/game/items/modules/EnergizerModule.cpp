@@ -24,11 +24,11 @@
 
 EnergizerModule::EnergizerModule(int id)
 {
-        data_id.id         = id;
-	data_id.subtype_id = ENTITY::ENERGIZER_MODULE_ID;
-        
-     	energy_max_add  = 0;
-     	restoration_add = 0;
+    data_id.id         = id;
+    data_id.subtype_id = ENTITY::eTYPE::ENERGIZER_MODULE_ID;
+    
+    energy_max_add  = 0;
+    restoration_add = 0;
 }
 
 /* virtual */

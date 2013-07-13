@@ -51,73 +51,73 @@ struct UnresolvedDataUniqueBaseItem
 
 class BaseItem : public BaseDrawable
 {
-    	public:
-      		BaseItem();
-      		virtual ~BaseItem();
-
-      		virtual void PutChildsToGarbage() const {};
-      		
-		void SetParentSubTypeId(int parent_subtype_id) { this->parent_subtype_id = parent_subtype_id; };
-		void SetItemCommonData(const ItemCommonData& data_item) { this->data_item = data_item; deterioration = data_item.deterioration_normal; };
-                void SetItemSlot(ItemSlot* item_slot)  { this->item_slot = item_slot; };
-                void SetCondition(int condition) { this->condition = condition; };
-
-                ItemSlot* GetItemSlot() const { return item_slot; };
-                                                
-		unsigned int GetMass()      	const { return data_item.mass; };
-		unsigned int GetCondition() 	const { return condition; };
-		int GetPrice()              	const { return price; };
-		int GetParentSubTypeId() const { return parent_subtype_id; };
-
-                bool GetDamaged()       const { return (condition < 0); };
-		bool GetLocked()	const { return (locked_turns > 0); };
-                int GetFunctioning()    const { return ( (condition > 0) and (locked_turns == 0) ); };
-                
-                void UseNormalDeterioration();
-                void UseOverloadDeterioration();
-                
-                void DamageEvent();
-                
-                void DeteriorationEvent(); 
-                void LockEvent(int); 
-                
-                bool RepairEvent();
-
-		virtual void UpdateProperties() {};
-		virtual void UpdateInStatic() { UpdateLock(); };
-                
-		void UpdateInfo();
-
-      		virtual void Render(const Box&, const Vec2<float>&, bool draw_text = true);
-      		void RenderKorpus(const Box&);
-      		void RenderInfo(const Vec2<float>&, float offset_x = 0, float offset_y = 0); 
+    public:
+        BaseItem();
+        virtual ~BaseItem();
+        
+        virtual void PutChildsToGarbage() const {};
+        
+        void SetParentSubTypeId(ENTITY::eTYPE parent_subtype_id) { this->parent_subtype_id = parent_subtype_id; };
+        void SetItemCommonData(const ItemCommonData& data_item) { this->data_item = data_item; deterioration = data_item.deterioration_normal; };
+        void SetItemSlot(ItemSlot* item_slot)  { this->item_slot = item_slot; };
+        void SetCondition(int condition) { this->condition = condition; };
+        
+        ItemSlot* GetItemSlot() const { return item_slot; };
+                                    
+        unsigned int GetMass()      	const { return data_item.mass; };
+        unsigned int GetCondition() 	const { return condition; };
+        int GetPrice()              	const { return price; };
+        ENTITY::eTYPE GetParentSubTypeId() const { return parent_subtype_id; };
+        
+        bool GetDamaged()       const { return (condition < 0); };
+        bool GetLocked()	const { return (locked_turns > 0); };
+        int GetFunctioning()    const { return ( (condition > 0) and (locked_turns == 0) ); };
+        
+        void UseNormalDeterioration();
+        void UseOverloadDeterioration();
+        
+        void DamageEvent();
+        
+        void DeteriorationEvent(); 
+        void LockEvent(int); 
+        
+        bool RepairEvent();
+        
+        virtual void UpdateProperties() {};
+        virtual void UpdateInStatic() { UpdateLock(); };
+        
+        void UpdateInfo();
+        
+        virtual void Render(const Box&, const Vec2<float>&, bool draw_text = true);
+        void RenderKorpus(const Box&);
+        void RenderInfo(const Vec2<float>&, float offset_x = 0, float offset_y = 0); 
 
 	protected:
-                int race_id;
-                int locked_turns;
-		int condition;
-     		int price;
-
-                int deterioration;
-                
-                int parent_subtype_id;
-                
-                ItemCommonData data_item;
-                
-                ItemSlot* item_slot;
-                
-                InfoTable info;  
-
-                UnresolvedDataUniqueBaseItem data_unresolved_BaseItem;
-                
-		void UpdateLock();
-
-     		virtual void AddCommonInfo()=0;
- 		virtual void AddUniqueInfo()=0;   
-                
-                void SaveDataUniqueBaseItem(boost::property_tree::ptree&, const std::string&) const; 
-                void LoadDataUniqueBaseItem(const boost::property_tree::ptree&); 
-                void ResolveDataUniqueBaseItem();                   
+        int race_id;
+        int locked_turns;
+        int condition;
+        int price;
+        
+        int deterioration;
+        
+        ENTITY::eTYPE parent_subtype_id;
+        
+        ItemCommonData data_item;
+        
+        ItemSlot* item_slot;
+        
+        InfoTable info;  
+        
+        UnresolvedDataUniqueBaseItem data_unresolved_BaseItem;
+        
+        void UpdateLock();
+        
+        virtual void AddCommonInfo()=0;
+        virtual void AddUniqueInfo()=0;   
+        
+        void SaveDataUniqueBaseItem(boost::property_tree::ptree&, const std::string&) const; 
+        void LoadDataUniqueBaseItem(const boost::property_tree::ptree&); 
+        void ResolveDataUniqueBaseItem();                   
 };
 
 #endif

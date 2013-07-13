@@ -42,18 +42,18 @@ ScanerModule* ScanerModuleBuilder::GetNewScanerModuleTemplate(unsigned long int 
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	scaner_module = new ScanerModule(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(scaner_module);
-        
-        return scaner_module;
+    try 
+    { 
+        scaner_module = new ScanerModule(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(scaner_module);
+    
+    return scaner_module;
 } 
 
 ScanerModule* ScanerModuleBuilder::GetNewScanerModule(int scan_add) const
@@ -61,17 +61,17 @@ ScanerModule* ScanerModuleBuilder::GetNewScanerModule(int scan_add) const
 	ScanerModule* scaner_module = GetNewScanerModuleTemplate();	
 	CreateNewInternals(scaner_module, scan_add);
         
-        return scaner_module;
+    return scaner_module;
 } 
        	
 void ScanerModuleBuilder::CreateNewInternals(ScanerModule* scaner_module, int scan_add) const
 {     
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-    	scan_add = getRandInt(MODULE::SCANER::SCAN_MIN, MODULE::SCANER::SCAN_MAX);
-    
-        scaner_module->SetParentSubTypeId(ENTITY::SCANER_EQUIPMENT_ID);    
-        scaner_module->BindData2D(texOb);
-        scaner_module->SetScanAdd(scan_add);
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    scan_add = getRandInt(MODULE::SCANER::SCAN_MIN, MODULE::SCANER::SCAN_MAX);
+
+    scaner_module->SetParentSubTypeId(ENTITY::eTYPE::SCANER_EQUIPMENT_ID);    
+    scaner_module->BindData2D(texOb);
+    scaner_module->SetScanAdd(scan_add);
 }
 
 

@@ -66,14 +66,14 @@ DriveModule* DriveModuleBuilder::GetNewDriveModule(int speed_add, int hyper_add)
         	
 void DriveModuleBuilder::CreateNewInternals(DriveModule* drive_module, int speed_add, int hyper_add) const
 {     
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-    	speed_add = getRandInt(MODULE::DRIVE::SPEED_MIN, MODULE::DRIVE::SPEED_MAX);
-    	hyper_add = getRandInt(MODULE::DRIVE::HYPER_MIN, MODULE::DRIVE::HYPER_MAX);
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    speed_add = getRandInt(MODULE::DRIVE::SPEED_MIN, MODULE::DRIVE::SPEED_MAX);
+    hyper_add = getRandInt(MODULE::DRIVE::HYPER_MIN, MODULE::DRIVE::HYPER_MAX);
     
-        drive_module->SetParentSubTypeId(ENTITY::DRIVE_EQUIPMENT_ID);    
-        drive_module->BindData2D(texOb);
-    	drive_module->SetSpeedAdd(speed_add);
-	drive_module->SetHyperAdd(hyper_add);
+    drive_module->SetParentSubTypeId(ENTITY::eTYPE::DRIVE_EQUIPMENT_ID);    
+    drive_module->BindData2D(texOb);
+    drive_module->SetSpeedAdd(speed_add);
+    drive_module->SetHyperAdd(hyper_add);
 }
 
 

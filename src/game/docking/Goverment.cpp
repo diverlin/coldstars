@@ -24,12 +24,11 @@
 #include "../world/EntityManager.hpp"
 
 Goverment::Goverment(int id)
+:
+textureOb_face(nullptr)
 {
 	data_id.id = id;
-	data_id.type_id = ENTITY::GOVERMENT_ID;
-	data_id.subtype_id = NONE_ID;
-
-        textureOb_face = nullptr;   
+	data_id.type_id = ENTITY::eTYPE::GOVERMENT_ID;
 }
 
 Goverment::~Goverment()

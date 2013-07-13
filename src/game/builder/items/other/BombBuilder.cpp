@@ -72,7 +72,7 @@ void BombBuilder::CreateNewInternals(Bomb* bomb, int damage, int radius) const
 	bomb->BindData2D(texOb);
 	bomb->SetDamage(damage);
 	bomb->SetRadius(radius);
-	bomb->SetParentSubTypeId(ENTITY::CARGO_SLOT_ID);
+	bomb->SetParentSubTypeId(ENTITY::eTYPE::CARGO_SLOT_ID);
 }
 
 

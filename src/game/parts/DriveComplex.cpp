@@ -197,9 +197,9 @@ void DriveComplex::UpdatePath()
 
 bool DriveComplex::ValidateTarget() const
 {
-        if (target->GetAlive() == true)
+    if (target->GetAlive() == true)
 	{
-		if (target->GetPlaceTypeId() == ENTITY::SPACE_ID)
+		if (target->GetPlaceTypeId() == ENTITY::eTYPE::SPACE_ID)
 		{
 			return true;
 		}
@@ -214,7 +214,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
 {		
 	switch(target->GetTypeId())
 	{
-		case ENTITY::STARSYSTEM_ID:
+		case ENTITY::eTYPE::STARSYSTEM_ID:
 		{
 			float angleInD = 90-getAngleInD(target->GetCenter(), owner_vehicle->GetStarSystem()->GetCenter()); //??
 		    	target_pos = getVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angleInD, owner_vehicle->GetStarSystem()->GetCenter().z);
@@ -223,26 +223,26 @@ void DriveComplex::UpdateDynamicTargetCoord()
 			break;
 		}
 	
-    		case ENTITY::PLANET_ID:
+    		case ENTITY::eTYPE::PLANET_ID:
     		{ 
         		//target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;         	
         		target_pos = ((Planet*)target)->GetCenter() + target_offset; 
 		       	break;		       	
     		} 
 
-    		case ENTITY::ASTEROID_ID:
+    		case ENTITY::eTYPE::ASTEROID_ID:
     		{ 
         		target_pos = ((Asteroid*)target)->GetOrbit().GetNextTurnPosition() + target_offset;         	
         		break;
     		} 
     	     
-    		case ENTITY::VEHICLE_ID:
+    		case ENTITY::eTYPE::VEHICLE_ID:
     		{ 
 			target_pos = target->GetCenter() + target_offset;  
         		break;    
     		}
 
-    		case ENTITY::CONTAINER_ID:
+    		case ENTITY::eTYPE::CONTAINER_ID:
     		{ 
 			target_pos = target->GetCenter() + target_offset;  
         		break;    
@@ -273,12 +273,12 @@ bool DriveComplex::GetDockingPermission()
 {
 	switch(target->GetTypeId())
 	{
-		case ENTITY::PLANET_ID:       { return ((Planet*)target)->GetLand()->GetPermissionToLand(); break; }
-		case ENTITY::VEHICLE_ID: 
+		case ENTITY::eTYPE::PLANET_ID:       { return ((Planet*)target)->GetLand()->GetPermissionToLand(); break; }
+		case ENTITY::eTYPE::VEHICLE_ID: 
 		{ 
 			switch(target->GetSubTypeId())
 			{
-				case ENTITY::SPACESTATION_ID: { return ((SpaceStation*)target)->GetLand()->GetPermissionToLand(); break; }
+				case ENTITY::eTYPE::SPACESTATION_ID: { return ((SpaceStation*)target)->GetLand()->GetPermissionToLand(); break; }
 				//case SHIP_ID:   { return targetOb->GetVehicle()->getPermissionToLand(); break; }
 			}
 			break;

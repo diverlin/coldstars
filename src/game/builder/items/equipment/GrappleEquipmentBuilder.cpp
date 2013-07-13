@@ -94,7 +94,7 @@ void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equip
         grapple_equipment->SetSpeedOrig(speed_orig);
 
         grapple_equipment->BindData2D(texOb_item);    
-        grapple_equipment->SetParentSubTypeId(ENTITY::GRAPPLE_SLOT_ID);
+        grapple_equipment->SetParentSubTypeId(ENTITY::eTYPE::GRAPPLE_SLOT_ID);
         grapple_equipment->SetItemCommonData(common_data);        
         grapple_equipment->SetCondition(common_data.condition_max);
         

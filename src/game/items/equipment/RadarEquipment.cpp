@@ -25,7 +25,7 @@
 RadarEquipment::RadarEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = ENTITY::RADAR_EQUIPMENT_ID;
+        data_id.subtype_id = ENTITY::eTYPE::RADAR_EQUIPMENT_ID;
         
     	radius_orig = 0;
 }

@@ -17,14 +17,14 @@
 */
 
 
-#ifndef ITEMSLOTBUILDER_H
-#define ITEMSLOTBUILDER_H
+#ifndef ITEMSLOTBUILDER_HPP
+#define ITEMSLOTBUILDER_HPP
 
-#include "../slots/ItemSlot.hpp"
-#include "../common/constants.hpp"
+#include <slots/ItemSlot.hpp>
+#include <common/constants.hpp>
 
-ItemSlot* GetNewItemSlot(int subtype_id, unsigned long int id = NONE_ID);
-ItemSlot* GetNewItemSlotWithoutSaveAbility(int subtype_id);
+ItemSlot* GetNewItemSlot(ENTITY::eTYPE subtype_id, unsigned long int id = NONE_ID);
+ItemSlot* GetNewItemSlotWithoutSaveAbility(ENTITY::eTYPE subtype_id);
 
 #endif 
     

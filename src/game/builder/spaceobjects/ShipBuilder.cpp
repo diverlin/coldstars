@@ -52,7 +52,7 @@ Ship* ShipBuilder::GetNewShipTemplate(unsigned long int id) const
         return ship;
 }
 
-Ship* ShipBuilder::GetNewShip(int race_id, int subsubtype_id, int size_id, int weapons_num) const
+Ship* ShipBuilder::GetNewShip(int race_id, ENTITY::eTYPE subsubtype_id, int size_id, int weapons_num) const
 {
         Ship* ship = GetNewShipTemplate();
         CreateNewInternals(ship, race_id, subsubtype_id, size_id, weapons_num);     
@@ -63,7 +63,7 @@ Ship* ShipBuilder::GetNewShip(int race_id, int subsubtype_id, int size_id, int w
 Ship* ShipBuilder::GetNewShip() const
 {
 	int race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-	int subsubtype_id = ENTITY::WARRIOR_ID;
+	ENTITY::eTYPE subsubtype_id = ENTITY::eTYPE::WARRIOR_ID;
 	int size_id = getRandInt(1, 9);
 	int weapons_num = size_id;
         	
@@ -73,7 +73,7 @@ Ship* ShipBuilder::GetNewShip() const
         return ship;
 }
 
-void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id, int size_id, int weapons_num) const
+void ShipBuilder::CreateNewInternals(Ship* ship, int race_id,  ENTITY::eTYPE subsubtype_id, int size_id, int weapons_num) const
 {
 	Mesh* mesh = nullptr;
 	TextureOb* texOb = nullptr;
@@ -90,8 +90,8 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id, int subsubtype_id,
         float otsec_rate      = 1;
         switch (subsubtype_id)
         {
-                case ENTITY::WARRIOR_ID: { protection_rate = 2; break; }
-                case ENTITY::TRADER_ID:  { otsec_rate = 1.5; break; }
+                case ENTITY::eTYPE::WARRIOR_ID: { protection_rate = 2; break; }
+                case ENTITY::eTYPE::TRADER_ID:  { otsec_rate = 1.5; break; }
         }
         
         VehicleKorpusData data_korpus;

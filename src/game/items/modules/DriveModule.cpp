@@ -24,7 +24,7 @@
 DriveModule::DriveModule(int id)
 {
 	data_id.id         = id;
-	data_id.subtype_id = ENTITY::DRIVE_MODULE_ID;
+	data_id.subtype_id = ENTITY::eTYPE::DRIVE_MODULE_ID;
 	
      	speed_add = 0;
      	hyper_add = 0;

@@ -40,8 +40,8 @@
 Ship::Ship(int id)
 {
 	data_id.id = id;
-	data_id.type_id = ENTITY::VEHICLE_ID;
-	data_id.subtype_id = ENTITY::SHIP_ID;
+	data_id.type_id = ENTITY::eTYPE::VEHICLE_ID;
+	data_id.subtype_id = ENTITY::eTYPE::SHIP_ID;
 }
 
 /* virtual */
@@ -62,7 +62,7 @@ void Ship::UpdateInfo()
 	if (starsystem) { info.addNameStr("id/ss_id:"); info.addValueStr( int2str(data_id.id) + " / " + int2str(starsystem->GetId()) ); }
 	else     		{ info.addNameStr("id:");       info.addValueStr( int2str(data_id.id) ); }
 	info.addNameStr("race:");   		info.addValueStr( getRaceStr(textureOb->race_id) ); 
-	info.addNameStr("class:");   		info.addValueStr( getTypeStr(data_id.subsubtype_id) );     	
+	info.addNameStr("class:");   		info.addValueStr( getEntityTypeStr(data_id.subsubtype_id) );     	
 	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
 	info.addNameStr("size id:");     	info.addValueStr( int2str(textureOb->size_id) );
 	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(properties.free_space) );

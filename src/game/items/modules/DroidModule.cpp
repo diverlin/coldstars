@@ -24,7 +24,7 @@
 DroidModule::DroidModule(int id)
 {
 	data_id.id         = id;
-	data_id.subtype_id = ENTITY::DROID_MODULE_ID;
+	data_id.subtype_id = ENTITY::eTYPE::DROID_MODULE_ID;
 	
      	repair_add = 0;
 }

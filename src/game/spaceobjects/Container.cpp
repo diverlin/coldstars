@@ -33,14 +33,13 @@
 #include "../common/Logger.hpp"
 
 Container::Container(int id)
+:
+item_slot(nullptr)    
 {
 	data_id.id         = id;
-	data_id.type_id    = ENTITY::CONTAINER_ID;
-	data_id.subtype_id = NONE_ID;
-	
-	mass = 1;
-	
-	item_slot = nullptr;
+	data_id.type_id    = ENTITY::eTYPE::CONTAINER_ID;
+
+    mass = 1;
 	
 	velocity = getRandInt(40, 42) / 100.0;
 }
@@ -86,7 +85,7 @@ void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 /* virtual */    
 void Container::PostDeathUniqueEvent(bool show_effect)
 {
-	if (item_slot->GetItem()->GetTypeId() == ENTITY::BOMB_ID)
+	if (item_slot->GetItem()->GetTypeId() == ENTITY::eTYPE::BOMB_ID)
 	{
 		starsystem->BombExplosionEvent(this, show_effect);  
 	}

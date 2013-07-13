@@ -32,7 +32,7 @@
 
 BaseEquipment::BaseEquipment()
 {
-        data_id.type_id = ENTITY::EQUIPMENT_ID;
+        data_id.type_id = ENTITY::eTYPE::EQUIPMENT_ID;
         race_id         = RACE::R0_ID;
 
     	price = 0;
@@ -125,7 +125,7 @@ void BaseEquipment::Render(const Box& box, const Vec2<float>& gui_offset, bool d
 
 	if (draw_text == true)
 	{
-    		if (data_id.subtype_id == ENTITY::ROCKET_EQUIPMENT_ID)
+    		if (data_id.subtype_id == ENTITY::eTYPE::ROCKET_EQUIPMENT_ID)
         	{
         		Vec2<float> pos(box.GetCenter().x - box.GetSize().x/2 + gui_offset.x, box.GetCenter().y + gui_offset.y);
         		Screen::Instance().DrawText(int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);

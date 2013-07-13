@@ -35,7 +35,7 @@
 Planet::Planet(int id):atmosphere(nullptr)
 {    
 	data_id.id = id;
-	data_id.type_id = ENTITY::PLANET_ID;
+	data_id.type_id = ENTITY::eTYPE::PLANET_ID;
 	
 	population  = 0;
 		      	

@@ -17,8 +17,8 @@
 */
 
 
-#ifndef MODULEBASE_H
-#define MODULEBASE_H
+#ifndef MODULEBASE_HPP
+#define MODULEBASE_HPP
 
 #include "../BaseItem.hpp"
 class BaseEquipment; //#include "../equipment/BaseEquipment.hpp"
@@ -31,22 +31,22 @@ struct UnresolvedDataUniqueBaseModule
 
 class BaseModule : public BaseItem
 {
-    	public:
-      		BaseModule();
-      		virtual ~BaseModule();
-      		
-      		void SetEquipmentOwner(BaseEquipment* equipment_owner) { this->equipment_owner = equipment_owner; };
+    public:
+        BaseModule();
+        virtual ~BaseModule();
+        
+        void SetEquipmentOwner(BaseEquipment* equipment_owner) { this->equipment_owner = equipment_owner; }
 
 	protected:     	
-		BaseEquipment* equipment_owner;
-		
-		UnresolvedDataUniqueBaseModule data_unresolved_BaseModule;
-		
-     		void AddCommonInfo();   
-     		
-     		void SaveDataUniqueBaseModule(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueBaseModule(const boost::property_tree::ptree&);
-		void ResolveDataUniqueBaseModule();                
+        BaseEquipment* equipment_owner;
+        
+        UnresolvedDataUniqueBaseModule data_unresolved_BaseModule;
+        
+        void AddCommonInfo();   
+        
+        void SaveDataUniqueBaseModule(boost::property_tree::ptree&, const std::string&) const;
+        void LoadDataUniqueBaseModule(const boost::property_tree::ptree&);
+        void ResolveDataUniqueBaseModule();                
 };
 
 #endif

@@ -16,16 +16,16 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef COMMON_HPP
+#define COMMON_HPP
 
 #include <string>
-#include "../math/myVector.hpp"
+#include <math/myVector.hpp>
 #include <common/constants.hpp>
 
 namespace GUI
 {
-    eTYPE getEquivalent(int);
+    GUI::eTYPE getEquivalent(ENTITY::eTYPE);
 }
        
 int getObjectSize(int w, int h); 

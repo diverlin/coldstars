@@ -24,7 +24,7 @@
 ProtectorModule::ProtectorModule(int id)
 {
         data_id.id    	   = id;
-        data_id.subtype_id = ENTITY::PROTECTOR_MODULE_ID;
+        data_id.subtype_id = ENTITY::eTYPE::PROTECTOR_MODULE_ID;
         
      	protection_add = 0;
 }

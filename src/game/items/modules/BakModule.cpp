@@ -24,9 +24,9 @@
 BakModule::BakModule(int id)
 {
 	data_id.id         = id;
-	data_id.subtype_id = ENTITY::BAK_MODULE_ID;
+	data_id.subtype_id = ENTITY::eTYPE::BAK_MODULE_ID;
 	
-    	fuel_max_add = 0;
+    fuel_max_add = 0;
 }
 
 /* virtual */

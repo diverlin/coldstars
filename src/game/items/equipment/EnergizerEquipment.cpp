@@ -28,7 +28,7 @@
 EnergizerEquipment::EnergizerEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = ENTITY::ENERGIZER_EQUIPMENT_ID;
+        data_id.subtype_id = ENTITY::eTYPE::ENERGIZER_EQUIPMENT_ID;
                
     	energy_max_orig  = 0;
         restoration_orig = 0;

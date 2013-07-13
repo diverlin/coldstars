@@ -30,11 +30,11 @@
 #include "../garbage/EntityGarbage.hpp"
 
 VehicleSlot::VehicleSlot(int id)
+:
+vehicle(nullptr)
 {   
 	data_id.id = id;
-	data_id.type_id = ENTITY::VEHICLE_SLOT_ID;
-	
-    	vehicle = nullptr;
+	data_id.type_id = ENTITY::eTYPE::VEHICLE_SLOT_ID;
 }
    
 VehicleSlot::~VehicleSlot()
@@ -129,7 +129,7 @@ void VehicleSlot::ResolveDataUniqueVehicleSlot()
         {
 	       //case ENTITY::VEHICLE_ID: 	{ ((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
 	       //case ENTITY::CONTAINER_ID:     { ((Container*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
-	       case ENTITY::STORE_ID:           { ((Store*)owner)->AddVehicleSlot(this); break; }
-	       case ENTITY::ANGAR_ID:         	{ ((Angar*)owner)->AddVehicleSlot(this); break; }
+	       case ENTITY::eTYPE::STORE_ID:           { ((Store*)owner)->AddVehicleSlot(this); break; }
+	       case ENTITY::eTYPE::ANGAR_ID:         	{ ((Angar*)owner)->AddVehicleSlot(this); break; }
 	}
 }

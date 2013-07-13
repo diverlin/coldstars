@@ -24,7 +24,7 @@
 ScanerModule::ScanerModule(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = ENTITY::SCANER_MODULE_ID;
+        data_id.subtype_id = ENTITY::eTYPE::SCANER_MODULE_ID;
         
     	scan_add = 0;
 }

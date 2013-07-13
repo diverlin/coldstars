@@ -66,16 +66,16 @@ RocketModule* RocketModuleBuilder::GetNewRocketModule(int ammo_max_add, int dama
       	
 void RocketModuleBuilder::CreateNewInternals(RocketModule* rocket_module, int ammo_max_add, int damage_add, int radius_add) const
 {     
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-    	ammo_max_add = getRandInt(MODULE::ROCKET::AMMO_MIN, MODULE::ROCKET::AMMO_MAX);
-    	damage_add = getRandInt(MODULE::ROCKET::DAMAGE_MIN, MODULE::ROCKET::DAMAGE_MAX);
-    	radius_add = getRandInt(MODULE::ROCKET::RADIUS_MIN, MODULE::ROCKET::RADIUS_MAX);
-    
-        rocket_module->SetParentSubTypeId(ENTITY::ROCKET_EQUIPMENT_ID);    
-        rocket_module->BindData2D(texOb);
-        rocket_module->SetAmmoMaxAdd(ammo_max_add);
-        rocket_module->SetDamageAdd(damage_add);
-        rocket_module->SetRadiusAdd(radius_add);
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    ammo_max_add = getRandInt(MODULE::ROCKET::AMMO_MIN, MODULE::ROCKET::AMMO_MAX);
+    damage_add = getRandInt(MODULE::ROCKET::DAMAGE_MIN, MODULE::ROCKET::DAMAGE_MAX);
+    radius_add = getRandInt(MODULE::ROCKET::RADIUS_MIN, MODULE::ROCKET::RADIUS_MAX);
+
+    rocket_module->SetParentSubTypeId(ENTITY::eTYPE::ROCKET_EQUIPMENT_ID);    
+    rocket_module->BindData2D(texOb);
+    rocket_module->SetAmmoMaxAdd(ammo_max_add);
+    rocket_module->SetDamageAdd(damage_add);
+    rocket_module->SetRadiusAdd(radius_add);
 }
 
 

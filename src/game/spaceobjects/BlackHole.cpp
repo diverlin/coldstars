@@ -30,9 +30,9 @@
 BlackHole::BlackHole(int id)
 {        
 	data_id.id = id;
-	data_id.type_id = ENTITY::BLACKHOLE_ID;
+	data_id.type_id = ENTITY::eTYPE::BLACKHOLE_ID;
 	
-    	mass = getRandInt(1000, 4000);
+    mass = getRandInt(1000, 4000);
 }
 
 /* virtual */

@@ -62,9 +62,9 @@ sector(nullptr),
 container_num_max(CONTAINER_NUM_MAX_DEFAULT)
 { 
     	data_id.id = id;
-    	data_id.type_id = ENTITY::STARSYSTEM_ID;
+    	data_id.type_id = ENTITY::eTYPE::STARSYSTEM_ID;
     	
-    	place_type_id = ENTITY::SPACE_ID;
+    	place_type_id = ENTITY::eTYPE::SPACE_ID;
     	
     	condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
     	
@@ -169,19 +169,19 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const Vec3<float>& center, const V
 	}
 	#endif
 	
-     	vehicle->SetPlaceTypeId(ENTITY::SPACE_ID);
-     	vehicle->SetStarSystem(this);  
-			
-	vehicle->SetCenter(center); 
-    	vehicle->SetAngle(angle);   
-    	vehicle->UpdateOrientation();  
-    	
-	vehicle->SetParent(parent);
-        vehicle->SetColor(color);
-                	
-	VEHICLE_vec.push_back(vehicle);  
+    vehicle->SetPlaceTypeId(ENTITY::eTYPE::SPACE_ID);
+    vehicle->SetStarSystem(this);  
+    
+    vehicle->SetCenter(center); 
+    vehicle->SetAngle(angle);   
+    vehicle->UpdateOrientation();  
+    
+    vehicle->SetParent(parent);
+    vehicle->SetColor(color);
+    
+    VEHICLE_vec.push_back(vehicle);  
 
-	if (vehicle->GetSubTypeId() == ENTITY::SATELLITE_ID)
+	if (vehicle->GetSubTypeId() == ENTITY::eTYPE::SATELLITE_ID)
 	{
 		((Satellite*)vehicle)->GetOrbit()->CalcPath(parent->GetCollisionRadius(), 1.0, getRandBool());
 	}
@@ -190,12 +190,12 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const Vec3<float>& center, const V
 
 void StarSystem::AddBullet(RocketBullet* rocket, const Vec3<float>& center, const Vec3<float>& angle)
 {
-     	rocket->SetPlaceTypeId(ENTITY::SPACE_ID);
-     	rocket->SetStarSystem(this);  
+    rocket->SetPlaceTypeId(ENTITY::eTYPE::SPACE_ID);
+    rocket->SetStarSystem(this);  
 			
 	rocket->SetCenter(center); 
-    	rocket->SetAngle(angle);   
-    	rocket->UpdateOrientation();      	
+    rocket->SetAngle(angle);   
+    rocket->UpdateOrientation();      	
 
 	ROCKET_vec.push_back(rocket);  
 }
@@ -206,26 +206,26 @@ void StarSystem::Add(BasePlanet* object, BaseSpaceEntity* parent, int it)
         object->SetParent(parent);
         
         object->SetStarSystem(this);
-        object->SetPlaceTypeId(ENTITY::SPACE_ID);
+        object->SetPlaceTypeId(ENTITY::eTYPE::SPACE_ID);
         
         object->GetOrbit().SetIt(it);
         object->UpdatePosition();
         
 	switch(object->GetTypeId())
 	{
-		case ENTITY::STAR_ID:
+		case ENTITY::eTYPE::STAR_ID:
 		{
 			STAR_vec.push_back((Star*)object);
 			break;
 		}
 		
-		case ENTITY::PLANET_ID:
+		case ENTITY::eTYPE::PLANET_ID:
 		{
 			PLANET_vec.push_back((Planet*)object);
 			break;
 		}
 		
-		case ENTITY::ASTEROID_ID:
+		case ENTITY::eTYPE::ASTEROID_ID:
 		{
 			ASTEROID_vec.push_back((Asteroid*)object);
 			break;
@@ -250,7 +250,7 @@ void StarSystem::AddContainer(Container* container, const Vec3<float>& center)
 	#endif
 	
 	container->SetStarSystem(this);
-        container->SetPlaceTypeId(ENTITY::SPACE_ID);
+        container->SetPlaceTypeId(ENTITY::eTYPE::SPACE_ID);
     	container->SetCenter(center);
         
         CONTAINER_vec.push_back(container);
@@ -259,7 +259,7 @@ void StarSystem::AddContainer(Container* container, const Vec3<float>& center)
 void StarSystem::Add(BlackHole* blackhole, const Vec3<float>& center)
 {
 	blackhole->SetStarSystem(this);
-        blackhole->SetPlaceTypeId(ENTITY::SPACE_ID);
+        blackhole->SetPlaceTypeId(ENTITY::eTYPE::SPACE_ID);
 	blackhole->SetCenter(center);
 	BLACKHOLE_vec.push_back(blackhole);
 }    
@@ -760,17 +760,17 @@ void StarSystem::UpdateInSpaceInStatic_s()
 {
 	UpdateStates();
 			
-     	for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 		
-     	{ 
-     		VEHICLE_vec[i]->GetOwnerNpc()->UpdateInSpaceInStatic(); 
-     		if (VEHICLE_vec[i]->GetSubTypeId() == ENTITY::SPACESTATION_ID)
-     		{
-     			((SpaceStation*)VEHICLE_vec[i])->GetLand()->UpdateInStatic();
-     		}
-     	}
+    for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 		
+    { 
+        VEHICLE_vec[i]->GetOwnerNpc()->UpdateInSpaceInStatic(); 
+        if (VEHICLE_vec[i]->GetSubTypeId() == ENTITY::eTYPE::SPACESTATION_ID)
+        {
+            ((SpaceStation*)VEHICLE_vec[i])->GetLand()->UpdateInStatic();
+        }
+    }
 
-    	for (unsigned int i=0; i<STAR_vec.size(); i++)     	{ STAR_vec[i]->UpdateInSpaceInStatic(); }     	
-    	for (unsigned int i=0; i<PLANET_vec.size(); i++)     	{ PLANET_vec[i]->UpdateInSpaceInStatic(); }
+    for (unsigned int i=0; i<STAR_vec.size(); i++)     	{ STAR_vec[i]->UpdateInSpaceInStatic(); }     	
+    for (unsigned int i=0; i<PLANET_vec.size(); i++)     	{ PLANET_vec[i]->UpdateInSpaceInStatic(); }
 
 	garbage_effects.clear(); 
 }      
@@ -873,47 +873,46 @@ void StarSystem::DrawPath()
      
 void StarSystem::ShipManager_s(unsigned int num)
 {
-        while (VEHICLE_vec.size() < num)
-        {
+    while (VEHICLE_vec.size() < num)
+    {
 		int prace_id    = RACE::R0_ID;
 		if (getRandBool())
 		{
 			prace_id = RACE::R6_ID;
 		}
 		
-      		int psubtype_id    = ENTITY::WARRIOR_ID;
-      		int psubsubtype_id = ENTITY::WARRIOR_ID;
-      		int size_id     = SIZE_4_ID;
-      		int weapons_num = 7;
-        
-       		Npc* new_pnpc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id, psubsubtype_id);
-        	Ship* new_pship = ShipBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
-        	ShipBuilder::Instance().EquipEquipment(new_pship);   // improove
-        
-        	new_pship->BindOwnerNpc(new_pnpc);
+        ENTITY::eTYPE psubtype_id    = ENTITY::eTYPE::WARRIOR_ID;
+        ENTITY::eTYPE psubsubtype_id = ENTITY::eTYPE::WARRIOR_ID;
+        int size_id     = SIZE_4_ID;
+        int weapons_num = 7;
+    
+        Npc* new_pnpc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id, psubsubtype_id);
+        Ship* new_pship = ShipBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
+        ShipBuilder::Instance().EquipEquipment(new_pship);   // improove
+    
+        new_pship->BindOwnerNpc(new_pnpc);
 
 		Vec2<float> center = getRandVec2f(100, 800);
 		Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
 		Vec3<float> angle(0,0,getRandInt(0, 360));
 		
-                AddVehicle(new_pship, center3, angle);
-        	//break;
-        }
+        AddVehicle(new_pship, center3, angle);
+    }
 }
 
 
 void StarSystem::ManageUnavaliableObjects_s()
 {               
-        for (std::vector<Vehicle*>::iterator it=VEHICLE_vec.begin(); it<VEHICLE_vec.end(); ++it)
-        {
-               	if ((*it)->GetPlaceTypeId() != ENTITY::SPACE_ID)
-               	{	
-               		#if ENTITY_TRANSACTION_LOG_ENABLED == 1
-			Logger::Instance().Log("starsysten("+int2str(GetId())+ ")::RemoveVehicle(" + int2str((*it)->GetId())+")");
-			#endif
-               		it = VEHICLE_vec.erase(it);
-               	}
+    for (std::vector<Vehicle*>::iterator it=VEHICLE_vec.begin(); it<VEHICLE_vec.end(); ++it)
+    {
+        if ((*it)->GetPlaceTypeId() != ENTITY::eTYPE::SPACE_ID)
+        {	
+            #if ENTITY_TRANSACTION_LOG_ENABLED == 1
+            Logger::Instance().Log("starsysten("+int2str(GetId())+ ")::RemoveVehicle(" + int2str((*it)->GetId())+")");
+            #endif
+            it = VEHICLE_vec.erase(it);
         }
+    }
 }
     		
 void StarSystem::ManageDeadObjects_s()

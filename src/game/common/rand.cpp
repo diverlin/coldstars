@@ -28,6 +28,12 @@ int getRandIntFromVec(const std::vector<int>& vec)
 	if (vec.size()>0) { return vec[getRandInt(0, vec.size()-1)]; }
 	else 		  { return NONE_ID; }
 }
+
+ENTITY::eTYPE getRandIntFromVec(const std::vector<ENTITY::eTYPE>& vec)
+{
+	if (vec.size()>0)   { return vec[getRandInt(0, vec.size()-1)]; }
+	else 		        { return ENTITY::eTYPE::NONE_ID; }
+}
         
         
 float getRandFloat(float low, float high)
@@ -57,10 +63,10 @@ bool getRandBool()
 		return false; 
 }
 
-int getRandNpcSubTypeId(int race_id, const std::vector<int>& subtypes)
+ENTITY::eTYPE getRandNpcSubTypeId(int race_id, const std::vector<ENTITY::eTYPE>& subtypes)
 {
-	std::vector<int> allowed_subtypes;
-	const std::vector<int>& allowed_race_subtypes =  getAllowedSubTypesByRaceId(race_id);
+	std::vector<ENTITY::eTYPE> allowed_subtypes;
+	const std::vector<ENTITY::eTYPE>& allowed_race_subtypes =  getAllowedSubTypesByRaceId(race_id);
 	
 	for (unsigned int i=0; i<subtypes.size(); i++)
 	{
@@ -73,32 +79,32 @@ int getRandNpcSubTypeId(int race_id, const std::vector<int>& subtypes)
 		}
 	}
 	
-        return getRandIntFromVec(allowed_subtypes);  
+    return getRandIntFromVec(allowed_subtypes);  
 }
 
-int getRandNpcSubTypeId(int race_id)
+ENTITY::eTYPE getRandNpcSubTypeId(int race_id)
 {
-	const std::vector<int>& allowed_race_subtypes =  getAllowedSubTypesByRaceId(race_id);
+	const std::vector<ENTITY::eTYPE>& allowed_race_subtypes =  getAllowedSubTypesByRaceId(race_id);
 	return getRandIntFromVec(allowed_race_subtypes);
 }
 
-const std::vector<int>& getAllowedSubTypesByRaceId(int race_id)
+const std::vector<ENTITY::eTYPE>& getAllowedSubTypesByRaceId(int race_id)
 {
 	switch(race_id)
-        {
-               	case RACE::R0_ID: { return RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec;  break; }
-               	case RACE::R1_ID: { return RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec;  break; }
-               	case RACE::R2_ID: { return RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec;  break; }
-               	case RACE::R3_ID: { return RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec;  break; }
-              	case RACE::R4_ID: { return RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec;  break; }
-              	case RACE::R6_ID: { return RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec;  break; }
-              	case RACE::R7_ID: { return RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec;  break; }
+    {
+        case RACE::R0_ID: { return RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec;  break; }
+        case RACE::R1_ID: { return RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec;  break; }
+        case RACE::R2_ID: { return RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec;  break; }
+        case RACE::R3_ID: { return RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec;  break; }
+        case RACE::R4_ID: { return RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec;  break; }
+        case RACE::R6_ID: { return RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec;  break; }
+        case RACE::R7_ID: { return RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec;  break; }
 	}
 }
 
-int getRandNpcSubSubTypeId(int subtype_id)
+ENTITY::eTYPE getRandNpcSubSubTypeId(ENTITY::eTYPE subtype_id)
 {
-        if (subtype_id == ENTITY::RANGER_ID)
+        if (subtype_id == ENTITY::eTYPE::RANGER_ID)
         {
                 return getRandIntFromVec(RaceInformationCollector::Instance().SUBSUBTYPE_vec);
         }

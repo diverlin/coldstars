@@ -90,7 +90,7 @@ void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector
 
         protector_equipment->SetProtectionOrig(protection_orig);  
         protector_equipment->BindData2D(texOb_item);
-        protector_equipment->SetParentSubTypeId(ENTITY::PROTECTOR_SLOT_ID);
+        protector_equipment->SetParentSubTypeId(ENTITY::eTYPE::PROTECTOR_SLOT_ID);
         protector_equipment->SetItemCommonData(common_data);
         protector_equipment->SetCondition(common_data.condition_max);
                 

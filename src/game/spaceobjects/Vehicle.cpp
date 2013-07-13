@@ -142,7 +142,7 @@ GoodsPack* Vehicle::GetGoodsPack() const
 	{
 		if (slot_cargo_vec[i]->GetItem() != nullptr)
 		{
-			if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
+			if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::eTYPE::GOODS_ID)
 			{
 				return slot_cargo_vec[i]->GetGoodsPack();
 			}
@@ -158,7 +158,7 @@ int Vehicle::GetGivenExpirience() const
 	return owner_npc->GetSkills().GetExpirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
 }
     
-bool Vehicle::CheckItemSlotPresenceBySubTypeId(int slot_subtype_id) const
+bool Vehicle::CheckItemSlotPresenceBySubTypeId(ENTITY::eTYPE slot_subtype_id) const
 {
 	for (unsigned int i=0; i<slot_total_vec.size(); i++)
 	{
@@ -177,7 +177,7 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
                 
 	switch(slot->GetSubTypeId())
 	{
-		case ENTITY::WEAPON_SLOT_ID:    
+		case ENTITY::eTYPE::WEAPON_SLOT_ID:    
 		{
 			float border_start = 0.2;
 			float border_end   = 0.8;
@@ -191,31 +191,31 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
 			
 			break; 
 		}
-		case ENTITY::DRIVE_SLOT_ID:     { drive_complex.SetDriveSlot(slot); break; }
-		case ENTITY::BAK_SLOT_ID:       { drive_complex.SetBakSlot(slot); break; }
-		case ENTITY::PROTECTOR_SLOT_ID: { protection_complex.SetProtectorSlot(slot); break; }
-		case ENTITY::RADAR_SLOT_ID:     { radar_slot  = slot; break; }
-		case ENTITY::SCANER_SLOT_ID:    { scaner_slot = slot; break; }
+		case ENTITY::eTYPE::DRIVE_SLOT_ID:     { drive_complex.SetDriveSlot(slot); break; }
+		case ENTITY::eTYPE::BAK_SLOT_ID:       { drive_complex.SetBakSlot(slot); break; }
+		case ENTITY::eTYPE::PROTECTOR_SLOT_ID: { protection_complex.SetProtectorSlot(slot); break; }
+		case ENTITY::eTYPE::RADAR_SLOT_ID:     { radar_slot  = slot; break; }
+		case ENTITY::eTYPE::SCANER_SLOT_ID:    { scaner_slot = slot; break; }
 		
-		case ENTITY::ENERGIZER_SLOT_ID: { energizer_slot = slot; break; }
-		case ENTITY::GRAPPLE_SLOT_ID:   { grapple_slot   = slot; break; }
-		case ENTITY::DROID_SLOT_ID:     { droid_slot     = slot; break; }
-		case ENTITY::FREEZER_SLOT_ID:   { freezer_slot   = slot; break; }
+		case ENTITY::eTYPE::ENERGIZER_SLOT_ID: { energizer_slot = slot; break; }
+		case ENTITY::eTYPE::GRAPPLE_SLOT_ID:   { grapple_slot   = slot; break; }
+		case ENTITY::eTYPE::DROID_SLOT_ID:     { droid_slot     = slot; break; }
+		case ENTITY::eTYPE::FREEZER_SLOT_ID:   { freezer_slot   = slot; break; }
 	}
         
 	slot_total_vec.push_back(slot); 
 
-	if ( (slot->GetSubTypeId() != ENTITY::ARTEFACT_SLOT_ID) and (slot->GetSubTypeId() != ENTITY::CARGO_SLOT_ID) )
+	if ( (slot->GetSubTypeId() != ENTITY::eTYPE::ARTEFACT_SLOT_ID) and (slot->GetSubTypeId() != ENTITY::eTYPE::CARGO_SLOT_ID) )
 	{
 		slot_funct_vec.push_back(slot);
 	}
 	
-	if (slot->GetSubTypeId() == ENTITY::ARTEFACT_SLOT_ID)
+	if (slot->GetSubTypeId() == ENTITY::eTYPE::ARTEFACT_SLOT_ID)
 	{
 		slot_artef_vec.push_back(slot);
 	}
 	
-	if (slot->GetSubTypeId() == ENTITY::CARGO_SLOT_ID)
+	if (slot->GetSubTypeId() == ENTITY::eTYPE::CARGO_SLOT_ID)
 	{
 		slot_cargo_vec.push_back(slot); 
 	}
@@ -229,7 +229,7 @@ bool Vehicle::GetAllItemsFromVehicle(Vehicle* vehicle)
 	{ 
 		if (vehicle->slot_total_vec[i]->GetItem() != nullptr)
 		{
-			if (vehicle->slot_total_vec[i]->GetSubTypeId() == ENTITY::CARGO_SLOT_ID)
+			if (vehicle->slot_total_vec[i]->GetSubTypeId() == ENTITY::eTYPE::CARGO_SLOT_ID)
 			{
 				result = AddItemToCargoSlot(vehicle->slot_total_vec[i]->GetItem());
 			}
@@ -247,10 +247,10 @@ bool Vehicle::ManageItem(BaseItem* item)
 {
 	switch(item->GetTypeId())
 	{
-		case ENTITY::EQUIPMENT_ID: 	{ return ManageFunctionEquipment(item); break; }
-		case ENTITY::MODULE_ID: 	{ return ManageFunctionModule(item); break; }
-		case ENTITY::ARTEFACT_ID: 	{ return ManageFunctionArtefact(item); break; }	
-		case ENTITY::GOODS_ID: 		{ return ManageFunctionGoodsPack(item); break; }
+		case ENTITY::eTYPE::EQUIPMENT_ID: 	{ return ManageFunctionEquipment(item); break; }
+		case ENTITY::eTYPE::MODULE_ID: 	{ return ManageFunctionModule(item); break; }
+		case ENTITY::eTYPE::ARTEFACT_ID: 	{ return ManageFunctionArtefact(item); break; }	
+		case ENTITY::eTYPE::GOODS_ID: 		{ return ManageFunctionGoodsPack(item); break; }
 	}
 	
 	return false;
@@ -263,7 +263,7 @@ bool Vehicle::ManageFunctionGoodsPack(BaseItem* item)
 
 bool Vehicle::ManageFunctionEquipment(BaseItem* item)
 {
-	if (item->GetParentSubTypeId() == ENTITY::WEAPON_SLOT_ID)
+	if (item->GetParentSubTypeId() == ENTITY::eTYPE::WEAPON_SLOT_ID)
 	{
 		ItemSlot* item_slot = weapon_complex.GetEmptyWeaponSlot();
 		if (item_slot != nullptr)
@@ -328,7 +328,7 @@ bool Vehicle::ManageFunctionArtefact(BaseItem* item)
 	return false;
 }
 
-ItemSlot* Vehicle::GetFuctionalSlot(int functional_slot_subtype_id) const
+ItemSlot* Vehicle::GetFuctionalSlot(ENTITY::eTYPE functional_slot_subtype_id) const
 {
 	for(unsigned int i=0; i<slot_funct_vec.size(); i++)
 	{
@@ -365,13 +365,13 @@ ItemSlot* Vehicle::GetEmptyCargoSlot()
 	return nullptr;
 }
 
-ItemSlot* Vehicle::GetCargoSlotWithGoods(int requested_goods_subtype_id)
+ItemSlot* Vehicle::GetCargoSlotWithGoods(ENTITY::eTYPE requested_goods_subtype_id)
 {
 	for (unsigned int i=0; i<slot_cargo_vec.size(); i++)
 	{
 		if (slot_cargo_vec[i]->GetItem() != nullptr)
 		{
-			if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::GOODS_ID)
+			if (slot_cargo_vec[i]->GetItem()->GetTypeId() == ENTITY::eTYPE::GOODS_ID)
 			{
 				if (slot_cargo_vec[i]->GetItem()->GetSubTypeId() == requested_goods_subtype_id)
 				{
@@ -399,7 +399,7 @@ bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
 bool Vehicle::AddItemToCargoSlot(BaseItem* item)
 {
 	IncreaseMass(item->GetMass());
-	if (item->GetTypeId() == ENTITY::GOODS_ID)
+	if (item->GetTypeId() == ENTITY::eTYPE::GOODS_ID)
 	{
 		if (ManageFunctionGoodsPack(item) == true)
 		{
@@ -458,13 +458,13 @@ bool Vehicle::SellItem(BaseItem* item)
 	int item_mass = item->GetMass();
 	switch(item->GetTypeId())
 	{
-		case ENTITY::GOODS_ID: 	   
+		case ENTITY::eTYPE::GOODS_ID: 	   
 		{ 
 			earn_money = ((Kosmoport*)land)->GetShop()->BuyGoods((GoodsPack*)item);	
 			break; 
 		}
 		
-		case ENTITY::EQUIPMENT_ID: 
+		case ENTITY::eTYPE::EQUIPMENT_ID: 
 		{ 
 			earn_money = ((Kosmoport*)land)->GetStore()->BuyItem(item);
 			break; 
@@ -630,7 +630,7 @@ void Vehicle::DockingEvent()
 	          	 
         switch(drive_complex.GetTarget()->GetTypeId())         	     	     	
      	{
-     		case ENTITY::PLANET_ID:
+     		case ENTITY::eTYPE::PLANET_ID:
      		{
                 	Planet* planet = ((Planet*)drive_complex.GetTarget());                
      			planet->GetLand()->AddVehicle(this);
@@ -638,11 +638,11 @@ void Vehicle::DockingEvent()
 			break;
 		}
 	
-		case ENTITY::VEHICLE_ID:
+		case ENTITY::eTYPE::VEHICLE_ID:
 		{	 
 			switch(drive_complex.GetTarget()->GetSubTypeId())
 			{
-				case ENTITY::SPACESTATION_ID:
+				case ENTITY::eTYPE::SPACESTATION_ID:
 				{
                 			SpaceStation* spacestation = ((SpaceStation*)drive_complex.GetTarget());
                         		spacestation->GetLand()->AddVehicle(this);
@@ -650,7 +650,7 @@ void Vehicle::DockingEvent()
 					break;
 				}
 				
-				case ENTITY::SHIP_ID:
+				case ENTITY::eTYPE::SHIP_ID:
 				{
 					//..
 					break;
@@ -674,7 +674,7 @@ void Vehicle::LaunchingEvent()
 	{
 		switch(parent_vehicleslot->GetOwner()->GetTypeId())
 		{
-			case ENTITY::ANGAR_ID:
+			case ENTITY::eTYPE::ANGAR_ID:
 			{
 				int angleInD = getRandInt(0, 360);
 				Vec2<float> offset_pos = getRandVec2f(40, 100);
@@ -686,7 +686,7 @@ void Vehicle::LaunchingEvent()
 				break;
 			}
 				
-			case ENTITY::VEHICLE_ID:
+			case ENTITY::eTYPE::VEHICLE_ID:
 			{
 				//..
 				break;
@@ -699,7 +699,7 @@ void Vehicle::LaunchingEvent()
 		Vec2<float> offset_pos = getRandVec2f(40, 100);
 		Vec3<float> offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
 		Vec3<float> angle(0,0,angleInD);
-	     	starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetCenter() + offset_pos3, angle, nullptr);
+        starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetCenter() + offset_pos3, angle, nullptr);
 		land->RemoveVehicle(this); 
 	}
 
@@ -797,7 +797,7 @@ void Vehicle::CheckNeedsInStatic()
         {
                 if (slot_funct_vec[i]->GetItem() != nullptr)
                 {
-                        if (slot_funct_vec[i]->GetItem()->GetSubTypeId() == ENTITY::ROCKET_EQUIPMENT_ID) 
+                        if (slot_funct_vec[i]->GetItem()->GetSubTypeId() == ENTITY::eTYPE::ROCKET_EQUIPMENT_ID) 
                         {
                                 if (slot_funct_vec[i]->GetRocketEquipment()->GetAmmo() == 0)
                                 {
@@ -858,7 +858,7 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
                 {
                         if (slot_funct_vec[i]->GetItem() != nullptr)
                         {
-                                if (slot_funct_vec[i]->GetItem()->GetSubTypeId() == ENTITY::ROCKET_EQUIPMENT_ID)
+                                if (slot_funct_vec[i]->GetItem()->GetSubTypeId() == ENTITY::eTYPE::ROCKET_EQUIPMENT_ID)
                                 {
                                         result = ((Angar*)parent_vehicleslot->GetOwner())->ChargeRocketEquipment(owner_npc, slot_funct_vec[i]->GetRocketEquipment());
                                 }
@@ -1179,13 +1179,13 @@ void Vehicle::UpdateArtefactInfluence()
               		{
 				switch(slot_artef_vec[i]->GetItem()->GetSubTypeId())
 				{
-					case ENTITY::GRAVITY_ARTEFACT_ID:
+					case ENTITY::eTYPE::GRAVITY_ARTEFACT_ID:
 					{
 						properties.artefact_gravity += ((GravityArtefact*)slot_artef_vec[i]->GetItem())->GetGravity();
 						break;
 					}
 
-					case ENTITY::PROTECTOR_ARTEFACT_ID:
+					case ENTITY::eTYPE::PROTECTOR_ARTEFACT_ID:
 					{
 						properties.artefact_protection += ((ProtectorArtefact*)slot_artef_vec[i]->GetItem())->GetProtection();
 						break;
@@ -1462,7 +1462,7 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        	if (parent_vehicleslot != nullptr) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); }
        	else  			       	{ save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }
       
-       	if (place_type_id == ENTITY::HYPER_SPACE_ID) 
+       	if (place_type_id == ENTITY::eTYPE::HYPER_SPACE_ID) 
        	{ 
        		save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", drive_complex.GetTarget()->GetId()); 
        	}
@@ -1525,19 +1525,19 @@ void Vehicle::ResolveDataUniqueVehicle()
 
         switch(place_type_id)
         {
-        	case ENTITY::SPACE_ID: 
+        	case ENTITY::eTYPE::SPACE_ID: 
         	{
 			starsystem->AddVehicle(this, data_unresolved_Orientation.center, data_unresolved_Orientation.angle, parent); 
 			break;
 		}
 		
-		case ENTITY::KOSMOPORT_ID:
+		case ENTITY::eTYPE::KOSMOPORT_ID:
 		{	
 			((VehicleSlot*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this); 
 			break;
 		}
 		
-		case ENTITY::HYPER_SPACE_ID:
+		case ENTITY::eTYPE::HYPER_SPACE_ID:
 		{
 			//std::cout<<"xxx="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
 			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.starsystem_hyper_id))->GetHyperSpace().AddVehicle(this);
@@ -1546,7 +1546,7 @@ void Vehicle::ResolveDataUniqueVehicle()
 			break;
 		}
 		
-		case ENTITY::NATURELAND_ID:
+		case ENTITY::eTYPE::NATURELAND_ID:
 		{
 			((NatureLand*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.land_id))->AddVehicle(this); 
 			break;

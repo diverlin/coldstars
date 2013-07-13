@@ -17,11 +17,11 @@
 */
 
 
-#ifndef BASE_H
-#define BASE_H
+#ifndef BASE_HPP
+#define BASE_HPP
 
 #include <boost/property_tree/ptree.hpp>
-#include "../struct/gameStruct.hpp"
+#include <struct/IdData.hpp>
 
 class Base
 {
@@ -31,14 +31,16 @@ class Base
 
 		virtual void PutChildsToGarbage() const = 0;
 
-		void SetSubTypeId(int subtype_id)       { data_id.subtype_id = subtype_id; }
-		void SetSubSubTypeId(int subsubtype_id) { data_id.subsubtype_id = subsubtype_id; }
+		void SetSubTypeId(ENTITY::eTYPE subtype_id)       { data_id.subtype_id = subtype_id; }
+		void SetSubSubTypeId(ENTITY::eTYPE subsubtype_id) { data_id.subsubtype_id = subsubtype_id; }
 		
 		unsigned long int GetId()        	const { return data_id.id; }   
-		int GetTypeId()   	const { return data_id.type_id; }
-		int GetSubTypeId() 	const { return data_id.subtype_id; }
-		int GetSubSubTypeId() 	const { return data_id.subsubtype_id; }
+		ENTITY::eTYPE GetTypeId()   	const { return data_id.type_id; }
+		ENTITY::eTYPE GetSubTypeId() 	const { return data_id.subtype_id; }
+		ENTITY::eTYPE GetSubSubTypeId() 	const { return data_id.subsubtype_id; }
 					
+        std::string GetDataTypeString() const;
+
 		virtual void SaveData(boost::property_tree::ptree&) const = 0;
 		virtual void LoadData(const boost::property_tree::ptree&) = 0;
 		virtual void ResolveData() = 0;

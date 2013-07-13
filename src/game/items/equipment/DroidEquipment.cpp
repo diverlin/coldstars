@@ -27,7 +27,7 @@
 DroidEquipment::DroidEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = ENTITY::DROID_EQUIPMENT_ID; 
+        data_id.subtype_id = ENTITY::eTYPE::DROID_EQUIPMENT_ID; 
         
     	repair_orig = 0;
 }

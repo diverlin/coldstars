@@ -32,7 +32,7 @@
 Store::Store(int id)
 {
 	data_id.id = id;
-	data_id.type_id  = ENTITY::STORE_ID;
+	data_id.type_id  = ENTITY::eTYPE::STORE_ID;
 }
 
 Store::~Store()
@@ -135,7 +135,7 @@ void Store::SellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
 	vehicle_slot->GetVehicle()->GetAllItemsFromVehicle(npc->GetVehicle());
 	vehicle_slot->GetVehicle()->SetStarSystem(npc->GetVehicle()->GetStarSystem());
 	vehicle_slot->GetVehicle()->SetLand(npc->GetVehicle()->GetLand());
-	vehicle_slot->GetVehicle()->SetPlaceTypeId(ENTITY::KOSMOPORT_ID);
+	vehicle_slot->GetVehicle()->SetPlaceTypeId(ENTITY::eTYPE::KOSMOPORT_ID);
 	
 	VehicleSlot* npc_vehicle_slot = npc->GetVehicle()->GetParentVehicleSlot();
 	npc->GetVehicle()->GetParentVehicleSlot()->SwapVehicle(vehicle_slot);

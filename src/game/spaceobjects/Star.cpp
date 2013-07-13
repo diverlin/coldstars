@@ -33,7 +33,7 @@
 Star::Star(int id)
 { 
 	data_id.id = id;
-	data_id.type_id = ENTITY::STAR_ID;
+	data_id.type_id = ENTITY::eTYPE::STAR_ID;
 	
    	texture_offset1 = 0.0;
     	texture_offset2 = 0.0;

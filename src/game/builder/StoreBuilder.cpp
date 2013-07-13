@@ -90,7 +90,7 @@ void StoreBuilder::CreateNewInternals(Store* store) const
 {
         for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++)
         {
-		ItemSlot* item_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);
+		ItemSlot* item_slot = GetNewItemSlot(ENTITY::eTYPE::CARGO_SLOT_ID);
                 store->AddItemSlot(item_slot);
         }
 

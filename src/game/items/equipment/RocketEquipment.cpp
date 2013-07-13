@@ -62,7 +62,7 @@ void BulletData::ResolveData()
 RocketEquipment::RocketEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = ENTITY::ROCKET_EQUIPMENT_ID;     
+        data_id.subtype_id = ENTITY::eTYPE::ROCKET_EQUIPMENT_ID;     
         
         ammo_max_orig = 0;
         damage_orig   = 0;

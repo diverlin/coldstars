@@ -90,7 +90,7 @@ void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, 
 
         radar_equipment->SetRadiusOrig(radius_orig);
         radar_equipment->BindData2D(texOb_item);
-        radar_equipment->SetParentSubTypeId(ENTITY::RADAR_SLOT_ID);
+        radar_equipment->SetParentSubTypeId(ENTITY::eTYPE::RADAR_SLOT_ID);
         radar_equipment->SetItemCommonData(common_data);
         radar_equipment->SetCondition(common_data.condition_max);
  

@@ -51,11 +51,11 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
     int angle = 0;
 	for (unsigned int i=0; i<vehicle->slot_total_vec.size(); i++)
 	{	
-		int slot_subtype_id = vehicle->slot_total_vec[i]->GetSubTypeId();
-		if ( (slot_subtype_id != ENTITY::CARGO_SLOT_ID) and (slot_subtype_id != ENTITY::ARTEFACT_SLOT_ID) )
+		ENTITY::eTYPE slot_subtype_id = vehicle->slot_total_vec[i]->GetSubTypeId();
+		if ( (slot_subtype_id != ENTITY::eTYPE::CARGO_SLOT_ID) and (slot_subtype_id != ENTITY::eTYPE::ARTEFACT_SLOT_ID) )
 		{  
-			int button_subtype_id = slot_subtype_id;
-			if (slot_subtype_id == ENTITY::WEAPON_SLOT_ID)
+			ENTITY::eTYPE button_subtype_id = slot_subtype_id;
+			if (slot_subtype_id == ENTITY::eTYPE::WEAPON_SLOT_ID)
 			{
 				button_subtype_id = vehicle->slot_total_vec[i]->GetSubSubTypeId();
 			}
@@ -66,7 +66,7 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
             Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
             Box box(size*scale);
                                 
-			ButtonItemSlot2* button = new ButtonItemSlot2(GUI::getEquivalent(button_subtype_id), getTypeStr(button_subtype_id), vehicle->slot_total_vec[i]);  
+			ButtonItemSlot2* button = new ButtonItemSlot2(GUI::getEquivalent(button_subtype_id), "", vehicle->slot_total_vec[i]);  
             button->SetBox(box);
 
             float zpos = -2;

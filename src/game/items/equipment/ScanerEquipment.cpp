@@ -25,7 +25,7 @@
 ScanerEquipment::ScanerEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = ENTITY::SCANER_EQUIPMENT_ID; 
+        data_id.subtype_id = ENTITY::eTYPE::SCANER_EQUIPMENT_ID; 
         
     	scan_orig = 0;
 }

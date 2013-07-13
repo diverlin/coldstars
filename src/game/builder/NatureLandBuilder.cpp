@@ -81,7 +81,7 @@ void NatureLandBuilder::CreateNewInternals(NatureLand* natureland) const
 	int item_slot_num = getRandInt(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
 	for (unsigned int i=0; i<item_slot_num; i++)
 	{
-		ItemSlot* item_slot = GetNewItemSlot(ENTITY::CARGO_SLOT_ID);   
+		ItemSlot* item_slot = GetNewItemSlot(ENTITY::eTYPE::CARGO_SLOT_ID);   
 		natureland->AddItemSlot(item_slot);
 	}
 	
@@ -89,21 +89,21 @@ void NatureLandBuilder::CreateNewInternals(NatureLand* natureland) const
 	{
 		if (natureland->CanAcceptNewItem() == true)
 		{
-			int type_id = getRandInt(ENTITY::GRAVITY_ARTEFACT_ID, ENTITY::PROTECTOR_ARTEFACT_ID);
-			switch (type_id)
-			{
-				case ENTITY::GRAVITY_ARTEFACT_ID:
-				{
-					natureland->AddItem(GravityArtefactBuilder::Instance().GetNewGravityArtefact());
-					break;
-				}
+			//int type_id = getRandInt(ENTITY::GRAVITY_ARTEFACT_ID, ENTITY::PROTECTOR_ARTEFACT_ID);
+			//switch (type_id)
+			//{
+				//case ENTITY::GRAVITY_ARTEFACT_ID:
+				//{
+					//natureland->AddItem(GravityArtefactBuilder::Instance().GetNewGravityArtefact());
+					//break;
+				//}
 				
-				case ENTITY::PROTECTOR_ARTEFACT_ID:
-				{
-					natureland->AddItem(ProtectorArtefactBuilder::Instance().GetNewProtectorArtefact());
-					break;
-				}
-			}
+				//case ENTITY::PROTECTOR_ARTEFACT_ID:
+				//{
+					//natureland->AddItem(ProtectorArtefactBuilder::Instance().GetNewProtectorArtefact());
+					//break;
+				//}
+			//}
 		}
 	}	
 }

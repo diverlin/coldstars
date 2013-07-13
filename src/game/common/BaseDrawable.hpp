@@ -17,10 +17,11 @@
 */
 
 
-#ifndef BASEDRAWABLE_H
-#define BASEDRAWABLE_H
+#ifndef BASEDRAWABLE_HPP
+#define BASEDRAWABLE_HPP
 
-#include "../common/Orientation.hpp"
+#include <common/Orientation.hpp>
+#include <struct/gameStruct.hpp>
 class Mesh;
 class TextureOb;
 class AnimationBase;

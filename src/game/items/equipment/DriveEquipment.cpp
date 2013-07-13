@@ -25,7 +25,7 @@
 DriveEquipment::DriveEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = ENTITY::DRIVE_EQUIPMENT_ID;
+        data_id.subtype_id = ENTITY::eTYPE::DRIVE_EQUIPMENT_ID;
         
      	speed_orig = 0;
      	hyper_orig = 0;

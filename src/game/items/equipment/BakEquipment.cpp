@@ -25,7 +25,7 @@
 BakEquipment::BakEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = ENTITY::BAK_EQUIPMENT_ID;
+        data_id.subtype_id = ENTITY::eTYPE::BAK_EQUIPMENT_ID;
         
     	fuel_max_orig = 0;  
     	fuel          = 0;

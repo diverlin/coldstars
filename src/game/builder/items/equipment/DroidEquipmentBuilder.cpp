@@ -88,7 +88,7 @@ void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, 
        
         droid_equipment->SetRepairOrig(repair_orig);  
         droid_equipment->BindData2D(texOb_item);    	
-        droid_equipment->SetParentSubTypeId(ENTITY::DROID_SLOT_ID);
+        droid_equipment->SetParentSubTypeId(ENTITY::eTYPE::DROID_SLOT_ID);
         droid_equipment->SetItemCommonData(common_data);
         droid_equipment->SetCondition(common_data.condition_max);
                 
