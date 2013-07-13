@@ -24,8 +24,7 @@
 Bomb::Bomb(int id)
 { 
         data_id.id         = id;
-    	data_id.type_id    = ENTITY::BOMB_ID;
-    	data_id.subtype_id = NONE_ID;   
+    	data_id.type_id    = ENTITY::eTYPE::BOMB_ID;
         
         damage = 0;
     	radius = 0;

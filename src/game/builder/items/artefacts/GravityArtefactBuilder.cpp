@@ -74,7 +74,7 @@ void GravityArtefactBuilder::CreateNewInternals(GravityArtefact* gravity_artefac
 
         gravity_artefact->SetGravity(gravity);
         gravity_artefact->BindData2D(texOb_item);    	
-        gravity_artefact->SetParentSubTypeId(ENTITY::ARTEFACT_SLOT_ID);
+        gravity_artefact->SetParentSubTypeId(ENTITY::eTYPE::ARTEFACT_SLOT_ID);
         gravity_artefact->SetItemCommonData(common_data);
         gravity_artefact->SetCondition(common_data.condition_max);
 }

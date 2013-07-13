@@ -49,6 +49,6 @@ class GoodsPack : public BaseItem
  		
 };
 
-GoodsPack* GetNewGoodsPack(int, unsigned long int id = NONE_ID);
+GoodsPack* GetNewGoodsPack(ENTITY::eTYPE, unsigned long int id = NONE_ID);
 
 #endif 

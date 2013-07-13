@@ -24,7 +24,7 @@
 RocketModule::RocketModule(int id)
 {
         data_id.id	   = id;
-        data_id.subtype_id = ENTITY::ROCKET_MODULE_ID;  
+        data_id.subtype_id = ENTITY::eTYPE::ROCKET_MODULE_ID;  
         
      	ammo_max_add = 0;
      	damage_add   = 0;

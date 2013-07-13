@@ -33,8 +33,7 @@ Sector::Sector(int id):
 galaxy(nullptr)
 {
 	data_id.id = id;
-	data_id.type_id =  ENTITY::SECTOR_ID;
-	data_id.subtype_id = NONE_ID;
+	data_id.type_id =  ENTITY::eTYPE::SECTOR_ID;
 }
 
 Sector::~Sector()

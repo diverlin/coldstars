@@ -63,47 +63,47 @@ Npc* NpcBuilder::GetNewNpcTemplate(unsigned long int id) const
 } 
 
 
-Npc* NpcBuilder::GetNewNpc(int race_id, int subtype_id, int subsubtype_id) const
+Npc* NpcBuilder::GetNewNpc(int race_id, ENTITY::eTYPE subtype_id, ENTITY::eTYPE subsubtype_id) const
 {
-        Npc* npc = GetNewNpcTemplate();
-        CreateNewInternals(npc, race_id, subtype_id, subsubtype_id);  
-        
-        return npc;
+    Npc* npc = GetNewNpcTemplate();
+    CreateNewInternals(npc, race_id, subtype_id, subsubtype_id);  
+    
+    return npc;
 }
         	
-void NpcBuilder::CreateNewInternals(Npc* npc, int race_id, int subtype_id, int subsubtype_id) const
+void NpcBuilder::CreateNewInternals(Npc* npc, int race_id, ENTITY::eTYPE subtype_id, ENTITY::eTYPE subsubtype_id) const
 {    	
-    	//LifeData data_life;
-    	
-       	//TextureOb* texOb_face  = TextureManager::Instance().getRandomFaceTexObWithFolloingAttributes(race_id);
-       	    
-       	npc->SetRaceId(race_id);
-        //npc->SetTextureOb(texOb_face);
-        npc->SetSubTypeId(subtype_id);
-        npc->SetSubSubTypeId(subsubtype_id);
-        //npc->SetLifeData(data_life);
+    //LifeData data_life;
+    
+    //TextureOb* texOb_face  = TextureManager::Instance().getRandomFaceTexObWithFolloingAttributes(race_id);
         
-        npc->ApplySkillsStrategy();
+    npc->SetRaceId(race_id);
+    //npc->SetTextureOb(texOb_face);
+    npc->SetSubTypeId(subtype_id);
+    npc->SetSubSubTypeId(subsubtype_id);
+    //npc->SetLifeData(data_life);
+    
+    npc->ApplySkillsStrategy();
         
    	if ((race_id != RACE::R6_ID) and (race_id != RACE::R7_ID))
    	{
 		switch(subtype_id)
 		{
-                        case ENTITY::RANGER_ID:
+                        case ENTITY::eTYPE::RANGER_ID:
    			{
    				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));    					
                                
                                 break;    
    			}
                         
-   			case ENTITY::WARRIOR_ID:
+   			case ENTITY::eTYPE::WARRIOR_ID:
    			{
    				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));    					
                                 
                                 break;    
    			}
                        
-   		   	case ENTITY::TRADER_ID: 
+   		   	case ENTITY::eTYPE::TRADER_ID: 
    		   	{
    		   		npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID)); 
    		   		

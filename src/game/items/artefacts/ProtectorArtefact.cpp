@@ -24,10 +24,10 @@
 ProtectorArtefact::ProtectorArtefact(int id)
 {
 	data_id.id = id;
-        data_id.type_id = ENTITY::ARTEFACT_ID;
-        data_id.subtype_id = ENTITY::PROTECTOR_ARTEFACT_ID;
-                                
-        protection = 0;
+    data_id.type_id = ENTITY::eTYPE::ARTEFACT_ID;
+    data_id.subtype_id = ENTITY::eTYPE::PROTECTOR_ARTEFACT_ID;
+                            
+    protection = 0;
 }
 
 /* virtual */

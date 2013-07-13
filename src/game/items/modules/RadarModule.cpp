@@ -24,7 +24,7 @@
 RadarModule::RadarModule(int id)
 {
         data_id.id = id;
-        data_id.subtype_id = ENTITY::RADAR_MODULE_ID; 
+        data_id.subtype_id = ENTITY::eTYPE::RADAR_MODULE_ID; 
         
      	radius_add = 0;
 }

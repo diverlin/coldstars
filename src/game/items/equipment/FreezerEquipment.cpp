@@ -25,7 +25,7 @@
 FreezerEquipment::FreezerEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = ENTITY::FREEZER_EQUIPMENT_ID; 
+        data_id.subtype_id = ENTITY::eTYPE::FREEZER_EQUIPMENT_ID; 
          
     	freeze_orig = 0;
 }

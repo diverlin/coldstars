@@ -24,7 +24,7 @@
 LazerModule::LazerModule(int id)
 {
         data_id.id    	   = id;
-        data_id.subtype_id = ENTITY::LAZER_MODULE_ID;  
+        data_id.subtype_id = ENTITY::eTYPE::LAZER_MODULE_ID;  
         
      	damage_add = 0;
      	radius_add = 0;

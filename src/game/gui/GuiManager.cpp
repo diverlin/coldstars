@@ -88,12 +88,12 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill)
 {	
 	if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
 	{
-       		gui_vehicle_scan->RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId());
+        gui_vehicle_scan->RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId());
 		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), Vec2<float>(0, 0));		
 	}
 	else
 	{
-		gui_vehicle_scan->RenderVehicle(data_mouse, NONE_ID);
+		gui_vehicle_scan->RenderVehicle(data_mouse);
 	}
 					
 	if ( (show_skill == true) and (gui_vehicle_scan->GetVehicle()->GetOwnerNpc() != nullptr) )
@@ -137,7 +137,7 @@ bool GuiManager::RunSessionInSpace()
     {                     
         if (scan_target)
         {                           
-            if (scan_target->GetTypeId() == ENTITY::VEHICLE_ID)
+            if (scan_target->GetTypeId() == ENTITY::eTYPE::VEHICLE_ID)
             {
                 gui_scan_vehicle->BindVehicle((Vehicle*)scan_target, /*offset=*/Vec2<float>(0, 0), /*full_control_on*/true);
                 gui_scan_vehicle->Show();  

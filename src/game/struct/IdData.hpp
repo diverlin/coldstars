@@ -16,20 +16,24 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef MYSTR_H
-#define MYSTR_H
+#ifndef IDDATA_H
+#define IDDATA_H
 
-#include <string>
-class Base;
 #include <common/constants.hpp>
 
-std::string int2str(long long int); 
-std::string bool2str(bool); 
+struct IdData  
+{
+	unsigned long int id;
+	ENTITY::eTYPE type_id;
+	ENTITY::eTYPE subtype_id;
+	ENTITY::eTYPE subsubtype_id;
 
-std::string getSpecialActionStr(int);
-std::string getAiModelStr(int);
-std::string getRaceStr(int); 
-std::string getNavigatorActionStr(int);
-std::string getEntityTypeStr(ENTITY::eTYPE);
+	IdData():
+    id(NONE_ID),
+    type_id(ENTITY::eTYPE::NONE_ID),
+    subtype_id(ENTITY::eTYPE::NONE_ID),
+    subsubtype_id(ENTITY::eTYPE::NONE_ID)
+    {}
+};
 
 #endif

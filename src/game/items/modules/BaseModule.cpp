@@ -23,11 +23,10 @@
 #include "../../world/EntityManager.hpp"
 #include "../../items/equipment/BaseEquipment.hpp"
 
-BaseModule::BaseModule()
+BaseModule::BaseModule():
+equipment_owner(nullptr)
 {
-        data_id.type_id = ENTITY::MODULE_ID;
-        
-        equipment_owner = nullptr;
+        data_id.type_id = ENTITY::eTYPE::MODULE_ID;
 }
 
 /* virtual */

@@ -33,10 +33,9 @@
 Asteroid::Asteroid(int id)
 {   
 	data_id.id = id;
-	data_id.type_id = ENTITY::ASTEROID_ID;
-	data_id.subtype_id = NONE_ID;
+	data_id.type_id = ENTITY::eTYPE::ASTEROID_ID;
 	
-      	mass  = getRandInt(10, 30);
+   	mass  = getRandInt(10, 30);
 }
     
 /* virtual */

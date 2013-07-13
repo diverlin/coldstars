@@ -143,7 +143,7 @@ Player* EntityManager::GetPlayer() const
 {
 	for (std::map<unsigned long int, Base*>::const_iterator it=entity_map.begin(); it!=entity_map.end(); ++it)
 	{
-		if (it->second->GetTypeId() == ENTITY::PLAYER_ID)
+		if (it->second->GetTypeId() == ENTITY::eTYPE::PLAYER_ID)
 		{
 			return (Player*)it->second;
 		}
@@ -174,11 +174,6 @@ void EntityManager::RemoveEntity(Base* entity)
 void EntityManager::SaveEvent(const std::string& filename)
 {
 	boost::property_tree::ptree save_ptree;
-	
-	for (unsigned int i=ENTITY::ENUM_START+1; i<ENTITY::ENUM_END; i++)
-	{
-		save_ptree.put(getTypeStr(i), i);
-	}
 	
 	for (std::map<unsigned long int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
@@ -508,8 +503,8 @@ void EntityManager::LoadPass0(const std::string& filename)
 		Logger::Instance().Log("loading goods_packs...");
 		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("goods_pack"))
 		{
-			GoodsPack* goods_pack = GetNewGoodsPack(v.second.get<int>("data_id.subtype_id"), v.second.get<unsigned long int>("data_id.id"));
-                	goods_pack->LoadData(v.second);
+			GoodsPack* goods_pack = GetNewGoodsPack((ENTITY::eTYPE)v.second.get<int>("data_id.subtype_id"), v.second.get<unsigned long int>("data_id.id"));
+            goods_pack->LoadData(v.second);
 		}
 	}
 	//
@@ -519,7 +514,7 @@ void EntityManager::LoadPass0(const std::string& filename)
 		Logger::Instance().Log("loading itemslots...");
         	BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("item_slot"))
 		{
-			ItemSlot* itemslot = GetNewItemSlot(v.second.get<int>("data_id.subtype_id"), v.second.get<unsigned long int>("data_id.id"));
+			ItemSlot* itemslot = GetNewItemSlot((ENTITY::eTYPE)v.second.get<int>("data_id.subtype_id"), v.second.get<unsigned long int>("data_id.id"));
 			itemslot->LoadData(v.second);
 		}
 	}
@@ -664,7 +659,7 @@ void EntityManager::LoadPass1() const
 	Logger::Instance().Log("RESOLVING DEPENDENCY START");
 	for (std::map<unsigned long int, Base*>::const_iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
 	{
-		Logger::Instance().Log("ResolveData() in " + getTypeStr(iterator->second->GetTypeId()) + " id="+int2str(iterator->second->GetId()));
+		Logger::Instance().Log("ResolveData() in " + iterator->second->GetDataTypeString());
 		iterator->second->ResolveData();
 	}
 

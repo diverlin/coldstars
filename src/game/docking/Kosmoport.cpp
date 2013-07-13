@@ -29,16 +29,16 @@
 #include "../garbage/EntityGarbage.hpp"
 #include "../slots/VehicleSlot.hpp"
 
-Kosmoport::Kosmoport(int id) 
+Kosmoport::Kosmoport(int id)
+:
+race_id(RACE::R0_ID), //wrong
+angar(nullptr),
+store(nullptr),
+shop(nullptr),
+goverment(nullptr)    
 {
 	data_id.id = id;
-	data_id.type_id = ENTITY::KOSMOPORT_ID;
-	race_id = RACE::R0_ID; //wrong
-	
-	angar     = nullptr;
-        store     = nullptr;
-        shop      = nullptr;
-        goverment = nullptr;
+	data_id.type_id = ENTITY::eTYPE::KOSMOPORT_ID;
 }
 
 /* virtual */

@@ -34,8 +34,8 @@
 RocketBullet::RocketBullet(int id)
 {
 	data_id.id = id;
-	data_id.type_id    = ENTITY::BULLET_ID;
-	data_id.subtype_id = ENTITY::ROCKETBULLET_ID;
+	data_id.type_id    = ENTITY::eTYPE::BULLET_ID;
+	data_id.subtype_id = ENTITY::eTYPE::ROCKETBULLET_ID;
 
 	target = nullptr;
 }
@@ -91,7 +91,7 @@ bool RocketBullet::CheckTarget() const
 {
         if (target->GetAlive() == true)
         {
-        	if (target->GetPlaceTypeId() == ENTITY::SPACE_ID)
+        	if (target->GetPlaceTypeId() == ENTITY::eTYPE::SPACE_ID)
         	{
         		if (target->GetStarSystem()->GetId() == starsystem->GetId())
                 	{

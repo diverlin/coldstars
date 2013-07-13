@@ -25,7 +25,7 @@
 ProtectorEquipment::ProtectorEquipment(int id)
 {
         data_id.id         = id;
-        data_id.subtype_id = ENTITY::PROTECTOR_EQUIPMENT_ID;
+        data_id.subtype_id = ENTITY::eTYPE::PROTECTOR_EQUIPMENT_ID;
         
     	protection_orig = 0;
 }

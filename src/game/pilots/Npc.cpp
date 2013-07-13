@@ -43,24 +43,21 @@
 
 #include "../common/GameDate.hpp" 
 
-Npc::Npc(int id)
+Npc::Npc(int id):
+race_id(NONE_ID),
+credits(1000),
+player(nullptr),
+vehicle(nullptr),
+vehicle_to_scan(nullptr)
 { 
 	is_alive = true;
 	data_id.id      = id;
-    	data_id.type_id = ENTITY::NPC_ID;
-    	race_id = NONE_ID;
+    data_id.type_id = ENTITY::eTYPE::NPC_ID;
 
-    	credits = 1000;
-
-        player = nullptr;
-        vehicle = nullptr;
-
-    	vehicle_to_scan = nullptr;
-
-        observation.SetNpcOwner(this);
-        state_machine.SetNpcOwner(this);   
+    observation.SetNpcOwner(this);
+    state_machine.SetNpcOwner(this);   
         
-        ai_model = nullptr;     
+    ai_model = nullptr;     
 }
     
 /* virtual */
@@ -261,8 +258,8 @@ void Npc::UpdateInfo()
     	info.addTitleStr("NPC");
     	info.addNameStr("id:");           info.addValueStr( int2str(data_id.id)  );
     	info.addNameStr("race:");   	  info.addValueStr( getRaceStr(race_id) ); 
-    	info.addNameStr("subype_id:");    info.addValueStr( getTypeStr(data_id.subtype_id) );  
-        info.addNameStr("subsubype_id:"); info.addValueStr( getTypeStr(data_id.subsubtype_id) );  
+    	info.addNameStr("subype_id:");    info.addValueStr( getEntityTypeStr(data_id.subtype_id) );  
+        info.addNameStr("subsubype_id:"); info.addValueStr( getEntityTypeStr(data_id.subsubtype_id) );  
     	info.addNameStr("model_ai:");     info.addValueStr( getAiModelStr(ai_model->GetTypeId()) );  
     	info.addNameStr("credits:");   	  info.addValueStr( int2str(credits) );	
     	info.addNameStr("expirience:");   info.addValueStr( int2str(skills.GetExpirience()) + " / " + int2str(skills.GetExpirienceNextLevel()) );	
@@ -291,7 +288,7 @@ void Npc::RenderInfo(const Vec2<float>& center)
 bool Npc::BuyGoods()
 {
 	Shop* shop = ((Kosmoport*)vehicle->GetLand())->GetShop();
-	int subtype_id = getRandInt(ENTITY::MINERALS_ID, ENTITY::EXCLUSIVE_ID);
+	ENTITY::eTYPE subtype_id = (ENTITY::eTYPE)getRandInt((int)ENTITY::eTYPE::MINERALS_ID, (int)ENTITY::eTYPE::EXCLUSIVE_ID);
 
 	// hard coded logic
 	int amount_to_hold  	= 0.8*vehicle->GetFreeSpace();
@@ -385,9 +382,9 @@ void Npc::ResolveDataUniqueNpc()
 }
 
 void Npc::ApplySkillsStrategy()
-{
-        int class_type_id = data_id.subtype_id;
-        if (data_id.subtype_id == ENTITY::RANGER_ID)
+{           /*
+        ENTITY::eTYPE class_type_id = data_id.subtype_id;
+        if (data_id.subtype_id == ENTITY::eTYPE::RANGER_ID)
         {
                 class_type_id = data_id.subsubtype_id;
         }
@@ -401,7 +398,7 @@ void Npc::ApplySkillsStrategy()
                 skills_strategy[i] = strategy_class_type[i] * strategy_race[i];
         }
         
-        skills.BindStrategy(skills_strategy);
+        skills.BindStrategy(skills_strategy);     */
 }
 
 std::string Npc::GetAgressorSetString() const

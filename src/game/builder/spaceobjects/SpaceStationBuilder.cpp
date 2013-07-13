@@ -115,7 +115,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     	else
        		data_korpus.draw_turrels = true; 
        		             
-    	spacestation->SetSubSubTypeId(ENTITY::TYPE::SPACESTATION_MILITARY_ID);
+    	spacestation->SetSubSubTypeId(ENTITY::eTYPE::SPACESTATION_MILITARY_ID);
     	spacestation->SetKorpusData(data_korpus);
 	spacestation->SetLifeData(data_life);
 

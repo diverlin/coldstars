@@ -25,7 +25,7 @@
 #include "../parts/Turrel.hpp"
 #include "../resources/textureOb.hpp"
 
-ItemSlot* GetNewItemSlot(int subtype_id, unsigned long int id)
+ItemSlot* GetNewItemSlot(ENTITY::eTYPE subtype_id, unsigned long int id)
 {
     if (id == NONE_ID)
     {
@@ -48,7 +48,7 @@ ItemSlot* GetNewItemSlot(int subtype_id, unsigned long int id)
     item_slot->SetSubTypeId(subtype_id);
     item_slot->SetTextureOb(texOb_slot);
     
-    if (subtype_id == ENTITY::WEAPON_SLOT_ID)
+    if (subtype_id == ENTITY::eTYPE::WEAPON_SLOT_ID)
     {
         Turrel* turrel = nullptr;
         TextureOb* texOb_turrel = TextureManager::Instance().GetRandomTextureOb(TEXTURE::TURREL_ID); 
@@ -68,7 +68,7 @@ ItemSlot* GetNewItemSlot(int subtype_id, unsigned long int id)
     return item_slot;
 }
 
-ItemSlot* GetNewItemSlotWithoutSaveAbility(int subtype_id)
+ItemSlot* GetNewItemSlotWithoutSaveAbility(ENTITY::eTYPE subtype_id)
 {
 	ItemSlot* item_slot = nullptr;
     try 

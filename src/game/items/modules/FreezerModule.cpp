@@ -24,7 +24,7 @@
 FreezerModule::FreezerModule(int id)
 {
         data_id.id 	   = id;
-        data_id.subtype_id = ENTITY::FREEZER_MODULE_ID; 
+        data_id.subtype_id = ENTITY::eTYPE::FREEZER_MODULE_ID; 
         
      	freeze_add = 0;
 }

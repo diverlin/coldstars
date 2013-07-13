@@ -25,13 +25,15 @@
 #include "GL/glew.h"
 
 #include "../math/myVector.hpp"
+#include <common/constants.hpp>
+
 
 class TextureOb
 {
     	public:
         	// textureOb attributes
         	int type_id;
-        	int subtype_id;   //# warrior/trader and so on
+        	ENTITY::eTYPE subtype_id;   //# warrior/trader and so on
         	int mod_id;       // is not used for now
         	int race_id;
         	int tech_level_id;

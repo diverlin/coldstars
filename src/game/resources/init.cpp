@@ -19,6 +19,7 @@
 #include "init.hpp"
 #include "resources.hpp"
 #include "TextureManager.hpp"
+#include <struct/gameStruct.hpp>
 
 #include "../ai/aiModel/AiModelCollector.hpp"
 #include "../ai/aiModel/AiModelRanger.hpp"
@@ -58,10 +59,10 @@ void init()
     	RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(RACE::R6_ID);
     	RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(RACE::R7_ID);  
         
-        RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::WARRIOR_ID);  
-        RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::PIRAT_ID);  
-        RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::TRADER_ID);  
-        RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::DIPLOMAT_ID);  
+        RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::eTYPE::WARRIOR_ID);  
+        RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::eTYPE::PIRAT_ID);  
+        RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::eTYPE::TRADER_ID);  
+        RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::eTYPE::DIPLOMAT_ID);  
 
     	loadGameData();           
         TextureManager::Instance().FillShipSubTypeList();        

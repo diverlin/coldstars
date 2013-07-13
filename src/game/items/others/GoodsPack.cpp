@@ -28,8 +28,7 @@
 GoodsPack::GoodsPack(int id)
 {
         data_id.id         = id; 
-        data_id.type_id    = ENTITY::GOODS_ID;
-        data_id.subtype_id = NONE_ID;
+        data_id.type_id    = ENTITY::eTYPE::GOODS_ID;
 }
 
 /* virtual */
@@ -47,12 +46,12 @@ void GoodsPack::AddUniqueInfo()
     	info.addTitleStr("GOODS");
     	switch(GetSubTypeId())
     	{
-    		case ENTITY::MINERALS_ID: 	{ info.addNameStr("mineral:"); info.addValueStr(int2str(data_item.mass)); break; }
-    		case ENTITY::FOOD_ID: 		{ info.addNameStr("food:"); info.addValueStr(int2str(data_item.mass)); break; }
-    		case ENTITY::MEDICINE_ID: 	{ info.addNameStr("medicine:"); info.addValueStr(int2str(data_item.mass)); break; }
-    		case ENTITY::MILITARY_ID: 	{ info.addNameStr("military:"); info.addValueStr(int2str(data_item.mass)); break; }
-    		case ENTITY::DRUG_ID: 		{ info.addNameStr("drug:"); info.addValueStr(int2str(data_item.mass)); break; }
-    		case ENTITY::EXCLUSIVE_ID: 	{ info.addNameStr("exclusive:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case ENTITY::eTYPE::MINERALS_ID: 	{ info.addNameStr("mineral:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case ENTITY::eTYPE::FOOD_ID: 		{ info.addNameStr("food:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case ENTITY::eTYPE::MEDICINE_ID: 	{ info.addNameStr("medicine:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case ENTITY::eTYPE::MILITARY_ID: 	{ info.addNameStr("military:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case ENTITY::eTYPE::DRUG_ID: 		{ info.addNameStr("drug:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case ENTITY::eTYPE::EXCLUSIVE_ID: 	{ info.addNameStr("exclusive:"); info.addValueStr(int2str(data_item.mass)); break; }
     		
     		default: { info.addNameStr("UNKNOWN:"); info.addValueStr("fix the bug"); break; }
     	}
@@ -112,9 +111,9 @@ void GoodsPack::ResolveDataUniqueGoodsPack()
 }
 
 
-GoodsPack* GetNewGoodsPack(int subtype_id, unsigned long int id)
+GoodsPack* GetNewGoodsPack(ENTITY::eTYPE subtype_id, unsigned long int id)
 {
-        if (id == NONE_ID)
+    if (id == NONE_ID)
 	{
 		id = EntityIdGenerator::Instance().GetNextId();
 	}

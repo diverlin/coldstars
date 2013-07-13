@@ -102,31 +102,31 @@ void GuiRadar::RenderUnique() const
 		{
 			switch(entity_vec[i]->GetTypeId())
 			{
-				case ENTITY::STAR_ID:
+				case ENTITY::eTYPE::STAR_ID:
 				{
 					glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_yellow->texture);
 					size = 2*size_base;
 					break;
 				}
-				case ENTITY::PLANET_ID:
+				case ENTITY::eTYPE::PLANET_ID:
 				{
 					glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_blue->texture);
 					size = 1.5*size_base;
 					break;				
 				}
-				case ENTITY::ASTEROID_ID:
+				case ENTITY::eTYPE::ASTEROID_ID:
 				{
 					glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_red->texture);
 					size = 1.25*size_base;
 					break;				
 				}
-				case ENTITY::BLACKHOLE_ID:
+				case ENTITY::eTYPE::BLACKHOLE_ID:
 				{
 					glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_purple->texture);
 					size = 1.5*size_base;
 					break;				
 				}
-				case ENTITY::VEHICLE_ID:
+				case ENTITY::eTYPE::VEHICLE_ID:
 				{
 					glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_green->texture);
 					size = 1*size_base;

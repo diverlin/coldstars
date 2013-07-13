@@ -43,7 +43,7 @@
 Cursor::Cursor():
 focused_ob(nullptr)
 {
-     	item_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::CARGO_SLOT_ID);
+     	item_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::eTYPE::CARGO_SLOT_ID);
      	rect.Set(0, 0, GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
      	
      	//ButtonTrigger* button; // EXPERIMENTAL GUI
@@ -104,9 +104,9 @@ bool Cursor::UpdateInSpace()
 	{
 		switch(focused_ob->GetTypeId())
 		{
-			case ENTITY::BULLET_ID:
+			case ENTITY::eTYPE::BULLET_ID:
 			{
-				case ENTITY::ROCKETBULLET_ID:
+				case ENTITY::eTYPE::ROCKETBULLET_ID:
 				{
 					//((RocketBullet*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 						
@@ -114,18 +114,18 @@ bool Cursor::UpdateInSpace()
 				}
 			}
 			
-			case ENTITY::VEHICLE_ID:
+			case ENTITY::eTYPE::VEHICLE_ID:
 			{
 				switch(focused_ob->GetSubTypeId())
 				{
-					case ENTITY::SATELLITE_ID:
+					case ENTITY::eTYPE::SATELLITE_ID:
 					{
 						//Satellite* satellite = (Satellite*)focused_ob;
 						                        
 						break;
 					}
 
-					case ENTITY::SHIP_ID:
+					case ENTITY::eTYPE::SHIP_ID:
 					{
 						//Ship* ship = (Ship*)focused_ob;
 						//if (ship->GetId() != player->GetNpc()->GetVehicle()->GetId())
@@ -141,7 +141,7 @@ bool Cursor::UpdateInSpace()
 						break;
 					}
 
-					case ENTITY::SPACESTATION_ID:
+					case ENTITY::eTYPE::SPACESTATION_ID:
 					{
 						//SpaceStation* spacestation = (SpaceStation*)focused_ob;
         					                
@@ -153,35 +153,35 @@ bool Cursor::UpdateInSpace()
 				break;
 			}
 
-			case ENTITY::CONTAINER_ID:
+			case ENTITY::eTYPE::CONTAINER_ID:
 			{
 				//((Container*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 				
 				break;
 			}
 
-			case ENTITY::ASTEROID_ID:
+			case ENTITY::eTYPE::ASTEROID_ID:
 			{
 				//((Asteroid*)focused_ob)->GetOrbit()->DrawPath();
 								
 				break;
 			}
 
-			case ENTITY::BLACKHOLE_ID:
+			case ENTITY::eTYPE::BLACKHOLE_ID:
 			{
 				//((BlackHole*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 				
 				break;
 			}
 									
-			case ENTITY::PLANET_ID:
+			case ENTITY::eTYPE::PLANET_ID:
 			{
 				//((Planet*)focused_ob)->GetOrbit()->DrawPath();
 								
 				break;
 			}
 			
-			case ENTITY::STAR_ID:
+			case ENTITY::eTYPE::STAR_ID:
 			{
 				//((Star*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 
@@ -201,19 +201,19 @@ void Cursor::RenderFocusedObjectStuff() const
 	
 		switch(focused_ob->GetTypeId())
 		{		
-			case ENTITY::BULLET_ID:
+			case ENTITY::eTYPE::BULLET_ID:
 			{
-				case ENTITY::ROCKETBULLET_ID:
+				case ENTITY::eTYPE::ROCKETBULLET_ID:
 				{			
 					break;
 				}
 			}
 			
-			case ENTITY::VEHICLE_ID:
+			case ENTITY::eTYPE::VEHICLE_ID:
 			{
 				switch(focused_ob->GetSubTypeId())
 				{
-					case ENTITY::SATELLITE_ID:
+					case ENTITY::eTYPE::SATELLITE_ID:
 					{
 						Satellite* satellite = (Satellite*)focused_ob;
 						
@@ -227,7 +227,7 @@ void Cursor::RenderFocusedObjectStuff() const
 						break;
 					}
 
-					case ENTITY::SHIP_ID:
+					case ENTITY::eTYPE::SHIP_ID:
 					{
 						Ship* ship = (Ship*)focused_ob;
 						
@@ -241,7 +241,7 @@ void Cursor::RenderFocusedObjectStuff() const
 						break;
 					}
 
-					case ENTITY::SPACESTATION_ID:
+					case ENTITY::eTYPE::SPACESTATION_ID:
 					{
 						SpaceStation* spacestation = (SpaceStation*)focused_ob;
 	
@@ -260,51 +260,51 @@ void Cursor::RenderFocusedObjectStuff() const
 				break;
 			}
 
-			case ENTITY::CONTAINER_ID:
+			case ENTITY::eTYPE::CONTAINER_ID:
 			{				
 				break;
 			}
 
-			case ENTITY::ASTEROID_ID:
+			case ENTITY::eTYPE::ASTEROID_ID:
 			{
 				((Asteroid*)focused_ob)->GetOrbit().DrawPath();
 								
 				break;
 			}
 
-			case ENTITY::BLACKHOLE_ID:
+			case ENTITY::eTYPE::BLACKHOLE_ID:
 			{			
 				break;
 			}
 									
-			case ENTITY::PLANET_ID:
+			case ENTITY::eTYPE::PLANET_ID:
 			{
 				((Planet*)focused_ob)->GetOrbit().DrawPath();
 								
 				break;
 			}
 			
-			case ENTITY::STAR_ID:
+			case ENTITY::eTYPE::STAR_ID:
 			{
 				break;
 			}		
 
-			case ENTITY::EQUIPMENT_ID:
+			case ENTITY::eTYPE::EQUIPMENT_ID:
 			{		
 				break;
 			}
 
-			case ENTITY::MODULE_ID:
+			case ENTITY::eTYPE::MODULE_ID:
 			{		
 				break;
 			}
 			
-			case ENTITY::ARTEFACT_ID:
+			case ENTITY::eTYPE::ARTEFACT_ID:
 			{				
 				break;
 			}
 			
-			case ENTITY::BOMB_ID:
+			case ENTITY::eTYPE::BOMB_ID:
 			{				
 				break;
 			}
@@ -327,9 +327,9 @@ void Cursor::RenderFocusedObjectInfo()
 	
 		switch(focused_ob->GetTypeId())
 		{		
-			case ENTITY::BULLET_ID:
+			case ENTITY::eTYPE::BULLET_ID:
 			{
-				case ENTITY::ROCKETBULLET_ID:
+				case ENTITY::eTYPE::ROCKETBULLET_ID:
 				{
 					((RocketBullet*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 						
@@ -337,21 +337,21 @@ void Cursor::RenderFocusedObjectInfo()
 				}
 			}
 			
-			case ENTITY::VEHICLE_ID:
+			case ENTITY::eTYPE::VEHICLE_ID:
 			{
 				switch(focused_ob->GetSubTypeId())
 				{
-					case ENTITY::SATELLITE_ID:
+					case ENTITY::eTYPE::SATELLITE_ID:
 					{
 						((Satellite*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 						                        
 						break;
 					}
 
-					case ENTITY::SHIP_ID:
+					case ENTITY::eTYPE::SHIP_ID:
 					{
 						Ship* ship = (Ship*)focused_ob;
-						if (ship->GetPlaceTypeId() == ENTITY::SPACE_ID)
+						if (ship->GetPlaceTypeId() == ENTITY::eTYPE::SPACE_ID)
 						{
 							ship->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 						}
@@ -362,7 +362,7 @@ void Cursor::RenderFocusedObjectInfo()
 						break;
 					}
 
-					case ENTITY::SPACESTATION_ID:
+					case ENTITY::eTYPE::SPACESTATION_ID:
 					{     
         					((SpaceStation*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
         					                
@@ -374,70 +374,70 @@ void Cursor::RenderFocusedObjectInfo()
 				break;
 			}
 
-			case ENTITY::CONTAINER_ID:
+			case ENTITY::eTYPE::CONTAINER_ID:
 			{
 				((Container*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 				
 				break;
 			}
 
-			case ENTITY::ASTEROID_ID:
+			case ENTITY::eTYPE::ASTEROID_ID:
 			{
 				((Asteroid*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 								
 				break;
 			}
 
-			case ENTITY::BLACKHOLE_ID:
+			case ENTITY::eTYPE::BLACKHOLE_ID:
 			{
 				((BlackHole*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 				
 				break;
 			}
 									
-			case ENTITY::PLANET_ID:
+			case ENTITY::eTYPE::PLANET_ID:
 			{
 				((Planet*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 								
 				break;
 			}
 			
-			case ENTITY::STAR_ID:
+			case ENTITY::eTYPE::STAR_ID:
 			{
 				((Star*)focused_ob)->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 
 				break;
 			}		
 
-			case ENTITY::EQUIPMENT_ID:
+			case ENTITY::eTYPE::EQUIPMENT_ID:
 			{
 				((BaseItem*)focused_ob)->RenderInfo(rect.GetCenter()); 
 				
 				break;
 			}
 
-			case ENTITY::MODULE_ID:
+			case ENTITY::eTYPE::MODULE_ID:
 			{
 				((BaseItem*)focused_ob)->RenderInfo(rect.GetCenter()); 
 				
 				break;
 			}
 			
-			case ENTITY::ARTEFACT_ID:
+			case ENTITY::eTYPE::ARTEFACT_ID:
 			{
 				((BaseItem*)focused_ob)->RenderInfo(rect.GetCenter()); 
 				
 				break;
 			}
 			
-			case ENTITY::BOMB_ID:
+			case ENTITY::eTYPE::BOMB_ID:
 			{
 				((BaseItem*)focused_ob)->RenderInfo(rect.GetCenter()); 
 				
 				break;
 			}
 
-			case ENTITY::GOODS_ID:
+			case ENTITY::eTYPE::GOODS_ID:
 			{
 				((BaseItem*)focused_ob)->RenderInfo(rect.GetCenter()); 
 				

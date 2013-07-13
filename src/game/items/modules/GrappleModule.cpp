@@ -24,7 +24,7 @@
 GrappleModule::GrappleModule(int id)
 {
         data_id.id 	   = id;
-        data_id.subtype_id = ENTITY::GRAPPLE_MODULE_ID;  
+        data_id.subtype_id = ENTITY::eTYPE::GRAPPLE_MODULE_ID;  
         
         strength_add   = 0;
         radius_add     = 0;

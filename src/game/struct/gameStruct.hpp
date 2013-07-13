@@ -33,15 +33,15 @@ class RaceInformationCollector
 		std::vector<int> RACES_GOOD_vec;
 		std::vector<int> RACES_EVIL_vec;
 
-		std::vector<int> RACE0_ALLOWED_SUBTYPE_vec;
-		std::vector<int> RACE1_ALLOWED_SUBTYPE_vec;
-		std::vector<int> RACE2_ALLOWED_SUBTYPE_vec;
-		std::vector<int> RACE3_ALLOWED_SUBTYPE_vec; 
-		std::vector<int> RACE4_ALLOWED_SUBTYPE_vec;
-		std::vector<int> RACE6_ALLOWED_SUBTYPE_vec;
-		std::vector<int> RACE7_ALLOWED_SUBTYPE_vec;
+		std::vector<ENTITY::eTYPE> RACE0_ALLOWED_SUBTYPE_vec;
+		std::vector<ENTITY::eTYPE> RACE1_ALLOWED_SUBTYPE_vec;
+		std::vector<ENTITY::eTYPE> RACE2_ALLOWED_SUBTYPE_vec;
+		std::vector<ENTITY::eTYPE> RACE3_ALLOWED_SUBTYPE_vec; 
+		std::vector<ENTITY::eTYPE> RACE4_ALLOWED_SUBTYPE_vec;
+		std::vector<ENTITY::eTYPE> RACE6_ALLOWED_SUBTYPE_vec;
+		std::vector<ENTITY::eTYPE> RACE7_ALLOWED_SUBTYPE_vec;
                 
-                std::vector<int> SUBSUBTYPE_vec;
+        std::vector<ENTITY::eTYPE> SUBSUBTYPE_vec;
 		
 		bool IsGood(int) const;
 	
@@ -71,22 +71,6 @@ struct LifeData
         garbage_ready(false) 
         {};
         
-};
-
-
-struct IdData  
-{
-	unsigned long int id;
-	int type_id;
-	int subtype_id;
-	int subsubtype_id;
-
-	IdData():
-        id(NONE_ID),
-	type_id(NONE_ID),
-	subtype_id(NONE_ID),
-	subsubtype_id(NONE_ID)
-        {}
 };
 
 

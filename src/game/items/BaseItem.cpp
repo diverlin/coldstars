@@ -26,18 +26,15 @@
 #include "../common/myStr.hpp"
 
 BaseItem::BaseItem()
+:
+item_slot(nullptr),
+parent_subtype_id(ENTITY::eTYPE::NONE_ID),
+race_id(NONE_ID),
+condition(0),
+price(0),
+locked_turns(0)
 {
-        item_slot = nullptr;
-        
-        parent_subtype_id = NONE_ID;
-        race_id = NONE_ID;
-        
-        condition = 0;
-        price = 0;
-        
-        locked_turns = 0;
-        
-        textureOb = nullptr;
+    textureOb = nullptr;
 }
 
 /* virtual */
@@ -167,7 +164,7 @@ void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, c
         save_ptree.put(root+"condition", condition);
         save_ptree.put(root+"locked_turns", locked_turns);
         save_ptree.put(root+"race_id", race_id);
-        save_ptree.put(root+"parent_subtype_id", parent_subtype_id);
+        save_ptree.put(root+"parent_subtype_id", (int)parent_subtype_id);
 
         save_ptree.put(root+"data_item.tech_level",    data_item.tech_level);        
         save_ptree.put(root+"data_item.modules_num_max",    data_item.modules_num_max);
@@ -176,10 +173,10 @@ void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, c
         save_ptree.put(root+"data_item.deterioration_overload_rate", data_item.deterioration_overload_rate);   
         save_ptree.put(root+"data_item.mass",               data_item.mass);
                     
-	if (textureOb) 	save_ptree.put(root+"unresolved.textureOb_path", textureOb->path);
-	else            save_ptree.put(root+"unresolved.textureOb_path", "none");
+	if (textureOb) 	{ save_ptree.put(root+"unresolved.textureOb_path", textureOb->path); }
+	else            { save_ptree.put(root+"unresolved.textureOb_path", "none"); }
         
-        if (item_slot) 	{ save_ptree.put(root+"unresolved.item_slot_id", item_slot->GetId()); }
+    if (item_slot) 	{ save_ptree.put(root+"unresolved.item_slot_id", item_slot->GetId()); }
 	else           	{ save_ptree.put(root+"unresolved.item_slot_id", NONE_ID); }
 }
 
@@ -189,18 +186,18 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
 	Logger::Instance().Log(" LoadDataUniqueBaseItem()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
 	#endif
 	
-        price             = load_ptree.get<int>("price");
-        condition         = load_ptree.get<int>("condition");
-        locked_turns      = load_ptree.get<int>("locked_turns");
-        race_id           = load_ptree.get<int>("race_id");
-        parent_subtype_id = load_ptree.get<int>("parent_subtype_id");
+    price             = load_ptree.get<int>("price");
+    condition         = load_ptree.get<int>("condition");
+    locked_turns      = load_ptree.get<int>("locked_turns");
+    race_id           = load_ptree.get<int>("race_id");
+    parent_subtype_id = (ENTITY::eTYPE)load_ptree.get<int>("parent_subtype_id");
 
-        data_item.tech_level           = load_ptree.get<int>("data_item.tech_level");    
-        data_item.modules_num_max      = load_ptree.get<int>("data_item.modules_num_max");
-        data_item.condition_max        = load_ptree.get<int>("data_item.condition_max");                         
-        data_item.deterioration_normal = load_ptree.get<int>("data_item.deterioration_normal");   
-        data_item.deterioration_overload_rate = load_ptree.get<float>("data_item.deterioration_overload_rate");   
-        data_item.mass                 = load_ptree.get<int>("data_item.mass");
+    data_item.tech_level           = load_ptree.get<int>("data_item.tech_level");    
+    data_item.modules_num_max      = load_ptree.get<int>("data_item.modules_num_max");
+    data_item.condition_max        = load_ptree.get<int>("data_item.condition_max");                         
+    data_item.deterioration_normal = load_ptree.get<int>("data_item.deterioration_normal");   
+    data_item.deterioration_overload_rate = load_ptree.get<float>("data_item.deterioration_overload_rate");   
+    data_item.mass                 = load_ptree.get<int>("data_item.mass");
                     
 	data_unresolved_BaseItem.textureOb_path = load_ptree.get<std::string>("unresolved.textureOb_path");
 	data_unresolved_BaseItem.item_slot_id   = load_ptree.get<int>("unresolved.item_slot_id");

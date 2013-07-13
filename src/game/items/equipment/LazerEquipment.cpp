@@ -32,8 +32,8 @@
 
 LazerEquipment::LazerEquipment(int id)
 {
-        data_id.id         = id;
-        data_id.subtype_id = ENTITY::LAZER_EQUIPMENT_ID;
+    data_id.id         = id;
+    data_id.subtype_id = ENTITY::eTYPE::LAZER_EQUIPMENT_ID;
         
    	damage_orig = 0;
    	radius_orig = 0;

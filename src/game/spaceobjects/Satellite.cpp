@@ -30,11 +30,11 @@
 Satellite::Satellite(int id)
 {        
 	data_id.id = id;
-	data_id.type_id = ENTITY::VEHICLE_ID;
-	data_id.subtype_id = ENTITY::SATELLITE_ID;
+	data_id.type_id = ENTITY::eTYPE::VEHICLE_ID;
+	data_id.subtype_id = ENTITY::eTYPE::SATELLITE_ID;
 	
-    	mass = getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX);
-    	orbit = new Orbit();
+    mass = getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX);
+    orbit = new Orbit();
 }
 
 /* virtual */

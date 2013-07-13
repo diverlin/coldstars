@@ -16,23 +16,25 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef RAND_H
-#define RAND_H
+#ifndef RAND_HPP
+#define RAND_HPP
 
 #include <vector>
+#include <common/constants.hpp>
 
 int getRandIntFromVec(const std::vector<int>&);
+ENTITY::eTYPE getRandIntFromVec(const std::vector<ENTITY::eTYPE>&);
 
 float getRandFloat(float, float);
 int getRandInt(int, int);
 int getRandSign();
 bool getRandBool();
 
-int getRandNpcSubTypeId(int, const std::vector<int>&);
-const std::vector<int>& getAllowedSubTypesByRaceId(int);
+ENTITY::eTYPE getRandNpcSubTypeId(int, const std::vector<ENTITY::eTYPE>&);
+const std::vector<ENTITY::eTYPE>& getAllowedSubTypesByRaceId(int);
 
-int getRandNpcSubTypeId(int);
-int getRandNpcSubSubTypeId(int);
+ENTITY::eTYPE getRandNpcSubTypeId(int);
+ENTITY::eTYPE getRandNpcSubSubTypeId(ENTITY::eTYPE);
 
 
 

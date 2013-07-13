@@ -61,17 +61,17 @@ DroidModule* DroidModuleBuilder::GetNewDroidModule(int repair_add) const
 	DroidModule* droid_module = GetNewDroidModuleTemplate();
 	CreateNewInternals(droid_module, repair_add);
 	        
-        return droid_module;
+    return droid_module;
 } 
  	
 void DroidModuleBuilder::CreateNewInternals(DroidModule* droid_module, int repair_add) const
 {     
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-    	repair_add  = getRandInt(MODULE::DROID::REPAIR_MIN, MODULE::DROID::REPAIR_MAX);
-    
-        droid_module->SetParentSubTypeId(ENTITY::DROID_EQUIPMENT_ID);    
-        droid_module->BindData2D(texOb);
-        droid_module->SetRepairAdd(repair_add);
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    repair_add  = getRandInt(MODULE::DROID::REPAIR_MIN, MODULE::DROID::REPAIR_MAX);
+
+    droid_module->SetParentSubTypeId(ENTITY::eTYPE::DROID_EQUIPMENT_ID);    
+    droid_module->BindData2D(texOb);
+    droid_module->SetRepairAdd(repair_add);
 }
 
 

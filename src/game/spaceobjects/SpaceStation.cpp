@@ -38,8 +38,8 @@
 SpaceStation::SpaceStation(int id): land(nullptr)
 {      
 	data_id.id         = id;
-	data_id.type_id    = ENTITY::VEHICLE_ID;
-	data_id.subtype_id = ENTITY::SPACESTATION_ID;  
+	data_id.type_id    = ENTITY::eTYPE::VEHICLE_ID;
+	data_id.subtype_id = ENTITY::eTYPE::SPACESTATION_ID;  
 }
 
 /* virtual */
@@ -81,12 +81,12 @@ void SpaceStation::UpdateInfo()
 {
 	info.clear();
 
-    	info.addTitleStr("StarBase" + int2str(data_id.subtype_id));
+    info.addTitleStr("StarBase" + getEntityTypeStr(data_id.subtype_id));
 
-    	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
-    	info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
-    	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
-	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
+    info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
+    info.addNameStr("id:");          info.addValueStr(int2str(data_id.id));
+    info.addNameStr("mass:");        info.addValueStr(int2str(mass));
+    info.addNameStr("pos:");       	 info.addValueStr( str(GetCenter()) );
 } 
 
 void SpaceStation::UpdateRenderStuff_2D()
