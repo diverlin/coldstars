@@ -96,8 +96,8 @@ void StoreBuilder::CreateNewInternals(Store* store) const
 
         for (unsigned int i=0; i<STORE_VEHICLE_SLOTS_NUM; i++)
         {
-		VehicleSlot* vehicle_slot = GetNewVehicleSlot();
-                store->AddVehicleSlot(vehicle_slot);
+            VehicleSlot* vehicle_slot = GetNewVehicleSlot(ENTITY::eTYPE::NONE_ID);
+            store->AddVehicleSlot(vehicle_slot);
         }
         
 	store->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::STORE_BACKGROUND_ID));

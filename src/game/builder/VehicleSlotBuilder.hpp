@@ -17,13 +17,14 @@
 */
 
 
-#ifndef VEHICLESLOTBUILDER_H
-#define VEHICLESLOTBUILDER_H
+#ifndef VEHICLESLOTBUILDER_HPP
+#define VEHICLESLOTBUILDER_HPP
 
 class VehicleSlot;
 #include "../common/constants.hpp"
+#include <common/TypesEntity.hpp>
 
-VehicleSlot* GetNewVehicleSlot(unsigned long int id = NONE_ID);
+VehicleSlot* GetNewVehicleSlot(ENTITY::eTYPE, unsigned long int id = NONE_ID);
 
 #endif 
     

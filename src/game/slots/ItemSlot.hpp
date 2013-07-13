@@ -17,8 +17,8 @@
 */
 
 
-#ifndef ITEMSLOT_H
-#define ITEMSLOT_H
+#ifndef ITEMSLOT_HPP
+#define ITEMSLOT_HPP
 
 #include "../slots/BaseSlot.hpp"
 class Turrel; 
@@ -67,21 +67,21 @@ struct UnresolvedDataUniqueItemSlot
 class ItemSlot : public BaseSlot
 {   
 	public:        
-		ItemSlot(int id);
+		ItemSlot(int, ENTITY::eTYPE);
 		virtual ~ItemSlot();                
-	
-	        virtual void PutChildsToGarbage() const;
-	        	
-	        void SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget = nullptr);
-		void SetTurrel(Turrel* turrel) { this->turrel = turrel; };
-                      
-                BaseSpaceEntity* GetTarget() const { return target; };
-                ItemSlot* GetSubTarget() const { return subtarget; };          
-		
-		Turrel* GetTurrel() const { return turrel; };
-		
-		BaseItem* GetItem()                         const { return item; };                
-             	RocketEquipment*    GetRocketEquipment()    const { return (RocketEquipment*)item; }
+        
+        virtual void PutChildsToGarbage() const;
+        
+        void SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget = nullptr);
+        void SetTurrel(Turrel* turrel) { this->turrel = turrel; };
+        
+        BaseSpaceEntity* GetTarget() const { return target; };
+        ItemSlot* GetSubTarget() const { return subtarget; };          
+        
+        Turrel* GetTurrel() const { return turrel; };
+        
+        BaseItem* GetItem()                         const { return item; };                
+        RocketEquipment*    GetRocketEquipment()    const { return (RocketEquipment*)item; }
  		LazerEquipment*     GetLazerEquipment()     const { return (LazerEquipment*)item; }
 		RadarEquipment*     GetRadarEquipment()     const { return (RadarEquipment*)item; }
 		DriveEquipment*     GetDriveEquipment()     const { return (DriveEquipment*)item; }

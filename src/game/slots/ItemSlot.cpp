@@ -43,7 +43,7 @@
 #include "../garbage/EntityGarbage.hpp"
 #include "../world/EntityManager.hpp"
 
-ItemSlot::ItemSlot(int id):
+ItemSlot::ItemSlot(int id, ENTITY::eTYPE subtype_id):
 turrel(nullptr),	      
 target(nullptr),
 subtarget(nullptr),	     
@@ -51,6 +51,7 @@ item(nullptr)
 {
 	SetId(id);
 	SetTypeId(ENTITY::eTYPE::ITEM_SLOT_ID);
+	SetSubTypeId(subtype_id);
 }
 
 /* virtual */

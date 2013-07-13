@@ -15,32 +15,30 @@
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-
-
-
-#ifndef GOODSPACK_H
-#define GOODSPACK_H
+    
+#ifndef GOODSPACK_HPP
+#define GOODSPACK_HPP
 
 #include "../BaseItem.hpp"
 #include "../../common/constants.hpp"
 
 class GoodsPack : public BaseItem
 {
-    	public:                  
-        	GoodsPack(int);
-        	virtual ~GoodsPack();
-        	
-        	void Increase(unsigned int ammount) { data_item.mass += ammount; };       
-                void Decrease(unsigned int ammount) { data_item.mass -= ammount; }; 
+    public:                  
+        GoodsPack(int, ENTITY::eTYPE);
+        virtual ~GoodsPack();
+        
+        void Increase(unsigned int ammount) { data_item.mass += ammount; };       
+        void Decrease(unsigned int ammount) { data_item.mass -= ammount; }; 
 
-                virtual void UpdateOwnerAbilities();
-        	
-        	virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void UpdateOwnerAbilities();
+        
+        virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);
 		virtual void ResolveData();
 		
-        private:
-        	virtual void AddCommonInfo();
+    private:
+        virtual void AddCommonInfo();
  		virtual void AddUniqueInfo();   
  		
  		void SaveDataUniqueGoodsPack(boost::property_tree::ptree&, const std::string&) const;

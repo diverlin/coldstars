@@ -40,7 +40,7 @@ NpcBuilder& NpcBuilder::Instance()
 NpcBuilder::~NpcBuilder()
 {}
 
-Npc* NpcBuilder::GetNewNpcTemplate(unsigned long int id) const
+Npc* NpcBuilder::GetNewNpcTemplate(ENTITY::eTYPE subtype_id, ENTITY::eTYPE subsubtype_id, unsigned long int id) const
 {
 	Npc* npc = nullptr;
 	
@@ -49,14 +49,14 @@ Npc* NpcBuilder::GetNewNpcTemplate(unsigned long int id) const
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-		npc = new Npc(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
+    try 
+    { 
+        npc = new Npc(id, subtype_id, subsubtype_id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
 	EntityManager::Instance().RegisterEntity(npc);
 	
 	return npc;
@@ -65,7 +65,7 @@ Npc* NpcBuilder::GetNewNpcTemplate(unsigned long int id) const
 
 Npc* NpcBuilder::GetNewNpc(int race_id, ENTITY::eTYPE subtype_id, ENTITY::eTYPE subsubtype_id) const
 {
-    Npc* npc = GetNewNpcTemplate();
+    Npc* npc = GetNewNpcTemplate(subtype_id, subsubtype_id);
     CreateNewInternals(npc, race_id, subtype_id, subsubtype_id);  
     
     return npc;
@@ -79,8 +79,8 @@ void NpcBuilder::CreateNewInternals(Npc* npc, int race_id, ENTITY::eTYPE subtype
         
     npc->SetRaceId(race_id);
     //npc->SetTextureOb(texOb_face);
-    npc->SetSubTypeId(subtype_id);
-    npc->SetSubSubTypeId(subsubtype_id);
+    //npc->SetSubTypeId(subtype_id);
+    //npc->SetSubSubTypeId(subsubtype_id);
     //npc->SetLifeData(data_life);
     
     npc->ApplySkillsStrategy();

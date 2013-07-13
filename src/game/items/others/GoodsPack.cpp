@@ -25,10 +25,11 @@
 #include "../../world/EntityManager.hpp"
 #include "../../resources/TextureManager.hpp"
 
-GoodsPack::GoodsPack(int id)
+GoodsPack::GoodsPack(int id, ENTITY::eTYPE subtype_id)
 {
     SetId(id); 
     SetTypeId(ENTITY::eTYPE::GOODS_ID);
+    SetSubTypeId(subtype_id);
 }
 
 /* virtual */
@@ -120,8 +121,7 @@ GoodsPack* GetNewGoodsPack(ENTITY::eTYPE subtype_id, unsigned long int id)
         
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID); 
 	
-	GoodsPack* goodsPack = new GoodsPack(id);
-	goodsPack->SetSubTypeId(subtype_id);
+	GoodsPack* goodsPack = new GoodsPack(id, subtype_id);
 	goodsPack->BindData2D(texOb);
 	
 	EntityManager::Instance().RegisterEntity(goodsPack);
