@@ -27,8 +27,8 @@ ProtectorEquipment::ProtectorEquipment(int id)
 protection_orig(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID);
-    SetSubTypeId(ENTITY::eTYPE::PROTECTOR_EQUIPMENT_ID);
+	SetTypeId(ENTITY::TYPE::EQUIPMENT_ID);
+    SetSubTypeId(ENTITY::TYPE::PROTECTOR_EQUIPMENT_ID);
 }
 
 /* virtual */

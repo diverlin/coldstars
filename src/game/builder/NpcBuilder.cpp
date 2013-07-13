@@ -40,7 +40,7 @@ NpcBuilder& NpcBuilder::Instance()
 NpcBuilder::~NpcBuilder()
 {}
 
-Npc* NpcBuilder::GetNewNpcTemplate(ENTITY::eTYPE subtype_id, ENTITY::eTYPE subsubtype_id, unsigned long int id) const
+Npc* NpcBuilder::GetNewNpcTemplate(ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id, unsigned long int id) const
 {
 	Npc* npc = nullptr;
 	
@@ -63,7 +63,7 @@ Npc* NpcBuilder::GetNewNpcTemplate(ENTITY::eTYPE subtype_id, ENTITY::eTYPE subsu
 } 
 
 
-Npc* NpcBuilder::GetNewNpc(int race_id, ENTITY::eTYPE subtype_id, ENTITY::eTYPE subsubtype_id) const
+Npc* NpcBuilder::GetNewNpc(int race_id, ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id) const
 {
     Npc* npc = GetNewNpcTemplate(subtype_id, subsubtype_id);
     CreateNewInternals(npc, race_id, subtype_id, subsubtype_id);  
@@ -71,7 +71,7 @@ Npc* NpcBuilder::GetNewNpc(int race_id, ENTITY::eTYPE subtype_id, ENTITY::eTYPE 
     return npc;
 }
         	
-void NpcBuilder::CreateNewInternals(Npc* npc, int race_id, ENTITY::eTYPE subtype_id, ENTITY::eTYPE subsubtype_id) const
+void NpcBuilder::CreateNewInternals(Npc* npc, int race_id, ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id) const
 {    	
     //LifeData data_life;
     
@@ -89,21 +89,21 @@ void NpcBuilder::CreateNewInternals(Npc* npc, int race_id, ENTITY::eTYPE subtype
    	{
 		switch(subtype_id)
 		{
-                        case ENTITY::eTYPE::RANGER_ID:
+                        case ENTITY::TYPE::RANGER_ID:
    			{
    				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));    					
                                
                                 break;    
    			}
                         
-   			case ENTITY::eTYPE::WARRIOR_ID:
+   			case ENTITY::TYPE::WARRIOR_ID:
    			{
    				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));    					
                                 
                                 break;    
    			}
                        
-   		   	case ENTITY::eTYPE::TRADER_ID: 
+   		   	case ENTITY::TYPE::TRADER_ID: 
    		   	{
    		   		npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID)); 
    		   		

@@ -33,7 +33,7 @@
 Asteroid::Asteroid(int id)
 {   
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::ASTEROID_ID);
+	SetTypeId(ENTITY::TYPE::ASTEROID_ID);
 	
    	mass  = getRandInt(10, 30);
 }

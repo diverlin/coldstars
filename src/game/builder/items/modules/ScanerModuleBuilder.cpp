@@ -69,7 +69,7 @@ void ScanerModuleBuilder::CreateNewInternals(ScanerModule* scaner_module, int sc
     TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
     scan_add = getRandInt(MODULE::SCANER::SCAN_MIN, MODULE::SCANER::SCAN_MAX);
 
-    scaner_module->SetParentSubTypeId(ENTITY::eTYPE::SCANER_EQUIPMENT_ID);    
+    scaner_module->SetParentSubTypeId(ENTITY::TYPE::SCANER_EQUIPMENT_ID);    
     scaner_module->BindData2D(texOb);
     scaner_module->SetScanAdd(scan_add);
 }

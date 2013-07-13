@@ -37,8 +37,8 @@ Container::Container(int id)
 item_slot(nullptr)    
 {
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::VEHICLE_ID);
-	SetSubTypeId(ENTITY::eTYPE::CONTAINER_ID);
+	SetTypeId(ENTITY::TYPE::VEHICLE_ID);
+	SetSubTypeId(ENTITY::TYPE::CONTAINER_ID);
 	
 	velocity = getRandInt(40, 42) / 100.0;
 }
@@ -84,7 +84,7 @@ void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords)
 /* virtual */    
 void Container::PostDeathUniqueEvent(bool show_effect)
 {
-	if (item_slot->GetItem()->GetTypeId() == ENTITY::eTYPE::BOMB_ID)
+	if (item_slot->GetItem()->GetTypeId() == ENTITY::TYPE::BOMB_ID)
 	{
 		starsystem->BombExplosionEvent(this, show_effect);  
 	}

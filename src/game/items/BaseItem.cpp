@@ -28,7 +28,7 @@
 BaseItem::BaseItem()
 :
 item_slot(nullptr),
-parent_subtype_id(ENTITY::eTYPE::NONE_ID),
+parent_subtype_id(ENTITY::TYPE::NONE_ID),
 race_id(NONE_ID),
 condition(0),
 price(0),
@@ -190,7 +190,7 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
     condition         = load_ptree.get<int>("condition");
     locked_turns      = load_ptree.get<int>("locked_turns");
     race_id           = load_ptree.get<int>("race_id");
-    parent_subtype_id = (ENTITY::eTYPE)load_ptree.get<int>("parent_subtype_id");
+    parent_subtype_id = (ENTITY::TYPE)load_ptree.get<int>("parent_subtype_id");
 
     data_item.tech_level           = load_ptree.get<int>("data_item.tech_level");    
     data_item.modules_num_max      = load_ptree.get<int>("data_item.modules_num_max");

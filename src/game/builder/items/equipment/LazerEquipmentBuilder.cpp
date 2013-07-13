@@ -92,7 +92,7 @@ void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, 
         lazer_equipment->SetDamageOrig(damage_orig);  
         lazer_equipment->SetRadiusOrig(radius_orig);  
         lazer_equipment->BindData2D(texOb_item);    	
-        lazer_equipment->SetParentSubTypeId(ENTITY::eTYPE::WEAPON_SLOT_ID);
+        lazer_equipment->SetParentSubTypeId(ENTITY::TYPE::WEAPON_SLOT_ID);
         lazer_equipment->SetItemCommonData(common_data);
         lazer_equipment->SetCondition(common_data.condition_max);
                 

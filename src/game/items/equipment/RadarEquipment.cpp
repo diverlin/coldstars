@@ -27,8 +27,8 @@ RadarEquipment::RadarEquipment(int id)
 radius_orig(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID);
-    SetSubTypeId(ENTITY::eTYPE::RADAR_EQUIPMENT_ID);
+	SetTypeId(ENTITY::TYPE::EQUIPMENT_ID);
+    SetSubTypeId(ENTITY::TYPE::RADAR_EQUIPMENT_ID);
 }
 
 /* virtual */

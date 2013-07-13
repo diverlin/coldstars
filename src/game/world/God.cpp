@@ -166,8 +166,8 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
 	        
 				{
 					int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-					ENTITY::eTYPE npc_subtype_id    = ENTITY::eTYPE::WARRIOR_ID;
-					ENTITY::eTYPE npc_subsubtype_id = ENTITY::eTYPE::WARRIOR_ID;
+					ENTITY::TYPE npc_subtype_id    = ENTITY::TYPE::WARRIOR_ID;
+					ENTITY::TYPE npc_subsubtype_id = ENTITY::TYPE::WARRIOR_ID;
 			
 					Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
 					satellite->BindOwnerNpc(npc);
@@ -181,22 +181,22 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
 		
 		if (starsystem_description.allow_ships == true)
 		{
-			std::vector<ENTITY::eTYPE> allowed_subtypes;
-			if (starsystem_description.allow_ship_ranger == true)  	{ allowed_subtypes.push_back(ENTITY::eTYPE::RANGER_ID); }		
-			if (starsystem_description.allow_ship_warrior == true) 	{ allowed_subtypes.push_back(ENTITY::eTYPE::WARRIOR_ID); }	
-			if (starsystem_description.allow_ship_trader == true) 	{ allowed_subtypes.push_back(ENTITY::eTYPE::TRADER_ID); }	
-			if (starsystem_description.allow_ship_pirat == true) 	{ allowed_subtypes.push_back(ENTITY::eTYPE::PIRAT_ID); }	
-			if (starsystem_description.allow_ship_diplomat == true) { allowed_subtypes.push_back(ENTITY::eTYPE::DIPLOMAT_ID); }	
+			std::vector<ENTITY::TYPE> allowed_subtypes;
+			if (starsystem_description.allow_ship_ranger == true)  	{ allowed_subtypes.push_back(ENTITY::TYPE::RANGER_ID); }		
+			if (starsystem_description.allow_ship_warrior == true) 	{ allowed_subtypes.push_back(ENTITY::TYPE::WARRIOR_ID); }	
+			if (starsystem_description.allow_ship_trader == true) 	{ allowed_subtypes.push_back(ENTITY::TYPE::TRADER_ID); }	
+			if (starsystem_description.allow_ship_pirat == true) 	{ allowed_subtypes.push_back(ENTITY::TYPE::PIRAT_ID); }	
+			if (starsystem_description.allow_ship_diplomat == true) { allowed_subtypes.push_back(ENTITY::TYPE::DIPLOMAT_ID); }	
 			
 			int ship_num = getRandInt(SHIPINIT_PER_PLANET_MIN, SHIPINIT_PER_PLANET_MAX);
 			for (int j=0; j<ship_num; j++)
 			{
 				int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-				ENTITY::eTYPE npc_subtype_id    = getRandNpcSubTypeId(npc_race_id, allowed_subtypes);
-				ENTITY::eTYPE npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
+				ENTITY::TYPE npc_subtype_id    = getRandNpcSubTypeId(npc_race_id, allowed_subtypes);
+				ENTITY::TYPE npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
 				
 				int ship_race_id = npc_race_id;         
-				ENTITY::eTYPE ship_subtype_id = npc_subtype_id;  
+				ENTITY::TYPE ship_subtype_id = npc_subtype_id;  
 				int ship_size_id = getRandInt(SIZE_1_ID, SIZE_9_ID);
 				int weapons_num = getRandInt(1, 5);
 		
@@ -220,11 +220,11 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
     	for (int i=0; i<spacestation_per_system; i++)
     	{     
     		int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-            ENTITY::eTYPE npc_subtype_id    = ENTITY::eTYPE::WARRIOR_ID;
-            ENTITY::eTYPE npc_subsubtype_id = ENTITY::eTYPE::WARRIOR_ID;
+            ENTITY::TYPE npc_subtype_id    = ENTITY::TYPE::WARRIOR_ID;
+            ENTITY::TYPE npc_subsubtype_id = ENTITY::TYPE::WARRIOR_ID;
                 
         	int ship_race_id = npc_race_id;         // RACES_ALL_vec[getRandInt(0, RACES_ALL_vec.size())];
-        	ENTITY::eTYPE ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
+        	ENTITY::TYPE ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
         	int ship_size_id = getRandInt(1, 9);
         	int weapons_num = 5;
         	
@@ -255,14 +255,14 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
     	}        
 }
 
-void God::CreateShipsInSpace(StarSystem* starsystem, int ship_num, int npc_race_id, ENTITY::eTYPE subtype_id, ENTITY::eTYPE subsubtype_id) const
+void God::CreateShipsInSpace(StarSystem* starsystem, int ship_num, int npc_race_id, ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id) const
 {
-    ENTITY::eTYPE npc_subtype_id = ENTITY::eTYPE::NONE_ID;
-    ENTITY::eTYPE npc_subsubtype_id = ENTITY::eTYPE::NONE_ID;
+    ENTITY::TYPE npc_subtype_id = ENTITY::TYPE::NONE_ID;
+    ENTITY::TYPE npc_subsubtype_id = ENTITY::TYPE::NONE_ID;
 
     for (int i=0; i<ship_num; i++)
     {     
-        if (subtype_id == ENTITY::eTYPE::NONE_ID)
+        if (subtype_id == ENTITY::TYPE::NONE_ID)
         {
             npc_subtype_id    = getRandNpcSubTypeId(npc_race_id);
             npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
@@ -274,7 +274,7 @@ void God::CreateShipsInSpace(StarSystem* starsystem, int ship_num, int npc_race_
         }   
 
         int ship_race_id    = npc_race_id;         
-        ENTITY::eTYPE ship_subtype_id = npc_subtype_id;  
+        ENTITY::TYPE ship_subtype_id = npc_subtype_id;  
         int ship_size_id = getRandInt(1, 9);
         int weapons_num = getRandInt(1, 5);
 

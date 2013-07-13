@@ -25,7 +25,7 @@
 
 namespace GUI
 {
-    GUI::eTYPE getEquivalent(ENTITY::eTYPE);
+    GUI::eTYPE getEquivalent(ENTITY::TYPE);
 }
        
 int getObjectSize(int w, int h); 

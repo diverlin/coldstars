@@ -26,8 +26,8 @@ FreezerModule::FreezerModule(int id)
 freeze_add(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::MODULE_ID);
-    SetSubTypeId(ENTITY::eTYPE::FREEZER_MODULE_ID); 
+	SetTypeId(ENTITY::TYPE::MODULE_ID);
+    SetSubTypeId(ENTITY::TYPE::FREEZER_MODULE_ID); 
 }
 
 /* virtual */

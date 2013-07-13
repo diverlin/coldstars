@@ -47,7 +47,7 @@ class BaseSpaceEntity : public BaseDrawable
 		void SetLifeData(const LifeData& data_life) { this->data_life = data_life; }
 
 		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
-		void SetPlaceTypeId(ENTITY::eTYPE place_type_id)      { this->place_type_id = place_type_id;  }
+		void SetPlaceTypeId(ENTITY::TYPE place_type_id)      { this->place_type_id = place_type_id;  }
 		void SetMass(int mass) 			    { this->mass = mass; }
 				
 		void SetGivenExpirience(int given_expirience) { this->given_expirience = given_expirience; }                
@@ -55,7 +55,7 @@ class BaseSpaceEntity : public BaseDrawable
 		void SetParent(BaseSpaceEntity* parent)     { this->parent = parent; }
 
 		StarSystem* GetStarSystem() const { return starsystem; }           
-		ENTITY::eTYPE GetPlaceTypeId()        const { return place_type_id; }
+		ENTITY::TYPE GetPlaceTypeId()        const { return place_type_id; }
 
 		virtual int GetGivenExpirience() const { return given_expirience; }
  
@@ -83,7 +83,7 @@ class BaseSpaceEntity : public BaseDrawable
 		Vec3<float> force;
 
 		StarSystem* starsystem;
-		ENTITY::eTYPE place_type_id;
+		ENTITY::TYPE place_type_id;
 
 		InfoTable info;
 

@@ -28,8 +28,8 @@ fuel_max_orig(0),
 fuel(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID);
-    SetSubTypeId(ENTITY::eTYPE::BAK_EQUIPMENT_ID);
+	SetTypeId(ENTITY::TYPE::EQUIPMENT_ID);
+    SetSubTypeId(ENTITY::TYPE::BAK_EQUIPMENT_ID);
 }
    
 /* virtual */

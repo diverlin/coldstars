@@ -62,9 +62,9 @@ sector(nullptr),
 container_num_max(CONTAINER_NUM_MAX_DEFAULT)
 { 
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::STARSYSTEM_ID); 
+	SetTypeId(ENTITY::TYPE::STARSYSTEM_ID); 
     
-    place_type_id = ENTITY::eTYPE::SPACE_ID;
+    place_type_id = ENTITY::TYPE::SPACE_ID;
     
     condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
     
@@ -169,7 +169,7 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const Vec3<float>& center, const V
 	}
 	#endif
 	
-    vehicle->SetPlaceTypeId(ENTITY::eTYPE::SPACE_ID);
+    vehicle->SetPlaceTypeId(ENTITY::TYPE::SPACE_ID);
     vehicle->SetStarSystem(this);  
     
     vehicle->SetCenter(center); 
@@ -181,7 +181,7 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const Vec3<float>& center, const V
     
     VEHICLE_vec.push_back(vehicle);  
 
-	if (vehicle->GetSubTypeId() == ENTITY::eTYPE::SATELLITE_ID)
+	if (vehicle->GetSubTypeId() == ENTITY::TYPE::SATELLITE_ID)
 	{
 		((Satellite*)vehicle)->GetOrbit()->CalcPath(parent->GetCollisionRadius(), 1.0, getRandBool());
 	}
@@ -190,7 +190,7 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const Vec3<float>& center, const V
 
 void StarSystem::AddBullet(RocketBullet* rocket, const Vec3<float>& center, const Vec3<float>& angle)
 {
-    rocket->SetPlaceTypeId(ENTITY::eTYPE::SPACE_ID);
+    rocket->SetPlaceTypeId(ENTITY::TYPE::SPACE_ID);
     rocket->SetStarSystem(this);  
 			
 	rocket->SetCenter(center); 
@@ -206,26 +206,26 @@ void StarSystem::Add(BasePlanet* object, BaseSpaceEntity* parent, int it)
         object->SetParent(parent);
         
         object->SetStarSystem(this);
-        object->SetPlaceTypeId(ENTITY::eTYPE::SPACE_ID);
+        object->SetPlaceTypeId(ENTITY::TYPE::SPACE_ID);
         
         object->GetOrbit().SetIt(it);
         object->UpdatePosition();
         
 	switch(object->GetTypeId())
 	{
-		case ENTITY::eTYPE::STAR_ID:
+		case ENTITY::TYPE::STAR_ID:
 		{
 			STAR_vec.push_back((Star*)object);
 			break;
 		}
 		
-		case ENTITY::eTYPE::PLANET_ID:
+		case ENTITY::TYPE::PLANET_ID:
 		{
 			PLANET_vec.push_back((Planet*)object);
 			break;
 		}
 		
-		case ENTITY::eTYPE::ASTEROID_ID:
+		case ENTITY::TYPE::ASTEROID_ID:
 		{
 			ASTEROID_vec.push_back((Asteroid*)object);
 			break;
@@ -250,7 +250,7 @@ void StarSystem::AddContainer(Container* container, const Vec3<float>& center)
 	#endif
 	
 	container->SetStarSystem(this);
-        container->SetPlaceTypeId(ENTITY::eTYPE::SPACE_ID);
+        container->SetPlaceTypeId(ENTITY::TYPE::SPACE_ID);
     	container->SetCenter(center);
         
         CONTAINER_vec.push_back(container);
@@ -259,7 +259,7 @@ void StarSystem::AddContainer(Container* container, const Vec3<float>& center)
 void StarSystem::Add(BlackHole* blackhole, const Vec3<float>& center)
 {
 	blackhole->SetStarSystem(this);
-        blackhole->SetPlaceTypeId(ENTITY::eTYPE::SPACE_ID);
+        blackhole->SetPlaceTypeId(ENTITY::TYPE::SPACE_ID);
 	blackhole->SetCenter(center);
 	BLACKHOLE_vec.push_back(blackhole);
 }    
@@ -763,7 +763,7 @@ void StarSystem::UpdateInSpaceInStatic_s()
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 		
     { 
         VEHICLE_vec[i]->GetOwnerNpc()->UpdateInSpaceInStatic(); 
-        if (VEHICLE_vec[i]->GetSubTypeId() == ENTITY::eTYPE::SPACESTATION_ID)
+        if (VEHICLE_vec[i]->GetSubTypeId() == ENTITY::TYPE::SPACESTATION_ID)
         {
             ((SpaceStation*)VEHICLE_vec[i])->GetLand()->UpdateInStatic();
         }
@@ -881,8 +881,8 @@ void StarSystem::ShipManager_s(unsigned int num)
 			prace_id = RACE::R6_ID;
 		}
 		
-        ENTITY::eTYPE psubtype_id    = ENTITY::eTYPE::WARRIOR_ID;
-        ENTITY::eTYPE psubsubtype_id = ENTITY::eTYPE::WARRIOR_ID;
+        ENTITY::TYPE psubtype_id    = ENTITY::TYPE::WARRIOR_ID;
+        ENTITY::TYPE psubsubtype_id = ENTITY::TYPE::WARRIOR_ID;
         int size_id     = SIZE_4_ID;
         int weapons_num = 7;
     
@@ -905,7 +905,7 @@ void StarSystem::ManageUnavaliableObjects_s()
 {               
     for (std::vector<Vehicle*>::iterator it=VEHICLE_vec.begin(); it<VEHICLE_vec.end(); ++it)
     {
-        if ((*it)->GetPlaceTypeId() != ENTITY::eTYPE::SPACE_ID)
+        if ((*it)->GetPlaceTypeId() != ENTITY::TYPE::SPACE_ID)
         {	
             #if ENTITY_TRANSACTION_LOG_ENABLED == 1
             Logger::Instance().Log("starsysten("+int2str(GetId())+ ")::RemoveVehicle(" + int2str((*it)->GetId())+")");

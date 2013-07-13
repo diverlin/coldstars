@@ -39,7 +39,7 @@ land(nullptr),
 population(0)
 {    
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::PLANET_ID);
+	SetTypeId(ENTITY::TYPE::PLANET_ID);
 }
 
 /* virtual */

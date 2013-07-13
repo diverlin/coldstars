@@ -27,8 +27,8 @@ ScanerEquipment::ScanerEquipment(int id)
 scan_orig(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID); 
-    SetSubTypeId(ENTITY::eTYPE::SCANER_EQUIPMENT_ID); 
+	SetTypeId(ENTITY::TYPE::EQUIPMENT_ID); 
+    SetSubTypeId(ENTITY::TYPE::SCANER_EQUIPMENT_ID); 
 }
 
 /* virtual */

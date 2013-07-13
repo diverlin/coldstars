@@ -23,18 +23,20 @@
 #include <common/constants.hpp>
 
 int getRandIntFromVec(const std::vector<int>&);
-ENTITY::eTYPE getRandIntFromVec(const std::vector<ENTITY::eTYPE>&);
+ENTITY::TYPE getRandIntFromVec(const std::vector<ENTITY::TYPE>&);
 
 float getRandFloat(float, float);
 int getRandInt(int, int);
 int getRandSign();
 bool getRandBool();
 
-ENTITY::eTYPE getRandNpcSubTypeId(int, const std::vector<ENTITY::eTYPE>&);
-const std::vector<ENTITY::eTYPE>& getAllowedSubTypesByRaceId(int);
+ENTITY::TYPE getRandNpcSubTypeId(int, const std::vector<ENTITY::TYPE>&);
+const std::vector<ENTITY::TYPE>& getAllowedSubTypesByRaceId(int);
 
-ENTITY::eTYPE getRandNpcSubTypeId(int);
-ENTITY::eTYPE getRandNpcSubSubTypeId(ENTITY::eTYPE);
+ENTITY::TYPE getRandNpcSubTypeId(int);
+ENTITY::TYPE getRandNpcSubSubTypeId(ENTITY::TYPE);
+
+ENTITY::TYPE getRand(const std::vector<ENTITY::TYPE>&);
 
 
 

@@ -26,7 +26,7 @@
 #include "../common/rand.hpp"
 #include "../resources/TextureManager.hpp"
 
-VehicleSlot* GetNewVehicleSlot(ENTITY::eTYPE subtype_id, unsigned long int id)
+VehicleSlot* GetNewVehicleSlot(ENTITY::TYPE subtype_id, unsigned long int id)
 {
     if (id == NONE_ID)
 	{

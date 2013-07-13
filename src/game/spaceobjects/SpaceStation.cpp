@@ -40,8 +40,8 @@ SpaceStation::SpaceStation(int id)
 land(nullptr)
 {      
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::VEHICLE_ID);
-	SetSubTypeId(ENTITY::eTYPE::SPACESTATION_ID);
+	SetTypeId(ENTITY::TYPE::VEHICLE_ID);
+	SetSubTypeId(ENTITY::TYPE::SPACESTATION_ID);
 }
 
 /* virtual */

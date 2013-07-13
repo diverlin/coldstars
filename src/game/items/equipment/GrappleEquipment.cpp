@@ -34,8 +34,8 @@ radius_orig(0),
 speed_orig(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID);  
-    SetSubTypeId(ENTITY::eTYPE::GRAPPLE_EQUIPMENT_ID);
+	SetTypeId(ENTITY::TYPE::EQUIPMENT_ID);  
+    SetSubTypeId(ENTITY::TYPE::GRAPPLE_EQUIPMENT_ID);
 }
 
 /* virtual */
@@ -124,7 +124,7 @@ void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
        			{
        				switch((*it)->GetTypeId())
        				{
-      					case ENTITY::eTYPE::CONTAINER_ID:
+      					case ENTITY::TYPE::CONTAINER_ID:
        					{
        						Container* container = (Container*)(*it);
        						if (vehicle.UnpackContainerItemToCargoSlot(container) == true)

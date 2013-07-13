@@ -80,7 +80,7 @@ class Vehicle : public BaseSpaceEntity
                 VehicleKorpusData& GetKorpusData() { return data_korpus; };
                                              
                 virtual int GetGivenExpirience() const;
-                bool CheckItemSlotPresenceBySubTypeId(ENTITY::eTYPE) const;
+                bool CheckItemSlotPresenceBySubTypeId(ENTITY::TYPE) const;
                                                                 
                 void AddItemSlot(ItemSlot*); 
                 
@@ -206,9 +206,9 @@ class Vehicle : public BaseSpaceEntity
                                 
                 VehicleSlot* parent_vehicleslot;
                                         
-                ItemSlot* GetFuctionalSlot(ENTITY::eTYPE) const;
+                ItemSlot* GetFuctionalSlot(ENTITY::TYPE) const;
        	        ItemSlot* GetEmptyArtefactSlot() const;
-       	        ItemSlot* GetCargoSlotWithGoods(ENTITY::eTYPE);
+       	        ItemSlot* GetCargoSlotWithGoods(ENTITY::TYPE);
        	        
        	        bool ManageItem(BaseItem*);
        	        bool ManageFunctionEquipment(BaseItem*);

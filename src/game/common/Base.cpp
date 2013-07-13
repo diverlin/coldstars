@@ -60,9 +60,9 @@ void Base::LoadDataUniqueBase(const boost::property_tree::ptree& load_ptree)
 	#endif
 	
 	m_Data_id.id              = load_ptree.get<unsigned long int>("data_id.id");
-	m_Data_id.type_id         = (ENTITY::eTYPE)load_ptree.get<int>("data_id.type_id");
-	m_Data_id.subtype_id      = (ENTITY::eTYPE)load_ptree.get<int>("data_id.subtype_id");
-	m_Data_id.subsubtype_id   = (ENTITY::eTYPE)load_ptree.get<int>("data_id.subsubtype_id");
+	m_Data_id.type_id         = (ENTITY::TYPE)load_ptree.get<int>("data_id.type_id");
+	m_Data_id.subtype_id      = (ENTITY::TYPE)load_ptree.get<int>("data_id.subtype_id");
+	m_Data_id.subsubtype_id   = (ENTITY::TYPE)load_ptree.get<int>("data_id.subsubtype_id");
 }
 
 void Base::ResolveDataUniqueBase()

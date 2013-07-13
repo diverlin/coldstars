@@ -30,6 +30,6 @@ std::string getSpecialActionStr(int);
 std::string getAiModelStr(int);
 std::string getRaceStr(int); 
 std::string getNavigatorActionStr(int);
-std::string getEntityTypeStr(ENTITY::eTYPE);
+std::string getEntityTypeStr(ENTITY::TYPE);
 
 #endif
