@@ -69,7 +69,7 @@ void RadarModuleBuilder::CreateNewInternals(RadarModule* radar_module, int radiu
     	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
     	radius_add  = getRandInt(MODULE::RADAR::RADIUS_MIN, MODULE::RADAR::RADIUS_MAX);
     
-        radar_module->SetParentSubTypeId(ENTITY::eTYPE::RADAR_EQUIPMENT_ID);    
+        radar_module->SetParentSubTypeId(ENTITY::TYPE::RADAR_EQUIPMENT_ID);    
         radar_module->BindData2D(texOb);
         radar_module->SetRadiusAdd(radius_add);
 }

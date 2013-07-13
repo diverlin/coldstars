@@ -28,7 +28,7 @@ class Vehicle;
 class VehicleSlot : public BaseSlot
 {
     public:
-        VehicleSlot(int, ENTITY::eTYPE);
+        VehicleSlot(int, ENTITY::TYPE);
         ~VehicleSlot();	
         
         virtual void PutChildsToGarbage() const;

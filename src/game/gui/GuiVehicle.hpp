@@ -43,7 +43,7 @@ class GuiVehicle : public BaseGuiElement
         
         virtual void RenderUnique() const override final;
         
-        void RenderVehicle(const MouseData&, ENTITY::eTYPE mark_slot_subtype_id = ENTITY::eTYPE::NONE_ID) const;
+        void RenderVehicle(const MouseData&, ENTITY::TYPE mark_slot_subtype_id = ENTITY::TYPE::NONE_ID) const;
     
     private:     
         bool block_manual_exit;
@@ -56,7 +56,7 @@ class GuiVehicle : public BaseGuiElement
         Vehicle* m_Vehicle;
             
         void RenderSlots() const;
-        void RenderMarksForEmptySlots(const MouseData&, ENTITY::eTYPE) const;  
+        void RenderMarksForEmptySlots(const MouseData&, ENTITY::TYPE) const;  
         
         void CreateKorpusGui(Vehicle*, float);
         void CreateItemSlotsGeometry(Vehicle*, float);

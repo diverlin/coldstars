@@ -26,8 +26,8 @@ BakModule::BakModule(int id)
 fuel_max_add(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::MODULE_ID);
-	SetSubTypeId(ENTITY::eTYPE::BAK_MODULE_ID);
+	SetTypeId(ENTITY::TYPE::MODULE_ID);
+	SetSubTypeId(ENTITY::TYPE::BAK_MODULE_ID);
 }
 
 /* virtual */

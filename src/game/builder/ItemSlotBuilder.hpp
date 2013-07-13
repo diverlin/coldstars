@@ -23,8 +23,8 @@
 #include <slots/ItemSlot.hpp>
 #include <common/constants.hpp>
 
-ItemSlot* GetNewItemSlot(ENTITY::eTYPE subtype_id, unsigned long int id = NONE_ID);
-ItemSlot* GetNewItemSlotWithoutSaveAbility(ENTITY::eTYPE subtype_id);
+ItemSlot* GetNewItemSlot(ENTITY::TYPE subtype_id, unsigned long int id = NONE_ID);
+ItemSlot* GetNewItemSlotWithoutSaveAbility(ENTITY::TYPE subtype_id);
 
 #endif 
     

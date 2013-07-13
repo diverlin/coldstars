@@ -28,7 +28,7 @@ Goverment::Goverment(int id)
 textureOb_face(nullptr)
 {
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::GOVERMENT_ID);
+	SetTypeId(ENTITY::TYPE::GOVERMENT_ID);
 }
 
 Goverment::~Goverment()

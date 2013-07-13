@@ -43,10 +43,10 @@ class Shop : public Room
         	int GetDrugPrice() 		const { return drug_price; };     
         	int GetExclusivePrice()		const { return exclusive_price; };
 
-                int GetAmount(ENTITY::eTYPE) const;    
-                int GetPrice(ENTITY::eTYPE) const;
+                int GetAmount(ENTITY::TYPE) const;    
+                int GetPrice(ENTITY::TYPE) const;
                         	                
-        	bool SellGoods(Npc*, ENTITY::eTYPE, int);
+        	bool SellGoods(Npc*, ENTITY::TYPE, int);
         	int BuyGoods(GoodsPack*);
         	                
                 void SaveData(boost::property_tree::ptree&) const;		
@@ -68,7 +68,7 @@ class Shop : public Room
         	int drug_price;     
         	int exclusive_price;
         	                   
-        	int Deal(int, ENTITY::eTYPE, int);
+        	int Deal(int, ENTITY::TYPE, int);
         	                     
         	void UpdateAllPrices();
         	void UpdateMineralPrice();

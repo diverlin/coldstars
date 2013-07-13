@@ -59,7 +59,7 @@ npc(nullptr),
 starsystem(nullptr)        
 { 
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::PLAYER_ID);
+	SetTypeId(ENTITY::TYPE::PLAYER_ID);
     
     cursor.SetPlayer(this);
     GuiManager::Instance().SetPlayer(this);
@@ -178,9 +178,9 @@ void Player::AddIfVisible(Vehicle* vehicle)
 		{
 			switch(vehicle->GetSubTypeId())
 			{			
-				case ENTITY::eTYPE::SHIP_ID:        	{ 	visible_SHIP_vec.push_back((Ship*)vehicle); break; }
-				case ENTITY::eTYPE::SATELLITE_ID:    	{ 	visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
-				case ENTITY::eTYPE::SPACESTATION_ID: 	{ 	visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
+				case ENTITY::TYPE::SHIP_ID:        	{ 	visible_SHIP_vec.push_back((Ship*)vehicle); break; }
+				case ENTITY::TYPE::SATELLITE_ID:    	{ 	visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
+				case ENTITY::TYPE::SPACESTATION_ID: 	{ 	visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
 			}
 		}
 	}
@@ -234,7 +234,7 @@ void Player::UpdatePostTransaction()
 {
         switch (npc->GetVehicle()->GetPlaceTypeId())
         {
-                case ENTITY::eTYPE::KOSMOPORT_ID:
+                case ENTITY::TYPE::KOSMOPORT_ID:
                 {
                         if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == false)
                         {
@@ -249,12 +249,12 @@ void Player::UpdatePostTransaction()
                         break;
                 }
         
-                case ENTITY::eTYPE::NATURELAND_ID:
+                case ENTITY::TYPE::NATURELAND_ID:
                 {                       
                         break;
                 }
                 
-                case ENTITY::eTYPE::SPACE_ID:
+                case ENTITY::TYPE::SPACE_ID:
                 {
                         if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == true)
                         {
@@ -303,7 +303,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 		
 		case SPECIAL_ACTION::INITIATE_JUMPOUT_ID:
 		{
-			if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::eTYPE::HYPER_SPACE_ID)
+			if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::TYPE::HYPER_SPACE_ID)
 			{
 				if (turn_timer.GetTurnEnded() == true)
 				{
@@ -316,7 +316,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 
 		case SPECIAL_ACTION::INITIATE_LAUNCHING_ID:
 		{
-			if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::eTYPE::SPACE_ID)
+			if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::TYPE::SPACE_ID)
 			{
 				if (turn_timer.GetTurnEnded() == true)
 				{
@@ -1189,10 +1189,10 @@ void Player::RunSession(const TurnTimer& turn_timer)
 	
        	switch(npc->GetVehicle()->GetPlaceTypeId())
        	{
-       		case ENTITY::eTYPE::SPACE_ID: 		{ SessionInSpace(npc->GetVehicle()->GetStarSystem(), turn_timer); break; }
-       		case ENTITY::eTYPE::HYPER_SPACE_ID: 	{ SessionInSpace((StarSystem*)npc->GetVehicle()->GetDriveComplex().GetTarget(), turn_timer); break; }
-       		case ENTITY::eTYPE::KOSMOPORT_ID:  	{ SessionInKosmoport(); break; }
-       		case ENTITY::eTYPE::NATURELAND_ID:  	{ SessionInNatureLand(); break; }
+       		case ENTITY::TYPE::SPACE_ID: 		{ SessionInSpace(npc->GetVehicle()->GetStarSystem(), turn_timer); break; }
+       		case ENTITY::TYPE::HYPER_SPACE_ID: 	{ SessionInSpace((StarSystem*)npc->GetVehicle()->GetDriveComplex().GetTarget(), turn_timer); break; }
+       		case ENTITY::TYPE::KOSMOPORT_ID:  	{ SessionInKosmoport(); break; }
+       		case ENTITY::TYPE::NATURELAND_ID:  	{ SessionInNatureLand(); break; }
        	}       
   	
        	cursor.RenderFocusedObjectInfo();

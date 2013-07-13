@@ -121,7 +121,7 @@ void BaseEquipment::Render(const Box& box, const Vec2<float>& gui_offset, bool d
 
 	if (draw_text == true)
 	{
-    		if (GetSubTypeId() == ENTITY::eTYPE::ROCKET_EQUIPMENT_ID)
+    		if (GetSubTypeId() == ENTITY::TYPE::ROCKET_EQUIPMENT_ID)
         	{
         		Vec2<float> pos(box.GetCenter().x - box.GetSize().x/2 + gui_offset.x, box.GetCenter().y + gui_offset.y);
         		Screen::Instance().DrawText(int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);

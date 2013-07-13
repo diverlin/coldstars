@@ -31,8 +31,8 @@ restoration_orig(0),
 energy(0)    
 {
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID);           
-    SetSubTypeId(ENTITY::eTYPE::ENERGIZER_EQUIPMENT_ID);
+	SetTypeId(ENTITY::TYPE::EQUIPMENT_ID);           
+    SetSubTypeId(ENTITY::TYPE::ENERGIZER_EQUIPMENT_ID);
 }
 
 /* virtual */

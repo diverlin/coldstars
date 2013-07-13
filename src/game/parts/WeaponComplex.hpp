@@ -53,8 +53,8 @@ class WeaponComplex
         	
      		void ActivateAllWeapons();
      		void DeactivateAllWeapons();
-		void ActivateWeaponsBySubTypeId(ENTITY::eTYPE);
-		void DeactivateWeaponsBySubTypeId(ENTITY::eTYPE);
+		void ActivateWeaponsBySubTypeId(ENTITY::TYPE);
+		void DeactivateWeaponsBySubTypeId(ENTITY::TYPE);
 
         	bool IsAnyWeaponSelected() const; 
         	

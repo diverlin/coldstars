@@ -82,7 +82,7 @@ int main()
 	Galaxy* galaxy = player->GetNpc()->GetVehicle()->GetStarSystem()->GetSector()->GetGalaxy();       
         
 	player->GetNpc()->GetVehicle()->SetGodMode(true);
-	player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
+	//player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
 
 	//Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
 	

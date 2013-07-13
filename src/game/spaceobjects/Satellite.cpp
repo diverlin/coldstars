@@ -30,8 +30,8 @@
 Satellite::Satellite(int id)
 {        
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::VEHICLE_ID);
-	SetSubTypeId(ENTITY::eTYPE::SATELLITE_ID);
+	SetTypeId(ENTITY::TYPE::VEHICLE_ID);
+	SetSubTypeId(ENTITY::TYPE::SATELLITE_ID);
 	
     mass = getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX);
     orbit = new Orbit();

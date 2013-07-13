@@ -43,14 +43,14 @@
 #include "../garbage/EntityGarbage.hpp"
 #include "../world/EntityManager.hpp"
 
-ItemSlot::ItemSlot(int id, ENTITY::eTYPE subtype_id):
+ItemSlot::ItemSlot(int id, ENTITY::TYPE subtype_id):
 turrel(nullptr),	      
 target(nullptr),
 subtarget(nullptr),	     
 item(nullptr)
 {
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::ITEM_SLOT_ID);
+	SetTypeId(ENTITY::TYPE::ITEM_SLOT_ID);
 	SetSubTypeId(subtype_id);
 }
 
@@ -112,8 +112,8 @@ bool ItemSlot::CheckAmmo() const
 {
 	switch(GetItem()->GetSubTypeId())
 	{
-    		case ENTITY::eTYPE::LAZER_EQUIPMENT_ID:  { /*if check energy */  return true; break; }
-    		case ENTITY::eTYPE::ROCKET_EQUIPMENT_ID: { if (GetRocketEquipment()->GetAmmo() > 0) return true; break; }
+    		case ENTITY::TYPE::LAZER_EQUIPMENT_ID:  { /*if check energy */  return true; break; }
+    		case ENTITY::TYPE::ROCKET_EQUIPMENT_ID: { if (GetRocketEquipment()->GetAmmo() > 0) return true; break; }
 	}
 	
     	return false;           
@@ -127,13 +127,13 @@ void ItemSlot::FireEvent(float attack_rate, bool show_effect)
 
 	switch(GetItem()->GetSubTypeId())
 	{
-    		case ENTITY::eTYPE::LAZER_EQUIPMENT_ID:
+    		case ENTITY::TYPE::LAZER_EQUIPMENT_ID:
     		{   
        			GetLazerEquipment()->FireEvent(GetTarget(), GetSubTarget(), attack_rate, show_effect); 
        			break;  
     		}
 
-    		case ENTITY::eTYPE::ROCKET_EQUIPMENT_ID:
+    		case ENTITY::TYPE::ROCKET_EQUIPMENT_ID:
     		{       
                 	GetRocketEquipment()->FireEvent(attack_rate);
                 	break;              
@@ -149,7 +149,7 @@ void ItemSlot::FireEvent(float attack_rate, bool show_effect)
 
 bool ItemSlot::CheckItemInsertion(BaseItem* item) const
 {
-	if (GetSubTypeId() == ENTITY::eTYPE::CARGO_SLOT_ID) 
+	if (GetSubTypeId() == ENTITY::TYPE::CARGO_SLOT_ID) 
 	{
 		return true;
 	}
@@ -164,7 +164,7 @@ bool ItemSlot::CheckItemInsertion(BaseItem* item) const
     		        
 bool ItemSlot::InsertItem(BaseItem* item)
 {	
-	if (GetSubTypeId() == ENTITY::eTYPE::CARGO_SLOT_ID) 
+	if (GetSubTypeId() == ENTITY::TYPE::CARGO_SLOT_ID) 
 	{           
 		this->item = item;
 		if (item->GetItemSlot() != nullptr)
@@ -197,7 +197,7 @@ void ItemSlot::RemoveItem()
         item = nullptr;
     	ResetTarget();
     	
-    	if (GetSubTypeId() != ENTITY::eTYPE::CARGO_SLOT_ID) 
+    	if (GetSubTypeId() != ENTITY::TYPE::CARGO_SLOT_ID) 
 	{    
                 UpdateVehiclePropetries(); 
 	}    	 
@@ -207,11 +207,11 @@ void ItemSlot::SelectEvent()
 {
 	selected = true;
         
-        if (owner->GetTypeId() == ENTITY::eTYPE::VEHICLE_ID)
+        if (owner->GetTypeId() == ENTITY::TYPE::VEHICLE_ID)
 	{ 	
 		switch(GetSubTypeId())
 		{
-			case ENTITY::eTYPE::DRIVE_SLOT_ID: { GetOwnerVehicle()->UpdatePropertiesSpeed(); break; }
+			case ENTITY::TYPE::DRIVE_SLOT_ID: { GetOwnerVehicle()->UpdatePropertiesSpeed(); break; }
 		}
 	}
 }
@@ -220,12 +220,12 @@ void ItemSlot::DeselectEvent()
 {
 	selected = false;
 	
-	if (owner->GetTypeId() == ENTITY::eTYPE::VEHICLE_ID)
+	if (owner->GetTypeId() == ENTITY::TYPE::VEHICLE_ID)
 	{ 	
 		switch(GetSubTypeId())
 		{
-			case ENTITY::eTYPE::WEAPON_SLOT_ID: 	{ 	ResetTarget(); break; }
-            case ENTITY::eTYPE::DRIVE_SLOT_ID: 	
+			case ENTITY::TYPE::WEAPON_SLOT_ID: 	{ 	ResetTarget(); break; }
+            case ENTITY::TYPE::DRIVE_SLOT_ID: 	
             {
   				GetOwnerVehicle()->UpdatePropertiesSpeed();
 				//GetOwnerVehicle()->UpdatePropertiesJump();
@@ -238,33 +238,33 @@ void ItemSlot::DeselectEvent()
         	
 void ItemSlot::UpdateVehiclePropetries() const
 {
-	if (GetSubTypeId() != ENTITY::eTYPE::CARGO_SLOT_ID)
+	if (GetSubTypeId() != ENTITY::TYPE::CARGO_SLOT_ID)
 	{ 	
 		switch(GetSubTypeId())
 		{
-			case ENTITY::eTYPE::WEAPON_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesFire(); break; }
-			case ENTITY::eTYPE::SCANER_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesScan(); break; }
-			case ENTITY::eTYPE::BAK_SLOT_ID:     	{
+			case ENTITY::TYPE::WEAPON_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesFire(); break; }
+			case ENTITY::TYPE::SCANER_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesScan(); break; }
+			case ENTITY::TYPE::BAK_SLOT_ID:     	{
 						  		GetOwnerVehicle()->UpdatePropertiesSpeed();
    								GetOwnerVehicle()->UpdatePropertiesJump(); 
    	
    						  		break;
   							}
   			
-  			case ENTITY::eTYPE::DRIVE_SLOT_ID:   	{
+  			case ENTITY::TYPE::DRIVE_SLOT_ID:   	{
   					  			GetOwnerVehicle()->UpdatePropertiesSpeed();
 								GetOwnerVehicle()->UpdatePropertiesJump(); 
 					  			break;
 							}
 				
-			case ENTITY::eTYPE::DROID_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesRepair(); break; }
-			case ENTITY::eTYPE::ENERGIZER_SLOT_ID: { GetOwnerVehicle()->UpdatePropertiesEnergy(); break; }
-			case ENTITY::eTYPE::FREEZER_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesFreeze(); break; }
-			case ENTITY::eTYPE::GRAPPLE_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesGrab(); break; }
-			case ENTITY::eTYPE::PROTECTOR_SLOT_ID: { GetOwnerVehicle()->UpdatePropertiesProtection(); break; }
-			case ENTITY::eTYPE::RADAR_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesRadar(); break; }
+			case ENTITY::TYPE::DROID_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesRepair(); break; }
+			case ENTITY::TYPE::ENERGIZER_SLOT_ID: { GetOwnerVehicle()->UpdatePropertiesEnergy(); break; }
+			case ENTITY::TYPE::FREEZER_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesFreeze(); break; }
+			case ENTITY::TYPE::GRAPPLE_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesGrab(); break; }
+			case ENTITY::TYPE::PROTECTOR_SLOT_ID: { GetOwnerVehicle()->UpdatePropertiesProtection(); break; }
+			case ENTITY::TYPE::RADAR_SLOT_ID: 	{ GetOwnerVehicle()->UpdatePropertiesRadar(); break; }
 			
-			case ENTITY::eTYPE::ARTEFACT_SLOT_ID: { GetOwnerVehicle()->UpdateArtefactInfluence(); break; }
+			case ENTITY::TYPE::ARTEFACT_SLOT_ID: { GetOwnerVehicle()->UpdateArtefactInfluence(); break; }
 		}
 	}
 }
@@ -288,21 +288,21 @@ int ItemSlot::GetItemRadius() const
 {       
         switch(item->GetTypeId())
         {
-                case ENTITY::eTYPE::EQUIPMENT_ID:
+                case ENTITY::TYPE::EQUIPMENT_ID:
                 {
                         switch (item->GetSubTypeId())
                         {
-                                case ENTITY::eTYPE::LAZER_EQUIPMENT_ID:   { return GetLazerEquipment()->GetRadius();  break; };
-                                case ENTITY::eTYPE::ROCKET_EQUIPMENT_ID:  { return GetRocketEquipment()->GetRadius(); break; };
+                                case ENTITY::TYPE::LAZER_EQUIPMENT_ID:   { return GetLazerEquipment()->GetRadius();  break; };
+                                case ENTITY::TYPE::ROCKET_EQUIPMENT_ID:  { return GetRocketEquipment()->GetRadius(); break; };
 		
-                                case ENTITY::eTYPE::GRAPPLE_EQUIPMENT_ID: { return GetGrappleEquipment()->GetRadius(); break; };
-                                case ENTITY::eTYPE::RADAR_EQUIPMENT_ID:   { return GetRadarEquipment()->GetRadius();   break; };
+                                case ENTITY::TYPE::GRAPPLE_EQUIPMENT_ID: { return GetGrappleEquipment()->GetRadius(); break; };
+                                case ENTITY::TYPE::RADAR_EQUIPMENT_ID:   { return GetRadarEquipment()->GetRadius();   break; };
                         }
                         
                         break;
                 }
                 
-                case ENTITY::eTYPE::BOMB_ID:
+                case ENTITY::TYPE::BOMB_ID:
                 {
                         return GetBomb()->GetRadius();   break; 
                 }
@@ -315,18 +315,18 @@ int ItemSlot::GetItemDamage() const
 {       
         switch(item->GetTypeId())
         {
-                case ENTITY::eTYPE::EQUIPMENT_ID:
+                case ENTITY::TYPE::EQUIPMENT_ID:
                 {
                         switch (item->GetSubTypeId())
                         {
-                                case ENTITY::eTYPE::LAZER_EQUIPMENT_ID:   { return GetLazerEquipment()->GetDamage();  break; };
-                                case ENTITY::eTYPE::ROCKET_EQUIPMENT_ID:  { return GetRocketEquipment()->GetDamage(); break; };
+                                case ENTITY::TYPE::LAZER_EQUIPMENT_ID:   { return GetLazerEquipment()->GetDamage();  break; };
+                                case ENTITY::TYPE::ROCKET_EQUIPMENT_ID:  { return GetRocketEquipment()->GetDamage(); break; };
                         }
                         
                         break;
                 }
                 
-                case ENTITY::eTYPE::BOMB_ID:
+                case ENTITY::TYPE::BOMB_ID:
                 {
                         return GetBomb()->GetDamage();   break; 
                 }
@@ -341,7 +341,7 @@ void ItemSlot::DropItemToSpace(Vehicle* vehicle)
                 
         switch (item->GetTypeId())
         {
-                case ENTITY::eTYPE::BOMB_ID: { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BOMB_ID); break; }
+                case ENTITY::TYPE::BOMB_ID: { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BOMB_ID); break; }
                 default:      { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID); break; }
         }
          
@@ -388,7 +388,7 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
        		
        		}
 
-       		if ( (item->GetTypeId() == ENTITY::eTYPE::MODULE_ID) and (slot->GetItem()->GetTypeId() == ENTITY::eTYPE::EQUIPMENT_ID) )
+       		if ( (item->GetTypeId() == ENTITY::TYPE::MODULE_ID) and (slot->GetItem()->GetTypeId() == ENTITY::TYPE::EQUIPMENT_ID) )
        		{
 			if (((BaseEquipment*)slot->GetItem())->InsertModule((BaseModule*)item) == true)  
 			{	
@@ -482,7 +482,7 @@ bool ItemSlot::IsTargetAlive(BaseSpaceEntity* _target) const
 
 bool ItemSlot::IsTargetInSpace(BaseSpaceEntity* _target) const  
 {
-	return (_target->GetPlaceTypeId() == ENTITY::eTYPE::SPACE_ID);
+	return (_target->GetPlaceTypeId() == ENTITY::TYPE::SPACE_ID);
 }           	
 
 bool ItemSlot::IsTargetInSameStarSystem(BaseSpaceEntity* _target) const
@@ -492,7 +492,7 @@ bool ItemSlot::IsTargetInSameStarSystem(BaseSpaceEntity* _target) const
 
 bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* _target) const
 {
-	if (_target->GetTypeId() == ENTITY::eTYPE::STARSYSTEM_ID)
+	if (_target->GetTypeId() == ENTITY::TYPE::STARSYSTEM_ID)
 	{
 		return true;
 	}
@@ -572,11 +572,11 @@ void ItemSlot::ResolveDataUniqueItemSlot()
 
         switch(owner->GetTypeId())
         {
-	       case ENTITY::eTYPE::VEHICLE_ID: 	{	((Vehicle*)owner)->AddItemSlot(this); break; }
-	       case ENTITY::eTYPE::CONTAINER_ID:     	{	((Container*)owner)->BindItemSlot(this); break; }
-	       case ENTITY::eTYPE::STORE_ID:         	{ 	((Store*)owner)->AddItemSlot(this); break; }
-	       case ENTITY::eTYPE::ANGAR_ID:         	{ 	((Angar*)owner)->AddItemSlot(this); break; }
-	       //case ENTITY::eTYPE::NATURELAND_ID:      { 	((NatureLand*)owner)->AddItemSlot(this); break; }
+	       case ENTITY::TYPE::VEHICLE_ID: 	{	((Vehicle*)owner)->AddItemSlot(this); break; }
+	       case ENTITY::TYPE::CONTAINER_ID:     	{	((Container*)owner)->BindItemSlot(this); break; }
+	       case ENTITY::TYPE::STORE_ID:         	{ 	((Store*)owner)->AddItemSlot(this); break; }
+	       case ENTITY::TYPE::ANGAR_ID:         	{ 	((Angar*)owner)->AddItemSlot(this); break; }
+	       //case ENTITY::TYPE::NATURELAND_ID:      { 	((NatureLand*)owner)->AddItemSlot(this); break; }
 	}
 }
 

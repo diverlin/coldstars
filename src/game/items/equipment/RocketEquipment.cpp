@@ -67,8 +67,8 @@ radius_orig(0),
 ammo(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID); 
-    SetSubTypeId(ENTITY::eTYPE::ROCKET_EQUIPMENT_ID);     
+	SetTypeId(ENTITY::TYPE::EQUIPMENT_ID); 
+    SetSubTypeId(ENTITY::TYPE::ROCKET_EQUIPMENT_ID);     
 
     fire_atOnce = getRandInt(1, 3);
 }

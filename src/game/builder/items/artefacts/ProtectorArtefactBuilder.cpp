@@ -74,7 +74,7 @@ void ProtectorArtefactBuilder::CreateNewInternals(ProtectorArtefact* protector_a
 
         protector_artefact->SetProtection(protection);
         protector_artefact->BindData2D(texOb_item);    	
-        protector_artefact->SetParentSubTypeId(ENTITY::eTYPE::ARTEFACT_SLOT_ID);
+        protector_artefact->SetParentSubTypeId(ENTITY::TYPE::ARTEFACT_SLOT_ID);
         protector_artefact->SetItemCommonData(common_data);
         protector_artefact->SetCondition(common_data.condition_max);
 }

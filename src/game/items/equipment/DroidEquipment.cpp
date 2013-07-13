@@ -29,8 +29,8 @@ DroidEquipment::DroidEquipment(int id)
 repair_orig(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID); 
-    SetSubTypeId(ENTITY::eTYPE::DROID_EQUIPMENT_ID); 
+	SetTypeId(ENTITY::TYPE::EQUIPMENT_ID); 
+    SetSubTypeId(ENTITY::TYPE::DROID_EQUIPMENT_ID); 
 }
 
 /* virtual */

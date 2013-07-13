@@ -24,15 +24,15 @@
 struct IdData  
 {
 	unsigned long int id;
-	ENTITY::eTYPE type_id;
-	ENTITY::eTYPE subtype_id;
-	ENTITY::eTYPE subsubtype_id;
+	ENTITY::TYPE type_id;
+	ENTITY::TYPE subtype_id;
+	ENTITY::TYPE subsubtype_id;
 
 	IdData():
     id(0),
-    type_id(ENTITY::eTYPE::NONE_ID),
-    subtype_id(ENTITY::eTYPE::NONE_ID),
-    subsubtype_id(ENTITY::eTYPE::NONE_ID)
+    type_id(ENTITY::TYPE::NONE_ID),
+    subtype_id(ENTITY::TYPE::NONE_ID),
+    subsubtype_id(ENTITY::TYPE::NONE_ID)
     {}
 };
 

@@ -46,7 +46,7 @@ void MicroScenarioDocking::Enter(Npc* npc) const
 /* virtual */
 bool MicroScenarioDocking::Validate(Npc* npc) const
 {
-	if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::eTYPE::SPACE_ID)
+	if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::TYPE::SPACE_ID)
 	{
 		return true;
 	}

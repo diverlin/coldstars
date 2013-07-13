@@ -26,8 +26,8 @@ GravityArtefact::GravityArtefact(int id)
 gravity(0)
 {
 	SetId(id);
-    SetTypeId(ENTITY::eTYPE::ARTEFACT_ID);
-    SetSubTypeId(ENTITY::eTYPE::GRAVITY_ARTEFACT_ID);
+    SetTypeId(ENTITY::TYPE::ARTEFACT_ID);
+    SetSubTypeId(ENTITY::TYPE::GRAVITY_ARTEFACT_ID);
 }
 
 /* virtual */

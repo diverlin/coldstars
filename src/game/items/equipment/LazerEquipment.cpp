@@ -36,8 +36,8 @@ damage_orig(0),
 radius_orig(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::eTYPE::EQUIPMENT_ID);
-    SetSubTypeId(ENTITY::eTYPE::LAZER_EQUIPMENT_ID);
+	SetTypeId(ENTITY::TYPE::EQUIPMENT_ID);
+    SetSubTypeId(ENTITY::TYPE::LAZER_EQUIPMENT_ID);
 
    	//TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
    	texOb_turrel	  = TextureManager::Instance().GetRandomTextureOb(TEXTURE::TURREL_ID); 

@@ -81,7 +81,7 @@ void NatureLandBuilder::CreateNewInternals(NatureLand* natureland) const
 	int item_slot_num = getRandInt(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
 	for (unsigned int i=0; i<item_slot_num; i++)
 	{
-		ItemSlot* item_slot = GetNewItemSlot(ENTITY::eTYPE::CARGO_SLOT_ID);   
+		ItemSlot* item_slot = GetNewItemSlot(ENTITY::TYPE::CARGO_SLOT_ID);   
 		natureland->AddItemSlot(item_slot);
 	}
 	
