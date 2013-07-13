@@ -29,12 +29,12 @@ class Base
 		virtual ~Base();
 
 		virtual void PutChildsToGarbage() const = 0;
-		void SetSubSubTypeId(ENTITY::eTYPE subsubtype_id)   { data_id.subsubtype_id = subsubtype_id; }
+		void SetSubSubTypeId(ENTITY::eTYPE subsubtype_id)   { m_Data_id.subsubtype_id = subsubtype_id; }
 		
-		unsigned long int GetId()       const { return data_id.id; }   
-		ENTITY::eTYPE GetTypeId()   	const { return data_id.type_id; }
-		ENTITY::eTYPE GetSubTypeId() 	const { return data_id.subtype_id; }
-		ENTITY::eTYPE GetSubSubTypeId() const { return data_id.subsubtype_id; }
+		unsigned long int GetId()       const { return m_Data_id.id; }   
+		ENTITY::eTYPE GetTypeId()   	const { return m_Data_id.type_id; }
+		ENTITY::eTYPE GetSubTypeId() 	const { return m_Data_id.subtype_id; }
+		ENTITY::eTYPE GetSubSubTypeId() const { return m_Data_id.subsubtype_id; }
 					
         std::string GetDataTypeString() const;
 
@@ -43,16 +43,16 @@ class Base
 		virtual void ResolveData() = 0;
 		
 	protected:
-        void SetId(unsigned long int id)                    { data_id.id = id; }
-        void SetTypeId(ENTITY::eTYPE type_id)               { data_id.type_id = type_id; }
-		void SetSubTypeId(ENTITY::eTYPE subtype_id)         { data_id.subtype_id = subtype_id; }
+        void SetId(unsigned long int id)                    { m_Data_id.id = id; }
+        void SetTypeId(ENTITY::eTYPE type_id)               { m_Data_id.type_id = type_id; }
+		void SetSubTypeId(ENTITY::eTYPE subtype_id)         { m_Data_id.subtype_id = subtype_id; }
         
 		void SaveDataUniqueBase(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueBase(const boost::property_tree::ptree&);
 		void ResolveDataUniqueBase();
 
     private:
-		IdData data_id;    
+		IdData m_Data_id;    
 };
 
 #endif 
