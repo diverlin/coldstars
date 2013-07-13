@@ -35,7 +35,7 @@ ItemSlot* GetNewItemSlot(ENTITY::eTYPE subtype_id, unsigned long int id)
     ItemSlot* item_slot = nullptr;
     try 
     { 
-        item_slot = new ItemSlot(id);
+        item_slot = new ItemSlot(id, subtype_id);
     }
     catch(std::bad_alloc)
     {
@@ -45,7 +45,6 @@ ItemSlot* GetNewItemSlot(ENTITY::eTYPE subtype_id, unsigned long int id)
     EntityManager::Instance().RegisterEntity(item_slot);
     
     TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEM_SLOT_ID);
-    item_slot->SetSubTypeId(subtype_id);
     item_slot->SetTextureOb(texOb_slot);
     
     if (subtype_id == ENTITY::eTYPE::WEAPON_SLOT_ID)
@@ -73,7 +72,7 @@ ItemSlot* GetNewItemSlotWithoutSaveAbility(ENTITY::eTYPE subtype_id)
 	ItemSlot* item_slot = nullptr;
     try 
     { 
-        item_slot = new ItemSlot(NONE_ID);
+        item_slot = new ItemSlot(NONE_ID, subtype_id);
     }
     catch(std::bad_alloc)
     {
@@ -81,7 +80,6 @@ ItemSlot* GetNewItemSlotWithoutSaveAbility(ENTITY::eTYPE subtype_id)
     }
     
     TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEM_SLOT_ID);
-    item_slot->SetSubTypeId(subtype_id);
     item_slot->SetTextureOb(texOb_slot);
     
     return item_slot;

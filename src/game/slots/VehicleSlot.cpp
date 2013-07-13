@@ -29,12 +29,13 @@
 
 #include "../garbage/EntityGarbage.hpp"
 
-VehicleSlot::VehicleSlot(int id)
+VehicleSlot::VehicleSlot(int id, ENTITY::eTYPE subtype_id)
 :
 vehicle(nullptr)
 { 
 	SetId(id);
 	SetTypeId(ENTITY::eTYPE::VEHICLE_SLOT_ID);  
+	SetSubTypeId(subtype_id);  
 }
    
 VehicleSlot::~VehicleSlot()

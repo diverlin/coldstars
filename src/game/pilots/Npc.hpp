@@ -16,8 +16,8 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef NPC_H
-#define NPC_H
+#ifndef NPC_HPP
+#define NPC_HPP
 
 #include <set>
 
@@ -46,13 +46,13 @@ struct UnresolvedDataUniqueNpc
 class Npc : public Base
 {
    	public:
-              	Npc(int);              	    
-     		virtual ~Npc();
-     		
-     		virtual void PutChildsToGarbage() const {};
-     		
-     		void SetRaceId(int race_id)			{ this->race_id = race_id; };
-     		void SetAiModel(BaseAiModel* ai_model)		{ this->ai_model = ai_model; };
+        Npc(int, ENTITY::eTYPE, ENTITY::eTYPE);              	    
+        virtual ~Npc();
+        
+        virtual void PutChildsToGarbage() const {};
+        
+        void SetRaceId(int race_id)			{ this->race_id = race_id; };
+        void SetAiModel(BaseAiModel* ai_model)		{ this->ai_model = ai_model; };
 		void SetAlive(bool is_alive)			{ this->is_alive = is_alive; }
 		void SetScanTarget(Vehicle* vehicle_to_scan)	{ this->vehicle_to_scan = vehicle_to_scan; };
 		void SetPlayer(Player* player) { this->player = player; };

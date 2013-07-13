@@ -46,17 +46,17 @@ Angar* AngarBuilder::GetNewAngarTemplate(unsigned long int id) const
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
         
-        try 
-        { 
-        	angar = new Angar(id); 
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        EntityManager::Instance().RegisterEntity(angar);
-        
-        return angar;
+    try 
+    { 
+        angar = new Angar(id); 
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    EntityManager::Instance().RegisterEntity(angar);
+    
+    return angar;
 } 
 
 Angar* AngarBuilder::GetNewAngar() const
@@ -64,29 +64,27 @@ Angar* AngarBuilder::GetNewAngar() const
 	Angar* angar = GetNewAngarTemplate();
 	CreateNewInternals(angar);
         
-        return angar;
+    return angar;
 } 
         	
 void AngarBuilder::CreateNewInternals(Angar* angar) const
 { 
  	for (int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM; i++)
  	{
- 		VehicleSlot* vehicle_slot = GetNewVehicleSlot(); 
-        vehicle_slot->SetSubTypeId(ENTITY::eTYPE::VEHICLE_MILITARY_SLOT_ID);
+ 		VehicleSlot* vehicle_slot = GetNewVehicleSlot(ENTITY::eTYPE::VEHICLE_MILITARY_SLOT_ID); 
  		angar->AddVehicleSlot(vehicle_slot);
 	}
 
  	for (int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++)
  	{
- 		VehicleSlot* vehicle_slot = GetNewVehicleSlot(); 
-                vehicle_slot->SetSubTypeId(ENTITY::eTYPE::VEHICLE_VISITORS_SLOT_ID);
+ 		VehicleSlot* vehicle_slot = GetNewVehicleSlot(ENTITY::eTYPE::VEHICLE_VISITORS_SLOT_ID); 
  		angar->AddVehicleSlot(vehicle_slot);
 	}
         
-        for (int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++)
+    for (int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++)
  	{
  		ItemSlot* cargo_slot = GetNewItemSlot(ENTITY::eTYPE::CARGO_SLOT_ID); 
-                angar->AddItemSlot(cargo_slot);
+        angar->AddItemSlot(cargo_slot);
 	}
 	
 	angar->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::ANGAR_BACKGROUND_ID));

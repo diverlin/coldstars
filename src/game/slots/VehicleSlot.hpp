@@ -17,8 +17,8 @@
 */
 
 
-#ifndef VEHICLESLOT_H
-#define VEHICLESLOT_H
+#ifndef VEHICLESLOT_HPP
+#define VEHICLESLOT_HPP
 
 #include <boost/property_tree/ptree.hpp>
 
@@ -27,29 +27,29 @@ class Vehicle;
 
 class VehicleSlot : public BaseSlot
 {
-        public:
-                VehicleSlot(int);
-                ~VehicleSlot();	
-                
-                virtual void PutChildsToGarbage() const;
-                
-                Vehicle* GetVehicle() const { return vehicle; };
-                void InsertVehicle(Vehicle*);
-                void Release(); 
-        	void SwapVehicle(VehicleSlot*);
-        	
-                void Render(const Rect&) const;
-                
-                virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-        private:
-        	Vehicle* vehicle;
+    public:
+        VehicleSlot(int, ENTITY::eTYPE);
+        ~VehicleSlot();	
         
-                void SaveDataUniqueVehicleSlot(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueVehicleSlot(const boost::property_tree::ptree&);
-		void ResolveDataUniqueVehicleSlot();     
+        virtual void PutChildsToGarbage() const;
+        
+        Vehicle* GetVehicle() const { return vehicle; };
+        void InsertVehicle(Vehicle*);
+        void Release(); 
+        void SwapVehicle(VehicleSlot*);
+        
+        void Render(const Rect&) const;
+        
+        virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+		
+    private:
+        Vehicle* vehicle;
+        
+        void SaveDataUniqueVehicleSlot(boost::property_tree::ptree&, const std::string&) const;
+        void LoadDataUniqueVehicleSlot(const boost::property_tree::ptree&);
+        void ResolveDataUniqueVehicleSlot();     
 }; 
 
 #endif

@@ -43,7 +43,7 @@
 
 #include "../common/GameDate.hpp" 
 
-Npc::Npc(int id)
+Npc::Npc(int id, ENTITY::eTYPE subtype_id, ENTITY::eTYPE subsubtype_id)
 :
 race_id(NONE_ID),
 credits(1000),
@@ -56,7 +56,9 @@ ai_model(nullptr)
     
 	SetId(id);
 	SetTypeId(ENTITY::eTYPE::NPC_ID);
-
+	SetSubTypeId(subtype_id);
+    SetSubSubTypeId(subsubtype_id);
+        
     observation.SetNpcOwner(this);
     state_machine.SetNpcOwner(this);   
 }

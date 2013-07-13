@@ -26,28 +26,28 @@
 #include "../common/rand.hpp"
 #include "../resources/TextureManager.hpp"
 
-VehicleSlot* GetNewVehicleSlot(unsigned long int id)
+VehicleSlot* GetNewVehicleSlot(ENTITY::eTYPE subtype_id, unsigned long int id)
 {
-       	if (id == NONE_ID)
+    if (id == NONE_ID)
 	{
 		id = EntityIdGenerator::Instance().GetNextId();
 	} 
 
 	VehicleSlot* vehicle_slot = nullptr;
-        try 
-        { 
-        	vehicle_slot = new VehicleSlot(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(vehicle_slot);
+    try 
+    { 
+        vehicle_slot = new VehicleSlot(id, subtype_id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(vehicle_slot);
       
 	TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::VEHICLE_SLOT_ID);
-    	vehicle_slot->SetTextureOb(texOb_slot);
-              
-        return vehicle_slot;
+    vehicle_slot->SetTextureOb(texOb_slot);
+          
+    return vehicle_slot;
 }
 
