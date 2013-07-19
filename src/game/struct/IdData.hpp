@@ -19,7 +19,7 @@
 #ifndef IDDATA_HPP
 #define IDDATA_HPP
 
-#include <common/TypesEntity.hpp>
+#include <common/EntityTypes.hpp>
 
 struct IdData  
 {

@@ -23,7 +23,7 @@
 #include <cstdint>
 #include "../math/myVector.hpp"
 #include <vector>
-#include "TypesEntity.hpp"
+#include "EntityTypes.hpp"
 
 #include "Converter.hpp"
 
@@ -114,7 +114,7 @@ enum GAME_MODE
 
 enum CAMERADIRECTION
 {
-	NONE=0, LEFT=1, RIGHT, UP, DOWN
+	NONE=0, LEFT, RIGHT, UP, DOWN
 };
 
 const float AMMO_PRICE_RATE = 0.01f;
@@ -201,6 +201,14 @@ const int EXCLUSIVE_AMOUNT_MAX = 100;
 const int EXCLUSIVE_STARTAMOUNT_MIN = EXCLUSIVE_AMOUNT_MAX/100;
 const int EXCLUSIVE_STARTAMOUNT_MAX = EXCLUSIVE_AMOUNT_MAX/10;
    
+namespace PLACE
+{
+    enum class TYPE
+    {
+        NONE_ID, SPACE_ID, HYPER_SPACE_ID, KOSMOPORT_ID, NATURELAND_ID
+    };
+}
+
 namespace MESH
 {
 	enum TYPE_ID
@@ -780,7 +788,7 @@ namespace GUI
         WEAPON_SLOT_ID, 
         WEAPON_SLOT1_ID, WEAPON_SLOT2_ID, WEAPON_SLOT3_ID, WEAPON_SLOT4_ID, WEAPON_SLOT5_ID, WEAPON_SLOT6_ID, WEAPON_SLOT7_ID, WEAPON_SLOT8_ID, WEAPON_SLOT9_ID,
            
-        //GATE_SLOT_ID, REPAIR_SLOT_ID, CHARGE_SLOT_ID,
+        GATE_SLOT_ID, //REPAIR_SLOT_ID, CHARGE_SLOT_ID,
 		
 		DRIVE_SLOT_ID, RADAR_SLOT_ID, BAK_SLOT_ID, ENERGIZER_SLOT_ID, PROTECTOR_SLOT_ID, DROID_SLOT_ID, FREEZER_SLOT_ID, GRAPPLE_SLOT_ID, SCANER_SLOT_ID, ARTEFACT_SLOT_ID, 
            

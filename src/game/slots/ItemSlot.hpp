@@ -112,60 +112,60 @@ class ItemSlot : public BaseSlot
 		bool InsertItem(BaseItem*);            
 		void RemoveItem();
 		
-		bool ValidateTarget();                    
-                void ResetTarget();
-                bool CheckAmmo() const;
-                void FireEvent(float, bool);
-                
-		void UpdateVehiclePropetries() const;
-                
-		virtual void Render(const Box&, const Vec2<float>&, bool draw_text = true) const;
-		void RenderMark(const Box&, TextureOb*) const;
-		                
-                void DropItemToSpace(Vehicle*);
-                                                
-                bool SwapItem(ItemSlot*);
-                
-                void UpdateRange(TextureOb*);
-           	void DrawRange(const Vec3<float>&);
-           	
-           	bool CheckSubTarget(ItemSlot*) const;
-           	bool CheckTarget(BaseSpaceEntity*) const;
-                bool CheckTargetPure(BaseSpaceEntity*) const;
-                        
-        	void SelectEvent();
-        	void DeselectEvent();
+        bool ValidateTarget();                    
+        void ResetTarget();
+        bool CheckAmmo() const;
+        void FireEvent(float, bool);
         
-        	virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-
-           	int GetItemRadius() const;
-           	int GetItemDamage() const;
+        void UpdateVehiclePropetries() const;
+        
+        virtual void Render(const Box&, const Vec2<float>&, bool draw_text = true) const;
+        void RenderMark(const Box&, TextureOb*) const;
+        
+        void DropItemToSpace();
+        
+        bool SwapItem(ItemSlot*);
+        
+        void UpdateRange(TextureOb*);
+        void DrawRange(const Vec3<float>&);
+        
+        bool CheckSubTarget(ItemSlot*) const;
+        bool CheckTarget(BaseSpaceEntity*) const;
+        bool CheckTargetPure(BaseSpaceEntity*) const;
+        
+        void SelectEvent();
+        void DeselectEvent();
+        
+        virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
+        int GetItemRadius() const;
+        int GetItemDamage() const;
            	           			
-        private:                               
-                Turrel* turrel;          // only for weapons slot
-                
-                BaseItem* item;
-
-                BaseSpaceEntity* target;
-                ItemSlot* subtarget;      
-                
-           	PathVisual range_visual;
-           	      
-           	bool CheckItemInsertion(BaseItem*) const;  
-           	      		        
-           	bool IsTargetAlive(BaseSpaceEntity*) const;
-           	bool IsTargetInSpace(BaseSpaceEntity*) const;  
-                bool IsTargetInSameStarSystem(BaseSpaceEntity*) const;
-           	bool CheckDistanceToTarget(BaseSpaceEntity*) const;
-                
-                UnresolvedDataUniqueItemSlot unresolved_ItemSlot;
-                void SaveDataUniqueItemSlot(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueItemSlot(const boost::property_tree::ptree&);
-		void ResolveDataUniqueItemSlot();
-		
-		void Log(const std::string&) const;
+    private:                               
+        Turrel* turrel;          // only for weapons slot
+        
+        BaseItem* item;
+        
+        BaseSpaceEntity* target;
+        ItemSlot* subtarget;      
+        
+        PathVisual range_visual;
+        
+        bool CheckItemInsertion(BaseItem*) const;  
+        
+        bool IsTargetAlive(BaseSpaceEntity*) const;
+        bool IsTargetInSpace(BaseSpaceEntity*) const;  
+        bool IsTargetInSameStarSystem(BaseSpaceEntity*) const;
+        bool CheckDistanceToTarget(BaseSpaceEntity*) const;
+        
+        UnresolvedDataUniqueItemSlot unresolved_ItemSlot;
+        void SaveDataUniqueItemSlot(boost::property_tree::ptree&, const std::string&) const;
+        void LoadDataUniqueItemSlot(const boost::property_tree::ptree&);
+        void ResolveDataUniqueItemSlot();
+        
+        void Log(const std::string&) const;
 }; 
 
 #endif

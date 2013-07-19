@@ -91,7 +91,7 @@ bool RocketBullet::CheckTarget() const
 {
         if (target->GetAlive() == true)
         {
-        	if (target->GetPlaceTypeId() == ENTITY::TYPE::SPACE_ID)
+        	if (target->GetPlaceTypeId() == PLACE::TYPE::SPACE_ID)
         	{
         		if (target->GetStarSystem()->GetId() == starsystem->GetId())
                 	{

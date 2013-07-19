@@ -234,7 +234,7 @@ void Player::UpdatePostTransaction()
 {
         switch (npc->GetVehicle()->GetPlaceTypeId())
         {
-                case ENTITY::TYPE::KOSMOPORT_ID:
+                case PLACE::TYPE::KOSMOPORT_ID:
                 {
                         if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == false)
                         {
@@ -249,12 +249,12 @@ void Player::UpdatePostTransaction()
                         break;
                 }
         
-                case ENTITY::TYPE::NATURELAND_ID:
+                case PLACE::TYPE::NATURELAND_ID:
                 {                       
                         break;
                 }
                 
-                case ENTITY::TYPE::SPACE_ID:
+                case PLACE::TYPE::SPACE_ID:
                 {
                         if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == true)
                         {
@@ -303,7 +303,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 		
 		case SPECIAL_ACTION::INITIATE_JUMPOUT_ID:
 		{
-			if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::TYPE::HYPER_SPACE_ID)
+			if (npc->GetVehicle()->GetPlaceTypeId() == PLACE::TYPE::HYPER_SPACE_ID)
 			{
 				if (turn_timer.GetTurnEnded() == true)
 				{
@@ -316,7 +316,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 
 		case SPECIAL_ACTION::INITIATE_LAUNCHING_ID:
 		{
-			if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::TYPE::SPACE_ID)
+			if (npc->GetVehicle()->GetPlaceTypeId() == PLACE::TYPE::SPACE_ID)
 			{
 				if (turn_timer.GetTurnEnded() == true)
 				{
@@ -1189,10 +1189,10 @@ void Player::RunSession(const TurnTimer& turn_timer)
 	
        	switch(npc->GetVehicle()->GetPlaceTypeId())
        	{
-       		case ENTITY::TYPE::SPACE_ID: 		{ SessionInSpace(npc->GetVehicle()->GetStarSystem(), turn_timer); break; }
-       		case ENTITY::TYPE::HYPER_SPACE_ID: 	{ SessionInSpace((StarSystem*)npc->GetVehicle()->GetDriveComplex().GetTarget(), turn_timer); break; }
-       		case ENTITY::TYPE::KOSMOPORT_ID:  	{ SessionInKosmoport(); break; }
-       		case ENTITY::TYPE::NATURELAND_ID:  	{ SessionInNatureLand(); break; }
+       		case PLACE::TYPE::SPACE_ID: 		{ SessionInSpace(npc->GetVehicle()->GetStarSystem(), turn_timer); break; }
+       		case PLACE::TYPE::HYPER_SPACE_ID: 	{ SessionInSpace((StarSystem*)npc->GetVehicle()->GetDriveComplex().GetTarget(), turn_timer); break; }
+       		case PLACE::TYPE::KOSMOPORT_ID:  	{ SessionInKosmoport(); break; }
+       		case PLACE::TYPE::NATURELAND_ID:  	{ SessionInNatureLand(); break; }
        	}       
   	
        	cursor.RenderFocusedObjectInfo();

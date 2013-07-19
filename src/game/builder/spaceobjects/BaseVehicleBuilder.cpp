@@ -67,85 +67,91 @@ void BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle) const
        
 void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
 {     
-        // WEAPON SLOTS
-        unsigned int slot_weapon_num = vehicle->GetKorpusData().slot_weapon_num;
-        for (unsigned int i=0; i<slot_weapon_num; i++)
-        {
-        	ItemSlot* weapon_slot = GetNewItemSlot(ENTITY::TYPE::WEAPON_SLOT_ID);  
-        	weapon_slot->SetSubSubTypeId(SLOT_WEAPON_TYPES[i]);   
-        	vehicle->AddItemSlot(weapon_slot);
-        }
+    // WEAPON SLOTS
+    unsigned int slot_weapon_num = vehicle->GetKorpusData().slot_weapon_num;
+    for (unsigned int i=0; i<slot_weapon_num; i++)
+    {
+        ItemSlot* weapon_slot = GetNewItemSlot(ENTITY::TYPE::WEAPON_SLOT_ID);  
+        weapon_slot->SetSubSubTypeId(SLOT_WEAPON_TYPES[i]);   
+        vehicle->AddItemSlot(weapon_slot);
+    }
+        
+    if (vehicle->GetKorpusData().slot_radar_num)
+    {
+        ItemSlot* radar_slot = GetNewItemSlot(ENTITY::TYPE::RADAR_SLOT_ID);
+        vehicle->AddItemSlot(radar_slot);
+    }
             
-        if (vehicle->GetKorpusData().slot_radar_num)
-        {
-                ItemSlot* radar_slot = GetNewItemSlot(ENTITY::TYPE::RADAR_SLOT_ID);
-                vehicle->AddItemSlot(radar_slot);
-	}
-                
-        if (vehicle->GetKorpusData().slot_scaner_num)
-        {
-                ItemSlot* scaner_slot = GetNewItemSlot(ENTITY::TYPE::SCANER_SLOT_ID); 
-                vehicle->AddItemSlot(scaner_slot);
-        }
-	
-        if (vehicle->GetKorpusData().slot_energizer_num)
-        {
-                ItemSlot* energizer_slot = GetNewItemSlot(ENTITY::TYPE::ENERGIZER_SLOT_ID); 
-                vehicle->AddItemSlot(energizer_slot);
-        }
-        
-    	if (vehicle->GetKorpusData().slot_grapple_num)
-	{
-		ItemSlot* grapple_slot = GetNewItemSlot(ENTITY::TYPE::GRAPPLE_SLOT_ID);
-    		vehicle->AddItemSlot(grapple_slot); 
-    	}
-    	
-        if (vehicle->GetKorpusData().slot_droid_num)
-        {
-                ItemSlot* droid_slot = GetNewItemSlot(ENTITY::TYPE::DROID_SLOT_ID);  
-                vehicle->AddItemSlot(droid_slot); 
-        }
-        
-        if (vehicle->GetKorpusData().slot_freezer_num)
-        {
-                //ItemSlot* freezer_slot = GetNewItemSlot(ENTITY::TYPE::FREEZER_SLOT_ID);
-                //vehicle->AddItemSlot(freezer_slot);           
-        }
-        
-        if (vehicle->GetKorpusData().slot_protector_num)
-        {
-                ItemSlot* protector_slot = GetNewItemSlot(ENTITY::TYPE::PROTECTOR_SLOT_ID);  
-                vehicle->AddItemSlot(protector_slot);         
-        }
-        
-        if (vehicle->GetKorpusData().slot_drive_num)
-        {
-                ItemSlot* drive_slot = GetNewItemSlot(ENTITY::TYPE::DRIVE_SLOT_ID); 
-                vehicle->AddItemSlot(drive_slot);
-        }
-        
-        if (vehicle->GetKorpusData().slot_bak_num)
-        {
-                ItemSlot* bak_slot = GetNewItemSlot(ENTITY::TYPE::BAK_SLOT_ID);  
-                vehicle->AddItemSlot(bak_slot);
-        }
-        
-    	//////////// ARTEFACT SLOT /////////////////////////
-    	int artefact_num = vehicle->GetKorpusData().slot_artefact_num;
-        for (int i=0; i<artefact_num; i++)
-    	{
-    		ItemSlot* artefact_slot = GetNewItemSlot(ENTITY::TYPE::ARTEFACT_SLOT_ID);
-    		vehicle->AddItemSlot(artefact_slot);         
-    	} 
+    if (vehicle->GetKorpusData().slot_scaner_num)
+    {
+        ItemSlot* scaner_slot = GetNewItemSlot(ENTITY::TYPE::SCANER_SLOT_ID); 
+        vehicle->AddItemSlot(scaner_slot);
+    }
 
-    	//////// OTSEC SLOT ////////////////////////////////
-        int otsec_num = vehicle->GetKorpusData().slot_otsec_num;
-    	for (int i=0; i<otsec_num; i++)
-    	{
-         	ItemSlot* otsec_slot = GetNewItemSlot(ENTITY::TYPE::CARGO_SLOT_ID); 
-            otsec_slot->SetSubSubTypeId(SLOT_CARGO_TYPES[i]);   
-         	vehicle->AddItemSlot(otsec_slot);         
-    	}
+    if (vehicle->GetKorpusData().slot_energizer_num)
+    {
+        ItemSlot* energizer_slot = GetNewItemSlot(ENTITY::TYPE::ENERGIZER_SLOT_ID); 
+        vehicle->AddItemSlot(energizer_slot);
+    }
+    
+    if (vehicle->GetKorpusData().slot_grapple_num)
+    {
+        ItemSlot* grapple_slot = GetNewItemSlot(ENTITY::TYPE::GRAPPLE_SLOT_ID);
+        vehicle->AddItemSlot(grapple_slot); 
+    }
+    
+    if (vehicle->GetKorpusData().slot_droid_num)
+    {
+        ItemSlot* droid_slot = GetNewItemSlot(ENTITY::TYPE::DROID_SLOT_ID);  
+        vehicle->AddItemSlot(droid_slot); 
+    }
+    
+    if (vehicle->GetKorpusData().slot_freezer_num)
+    {
+        //ItemSlot* freezer_slot = GetNewItemSlot(ENTITY::TYPE::FREEZER_SLOT_ID);
+        //vehicle->AddItemSlot(freezer_slot);           
+    }
+    
+    if (vehicle->GetKorpusData().slot_protector_num)
+{
+        ItemSlot* protector_slot = GetNewItemSlot(ENTITY::TYPE::PROTECTOR_SLOT_ID);  
+        vehicle->AddItemSlot(protector_slot);         
+    }
+    
+    if (vehicle->GetKorpusData().slot_drive_num)
+    {
+        ItemSlot* drive_slot = GetNewItemSlot(ENTITY::TYPE::DRIVE_SLOT_ID); 
+        vehicle->AddItemSlot(drive_slot);
+    }
+    
+    if (vehicle->GetKorpusData().slot_bak_num)
+    {
+        ItemSlot* bak_slot = GetNewItemSlot(ENTITY::TYPE::BAK_SLOT_ID);  
+        vehicle->AddItemSlot(bak_slot);
+    }
+    
+    //////////// ARTEFACT SLOT /////////////////////////
+    int artefact_num = vehicle->GetKorpusData().slot_artefact_num;
+    for (int i=0; i<artefact_num; i++)
+    {
+        ItemSlot* artefact_slot = GetNewItemSlot(ENTITY::TYPE::ARTEFACT_SLOT_ID);
+        vehicle->AddItemSlot(artefact_slot);         
+    } 
+
+    //////// OTSEC SLOT ////////////////////////////////
+    int otsec_num = vehicle->GetKorpusData().slot_otsec_num;
+    for (int i=0; i<otsec_num; i++)
+    {
+        ItemSlot* otsec_slot = GetNewItemSlot(ENTITY::TYPE::CARGO_SLOT_ID); 
+        otsec_slot->SetSubSubTypeId(SLOT_CARGO_TYPES[i]);   
+        vehicle->AddItemSlot(otsec_slot);         
+    }
+
+    //GATE SLOT
+    {
+        ItemSlot* gate_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::TYPE::GATE_SLOT_ID); 
+        vehicle->AddItemSlot(gate_slot);
+    }
 }
 
 void BaseVehicleBuilder::EquipEquipment(Vehicle* vehicle, int tech_level) const

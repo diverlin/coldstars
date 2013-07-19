@@ -351,7 +351,7 @@ void Cursor::RenderFocusedObjectInfo()
 					case ENTITY::TYPE::SHIP_ID:
 					{
 						Ship* ship = (Ship*)focused_ob;
-						if (ship->GetPlaceTypeId() == ENTITY::TYPE::SPACE_ID)
+						if (ship->GetPlaceTypeId() == PLACE::TYPE::SPACE_ID)
 						{
 							ship->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC());
 						}

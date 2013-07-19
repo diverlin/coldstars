@@ -17,8 +17,8 @@
 */
 
 
-#ifndef BASESLOT_H
-#define BASESLOT_H
+#ifndef BASESLOT_HPP
+#define BASESLOT_HPP
 
 #include "../common/Base.hpp"
 #include "../common/constants.hpp"
@@ -55,17 +55,17 @@ class BaseSlot : public Base
 		Vehicle* GetOwnerVehicle() const { return (Vehicle*)owner; };
 		Base* GetOwner() const { return owner; };
 		
-        protected:        
-                bool selected;                     
-                
-                TextureOb* textureOb;
-                                
-                Base* owner; 
-                
-                Vec2<float> position;
-             
-                UnresolvedDataUniqueBaseSlot unresolved_BaseSlot;
-                void SaveDataUniqueBaseSlot(boost::property_tree::ptree&, const std::string&) const;
+    protected:        
+        bool selected;                     
+        
+        TextureOb* textureOb;
+                        
+        Base* owner; 
+        
+        Vec2<float> position;
+     
+        UnresolvedDataUniqueBaseSlot unresolved_BaseSlot;
+        void SaveDataUniqueBaseSlot(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueBaseSlot(const boost::property_tree::ptree&);
 		void ResolveDataUniqueBaseSlot();
 }; 
