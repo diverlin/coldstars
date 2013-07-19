@@ -24,7 +24,7 @@
 void ButtonItemSlot::PressEvent(Player* player)
 {
     if (m_ItemSlot)
-    {
+    {    
         if ((player->GetCursor().GetItemSlot()->GetItem() == nullptr) and (m_ItemSlot->GetItem() != nullptr))
         {
             player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);

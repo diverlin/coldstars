@@ -164,6 +164,13 @@ bool ItemSlot::CheckItemInsertion(BaseItem* item) const
     		        
 bool ItemSlot::InsertItem(BaseItem* item)
 {	
+	if (GetSubTypeId() == ENTITY::TYPE::GATE_SLOT_ID) 
+	{ 
+        this->item = item;
+        DropItemToSpace();
+        return true;
+    }
+    
 	if (GetSubTypeId() == ENTITY::TYPE::CARGO_SLOT_ID) 
 	{           
 		this->item = item;
@@ -194,12 +201,12 @@ bool ItemSlot::InsertItem(BaseItem* item)
 
 void ItemSlot::RemoveItem()
 {	
-        item = nullptr;
-    	ResetTarget();
+    item = nullptr;
+    ResetTarget();
     	
-    	if (GetSubTypeId() != ENTITY::TYPE::CARGO_SLOT_ID) 
+    if (GetSubTypeId() != ENTITY::TYPE::CARGO_SLOT_ID) 
 	{    
-                UpdateVehiclePropetries(); 
+        UpdateVehiclePropetries(); 
 	}    	 
 }
 
@@ -207,7 +214,7 @@ void ItemSlot::SelectEvent()
 {
 	selected = true;
         
-        if (owner->GetTypeId() == ENTITY::TYPE::VEHICLE_ID)
+    if (owner->GetTypeId() == ENTITY::TYPE::VEHICLE_ID)
 	{ 	
 		switch(GetSubTypeId())
 		{
@@ -335,25 +342,27 @@ int ItemSlot::GetItemDamage() const
         return 0;
 }
 
-void ItemSlot::DropItemToSpace(Vehicle* vehicle)
+void ItemSlot::DropItemToSpace()
 {
-        TextureOb* textureOb_ = nullptr;  
-                
-        switch (item->GetTypeId())
-        {
-                case ENTITY::TYPE::BOMB_ID: { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BOMB_ID); break; }
-                default:      { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID); break; }
-        }
-         
-        Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, item);
-        
-        float impulse_strength = 0.5;
-        Vec3<float> impulse_dir(getRandXYVec3Unit());
-    	container->ApplyImpulse(impulse_dir, impulse_strength);
-        
-	vehicle->GetStarSystem()->AddContainer(container, vehicle->GetCenter());
+    TextureOb* textureOb_ = nullptr;  
+            
+    switch (item->GetTypeId())
+    {
+            case ENTITY::TYPE::BOMB_ID: { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BOMB_ID); break; }
+            default:      { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID); break; }
+    }
+     
+    Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, item);
+    
+    float impulse_strength = 0.5;
+    Vec3<float> impulse_dir(getRandXYVec3Unit());
+    container->ApplyImpulse(impulse_dir, impulse_strength);        
+      
+	GetOwnerVehicle()->GetStarSystem()->AddContainer(container, GetOwnerVehicle()->GetCenter());
+    
+    RemoveItem();
 }
-        
+       
 bool ItemSlot::SwapItem(ItemSlot* slot)
 {
        	if ( (item == nullptr) and (slot->GetItem() != nullptr) )
@@ -482,7 +491,7 @@ bool ItemSlot::IsTargetAlive(BaseSpaceEntity* _target) const
 
 bool ItemSlot::IsTargetInSpace(BaseSpaceEntity* _target) const  
 {
-	return (_target->GetPlaceTypeId() == ENTITY::TYPE::SPACE_ID);
+	return (_target->GetPlaceTypeId() == PLACE::TYPE::SPACE_ID);
 }           	
 
 bool ItemSlot::IsTargetInSameStarSystem(BaseSpaceEntity* _target) const

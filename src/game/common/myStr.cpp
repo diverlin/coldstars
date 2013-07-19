@@ -136,8 +136,7 @@ std::string getEntityTypeStr(ENTITY::TYPE type_id)
 		case ENTITY::TYPE::PLAYER_ID: 		{ return "PLAYER_ID"; break; }
 		case ENTITY::TYPE::KOSMOPORT_ID: 		{ return "KOSMOPORT_ID"; break; }
 		case ENTITY::TYPE::NATURELAND_ID: 			{ return "NATURELAND_ID"; break; }
-		case ENTITY::TYPE::SPACE_ID: 		{ return "SPACE_ID"; break; }
-		case ENTITY::TYPE::HYPER_SPACE_ID: 		{ return "HYPER_SPACE_ID"; break; }
+
 		case ENTITY::TYPE::GOVERMENT_ID: 		{ return "GOVERMENT_ID"; break; }
 		case ENTITY::TYPE::STORE_ID: 		{ return "STORE_ID"; break; }
 		case ENTITY::TYPE::SHOP_ID: 			{ return "SHOP_ID"; break; }
@@ -215,5 +214,18 @@ std::string getEntityTypeStr(ENTITY::TYPE type_id)
 }
 
 
-
-
+std::string getPlaceTypeStr(PLACE::TYPE type_id)
+{
+	switch(type_id)
+	{
+	    switch(type_id)
+	    {
+		    case PLACE::TYPE::SPACE_ID: 		{ return "SPACE_ID"; break; }
+		    case PLACE::TYPE::HYPER_SPACE_ID: 	{ return "HYPER_SPACE_ID"; break; }
+            case PLACE::TYPE::KOSMOPORT_ID: 	{ return "KOSMOPORT_ID"; break; }
+		    case PLACE::TYPE::NATURELAND_ID: 	{ return "NATURELAND_ID"; break; }
+							
+		    default: { return "UNKNOWN ID"; }
+	    }
+    }
+}

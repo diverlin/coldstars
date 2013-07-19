@@ -71,7 +71,7 @@ namespace GUI
 
             case ENTITY::TYPE::ARTEFACT_SLOT_ID:   { return GUI::eTYPE::ARTEFACT_SLOT_ID; break; }
 
-            //case ENTITY::TYPE::GATE_SLOT_ID:   { return GUI::eTYPE::GATE_SLOT_ID; break; }
+            case ENTITY::TYPE::GATE_SLOT_ID:   { return GUI::eTYPE::GATE_SLOT_ID; break; }
             //case ENTITY::TYPE::REPAIR_SLOT_ID:   { return GUI::eTYPE::REPAIR_SLOT_ID; break; }
             //case ENTITY::TYPE::CHARGE_SLOT_ID:   { return GUI::eTYPE::CHARGE_SLOT_ID; break; }                        
         }

@@ -1410,7 +1410,7 @@ void Vehicle::DropRandomItemToSpace()
 	
 	if (_equiped_slot_vec.size() > 0)
 	{
-		_equiped_slot_vec[getRandInt(0, _equiped_slot_vec.size()-1)]->DropItemToSpace(this);
+		_equiped_slot_vec[getRandInt(0, _equiped_slot_vec.size()-1)]->DropItemToSpace();
 	}		
 }
 
@@ -1462,7 +1462,7 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        	if (parent_vehicleslot != nullptr) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); }
        	else  			       	{ save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }
       
-       	if (place_type_id == ENTITY::TYPE::HYPER_SPACE_ID) 
+       	if (place_type_id == PLACE::TYPE::HYPER_SPACE_ID) 
        	{ 
        		save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", drive_complex.GetTarget()->GetId()); 
        	}
@@ -1525,19 +1525,19 @@ void Vehicle::ResolveDataUniqueVehicle()
 
         switch(place_type_id)
         {
-        	case ENTITY::TYPE::SPACE_ID: 
+        	case PLACE::TYPE::SPACE_ID: 
         	{
 			starsystem->AddVehicle(this, data_unresolved_Orientation.center, data_unresolved_Orientation.angle, parent); 
 			break;
 		}
 		
-		case ENTITY::TYPE::KOSMOPORT_ID:
+		case PLACE::TYPE::KOSMOPORT_ID:
 		{	
 			((VehicleSlot*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this); 
 			break;
 		}
 		
-		case ENTITY::TYPE::HYPER_SPACE_ID:
+		case PLACE::TYPE::HYPER_SPACE_ID:
 		{
 			//std::cout<<"xxx="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
 			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.starsystem_hyper_id))->GetHyperSpace().AddVehicle(this);
@@ -1546,7 +1546,7 @@ void Vehicle::ResolveDataUniqueVehicle()
 			break;
 		}
 		
-		case ENTITY::TYPE::NATURELAND_ID:
+		case PLACE::TYPE::NATURELAND_ID:
 		{
 			((NatureLand*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.land_id))->AddVehicle(this); 
 			break;

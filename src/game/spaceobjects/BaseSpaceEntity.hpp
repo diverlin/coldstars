@@ -35,8 +35,7 @@ struct UnresolvedDataUniqueBaseSpaceEntity
 	int parent_id;
 	int starsystem_id;
 	
-};
-
+}; 
 
 class BaseSpaceEntity : public BaseDrawable
 {
@@ -47,7 +46,7 @@ class BaseSpaceEntity : public BaseDrawable
 		void SetLifeData(const LifeData& data_life) { this->data_life = data_life; }
 
 		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
-		void SetPlaceTypeId(ENTITY::TYPE place_type_id)      { this->place_type_id = place_type_id;  }
+		void SetPlaceTypeId(PLACE::TYPE place_type_id)      { this->place_type_id = place_type_id;  }
 		void SetMass(int mass) 			    { this->mass = mass; }
 				
 		void SetGivenExpirience(int given_expirience) { this->given_expirience = given_expirience; }                
@@ -55,7 +54,7 @@ class BaseSpaceEntity : public BaseDrawable
 		void SetParent(BaseSpaceEntity* parent)     { this->parent = parent; }
 
 		StarSystem* GetStarSystem() const { return starsystem; }           
-		ENTITY::TYPE GetPlaceTypeId()        const { return place_type_id; }
+		PLACE::TYPE GetPlaceTypeId()        const { return place_type_id; }
 
 		virtual int GetGivenExpirience() const { return given_expirience; }
  
@@ -83,7 +82,7 @@ class BaseSpaceEntity : public BaseDrawable
 		Vec3<float> force;
 
 		StarSystem* starsystem;
-		ENTITY::TYPE place_type_id;
+		PLACE::TYPE place_type_id;
 
 		InfoTable info;
 
