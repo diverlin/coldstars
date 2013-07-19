@@ -111,7 +111,7 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id,  ENTITY::TYPE subs
     data_korpus.slot_scaner_num    = 1;
     data_korpus.slot_freezer_num   = 1;
 	data_korpus.slot_weapon_num   = weapons_num;  
-	data_korpus.slot_artefact_num = getRandInt(0, SLOT_ARTEFACT_TYPES.size());  
+	data_korpus.slot_artefact_num = getRandInt(1, SLOT_ARTEFACT_TYPES.size());  
     data_korpus.slot_otsec_num    = getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
     
     int size_threshold = 2; 
@@ -144,15 +144,15 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id,  ENTITY::TYPE subs
 		ship->BindData2D(texOb);	
 	}
 
-    	LifeData data_life;
-        data_life.armor      = data_korpus.armor * 0.1;
-      	data_life.dying_time = ship->GetCollisionRadius() * 0.1;
-      	ship->SetLifeData(data_life);
-	
-	CreateKorpusGeometry(ship);
-
-	ship->CreateDriveComplexTextureDependedStuff();
-	ship->CreateProtectionComplexTextureDependedStuff();
-	                            
-        CreateItemSlots(ship);
+    LifeData data_life;
+    data_life.armor      = data_korpus.armor * 0.1;
+    data_life.dying_time = ship->GetCollisionRadius() * 0.1;
+    ship->SetLifeData(data_life);
+    
+    CreateKorpusGeometry(ship);
+    
+    ship->CreateDriveComplexTextureDependedStuff();
+    ship->CreateProtectionComplexTextureDependedStuff();
+                            
+    CreateItemSlots(ship);
 }

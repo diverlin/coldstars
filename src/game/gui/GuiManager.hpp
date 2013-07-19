@@ -16,8 +16,8 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUIMANAGER_H
-#define GUIMANAGER_H
+#ifndef GUIMANAGER_HPP
+#define GUIMANAGER_HPP
 
 class GuiSkill;
 class GuiGalaxyMap;

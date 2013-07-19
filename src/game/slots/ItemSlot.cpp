@@ -279,8 +279,12 @@ void ItemSlot::UpdateVehiclePropetries() const
 /* virtual */
 void ItemSlot::Render(const Box& box, const Vec2<float>& gui_offset, bool draw_text) const
 { 
-       	drawQuad(textureOb, box); 
-       	if (item != nullptr)
+       	if (textureOb != nullptr)
+        {
+            drawQuad(textureOb, box); 
+        }
+        
+        if (item != nullptr)
        	{
        		item->Render(box, gui_offset, draw_text);	
         }

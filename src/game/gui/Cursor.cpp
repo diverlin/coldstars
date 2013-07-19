@@ -40,40 +40,43 @@
 
 #include "../render/Render.hpp"
 
-Cursor::Cursor():
+Cursor::Cursor()
+: 
+BaseGuiElement(),
 focused_ob(nullptr)
 {
-     	item_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::TYPE::CARGO_SLOT_ID);
-     	rect.Set(0, 0, GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
-     	
-     	//ButtonTrigger* button; // EXPERIMENTAL GUI
-   	//button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::ACTION_ATTACK_ID, "attack");  
-  	//button_map.insert(std::make_pair(button->GetSubTypeId(), button));
-
-   	//button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::ACTION_PRECISEATTACK_ID, "presize_attack");  
-  	//button_map.insert(std::make_pair(button->GetSubTypeId(), button));
-
-   	//button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_green, GUI::BUTTON::ACTION_SCAN_ID, "scan");  
-  	//button_map.insert(std::make_pair(button->GetSubTypeId(), button));
-  	 
-  	//button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_blue, GUI::BUTTON::ACTION_GRAB_ID, "grab");  
-  	//button_map.insert(std::make_pair(button->GetSubTypeId(), button)); 	   		
-
-  	//button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_yellow, GUI::BUTTON::ACTION_FOLLOW_ID, "follow");  
-  	//button_map.insert(std::make_pair(button->GetSubTypeId(), button));
-  	        
-        //int angle = 0;
-        //for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
-	//{
-		//float scale = 0.4;
-        	//Vec2<float> pos = getVec2f(100*scale, angle);	
-		//rect.SetCenter(pos);
-		//rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		    			   
-        	//rect.Scale(scale);	
-    		//iterator->second->SetRect(rect);   
-
-		//angle += 360/button_map.size();
-	//}
+    m_TextureOb = nullptr;
+    item_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::TYPE::CARGO_SLOT_ID);
+    rect.Set(0, 0, GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
+    
+    //ButtonTrigger* button; // EXPERIMENTAL GUI
+    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::ACTION_ATTACK_ID, "attack");  
+    //button_map.insert(std::make_pair(button->GetSubTypeId(), button));
+    
+    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::ACTION_PRECISEATTACK_ID, "presize_attack");  
+    //button_map.insert(std::make_pair(button->GetSubTypeId(), button));
+    
+    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_green, GUI::BUTTON::ACTION_SCAN_ID, "scan");  
+    //button_map.insert(std::make_pair(button->GetSubTypeId(), button));
+    
+    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_blue, GUI::BUTTON::ACTION_GRAB_ID, "grab");  
+    //button_map.insert(std::make_pair(button->GetSubTypeId(), button)); 	   		
+    
+    //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_yellow, GUI::BUTTON::ACTION_FOLLOW_ID, "follow");  
+    //button_map.insert(std::make_pair(button->GetSubTypeId(), button));
+        
+    //int angle = 0;
+    //for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
+    //{
+    //float scale = 0.4;
+        //Vec2<float> pos = getVec2f(100*scale, angle);	
+    //rect.SetCenter(pos);
+    //rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		    			   
+        //rect.Scale(scale);	
+        //iterator->second->SetRect(rect);   
+    
+    //angle += 360/button_map.size();
+    //}
 }
 
 Cursor::~Cursor()
@@ -451,4 +454,12 @@ void Cursor::RenderFocusedObjectInfo()
 	}
 	
 	focused_ob = nullptr;
+}
+
+        
+void Cursor::RenderUnique() const
+{
+    //Box box(Vec3<float>(rect.GetCenter().x, rect.GetCenter().y, -2), Vec3<float>(100, 100, 0.0));
+    //item_slot->Render(m_Box, Vec3<float>(0,0,0));   
+    std::cout<<item_slot->GetId()<<std::endl;
 }

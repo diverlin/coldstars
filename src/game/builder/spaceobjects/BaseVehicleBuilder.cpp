@@ -132,9 +132,11 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
     
     //////////// ARTEFACT SLOT /////////////////////////
     int artefact_num = vehicle->GetKorpusData().slot_artefact_num;
+    std::cout<<artefact_num<<std::endl;
     for (int i=0; i<artefact_num; i++)
     {
         ItemSlot* artefact_slot = GetNewItemSlot(ENTITY::TYPE::ARTEFACT_SLOT_ID);
+        artefact_slot->SetSubSubTypeId(SLOT_ARTEFACT_TYPES[i]);  
         vehicle->AddItemSlot(artefact_slot);         
     } 
 
