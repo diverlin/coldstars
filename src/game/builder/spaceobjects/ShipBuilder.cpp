@@ -86,47 +86,43 @@ void ShipBuilder::CreateNewInternals(Ship* ship, int race_id,  ENTITY::TYPE subs
        		//mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
 	//}
 
-       	float protection_rate = 1;
-        float otsec_rate      = 1;
-        switch (subsubtype_id)
-        {
-                case ENTITY::TYPE::WARRIOR_ID: { protection_rate = 2; break; }
-                case ENTITY::TYPE::TRADER_ID:  { otsec_rate = 1.5; break; }
-        }
-        
-        VehicleKorpusData data_korpus;
-    	data_korpus.space       = size_id*100 + getRandInt(0, 100);
-    	data_korpus.armor       = data_korpus.space;
-    	data_korpus.protection  = protection_rate*size_id/(SIZE_1_ID);
-    	data_korpus.temperature = 100;
-        data_korpus.price       = getRandInt(200, 400)*size_id;
+    float protection_rate = 1;
+    float otsec_rate      = 1;
+    switch (subsubtype_id)
+    {
+            case ENTITY::TYPE::WARRIOR_ID: { protection_rate = 2; break; }
+            case ENTITY::TYPE::TRADER_ID:  { otsec_rate = 1.5; break; }
+    }
+    
+    VehicleKorpusData data_korpus;
+    data_korpus.space       = size_id*100 + getRandInt(0, 100);
+    data_korpus.armor       = data_korpus.space;
+    data_korpus.protection  = protection_rate*size_id/(SIZE_1_ID);
+    data_korpus.temperature = 100;
+    data_korpus.price       = getRandInt(200, 400)*size_id;
 
-        data_korpus.slot_bak_num       = 1;
-        data_korpus.slot_drive_num     = 1;
-        data_korpus.slot_droid_num     = 1;
-        data_korpus.slot_energizer_num = 1;
-        data_korpus.slot_grapple_num   = 1;
-        data_korpus.slot_protector_num = 1;
-        data_korpus.slot_radar_num     = 1;
-        data_korpus.slot_scaner_num    = 1;
-        data_korpus.slot_freezer_num   = 1;
+    data_korpus.slot_bak_num       = 1;
+    data_korpus.slot_drive_num     = 1;
+    data_korpus.slot_droid_num     = 1;
+    data_korpus.slot_energizer_num = 1;
+    data_korpus.slot_grapple_num   = 1;
+    data_korpus.slot_protector_num = 1;
+    data_korpus.slot_radar_num     = 1;
+    data_korpus.slot_scaner_num    = 1;
+    data_korpus.slot_freezer_num   = 1;
 	data_korpus.slot_weapon_num   = weapons_num;  
-	data_korpus.slot_artefact_num = getRandInt(0, 4);  
-        data_korpus.slot_otsec_num    = getRandInt(6, 8) * otsec_rate;
-        if (data_korpus.slot_otsec_num > OTSEC_SLOT_MAX_NUM)
-        {
-            data_korpus.slot_otsec_num = OTSEC_SLOT_MAX_NUM;
+	data_korpus.slot_artefact_num = getRandInt(0, SLOT_ARTEFACT_TYPES.size());  
+    data_korpus.slot_otsec_num    = getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
+    
+    int size_threshold = 2; 
+    data_korpus.draw_turrels = false;
+    if (mesh == nullptr)
+    {
+        if (texOb->size_id > size_threshold)
+    {
+        data_korpus.draw_turrels = true; 
         }
-        
-        int size_threshold = 2; 
-        data_korpus.draw_turrels = false;
-    	if (mesh == nullptr)
-    	{
-    		if (texOb->size_id > size_threshold)
-		{
-			data_korpus.draw_turrels = true; 
-       		}
-       	}
+    }
 
 	ship->SetSubSubTypeId(subsubtype_id);
 	ship->SetKorpusData(data_korpus);
