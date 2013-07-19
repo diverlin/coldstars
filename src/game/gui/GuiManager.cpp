@@ -133,10 +133,11 @@ bool GuiManager::RunSessionInSpace()
     GuiVehicle* gui_radar = (GuiVehicle*)GetGuiElement(GUI::eTYPE::GUI_RADAR_ID);
            
     const BaseSpaceEntity* scan_target = player->GetNpc()->GetScanTarget();    
-    if (gui_scan_vehicle->GetVehicle() == nullptr)
-    {                     
-        if (scan_target)
-        {                           
+                    
+    if (scan_target)
+    {       
+        if (gui_scan_vehicle->GetVehicle() == nullptr)
+        {               
             if (scan_target->GetTypeId() == ENTITY::TYPE::VEHICLE_ID)
             {
                 gui_scan_vehicle->BindVehicle((Vehicle*)scan_target, /*offset=*/Vec2<float>(0, 0), /*full_control_on*/true);
@@ -149,14 +150,12 @@ bool GuiManager::RunSessionInSpace()
     }
     else
     {
-        if (!scan_target)
-        {  
-            gui_scan_vehicle->UnbindVehicle();
-            gui_scan_vehicle->Hide();
-            
-            gui_player_vehicle->Show(); 
-            gui_radar->Show();
-        }
+        gui_scan_vehicle->UnbindVehicle();
+        gui_scan_vehicle->Hide();
+        
+        gui_player_vehicle->Show(); 
+        gui_radar->Show();
+        
     }
 
     BaseGuiElement* button = GetGuiElement(GUI::eTYPE::GALAXYMAP_ID);

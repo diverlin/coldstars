@@ -197,7 +197,7 @@ void BaseGuiElement::RenderUnique() const
 {
 	if (m_TextureOb)
 	{
-		drawQuad(m_TextureOb, m_Box);
+		//drawQuad(m_TextureOb, m_Box);
    	}
 }
 

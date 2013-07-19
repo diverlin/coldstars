@@ -16,8 +16,8 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef CURSOR_H
-#define CURSOR_H
+#ifndef CURSOR_HPP
+#define CURSOR_HPP
 
 class ItemSlot;
 #include "../common/rect.hpp"
@@ -45,6 +45,8 @@ class Cursor : public BaseGuiElement
 		
 		void RenderFocusedObjectStuff() const;
 		void RenderFocusedObjectInfo();
+        
+        virtual void RenderUnique() const final;
 				
 	private:       	
 		ItemSlot* item_slot;  
