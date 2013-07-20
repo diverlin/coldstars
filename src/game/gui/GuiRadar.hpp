@@ -27,7 +27,7 @@ class GuiRadar : public BaseGuiElement
 {
 	public:
 		GuiRadar();
-		virtual ~GuiRadar() final;
+		virtual ~GuiRadar() override final;
 	
 		const Rect& GetRect() const { return rect; };
 		void Resize(int, int);
@@ -37,9 +37,9 @@ class GuiRadar : public BaseGuiElement
 		void Add(BaseSpaceEntity*);
 		void AddIfWithinRadarRange(BaseSpaceEntity*, const Vehicle&);
 
-        virtual void UpdateUnique(Player*) final;
+        virtual void UpdateUnique(Player*) override final;
              		
-		virtual void RenderUnique() const final;
+		virtual void RenderUnique(Player*) const override final;
 			
 	private:
 		float scale;

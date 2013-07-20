@@ -23,7 +23,7 @@
 
 std::map<GUI::eTYPE, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
 
-BaseGuiElement::BaseGuiElement(GUI::eTYPE subtype_id, const std::string info, TextureOb* textureOb, BaseGuiElement* parent):
+BaseGuiElement::BaseGuiElement(GUI::eTYPE subtype_id, const std::string& info, TextureOb* textureOb, BaseGuiElement* parent):
 m_Subtype_id(subtype_id),
 m_Info(info),
 m_TextureOb(textureOb),
@@ -36,6 +36,7 @@ m_Pressed(false)
 	m_Scale.Set(1.0, 1.0, 1.0);
 }
 
+/* virtual */
 BaseGuiElement::~BaseGuiElement()
 {
 	for (std::vector<BaseGuiElement*>::iterator it=m_Child_vec.begin(); it!=m_Child_vec.end(); it++)
@@ -177,34 +178,39 @@ void BaseGuiElement::UpdateCommon(Player* player)
 	}
 }
 
-void BaseGuiElement::Render() const
+void BaseGuiElement::Render(Player* player) const
 {
 	if (!m_Show)
 	{
 		return;
 	}
 	
+    if (m_Root)
+    {
+        resetRenderTransformation();
+    }
+    
 	enable_BLEND();
 	{
-		RenderUnique();
-		RenderCommon();
+		RenderCommon(player);
+		RenderUnique(player);
 	}
 	disable_BLEND();
 }
 
 /* virtual */
-void BaseGuiElement::RenderUnique() const
+void BaseGuiElement::RenderUnique(Player* player) const
 {
 	if (m_TextureOb)
 	{
-		//drawQuad(m_TextureOb, m_Box);
+		drawQuad(m_TextureOb, m_Box);
    	}
 }
 
-void BaseGuiElement::RenderCommon() const
+void BaseGuiElement::RenderCommon(Player* player) const
 {
    	for (const auto &gui_element : m_Child_vec)
 	{
-		gui_element->Render();
+		gui_element->Render(player);
 	}
 }

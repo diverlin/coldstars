@@ -83,8 +83,8 @@ void GuiRadar::AddIfWithinRadarRange(BaseSpaceEntity* object, const Vehicle& veh
 	}
 }     		
     		
-/* virtual final */
-void GuiRadar::RenderUnique() const
+/* virtual override final */
+void GuiRadar::RenderUnique(Player*) const
 {
 	float range_diameter = 2*m_Player->GetNpc()->GetVehicle()->GetProperties().radar;
 	Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);

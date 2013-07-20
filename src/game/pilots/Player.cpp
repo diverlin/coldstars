@@ -1165,7 +1165,7 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 	RenderInSpace(starsystem, turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath());
     
     GuiManager::Instance().RunSessionInSpace();
- 	GuiManager::Instance().GetGuiSpace().Render(); 
+ 	GuiManager::Instance().GetGuiSpace().Render(this); 
  	if (gui_element != nullptr)
  	{
  		gui_element->RenderInfo();

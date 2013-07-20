@@ -421,22 +421,24 @@ void TextureOb::shieldEffectArgManager(std::vector<int>* arg)
        	
 void loadToVRAM(const std::string& path, GLuint& texture, int& w, int& h)
 {
-     	sf::Image image;
-     	if (!image.loadFromFile(path))
+    sf::Image image;
+    if (!image.loadFromFile(path))
  	{
  		std::cout<<"FAULT: Not abe to open file:"<<path;
  		exit(EXIT_FAILURE);
  	}
      	
-     	w = image.getSize().x;
-     	h = image.getSize().y;
+    image.flipVertically();
+    
+    w = image.getSize().x;
+    h = image.getSize().y;
 
-     	glGenTextures(1, &texture);
-     	glBindTexture(GL_TEXTURE_2D, texture);
-     	gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, w, h, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
-         
-     	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-     	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, w, h, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
+     
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 }         
 
 

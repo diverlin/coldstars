@@ -19,8 +19,9 @@
 #include "ButtonItemSlot.hpp"
 #include <slots/ItemSlot.hpp>
 #include <pilots/Player.hpp>
+#include <items/BaseItem.hpp>
     
-/*virtual final*/
+/* virtual override final */
 void ButtonItemSlot::PressEvent(Player* player)
 {
     if (m_ItemSlot)
@@ -40,12 +41,20 @@ void ButtonItemSlot::PressEvent(Player* player)
         
 }
 
-/*virtual final*/
-void ButtonItemSlot::RenderUnique() const 
+/* virtual override final */
+void ButtonItemSlot::RenderUnique(Player*) const 
+{
+    m_ItemSlot->Render(m_Box, Vec3<float>(0,0,0), false);
+}
+  
+/* virtual override final */
+void ButtonItemSlot::RenderInfo() const
 {
     if (m_ItemSlot)
     {
-       m_ItemSlot->Render(m_Box, Vec3<float>(0,0,0), false);
+        if (m_ItemSlot->GetItem())
+        {
+            m_ItemSlot->GetItem()->RenderInfo(Vec2<float>(m_Box.GetCenter().x, m_Box.GetCenter().y)); 
+        }
     }
 }
-        

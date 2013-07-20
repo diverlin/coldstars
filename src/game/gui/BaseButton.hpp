@@ -39,7 +39,7 @@ class BaseButton : public BaseGuiElement
 			virtual void ResetState() override;
 		
        		virtual void RenderInfo() const override;        		
-       		virtual void RenderUnique() const override;   
+       		virtual void RenderUnique(Player*) const override;   
        		        
 	protected:      	
         	float m_Alpha;        	        	

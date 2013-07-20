@@ -26,10 +26,10 @@ class ButtonTrigger : public BaseButton
 	public:
         ButtonTrigger(GUI::eTYPE subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb):BaseButton(subtype_id, info, pAction, textureOb) {};
                
-        virtual ~ButtonTrigger() final {};  
+        virtual ~ButtonTrigger() override final {};  
 
-        virtual void PressEvent(Player*) final;
-        virtual void UpdateUnique(Player*) final;
+        virtual void PressEvent(Player*) override final;
+        virtual void UpdateUnique(Player*) override final;
         
 	private:
 };

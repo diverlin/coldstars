@@ -54,10 +54,10 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
 		ENTITY::TYPE slot_subtype_id = vehicle->slot_total_vec[i]->GetSubTypeId();
 		if ( (slot_subtype_id != ENTITY::TYPE::CARGO_SLOT_ID) and (slot_subtype_id != ENTITY::TYPE::ARTEFACT_SLOT_ID) )
 		{  
-			ENTITY::TYPE button_subtype_id = slot_subtype_id;
+			ENTITY::TYPE entity_type_id = slot_subtype_id;
 			if (slot_subtype_id == ENTITY::TYPE::WEAPON_SLOT_ID)
 			{
-				button_subtype_id = vehicle->slot_total_vec[i]->GetSubSubTypeId();
+				entity_type_id = vehicle->slot_total_vec[i]->GetSubSubTypeId();
 			}
 						  
 			TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;
@@ -66,7 +66,7 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
             Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
             Box box(size*scale);
                                 
-			ButtonItemSlot2* button = new ButtonItemSlot2(GUI::getEquivalent(button_subtype_id), "", vehicle->slot_total_vec[i]);  
+			ButtonItemSlot2* button = new ButtonItemSlot2(GUI::getEquivalent(entity_type_id), getEntityTypeStr(entity_type_id), vehicle->slot_total_vec[i]);  
             button->SetBox(box);
 
             float zpos = -2;
@@ -79,7 +79,7 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
 	}    	
 }	
 
-/*virtual final*/
+/* virtual override final */
 void GuiVehicle2::UpdateUnique(Player* player)
 {
     bool need_update = false;

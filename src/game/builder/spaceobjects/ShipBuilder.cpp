@@ -67,10 +67,10 @@ Ship* ShipBuilder::GetNewShip() const
 	int size_id = getRandInt(1, 9);
 	int weapons_num = size_id;
         	
-        Ship* ship = GetNewShipTemplate();
-        CreateNewInternals(ship, race_id, subsubtype_id, size_id, weapons_num);     
-        
-        return ship;
+    Ship* ship = GetNewShipTemplate();
+    CreateNewInternals(ship, race_id, subsubtype_id, size_id, weapons_num);     
+    
+    return ship;
 }
 
 void ShipBuilder::CreateNewInternals(Ship* ship, int race_id,  ENTITY::TYPE subsubtype_id, int size_id, int weapons_num) const

@@ -46,7 +46,7 @@ class Cursor : public BaseGuiElement
 		void RenderFocusedObjectStuff() const;
 		void RenderFocusedObjectInfo();
         
-        virtual void RenderUnique() const final;
+        virtual void RenderUnique(Player*) const override final;
 				
 	private:       	
 		ItemSlot* item_slot;  
