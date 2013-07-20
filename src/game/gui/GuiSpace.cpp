@@ -364,37 +364,32 @@ void GuiSpace::UpdateUnique(Player* player)
 //}
 
 /* virtual final */
-void GuiSpace::RenderUnique() const
+void GuiSpace::RenderUnique(Player*) const
 {
-	resetRenderTransformation();
-	enable_BLEND(); 
-    {   
-        //if (show_gui_radar == true)  
-        //{
-            //gui_radar->Render();
-            //gui_vehicle_player.Render();
-            //gui_vehicle_player.RenderInfo(data_mouse);    
-        //}
-        
-        if (gui_galaxymap_shared->GetGalaxy() != nullptr)  
-        {
-            gui_galaxymap_shared->Render();    
-        }
-                                        
-        //if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
-        //{
-            //GuiManager::Instance().RenderScanVehicle(data_mouse, player->GetNpc()->GetScanTarget()); 				                 
-        //}
-        
-        //if (gui_vehicle_target.GetVehicle() != nullptr)
-        //{
-            //gui_vehicle_target.Render();
-            //gui_vehicle_target.RenderInfo(data_mouse); 
-        //}
+    //if (show_gui_radar == true)  
+    //{
+        //gui_radar->Render();
+        //gui_vehicle_player.Render();
+        //gui_vehicle_player.RenderInfo(data_mouse);    
+    //}
     
-        //RenderChildInfo(data_mouse);
+    if (gui_galaxymap_shared->GetGalaxy() != nullptr)  
+    {
+        gui_galaxymap_shared->Render();    
     }
-	disable_BLEND();
+                                    
+    //if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
+    //{
+        //GuiManager::Instance().RenderScanVehicle(data_mouse, player->GetNpc()->GetScanTarget()); 				                 
+    //}
+    
+    //if (gui_vehicle_target.GetVehicle() != nullptr)
+    //{
+        //gui_vehicle_target.Render();
+        //gui_vehicle_target.RenderInfo(data_mouse); 
+    //}
+
+    //RenderChildInfo(data_mouse);
 	
 	RenderText(Screen::Instance().GetBottomLeftScreenWC());
 }

@@ -20,7 +20,7 @@
 #include "ButtonTrigger.hpp"
 #include "../pilots/Player.hpp"
     
-/*virtual final*/
+/*virtual override final*/
 void ButtonTrigger::PressEvent(Player* player)
 {
     if (m_pAction)
@@ -43,7 +43,7 @@ void ButtonTrigger::PressEvent(Player* player)
 	}
 }
 
-/*virtual final*/	
+/*virtual override final*/	
 void ButtonTrigger::UpdateUnique(Player* player)
 {
 	if ( (m_Lock == false) and (m_Pressed == false) )

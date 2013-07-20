@@ -18,7 +18,7 @@
 
 #include "ButtonSingle.hpp"
 
-/*virtual final*/
+/*virtual override final*/
 void ButtonSingle::PressEvent(Player* player)
 {
     if (m_pAction)
@@ -33,7 +33,7 @@ void ButtonSingle::PressEvent(Player* player)
 	}
 }
 
-/*virtual final*/   		
+/*virtual override final*/   		
 void ButtonSingle::UpdateUnique(Player* player)
 {
 	if (m_Lock == false)

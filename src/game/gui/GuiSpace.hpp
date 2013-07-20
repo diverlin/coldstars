@@ -50,7 +50,7 @@ class GuiSpace : public BaseGuiElement
 		void Resize(int, int);
 		void ButtonsAction(Player*) const;
 		
-		virtual void RenderUnique() const override final;
+		virtual void RenderUnique(Player*) const override final;
 				
 		void RenderText(const Vec2<float>&) const;
 		

@@ -31,12 +31,12 @@ class ButtonItemSlot2 : public BaseButton
         m_ItemSlot(itemslot) 
         {}
                
-        virtual ~ButtonItemSlot2() final {};  
+        virtual ~ButtonItemSlot2() override final {};  
 
-        virtual void PressEvent(Player*) final;
-        virtual void UpdateUnique(Player*) final;
+        virtual void PressEvent(Player*) override final;
+        virtual void UpdateUnique(Player*) override final;
         
-        virtual void RenderUnique() const final; 
+        virtual void RenderUnique(Player*) const override final; 
         
 	private:
         ItemSlot* m_ItemSlot;

@@ -439,13 +439,11 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, ENTITY::T
     */
 }
 
-/*virtual final*/
-void GuiVehicle::RenderUnique() const
+/*virtual override final*/
+void GuiVehicle::RenderUnique(Player* player) const
 {
-    //m_Player->GetCursor().RenderUnique();
-    //std::cout<<m_Player->GetCursor().GetItemSlot()->GetId()<<std::endl;
-    if (m_Player)
-    std::cout<<m_Player->GetNpc()->GetVehicle()->GetId()<<std::endl;    
+    player->GetCursor().Render(player);
+  
     //drawTexturedRect(m_TextureOb_korpus, rect_korpus, -1.0);
 
 	//RenderSlots();

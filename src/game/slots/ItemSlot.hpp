@@ -120,6 +120,7 @@ class ItemSlot : public BaseSlot
         void UpdateVehiclePropetries() const;
         
         virtual void Render(const Box&, const Vec2<float>&, bool draw_text = true) const;
+        virtual void RenderItem(const Box&, const Vec2<float>&, bool draw_text = true) const;
         void RenderMark(const Box&, TextureOb*) const;
         
         void DropItemToSpace();

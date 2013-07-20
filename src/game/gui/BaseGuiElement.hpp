@@ -33,8 +33,8 @@ class Player;
 class BaseGuiElement
 {
 	public:
-		BaseGuiElement(GUI::eTYPE subtype_id=GUI::eTYPE::NONE_ID, const std::string info="", TextureOb* textureOb=nullptr, BaseGuiElement* parent=nullptr);
-		~BaseGuiElement();
+		BaseGuiElement(GUI::eTYPE subtype_id=GUI::eTYPE::NONE_ID, const std::string& info="", TextureOb* textureOb=nullptr, BaseGuiElement* parent=nullptr);
+		virtual ~BaseGuiElement();
 		
 		//void SetSubTypeId(int subtype_id) { this->subtype_id = subtype_id; } 
 		
@@ -78,7 +78,7 @@ class BaseGuiElement
 		virtual void ResetState();
 
 		void Update(Player*);
-        void Render() const;		
+        void Render(Player*) const;		
 		virtual void RenderInfo() const {};
 				
 	protected:
@@ -108,8 +108,8 @@ class BaseGuiElement
 		virtual void UpdateUnique(Player*);		
 		void UpdateCommon(Player*);
         				
-		virtual void RenderUnique() const;		
-		void RenderCommon() const;
+		virtual void RenderUnique(Player*) const;		
+		void RenderCommon(Player*) const;
        		       	
 	private:       				
 		Vec3<float> m_Offset;

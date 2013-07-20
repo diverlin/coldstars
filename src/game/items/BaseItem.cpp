@@ -125,7 +125,10 @@ void BaseItem::RenderInfo(const Vec2<float>& pos, float offset_x, float offset_y
 {  
 	UpdateInfo();
 	Vec2<float> pos2(pos.x - offset_x, pos.y - offset_y);
-     	drawInfoIn2Column(info.title_list, info.value_list, pos2);
+    
+    enable_BLEND();
+    drawInfoIn2Column(info.title_list, info.value_list, pos2);
+    disable_BLEND();
 }
 
 /* virtual */

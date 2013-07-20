@@ -19,7 +19,7 @@
 #include "ButtonItemSlot2.hpp"
 #include <slots/ItemSlot.hpp>
     
-/*virtual final*/
+/*virtual override final*/
 void ButtonItemSlot2::PressEvent(Player* player)
 {
     if (m_ItemSlot)
@@ -56,7 +56,7 @@ void ButtonItemSlot2::PressEvent(Player* player)
     }
 }
 
-/*virtual final*/	
+/*virtual override final*/	
 void ButtonItemSlot2::UpdateUnique(Player* player)
 {
     if (m_ItemSlot)
@@ -68,8 +68,8 @@ void ButtonItemSlot2::UpdateUnique(Player* player)
     }
 }
 
-/*virtual final*/
-void ButtonItemSlot2::RenderUnique() const 
+/*virtual override final*/
+void ButtonItemSlot2::RenderUnique(Player*) const 
 {
     if (m_ItemSlot)
     {

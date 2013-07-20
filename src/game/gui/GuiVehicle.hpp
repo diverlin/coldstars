@@ -41,7 +41,7 @@ class GuiVehicle : public BaseGuiElement
         bool UpdateMouseInteraction(const MouseData&);   
         bool UpdateMouseInteractionInStore(const MouseData&, Store*); 
         
-        virtual void RenderUnique() const override final;
+        virtual void RenderUnique(Player*) const override final;
         
         void RenderVehicle(const MouseData&, ENTITY::TYPE mark_slot_subtype_id = ENTITY::TYPE::NONE_ID) const;
     

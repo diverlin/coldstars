@@ -456,10 +456,9 @@ void Cursor::RenderFocusedObjectInfo()
 	focused_ob = nullptr;
 }
 
-        
-void Cursor::RenderUnique() const
+/* virtual override final */
+void Cursor::RenderUnique(Player* player) const
 {
-    //Box box(Vec3<float>(rect.GetCenter().x, rect.GetCenter().y, -2), Vec3<float>(100, 100, 0.0));
-    //item_slot->Render(m_Box, Vec3<float>(0,0,0));   
-    std::cout<<item_slot->GetId()<<std::endl;
+    //Box box(Vec3<float>(rect.GetCenter().x, rect.GetCenter().y, -1.0), Vec3<float>(100, 100, 0.0));
+    item_slot->RenderItem(rect, Vec3<float>(0,0,0));   
 }
