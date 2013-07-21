@@ -24,7 +24,7 @@
 class ButtonSingle : public BaseButton
 {
 	public:
-		ButtonSingle(GUI::eTYPE subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb):BaseButton(subtype_id, info, pAction, textureOb) {};
+		ButtonSingle(GUI::TYPE subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb):BaseButton(subtype_id, info, pAction, textureOb) {};
 			   
 		virtual ~ButtonSingle() {};  
 

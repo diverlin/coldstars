@@ -766,7 +766,7 @@ namespace TECHLEVEL
 
 namespace GUI
 { 
-    enum class eTYPE
+    enum class TYPE
     {
         NONE_ID = 0,
         

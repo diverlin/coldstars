@@ -45,7 +45,7 @@ GuiManager::GuiManager()
 {
 	player = nullptr;
         
-        gui_vehicle_scan = new GuiVehicle(GUI::eTYPE::SCAN_VEHICLE_ID);
+        gui_vehicle_scan = new GuiVehicle(GUI::TYPE::SCAN_VEHICLE_ID);
         gui_skills       = new GuiSkills();
         gui_galaxymap    = new GuiGalaxyMap();
        	slider           = new Slider();  
@@ -128,9 +128,9 @@ void GuiManager::ExitGuiSpace()
              
 bool GuiManager::RunSessionInSpace()
 {
-    GuiVehicle* gui_scan_vehicle = (GuiVehicle*)GetGuiElement(GUI::eTYPE::SCAN_VEHICLE_ID);     
-    GuiVehicle* gui_player_vehicle = (GuiVehicle*)GetGuiElement(GUI::eTYPE::PLAYER_VEHICLE_ID);
-    GuiVehicle* gui_radar = (GuiVehicle*)GetGuiElement(GUI::eTYPE::GUI_RADAR_ID);
+    GuiVehicle* gui_scan_vehicle = (GuiVehicle*)GetGuiElement(GUI::TYPE::SCAN_VEHICLE_ID);     
+    GuiVehicle* gui_player_vehicle = (GuiVehicle*)GetGuiElement(GUI::TYPE::PLAYER_VEHICLE_ID);
+    GuiVehicle* gui_radar = (GuiVehicle*)GetGuiElement(GUI::TYPE::GUI_RADAR_ID);
            
     const BaseSpaceEntity* scan_target = player->GetNpc()->GetScanTarget();    
                     
@@ -158,7 +158,7 @@ bool GuiManager::RunSessionInSpace()
         
     }
 
-    BaseGuiElement* button = GetGuiElement(GUI::eTYPE::GALAXYMAP_ID);
+    BaseGuiElement* button = GetGuiElement(GUI::TYPE::GALAXYMAP_ID);
     if (button->GetPressed())
     {
         player->GetNpc()->ResetScanTarget();
@@ -220,17 +220,17 @@ bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 }
 
 
-void GuiManager::PressEventOnGuiElement(GUI::eTYPE subtype_id)
+void GuiManager::PressEventOnGuiElement(GUI::TYPE subtype_id)
 {
 	gui_space.PressEventOnGuiElement(subtype_id); 
 }	
 
-void GuiManager::ResetEventOnGuiElement(GUI::eTYPE subtype_id)
+void GuiManager::ResetEventOnGuiElement(GUI::TYPE subtype_id)
 {
 	gui_space.ResetStateEventOnGuiElement(subtype_id);
 }	
 
-BaseGuiElement* GuiManager::GetGuiElement(GUI::eTYPE request_subtype_id) const
+BaseGuiElement* GuiManager::GetGuiElement(GUI::TYPE request_subtype_id) const
 {
 	return gui_space.GetGuiElement(request_subtype_id);
 }

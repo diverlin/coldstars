@@ -26,7 +26,7 @@ class AnimationEffect2D;
 class BaseButton : public BaseGuiElement
 {
 	public:
-       		BaseButton(GUI::eTYPE, const std::string&,void (*pAction)(Player*) = nullptr, TextureOb* textureOb = nullptr);       		       
+       		BaseButton(GUI::TYPE, const std::string&,void (*pAction)(Player*) = nullptr, TextureOb* textureOb = nullptr);       		       
        		virtual ~BaseButton();  
 
 			void SetTextureObAdditional(TextureOb* textureOb_additional) { m_TextureOb_additional = textureOb_additional; }

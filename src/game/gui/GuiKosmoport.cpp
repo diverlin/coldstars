@@ -427,7 +427,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 		{
 			gui_shop.UpdateLables();
 			gui_shop.ButtonsAction(*slider_shared);
-			if (slider_shared->GetSubTypeId() != GUI::eTYPE::NONE_ID)
+			if (slider_shared->GetSubTypeId() != GUI::TYPE::NONE_ID)
 			{
 				slider_shared->CheckButtonsLock();
 				slider_shared->ButtonsAction(gui_shop.GetShop());
@@ -438,7 +438,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 				interaction = gui_shop.UpdateMouseInteraction(data_mouse.pos_screencoord);
 				if (interaction == false)
 				{
-					if (slider_shared->GetSubTypeId() != GUI::eTYPE::NONE_ID)
+					if (slider_shared->GetSubTypeId() != GUI::TYPE::NONE_ID)
 					{
 						slider_shared->UpdateSlidePosition(data_mouse);
 						interaction = slider_shared->UpdateMouseInteraction(data_mouse.pos_screencoord);

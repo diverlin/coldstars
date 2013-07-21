@@ -34,7 +34,7 @@ class AnimationEffect2D;
 class BaseGuiElement
 {
 	public:
-		BaseGuiElement(GUI::eTYPE subtype_id=GUI::eTYPE::NONE_ID, const std::string& info="", TextureOb* textureOb=nullptr, BaseGuiElement* parent=nullptr);
+		BaseGuiElement(GUI::TYPE subtype_id=GUI::TYPE::NONE_ID, const std::string& info="", TextureOb* textureOb=nullptr, BaseGuiElement* parent=nullptr);
 		virtual ~BaseGuiElement();
 		
 		//void SetSubTypeId(int subtype_id) { this->subtype_id = subtype_id; } 
@@ -56,8 +56,8 @@ class BaseGuiElement
 		
 		void SetBox(const Box& box) { m_Box = box; }
 	
-		GUI::eTYPE GetTypeId() const { return m_Type_id; }
-		GUI::eTYPE GetSubTypeId() const { return m_Subtype_id; }
+		GUI::TYPE GetTypeId() const { return m_Type_id; }
+		GUI::TYPE GetSubTypeId() const { return m_Subtype_id; }
 					
 		const Vec3<float>& GetOffset() const { return m_Offset; } // depr
 		const Box& GetBox() const { return m_Box; }
@@ -66,7 +66,7 @@ class BaseGuiElement
         bool GetLock() const { return m_Lock; }
         bool GetPressed() const { return m_Pressed; }
             
-        BaseGuiElement* GetGuiElement(GUI::eTYPE) const;                     
+        BaseGuiElement* GetGuiElement(GUI::TYPE) const;                     
 			
 		BaseGuiElement* UpdateMouseInteraction(const Vec2<float>&);
 		
@@ -83,8 +83,8 @@ class BaseGuiElement
 		virtual void RenderInfo() const {};
 				
 	protected:
-		GUI::eTYPE m_Type_id;
-		GUI::eTYPE m_Subtype_id;
+		GUI::TYPE m_Type_id;
+		GUI::TYPE m_Subtype_id;
 		
 		bool m_Lock;
 		bool m_Pressed;
@@ -101,8 +101,8 @@ class BaseGuiElement
 		//BaseGuiElement* m_Parent;
 		std::vector<BaseGuiElement*> m_Child_vec;
 
-		void PressEventOnGuiElement(GUI::eTYPE);
-		void ResetStateEventOnGuiElement(GUI::eTYPE);			
+		void PressEventOnGuiElement(GUI::TYPE);
+		void ResetStateEventOnGuiElement(GUI::TYPE);			
 
 		void UpdateGeometry(const Vec3<float>&, const Vec3<float>&);	
         
@@ -118,7 +118,7 @@ class BaseGuiElement
 		
         AnimationEffect2D* m_Animation;
         
-		static std::map<GUI::eTYPE, BaseGuiElement*> static_gui_element_map;
+		static std::map<GUI::TYPE, BaseGuiElement*> static_gui_element_map;
 		
 	friend class GuiManager;
 };

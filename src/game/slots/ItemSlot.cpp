@@ -155,7 +155,7 @@ bool ItemSlot::CheckItemInsertion(BaseItem* item) const
 
 	if (GetSubTypeId() == item->GetParentSubTypeId())
 	{                                     
-                return true;
+        return true;
 	}
 	
 	return false;
@@ -391,7 +391,7 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
         {
             BaseItem* tmp_item = slot->GetItem();
             if ( (slot->CheckItemInsertion(item) == true) and (CheckItemInsertion(tmp_item) == true) )
-            {       				
+            {   std::cout<<"111"<<std::endl;    				
                 slot->InsertItem(item);
                 tmp_item->SetItemSlot(nullptr);
                 InsertItem(tmp_item);
@@ -408,14 +408,6 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
                 return true;
             }
         }
-
-       		//if ( (item->GetTypeId() == ENTITY::EQUIPMENT_ID) and (slot->GetItem()->GetTypeId() == ENTITY::MODULE_ID) )
-       		//{
-			//if (((BaseEquipment*)item)->InsertModule((BaseModule*)slot->GetItem()) == true)  
-			//{				
-				//return true;
-        		//}
-       		//}
 	}               
 	
 	return false;

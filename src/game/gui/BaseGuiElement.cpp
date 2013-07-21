@@ -23,9 +23,9 @@
 
 #include "../render/AnimationEffect2D.hpp"
 
-std::map<GUI::eTYPE, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
+std::map<GUI::TYPE, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
 
-BaseGuiElement::BaseGuiElement(GUI::eTYPE subtype_id, const std::string& info, TextureOb* textureOb, BaseGuiElement* parent)
+BaseGuiElement::BaseGuiElement(GUI::TYPE subtype_id, const std::string& info, TextureOb* textureOb, BaseGuiElement* parent)
 :
 m_Subtype_id(subtype_id),
 m_Info(info),
@@ -53,9 +53,9 @@ BaseGuiElement::~BaseGuiElement()
     delete m_Animation;
 }	
       	
-BaseGuiElement* BaseGuiElement::GetGuiElement(GUI::eTYPE request_subtype_id) const
+BaseGuiElement* BaseGuiElement::GetGuiElement(GUI::TYPE request_subtype_id) const
 {
-	std::map<GUI::eTYPE, BaseGuiElement*>::const_iterator it = static_gui_element_map.find(request_subtype_id);
+	std::map<GUI::TYPE, BaseGuiElement*>::const_iterator it = static_gui_element_map.find(request_subtype_id);
 	if (it != static_gui_element_map.cend())
 	{
 		return it->second;
@@ -64,7 +64,7 @@ BaseGuiElement* BaseGuiElement::GetGuiElement(GUI::eTYPE request_subtype_id) con
 	return nullptr;
 }   
 	
-void BaseGuiElement::PressEventOnGuiElement(GUI::eTYPE subtype_id)
+void BaseGuiElement::PressEventOnGuiElement(GUI::TYPE subtype_id)
 {
 	BaseGuiElement* button = GetGuiElement(subtype_id);
 	if (button != nullptr)
@@ -80,7 +80,7 @@ void BaseGuiElement::PressEventOnGuiElement(GUI::eTYPE subtype_id)
 
 }	
 
-void BaseGuiElement::ResetStateEventOnGuiElement(GUI::eTYPE subtype_id)
+void BaseGuiElement::ResetStateEventOnGuiElement(GUI::TYPE subtype_id)
 {
 	BaseGuiElement* button = GetGuiElement(subtype_id);
 	if (button != nullptr)

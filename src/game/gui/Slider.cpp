@@ -34,8 +34,8 @@
 
 Slider::Slider()
 {
-	//type_id = GUI::eTYPE::SLIDER_ID;
-	//subtype_id = GUI::eTYPE::NONE_ID;
+	//type_id = GUI::TYPE::SLIDER_ID;
+	//subtype_id = GUI::TYPE::NONE_ID;
 	
 	textureOb = GuiTextureObCollector::Instance().text_background;
 	textureOb_scale = TextureManager::Instance().GetRandomTextureOb(TEXTURE::LAZER_EFFECT_ID);
@@ -73,7 +73,7 @@ void Slider::Configure(int ammount_total, int price_for_one)
 
 void Slider::UpdateSlidePosition(const MouseData& data_mouse)
 {      /*
-	ButtonSingle* slide_button = (ButtonSingle*)GetGuiElement(GUI::eTYPE::SLIDER_ID);
+	ButtonSingle* slide_button = (ButtonSingle*)GetGuiElement(GUI::TYPE::SLIDER_ID);
 	if (rect_slide.CheckInteraction(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y) == true)
 	{
 		if (data_mouse.left_press == true)
