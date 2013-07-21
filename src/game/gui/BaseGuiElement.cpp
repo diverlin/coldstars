@@ -69,7 +69,10 @@ void BaseGuiElement::PressEventOnGuiElement(GUI::TYPE subtype_id)
 	BaseGuiElement* button = GetGuiElement(subtype_id);
 	if (button != nullptr)
 	{
-		button->PressEvent(m_Player);
+    	#if GUI_LOG_ENABLED == 1
+		Logger::Instance().Log("BaseGuiElement::PressEventOnGuiElement="+getGuiTypeStr(button->GetSubTypeId()), GUI_LOG_DIP);
+		#endif
+		button->OnPressEventLMB(m_Player);
 	}
 	#if GUI_LOG_ENABLED == 1
 	else

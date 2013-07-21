@@ -24,7 +24,7 @@
 
 namespace GUI
 {
-    GUI::TYPE getEquivalent(ENTITY::TYPE val)
+    GUI::TYPE getGuiItemSlotType(ENTITY::TYPE val)
     {
         switch(val)
         {
@@ -80,6 +80,34 @@ namespace GUI
             case ENTITY::TYPE::GATE_SLOT_ID:   { return GUI::TYPE::GATE_SLOT_ID; break; }
             //case ENTITY::TYPE::REPAIR_SLOT_ID:   { return GUI::TYPE::REPAIR_SLOT_ID; break; }
             //case ENTITY::TYPE::CHARGE_SLOT_ID:   { return GUI::TYPE::CHARGE_SLOT_ID; break; }                        
+        }
+    }
+    
+    GUI::TYPE getGuiItemSlotSelectorType(ENTITY::TYPE val)
+    {
+        switch(val)
+        {
+            case ENTITY::TYPE::NONE_ID:     { return GUI::TYPE::NONE_ID; break; }
+                                   
+            case ENTITY::TYPE::WEAPON_SLOT1_ID:   { return GUI::TYPE::WEAPON_SLOT1_SELECTOR_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT2_ID:   { return GUI::TYPE::WEAPON_SLOT2_SELECTOR_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT3_ID:   { return GUI::TYPE::WEAPON_SLOT3_SELECTOR_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT4_ID:   { return GUI::TYPE::WEAPON_SLOT4_SELECTOR_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT5_ID:   { return GUI::TYPE::WEAPON_SLOT5_SELECTOR_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT6_ID:   { return GUI::TYPE::WEAPON_SLOT6_SELECTOR_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT7_ID:   { return GUI::TYPE::WEAPON_SLOT7_SELECTOR_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT8_ID:   { return GUI::TYPE::WEAPON_SLOT8_SELECTOR_ID; break; }    
+            case ENTITY::TYPE::WEAPON_SLOT9_ID:   { return GUI::TYPE::WEAPON_SLOT9_SELECTOR_ID; break; }
+            
+            case ENTITY::TYPE::DRIVE_SLOT_ID:   { return GUI::TYPE::DRIVE_SLOT_SELECTOR_ID; break; }
+            case ENTITY::TYPE::RADAR_SLOT_ID:   { return GUI::TYPE::RADAR_SLOT_SELECTOR_ID; break; }
+            case ENTITY::TYPE::BAK_SLOT_ID:   { return GUI::TYPE::BAK_SLOT_SELECTOR_ID; break; }
+            case ENTITY::TYPE::ENERGIZER_SLOT_ID:   { return GUI::TYPE::ENERGIZER_SLOT_SELECTOR_ID; break; }
+            case ENTITY::TYPE::PROTECTOR_SLOT_ID:   { return GUI::TYPE::PROTECTOR_SLOT_SELECTOR_ID; break; }
+            case ENTITY::TYPE::DROID_SLOT_ID:   { return GUI::TYPE::DROID_SLOT_SELECTOR_ID; break; }
+            case ENTITY::TYPE::FREEZER_SLOT_ID:   { return GUI::TYPE::FREEZER_SLOT_SELECTOR_ID; break; }
+            case ENTITY::TYPE::GRAPPLE_SLOT_ID:   { return GUI::TYPE::GRAPPLE_SLOT_SELECTOR_ID; break; }
+            case ENTITY::TYPE::SCANER_SLOT_ID:   { return GUI::TYPE::SCANER_SLOT_SELECTOR_ID; break; }         
         }
     }
 }

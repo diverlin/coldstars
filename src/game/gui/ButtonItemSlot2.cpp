@@ -20,11 +20,11 @@
 #include <slots/ItemSlot.hpp>
     
 /*virtual override final*/
-void ButtonItemSlot2::PressEvent(Player* player)
+void ButtonItemSlot2::OnPressEventLMB(Player* player)
 {
-    if (m_ItemSlot)
-    {
-        
+    std::cout<<     "OnPressEventLMB"<<std::endl;
+    if (m_ItemSlot != nullptr)
+    {        
         if (GetPressed() == true)
         {
             if (m_ItemSlot->GetSelected() == false)
@@ -59,7 +59,7 @@ void ButtonItemSlot2::PressEvent(Player* player)
 /*virtual override final*/	
 void ButtonItemSlot2::UpdateUnique(Player* player)
 {
-    if (m_ItemSlot)
+    if (m_ItemSlot != nullptr)
     {
         if ( (m_Lock == false) and (m_Pressed == false) )
         {
@@ -71,7 +71,7 @@ void ButtonItemSlot2::UpdateUnique(Player* player)
 /*virtual override final*/
 void ButtonItemSlot2::RenderUnique(Player*) const 
 {
-    if (m_ItemSlot)
+    if (m_ItemSlot != nullptr)
     {
         m_ItemSlot->Render(m_Box, Vec3<float>(0,0,0), false);
     }

@@ -1158,7 +1158,7 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 	{
 			if (cursor.GetMouseData().left_click == true)
 			{
-				gui_element->PressEvent(this);
+				gui_element->OnPressEventLMB(this);
 			}
 	}
 

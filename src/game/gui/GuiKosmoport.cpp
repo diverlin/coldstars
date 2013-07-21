@@ -327,7 +327,7 @@ void GuiKosmoport::ButtonsAction()
 	   		//{
 	   			//case GUI::BUTTON::ANGAR_ID: 
 	   			//{
-   				      	////button->PressEvent(player);   
+   				      	////button->OnPressEventLMB(player);   
                                         ////ExitCurrentScreen();
                                         ////EnterGuiAngarScreen();
                                         
@@ -336,7 +336,7 @@ void GuiKosmoport::ButtonsAction()
 
 	   			//case GUI::BUTTON::STORE_ID: 
 	   			//{
-   				      	////button->PressEvent(player);
+   				      	////button->OnPressEventLMB(player);
                                         ////ExitCurrentScreen();
                                         ////EnterGuiStoreScreen();
                                         
@@ -345,7 +345,7 @@ void GuiKosmoport::ButtonsAction()
 
 	   			//case GUI::BUTTON::SHOP_ID: 
 	   			//{
-   				      	////button->PressEvent(player);
+   				      	////button->OnPressEventLMB(player);
                                         ////ExitCurrentScreen();
                                         ////EnterGuiShopScreen();
                                         
@@ -354,7 +354,7 @@ void GuiKosmoport::ButtonsAction()
 
 	   			//case GUI::BUTTON::GALAXYMAP_ID: 
 	   			//{
-   				      	////button->PressEvent(player);
+   				      	////button->OnPressEventLMB(player);
                                         ////ExitCurrentScreen();                                                                                
                                         ////EnterGuiGalaxyMapScreen();
                                         
@@ -363,7 +363,7 @@ void GuiKosmoport::ButtonsAction()
 
 	   			//case GUI::BUTTON::GOVERMENT_ID: 
 	   			//{
-   				      	////button->PressEvent(player);
+   				      	////button->OnPressEventLMB(player);
                                         ////ExitCurrentScreen();
                                         ////EnterGuiGovermentScreen();
                                         

@@ -47,7 +47,7 @@ m_Vehicle(nullptr)
     /** WEAPON SLOTS */
     for (int i=0; i<weapon_slot_max; i++)
     {
-        ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(SLOT_WEAPON_TYPES[i]), "ENTITY::WEAPON_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(SLOT_WEAPON_TYPES[i]), "ENTITY::WEAPON_SLOT_ID");
         
         Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
         Box box(size); 
@@ -62,7 +62,7 @@ m_Vehicle(nullptr)
     
     /** EQUIPMENT SLOTS */
     {
-        ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(ENTITY::TYPE::RADAR_SLOT_ID), "ENTITY::RADAR_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(ENTITY::TYPE::RADAR_SLOT_ID), "ENTITY::RADAR_SLOT_ID");
         
         Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
         Box box(size);
@@ -75,7 +75,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(ENTITY::TYPE::SCANER_SLOT_ID), "ENTITY::SCANER_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(ENTITY::TYPE::SCANER_SLOT_ID), "ENTITY::SCANER_SLOT_ID");
         Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
         Box box(size);
         button->SetBox(box);
@@ -87,7 +87,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(ENTITY::TYPE::ENERGIZER_SLOT_ID), "ENTITY::ENERGIZER_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(ENTITY::TYPE::ENERGIZER_SLOT_ID), "ENTITY::ENERGIZER_SLOT_ID");
         Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
         Box box(size);
         button->SetBox(box);
@@ -99,7 +99,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(ENTITY::TYPE::GRAPPLE_SLOT_ID), "ENTITY::GRAPPLE_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(ENTITY::TYPE::GRAPPLE_SLOT_ID), "ENTITY::GRAPPLE_SLOT_ID");
         Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
         Box box(size);
         button->SetBox(box);
@@ -111,7 +111,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(ENTITY::TYPE::DROID_SLOT_ID), "ENTITY::DROID_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(ENTITY::TYPE::DROID_SLOT_ID), "ENTITY::DROID_SLOT_ID");
         Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
         Box box(size);
         button->SetBox(box);
@@ -135,7 +135,7 @@ m_Vehicle(nullptr)
     //}
         		
     {
-        ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(ENTITY::TYPE::PROTECTOR_SLOT_ID), "ENTITY::PROTECTOR_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(ENTITY::TYPE::PROTECTOR_SLOT_ID), "ENTITY::PROTECTOR_SLOT_ID");
         Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
         Box box(size);
         button->SetBox(box);
@@ -147,7 +147,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(ENTITY::TYPE::DRIVE_SLOT_ID), "ENTITY::DRIVE_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(ENTITY::TYPE::DRIVE_SLOT_ID), "ENTITY::DRIVE_SLOT_ID");
         Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
         Box box(size);
         button->SetBox(box);
@@ -159,7 +159,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(ENTITY::TYPE::BAK_SLOT_ID), "ENTITY::BAK_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(ENTITY::TYPE::BAK_SLOT_ID), "ENTITY::BAK_SLOT_ID");
         Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
         Box box(size);
         button->SetBox(box);
@@ -174,7 +174,7 @@ m_Vehicle(nullptr)
     for (int i=0; i<otsec_slot_max; i++)
     {
         float scale_size =1/1.5;
-        ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(SLOT_CARGO_TYPES[i]), "ENTITY::CARGO_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(SLOT_CARGO_TYPES[i]), "ENTITY::CARGO_SLOT_ID");
         
         Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, GUI::ITEMSLOT::HEIGHT_FOR_SHIP*scale_size, zsize);
         Box box(size);
@@ -191,7 +191,7 @@ m_Vehicle(nullptr)
         float scale_size = 1/2.0;
         for (int i=0; i<artefact_slot_max; i++)
         {
-            ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(SLOT_ARTEFACT_TYPES[i]), "ENTITY::ARTEFACT_SLOT_ID");
+            ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(SLOT_ARTEFACT_TYPES[i]), "ENTITY::ARTEFACT_SLOT_ID");
             Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, GUI::ITEMSLOT::HEIGHT_FOR_SHIP*scale_size, zsize);
             Box box(size);
             button->SetBox(box);
@@ -205,7 +205,7 @@ m_Vehicle(nullptr)
         
     /** GATE SLOT */
     {
-        ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(ENTITY::TYPE::GATE_SLOT_ID), "ENTITY::GATE_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(ENTITY::TYPE::GATE_SLOT_ID), "ENTITY::GATE_SLOT_ID");
         
         Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP/2, GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2, zsize);
         Box box(size);
@@ -272,13 +272,13 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
 {
     for (const auto itemslot : vehicle->slot_total_vec)
     { 
-        ENTITY::TYPE request = itemslot->GetSubTypeId();
-        if ((request == ENTITY::TYPE::WEAPON_SLOT_ID) or (request == ENTITY::TYPE::CARGO_SLOT_ID) or (request == ENTITY::TYPE::ARTEFACT_SLOT_ID))
+        ENTITY::TYPE request_type = itemslot->GetSubTypeId();
+        if ((request_type == ENTITY::TYPE::WEAPON_SLOT_ID) or (request_type == ENTITY::TYPE::CARGO_SLOT_ID) or (request_type == ENTITY::TYPE::ARTEFACT_SLOT_ID))
         {
-            request = itemslot->GetSubSubTypeId(); 
+            request_type = itemslot->GetSubSubTypeId(); 
         }         
     
-        BaseGuiElement* child = GetGuiElement(GUI::getEquivalent(request));
+        BaseGuiElement* child = GetGuiElement(GUI::getGuiItemSlotType(request_type));
         if (child)
         {
             child->Show();
@@ -409,7 +409,7 @@ void GuiVehicle::RenderVehicle(const MouseData& data_mouse, ENTITY::TYPE mark_sl
 		drawTexturedRect(m_TextureOb_korpus, rect_korpus, -1.0);
 		if (mark_slot_subtype_id != ENTITY::TYPE::NONE_ID)
 		{
-			RenderMarksForEmptySlots(data_mouse, GUI::getEquivalent(mark_slot_subtype_id));
+			RenderMarksForEmptySlots(data_mouse, GUI::getGuiItemSlotType(mark_slot_subtype_id));
 		}
 	}
     glPopMatrix();
@@ -426,7 +426,7 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, GUI::TYPE
             GUI::TYPE buton_subtype_id = button_itemslot->GetSubTypeId();
             for (ENTITY::TYPE type : SLOT_WEAPON_TYPES)
             {
-                if (buton_subtype_id == GUI::getEquivalent(type))
+                if (buton_subtype_id == GUI::getGuiItemSlotType(type))
                 {
                    buton_subtype_id = GUI::TYPE::WEAPON_SLOT_ID;
                    break;
@@ -434,7 +434,7 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, GUI::TYPE
             }
             for (ENTITY::TYPE type : SLOT_CARGO_TYPES)
             {
-                if (buton_subtype_id == GUI::getEquivalent(type))
+                if (buton_subtype_id == GUI::getGuiItemSlotType(type))
                 {
                    buton_subtype_id = GUI::TYPE::CARGO_SLOT_ID;
                    break;
@@ -442,7 +442,7 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, GUI::TYPE
             }
             for (ENTITY::TYPE type : SLOT_ARTEFACT_TYPES)
             {
-                if (buton_subtype_id == GUI::getEquivalent(type))
+                if (buton_subtype_id == GUI::getGuiItemSlotType(type))
                 {
                    buton_subtype_id = GUI::TYPE::ARTEFACT_SLOT_ID;
                    break;
@@ -474,7 +474,7 @@ void GuiVehicle::RenderUnique(Player* player) const
     {
         enable_BLEND();
         {
-            RenderMarksForEmptySlots(player->GetCursor().GetMouseData(), GUI::getEquivalent(player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId()));
+            RenderMarksForEmptySlots(player->GetCursor().GetMouseData(), GUI::getGuiItemSlotType(player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId()));
         }
         disable_BLEND();
     }

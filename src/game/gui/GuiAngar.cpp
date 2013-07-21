@@ -165,7 +165,7 @@ void GuiAngar::ButtonsAction() const
 	   			//{
 	   				//if (button->GetLock() == false)
 	   				//{  			
-						//button->PressEvent(player);
+						//button->OnPressEventLMB(player);
 						
 						//angar->RepairVehicle(player->GetNpc()->GetVehicle());
 						//return; 
@@ -178,7 +178,7 @@ void GuiAngar::ButtonsAction() const
 	   			//{
 	   				//if (button->GetLock() == false)
 	   				//{
-						//button->PressEvent(player);
+						//button->OnPressEventLMB(player);
 						
 						//angar->TankUpVehicle(player->GetNpc()->GetVehicle());
 						//return; 

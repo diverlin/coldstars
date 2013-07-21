@@ -29,7 +29,6 @@ std::string bool2str(bool);
 std::string getSpecialActionStr(int);
 std::string getAiModelStr(int);
 std::string getRaceStr(int); 
-std::string getNavigatorActionStr(int);
-std::string getEntityTypeStr(ENTITY::TYPE);
+std::string getNavigatorActionStr(int); 
 
 #endif

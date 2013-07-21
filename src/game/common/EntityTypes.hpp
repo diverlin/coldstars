@@ -20,6 +20,7 @@
 #define ENTITYTYPES_HPP
 
 #include <vector>
+#include <string>
 
 namespace ENTITY 
 {
@@ -152,6 +153,8 @@ ENTITY::TYPE::FREEZER_MODULE_ID,
 ENTITY::TYPE::GRAPPLE_MODULE_ID, 
 ENTITY::TYPE::SCANER_MODULE_ID
 };	
+
+std::string getEntityTypeStr(ENTITY::TYPE);
 
 #endif
 
