@@ -98,7 +98,7 @@ void Cursor::UpdateMouseStuff()
 
 void Cursor::Update()
 {
-     	rect.SetCenter(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y);     	
+    rect.SetCenter(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y);     	
 }
 
 bool Cursor::UpdateInSpace()
@@ -459,6 +459,7 @@ void Cursor::RenderFocusedObjectInfo()
 /* virtual override final */
 void Cursor::RenderUnique(Player* player) const
 {
-    //Box box(Vec3<float>(rect.GetCenter().x, rect.GetCenter().y, -1.0), Vec3<float>(100, 100, 0.0));
+    //Box box(Vec3<float>(rect.GetCenter().x, rect.GetCenter().y, -2.0), Vec3<float>(100, 100, 1.0));
+    //Box box(Vec3<float>(200, 200, -2.0), Vec3<float>(100, 100, 1.0));
     item_slot->RenderItem(rect, Vec3<float>(0,0,0));   
 }

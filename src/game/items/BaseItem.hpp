@@ -16,8 +16,8 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BASEITEM_H
-#define BASEITEM_H
+#ifndef BASEITEM_HPP
+#define BASEITEM_HPP
 
 #include "../common/BaseDrawable.hpp"
 #include "../text/InfoTable.hpp"

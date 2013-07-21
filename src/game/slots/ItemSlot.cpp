@@ -77,7 +77,7 @@ void ItemSlot::SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget)
 	this->subtarget = subtarget;
 
 	#if WEAPONSTARGET_LOG_ENABLED == 1 
-        Log("SetTarget");
+    Log("SetTarget");
 	#endif     
 }
         
@@ -95,12 +95,12 @@ bool ItemSlot::ValidateTarget()
 		}
 	}
 	
-        return CheckTarget(target);
+    return CheckTarget(target);
 }
 
 void ItemSlot::ResetTarget()
 { 
-       	#if WEAPONSTARGET_LOG_ENABLED == 1 
+    #if WEAPONSTARGET_LOG_ENABLED == 1 
 	Log("ResetTarget");
 	#endif   
 		
@@ -112,11 +112,11 @@ bool ItemSlot::CheckAmmo() const
 {
 	switch(GetItem()->GetSubTypeId())
 	{
-    		case ENTITY::TYPE::LAZER_EQUIPMENT_ID:  { /*if check energy */  return true; break; }
-    		case ENTITY::TYPE::ROCKET_EQUIPMENT_ID: { if (GetRocketEquipment()->GetAmmo() > 0) return true; break; }
+        case ENTITY::TYPE::LAZER_EQUIPMENT_ID:  { /*if check energy */  return true; break; }
+        case ENTITY::TYPE::ROCKET_EQUIPMENT_ID: { if (GetRocketEquipment()->GetAmmo() > 0) return true; break; }
 	}
 	
-    	return false;           
+    return false;           
 }
 
 void ItemSlot::FireEvent(float attack_rate, bool show_effect)
@@ -127,18 +127,17 @@ void ItemSlot::FireEvent(float attack_rate, bool show_effect)
 
 	switch(GetItem()->GetSubTypeId())
 	{
-    		case ENTITY::TYPE::LAZER_EQUIPMENT_ID:
-    		{   
-       			GetLazerEquipment()->FireEvent(GetTarget(), GetSubTarget(), attack_rate, show_effect); 
-       			break;  
-    		}
+        case ENTITY::TYPE::LAZER_EQUIPMENT_ID:
+        {   
+            GetLazerEquipment()->FireEvent(GetTarget(), GetSubTarget(), attack_rate, show_effect); 
+            break;  
+        }
 
-    		case ENTITY::TYPE::ROCKET_EQUIPMENT_ID:
-    		{       
-                	GetRocketEquipment()->FireEvent(attack_rate);
-                	break;              
-    		}
-
+        case ENTITY::TYPE::ROCKET_EQUIPMENT_ID:
+        {       
+            GetRocketEquipment()->FireEvent(attack_rate);
+            break;              
+        }
 	}
 
 	if (GetTarget()->GetAlive() == false)
@@ -191,9 +190,9 @@ bool ItemSlot::InsertItem(BaseItem* item)
 			item->GetItemSlot()->RemoveItem();
 		}
 		item->SetItemSlot(this);
-                UpdateVehiclePropetries(); 
+        UpdateVehiclePropetries(); 
 
-                return true;
+        return true;
 	}
 	
 	return false;
@@ -298,53 +297,53 @@ void ItemSlot::RenderMark(const Box& box, TextureOb* textureOb_mark) const
         
 int ItemSlot::GetItemRadius() const
 {       
-        switch(item->GetTypeId())
+    switch(item->GetTypeId())
+    {
+        case ENTITY::TYPE::EQUIPMENT_ID:
         {
-                case ENTITY::TYPE::EQUIPMENT_ID:
-                {
-                        switch (item->GetSubTypeId())
-                        {
-                                case ENTITY::TYPE::LAZER_EQUIPMENT_ID:   { return GetLazerEquipment()->GetRadius();  break; };
-                                case ENTITY::TYPE::ROCKET_EQUIPMENT_ID:  { return GetRocketEquipment()->GetRadius(); break; };
-		
-                                case ENTITY::TYPE::GRAPPLE_EQUIPMENT_ID: { return GetGrappleEquipment()->GetRadius(); break; };
-                                case ENTITY::TYPE::RADAR_EQUIPMENT_ID:   { return GetRadarEquipment()->GetRadius();   break; };
-                        }
-                        
-                        break;
-                }
-                
-                case ENTITY::TYPE::BOMB_ID:
-                {
-                        return GetBomb()->GetRadius();   break; 
-                }
+            switch (item->GetSubTypeId())
+            {
+                case ENTITY::TYPE::LAZER_EQUIPMENT_ID:   { return GetLazerEquipment()->GetRadius();  break; };
+                case ENTITY::TYPE::ROCKET_EQUIPMENT_ID:  { return GetRocketEquipment()->GetRadius(); break; };
+
+                case ENTITY::TYPE::GRAPPLE_EQUIPMENT_ID: { return GetGrappleEquipment()->GetRadius(); break; };
+                case ENTITY::TYPE::RADAR_EQUIPMENT_ID:   { return GetRadarEquipment()->GetRadius();   break; };
+            }
+            
+            break;
         }
         
-        return 0;
+        case ENTITY::TYPE::BOMB_ID:
+        {
+            return GetBomb()->GetRadius();   break; 
+        }
+    }
+    
+    return 0;
 }
 
 int ItemSlot::GetItemDamage() const
 {       
-        switch(item->GetTypeId())
+    switch(item->GetTypeId())
+    {
+        case ENTITY::TYPE::EQUIPMENT_ID:
         {
-                case ENTITY::TYPE::EQUIPMENT_ID:
-                {
-                        switch (item->GetSubTypeId())
-                        {
-                                case ENTITY::TYPE::LAZER_EQUIPMENT_ID:   { return GetLazerEquipment()->GetDamage();  break; };
-                                case ENTITY::TYPE::ROCKET_EQUIPMENT_ID:  { return GetRocketEquipment()->GetDamage(); break; };
-                        }
-                        
-                        break;
-                }
-                
-                case ENTITY::TYPE::BOMB_ID:
-                {
-                        return GetBomb()->GetDamage();   break; 
-                }
+            switch (item->GetSubTypeId())
+            {
+                case ENTITY::TYPE::LAZER_EQUIPMENT_ID:   { return GetLazerEquipment()->GetDamage();  break; };
+                case ENTITY::TYPE::ROCKET_EQUIPMENT_ID:  { return GetRocketEquipment()->GetDamage(); break; };
+            }
+            
+            break;
         }
-        
-        return 0;
+            
+        case ENTITY::TYPE::BOMB_ID:
+        {
+            return GetBomb()->GetDamage();   break; 
+        }
+    }
+    
+    return 0;
 }
 
 void ItemSlot::DropItemToSpace()
@@ -353,8 +352,8 @@ void ItemSlot::DropItemToSpace()
             
     switch (item->GetTypeId())
     {
-            case ENTITY::TYPE::BOMB_ID: { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BOMB_ID); break; }
-            default:      { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID); break; }
+        case ENTITY::TYPE::BOMB_ID: { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BOMB_ID); break; }
+        default:      { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID); break; }
     }
      
     Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, item);
@@ -370,16 +369,16 @@ void ItemSlot::DropItemToSpace()
        
 bool ItemSlot::SwapItem(ItemSlot* slot)
 {
-       	if ( (item == nullptr) and (slot->GetItem() != nullptr) )
-       	{      
-       		if (InsertItem(slot->GetItem()) == true) 
-       		{  			
-       			return true; 
-       		}             
+    if ( (item == nullptr) and (slot->GetItem() != nullptr) )
+    {      
+        if (InsertItem(slot->GetItem()) == true) 
+        {  			
+            return true; 
+        }             
 	}
 	
 	if ( (item != nullptr) and (slot->GetItem() == nullptr) )
-       	{ 
+    { 
 		if (slot->InsertItem(GetItem()) == true)
 		{			
 			return true; 
@@ -387,28 +386,28 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
 	}
 
 	if ( (item != nullptr) and (slot->GetItem() != nullptr) )
-       	{        
-       		if (item->GetTypeId() == slot->GetItem()->GetTypeId())
-       		{
-       			BaseItem* tmp_item = slot->GetItem();
-       			if ( (slot->CheckItemInsertion(item) == true) and (CheckItemInsertion(tmp_item) == true) )
-       			{       				
-       				slot->InsertItem(item);
-       				tmp_item->SetItemSlot(nullptr);
-       				InsertItem(tmp_item);
-       			
-       				return true;
-       			}
-       		
-       		}
+    {        
+        if (item->GetTypeId() == slot->GetItem()->GetTypeId())
+        {
+            BaseItem* tmp_item = slot->GetItem();
+            if ( (slot->CheckItemInsertion(item) == true) and (CheckItemInsertion(tmp_item) == true) )
+            {       				
+                slot->InsertItem(item);
+                tmp_item->SetItemSlot(nullptr);
+                InsertItem(tmp_item);
+            
+                return true;
+            }
+        
+        }
 
-       		if ( (item->GetTypeId() == ENTITY::TYPE::MODULE_ID) and (slot->GetItem()->GetTypeId() == ENTITY::TYPE::EQUIPMENT_ID) )
-       		{
-			if (((BaseEquipment*)slot->GetItem())->InsertModule((BaseModule*)item) == true)  
-			{	
-				return true;
-        		}
-       		}
+        if ( (item->GetTypeId() == ENTITY::TYPE::MODULE_ID) and (slot->GetItem()->GetTypeId() == ENTITY::TYPE::EQUIPMENT_ID) )
+        {
+            if (((BaseEquipment*)slot->GetItem())->InsertModule((BaseModule*)item) == true)  
+            {	
+                return true;
+            }
+        }
 
        		//if ( (item->GetTypeId() == ENTITY::EQUIPMENT_ID) and (slot->GetItem()->GetTypeId() == ENTITY::MODULE_ID) )
        		//{
@@ -427,12 +426,12 @@ void ItemSlot::UpdateRange(TextureOb* _texOb)
 	float radius = this->GetItemRadius();
 	int size = 6;
 	
-        range_visual.FillData(_texOb, radius, size);
+    range_visual.FillData(_texOb, radius, size);
 }
 
 void ItemSlot::DrawRange(const Vec3<float>& offset)
 { 
-    	range_visual.Draw(offset);
+    range_visual.Draw(offset);
 }
 
 bool ItemSlot::CheckSubTarget(ItemSlot* _subtarget) const
@@ -457,14 +456,14 @@ bool ItemSlot::CheckTarget(BaseSpaceEntity* _target) const
 	#endif     
 	
 	if (CheckTargetPure(_target) == true)
+    {
+        if (CheckDistanceToTarget(_target) == true)
         {
-                if (CheckDistanceToTarget(_target) == true)
-                {
-                        return true;
-                }
+            return true;
         }
+    }
         
-        return false;
+    return false;
 }
       
       
@@ -476,17 +475,17 @@ bool ItemSlot::CheckTargetPure(BaseSpaceEntity* _target) const
 	#endif     
 	
 	if (IsTargetAlive(_target) == true)
+    {
+        if (IsTargetInSpace(_target) == true)
         {
-        	if (IsTargetInSpace(_target) == true)
-        	{
-                	if (IsTargetInSameStarSystem(_target) == true)
-                        {
-                                return true;
-                        }
-                }
+            if (IsTargetInSameStarSystem(_target) == true)
+            {
+                return true;
+            }
         }
-        
-        return false;
+    }
+    
+    return false;
 }
           
 bool ItemSlot::IsTargetAlive(BaseSpaceEntity* _target) const
@@ -501,7 +500,7 @@ bool ItemSlot::IsTargetInSpace(BaseSpaceEntity* _target) const
 
 bool ItemSlot::IsTargetInSameStarSystem(BaseSpaceEntity* _target) const
 {
-        return (_target->GetStarSystem()->GetId() == ((Vehicle*)owner)->GetStarSystem()->GetId());
+    return (_target->GetStarSystem()->GetId() == ((Vehicle*)owner)->GetStarSystem()->GetId());
 }                
 
 bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* _target) const
@@ -511,13 +510,13 @@ bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* _target) const
 		return true;
 	}
 	
-        float dist = distanceBetween(GetOwnerVehicle()->GetCenter(), _target->GetCenter());                                               
-        if (dist < GetItemRadius())
-        {
-                return true;
-        }
+    float dist = distanceBetween(GetOwnerVehicle()->GetCenter(), _target->GetCenter());                                               
+    if (dist < GetItemRadius())
+    {
+            return true;
+    }
 
-       	return false;
+    return false;
 }
 
 /*virtual*/
@@ -550,12 +549,12 @@ void ItemSlot::SaveDataUniqueItemSlot(boost::property_tree::ptree& save_ptree, c
 	#if SAVELOAD_LOG_ENABLED == 1
 	Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::SaveDataUniqueItemSlot", SAVELOAD_LOG_DIP);
 	#endif
-	
-        if (target != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.target_id", target->GetId()); }
-        else                { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE_ID); }
 
-        if (subtarget != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", subtarget->GetId()); }
-        else          	       { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE_ID); }
+    if (target != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.target_id", target->GetId()); }
+    else                { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE_ID); }
+
+    if (subtarget != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", subtarget->GetId()); }
+    else          	       { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE_ID); }
 }
 
 void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_ptree)
@@ -564,8 +563,8 @@ void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_pt
 	Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::LoadDataUniqueItemSlot", SAVELOAD_LOG_DIP);
 	#endif
 	
-        unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id"); 
-        unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id"); 
+    unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id"); 
+    unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id"); 
 }
 
 void ItemSlot::ResolveDataUniqueItemSlot()
@@ -584,13 +583,13 @@ void ItemSlot::ResolveDataUniqueItemSlot()
 		subtarget = (ItemSlot*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.subtarget_id);
 	}
 
-        switch(owner->GetTypeId())
-        {
-	       case ENTITY::TYPE::VEHICLE_ID: 	{	((Vehicle*)owner)->AddItemSlot(this); break; }
-	       case ENTITY::TYPE::CONTAINER_ID:     	{	((Container*)owner)->BindItemSlot(this); break; }
-	       case ENTITY::TYPE::STORE_ID:         	{ 	((Store*)owner)->AddItemSlot(this); break; }
-	       case ENTITY::TYPE::ANGAR_ID:         	{ 	((Angar*)owner)->AddItemSlot(this); break; }
-	       //case ENTITY::TYPE::NATURELAND_ID:      { 	((NatureLand*)owner)->AddItemSlot(this); break; }
+    switch(owner->GetTypeId())
+    {
+       case ENTITY::TYPE::VEHICLE_ID: 	{	((Vehicle*)owner)->AddItemSlot(this); break; }
+       case ENTITY::TYPE::CONTAINER_ID:     	{	((Container*)owner)->BindItemSlot(this); break; }
+       case ENTITY::TYPE::STORE_ID:         	{ 	((Store*)owner)->AddItemSlot(this); break; }
+       case ENTITY::TYPE::ANGAR_ID:         	{ 	((Angar*)owner)->AddItemSlot(this); break; }
+       //case ENTITY::TYPE::NATURELAND_ID:      { 	((NatureLand*)owner)->AddItemSlot(this); break; }
 	}
 }
 

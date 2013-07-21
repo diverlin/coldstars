@@ -21,9 +21,12 @@
 #include <render/Render.hpp>
 #include <common/Logger.hpp>
 
+#include "../render/AnimationEffect2D.hpp"
+
 std::map<GUI::eTYPE, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
 
-BaseGuiElement::BaseGuiElement(GUI::eTYPE subtype_id, const std::string& info, TextureOb* textureOb, BaseGuiElement* parent):
+BaseGuiElement::BaseGuiElement(GUI::eTYPE subtype_id, const std::string& info, TextureOb* textureOb, BaseGuiElement* parent)
+:
 m_Subtype_id(subtype_id),
 m_Info(info),
 m_TextureOb(textureOb),
@@ -31,8 +34,11 @@ m_TextureOb(textureOb),
 m_Show(true),
 m_Root(true),
 m_Lock(false),
-m_Pressed(false)
+m_Pressed(false),
+m_Animation(nullptr)
 {
+	//m_Animation = new AnimationEffect2D(Vec3<float>(0.7, 0.7, 1.0), Vec3<float>(1.3, 1.3, 1.0), Vec3<float>(0.02, 0.02, 0.0), 0, 0, 0);
+    
 	m_Scale.Set(1.0, 1.0, 1.0);
 }
 
@@ -43,6 +49,8 @@ BaseGuiElement::~BaseGuiElement()
 	{
 		delete *it;
 	}
+    
+    delete m_Animation;
 }	
       	
 BaseGuiElement* BaseGuiElement::GetGuiElement(GUI::eTYPE request_subtype_id) const
@@ -176,6 +184,11 @@ void BaseGuiElement::UpdateCommon(Player* player)
 	{      
         child->Update(player);
 	}
+	
+    if (m_Animation)
+   	{    
+   		m_Animation->Update(m_Box);
+   	}
 }
 
 void BaseGuiElement::Render(Player* player) const

@@ -21,17 +21,21 @@
 #include "rect.hpp"
 
 Box::Box()
-{}
+{
+    scale.Set(1.0, 1.0, 1.0);
+}
 
 Box::Box(const Vec3<float>& size)
 {
 	SetSize(size);
+    scale.Set(1.0, 1.0, 1.0);
 }
 
 Box::Box(const Vec3<float>& center, const Vec3<float>& size)
 {
 	SetCenter(center);
 	SetSize(size);	
+    scale.Set(1.0, 1.0, 1.0);
 }
 
 Box::Box(const Box& rhs)
@@ -43,6 +47,7 @@ Box::Box(const Rect& rect)
 {
 	SetCenter(Vec3<float>(rect.GetCenter().x, rect.GetCenter().y, -1.0));
 	SetSize(Vec3<float>(rect.GetWidth(), rect.GetHeight(), 1.0));
+    scale.Set(1.0, 1.0, 1.0);
 }
 
 Box::~Box()
@@ -57,5 +62,6 @@ void Box::Set(const Box& box)
 {
 	SetCenter(box.GetCenter());
 	SetSize(box.GetSize());
+	SetScale(box.GetScale());
 }
 

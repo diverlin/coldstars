@@ -17,9 +17,9 @@
 */
 
 #include "AnimationEffect2D.hpp"
-#include "../common/rect.hpp"
+#include "../common/Box.hpp"
 
-void AnimationEffect2D::Update(Rect& rect)
+void AnimationEffect2D::Update(Box& box)
 {
 	if ((scale.x < scale_min.x) and (scale.y < scale_min.y))
 	{
@@ -39,12 +39,12 @@ void AnimationEffect2D::Update(Rect& rect)
 		scale -= d_scale;
 	}
 	
-	rect.Scale(scale);
+	box.SetScale(scale);
 }
 
 void AnimationEffect2D::Reset()
 {
-	scale.Set(1.0f, 1.0f);
+	scale.Set(1.0f, 1.0f, 1.0f);
 	angle = 0.0f;
 	scale_up = true;
 }

@@ -33,7 +33,7 @@
 BaseEquipment::BaseEquipment()
 {
     race_id         = RACE::R0_ID;
-    animation_notfunctioning = new AnimationEffect2D(Vec2<float>(0.8, 0.8), Vec2<float>(1.2, 1.2), Vec2<float>(0.02, 0.02), 0, 0, 0);
+    animation_notfunctioning = new AnimationEffect2D(Vec3<float>(0.8, 0.8, 1.0), Vec3<float>(1.2, 1.2, 1.0), Vec3<float>(0.02, 0.02, 0.0), 0, 0, 0);
 }
 
 /*virtual */
@@ -95,36 +95,36 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 /* virtual */
 void BaseEquipment::Render(const Box& box, const Vec2<float>& gui_offset, bool draw_text)
 {    	
-    	RenderKorpus(box);
-    
-    	for (unsigned int i=0; i<modules_vec.size(); i++)
-    	{
-        	Rect module_rect(box.GetCenter().x + (1.1 * GUI::INSERTED_MODULE_SIZE) * (i), 
-        		         box.GetCenter().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
-        			 GUI::INSERTED_MODULE_SIZE, 
-        			 GUI::INSERTED_MODULE_SIZE);
-        	drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1.0f);
-    	}
+    RenderKorpus(box);
+
+    for (unsigned int i=0; i<modules_vec.size(); i++)
+    {
+        Rect module_rect(box.GetCenter().x + (1.1 * GUI::INSERTED_MODULE_SIZE) * (i), 
+                     box.GetCenter().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
+                 GUI::INSERTED_MODULE_SIZE, 
+                 GUI::INSERTED_MODULE_SIZE);
+        drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1.0f);
+    }
     	
 	if (condition == 0)
 	{
-	    	drawQuad(GuiTextureObCollector::Instance().slot_mark_reject, box);
+        drawQuad(GuiTextureObCollector::Instance().slot_mark_reject, box);
 	}
 	if (GetLocked() == true)
 	{
 		int font_size = 12;	
 		drawQuad(GuiTextureObCollector::Instance().slot_mark_accept, box);
 
-    		Vec2<float> pos(box.GetCenter().x - font_size/2 + gui_offset.x, box.GetCenter().y - font_size + gui_offset.y);
-    		Screen::Instance().DrawText(int2str(locked_turns), font_size, pos);	
+        Vec2<float> pos(box.GetCenter().x - font_size/2 + gui_offset.x, box.GetCenter().y - font_size + gui_offset.y);
+        Screen::Instance().DrawText(int2str(locked_turns), font_size, pos);	
 	}
 
 	if (draw_text == true)
 	{
-    		if (GetSubTypeId() == ENTITY::TYPE::ROCKET_EQUIPMENT_ID)
-        	{
-        		Vec2<float> pos(box.GetCenter().x - box.GetSize().x/2 + gui_offset.x, box.GetCenter().y + gui_offset.y);
-        		Screen::Instance().DrawText(int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
+        if (GetSubTypeId() == ENTITY::TYPE::ROCKET_EQUIPMENT_ID)
+        {
+            Vec2<float> pos(box.GetCenter().x - box.GetSize().x/2 + gui_offset.x, box.GetCenter().y + gui_offset.y);
+            Screen::Instance().DrawText(int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
 		}
 	}
 }

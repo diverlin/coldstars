@@ -404,46 +404,82 @@ bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Stor
 void GuiVehicle::RenderVehicle(const MouseData& data_mouse, ENTITY::TYPE mark_slot_subtype_id) const
 {
 	glPushMatrix();
+    {
 		glTranslatef(GetOffset().x, GetOffset().y, 0);
 		drawTexturedRect(m_TextureOb_korpus, rect_korpus, -1.0);
 		if (mark_slot_subtype_id != ENTITY::TYPE::NONE_ID)
 		{
-			RenderMarksForEmptySlots(data_mouse, mark_slot_subtype_id);
-		}
-	glPopMatrix();
-}
-
-void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, ENTITY::TYPE mark_slot_subtype_id) const
-{
-/*
-	for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
-	{
-		if (gui_itemslot_vec[i].GetItemSlot()->GetItem() == nullptr) 
-		{
-			if ( (gui_itemslot_vec[i].GetItemSlot()->GetSubTypeId() != ENTITY::CARGO_SLOT_ID) and (gui_itemslot_vec[i].GetItemSlot()->GetSubTypeId() != ENTITY::GATE_SLOT_ID) )
-               		{
-               			if (mark_slot_subtype_id == gui_itemslot_vec[i].GetItemSlot()->GetSubTypeId())  
-               			{
-               				gui_itemslot_vec[i].GetItemSlot()->RenderMark(gui_itemslot_vec[i].GetBox(), GuiTextureObCollector::Instance().slot_mark_accept);
-               			}
-               			else
-               			{
-               				if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.pos_screencoord) == true)
-	               			{
-	               				gui_itemslot_vec[i].GetItemSlot()->RenderMark(gui_itemslot_vec[i].GetBox(), GuiTextureObCollector::Instance().slot_mark_reject);
-	               			}
-               			}
-               		}
+			RenderMarksForEmptySlots(data_mouse, GUI::getEquivalent(mark_slot_subtype_id));
 		}
 	}
-    */
+    glPopMatrix();
+}
+
+void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, GUI::eTYPE mark_slot_subtype_id) const
+{ 
+	for(auto &child : m_Child_vec)
+	{
+        //if (child->GetTypeId() == GUI::eTYPE::BUTTON_ITEMSLOT_ID)
+        ButtonItemSlot* button_itemslot = (ButtonItemSlot*)child;
+		if (button_itemslot->GetEquiped() == false) 
+		{
+            GUI::eTYPE buton_subtype_id = button_itemslot->GetSubTypeId();
+            for (ENTITY::TYPE type : SLOT_WEAPON_TYPES)
+            {
+                if (buton_subtype_id == GUI::getEquivalent(type))
+                {
+                   buton_subtype_id = GUI::eTYPE::WEAPON_SLOT_ID;
+                   break;
+                }
+            }
+            for (ENTITY::TYPE type : SLOT_CARGO_TYPES)
+            {
+                if (buton_subtype_id == GUI::getEquivalent(type))
+                {
+                   buton_subtype_id = GUI::eTYPE::CARGO_SLOT_ID;
+                   break;
+                }
+            }
+            for (ENTITY::TYPE type : SLOT_ARTEFACT_TYPES)
+            {
+                if (buton_subtype_id == GUI::getEquivalent(type))
+                {
+                   buton_subtype_id = GUI::eTYPE::ARTEFACT_SLOT_ID;
+                   break;
+                }
+            }
+                                
+			if (buton_subtype_id != GUI::eTYPE::GATE_SLOT_ID)
+            {            
+                if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == GUI::eTYPE::CARGO_SLOT_ID))  
+                {
+                    button_itemslot->RenderMark(button_itemslot->GetBox(), GuiTextureObCollector::Instance().slot_mark_accept);
+                }
+                else
+                {
+                    if (button_itemslot->GetBox().CheckInteraction(data_mouse.pos_screencoord) == true)
+                    {
+                        button_itemslot->RenderMark(button_itemslot->GetBox(), GuiTextureObCollector::Instance().slot_mark_reject);
+                    }
+                }
+            }
+		}
+	}
 }
 
 /*virtual override final*/
 void GuiVehicle::RenderUnique(Player* player) const
 {
+    if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
+    {
+        enable_BLEND();
+        {
+            RenderMarksForEmptySlots(player->GetCursor().GetMouseData(), GUI::getEquivalent(player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId()));
+        }
+        disable_BLEND();
+    }
+    
     player->GetCursor().Render(player);
-  
     //drawTexturedRect(m_TextureOb_korpus, rect_korpus, -1.0);
 
 	//RenderSlots();

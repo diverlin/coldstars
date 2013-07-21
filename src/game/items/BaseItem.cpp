@@ -57,21 +57,21 @@ void BaseItem::LockEvent(int locked_turns)
 		was_working = true;
 	}
 	
-        this->locked_turns += locked_turns;
-        if (was_working == true)
-        {
-        	item_slot->UpdateVehiclePropetries();        
+    this->locked_turns += locked_turns;
+    if (was_working == true)
+    {
+        item_slot->UpdateVehiclePropetries();        
 	}
 }
                 
 void BaseItem::UseNormalDeterioration()
 {
-        deterioration =  data_item.deterioration_normal;
+    deterioration =  data_item.deterioration_normal;
 }
                                 
 void BaseItem::UseOverloadDeterioration()
 {
-        deterioration = data_item.deterioration_normal * data_item.deterioration_overload_rate;
+    deterioration = data_item.deterioration_normal * data_item.deterioration_overload_rate;
 }
  
 void BaseItem::DamageEvent()
@@ -80,37 +80,37 @@ void BaseItem::DamageEvent()
 	Logger::Instance().Log("BaseItem::DamageEvent", ITEMINFLUENCE_LOG_DIP);
 	#endif
 
-        item_slot->UpdateVehiclePropetries();
+    item_slot->UpdateVehiclePropetries();
 }
                 
 void BaseItem::DeteriorationEvent()
 {
-        condition -= deterioration;
-        if (condition <= 0)
-    	{
-    	        condition = 0;
-        	DamageEvent();
+    condition -= deterioration;
+    if (condition <= 0)
+    {
+        condition = 0;
+        DamageEvent();
 	}
 }         
                 
 bool BaseItem::RepairEvent()
 {
-    	condition = data_item.condition_max;
-      	item_slot->UpdateVehiclePropetries();  
-        
-        return true;
+    condition = data_item.condition_max;
+    item_slot->UpdateVehiclePropetries();  
+    
+    return true;
 }
 
 void BaseItem::UpdateLock()
 {
-        if (locked_turns > 0)
+    if (locked_turns > 0)
+    {
+        locked_turns--; 
+        if (locked_turns == 0)
         {
-                locked_turns--; 
-                if (locked_turns == 0)
-                {
-                	item_slot->UpdateVehiclePropetries();
-                }
+            item_slot->UpdateVehiclePropetries();
         }
+    }
 }     
 
 void BaseItem::UpdateInfo()
@@ -118,7 +118,7 @@ void BaseItem::UpdateInfo()
 	info.clear();
 
 	AddUniqueInfo();
-    	AddCommonInfo();
+    AddCommonInfo();
 }
 
 void BaseItem::RenderInfo(const Vec2<float>& pos, float offset_x, float offset_y)
@@ -141,7 +141,8 @@ void BaseItem::RenderKorpus(const Box& box)
 {
 	if (Is3D())
 	{
-		disable_BLEND();
+		//disable_BLEND();
+        {
 			Vec3<float> v(0.0);
 			Color4<float> c(1.0, 1.0, 1.0, 1.0);
 			SetCenter(box.GetCenter());
@@ -149,7 +150,8 @@ void BaseItem::RenderKorpus(const Box& box)
 			UpdateRenderAnimation();
 			//SetScale(box.GetSize());
 			RenderMeshLight(v, c);
-		enable_BLEND();
+		}
+        //enable_BLEND();
 	}
 	else
 	{
@@ -163,18 +165,18 @@ void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, c
 	Logger::Instance().Log(" SaveDataUniqueBaseItem()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
 	#endif
 	
-        save_ptree.put(root+"price", price);
-        save_ptree.put(root+"condition", condition);
-        save_ptree.put(root+"locked_turns", locked_turns);
-        save_ptree.put(root+"race_id", race_id);
-        save_ptree.put(root+"parent_subtype_id", (int)parent_subtype_id);
+    save_ptree.put(root+"price", price);
+    save_ptree.put(root+"condition", condition);
+    save_ptree.put(root+"locked_turns", locked_turns);
+    save_ptree.put(root+"race_id", race_id);
+    save_ptree.put(root+"parent_subtype_id", (int)parent_subtype_id);
 
-        save_ptree.put(root+"data_item.tech_level",    data_item.tech_level);        
-        save_ptree.put(root+"data_item.modules_num_max",    data_item.modules_num_max);
-        save_ptree.put(root+"data_item.condition_max",      data_item.condition_max);                         
-        save_ptree.put(root+"data_item.deterioration_normal", data_item.deterioration_normal);   
-        save_ptree.put(root+"data_item.deterioration_overload_rate", data_item.deterioration_overload_rate);   
-        save_ptree.put(root+"data_item.mass",               data_item.mass);
+    save_ptree.put(root+"data_item.tech_level",    data_item.tech_level);        
+    save_ptree.put(root+"data_item.modules_num_max",    data_item.modules_num_max);
+    save_ptree.put(root+"data_item.condition_max",      data_item.condition_max);                         
+    save_ptree.put(root+"data_item.deterioration_normal", data_item.deterioration_normal);   
+    save_ptree.put(root+"data_item.deterioration_overload_rate", data_item.deterioration_overload_rate);   
+    save_ptree.put(root+"data_item.mass",               data_item.mass);
                     
 	if (textureOb) 	{ save_ptree.put(root+"unresolved.textureOb_path", textureOb->path); }
 	else            { save_ptree.put(root+"unresolved.textureOb_path", "none"); }
