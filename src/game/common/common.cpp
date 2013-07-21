@@ -24,62 +24,62 @@
 
 namespace GUI
 {
-    GUI::eTYPE getEquivalent(ENTITY::TYPE val)
+    GUI::TYPE getEquivalent(ENTITY::TYPE val)
     {
         switch(val)
         {
-            case ENTITY::TYPE::NONE_ID:     { return GUI::eTYPE::NONE_ID; break; }
+            case ENTITY::TYPE::NONE_ID:     { return GUI::TYPE::NONE_ID; break; }
             
-            case ENTITY::TYPE::CARGO_SLOT_ID:     { return GUI::eTYPE::CARGO_SLOT_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT1_ID:    { return GUI::eTYPE::CARGO_SLOT1_ID; break; }             
-            case ENTITY::TYPE::CARGO_SLOT2_ID:    { return GUI::eTYPE::CARGO_SLOT2_ID; break; }  
-            case ENTITY::TYPE::CARGO_SLOT3_ID:    { return GUI::eTYPE::CARGO_SLOT3_ID; break; }  
-            case ENTITY::TYPE::CARGO_SLOT4_ID:    { return GUI::eTYPE::CARGO_SLOT4_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT5_ID:    { return GUI::eTYPE::CARGO_SLOT5_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT6_ID:    { return GUI::eTYPE::CARGO_SLOT6_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT7_ID:    { return GUI::eTYPE::CARGO_SLOT7_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT8_ID:    { return GUI::eTYPE::CARGO_SLOT8_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT9_ID:    { return GUI::eTYPE::CARGO_SLOT9_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT10_ID:   { return GUI::eTYPE::CARGO_SLOT10_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT11_ID:   { return GUI::eTYPE::CARGO_SLOT11_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT12_ID:   { return GUI::eTYPE::CARGO_SLOT12_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT13_ID:   { return GUI::eTYPE::CARGO_SLOT13_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT14_ID:   { return GUI::eTYPE::CARGO_SLOT14_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT15_ID:   { return GUI::eTYPE::CARGO_SLOT15_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT16_ID:   { return GUI::eTYPE::CARGO_SLOT16_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT17_ID:   { return GUI::eTYPE::CARGO_SLOT17_ID; break; }
-            case ENTITY::TYPE::CARGO_SLOT18_ID:   { return GUI::eTYPE::CARGO_SLOT18_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT_ID:     { return GUI::TYPE::CARGO_SLOT_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT1_ID:    { return GUI::TYPE::CARGO_SLOT1_ID; break; }             
+            case ENTITY::TYPE::CARGO_SLOT2_ID:    { return GUI::TYPE::CARGO_SLOT2_ID; break; }  
+            case ENTITY::TYPE::CARGO_SLOT3_ID:    { return GUI::TYPE::CARGO_SLOT3_ID; break; }  
+            case ENTITY::TYPE::CARGO_SLOT4_ID:    { return GUI::TYPE::CARGO_SLOT4_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT5_ID:    { return GUI::TYPE::CARGO_SLOT5_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT6_ID:    { return GUI::TYPE::CARGO_SLOT6_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT7_ID:    { return GUI::TYPE::CARGO_SLOT7_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT8_ID:    { return GUI::TYPE::CARGO_SLOT8_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT9_ID:    { return GUI::TYPE::CARGO_SLOT9_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT10_ID:   { return GUI::TYPE::CARGO_SLOT10_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT11_ID:   { return GUI::TYPE::CARGO_SLOT11_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT12_ID:   { return GUI::TYPE::CARGO_SLOT12_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT13_ID:   { return GUI::TYPE::CARGO_SLOT13_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT14_ID:   { return GUI::TYPE::CARGO_SLOT14_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT15_ID:   { return GUI::TYPE::CARGO_SLOT15_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT16_ID:   { return GUI::TYPE::CARGO_SLOT16_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT17_ID:   { return GUI::TYPE::CARGO_SLOT17_ID; break; }
+            case ENTITY::TYPE::CARGO_SLOT18_ID:   { return GUI::TYPE::CARGO_SLOT18_ID; break; }
                                     
-            case ENTITY::TYPE::WEAPON_SLOT_ID:    { return GUI::eTYPE::WEAPON_SLOT_ID; break; }
-            case ENTITY::TYPE::WEAPON_SLOT1_ID:   { return GUI::eTYPE::WEAPON_SLOT1_ID; break; }
-            case ENTITY::TYPE::WEAPON_SLOT2_ID:   { return GUI::eTYPE::WEAPON_SLOT2_ID; break; }
-            case ENTITY::TYPE::WEAPON_SLOT3_ID:   { return GUI::eTYPE::WEAPON_SLOT3_ID; break; }
-            case ENTITY::TYPE::WEAPON_SLOT4_ID:   { return GUI::eTYPE::WEAPON_SLOT4_ID; break; }
-            case ENTITY::TYPE::WEAPON_SLOT5_ID:   { return GUI::eTYPE::WEAPON_SLOT5_ID; break; }
-            case ENTITY::TYPE::WEAPON_SLOT6_ID:   { return GUI::eTYPE::WEAPON_SLOT6_ID; break; }
-            case ENTITY::TYPE::WEAPON_SLOT7_ID:   { return GUI::eTYPE::WEAPON_SLOT7_ID; break; }
-            case ENTITY::TYPE::WEAPON_SLOT8_ID:   { return GUI::eTYPE::WEAPON_SLOT8_ID; break; }    
-            case ENTITY::TYPE::WEAPON_SLOT9_ID:   { return GUI::eTYPE::WEAPON_SLOT9_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT_ID:    { return GUI::TYPE::WEAPON_SLOT_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT1_ID:   { return GUI::TYPE::WEAPON_SLOT1_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT2_ID:   { return GUI::TYPE::WEAPON_SLOT2_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT3_ID:   { return GUI::TYPE::WEAPON_SLOT3_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT4_ID:   { return GUI::TYPE::WEAPON_SLOT4_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT5_ID:   { return GUI::TYPE::WEAPON_SLOT5_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT6_ID:   { return GUI::TYPE::WEAPON_SLOT6_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT7_ID:   { return GUI::TYPE::WEAPON_SLOT7_ID; break; }
+            case ENTITY::TYPE::WEAPON_SLOT8_ID:   { return GUI::TYPE::WEAPON_SLOT8_ID; break; }    
+            case ENTITY::TYPE::WEAPON_SLOT9_ID:   { return GUI::TYPE::WEAPON_SLOT9_ID; break; }
             
-            case ENTITY::TYPE::DRIVE_SLOT_ID:   { return GUI::eTYPE::DRIVE_SLOT_ID; break; }
-            case ENTITY::TYPE::RADAR_SLOT_ID:   { return GUI::eTYPE::RADAR_SLOT_ID; break; }
-            case ENTITY::TYPE::BAK_SLOT_ID:   { return GUI::eTYPE::BAK_SLOT_ID; break; }
-            case ENTITY::TYPE::ENERGIZER_SLOT_ID:   { return GUI::eTYPE::ENERGIZER_SLOT_ID; break; }
-            case ENTITY::TYPE::PROTECTOR_SLOT_ID:   { return GUI::eTYPE::PROTECTOR_SLOT_ID; break; }
-            case ENTITY::TYPE::DROID_SLOT_ID:   { return GUI::eTYPE::DROID_SLOT_ID; break; }
-            case ENTITY::TYPE::FREEZER_SLOT_ID:   { return GUI::eTYPE::FREEZER_SLOT_ID; break; }
-            case ENTITY::TYPE::GRAPPLE_SLOT_ID:   { return GUI::eTYPE::GRAPPLE_SLOT_ID; break; }
-            case ENTITY::TYPE::SCANER_SLOT_ID:   { return GUI::eTYPE::SCANER_SLOT_ID; break; }
+            case ENTITY::TYPE::DRIVE_SLOT_ID:   { return GUI::TYPE::DRIVE_SLOT_ID; break; }
+            case ENTITY::TYPE::RADAR_SLOT_ID:   { return GUI::TYPE::RADAR_SLOT_ID; break; }
+            case ENTITY::TYPE::BAK_SLOT_ID:   { return GUI::TYPE::BAK_SLOT_ID; break; }
+            case ENTITY::TYPE::ENERGIZER_SLOT_ID:   { return GUI::TYPE::ENERGIZER_SLOT_ID; break; }
+            case ENTITY::TYPE::PROTECTOR_SLOT_ID:   { return GUI::TYPE::PROTECTOR_SLOT_ID; break; }
+            case ENTITY::TYPE::DROID_SLOT_ID:   { return GUI::TYPE::DROID_SLOT_ID; break; }
+            case ENTITY::TYPE::FREEZER_SLOT_ID:   { return GUI::TYPE::FREEZER_SLOT_ID; break; }
+            case ENTITY::TYPE::GRAPPLE_SLOT_ID:   { return GUI::TYPE::GRAPPLE_SLOT_ID; break; }
+            case ENTITY::TYPE::SCANER_SLOT_ID:   { return GUI::TYPE::SCANER_SLOT_ID; break; }
 
-            case ENTITY::TYPE::ARTEFACT_SLOT_ID:   { return GUI::eTYPE::ARTEFACT_SLOT_ID; break; }
-            case ENTITY::TYPE::ARTEFACT_SLOT1_ID:  { return GUI::eTYPE::ARTEFACT_SLOT1_ID; break; }
-            case ENTITY::TYPE::ARTEFACT_SLOT2_ID:  { return GUI::eTYPE::ARTEFACT_SLOT2_ID; break; }
-            case ENTITY::TYPE::ARTEFACT_SLOT3_ID:  { return GUI::eTYPE::ARTEFACT_SLOT3_ID; break; }
-            case ENTITY::TYPE::ARTEFACT_SLOT4_ID:  { return GUI::eTYPE::ARTEFACT_SLOT4_ID; break; }
+            case ENTITY::TYPE::ARTEFACT_SLOT_ID:   { return GUI::TYPE::ARTEFACT_SLOT_ID; break; }
+            case ENTITY::TYPE::ARTEFACT_SLOT1_ID:  { return GUI::TYPE::ARTEFACT_SLOT1_ID; break; }
+            case ENTITY::TYPE::ARTEFACT_SLOT2_ID:  { return GUI::TYPE::ARTEFACT_SLOT2_ID; break; }
+            case ENTITY::TYPE::ARTEFACT_SLOT3_ID:  { return GUI::TYPE::ARTEFACT_SLOT3_ID; break; }
+            case ENTITY::TYPE::ARTEFACT_SLOT4_ID:  { return GUI::TYPE::ARTEFACT_SLOT4_ID; break; }
                                                 
-            case ENTITY::TYPE::GATE_SLOT_ID:   { return GUI::eTYPE::GATE_SLOT_ID; break; }
-            //case ENTITY::TYPE::REPAIR_SLOT_ID:   { return GUI::eTYPE::REPAIR_SLOT_ID; break; }
-            //case ENTITY::TYPE::CHARGE_SLOT_ID:   { return GUI::eTYPE::CHARGE_SLOT_ID; break; }                        
+            case ENTITY::TYPE::GATE_SLOT_ID:   { return GUI::TYPE::GATE_SLOT_ID; break; }
+            //case ENTITY::TYPE::REPAIR_SLOT_ID:   { return GUI::TYPE::REPAIR_SLOT_ID; break; }
+            //case ENTITY::TYPE::CHARGE_SLOT_ID:   { return GUI::TYPE::CHARGE_SLOT_ID; break; }                        
         }
     }
 }

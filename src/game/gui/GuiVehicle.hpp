@@ -28,7 +28,7 @@ class Vehicle;
 class GuiVehicle : public BaseGuiElement
 {
     public:
-        GuiVehicle(GUI::eTYPE);
+        GuiVehicle(GUI::TYPE);
         virtual ~GuiVehicle();
         
         Vehicle* GetVehicle() const { return m_Vehicle; };
@@ -54,7 +54,7 @@ class GuiVehicle : public BaseGuiElement
             
         Vehicle* m_Vehicle;
             
-        void RenderMarksForEmptySlots(const MouseData&, GUI::eTYPE) const;  
+        void RenderMarksForEmptySlots(const MouseData&, GUI::TYPE) const;  
         
         void CreateKorpusGui(Vehicle*, float);
         void CreateItemSlotsGeometry(Vehicle*, float);

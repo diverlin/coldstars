@@ -31,7 +31,7 @@
 #include "../spaceobjects/Vehicle.hpp"
 #include "ButtonItemSlot.hpp"
          
-GuiVehicle::GuiVehicle(GUI::eTYPE subtype_id)
+GuiVehicle::GuiVehicle(GUI::TYPE subtype_id)
 :
 BaseGuiElement(subtype_id),
 m_TextureOb_korpus(nullptr),
@@ -415,20 +415,20 @@ void GuiVehicle::RenderVehicle(const MouseData& data_mouse, ENTITY::TYPE mark_sl
     glPopMatrix();
 }
 
-void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, GUI::eTYPE mark_slot_subtype_id) const
+void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, GUI::TYPE mark_slot_subtype_id) const
 { 
 	for(auto &child : m_Child_vec)
 	{
-        //if (child->GetTypeId() == GUI::eTYPE::BUTTON_ITEMSLOT_ID)
+        //if (child->GetTypeId() == GUI::TYPE::BUTTON_ITEMSLOT_ID)
         ButtonItemSlot* button_itemslot = (ButtonItemSlot*)child;
 		if (button_itemslot->GetEquiped() == false) 
 		{
-            GUI::eTYPE buton_subtype_id = button_itemslot->GetSubTypeId();
+            GUI::TYPE buton_subtype_id = button_itemslot->GetSubTypeId();
             for (ENTITY::TYPE type : SLOT_WEAPON_TYPES)
             {
                 if (buton_subtype_id == GUI::getEquivalent(type))
                 {
-                   buton_subtype_id = GUI::eTYPE::WEAPON_SLOT_ID;
+                   buton_subtype_id = GUI::TYPE::WEAPON_SLOT_ID;
                    break;
                 }
             }
@@ -436,7 +436,7 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, GUI::eTYP
             {
                 if (buton_subtype_id == GUI::getEquivalent(type))
                 {
-                   buton_subtype_id = GUI::eTYPE::CARGO_SLOT_ID;
+                   buton_subtype_id = GUI::TYPE::CARGO_SLOT_ID;
                    break;
                 }
             }
@@ -444,14 +444,14 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, GUI::eTYP
             {
                 if (buton_subtype_id == GUI::getEquivalent(type))
                 {
-                   buton_subtype_id = GUI::eTYPE::ARTEFACT_SLOT_ID;
+                   buton_subtype_id = GUI::TYPE::ARTEFACT_SLOT_ID;
                    break;
                 }
             }
                                 
-			if (buton_subtype_id != GUI::eTYPE::GATE_SLOT_ID)
+			if (buton_subtype_id != GUI::TYPE::GATE_SLOT_ID)
             {            
-                if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == GUI::eTYPE::CARGO_SLOT_ID))  
+                if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == GUI::TYPE::CARGO_SLOT_ID))  
                 {
                     button_itemslot->RenderMark(button_itemslot->GetBox(), GuiTextureObCollector::Instance().slot_mark_accept);
                 }

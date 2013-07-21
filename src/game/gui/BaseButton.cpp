@@ -24,7 +24,7 @@
 #include "../render/Screen.hpp"
 
 
-BaseButton::BaseButton(GUI::eTYPE subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb)
+BaseButton::BaseButton(GUI::TYPE subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb)
 :
 BaseGuiElement(subtype_id, info, textureOb)
 {
