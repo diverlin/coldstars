@@ -69,6 +69,15 @@ class Vec3
 			return *this;
 		}
 
+		const Vec3<VARTYPE>& operator-=(const Vec3<VARTYPE>& rhs)
+		{
+			x -= rhs.x;
+			y -= rhs.y;
+			z -= rhs.z;	
+			
+			return *this;
+		}
+        
 		const Vec3<VARTYPE>& operator*=(const Vec3<VARTYPE>& rhs)
 		{
 			x *= rhs.x;

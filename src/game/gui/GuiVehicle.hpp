@@ -52,10 +52,9 @@ class GuiVehicle : public BaseGuiElement
         Rect rect_korpus; 
         TextureOb* m_TextureOb_korpus;
             
-        //ItemSlot* gate_slot;
         Vehicle* m_Vehicle;
             
-        void RenderMarksForEmptySlots(const MouseData&, ENTITY::TYPE) const;  
+        void RenderMarksForEmptySlots(const MouseData&, GUI::eTYPE) const;  
         
         void CreateKorpusGui(Vehicle*, float);
         void CreateItemSlotsGeometry(Vehicle*, float);

@@ -47,8 +47,6 @@ class BaseButton : public BaseGuiElement
 			TextureOb* m_TextureOb_additional;
 			TextureOb* m_TextureOb_mask;
        		
-       		AnimationEffect2D* m_Animation_scale;
-       		
        		void (*m_pAction)(Player*);
        		 
      		void FullShadeOn();

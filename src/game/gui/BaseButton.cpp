@@ -22,7 +22,7 @@
 #include "../common/Collision.hpp"
 #include "../render/Render.hpp"
 #include "../render/Screen.hpp"
-#include "../render/AnimationEffect2D.hpp"
+
 
 BaseButton::BaseButton(GUI::eTYPE subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb)
 :
@@ -33,15 +33,11 @@ BaseGuiElement(subtype_id, info, textureOb)
 		
 	m_Alpha = 1.0f;
 	
-	m_Animation_scale = new AnimationEffect2D(Vec2<float>(0.7, 0.7), Vec2<float>(1.3, 1.3), Vec2<float>(0.02, 0.02), 0, 0, 0);
-	
 	m_pAction = pAction;
 }
 
 BaseButton::~BaseButton()
-{
-	delete m_Animation_scale;
-}
+{}
 
 /* virtual override */
 void BaseButton::ResetState()
@@ -81,18 +77,17 @@ void BaseButton::ShadeOff()
 /* virtual override */   		    
 void BaseButton::RenderInfo() const
 {
-	Vec2<float> pos(m_Box.GetCenter().x, m_Box.GetCenter().y);
-	drawSimpleColoredTextWithBackground(m_Info, 12, pos, Color4<int>(255, 255, 255, 255));
+    enable_BLEND();
+    {
+	    Vec2<float> pos(m_Box.GetCenter().x, m_Box.GetCenter().y);
+	    drawSimpleColoredTextWithBackground(m_Info, 12, pos, Color4<int>(255, 255, 255, 255));
+    }
+    disable_BLEND();
 }
 
 /* virtual override */
 void BaseButton::RenderUnique(Player*) const
-{
-	//if (textureOb_mask != nullptr)
-   	//{
-   		//animation_scale->Update(rect1);
-   	//}
-   	
+{  	
 	setColor4f(1.0f, 1.0f, 1.0f, m_Alpha);
 
     if (m_TextureOb)

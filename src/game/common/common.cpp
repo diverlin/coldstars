@@ -28,6 +28,8 @@ namespace GUI
     {
         switch(val)
         {
+            case ENTITY::TYPE::NONE_ID:     { return GUI::eTYPE::NONE_ID; break; }
+            
             case ENTITY::TYPE::CARGO_SLOT_ID:     { return GUI::eTYPE::CARGO_SLOT_ID; break; }
             case ENTITY::TYPE::CARGO_SLOT1_ID:    { return GUI::eTYPE::CARGO_SLOT1_ID; break; }             
             case ENTITY::TYPE::CARGO_SLOT2_ID:    { return GUI::eTYPE::CARGO_SLOT2_ID; break; }  

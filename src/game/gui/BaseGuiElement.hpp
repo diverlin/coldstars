@@ -24,6 +24,7 @@
 #include <vector>
 
 class Player;
+class AnimationEffect2D;
 #include <common/Box.hpp> // to be removed
 #include <common/rect.hpp> // to be removed
 #include <resources/TextureManager.hpp>
@@ -115,6 +116,8 @@ class BaseGuiElement
 		Vec3<float> m_Offset;
 		Vec3<float> m_Scale;
 		
+        AnimationEffect2D* m_Animation;
+        
 		static std::map<GUI::eTYPE, BaseGuiElement*> static_gui_element_map;
 		
 	friend class GuiManager;

@@ -16,8 +16,8 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef QUAD_H
-#define QUAD_H
+#ifndef BOX_HPP
+#define BOX_HPP
 
 #include "../math/Vec2.hpp"
 #include "../math/Vec3.hpp"
@@ -32,7 +32,7 @@ class Box
 		Box(const Vec3<float>&);
 		Box(const Vec3<float>&, const Vec3<float>&);
 		Box(const Box&);
-		Box(const Rect&); // tmp hack
+		Box(const Rect&); // depr
 		~Box();
 		
 		void Set(const Box&);

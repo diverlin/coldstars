@@ -111,7 +111,7 @@ void drawQuad(TextureOb* texOb,
 
 void drawQuad(TextureOb* texOb, const Box& box)
 {
-	drawQuad(texOb, box.GetCenter(), box.GetSize(), box.GetAngle().z);
+	drawQuad(texOb, box.GetCenter(), box.GetSize()*box.GetScale(), box.GetAngle().z);
 }
 
 
