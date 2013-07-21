@@ -25,6 +25,9 @@
 
 class Player;
 class AnimationEffect2D;
+
+#include <common/GuiTypes.hpp>
+
 #include <common/Box.hpp> // to be removed
 #include <common/rect.hpp> // to be removed
 #include <resources/TextureManager.hpp>
@@ -75,7 +78,7 @@ class BaseGuiElement
 		void Show() { m_Show = true; }
 		void Hide() { m_Show = false; }
 								
-		virtual void PressEvent(Player*) {}
+		virtual void OnPressEventLMB(Player*) {}
 		virtual void ResetState();
 
 		void Update(Player*);

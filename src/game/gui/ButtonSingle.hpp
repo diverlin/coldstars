@@ -28,7 +28,7 @@ class ButtonSingle : public BaseButton
 			   
 		virtual ~ButtonSingle() {};  
 
-		virtual void PressEvent(Player*) override final;
+		virtual void OnPressEventLMB(Player*) override final;
 		virtual void UpdateUnique(Player*) override final;
         
 	private:

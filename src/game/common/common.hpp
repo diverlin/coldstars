@@ -25,7 +25,8 @@
 
 namespace GUI
 {
-    GUI::TYPE getEquivalent(ENTITY::TYPE);
+    GUI::TYPE getGuiItemSlotType(ENTITY::TYPE);
+    GUI::TYPE getGuiItemSlotSelectorType(ENTITY::TYPE);
 }
        
 int getObjectSize(int w, int h); 

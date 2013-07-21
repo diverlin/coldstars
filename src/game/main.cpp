@@ -88,11 +88,11 @@ int main()
 	
 	/** */
 	//ButtonTrigger* button = new ButtonTrigger(/*subtype_id=*/1, /*info*/"info", /*pAction=*/GuiActions::Test, /*textureOb*/NULL);
-	//button->PressEvent(player);
-	//button->PressEvent(player);
+	//button->OnPressEventLMB(player);
+	//button->OnPressEventLMB(player);
 
 	//ButtonTrigger* button2 = new ButtonTrigger(/*subtype_id=*/2, /*info*/"info", /*pAction=*/GuiActions::Test2, /*textureOb*/NULL);
-	//button2->PressEvent(player);
+	//button2->OnPressEventLMB(player);
 	
 	////GuiActions::GalaxyMapGuiTransition(player);
 	////player->GetGuiManager().EnterGuiSpace();

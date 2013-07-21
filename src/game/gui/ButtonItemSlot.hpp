@@ -37,7 +37,7 @@ class ButtonItemSlot : public BaseButton
         
         void SetItemSlot(ItemSlot* itemslot) { m_ItemSlot = itemslot; }
 
-        virtual void PressEvent(Player*) override final;
+        virtual void OnPressEventLMB(Player*) override final;
         
         virtual void RenderInfo() const override final;  
         virtual void RenderUnique(Player*) const override final;

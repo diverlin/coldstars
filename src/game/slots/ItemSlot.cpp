@@ -387,11 +387,11 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
 
 	if ( (item != nullptr) and (slot->GetItem() != nullptr) )
     {        
-        if (item->GetTypeId() == slot->GetItem()->GetTypeId())
+        //if (item->GetTypeId() == slot->GetItem()->GetTypeId())
         {
             BaseItem* tmp_item = slot->GetItem();
             if ( (slot->CheckItemInsertion(item) == true) and (CheckItemInsertion(tmp_item) == true) )
-            {   std::cout<<"111"<<std::endl;    				
+            {  				
                 slot->InsertItem(item);
                 tmp_item->SetItemSlot(nullptr);
                 InsertItem(tmp_item);

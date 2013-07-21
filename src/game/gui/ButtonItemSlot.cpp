@@ -37,7 +37,7 @@ bool ButtonItemSlot::GetEquiped() const
 }
            
 /* virtual override final */
-void ButtonItemSlot::PressEvent(Player* player)
+void ButtonItemSlot::OnPressEventLMB(Player* player)
 {
     //if (m_ItemSlot)
     //{    
