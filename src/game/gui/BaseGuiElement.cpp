@@ -35,10 +35,8 @@ m_Show(true),
 m_Root(true),
 m_Lock(false),
 m_Pressed(false),
-m_Animation(nullptr)
+m_AnimationProgram(nullptr)
 {
-	//m_Animation = new AnimationEffect2D(Vec3<float>(0.7, 0.7, 1.0), Vec3<float>(1.3, 1.3, 1.0), Vec3<float>(0.02, 0.02, 0.0), 0, 0, 0);
-    
 	m_Scale.Set(1.0, 1.0, 1.0);
 }
 
@@ -50,8 +48,18 @@ BaseGuiElement::~BaseGuiElement()
 		delete *it;
 	}
     
-    delete m_Animation;
+    delete m_AnimationProgram;
 }	
+ 
+void BaseGuiElement::DeleteAnimationProgram()
+{
+    if (m_AnimationProgram != nullptr)
+    {
+        delete m_AnimationProgram;
+        m_AnimationProgram = nullptr;
+    }
+}
+
       	
 BaseGuiElement* BaseGuiElement::GetGuiElement(GUI::TYPE request_subtype_id) const
 {
@@ -188,9 +196,9 @@ void BaseGuiElement::UpdateCommon(Player* player)
         child->Update(player);
 	}
 	
-    if (m_Animation)
+    if (m_AnimationProgram != nullptr)
    	{    
-   		m_Animation->Update(m_Box);
+   		m_AnimationProgram->Update(m_Box);
    	}
 }
 

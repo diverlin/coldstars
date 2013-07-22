@@ -19,17 +19,17 @@
 #ifndef BUTTONITEMSLOT2_HPP
 #define BUTTONITEMSLOT2_HPP
 
-#include "BaseButton.hpp"
-class ItemSlot;
+#include "BaseButtonItemSlot.hpp"
 
-class ButtonItemSlot2 : public BaseButton
+class ButtonItemSlot2 : public BaseButtonItemSlot
 {
 	public:
         ButtonItemSlot2(GUI::TYPE subtype_id, const std::string& info, ItemSlot* itemslot)
         :
-        BaseButton(subtype_id, info), 
-        m_ItemSlot(itemslot) 
-        {}
+        BaseButtonItemSlot(subtype_id, info) 
+        {
+            m_ItemSlot = itemslot;
+        }
                
         virtual ~ButtonItemSlot2() override final {};  
 
@@ -39,7 +39,7 @@ class ButtonItemSlot2 : public BaseButton
         virtual void RenderUnique(Player*) const override final; 
         
 	private:
-        ItemSlot* m_ItemSlot;
+
 };
 
 #endif

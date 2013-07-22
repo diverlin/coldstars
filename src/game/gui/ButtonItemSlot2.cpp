@@ -22,7 +22,6 @@
 /*virtual override final*/
 void ButtonItemSlot2::OnPressEventLMB(Player* player)
 {
-    std::cout<<     "OnPressEventLMB"<<std::endl;
     if (m_ItemSlot != nullptr)
     {        
         if (GetPressed() == true)
@@ -59,11 +58,27 @@ void ButtonItemSlot2::OnPressEventLMB(Player* player)
 /*virtual override final*/	
 void ButtonItemSlot2::UpdateUnique(Player* player)
 {
-    if (m_ItemSlot != nullptr)
+    UpdateAnimationProgram();
+
+    if (IsAnimationProgramActive() == false)
     {
-        if ( (m_Lock == false) and (m_Pressed == false) )
+        if (m_ItemSlot != nullptr)
         {
-            m_Alpha < 1.0f ? m_Alpha += 0.01f : m_Alpha = 1.0f;
+            if (m_Pressed == true)
+            {
+                m_Box.SetScale(1.5, 1.5, 1.0);
+            }
+            else
+            {
+                m_Box.SetScale(1.0, 1.0, 1.0);        
+            }
+        }
+    }
+    else
+    {
+        if (m_Pressed == true)
+        {
+            ResetState();
         }
     }
 }

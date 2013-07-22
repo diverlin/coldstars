@@ -74,26 +74,26 @@ void GuiManager::SetPlayer(Player* player)
 
 bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mouse)
 {
-	bool interaction = gui_vehicle_scan->UpdateMouseInteraction(data_mouse);        
-	if ( (interaction == true) and (gui_vehicle_scan->GetAllowFullControl() == true) )
-	{
-		interaction = gui_skills->UpdateMouseInteraction(data_mouse.pos_screencoord);
-		gui_skills->ButtonsAction(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());
-	}
+	//bool interaction = gui_vehicle_scan->UpdateMouseInteraction(data_mouse);        
+	//if ( (interaction == true) and (gui_vehicle_scan->GetAllowFullControl() == true) )
+	//{
+		//interaction = gui_skills->UpdateMouseInteraction(data_mouse.pos_screencoord);
+		//gui_skills->ButtonsAction(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());
+	//}
 
-	return interaction;
+	//return interaction;
 }
 
 void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill) const
 {	
 	if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
 	{
-        gui_vehicle_scan->RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId());
-		player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), Vec2<float>(0, 0));		
+        //gui_vehicle_scan->RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId());
+		//player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), Vec2<float>(0, 0));		
 	}
 	else
 	{
-		gui_vehicle_scan->RenderVehicle(data_mouse);
+		//gui_vehicle_scan->RenderVehicle(data_mouse);
 	}
 					
 	if ( (show_skill == true) and (gui_vehicle_scan->GetVehicle()->GetOwnerNpc() != nullptr) )

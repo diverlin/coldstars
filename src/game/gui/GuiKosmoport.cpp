@@ -416,7 +416,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 				interaction = gui_store.UpdateMouseInteraction(data_mouse);
 			    	if (interaction == false)
 			    	{
-			    		interaction = gui_vehicle_scan_shared->UpdateMouseInteractionInStore(data_mouse, gui_store.GetStore());
+			    		//interaction = gui_vehicle_scan_shared->UpdateMouseInteractionInStore(data_mouse, gui_store.GetStore());
 			    	}
 			}
 
