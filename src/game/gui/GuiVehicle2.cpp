@@ -27,6 +27,14 @@
 #include "../pilots/Npc.hpp"
 
 
+GuiVehicle2::GuiVehicle2(GUI::TYPE subtype_id)
+:
+BaseGuiElement(subtype_id), 
+m_Vehicle(nullptr) 
+{
+
+}        
+
 void GuiVehicle2::Reset()
 {
 	for (unsigned int i=0; i<m_Child_vec.size(); i++)
@@ -83,11 +91,11 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
 void GuiVehicle2::UpdateUnique(Player* player)
 {
     bool need_update = false;
-    if (m_Vehicle)        
+    if (m_Vehicle != nullptr)        
     {
         if (m_Vehicle != player->GetNpc()->GetVehicle())
         {
-                need_update = true;
+            need_update = true;
         }
     }
     else

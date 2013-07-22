@@ -50,8 +50,7 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
                     {
                         SetAnimationProgram(new AnimationEffect2D(Vec3<float>(0.7, 0.7, 1.0), Vec3<float>(1.3, 1.3, 1.0), Vec3<float>(0.02, 0.02, 0.0), 0, 0, 0));
                         return;
-                    }
-                    
+                    }                    
                 } 
                 else
                 {
