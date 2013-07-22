@@ -21,20 +21,9 @@
 #include <slots/ItemSlot.hpp>
 #include <pilots/Player.hpp>
 #include <items/BaseItem.hpp>
+
+#include <render/AnimationEffect2D.hpp> 
     
-    
-bool ButtonItemSlot::GetEquiped() const
-{
-    if (m_ItemSlot != nullptr)
-    {
-        if (m_ItemSlot->GetItem() != nullptr)
-        {
-            return true;
-        }
-    } 
-    
-    return false;
-}
            
 /* virtual override final */
 void ButtonItemSlot::OnPressEventLMB(Player* player)
@@ -58,6 +47,12 @@ void ButtonItemSlot::OnPressEventLMB(Player* player)
 }
 
 /* virtual override final */
+void ButtonItemSlot::UpdateUnique(Player* player)
+{
+    UpdateAnimationProgram();
+}
+
+/* virtual override final */
 void ButtonItemSlot::RenderUnique(Player*) const 
 {
     m_ItemSlot->Render(m_Box, Vec3<float>(0,0,0), true);
@@ -72,13 +67,5 @@ void ButtonItemSlot::RenderInfo() const
         {
             m_ItemSlot->GetItem()->RenderInfo(Vec2<float>(m_Box.GetCenter().x, m_Box.GetCenter().y)); 
         }
-    }
-}
-
-void ButtonItemSlot::RenderMark(const Box& box, TextureOb* textureOb) const
-{
-    if (m_ItemSlot != nullptr)
-    {
-        m_ItemSlot->RenderMark(box, textureOb);
     }
 }

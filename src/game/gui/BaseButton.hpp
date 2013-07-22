@@ -21,7 +21,6 @@
 #define BASEBUTTON_HPP
 
 #include "BaseGuiElement.hpp"
-class AnimationEffect2D;
 
 class BaseButton : public BaseGuiElement
 {

@@ -16,28 +16,36 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BUTTONITEMSLOT_HPP
-#define BUTTONITEMSLOT_HPP
+#ifndef BASEBUTTONITEMSLOT_HPP
+#define BASEBUTTONITEMSLOT_HPP
 
-#include "BaseButtonItemSlot.hpp"
+#include "BaseButton.hpp"
+class ItemSlot;
 
-class ButtonItemSlot : public BaseButtonItemSlot
+class BaseButtonItemSlot : public BaseButton
 {
 	public:
-        ButtonItemSlot(GUI::TYPE subtype_id, const std::string& info)
+        BaseButtonItemSlot(GUI::TYPE subtype_id, const std::string& info)
         :
-        BaseButtonItemSlot(subtype_id, info)
+        BaseButton(subtype_id, info), 
+        m_ItemSlot(nullptr) 
         {}
                
-        virtual ~ButtonItemSlot() final {};  
-
-        virtual void OnPressEventLMB(Player*) override final;
-                        
-	private:
-        virtual void UpdateUnique(Player*) override final;	
+        virtual ~BaseButtonItemSlot() {};  
         
-        virtual void RenderInfo() const override final;  
-        virtual void RenderUnique(Player*) const override final;
+        bool GetEquiped() const;
+        
+        void SetItemSlot(ItemSlot* itemslot) { m_ItemSlot = itemslot; }
+ 
+        void RenderMark(const Box&, TextureOb*) const;
+           
+    protected:
+        ItemSlot* m_ItemSlot;
+
+        void UpdateAnimationProgram();
+            
+	private:
+	
 };
 
 #endif

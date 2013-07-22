@@ -58,7 +58,7 @@ class BaseGuiElement
 		//void SetParent(BaseGuiElement* parent) { m_Parent = parent; }
 		
 		void SetBox(const Box& box) { m_Box = box; }
-	
+        	
 		GUI::TYPE GetTypeId() const { return m_Type_id; }
 		GUI::TYPE GetSubTypeId() const { return m_Subtype_id; }
 					
@@ -68,7 +68,9 @@ class BaseGuiElement
 				
         bool GetLock() const { return m_Lock; }
         bool GetPressed() const { return m_Pressed; }
-            
+        
+        bool IsAnimationProgramActive() const { return (m_AnimationProgram != nullptr); }
+
         BaseGuiElement* GetGuiElement(GUI::TYPE) const;                     
 			
 		BaseGuiElement* UpdateMouseInteraction(const Vec2<float>&);
@@ -104,6 +106,11 @@ class BaseGuiElement
 		//BaseGuiElement* m_Parent;
 		std::vector<BaseGuiElement*> m_Child_vec;
 
+		void SetAnimationProgram(AnimationEffect2D* animation_program) { m_AnimationProgram = animation_program; }
+        
+        bool GetAnimationProgramActive() const { return (m_AnimationProgram != nullptr); }
+        void DeleteAnimationProgram();
+        
 		void PressEventOnGuiElement(GUI::TYPE);
 		void ResetStateEventOnGuiElement(GUI::TYPE);			
 
@@ -119,7 +126,7 @@ class BaseGuiElement
 		Vec3<float> m_Offset;
 		Vec3<float> m_Scale;
 		
-        AnimationEffect2D* m_Animation;
+        AnimationEffect2D* m_AnimationProgram;
         
 		static std::map<GUI::TYPE, BaseGuiElement*> static_gui_element_map;
 		

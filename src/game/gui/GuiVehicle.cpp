@@ -287,8 +287,9 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
     }
 } 
 
+/*
 bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
-{    /*
+{    
 	for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
 	{ 
 		if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.pos_screencoord) == true)
@@ -374,11 +375,12 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
         }                       
 
 	return false;
-    */
 }
-
+*/
+    
+/*
 bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Store* store)
-{ /*
+{ 
 	for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
 	{ 
 		if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.pos_screencoord) == true)
@@ -398,22 +400,23 @@ bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Stor
         }
 	
 	return false;
-    */
-}
 
-void GuiVehicle::RenderVehicle(const MouseData& data_mouse, ENTITY::TYPE mark_slot_subtype_id) const
-{
-	glPushMatrix();
-    {
-		glTranslatef(GetOffset().x, GetOffset().y, 0);
-		drawTexturedRect(m_TextureOb_korpus, rect_korpus, -1.0);
-		if (mark_slot_subtype_id != ENTITY::TYPE::NONE_ID)
-		{
-			RenderMarksForEmptySlots(data_mouse, GUI::getGuiItemSlotType(mark_slot_subtype_id));
-		}
-	}
-    glPopMatrix();
 }
+*/
+    
+//void GuiVehicle::RenderVehicle(const MouseData& data_mouse, ENTITY::TYPE mark_slot_subtype_id) const
+//{
+	//glPushMatrix();
+    //{
+		//glTranslatef(GetOffset().x, GetOffset().y, 0);
+		//drawTexturedRect(m_TextureOb_korpus, rect_korpus, -1.0);
+		//if (mark_slot_subtype_id != ENTITY::TYPE::NONE_ID)
+		//{
+			//RenderMarksForEmptySlots(data_mouse, GUI::getGuiItemSlotType(mark_slot_subtype_id));
+		//}
+	//}
+    //glPopMatrix();
+//}
 
 void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, GUI::TYPE mark_slot_subtype_id) const
 { 
@@ -466,8 +469,8 @@ void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, GUI::TYPE
 		}
 	}
 }
-
-/*virtual override final*/
+        
+/* virtual override final */
 void GuiVehicle::RenderUnique(Player* player) const
 {
     if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)

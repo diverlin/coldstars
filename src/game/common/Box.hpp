@@ -40,6 +40,7 @@ class Box
 		void SetCenter(const Vec3<float>& center)	{ this->center = center; } 
 		void SetSize(const Vec3<float>& size)		{ this->size = size; } 
 		void SetScale(const Vec3<float>& scale)		{ this->scale = scale; }
+		void SetScale(float x, float y, float z)	{ scale.Set(x,y,z); }
 		void SetAngle(const Vec3<float>& angle)		{ this->angle = angle; }
 		
 		const Vec3<float>& GetCenter() const	{ return center; }      		      
