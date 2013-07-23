@@ -71,14 +71,17 @@ void Container::UpdateInfo()
 	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
 	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
 }        
-       	
-void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords)
+ 
+/* virtual override final */       	
+void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords, float zoom)
 {
 	UpdateInfo();
-	float scale = Screen::Instance().GetScale();
-	Vec2<float> pos(GetCenter().x - scroll_coords.x - 200/scale, GetCenter().y - scroll_coords.y);
+	Vec2<float> pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
+    pos /= zoom;
 	drawInfoIn2Column(info.title_list, info.value_list, pos);
-	item_slot->GetItem()->RenderInfo(GetCenter(), scroll_coords.x, scroll_coords.y);
+    
+    Vec2<float> pos2(pos.x + 100, pos.y);
+	item_slot->GetItem()->RenderInfo(pos2);
 }
  
 /* virtual */    

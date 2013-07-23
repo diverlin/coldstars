@@ -68,6 +68,11 @@ namespace CONVERTER
 
 #define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click
 
+namespace GUI
+{
+    const float POS_Z = -2.0;
+}
+
 const int CONTAINER_NUM_MAX_DEFAULT = 400;
 
 const float DEFAULT_ENTITY_ZPOS = 0.0;
@@ -485,8 +490,8 @@ namespace EQUIPMENT
 
 	namespace DRIVE
 	{
-                const float OVERLOAD_RATE = 1.5f;
-                const float OVERLOAD_DETERIORATION_RATE = 4.0f;
+        const float OVERLOAD_RATE = 1.5f;
+        const float OVERLOAD_DETERIORATION_RATE = 4.0f;
                                 
 		const float SPEED_MIN = 3.0;   
 		const float SPEED_MAX = 4.0; 

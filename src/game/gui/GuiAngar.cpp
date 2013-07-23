@@ -202,6 +202,7 @@ void GuiAngar::ButtonsAction() const
 
 bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mouse)
 {	
+  /*
         for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
         { 
                 if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.pos_screencoord) == true)
@@ -275,6 +276,7 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
         }
                 
         return false;
+        */
 }
 
 void GuiAngar::RenderVehicleAndItemSlots() const

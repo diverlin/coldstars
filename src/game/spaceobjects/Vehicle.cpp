@@ -517,13 +517,13 @@ void Vehicle::BindOwnerNpc(Npc* owner_npc)
 
 bool Vehicle::IsObjectWithinRadarRange(BaseSpaceEntity* object) const
 {
-        float dist = distanceBetween(GetCenter(), object->GetCenter());
-        if (dist < properties.radar)
-        {
-               	return true;
-        }
-        
-        return false;
+    float dist = distanceBetween(GetCenter(), object->GetCenter());
+    if (dist < properties.radar)
+    {
+            return true;
+    }
+    
+    return false;
 }	
 
 void Vehicle::UpdateSpecialAction()
@@ -571,9 +571,7 @@ void Vehicle::UpdateSpecialAction()
 			        }
 			
 				break;
-			}			
-			
-			
+			}
 		}
 	}
 }
@@ -609,20 +607,20 @@ bool Vehicle::UpdateFadeOutEffect()
 //// ******** DOCKING/LAUNCHING ******** 
 void Vehicle::HyperJumpEvent(StarSystem* starsystem)
 {
-        #if ENTITY_TRANSACTION_LOG_ENABLED == 1 
-	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::HyperJumpEvent", ENTITY_TRANSACTION_LOG_DIP); 
-	#endif   
-	
-	weapon_complex.DeactivateAllWeapons();
-	
-        special_action_id = SPECIAL_ACTION::INITIATE_JUMPOUT_ID;
-        starsystem->GetHyperSpace().AddVehicle(this);
+    #if ENTITY_TRANSACTION_LOG_ENABLED == 1 
+    Logger::Instance().Log("Vehicle("+int2str(GetId())+")::HyperJumpEvent", ENTITY_TRANSACTION_LOG_DIP); 
+    #endif   
+    
+    weapon_complex.DeactivateAllWeapons();
+    
+    special_action_id = SPECIAL_ACTION::INITIATE_JUMPOUT_ID;
+    starsystem->GetHyperSpace().AddVehicle(this);
 }
                 
                 
 void Vehicle::DockingEvent()
 {
-        #if ENTITY_TRANSACTION_LOG_ENABLED == 1 
+    #if ENTITY_TRANSACTION_LOG_ENABLED == 1 
 	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::DockingEvent", ENTITY_TRANSACTION_LOG_DIP); 
 	#endif
 	          
@@ -1205,17 +1203,18 @@ void Vehicle::UpdateArtefactInfluence()
 		UpdatePropertiesProtection();
 	}
 }
-               
-void Vehicle::RenderInfoInSpace(const Vec2<float>& scroll_coords)
+
+/* virtual override final */               
+void Vehicle::RenderInfoInSpace(const Vec2<float>& scroll_coords, float zoom)
 {  
 	UpdateInfo(); // virtual
 	Vec2<float> pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
-	drawInfoIn2Column(info.title_list, info.value_list, pos);
-	
+	pos /= zoom;
+    drawInfoIn2Column(info.title_list, info.value_list, pos);
 	if (owner_npc != nullptr)
 	{
-		float scale = Screen::Instance().GetScale();
-		owner_npc->RenderInfo(Vec2<float>(GetCenter().x + 190/scale - scroll_coords.x, GetCenter().y - scroll_coords.y));
+        Vec2<float> pos2(pos.x + 200, pos.y);
+    	owner_npc->RenderInfo(pos2);
 	}
 }
 

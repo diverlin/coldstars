@@ -22,6 +22,11 @@
 /*virtual override final*/
 void ButtonItemSlot2::OnPressEventLMB(Player* player)
 {
+    if (m_Lock == false)
+    {
+        m_Pressed = !m_Pressed;
+    }
+        
     if (m_ItemSlot != nullptr)
     {        
         if (GetPressed() == true)
@@ -38,20 +43,6 @@ void ButtonItemSlot2::OnPressEventLMB(Player* player)
                 m_ItemSlot->DeselectEvent();
             }
         }    
-            
-        if (m_Lock == false)
-        {
-            if (m_Pressed == false)
-            {
-                m_Pressed = true;
-                ShadeOn();
-            }
-            else
-            {
-                m_Pressed = false;
-                ShadeOff();
-            }
-        }
     }
 }
 

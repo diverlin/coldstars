@@ -16,36 +16,36 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SATELLITE_H
-#define SATELLITE_H
+#ifndef SATELLITE_HPP
+#define SATELLITE_HPP
 
 #include "Vehicle.hpp"
 #include "../parts/orbit.hpp"
 
 class Satellite : public Vehicle
 {
-    	public:  
-        	Satellite(int);
-        	virtual ~Satellite();
+    public:  
+        Satellite(int);
+        virtual ~Satellite();
 
-    		Orbit* GetOrbit() const { return orbit; };
+        Orbit* GetOrbit() const { return orbit; };
     		
 		void UpdateInSpace(int, bool);
         	
-        	void UpdateRenderStuff();
-        	void RenderInSpace();
-		void RenderAtPlanet() const; 
-		
-		void SaveData(boost::property_tree::ptree&) const;
-    		void LoadData(const boost::property_tree::ptree&);
-    		void ResolveData();
+        void UpdateRenderStuff();
+        void RenderInSpace();
+        void RenderAtPlanet() const; 
+        
+        void SaveData(boost::property_tree::ptree&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
     		
-        private:
-        	Orbit* orbit;
+    private:
+        Orbit* orbit;
 
-        	virtual void UpdateInfo();
-        	
-        	void SaveDataUniqueSatellite(boost::property_tree::ptree&, const std::string&) const;
+        virtual void UpdateInfo();
+        
+        void SaveDataUniqueSatellite(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueSatellite(const boost::property_tree::ptree&);
 		void ResolveDataUniqueSatellite();
 };
