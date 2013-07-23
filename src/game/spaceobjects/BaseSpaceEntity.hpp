@@ -72,7 +72,7 @@ class BaseSpaceEntity : public BaseDrawable
 		virtual void Hit(int, bool);
 		void SilentKill();
 		
-		void RenderInfoInSpace(const Vec2<float>&);		
+		virtual void RenderInfoInSpace(const Vec2<float>&, float);		
 		void RenderInfo(const Vec2<float>&);
 		void virtual UpdateInfo() {};	
 				

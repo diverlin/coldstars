@@ -121,13 +121,12 @@ void BaseItem::UpdateInfo()
     AddCommonInfo();
 }
 
-void BaseItem::RenderInfo(const Vec2<float>& pos, float offset_x, float offset_y)
+void BaseItem::RenderInfo(const Vec2<float>& pos)
 {  
 	UpdateInfo();
-	Vec2<float> pos2(pos.x - offset_x, pos.y - offset_y);
     
     enable_BLEND();
-    drawInfoIn2Column(info.title_list, info.value_list, pos2);
+    drawInfoIn2Column(info.title_list, info.value_list, pos);
     disable_BLEND();
 }
 

@@ -97,24 +97,24 @@ void GuiNatureLand::ButtonsAction() const
 
 bool GuiNatureLand::UpdateMouseInteractionWithEquipedItemSlots(const MouseData& data_mouse)
 {
-       	for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
-       	{
-		BaseItem* item = rect_itemslot_vec[i].second->GetItem();
-		if (item != nullptr)
-		{	 
-	                if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y) == true)
-	                {	
-                		if (data_mouse.left_click == true)
-                        	{
-                        		m_Player->GetNpc()->GetVehicle()->AddItemToCargoSlot(item);
-                        	}
+       	//for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
+       	//{
+		//BaseItem* item = rect_itemslot_vec[i].second->GetItem();
+		//if (item != nullptr)
+		//{	 
+	                //if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y) == true)
+	                //{	
+                		//if (data_mouse.left_click == true)
+                        	//{
+                        		//m_Player->GetNpc()->GetVehicle()->AddItemToCargoSlot(item);
+                        	//}
                      
-               			m_Player->GetCursor().SetFocusedObject(item);
-        		}
-		}
-       	}
+               			//m_Player->GetCursor().SetFocusedObject(item);
+        		//}
+		//}
+       	//}
                 
-        return false;
+        //return false;
 }
 
 void GuiNatureLand::RenderBackground(const Rect& rect) const

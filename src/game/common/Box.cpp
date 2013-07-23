@@ -22,20 +22,20 @@
 
 Box::Box()
 {
-    scale.Set(1.0, 1.0, 1.0);
+    SetScale(1.0, 1.0, 1.0);
 }
 
 Box::Box(const Vec3<float>& size)
 {
 	SetSize(size);
-    scale.Set(1.0, 1.0, 1.0);
+    SetScale(1.0, 1.0, 1.0);
 }
 
 Box::Box(const Vec3<float>& center, const Vec3<float>& size)
 {
 	SetCenter(center);
 	SetSize(size);	
-    scale.Set(1.0, 1.0, 1.0);
+    SetScale(1.0, 1.0, 1.0);
 }
 
 Box::Box(const Box& rhs)
@@ -47,7 +47,7 @@ Box::Box(const Rect& rect)
 {
 	SetCenter(Vec3<float>(rect.GetCenter().x, rect.GetCenter().y, -1.0));
 	SetSize(Vec3<float>(rect.GetWidth(), rect.GetHeight(), 1.0));
-    scale.Set(1.0, 1.0, 1.0);
+    SetScale(1.0, 1.0, 1.0);
 }
 
 Box::~Box()
@@ -55,7 +55,7 @@ Box::~Box()
 
 bool Box::CheckInteraction(const Vec2<float>& point) const
 {       	
-	return checkCollisionDotWithRectangle(point, center, size*scale);
+	return checkCollisionDotWithRectangle(point, m_Center, m_Size*m_Scale);
 }
            	
 void Box::Set(const Box& box)

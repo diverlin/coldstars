@@ -90,7 +90,7 @@ class BaseItem : public BaseDrawable
         
         virtual void Render(const Box&, const Vec2<float>&, bool draw_text = true);
         void RenderKorpus(const Box&);
-        void RenderInfo(const Vec2<float>&, float offset_x = 0, float offset_y = 0); 
+        void RenderInfo(const Vec2<float>&); 
 
 	protected:
         int race_id;

@@ -22,7 +22,7 @@
 class ItemSlot;
 #include "../common/rect.hpp"
 #include "MouseData.hpp"
-class Base;
+class BaseSpaceEntity;
 #include "BaseGuiElement.hpp"
 
 class Cursor : public BaseGuiElement
@@ -33,11 +33,10 @@ class Cursor : public BaseGuiElement
 		
 		void SetLeftMouseButtonClick(bool left_click) 		{ data_mouse.left_click = left_click; };
 		void SetRightMouseButtonClick(bool right_click) 	{ data_mouse.right_click = right_click; };
-		void SetFocusedObject(Base* focused_ob) { this->focused_ob = focused_ob; };
+		void SetFocusedObject(BaseSpaceEntity* focused_ob) { this->focused_ob = focused_ob; };
 		
 		const MouseData& GetMouseData() { return data_mouse; };
 		ItemSlot* GetItemSlot() const { return item_slot; };
-		const Rect& GetRect() const { return rect; };
 		
 		void UpdateMouseStuff();		
 		void Update();
@@ -50,11 +49,10 @@ class Cursor : public BaseGuiElement
 				
 	private:       	
 		ItemSlot* item_slot;  
-		Rect rect;      	
 		
 		MouseData data_mouse;
 		
-		Base* focused_ob;
+		BaseSpaceEntity* focused_ob;
 }; 
 
 #endif 

@@ -37,25 +37,27 @@ class Box
 		
 		void Set(const Box&);
 		
-		void SetCenter(const Vec3<float>& center)	{ this->center = center; } 
-		void SetSize(const Vec3<float>& size)		{ this->size = size; } 
-		void SetScale(const Vec3<float>& scale)		{ this->scale = scale; }
-		void SetScale(float x, float y, float z)	{ scale.Set(x,y,z); }
-		void SetAngle(const Vec3<float>& angle)		{ this->angle = angle; }
+		void SetCenter(const Vec3<float>& center)	{ m_Center = center; } 
+		void SetCenter(float x, float y, float z)	{ m_Center.Set(x,y,z); } 
+		void SetSize(const Vec3<float>& size)		{ m_Size = size; } 
+		void SetSize(float x, float y, float z)		{ m_Size.Set(x,y,z); } 
+		void SetScale(const Vec3<float>& scale)		{ m_Scale = scale; }
+		void SetScale(float x, float y, float z)	{ m_Scale.Set(x,y,z); }
+		void SetAngle(const Vec3<float>& angle)		{ m_Angle = angle; }
 		
-		const Vec3<float>& GetCenter() const	{ return center; }      		      
-		const Vec3<float>& GetSize() const		{ return size; }
-		const Vec3<float>& GetScale() const		{ return scale; }
-		const Vec3<float>& GetAngle() const		{ return angle; }
+		const Vec3<float>& GetCenter() const	{ return m_Center; }      		      
+		const Vec3<float>& GetSize() const		{ return m_Size; }
+		const Vec3<float>& GetScale() const		{ return m_Scale; }
+		const Vec3<float>& GetAngle() const		{ return m_Angle; }
 		
 		bool CheckInteraction(const Vec2<float>&) const;	
       		      		      		
 	private:
-		Vec3<float> center;  
-		Vec3<float> size;
-		Vec3<float> angle;
+		Vec3<float> m_Center;  
+		Vec3<float> m_Size;
+		Vec3<float> m_Angle;
 		
-		Vec3<float> scale;      		      		
+		Vec3<float> m_Scale;      		      		
 };
 
 

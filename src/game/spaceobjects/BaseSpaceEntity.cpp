@@ -32,6 +32,8 @@
 #include "../resources/ShaderCollector.hpp"
 #include "../animations/AnimationBase.hpp"
 
+#include <render/Screen.hpp>
+
 
 BaseSpaceEntity::BaseSpaceEntity():
 starsystem(nullptr), 
@@ -93,18 +95,19 @@ void BaseSpaceEntity::CheckDeath(bool show_effect)
 		}
 	}  
 }
-		
-void BaseSpaceEntity::RenderInfoInSpace(const Vec2<float>& scroll_coords)
+
+/* virtual */		
+void BaseSpaceEntity::RenderInfoInSpace(const Vec2<float>& scroll_coords, float zoom)
 { 
 	UpdateInfo(); // virtual
 	Vec2<float> pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
-     	drawInfoIn2Column(info.title_list, info.value_list, pos);
+    drawInfoIn2Column(info.title_list, info.value_list, pos/zoom);
 }
 
 void BaseSpaceEntity::RenderInfo(const Vec2<float>& center)
 { 
 	UpdateInfo(); // virtual
-     	drawInfoIn2Column(info.title_list, info.value_list, center);
+    drawInfoIn2Column(info.title_list, info.value_list, center);
 }
 	
 void BaseSpaceEntity::SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree& save_ptree, const std::string& root) const

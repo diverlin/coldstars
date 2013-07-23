@@ -85,6 +85,7 @@ void GuiStore::UnbindStore()
         
 bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
 {
+/*
         for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
         { 
                 if (rect_itemslot_vec[i].second->GetItem() != nullptr)
@@ -93,14 +94,14 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
                 	{
 				        m_Player->GetCursor().SetFocusedObject(rect_itemslot_vec[i].second->GetItem());
                 	
-                        	if (data_mouse.left_click == true)
-                        	{
-                        		if (m_Player->GetNpc()->GetCredits() >= rect_itemslot_vec[i].second->GetItem()->GetPrice())
-                              		{
-                        			m_Player->GetNpc()->GetVehicle()->BuyItem(rect_itemslot_vec[i].second->GetItem());
-                        		}
-                        	} 
-                        	return true; 
+                        if (data_mouse.left_click == true)
+                        {
+                            if (m_Player->GetNpc()->GetCredits() >= rect_itemslot_vec[i].second->GetItem()->GetPrice())
+                                {
+                                m_Player->GetNpc()->GetVehicle()->BuyItem(rect_itemslot_vec[i].second->GetItem());
+                            }
+                        } 
+                        return true; 
                 	} 
         	}
         }
@@ -129,6 +130,7 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
         }
                 
         return false;
+        */
 }
 
 void GuiStore::RenderSlots(int credits) const
