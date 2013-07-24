@@ -357,7 +357,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 		// render background and star to FBO0
 		Screen::Instance().GetFbo0().Activate(w, h);
 		{
-			resizeGl(w*(1.0+scale*0.02), h*(1.0+scale*0.02));
+			resizeGl(w*(1+scale/100.0), h*(1+scale/100.0));
 				
 	        starsystem->DrawBackground(world_coord);           
 			camera(world_coord.x, world_coord.y, CAMERA_POS_Z);    
@@ -773,7 +773,6 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
 		}
 	
 		cursor.RenderFocusedObjectStuff();
-        cursor.Render(this);
 	}
 	disable_BLEND();  
 	resizeGl(w, h); 

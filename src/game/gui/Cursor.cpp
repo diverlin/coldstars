@@ -237,8 +237,7 @@ void Cursor::RenderFocusedObjectInfo()
 	    {
         	focused_ob->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC(), Screen::Instance().GetScale());
         }
-disable_BLEND();
-	
+        disable_BLEND();   	
 	}
 	
 	focused_ob = nullptr;
