@@ -93,7 +93,6 @@ class BaseGuiElement
 		std::vector<BaseGuiElement*> m_Child_vec;
 
 		void SetScale(const Vec2<float>& scale) { m_Box.SetScale(scale); }		
-		void SetOffset(const Vec2<float>& offset) { m_Offset = offset; }	
         void SetRoot(bool root) { m_Root = root; }
                 
 		void SetAnimationProgram(AnimationEffect2D* animation_program) { m_AnimationProgram = animation_program; }
@@ -117,7 +116,10 @@ class BaseGuiElement
         AnimationEffect2D* m_AnimationProgram;
         
 		static std::map<GUI::TYPE, BaseGuiElement*> static_gui_element_map;
-                
+
+		void SetOffset(const Vec2<float>& offset) { m_Offset = offset; }	
+		void SetOffset(float x, float y) { m_Offset.Set(x,y); }
+                        
 	friend class GuiManager;
 };
 

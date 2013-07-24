@@ -176,7 +176,7 @@ void BaseGuiElement::Update(Player* player)
     
     if (m_Root)
     {
-        UpdateGeometry(Vec3<float>(0,0,0), Vec3<float>(1,1,1));
+        UpdateGeometry(m_Offset, Vec2<float>(1,1));
     }
 	
     UpdateCommon(player);

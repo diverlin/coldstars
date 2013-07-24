@@ -58,7 +58,7 @@ void Slider::Configure(int ammount_total, int price_for_one)
 	this->ammount_total = ammount_total;
 	this->price_for_one  = price_for_one;
 
-	SetOffset(Vec2<float>(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2));
+	//SetOffset(Vec2<float>(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2));
 
 	ammount_selected = 0;
 	price_selected = 0;
