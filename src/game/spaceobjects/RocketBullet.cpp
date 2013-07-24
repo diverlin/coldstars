@@ -155,7 +155,7 @@ void RocketBullet::UpdateRenderStuff()
 
 void RocketBullet::RenderInSpace(float scale) const
 {
-	drawQuad(textureOb, GetCenter(), GetSize(), GetAngle().z);
+	drawQuad(GetTextureOb(), GetCenter(), GetSize(), GetAngle().z);
 			  
 	drive_effect->Update();
 	drive_effect->Render(scale, 0.0f);
