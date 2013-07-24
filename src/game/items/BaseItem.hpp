@@ -22,7 +22,7 @@
 #include "../common/BaseDrawable.hpp"
 #include "../text/InfoTable.hpp"
 class ItemSlot; 
-class Box;
+class Box2D;
 
 struct ItemCommonData 
 {
@@ -88,8 +88,8 @@ class BaseItem : public BaseDrawable
         
         void UpdateInfo();
         
-        virtual void Render(const Box&, const Vec2<float>&, bool draw_text = true);
-        void RenderKorpus(const Box&);
+        virtual void Render(const Box2D&, const Vec2<float>&, bool draw_text = true);
+        void RenderKorpus(const Box2D&);
         void RenderInfo(const Vec2<float>&); 
 
 	protected:

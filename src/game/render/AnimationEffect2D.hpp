@@ -20,7 +20,7 @@
 #define ANIMATIONEFFECT2D_HPP
 
 #include "../math/myVector.hpp"
-class Box;
+class Box2D;
 
 class AnimationEffect2D
 {
@@ -40,7 +40,7 @@ class AnimationEffect2D
 		const Vec3<float>& GetScale() const { return scale; };
 		float GetAngle() const { return angle; };
 		
-		void Update(Box&);
+		void Update(Box2D&);
 		void Reset();
 		
 	private:

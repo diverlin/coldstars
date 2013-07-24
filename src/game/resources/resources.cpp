@@ -1278,11 +1278,6 @@ void loadImages()
 
 {
 	std::vector<int> arg;  
-	GuiTextureObCollector::Instance().bar_top = new TextureOb(NONE_ID, "data/gui/bar_top.png", true, &arg);
-}
-
-{
-	std::vector<int> arg;  
 	GuiTextureObCollector::Instance().text_background =  new TextureOb(NONE_ID, "data/other/text_background.png", true, &arg);
 }
 

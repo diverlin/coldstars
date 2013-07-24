@@ -69,18 +69,13 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
 			}
 						  
 			TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;
-            
-            float zsize = 1;
-            Vec3<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP, zsize);
-            Box box(size*scale);
-                                
 			ButtonItemSlot2* button = new ButtonItemSlot2(GUI::getGuiItemSlotSelectorType(entity_type_id), getEntityTypeStr(entity_type_id), vehicle->slot_total_vec[i]);  
-            button->SetBox(box);
 
-            float zpos = -2;
-            Vec2<float> offset2 = getVec2f(160, angle);
-            Vec3<float> offset3(offset2.x, offset2.y, zpos);            
-			AddChild(button, offset3*scale);
+            Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+            button->SetSize(size*scale);
+
+            Vec2<float> offset = getVec2f(160, angle);
+			AddChild(button, offset*scale);
 
 		    angle += 20; 
 		}

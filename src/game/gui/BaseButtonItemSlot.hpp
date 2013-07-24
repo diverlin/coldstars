@@ -37,7 +37,7 @@ class BaseButtonItemSlot : public BaseButton
         
         void SetItemSlot(ItemSlot* itemslot) { m_ItemSlot = itemslot; }
  
-        void RenderMark(const Box&, TextureOb*) const;
+        void RenderMark(const Box2D&, TextureOb*) const;
            
     protected:
         ItemSlot* m_ItemSlot;

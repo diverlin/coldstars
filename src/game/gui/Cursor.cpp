@@ -48,7 +48,7 @@ focused_ob(nullptr)
     m_TextureOb = nullptr;
     item_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::TYPE::CARGO_SLOT_ID);
     
-    m_Box.SetSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR, 1.0);
+    m_Box.SetSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
     
     //ButtonTrigger* button; // EXPERIMENTAL GUI
     //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::ACTION_ATTACK_ID, "attack");  
@@ -99,7 +99,7 @@ void Cursor::UpdateMouseStuff()
 
 void Cursor::Update()
 {
-    m_Box.SetCenter(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y, GUI::POS_Z);     	
+    m_Box.SetCenter(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y);     	
 }
 
 bool Cursor::UpdateInSpace()

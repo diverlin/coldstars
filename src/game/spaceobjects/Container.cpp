@@ -80,7 +80,7 @@ void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords, float zoom)
     pos /= zoom;
 	drawInfoIn2Column(info.title_list, info.value_list, pos);
     
-    Vec2<float> pos2(pos.x + 100, pos.y);
+    Vec2<float> pos2(pos.x + 200, pos.y);
 	item_slot->GetItem()->RenderInfo(pos2);
 }
  

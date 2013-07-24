@@ -19,10 +19,11 @@
 #include "GuiItemSlot.hpp"
 #include "MouseData.hpp"
 
-GuiItemSlot::GuiItemSlot(ItemSlot* itemslot, const Box& box):
+GuiItemSlot::GuiItemSlot(ItemSlot* itemslot, const Box2D& box)
+:
 itemslot(itemslot)
 {
-    this->m_Box = box;
+    m_Box = box;
 }
 
 GuiItemSlot::~GuiItemSlot()

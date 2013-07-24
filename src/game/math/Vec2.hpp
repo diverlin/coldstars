@@ -2,7 +2,7 @@
 #define VEC2_HPP
 
 #include <cmath>
-#include "Vec3.hpp"
+#include <math/Vec3.hpp>
 
 template<typename VARTYPE>
 class Vec2
@@ -12,9 +12,9 @@ class Vec2
 		VARTYPE y;
 		
 		Vec2():x(0), y(0) {};
-		Vec2(VARTYPE x, VARTYPE y)   { Set(x, y); };
-		Vec2(const Vec2<VARTYPE>& v) { Set(v); };
-		Vec2(const Vec3<VARTYPE>& v) { Set(v.x, v.y); };
+		Vec2(VARTYPE x, VARTYPE y)   { Set(x, y); }
+		Vec2(const Vec2<VARTYPE>& v) { Set(v.x, v.y); }
+		Vec2(const Vec3<VARTYPE>& v) { Set(v.x, v.y); }
 		~Vec2() {};
 		
 		bool IsNull() const 
@@ -39,8 +39,8 @@ class Vec2
 		}
 		
 		void Set(VARTYPE x, VARTYPE y) 			{ this->x = x; this->y = y; }
-		void Set(const Vec2<VARTYPE>& v)    	{ *this = v; };
-		
+		void Set(const Vec2<VARTYPE>& v)    	{ *this = v; }
+        		
 		Vec2<VARTYPE>& operator+=(const Vec2<VARTYPE>& rhs)
 		{
 			x += rhs.x;
@@ -98,34 +98,32 @@ class Vec2
 			Vec2<VARTYPE> result(x*val, y*val);
 			return result;
 		}
-		
+
+		Vec2<VARTYPE> operator*(const Vec2<VARTYPE>& rhs) const
+		{
+			Vec2<VARTYPE> result(x*rhs.x, y*rhs.y);
+			return result;
+		}
+        		
 		Vec2<VARTYPE> operator/(VARTYPE val) const
 		{
 			Vec2<VARTYPE> result(x/val, y/val);	
 			return result;
 		}
 		
-		void operator()(const Vec2<VARTYPE>& v)
-		{
-			Set(v);
-		}
-		
-		
-		//float GetDistanceTo(const Vec2<VARTYPE> v) const
+		//void operator()(const Vec2<VARTYPE>& v)
 		//{
-		//float lx = v.x - x;
-		//float ly = v.y - y;
-		
-		//return sqrt(lx*lx + ly*ly);
+			//Set(v);
 		//}
-		
-		//float GetDistanceTo(float x, float y) const
-		//{
-		//float lx = x - this->x;
-		//float ly = y - this->y;
-		
-		//return sqrt(lx*lx + ly*ly);
-		//}
+
 };
+
+template<typename VARTYPE>
+std::string str(Vec2<VARTYPE> v)
+{
+	std::stringstream ss;
+	ss<<v.x<<","<<v.y<<".";
+	return ss.str();
+}
 
 #endif

@@ -72,7 +72,8 @@ namespace GUI
 {
     const float POS_Z = -2.0;
 }
-
+const float ZSIZE = 1;
+    
 const int CONTAINER_NUM_MAX_DEFAULT = 400;
 
 const float DEFAULT_ENTITY_ZPOS = 0.0;

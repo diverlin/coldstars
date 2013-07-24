@@ -55,7 +55,7 @@ void ButtonItemSlot::UpdateUnique(Player* player)
 /* virtual override final */
 void ButtonItemSlot::RenderUnique(Player*) const 
 {
-    m_ItemSlot->Render(m_Box, Vec3<float>(0,0,0), true);
+    m_ItemSlot->Render(m_Box, Vec2<float>(0,0), true);
 }
   
 /* virtual override final */

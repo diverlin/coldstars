@@ -276,13 +276,13 @@ void ItemSlot::UpdateVehiclePropetries() const
 }
    
 /* virtual */
-void ItemSlot::Render(const Box& box, const Vec2<float>& gui_offset, bool draw_text) const
+void ItemSlot::Render(const Box2D& box, const Vec2<float>& gui_offset, bool draw_text) const
 { 
     drawQuad(textureOb, box); 
     RenderItem(box, gui_offset, draw_text);	
 }
 
-void ItemSlot::RenderItem(const Box& box, const Vec2<float>& gui_offset, bool draw_text) const
+void ItemSlot::RenderItem(const Box2D& box, const Vec2<float>& gui_offset, bool draw_text) const
 {   
     if (item != nullptr)
     {
@@ -290,7 +290,7 @@ void ItemSlot::RenderItem(const Box& box, const Vec2<float>& gui_offset, bool dr
     }
 }
 
-void ItemSlot::RenderMark(const Box& box, TextureOb* textureOb_mark) const
+void ItemSlot::RenderMark(const Box2D& box, TextureOb* textureOb_mark) const
 {
     drawQuad(textureOb_mark, box); 
 }      
