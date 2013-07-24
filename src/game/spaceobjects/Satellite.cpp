@@ -87,26 +87,26 @@ void Satellite::UpdateInfo()
             
 void Satellite::UpdateRenderStuff()
 {
-    	protection_complex.GetShieldEffect()->Update();
-    	
-    	UpdateOrientation();
+    protection_complex.GetShieldEffect()->Update();
+    
+    UpdateOrientation();
 }
 
-void Satellite::RenderInSpace()
+void Satellite::RenderInSpace(float scale)
 {   
 	UpdateRenderAnimation();
         
-    	RenderKorpus();
-    	
-    	if (data_korpus.draw_turrels == true)
-    	{
-        	weapon_complex.RenderTurrels();
-        }
+    RenderKorpus();
+    
+    if (data_korpus.draw_turrels == true)
+    {
+        weapon_complex.RenderTurrels();
+    }
 
-        if (protection_complex.GetProtectorSlot()->GetItem() != nullptr)
-    	{
-        	RenderShieldEffect(1.0 - color.a); 
-        }
+    if (protection_complex.GetProtectorSlot()->GetItem() != nullptr)
+    {
+        RenderShieldEffect(1.0 - color.a); 
+    }
 }
 
 void Satellite::RenderAtPlanet() const
@@ -114,9 +114,9 @@ void Satellite::RenderAtPlanet() const
 	RenderKorpus();
 	
 	if (data_korpus.draw_turrels == true)
-    	{
-        	weapon_complex.RenderTurrels();
-        }
+    {
+        weapon_complex.RenderTurrels();
+    }
 }		
 
 
@@ -156,8 +156,8 @@ void Satellite::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/
 void Satellite::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-        LoadDataUniqueBase(load_ptree);
-        LoadDataUniqueOrientation(load_ptree);
+    LoadDataUniqueBase(load_ptree);
+    LoadDataUniqueOrientation(load_ptree);
 	LoadDataUniqueBaseDrawable(load_ptree);
 	LoadDataUniqueBaseSpaceEntity(load_ptree);
 	LoadDataUniqueVehicle(load_ptree);
@@ -167,8 +167,8 @@ void Satellite::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/
 void Satellite::ResolveData()
 {
-        ResolveDataUniqueBase();
-        ResolveDataUniqueOrientation();
+    ResolveDataUniqueBase();
+    ResolveDataUniqueOrientation();
 	ResolveDataUniqueBaseDrawable();
 	ResolveDataUniqueBaseSpaceEntity();
 	ResolveDataUniqueVehicle();

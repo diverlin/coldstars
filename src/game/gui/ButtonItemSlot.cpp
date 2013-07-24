@@ -67,5 +67,9 @@ void ButtonItemSlot::RenderInfo() const
         {
             m_ItemSlot->GetItem()->RenderInfo(Vec2<float>(m_Box.GetCenter().x, m_Box.GetCenter().y)); 
         }
+        else
+        {
+            //m_ItemSlot->RenderInfo();
+        }
     }
 }

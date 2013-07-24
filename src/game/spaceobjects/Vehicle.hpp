@@ -221,7 +221,7 @@ class Vehicle : public BaseSpaceEntity
         void RenderGrabTrail() const;
         void RenderKorpus() const;
         void RenderTurrels() const;
-        void RenderDriveEffect(float parent_d_alpha = 0.0) const;
+        void RenderDriveEffect(float scale, float parent_d_alpha = 0.0) const;
         void RenderShieldEffect(float parent_d_alpha = 0.0) const;
         
         

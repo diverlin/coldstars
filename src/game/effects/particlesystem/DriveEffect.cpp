@@ -24,89 +24,87 @@
 #include "../../common/constants.hpp"
 #include "../../resources/TextureManager.hpp"
 
-DriveEffect::DriveEffect(Vec3<float>* pTo_start_pos, 
-			 Vec3<float>* pTo_target_pos)
+DriveEffect::DriveEffect(Vec3<float>* pTo_start_pos, Vec3<float>* pTo_target_pos)
 {
-    	this->pTo_start_pos  = pTo_start_pos;      //ob.points.midLeft
-     	this->pTo_target_pos = pTo_target_pos;     //ob.points.midFarLeft
+    this->pTo_start_pos  = pTo_start_pos;      //ob.points.midLeft
+    this->pTo_target_pos = pTo_target_pos;     //ob.points.midFarLeft
 }
 
-/* virtual */
+/* virtual override final */
 DriveEffect::~DriveEffect()
 {}
 
 void DriveEffect::CreateParticles()
 {
-     	for (unsigned int i = 0; i < num_particles; i++)
-     	{
-         	Particle* particle = new Particle(data_particle);  
-                particle->SetPosition(*pTo_start_pos);
-         	particle->SetVelocity(velocity);
-         	particles_vec.push_back(particle);
-     	}
+    for (unsigned int i=0; i<num_particles; i++)
+    {
+        Particle* particle = new Particle(data_particle);  
+        particle->SetPosition(*pTo_start_pos);
+        particle->SetVelocity(velocity);
+        particles_vec.push_back(particle);
+    }
 }
 
 
 void DriveEffect::UpdateVelocity()
 {
-     	float xl = (pTo_target_pos->x - pTo_start_pos->x);
-     	float yl = (pTo_target_pos->y - pTo_start_pos->y);
-     	float l = sqrt(xl*xl + yl*yl);
+    float xl = (pTo_target_pos->x - pTo_start_pos->x);
+    float yl = (pTo_target_pos->y - pTo_start_pos->y);
+    float l = sqrt(xl*xl + yl*yl);
 
-     	float d_xn = xl / l;
-     	float d_yn = yl / l;
+    float d_xn = xl / l;
+    float d_yn = yl / l;
 
-     	velocity.x = d_xn * data_particle.velocity_start;
-     	velocity.y = d_yn * data_particle.velocity_start;
+    velocity.x = d_xn * data_particle.velocity_start;
+    velocity.y = d_yn * data_particle.velocity_start;
 }
 
 
 void DriveEffect::PutParticlesToInitPos()
 {
-        float particle_offset = (data_particle.color_start.a - data_particle.color_end.a) / num_particles; 
-        
-     	for (unsigned int i = 0; i < particles_vec.size(); i++) 
-     	{
-         	while ( particles_vec[i]->GetAlpha() > ( particles_vec[i]->GetAlphaStart() - i * particle_offset) ) 
-         	{
-            		particles_vec[i]->Update();
-         	}     
-     	}
+    float particle_offset = (data_particle.color_start.a - data_particle.color_end.a) / num_particles; 
+    
+    for (unsigned int i = 0; i < particles_vec.size(); i++) 
+    {
+        while ( particles_vec[i]->GetAlpha() > ( particles_vec[i]->GetAlphaStart() - i * particle_offset) ) 
+        {
+            particles_vec[i]->Update();
+        }     
+    }
 }
 
-/* virtual */
+/* virtual override final */
 void DriveEffect::Update()
 {
-     	UpdateVelocity();
+    UpdateVelocity();
 
-     	for (unsigned int i = 0; i < particles_vec.size(); i++) 
-     	{
-     		if (particles_vec[i]->GetAlive() == true)
-     		{
-            		particles_vec[i]->Update();
-            	}
-            	else
-            	{
-                        particles_vec[i]->SetPosition(*pTo_start_pos);
-                        particles_vec[i]->SetVelocity(velocity);
-            		particles_vec[i]->Reborn();
-            	}
+    for (unsigned int i=0; i<particles_vec.size(); i++) 
+    {
+        if (particles_vec[i]->GetAlive() == true)
+        {
+            particles_vec[i]->Update();
+        }
+        else
+        {
+            particles_vec[i]->SetPosition(*pTo_start_pos);
+            particles_vec[i]->SetVelocity(velocity);
+            particles_vec[i]->Reborn();
+        }
 	}
 }
+    
 
-
-
-void DriveEffect::Render(float parent_d_alpha)
+void DriveEffect::Render(float scale, float parent_d_alpha)
 {
+    glBindTexture(GL_TEXTURE_2D, textureOb->texture);
 	enable_POINTSPRITE(); 
 	{     
 		glPushMatrix();
 		{
 			glTranslatef(pTo_start_pos->x, pTo_start_pos->y, 0.0); 	
-			glBindTexture(GL_TEXTURE_2D, textureOb->texture);
 			for (unsigned int i=0; i<particles_vec.size(); i++) 
 			{
-				particles_vec[i]->Render(parent_d_alpha);
+				particles_vec[i]->Render(scale, parent_d_alpha);
 			}
 		}
 		glPopMatrix();

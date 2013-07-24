@@ -423,7 +423,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     			{ 
     				if(visible_SPACESTATION_vec[i]->Is3D())
     				{
-       					visible_SPACESTATION_vec[i]->RenderInSpace_3D(world_coord); 
+       					visible_SPACESTATION_vec[i]->RenderInSpace_3D(world_coord, 1/scale); 
     				}
     			}
     			
@@ -431,7 +431,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     			{ 
     				if(visible_SHIP_vec[i]->Is3D())
        				{
-       					visible_SHIP_vec[i]->RenderInSpace_3D(world_coord); 
+       					visible_SHIP_vec[i]->RenderInSpace_3D(world_coord, 1/scale); 
     				}
     			}
     				
@@ -453,7 +453,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     			{ 
 					if(!visible_SPACESTATION_vec[i]->Is3D())
     				{
-       					visible_SPACESTATION_vec[i]->RenderInSpace_2D(); 
+       					visible_SPACESTATION_vec[i]->RenderInSpace_2D(1/scale); 
     				}
     			}
    
@@ -465,23 +465,23 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
     			for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
     			{ 
-    				if(!visible_SHIP_vec[i]->Is3D())
+    				if(visible_SHIP_vec[i]->Is3D() == false)
        				{
-       					visible_SHIP_vec[i]->RenderInSpace_2D(); 
+       					visible_SHIP_vec[i]->RenderInSpace_2D(1/scale); 
     				}
     			}
 
 				for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
     			{ 
     				visible_SATELLITE_vec[i]->UpdateRenderStuff(); 
-       				visible_SATELLITE_vec[i]->RenderInSpace(); 
+       				visible_SATELLITE_vec[i]->RenderInSpace(1/scale); 
         			starsystem->RestoreSceneColor();
     			}
     			
     			for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
     			{ 
 					visible_ROCKET_vec[i]->UpdateRenderStuff();
-       				visible_ROCKET_vec[i]->RenderInSpace(); 
+       				visible_ROCKET_vec[i]->RenderInSpace(1/scale); 
        				starsystem->RestoreSceneColor();
     			} 
 
@@ -560,7 +560,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 	    		{
 	    			for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
 	    			{ 
-	        			visible_effect_PARTICLESYSTEM_vec[i]->Render(); 
+	        			visible_effect_PARTICLESYSTEM_vec[i]->Render(1/scale); 
 	    			}
 	    		}
 	    		disable_POINTSPRITE();
@@ -773,6 +773,7 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
 		}
 	
 		cursor.RenderFocusedObjectStuff();
+        cursor.Render(this);
 	}
 	disable_BLEND();  
 	resizeGl(w, h); 
@@ -1166,6 +1167,9 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
     
     GuiManager::Instance().RunSessionInSpace();
  	GuiManager::Instance().GetGuiSpace().Render(this); 
+    
+    cursor.Render(this);
+        
  	if (gui_element != nullptr)
  	{
  		gui_element->RenderInfo();

@@ -33,7 +33,7 @@ class Satellite : public Vehicle
 		void UpdateInSpace(int, bool);
         	
         void UpdateRenderStuff();
-        void RenderInSpace();
+        void RenderInSpace(float scale);
         void RenderAtPlanet() const; 
         
         void SaveData(boost::property_tree::ptree&) const;

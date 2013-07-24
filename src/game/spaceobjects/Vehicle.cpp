@@ -1222,17 +1222,17 @@ void Vehicle::RenderInfo(const Vec2<float>& center, int offset_x, int offset_y)
 {  
 	UpdateInfo(); // virtual
 	Vec2<float> pos(center.x - offset_x, center.y - offset_y);
-     	drawInfoIn2Column(info.title_list, info.value_list, pos);
+    drawInfoIn2Column(info.title_list, info.value_list, pos);
 
-     	if (owner_npc != nullptr)
-     	{
-     		owner_npc->RenderInfo(Vec2<float>(center.x + 190 - offset_x, center.y - offset_y));
-     	}
+    if (owner_npc != nullptr)
+    {
+        owner_npc->RenderInfo(Vec2<float>(center.x + 190 - offset_x, center.y - offset_y));
+    }
 }
 
 void Vehicle::RenderGrabTrail() const
 {
-        grapple_slot->GetGrappleEquipment()->RenderGrabTrail();
+    grapple_slot->GetGrappleEquipment()->RenderGrabTrail();
 }
 		
 void Vehicle::RenderKorpus() const
@@ -1240,10 +1240,10 @@ void Vehicle::RenderKorpus() const
 	drawQuad(textureOb, GetCenter(), GetSize(), GetAngle().z);
 }
 
-void Vehicle::RenderDriveEffect(float parent_d_alpha) const
+void Vehicle::RenderDriveEffect(float scale, float parent_d_alpha) const
 {
 	drive_complex.GetDriveEffect()->Update();
-	drive_complex.GetDriveEffect()->Render(parent_d_alpha);
+	drive_complex.GetDriveEffect()->Render(scale, parent_d_alpha);
 }
 
 

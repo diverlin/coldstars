@@ -140,10 +140,18 @@ void Particle::Render() const
 	}
 }
 
-void Particle::Render(float parent_d_alpha) const
+void Particle::Render(float scale) const
 {
 	if (is_alive == true)
 	{
-		drawParticle(pos, size, color.r, color.g, color.b, color.a - parent_d_alpha);
+		drawParticle(pos, size*scale, color.r, color.g, color.b, color.a);
+	}
+}
+
+void Particle::Render(float scale, float parent_d_alpha) const
+{
+	if (is_alive == true)
+	{
+		drawParticle(pos, size*scale, color.r, color.g, color.b, color.a - parent_d_alpha);
 	}
 }

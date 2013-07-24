@@ -93,36 +93,36 @@ void SpaceStation::UpdateInfo()
 
 void SpaceStation::UpdateRenderStuff_2D()
 {
-    	//points.update(); 
-    	protection_complex.GetShieldEffect()->Update();
-    	
-    	//if (ableTo.DRIVE == true)
-    	//{
-       		//drive_trail->update();
-    	//}
+    //points.update(); 
+    protection_complex.GetShieldEffect()->Update();
+    
+    //if (ableTo.DRIVE == true)
+    //{
+        //drive_trail->update();
+    //}
 }
 
-void SpaceStation::RenderInSpace_2D()
+void SpaceStation::RenderInSpace_2D(float scale)
 {     
 	UpdateRenderStuff_2D();
 		
-    	RenderKorpus();
+    RenderKorpus();
     	
-    	if (data_korpus.draw_turrels == true)
-    	{
-        	weapon_complex.RenderTurrels();
-        }
-    	
-    	if (protection_complex.GetProtectorSlot()->GetItem() != nullptr)
-    	{
-        	RenderShieldEffect(1.0 - color.a); 
-        }
-        	
-        starsystem->RestoreSceneColor();
+    if (data_korpus.draw_turrels == true)
+    {
+        weapon_complex.RenderTurrels();
+    }
+    
+    if (protection_complex.GetProtectorSlot()->GetItem() != nullptr)
+    {
+        RenderShieldEffect(1.0 - color.a); 
+    }
+        
+    starsystem->RestoreSceneColor();
 }
 
 				 		
-void SpaceStation::RenderInSpace_3D(const Vec2<float>& scroll_coords)
+void SpaceStation::RenderInSpace_3D(const Vec2<float>& scroll_coords, float scale)
 {     	
 	UpdateRenderAnimation();	
 	RenderMeshLight(scroll_coords, starsystem->GetColor4f());        
