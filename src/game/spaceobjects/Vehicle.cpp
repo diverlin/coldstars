@@ -1237,7 +1237,7 @@ void Vehicle::RenderGrabTrail() const
 		
 void Vehicle::RenderKorpus() const
 {
-	drawQuad(textureOb, GetCenter(), GetSize(), GetAngle().z);
+	drawQuad(GetTextureOb(), GetCenter(), GetSize(), GetAngle().z);
 }
 
 void Vehicle::RenderDriveEffect(float scale, float parent_d_alpha) const

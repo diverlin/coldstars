@@ -61,10 +61,10 @@ void Ship::UpdateInfo()
 	info.addTitleStr("SHIP");
 	if (starsystem) { info.addNameStr("id/ss_id:"); info.addValueStr( int2str(GetId()) + " / " + int2str(starsystem->GetId()) ); }
 	else     		{ info.addNameStr("id:");       info.addValueStr( int2str(GetId()) ); }
-	info.addNameStr("race:");   		info.addValueStr( getRaceStr(textureOb->race_id) ); 
+	info.addNameStr("race:");   		info.addValueStr( getRaceStr(GetTextureOb()->race_id) ); 
 	info.addNameStr("class:");   		info.addValueStr( getEntityTypeStr(GetSubSubTypeId()) );     	
 	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
-	info.addNameStr("size id:");     	info.addValueStr( int2str(textureOb->size_id) );
+	info.addNameStr("size id:");     	info.addValueStr( int2str(GetTextureOb()->size_id) );
 	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(properties.free_space) );
 	info.addNameStr("mass:");   		info.addValueStr( int2str(mass) );
 	info.addNameStr("speedx100:");      info.addValueStr( int2str(properties.speed*100) );

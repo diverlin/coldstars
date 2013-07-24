@@ -33,9 +33,7 @@ race_id(NONE_ID),
 condition(0),
 price(0),
 locked_turns(0)
-{
-    textureOb = nullptr;
-}
+{}
 
 /* virtual */
 BaseItem::~BaseItem()
@@ -151,7 +149,7 @@ void BaseItem::RenderKorpus(const Box2D& box)
 	}
 	else
 	{
-       		drawQuad(textureOb, box); 
+       		drawQuad(GetTextureOb(), box); 
 	}
 }
 
@@ -174,7 +172,7 @@ void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, c
     save_ptree.put(root+"data_item.deterioration_overload_rate", data_item.deterioration_overload_rate);   
     save_ptree.put(root+"data_item.mass",               data_item.mass);
                     
-	if (textureOb) 	{ save_ptree.put(root+"unresolved.textureOb_path", textureOb->path); }
+	if (GetTextureOb()) 	{ save_ptree.put(root+"unresolved.textureOb_path", GetTextureOb()->path); }
 	else            { save_ptree.put(root+"unresolved.textureOb_path", "none"); }
         
     if (item_slot) 	{ save_ptree.put(root+"unresolved.item_slot_id", item_slot->GetId()); }
@@ -210,7 +208,7 @@ void BaseItem::ResolveDataUniqueBaseItem()
 	Logger::Instance().Log(" ResolveDataUniqueBaseItem()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
 	#endif
 	
-	textureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path);
+	SetTextureOb(TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path));
 	
 	UseNormalDeterioration();	
 	UpdateProperties(); // this function must be performed before inserting to slot!!!

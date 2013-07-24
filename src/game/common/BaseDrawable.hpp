@@ -36,30 +36,25 @@ class BaseDrawable : public Orientation
 {
 	public:      
 		BaseDrawable();
-		virtual ~BaseDrawable();
+		virtual ~BaseDrawable() override;
 
 		void BindData3D(Mesh*, TextureOb*, const Vec3<float>&);
 		void BindData2D(TextureOb*);    
-		void SetRenderAnimation(AnimationBase* animation_program) { this->animation_program = animation_program; }
-		
-		bool Is3D() const 				{ return (mesh != nullptr); }
-		const Vec3<float>& GetBoundaryBox() const 	{ return mesh->GetBoundaryBox(); }
-		Mesh* GetMesh() const 				{ return mesh; }
+		void SetRenderAnimation(AnimationBase* animation_program) { m_AnimationProgram = animation_program; }
+        void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; }
+        		
+		bool Is3D() const 				{ return (m_Mesh != nullptr); }
+		const Vec3<float>& GetBoundaryBox() const 	{ return m_Mesh->GetBoundaryBox(); }
+		const Mesh* const GetMesh() const 	{ return m_Mesh; }
                 
-		void SetZYX(bool ZYX)    			{ this->ZYX = ZYX; }
+		void SetZYX(bool ZYX)    			{ m_ZYX = ZYX; }
 
-   		TextureOb* GetTextureOb() const { return textureOb; }
-							
+   		TextureOb* const GetTextureOb() const { return m_TextureOb; }
+   		bool GetZYX() const { return m_ZYX; }
+        							
 		void RenderCollisionRadius() const;
 				
 	protected:
-		bool ZYX;
-
-		TextureOb* textureOb;
-		Mesh* mesh; 
-		
-		AnimationBase* animation_program;
-
 		void UpdateRenderAnimation();
 		void RenderMeshLight(const Vec2<float>&, const Color4<float>&) const;
 		void RenderMeshLightNormalMap(const Vec2<float>&, const Color4<float>&) const;
@@ -68,8 +63,17 @@ class BaseDrawable : public Orientation
 		void SaveDataUniqueBaseDrawable(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueBaseDrawable(const boost::property_tree::ptree&);
 		void ResolveDataUniqueBaseDrawable();
-				
+
+    private:
+        bool m_ZYX;
+
+		TextureOb* m_TextureOb;
+		Mesh* m_Mesh; 
+		
+		AnimationBase* m_AnimationProgram;
+        				
 	friend class BaseVehicleBuilder;
+
 };
 
 #endif 

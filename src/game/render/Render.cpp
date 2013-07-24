@@ -155,20 +155,6 @@ void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos)
 }
 
 
-
-void drawTexturedPoint(GLuint texture, const Vec2<float>& center, float size, float pos_z)
-{
-	glBindTexture(GL_TEXTURE_2D, texture);
-	
-	glPointSize(size);
-		
-	glBegin(GL_POINTS);
-		glVertex3f(center.x, center.y, pos_z);
-	glEnd();
-}
-
-
-
 void drawLine(TextureOb* texOb, 
               const Vec3<float>& start_pos, 
               float len, 
@@ -302,7 +288,7 @@ void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z
 }
     
     
-void renderMesh(Mesh* mesh, const Vec3<float>& center, const Vec3<float>& size, const Vec3<float>& angle, bool ZYX)
+void renderMesh(const Mesh* const mesh, const Vec3<float>& center, const Vec3<float>& size, const Vec3<float>& angle, bool ZYX)
 {
 	glPushMatrix();
 	{
@@ -329,6 +315,17 @@ void rotateXYZ(const Vec3<float>& angle)
 	glRotatef(angle.x, 1.0, 0.0, 0.0); 
 	glRotatef(angle.y, 0.0, 1.0, 0.0); 
 	glRotatef(angle.z, 0.0, 0.0, 1.0); 
+}
+
+void drawParticleTextured(GLuint texture, const Vec2<float>& center, float size, float pos_z)
+{
+	glBindTexture(GL_TEXTURE_2D, texture);
+	
+	glPointSize(size);
+		
+	glBegin(GL_POINTS);
+		glVertex3f(center.x, center.y, pos_z);
+	glEnd();
 }
 
 void drawParticle(const Vec2<float>& center, float size, float r, float g, float b, float a)

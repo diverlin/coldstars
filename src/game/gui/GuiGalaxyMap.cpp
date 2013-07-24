@@ -116,20 +116,20 @@ void GuiGalaxyMap::Render()
 				
 				TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::DISTANTSTAR_ID, starsystem->STAR_vec[0]->GetColorId()); 
 				
-				drawTexturedPoint(texOb_particle->texture, starsystem->GetCenter()*scale_parsec2screencoord, 30.0, -2.0);
+				drawParticleTextured(texOb_particle->texture, starsystem->GetCenter()*scale_parsec2screencoord, 30.0, -2.0);
 				
 				if (starsystem->GetConquerorRaceId() != NONE_ID)
 				{
-					drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_captured->texture, starsystem->GetCenter()*scale_parsec2screencoord, 20.0, -2.0);
+					drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_captured->texture, starsystem->GetCenter()*scale_parsec2screencoord, 20.0, -2.0);
 				}
 				
 				if (starsystem->GetConditionId() == ENTITY::STARSYSTEM::CONDITION::WAR_ID)
 				{
-					drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_war->texture, starsystem->GetCenter()*scale_parsec2screencoord + Vec3<float>(0.0,-13.0, 0.0), 20.0, -2.0);
+					drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_war->texture, starsystem->GetCenter()*scale_parsec2screencoord + Vec3<float>(0.0,-13.0, 0.0), 20.0, -2.0);
 				}        		
 			}           	
 		}	 
-		drawTexturedPoint(GuiTextureObCollector::Instance().starsystem_mark_player->texture, m_Player->GetNpc()->GetStarSystem()->GetCenter()*scale_parsec2screencoord, 40.0, -2.0);
+		drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_player->texture, m_Player->GetNpc()->GetStarSystem()->GetCenter()*scale_parsec2screencoord, 40.0, -2.0);
 		
 		visual_hyperjump_range.FillData(GuiTextureObCollector::Instance().dot_yellow, 
 		scale_parsec2screencoord*m_Player->GetNpc()->GetVehicle()->GetProperties().hyper, 

@@ -28,46 +28,46 @@
 class Star : public BasePlanet
 {
 	public:
-    		float texture_offset1, texture_offset2;    
-   		
-    		Star(int);
-    		virtual ~Star();
+        float texture_offset1, texture_offset2;    
+        
+        Star(int);
+        virtual ~Star();
+        
+        const Color4<float>& GetColor() const { return color; }
+        int GetColorId() const { return GetTextureOb()->color_id; }
+        float GetBrightThreshold() const { return GetTextureOb()->brightThreshold; }
+        float GetDColor() const { return d_color; }
+        
+        void Hit(int, bool) {};
+        void InitiateSpark();
+        
+        void CalcColor();    	
+        void UpdateInSpaceInStatic();	
+        void UpdateInSpace(int, bool);
+        
+        void Render_NEW() const;
+        void Render_OLD() const;
+        
+        void SaveData(boost::property_tree::ptree&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
                 
-		const Color4<float>& GetColor() const { return color; }
-		int GetColorId()           const { return textureOb->color_id; }
-		float GetBrightThreshold() const { return textureOb->brightThreshold; }
-		float GetDColor() const { return d_color; }
-				
-		void Hit(int, bool) {};
-		void InitiateSpark();
-
-                void CalcColor();    	
-                void UpdateInSpaceInStatic();	
-    		void UpdateInSpace(int, bool);
-    		
-    		void Render_NEW() const;
-    		void Render_OLD() const;
-                
-                void SaveData(boost::property_tree::ptree&) const;
-                void LoadData(const boost::property_tree::ptree&);
-		void ResolveData();
-                
-        private:
-        	Color4<float> color;
-        	float d_color;
-        	
-        	bool spark_active;
-        	bool spark_grows;
-        	
-        	int turn_since_last_spark_counter;
-        	int turn_spark_threshold;
-        	
-    		void UpdateInfo();
-    		void PostDeathUniqueEvent(bool);
-
-    		void SaveDataUniqueStar(boost::property_tree::ptree&, const std::string&) const;		
-		void LoadDataUniqueStar(const boost::property_tree::ptree&);
-		void ResolveDataUniqueStar();
+    private:
+        Color4<float> color;
+        float d_color;
+        
+        bool spark_active;
+        bool spark_grows;
+        
+        int turn_since_last_spark_counter;
+        int turn_spark_threshold;
+        
+        void UpdateInfo();
+        void PostDeathUniqueEvent(bool);
+        
+        void SaveDataUniqueStar(boost::property_tree::ptree&, const std::string&) const;		
+        void LoadDataUniqueStar(const boost::property_tree::ptree&);
+        void ResolveDataUniqueStar();
 }; 
 
 

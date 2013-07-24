@@ -55,7 +55,7 @@ Star::~Star()
     
 void Star::CalcColor()
 {
-	color = getColor4fById(textureOb->color_id);
+	color = getColor4fById(GetTextureOb()->color_id);
 }
        
 void Star::InitiateSpark()
@@ -127,16 +127,16 @@ void Star::Render_NEW() const
 	glUseProgram(ShaderCollector::Instance().multitexturing);
 	
 	glActiveTexture(GL_TEXTURE0);                                
-	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+	glBindTexture(GL_TEXTURE_2D, GetTextureOb()->texture);
 	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_0"), 0);
 	
 	glActiveTexture(GL_TEXTURE1);                                
-	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+	glBindTexture(GL_TEXTURE_2D, GetTextureOb()->texture);
 	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_1"), 1);
 	
 	glUniform2f(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "displ"), texture_offset1, texture_offset2);
 	
-	renderMesh(mesh, GetCenter(), GetSize(), GetAngle(), false);
+	renderMesh(GetMesh(), GetCenter(), GetSize(), GetAngle(), false);
 	
 	glUseProgram(0);
 	glActiveTexture(GL_TEXTURE0);
@@ -144,8 +144,8 @@ void Star::Render_NEW() const
         
 void Star::Render_OLD() const
 {    
-	glBindTexture(GL_TEXTURE_2D, textureOb->texture);      		
-	renderMesh(mesh, GetCenter(),GetSize(), GetAngle(), ZYX);
+	glBindTexture(GL_TEXTURE_2D, GetTextureOb()->texture);      		
+	renderMesh(GetMesh(), GetCenter(),GetSize(), GetAngle(), GetZYX());
 }
 
 void Star::UpdateInfo()
