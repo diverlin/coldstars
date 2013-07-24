@@ -44,7 +44,7 @@ class BaseParticleSystem
 		const Vec2<float>& GetCenter() const { return center; }
 		
 		virtual void Update() = 0;
-		virtual void Render() = 0;
+		virtual void Render(float) {}
 	
 	protected:
 		int type_id;

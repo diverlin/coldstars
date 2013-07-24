@@ -29,15 +29,15 @@ Orbit::~Orbit()
  
 const Vec3<float>& Orbit::GetNextTurnPosition() const 
 { 
-        if (it + TURN_TIME < len)
-        {
-                return coords_vec[it+TURN_TIME]; 
-        }
-        else
-        {
-                int d_orbit = len-it;
-                return coords_vec[TURN_TIME - d_orbit]; 
-        }
+    if (it + TURN_TIME < len)
+    {
+        return coords_vec[it+TURN_TIME]; 
+    }
+    else
+    {
+        int d_orbit = len-it;
+        return coords_vec[TURN_TIME - d_orbit]; 
+    }
 }
 
 
@@ -45,64 +45,64 @@ void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_ph
 {   
 	coords_vec.clear();
 	
-     	float d_angleInRad = speed / RADIAN_TO_DEGREE_RATE;;
-     	if (clockwise == true) 
-     	{
-     		d_angleInRad *= -1;
-     	}     	
-		 
-     	float orbitPhiInRad = orbit_phi_inD / RADIAN_TO_DEGREE_RATE;
-     	
-     	Vec3<float> new_coord;
-     	
-     	for(float angleInRad=0; fabs(angleInRad)<2*PI; angleInRad+=d_angleInRad) 
-     	{ 
-         	new_coord.x = radius_A * cos(angleInRad) * cos(orbitPhiInRad) - radius_B * sin(angleInRad) * sin(orbitPhiInRad);
-         	new_coord.y = radius_A * cos(angleInRad) * sin(orbitPhiInRad) + radius_B * sin(angleInRad) * cos(orbitPhiInRad);
-         	new_coord.z = DEFAULT_ENTITY_ZPOS;         	
-         	coords_vec.push_back(new_coord);
-     	}
-        len = coords_vec.size();
+    float d_angleInRad = speed / RADIAN_TO_DEGREE_RATE;;
+    if (clockwise == true) 
+    {
+        d_angleInRad *= -1;
+    }     	
+     
+    float orbitPhiInRad = orbit_phi_inD / RADIAN_TO_DEGREE_RATE;
+    
+    Vec3<float> new_coord;
+    
+    for(float angleInRad=0; fabs(angleInRad)<2*PI; angleInRad+=d_angleInRad) 
+    { 
+        new_coord.x = radius_A * cos(angleInRad) * cos(orbitPhiInRad) - radius_B * sin(angleInRad) * sin(orbitPhiInRad);
+        new_coord.y = radius_A * cos(angleInRad) * sin(orbitPhiInRad) + radius_B * sin(angleInRad) * cos(orbitPhiInRad);
+        new_coord.z = DEFAULT_ENTITY_ZPOS;         	
+        coords_vec.push_back(new_coord);
+    }
+    len = coords_vec.size();
 }    
 
 void Orbit::CalcPath(float radius, float speed, bool clockwise)
 {   	
 	coords_vec.clear();
 	
-     	float d_angleInRad  = speed / RADIAN_TO_DEGREE_RATE;
-     	if (clockwise == true) 
-     	{
-     		d_angleInRad *= -1;
-     	}    
-     	
-     	Vec3<float> new_coord;
-     	for(float angleInRad=0; fabs(angleInRad)<2*PI; angleInRad+=d_angleInRad) 
-     	{ 
-         	new_coord.x = radius*(cos(angleInRad) - sin(angleInRad));
-         	new_coord.y = radius*(cos(angleInRad) + sin(angleInRad));
-         	new_coord.z = DEFAULT_ENTITY_ZPOS;
-         	coords_vec.push_back(new_coord);
-     	}
-        len = coords_vec.size();
+    float d_angleInRad  = speed / RADIAN_TO_DEGREE_RATE;
+    if (clockwise == true) 
+    {
+        d_angleInRad *= -1;
+    }    
+    
+    Vec3<float> new_coord;
+    for(float angleInRad=0; fabs(angleInRad)<2*PI; angleInRad+=d_angleInRad) 
+    { 
+        new_coord.x = radius*(cos(angleInRad) - sin(angleInRad));
+        new_coord.y = radius*(cos(angleInRad) + sin(angleInRad));
+        new_coord.z = DEFAULT_ENTITY_ZPOS;
+        coords_vec.push_back(new_coord);
+    }
+    len = coords_vec.size();
 }    
 
 void Orbit::UpdatePosition()
 {   
-     	if (it < len-1) { it++; }
-     	else 		{ it = 0; }
+    if (it < len-1) { it++; }
+    else 		{ it = 0; }
 }    
 
 void Orbit::UpdatePathVisualisation()
 {
 	visual_orbit_path.FillData(coords_vec, 30, 10);
-        visual_orbit_turn.FillData(coords_vec, TURN_TIME, 13);
+    visual_orbit_turn.FillData(coords_vec, TURN_TIME, 13);
 }
 
 void Orbit::DrawPath()
 {   
 	this->UpdatePathVisualisation();   // TOO SLOW
-        visual_orbit_path.Draw();
-        visual_orbit_turn.Draw();
+    visual_orbit_path.Draw();
+    visual_orbit_turn.Draw();
 }
 
 

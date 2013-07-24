@@ -114,7 +114,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 	}
 }
 
-void Ship::RenderInSpace_2D() const
+void Ship::RenderInSpace_2D(float scale) const
 {   
 	setColor4f(color);
 	if (properties.grab_radius > 0)
@@ -131,7 +131,7 @@ void Ship::RenderInSpace_2D() const
 	
 	if (properties.speed > 0)
 	{
-		RenderDriveEffect(1.0 - color.a);
+		RenderDriveEffect(scale , 1.0 - color.a);
 	}
 	
 	if (properties.shield_effect_enabled == true)
@@ -141,7 +141,7 @@ void Ship::RenderInSpace_2D() const
 	starsystem->RestoreSceneColor();
 }
 
-void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords)
+void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords, float scale)
 {
 	UpdateRenderAnimation();
 	RenderMeshLight(scroll_coords, starsystem->GetColor4f());

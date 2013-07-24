@@ -25,22 +25,21 @@
 class DriveEffect : public BaseParticleSystem
 {
    	public:
-       		DriveEffect(Vec3<float>*, Vec3<float>*);
-       		virtual ~DriveEffect();
-       
-       		virtual void Update();
-       		virtual void Render() {};
-       		void Render(float parent_d_alpha = 0.0);
-       		
-                void CreateParticles();
-                void UpdateVelocity();
-       		void PutParticlesToInitPos();
+        DriveEffect(Vec3<float>*, Vec3<float>*);
+        virtual ~DriveEffect() override final;
+        
+        virtual void Update() override final;
+        void Render(float scale, float parent_d_alpha);
+        
+        void CreateParticles();
+        void UpdateVelocity();
+        void PutParticlesToInitPos();
                                 
-       	private:
-       		Vec3<float>* pTo_start_pos;      //ob.points.midLeft
-       		Vec3<float>* pTo_target_pos;     //ob.points.midFarLeft
-
-       		Vec3<float> velocity;
+    private:
+        Vec3<float>* pTo_start_pos;      //ob.points.midLeft
+        Vec3<float>* pTo_target_pos;     //ob.points.midFarLeft
+        
+        Vec3<float> velocity;
 
 
        	

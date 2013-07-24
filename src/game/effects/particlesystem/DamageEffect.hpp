@@ -25,15 +25,15 @@
 class DamageEffect : public BaseParticleSystem
 {
    	public: 
-       		DamageEffect();   
-       		virtual ~DamageEffect();
-                
-                void CreateParticles(); 
-                                
-       		virtual void Update();
-       		virtual void Render();
+        DamageEffect();   
+        virtual ~DamageEffect() override final;
+            
+        void CreateParticles(); 
+                            
+        virtual void Update() override final;
+        virtual void Render(float) override final;
 
-       	private:    
+    private:    
 
 };
 

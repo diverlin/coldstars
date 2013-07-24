@@ -25,6 +25,7 @@ DamageEffect::DamageEffect()
 	//subtype_id = DAMAGE_EFFECT_ID;
 }
 
+/* virtual override final */
 DamageEffect::~DamageEffect()
 {}
 
@@ -40,6 +41,7 @@ void DamageEffect::CreateParticles()
     	}
 }
 
+/* virtual override final */
 void DamageEffect::Update()
 {
      	is_alive = false;
@@ -60,16 +62,19 @@ void DamageEffect::Update()
         }
 }
 
-void DamageEffect::Render()
+/* virtual override final */
+void DamageEffect::Render(float scale)
 {
 	glPushMatrix();
-		glTranslatef(parent->GetCenter().x, parent->GetCenter().y, 0.0);
-	     	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+    {
+        glTranslatef(parent->GetCenter().x, parent->GetCenter().y, 0.0);
+        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
 		for (unsigned int i=0; i<num_particles; i++)
 		{
-	       		particles_vec[i]->Render();
-	       	}
-	glPopMatrix(); 
+            particles_vec[i]->Render(scale);
+        }
+	}
+    glPopMatrix(); 
 }
 
 

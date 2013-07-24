@@ -17,8 +17,8 @@
 */
 
 
-#ifndef SPACESTATION_H
-#define SPACESTATION_H
+#ifndef SPACESTATION_HPP
+#define SPACESTATION_HPP
 
 #include "Vehicle.hpp"
 #include "../docking/BaseLand.hpp"
@@ -26,34 +26,34 @@
 
 class SpaceStation : public Vehicle
 {
-    	public:  
-        	SpaceStation(int);
-        	virtual ~SpaceStation();
-        	
-        	virtual void PutChildsToGarbage() const;
-        		
-		BaseLand* GetLand() const { return land; };
-		void BindLand(BaseLand* land);
-
-		void UpdateInSpace(int, bool);
-		
-        	virtual void UpdateInfo();  
-        	
-        	void RenderInSpace_2D();
-        	void RenderInSpace_3D(const Vec2<float>&);     	
-        			
-        	void SaveData(boost::property_tree::ptree&) const;
-    		void LoadData(const boost::property_tree::ptree&);
-    		void ResolveData();
+    public:  
+        SpaceStation(int);
+        virtual ~SpaceStation();
+        
+        virtual void PutChildsToGarbage() const;
+            
+        BaseLand* GetLand() const { return land; };
+        void BindLand(BaseLand* land);
+        
+        void UpdateInSpace(int, bool);
+        
+        virtual void UpdateInfo();  
+        
+        void RenderInSpace_2D(float);
+        void RenderInSpace_3D(const Vec2<float>&, float);     	
+                
+        void SaveData(boost::property_tree::ptree&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
     		
-        private:
-                BaseLand* land;
-              
-                void SaveDataUniqueSpaceStation(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueSpaceStation(const boost::property_tree::ptree&);
-		void ResolveDataUniqueSpaceStation();
-
-        	void UpdateRenderStuff_2D();        	
+    private:
+        BaseLand* land;
+        
+        void SaveDataUniqueSpaceStation(boost::property_tree::ptree&, const std::string&) const;
+        void LoadDataUniqueSpaceStation(const boost::property_tree::ptree&);
+        void ResolveDataUniqueSpaceStation();
+        
+        void UpdateRenderStuff_2D();        	
 };
 
 

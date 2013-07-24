@@ -55,7 +55,7 @@
 #include "../pureTest/pureTest.cpp"
 #include "../pureTest/threadTest.cpp"
 
-enum { NORMAL_RUNSCENARIO, TEST_PARTICLES_RUNSCENARIO, TEST_TEXT_RUNSCENARIO };
+enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT };
 
 int main()
 {
@@ -68,13 +68,13 @@ int main()
 	Player* player = PlayerBuilder::Instance().GetNewPlayer();
 	
 	BaseRunScenario* run_scenario = nullptr;
-	int scenario_type = NORMAL_RUNSCENARIO;
+	RUN_SCENARIO scenario_type = RUN_SCENARIO::NORMAL_RUN;
 	switch(scenario_type)
 	{
-		case NORMAL_RUNSCENARIO: 			{ run_scenario = new NormalRunScenario(); break; }
-		case TEST_PARTICLES_RUNSCENARIO: 	{ run_scenario = new TestParticlesRunScenario(); break; }	
-		case TEST_TEXT_RUNSCENARIO: 		{ run_scenario = new TestTextRunScenario(); break; }
-		default: 							{ std::cout<<"INVALID_RUNSCENARIO"<<std::endl; return EXIT_FAILURE; break; }	
+		case RUN_SCENARIO::NORMAL_RUN: 		{ run_scenario = new NormalRunScenario(); break; }
+		case RUN_SCENARIO::TEST_PARTICLES: 	{ run_scenario = new TestParticlesRunScenario(); break; }	
+		case RUN_SCENARIO::TEST_TEXT: 		{ run_scenario = new TestTextRunScenario(); break; }
+		default: 	    					{ std::cout<<"INVALID_RUNSCENARIO"<<std::endl; return EXIT_FAILURE; break; }	
 	}
 	run_scenario->Init(player);
 	

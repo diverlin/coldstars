@@ -25,7 +25,7 @@
 ExplosionSlice::ExplosionSlice()
 {}
  
-/* virtual */
+/* virtual override final */
 ExplosionSlice::~ExplosionSlice()
 {}
 
@@ -39,6 +39,7 @@ void ExplosionSlice::CreateParticles()
 	}
 }
 
+/* virtual override final */
 void ExplosionSlice::Update()
 {
 	is_alive = false;
@@ -52,18 +53,16 @@ void ExplosionSlice::Update()
 	}  
 }     
 
-void ExplosionSlice::Render()
+/* virtual override final */
+void ExplosionSlice::Render(float scale)
 {
 	glBindTexture(GL_TEXTURE_2D, textureOb->texture);
 	for(unsigned int i=0; i<num_particles; i++)
 	{
-		particles_vec[i]->Render();
+		particles_vec[i]->Render(scale);
 	}  
 }  
-
-
-
-
+     
 
 
 
@@ -175,7 +174,7 @@ radius(radius)
 
 }
  
-/* virtual */
+/* virtual override final */
 ExplosionEffect::~ExplosionEffect()
 {
 	for (unsigned int i=0; i<slice_vec.size(); i++)
@@ -184,7 +183,7 @@ ExplosionEffect::~ExplosionEffect()
 	}
 }
 
-
+/* virtual override final */
 void ExplosionEffect::Update()
 {
 	is_alive = false;
@@ -198,16 +197,15 @@ void ExplosionEffect::Update()
 	}  
 }     
     
-
-void ExplosionEffect::Render()
+/* virtual override final */
+void ExplosionEffect::Render(float scale)
 {
 	glPushMatrix();
 	{
-		glTranslatef(center.x, center.y, 0.0);
-	
+		glTranslatef(center.x, center.y, 0.0);	
 	   	for (unsigned int i=0; i<slice_vec.size(); i++)
 	   	{
-	   		slice_vec[i]->Render();
+	   		slice_vec[i]->Render(scale);
 	   	}         
 	}
 	glPopMatrix();  

@@ -26,10 +26,10 @@ class ExplosionSlice : public BaseParticleSystem
 { 
 	public:
 		ExplosionSlice();       
-		virtual ~ExplosionSlice();
+		virtual ~ExplosionSlice() override final;
 		
-		virtual void Update();
-		virtual void Render();
+		virtual void Update() override final;
+		virtual void Render(float) override final;
 		
 		void CreateParticles();
 	private:
@@ -40,14 +40,15 @@ class ExplosionEffect : public BaseParticleSystem
 { 
 	public:
 		ExplosionEffect(float);       
-		virtual ~ExplosionEffect();
+		virtual ~ExplosionEffect() override final;
 		
 		float GetRadius() const { return radius; }
 		void Add(ExplosionSlice* explosion_slice) { slice_vec.push_back(explosion_slice); }
 		
-		virtual void Update();
-		virtual void Render();
-		private:
+		virtual void Update() override final;
+		virtual void Render(float) override final;
+		
+    private:
 		float radius;
 		std::vector<ExplosionSlice*> slice_vec;
 

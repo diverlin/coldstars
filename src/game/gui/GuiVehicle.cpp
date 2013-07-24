@@ -40,6 +40,7 @@ m_Vehicle(nullptr)
     int otsec_slot_max    = SLOT_CARGO_TYPES.size();
     int artefact_slot_max = SLOT_ARTEFACT_TYPES.size();
     
+    float dist_rate = 1.1;
     /** WEAPON SLOTS */
     for (int i=0; i<weapon_slot_max; i++)
     {
@@ -48,7 +49,7 @@ m_Vehicle(nullptr)
         Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
 
-        Vec2<float> offset((-5+1.1*i)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (-1/2+2*1.1)*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);                       
+        Vec2<float> offset((-2+i)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (2)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);                       
         AddChild(button, offset);
     } 
     
@@ -59,7 +60,7 @@ m_Vehicle(nullptr)
         Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
         
-        Vec2<float> offset(0*GUI::ITEMSLOT::WIDTH_FOR_SHIP, -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2);
+        Vec2<float> offset((3)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (-0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);
     }
 
@@ -69,7 +70,7 @@ m_Vehicle(nullptr)
         Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
                     
-        Vec2<float> offset( 0*GUI::ITEMSLOT::WIDTH_FOR_SHIP, -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2);
+        Vec2<float> offset((3)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);
     }
 
@@ -79,7 +80,7 @@ m_Vehicle(nullptr)
         Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
                 
-        Vec2<float> offset(-2*GUI::ITEMSLOT::WIDTH_FOR_SHIP, -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2); 
+        Vec2<float> offset((0)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP); 
         AddChild(button, offset);
     }
 
@@ -89,7 +90,7 @@ m_Vehicle(nullptr)
         Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
         
-        Vec2<float> offset(-2.5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, -GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        Vec2<float> offset((-0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);
     }
 
@@ -99,7 +100,7 @@ m_Vehicle(nullptr)
         Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
                             
-        Vec2<float> offset(-1.5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        Vec2<float> offset((0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP,(0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);
     }
 
@@ -109,7 +110,7 @@ m_Vehicle(nullptr)
         //Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         //button->SetSize(size);
                 
-        //Vec2<float> offset(-1.5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        //Vec2<float> offset((-0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP,(-0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         //AddChild(button, offset);
     //}
         		
@@ -119,7 +120,7 @@ m_Vehicle(nullptr)
         Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
                 
-        Vec2<float> offset(-2.5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        Vec2<float> offset((0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP,(-0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);
     }
 
@@ -129,7 +130,7 @@ m_Vehicle(nullptr)
         Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
                             
-        Vec2<float> offset(-4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 + 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2);
+        Vec2<float> offset((-2.5)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);
     }
 
@@ -139,20 +140,7 @@ m_Vehicle(nullptr)
         Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
                     
-        Vec2<float> offset(-4*GUI::ITEMSLOT::WIDTH_FOR_SHIP, -1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2 - 1.1*GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2);
-        AddChild(button, offset);
-    }
-    
-    /** CARGO SLOTS */    		
-    for (int i=0; i<otsec_slot_max; i++)
-    {
-        float scale_size =1/1.5;
-        ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(SLOT_CARGO_TYPES[i]), "ENTITY::CARGO_SLOT_ID");
-        
-        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, GUI::ITEMSLOT::HEIGHT_FOR_SHIP*scale_size);
-        button->SetSize(size);
-
-        Vec2<float> offset((-6+i)*GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, -3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);        
+        Vec2<float> offset((-2.5)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (-0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);
     }
 
@@ -166,19 +154,32 @@ m_Vehicle(nullptr)
             Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, GUI::ITEMSLOT::HEIGHT_FOR_SHIP*scale_size);
             button->SetSize(size);
                              
-            Vec2<float> offset(0*GUI::ITEMSLOT::WIDTH_FOR_SHIP + i*GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, -2.0*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+            Vec2<float> offset((i+1)*GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, (-2.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
             AddChild(button, offset);
         }      
+    }
+        
+    /** CARGO SLOTS */    		
+    for (int i=0; i<otsec_slot_max; i++)
+    {
+        float scale_size =1/1.5;
+        ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(SLOT_CARGO_TYPES[i]), "ENTITY::CARGO_SLOT_ID");
+        
+        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, GUI::ITEMSLOT::HEIGHT_FOR_SHIP*scale_size);
+        button->SetSize(size);
+
+        Vec2<float> offset((-5+i)*GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, -1.75*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);        
+        AddChild(button, offset);
     }
         
     /** GATE SLOT */
     {
         ButtonItemSlot* button = new ButtonItemSlot(GUI::getGuiItemSlotType(ENTITY::TYPE::GATE_SLOT_ID), "ENTITY::GATE_SLOT_ID");
         
-        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP/2, GUI::ITEMSLOT::HEIGHT_FOR_SHIP/2);
+        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
                             
-        Vec2<float> offset(-5*GUI::ITEMSLOT::WIDTH_FOR_SHIP, 3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        Vec2<float> offset((-3.2)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (3.2)*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);  		
 	}
 	
@@ -331,46 +332,6 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 }
 */
     
-/*
-bool GuiVehicle::UpdateMouseInteractionInStore(const MouseData& data_mouse, Store* store)
-{ 
-	for(unsigned int i=0; i<gui_itemslot_vec.size(); i++)
-	{ 
-		if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.pos_screencoord) == true)
-		{  
-			if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr)
-			{
-				m_Player->GetCursor().SetFocusedObject(gui_itemslot_vec[i].GetItemSlot()->GetItem());
-							
-				if (data_mouse.left_click == true)
-				{
-					vehicle->SellItem(gui_itemslot_vec[i].GetItemSlot()->GetItem());
-            			}
-			} 
-			
-			return true;
-       		}      
-        }
-	
-	return false;
-
-}
-*/
-    
-//void GuiVehicle::RenderVehicle(const MouseData& data_mouse, ENTITY::TYPE mark_slot_subtype_id) const
-//{
-	//glPushMatrix();
-    //{
-		//glTranslatef(GetOffset().x, GetOffset().y, 0);
-		//drawTexturedRect(m_TextureOb_korpus, rect_korpus, -1.0);
-		//if (mark_slot_subtype_id != ENTITY::TYPE::NONE_ID)
-		//{
-			//RenderMarksForEmptySlots(data_mouse, GUI::getGuiItemSlotType(mark_slot_subtype_id));
-		//}
-	//}
-    //glPopMatrix();
-//}
-
 void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, GUI::TYPE mark_slot_subtype_id) const
 { 
 	for(auto &child : m_Child_vec)
@@ -434,8 +395,6 @@ void GuiVehicle::RenderUnique(Player* player) const
         }
         disable_BLEND();
     }
-    
-    player->GetCursor().Render(player);
     
     enable_BLEND();
     {
