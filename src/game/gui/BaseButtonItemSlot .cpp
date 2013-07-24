@@ -73,7 +73,7 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
     }
 }
 
-void BaseButtonItemSlot::RenderMark(const Box& box, TextureOb* textureOb) const
+void BaseButtonItemSlot::RenderMark(const Box2D& box, TextureOb* textureOb) const
 {
     if (m_ItemSlot != nullptr)
     {

@@ -16,14 +16,19 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "BarFlat.hpp"
+#ifndef GUIBAR_HPP
+#define GUIBAR_HPP
 
-#include "../resources/GuiTextureObCollector.hpp"
+#include "BaseGuiElement.hpp"
 
+class GuiBar : public BaseGuiElement
+{
+	public:
+		GuiBar(TextureOb*);
+		~GuiBar();
+		
+	private:
 
-BarFlat::BarFlat()
-{}
+};
 
-/* virtual */
-BarFlat::~BarFlat()
-{}
+#endif

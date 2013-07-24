@@ -57,11 +57,11 @@ void ButtonItemSlot2::UpdateUnique(Player* player)
         {
             if (m_Pressed == true)
             {
-                m_Box.SetScale(1.5, 1.5, 1.0);
+                m_Box.SetScale(1.5, 1.5);
             }
             else
             {
-                m_Box.SetScale(1.0, 1.0, 1.0);        
+                m_Box.SetScale(1.0, 1.0);        
             }
         }
     }

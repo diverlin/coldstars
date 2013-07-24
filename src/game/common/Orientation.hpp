@@ -22,7 +22,6 @@
 
 #include "Base.hpp"
 #include "points.hpp"
-#include "Box.hpp"
 
 struct UnresolvedDataUniqueOrientation
 {	

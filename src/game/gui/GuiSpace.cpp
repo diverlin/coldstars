@@ -27,7 +27,7 @@
 
 #include "GuiManager.hpp"
 
-#include "BarFlat.hpp"
+#include "GuiBar.hpp"
 
 #include "../common/myStr.hpp"
 #include "../common/constants.hpp"
@@ -59,41 +59,31 @@ init_done(false)
 	int screen_w = Screen::Instance().GetWidth();
 	int screen_h = Screen::Instance().GetHeight();
 	
-	float zpos = -1;
-	float zsize = 1;
-	
 	{
-		Vec3<float> center;		
-		Vec3<float> size(screen_w, screen_h, 1);
-		Box box(center, size);
-		this->SetBox(box);
+		Vec2<float> size(screen_w, screen_h);
+		SetSize(size);
 		
-		this->SetOffset(Vec3<float>(screen_w/2, screen_h/2, zpos));
+		SetOffset(Vec2<float>(screen_w/2, screen_h/2));
 	}
 	
 	/** Top bar */
 	{
-		BarFlat* bar_top = new BarFlat();
-		{
-			TextureOb* textureOb_bar_top = GuiTextureObCollector::Instance().bar_top;	
-			bar_top->SetTextureOb(textureOb_bar_top);
-			Vec3<float> center;
-			Vec3<float> size(screen_w, GUI::BAR_HEIGHT, 1);
-			Box box(center, size);
-			bar_top->SetBox(box);
-	
-			Vec3<float> offset(0, screen_h/2-GUI::BAR_HEIGHT/2, 0);
-			this->AddChild(bar_top, offset);	
-		}
+        TextureOb* textureOb_bar_top = GuiTextureObCollector::Instance().bar_top;	
+        GuiBar* bar_top = new GuiBar(textureOb_bar_top);
+    
+        Vec2<float> size(screen_w, GUI::BAR_HEIGHT);
+        bar_top->SetSize(size);
+
+        Vec2<float> offset(0, screen_h/2-GUI::BAR_HEIGHT/2);
+        AddChild(bar_top, offset);	
 
 		{
 			TextureOb* texOb = GuiTextureObCollector::Instance().icon_map;  
 			ButtonTrigger* galaxymap_button = new ButtonTrigger(GUI::TYPE::GALAXYMAP_ID, "galaxy map", GuiActions::GalaxyMapGuiTransition, texOb);
-			Vec3<float> center;
-			Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
-			Box box(center, size);		
-			galaxymap_button->SetBox(box);		
-			galaxymap_button->SetScale(Vec3<float>(1.0, 2.0, 1.0));
+			
+            Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE); 	
+			galaxymap_button->SetSize(size);		
+            
 			Vec3<float> offset(screen_w/2-1*1.1*GUI::ICON_SIZE, 0, 0);
 			bar_top->AddChild(galaxymap_button, offset);
 		}
@@ -101,24 +91,22 @@ init_done(false)
 		{
 			TextureOb* texOb = GuiTextureObCollector::Instance().icon_plus;
 			ButtonSingle* load_button = new ButtonSingle(GUI::TYPE::LOAD_ID, "load", GuiActions::LoadEvent, texOb);    
-			Vec3<float> center; 
-			Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
-			Box box(center, size);		
-			load_button->SetBox(box);
 			
-			Vec3<float> offset(screen_w/2-2*1.1*GUI::ICON_SIZE, 0, 0);
+            Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);	
+			load_button->SetSize(size);
+			
+			Vec2<float> offset(screen_w/2-2*1.1*GUI::ICON_SIZE, 0);
 			bar_top->AddChild(load_button, offset);				     
 		}
 		
 		{
 			TextureOb* texOb = GuiTextureObCollector::Instance().icon_minus;
 			ButtonSingle* save_button = new ButtonSingle(GUI::TYPE::SAVE_ID, "save", GuiActions::SaveEvent, texOb);    
-			Vec3<float> center; 
-			Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);	
-			Box box(center, size);		
-			save_button->SetBox(box);	
+
+			Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);	
+			save_button->SetSize(size);	
 			
-			Vec3<float> offset(screen_w/2-3*1.1*GUI::ICON_SIZE, 0, 0);				     
+			Vec2<float> offset(screen_w/2-3*1.1*GUI::ICON_SIZE, 0);				     
 			bar_top->AddChild(save_button, offset);	
 		}
 	}
@@ -126,54 +114,44 @@ init_done(false)
 	
 	/** Bottom bar */
 	{
-		BarFlat* bar_bottom = new BarFlat();
-		{
-			TextureOb* textureOb_bar_bottom = GuiTextureObCollector::Instance().bar_bottom;	
-			bar_bottom->SetTextureOb(textureOb_bar_bottom);
-			Vec3<float> center;
-			Vec3<float> size(screen_w, GUI::BAR_HEIGHT, 1);
-			Box box(center, size);
-			bar_bottom->SetBox(box);
-	
-			Vec3<float> offset(0, -screen_h/2+GUI::BAR_HEIGHT/2, 0);
-			this->AddChild(bar_bottom, offset);	
-		}
+		TextureOb* textureOb_bar_bottom = GuiTextureObCollector::Instance().bar_bottom;	
+		GuiBar* bar_bottom = new GuiBar(textureOb_bar_bottom);
+
+        Vec2<float> size(screen_w, GUI::BAR_HEIGHT);
+        bar_bottom->SetSize(size);
+
+        Vec2<float> offset(0, -screen_h/2+GUI::BAR_HEIGHT/2);
+        AddChild(bar_bottom, offset);	
 	}
 		
 	{
 		GuiRadar* gui_radar = new GuiRadar();
-		Vec3<float> center;
-		Vec3<float> size(250, 250, 1);	
 		
-		Box box(center, size);
-		gui_radar->SetBox(box);
+        Vec2<float> size(250, 250);	
+		gui_radar->SetSize(size);
 	
-        Vec3<float> offset(0, -screen_h/2+GUI::BAR_HEIGHT/2, 0);
-		this->AddChild(gui_radar, offset);	
+        Vec2<float> offset(0, -screen_h/2+GUI::BAR_HEIGHT/2);
+		AddChild(gui_radar, offset);	
 	}
     
     {
 		GuiVehicle2* gui_vehicle_player = new GuiVehicle2(GUI::TYPE::PLAYER_VEHICLE_ID);
-		Vec3<float> center;
-		Vec3<float> size(250, 250, 1);	
 		
-		Box box(center, size);
-		gui_vehicle_player->SetBox(box);
+        Vec2<float> size(250, 250);	
+		gui_vehicle_player->SetSize(size);
     
-        Vec3<float> offset(-screen_w/2+125, -screen_h/2+125, 0);
-		this->AddChild(gui_vehicle_player, offset);	
+        Vec2<float> offset(-screen_w/2+125, -screen_h/2+125);
+		AddChild(gui_vehicle_player, offset);	
 	}      
 
     {
 		GuiVehicle* gui_scan = new GuiVehicle(GUI::TYPE::SCAN_VEHICLE_ID);
-		Vec3<float> center;
-		Vec3<float> size(250, 250, 1);	
-		
-		Box box(center, size);
-		gui_scan->SetBox(box);
+
+		Vec2<float> size(250, 250);	
+		gui_scan->SetSize(size);
     
-        Vec3<float> offset(screen_w/2, screen_h/2, 0);
-		this->AddChild(gui_scan, offset);	
+        Vec2<float> offset(screen_w/2, screen_h/2);
+		AddChild(gui_scan, offset);	
 	} 
 }
 

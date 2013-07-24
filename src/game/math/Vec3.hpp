@@ -3,7 +3,6 @@
 
 #include <cmath>
 #include <sstream>
-#include "Vec2.hpp"
 
 template<typename VARTYPE>
 class Vec3

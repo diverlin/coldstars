@@ -131,26 +131,23 @@ void BaseItem::RenderInfo(const Vec2<float>& pos)
 }
 
 /* virtual */
-void BaseItem::Render(const Box& box, const Vec2<float>& gui_offset, bool draw_text)
+void BaseItem::Render(const Box2D& box, const Vec2<float>& gui_offset, bool draw_text)
 {
 	RenderKorpus(box);
 }
 
-void BaseItem::RenderKorpus(const Box& box)
+void BaseItem::RenderKorpus(const Box2D& box)
 {
 	if (Is3D())
 	{
-		//disable_BLEND();
-        {
-			Vec3<float> v(0.0);
-			Color4<float> c(1.0, 1.0, 1.0, 1.0);
-			SetCenter(box.GetCenter());
-			//SetAngle(box.GetAngle());
-			UpdateRenderAnimation();
-			//SetScale(box.GetSize());
-			RenderMeshLight(v, c);
-		}
-        //enable_BLEND();
+		Vec3<float> v(0.0);
+		Color4<float> c(1.0, 1.0, 1.0, 1.0);
+        Vec3<float> center(box.GetCenter().x, box.GetCenter().y, GUI::POS_Z);
+		SetCenter(center);
+		//SetAngle(box.GetAngle());
+		UpdateRenderAnimation();
+		//SetScale(box.GetSize());
+		RenderMeshLight(v, c);
 	}
 	else
 	{

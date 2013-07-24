@@ -120,9 +120,9 @@ int main()
 		/* server code end */
 
 		/* client code start */
-                player->UpdatePostTransaction();   
-		player->RunSession(TurnTimer::Instance());  
-                player->UpdatePostTransactionEvent(TurnTimer::Instance()); 
+        player->UpdatePostTransaction();   
+        player->RunSession(TurnTimer::Instance());  
+        player->UpdatePostTransactionEvent(TurnTimer::Instance()); 
 		/* client code end */
 		
 		if (TurnTimer::Instance().GetTurnEnded() == true)
@@ -146,7 +146,7 @@ int main()
 		{
 			run_scenario->Update_inStatic(player);		
 		}
-		
+
 		checkOpenglErrors(__FILE__,__LINE__);
 	}
 

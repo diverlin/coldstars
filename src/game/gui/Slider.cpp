@@ -140,25 +140,25 @@ void Slider::Render() const
 {
 	glPushMatrix();
 	{
-		glTranslatef(GetOffset().x, GetOffset().y, 0);
+		//glTranslatef(GetOffset().x, GetOffset().y, 0);
 		drawTexturedRect(textureOb, rect, -1);
 		drawTexturedRect(textureOb_scale, rect_slide, -1);
 	}
 	glPopMatrix();
 	
 	{
-		Vec2<float> pos(rect.GetBottomLeft().x + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
-		Screen::Instance().DrawText("0", 12, pos);
+		//Vec2<float> pos(rect.GetBottomLeft().x + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
+		//Screen::Instance().DrawText("0", 12, pos);
 	}
 
 	{
-		Vec2<float> pos(rect.GetBottomLeft().x + rect.GetWidth()/2 - 20 + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
-		Screen::Instance().DrawText(int2str(ammount_selected)+" :"+int2str(price_selected) + "$", 12, pos);		
+		//Vec2<float> pos(rect.GetBottomLeft().x + rect.GetWidth()/2 - 20 + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
+		//Screen::Instance().DrawText(int2str(ammount_selected)+" :"+int2str(price_selected) + "$", 12, pos);		
 	}
 
 	{
-		Vec2<float> pos(rect.GetBottomLeft().x + rect.GetWidth() - 20 + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
-		Screen::Instance().DrawText(int2str(ammount_total), 12, pos);	
+		//Vec2<float> pos(rect.GetBottomLeft().x + rect.GetWidth() - 20 + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
+		//Screen::Instance().DrawText(int2str(ammount_total), 12, pos);	
 	}	
 	
 	//RenderButtons();

@@ -28,7 +28,7 @@ class AnimationEffect2D;
 
 #include <common/GuiTypes.hpp>
 
-#include <common/Box.hpp> // to be removed
+#include <common/Box2D.hpp> 
 #include <common/rect.hpp> // to be removed
 #include <resources/TextureManager.hpp>
 #include <common/constants.hpp>
@@ -40,30 +40,17 @@ class BaseGuiElement
 		BaseGuiElement(GUI::TYPE subtype_id=GUI::TYPE::NONE_ID, const std::string& info="", TextureOb* textureOb=nullptr, BaseGuiElement* parent=nullptr);
 		virtual ~BaseGuiElement();
 		
-		//void SetSubTypeId(int subtype_id) { this->subtype_id = subtype_id; } 
-		
-		//void SetInfo(const std::string& info) { this->info = info; }
 		void SetLabel(const std::string& label) { m_Label = label; }
-
-		void SetRoot(bool root) { m_Root = root; }
 		
 		void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; } 		
 		void SetPlayer(Player* player) { m_Player = player; } // depr
-
-		void SetScale(const Vec3<float>& scale) { m_Scale = scale; }		
-				
-		void SetOffset(const Vec3<float>& offset) { m_Offset = offset; }	// depr				
-		void SetOffset(const Vec2<float>& offset) { m_Offset.Set(offset.x, offset.y, 0); }	// depr	
 		
-		//void SetParent(BaseGuiElement* parent) { m_Parent = parent; }
-		
-		void SetBox(const Box& box) { m_Box = box; }
+        void SetSize(Vec2<float> size) { m_Box.SetSize(size); };
         	
 		GUI::TYPE GetTypeId() const { return m_Type_id; }
 		GUI::TYPE GetSubTypeId() const { return m_Subtype_id; }
 					
-		const Vec3<float>& GetOffset() const { return m_Offset; } // depr
-		const Box& GetBox() const { return m_Box; }
+		const Box2D& GetBox() const { return m_Box; }
 		TextureOb* GetTextureOb() const { return m_TextureOb; }
 				
         bool GetLock() const { return m_Lock; }
@@ -75,7 +62,7 @@ class BaseGuiElement
 			
 		BaseGuiElement* UpdateMouseInteraction(const Vec2<float>&);
 		
-		void AddChild(BaseGuiElement*, const Vec3<float>&);
+		void AddChild(BaseGuiElement*, const Vec2<float>&);
 
 		void Show() { m_Show = true; }
 		void Hide() { m_Show = false; }
@@ -96,25 +83,28 @@ class BaseGuiElement
 		bool m_Show;
 		bool m_Root;
 		
-		Box m_Box;
+		Box2D m_Box;
 		Player* m_Player; // depr
 				
 		TextureOb* m_TextureOb;	
 		std::string m_Info; 
 		std::string m_Label; 
 		
-		//BaseGuiElement* m_Parent;
 		std::vector<BaseGuiElement*> m_Child_vec;
 
+		void SetScale(const Vec2<float>& scale) { m_Box.SetScale(scale); }		
+		void SetOffset(const Vec2<float>& offset) { m_Offset = offset; }	
+        void SetRoot(bool root) { m_Root = root; }
+                
 		void SetAnimationProgram(AnimationEffect2D* animation_program) { m_AnimationProgram = animation_program; }
-        
+
         bool GetAnimationProgramActive() const { return (m_AnimationProgram != nullptr); }
         void DeleteAnimationProgram();
         
 		void PressEventOnGuiElement(GUI::TYPE);
 		void ResetStateEventOnGuiElement(GUI::TYPE);			
 
-		void UpdateGeometry(const Vec3<float>&, const Vec3<float>&);	
+		void UpdateGeometry(const Vec2<float>&, const Vec2<float>&);	
         
 		virtual void UpdateUnique(Player*);		
 		void UpdateCommon(Player*);
@@ -122,14 +112,12 @@ class BaseGuiElement
 		virtual void RenderUnique(Player*) const;		
 		void RenderCommon(Player*) const;
        		       	
-	private:       				
-		Vec3<float> m_Offset;
-		Vec3<float> m_Scale;
-		
+	private: 
+        Vec2<float> m_Offset;      
         AnimationEffect2D* m_AnimationProgram;
         
 		static std::map<GUI::TYPE, BaseGuiElement*> static_gui_element_map;
-		
+                
 	friend class GuiManager;
 };
 

@@ -36,9 +36,7 @@ m_Root(true),
 m_Lock(false),
 m_Pressed(false),
 m_AnimationProgram(nullptr)
-{
-	m_Scale.Set(1.0, 1.0, 1.0);
-}
+{}
 
 /* virtual */
 BaseGuiElement::~BaseGuiElement()
@@ -113,9 +111,8 @@ void BaseGuiElement::ResetState()
 	m_Lock = false;
 }
 
-void BaseGuiElement::AddChild(BaseGuiElement* child, const Vec3<float>& offset) 
+void BaseGuiElement::AddChild(BaseGuiElement* child, const Vec2<float>& offset) 
 { 
-	//child->SetParent(this);
 	child->SetOffset(offset);
 	child->SetRoot(false);
 	
@@ -151,17 +148,18 @@ BaseGuiElement* BaseGuiElement::UpdateMouseInteraction(const Vec2<float>& mouse_
 	return nullptr;
 }
 
-void BaseGuiElement::UpdateGeometry(const Vec3<float>& parent_offset, const Vec3<float>& parent_scale)
+void BaseGuiElement::UpdateGeometry(const Vec2<float>& parent_offset, const Vec2<float>& parent_scale)
 {
 	if (!m_Show)
 	{
 		return;
 	}
 	
-	Vec3<float> next_offset = m_Offset*m_Scale + parent_offset*parent_scale;
-	Vec3<float> next_scale = parent_scale*m_Scale;
-	m_Box.SetCenter(next_offset);
-	m_Box.SetScale(next_scale);
+	Vec2<float> next_offset = parent_offset + m_Offset;
+	Vec2<float> next_scale = parent_scale * m_Box.GetScale();
+
+    m_Box.SetCenter(next_offset);
+    m_Box.SetScale(next_scale);
 			
 	for (auto &child : m_Child_vec)
 	{
@@ -216,8 +214,8 @@ void BaseGuiElement::Render(Player* player) const
     
 	enable_BLEND();
 	{
-		RenderCommon(player);
 		RenderUnique(player);
+		RenderCommon(player);
 	}
 	disable_BLEND();
 }

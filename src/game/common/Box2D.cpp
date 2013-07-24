@@ -16,52 +16,52 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Box.hpp"
+#include "Box2D.hpp"
 #include "Collision.hpp"
 #include "rect.hpp"
 
-Box::Box()
+Box2D::Box2D()
 {
-    SetScale(1.0, 1.0, 1.0);
+    SetScale(1.0, 1.0);
 }
 
-Box::Box(const Vec3<float>& size)
+Box2D::Box2D(const Vec2<float>& size)
 {
 	SetSize(size);
-    SetScale(1.0, 1.0, 1.0);
+    SetScale(1.0, 1.0);
 }
 
-Box::Box(const Vec3<float>& center, const Vec3<float>& size)
+Box2D::Box2D(const Vec2<float>& center, const Vec2<float>& size)
 {
 	SetCenter(center);
 	SetSize(size);	
-    SetScale(1.0, 1.0, 1.0);
+    SetScale(1.0, 1.0);
 }
 
-Box::Box(const Box& rhs)
+Box2D::Box2D(const Box2D& rhs)
 {
 	Set(rhs);
 }
 
-Box::Box(const Rect& rect)
+Box2D::Box2D(const Rect& rect)
 {
-	SetCenter(Vec3<float>(rect.GetCenter().x, rect.GetCenter().y, -1.0));
-	SetSize(Vec3<float>(rect.GetWidth(), rect.GetHeight(), 1.0));
-    SetScale(1.0, 1.0, 1.0);
+	SetCenter(Vec2<float>(rect.GetCenter().x, rect.GetCenter().y));
+	SetSize(Vec2<float>(rect.GetWidth(), rect.GetHeight()));
+    SetScale(1.0, 1.0);
 }
 
-Box::~Box()
+Box2D::~Box2D()
 {}
 
-bool Box::CheckInteraction(const Vec2<float>& point) const
+bool Box2D::CheckInteraction(const Vec2<float>& point) const
 {       	
 	return checkCollisionDotWithRectangle(point, m_Center, m_Size*m_Scale);
 }
            	
-void Box::Set(const Box& box)
+void Box2D::Set(const Box2D& box)
 {
-	SetCenter(box.GetCenter());
-	SetSize(box.GetSize());
+    SetSize(box.GetSize());
 	SetScale(box.GetScale());
+	SetCenter(box.GetCenter());
 }
 

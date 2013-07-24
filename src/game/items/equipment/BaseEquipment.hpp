@@ -25,24 +25,24 @@ class AnimationEffect2D;
 
 class BaseEquipment : public BaseItem
 {
-        public:
-     		BaseEquipment();
-     		virtual ~BaseEquipment();
-
-		virtual void PutChildsToGarbage() const;
-
-      		bool InsertModule(BaseModule*);
-      		
-       		virtual void Render(const Box&, const Vec2<float>&, bool draw_text = true);
+    public:
+        BaseEquipment();
+        virtual ~BaseEquipment();
+        
+        virtual void PutChildsToGarbage() const;
+        
+        bool InsertModule(BaseModule*);
+        
+        virtual void Render(const Box2D&, const Vec2<float>&, bool draw_text = true);
       		      		
-     	protected:
+    protected:
 		std::vector<BaseModule*> modules_vec;    // needs for inserted modules drawing
-                
-                AnimationEffect2D* animation_notfunctioning;
-                
-                virtual void AddCommonInfo();
-                
-                void SaveDataUniqueBaseEquipment(boost::property_tree::ptree&, const std::string&) const;
+        
+        AnimationEffect2D* animation_notfunctioning;
+        
+        virtual void AddCommonInfo();
+        
+        void SaveDataUniqueBaseEquipment(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueBaseEquipment(const boost::property_tree::ptree&);
 		void ResolveDataUniqueBaseEquipment();   
 };

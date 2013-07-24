@@ -109,9 +109,35 @@ void drawQuad(TextureOb* texOb,
 	glPopMatrix();
 }
 
-void drawQuad(TextureOb* texOb, const Box& box)
+void drawQuad(TextureOb* texOb,
+		 const Vec2<float>& center, 
+		 const Vec2<float>& size,
+		 float angle)
 {
-	drawQuad(texOb, box.GetCenter(), box.GetSize()*box.GetScale(), box.GetAngle().z);
+	glBindTexture(GL_TEXTURE_2D, texOb->texture);
+	int frame = texOb->updateAnimationFrame();
+	
+	glPushMatrix();
+	{
+		glTranslatef(center.x, center.y, GUI::POS_Z);
+		glRotatef(angle, 0.0, 0.0, 1.0);
+		glScalef(size.x, size.y, 1.0);
+									
+		glBegin(GL_QUADS);
+        {   
+			glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
+			glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
+			glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
+			glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
+		}
+        glEnd();
+	}
+	glPopMatrix();
+}
+
+void drawQuad(TextureOb* texOb, const Box2D& box)
+{
+	drawQuad(texOb, box.GetCenter(), box.GetSize()*box.GetScale(), box.GetAngle());
 }
 
 

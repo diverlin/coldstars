@@ -17,9 +17,9 @@
 */
 
 #include "AnimationEffect2D.hpp"
-#include "../common/Box.hpp"
+#include <common/Box2D.hpp>
 
-void AnimationEffect2D::Update(Box& box)
+void AnimationEffect2D::Update(Box2D& box)
 {
 	if ((scale.x < scale_min.x) and (scale.y < scale_min.y))
 	{

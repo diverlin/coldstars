@@ -23,7 +23,7 @@
 #include <GL/glew.h>
 #include "../resources/textureOb.hpp"
 #include "../common/rect.hpp"
-#include "../common/Box.hpp"
+#include <common/Box2D.hpp>
 class Mesh;
 
 void initGl(int, int);
@@ -52,8 +52,13 @@ void drawQuad(TextureOb* texOb,
 		 const Vec3<float>& center,
 		 const Vec3<float>& size, 
 		 float angle=0);
+         
+void drawQuad(TextureOb* texOb,
+		 const Vec2<float>& center, 
+		 const Vec2<float>& size,
+		 float angle);
 		 	 
-void drawQuad(TextureOb*, const Box&);
+void drawQuad(TextureOb*, const Box2D&);
 		 		 		 
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
 
