@@ -34,13 +34,12 @@
 GuiVehicle::GuiVehicle(GUI::TYPE subtype_id)
 :
 BaseGuiElement(subtype_id),
-m_TextureOb_korpus(nullptr),
 m_Vehicle(nullptr)
 {   
     int weapon_slot_max   = SLOT_WEAPON_TYPES.size();
     int otsec_slot_max    = SLOT_CARGO_TYPES.size();
     int artefact_slot_max = SLOT_ARTEFACT_TYPES.size();
-	
+    
     /** WEAPON SLOTS */
     for (int i=0; i<weapon_slot_max; i++)
     {
@@ -194,11 +193,8 @@ void GuiVehicle::BindVehicle(Vehicle* vehicle, const Vec2<float>& gui_offset, bo
 {      
 	m_Vehicle = vehicle; 
      
-	SetOffset(gui_offset);
 	this->allow_full_control = allow_full_control;
 	this->block_manual_exit = block_manual_exit;
-                
-	m_TextureOb_korpus = nullptr;
 
 	CreateKorpusGui(vehicle, scale);
 	CreateItemSlotsGeometry(vehicle, scale);
@@ -217,12 +213,12 @@ void GuiVehicle::UnbindVehicle()
 
 void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
 {
-	m_TextureOb_korpus = vehicle->GetTextureOb();
+	m_TextureOb = GuiTextureObCollector::Instance().radar_range;
 
     float kontur_w = 400;
     float kontur_h = 400;           
 
-    rect_korpus.Set(-kontur_w/2 * scale, -kontur_h/2 * scale, kontur_w * scale, kontur_h * scale); 
+    m_Box.SetSize(kontur_w * scale, kontur_h * scale); 
 }      
   
 void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
@@ -443,15 +439,9 @@ void GuiVehicle::RenderUnique(Player* player) const
     
     enable_BLEND();
     {
-        drawTexturedRect(m_TextureOb_korpus, rect_korpus, -1.0);
+        drawQuad(m_TextureOb, m_Box);
     }
     disable_BLEND();
-
-	//RenderSlots();
-	//if (mark_slot_subtype_id != NONE_ID)
-	//{
-		//RenderMarksForEmptySlots(data_mouse, mark_slot_subtype_id);
-	//}
 }        
         
 

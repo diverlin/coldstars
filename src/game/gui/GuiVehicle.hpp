@@ -16,8 +16,8 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUIVEHICLE_H
-#define GUIVEHICLE_H
+#ifndef GUIVEHICLE_HPP
+#define GUIVEHICLE_HPP
 
 #include "BaseGuiElement.hpp"
 #include <docking/Store.hpp>
@@ -37,18 +37,10 @@ class GuiVehicle : public BaseGuiElement
                         
         void BindVehicle(Vehicle*, const Vec2<float>& offset, bool full_control_on, bool block_manual_closing = false, float scale = 1.0f);
         void UnbindVehicle();
-        
-        //bool UpdateMouseInteraction(const MouseData&);   
-        //bool UpdateMouseInteractionInStore(const MouseData&, Store*); 
-        
-        //void RenderVehicle(const MouseData&, ENTITY::TYPE mark_slot_subtype_id = ENTITY::TYPE::NONE_ID) const;
     
     private:     
         bool block_manual_exit;
         bool allow_full_control;
-        
-        Rect rect_korpus; 
-        TextureOb* m_TextureOb_korpus;
             
         Vehicle* m_Vehicle;
 

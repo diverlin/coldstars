@@ -62,8 +62,6 @@ init_done(false)
 	{
 		Vec2<float> size(screen_w, screen_h);
 		SetSize(size);
-		
-		SetOffset(Vec2<float>(screen_w/2, screen_h/2));
 	}
 	
 	/** Top bar */
@@ -74,7 +72,7 @@ init_done(false)
         Vec2<float> size(screen_w, GUI::BAR_HEIGHT);
         bar_top->SetSize(size);
 
-        Vec2<float> offset(0, screen_h/2-GUI::BAR_HEIGHT/2);
+        Vec2<float> offset(screen_w/2, screen_h-GUI::BAR_HEIGHT/2);
         AddChild(bar_top, offset);	
 
 		{
@@ -120,7 +118,7 @@ init_done(false)
         Vec2<float> size(screen_w, GUI::BAR_HEIGHT);
         bar_bottom->SetSize(size);
 
-        Vec2<float> offset(0, -screen_h/2+GUI::BAR_HEIGHT/2);
+        Vec2<float> offset(screen_w/2, GUI::BAR_HEIGHT/2);
         AddChild(bar_bottom, offset);	
 	}
 		
@@ -140,7 +138,7 @@ init_done(false)
         Vec2<float> size(250, 250);	
 		gui_vehicle_player->SetSize(size);
     
-        Vec2<float> offset(-screen_w/2+125, -screen_h/2+125);
+        Vec2<float> offset(125, 125);
 		AddChild(gui_vehicle_player, offset);	
 	}      
 
