@@ -24,9 +24,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class LazerTraceEffect
 { 
     	public:
-       		LazerTraceEffect(TextureOb*, 
-       				 Vec3<float>*, 
-       				 Vec3<float>*);
+       		LazerTraceEffect(TextureOb*, const Vec3<float>* const, const Vec3<float>* const);
        		~LazerTraceEffect();
 
 		void setDamageEffect(DamageEffect* _damage_effect) { damage_effect = _damage_effect; };
@@ -52,8 +50,8 @@ class LazerTraceEffect
        		
        		int existance_time;
        		       		
-       		Vec3<float>* pTo_start_pos;
-       		Vec3<float>* pTo_end_pos;
+       		const Vec3<float>* pTo_start_pos;
+       		const Vec3<float>* pTo_end_pos;
        		       		
        		DamageEffect* damage_effect;
  	       		

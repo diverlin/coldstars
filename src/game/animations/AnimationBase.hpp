@@ -23,18 +23,19 @@
 
 class AnimationBase
 {  
-     	public:
-        	AnimationBase(float step):
-			clockwise(true),
-			step(step)
-			{}
-        	virtual ~AnimationBase() {};
+    public:
+        AnimationBase(float step)
+        :
+        clockwise(true),
+        step(step)
+        {}
+        virtual ~AnimationBase() {}
 
-        	virtual void Update(Vec3<float>&) = 0;
+        virtual void Update(Vec3<float>&) = 0;
 
-        protected:       
-        	bool clockwise;
-        	float step;      
+    protected:       
+        bool clockwise;
+        float step;      
 };
 
 #endif 

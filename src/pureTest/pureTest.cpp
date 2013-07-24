@@ -55,12 +55,15 @@ void pureTest3()
 	exit(0);		
 }
 
-enum class Z { ONE=1, TWO, THREE };
-
 void pureTest4()
 {	
-    Z a;
-    a = Z::TWO;
-	//std::cout<<Z::TWO<<std::endl;
+    int a = 2;
+    int b = 3;
+    
+    const int* const p = &a;
+    //*p = 4;
+    //p = &b;
+    std::cout<<*p<<std::endl;
+    
 	exit(0);		
 }

@@ -61,10 +61,7 @@ void DistantNebulaEffect::ResolveData()
 	ResolveDataUniqueDistantNebulaEffect();
 }
 
-
-		
-
-void DistantNebulaEffect::SaveDataUniqueDistantNebulaEffect(boost::property_tree::ptree& save_ptree, const std::string& root) const		
+ void DistantNebulaEffect::SaveDataUniqueDistantNebulaEffect(boost::property_tree::ptree& save_ptree, const std::string& root) const		
 {
 	save_ptree.put(root+"angle_inD", angle_inD);
 	save_ptree.put(root+"d_angle_inD", d_angle_inD);
@@ -87,15 +84,20 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
 	   	
 	float parallax_rate;
 	if(textureOb->GetFrameWidth() * textureOb->GetFrameHeight() > 300000)
+    {
 		parallax_rate =  1.0/getRandInt(50, 70); 
-	else
+	}
+    else
+    {
 		parallax_rate =  1.0/getRandInt(30, 50);
-	
+	}
+    
 	float angle_inD = getRandInt(0, 360);
 	float d_angle_inD = 0.0;
 	if(textureOb->is_rotated)
+    {
 		d_angle_inD = getRandInt(8,12)*0.001 * getRandSign();    	
-	
+	}
 	
 	Vec3<float> center((float)getRandInt(0, 1000), (float)getRandInt(0, 1000), -999.0);
 	

@@ -152,7 +152,7 @@ void LazerEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "lazer_equipment." + int2str(GetId()) + ".";
 	SaveDataUniqueBase(save_ptree, root);
-        SaveDataUniqueBaseItem(save_ptree, root);
+    SaveDataUniqueBaseItem(save_ptree, root);
 	SaveDataUniqueBaseEquipment(save_ptree, root);
 	SaveDataUniqueLazerEquipment(save_ptree, root);
 }

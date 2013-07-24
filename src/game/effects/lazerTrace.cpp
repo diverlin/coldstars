@@ -23,29 +23,29 @@
 #include "../render/Screen.hpp"
 #include "../resources/ShaderCollector.hpp"
 
-LazerTraceEffect::LazerTraceEffect(TextureOb* _texOb, Vec3<float>* _pTo_start_pos, Vec3<float>* _pTo_end_pos)
+LazerTraceEffect::LazerTraceEffect(TextureOb* _texOb, const Vec3<float>* const _pTo_start_pos, const Vec3<float>* const _pTo_end_pos)
 {
-        is_alive = true;
-        is_alreadyInRemoveQueue = false; 
-
-	texOb = _texOb;
-        
-        existance_time = getRandInt(40, 45);
-
-        if (getRandInt(1,2) == 1)
-        	d_angle_inR = 0.0005 * 3;  //self.target.size
-        else
-        	d_angle_inR = -0.0005 * 3; // self.target.size
-
-
-       	additional_angle_inR = 0;
-
-       	pTo_start_pos = _pTo_start_pos;
-       	pTo_end_pos   = _pTo_end_pos;
-
-       	damage_effect = nullptr;
-       
-       	updateAngleAndLen();
+    is_alive = true;
+    is_alreadyInRemoveQueue = false; 
+    
+    texOb = _texOb;
+    
+    existance_time = getRandInt(40, 45);
+    
+    if (getRandInt(1,2) == 1)
+        d_angle_inR = 0.0005 * 3;  //self.target.size
+    else
+        d_angle_inR = -0.0005 * 3; // self.target.size
+    
+    
+    additional_angle_inR = 0;
+    
+    pTo_start_pos = _pTo_start_pos;
+    pTo_end_pos   = _pTo_end_pos;
+    
+    damage_effect = nullptr;
+    
+    updateAngleAndLen();
 }
 
 LazerTraceEffect::~LazerTraceEffect()

@@ -17,11 +17,11 @@
 */
 
 
-#ifndef ORIENTATION_H
-#define ORIENTATION_H
+#ifndef ORIENTATION_HPP
+#define ORIENTATION_HPP
 
-#include "Base.hpp"
-#include "points.hpp"
+#include <common/Base.hpp>
+#include <common/points.hpp>
 
 struct UnresolvedDataUniqueOrientation
 {	
@@ -33,61 +33,60 @@ class Orientation : public Base
 {
 	public:      
 		Orientation();
-		virtual ~Orientation();
+		virtual ~Orientation() override;
 
-		void SetParentCenter(float px, float py, float pz) { parent_center.Set(px, py, pz); }		
-		void SetParentCenter(Vec3<float> parent_center) { this->parent_center.Set(parent_center); }
+		void SetParentCenter(float x, float y, float z) { m_ParentCenter.Set(x, y, z); }		
+		void SetParentCenter(Vec3<float> parent_center) { m_ParentCenter.Set(parent_center); }
 		
-		void SetCenter(float cx, float cy, float cz)	{ center.Set(cx, cy, cz); is_updated = false; }
-		void SetCenter(const Vec3<float>& center)       { this->center.Set(center); is_updated = false; }
+		void SetCenter(float x, float y, float z)	{ m_Center.Set(x, y, z); m_IsUpdated = false; }
+		void SetCenter(const Vec3<float>& center)   { m_Center.Set(center); m_IsUpdated = false; }
 		
-		void SetAngle(float ax, float ay, float az) { angle.Set(ax, ay, az); is_updated = false; }
-		void SetAngle(const Vec3<float>& angle) { this->angle.Set(angle); is_updated = false; }
-		void SetAngleZ(float angle_z) 	{ this->angle.z = angle_z; is_updated = false; }
+		void SetAngle(float x, float y, float z) { m_Angle.Set(x, y, z); m_IsUpdated = false; }
+		void SetAngle(const Vec3<float>& angle) { m_Angle.Set(angle); m_IsUpdated = false; }
+		void SetAngleZ(float angle_z) 	{ m_Angle.z = angle_z; m_IsUpdated = false; }
 		
-		void SetSize(float sx, float sy, float sz) { size.Set(sx, sy, sz); is_updated = false; }
-		void SetSize(const Vec3<float>& size) { this->size.Set(size); is_updated = false; }
+		void SetSize(float sx, float sy, float sz) { m_Size.Set(sx, sy, sz); m_IsUpdated = false; }
+		void SetSize(const Vec3<float>& size) { m_Size.Set(size); m_IsUpdated = false; }
 		
-		float GetWidth() const  { return size.x; }
-		float GetHeight() const { return size.y; }
+		const Vec3<float>& GetAngle() const { return m_Angle; }       
+		Vec3<float>& GetAngle() { return m_Angle; }      // !!!
+		const float* const GetpAngleZ() { return &m_Angle.z; } 
 		
-		const Vec3<float>& GetAngle() const { return angle; }       
-		Vec3<float>& GetAngle() { return angle; }
-		float* GetpAngleZ() { return &angle.z; }
+		const Vec3<float>& GetCenter() const { return m_Center; }
+		const Vec3<float>& GetSize()  const { return m_Size; } 
 		
-		const Vec3<float>& GetCenter() const { return center; }
-		const Vec3<float>& GetSize()  const { return size; } 
-		
-		Vec3<float>* GetpCenter() { return &center; }
-		Vec3<float>* GetpParentCenter() { return &parent_center; }
+		Vec3<float>* const GetpCenter() { return &m_Center; }
+		const Vec3<float>* const GetpParentCenter() { return &m_ParentCenter; }
 						
-   		Points& GetPoints()          { return points; }
-   				
-		float GetCollisionRadius() const  { return collision_radius; }
+   		Points& GetPoints()          { return m_Points; }  // !!!
+   		
+		float GetCollisionRadius() const  { return m_CollisionRadius; }
 
 		void UpdateOrientation();
-						
+        						
 	protected:			
-		float collision_radius;
-			
-		Points points;
-		
 		UnresolvedDataUniqueOrientation data_unresolved_Orientation;
 		void SaveDataUniqueOrientation(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueOrientation(const boost::property_tree::ptree&);
 		void ResolveDataUniqueOrientation();
-		
-	private:
-		bool is_updated;
-		
-		Vec3<float> center;                  
-		Vec3<float> size;
-		Vec3<float> angle;
-		
-		Vec3<float> uOrient;
-		
-		Vec3<float> parent_center; 
+
+		void SetCollisionRadius(float collision_radius) { m_CollisionRadius = collision_radius; }	
                 		
+	private:
+		bool m_IsUpdated;
+
+		float m_CollisionRadius;
+        		
+		Vec3<float> m_Center;                  
+		Vec3<float> m_Size;
+		Vec3<float> m_Angle;
+		
+		Vec3<float> m_Orient;
+		
+		Vec3<float> m_ParentCenter; 
+
+		Points m_Points;
+                        		
 	friend class BaseVehicleBuilder;
 };
 

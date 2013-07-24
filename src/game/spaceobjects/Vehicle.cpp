@@ -186,7 +186,7 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
 			float pos_y = getRandFloat(border_start, border_end) - 0.5;
 							
 			slot->GetTurrel()->SetParentCenter(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
-			points.Add(slot->GetTurrel()->GetpCenter(), slot->GetTurrel()->GetpParentCenter()); 
+			GetPoints().Add(slot->GetTurrel()->GetpCenter(), slot->GetTurrel()->GetpParentCenter()); 
 			weapon_complex.AddSlot(slot); 
 			
 			break; 
@@ -746,7 +746,7 @@ void Vehicle::Hit(int damage, bool show_effect)
        			protection_complex.GetShieldEffect()->SetAlpha(1.0);
        		}       	
        		
-       		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, GetCenter(), COLOR::COLOR4I_RED_LIGHT, collision_radius);
+       		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, GetCenter(), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
        		starsystem->Add(text); 
        	}
        	

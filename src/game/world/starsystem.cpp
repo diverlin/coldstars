@@ -822,31 +822,35 @@ void StarSystem::RestoreDefaultColor()
 void StarSystem::DrawBackground(Vec2<float> scroll_coords)
 {   
 	// HACK for point sprites
-    	enable_POINTSPRITE();
-    		if (distantStarEffect_vec.size()>0) distantStarEffect_vec[0]->Render(scroll_coords.x, scroll_coords.y); 
-    	disable_POINTSPRITE();
-    	// HACK for point sprites
+    enable_POINTSPRITE();
+    {
+        if (distantStarEffect_vec.size()>0) distantStarEffect_vec[0]->Render(scroll_coords.x, scroll_coords.y); 
+    }
+    disable_POINTSPRITE();
+    // HACK for point sprites
 
 	clearScreen();
 	resetRenderTransformation();
-        RestoreSceneColor();
+    RestoreSceneColor();
 
-    	enable_BLEND();
-		glDepthMask(false);
+    enable_BLEND();
+    glDepthMask(false);
 
-    		for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++)
-    		{ 
-        		distantNebulaEffect_vec[i]->Render(scroll_coords.x, scroll_coords.y); 
-    		}
+    for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++)
+    { 
+        distantNebulaEffect_vec[i]->Render(scroll_coords.x, scroll_coords.y); 
+    }
 
-    		enable_POINTSPRITE();
-    			for(unsigned int i = 0; i<distantStarEffect_vec.size(); i++)
-    			{ 
-       				distantStarEffect_vec[i]->Render(scroll_coords.x, scroll_coords.y); 
-    			}
-    		disable_POINTSPRITE();
+    enable_POINTSPRITE();
+    {
+        for(unsigned int i = 0; i<distantStarEffect_vec.size(); i++)
+        { 
+            distantStarEffect_vec[i]->Render(scroll_coords.x, scroll_coords.y); 
+        }
+    }
+    disable_POINTSPRITE();
     	
-		glDepthMask(true);
+    glDepthMask(true);
 	disable_BLEND();
 }
     

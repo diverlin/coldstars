@@ -25,7 +25,7 @@ Points::Points()
 Points::~Points()
 {}              
                 
-void Points::Add(Vec3<float>* point, Vec3<float>* point_orig)
+void Points::Add(Vec3<float>* const point, const Vec3<float>* const point_orig)
 { 
         vector_orig.push_back(point_orig);
         vector.push_back(point);
@@ -52,19 +52,19 @@ void Points::addMidFarLeftPoint()
 
 void Points::Update(const Vec3<float>& center, const Vec3<float>& angle, const Vec3<float>& scale, const Vec3<float>& uOrient)
 {
-       	Vec3<float> pos = center;
+    Vec3<float> pos = center;
 
-       	for (unsigned int i=0; i<vector.size(); i++)
-       	{   
-       		////// rotation around center
-       		vector[i]->x = uOrient.x*scale.x*vector_orig[i]->x - uOrient.y*scale.y*vector_orig[i]->y;
-		vector[i]->y = uOrient.y*scale.x*vector_orig[i]->x + uOrient.x*scale.y*vector_orig[i]->y;  
-		////// moving to position
-		vector[i]->x += pos.x;
-		vector[i]->y += pos.y;
-		
-		vector[i]->z = vector_orig[i]->z;
-    	}
+    for (unsigned int i=0; i<vector.size(); i++)
+    {   
+        ////// rotation around center
+        vector[i]->x = uOrient.x*scale.x*vector_orig[i]->x - uOrient.y*scale.y*vector_orig[i]->y;
+        vector[i]->y = uOrient.y*scale.x*vector_orig[i]->x + uOrient.x*scale.y*vector_orig[i]->y;  
+        ////// moving to position
+        vector[i]->x += pos.x;
+        vector[i]->y += pos.y;
+        
+        vector[i]->z = vector_orig[i]->z;
+    }
 }        
          
 

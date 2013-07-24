@@ -16,12 +16,14 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Orientation.hpp"
-#include "../common/Logger.hpp"
+#include <common/Orientation.hpp>
+#include <common/Logger.hpp>
 
-Orientation::Orientation():is_updated(false)
+Orientation::Orientation()
+:
+m_IsUpdated(false)
 {
-        uOrient.Set(1.0, 0.0, 0.0); // -> (0 degree)
+    m_Orient.Set(1.0, 0.0, 0.0); // -> (0 degree)
 }
 
 /* virtual */
@@ -34,17 +36,17 @@ Orientation::~Orientation()
 
 void Orientation::UpdateOrientation()
 {
-	if (is_updated == false)
+	if (m_IsUpdated == false)
 	{   
-		float angle_radian = angle.z/RADIAN_TO_DEGREE_RATE;
+		float angle_radian = m_Angle.z/RADIAN_TO_DEGREE_RATE;
 		
-		uOrient.x = cos(angle_radian);
-		uOrient.y = sin(angle_radian);
-		uOrient.z = 0.0; 
+		m_Orient.x = cos(angle_radian);
+		m_Orient.y = sin(angle_radian);
+		m_Orient.z = 0.0; 
 		
-		points.Update(center, angle, size, uOrient);
+		m_Points.Update(m_Center, m_Angle, m_Size, m_Orient);
 		
-		is_updated = true;
+		m_IsUpdated = true;
 	}
     		
 }		
@@ -55,13 +57,13 @@ void Orientation::SaveDataUniqueOrientation(boost::property_tree::ptree& save_pt
 	Logger::Instance().Log(" Orientation("+int2str(GetId())+")::SaveDataUniqueOrientation", SAVELOAD_LOG_DIP);
 	#endif
 		
-	save_ptree.put(root+"data_unresolved_Orientation.center.x", GetCenter().x);
-	save_ptree.put(root+"data_unresolved_Orientation.center.y", GetCenter().y);
-	save_ptree.put(root+"data_unresolved_Orientation.center.z", GetCenter().z);
+	save_ptree.put(root+"data_unresolved_Orientation.center.x", m_Center.x);
+	save_ptree.put(root+"data_unresolved_Orientation.center.y", m_Center.y);
+	save_ptree.put(root+"data_unresolved_Orientation.center.z", m_Center.z);
 	
-	save_ptree.put(root+"data_unresolved_Orientation.angle.x", GetAngle().x);
-	save_ptree.put(root+"data_unresolved_Orientation.angle.y", GetAngle().y);
-	save_ptree.put(root+"data_unresolved_Orientation.angle.z", GetAngle().z);
+	save_ptree.put(root+"data_unresolved_Orientation.angle.x", m_Angle.x);
+	save_ptree.put(root+"data_unresolved_Orientation.angle.y", m_Angle.y);
+	save_ptree.put(root+"data_unresolved_Orientation.angle.z", m_Angle.z);
 		
 }
 
