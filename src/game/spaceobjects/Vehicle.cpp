@@ -92,7 +92,7 @@ m_SlotFreezer(nullptr)
 	m_ComplexProtector.SetOwnerVehicle(this);
 }
 
-/*virtual*/
+/* virtual */
 Vehicle::~Vehicle()
 {
 	#if CREATEDESTROY_LOG_ENABLED == 1
@@ -100,7 +100,7 @@ Vehicle::~Vehicle()
 	#endif
 } 
 
-/* virtual */
+/* virtual override */
 void Vehicle::PutChildsToGarbage() const
 {
 	m_OwnerNpc->SetAlive(false);

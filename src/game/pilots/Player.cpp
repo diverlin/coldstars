@@ -473,7 +473,6 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
 				for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
     			{ 
-    				visible_SATELLITE_vec[i]->UpdateRenderStuff(); 
        				visible_SATELLITE_vec[i]->RenderInSpace(1/scale); 
         			starsystem->RestoreSceneColor();
     			}

@@ -34,7 +34,6 @@ Satellite::Satellite(int id)
 	SetSubTypeId(ENTITY::TYPE::SATELLITE_ID);
 	
     SetMass(getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX));
-    orbit = new Orbit();
 }
 
 /* virtual */
@@ -43,23 +42,28 @@ Satellite::~Satellite()
 	#if CREATEDESTROY_LOG_ENABLED == 1
 	Logger::Instance().Log("___::~Satellite("+int2str(GetId())+")");
 	#endif
-
-	delete orbit;
 }
 
+void Satellite::BindParent(const BaseSpaceEntity* const parent)
+{
+    SetParent(parent);
+    m_Orbit.CalcPath(2*1.1*parent->GetCollisionRadius(), 1.0, getRandBool());
+}
+        
 void Satellite::UpdateInSpace(int time, bool show_effect)
 {
 	CheckDeath(show_effect);
+    UpdateRenderStuff(); 
 	if (time > 0)
 	{
-		orbit->UpdatePosition();
+		m_Orbit.UpdatePosition();
 
 		//printf("sat orbit =%f,%f\n", orbit->getPosition().x, orbit->getPosition().y);
 		//if (parent != nullptr)
 		//{		
 			Vec3<float> new_pos;
-			new_pos.x = GetParent()->GetCenter().x + orbit->GetPosition().x;
-			new_pos.y = GetParent()->GetCenter().y + orbit->GetPosition().y;
+			new_pos.x = GetParent()->GetCenter().x + m_Orbit.GetPosition().x;
+			new_pos.y = GetParent()->GetCenter().y + m_Orbit.GetPosition().y;
 			new_pos.z = GetParent()->GetCenter().z;
 			SetCenter(new_pos);
 			UpdateOrientation();
@@ -87,8 +91,7 @@ void Satellite::UpdateInfo()
             
 void Satellite::UpdateRenderStuff()
 {
-    GetComplexProtector().GetShieldEffect()->Update();
-    
+    GetComplexProtector().GetShieldEffect()->Update();    
     UpdateOrientation();
 }
 

@@ -16,11 +16,12 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef SATELLITE_HPP
 #define SATELLITE_HPP
 
-#include "Vehicle.hpp"
-#include "../parts/orbit.hpp"
+#include <spaceobjects/Vehicle.hpp>
+#include <parts/orbit.hpp>
 
 class Satellite : public Vehicle
 {
@@ -28,23 +29,23 @@ class Satellite : public Vehicle
         Satellite(int);
         virtual ~Satellite();
 
-        Orbit* GetOrbit() const { return orbit; };
-    		
-		void UpdateInSpace(int, bool);
+    	void BindParent(const BaseSpaceEntity* const);
         	
-        void UpdateRenderStuff();
-        void RenderInSpace(float scale);
+		virtual void UpdateInSpace(int, bool) override final;
+        	
+        void RenderInSpace(float);
         void RenderAtPlanet() const; 
-        
-        void SaveData(boost::property_tree::ptree&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+                
+        virtual void SaveData(boost::property_tree::ptree&) const override final;
+        virtual void LoadData(const boost::property_tree::ptree&) override final;
+        virtual void ResolveData() override final;
     		
     private:
-        Orbit* orbit;
+        Orbit m_Orbit;
 
-        virtual void UpdateInfo();
-        
+        virtual void UpdateInfo() override final;
+        void UpdateRenderStuff();
+                        
         void SaveDataUniqueSatellite(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueSatellite(const boost::property_tree::ptree&);
 		void ResolveDataUniqueSatellite();
