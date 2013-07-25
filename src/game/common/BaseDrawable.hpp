@@ -22,6 +22,7 @@
 
 #include <common/Orientation.hpp>
 #include <struct/gameStruct.hpp>
+
 class Mesh;
 class TextureOb;
 class AnimationBase;
@@ -42,7 +43,8 @@ class BaseDrawable : public Orientation
 		void BindData2D(TextureOb*);    
 		void SetRenderAnimation(AnimationBase* animation_program) { m_AnimationProgram = animation_program; }
         void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; }
-        		
+        void SetColor(const Color4<float>& color) { m_Color = color; }
+                		
 		bool Is3D() const 				{ return (m_Mesh != nullptr); }
 		const Vec3<float>& GetBoundaryBox() const 	{ return m_Mesh->GetBoundaryBox(); }
 		const Mesh* const GetMesh() const 	{ return m_Mesh; }
@@ -51,11 +53,19 @@ class BaseDrawable : public Orientation
 
    		TextureOb* const GetTextureOb() const { return m_TextureOb; }
    		bool GetZYX() const { return m_ZYX; }
-        							
+        
+        const Color4<float> GetColor() const { return m_Color; }
+                							
 		void RenderCollisionRadius() const;
 				
 	protected:
+        void SetTransparency(float alpha)  { m_Color.a = alpha; }
+    
 		void UpdateRenderAnimation();
+                
+        bool UpdateFadeInEffect(); // depr, move to animation program
+        bool UpdateFadeOutEffect(); // depr, mve to animation program
+        
 		void RenderMeshLight(const Vec2<float>&, const Color4<float>&) const;
 		void RenderMeshLightNormalMap(const Vec2<float>&, const Color4<float>&) const;
 		
@@ -66,8 +76,10 @@ class BaseDrawable : public Orientation
 
     private:
         bool m_ZYX;
-
-		TextureOb* m_TextureOb;
+        		          
+        Color4<float> m_Color;
+        
+        TextureOb* m_TextureOb;
 		Mesh* m_Mesh; 
 		
 		AnimationBase* m_AnimationProgram;

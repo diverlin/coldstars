@@ -41,7 +41,7 @@ MicroScenarioGrab::~MicroScenarioGrab()
 /* virtual */		
 void MicroScenarioGrab::Enter(Npc* npc) const
 {
-	npc->GetVehicle()->GetDriveComplex().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::COLLECTING_ID);
+	npc->GetVehicle()->GetComplexDrive().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::COLLECTING_ID);
 	
         #if AISCENARIO_LOG_ENABLED == 1 
 	Logger::Instance().Log("npc_id="+int2str(npc->GetId())+" ENTER MicroScenarioGrab"); 
@@ -56,16 +56,16 @@ bool MicroScenarioGrab::Validate(Npc* npc) const
         
         // check if equipment is able to perform current task
         bool euipment_is_ok = false;
-        if (npc->GetVehicle()->GetGrappleSlot()->GetItem() != nullptr)
+        if (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr)
         {
-                if (npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->GetFunctioning() == true)
+                if (npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->GetFunctioning() == true)
                 {
                         euipment_is_ok = true;
                 }
         }
         
         // check if target is ok
-        bool target_is_ok = npc->GetVehicle()->GetGrappleSlot()->CheckTargetPure(target);
+        bool target_is_ok = npc->GetVehicle()->GetSlotGrapple()->CheckTargetPure(target);
         
 	if ( (euipment_is_ok == true) and (target_is_ok == true) )
         {
@@ -79,9 +79,9 @@ bool MicroScenarioGrab::Validate(Npc* npc) const
 void MicroScenarioGrab::UpdateInStaticInSpace(Npc* npc) const
 {
 	BaseSpaceEntity* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();
-	if (npc->GetVehicle()->GetGrappleSlot()->CheckTarget(target) == true)
+	if (npc->GetVehicle()->GetSlotGrapple()->CheckTarget(target) == true)
 	{
-       		npc->GetVehicle()->GetGrappleSlot()->GetGrappleEquipment()->AddTarget(target);
+       		npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->AddTarget(target);
        	}
 }
 

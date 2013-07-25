@@ -69,7 +69,7 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
 			//points.SetCenter(orbit->getPosition());
 		//}
 		
-		weapon_complex.Fire(time, owner_npc->GetSkills().GetAttackNormalized(), show_effect);
+		GetComplexWeapon().Fire(time, GetOwnerNpc()->GetSkills().GetAttackNormalized(), show_effect);
 	}
 }
 
@@ -87,7 +87,7 @@ void Satellite::UpdateInfo()
             
 void Satellite::UpdateRenderStuff()
 {
-    protection_complex.GetShieldEffect()->Update();
+    GetComplexProtector().GetShieldEffect()->Update();
     
     UpdateOrientation();
 }
@@ -98,14 +98,14 @@ void Satellite::RenderInSpace(float scale)
         
     RenderKorpus();
     
-    if (data_korpus.draw_turrels == true)
+    if (GetDataKorpus().draw_turrels == true)
     {
-        weapon_complex.RenderTurrels();
+        GetComplexWeapon().RenderTurrels();
     }
 
-    if (protection_complex.GetProtectorSlot()->GetItem() != nullptr)
+    if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
     {
-        RenderShieldEffect(1.0 - color.a); 
+        RenderShieldEffect(1.0 - GetColor().a); 
     }
 }
 
@@ -113,9 +113,9 @@ void Satellite::RenderAtPlanet() const
 {
 	RenderKorpus();
 	
-	if (data_korpus.draw_turrels == true)
+	if (GetDataKorpus().draw_turrels == true)
     {
-        weapon_complex.RenderTurrels();
+        GetComplexWeapon().RenderTurrels();
     }
 }		
 

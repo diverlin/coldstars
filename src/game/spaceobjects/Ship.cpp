@@ -63,24 +63,24 @@ void Ship::UpdateInfo()
 	else     		{ GetInfo().addNameStr("id:");       GetInfo().addValueStr( int2str(GetId()) ); }
 	GetInfo().addNameStr("race:");   		GetInfo().addValueStr( getRaceStr(GetTextureOb()->race_id) ); 
 	GetInfo().addNameStr("class:");   		GetInfo().addValueStr( getEntityTypeStr(GetSubSubTypeId()) );     	
-	GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( int2str(GetDataLife().armor) + "/" + int2str(data_korpus.armor) );
+	GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( int2str(GetDataLife().armor) + "/" + int2str(GetDataKorpus().armor) );
 	GetInfo().addNameStr("size id:");     	GetInfo().addValueStr( int2str(GetTextureOb()->size_id) );
-	GetInfo().addNameStr("space/free:");   	GetInfo().addValueStr( int2str(data_korpus.space) + "/" + int2str(properties.free_space) );
+	GetInfo().addNameStr("space/free:");   	GetInfo().addValueStr( int2str(GetDataKorpus().space) + "/" + int2str(GetProperties().free_space) );
 	GetInfo().addNameStr("mass:");   		GetInfo().addValueStr( int2str(GetMass()) );
-	GetInfo().addNameStr("speedx100:");     GetInfo().addValueStr( int2str(properties.speed*100) );
+	GetInfo().addNameStr("speedx100:");     GetInfo().addValueStr( int2str(GetProperties().speed*100) );
 	GetInfo().addNameStr("speed dmx100:");  GetInfo().addValueStr( int2str(GetMass()*MASS_DECREASE_SPEED_RATE*100));
-	GetInfo().addNameStr("energy:");        GetInfo().addValueStr( int2str(properties.energy) );
-	GetInfo().addNameStr("temp.:");       	GetInfo().addValueStr( int2str(data_korpus.temperature) );
-	GetInfo().addNameStr("radar:");    		GetInfo().addValueStr( int2str(properties.radar) );
-	GetInfo().addNameStr("protect:");       GetInfo().addValueStr( int2str(properties.protection) );
-	GetInfo().addNameStr("repair:");        GetInfo().addValueStr( int2str(properties.repair) );
-	GetInfo().addNameStr("scan:");        	GetInfo().addValueStr( int2str(properties.scan) );
-	GetInfo().addNameStr("price:");       	GetInfo().addValueStr( int2str(data_korpus.price) );
+	GetInfo().addNameStr("energy:");        GetInfo().addValueStr( int2str(GetProperties().energy) );
+	GetInfo().addNameStr("temp.:");       	GetInfo().addValueStr( int2str(GetDataKorpus().temperature) );
+	GetInfo().addNameStr("radar:");    		GetInfo().addValueStr( int2str(GetProperties().radar) );
+	GetInfo().addNameStr("protect:");       GetInfo().addValueStr( int2str(GetProperties().protection) );
+	GetInfo().addNameStr("repair:");        GetInfo().addValueStr( int2str(GetProperties().repair) );
+	GetInfo().addNameStr("scan:");        	GetInfo().addValueStr( int2str(GetProperties().scan) );
+	GetInfo().addNameStr("price:");       	GetInfo().addValueStr( int2str(GetDataKorpus().price) );
 	GetInfo().addNameStr("pos:");       	GetInfo().addValueStr( str(GetCenter()) );
 		
-	if (properties.grab_radius > 0)
+	if (GetProperties().grab_radius > 0)
 	{
-		std::string grab_str = GetGrappleSlot()->GetGrappleEquipment()->GetTargetStr();
+		std::string grab_str = GetSlotGrapple()->GetGrappleEquipment()->GetTargetStr();
 		if (grab_str.size() > 0)
 		{
 			GetInfo().addNameStr("grab_id:");   		GetInfo().addValueStr( grab_str ); 
@@ -95,19 +95,19 @@ void Ship::UpdateInfo()
 void Ship::UpdateInSpace(int time, bool show_effect)
 {   
 	CheckDeath(show_effect);
-	protection_complex.GetShieldEffect()->Update();
+	GetComplexProtector().GetShieldEffect()->Update();
     		
 	if (time > 0)
 	{
 		UpdateSpecialAction();
 		
-		owner_npc->UpdateInSpace(time, show_effect);
+		GetOwnerNpc()->UpdateInSpace(time, show_effect);
 		UpdateOrientation();   
-		weapon_complex.Fire(time, owner_npc->GetSkills().GetAttackNormalized(), show_effect);
+		GetComplexWeapon().Fire(time, GetOwnerNpc()->GetSkills().GetAttackNormalized(), show_effect);
 		
-		if (properties.speed > 0) 
+		if (GetProperties().speed > 0) 
 		{ 
-			drive_complex.UpdatePosition();
+			GetComplexDrive().UpdatePosition();
 		}
 		
 		UpdateGrappleMicroProgram_inDynamic();
@@ -116,27 +116,27 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 
 void Ship::RenderInSpace_2D(float scale) const
 {   
-	setColor4f(color);
-	if (properties.grab_radius > 0)
+	setColor4f(GetColor());
+	if (GetProperties().grab_radius > 0)
 	{
 		RenderGrabTrail();
 	}
 	
 	RenderKorpus();
 	
-	if (data_korpus.draw_turrels == true)
+	if (GetDataKorpus().draw_turrels == true)
 	{
-		weapon_complex.RenderTurrels();
+		GetComplexWeapon().RenderTurrels();
 	}
 	
-	if (properties.speed > 0)
+	if (GetProperties().speed > 0)
 	{
-		RenderDriveEffect(scale , 1.0 - color.a);
+		RenderDriveEffect(scale , 1.0 - GetColor().a);
 	}
 	
-	if (properties.shield_effect_enabled == true)
+	if (GetProperties().shield_effect_enabled == true)
 	{
-		RenderShieldEffect(1.0 - color.a); 
+		RenderShieldEffect(1.0 - GetColor().a); 
 	}
 	GetStarSystem()->RestoreSceneColor();
 }
@@ -146,11 +146,11 @@ void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords, float scale)
 	UpdateRenderAnimation();
 	RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());
 
-	setColor4f(color);
+	setColor4f(GetColor());
 	enable_BLEND();
-	if (properties.shield_effect_enabled == true)
+	if (GetProperties().shield_effect_enabled == true)
 	{
-		RenderShieldEffect(1.0 - color.a); 
+		RenderShieldEffect(1.0 - GetColor().a); 
 	}
 	disable_BLEND();
 	GetStarSystem()->RestoreSceneColor();
@@ -164,9 +164,9 @@ void Ship::RenderAtPlanet(const Vec3<float>& center)
 	
 	RenderKorpus();
 	
-	if (data_korpus.draw_turrels == true)
+	if (GetDataKorpus().draw_turrels == true)
 	{
-		weapon_complex.RenderTurrels();
+		GetComplexWeapon().RenderTurrels();
 	}
 }		
 

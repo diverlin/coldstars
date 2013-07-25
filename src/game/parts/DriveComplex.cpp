@@ -136,7 +136,7 @@ void DriveComplex::DefineDistance()
 
     		case NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID:
     		{
-    			int weapon_radius_min = owner_vehicle->GetWeaponComplex().GetRadiusMin();
+    			int weapon_radius_min = owner_vehicle->GetComplexWeapon().GetRadiusMin();
     			if (weapon_radius_min < 10) // in some cases case thee the bug (HACK)
     			{
     		    		target_distance = 150;    			

@@ -126,7 +126,7 @@ void UserInput::KeyPressedInSpace(Player* player)
 		
 		case sf::Keyboard::A:
 		{ 
-			if (player->GetNpc()->GetVehicle()->GetWeaponComplex().IsAnyWeaponSelected() == true)
+			if (player->GetNpc()->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
 			{
 				GuiManager::Instance().ResetEventOnGuiElement(GUI::TYPE::WEAPON_SLOT1_SELECTOR_ID);
 				GuiManager::Instance().ResetEventOnGuiElement(GUI::TYPE::WEAPON_SLOT2_SELECTOR_ID);

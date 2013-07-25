@@ -129,12 +129,12 @@ void Cursor::RenderFocusedObjectStuff() const
 					{
 						Satellite* satellite = (Satellite*)focused_ob;
 						
-                        satellite->GetWeaponComplex().RenderWeaponIcons();
+                        satellite->GetComplexWeapon().RenderWeaponIcons();
 
                         satellite->RenderRadarRange(); 
-                        satellite->GetWeaponComplex().RenderWeaponsRange(); 
+                        satellite->GetComplexWeapon().RenderWeaponsRange(); 
                                                 
-                        satellite->GetDriveComplex().DrawPath(); 
+                        satellite->GetComplexDrive().DrawPath(); 
 						                        
 						break;
 					}
@@ -143,12 +143,12 @@ void Cursor::RenderFocusedObjectStuff() const
 					{
 						Ship* ship = (Ship*)focused_ob;
 						
-                        ship->GetWeaponComplex().RenderWeaponIcons();
+                        ship->GetComplexWeapon().RenderWeaponIcons();
                         
                         ship->RenderRadarRange(); 
-                        ship->GetWeaponComplex().RenderWeaponsRange(); 
+                        ship->GetComplexWeapon().RenderWeaponsRange(); 
                                             
-                        ship->GetDriveComplex().DrawPath(); 
+                        ship->GetComplexDrive().DrawPath(); 
 						             
 						break;
 					}
@@ -157,12 +157,12 @@ void Cursor::RenderFocusedObjectStuff() const
 					{
 						SpaceStation* spacestation = (SpaceStation*)focused_ob;
                         
-                        spacestation->GetWeaponComplex().RenderWeaponIcons();
+                        spacestation->GetComplexWeapon().RenderWeaponIcons();
                         
                         spacestation->RenderRadarRange(); 
-                        spacestation->GetWeaponComplex().RenderWeaponsRange(); 
+                        spacestation->GetComplexWeapon().RenderWeaponsRange(); 
                         
-                        spacestation->GetDriveComplex().DrawPath(); 
+                        spacestation->GetComplexDrive().DrawPath(); 
                         
                         break;
 					}

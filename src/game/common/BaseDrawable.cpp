@@ -77,7 +77,34 @@ void BaseDrawable::UpdateRenderAnimation()
 		m_AnimationProgram->Update(GetAngle());
 	}
 }
+          
+bool BaseDrawable::UpdateFadeInEffect()
+{
+	if (m_Color.a > 0.01)
+	{
+		m_Color.a -= 0.02;
+		return false;
+	}
+	else
+	{
+		m_Color.a = 0.0;
+		return true;
+	}
+}
 
+bool BaseDrawable::UpdateFadeOutEffect()
+{
+	if (m_Color.a < 1.0)
+	{
+		m_Color.a += 0.02;
+		return false;
+	}
+	else
+	{
+		m_Color.a = 1.0;
+		return true;
+	}
+}
 
 void BaseDrawable::RenderMeshLight(const Vec2<float>& scroll_coords, const Color4<float>& color) const
 {

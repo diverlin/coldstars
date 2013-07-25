@@ -43,7 +43,7 @@ m_Mass(0),
 m_GiveExpirience(0)
 {}
 
-/* virtual */
+/* virtual override */
 BaseSpaceEntity::~BaseSpaceEntity()
 {
 	#if CREATEDESTROY_LOG_ENABLED == 1
