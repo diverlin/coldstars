@@ -17,13 +17,12 @@
 */
 
 
-#ifndef BASEPLANET_H
-#define BASEPLANET_H
+#ifndef BASEPLANET_HPP
+#define BASEPLANET_HPP
 
-#include "BaseSpaceEntity.hpp"
-#include "../math/myVector.hpp"
-#include "../parts/orbit.hpp"
-#include "../struct/PlanetData.hpp"
+#include <spaceobjects/BaseSpaceEntity.hpp>
+#include <parts/orbit.hpp>
+#include <struct/PlanetData.hpp>
 
 struct UnresolvedDataBasePlanet
 {
@@ -35,20 +34,20 @@ class BasePlanet : public BaseSpaceEntity
 	public:      
 		BasePlanet();
 		virtual ~BasePlanet();
-
-      		virtual void PutChildsToGarbage() const {};
       		
-		void SetPlanetData(PlanetData data_planet) { this->data_planet = data_planet; };
-		Orbit& GetOrbit() { return orbit; };
-
-		void CreateOrbit();
+		void SetPlanetData(const PlanetData& data_planet) { m_DataPlanet = data_planet; }
+        
+		Orbit& GetOrbit() { return m_Orbit; }   // !!!
+		const Orbit& GetOrbit() const { return m_Orbit; }   
+		const PlanetData& GetDataPlanet() const { return m_DataPlanet; }
+        
+        void BindParent(const BaseSpaceEntity* const, int);
 		
 		void RenderMesh_OLD() const;
 				
 	protected:
-		PlanetData data_planet;   
-		Orbit orbit;  	
-				
+        virtual void PutChildsToGarbage() const {}
+        
 		virtual void PostDeathUniqueEvent(bool);
 		void UpdatePosition();
 				
@@ -57,7 +56,11 @@ class BasePlanet : public BaseSpaceEntity
 		void LoadDataUniqueBasePlanet(const boost::property_tree::ptree&);
 		void ResolveDataUniqueBasePlanet();
 		
-	friend class StarSystem;
+    private:
+		PlanetData m_DataPlanet;   
+		Orbit m_Orbit;     
+
+		void CreateOrbit();    
 };
 
 #endif 

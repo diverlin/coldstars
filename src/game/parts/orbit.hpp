@@ -28,10 +28,10 @@ class Orbit
 		Orbit();
 		~Orbit();
 
-		void SetIt(int it) { this->it = it; };
+		void SetIt(int it) { m_It = it; };
 
-		int GetIt() const { return it; };
-		const Vec3<float>& GetPosition() const { return coords_vec[it]; };
+		int GetIt() const { return m_It; };
+		const Vec3<float>& GetPosition() const { return m_Coords_vec[m_It]; };
 		const Vec3<float>& GetNextTurnPosition() const; 
 
 		void CalcPath(float, float, float, float, bool);
@@ -42,12 +42,12 @@ class Orbit
 		void UpdatePathVisualisation();
 		void DrawPath();
 
-	protected:
-		PathVisual visual_orbit_path;
-		PathVisual visual_orbit_turn;
+	private:
+		PathVisual m_VisualOrbitPath;
+		PathVisual m_VisualOrbitTurn;
                 
-		std::vector<Vec3<float>> coords_vec;
-		int len, it; 
+		std::vector<Vec3<float>> m_Coords_vec;
+		int m_Len, m_It; 
 };
 
 #endif 

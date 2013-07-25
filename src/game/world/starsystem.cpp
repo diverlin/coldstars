@@ -205,14 +205,11 @@ void StarSystem::AddBullet(RocketBullet* rocket, const Vec3<float>& center, cons
 
 void StarSystem::Add(BasePlanet* object, const BaseSpaceEntity* parent, int it)
 {
-	object->CreateOrbit();
-    object->SetParent(parent);
+	//object->CreateOrbit();
+    object->BindParent(parent, it);
     
     object->SetStarSystem(this);
-    object->SetPlaceTypeId(PLACE::TYPE::SPACE_ID);
-    
-    object->GetOrbit().SetIt(it);
-    object->UpdatePosition();
+    object->SetPlaceTypeId(PLACE::TYPE::SPACE_ID);   
         
 	switch(object->GetTypeId())
 	{

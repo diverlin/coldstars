@@ -34,24 +34,33 @@ BasePlanet::~BasePlanet()
 	#endif
 }
 
+void BasePlanet::BindParent(const BaseSpaceEntity* const parent, int it)
+{
+    SetParent(parent);
+    CreateOrbit();
+    m_Orbit.SetIt(it);
+    UpdatePosition();
+}
+        
 void BasePlanet::CreateOrbit()
 {
-	orbit.CalcPath(data_planet.radius_A, data_planet.radius_B, data_planet.speed, data_planet.orbit_phi_inD, data_planet.clockwise);
+	m_Orbit.CalcPath(m_DataPlanet.radius_A, m_DataPlanet.radius_B, m_DataPlanet.speed, m_DataPlanet.orbit_phi_inD, m_DataPlanet.clockwise);
 }
 
-void BasePlanet::PostDeathUniqueEvent(bool)  /* virtual */
+/* virtual */
+void BasePlanet::PostDeathUniqueEvent(bool)  
 {}		
 	
 void BasePlanet::UpdatePosition()
 {
-	orbit.UpdatePosition();  
+	m_Orbit.UpdatePosition();  
 	if (GetParent() == nullptr)
 	{
-		SetCenter(orbit.GetPosition());
+		SetCenter(m_Orbit.GetPosition());
 	}
 	else
 	{
-		SetCenter(GetParent()->GetCenter() + orbit.GetPosition());
+		SetCenter(GetParent()->GetCenter() + m_Orbit.GetPosition());
 	}
 }
 
@@ -68,15 +77,15 @@ void BasePlanet::SaveDataUniqueBasePlanet(boost::property_tree::ptree& save_ptre
 	Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::SaveDataUniqueBasePlanet", SAVELOAD_LOG_DIP);
 	#endif
 	
-	save_ptree.put(root+"data.orbit_center.x", data_planet.orbit_center.x);	
-	save_ptree.put(root+"data.orbit_center.y", data_planet.orbit_center.y);	
-	save_ptree.put(root+"data.radius_A", data_planet.radius_A);	
-	save_ptree.put(root+"data.radius_B", data_planet.radius_B);
-	save_ptree.put(root+"data.orbit_phi_inD", data_planet.orbit_phi_inD);		
-	save_ptree.put(root+"data.speed", data_planet.speed);
-	save_ptree.put(root+"data.clockwise", data_planet.clockwise);
+	save_ptree.put(root+"data.m_Orbit_center.x", m_DataPlanet.orbit_center.x);	
+	save_ptree.put(root+"data.m_Orbit_center.y", m_DataPlanet.orbit_center.y);	
+	save_ptree.put(root+"data.radius_A", m_DataPlanet.radius_A);	
+	save_ptree.put(root+"data.radius_B", m_DataPlanet.radius_B);
+	save_ptree.put(root+"data.m_Orbit_phi_inD", m_DataPlanet.orbit_phi_inD);		
+	save_ptree.put(root+"data.speed", m_DataPlanet.speed);
+	save_ptree.put(root+"data.clockwise", m_DataPlanet.clockwise);
 	
-	save_ptree.put(root+"unresolved.orbit_it", orbit.GetIt());
+	save_ptree.put(root+"unresolved.orbit_it", m_Orbit.GetIt());
 }
 
 void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& load_ptree)
@@ -85,13 +94,13 @@ void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& loa
 	Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::LoadDataUniqueBasePlanet", SAVELOAD_LOG_DIP);
 	#endif
 	
-	data_planet.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");	
-	data_planet.orbit_center.y = load_ptree.get<float>("data.orbit_center.y");	
-	data_planet.radius_A = load_ptree.get<float>("data.radius_A");	
-	data_planet.radius_B = load_ptree.get<float>("data.radius_B");
-	data_planet.orbit_phi_inD = load_ptree.get<float>("data.orbit_phi_inD");		
-	data_planet.speed = load_ptree.get<float>("data.speed");
-	data_planet.clockwise = load_ptree.get<bool>("data.clockwise");
+	m_DataPlanet.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");	
+	m_DataPlanet.orbit_center.y = load_ptree.get<float>("data.orbit_center.y");	
+	m_DataPlanet.radius_A = load_ptree.get<float>("data.radius_A");	
+	m_DataPlanet.radius_B = load_ptree.get<float>("data.radius_B");
+	m_DataPlanet.orbit_phi_inD = load_ptree.get<float>("data.orbit_phi_inD");		
+	m_DataPlanet.speed = load_ptree.get<float>("data.speed");
+	m_DataPlanet.clockwise = load_ptree.get<bool>("data.clockwise");
 	
 	data_unresolved_BasePlanet.orbit_it = load_ptree.get<int>("unresolved.orbit_it");
 }
