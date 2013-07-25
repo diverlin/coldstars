@@ -65,11 +65,11 @@ void Container::BindItemSlot(ItemSlot* item_slot)
 
 void Container::UpdateInfo()  
 {
-	info.clear();
-	info.addTitleStr("CONTAINER");
-	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(GetId()) + " / " + int2str(starsystem->GetId()));
-	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
-	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
+	GetInfo().clear();
+	GetInfo().addTitleStr("CONTAINER");
+	GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()));
+	GetInfo().addNameStr("armor:");       GetInfo().addValueStr(int2str(GetDataLife().armor));
+	GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 }        
  
 /* virtual override final */       	
@@ -78,7 +78,7 @@ void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords, float zoom)
 	UpdateInfo();
 	Vec2<float> pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
     pos /= zoom;
-	drawInfoIn2Column(info.title_list, info.value_list, pos);
+	drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     
     Vec2<float> pos2(pos.x + 200, pos.y);
 	item_slot->GetItem()->RenderInfo(pos2);
@@ -89,14 +89,14 @@ void Container::PostDeathUniqueEvent(bool show_effect)
 {
 	if (item_slot->GetItem()->GetTypeId() == ENTITY::TYPE::BOMB_ID)
 	{
-		starsystem->BombExplosionEvent(this, show_effect);  
+		GetStarSystem()->BombExplosionEvent(this, show_effect);  
 	}
 	else
 	{
 		if (show_effect == true)
 		{
 			ExplosionEffect* explosion = getNewExplosionEffect(GetCollisionRadius());
-			starsystem->Add(explosion, GetCenter()); 
+			GetStarSystem()->Add(explosion, GetCenter()); 
 		}
 	}
 }
@@ -107,8 +107,8 @@ void Container::UpdateInSpace(int time, bool show_effect)
 		
 	if (time > 0)
 	{
-		SetCenter(GetCenter() + force);
-		force *= 0.99;
+		SetCenter(GetCenter() + GetAppliedForce());
+		GetAppliedForce() *= 0.99;
 	}
 }
        		

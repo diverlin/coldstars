@@ -32,7 +32,7 @@ BlackHole::BlackHole(int id)
 	SetId(id);
 	SetTypeId(ENTITY::TYPE::BLACKHOLE_ID);
 	
-    mass = getRandInt(1000, 4000);
+    SetMass(getRandInt(1000, 4000));
 }
 
 /* virtual */
@@ -56,13 +56,13 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
 		SetCenter(GetCenter()+getRandXYVec3f(1, 2, 0));
 		shockwave->SetCenter(GetCenter());
 	
-		data_life.life_time--;
-		if (data_life.life_time < 0)
+		GetDataLife().life_time--;
+		if (GetDataLife().life_time < 0)
 		{
 			//scale -= 0.1;
 			//if (scale < 1.0)
 			{
-				data_life.is_alive = false;
+				GetDataLife().is_alive = false;
 			}
 		}
 	}
@@ -72,19 +72,19 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
 
 void BlackHole::UpdateInfo()
 {
-	info.clear();
+	GetInfo().clear();
 
-    	info.addTitleStr("BLACKHOLE");
+    GetInfo().addTitleStr("BLACKHOLE");
 
-    	info.addNameStr("id:");          info.addValueStr(int2str(GetId()));
-    	info.addNameStr("mass:");        info.addValueStr(int2str(mass));
-    	info.addNameStr("pos:");       	 info.addValueStr( str(GetCenter()) );
+    GetInfo().addNameStr("id:");         GetInfo().addValueStr(int2str(GetId()));
+    GetInfo().addNameStr("mass:");       GetInfo().addValueStr(int2str(GetMass()));
+    GetInfo().addNameStr("pos:");        GetInfo().addValueStr( str(GetCenter()) );
 }
       
 void BlackHole::Render_NEW(const Vec2<float>& scroll_coords)
 {
 	UpdateRenderAnimation();
-	RenderMeshLight(scroll_coords, starsystem->GetColor4f());
+	RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());
 }
 	
 void BlackHole::Render_OLD() const
@@ -112,7 +112,7 @@ void BlackHole::ResolveDataUniqueBlackHole()
 	Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::ResolveDataUniqueBlackHole", SAVELOAD_LOG_DIP);
 	#endif
 	
-	starsystem->Add(this, data_unresolved_Orientation.center); 
+	GetStarSystem()->Add(this, data_unresolved_Orientation.center); 
 }
  
 /*virtual*/

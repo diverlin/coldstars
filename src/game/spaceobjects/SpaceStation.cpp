@@ -81,14 +81,14 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 //overriding
 void SpaceStation::UpdateInfo()
 {
-	info.clear();
+	GetInfo().clear();
 
-    info.addTitleStr("StarBase" + getEntityTypeStr(GetSubTypeId()));
+    GetInfo().addTitleStr("StarBase" + getEntityTypeStr(GetSubTypeId()));
 
-    info.addNameStr("id/ss_id:");    info.addValueStr(int2str(GetId()) + " / " + int2str(starsystem->GetId()));
-    info.addNameStr("id:");          info.addValueStr(int2str(GetId()));
-    info.addNameStr("mass:");        info.addValueStr(int2str(mass));
-    info.addNameStr("pos:");       	 info.addValueStr( str(GetCenter()) );
+    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()));
+    GetInfo().addNameStr("id:");          GetInfo().addValueStr(int2str(GetId()));
+    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(int2str(GetMass()));
+    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 } 
 
 void SpaceStation::UpdateRenderStuff_2D()
@@ -118,14 +118,14 @@ void SpaceStation::RenderInSpace_2D(float scale)
         RenderShieldEffect(1.0 - color.a); 
     }
         
-    starsystem->RestoreSceneColor();
+    GetStarSystem()->RestoreSceneColor();
 }
 
 				 		
 void SpaceStation::RenderInSpace_3D(const Vec2<float>& scroll_coords, float scale)
 {     	
 	UpdateRenderAnimation();	
-	RenderMeshLight(scroll_coords, starsystem->GetColor4f());        
+	RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());        
 }
 
 void SpaceStation::SaveDataUniqueSpaceStation(boost::property_tree::ptree& save_ptree, const std::string& root) const

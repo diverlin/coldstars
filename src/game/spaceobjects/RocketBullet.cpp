@@ -73,7 +73,7 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
                 
 		if (target != nullptr)
         { 
-            get_dPos_ToPoint(GetCenter(), target->GetCenter(), speed/100.0, force, angle_inD);
+            get_dPos_ToPoint(GetCenter(), target->GetCenter(), speed/100.0, GetAppliedForce(), angle_inD);
         
             if (CheckTarget() == false)
             {
@@ -81,7 +81,7 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
             }
         }      
         SetAngleZ(angle_inD);
-        SetCenter(GetCenter() + force);    
+        SetCenter(GetCenter() +  GetAppliedForce());    
 
         data_bullet.live_time -= 1;
     }
@@ -93,7 +93,7 @@ bool RocketBullet::CheckTarget() const
     {
         if (target->GetPlaceTypeId() == PLACE::TYPE::SPACE_ID)
         {
-            if (target->GetStarSystem()->GetId() == starsystem->GetId())
+            if (target->GetStarSystem()->GetId() == GetStarSystem()->GetId())
             {
                 return true;
             }
@@ -105,38 +105,38 @@ bool RocketBullet::CheckTarget() const
 
 void RocketBullet::CollisionEvent(bool show_effect)
 {
-	data_life.is_alive = false; 
-	data_life.dying_time = -1;
+	GetDataLife().is_alive = false; 
+	GetDataLife().dying_time = -1;
 }
 
 void RocketBullet::UpdateInfo()
 {
-	info.clear();
+	GetInfo().clear();
 
-    info.addTitleStr("ROCKET");
-    info.addNameStr("id/ss_id:");          	info.addValueStr( int2str(GetId()) + " / " + int2str(starsystem->GetId()) );
-    info.addNameStr("armor:");     		info.addValueStr( int2str(data_life.armor) );
+    GetInfo().addTitleStr("ROCKET");
+    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()) );
+    GetInfo().addNameStr("armor:");     		GetInfo().addValueStr( int2str(GetDataLife().armor) );
     if (target != nullptr) 
     { 
-    	info.addNameStr("target_id:");   	info.addValueStr(int2str(target->GetId())); 
+    	GetInfo().addNameStr("target_id:");   	GetInfo().addValueStr(int2str(target->GetId())); 
 	}
 }
 
 /* virtual */
 void RocketBullet::Hit(int damage, bool show_effect)
 {
-	data_life.armor -= damage;
+	GetDataLife().armor -= damage;
 
-    if (data_life.armor < 0)
+    if (GetDataLife().armor < 0)
     {
-        data_life.is_alive = false;
+        GetDataLife().is_alive = false;
     }
 
 	if (show_effect == true)
 	{
         // improove
         VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, GetCenter(), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
-        starsystem->Add(text); 
+        GetStarSystem()->Add(text); 
     }
 }
 
@@ -146,7 +146,7 @@ void RocketBullet::PostDeathUniqueEvent(bool show_effect)
 	if (show_effect == true)
     {
         ExplosionEffect* explosion = getNewExplosionEffect(GetCollisionRadius());
-        starsystem->Add(explosion, GetCenter());        		
+        GetStarSystem()->Add(explosion, GetCenter());        		
     }
 }
 

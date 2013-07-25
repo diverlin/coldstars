@@ -96,7 +96,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
 				if (d_color > 1.0)
 				{
 					d_color = 1.0;
-					starsystem->StarSparkEvent(getRandInt(600, 1200));
+					GetStarSystem()->StarSparkEvent(getRandInt(600, 1200));
 					spark_grows = false;
 				}
 			} 
@@ -114,7 +114,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
 		}
 		else
 		{
-			starsystem->StarSparkEvent(getRandInt(600, 1200));
+			GetStarSystem()->StarSparkEvent(getRandInt(600, 1200));
 			spark_active = false;
 		}
 	}
@@ -150,11 +150,11 @@ void Star::Render_OLD() const
 
 void Star::UpdateInfo()
 { 
-	info.clear();
-	info.addTitleStr("STAR");
-	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(GetId()) + " / " + int2str(starsystem->GetId()));
-	info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
-	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
+	GetInfo().clear();
+	GetInfo().addTitleStr("STAR");
+	GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()));
+	GetInfo().addNameStr("armor:");     GetInfo().addValueStr(int2str(GetDataLife().armor));
+	GetInfo().addNameStr("pos:");       GetInfo().addValueStr( str(GetCenter()) );
 }
 
 void Star::PostDeathUniqueEvent(bool)
