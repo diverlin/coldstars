@@ -53,6 +53,9 @@
 #include "../gui/GuiManager.hpp"
 #include "../gui/GuiRadar.hpp"
 
+
+#include "../slots/ItemSlot.hpp"
+
 int StarSystem::counter = 0;
                 
 StarSystem::StarSystem(int id):
@@ -205,7 +208,6 @@ void StarSystem::AddBullet(RocketBullet* rocket, const Vec3<float>& center, cons
 
 void StarSystem::Add(BasePlanet* object, const BaseSpaceEntity* parent, int it)
 {
-	//object->CreateOrbit();
     object->BindParent(parent, it);
     
     object->SetStarSystem(this);

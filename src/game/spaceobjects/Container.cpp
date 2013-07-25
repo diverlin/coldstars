@@ -17,30 +17,32 @@
 */
 
 #include "Container.hpp"
-#include "../items/BaseItem.hpp"
-#include "../common/common.hpp"
-#include "../common/constants.hpp"
 
-#include "../common/rand.hpp"
-#include "../common/myStr.hpp"
-#include "../world/EntityManager.hpp"
-#include "../world/starsystem.hpp"
-#include "../render/Render.hpp"
-#include "../render/Screen.hpp"
-#include "../effects/particlesystem/ExplosionEffect.hpp"
+#include <common/common.hpp>
+#include <common/myStr.hpp>
+#include <common/Logger.hpp>
 
-#include "../garbage/EntityGarbage.hpp"
-#include "../common/Logger.hpp"
+#include <world/EntityManager.hpp>
+#include <world/starsystem.hpp>
+
+#include <render/Render.hpp>
+
+#include <effects/particlesystem/ExplosionEffect.hpp>
+
+#include <garbage/EntityGarbage.hpp>
+
+#include <slots/ItemSlot.hpp>
+#include <items/BaseItem.hpp>
+
 
 Container::Container(int id)
 :
-item_slot(nullptr)    
+m_ItemSlot(nullptr),
+m_Velocity(0)    
 {
 	SetId(id);
 	SetTypeId(ENTITY::TYPE::VEHICLE_ID);
 	SetSubTypeId(ENTITY::TYPE::CONTAINER_ID);
-	
-	velocity = getRandInt(40, 42) / 100.0;
 }
 
 /* virtual */   
@@ -51,18 +53,19 @@ Container::~Container()
 	#endif
 }
 
-/* virtual */
+/* virtual override final */
 void Container::PutChildsToGarbage() const
 {
-	EntityGarbage::Instance().Add(item_slot);
+	EntityGarbage::Instance().Add(m_ItemSlot);
 }
         	
-void Container::BindItemSlot(ItemSlot* item_slot) 
+void Container::BindItemSlot(ItemSlot* m_ItemSlot) 
 { 
-	this->item_slot = item_slot; 
-	item_slot->SetOwner(this); 
+	m_ItemSlot = m_ItemSlot; 
+	m_ItemSlot->SetOwner(this); 
 }
 
+/* virtual override final */
 void Container::UpdateInfo()  
 {
 	GetInfo().clear();
@@ -81,13 +84,13 @@ void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords, float zoom)
 	drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     
     Vec2<float> pos2(pos.x + 200, pos.y);
-	item_slot->GetItem()->RenderInfo(pos2);
+	m_ItemSlot->GetItem()->RenderInfo(pos2);
 }
  
-/* virtual */    
+/* virtual override final */   
 void Container::PostDeathUniqueEvent(bool show_effect)
 {
-	if (item_slot->GetItem()->GetTypeId() == ENTITY::TYPE::BOMB_ID)
+	if (m_ItemSlot->GetItem()->GetTypeId() == ENTITY::TYPE::BOMB_ID)
 	{
 		GetStarSystem()->BombExplosionEvent(this, show_effect);  
 	}
@@ -103,8 +106,7 @@ void Container::PostDeathUniqueEvent(bool show_effect)
 
 void Container::UpdateInSpace(int time, bool show_effect)
 {
-	CheckDeath(show_effect);
-		
+	CheckDeath(show_effect); 		
 	if (time > 0)
 	{
 		SetCenter(GetCenter() + GetAppliedForce());
@@ -124,10 +126,10 @@ void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree,
 	Logger::Instance().Log(" Container("+int2str(GetId())+")::SaveDataUniqueContainer", SAVELOAD_LOG_DIP);
 	#endif
 	
-	save_ptree.put(root+"target_pos.x", target_pos.x);
-	save_ptree.put(root+"target_pos.y", target_pos.y);
+	save_ptree.put(root+"target_pos.x", m_TargetPos.x);
+	save_ptree.put(root+"target_pos.y", m_TargetPos.y);
 
-	save_ptree.put(root+"velocity", velocity);
+	save_ptree.put(root+"velocity", m_Velocity);
 }
 
 void Container::LoadDataUniqueContainer(const boost::property_tree::ptree& load_ptree)
@@ -136,10 +138,10 @@ void Container::LoadDataUniqueContainer(const boost::property_tree::ptree& load_
 	Logger::Instance().Log(" Container("+int2str(GetId())+")::LoadDataUniqueContainer", SAVELOAD_LOG_DIP);
 	#endif
 	
-	target_pos.x   = load_ptree.get<float>("target_pos.x");
-	target_pos.y   = load_ptree.get<float>("target_pos.y");
+	m_TargetPos.x   = load_ptree.get<float>("target_pos.x");
+	m_TargetPos.y   = load_ptree.get<float>("target_pos.y");
 	
-	velocity = load_ptree.get<float>("velocity");
+	m_Velocity = load_ptree.get<float>("velocity");
 }
 
 void Container::ResolveDataUniqueContainer()
@@ -151,7 +153,7 @@ void Container::ResolveDataUniqueContainer()
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddContainer(this, data_unresolved_Orientation.center); 
 }		
 
-/*virtual*/
+/* virtual override final */
 void Container::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	const std::string root = "container." + int2str(GetId()) + ".";
@@ -162,7 +164,7 @@ void Container::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueContainer(save_ptree, root);
 }
 
-/*virtual*/		
+/* virtual override final */
 void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
@@ -172,7 +174,7 @@ void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 	LoadDataUniqueContainer(load_ptree);
 }
 	
-/*virtual*/	
+/* virtual override final */	
 void Container::ResolveData()
 {
 	ResolveDataUniqueBase();

@@ -53,6 +53,8 @@
 #include "../gui/GuiGalaxyMap.hpp"
 #include "../gui/GuiManager.hpp"
 
+#include "../slots/ItemSlot.hpp"
+
 Player::Player(int id)
 :
 npc(nullptr),
@@ -589,7 +591,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 			glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "radius"), (float)npc->GetVehicle()->GetProperties().radar/(h*scale));
 			glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "world_coord"), world_coord.x/(w*scale), world_coord.y/(h*scale));
 	
-			glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "dcolor"), npc->GetVehicle()->GetStarSystem()->GetStar()->GetDColor());
+			glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "dcolor"), npc->GetVehicle()->GetStarSystem()->GetStar()->GetDeltaColor());
 	
 			drawFullScreenQuad(w, h, -999.0);
 		}

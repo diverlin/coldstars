@@ -74,24 +74,24 @@ Container* ContainerBuilder::GetNewMineralContainer(int mineral_ammount) const
        	
 void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textureOb, BaseItem* item) const
 {           
-        LifeData data_life;
-        data_life.armor = 1;
-        data_life.dying_time = 30;
-        
-        Vec3<float> d_angle;
-        d_angle.z = -getRandInt(10, 100)*0.01;      
-        
-        container->SetLifeData(data_life);
-	container->BindData2D(textureOb);
-	
-	float step = getRandInt(10, 100)*0.01;
-	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
-	container->SetRenderAnimation(animation_program);
-
-       	container->SetGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
-        
-   	container->BindItemSlot(GetNewItemSlot(ENTITY::TYPE::CARGO_SLOT_ID));
-        container->GetItemSlot()->InsertItem(item);
+    LifeData data_life;
+    data_life.armor = 1;
+    data_life.dying_time = 30;
+    
+    Vec3<float> d_angle;
+    d_angle.z = -getRandInt(10, 100)*0.01;      
+    
+    container->SetLifeData(data_life);
+    container->BindData2D(textureOb);
+    
+    float step = getRandInt(10, 100)*0.01;
+    AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
+    container->SetRenderAnimation(animation_program);
+    
+    container->SetGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
+    
+    container->BindItemSlot(GetNewItemSlot(ENTITY::TYPE::CARGO_SLOT_ID));
+    container->GetItemSlot()->InsertItem(item);
 }
 
 

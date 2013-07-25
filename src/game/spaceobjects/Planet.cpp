@@ -17,26 +17,30 @@
 */
 
 #include "Planet.hpp"
-#include "../docking/BaseLand.hpp"
-#include "../effects/Atmosphere.hpp"
-#include "../common/constants.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/myStr.hpp"
-#include "../resources/TextureManager.hpp"
-#include "../world/starsystem.hpp"
-#include "../render/Render.hpp"
-#include "../resources/ShaderCollector.hpp"
-#include "../docking/Kosmoport.hpp"
-#include "../spaceobjects/Vehicle.hpp"
 
-#include "../garbage/EntityGarbage.hpp"
-#include "../common/Logger.hpp"
+#include <common/myStr.hpp>
+#include <common/Logger.hpp>
+  
+#include <docking/Kosmoport.hpp>
+
+#include <effects/Atmosphere.hpp>
+
+#include <world/EntityManager.hpp>
+#include <world/starsystem.hpp>
+
+#include <resources/ShaderCollector.hpp>
+
+#include <spaceobjects/Vehicle.hpp>
+
+#include <garbage/EntityGarbage.hpp>
+
+#include <render/Render.hpp>
 
 Planet::Planet(int id)
 :
-atmosphere(nullptr),
-land(nullptr),
-population(0)
+m_Land(nullptr),
+m_Atmosphere(nullptr),
+m_Population(0)
 {    
 	SetId(id);
 	SetTypeId(ENTITY::TYPE::PLANET_ID);
@@ -49,25 +53,25 @@ Planet::~Planet()
 	Logger::Instance().Log("___::~Planet("+int2str(GetId())+")");
 	#endif	
 	
-	delete atmosphere;
+	delete m_Atmosphere;
 }
 
-/* virtual */
+/* virtual override final */
 void Planet::PutChildsToGarbage() const
 {
-	EntityGarbage::Instance().Add(land);
+	EntityGarbage::Instance().Add(m_Land);
 }
 
 void Planet::BindAtmosphere(Atmosphere* atmosphere) 
 {
-	this->atmosphere = atmosphere; 
-	atmosphere->SetParent(this);
+	m_Atmosphere = atmosphere; 
+	m_Atmosphere->SetParent(this);
 }
 		
 void Planet::BindLand(BaseLand* land)
 {
-	this->land = land;
-	this->land->SetOwner(this);
+	m_Land = land;
+	m_Land->SetOwner(this);
     SetSubTypeId(land->GetTypeId());
 }
 	
@@ -78,7 +82,7 @@ void Planet::AddVehicle(Vehicle* vehicle) const
 		vehicle->SetStarSystem(GetStarSystem());
 	}
 	
-	land->AddVehicle(vehicle);
+	m_Land->AddVehicle(vehicle);
 	
 }
 	
@@ -92,9 +96,10 @@ void Planet::UpdateInSpace(int time, bool show_effect)
 
 void Planet::UpdateInSpaceInStatic()
 {
-	land->UpdateInStatic();
+	m_Land->UpdateInStatic();
 }
 
+/* virtual override final */
 void Planet::UpdateInfo()
 {
 	GetInfo().clear();
@@ -102,8 +107,8 @@ void Planet::UpdateInfo()
 	GetInfo().addTitleStr("PLANET");
 	GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()));
 	GetInfo().addNameStr("armor:");  	  GetInfo().addValueStr(int2str(GetDataLife().armor));
-	GetInfo().addNameStr("population:");  GetInfo().addValueStr(int2str(population));
-	GetInfo().addNameStr("dock_veh:");    GetInfo().addValueStr(land->GetDockVehicleStr());
+	GetInfo().addNameStr("population:");  GetInfo().addValueStr(int2str(m_Population));
+	GetInfo().addNameStr("dock_veh:");    GetInfo().addValueStr(m_Land->GetDockVehicleStr());
 	GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 }
 
@@ -114,9 +119,9 @@ void Planet::Render_NEW(const Vec2<float>& scroll_coords)
 {
 	UpdateRenderAnimation();
 	RenderMeshLightNormalMap(scroll_coords, GetStarSystem()->GetColor4f());
-	if (atmosphere != nullptr)
+	if (m_Atmosphere != nullptr)
 	{
-		atmosphere->Render(scroll_coords);
+		m_Atmosphere->Render(scroll_coords);
 	}
 }
 	
@@ -132,7 +137,7 @@ void Planet::SaveDataUniquePlanet(boost::property_tree::ptree& save_ptree, const
 	#endif
 	
 	//SaveManager::Instance().Put(root+"race_id", race_id);
-	save_ptree.put(root+"population", population);
+	save_ptree.put(root+"population", m_Population);
 }
 
 void Planet::LoadDataUniquePlanet(const boost::property_tree::ptree& load_ptree)
@@ -142,7 +147,7 @@ void Planet::LoadDataUniquePlanet(const boost::property_tree::ptree& load_ptree)
 	#endif
 	
 	//race_id = SaveManager::Instance().Get<int>(root+"race_id");
-	population = load_ptree.get<int>("population");	
+	m_Population = load_ptree.get<unsigned int>("population");	
 }
 
 void Planet::ResolveDataUniquePlanet()
@@ -154,6 +159,7 @@ void Planet::ResolveDataUniquePlanet()
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, GetParent(), data_unresolved_BasePlanet.orbit_it); 
 }
 	
+/* virtual override final */
 void Planet::SaveData(boost::property_tree::ptree& save_ptree) const		
 {
 	std::string root = "planet." + int2str(GetId())+".";
@@ -165,6 +171,7 @@ void Planet::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniquePlanet(save_ptree, root);
 }
 
+/* virtual override final */
 void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
@@ -175,6 +182,7 @@ void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
 	LoadDataUniquePlanet(load_ptree);
 }
 
+/* virtual override final */
 void Planet::ResolveData()
 {
 	ResolveDataUniqueBase();

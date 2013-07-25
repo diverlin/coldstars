@@ -17,11 +17,12 @@
 */
 
 #include "BasePlanet.hpp"
-#include "../resources/ShaderCollector.hpp"
-#include "../render/Render.hpp"
+#include <resources/ShaderCollector.hpp>
 
-#include "../common/Logger.hpp" 
-#include "../common/myStr.hpp"
+#include <render/Render.hpp>
+
+#include <common/Logger.hpp> 
+#include <common/myStr.hpp>
 
 BasePlanet::BasePlanet()
 {}

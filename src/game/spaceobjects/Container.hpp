@@ -19,8 +19,8 @@
 #ifndef CONTAINER_HPP
 #define CONTAINER_HPP
 
-#include "BaseSpaceEntity.hpp"
-#include "../slots/ItemSlot.hpp"
+#include <spaceobjects/BaseSpaceEntity.hpp>
+class ItemSlot;
 
 class Container : public BaseSpaceEntity
 {
@@ -28,31 +28,33 @@ class Container : public BaseSpaceEntity
         Container(int);
         virtual ~Container();
         
-        virtual void PutChildsToGarbage() const;
-        
-        void SetTargetPos(const Vec3<float>& target_pos, float velocity) { this->target_pos = target_pos; this->velocity = velocity; };
+        void SetTargetPos(const Vec3<float>& target_pos, float velocity) { m_TargetPos = target_pos; m_Velocity = velocity; }
         void BindItemSlot(ItemSlot*);
-        ItemSlot* GetItemSlot() const { return item_slot; };
+        
+        ItemSlot* const GetItemSlot() const { return m_ItemSlot; }
 
         virtual void RenderInfoInSpace(const Vec2<float>&, float) override final;
         
-        virtual void PostDeathUniqueEvent(bool);
+        virtual void PostDeathUniqueEvent(bool) override final;
             
         void UpdateInSpace(int, bool);
 
         void Render2D();
                             
-        virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
+        virtual void SaveData(boost::property_tree::ptree&) const override final;
+		virtual void LoadData(const boost::property_tree::ptree&) override final;
+		virtual void ResolveData() override final;
 		
     private:
-        ItemSlot* item_slot;        
-        void UpdateInfo();  
+        ItemSlot* m_ItemSlot;        
         
-        Vec3<float> target_pos;    	
-        float velocity;
-        
+        Vec3<float> m_TargetPos;    	
+        float m_Velocity;
+
+        virtual void UpdateInfo() override final; 
+         
+        virtual void PutChildsToGarbage() const override final;
+                        
         void SaveDataUniqueContainer(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueContainer(const boost::property_tree::ptree&);
 		void ResolveDataUniqueContainer();
