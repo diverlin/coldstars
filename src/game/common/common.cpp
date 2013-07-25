@@ -131,67 +131,67 @@ int getObjectSize(int w, int h)
 
 bool get_dPos_ToPoint(const Vec3<float>& p1, const Vec3<float>& p2, float velocity, Vec3<float>& d_pos)
 {   	    
-    	Vec3<float> dir(p2-p1);
+    Vec3<float> dir(p2-p1);
 
-    	if (!dir.IsNull())
-    	{
-    	    	dir.Normalize();
-    	       	d_pos.Set(dir * velocity);       		
-       		return true;
-    	}
-    	else
-    	{
-    	    	d_pos.Set(0.0, 0.0, 0.0);       		
-       		return false;
-    	}
+    if (!dir.IsNull())
+    {
+        dir.Normalize();
+        d_pos.Set(dir * velocity);       		
+        return true;
+    }
+    else
+    {
+        d_pos.Set(0.0, 0.0, 0.0);       		
+        return false;
+    }
 }
 
 
 bool get_dPos_ToPoint(const Vec3<float>& p1, const Vec3<float>& p2, float velocity, Vec3<float>& d_pos, float& rTo_angle_inD)
 {
-    	Vec3<float> dir(p2-p1);
+    Vec3<float> dir(p2-p1);
 
-    	if (!dir.IsNull())
-    	{ 	    	
-    	    	dir.Normalize();
-    	       	d_pos.Set(dir * velocity);   
-       		rTo_angle_inD = atan2(dir.y, dir.x) * RADIAN_TO_DEGREE_RATE;
-       		
-       		return true;
-    	}
-    	else
-    	{
-    	    	d_pos.Set(0.0, 0.0, 0.0); 
-       		rTo_angle_inD = atan2(0.0, 0.0) * RADIAN_TO_DEGREE_RATE;
-       		
-       		return false;
-    	}    	
+    if (!dir.IsNull())
+    { 	    	
+        dir.Normalize();
+        d_pos.Set(dir * velocity);   
+        rTo_angle_inD = atan2(dir.y, dir.x) * RADIAN_TO_DEGREE_RATE;
+        
+        return true;
+    }
+    else
+    {
+        d_pos.Set(0.0, 0.0, 0.0); 
+        rTo_angle_inD = atan2(0.0, 0.0) * RADIAN_TO_DEGREE_RATE;
+        
+        return false;
+    }    	
 }
 
 Color4<float> getColor4fById(int color_id)
 {
 	Color4<float> color;
-        switch(color_id)
-        {	
-        	case COLOR::YELLOW_ID:
-		{
-			color.r = 255/255.0;
-			color.g = 255/255.0;
-			color.b = 235/255.0;
-			color.a = 1.0;
-			
-			break;
-		}
-	
-		case COLOR::BLUE_ID:
-		{
-			color.r = 220/255.0;
-			color.g = 255/255.0;
-			color.b = 255/255.0;
-			color.a = 1.0;
-			
-			break;
-		}
+    switch(color_id)
+    {	
+        case COLOR::YELLOW_ID:
+        {
+            color.r = 255/255.0;
+            color.g = 255/255.0;
+            color.b = 235/255.0;
+            color.a = 1.0;
+            
+            break;
+        }
+
+        case COLOR::BLUE_ID:
+        {
+            color.r = 220/255.0;
+            color.g = 255/255.0;
+            color.b = 255/255.0;
+            color.a = 1.0;
+            
+            break;
+        }
 	}
 	
 	return color;

@@ -89,10 +89,10 @@ class StarSystem : public BaseSpaceEntity
 		void CreateGroupAndShareTask(Npc*, StarSystem*, int) const;
 		
 		//// TRANSITION
-		void AddVehicle(Vehicle*, const Vec3<float>&, const Vec3<float>&, BaseSpaceEntity* parent = nullptr);
+		void AddVehicle(Vehicle*, const Vec3<float>&, const Vec3<float>&, const BaseSpaceEntity* const parent = nullptr);
 		void AddBullet(RocketBullet*, const Vec3<float>&, const Vec3<float>&);
 								
-		void Add(BasePlanet*, BaseSpaceEntity* parent = nullptr, int it = 0);
+		void Add(BasePlanet*, const BaseSpaceEntity* parent = nullptr, int it = 0);
 		void AddContainer(Container*, const Vec3<float>&);
 		void Add(BlackHole*, const Vec3<float>&);
 

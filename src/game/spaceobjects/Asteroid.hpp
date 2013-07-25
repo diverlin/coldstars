@@ -28,7 +28,7 @@ class Asteroid : public BasePlanet
 		Asteroid(int);
 		virtual ~Asteroid();
 
-		int GetDamage() const { return mass*10; };
+		int GetDamage() const { return GetMass()*10; };
 
 		void UpdateInSpace(int, bool);        	
 		void CollisionEvent(bool);

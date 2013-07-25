@@ -64,7 +64,7 @@ container_num_max(CONTAINER_NUM_MAX_DEFAULT)
 	SetId(id);
 	SetTypeId(ENTITY::TYPE::STARSYSTEM_ID); 
     
-    place_type_id = PLACE::TYPE::SPACE_ID;
+    SetPlaceTypeId(PLACE::TYPE::SPACE_ID);
     
     condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
     
@@ -154,7 +154,7 @@ void StarSystem::CreateGroupAndShareTask(Npc* npc_leader, StarSystem* target_sta
 	}
 }
 		
-void StarSystem::AddVehicle(Vehicle* vehicle, const Vec3<float>& center, const Vec3<float>& angle, BaseSpaceEntity* parent)
+void StarSystem::AddVehicle(Vehicle* vehicle, const Vec3<float>& center, const Vec3<float>& angle, const BaseSpaceEntity* const parent)
 {
 	#if ENTITY_TRANSACTION_LOG_ENABLED == 1
 	Logger::Instance().Log(" StarSystem(" + int2str(GetId()) + ")::AddVehicle(" + int2str(vehicle->GetId())+")", ENTITY_TRANSACTION_LOG_DIP);
@@ -200,16 +200,16 @@ void StarSystem::AddBullet(RocketBullet* rocket, const Vec3<float>& center, cons
 	ROCKET_vec.push_back(rocket);  
 }
 
-void StarSystem::Add(BasePlanet* object, BaseSpaceEntity* parent, int it)
+void StarSystem::Add(BasePlanet* object, const BaseSpaceEntity* parent, int it)
 {
 	object->CreateOrbit();
-        object->SetParent(parent);
-        
-        object->SetStarSystem(this);
-        object->SetPlaceTypeId(PLACE::TYPE::SPACE_ID);
-        
-        object->GetOrbit().SetIt(it);
-        object->UpdatePosition();
+    object->SetParent(parent);
+    
+    object->SetStarSystem(this);
+    object->SetPlaceTypeId(PLACE::TYPE::SPACE_ID);
+    
+    object->GetOrbit().SetIt(it);
+    object->UpdatePosition();
         
 	switch(object->GetTypeId())
 	{
@@ -1142,7 +1142,7 @@ void StarSystem::ResolveDataUniqueStarSystem()
 
 void StarSystem::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	const std::string root = "starsystem." + int2str(starsystem->GetId())+".";
+	const std::string root = "starsystem." + int2str(GetStarSystem()->GetId())+".";
 	SaveDataUniqueBase(save_ptree, root);
 	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
 	SaveDataUniqueStarSystem(save_ptree, root);

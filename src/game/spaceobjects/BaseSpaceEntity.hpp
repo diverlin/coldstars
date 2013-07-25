@@ -33,8 +33,7 @@ class AnimationBase;
 struct UnresolvedDataUniqueBaseSpaceEntity
 {
 	int parent_id;
-	int starsystem_id;
-	
+	int starsystem_id; 	
 }; 
 
 class BaseSpaceEntity : public BaseDrawable
@@ -43,62 +42,73 @@ class BaseSpaceEntity : public BaseDrawable
 		BaseSpaceEntity();
 		virtual ~BaseSpaceEntity();
 
-		void SetLifeData(const LifeData& data_life) { this->data_life = data_life; }
+		void SetLifeData(const LifeData& data_life) { m_DataLife = data_life; }
 
-		void SetStarSystem(StarSystem* starsystem)  { this->starsystem = starsystem; }
-		void SetPlaceTypeId(PLACE::TYPE place_type_id)      { this->place_type_id = place_type_id;  }
-		void SetMass(int mass) 			    { this->mass = mass; }
+		void SetStarSystem(StarSystem* starsystem) { m_Starsystem = starsystem; }
+		void SetPlaceTypeId(PLACE::TYPE place_type_id) { m_PlaceTypeId = place_type_id;  }
+		void SetMass(int mass) { m_Mass = mass; }
 				
-		void SetGivenExpirience(int given_expirience) { this->given_expirience = given_expirience; }                
+		void SetGivenExpirience(int given_expirience) { m_GiveExpirience = given_expirience; }                
 	
-		void SetParent(BaseSpaceEntity* parent)     { this->parent = parent; }
+		void SetParent(const BaseSpaceEntity* const parent) { m_Parent = parent; }
 
-		StarSystem* GetStarSystem() const { return starsystem; }           
-		PLACE::TYPE GetPlaceTypeId()        const { return place_type_id; }
+		StarSystem* GetStarSystem() const { return m_Starsystem; }           
+		PLACE::TYPE GetPlaceTypeId() const { return m_PlaceTypeId; }
 
-		virtual int GetGivenExpirience() const { return given_expirience; }
+		virtual int GetGivenExpirience() const { return m_GiveExpirience; }  // !!!
  
-		bool GetAlive()          const { return data_life.is_alive; }
-		bool GetGarbageReady()   const { return data_life.garbage_ready; }             
+		bool GetAlive()          const { return m_DataLife.is_alive; }
+		bool GetGarbageReady()   const { return m_DataLife.garbage_ready; }             
 
-		int GetMass()         const { return mass; }
-		int GetArmor()        const { return data_life.armor; }
+		int GetMass()         const { return m_Mass; }
+		int GetArmor()        const { return m_DataLife.armor; }
 
-		BaseSpaceEntity* GetParent() const { return parent; }
+		const BaseSpaceEntity* const GetParent() const { return m_Parent; }
 
 		void ApplyImpulse(const Vec3<float>&, float);
 
-		virtual void TakeIntoAccountAgressor(Vehicle*) {};
+		virtual void TakeIntoAccountAgressor(Vehicle*) {}
 		virtual void Hit(int, bool);
 		void SilentKill();
 		
 		virtual void RenderInfoInSpace(const Vec2<float>&, float);		
 		void RenderInfo(const Vec2<float>&);
-		void virtual UpdateInfo() {};	
+		void virtual UpdateInfo() {}	
 				
 	protected:
-		LifeData data_life;		
-
-		Vec3<float> force;
-
-		StarSystem* starsystem;
-		PLACE::TYPE place_type_id;
-
-		InfoTable info;
-
-		int mass;
-		int given_expirience;
-
-		BaseSpaceEntity* parent;
-
+        void SetMass(float mass) { m_Mass = mass; }
+        void ChangeMass(int d_mass) { m_Mass += d_mass; }
+        
+        InfoTable& GetInfo() { return m_Info; }
+        LifeData& GetDataLife() { return m_DataLife; }
+        const LifeData& GetDataLife() const { return m_DataLife; }
+        
+        const Vec3<float>& GetAppliedForce() const { return m_AppliedForce; } 
+        Vec3<float>& GetAppliedForce() { return m_AppliedForce; }     // !!!
+                                    
 		void CheckDeath(bool);
-		virtual void PostDeathUniqueEvent(bool) {};
+		virtual void PostDeathUniqueEvent(bool) {}
 
 		UnresolvedDataUniqueBaseSpaceEntity data_unresolved_BaseSpaceEntity;
 		void SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueBaseSpaceEntity(const boost::property_tree::ptree&);
 		void ResolveDataUniqueBaseSpaceEntity();
-				
+	
+    private:
+		LifeData m_DataLife;		
+
+		Vec3<float> m_AppliedForce;
+
+		StarSystem* m_Starsystem;
+		PLACE::TYPE m_PlaceTypeId;
+
+		InfoTable m_Info;
+
+		int m_Mass;
+		int m_GiveExpirience;
+
+		const BaseSpaceEntity* m_Parent;
+            			
 	friend class BaseVehicleBuilder;
 };
 

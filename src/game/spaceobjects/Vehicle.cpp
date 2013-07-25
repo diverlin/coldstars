@@ -79,7 +79,6 @@ Vehicle::Vehicle()
 	special_action_id = NONE_ID;
 	
 	owner_npc  = nullptr;
-	starsystem = nullptr; 
 	
 	weapon_complex.SetOwnerVehicle(this);
 	drive_complex.SetOwnerVehicle(this);
@@ -678,7 +677,7 @@ void Vehicle::LaunchingEvent()
 				Vec2<float> offset_pos = getRandVec2f(40, 100);
 				Vec3<float> offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
 				Vec3<float> angle(0,0,angleInD);
-			     	starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetCenter() + offset_pos3, angle, nullptr);
+                GetStarSystem()->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetCenter() + offset_pos3, angle, nullptr);
 				land->RemoveVehicle(this);
 	
 				break;
@@ -697,7 +696,7 @@ void Vehicle::LaunchingEvent()
 		Vec2<float> offset_pos = getRandVec2f(40, 100);
 		Vec3<float> offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
 		Vec3<float> angle(0,0,angleInD);
-        starsystem->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetCenter() + offset_pos3, angle, nullptr);
+        GetStarSystem()->AddVehicle(this, ((BaseSpaceEntity*)land->GetOwner())->GetCenter() + offset_pos3, angle, nullptr);
 		land->RemoveVehicle(this); 
 	}
 
@@ -732,25 +731,25 @@ void Vehicle::Hit(int damage, bool show_effect)
 	damage *= (1.0 - properties.protection*0.01f);
 	damage *= owner_npc->GetSkills().GetDefenceNormalized();
 	
-	data_life.armor -= damage;
+	GetDataLife().armor -= damage;
 	
-    	if (data_life.armor < 0)
-    	{
-       		data_life.is_alive = false;
-       	}
+    if (GetDataLife().armor < 0)
+    {
+        GetDataLife().is_alive = false;
+    }
 
 	if (show_effect == true)
 	{
-    		if (protection_complex.GetProtectorSlot()->GetItem() != nullptr)
-    		{
-       			protection_complex.GetShieldEffect()->SetAlpha(1.0);
-       		}       	
+        if (protection_complex.GetProtectorSlot()->GetItem() != nullptr)
+        {
+            protection_complex.GetShieldEffect()->SetAlpha(1.0);
+        }       	
        		
        		VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, GetCenter(), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
-       		starsystem->Add(text); 
+       		GetStarSystem()->Add(text); 
        	}
        	
-       	}
+    }
 }
 
 /* virtual */
@@ -765,7 +764,7 @@ void Vehicle::PostDeathUniqueEvent(bool show_effect)
 	if (show_effect == true)
      	{
      		ExplosionEffect* explosion = getNewExplosionEffect(GetCollisionRadius());
-        	starsystem->Add(explosion, GetCenter());        		
+        	GetStarSystem()->Add(explosion, GetCenter());        		
         }
 }
 
@@ -773,7 +772,7 @@ void Vehicle::PostDeathUniqueEvent(bool show_effect)
 void Vehicle::CheckNeedsInStatic()
 {
         // check armor
-        if (data_life.armor < 0.5*data_korpus.armor) { needs.repair_korpus = true; }
+        if (GetDataLife().armor < 0.5*data_korpus.armor) { needs.repair_korpus = true; }
         else                                         { needs.repair_korpus = false; }
 
         //check item damages
@@ -900,8 +899,8 @@ void Vehicle::IncreaseMass(int d_mass)
 	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::IncreaseMass", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	
-	mass += d_mass;
-    	properties.free_space = data_korpus.space - mass;
+	ChangeMass(d_mass);
+    properties.free_space = data_korpus.space - GetMass();
 	UpdatePropertiesSpeed(); // as the mass influence speed this action is necessary here
 }
 
@@ -911,8 +910,8 @@ void Vehicle::DecreaseMass(int d_mass)
 	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::DecreaseMass", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	
-	mass -= d_mass;
-    	properties.free_space = data_korpus.space - mass;
+	ChangeMass(-d_mass);
+    properties.free_space = data_korpus.space - GetMass();
 	UpdatePropertiesSpeed(); // as the mass influence speed this action is necessary here
 }
 
@@ -931,7 +930,7 @@ void Vehicle::UpdatePropertiesSpeed()
                 {
                         if (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)  
                         {
-                                float actual_speed = (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetSpeed() - mass*MASS_DECREASE_SPEED_RATE); 
+                                float actual_speed = (drive_complex.GetDriveSlot()->GetDriveEquipment()->GetSpeed() - GetMass()*MASS_DECREASE_SPEED_RATE); 
                                 if (actual_speed > 0)
                                 { 
                                         if (properties.artefact_gravity > 0)
@@ -1096,11 +1095,11 @@ void Vehicle::IncreaseArmor(int repair)
 	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::IncreaseArmor", ITEMINFLUENCE_LOG_DIP);
 	#endif
 	
-	data_life.armor += repair;
+	GetDataLife().armor += repair;
 	
-	if (data_life.armor > data_korpus.armor)
+	if (GetDataLife().armor > data_korpus.armor)
 	{
-		data_life.armor = data_korpus.armor;
+		GetDataLife().armor = data_korpus.armor;
 	}
 }
 
@@ -1210,7 +1209,7 @@ void Vehicle::RenderInfoInSpace(const Vec2<float>& scroll_coords, float zoom)
 	UpdateInfo(); // virtual
 	Vec2<float> pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
 	pos /= zoom;
-    drawInfoIn2Column(info.title_list, info.value_list, pos);
+    drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
 	if (owner_npc != nullptr)
 	{
         Vec2<float> pos2(pos.x + 200, pos.y);
@@ -1222,7 +1221,7 @@ void Vehicle::RenderInfo(const Vec2<float>& center, int offset_x, int offset_y)
 {  
 	UpdateInfo(); // virtual
 	Vec2<float> pos(center.x - offset_x, center.y - offset_y);
-    drawInfoIn2Column(info.title_list, info.value_list, pos);
+    drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
 
     if (owner_npc != nullptr)
     {
@@ -1272,7 +1271,7 @@ void Vehicle::RenderGrappleRange()
 
 bool Vehicle::IsAbleToJumpTo(StarSystem* target_starsystem) const
 {
- 	float dist = distanceBetween(starsystem->GetCenter(), target_starsystem->GetCenter());
+ 	float dist = distanceBetween(GetStarSystem()->GetCenter(), target_starsystem->GetCenter());
 	if (dist < properties.hyper)
 	{
 		return true;
@@ -1283,16 +1282,16 @@ bool Vehicle::IsAbleToJumpTo(StarSystem* target_starsystem) const
 		
 void Vehicle::RepairKorpusOnAmount(int amount)
 {
-	data_life.armor += amount;
-	if (data_life.armor > data_korpus.armor)
+	GetDataLife().armor += amount;
+	if (GetDataLife().armor > data_korpus.armor)
 	{
-		data_life.armor = data_korpus.armor;
+		GetDataLife().armor = data_korpus.armor;
 	}
 }
 
 bool Vehicle::IsArmorFull() const
 {
-	if (data_life.armor == data_korpus.armor)
+	if (GetDataLife().armor == data_korpus.armor)
 	{
 		return true;
 	}
@@ -1302,7 +1301,7 @@ bool Vehicle::IsArmorFull() const
 
 int Vehicle::GetArmorMiss() const
 {
-	return (data_korpus.armor - data_life.armor);
+	return (data_korpus.armor - GetDataLife().armor);
 }
 
 bool Vehicle::IsFuelFull() const
@@ -1461,7 +1460,7 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
        	if (parent_vehicleslot != nullptr) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", parent_vehicleslot->GetId()); }
        	else  			       	{ save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }
       
-       	if (place_type_id == PLACE::TYPE::HYPER_SPACE_ID) 
+       	if (GetPlaceTypeId() == PLACE::TYPE::HYPER_SPACE_ID) 
        	{ 
        		save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", drive_complex.GetTarget()->GetId()); 
        	}
@@ -1522,11 +1521,11 @@ void Vehicle::ResolveDataUniqueVehicle()
         	SetLand( (BaseLand*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.land_id) ); 
         }              
 
-        switch(place_type_id)
+        switch(GetPlaceTypeId())
         {
         	case PLACE::TYPE::SPACE_ID: 
         	{
-			starsystem->AddVehicle(this, data_unresolved_Orientation.center, data_unresolved_Orientation.angle, parent); 
+			GetStarSystem()->AddVehicle(this, data_unresolved_Orientation.center, data_unresolved_Orientation.angle, GetParent()); 
 			break;
 		}
 		

@@ -33,7 +33,7 @@ Satellite::Satellite(int id)
 	SetTypeId(ENTITY::TYPE::VEHICLE_ID);
 	SetSubTypeId(ENTITY::TYPE::SATELLITE_ID);
 	
-    mass = getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX);
+    SetMass(getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX));
     orbit = new Orbit();
 }
 
@@ -58,9 +58,9 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
 		//if (parent != nullptr)
 		//{		
 			Vec3<float> new_pos;
-			new_pos.x = parent->GetCenter().x + orbit->GetPosition().x;
-			new_pos.y = parent->GetCenter().y + orbit->GetPosition().y;
-			new_pos.z = parent->GetCenter().z;
+			new_pos.x = GetParent()->GetCenter().x + orbit->GetPosition().x;
+			new_pos.y = GetParent()->GetCenter().y + orbit->GetPosition().y;
+			new_pos.z = GetParent()->GetCenter().z;
 			SetCenter(new_pos);
 			UpdateOrientation();
 		//}
@@ -75,14 +75,14 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
 
 void Satellite::UpdateInfo()
 {
-	info.clear();
+	GetInfo().clear();
 
-    info.addTitleStr("SATELLITE");
+    GetInfo().addTitleStr("SATELLITE");
 
-    //info.addNameStr("id/ss_id:");    info.addValueStr(int2str(GetId()) + " / " + int2str(starsystem->GetId()));
-    info.addNameStr("id:");          info.addValueStr(int2str(GetId()));
-    info.addNameStr("mass:");        info.addValueStr(int2str(mass));
-	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
+    //GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(starsystem->GetId()));
+    GetInfo().addNameStr("id:");          GetInfo().addValueStr(int2str(GetId()));
+    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(int2str(GetMass()));
+    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 }
             
 void Satellite::UpdateRenderStuff()

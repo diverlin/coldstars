@@ -49,14 +49,14 @@ bool HyperSpace::IsVehicleHere(int id) const
 
 void HyperSpace::PostHyperJumpEvent(StarSystem* starsystem)
 {
-        for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
-        {             
-                VEHICLE_vec[i]->GetDriveComplex().ResetTarget(); 
-                  
-        	Vec3<float> center(getRandInt(700, 1200), getRandInt(700, 1200), -500); // get correct pos
-		Vec3<float> angle(0,0,getRandInt(0, 360));  
-                starsystem->AddVehicle(VEHICLE_vec[i], center, angle, VEHICLE_vec[i]->GetParent());  
-        }
-              
-        VEHICLE_vec.clear();  
+    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+    {             
+        VEHICLE_vec[i]->GetDriveComplex().ResetTarget(); 
+        
+        Vec3<float> center(getRandInt(700, 1200), getRandInt(700, 1200), -500); // get correct pos
+        Vec3<float> angle(0,0,getRandInt(0, 360));  
+        starsystem->AddVehicle(VEHICLE_vec[i], center, angle, VEHICLE_vec[i]->GetParent());  
+    }
+          
+    VEHICLE_vec.clear();  
 }

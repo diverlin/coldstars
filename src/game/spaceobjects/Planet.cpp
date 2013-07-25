@@ -75,7 +75,7 @@ void Planet::AddVehicle(Vehicle* vehicle) const
 {
 	if (vehicle->GetStarSystem() == nullptr)
 	{
-		vehicle->SetStarSystem(starsystem);
+		vehicle->SetStarSystem(GetStarSystem());
 	}
 	
 	land->AddVehicle(vehicle);
@@ -97,14 +97,14 @@ void Planet::UpdateInSpaceInStatic()
 
 void Planet::UpdateInfo()
 {
-	info.clear();
+	GetInfo().clear();
 
-	info.addTitleStr("PLANET");
-	info.addNameStr("id/ss_id:");    info.addValueStr(int2str(GetId()) + " / " + int2str(starsystem->GetId()));
-	info.addNameStr("armor:");  	 info.addValueStr(int2str(data_life.armor));
-	info.addNameStr("population:");  info.addValueStr(int2str(population));
-	info.addNameStr("dock_veh:");    info.addValueStr(land->GetDockVehicleStr());
-	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
+	GetInfo().addTitleStr("PLANET");
+	GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()));
+	GetInfo().addNameStr("armor:");  	  GetInfo().addValueStr(int2str(GetDataLife().armor));
+	GetInfo().addNameStr("population:");  GetInfo().addValueStr(int2str(population));
+	GetInfo().addNameStr("dock_veh:");    GetInfo().addValueStr(land->GetDockVehicleStr());
+	GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 }
 
 void Planet::PostDeathUniqueEvent(bool)
@@ -113,7 +113,7 @@ void Planet::PostDeathUniqueEvent(bool)
 void Planet::Render_NEW(const Vec2<float>& scroll_coords)
 {
 	UpdateRenderAnimation();
-	RenderMeshLightNormalMap(scroll_coords, starsystem->GetColor4f());
+	RenderMeshLightNormalMap(scroll_coords, GetStarSystem()->GetColor4f());
 	if (atmosphere != nullptr)
 	{
 		atmosphere->Render(scroll_coords);
@@ -151,7 +151,7 @@ void Planet::ResolveDataUniquePlanet()
 	Logger::Instance().Log(" Planet("+int2str(GetId())+")::ResolveDataUniquePlanet", SAVELOAD_LOG_DIP);
 	#endif
 	
-	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, parent, data_unresolved_BasePlanet.orbit_it); 
+	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, GetParent(), data_unresolved_BasePlanet.orbit_it); 
 }
 	
 void Planet::SaveData(boost::property_tree::ptree& save_ptree) const		

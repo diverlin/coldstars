@@ -56,34 +56,34 @@ Ship::~Ship()
 //overriding
 void Ship::UpdateInfo()
 {
-	info.clear();
+	GetInfo().clear();
 
-	info.addTitleStr("SHIP");
-	if (starsystem) { info.addNameStr("id/ss_id:"); info.addValueStr( int2str(GetId()) + " / " + int2str(starsystem->GetId()) ); }
-	else     		{ info.addNameStr("id:");       info.addValueStr( int2str(GetId()) ); }
-	info.addNameStr("race:");   		info.addValueStr( getRaceStr(GetTextureOb()->race_id) ); 
-	info.addNameStr("class:");   		info.addValueStr( getEntityTypeStr(GetSubSubTypeId()) );     	
-	info.addNameStr("armor/max:");     	info.addValueStr( int2str(data_life.armor) + "/" + int2str(data_korpus.armor) );
-	info.addNameStr("size id:");     	info.addValueStr( int2str(GetTextureOb()->size_id) );
-	info.addNameStr("space/free:");   	info.addValueStr( int2str(data_korpus.space) + "/" + int2str(properties.free_space) );
-	info.addNameStr("mass:");   		info.addValueStr( int2str(mass) );
-	info.addNameStr("speedx100:");      info.addValueStr( int2str(properties.speed*100) );
-	info.addNameStr("speed dmx100:");   info.addValueStr( int2str(mass*MASS_DECREASE_SPEED_RATE*100));
-	info.addNameStr("energy:");         info.addValueStr( int2str(properties.energy) );
-	info.addNameStr("temp.:");       	info.addValueStr( int2str(data_korpus.temperature) );
-	info.addNameStr("radar:");    		info.addValueStr( int2str(properties.radar) );
-	info.addNameStr("protect:");        info.addValueStr( int2str(properties.protection) );
-	info.addNameStr("repair:");        	info.addValueStr( int2str(properties.repair) );
-	info.addNameStr("scan:");        	info.addValueStr( int2str(properties.scan) );
-	info.addNameStr("price:");       	info.addValueStr( int2str(data_korpus.price) );
-	info.addNameStr("pos:");       		info.addValueStr( str(GetCenter()) );
+	GetInfo().addTitleStr("SHIP");
+	if (GetStarSystem()) { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()) ); }
+	else     		{ GetInfo().addNameStr("id:");       GetInfo().addValueStr( int2str(GetId()) ); }
+	GetInfo().addNameStr("race:");   		GetInfo().addValueStr( getRaceStr(GetTextureOb()->race_id) ); 
+	GetInfo().addNameStr("class:");   		GetInfo().addValueStr( getEntityTypeStr(GetSubSubTypeId()) );     	
+	GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( int2str(GetDataLife().armor) + "/" + int2str(data_korpus.armor) );
+	GetInfo().addNameStr("size id:");     	GetInfo().addValueStr( int2str(GetTextureOb()->size_id) );
+	GetInfo().addNameStr("space/free:");   	GetInfo().addValueStr( int2str(data_korpus.space) + "/" + int2str(properties.free_space) );
+	GetInfo().addNameStr("mass:");   		GetInfo().addValueStr( int2str(GetMass()) );
+	GetInfo().addNameStr("speedx100:");     GetInfo().addValueStr( int2str(properties.speed*100) );
+	GetInfo().addNameStr("speed dmx100:");  GetInfo().addValueStr( int2str(GetMass()*MASS_DECREASE_SPEED_RATE*100));
+	GetInfo().addNameStr("energy:");        GetInfo().addValueStr( int2str(properties.energy) );
+	GetInfo().addNameStr("temp.:");       	GetInfo().addValueStr( int2str(data_korpus.temperature) );
+	GetInfo().addNameStr("radar:");    		GetInfo().addValueStr( int2str(properties.radar) );
+	GetInfo().addNameStr("protect:");       GetInfo().addValueStr( int2str(properties.protection) );
+	GetInfo().addNameStr("repair:");        GetInfo().addValueStr( int2str(properties.repair) );
+	GetInfo().addNameStr("scan:");        	GetInfo().addValueStr( int2str(properties.scan) );
+	GetInfo().addNameStr("price:");       	GetInfo().addValueStr( int2str(data_korpus.price) );
+	GetInfo().addNameStr("pos:");       	GetInfo().addValueStr( str(GetCenter()) );
 		
 	if (properties.grab_radius > 0)
 	{
 		std::string grab_str = GetGrappleSlot()->GetGrappleEquipment()->GetTargetStr();
 		if (grab_str.size() > 0)
 		{
-			info.addNameStr("grab_id:");   		info.addValueStr( grab_str ); 
+			GetInfo().addNameStr("grab_id:");   		GetInfo().addValueStr( grab_str ); 
 		}
 	}
 
@@ -138,13 +138,13 @@ void Ship::RenderInSpace_2D(float scale) const
 	{
 		RenderShieldEffect(1.0 - color.a); 
 	}
-	starsystem->RestoreSceneColor();
+	GetStarSystem()->RestoreSceneColor();
 }
 
 void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords, float scale)
 {
 	UpdateRenderAnimation();
-	RenderMeshLight(scroll_coords, starsystem->GetColor4f());
+	RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());
 
 	setColor4f(color);
 	enable_BLEND();
@@ -153,7 +153,7 @@ void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords, float scale)
 		RenderShieldEffect(1.0 - color.a); 
 	}
 	disable_BLEND();
-	starsystem->RestoreSceneColor();
+	GetStarSystem()->RestoreSceneColor();
 }
 
 void Ship::RenderAtPlanet(const Vec3<float>& center)
