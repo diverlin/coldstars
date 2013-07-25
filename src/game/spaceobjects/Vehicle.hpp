@@ -16,6 +16,7 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef VEHICLE_HPP
 #define VEHICLE_HPP
 
@@ -37,6 +38,7 @@ class BaseEquipment;
 class BaseParticleSystem;
 class ShockWaveEffect;
 
+
 struct UnresolvedDataUniqueVehicle
 {
 	int drive_complex_target_id;
@@ -47,18 +49,19 @@ struct UnresolvedDataUniqueVehicle
 	int land_id;
 };
 
+
 enum class VEHICLE_SPECIAL_ACTION_TYPE
 {
 	NONE_ID=0, INITIATE_DOCKING_ID, INITIATE_LAUNCHING_ID, INITIATE_JUMPIN_ID, INITIATE_JUMPOUT_ID
 };
 
+
 class Vehicle : public BaseSpaceEntity
 {   
     public:
         Vehicle();
-        virtual ~Vehicle() override; 
+        virtual ~Vehicle(); 
 
-		virtual void PutChildsToGarbage() const override;
         void CreateDriveComplexTextureDependedStuff();
         void CreateProtectionComplexTextureDependedStuff(); 
         		
@@ -179,6 +182,8 @@ class Vehicle : public BaseSpaceEntity
         void TEST_DamageAndLockRandItems();
         	
 	protected:
+        std::vector<ItemSlot*> m_SlotTotal_vec;
+            
         ItemSlot* const GetFuctionalSlot(ENTITY::TYPE) const;
         ItemSlot* const GetEmptyArtefactSlot() const;
         ItemSlot* const GetCargoSlotWithGoods(ENTITY::TYPE);
@@ -198,7 +203,9 @@ class Vehicle : public BaseSpaceEntity
         void RenderShieldEffect(float parent_d_alpha = 0.0) const;          
         
         void UpdateGrappleMicroProgram_inDynamic();
-        	        	                                
+        
+        virtual void PutChildsToGarbage() const override;
+                	        	                                
         UnresolvedDataUniqueVehicle data_unresolved_Vehicle;
         
         void SaveDataUniqueVehicle(boost::property_tree::ptree&, const std::string&) const;		
@@ -222,7 +229,6 @@ class Vehicle : public BaseSpaceEntity
         ItemSlot* m_SlotDroid;
         ItemSlot* m_SlotFreezer;
          
-        std::vector<ItemSlot*> m_SlotTotal_vec;
         std::vector<ItemSlot*> m_SlotFunct_vec;
         std::vector<ItemSlot*> m_SlotArtef_vec;
         std::vector<ItemSlot*> m_SlotCargo_vec;
@@ -238,8 +244,8 @@ class Vehicle : public BaseSpaceEntity
         void DropRandomItemToSpace();   
         bool MergeIdenticalGoods(BaseItem*);
              	
-        friend class GuiVehicle;
-        friend class GuiVehicle2;             	
+    friend class GuiVehicle;
+    friend class GuiVehicle2;             	
 };
 
 std::string getVehicleSpecialActionStr(VEHICLE_SPECIAL_ACTION_TYPE);

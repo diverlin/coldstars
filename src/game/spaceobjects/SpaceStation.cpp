@@ -17,27 +17,29 @@
 */
 
 #include "SpaceStation.hpp"
-#include "../common/rand.hpp"
-#include "../common/myStr.hpp"
-#include "../common/Logger.hpp"
-#include "../world/EntityManager.hpp"
+#include <common/rand.hpp>
+#include <common/myStr.hpp>
+#include <common/Logger.hpp>
 
-#include "../garbage/EntityGarbage.hpp"
+#include <world/EntityManager.hpp>
+#include <world/starsystem.hpp>
 
-#include "../world/starsystem.hpp"
-#include "../docking/Kosmoport.hpp"
-#include "../effects/Shield.hpp"
-#include "../parts/WeaponComplex.hpp"
-#include "../common/constants.hpp"
-#include "../slots/ItemSlot.hpp"
-#include "../pilots/Npc.hpp"
+#include <garbage/EntityGarbage.hpp>
 
-#include "../resources/ShaderCollector.hpp"
-#include "../render/Render.hpp"
+#include <docking/Kosmoport.hpp>
+
+#include <effects/Shield.hpp>
+
+#include <slots/ItemSlot.hpp>
+
+#include <pilots/Npc.hpp>
+
+#include <render/Render.hpp>
+
 
 SpaceStation::SpaceStation(int id)
 : 
-land(nullptr)
+m_Land(nullptr)
 {      
 	SetId(id);
 	SetTypeId(ENTITY::TYPE::VEHICLE_ID);
@@ -52,18 +54,26 @@ SpaceStation::~SpaceStation()
 	#endif
 }    
  
-/* virtual */
-void SpaceStation::PutChildsToGarbage() const
+/* virtual override final */
+void SpaceStation::PutChildsToGarbage() const 
 {
-	EntityGarbage::Instance().Add(land);
+	EntityGarbage::Instance().Add(m_Land);
+    GetOwnerNpc()->SetAlive(false);
+    EntityGarbage::Instance().Add(GetOwnerNpc());
+    
+    for(unsigned int i=0; i<m_SlotTotal_vec.size(); i++)
+	{
+		EntityGarbage::Instance().Add(m_SlotTotal_vec[i]);	
+	}
 }
 
 void SpaceStation::BindLand(BaseLand* land)       		
 {
-	this->land = land;
-	this->land->SetOwner(this);
+	m_Land = land;
+	m_Land->SetOwner(this);
 }
-       	
+ 
+/* virtual override final */      	
 void SpaceStation::UpdateInSpace(int time, bool show_effect)
 {
 	CheckDeath(show_effect);
@@ -73,7 +83,7 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 	}
 }
 
-//overriding
+/* virtual override final */
 void SpaceStation::UpdateInfo()
 {
 	GetInfo().clear();
@@ -145,7 +155,7 @@ void SpaceStation::ResolveDataUniqueSpaceStation()
 }
 
 
-/*virtual*/
+/* virtual override final */
 void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "spacestation."+int2str(GetId())+".";
@@ -157,7 +167,7 @@ void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueSpaceStation(save_ptree, root);
 }
 
-/*virtual*/
+/* virtual override final */
 void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LoadDataUniqueBase(load_ptree);
@@ -168,11 +178,11 @@ void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
 	LoadDataUniqueSpaceStation(load_ptree);
 }
 
-/*virtual*/
+/* virtual override final */
 void SpaceStation::ResolveData()
 {
-        ResolveDataUniqueBase();
-        ResolveDataUniqueOrientation();
+    ResolveDataUniqueBase();
+    ResolveDataUniqueOrientation();
 	ResolveDataUniqueBaseDrawable();
 	ResolveDataUniqueBaseSpaceEntity();
 	ResolveDataUniqueVehicle();

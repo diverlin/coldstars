@@ -15,45 +15,45 @@
 	along with this program; if not, write to the Free Software
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-
-
+   
+   
 #ifndef SPACESTATION_HPP
 #define SPACESTATION_HPP
 
-#include "Vehicle.hpp"
-#include "../docking/BaseLand.hpp"
-
-
+#include <spaceobjects/Vehicle.hpp>
+#include <docking/BaseLand.hpp>
+   
+   
 class SpaceStation : public Vehicle
 {
     public:  
         SpaceStation(int);
         virtual ~SpaceStation();
-        
-        virtual void PutChildsToGarbage() const;
             
-        BaseLand* GetLand() const { return land; };
+        BaseLand* const GetLand() const { return m_Land; };
+        
         void BindLand(BaseLand* land);
         
-        void UpdateInSpace(int, bool);
-        
-        virtual void UpdateInfo();  
+        virtual void UpdateInSpace(int, bool) override final;
         
         void RenderInSpace_2D(float);
         void RenderInSpace_3D(const Vec2<float>&, float);     	
                 
-        void SaveData(boost::property_tree::ptree&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+        virtual void SaveData(boost::property_tree::ptree&) const override final;
+        virtual void LoadData(const boost::property_tree::ptree&) override final;
+        virtual void ResolveData() override final;
     		
     private:
-        BaseLand* land;
-        
+        BaseLand* m_Land;
+
+        void UpdateRenderStuff_2D();        	
+        virtual void UpdateInfo() override final;  
+            
+        virtual void PutChildsToGarbage() const override final;
+            
         void SaveDataUniqueSpaceStation(boost::property_tree::ptree&, const std::string&) const;
         void LoadDataUniqueSpaceStation(const boost::property_tree::ptree&);
         void ResolveDataUniqueSpaceStation();
-        
-        void UpdateRenderStuff_2D();        	
 };
 
 

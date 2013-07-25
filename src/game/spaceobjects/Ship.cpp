@@ -19,22 +19,21 @@
 
 #include "Ship.hpp"
 
-#include <boost/lexical_cast.hpp>
+#include <common/myStr.hpp>
+#include <common/Logger.hpp>
 
-#include "../common/myStr.hpp"
-#include "../world/EntityManager.hpp"
+#include <world/starsystem.hpp>
 
-#include "../world/starsystem.hpp"
+#include <render/Render.hpp>
 
-#include "../render/Render.hpp"
-#include "../effects/Shield.hpp"
-#include "../items/equipment/GrappleEquipment.hpp"
-#include "../slots/ItemSlot.hpp"
-#include "../slots/VehicleSlot.hpp"
-#include "../parts/WeaponComplex.hpp"
-#include "../common/Logger.hpp"
+#include <effects/Shield.hpp>
 
-#include "../pilots/Npc.hpp"
+#include <items/equipment/GrappleEquipment.hpp>
+
+#include <slots/ItemSlot.hpp>
+#include <slots/VehicleSlot.hpp>
+
+#include <pilots/Npc.hpp>
 
 
 Ship::Ship(int id)
@@ -44,7 +43,7 @@ Ship::Ship(int id)
 	SetSubTypeId(ENTITY::TYPE::SHIP_ID);
 }
 
-/* virtual */
+/* virtual override final */
 Ship::~Ship()
 {
 	#if CREATEDESTROY_LOG_ENABLED == 1
@@ -53,14 +52,14 @@ Ship::~Ship()
 } 
 
 
-//overriding
+/* virtual override final */
 void Ship::UpdateInfo()
 {
 	GetInfo().clear();
 
 	GetInfo().addTitleStr("SHIP");
-	if (GetStarSystem()) { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()) ); }
-	else     		{ GetInfo().addNameStr("id:");       GetInfo().addValueStr( int2str(GetId()) ); }
+	if (GetStarSystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()) ); }
+	else     		        { GetInfo().addNameStr("id:");       GetInfo().addValueStr( int2str(GetId()) ); }
 	GetInfo().addNameStr("race:");   		GetInfo().addValueStr( getRaceStr(GetTextureOb()->race_id) ); 
 	GetInfo().addNameStr("class:");   		GetInfo().addValueStr( getEntityTypeStr(GetSubSubTypeId()) );     	
 	GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( int2str(GetDataLife().armor) + "/" + int2str(GetDataKorpus().armor) );
@@ -91,7 +90,7 @@ void Ship::UpdateInfo()
 	//info.addNameStr("defenceR:");       	info.addValueStr( boost::lexical_cast<std::string>(propetries.defence_rate_normalized) );	
 }
 
-/* virtual */
+/* virtual override final */
 void Ship::UpdateInSpace(int time, bool show_effect)
 {   
 	CheckDeath(show_effect);
@@ -191,7 +190,7 @@ void Ship::ResolveDataUniqueShip()
 	#endif
 }
 
-/*virtual*/
+/* virtual override final */
 void Ship::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	const std::string root = "ship."+int2str(GetId())+".";
@@ -203,22 +202,22 @@ void Ship::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueShip(save_ptree, root);
 }
 
-/*virtual*/
+/* virtual override final */
 void Ship::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-        LoadDataUniqueBase(load_ptree);
-        LoadDataUniqueOrientation(load_ptree);
+    LoadDataUniqueBase(load_ptree);
+    LoadDataUniqueOrientation(load_ptree);
 	LoadDataUniqueBaseDrawable(load_ptree);
 	LoadDataUniqueBaseSpaceEntity(load_ptree);
 	LoadDataUniqueVehicle(load_ptree);
 	LoadDataUniqueShip(load_ptree);
 }
 
-/*virtual*/
+/* virtual override final */
 void Ship::ResolveData()
 {
-        ResolveDataUniqueBase();
-        ResolveDataUniqueOrientation();
+    ResolveDataUniqueBase();
+    ResolveDataUniqueOrientation();
 	ResolveDataUniqueBaseDrawable();
 	ResolveDataUniqueBaseSpaceEntity();
 	ResolveDataUniqueVehicle();

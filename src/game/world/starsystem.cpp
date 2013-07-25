@@ -176,15 +176,18 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const Vec3<float>& center, const V
     vehicle->SetAngle(angle);   
     vehicle->UpdateOrientation();  
     
-    vehicle->SetParent(parent);
     vehicle->SetColor(color);
     
     VEHICLE_vec.push_back(vehicle);  
 
 	if (vehicle->GetSubTypeId() == ENTITY::TYPE::SATELLITE_ID)
 	{
-		((Satellite*)vehicle)->GetOrbit()->CalcPath(parent->GetCollisionRadius(), 1.0, getRandBool());
+		((Satellite*)vehicle)->BindParent(parent);
 	}
+    else
+    {
+        vehicle->SetParent(parent);
+    }
 }
 
 

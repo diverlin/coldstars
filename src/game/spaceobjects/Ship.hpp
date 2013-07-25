@@ -20,8 +20,7 @@
 #ifndef SHIP_HPP
 #define SHIP_HPP
 
-#include "Vehicle.hpp"
-#include "../math/myVector.hpp"
+#include <spaceobjects/Vehicle.hpp>
 
 class Ship : public Vehicle
 {   
@@ -29,17 +28,17 @@ class Ship : public Vehicle
         Ship(int);
         virtual ~Ship();
         
-        virtual void UpdateInSpace(int, bool);
+        virtual void UpdateInSpace(int, bool) override final;
         
-        virtual void UpdateInfo();  
+        virtual void UpdateInfo() override final;  
         
         void RenderInSpace_2D(float) const;        	
         void RenderInSpace_3D(const Vec2<float>&, float);
         void RenderAtPlanet(const Vec3<float>&);       
 		
-        virtual void SaveData(boost::property_tree::ptree&) const;
-        virtual void LoadData(const boost::property_tree::ptree&);
-        virtual void ResolveData();
+        virtual void SaveData(boost::property_tree::ptree&) const override final;
+        virtual void LoadData(const boost::property_tree::ptree&) override final;
+        virtual void ResolveData() override final;
          
     private:        
         void SaveDataUniqueShip(boost::property_tree::ptree&, const std::string&) const;		
