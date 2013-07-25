@@ -52,7 +52,7 @@ void Asteroid::UpdateInSpace(int time, bool show_effect)
 	if (time > 0)
 	{	
      		UpdatePosition();
-     	}     	
+    }     	
 }
 
 void Asteroid::CollisionEvent(bool show_effect)
@@ -94,7 +94,7 @@ void Asteroid::UpdateInfo()
     GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()));
     GetInfo().addNameStr("armor:");       GetInfo().addValueStr(int2str(GetDataLife().armor));
     GetInfo().addNameStr("mass:");        GetInfo().addValueStr(int2str(GetMass()));
-	GetInfo().addNameStr("speed x 100:"); GetInfo().addValueStr(int2str(int(data_planet.speed*100)));
+	GetInfo().addNameStr("speed x 100:"); GetInfo().addValueStr(int2str(int(GetDataPlanet().speed*100)));
 	GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 }     
 

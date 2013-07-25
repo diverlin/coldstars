@@ -68,7 +68,7 @@ void Planet::BindLand(BaseLand* land)
 {
 	this->land = land;
 	this->land->SetOwner(this);
-        SetSubTypeId(land->GetTypeId());
+    SetSubTypeId(land->GetTypeId());
 }
 	
 void Planet::AddVehicle(Vehicle* vehicle) const

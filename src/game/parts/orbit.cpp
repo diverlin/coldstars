@@ -21,7 +21,10 @@
 #include "../common/constants.hpp"
 
 
-Orbit::Orbit():it(0)
+Orbit::Orbit()
+:
+m_It(0),
+m_Len(0)
 {}
 
 Orbit::~Orbit()
@@ -29,21 +32,21 @@ Orbit::~Orbit()
  
 const Vec3<float>& Orbit::GetNextTurnPosition() const 
 { 
-    if (it + TURN_TIME < len)
+    if (m_It + TURN_TIME < m_Len)
     {
-        return coords_vec[it+TURN_TIME]; 
+        return m_Coords_vec[m_It+TURN_TIME]; 
     }
     else
     {
-        int d_orbit = len-it;
-        return coords_vec[TURN_TIME - d_orbit]; 
+        int d_orbit = m_Len-m_It;
+        return m_Coords_vec[TURN_TIME - d_orbit]; 
     }
 }
 
 
 void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_phi_inD, bool clockwise)
 {   
-	coords_vec.clear();
+	m_Coords_vec.clear();
 	
     float d_angleInRad = speed / RADIAN_TO_DEGREE_RATE;;
     if (clockwise == true) 
@@ -60,14 +63,14 @@ void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_ph
         new_coord.x = radius_A * cos(angleInRad) * cos(orbitPhiInRad) - radius_B * sin(angleInRad) * sin(orbitPhiInRad);
         new_coord.y = radius_A * cos(angleInRad) * sin(orbitPhiInRad) + radius_B * sin(angleInRad) * cos(orbitPhiInRad);
         new_coord.z = DEFAULT_ENTITY_ZPOS;         	
-        coords_vec.push_back(new_coord);
+        m_Coords_vec.push_back(new_coord);
     }
-    len = coords_vec.size();
+    m_Len = m_Coords_vec.size();
 }    
 
 void Orbit::CalcPath(float radius, float speed, bool clockwise)
 {   	
-	coords_vec.clear();
+	m_Coords_vec.clear();
 	
     float d_angleInRad  = speed / RADIAN_TO_DEGREE_RATE;
     if (clockwise == true) 
@@ -81,28 +84,28 @@ void Orbit::CalcPath(float radius, float speed, bool clockwise)
         new_coord.x = radius*(cos(angleInRad) - sin(angleInRad));
         new_coord.y = radius*(cos(angleInRad) + sin(angleInRad));
         new_coord.z = DEFAULT_ENTITY_ZPOS;
-        coords_vec.push_back(new_coord);
+        m_Coords_vec.push_back(new_coord);
     }
-    len = coords_vec.size();
+    m_Len = m_Coords_vec.size();
 }    
 
 void Orbit::UpdatePosition()
 {   
-    if (it < len-1) { it++; }
-    else 		{ it = 0; }
+    if (m_It < m_Len-1) { m_It++; }
+    else 		        { m_It=0; }
 }    
 
 void Orbit::UpdatePathVisualisation()
 {
-	visual_orbit_path.FillData(coords_vec, 30, 10);
-    visual_orbit_turn.FillData(coords_vec, TURN_TIME, 13);
+	m_VisualOrbitPath.FillData(m_Coords_vec, 30, 10);
+    m_VisualOrbitTurn.FillData(m_Coords_vec, TURN_TIME, 13);
 }
 
 void Orbit::DrawPath()
 {   
-	this->UpdatePathVisualisation();   // TOO SLOW
-    visual_orbit_path.Draw();
-    visual_orbit_turn.Draw();
+	UpdatePathVisualisation();   // TOO SLOW
+    m_VisualOrbitPath.Draw();
+    m_VisualOrbitTurn.Draw();
 }
 
 
