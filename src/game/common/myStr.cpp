@@ -46,20 +46,6 @@ std::string bool2str(bool var)
     	return stm.str() ;
 }
 
-std::string getSpecialActionStr(int id)
-{
-	switch(id)
-	{
-		case SPECIAL_ACTION::INITIATE_DOCKING_ID: 	{ return "INITIATE_DOCKING_ID"; break; }
-		case SPECIAL_ACTION::INITIATE_LAUNCHING_ID:	{ return "INITIATE_LAUNCHING_ID"; break; }
-		case SPECIAL_ACTION::INITIATE_JUMPIN_ID:	{ return "INITIATE_JUMPIN_ID"; break; }
-		case SPECIAL_ACTION::INITIATE_JUMPOUT_ID:	{ return "INITIATE_JUMPOUT_ID"; break; }
-		case NONE_ID:					{ return "NONE_ID"; break; }
-						
-		default:			{ return "UKNOWN ID"; break; }		
-	}
-}
-
 std::string getAiModelStr(int id)
 {
 	switch(id)

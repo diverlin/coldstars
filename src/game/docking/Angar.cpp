@@ -116,21 +116,21 @@ bool Angar::ChargeRocketEquipment(Npc* npc, RocketEquipment* rocket_equipment) c
                 
 bool Angar::RepairVehicle(Vehicle* vehicle) const
 {        
-        int price_for_one = vehicle->GetKorpusData().price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
+    int price_for_one = vehicle->GetDataKorpus().price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
 	int repair_max =  vehicle->GetOwnerNpc()->GetCredits() / price_for_one;
-	int repair_need = vehicle->GetKorpusData().armor - vehicle->GetArmor();
+	int repair_need = vehicle->GetDataKorpus().armor - vehicle->GetArmor();
 	
 	int repair_amount = 0;
 	if (repair_max > repair_need) {	repair_amount = repair_need; }
 	else                          { repair_amount = repair_max; }
 	
-        if (vehicle->GetOwnerNpc()->WithdrawCredits(repair_amount*price_for_one) == true)
-        {
-                vehicle->RepairKorpusOnAmount(repair_amount);
-                return true;  
-        }
-        
-        return false;        
+    if (vehicle->GetOwnerNpc()->WithdrawCredits(repair_amount*price_for_one) == true)
+    {
+        vehicle->RepairKorpusOnAmount(repair_amount);
+        return true;  
+    }
+    
+    return false;        
 }
 
 bool Angar::TankUpVehicle(Vehicle* vehicle) const
@@ -144,25 +144,25 @@ bool Angar::TankUpVehicle(Vehicle* vehicle) const
 
 	if (vehicle->GetOwnerNpc()->WithdrawCredits(fuel*price_fuel) == true)
 	{
-		vehicle->GetDriveComplex().GetBakSlot()->GetBakEquipment()->IncreaseFuel(fuel);
-                return true;
+		vehicle->GetComplexDrive().GetBakSlot()->GetBakEquipment()->IncreaseFuel(fuel);
+        return true;
 	}
         
-        return false;
+    return false;
 }
 
 void Angar::UpdateInStatic() const
 {
-        for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++)
+    for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++)
+    {
+        if (vehicle_visitors_slot_vec[i]->GetVehicle() != nullptr)
         {
-                if (vehicle_visitors_slot_vec[i]->GetVehicle() != nullptr)
-                {
-                	if (vehicle_visitors_slot_vec[i]->GetVehicle()->GetOwnerNpc() != nullptr)
-                	{
-                        	vehicle_visitors_slot_vec[i]->GetVehicle()->GetOwnerNpc()->UpdateInKosmoportInStatic();
-                	}
-               	}
+            if (vehicle_visitors_slot_vec[i]->GetVehicle()->GetOwnerNpc() != nullptr)
+            {
+                vehicle_visitors_slot_vec[i]->GetVehicle()->GetOwnerNpc()->UpdateInKosmoportInStatic();
+            }
         }
+    }
 }
                                                 
 int Angar::GetFreeVehicleSlotTotalNum() const

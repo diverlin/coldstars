@@ -19,7 +19,14 @@
 #ifndef VEHICLE_HPP
 #define VEHICLE_HPP
 
-#include "../spaceobjects/BaseSpaceEntity.hpp"
+#include <spaceobjects/BaseSpaceEntity.hpp>
+#include <parts/WeaponComplex.hpp>
+#include <parts/DriveComplex.hpp>
+#include <parts/ProtectionComplex.hpp>
+#include <struct/VehicleKorpusData.hpp>
+#include <struct/VehiclePropetries.hpp>
+#include <struct/VehicleNeeds.hpp>
+
 class VehicleSlot; 
 class BaseLand; 
 class Npc;
@@ -27,14 +34,6 @@ class GoodsPack;
 class Container;
 class BaseItem;
 class BaseEquipment;
-
-#include "../parts/WeaponComplex.hpp"
-#include "../parts/DriveComplex.hpp"
-#include "../parts/ProtectionComplex.hpp"
-#include "../struct/VehicleKorpusData.hpp"
-#include "../struct/VehiclePropetries.hpp"
-#include "../struct/VehicleNeeds.hpp"
-
 class BaseParticleSystem;
 class ShockWaveEffect;
 
@@ -46,7 +45,11 @@ struct UnresolvedDataUniqueVehicle
 	int starsystem_hyper_id;
 	int parent_vehicleslot_id;
 	int land_id;
-	//std::string textureOb_gui_path; 
+};
+
+enum class VEHICLE_SPECIAL_ACTION_TYPE
+{
+	NONE_ID=0, INITIATE_DOCKING_ID, INITIATE_LAUNCHING_ID, INITIATE_JUMPIN_ID, INITIATE_JUMPOUT_ID
 };
 
 class Vehicle : public BaseSpaceEntity
@@ -55,29 +58,27 @@ class Vehicle : public BaseSpaceEntity
         Vehicle();
         virtual ~Vehicle() override; 
 
-		virtual void PutChildsToGarbage() const;
-		
-		void SetGodMode(bool god_mode) { this->god_mode = god_mode; };
-		void SetSpecialActionId(int special_action_id) { this->special_action_id = special_action_id; };
-		void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { this->parent_vehicleslot = parent_vehicleslot; };
-		
-        void SetColor(const Color4<float>& color) { this->color = color; }
-        void SetLand(BaseLand* land) { this->land = land; };
+		virtual void PutChildsToGarbage() const override;
+        void CreateDriveComplexTextureDependedStuff();
+        void CreateProtectionComplexTextureDependedStuff(); 
+        		
+		void SetGodMode(bool god_mode) { m_GodMode = god_mode; }
+		void SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE special_action_id) { m_SpecialActionId = special_action_id; }
+		void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { m_ParentVehicleSlot = parent_vehicleslot; }
+
+        void SetLand(BaseLand* land) { m_Land = land; }
             
         void SetKorpusData(const VehicleKorpusData&);
-        void CreateDriveComplexTextureDependedStuff();
-        void CreateProtectionComplexTextureDependedStuff();                
+
+        bool GetGodMode() const { return m_GodMode; }
+        BaseLand* const GetLand() const { return m_Land; }
+        VEHICLE_SPECIAL_ACTION_TYPE GetSpecialActionId() const { return m_SpecialActionId; }
         
-        bool GetGodMode() const { return god_mode; };
-        BaseLand* GetLand() const { return land; };
-        int GetSpecialActionId() const { return special_action_id; };
+        VehicleSlot* const GetParentVehicleSlot() const { return m_ParentVehicleSlot; }
         
-        VehicleSlot* GetParentVehicleSlot() const { return parent_vehicleslot; };
-        
-        const VehiclePropetries& GetProperties() const { return properties; };
-        const VehicleNeeds& GetNeeds() const { return needs; };
-        
-        VehicleKorpusData& GetKorpusData() { return data_korpus; };
+        const VehiclePropetries& GetProperties() const { return m_Properties; }
+        const VehicleNeeds& GetNeeds() const { return m_Needs; }        
+        const VehicleKorpusData& GetDataKorpus() const { return m_DataKorpus; }
         
         virtual int GetGivenExpirience() const;
         bool CheckItemSlotPresenceBySubTypeId(ENTITY::TYPE) const;
@@ -97,26 +98,28 @@ class Vehicle : public BaseSpaceEntity
         
         bool UnpackContainerItemToCargoSlot(Container*);
         
-        int GetFreeSpace() const { return properties.free_space; };
+        int GetFreeSpace() const { return m_Properties.free_space; }
         
         void BindOwnerNpc(Npc*);
                 
 		bool IsObjectWithinRadarRange(BaseSpaceEntity*) const;
         
-        WeaponComplex& GetWeaponComplex() { return weapon_complex; };
-        DriveComplex& GetDriveComplex()   { return drive_complex; };                
-        ProtectionComplex& GetProtectionComplex() { return protection_complex; };
+        WeaponComplex& GetComplexWeapon() { return m_ComplexWeapon; }   // !!!
+        DriveComplex& GetComplexDrive()   { return m_ComplexDrive; }                
+        ProtectionComplex& GetComplexProtector() { return m_ComplexProtector; }
+
+        const WeaponComplex& GetComplexWeapon() const { return m_ComplexWeapon; }
+                
+        ItemSlot* const GetSlotRadar()     const { return m_SlotRadar; }
+        ItemSlot* const GetSlotScaner()    const { return m_SlotScaner; }
+        ItemSlot* const GetSlotEnergizer() const { return m_SlotEnergizer; }
+        ItemSlot* const GetSlotGrapple()   const { return m_SlotGrapple; }
+        ItemSlot* const GetSlotDroid()     const { return m_SlotDroid; }
+        ItemSlot* const GetSlotFreezer()   const { return m_SlotFreezer; }
         
-        ItemSlot* GetRadarSlot()     const { return radar_slot; };
-        ItemSlot* GetScanerSlot()    const { return scaner_slot; };
-        ItemSlot* GetEnergizerSlot() const { return energizer_slot; };
-        ItemSlot* GetGrappleSlot()   const { return grapple_slot; };
-        ItemSlot* GetDroidSlot()     const { return droid_slot; };
-        ItemSlot* GetFreezerSlot()   const { return freezer_slot; };
+        Npc* const GetOwnerNpc() const { return m_OwnerNpc; }
         
-        Npc* GetOwnerNpc() const { return owner_npc; };
-        
-        ItemSlot* GetEmptyCargoSlot();
+        ItemSlot* const GetEmptyCargoSlot();
         GoodsPack* GetGoodsPack() const;
         
         void UpdateSpecialAction();         
@@ -176,39 +179,9 @@ class Vehicle : public BaseSpaceEntity
         void TEST_DamageAndLockRandItems();
         	
 	protected:
-		int special_action_id;
-	
-        VehiclePropetries properties;
-        VehicleNeeds needs;
-        VehicleKorpusData data_korpus;
-        
-        WeaponComplex     weapon_complex;
-        DriveComplex      drive_complex;
-        ProtectionComplex protection_complex;
-        
-        Npc* owner_npc;
-
-        ItemSlot* radar_slot;
-        ItemSlot* scaner_slot;
-        ItemSlot* energizer_slot;
-        ItemSlot* grapple_slot;
-        ItemSlot* droid_slot;
-        ItemSlot* freezer_slot;
-        
-        std::vector<ItemSlot*> slot_total_vec;
-        std::vector<ItemSlot*> slot_funct_vec;
-        std::vector<ItemSlot*> slot_artef_vec;
-        std::vector<ItemSlot*> slot_cargo_vec;
-        
-        BaseLand* land;
-        
-        Color4<float> color;
-        
-        VehicleSlot* parent_vehicleslot;
-        
-        ItemSlot* GetFuctionalSlot(ENTITY::TYPE) const;
-        ItemSlot* GetEmptyArtefactSlot() const;
-        ItemSlot* GetCargoSlotWithGoods(ENTITY::TYPE);
+        ItemSlot* const GetFuctionalSlot(ENTITY::TYPE) const;
+        ItemSlot* const GetEmptyArtefactSlot() const;
+        ItemSlot* const GetCargoSlotWithGoods(ENTITY::TYPE);
         
         bool ManageItem(BaseItem*);
         bool ManageFunctionEquipment(BaseItem*);
@@ -222,8 +195,7 @@ class Vehicle : public BaseSpaceEntity
         void RenderKorpus() const;
         void RenderTurrels() const;
         void RenderDriveEffect(float scale, float parent_d_alpha = 0.0) const;
-        void RenderShieldEffect(float parent_d_alpha = 0.0) const;
-        
+        void RenderShieldEffect(float parent_d_alpha = 0.0) const;          
         
         void UpdateGrappleMicroProgram_inDynamic();
         	        	                                
@@ -234,16 +206,42 @@ class Vehicle : public BaseSpaceEntity
 		void ResolveDataUniqueVehicle();
 
     private:
-        bool god_mode;
-
+        bool m_GodMode;
+		VEHICLE_SPECIAL_ACTION_TYPE m_SpecialActionId;
+        
+        Npc* m_OwnerNpc;
+        
+        VehicleSlot* m_ParentVehicleSlot;
+       
+        BaseLand* m_Land;
+        
+        ItemSlot* m_SlotRadar;
+        ItemSlot* m_SlotScaner;
+        ItemSlot* m_SlotEnergizer;
+        ItemSlot* m_SlotGrapple;
+        ItemSlot* m_SlotDroid;
+        ItemSlot* m_SlotFreezer;
+         
+        std::vector<ItemSlot*> m_SlotTotal_vec;
+        std::vector<ItemSlot*> m_SlotFunct_vec;
+        std::vector<ItemSlot*> m_SlotArtef_vec;
+        std::vector<ItemSlot*> m_SlotCargo_vec;
+      
+        WeaponComplex     m_ComplexWeapon;
+        DriveComplex      m_ComplexDrive;
+        ProtectionComplex m_ComplexProtector;
+        
+        VehiclePropetries m_Properties;
+        VehicleNeeds m_Needs;
+        VehicleKorpusData m_DataKorpus;
+                                                                               
         void DropRandomItemToSpace();   
         bool MergeIdenticalGoods(BaseItem*);
-        
-        bool UpdateFadeInEffect();
-        bool UpdateFadeOutEffect();
              	
         friend class GuiVehicle;
         friend class GuiVehicle2;             	
 };
+
+std::string getVehicleSpecialActionStr(VEHICLE_SPECIAL_ACTION_TYPE);
 
 #endif 

@@ -224,7 +224,7 @@ void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
   
 void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
 {
-    for (const auto itemslot : vehicle->slot_total_vec)
+    for (const auto itemslot : vehicle->m_SlotTotal_vec)
     { 
         ENTITY::TYPE request_type = itemslot->GetSubTypeId();
         if ((request_type == ENTITY::TYPE::WEAPON_SLOT_ID) or (request_type == ENTITY::TYPE::CARGO_SLOT_ID) or (request_type == ENTITY::TYPE::ARTEFACT_SLOT_ID))

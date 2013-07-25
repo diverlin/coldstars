@@ -90,7 +90,7 @@ void Npc::UpdateInKosmoportInStatic()
 	vehicle->ResolveNeedsInKosmoportInStatic();
 	
 	// if all things are DONE
-	//((Planet*)vehicle->GetDriveComplex()->GetTarget())->GetLand()->AddToLaunchingQueue(this); // improove by adding spacestation
+	//((Planet*)vehicle->GetComplexDrive()->GetTarget())->GetLand()->AddToLaunchingQueue(this); // improove by adding spacestation
 	if (player == nullptr)
 	{
         	//if (ai_model)
@@ -115,7 +115,7 @@ void Npc::UpdateInSpaceInStatic()
 	#endif 
 
         vehicle->UpdateAllFunctionalItemsInStatic();
-	vehicle->GetWeaponComplex().PrepareWeapons();
+	vehicle->GetComplexWeapon().PrepareWeapons();
 	        
 	if (player == nullptr)
 	{
@@ -143,7 +143,7 @@ void Npc::UpdateInSpaceInStatic()
        		state_machine.UpdateInStaticInSpace();
         }
 
-        vehicle->GetDriveComplex().UpdatePath();
+        vehicle->GetComplexDrive().UpdatePath();
         
         #if AI_LOG_ENABLED == 1 
 	Logger::Instance().Log("Npc("+int2str(GetId())+")::UpdateInSpaceInStatic END", AI_LOG_DIP); 
@@ -200,10 +200,10 @@ void Npc::ScenarioFireVehicleAgressor()
                 {
                         if (observation.visible_VEHICLE_pair_vec[i].object->GetOwnerNpc()->GetId() == it->npc_id)
                         {
-                                vehicle->GetWeaponComplex().DeactivateAllWeapons();
+                                vehicle->GetComplexWeapon().DeactivateAllWeapons();
 
-                                vehicle->GetWeaponComplex().ActivateAllWeapons();
-                                vehicle->GetWeaponComplex().SetTarget(observation.visible_VEHICLE_pair_vec[i].object);
+                                vehicle->GetComplexWeapon().ActivateAllWeapons();
+                                vehicle->GetComplexWeapon().SetTarget(observation.visible_VEHICLE_pair_vec[i].object);
                         
                                 return;
                         }
@@ -213,10 +213,10 @@ void Npc::ScenarioFireVehicleAgressor()
 
 void Npc::ScenarioFireAsteroid()
 {
-        vehicle->GetWeaponComplex().DeactivateAllWeapons();
+        vehicle->GetComplexWeapon().DeactivateAllWeapons();
 
-        vehicle->GetWeaponComplex().ActivateAllWeapons();
-        vehicle->GetWeaponComplex().SetTarget(observation.visible_ASTEROID_pair_vec[0].object);
+        vehicle->GetComplexWeapon().ActivateAllWeapons();
+        vehicle->GetComplexWeapon().SetTarget(observation.visible_ASTEROID_pair_vec[0].object);
 }
 
 Planet* Npc::GetPlanetForDocking()

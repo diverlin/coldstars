@@ -36,22 +36,22 @@ void HyperSpace::AddVehicle(Vehicle* vehicle)
 
 bool HyperSpace::IsVehicleHere(int id) const
 {
-        for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
-        {               
+    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+    {               
 		if (VEHICLE_vec[i]->GetId() == id)
 		{
 			return true;
 		}
-        }
+    }
         
-        return false;
+    return false;
 }    
 
 void HyperSpace::PostHyperJumpEvent(StarSystem* starsystem)
 {
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     {             
-        VEHICLE_vec[i]->GetDriveComplex().ResetTarget(); 
+        VEHICLE_vec[i]->GetComplexDrive().ResetTarget(); 
         
         Vec3<float> center(getRandInt(700, 1200), getRandInt(700, 1200), -500); // get correct pos
         Vec3<float> angle(0,0,getRandInt(0, 360));  

@@ -20,12 +20,11 @@
 #ifndef BASEGAMEENTITY_HPP
 #define BASEGAMEENTITY_HPP
 
-#include "../common/BaseDrawable.hpp"
+#include <common/BaseDrawable.hpp>
+#include <text/InfoTable.hpp>
 
 class StarSystem;
 class Mesh;
-#include "../common/points.hpp"
-#include "../text/InfoTable.hpp" 
 class TextureOb;
 class Vehicle;
 class AnimationBase;
@@ -40,7 +39,7 @@ class BaseSpaceEntity : public BaseDrawable
 {
 	public:      
 		BaseSpaceEntity();
-		virtual ~BaseSpaceEntity();
+		virtual ~BaseSpaceEntity() override;
 
 		void SetLifeData(const LifeData& data_life) { m_DataLife = data_life; }
 

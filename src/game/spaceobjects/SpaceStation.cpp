@@ -55,11 +55,6 @@ SpaceStation::~SpaceStation()
 /* virtual */
 void SpaceStation::PutChildsToGarbage() const
 {
-	for(unsigned int i=0; i<slot_total_vec.size(); i++)
-	{
-		EntityGarbage::Instance().Add(slot_total_vec[i]);	
-	}	
-	
 	EntityGarbage::Instance().Add(land);
 }
 
@@ -74,7 +69,7 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 	CheckDeath(show_effect);
 	if (time > 0)
 	{
-		weapon_complex.Fire(time, owner_npc->GetSkills().GetAttackNormalized(), show_effect);
+		GetComplexWeapon().Fire(time, GetOwnerNpc()->GetSkills().GetAttackNormalized(), show_effect);
 	}
 }
 
@@ -94,7 +89,7 @@ void SpaceStation::UpdateInfo()
 void SpaceStation::UpdateRenderStuff_2D()
 {
     //points.update(); 
-    protection_complex.GetShieldEffect()->Update();
+    GetComplexProtector().GetShieldEffect()->Update();
     
     //if (ableTo.DRIVE == true)
     //{
@@ -108,14 +103,14 @@ void SpaceStation::RenderInSpace_2D(float scale)
 		
     RenderKorpus();
     	
-    if (data_korpus.draw_turrels == true)
+    if (GetDataKorpus().draw_turrels == true)
     {
-        weapon_complex.RenderTurrels();
+        GetComplexWeapon().RenderTurrels();
     }
     
-    if (protection_complex.GetProtectorSlot()->GetItem() != nullptr)
+    if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
     {
-        RenderShieldEffect(1.0 - color.a); 
+        RenderShieldEffect(1.0 - GetColor().a); 
     }
         
     GetStarSystem()->RestoreSceneColor();

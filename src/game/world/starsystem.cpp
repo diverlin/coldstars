@@ -1029,9 +1029,9 @@ void StarSystem::StarSparkEvent(float radius) const
     	{
        	        if ( distanceBetween(VEHICLE_vec[i]->GetCenter(), GetStar()->GetCenter()) < radius )
                	{
-               		if (VEHICLE_vec[i]->GetRadarSlot()->GetItem() != nullptr)
+               		if (VEHICLE_vec[i]->GetSlotRadar()->GetItem() != nullptr)
                		{
-       				VEHICLE_vec[i]->GetRadarSlot()->GetItem()->LockEvent(2); 
+       				VEHICLE_vec[i]->GetSlotRadar()->GetItem()->LockEvent(2); 
        			}
        		}
     	}
