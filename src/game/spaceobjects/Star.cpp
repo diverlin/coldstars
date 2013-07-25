@@ -17,32 +17,33 @@
 */
 
 #include "Star.hpp"
-#include "../common/constants.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/myStr.hpp"
-#include "../common/common.hpp"
-#include "../common/rand.hpp"
-#include "../resources/TextureManager.hpp"
-#include "../world/starsystem.hpp"
-#include "../render/Render.hpp"
-#include "../resources/ShaderCollector.hpp"
 
-#include "../common/Logger.hpp"
+#include <common/myStr.hpp>
+#include <common/common.hpp>
+#include <common/rand.hpp>
+#include <common/Logger.hpp>
+
+#include <world/EntityManager.hpp>
+#include <world/starsystem.hpp>
+
+#include <resources/ShaderCollector.hpp>
+
+#include <render/Render.hpp>
 
    
 Star::Star(int id)
 :
-texture_offset1(0.0),
-texture_offset2(0.0),
-d_color(0.0),
-spark_active(false),
-spark_grows(false),
-turn_since_last_spark_counter(0)
+m_TextureOffset1(0.0),
+m_TextureOffset2(0.0),
+m_DeltaColor(0.0),
+m_SparkActive(false),
+m_SparkGrows(false),
+m_TurnSinceLastSparkCounter(0)
 { 
 	SetId(id);
 	SetTypeId(ENTITY::TYPE::STAR_ID);
 
-    turn_spark_threshold = getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
+    m_TurnSparkThreshold = getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
 }
   
 /* virtual */  
@@ -52,22 +53,26 @@ Star::~Star()
 	Logger::Instance().Log("___::~Star("+int2str(GetId())+")");
 	#endif	
 }
-    
+
+int Star::GetColorId() const { return GetTextureOb()->color_id; }
+
+float Star::GetBrightThreshold() const { return GetTextureOb()->brightThreshold; }
+            
 void Star::CalcColor()
 {
-	color = getColor4fById(GetTextureOb()->color_id);
+	SetColor(getColor4fById(GetTextureOb()->color_id));
 }
        
 void Star::InitiateSpark()
 {
-	spark_active = true;
-	spark_grows = true;
-    	turn_since_last_spark_counter = 0;
+	m_SparkActive = true;
+	m_SparkGrows = true;
+    m_TurnSinceLastSparkCounter = 0;
 }
 
 void Star::UpdateInSpaceInStatic()
 {
-	if (turn_since_last_spark_counter > turn_spark_threshold)
+	if (m_TurnSinceLastSparkCounter > m_TurnSparkThreshold)
 	{
 		if (getRandInt(1, 2) == 1) 
 		{
@@ -76,46 +81,45 @@ void Star::UpdateInSpaceInStatic()
 	}
 	else
 	{
-		turn_since_last_spark_counter++;	
+		m_TurnSinceLastSparkCounter++;	
 	}
 }
        		
 void Star::UpdateInSpace(int time, bool show_effect)
 {
-        texture_offset1 += 0.0002;
-        texture_offset2 += 0.0003;
+    m_TextureOffset1 += 0.0002;
+    m_TextureOffset2 += 0.0003;
 
-	if (spark_active == true)
+	if (m_SparkActive == true)
 	{
 		if (show_effect == true)
 		{
-			if (spark_grows == true)
+			if (m_SparkGrows == true)
 			{
-				d_color += 0.02;
+				m_DeltaColor += 0.02;
 				//scale += 0.2;
-				if (d_color > 1.0)
+				if (m_DeltaColor > 1.0)
 				{
-					d_color = 1.0;
+					m_DeltaColor = 1.0;
 					GetStarSystem()->StarSparkEvent(getRandInt(600, 1200));
-					spark_grows = false;
+					m_SparkGrows = false;
 				}
 			} 
 			else
 			{		
-				d_color -= 0.005;	
+				m_DeltaColor -= 0.005;	
 				//scale -= 0.05;
-				if (d_color < 0.0)
+				if (m_DeltaColor < 0.0)
 				{
-					d_color = 0;
-					spark_active = false;
-				}
-
+					m_DeltaColor = 0;
+					m_SparkActive = false;
+				} 
 			}
 		}
 		else
 		{
 			GetStarSystem()->StarSparkEvent(getRandInt(600, 1200));
-			spark_active = false;
+			m_SparkActive = false;
 		}
 	}
 
@@ -134,7 +138,7 @@ void Star::Render_NEW() const
 	glBindTexture(GL_TEXTURE_2D, GetTextureOb()->texture);
 	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_1"), 1);
 	
-	glUniform2f(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "displ"), texture_offset1, texture_offset2);
+	glUniform2f(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "displ"), m_TextureOffset1, m_TextureOffset2);
 	
 	renderMesh(GetMesh(), GetCenter(), GetSize(), GetAngle(), false);
 	
@@ -148,6 +152,7 @@ void Star::Render_OLD() const
 	renderMesh(GetMesh(), GetCenter(),GetSize(), GetAngle(), GetZYX());
 }
 
+/* virtual override final */
 void Star::UpdateInfo()
 { 
 	GetInfo().clear();
@@ -157,6 +162,7 @@ void Star::UpdateInfo()
 	GetInfo().addNameStr("pos:");       GetInfo().addValueStr( str(GetCenter()) );
 }
 
+/* virtual override final */
 void Star::PostDeathUniqueEvent(bool)
 {}
 
@@ -167,8 +173,8 @@ void Star::SaveDataUniqueStar(boost::property_tree::ptree& save_ptree, const std
 	Logger::Instance().Log(" Star("+int2str(GetId())+")::SaveDataUniqueStar", SAVELOAD_LOG_DIP);
 	#endif
 	
-	save_ptree.put(root+"turn_since_last_spark_counter", turn_since_last_spark_counter);
-	save_ptree.put(root+"turn_spark_threshold", turn_spark_threshold);
+	save_ptree.put(root+"m_TurnSinceLastSparkCounter", m_TurnSinceLastSparkCounter);
+	save_ptree.put(root+"m_TurnSparkThreshold", m_TurnSparkThreshold);
 }
 
 void Star::LoadDataUniqueStar(const boost::property_tree::ptree& load_ptree)
@@ -177,8 +183,8 @@ void Star::LoadDataUniqueStar(const boost::property_tree::ptree& load_ptree)
 	Logger::Instance().Log(" Star("+int2str(GetId())+")::LoadDataUniqueStar", SAVELOAD_LOG_DIP);
 	#endif
 	
-	turn_since_last_spark_counter = load_ptree.get<int>("turn_since_last_spark_counter");
-	turn_spark_threshold = load_ptree.get<int>("turn_spark_threshold");	
+	m_TurnSinceLastSparkCounter = load_ptree.get<int>("m_TurnSinceLastSparkCounter");
+	m_TurnSparkThreshold = load_ptree.get<int>("m_TurnSparkThreshold");	
 }
 
 void Star::ResolveDataUniqueStar()
@@ -190,7 +196,7 @@ void Star::ResolveDataUniqueStar()
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this); 	
 }
 
-/*virtual*/
+/* virtual override final */
 void Star::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	std::string root = "star." + int2str(GetId())+".";
@@ -202,7 +208,7 @@ void Star::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueStar(save_ptree, root);
 }
 
-/*virtual*/
+/* virtual override final */
 void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
@@ -213,7 +219,7 @@ void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 	LoadDataUniqueStar(load_ptree);
 }
 
-/*virtual*/
+/* virtual override final */
 void Star::ResolveData()
 {
 	ResolveDataUniqueBase();

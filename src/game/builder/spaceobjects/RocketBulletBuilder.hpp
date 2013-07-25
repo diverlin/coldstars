@@ -32,15 +32,13 @@ class RocketBulletBuilder
 		
 		RocketBullet* GetNewRocketBulletTemplate(unsigned long int id = NONE_ID) const;							
 		RocketBullet* GetNewRocketBullet(const BulletData&) const;   
-		
-		void CreateKorpusGeometry(RocketBullet*) const;   
         	       
-        private:
-        	RocketBulletBuilder() {};   	
-        	RocketBulletBuilder(const RocketBulletBuilder&) = delete; 
-        	RocketBulletBuilder& operator=(const RocketBulletBuilder&) = delete;
-        	
-        	void CreateNewInternals(RocketBullet*, const BulletData&) const; 
+    private:
+        RocketBulletBuilder() {};   	
+        RocketBulletBuilder(const RocketBulletBuilder&) = delete; 
+        RocketBulletBuilder& operator=(const RocketBulletBuilder&) = delete;
+        
+        void CreateNewInternals(RocketBullet*, const BulletData&) const; 
 }; 
 
 

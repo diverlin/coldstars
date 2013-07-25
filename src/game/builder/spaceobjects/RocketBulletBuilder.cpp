@@ -39,18 +39,18 @@ RocketBullet* RocketBulletBuilder::GetNewRocketBulletTemplate(unsigned long int 
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	rocket_bullet = new RocketBullet(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }        
-      
-        EntityManager::Instance().RegisterEntity(rocket_bullet);
-        
-        return rocket_bullet;
+    try 
+    { 
+        rocket_bullet = new RocketBullet(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }        
+  
+    EntityManager::Instance().RegisterEntity(rocket_bullet);
+    
+    return rocket_bullet;
 }
 
 RocketBullet* RocketBulletBuilder::GetNewRocketBullet(const BulletData& data_bullet) const
@@ -58,24 +58,19 @@ RocketBullet* RocketBulletBuilder::GetNewRocketBullet(const BulletData& data_bul
 	RocketBullet* rocket_bullet = GetNewRocketBulletTemplate();
 	CreateNewInternals(rocket_bullet, data_bullet);	
         
-        return rocket_bullet;
+    return rocket_bullet;
 }
 
 void RocketBulletBuilder::CreateNewInternals(RocketBullet* rocket_bullet, const BulletData& data_bullet) const
 {
 	LifeData data_life;	
-        data_life.armor = data_bullet.armor;        
+    data_life.armor = data_bullet.armor;        
 
-        rocket_bullet->SetBulletData(data_bullet);
-        
-        rocket_bullet->SetLifeData(data_life);
-        TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID);
-        rocket_bullet->BindData2D(texOb);
-         
-        CreateKorpusGeometry(rocket_bullet);
+    rocket_bullet->SetBulletData(data_bullet);
+    
+    rocket_bullet->SetLifeData(data_life);
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID);
+    rocket_bullet->BindData2D(texOb);
 
 	rocket_bullet->CreateDriveComplexTextureDependedStuff();       
 }
-
-void RocketBulletBuilder::CreateKorpusGeometry(RocketBullet* rocket_bullet) const
-{}

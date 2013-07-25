@@ -17,18 +17,21 @@
 */
 
 #include "Asteroid.hpp"
-#include "../common/constants.hpp"
-#include "../common/rand.hpp"
-#include "../common/myStr.hpp"
-#include "../world/EntityManager.hpp"
 
-#include "../builder/spaceobjects/ContainerBuilder.hpp"
-#include "../world/starsystem.hpp"
-#include "../effects/particlesystem/ExplosionEffect.hpp"
+#include <common/constants.hpp>
+#include <common/rand.hpp>
+#include <common/myStr.hpp>
+#include <common/Logger.hpp>
+ 
+#include <world/starsystem.hpp>
+#include <world/EntityManager.hpp>
 
-#include "../spaceobjects/Container.hpp"
+#include <builder/spaceobjects/ContainerBuilder.hpp>
 
-#include "../common/Logger.hpp"
+#include <effects/particlesystem/ExplosionEffect.hpp>
+
+#include <spaceobjects/Container.hpp>
+
 
 Asteroid::Asteroid(int id)
 {   
@@ -51,7 +54,7 @@ void Asteroid::UpdateInSpace(int time, bool show_effect)
 	CheckDeath(show_effect);
 	if (time > 0)
 	{	
-     		UpdatePosition();
+        UpdatePosition();
     }     	
 }
 
@@ -63,18 +66,18 @@ void Asteroid::CollisionEvent(bool show_effect)
     
 void Asteroid::PostDeathUniqueEvent(bool show_effect)
 {
-    int _angleZ = getRandInt(0, 360);
+    int angleZ = getRandInt(0, 360);
     float impulse_strength = 0.5;
     for (int i=0; i<3; i++)
     {      
         Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
         
-        Vec3<float> impulse_dir(getXYVec3Unit(_angleZ));
+        Vec3<float> impulse_dir(getXYVec3Unit(angleZ));
         container->ApplyImpulse(impulse_dir, impulse_strength);
         
         GetStarSystem()->AddContainer(container, GetCenter());
         
-        _angleZ += 120;
+        angleZ += 120;
     }
     
     if (show_effect == true)
@@ -84,8 +87,8 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
     }
         			
 }    
-
-
+  
+/* virtual override final */
 void Asteroid::UpdateInfo()
 {   
 	GetInfo().clear();
@@ -131,7 +134,8 @@ void Asteroid::ResolveDataUniqueAsteroid()
 	
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, GetParent(), data_unresolved_BasePlanet.orbit_it); 
 }
-	
+
+/* virtual override final */	
 void Asteroid::SaveData(boost::property_tree::ptree& save_ptree) const		
 {
 	std::string root = "asteroid." + int2str(GetId())+".";
@@ -143,6 +147,7 @@ void Asteroid::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueAsteroid(save_ptree, root);
 }
 
+/* virtual override final */	
 void Asteroid::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
@@ -153,6 +158,7 @@ void Asteroid::LoadData(const boost::property_tree::ptree& load_ptree)
 	LoadDataUniqueAsteroid(load_ptree);
 }
 
+/* virtual override final */	
 void Asteroid::ResolveData()
 {
 	ResolveDataUniqueBase();

@@ -157,46 +157,46 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 	if (fire_atOnce>=1)
 	{
 		RocketBullet* rocket_bullet = RocketBulletBuilder::Instance().GetNewRocketBullet(data_bullet);
-		rocket_bullet->SetDamage(data_bullet.damage * attack_rate_normalized);
+		rocket_bullet->SetDamageRate(attack_rate_normalized);
 
 		if (item_slot->GetOwnerVehicle()->GetDataKorpus().draw_turrels == true)
-    		{
-        		start_pos = item_slot->GetTurrel()->GetCenter(); 
-        		angle_inD = item_slot->GetTurrel()->GetAngle().z;
-        	}
-        	else
-    		{
-         		start_pos = item_slot->GetOwnerVehicle()->GetCenter();
-         		angle_inD = item_slot->GetOwnerVehicle()->GetAngle().z;
-    		}  
+        {
+            start_pos = item_slot->GetTurrel()->GetCenter(); 
+            angle_inD = item_slot->GetTurrel()->GetAngle().z;
+        }
+        else
+        {
+            start_pos = item_slot->GetOwnerVehicle()->GetCenter();
+            angle_inD = item_slot->GetOwnerVehicle()->GetAngle().z;
+        }  
         
-                rocket_bullet->SetOwnerId(item_slot->GetOwnerVehicle()->GetId());
-        	rocket_bullet->SetTarget(item_slot->GetTarget());
-        
-    		item_slot->GetOwnerVehicle()->GetStarSystem()->AddBullet(rocket_bullet, start_pos, Vec3<float>(0, 0, angle_inD));
-    		num++;
-    	}
+        rocket_bullet->SetOwnerId(item_slot->GetOwnerVehicle()->GetId());
+        rocket_bullet->SetTarget(item_slot->GetTarget());
+    
+        item_slot->GetOwnerVehicle()->GetStarSystem()->AddBullet(rocket_bullet, start_pos, Vec3<float>(0, 0, angle_inD));
+        num++;
+    }
     	
-    	//if (fire_atOnce>=2)
-    	//{
-    		//offset = +2.0;
-		//RocketBuilder::Instance().CreateNewRocket();
-		//RocketBuilder::Instance().CreateNewInternals(data_bullet);	
-    		//slot->GetOwnerVehicle()->GetStarSystem()->Add(RocketBuilder::Instance().GetRocket(), slot, offset);
-    		//num++;
-    	//}
+    //if (fire_atOnce>=2)
+    //{
+        //offset = +2.0;
+    //RocketBuilder::Instance().CreateNewRocket();
+    //RocketBuilder::Instance().CreateNewInternals(data_bullet);	
+        //slot->GetOwnerVehicle()->GetStarSystem()->Add(RocketBuilder::Instance().GetRocket(), slot, offset);
+        //num++;
+    //}
 
-    	//if (fire_atOnce>=3)
-    	//{
-    		//offset = -2.0;
-		//RocketBuilder::Instance().CreateNewRocket();
-		//RocketBuilder::Instance().CreateNewInternals(data_bullet);	
-    		//slot->GetOwnerVehicle()->GetStarSystem()->Add(RocketBuilder::Instance().GetRocket(), slot, offset);
-    		//num++;
-    	//}    	
-    	
-    	//rocketlaunch.play()
-    	ammo -= num;
+    //if (fire_atOnce>=3)
+    //{
+        //offset = -2.0;
+    //RocketBuilder::Instance().CreateNewRocket();
+    //RocketBuilder::Instance().CreateNewInternals(data_bullet);	
+        //slot->GetOwnerVehicle()->GetStarSystem()->Add(RocketBuilder::Instance().GetRocket(), slot, offset);
+        //num++;
+    //}    	
+    
+    //rocketlaunch.play()
+    ammo -= num;
 
 	DeteriorationEvent();
 }

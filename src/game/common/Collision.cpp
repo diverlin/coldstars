@@ -21,9 +21,9 @@
 
 bool checkCollisionDotWithCircle_DIRTY(const Vec2<float>& dot, const Vec2<float>& center, float radius)
 {
-	if (std::fabs(dot.x - center.x) > radius/2)
+	if (std::fabs(dot.x - center.x) > radius)
 		return false;
-	if (std::fabs(dot.y - center.y) > radius/2)
+	if (std::fabs(dot.y - center.y) > radius)
 		return false;
 	
 	return true;

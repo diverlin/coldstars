@@ -17,23 +17,28 @@
 */
 
 #include "RocketBullet.hpp"
-#include "../common/common.hpp"
-#include "../common/constants.hpp"
-#include "../common/myStr.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/Logger.hpp"
-#include "../resources/TextureManager.hpp"
-#include "../world/starsystem.hpp"
-#include "../builder/spaceobjects/RocketBulletBuilder.hpp"
-#include "../resources/textureOb.hpp"
-#include "../effects/particlesystem/DriveEffect.hpp"
-#include "../render/Render.hpp"
-#include "../text/VerticalFlowText.hpp" 
-#include "../effects/particlesystem/ExplosionEffect.hpp"
+
+#include <common/common.hpp>
+#include <common/myStr.hpp>
+#include <common/Logger.hpp>
+
+#include <world/EntityManager.hpp>
+#include <world/starsystem.hpp>
+
+#include <effects/particlesystem/DriveEffect.hpp>
+#include <effects/particlesystem/ExplosionEffect.hpp>
+
+#include <render/Render.hpp>
+
+#include <text/VerticalFlowText.hpp> 
 
 RocketBullet::RocketBullet(int id)
 :
-target(nullptr)
+m_Target(nullptr),
+m_EffectDrive(nullptr),
+m_DamageRate(1.0),
+m_OwnerId(0),
+m_Speed(0)  
 {
 	SetId(id);
 	SetTypeId(ENTITY::TYPE::BULLET_ID);
@@ -47,7 +52,7 @@ RocketBullet::~RocketBullet()
 	Logger::Instance().Log("___::~RocketBullet("+int2str(GetId())+")");
 	#endif
 
-	delete drive_effect;
+	delete m_EffectDrive;
 }
 
 void RocketBullet::CreateDriveComplexTextureDependedStuff()
@@ -55,7 +60,7 @@ void RocketBullet::CreateDriveComplexTextureDependedStuff()
     GetPoints().addMidLeftPoint();
     GetPoints().addMidFarLeftPoint();
     	
-	drive_effect = GetNewDriveEffect(GetTextureOb()->size_id, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
+	m_EffectDrive = GetNewDriveEffect(GetTextureOb()->size_id/2, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
 }    
 
 void RocketBullet::UpdateInSpace(int time, bool show_effect)
@@ -66,34 +71,39 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
 	{
         UpdateOrientation();
             
-        if (speed < data_bullet.speed_max)
+        if (m_Speed < m_DataBullet.speed_max)
         {
-            speed += data_bullet.d_speed; 
+            m_Speed += m_DataBullet.d_speed; 
         } 
                 
-		if (target != nullptr)
+		if (m_Target != nullptr)
         { 
-            get_dPos_ToPoint(GetCenter(), target->GetCenter(), speed/100.0, GetAppliedForce(), angle_inD);
+            float angle; 
+            get_dPos_ToPoint(GetCenter(), m_Target->GetCenter(), m_Speed/100.0, GetAppliedForce(), angle);
         
-            if (CheckTarget() == false)
+            if (CheckTarget() == true)
             {
-                target = nullptr;
+                SetAngleZ(angle);
+            }
+            else
+            {
+                m_Target = nullptr;
             }
         }      
-        SetAngleZ(angle_inD);
-        SetCenter(GetCenter() +  GetAppliedForce());    
 
-        data_bullet.live_time -= 1;
+        SetCenter(GetCenter() + GetAppliedForce());    
+
+        m_DataBullet.live_time -= 1;
     }
 }
 
 bool RocketBullet::CheckTarget() const
 {
-    if (target->GetAlive() == true)
+    if (m_Target->GetAlive() == true)
     {
-        if (target->GetPlaceTypeId() == PLACE::TYPE::SPACE_ID)
+        if (m_Target->GetPlaceTypeId() == PLACE::TYPE::SPACE_ID)
         {
-            if (target->GetStarSystem()->GetId() == GetStarSystem()->GetId())
+            if (m_Target->GetStarSystem()->GetId() == GetStarSystem()->GetId())
             {
                 return true;
             }
@@ -109,6 +119,7 @@ void RocketBullet::CollisionEvent(bool show_effect)
 	GetDataLife().dying_time = -1;
 }
 
+/* virtual override final */
 void RocketBullet::UpdateInfo()
 {
 	GetInfo().clear();
@@ -116,13 +127,13 @@ void RocketBullet::UpdateInfo()
     GetInfo().addTitleStr("ROCKET");
     GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()) );
     GetInfo().addNameStr("armor:");     		GetInfo().addValueStr( int2str(GetDataLife().armor) );
-    if (target != nullptr) 
+    if (m_Target != nullptr) 
     { 
-    	GetInfo().addNameStr("target_id:");   	GetInfo().addValueStr(int2str(target->GetId())); 
+    	GetInfo().addNameStr("target_id:");   	GetInfo().addValueStr(int2str(m_Target->GetId())); 
 	}
 }
 
-/* virtual */
+/* virtual override final */
 void RocketBullet::Hit(int damage, bool show_effect)
 {
 	GetDataLife().armor -= damage;
@@ -140,7 +151,7 @@ void RocketBullet::Hit(int damage, bool show_effect)
     }
 }
 
-/* virtual */
+/* virtual override final */
 void RocketBullet::PostDeathUniqueEvent(bool show_effect)  
 {
 	if (show_effect == true)
@@ -157,45 +168,44 @@ void RocketBullet::RenderInSpace(float scale) const
 {
 	drawQuad(GetTextureOb(), GetCenter(), GetSize(), GetAngle().z);
 			  
-	drive_effect->Update();
-	drive_effect->Render(scale, 0.0f);
+	m_EffectDrive->Update();
+	m_EffectDrive->Render(scale, 0.0f);
 }
 
 
 void RocketBullet::SaveDataUniqueRocketBullet(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	save_ptree.put(root+"speed", speed);
-	save_ptree.put(root+"owner_id", owner_id);
-	if (target != nullptr) 	{ save_ptree.put(root+"target_id", target->GetId()); }
-	else                	{ save_ptree.put(root+"target_id", NONE_ID); }
+	save_ptree.put(root+"speed", m_Speed);
+	save_ptree.put(root+"owner_id", m_OwnerId);
+	if (m_Target != nullptr) 	{ save_ptree.put(root+"target_id", m_Target->GetId()); }
+	else                	    { save_ptree.put(root+"target_id", NONE_ID); }
 	
-	data_bullet.SaveData(save_ptree, root);
+	m_DataBullet.SaveData(save_ptree, root);
 }
 
 void RocketBullet::LoadDataUniqueRocketBullet(const boost::property_tree::ptree& load_ptree)
 {
-	speed = load_ptree.get<float>("speed");  
-	owner_id = load_ptree.get<int>("owner_id");  
+	m_Speed = load_ptree.get<float>("speed");  
+	m_OwnerId = load_ptree.get<int>("owner_id");  
 	unresolved_RocketBullet_target_id = load_ptree.get<int>("target_id");  
 	
-	data_bullet.LoadData(load_ptree.get_child("data_bullet"));
+	m_DataBullet.LoadData(load_ptree.get_child("data_bullet"));
 }
 
 void RocketBullet::ResolveDataUniqueRocketBullet()
 {           
-	RocketBulletBuilder::Instance().CreateKorpusGeometry(this);
 	CreateDriveComplexTextureDependedStuff();
 				
 	if (unresolved_RocketBullet_target_id != NONE_ID)
 	{
-		target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_RocketBullet_target_id);
+		m_Target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_RocketBullet_target_id);
 	}
 	
 	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddBullet(this, data_unresolved_Orientation.center, data_unresolved_Orientation.angle); 
 }
-
-
-/*virtual*/
+   
+   
+/* virtual override final */
 void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
 {
 	const std::string root = "rocketbullet."+int2str(GetId())+".";
@@ -206,7 +216,7 @@ void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
 	SaveDataUniqueRocketBullet(save_ptree, root);
 }
 
-/*virtual*/
+/* virtual override final */
 void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 	LoadDataUniqueBase(load_ptree);
@@ -216,7 +226,7 @@ void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
 	LoadDataUniqueRocketBullet(load_ptree);
 }
 
-/*virtual*/
+/* virtual override final */
 void RocketBullet::ResolveData()
 {
 	ResolveDataUniqueBase();

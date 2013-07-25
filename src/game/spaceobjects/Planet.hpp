@@ -17,8 +17,8 @@
 */
 
 
-#ifndef PLANET_H
-#define PLANET_H
+#ifndef PLANET_HPP
+#define PLANET_HPP
 
 #include "BasePlanet.hpp"
 class BaseLand;
@@ -30,15 +30,13 @@ class Planet : public BasePlanet
 	public:
 		Planet(int);
 		virtual ~Planet();
-		
-		virtual void PutChildsToGarbage() const;
 
 		void BindAtmosphere(Atmosphere*);
 		void BindLand(BaseLand*);
-		void SetPopulation(unsigned long int population)  { this->population = population; }
+		void SetPopulation(unsigned long int population)  { m_Population = population; }
 		
-		unsigned long int GetPopulation() const { return population; }
-		BaseLand* GetLand() const { return land; }
+		unsigned long int GetPopulation() const { return m_Population; }
+		BaseLand* const GetLand() const { return m_Land; }
 
 		void AddVehicle(Vehicle*) const;
 		
@@ -48,17 +46,19 @@ class Planet : public BasePlanet
 		void Render_NEW(const Vec2<float>&);
 		void Render_OLD() const;
 
-		void SaveData(boost::property_tree::ptree&) const;		
-		void LoadData(const boost::property_tree::ptree&);
-		void ResolveData();
+		virtual void SaveData(boost::property_tree::ptree&) const override final;		
+		virtual void LoadData(const boost::property_tree::ptree&) override final;
+		virtual void ResolveData() override final;
 		
 	private:
-		BaseLand* land;
+		BaseLand* m_Land; 		
+		Atmosphere* m_Atmosphere;
 		
-		Atmosphere* atmosphere;
-		
-		unsigned long int population;
-		void UpdateInfo();
+		unsigned long int m_Population;
+        
+        virtual void PutChildsToGarbage() const override final;
+                
+		virtual void UpdateInfo() override final;
 
 		void PostDeathUniqueEvent(bool);
 		
@@ -66,8 +66,7 @@ class Planet : public BasePlanet
 		void LoadDataUniquePlanet(const boost::property_tree::ptree&);
 		void ResolveDataUniquePlanet();
 }; 
-
-
+ 
 #endif 
 
 

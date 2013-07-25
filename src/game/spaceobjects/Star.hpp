@@ -17,26 +17,20 @@
 */
 
 
-#ifndef STAR_H
-#define STAR_H
+#ifndef STAR_HPP
+#define STAR_HPP
 
-#include <boost/property_tree/ptree.hpp>
-
-#include "../spaceobjects/BasePlanet.hpp"
-#include "../resources/textureOb.hpp"
+#include <spaceobjects/BasePlanet.hpp>
 
 class Star : public BasePlanet
 {
 	public:
-        float texture_offset1, texture_offset2;    
-        
         Star(int);
         virtual ~Star();
         
-        const Color4<float>& GetColor() const { return color; }
-        int GetColorId() const { return GetTextureOb()->color_id; }
-        float GetBrightThreshold() const { return GetTextureOb()->brightThreshold; }
-        float GetDColor() const { return d_color; }
+        int GetColorId() const;
+        float GetBrightThreshold() const;
+        float GetDeltaColor() const { return m_DeltaColor; }
         
         void Hit(int, bool) {};
         void InitiateSpark();
@@ -48,22 +42,24 @@ class Star : public BasePlanet
         void Render_NEW() const;
         void Render_OLD() const;
         
-        void SaveData(boost::property_tree::ptree&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+        virtual void SaveData(boost::property_tree::ptree&) const override final;
+        virtual void LoadData(const boost::property_tree::ptree&) override final;
+        virtual void ResolveData() override final;
                 
     private:
-        Color4<float> color;
-        float d_color;
+        float m_TextureOffset1;
+        float m_TextureOffset2;
+         
+        float m_DeltaColor;
         
-        bool spark_active;
-        bool spark_grows;
+        bool m_SparkActive;
+        bool m_SparkGrows;
         
-        int turn_since_last_spark_counter;
-        int turn_spark_threshold;
+        int m_TurnSinceLastSparkCounter;
+        int m_TurnSparkThreshold;
         
-        void UpdateInfo();
-        void PostDeathUniqueEvent(bool);
+        virtual void UpdateInfo() override final;
+        virtual void PostDeathUniqueEvent(bool) override final;
         
         void SaveDataUniqueStar(boost::property_tree::ptree&, const std::string&) const;		
         void LoadDataUniqueStar(const boost::property_tree::ptree&);

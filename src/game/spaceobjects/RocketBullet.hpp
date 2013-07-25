@@ -20,8 +20,9 @@
 #ifndef ROCKETBULLET_HPP
 #define ROCKETBULLET_HPP
 
-#include "../spaceobjects/BaseSpaceEntity.hpp"
-#include "../common/BulletData.hpp"
+#include <spaceobjects/BaseSpaceEntity.hpp>
+#include <common/BulletData.hpp>
+
 class DriveEffect;
 
 class RocketBullet : public BaseSpaceEntity
@@ -30,48 +31,48 @@ class RocketBullet : public BaseSpaceEntity
         RocketBullet(int);
         
         virtual ~RocketBullet();
+      
+        void SetBulletData(BulletData data_bullet) { m_DataBullet = data_bullet; m_Speed = data_bullet.speed_init; };
+        void SetOwnerId(int owner_id) { m_OwnerId = owner_id; };
+        void SetTarget(BaseSpaceEntity* target) { m_Target = target; };
+        void SetDamageRate(float damage_rate) { m_DamageRate = damage_rate; };
         
-        virtual void PutChildsToGarbage() const {};
-        
-        void SetBulletData(BulletData data_bullet) { this->data_bullet = data_bullet; speed = data_bullet.speed_init; };
-        void SetOwnerId(int owner_id) { this->owner_id = owner_id; };
-        void SetTarget(BaseSpaceEntity* target) { this->target = target; };
-        void SetDamage(int damage) { data_bullet.damage = damage; };
-        
-        int GetDamage() const { return data_bullet.damage; };
-        unsigned int GetOwnerId() const { return owner_id; };
+        int GetDamage() const { return m_DataBullet.damage; };
+        int GetOwnerId() const { return m_OwnerId; };
         
         void CreateDriveComplexTextureDependedStuff();
         void UpdateInSpace(int, bool);
         
         void CollisionEvent(bool);
         
-        virtual void Hit(int, bool);
-        virtual void PostDeathUniqueEvent(bool);  
+        virtual void Hit(int, bool) override final;
+        virtual void PostDeathUniqueEvent(bool) override final;  
         
         void UpdateRenderStuff();
         void RenderInSpace(float) const;
         
-        void SaveData(boost::property_tree::ptree&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+        virtual void SaveData(boost::property_tree::ptree&) const override final;
+        virtual void LoadData(const boost::property_tree::ptree&) override final;
+        virtual void ResolveData() override final;
     		
     private:
-        float speed;
+        float m_Speed;        
+        float m_DamageRate;
         
-        float angle_inD;                
+        int m_OwnerId;
+        BaseSpaceEntity* m_Target;
         
-        int owner_id;
-        BaseSpaceEntity* target;
+        BulletData m_DataBullet;
+        DriveEffect* m_EffectDrive;
         
-        BulletData data_bullet;
-        DriveEffect* drive_effect;
+        virtual void UpdateInfo() override final; 
         
-        virtual void UpdateInfo(); 
-        
+        virtual void PutChildsToGarbage() const override final {}
+                
         bool CheckTarget() const;
         
-        int unresolved_RocketBullet_target_id;              
+        int unresolved_RocketBullet_target_id; 
+                     
         void SaveDataUniqueRocketBullet(boost::property_tree::ptree&, const std::string&) const;		
         void LoadDataUniqueRocketBullet(const boost::property_tree::ptree&);
         void ResolveDataUniqueRocketBullet();
