@@ -22,12 +22,10 @@
 #include <string>
 #include <math/myVector.hpp>
 #include <common/constants.hpp>
+#include <common/EntityTypes.hpp>
 
-namespace GUI
-{
-    GUI::TYPE getGuiItemSlotType(ENTITY::TYPE);
-    GUI::TYPE getGuiItemSlotSelectorType(ENTITY::TYPE);
-}
+GUI::TYPE getGuiItemSlotType(TYPE::ENTITY);
+GUI::TYPE getGuiItemSlotSelectorType(TYPE::ENTITY);
        
 int getObjectSize(int w, int h); 
 
@@ -38,7 +36,7 @@ template <typename T>
 inline T getMin(T val1, T val2)
 {
 	if (val1<val2) 	return val1;
-	else		return val2;
+	else		    return val2;
 }
 
 template <typename T>

@@ -25,10 +25,10 @@
 #include "../../world/EntityManager.hpp"
 #include "../../resources/TextureManager.hpp"
 
-GoodsPack::GoodsPack(int id, ENTITY::TYPE subtype_id)
+GoodsPack::GoodsPack(int id, TYPE::ENTITY subtype_id)
 {
     SetId(id); 
-    SetTypeId(ENTITY::TYPE::GOODS_ID);
+    SetTypeId(TYPE::ENTITY::GOODS_ID);
     SetSubTypeId(subtype_id);
 }
 
@@ -47,12 +47,12 @@ void GoodsPack::AddUniqueInfo()
     	info.addTitleStr("GOODS");
     	switch(GetSubTypeId())
     	{
-    		case ENTITY::TYPE::MINERALS_ID: 	{ info.addNameStr("mineral:"); info.addValueStr(int2str(data_item.mass)); break; }
-    		case ENTITY::TYPE::FOOD_ID: 		{ info.addNameStr("food:"); info.addValueStr(int2str(data_item.mass)); break; }
-    		case ENTITY::TYPE::MEDICINE_ID: 	{ info.addNameStr("medicine:"); info.addValueStr(int2str(data_item.mass)); break; }
-    		case ENTITY::TYPE::MILITARY_ID: 	{ info.addNameStr("military:"); info.addValueStr(int2str(data_item.mass)); break; }
-    		case ENTITY::TYPE::DRUG_ID: 		{ info.addNameStr("drug:"); info.addValueStr(int2str(data_item.mass)); break; }
-    		case ENTITY::TYPE::EXCLUSIVE_ID: 	{ info.addNameStr("exclusive:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case TYPE::ENTITY::MINERALS_ID: 	{ info.addNameStr("mineral:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case TYPE::ENTITY::FOOD_ID: 		{ info.addNameStr("food:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case TYPE::ENTITY::MEDICINE_ID: 	{ info.addNameStr("medicine:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case TYPE::ENTITY::MILITARY_ID: 	{ info.addNameStr("military:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case TYPE::ENTITY::DRUG_ID: 		{ info.addNameStr("drug:"); info.addValueStr(int2str(data_item.mass)); break; }
+    		case TYPE::ENTITY::EXCLUSIVE_ID: 	{ info.addNameStr("exclusive:"); info.addValueStr(int2str(data_item.mass)); break; }
     		
     		default: { info.addNameStr("UNKNOWN:"); info.addValueStr("fix the bug"); break; }
     	}
@@ -112,7 +112,7 @@ void GoodsPack::ResolveDataUniqueGoodsPack()
 }
 
 
-GoodsPack* GetNewGoodsPack(ENTITY::TYPE subtype_id, unsigned long int id)
+GoodsPack* GetNewGoodsPack(TYPE::ENTITY subtype_id, unsigned long int id)
 {
     if (id == NONE_ID)
 	{

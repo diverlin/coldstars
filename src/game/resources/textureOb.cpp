@@ -241,7 +241,7 @@ void TextureOb::satelliteArgManager(std::vector<int>* arg)
 void TextureOb::shipArgManager(std::vector<int>* arg)
 {
     race_id    = (TYPE::RACE)(*arg)[0];
-    subtype_id = (ENTITY::TYPE)(*arg)[1];   // warrior/trader and so on
+    subtype_id = (TYPE::ENTITY)(*arg)[1];   // warrior/trader and so on
     mod_id     = 0;
 }
 
@@ -298,7 +298,7 @@ void TextureOb::govermentBgArgManager(std::vector<int>* arg)
 void TextureOb::faceArgManager(std::vector<int>* arg)
 {
    	race_id       = (TYPE::RACE)(*arg)[0];
-   	subtype_id    = (ENTITY::TYPE)(*arg)[1];   // warrior/trader and so on
+   	subtype_id    = (TYPE::ENTITY)(*arg)[1];   // warrior/trader and so on
 }
 
 

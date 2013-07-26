@@ -72,8 +72,8 @@ GuiAngar::GuiAngar():angar(nullptr)
 		//button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH_ID, launch_button));
 	}
 	
-	repair_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::TYPE::REPAIR_SLOT_ID);
-	charge_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::TYPE::CHARGE_SLOT_ID);
+	repair_slot = GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY::REPAIR_SLOT_ID);
+	charge_slot = GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY::CHARGE_SLOT_ID);
 }
 
 
@@ -230,7 +230,7 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                         {
                 		switch (rect_itemslot_vec[i].second->GetSubTypeId())
                                 {
-                                        case ENTITY::TYPE::REPAIR_SLOT_ID:
+                                        case TYPE::ENTITY::REPAIR_SLOT_ID:
                                         {        
                                                 if (m_Player->GetCursor().GetItemSlot()->GetItem() != nullptr)
                                                 {                                        
@@ -240,13 +240,13 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                                                 break;
                                         }
                                         
-                                        case ENTITY::TYPE::CHARGE_SLOT_ID:
+                                        case TYPE::ENTITY::CHARGE_SLOT_ID:
                                         {
                                                 if (m_Player->GetCursor().GetItemSlot()->GetItem() != nullptr)
                                                 {
                                                         switch (m_Player->GetCursor().GetItemSlot()->GetItem()->GetSubTypeId())
                                                         {
-                                                                case ENTITY::TYPE::ROCKET_EQUIPMENT_ID:
+                                                                case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:
                                                                 {
                                                                         angar->ChargeRocketEquipment(m_Player->GetNpc(), (RocketEquipment*)m_Player->GetCursor().GetItemSlot()->GetItem());
                                                                         

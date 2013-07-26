@@ -84,7 +84,7 @@ class Vehicle : public BaseSpaceEntity
         const VehicleKorpusData& GetDataKorpus() const { return m_DataKorpus; }
         
         virtual int GetGivenExpirience() const;
-        bool CheckItemSlotPresenceBySubTypeId(ENTITY::TYPE) const;
+        bool CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY) const;
         
         void AddItemSlot(ItemSlot*); 
         
@@ -184,9 +184,9 @@ class Vehicle : public BaseSpaceEntity
 	protected:
         std::vector<ItemSlot*> m_SlotTotal_vec;
             
-        ItemSlot* const GetFuctionalSlot(ENTITY::TYPE) const;
+        ItemSlot* const GetFuctionalSlot(TYPE::ENTITY) const;
         ItemSlot* const GetEmptyArtefactSlot() const;
-        ItemSlot* const GetCargoSlotWithGoods(ENTITY::TYPE);
+        ItemSlot* const GetCargoSlotWithGoods(TYPE::ENTITY);
         
         bool ManageItem(BaseItem*);
         bool ManageFunctionEquipment(BaseItem*);

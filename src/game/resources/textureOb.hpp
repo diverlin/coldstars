@@ -34,7 +34,7 @@ class TextureOb
     	public:
         	// textureOb attributes
         	int type_id;
-        	ENTITY::TYPE subtype_id;   //# warrior/trader and so on
+        	TYPE::ENTITY subtype_id;   //# warrior/trader and so on
         	int mod_id;       // is not used for now
         	TYPE::RACE race_id;
         	int tech_level_id;

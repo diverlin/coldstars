@@ -41,8 +41,8 @@ m_OwnerId(0),
 m_Speed(0)  
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::BULLET_ID);
-	SetSubTypeId(ENTITY::TYPE::ROCKETBULLET_ID);
+	SetTypeId(TYPE::ENTITY::BULLET_ID);
+	SetSubTypeId(TYPE::ENTITY::ROCKETBULLET_ID);
 }
 
 /* virtual */

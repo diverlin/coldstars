@@ -26,8 +26,8 @@ DroidModule::DroidModule(int id)
 repair_add(0)        
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::MODULE_ID);
-	SetSubTypeId(ENTITY::TYPE::DROID_MODULE_ID);
+	SetTypeId(TYPE::ENTITY::MODULE_ID);
+	SetSubTypeId(TYPE::ENTITY::DROID_MODULE_ID);
 }
 
 /* virtual */

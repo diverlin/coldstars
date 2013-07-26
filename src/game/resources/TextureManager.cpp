@@ -59,11 +59,11 @@ void TextureManager::Add(TextureOb* texOb)
         			{
         				switch(texOb->subtype_id)
         				{
-        					case ENTITY::TYPE::RANGER_ID:   { ship_race0_ranger_texOb_vec.push_back(texOb);   break; }
-        					case ENTITY::TYPE::WARRIOR_ID:  { ship_race0_warrior_texOb_vec.push_back(texOb);  break; }
-           					case ENTITY::TYPE::TRADER_ID:   { ship_race0_trader_texOb_vec.push_back(texOb);   break; }
-           					case ENTITY::TYPE::PIRAT_ID:    { ship_race0_pirat_texOb_vec.push_back(texOb);    break; }
-           					case ENTITY::TYPE::DIPLOMAT_ID: { ship_race0_diplomat_texOb_vec.push_back(texOb); break; }
+        					case TYPE::ENTITY::RANGER_ID:   { ship_race0_ranger_texOb_vec.push_back(texOb);   break; }
+        					case TYPE::ENTITY::WARRIOR_ID:  { ship_race0_warrior_texOb_vec.push_back(texOb);  break; }
+           					case TYPE::ENTITY::TRADER_ID:   { ship_race0_trader_texOb_vec.push_back(texOb);   break; }
+           					case TYPE::ENTITY::PIRAT_ID:    { ship_race0_pirat_texOb_vec.push_back(texOb);    break; }
+           					case TYPE::ENTITY::DIPLOMAT_ID: { ship_race0_diplomat_texOb_vec.push_back(texOb); break; }
         				}
         				
         				break;
@@ -74,11 +74,11 @@ void TextureManager::Add(TextureOb* texOb)
         			{
         			         switch(texOb->subtype_id)
         			         {
-        			         	case ENTITY::TYPE::RANGER_ID:   { ship_race1_ranger_texOb_vec.push_back(texOb);   break; }
-           					case ENTITY::TYPE::WARRIOR_ID:  { ship_race1_warrior_texOb_vec.push_back(texOb);  break; }
-           					case ENTITY::TYPE::TRADER_ID:   { ship_race1_trader_texOb_vec.push_back(texOb);   break; }
-           					case ENTITY::TYPE::PIRAT_ID:    { ship_race1_pirat_texOb_vec.push_back(texOb);    break; }
-           					case ENTITY::TYPE::DIPLOMAT_ID: { ship_race1_diplomat_texOb_vec.push_back(texOb); break; }
+        			         	case TYPE::ENTITY::RANGER_ID:   { ship_race1_ranger_texOb_vec.push_back(texOb);   break; }
+           					case TYPE::ENTITY::WARRIOR_ID:  { ship_race1_warrior_texOb_vec.push_back(texOb);  break; }
+           					case TYPE::ENTITY::TRADER_ID:   { ship_race1_trader_texOb_vec.push_back(texOb);   break; }
+           					case TYPE::ENTITY::PIRAT_ID:    { ship_race1_pirat_texOb_vec.push_back(texOb);    break; }
+           					case TYPE::ENTITY::DIPLOMAT_ID: { ship_race1_diplomat_texOb_vec.push_back(texOb); break; }
         				 }
         				 
         				 break;
@@ -88,11 +88,11 @@ void TextureManager::Add(TextureOb* texOb)
         			{
         			         switch(texOb->subtype_id)
         			         {
-        			         	case ENTITY::TYPE::RANGER_ID: { ship_race2_ranger_texOb_vec.push_back(texOb); break; }
-           					case ENTITY::TYPE::WARRIOR_ID: { ship_race2_warrior_texOb_vec.push_back(texOb); break; }
-           					case ENTITY::TYPE::TRADER_ID: { ship_race2_trader_texOb_vec.push_back(texOb); break; }
-           					case ENTITY::TYPE::PIRAT_ID:  { ship_race2_pirat_texOb_vec.push_back(texOb);  break; }
-           					case ENTITY::TYPE::DIPLOMAT_ID: { ship_race2_diplomat_texOb_vec.push_back(texOb); break; }
+        			         	case TYPE::ENTITY::RANGER_ID: { ship_race2_ranger_texOb_vec.push_back(texOb); break; }
+           					case TYPE::ENTITY::WARRIOR_ID: { ship_race2_warrior_texOb_vec.push_back(texOb); break; }
+           					case TYPE::ENTITY::TRADER_ID: { ship_race2_trader_texOb_vec.push_back(texOb); break; }
+           					case TYPE::ENTITY::PIRAT_ID:  { ship_race2_pirat_texOb_vec.push_back(texOb);  break; }
+           					case TYPE::ENTITY::DIPLOMAT_ID: { ship_race2_diplomat_texOb_vec.push_back(texOb); break; }
         				 }
         				 
         				 break;
@@ -103,11 +103,11 @@ void TextureManager::Add(TextureOb* texOb)
 				{
 					switch(texOb->subtype_id)
 					{
-						case ENTITY::TYPE::RANGER_ID:  { ship_race3_ranger_texOb_vec.push_back(texOb);    break; }
-           					case ENTITY::TYPE::WARRIOR_ID: { ship_race3_warrior_texOb_vec.push_back(texOb);   break; }
-           					case ENTITY::TYPE::TRADER_ID:  { ship_race3_trader_texOb_vec.push_back(texOb);    break; }
-           					case ENTITY::TYPE::PIRAT_ID:   { ship_race3_pirat_texOb_vec.push_back(texOb);     break; }
-           					case ENTITY::TYPE::DIPLOMAT_ID: { ship_race3_diplomat_texOb_vec.push_back(texOb); break; }
+						case TYPE::ENTITY::RANGER_ID:  { ship_race3_ranger_texOb_vec.push_back(texOb);    break; }
+           					case TYPE::ENTITY::WARRIOR_ID: { ship_race3_warrior_texOb_vec.push_back(texOb);   break; }
+           					case TYPE::ENTITY::TRADER_ID:  { ship_race3_trader_texOb_vec.push_back(texOb);    break; }
+           					case TYPE::ENTITY::PIRAT_ID:   { ship_race3_pirat_texOb_vec.push_back(texOb);     break; }
+           					case TYPE::ENTITY::DIPLOMAT_ID: { ship_race3_diplomat_texOb_vec.push_back(texOb); break; }
         				}
         				
         				break;
@@ -117,11 +117,11 @@ void TextureManager::Add(TextureOb* texOb)
         			{
         				switch(texOb->subtype_id)
         				{	
-        					case ENTITY::TYPE::RANGER_ID:   { ship_race4_ranger_texOb_vec.push_back(texOb);   break; }
-           					case ENTITY::TYPE::WARRIOR_ID:  { ship_race4_warrior_texOb_vec.push_back(texOb);  break; }
-           					case ENTITY::TYPE::TRADER_ID:   { ship_race4_trader_texOb_vec.push_back(texOb);   break; }
-           					case ENTITY::TYPE::PIRAT_ID:    { ship_race4_pirat_texOb_vec.push_back(texOb);    break; } 
-           					case ENTITY::TYPE::DIPLOMAT_ID: { ship_race4_diplomat_texOb_vec.push_back(texOb); break; }
+        					case TYPE::ENTITY::RANGER_ID:   { ship_race4_ranger_texOb_vec.push_back(texOb);   break; }
+           					case TYPE::ENTITY::WARRIOR_ID:  { ship_race4_warrior_texOb_vec.push_back(texOb);  break; }
+           					case TYPE::ENTITY::TRADER_ID:   { ship_race4_trader_texOb_vec.push_back(texOb);   break; }
+           					case TYPE::ENTITY::PIRAT_ID:    { ship_race4_pirat_texOb_vec.push_back(texOb);    break; } 
+           					case TYPE::ENTITY::DIPLOMAT_ID: { ship_race4_diplomat_texOb_vec.push_back(texOb); break; }
            				}
            				
            				break;
@@ -131,11 +131,11 @@ void TextureManager::Add(TextureOb* texOb)
 				{	
 					switch(texOb->subtype_id)
 					{
-						case ENTITY::TYPE::RANGER_ID:   { ship_race6_ranger_texOb_vec.push_back(texOb);   break; }
-           					case ENTITY::TYPE::WARRIOR_ID:  { ship_race6_warrior_texOb_vec.push_back(texOb);  break; }
-           					case ENTITY::TYPE::TRADER_ID:   { ship_race6_trader_texOb_vec.push_back(texOb);   break; }
-           					case ENTITY::TYPE::PIRAT_ID:    { ship_race6_pirat_texOb_vec.push_back(texOb);    break; }
-           					case ENTITY::TYPE::DIPLOMAT_ID: { ship_race6_diplomat_texOb_vec.push_back(texOb); break; }
+						case TYPE::ENTITY::RANGER_ID:   { ship_race6_ranger_texOb_vec.push_back(texOb);   break; }
+           					case TYPE::ENTITY::WARRIOR_ID:  { ship_race6_warrior_texOb_vec.push_back(texOb);  break; }
+           					case TYPE::ENTITY::TRADER_ID:   { ship_race6_trader_texOb_vec.push_back(texOb);   break; }
+           					case TYPE::ENTITY::PIRAT_ID:    { ship_race6_pirat_texOb_vec.push_back(texOb);    break; }
+           					case TYPE::ENTITY::DIPLOMAT_ID: { ship_race6_diplomat_texOb_vec.push_back(texOb); break; }
         				}
         				
         				break;
@@ -145,11 +145,11 @@ void TextureManager::Add(TextureOb* texOb)
 				{	
 					switch(texOb->subtype_id)
 					{
-						case ENTITY::TYPE::RANGER_ID:   { ship_race7_ranger_texOb_vec.push_back(texOb);   break; }
-           					case ENTITY::TYPE::WARRIOR_ID:  { ship_race7_warrior_texOb_vec.push_back(texOb);  break; }
-           					case ENTITY::TYPE::TRADER_ID:   { ship_race7_trader_texOb_vec.push_back(texOb);   break; }
-           					case ENTITY::TYPE::PIRAT_ID:    { ship_race7_pirat_texOb_vec.push_back(texOb);    break; }
-           					case ENTITY::TYPE::DIPLOMAT_ID: { ship_race7_diplomat_texOb_vec.push_back(texOb); break; }
+						case TYPE::ENTITY::RANGER_ID:   { ship_race7_ranger_texOb_vec.push_back(texOb);   break; }
+           					case TYPE::ENTITY::WARRIOR_ID:  { ship_race7_warrior_texOb_vec.push_back(texOb);  break; }
+           					case TYPE::ENTITY::TRADER_ID:   { ship_race7_trader_texOb_vec.push_back(texOb);   break; }
+           					case TYPE::ENTITY::PIRAT_ID:    { ship_race7_pirat_texOb_vec.push_back(texOb);    break; }
+           					case TYPE::ENTITY::DIPLOMAT_ID: { ship_race7_diplomat_texOb_vec.push_back(texOb); break; }
         				}
         				
         				break;
@@ -302,7 +302,7 @@ TextureOb* TextureManager::GetRandomFaceTexObWithFolloingAttributes(TYPE::RACE r
 	return requested_texOb;
 }
 
-TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE race_id, ENTITY::TYPE subtype_id, int size_id)
+TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE race_id, TYPE::ENTITY subtype_id, int size_id)
 {
 	TextureOb* requested_texOb = nullptr;
 
@@ -312,11 +312,11 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE 
         	{
                 	switch(subtype_id)
                 	{
-                		case ENTITY::TYPE::RANGER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race0_ranger_texOb_vec, size_id);   break; }
-				case ENTITY::TYPE::WARRIOR_ID:  { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race0_warrior_texOb_vec, size_id);  break; }
- 				case ENTITY::TYPE::TRADER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race0_trader_texOb_vec, size_id);   break; }
-				case ENTITY::TYPE::PIRAT_ID:    { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race0_pirat_texOb_vec, size_id);    break; }
-				case ENTITY::TYPE::DIPLOMAT_ID: { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race0_diplomat_texOb_vec, size_id); break; }
+                		case TYPE::ENTITY::RANGER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race0_ranger_texOb_vec, size_id);   break; }
+				case TYPE::ENTITY::WARRIOR_ID:  { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race0_warrior_texOb_vec, size_id);  break; }
+ 				case TYPE::ENTITY::TRADER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race0_trader_texOb_vec, size_id);   break; }
+				case TYPE::ENTITY::PIRAT_ID:    { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race0_pirat_texOb_vec, size_id);    break; }
+				case TYPE::ENTITY::DIPLOMAT_ID: { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race0_diplomat_texOb_vec, size_id); break; }
 		       }
 		       
 		       break;
@@ -326,11 +326,11 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE 
         	{
                 	switch(subtype_id)
                 	{	
-                		case ENTITY::TYPE::RANGER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race1_ranger_texOb_vec, size_id);   break; }
-				case ENTITY::TYPE::WARRIOR_ID:  { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race1_warrior_texOb_vec, size_id);  break; } 
-				case ENTITY::TYPE::TRADER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race1_trader_texOb_vec, size_id);   break; }
-				case ENTITY::TYPE::PIRAT_ID:    { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race1_pirat_texOb_vec, size_id);    break; }
-				case ENTITY::TYPE::DIPLOMAT_ID: { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race1_diplomat_texOb_vec, size_id); break; }
+                		case TYPE::ENTITY::RANGER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race1_ranger_texOb_vec, size_id);   break; }
+				case TYPE::ENTITY::WARRIOR_ID:  { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race1_warrior_texOb_vec, size_id);  break; } 
+				case TYPE::ENTITY::TRADER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race1_trader_texOb_vec, size_id);   break; }
+				case TYPE::ENTITY::PIRAT_ID:    { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race1_pirat_texOb_vec, size_id);    break; }
+				case TYPE::ENTITY::DIPLOMAT_ID: { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race1_diplomat_texOb_vec, size_id); break; }
 			}
 			
 			break;
@@ -340,11 +340,11 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE 
         	{
                 	switch(subtype_id)
                 	{	
-                		case ENTITY::TYPE::RANGER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race2_ranger_texOb_vec, size_id);   break; }
-				case ENTITY::TYPE::WARRIOR_ID:  { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race2_warrior_texOb_vec, size_id);  break; } 
-				case ENTITY::TYPE::TRADER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race2_trader_texOb_vec, size_id);   break; }
-				case ENTITY::TYPE::PIRAT_ID:    { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race2_pirat_texOb_vec, size_id);    break; }
-				case ENTITY::TYPE::DIPLOMAT_ID: { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race2_diplomat_texOb_vec, size_id); break; }
+                		case TYPE::ENTITY::RANGER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race2_ranger_texOb_vec, size_id);   break; }
+				case TYPE::ENTITY::WARRIOR_ID:  { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race2_warrior_texOb_vec, size_id);  break; } 
+				case TYPE::ENTITY::TRADER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race2_trader_texOb_vec, size_id);   break; }
+				case TYPE::ENTITY::PIRAT_ID:    { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race2_pirat_texOb_vec, size_id);    break; }
+				case TYPE::ENTITY::DIPLOMAT_ID: { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race2_diplomat_texOb_vec, size_id); break; }
 			}
 			
 			break;
@@ -355,11 +355,11 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE 
         	{
                 	switch(subtype_id)
                 	{	
-                		case ENTITY::TYPE::RANGER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race3_ranger_texOb_vec, size_id);   break; }
-				case ENTITY::TYPE::WARRIOR_ID:  { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race3_warrior_texOb_vec, size_id);  break; } 
-				case ENTITY::TYPE::TRADER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race3_trader_texOb_vec, size_id);   break; }
-				case ENTITY::TYPE::PIRAT_ID:    { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race3_pirat_texOb_vec, size_id);    break; }
-				case ENTITY::TYPE::DIPLOMAT_ID: { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race3_diplomat_texOb_vec, size_id); break; }
+                		case TYPE::ENTITY::RANGER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race3_ranger_texOb_vec, size_id);   break; }
+				case TYPE::ENTITY::WARRIOR_ID:  { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race3_warrior_texOb_vec, size_id);  break; } 
+				case TYPE::ENTITY::TRADER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race3_trader_texOb_vec, size_id);   break; }
+				case TYPE::ENTITY::PIRAT_ID:    { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race3_pirat_texOb_vec, size_id);    break; }
+				case TYPE::ENTITY::DIPLOMAT_ID: { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race3_diplomat_texOb_vec, size_id); break; }
 			}
 			
 			break;
@@ -370,11 +370,11 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE 
         	{
                 	switch(subtype_id)
                 	{	
-                		case ENTITY::TYPE::RANGER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race4_ranger_texOb_vec, size_id);   break; }
-				case ENTITY::TYPE::WARRIOR_ID:  { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race4_warrior_texOb_vec, size_id);  break; } 
-				case ENTITY::TYPE::TRADER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race4_trader_texOb_vec, size_id);   break; }
-				case ENTITY::TYPE::PIRAT_ID:    { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race4_pirat_texOb_vec, size_id);    break; }
-				case ENTITY::TYPE::DIPLOMAT_ID: { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race4_diplomat_texOb_vec, size_id); break; }
+                		case TYPE::ENTITY::RANGER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race4_ranger_texOb_vec, size_id);   break; }
+				case TYPE::ENTITY::WARRIOR_ID:  { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race4_warrior_texOb_vec, size_id);  break; } 
+				case TYPE::ENTITY::TRADER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race4_trader_texOb_vec, size_id);   break; }
+				case TYPE::ENTITY::PIRAT_ID:    { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race4_pirat_texOb_vec, size_id);    break; }
+				case TYPE::ENTITY::DIPLOMAT_ID: { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race4_diplomat_texOb_vec, size_id); break; }
 			}
 			
 			break;
@@ -385,11 +385,11 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE 
         	{
                 	switch(subtype_id)
                 	{	
-                		case ENTITY::TYPE::RANGER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race6_ranger_texOb_vec, size_id);   break; }
-				case ENTITY::TYPE::WARRIOR_ID:  { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race6_warrior_texOb_vec, size_id);  break; } 
-				case ENTITY::TYPE::TRADER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race6_trader_texOb_vec, size_id);   break; }
-				case ENTITY::TYPE::PIRAT_ID:    { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race6_pirat_texOb_vec, size_id);    break; }
-				case ENTITY::TYPE::DIPLOMAT_ID: { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race6_diplomat_texOb_vec, size_id); break; }
+                		case TYPE::ENTITY::RANGER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race6_ranger_texOb_vec, size_id);   break; }
+				case TYPE::ENTITY::WARRIOR_ID:  { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race6_warrior_texOb_vec, size_id);  break; } 
+				case TYPE::ENTITY::TRADER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race6_trader_texOb_vec, size_id);   break; }
+				case TYPE::ENTITY::PIRAT_ID:    { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race6_pirat_texOb_vec, size_id);    break; }
+				case TYPE::ENTITY::DIPLOMAT_ID: { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race6_diplomat_texOb_vec, size_id); break; }
 			}
 			
 			break;
@@ -399,11 +399,11 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE 
         	{
                 	switch(subtype_id)
                 	{	
-                		case ENTITY::TYPE::RANGER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race7_ranger_texOb_vec, size_id);   break; }
-				case ENTITY::TYPE::WARRIOR_ID:  { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race7_warrior_texOb_vec, size_id);  break; } 
-				case ENTITY::TYPE::TRADER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race7_trader_texOb_vec, size_id);   break; }
-				case ENTITY::TYPE::PIRAT_ID:    { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race7_pirat_texOb_vec, size_id);    break; }
-				case ENTITY::TYPE::DIPLOMAT_ID: { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race7_diplomat_texOb_vec, size_id); break; }
+                		case TYPE::ENTITY::RANGER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race7_ranger_texOb_vec, size_id);   break; }
+				case TYPE::ENTITY::WARRIOR_ID:  { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race7_warrior_texOb_vec, size_id);  break; } 
+				case TYPE::ENTITY::TRADER_ID:   { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race7_trader_texOb_vec, size_id);   break; }
+				case TYPE::ENTITY::PIRAT_ID:    { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race7_pirat_texOb_vec, size_id);    break; }
+				case TYPE::ENTITY::DIPLOMAT_ID: { requested_texOb = GetShipTexObByClosestSizeFromVec(ship_race7_diplomat_texOb_vec, size_id); break; }
 			}
 			
 			break;
@@ -506,47 +506,47 @@ TextureOb* TextureManager::GetRandomTextureOb(int texture_type_id)
 		
 void TextureManager::FillShipSubTypeList()
 {
-        if (ship_race0_ranger_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::RANGER_ID);
-        if (ship_race0_warrior_texOb_vec.size() != 0)  RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::WARRIOR_ID);
-        if (ship_race0_trader_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::TRADER_ID);
-        if (ship_race0_pirat_texOb_vec.size() != 0)    RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::PIRAT_ID);
-        if (ship_race0_diplomat_texOb_vec.size() != 0) RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::DIPLOMAT_ID);
+        if (ship_race0_ranger_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
+        if (ship_race0_warrior_texOb_vec.size() != 0)  RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
+        if (ship_race0_trader_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
+        if (ship_race0_pirat_texOb_vec.size() != 0)    RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
+        if (ship_race0_diplomat_texOb_vec.size() != 0) RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
 
-        if (ship_race1_ranger_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::RANGER_ID);
-        if (ship_race1_warrior_texOb_vec.size() != 0)  RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::WARRIOR_ID);
-        if (ship_race1_trader_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::TRADER_ID);
-        if (ship_race1_pirat_texOb_vec.size() != 0)    RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::PIRAT_ID); 
-        if (ship_race1_diplomat_texOb_vec.size() != 0) RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::DIPLOMAT_ID);
+        if (ship_race1_ranger_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
+        if (ship_race1_warrior_texOb_vec.size() != 0)  RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
+        if (ship_race1_trader_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
+        if (ship_race1_pirat_texOb_vec.size() != 0)    RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID); 
+        if (ship_race1_diplomat_texOb_vec.size() != 0) RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
 
-        if (ship_race2_ranger_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::RANGER_ID);
-        if (ship_race2_warrior_texOb_vec.size() != 0)  RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::WARRIOR_ID);
-        if (ship_race2_trader_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::TRADER_ID); 
-        if (ship_race2_pirat_texOb_vec.size() != 0)    RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::PIRAT_ID);
-        if (ship_race2_diplomat_texOb_vec.size() != 0) RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::DIPLOMAT_ID);
+        if (ship_race2_ranger_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
+        if (ship_race2_warrior_texOb_vec.size() != 0)  RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
+        if (ship_race2_trader_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID); 
+        if (ship_race2_pirat_texOb_vec.size() != 0)    RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
+        if (ship_race2_diplomat_texOb_vec.size() != 0) RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
      
-        if (ship_race3_ranger_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::RANGER_ID);
-        if (ship_race3_warrior_texOb_vec.size() != 0)  RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::WARRIOR_ID);
-        if (ship_race3_trader_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::TRADER_ID);
-        if (ship_race3_pirat_texOb_vec.size() != 0)    RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::PIRAT_ID);
-        if (ship_race3_diplomat_texOb_vec.size() != 0) RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::DIPLOMAT_ID); 
+        if (ship_race3_ranger_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
+        if (ship_race3_warrior_texOb_vec.size() != 0)  RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
+        if (ship_race3_trader_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
+        if (ship_race3_pirat_texOb_vec.size() != 0)    RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
+        if (ship_race3_diplomat_texOb_vec.size() != 0) RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID); 
 
-        if (ship_race4_ranger_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::RANGER_ID);
-        if (ship_race4_warrior_texOb_vec.size() != 0)  RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::WARRIOR_ID); 
-        if (ship_race4_trader_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::TRADER_ID);
-        if (ship_race4_pirat_texOb_vec.size() != 0)    RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::PIRAT_ID); 
-        if (ship_race4_diplomat_texOb_vec.size() != 0) RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::DIPLOMAT_ID);
+        if (ship_race4_ranger_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
+        if (ship_race4_warrior_texOb_vec.size() != 0)  RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID); 
+        if (ship_race4_trader_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
+        if (ship_race4_pirat_texOb_vec.size() != 0)    RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID); 
+        if (ship_race4_diplomat_texOb_vec.size() != 0) RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
 
-        if (ship_race6_ranger_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::RANGER_ID);
-        if (ship_race6_warrior_texOb_vec.size() != 0)  RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::WARRIOR_ID);
-        if (ship_race6_trader_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::TRADER_ID);
-        if (ship_race6_pirat_texOb_vec.size() != 0)    RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::PIRAT_ID);
-        if (ship_race6_diplomat_texOb_vec.size() != 0) RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::DIPLOMAT_ID);
+        if (ship_race6_ranger_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
+        if (ship_race6_warrior_texOb_vec.size() != 0)  RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
+        if (ship_race6_trader_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
+        if (ship_race6_pirat_texOb_vec.size() != 0)    RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
+        if (ship_race6_diplomat_texOb_vec.size() != 0) RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
 
-        if (ship_race7_ranger_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::RANGER_ID); 
-        if (ship_race7_warrior_texOb_vec.size() != 0)  RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::WARRIOR_ID); 
-        if (ship_race7_trader_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::TRADER_ID); 
-        if (ship_race7_pirat_texOb_vec.size() != 0)    RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::PIRAT_ID); 
-        if (ship_race7_diplomat_texOb_vec.size() != 0) RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(ENTITY::TYPE::DIPLOMAT_ID);                      
+        if (ship_race7_ranger_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID); 
+        if (ship_race7_warrior_texOb_vec.size() != 0)  RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID); 
+        if (ship_race7_trader_texOb_vec.size() != 0)   RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID); 
+        if (ship_race7_pirat_texOb_vec.size() != 0)    RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID); 
+        if (ship_race7_diplomat_texOb_vec.size() != 0) RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);                      
 }
 
 TextureOb* TextureManager::GetTextureObByPath(const std::string& path)

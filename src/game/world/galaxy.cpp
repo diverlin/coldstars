@@ -29,7 +29,7 @@
 Galaxy::Galaxy(int id)
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::GALAXY_ID);  
+	SetTypeId(TYPE::ENTITY::GALAXY_ID);  
 }
 
 Galaxy::~Galaxy()

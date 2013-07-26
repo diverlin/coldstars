@@ -41,7 +41,7 @@ m_SparkGrows(false),
 m_TurnSinceLastSparkCounter(0)
 { 
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::STAR_ID);
+	SetTypeId(TYPE::ENTITY::STAR_ID);
 
     m_TurnSparkThreshold = getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
 }

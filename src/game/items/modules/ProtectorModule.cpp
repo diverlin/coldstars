@@ -26,8 +26,8 @@ ProtectorModule::ProtectorModule(int id)
 protection_add(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::MODULE_ID);
-    SetSubTypeId(ENTITY::TYPE::PROTECTOR_MODULE_ID);
+	SetTypeId(TYPE::ENTITY::MODULE_ID);
+    SetSubTypeId(TYPE::ENTITY::PROTECTOR_MODULE_ID);
 }
 
 /* virtual */

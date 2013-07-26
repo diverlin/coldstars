@@ -27,8 +27,8 @@ FreezerEquipment::FreezerEquipment(int id)
 freeze_orig(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::EQUIPMENT_ID);  
-    SetSubTypeId(ENTITY::TYPE::FREEZER_EQUIPMENT_ID); 
+	SetTypeId(TYPE::ENTITY::EQUIPMENT_ID);  
+    SetSubTypeId(TYPE::ENTITY::FREEZER_EQUIPMENT_ID); 
 }
 
 /* virtual */

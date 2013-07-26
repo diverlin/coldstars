@@ -61,10 +61,10 @@ void init()
     RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(TYPE::RACE::R6_ID);
     RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(TYPE::RACE::R7_ID);  
     
-    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::TYPE::WARRIOR_ID);  
-    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::TYPE::PIRAT_ID);  
-    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::TYPE::TRADER_ID);  
-    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::TYPE::DIPLOMAT_ID);  
+    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);  
+    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);  
+    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);  
+    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);  
     
     loadGameData();           
     TextureManager::Instance().FillShipSubTypeList();        

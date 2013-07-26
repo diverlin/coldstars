@@ -35,7 +35,7 @@ class TextureManager
         	void Add(TextureOb*);
 
         	TextureOb* GetRandomFaceTexObWithFolloingAttributes(TYPE::RACE);
-        	TextureOb* GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE, ENTITY::TYPE, int _size_id);
+        	TextureOb* GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE, TYPE::ENTITY, int _size_id);
 
         	TextureOb* GetTexObByColorId(int type_id, int color_id);
                         	

@@ -41,8 +41,8 @@ m_ItemSlot(nullptr),
 m_Velocity(0)    
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::VEHICLE_ID);
-	SetSubTypeId(ENTITY::TYPE::CONTAINER_ID);
+	SetTypeId(TYPE::ENTITY::VEHICLE_ID);
+	SetSubTypeId(TYPE::ENTITY::CONTAINER_ID);
 }
 
 /* virtual */   
@@ -90,7 +90,7 @@ void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords, float zoom)
 /* virtual override final */   
 void Container::PostDeathUniqueEvent(bool show_effect)
 {
-	if (m_ItemSlot->GetItem()->GetTypeId() == ENTITY::TYPE::BOMB_ID)
+	if (m_ItemSlot->GetItem()->GetTypeId() == TYPE::ENTITY::BOMB_ID)
 	{
 		GetStarSystem()->BombExplosionEvent(this, show_effect);  
 	}

@@ -26,8 +26,8 @@ ScanerModule::ScanerModule(int id)
 scan_add(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::MODULE_ID);
-    SetSubTypeId(ENTITY::TYPE::SCANER_MODULE_ID);   
+	SetTypeId(TYPE::ENTITY::MODULE_ID);
+    SetSubTypeId(TYPE::ENTITY::SCANER_MODULE_ID);   
 }
 
 /* virtual */

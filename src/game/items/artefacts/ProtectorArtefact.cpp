@@ -26,8 +26,8 @@ ProtectorArtefact::ProtectorArtefact(int id)
 protection(0)
 {
 	SetId(id);
-    SetTypeId(ENTITY::TYPE::ARTEFACT_ID);
-    SetSubTypeId(ENTITY::TYPE::PROTECTOR_ARTEFACT_ID);
+    SetTypeId(TYPE::ENTITY::ARTEFACT_ID);
+    SetSubTypeId(TYPE::ENTITY::PROTECTOR_ARTEFACT_ID);
 }
 
 /* virtual */

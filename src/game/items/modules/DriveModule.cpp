@@ -27,8 +27,8 @@ speed_add(0),
 hyper_add(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::MODULE_ID);
-	SetSubTypeId(ENTITY::TYPE::DRIVE_MODULE_ID);
+	SetTypeId(TYPE::ENTITY::MODULE_ID);
+	SetSubTypeId(TYPE::ENTITY::DRIVE_MODULE_ID);
 }
 
 /* virtual */

@@ -71,7 +71,7 @@ void GrappleModuleBuilder::CreateNewInternals(GrappleModule* grapple_module, int
     	radius_add     = getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
     	speed_add      = getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);
     
-        grapple_module->SetParentSubTypeId(ENTITY::TYPE::GRAPPLE_EQUIPMENT_ID);    
+        grapple_module->SetParentSubTypeId(TYPE::ENTITY::GRAPPLE_EQUIPMENT_ID);    
         grapple_module->BindData2D(texOb);
         grapple_module->SetStrengthAdd(strength_add);
         grapple_module->SetRadiusAdd(radius_add);

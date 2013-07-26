@@ -43,7 +43,7 @@ m_Atmosphere(nullptr),
 m_Population(0)
 {    
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::PLANET_ID);
+	SetTypeId(TYPE::ENTITY::PLANET_ID);
 }
 
 /* virtual */

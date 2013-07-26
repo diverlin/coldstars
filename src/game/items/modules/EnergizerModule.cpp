@@ -28,8 +28,8 @@ energy_max_add(0),
 restoration_add(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::MODULE_ID);
-    SetSubTypeId(ENTITY::TYPE::ENERGIZER_MODULE_ID);
+	SetTypeId(TYPE::ENTITY::MODULE_ID);
+    SetSubTypeId(TYPE::ENTITY::ENERGIZER_MODULE_ID);
 }
 
 /* virtual */

@@ -45,15 +45,15 @@ void BaseLand::ResolveDataUniqueBaseLand()
 	Base* owner = EntityManager::Instance().GetEntityById(data_unresolved_BaseLand.owner_id);
 	switch(owner->GetTypeId())
 	{
-		case ENTITY::TYPE::PLANET_ID:
+		case TYPE::ENTITY::PLANET_ID:
 		{
 			((Planet*)owner)->BindLand(this);
 			break;
 		}
 
-		case ENTITY::TYPE::VEHICLE_ID:
+		case TYPE::ENTITY::VEHICLE_ID:
 		{
-			if (owner->GetSubTypeId() == ENTITY::TYPE::SPACESTATION_ID)
+			if (owner->GetSubTypeId() == TYPE::ENTITY::SPACESTATION_ID)
 			{
 				((SpaceStation*)owner)->BindLand(this);
 			}

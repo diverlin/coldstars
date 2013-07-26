@@ -59,17 +59,17 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
     int angle = 0;
 	for (unsigned int i=0; i<vehicle->m_SlotTotal_vec.size(); i++)
 	{	
-		ENTITY::TYPE slot_subtype_id = vehicle->m_SlotTotal_vec[i]->GetSubTypeId();
-		if ( (slot_subtype_id != ENTITY::TYPE::CARGO_SLOT_ID) and (slot_subtype_id != ENTITY::TYPE::ARTEFACT_SLOT_ID) )
+		TYPE::ENTITY slot_subtype_id = vehicle->m_SlotTotal_vec[i]->GetSubTypeId();
+		if ( (slot_subtype_id != TYPE::ENTITY::CARGO_SLOT_ID) and (slot_subtype_id != TYPE::ENTITY::ARTEFACT_SLOT_ID) )
 		{  
-			ENTITY::TYPE entity_type_id = slot_subtype_id;
-			if (slot_subtype_id == ENTITY::TYPE::WEAPON_SLOT_ID)
+			TYPE::ENTITY entity_type_id = slot_subtype_id;
+			if (slot_subtype_id == TYPE::ENTITY::WEAPON_SLOT_ID)
 			{
 				entity_type_id = vehicle->m_SlotTotal_vec[i]->GetSubSubTypeId();
 			}
 						  
 			//TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;
-			ButtonItemSlot2* button = new ButtonItemSlot2(GUI::getGuiItemSlotSelectorType(entity_type_id), getEntityTypeStr(entity_type_id), vehicle->m_SlotTotal_vec[i]);  
+			ButtonItemSlot2* button = new ButtonItemSlot2(getGuiItemSlotSelectorType(entity_type_id), getEntityTypeStr(entity_type_id), vehicle->m_SlotTotal_vec[i]);  
 
             Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
             button->SetSize(size*scale);

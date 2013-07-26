@@ -61,7 +61,7 @@ npc(nullptr),
 starsystem(nullptr)        
 { 
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::PLAYER_ID);
+	SetTypeId(TYPE::ENTITY::PLAYER_ID);
     
     cursor.SetPlayer(this);
     GuiManager::Instance().SetPlayer(this);
@@ -180,9 +180,9 @@ void Player::AddIfVisible(Vehicle* vehicle)
 		{
 			switch(vehicle->GetSubTypeId())
 			{			
-				case ENTITY::TYPE::SHIP_ID:        	{ 	visible_SHIP_vec.push_back((Ship*)vehicle); break; }
-				case ENTITY::TYPE::SATELLITE_ID:    	{ 	visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
-				case ENTITY::TYPE::SPACESTATION_ID: 	{ 	visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
+				case TYPE::ENTITY::SHIP_ID:        	{ 	visible_SHIP_vec.push_back((Ship*)vehicle); break; }
+				case TYPE::ENTITY::SATELLITE_ID:    	{ 	visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
+				case TYPE::ENTITY::SPACESTATION_ID: 	{ 	visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
 			}
 		}
 	}

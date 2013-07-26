@@ -30,7 +30,7 @@
 NatureLand::NatureLand(int id)
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::NATURELAND_ID);
+	SetTypeId(TYPE::ENTITY::NATURELAND_ID);
 }
 
 /* virtual */

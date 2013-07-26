@@ -46,7 +46,7 @@ struct UnresolvedDataUniqueNpc
 class Npc : public Base
 {
    	public:
-        Npc(int, ENTITY::TYPE, ENTITY::TYPE);              	    
+        Npc(int, TYPE::ENTITY, TYPE::ENTITY);              	    
         virtual ~Npc();
         
         virtual void PutChildsToGarbage() const {};
