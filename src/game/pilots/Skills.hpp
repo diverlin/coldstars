@@ -22,6 +22,7 @@
 
 #include <boost/property_tree/ptree.hpp>
 #include "../common/constants.hpp"
+#include "../common/RaceTypes.hpp"
 
 class Skills
 { 
@@ -86,16 +87,16 @@ class Skills
 		unsigned long int expirience;
 		unsigned long int expirience_nextlevel;
                 
-                int strategy[SKILLS_NUM];
-                        
-                void ImcrementSkillDependingOnArrayIndex(int);
-                int GetSkillDependingOnArrayIndex(int); 
+        int strategy[SKILLS_NUM];
                 
-                bool CheckLevelUp();               
+        void ImcrementSkillDependingOnArrayIndex(int);
+        int GetSkillDependingOnArrayIndex(int); 
+        
+        bool CheckLevelUp();               
 };
 
 const int* getArrayDependingOnClassTypeId(int);
-const int* getArrayDependingOnRaceId(int);
+const int* getArrayDependingOnRaceId(RACE::TYPE);
 
 #endif
 

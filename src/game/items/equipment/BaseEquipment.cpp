@@ -32,7 +32,7 @@
 
 BaseEquipment::BaseEquipment()
 {
-    race_id         = RACE::R0_ID;
+    race_id = RACE::TYPE::R0_ID;
     animation_notfunctioning = new AnimationEffect2D(Vec3<float>(0.8, 0.8, 1.0), Vec3<float>(1.2, 1.2, 1.0), Vec3<float>(0.02, 0.02, 0.0), 0, 0, 0);
 }
 

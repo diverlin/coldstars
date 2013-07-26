@@ -82,6 +82,7 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 	//}
 
 	//return interaction;
+    return false;
 }
 
 void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill) const

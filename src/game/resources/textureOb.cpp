@@ -42,7 +42,7 @@ TextureOb::TextureOb(int type_id, const std::string& path, const std::string& pa
 void TextureOb::Manage(int type_id, const std::string& path, const std::string& path_normalmap, bool use_alpha, std::vector<int>* args, int columns_num, int rows_num, int fps)
 {
     	// textureOb attributes INIT
-    	race_id = NONE_ID;
+    	race_id = RACE::TYPE::NONE_ID;
     	tech_level_id = NONE_ID;
 
     	color_id = NONE_ID;
@@ -240,15 +240,15 @@ void TextureOb::satelliteArgManager(std::vector<int>* arg)
    
 void TextureOb::shipArgManager(std::vector<int>* arg)
 {
-     	race_id    = (*arg)[0];
-     	subtype_id = (ENTITY::TYPE)(*arg)[1];   // warrior/trader and so on
-     	mod_id     = 0;
+    race_id    = (RACE::TYPE)(*arg)[0];
+    subtype_id = (ENTITY::TYPE)(*arg)[1];   // warrior/trader and so on
+    mod_id     = 0;
 }
 
 void TextureOb::nebulaArgManager(std::vector<int>* arg)
 {
-     	color_id    = (*arg)[0];
-    	is_rotated =  (*arg)[1];
+    color_id    = (*arg)[0];
+    is_rotated =  (*arg)[1];
 }
 
 void TextureOb::starArgManager(std::vector<int>* arg)
@@ -297,7 +297,7 @@ void TextureOb::govermentBgArgManager(std::vector<int>* arg)
 
 void TextureOb::faceArgManager(std::vector<int>* arg)
 {
-   	race_id       = (*arg)[0];
+   	race_id       = (RACE::TYPE)(*arg)[0];
    	subtype_id    = (ENTITY::TYPE)(*arg)[1];   // warrior/trader and so on
 }
 
@@ -305,69 +305,69 @@ void TextureOb::faceArgManager(std::vector<int>* arg)
 // ITEMS
 void TextureOb::DriveEquipmentArgManager(std::vector<int>* arg)
 {
-   	race_id       = (*arg)[0];
+   	race_id       = (RACE::TYPE)(*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
 void TextureOb::LazerEquipmentArgManager(std::vector<int>* arg)
 {
-   	race_id       = (*arg)[0];
+   	race_id       = (RACE::TYPE)(*arg)[0];
    	tech_level_id = (*arg)[1];
    	color_id      = (*arg)[2];
 }
 
 void TextureOb::RocketEquipmentArgManager(std::vector<int>* arg)
 {
-   	race_id       = (*arg)[0];
+   	race_id       = (RACE::TYPE)(*arg)[0];
    	tech_level_id = (*arg)[1];
   	 color_id      = (*arg)[2];
 }
 
 void TextureOb::ProtectorEquipmentArgManager(std::vector<int>* arg)
 {
-   	race_id       = (*arg)[0];
+   	race_id       = (RACE::TYPE)(*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
 void TextureOb::DroidEquipmentArgManager(std::vector<int>* arg)
 {
-   	race_id       = (*arg)[0];
+   	race_id       = (RACE::TYPE)(*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
 void TextureOb::GrappleEquipmentArgManager(std::vector<int>* arg)
 {
-   	race_id       = (*arg)[0];
+   	race_id       = (RACE::TYPE)(*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
 void TextureOb::BakEquipmentArgManager(std::vector<int>* arg)
 {
-   	race_id       = (*arg)[0];
+   	race_id       = (RACE::TYPE)(*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
 void TextureOb::energyBlockItemArgManager(std::vector<int>* arg)
 {
-   	race_id       = (*arg)[0];
+   	race_id       = (RACE::TYPE)(*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
 void TextureOb::FreezerEquipmentArgManager(std::vector<int>* arg)
 {
-   	race_id       = (*arg)[0];
+   	race_id       = (RACE::TYPE)(*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
 void TextureOb::RadarEquipmentArgManager(std::vector<int>* arg)
 {
-   	race_id       = (*arg)[0];
+   	race_id       = (RACE::TYPE)(*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 
 void TextureOb::ScanerEquipmentArgManager(std::vector<int>* arg)
 {
-   	race_id       = (*arg)[0];
+   	race_id       = (RACE::TYPE)(*arg)[0];
    	tech_level_id = (*arg)[1];
 }
 

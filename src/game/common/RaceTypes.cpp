@@ -16,31 +16,22 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef RAND_HPP
-#define RAND_HPP
+#include "RaceTypes.hpp"
 
-#include <vector>
-#include <common/constants.hpp>
-#include <common/RaceTypes.hpp>
+std::string getRaceStr(RACE::TYPE race_id) 
+{
+	switch(race_id)
+	{
+		case RACE::TYPE::R0_ID: { return "RACE0"; break; }
+		case RACE::TYPE::R1_ID:	{ return "RACE1"; break; }
+		case RACE::TYPE::R2_ID:	{ return "RACE2"; break; }
+		case RACE::TYPE::R3_ID:	{ return "RACE3"; break; }
+		case RACE::TYPE::R4_ID:	{ return "RACE4"; break; }	
 
+		case RACE::TYPE::R6_ID:	{ return "RACE6"; break; }
+		case RACE::TYPE::R7_ID:	{ return "RACE7"; break; }	
+		
+		default: { return "UKNOWN ID"; break; }
+	}
+}
 
-int getRandIntFromVec(const std::vector<int>&);
-ENTITY::TYPE getRandIntFromVec(const std::vector<ENTITY::TYPE>&);
-RACE::TYPE getRandIntFromVec(const std::vector<RACE::TYPE>&);
-
-float getRandFloat(float, float);
-int getRandInt(int, int);
-int getRandSign();
-bool getRandBool();
-
-ENTITY::TYPE getRandNpcSubTypeId(RACE::TYPE, const std::vector<ENTITY::TYPE>&);
-const std::vector<ENTITY::TYPE>& getAllowedSubTypesByRaceId(RACE::TYPE);
-
-ENTITY::TYPE getRandNpcSubTypeId(RACE::TYPE);
-ENTITY::TYPE getRandNpcSubSubTypeId(ENTITY::TYPE);
-
-ENTITY::TYPE getRand(const std::vector<ENTITY::TYPE>&);
-
-
-
-#endif

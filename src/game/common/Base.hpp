@@ -31,7 +31,7 @@ class Base
 		virtual void PutChildsToGarbage() const = 0;
 		void SetSubSubTypeId(ENTITY::TYPE subsubtype_id) { m_Data_id.subsubtype_id = subsubtype_id; }
 		
-		unsigned long int GetId()   const { return m_Data_id.id; }   
+		INTLONGEST GetId()   const { return m_Data_id.id; }   
 		ENTITY::TYPE GetTypeId()   	const { return m_Data_id.type_id; }
 		ENTITY::TYPE GetSubTypeId() const { return m_Data_id.subtype_id; }
 		ENTITY::TYPE GetSubSubTypeId() const { return m_Data_id.subsubtype_id; }
@@ -43,7 +43,7 @@ class Base
 		virtual void ResolveData() = 0;
 		
 	protected:
-        void SetId(unsigned long int id)           { m_Data_id.id = id; }
+        void SetId(INTLONGEST id)                  { m_Data_id.id = id; }
         void SetTypeId(ENTITY::TYPE type_id)       { m_Data_id.type_id = type_id; }
 		void SetSubTypeId(ENTITY::TYPE subtype_id) { m_Data_id.subtype_id = subtype_id; }
         

@@ -56,46 +56,46 @@ ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipmentTemplate(unsigned 
         return scaner_equipment;
 } 
 
-ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipment(int tech_level, int race_id, int scan_orig) const
+ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipment(int tech_level, RACE::TYPE race_id, int scan_orig) const
 {
 	ScanerEquipment* scaner_equipment = GetNewScanerEquipmentTemplate();
 	CreateNewInternals(scaner_equipment, tech_level, race_id, scan_orig);
         
-        return scaner_equipment;
+    return scaner_equipment;
 } 
         	
-void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipment, int tech_level, int race_id, int scan_orig) const
+void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipment, int tech_level, RACE::TYPE race_id, int scan_orig) const
 {     
-        if (race_id == NONE_ID)
-        {
-       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+    if (race_id == RACE::TYPE::NONE_ID)
+    {
+        race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
-    	if (tech_level == NONE_ID)
-    	{
-       		tech_level = 1; 
+    if (tech_level == NONE_ID)
+    {
+        tech_level = 1; 
 	}
 
-    	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SCANER_EQUIPMENT_ID);   
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
+    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SCANER_EQUIPMENT_ID);   
+    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
 
-    	scan_orig       = getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECHLEVEL_RATE * tech_level);
-    	
-    	ItemCommonData common_data;
-        common_data.tech_level 	    = tech_level;
-    	common_data.modules_num_max = getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
-    	common_data.mass            = getRandInt(EQUIPMENT::SCANER::MASS_MIN,        EQUIPMENT::SCANER::MASS_MAX);
-    	common_data.condition_max   = getRandInt(EQUIPMENT::SCANER::CONDITION_MIN,   EQUIPMENT::SCANER::CONDITION_MAX);
-    	common_data.deterioration_normal = 1;
-        
-        scaner_equipment->SetScanOrig(scan_orig);  
-        scaner_equipment->BindData2D(texOb_item);    	
-        scaner_equipment->SetParentSubTypeId(ENTITY::TYPE::SCANER_SLOT_ID);
-        scaner_equipment->SetItemCommonData(common_data);
-        scaner_equipment->SetCondition(common_data.condition_max);
-                   
-    	scaner_equipment->UpdateProperties();
-    	scaner_equipment->CountPrice();
+    scan_orig       = getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECHLEVEL_RATE * tech_level);
+    
+    ItemCommonData common_data;
+    common_data.tech_level 	    = tech_level;
+    common_data.modules_num_max = getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
+    common_data.mass            = getRandInt(EQUIPMENT::SCANER::MASS_MIN,        EQUIPMENT::SCANER::MASS_MAX);
+    common_data.condition_max   = getRandInt(EQUIPMENT::SCANER::CONDITION_MIN,   EQUIPMENT::SCANER::CONDITION_MAX);
+    common_data.deterioration_normal = 1;
+    
+    scaner_equipment->SetScanOrig(scan_orig);  
+    scaner_equipment->BindData2D(texOb_item);    	
+    scaner_equipment->SetParentSubTypeId(ENTITY::TYPE::SCANER_SLOT_ID);
+    scaner_equipment->SetItemCommonData(common_data);
+    scaner_equipment->SetCondition(common_data.condition_max);
+               
+    scaner_equipment->UpdateProperties();
+    scaner_equipment->CountPrice();
 }
 
 

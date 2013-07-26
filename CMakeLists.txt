@@ -6,7 +6,6 @@ project (${PROJECT})
 set(BIN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bin/ )
 
 #add_definitions(-Wall -Wextra -std=c++11 -std=gnu++11)
-add_definitions(-std=c++11 -std=gnu++11)
 
 find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
@@ -23,5 +22,7 @@ add_subdirectory(dependencies/SFML2)
 set(GLEW_STATIC 1)
 add_subdirectory(dependencies/glew)
 
+#add_definitions(-Wall -Werror -Wno-return-type -std=c++11 -std=gnu++11)
+add_definitions(-std=c++11 -std=gnu++11)
 add_subdirectory(src/game)
 

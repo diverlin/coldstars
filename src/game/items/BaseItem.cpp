@@ -29,7 +29,7 @@ BaseItem::BaseItem()
 :
 item_slot(nullptr),
 parent_subtype_id(ENTITY::TYPE::NONE_ID),
-race_id(NONE_ID),
+race_id(RACE::TYPE::NONE_ID),
 condition(0),
 price(0),
 locked_turns(0)
@@ -162,15 +162,15 @@ void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, c
     save_ptree.put(root+"price", price);
     save_ptree.put(root+"condition", condition);
     save_ptree.put(root+"locked_turns", locked_turns);
-    save_ptree.put(root+"race_id", race_id);
+    save_ptree.put(root+"race_id", (int)race_id);
     save_ptree.put(root+"parent_subtype_id", (int)parent_subtype_id);
 
-    save_ptree.put(root+"data_item.tech_level",    data_item.tech_level);        
-    save_ptree.put(root+"data_item.modules_num_max",    data_item.modules_num_max);
-    save_ptree.put(root+"data_item.condition_max",      data_item.condition_max);                         
-    save_ptree.put(root+"data_item.deterioration_normal", data_item.deterioration_normal);   
-    save_ptree.put(root+"data_item.deterioration_overload_rate", data_item.deterioration_overload_rate);   
-    save_ptree.put(root+"data_item.mass",               data_item.mass);
+    save_ptree.put(root+"data_item.tech_level",                     data_item.tech_level);        
+    save_ptree.put(root+"data_item.modules_num_max",                data_item.modules_num_max);
+    save_ptree.put(root+"data_item.condition_max",                  data_item.condition_max);                         
+    save_ptree.put(root+"data_item.deterioration_normal",           data_item.deterioration_normal);   
+    save_ptree.put(root+"data_item.deterioration_overload_rate",    data_item.deterioration_overload_rate);   
+    save_ptree.put(root+"data_item.mass",                           data_item.mass);
                     
 	if (GetTextureOb()) 	{ save_ptree.put(root+"unresolved.textureOb_path", GetTextureOb()->path); }
 	else            { save_ptree.put(root+"unresolved.textureOb_path", "none"); }
@@ -188,7 +188,7 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
     price             = load_ptree.get<int>("price");
     condition         = load_ptree.get<int>("condition");
     locked_turns      = load_ptree.get<int>("locked_turns");
-    race_id           = load_ptree.get<int>("race_id");
+    race_id           = (RACE::TYPE)load_ptree.get<int>("race_id");
     parent_subtype_id = (ENTITY::TYPE)load_ptree.get<int>("parent_subtype_id");
 
     data_item.tech_level           = load_ptree.get<int>("data_item.tech_level");    

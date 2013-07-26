@@ -44,22 +44,22 @@ void init()
 {
     srand(time(0));
     
-    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::R0_ID);
-    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::R1_ID);
-    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::R2_ID);
-    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::R3_ID);
-    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::R4_ID);
-    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::R6_ID);
-    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::R7_ID);
+    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::TYPE::R0_ID);
+    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::TYPE::R1_ID);
+    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::TYPE::R2_ID);
+    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::TYPE::R3_ID);
+    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::TYPE::R4_ID);
+    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::TYPE::R6_ID);
+    RaceInformationCollector::Instance().RACES_ALL_vec.push_back(RACE::TYPE::R7_ID);
     
-    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::R0_ID);
-    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::R1_ID);
-    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::R2_ID);
-    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::R3_ID);
-    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::R4_ID);
+    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::TYPE::R0_ID);
+    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::TYPE::R1_ID);
+    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::TYPE::R2_ID);
+    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::TYPE::R3_ID);
+    RaceInformationCollector::Instance().RACES_GOOD_vec.push_back(RACE::TYPE::R4_ID);
     
-    RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(RACE::R6_ID);
-    RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(RACE::R7_ID);  
+    RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(RACE::TYPE::R6_ID);
+    RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(RACE::TYPE::R7_ID);  
     
     RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::TYPE::WARRIOR_ID);  
     RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(ENTITY::TYPE::PIRAT_ID);  

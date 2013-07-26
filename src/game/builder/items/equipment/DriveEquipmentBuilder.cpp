@@ -56,24 +56,24 @@ DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipmentTemplate(unsigned lon
         return drive_equipment;
 } 
         
-DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipment(int tech_level, int race_id, int speed_orig, int hyper_orig) const
+DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipment(int tech_level, RACE::TYPE race_id, int speed_orig, int hyper_orig) const
 {
 	DriveEquipment* drive_equipment = GetNewDriveEquipmentTemplate();
 	CreateNewInternals(drive_equipment, tech_level, race_id, speed_orig, hyper_orig);
         
-        return drive_equipment;
+    return drive_equipment;
 }        
         	
-void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, int tech_level, int race_id, int speed_orig, int hyper_orig) const
+void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, int tech_level, RACE::TYPE race_id, int speed_orig, int hyper_orig) const
 {     
-        if (race_id == NONE_ID)
-        {
-       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+    if (race_id == RACE::TYPE::NONE_ID)
+    {
+        race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
-    	if (tech_level == NONE_ID)
-    	{
-       		tech_level = 1; 
+    if (tech_level == NONE_ID)
+    {
+        tech_level = 1; 
 	}
 
 	Mesh* mesh = nullptr;
@@ -81,27 +81,27 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
 	if (0)
 	{
 		texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::DRIVE_EQUIPMENT_ID); 
-       	}
-       	else
-       	{	
-       		mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
+    }
+    else
+    {	
+        mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
 		texOb = mesh->GetTextureOb(); 
 	}
 	
-        //texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 
+    //texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 
 
-        speed_orig      = getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * (1 + EQUIPMENT::DRIVE::SPEED_TECHLEVEL_RATE*tech_level);
-        hyper_orig      = getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX) * (1 + EQUIPMENT::DRIVE::HYPER_TECHLEVEL_RATE*tech_level);
-    
-        ItemCommonData common_data;
-        common_data.tech_level 		= tech_level;
-        common_data.modules_num_max 	= getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
-        common_data.mass            	= getRandInt(EQUIPMENT::DRIVE::MASS_MIN,        EQUIPMENT::DRIVE::MASS_MAX);
-        common_data.condition_max   	= getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN,   EQUIPMENT::DRIVE::CONDITION_MAX);
-    	common_data.deterioration_normal = 1;
-    	common_data.deterioration_overload_rate = EQUIPMENT::DRIVE::OVERLOAD_DETERIORATION_RATE;
-    
-    	if (mesh != nullptr)
+    speed_orig      = getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * (1 + EQUIPMENT::DRIVE::SPEED_TECHLEVEL_RATE*tech_level);
+    hyper_orig      = getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX) * (1 + EQUIPMENT::DRIVE::HYPER_TECHLEVEL_RATE*tech_level);
+
+    ItemCommonData common_data;
+    common_data.tech_level 		= tech_level;
+    common_data.modules_num_max 	= getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
+    common_data.mass            	= getRandInt(EQUIPMENT::DRIVE::MASS_MIN,        EQUIPMENT::DRIVE::MASS_MAX);
+    common_data.condition_max   	= getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN,   EQUIPMENT::DRIVE::CONDITION_MAX);
+    common_data.deterioration_normal = 1;
+    common_data.deterioration_overload_rate = EQUIPMENT::DRIVE::OVERLOAD_DETERIORATION_RATE;
+
+    if (mesh != nullptr)
 	{
 		Vec3<float> scale(50);
 		drive_equipment->BindData3D(mesh, mesh->GetTextureOb(), scale);
@@ -111,20 +111,20 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
 		drive_equipment->SetRenderAnimation(animation_program);
 		drive_equipment->SetAngle(Vec3<float>(0, getRandInt(10, 45), getRandInt(10, 45)));	
 		drive_equipment->SetZYX(true);		
-    	}
-    	else
-    	{
-		drive_equipment->BindData2D(texOb);    		
-    	}
+    }
+    else
+    {
+        drive_equipment->BindData2D(texOb);    		
+    }
             
-        drive_equipment->SetSpeedOrig(speed_orig);  
-        drive_equipment->SetHyperOrig(hyper_orig);
-        drive_equipment->SetParentSubTypeId(ENTITY::TYPE::DRIVE_SLOT_ID);
-        drive_equipment->SetItemCommonData(common_data);
-        drive_equipment->SetCondition(common_data.condition_max);
-        
-        drive_equipment->UpdateProperties();
-     	drive_equipment->CountPrice();
+    drive_equipment->SetSpeedOrig(speed_orig);  
+    drive_equipment->SetHyperOrig(hyper_orig);
+    drive_equipment->SetParentSubTypeId(ENTITY::TYPE::DRIVE_SLOT_ID);
+    drive_equipment->SetItemCommonData(common_data);
+    drive_equipment->SetCondition(common_data.condition_max);
+    
+    drive_equipment->UpdateProperties();
+    drive_equipment->CountPrice();
 }
 
 

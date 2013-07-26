@@ -49,12 +49,13 @@
 
 #include "../spaceobjects/Vehicle.hpp"
 
-GuiSpace::GuiSpace():
+GuiSpace::GuiSpace()
+:
+init_done(false),
 gui_galaxymap_shared(nullptr),
 gui_vehicle_scan_shared(nullptr),
 gui_skills_shared(nullptr),
-slider_shared(nullptr),
-init_done(false)
+slider_shared(nullptr)
 {   	
 	int screen_w = Screen::Instance().GetWidth();
 	int screen_h = Screen::Instance().GetHeight();

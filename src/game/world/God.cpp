@@ -95,9 +95,9 @@ void God::CreateInvasion(const GalaxyDescription& galaxy_description) const
 	for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++)
 	{
 		StarSystem* starsystem = galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
-		int race_id = getRandInt(RACE::R6_ID, RACE::R7_ID);
-        	int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
-        	CreateShipsInSpace(starsystem, ship_num, race_id);
+		RACE::TYPE race_id = (RACE::TYPE)getRandInt((int)RACE::TYPE::R6_ID, (int)RACE::TYPE::R7_ID);
+        int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
+        CreateShipsInSpace(starsystem, ship_num, race_id);
 	}
 }
 
@@ -165,7 +165,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
 				SatelliteBuilder::Instance().EquipEquipment(satellite); // improove
 	        
 				{
-					int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+					RACE::TYPE npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 					ENTITY::TYPE npc_subtype_id    = ENTITY::TYPE::WARRIOR_ID;
 					ENTITY::TYPE npc_subsubtype_id = ENTITY::TYPE::WARRIOR_ID;
 			
@@ -191,11 +191,11 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
 			int ship_num = getRandInt(SHIPINIT_PER_PLANET_MIN, SHIPINIT_PER_PLANET_MAX);
 			for (int j=0; j<ship_num; j++)
 			{
-				int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+				RACE::TYPE npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 				ENTITY::TYPE npc_subtype_id    = getRandNpcSubTypeId(npc_race_id, allowed_subtypes);
 				ENTITY::TYPE npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
 				
-				int ship_race_id = npc_race_id;         
+				RACE::TYPE ship_race_id = npc_race_id;         
 				ENTITY::TYPE ship_subtype_id = npc_subtype_id;  
 				int ship_size_id = getRandInt(SIZE_1_ID, SIZE_9_ID);
 				int weapons_num = getRandInt(1, 5);
@@ -217,45 +217,45 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
 
 void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_system) const
 {       
-    	for (int i=0; i<spacestation_per_system; i++)
-    	{     
-    		int npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
-            ENTITY::TYPE npc_subtype_id    = ENTITY::TYPE::WARRIOR_ID;
-            ENTITY::TYPE npc_subsubtype_id = ENTITY::TYPE::WARRIOR_ID;
-                
-        	int ship_race_id = npc_race_id;         // RACES_ALL_vec[getRandInt(0, RACES_ALL_vec.size())];
-        	ENTITY::TYPE ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
-        	int ship_size_id = getRandInt(1, 9);
-        	int weapons_num = 5;
-        	
-        	SpaceStation* spacestation = SpaceStationBuilder::Instance().GetNewSpaceStation();
-        	SpaceStationBuilder::Instance().EquipEquipment(spacestation);  // improove
+    for (int i=0; i<spacestation_per_system; i++)
+    {     
+        RACE::TYPE npc_race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+        ENTITY::TYPE npc_subtype_id    = ENTITY::TYPE::WARRIOR_ID;
+        ENTITY::TYPE npc_subsubtype_id = ENTITY::TYPE::WARRIOR_ID;
+            
+        RACE::TYPE ship_race_id = npc_race_id;         // RACES_ALL_vec[getRandInt(0, RACES_ALL_vec.size())];
+        ENTITY::TYPE ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
+        int ship_size_id = getRandInt(1, 9);
+        int weapons_num = 5;
+        
+        SpaceStation* spacestation = SpaceStationBuilder::Instance().GetNewSpaceStation();
+        SpaceStationBuilder::Instance().EquipEquipment(spacestation);  // improove
 
-                Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
-        	spacestation->BindOwnerNpc(npc);
+        Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+        spacestation->BindOwnerNpc(npc);
 
 		Vec2<float> center = getRandVec2f(700, 1500);
                 Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
 		Vec3<float> angle(0,0,getRandInt(0, 360));  
 		                
-        	starsystem->AddVehicle(spacestation, center3, angle, nullptr);
-        	
-        	{  
-                Satellite* satellite = SatelliteBuilder::Instance().GetNewSatellite();
-                SatelliteBuilder::Instance().EquipEquipment(satellite);           		// improove
+        starsystem->AddVehicle(spacestation, center3, angle, nullptr);
+        
+        {  
+            Satellite* satellite = SatelliteBuilder::Instance().GetNewSatellite();
+            SatelliteBuilder::Instance().EquipEquipment(satellite);           		// improove
 
-                Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
-                satellite->BindOwnerNpc(new_npc);
-                
-                Vec3<float> center(0, 0, DEFAULT_ENTITY_ZPOS);
-                Vec3<float> angle(0, 0, 0);
-                                
-                starsystem->AddVehicle(satellite, center, angle, spacestation);
-    		}
-    	}        
+            Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+            satellite->BindOwnerNpc(new_npc);
+            
+            Vec3<float> center(0, 0, DEFAULT_ENTITY_ZPOS);
+            Vec3<float> angle(0, 0, 0);
+                            
+            starsystem->AddVehicle(satellite, center, angle, spacestation);
+        }
+    }        
 }
 
-void God::CreateShipsInSpace(StarSystem* starsystem, int ship_num, int npc_race_id, ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id) const
+void God::CreateShipsInSpace(StarSystem* starsystem, int ship_num, RACE::TYPE npc_race_id, ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id) const
 {
     ENTITY::TYPE npc_subtype_id = ENTITY::TYPE::NONE_ID;
     ENTITY::TYPE npc_subsubtype_id = ENTITY::TYPE::NONE_ID;
@@ -273,7 +273,7 @@ void God::CreateShipsInSpace(StarSystem* starsystem, int ship_num, int npc_race_
             npc_subsubtype_id = subsubtype_id;
         }   
 
-        int ship_race_id    = npc_race_id;         
+        RACE::TYPE ship_race_id    = npc_race_id;         
         ENTITY::TYPE ship_subtype_id = npc_subtype_id;  
         int ship_size_id = getRandInt(1, 9);
         int weapons_num = getRandInt(1, 5);

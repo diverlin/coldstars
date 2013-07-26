@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef DROIDEQUIPMENTBUILDER_H
-#define DROIDEQUIPMENTBUILDER_H
+#ifndef DROIDEQUIPMENTBUILDER_HPP
+#define DROIDEQUIPMENTBUILDER_HPP
+
+#include <common/constants.hpp>
+#include <common/RaceTypes.hpp>
 
 class DroidEquipment;
-#include "../../../common/constants.hpp"
 
 class DroidEquipmentBuilder
 {
@@ -28,15 +30,15 @@ class DroidEquipmentBuilder
 		static DroidEquipmentBuilder& Instance();
 		~DroidEquipmentBuilder();
 
-        	DroidEquipment* GetNewDroidEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-                DroidEquipment* GetNewDroidEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int repair_orig = NONE_ID) const;
+        DroidEquipment* GetNewDroidEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        DroidEquipment* GetNewDroidEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int repair_orig = NONE_ID) const;
         	 		                
-        private:
+    private:
 		DroidEquipmentBuilder() {};
 		DroidEquipmentBuilder(const DroidEquipmentBuilder&) = delete;
 		DroidEquipmentBuilder& operator=(const DroidEquipmentBuilder&) = delete;
 
-                void CreateNewInternals(DroidEquipment*, int, int, int) const;
+        void CreateNewInternals(DroidEquipment*, int, RACE::TYPE, int) const;
 }; 
 
 #endif 

@@ -17,11 +17,13 @@
 */
 
 
-#ifndef PROTECTOREQUIPMENTBUILDER_H
-#define PROTECTOREQUIPMENTBUILDER_H
+#ifndef PROTECTOREQUIPMENTBUILDER_HPP
+#define PROTECTOREQUIPMENTBUILDER_HPP
+
+#include <common/constants.hpp>
+#include <common/RaceTypes.hpp>
 
 class ProtectorEquipment;
-#include "../../../common/constants.hpp"
 
 class ProtectorEquipmentBuilder
 {
@@ -29,15 +31,15 @@ class ProtectorEquipmentBuilder
 		static ProtectorEquipmentBuilder& Instance();
 		~ProtectorEquipmentBuilder();
 
-        	ProtectorEquipment* GetNewProtectorEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-                ProtectorEquipment* GetNewProtectorEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int protection_orig = NONE_ID) const;
+        ProtectorEquipment* GetNewProtectorEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        ProtectorEquipment* GetNewProtectorEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int protection_orig = NONE_ID) const;
         	 		                
-        private:
+    private:
 		ProtectorEquipmentBuilder() {};
 		ProtectorEquipmentBuilder(const ProtectorEquipmentBuilder&) = delete;
 		ProtectorEquipmentBuilder& operator=(const ProtectorEquipmentBuilder&) = delete;
 
-                void CreateNewInternals(ProtectorEquipment*, int, int, int) const;
+        void CreateNewInternals(ProtectorEquipment*, int, RACE::TYPE, int) const;
 }; 
 
 #endif 

@@ -19,8 +19,10 @@
 #ifndef NPCBUILDER_HPP
 #define NPCBUILDER_HPP
 
-class Npc;
 #include <common/constants.hpp>
+#include <common/RaceTypes.hpp>
+
+class Npc;
 
 class NpcBuilder
 {
@@ -29,14 +31,14 @@ class NpcBuilder
         ~NpcBuilder();
         
         Npc* GetNewNpcTemplate(ENTITY::TYPE, ENTITY::TYPE, unsigned long int id = NONE_ID) const; 
-        Npc* GetNewNpc(int, ENTITY::TYPE, ENTITY::TYPE) const;
+        Npc* GetNewNpc(RACE::TYPE, ENTITY::TYPE, ENTITY::TYPE) const;
                                        
     private:            
 		NpcBuilder() {};
 		NpcBuilder(const NpcBuilder&) = delete;
 		NpcBuilder& operator=(const NpcBuilder&) = delete;
                 
-        void CreateNewInternals(Npc*, int, ENTITY::TYPE, ENTITY::TYPE) const;
+        void CreateNewInternals(Npc*, RACE::TYPE, ENTITY::TYPE, ENTITY::TYPE) const;
 }; 
 
 

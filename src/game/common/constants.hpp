@@ -738,14 +738,6 @@ namespace ARTEFACT
 	}
 }
 
-namespace RACE 
-{
-	enum TYPE
-	{
-		R0_ID=1, R1_ID, R2_ID, R3_ID, R4_ID, R6_ID, R7_ID
-	};
-};
-
 namespace NAVIGATOR_ACTION
 {
 	enum TYPE

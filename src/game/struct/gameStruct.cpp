@@ -26,7 +26,7 @@ RaceInformationCollector& RaceInformationCollector::Instance()
 	return instance;
 }
 
-bool RaceInformationCollector::IsGood(int race_id) const
+bool RaceInformationCollector::IsGood(RACE::TYPE race_id) const
 {
 	for (unsigned int i=0; i<RACES_GOOD_vec.size(); i++)
 	{

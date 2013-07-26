@@ -17,12 +17,13 @@
 */
 
 
-#ifndef OBSERVATION_H
-#define OBSERVATION_H
+#ifndef OBSERVATION_HPP
+#define OBSERVATION_HPP
 
 #include <vector>
-class Npc; 
+#include <common/RaceTypes.hpp>
 
+class Npc; 
 class Galaxy;
 class StarSystem;
 class Asteroid;
@@ -35,22 +36,25 @@ class Pair
 	public:
 		TYPE object;
 		float dist;
-		
-	Pair(TYPE object, float dist):object(object), dist(dist) {};
-	~Pair() {};
+            
+        Pair(TYPE object, float dist):object(object), dist(dist) {};
+        ~Pair() {};
 };
 
 struct VisionStatus
 {
-	VisionStatus():ASTEROID(false),
-			 CONTAINER(false),
-			 pickable_CONTAINER(false),
-			 RANGER(false),
-			 WARRIOR(false),
-			 TRADER(false),
-			 PIRAT(false),
-			 DIPLOMAT(false) {};
-	bool ASTEROID;
+	VisionStatus()
+    :
+    ASTEROID(false),
+	CONTAINER(false),
+	pickable_CONTAINER(false),
+	RANGER(false),
+	WARRIOR(false),
+	TRADER(false),
+	PIRAT(false),
+	DIPLOMAT(false) {}
+	
+    bool ASTEROID;
 	bool CONTAINER;
 	bool pickable_CONTAINER;
 
@@ -65,41 +69,41 @@ struct VisionStatus
 class Observation 
 {
    	public:
-      		Observation();
-     		~Observation();
-     		
-     		const VisionStatus& GetVisionStatus() const { return see; };
-     		
-     		void SetNpcOwner(Npc* npc_owner) { this->npc_owner = npc_owner; };
- 		void ObserveAllInSpace();
-          	
-          	void FindEchievableStarSystems(Galaxy*);
-          	Container* GetClosestPickableContainer() const;
-          	Container* GetRandomPickableContainer() const;
-          	StarSystem* GetClosestStarSystem(int) const;
-          	Vehicle* GetClosestVisibleVehicle(const std::vector<int>&) const;
-          	Vehicle* GetRandVisibleVehicle(const std::vector<int>&) const;
-          	          	          	          	                
-          	void FindVisibleAsteroidsInSpaceInStatic();
-          	void FindVisibleContainersInSpaceInStatic();
-          	void FindVisibleVehiclesInSpaceInStatic();
-
-                template <typename OBSERVED_DATA_TYPE>
-		void Sort(std::vector<OBSERVED_DATA_TYPE>&);
+        Observation();
+        ~Observation();
+        
+        const VisionStatus& GetVisionStatus() const { return see; };
+        
+        void SetNpcOwner(Npc* npc_owner) { this->npc_owner = npc_owner; };
+        void ObserveAllInSpace();
+        
+        void FindEchievableStarSystems(Galaxy*);
+        Container* GetClosestPickableContainer() const;
+        Container* GetRandomPickableContainer() const;
+        StarSystem* GetClosestStarSystem(int) const;
+        Vehicle* GetClosestVisibleVehicle(const std::vector<RACE::TYPE>&) const;
+        Vehicle* GetRandVisibleVehicle(const std::vector<RACE::TYPE>&) const;
+        
+        void FindVisibleAsteroidsInSpaceInStatic();
+        void FindVisibleContainersInSpaceInStatic();
+        void FindVisibleVehiclesInSpaceInStatic();
+        
+        template <typename OBSERVED_DATA_TYPE>
+        void Sort(std::vector<OBSERVED_DATA_TYPE>&);
                	
 	private:
-                Npc* npc_owner;	
-
-     		std::vector< Pair<StarSystem*> > visible_STARSYSTEM_pair_vec; 
-     		std::vector< Pair<Container*> > visible_CONTAINER_pair_vec;                              
-     		std::vector< Pair<Container*> > visible_pickable_CONTAINER_pair_vec; 
-     		std::vector< Pair<Asteroid*> > visible_ASTEROID_pair_vec; 		
-
-     		std::vector< Pair<Vehicle*> > visible_VEHICLE_pair_vec;                
-
-     		VisionStatus see;
-     		
-     		friend class Npc;
+        Npc* npc_owner;	
+        
+        std::vector< Pair<StarSystem*> > visible_STARSYSTEM_pair_vec; 
+        std::vector< Pair<Container*> > visible_CONTAINER_pair_vec;                              
+        std::vector< Pair<Container*> > visible_pickable_CONTAINER_pair_vec; 
+        std::vector< Pair<Asteroid*> > visible_ASTEROID_pair_vec; 		
+        
+        std::vector< Pair<Vehicle*> > visible_VEHICLE_pair_vec;                
+        
+        VisionStatus see;
+        
+    friend class Npc;
 };
 
 #endif 

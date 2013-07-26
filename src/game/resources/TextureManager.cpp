@@ -17,11 +17,16 @@
 */
 
 #include "TextureManager.hpp"
-#include "../common/constants.hpp"
-#include "../common/rand.hpp"
+
+#include <common/constants.hpp>
+#include <common/rand.hpp>
+#include <common/Logger.hpp>
+#include <common/RaceTypes.hpp>
+
 #include "../struct/gameStruct.hpp"
-#include "../common/Logger.hpp"
+
 #include "../resources/textureOb.hpp"
+
 
 TextureManager& TextureManager::Instance()
 {
@@ -50,7 +55,7 @@ void TextureManager::Add(TextureOb* texOb)
 		{  
 			switch(texOb->race_id) 
 			{
-        			case RACE::R0_ID:
+        			case RACE::TYPE::R0_ID:
         			{
         				switch(texOb->subtype_id)
         				{
@@ -65,7 +70,7 @@ void TextureManager::Add(TextureOb* texOb)
         			}
         			
 
-        			case RACE::R1_ID:
+        			case RACE::TYPE::R1_ID:
         			{
         			         switch(texOb->subtype_id)
         			         {
@@ -79,7 +84,7 @@ void TextureManager::Add(TextureOb* texOb)
         				 break;
         			}
 
-        			case RACE::R2_ID:
+        			case RACE::TYPE::R2_ID:
         			{
         			         switch(texOb->subtype_id)
         			         {
@@ -94,7 +99,7 @@ void TextureManager::Add(TextureOb* texOb)
         			}
         			
         			
-				case RACE::R3_ID:
+				case RACE::TYPE::R3_ID:
 				{
 					switch(texOb->subtype_id)
 					{
@@ -108,7 +113,7 @@ void TextureManager::Add(TextureOb* texOb)
         				break;
         			}
 
-        			case RACE::R4_ID:
+        			case RACE::TYPE::R4_ID:
         			{
         				switch(texOb->subtype_id)
         				{	
@@ -122,7 +127,7 @@ void TextureManager::Add(TextureOb* texOb)
            				break;
            			}
 			
-				case RACE::R6_ID:
+				case RACE::TYPE::R6_ID:
 				{	
 					switch(texOb->subtype_id)
 					{
@@ -136,7 +141,7 @@ void TextureManager::Add(TextureOb* texOb)
         				break;
         			}
 
-				case RACE::R7_ID:
+				case RACE::TYPE::R7_ID:
 				{	
 					switch(texOb->subtype_id)
 					{
@@ -196,14 +201,14 @@ void TextureManager::Add(TextureOb* texOb)
 		{
 			switch(texOb->race_id)
 			{
-			       	case RACE::R0_ID: { face_race0_texOb_vec.push_back(texOb); break; } 
-       				case RACE::R1_ID: { face_race1_texOb_vec.push_back(texOb); break; } 
-       				case RACE::R2_ID: { face_race2_texOb_vec.push_back(texOb); break; } 
-       				case RACE::R3_ID: { face_race3_texOb_vec.push_back(texOb); break; } 
-       				case RACE::R4_ID: { face_race4_texOb_vec.push_back(texOb); break; } 
+			       	case RACE::TYPE::R0_ID: { face_race0_texOb_vec.push_back(texOb); break; } 
+       				case RACE::TYPE::R1_ID: { face_race1_texOb_vec.push_back(texOb); break; } 
+       				case RACE::TYPE::R2_ID: { face_race2_texOb_vec.push_back(texOb); break; } 
+       				case RACE::TYPE::R3_ID: { face_race3_texOb_vec.push_back(texOb); break; } 
+       				case RACE::TYPE::R4_ID: { face_race4_texOb_vec.push_back(texOb); break; } 
 
-       				case RACE::R6_ID: { face_race6_texOb_vec.push_back(texOb); break; } 
-       				case RACE::R7_ID: { face_race7_texOb_vec.push_back(texOb); break; }   
+       				case RACE::TYPE::R6_ID: { face_race6_texOb_vec.push_back(texOb); break; } 
+       				case RACE::TYPE::R7_ID: { face_race7_texOb_vec.push_back(texOb); break; }   
 			}
 			break;
 		}
@@ -275,19 +280,19 @@ TextureOb* TextureManager::GetShipTexObBySizeFromVec(const std::vector<TextureOb
 }
 
 
-TextureOb* TextureManager::GetRandomFaceTexObWithFolloingAttributes(int race_id)
+TextureOb* TextureManager::GetRandomFaceTexObWithFolloingAttributes(RACE::TYPE race_id)
 {
 	TextureOb* requested_texOb = nullptr;
 	switch(race_id)
 	{
-		case RACE::R0_ID: { requested_texOb = GetRandomTextureObFromVec(face_race0_texOb_vec); break; }
-		case RACE::R1_ID: { requested_texOb = GetRandomTextureObFromVec(face_race1_texOb_vec); break; }
-		case RACE::R2_ID: { requested_texOb = GetRandomTextureObFromVec(face_race2_texOb_vec); break; }
- 		case RACE::R3_ID: { requested_texOb = GetRandomTextureObFromVec(face_race3_texOb_vec); break; }
-		case RACE::R4_ID: { requested_texOb = GetRandomTextureObFromVec(face_race4_texOb_vec); break; }
+		case RACE::TYPE::R0_ID: { requested_texOb = GetRandomTextureObFromVec(face_race0_texOb_vec); break; }
+		case RACE::TYPE::R1_ID: { requested_texOb = GetRandomTextureObFromVec(face_race1_texOb_vec); break; }
+		case RACE::TYPE::R2_ID: { requested_texOb = GetRandomTextureObFromVec(face_race2_texOb_vec); break; }
+ 		case RACE::TYPE::R3_ID: { requested_texOb = GetRandomTextureObFromVec(face_race3_texOb_vec); break; }
+		case RACE::TYPE::R4_ID: { requested_texOb = GetRandomTextureObFromVec(face_race4_texOb_vec); break; }
 		
-		case RACE::R6_ID: { requested_texOb = GetRandomTextureObFromVec(face_race6_texOb_vec); break; }
-		case RACE::R7_ID: { requested_texOb = GetRandomTextureObFromVec(face_race7_texOb_vec); break; }
+		case RACE::TYPE::R6_ID: { requested_texOb = GetRandomTextureObFromVec(face_race6_texOb_vec); break; }
+		case RACE::TYPE::R7_ID: { requested_texOb = GetRandomTextureObFromVec(face_race7_texOb_vec); break; }
 	}
 	
 	#if TEXTURE_MANAGER_LOG_ENABLED == 1
@@ -297,13 +302,13 @@ TextureOb* TextureManager::GetRandomFaceTexObWithFolloingAttributes(int race_id)
 	return requested_texOb;
 }
 
-TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(int race_id, ENTITY::TYPE subtype_id, int size_id)
+TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(RACE::TYPE race_id, ENTITY::TYPE subtype_id, int size_id)
 {
 	TextureOb* requested_texOb = nullptr;
 
         switch(race_id)
         {	
-        	case RACE::R0_ID:
+        	case RACE::TYPE::R0_ID:
         	{
                 	switch(subtype_id)
                 	{
@@ -317,7 +322,7 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(int race_id
 		       break;
 		}
 
-        	case RACE::R1_ID:
+        	case RACE::TYPE::R1_ID:
         	{
                 	switch(subtype_id)
                 	{	
@@ -331,7 +336,7 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(int race_id
 			break;
 		}
 		
-	        case RACE::R2_ID:
+	        case RACE::TYPE::R2_ID:
         	{
                 	switch(subtype_id)
                 	{	
@@ -346,7 +351,7 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(int race_id
         	}
       
 
-    	        case RACE::R3_ID:
+    	        case RACE::TYPE::R3_ID:
         	{
                 	switch(subtype_id)
                 	{	
@@ -361,7 +366,7 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(int race_id
         	}
 
 
-    	        case RACE::R4_ID:
+    	        case RACE::TYPE::R4_ID:
         	{
                 	switch(subtype_id)
                 	{	
@@ -376,7 +381,7 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(int race_id
         	}
 
 
-	        case RACE::R6_ID:
+	        case RACE::TYPE::R6_ID:
         	{
                 	switch(subtype_id)
                 	{	
@@ -390,7 +395,7 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(int race_id
 			break;
         	}
 
-       	        case RACE::R7_ID:
+       	        case RACE::TYPE::R7_ID:
         	{
                 	switch(subtype_id)
                 	{	

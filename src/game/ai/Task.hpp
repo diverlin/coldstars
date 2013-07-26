@@ -16,23 +16,23 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef TASK_H
-#define TASK_H
+#ifndef TASK_HPP
+#define TASK_HPP
 
 #include <boost/property_tree/ptree.hpp>
-#include "../common/constants.hpp"
-
+#include <common/constants.hpp>
+#include <common/MyInt.hpp>
 
 class Task
 {
 	public:
-		Task(int scenario_type_id = NONE_ID, int target_id = NONE_ID, int reward = 0, int expiriance = 0):
-		scenario_type_id(scenario_type_id),
-		target_id(target_id),
+		Task(int scenario_type_id = NONE_ID, INTLONGEST target_id = NONE_ID, int reward = 0, int expiriance = 0):
+		result(NONE_ID),
 		reward(reward),
 		expiriance(expiriance),
-		result(NONE_ID) 
-		{};
+		scenario_type_id(scenario_type_id),
+		target_id(target_id)
+		{}
 		
 		~Task() {};
 
@@ -55,7 +55,7 @@ class Task
 		int expiriance;
 		
 		int scenario_type_id;
-		int target_id;	
+		INTLONGEST target_id;	
 };
 
 #endif 

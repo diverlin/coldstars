@@ -17,11 +17,13 @@
 */
 
 
-#ifndef FREEZEREQUIPMENTBUILDER_H
-#define FREEZEREQUIPMENTBUILDER_H
+#ifndef FREEZEREQUIPMENTBUILDER_HPP
+#define FREEZEREQUIPMENTBUILDER_HPP
+
+#include <common/constants.hpp>
+#include <common/RaceTypes.hpp>
 
 class FreezerEquipment;
-#include "../../../common/constants.hpp"
 
 class FreezerEquipmentBuilder
 {
@@ -29,15 +31,15 @@ class FreezerEquipmentBuilder
 		static FreezerEquipmentBuilder& Instance();
 		~FreezerEquipmentBuilder();
 		
-        	FreezerEquipment* GetNewFreezerEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-                FreezerEquipment* GetNewFreezerEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int freeze_orig = NONE_ID) const;
+        FreezerEquipment* GetNewFreezerEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        FreezerEquipment* GetNewFreezerEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int freeze_orig = NONE_ID) const;
         	 		                
-        private:
+    private:
 		FreezerEquipmentBuilder() {};
 		FreezerEquipmentBuilder(const FreezerEquipmentBuilder&) = delete;
 		FreezerEquipmentBuilder& operator=(const FreezerEquipmentBuilder&) = delete;
 
-                void CreateNewInternals(FreezerEquipment*, int, int, int) const;
+        void CreateNewInternals(FreezerEquipment*, int, RACE::TYPE, int) const;
 }; 
 
 #endif 
