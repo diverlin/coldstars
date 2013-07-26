@@ -16,13 +16,14 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef LOGGER_H
-#define LOGGER_H
+#ifndef LOGGER_HPP
+#define LOGGER_HPP
 
 #include <iostream>
 #include <fstream>
 
-#include "../common/constants.hpp"
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class Logger
 {
