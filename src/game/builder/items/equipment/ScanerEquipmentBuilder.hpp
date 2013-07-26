@@ -31,14 +31,14 @@ class ScanerEquipmentBuilder
 		~ScanerEquipmentBuilder();
 
         ScanerEquipment* GetNewScanerEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-        ScanerEquipment* GetNewScanerEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int scan_orig = NONE_ID) const;
+        ScanerEquipment* GetNewScanerEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int scan_orig = NONE_ID) const;
         	 		                
     private:
 		ScanerEquipmentBuilder() {};
 		ScanerEquipmentBuilder(const ScanerEquipmentBuilder&) = delete;
 		ScanerEquipmentBuilder& operator=(const ScanerEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(ScanerEquipment*, int, RACE::TYPE, int) const;
+        void CreateNewInternals(ScanerEquipment*, int, TYPE::RACE, int) const;
 }; 
 
 #endif 

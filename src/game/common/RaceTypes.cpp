@@ -18,18 +18,18 @@
 
 #include "RaceTypes.hpp"
 
-std::string getRaceStr(RACE::TYPE race_id) 
+std::string getRaceStr(TYPE::RACE race_id) 
 {
 	switch(race_id)
 	{
-		case RACE::TYPE::R0_ID: { return "RACE0"; break; }
-		case RACE::TYPE::R1_ID:	{ return "RACE1"; break; }
-		case RACE::TYPE::R2_ID:	{ return "RACE2"; break; }
-		case RACE::TYPE::R3_ID:	{ return "RACE3"; break; }
-		case RACE::TYPE::R4_ID:	{ return "RACE4"; break; }	
+		case TYPE::RACE::R0_ID: { return "RACE0"; break; }
+		case TYPE::RACE::R1_ID:	{ return "RACE1"; break; }
+		case TYPE::RACE::R2_ID:	{ return "RACE2"; break; }
+		case TYPE::RACE::R3_ID:	{ return "RACE3"; break; }
+		case TYPE::RACE::R4_ID:	{ return "RACE4"; break; }	
 
-		case RACE::TYPE::R6_ID:	{ return "RACE6"; break; }
-		case RACE::TYPE::R7_ID:	{ return "RACE7"; break; }	
+		case TYPE::RACE::R6_ID:	{ return "RACE6"; break; }
+		case TYPE::RACE::R7_ID:	{ return "RACE7"; break; }	
 		
 		default: { return "UKNOWN ID"; break; }
 	}

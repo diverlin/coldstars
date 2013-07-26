@@ -31,14 +31,14 @@ class BakEquipmentBuilder
 		~BakEquipmentBuilder();
 
         BakEquipment* GetNewBakEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-        BakEquipment* GetNewBakEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int fuel_max_orig = NONE_ID) const;
+        BakEquipment* GetNewBakEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int fuel_max_orig = NONE_ID) const;
         	 		                
     private:                
 		BakEquipmentBuilder() {};
 		BakEquipmentBuilder(const BakEquipmentBuilder&) = delete;
 		BakEquipmentBuilder& operator=(const BakEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(BakEquipment*, int, RACE::TYPE, int) const;
+        void CreateNewInternals(BakEquipment*, int, TYPE::RACE, int) const;
 }; 
 
 

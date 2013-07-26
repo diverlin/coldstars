@@ -56,7 +56,7 @@ ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipmentTemplate(unsigned 
         return scaner_equipment;
 } 
 
-ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipment(int tech_level, RACE::TYPE race_id, int scan_orig) const
+ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipment(int tech_level, TYPE::RACE race_id, int scan_orig) const
 {
 	ScanerEquipment* scaner_equipment = GetNewScanerEquipmentTemplate();
 	CreateNewInternals(scaner_equipment, tech_level, race_id, scan_orig);
@@ -64,9 +64,9 @@ ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipment(int tech_level, R
     return scaner_equipment;
 } 
         	
-void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipment, int tech_level, RACE::TYPE race_id, int scan_orig) const
+void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipment, int tech_level, TYPE::RACE race_id, int scan_orig) const
 {     
-    if (race_id == RACE::TYPE::NONE_ID)
+    if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}

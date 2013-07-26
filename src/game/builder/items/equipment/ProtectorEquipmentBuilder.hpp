@@ -32,14 +32,14 @@ class ProtectorEquipmentBuilder
 		~ProtectorEquipmentBuilder();
 
         ProtectorEquipment* GetNewProtectorEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-        ProtectorEquipment* GetNewProtectorEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int protection_orig = NONE_ID) const;
+        ProtectorEquipment* GetNewProtectorEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int protection_orig = NONE_ID) const;
         	 		                
     private:
 		ProtectorEquipmentBuilder() {};
 		ProtectorEquipmentBuilder(const ProtectorEquipmentBuilder&) = delete;
 		ProtectorEquipmentBuilder& operator=(const ProtectorEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(ProtectorEquipment*, int, RACE::TYPE, int) const;
+        void CreateNewInternals(ProtectorEquipment*, int, TYPE::RACE, int) const;
 }; 
 
 #endif 

@@ -56,7 +56,7 @@ BakEquipment* BakEquipmentBuilder::GetNewBakEquipmentTemplate(unsigned long int 
         return bak_equipment;
 } 
        
-BakEquipment* BakEquipmentBuilder::GetNewBakEquipment(int tech_level, RACE::TYPE race_id, int fuel_max) const
+BakEquipment* BakEquipmentBuilder::GetNewBakEquipment(int tech_level, TYPE::RACE race_id, int fuel_max) const
 {
 	BakEquipment* bak_equipment = GetNewBakEquipmentTemplate();
 	CreateNewInternals(bak_equipment, tech_level, race_id, fuel_max);
@@ -64,9 +64,9 @@ BakEquipment* BakEquipmentBuilder::GetNewBakEquipment(int tech_level, RACE::TYPE
 	return bak_equipment;
 }
                       	
-void BakEquipmentBuilder::CreateNewInternals(BakEquipment* bak_equipment, int tech_level, RACE::TYPE race_id, int fuel_max_orig) const
+void BakEquipmentBuilder::CreateNewInternals(BakEquipment* bak_equipment, int tech_level, TYPE::RACE race_id, int fuel_max_orig) const
 {     
-    if (race_id == RACE::TYPE::NONE_ID)
+    if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}

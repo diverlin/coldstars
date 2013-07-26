@@ -81,8 +81,8 @@ class Observation
         Container* GetClosestPickableContainer() const;
         Container* GetRandomPickableContainer() const;
         StarSystem* GetClosestStarSystem(int) const;
-        Vehicle* GetClosestVisibleVehicle(const std::vector<RACE::TYPE>&) const;
-        Vehicle* GetRandVisibleVehicle(const std::vector<RACE::TYPE>&) const;
+        Vehicle* GetClosestVisibleVehicle(const std::vector<TYPE::RACE>&) const;
+        Vehicle* GetRandVisibleVehicle(const std::vector<TYPE::RACE>&) const;
         
         void FindVisibleAsteroidsInSpaceInStatic();
         void FindVisibleContainersInSpaceInStatic();

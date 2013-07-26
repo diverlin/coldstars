@@ -56,7 +56,7 @@ RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipmentTemplate(unsigned lon
         return radar_equipment;
 } 
   
-RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipment(int tech_level, RACE::TYPE race_id, int radius_orig) const
+RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipment(int tech_level, TYPE::RACE race_id, int radius_orig) const
 {
 	RadarEquipment* radar_equipment = GetNewRadarEquipmentTemplate();
 	CreateNewInternals(radar_equipment, tech_level, race_id, radius_orig);
@@ -64,9 +64,9 @@ RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipment(int tech_level, RACE
     return radar_equipment;
 } 
     	
-void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, int tech_level, RACE::TYPE race_id, int radius_orig) const
+void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, int tech_level, TYPE::RACE race_id, int radius_orig) const
 {     
-    if (race_id == RACE::TYPE::NONE_ID)
+    if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}

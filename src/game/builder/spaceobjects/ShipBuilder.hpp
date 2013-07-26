@@ -41,7 +41,7 @@ class ShipBuilder : public BaseVehicleBuilder
 		~ShipBuilder();
 		
 		Ship* GetNewShipTemplate(unsigned long int id = NONE_ID) const;
-        Ship* GetNewShip(RACE::TYPE, ENTITY::TYPE, int, int) const;        
+        Ship* GetNewShip(TYPE::RACE, ENTITY::TYPE, int, int) const;        
         Ship* GetNewShip() const;   
                        
     private:
@@ -49,7 +49,7 @@ class ShipBuilder : public BaseVehicleBuilder
         ShipBuilder(const ShipBuilder&) = delete; 
         ShipBuilder& operator=(const ShipBuilder&) = delete;
             
-        void CreateNewInternals(Ship*, RACE::TYPE, ENTITY::TYPE, int, int) const;  
+        void CreateNewInternals(Ship*, TYPE::RACE, ENTITY::TYPE, int, int) const;  
 }; 
 
 #endif 

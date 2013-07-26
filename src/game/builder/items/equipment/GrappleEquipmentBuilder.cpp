@@ -55,7 +55,7 @@ GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipmentTemplate(unsign
         return grapple_equipment;
 } 
         
-GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipment(int tech_level, RACE::TYPE race_id, int strength_orig, int radius_orig, int speed_orig) const
+GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipment(int tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
 {
 	GrappleEquipment* grapple_equipment = GetNewGrappleEquipmentTemplate();
 	CreateNewInternals(grapple_equipment, tech_level, race_id, strength_orig, radius_orig, speed_orig);
@@ -63,9 +63,9 @@ GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipment(int tech_level
     return grapple_equipment;
 } 
         	
-void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equipment, int tech_level, RACE::TYPE race_id, int strength_orig, int radius_orig, int speed_orig) const
+void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equipment, int tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
 {     
-    if (race_id == RACE::TYPE::NONE_ID)
+    if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}

@@ -21,15 +21,15 @@
 
 #include <string>
 
-namespace RACE
+namespace TYPE
 {
-    enum class TYPE 
+    enum class RACE 
     {
         NONE_ID=0, R0_ID, R1_ID, R2_ID, R3_ID, R4_ID, R6_ID, R7_ID
     };
 }
 
-std::string getRaceStr(RACE::TYPE); 
+std::string getRaceStr(TYPE::RACE); 
 
 #endif
 

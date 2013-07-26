@@ -56,7 +56,7 @@ LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipmentTemplate(unsigned lon
         return lazer_equipment;
 } 
       
-LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipment(int tech_level, RACE::TYPE race_id, int damage_orig, int radius_orig) const
+LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipment(int tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {
 	LazerEquipment* lazer_equipment = GetNewLazerEquipmentTemplate(); 
 	CreateNewInternals(lazer_equipment, tech_level, race_id, damage_orig, radius_orig);
@@ -64,9 +64,9 @@ LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipment(int tech_level, RACE
     return lazer_equipment;
 } 
   	
-void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, int tech_level, RACE::TYPE race_id, int damage_orig, int radius_orig) const
+void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, int tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {     
-    if (race_id == RACE::TYPE::NONE_ID)
+    if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}

@@ -46,7 +46,7 @@
 
 Npc::Npc(int id, ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id)
 :
-race_id(RACE::TYPE::NONE_ID),
+race_id(TYPE::RACE::NONE_ID),
 credits(1000),
 player(nullptr),
 vehicle(nullptr),
@@ -348,7 +348,7 @@ void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::
 void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 {
 	is_alive = load_ptree.get<bool>("is_alive");
-	race_id  = (RACE::TYPE)load_ptree.get<int>("race_id");
+	race_id  = (TYPE::RACE)load_ptree.get<int>("race_id");
 	data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
 	data_unresolved_npc.aiModel_id = load_ptree.get<int>("unresolved.aiModel_id");
 	

@@ -56,7 +56,7 @@ DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipmentTemplate(unsigned lon
         return drive_equipment;
 } 
         
-DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipment(int tech_level, RACE::TYPE race_id, int speed_orig, int hyper_orig) const
+DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipment(int tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
 {
 	DriveEquipment* drive_equipment = GetNewDriveEquipmentTemplate();
 	CreateNewInternals(drive_equipment, tech_level, race_id, speed_orig, hyper_orig);
@@ -64,9 +64,9 @@ DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipment(int tech_level, RACE
     return drive_equipment;
 }        
         	
-void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, int tech_level, RACE::TYPE race_id, int speed_orig, int hyper_orig) const
+void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, int tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
 {     
-    if (race_id == RACE::TYPE::NONE_ID)
+    if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}

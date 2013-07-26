@@ -36,7 +36,7 @@ class TextureOb
         	int type_id;
         	ENTITY::TYPE subtype_id;   //# warrior/trader and so on
         	int mod_id;       // is not used for now
-        	RACE::TYPE race_id;
+        	TYPE::RACE race_id;
         	int tech_level_id;
         	int size_id;      // counting from wxh of sprite
         
