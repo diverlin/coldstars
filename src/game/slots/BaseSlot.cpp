@@ -44,8 +44,8 @@ void BaseSlot::SaveDataUniqueBaseSlot(boost::property_tree::ptree& save_ptree, c
 	Logger::Instance().Log(" BaseSlot("+int2str(GetId())+")::SaveDataUniqueBaseSlot", SAVELOAD_LOG_DIP);
 	#endif
 	    
-        if (owner) { save_ptree.put(root+"unresolved.owner_id", owner->GetId()); }
-        else       { save_ptree.put(root+"unresolved.owner_id", NONE_ID); }
+    if (owner) { save_ptree.put(root+"unresolved.owner_id", owner->GetId()); }
+    else       { save_ptree.put(root+"unresolved.owner_id", NONE_ID); }
 	
 	save_ptree.put(root+"position.x", position.x);
 	save_ptree.put(root+"position.y", position.y);
@@ -57,7 +57,7 @@ void BaseSlot::LoadDataUniqueBaseSlot(const boost::property_tree::ptree& load_pt
 	Logger::Instance().Log(" BaseSlot("+int2str(GetId())+")::LoadDataUniqueBaseSlot", SAVELOAD_LOG_DIP);
 	#endif
 	   
-        unresolved_BaseSlot.owner_id = load_ptree.get<int>("unresolved.owner_id"); 
+    unresolved_BaseSlot.owner_id = load_ptree.get<int>("unresolved.owner_id"); 
 	position.Set(load_ptree.get<int>("position.x"), load_ptree.get<int>("position.y"));
 
 }

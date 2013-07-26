@@ -29,46 +29,46 @@ class BaseSpaceEntity;
 class DriveComplex
 {
 	public:
-      		DriveComplex();
-      		~DriveComplex();
-      		
-      		void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
-      		void SetDriveEffect(DriveEffect* drive_effect) { this->drive_effect = drive_effect; };
-      		      		
-                void SetDriveSlot(ItemSlot* drive_slot) { this->drive_slot = drive_slot; };
-                void SetBakSlot(ItemSlot* bak_slot)     { this->bak_slot = bak_slot; };
-
-      		void SetTarget(BaseSpaceEntity*, int);       
-      		void SetStaticTargetCoords(const Vec3<float>&);
+        DriveComplex();
+        ~DriveComplex();
+        
+        void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
+        void SetDriveEffect(DriveEffect* drive_effect) { this->drive_effect = drive_effect; };
+        
+        void SetDriveSlot(ItemSlot* drive_slot) { this->drive_slot = drive_slot; };
+        void SetBakSlot(ItemSlot* bak_slot)     { this->bak_slot = bak_slot; };
+        
+        void SetTarget(BaseSpaceEntity*, int);       
+        void SetStaticTargetCoords(const Vec3<float>&);
 
 		int GetActionId() const { return action_id; };
-      		DriveEffect* GetDriveEffect() const { return drive_effect; };
-      		      		                
-      		ItemSlot* GetDriveSlot() const { return drive_slot; };
-        	ItemSlot* GetBakSlot()   const { return bak_slot; };
-                  
-                BaseSpaceEntity* GetTarget() const { return target; };                
-    			        
-    		bool PathExists() const;
+        DriveEffect* GetDriveEffect() const { return drive_effect; };
+                                    
+        ItemSlot* GetDriveSlot() const { return drive_slot; };
+        ItemSlot* GetBakSlot()   const { return bak_slot; };
+              
+        BaseSpaceEntity* GetTarget() const { return target; };                
+                    
+        bool PathExists() const;
+        
+        bool CheckTargetEchievement();
+        bool GetDockingPermission();               
+    
+        void ResetTarget();
+
+        //void CalcAcceleratedPath(); // used for hyper jump effect
+        void UpdatePath();
+        void UpdatePosition();
+
+        void UpdatePathVisualisation();                
+        void DrawPath();
     		
-      		bool CheckTargetEchievement();
-      		bool GetDockingPermission();               
-       	
-        	void ResetTarget();
-
-    		//void CalcAcceleratedPath(); // used for hyper jump effect
-        	void UpdatePath();
-                void UpdatePosition();
-
-                void UpdatePathVisualisation();                
-                void DrawPath();
-    		
-      	private:
-                ItemSlot* drive_slot;
-        	ItemSlot* bak_slot;
-
-      		Vehicle* owner_vehicle;
-      		BaseSpaceEntity* target;
+    private:
+        ItemSlot* drive_slot;
+        ItemSlot* bak_slot;
+        
+        Vehicle* owner_vehicle;
+        BaseSpaceEntity* target;
 
 		DriveEffect* drive_effect; 
 
@@ -79,23 +79,23 @@ class DriveComplex
 		Vec3<float> target_offset;
 
 		//std::vector<Vec2<float>> debug_midLeft_vec;
-        	std::vector<Vec3<float>> path_center_vec;
-        	std::vector<float> angle_inD_vec;
-
-                bool has_target;
-        	bool direction_list_END;
-        	int move_it;
-   
-                PathVisual visual_center_path;
-                PathVisual visual_center_turn;
-                //PathVisual visual_debug_midLeft_path;
-
-		void ClearPath();
-   		void CalcPath();      
-   		void CalcPath2();  
-                bool ValidateTarget() const;
-	
-	        void UpdateDynamicTargetCoord();
+        std::vector<Vec3<float>> path_center_vec;
+        std::vector<float> angle_inD_vec;
+        
+        bool has_target;
+        bool direction_list_END;
+        unsigned int move_it;
+        
+        PathVisual visual_center_path;
+        PathVisual visual_center_turn;
+        //PathVisual visual_debug_midLeft_path;
+        
+        void ClearPath();
+        void CalcPath();      
+        void CalcPath2();  
+        bool ValidateTarget() const;
+        
+        void UpdateDynamicTargetCoord();
 
 		void DefineDistance();
 };

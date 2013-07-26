@@ -497,19 +497,19 @@ if (path_center_vec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<
 
 void DriveComplex::UpdatePosition()
 {
-     	if (direction_list_END == false)
-     	{
-        	if (move_it < path_center_vec.size())
-        	{
-           		owner_vehicle->SetCenter(path_center_vec[move_it]);
-           		owner_vehicle->SetAngleZ(angle_inD_vec[move_it]);
-           		move_it++;
-        	}
-        	else
-        	{
-           		direction_list_END = true;
-           	}
-     	}
+    if (direction_list_END == false)
+    {
+        if (move_it < path_center_vec.size())
+        {
+            owner_vehicle->SetCenter(path_center_vec[move_it]);
+            owner_vehicle->SetAngleZ(angle_inD_vec[move_it]);
+            move_it++;
+        }
+        else
+        {
+            direction_list_END = true;
+        }
+    }
 }
 
 void DriveComplex::UpdatePathVisualisation()

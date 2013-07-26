@@ -22,6 +22,8 @@
 #include "../../spaceobjects/SpaceStation.hpp"
 #include "../../docking/Kosmoport.hpp"
 
+#include <common/MeshTypes.hpp>
+
 SpaceStationBuilder& SpaceStationBuilder::Instance()
 {	
 	static SpaceStationBuilder instance;
@@ -66,58 +68,58 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 	TextureOb* texOb = nullptr;
 	if (getRandInt(0, 1))
 	{
-		texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
-       	}
-       	else
-       	{	
-       		mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
+        texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
+    }
+    else
+    {	
+        mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPACESTATION_ID);
 		texOb = mesh->GetTextureOb(); 
 	}
-	
-       	int protection_rate = 50;
-       	//if (subtype_id == ENTITY::WARRIOR_ID)
-        //{
-        	//protection_rate = 5;
-        //}
-        
-        VehicleKorpusData data_korpus;
-    	data_korpus.space       = 2500 + getRandInt(0, 1000);
-    	data_korpus.armor       = data_korpus.space;
-    	data_korpus.protection  = protection_rate;
-    	data_korpus.temperature = 100;
-        data_korpus.price       = 10000000;
-
-        data_korpus.slot_bak_num       = 1;
-        data_korpus.slot_drive_num     = 1;
-        data_korpus.slot_droid_num     = 1;
-        data_korpus.slot_energizer_num = 1;
-        data_korpus.slot_grapple_num   = 0;
-        data_korpus.slot_protector_num = 1;
-        data_korpus.slot_radar_num     = 1;
-        data_korpus.slot_scaner_num    = 1;
-        data_korpus.slot_freezer_num   = 0;
-	data_korpus.slot_weapon_num    = 7; 
-       	data_korpus.slot_artefact_num  = 0;  
-        data_korpus.slot_otsec_num     = 10;
-        
-        LifeData data_life;
-        data_life.armor      = data_korpus.armor;
-        data_life.dying_time = 10*texOb->size_id;
-        
-        int size_threshold = 2; 
-    	//if ( (texOb->size_id < size_threshold) or (mesh != nullptr) )
-       		//data_korpus.draw_turrels = false; 
-    	//else
-       		//data_korpus.draw_turrels = true; 
-              
-        if (texOb->size_id < size_threshold)
-       		data_korpus.draw_turrels = false; 
-    	else
-       		data_korpus.draw_turrels = true; 
-       		             
-    	spacestation->SetSubSubTypeId(TYPE::ENTITY::SPACESTATION_MILITARY_ID);
-    	spacestation->SetKorpusData(data_korpus);
-	spacestation->SetLifeData(data_life);
+    
+    int protection_rate = 50;
+    //if (subtype_id == ENTITY::WARRIOR_ID)
+    //{
+    //protection_rate = 5;
+    //}
+    
+    VehicleKorpusData data_korpus;
+    data_korpus.space       = 2500 + getRandInt(0, 1000);
+    data_korpus.armor       = data_korpus.space;
+    data_korpus.protection  = protection_rate;
+    data_korpus.temperature = 100;
+    data_korpus.price       = 10000000;
+    
+    data_korpus.slot_bak_num       = 1;
+    data_korpus.slot_drive_num     = 1;
+    data_korpus.slot_droid_num     = 1;
+    data_korpus.slot_energizer_num = 1;
+    data_korpus.slot_grapple_num   = 0;
+    data_korpus.slot_protector_num = 1;
+    data_korpus.slot_radar_num     = 1;
+    data_korpus.slot_scaner_num    = 1;
+    data_korpus.slot_freezer_num   = 0;
+    data_korpus.slot_weapon_num    = 7; 
+    data_korpus.slot_artefact_num  = 0;  
+    data_korpus.slot_otsec_num     = 10;
+    
+    LifeData data_life;
+    data_life.armor      = data_korpus.armor;
+    data_life.dying_time = 10*texOb->size_id;
+    
+    int size_threshold = 2; 
+    //if ( (texOb->size_id < size_threshold) or (mesh != nullptr) )
+    //data_korpus.draw_turrels = false; 
+    //else
+    //data_korpus.draw_turrels = true; 
+    
+    if (texOb->size_id < size_threshold)
+        data_korpus.draw_turrels = false; 
+    else
+        data_korpus.draw_turrels = true; 
+    
+    spacestation->SetSubSubTypeId(TYPE::ENTITY::SPACESTATION_MILITARY_ID);
+    spacestation->SetKorpusData(data_korpus);
+    spacestation->SetLifeData(data_life);
 
 	if (mesh != nullptr)
 	{
@@ -130,20 +132,20 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 		spacestation->SetRenderAnimation(animation_program);
 		spacestation->SetAngle(Vec3<float>(0, getRandInt(10, 45), getRandInt(10, 45)));	
 		spacestation->SetZYX(true);		
-    	}
-    	else
-    	{
-		spacestation->BindData2D(texOb);    		
-    	}
-    	
-    	spacestation->SetMass(getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));
-    	
-	CreateKorpusGeometry(spacestation);
-
-        spacestation->CreateDriveComplexTextureDependedStuff();
-        spacestation->CreateProtectionComplexTextureDependedStuff();
-                
-        CreateItemSlots(spacestation);
+    }
+    else
+    {
+        spacestation->BindData2D(texOb);    		
+    }
+    
+    spacestation->SetMass(getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));
+    
+    CreateKorpusGeometry(spacestation);
+    
+    spacestation->CreateDriveComplexTextureDependedStuff();
+    spacestation->CreateProtectionComplexTextureDependedStuff();
+    
+    CreateItemSlots(spacestation);
                 
 	spacestation->BindLand(KosmoportBuilder::Instance().GetNewKosmoport());
 }

@@ -5,8 +5,11 @@
 #include <string>
 #include <vector>
 
-#include "../math/myVector.hpp"
-#include "MyGl.hpp"
+#include <math/Vec2.hpp>
+#include <math/Vec3.hpp>
+
+#include <render/MyGl.hpp>
+#include <common/MeshTypes.hpp>
 
 class ObjLoader;
 class TextureOb;
@@ -26,17 +29,17 @@ struct MeshFaceData
 class Mesh
 { 
 	public:
-		Mesh(const std::string&, TextureOb* textureOb, int);
+		Mesh(const std::string&, TextureOb* textureOb, TYPE::MESH);
 		~Mesh();
 
-		int GetTypeId() const { return type_id; };
+		TYPE::MESH GetTypeId() const { return type_id; };
 		TextureOb* GetTextureOb() const { return textureOb; };
 		const Vec3<float>& GetBoundaryBox() const { return boundary_box; };
 						
 		void Draw() const;
 	
 	private:
-		int type_id;
+		TYPE::MESH type_id;
 		
 		TextureOb* textureOb;
 		std::vector<MeshFaceData> faces; 
@@ -45,7 +48,7 @@ class Mesh
 		GLuint glList; 
 		GLuint vbo_id;
       		
-      		void BuildFaces(const ObjLoader&);
+        void BuildFaces(const ObjLoader&);
 		void CreateGlList(); 
 		void CreateVbo(); 
 

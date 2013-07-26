@@ -31,7 +31,7 @@ void MeshCollector::RegisterMesh(Mesh* mesh)
 	mesh_vec.push_back(mesh);
 }
 
-Mesh* MeshCollector::GetMeshByTypeId(int type_id) const
+Mesh* MeshCollector::GetMeshByTypeId(TYPE::MESH type_id) const
 {
 	std::vector<Mesh*> result;
 	for (unsigned int i=0; i<mesh_vec.size(); i++)

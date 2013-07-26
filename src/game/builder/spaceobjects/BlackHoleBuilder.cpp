@@ -20,6 +20,8 @@
 #include "../CommonBuilderHeaders.hpp"
 #include "../../spaceobjects/BlackHole.hpp"
 
+#include <common/MeshTypes.hpp>
+
 BlackHoleBuilder& BlackHoleBuilder::Instance()
 {
 	static BlackHoleBuilder instance;
@@ -65,14 +67,14 @@ BlackHole* BlackHoleBuilder::GetNewBlackHole() const
        	
 void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
 {           
-	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID);
+	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPHERE_ID);
 	
-        LifeData data_life;
-        data_life.is_alive   = true;
-        data_life.garbage_ready = false;
-    	data_life.armor      = 100000;
-        data_life.life_time = getRandInt(250, 500);     
-        data_life.dying_time = 2;        
+    LifeData data_life;
+    data_life.is_alive   = true;
+    data_life.garbage_ready = false;
+    data_life.armor      = 100000;
+    data_life.life_time = getRandInt(250, 500);     
+    data_life.dying_time = 2;        
         
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BLACKHOLE_ID); 
                 

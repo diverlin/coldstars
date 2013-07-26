@@ -20,6 +20,7 @@
 #include "../CommonBuilderHeaders.hpp"
 #include "../../spaceobjects/Star.hpp"
 
+#include <common/MeshTypes.hpp>
 	
 StarBuilder& StarBuilder::Instance()
 {
@@ -40,17 +41,17 @@ Star* StarBuilder::GetNewStarTemplate(unsigned long int id) const
 	}
 
 	try 
-        { 
-        	star = new Star(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(star);
-        
-        return star;
+    { 
+        star = new Star(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(star);
+    
+    return star;
 } 
  
 Star* StarBuilder::GetNewStar() const
@@ -58,30 +59,30 @@ Star* StarBuilder::GetNewStar() const
 	Star* star = GetNewStarTemplate();
 	CreateNewInternals(star);
         
-        return star;
+    return star;
 } 
       	
 void StarBuilder::CreateNewInternals(Star* star) const
 {     
-	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID);
+	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPHERE_ID);
 	
-        LifeData data_life;
-        data_life.armor = 1000000; 
-
- 	PlanetData star_data;
-    	star_data.orbit_center.Set(0, 0, DEFAULT_ENTITY_ZPOS); 
-    	star_data.radius_A      = 50;
-    	star_data.radius_B      = 50; 
-    	star_data.orbit_phi_inD = 0;
-    	star_data.speed         = 1.8;
-
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::STAR_ID);
-
-    	star->SetPlanetData(star_data);
-	star->SetLifeData(data_life);
-	float scale_comp = getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX); 
-	Vec3<float> scale(scale_comp, scale_comp, scale_comp);
-	star->BindData3D(mesh, texOb, scale);	
+    LifeData data_life;
+    data_life.armor = 1000000; 
+    
+    PlanetData star_data;
+    star_data.orbit_center.Set(0, 0, DEFAULT_ENTITY_ZPOS); 
+    star_data.radius_A      = 50;
+    star_data.radius_B      = 50; 
+    star_data.orbit_phi_inD = 0;
+    star_data.speed         = 1.8;
+    
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::STAR_ID);
+    
+    star->SetPlanetData(star_data);
+    star->SetLifeData(data_life);
+    float scale_comp = getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX); 
+    Vec3<float> scale(scale_comp, scale_comp, scale_comp);
+    star->BindData3D(mesh, texOb, scale);	
  
 	star->CalcColor();
 }
