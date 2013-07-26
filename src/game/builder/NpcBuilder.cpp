@@ -40,7 +40,7 @@ NpcBuilder& NpcBuilder::Instance()
 NpcBuilder::~NpcBuilder()
 {}
 
-Npc* NpcBuilder::GetNewNpcTemplate(ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id, unsigned long int id) const
+Npc* NpcBuilder::GetNewNpcTemplate(TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id, unsigned long int id) const
 {
 	Npc* npc = nullptr;
 	
@@ -63,7 +63,7 @@ Npc* NpcBuilder::GetNewNpcTemplate(ENTITY::TYPE subtype_id, ENTITY::TYPE subsubt
 } 
 
 
-Npc* NpcBuilder::GetNewNpc(TYPE::RACE race_id, ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id) const
+Npc* NpcBuilder::GetNewNpc(TYPE::RACE race_id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id) const
 {
     Npc* npc = GetNewNpcTemplate(subtype_id, subsubtype_id);
     CreateNewInternals(npc, race_id, subtype_id, subsubtype_id);  
@@ -71,7 +71,7 @@ Npc* NpcBuilder::GetNewNpc(TYPE::RACE race_id, ENTITY::TYPE subtype_id, ENTITY::
     return npc;
 }
         	
-void NpcBuilder::CreateNewInternals(Npc* npc, TYPE::RACE race_id, ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id) const
+void NpcBuilder::CreateNewInternals(Npc* npc, TYPE::RACE race_id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id) const
 {    	
     //LifeData data_life;
     
@@ -89,21 +89,21 @@ void NpcBuilder::CreateNewInternals(Npc* npc, TYPE::RACE race_id, ENTITY::TYPE s
    	{
 		switch(subtype_id)
 		{
-            case ENTITY::TYPE::RANGER_ID:
+            case TYPE::ENTITY::RANGER_ID:
    			{
    				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));			
                                
                 break;    
    			}
                         
-   			case ENTITY::TYPE::WARRIOR_ID:
+   			case TYPE::ENTITY::WARRIOR_ID:
    			{
    				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));    					
                                 
                 break;    
    			}
                        
-   		   	case ENTITY::TYPE::TRADER_ID: 
+   		   	case TYPE::ENTITY::TRADER_ID: 
    		   	{
    		   		npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID)); 
    		   		

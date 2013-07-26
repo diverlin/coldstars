@@ -90,7 +90,7 @@ void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipmen
     
     scaner_equipment->SetScanOrig(scan_orig);  
     scaner_equipment->BindData2D(texOb_item);    	
-    scaner_equipment->SetParentSubTypeId(ENTITY::TYPE::SCANER_SLOT_ID);
+    scaner_equipment->SetParentSubTypeId(TYPE::ENTITY::SCANER_SLOT_ID);
     scaner_equipment->SetItemCommonData(common_data);
     scaner_equipment->SetCondition(common_data.condition_max);
                

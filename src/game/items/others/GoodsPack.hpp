@@ -25,7 +25,7 @@
 class GoodsPack : public BaseItem
 {
     public:                  
-        GoodsPack(int, ENTITY::TYPE);
+        GoodsPack(int, TYPE::ENTITY);
         virtual ~GoodsPack();
         
         void Increase(unsigned int ammount) { data_item.mass += ammount; };       
@@ -47,6 +47,6 @@ class GoodsPack : public BaseItem
  		
 };
 
-GoodsPack* GetNewGoodsPack(ENTITY::TYPE, unsigned long int id = NONE_ID);
+GoodsPack* GetNewGoodsPack(TYPE::ENTITY, unsigned long int id = NONE_ID);
 
 #endif 

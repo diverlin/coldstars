@@ -34,15 +34,15 @@ class RaceInformationCollector
 		std::vector<TYPE::RACE> RACES_GOOD_vec;
 		std::vector<TYPE::RACE> RACES_EVIL_vec;
 
-		std::vector<ENTITY::TYPE> RACE0_ALLOWED_SUBTYPE_vec;
-		std::vector<ENTITY::TYPE> RACE1_ALLOWED_SUBTYPE_vec;
-		std::vector<ENTITY::TYPE> RACE2_ALLOWED_SUBTYPE_vec;
-		std::vector<ENTITY::TYPE> RACE3_ALLOWED_SUBTYPE_vec; 
-		std::vector<ENTITY::TYPE> RACE4_ALLOWED_SUBTYPE_vec;
-		std::vector<ENTITY::TYPE> RACE6_ALLOWED_SUBTYPE_vec;
-		std::vector<ENTITY::TYPE> RACE7_ALLOWED_SUBTYPE_vec;
+		std::vector<TYPE::ENTITY> RACE0_ALLOWED_SUBTYPE_vec;
+		std::vector<TYPE::ENTITY> RACE1_ALLOWED_SUBTYPE_vec;
+		std::vector<TYPE::ENTITY> RACE2_ALLOWED_SUBTYPE_vec;
+		std::vector<TYPE::ENTITY> RACE3_ALLOWED_SUBTYPE_vec; 
+		std::vector<TYPE::ENTITY> RACE4_ALLOWED_SUBTYPE_vec;
+		std::vector<TYPE::ENTITY> RACE6_ALLOWED_SUBTYPE_vec;
+		std::vector<TYPE::ENTITY> RACE7_ALLOWED_SUBTYPE_vec;
                 
-        std::vector<ENTITY::TYPE> SUBSUBTYPE_vec;
+        std::vector<TYPE::ENTITY> SUBSUBTYPE_vec;
 		
 		bool IsGood(TYPE::RACE) const;
 	

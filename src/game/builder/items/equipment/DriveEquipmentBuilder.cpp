@@ -119,7 +119,7 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
             
     drive_equipment->SetSpeedOrig(speed_orig);  
     drive_equipment->SetHyperOrig(hyper_orig);
-    drive_equipment->SetParentSubTypeId(ENTITY::TYPE::DRIVE_SLOT_ID);
+    drive_equipment->SetParentSubTypeId(TYPE::ENTITY::DRIVE_SLOT_ID);
     drive_equipment->SetItemCommonData(common_data);
     drive_equipment->SetCondition(common_data.condition_max);
     

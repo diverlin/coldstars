@@ -60,7 +60,7 @@ class BaseItem : public BaseDrawable
         
         virtual void PutChildsToGarbage() const {};
         
-        void SetParentSubTypeId(ENTITY::TYPE parent_subtype_id) { this->parent_subtype_id = parent_subtype_id; };
+        void SetParentSubTypeId(TYPE::ENTITY parent_subtype_id) { this->parent_subtype_id = parent_subtype_id; };
         void SetItemCommonData(const ItemCommonData& data_item) { this->data_item = data_item; deterioration = data_item.deterioration_normal; };
         void SetItemSlot(ItemSlot* item_slot)  { this->item_slot = item_slot; };
         void SetCondition(int condition) { this->condition = condition; };
@@ -70,7 +70,7 @@ class BaseItem : public BaseDrawable
         unsigned int GetMass()      	const { return data_item.mass; };
         unsigned int GetCondition() 	const { return condition; };
         int GetPrice()              	const { return price; };
-        ENTITY::TYPE GetParentSubTypeId() const { return parent_subtype_id; };
+        TYPE::ENTITY GetParentSubTypeId() const { return parent_subtype_id; };
         
         bool GetDamaged()       const { return (condition < 0); };
         bool GetLocked()	const { return (locked_turns > 0); };
@@ -104,7 +104,7 @@ class BaseItem : public BaseDrawable
         
         int deterioration;
         
-        ENTITY::TYPE parent_subtype_id;
+        TYPE::ENTITY parent_subtype_id;
         
         ItemCommonData data_item;
         

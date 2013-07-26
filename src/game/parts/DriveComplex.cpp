@@ -214,7 +214,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
 {		
 	switch(target->GetTypeId())
 	{
-		case ENTITY::TYPE::STARSYSTEM_ID:
+		case TYPE::ENTITY::STARSYSTEM_ID:
 		{
 			float angleInD = 90-getAngleInD(target->GetCenter(), owner_vehicle->GetStarSystem()->GetCenter()); //??
 		    	target_pos = getVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angleInD, owner_vehicle->GetStarSystem()->GetCenter().z);
@@ -223,26 +223,26 @@ void DriveComplex::UpdateDynamicTargetCoord()
 			break;
 		}
 	
-    		case ENTITY::TYPE::PLANET_ID:
+    		case TYPE::ENTITY::PLANET_ID:
     		{ 
         		//target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;         	
         		target_pos = ((Planet*)target)->GetCenter() + target_offset; 
 		       	break;		       	
     		} 
 
-    		case ENTITY::TYPE::ASTEROID_ID:
+    		case TYPE::ENTITY::ASTEROID_ID:
     		{ 
         		target_pos = ((Asteroid*)target)->GetOrbit().GetNextTurnPosition() + target_offset;         	
         		break;
     		} 
     	     
-    		case ENTITY::TYPE::VEHICLE_ID:
+    		case TYPE::ENTITY::VEHICLE_ID:
     		{ 
 			target_pos = target->GetCenter() + target_offset;  
         		break;    
     		}
 
-    		case ENTITY::TYPE::CONTAINER_ID:
+    		case TYPE::ENTITY::CONTAINER_ID:
     		{ 
 			target_pos = target->GetCenter() + target_offset;  
         		break;    
@@ -273,12 +273,12 @@ bool DriveComplex::GetDockingPermission()
 {
 	switch(target->GetTypeId())
 	{
-		case ENTITY::TYPE::PLANET_ID:       { return ((Planet*)target)->GetLand()->GetPermissionToLand(); break; }
-		case ENTITY::TYPE::VEHICLE_ID: 
+		case TYPE::ENTITY::PLANET_ID:       { return ((Planet*)target)->GetLand()->GetPermissionToLand(); break; }
+		case TYPE::ENTITY::VEHICLE_ID: 
 		{ 
 			switch(target->GetSubTypeId())
 			{
-				case ENTITY::TYPE::SPACESTATION_ID: { return ((SpaceStation*)target)->GetLand()->GetPermissionToLand(); break; }
+				case TYPE::ENTITY::SPACESTATION_ID: { return ((SpaceStation*)target)->GetLand()->GetPermissionToLand(); break; }
 				//case SHIP_ID:   { return targetOb->GetVehicle()->getPermissionToLand(); break; }
 			}
 			break;

@@ -67,7 +67,7 @@ race_id(TYPE::RACE::R0_ID),
 conqueror_race_id(TYPE::RACE::NONE_ID)
 { 
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::STARSYSTEM_ID); 
+	SetTypeId(TYPE::ENTITY::STARSYSTEM_ID); 
     
     SetPlaceTypeId(PLACE::TYPE::SPACE_ID);
     
@@ -182,7 +182,7 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const Vec3<float>& center, const V
     
     VEHICLE_vec.push_back(vehicle);  
 
-	if (vehicle->GetSubTypeId() == ENTITY::TYPE::SATELLITE_ID)
+	if (vehicle->GetSubTypeId() == TYPE::ENTITY::SATELLITE_ID)
 	{
 		((Satellite*)vehicle)->BindParent(parent);
 	}
@@ -214,19 +214,19 @@ void StarSystem::Add(BasePlanet* object, const BaseSpaceEntity* parent, int it)
         
 	switch(object->GetTypeId())
 	{
-		case ENTITY::TYPE::STAR_ID:
+		case TYPE::ENTITY::STAR_ID:
 		{
 			STAR_vec.push_back((Star*)object);
 			break;
 		}
 		
-		case ENTITY::TYPE::PLANET_ID:
+		case TYPE::ENTITY::PLANET_ID:
 		{
 			PLANET_vec.push_back((Planet*)object);
 			break;
 		}
 		
-		case ENTITY::TYPE::ASTEROID_ID:
+		case TYPE::ENTITY::ASTEROID_ID:
 		{
 			ASTEROID_vec.push_back((Asteroid*)object);
 			break;
@@ -767,7 +767,7 @@ void StarSystem::UpdateInSpaceInStatic_s()
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 		
     { 
         VEHICLE_vec[i]->GetOwnerNpc()->UpdateInSpaceInStatic(); 
-        if (VEHICLE_vec[i]->GetSubTypeId() == ENTITY::TYPE::SPACESTATION_ID)
+        if (VEHICLE_vec[i]->GetSubTypeId() == TYPE::ENTITY::SPACESTATION_ID)
         {
             ((SpaceStation*)VEHICLE_vec[i])->GetLand()->UpdateInStatic();
         }
@@ -889,8 +889,8 @@ void StarSystem::ShipManager_s(unsigned int num)
 			prace_id = TYPE::RACE::R6_ID;
 		}
 		
-        ENTITY::TYPE psubtype_id    = ENTITY::TYPE::WARRIOR_ID;
-        ENTITY::TYPE psubsubtype_id = ENTITY::TYPE::WARRIOR_ID;
+        TYPE::ENTITY psubtype_id    = TYPE::ENTITY::WARRIOR_ID;
+        TYPE::ENTITY psubsubtype_id = TYPE::ENTITY::WARRIOR_ID;
         int size_id     = SIZE_4_ID;
         int weapons_num = 7;
     

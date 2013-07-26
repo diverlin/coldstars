@@ -28,8 +28,8 @@ speed_orig(0),
 hyper_orig(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::EQUIPMENT_ID);  
-    SetSubTypeId(ENTITY::TYPE::DRIVE_EQUIPMENT_ID);
+	SetTypeId(TYPE::ENTITY::EQUIPMENT_ID);  
+    SetSubTypeId(TYPE::ENTITY::DRIVE_EQUIPMENT_ID);
 }
 
 /* virtual */

@@ -34,7 +34,7 @@ Sector::Sector(int id)
 galaxy(nullptr)
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::SECTOR_ID);  
+	SetTypeId(TYPE::ENTITY::SECTOR_ID);  
 }
 
 Sector::~Sector()

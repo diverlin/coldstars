@@ -35,10 +35,10 @@ TYPE::RACE getRandIntFromVec(const std::vector<TYPE::RACE>& vec)
 	else 		      { return TYPE::RACE::NONE_ID; }
 }
 
-ENTITY::TYPE getRandIntFromVec(const std::vector<ENTITY::TYPE>& vec)
+TYPE::ENTITY getRandIntFromVec(const std::vector<TYPE::ENTITY>& vec)
 {
 	if (vec.size()>0)   { return vec[getRandInt(0, vec.size()-1)]; }
-	else 		        { return ENTITY::TYPE::NONE_ID; }
+	else 		        { return TYPE::ENTITY::NONE_ID; }
 }
         
         
@@ -69,10 +69,10 @@ bool getRandBool()
 		return false; 
 }
 
-ENTITY::TYPE getRandNpcSubTypeId(TYPE::RACE race_id, const std::vector<ENTITY::TYPE>& subtypes)
+TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE race_id, const std::vector<TYPE::ENTITY>& subtypes)
 {
-	std::vector<ENTITY::TYPE> allowed_subtypes;
-	const std::vector<ENTITY::TYPE>& allowed_race_subtypes =  getAllowedSubTypesByRaceId(race_id);
+	std::vector<TYPE::ENTITY> allowed_subtypes;
+	const std::vector<TYPE::ENTITY>& allowed_race_subtypes =  getAllowedSubTypesByRaceId(race_id);
 	
 	for (unsigned int i=0; i<subtypes.size(); i++)
 	{
@@ -88,13 +88,13 @@ ENTITY::TYPE getRandNpcSubTypeId(TYPE::RACE race_id, const std::vector<ENTITY::T
     return getRandIntFromVec(allowed_subtypes);  
 }
 
-ENTITY::TYPE getRandNpcSubTypeId(TYPE::RACE race_id)
+TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE race_id)
 {
-	const std::vector<ENTITY::TYPE>& allowed_race_subtypes =  getAllowedSubTypesByRaceId(race_id);
+	const std::vector<TYPE::ENTITY>& allowed_race_subtypes =  getAllowedSubTypesByRaceId(race_id);
 	return getRandIntFromVec(allowed_race_subtypes);
 }
 
-const std::vector<ENTITY::TYPE>& getAllowedSubTypesByRaceId(TYPE::RACE race_id)
+const std::vector<TYPE::ENTITY>& getAllowedSubTypesByRaceId(TYPE::RACE race_id)
 {
 	switch(race_id)
     {
@@ -108,9 +108,9 @@ const std::vector<ENTITY::TYPE>& getAllowedSubTypesByRaceId(TYPE::RACE race_id)
 	}
 }
 
-ENTITY::TYPE getRandNpcSubSubTypeId(ENTITY::TYPE subtype_id)
+TYPE::ENTITY getRandNpcSubSubTypeId(TYPE::ENTITY subtype_id)
 {
-        if (subtype_id == ENTITY::TYPE::RANGER_ID)
+        if (subtype_id == TYPE::ENTITY::RANGER_ID)
         {
                 return getRandIntFromVec(RaceInformationCollector::Instance().SUBSUBTYPE_vec);
         }
@@ -120,7 +120,7 @@ ENTITY::TYPE getRandNpcSubSubTypeId(ENTITY::TYPE subtype_id)
         }
 }
 
-ENTITY::TYPE getRand(const std::vector<ENTITY::TYPE>& types)
+TYPE::ENTITY getRand(const std::vector<TYPE::ENTITY>& types)
 {
     int rindex = getRandInt(0, types.size()-1);
     return types[rindex];

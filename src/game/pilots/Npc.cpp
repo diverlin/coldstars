@@ -44,7 +44,7 @@
 #include "../common/GameDate.hpp" 
 #include <common/RaceTypes.hpp> 
 
-Npc::Npc(int id, ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id)
+Npc::Npc(int id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id)
 :
 race_id(TYPE::RACE::NONE_ID),
 credits(1000),
@@ -56,7 +56,7 @@ ai_model(nullptr)
 	is_alive = true;
     
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::NPC_ID);
+	SetTypeId(TYPE::ENTITY::NPC_ID);
 	SetSubTypeId(subtype_id);
     SetSubSubTypeId(subsubtype_id);
         
@@ -292,7 +292,7 @@ void Npc::RenderInfo(const Vec2<float>& center)
 bool Npc::BuyGoods()
 {
 	Shop* shop = ((Kosmoport*)vehicle->GetLand())->GetShop();
-	ENTITY::TYPE subtype_id = (ENTITY::TYPE)getRandInt((int)ENTITY::TYPE::MINERALS_ID, (int)ENTITY::TYPE::EXCLUSIVE_ID);
+	TYPE::ENTITY subtype_id = (TYPE::ENTITY)getRandInt((int)TYPE::ENTITY::MINERALS_ID, (int)TYPE::ENTITY::EXCLUSIVE_ID);
 
 	// hard coded logic
 	int amount_to_hold  	= 0.8*vehicle->GetFreeSpace();
@@ -387,8 +387,8 @@ void Npc::ResolveDataUniqueNpc()
 
 void Npc::ApplySkillsStrategy()
 {           /*
-    ENTITY::TYPE class_type_id = data_id.subtype_id;
-    if (data_id.subtype_id == ENTITY::TYPE::RANGER_ID)
+    TYPE::ENTITY class_type_id = data_id.subtype_id;
+    if (data_id.subtype_id == TYPE::ENTITY::RANGER_ID)
     {
             class_type_id = data_id.subsubtype_id;
     }

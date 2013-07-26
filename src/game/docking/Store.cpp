@@ -32,7 +32,7 @@
 Store::Store(int id)
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::STORE_ID);
+	SetTypeId(TYPE::ENTITY::STORE_ID);
 }
 
 Store::~Store()

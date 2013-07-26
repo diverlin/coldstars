@@ -30,15 +30,15 @@ class NpcBuilder
         static NpcBuilder& Instance();
         ~NpcBuilder();
         
-        Npc* GetNewNpcTemplate(ENTITY::TYPE, ENTITY::TYPE, unsigned long int id = NONE_ID) const; 
-        Npc* GetNewNpc(TYPE::RACE, ENTITY::TYPE, ENTITY::TYPE) const;
+        Npc* GetNewNpcTemplate(TYPE::ENTITY, TYPE::ENTITY, unsigned long int id = NONE_ID) const; 
+        Npc* GetNewNpc(TYPE::RACE, TYPE::ENTITY, TYPE::ENTITY) const;
                                        
     private:            
 		NpcBuilder() {};
 		NpcBuilder(const NpcBuilder&) = delete;
 		NpcBuilder& operator=(const NpcBuilder&) = delete;
                 
-        void CreateNewInternals(Npc*, TYPE::RACE, ENTITY::TYPE, ENTITY::TYPE) const;
+        void CreateNewInternals(Npc*, TYPE::RACE, TYPE::ENTITY, TYPE::ENTITY) const;
 }; 
 
 

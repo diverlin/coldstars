@@ -40,7 +40,7 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
 {
     if (m_ItemSlot != nullptr)
     {
-        if (m_ItemSlot->GetSubTypeId() != ENTITY::TYPE::CARGO_SLOT_ID)
+        if (m_ItemSlot->GetSubTypeId() != TYPE::ENTITY::CARGO_SLOT_ID)
         {
             if (m_ItemSlot->GetItem() != nullptr)
             {

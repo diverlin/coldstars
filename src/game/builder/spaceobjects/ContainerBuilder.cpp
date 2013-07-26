@@ -64,7 +64,7 @@ Container* ContainerBuilder::GetNewContainer(TextureOb* textureOb, BaseItem* ite
 Container* ContainerBuilder::GetNewMineralContainer(int mineral_ammount) const
 {
 	TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MINERAL_ID);   
-        GoodsPack* goods_pack = GetNewGoodsPack(ENTITY::TYPE::MINERALS_ID);
+        GoodsPack* goods_pack = GetNewGoodsPack(TYPE::ENTITY::MINERALS_ID);
         goods_pack->Increase(mineral_ammount);
 
         Container* container = GetNewContainer(textureOb, goods_pack);
@@ -90,7 +90,7 @@ void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textu
     
     container->SetGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
     
-    container->BindItemSlot(GetNewItemSlot(ENTITY::TYPE::CARGO_SLOT_ID));
+    container->BindItemSlot(GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID));
     container->GetItemSlot()->InsertItem(item);
 }
 

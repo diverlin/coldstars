@@ -38,7 +38,7 @@ shop(nullptr),
 goverment(nullptr)    
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::KOSMOPORT_ID);
+	SetTypeId(TYPE::ENTITY::KOSMOPORT_ID);
 }
 
 /* virtual */

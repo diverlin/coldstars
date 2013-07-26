@@ -27,7 +27,7 @@ damage(0),
 radius(0)
 { 
     SetId(id);
-    SetTypeId(ENTITY::TYPE::BOMB_ID);
+    SetTypeId(TYPE::ENTITY::BOMB_ID);
 }
 
  /* virtual */

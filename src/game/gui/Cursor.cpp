@@ -46,7 +46,7 @@ BaseGuiElement(),
 focused_ob(nullptr)
 {
     m_TextureOb = nullptr;
-    item_slot = GetNewItemSlotWithoutSaveAbility(ENTITY::TYPE::CARGO_SLOT_ID);
+    item_slot = GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY::CARGO_SLOT_ID);
     
     m_Box.SetSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
     
@@ -113,19 +113,19 @@ void Cursor::RenderFocusedObjectStuff() const
 	
 		switch(focused_ob->GetTypeId())
 		{		
-			case ENTITY::TYPE::BULLET_ID:
+			case TYPE::ENTITY::BULLET_ID:
 			{
-				case ENTITY::TYPE::ROCKETBULLET_ID:
+				case TYPE::ENTITY::ROCKETBULLET_ID:
 				{			
 					break;
 				}
 			}
 			
-			case ENTITY::TYPE::VEHICLE_ID:
+			case TYPE::ENTITY::VEHICLE_ID:
 			{
 				switch(focused_ob->GetSubTypeId())
 				{
-					case ENTITY::TYPE::SATELLITE_ID:
+					case TYPE::ENTITY::SATELLITE_ID:
 					{
 						Satellite* satellite = (Satellite*)focused_ob;
 						
@@ -139,7 +139,7 @@ void Cursor::RenderFocusedObjectStuff() const
 						break;
 					}
 
-					case ENTITY::TYPE::SHIP_ID:
+					case TYPE::ENTITY::SHIP_ID:
 					{
 						Ship* ship = (Ship*)focused_ob;
 						
@@ -153,7 +153,7 @@ void Cursor::RenderFocusedObjectStuff() const
 						break;
 					}
 
-					case ENTITY::TYPE::SPACESTATION_ID:
+					case TYPE::ENTITY::SPACESTATION_ID:
 					{
 						SpaceStation* spacestation = (SpaceStation*)focused_ob;
                         
@@ -172,51 +172,51 @@ void Cursor::RenderFocusedObjectStuff() const
 				break;
 			}
 
-			case ENTITY::TYPE::CONTAINER_ID:
+			case TYPE::ENTITY::CONTAINER_ID:
 			{				
 				break;
 			}
 
-			case ENTITY::TYPE::ASTEROID_ID:
+			case TYPE::ENTITY::ASTEROID_ID:
 			{
 				((Asteroid*)focused_ob)->GetOrbit().DrawPath();
 								
 				break;
 			}
 
-			case ENTITY::TYPE::BLACKHOLE_ID:
+			case TYPE::ENTITY::BLACKHOLE_ID:
 			{			
 				break;
 			}
 									
-			case ENTITY::TYPE::PLANET_ID:
+			case TYPE::ENTITY::PLANET_ID:
 			{
 				((Planet*)focused_ob)->GetOrbit().DrawPath();
 								
 				break;
 			}
 			
-			case ENTITY::TYPE::STAR_ID:
+			case TYPE::ENTITY::STAR_ID:
 			{
 				break;
 			}		
 
-			case ENTITY::TYPE::EQUIPMENT_ID:
+			case TYPE::ENTITY::EQUIPMENT_ID:
 			{		
 				break;
 			}
 
-			case ENTITY::TYPE::MODULE_ID:
+			case TYPE::ENTITY::MODULE_ID:
 			{		
 				break;
 			}
 			
-			case ENTITY::TYPE::ARTEFACT_ID:
+			case TYPE::ENTITY::ARTEFACT_ID:
 			{				
 				break;
 			}
 			
-			case ENTITY::TYPE::BOMB_ID:
+			case TYPE::ENTITY::BOMB_ID:
 			{				
 				break;
 			}

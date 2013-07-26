@@ -29,8 +29,8 @@ speed_add(0),
 maxNumItem_add(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::MODULE_ID);
-    SetSubTypeId(ENTITY::TYPE::GRAPPLE_MODULE_ID);  
+	SetTypeId(TYPE::ENTITY::MODULE_ID);
+    SetSubTypeId(TYPE::ENTITY::GRAPPLE_MODULE_ID);  
 }
 
 /* virtual */

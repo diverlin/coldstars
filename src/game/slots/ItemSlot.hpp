@@ -67,7 +67,7 @@ struct UnresolvedDataUniqueItemSlot
 class ItemSlot : public BaseSlot
 {   
 	public:        
-		ItemSlot(int, ENTITY::TYPE);
+		ItemSlot(int, TYPE::ENTITY);
 		virtual ~ItemSlot();                
         
         virtual void PutChildsToGarbage() const;

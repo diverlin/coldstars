@@ -30,7 +30,7 @@
 BlackHole::BlackHole(int id)
 {        
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::BLACKHOLE_ID);
+	SetTypeId(TYPE::ENTITY::BLACKHOLE_ID);
 	
     SetMass(getRandInt(1000, 4000));
 }

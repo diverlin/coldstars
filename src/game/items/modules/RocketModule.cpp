@@ -28,8 +28,8 @@ damage_add(0),
 radius_add(0)
 {
 	SetId(id);
-	SetTypeId(ENTITY::TYPE::MODULE_ID);
-    SetSubTypeId(ENTITY::TYPE::ROCKET_MODULE_ID);  
+	SetTypeId(TYPE::ENTITY::MODULE_ID);
+    SetSubTypeId(TYPE::ENTITY::ROCKET_MODULE_ID);  
 }
        
 /* virtual */
