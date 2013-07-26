@@ -74,8 +74,8 @@ void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, 
         tech_level = 1; 
 	}
 
-    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::DROID_EQUIPMENT_ID);    
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::DROID_EQUIPMENT_ID, revision_id)
+    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID);    
+    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID, revision_id)
 
     repair_orig     = getRandInt(EQUIPMENT::DROID::REPAIR_MIN, EQUIPMENT::DROID::REPAIR_MAX) * (1 + EQUIPMENT::DROID::REPAIR_TECHLEVEL_RATE*tech_level);
     

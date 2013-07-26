@@ -69,7 +69,7 @@ void RocketBulletBuilder::CreateNewInternals(RocketBullet* rocket_bullet, const 
     rocket_bullet->SetBulletData(data_bullet);
     
     rocket_bullet->SetLifeData(data_life);
-    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ROCKET_BULLET_ID);
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID);
     rocket_bullet->BindData2D(texOb);
 
 	rocket_bullet->CreateDriveComplexTextureDependedStuff();       

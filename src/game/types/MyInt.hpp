@@ -21,4 +21,6 @@
 
 typedef long long int INTLONGEST;
 
+const INTLONGEST NONE_ID = 0;
+
 #endif

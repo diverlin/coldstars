@@ -21,9 +21,9 @@
 #define LAZERMODULEBUILDER_HPP
 
 #include <types/MyInt.hpp>
-#include <common/constants.hpp>
 
 class LazerModule;
+
 
 class LazerModuleBuilder
 {

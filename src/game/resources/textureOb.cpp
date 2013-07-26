@@ -20,7 +20,7 @@
 #include <iostream>
 
 #include "textureOb.hpp"
-#include "../common/constants.hpp"
+#include <types/TextureTypes.hpp>
 #include "../common/IdGenerator.hpp"
 #include "../common/common.hpp"
 #include "../render/Screen.hpp"
@@ -28,18 +28,18 @@
 TextureOb::TextureOb()
 {}
 
-TextureOb::TextureOb(int type_id, const std::string& path, bool use_alpha, std::vector<int>* args, int columns_num, int rows_num, int fps)
+TextureOb::TextureOb(TYPE::TEXTURE type_id, const std::string& path, bool use_alpha, std::vector<int>* args, int columns_num, int rows_num, int fps)
 {
 	const std::string path_normalmap = "";
 	Manage(type_id, path, path_normalmap, use_alpha, args, columns_num, rows_num, fps);
 }
 
-TextureOb::TextureOb(int type_id, const std::string& path, const std::string& path_normalmap, bool use_alpha, std::vector<int>* args, int columns_num, int rows_num, int fps)
+TextureOb::TextureOb(TYPE::TEXTURE type_id, const std::string& path, const std::string& path_normalmap, bool use_alpha, std::vector<int>* args, int columns_num, int rows_num, int fps)
 {
 	Manage(type_id, path, path_normalmap, use_alpha, args, columns_num, rows_num, fps);
 }
 
-void TextureOb::Manage(int type_id, const std::string& path, const std::string& path_normalmap, bool use_alpha, std::vector<int>* args, int columns_num, int rows_num, int fps)
+void TextureOb::Manage(TYPE::TEXTURE type_id, const std::string& path, const std::string& path_normalmap, bool use_alpha, std::vector<int>* args, int columns_num, int rows_num, int fps)
 {
     	// textureOb attributes INIT
     	race_id = TYPE::RACE::NONE_ID;
@@ -80,58 +80,58 @@ void TextureOb::Manage(int type_id, const std::string& path, const std::string& 
 
 	switch(type_id)
 	{
-    		case TEXTURE::ITEM_SLOT_ID:   { itemslotArgManager(args);   break; }
-    		case TEXTURE::VEHICLE_SLOT_ID: { vehicleslotArgManager(args);   break; }
-    		case TEXTURE::TURREL_ID: { turrelArgManager(args); break; }
+        case TYPE::TEXTURE::ITEM_SLOT_ID:   { itemslotArgManager(args);   break; }
+        case TYPE::TEXTURE::VEHICLE_SLOT_ID: { vehicleslotArgManager(args);   break; }
+        case TYPE::TEXTURE::TURREL_ID: { turrelArgManager(args); break; }
 
-    		case TEXTURE::NEBULA_BACKGROUND_ID: { nebulaArgManager(args); break; }          
-    		case TEXTURE::STAR_ID:   { starArgManager(args); break; } 
- 		case TEXTURE::PLANET_ID: { planetArgManager(args); break; }
+        case TYPE::TEXTURE::NEBULA_BACKGROUND_ID: { nebulaArgManager(args); break; }          
+        case TYPE::TEXTURE::STAR_ID:   { starArgManager(args); break; } 
+ 		case TYPE::TEXTURE::PLANET_ID: { planetArgManager(args); break; }
          
-    		case TEXTURE::ATMOSPHERE_ID: { atmosphereArgManager(args); break; }
- 
-    		case TEXTURE::NATURELAND_BACKGROUND_ID: { landBgArgManager(args); break; }
-    		
-    		// KOSMOPORT
-    		case TEXTURE::ANGAR_BACKGROUND_ID: { angarBgArgManager(args); break; }
-   		case TEXTURE::STORE_BACKGROUND_ID: { storeBgArgManager(args); break; }
-		case TEXTURE::SHOP_BACKGROUND_ID:  { shopBgArgManager(args);  break; }
-    		case TEXTURE::GOVERMENT_BACKGROUND_ID: { govermentBgArgManager(args); break; }
-    		case TEXTURE::FACE_ID:         { faceArgManager(args); break; }
- 		
-    		case TEXTURE::SPACESTATION_ID:   { spacestationArgManager(args); break; }    	
-    		case TEXTURE::SATELLITE_ID:  { satelliteArgManager(args); break; }
-		case TEXTURE::SHIP_ID:     { shipArgManager(args); break; }
-          	case TEXTURE::PARTICLE_EFFECT_ID: { particleArgManager(args); break; }
+        case TYPE::TEXTURE::ATMOSPHERE_ID: { atmosphereArgManager(args); break; }
 
-		case TEXTURE::DISTANTSTAR_ID:   { distStarArgManager(args); break; }
-    		case TEXTURE::SHIELD_EFFECT_ID: { shieldEffectArgManager(args); break; }
-
-    		// ITEMS
-    		case TEXTURE::DRIVE_EQUIPMENT_ID:  { DriveEquipmentArgManager(args); break; }
-		case TEXTURE::LAZER_EQUIPMENT_ID:  { LazerEquipmentArgManager(args); break; }
-    		case TEXTURE::ROCKET_EQUIPMENT_ID: { RocketEquipmentArgManager(args); break; }
-		case TEXTURE::PROTECTOR_EQUIPMENT_ID: { ProtectorEquipmentArgManager(args); break; }
-   		case TEXTURE::DROID_EQUIPMENT_ID:  { DroidEquipmentArgManager(args); break; }
-		case TEXTURE::GRAPPLE_EQUIPMENT_ID: { GrappleEquipmentArgManager(args); break; }
-		case TEXTURE::BAK_EQUIPMENT_ID:     { BakEquipmentArgManager(args); break; }
-		case TEXTURE::ENERGIZER_EQUIPMENT_ID: { energyBlockItemArgManager(args); break; }
-     		case TEXTURE::FREEZER_EQUIPMENT_ID: { FreezerEquipmentArgManager(args);  break; }
-    		case TEXTURE::RADAR_EQUIPMENT_ID:   { RadarEquipmentArgManager(args); break; }
-		case TEXTURE::SCANER_EQUIPMENT_ID:  { ScanerEquipmentArgManager(args); break; }
-		
-		// BULLETS
-    		case TEXTURE::ROCKET_BULLET_ID: { rocketBulletArgManager(args); break; }
-    		case TEXTURE::LAZER_EFFECT_ID:  { lazerEffectArgManager(args); break; }
-
-		// ASTEROIDS/MINERALS
-    		case TEXTURE::ASTEROID_ID: { asteroidArgManager(args); break; }
-		case TEXTURE::MINERAL_ID:  { mineralArgManager(args); break; }
-    		case TEXTURE::CONTAINER_ID: { containerArgManager(args); break; }
-		case TEXTURE::BOMB_ID: { bombArgManager(args); break; }
-		case TEXTURE::BLACKHOLE_ID: { blackholeArgManager(args); break; }
-
-		case TEXTURE::NOTYPE_ID: { break; }
+        case TYPE::TEXTURE::NATURELAND_BACKGROUND_ID: { landBgArgManager(args); break; }
+        
+        // KOSMOPORT
+        case TYPE::TEXTURE::ANGAR_BACKGROUND_ID: { angarBgArgManager(args); break; }
+   		case TYPE::TEXTURE::STORE_BACKGROUND_ID: { storeBgArgManager(args); break; }
+		case TYPE::TEXTURE::SHOP_BACKGROUND_ID:  { shopBgArgManager(args);  break; }
+        case TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID: { govermentBgArgManager(args); break; }
+        case TYPE::TEXTURE::FACE_ID:         { faceArgManager(args); break; }
+    
+        case TYPE::TEXTURE::SPACESTATION_ID:   { spacestationArgManager(args); break; }    	
+        case TYPE::TEXTURE::SATELLITE_ID:  { satelliteArgManager(args); break; }
+        case TYPE::TEXTURE::SHIP_ID:     { shipArgManager(args); break; }
+        case TYPE::TEXTURE::PARTICLE_EFFECT_ID: { particleArgManager(args); break; }
+        
+        case TYPE::TEXTURE::DISTANTSTAR_ID:   { distStarArgManager(args); break; }
+        case TYPE::TEXTURE::SHIELD_EFFECT_ID: { shieldEffectArgManager(args); break; }
+        
+        // ITEMS
+        case TYPE::TEXTURE::DRIVE_EQUIPMENT_ID:  { DriveEquipmentArgManager(args); break; }
+        case TYPE::TEXTURE::LAZER_EQUIPMENT_ID:  { LazerEquipmentArgManager(args); break; }
+        case TYPE::TEXTURE::ROCKET_EQUIPMENT_ID: { RocketEquipmentArgManager(args); break; }
+		case TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID: { ProtectorEquipmentArgManager(args); break; }
+   		case TYPE::TEXTURE::DROID_EQUIPMENT_ID:  { DroidEquipmentArgManager(args); break; }
+		case TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID: { GrappleEquipmentArgManager(args); break; }
+		case TYPE::TEXTURE::BAK_EQUIPMENT_ID:     { BakEquipmentArgManager(args); break; }
+		case TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID: { energyBlockItemArgManager(args); break; }
+        case TYPE::TEXTURE::FREEZER_EQUIPMENT_ID: { FreezerEquipmentArgManager(args);  break; }
+        case TYPE::TEXTURE::RADAR_EQUIPMENT_ID:   { RadarEquipmentArgManager(args); break; }
+        case TYPE::TEXTURE::SCANER_EQUIPMENT_ID:  { ScanerEquipmentArgManager(args); break; }
+        
+        // BULLETS
+        case TYPE::TEXTURE::ROCKET_BULLET_ID: { rocketBulletArgManager(args); break; }
+        case TYPE::TEXTURE::LAZER_EFFECT_ID:  { lazerEffectArgManager(args); break; }
+        
+        // ASTEROIDS/MINERALS
+        case TYPE::TEXTURE::ASTEROID_ID: { asteroidArgManager(args); break; }
+        case TYPE::TEXTURE::MINERAL_ID:  { mineralArgManager(args); break; }
+        case TYPE::TEXTURE::CONTAINER_ID: { containerArgManager(args); break; }
+        case TYPE::TEXTURE::BOMB_ID: { bombArgManager(args); break; }
+        case TYPE::TEXTURE::BLACKHOLE_ID: { blackholeArgManager(args); break; }
+        
+        case TYPE::TEXTURE::NONE_ID: { break; }
 		
 	}
 }  

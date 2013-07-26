@@ -21,9 +21,9 @@
 #define DROIDMODULEBUILDER_HPP
 
 #include <types/MyInt.hpp>
-#include <common/constants.hpp>
 
 class DroidModule;
+
 
 class DroidModuleBuilder
 {

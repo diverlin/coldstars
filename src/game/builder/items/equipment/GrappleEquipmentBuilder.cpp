@@ -75,8 +75,8 @@ void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equip
         tech_level = 1; 
 	}
 
-    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::GRAPPLE_EQUIPMENT_ID);   
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::GRAPPLE_EQUIPMENT_ID, revision_id) 
+    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID);   
+    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID, revision_id) 
 
     strength_orig   = getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN, EQUIPMENT::GRAPPLE::STRENGTH_MAX) * (1 + EQUIPMENT::GRAPPLE::STRENGTH_TECHLEVEL_RATE*tech_level);
     radius_orig     = getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN,   EQUIPMENT::GRAPPLE::RADIUS_MAX)   * (1 + EQUIPMENT::GRAPPLE::RADIUS_TECHLEVEL_RATE*tech_level);

@@ -44,13 +44,13 @@ ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
     
     EntityManager::Instance().RegisterEntity(item_slot);
     
-    TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEM_SLOT_ID);
+    TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ITEM_SLOT_ID);
     item_slot->SetTextureOb(texOb_slot);
     
     if (subtype_id == TYPE::ENTITY::WEAPON_SLOT_ID)
     {
         Turrel* turrel = nullptr;
-        TextureOb* texOb_turrel = TextureManager::Instance().GetRandomTextureOb(TEXTURE::TURREL_ID); 
+        TextureOb* texOb_turrel = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::TURREL_ID); 
         try 
         { 
                 turrel = new Turrel(item_slot); 
@@ -79,7 +79,7 @@ ItemSlot* GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY subtype_id)
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation");
     }
     
-    TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ITEM_SLOT_ID);
+    TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ITEM_SLOT_ID);
     item_slot->SetTextureOb(texOb_slot);
     
     return item_slot;

@@ -76,7 +76,7 @@ NatureLand* NatureLandBuilder::GetNewNatureLand() const
        	
 void NatureLandBuilder::CreateNewInternals(NatureLand* natureland) const
 {
-	natureland->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::NATURELAND_BACKGROUND_ID));
+	natureland->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::NATURELAND_BACKGROUND_ID));
 	
 	unsigned int item_slot_num = getRandInt(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
 	for (unsigned int i=0; i<item_slot_num; i++)

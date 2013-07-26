@@ -65,7 +65,7 @@ Bomb* BombBuilder::GetNewBomb(int damage, int radius) const
         	
 void BombBuilder::CreateNewInternals(Bomb* bomb, int damage, int radius) const
 {     
-	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BOMB_ID); 
+	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::BOMB_ID); 
 	damage = 300;
     radius = 300;
         

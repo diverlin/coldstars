@@ -66,10 +66,10 @@ Goverment* GovermentBuilder::GetNewGoverment() const
     	
 void GovermentBuilder::CreateNewInternals(Goverment* goverment) const
 {
-	TextureOb* textureOb_face  = TextureManager::Instance().GetRandomTextureOb(TEXTURE::GOVERMENT_BACKGROUND_ID); 
+	TextureOb* textureOb_face  = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID); 
 	goverment->SetTextureObFace(textureOb_face);
 		        
-	TextureOb* textureOb_background  = TextureManager::Instance().GetRandomTextureOb(TEXTURE::GOVERMENT_BACKGROUND_ID); 
+	TextureOb* textureOb_background  = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID); 
 	goverment->SetTextureObBackground(textureOb_background);
 
 }

@@ -16,13 +16,15 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef ROCKETEQUIPMENTBUILDER_HPP
 #define ROCKETEQUIPMENTBUILDER_HPP
 
-#include <common/constants.hpp>
+#include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
 
 class RocketEquipment;
+
 
 class RocketEquipmentBuilder
 {

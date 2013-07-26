@@ -66,7 +66,7 @@ BakModule* BakModuleBuilder::GetNewBakModule(int fuel_max_add) const
          	
 void BakModuleBuilder::CreateNewInternals(BakModule* bak_module, int fuel_max_add) const
 {     
-    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);   
     fuel_max_add = getRandInt(MODULE::BAK::FUEL_MIN, MODULE::BAK::FUEL_MAX);
 
     bak_module->SetParentSubTypeId(TYPE::ENTITY::BAK_EQUIPMENT_ID);    

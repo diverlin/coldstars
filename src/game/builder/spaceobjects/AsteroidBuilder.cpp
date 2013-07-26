@@ -83,7 +83,7 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
 
 	float scale_comp = getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);
 	Vec3<float> scale(scale_comp, scale_comp, scale_comp);
-	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ASTEROID_ID); 
+	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ASTEROID_ID); 
 	      
 	asteroid->BindData3D(mesh, texOb, scale);        
     asteroid->SetAngle(Vec3<float>(getRandInt(10, 40), getRandInt(10, 40), 0));	        

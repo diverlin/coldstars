@@ -22,9 +22,9 @@
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
-#include <common/constants.hpp>
 
 class GrappleEquipment;
+
 
 class GrappleEquipmentBuilder
 {
