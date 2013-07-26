@@ -22,7 +22,7 @@
 
 #include <common/constants.hpp>
 #include <common/myStr.hpp>
-#include <common/AiScenarioTypes.hpp>
+#include <types/AiScenarioTypes.hpp>
 
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../pilots/Player.hpp"

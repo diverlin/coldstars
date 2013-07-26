@@ -22,7 +22,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <common/constants.hpp>
 #include <types/MyInt.hpp>
-#include <common/AiScenarioTypes.hpp>
+#include <types/AiScenarioTypes.hpp>
 
 class Task
 {
