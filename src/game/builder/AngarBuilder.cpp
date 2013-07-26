@@ -28,6 +28,9 @@
 #include "../builder/VehicleSlotBuilder.hpp"
 #include "../builder/ItemSlotBuilder.hpp"
 
+#include <common/constants.hpp>
+
+
 AngarBuilder& AngarBuilder::Instance()
 {
 	static AngarBuilder instance;

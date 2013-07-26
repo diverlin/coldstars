@@ -16,14 +16,15 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SATELLITEBUILDER_H
-#define SATELLITEBUILDER_H
+
+#ifndef SATELLITEBUILDER_HPP
+#define SATELLITEBUILDER_HPP
 
 #include <builder/spaceobjects/BaseVehicleBuilder.hpp>
 #include <types/MyInt.hpp>
-#include <common/constants.hpp>
 
 class Satellite;
+
 
 class SatelliteBuilder : public BaseVehicleBuilder
 {

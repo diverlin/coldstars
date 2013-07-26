@@ -16,14 +16,16 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef NPCBUILDER_HPP
 #define NPCBUILDER_HPP
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
-#include <common/constants.hpp>
+#include <types/EntityTypes.hpp>
 
 class Npc;
+
 
 class NpcBuilder
 {

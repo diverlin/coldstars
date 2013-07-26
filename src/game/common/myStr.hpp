@@ -16,17 +16,15 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef MYSTR_HPP
 #define MYSTR_HPP
 
 #include <string>
-class Base;
-#include <common/constants.hpp>
 
 std::string int2str(long long int); 
 std::string bool2str(bool); 
-
-
+                              
 std::string getAiModelStr(int);
 std::string getNavigatorActionStr(int); 
 

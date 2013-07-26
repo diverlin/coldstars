@@ -24,6 +24,7 @@
 #include "../resources/TextureManager.hpp"
 #include "../parts/Turrel.hpp"
 #include "../resources/textureOb.hpp"
+#include <slots/ItemSlot.hpp>
 
 ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
 {

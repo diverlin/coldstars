@@ -20,7 +20,7 @@
 #define TASK_HPP
 
 #include <boost/property_tree/ptree.hpp>
-#include <common/constants.hpp>
+
 #include <types/MyInt.hpp>
 #include <types/AiScenarioTypes.hpp>
 

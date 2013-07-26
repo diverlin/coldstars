@@ -21,9 +21,11 @@
 #define VEHICLESLOT_HPP
 
 #include <boost/property_tree/ptree.hpp>
-
 #include "../slots/BaseSlot.hpp"
+
 class Vehicle;
+class Rect; // to be removed
+
 
 class VehicleSlot : public BaseSlot
 {

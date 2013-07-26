@@ -19,15 +19,15 @@
 #ifndef SHIPBUILDER_HPP
 #define SHIPBUILDER_HPP
 
+
 #include <builder/spaceobjects/BaseVehicleBuilder.hpp>
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
-
-#include <common/constants.hpp>
-
+#include <types/EntityTypes.hpp>
 
 class Ship;
+
 
 namespace ENTITY
 {

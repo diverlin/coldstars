@@ -21,11 +21,11 @@
 #define CONTAINERBUILDER_HPP
 
 #include <types/MyInt.hpp>
-#include <common/constants.hpp>
 
 class Container;
 class TextureOb;
 class BaseItem;
+
 
 class ContainerBuilder
 {

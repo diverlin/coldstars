@@ -21,12 +21,11 @@
 #define BASESLOT_HPP
 
 #include <common/Base.hpp>
-#include <common/constants.hpp>
 #include <types/MyInt.hpp>
+#include <math/Vec2.hpp>
 
 class Vehicle;
 class TextureOb;
-class Rect;  
 
 
 struct UnresolvedDataUniqueBaseSlot

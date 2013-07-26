@@ -40,6 +40,9 @@
 
 #include "../render/Render.hpp"
 
+#include <slots/ItemSlot.hpp>
+
+
 Cursor::Cursor()
 : 
 BaseGuiElement(),
