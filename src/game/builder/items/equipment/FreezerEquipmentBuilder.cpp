@@ -55,7 +55,7 @@ FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipmentTemplate(unsign
         return freezer_equipment;
 } 
     
-FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipment(int tech_level, RACE::TYPE race_id, int freeze_orig) const
+FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipment(int tech_level, TYPE::RACE race_id, int freeze_orig) const
 {
 	FreezerEquipment* freezer_equipment = GetNewFreezerEquipmentTemplate();
     CreateNewInternals(freezer_equipment, tech_level, race_id, freeze_orig);
@@ -63,9 +63,9 @@ FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipment(int tech_level
     return freezer_equipment;
 } 
     	
-void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equipment, int tech_level, RACE::TYPE race_id, int freeze_orig) const
+void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equipment, int tech_level, TYPE::RACE race_id, int freeze_orig) const
 {     
-    if (race_id == RACE::TYPE::NONE_ID)
+    if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}

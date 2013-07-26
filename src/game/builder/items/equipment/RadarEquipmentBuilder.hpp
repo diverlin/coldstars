@@ -31,14 +31,14 @@ class RadarEquipmentBuilder
 		~RadarEquipmentBuilder();
 
         RadarEquipment* GetNewRadarEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-        RadarEquipment* GetNewRadarEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int radius_orig = NONE_ID) const;
+        RadarEquipment* GetNewRadarEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
     private:
 		RadarEquipmentBuilder() {};
 		RadarEquipmentBuilder(const RadarEquipmentBuilder&) = delete;
 		RadarEquipmentBuilder& operator=(const RadarEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(RadarEquipment*, int, RACE::TYPE, int) const;
+        void CreateNewInternals(RadarEquipment*, int, TYPE::RACE, int) const;
 }; 
 
 #endif 

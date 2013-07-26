@@ -69,7 +69,7 @@ Player* PlayerBuilder::GetNewPlayer() const
 
 void PlayerBuilder::CreateNewInternals(Player* player) const
 {    
-    RACE::TYPE prace_id       = RACE::TYPE::R0_ID;
+    TYPE::RACE prace_id       = TYPE::RACE::R0_ID;
     ENTITY::TYPE psubtype_id    = ENTITY::TYPE::RANGER_ID;
     ENTITY::TYPE psubsubtype_id = ENTITY::TYPE::WARRIOR_ID;
     int size_id        = SIZE_4_ID;

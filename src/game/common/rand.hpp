@@ -26,17 +26,17 @@
 
 int getRandIntFromVec(const std::vector<int>&);
 ENTITY::TYPE getRandIntFromVec(const std::vector<ENTITY::TYPE>&);
-RACE::TYPE getRandIntFromVec(const std::vector<RACE::TYPE>&);
+TYPE::RACE getRandIntFromVec(const std::vector<TYPE::RACE>&);
 
 float getRandFloat(float, float);
 int getRandInt(int, int);
 int getRandSign();
 bool getRandBool();
 
-ENTITY::TYPE getRandNpcSubTypeId(RACE::TYPE, const std::vector<ENTITY::TYPE>&);
-const std::vector<ENTITY::TYPE>& getAllowedSubTypesByRaceId(RACE::TYPE);
+ENTITY::TYPE getRandNpcSubTypeId(TYPE::RACE, const std::vector<ENTITY::TYPE>&);
+const std::vector<ENTITY::TYPE>& getAllowedSubTypesByRaceId(TYPE::RACE);
 
-ENTITY::TYPE getRandNpcSubTypeId(RACE::TYPE);
+ENTITY::TYPE getRandNpcSubTypeId(TYPE::RACE);
 ENTITY::TYPE getRandNpcSubSubTypeId(ENTITY::TYPE);
 
 ENTITY::TYPE getRand(const std::vector<ENTITY::TYPE>&);

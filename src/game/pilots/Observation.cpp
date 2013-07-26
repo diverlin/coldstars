@@ -76,7 +76,7 @@ StarSystem* Observation::GetClosestStarSystem(int requested_consdition_id) const
 }    	
 
 
-Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<RACE::TYPE>& rVec_race_id) const
+Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<TYPE::RACE>& rVec_race_id) const
 {
     for (unsigned int i=0; i<rVec_race_id.size(); i++)
     {
@@ -92,7 +92,7 @@ Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<RACE::TYPE>& rV
 	return nullptr;	
 }
 
-Vehicle* Observation::GetRandVisibleVehicle(const std::vector<RACE::TYPE>& rVec_race_id) const
+Vehicle* Observation::GetRandVisibleVehicle(const std::vector<TYPE::RACE>& rVec_race_id) const
 {
 	std::vector<Vehicle*> tmp_vehicle;
     for (unsigned int i=0; i<rVec_race_id.size(); i++)

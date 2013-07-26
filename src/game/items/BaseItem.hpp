@@ -96,7 +96,7 @@ class BaseItem : public BaseDrawable
         void RenderInfo(const Vec2<float>&); 
 
 	protected:
-        RACE::TYPE race_id;
+        TYPE::RACE race_id;
         
         int locked_turns;
         int condition;

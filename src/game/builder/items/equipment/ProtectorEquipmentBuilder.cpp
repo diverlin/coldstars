@@ -56,7 +56,7 @@ ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipmentTemplate(
         return protector_equipment;
 } 
    
-ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipment(int tech_level, RACE::TYPE race_id, int protection_orig) const
+ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipment(int tech_level, TYPE::RACE race_id, int protection_orig) const
 {
 	ProtectorEquipment* protector_equipment = GetNewProtectorEquipmentTemplate();
 	CreateNewInternals(protector_equipment, tech_level, race_id, protection_orig);
@@ -64,9 +64,9 @@ ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipment(int tech
     return protector_equipment;
 } 
      	
-void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector_equipment, int tech_level, RACE::TYPE race_id, int protection_orig) const
+void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector_equipment, int tech_level, TYPE::RACE race_id, int protection_orig) const
 {     
-    if (race_id == RACE::TYPE::NONE_ID)
+    if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}

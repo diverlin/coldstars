@@ -54,7 +54,7 @@ DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipmentTemplate(unsigned lon
         return droid_equipment;
 } 
 
-DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipment(int tech_level, RACE::TYPE race_id, int repair_orig) const
+DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipment(int tech_level, TYPE::RACE race_id, int repair_orig) const
 {
 	DroidEquipment* droid_equipment = GetNewDroidEquipmentTemplate();
 	CreateNewInternals(droid_equipment, tech_level, race_id, repair_orig);
@@ -62,9 +62,9 @@ DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipment(int tech_level, RACE
     return droid_equipment;
 }  
         	
-void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, int tech_level, RACE::TYPE race_id, int repair_orig) const
+void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, int tech_level, TYPE::RACE race_id, int repair_orig) const
 {     
-    if (race_id == RACE::TYPE::NONE_ID)
+    if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}

@@ -56,7 +56,7 @@ RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipmentTemplate(unsigned 
         return rocket_equipment;
 } 
 
-RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipment(int tech_level, RACE::TYPE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipment(int tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {
 	RocketEquipment* rocket_equipment = GetNewRocketEquipmentTemplate();
 	CreateNewInternals(rocket_equipment, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
@@ -64,9 +64,9 @@ RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipment(int tech_level, R
     return rocket_equipment;
 } 
         	
-void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipment, int tech_level, RACE::TYPE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipment, int tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {     
-    if (race_id == RACE::TYPE::NONE_ID)
+    if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}

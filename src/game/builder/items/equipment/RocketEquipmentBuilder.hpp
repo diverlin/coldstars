@@ -31,14 +31,14 @@ class RocketEquipmentBuilder
 		~RocketEquipmentBuilder();
 
         RocketEquipment* GetNewRocketEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-        RocketEquipment* GetNewRocketEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
+        RocketEquipment* GetNewRocketEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
     private:
 		RocketEquipmentBuilder() {};
 		RocketEquipmentBuilder(const RocketEquipmentBuilder&) = delete;
 		RocketEquipmentBuilder& operator=(const RocketEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(RocketEquipment*, int, RACE::TYPE, int, int, int) const;
+        void CreateNewInternals(RocketEquipment*, int, TYPE::RACE, int, int, int) const;
 }; 
 
 #endif 

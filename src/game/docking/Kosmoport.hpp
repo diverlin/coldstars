@@ -57,7 +57,7 @@ class Kosmoport : public BaseLand
 		void ResolveData();
 		
     private:
-        RACE::TYPE race_id;
+        TYPE::RACE race_id;
         
         Angar*     angar;
         Store*     store;

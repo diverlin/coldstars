@@ -31,14 +31,14 @@ class NpcBuilder
         ~NpcBuilder();
         
         Npc* GetNewNpcTemplate(ENTITY::TYPE, ENTITY::TYPE, unsigned long int id = NONE_ID) const; 
-        Npc* GetNewNpc(RACE::TYPE, ENTITY::TYPE, ENTITY::TYPE) const;
+        Npc* GetNewNpc(TYPE::RACE, ENTITY::TYPE, ENTITY::TYPE) const;
                                        
     private:            
 		NpcBuilder() {};
 		NpcBuilder(const NpcBuilder&) = delete;
 		NpcBuilder& operator=(const NpcBuilder&) = delete;
                 
-        void CreateNewInternals(Npc*, RACE::TYPE, ENTITY::TYPE, ENTITY::TYPE) const;
+        void CreateNewInternals(Npc*, TYPE::RACE, ENTITY::TYPE, ENTITY::TYPE) const;
 }; 
 
 

@@ -30,9 +30,9 @@ class RaceInformationCollector
 		static RaceInformationCollector& Instance();
 		~RaceInformationCollector() {};
 		
-		std::vector<RACE::TYPE> RACES_ALL_vec;
-		std::vector<RACE::TYPE> RACES_GOOD_vec;
-		std::vector<RACE::TYPE> RACES_EVIL_vec;
+		std::vector<TYPE::RACE> RACES_ALL_vec;
+		std::vector<TYPE::RACE> RACES_GOOD_vec;
+		std::vector<TYPE::RACE> RACES_EVIL_vec;
 
 		std::vector<ENTITY::TYPE> RACE0_ALLOWED_SUBTYPE_vec;
 		std::vector<ENTITY::TYPE> RACE1_ALLOWED_SUBTYPE_vec;
@@ -44,7 +44,7 @@ class RaceInformationCollector
                 
         std::vector<ENTITY::TYPE> SUBSUBTYPE_vec;
 		
-		bool IsGood(RACE::TYPE) const;
+		bool IsGood(TYPE::RACE) const;
 	
 	private:
 		RaceInformationCollector() {};

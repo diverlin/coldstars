@@ -31,14 +31,14 @@ class EnergizerEquipmentBuilder
 		~EnergizerEquipmentBuilder();
 
         EnergizerEquipment* GetNewEnergizerEquipmentTemplate(unsigned long int id = NONE_ID)const; 
-        EnergizerEquipment* GetNewEnergizerEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int energy_max_orig = NONE_ID, int restoration_orig = NONE_ID) const;
+        EnergizerEquipment* GetNewEnergizerEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int energy_max_orig = NONE_ID, int restoration_orig = NONE_ID) const;
         	 		                
     private:
 		EnergizerEquipmentBuilder() {};
 		EnergizerEquipmentBuilder(const EnergizerEquipmentBuilder&) = delete;
 		EnergizerEquipmentBuilder& operator=(const EnergizerEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(EnergizerEquipment*, int, RACE::TYPE, int, int) const;
+        void CreateNewInternals(EnergizerEquipment*, int, TYPE::RACE, int, int) const;
 }; 
 
 #endif 

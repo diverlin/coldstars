@@ -63,7 +63,7 @@ Npc* NpcBuilder::GetNewNpcTemplate(ENTITY::TYPE subtype_id, ENTITY::TYPE subsubt
 } 
 
 
-Npc* NpcBuilder::GetNewNpc(RACE::TYPE race_id, ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id) const
+Npc* NpcBuilder::GetNewNpc(TYPE::RACE race_id, ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id) const
 {
     Npc* npc = GetNewNpcTemplate(subtype_id, subsubtype_id);
     CreateNewInternals(npc, race_id, subtype_id, subsubtype_id);  
@@ -71,7 +71,7 @@ Npc* NpcBuilder::GetNewNpc(RACE::TYPE race_id, ENTITY::TYPE subtype_id, ENTITY::
     return npc;
 }
         	
-void NpcBuilder::CreateNewInternals(Npc* npc, RACE::TYPE race_id, ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id) const
+void NpcBuilder::CreateNewInternals(Npc* npc, TYPE::RACE race_id, ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id) const
 {    	
     //LifeData data_life;
     
@@ -85,7 +85,7 @@ void NpcBuilder::CreateNewInternals(Npc* npc, RACE::TYPE race_id, ENTITY::TYPE s
     
     npc->ApplySkillsStrategy();
         
-   	if ((race_id != RACE::TYPE::R6_ID) and (race_id != RACE::TYPE::R7_ID))
+   	if ((race_id != TYPE::RACE::R6_ID) and (race_id != TYPE::RACE::R7_ID))
    	{
 		switch(subtype_id)
 		{

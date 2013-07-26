@@ -31,14 +31,14 @@ class DriveEquipmentBuilder
 		~DriveEquipmentBuilder();
 
         DriveEquipment* GetNewDriveEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-        DriveEquipment* GetNewDriveEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int speed_orig = NONE_ID, int hyper_orig = NONE_ID) const;
+        DriveEquipment* GetNewDriveEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int speed_orig = NONE_ID, int hyper_orig = NONE_ID) const;
         	 		                
     private:
 		DriveEquipmentBuilder() {};
 		DriveEquipmentBuilder(const DriveEquipmentBuilder&) = delete;
 		DriveEquipmentBuilder& operator=(const DriveEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(DriveEquipment*, int, RACE::TYPE, int, int) const;
+        void CreateNewInternals(DriveEquipment*, int, TYPE::RACE, int, int) const;
 }; 
 
 #endif 
