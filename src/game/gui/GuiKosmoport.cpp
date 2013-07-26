@@ -57,13 +57,13 @@ gui_vehicle_scan_shared(nullptr),
 gui_skills_shared(nullptr),
 slider_shared(nullptr)
 {
-	int screen_w = Screen::Instance().GetWidth();
-	int screen_h = Screen::Instance().GetHeight();
+	//int screen_w = Screen::Instance().GetWidth();
+	//int screen_h = Screen::Instance().GetHeight();
 	
-	TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
+	//TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
 	
-	float zpos = -1;
-	float zsize = 1;
+	//float zpos = -1;
+	//float zsize = 1;
 	
 	{
 		//ButtonSingle* angar_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::ANGAR_ID, "angar"); 

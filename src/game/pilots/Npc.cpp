@@ -75,7 +75,7 @@ void Npc::CloneMacroTaskFrom(Npc* npc)
 	state_machine.SetCurrentMacroTask(npc->GetStateMachine().GetMacroTaskManager().GetTask());
 }
      		
-bool Npc::WithdrawCredits(int amount)
+bool Npc::WithdrawCredits(INTLONGEST amount)
 {
 	if (credits > amount)
 	{
@@ -168,16 +168,16 @@ void Npc::TakeIntoAccountAgressor(Vehicle* agressor)
 	{
 		if (it->npc_id == agressor->GetOwnerNpc()->GetId())
 		{
-                        if (it->last_date != GameDate::Instance().GetDate())
-                        {
-                                int counter = it->counter;
-                                data_agressor_set.erase(it);
-                                
-                                AgressorData agressor_data(agressor->GetOwnerNpc()->GetId(), GameDate::Instance().GetDate(), ++counter);
-                                data_agressor_set.insert(agressor_data);
-                        }
-
-                        return;
+            if (it->last_date != GameDate::Instance().GetDate())
+            {
+                int counter = it->counter;
+                data_agressor_set.erase(it);
+                
+                AgressorData agressor_data(agressor->GetOwnerNpc()->GetId(), GameDate::Instance().GetDate(), ++counter);
+                data_agressor_set.insert(agressor_data);
+            }
+    
+            return;
 		}
 	}
 
@@ -374,12 +374,12 @@ void Npc::ResolveDataUniqueNpc()
 
 	skills.ResolveData();
 	
-	if (data_unresolved_npc.macrotask.GetScenarioTypeId() != NONE_ID)
+	if (data_unresolved_npc.macrotask.GetScenarioTypeId() != TYPE::AISCENARIO::NONE_ID)
 	{
 		state_machine.SetCurrentMacroTask(data_unresolved_npc.macrotask);
 	}
 	
-	if (data_unresolved_npc.microtask.GetScenarioTypeId() != NONE_ID)
+	if (data_unresolved_npc.microtask.GetScenarioTypeId() != TYPE::AISCENARIO::NONE_ID)
 	{
 		state_machine.SetCurrentMicroTask(data_unresolved_npc.microtask);
 	}

@@ -22,7 +22,7 @@ add_subdirectory(dependencies/SFML2)
 set(GLEW_STATIC 1)
 add_subdirectory(dependencies/glew)
 
-#add_definitions(-Wall -Werror -Wno-return-type -std=c++11 -std=gnu++11)
+#add_definitions(-Wall -Werror -Wno-return-type -Wno-switch -Wno-reorder -std=c++11 -std=gnu++11)
 add_definitions(-std=c++11 -std=gnu++11)
 add_subdirectory(src/game)
 

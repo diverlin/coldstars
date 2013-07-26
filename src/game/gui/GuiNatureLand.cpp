@@ -66,12 +66,12 @@ void GuiNatureLand::BindNatureLand(NatureLand* natureland)
 	
 	rect_itemslot_vec.clear();
 
-        for (int i=0; i<natureland->item_slot_vec.size(); i++)
+    for (unsigned int i=0; i<natureland->item_slot_vec.size(); i++)
  	{
  		Rect _rect(natureland->item_slot_vec[i]->GetPosition().x/100.f*(screen_w - GUI::ITEMSLOT::WIDTH_FOR_ANGAR), 
- 			   natureland->item_slot_vec[i]->GetPosition().y/100.f*(screen_h - GUI::ITEMSLOT::HEIGHT_FOR_ANGAR), 
- 			   GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
-        	rect_itemslot_vec.push_back(GuiPair<Rect, ItemSlot*>(_rect, natureland->item_slot_vec[i]));
+ 			       natureland->item_slot_vec[i]->GetPosition().y/100.f*(screen_h - GUI::ITEMSLOT::HEIGHT_FOR_ANGAR), 
+ 			       GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
+        rect_itemslot_vec.push_back(GuiPair<Rect, ItemSlot*>(_rect, natureland->item_slot_vec[i]));
 	}
 }
 

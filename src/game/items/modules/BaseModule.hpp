@@ -20,13 +20,15 @@
 #ifndef MODULEBASE_HPP
 #define MODULEBASE_HPP
 
-#include "../BaseItem.hpp"
-class BaseEquipment; //#include "../equipment/BaseEquipment.hpp"
+#include <items/BaseItem.hpp>
 
+#include <common/MyInt.hpp>
+
+class BaseEquipment;
 
 struct UnresolvedDataUniqueBaseModule
 {
-        int equipment_owner_id;
+    INTLONGEST equipment_owner_id;
 };
 
 class BaseModule : public BaseItem

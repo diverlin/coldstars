@@ -17,8 +17,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef SCENARIOCOLLECTOR_H
-#define SCENARIOCOLLECTOR_H
+#ifndef SCENARIOCOLLECTOR_HPP
+#define SCENARIOCOLLECTOR_HPP
 
 #include <map>
 #include "BaseScenario.hpp"
@@ -30,10 +30,10 @@ class ScenarioCollector
 		~ScenarioCollector();
 		
 		void RegisterScenario(BaseScenario*);
-		BaseScenario* GetScenario(int) const;
+		BaseScenario* GetScenario(TYPE::AISCENARIO) const;
                       	 		                
-        private:   
-        	std::map<int, BaseScenario*> scenario_map;
+    private:   
+        std::map<TYPE::AISCENARIO, BaseScenario*> scenario_map;
         	             
 		ScenarioCollector() {};
 		ScenarioCollector(const ScenarioCollector&) = delete;

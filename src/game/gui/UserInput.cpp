@@ -289,7 +289,7 @@ void UserInput::ManageRealTimeInputsInSpace(Player* player)
 	moveCamera_axis_x  = CAMERADIRECTION::NONE;
 	moveCamera_axis_y  = CAMERADIRECTION::NONE;
 	
-	sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());
+	//sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());
 	   
 	int mx = player->GetCursor().GetMouseData().pos_screencoord.x;
 	int my = player->GetCursor().GetMouseData().pos_screencoord.y;
