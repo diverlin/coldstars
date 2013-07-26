@@ -20,7 +20,13 @@
 #ifndef ITEMSLOT_HPP
 #define ITEMSLOT_HPP
 
-#include "../slots/BaseSlot.hpp"
+#include <common/constants.hpp>
+#include <common/MyInt.hpp>
+
+#include <slots/BaseSlot.hpp>
+
+#include <render/PathVisual.hpp>
+
 class Turrel; 
 class BaseItem;
 class BaseSpaceEntity;
@@ -51,8 +57,7 @@ class GrappleModule;
 
 class Bomb; 
 class GoodsPack; 
-#include "../render/PathVisual.hpp"
-#include "../common/constants.hpp"
+
 class Box2D;
 
 struct UnresolvedDataUniqueItemSlot
@@ -60,8 +65,8 @@ struct UnresolvedDataUniqueItemSlot
 	UnresolvedDataUniqueItemSlot():target_id(NONE_ID), subtarget_id(NONE_ID) 
 	{};
 	
-	int target_id;    
-	int subtarget_id; 
+	INTLONGEST target_id;    
+	INTLONGEST subtarget_id; 
 };
 
 class ItemSlot : public BaseSlot

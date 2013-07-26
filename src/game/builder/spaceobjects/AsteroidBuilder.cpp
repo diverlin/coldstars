@@ -20,6 +20,8 @@
 #include "../CommonBuilderHeaders.hpp"
 #include "../../spaceobjects/Asteroid.hpp"
 
+#include <common/MeshTypes.hpp>
+
 AsteroidBuilder& AsteroidBuilder::Instance()
 {
 	static AsteroidBuilder instance;
@@ -61,22 +63,22 @@ Asteroid* AsteroidBuilder::GetNewAsteroid() const
        	
 void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
 {           
-	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_DEFORMED_ID);
+	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPHERE_DEFORMED_ID);
 	
 	LifeData data_life;   
 	data_life.armor      = 10;
-      	data_life.dying_time = 50;
-      	
-    	PlanetData planet_data;
-	
-    	planet_data.orbit_center.Set(0, 0, DEFAULT_ENTITY_ZPOS); 
-    	planet_data.radius_A      = getRandInt(300, 1200);
-    	planet_data.radius_B      = getRandInt(300, 1200); 
-    	planet_data.orbit_phi_inD = getRandInt(0, 360);
-    	planet_data.speed         = 0.1;
-    	planet_data.clockwise     = getRandBool();
-        
-        asteroid->SetPlanetData(planet_data);
+    data_life.dying_time = 50;
+    
+    PlanetData planet_data;
+
+    planet_data.orbit_center.Set(0, 0, DEFAULT_ENTITY_ZPOS); 
+    planet_data.radius_A      = getRandInt(300, 1200);
+    planet_data.radius_B      = getRandInt(300, 1200); 
+    planet_data.orbit_phi_inD = getRandInt(0, 360);
+    planet_data.speed         = 0.1;
+    planet_data.clockwise     = getRandBool();
+    
+    asteroid->SetPlanetData(planet_data);
 	asteroid->SetLifeData(data_life);
 
 	float scale_comp = getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);
@@ -84,14 +86,14 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ASTEROID_ID); 
 	      
 	asteroid->BindData3D(mesh, texOb, scale);        
-        asteroid->SetAngle(Vec3<float>(getRandInt(10, 40), getRandInt(10, 40), 0));	        
+    asteroid->SetAngle(Vec3<float>(getRandInt(10, 40), getRandInt(10, 40), 0));	        
 	
 	float step = getRandInt(10, 100)*0.01;
 	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
 	asteroid->SetRenderAnimation(animation_program);
 	asteroid->SetZYX(false);
 				
-       	asteroid->SetGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
+    asteroid->SetGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
 }
 
 

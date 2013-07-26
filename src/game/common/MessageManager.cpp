@@ -24,24 +24,24 @@ void MessageManager::NewMessage(double delay,
 
   	if (receiver == nullptr)
   	{
-    		return;
+        return;
   	}
   
-    	Message message(NO_DELAY, sender_id, receiver_id, type_id, extra);
+    Message message(NO_DELAY, sender_id, receiver_id, type_id, extra);
   
                   
   	if (delay <= 0.0f)                                                        
   	{
-    		SendEvent(receiver, message);
-    		return;
+        SendEvent(receiver, message);
+        return;
   	}
   	else
   	{
-    		//double CurrentTime = Clock->GetCurrentTime(); 
-    		//telegram.DispatchTime = CurrentTime + delay;
+        //double CurrentTime = Clock->GetCurrentTime(); 
+        //telegram.DispatchTime = CurrentTime + delay;
 	}
 	
-    	messages_queue.insert(message);   
+    messages_queue.insert(message);   
 }
 
 void MessageManager::UpdateQueue()
@@ -52,10 +52,10 @@ void MessageManager::UpdateQueue()
   	{
   		const Message& message = *messages_queue.begin();
   	
-    		BaseSpaceEntity* receiver = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(message.receiver_id);
-    		SendEvent(receiver, message);
+        BaseSpaceEntity* receiver = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(message.receiver_id);
+        SendEvent(receiver, message);
 
-    		messages_queue.erase(messages_queue.begin());
+        messages_queue.erase(messages_queue.begin());
   	}
 }
 

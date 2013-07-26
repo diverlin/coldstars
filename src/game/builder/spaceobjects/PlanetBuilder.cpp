@@ -21,6 +21,8 @@
 #include "../../spaceobjects/Planet.hpp"
 #include "../../effects/Atmosphere.hpp"
 
+#include <common/MeshTypes.hpp>
+
 PlanetBuilder& PlanetBuilder::Instance()
 {
 	static PlanetBuilder instance;
@@ -63,9 +65,9 @@ Planet* PlanetBuilder::GetNewPlanet(float orbit_radius) const
  	
 void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 {     
-	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPHERE_ID);
+	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPHERE_ID);
       
-        LifeData data_life;
+    LifeData data_life;
 	data_life.armor = 100000;
 
 	PlanetData planet_data;
@@ -75,11 +77,11 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 	planet_data.radius_B      = orbit_radius; 
 	planet_data.orbit_phi_inD = 0;
 	planet_data.speed         = (float)getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / (float)orbit_radius;
-    	planet_data.clockwise     = getRandBool();
+    planet_data.clockwise     = getRandBool();
 
-        TextureOb* textureOb 	        = TextureManager::Instance().GetRandomTextureOb(TEXTURE::PLANET_ID); 
-        
-        planet->SetPlanetData(planet_data);
+    TextureOb* textureOb 	        = TextureManager::Instance().GetRandomTextureOb(TEXTURE::PLANET_ID); 
+    
+    planet->SetPlanetData(planet_data);
 	
 	planet->SetLifeData(data_life);
 

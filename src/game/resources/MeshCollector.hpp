@@ -17,10 +17,11 @@
 */
 
 
-#ifndef MESHCOLLECTOR_H
-#define MESHCOLLECTOR_H
+#ifndef MESHCOLLECTOR_HPP
+#define MESHCOLLECTOR_HPP
 
 #include <vector>
+#include <common/MeshTypes.hpp>
 
 class Mesh;
 
@@ -30,7 +31,7 @@ class MeshCollector
 		static MeshCollector& Instance();
 		
 		void RegisterMesh(Mesh*);
-		Mesh* GetMeshByTypeId(int) const;
+		Mesh* GetMeshByTypeId(TYPE::MESH) const;
 		
 	private:
 		std::vector<Mesh*> mesh_vec;

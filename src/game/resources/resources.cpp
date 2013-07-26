@@ -28,6 +28,7 @@
 #include "GuiTextureObCollector.hpp"
 
 #include "common/RaceTypes.hpp"
+#include "common/MeshTypes.hpp"
 
 void loadGameData()
 {    	
@@ -52,17 +53,17 @@ void loadGameData()
 
 void load3DModels()
 {    	
-	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/sphere/sphere.obj", nullptr, MESH::SPHERE_ID));
-	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/sphere_deformed/sphere_deformed.obj", nullptr, MESH::SPHERE_DEFORMED_ID));
+	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/sphere/sphere.obj", nullptr, TYPE::MESH::SPHERE_ID));
+	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/sphere_deformed/sphere_deformed.obj", nullptr, TYPE::MESH::SPHERE_DEFORMED_ID));
 	
 	{
 	TextureOb* textureOb = new TextureOb(TEXTURE::NOTYPE_ID, "data/obj/vehicles/BabylonStation/station_texture/babylonstation.jpg", false);	
-	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/vehicles/BabylonStation/babylon_station_mod.obj", textureOb, MESH::SPACESTATION_ID));
+	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/vehicles/BabylonStation/babylon_station_mod.obj", textureOb, TYPE::MESH::SPACESTATION_ID));
 	}
 
 	{
 	TextureOb* textureOb = new TextureOb(TEXTURE::NOTYPE_ID, "data/obj/vehicles//Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg", false);	
-	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/vehicles/Anna_V_2.0_variations/anna_mod.obj", textureOb, MESH::SPACESTATION_ID));
+	MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/vehicles/Anna_V_2.0_variations/anna_mod.obj", textureOb, TYPE::MESH::SPACESTATION_ID));
 	}
 }
 

@@ -17,11 +17,14 @@
 */
 
 #include "DriveEquipmentBuilder.hpp"
-#include "../../../items/equipment/DriveEquipment.hpp"
-#include "../../../common/IdGenerator.hpp"
-#include "../../../common/Logger.hpp"
+#include <items/equipment/DriveEquipment.hpp>
+
+#include <common/IdGenerator.hpp>
+#include <common/rand.hpp>
+#include <common/Logger.hpp>
+#include <common/MeshTypes.hpp>
+
 #include "../../../world/EntityManager.hpp"
-#include "../../../common/rand.hpp"
 #include "../../../resources/TextureManager.hpp"
 #include "../../../resources/MeshCollector.hpp"
 #include "../../../animations/AnimationConstantRotationAxisX.hpp"
@@ -84,7 +87,7 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
     }
     else
     {	
-        mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
+        mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPACESTATION_ID);
 		texOb = mesh->GetTextureOb(); 
 	}
 	

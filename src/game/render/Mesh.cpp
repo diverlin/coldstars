@@ -6,9 +6,12 @@
 #include "../common/myStr.hpp"
 #include "../resources/ObjLoader.hpp"
   
-Mesh::Mesh(const std::string& path, TextureOb* textureOb, int type_id):textureOb(textureOb), type_id(type_id)
+Mesh::Mesh(const std::string& path, TextureOb* textureOb, TYPE::MESH type_id)
+:
+textureOb(textureOb), 
+type_id(type_id)
 {    	
-     	ObjLoader objLoader(path);
+    ObjLoader objLoader(path);
      	     
  	BuildFaces(objLoader);
  	boundary_box = objLoader.GetBoundaryBox();

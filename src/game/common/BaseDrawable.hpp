@@ -29,7 +29,7 @@ class AnimationBase;
 
 struct UnresolvedDataUniqueBaseDrawable
 {
-	int mesh_type_id;
+	TYPE::MESH mesh_type_id;
 	std::string textureOb_path;
 };
 

@@ -20,8 +20,10 @@
 #ifndef BASESLOT_HPP
 #define BASESLOT_HPP
 
-#include "../common/Base.hpp"
-#include "../common/constants.hpp"
+#include <common/Base.hpp>
+#include <common/constants.hpp>
+#include <common/MyInt.hpp>
+
 class Vehicle;
 class TextureOb;
 class Rect;
@@ -32,7 +34,7 @@ struct UnresolvedDataUniqueBaseSlot
 	UnresolvedDataUniqueBaseSlot():owner_id(NONE_ID) 
 	{};
 	
-	int owner_id;    
+	INTLONGEST owner_id;    
 };
 
 

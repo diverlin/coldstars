@@ -158,11 +158,11 @@ void BaseDrawable::SaveDataUniqueBaseDrawable(boost::property_tree::ptree& save_
 	Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::SaveDataUniqueBaseDrawable", SAVELOAD_LOG_DIP);
 	#endif
 		
-	if (m_Mesh) save_ptree.put(root+"data_unresolved_BaseDrawable.mesh_type_id", m_Mesh->GetTypeId());
-	else      save_ptree.put(root+"data_unresolved_BaseDrawable.mesh_type_id", NONE_ID);
+	if (m_Mesh) save_ptree.put(root+"data_unresolved_BaseDrawable.mesh_type_id", (int)m_Mesh->GetTypeId());
+	else        save_ptree.put(root+"data_unresolved_BaseDrawable.mesh_type_id", (int)TYPE::MESH::NONE_ID);
 	
 	if (m_TextureOb) 	save_ptree.put(root+"data_unresolved_BaseDrawable.textureOb_path", m_TextureOb->path);
-	else            save_ptree.put(root+"data_unresolved_BaseDrawable.textureOb_path", "none");
+	else                save_ptree.put(root+"data_unresolved_BaseDrawable.textureOb_path", "none");
 }
 
 void BaseDrawable::LoadDataUniqueBaseDrawable(const boost::property_tree::ptree& load_ptree)
@@ -171,7 +171,7 @@ void BaseDrawable::LoadDataUniqueBaseDrawable(const boost::property_tree::ptree&
 	Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::LoadDataUniqueBaseDrawable", SAVELOAD_LOG_DIP);
 	#endif
 
-	data_unresolved_BaseDrawable.mesh_type_id = load_ptree.get<int>("data_unresolved_BaseDrawable.mesh_type_id");
+	data_unresolved_BaseDrawable.mesh_type_id = (TYPE::MESH)load_ptree.get<int>("data_unresolved_BaseDrawable.mesh_type_id");
 	data_unresolved_BaseDrawable.textureOb_path = load_ptree.get<std::string>("data_unresolved_BaseDrawable.textureOb_path");
 }
 
@@ -181,7 +181,7 @@ void BaseDrawable::ResolveDataUniqueBaseDrawable()
 	Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::ResolveDataUniqueBaseDrawable", SAVELOAD_LOG_DIP);
 	#endif
 	
-	if (data_unresolved_BaseDrawable.mesh_type_id != NONE_ID)
+	if (data_unresolved_BaseDrawable.mesh_type_id != TYPE::MESH::NONE_ID)
 	{
 		m_Mesh = MeshCollector::Instance().GetMeshByTypeId(data_unresolved_BaseDrawable.mesh_type_id); 
 	}

@@ -58,7 +58,7 @@ ItemSlot* WeaponComplex::GetEmptyWeaponSlot() const
 ItemSlot* WeaponComplex::GetEquipedWeakestWeaponSlot() const
 {
 	int min_price = 0;
-	int i_min = NONE_ID;
+	unsigned int i_min = NONE_ID;
 		
 	for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
 	{
@@ -85,7 +85,7 @@ ItemSlot* WeaponComplex::GetEquipedWeakestWeaponSlot() const
                 
 void WeaponComplex::PrepareWeapons()
 {       
-     	// used once at the begining of turn
+    // used once at the begining of turn
 	ReloadAllWeapons();
 	ValidateAllWeaponsTarget(); 
 }
@@ -166,34 +166,32 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 
 void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 {                          
-        float dist = distanceBetween(owner_vehicle->GetCenter(), target->GetCenter());
-        
-        #if WEAPONSTARGET_LOG_ENABLED == 1 
-        if (item_slot == nullptr)
-	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP); 
-	else
-	Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " item_subtype_id=" + getTypeStr(item_slot->GetItem()->GetSubTypeId()) + " id=" + int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
+    //float dist = distanceBetween(owner_vehicle->GetCenter(), target->GetCenter());
+    
+    #if WEAPONSTARGET_LOG_ENABLED == 1 
+    if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP); 
+	else                        Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " item_subtype_id=" + getTypeStr(item_slot->GetItem()->GetSubTypeId()) + " id=" + int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
 	#endif   
 	
 	target->TakeIntoAccountAgressor(owner_vehicle);
 	
-        for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
+    for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
+    {
+        if (slot_weapon_vec[i]->GetSelected() == true )
         {
-                if (slot_weapon_vec[i]->GetSelected() == true )
-        	{
-	                if (slot_weapon_vec[i]->GetItem() != nullptr)
-	        	{
-	           		if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
-	           		{
-	     	      	   		if ( slot_weapon_vec[i]->GetTarget() == nullptr )
-           				{
-	           				if (slot_weapon_vec[i]->CheckTarget(target) == true)
-	         				{
-	         					slot_weapon_vec[i]->SetTarget(target, item_slot);
-	                                	}
-	                        	}
-                		} 
-        		}
+            if (slot_weapon_vec[i]->GetItem() != nullptr)
+            {
+                if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
+                {
+                    if ( slot_weapon_vec[i]->GetTarget() == nullptr )
+                    {
+                        if (slot_weapon_vec[i]->CheckTarget(target) == true)
+                        {
+                            slot_weapon_vec[i]->SetTarget(target, item_slot);
+                        }
+                    }
+                } 
+            }
 		}
 	}
 }

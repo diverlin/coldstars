@@ -65,20 +65,20 @@ Color4<float> getColor4fById(int);
 //}
 
 template <typename T>
-int getIndexWithMinVal(const T* array, int size)
+int getIndexWithMinVal(const T* array, unsigned int size)
 {
-        int index_min = 0;
-        T val_min = array[index_min];
-        for (unsigned int i=1; i<size; i++)
+    int index_min = 0;
+    T val_min = array[index_min];
+    for (unsigned int i=1; i<size; i++)
+    {
+        if (array[i]<val_min)
         {
-                if (array[i]<val_min)
-                {
-                        val_min = array[i];
-                        index_min = i;
-                }
+            val_min = array[i];
+            index_min = i;
         }
-        
-        return index_min;
+    }
+    
+    return index_min;
 }
 
 #endif

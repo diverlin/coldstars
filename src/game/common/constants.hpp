@@ -213,14 +213,6 @@ namespace PLACE
         NONE_ID, SPACE_ID, HYPER_SPACE_ID, KOSMOPORT_ID, NATURELAND_ID
     };
 }
-
-namespace MESH
-{
-	enum TYPE_ID
-	{ 
-		SPHERE_ID=1, SPHERE_DEFORMED_ID, SPACESTATION_ID 
-	};
-}  
         
 namespace LOG
 {
