@@ -55,7 +55,8 @@ class BaseParticleSystem
 		Vec2<float> center;
 		BaseSpaceEntity* parent;
 		
-		bool is_alive, is_dying;
+		bool is_alive;
+        bool is_dying;
 		
 		std::vector<Particle*> particles_vec;  
 };

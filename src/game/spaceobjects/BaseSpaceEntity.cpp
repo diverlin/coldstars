@@ -37,10 +37,10 @@
 
 BaseSpaceEntity::BaseSpaceEntity():
 m_Starsystem(nullptr), 
-m_Parent(nullptr),
 m_PlaceTypeId(PLACE::TYPE::NONE_ID), 
 m_Mass(0), 
-m_GiveExpirience(0)
+m_GiveExpirience(0),
+m_Parent(nullptr)
 {}
 
 /* virtual override */

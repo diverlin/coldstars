@@ -27,12 +27,12 @@
 
 BaseItem::BaseItem()
 :
-item_slot(nullptr),
-parent_subtype_id(TYPE::ENTITY::NONE_ID),
 race_id(TYPE::RACE::NONE_ID),
+locked_turns(0),
 condition(0),
 price(0),
-locked_turns(0)
+parent_subtype_id(TYPE::ENTITY::NONE_ID),
+item_slot(nullptr)
 {}
 
 /* virtual */

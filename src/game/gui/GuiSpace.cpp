@@ -198,7 +198,7 @@ bool GuiSpace::UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData& da
 		//}
 	//}
 
-	//return false;
+	return false;
 }
 
 void GuiSpace::EnterGalaxyMap()

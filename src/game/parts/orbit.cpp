@@ -23,8 +23,8 @@
 
 Orbit::Orbit()
 :
-m_It(0),
-m_Len(0)
+m_Len(0),
+m_It(0)
 {}
 
 Orbit::~Orbit()

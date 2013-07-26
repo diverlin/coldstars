@@ -21,7 +21,8 @@
 #include "../common/constants.hpp"
 #include "../common/common.hpp"
 
-Skills::Skills():
+Skills::Skills()
+:
 attack(SKILLS::ATTACK_MIN),
 defence(SKILLS::DEFENCE_MIN),
 leader(SKILLS::LEADER_MIN),
@@ -29,9 +30,9 @@ trader(SKILLS::TRADER_MIN),
 technic(SKILLS::TECHNIC_MIN),
 diplomat(SKILLS::DIPLOMAT_MIN),
 available_points(0),
+level(1),
 expirience(0),
-expirience_nextlevel(SKILLS::EXPIRIENCE_THRESHOLD),
-level(1)
+expirience_nextlevel(SKILLS::EXPIRIENCE_THRESHOLD)
 {}     
 
 Skills::~Skills() 

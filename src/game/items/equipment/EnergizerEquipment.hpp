@@ -17,51 +17,53 @@
 */
 
 
-#ifndef ENERGIZEREQUIPMENT_H
-#define ENERGIZEREQUIPMENT_H
+#ifndef ENERGIZEREQUIPMENT_HPP
+#define ENERGIZEREQUIPMENT_HPP
 
-#include "BaseEquipment.hpp"
+#include <types/MyInt.hpp>
+#include <items/equipment//BaseEquipment.hpp>
+
 
 class EnergizerEquipment : public BaseEquipment
 {
 	public:
-      		EnergizerEquipment(int);         
-      		virtual ~EnergizerEquipment();
+        EnergizerEquipment(INTLONGEST);         
+        virtual ~EnergizerEquipment();
 
-      		void SetEnergyMaxOrig(int energy_max_orig)    { this->energy_max_orig  = energy_max_orig; };
-                void SetRestorationOrig(int restoration_orig) { this->restoration_orig = restoration_orig; };
-      		void SetEnergy(int energy) { this->energy  = energy; };
-                                                      
-      		int GetEnergyMax() const { return energy_max; };
-      		int GetEnergy() const { return energy; };
+        void SetEnergyMaxOrig(int energy_max_orig)    { this->energy_max_orig  = energy_max_orig; };
+            void SetRestorationOrig(int restoration_orig) { this->restoration_orig = restoration_orig; };
+        void SetEnergy(int energy) { this->energy  = energy; };
+                                                  
+        int GetEnergyMax() const { return energy_max; };
+        int GetEnergy() const { return energy; };
 
-      		void IncreaseEnergy(int energy) { this->energy += energy; };      		
-      		void DecreaseEnergy(int energy) { this->energy -= energy; };
-      		      		
-      		void CountPrice();
-      		virtual void UpdateProperties();
-      		      		
-      		virtual void UpdateInStatic();
-      		      		
-      		virtual void SaveData(boost::property_tree::ptree&) const;
+        void IncreaseEnergy(int energy) { this->energy += energy; };      		
+        void DecreaseEnergy(int energy) { this->energy -= energy; };
+                    
+        void CountPrice();
+        virtual void UpdateProperties();
+                    
+        virtual void UpdateInStatic();
+                    
+        virtual void SaveData(boost::property_tree::ptree&) const;
 		virtual void LoadData(const boost::property_tree::ptree&);
 		virtual void ResolveData();
 		
-      	private:
-      		int energy_max_orig;
-      		int energy_max_add;
-      		int energy_max;
-      		int energy;
-
-      		int restoration_orig;
-      		int restoration_add;
-      		int restoration;
-      		
-     		void virtual AddUniqueInfo();
-           	std::string GetEnergyStr();
-           	std::string GetRestorationStr();
-                
-                void SaveDataUniqueEnergizerEquipment(boost::property_tree::ptree&, const std::string&) const;
+    private:
+        int energy_max_orig;
+        int energy_max_add;
+        int energy_max;
+        int energy;
+        
+        int restoration_orig;
+        int restoration_add;
+        int restoration;
+        
+        void virtual AddUniqueInfo();
+        std::string GetEnergyStr();
+        std::string GetRestorationStr();
+        
+        void SaveDataUniqueEnergizerEquipment(boost::property_tree::ptree&, const std::string&) const;
 		void LoadDataUniqueEnergizerEquipment(const boost::property_tree::ptree&);
 		void ResolveDataUniqueEnergizerEquipment(); 
 };

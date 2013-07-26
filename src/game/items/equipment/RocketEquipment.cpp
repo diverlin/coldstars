@@ -59,12 +59,12 @@ void BulletData::ResolveData()
 
 
 
-RocketEquipment::RocketEquipment(int id)
+RocketEquipment::RocketEquipment(INTLONGEST id)
 :
 ammo_max_orig(0),
+ammo(0),
 damage_orig(0),
-radius_orig(0),
-ammo(0)
+radius_orig(0)
 {
 	SetId(id);
 	SetTypeId(TYPE::ENTITY::EQUIPMENT_ID); 

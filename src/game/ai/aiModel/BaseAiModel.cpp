@@ -28,4 +28,6 @@ void BaseAiModel::UpdateInStatic(Npc* _npc) const
 {}
 
 std::string BaseAiModel::GetDescription(Npc* _npc) const
-{}
+{
+    return {};
+}

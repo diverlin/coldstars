@@ -45,9 +45,9 @@
 
 ItemSlot::ItemSlot(int id, TYPE::ENTITY subtype_id):
 turrel(nullptr),	      
+item(nullptr),
 target(nullptr),
-subtarget(nullptr),	     
-item(nullptr)
+subtarget(nullptr)
 {
 	SetId(id);
 	SetTypeId(TYPE::ENTITY::ITEM_SLOT_ID);

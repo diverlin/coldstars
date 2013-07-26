@@ -127,7 +127,7 @@ void GuiManager::ExitGuiSpace()
         gui_space.UnbindSharedGuis();
 }
              
-bool GuiManager::RunSessionInSpace()
+void GuiManager::RunSessionInSpace()
 {
     GuiVehicle* gui_scan_vehicle = (GuiVehicle*)GetGuiElement(GUI::TYPE::SCAN_VEHICLE_ID);     
     GuiVehicle* gui_player_vehicle = (GuiVehicle*)GetGuiElement(GUI::TYPE::PLAYER_VEHICLE_ID);
@@ -181,13 +181,13 @@ bool GuiManager::RunSessionInSpace()
     //gui_space.RenderInfo(data_mouse);
 }
 
-bool GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
+void GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 {
         gui_kosmoport.Update(data_mouse);
         gui_kosmoport.Render(data_mouse);
 }
 
-bool GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
+void GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 {    	
 	Rect screen_rect(0, 0, Screen::Instance().GetWidth(), Screen::Instance().GetHeight());   
 	Vec2<float> center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);       			

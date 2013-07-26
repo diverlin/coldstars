@@ -274,9 +274,8 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                 	}
                 }
         }
-                
+        */                
         return false;
-        */
 }
 
 void GuiAngar::RenderVehicleAndItemSlots() const

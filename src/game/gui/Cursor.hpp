@@ -19,11 +19,11 @@
 #ifndef CURSOR_HPP
 #define CURSOR_HPP
 
+#include <gui/MouseData.hpp>
+#include <gui/BaseGuiElement.hpp>
+
 class ItemSlot;
-#include "../common/rect.hpp"
-#include "MouseData.hpp"
 class BaseSpaceEntity;
-#include "BaseGuiElement.hpp"
 
 class Cursor : public BaseGuiElement
 {
@@ -40,7 +40,6 @@ class Cursor : public BaseGuiElement
 		
 		void UpdateMouseStuff();		
 		void Update();
-		bool UpdateInSpace();
 		
 		void RenderFocusedObjectStuff() const;
 		void RenderFocusedObjectInfo();

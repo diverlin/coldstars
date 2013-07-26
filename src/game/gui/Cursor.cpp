@@ -105,9 +105,6 @@ void Cursor::Update()
     m_Box.SetCenter(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y);     	
 }
 
-bool Cursor::UpdateInSpace()
-{}
-
 void Cursor::RenderFocusedObjectStuff() const
 {
 	if (focused_ob != nullptr)

@@ -30,7 +30,10 @@ Logger& Logger::Instance()
 	return instance;
 }
 
-Logger::Logger(): line_counter(0), turn_counter(-1)
+Logger::Logger()
+:
+turn_counter(0),
+line_counter(0) 
 {
 	mode = Config::Instance().GetLogMode();
 }

@@ -24,10 +24,11 @@
 
 #include "../spaceobjects/Vehicle.hpp"
 
-BaseSlot::BaseSlot():
+BaseSlot::BaseSlot()
+:
 selected(false),
-owner(nullptr),
-textureOb(nullptr)
+textureOb(nullptr),
+owner(nullptr)
 {}
 
 /* virtual */
