@@ -66,7 +66,7 @@ ScanerModule* ScanerModuleBuilder::GetNewScanerModule(int scan_add) const
        	
 void ScanerModuleBuilder::CreateNewInternals(ScanerModule* scaner_module, int scan_add) const
 {     
-    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);   
     scan_add = getRandInt(MODULE::SCANER::SCAN_MIN, MODULE::SCANER::SCAN_MAX);
 
     scaner_module->SetParentSubTypeId(TYPE::ENTITY::SCANER_EQUIPMENT_ID);    

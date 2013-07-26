@@ -16,13 +16,14 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef BAKMODULEBUILDER_HPP
 #define BAKMODULEBUILDER_HPP
 
 #include <types/MyInt.hpp>
-#include <common/constants.hpp>
 
 class BakModule;
+
 
 class BakModuleBuilder
 {

@@ -16,12 +16,14 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef STOREBUILDER_HPP
 #define STOREBUILDER_HPP
 
-#include <common/constants.hpp>
+#include <types/MyInt.hpp>
 
 class Store;
+
 
 class StoreBuilder
 {

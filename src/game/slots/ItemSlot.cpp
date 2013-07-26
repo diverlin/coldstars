@@ -352,8 +352,8 @@ void ItemSlot::DropItemToSpace()
             
     switch (item->GetTypeId())
     {
-        case TYPE::ENTITY::BOMB_ID: { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BOMB_ID); break; }
-        default:      { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID); break; }
+        case TYPE::ENTITY::BOMB_ID: { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::BOMB_ID); break; }
+        default:      { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::CONTAINER_ID); break; }
     }
      
     Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, item);

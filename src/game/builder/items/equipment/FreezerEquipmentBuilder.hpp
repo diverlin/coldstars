@@ -20,10 +20,11 @@
 #ifndef FREEZEREQUIPMENTBUILDER_HPP
 #define FREEZEREQUIPMENTBUILDER_HPP
 
-#include <common/constants.hpp>
+#include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
 
 class FreezerEquipment;
+
 
 class FreezerEquipmentBuilder
 {

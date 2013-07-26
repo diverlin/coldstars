@@ -45,7 +45,7 @@ VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
     
     EntityManager::Instance().RegisterEntity(vehicle_slot);
       
-	TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TEXTURE::VEHICLE_SLOT_ID);
+	TextureOb* texOb_slot = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::VEHICLE_SLOT_ID);
     vehicle_slot->SetTextureOb(texOb_slot);
           
     return vehicle_slot;

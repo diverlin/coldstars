@@ -66,7 +66,7 @@ GrappleModule* GrappleModuleBuilder::GetNewGrappleModule(int strength_add, int r
         	
 void GrappleModuleBuilder::CreateNewInternals(GrappleModule* grapple_module, int strength_add, int radius_add, int speed_add) const
 {     
-    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);   
     strength_add   = getRandInt(MODULE::GRAPPLE::STRENGTH_MIN, MODULE::GRAPPLE::STRENGTH_MAX);
     radius_add     = getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
     speed_add      = getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);

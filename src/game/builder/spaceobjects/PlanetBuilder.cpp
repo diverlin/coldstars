@@ -79,7 +79,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 	planet_data.speed         = (float)getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / (float)orbit_radius;
     planet_data.clockwise     = getRandBool();
 
-    TextureOb* textureOb 	        = TextureManager::Instance().GetRandomTextureOb(TEXTURE::PLANET_ID); 
+    TextureOb* textureOb 	        = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::PLANET_ID); 
     
     planet->SetPlanetData(planet_data);
 	
@@ -97,7 +97,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 	
 	//if (getRandBool()) 
 	{
-	        TextureOb* textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ATMOSPHERE_ID); 
+	        TextureOb* textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ATMOSPHERE_ID); 
 		Atmosphere* atmosphere = new Atmosphere(textureOb_atmosphere);
 		planet->BindAtmosphere(atmosphere);
 	}

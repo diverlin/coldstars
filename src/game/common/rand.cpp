@@ -21,12 +21,13 @@
 #include <cmath>
 
 #include "constants.hpp"
+#include <types/MyInt.hpp>
 #include "../struct/gameStruct.hpp"
 
 int getRandIntFromVec(const std::vector<int>& vec)
 {
 	if (vec.size()>0) { return vec[getRandInt(0, vec.size()-1)]; }
-	else 		  { return NONE_ID; }
+	else 		      { return NONE_ID; }
 }
 
 TYPE::RACE getRandIntFromVec(const std::vector<TYPE::RACE>& vec)

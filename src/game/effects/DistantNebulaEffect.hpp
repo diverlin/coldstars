@@ -20,8 +20,8 @@
 #ifndef DISTANTNEBULAEFFECT_HPP
 #define DISTANTNEBULAEFFECT_HPP
 
-#include "../effects/BaseBackGroundEffect.hpp"    
-#include "../common/constants.hpp"
+#include <effects/BaseBackGroundEffect.hpp>    
+#include <types/MyInt.hpp>
 
 class DistantNebulaEffect : public BaseBackGroundEffect
 {

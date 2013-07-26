@@ -76,8 +76,8 @@ void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, 
         tech_level = 1; 
 	}
 
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
-    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::LAZER_EQUIPMENT_ID);     
+    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
+    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID);     
 
     damage_orig     = getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX) * (1 + EQUIPMENT::LAZER::DAMAGE_TECHLEVEL_RATE * tech_level);
     radius_orig     = getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX) * (1 + EQUIPMENT::LAZER::RADIUS_TECHLEVEL_RATE * tech_level);

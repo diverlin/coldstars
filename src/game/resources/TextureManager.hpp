@@ -22,8 +22,10 @@
 
 #include <string>
 #include <vector>
-#include <common/constants.hpp>
+
+#include <types/TextureTypes.hpp>
 #include <types/RaceTypes.hpp>
+#include <types/EntityTypes.hpp>
 
 class TextureOb;
 
@@ -31,135 +33,134 @@ class TextureManager
 {   
 	public:
 		static TextureManager& Instance();
-        	
-        	void Add(TextureOb*);
+        
+        void Add(TextureOb*);
+        
+        TextureOb* GetRandomFaceTexObWithFolloingAttributes(TYPE::RACE);
+        TextureOb* GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE, TYPE::ENTITY, int _size_id);
+        
+        TextureOb* GetTexObByColorId(TYPE::TEXTURE, int color_id);
+        
+        TextureOb* GetRandomTextureOb(TYPE::TEXTURE);
+        
+        TextureOb* GetTextureObByPath(const std::string&);
+        
+        void FillShipSubTypeList();
 
-        	TextureOb* GetRandomFaceTexObWithFolloingAttributes(TYPE::RACE);
-        	TextureOb* GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE, TYPE::ENTITY, int _size_id);
+    private:
+        TextureManager() {};
+        ~TextureManager() {};
+        
+        TextureManager(TextureManager&) = delete;
+        TextureManager& operator=(TextureManager&) = delete;
+        
+        std::vector<TextureOb*> textureOb_total_vec;
+        
+        std::vector<TextureOb*> itemslot_texOb_vec;
+        std::vector<TextureOb*> vehicleslot_texOb_vec;
+        std::vector<TextureOb*> turrel_texOb_vec;
+            
+            std::vector<TextureOb*> particles_texOb_vec;
 
-        	TextureOb* GetTexObByColorId(int type_id, int color_id);
-                        	
-		TextureOb* GetRandomTextureOb(int);
-		
-		TextureOb* GetTextureObByPath(const std::string&);
-               
-                void FillShipSubTypeList();
+        // BACKGROUND 
+        std::vector<TextureOb*> nebulaBgEffect_texOb_vec;
+        std::vector<TextureOb*> starBgEffect_texOb_vec;
 
-        private:
-                TextureManager() {};
-        	~TextureManager() {};
-        	
-        	TextureManager(TextureManager&) = delete;
-        	TextureManager& operator=(TextureManager&) = delete;
-        	
-        	std::vector<TextureOb*> textureOb_total_vec;
-        	
-        	std::vector<TextureOb*> itemslot_texOb_vec;
-        	std::vector<TextureOb*> vehicleslot_texOb_vec;
-        	std::vector<TextureOb*> turrel_texOb_vec;
-                
-                std::vector<TextureOb*> particles_texOb_vec;
+        // BACKGROUND AT PLANET 
+        std::vector<TextureOb*> angarBg_texOb_vec;
+        std::vector<TextureOb*> storeBg_texOb_vec;
+        std::vector<TextureOb*> shopBg_texOb_vec;
+        std::vector<TextureOb*> govermentBg_texOb_vec;
+        std::vector<TextureOb*> landBg_texOb_vec;
 
-        	// BACKGROUND 
-        	std::vector<TextureOb*> nebulaBgEffect_texOb_vec;
-        	std::vector<TextureOb*> starBgEffect_texOb_vec;
-
-          	// BACKGROUND AT PLANET 
-          	std::vector<TextureOb*> angarBg_texOb_vec;
-          	std::vector<TextureOb*> storeBg_texOb_vec;
-          	std::vector<TextureOb*> shopBg_texOb_vec;
-          	std::vector<TextureOb*> govermentBg_texOb_vec;
-          	std::vector<TextureOb*> landBg_texOb_vec;
-
-        	// EFFECTS
-        	std::vector<TextureOb*> rocketBullet_texOb_vec;
-        	std::vector<TextureOb*> lazerEffect_texOb_vec;
-        	std::vector<TextureOb*> shieldEffect_texOb_vec;
+        // EFFECTS
+        std::vector<TextureOb*> rocketBullet_texOb_vec;
+        std::vector<TextureOb*> lazerEffect_texOb_vec;
+        std::vector<TextureOb*> shieldEffect_texOb_vec;
 
 
-        	// SPACE OBJECTS
-        	std::vector<TextureOb*> spacestation_texOb_vec;
-	       	std::vector<TextureOb*> satellite_texOb_vec;
-               	std::vector<TextureOb*> star_texOb_vec;
-        	std::vector<TextureOb*> planet_texOb_vec;
-        	std::vector<TextureOb*> atmosphere_texOb_vec;
-        	std::vector<TextureOb*> asteroid_texOb_vec;  
-        	std::vector<TextureOb*> mineral_texOb_vec;   
-        	std::vector<TextureOb*> container_texOb_vec;  
-        	std::vector<TextureOb*> bomb_texOb_vec;   
-        	std::vector<TextureOb*> blackhole_texOb_vec;  
-        	
-        	// SHIPS
-        	std::vector<TextureOb*> ship_race0_ranger_texOb_vec;
-        	std::vector<TextureOb*> ship_race0_warrior_texOb_vec;
-        	std::vector<TextureOb*> ship_race0_trader_texOb_vec;
-        	std::vector<TextureOb*> ship_race0_pirat_texOb_vec;
-        	std::vector<TextureOb*> ship_race0_diplomat_texOb_vec;
+        // SPACE OBJECTS
+        std::vector<TextureOb*> spacestation_texOb_vec;
+        std::vector<TextureOb*> satellite_texOb_vec;
+            std::vector<TextureOb*> star_texOb_vec;
+        std::vector<TextureOb*> planet_texOb_vec;
+        std::vector<TextureOb*> atmosphere_texOb_vec;
+        std::vector<TextureOb*> asteroid_texOb_vec;  
+        std::vector<TextureOb*> mineral_texOb_vec;   
+        std::vector<TextureOb*> container_texOb_vec;  
+        std::vector<TextureOb*> bomb_texOb_vec;   
+        std::vector<TextureOb*> blackhole_texOb_vec;  
+        
+        // SHIPS
+        std::vector<TextureOb*> ship_race0_ranger_texOb_vec;
+        std::vector<TextureOb*> ship_race0_warrior_texOb_vec;
+        std::vector<TextureOb*> ship_race0_trader_texOb_vec;
+        std::vector<TextureOb*> ship_race0_pirat_texOb_vec;
+        std::vector<TextureOb*> ship_race0_diplomat_texOb_vec;
 
-        	std::vector<TextureOb*> ship_race1_ranger_texOb_vec;
-        	std::vector<TextureOb*> ship_race1_warrior_texOb_vec;
-        	std::vector<TextureOb*> ship_race1_trader_texOb_vec;
-        	std::vector<TextureOb*> ship_race1_pirat_texOb_vec;
-        	std::vector<TextureOb*> ship_race1_diplomat_texOb_vec;
+        std::vector<TextureOb*> ship_race1_ranger_texOb_vec;
+        std::vector<TextureOb*> ship_race1_warrior_texOb_vec;
+        std::vector<TextureOb*> ship_race1_trader_texOb_vec;
+        std::vector<TextureOb*> ship_race1_pirat_texOb_vec;
+        std::vector<TextureOb*> ship_race1_diplomat_texOb_vec;
 
-        	std::vector<TextureOb*> ship_race2_ranger_texOb_vec;
-        	std::vector<TextureOb*> ship_race2_warrior_texOb_vec;
-        	std::vector<TextureOb*> ship_race2_trader_texOb_vec;
-        	std::vector<TextureOb*> ship_race2_pirat_texOb_vec;
-        	std::vector<TextureOb*> ship_race2_diplomat_texOb_vec;
+        std::vector<TextureOb*> ship_race2_ranger_texOb_vec;
+        std::vector<TextureOb*> ship_race2_warrior_texOb_vec;
+        std::vector<TextureOb*> ship_race2_trader_texOb_vec;
+        std::vector<TextureOb*> ship_race2_pirat_texOb_vec;
+        std::vector<TextureOb*> ship_race2_diplomat_texOb_vec;
 
-        	std::vector<TextureOb*> ship_race3_ranger_texOb_vec;
-        	std::vector<TextureOb*> ship_race3_warrior_texOb_vec;
-        	std::vector<TextureOb*> ship_race3_trader_texOb_vec;
-        	std::vector<TextureOb*> ship_race3_pirat_texOb_vec;
-        	std::vector<TextureOb*> ship_race3_diplomat_texOb_vec;
+        std::vector<TextureOb*> ship_race3_ranger_texOb_vec;
+        std::vector<TextureOb*> ship_race3_warrior_texOb_vec;
+        std::vector<TextureOb*> ship_race3_trader_texOb_vec;
+        std::vector<TextureOb*> ship_race3_pirat_texOb_vec;
+        std::vector<TextureOb*> ship_race3_diplomat_texOb_vec;
 
-        	std::vector<TextureOb*> ship_race4_ranger_texOb_vec;
-        	std::vector<TextureOb*> ship_race4_warrior_texOb_vec;
-        	std::vector<TextureOb*> ship_race4_trader_texOb_vec;
-        	std::vector<TextureOb*> ship_race4_pirat_texOb_vec;
-        	std::vector<TextureOb*> ship_race4_diplomat_texOb_vec;
+        std::vector<TextureOb*> ship_race4_ranger_texOb_vec;
+        std::vector<TextureOb*> ship_race4_warrior_texOb_vec;
+        std::vector<TextureOb*> ship_race4_trader_texOb_vec;
+        std::vector<TextureOb*> ship_race4_pirat_texOb_vec;
+        std::vector<TextureOb*> ship_race4_diplomat_texOb_vec;
 
-        	std::vector<TextureOb*> ship_race6_ranger_texOb_vec;
-        	std::vector<TextureOb*> ship_race6_warrior_texOb_vec;
-       		std::vector<TextureOb*> ship_race6_trader_texOb_vec;
-        	std::vector<TextureOb*> ship_race6_pirat_texOb_vec;
-        	std::vector<TextureOb*> ship_race6_diplomat_texOb_vec;
+        std::vector<TextureOb*> ship_race6_ranger_texOb_vec;
+        std::vector<TextureOb*> ship_race6_warrior_texOb_vec;
+        std::vector<TextureOb*> ship_race6_trader_texOb_vec;
+        std::vector<TextureOb*> ship_race6_pirat_texOb_vec;
+        std::vector<TextureOb*> ship_race6_diplomat_texOb_vec;
 
-        	std::vector<TextureOb*> ship_race7_ranger_texOb_vec;
-        	std::vector<TextureOb*> ship_race7_warrior_texOb_vec;
-        	std::vector<TextureOb*> ship_race7_trader_texOb_vec;
-        	std::vector<TextureOb*> ship_race7_pirat_texOb_vec;
-        	std::vector<TextureOb*> ship_race7_diplomat_texOb_vec;
+        std::vector<TextureOb*> ship_race7_ranger_texOb_vec;
+        std::vector<TextureOb*> ship_race7_warrior_texOb_vec;
+        std::vector<TextureOb*> ship_race7_trader_texOb_vec;
+        std::vector<TextureOb*> ship_race7_pirat_texOb_vec;
+        std::vector<TextureOb*> ship_race7_diplomat_texOb_vec;
 
-        	// ITEMS
-        	std::vector<TextureOb*> lazerEquipment_texOb_vec;
-        	std::vector<TextureOb*> rocketEquipment_texOb_vec;
-        	std::vector<TextureOb*> driveEquipment_texOb_vec;
-        	std::vector<TextureOb*> protectorEquipment_texOb_vec;
-        	std::vector<TextureOb*> droidEquipment_texOb_vec;
-        	std::vector<TextureOb*> grappleEquipment_texOb_vec;
-        	std::vector<TextureOb*> bakEquipment_texOb_vec;
-        	std::vector<TextureOb*> energyBlockEquipment_texOb_vec;
-        	std::vector<TextureOb*> freezerEquipment_texOb_vec;
-        	std::vector<TextureOb*> radarEquipment_texOb_vec;
-        	std::vector<TextureOb*> scanerEquipment_texOb_vec;
-        	
-        	std::vector<TextureOb*> module_texOb_vec;        	
+        // ITEMS
+        std::vector<TextureOb*> lazerEquipment_texOb_vec;
+        std::vector<TextureOb*> rocketEquipment_texOb_vec;
+        std::vector<TextureOb*> driveEquipment_texOb_vec;
+        std::vector<TextureOb*> protectorEquipment_texOb_vec;
+        std::vector<TextureOb*> droidEquipment_texOb_vec;
+        std::vector<TextureOb*> grappleEquipment_texOb_vec;
+        std::vector<TextureOb*> bakEquipment_texOb_vec;
+        std::vector<TextureOb*> energyBlockEquipment_texOb_vec;
+        std::vector<TextureOb*> freezerEquipment_texOb_vec;
+        std::vector<TextureOb*> radarEquipment_texOb_vec;
+        std::vector<TextureOb*> scanerEquipment_texOb_vec;
+        
+        std::vector<TextureOb*> module_texOb_vec;        	
 
-        	// FACE
-        	std::vector<TextureOb*> face_race0_texOb_vec;
-        	std::vector<TextureOb*> face_race1_texOb_vec;
-       		std::vector<TextureOb*> face_race2_texOb_vec;
-        	std::vector<TextureOb*> face_race3_texOb_vec;
-       		std::vector<TextureOb*> face_race4_texOb_vec;
-        	std::vector<TextureOb*> face_race6_texOb_vec;
-        	std::vector<TextureOb*> face_race7_texOb_vec;
-       	
-        	TextureOb* GetRandomTextureObFromVec(const std::vector<TextureOb*>&);
-       		TextureOb* GetShipTexObByClosestSizeFromVec(const std::vector<TextureOb*>&, int);
-        	TextureOb* GetShipTexObBySizeFromVec(const std::vector<TextureOb*>&, int);
-
+        // FACE
+        std::vector<TextureOb*> face_race0_texOb_vec;
+        std::vector<TextureOb*> face_race1_texOb_vec;
+        std::vector<TextureOb*> face_race2_texOb_vec;
+        std::vector<TextureOb*> face_race3_texOb_vec;
+        std::vector<TextureOb*> face_race4_texOb_vec;
+        std::vector<TextureOb*> face_race6_texOb_vec;
+        std::vector<TextureOb*> face_race7_texOb_vec;
+    
+        TextureOb* GetRandomTextureObFromVec(const std::vector<TextureOb*>&);
+        TextureOb* GetShipTexObByClosestSizeFromVec(const std::vector<TextureOb*>&, int);
+        TextureOb* GetShipTexObBySizeFromVec(const std::vector<TextureOb*>&, int);
 };
 
 #endif 

@@ -76,8 +76,8 @@ void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipmen
         tech_level = 1; 
 	}
 
-    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SCANER_EQUIPMENT_ID);   
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
+    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);   
+    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
 
     scan_orig       = getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECHLEVEL_RATE * tech_level);
     

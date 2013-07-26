@@ -18,10 +18,11 @@
 
 #include "TextureManager.hpp"
 
-#include <common/constants.hpp>
+#include <types/TextureTypes.hpp>
+#include <types/RaceTypes.hpp>
+
 #include <common/rand.hpp>
 #include <common/Logger.hpp>
-#include <types/RaceTypes.hpp>
 
 #include "../struct/gameStruct.hpp"
 
@@ -40,18 +41,18 @@ void TextureManager::Add(TextureOb* texOb)
 
 	switch(texOb->type_id)
 	{
-	  	case TEXTURE::SPACESTATION_ID: { spacestation_texOb_vec.push_back(texOb);    break; }       
-	 	case TEXTURE::SATELLITE_ID:    { satellite_texOb_vec.push_back(texOb);   break; }       
-	  		  		
-  		case TEXTURE::ITEM_SLOT_ID:    { itemslot_texOb_vec.push_back(texOb);        break; }       
-    		case TEXTURE::VEHICLE_SLOT_ID: { vehicleslot_texOb_vec.push_back(texOb); break; }
-       		case TEXTURE::TURREL_ID:      { turrel_texOb_vec.push_back(texOb);      break; }
-
-    		case TEXTURE::NEBULA_BACKGROUND_ID:      { nebulaBgEffect_texOb_vec.push_back(texOb); break; }
-    		case TEXTURE::STAR_ID:        { star_texOb_vec.push_back(texOb);           break; } 
-		case TEXTURE::PLANET_ID:      { planet_texOb_vec.push_back(texOb);         break; }
-		case TEXTURE::ATMOSPHERE_ID:  { atmosphere_texOb_vec.push_back(texOb);     break; }
-		case TEXTURE::SHIP_ID:        
+        case TYPE::TEXTURE::SPACESTATION_ID: { spacestation_texOb_vec.push_back(texOb);    break; }       
+        case TYPE::TEXTURE::SATELLITE_ID:    { satellite_texOb_vec.push_back(texOb);   break; }       
+        
+        case TYPE::TEXTURE::ITEM_SLOT_ID:    { itemslot_texOb_vec.push_back(texOb);        break; }       
+        case TYPE::TEXTURE::VEHICLE_SLOT_ID: { vehicleslot_texOb_vec.push_back(texOb); break; }
+        case TYPE::TEXTURE::TURREL_ID:      { turrel_texOb_vec.push_back(texOb);      break; }
+        
+        case TYPE::TEXTURE::NEBULA_BACKGROUND_ID:      { nebulaBgEffect_texOb_vec.push_back(texOb); break; }
+        case TYPE::TEXTURE::STAR_ID:        { star_texOb_vec.push_back(texOb);           break; } 
+		case TYPE::TEXTURE::PLANET_ID:      { planet_texOb_vec.push_back(texOb);         break; }
+		case TYPE::TEXTURE::ATMOSPHERE_ID:  { atmosphere_texOb_vec.push_back(texOb);     break; }
+		case TYPE::TEXTURE::SHIP_ID:        
 		{  
 			switch(texOb->race_id) 
 			{
@@ -158,46 +159,46 @@ void TextureManager::Add(TextureOb* texOb)
     		break;
     		}
     		
-		case TEXTURE::ROCKET_BULLET_ID: { rocketBullet_texOb_vec.push_back(texOb); break; }
-		case TEXTURE::LAZER_EFFECT_ID:  { lazerEffect_texOb_vec.push_back(texOb);  break; }
-		case TEXTURE::SHIELD_EFFECT_ID: { shieldEffect_texOb_vec.push_back(texOb); break; }
-		case TEXTURE::DISTANTSTAR_ID:   { starBgEffect_texOb_vec.push_back(texOb); break; }
-                case TEXTURE::PARTICLE_EFFECT_ID:      { particles_texOb_vec.push_back(texOb); break; } 
+		case TYPE::TEXTURE::ROCKET_BULLET_ID: { rocketBullet_texOb_vec.push_back(texOb); break; }
+		case TYPE::TEXTURE::LAZER_EFFECT_ID:  { lazerEffect_texOb_vec.push_back(texOb);  break; }
+		case TYPE::TEXTURE::SHIELD_EFFECT_ID: { shieldEffect_texOb_vec.push_back(texOb); break; }
+		case TYPE::TEXTURE::DISTANTSTAR_ID:   { starBgEffect_texOb_vec.push_back(texOb); break; }
+                case TYPE::TEXTURE::PARTICLE_EFFECT_ID:      { particles_texOb_vec.push_back(texOb); break; } 
 
     		// ASTEROIDS/MINERALS
-    		case TEXTURE::ASTEROID_ID:  { asteroid_texOb_vec.push_back(texOb);  break; } 
-		case TEXTURE::MINERAL_ID:   { mineral_texOb_vec.push_back(texOb);   break; } 
-		case TEXTURE::CONTAINER_ID: { container_texOb_vec.push_back(texOb); break; }
-		case TEXTURE::BOMB_ID:      { bomb_texOb_vec.push_back(texOb);      break; }
+    		case TYPE::TEXTURE::ASTEROID_ID:  { asteroid_texOb_vec.push_back(texOb);  break; } 
+		case TYPE::TEXTURE::MINERAL_ID:   { mineral_texOb_vec.push_back(texOb);   break; } 
+		case TYPE::TEXTURE::CONTAINER_ID: { container_texOb_vec.push_back(texOb); break; }
+		case TYPE::TEXTURE::BOMB_ID:      { bomb_texOb_vec.push_back(texOb);      break; }
 
-    		case TEXTURE::BLACKHOLE_ID: { blackhole_texOb_vec.push_back(texOb); break; }
+    		case TYPE::TEXTURE::BLACKHOLE_ID: { blackhole_texOb_vec.push_back(texOb); break; }
 
 		// LAND
-    		case TEXTURE::NATURELAND_BACKGROUND_ID: { landBg_texOb_vec.push_back(texOb); break; }
+    		case TYPE::TEXTURE::NATURELAND_BACKGROUND_ID: { landBg_texOb_vec.push_back(texOb); break; }
 
 		// IN KOSMOPORT
-    		case TEXTURE::ANGAR_BACKGROUND_ID: { angarBg_texOb_vec.push_back(texOb); break; }
-		case TEXTURE::STORE_BACKGROUND_ID: { storeBg_texOb_vec.push_back(texOb); break; }
-		case TEXTURE::SHOP_BACKGROUND_ID:  { shopBg_texOb_vec.push_back(texOb); break; }
-		case TEXTURE::GOVERMENT_BACKGROUND_ID: { govermentBg_texOb_vec.push_back(texOb); break; }
+    		case TYPE::TEXTURE::ANGAR_BACKGROUND_ID: { angarBg_texOb_vec.push_back(texOb); break; }
+		case TYPE::TEXTURE::STORE_BACKGROUND_ID: { storeBg_texOb_vec.push_back(texOb); break; }
+		case TYPE::TEXTURE::SHOP_BACKGROUND_ID:  { shopBg_texOb_vec.push_back(texOb); break; }
+		case TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID: { govermentBg_texOb_vec.push_back(texOb); break; }
 		
 		
 		// ITEMS
-		case TEXTURE::ROCKET_EQUIPMENT_ID:      { rocketEquipment_texOb_vec.push_back(texOb);      break; } 
-		case TEXTURE::LAZER_EQUIPMENT_ID:       { lazerEquipment_texOb_vec.push_back(texOb);       break; } 
-		case TEXTURE::DRIVE_EQUIPMENT_ID:       { driveEquipment_texOb_vec.push_back(texOb);       break; } 
-		case TEXTURE::PROTECTOR_EQUIPMENT_ID:   { protectorEquipment_texOb_vec.push_back(texOb);   break; } 
-		case TEXTURE::DROID_EQUIPMENT_ID:       { droidEquipment_texOb_vec.push_back(texOb);       break; } 
-		case TEXTURE::GRAPPLE_EQUIPMENT_ID:     { grappleEquipment_texOb_vec.push_back(texOb);     break; } 
-		case TEXTURE::BAK_EQUIPMENT_ID:         { bakEquipment_texOb_vec.push_back(texOb);         break; } 
-		case TEXTURE::ENERGIZER_EQUIPMENT_ID: { energyBlockEquipment_texOb_vec.push_back(texOb); break; } 
-		case TEXTURE::FREEZER_EQUIPMENT_ID:     { freezerEquipment_texOb_vec.push_back(texOb);     break; } 
-		case TEXTURE::RADAR_EQUIPMENT_ID:       { radarEquipment_texOb_vec.push_back(texOb);       break; } 
-		case TEXTURE::SCANER_EQUIPMENT_ID:      { scanerEquipment_texOb_vec.push_back(texOb);      break; } 
+		case TYPE::TEXTURE::ROCKET_EQUIPMENT_ID:      { rocketEquipment_texOb_vec.push_back(texOb);      break; } 
+		case TYPE::TEXTURE::LAZER_EQUIPMENT_ID:       { lazerEquipment_texOb_vec.push_back(texOb);       break; } 
+		case TYPE::TEXTURE::DRIVE_EQUIPMENT_ID:       { driveEquipment_texOb_vec.push_back(texOb);       break; } 
+		case TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID:   { protectorEquipment_texOb_vec.push_back(texOb);   break; } 
+		case TYPE::TEXTURE::DROID_EQUIPMENT_ID:       { droidEquipment_texOb_vec.push_back(texOb);       break; } 
+		case TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID:     { grappleEquipment_texOb_vec.push_back(texOb);     break; } 
+		case TYPE::TEXTURE::BAK_EQUIPMENT_ID:         { bakEquipment_texOb_vec.push_back(texOb);         break; } 
+		case TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID: { energyBlockEquipment_texOb_vec.push_back(texOb); break; } 
+		case TYPE::TEXTURE::FREEZER_EQUIPMENT_ID:     { freezerEquipment_texOb_vec.push_back(texOb);     break; } 
+		case TYPE::TEXTURE::RADAR_EQUIPMENT_ID:       { radarEquipment_texOb_vec.push_back(texOb);       break; } 
+		case TYPE::TEXTURE::SCANER_EQUIPMENT_ID:      { scanerEquipment_texOb_vec.push_back(texOb);      break; } 
 
-		case TEXTURE::MODULE_ID: { module_texOb_vec.push_back(texOb);      break; } 
+		case TYPE::TEXTURE::MODULE_ID: { module_texOb_vec.push_back(texOb);      break; } 
 				
-		case TEXTURE::FACE_ID:
+		case TYPE::TEXTURE::FACE_ID:
 		{
 			switch(texOb->race_id)
 			{
@@ -418,16 +419,16 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE 
 
 }
 
-TextureOb* TextureManager::GetTexObByColorId(int _type_id, int _color_id)
+TextureOb* TextureManager::GetTexObByColorId(TYPE::TEXTURE _type_id, int _color_id)
 {
 	TextureOb* requested_texOb = nullptr;     
 	std::vector<TextureOb*>* requested_vec = nullptr;
 	
 	switch(_type_id)
 	{
-		case TEXTURE::PARTICLE_EFFECT_ID:    { requested_vec = &particles_texOb_vec;      break; }
-		case TEXTURE::DISTANTSTAR_ID: 	     { requested_vec = &starBgEffect_texOb_vec;   break; }
-		case TEXTURE::NEBULA_BACKGROUND_ID:  { requested_vec = &nebulaBgEffect_texOb_vec; break; }
+		case TYPE::TEXTURE::PARTICLE_EFFECT_ID:    { requested_vec = &particles_texOb_vec;      break; }
+		case TYPE::TEXTURE::DISTANTSTAR_ID: 	     { requested_vec = &starBgEffect_texOb_vec;   break; }
+		case TYPE::TEXTURE::NEBULA_BACKGROUND_ID:  { requested_vec = &nebulaBgEffect_texOb_vec; break; }
 	}
 	
      	for(unsigned int i=0; i<requested_vec->size(); i++)
@@ -446,53 +447,53 @@ TextureOb* TextureManager::GetTexObByColorId(int _type_id, int _color_id)
      	return requested_texOb;
 }
                 
-TextureOb* TextureManager::GetRandomTextureOb(int texture_type_id)
+TextureOb* TextureManager::GetRandomTextureOb(TYPE::TEXTURE texture_type_id)
 {
 	TextureOb* requested_texOb = nullptr;
 	switch(texture_type_id)
 	{
-		case TEXTURE::SPACESTATION_ID:     { requested_texOb = GetRandomTextureObFromVec(spacestation_texOb_vec);             break; }
-		case TEXTURE::SATELLITE_ID:        { requested_texOb = GetRandomTextureObFromVec(satellite_texOb_vec);            break; }
+		case TYPE::TEXTURE::SPACESTATION_ID:     { requested_texOb = GetRandomTextureObFromVec(spacestation_texOb_vec);             break; }
+		case TYPE::TEXTURE::SATELLITE_ID:        { requested_texOb = GetRandomTextureObFromVec(satellite_texOb_vec);            break; }
 					
-		case TEXTURE::ITEM_SLOT_ID:         { requested_texOb = GetRandomTextureObFromVec(itemslot_texOb_vec);             break; }
-		case TEXTURE::VEHICLE_SLOT_ID:      { requested_texOb = GetRandomTextureObFromVec(vehicleslot_texOb_vec);          break; }
-		case TEXTURE::CONTAINER_ID:        { requested_texOb = GetRandomTextureObFromVec(container_texOb_vec);            break; }
-		case TEXTURE::STAR_ID:             { requested_texOb = GetRandomTextureObFromVec(star_texOb_vec);                 break; }
-		case TEXTURE::PLANET_ID:           { requested_texOb = GetRandomTextureObFromVec(planet_texOb_vec);               break; }
-		case TEXTURE::ATMOSPHERE_ID:       { requested_texOb = GetRandomTextureObFromVec(atmosphere_texOb_vec);           break; }
-		case TEXTURE::ASTEROID_ID:         { requested_texOb = GetRandomTextureObFromVec(asteroid_texOb_vec);             break; }
-		case TEXTURE::MINERAL_ID:          { requested_texOb = GetRandomTextureObFromVec(mineral_texOb_vec);              break; }
-		case TEXTURE::BOMB_ID:             { requested_texOb = GetRandomTextureObFromVec(bomb_texOb_vec);                 break; }
-		case TEXTURE::BLACKHOLE_ID:        { requested_texOb = GetRandomTextureObFromVec(blackhole_texOb_vec);            break; }
-		case TEXTURE::ROCKET_BULLET_ID:    { requested_texOb = GetRandomTextureObFromVec(rocketBullet_texOb_vec);         break; }
+		case TYPE::TEXTURE::ITEM_SLOT_ID:         { requested_texOb = GetRandomTextureObFromVec(itemslot_texOb_vec);             break; }
+		case TYPE::TEXTURE::VEHICLE_SLOT_ID:      { requested_texOb = GetRandomTextureObFromVec(vehicleslot_texOb_vec);          break; }
+		case TYPE::TEXTURE::CONTAINER_ID:        { requested_texOb = GetRandomTextureObFromVec(container_texOb_vec);            break; }
+		case TYPE::TEXTURE::STAR_ID:             { requested_texOb = GetRandomTextureObFromVec(star_texOb_vec);                 break; }
+		case TYPE::TEXTURE::PLANET_ID:           { requested_texOb = GetRandomTextureObFromVec(planet_texOb_vec);               break; }
+		case TYPE::TEXTURE::ATMOSPHERE_ID:       { requested_texOb = GetRandomTextureObFromVec(atmosphere_texOb_vec);           break; }
+		case TYPE::TEXTURE::ASTEROID_ID:         { requested_texOb = GetRandomTextureObFromVec(asteroid_texOb_vec);             break; }
+		case TYPE::TEXTURE::MINERAL_ID:          { requested_texOb = GetRandomTextureObFromVec(mineral_texOb_vec);              break; }
+		case TYPE::TEXTURE::BOMB_ID:             { requested_texOb = GetRandomTextureObFromVec(bomb_texOb_vec);                 break; }
+		case TYPE::TEXTURE::BLACKHOLE_ID:        { requested_texOb = GetRandomTextureObFromVec(blackhole_texOb_vec);            break; }
+		case TYPE::TEXTURE::ROCKET_BULLET_ID:    { requested_texOb = GetRandomTextureObFromVec(rocketBullet_texOb_vec);         break; }
 
-		case TEXTURE::ROCKET_EQUIPMENT_ID:      { requested_texOb = GetRandomTextureObFromVec(rocketEquipment_texOb_vec);      break; }
-		case TEXTURE::LAZER_EQUIPMENT_ID:       { requested_texOb = GetRandomTextureObFromVec(lazerEquipment_texOb_vec);       break; }
-		case TEXTURE::RADAR_EQUIPMENT_ID:       { requested_texOb = GetRandomTextureObFromVec(radarEquipment_texOb_vec);       break; }
-		case TEXTURE::DRIVE_EQUIPMENT_ID:       { requested_texOb = GetRandomTextureObFromVec(driveEquipment_texOb_vec);       break; }
-		case TEXTURE::BAK_EQUIPMENT_ID:         { requested_texOb = GetRandomTextureObFromVec(bakEquipment_texOb_vec);         break; }
-		case TEXTURE::ENERGIZER_EQUIPMENT_ID: { requested_texOb = GetRandomTextureObFromVec(energyBlockEquipment_texOb_vec); break; }
-		case TEXTURE::PROTECTOR_EQUIPMENT_ID:   { requested_texOb = GetRandomTextureObFromVec(protectorEquipment_texOb_vec);   break; }
-		case TEXTURE::DROID_EQUIPMENT_ID:       { requested_texOb = GetRandomTextureObFromVec(droidEquipment_texOb_vec);       break; }
-		case TEXTURE::FREEZER_EQUIPMENT_ID:     { requested_texOb = GetRandomTextureObFromVec(freezerEquipment_texOb_vec);     break; }
-		case TEXTURE::SCANER_EQUIPMENT_ID:      { requested_texOb = GetRandomTextureObFromVec(scanerEquipment_texOb_vec);      break; }
-		case TEXTURE::GRAPPLE_EQUIPMENT_ID:     { requested_texOb = GetRandomTextureObFromVec(grappleEquipment_texOb_vec);     break; }
+		case TYPE::TEXTURE::ROCKET_EQUIPMENT_ID:      { requested_texOb = GetRandomTextureObFromVec(rocketEquipment_texOb_vec);      break; }
+		case TYPE::TEXTURE::LAZER_EQUIPMENT_ID:       { requested_texOb = GetRandomTextureObFromVec(lazerEquipment_texOb_vec);       break; }
+		case TYPE::TEXTURE::RADAR_EQUIPMENT_ID:       { requested_texOb = GetRandomTextureObFromVec(radarEquipment_texOb_vec);       break; }
+		case TYPE::TEXTURE::DRIVE_EQUIPMENT_ID:       { requested_texOb = GetRandomTextureObFromVec(driveEquipment_texOb_vec);       break; }
+		case TYPE::TEXTURE::BAK_EQUIPMENT_ID:         { requested_texOb = GetRandomTextureObFromVec(bakEquipment_texOb_vec);         break; }
+		case TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID: { requested_texOb = GetRandomTextureObFromVec(energyBlockEquipment_texOb_vec); break; }
+		case TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID:   { requested_texOb = GetRandomTextureObFromVec(protectorEquipment_texOb_vec);   break; }
+		case TYPE::TEXTURE::DROID_EQUIPMENT_ID:       { requested_texOb = GetRandomTextureObFromVec(droidEquipment_texOb_vec);       break; }
+		case TYPE::TEXTURE::FREEZER_EQUIPMENT_ID:     { requested_texOb = GetRandomTextureObFromVec(freezerEquipment_texOb_vec);     break; }
+		case TYPE::TEXTURE::SCANER_EQUIPMENT_ID:      { requested_texOb = GetRandomTextureObFromVec(scanerEquipment_texOb_vec);      break; }
+		case TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID:     { requested_texOb = GetRandomTextureObFromVec(grappleEquipment_texOb_vec);     break; }
 
-		case TEXTURE::MODULE_ID: { requested_texOb = GetRandomTextureObFromVec(module_texOb_vec);     break; }
+		case TYPE::TEXTURE::MODULE_ID: { requested_texOb = GetRandomTextureObFromVec(module_texOb_vec);     break; }
 																				
-		case TEXTURE::TURREL_ID:           { requested_texOb = GetRandomTextureObFromVec(turrel_texOb_vec);               break; }
-		case TEXTURE::LAZER_EFFECT_ID:     { requested_texOb = GetRandomTextureObFromVec(lazerEffect_texOb_vec);          break; }
+		case TYPE::TEXTURE::TURREL_ID:           { requested_texOb = GetRandomTextureObFromVec(turrel_texOb_vec);               break; }
+		case TYPE::TEXTURE::LAZER_EFFECT_ID:     { requested_texOb = GetRandomTextureObFromVec(lazerEffect_texOb_vec);          break; }
 		
-		case TEXTURE::NATURELAND_BACKGROUND_ID: { requested_texOb = GetRandomTextureObFromVec(landBg_texOb_vec); break; }
+		case TYPE::TEXTURE::NATURELAND_BACKGROUND_ID: { requested_texOb = GetRandomTextureObFromVec(landBg_texOb_vec); break; }
 			    			
-		case TEXTURE::ANGAR_BACKGROUND_ID:         { requested_texOb = GetRandomTextureObFromVec(angarBg_texOb_vec);              break; }				
-		case TEXTURE::STORE_BACKGROUND_ID:         { requested_texOb = GetRandomTextureObFromVec(storeBg_texOb_vec);              break; }	
-		case TEXTURE::SHOP_BACKGROUND_ID:          { requested_texOb = GetRandomTextureObFromVec(shopBg_texOb_vec);               break; }	
-		case TEXTURE::GOVERMENT_BACKGROUND_ID:     { requested_texOb = GetRandomTextureObFromVec(govermentBg_texOb_vec);          break; }	
+		case TYPE::TEXTURE::ANGAR_BACKGROUND_ID:         { requested_texOb = GetRandomTextureObFromVec(angarBg_texOb_vec);              break; }				
+		case TYPE::TEXTURE::STORE_BACKGROUND_ID:         { requested_texOb = GetRandomTextureObFromVec(storeBg_texOb_vec);              break; }	
+		case TYPE::TEXTURE::SHOP_BACKGROUND_ID:          { requested_texOb = GetRandomTextureObFromVec(shopBg_texOb_vec);               break; }	
+		case TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID:     { requested_texOb = GetRandomTextureObFromVec(govermentBg_texOb_vec);          break; }	
 
-		case TEXTURE::SHIELD_EFFECT_ID:    { requested_texOb = GetRandomTextureObFromVec(shieldEffect_texOb_vec);         break; }	
-		case TEXTURE::NEBULA_BACKGROUND_ID:           { requested_texOb = GetRandomTextureObFromVec(nebulaBgEffect_texOb_vec);       break; }
-		case TEXTURE::DISTANTSTAR_ID:      { requested_texOb = GetRandomTextureObFromVec(starBgEffect_texOb_vec);         break; }				
+		case TYPE::TEXTURE::SHIELD_EFFECT_ID:    { requested_texOb = GetRandomTextureObFromVec(shieldEffect_texOb_vec);         break; }	
+		case TYPE::TEXTURE::NEBULA_BACKGROUND_ID:           { requested_texOb = GetRandomTextureObFromVec(nebulaBgEffect_texOb_vec);       break; }
+		case TYPE::TEXTURE::DISTANTSTAR_ID:      { requested_texOb = GetRandomTextureObFromVec(starBgEffect_texOb_vec);         break; }				
 				
 	}
 

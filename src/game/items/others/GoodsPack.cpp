@@ -119,7 +119,7 @@ GoodsPack* GetNewGoodsPack(TYPE::ENTITY subtype_id, INTLONGEST id)
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
         
-	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::CONTAINER_ID); 
+	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::CONTAINER_ID); 
 	
 	GoodsPack* goodsPack = new GoodsPack(id, subtype_id);
 	goodsPack->BindData2D(texOb);

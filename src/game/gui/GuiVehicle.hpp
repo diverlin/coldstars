@@ -16,14 +16,16 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef GUIVEHICLE_HPP
 #define GUIVEHICLE_HPP
 
-#include "BaseGuiElement.hpp"
-#include <docking/Store.hpp>
-#include <common/constants.hpp>
+#include <gui/BaseGuiElement.hpp>
+
 class Vehicle;
-#include "MouseData.hpp" // to be removed
+class Store;
+class MouseData; // to be removed
+
 
 class GuiVehicle : public BaseGuiElement
 {

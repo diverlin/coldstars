@@ -65,8 +65,8 @@ GravityArtefact* GravityArtefactBuilder::GetNewGravityArtefact(int gravity) cons
     	
 void GravityArtefactBuilder::CreateNewInternals(GravityArtefact* gravity_artefact, int gravity) const
 {     
-    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BAK_EQUIPMENT_ID);    
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
+    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::BAK_EQUIPMENT_ID);    
+    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
     gravity = getRandInt(ARTEFACT::GRAVITY::GRAVITYRATE_MIN, ARTEFACT::GRAVITY::GRAVITYRATE_MAX);
 
     ItemCommonData common_data;

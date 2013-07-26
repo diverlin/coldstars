@@ -66,7 +66,7 @@ DroidModule* DroidModuleBuilder::GetNewDroidModule(int repair_add) const
  	
 void DroidModuleBuilder::CreateNewInternals(DroidModule* droid_module, int repair_add) const
 {     
-    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);   
     repair_add  = getRandInt(MODULE::DROID::REPAIR_MIN, MODULE::DROID::REPAIR_MAX);
 
     droid_module->SetParentSubTypeId(TYPE::ENTITY::DROID_EQUIPMENT_ID);    

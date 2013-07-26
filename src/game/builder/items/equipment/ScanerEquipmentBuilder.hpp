@@ -16,14 +16,15 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef SCANEREQUIPMENTBUILDER_HPP
 #define SCANEREQUIPMENTBUILDER_HPP
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
-#include <common/constants.hpp>
 
 class ScanerEquipment;
+
 
 class ScanerEquipmentBuilder
 {

@@ -16,14 +16,15 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef LAZEREQUIPMENTBUILDER_HPP
 #define LAZEREQUIPMENTBUILDER_HPP
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
-#include <common/constants.hpp>
 
 class LazerEquipment;
+
 
 class LazerEquipmentBuilder
 {

@@ -16,10 +16,12 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUIRADAR_H
-#define GUIRADAR_H
+#ifndef GUIRADAR_HPP
+#define GUIRADAR_HPP
 
 #include "BaseGuiElement.hpp"
+#include <common/rect.hpp> // to be removed
+
 class BaseSpaceEntity;
 class Vehicle;
 

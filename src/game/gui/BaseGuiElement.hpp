@@ -23,15 +23,12 @@
 #include <map>
 #include <vector>
 
+#include <types/GuiTypes.hpp>
+#include <common/Box2D.hpp> 
+
 class Player;
 class AnimationEffect2D;
-
-#include <types/GuiTypes.hpp>
-
-#include <common/Box2D.hpp> 
-#include <common/rect.hpp> // to be removed
-#include <resources/TextureManager.hpp>
-#include <common/constants.hpp>
+class TextureOb;
 
           
 class BaseGuiElement

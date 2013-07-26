@@ -68,7 +68,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 	TextureOb* texOb = nullptr;
 	if (getRandInt(0, 1))
 	{
-        texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SPACESTATION_ID); 
+        texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SPACESTATION_ID); 
     }
     else
     {	

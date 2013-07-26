@@ -17,11 +17,11 @@
 */
 
 
-#ifndef DISTANTSTAREFFECT_H
-#define DISTANTSTAREFFECT_H
+#ifndef DISTANTSTAREFFECT_HPP
+#define DISTANTSTAREFFECT_HPP
 
-#include "BaseBackGroundEffect.hpp"
-#include "../common/constants.hpp"
+#include <effects/BaseBackGroundEffect.hpp>    
+#include <types/MyInt.hpp>
 
 class DistantStarEffect : public BaseBackGroundEffect
 {   

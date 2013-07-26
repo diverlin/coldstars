@@ -117,7 +117,7 @@ void GuiGalaxyMap::Render()
 			{   	
 				StarSystem* starsystem = galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
 				
-				TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TEXTURE::DISTANTSTAR_ID, starsystem->STAR_vec[0]->GetColorId()); 
+				TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::DISTANTSTAR_ID, starsystem->STAR_vec[0]->GetColorId()); 
 				
 				drawParticleTextured(texOb_particle->texture, starsystem->GetCenter()*scale_parsec2screencoord, 30.0, -2.0);
 				

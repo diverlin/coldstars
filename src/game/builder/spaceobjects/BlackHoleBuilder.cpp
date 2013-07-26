@@ -76,7 +76,7 @@ void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
     data_life.life_time = getRandInt(250, 500);     
     data_life.dying_time = 2;        
         
-	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BLACKHOLE_ID); 
+	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::BLACKHOLE_ID); 
                 
 	blackhole->SetLifeData(data_life);
 	

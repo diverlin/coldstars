@@ -16,12 +16,14 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef ASTEROIDBUILDER_HPP
 #define ASTEROIDBUILDER_HPP
 
-#include <common/constants.hpp>
+#include <types/MyInt.hpp>
 
 class Asteroid;
+
 
 namespace ENTITY
 {
@@ -33,6 +35,7 @@ namespace ENTITY
 		const int GIVEN_EXPIRIENCE = 100;
 	}
 }
+
 
 class AsteroidBuilder
 {
