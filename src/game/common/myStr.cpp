@@ -58,23 +58,6 @@ std::string getAiModelStr(int id)
 	}
 }
 
-std::string getRaceStr(int race_id) 
-{
-	switch(race_id)
-	{
-		case RACE::R0_ID: 	{ return "RACE0"; break; }
-		case RACE::R1_ID:	{ return "RACE1"; break; }
-		case RACE::R2_ID:	{ return "RACE2"; break; }
-		case RACE::R3_ID:	{ return "RACE3"; break; }
-		case RACE::R4_ID:	{ return "RACE4"; break; }	
-
-		case RACE::R6_ID:	{ return "RACE6"; break; }
-		case RACE::R7_ID:	{ return "RACE7"; break; }	
-		
-		default:		{ return "UKNOWN ID"; break; }
-	}
-}
-
 std::string getNavigatorActionStr(int type_id)
 {
 	switch(type_id)

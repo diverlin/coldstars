@@ -22,6 +22,7 @@
 #include "../render/Mesh.hpp"
 #include "../math/myVector.hpp"
 #include "../common/constants.hpp"
+#include "../common/RaceTypes.hpp"
 
 class RaceInformationCollector
 {
@@ -29,9 +30,9 @@ class RaceInformationCollector
 		static RaceInformationCollector& Instance();
 		~RaceInformationCollector() {};
 		
-		std::vector<int> RACES_ALL_vec;
-		std::vector<int> RACES_GOOD_vec;
-		std::vector<int> RACES_EVIL_vec;
+		std::vector<RACE::TYPE> RACES_ALL_vec;
+		std::vector<RACE::TYPE> RACES_GOOD_vec;
+		std::vector<RACE::TYPE> RACES_EVIL_vec;
 
 		std::vector<ENTITY::TYPE> RACE0_ALLOWED_SUBTYPE_vec;
 		std::vector<ENTITY::TYPE> RACE1_ALLOWED_SUBTYPE_vec;
@@ -43,7 +44,7 @@ class RaceInformationCollector
                 
         std::vector<ENTITY::TYPE> SUBSUBTYPE_vec;
 		
-		bool IsGood(int) const;
+		bool IsGood(RACE::TYPE) const;
 	
 	private:
 		RaceInformationCollector() {};

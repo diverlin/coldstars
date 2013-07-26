@@ -17,12 +17,14 @@
 */
 
 
-#ifndef TEXTUREMANAGER_H
-#define TEXTUREMANAGER_H
+#ifndef TEXTUREMANAGER_HPP
+#define TEXTUREMANAGER_HPP
 
 #include <string>
 #include <vector>
 #include <common/constants.hpp>
+#include <common/RaceTypes.hpp>
+
 class TextureOb;
 
 class TextureManager
@@ -32,8 +34,8 @@ class TextureManager
         	
         	void Add(TextureOb*);
 
-        	TextureOb* GetRandomFaceTexObWithFolloingAttributes(int _race_id);
-        	TextureOb* GetRandomShipTexObWithFollowingAtrributes(int _race_id, ENTITY::TYPE _subtype_id, int _size_id);
+        	TextureOb* GetRandomFaceTexObWithFolloingAttributes(RACE::TYPE);
+        	TextureOb* GetRandomShipTexObWithFollowingAtrributes(RACE::TYPE, ENTITY::TYPE, int _size_id);
 
         	TextureOb* GetTexObByColorId(int type_id, int color_id);
                         	

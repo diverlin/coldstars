@@ -131,6 +131,8 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
                 
         return false;
         */
+        
+        return false;
 }
 
 void GuiStore::RenderSlots(int credits) const

@@ -21,6 +21,7 @@
 
 #include "../common/BaseDrawable.hpp"
 #include "../text/InfoTable.hpp"
+
 class ItemSlot; 
 class Box2D;
 
@@ -45,8 +46,8 @@ struct ItemCommonData
 
 struct UnresolvedDataUniqueBaseItem
 {
-        std::string textureOb_path;
-        int item_slot_id;
+    std::string textureOb_path;
+    int item_slot_id;
 };
 
 class BaseItem : public BaseDrawable
@@ -93,7 +94,8 @@ class BaseItem : public BaseDrawable
         void RenderInfo(const Vec2<float>&); 
 
 	protected:
-        int race_id;
+        RACE::TYPE race_id;
+        
         int locked_turns;
         int condition;
         int price;

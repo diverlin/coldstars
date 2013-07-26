@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef LAZEREQUIPMENTBUILDER_H
-#define LAZEREQUIPMENTBUILDER_H
+#ifndef LAZEREQUIPMENTBUILDER_HPP
+#define LAZEREQUIPMENTBUILDER_HPP
+
+#include <common/constants.hpp>
+#include <common/RaceTypes.hpp>
 
 class LazerEquipment;
-#include "../../../common/constants.hpp"
 
 class LazerEquipmentBuilder
 {
@@ -28,15 +30,15 @@ class LazerEquipmentBuilder
 		static LazerEquipmentBuilder& Instance();
 		~LazerEquipmentBuilder();
 
-        	LazerEquipment* GetNewLazerEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-                LazerEquipment* GetNewLazerEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
+        LazerEquipment* GetNewLazerEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        LazerEquipment* GetNewLazerEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
-        private:
+    private:
 		LazerEquipmentBuilder() {};
 		LazerEquipmentBuilder(const LazerEquipmentBuilder&) = delete;
 		LazerEquipmentBuilder& operator=(const LazerEquipmentBuilder&) = delete;
 
-                void CreateNewInternals(LazerEquipment*, int, int, int, int) const;
+        void CreateNewInternals(LazerEquipment*, int, RACE::TYPE, int, int) const;
 }; 
 
 #endif 

@@ -42,10 +42,11 @@
 #include "../text/VerticalFlowText.hpp" 
 
 #include "../common/GameDate.hpp" 
+#include <common/RaceTypes.hpp> 
 
 Npc::Npc(int id, ENTITY::TYPE subtype_id, ENTITY::TYPE subsubtype_id)
 :
-race_id(NONE_ID),
+race_id(RACE::TYPE::NONE_ID),
 credits(1000),
 player(nullptr),
 vehicle(nullptr),
@@ -258,27 +259,27 @@ void Npc::UpdateInfo()
 {
 	info.clear();
 
-    	info.addTitleStr("NPC");
-    	info.addNameStr("id:");           info.addValueStr( int2str(GetId())  );
-    	info.addNameStr("race:");   	  info.addValueStr( getRaceStr(race_id) ); 
-    	info.addNameStr("subype_id:");    info.addValueStr( getEntityTypeStr(GetSubTypeId()) );  
-        info.addNameStr("subsubype_id:"); info.addValueStr( getEntityTypeStr(GetSubSubTypeId()) );  
-    	info.addNameStr("model_ai:");     info.addValueStr( getAiModelStr(ai_model->GetTypeId()) );  
-    	info.addNameStr("credits:");   	  info.addValueStr( int2str(credits) );	
-    	info.addNameStr("expirience:");   info.addValueStr( int2str(skills.GetExpirience()) + " / " + int2str(skills.GetExpirienceNextLevel()) );	
-    	info.addNameStr("free skills:");  info.addValueStr( int2str(skills.GetAvailablePoints()) );	
-	
-        info.addNameStr("npc_agress:"); info.addValueStr( GetAgressorSetString() );
-        
-    	if (state_machine.GetMacroTaskManager().GetScenario() != nullptr)
-    	{ 	
-    	info.addNameStr("macro_task:");   info.addValueStr( state_machine.GetMacroTaskManager().GetScenario()->GetDescription(this) ); 
-    	}
-    	
-    	if (state_machine.GetMicroTaskManager().GetScenario() != nullptr)
-    	{ 	
-    	info.addNameStr("micro_task:");   info.addValueStr( state_machine.GetMicroTaskManager().GetScenario()->GetDescription(this) ); 
-    	}
+    info.addTitleStr("NPC");
+    info.addNameStr("id:");           info.addValueStr( int2str(GetId())  );
+    info.addNameStr("race:");   	  info.addValueStr( getRaceStr(race_id) ); 
+    info.addNameStr("subype_id:");    info.addValueStr( getEntityTypeStr(GetSubTypeId()) );  
+    info.addNameStr("subsubype_id:"); info.addValueStr( getEntityTypeStr(GetSubSubTypeId()) );  
+    info.addNameStr("model_ai:");     info.addValueStr( getAiModelStr(ai_model->GetTypeId()) );  
+    info.addNameStr("credits:");   	  info.addValueStr( int2str(credits) );	
+    info.addNameStr("expirience:");   info.addValueStr( int2str(skills.GetExpirience()) + " / " + int2str(skills.GetExpirienceNextLevel()) );	
+    info.addNameStr("free skills:");  info.addValueStr( int2str(skills.GetAvailablePoints()) );	
+
+    info.addNameStr("npc_agress:"); info.addValueStr( GetAgressorSetString() );
+    
+    if (state_machine.GetMacroTaskManager().GetScenario() != nullptr)
+    { 	
+        info.addNameStr("macro_task:");   info.addValueStr( state_machine.GetMacroTaskManager().GetScenario()->GetDescription(this) ); 
+    }
+    
+    if (state_machine.GetMicroTaskManager().GetScenario() != nullptr)
+    { 	
+        info.addNameStr("micro_task:");   info.addValueStr( state_machine.GetMicroTaskManager().GetScenario()->GetDescription(this) ); 
+    }
 }
 
 void Npc::RenderInfo(const Vec2<float>& center)
@@ -327,9 +328,9 @@ void Npc::ResolveData()
 void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::string& root) const	
 {
 	save_ptree.put(root+"is_alive", is_alive);
-	save_ptree.put(root+"race_id", race_id);
-        save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
-        save_ptree.put(root+"unresolved.aiModel_id", ai_model->GetTypeId());
+	save_ptree.put(root+"race_id", (int)race_id);
+    save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
+    save_ptree.put(root+"unresolved.aiModel_id", ai_model->GetTypeId());
 	skills.SaveData(save_ptree, root);
 	if (state_machine.GetMacroTaskManager().GetScenario() != nullptr)
 	{
@@ -347,7 +348,7 @@ void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::
 void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 {
 	is_alive = load_ptree.get<bool>("is_alive");
-	race_id  = load_ptree.get<int>("race_id");
+	race_id  = (RACE::TYPE)load_ptree.get<int>("race_id");
 	data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
 	data_unresolved_npc.aiModel_id = load_ptree.get<int>("unresolved.aiModel_id");
 	
@@ -366,10 +367,10 @@ void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
 
 void Npc::ResolveDataUniqueNpc()
 {
-        ApplySkillsStrategy();
-        
-        ((Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
-        SetAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
+    ApplySkillsStrategy();
+    
+    ((Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
+    SetAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
 	skills.ResolveData();
 	
@@ -386,31 +387,31 @@ void Npc::ResolveDataUniqueNpc()
 
 void Npc::ApplySkillsStrategy()
 {           /*
-        ENTITY::TYPE class_type_id = data_id.subtype_id;
-        if (data_id.subtype_id == ENTITY::TYPE::RANGER_ID)
-        {
-                class_type_id = data_id.subsubtype_id;
-        }
-                       
-        int skills_strategy[SKILLS_NUM];
-        const int* strategy_class_type = getArrayDependingOnClassTypeId(class_type_id);
-        const int* strategy_race       = getArrayDependingOnRaceId(race_id);
+    ENTITY::TYPE class_type_id = data_id.subtype_id;
+    if (data_id.subtype_id == ENTITY::TYPE::RANGER_ID)
+    {
+            class_type_id = data_id.subsubtype_id;
+    }
+                   
+    int skills_strategy[SKILLS_NUM];
+    const int* strategy_class_type = getArrayDependingOnClassTypeId(class_type_id);
+    const int* strategy_race       = getArrayDependingOnRaceId(race_id);
 
-        for (unsigned int i=0; i<SKILLS_NUM; i++)
-        {
-                skills_strategy[i] = strategy_class_type[i] * strategy_race[i];
-        }
-        
-        skills.BindStrategy(skills_strategy);     */
+    for (unsigned int i=0; i<SKILLS_NUM; i++)
+    {
+            skills_strategy[i] = strategy_class_type[i] * strategy_race[i];
+    }
+    
+    skills.BindStrategy(skills_strategy);     */
 }
 
 std::string Npc::GetAgressorSetString() const
 {
-        std::string str;
-        for (std::set<AgressorData>::iterator it = data_agressor_set.begin(); it != data_agressor_set.end(); ++it)
-        {
-                str += int2str(it->npc_id) + ":" + int2str(it->counter) + " ";
-        }
-        
-        return str;
+    std::string str;
+    for (std::set<AgressorData>::iterator it = data_agressor_set.begin(); it != data_agressor_set.end(); ++it)
+    {
+            str += int2str(it->npc_id) + ":" + int2str(it->counter) + " ";
+    }
+    
+    return str;
 }

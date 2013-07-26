@@ -17,8 +17,8 @@
 */
 
 
-#ifndef TEXTUREOB_H
-#define TEXTUREOB_H
+#ifndef TEXTUREOB_HPP
+#define TEXTUREOB_HPP
 
 #include <string>
 #include <vector>
@@ -26,6 +26,7 @@
 
 #include "../math/myVector.hpp"
 #include <common/constants.hpp>
+#include <common/RaceTypes.hpp>
 
 
 class TextureOb
@@ -35,7 +36,7 @@ class TextureOb
         	int type_id;
         	ENTITY::TYPE subtype_id;   //# warrior/trader and so on
         	int mod_id;       // is not used for now
-        	int race_id;
+        	RACE::TYPE race_id;
         	int tech_level_id;
         	int size_id;      // counting from wxh of sprite
         

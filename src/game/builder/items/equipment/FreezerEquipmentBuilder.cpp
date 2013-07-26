@@ -55,46 +55,46 @@ FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipmentTemplate(unsign
         return freezer_equipment;
 } 
     
-FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipment(int tech_level, int race_id, int freeze_orig) const
+FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipment(int tech_level, RACE::TYPE race_id, int freeze_orig) const
 {
 	FreezerEquipment* freezer_equipment = GetNewFreezerEquipmentTemplate();
-        CreateNewInternals(freezer_equipment, tech_level, race_id, freeze_orig);
-        
-        return freezer_equipment;
+    CreateNewInternals(freezer_equipment, tech_level, race_id, freeze_orig);
+    
+    return freezer_equipment;
 } 
     	
-void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equipment, int tech_level, int race_id, int freeze_orig) const
+void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equipment, int tech_level, RACE::TYPE race_id, int freeze_orig) const
 {     
-        if (race_id == NONE_ID)
-        {
-       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+    if (race_id == RACE::TYPE::NONE_ID)
+    {
+        race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
-    	if (tech_level == NONE_ID)
-    	{
-       		tech_level = 1; 
+    if (tech_level == NONE_ID)
+    {
+        tech_level = 1; 
 	}
 
-    	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::FREEZER_EQUIPMENT_ID);    
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
+    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::FREEZER_EQUIPMENT_ID);    
+    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
 
-    	freeze_orig     = getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX) * (1 + EQUIPMENT::FREEZER::FREEZE_TECHLEVEL_RATE*tech_level);
-    	
-    	ItemCommonData common_data;
-    	common_data.tech_level 	    = tech_level;
-    	common_data.modules_num_max = getRandInt(EQUIPMENT::FREEZER::MODULES_NUM_MIN, EQUIPMENT::FREEZER::MODULES_NUM_MAX);
-    	common_data.mass            = getRandInt(EQUIPMENT::FREEZER::MASS_MIN,        EQUIPMENT::FREEZER::MASS_MAX);
-    	common_data.condition_max   = getRandInt(EQUIPMENT::FREEZER::CONDITION_MIN,   EQUIPMENT::FREEZER::CONDITION_MAX);
-    	common_data.deterioration_normal = 1;
-        
-        freezer_equipment->SetFreezeOrig(freeze_orig);  
-        freezer_equipment->BindData2D(texOb_item);    	
-        freezer_equipment->SetParentSubTypeId(ENTITY::TYPE::FREEZER_SLOT_ID);
-        freezer_equipment->SetItemCommonData(common_data);
-        freezer_equipment->SetCondition(common_data.condition_max);
-          
-      	freezer_equipment->UpdateProperties();
-    	freezer_equipment->CountPrice();
+    freeze_orig     = getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX) * (1 + EQUIPMENT::FREEZER::FREEZE_TECHLEVEL_RATE*tech_level);
+    
+    ItemCommonData common_data;
+    common_data.tech_level 	    = tech_level;
+    common_data.modules_num_max = getRandInt(EQUIPMENT::FREEZER::MODULES_NUM_MIN, EQUIPMENT::FREEZER::MODULES_NUM_MAX);
+    common_data.mass            = getRandInt(EQUIPMENT::FREEZER::MASS_MIN,        EQUIPMENT::FREEZER::MASS_MAX);
+    common_data.condition_max   = getRandInt(EQUIPMENT::FREEZER::CONDITION_MIN,   EQUIPMENT::FREEZER::CONDITION_MAX);
+    common_data.deterioration_normal = 1;
+    
+    freezer_equipment->SetFreezeOrig(freeze_orig);  
+    freezer_equipment->BindData2D(texOb_item);    	
+    freezer_equipment->SetParentSubTypeId(ENTITY::TYPE::FREEZER_SLOT_ID);
+    freezer_equipment->SetItemCommonData(common_data);
+    freezer_equipment->SetCondition(common_data.condition_max);
+      
+    freezer_equipment->UpdateProperties();
+    freezer_equipment->CountPrice();
 }
 
 

@@ -16,47 +16,50 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef IDGENERATOR_H
-#define IDGENERATOR_H
+
+#ifndef IDGENERATOR_HPP
+#define IDGENERATOR_HPP
 
 #include <string>
 #include <vector>
 
+#include <common/MyInt.hpp>
+
 class EntityIdGenerator
 {
-    	public:
-		static EntityIdGenerator& Instance();
+    public:
+        static EntityIdGenerator& Instance();
+        
+        INTLONGEST GetNextId();
+        void AddFreeId(INTLONGEST free_id) { free_ids.push_back(free_id); };
         	
-        	unsigned long int GetNextId();
-        	void AddFreeId(unsigned long int free_id) { free_ids.push_back(free_id); };
-        	
-        private:
-        	EntityIdGenerator():last_incremented_id(0) {};
-        	~EntityIdGenerator() {};
-        	
-        	EntityIdGenerator(EntityIdGenerator&) = delete;
-        	EntityIdGenerator& operator=(EntityIdGenerator&) = delete;
-        	        
-                unsigned long int last_incremented_id;
-        	std::vector<unsigned long int> free_ids; 
+    private:
+        EntityIdGenerator():last_incremented_id(0) {}
+        ~EntityIdGenerator() {}
+        
+        EntityIdGenerator(EntityIdGenerator&) = delete;
+        EntityIdGenerator& operator=(EntityIdGenerator&) = delete;
+        
+        INTLONGEST last_incremented_id;
+        std::vector<INTLONGEST> free_ids; 
 };
 
 
 class TextureIdGenerator
 {
-    	public:
-		static TextureIdGenerator& Instance();
+    public:
+        static TextureIdGenerator& Instance();
+        
+        INTLONGEST GetNextId();
         	
-        	unsigned long int GetNextId();
-        	
-        private:
-        	TextureIdGenerator():last_incremented_id(0) {};
-        	~TextureIdGenerator() {};
-        	
-        	TextureIdGenerator(TextureIdGenerator&) = delete;
-        	TextureIdGenerator& operator=(TextureIdGenerator&) = delete;
-        	        
-                unsigned long int last_incremented_id;
+    private:
+        TextureIdGenerator():last_incremented_id(0) {}       
+        ~TextureIdGenerator() {}
+        
+        TextureIdGenerator(TextureIdGenerator&) = delete;
+        TextureIdGenerator& operator=(TextureIdGenerator&) = delete;
+        
+        INTLONGEST last_incremented_id;
 };
 
 #endif

@@ -16,41 +16,9 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <common/IdGenerator.hpp>
+#ifndef MYINT_HPP
+#define MYINT_HPP
 
-EntityIdGenerator& EntityIdGenerator::Instance()
-{
-	static EntityIdGenerator instance;
-	return instance;
-}
+typedef unsigned long long int INTLONGEST;
 
-INTLONGEST EntityIdGenerator::GetNextId()
-{  
-	if (!free_ids.empty())
-	{
-		 INTLONGEST id = free_ids[free_ids.size()-1];
-		 free_ids.pop_back();
-		 return id;		 
-	}
-	else
-	{
-		last_incremented_id++;
-        return last_incremented_id;
-	}
-}  
-
-
-TextureIdGenerator& TextureIdGenerator::Instance()
-{
-	static TextureIdGenerator instance;
-	return instance;
-}
-
-INTLONGEST TextureIdGenerator::GetNextId()
-{  
-	last_incremented_id++;
-        
-    return last_incremented_id;
-}  
-
-
+#endif

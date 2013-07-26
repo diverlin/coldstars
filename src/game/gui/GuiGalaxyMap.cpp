@@ -118,7 +118,7 @@ void GuiGalaxyMap::Render()
 				
 				drawParticleTextured(texOb_particle->texture, starsystem->GetCenter()*scale_parsec2screencoord, 30.0, -2.0);
 				
-				if (starsystem->GetConquerorRaceId() != NONE_ID)
+				if (starsystem->GetConquerorRaceId() != RACE::TYPE::NONE_ID)
 				{
 					drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_captured->texture, starsystem->GetCenter()*scale_parsec2screencoord, 20.0, -2.0);
 				}

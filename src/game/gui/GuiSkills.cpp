@@ -30,17 +30,17 @@ trader_undo(0),
 technic_undo(0),
 diplomat_undo(0)
 {
-	textureOb_skill = GuiTextureObCollector::Instance().skill;
-	textureOb_skill_transparent = GuiTextureObCollector::Instance().skill_transparent;     	     	
+	//textureOb_skill = GuiTextureObCollector::Instance().skill;
+	//textureOb_skill_transparent = GuiTextureObCollector::Instance().skill_transparent;     	     	
 	
-	int button_w = GUI::BUTTON::SKILLS::BUTTON_WIDTH;  
-	int button_h = GUI::BUTTON::SKILLS::BUTTON_HEIGHT; 
+	//int button_w = GUI::BUTTON::SKILLS::BUTTON_WIDTH;  
+	//int button_h = GUI::BUTTON::SKILLS::BUTTON_HEIGHT; 
 	
-	TextureOb* texOb_icon_plus  = GuiTextureObCollector::Instance().icon_plus;
-	TextureOb* texOb_icon_minus = GuiTextureObCollector::Instance().icon_minus;
+	//TextureOb* texOb_icon_plus  = GuiTextureObCollector::Instance().icon_plus;
+	//TextureOb* texOb_icon_minus = GuiTextureObCollector::Instance().icon_minus;
 		 
-	float zpos = -1;
-	float zsize = 1;
+	//float zpos = -1;
+	//float zsize = 1;
 	
 	{
 		//ButtonSingle* Increment_attack_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_ATTACK_ID, "increment attack");  
@@ -150,7 +150,7 @@ diplomat_undo(0)
 		//button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_DIPLOMAT_ID, Decrement_diplomat_button));    
 	}
 	
-	background_rect.Set(0, 0, 6*button_w, SKILLS::ATTACK_MAX*button_h);	
+	//background_rect.Set(0, 0, 6*button_w, SKILLS::ATTACK_MAX*button_h);	
 	textureOb_background = GuiTextureObCollector::Instance().text_background;
 }
 

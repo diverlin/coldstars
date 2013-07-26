@@ -35,13 +35,13 @@
 
 GuiNatureLand::GuiNatureLand():natureland(nullptr)
 {
-	int screen_w = Config::Instance().SCREEN_WIDTH;
-	int screen_h = Config::Instance().SCREEN_HEIGHT;
+	//int screen_w = Config::Instance().SCREEN_WIDTH;
+	//int screen_h = Config::Instance().SCREEN_HEIGHT;
 	
-	TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
+	//TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
 	
-	float zpos = -1;
-	float zsize = 1;	
+	//float zpos = -1;
+	//float zsize = 1;	
 	
 	{		   
 		//ButtonSingle* launch_button = new ButtonSingle(texOb_button, GUI::BUTTON::GETLAUNCH_ID, "launch");

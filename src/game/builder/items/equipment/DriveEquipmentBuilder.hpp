@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef DRIVEEQUIPMENTBUILDER_H
-#define DRIVEEQUIPMENTBUILDER_H
+#ifndef DRIVEEQUIPMENTBUILDER_HPP
+#define DRIVEEQUIPMENTBUILDER_HPP
+
+#include <common/constants.hpp>
+#include <common/RaceTypes.hpp>
 
 class DriveEquipment;
-#include "../../../common/constants.hpp"
 
 class DriveEquipmentBuilder
 {
@@ -28,15 +30,15 @@ class DriveEquipmentBuilder
 		static DriveEquipmentBuilder& Instance();
 		~DriveEquipmentBuilder();
 
-        	DriveEquipment* GetNewDriveEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-                DriveEquipment* GetNewDriveEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int speed_orig = NONE_ID, int hyper_orig = NONE_ID) const;
+        DriveEquipment* GetNewDriveEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        DriveEquipment* GetNewDriveEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int speed_orig = NONE_ID, int hyper_orig = NONE_ID) const;
         	 		                
-        private:
+    private:
 		DriveEquipmentBuilder() {};
 		DriveEquipmentBuilder(const DriveEquipmentBuilder&) = delete;
 		DriveEquipmentBuilder& operator=(const DriveEquipmentBuilder&) = delete;
 
-                void CreateNewInternals(DriveEquipment*, int, int, int, int) const;
+        void CreateNewInternals(DriveEquipment*, int, RACE::TYPE, int, int) const;
 }; 
 
 #endif 

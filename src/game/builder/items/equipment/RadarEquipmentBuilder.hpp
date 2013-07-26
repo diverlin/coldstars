@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef RADAREQUIPMENTBUILDER_H
-#define RADAREQUIPMENTBUILDER_H
+#ifndef RADAREQUIPMENTBUILDER_HPP
+#define RADAREQUIPMENTBUILDER_HPP
+
+#include <common/constants.hpp>
+#include <common/RaceTypes.hpp>
 
 class RadarEquipment;
-#include "../../../common/constants.hpp"
 
 class RadarEquipmentBuilder
 {
@@ -28,15 +30,15 @@ class RadarEquipmentBuilder
 		static RadarEquipmentBuilder& Instance();
 		~RadarEquipmentBuilder();
 
-        	RadarEquipment* GetNewRadarEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-                RadarEquipment* GetNewRadarEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int radius_orig = NONE_ID) const;
+        RadarEquipment* GetNewRadarEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        RadarEquipment* GetNewRadarEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
-        private:
+    private:
 		RadarEquipmentBuilder() {};
 		RadarEquipmentBuilder(const RadarEquipmentBuilder&) = delete;
 		RadarEquipmentBuilder& operator=(const RadarEquipmentBuilder&) = delete;
 
-                void CreateNewInternals(RadarEquipment*, int, int, int) const;
+        void CreateNewInternals(RadarEquipment*, int, RACE::TYPE, int) const;
 }; 
 
 #endif 

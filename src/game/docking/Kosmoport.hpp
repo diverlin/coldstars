@@ -16,10 +16,11 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef KOSMOPORT_H
-#define KOSMOPORT_H
+#ifndef KOSMOPORT_HPP
+#define KOSMOPORT_HPP
 
-#include "../docking/BaseLand.hpp"
+#include <docking/BaseLand.hpp>
+#include <common/RaceTypes.hpp>
 
 class Angar; 
 class Store; 
@@ -28,44 +29,44 @@ class Goverment;
 
 class Kosmoport : public BaseLand
 {
-        public:
-                Kosmoport(int);
-                virtual ~Kosmoport();
-                
-                virtual void PutChildsToGarbage() const;
+    public:
+        Kosmoport(int);
+        virtual ~Kosmoport();
 
-                Angar*     	GetAngar()    	const { return angar; };
-                Store*    	GetStore()    	const { return store; };
-                Shop*      	GetShop()      	const { return shop; };
-                Goverment* 	GetGoverment() 	const { return goverment; }; 
+        Angar*     	GetAngar()    	const { return angar; };
+        Store*    	GetStore()    	const { return store; };
+        Shop*      	GetShop()      	const { return shop; };
+        Goverment* 	GetGoverment() 	const { return goverment; }; 
 
-                void BindAngar(Angar* angar);
-                void BindStore(Store* store);
-                void BindShop(Shop* shop);
-                void BindGoverment(Goverment* goverment);
-                                
-                virtual bool GetPermissionToLand() const;
-                                
-                virtual bool AddVehicle(Vehicle*);
-                virtual bool RemoveVehicle(Vehicle*);
-                
-                virtual void UpdateInStatic();
-                
-                virtual std::string GetDockVehicleStr() const;
-                                
-                void SaveData(boost::property_tree::ptree&) const;		
+        void BindAngar(Angar* angar);
+        void BindStore(Store* store);
+        void BindShop(Shop* shop);
+        void BindGoverment(Goverment* goverment);
+                        
+        virtual bool GetPermissionToLand() const;
+                        
+        virtual bool AddVehicle(Vehicle*);
+        virtual bool RemoveVehicle(Vehicle*);
+        
+        virtual void UpdateInStatic();
+        
+        virtual std::string GetDockVehicleStr() const;
+                        
+        void SaveData(boost::property_tree::ptree&) const;		
 		void LoadData(const boost::property_tree::ptree&);
 		void ResolveData();
 		
-        private:
-        	int race_id;
+    private:
+        RACE::TYPE race_id;
+        
+        Angar*     angar;
+        Store*     store;
+        Shop*      shop;
+        Goverment* goverment; 
+
+        virtual void PutChildsToGarbage() const;
                 
-                Angar*     angar;
-                Store*     store;
-                Shop*      shop;
-                Goverment* goverment; 
-              
-                void SaveDataUniqueKosmoport(boost::property_tree::ptree&, const std::string&) const;		
+        void SaveDataUniqueKosmoport(boost::property_tree::ptree&, const std::string&) const;		
 		void LoadDataUniqueKosmoport(const boost::property_tree::ptree&);
 		void ResolveDataUniqueKosmoport();
 };

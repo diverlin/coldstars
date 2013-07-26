@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ROCKETEQUIPMENTBUILDER_H
-#define ROCKETEQUIPMENTBUILDER_H
+#ifndef ROCKETEQUIPMENTBUILDER_HPP
+#define ROCKETEQUIPMENTBUILDER_HPP
+
+#include <common/constants.hpp>
+#include <common/RaceTypes.hpp>
 
 class RocketEquipment;
-#include "../../../common/constants.hpp"
 
 class RocketEquipmentBuilder
 {
@@ -28,15 +30,15 @@ class RocketEquipmentBuilder
 		static RocketEquipmentBuilder& Instance();
 		~RocketEquipmentBuilder();
 
-        	RocketEquipment* GetNewRocketEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-                RocketEquipment* GetNewRocketEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
+        RocketEquipment* GetNewRocketEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        RocketEquipment* GetNewRocketEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
-        private:
+    private:
 		RocketEquipmentBuilder() {};
 		RocketEquipmentBuilder(const RocketEquipmentBuilder&) = delete;
 		RocketEquipmentBuilder& operator=(const RocketEquipmentBuilder&) = delete;
 
-                void CreateNewInternals(RocketEquipment*, int, int, int, int, int) const;
+        void CreateNewInternals(RocketEquipment*, int, RACE::TYPE, int, int, int) const;
 }; 
 
 #endif 

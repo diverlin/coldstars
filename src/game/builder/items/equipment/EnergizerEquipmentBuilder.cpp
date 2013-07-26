@@ -55,49 +55,49 @@ EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipmentTemplate(
         return energizer_equipment;
 } 
     
-EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipment(int tech_level, int race_id, int energy_max_orig, int restoration_orig) const
+EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipment(int tech_level, RACE::TYPE race_id, int energy_max_orig, int restoration_orig) const
 {
 	EnergizerEquipment* energizer_equipment = GetNewEnergizerEquipmentTemplate();
 	CreateNewInternals(energizer_equipment, tech_level, race_id, energy_max_orig, restoration_orig);
 	        
-        return energizer_equipment;
+    return energizer_equipment;
 } 
     	
-void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer_equipment, int tech_level, int race_id, int energy_max_orig, int restoration_orig) const
+void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer_equipment, int tech_level, RACE::TYPE race_id, int energy_max_orig, int restoration_orig) const
 {     
-        if (race_id == NONE_ID)
-        {
-       		race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+    if (race_id == RACE::TYPE::NONE_ID)
+    {
+        race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
-    	if (tech_level == NONE_ID)
-    	{
-       		tech_level = 1; 
+    if (tech_level == NONE_ID)
+    {
+        tech_level = 1; 
 	}
 
-    	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ENERGIZER_EQUIPMENT_ID);   
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
+    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::ENERGIZER_EQUIPMENT_ID);   
+    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
 
-    	energy_max_orig  = getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN,      EQUIPMENT::ENERGIZER::ENERGY_MAX)      * (1 + EQUIPMENT::ENERGIZER::ENERGY_TECHLEVEL_RATE*tech_level);
-    	restoration_orig = getRandInt(EQUIPMENT::ENERGIZER::RESTORATION_MIN, EQUIPMENT::ENERGIZER::RESTORATION_MAX) * (1 + EQUIPMENT::ENERGIZER::RESTORATION_TECHLEVEL_RATE*tech_level);
-    	
-    	ItemCommonData common_data;
-        common_data.tech_level 	     = tech_level;
-    	common_data.modules_num_max  = getRandInt(EQUIPMENT::ENERGIZER::MODULES_NUM_MIN, EQUIPMENT::ENERGIZER::MODULES_NUM_MAX);
-    	common_data.mass             = getRandInt(EQUIPMENT::ENERGIZER::MASS_MIN,        EQUIPMENT::ENERGIZER::MASS_MAX);
-    	common_data.condition_max    = getRandInt(EQUIPMENT::ENERGIZER::CONDITION_MIN,   EQUIPMENT::ENERGIZER::CONDITION_MAX);
-    	common_data.deterioration_normal = 1;
+    energy_max_orig  = getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN,      EQUIPMENT::ENERGIZER::ENERGY_MAX)      * (1 + EQUIPMENT::ENERGIZER::ENERGY_TECHLEVEL_RATE*tech_level);
+    restoration_orig = getRandInt(EQUIPMENT::ENERGIZER::RESTORATION_MIN, EQUIPMENT::ENERGIZER::RESTORATION_MAX) * (1 + EQUIPMENT::ENERGIZER::RESTORATION_TECHLEVEL_RATE*tech_level);
+    
+    ItemCommonData common_data;
+    common_data.tech_level 	     = tech_level;
+    common_data.modules_num_max  = getRandInt(EQUIPMENT::ENERGIZER::MODULES_NUM_MIN, EQUIPMENT::ENERGIZER::MODULES_NUM_MAX);
+    common_data.mass             = getRandInt(EQUIPMENT::ENERGIZER::MASS_MIN,        EQUIPMENT::ENERGIZER::MASS_MAX);
+    common_data.condition_max    = getRandInt(EQUIPMENT::ENERGIZER::CONDITION_MIN,   EQUIPMENT::ENERGIZER::CONDITION_MAX);
+    common_data.deterioration_normal = 1;
 
-        energizer_equipment->SetEnergyMaxOrig(energy_max_orig);
-        energizer_equipment->SetRestorationOrig(restoration_orig);
-        energizer_equipment->SetEnergy(0.05*energy_max_orig);
-        energizer_equipment->BindData2D(texOb_item);    	
-        energizer_equipment->SetParentSubTypeId(ENTITY::TYPE::ENERGIZER_SLOT_ID);
-        energizer_equipment->SetItemCommonData(common_data);
-        energizer_equipment->SetCondition(common_data.condition_max);
-                        
-        energizer_equipment->UpdateProperties();
-    	energizer_equipment->CountPrice();
+    energizer_equipment->SetEnergyMaxOrig(energy_max_orig);
+    energizer_equipment->SetRestorationOrig(restoration_orig);
+    energizer_equipment->SetEnergy(0.05*energy_max_orig);
+    energizer_equipment->BindData2D(texOb_item);    	
+    energizer_equipment->SetParentSubTypeId(ENTITY::TYPE::ENERGIZER_SLOT_ID);
+    energizer_equipment->SetItemCommonData(common_data);
+    energizer_equipment->SetCondition(common_data.condition_max);
+                    
+    energizer_equipment->UpdateProperties();
+    energizer_equipment->CountPrice();
 }
 
 

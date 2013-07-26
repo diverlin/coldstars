@@ -68,7 +68,7 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
 				entity_type_id = vehicle->m_SlotTotal_vec[i]->GetSubSubTypeId();
 			}
 						  
-			TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;
+			//TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;
 			ButtonItemSlot2* button = new ButtonItemSlot2(GUI::getGuiItemSlotSelectorType(entity_type_id), getEntityTypeStr(entity_type_id), vehicle->m_SlotTotal_vec[i]);  
 
             Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);

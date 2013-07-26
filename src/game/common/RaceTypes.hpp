@@ -16,31 +16,20 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef RAND_HPP
-#define RAND_HPP
+#ifndef RACETYPES_HPP
+#define RACETYPES_HPP
 
-#include <vector>
-#include <common/constants.hpp>
-#include <common/RaceTypes.hpp>
+#include <string>
 
+namespace RACE
+{
+    enum class TYPE 
+    {
+        NONE_ID=0, R0_ID, R1_ID, R2_ID, R3_ID, R4_ID, R6_ID, R7_ID
+    };
+}
 
-int getRandIntFromVec(const std::vector<int>&);
-ENTITY::TYPE getRandIntFromVec(const std::vector<ENTITY::TYPE>&);
-RACE::TYPE getRandIntFromVec(const std::vector<RACE::TYPE>&);
-
-float getRandFloat(float, float);
-int getRandInt(int, int);
-int getRandSign();
-bool getRandBool();
-
-ENTITY::TYPE getRandNpcSubTypeId(RACE::TYPE, const std::vector<ENTITY::TYPE>&);
-const std::vector<ENTITY::TYPE>& getAllowedSubTypesByRaceId(RACE::TYPE);
-
-ENTITY::TYPE getRandNpcSubTypeId(RACE::TYPE);
-ENTITY::TYPE getRandNpcSubSubTypeId(ENTITY::TYPE);
-
-ENTITY::TYPE getRand(const std::vector<ENTITY::TYPE>&);
-
-
+std::string getRaceStr(RACE::TYPE); 
 
 #endif
+

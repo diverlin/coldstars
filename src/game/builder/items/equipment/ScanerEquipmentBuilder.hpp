@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SCANEREQUIPMENTBUILDER_H
-#define SCANEREQUIPMENTBUILDER_H
+#ifndef SCANEREQUIPMENTBUILDER_HPP
+#define SCANEREQUIPMENTBUILDER_HPP
+
+#include <common/constants.hpp>
+#include <common/RaceTypes.hpp>
 
 class ScanerEquipment;
-#include "../../../common/constants.hpp"
 
 class ScanerEquipmentBuilder
 {
@@ -28,15 +30,15 @@ class ScanerEquipmentBuilder
 		static ScanerEquipmentBuilder& Instance();
 		~ScanerEquipmentBuilder();
 
-        	ScanerEquipment* GetNewScanerEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-                ScanerEquipment* GetNewScanerEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int scan_orig = NONE_ID) const;
+        ScanerEquipment* GetNewScanerEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        ScanerEquipment* GetNewScanerEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int scan_orig = NONE_ID) const;
         	 		                
-        private:
+    private:
 		ScanerEquipmentBuilder() {};
 		ScanerEquipmentBuilder(const ScanerEquipmentBuilder&) = delete;
 		ScanerEquipmentBuilder& operator=(const ScanerEquipmentBuilder&) = delete;
 
-                void CreateNewInternals(ScanerEquipment*, int, int, int) const;
+        void CreateNewInternals(ScanerEquipment*, int, RACE::TYPE, int) const;
 }; 
 
 #endif 

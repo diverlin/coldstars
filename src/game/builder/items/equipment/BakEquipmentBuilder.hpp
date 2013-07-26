@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BAKEQUIPMENTBUILDER_H
-#define BAKEQUIPMENTBUILDER_H
+#ifndef BAKEQUIPMENTBUILDER_HPP
+#define BAKEQUIPMENTBUILDER_HPP
+
+#include <common/constants.hpp>
+#include <common/RaceTypes.hpp>
 
 class BakEquipment;
-#include "../../../common/constants.hpp"
 
 class BakEquipmentBuilder
 {
@@ -28,15 +30,15 @@ class BakEquipmentBuilder
 		static BakEquipmentBuilder& Instance();
 		~BakEquipmentBuilder();
 
-        	BakEquipment* GetNewBakEquipmentTemplate(unsigned long int id = NONE_ID) const; 
-                BakEquipment* GetNewBakEquipment(int tech_level = NONE_ID, int race_id = NONE_ID, int fuel_max_orig = NONE_ID) const;
+        BakEquipment* GetNewBakEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        BakEquipment* GetNewBakEquipment(int tech_level = NONE_ID, RACE::TYPE race_id = RACE::TYPE::NONE_ID, int fuel_max_orig = NONE_ID) const;
         	 		                
-        private:                
+    private:                
 		BakEquipmentBuilder() {};
 		BakEquipmentBuilder(const BakEquipmentBuilder&) = delete;
 		BakEquipmentBuilder& operator=(const BakEquipmentBuilder&) = delete;
 
-                void CreateNewInternals(BakEquipment*, int, int, int) const;
+        void CreateNewInternals(BakEquipment*, int, RACE::TYPE, int) const;
 }; 
 
 

@@ -73,8 +73,8 @@ class StarSystem : public BaseSpaceEntity
 		const Color4<float>& GetColor() const { return color; }
 		//bool GetDetailedSimulationFlag() const { return detalied_simulation; }
 		int GetConditionId()     const { return condition_id; }
-		int GetRaceId()          const { return race_id; }
-		int GetConquerorRaceId() const { return conqueror_race_id; } 
+		RACE::TYPE GetRaceId()          const { return race_id; }
+		RACE::TYPE GetConquerorRaceId() const { return conqueror_race_id; } 
 		Star* GetStar()          const { return STAR_vec[0]; }	
 		Sector* GetSector()      const { return sector; }
 		int GetShockWaveEffectNum()    const { return effect_SHOCKWAVE_vec.size(); }
@@ -85,7 +85,7 @@ class StarSystem : public BaseSpaceEntity
 						
 		HyperSpace& GetHyperSpace() { return hyperspace; };
 		
-		Npc* GetFreeLeaderByRaceId(int) const;
+		Npc* GetFreeLeaderByRaceId(RACE::TYPE) const;
 		void CreateGroupAndShareTask(Npc*, StarSystem*, int) const;
 		
 		//// TRANSITION
@@ -134,27 +134,28 @@ class StarSystem : public BaseSpaceEntity
 		Planet* GetRandomInhabitedPlanet() const;
 		Planet* GetRandomPlanet() const;
 		Vehicle* GetRandomVehicle() const;
-		Vehicle* GetRandomVehicleExcludingNpcRaceId(int) const;
-		Vehicle* GetRandomVehicleByNpcRaceId(int) const;
-		Vehicle* GetRandomVehicle(const std::vector<int>&) const;
+		Vehicle* GetRandomVehicleExcludingNpcRaceId(RACE::TYPE) const;
+		Vehicle* GetRandomVehicleByNpcRaceId(RACE::TYPE) const;
+		Vehicle* GetRandomVehicle(const std::vector<RACE::TYPE>&) const;
 		// 
-    	private:
-                static int counter;
-                
-                int race_id, conqueror_race_id;
-                
-    		bool unique_update_inDymanic_done;
-    		bool unique_update_inStatic_done;
-    		
-    		int condition_id;
-    		int container_num_max;
-    		
-    		Sector* sector;
-    		Color4<float> color;
+    private:
+        static int counter;
+        
+        RACE::TYPE race_id;
+        RACE::TYPE conqueror_race_id;
+        
+        bool unique_update_inDymanic_done;
+        bool unique_update_inStatic_done;
+        
+        int condition_id;
+        int container_num_max;
+        
+        Sector* sector;
+        Color4<float> color;
+        
+        AsteroidManager asteroid_manager;
     	
-    		AsteroidManager asteroid_manager;
-    	
-    		// ENTITY VECTORS
+        // ENTITY VECTORS
 		//std::vector<Player*> 	   PLAYER_vec;
 
 		std::vector<Star*>         STAR_vec;

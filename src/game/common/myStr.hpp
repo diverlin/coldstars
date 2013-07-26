@@ -28,7 +28,6 @@ std::string bool2str(bool);
 
 
 std::string getAiModelStr(int);
-std::string getRaceStr(int); 
 std::string getNavigatorActionStr(int); 
 
 #endif

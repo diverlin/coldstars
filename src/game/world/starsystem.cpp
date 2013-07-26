@@ -62,7 +62,9 @@ StarSystem::StarSystem(int id):
 unique_update_inDymanic_done(false),
 unique_update_inStatic_done(false),
 sector(nullptr),
-container_num_max(CONTAINER_NUM_MAX_DEFAULT)
+container_num_max(CONTAINER_NUM_MAX_DEFAULT),
+race_id(RACE::TYPE::R0_ID),
+conqueror_race_id(RACE::TYPE::NONE_ID)
 { 
 	SetId(id);
 	SetTypeId(ENTITY::TYPE::STARSYSTEM_ID); 
@@ -70,9 +72,6 @@ container_num_max(CONTAINER_NUM_MAX_DEFAULT)
     SetPlaceTypeId(PLACE::TYPE::SPACE_ID);
     
     condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
-    
-    race_id = RACE::R0_ID;
-    conqueror_race_id = NONE_ID;
 
     this->SetStarSystem(this);
     
@@ -104,7 +103,7 @@ void StarSystem::PutChildsToGarbage() const
 	for(unsigned int i=0; i<VEHICLE_vec.size(); i++)   { EntityGarbage::Instance().Add(VEHICLE_vec[i]); } 
 }      
 
-Npc* StarSystem::GetFreeLeaderByRaceId(int race_id) const
+Npc* StarSystem::GetFreeLeaderByRaceId(RACE::TYPE race_id) const
 {
 	std::vector<Npc*> tmp_npc_vec;
 	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
@@ -308,9 +307,9 @@ void StarSystem::Add(DistantStarEffect* ds)                  { distantStarEffect
 // poor                
 Planet* StarSystem::GetClosestInhabitedPlanet(const Vec2<float>& _pos) const
 {    	
-     	Planet* requested_planet = nullptr;
-     	
-     	std::vector<Planet*> tmp_planet_vec;     	
+    Planet* requested_planet = nullptr;
+    
+    std::vector<Planet*> tmp_planet_vec;     	
 	for(unsigned int i=0; i<PLANET_vec.size(); i++)
 	{
 		if (PLANET_vec[i]->GetPopulation() > 0)
@@ -340,6 +339,7 @@ Planet* StarSystem::GetClosestInhabitedPlanet(const Vec2<float>& _pos) const
 	
 	return requested_planet;
 }
+
 Planet* StarSystem::GetRandomInhabitedPlanet() const
 {
 	Planet* requested_planet = nullptr;
@@ -353,13 +353,14 @@ Planet* StarSystem::GetRandomInhabitedPlanet() const
 		}
 	}
 	
-     	if (tmp_planet_vec.size() >= 1) 
-     	{
-     		requested_planet = tmp_planet_vec[getRandInt(0, tmp_planet_vec.size()-1)];
-     	}
+    if (tmp_planet_vec.size() >= 1) 
+    {
+        requested_planet = tmp_planet_vec[getRandInt(0, tmp_planet_vec.size()-1)];
+    }
 
 	return requested_planet;
 }
+
 Planet* StarSystem::GetRandomPlanet() const
 {
 	return PLANET_vec[getRandInt(0, PLANET_vec.size()-1)];
@@ -367,76 +368,77 @@ Planet* StarSystem::GetRandomPlanet() const
 
 Vehicle* StarSystem::GetRandomVehicle() const
 {
-     	return VEHICLE_vec[getRandInt(0, VEHICLE_vec.size()-1)];
-}
-Vehicle* StarSystem::GetRandomVehicleExcludingNpcRaceId(int _race_id) const
-{
-        std::vector<Vehicle*> _vehicle_vec;
-        Vehicle* requested_vehicle = nullptr;
-        
-        for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
-        {
-        	if (VEHICLE_vec[i]->GetOwnerNpc() != nullptr)
-                {
-                	if (VEHICLE_vec[i]->GetOwnerNpc()->GetRaceId() != _race_id)
-                	{
-                        	_vehicle_vec.push_back(VEHICLE_vec[i]);
-                	}
-                }
-        }
-        
-        if (_vehicle_vec.size() > 0)
-        {
-                requested_vehicle = _vehicle_vec[getRandInt(0, _vehicle_vec.size()-1)];
-        }
-        
-        return requested_vehicle;
+    return VEHICLE_vec[getRandInt(0, VEHICLE_vec.size()-1)];
 }
 
-Vehicle* StarSystem::GetRandomVehicleByNpcRaceId(int _race_id) const
+Vehicle* StarSystem::GetRandomVehicleExcludingNpcRaceId(RACE::TYPE _race_id) const
 {
-        std::vector<Vehicle*> _vehicle_vec;
-        Vehicle* requested_vehicle = nullptr;
-        
-        for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+    std::vector<Vehicle*> _vehicle_vec;
+    Vehicle* requested_vehicle = nullptr;
+    
+    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+    {
+        if (VEHICLE_vec[i]->GetOwnerNpc() != nullptr)
         {
-        	if (VEHICLE_vec[i]->GetOwnerNpc() != nullptr)
-                {
-                	if (VEHICLE_vec[i]->GetOwnerNpc()->GetRaceId() == _race_id)
-                	{
-                        	_vehicle_vec.push_back(VEHICLE_vec[i]);
-                	}
-                }
+            if (VEHICLE_vec[i]->GetOwnerNpc()->GetRaceId() != _race_id)
+            {
+                _vehicle_vec.push_back(VEHICLE_vec[i]);
+            }
         }
-        
-        if (_vehicle_vec.size() > 0)
-        {
-                requested_vehicle = _vehicle_vec[getRandInt(0, _vehicle_vec.size()-1)];
-        }
-        
-        return requested_vehicle;
+    }
+    
+    if (_vehicle_vec.size() > 0)
+    {
+        requested_vehicle = _vehicle_vec[getRandInt(0, _vehicle_vec.size()-1)];
+    }
+    
+    return requested_vehicle;
 }
 
-Vehicle* StarSystem::GetRandomVehicle(const std::vector<int>& rVec_race_id) const
+Vehicle* StarSystem::GetRandomVehicleByNpcRaceId(RACE::TYPE _race_id) const
+{
+    std::vector<Vehicle*> _vehicle_vec;
+    Vehicle* requested_vehicle = nullptr;
+    
+    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+    {
+        if (VEHICLE_vec[i]->GetOwnerNpc() != nullptr)
+        {
+            if (VEHICLE_vec[i]->GetOwnerNpc()->GetRaceId() == _race_id)
+            {
+                _vehicle_vec.push_back(VEHICLE_vec[i]);
+            }
+        }
+    }
+    
+    if (_vehicle_vec.size() > 0)
+    {
+        requested_vehicle = _vehicle_vec[getRandInt(0, _vehicle_vec.size()-1)];
+    }
+    
+    return requested_vehicle;
+}
+
+Vehicle* StarSystem::GetRandomVehicle(const std::vector<RACE::TYPE>& rVec_race_id) const
 {
 	std::vector<Vehicle*> tmp_vehicle_vec;
 	Vehicle* requested_vehicle = nullptr;
 
-        for (unsigned int i=0; i<rVec_race_id.size(); i++)
-        {	
-		for (unsigned int j=0; j<VEHICLE_vec.size(); j++)
-        	{
-       			if (rVec_race_id[i] == VEHICLE_vec[j]->GetOwnerNpc()->GetRaceId())
-       			{
-       				tmp_vehicle_vec.push_back(VEHICLE_vec[j]);
-       			}
-        	}
-        }
-        
-        if (tmp_vehicle_vec.size() > 0)
+    for (unsigned int i=0; i<rVec_race_id.size(); i++)
+    {	
+        for (unsigned int j=0; j<VEHICLE_vec.size(); j++)
         {
-                requested_vehicle = tmp_vehicle_vec[getRandInt(0, tmp_vehicle_vec.size()-1)];
+            if (rVec_race_id[i] == VEHICLE_vec[j]->GetOwnerNpc()->GetRaceId())
+            {
+                tmp_vehicle_vec.push_back(VEHICLE_vec[j]);
+            }
         }
+    }
+    
+    if (tmp_vehicle_vec.size() > 0)
+    {
+        requested_vehicle = tmp_vehicle_vec[getRandInt(0, tmp_vehicle_vec.size()-1)];
+    }
 	
 	return requested_vehicle;
 }
@@ -501,14 +503,14 @@ void StarSystem::UpdateStates()
 				else
 				{
 					condition_id = ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID;
-					if (GetRandomVehicleByNpcRaceId(RACE::R6_ID) != nullptr)
+					if (GetRandomVehicleByNpcRaceId(RACE::TYPE::R6_ID) != nullptr)
 					{
-						conqueror_race_id = RACE::R6_ID;
+						conqueror_race_id = RACE::TYPE::R6_ID;
 					}
 				
-					if (GetRandomVehicleByNpcRaceId(RACE::R7_ID) != nullptr)
+					if (GetRandomVehicleByNpcRaceId(RACE::TYPE::R7_ID) != nullptr)
 					{
-						conqueror_race_id = RACE::R7_ID;
+						conqueror_race_id = RACE::TYPE::R7_ID;
 					}
 				}
 			}
@@ -527,7 +529,7 @@ void StarSystem::UpdateStates()
 				else	
 				{
 					condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
-					conqueror_race_id = NONE_ID;
+					conqueror_race_id = RACE::TYPE::NONE_ID;
 				}
 			}
 			
@@ -881,10 +883,10 @@ void StarSystem::ShipManager_s(unsigned int num)
 {
     while (VEHICLE_vec.size() < num)
     {
-		int prace_id    = RACE::R0_ID;
+		RACE::TYPE prace_id = RACE::TYPE::R0_ID;
 		if (getRandBool())
 		{
-			prace_id = RACE::R6_ID;
+			prace_id = RACE::TYPE::R6_ID;
 		}
 		
         ENTITY::TYPE psubtype_id    = ENTITY::TYPE::WARRIOR_ID;

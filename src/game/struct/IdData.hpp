@@ -20,10 +20,11 @@
 #define IDDATA_HPP
 
 #include <common/EntityTypes.hpp>
+#include <common/MyInt.hpp>
 
 struct IdData  
 {
-	unsigned long int id;
+	INTLONGEST id;
 	ENTITY::TYPE type_id;
 	ENTITY::TYPE subtype_id;
 	ENTITY::TYPE subsubtype_id;

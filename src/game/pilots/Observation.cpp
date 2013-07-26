@@ -76,49 +76,49 @@ StarSystem* Observation::GetClosestStarSystem(int requested_consdition_id) const
 }    	
 
 
-Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<int>& rVec_race_id) const
+Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<RACE::TYPE>& rVec_race_id) const
 {
-        for (unsigned int i=0; i<rVec_race_id.size(); i++)
+    for (unsigned int i=0; i<rVec_race_id.size(); i++)
+    {
+        for (unsigned int j=0; j<visible_VEHICLE_pair_vec.size(); j++)
         {
-		for (unsigned int j=0; j<visible_VEHICLE_pair_vec.size(); j++)
-        	{
-       			if (rVec_race_id[i] == visible_VEHICLE_pair_vec[j].object->GetOwnerNpc()->GetRaceId())
-       			{
-       				return visible_VEHICLE_pair_vec[j].object;
-       			}
-             	}
+            if (rVec_race_id[i] == visible_VEHICLE_pair_vec[j].object->GetOwnerNpc()->GetRaceId())
+            {
+                return visible_VEHICLE_pair_vec[j].object;
+            }
         }
+    }
         
 	return nullptr;	
 }
 
-Vehicle* Observation::GetRandVisibleVehicle(const std::vector<int>& rVec_race_id) const
+Vehicle* Observation::GetRandVisibleVehicle(const std::vector<RACE::TYPE>& rVec_race_id) const
 {
 	std::vector<Vehicle*> tmp_vehicle;
-        for (unsigned int i=0; i<rVec_race_id.size(); i++)
+    for (unsigned int i=0; i<rVec_race_id.size(); i++)
+    {
+        for (unsigned int j=0; j<visible_VEHICLE_pair_vec.size(); j++)
         {
-		for (unsigned int j=0; j<visible_VEHICLE_pair_vec.size(); j++)
-        	{
-       			if (rVec_race_id[i] == visible_VEHICLE_pair_vec[j].object->GetOwnerNpc()->GetRaceId())
-       			{
-       				tmp_vehicle.push_back(visible_VEHICLE_pair_vec[j].object);
-       			}
-             	}
+            if (rVec_race_id[i] == visible_VEHICLE_pair_vec[j].object->GetOwnerNpc()->GetRaceId())
+            {
+                tmp_vehicle.push_back(visible_VEHICLE_pair_vec[j].object);
+            }
         }
-        
-        if (tmp_vehicle.size() > 0)
-        {
-        	return tmp_vehicle[getRandInt(0, tmp_vehicle.size()-1)];
-        }
-	
+    }
+    
+    if (tmp_vehicle.size() > 0)
+    {
+        return tmp_vehicle[getRandInt(0, tmp_vehicle.size()-1)];
+    }
+
 	return nullptr;	
 }
 
 void Observation::ObserveAllInSpace()
 {
-     	FindVisibleAsteroidsInSpaceInStatic();
-     	FindVisibleContainersInSpaceInStatic();
-     	FindVisibleVehiclesInSpaceInStatic();
+    FindVisibleAsteroidsInSpaceInStatic();
+    FindVisibleContainersInSpaceInStatic();
+    FindVisibleVehiclesInSpaceInStatic();
 }
 
 template <typename OBSERVED_DATA_TYPE>

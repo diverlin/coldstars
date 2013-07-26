@@ -271,18 +271,18 @@ const int* getArrayDependingOnClassTypeId(ENTITY::TYPE class_type_id)
         return nullptr;
 }
 
-const int* getArrayDependingOnRaceId(int race_id)
+const int* getArrayDependingOnRaceId(RACE::TYPE race_id)
 {
-        switch(race_id)
-        {
-                case RACE::R0_ID: { return SKILLS_STRATEGY_RACE0; break; }
-                case RACE::R1_ID: { return SKILLS_STRATEGY_RACE1; break; }
-                case RACE::R2_ID: { return SKILLS_STRATEGY_RACE2; break; }
-                case RACE::R3_ID: { return SKILLS_STRATEGY_RACE3; break; }
-                case RACE::R4_ID: { return SKILLS_STRATEGY_RACE4; break; }
-                case RACE::R6_ID: { return SKILLS_STRATEGY_RACE6; break; }
-                case RACE::R7_ID: { return SKILLS_STRATEGY_RACE7; break; }
-        }
-        
-        return nullptr;
+    switch(race_id)
+    {
+        case RACE::TYPE::R0_ID: { return SKILLS_STRATEGY_RACE0; break; }
+        case RACE::TYPE::R1_ID: { return SKILLS_STRATEGY_RACE1; break; }
+        case RACE::TYPE::R2_ID: { return SKILLS_STRATEGY_RACE2; break; }
+        case RACE::TYPE::R3_ID: { return SKILLS_STRATEGY_RACE3; break; }
+        case RACE::TYPE::R4_ID: { return SKILLS_STRATEGY_RACE4; break; }
+        case RACE::TYPE::R6_ID: { return SKILLS_STRATEGY_RACE6; break; }
+        case RACE::TYPE::R7_ID: { return SKILLS_STRATEGY_RACE7; break; }
+    }
+    
+    return nullptr;
 }

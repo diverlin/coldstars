@@ -35,8 +35,8 @@ struct VehiclePropetries
 	int freeze; // depends on freezer
 	int scan;   // depends on scaner
 
-        int grab_strength;
-        int grab_radius;
+    int grab_strength;
+    int grab_radius;
         
 	int temperature;
 	
@@ -52,35 +52,36 @@ struct VehiclePropetries
 	bool hibernate_mode_enabled;
 
 	int total_damage;
-        int total_radius;
+    int total_radius;
         
-	VehiclePropetries():
+	VehiclePropetries()
+    :
 	free_space(0),
 	protection(0),
-        radar(0),
-        speed(0),
-        hyper(0),
-        //fuel(0),
-        repair(0),
-        freeze(0),
-        scan(0),    
-        grab_radius(0),
-        grab_strength(0),
+    radar(0),
+    speed(0),
+    energy(0),
+    hyper(0),
+    //fuel(0),
+    repair(0),
+    freeze(0),
+    scan(0),    
+    grab_strength(0),
+    grab_radius(0),
             
-        energy(0),
-        temperature(0),
-        artefact_gravity(0),
-        artefact_protection(0),
-        
-        average_damage(0),
-        average_fire_radius(0),
-        equipment_radar(false),
-        shield_effect_enabled(false),
-        hibernate_mode_enabled(false),
-        
-        total_damage(0),
-        total_radius(0)
-        {}
+    temperature(0),
+    artefact_gravity(0),
+    artefact_protection(0),
+    
+    average_damage(0),
+    average_fire_radius(0),
+    equipment_radar(false),
+    shield_effect_enabled(false),
+    hibernate_mode_enabled(false),
+    
+    total_damage(0),
+    total_radius(0)
+    {}
 };
 
 #endif 
