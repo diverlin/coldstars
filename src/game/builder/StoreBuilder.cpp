@@ -18,10 +18,14 @@
 
 #include "StoreBuilder.hpp"
 
+#include <docking/Store.hpp>
+
 #include "../common/IdGenerator.hpp"
-#include "../world/EntityManager.hpp"
 #include "../common/Logger.hpp"
 #include "../common/rand.hpp"
+
+#include "../world/EntityManager.hpp"
+
 #include "../resources/TextureManager.hpp"
 
 #include "../spaceobjects/Ship.hpp"
@@ -41,7 +45,6 @@
 
 #include "../builder/ItemSlotBuilder.hpp"
 #include "../builder/VehicleSlotBuilder.hpp"
-
 #include "../builder/items/IncludeItemBuilders.hpp"
 #include "../builder/spaceobjects/ShipBuilder.hpp"
 
@@ -54,7 +57,7 @@ StoreBuilder& StoreBuilder::Instance()
 StoreBuilder::~StoreBuilder()
 {}
 
-Store* StoreBuilder::GetNewStoreTemplate(unsigned long int id) const
+Store* StoreBuilder::GetNewStoreTemplate(INTLONGEST id) const
 {
 	Store* store = nullptr;
 	
@@ -63,18 +66,18 @@ Store* StoreBuilder::GetNewStoreTemplate(unsigned long int id) const
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	store = new Store(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(store);
-        
-        return store;
+    try 
+    { 
+        store = new Store(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(store);
+    
+    return store;
 } 
 
 Store* StoreBuilder::GetNewStore() const
@@ -88,17 +91,17 @@ Store* StoreBuilder::GetNewStore() const
         	
 void StoreBuilder::CreateNewInternals(Store* store) const
 {
-        for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++)
-        {
-		ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
-                store->AddItemSlot(item_slot);
-        }
+    for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++)
+    {
+        ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
+        store->AddItemSlot(item_slot);
+    }
 
-        for (unsigned int i=0; i<STORE_VEHICLE_SLOTS_NUM; i++)
-        {
-            VehicleSlot* vehicle_slot = GetNewVehicleSlot(TYPE::ENTITY::NONE_ID);
-            store->AddVehicleSlot(vehicle_slot);
-        }
+    for (unsigned int i=0; i<STORE_VEHICLE_SLOTS_NUM; i++)
+    {
+        VehicleSlot* vehicle_slot = GetNewVehicleSlot(TYPE::ENTITY::NONE_ID);
+        store->AddVehicleSlot(vehicle_slot);
+    }
         
 	store->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::STORE_BACKGROUND_ID));
 }

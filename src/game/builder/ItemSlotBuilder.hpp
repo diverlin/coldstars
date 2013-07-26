@@ -20,10 +20,11 @@
 #ifndef ITEMSLOTBUILDER_HPP
 #define ITEMSLOTBUILDER_HPP
 
-#include <slots/ItemSlot.hpp>
+#include <types/MyInt.hpp>
 #include <common/constants.hpp>
+#include <slots/ItemSlot.hpp>
 
-ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, unsigned long int id = NONE_ID);
+ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id = NONE_ID);
 ItemSlot* GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY subtype_id);
 
 #endif 

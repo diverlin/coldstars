@@ -20,11 +20,13 @@
 #ifndef VEHICLESLOTBUILDER_HPP
 #define VEHICLESLOTBUILDER_HPP
 
-class VehicleSlot;
-#include "../common/constants.hpp"
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 #include <types/EntityTypes.hpp>
 
-VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY, unsigned long int id = NONE_ID);
+class VehicleSlot;
+
+VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY, INTLONGEST id = NONE_ID);
 
 #endif 
     

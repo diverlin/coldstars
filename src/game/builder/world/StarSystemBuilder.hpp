@@ -29,7 +29,7 @@ class StarSystemBuilder
 		static StarSystemBuilder& Instance();
 		~StarSystemBuilder();
 		
-		StarSystem* GetNewStarSystemTemplate(unsigned long int id = NONE_ID) const; 
+		StarSystem* GetNewStarSystemTemplate(INTLONGEST id = NONE_ID) const; 
 		StarSystem* GetNewStarSystem(const StarSystemDescription&) const;
 	
 	private:

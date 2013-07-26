@@ -30,7 +30,7 @@ SatelliteBuilder& SatelliteBuilder::Instance()
 SatelliteBuilder::~SatelliteBuilder() {}
 
 
-Satellite* SatelliteBuilder::GetNewSatelliteTemplate(unsigned long int id) const
+Satellite* SatelliteBuilder::GetNewSatelliteTemplate(INTLONGEST id) const
 {
 	Satellite* satellite = nullptr;
 	if (id == NONE_ID)
@@ -39,62 +39,62 @@ Satellite* SatelliteBuilder::GetNewSatelliteTemplate(unsigned long int id) const
 	}
 
 	try 
-        { 
-        	satellite = new Satellite(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(satellite);
-        
-        return satellite;
+    { 
+        satellite = new Satellite(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(satellite);
+    
+    return satellite;
 }
 
 Satellite* SatelliteBuilder::GetNewSatellite() const
 {
 	Satellite* satellite = GetNewSatelliteTemplate();
-        CreateNewInternals(satellite);
-        
-        return satellite;
+    CreateNewInternals(satellite);
+    
+    return satellite;
 }
 
 void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const 
 {
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::SATELLITE_ID);  
 
-       	int protection_rate = 1;
-       	//if (subtype_id == ENTITY::WARRIOR_ID)
-        //{
-        	//protection_rate = 1;
-        //}
-        
-        VehicleKorpusData data_korpus;
-    	data_korpus.space       = 60 + getRandInt(0, 20);
-    	data_korpus.armor       = 10*data_korpus.space;
-    	data_korpus.protection  = 2*protection_rate;
-    	data_korpus.temperature = 100;
-        data_korpus.price       = 1000;
+    int protection_rate = 1;
+    //if (subtype_id == ENTITY::WARRIOR_ID)
+    //{
+        //protection_rate = 1;
+    //}
+    
+    VehicleKorpusData data_korpus;
+    data_korpus.space       = 60 + getRandInt(0, 20);
+    data_korpus.armor       = 10*data_korpus.space;
+    data_korpus.protection  = 2*protection_rate;
+    data_korpus.temperature = 100;
+    data_korpus.price       = 1000;
 
-        data_korpus.slot_bak_num       = 0;
-        data_korpus.slot_drive_num     = 0;
-        data_korpus.slot_droid_num     = 1;
-        data_korpus.slot_energizer_num = 1;
-        data_korpus.slot_grapple_num   = 0;
-        data_korpus.slot_protector_num = 1;
-        data_korpus.slot_radar_num     = 1;
-        data_korpus.slot_scaner_num    = 0;
-        data_korpus.slot_freezer_num   = 0;
+    data_korpus.slot_bak_num       = 0;
+    data_korpus.slot_drive_num     = 0;
+    data_korpus.slot_droid_num     = 1;
+    data_korpus.slot_energizer_num = 1;
+    data_korpus.slot_grapple_num   = 0;
+    data_korpus.slot_protector_num = 1;
+    data_korpus.slot_radar_num     = 1;
+    data_korpus.slot_scaner_num    = 0;
+    data_korpus.slot_freezer_num   = 0;
 	data_korpus.slot_weapon_num   = 2; 
  	data_korpus.slot_artefact_num = 0;  
-        data_korpus.slot_otsec_num    = 1;
-        
-        LifeData data_life;
-        data_life.armor      = data_korpus.armor;
-        data_life.dying_time = 10*texOb->size_id;
-        
-        int size_threshold = 2; 
+    data_korpus.slot_otsec_num    = 1;
+    
+    LifeData data_life;
+    data_life.armor      = data_korpus.armor;
+    data_life.dying_time = 10*texOb->size_id;
+    
+    //int size_threshold = 2; 
 	data_korpus.draw_turrels = true;       
 	
 	float step = getRandInt(10, 100)*0.01;
@@ -107,8 +107,8 @@ void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const
 	
 	CreateKorpusGeometry(satellite);
 
-        satellite->CreateDriveComplexTextureDependedStuff();
-        satellite->CreateProtectionComplexTextureDependedStuff();
-         	
-        CreateItemSlots(satellite);
+    satellite->CreateDriveComplexTextureDependedStuff();
+    satellite->CreateProtectionComplexTextureDependedStuff();
+        
+    CreateItemSlots(satellite);
 }

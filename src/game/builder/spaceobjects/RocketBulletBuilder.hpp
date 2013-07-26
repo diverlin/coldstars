@@ -17,12 +17,14 @@
 */
 
 
-#ifndef ROCKETBULLETBUILDER_H
-#define ROCKETBULLETBUILDER_H
+#ifndef ROCKETBULLETBUILDER_HPP
+#define ROCKETBULLETBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class RocketBullet;
 class BulletData;
-#include "../../common/constants.hpp"
 
 class RocketBulletBuilder
 {
@@ -30,7 +32,7 @@ class RocketBulletBuilder
 		static RocketBulletBuilder& Instance();
 		~RocketBulletBuilder();
 		
-		RocketBullet* GetNewRocketBulletTemplate(unsigned long int id = NONE_ID) const;							
+		RocketBullet* GetNewRocketBulletTemplate(INTLONGEST id = NONE_ID) const;							
 		RocketBullet* GetNewRocketBullet(const BulletData&) const;   
         	       
     private:

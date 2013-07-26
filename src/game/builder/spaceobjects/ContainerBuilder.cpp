@@ -31,7 +31,7 @@ ContainerBuilder& ContainerBuilder::Instance()
 ContainerBuilder::~ContainerBuilder()
 {}
 
-Container* ContainerBuilder::GetNewContainerTemplate(unsigned long int id) const
+Container* ContainerBuilder::GetNewContainerTemplate(INTLONGEST id) const
 {
 	Container* container = nullptr;
 	
@@ -40,17 +40,17 @@ Container* ContainerBuilder::GetNewContainerTemplate(unsigned long int id) const
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
         
-        try 
-        { 
-		container = new Container(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        EntityManager::Instance().RegisterEntity(container);
-        
-        return container;
+    try 
+    { 
+        container = new Container(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    EntityManager::Instance().RegisterEntity(container);
+    
+    return container;
 } 
 
 Container* ContainerBuilder::GetNewContainer(TextureOb* textureOb, BaseItem* item) const

@@ -18,6 +18,8 @@ include_directories(dependencies/freetype2/)
 
 add_library(freetyperender dependencies/freetype2/src/FreeType.cpp)
 include_directories(dependencies/freetype2/src)
+SET_TARGET_PROPERTIES(freetyperender PROPERTIES COMPILE_FLAGS "-std=c++11 -std=gnu++11")
+
 
 include_directories(src/game/)
 
@@ -26,6 +28,6 @@ set(GLEW_STATIC 1)
 add_subdirectory(dependencies/glew)
 
 #add_definitions(-Wall -Werror -Wno-return-type -Wno-switch -Wno-reorder -std=c++11 -std=gnu++11)
-add_definitions(-std=c++11 -std=gnu++11)
+#add_definitions(-std=c++11 -std=gnu++11)
 add_subdirectory(src/game)
 

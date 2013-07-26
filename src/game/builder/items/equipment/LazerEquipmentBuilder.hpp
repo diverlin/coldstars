@@ -19,8 +19,9 @@
 #ifndef LAZEREQUIPMENTBUILDER_HPP
 #define LAZEREQUIPMENTBUILDER_HPP
 
-#include <common/constants.hpp>
+#include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <common/constants.hpp>
 
 class LazerEquipment;
 
@@ -30,7 +31,7 @@ class LazerEquipmentBuilder
 		static LazerEquipmentBuilder& Instance();
 		~LazerEquipmentBuilder();
 
-        LazerEquipment* GetNewLazerEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        LazerEquipment* GetNewLazerEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
         LazerEquipment* GetNewLazerEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
     private:

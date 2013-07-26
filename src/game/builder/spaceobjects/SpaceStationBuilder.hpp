@@ -16,12 +16,14 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SPACESTATIONBUILDER_H
-#define SPACESTATIONBUILDER_H
+#ifndef SPACESTATIONBUILDER_HPP
+#define SPACESTATIONBUILDER_HPP
 
-#include "BaseVehicleBuilder.hpp"
+#include <builder/spaceobjects/BaseVehicleBuilder.hpp>
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
+
 class SpaceStation;
-#include "../../common/constants.hpp"
 	
 namespace ENTITY
 {
@@ -41,13 +43,13 @@ class SpaceStationBuilder : public BaseVehicleBuilder
 		static SpaceStationBuilder& Instance();
 		~SpaceStationBuilder();
 		
-		SpaceStation* GetNewSpaceStationTemplate(unsigned long int id = NONE_ID) const;							
+		SpaceStation* GetNewSpaceStationTemplate(INTLONGEST id = NONE_ID) const;							
 		SpaceStation* GetNewSpaceStation() const;         
        
-        private:
-        	SpaceStationBuilder() {};   	
-        	SpaceStationBuilder(const SpaceStationBuilder&) = delete; 
-        	SpaceStationBuilder& operator=(const SpaceStationBuilder&) = delete;
+    private:
+        SpaceStationBuilder() {};   	
+        SpaceStationBuilder(const SpaceStationBuilder&) = delete; 
+        SpaceStationBuilder& operator=(const SpaceStationBuilder&) = delete;
 
 		void CreateNewInternals(SpaceStation*) const;   
 }; 

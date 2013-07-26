@@ -34,7 +34,7 @@ GovermentBuilder& GovermentBuilder::Instance()
 GovermentBuilder::~GovermentBuilder()
 {}
 
-Goverment* GovermentBuilder::GetNewGovermentTemplate(unsigned long int id) const
+Goverment* GovermentBuilder::GetNewGovermentTemplate(INTLONGEST id) const
 {
 	Goverment* goverment = nullptr;
 	
@@ -43,17 +43,17 @@ Goverment* GovermentBuilder::GetNewGovermentTemplate(unsigned long int id) const
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	goverment = new Goverment(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        EntityManager::Instance().RegisterEntity(goverment);
-        
-        return goverment;
+    try 
+    { 
+        goverment = new Goverment(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    EntityManager::Instance().RegisterEntity(goverment);
+    
+    return goverment;
 } 
 
 Goverment* GovermentBuilder::GetNewGoverment() const

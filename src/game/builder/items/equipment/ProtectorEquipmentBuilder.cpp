@@ -33,7 +33,7 @@ ProtectorEquipmentBuilder& ProtectorEquipmentBuilder::Instance()
 ProtectorEquipmentBuilder::~ProtectorEquipmentBuilder()
 {}
 
-ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipmentTemplate(unsigned long int id) const
+ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipmentTemplate(INTLONGEST id) const
 {
 	ProtectorEquipment* protector_equipment = nullptr;
 
@@ -43,17 +43,17 @@ ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipmentTemplate(
 	}
 
 	try 
-        { 
-        	protector_equipment = new ProtectorEquipment(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(protector_equipment);
-        
-        return protector_equipment;
+    { 
+        protector_equipment = new ProtectorEquipment(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(protector_equipment);
+    
+    return protector_equipment;
 } 
    
 ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipment(int tech_level, TYPE::RACE race_id, int protection_orig) const

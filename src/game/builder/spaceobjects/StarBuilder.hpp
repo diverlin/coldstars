@@ -16,12 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef STARBUILDER_H
-#define STARBUILDER_H
+#ifndef STARBUILDER_HPP
+#define STARBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class Star;
-#include "../../common/constants.hpp"
-
 
 namespace ENTITY
 {
@@ -37,19 +38,17 @@ class StarBuilder
 	public:
 		static StarBuilder& Instance();
 		~StarBuilder();
-
-        	Star* GetNewStarTemplate(unsigned long int id = NONE_ID) const; 
-                Star* GetNewStar() const;
+        
+        Star* GetNewStarTemplate(INTLONGEST id = NONE_ID) const; 
+        Star* GetNewStar() const;
         	 		                
-        private:
+    private:
 		StarBuilder() {};
 		StarBuilder(const StarBuilder&) = delete;
 		StarBuilder& operator=(const StarBuilder&) = delete;
 
-                void CreateNewInternals(Star*) const;
-}; 
-
-
+        void CreateNewInternals(Star*) const;
+};
 
 #endif 
     

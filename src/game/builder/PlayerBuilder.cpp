@@ -37,7 +37,7 @@ PlayerBuilder& PlayerBuilder::Instance()
 PlayerBuilder::~PlayerBuilder()
 {}
 
-Player* PlayerBuilder::GetNewPlayerTemplate(unsigned long int id) const
+Player* PlayerBuilder::GetNewPlayerTemplate(INTLONGEST id) const
 {
 	Player* player = nullptr;
 	if (id == NONE_ID)
@@ -46,13 +46,13 @@ Player* PlayerBuilder::GetNewPlayerTemplate(unsigned long int id) const
 	}
 
 	try 
-        { 
-		player = new Player(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
+    { 
+        player = new Player(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
         
 	EntityManager::Instance().RegisterEntity(player); 
 	

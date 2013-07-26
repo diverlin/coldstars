@@ -31,7 +31,7 @@ BlackHoleBuilder& BlackHoleBuilder::Instance()
 BlackHoleBuilder::~BlackHoleBuilder()
 {}
 
-BlackHole* BlackHoleBuilder::GetNewBlackHoleTemplate(unsigned long int id) const
+BlackHole* BlackHoleBuilder::GetNewBlackHoleTemplate(INTLONGEST id) const
 {
 	BlackHole* blackhole = nullptr;
 	
@@ -40,21 +40,21 @@ BlackHole* BlackHoleBuilder::GetNewBlackHoleTemplate(unsigned long int id) const
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	blackhole = new BlackHole(id); 
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-
-	int size = 4;
-    	bool dynamic = false;
-       	blackhole->BindShockWaveEffect(getNewShockWave(size, dynamic)); 
-        EntityManager::Instance().RegisterEntity(blackhole);
-        
-        return blackhole;
+    try 
+    { 
+        blackhole = new BlackHole(id); 
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    int size = 4;
+    bool dynamic = false;
+    blackhole->BindShockWaveEffect(getNewShockWave(size, dynamic)); 
+    EntityManager::Instance().RegisterEntity(blackhole);
+    
+    return blackhole;
 } 
 
 BlackHole* BlackHoleBuilder::GetNewBlackHole() const

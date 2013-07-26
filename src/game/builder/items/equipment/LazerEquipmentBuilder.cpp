@@ -33,7 +33,7 @@ LazerEquipmentBuilder& LazerEquipmentBuilder::Instance()
 LazerEquipmentBuilder::~LazerEquipmentBuilder()
 {}
 
-LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipmentTemplate(unsigned long int id) const
+LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipmentTemplate(INTLONGEST id) const
 {
 	LazerEquipment* lazer_equipment = nullptr; 
 	
@@ -42,18 +42,18 @@ LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipmentTemplate(unsigned lon
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	lazer_equipment = new LazerEquipment(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
+    try 
+    { 
+        lazer_equipment = new LazerEquipment(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
 
-        EntityManager::Instance().RegisterEntity(lazer_equipment);
-        
-        return lazer_equipment;
+    EntityManager::Instance().RegisterEntity(lazer_equipment);
+    
+    return lazer_equipment;
 } 
       
 LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipment(int tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const

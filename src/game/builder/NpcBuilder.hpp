@@ -19,8 +19,9 @@
 #ifndef NPCBUILDER_HPP
 #define NPCBUILDER_HPP
 
-#include <common/constants.hpp>
+#include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <common/constants.hpp>
 
 class Npc;
 
@@ -30,7 +31,7 @@ class NpcBuilder
         static NpcBuilder& Instance();
         ~NpcBuilder();
         
-        Npc* GetNewNpcTemplate(TYPE::ENTITY, TYPE::ENTITY, unsigned long int id = NONE_ID) const; 
+        Npc* GetNewNpcTemplate(TYPE::ENTITY, TYPE::ENTITY, INTLONGEST id = NONE_ID) const; 
         Npc* GetNewNpc(TYPE::RACE, TYPE::ENTITY, TYPE::ENTITY) const;
                                        
     private:            

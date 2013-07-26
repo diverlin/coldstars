@@ -157,106 +157,106 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
 
 void BaseVehicleBuilder::EquipEquipment(Vehicle* vehicle, int tech_level) const
 {
-        int weapons_num = getRandInt(1, vehicle->GetDataKorpus().slot_weapon_num);
-    	for (unsigned int i=0; i<weapons_num; i++)
-    	{
-    		if (getRandBool())
-    		{
-                        RocketEquipment* rocket_equipment = RocketEquipmentBuilder::Instance().GetNewRocketEquipment(tech_level);
-       			if (vehicle->AddAndManageItem(rocket_equipment) == false)
-                        {
-                                EntityGarbage::Instance().Add(rocket_equipment);
-                        }
-		}
-		else
-		{
-                        LazerEquipment* lazer_equipment = LazerEquipmentBuilder::Instance().GetNewLazerEquipment(tech_level);
-       			if (vehicle->AddAndManageItem(lazer_equipment) == false)
-                        {
-                                EntityGarbage::Instance().Add(lazer_equipment); 
-                        }
-       		}
-    	}   
-        
-        if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::RADAR_SLOT_ID) == true)
+    unsigned int weapons_num = getRandInt(1, vehicle->GetDataKorpus().slot_weapon_num);
+    for (unsigned int i=0; i<weapons_num; i++)
+    {
+        if (getRandBool())
         {
-                RadarEquipment* radar_equipment = RadarEquipmentBuilder::Instance().GetNewRadarEquipment(tech_level);
-                if (vehicle->AddAndManageItem(radar_equipment) == false)
-                {	
-                        EntityGarbage::Instance().Add(radar_equipment); 
-                }
+            RocketEquipment* rocket_equipment = RocketEquipmentBuilder::Instance().GetNewRocketEquipment(tech_level);
+            if (vehicle->AddAndManageItem(rocket_equipment) == false)
+            {
+                EntityGarbage::Instance().Add(rocket_equipment);
+            }
         }
-        
-        if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::DRIVE_SLOT_ID) == true)
+        else
         {
-                DriveEquipment* drive_equipment = DriveEquipmentBuilder::Instance().GetNewDriveEquipment(tech_level);
-                if (vehicle->AddAndManageItem(drive_equipment) == false)
-                {
-                        EntityGarbage::Instance().Add(drive_equipment); 
-                }
+            LazerEquipment* lazer_equipment = LazerEquipmentBuilder::Instance().GetNewLazerEquipment(tech_level);
+            if (vehicle->AddAndManageItem(lazer_equipment) == false)
+            {
+                EntityGarbage::Instance().Add(lazer_equipment); 
+            }
         }
-        
-        if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::BAK_SLOT_ID) == true)
-        {
-                BakEquipment* bak_equipment = BakEquipmentBuilder::Instance().GetNewBakEquipment(tech_level);
-                if (vehicle->AddAndManageItem(bak_equipment) == false)
-                {
-                        EntityGarbage::Instance().Add(bak_equipment); 
-                } 
+    }   
+    
+    if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::RADAR_SLOT_ID) == true)
+    {
+        RadarEquipment* radar_equipment = RadarEquipmentBuilder::Instance().GetNewRadarEquipment(tech_level);
+        if (vehicle->AddAndManageItem(radar_equipment) == false)
+        {	
+            EntityGarbage::Instance().Add(radar_equipment); 
         }
-        
-        if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::ENERGIZER_SLOT_ID) == true)
+    }
+    
+    if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::DRIVE_SLOT_ID) == true)
+    {
+        DriveEquipment* drive_equipment = DriveEquipmentBuilder::Instance().GetNewDriveEquipment(tech_level);
+        if (vehicle->AddAndManageItem(drive_equipment) == false)
         {
-                EnergizerEquipment* energizer_equipment = EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment(tech_level);
-                if (vehicle->AddAndManageItem(energizer_equipment) == false)
-                {
-                        EntityGarbage::Instance().Add(energizer_equipment); 
-                }     
-   	}
-        
-        if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::FREEZER_SLOT_ID) == true)
-        {
-                //FreezerEquipment* freezer_equipment = FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment(tech_level);
-                //if (vehicle->AddAndManageItem(freezer_equipment) == false)
-                //{
-                        //EntityGarbage::Instance().Add(freezer_equipment); 
-                //}  
+            EntityGarbage::Instance().Add(drive_equipment); 
         }
-        
-        if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::PROTECTOR_SLOT_ID) == true)
+    }
+    
+    if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::BAK_SLOT_ID) == true)
+    {
+        BakEquipment* bak_equipment = BakEquipmentBuilder::Instance().GetNewBakEquipment(tech_level);
+        if (vehicle->AddAndManageItem(bak_equipment) == false)
         {
-                ProtectorEquipment* protector_equipment = ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipment(tech_level);
-                if (vehicle->AddAndManageItem(protector_equipment) == false)
-                {
-                        EntityGarbage::Instance().Add(protector_equipment); 
-                }  
-   	}
-        
-        if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::DROID_SLOT_ID) == true)
+            EntityGarbage::Instance().Add(bak_equipment); 
+        } 
+    }
+    
+    if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::ENERGIZER_SLOT_ID) == true)
+    {
+        EnergizerEquipment* energizer_equipment = EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment(tech_level);
+        if (vehicle->AddAndManageItem(energizer_equipment) == false)
         {
-                DroidEquipment* droid_equipment = DroidEquipmentBuilder::Instance().GetNewDroidEquipment(tech_level);
-                if (vehicle->AddAndManageItem(droid_equipment) == false)
-                {
-                        EntityGarbage::Instance().Add(droid_equipment); 
-                }  
-   	}
-        
-        if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::SCANER_SLOT_ID) == true)
+            EntityGarbage::Instance().Add(energizer_equipment); 
+        }     
+    }
+    
+    if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::FREEZER_SLOT_ID) == true)
+    {
+        //FreezerEquipment* freezer_equipment = FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment(tech_level);
+        //if (vehicle->AddAndManageItem(freezer_equipment) == false)
+        //{
+            //EntityGarbage::Instance().Add(freezer_equipment); 
+        //}  
+    }
+    
+    if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::PROTECTOR_SLOT_ID) == true)
+    {
+        ProtectorEquipment* protector_equipment = ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipment(tech_level);
+        if (vehicle->AddAndManageItem(protector_equipment) == false)
         {
-                ScanerEquipment* scaner_equipment = ScanerEquipmentBuilder::Instance().GetNewScanerEquipment(tech_level);
-                if (vehicle->AddAndManageItem(scaner_equipment) == false)
-                {
-                        EntityGarbage::Instance().Add(scaner_equipment); 
-                }  
-        }
+            EntityGarbage::Instance().Add(protector_equipment); 
+        }  
+    }
         
-        if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::GRAPPLE_SLOT_ID) == true)
+    if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::DROID_SLOT_ID) == true)
+    {
+        DroidEquipment* droid_equipment = DroidEquipmentBuilder::Instance().GetNewDroidEquipment(tech_level);
+        if (vehicle->AddAndManageItem(droid_equipment) == false)
         {
-                GrappleEquipment* grapple_equipment = GrappleEquipmentBuilder::Instance().GetNewGrappleEquipment(tech_level);
-                if (vehicle->AddAndManageItem(grapple_equipment) == false)
-                {
-                        EntityGarbage::Instance().Add(grapple_equipment); 
-                } 
+            EntityGarbage::Instance().Add(droid_equipment); 
+        }  
+    }
+    
+    if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::SCANER_SLOT_ID) == true)
+    {
+        ScanerEquipment* scaner_equipment = ScanerEquipmentBuilder::Instance().GetNewScanerEquipment(tech_level);
+        if (vehicle->AddAndManageItem(scaner_equipment) == false)
+        {
+            EntityGarbage::Instance().Add(scaner_equipment); 
+        }  
+    }
+    
+    if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::GRAPPLE_SLOT_ID) == true)
+    {
+        GrappleEquipment* grapple_equipment = GrappleEquipmentBuilder::Instance().GetNewGrappleEquipment(tech_level);
+        if (vehicle->AddAndManageItem(grapple_equipment) == false)
+        {
+            EntityGarbage::Instance().Add(grapple_equipment); 
+        } 
    	}
 }
 

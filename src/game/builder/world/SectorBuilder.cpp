@@ -35,7 +35,7 @@ SectorBuilder& SectorBuilder::Instance()
 SectorBuilder::~SectorBuilder()
 {}
 
-Sector* SectorBuilder::GetNewSectorTemplate(unsigned long int id) const
+Sector* SectorBuilder::GetNewSectorTemplate(INTLONGEST id) const
 {
 	Sector* sector = nullptr;
 	if (id == NONE_ID)

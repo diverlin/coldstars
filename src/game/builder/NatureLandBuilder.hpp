@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef NATURELANDBUILDER_H
-#define NATURELANDBUILDER_H
+#ifndef NATURELANDBUILDER_HPP
+#define NATURELANDBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class NatureLand;
-#include "../common/constants.hpp"
 
 class NatureLandBuilder
 {
@@ -28,15 +30,15 @@ class NatureLandBuilder
 		static NatureLandBuilder& Instance();
 		~NatureLandBuilder();
 
-        	NatureLand* GetNewNatureLandTemplate(unsigned long int id = NONE_ID) const; 
-                NatureLand* GetNewNatureLand() const;
+        NatureLand* GetNewNatureLandTemplate(INTLONGEST id = NONE_ID) const; 
+        NatureLand* GetNewNatureLand() const;
                        	 		                
-        private:
+    private:
 		NatureLandBuilder() {};
 		NatureLandBuilder(const NatureLandBuilder&) = delete;
 		NatureLandBuilder& operator=(const NatureLandBuilder&) = delete;
 		
-                void CreateNewInternals(NatureLand*) const;
+        void CreateNewInternals(NatureLand*) const;
 }; 
 
 

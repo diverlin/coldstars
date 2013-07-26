@@ -17,13 +17,15 @@
 */
 
 
-#ifndef CONTAINERBUILDER_H
-#define CONTAINERBUILDER_H
+#ifndef CONTAINERBUILDER_HPP
+#define CONTAINERBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class Container;
 class TextureOb;
 class BaseItem;
-#include "../../common/constants.hpp"
 
 class ContainerBuilder
 {
@@ -31,16 +33,16 @@ class ContainerBuilder
 		static ContainerBuilder& Instance();
 		~ContainerBuilder();
 
-        	Container* GetNewContainerTemplate(unsigned long int id = NONE_ID) const; 
-                Container* GetNewContainer(TextureOb*, BaseItem*) const;
-                Container* GetNewMineralContainer(int) const;
+        Container* GetNewContainerTemplate(INTLONGEST id = NONE_ID) const; 
+        Container* GetNewContainer(TextureOb*, BaseItem*) const;
+        Container* GetNewMineralContainer(int) const;
                         	 		                
-        private:
+    private:
 		ContainerBuilder() {};
 		ContainerBuilder(const ContainerBuilder&) = delete;
 		ContainerBuilder& operator=(const ContainerBuilder&) = delete;
 
-                void CreateNewInternals(Container*, TextureOb*, BaseItem*) const;
+        void CreateNewInternals(Container*, TextureOb*, BaseItem*) const;
 }; 
 
 #endif 

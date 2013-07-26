@@ -34,7 +34,7 @@ ShopBuilder& ShopBuilder::Instance()
 ShopBuilder::~ShopBuilder()
 {}
 
-Shop* ShopBuilder::GetNewShopTemplate(unsigned long int id) const
+Shop* ShopBuilder::GetNewShopTemplate(INTLONGEST id) const
 {
 	Shop* shop = nullptr;
 	
@@ -43,18 +43,18 @@ Shop* ShopBuilder::GetNewShopTemplate(unsigned long int id) const
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	shop = new Shop(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(shop);
-        
-        return shop;
+    try 
+    { 
+        shop = new Shop(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(shop);
+    
+    return shop;
 } 
  
 Shop* ShopBuilder::GetNewShop() const

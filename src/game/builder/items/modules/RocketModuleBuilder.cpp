@@ -33,7 +33,7 @@ RocketModuleBuilder& RocketModuleBuilder::Instance()
 RocketModuleBuilder::~RocketModuleBuilder()
 {}
 
-RocketModule* RocketModuleBuilder::GetNewRocketModuleTemplate(unsigned long int id) const
+RocketModule* RocketModuleBuilder::GetNewRocketModuleTemplate(INTLONGEST id) const
 {
 	RocketModule* rocket_module = nullptr;
 	
@@ -42,18 +42,18 @@ RocketModule* RocketModuleBuilder::GetNewRocketModuleTemplate(unsigned long int 
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	rocket_module = new RocketModule(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(rocket_module);
-        
-        return rocket_module;
+    try 
+    { 
+        rocket_module = new RocketModule(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(rocket_module);
+    
+    return rocket_module;
 } 
   
 RocketModule* RocketModuleBuilder::GetNewRocketModule(int ammo_max_add, int damage_add, int radius_add) const

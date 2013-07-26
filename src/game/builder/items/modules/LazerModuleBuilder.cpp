@@ -33,7 +33,7 @@ LazerModuleBuilder& LazerModuleBuilder::Instance()
 LazerModuleBuilder::~LazerModuleBuilder()
 {}
 
-LazerModule* LazerModuleBuilder::GetNewLazerModuleTemplate(unsigned long int id) const
+LazerModule* LazerModuleBuilder::GetNewLazerModuleTemplate(INTLONGEST id) const
 {
 	LazerModule* lazer_module = nullptr;
 
@@ -42,18 +42,18 @@ LazerModule* LazerModuleBuilder::GetNewLazerModuleTemplate(unsigned long int id)
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	lazer_module = new LazerModule(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(lazer_module);
-        
-        return lazer_module;
+    try 
+    { 
+        lazer_module = new LazerModule(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(lazer_module);
+    
+    return lazer_module;
 } 
 
 LazerModule* LazerModuleBuilder::GetNewLazerModule(int damage_add, int radius_add) const
@@ -61,19 +61,19 @@ LazerModule* LazerModuleBuilder::GetNewLazerModule(int damage_add, int radius_ad
 	LazerModule* lazer_module = GetNewLazerModuleTemplate();
 	CreateNewInternals(lazer_module, damage_add, radius_add);
         
-        return lazer_module;
+    return lazer_module;
 } 
         	
 void LazerModuleBuilder::CreateNewInternals(LazerModule* lazer_module, int damage_add, int radius_add) const
 {     
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-    	damage_add = getRandInt(MODULE::LAZER::DAMAGE_MIN, MODULE::LAZER::DAMAGE_MAX);
-    	radius_add = getRandInt(MODULE::LAZER::RADIUS_MIN, MODULE::LAZER::RADIUS_MAX);
-    
-        lazer_module->SetParentSubTypeId(TYPE::ENTITY::LAZER_EQUIPMENT_ID);    
-        lazer_module->BindData2D(texOb);
-        lazer_module->SetDamageAdd(damage_add);
-        lazer_module->SetRadiusAdd(radius_add);
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    damage_add = getRandInt(MODULE::LAZER::DAMAGE_MIN, MODULE::LAZER::DAMAGE_MAX);
+    radius_add = getRandInt(MODULE::LAZER::RADIUS_MIN, MODULE::LAZER::RADIUS_MAX);
+
+    lazer_module->SetParentSubTypeId(TYPE::ENTITY::LAZER_EQUIPMENT_ID);    
+    lazer_module->BindData2D(texOb);
+    lazer_module->SetDamageAdd(damage_add);
+    lazer_module->SetRadiusAdd(radius_add);
 }
 
 

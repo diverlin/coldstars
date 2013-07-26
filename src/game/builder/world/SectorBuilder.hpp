@@ -17,12 +17,14 @@
 */
 
 
-#ifndef SECTORBUILDER_H
-#define SECTORBUILDER_H
+#ifndef SECTORBUILDER_HPP
+#define SECTORBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class Sector;
 class SectorDescription;
-#include "../../common/constants.hpp"
 
 class SectorBuilder
 {
@@ -30,7 +32,7 @@ class SectorBuilder
 		static SectorBuilder& Instance();
 		~SectorBuilder();
 		
-		Sector* GetNewSectorTemplate(unsigned long int id = NONE_ID) const; 
+		Sector* GetNewSectorTemplate(INTLONGEST id = NONE_ID) const; 
 		Sector* GetNewSector(const SectorDescription&) const; 
 	
 	private:

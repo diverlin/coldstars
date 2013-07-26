@@ -33,7 +33,7 @@ RocketEquipmentBuilder& RocketEquipmentBuilder::Instance()
 RocketEquipmentBuilder::~RocketEquipmentBuilder()
 {}
 
-RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipmentTemplate(unsigned long int id) const
+RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipmentTemplate(INTLONGEST id) const
 {
 	RocketEquipment* rocket_equipment = nullptr;
 
@@ -43,17 +43,17 @@ RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipmentTemplate(unsigned 
 	}
 
  	try 
-        { 
-        	rocket_equipment = new RocketEquipment(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(rocket_equipment);
-        
-        return rocket_equipment;
+    { 
+        rocket_equipment = new RocketEquipment(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(rocket_equipment);
+    
+    return rocket_equipment;
 } 
 
 RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipment(int tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const

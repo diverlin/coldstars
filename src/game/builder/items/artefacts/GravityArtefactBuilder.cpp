@@ -33,7 +33,7 @@ GravityArtefactBuilder& GravityArtefactBuilder::Instance()
 GravityArtefactBuilder::~GravityArtefactBuilder()
 {}
 
-GravityArtefact* GravityArtefactBuilder::GetNewGravityArtefactTemplate(unsigned long int id) const
+GravityArtefact* GravityArtefactBuilder::GetNewGravityArtefactTemplate(INTLONGEST id) const
 {
 	GravityArtefact* gravity_artefact = nullptr;
 
@@ -42,17 +42,17 @@ GravityArtefact* GravityArtefactBuilder::GetNewGravityArtefactTemplate(unsigned 
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	gravity_artefact = new GravityArtefact(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        EntityManager::Instance().RegisterEntity(gravity_artefact);
-        
-        return gravity_artefact;
+    try 
+    { 
+        gravity_artefact = new GravityArtefact(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    EntityManager::Instance().RegisterEntity(gravity_artefact);
+    
+    return gravity_artefact;
 } 
     
 GravityArtefact* GravityArtefactBuilder::GetNewGravityArtefact(int gravity) const
@@ -60,23 +60,23 @@ GravityArtefact* GravityArtefactBuilder::GetNewGravityArtefact(int gravity) cons
 	GravityArtefact* gravity_artefact = GetNewGravityArtefactTemplate();
 	CreateNewInternals(gravity_artefact, gravity);	
         
-        return gravity_artefact;
+    return gravity_artefact;
 } 
     	
 void GravityArtefactBuilder::CreateNewInternals(GravityArtefact* gravity_artefact, int gravity) const
 {     
-    	TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BAK_EQUIPMENT_ID);    
-    	//item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
-    	gravity = getRandInt(ARTEFACT::GRAVITY::GRAVITYRATE_MIN, ARTEFACT::GRAVITY::GRAVITYRATE_MAX);
+    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BAK_EQUIPMENT_ID);    
+    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
+    gravity = getRandInt(ARTEFACT::GRAVITY::GRAVITYRATE_MIN, ARTEFACT::GRAVITY::GRAVITYRATE_MAX);
 
-      	ItemCommonData common_data;
-    	common_data.deterioration_normal = 1;
+    ItemCommonData common_data;
+    common_data.deterioration_normal = 1;
 
-        gravity_artefact->SetGravity(gravity);
-        gravity_artefact->BindData2D(texOb_item);    	
-        gravity_artefact->SetParentSubTypeId(TYPE::ENTITY::ARTEFACT_SLOT_ID);
-        gravity_artefact->SetItemCommonData(common_data);
-        gravity_artefact->SetCondition(common_data.condition_max);
+    gravity_artefact->SetGravity(gravity);
+    gravity_artefact->BindData2D(texOb_item);    	
+    gravity_artefact->SetParentSubTypeId(TYPE::ENTITY::ARTEFACT_SLOT_ID);
+    gravity_artefact->SetItemCommonData(common_data);
+    gravity_artefact->SetCondition(common_data.condition_max);
 }
 
 

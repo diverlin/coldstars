@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BOMBBUILDER_H
-#define BOMBBUILDER_H
+#ifndef BOMBBUILDER_HPP
+#define BOMBBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class Bomb;
-#include "../../../common/constants.hpp"
 
 class BombBuilder
 {
@@ -28,15 +30,15 @@ class BombBuilder
 		static BombBuilder& Instance();
 		~BombBuilder();
 
-        	Bomb* GetNewBombTemplate(unsigned long int id = NONE_ID) const; 
-                Bomb* GetNewBomb(int damage = NONE_ID, int radius = NONE_ID) const;
+        Bomb* GetNewBombTemplate(INTLONGEST id = NONE_ID) const; 
+        Bomb* GetNewBomb(int damage = NONE_ID, int radius = NONE_ID) const;
         	 		                
-        private:
+    private:
 		BombBuilder() {};
 		BombBuilder(const BombBuilder&) = delete;
 		BombBuilder& operator=(const BombBuilder&) = delete;
 
-                void CreateNewInternals(Bomb*, int, int) const;
+        void CreateNewInternals(Bomb*, int, int) const;
 }; 
 
 #endif 

@@ -32,7 +32,7 @@ PlanetBuilder& PlanetBuilder::Instance()
 PlanetBuilder::~PlanetBuilder()
 {}
 
-Planet* PlanetBuilder::GetNewPlanetTemplate(unsigned long int id) const
+Planet* PlanetBuilder::GetNewPlanetTemplate(INTLONGEST id) const
 {
 	Planet* planet = nullptr;
 	
@@ -42,17 +42,17 @@ Planet* PlanetBuilder::GetNewPlanetTemplate(unsigned long int id) const
 	}
 
 	try 
-        { 
-		planet = new Planet(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(planet);
-        
-        return planet;
+    { 
+        planet = new Planet(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(planet);
+    
+    return planet;
 } 
        
 Planet* PlanetBuilder::GetNewPlanet(float orbit_radius) const

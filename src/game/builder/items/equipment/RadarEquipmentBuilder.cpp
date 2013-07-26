@@ -33,7 +33,7 @@ RadarEquipmentBuilder& RadarEquipmentBuilder::Instance()
 RadarEquipmentBuilder::~RadarEquipmentBuilder()
 {}
 
-RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipmentTemplate(unsigned long int id) const
+RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipmentTemplate(INTLONGEST id) const
 {
 	RadarEquipment* radar_equipment = nullptr;
 	
@@ -42,18 +42,18 @@ RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipmentTemplate(unsigned lon
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-       	try 
-        { 
-		radar_equipment = new RadarEquipment(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(radar_equipment);
-        
-        return radar_equipment;
+    try 
+    { 
+        radar_equipment = new RadarEquipment(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(radar_equipment);
+    
+    return radar_equipment;
 } 
   
 RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipment(int tech_level, TYPE::RACE race_id, int radius_orig) const

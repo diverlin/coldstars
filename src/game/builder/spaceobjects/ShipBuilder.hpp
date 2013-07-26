@@ -20,8 +20,12 @@
 #define SHIPBUILDER_HPP
 
 #include <builder/spaceobjects/BaseVehicleBuilder.hpp>
-#include <common/constants.hpp>
+
+#include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+
+#include <common/constants.hpp>
+
 
 class Ship;
 
@@ -40,7 +44,7 @@ class ShipBuilder : public BaseVehicleBuilder
 		static ShipBuilder& Instance();
 		~ShipBuilder();
 		
-		Ship* GetNewShipTemplate(unsigned long int id = NONE_ID) const;
+		Ship* GetNewShipTemplate(INTLONGEST id = NONE_ID) const;
         Ship* GetNewShip(TYPE::RACE, TYPE::ENTITY, int, int) const;        
         Ship* GetNewShip() const;   
                        

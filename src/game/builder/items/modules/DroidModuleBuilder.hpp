@@ -17,11 +17,13 @@
 */
 
 
-#ifndef DROIDMODULEBUILDER_H
-#define DROIDMODULEBUILDER_H
+#ifndef DROIDMODULEBUILDER_HPP
+#define DROIDMODULEBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class DroidModule;
-#include "../../../common/constants.hpp"
 
 class DroidModuleBuilder
 {
@@ -29,15 +31,15 @@ class DroidModuleBuilder
 		static DroidModuleBuilder& Instance();
 		~DroidModuleBuilder();
 
-        	DroidModule* GetNewDroidModuleTemplate(unsigned long int id = NONE_ID) const; 
-                DroidModule* GetNewDroidModule(int repair_add = NONE_ID) const;
+        DroidModule* GetNewDroidModuleTemplate(INTLONGEST id = NONE_ID) const; 
+        DroidModule* GetNewDroidModule(int repair_add = NONE_ID) const;
         	 		                
-        private:
+    private:
 		DroidModuleBuilder() {};
 		DroidModuleBuilder(const DroidModuleBuilder&) = delete;
 		DroidModuleBuilder& operator=(const DroidModuleBuilder&) = delete;
 
-                void CreateNewInternals(DroidModule*, int) const;
+        void CreateNewInternals(DroidModule*, int) const;
 }; 
 
 #endif 

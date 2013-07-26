@@ -19,8 +19,9 @@
 #ifndef SCANEREQUIPMENTBUILDER_HPP
 #define SCANEREQUIPMENTBUILDER_HPP
 
-#include <common/constants.hpp>
+#include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <common/constants.hpp>
 
 class ScanerEquipment;
 
@@ -30,7 +31,7 @@ class ScanerEquipmentBuilder
 		static ScanerEquipmentBuilder& Instance();
 		~ScanerEquipmentBuilder();
 
-        ScanerEquipment* GetNewScanerEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        ScanerEquipment* GetNewScanerEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
         ScanerEquipment* GetNewScanerEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int scan_orig = NONE_ID) const;
         	 		                
     private:

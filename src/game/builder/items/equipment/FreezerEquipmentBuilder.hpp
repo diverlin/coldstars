@@ -31,7 +31,7 @@ class FreezerEquipmentBuilder
 		static FreezerEquipmentBuilder& Instance();
 		~FreezerEquipmentBuilder();
 		
-        FreezerEquipment* GetNewFreezerEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        FreezerEquipment* GetNewFreezerEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
         FreezerEquipment* GetNewFreezerEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int freeze_orig = NONE_ID) const;
         	 		                
     private:

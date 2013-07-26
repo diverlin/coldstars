@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef RADARMODULEBUILDER_H
-#define RADARMODULEBUILDER_H
+#ifndef RADARMODULEBUILDER_HPP
+#define RADARMODULEBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class RadarModule;
-#include "../../../common/constants.hpp"
 
 class RadarModuleBuilder
 {
@@ -28,15 +30,15 @@ class RadarModuleBuilder
 		static RadarModuleBuilder& Instance();
 		~RadarModuleBuilder();
 
-        	RadarModule* GetNewRadarModuleTemplate(unsigned long int id = NONE_ID) const; 
-                RadarModule* GetNewRadarModule(int radius_add = NONE_ID) const;
+        RadarModule* GetNewRadarModuleTemplate(INTLONGEST id = NONE_ID) const; 
+        RadarModule* GetNewRadarModule(int radius_add = NONE_ID) const;
         	 		                
-        private:
+    private:
 		RadarModuleBuilder() {};
 		RadarModuleBuilder(const RadarModuleBuilder&) = delete;
 		RadarModuleBuilder& operator=(const RadarModuleBuilder&) = delete;
 
-                void CreateNewInternals(RadarModule*, int) const;
+        void CreateNewInternals(RadarModule*, int) const;
 }; 
 
 #endif 

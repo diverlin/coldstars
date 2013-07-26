@@ -33,7 +33,7 @@ DriveModuleBuilder& DriveModuleBuilder::Instance()
 DriveModuleBuilder::~DriveModuleBuilder()
 {}
 
-DriveModule* DriveModuleBuilder::GetNewDriveModuleTemplate(unsigned long int id) const
+DriveModule* DriveModuleBuilder::GetNewDriveModuleTemplate(INTLONGEST id) const
 {
 	DriveModule* drive_module = nullptr;
 

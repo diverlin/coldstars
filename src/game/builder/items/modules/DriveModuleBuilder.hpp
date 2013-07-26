@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef DRIVEMODULEBUILDER_H
-#define DRIVEMODULEBUILDER_H
+#ifndef DRIVEMODULEBUILDER_HPP
+#define DRIVEMODULEBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class DriveModule;
-#include "../../../common/constants.hpp"
 
 class DriveModuleBuilder
 {
@@ -28,15 +30,15 @@ class DriveModuleBuilder
 		static DriveModuleBuilder& Instance();
 		~DriveModuleBuilder();
 
-        	DriveModule* GetNewDriveModuleTemplate(unsigned long int id = NONE_ID) const; 
-                DriveModule* GetNewDriveModule(int speed_add = NONE_ID, int hyper_add = NONE_ID) const;
+        DriveModule* GetNewDriveModuleTemplate(INTLONGEST id = NONE_ID) const; 
+        DriveModule* GetNewDriveModule(int speed_add = NONE_ID, int hyper_add = NONE_ID) const;
         	 		                
-        private:
+    private:
 		DriveModuleBuilder() {};
 		DriveModuleBuilder(const DriveModuleBuilder&) = delete;
 		DriveModuleBuilder& operator=(const DriveModuleBuilder&) = delete;
 
-                void CreateNewInternals(DriveModule*, int, int) const;
+        void CreateNewInternals(DriveModule*, int, int) const;
 }; 
 
 #endif 

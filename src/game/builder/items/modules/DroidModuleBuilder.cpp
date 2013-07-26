@@ -33,7 +33,7 @@ DroidModuleBuilder& DroidModuleBuilder::Instance()
 DroidModuleBuilder::~DroidModuleBuilder()
 {}
 
-DroidModule* DroidModuleBuilder::GetNewDroidModuleTemplate(unsigned long int id) const
+DroidModule* DroidModuleBuilder::GetNewDroidModuleTemplate(INTLONGEST id) const
 {
 	DroidModule* droid_module = nullptr;
 
@@ -42,18 +42,18 @@ DroidModule* DroidModuleBuilder::GetNewDroidModuleTemplate(unsigned long int id)
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	droid_module = new DroidModule(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(droid_module);
-        
-        return droid_module;
+    try 
+    { 
+        droid_module = new DroidModule(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(droid_module);
+    
+    return droid_module;
 } 
        
 DroidModule* DroidModuleBuilder::GetNewDroidModule(int repair_add) const

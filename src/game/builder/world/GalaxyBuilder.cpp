@@ -35,7 +35,7 @@ GalaxyBuilder& GalaxyBuilder::Instance()
 GalaxyBuilder::~GalaxyBuilder()
 {}
 
-Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(unsigned long int id) const
+Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(INTLONGEST id) const
 {
 	Galaxy* galaxy = nullptr;
 	if (id == NONE_ID)
@@ -69,7 +69,7 @@ Galaxy* GalaxyBuilder::GetNewGalaxy(const GalaxyDescription& galaxy_description)
 void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy, const GalaxyDescription& galaxy_description) const
 {     
 	Vec3<float> pos;
-	for(int i=0; i<galaxy_description.sector_descriptions.size(); i++)
+	for(unsigned int i=0; i<galaxy_description.sector_descriptions.size(); i++)
 	{  
 		Vec3<float> offset = getRandXYVec3f(2, 20, 0);
 		pos.x += 20;

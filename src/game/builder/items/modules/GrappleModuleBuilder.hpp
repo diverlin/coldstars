@@ -16,12 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GRAPPLEMODULEBUILDER_H
-#define GRAPPLEMODULEBUILDER_H
+#ifndef GRAPPLEMODULEBUILDER_HPP
+#define GRAPPLEMODULEBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class GrappleModule;
-#include "../../../common/constants.hpp"
-
 
 class GrappleModuleBuilder
 {
@@ -29,15 +30,15 @@ class GrappleModuleBuilder
 		static GrappleModuleBuilder& Instance();
 		~GrappleModuleBuilder();
 
-        	GrappleModule* GetNewGrappleModuleTemplate(unsigned long int id = NONE_ID) const; 
-                GrappleModule* GetNewGrappleModule(int strength_add = NONE_ID, int radius_add = NONE_ID, int speed_add = NONE_ID) const;
+        GrappleModule* GetNewGrappleModuleTemplate(INTLONGEST id = NONE_ID) const; 
+        GrappleModule* GetNewGrappleModule(int strength_add = NONE_ID, int radius_add = NONE_ID, int speed_add = NONE_ID) const;
         	 		                
-        private:
+    private:
 		GrappleModuleBuilder() {};
 		GrappleModuleBuilder(const GrappleModuleBuilder&) = delete;
 		GrappleModuleBuilder& operator=(const GrappleModuleBuilder&) = delete;
 
-                void CreateNewInternals(GrappleModule*, int, int, int) const;
+        void CreateNewInternals(GrappleModule*, int, int, int) const;
 }; 
 
 #endif 

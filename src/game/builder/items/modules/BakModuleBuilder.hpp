@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BAKMODULEBUILDER_H
-#define BAKMODULEBUILDER_H
+#ifndef BAKMODULEBUILDER_HPP
+#define BAKMODULEBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class BakModule;
-#include "../../../common/constants.hpp"
 
 class BakModuleBuilder
 {
@@ -28,15 +30,15 @@ class BakModuleBuilder
 		static BakModuleBuilder& Instance();
 		~BakModuleBuilder();
 
-        	BakModule* GetNewBakModuleTemplate(unsigned long int id = NONE_ID) const; 
-                BakModule* GetNewBakModule(int fuel_max_add = NONE_ID) const;
+        BakModule* GetNewBakModuleTemplate(INTLONGEST id = NONE_ID) const; 
+        BakModule* GetNewBakModule(int fuel_max_add = NONE_ID) const;
         	 		                
-        private:
+    private:
 		BakModuleBuilder() {};
 		BakModuleBuilder(const BakModuleBuilder&) = delete;
 		BakModuleBuilder& operator=(const BakModuleBuilder&) = delete;
 
-                void CreateNewInternals(BakModule*, int) const;
+        void CreateNewInternals(BakModule*, int) const;
 }; 
 
 #endif 

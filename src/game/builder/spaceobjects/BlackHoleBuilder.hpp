@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BLACKHOLEBUILDER_H
-#define BLACKHOLEBUILDER_H
+#ifndef BLACKHOLEBUILDER_HPP
+#define BLACKHOLEBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class BlackHole;
-#include "../../common/constants.hpp"
 
 class BlackHoleBuilder
 {
@@ -28,15 +30,15 @@ class BlackHoleBuilder
 		static BlackHoleBuilder& Instance();
 		~BlackHoleBuilder();
 
-        	BlackHole* GetNewBlackHoleTemplate(unsigned long int id = NONE_ID) const; 
-                BlackHole* GetNewBlackHole() const;
+        BlackHole* GetNewBlackHoleTemplate(INTLONGEST id = NONE_ID) const; 
+        BlackHole* GetNewBlackHole() const;
         	 		                
-        private:
+    private:
 		BlackHoleBuilder() {};
 		BlackHoleBuilder(const BlackHoleBuilder&) = delete;
 		BlackHoleBuilder& operator=(const BlackHoleBuilder&) = delete;
 
-                void CreateNewInternals(BlackHole*) const;
+        void CreateNewInternals(BlackHole*) const;
 }; 
 
 

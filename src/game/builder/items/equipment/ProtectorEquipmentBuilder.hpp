@@ -20,8 +20,9 @@
 #ifndef PROTECTOREQUIPMENTBUILDER_HPP
 #define PROTECTOREQUIPMENTBUILDER_HPP
 
-#include <common/constants.hpp>
+#include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <common/constants.hpp>
 
 class ProtectorEquipment;
 
@@ -31,7 +32,7 @@ class ProtectorEquipmentBuilder
 		static ProtectorEquipmentBuilder& Instance();
 		~ProtectorEquipmentBuilder();
 
-        ProtectorEquipment* GetNewProtectorEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        ProtectorEquipment* GetNewProtectorEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
         ProtectorEquipment* GetNewProtectorEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int protection_orig = NONE_ID) const;
         	 		                
     private:

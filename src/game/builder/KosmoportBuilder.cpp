@@ -37,7 +37,7 @@ KosmoportBuilder& KosmoportBuilder::Instance()
 KosmoportBuilder::~KosmoportBuilder()
 {}
 
-Kosmoport* KosmoportBuilder::GetNewKosmoportTemplate(unsigned long int id) const
+Kosmoport* KosmoportBuilder::GetNewKosmoportTemplate(INTLONGEST id) const
 {
 	Kosmoport* kosmoport = nullptr;
 	
@@ -46,18 +46,18 @@ Kosmoport* KosmoportBuilder::GetNewKosmoportTemplate(unsigned long int id) const
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	kosmoport = new Kosmoport(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(kosmoport);
-        
-        return kosmoport;
+    try 
+    { 
+        kosmoport = new Kosmoport(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(kosmoport);
+    
+    return kosmoport;
 } 
 
 Kosmoport* KosmoportBuilder::GetNewKosmoport() const
