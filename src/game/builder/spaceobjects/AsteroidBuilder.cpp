@@ -20,7 +20,7 @@
 #include "../CommonBuilderHeaders.hpp"
 #include "../../spaceobjects/Asteroid.hpp"
 
-#include <common/MeshTypes.hpp>
+#include <types/MeshTypes.hpp>
 
 AsteroidBuilder& AsteroidBuilder::Instance()
 {

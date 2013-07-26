@@ -26,7 +26,7 @@
 class Player;
 class AnimationEffect2D;
 
-#include <common/GuiTypes.hpp>
+#include <types/GuiTypes.hpp>
 
 #include <common/Box2D.hpp> 
 #include <common/rect.hpp> // to be removed

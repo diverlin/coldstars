@@ -21,7 +21,7 @@
 #include "../../spaceobjects/Planet.hpp"
 #include "../../effects/Atmosphere.hpp"
 
-#include <common/MeshTypes.hpp>
+#include <types/MeshTypes.hpp>
 
 PlanetBuilder& PlanetBuilder::Instance()
 {

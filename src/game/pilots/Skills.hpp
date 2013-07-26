@@ -17,12 +17,12 @@
 */
 
 
-#ifndef SKILLS_H
-#define SKILLS_H
+#ifndef SKILLS_HPP
+#define SKILLS_HPP
 
 #include <boost/property_tree/ptree.hpp>
 #include "../common/constants.hpp"
-#include "../common/RaceTypes.hpp"
+#include <types/RaceTypes.hpp>
 
 class Skills
 { 

@@ -20,7 +20,7 @@
 #include "../CommonBuilderHeaders.hpp"
 #include "../../spaceobjects/Star.hpp"
 
-#include <common/MeshTypes.hpp>
+#include <types/MeshTypes.hpp>
 	
 StarBuilder& StarBuilder::Instance()
 {

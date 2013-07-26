@@ -42,7 +42,7 @@
 #include "../text/VerticalFlowText.hpp" 
 
 #include "../common/GameDate.hpp" 
-#include <common/RaceTypes.hpp> 
+#include <types/RaceTypes.hpp> 
 
 Npc::Npc(int id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id)
 :

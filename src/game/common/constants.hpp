@@ -23,8 +23,8 @@
 #include <cstdint>
 #include "../math/myVector.hpp"
 #include <vector>
-#include "EntityTypes.hpp"
-#include "GuiTypes.hpp"
+#include <types/EntityTypes.hpp>
+#include <types/GuiTypes.hpp>
 #include "MyInt.hpp"
 #include "Converter.hpp"
 

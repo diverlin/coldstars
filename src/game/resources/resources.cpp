@@ -27,8 +27,8 @@
 #include "TextureManager.hpp"
 #include "GuiTextureObCollector.hpp"
 
-#include "common/RaceTypes.hpp"
-#include "common/MeshTypes.hpp"
+#include <types/RaceTypes.hpp>
+#include <types/MeshTypes.hpp>
 
 void loadGameData()
 {    	

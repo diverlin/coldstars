@@ -26,7 +26,7 @@
 
 #include "../math/myVector.hpp"
 #include <common/constants.hpp>
-#include <common/RaceTypes.hpp>
+#include <types/RaceTypes.hpp>
 
 
 class TextureOb
