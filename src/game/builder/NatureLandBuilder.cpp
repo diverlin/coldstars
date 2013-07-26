@@ -43,7 +43,7 @@ NatureLandBuilder& NatureLandBuilder::Instance()
 NatureLandBuilder::~NatureLandBuilder()
 {}
 
-NatureLand* NatureLandBuilder::GetNewNatureLandTemplate(unsigned long int id) const
+NatureLand* NatureLandBuilder::GetNewNatureLandTemplate(INTLONGEST id) const
 {
 	NatureLand* natureland = nullptr;
 	
@@ -52,18 +52,18 @@ NatureLand* NatureLandBuilder::GetNewNatureLandTemplate(unsigned long int id) co
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	natureland = new NatureLand(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(natureland);
-        
-        return natureland;
+    try 
+    { 
+        natureland = new NatureLand(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(natureland);
+    
+    return natureland;
 } 
 
 NatureLand* NatureLandBuilder::GetNewNatureLand() const
@@ -71,14 +71,14 @@ NatureLand* NatureLandBuilder::GetNewNatureLand() const
 	NatureLand* natureland = GetNewNatureLandTemplate();
 	CreateNewInternals(natureland);
         
-        return natureland;
+    return natureland;
 } 
        	
 void NatureLandBuilder::CreateNewInternals(NatureLand* natureland) const
 {
 	natureland->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TEXTURE::NATURELAND_BACKGROUND_ID));
 	
-	int item_slot_num = getRandInt(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
+	unsigned int item_slot_num = getRandInt(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
 	for (unsigned int i=0; i<item_slot_num; i++)
 	{
 		ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);   

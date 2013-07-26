@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ROCKETMODULEBUILDER_H
-#define ROCKETMODULEBUILDER_H
+#ifndef ROCKETMODULEBUILDER_HPP
+#define ROCKETMODULEBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class RocketModule;
-#include "../../../common/constants.hpp"
 
 class RocketModuleBuilder
 {
@@ -28,15 +30,15 @@ class RocketModuleBuilder
 		static RocketModuleBuilder& Instance();
 		~RocketModuleBuilder();
 
-        	RocketModule* GetNewRocketModuleTemplate(unsigned long int id = NONE_ID) const;
-                RocketModule* GetNewRocketModule(int ammo_max_add = NONE_ID, int damage_add = NONE_ID, int radius_add = NONE_ID) const;
+        RocketModule* GetNewRocketModuleTemplate(INTLONGEST id = NONE_ID) const;
+        RocketModule* GetNewRocketModule(int ammo_max_add = NONE_ID, int damage_add = NONE_ID, int radius_add = NONE_ID) const;
         	 		                
-        private:
+    private:
 		RocketModuleBuilder() {};
 		RocketModuleBuilder(const RocketModuleBuilder&) = delete;
 		RocketModuleBuilder& operator=(const RocketModuleBuilder&) = delete;
 
-                void CreateNewInternals(RocketModule*, int, int, int) const;
+        void CreateNewInternals(RocketModule*, int, int, int) const;
 }; 
 
 #endif 

@@ -19,8 +19,9 @@
 #ifndef DROIDEQUIPMENTBUILDER_HPP
 #define DROIDEQUIPMENTBUILDER_HPP
 
-#include <common/constants.hpp>
+#include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <common/constants.hpp>
 
 class DroidEquipment;
 
@@ -30,7 +31,7 @@ class DroidEquipmentBuilder
 		static DroidEquipmentBuilder& Instance();
 		~DroidEquipmentBuilder();
 
-        DroidEquipment* GetNewDroidEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        DroidEquipment* GetNewDroidEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
         DroidEquipment* GetNewDroidEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int repair_orig = NONE_ID) const;
         	 		                
     private:

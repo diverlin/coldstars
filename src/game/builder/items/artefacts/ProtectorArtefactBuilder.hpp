@@ -16,27 +16,29 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef PROTECTORARTEFACTBUILDER_H
-#define PROTECTORARTEFACTBUILDER_H
+#ifndef PROTECTORARTEFACTBUILDER_HPP
+#define PROTECTORARTEFACTBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class ProtectorArtefact;
-#include "../../../common/constants.hpp"
 
 class ProtectorArtefactBuilder
 {
 	public:
 		static ProtectorArtefactBuilder& Instance();
 		~ProtectorArtefactBuilder();
-
-        	ProtectorArtefact* GetNewProtectorArtefactTemplate(unsigned long int id = NONE_ID) const;
-                ProtectorArtefact* GetNewProtectorArtefact(int protection = NONE_ID) const;
+        
+        ProtectorArtefact* GetNewProtectorArtefactTemplate(INTLONGEST id = NONE_ID) const;
+        ProtectorArtefact* GetNewProtectorArtefact(int protection = NONE_ID) const;
         	 		                
-        private:
+    private:
 		ProtectorArtefactBuilder() {};
 		ProtectorArtefactBuilder(const ProtectorArtefactBuilder&) = delete;
 		ProtectorArtefactBuilder& operator=(const ProtectorArtefactBuilder&) = delete;
 		
-                void CreateNewInternals(ProtectorArtefact*, int) const;
+        void CreateNewInternals(ProtectorArtefact*, int) const;
 }; 
 
 

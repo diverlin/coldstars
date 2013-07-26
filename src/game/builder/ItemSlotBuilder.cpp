@@ -25,7 +25,7 @@
 #include "../parts/Turrel.hpp"
 #include "../resources/textureOb.hpp"
 
-ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, unsigned long int id)
+ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
 {
     if (id == NONE_ID)
     {

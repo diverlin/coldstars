@@ -33,7 +33,7 @@ BombBuilder& BombBuilder::Instance()
 BombBuilder::~BombBuilder()
 {}
 
-Bomb* BombBuilder::GetNewBombTemplate(unsigned long int id) const
+Bomb* BombBuilder::GetNewBombTemplate(INTLONGEST id) const
 {
 	Bomb* bomb = nullptr;
 	
@@ -43,16 +43,16 @@ Bomb* BombBuilder::GetNewBombTemplate(unsigned long int id) const
 	}
 
    	try 
-        { 
-        	bomb = new Bomb(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        EntityManager::Instance().RegisterEntity(bomb);
-        
-        return bomb;
+    { 
+        bomb = new Bomb(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    EntityManager::Instance().RegisterEntity(bomb);
+    
+    return bomb;
 } 
 
 Bomb* BombBuilder::GetNewBomb(int damage, int radius) const
@@ -60,14 +60,14 @@ Bomb* BombBuilder::GetNewBomb(int damage, int radius) const
 	Bomb* bomb = GetNewBombTemplate();
 	CreateNewInternals(bomb, damage, radius);
         
-        return bomb;
+    return bomb;
 } 
         	
 void BombBuilder::CreateNewInternals(Bomb* bomb, int damage, int radius) const
 {     
 	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::BOMB_ID); 
 	damage = 300;
-        radius = 300;
+    radius = 300;
         
 	bomb->BindData2D(texOb);
 	bomb->SetDamage(damage);

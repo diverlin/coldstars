@@ -19,8 +19,9 @@
 #ifndef BAKEQUIPMENTBUILDER_HPP
 #define BAKEQUIPMENTBUILDER_HPP
 
-#include <common/constants.hpp>
+#include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <common/constants.hpp>
 
 class BakEquipment;
 
@@ -30,7 +31,7 @@ class BakEquipmentBuilder
 		static BakEquipmentBuilder& Instance();
 		~BakEquipmentBuilder();
 
-        BakEquipment* GetNewBakEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        BakEquipment* GetNewBakEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
         BakEquipment* GetNewBakEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int fuel_max_orig = NONE_ID) const;
         	 		                
     private:                

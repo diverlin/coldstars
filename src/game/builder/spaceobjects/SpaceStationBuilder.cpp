@@ -32,7 +32,7 @@ SpaceStationBuilder& SpaceStationBuilder::Instance()
 
 SpaceStationBuilder::~SpaceStationBuilder() {}
 
-SpaceStation* SpaceStationBuilder::GetNewSpaceStationTemplate(unsigned long int id) const
+SpaceStation* SpaceStationBuilder::GetNewSpaceStationTemplate(INTLONGEST id) const
 {
 	SpaceStation* spacestation = nullptr;
 	if (id == NONE_ID)
@@ -41,25 +41,25 @@ SpaceStation* SpaceStationBuilder::GetNewSpaceStationTemplate(unsigned long int 
 	}
 	        
 	try 
-        { 
-        	spacestation = new SpaceStation(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(spacestation);
-        
-        return spacestation;
+    { 
+        spacestation = new SpaceStation(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(spacestation);
+    
+    return spacestation;
 }
 
 SpaceStation* SpaceStationBuilder::GetNewSpaceStation() const
 {
 	SpaceStation* spacestation = GetNewSpaceStationTemplate();
-        CreateNewInternals(spacestation);
-        
-        return spacestation;
+    CreateNewInternals(spacestation);
+    
+    return spacestation;
 }
 
 void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const

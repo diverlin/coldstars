@@ -26,7 +26,7 @@
 #include "../common/rand.hpp"
 #include "../resources/TextureManager.hpp"
 
-VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY subtype_id, unsigned long int id)
+VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
 {
     if (id == NONE_ID)
 	{

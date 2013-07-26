@@ -31,7 +31,7 @@ AsteroidBuilder& AsteroidBuilder::Instance()
 AsteroidBuilder::~AsteroidBuilder()
 {}
 
-Asteroid* AsteroidBuilder::GetNewAsteroidTemplate(unsigned long int id) const
+Asteroid* AsteroidBuilder::GetNewAsteroidTemplate(INTLONGEST id) const
 {
 	Asteroid* asteroid = nullptr;
 	
@@ -40,17 +40,17 @@ Asteroid* AsteroidBuilder::GetNewAsteroidTemplate(unsigned long int id) const
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	asteroid = new Asteroid(id); 
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        EntityManager::Instance().RegisterEntity(asteroid);
-        
-        return asteroid;
+    try 
+    { 
+        asteroid = new Asteroid(id); 
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    EntityManager::Instance().RegisterEntity(asteroid);
+    
+    return asteroid;
 } 
 
 Asteroid* AsteroidBuilder::GetNewAsteroid() const
@@ -58,7 +58,7 @@ Asteroid* AsteroidBuilder::GetNewAsteroid() const
 	Asteroid* asteroid = GetNewAsteroidTemplate();
 	CreateNewInternals(asteroid);
         
-        return asteroid;
+    return asteroid;
 } 
        	
 void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const

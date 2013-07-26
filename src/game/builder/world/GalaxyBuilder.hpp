@@ -17,12 +17,14 @@
 */
 
 
-#ifndef GALAXYBUILDER_H
-#define GALAXYBUILDER_H
+#ifndef GALAXYBUILDER_HPP
+#define GALAXYBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class Galaxy;
 class GalaxyDescription;
-#include "../../common/constants.hpp"
 
 class GalaxyBuilder
 {
@@ -30,7 +32,7 @@ class GalaxyBuilder
 		static GalaxyBuilder& Instance();
 		~GalaxyBuilder();
 		
-		Galaxy* GetNewGalaxyTemplate(unsigned long int id = NONE_ID) const; 
+		Galaxy* GetNewGalaxyTemplate(INTLONGEST id = NONE_ID) const; 
 		Galaxy* GetNewGalaxy(const GalaxyDescription&) const; 
 												
 	private:
@@ -40,9 +42,7 @@ class GalaxyBuilder
 		
 		void CreateNewInternals(Galaxy*, const GalaxyDescription&) const;
 }; 
-
-
-
+    
 #endif 
     
 

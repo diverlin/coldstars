@@ -20,8 +20,9 @@
 #ifndef GRAPPLEEQUIPMENTBUILDER_HPP
 #define GRAPPLEEQUIPMENTBUILDER_HPP
 
-#include <common/constants.hpp>
+#include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <common/constants.hpp>
 
 class GrappleEquipment;
 
@@ -31,7 +32,7 @@ class GrappleEquipmentBuilder
 		static GrappleEquipmentBuilder& Instance();
 		~GrappleEquipmentBuilder();
 
-        GrappleEquipment* GetNewGrappleEquipmentTemplate(unsigned long int id = NONE_ID) const; 
+        GrappleEquipment* GetNewGrappleEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
         GrappleEquipment* GetNewGrappleEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int strength_orig = NONE_ID, int radius_orig = NONE_ID, int speed_orig = NONE_ID) const;
         	 		                
     private:

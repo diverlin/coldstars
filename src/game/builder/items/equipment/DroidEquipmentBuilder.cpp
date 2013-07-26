@@ -33,7 +33,7 @@ DroidEquipmentBuilder& DroidEquipmentBuilder::Instance()
 DroidEquipmentBuilder::~DroidEquipmentBuilder()
 {}
 
-DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipmentTemplate(unsigned long int id) const
+DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipmentTemplate(INTLONGEST id) const
 {
 	DroidEquipment* droid_equipment = nullptr;
 	if (id == NONE_ID)
@@ -41,17 +41,17 @@ DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipmentTemplate(unsigned lon
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	droid_equipment = new DroidEquipment(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        EntityManager::Instance().RegisterEntity(droid_equipment);
-        
-        return droid_equipment;
+    try 
+    { 
+        droid_equipment = new DroidEquipment(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    EntityManager::Instance().RegisterEntity(droid_equipment);
+    
+    return droid_equipment;
 } 
 
 DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipment(int tech_level, TYPE::RACE race_id, int repair_orig) const

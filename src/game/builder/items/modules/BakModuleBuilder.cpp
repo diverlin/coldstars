@@ -33,7 +33,7 @@ BakModuleBuilder& BakModuleBuilder::Instance()
 BakModuleBuilder::~BakModuleBuilder()
 {}
 
-BakModule* BakModuleBuilder::GetNewBakModuleTemplate(unsigned long int id) const
+BakModule* BakModuleBuilder::GetNewBakModuleTemplate(INTLONGEST id) const
 {
 	BakModule* bak_module = nullptr;
 
@@ -42,18 +42,18 @@ BakModule* BakModuleBuilder::GetNewBakModuleTemplate(unsigned long int id) const
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	bak_module = new BakModule(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(bak_module);
-        
-        return bak_module;
+    try 
+    { 
+        bak_module = new BakModule(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(bak_module);
+    
+    return bak_module;
 } 
   
 BakModule* BakModuleBuilder::GetNewBakModule(int fuel_max_add) const

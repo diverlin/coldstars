@@ -19,9 +19,11 @@
 #ifndef SATELLITEBUILDER_H
 #define SATELLITEBUILDER_H
 
-#include "BaseVehicleBuilder.hpp"
+#include <builder/spaceobjects/BaseVehicleBuilder.hpp>
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
+
 class Satellite;
-#include "../../common/constants.hpp"
 
 class SatelliteBuilder : public BaseVehicleBuilder
 {
@@ -29,13 +31,13 @@ class SatelliteBuilder : public BaseVehicleBuilder
 		static SatelliteBuilder& Instance();
 		~SatelliteBuilder();
 		
-		Satellite* GetNewSatelliteTemplate(unsigned long int id = NONE_ID) const;							
+		Satellite* GetNewSatelliteTemplate(INTLONGEST id = NONE_ID) const;							
 		Satellite* GetNewSatellite() const;
        
-        private:
-        	SatelliteBuilder() {};   	
-        	SatelliteBuilder(const SatelliteBuilder&) = delete; 
-        	SatelliteBuilder& operator=(const SatelliteBuilder&) = delete;
+    private:
+        SatelliteBuilder() {};   	
+        SatelliteBuilder(const SatelliteBuilder&) = delete; 
+        SatelliteBuilder& operator=(const SatelliteBuilder&) = delete;
         	
 		void CreateNewInternals(Satellite*) const; 
 }; 

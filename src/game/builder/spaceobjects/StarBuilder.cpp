@@ -31,7 +31,7 @@ StarBuilder& StarBuilder::Instance()
 StarBuilder::~StarBuilder()
 {}
 
-Star* StarBuilder::GetNewStarTemplate(unsigned long int id) const
+Star* StarBuilder::GetNewStarTemplate(INTLONGEST id) const
 {
 	Star* star = nullptr;
 	

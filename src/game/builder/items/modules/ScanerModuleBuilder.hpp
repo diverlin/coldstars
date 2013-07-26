@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SCANERMODULEBUILDER_H
-#define SCANERMODULEBUILDER_H
+#ifndef SCANERMODULEBUILDER_HPP
+#define SCANERMODULEBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class ScanerModule;
-#include "../../../common/constants.hpp"
 
 class ScanerModuleBuilder
 {
@@ -28,15 +30,15 @@ class ScanerModuleBuilder
 		static ScanerModuleBuilder& Instance();
 		~ScanerModuleBuilder();
 
-        	ScanerModule* GetNewScanerModuleTemplate(unsigned long int id = NONE_ID) const; 
-                ScanerModule* GetNewScanerModule(int scan_add = NONE_ID) const;
+        ScanerModule* GetNewScanerModuleTemplate(INTLONGEST id = NONE_ID) const; 
+        ScanerModule* GetNewScanerModule(int scan_add = NONE_ID) const;
         	 		                
-        private:
+    private:
 		ScanerModuleBuilder() {};
 		ScanerModuleBuilder(const ScanerModuleBuilder&) = delete;
 		ScanerModuleBuilder& operator=(const ScanerModuleBuilder&) = delete;
 
-                void CreateNewInternals(ScanerModule*, int) const;
+        void CreateNewInternals(ScanerModule*, int) const;
 }; 
 
 #endif 

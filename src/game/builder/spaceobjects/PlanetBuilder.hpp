@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef PLANETBUILDER_H
-#define PLANETBUILDER_H
+#ifndef PLANETBUILDER_HPP
+#define PLANETBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class Planet;
-#include "../../common/constants.hpp"
 
 namespace ENTITY
 {
@@ -43,15 +45,15 @@ class PlanetBuilder
 		static PlanetBuilder& Instance();
 		~PlanetBuilder();
 
-        	Planet* GetNewPlanetTemplate(unsigned long int id = NONE_ID) const; 
-                Planet* GetNewPlanet(float) const;
+        Planet* GetNewPlanetTemplate(INTLONGEST id = NONE_ID) const; 
+        Planet* GetNewPlanet(float) const;
         	 		                
-        private:
+    private:
 		PlanetBuilder() {};
 		PlanetBuilder(const PlanetBuilder&) = delete;
 		PlanetBuilder& operator=(const PlanetBuilder&) = delete;
 
-                void CreateNewInternals(Planet*, float) const;
+        void CreateNewInternals(Planet*, float) const;
 }; 
 
 

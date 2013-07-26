@@ -33,7 +33,7 @@ EnergizerEquipmentBuilder& EnergizerEquipmentBuilder::Instance()
 EnergizerEquipmentBuilder::~EnergizerEquipmentBuilder()
 {}
 
-EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipmentTemplate(unsigned long int id) const
+EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipmentTemplate(INTLONGEST id) const
 {
 	EnergizerEquipment* energizer_equipment = nullptr;
 
@@ -43,16 +43,16 @@ EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipmentTemplate(
 	}
 
  	try 
-        { 
-        	energizer_equipment = new EnergizerEquipment(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        EntityManager::Instance().RegisterEntity(energizer_equipment);
-        
-        return energizer_equipment;
+    { 
+        energizer_equipment = new EnergizerEquipment(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    EntityManager::Instance().RegisterEntity(energizer_equipment);
+    
+    return energizer_equipment;
 } 
     
 EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipment(int tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const

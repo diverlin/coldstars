@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef PROTECTORMODULEBUILDER_H
-#define PROTECTORMODULEBUILDER_H
+#ifndef PROTECTORMODULEBUILDER_HPP
+#define PROTECTORMODULEBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class ProtectorModule;
-#include "../../../common/constants.hpp"
 
 class ProtectorModuleBuilder
 {
@@ -28,15 +30,15 @@ class ProtectorModuleBuilder
 		static ProtectorModuleBuilder& Instance();
 		~ProtectorModuleBuilder();
 
-        	ProtectorModule* GetNewProtectorModuleTemplate(unsigned long int id = NONE_ID) const; 
-                ProtectorModule* GetNewProtectorModule(int protection_add = NONE_ID) const;
+        ProtectorModule* GetNewProtectorModuleTemplate(INTLONGEST id = NONE_ID) const; 
+        ProtectorModule* GetNewProtectorModule(int protection_add = NONE_ID) const;
         	 		                
-        private:
+    private:
 		ProtectorModuleBuilder() {};
 		ProtectorModuleBuilder(const ProtectorModuleBuilder&) = delete;
 		ProtectorModuleBuilder& operator=(const ProtectorModuleBuilder&) = delete;
 
-                void CreateNewInternals(ProtectorModule*, int) const;
+        void CreateNewInternals(ProtectorModule*, int) const;
 }; 
 
 #endif 

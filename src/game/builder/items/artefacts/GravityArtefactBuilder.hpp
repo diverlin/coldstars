@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GRAVITYARTEFACTBUILDER_H
-#define GRAVITYARTEFACTBUILDER_H
+#ifndef GRAVITYARTEFACTBUILDER_HPP
+#define GRAVITYARTEFACTBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class GravityArtefact;
-#include "../../../common/constants.hpp"
 
 class GravityArtefactBuilder
 {
@@ -28,19 +30,17 @@ class GravityArtefactBuilder
 		static GravityArtefactBuilder& Instance();
 		~GravityArtefactBuilder();
 
-        	GravityArtefact* GetNewGravityArtefactTemplate(unsigned long int id = NONE_ID) const; 
-                GravityArtefact* GetNewGravityArtefact(int gravity = NONE_ID) const;
+        GravityArtefact* GetNewGravityArtefactTemplate(INTLONGEST id = NONE_ID) const; 
+        GravityArtefact* GetNewGravityArtefact(int gravity = NONE_ID) const;
         	 		                
-        private:
+    private:
 		GravityArtefactBuilder() {};
 		GravityArtefactBuilder(const GravityArtefactBuilder&) = delete;
 		GravityArtefactBuilder& operator=(const GravityArtefactBuilder&) = delete;
 
-                void CreateNewInternals(GravityArtefact*, int) const;
+        void CreateNewInternals(GravityArtefact*, int) const;
 }; 
-
-
-
+     
 #endif 
     
 

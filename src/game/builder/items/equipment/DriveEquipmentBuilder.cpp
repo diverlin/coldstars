@@ -38,7 +38,7 @@ DriveEquipmentBuilder& DriveEquipmentBuilder::Instance()
 DriveEquipmentBuilder::~DriveEquipmentBuilder()
 {}
 
-DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipmentTemplate(unsigned long int id) const
+DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipmentTemplate(INTLONGEST id) const
 {
 	DriveEquipment* drive_equipment = nullptr;
 	if (id == NONE_ID)

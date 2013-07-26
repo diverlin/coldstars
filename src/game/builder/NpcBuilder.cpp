@@ -40,7 +40,7 @@ NpcBuilder& NpcBuilder::Instance()
 NpcBuilder::~NpcBuilder()
 {}
 
-Npc* NpcBuilder::GetNewNpcTemplate(TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id, unsigned long int id) const
+Npc* NpcBuilder::GetNewNpcTemplate(TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id, INTLONGEST id) const
 {
 	Npc* npc = nullptr;
 	

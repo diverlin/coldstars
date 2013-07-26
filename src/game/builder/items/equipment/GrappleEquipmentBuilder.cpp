@@ -33,7 +33,7 @@ GrappleEquipmentBuilder& GrappleEquipmentBuilder::Instance()
 GrappleEquipmentBuilder::~GrappleEquipmentBuilder()
 {}
 
-GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipmentTemplate(unsigned long int id) const
+GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipmentTemplate(INTLONGEST id) const
 {
 	GrappleEquipment* grapple_equipment = nullptr;
 	
@@ -43,16 +43,16 @@ GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipmentTemplate(unsign
 	}
 
   	try 
-        { 
-        	grapple_equipment = new GrappleEquipment(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        EntityManager::Instance().RegisterEntity(grapple_equipment);
-        
-        return grapple_equipment;
+    { 
+        grapple_equipment = new GrappleEquipment(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    EntityManager::Instance().RegisterEntity(grapple_equipment);
+    
+    return grapple_equipment;
 } 
         
 GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipment(int tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const

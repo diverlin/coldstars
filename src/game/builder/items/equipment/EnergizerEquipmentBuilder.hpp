@@ -19,8 +19,9 @@
 #ifndef ENERGIZEREQUIPMENTBUILDER_HPP
 #define ENERGIZEREQUIPMENTBUILDER_HPP
 
-#include <common/constants.hpp>
+#include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <common/constants.hpp>
 
 class EnergizerEquipment;
 
@@ -30,7 +31,7 @@ class EnergizerEquipmentBuilder
 		static EnergizerEquipmentBuilder& Instance();
 		~EnergizerEquipmentBuilder();
 
-        EnergizerEquipment* GetNewEnergizerEquipmentTemplate(unsigned long int id = NONE_ID)const; 
+        EnergizerEquipment* GetNewEnergizerEquipmentTemplate(INTLONGEST id = NONE_ID)const; 
         EnergizerEquipment* GetNewEnergizerEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int energy_max_orig = NONE_ID, int restoration_orig = NONE_ID) const;
         	 		                
     private:

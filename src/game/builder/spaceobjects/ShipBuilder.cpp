@@ -29,7 +29,7 @@ ShipBuilder& ShipBuilder::Instance()
 
 ShipBuilder::~ShipBuilder() {}
 
-Ship* ShipBuilder::GetNewShipTemplate(unsigned long int id) const
+Ship* ShipBuilder::GetNewShipTemplate(INTLONGEST id) const
 {
 	Ship* ship = nullptr;
 
@@ -38,18 +38,18 @@ Ship* ShipBuilder::GetNewShipTemplate(unsigned long int id) const
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	ship = new Ship(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(ship);
-        
-        return ship;
+    try 
+    { 
+        ship = new Ship(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(ship);
+    
+    return ship;
 }
 
 Ship* ShipBuilder::GetNewShip(TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const

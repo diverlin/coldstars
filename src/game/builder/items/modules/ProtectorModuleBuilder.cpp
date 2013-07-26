@@ -33,7 +33,7 @@ ProtectorModuleBuilder& ProtectorModuleBuilder::Instance()
 ProtectorModuleBuilder::~ProtectorModuleBuilder()
 {}
 
-ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModuleTemplate(unsigned long int id) const
+ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModuleTemplate(INTLONGEST id) const
 {
 	ProtectorModule* protector_module = nullptr;
 	
@@ -42,18 +42,18 @@ ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModuleTemplate(unsigned 
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	protector_module = new ProtectorModule(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(protector_module);
-        
-        return protector_module;
+    try 
+    { 
+        protector_module = new ProtectorModule(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(protector_module);
+    
+    return protector_module;
 } 
 
 ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModule(int protection_add) const

@@ -30,7 +30,7 @@ RocketBulletBuilder& RocketBulletBuilder::Instance()
 RocketBulletBuilder::~RocketBulletBuilder() {}
 
 
-RocketBullet* RocketBulletBuilder::GetNewRocketBulletTemplate(unsigned long int id) const
+RocketBullet* RocketBulletBuilder::GetNewRocketBulletTemplate(INTLONGEST id) const
 {
 	RocketBullet* rocket_bullet = nullptr;
 

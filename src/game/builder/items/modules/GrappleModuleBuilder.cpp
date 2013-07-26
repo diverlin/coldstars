@@ -33,7 +33,7 @@ GrappleModuleBuilder& GrappleModuleBuilder::Instance()
 GrappleModuleBuilder::~GrappleModuleBuilder()
 {}
 
-GrappleModule* GrappleModuleBuilder::GetNewGrappleModuleTemplate(unsigned long int id) const
+GrappleModule* GrappleModuleBuilder::GetNewGrappleModuleTemplate(INTLONGEST id) const
 {
 	GrappleModule* grapple_module = nullptr;
 
@@ -42,18 +42,18 @@ GrappleModule* GrappleModuleBuilder::GetNewGrappleModuleTemplate(unsigned long i
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	grapple_module = new GrappleModule(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(grapple_module);
-        
-        return grapple_module;
+    try 
+    { 
+        grapple_module = new GrappleModule(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(grapple_module);
+    
+    return grapple_module;
 } 
 
 GrappleModule* GrappleModuleBuilder::GetNewGrappleModule(int strength_add, int radius_add, int speed_add) const
@@ -61,21 +61,21 @@ GrappleModule* GrappleModuleBuilder::GetNewGrappleModule(int strength_add, int r
 	GrappleModule* grapple_module = GetNewGrappleModuleTemplate();
 	CreateNewInternals(grapple_module, strength_add, radius_add, speed_add);
         
-        return grapple_module;
+    return grapple_module;
 } 
         	
 void GrappleModuleBuilder::CreateNewInternals(GrappleModule* grapple_module, int strength_add, int radius_add, int speed_add) const
 {     
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
-    	strength_add   = getRandInt(MODULE::GRAPPLE::STRENGTH_MIN, MODULE::GRAPPLE::STRENGTH_MAX);
-    	radius_add     = getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
-    	speed_add      = getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);
-    
-        grapple_module->SetParentSubTypeId(TYPE::ENTITY::GRAPPLE_EQUIPMENT_ID);    
-        grapple_module->BindData2D(texOb);
-        grapple_module->SetStrengthAdd(strength_add);
-        grapple_module->SetRadiusAdd(radius_add);
-        grapple_module->SetSpeedAdd(speed_add);
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TEXTURE::MODULE_ID);   
+    strength_add   = getRandInt(MODULE::GRAPPLE::STRENGTH_MIN, MODULE::GRAPPLE::STRENGTH_MAX);
+    radius_add     = getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
+    speed_add      = getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);
+
+    grapple_module->SetParentSubTypeId(TYPE::ENTITY::GRAPPLE_EQUIPMENT_ID);    
+    grapple_module->BindData2D(texOb);
+    grapple_module->SetStrengthAdd(strength_add);
+    grapple_module->SetRadiusAdd(radius_add);
+    grapple_module->SetSpeedAdd(speed_add);
 }
 
 

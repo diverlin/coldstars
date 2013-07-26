@@ -33,7 +33,7 @@ ScanerModuleBuilder& ScanerModuleBuilder::Instance()
 ScanerModuleBuilder::~ScanerModuleBuilder()
 {}
 
-ScanerModule* ScanerModuleBuilder::GetNewScanerModuleTemplate(unsigned long int id) const
+ScanerModule* ScanerModuleBuilder::GetNewScanerModuleTemplate(INTLONGEST id) const
 {
 	ScanerModule* scaner_module = nullptr;
 	

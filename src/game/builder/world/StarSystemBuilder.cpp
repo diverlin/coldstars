@@ -40,7 +40,7 @@ StarSystemBuilder& StarSystemBuilder::Instance()
 StarSystemBuilder::~StarSystemBuilder()
 {}
 
-StarSystem* StarSystemBuilder::GetNewStarSystemTemplate(unsigned long int id) const
+StarSystem* StarSystemBuilder::GetNewStarSystemTemplate(INTLONGEST id) const
 {
 	StarSystem* starsystem = nullptr;
 	

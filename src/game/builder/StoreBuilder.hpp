@@ -16,11 +16,12 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef STOREBUILDER_H
-#define STOREBUILDER_H
+#ifndef STOREBUILDER_HPP
+#define STOREBUILDER_HPP
 
-#include "../docking/Store.hpp"
-#include "../common/constants.hpp"
+#include <common/constants.hpp>
+
+class Store;
 
 class StoreBuilder
 {
@@ -28,18 +29,17 @@ class StoreBuilder
 		static StoreBuilder& Instance();
 		~StoreBuilder();
 
-        	Store* GetNewStoreTemplate(unsigned long int id = NONE_ID) const; 
-                Store* GetNewStore() const;
+        Store* GetNewStoreTemplate(INTLONGEST id = NONE_ID) const; 
+        Store* GetNewStore() const;
                                        	 		                
-        private:
+    private:
 		StoreBuilder() {};
 		StoreBuilder(const StoreBuilder&) = delete;
 		StoreBuilder& operator=(const StoreBuilder&) = delete;
                 
-                void CreateNewInternals(Store*) const;
-                void PutRandomEquipment(Store*) const;
+        void CreateNewInternals(Store*) const;
+        void PutRandomEquipment(Store*) const;
 }; 
-
 
 #endif 
     

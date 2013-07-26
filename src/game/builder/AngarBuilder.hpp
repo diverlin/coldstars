@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ANGARBUILDER_H
-#define ANGARBUILDER_H
+#ifndef ANGARBUILDER_HPP
+#define ANGARBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class Angar;
-#include "../common/constants.hpp"
 
 class AngarBuilder
 {
@@ -28,15 +30,15 @@ class AngarBuilder
 		static AngarBuilder& Instance();
 		~AngarBuilder();
 
-        	Angar* GetNewAngarTemplate(unsigned long int id = NONE_ID) const; 
-                Angar* GetNewAngar() const;
+        Angar* GetNewAngarTemplate(INTLONGEST id = NONE_ID) const; 
+        Angar* GetNewAngar() const;
 
-        private:
+    private:
 		AngarBuilder() {};
 		AngarBuilder(const AngarBuilder&) = delete;
 		AngarBuilder& operator=(const AngarBuilder&) = delete;
 
-                void CreateNewInternals(Angar*) const;
+        void CreateNewInternals(Angar*) const;
 }; 
 
 #endif 

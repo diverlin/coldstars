@@ -17,11 +17,13 @@
 */
 
 
-#ifndef LAZERMODULEBUILDER_H
-#define LAZERMODULEBUILDER_H
+#ifndef LAZERMODULEBUILDER_HPP
+#define LAZERMODULEBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class LazerModule;
-#include "../../../common/constants.hpp"
 
 class LazerModuleBuilder
 {
@@ -29,15 +31,15 @@ class LazerModuleBuilder
 		static LazerModuleBuilder& Instance();
 		~LazerModuleBuilder();
 
-        	LazerModule* GetNewLazerModuleTemplate(unsigned long int id = NONE_ID) const; 
-                LazerModule* GetNewLazerModule(int damage_add = NONE_ID, int radius_add = NONE_ID) const;
+        LazerModule* GetNewLazerModuleTemplate(INTLONGEST id = NONE_ID) const; 
+        LazerModule* GetNewLazerModule(int damage_add = NONE_ID, int radius_add = NONE_ID) const;
         	 		                
-        private:
+    private:
 		LazerModuleBuilder() {};
 		LazerModuleBuilder(const LazerModuleBuilder&) = delete;
 		LazerModuleBuilder& operator=(const LazerModuleBuilder&) = delete;
 
-                void CreateNewInternals(LazerModule*, int, int) const;
+        void CreateNewInternals(LazerModule*, int, int) const;
 }; 
 
 #endif 

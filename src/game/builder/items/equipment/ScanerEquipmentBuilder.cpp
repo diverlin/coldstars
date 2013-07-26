@@ -33,7 +33,7 @@ ScanerEquipmentBuilder& ScanerEquipmentBuilder::Instance()
 ScanerEquipmentBuilder::~ScanerEquipmentBuilder()
 {}
 
-ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipmentTemplate(unsigned long int id) const
+ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipmentTemplate(INTLONGEST id) const
 {
 	ScanerEquipment* scaner_equipment = nullptr;
 
@@ -43,17 +43,17 @@ ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipmentTemplate(unsigned 
 	}
 
 	try 
-        { 
-        	scaner_equipment = new ScanerEquipment(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        
-        EntityManager::Instance().RegisterEntity(scaner_equipment);
-        
-        return scaner_equipment;
+    { 
+        scaner_equipment = new ScanerEquipment(id);
+    }
+    catch(std::bad_alloc)
+    {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    
+    EntityManager::Instance().RegisterEntity(scaner_equipment);
+    
+    return scaner_equipment;
 } 
 
 ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipment(int tech_level, TYPE::RACE race_id, int scan_orig) const

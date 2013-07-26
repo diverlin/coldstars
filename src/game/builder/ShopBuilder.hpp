@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SHOPBUILDER_H
-#define SHOPBUILDER_H
+#ifndef SHOPBUILDER_HPP
+#define SHOPBUILDER_HPP
+
+#include <types/MyInt.hpp>
+#include <common/constants.hpp>
 
 class Shop;
-#include "../common/constants.hpp"
 
 class ShopBuilder
 {
@@ -28,10 +30,10 @@ class ShopBuilder
 		static ShopBuilder& Instance();
 		~ShopBuilder();
 
-        	Shop* GetNewShopTemplate(unsigned long int id = NONE_ID) const; 
-                Shop* GetNewShop() const;
+        Shop* GetNewShopTemplate(INTLONGEST id = NONE_ID) const; 
+        Shop* GetNewShop() const;
                        	 		                
-        private:
+    private:
 		ShopBuilder() {};
 		ShopBuilder(const ShopBuilder&) = delete;
 		ShopBuilder& operator=(const ShopBuilder&) = delete;
