@@ -17,10 +17,11 @@
 */
 
 
-#ifndef ORBIT_H
-#define ORBIT_H
+#ifndef ORBIT_HPP
+#define ORBIT_HPP
 
-#include "../render/PathVisual.hpp"
+#include <render/PathVisual.hpp>
+
 
 class Orbit
 {
@@ -47,7 +48,8 @@ class Orbit
 		PathVisual m_VisualOrbitTurn;
                 
 		std::vector<Vec3<float>> m_Coords_vec;
-		int m_Len, m_It; 
+		int m_Len;
+        int m_It; 
 };
 
 #endif 

@@ -50,8 +50,8 @@ race_id(TYPE::RACE::NONE_ID),
 credits(1000),
 player(nullptr),
 vehicle(nullptr),
-vehicle_to_scan(nullptr),
-ai_model(nullptr)
+ai_model(nullptr),
+vehicle_to_scan(nullptr)
 { 
 	is_alive = true;
     
@@ -304,6 +304,8 @@ bool Npc::BuyGoods()
 	{
 		shop->SellGoods(this, subtype_id, amount); 
 	}
+    
+    return true;
 }
   
 void Npc::SaveData(boost::property_tree::ptree& save_ptree) const

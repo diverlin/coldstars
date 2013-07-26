@@ -32,10 +32,10 @@
 
 BaseDrawable::BaseDrawable()
 :
-m_Mesh(nullptr), 
+m_ZYX(false),
 m_TextureOb(nullptr), 
-m_AnimationProgram(nullptr),
-m_ZYX(false)
+m_Mesh(nullptr), 
+m_AnimationProgram(nullptr)
 {}
 
 /* virtual */

@@ -334,6 +334,8 @@ ItemSlot* const Vehicle::GetFuctionalSlot(TYPE::ENTITY functional_slot_subtype_i
 			return m_SlotFunct_vec[i];
 		}
 	}
+    
+    return nullptr;
 }
 
 ItemSlot* const Vehicle::GetEmptyArtefactSlot() const

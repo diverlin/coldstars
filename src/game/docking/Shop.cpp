@@ -61,6 +61,8 @@ int Shop::GetAmount(TYPE::ENTITY subtype_id) const
 		case TYPE::ENTITY::DRUG_ID:		{ return drug_amount; break; }
 		case TYPE::ENTITY::EXCLUSIVE_ID: 	{ return exclusive_amount; break; }
 	}
+    
+    return 0;
 }    
                 
 int Shop::GetPrice(TYPE::ENTITY subtype_id) const
@@ -71,9 +73,11 @@ int Shop::GetPrice(TYPE::ENTITY subtype_id) const
 		case TYPE::ENTITY::FOOD_ID: 		{ return food_price; break; }
 		case TYPE::ENTITY::MEDICINE_ID: 	{ return medicine_price; break; }
 		case TYPE::ENTITY::MILITARY_ID: 	{ return military_price; break; }		
-		case TYPE::ENTITY::DRUG_ID:		{ return drug_price; break; }
+		case TYPE::ENTITY::DRUG_ID:		    { return drug_price; break; }
 		case TYPE::ENTITY::EXCLUSIVE_ID: 	{ return exclusive_price; break; }
 	}
+    
+    return 0;
 }
 
                 
@@ -124,7 +128,7 @@ int Shop::Deal(int sign, TYPE::ENTITY subtype_id, int amount)
 			
 			UpdateMineralPrice();
 			
-			return money; break;
+			break;
 		}
 
 		case TYPE::ENTITY::FOOD_ID:
@@ -134,7 +138,7 @@ int Shop::Deal(int sign, TYPE::ENTITY subtype_id, int amount)
 						
 			UpdateFoodPrice();
 			
-			return money; break;
+			break;
 		}
 
 		case TYPE::ENTITY::MEDICINE_ID:
@@ -144,7 +148,7 @@ int Shop::Deal(int sign, TYPE::ENTITY subtype_id, int amount)
 			
 			UpdateMedicinePrice();
 			
-			return money; break;
+			break;
 		}			
 
 		case TYPE::ENTITY::MILITARY_ID:
@@ -154,7 +158,7 @@ int Shop::Deal(int sign, TYPE::ENTITY subtype_id, int amount)
 		
 			UpdateMilitaryPrice();
 			
-			return money; break;
+			break;
 		}	
 
 		case TYPE::ENTITY::DRUG_ID:
@@ -164,7 +168,7 @@ int Shop::Deal(int sign, TYPE::ENTITY subtype_id, int amount)
 						
 			UpdateDrugPrice();
 			
-			return money; break;
+			break;
 		}	
 
 		case TYPE::ENTITY::EXCLUSIVE_ID:
@@ -174,9 +178,11 @@ int Shop::Deal(int sign, TYPE::ENTITY subtype_id, int amount)
 						
 			UpdateExclusivePrice();
 			
-			return money; break;
+			break;
 		}	
 	}
+    
+    return money;
 }
         	
 void Shop::UpdateAllPrices()

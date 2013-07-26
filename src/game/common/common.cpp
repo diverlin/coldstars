@@ -26,8 +26,6 @@ GUI::TYPE getGuiItemSlotType(TYPE::ENTITY val)
 {
     switch(val)
     {
-        case TYPE::ENTITY::NONE_ID:     { return GUI::TYPE::NONE_ID; break; }
-        
         case TYPE::ENTITY::CARGO_SLOT_ID:     { return GUI::TYPE::CARGO_SLOT_ID; break; }
         case TYPE::ENTITY::CARGO_SLOT1_ID:    { return GUI::TYPE::CARGO_SLOT1_ID; break; }             
         case TYPE::ENTITY::CARGO_SLOT2_ID:    { return GUI::TYPE::CARGO_SLOT2_ID; break; }  
@@ -79,14 +77,14 @@ GUI::TYPE getGuiItemSlotType(TYPE::ENTITY val)
         //case TYPE::ENTITY::REPAIR_SLOT_ID:   { return GUI::TYPE::REPAIR_SLOT_ID; break; }
         //case TYPE::ENTITY::CHARGE_SLOT_ID:   { return GUI::TYPE::CHARGE_SLOT_ID; break; }                        
     }
+    
+    return GUI::TYPE::NONE_ID;
 }
 
 GUI::TYPE getGuiItemSlotSelectorType(TYPE::ENTITY val)
 {
     switch(val)
-    {
-        case TYPE::ENTITY::NONE_ID:     { return GUI::TYPE::NONE_ID; break; }
-                               
+    {                                
         case TYPE::ENTITY::WEAPON_SLOT1_ID:   { return GUI::TYPE::WEAPON_SLOT1_SELECTOR_ID; break; }
         case TYPE::ENTITY::WEAPON_SLOT2_ID:   { return GUI::TYPE::WEAPON_SLOT2_SELECTOR_ID; break; }
         case TYPE::ENTITY::WEAPON_SLOT3_ID:   { return GUI::TYPE::WEAPON_SLOT3_SELECTOR_ID; break; }
@@ -107,21 +105,25 @@ GUI::TYPE getGuiItemSlotSelectorType(TYPE::ENTITY val)
         case TYPE::ENTITY::GRAPPLE_SLOT_ID:   { return GUI::TYPE::GRAPPLE_SLOT_SELECTOR_ID; break; }
         case TYPE::ENTITY::SCANER_SLOT_ID:   { return GUI::TYPE::SCANER_SLOT_SELECTOR_ID; break; }         
     }
+    
+    return GUI::TYPE::NONE_ID;
 }
     
 int getObjectSize(int w, int h)
 {
 	int area = w*h;
-    	if(area < SIZE_1_AREA) return SIZE_1_ID;
-    	if(area < SIZE_2_AREA) return SIZE_2_ID;
-    	if(area < SIZE_3_AREA) return SIZE_3_ID;
-    	if(area < SIZE_4_AREA) return SIZE_4_ID;
-    	if(area < SIZE_5_AREA) return SIZE_5_ID;
-    	if(area < SIZE_6_AREA) return SIZE_6_ID;
-    	if(area < SIZE_7_AREA) return SIZE_7_ID;
-    	if(area < SIZE_8_AREA) return SIZE_8_ID;
-    	if(area < SIZE_9_AREA) return SIZE_9_ID;
-    	if(area >= SIZE_9_AREA) return SIZE_10_ID;
+    if(area < SIZE_1_AREA) return SIZE_1_ID;
+    if(area < SIZE_2_AREA) return SIZE_2_ID;
+    if(area < SIZE_3_AREA) return SIZE_3_ID;
+    if(area < SIZE_4_AREA) return SIZE_4_ID;
+    if(area < SIZE_5_AREA) return SIZE_5_ID;
+    if(area < SIZE_6_AREA) return SIZE_6_ID;
+    if(area < SIZE_7_AREA) return SIZE_7_ID;
+    if(area < SIZE_8_AREA) return SIZE_8_ID;
+    if(area < SIZE_9_AREA) return SIZE_9_ID;
+    if(area >= SIZE_9_AREA) return SIZE_10_ID;
+    
+    return SIZE_10_ID;
 }
 
 

@@ -8,8 +8,8 @@
   
 Mesh::Mesh(const std::string& path, TextureOb* textureOb, TYPE::MESH type_id)
 :
-textureOb(textureOb), 
-type_id(type_id)
+type_id(type_id),
+textureOb(textureOb)
 {    	
     ObjLoader objLoader(path);
      	     

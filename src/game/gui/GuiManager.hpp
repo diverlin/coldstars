@@ -16,15 +16,17 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef GUIMANAGER_HPP
 #define GUIMANAGER_HPP
 
 class GuiSkill;
 class GuiGalaxyMap;
 
-#include "../gui/GuiKosmoport.hpp"
-#include "../gui/GuiSpace.hpp"
-#include "../gui/GuiNatureLand.hpp"
+#include <gui/GuiKosmoport.hpp>
+#include <gui/GuiSpace.hpp>
+#include <gui/GuiNatureLand.hpp>
+
 
 class GuiManager
 {
@@ -40,10 +42,10 @@ class GuiManager
 		GuiVehicle* GetGuiVehicleScan() const { return gui_vehicle_scan; };
 		GuiGalaxyMap* GetGuiGalaxyMap() const { return gui_galaxymap; };
 				
-		bool RunSessionInSpace();                                
-		bool RunSessionInKosmoport(const MouseData&);
-		bool RunSessionInNatureLand(const MouseData&);
-		
+		void RunSessionInSpace();                                
+		void RunSessionInKosmoport(const MouseData&);
+		void RunSessionInNatureLand(const MouseData&);
+
 		void EnterGuiKosmoport();
 		void ExitGuiKosmoport();                
 		
@@ -76,7 +78,5 @@ class GuiManager
 		GuiGalaxyMap*   gui_galaxymap;
 		Slider*         slider;  
 };
-
-
-
+  
 #endif

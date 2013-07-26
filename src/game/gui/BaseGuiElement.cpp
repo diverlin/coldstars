@@ -16,24 +16,27 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "BaseGuiElement.hpp"
 #include <common/constants.hpp>
 #include <render/Render.hpp>
 #include <common/Logger.hpp>
 
-#include "../render/AnimationEffect2D.hpp"
+#include <render/AnimationEffect2D.hpp>
+
 
 std::map<GUI::TYPE, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
 
+   
 BaseGuiElement::BaseGuiElement(GUI::TYPE subtype_id, const std::string& info, TextureOb* textureOb)
 :
 m_Subtype_id(subtype_id),
-m_Info(info),
-m_TextureOb(textureOb),
-m_Show(true),
-m_Root(true),
 m_Lock(false),
 m_Pressed(false),
+m_Show(true),
+m_Root(true),
+m_TextureOb(textureOb),
+m_Info(info),
 m_AnimationProgram(nullptr)
 {}
 

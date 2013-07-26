@@ -25,10 +25,11 @@
 #include "../../slots/ItemSlot.hpp"
 #include "../../spaceobjects/Vehicle.hpp"
 
-EnergizerEquipment::EnergizerEquipment(int id):
+EnergizerEquipment::EnergizerEquipment(INTLONGEST id)
+:
 energy_max_orig(0),
-restoration_orig(0),
-energy(0)    
+energy(0),
+restoration_orig(0) 
 {
 	SetId(id);
 	SetTypeId(TYPE::ENTITY::EQUIPMENT_ID);           

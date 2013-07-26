@@ -34,11 +34,11 @@
 
 RocketBullet::RocketBullet(int id)
 :
-m_Target(nullptr),
-m_EffectDrive(nullptr),
+m_Speed(0),
 m_DamageRate(1.0),
 m_OwnerId(0),
-m_Speed(0)  
+m_Target(nullptr),
+m_EffectDrive(nullptr) 
 {
 	SetId(id);
 	SetTypeId(TYPE::ENTITY::BULLET_ID);

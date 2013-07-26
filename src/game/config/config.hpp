@@ -34,10 +34,8 @@ struct Config
 		int GAME_SPEED;
 		
 		int SCROLL_VELOCITY_MAX;
-		int SCROLL_VELOCITY_STEP;
-		
-
-							
+		int SCROLL_VELOCITY_STEP; 
+        							
 	private:
 		Config();
 		Config(const Config&) = delete;

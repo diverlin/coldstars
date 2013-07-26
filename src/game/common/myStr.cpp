@@ -69,9 +69,9 @@ std::string getNavigatorActionStr(int type_id)
 		case NAVIGATOR_ACTION::KEEP_CLOSE_ID:	{ return "KEEP_CLOSE_ID"; break; }
 		case NAVIGATOR_ACTION::KEEP_MIDDLE_ID:	{ return "KEEP_MIDDLE_ID"; break; }
 		case NAVIGATOR_ACTION::KEEP_FAR_ID: 	{ return "KEEP_FAR_ID"; break; }
-		
-		default: { return "UNKNOWN ID"; }
 	}
+
+    return "UNKNOWN ID";
 }
 
 
@@ -89,8 +89,8 @@ std::string getPlaceTypeStr(PLACE::TYPE type_id)
 		    case PLACE::TYPE::HYPER_SPACE_ID: 	{ return "HYPER_SPACE_ID"; break; }
             case PLACE::TYPE::KOSMOPORT_ID: 	{ return "KOSMOPORT_ID"; break; }
 		    case PLACE::TYPE::NATURELAND_ID: 	{ return "NATURELAND_ID"; break; }
-							
-		    default: { return "UNKNOWN ID"; }
 	    }
     }
+
+    return "UNKNOWN ID";
 }

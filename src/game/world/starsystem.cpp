@@ -58,13 +58,14 @@
 
 int StarSystem::counter = 0;
                 
-StarSystem::StarSystem(int id):
+StarSystem::StarSystem(int id)
+:
+race_id(TYPE::RACE::R0_ID),
+conqueror_race_id(TYPE::RACE::NONE_ID),
 unique_update_inDymanic_done(false),
 unique_update_inStatic_done(false),
-sector(nullptr),
 container_num_max(CONTAINER_NUM_MAX_DEFAULT),
-race_id(TYPE::RACE::R0_ID),
-conqueror_race_id(TYPE::RACE::NONE_ID)
+sector(nullptr)
 { 
 	SetId(id);
 	SetTypeId(TYPE::ENTITY::STARSYSTEM_ID); 

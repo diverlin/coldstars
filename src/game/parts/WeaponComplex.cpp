@@ -38,7 +38,9 @@ WeaponComplex::~WeaponComplex()
 
 bool WeaponComplex::AddSlot(ItemSlot* slot)
 {
-        slot_weapon_vec.push_back(slot); 
+    slot_weapon_vec.push_back(slot); 
+    
+    return true;
 }
 
                        	

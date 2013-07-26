@@ -1,32 +1,30 @@
 #include "config.hpp"
 #include "../common/constants.hpp"
 
+
 Config& Config::Instance()
 {
 	static Config config;
 	return config;
 }
-
-Config::Config():	
-
+        
+Config::Config()
+:
 SCREEN_WIDTH(800),
 SCREEN_HEIGHT(600),
 BPP(32),
-VSYNC(true),
 FPS_LIMIT(60),
-
+VSYNC(true),
 MODERN_EFFECTS(false),
-
 DEBUG_MODE(false),
-game_mode(GAME_MODE::NORMAL_RUN),
-
 AUTO_TURN_MODE(false),
-auto_save_mode(false),
-auto_load_mode(false),
 GAME_SPEED(1),
-
 SCROLL_VELOCITY_MAX(20),
 SCROLL_VELOCITY_STEP(1),
+game_mode(GAME_MODE::NORMAL_RUN),
+log_mode(0),
+auto_save_mode(false),
+auto_load_mode(false),
 mouse_camera_scroll(false)		
 {
 	boost::property_tree::info_parser::read_info("config.info", ptree);

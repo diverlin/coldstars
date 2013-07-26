@@ -124,10 +124,8 @@ int Store::BuyItem(BaseItem* item)
 			return item->GetPrice();
 		}
 	}
-        else
-        {
-               	return 0;
-	}
+
+    return 0;
 }
 
 void Store::SellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
