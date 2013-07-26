@@ -73,6 +73,8 @@
 
 #include <garbage/EntityGarbage.hpp>
 
+#include <slots/ItemSlot.hpp>
+
 Vehicle::Vehicle()
 :
 m_GodMode(false),

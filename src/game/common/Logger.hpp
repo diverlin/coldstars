@@ -19,11 +19,7 @@
 #ifndef LOGGER_HPP
 #define LOGGER_HPP
 
-#include <iostream>
 #include <fstream>
-
-#include <types/MyInt.hpp>
-#include <common/constants.hpp>
 
 class Logger
 {

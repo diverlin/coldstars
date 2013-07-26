@@ -21,10 +21,10 @@
 #define VEHICLESLOTBUILDER_HPP
 
 #include <types/MyInt.hpp>
-#include <common/constants.hpp>
 #include <types/EntityTypes.hpp>
 
 class VehicleSlot;
+
 
 VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY, INTLONGEST id = NONE_ID);
 

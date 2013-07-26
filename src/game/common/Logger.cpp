@@ -22,6 +22,8 @@
 #include "GameDate.hpp"
 #include "../config/config.hpp"
 
+#include <common/constants.hpp>
+
 Logger& Logger::Instance()
 {
 	static Logger instance;

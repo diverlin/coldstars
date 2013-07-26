@@ -21,10 +21,10 @@
 #define SECTORBUILDER_HPP
 
 #include <types/MyInt.hpp>
-#include <common/constants.hpp>
 
 class Sector;
 class SectorDescription;
+
 
 class SectorBuilder
 {

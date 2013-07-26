@@ -21,10 +21,10 @@
 #define GALAXYBUILDER_HPP
 
 #include <types/MyInt.hpp>
-#include <common/constants.hpp>
 
 class Galaxy;
 class GalaxyDescription;
+
 
 class GalaxyBuilder
 {

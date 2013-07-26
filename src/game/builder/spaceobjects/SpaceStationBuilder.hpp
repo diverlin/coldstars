@@ -16,14 +16,15 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef SPACESTATIONBUILDER_HPP
 #define SPACESTATIONBUILDER_HPP
 
 #include <builder/spaceobjects/BaseVehicleBuilder.hpp>
 #include <types/MyInt.hpp>
-#include <common/constants.hpp>
 
 class SpaceStation;
+
 	
 namespace ENTITY
 {

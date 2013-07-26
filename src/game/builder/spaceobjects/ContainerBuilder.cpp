@@ -22,6 +22,9 @@
 #include "../../spaceobjects/Container.hpp"
 #include "../../items/others/GoodsPack.hpp"
 
+#include <slots/ItemSlot.hpp>
+
+
 ContainerBuilder& ContainerBuilder::Instance()
 {
 	static ContainerBuilder instance;

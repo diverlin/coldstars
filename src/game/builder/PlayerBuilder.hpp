@@ -16,13 +16,14 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef PLAYERBUILDER_HPP
 #define PLAYERBUILDER_HPP
 
 #include <types/MyInt.hpp>
-#include <common/constants.hpp>
 
 class Player;
+
 
 class PlayerBuilder
 {

@@ -16,14 +16,17 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef COMMON_HPP
 #define COMMON_HPP
 
 #include <string>
-#include <math/myVector.hpp>
-#include <common/constants.hpp>
-#include <types/EntityTypes.hpp>
 
+#include <math/myVector.hpp>
+
+#include <types/EntityTypes.hpp>
+#include <types/GuiTypes.hpp>
+     
 GUI::TYPE getGuiItemSlotType(TYPE::ENTITY);
 GUI::TYPE getGuiItemSlotSelectorType(TYPE::ENTITY);
        
@@ -54,15 +57,6 @@ inline T getMin(T val1, T val2, T val3)
 }
 
 Color4<float> getColor4fById(int);
-
-//template <typename T>
-//void copyArray(T* src, T* res, int size)
-//{
-        //for (unsigned int i=0; i<size; i++)
-        //{
-                //res[i] = src[i];
-        //}
-//}
 
 template <typename T>
 int getIndexWithMinVal(const T* array, unsigned int size)

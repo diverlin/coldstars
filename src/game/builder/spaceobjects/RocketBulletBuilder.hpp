@@ -21,10 +21,10 @@
 #define ROCKETBULLETBUILDER_HPP
 
 #include <types/MyInt.hpp>
-#include <common/constants.hpp>
 
 class RocketBullet;
 class BulletData;
+
 
 class RocketBulletBuilder
 {

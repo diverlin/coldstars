@@ -19,10 +19,10 @@
 #ifndef GOD_HPP
 #define GOD_HPP
 
-#include <common/constants.hpp>
-#include <common/Date.hpp>
 #include <types/RaceTypes.hpp>
+#include <types/EntityTypes.hpp>
 
+#include <common/Date.hpp>
 #include <struct/StarSystemsConditionData.hpp>
 
 class Galaxy;

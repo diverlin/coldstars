@@ -21,12 +21,8 @@
 #define ITEMSLOT_HPP
 
 #include <types/MyInt.hpp>
-
-#include <common/constants.hpp>
-
 #include <slots/BaseSlot.hpp>
-
-#include <render/PathVisual.hpp>
+#include <render/PathVisual.hpp>  // !!!
 
 class Turrel; 
 class BaseItem;
@@ -158,7 +154,7 @@ class ItemSlot : public BaseSlot
         BaseSpaceEntity* target;
         ItemSlot* subtarget;      
         
-        PathVisual range_visual;
+        PathVisual range_visual;    // !!!
         
         bool CheckItemInsertion(BaseItem*) const;  
         

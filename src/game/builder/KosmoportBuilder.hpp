@@ -16,13 +16,14 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef KOSMOPORTBUILDER_HPP
 #define KOSMOPORTBUILDER_HPP
 
 #include <types/MyInt.hpp>
-#include <common/constants.hpp>
 
 class Kosmoport;
+
 
 class KosmoportBuilder
 {

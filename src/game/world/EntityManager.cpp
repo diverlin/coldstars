@@ -94,6 +94,9 @@
 #include "../common/myStr.hpp"
 #include "../common/TurnTimer.hpp"
 
+#include <slots/ItemSlot.hpp>
+
+
 EntityManager& EntityManager::Instance()
 {
 	static EntityManager instance;

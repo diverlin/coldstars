@@ -56,6 +56,9 @@
 #include "../../common/rand.hpp"
 #include "../../effects/particlesystem/DriveEffect.hpp"
 
+#include <slots/ItemSlot.hpp>
+
+
 BaseVehicleBuilder& BaseVehicleBuilder::Instance()
 {	
 	static BaseVehicleBuilder instance;
