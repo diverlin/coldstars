@@ -25,7 +25,7 @@
 #include <vector>
 #include "EntityTypes.hpp"
 #include "GuiTypes.hpp"
-
+#include "MyInt.hpp"
 #include "Converter.hpp"
 
 namespace CONVERTER
@@ -149,7 +149,7 @@ const int COLLISION_RADIUS_FOR_STATIC_COORD = 5;
 const int VISIBLE_DISTANCE_WITHOUT_RADAR = 200;
 const float MASS_DECREASE_SPEED_RATE = 0.004;
 
-const int SHOCKWAVES_MAX_NUM = 10;
+const unsigned int SHOCKWAVES_MAX_NUM = 10;
 
 const int PRICE_FUEL = 10;
 
@@ -253,7 +253,7 @@ enum SIZE
 
 const float INCREDIBLY_MAX_FLOAT = 1e10; 
 
-const unsigned long int NONE_ID = 0;
+const INTLONGEST NONE_ID = 0;
 const int FAIL_ID = 1;
 const int SUCCESS_ID = 2;
 const int PERFORM_ID = 3;
@@ -268,34 +268,6 @@ namespace AIMODEL
 	};
 }
 
-namespace MACROSCENARIO
-{
-	enum TYPE_ID
-	{
-		WARRIORRECRUTE_ID=1, 
-		STARSYSTEMDEFENCE_ID, 
-		STARSYSTEMLIBERATION_ID, 
-		SELFSAFETY_ID, // replace selfsafety to survival
-		
-		GOODSTRADING_ID,
-		ENUM_LAST
-	};
-	
-} 
-
-namespace MICROSCENARIO
-{
-	enum TYPE_ID
-	{
-		DESTROY_ID = MACROSCENARIO::ENUM_LAST,
-		DOCKING_ID,		
-		LAUNCHING_ID,
-		GRAB_ID,
-		JUMP_ID,
-		EXPLORATION_ID	
-	};
-}
- 
 namespace SKILLS
 {
 	const int ATTACK_MIN = 1;

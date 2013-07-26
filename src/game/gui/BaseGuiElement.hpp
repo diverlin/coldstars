@@ -37,7 +37,7 @@ class AnimationEffect2D;
 class BaseGuiElement
 {
 	public:
-		BaseGuiElement(GUI::TYPE subtype_id=GUI::TYPE::NONE_ID, const std::string& info="", TextureOb* textureOb=nullptr, BaseGuiElement* parent=nullptr);
+		BaseGuiElement(GUI::TYPE subtype_id=GUI::TYPE::NONE_ID, const std::string& info="", TextureOb* textureOb=nullptr);
 		virtual ~BaseGuiElement();
 		
 		void SetLabel(const std::string& label) { m_Label = label; }

@@ -27,7 +27,7 @@
 
 MacroScenarioStarSystemLiberation::MacroScenarioStarSystemLiberation() 
 {
-	type_id = MACROSCENARIO::STARSYSTEMLIBERATION_ID;
+	type_id = TYPE::AISCENARIO::MACRO_STARSYSTEMLIBERATION_ID;
 }
 
 /*virtual*/
@@ -48,9 +48,9 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
 	StarSystem* target_starsystem = npc->GetStateMachine().GetMacroTaskManager().GetTarget()->GetStarSystem();
 	if (npc->GetStarSystem()->GetId() != target_starsystem->GetId())
 	{
-		if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != MICROSCENARIO::JUMP_ID)
+		if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != TYPE::AISCENARIO::MICRO_JUMP_ID)
 		{
-			Task microtask(MICROSCENARIO::JUMP_ID, target_starsystem->GetId());
+			Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, target_starsystem->GetId());
 			npc->GetStateMachine().SetCurrentMicroTask(microtask);
 			
 			return;
@@ -60,19 +60,19 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
 	{
 		if (target_starsystem->GetConditionId() != ENTITY::STARSYSTEM::CONDITION::SAFE_ID)
 		{
-			if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != MICROSCENARIO::DESTROY_ID)
+			if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != TYPE::AISCENARIO::MICRO_DESTROY_ID)
 			{
 				Vehicle* target_vehicle = npc->GetObservation().GetRandVisibleVehicle(RaceInformationCollector::Instance().RACES_EVIL_vec);
 				if (target_vehicle != nullptr)
 				{
-					Task microtask(MICROSCENARIO::DESTROY_ID, target_vehicle->GetId());
+					Task microtask(TYPE::AISCENARIO::MICRO_DESTROY_ID, target_vehicle->GetId());
 					npc->GetStateMachine().SetCurrentMicroTask(microtask);
 					
 					return;
 				}
 				else
 				{
-					Task microtask(MICROSCENARIO::EXPLORATION_ID);
+					Task microtask(TYPE::AISCENARIO::MICRO_EXPLORATION_ID);
 					npc->GetStateMachine().SetCurrentMicroTask(microtask);
 					
 					return;

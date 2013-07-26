@@ -39,18 +39,17 @@ Skills::~Skills()
 
 void Skills::BindStrategy(const int* strategy)
 {
-        for (unsigned int i=0; i<SKILLS_NUM; i++)
-        {
-                this->strategy[i] = strategy[i]; 
-        }
+    for (int i=0; i<SKILLS_NUM; i++)
+    {
+        this->strategy[i] = strategy[i]; 
+    }
 }
 
 void Skills::AddExpirience(unsigned long int addExpirience)
 {
 	expirience += addExpirience;
-        while(CheckLevelUp() == true) 
-        {}
-
+    while(CheckLevelUp() == true) 
+    {}
 }
 
 bool Skills::CheckLevelUp()
@@ -219,14 +218,14 @@ void Skills::ResolveData()
 
 void Skills::ManageAccordingToStrategy()
 {
-        float strategy_norm[SKILLS_NUM] = {1.,1.,1.,1.,1.,1.};
-        for (unsigned int i=0; i<SKILLS_NUM; i++)
-        {
-              strategy_norm[i] = (float)GetSkillDependingOnArrayIndex(i) / strategy[i]; 
-        }
-        
-        int index_min = getIndexWithMinVal(strategy_norm, SKILLS_NUM);
-        ImcrementSkillDependingOnArrayIndex(index_min);
+    float strategy_norm[SKILLS_NUM] = {1.,1.,1.,1.,1.,1.};
+    for (int i=0; i<SKILLS_NUM; i++)
+    {
+        strategy_norm[i] = (float)GetSkillDependingOnArrayIndex(i) / strategy[i]; 
+    }
+    
+    int index_min = getIndexWithMinVal(strategy_norm, SKILLS_NUM);
+    ImcrementSkillDependingOnArrayIndex(index_min);
         
 }
 

@@ -16,14 +16,15 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef AGRESSORDATA_H
-#define AGRESSORDATA_H
+#ifndef AGRESSORDATA_HPP
+#define AGRESSORDATA_HPP
 
-#include "../common/Date.hpp"
+#include <common/Date.hpp>
+#include <common/MyInt.hpp>
 
 struct AgressorData
 {
-	int npc_id;
+	INTLONGEST npc_id;
 	Date last_date;
 	int counter;
 	
@@ -31,10 +32,8 @@ struct AgressorData
    
 	bool operator<(const AgressorData& rhs) 
 	{ 
-		if (counter < rhs.counter) 
-			return true;
-		else
-			return false;
+		if (counter < rhs.counter)  { return true; }
+        else                        { return false; }
 	}
 };
 
@@ -42,11 +41,9 @@ struct AgressorDataComparator
 {
 	bool operator() (const AgressorData& lhs, const AgressorData& rhs) const
 	{
-		if (lhs.counter < rhs.counter) 
-			return true;
-		else
-			return false;
-    	}
+		if (lhs.counter < rhs.counter) { return true; }
+		else                           { return false; }
+    }
 };	
 #endif 
 

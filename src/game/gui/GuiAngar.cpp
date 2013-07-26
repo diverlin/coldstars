@@ -37,13 +37,13 @@
 
 GuiAngar::GuiAngar():angar(nullptr)
 {
-	int screen_w = Config::Instance().SCREEN_WIDTH;
-	int screen_h = Config::Instance().SCREEN_HEIGHT;
+	//int screen_w = Config::Instance().SCREEN_WIDTH;
+	//int screen_h = Config::Instance().SCREEN_HEIGHT;
 	
-	TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
+	//TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
 	
-	float zpos = -1;
-	float zsize = 1;
+	//float zpos = -1;
+	//float zsize = 1;
 	
 	{
 		//ButtonSingle* repair_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYARMOR_ID, "buy_repair");
@@ -87,52 +87,52 @@ void GuiAngar::BindAngar(Angar* angar)
 {
 	this->angar = angar;
 	
-        int column_counter = 1;
-        int row_counter = 0;
-        for (int i=0; i<angar->vehicle_visitors_slot_vec.size(); i++)
+    int column_counter = 1;
+    int row_counter = 0;
+    for (unsigned int i=0; i<angar->vehicle_visitors_slot_vec.size(); i++)
  	{
  		Rect _rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR, 
- 			   GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
-        	rect_vehicleslot_vec.push_back(GuiPair<Rect, VehicleSlot*>(_rect, angar->vehicle_visitors_slot_vec[i]));
+ 			       GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
+        	       rect_vehicleslot_vec.push_back(GuiPair<Rect, VehicleSlot*>(_rect, angar->vehicle_visitors_slot_vec[i]));
                 
-                column_counter++;                
+        column_counter++;                
 	}
         
-        column_counter = 1;
-        row_counter = 2;
-        for (int i=0; i<angar->vehicle_military_slot_vec.size(); i++)
+    column_counter = 1;
+    row_counter = 2;
+    for (unsigned int i=0; i<angar->vehicle_military_slot_vec.size(); i++)
  	{
  		Rect _rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR, 
  			   GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
         	rect_vehicleslot_vec.push_back(GuiPair<Rect, VehicleSlot*>(_rect, angar->vehicle_military_slot_vec[i]));
                 
-                column_counter++;                
+        column_counter++;                
 	}
 	
 	column_counter = 0;
-        row_counter = 0;
-        for (int i=0; i<angar->item_slot_vec.size(); i++)
+    row_counter = 0;
+    for (unsigned int i=0; i<angar->item_slot_vec.size(); i++)
  	{
  		Rect _rect(column_counter*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, row_counter*GUI::ITEMSLOT::HEIGHT_FOR_ANGAR, 
  			   GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
         	rect_itemslot_vec.push_back(GuiPair<Rect, ItemSlot*>(_rect, angar->item_slot_vec[i]));
                 
-                row_counter++;                
+        row_counter++;                
 	}
 	
-        {
-   	Rect rect(GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
+    {
+        Rect rect(GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
     		   3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
     		   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-	rect_itemslot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, repair_slot));   
-        }
+        rect_itemslot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, repair_slot));   
+    }
 
-        {
+    {
         Rect rect(GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
     		   4*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
     		   GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-	rect_itemslot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, charge_slot));  
-        }
+        rect_itemslot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, charge_slot));  
+    }
 }
 
 void GuiAngar::UnbindAngar()

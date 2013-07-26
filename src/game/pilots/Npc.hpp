@@ -65,13 +65,13 @@ class Npc : public Base
 		Skills& GetSkills() 		{ return skills; };
 		Vehicle* GetScanTarget()        const { return vehicle_to_scan; };
 		Observation& GetObservation()   { return observation; };
-		unsigned long int GetCredits()  const { return credits; };   
+		INTLONGEST GetCredits()  const { return credits; };   
 		StateMachine& GetStateMachine() { return state_machine; };
 
 		StarSystem* GetStarSystem() const;
 
-		void IncreaseCredits(int credits) { this->credits += credits; };
-		bool WithdrawCredits(int);
+		void IncreaseCredits(INTLONGEST credits) { this->credits += credits; };
+		bool WithdrawCredits(INTLONGEST);
      
         void AddExpirience(int, bool);
         
@@ -110,7 +110,7 @@ class Npc : public Base
    	private:
         bool is_alive;
         RACE::TYPE race_id;
-        unsigned long int credits; 
+        INTLONGEST credits; 
         
         Player* player;
         Vehicle* vehicle;

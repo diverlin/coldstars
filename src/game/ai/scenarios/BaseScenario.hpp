@@ -17,20 +17,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef BASESCENARIO_H
-#define BASESCENARIO_H
+#ifndef BASESCENARIO_HPP
+#define BASESCENARIO_HPP
 
 #include <string>
-#include "../../common/constants.hpp"
+#include "common/AiScenarioTypes.hpp"
+
 class Npc;
 
 class BaseScenario
 {
 	public:
-		BaseScenario():type_id(NONE_ID) {};
+		BaseScenario():type_id(TYPE::AISCENARIO::NONE_ID) {};
 		virtual ~BaseScenario() {};
 		
-		int GetTypeId() const { return type_id; };
+		TYPE::AISCENARIO GetTypeId() const { return type_id; };
 		
 		virtual void Enter(Npc*) const {};
 		virtual bool Validate(Npc*) const { return true; };
@@ -43,7 +44,7 @@ class BaseScenario
 		virtual std::string GetDescription(Npc*) const { return "_"; };
 		
 	protected:
-		int type_id;
+		TYPE::AISCENARIO type_id;
 }; 
 
 

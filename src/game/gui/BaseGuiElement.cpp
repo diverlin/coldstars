@@ -25,12 +25,11 @@
 
 std::map<GUI::TYPE, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
 
-BaseGuiElement::BaseGuiElement(GUI::TYPE subtype_id, const std::string& info, TextureOb* textureOb, BaseGuiElement* parent)
+BaseGuiElement::BaseGuiElement(GUI::TYPE subtype_id, const std::string& info, TextureOb* textureOb)
 :
 m_Subtype_id(subtype_id),
 m_Info(info),
 m_TextureOb(textureOb),
-//m_Parent(parent),
 m_Show(true),
 m_Root(true),
 m_Lock(false),

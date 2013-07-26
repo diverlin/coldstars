@@ -43,7 +43,7 @@ void AiModelRanger::UpdateInStatic(Npc* npc) const
         	
         	if (target_starsystem != nullptr)
         	{
-        	        Task macrotask(MACROSCENARIO::STARSYSTEMLIBERATION_ID, target_starsystem->GetId());
+        	        Task macrotask(TYPE::AISCENARIO::MACRO_STARSYSTEMLIBERATION_ID, target_starsystem->GetId());
         		npc->GetStateMachine().SetCurrentMacroTask(macrotask);        			
         	}
         }            

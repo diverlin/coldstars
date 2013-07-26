@@ -40,20 +40,7 @@ bool WeaponComplex::AddSlot(ItemSlot* slot)
 {
         slot_weapon_vec.push_back(slot); 
 }
-        
-TextureOb* WeaponComplex::GetItemTextureOb(int index) const
-{
-	index--;
-	if (index < slot_weapon_vec.size())
-	{
-		if (slot_weapon_vec[index]->GetItem() != nullptr)
-                {
-                     	return slot_weapon_vec[index]->GetItem()->GetTextureOb();   
-                }
-	}
 
-	return nullptr;	
-}
                        	
 ItemSlot* WeaponComplex::GetEmptyWeaponSlot() const
 {

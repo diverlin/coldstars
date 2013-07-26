@@ -22,11 +22,12 @@
 #include <boost/property_tree/ptree.hpp>
 #include <common/constants.hpp>
 #include <common/MyInt.hpp>
+#include <common/AiScenarioTypes.hpp>
 
 class Task
 {
 	public:
-		Task(int scenario_type_id = NONE_ID, INTLONGEST target_id = NONE_ID, int reward = 0, int expiriance = 0):
+		Task(TYPE::AISCENARIO scenario_type_id = TYPE::AISCENARIO::NONE_ID, INTLONGEST target_id = NONE_ID, int reward = 0, int expiriance = 0):
 		result(NONE_ID),
 		reward(reward),
 		expiriance(expiriance),
@@ -38,8 +39,8 @@ class Task
 
 		void SetResult(int result)  { this->result = result; }
 				
-		int GetScenarioTypeId() const { return scenario_type_id; };
-		int GetTargetId() const { return target_id; };
+		TYPE::AISCENARIO GetScenarioTypeId() const { return scenario_type_id; };
+		INTLONGEST GetTargetId() const { return target_id; };
 				
 		int GetResult() const { return result; };
 		
@@ -54,7 +55,7 @@ class Task
 		int reward;
 		int expiriance;
 		
-		int scenario_type_id;
+		TYPE::AISCENARIO scenario_type_id;
 		INTLONGEST target_id;	
 };
 

@@ -116,7 +116,7 @@ void God::ProceedInvasion() const
 	}
 	
 	Npc* npc_leader = starsystem_invade_from->GetFreeLeaderByRaceId(starsystem_invade_from->GetConquerorRaceId());
-	Task macrotask(MACROSCENARIO::STARSYSTEMLIBERATION_ID, starsystem_invade_to->GetId());
+	Task macrotask(TYPE::AISCENARIO::MACRO_STARSYSTEMLIBERATION_ID, starsystem_invade_to->GetId());
 	npc_leader->GetStateMachine().SetCurrentMacroTask(macrotask);
 	
 	int num_max= 10;

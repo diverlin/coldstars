@@ -28,7 +28,7 @@
 
 MicroScenarioJump::MicroScenarioJump()
 {
-	type_id = MICROSCENARIO::JUMP_ID;
+	type_id = TYPE::AISCENARIO::MICRO_JUMP_ID;
 }
 
 /* virtual */
@@ -38,7 +38,7 @@ MicroScenarioJump::~MicroScenarioJump()
 /* virtual */
 void MicroScenarioJump::Enter(Npc* npc) const
 {	
-        #if AISCENARIO_LOG_ENABLED == 1 
+    #if AISCENARIO_LOG_ENABLED == 1 
 	Logger::Instance().Log("vehicle_id/npc_id="+int2str(npc->GetVehicle()->GetId())+"/"+int2str(npc->GetId())+"  ENTER MicroScenarioJump", AISCENARIO_LOG_DIP); 
 	#endif    
 	

@@ -1036,74 +1036,73 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 {
 	for (unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
 	{ 
-       		float object_cursor_dist = distanceBetween(visible_SPACESTATION_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-       		if (object_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
-            	{ 
-                	cursor.SetFocusedObject(visible_SPACESTATION_vec[i]); 
-                
-               		if (data_mouse.left_click == true)
-               		{
-               			if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-               			{
-               				npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_SPACESTATION_vec[i]);
-               			}
-               			else
-               			{
-               				Task microtask(MICROSCENARIO::DOCKING_ID, visible_SPACESTATION_vec[i]->GetId());
-               				npc->GetStateMachine().SetCurrentMicroTask(microtask);
-               				npc->GetVehicle()->GetComplexDrive().UpdatePath();
-               			}
-			}
-
-               		if (data_mouse.right_click == true)
-               		{
-               			if ( (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
-               			{
-					//if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
-					//{
-						//pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->add(visible_STARBASE_vec[i]);
-						//pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();	       						
-					//}
-               			}
-               			else
-               			{
-               			        if ( npc->CheckPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
-               				{
-                      				npc->SetScanTarget(visible_SPACESTATION_vec[i]);
-                      				GuiManager::Instance().GetGuiSpace().EnterGuiScan();
-               				}
-       				}
-       			}
-			
-               		return true; 
-            	}
-        }
+        float object_cursor_dist = distanceBetween(visible_SPACESTATION_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        if (object_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
+        { 
+            cursor.SetFocusedObject(visible_SPACESTATION_vec[i]); 
         
-        return false;
+            if (data_mouse.left_click == true)
+            {
+                if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+                {
+                    npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_SPACESTATION_vec[i]);
+                }
+                else
+                {
+                    Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_SPACESTATION_vec[i]->GetId());
+                    npc->GetStateMachine().SetCurrentMicroTask(microtask);
+                    npc->GetVehicle()->GetComplexDrive().UpdatePath();
+                }
+            }
+
+            if (data_mouse.right_click == true)
+            {
+                if ( (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
+                {
+                    //if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
+                    //{
+                        //pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->add(visible_STARBASE_vec[i]);
+                        //pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();	       						
+                    //}
+                }
+                else
+                {
+                    if ( npc->CheckPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
+                    {
+                        npc->SetScanTarget(visible_SPACESTATION_vec[i]);
+                        GuiManager::Instance().GetGuiSpace().EnterGuiScan();
+                    }
+                }
+            }
+    
+            return true; 
+        }
+    }
+        
+    return false;
 }
 
 bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
 {
-       	for (unsigned int i=0; i<visible_PLANET_vec.size(); i++)
-       	{ 
-       		float object_cursor_dist = distanceBetween(visible_PLANET_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-       		if (object_cursor_dist < visible_PLANET_vec[i]->GetCollisionRadius())
-            	{   
-                	cursor.SetFocusedObject(visible_PLANET_vec[i]); 
-          
-               		if (data_mouse.left_click == true)
-               		{
-       				Task microtask(MICROSCENARIO::DOCKING_ID, visible_PLANET_vec[i]->GetId());
-              			npc->GetStateMachine().SetCurrentMicroTask(microtask);
-              			npc->GetVehicle()->GetComplexDrive().UpdatePath();
-              		}   
-		
-				
-                	return true; 
-            	}
+    for (unsigned int i=0; i<visible_PLANET_vec.size(); i++)
+    { 
+        float object_cursor_dist = distanceBetween(visible_PLANET_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        if (object_cursor_dist < visible_PLANET_vec[i]->GetCollisionRadius())
+        {   
+            cursor.SetFocusedObject(visible_PLANET_vec[i]); 
+  
+            if (data_mouse.left_click == true)
+            {
+                Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_PLANET_vec[i]->GetId());
+                npc->GetStateMachine().SetCurrentMicroTask(microtask);
+                npc->GetVehicle()->GetComplexDrive().UpdatePath();
+            }   
+        
+            return true; 
         }
-    
-    	return false;
+    }
+
+    return false;
 }
 
 bool Player::MouseInteractionWithStars(const MouseData& data_mouse)

@@ -19,8 +19,11 @@
 #include "GuiGalaxyMap.hpp"
 #include "MouseData.hpp"
 #include "../config/config.hpp"
-#include "../common/constants.hpp"
-#include "../common/myStr.hpp"
+
+#include <common/constants.hpp>
+#include <common/myStr.hpp>
+#include <common/AiScenarioTypes.hpp>
+
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../pilots/Player.hpp"
 #include "../world/starsystem.hpp"
@@ -79,7 +82,7 @@ bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse)
 						{
 							if (data_mouse.left_click == true)
 							{ 
-								Task microtask(MICROSCENARIO::JUMP_ID, starsystem->GetId());
+								Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, starsystem->GetId());
 								m_Player->GetNpc()->GetStateMachine().SetCurrentMicroTask(microtask);
 								m_Player->GetNpc()->GetVehicle()->GetComplexDrive().UpdatePath();
 								
@@ -136,7 +139,7 @@ void GuiGalaxyMap::Render()
 		10);
 		visual_hyperjump_range.Draw(m_Player->GetNpc()->GetVehicle()->GetStarSystem()->GetCenter()*scale_parsec2screencoord);
 		
-		if (m_Player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() ==  MICROSCENARIO::JUMP_ID)
+		if (m_Player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() == TYPE::AISCENARIO::MICRO_JUMP_ID)
 		{
 			visual_hyperjump_path.FillData(GuiTextureObCollector::Instance().dot_green,
 			m_Player->GetNpc()->GetVehicle()->GetStarSystem()->GetCenter()*scale_parsec2screencoord,

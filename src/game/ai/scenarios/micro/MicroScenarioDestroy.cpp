@@ -26,7 +26,7 @@
 
 MicroScenarioDestroy::MicroScenarioDestroy()
 {
-	type_id = MICROSCENARIO::DESTROY_ID;
+	type_id = TYPE::AISCENARIO::MICRO_DESTROY_ID;
 }
 
 /* virtual */

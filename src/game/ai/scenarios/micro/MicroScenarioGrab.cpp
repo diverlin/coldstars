@@ -31,7 +31,7 @@
 
 MicroScenarioGrab::MicroScenarioGrab()
 {
-	type_id = MICROSCENARIO::GRAB_ID;
+	type_id = TYPE::AISCENARIO::MICRO_GRAB_ID;
 }
 
 /* virtual */

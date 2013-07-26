@@ -19,8 +19,10 @@
 #ifndef BASEITEM_HPP
 #define BASEITEM_HPP
 
-#include "../common/BaseDrawable.hpp"
-#include "../text/InfoTable.hpp"
+#include <common/BaseDrawable.hpp>
+#include <common/MyInt.hpp>
+
+#include <text/InfoTable.hpp>
 
 class ItemSlot; 
 class Box2D;
@@ -47,7 +49,7 @@ struct ItemCommonData
 struct UnresolvedDataUniqueBaseItem
 {
     std::string textureOb_path;
-    int item_slot_id;
+    INTLONGEST item_slot_id;
 };
 
 class BaseItem : public BaseDrawable

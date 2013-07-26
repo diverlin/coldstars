@@ -29,12 +29,12 @@
 
 GuiShop::GuiShop():shop(nullptr)
 {
-	Vec2<float> center(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);
+	//Vec2<float> center(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);
 			
-	TextureOb* _texOb = GuiTextureObCollector::Instance().text_background; 
+	//TextureOb* _texOb = GuiTextureObCollector::Instance().text_background; 
 	
-	float zpos = -1;
-	float zsize = 1;
+	//float zpos = -1;
+	//float zsize = 1;
 	{
 		//ButtonSingle* minerals_button = new ButtonSingle(_texOb, GUI::BUTTON::MINERALS_ID, "minerals");  
 		//Vec3<float> center(center.x, center.y - 1*(GUI::ICON_SIZE + 5), zpos);
