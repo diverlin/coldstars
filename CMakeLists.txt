@@ -16,13 +16,16 @@ include_directories(dependencies/glew/include/)
 include_directories(dependencies/glm-0.9.4.0/)
 include_directories(dependencies/freetype2/)
 
+add_library(freetyperender dependencies/freetype2/src/FreeType.cpp)
+include_directories(dependencies/freetype2/src)
+
 include_directories(src/game/)
 
 add_subdirectory(dependencies/SFML2)
 set(GLEW_STATIC 1)
 add_subdirectory(dependencies/glew)
 
-add_definitions(-Wall -Werror -Wno-return-type -Wno-switch -Wno-reorder -std=c++11 -std=gnu++11)
-#add_definitions(-std=c++11 -std=gnu++11)
+#add_definitions(-Wall -Werror -Wno-return-type -Wno-switch -Wno-reorder -std=c++11 -std=gnu++11)
+add_definitions(-std=c++11 -std=gnu++11)
 add_subdirectory(src/game)
 

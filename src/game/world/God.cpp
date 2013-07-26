@@ -73,21 +73,21 @@ void God::Init(Galaxy* galaxy, const GalaxyDescription& galaxy_description)
 
 void God::CreateLife(const GalaxyDescription& galaxy_description) const
 {
-        for(unsigned int i=0; i<galaxy->SECTOR_vec.size(); i++)
-        {
-        	for(unsigned int j=0; j<galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
-        	{	        
-	     		const StarSystemDescription& starsystem_description = galaxy_description.sector_descriptions[i].starsystem_descriptions[j];
-			StarSystem* starsystem = galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j];
-			
-		        for(int j=0; j<starsystem->PLANET_vec.size(); j++)
-		        {        
-		                CreateLifeAtPlanet(starsystem->PLANET_vec[j], starsystem_description);
-		        }
-	
-        		CreateSpaceStations(starsystem, starsystem_description.spacestation_num);
-        	}
+    for(unsigned int i=0; i<galaxy->SECTOR_vec.size(); i++)
+    {
+        for(unsigned int j=0; j<galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
+        {	        
+            const StarSystemDescription& starsystem_description = galaxy_description.sector_descriptions[i].starsystem_descriptions[j];
+            StarSystem* starsystem = galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j];
+        
+            for(unsigned int j=0; j<starsystem->PLANET_vec.size(); j++)
+            {        
+                CreateLifeAtPlanet(starsystem->PLANET_vec[j], starsystem_description);
+            }
+
+            CreateSpaceStations(starsystem, starsystem_description.spacestation_num);
         }
+    }
 }
 
 void God::CreateInvasion(const GalaxyDescription& galaxy_description) const
@@ -212,7 +212,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
 				planet->AddVehicle(new_ship);
 			}
 		}
-     	}
+    }
 }
 
 void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_system) const
@@ -223,10 +223,9 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
         TYPE::ENTITY npc_subtype_id    = TYPE::ENTITY::WARRIOR_ID;
         TYPE::ENTITY npc_subsubtype_id = TYPE::ENTITY::WARRIOR_ID;
             
-        TYPE::RACE ship_race_id = npc_race_id;         // RACES_ALL_vec[getRandInt(0, RACES_ALL_vec.size())];
-        TYPE::ENTITY ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
-        int ship_size_id = getRandInt(1, 9);
-        int weapons_num = 5;
+        //TYPE::RACE ship_race_id = npc_race_id;         // RACES_ALL_vec[getRandInt(0, RACES_ALL_vec.size())];
+        //TYPE::ENTITY ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
+        //int weapons_num = 5;
         
         SpaceStation* spacestation = SpaceStationBuilder::Instance().GetNewSpaceStation();
         SpaceStationBuilder::Instance().EquipEquipment(spacestation);  // improove
@@ -235,7 +234,7 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
         spacestation->BindOwnerNpc(npc);
 
 		Vec2<float> center = getRandVec2f(700, 1500);
-                Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
+        Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
 		Vec3<float> angle(0,0,getRandInt(0, 360));  
 		                
         starsystem->AddVehicle(spacestation, center3, angle, nullptr);

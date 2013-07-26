@@ -20,7 +20,7 @@
 #define BASEITEM_HPP
 
 #include <common/BaseDrawable.hpp>
-#include <common/MyInt.hpp>
+#include <types/MyInt.hpp>
 
 #include <text/InfoTable.hpp>
 

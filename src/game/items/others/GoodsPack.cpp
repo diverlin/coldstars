@@ -112,7 +112,7 @@ void GoodsPack::ResolveDataUniqueGoodsPack()
 }
 
 
-GoodsPack* GetNewGoodsPack(TYPE::ENTITY subtype_id, unsigned long int id)
+GoodsPack* GetNewGoodsPack(TYPE::ENTITY subtype_id, INTLONGEST id)
 {
     if (id == NONE_ID)
 	{

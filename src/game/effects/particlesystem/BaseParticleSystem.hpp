@@ -48,7 +48,7 @@ class BaseParticleSystem
 	
 	protected:
 		int type_id;
-		int num_particles;
+		unsigned int num_particles;
 		
 		TextureOb* textureOb;
 		ParticleData data_particle;

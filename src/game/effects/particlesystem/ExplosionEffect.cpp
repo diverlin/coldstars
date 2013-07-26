@@ -31,7 +31,7 @@ ExplosionSlice::~ExplosionSlice()
 
 void ExplosionSlice::CreateParticles()
 {
-	for(int i=0; i<num_particles; i++)
+	for(unsigned int i=0; i<num_particles; i++)
 	{  
 		Particle* particle = new Particle(data_particle);
 		particle->CalcRandomVelocity();

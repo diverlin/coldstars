@@ -32,13 +32,13 @@ DamageEffect::~DamageEffect()
 
 void DamageEffect::CreateParticles()
 {
-	for(int i=0; i<num_particles; i++)
-    	{  
-       		Particle* particle = new Particle(data_particle);
-       		particle->Randomize_d_alpha(0.003, 0.006); //   ??
-       		particle->CalcRandomVelocity();
-       		particles_vec.push_back(particle);
-    	}
+	for(unsigned int i=0; i<num_particles; i++)
+    {  
+        Particle* particle = new Particle(data_particle);
+        particle->Randomize_d_alpha(0.003, 0.006); //   ??
+        particle->CalcRandomVelocity();
+        particles_vec.push_back(particle);
+    }
 }
 
 /* virtual override final */

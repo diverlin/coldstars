@@ -19,6 +19,6 @@
 #ifndef MYINT_HPP
 #define MYINT_HPP
 
-typedef unsigned long long int INTLONGEST;
+typedef long long int INTLONGEST;
 
 #endif

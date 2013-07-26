@@ -77,10 +77,10 @@ class StarSystem : public BaseSpaceEntity
 		TYPE::RACE GetConquerorRaceId() const { return conqueror_race_id; } 
 		Star* GetStar()          const { return STAR_vec[0]; }	
 		Sector* GetSector()      const { return sector; }
-		int GetShockWaveEffectNum()    const { return effect_SHOCKWAVE_vec.size(); }
-		int GetAsteroidNum()     const { return ASTEROID_vec.size(); }
-		int GetExplosionEffectNum()     const { return effect_PARTICLESYSTEM_vec.size(); }
-		int GetTextDamageNum()     const { return text_DAMAGE_vec.size(); }
+		unsigned int GetShockWaveEffectNum()    const { return effect_SHOCKWAVE_vec.size(); }
+		unsigned int GetAsteroidNum()     const { return ASTEROID_vec.size(); }
+		unsigned int GetExplosionEffectNum()     const { return effect_PARTICLESYSTEM_vec.size(); }
+		unsigned int GetTextDamageNum()     const { return text_DAMAGE_vec.size(); }
 		bool IsAnyActiveParticlesEffectPresent(int) const; 
 						
 		HyperSpace& GetHyperSpace() { return hyperspace; };
@@ -148,7 +148,7 @@ class StarSystem : public BaseSpaceEntity
         bool unique_update_inStatic_done;
         
         int condition_id;
-        int container_num_max;
+        unsigned int container_num_max;
         
         Sector* sector;
         Color4<float> color;
