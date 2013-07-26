@@ -20,7 +20,7 @@
 #define KOSMOPORT_HPP
 
 #include <docking/BaseLand.hpp>
-#include <common/RaceTypes.hpp>
+#include <types/RaceTypes.hpp>
 
 class Angar; 
 class Store; 

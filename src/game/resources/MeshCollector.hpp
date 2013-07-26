@@ -21,7 +21,7 @@
 #define MESHCOLLECTOR_HPP
 
 #include <vector>
-#include <common/MeshTypes.hpp>
+#include <types/MeshTypes.hpp>
 
 class Mesh;
 

@@ -22,7 +22,7 @@
 #include "../../spaceobjects/SpaceStation.hpp"
 #include "../../docking/Kosmoport.hpp"
 
-#include <common/MeshTypes.hpp>
+#include <types/MeshTypes.hpp>
 
 SpaceStationBuilder& SpaceStationBuilder::Instance()
 {	

@@ -21,7 +21,7 @@
 #define GRAPPLEEQUIPMENTBUILDER_HPP
 
 #include <common/constants.hpp>
-#include <common/RaceTypes.hpp>
+#include <types/RaceTypes.hpp>
 
 class GrappleEquipment;
 

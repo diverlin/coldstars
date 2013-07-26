@@ -21,7 +21,7 @@
 
 #include <common/constants.hpp>
 #include <common/Date.hpp>
-#include <common/RaceTypes.hpp>
+#include <types/RaceTypes.hpp>
 
 #include <struct/StarSystemsConditionData.hpp>
 

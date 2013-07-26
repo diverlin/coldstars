@@ -22,7 +22,7 @@
 #include <common/IdGenerator.hpp>
 #include <common/rand.hpp>
 #include <common/Logger.hpp>
-#include <common/MeshTypes.hpp>
+#include <types/MeshTypes.hpp>
 
 #include "../../../world/EntityManager.hpp"
 #include "../../../resources/TextureManager.hpp"

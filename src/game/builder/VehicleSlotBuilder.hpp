@@ -22,7 +22,7 @@
 
 class VehicleSlot;
 #include "../common/constants.hpp"
-#include <common/EntityTypes.hpp>
+#include <types/EntityTypes.hpp>
 
 VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY, unsigned long int id = NONE_ID);
 

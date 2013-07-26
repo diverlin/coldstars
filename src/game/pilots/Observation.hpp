@@ -21,7 +21,7 @@
 #define OBSERVATION_HPP
 
 #include <vector>
-#include <common/RaceTypes.hpp>
+#include <types/RaceTypes.hpp>
 
 class Npc; 
 class Galaxy;

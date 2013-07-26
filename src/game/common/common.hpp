@@ -22,7 +22,7 @@
 #include <string>
 #include <math/myVector.hpp>
 #include <common/constants.hpp>
-#include <common/EntityTypes.hpp>
+#include <types/EntityTypes.hpp>
 
 GUI::TYPE getGuiItemSlotType(TYPE::ENTITY);
 GUI::TYPE getGuiItemSlotSelectorType(TYPE::ENTITY);

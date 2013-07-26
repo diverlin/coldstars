@@ -9,7 +9,7 @@
 #include <math/Vec3.hpp>
 
 #include <render/MyGl.hpp>
-#include <common/MeshTypes.hpp>
+#include <types/MeshTypes.hpp>
 
 class ObjLoader;
 class TextureOb;

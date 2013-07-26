@@ -20,7 +20,7 @@
 #include "../CommonBuilderHeaders.hpp"
 #include "../../spaceobjects/BlackHole.hpp"
 
-#include <common/MeshTypes.hpp>
+#include <types/MeshTypes.hpp>
 
 BlackHoleBuilder& BlackHoleBuilder::Instance()
 {
