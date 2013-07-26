@@ -22,7 +22,7 @@
 
 #include <items/BaseItem.hpp>
 
-#include <common/MyInt.hpp>
+#include <types/MyInt.hpp>
 
 class BaseEquipment;
 

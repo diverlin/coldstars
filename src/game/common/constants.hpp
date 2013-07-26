@@ -25,7 +25,7 @@
 #include <vector>
 #include <types/EntityTypes.hpp>
 #include <types/GuiTypes.hpp>
-#include "MyInt.hpp"
+#include <types/MyInt.hpp>
 #include "Converter.hpp"
 
 namespace CONVERTER
@@ -110,7 +110,7 @@ const int SHIPINIT_PER_PLANET_MAX = 5;
 const int SATELLITEWARRIORS_PER_PLANET_MIN = 1;
 const int SATELLITEWARRIORS_PER_PLANET_MAX = 1;
 
-const int INITIATE_STARSYSTEM_IVASION_NUM = 3;
+const unsigned int INITIATE_STARSYSTEM_IVASION_NUM = 3;
 
 enum GAME_MODE
 { 

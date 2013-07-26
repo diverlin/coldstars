@@ -22,11 +22,11 @@
 
 #include <common/Base.hpp>
 #include <common/constants.hpp>
-#include <common/MyInt.hpp>
+#include <types/MyInt.hpp>
 
 class Vehicle;
 class TextureOb;
-class Rect;
+class Rect;  
 
 
 struct UnresolvedDataUniqueBaseSlot

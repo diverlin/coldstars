@@ -595,40 +595,40 @@ void StarSystem::Update(int time)
 	bool detalied_simulation = true;
 
 	UpdateEntities_s(time, detalied_simulation);
-        ManageUnavaliableObjects_s();
-        ManageDeadObjects_s();         // no need to update so frequently, pri /6
+    ManageUnavaliableObjects_s();
+    ManageDeadObjects_s();         // no need to update so frequently, pri /6
         	    		
 	if (time > 0)
 	{
 		if (unique_update_inDymanic_done == false)
 		{
-                        hyperspace.PostHyperJumpEvent(this);
-                        
-                        unique_update_inDymanic_done = true;
-			unique_update_inStatic_done  = false;
+            hyperspace.PostHyperJumpEvent(this);
+            
+            unique_update_inDymanic_done = true;
+            unique_update_inStatic_done  = false;
 		}
 
-		// phisics
-    		rocketCollision_s(detalied_simulation);   // pri/2
-    		asteroidCollision_s(detalied_simulation); // pri/2
-    		ExternalForcesAffection_s(detalied_simulation); // pri/2
-    		//phisics
-    		
-    		if (CONTAINER_vec.size() > container_num_max)
-        	{
-        		unsigned int index = getRandInt(0, container_num_max-1);
-               		CONTAINER_vec[index]->Hit(100, true);
-        	}
+        // phisics
+        rocketCollision_s(detalied_simulation);   // pri/2
+        asteroidCollision_s(detalied_simulation); // pri/2
+        ExternalForcesAffection_s(detalied_simulation); // pri/2
+        //phisics
+        
+        if (CONTAINER_vec.size() > container_num_max)
+        {
+            unsigned int index = getRandInt(0, container_num_max-1);
+            CONTAINER_vec[index]->Hit(100, true);
+        }
 	}
 	else
 	{
 		if (unique_update_inStatic_done == false)
 		{    				
-    			UpdateInSpaceInStatic_s();     			
-			
-			unique_update_inDymanic_done = false;
-    			unique_update_inStatic_done  = true;
-    		}    		
+            UpdateInSpaceInStatic_s();     			
+            
+            unique_update_inDymanic_done = false;
+            unique_update_inStatic_done  = true;
+        }    		
 	}
 }
 

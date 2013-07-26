@@ -20,8 +20,9 @@
 #ifndef ITEMSLOT_HPP
 #define ITEMSLOT_HPP
 
+#include <types/MyInt.hpp>
+
 #include <common/constants.hpp>
-#include <common/MyInt.hpp>
 
 #include <slots/BaseSlot.hpp>
 

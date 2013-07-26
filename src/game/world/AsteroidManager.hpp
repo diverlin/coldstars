@@ -32,14 +32,14 @@ class AsteroidManager
 		{}
 		~AsteroidManager() {}
 		
-		void Parameterize(int asteroids_num, int asteroid_delay = 0) { this->asteroid_num = asteroid_num; this->asteroid_delay = asteroid_delay; }
+		void Parameterize(unsigned int asteroids_num, int asteroid_delay = 0) { this->asteroid_num = asteroid_num; this->asteroid_delay = asteroid_delay; }
 			
 		void Update(StarSystem*);
 
-    	private:                 		
-    		int asteroid_num;
-    		int asteroid_delay;
-    		int asteroid_last_turn_created;    		
+    private:                 		
+        unsigned int asteroid_num;
+        int asteroid_delay;
+        int asteroid_last_turn_created;    		
 };
 
 #endif 

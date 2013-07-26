@@ -39,7 +39,7 @@ class Logger
 		Logger& operator=(const Logger&) = delete;
 
 		int mode;
-		int turn_counter;
+		unsigned int turn_counter;
 		int line_counter;
 		
 		std::ofstream file;

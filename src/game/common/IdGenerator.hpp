@@ -23,7 +23,7 @@
 #include <string>
 #include <vector>
 
-#include <common/MyInt.hpp>
+#include <types/MyInt.hpp>
 
 class EntityIdGenerator
 {

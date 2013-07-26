@@ -19,7 +19,7 @@ void MessageManager::NewMessage(double delay,
                        		int    type_id,
                        		void*  extra)
 {
-  	BaseSpaceEntity* sender   = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(sender_id);
+  	//BaseSpaceEntity* sender   = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(sender_id);
   	BaseSpaceEntity* receiver = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(receiver_id);
 
   	if (receiver == nullptr)

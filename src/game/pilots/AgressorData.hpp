@@ -20,7 +20,7 @@
 #define AGRESSORDATA_HPP
 
 #include <common/Date.hpp>
-#include <common/MyInt.hpp>
+#include <types/MyInt.hpp>
 
 struct AgressorData
 {

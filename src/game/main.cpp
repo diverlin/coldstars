@@ -60,7 +60,8 @@ enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT };
 int main()
 {
 	//runThreadTest();
-	
+	runSinglethread();
+    
     //pureTest4();
 	init();        
 	GameDate::Instance().SetDate(1,1,4000);
@@ -136,6 +137,10 @@ int main()
 				player = EntityManager::Instance().GetPlayer();
 				galaxy = player->GetNpc()->GetVehicle()->GetStarSystem()->GetSector()->GetGalaxy();
 			}
+            if (save_event == true)
+            {
+            
+            }
 		}
 
 		if (TurnTimer::Instance().GetTurnTick() > 1) // hack

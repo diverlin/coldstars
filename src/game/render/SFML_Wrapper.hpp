@@ -5,7 +5,7 @@
 #include "../math/myVector.hpp"
 
 #include "MyGl.hpp"
-#include "FreeType.h"
+#include <FreeType.h>
 
 class SFML_Wrapper
 {
