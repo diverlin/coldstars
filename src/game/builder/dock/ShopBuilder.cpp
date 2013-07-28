@@ -16,14 +16,12 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "ShopBuilder.hpp"
 
-#include "../docking/Shop.hpp"
+#include <builder/dock/ShopBuilder.hpp>
+#include <builder/CommonBuilderHeaders.hpp>
 
-#include "../common/IdGenerator.hpp"
-#include "../common/Logger.hpp"
-#include "../world/EntityManager.hpp"
-#include "../resources/TextureManager.hpp"
+#include <docking/Shop.hpp>
+
 
 ShopBuilder& ShopBuilder::Instance()
 {

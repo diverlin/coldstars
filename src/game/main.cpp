@@ -20,7 +20,7 @@
 #include "resources/init.hpp"
 
 #include "builder/world/GalaxyBuilder.hpp"
-#include "builder/PlayerBuilder.hpp"
+#include "builder/pilots/PlayerBuilder.hpp"
 #include "config/config.hpp"
 #include "world/EntityManager.hpp"
 

@@ -16,15 +16,20 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "ItemSlotBuilder.hpp"
 
-#include "../common/IdGenerator.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/Logger.hpp"
-#include "../resources/TextureManager.hpp"
-#include "../parts/Turrel.hpp"
-#include "../resources/textureOb.hpp"
+#include <builder/slots/ItemSlotBuilder.hpp>
+
+#include <common/IdGenerator.hpp>
+#include <common/Logger.hpp>
+
+#include <resources/TextureManager.hpp>
+#include <resources/textureOb.hpp>
+
+#include <world/EntityManager.hpp>
+
+#include <parts/Turrel.hpp>
 #include <slots/ItemSlot.hpp>
+
 
 ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
 {

@@ -16,15 +16,20 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "VehicleSlotBuilder.hpp"
 
-#include "../slots/VehicleSlot.hpp"
+#include <builder/slots/VehicleSlotBuilder.hpp>
 
-#include "../common/IdGenerator.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/Logger.hpp"
-#include "../common/rand.hpp"
-#include "../resources/TextureManager.hpp"
+#include <common/IdGenerator.hpp>
+
+#include <common/Logger.hpp>
+#include <common/rand.hpp>
+
+#include <resources/TextureManager.hpp>
+
+#include <slots/VehicleSlot.hpp>
+
+#include <world/EntityManager.hpp>
+
 
 VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
 {

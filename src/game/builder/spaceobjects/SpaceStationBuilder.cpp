@@ -16,13 +16,15 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "SpaceStationBuilder.hpp"
-#include "../CommonBuilderHeaders.hpp"
-#include "../KosmoportBuilder.hpp"
-#include "../../spaceobjects/SpaceStation.hpp"
-#include "../../docking/Kosmoport.hpp"
 
-#include <types/MeshTypes.hpp>
+#include <builder/spaceobjects/SpaceStationBuilder.hpp>
+#include <builder/dock/KosmoportBuilder.hpp>
+#include <builder/CommonBuilderHeaders.hpp>
+
+#include <spaceobjects/SpaceStation.hpp>
+
+#include <docking/Kosmoport.hpp>
+
 
 SpaceStationBuilder& SpaceStationBuilder::Instance()
 {	

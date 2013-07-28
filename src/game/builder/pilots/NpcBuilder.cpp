@@ -16,20 +16,23 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "NpcBuilder.hpp"
-#include "../pilots/Npc.hpp"
+#include <builder/pilots/NpcBuilder.hpp>
 
-#include "../ai/aiModel/AiModelCollector.hpp"
-#include "../ai/aiModel/AiModelConqueror.hpp"
-#include "../ai/aiModel/AiModelRanger.hpp"
-#include "../ai/aiModel/AiModelTrader.hpp"
+#include <common/IdGenerator.hpp>
+#include <common/Logger.hpp>
+#include <common/rand.hpp>
 
-#include "../common/IdGenerator.hpp"
-#include "../common/Logger.hpp"
-#include "../common/rand.hpp"
+#include <resources/TextureManager.hpp>
 
-#include "../world/EntityManager.hpp"
-#include "../resources/TextureManager.hpp"
+#include <pilots/Npc.hpp>
+
+#include <world/EntityManager.hpp>
+
+#include <ai/aiModel/AiModelCollector.hpp>
+#include <ai/aiModel/AiModelConqueror.hpp>
+#include <ai/aiModel/AiModelRanger.hpp>
+#include <ai/aiModel/AiModelTrader.hpp>
+
 
 NpcBuilder& NpcBuilder::Instance()
 {

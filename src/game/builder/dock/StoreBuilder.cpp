@@ -16,37 +16,30 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "StoreBuilder.hpp"
+
+#include <builder/dock/StoreBuilder.hpp>
+#include <builder/slots/ItemSlotBuilder.hpp>
+#include <builder/slots/VehicleSlotBuilder.hpp>
+#include <builder/items/IncludeItemBuilders.hpp>
+#include <builder/spaceobjects/ShipBuilder.hpp>
+#include <builder/CommonBuilderHeaders.hpp>
 
 #include <docking/Store.hpp>
 
-#include "../common/IdGenerator.hpp"
-#include "../common/Logger.hpp"
-#include "../common/rand.hpp"
+#include <spaceobjects/Ship.hpp>
 
-#include "../world/EntityManager.hpp"
+#include <items/equipment/BakEquipment.hpp>
+#include <items/equipment/DriveEquipment.hpp>
+#include <items/equipment/DroidEquipment.hpp>
+#include <items/equipment/GrappleEquipment.hpp>
+#include <items/equipment/LazerEquipment.hpp>
+#include <items/equipment/ProtectorEquipment.hpp>
+#include <items/equipment/RadarEquipment.hpp>
+#include <items/equipment/RocketEquipment.hpp>
+#include <items/equipment/ScanerEquipment.hpp>
+#include <items/equipment/EnergizerEquipment.hpp>
+#include <items/equipment/FreezerEquipment.hpp>
 
-#include "../resources/TextureManager.hpp"
-
-#include "../spaceobjects/Ship.hpp"
-
-#include "../items/equipment/BakEquipment.hpp"
-#include "../items/equipment/DriveEquipment.hpp"
-#include "../items/equipment/DroidEquipment.hpp"
-#include "../items/equipment/GrappleEquipment.hpp"
-#include "../items/equipment/LazerEquipment.hpp"
-#include "../items/equipment/ProtectorEquipment.hpp"
-#include "../items/equipment/RadarEquipment.hpp"
-#include "../items/equipment/RocketEquipment.hpp"
-#include "../items/equipment/ScanerEquipment.hpp"
-#include "../items/equipment/EnergizerEquipment.hpp"
-#include "../items/equipment/FreezerEquipment.hpp"
-
-
-#include "../builder/ItemSlotBuilder.hpp"
-#include "../builder/VehicleSlotBuilder.hpp"
-#include "../builder/items/IncludeItemBuilders.hpp"
-#include "../builder/spaceobjects/ShipBuilder.hpp"
 
 StoreBuilder& StoreBuilder::Instance()
 {

@@ -19,19 +19,21 @@
 #ifndef COMMONBUILDERHEADERS_HPP
 #define COMMONBUILDERHEADERS_HPP
 
-#include "../common/common.hpp"
-#include "../common/rand.hpp"
-#include "../common/IdGenerator.hpp"
-#include "../common/Logger.hpp"
+#include <types/MeshTypes.hpp>
 
-#include "../resources/TextureManager.hpp"
-#include "../resources/textureOb.hpp"
-#include "../resources/MeshCollector.hpp"
+#include <common/common.hpp>
+#include <common/rand.hpp>
+#include <common/IdGenerator.hpp>
+#include <common/Logger.hpp>
 
-#include "../world/EntityManager.hpp"
+#include <resources/TextureManager.hpp>
+#include <resources/textureOb.hpp>
+#include <resources/MeshCollector.hpp>
 
-#include "../animations/AnimationConstantRotationAxisX.hpp"
-#include "../animations/AnimationConstantRotationAxisZ.hpp"
-#include "../animations/AnimationWiggleAxisX.hpp"
+#include <world/EntityManager.hpp>
+
+#include <animations/AnimationConstantRotationAxisX.hpp>
+#include <animations/AnimationConstantRotationAxisZ.hpp>
+#include <animations/AnimationWiggleAxisX.hpp>
 
 #endif	

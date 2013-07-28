@@ -23,9 +23,11 @@
 #include "../math/myVector.hpp"
 
 #include "../effects/particlesystem/ExplosionEffect.hpp"
-#include "../builder/spaceobjects/BlackHoleBuilder.hpp"
-#include "../builder/spaceobjects/ShipBuilder.hpp"
-#include "../builder/NpcBuilder.hpp"
+
+#include <builder/spaceobjects/BlackHoleBuilder.hpp>
+#include <builder/spaceobjects/ShipBuilder.hpp>
+#include <builder/pilots/NpcBuilder.hpp>
+
 #include "../common/Collision.hpp"
 #include "../world/EntityManager.hpp"
 #include "../common/rand.hpp"
@@ -37,8 +39,8 @@
 
 #include "../spaceobjects/IncludeSpaceObjects.hpp"
 
-#include "../pilots/Player.hpp"
-#include "../pilots/Npc.hpp"
+#include <pilots/Player.hpp>
+#include <pilots/Npc.hpp>
 
 #include "../effects/DistantNebulaEffect.hpp"
 #include "../effects/DistantStarEffect.hpp"

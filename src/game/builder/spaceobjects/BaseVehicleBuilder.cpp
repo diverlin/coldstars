@@ -51,7 +51,7 @@
 
 #include "../../builder/items/IncludeItemBuilders.hpp"
 
-#include "../../builder/ItemSlotBuilder.hpp"
+#include <builder/slots/ItemSlotBuilder.hpp>
 
 #include "../../common/rand.hpp"
 #include "../../effects/particlesystem/DriveEffect.hpp"

@@ -16,19 +16,20 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "StarSystemBuilder.hpp"
-#include "../../struct/StarSystemDescription.hpp"
-#include "../CommonBuilderHeaders.hpp"
-#include "../NpcBuilder.hpp"
 
+#include <builder/world/StarSystemBuilder.hpp>
+#include <builder/spaceobjects/IncludeSpaceObjectBuilders.hpp>
+#include <builder/pilots/NpcBuilder.hpp>
+#include <builder/CommonBuilderHeaders.hpp>
 
-#include "../spaceobjects/IncludeSpaceObjectBuilders.hpp"
-#include "../../spaceobjects/IncludeSpaceObjects.hpp"
+#include <struct/StarSystemDescription.hpp>
 
-#include "../../world/starsystem.hpp"
+#include <spaceobjects/IncludeSpaceObjects.hpp>
 
-#include "../../effects/DistantNebulaEffect.hpp"
-#include "../../effects/DistantStarEffect.hpp"
+#include <world/starsystem.hpp>
+
+#include <effects/DistantNebulaEffect.hpp>
+#include <effects/DistantStarEffect.hpp>
 
 
 StarSystemBuilder& StarSystemBuilder::Instance()

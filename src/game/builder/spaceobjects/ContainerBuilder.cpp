@@ -16,13 +16,15 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "ContainerBuilder.hpp"
-#include "../CommonBuilderHeaders.hpp"
-#include "../ItemSlotBuilder.hpp"
-#include "../../spaceobjects/Container.hpp"
-#include "../../items/others/GoodsPack.hpp"
+#include <builder/spaceobjects/ContainerBuilder.hpp>
+#include <builder/slots/ItemSlotBuilder.hpp>
+#include <builder/CommonBuilderHeaders.hpp>
+
+#include <spaceobjects/Container.hpp>
 
 #include <slots/ItemSlot.hpp>
+
+#include <items/others/GoodsPack.hpp>
 
 
 ContainerBuilder& ContainerBuilder::Instance()

@@ -30,7 +30,7 @@
 #include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
 
-#include "../builder/ItemSlotBuilder.hpp"
+#include <builder/slots/ItemSlotBuilder.hpp>
 
 #include "../render/Render.hpp"
 #include "../gui/GuiManager.hpp"

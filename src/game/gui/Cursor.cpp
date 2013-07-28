@@ -18,7 +18,7 @@
 
 #include "Cursor.hpp"
 #include "../render/Screen.hpp"
-#include "../builder/ItemSlotBuilder.hpp"
+#include <builder/slots/ItemSlotBuilder.hpp>
 
 #include "../items/BaseItem.hpp"
 

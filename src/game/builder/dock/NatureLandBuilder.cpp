@@ -16,23 +16,17 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "NatureLandBuilder.hpp"
 
-#include "../docking/NatureLand.hpp"
+#include <builder/dock/NatureLandBuilder.hpp>
+#include <builder/slots/ItemSlotBuilder.hpp>
+#include <builder/items/artefacts/GravityArtefactBuilder.hpp>
+#include <builder/items/artefacts/ProtectorArtefactBuilder.hpp>
+#include <builder/CommonBuilderHeaders.hpp>
 
-#include "../common/IdGenerator.hpp"
-#include "../common/Logger.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/rand.hpp"
+#include <items/artefacts/GravityArtefact.hpp>
+#include <items/artefacts/ProtectorArtefact.hpp>
 
-#include "../resources/TextureManager.hpp"
-
-#include "items/artefacts/GravityArtefactBuilder.hpp"
-#include "items/artefacts/ProtectorArtefactBuilder.hpp"
-#include "../items/artefacts/GravityArtefact.hpp"
-#include "../items/artefacts/ProtectorArtefact.hpp"
-
-#include "../builder/ItemSlotBuilder.hpp"
+#include <docking/NatureLand.hpp>
 
 NatureLandBuilder& NatureLandBuilder::Instance()
 {
