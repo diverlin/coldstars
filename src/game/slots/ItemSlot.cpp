@@ -35,8 +35,8 @@
 
 #include "../items/others/Bomb.hpp"
 
-#include "../docking/Store.hpp"
-#include "../docking/Angar.hpp"
+#include "../dock/Store.hpp"
+#include "../dock/Angar.hpp"
 
 #include "../common/Logger.hpp"
 

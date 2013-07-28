@@ -29,7 +29,7 @@
 #include "../spaceobjects/Vehicle.hpp"
 //#include "../builder/ItemSlotBuilder.hpp"
 
-#include "../docking/NatureLand.hpp"
+#include "../dock/NatureLand.hpp"
 
 #include "../render/Render.hpp"
 

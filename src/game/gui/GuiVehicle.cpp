@@ -19,7 +19,7 @@
 #include "GuiVehicle.hpp"
 #include "../pilots/Player.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
-#include "../docking/Kosmoport.hpp"
+#include "../dock/Kosmoport.hpp"
 #include "../render/Render.hpp"
 #include "../items/BaseItem.hpp"
 #include "../slots/ItemSlot.hpp"

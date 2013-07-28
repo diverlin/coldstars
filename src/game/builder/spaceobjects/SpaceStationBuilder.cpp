@@ -23,7 +23,7 @@
 
 #include <spaceobjects/SpaceStation.hpp>
 
-#include <docking/Kosmoport.hpp>
+#include <dock/Kosmoport.hpp>
 
 
 SpaceStationBuilder& SpaceStationBuilder::Instance()

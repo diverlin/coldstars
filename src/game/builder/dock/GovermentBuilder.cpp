@@ -20,7 +20,7 @@
 #include <builder/dock/GovermentBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <docking/Goverment.hpp>
+#include <dock/Goverment.hpp>
 
 
 GovermentBuilder& GovermentBuilder::Instance()

@@ -17,7 +17,7 @@
 */
 
 #include "GuiAngar.hpp"
-#include "../docking/Angar.hpp"
+#include "../dock/Angar.hpp"
 #include "ButtonSingle.hpp"
 #include "../config/config.hpp"
 #include "../slots/VehicleSlot.hpp"

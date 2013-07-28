@@ -24,7 +24,7 @@
 
 #include <slots/VehicleSlot.hpp>
 
-#include <docking/Angar.hpp>
+#include <dock/Angar.hpp>
 
 
 AngarBuilder& AngarBuilder::Instance()

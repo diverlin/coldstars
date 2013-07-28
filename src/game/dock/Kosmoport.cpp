@@ -21,10 +21,10 @@
 #include "../common/myStr.hpp"
 #include "../common/constants.hpp"
 
-#include "../docking/Angar.hpp"
-#include "../docking/Store.hpp"
-#include "../docking/Shop.hpp"
-#include "../docking/Goverment.hpp"
+#include "../dock/Angar.hpp"
+#include "../dock/Store.hpp"
+#include "../dock/Shop.hpp"
+#include "../dock/Goverment.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
 #include "../slots/VehicleSlot.hpp"

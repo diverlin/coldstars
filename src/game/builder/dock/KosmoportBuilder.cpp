@@ -24,7 +24,7 @@
 #include <builder/dock/GovermentBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <docking/Kosmoport.hpp>
+#include <dock/Kosmoport.hpp>
 
 
 KosmoportBuilder& KosmoportBuilder::Instance()

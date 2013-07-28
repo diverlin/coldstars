@@ -23,8 +23,8 @@
 #include "../common/myStr.hpp"
 #include "../common/Logger.hpp"
 
-#include "../docking/Angar.hpp"
-#include "../docking/Store.hpp"
+#include "../dock/Angar.hpp"
+#include "../dock/Store.hpp"
 #include "../world/EntityManager.hpp"
 
 #include "../garbage/EntityGarbage.hpp"

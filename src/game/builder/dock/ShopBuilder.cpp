@@ -20,7 +20,7 @@
 #include <builder/dock/ShopBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <docking/Shop.hpp>
+#include <dock/Shop.hpp>
 
 
 ShopBuilder& ShopBuilder::Instance()
