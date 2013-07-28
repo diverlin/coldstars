@@ -60,9 +60,9 @@ enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT };
 int main()
 {
 	//runThreadTest();
-	runSinglethread();
-    
+	//runSinglethread();    
     //pureTest4();
+    
 	init();        
 	GameDate::Instance().SetDate(1,1,4000);
         
