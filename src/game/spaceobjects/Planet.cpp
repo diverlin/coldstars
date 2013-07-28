@@ -21,7 +21,7 @@
 #include <common/myStr.hpp>
 #include <common/Logger.hpp>
   
-#include <docking/Kosmoport.hpp>
+#include <dock/Kosmoport.hpp>
 
 #include <effects/Atmosphere.hpp>
 

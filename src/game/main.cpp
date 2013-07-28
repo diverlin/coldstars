@@ -43,7 +43,7 @@
 #include "world/God.hpp"
 
 #include "struct/GalaxyDescription.hpp"
-#include "docking/BaseLand.hpp"
+#include "dock/BaseLand.hpp"
 
 #include "run_scenario/NormalRunScenario.hpp"
 #include "run_scenario/TestParticlesRunScenario.hpp"

@@ -27,7 +27,7 @@
 #include "../common/common.hpp"
 #include "../ai/aiModel/AiModelCollector.hpp"
 #include "../render/Render.hpp"
-#include "../docking/Kosmoport.hpp"
+#include "../dock/Kosmoport.hpp"
 
 #include "../ai/aiModel/BaseAiModel.hpp"
 #include "../pilots/Skills.hpp"
@@ -38,7 +38,7 @@
 
 #include "../items/others/GoodsPack.hpp"
 
-#include "../docking/Shop.hpp"
+#include "../dock/Shop.hpp"
 #include "../text/VerticalFlowText.hpp" 
 
 #include "../common/GameDate.hpp" 

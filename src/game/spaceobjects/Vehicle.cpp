@@ -65,11 +65,11 @@
 
 #include <pilots/Npc.hpp>
 
-#include <docking/Kosmoport.hpp>
-#include <docking/Angar.hpp>
-#include <docking/Shop.hpp>
-#include <docking/Store.hpp>
-#include <docking/NatureLand.hpp>
+#include <dock/Kosmoport.hpp>
+#include <dock/Angar.hpp>
+#include <dock/Shop.hpp>
+#include <dock/Store.hpp>
+#include <dock/NatureLand.hpp>
 
 #include <garbage/EntityGarbage.hpp>
 
@@ -574,7 +574,7 @@ void Vehicle::UpdateSpecialAction()
     }
 }
  
-//// ******** DOCKING/LAUNCHING ******** 
+//// ******** dock/LAUNCHING ******** 
 void Vehicle::HyperJumpEvent(StarSystem* starsystem)
 {
     #if ENTITY_TRANSACTION_LOG_ENABLED == 1 

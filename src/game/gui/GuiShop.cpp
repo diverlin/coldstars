@@ -17,7 +17,7 @@
 */
 
 #include "GuiShop.hpp"
-#include "../docking/Shop.hpp"
+#include "../dock/Shop.hpp"
 
 #include "../common/rect.hpp"
 #include "../gui/Cursor.hpp"

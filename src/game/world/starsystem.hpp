@@ -21,7 +21,10 @@
 #define STARSYSTEM_HPP
 
 #include <vector>
-#include "../spaceobjects/BaseSpaceEntity.hpp"
+#include <spaceobjects/BaseSpaceEntity.hpp>
+#include <garbage/garbageEffects.hpp>
+#include <world/HyperSpace.hpp>
+#include <world/AsteroidManager.hpp>
 
 class RocketBullet;
 class BasePlanet;
@@ -33,9 +36,12 @@ class Vehicle;
 class SpaceStation;
 class Satellite; 
 class Ship; 
-class Sector;
 class Container;
+
 class Player;
+class Npc;
+
+class Sector;
 
 class DistantNebulaEffect;
 class DistantStarEffect;
@@ -44,11 +50,6 @@ class ShockWaveEffect;
 class ExplosionEffect;
 class LazerTraceEffect;
 
-#include "../garbage/garbageEffects.hpp"
-#include "HyperSpace.hpp"
-#include "AsteroidManager.hpp"
-
-class Npc;
 
 struct UnresolvedDataUniqueStarSystem
 {

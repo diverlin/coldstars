@@ -24,7 +24,7 @@
 #include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <docking/Store.hpp>
+#include <dock/Store.hpp>
 
 #include <spaceobjects/Ship.hpp>
 

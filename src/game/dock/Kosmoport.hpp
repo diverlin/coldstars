@@ -19,7 +19,7 @@
 #ifndef KOSMOPORT_HPP
 #define KOSMOPORT_HPP
 
-#include <docking/BaseLand.hpp>
+#include <dock/BaseLand.hpp>
 #include <types/RaceTypes.hpp>
 
 class Angar; 

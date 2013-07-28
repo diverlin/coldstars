@@ -21,7 +21,7 @@
 #define SPACESTATION_HPP
 
 #include <spaceobjects/Vehicle.hpp>
-#include <docking/BaseLand.hpp>
+#include <dock/BaseLand.hpp>
    
    
 class SpaceStation : public Vehicle

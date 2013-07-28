@@ -18,8 +18,7 @@
 
 #include "starsystem.hpp"
 #include "Sector.hpp"
-#include <boost/property_tree/ptree.hpp>
-#include <boost/foreach.hpp>
+
 #include "../math/myVector.hpp"
 
 #include "../effects/particlesystem/ExplosionEffect.hpp"
@@ -37,7 +36,7 @@
 
 #include "../items/others/Bomb.hpp"
 
-#include "../spaceobjects/IncludeSpaceObjects.hpp"
+#include <spaceobjects/IncludeSpaceObjects.hpp>
 
 #include <pilots/Player.hpp>
 #include <pilots/Npc.hpp>
@@ -1121,23 +1120,23 @@ void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& loa
 	boost::property_tree::ptree tmp_ptree = load_ptree;
 	if (tmp_ptree.get_child_optional("distant_nebula_effect"))
 	{	
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, tmp_ptree.get_child("distant_nebula_effect"))
+		for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_nebula_effect"))
 		{
 			DistantNebulaEffect* dn = GetNewDistantNebulaEffect(NONE_ID);
 			dn->LoadData(v.second);
 			dn->ResolveData();
-                	Add(dn);
+            Add(dn);
 		}
 	}
 	
 	if (tmp_ptree.get_child_optional("distant_star_effect"))
 	{	
-		BOOST_FOREACH(boost::property_tree::ptree::value_type &v, tmp_ptree.get_child("distant_star_effect"))
+		for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_star_effect"))
 		{
 			DistantStarEffect* ds = GetNewDistantStarEffect(NONE_ID);
 			ds->LoadData(v.second);
 			ds->ResolveData();
-                	Add(ds);
+            Add(ds);
 		}
 	}
 }

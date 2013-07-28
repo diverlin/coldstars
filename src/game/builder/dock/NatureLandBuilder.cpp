@@ -26,7 +26,7 @@
 #include <items/artefacts/GravityArtefact.hpp>
 #include <items/artefacts/ProtectorArtefact.hpp>
 
-#include <docking/NatureLand.hpp>
+#include <dock/NatureLand.hpp>
 
 NatureLandBuilder& NatureLandBuilder::Instance()
 {

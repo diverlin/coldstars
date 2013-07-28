@@ -20,8 +20,8 @@
 
 #include "../spaceobjects/IncludeSpaceObjects.hpp"
 
-#include "../docking/Kosmoport.hpp"
-#include "../docking/NatureLand.hpp"
+#include "../dock/Kosmoport.hpp"
+#include "../dock/NatureLand.hpp"
 
 #include "../builder/dock/KosmoportBuilder.hpp"
 #include "../builder/dock/NatureLandBuilder.hpp"

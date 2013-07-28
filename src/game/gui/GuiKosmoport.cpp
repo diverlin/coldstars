@@ -34,14 +34,14 @@
 #include "../world/starsystem.hpp"
 #include "../world/Sector.hpp"
 
-#include "../docking/Kosmoport.hpp"
+#include "../dock/Kosmoport.hpp"
 #include "../slots/ItemSlot.hpp"
 #include "../items/BaseItem.hpp"
 
 #include "../render/Render.hpp"
 
-#include "../docking/Angar.hpp"
-#include "../docking/Goverment.hpp"
+#include "../dock/Angar.hpp"
+#include "../dock/Goverment.hpp"
 
 #include "../gui/GuiManager.hpp"
 #include "../gui/GuiVehicle.hpp"

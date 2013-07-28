@@ -23,7 +23,7 @@
 #include "../world/God.hpp"
 
 #include "../spaceobjects/Planet.hpp"
-#include "../docking/BaseLand.hpp"
+#include "../dock/BaseLand.hpp"
 
 #include "../world/galaxy.hpp"
 #include "../world/Sector.hpp"

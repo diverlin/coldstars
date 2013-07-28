@@ -19,7 +19,7 @@
 #include "GuiManager.hpp"
 #include "UserInput.hpp"
 #include "../slots/ItemSlot.hpp"
-#include "../docking/Kosmoport.hpp"
+#include "../dock/Kosmoport.hpp"
 #include "../world/starsystem.hpp"
 #include "../common/myStr.hpp"
 #include "../render/Screen.hpp"

@@ -53,10 +53,10 @@
 #include "../builder/dock/ShopBuilder.hpp"
 #include "../builder/dock/GovermentBuilder.hpp"
 
-#include "../docking/Angar.hpp"
-#include "../docking/Store.hpp"
-#include "../docking/Shop.hpp"
-#include "../docking/Goverment.hpp"
+#include "../dock/Angar.hpp"
+#include "../dock/Store.hpp"
+#include "../dock/Shop.hpp"
+#include "../dock/Goverment.hpp"
 
 #include "../items/equipment/BakEquipment.hpp"
 #include "../items/equipment/DriveEquipment.hpp"
@@ -85,9 +85,9 @@
 #include "../items/artefacts/GravityArtefact.hpp"
 #include "../items/artefacts/ProtectorArtefact.hpp"
 
-#include "../docking/Goverment.hpp"
-#include "../docking/NatureLand.hpp"
-#include "../docking/Kosmoport.hpp"
+#include "../dock/Goverment.hpp"
+#include "../dock/NatureLand.hpp"
+#include "../dock/Kosmoport.hpp"
 
 #include "../slots/VehicleSlot.hpp"
 #include "../common/myStr.hpp"

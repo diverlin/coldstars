@@ -26,7 +26,7 @@
 
 #include <garbage/EntityGarbage.hpp>
 
-#include <docking/Kosmoport.hpp>
+#include <dock/Kosmoport.hpp>
 
 #include <effects/Shield.hpp>
 

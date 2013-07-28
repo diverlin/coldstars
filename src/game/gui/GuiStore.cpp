@@ -17,7 +17,7 @@
 */
 
 #include "GuiStore.hpp"
-#include "../docking/Store.hpp"
+#include "../dock/Store.hpp"
 #include "../pilots/Player.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../items/BaseItem.hpp"
