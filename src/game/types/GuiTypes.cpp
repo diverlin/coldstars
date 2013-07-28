@@ -34,9 +34,9 @@ std::string getGuiTypeStr(GUI::TYPE type_id)
 		case GUI::TYPE::EXCLUSIVE_ID: 		{ return "GUI::EXCLUSIVE_ID"; break; }
 
 
-		case GUI::TYPE::GOVERMENT_ID: 		{ return "GUI::GOVERMENT_ID"; break; }
+		case GUI::TYPE::GOVERMENT_ID: 	{ return "GUI::GOVERMENT_ID"; break; }
 		case GUI::TYPE::STORE_ID: 		{ return "GUI::STORE_ID"; break; }
-		case GUI::TYPE::SHOP_ID: 			{ return "GUI::SHOP_ID"; break; }
+		case GUI::TYPE::SHOP_ID: 		{ return "GUI::SHOP_ID"; break; }
 		case GUI::TYPE::ANGAR_ID: 		{ return "GUI::ANGAR_ID"; break; }  		
 	
 		case GUI::TYPE::CARGO_SLOT_ID: 		{ return "GUI::CARGO_SLOT_ID"; break; }	
@@ -69,11 +69,11 @@ std::string getGuiTypeStr(GUI::TYPE type_id)
 		case GUI::TYPE::ENERGIZER_SLOT_ID: 	{ return "GUI::ENERGIZER_SLOT_ID"; break; }
 		case GUI::TYPE::PROTECTOR_SLOT_ID: 	{ return "GUI::PROTECTOR_SLOT_ID"; break; }
 		case GUI::TYPE::DROID_SLOT_ID: 		{ return "GUI::DROID_SLOT_ID"; break; }
-		case GUI::TYPE::FREEZER_SLOT_ID: 		{ return "GUI::FREEZER_SLOT_ID"; break; }
-		case GUI::TYPE::GRAPPLE_SLOT_ID: 		{ return "GUI::GRAPPLE_SLOT_ID"; break; }
-		case GUI::TYPE::SCANER_SLOT_ID: 		{ return "GUI::SCANER_SLOT_ID"; break; }
+		case GUI::TYPE::FREEZER_SLOT_ID: 	{ return "GUI::FREEZER_SLOT_ID"; break; }
+		case GUI::TYPE::GRAPPLE_SLOT_ID: 	{ return "GUI::GRAPPLE_SLOT_ID"; break; }
+		case GUI::TYPE::SCANER_SLOT_ID: 	{ return "GUI::SCANER_SLOT_ID"; break; }
 		case GUI::TYPE::ARTEFACT_SLOT_ID: 	{ return "GUI::ARTEFACT_SLOT_ID"; break; }
-							
-		default: { return "GUI::UNKNOWN ID"; }
 	}
+								
+	return "GUI::UNKNOWN ID";
 }

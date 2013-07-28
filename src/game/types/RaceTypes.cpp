@@ -16,12 +16,15 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "RaceTypes.hpp"
 
 std::string getRaceStr(TYPE::RACE race_id) 
 {
 	switch(race_id)
 	{
+		case TYPE::RACE::NONE_ID: { return "RACE_NONE"; break; }
+		
 		case TYPE::RACE::R0_ID: { return "RACE0"; break; }
 		case TYPE::RACE::R1_ID:	{ return "RACE1"; break; }
 		case TYPE::RACE::R2_ID:	{ return "RACE2"; break; }
@@ -30,8 +33,8 @@ std::string getRaceStr(TYPE::RACE race_id)
 
 		case TYPE::RACE::R6_ID:	{ return "RACE6"; break; }
 		case TYPE::RACE::R7_ID:	{ return "RACE7"; break; }	
-		
-		default: { return "UKNOWN ID"; break; }
 	}
+	
+	return "RACE_UKNOWN";
 }
 

@@ -16,6 +16,7 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef CONSTANTS_HPP
 #define CONSTANTS_HPP
 
@@ -27,6 +28,7 @@
 #include <types/GuiTypes.hpp>
 //#include <types/MyInt.hpp>
 #include "Converter.hpp"
+
 
 namespace CONVERTER
 {
@@ -701,14 +703,6 @@ namespace NAVIGATOR_ACTION
 	enum TYPE
 	{
 		NONE_ID=0, DOCKING_ID=1, COLLECTING_ID, KEEP_FIRE_DISTANCE_ID, KEEP_CLOSE_ID, KEEP_MIDDLE_ID, KEEP_FAR_ID 
-	};
-}
-
-namespace TECHLEVEL
-{
-	enum TYPE
-	{
-		L0_ID=1, L1_ID, L2_ID, L3_ID	
 	};
 }
 

@@ -29,6 +29,7 @@
 #include <types/TextureTypes.hpp>
 #include <types/RaceTypes.hpp>
 #include <types/EntityTypes.hpp>
+#include <types/TechLevelTypes.hpp>
 
 
 class TextureOb
@@ -39,7 +40,7 @@ class TextureOb
         TYPE::ENTITY subtype_id;   //# warrior/trader and so on
         int mod_id;       // is not used for now
         TYPE::RACE race_id;
-        int tech_level_id;
+        TYPE::TECHLEVEL tech_level_id;
         int size_id;      // counting from wxh of sprite
         
         int color_id;     // probably color_rgb will be more usefull

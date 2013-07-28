@@ -62,7 +62,7 @@ int main()
 	//runThreadTest();
 	//runSinglethread();    
     //pureTest4();
-    
+
 	init();        
 	GameDate::Instance().SetDate(1,1,4000);
         

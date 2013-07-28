@@ -23,19 +23,18 @@
 
 #include <world/starsystem.hpp>
 #include <world/EntityManager.hpp>
+#include <garbage/EntityGarbage.hpp>
 
 #include <common/rand.hpp>
 #include <common/myStr.hpp>
 #include <common/Logger.hpp>
 
 #include <render/Render.hpp>
-#include <render/Screen.hpp>
 
-#include <resources/TextureManager.hpp>
 #include <resources/GuiTextureObCollector.hpp>
 
-#include <builder/spaceobjects/BaseVehicleBuilder.hpp>
-#include <builder/slots/ItemSlotBuilder.hpp>
+#include <slots/VehicleSlot.hpp> 
+#include <slots/ItemSlot.hpp>
 
 #include <items/equipment/RocketEquipment.hpp>
 #include <items/equipment/EnergizerEquipment.hpp>
@@ -52,16 +51,11 @@
 #include <items/artefacts/ProtectorArtefact.hpp>
 
 #include <effects/Shield.hpp>
-
 #include <effects/particlesystem/DriveEffect.hpp>
 #include <effects/particlesystem/ExplosionEffect.hpp>
-
-#include <parts/Turrel.hpp>
-#include <parts/WeaponComplex.hpp>
-
 #include <text/VerticalFlowText.hpp> 
 
-#include <slots/VehicleSlot.hpp> 
+#include <parts/Turrel.hpp>
 
 #include <pilots/Npc.hpp>
 
@@ -71,9 +65,6 @@
 #include <dock/Store.hpp>
 #include <dock/NatureLand.hpp>
 
-#include <garbage/EntityGarbage.hpp>
-
-#include <slots/ItemSlot.hpp>
 
 Vehicle::Vehicle()
 :
@@ -1480,7 +1471,6 @@ void Vehicle::ResolveDataUniqueVehicle()
 	Logger::Instance().Log(" Vehicle("+int2str(GetId())+")::ResolveDataUniqueVehicle", SAVELOAD_LOG_DIP);
 	#endif
 	
-    BaseVehicleBuilder::Instance().CreateKorpusGeometry(this);
     CreateDriveComplexTextureDependedStuff();
     CreateProtectionComplexTextureDependedStuff();
 

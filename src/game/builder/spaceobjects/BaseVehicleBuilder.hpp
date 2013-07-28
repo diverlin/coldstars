@@ -16,10 +16,12 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BASEVEHICLEBUILDER_H
-#define BASEVEHICLEBUILDER_H
+
+#ifndef BASEVEHICLEBUILDER_HPP
+#define BASEVEHICLEBUILDER_HPP
 
 class Vehicle;
+
 
 class BaseVehicleBuilder
 {
@@ -31,15 +33,13 @@ class BaseVehicleBuilder
         void EquipModules(Vehicle*, int tech_leve = 1) const; 
         void EquipArtefacts(Vehicle*, int tech_leve = 1) const; 
         void EquipBomb(Vehicle*, int tech_leve = 1) const; 
-                                                        
-        void CreateKorpusGeometry(Vehicle*) const;      
-        
-        void CreateItemSlots(Vehicle*) const;
-                
+              
     protected:
 		BaseVehicleBuilder() {};
 		BaseVehicleBuilder(const BaseVehicleBuilder&) = delete;
-		BaseVehicleBuilder& operator=(const BaseVehicleBuilder&) = delete;
+		BaseVehicleBuilder& operator=(const BaseVehicleBuilder&) = delete;  
+        
+        void CreateItemSlots(Vehicle*) const;
 }; 
 
 

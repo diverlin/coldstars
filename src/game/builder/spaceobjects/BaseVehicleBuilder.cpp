@@ -64,10 +64,7 @@ BaseVehicleBuilder& BaseVehicleBuilder::Instance()
 	static BaseVehicleBuilder instance;
 	return instance;
 }	
-
-void BaseVehicleBuilder::CreateKorpusGeometry(Vehicle* vehicle) const
-{}
-       
+     
 void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
 {     
     // WEAPON SLOTS
