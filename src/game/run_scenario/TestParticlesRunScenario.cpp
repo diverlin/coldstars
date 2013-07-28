@@ -81,15 +81,15 @@ void TestParticlesRunScenario::Init(Player* player)
 	}
 	
 	Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
-        God::Instance().Init(galaxy, galaxy_description);
-        	
-        Vec3<float> center(500, 500, DEFAULT_ENTITY_ZPOS);
-        Vec3<float> angle(0,0,0); 
-         
-        galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
+	God::Instance().SetGalaxy(galaxy);
+		
+	Vec3<float> center(500, 500, DEFAULT_ENTITY_ZPOS);
+	Vec3<float> angle(0,0,0); 
+	 
+	galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
         
 	StarSystem* starsystem = player->GetNpc()->GetVehicle()->GetStarSystem(); // shortcut        
-        for (int i=0; i<200; i++)
+	for (int i=0; i<200; i++)
 	{
 		Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
 
@@ -97,7 +97,7 @@ void TestParticlesRunScenario::Init(Player* player)
 		starsystem->AddContainer(container, center);
 	}
 
-        for (int i=0; i<200; i++)
+	for (int i=0; i<200; i++)
 	{
 		Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
 

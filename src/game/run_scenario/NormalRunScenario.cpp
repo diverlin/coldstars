@@ -16,27 +16,29 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "../builder/world/GalaxyBuilder.hpp"
 
-#include "../pilots/Npc.hpp"
-#include "../pilots/Player.hpp"
-#include "../world/God.hpp"
-
-#include "../spaceobjects/Planet.hpp"
-#include "../dock/BaseLand.hpp"
-
-#include "../world/galaxy.hpp"
-#include "../world/Sector.hpp"
-#include "../world/starsystem.hpp"
-#include "../world/EntityManager.hpp"
-
-#include "../garbage/EntityGarbage.hpp"
-
-#include "../struct/GalaxyDescription.hpp"
+#include <run_scenario/NormalRunScenario.hpp>
 
 #include <iostream>
 
-#include "NormalRunScenario.hpp"
+#include <builder/world/GalaxyBuilder.hpp>
+
+#include <pilots/Npc.hpp>
+#include <pilots/Player.hpp>
+
+#include <world/God.hpp>
+#include <world/galaxy.hpp>
+#include <world/Sector.hpp>
+#include <world/starsystem.hpp>
+#include <world/EntityManager.hpp>
+
+#include <spaceobjects/Planet.hpp>
+#include <dock/BaseLand.hpp>
+
+#include <garbage/EntityGarbage.hpp>
+
+#include <struct/GalaxyDescription.hpp>
+
 
 /* virtual */
 void NormalRunScenario::Init(Player* player)
@@ -53,7 +55,7 @@ void NormalRunScenario::Init(Player* player)
 		for (int j=0; j<sector_description.starsystem_num; j++)		
 		{
 			StarSystemDescription starsystem_description;
-			starsystem_description.planet_num = 50;
+			starsystem_description.planet_num = 10;
 			starsystem_description.spacestation_num = 3;
 			starsystem_description.asteroid_num = 3;
 						
@@ -69,18 +71,26 @@ void NormalRunScenario::Init(Player* player)
 	}
 	
 	Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
-	God::Instance().Init(galaxy, galaxy_description);
-        
- 	bool player2space = true;
-        if (player2space == true)
-        {
-                Vec3<float> center(500, 500, DEFAULT_ENTITY_ZPOS);
-                Vec3<float> angle(0,0,0);  
-                galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
+	God::Instance().SetGalaxy(galaxy);        
+	God::Instance().CreateLife(galaxy_description);
+	if (galaxy_description.allow_invasion == true)
+	{
+		God::Instance().CreateInvasion(galaxy_description);
 	}
-        else
-        {
-                galaxy->GetRandomSector()->GetRandomStarSystem()->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
-        }
+	
+ 	bool player2space = true;
+ 	StarSystem* const starsystem = galaxy->GetRandomSector()->GetRandomStarSystem();
+	if (player2space == true)
+	{
+		Vec3<float> center(500, 500, DEFAULT_ENTITY_ZPOS);
+		Vec3<float> angle(0,0,0);  
+		starsystem->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
+	}
+	else
+	{
+		starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
+	}
+
+	God::Instance().CreateShips(starsystem, /*ships_num=*/50, TYPE::RACE::R0_ID);
 }
 

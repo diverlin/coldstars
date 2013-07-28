@@ -16,8 +16,12 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef BASERUNSCENARIO_HPP
 #define BASERUNSCENARIO_HPP
+
+class Player;
+
 
 class BaseRunScenario
 {
