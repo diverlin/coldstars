@@ -103,9 +103,7 @@ void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const
 	
 	satellite->SetKorpusData(data_korpus);
 	satellite->SetLifeData(data_life);
-	satellite->BindData2D(texOb);
-	
-	CreateKorpusGeometry(satellite);
+	satellite->BindData2D(texOb);	
 
     satellite->CreateDriveComplexTextureDependedStuff();
     satellite->CreateProtectionComplexTextureDependedStuff();

@@ -17,32 +17,30 @@
 */
 
 
-#ifndef RAND_HPP
-#define RAND_HPP
+#ifndef TECHLEVELTYPES_HPP
+#define TECHLEVELTYPES_HPP
 
+#include <string>
 #include <vector>
 
-#include <types/RaceTypes.hpp>
-#include <types/EntityTypes.hpp>
 
-int getRandIntFromVec(const std::vector<int>&);
-
-float getRandFloat(float, float);
-int getRandInt(int, int);
-int getRandSign();
-bool getRandBool();
-
-TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE, const std::vector<TYPE::ENTITY>&);
-const std::vector<TYPE::ENTITY>& getAllowedSubTypesByRaceId(TYPE::RACE);
-
-TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE);
-TYPE::ENTITY getRandNpcSubSubTypeId(TYPE::ENTITY);
-
-template<typename TYPE> 
-TYPE getRand(const std::vector<TYPE>& vec)
+namespace TYPE
 {
-	if (vec.size()>0) { return vec[getRandInt(0, vec.size()-1)]; }
-	else 		      { return TYPE::NONE_ID; }
+    enum class TECHLEVEL 
+    {
+        NONE_ID=0, L0_ID, L1_ID, L2_ID, L3_ID/*, L4_ID, L5_ID, L6_ID, L7_ID, L8_ID, L9_ID*/
+    };
 }
 
+const std::vector<TYPE::TECHLEVEL> TECHLEVEL_TYPES =
+{
+TYPE::TECHLEVEL::L0_ID,
+TYPE::TECHLEVEL::L1_ID,
+TYPE::TECHLEVEL::L2_ID,
+TYPE::TECHLEVEL::L3_ID
+};
+
+std::string getTechLevelStr(TYPE::TECHLEVEL); 
+
 #endif
+

@@ -62,7 +62,7 @@ Ship* ShipBuilder::GetNewShip(TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, in
 
 Ship* ShipBuilder::GetNewShip() const
 {
-	TYPE::RACE race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+	TYPE::RACE race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	TYPE::ENTITY subsubtype_id = TYPE::ENTITY::WARRIOR_ID;
 	int size_id = getRandInt(1, 9);
 	int weapons_num = size_id;
@@ -148,8 +148,6 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id,  TYPE::ENTI
     data_life.armor      = data_korpus.armor * 0.1;
     data_life.dying_time = ship->GetCollisionRadius() * 0.1;
     ship->SetLifeData(data_life);
-    
-    CreateKorpusGeometry(ship);
     
     ship->CreateDriveComplexTextureDependedStuff();
     ship->CreateProtectionComplexTextureDependedStuff();

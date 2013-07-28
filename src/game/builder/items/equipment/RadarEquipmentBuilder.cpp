@@ -68,7 +68,7 @@ void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, 
 {     
     if (race_id == TYPE::RACE::NONE_ID)
     {
-        race_id = getRandIntFromVec(RaceInformationCollector::Instance().RACES_GOOD_vec);
+        race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
     if (tech_level == NONE_ID)

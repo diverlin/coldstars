@@ -142,8 +142,6 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     
     spacestation->SetMass(getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));
     
-    CreateKorpusGeometry(spacestation);
-    
     spacestation->CreateDriveComplexTextureDependedStuff();
     spacestation->CreateProtectionComplexTextureDependedStuff();
     
