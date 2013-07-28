@@ -16,14 +16,15 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
 
 #include <vector>
 
-#include "../common/Base.hpp"
-#include "../gui/Cursor.hpp"
-#include "../pilots/Show.hpp"
+#include <common/Base.hpp>
+#include <gui/Cursor.hpp>
+#include <pilots/Show.hpp>
+
 class TurnTimer;
 
 class StarSystem;
@@ -43,6 +44,7 @@ class LazerTraceEffect;
 class ShockWaveEffect;
 class BaseParticleSystem;
 class VerticalFlowText;
+
 
 struct UnresolvedDataUniquePlayer
 {

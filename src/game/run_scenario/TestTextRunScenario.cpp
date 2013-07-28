@@ -70,7 +70,7 @@ void TestTextRunScenario::Init(Player* player)
 	}
 	
 	Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
-	God::Instance().Init(galaxy, galaxy_description);
+	God::Instance().SetGalaxy(galaxy);
 		
 	Vec3<float> center(500, 500, DEFAULT_ENTITY_ZPOS);
 	Vec3<float> angle(0,0,0); 

@@ -16,6 +16,7 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef GOD_HPP
 #define GOD_HPP
 
@@ -31,34 +32,40 @@ class StarSystem;
 class StarSystemDescription;
 class Planet;
 
+class NormalRunScenario;
+
+
 class God
 {
 	public:
 		static God& Instance();
 		~God();
 
-		void Init(Galaxy*, const GalaxyDescription&);
-		void Update(const Date&);
+		void SetGalaxy(Galaxy* galaxy) { m_Galaxy = galaxy; }
 
+        void CreateLife(const GalaxyDescription&) const;
+        void CreateInvasion(const GalaxyDescription&) const;
+        
+		void Update(const Date&);
+		        
     private:
 		God();
 		God(const God&) = delete;
 		God& operator=(const God&) = delete;
    	
-        Date last_update_date;
-        Galaxy* galaxy;
+        Date m_DateLastUpdate;
+        Galaxy* m_Galaxy;
         
         StarSystemsConditionData data_starsystems_condition;
-        
-        void CreateLife(const GalaxyDescription&) const;
-        void CreateInvasion(const GalaxyDescription&) const;
         
         void CreateLifeAtPlanet(Planet*, const StarSystemDescription&) const;
         
         void CreateSpaceStations(StarSystem*, int) const;
-        void CreateShipsInSpace(StarSystem*, int, TYPE::RACE, TYPE::ENTITY subtype_id = TYPE::ENTITY::NONE_ID, TYPE::ENTITY subsubtype_id = TYPE::ENTITY::NONE_ID) const;   
+        void CreateShips(StarSystem*, int, TYPE::RACE race_id = TYPE::RACE::NONE_ID, TYPE::ENTITY subtype_id = TYPE::ENTITY::NONE_ID, TYPE::ENTITY subsubtype_id = TYPE::ENTITY::NONE_ID) const;   
         
         void ProceedInvasion() const;
+        
+    friend class NormalRunScenario;
 }; 
 
 #endif 

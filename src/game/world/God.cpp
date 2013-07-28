@@ -16,32 +16,34 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "God.hpp"
 
-#include "../spaceobjects/IncludeSpaceObjects.hpp"
+#include <world/God.hpp>
 
-#include "../dock/Kosmoport.hpp"
-#include "../dock/NatureLand.hpp"
+#include <common/Logger.hpp>
+#include <common/rand.hpp>
+#include <common/constants.hpp>
+#include <common/Date.hpp>
 
-#include "../builder/dock/KosmoportBuilder.hpp"
-#include "../builder/dock/NatureLandBuilder.hpp"
-#include "../builder/pilots/NpcBuilder.hpp"
-#include "../builder/spaceobjects/ShipBuilder.hpp"
-#include "../builder/spaceobjects/SpaceStationBuilder.hpp"
-#include "../builder/spaceobjects/SatelliteBuilder.hpp"
+#include <world/galaxy.hpp>
+#include <world/Sector.hpp>
+#include <world/starsystem.hpp>
 
-#include "../common/Logger.hpp"
-#include "../common/rand.hpp"
-#include "../common/constants.hpp"
-#include "../common/Date.hpp"
+#include <builder/dock/KosmoportBuilder.hpp>
+#include <builder/dock/NatureLandBuilder.hpp>
+#include <builder/pilots/NpcBuilder.hpp>
+#include <builder/spaceobjects/ShipBuilder.hpp>
+#include <builder/spaceobjects/SpaceStationBuilder.hpp>
+#include <builder/spaceobjects/SatelliteBuilder.hpp>
 
-#include "../world/galaxy.hpp"
-#include "../world/Sector.hpp"
-#include "../world/starsystem.hpp"
+#include <spaceobjects/IncludeSpaceObjects.hpp>
 
-#include "../ai/Task.hpp"
-#include "../pilots/Npc.hpp"
-#include "../struct/GalaxyDescription.hpp"
+#include <dock/Kosmoport.hpp>
+#include <dock/NatureLand.hpp>
+
+#include <ai/Task.hpp>
+#include <pilots/Npc.hpp>
+#include <struct/GalaxyDescription.hpp>
+
 
 God& God::Instance()
 {
@@ -49,36 +51,23 @@ God& God::Instance()
 	return instance;
 }
 
-God::God() 
-{ 
-	last_update_date.day = 0;
-	last_update_date.month = 0;
-	last_update_date.year = 0;
-	
-	galaxy = nullptr;
-}
+God::God()
+:
+m_DateLastUpdate(0,0,0),
+m_Galaxy(nullptr)
+{}
 		
 God::~God()
 {}
 
-void God::Init(Galaxy* galaxy, const GalaxyDescription& galaxy_description)
-{
-	this->galaxy = galaxy;
-	CreateLife(galaxy_description);
-	if (galaxy_description.allow_invasion == true)
-	{
-		CreateInvasion(galaxy_description);
-	}
-}
-
 void God::CreateLife(const GalaxyDescription& galaxy_description) const
 {
-    for(unsigned int i=0; i<galaxy->SECTOR_vec.size(); i++)
+    for(unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
     {
-        for(unsigned int j=0; j<galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
+        for(unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
         {	        
             const StarSystemDescription& starsystem_description = galaxy_description.sector_descriptions[i].starsystem_descriptions[j];
-            StarSystem* starsystem = galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j];
+            StarSystem* starsystem = m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j];
         
             for(unsigned int j=0; j<starsystem->PLANET_vec.size(); j++)
             {        
@@ -94,22 +83,22 @@ void God::CreateInvasion(const GalaxyDescription& galaxy_description) const
 {
 	for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++)
 	{
-		StarSystem* starsystem = galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+		StarSystem* starsystem = m_Galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
 		TYPE::RACE race_id = (TYPE::RACE)getRandInt((int)TYPE::RACE::R6_ID, (int)TYPE::RACE::R7_ID);
         int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
-        CreateShipsInSpace(starsystem, ship_num, race_id);
+        CreateShips(starsystem, ship_num, race_id);
 	}
 }
 
 void God::ProceedInvasion() const
 {
-	StarSystem* starsystem_invade_from = galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
+	StarSystem* starsystem_invade_from = m_Galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
 	if (starsystem_invade_from == nullptr)
 	{
 		return;
 	}
 	
-	StarSystem* starsystem_invade_to   = galaxy->GetClosestSectorTo(starsystem_invade_from->GetSector())->GetClosestStarSystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+	StarSystem* starsystem_invade_to   = m_Galaxy->GetClosestSectorTo(starsystem_invade_from->GetSector())->GetClosestStarSystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
 	if (starsystem_invade_to == nullptr)
 	{
 		return;
@@ -125,14 +114,14 @@ void God::ProceedInvasion() const
 
 void God::Update(const Date& date)
 {
-	if (last_update_date.GetDaysPassSince(date) >= GOD_REST_IN_DAYS)
+	if (m_DateLastUpdate.GetDaysPassSince(date) >= GOD_REST_IN_DAYS)
 	{
 		#if GOD_LOG_ENABLED == 1
 		Logger::Instance().Log("God::Update", GOD_LOG_DIP);
 		#endif
 			
-		galaxy->FillStarSystemsCondition(data_starsystems_condition);
-		last_update_date = date;
+		m_Galaxy->FillStarSystemsCondition(data_starsystems_condition);
+		m_DateLastUpdate = date;
 		
 		ProceedInvasion();
 
@@ -254,7 +243,7 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
     }        
 }
 
-void God::CreateShipsInSpace(StarSystem* starsystem, int ship_num, TYPE::RACE npc_race_id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id) const
+void God::CreateShips(StarSystem* starsystem, int ship_num, TYPE::RACE npc_race_id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id) const
 {
     TYPE::ENTITY npc_subtype_id = TYPE::ENTITY::NONE_ID;
     TYPE::ENTITY npc_subsubtype_id = TYPE::ENTITY::NONE_ID;
@@ -283,10 +272,9 @@ void God::CreateShipsInSpace(StarSystem* starsystem, int ship_num, TYPE::RACE np
         Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         new_ship->BindOwnerNpc(new_npc);
 
-        Vec2<float> center = getRandVec2f(300, 1200);
-        Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
-        Vec3<float> angle(0,0,getRandInt(0, 360));		
-        starsystem->AddVehicle(new_ship, center3, angle, nullptr);
+        Vec3<float> center = getRandXYVec3f(300, 1200, DEFAULT_ENTITY_ZPOS);
+        Vec3<float> angle(0, 0, getRandInt(0, 360));		
+        starsystem->AddVehicle(new_ship, center, angle, nullptr);
     }
 }
 

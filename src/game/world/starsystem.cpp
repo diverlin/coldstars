@@ -16,48 +16,50 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "starsystem.hpp"
-#include "Sector.hpp"
 
-#include "../math/myVector.hpp"
+#include <world/starsystem.hpp>
+#include <world/Sector.hpp>
 
-#include "../effects/particlesystem/ExplosionEffect.hpp"
+#include <math/myVector.hpp>
 
 #include <builder/spaceobjects/BlackHoleBuilder.hpp>
 #include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/pilots/NpcBuilder.hpp>
 
-#include "../common/Collision.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/rand.hpp"
-#include "../common/myStr.hpp"
-#include "../config/config.hpp"
-#include "../render/Render.hpp"
+#include <common/Logger.hpp>
+#include <common/Collision.hpp>
+#include <common/rand.hpp>
+#include <common/myStr.hpp>
 
-#include "../items/others/Bomb.hpp"
+#include <world/EntityManager.hpp>
+
+#include <config/config.hpp>
+
+#include <render/Render.hpp>
+
+#include <slots/ItemSlot.hpp>
+#include <items/others/Bomb.hpp>
 
 #include <spaceobjects/IncludeSpaceObjects.hpp>
 
 #include <pilots/Player.hpp>
 #include <pilots/Npc.hpp>
 
-#include "../effects/DistantNebulaEffect.hpp"
-#include "../effects/DistantStarEffect.hpp"
-#include "../text/VerticalFlowText.hpp" 
-#include "../effects/lazerTrace.hpp"
+#include <effects/DistantNebulaEffect.hpp>
+#include <effects/DistantStarEffect.hpp>
+#include <effects/lazerTrace.hpp>
+#include <effects/particlesystem/ExplosionEffect.hpp>
 
+#include <text/VerticalFlowText.hpp> 
 
-#include "../common/Logger.hpp"
+#include <garbage/EntityGarbage.hpp>
 
-#include "../garbage/EntityGarbage.hpp"
+#include <gui/GuiManager.hpp>
+#include <gui/GuiRadar.hpp>
 
-#include "../gui/GuiManager.hpp"
-#include "../gui/GuiRadar.hpp"
-
-
-#include "../slots/ItemSlot.hpp"
 
 int StarSystem::counter = 0;
+
                 
 StarSystem::StarSystem(int id)
 :
