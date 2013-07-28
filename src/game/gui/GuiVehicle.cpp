@@ -25,7 +25,7 @@
 #include "../slots/ItemSlot.hpp"
 #include "../common/myStr.hpp"
 #include "../common/common.hpp"
-#include "../builder/ItemSlotBuilder.hpp"
+#include <builder/slots/ItemSlotBuilder.hpp>
 
 #include "../pilots/Npc.hpp"
 #include "../spaceobjects/Vehicle.hpp"

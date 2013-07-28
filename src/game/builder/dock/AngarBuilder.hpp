@@ -24,6 +24,11 @@
 
 class Angar;
 
+const unsigned int ANGAR_ITEM_SLOTS_NUM = 10;
+const unsigned int ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM = 6;
+const unsigned int ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM = 6;
+const unsigned int ANGAR_VEHICLE_SLOTS_NUM = ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM + ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM;
+
 
 class AngarBuilder
 {

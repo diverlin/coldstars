@@ -16,17 +16,19 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "PlayerBuilder.hpp"
-#include "NpcBuilder.hpp"
-#include "spaceobjects/ShipBuilder.hpp"
+#include <builder/pilots/PlayerBuilder.hpp>
+#include <builder/pilots/NpcBuilder.hpp>
+#include <builder/spaceobjects/ShipBuilder.hpp>
 
-#include "../common/IdGenerator.hpp"
-#include "../common/Logger.hpp"
-#include "../world/EntityManager.hpp"
+#include <pilots/Player.hpp>
 
-#include "../pilots/Player.hpp"
+#include <spaceobjects/Ship.hpp>
 
-#include "../spaceobjects/Ship.hpp"
+#include <common/IdGenerator.hpp>
+#include <common/Logger.hpp>
+
+#include <world/EntityManager.hpp>
+
  
 PlayerBuilder& PlayerBuilder::Instance()
 {

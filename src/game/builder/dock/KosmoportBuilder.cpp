@@ -16,17 +16,16 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "KosmoportBuilder.hpp"
-#include "../docking/Kosmoport.hpp"
 
-#include "AngarBuilder.hpp"
-#include "StoreBuilder.hpp"
-#include "ShopBuilder.hpp"
-#include "GovermentBuilder.hpp"
+#include <builder/dock/KosmoportBuilder.hpp>
+#include <builder/dock/AngarBuilder.hpp>
+#include <builder/dock/StoreBuilder.hpp>
+#include <builder/dock/ShopBuilder.hpp>
+#include <builder/dock/GovermentBuilder.hpp>
+#include <builder/CommonBuilderHeaders.hpp>
 
-#include "../common/IdGenerator.hpp"
-#include "../common/Logger.hpp"
-#include "../world/EntityManager.hpp"
+#include <docking/Kosmoport.hpp>
+
 
 KosmoportBuilder& KosmoportBuilder::Instance()
 {

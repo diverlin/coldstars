@@ -37,22 +37,21 @@
 
 #include "../items/others/GoodsPack.hpp"
 
-#include "../builder/ItemSlotBuilder.hpp"
-#include "../builder/VehicleSlotBuilder.hpp"
+#include "../builder/slots/ItemSlotBuilder.hpp"
+#include "../builder/slots/VehicleSlotBuilder.hpp"
 
 #include "../builder/world/GalaxyBuilder.hpp"
-#include "../builder/PlayerBuilder.hpp"
 #include "../builder/world/StarSystemBuilder.hpp"
 
+#include "../builder/pilots/PlayerBuilder.hpp"
+#include "../builder/pilots/NpcBuilder.hpp"
 
-#include "../builder/NpcBuilder.hpp"
-
-#include "../builder/NatureLandBuilder.hpp"
-#include "../builder/KosmoportBuilder.hpp"
-#include "../builder/AngarBuilder.hpp"
-#include "../builder/StoreBuilder.hpp"
-#include "../builder/ShopBuilder.hpp"
-#include "../builder/GovermentBuilder.hpp"
+#include "../builder/dock/NatureLandBuilder.hpp"
+#include "../builder/dock/KosmoportBuilder.hpp"
+#include "../builder/dock/AngarBuilder.hpp"
+#include "../builder/dock/StoreBuilder.hpp"
+#include "../builder/dock/ShopBuilder.hpp"
+#include "../builder/dock/GovermentBuilder.hpp"
 
 #include "../docking/Angar.hpp"
 #include "../docking/Store.hpp"

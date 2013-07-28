@@ -35,7 +35,7 @@
 #include <resources/GuiTextureObCollector.hpp>
 
 #include <builder/spaceobjects/BaseVehicleBuilder.hpp>
-#include <builder/ItemSlotBuilder.hpp>
+#include <builder/slots/ItemSlotBuilder.hpp>
 
 #include <items/equipment/RocketEquipment.hpp>
 #include <items/equipment/EnergizerEquipment.hpp>

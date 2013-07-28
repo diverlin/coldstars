@@ -16,19 +16,15 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "AngarBuilder.hpp"
-#include "../slots/VehicleSlot.hpp"
-#include "../docking/Angar.hpp"
-#include "../common/IdGenerator.hpp"
-#include "../world/EntityManager.hpp"
-#include "../common/Logger.hpp"
-#include "../common/rand.hpp"
-#include "../resources/TextureManager.hpp"
 
-#include "../builder/VehicleSlotBuilder.hpp"
-#include "../builder/ItemSlotBuilder.hpp"
+#include <builder/dock/AngarBuilder.hpp>
+#include <builder/slots/VehicleSlotBuilder.hpp>
+#include <builder/slots/ItemSlotBuilder.hpp>
+#include <builder/CommonBuilderHeaders.hpp>
 
-#include <common/constants.hpp>
+#include <slots/VehicleSlot.hpp>
+
+#include <docking/Angar.hpp>
 
 
 AngarBuilder& AngarBuilder::Instance()
