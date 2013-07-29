@@ -19,7 +19,7 @@
 #include "ButtonSingle.hpp"
 
 /*virtual override final*/
-void ButtonSingle::OnPressEventLMB(Player* player)
+void ButtonSingle::OnPressEventMBL(Player* player)
 {
     if (m_pAction)
     {

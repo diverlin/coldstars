@@ -16,6 +16,7 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "GuiManager.hpp"
 #include "UserInput.hpp"
 #include "../slots/ItemSlot.hpp"
@@ -35,6 +36,7 @@
 #include "../gui/GuiSkills.hpp"
 #include "../gui/GuiGalaxyMap.hpp"
 
+
 GuiManager& GuiManager::Instance()
 {
 	static GuiManager instance;
@@ -45,18 +47,18 @@ GuiManager::GuiManager()
 {
 	player = nullptr;
         
-        gui_vehicle_scan = new GuiVehicle(GUI::TYPE::SCAN_VEHICLE_ID);
-        gui_skills       = new GuiSkills();
-        gui_galaxymap    = new GuiGalaxyMap();
-       	slider           = new Slider();  
+	gui_vehicle_scan = new GuiVehicle(GUI::TYPE::SCAN_VEHICLE_ID);
+	gui_skills       = new GuiSkills();
+	gui_galaxymap    = new GuiGalaxyMap();
+	slider           = new Slider();  
 }
 
 GuiManager::~GuiManager()
 {
-        delete gui_vehicle_scan;
-        delete gui_skills;
-        delete gui_galaxymap;
-       	delete slider;  
+	delete gui_vehicle_scan;
+	delete gui_skills;
+	delete gui_galaxymap;
+	delete slider;  
 }
 		
 void GuiManager::SetPlayer(Player* player)
@@ -107,24 +109,24 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill)
 
 void GuiManager::EnterGuiKosmoport()
 {
-        gui_kosmoport.BindKosmoport((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand());
-        gui_kosmoport.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
+	gui_kosmoport.BindKosmoport((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand());
+	gui_kosmoport.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
 }
         
 void GuiManager::ExitGuiKosmoport()
 {    
-        gui_kosmoport.UnbindKosmoport();
-        gui_kosmoport.UnbindSharedGuis();
+	gui_kosmoport.UnbindKosmoport();
+	gui_kosmoport.UnbindSharedGuis();
 }
 
 void GuiManager::EnterGuiSpace()
 {
-        gui_space.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
+	gui_space.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
 }
 
 void GuiManager::ExitGuiSpace()
 {
-        gui_space.UnbindSharedGuis();
+	gui_space.UnbindSharedGuis();
 }
              
 void GuiManager::RunSessionInSpace()
@@ -183,8 +185,8 @@ void GuiManager::RunSessionInSpace()
 
 void GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 {
-        gui_kosmoport.Update(data_mouse);
-        gui_kosmoport.Render(data_mouse);
+	gui_kosmoport.Update(data_mouse);
+	gui_kosmoport.Render(data_mouse);
 }
 
 void GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
@@ -193,7 +195,7 @@ void GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 	Vec2<float> center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);       			
         			
  	UserInput::Instance().UpdateInKosmoport(player);
-     	player->GetCursor().Update(); 
+	player->GetCursor().Update(); 
      	    	       	
 	//bool interaction = gui_kosmoport.UpdateMouseInteractionWithButtons(data_mouse);
 	//gui_kosmoport.ButtonsAction();
@@ -213,17 +215,19 @@ void GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 	//render
 	resetRenderTransformation();
 	gui_natureland.RenderBackground(screen_rect);
-	enable_BLEND();   
+	enable_BLEND();
+	{   
 		gui_natureland.RenderEquipedItemSlots();
 		//gui_natureland.RenderButtons();
 		//gui_natureland.RenderFocusedButtonInfo(data_mouse); 
+	}
 	disable_BLEND(); 
 }
 
 
-void GuiManager::PressEventOnGuiElement(GUI::TYPE subtype_id)
+void GuiManager::PressEventMBL_onGuiElement(GUI::TYPE subtype_id)
 {
-	gui_space.PressEventOnGuiElement(subtype_id); 
+	gui_space.PressEventMBL_onGuiElement(subtype_id); 
 }	
 
 void GuiManager::ResetEventOnGuiElement(GUI::TYPE subtype_id)

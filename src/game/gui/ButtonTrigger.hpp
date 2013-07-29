@@ -28,7 +28,7 @@ class ButtonTrigger : public BaseButton
                
         virtual ~ButtonTrigger() override final {};  
 
-        virtual void OnPressEventLMB(Player*) override final;
+        virtual void OnPressEventMBL(Player*) override final;
         virtual void UpdateUnique(Player*) override final;
         
 	private:

@@ -29,6 +29,7 @@ struct UnresolvedDataBasePlanet
 	int orbit_it;
 };
 
+
 class BasePlanet : public BaseSpaceEntity 
 {
 	public:      
@@ -42,7 +43,9 @@ class BasePlanet : public BaseSpaceEntity
 		const PlanetData& GetDataPlanet() const { return m_DataPlanet; }
         
         void BindParent(const BaseSpaceEntity* const, int);
-		
+	
+		virtual void RenderStuffWhenFocusedInSpace() override final;
+				
 		void RenderMesh_OLD() const;
 				
 	protected:

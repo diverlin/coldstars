@@ -19,23 +19,28 @@
 #include "Player.hpp"
 #include "../config/config.hpp"
 #include "../resources/ShaderCollector.hpp"
+
 #include "../render/Render.hpp"
 #include "../render/Screen.hpp"
+
 #include "../world/starsystem.hpp"
+#include "../world/EntityManager.hpp"
 
 #include "../common/rand.hpp"
 #include "../common/myStr.hpp"
-#include "../world/EntityManager.hpp"
+#include "../common/TurnTimer.hpp"
+#include "../common/Logger.hpp"
 
 #include "../ai/Task.hpp"
 #include "../ai/StateMachine.hpp"
 
 #include "../items/equipment/ScanerEquipment.hpp"
 #include "../items/equipment/GrappleEquipment.hpp"
+
 #include "../parts/WeaponComplex.hpp"
 
-#include "../text/VerticalFlowText.hpp" 
 #include "../effects/lazerTrace.hpp"
+#include "../text/VerticalFlowText.hpp" 
 
 #include "../spaceobjects/RocketBullet.hpp"
 #include "../spaceobjects/Container.hpp"
@@ -47,7 +52,6 @@
 #include "../spaceobjects/Satellite.hpp"
 #include "../spaceobjects/Ship.hpp"
 
-#include "../common/TurnTimer.hpp"
 #include "../pilots/Npc.hpp"
 
 #include "../gui/GuiGalaxyMap.hpp"
@@ -1158,7 +1162,19 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 	{
 			if (cursor.GetMouseData().left_click == true)
 			{
-				gui_element->OnPressEventLMB(this);
+				#if GUI_LOG_ENABLED == 1
+				Logger::Instance().Log("OnPressEventMBL="+getGuiTypeStr(gui_element->GetSubTypeId()), GUI_LOG_DIP);
+				#endif
+	
+				gui_element->OnPressEventMBL(this);
+			}
+			else if (cursor.GetMouseData().right_click == true)
+			{
+				#if GUI_LOG_ENABLED == 1
+				Logger::Instance().Log("OnPressEventMBR="+getGuiTypeStr(gui_element->GetSubTypeId()), GUI_LOG_DIP);
+				#endif
+				
+				gui_element->OnPressEventMBR(this);				
 			}
 	}
 

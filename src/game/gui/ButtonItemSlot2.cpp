@@ -20,7 +20,7 @@
 #include <slots/ItemSlot.hpp>
     
 /*virtual override final*/
-void ButtonItemSlot2::OnPressEventLMB(Player* player)
+void ButtonItemSlot2::OnPressEventMBL(Player* player)
 {
     if (m_Lock == false)
     {

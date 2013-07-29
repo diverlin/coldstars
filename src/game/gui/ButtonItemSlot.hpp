@@ -31,8 +31,9 @@ class ButtonItemSlot : public BaseButtonItemSlot
                
         virtual ~ButtonItemSlot() final {};  
 
-        virtual void OnPressEventLMB(Player*) override final;
-                        
+        virtual void OnPressEventMBL(Player*) override final;
+        virtual void OnPressEventMBR(Player*) override final;
+                                
 	private:
         virtual void UpdateUnique(Player*) override final;	
         

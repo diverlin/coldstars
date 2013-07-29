@@ -64,7 +64,8 @@ class BaseGuiElement
 		void Show() { m_Show = true; }
 		void Hide() { m_Show = false; }
 								
-		virtual void OnPressEventLMB(Player*) {}
+		virtual void OnPressEventMBL(Player*) {}
+		virtual void OnPressEventMBR(Player*) {}
 		virtual void ResetState();
 
 		void Update(Player*);
@@ -97,7 +98,7 @@ class BaseGuiElement
         bool GetAnimationProgramActive() const { return (m_AnimationProgram != nullptr); }
         void DeleteAnimationProgram();
         
-		void PressEventOnGuiElement(GUI::TYPE);
+		void PressEventMBL_onGuiElement(GUI::TYPE);
 		void ResetStateEventOnGuiElement(GUI::TYPE);			
 
 		void UpdateGeometry(const Vec2<float>&, const Vec2<float>&);	

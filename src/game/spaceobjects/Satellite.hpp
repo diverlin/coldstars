@@ -32,7 +32,7 @@ class Satellite : public Vehicle
     	void BindParent(const BaseSpaceEntity* const);
         	
 		virtual void UpdateInSpace(int, bool) override final;
-        	
+        
         void RenderInSpace(float);
         void RenderAtPlanet() const; 
                 

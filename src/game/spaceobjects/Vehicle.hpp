@@ -83,7 +83,7 @@ class Vehicle : public BaseSpaceEntity
         const VehicleNeeds& GetNeeds() const { return m_Needs; }        
         const VehicleKorpusData& GetDataKorpus() const { return m_DataKorpus; }
         
-        virtual int GetGivenExpirience() const;
+        virtual int GetGivenExpirience() const override final;
         bool CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY) const;
         
         void AddItemSlot(ItemSlot*); 
@@ -157,6 +157,7 @@ class Vehicle : public BaseSpaceEntity
 		void UpdateSpecialEffect();
         void UpdateLockedItems();
             
+		virtual void RenderStuffWhenFocusedInSpace() override final;
         virtual void RenderInfoInSpace(const Vec2<float>&, float) override final;
         void RenderInfo(const Vec2<float>&, int, int);
                     
