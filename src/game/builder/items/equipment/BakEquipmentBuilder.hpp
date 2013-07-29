@@ -22,6 +22,7 @@
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <types/TechLevelTypes.hpp>
 
 class BakEquipment;
 
@@ -33,14 +34,14 @@ class BakEquipmentBuilder
 		~BakEquipmentBuilder();
 
         BakEquipment* GetNewBakEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
-        BakEquipment* GetNewBakEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int fuel_max_orig = NONE_ID) const;
+        BakEquipment* GetNewBakEquipment(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int fuel_max_orig = NONE_ID) const;
         	 		                
     private:                
 		BakEquipmentBuilder() {};
 		BakEquipmentBuilder(const BakEquipmentBuilder&) = delete;
 		BakEquipmentBuilder& operator=(const BakEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(BakEquipment*, int, TYPE::RACE, int) const;
+        void CreateNewInternals(BakEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
 }; 
 
 

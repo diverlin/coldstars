@@ -16,18 +16,19 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "DriveEquipmentBuilder.hpp"
+#include <builder/items/equipment/DriveEquipmentBuilder.hpp>
 #include <items/equipment/DriveEquipment.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/rand.hpp>
 #include <common/Logger.hpp>
-#include <types/MeshTypes.hpp>
 
-#include "../../../world/EntityManager.hpp"
-#include "../../../resources/TextureManager.hpp"
-#include "../../../resources/MeshCollector.hpp"
-#include "../../../animations/AnimationConstantRotationAxisX.hpp"
+#include <world/EntityManager.hpp>
+#include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+
+#include <animations/AnimationConstantRotationAxisX.hpp>
+
 
 DriveEquipmentBuilder& DriveEquipmentBuilder::Instance()
 {
@@ -59,7 +60,7 @@ DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipmentTemplate(INTLONGEST i
         return drive_equipment;
 } 
         
-DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipment(int tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
+DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
 {
 	DriveEquipment* drive_equipment = GetNewDriveEquipmentTemplate();
 	CreateNewInternals(drive_equipment, tech_level, race_id, speed_orig, hyper_orig);
@@ -67,16 +68,16 @@ DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipment(int tech_level, TYPE
     return drive_equipment;
 }        
         	
-void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, int tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
+void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
-    if (tech_level == NONE_ID)
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
     {
-        tech_level = 1; 
+        tech_level = TYPE::TECHLEVEL::L0_ID; 
 	}
 
 	Mesh* mesh = nullptr;
@@ -93,8 +94,8 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
 	
     //texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 
 
-    speed_orig      = getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * (1 + EQUIPMENT::DRIVE::SPEED_TECHLEVEL_RATE*tech_level);
-    hyper_orig      = getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX) * (1 + EQUIPMENT::DRIVE::HYPER_TECHLEVEL_RATE*tech_level);
+    speed_orig      = getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * (1 + EQUIPMENT::DRIVE::SPEED_TECHLEVEL_RATE * (int)tech_level);
+    hyper_orig      = getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX) * (1 + EQUIPMENT::DRIVE::HYPER_TECHLEVEL_RATE * (int)tech_level);
 
     ItemCommonData common_data;
     common_data.tech_level 		= tech_level;

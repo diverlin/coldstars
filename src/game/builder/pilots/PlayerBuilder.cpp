@@ -76,7 +76,7 @@ void PlayerBuilder::CreateNewInternals(Player* player) const
     TYPE::ENTITY psubsubtype_id = TYPE::ENTITY::WARRIOR_ID;
     int size_id        = SIZE_4_ID;
     int weapons_num    = 4;
-    int tech_level     = 5;
+    TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::L3_ID;
     
     Npc* npc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id, psubsubtype_id);
     Ship* ship = ShipBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);

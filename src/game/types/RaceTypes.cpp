@@ -33,8 +33,8 @@ std::string getRaceStr(TYPE::RACE race_id)
 
 		case TYPE::RACE::R6_ID:	{ return "RACE6"; break; }
 		case TYPE::RACE::R7_ID:	{ return "RACE7"; break; }	
+
+		default: { return "RACE_UKNOWN"; break; }	
 	}
-	
-	return "RACE_UKNOWN";
 }
 

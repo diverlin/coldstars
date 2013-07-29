@@ -22,6 +22,7 @@
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <types/TechLevelTypes.hpp>
 
 class RadarEquipment;
 
@@ -33,14 +34,14 @@ class RadarEquipmentBuilder
 		~RadarEquipmentBuilder();
 
         RadarEquipment* GetNewRadarEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
-        RadarEquipment* GetNewRadarEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int radius_orig = NONE_ID) const;
+        RadarEquipment* GetNewRadarEquipment(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
     private:
 		RadarEquipmentBuilder() {};
 		RadarEquipmentBuilder(const RadarEquipmentBuilder&) = delete;
 		RadarEquipmentBuilder& operator=(const RadarEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(RadarEquipment*, int, TYPE::RACE, int) const;
+        void CreateNewInternals(RadarEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
 }; 
 
 #endif 

@@ -20,6 +20,8 @@
 #ifndef BASEVEHICLEBUILDER_HPP
 #define BASEVEHICLEBUILDER_HPP
 
+#include <types/TechLevelTypes.hpp>
+
 class Vehicle;
 
 
@@ -29,10 +31,10 @@ class BaseVehicleBuilder
 		static BaseVehicleBuilder& Instance();
 		virtual ~BaseVehicleBuilder() {};
 
-        void EquipEquipment(Vehicle*, int tech_leve = 1) const; 
-        void EquipModules(Vehicle*, int tech_leve = 1) const; 
-        void EquipArtefacts(Vehicle*, int tech_leve = 1) const; 
-        void EquipBomb(Vehicle*, int tech_leve = 1) const; 
+        void EquipEquipment(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const; 
+        void EquipModules(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const; 
+        void EquipArtefacts(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const; 
+        void EquipBomb(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const; 
               
     protected:
 		BaseVehicleBuilder() {};

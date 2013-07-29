@@ -16,13 +16,18 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "RadarEquipmentBuilder.hpp"
-#include "../../../items/equipment/RadarEquipment.hpp"
-#include "../../../common/IdGenerator.hpp"
-#include "../../../common/Logger.hpp"
-#include "../../../world/EntityManager.hpp"
-#include "../../../common/rand.hpp"
-#include "../../../resources/TextureManager.hpp"
+
+#include <builder/items/equipment/RadarEquipmentBuilder.hpp>
+#include <items/equipment/RadarEquipment.hpp>
+
+#include <common/IdGenerator.hpp>
+#include <common/rand.hpp>
+#include <common/Logger.hpp>
+
+#include <world/EntityManager.hpp>
+#include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+
 
 RadarEquipmentBuilder& RadarEquipmentBuilder::Instance()
 {
@@ -56,7 +61,7 @@ RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipmentTemplate(INTLONGEST i
     return radar_equipment;
 } 
   
-RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipment(int tech_level, TYPE::RACE race_id, int radius_orig) const
+RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int radius_orig) const
 {
 	RadarEquipment* radar_equipment = GetNewRadarEquipmentTemplate();
 	CreateNewInternals(radar_equipment, tech_level, race_id, radius_orig);
@@ -64,22 +69,22 @@ RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipment(int tech_level, TYPE
     return radar_equipment;
 } 
     	
-void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, int tech_level, TYPE::RACE race_id, int radius_orig) const
+void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
-    if (tech_level == NONE_ID)
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
     {
-        tech_level = 1; 
+        tech_level = TYPE::TECHLEVEL::L0_ID; 
 	}
 
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID);   
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
 
-    radius_orig     = getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX) * (1 + EQUIPMENT::RADAR::RADIUS_TECHLEVEL_RATE * tech_level);
+    radius_orig     = getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX) * (1 + EQUIPMENT::RADAR::RADIUS_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech_level      = tech_level;

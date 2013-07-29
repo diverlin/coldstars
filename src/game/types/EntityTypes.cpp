@@ -121,7 +121,7 @@ std::string getEntityTypeStr(TYPE::ENTITY type_id)
 		case TYPE::ENTITY::PIRAT_ID: 	{ return "ENTITY::PIRAT_ID"; break; }
 		case TYPE::ENTITY::TRADER_ID: 	{ return "ENTITY::TRADER_ID"; break; }						
 		case TYPE::ENTITY::DIPLOMAT_ID: { return "ENTITY::DIPLOMAT_ID"; break; }	
+
+		default: { return "ENTITY::UNKNOWN ID"; break; }
 	}
-								
-	return "ENTITY::UNKNOWN ID"; 
 }
