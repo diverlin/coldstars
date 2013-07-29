@@ -16,13 +16,16 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "RocketEquipmentBuilder.hpp"
-#include "../../../items/equipment/RocketEquipment.hpp"
-#include "../../../common/IdGenerator.hpp"
-#include "../../../common/Logger.hpp"
-#include "../../../world/EntityManager.hpp"
-#include "../../../common/rand.hpp"
-#include "../../../resources/TextureManager.hpp"
+#include <builder/items/equipment/RocketEquipmentBuilder.hpp>
+#include <items/equipment/RocketEquipment.hpp>
+
+#include <common/IdGenerator.hpp>
+#include <common/rand.hpp>
+#include <common/Logger.hpp>
+
+#include <world/EntityManager.hpp>
+#include <resources/TextureManager.hpp>
+
 
 RocketEquipmentBuilder& RocketEquipmentBuilder::Instance()
 {
@@ -56,7 +59,7 @@ RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipmentTemplate(INTLONGES
     return rocket_equipment;
 } 
 
-RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipment(int tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {
 	RocketEquipment* rocket_equipment = GetNewRocketEquipmentTemplate();
 	CreateNewInternals(rocket_equipment, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
@@ -64,24 +67,24 @@ RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipment(int tech_level, T
     return rocket_equipment;
 } 
         	
-void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipment, int tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
-    if (tech_level == NONE_ID)
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
     {
-        tech_level = 1; 
+        tech_level = TYPE::TECHLEVEL::L0_ID; 
 	}
     
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID);    
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)   
     
-    ammo_max_orig = getRandInt(EQUIPMENT::ROCKET::AMMO_MIN, EQUIPMENT::ROCKET::AMMO_MAX)     * (1 + EQUIPMENT::ROCKET::AMMO_TECHLEVEL_RATE * tech_level);
-    damage_orig   = getRandInt(EQUIPMENT::ROCKET::DAMAGE_MIN, EQUIPMENT::ROCKET::DAMAGE_MAX) * (1 + EQUIPMENT::ROCKET::DAMAGE_TECHLEVEL_RATE * tech_level);
-    radius_orig   = getRandInt(EQUIPMENT::ROCKET::RADIUS_MIN, EQUIPMENT::ROCKET::RADIUS_MAX) * (1 + EQUIPMENT::ROCKET::RADIUS_TECHLEVEL_RATE * tech_level);
+    ammo_max_orig = getRandInt(EQUIPMENT::ROCKET::AMMO_MIN, EQUIPMENT::ROCKET::AMMO_MAX)     * (1 + EQUIPMENT::ROCKET::AMMO_TECHLEVEL_RATE * (int)tech_level);
+    damage_orig   = getRandInt(EQUIPMENT::ROCKET::DAMAGE_MIN, EQUIPMENT::ROCKET::DAMAGE_MAX) * (1 + EQUIPMENT::ROCKET::DAMAGE_TECHLEVEL_RATE * (int)tech_level);
+    radius_orig   = getRandInt(EQUIPMENT::ROCKET::RADIUS_MIN, EQUIPMENT::ROCKET::RADIUS_MAX) * (1 + EQUIPMENT::ROCKET::RADIUS_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech_level 	    = tech_level;

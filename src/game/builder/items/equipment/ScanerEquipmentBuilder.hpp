@@ -22,6 +22,7 @@
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <types/TechLevelTypes.hpp>
 
 class ScanerEquipment;
 
@@ -33,14 +34,14 @@ class ScanerEquipmentBuilder
 		~ScanerEquipmentBuilder();
 
         ScanerEquipment* GetNewScanerEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
-        ScanerEquipment* GetNewScanerEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int scan_orig = NONE_ID) const;
+        ScanerEquipment* GetNewScanerEquipment(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int scan_orig = NONE_ID) const;
         	 		                
     private:
 		ScanerEquipmentBuilder() {};
 		ScanerEquipmentBuilder(const ScanerEquipmentBuilder&) = delete;
 		ScanerEquipmentBuilder& operator=(const ScanerEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(ScanerEquipment*, int, TYPE::RACE, int) const;
+        void CreateNewInternals(ScanerEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
 }; 
 
 #endif 

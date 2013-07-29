@@ -48,9 +48,9 @@ void pureTest2()
 
 void pureTest3()
 {	
-	unsigned long int uli = 5286255174080033224;
-	std::cout<<uli<<std::endl;
-	std::cout<<int2str(uli)<<std::endl;
+	//unsigned long int uli = 5286255174080033224;
+	//std::cout<<uli<<std::endl;
+	//std::cout<<int2str(uli)<<std::endl;
 	
 	exit(0);		
 }

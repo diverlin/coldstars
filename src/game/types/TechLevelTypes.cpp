@@ -20,7 +20,7 @@
 #include "TechLevelTypes.hpp"
 
 
-std::string getRaceStr(TYPE::TECHLEVEL techlevel_id) 
+std::string getTechLevelStr(TYPE::TECHLEVEL techlevel_id) 
 {
 	switch(techlevel_id)
 	{

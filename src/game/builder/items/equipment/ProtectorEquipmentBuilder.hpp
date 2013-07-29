@@ -22,6 +22,7 @@
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <types/TechLevelTypes.hpp>
 
 class ProtectorEquipment;
 
@@ -33,14 +34,14 @@ class ProtectorEquipmentBuilder
 		~ProtectorEquipmentBuilder();
 
         ProtectorEquipment* GetNewProtectorEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
-        ProtectorEquipment* GetNewProtectorEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int protection_orig = NONE_ID) const;
+        ProtectorEquipment* GetNewProtectorEquipment(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int protection_orig = NONE_ID) const;
         	 		                
     private:
 		ProtectorEquipmentBuilder() {};
 		ProtectorEquipmentBuilder(const ProtectorEquipmentBuilder&) = delete;
 		ProtectorEquipmentBuilder& operator=(const ProtectorEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(ProtectorEquipment*, int, TYPE::RACE, int) const;
+        void CreateNewInternals(ProtectorEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
 }; 
 
 #endif 

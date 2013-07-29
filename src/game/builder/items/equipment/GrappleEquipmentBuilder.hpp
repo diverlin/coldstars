@@ -22,6 +22,7 @@
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <types/TechLevelTypes.hpp>
 
 class GrappleEquipment;
 
@@ -33,14 +34,14 @@ class GrappleEquipmentBuilder
 		~GrappleEquipmentBuilder();
 
         GrappleEquipment* GetNewGrappleEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
-        GrappleEquipment* GetNewGrappleEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int strength_orig = NONE_ID, int radius_orig = NONE_ID, int speed_orig = NONE_ID) const;
+        GrappleEquipment* GetNewGrappleEquipment(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int strength_orig = NONE_ID, int radius_orig = NONE_ID, int speed_orig = NONE_ID) const;
         	 		                
     private:
 		GrappleEquipmentBuilder() {};
 		GrappleEquipmentBuilder(const GrappleEquipmentBuilder&) = delete;
 		GrappleEquipmentBuilder& operator=(const GrappleEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(GrappleEquipment*, int, TYPE::RACE, int, int, int) const;
+        void CreateNewInternals(GrappleEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int, int, int) const;
 }; 
 
 #endif 

@@ -16,13 +16,17 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "DroidEquipmentBuilder.hpp"
-#include "../../../items/equipment/DroidEquipment.hpp"
-#include "../../../common/IdGenerator.hpp"
-#include "../../../common/Logger.hpp"
-#include "../../../world/EntityManager.hpp"
-#include "../../../common/rand.hpp"
-#include "../../../resources/TextureManager.hpp"
+
+#include <builder/items/equipment/DroidEquipmentBuilder.hpp>
+#include <items/equipment/DroidEquipment.hpp>
+
+#include <common/IdGenerator.hpp>
+#include <common/rand.hpp>
+#include <common/Logger.hpp>
+
+#include <world/EntityManager.hpp>
+#include <resources/TextureManager.hpp>
+
 
 DroidEquipmentBuilder& DroidEquipmentBuilder::Instance()
 {
@@ -54,7 +58,7 @@ DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipmentTemplate(INTLONGEST i
     return droid_equipment;
 } 
 
-DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipment(int tech_level, TYPE::RACE race_id, int repair_orig) const
+DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int repair_orig) const
 {
 	DroidEquipment* droid_equipment = GetNewDroidEquipmentTemplate();
 	CreateNewInternals(droid_equipment, tech_level, race_id, repair_orig);
@@ -62,22 +66,22 @@ DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipment(int tech_level, TYPE
     return droid_equipment;
 }  
         	
-void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, int tech_level, TYPE::RACE race_id, int repair_orig) const
+void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int repair_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
-    if (tech_level == NONE_ID)
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
     {
-        tech_level = 1; 
+        tech_level = TYPE::TECHLEVEL::L0_ID; 
 	}
 
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID);    
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID, revision_id)
 
-    repair_orig     = getRandInt(EQUIPMENT::DROID::REPAIR_MIN, EQUIPMENT::DROID::REPAIR_MAX) * (1 + EQUIPMENT::DROID::REPAIR_TECHLEVEL_RATE*tech_level);
+    repair_orig     = getRandInt(EQUIPMENT::DROID::REPAIR_MIN, EQUIPMENT::DROID::REPAIR_MAX) * (1 + EQUIPMENT::DROID::REPAIR_TECHLEVEL_RATE*(int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech_level 	    = tech_level;

@@ -2,6 +2,9 @@ cmake_minimum_required (VERSION 2.8)
 
 set(PROJECT run)
 
+set (CMAKE_C_COMPILER gcc-4.7)
+set (CMAKE_CXX_COMPILER g++-4.7)
+
 project (${PROJECT})
 set(BIN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bin/ )
 

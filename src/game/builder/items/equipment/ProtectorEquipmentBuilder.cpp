@@ -16,13 +16,18 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "ProtectorEquipmentBuilder.hpp"
-#include "../../../items/equipment/ProtectorEquipment.hpp"
-#include "../../../common/IdGenerator.hpp"
-#include "../../../common/Logger.hpp"
-#include "../../../world/EntityManager.hpp"
-#include "../../../common/rand.hpp"
-#include "../../../resources/TextureManager.hpp"
+
+#include <builder/items/equipment/ProtectorEquipmentBuilder.hpp>
+#include <items/equipment/ProtectorEquipment.hpp>
+
+#include <common/IdGenerator.hpp>
+#include <common/rand.hpp>
+#include <common/Logger.hpp>
+
+#include <world/EntityManager.hpp>
+#include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+
 
 ProtectorEquipmentBuilder& ProtectorEquipmentBuilder::Instance()
 {
@@ -56,7 +61,7 @@ ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipmentTemplate(
     return protector_equipment;
 } 
    
-ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipment(int tech_level, TYPE::RACE race_id, int protection_orig) const
+ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int protection_orig) const
 {
 	ProtectorEquipment* protector_equipment = GetNewProtectorEquipmentTemplate();
 	CreateNewInternals(protector_equipment, tech_level, race_id, protection_orig);
@@ -64,22 +69,22 @@ ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipment(int tech
     return protector_equipment;
 } 
      	
-void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector_equipment, int tech_level, TYPE::RACE race_id, int protection_orig) const
+void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int protection_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
-    if (tech_level == NONE_ID)
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
     {
-        tech_level = 1; 
+        tech_level = TYPE::TECHLEVEL::L0_ID; 
 	}
 
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID);   
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, revision_id) 
 
-    protection_orig = getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX) * (1 + EQUIPMENT::PROTECTOR::PROTECTION_TECHLEVEL_RATE * tech_level);
+    protection_orig = getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX) * (1 + EQUIPMENT::PROTECTOR::PROTECTION_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech_level 	    = tech_level;

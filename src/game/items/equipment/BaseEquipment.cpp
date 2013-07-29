@@ -58,13 +58,13 @@ void BaseEquipment::PutChildsToGarbage() const
 /* virtual */
 void BaseEquipment::AddCommonInfo()
 {
-    	info.addNameStr("tech_level:");   info.addValueStr( int2str(data_item.tech_level) );
-    	info.addNameStr("modules:");   info.addValueStr( int2str(data_item.modules_num_max) );
-    	info.addNameStr("race:");      info.addValueStr( getRaceStr(race_id) );
-        info.addNameStr("deteriori:"); info.addValueStr( int2str(deterioration) );
-    	info.addNameStr("condition:"); info.addValueStr( int2str(condition) + "/" + int2str(data_item.condition_max) );
-        info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
-    	info.addNameStr("price:");     info.addValueStr( int2str(price) );
+	info.addNameStr("tech_level:");   info.addValueStr( getTechLevelStr(data_item.tech_level) );
+	info.addNameStr("modules:");   info.addValueStr( int2str(data_item.modules_num_max) );
+	info.addNameStr("race:");      info.addValueStr( getRaceStr(race_id) );
+	info.addNameStr("deteriori:"); info.addValueStr( int2str(deterioration) );
+	info.addNameStr("condition:"); info.addValueStr( int2str(condition) + "/" + int2str(data_item.condition_max) );
+	info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
+	info.addNameStr("price:");     info.addValueStr( int2str(price) );
 
 }
 

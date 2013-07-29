@@ -55,7 +55,7 @@ EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipmentTemplate(
     return energizer_equipment;
 } 
     
-EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipment(int tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
+EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
 {
 	EnergizerEquipment* energizer_equipment = GetNewEnergizerEquipmentTemplate();
 	CreateNewInternals(energizer_equipment, tech_level, race_id, energy_max_orig, restoration_orig);
@@ -63,23 +63,23 @@ EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipment(int tech
     return energizer_equipment;
 } 
     	
-void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer_equipment, int tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
+void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
-    if (tech_level == NONE_ID)
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
     {
-        tech_level = 1; 
+        tech_level = TYPE::TECHLEVEL::L0_ID; 
 	}
 
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID);   
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
 
-    energy_max_orig  = getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN,      EQUIPMENT::ENERGIZER::ENERGY_MAX)      * (1 + EQUIPMENT::ENERGIZER::ENERGY_TECHLEVEL_RATE*tech_level);
-    restoration_orig = getRandInt(EQUIPMENT::ENERGIZER::RESTORATION_MIN, EQUIPMENT::ENERGIZER::RESTORATION_MAX) * (1 + EQUIPMENT::ENERGIZER::RESTORATION_TECHLEVEL_RATE*tech_level);
+    energy_max_orig  = getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN,      EQUIPMENT::ENERGIZER::ENERGY_MAX)      * (1 + EQUIPMENT::ENERGIZER::ENERGY_TECHLEVEL_RATE * (int)tech_level);
+    restoration_orig = getRandInt(EQUIPMENT::ENERGIZER::RESTORATION_MIN, EQUIPMENT::ENERGIZER::RESTORATION_MAX) * (1 + EQUIPMENT::ENERGIZER::RESTORATION_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech_level 	     = tech_level;

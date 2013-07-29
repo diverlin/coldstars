@@ -16,13 +16,17 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "ScanerEquipmentBuilder.hpp"
-#include "../../../items/equipment/ScanerEquipment.hpp"
-#include "../../../common/IdGenerator.hpp"
-#include "../../../common/Logger.hpp"
-#include "../../../world/EntityManager.hpp"
-#include "../../../common/rand.hpp"
-#include "../../../resources/TextureManager.hpp"
+
+#include <builder/items/equipment/ScanerEquipmentBuilder.hpp>
+#include <items/equipment/ScanerEquipment.hpp>
+
+#include <common/IdGenerator.hpp>
+#include <common/rand.hpp>
+#include <common/Logger.hpp>
+
+#include <world/EntityManager.hpp>
+#include <resources/TextureManager.hpp>
+
 
 ScanerEquipmentBuilder& ScanerEquipmentBuilder::Instance()
 {
@@ -56,7 +60,7 @@ ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipmentTemplate(INTLONGES
     return scaner_equipment;
 } 
 
-ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipment(int tech_level, TYPE::RACE race_id, int scan_orig) const
+ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int scan_orig) const
 {
 	ScanerEquipment* scaner_equipment = GetNewScanerEquipmentTemplate();
 	CreateNewInternals(scaner_equipment, tech_level, race_id, scan_orig);
@@ -64,22 +68,22 @@ ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipment(int tech_level, T
     return scaner_equipment;
 } 
         	
-void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipment, int tech_level, TYPE::RACE race_id, int scan_orig) const
+void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int scan_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
-    if (tech_level == NONE_ID)
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
     {
-        tech_level = 1; 
+        tech_level = TYPE::TECHLEVEL::L0_ID; 
 	}
 
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);   
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
 
-    scan_orig       = getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECHLEVEL_RATE * tech_level);
+    scan_orig       = getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech_level 	    = tech_level;

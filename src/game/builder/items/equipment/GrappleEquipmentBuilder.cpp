@@ -16,13 +16,18 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "GrappleEquipmentBuilder.hpp"
-#include "../../../items/equipment/GrappleEquipment.hpp"
-#include "../../../common/IdGenerator.hpp"
-#include "../../../common/Logger.hpp"
-#include "../../../world/EntityManager.hpp"
-#include "../../../common/rand.hpp"
-#include "../../../resources/TextureManager.hpp"
+
+#include <builder/items/equipment/GrappleEquipmentBuilder.hpp>
+#include <items/equipment/GrappleEquipment.hpp>
+
+#include <common/IdGenerator.hpp>
+#include <common/rand.hpp>
+#include <common/Logger.hpp>
+
+#include <world/EntityManager.hpp>
+#include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+
 
 GrappleEquipmentBuilder& GrappleEquipmentBuilder::Instance()
 {
@@ -55,7 +60,7 @@ GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipmentTemplate(INTLON
     return grapple_equipment;
 } 
         
-GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipment(int tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
+GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
 {
 	GrappleEquipment* grapple_equipment = GetNewGrappleEquipmentTemplate();
 	CreateNewInternals(grapple_equipment, tech_level, race_id, strength_orig, radius_orig, speed_orig);
@@ -63,24 +68,24 @@ GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipment(int tech_level
     return grapple_equipment;
 } 
         	
-void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equipment, int tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
+void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
-    if (tech_level == NONE_ID)
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
     {
-        tech_level = 1; 
+        tech_level = TYPE::TECHLEVEL::L0_ID; 
 	}
 
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID);   
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID, revision_id) 
 
-    strength_orig   = getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN, EQUIPMENT::GRAPPLE::STRENGTH_MAX) * (1 + EQUIPMENT::GRAPPLE::STRENGTH_TECHLEVEL_RATE*tech_level);
-    radius_orig     = getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN,   EQUIPMENT::GRAPPLE::RADIUS_MAX)   * (1 + EQUIPMENT::GRAPPLE::RADIUS_TECHLEVEL_RATE*tech_level);
-    speed_orig      = getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,    EQUIPMENT::GRAPPLE::SPEED_MAX)    * (1 + EQUIPMENT::GRAPPLE::SPEED_TECHLEVEL_RATE*tech_level);
+    strength_orig   = getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN, EQUIPMENT::GRAPPLE::STRENGTH_MAX) * (1 + EQUIPMENT::GRAPPLE::STRENGTH_TECHLEVEL_RATE * (int)tech_level);
+    radius_orig     = getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN,   EQUIPMENT::GRAPPLE::RADIUS_MAX)   * (1 + EQUIPMENT::GRAPPLE::RADIUS_TECHLEVEL_RATE * (int)tech_level);
+    speed_orig      = getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,    EQUIPMENT::GRAPPLE::SPEED_MAX)    * (1 + EQUIPMENT::GRAPPLE::SPEED_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech_level 	    = tech_level;

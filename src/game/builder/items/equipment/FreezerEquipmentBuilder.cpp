@@ -16,13 +16,15 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "FreezerEquipmentBuilder.hpp"
-#include "../../../items/equipment/FreezerEquipment.hpp"
-#include "../../../common/IdGenerator.hpp"
-#include "../../../common/Logger.hpp"
-#include "../../../world/EntityManager.hpp"
-#include "../../../common/rand.hpp"
-#include "../../../resources/TextureManager.hpp"
+#include <builder/items/equipment/FreezerEquipmentBuilder.hpp>
+#include <items/equipment/FreezerEquipment.hpp>
+
+#include <common/IdGenerator.hpp>
+#include <common/rand.hpp>
+#include <common/Logger.hpp>
+
+#include <world/EntityManager.hpp>
+#include <resources/TextureManager.hpp>
 
 FreezerEquipmentBuilder& FreezerEquipmentBuilder::Instance()
 {
@@ -55,7 +57,7 @@ FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipmentTemplate(INTLON
         return freezer_equipment;
 } 
     
-FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipment(int tech_level, TYPE::RACE race_id, int freeze_orig) const
+FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int freeze_orig) const
 {
 	FreezerEquipment* freezer_equipment = GetNewFreezerEquipmentTemplate();
     CreateNewInternals(freezer_equipment, tech_level, race_id, freeze_orig);
@@ -63,22 +65,22 @@ FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipment(int tech_level
     return freezer_equipment;
 } 
     	
-void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equipment, int tech_level, TYPE::RACE race_id, int freeze_orig) const
+void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int freeze_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
-    if (tech_level == NONE_ID)
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
     {
-        tech_level = 1; 
+        tech_level = TYPE::TECHLEVEL::L0_ID; 
 	}
 
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::FREEZER_EQUIPMENT_ID);    
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
 
-    freeze_orig     = getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX) * (1 + EQUIPMENT::FREEZER::FREEZE_TECHLEVEL_RATE*tech_level);
+    freeze_orig     = getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX) * (1 + EQUIPMENT::FREEZER::FREEZE_TECHLEVEL_RATE*(int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech_level 	    = tech_level;

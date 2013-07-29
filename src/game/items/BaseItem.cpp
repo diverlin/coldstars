@@ -165,7 +165,7 @@ void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, c
     save_ptree.put(root+"race_id", (int)race_id);
     save_ptree.put(root+"parent_subtype_id", (int)parent_subtype_id);
 
-    save_ptree.put(root+"data_item.tech_level",                     data_item.tech_level);        
+    save_ptree.put(root+"data_item.tech_level",                     (int)data_item.tech_level);        
     save_ptree.put(root+"data_item.modules_num_max",                data_item.modules_num_max);
     save_ptree.put(root+"data_item.condition_max",                  data_item.condition_max);                         
     save_ptree.put(root+"data_item.deterioration_normal",           data_item.deterioration_normal);   
@@ -191,7 +191,7 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
     race_id           = (TYPE::RACE)load_ptree.get<int>("race_id");
     parent_subtype_id = (TYPE::ENTITY)load_ptree.get<int>("parent_subtype_id");
 
-    data_item.tech_level           = load_ptree.get<int>("data_item.tech_level");    
+    data_item.tech_level           = (TYPE::TECHLEVEL)load_ptree.get<int>("data_item.tech_level");    
     data_item.modules_num_max      = load_ptree.get<int>("data_item.modules_num_max");
     data_item.condition_max        = load_ptree.get<int>("data_item.condition_max");                         
     data_item.deterioration_normal = load_ptree.get<int>("data_item.deterioration_normal");   

@@ -22,6 +22,7 @@
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <types/TechLevelTypes.hpp>
 
 class RocketEquipment;
 
@@ -33,14 +34,14 @@ class RocketEquipmentBuilder
 		~RocketEquipmentBuilder();
 
         RocketEquipment* GetNewRocketEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
-        RocketEquipment* GetNewRocketEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
+        RocketEquipment* GetNewRocketEquipment(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
         	 		                
     private:
 		RocketEquipmentBuilder() {};
 		RocketEquipmentBuilder(const RocketEquipmentBuilder&) = delete;
 		RocketEquipmentBuilder& operator=(const RocketEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(RocketEquipment*, int, TYPE::RACE, int, int, int) const;
+        void CreateNewInternals(RocketEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int, int, int) const;
 }; 
 
 #endif 

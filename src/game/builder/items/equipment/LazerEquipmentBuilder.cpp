@@ -16,13 +16,17 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "LazerEquipmentBuilder.hpp"
-#include "../../../items/equipment/LazerEquipment.hpp"
-#include "../../../common/IdGenerator.hpp"
-#include "../../../common/Logger.hpp"
-#include "../../../world/EntityManager.hpp"
-#include "../../../common/rand.hpp"
-#include "../../../resources/TextureManager.hpp"
+
+#include <builder/items/equipment/LazerEquipmentBuilder.hpp>
+#include <items/equipment/LazerEquipment.hpp>
+
+#include <common/IdGenerator.hpp>
+#include <common/rand.hpp>
+#include <common/Logger.hpp>
+
+#include <world/EntityManager.hpp>
+#include <resources/TextureManager.hpp>
+
 
 LazerEquipmentBuilder& LazerEquipmentBuilder::Instance()
 {
@@ -56,7 +60,7 @@ LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipmentTemplate(INTLONGEST i
     return lazer_equipment;
 } 
       
-LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipment(int tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
+LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {
 	LazerEquipment* lazer_equipment = GetNewLazerEquipmentTemplate(); 
 	CreateNewInternals(lazer_equipment, tech_level, race_id, damage_orig, radius_orig);
@@ -64,23 +68,23 @@ LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipment(int tech_level, TYPE
     return lazer_equipment;
 } 
   	
-void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, int tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
+void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
 	}
 	
-    if (tech_level == NONE_ID)
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
     {
-        tech_level = 1; 
+        tech_level = TYPE::TECHLEVEL::L0_ID; 
 	}
 
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID);     
 
-    damage_orig     = getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX) * (1 + EQUIPMENT::LAZER::DAMAGE_TECHLEVEL_RATE * tech_level);
-    radius_orig     = getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX) * (1 + EQUIPMENT::LAZER::RADIUS_TECHLEVEL_RATE * tech_level);
+    damage_orig     = getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX) * (1 + EQUIPMENT::LAZER::DAMAGE_TECHLEVEL_RATE * (int)tech_level);
+    radius_orig     = getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX) * (1 + EQUIPMENT::LAZER::RADIUS_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech_level 	    = tech_level;

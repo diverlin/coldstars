@@ -22,6 +22,7 @@
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <types/TechLevelTypes.hpp>
 
 class DroidEquipment;
 
@@ -33,14 +34,14 @@ class DroidEquipmentBuilder
 		~DroidEquipmentBuilder();
 
         DroidEquipment* GetNewDroidEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
-        DroidEquipment* GetNewDroidEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int repair_orig = NONE_ID) const;
+        DroidEquipment* GetNewDroidEquipment(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int repair_orig = NONE_ID) const;
         	 		                
     private:
 		DroidEquipmentBuilder() {};
 		DroidEquipmentBuilder(const DroidEquipmentBuilder&) = delete;
 		DroidEquipmentBuilder& operator=(const DroidEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(DroidEquipment*, int, TYPE::RACE, int) const;
+        void CreateNewInternals(DroidEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
 }; 
 
 #endif 

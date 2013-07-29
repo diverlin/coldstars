@@ -22,6 +22,7 @@
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
+#include <types/TechLevelTypes.hpp>
 
 class DriveEquipment;
 
@@ -33,14 +34,14 @@ class DriveEquipmentBuilder
 		~DriveEquipmentBuilder();
 
         DriveEquipment* GetNewDriveEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
-        DriveEquipment* GetNewDriveEquipment(int tech_level = NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int speed_orig = NONE_ID, int hyper_orig = NONE_ID) const;
+        DriveEquipment* GetNewDriveEquipment(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int speed_orig = NONE_ID, int hyper_orig = NONE_ID) const;
         	 		                
     private:
 		DriveEquipmentBuilder() {};
 		DriveEquipmentBuilder(const DriveEquipmentBuilder&) = delete;
 		DriveEquipmentBuilder& operator=(const DriveEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(DriveEquipment*, int, TYPE::RACE, int, int) const;
+        void CreateNewInternals(DriveEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int, int) const;
 }; 
 
 #endif 

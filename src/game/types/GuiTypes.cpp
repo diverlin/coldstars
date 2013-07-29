@@ -73,7 +73,7 @@ std::string getGuiTypeStr(GUI::TYPE type_id)
 		case GUI::TYPE::GRAPPLE_SLOT_ID: 	{ return "GUI::GRAPPLE_SLOT_ID"; break; }
 		case GUI::TYPE::SCANER_SLOT_ID: 	{ return "GUI::SCANER_SLOT_ID"; break; }
 		case GUI::TYPE::ARTEFACT_SLOT_ID: 	{ return "GUI::ARTEFACT_SLOT_ID"; break; }
+
+		default: 	{ return "GUI::UNKNOWN ID"; break; }
 	}
-								
-	return "GUI::UNKNOWN ID";
 }
