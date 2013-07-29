@@ -21,7 +21,7 @@
 #include "../pilots/Player.hpp"
     
 /*virtual override final*/
-void ButtonTrigger::OnPressEventLMB(Player* player)
+void ButtonTrigger::OnPressEventMBL(Player* player)
 {
     if (m_pAction)
 	{

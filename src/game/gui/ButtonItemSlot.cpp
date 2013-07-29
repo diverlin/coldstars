@@ -26,7 +26,7 @@
     
            
 /* virtual override final */
-void ButtonItemSlot::OnPressEventLMB(Player* player)
+void ButtonItemSlot::OnPressEventMBL(Player* player)
 {
     //if (m_ItemSlot)
     //{    
@@ -44,6 +44,13 @@ void ButtonItemSlot::OnPressEventLMB(Player* player)
     //}         
 
     player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);
+}
+
+         
+/* virtual override final */
+void ButtonItemSlot::OnPressEventMBR(Player* player)
+{	
+    //player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);
 }
 
 /* virtual override final */

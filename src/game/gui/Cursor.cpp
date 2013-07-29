@@ -110,124 +110,12 @@ void Cursor::RenderFocusedObjectStuff() const
 	if (focused_ob != nullptr)
 	{
 		enable_BLEND();
-	
-		switch(focused_ob->GetTypeId())
-		{		
-			case TYPE::ENTITY::BULLET_ID:
-			{
-				case TYPE::ENTITY::ROCKETBULLET_ID:
-				{			
-					break;
-				}
-			}
-			
-			case TYPE::ENTITY::VEHICLE_ID:
-			{
-				switch(focused_ob->GetSubTypeId())
-				{
-					case TYPE::ENTITY::SATELLITE_ID:
-					{
-						Satellite* satellite = (Satellite*)focused_ob;
-						
-                        satellite->GetComplexWeapon().RenderWeaponIcons();
-
-                        satellite->RenderRadarRange(); 
-                        satellite->GetComplexWeapon().RenderWeaponsRange(); 
-                                                
-                        satellite->GetComplexDrive().DrawPath(); 
-						                        
-						break;
-					}
-
-					case TYPE::ENTITY::SHIP_ID:
-					{
-						Ship* ship = (Ship*)focused_ob;
-						
-                        ship->GetComplexWeapon().RenderWeaponIcons();
-                        
-                        ship->RenderRadarRange(); 
-                        ship->GetComplexWeapon().RenderWeaponsRange(); 
-                                            
-                        ship->GetComplexDrive().DrawPath(); 
-						             
-						break;
-					}
-
-					case TYPE::ENTITY::SPACESTATION_ID:
-					{
-						SpaceStation* spacestation = (SpaceStation*)focused_ob;
-                        
-                        spacestation->GetComplexWeapon().RenderWeaponIcons();
-                        
-                        spacestation->RenderRadarRange(); 
-                        spacestation->GetComplexWeapon().RenderWeaponsRange(); 
-                        
-                        spacestation->GetComplexDrive().DrawPath(); 
-                        
-                        break;
-					}
-				}
-
-				
-				break;
-			}
-
-			case TYPE::ENTITY::CONTAINER_ID:
-			{				
-				break;
-			}
-
-			case TYPE::ENTITY::ASTEROID_ID:
-			{
-				((Asteroid*)focused_ob)->GetOrbit().DrawPath();
-								
-				break;
-			}
-
-			case TYPE::ENTITY::BLACKHOLE_ID:
-			{			
-				break;
-			}
-									
-			case TYPE::ENTITY::PLANET_ID:
-			{
-				((Planet*)focused_ob)->GetOrbit().DrawPath();
-								
-				break;
-			}
-			
-			case TYPE::ENTITY::STAR_ID:
-			{
-				break;
-			}		
-
-			case TYPE::ENTITY::EQUIPMENT_ID:
-			{		
-				break;
-			}
-
-			case TYPE::ENTITY::MODULE_ID:
-			{		
-				break;
-			}
-			
-			case TYPE::ENTITY::ARTEFACT_ID:
-			{				
-				break;
-			}
-			
-			case TYPE::ENTITY::BOMB_ID:
-			{				
-				break;
-			}
-		}
-		
-		disable_BLEND();
-	
+	    {
+        	focused_ob->RenderStuffWhenFocusedInSpace();
+        }
+        disable_BLEND();   	
 	}
 }
-
-
 
 void Cursor::RenderFocusedObjectInfo()
 {

@@ -65,6 +65,12 @@ void BasePlanet::UpdatePosition()
 	}
 }
 
+/* virtual override final */
+void BasePlanet::RenderStuffWhenFocusedInSpace()
+{
+	m_Orbit.DrawPath();
+}
+
 void BasePlanet::RenderMesh_OLD() const
 {   	
 	glBindTexture(GL_TEXTURE_2D, GetTextureOb()->texture);

@@ -29,6 +29,7 @@ class TextureOb;
 class Vehicle;
 class AnimationBase;
 
+
 struct UnresolvedDataUniqueBaseSpaceEntity
 {
 	int parent_id;
@@ -70,6 +71,7 @@ class BaseSpaceEntity : public BaseDrawable
 		virtual void Hit(int, bool);
 		void SilentKill();
 		
+		virtual void RenderStuffWhenFocusedInSpace() {};
 		virtual void RenderInfoInSpace(const Vec2<float>&, float);		
 		void RenderInfo(const Vec2<float>&);
 		void virtual UpdateInfo() {}	

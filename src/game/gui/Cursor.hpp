@@ -16,6 +16,7 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef CURSOR_HPP
 #define CURSOR_HPP
 
@@ -24,6 +25,7 @@
 
 class ItemSlot;
 class BaseSpaceEntity;
+
 
 class Cursor : public BaseGuiElement
 {

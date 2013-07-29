@@ -72,23 +72,13 @@ BaseGuiElement* BaseGuiElement::GetGuiElement(GUI::TYPE request_subtype_id) cons
 	return nullptr;
 }   
 	
-void BaseGuiElement::PressEventOnGuiElement(GUI::TYPE subtype_id)
+void BaseGuiElement::PressEventMBL_onGuiElement(GUI::TYPE subtype_id)
 {
 	BaseGuiElement* button = GetGuiElement(subtype_id);
 	if (button != nullptr)
 	{
-    	#if GUI_LOG_ENABLED == 1
-		Logger::Instance().Log("BaseGuiElement::PressEventOnGuiElement="+getGuiTypeStr(button->GetSubTypeId()), GUI_LOG_DIP);
-		#endif
-		button->OnPressEventLMB(m_Player);
+		button->OnPressEventMBL(m_Player);
 	}
-	#if GUI_LOG_ENABLED == 1
-	else
-	{
-		Logger::Instance().Log("BaseGuiElement::PressEventOnGuiElement, unknown subtype_id", GUI_LOG_DIP);
-	}
-	#endif
-
 }	
 
 void BaseGuiElement::ResetStateEventOnGuiElement(GUI::TYPE subtype_id)
@@ -98,12 +88,6 @@ void BaseGuiElement::ResetStateEventOnGuiElement(GUI::TYPE subtype_id)
 	{
 		button->ResetState();
 	}
-	#if GUI_LOG_ENABLED == 1
-	else
-	{
-		Logger::Instance().Log("BaseGuiElement::ResetEventOnGuiElement, unknown subtype_id", GUI_LOG_DIP);
-	}
-	#endif
 }	
 			
 /* virtual */
