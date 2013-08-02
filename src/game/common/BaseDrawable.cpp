@@ -119,18 +119,18 @@ void BaseDrawable::RenderMeshLight(const Vec2<float>& scroll_coords, const Color
 	float ambient_factor = 0.25;
 	
 	glUseProgram(ShaderCollector::Instance().light);
-	
-	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "iLightPos"), -scroll_coords.x, -scroll_coords.y, -200.0);
-	glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "iEyePos"), -scroll_coords.x, -scroll_coords.y, -200.0);
-	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "iDiffColor"), color.r, color.g, color.b, color.a);
-	glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "iAmbientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
-	
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, m_TextureOb->texture);
-	glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "iTexture_0"), 0);
-	
-	renderMesh(m_Mesh, GetCenter(), GetSize(), GetAngle(), m_ZYX);
-	
+	{
+		glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "iLightPos"), -scroll_coords.x, -scroll_coords.y, -200.0);
+		glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "iEyePos"), -scroll_coords.x, -scroll_coords.y, -200.0);
+		glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "iDiffColor"), color.r, color.g, color.b, color.a);
+		glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "iAmbientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
+		
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, m_TextureOb->texture); // ???
+		glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "iTexture_0"), 0);
+		
+		renderMesh(m_Mesh, GetCenter(), GetSize(), GetAngle(), m_ZYX);
+	}
 	glUseProgram(0);
 	glActiveTexture(GL_TEXTURE0);
 }

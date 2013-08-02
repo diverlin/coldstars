@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef CONTAINER_HPP
 #define CONTAINER_HPP
 
 #include <spaceobjects/BaseSpaceEntity.hpp>
 class ItemSlot;
+
 
 class Container : public BaseSpaceEntity
 {

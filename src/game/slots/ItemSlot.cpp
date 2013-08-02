@@ -43,7 +43,9 @@
 #include "../garbage/EntityGarbage.hpp"
 #include "../world/EntityManager.hpp"
 
-ItemSlot::ItemSlot(int id, TYPE::ENTITY subtype_id):
+
+ItemSlot::ItemSlot(INTLONGEST id, TYPE::ENTITY subtype_id)
+:
 turrel(nullptr),	      
 item(nullptr),
 target(nullptr),
@@ -169,7 +171,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
         DropItemToSpace();
         return true;
     }
-    
+
 	if (GetSubTypeId() == TYPE::ENTITY::CARGO_SLOT_ID) 
 	{           
 		this->item = item;
@@ -294,6 +296,11 @@ void ItemSlot::RenderMark(const Box2D& box, TextureOb* textureOb_mark) const
 {
     drawQuad(textureOb_mark, box); 
 }      
+
+void ItemSlot::RenderTargetMark(const Box2D& box, TextureOb* textureOb_mask, TextureOb* textureOb) const
+{
+    drawQuadMasked(textureOb, box, textureOb_mask, 0.5); 
+}     
         
 int ItemSlot::GetItemRadius() const
 {       
@@ -349,21 +356,18 @@ int ItemSlot::GetItemDamage() const
 void ItemSlot::DropItemToSpace()
 {
     TextureOb* textureOb_ = nullptr;  
-            
+           
     switch (item->GetTypeId())
     {
         case TYPE::ENTITY::BOMB_ID: { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::BOMB_ID); break; }
-        default:      { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::CONTAINER_ID); break; }
+        default:      				{ textureOb_ = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::CONTAINER_ID); break; }
     }
-     
+
     Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, item);
-    
     float impulse_strength = 0.5;
     Vec3<float> impulse_dir(getRandXYVec3Unit());
     container->ApplyImpulse(impulse_dir, impulse_strength);        
-      
 	GetOwnerVehicle()->GetStarSystem()->AddContainer(container, GetOwnerVehicle()->GetCenter());
-    
     RemoveItem();
 }
        

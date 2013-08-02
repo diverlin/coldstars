@@ -111,6 +111,11 @@ void Cursor::RenderFocusedObjectStuff() const
 		enable_BLEND();
 	    {
         	focused_ob->RenderStuffWhenFocusedInSpace();
+
+			Box2D box(focused_ob->GetCenter(), focused_ob->GetSize());
+			box.SetScale(1.1, 1.1);
+			box.SetAngle(focused_ob->GetAngle().z);
+			drawQuad(GuiTextureObCollector::Instance().mark_target, box);
         }
         disable_BLEND();   	
 	}

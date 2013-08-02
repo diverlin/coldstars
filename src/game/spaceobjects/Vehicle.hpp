@@ -181,7 +181,8 @@ class Vehicle : public BaseSpaceEntity
         bool TryToGenerateEnergy(int);
         
         void TEST_DamageAndLockRandItems();
-        	
+        void TEST_DropRandomItemToSpace(); 
+        	        
 	protected:
         std::vector<ItemSlot*> m_SlotTotal_vec;
             

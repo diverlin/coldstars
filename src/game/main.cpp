@@ -83,6 +83,7 @@ int main()
         
 	player->GetNpc()->GetVehicle()->SetGodMode(true);
 	//player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
+	player->GetNpc()->GetVehicle()->TEST_DropRandomItemToSpace();
 
 	//Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
 	

@@ -26,6 +26,8 @@
 #include <pilots/Npc.hpp>
 
 #include <spaceobjects/Vehicle.hpp>
+
+#include <common/common.hpp>
     
            
 /* virtual override final */
@@ -66,9 +68,16 @@ void ButtonItemSlot::UpdateUnique(Player* player)
 }
 
 /* virtual override final */
-void ButtonItemSlot::RenderUnique(Player*) const 
+void ButtonItemSlot::RenderUnique(Player* player) const 
 {
     GetItemSlot()->Render(GetBox(), Vec2<float>(0,0), true);
+    
+    if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
+	{
+		RenderMarkEmptySlot(player->GetCursor().GetMouseData().pos_screencoord, getGuiItemSlotType(player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId()));
+	}
+	
+	RenderMarkTarget();		
 }
   
 /* virtual override final */
@@ -76,7 +85,7 @@ void ButtonItemSlot::RenderInfo() const
 {
     if (GetItemSlot() != nullptr)
     {
-        if (GetItemSlot()->GetItem())
+        if (GetItemSlot()->GetItem() != nullptr)
         {
             GetItemSlot()->GetItem()->RenderInfo(GetBox().GetCenter()); 
         }

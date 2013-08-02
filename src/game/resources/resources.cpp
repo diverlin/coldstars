@@ -1301,6 +1301,11 @@ void loadImages()
 	GuiTextureObCollector::Instance().slot_mark_reject =  new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/slot_mark_reject.png", true, &arg);
 }
 
+{
+	std::vector<int> arg;  
+	GuiTextureObCollector::Instance().mark_target =  new TextureOb(TYPE::TEXTURE::NONE_ID, "data/gui/mark_target.png", true, &arg);
+}
+
 }
 
 

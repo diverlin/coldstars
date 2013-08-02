@@ -31,6 +31,9 @@
 #include "../spaceobjects/Vehicle.hpp"
 #include "ButtonItemSlot.hpp"
          
+//    drawQuadMasked(textureOb, box, GuiTextureObCollector::Instance().mask_round ,0.5); 
+         
+         
 GuiVehicle::GuiVehicle(GUI::TYPE subtype_id)
 :
 BaseGuiElement(subtype_id),
@@ -330,75 +333,14 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 
 	return false;
 }
-*/
-    
-void GuiVehicle::RenderMarksForEmptySlots(const MouseData& data_mouse, GUI::TYPE mark_slot_subtype_id) const
-{ 
-	for(auto &child : m_Child_vec)
-	{
-        //if (child->GetTypeId() == GUI::TYPE::BUTTON_ITEMSLOT_ID)
-        ButtonItemSlot* button_itemslot = (ButtonItemSlot*)child;
-		if (button_itemslot->GetEquiped() == false) 
-		{
-            GUI::TYPE buton_subtype_id = button_itemslot->GetSubTypeId();
-            for (TYPE::ENTITY type : SLOT_WEAPON_TYPES)
-            {
-                if (buton_subtype_id == getGuiItemSlotType(type))
-                {
-                   buton_subtype_id = GUI::TYPE::WEAPON_SLOT_ID;
-                   break;
-                }
-            }
-            for (TYPE::ENTITY type : SLOT_CARGO_TYPES)
-            {
-                if (buton_subtype_id == getGuiItemSlotType(type))
-                {
-                   buton_subtype_id = GUI::TYPE::CARGO_SLOT_ID;
-                   break;
-                }
-            }
-            for (TYPE::ENTITY type : SLOT_ARTEFACT_TYPES)
-            {
-                if (buton_subtype_id == getGuiItemSlotType(type))
-                {
-                   buton_subtype_id = GUI::TYPE::ARTEFACT_SLOT_ID;
-                   break;
-                }
-            }
-                                
-			if (buton_subtype_id != GUI::TYPE::GATE_SLOT_ID)
-            {            
-                if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == GUI::TYPE::CARGO_SLOT_ID))  
-                {
-                    button_itemslot->RenderMark(button_itemslot->GetBox(), GuiTextureObCollector::Instance().slot_mark_accept);
-                }
-                else
-                {
-                    if (button_itemslot->GetBox().CheckInteraction(data_mouse.pos_screencoord) == true)
-                    {
-                        button_itemslot->RenderMark(button_itemslot->GetBox(), GuiTextureObCollector::Instance().slot_mark_reject);
-                    }
-                }
-            }
-		}
-	}
-}
-        
+*/   
+     
 /* virtual override final */
 void GuiVehicle::RenderUnique(Player* player) const
 {
-    if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
-    {
-        enable_BLEND();
-        {
-            RenderMarksForEmptySlots(player->GetCursor().GetMouseData(), getGuiItemSlotType(player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId()));
-        }
-        disable_BLEND();
-    }
-    
-    enable_BLEND();
-    {
-        drawQuad(GetTextureOb(), GetBox());
+	enable_BLEND(); 
+	{
+	    drawQuad(GetTextureOb(), GetBox());
     }
     disable_BLEND();
 }        

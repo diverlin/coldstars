@@ -63,18 +63,18 @@ Container* ContainerBuilder::GetNewContainer(TextureOb* textureOb, BaseItem* ite
 	Container* container = GetNewContainerTemplate();
 	CreateNewInternals(container, textureOb, item);
         
-        return container;
+	return container;
 } 
 
 Container* ContainerBuilder::GetNewMineralContainer(int mineral_ammount) const
 {
 	TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MINERAL_ID);   
-        GoodsPack* goods_pack = GetNewGoodsPack(TYPE::ENTITY::MINERALS_ID);
-        goods_pack->Increase(mineral_ammount);
+	GoodsPack* goods_pack = GetNewGoodsPack(TYPE::ENTITY::MINERALS_ID);
+	goods_pack->Increase(mineral_ammount);
 
-        Container* container = GetNewContainer(textureOb, goods_pack);
-        
-        return container;
+	Container* container = GetNewContainer(textureOb, goods_pack);
+	
+	return container;
 } 
        	
 void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textureOb, BaseItem* item) const
@@ -95,7 +95,9 @@ void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textu
     
     container->SetGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
     
-    container->BindItemSlot(GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID));
+    ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
+    
+    container->BindItemSlot(item_slot);
     container->GetItemSlot()->InsertItem(item);
 }
 

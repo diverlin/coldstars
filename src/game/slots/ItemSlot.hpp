@@ -69,7 +69,7 @@ struct UnresolvedDataUniqueItemSlot
 class ItemSlot : public BaseSlot
 {   
 	public:        
-		ItemSlot(int, TYPE::ENTITY);
+		ItemSlot(INTLONGEST, TYPE::ENTITY);
 		virtual ~ItemSlot();                
         
         virtual void PutChildsToGarbage() const;
@@ -124,6 +124,7 @@ class ItemSlot : public BaseSlot
         virtual void Render(const Box2D&, const Vec2<float>&, bool draw_text = true) const;
         virtual void RenderItem(const Box2D&, const Vec2<float>&, bool draw_text = true) const;
         void RenderMark(const Box2D&, TextureOb*) const;
+        void RenderTargetMark(const Box2D&, TextureOb*, TextureOb*) const;
         
         void DropItemToSpace();
         
