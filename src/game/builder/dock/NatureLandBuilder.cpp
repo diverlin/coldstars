@@ -28,6 +28,9 @@
 
 #include <dock/NatureLand.hpp>
 
+#include <common/constants.hpp>
+
+
 NatureLandBuilder& NatureLandBuilder::Instance()
 {
 	static NatureLandBuilder instance;

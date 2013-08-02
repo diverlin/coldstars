@@ -16,13 +16,15 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "rand.hpp"
 #include <stdlib.h>
 #include <cmath>
 
 #include "constants.hpp"
 #include <types/MyInt.hpp>
-#include "../struct/gameStruct.hpp"
+#include <struct/RaceInformationCollector.hpp>
+
 
 int getRandIntFromVec(const std::vector<int>& vec)
 {

@@ -42,8 +42,9 @@
 
 #include <ai/Task.hpp>
 #include <pilots/Npc.hpp>
-#include <struct/GalaxyDescription.hpp>
 
+#include <struct/GalaxyDescription.hpp>
+#include <struct/RaceInformationCollector.hpp>
 
 God& God::Instance()
 {

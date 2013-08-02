@@ -18,10 +18,13 @@
 
 #include "RocketModuleBuilder.hpp"
 #include "../../../items/modules/RocketModule.hpp"
-#include "../../../common/IdGenerator.hpp"
 #include "../../../world/EntityManager.hpp"
-#include "../../../common/Logger.hpp"
-#include "../../../common/rand.hpp"
+
+#include <common/IdGenerator.hpp>
+#include <common/Logger.hpp>
+#include <common/rand.hpp>
+#include <common/constants.hpp>
+
 #include "../../../resources/TextureManager.hpp"
 
 RocketModuleBuilder& RocketModuleBuilder::Instance()

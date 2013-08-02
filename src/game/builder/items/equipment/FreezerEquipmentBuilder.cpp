@@ -16,15 +16,20 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include <builder/items/equipment/FreezerEquipmentBuilder.hpp>
 #include <items/equipment/FreezerEquipment.hpp>
 
 #include <common/IdGenerator.hpp>
-#include <common/rand.hpp>
 #include <common/Logger.hpp>
+#include <common/rand.hpp>
+#include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
 #include <resources/TextureManager.hpp>
+
+#include <struct/RaceInformationCollector.hpp>
+
 
 FreezerEquipmentBuilder& FreezerEquipmentBuilder::Instance()
 {

@@ -16,31 +16,22 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BUTTONITEMSLOT2_HPP
-#define BUTTONITEMSLOT2_HPP
 
-#include "BaseButtonItemSlot.hpp"
+#include "PlaceTypes.hpp"
 
-class ButtonItemSlot2 : public BaseButtonItemSlot
+
+std::string getPlaceStr(TYPE::PLACE place_id) 
 {
-	public:
-        ButtonItemSlot2(GUI::TYPE subtype_id, const std::string& info, ItemSlot* itemslot)
-        :
-        BaseButtonItemSlot(subtype_id, info) 
-        {
-            SetItemSlot(itemslot);
-        }
-               
-        virtual ~ButtonItemSlot2() override final {};  
+	switch(place_id)
+	{
+		case TYPE::PLACE::NONE_ID: 			{ return "PLACE_NONE"; break; }
+		
+		case TYPE::PLACE::SPACE_ID: 		{ return "SPACE_ID"; break; }
+		case TYPE::PLACE::HYPER_SPACE_ID:	{ return "HYPER_SPACE_ID"; break; }
+		case TYPE::PLACE::KOSMOPORT_ID:		{ return "KOSMOPORT_ID"; break; }
+		case TYPE::PLACE::NATURELAND_ID:	{ return "NATURELAND_ID"; break; }
 
-        virtual void OnPressEventMBL(Player*) override final;
-        virtual void ResetState() override final;
-        virtual void UpdateUnique(Player*) override final;
-        
-        virtual void RenderUnique(Player*) const override final; 
-        
-	private:
+		default: { return "PLACE_UKNOWN"; break; }	
+	}
+} 
 
-};
-
-#endif

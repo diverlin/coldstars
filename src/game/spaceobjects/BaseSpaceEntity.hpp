@@ -21,7 +21,9 @@
 #define BASEGAMEENTITY_HPP
 
 #include <common/BaseDrawable.hpp>
+#include <struct/LifeData.hpp>
 #include <text/InfoTable.hpp>
+#include <types/PlaceTypes.hpp>
 
 class StarSystem;
 class Mesh;
@@ -45,7 +47,7 @@ class BaseSpaceEntity : public BaseDrawable
 		void SetLifeData(const LifeData& data_life) { m_DataLife = data_life; }
 
 		void SetStarSystem(StarSystem* starsystem) { m_Starsystem = starsystem; }
-		void SetPlaceTypeId(PLACE::TYPE place_type_id) { m_PlaceTypeId = place_type_id;  }
+		void SetPlaceTypeId(TYPE::PLACE place_type_id) { m_PlaceTypeId = place_type_id;  }
 		void SetMass(int mass) { m_Mass = mass; }
 				
 		void SetGivenExpirience(int given_expirience) { m_GiveExpirience = given_expirience; }                
@@ -53,7 +55,7 @@ class BaseSpaceEntity : public BaseDrawable
 		void SetParent(const BaseSpaceEntity* const parent) { m_Parent = parent; }
 
 		StarSystem* GetStarSystem() const { return m_Starsystem; }           
-		PLACE::TYPE GetPlaceTypeId() const { return m_PlaceTypeId; }
+		TYPE::PLACE GetPlaceTypeId() const { return m_PlaceTypeId; }
 
 		virtual int GetGivenExpirience() const { return m_GiveExpirience; }  // !!!
  
@@ -101,7 +103,7 @@ class BaseSpaceEntity : public BaseDrawable
 		Vec3<float> m_AppliedForce;
 
 		StarSystem* m_Starsystem;
-		PLACE::TYPE m_PlaceTypeId;
+		TYPE::PLACE m_PlaceTypeId;
 
 		InfoTable m_Info;
 

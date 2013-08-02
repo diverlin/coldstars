@@ -16,31 +16,26 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BUTTONITEMSLOT2_HPP
-#define BUTTONITEMSLOT2_HPP
 
-#include "BaseButtonItemSlot.hpp"
+#include <struct/RaceInformationCollector.hpp>
 
-class ButtonItemSlot2 : public BaseButtonItemSlot
+
+RaceInformationCollector& RaceInformationCollector::Instance()
 {
-	public:
-        ButtonItemSlot2(GUI::TYPE subtype_id, const std::string& info, ItemSlot* itemslot)
-        :
-        BaseButtonItemSlot(subtype_id, info) 
-        {
-            SetItemSlot(itemslot);
-        }
-               
-        virtual ~ButtonItemSlot2() override final {};  
+	static RaceInformationCollector instance;
+	return instance;
+}
 
-        virtual void OnPressEventMBL(Player*) override final;
-        virtual void ResetState() override final;
-        virtual void UpdateUnique(Player*) override final;
-        
-        virtual void RenderUnique(Player*) const override final; 
-        
-	private:
-
-};
-
-#endif
+bool RaceInformationCollector::IsGood(TYPE::RACE race_id) const
+{
+	for (unsigned int i=0; i<RACES_GOOD_vec.size(); i++)
+	{
+		if (race_id == RACES_GOOD_vec[i])
+		{
+			return true;
+		}
+	}
+	
+	return false;
+}		
+	

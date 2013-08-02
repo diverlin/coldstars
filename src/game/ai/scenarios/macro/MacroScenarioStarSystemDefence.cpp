@@ -19,12 +19,17 @@
 #include "MacroScenarioStarSystemDefence.hpp"
 #include "../../../pilots/Npc.hpp"
 #include "../../../spaceobjects/Vehicle.hpp"
+
 #include "../../../common/constants.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/myStr.hpp"
+
 #include "../../Task.hpp"
 #include "../../../world/starsystem.hpp"
 #include "../../../ai/StateMachine.hpp"
+
+#include <struct/RaceInformationCollector.hpp>
+
 
 MacroScenarioStarSystemDefence::MacroScenarioStarSystemDefence() 
 {
@@ -63,10 +68,10 @@ void MacroScenarioStarSystemDefence::UpdateInStaticInSpace(Npc* npc) const
 		{
 			if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != TYPE::AISCENARIO::MICRO_DESTROY_ID)
 			{       	
-			        Vehicle* target_vehicle = npc->GetObservation().GetRandVisibleVehicle(RaceInformationCollector::Instance().RACES_GOOD_vec);
-            			if (target_vehicle != nullptr)
-            			{
-            				Task microtask(TYPE::AISCENARIO::MICRO_DESTROY_ID, target_vehicle->GetId());
+		        Vehicle* target_vehicle = npc->GetObservation().GetRandVisibleVehicle(RaceInformationCollector::Instance().RACES_GOOD_vec);
+				if (target_vehicle != nullptr)
+				{
+					Task microtask(TYPE::AISCENARIO::MICRO_DESTROY_ID, target_vehicle->GetId());
 					npc->GetStateMachine().SetCurrentMicroTask(microtask);
 					
 					return;

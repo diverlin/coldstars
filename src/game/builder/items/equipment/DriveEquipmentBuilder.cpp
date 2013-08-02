@@ -20,14 +20,18 @@
 #include <items/equipment/DriveEquipment.hpp>
 
 #include <common/IdGenerator.hpp>
-#include <common/rand.hpp>
 #include <common/Logger.hpp>
+#include <common/rand.hpp>
+#include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
 
 #include <animations/AnimationConstantRotationAxisX.hpp>
+
+#include <struct/RaceInformationCollector.hpp>
+#include <render/Mesh.hpp>
 
 
 DriveEquipmentBuilder& DriveEquipmentBuilder::Instance()
@@ -47,17 +51,17 @@ DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipmentTemplate(INTLONGEST i
 		id = EntityIdGenerator::Instance().GetNextId();
 	}
 
-        try 
-        { 
-        	drive_equipment = new DriveEquipment(id);
-        }
-        catch(std::bad_alloc)
-        {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        EntityManager::Instance().RegisterEntity(drive_equipment);
-        
-        return drive_equipment;
+	try 
+	{ 
+		drive_equipment = new DriveEquipment(id);
+	}
+	catch(std::bad_alloc)
+	{
+		Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+	}
+	EntityManager::Instance().RegisterEntity(drive_equipment);
+	
+	return drive_equipment;
 } 
         
 DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const

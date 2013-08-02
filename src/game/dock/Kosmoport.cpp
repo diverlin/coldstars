@@ -92,7 +92,7 @@ bool Kosmoport::GetPermissionToLand() const
 /* virtual */
 bool Kosmoport::AddVehicle(Vehicle* vehicle)
 {        
-    vehicle->SetPlaceTypeId(PLACE::TYPE::KOSMOPORT_ID); 
+    vehicle->SetPlaceTypeId(TYPE::PLACE::KOSMOPORT_ID); 
     angar->AddVehicle(vehicle);  
     
     vehicle->SetLand(this);        

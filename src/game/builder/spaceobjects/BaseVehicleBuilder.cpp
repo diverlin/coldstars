@@ -159,10 +159,11 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
 
 void BaseVehicleBuilder::EquipEquipment(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) const
 {
-    unsigned int weapons_num = getRandInt(1, vehicle->GetDataKorpus().slot_weapon_num);
+    unsigned int weapons_num = getRandInt(vehicle->GetDataKorpus().slot_weapon_num/2, vehicle->GetDataKorpus().slot_weapon_num);
     for (unsigned int i=0; i<weapons_num; i++)
     {
-        if (getRandBool())
+		bool rand = 0; //getRandBool();
+        if (rand)
         {
             RocketEquipment* rocket_equipment = RocketEquipmentBuilder::Instance().GetNewRocketEquipment(tech_level);
             if (vehicle->AddAndManageItem(rocket_equipment) == false)

@@ -40,7 +40,6 @@ class BaseGuiElement
 		void SetLabel(const std::string& label) { m_Label = label; }
 		
 		void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; } 		
-		void SetPlayer(Player* player) { m_Player = player; } // depr
 		
         void SetSize(Vec2<float> size) { m_Box.SetSize(size); };
         	
@@ -48,9 +47,11 @@ class BaseGuiElement
 		GUI::TYPE GetSubTypeId() const { return m_Subtype_id; }
 					
 		const Box2D& GetBox() const { return m_Box; }
+		Box2D& GetBox() { return m_Box; } // !!!
+				
 		TextureOb* GetTextureOb() const { return m_TextureOb; }
 				
-        bool GetLock() const { return m_Lock; }
+        bool GetLock() const { return m_Locked; }
         bool GetPressed() const { return m_Pressed; }
         
         bool IsAnimationProgramActive() const { return (m_AnimationProgram != nullptr); }
@@ -73,32 +74,28 @@ class BaseGuiElement
 		virtual void RenderInfo() const {};
 				
 	protected:
-		GUI::TYPE m_Type_id;
-		GUI::TYPE m_Subtype_id;
-		
-		bool m_Lock;
-		bool m_Pressed;
-		bool m_Show;
-		bool m_Root;
-		
-		Box2D m_Box;
-		Player* m_Player; // depr
-				
-		TextureOb* m_TextureOb;	
-		std::string m_Info; 
-		std::string m_Label; 
-		
 		std::vector<BaseGuiElement*> m_Child_vec;
 
+		void SetSubTypeId(GUI::TYPE subtype_id) { m_Subtype_id = subtype_id; }
+		
+		void SetBox(const Box2D& box) { m_Box = box; }
+		
 		void SetScale(const Vec2<float>& scale) { m_Box.SetScale(scale); }		
         void SetRoot(bool root) { m_Root = root; }
-                
+        void SetPressed(bool pressed) { m_Pressed = pressed; } 
+        void SetLocked(bool locked) { m_Locked = locked; } 
+                 
 		void SetAnimationProgram(AnimationEffect2D* animation_program) { m_AnimationProgram = animation_program; }
 
+		const std::string& GetInfo() const { return m_Info; }
+		const std::string& GetLabel() const { return m_Label; }
+				
+		bool GetLocked() const { return m_Locked; }
+				
         bool GetAnimationProgramActive() const { return (m_AnimationProgram != nullptr); }
         void DeleteAnimationProgram();
         
-		void PressEventMBL_onGuiElement(GUI::TYPE);
+		void PressEventMBL_onGuiElement(GUI::TYPE, Player*);
 		void ResetStateEventOnGuiElement(GUI::TYPE);			
 
 		void UpdateGeometry(const Vec2<float>&, const Vec2<float>&);	
@@ -110,6 +107,20 @@ class BaseGuiElement
 		void RenderCommon(Player*) const;
        		       	
 	private: 
+		TextureOb* m_TextureOb;	
+		std::string m_Info; 
+		std::string m_Label; 
+		
+		GUI::TYPE m_Type_id;
+		GUI::TYPE m_Subtype_id;
+		
+		Box2D m_Box;
+			
+		bool m_Locked;
+		bool m_Pressed;
+		bool m_Show;
+		bool m_Root;
+		
         Vec2<float> m_Offset;      
         AnimationEffect2D* m_AnimationProgram;
         

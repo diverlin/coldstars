@@ -16,13 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GAMESTRUCT_H
-#define GAMESTRUCT_H
 
-#include "../render/Mesh.hpp"
-#include "../math/myVector.hpp"
-#include "../common/constants.hpp"
+#ifndef RACEINFORMATIONCOLLECTOR_HPP
+#define RACEINFORMATIONCOLLECTOR_HPP
+
+#include <vector>
 #include <types/RaceTypes.hpp>
+#include <types/EntityTypes.hpp>
 
 class RaceInformationCollector
 {
@@ -49,60 +49,7 @@ class RaceInformationCollector
 	private:
 		RaceInformationCollector() {};
 		RaceInformationCollector(const RaceInformationCollector&) = delete;
-		RaceInformationCollector& operator=(const RaceInformationCollector&) = delete;
-	
+		RaceInformationCollector& operator=(const RaceInformationCollector&) = delete;	
 }; 
-
-
-struct LifeData
-{
-	bool is_alive;
-	unsigned int armor;
-
-	int life_time;
-	int dying_time;
-
-	bool garbage_ready;
-
-	LifeData()
-    :
-	is_alive(true),
-    armor(1),
-    life_time(0),
-    dying_time(0),
-    garbage_ready(false) 
-    {}        
-};
-
-
-
-struct ParticleData
-{
-	ParticleData();
-
-	float size_start;
-	float size_end;
-	float d_size;
-
-	float velocity_start;
-	float velocity_end;
-	float d_velocity;
-
-	Color4<float> color_start;
-	Color4<float> color_end;
-	Color4<float> color_delta;
-
-	int frame;
-};
-
-
-
-struct AngleData
-{
-	AngleData();
-
-	Vec3<float> angle;
-	Vec3<float> d_angle;
-};
 
 #endif

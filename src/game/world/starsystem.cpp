@@ -57,6 +57,8 @@
 #include <gui/GuiManager.hpp>
 #include <gui/GuiRadar.hpp>
 
+#include <struct/RaceInformationCollector.hpp>
+
 
 int StarSystem::counter = 0;
 
@@ -73,7 +75,7 @@ sector(nullptr)
 	SetId(id);
 	SetTypeId(TYPE::ENTITY::STARSYSTEM_ID); 
     
-    SetPlaceTypeId(PLACE::TYPE::SPACE_ID);
+    SetPlaceTypeId(TYPE::PLACE::SPACE_ID);
     
     condition_id = ENTITY::STARSYSTEM::CONDITION::SAFE_ID;
 
@@ -175,7 +177,7 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const Vec3<float>& center, const V
 	}
 	#endif
 	
-    vehicle->SetPlaceTypeId(PLACE::TYPE::SPACE_ID);
+    vehicle->SetPlaceTypeId(TYPE::PLACE::SPACE_ID);
     vehicle->SetStarSystem(this);  
     
     vehicle->SetCenter(center); 
@@ -199,7 +201,7 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const Vec3<float>& center, const V
 
 void StarSystem::AddBullet(RocketBullet* rocket, const Vec3<float>& center, const Vec3<float>& angle)
 {
-    rocket->SetPlaceTypeId(PLACE::TYPE::SPACE_ID);
+    rocket->SetPlaceTypeId(TYPE::PLACE::SPACE_ID);
     rocket->SetStarSystem(this);  
 			
 	rocket->SetCenter(center); 
@@ -214,7 +216,7 @@ void StarSystem::Add(BasePlanet* object, const BaseSpaceEntity* parent, int it)
     object->BindParent(parent, it);
     
     object->SetStarSystem(this);
-    object->SetPlaceTypeId(PLACE::TYPE::SPACE_ID);   
+    object->SetPlaceTypeId(TYPE::PLACE::SPACE_ID);   
         
 	switch(object->GetTypeId())
 	{
@@ -255,7 +257,7 @@ void StarSystem::AddContainer(Container* container, const Vec3<float>& center)
 	#endif
 	
 	container->SetStarSystem(this);
-        container->SetPlaceTypeId(PLACE::TYPE::SPACE_ID);
+        container->SetPlaceTypeId(TYPE::PLACE::SPACE_ID);
     	container->SetCenter(center);
         
         CONTAINER_vec.push_back(container);
@@ -264,7 +266,7 @@ void StarSystem::AddContainer(Container* container, const Vec3<float>& center)
 void StarSystem::Add(BlackHole* blackhole, const Vec3<float>& center)
 {
 	blackhole->SetStarSystem(this);
-        blackhole->SetPlaceTypeId(PLACE::TYPE::SPACE_ID);
+        blackhole->SetPlaceTypeId(TYPE::PLACE::SPACE_ID);
 	blackhole->SetCenter(center);
 	BLACKHOLE_vec.push_back(blackhole);
 }    
@@ -917,7 +919,7 @@ void StarSystem::ManageUnavaliableObjects_s()
 {               
     for (std::vector<Vehicle*>::iterator it=VEHICLE_vec.begin(); it<VEHICLE_vec.end(); ++it)
     {
-        if ((*it)->GetPlaceTypeId() != PLACE::TYPE::SPACE_ID)
+        if ((*it)->GetPlaceTypeId() != TYPE::PLACE::SPACE_ID)
         {	
             #if ENTITY_TRANSACTION_LOG_ENABLED == 1
             Logger::Instance().Log("starsysten("+int2str(GetId())+ ")::RemoveVehicle(" + int2str((*it)->GetId())+")");

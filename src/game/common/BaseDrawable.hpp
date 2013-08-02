@@ -21,11 +21,13 @@
 #define BASEDRAWABLE_HPP
 
 #include <common/Orientation.hpp>
-#include <struct/gameStruct.hpp>
+#include <types/MeshTypes.hpp>
+//#include <struct/gameStruct.hpp>
 
 class Mesh;
 class TextureOb;
 class AnimationBase;
+
 
 struct UnresolvedDataUniqueBaseDrawable
 {
@@ -46,7 +48,7 @@ class BaseDrawable : public Orientation
         void SetColor(const Color4<float>& color) { m_Color = color; }
                 		
 		bool Is3D() const 				{ return (m_Mesh != nullptr); }
-		const Vec3<float>& GetBoundaryBox() const 	{ return m_Mesh->GetBoundaryBox(); }
+		//const Vec3<float>& GetBoundaryBox() const 	{ return m_Mesh->GetBoundaryBox(); }
 		const Mesh* const GetMesh() const 	{ return m_Mesh; }
                 
 		void SetZYX(bool ZYX)    			{ m_ZYX = ZYX; }
@@ -85,7 +87,6 @@ class BaseDrawable : public Orientation
 		AnimationBase* m_AnimationProgram;
         				
 	friend class BaseVehicleBuilder;
-
 };
 
 #endif 

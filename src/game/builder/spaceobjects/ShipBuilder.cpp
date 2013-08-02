@@ -16,9 +16,14 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "ShipBuilder.hpp"
 #include "../CommonBuilderHeaders.hpp"
-#include "../../spaceobjects/Ship.hpp"
+#include <spaceobjects/Ship.hpp>
+
+#include <render/Mesh.hpp>
+
+#include <struct/RaceInformationCollector.hpp>
 
 
 ShipBuilder& ShipBuilder::Instance()

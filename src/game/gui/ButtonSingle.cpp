@@ -26,9 +26,9 @@ void ButtonSingle::OnPressEventMBL(Player* player)
 	    m_pAction(player);
     }
     
-	if (m_Lock == false)
+	if (GetLock() == false)
 	{
-		m_Pressed = true;
+		SetPressed(true);
 		ShadeOn();
 	}
 }
@@ -36,7 +36,7 @@ void ButtonSingle::OnPressEventMBL(Player* player)
 /*virtual override final*/   		
 void ButtonSingle::UpdateUnique(Player* player)
 {
-	if (m_Lock == false)
+	if (GetLocked() == false)
 	{
 		if (m_Alpha < 1.0f)
 		{
@@ -48,6 +48,6 @@ void ButtonSingle::UpdateUnique(Player* player)
 		}
 	}
 	
-	m_Pressed = false;
+	SetPressed(false);
 }
       

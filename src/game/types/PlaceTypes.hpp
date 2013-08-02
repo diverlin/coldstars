@@ -16,37 +16,22 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BASEBUTTONITEMSLOT_HPP
-#define BASEBUTTONITEMSLOT_HPP
 
-#include "BaseButton.hpp"
-class ItemSlot;
+#ifndef PLACETYPES_HPP
+#define PLACETYPES_HPP
 
-class BaseButtonItemSlot : public BaseButton
+#include <string>
+
+
+namespace TYPE
 {
-	public:
-        BaseButtonItemSlot(GUI::TYPE subtype_id, const std::string& info)
-        :
-        BaseButton(subtype_id, info), 
-        m_ItemSlot(nullptr) 
-        {}
-               
-        virtual ~BaseButtonItemSlot() {};  
-        
-        bool GetEquiped() const;
-        
-        void SetItemSlot(ItemSlot* item_slot) { m_ItemSlot = item_slot; }
- 
-        void RenderMark(const Box2D&, TextureOb*) const;
-           
-    protected:
-        ItemSlot* const GetItemSlot() const { return m_ItemSlot; }
+    enum class PLACE
+    {
+        NONE_ID, SPACE_ID, HYPER_SPACE_ID, KOSMOPORT_ID, NATURELAND_ID
+    };
+}
 
-        void UpdateAnimationProgram();
-                
-    private:
-        ItemSlot* m_ItemSlot;    
-	
-};
+std::string getPlaceStr(TYPE::PLACE); 
 
 #endif
+

@@ -19,7 +19,8 @@
 #include "init.hpp"
 #include "resources.hpp"
 #include "TextureManager.hpp"
-#include <struct/gameStruct.hpp>
+
+#include <struct/RaceInformationCollector.hpp>
 
 #include "../ai/aiModel/AiModelCollector.hpp"
 #include "../ai/aiModel/AiModelRanger.hpp"

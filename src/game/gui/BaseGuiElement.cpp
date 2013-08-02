@@ -30,13 +30,13 @@ std::map<GUI::TYPE, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
    
 BaseGuiElement::BaseGuiElement(GUI::TYPE subtype_id, const std::string& info, TextureOb* textureOb)
 :
+m_TextureOb(textureOb),
+m_Info(info),
 m_Subtype_id(subtype_id),
-m_Lock(false),
+m_Locked(false),
 m_Pressed(false),
 m_Show(true),
 m_Root(true),
-m_TextureOb(textureOb),
-m_Info(info),
 m_AnimationProgram(nullptr)
 {}
 
@@ -72,12 +72,12 @@ BaseGuiElement* BaseGuiElement::GetGuiElement(GUI::TYPE request_subtype_id) cons
 	return nullptr;
 }   
 	
-void BaseGuiElement::PressEventMBL_onGuiElement(GUI::TYPE subtype_id)
+void BaseGuiElement::PressEventMBL_onGuiElement(GUI::TYPE subtype_id, Player* player)
 {
 	BaseGuiElement* button = GetGuiElement(subtype_id);
 	if (button != nullptr)
 	{
-		button->OnPressEventMBL(m_Player);
+		button->OnPressEventMBL(player);
 	}
 }	
 
@@ -94,7 +94,6 @@ void BaseGuiElement::ResetStateEventOnGuiElement(GUI::TYPE subtype_id)
 void BaseGuiElement::ResetState()
 {
 	m_Pressed = false;
-	m_Lock = false;
 }
 
 void BaseGuiElement::AddChild(BaseGuiElement* child, const Vec2<float>& offset) 

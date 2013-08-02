@@ -199,7 +199,7 @@ bool DriveComplex::ValidateTarget() const
 {
     if (target->GetAlive() == true)
 	{
-		if (target->GetPlaceTypeId() == PLACE::TYPE::SPACE_ID)
+		if (target->GetPlaceTypeId() == TYPE::PLACE::SPACE_ID)
 		{
 			return true;
 		}

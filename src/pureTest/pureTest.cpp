@@ -2,7 +2,6 @@
 #include <vector>
 #include <iostream>
 #include "items/equipment/RadarEquipment.hpp"
-#include "struct/gameStruct.hpp"
 #include "common/rand.hpp"
 #include "common/myStr.hpp"
 

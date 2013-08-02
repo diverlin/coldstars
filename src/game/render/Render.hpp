@@ -59,6 +59,7 @@ void drawQuad(TextureOb* texOb,
 		 float angle);
 		 	 
 void drawQuad(TextureOb*, const Box2D&);
+void drawQuadMasked(TextureOb*, const Box2D&, TextureOb*, float);
 		 		 		 
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
 
