@@ -47,8 +47,6 @@ class GuiVehicle : public BaseGuiElement
         Vehicle* m_Vehicle;
 
         virtual void RenderUnique(Player*) const override final;            
-                    
-        void RenderMarksForEmptySlots(const MouseData&, GUI::TYPE) const;  
         
         void CreateKorpusGui(Vehicle*, float);
         void CreateItemSlotsGeometry(Vehicle*, float);

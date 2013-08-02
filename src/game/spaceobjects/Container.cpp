@@ -59,9 +59,9 @@ void Container::PutChildsToGarbage() const
 	EntityGarbage::Instance().Add(m_ItemSlot);
 }
         	
-void Container::BindItemSlot(ItemSlot* m_ItemSlot) 
+void Container::BindItemSlot(ItemSlot* item_slot) 
 { 
-	m_ItemSlot = m_ItemSlot; 
+	m_ItemSlot = item_slot; 
 	m_ItemSlot->SetOwner(this); 
 }
 

@@ -21,7 +21,13 @@
 #include <slots/ItemSlot.hpp>
 #include <items/BaseItem.hpp>
 
+#include <resources/GuiTextureObCollector.hpp>
+
 #include <render/AnimationEffect2D.hpp> 
+#include <render/Render.hpp> 
+
+#include <common/common.hpp>
+
     
 bool BaseButtonItemSlot::GetEquiped() const
 {
@@ -73,10 +79,66 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
     }
 }
 
-void BaseButtonItemSlot::RenderMark(const Box2D& box, TextureOb* textureOb) const
+void BaseButtonItemSlot::RenderMarkEmptySlot(const Vec2<float>& mouse_screen_coord_pos, GUI::TYPE mark_slot_subtype_id) const
 {
     if (m_ItemSlot != nullptr)
     {
-        m_ItemSlot->RenderMark(box, textureOb);
+		if (GetEquiped() == false) 
+		{
+            GUI::TYPE buton_subtype_id = GetSubTypeId();
+            for (TYPE::ENTITY type : SLOT_WEAPON_TYPES)
+            {
+                if (buton_subtype_id == getGuiItemSlotType(type))
+                {
+                   buton_subtype_id = GUI::TYPE::WEAPON_SLOT_ID;
+                   break;
+                }
+            }
+            for (TYPE::ENTITY type : SLOT_CARGO_TYPES)
+            {
+                if (buton_subtype_id == getGuiItemSlotType(type))
+                {
+                   buton_subtype_id = GUI::TYPE::CARGO_SLOT_ID;
+                   break;
+                }
+            }
+            for (TYPE::ENTITY type : SLOT_ARTEFACT_TYPES)
+            {
+                if (buton_subtype_id == getGuiItemSlotType(type))
+                {
+                   buton_subtype_id = GUI::TYPE::ARTEFACT_SLOT_ID;
+                   break;
+                }
+            }
+                                
+			if (buton_subtype_id != GUI::TYPE::GATE_SLOT_ID)
+            {            
+                if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == GUI::TYPE::CARGO_SLOT_ID))  
+                {
+                   m_ItemSlot->RenderMark(GetBox(), GuiTextureObCollector::Instance().slot_mark_accept);
+                }
+                else
+                {
+                    if (GetBox().CheckInteraction(mouse_screen_coord_pos) == true)
+                    {
+                        m_ItemSlot->RenderMark(GetBox(), GuiTextureObCollector::Instance().slot_mark_reject);
+                    }
+                }
+            }
+		}
     }
+}
+
+void BaseButtonItemSlot::RenderMarkTarget() const
+{
+    if (m_ItemSlot != nullptr)
+    {
+        if (m_ItemSlot->GetItem() != nullptr)
+        {  
+			Box2D box = GetBox();
+			box.SetScale(1.1, 1.1);
+			//drawQuadMasked(GuiTextureObCollector::Instance().slot_mark_accept, box, GuiTextureObCollector::Instance().mask_round, 1.0-0.5);
+			drawQuad(GuiTextureObCollector::Instance().mark_target, box);
+		}
+	}
 }

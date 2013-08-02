@@ -36,14 +36,15 @@ class BaseButtonItemSlot : public BaseButton
         bool GetEquiped() const;
         
         void SetItemSlot(ItemSlot* item_slot) { m_ItemSlot = item_slot; }
- 
-        void RenderMark(const Box2D&, TextureOb*) const;
-           
+                   
     protected:
         ItemSlot* const GetItemSlot() const { return m_ItemSlot; }
 
         void UpdateAnimationProgram();
-                
+
+        void RenderMarkEmptySlot(const Vec2<float>&, GUI::TYPE) const;
+        void RenderMarkTarget() const;
+                        
     private:
         ItemSlot* m_ItemSlot;    
 	

@@ -21,17 +21,23 @@
 #include "rect.hpp"
 
 Box2D::Box2D()
+:
+m_Angle(0.0)
 {
     SetScale(1.0, 1.0);
 }
 
 Box2D::Box2D(const Vec2<float>& size)
+:
+m_Angle(0.0)
 {
 	SetSize(size);
     SetScale(1.0, 1.0);
 }
 
 Box2D::Box2D(const Vec2<float>& center, const Vec2<float>& size)
+:
+m_Angle(0.0)
 {
 	SetCenter(center);
 	SetSize(size);	
@@ -39,11 +45,15 @@ Box2D::Box2D(const Vec2<float>& center, const Vec2<float>& size)
 }
 
 Box2D::Box2D(const Box2D& rhs)
+:
+m_Angle(0.0)
 {
 	Set(rhs);
 }
 
 Box2D::Box2D(const Rect& rect)
+:
+m_Angle(0.0)
 {
 	SetCenter(Vec2<float>(rect.GetCenter().x, rect.GetCenter().y));
 	SetSize(Vec2<float>(rect.GetWidth(), rect.GetHeight()));
@@ -63,5 +73,6 @@ void Box2D::Set(const Box2D& box)
     SetSize(box.GetSize());
 	SetScale(box.GetScale());
 	SetCenter(box.GetCenter());
+	m_Angle = box.GetAngle();
 }
 

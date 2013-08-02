@@ -20,7 +20,10 @@
 #include "Screen.hpp"
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include "../resources/GuiTextureObCollector.hpp"
+
+#include <resources/GuiTextureObCollector.hpp>
+#include <resources/ShaderCollector.hpp>
+
 #include "Mesh.hpp"
 #include "../common/constants.hpp"
 
@@ -143,25 +146,38 @@ void drawQuad(TextureOb* texOb,
 		 TextureOb* texOb_mask,
 		 float threshold)
 {
-	//glBindTexture(GL_TEXTURE_2D, texOb->texture);
-	int frame = texOb->updateAnimationFrame();
-	
-	glPushMatrix();
-	{
-		glTranslatef(center.x, center.y, GUI::POS_Z);
-		glRotatef(angle, 0.0, 0.0, 1.0);
-		glScalef(size.x, size.y, 1.0);
-									
-		glBegin(GL_QUADS);
-        {   
-			glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
-			glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
-			glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
-			glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
+	glUseProgram(ShaderCollector::Instance().mask);
+	{	
+		int frame = 0;
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, texOb_mask->texture);
+		glUniform1i(glGetUniformLocation(ShaderCollector::Instance().mask, "u_TextureMask"), 0);
+		
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, texOb->texture);		
+		glUniform1i(glGetUniformLocation(ShaderCollector::Instance().mask, "u_TextureTarget"), 1);
+
+		glUniform1f(glGetUniformLocation(ShaderCollector::Instance().mask, "u_Threshold"), threshold);
+						
+		glPushMatrix();
+		{
+			glTranslatef(center.x, center.y, GUI::POS_Z);
+			glRotatef(angle, 0.0, 0.0, 1.0);
+			glScalef(size.x, size.y, 1.0);
+										
+			glBegin(GL_QUADS);
+	        {   
+				glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
+				glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
+				glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
+				glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
+			}
+	        glEnd();
 		}
-        glEnd();
+		glPopMatrix();
 	}
-	glPopMatrix();
+	glUseProgram(0);
+	glActiveTexture(GL_TEXTURE0);
 }
 
 void drawQuad(TextureOb* texOb, const Box2D& box)

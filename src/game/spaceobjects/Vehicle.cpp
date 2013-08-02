@@ -1549,6 +1549,10 @@ void Vehicle::TEST_DamageAndLockRandItems()
 	}
 }
 
+void Vehicle::TEST_DropRandomItemToSpace()
+{
+	DropRandomItemToSpace();	
+}
 
 
 
