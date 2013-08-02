@@ -21,6 +21,7 @@
 #include <common/common.hpp>
 #include <common/myStr.hpp>
 #include <common/Logger.hpp>
+#include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
 #include <world/starsystem.hpp>
@@ -101,7 +102,7 @@ bool RocketBullet::CheckTarget() const
 {
     if (m_Target->GetAlive() == true)
     {
-        if (m_Target->GetPlaceTypeId() == PLACE::TYPE::SPACE_ID)
+        if (m_Target->GetPlaceTypeId() == TYPE::PLACE::SPACE_ID)
         {
             if (m_Target->GetStarSystem()->GetId() == GetStarSystem()->GetId())
             {

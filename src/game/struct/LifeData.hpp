@@ -16,37 +16,29 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BASEBUTTONITEMSLOT_HPP
-#define BASEBUTTONITEMSLOT_HPP
 
-#include "BaseButton.hpp"
-class ItemSlot;
+#ifndef LIFEDATA_HPP
+#define LIFEDATA_HPP
 
-class BaseButtonItemSlot : public BaseButton
+
+struct LifeData
 {
-	public:
-        BaseButtonItemSlot(GUI::TYPE subtype_id, const std::string& info)
-        :
-        BaseButton(subtype_id, info), 
-        m_ItemSlot(nullptr) 
-        {}
-               
-        virtual ~BaseButtonItemSlot() {};  
-        
-        bool GetEquiped() const;
-        
-        void SetItemSlot(ItemSlot* item_slot) { m_ItemSlot = item_slot; }
- 
-        void RenderMark(const Box2D&, TextureOb*) const;
-           
-    protected:
-        ItemSlot* const GetItemSlot() const { return m_ItemSlot; }
+	bool is_alive;
+	unsigned int armor;
 
-        void UpdateAnimationProgram();
-                
-    private:
-        ItemSlot* m_ItemSlot;    
-	
+	int life_time;
+	int dying_time;
+
+	bool garbage_ready;
+
+	LifeData()
+    :
+	is_alive(true),
+    armor(1),
+    life_time(0),
+    dying_time(0),
+    garbage_ready(false) 
+    {}        
 };
 
 #endif

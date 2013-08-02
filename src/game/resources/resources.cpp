@@ -1293,6 +1293,11 @@ void loadImages()
 
 {
 	std::vector<int> arg;  
+	GuiTextureObCollector::Instance().mask_round =  new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/mask_round.png", true, &arg);
+}
+
+{
+	std::vector<int> arg;  
 	GuiTextureObCollector::Instance().slot_mark_reject =  new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/slot_mark_reject.png", true, &arg);
 }
 
@@ -1410,4 +1415,12 @@ void loadShaders()
 	compileProgram(path_vert, path_frag, ShaderCollector::Instance().flash);
 	}
 
+	{
+	const std::string path_vert = "data/shaders/mask.vert"; 
+	const std::string path_frag = "data/shaders/mask.frag"; 
+
+	ShaderCollector::Instance().mask = glCreateProgram();
+	
+	compileProgram(path_vert, path_frag, ShaderCollector::Instance().mask);
+	}
 }

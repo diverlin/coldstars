@@ -77,20 +77,3 @@ std::string getNavigatorActionStr(int type_id)
 
 
 
-
-
-std::string getPlaceTypeStr(PLACE::TYPE type_id)
-{
-	switch(type_id)
-	{
-	    switch(type_id)
-	    {
-		    case PLACE::TYPE::SPACE_ID: 		{ return "SPACE_ID"; break; }
-		    case PLACE::TYPE::HYPER_SPACE_ID: 	{ return "HYPER_SPACE_ID"; break; }
-            case PLACE::TYPE::KOSMOPORT_ID: 	{ return "KOSMOPORT_ID"; break; }
-		    case PLACE::TYPE::NATURELAND_ID: 	{ return "NATURELAND_ID"; break; }
-	    }
-    }
-
-    return "UNKNOWN ID";
-}

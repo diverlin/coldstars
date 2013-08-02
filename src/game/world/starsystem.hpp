@@ -23,8 +23,10 @@
 #include <vector>
 #include <spaceobjects/BaseSpaceEntity.hpp>
 #include <garbage/garbageEffects.hpp>
+
 #include <world/HyperSpace.hpp>
 #include <world/AsteroidManager.hpp>
+#include <types/RaceTypes.hpp>
 
 class RocketBullet;
 class BasePlanet;

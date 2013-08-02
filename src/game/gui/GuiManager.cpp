@@ -65,13 +65,13 @@ void GuiManager::SetPlayer(Player* player)
 {	
     this->player = player;
     
-    gui_vehicle_scan->SetPlayer(player);
-    gui_galaxymap->SetPlayer(player); 
-    slider->SetPlayer(player);
+    //gui_vehicle_scan->SetPlayer(player);
+    //gui_galaxymap->SetPlayer(player); 
+    //slider->SetPlayer(player);
     
-    gui_space.SetPlayer(player);
-    gui_kosmoport.SetPlayer(player);
-    gui_natureland.SetPlayer(player); 
+    //gui_space.SetPlayer(player);
+    //gui_kosmoport.SetPlayer(player);
+    //gui_natureland.SetPlayer(player); 
 }
 
 bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mouse)
@@ -227,7 +227,7 @@ void GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 
 void GuiManager::PressEventMBL_onGuiElement(GUI::TYPE subtype_id)
 {
-	gui_space.PressEventMBL_onGuiElement(subtype_id); 
+	gui_space.PressEventMBL_onGuiElement(subtype_id, player); 
 }	
 
 void GuiManager::ResetEventOnGuiElement(GUI::TYPE subtype_id)

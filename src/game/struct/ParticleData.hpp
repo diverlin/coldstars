@@ -16,45 +16,39 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "gameStruct.hpp"
-#include "../common/constants.hpp"
-#include "../common/rand.hpp"
 
-RaceInformationCollector& RaceInformationCollector::Instance()
+#ifndef PARTICLEDATA_HPP
+#define PARTICLEDATA_HPP
+
+#include <math/Color4.hpp>
+
+
+struct ParticleData
 {
-	static RaceInformationCollector instance;
-	return instance;
-}
+	float size_start;
+	float size_end;
+	float d_size;
 
-bool RaceInformationCollector::IsGood(TYPE::RACE race_id) const
-{
-	for (unsigned int i=0; i<RACES_GOOD_vec.size(); i++)
-	{
-		if (race_id == RACES_GOOD_vec[i])
-		{
-			return true;
-		}
-	}
+	float velocity_start;
+	float velocity_end;
+	float d_velocity;
+
+	Color4<float> color_start;
+	Color4<float> color_end;
+	Color4<float> color_delta;
+
+	int frame;
 	
-	return false;
-}		
-		
+	ParticleData()
+	:
+	size_start(0.0),
+	size_end(0.0),
+	d_size(0.0),
+	velocity_start(0.0),
+	velocity_end(0.0),
+	d_velocity(0.0),	
+	frame(0)
+	{}
+};
 
-ParticleData::ParticleData()
-{	
-      	size_start = 0.0;
-      	size_end   = 0.0;
-        d_size     = 0.0;
-
-      	velocity_start = 0.0;
-      	velocity_end   = 0.0;
-	d_velocity     = 0.0;
-        
-        frame = 0;
-}
-	
-
-
-
-AngleData::AngleData()
-{}
+#endif

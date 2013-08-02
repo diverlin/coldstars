@@ -18,11 +18,16 @@
 
 #include "EnergizerEquipmentBuilder.hpp"
 #include "../../../items/equipment/EnergizerEquipment.hpp"
-#include "../../../common/IdGenerator.hpp"
-#include "../../../common/Logger.hpp"
+
+#include <common/IdGenerator.hpp>
+#include <common/Logger.hpp>
+#include <common/rand.hpp>
+#include <common/constants.hpp>
+
 #include "../../../world/EntityManager.hpp"
-#include "../../../common/rand.hpp"
 #include "../../../resources/TextureManager.hpp"
+
+#include <struct/RaceInformationCollector.hpp>
 
 EnergizerEquipmentBuilder& EnergizerEquipmentBuilder::Instance()
 {
@@ -90,7 +95,7 @@ void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer
 
     energizer_equipment->SetEnergyMaxOrig(energy_max_orig);
     energizer_equipment->SetRestorationOrig(restoration_orig);
-    energizer_equipment->SetEnergy(0.05*energy_max_orig);
+    energizer_equipment->SetEnergy(0.5*energy_max_orig);
     energizer_equipment->BindData2D(texOb_item);    	
     energizer_equipment->SetParentSubTypeId(TYPE::ENTITY::ENERGIZER_SLOT_ID);
     energizer_equipment->SetItemCommonData(common_data);

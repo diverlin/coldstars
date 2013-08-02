@@ -64,7 +64,8 @@ void GuiGalaxyMap::UnbindGalaxy()
                 
 bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse)
 {
-	if (m_Player->GetNpc()->GetVehicle()->GetProperties().hyper > 0)
+	/*
+	if (GetPlayer()->GetNpc()->GetVehicle()->GetProperties().hyper > 0)
 	{      
 		for (unsigned int i=0; i<galaxy->SECTOR_vec.size(); i++)
 		{
@@ -72,26 +73,26 @@ bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse)
 			{
 				StarSystem* starsystem = galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
 				
-				if (starsystem->GetId() != m_Player->GetNpc()->GetVehicle()->GetStarSystem()->GetId())
+				if (starsystem->GetId() != player->GetNpc()->GetVehicle()->GetStarSystem()->GetId())
 				{	            			
 					float ss_cursor_dist = distanceBetween(starsystem->GetCenter(), data_mouse.pos_screencoord);
 					if (ss_cursor_dist < 10)
 					{ 
-						int ss_ss_dist = distanceBetween(starsystem->GetCenter(), m_Player->GetNpc()->GetStarSystem()->GetCenter());
-						if (ss_ss_dist < m_Player->GetNpc()->GetVehicle()->GetProperties().hyper)
+						int ss_ss_dist = distanceBetween(starsystem->GetCenter(), player->GetNpc()->GetStarSystem()->GetCenter());
+						if (ss_ss_dist < player->GetNpc()->GetVehicle()->GetProperties().hyper)
 						{
 							if (data_mouse.left_click == true)
 							{ 
 								Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, starsystem->GetId());
-								m_Player->GetNpc()->GetStateMachine().SetCurrentMicroTask(microtask);
-								m_Player->GetNpc()->GetVehicle()->GetComplexDrive().UpdatePath();
+								player->GetNpc()->GetStateMachine().SetCurrentMicroTask(microtask);
+								player->GetNpc()->GetVehicle()->GetComplexDrive().UpdatePath();
 								
 								return true;
 							} 
 							if (data_mouse.right_click == true)
 							{
 								// DEBUG WAY
-								m_Player->GetNpc()->GetVehicle()->HyperJumpEvent(starsystem);
+								player->GetNpc()->GetVehicle()->HyperJumpEvent(starsystem);
 							}
 						}
 					}
@@ -99,13 +100,13 @@ bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse)
 			}
 		}
 	}
-	
+	*/
 	return false;
 }
 
 
-
-void GuiGalaxyMap::Render()
+/* vitual override final */
+void GuiGalaxyMap::RenderUnique(Player* player) const
 {
 	drawTexturedRect(texOb_background, rect, -1.0);
 	
@@ -132,21 +133,21 @@ void GuiGalaxyMap::Render()
 				}        		
 			}           	
 		}	 
-		drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_player->texture, m_Player->GetNpc()->GetStarSystem()->GetCenter()*scale_parsec2screencoord, 40.0, -2.0);
+		drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player->GetNpc()->GetStarSystem()->GetCenter()*scale_parsec2screencoord, 40.0, -2.0);
 		
-		visual_hyperjump_range.FillData(GuiTextureObCollector::Instance().dot_yellow, 
-		scale_parsec2screencoord*m_Player->GetNpc()->GetVehicle()->GetProperties().hyper, 
-		10);
-		visual_hyperjump_range.Draw(m_Player->GetNpc()->GetVehicle()->GetStarSystem()->GetCenter()*scale_parsec2screencoord);
+		//visual_hyperjump_range.FillData(GuiTextureObCollector::Instance().dot_yellow, 
+		//scale_parsec2screencoord*player->GetNpc()->GetVehicle()->GetProperties().hyper, 
+		//10);
+		//visual_hyperjump_range.Draw(player->GetNpc()->GetVehicle()->GetStarSystem()->GetCenter()*scale_parsec2screencoord);
 		
-		if (m_Player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() == TYPE::AISCENARIO::MICRO_JUMP_ID)
+		if (player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() == TYPE::AISCENARIO::MICRO_JUMP_ID)
 		{
-			visual_hyperjump_path.FillData(GuiTextureObCollector::Instance().dot_green,
-			m_Player->GetNpc()->GetVehicle()->GetStarSystem()->GetCenter()*scale_parsec2screencoord,
-			m_Player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTarget()->GetCenter()*scale_parsec2screencoord,
-			10,
-			10);
-			visual_hyperjump_path.Draw();       	
+			//visual_hyperjump_path.FillData(GuiTextureObCollector::Instance().dot_green,
+			//player->GetNpc()->GetVehicle()->GetStarSystem()->GetCenter()*scale_parsec2screencoord,
+			//player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTarget()->GetCenter()*scale_parsec2screencoord,
+			//10, 
+			//20);
+			//visual_hyperjump_path.Draw();       	
 		}
 	}
 	disable_POINTSPRITE();

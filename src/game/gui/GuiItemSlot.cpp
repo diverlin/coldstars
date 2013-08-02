@@ -23,7 +23,7 @@ GuiItemSlot::GuiItemSlot(ItemSlot* itemslot, const Box2D& box)
 :
 itemslot(itemslot)
 {
-    m_Box = box;
+    SetBox(box);
 }
 
 GuiItemSlot::~GuiItemSlot()

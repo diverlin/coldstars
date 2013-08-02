@@ -28,16 +28,16 @@ void ButtonTrigger::OnPressEventMBL(Player* player)
         m_pAction(player);
 	}
 	
-	if (m_Lock == false)
+	if (GetLocked() == false)
 	{
-		if (m_Pressed == false)
+		if (GetPressed() == false)
 		{
-			m_Pressed = true;
+			SetPressed(true);
 			ShadeOn();
 		}
 		else
 		{
-			m_Pressed = false;
+			SetPressed(false);
 			ShadeOff();
 		}
 	}
@@ -46,7 +46,7 @@ void ButtonTrigger::OnPressEventMBL(Player* player)
 /*virtual override final*/	
 void ButtonTrigger::UpdateUnique(Player* player)
 {
-	if ( (m_Lock == false) and (m_Pressed == false) )
+	if ( (GetLocked() == false) and (GetPressed() == false) )
 	{
 		if (m_Alpha < 1.0f)
 		{

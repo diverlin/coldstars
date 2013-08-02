@@ -25,6 +25,8 @@
 
 #include <dock/Kosmoport.hpp>
 
+#include <render/Mesh.hpp>
+
 
 SpaceStationBuilder& SpaceStationBuilder::Instance()
 {	

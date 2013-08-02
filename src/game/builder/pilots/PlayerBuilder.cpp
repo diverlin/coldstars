@@ -71,11 +71,11 @@ Player* PlayerBuilder::GetNewPlayer() const
 
 void PlayerBuilder::CreateNewInternals(Player* player) const
 {    
-    TYPE::RACE prace_id       = TYPE::RACE::R0_ID;
+    TYPE::RACE prace_id         = TYPE::RACE::R0_ID;
     TYPE::ENTITY psubtype_id    = TYPE::ENTITY::RANGER_ID;
     TYPE::ENTITY psubsubtype_id = TYPE::ENTITY::WARRIOR_ID;
     int size_id        = SIZE_4_ID;
-    int weapons_num    = 4;
+    int weapons_num    = 6;
     TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::L3_ID;
     
     Npc* npc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id, psubsubtype_id);

@@ -19,55 +19,72 @@
 #include "ButtonItemSlot2.hpp"
 #include <slots/ItemSlot.hpp>
     
-/*virtual override final*/
+/* virtual override final */
 void ButtonItemSlot2::OnPressEventMBL(Player* player)
 {
-    if (m_Lock == false)
+    if (GetLocked() == false)
     {
-        m_Pressed = !m_Pressed;
+        SetPressed(!GetPressed());
     }
+    else
+    {
+		SetPressed(false);
+	}
         
-    if (m_ItemSlot != nullptr)
+    if (GetItemSlot() != nullptr) // !!!
     {        
         if (GetPressed() == true)
         {
-            if (m_ItemSlot->GetSelected() == false)
+            if (GetItemSlot()->GetSelected() == false)
             {
-                m_ItemSlot->SelectEvent();
+                GetItemSlot()->SelectEvent();
             }
         }
         else
         {
-            if (m_ItemSlot->GetSelected() == true)
+            if (GetItemSlot()->GetSelected() == true)
             {
-                m_ItemSlot->DeselectEvent();
+                GetItemSlot()->DeselectEvent();
             }
         }    
     }
 }
 
-/*virtual override final*/	
+/* virtual override final */
+void ButtonItemSlot2::ResetState()
+{
+	SetPressed(false);
+    if (GetItemSlot() != nullptr)
+    {  
+		if (GetItemSlot()->GetSelected() == true)
+		{
+			GetItemSlot()->DeselectEvent();
+		}
+	}
+}
+        
+/* virtual override final */	
 void ButtonItemSlot2::UpdateUnique(Player* player)
 {
-    UpdateAnimationProgram();
-
+	UpdateAnimationProgram();
+			
     if (IsAnimationProgramActive() == false)
     {
-        if (m_ItemSlot != nullptr)
+        if (GetItemSlot() != nullptr)
         {
-            if (m_Pressed == true)
+            if (GetPressed() == true)
             {
-                m_Box.SetScale(1.5, 1.5);
+                GetBox().SetScale(1.5, 1.5);
             }
             else
             {
-                m_Box.SetScale(1.0, 1.0);        
+                GetBox().SetScale(1.0, 1.0);        
             }
         }
     }
     else
-    {
-        if (m_Pressed == true)
+    {	    
+        if (GetPressed() == true)
         {
             ResetState();
         }
@@ -77,8 +94,8 @@ void ButtonItemSlot2::UpdateUnique(Player* player)
 /*virtual override final*/
 void ButtonItemSlot2::RenderUnique(Player*) const 
 {
-    if (m_ItemSlot != nullptr)
+    if (GetItemSlot() != nullptr)
     {
-        m_ItemSlot->Render(m_Box, Vec3<float>(0,0,0), false);
+        GetItemSlot()->Render(GetBox(), Vec3<float>(0,0,0), false);
     }
 }        

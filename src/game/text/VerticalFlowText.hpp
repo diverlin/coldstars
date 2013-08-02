@@ -16,11 +16,13 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef VERTICALFLOWTEXT_H
-#define VERTICALFLOWTEXT_H
 
-#include "../struct/gameStruct.hpp"
-#include "../math/myVector.hpp"
+#ifndef VERTICALFLOWTEXT_HPP
+#define VERTICALFLOWTEXT_HPP
+
+#include <string>
+#include <math/Vec2.hpp>
+#include <math/Color4.hpp>
 
 class VerticalFlowText
 {

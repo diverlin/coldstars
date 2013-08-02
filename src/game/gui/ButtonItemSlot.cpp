@@ -18,11 +18,14 @@
           
              
 #include "ButtonItemSlot.hpp"
+
 #include <slots/ItemSlot.hpp>
-#include <pilots/Player.hpp>
 #include <items/BaseItem.hpp>
 
-#include <render/AnimationEffect2D.hpp> 
+#include <pilots/Player.hpp>
+#include <pilots/Npc.hpp>
+
+#include <spaceobjects/Vehicle.hpp>
     
            
 /* virtual override final */
@@ -43,14 +46,17 @@ void ButtonItemSlot::OnPressEventMBL(Player* player)
         //}
     //}         
 
-    player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);
+    player->GetCursor().GetItemSlot()->SwapItem(GetItemSlot());
 }
 
          
 /* virtual override final */
 void ButtonItemSlot::OnPressEventMBR(Player* player)
 {	
-    //player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);
+	if (GetItemSlot() != nullptr)
+	{
+		player->GetNpc()->GetVehicle()->GetComplexWeapon().SetTarget(GetItemSlot()->GetOwnerVehicle(), GetItemSlot());
+	}
 }
 
 /* virtual override final */
@@ -62,21 +68,21 @@ void ButtonItemSlot::UpdateUnique(Player* player)
 /* virtual override final */
 void ButtonItemSlot::RenderUnique(Player*) const 
 {
-    m_ItemSlot->Render(m_Box, Vec2<float>(0,0), true);
+    GetItemSlot()->Render(GetBox(), Vec2<float>(0,0), true);
 }
   
 /* virtual override final */
 void ButtonItemSlot::RenderInfo() const
 {
-    if (m_ItemSlot != nullptr)
+    if (GetItemSlot() != nullptr)
     {
-        if (m_ItemSlot->GetItem())
+        if (GetItemSlot()->GetItem())
         {
-            m_ItemSlot->GetItem()->RenderInfo(Vec2<float>(m_Box.GetCenter().x, m_Box.GetCenter().y)); 
+            GetItemSlot()->GetItem()->RenderInfo(GetBox().GetCenter()); 
         }
         else
         {
-            //m_ItemSlot->RenderInfo();
+            //GetItemSlot()->RenderInfo();
         }
     }
 }

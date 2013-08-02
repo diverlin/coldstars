@@ -37,7 +37,7 @@
 
 BaseSpaceEntity::BaseSpaceEntity():
 m_Starsystem(nullptr), 
-m_PlaceTypeId(PLACE::TYPE::NONE_ID), 
+m_PlaceTypeId(TYPE::PLACE::NONE_ID), 
 m_Mass(0), 
 m_GiveExpirience(0),
 m_Parent(nullptr)
@@ -148,7 +148,7 @@ void BaseSpaceEntity::LoadDataUniqueBaseSpaceEntity(const boost::property_tree::
 
 	m_Mass = load_ptree.get<int>("mass");
 
-	m_PlaceTypeId = (PLACE::TYPE)load_ptree.get<int>("place_type_id");	
+	m_PlaceTypeId = (TYPE::PLACE)load_ptree.get<int>("place_type_id");	
 	
 	data_unresolved_BaseSpaceEntity.parent_id     = load_ptree.get<int>("data_unresolved_BaseSpaceEntity.parent_id");			
 	data_unresolved_BaseSpaceEntity.starsystem_id = load_ptree.get<int>("data_unresolved_BaseSpaceEntity.starsystem_id");

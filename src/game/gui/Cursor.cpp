@@ -48,10 +48,9 @@ Cursor::Cursor()
 BaseGuiElement(),
 focused_ob(nullptr)
 {
-    m_TextureOb = nullptr;
     item_slot = GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY::CARGO_SLOT_ID);
     
-    m_Box.SetSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
+    GetBox().SetSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
     
     //ButtonTrigger* button; // EXPERIMENTAL GUI
     //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::ACTION_ATTACK_ID, "attack");  
@@ -102,7 +101,7 @@ void Cursor::UpdateMouseStuff()
 
 void Cursor::Update()
 {
-    m_Box.SetCenter(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y);     	
+    GetBox().SetCenter(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y);     	
 }
 
 void Cursor::RenderFocusedObjectStuff() const
@@ -134,5 +133,5 @@ void Cursor::RenderFocusedObjectInfo()
 /* virtual override final */
 void Cursor::RenderUnique(Player* player) const
 {
-    item_slot->RenderItem(m_Box, Vec3<float>(0,0,0));   
+    item_slot->RenderItem(GetBox(), Vec3<float>(0,0,0));   
 }

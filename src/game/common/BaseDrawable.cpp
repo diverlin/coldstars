@@ -16,18 +16,26 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "BaseDrawable.hpp"
-#include "../resources/MeshCollector.hpp"
-#include "../resources/TextureManager.hpp"
-#include "../resources/GuiTextureObCollector.hpp"
-#include "../common/constants.hpp"
-#include "../common/rand.hpp"
-#include "../common/common.hpp"
-#include "../world/EntityManager.hpp"
-#include "../render/Render.hpp"
-#include "../common/Logger.hpp"
-#include "../resources/ShaderCollector.hpp"
-#include "../animations/AnimationBase.hpp"
+
+#include <common/BaseDrawable.hpp>
+
+#include <resources/MeshCollector.hpp>
+#include <resources/TextureManager.hpp>
+#include <resources/GuiTextureObCollector.hpp>
+#include <resources/ShaderCollector.hpp>
+
+#include <common/constants.hpp>
+#include <common/rand.hpp>
+#include <common/common.hpp>
+#include <common/Logger.hpp>
+
+#include <world/EntityManager.hpp>
+
+#include <render/Render.hpp>
+
+#include <animations/AnimationBase.hpp>
+
+#include <render/Mesh.hpp>
 
 
 BaseDrawable::BaseDrawable()

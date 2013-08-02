@@ -94,30 +94,30 @@ void WeaponComplex::PrepareWeapons()
     
 void WeaponComplex::ReloadAllWeapons()
 {
-     	slot_weapon_reloaded_vec.clear();
-     	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
-        {
-                if (slot_weapon_vec[i]->GetItem() != nullptr)
-        	{
-           		if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
-           		{
-           	         	if (slot_weapon_vec[i]->CheckAmmo() == true)
-                		{
-             				slot_weapon_reloaded_vec.push_back(slot_weapon_vec[i]);
-                		}
-        		}
-        	}
-        }
-        
-     	fire_delay = getRandInt(7,15);
-     	d_fire_delay = TURN_TIME/(slot_weapon_reloaded_vec.size()+1);   
+	slot_weapon_reloaded_vec.clear();
+	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
+	{
+		if (slot_weapon_vec[i]->GetItem() != nullptr)
+		{
+			if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
+			{
+				if (slot_weapon_vec[i]->CheckAmmo() == true)
+				{
+					slot_weapon_reloaded_vec.push_back(slot_weapon_vec[i]);
+				}
+			}
+		}
+	}
+	
+	fire_delay = getRandInt(7,15);
+	d_fire_delay = TURN_TIME/(slot_weapon_reloaded_vec.size()+1);   
 }
   
 void WeaponComplex::ActivateAllWeapons()
 {
 	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
 	{
-               	slot_weapon_reloaded_vec[i]->SelectEvent();
+		slot_weapon_reloaded_vec[i]->SelectEvent();
 	}
 }
 
@@ -125,7 +125,7 @@ void WeaponComplex::DeactivateAllWeapons()
 {
 	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
 	{
-               	slot_weapon_vec[i]->DeselectEvent();
+		slot_weapon_vec[i]->DeselectEvent();
 	}
 }
 
@@ -147,7 +147,7 @@ void WeaponComplex::DeactivateWeaponsBySubTypeId(TYPE::ENTITY weapon_subtype_id)
 	{
 		if (slot_weapon_reloaded_vec[i]->GetItem()->GetSubTypeId() == weapon_subtype_id)
 		{
-               		slot_weapon_reloaded_vec[i]->DeselectEvent();
+			slot_weapon_reloaded_vec[i]->DeselectEvent();
 		}
 	}
 }
@@ -157,9 +157,9 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 {
 	for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
 	{
-       		if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
-       		{ 
-       			return true;		
+		if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
+		{ 
+			return true;		
 		}
 	}
 	
@@ -167,9 +167,7 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 }
 
 void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
-{                          
-    //float dist = distanceBetween(owner_vehicle->GetCenter(), target->GetCenter());
-    
+{                 
     #if WEAPONSTARGET_LOG_ENABLED == 1 
     if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP); 
 	else                        Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " item_subtype_id=" + getTypeStr(item_slot->GetItem()->GetSubTypeId()) + " id=" + int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
@@ -179,17 +177,18 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 	
     for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
-        if (slot_weapon_vec[i]->GetSelected() == true )
+		ItemSlot& weapon_slot = *slot_weapon_vec[i]; // shortcut
+        if (weapon_slot.GetSelected() == true )
         {
-            if (slot_weapon_vec[i]->GetItem() != nullptr)
+            if (weapon_slot.GetItem() != nullptr)
             {
-                if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
+                if (weapon_slot.GetItem()->GetFunctioning() == true)
                 {
-                    if ( slot_weapon_vec[i]->GetTarget() == nullptr )
+                    if (weapon_slot.GetTarget() == nullptr)
                     {
-                        if (slot_weapon_vec[i]->CheckTarget(target) == true)
+                        if (weapon_slot.CheckTarget(target) == true)
                         {
-                            slot_weapon_vec[i]->SetTarget(target, item_slot);
+                            weapon_slot.SetTarget(target, item_slot);
                         }
                     }
                 } 
@@ -200,31 +199,30 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 
 void WeaponComplex::Fire(int timer, float attack_rate, bool show_effect)
 {
-     	if (timer < TURN_TIME - fire_delay)
-     	{
-        	for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); ++it)
-        	{	
-        		if ((*it)->GetTarget() != nullptr)
-        		{
-	                        if ((*it)->ValidateTarget() == true)
-	                        {
-	      				(*it)->FireEvent(attack_rate, show_effect);
-					if ((*it)->GetSubTarget() == nullptr)
-	           			{
-	           				fire_delay += d_fire_delay;
-	           				slot_weapon_reloaded_vec.erase(it);
-	           				break;
-	               			}
-	        		}
-	        		else
-	        		{
-	        			(*it)->ResetTarget();
-	        		}    
-	        		
-	        		it = slot_weapon_reloaded_vec.erase(it);
+	if (timer < TURN_TIME - fire_delay)
+	{
+		for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); ++it)
+		{	
+			ItemSlot& weapon_slot = **it; // shortcut
+			if (weapon_slot.GetTarget() != nullptr)
+			{
+				if (weapon_slot.ValidateTarget() == true)
+				{
+      				weapon_slot.FireEvent(attack_rate, show_effect);
+					if (weapon_slot.GetSubTarget() == nullptr)
+           			{
+           				fire_delay += d_fire_delay;
+					}
         		}
-        	}
-        } 	
+        		else
+        		{
+        			weapon_slot.ResetTarget();
+        		}    
+	        		
+        		it = slot_weapon_reloaded_vec.erase(it);
+			}
+		}
+	} 	
 }
 
 void WeaponComplex::ValidateAllWeaponsTarget()

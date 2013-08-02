@@ -37,7 +37,7 @@ class GuiGalaxyMap : public BaseGuiElement
 		Galaxy* GetGalaxy() const { return galaxy; };
 		   
 		bool UpdateMouseInteraction(const MouseData&);
-		void Render();
+		virtual void RenderUnique(Player*) const override final;
 
 	private:
 		float scale_parsec2screencoord;

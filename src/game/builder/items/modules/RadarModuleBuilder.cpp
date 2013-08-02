@@ -18,10 +18,13 @@
 
 #include "RadarModuleBuilder.hpp"
 #include "../../../items/modules/RadarModule.hpp"
-#include "../../../common/IdGenerator.hpp"
+
+#include <common/IdGenerator.hpp>
+#include <common/Logger.hpp>
+#include <common/rand.hpp>
+#include <common/constants.hpp>
+
 #include "../../../world/EntityManager.hpp"
-#include "../../../common/Logger.hpp"
-#include "../../../common/rand.hpp"
 #include "../../../resources/TextureManager.hpp"
 
 RadarModuleBuilder& RadarModuleBuilder::Instance()
@@ -61,17 +64,17 @@ RadarModule* RadarModuleBuilder::GetNewRadarModule(int radius_add) const
 	RadarModule* radar_module = GetNewRadarModuleTemplate();
 	CreateNewInternals(radar_module, radius_add);	
         
-        return radar_module;
+	return radar_module;
 } 
         	
 void RadarModuleBuilder::CreateNewInternals(RadarModule* radar_module, int radius_add) const
 {     
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);   
-    	radius_add  = getRandInt(MODULE::RADAR::RADIUS_MIN, MODULE::RADAR::RADIUS_MAX);
-    
-        radar_module->SetParentSubTypeId(TYPE::ENTITY::RADAR_EQUIPMENT_ID);    
-        radar_module->BindData2D(texOb);
-        radar_module->SetRadiusAdd(radius_add);
+	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);   
+	radius_add  = getRandInt(MODULE::RADAR::RADIUS_MIN, MODULE::RADAR::RADIUS_MAX);
+
+	radar_module->SetParentSubTypeId(TYPE::ENTITY::RADAR_EQUIPMENT_ID);    
+	radar_module->BindData2D(texOb);
+	radar_module->SetRadiusAdd(radius_add);
 }
 
 

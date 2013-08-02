@@ -16,14 +16,17 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "BaseItem.hpp"
 #include "../common/constants.hpp"
+#include "../common/Logger.hpp"
+#include "../common/myStr.hpp"
+
 #include "../world/EntityManager.hpp"
 #include "../slots/ItemSlot.hpp"
 #include "../render/Render.hpp"
 #include "../resources/TextureManager.hpp"
-#include "../common/Logger.hpp"
-#include "../common/myStr.hpp"
+
 
 BaseItem::BaseItem()
 :

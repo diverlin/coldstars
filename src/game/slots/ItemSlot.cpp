@@ -487,7 +487,7 @@ bool ItemSlot::IsTargetAlive(BaseSpaceEntity* _target) const
 
 bool ItemSlot::IsTargetInSpace(BaseSpaceEntity* _target) const  
 {
-	return (_target->GetPlaceTypeId() == PLACE::TYPE::SPACE_ID);
+	return (_target->GetPlaceTypeId() == TYPE::PLACE::SPACE_ID);
 }           	
 
 bool ItemSlot::IsTargetInSameStarSystem(BaseSpaceEntity* _target) const

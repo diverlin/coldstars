@@ -160,9 +160,9 @@ GuiSpace::~GuiSpace()
 
 void GuiSpace::SetPlayer(Player* player)
 {	
-	m_Player = player;
+	//SetPlayer(player);
         
-	GetGuiElement(GUI::TYPE::GUI_RADAR_ID)->SetPlayer(player); 
+	//GetGuiElement(GUI::TYPE::GUI_RADAR_ID)->SetPlayer(player); 
 }
 
 void GuiSpace::BindSharedGuis(GuiGalaxyMap* gui_galaxymap_shared, GuiVehicle* gui_vehicle_scan_shared, GuiSkills* gui_skills_shared, Slider* slider_shared)
@@ -214,7 +214,7 @@ void GuiSpace::EnterGalaxyMap()
 	
 	GetGuiElement(GUI::TYPE::GUI_RADAR_ID)->Hide();
 	      
-	gui_galaxymap_shared->BindGalaxy(m_Player->GetNpc()->GetStarSystem()->GetSector()->GetGalaxy());
+	//gui_galaxymap_shared->BindGalaxy(GetPlayer()->GetNpc()->GetStarSystem()->GetSector()->GetGalaxy());
 }
 
 void GuiSpace::ExitGalaxyMap()
@@ -289,7 +289,7 @@ void GuiSpace::UpdateUnique(Player* player)
 	Vec2<float> center_screen(screen_w/2, screen_h/2);
     
     UserInput::Instance().UpdateInSpace(player);
-	m_Player->GetCursor().Update(); 
+	player->GetCursor().Update(); 
 }
                                                 
 //BaseGuiElement* GuiSpace::CheckInteraction(const MouseData& data_mouse)
@@ -341,7 +341,7 @@ void GuiSpace::UpdateUnique(Player* player)
 //}
 
 /* virtual final */
-void GuiSpace::RenderUnique(Player*) const
+void GuiSpace::RenderUnique(Player* player) const
 {
     //if (show_gui_radar == true)  
     //{
@@ -352,7 +352,7 @@ void GuiSpace::RenderUnique(Player*) const
     
     if (gui_galaxymap_shared->GetGalaxy() != nullptr)  
     {
-        gui_galaxymap_shared->Render();    
+        gui_galaxymap_shared->Render(player);    
     }
                                     
     //if (gui_vehicle_scan_shared->GetVehicle() != nullptr)

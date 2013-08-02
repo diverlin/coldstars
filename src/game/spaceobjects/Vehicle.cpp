@@ -1435,7 +1435,7 @@ void Vehicle::SaveDataUniqueVehicle(boost::property_tree::ptree& save_ptree, con
     if (m_ParentVehicleSlot != nullptr) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", m_ParentVehicleSlot->GetId()); }
     else  			       	            { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }
   
-    if (GetPlaceTypeId() == PLACE::TYPE::HYPER_SPACE_ID) 
+    if (GetPlaceTypeId() == TYPE::PLACE::HYPER_SPACE_ID) 
     { 
         save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", m_ComplexDrive.GetTarget()->GetId()); 
     }
@@ -1497,19 +1497,19 @@ void Vehicle::ResolveDataUniqueVehicle()
 
     switch(GetPlaceTypeId())
     {
-        case PLACE::TYPE::SPACE_ID: 
+        case TYPE::PLACE::SPACE_ID: 
         {
             GetStarSystem()->AddVehicle(this, data_unresolved_Orientation.center, data_unresolved_Orientation.angle, GetParent()); 
             break;
 		}
 		
-		case PLACE::TYPE::KOSMOPORT_ID:
+		case TYPE::PLACE::KOSMOPORT_ID:
 		{	
 			((VehicleSlot*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this); 
 			break;
 		}
 		
-		case PLACE::TYPE::HYPER_SPACE_ID:
+		case TYPE::PLACE::HYPER_SPACE_ID:
 		{
 			//std::cout<<"xxx="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
 			((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.starsystem_hyper_id))->GetHyperSpace().AddVehicle(this);
@@ -1518,7 +1518,7 @@ void Vehicle::ResolveDataUniqueVehicle()
 			break;
 		}
 		
-		case PLACE::TYPE::NATURELAND_ID:
+		case TYPE::PLACE::NATURELAND_ID:
 		{
 			((NatureLand*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.land_id))->AddVehicle(this); 
 			break;

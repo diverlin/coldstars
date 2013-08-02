@@ -20,7 +20,10 @@
 #ifndef PARTICLE_HPP
 #define PARTICLE_HPP
  
-#include "../../struct/gameStruct.hpp"
+#include <struct/ParticleData.hpp>
+#include <math/Vec2.hpp>
+#include <math/Color4.hpp>
+
 
 class Particle
 {

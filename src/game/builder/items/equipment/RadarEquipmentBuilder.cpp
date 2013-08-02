@@ -21,12 +21,16 @@
 #include <items/equipment/RadarEquipment.hpp>
 
 #include <common/IdGenerator.hpp>
-#include <common/rand.hpp>
 #include <common/Logger.hpp>
+#include <common/rand.hpp>
+#include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
+
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
+
+#include <struct/RaceInformationCollector.hpp>
 
 
 RadarEquipmentBuilder& RadarEquipmentBuilder::Instance()

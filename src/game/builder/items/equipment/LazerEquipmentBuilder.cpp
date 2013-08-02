@@ -21,11 +21,14 @@
 #include <items/equipment/LazerEquipment.hpp>
 
 #include <common/IdGenerator.hpp>
-#include <common/rand.hpp>
 #include <common/Logger.hpp>
+#include <common/rand.hpp>
+#include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
 #include <resources/TextureManager.hpp>
+
+#include <struct/RaceInformationCollector.hpp>
 
 
 LazerEquipmentBuilder& LazerEquipmentBuilder::Instance()

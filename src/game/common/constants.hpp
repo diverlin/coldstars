@@ -203,13 +203,7 @@ const int EXCLUSIVE_AMOUNT_MAX = 100;
 const int EXCLUSIVE_STARTAMOUNT_MIN = EXCLUSIVE_AMOUNT_MAX/100;
 const int EXCLUSIVE_STARTAMOUNT_MAX = EXCLUSIVE_AMOUNT_MAX/10;
    
-namespace PLACE
-{
-    enum class TYPE
-    {
-        NONE_ID, SPACE_ID, HYPER_SPACE_ID, KOSMOPORT_ID, NATURELAND_ID
-    };
-}
+
         
 namespace LOG
 {

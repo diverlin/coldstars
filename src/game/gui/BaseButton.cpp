@@ -42,20 +42,19 @@ BaseButton::~BaseButton()
 /* virtual override */
 void BaseButton::ResetState()
 {
-	m_Pressed = false;
-	m_Lock = false;
+	SetPressed(false);
 	ShadeOff();
 }
 
 void BaseButton::LockOn() 
 { 
-	m_Lock = true; 
+	SetLocked(true); 
 	FullShadeOn();  
 };
 
 void BaseButton::LockOff() 
 { 
-	m_Lock = false; 
+	SetLocked(false); 
 	ShadeOff();
 };
 
@@ -79,8 +78,7 @@ void BaseButton::RenderInfo() const
 {
     enable_BLEND();
     {
-	    Vec2<float> pos(m_Box.GetCenter().x, m_Box.GetCenter().y);
-	    drawSimpleColoredTextWithBackground(m_Info, 12, pos, Color4<int>(255, 255, 255, 255));
+	    drawSimpleColoredTextWithBackground(GetInfo(), 12, GetBox().GetCenter(), Color4<int>(255, 255, 255, 255));
     }
     disable_BLEND();
 }
@@ -90,26 +88,26 @@ void BaseButton::RenderUnique(Player*) const
 {  	
 	setColor4f(1.0f, 1.0f, 1.0f, m_Alpha);
 
-    if (m_TextureOb)
+    if (GetTextureOb() != nullptr)
     {
-   	    drawQuad(m_TextureOb, m_Box);
+   	    drawQuad(GetTextureOb(), GetBox());
    	}
     
-   	if (m_TextureOb_additional)
+   	if (m_TextureOb_additional != nullptr)
    	{
-   	   	drawQuad(m_TextureOb_additional, m_Box);
+   	   	drawQuad(m_TextureOb_additional, GetBox());
    	}
 	setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
    	if (m_TextureOb_mask)
    	{
-   	   	drawQuad(m_TextureOb_mask, m_Box);
+   	   	drawQuad(m_TextureOb_mask, GetBox());
    	}
    		
-	if (m_Label != "")
+	if (GetLabel() != "")
 	{
-		Vec2<float> pos(m_Box.GetCenter().x, m_Box.GetCenter().y + m_Box.GetSize().y);
-		Screen::Instance().DrawText(m_Label, 12, pos);
+		Vec2<float> pos(GetBox().GetCenter().x, GetBox().GetCenter().y + GetBox().GetSize().y);
+		Screen::Instance().DrawText(GetLabel(), 12, pos);
 	}
 }
 		

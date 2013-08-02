@@ -17,10 +17,10 @@
 */
 
 
-#ifndef SHADERCOLLECTOR_H
-#define SHADERCOLLECTOR_H
+#ifndef SHADERCOLLECTOR_HPP
+#define SHADERCOLLECTOR_HPP
 
-#include <GL/glew.h>
+#include <render/MyGl.hpp>
 
 class ShaderCollector
 {
@@ -39,7 +39,8 @@ class ShaderCollector
 		GLuint blank;
 		GLuint fogwarspark;
 		GLuint flash;
-				
+		GLuint mask;
+						
 	private:
 		ShaderCollector() {};
 		~ShaderCollector() {};

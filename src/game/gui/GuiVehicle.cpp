@@ -214,12 +214,12 @@ void GuiVehicle::UnbindVehicle()
 
 void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
 {
-	m_TextureOb = GuiTextureObCollector::Instance().radar_range;
+	SetTextureOb(GuiTextureObCollector::Instance().radar_range);
 
     float kontur_w = 400;
     float kontur_h = 400;           
 
-    m_Box.SetSize(kontur_w * scale, kontur_h * scale); 
+    GetBox().SetSize(kontur_w * scale, kontur_h * scale); 
 }      
   
 void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
@@ -398,7 +398,7 @@ void GuiVehicle::RenderUnique(Player* player) const
     
     enable_BLEND();
     {
-        drawQuad(m_TextureOb, m_Box);
+        drawQuad(GetTextureOb(), GetBox());
     }
     disable_BLEND();
 }        

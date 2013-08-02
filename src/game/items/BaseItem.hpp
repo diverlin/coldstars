@@ -20,8 +20,10 @@
 #define BASEITEM_HPP
 
 #include <common/BaseDrawable.hpp>
+
 #include <types/MyInt.hpp>
 #include <types/TechLevelTypes.hpp>
+#include <types/RaceTypes.hpp>
 
 #include <text/InfoTable.hpp>
 
