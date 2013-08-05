@@ -39,6 +39,7 @@
 #include "../dock/Angar.hpp"
 
 #include "../common/Logger.hpp"
+#include "../common/rand.hpp" // (tmp) move to builder
 
 #include "../garbage/EntityGarbage.hpp"
 #include "../world/EntityManager.hpp"
@@ -46,14 +47,17 @@
 
 ItemSlot::ItemSlot(INTLONGEST id, TYPE::ENTITY subtype_id)
 :
-turrel(nullptr),	      
-item(nullptr),
-target(nullptr),
-subtarget(nullptr)
+m_Turrel(nullptr),	      
+m_Item(nullptr),
+m_Target(nullptr),
+m_Subtarget(nullptr),
+m_HitProbability(0)
 {
 	SetId(id);
 	SetTypeId(TYPE::ENTITY::ITEM_SLOT_ID);
 	SetSubTypeId(subtype_id);
+    
+    m_HitProbability = getRandInt(0, 100); // (tmp) move to builder
 }
 
 /* virtual */
@@ -67,16 +71,16 @@ ItemSlot::~ItemSlot()
 /* virtual */  
 void ItemSlot::PutChildsToGarbage() const
 {
-	if (item != nullptr)
+	if (m_Item != nullptr)
 	{
-		EntityGarbage::Instance().Add(item);
+		EntityGarbage::Instance().Add(m_Item);
 	}
 }
 
 void ItemSlot::SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget) 	
 {
-	this->target    = target; 
-	this->subtarget = subtarget;
+	m_Target    = target; 
+	m_Subtarget = subtarget;
 
 	#if WEAPONSTARGET_LOG_ENABLED == 1 
     Log("SetTarget");
@@ -89,15 +93,15 @@ bool ItemSlot::ValidateTarget()
 	Log("ValidateTarget");
 	#endif   
 	
-	if (subtarget != nullptr)
+	if (m_Subtarget != nullptr)
 	{
-		if (CheckSubTarget(subtarget) == false)
+		if (CheckSubTarget(m_Subtarget) == false)
 		{
-			subtarget = nullptr; // reseting only subtarget, firemode for target will be used
+			m_Subtarget = nullptr; // reseting only subtarget, firemode for target will be used
 		}
 	}
 	
-    return CheckTarget(target);
+    return CheckTarget(m_Target);
 }
 
 void ItemSlot::ResetTarget()
@@ -106,8 +110,8 @@ void ItemSlot::ResetTarget()
 	Log("ResetTarget");
 	#endif   
 		
-	target    = nullptr; 
-	subtarget = nullptr;		
+	m_Target    = nullptr; 
+	m_Subtarget = nullptr;		
 }
 
 bool ItemSlot::CheckAmmo() const
@@ -167,14 +171,14 @@ bool ItemSlot::InsertItem(BaseItem* item)
 {	
 	if (GetSubTypeId() == TYPE::ENTITY::GATE_SLOT_ID) 
 	{ 
-        this->item = item;
+        m_Item = item;
         DropItemToSpace();
         return true;
     }
 
 	if (GetSubTypeId() == TYPE::ENTITY::CARGO_SLOT_ID) 
 	{           
-		this->item = item;
+		m_Item = item;
 		if (item->GetItemSlot() != nullptr)
 		{
 			item->GetItemSlot()->RemoveItem();
@@ -186,7 +190,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 
 	if (GetSubTypeId() == item->GetParentSubTypeId())
 	{                                     
-		this->item = item;
+		m_Item = item;
 		if (item->GetItemSlot() != nullptr)
 		{
 			item->GetItemSlot()->RemoveItem();
@@ -202,7 +206,7 @@ bool ItemSlot::InsertItem(BaseItem* item)
 
 void ItemSlot::RemoveItem()
 {	
-    item = nullptr;
+    m_Item = nullptr;
     ResetTarget();
     	
     if (GetSubTypeId() != TYPE::ENTITY::CARGO_SLOT_ID) 
@@ -286,9 +290,9 @@ void ItemSlot::Render(const Box2D& box, const Vec2<float>& gui_offset, bool draw
 
 void ItemSlot::RenderItem(const Box2D& box, const Vec2<float>& gui_offset, bool draw_text) const
 {   
-    if (item != nullptr)
+    if (m_Item != nullptr)
     {
-        item->Render(box, gui_offset, draw_text);	
+        m_Item->Render(box, gui_offset, draw_text);	
     }
 }
 
@@ -304,11 +308,11 @@ void ItemSlot::RenderTargetMark(const Box2D& box, TextureOb* textureOb_mask, Tex
         
 int ItemSlot::GetItemRadius() const
 {       
-    switch(item->GetTypeId())
+    switch(m_Item->GetTypeId())
     {
         case TYPE::ENTITY::EQUIPMENT_ID:
         {
-            switch (item->GetSubTypeId())
+            switch (m_Item->GetSubTypeId())
             {
                 case TYPE::ENTITY::LAZER_EQUIPMENT_ID:   { return GetLazerEquipment()->GetRadius();  break; };
                 case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:  { return GetRocketEquipment()->GetRadius(); break; };
@@ -331,11 +335,11 @@ int ItemSlot::GetItemRadius() const
 
 int ItemSlot::GetItemDamage() const
 {       
-    switch(item->GetTypeId())
+    switch(m_Item->GetTypeId())
     {
         case TYPE::ENTITY::EQUIPMENT_ID:
         {
-            switch (item->GetSubTypeId())
+            switch (m_Item->GetSubTypeId())
             {
                 case TYPE::ENTITY::LAZER_EQUIPMENT_ID:   { return GetLazerEquipment()->GetDamage();  break; };
                 case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:  { return GetRocketEquipment()->GetDamage(); break; };
@@ -357,13 +361,13 @@ void ItemSlot::DropItemToSpace()
 {
     TextureOb* textureOb_ = nullptr;  
            
-    switch (item->GetTypeId())
+    switch (m_Item->GetTypeId())
     {
         case TYPE::ENTITY::BOMB_ID: { textureOb_ = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::BOMB_ID); break; }
         default:      				{ textureOb_ = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::CONTAINER_ID); break; }
     }
 
-    Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, item);
+    Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, m_Item);
     float impulse_strength = 0.5;
     Vec3<float> impulse_dir(getRandXYVec3Unit());
     container->ApplyImpulse(impulse_dir, impulse_strength);        
@@ -373,7 +377,7 @@ void ItemSlot::DropItemToSpace()
        
 bool ItemSlot::SwapItem(ItemSlot* slot)
 {
-    if ( (item == nullptr) and (slot->GetItem() != nullptr) )
+    if ( (m_Item == nullptr) and (slot->GetItem() != nullptr) )
     {      
         if (InsertItem(slot->GetItem()) == true) 
         {  			
@@ -381,7 +385,7 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
         }             
 	}
 	
-	if ( (item != nullptr) and (slot->GetItem() == nullptr) )
+	if ( (m_Item != nullptr) and (slot->GetItem() == nullptr) )
     { 
 		if (slot->InsertItem(GetItem()) == true)
 		{			
@@ -389,14 +393,14 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
 		}
 	}
 
-	if ( (item != nullptr) and (slot->GetItem() != nullptr) )
+	if ( (m_Item != nullptr) and (slot->GetItem() != nullptr) )
     {        
         //if (item->GetTypeId() == slot->GetItem()->GetTypeId())
         {
             BaseItem* tmp_item = slot->GetItem();
-            if ( (slot->CheckItemInsertion(item) == true) and (CheckItemInsertion(tmp_item) == true) )
+            if ( (slot->CheckItemInsertion(m_Item) == true) and (CheckItemInsertion(tmp_item) == true) )
             {  				
-                slot->InsertItem(item);
+                slot->InsertItem(m_Item);
                 tmp_item->SetItemSlot(nullptr);
                 InsertItem(tmp_item);
             
@@ -405,9 +409,9 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
         
         }
 
-        if ( (item->GetTypeId() == TYPE::ENTITY::MODULE_ID) and (slot->GetItem()->GetTypeId() == TYPE::ENTITY::EQUIPMENT_ID) )
+        if ( (m_Item->GetTypeId() == TYPE::ENTITY::MODULE_ID) and (slot->GetItem()->GetTypeId() == TYPE::ENTITY::EQUIPMENT_ID) )
         {
-            if (((BaseEquipment*)slot->GetItem())->InsertModule((BaseModule*)item) == true)  
+            if (((BaseEquipment*)slot->GetItem())->InsertModule((BaseModule*)m_Item) == true)  
             {	
                 return true;
             }
@@ -422,12 +426,12 @@ void ItemSlot::UpdateRange(TextureOb* _texOb)
 	float radius = this->GetItemRadius();
 	int size = 6;
 	
-    range_visual.FillData(_texOb, radius, size);
+    m_VisualPath.FillData(_texOb, radius, size);
 }
 
 void ItemSlot::DrawRange(const Vec3<float>& offset)
 { 
-    range_visual.Draw(offset);
+    m_VisualPath.Draw(offset);
 }
 
 bool ItemSlot::CheckSubTarget(ItemSlot* _subtarget) const
@@ -546,11 +550,11 @@ void ItemSlot::SaveDataUniqueItemSlot(boost::property_tree::ptree& save_ptree, c
 	Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::SaveDataUniqueItemSlot", SAVELOAD_LOG_DIP);
 	#endif
 
-    if (target != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.target_id", target->GetId()); }
-    else                { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE_ID); }
+    if (m_Target != nullptr)    { save_ptree.put(root+"unresolved_ItemSlot.target_id", m_Target->GetId()); }
+    else                        { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE_ID); }
 
-    if (subtarget != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", subtarget->GetId()); }
-    else          	       { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE_ID); }
+    if (m_Subtarget != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", m_Subtarget->GetId()); }
+    else          	            { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE_ID); }
 }
 
 void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_ptree)
@@ -571,12 +575,12 @@ void ItemSlot::ResolveDataUniqueItemSlot()
 	
 	if (unresolved_ItemSlot.target_id != NONE_ID)
 	{
-		target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.target_id);
+		m_Target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.target_id);
 	}
 
 	if (unresolved_ItemSlot.subtarget_id != NONE_ID)
 	{
-		subtarget = (ItemSlot*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.subtarget_id);
+		m_Subtarget = (ItemSlot*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.subtarget_id);
 	}
 
     switch(owner->GetTypeId())
@@ -598,19 +602,19 @@ void ItemSlot::Log(const std::string& func_name) const
 		Logger::Instance().Log(" owner="+owner->GetDataTypeString(), WEAPONSTARGET_LOG_DIP); 
 	}
 	
-	if (item != nullptr)
+	if (m_Item != nullptr)
 	{
-		Logger::Instance().Log("item="+item->GetDataTypeString(), WEAPONSTARGET_LOG_DIP); 
+		Logger::Instance().Log("item="+m_Item->GetDataTypeString(), WEAPONSTARGET_LOG_DIP); 
 	}
 	
-	if (target != nullptr)
+	if (m_Target != nullptr)
 	{
-		Logger::Instance().Log("target="+target->GetDataTypeString(), WEAPONSTARGET_LOG_DIP); 		
+		Logger::Instance().Log("target="+m_Target->GetDataTypeString(), WEAPONSTARGET_LOG_DIP); 		
 	}
 	
-	if (subtarget != nullptr)
+	if (m_Subtarget != nullptr)
 	{
-		Logger::Instance().Log("subtarget="+subtarget->GetDataTypeString(), WEAPONSTARGET_LOG_DIP); 	
+		Logger::Instance().Log("subtarget="+m_Subtarget->GetDataTypeString(), WEAPONSTARGET_LOG_DIP); 	
 	}
 }
 

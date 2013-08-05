@@ -22,25 +22,29 @@
 #include "builder/world/GalaxyBuilder.hpp"
 #include "builder/pilots/PlayerBuilder.hpp"
 #include "config/config.hpp"
-#include "world/EntityManager.hpp"
 
 #include "render/Screen.hpp"
 #include "render/GlErrorHelper.hpp"
-#include "gui/UserInput.hpp"
+
+#include "gui/UserInputManagerInSpace.hpp"
+#include "gui/ButtonTrigger.hpp"
+#include "gui/GuiActions.hpp"
 
 #include "common/TurnTimer.hpp"
+
 #include "pilots/Npc.hpp"
 #include "pilots/Player.hpp"
+
 #include "spaceobjects/Planet.hpp"
 #include "spaceobjects/Vehicle.hpp"
 
+#include "world/EntityManager.hpp"
 #include "world/galaxy.hpp"
 #include "world/Sector.hpp"
 #include "world/starsystem.hpp"
+#include "world/God.hpp"
 
 #include "garbage/EntityGarbage.hpp"
-
-#include "world/God.hpp"
 
 #include "struct/GalaxyDescription.hpp"
 #include "dock/BaseLand.hpp"
@@ -48,9 +52,6 @@
 #include "run_scenario/NormalRunScenario.hpp"
 #include "run_scenario/TestParticlesRunScenario.hpp"
 #include "run_scenario/TestTextRunScenario.hpp"
-
-#include "gui/ButtonTrigger.hpp"
-#include "gui/GuiActions.hpp"
 
 #include "../pureTest/pureTest.cpp"
 #include "../pureTest/threadTest.cpp"
@@ -115,7 +116,7 @@ int main()
 			galaxy->Update(TurnTimer::Instance().GetTurnTick());
 		}
 
-		if ((TurnTimer::Instance().GetTurnEnded() == true) and (UserInput::Instance().GetNextTurnReady()))
+		if ((TurnTimer::Instance().GetTurnEnded() == true) and (UserInputManagerInSpace::Instance().GetNextTurnReady()))
 		{
 			TurnTimer::Instance().NextTurn();
 		} 

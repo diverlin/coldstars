@@ -18,7 +18,9 @@
 
 #include "GuiGoverment.hpp"
 
-GuiGoverment::GuiGoverment():goverment(nullptr)
+GuiGoverment::GuiGoverment()
+:
+goverment(nullptr)
 {}
 
 

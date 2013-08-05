@@ -39,7 +39,10 @@
 #include "../pilots/Npc.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 
-GuiGalaxyMap::GuiGalaxyMap():galaxy(nullptr)
+GuiGalaxyMap::GuiGalaxyMap()
+:
+BaseGuiElement(TYPE::GUI::GALAXYMAP_ID, TYPE::GUI::GALAXYMAP_ID),
+galaxy(nullptr)
 { 
 	rect.Set(GUI::MAP::BORDER_X, GUI::MAP::BORDER_Y, 
 	Config::Instance().SCREEN_WIDTH  - 2 * GUI::MAP::BORDER_X, 

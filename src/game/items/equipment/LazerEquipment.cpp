@@ -17,9 +17,13 @@
 */
 
 #include "LazerEquipment.hpp"
-#include "../../common/constants.hpp"
-#include "../../common/myStr.hpp"
-#include "../../common/Logger.hpp"
+
+#include <common/constants.hpp>
+#include <common/myStr.hpp>
+#include <common/Logger.hpp>
+#include <common/Logger.hpp>
+#include <common/rand.hpp>
+
 #include "../../resources/TextureManager.hpp"
 #include "../../items/modules/LazerModule.hpp"
 #include "../../effects/lazerTrace.hpp"
@@ -28,7 +32,6 @@
 #include "../../world/starsystem.hpp"
 #include "../../parts/Turrel.hpp"
 
-#include "../../common/Logger.hpp"
 
 LazerEquipment::LazerEquipment(int id)
 :
@@ -71,8 +74,8 @@ void LazerEquipment::CountPrice()
    	float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::LAZER::MODULES_NUM_MAX;
 
    	float effectiveness_rate = EQUIPMENT::LAZER::DAMAGE_WEIGHT * damage_rate + 
-   				   EQUIPMENT::LAZER::RADIUS_WEIGHT * radius_rate + 
-   				   EQUIPMENT::LAZER::MODULES_NUM_WEIGHT * modules_num_rate;
+                               EQUIPMENT::LAZER::RADIUS_WEIGHT * radius_rate + 
+                               EQUIPMENT::LAZER::MODULES_NUM_WEIGHT * modules_num_rate;
 
    	float mass_rate          = (float)data_item.mass / EQUIPMENT::LAZER::MASS_MIN;
    	float condition_rate     = (float)condition / data_item.condition_max;
@@ -110,7 +113,7 @@ void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, flo
 	{
 		if (subtarget != nullptr) // precise fire
 		{
-			//if (getRandInt(1, 2) == 1)
+			if (isActionShouldHappen(item_slot->GetHitProbability()) == true)
 			{
 				subtarget->GetItem()->LockEvent(1);
 			}

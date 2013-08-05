@@ -24,9 +24,9 @@
 class ButtonItemSlot2 : public BaseButtonItemSlot
 {
 	public:
-        ButtonItemSlot2(GUI::TYPE subtype_id, const std::string& info, ItemSlot* itemslot)
+        ButtonItemSlot2(TYPE::GUI subtype_id, const std::string& info, ItemSlot* itemslot)
         :
-        BaseButtonItemSlot(subtype_id, info) 
+        BaseButtonItemSlot(TYPE::GUI::BUTTON_ITEMSLOT2_ID, subtype_id, info) 
         {
             SetItemSlot(itemslot);
         }

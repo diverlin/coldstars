@@ -34,7 +34,7 @@ class TextureOb;
 class BaseGuiElement
 {
 	public:
-		BaseGuiElement(GUI::TYPE subtype_id=GUI::TYPE::NONE_ID, const std::string& info="", TextureOb* textureOb=nullptr);
+		BaseGuiElement(TYPE::GUI type_id=TYPE::GUI::NONE_ID, TYPE::GUI subtype_id=TYPE::GUI::NONE_ID, const std::string& info="", TextureOb* textureOb=nullptr);
 		virtual ~BaseGuiElement();
 		
 		void SetLabel(const std::string& label) { m_Label = label; }
@@ -43,8 +43,8 @@ class BaseGuiElement
 		
         void SetSize(Vec2<float> size) { m_Box.SetSize(size); };
         	
-		GUI::TYPE GetTypeId() const { return m_Type_id; }
-		GUI::TYPE GetSubTypeId() const { return m_Subtype_id; }
+		TYPE::GUI GetTypeId() const { return m_Type_id; }
+		TYPE::GUI GetSubTypeId() const { return m_Subtype_id; }
 					
 		const Box2D& GetBox() const { return m_Box; }
 		Box2D& GetBox() { return m_Box; } // !!!
@@ -56,7 +56,7 @@ class BaseGuiElement
         
         bool IsAnimationProgramActive() const { return (m_AnimationProgram != nullptr); }
 
-        BaseGuiElement* GetGuiElement(GUI::TYPE) const;                     
+        BaseGuiElement* GetGuiElement(TYPE::GUI) const;                     
 			
 		BaseGuiElement* UpdateMouseInteraction(const Vec2<float>&);
 		
@@ -76,7 +76,7 @@ class BaseGuiElement
 	protected:
 		std::vector<BaseGuiElement*> m_Child_vec;
 
-		void SetSubTypeId(GUI::TYPE subtype_id) { m_Subtype_id = subtype_id; }
+		void SetSubTypeId(TYPE::GUI subtype_id) { m_Subtype_id = subtype_id; }
 		
 		void SetBox(const Box2D& box) { m_Box = box; }
 		
@@ -95,8 +95,8 @@ class BaseGuiElement
         bool GetAnimationProgramActive() const { return (m_AnimationProgram != nullptr); }
         void DeleteAnimationProgram();
         
-		void PressEventMBL_onGuiElement(GUI::TYPE, Player*);
-		void ResetStateEventOnGuiElement(GUI::TYPE);			
+		void PressEventMBL_onGuiElement(TYPE::GUI, Player*);
+		void ResetStateEventOnGuiElement(TYPE::GUI);			
 
 		void UpdateGeometry(const Vec2<float>&, const Vec2<float>&);	
         
@@ -107,12 +107,13 @@ class BaseGuiElement
 		void RenderCommon(Player*) const;
        		       	
 	private: 
+		TYPE::GUI m_Type_id;
+		TYPE::GUI m_Subtype_id;
+        
 		TextureOb* m_TextureOb;	
+        
 		std::string m_Info; 
 		std::string m_Label; 
-		
-		GUI::TYPE m_Type_id;
-		GUI::TYPE m_Subtype_id;
 		
 		Box2D m_Box;
 			
@@ -124,7 +125,7 @@ class BaseGuiElement
         Vec2<float> m_Offset;      
         AnimationEffect2D* m_AnimationProgram;
         
-		static std::map<GUI::TYPE, BaseGuiElement*> static_gui_element_map;
+		static std::map<TYPE::GUI, BaseGuiElement*> static_gui_element_map;
 
 		void SetOffset(const Vec2<float>& offset) { m_Offset = offset; }	
 		void SetOffset(float x, float y) { m_Offset.Set(x,y); }

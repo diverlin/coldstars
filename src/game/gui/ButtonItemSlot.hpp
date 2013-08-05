@@ -26,9 +26,9 @@
 class ButtonItemSlot : public BaseButtonItemSlot
 {
 	public:
-        ButtonItemSlot(GUI::TYPE subtype_id, const std::string& info)
+        ButtonItemSlot(TYPE::GUI subtype_id, const std::string& info)
         :
-        BaseButtonItemSlot(subtype_id, info)
+        BaseButtonItemSlot(TYPE::GUI::BUTTON_ITEMSLOT_ID, subtype_id, info)
         {}
                
         virtual ~ButtonItemSlot() final {};  

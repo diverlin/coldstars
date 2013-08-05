@@ -120,7 +120,7 @@ void Ship::RenderInSpace_2D(float scale) const
 	{
 		RenderGrabTrail();
 	}
-	
+    	
 	RenderKorpus();
 	
 	if (GetDataKorpus().draw_turrels == true)
@@ -128,16 +128,17 @@ void Ship::RenderInSpace_2D(float scale) const
 		GetComplexWeapon().RenderTurrels();
 	}
 	
-	if (GetProperties().speed > 0)
+    if (GetProperties().speed > 0)
 	{
 		RenderDriveEffect(scale , 1.0 - GetColor().a);
+        GetStarSystem()->RestoreSceneColor();
 	}
-	
+    
 	if (GetProperties().shield_effect_enabled == true)
 	{
 		RenderShieldEffect(1.0 - GetColor().a); 
+        GetStarSystem()->RestoreSceneColor();
 	}
-	GetStarSystem()->RestoreSceneColor();
 }
 
 void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords, float scale)

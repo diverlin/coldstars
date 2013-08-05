@@ -27,8 +27,8 @@
 #include <types/EntityTypes.hpp>
 #include <types/GuiTypes.hpp>
      
-GUI::TYPE getGuiItemSlotType(TYPE::ENTITY);
-GUI::TYPE getGuiItemSlotSelectorType(TYPE::ENTITY);
+TYPE::GUI getGuiItemSlotType(TYPE::ENTITY);
+TYPE::GUI getGuiItemSlotSelectorType(TYPE::ENTITY);
        
 int getObjectSize(int w, int h); 
 

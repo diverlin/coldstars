@@ -21,58 +21,52 @@
 #include "../render/Render.hpp"
 #include "../render/Screen.hpp"
 
-VerticalFlowText::VerticalFlowText(const std::string& str, 
+VerticalFlowText::VerticalFlowText(const std::string& text, 
 									int font_size,
 									const Vec2<float>& center, 
 									const Color4<int>& color, 
 									float collision_radius)
+:
+m_IsAlive(true),
+m_LiveTime(70), //TEXT_EXISTANCE_TIME
+m_FontSize(font_size),
+m_Text(text),
+m_Color(color),
+m_Speed(2.0)
 {
-	is_alive = true;
-	live_time = 70; //TEXT_EXISTANCE_TIME
-	
-	this->str = str;
-	this->font_size = font_size;
-	this->color = color;	
-	
 	float kof1 = 0.1 * getRandInt(3, 18);
 	float kof2 = 0.1 * getRandInt(5, 15);
 	
-	pos.x = center.x - collision_radius * kof1;
-	pos.y = center.y + collision_radius * kof2;
-	
-	speed = 2.0;
+	m_Center.x = center.x - collision_radius * kof1;
+	m_Center.y = center.y + collision_radius * kof2;
 }
 
 VerticalFlowText::~VerticalFlowText()
 {}
 
-void VerticalFlowText::update()
+void VerticalFlowText::Update()
 {
-	if (is_alive == true)
+	if (m_IsAlive == true)
 	{
-		pos.y += speed;
-		if (speed > 0.5)
+		m_Center.y += m_Speed;
+		if (m_Speed > 0.5)
 		{
-			speed -= 0.1;
+			m_Speed -= 0.1;
 		}
 		
-		live_time -= 1;
-		if (live_time < 0)
+		m_LiveTime -= 1;
+		if (m_LiveTime < 0)
 		{
-			is_alive = false;
+			m_IsAlive = false;
 		}
 	}
 }
                 
-void VerticalFlowText::Render(const Vec2<float>& scroll_coords) const
+void VerticalFlowText::Render(const Vec2<float>& scroll_coords, float scale) const
 {
-	if (is_alive == true)
+	if (m_IsAlive == true)
 	{
-		float scale = Screen::Instance().GetScale();
-		glPushMatrix();
-			glLoadIdentity();
-			Screen::Instance().DrawText(str, font_size, pos*scale-scroll_coords, color);
-		glPopMatrix();
+		drawColoredText(m_Text, m_FontSize, (m_Center-scroll_coords)*scale, m_Color);
 	}
 }
  

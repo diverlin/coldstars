@@ -24,17 +24,14 @@
 #include "../render/Screen.hpp"
 
 
-BaseButton::BaseButton(GUI::TYPE subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb)
+BaseButton::BaseButton(TYPE::GUI type_id, TYPE::GUI subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb)
 :
-BaseGuiElement(subtype_id, info, textureOb)
-{
-	m_TextureOb_additional = nullptr;
-	m_TextureOb_mask = nullptr;
-		
-	m_Alpha = 1.0f;
-	
-	m_pAction = pAction;
-}
+BaseGuiElement(type_id, subtype_id, info, textureOb),
+m_Alpha(1.0f),
+m_TextureOb_additional(nullptr),
+m_TextureOb_mask(nullptr),    
+m_pAction(pAction)
+{}
 
 BaseButton::~BaseButton()
 {}
@@ -76,11 +73,7 @@ void BaseButton::ShadeOff()
 /* virtual override */   		    
 void BaseButton::RenderInfo() const
 {
-    enable_BLEND();
-    {
-	    drawSimpleColoredTextWithBackground(GetInfo(), 12, GetBox().GetCenter(), Color4<int>(255, 255, 255, 255));
-    }
-    disable_BLEND();
+    drawColoredTextWithBackground(GetInfo(), 12, GetBox().GetCenter(), Color4<int>(255, 255, 255, 255));
 }
 
 /* virtual override */

@@ -16,16 +16,18 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef GUIVEHICLE2_HPP
 #define GUIVEHICLE2_HPP
 
 #include "BaseGuiElement.hpp"
 class Vehicle;
 
+
 class GuiVehicle2 : public BaseGuiElement
 {
    	public:
-        GuiVehicle2(GUI::TYPE subtype_id);
+        GuiVehicle2();
         ~GuiVehicle2() {}
         
         virtual void UpdateUnique(Player*) override final;

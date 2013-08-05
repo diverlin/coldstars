@@ -47,6 +47,8 @@ class Box2D
 		const Vec2<float>& GetScale() const		{ return m_Scale; }
 		float GetAngle() const		{ return m_Angle; }
         		
+        const Vec2<float> GetMiddleTop() const { return m_Center + Vec2<float>(0, m_Size.y/2); }
+        
 		bool CheckInteraction(const Vec2<float>&) const;	
       		      		      		
 	private:

@@ -97,18 +97,20 @@ void PathVisual::FillData(TextureOb* textureOb, int radius, int point_size)
 {
 	glDeleteLists(gl_list, sizeof(gl_list));
 
-	float da = 4.0f/RADIAN_TO_DEGREE_RATE;// - radius/1000.0f;
+	float da = 4.0f/RADIAN_TO_DEGREE_RATE;
 	glNewList(gl_list, GL_COMPILE);
+    {
+        enable_POINTSPRITE();
         {
-                enable_POINTSPRITE();
-                glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-                for (float a=0.0f; a<=2*PI; a+=da)
+            glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+            for (float a=0.0f; a<=2*PI; a+=da)
       		{
       			drawParticle(Vec2<float>(radius * cos(a), radius * sin(a)), point_size);
-		}
-                disable_POINTSPRITE();
+		    }
         }
-        glEndList();
+        disable_POINTSPRITE();
+    }
+    glEndList();
 }
 
 void PathVisual::FillData(TextureOb* textureOb, const Vec3<float>& start_pos, const Vec3<float>& target_pos, int step, int point_size)

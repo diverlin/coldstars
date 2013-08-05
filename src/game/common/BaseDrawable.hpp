@@ -22,7 +22,6 @@
 
 #include <common/Orientation.hpp>
 #include <types/MeshTypes.hpp>
-//#include <struct/gameStruct.hpp>
 
 class Mesh;
 class TextureOb;
@@ -66,7 +65,7 @@ class BaseDrawable : public Orientation
 		void UpdateRenderAnimation();
                 
         bool UpdateFadeInEffect(); // depr, move to animation program
-        bool UpdateFadeOutEffect(); // depr, mve to animation program
+        bool UpdateFadeOutEffect(); // depr, move to animation program
         
 		void RenderMeshLight(const Vec2<float>&, const Color4<float>&) const;
 		void RenderMeshLightNormalMap(const Vec2<float>&, const Color4<float>&) const;

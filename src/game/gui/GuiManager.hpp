@@ -42,7 +42,7 @@ class GuiManager
 		GuiVehicle* GetGuiVehicleScan() const { return gui_vehicle_scan; };
 		GuiGalaxyMap* GetGuiGalaxyMap() const { return gui_galaxymap; };
 				
-		void RunSessionInSpace();                                
+		void UpdateSessionInSpace();                                
 		void RunSessionInKosmoport(const MouseData&);
 		void RunSessionInNatureLand(const MouseData&);
 
@@ -55,9 +55,9 @@ class GuiManager
 		bool UpdateMouseInteractionWithScanVehicle(const MouseData&);     		
 		void RenderScanVehicle(const MouseData&, bool show_skill = true) const;  
 			
-		void PressEventMBL_onGuiElement(GUI::TYPE);
-		void ResetEventOnGuiElement(GUI::TYPE);
-		BaseGuiElement* GetGuiElement(GUI::TYPE) const;
+		void PressEventMBL_onGuiElement(TYPE::GUI);
+		void ResetEventOnGuiElement(TYPE::GUI);
+		BaseGuiElement* GetGuiElement(TYPE::GUI) const;
 				
 	private:
 		GuiManager();
@@ -74,8 +74,9 @@ class GuiManager
 		
 		// shared guis
 		GuiVehicle* 	gui_vehicle_scan;
-		GuiSkills*   	gui_skills;
 		GuiGalaxyMap*   gui_galaxymap;
+		
+		GuiSkills*   	gui_skills;
 		Slider*         slider;  
 };
   

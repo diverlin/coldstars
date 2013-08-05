@@ -16,18 +16,23 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef GUITYPES_HPP
 #define GUITYPES_HPP
 
 #include <string>
 
-namespace GUI
+
+namespace TYPE
 { 
-    enum class TYPE
+    enum class GUI
     {
         NONE_ID = 0,
         
         BUTTON_ID, 
+        BUTTON_SINGLE_ID, BUTTON_TRIGGER_ID,
+        BUTTON_ITEMSLOT_ID, BUTTON_ITEMSLOT2_ID,
+        BUTTON_GALAXYMAP_ID,
         
         SLIDER_ID,
         SLIDE_ID, ACCEPT_ID, DECLINE_ID,
@@ -71,7 +76,7 @@ namespace GUI
     };
 }
 
-std::string getGuiTypeStr(GUI::TYPE);
+std::string getGuiTypeStr(TYPE::GUI);
 
 #endif
 

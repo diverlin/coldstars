@@ -21,39 +21,47 @@
 #define CURSOR_HPP
 
 #include <gui/MouseData.hpp>
-#include <gui/BaseGuiElement.hpp>
+#include <common/Box2D.hpp>
 
 class ItemSlot;
 class BaseSpaceEntity;
+class BaseGuiElement;
+class Player;
 
 
-class Cursor : public BaseGuiElement
+class Cursor
 {
   	public:
 		Cursor();
 		~Cursor();		
 		
-		void SetLeftMouseButtonClick(bool left_click) 		{ data_mouse.left_click = left_click; };
-		void SetRightMouseButtonClick(bool right_click) 	{ data_mouse.right_click = right_click; };
-		void SetFocusedObject(BaseSpaceEntity* focused_ob) { this->focused_ob = focused_ob; };
+		void SetLeftMouseButtonClick(bool left_click) 		{ m_DataMouse.left_click = left_click; }
+		void SetRightMouseButtonClick(bool right_click) 	{ m_DataMouse.right_click = right_click; }
+		void SetFocusedSpaceObject(BaseSpaceEntity* space_object)   { m_FocusedSpaceObject = space_object; }
+		void SetFocusedGuiElement(BaseGuiElement* gui_element)      { m_FocusedGuiElement = gui_element; }
+        		
+		const MouseData& GetMouseData() const { return m_DataMouse; }
+		ItemSlot* GetItemSlot() const { return m_ItemSlot; }
+
+		void Reset();	
+		void Update(Player*);
 		
-		const MouseData& GetMouseData() { return data_mouse; };
-		ItemSlot* GetItemSlot() const { return item_slot; };
-		
-		void UpdateMouseStuff();		
-		void Update();
-		
-		void RenderFocusedObjectStuff() const;
-		void RenderFocusedObjectInfo();
+        void RenderFocusedObjectStuff() const;
+		void RenderFocusedObjectInfo() const;
         
-        virtual void RenderUnique(Player*) const override final;
+        void RenderItem() const;
 				
 	private:       	
-		ItemSlot* item_slot;  
+		ItemSlot* m_ItemSlot;  
 		
-		MouseData data_mouse;
+		MouseData m_DataMouse;
 		
-		BaseSpaceEntity* focused_ob;
+		BaseSpaceEntity* m_FocusedSpaceObject;
+        BaseGuiElement* m_FocusedGuiElement;
+        
+        Box2D m_Box;
+
+		void UpdateMouseStuff(); 
 }; 
 
 #endif 

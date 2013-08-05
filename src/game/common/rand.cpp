@@ -59,6 +59,13 @@ bool getRandBool()
 		return false; 
 }
 
+bool isActionShouldHappen(int percent)
+{
+    int rand_percent = getRandInt(1, 100);
+    if (percent > rand_percent) { return true; }
+    else                        { return false; }
+}
+
 TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE race_id, const std::vector<TYPE::ENTITY>& subtypes)
 {
 	std::vector<TYPE::ENTITY> allowed_subtypes;

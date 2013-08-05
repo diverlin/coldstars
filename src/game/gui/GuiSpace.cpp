@@ -16,10 +16,11 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "GuiSpace.hpp"
 #include "GuiGalaxyMap.hpp"
 #include "GuiSkills.hpp"
-#include "UserInput.hpp"
+#include "UserInputManagerInSpace.hpp"
 #include "GuiActions.hpp"
 
 #include "ButtonTrigger.hpp"
@@ -49,11 +50,12 @@
 
 #include "../spaceobjects/Vehicle.hpp"
 
+
 GuiSpace::GuiSpace()
 :
 init_done(false),
 gui_galaxymap_shared(nullptr),
-gui_vehicle_scan_shared(nullptr),
+//gui_vehicle_scan_shared(nullptr),
 gui_skills_shared(nullptr),
 slider_shared(nullptr)
 {   	
@@ -78,7 +80,7 @@ slider_shared(nullptr)
 
 		{
 			TextureOb* texOb = GuiTextureObCollector::Instance().icon_map;  
-			ButtonTrigger* galaxymap_button = new ButtonTrigger(GUI::TYPE::GALAXYMAP_ID, "galaxy map", GuiActions::GalaxyMapGuiTransition, texOb);
+			ButtonTrigger* galaxymap_button = new ButtonTrigger(TYPE::GUI::BUTTON_GALAXYMAP_ID, "galaxy map", GuiActions::GalaxyMapGuiTransition, texOb);
 			
             Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE); 	
 			galaxymap_button->SetSize(size);		
@@ -89,7 +91,7 @@ slider_shared(nullptr)
 		
 		{
 			TextureOb* texOb = GuiTextureObCollector::Instance().icon_plus;
-			ButtonSingle* load_button = new ButtonSingle(GUI::TYPE::LOAD_ID, "load", GuiActions::LoadEvent, texOb);    
+			ButtonSingle* load_button = new ButtonSingle(TYPE::GUI::LOAD_ID, "load", GuiActions::LoadEvent, texOb);    
 			
             Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);	
 			load_button->SetSize(size);
@@ -100,7 +102,7 @@ slider_shared(nullptr)
 		
 		{
 			TextureOb* texOb = GuiTextureObCollector::Instance().icon_minus;
-			ButtonSingle* save_button = new ButtonSingle(GUI::TYPE::SAVE_ID, "save", GuiActions::SaveEvent, texOb);    
+			ButtonSingle* save_button = new ButtonSingle(TYPE::GUI::SAVE_ID, "save", GuiActions::SaveEvent, texOb);    
 
 			Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);	
 			save_button->SetSize(size);	
@@ -134,41 +136,24 @@ slider_shared(nullptr)
 	}
     
     {
-		GuiVehicle2* gui_vehicle_player = new GuiVehicle2(GUI::TYPE::PLAYER_VEHICLE_ID);
+		GuiVehicle2* gui_vehicle_player = new GuiVehicle2();
 		
         Vec2<float> size(250, 250);	
 		gui_vehicle_player->SetSize(size);
     
         Vec2<float> offset(125, 125);
 		AddChild(gui_vehicle_player, offset);	
-	}      
-
-    {
-		GuiVehicle* gui_scan = new GuiVehicle(GUI::TYPE::SCAN_VEHICLE_ID);
-
-		Vec2<float> size(250, 250);	
-		gui_scan->SetSize(size);
-    
-        Vec2<float> offset(screen_w/2, screen_h/2);
-		AddChild(gui_scan, offset);	
-	} 
+	}   
 }
 
-/*virtual*/
+/* virtual */
 GuiSpace::~GuiSpace()
 {}
-
-void GuiSpace::SetPlayer(Player* player)
-{	
-	//SetPlayer(player);
-        
-	//GetGuiElement(GUI::TYPE::GUI_RADAR_ID)->SetPlayer(player); 
-}
 
 void GuiSpace::BindSharedGuis(GuiGalaxyMap* gui_galaxymap_shared, GuiVehicle* gui_vehicle_scan_shared, GuiSkills* gui_skills_shared, Slider* slider_shared)
 {
 	this->gui_galaxymap_shared    = gui_galaxymap_shared;
-	this->gui_vehicle_scan_shared = gui_vehicle_scan_shared;
+	//this->gui_vehicle_scan_shared = gui_vehicle_scan_shared;
 	this->gui_skills_shared       = gui_skills_shared;
 	this->slider_shared           = slider_shared;
 	
@@ -178,7 +163,7 @@ void GuiSpace::BindSharedGuis(GuiGalaxyMap* gui_galaxymap_shared, GuiVehicle* gu
 void GuiSpace::UnbindSharedGuis()
 {
 	gui_galaxymap_shared    = nullptr;
-	gui_vehicle_scan_shared = nullptr;
+	//gui_vehicle_scan_shared = nullptr;
 	gui_skills_shared       = nullptr;
 	slider_shared           = nullptr;
 	
@@ -207,12 +192,12 @@ void GuiSpace::EnterGalaxyMap()
 	Logger::Instance().Log("GuiSpace::EnterGalaxyMap", GUI_LOG_DIP);
 	#endif
 	
-	if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
-	{
-		ExitGuiScan();
-	}
+	//if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
+	//{
+		//ExitGuiScan();
+	//}
 	
-	GetGuiElement(GUI::TYPE::GUI_RADAR_ID)->Hide();
+	//GetGuiElement(TYPE::GUI::GUI_RADAR_ID)->Hide();
 	      
 	//gui_galaxymap_shared->BindGalaxy(GetPlayer()->GetNpc()->GetStarSystem()->GetSector()->GetGalaxy());
 }
@@ -223,8 +208,8 @@ void GuiSpace::ExitGalaxyMap()
 	Logger::Instance().Log("GuiSpace::ExitGalaxyMap", GUI_LOG_DIP);
 	#endif
 	
-	GetGuiElement(GUI::TYPE::GUI_RADAR_ID)->Show();    
-	gui_galaxymap_shared->UnbindGalaxy();
+	//GetGuiElement(TYPE::GUI::GUI_RADAR_ID)->Show();    
+	//gui_galaxymap_shared->UnbindGalaxy();
 }
     
 void GuiSpace::EnterGuiScan()
@@ -241,8 +226,8 @@ void GuiSpace::EnterGuiScan()
 	//gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
 	//gui_skills_shared->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
 			
-    //GetGuiElement(GUI::TYPE::PLAYER_VEHICLE_ID)->Hide();		
-	//GetGuiElement(GUI::TYPE::GUI_RADAR_ID)->Hide();
+    //GetGuiElement(TYPE::GUI::PLAYER_VEHICLE_ID)->Hide();		
+	//GetGuiElement(TYPE::GUI::GUI_RADAR_ID)->Hide();
 }
 
 void GuiSpace::ExitGuiScan()
@@ -259,8 +244,8 @@ void GuiSpace::ExitGuiScan()
 	
 	//m_Player->GetNpc()->ResetScanTarget();
 	
-	//GetGuiElement(GUI::TYPE::GUI_RADAR_ID)->Show();
-    //GetGuiElement(GUI::TYPE::PLAYER_VEHICLE_ID)->Show();	
+	//GetGuiElement(TYPE::GUI::GUI_RADAR_ID)->Show();
+    //GetGuiElement(TYPE::GUI::PLAYER_VEHICLE_ID)->Show();	
 }
 
 void GuiSpace::ButtonsAction(Player* player) const
@@ -280,16 +265,13 @@ void GuiSpace::RenderText(const Vec2<float>& scroll_coords) const
 	Screen::Instance().DrawText(_coord_str, 12, pos);    
 }
 
-/*virtual override final*/
+/* virtual override final */
 void GuiSpace::UpdateUnique(Player* player)
 { 
     int screen_w = Screen::Instance().GetWidth();
 	int screen_h = Screen::Instance().GetHeight();
 	Rect screen_rect(0, 0, screen_w, screen_h);   
 	Vec2<float> center_screen(screen_w/2, screen_h/2);
-    
-    UserInput::Instance().UpdateInSpace(player);
-	player->GetCursor().Update(); 
 }
                                                 
 //BaseGuiElement* GuiSpace::CheckInteraction(const MouseData& data_mouse)
@@ -350,9 +332,9 @@ void GuiSpace::RenderUnique(Player* player) const
         //gui_vehicle_player.RenderInfo(data_mouse);    
     //}
     
-    if (gui_galaxymap_shared->GetGalaxy() != nullptr)  
+    //if (gui_galaxymap_shared->GetGalaxy() != nullptr)  
     {
-        gui_galaxymap_shared->Render(player);    
+        //gui_galaxymap_shared->Render(player);    
     }
                                     
     //if (gui_vehicle_scan_shared->GetVehicle() != nullptr)

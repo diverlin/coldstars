@@ -27,9 +27,9 @@
 #include "../pilots/Npc.hpp"
 
 
-GuiVehicle2::GuiVehicle2(GUI::TYPE subtype_id)
+GuiVehicle2::GuiVehicle2()
 :
-BaseGuiElement(subtype_id), 
+BaseGuiElement(TYPE::GUI::PLAYER_VEHICLE_ID, TYPE::GUI::PLAYER_VEHICLE_ID), 
 m_Vehicle(nullptr) 
 {
 

@@ -25,7 +25,7 @@
 class BaseButton : public BaseGuiElement
 {
 	public:
-       		BaseButton(GUI::TYPE, const std::string&,void (*pAction)(Player*) = nullptr, TextureOb* textureOb = nullptr);       		       
+       		BaseButton(TYPE::GUI, TYPE::GUI, const std::string&,void (*pAction)(Player*) = nullptr, TextureOb* textureOb = nullptr);       		       
        		virtual ~BaseButton();  
 
 			void SetTextureObAdditional(TextureOb* textureOb_additional) { m_TextureOb_additional = textureOb_additional; }

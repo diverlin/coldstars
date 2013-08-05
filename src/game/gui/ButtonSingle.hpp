@@ -24,9 +24,12 @@
 class ButtonSingle : public BaseButton
 {
 	public:
-		ButtonSingle(GUI::TYPE subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb):BaseButton(subtype_id, info, pAction, textureOb) {};
+		ButtonSingle(TYPE::GUI subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb)
+        :
+        BaseButton(TYPE::GUI::BUTTON_SINGLE_ID, subtype_id, info, pAction, textureOb) 
+        {}
 			   
-		virtual ~ButtonSingle() {};  
+		virtual ~ButtonSingle() {}  
 
 		virtual void OnPressEventMBL(Player*) override final;
 		virtual void UpdateUnique(Player*) override final;

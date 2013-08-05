@@ -30,13 +30,11 @@
 #include "../pilots/Npc.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "ButtonItemSlot.hpp"
+
          
-//    drawQuadMasked(textureOb, box, GuiTextureObCollector::Instance().mask_round ,0.5); 
-         
-         
-GuiVehicle::GuiVehicle(GUI::TYPE subtype_id)
+GuiVehicle::GuiVehicle()
 :
-BaseGuiElement(subtype_id),
+BaseGuiElement(TYPE::GUI::SCAN_VEHICLE_ID, TYPE::GUI::SCAN_VEHICLE_ID),
 m_Vehicle(nullptr)
 {   
     int weapon_slot_max   = SLOT_WEAPON_TYPES.size();
