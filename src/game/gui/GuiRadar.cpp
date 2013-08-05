@@ -29,7 +29,7 @@
 
 GuiRadar::GuiRadar()
 {
-	SetSubTypeId(GUI::TYPE::GUI_RADAR_ID);
+	SetSubTypeId(TYPE::GUI::GUI_RADAR_ID);
 	
 	textureOb_background 	= GuiTextureObCollector::Instance().radar_background;
 	textureOb_bar	 		= GuiTextureObCollector::Instance().radar_bar;

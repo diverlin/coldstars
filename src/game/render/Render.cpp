@@ -16,6 +16,7 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "Render.hpp"
 #include "Screen.hpp"
 #include <SFML/Window.hpp>
@@ -26,6 +27,7 @@
 
 #include "Mesh.hpp"
 #include "../common/constants.hpp"
+
 
 void initGl(int width, int height)
 {   
@@ -226,18 +228,33 @@ void drawLine(TextureOb* texOb,
 	glPopMatrix();
 }
 
-void drawSimpleColoredTextWithBackground(const std::string& str, int font_size, const Vec2<float>& pos, const Color4<int>& color)
+void drawColoredTextWithBackground(const std::string& str, int font_size, const Vec2<float>& pos, const Color4<int>& color)
 {
 	float char_w = font_size;
-	float char_h = 2*font_size;
+	float char_h = font_size;
 			
 	float string_w = char_w * str.size();
-	
+
 	TextureOb* texOb_textBg = GuiTextureObCollector::Instance().text_background;
-	Rect rect(pos.x - char_w, pos.y - 0.8*char_h, string_w, char_h);
-	drawTexturedRect(texOb_textBg, rect, -2);
+	Rect rect(pos.x - char_w, pos.y - char_h, string_w, 2*char_h);
+    	
+    enable_BLEND();
+    {
+        drawTexturedRect(texOb_textBg, rect, GUI::POS_Z);
+    }
+    disable_BLEND();
 	
-	Screen::Instance().DrawText(str, font_size, pos, color);
+    Screen::Instance().DrawText(str, font_size, pos, color);
+}
+
+void drawColoredText(const std::string& str, int font_size, const Vec2<float>& pos, const Color4<int>& color)
+{
+    glPushMatrix();
+    {
+        glLoadIdentity();
+	    Screen::Instance().DrawText(str, font_size, pos, color);
+    }
+    glPopMatrix();
 }
 
 void drawInfoIn2Column(

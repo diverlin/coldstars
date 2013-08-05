@@ -17,52 +17,34 @@
 */
 
 
-#ifndef USERINPUT_H
-#define USERINPUT_H
+#ifndef USERINPUT_HPP
+#define USERINPUT_HPP
 
-#include <GL/glew.h>
+
 #include <SFML/Window.hpp>
-#include "../math/Vec2.hpp"
-class Player;
-class GuiManager;
+
+class UserInputManagerInSpace;
+
 
 class UserInput
 {
 	public:
 		static UserInput& Instance();
-		~UserInput();
+		~UserInput() {};
 		
-		bool GetNextTurnReady() const { return next_turn_ready; };
+		void Update();
 		
-		void UpdateInKosmoport(Player*);
-		void UpdateInSpace(Player*);
-
 	private:
-		UserInput();
+		UserInput() {};
 		UserInput(const UserInput&) = delete;
 		UserInput& operator=(const UserInput&) = delete;
 		
-		int moveCamera_axis_x;
-		int moveCamera_axis_y;
+		sf::Event m_Event;		
 		
-		sf::Event event;
-		
-		Vec2<float> scroll_accel; 
-					
-		bool next_turn_ready;
-		
-		void ResetFlags(Player*);
-					
-		void ManageInputsInSpace(Player*);
-		void ManageInputsInKosmoport(Player*);
-		
-		bool KeyPressedCommon(Player*);
-		void KeyPressedInSpace(Player*);
-		void KeyPressedInKosmoport(Player*);
-		void MouseButtonPressed(Player*);
-					
-		void ManageRealTimeInputsInSpace(Player*);
-		void ScrollCamera(Player*);
+		std::vector<sf::Keyboard::Key> m_KeyboardCodesPressed_vec;
+		std::vector<sf::Keyboard::Key> m_MouseCodesPressed_vec;
+	
+	friend class UserInputManagerInSpace;
 };
 
 #endif 

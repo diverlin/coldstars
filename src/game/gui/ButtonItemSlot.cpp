@@ -33,21 +33,6 @@
 /* virtual override final */
 void ButtonItemSlot::OnPressEventMBL(Player* player)
 {
-    //if (m_ItemSlot)
-    //{    
-        //if ((player->GetCursor().GetItemSlot()->GetItem() == nullptr) and (m_ItemSlot->GetItem() != nullptr))
-        //{
-            //player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);
-            //return;
-        //}
-    
-        //if ((player->GetCursor().GetItemSlot()->GetItem() != nullptr) and (m_ItemSlot->GetItem() == nullptr))
-        //{
-            //player->GetCursor().GetItemSlot()->SwapItem(m_ItemSlot);
-            //return;
-        //}
-    //}         
-
     player->GetCursor().GetItemSlot()->SwapItem(GetItemSlot());
 }
 
@@ -55,10 +40,7 @@ void ButtonItemSlot::OnPressEventMBL(Player* player)
 /* virtual override final */
 void ButtonItemSlot::OnPressEventMBR(Player* player)
 {	
-	if (GetItemSlot() != nullptr)
-	{
-		player->GetNpc()->GetVehicle()->GetComplexWeapon().SetTarget(GetItemSlot()->GetOwnerVehicle(), GetItemSlot());
-	}
+	player->GetNpc()->GetVehicle()->GetComplexWeapon().SetTarget(GetItemSlot()->GetOwnerVehicle(), GetItemSlot());
 }
 
 /* virtual override final */
@@ -77,7 +59,10 @@ void ButtonItemSlot::RenderUnique(Player* player) const
 		RenderMarkEmptySlot(player->GetCursor().GetMouseData().pos_screencoord, getGuiItemSlotType(player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId()));
 	}
 	
-	RenderMarkTarget();		
+    if (player->GetNpc()->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+    {
+	    RenderMarkTarget();		
+    }
 }
   
 /* virtual override final */

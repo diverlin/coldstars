@@ -166,11 +166,12 @@ void RocketBullet::UpdateRenderStuff()
 {}
 
 void RocketBullet::RenderInSpace(float scale) const
-{
+{  
 	drawQuad(GetTextureOb(), GetCenter(), GetSize(), GetAngle().z);
-			  
+
 	m_EffectDrive->Update();
 	m_EffectDrive->Render(scale, 0.0f);
+    GetStarSystem()->RestoreSceneColor();
 }
 
 

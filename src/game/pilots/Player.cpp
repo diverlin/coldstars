@@ -16,6 +16,7 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "Player.hpp"
 #include "../config/config.hpp"
 #include "../resources/ShaderCollector.hpp"
@@ -58,6 +59,9 @@
 #include "../gui/GuiManager.hpp"
 
 #include "../slots/ItemSlot.hpp"
+
+#include <gui/UserInput.hpp>
+#include <gui/UserInputManagerInSpace.hpp>
 
 
 Player::Player(int id)
@@ -205,10 +209,10 @@ void Player::AddIfVisible(ShockWaveEffect* effect)
 
 void Player::AddIfVisible(LazerTraceEffect* effect)
 {
-        if ( (isPointOnScreen(effect->GetStartPos()) == true) or (isPointOnScreen(effect->GetEndPos()) == true) )
+    if ( (isPointOnScreen(effect->GetStartPos()) == true) or (isPointOnScreen(effect->GetEndPos()) == true) )
+    {
+        if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
         {
-                if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
-                {
 			visible_effect_LAZERTRACE_vec.push_back(effect);
 		}
 	}
@@ -216,10 +220,10 @@ void Player::AddIfVisible(LazerTraceEffect* effect)
  
 void Player::AddIfVisible(BaseParticleSystem* effect)
 {
-        if (isObjectOnScreen(effect->GetCenter(), 600))
+    if (isObjectOnScreen(effect->GetCenter(), 600))
+    {
+        if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
         {
-                if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
-                {
 			visible_effect_PARTICLESYSTEM_vec.push_back(effect);
 		}
 	}
@@ -227,10 +231,10 @@ void Player::AddIfVisible(BaseParticleSystem* effect)
 
 void Player::AddIfVisible(VerticalFlowText* effect)
 {
-        if (isPointOnScreen(effect->GetPos()))
+    if (isPointOnScreen(effect->GetCenter()))
+    {
+        if (isPointOnScreen(effect->GetCenter()))
         {
-                if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
-                {
 			visible_text_DAMAGE_vec.push_back(effect);
 		}
 	}
@@ -238,43 +242,43 @@ void Player::AddIfVisible(VerticalFlowText* effect)
 
 void Player::UpdatePostTransaction()
 {
-        switch (npc->GetVehicle()->GetPlaceTypeId())
+    switch (npc->GetVehicle()->GetPlaceTypeId())
+    {
+        case TYPE::PLACE::KOSMOPORT_ID:
         {
-                case TYPE::PLACE::KOSMOPORT_ID:
-                {
-                        if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == false)
-                        {
-                               GuiManager::Instance().EnterGuiKosmoport(); 
-                        }
-                        
-                        if (GuiManager::Instance().GetGuiSpace().GetInitDone() == true)
-                        {
-                                GuiManager::Instance().ExitGuiSpace();
-                        }
-                        
-                        break;
-                }
+            if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == false)
+            {
+                GuiManager::Instance().EnterGuiKosmoport(); 
+            }
+            
+            if (GuiManager::Instance().GetGuiSpace().GetInitDone() == true)
+            {
+                GuiManager::Instance().ExitGuiSpace();
+            }
+            
+            break;
+        }
+
+        case TYPE::PLACE::NATURELAND_ID:
+        {                       
+            break;
+        }
         
-                case TYPE::PLACE::NATURELAND_ID:
-                {                       
-                        break;
-                }
-                
-                case TYPE::PLACE::SPACE_ID:
-                {
-                        if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == true)
-                        {
-                                GuiManager::Instance().ExitGuiKosmoport(); 
-                        }
-                        
-                        if (GuiManager::Instance().GetGuiSpace().GetInitDone() == false)
-                        {
-                                GuiManager::Instance().EnterGuiSpace();
-                        }
-                        
-                        break;
-                }
-        }        
+        case TYPE::PLACE::SPACE_ID:
+        {
+            if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == true)
+            {
+                GuiManager::Instance().ExitGuiKosmoport(); 
+            }
+            
+            if (GuiManager::Instance().GetGuiSpace().GetInitDone() == false)
+            {
+                GuiManager::Instance().EnterGuiSpace();
+            }
+            
+            break;
+        }
+    }        
 }
 
 void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
@@ -480,17 +484,18 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 				for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
     			{ 
        				visible_SATELLITE_vec[i]->RenderInSpace(1/scale); 
-        			starsystem->RestoreSceneColor();
     			}
     			
     			for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
     			{ 
 					visible_ROCKET_vec[i]->UpdateRenderStuff();
        				visible_ROCKET_vec[i]->RenderInSpace(1/scale); 
-       				starsystem->RestoreSceneColor();
     			} 
 
-				RenderCollisionRadiusOfVisibleObjects();
+				if (show.GetCollisionRadius() == true)
+				{
+					RenderCollisionRadiusOfVisibleObjects();
+				}
 			}
 			disable_BLEND();
 		}
@@ -606,7 +611,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 		camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
     	for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
     	{ 
-        	visible_text_DAMAGE_vec[i]->Render(world_coord); 
+        	visible_text_DAMAGE_vec[i]->Render(world_coord, 1/scale); 
     	}   
     		    	
     	starsystem->RestoreSceneColor();
@@ -724,11 +729,11 @@ void Player::RenderInSpace_OLD(StarSystem* starsystem)
         //disable_BLEND();
 
 	// text
-        for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
-    	{ 
-        	visible_text_DAMAGE_vec[i]->Render(world_coord); 
-    	}    		
-    	starsystem->RestoreSceneColor();
+        //for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
+    	//{ 
+        	//visible_text_DAMAGE_vec[i]->Render(world_coord); 
+    	//}    		
+    	//starsystem->RestoreSceneColor();
 }
 
 
@@ -807,7 +812,7 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
 		float object_cursor_dist = distanceBetween(rocket_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, rocket_pos.z);
 		if (object_cursor_dist < visible_ROCKET_vec[i]->GetCollisionRadius())
 		{ 
-			cursor.SetFocusedObject(visible_ROCKET_vec[i]);
+			cursor.SetFocusedSpaceObject(visible_ROCKET_vec[i]);
 	   
 			if (data_mouse.left_click == true)
 			{
@@ -837,7 +842,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
 		float object_cursor_dist = distanceBetween(container_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, container_pos.z);
 		if (object_cursor_dist < visible_CONTAINER_vec[i]->GetCollisionRadius())
 		{   
-			cursor.SetFocusedObject(visible_CONTAINER_vec[i]);
+			cursor.SetFocusedSpaceObject(visible_CONTAINER_vec[i]);
 		            		
 			if (data_mouse.left_click == true)
 			{          					    
@@ -877,7 +882,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 		float object_cursor_dist = distanceBetween(visible_SATELLITE_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 		if (object_cursor_dist < visible_SATELLITE_vec[i]->GetCollisionRadius())
 		{ 
-			cursor.SetFocusedObject(visible_SATELLITE_vec[i]);
+			cursor.SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
 		
 			if (data_mouse.left_click == true)
 			{
@@ -927,7 +932,7 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 		float object_cursor_dist = distanceBetween(visible_ASTEROID_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 		if (object_cursor_dist < visible_ASTEROID_vec[i]->GetCollisionRadius())
 		{   
-			cursor.SetFocusedObject(visible_ASTEROID_vec[i]);        
+			cursor.SetFocusedSpaceObject(visible_ASTEROID_vec[i]);        
 		
 			if (data_mouse.left_click == true)
 			{
@@ -956,7 +961,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 		float object_cursor_dist = distanceBetween(visible_SHIP_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 		if (object_cursor_dist < visible_SHIP_vec[i]->GetCollisionRadius())
 		{ 
-			cursor.SetFocusedObject(visible_SHIP_vec[i]);    
+			cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);    
 		
 			if (npc->GetVehicle()->GetId() != visible_SHIP_vec[i]->GetId())
 			{
@@ -1017,7 +1022,7 @@ bool Player::MouseInteractionWithBlackHoles(const MouseData& data_mouse)
 		float cursor_dist = distanceBetween(visible_BLACKHOLE_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 		if (cursor_dist < visible_BLACKHOLE_vec[i]->GetCollisionRadius())
 		{   
-			cursor.SetFocusedObject(visible_BLACKHOLE_vec[i]); 
+			cursor.SetFocusedSpaceObject(visible_BLACKHOLE_vec[i]); 
 			
 			return true;
 		}
@@ -1033,7 +1038,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
         float object_cursor_dist = distanceBetween(visible_SPACESTATION_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
         { 
-            cursor.SetFocusedObject(visible_SPACESTATION_vec[i]); 
+            cursor.SetFocusedSpaceObject(visible_SPACESTATION_vec[i]); 
         
             if (data_mouse.left_click == true)
             {
@@ -1083,7 +1088,7 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
         float object_cursor_dist = distanceBetween(visible_PLANET_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_PLANET_vec[i]->GetCollisionRadius())
         {   
-            cursor.SetFocusedObject(visible_PLANET_vec[i]); 
+            cursor.SetFocusedSpaceObject(visible_PLANET_vec[i]); 
   
             if (data_mouse.left_click == true)
             {
@@ -1106,7 +1111,7 @@ bool Player::MouseInteractionWithStars(const MouseData& data_mouse)
 		float object_cursor_dist = distanceBetween(visible_STAR_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 		if (object_cursor_dist < visible_STAR_vec[i]->GetCollisionRadius())
 		{   
-			cursor.SetFocusedObject(visible_STAR_vec[i]); 
+			cursor.SetFocusedSpaceObject(visible_STAR_vec[i]); 
 				
 			return true; 
 		}
@@ -1131,14 +1136,16 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 	{
 		starsystem->FindRadarVisibleEntities_c(this);
 	}
-	
-    GuiManager::Instance().GetGuiSpace().Update(this);
-	BaseGuiElement* gui_element = GuiManager::Instance().GetGuiSpace().UpdateMouseInteraction(cursor.GetMouseData().pos_screencoord);
-	if (gui_element == nullptr)
-	{   
-		if (turn_timer.GetTurnEnded() == true)  
-		{
-			if ( (GuiManager::Instance().GetGuiVehicleScan()->GetVehicle() == nullptr) && (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr) )
+
+	UserInput::Instance().Update();
+    UserInputManagerInSpace::Instance().UpdateInSpace(this);
+	if (turn_timer.GetTurnEnded() == true)  
+	{	
+	    GuiManager::Instance().GetGuiSpace().Update(this);
+		BaseGuiElement* gui_element = GuiManager::Instance().GetGuiSpace().UpdateMouseInteraction(cursor.GetMouseData().pos_screencoord);
+		if (gui_element == nullptr)
+		{  
+			if ( (GuiManager::Instance().GetGuiVehicleScan()->GetVehicle() == nullptr) and (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr) )
 			{
 				bool mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(cursor.GetMouseData());  
 				if (mouse_interaction == false)
@@ -1147,38 +1154,18 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 				}
 			}
 		}
-	}
-	else
-	{
-			if (cursor.GetMouseData().left_click == true)
-			{
-				#if GUI_LOG_ENABLED == 1
-				Logger::Instance().Log("OnPressEventMBL="+getGuiTypeStr(gui_element->GetSubTypeId()), GUI_LOG_DIP);
-				#endif
-	
-				gui_element->OnPressEventMBL(this);
-			}
-			else if (cursor.GetMouseData().right_click == true)
-			{
-				#if GUI_LOG_ENABLED == 1
-				Logger::Instance().Log("OnPressEventMBR="+getGuiTypeStr(gui_element->GetSubTypeId()), GUI_LOG_DIP);
-				#endif
-				
-				gui_element->OnPressEventMBR(this);				
-			}
+		else
+		{
+	        cursor.SetFocusedGuiElement(gui_element);
+		}
 	}
 
 	RenderInSpace(starsystem, turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath());
     
-    GuiManager::Instance().RunSessionInSpace();
+    GuiManager::Instance().UpdateSessionInSpace();
  	GuiManager::Instance().GetGuiSpace().Render(this); 
     
-    cursor.Render(this);
-        
- 	if (gui_element != nullptr)
- 	{
- 		gui_element->RenderInfo();
- 	}
+    cursor.RenderItem();
 }
 
 
@@ -1194,18 +1181,18 @@ void Player::SessionInNatureLand()
 
 void Player::RunSession(const TurnTimer& turn_timer)
 {
-	cursor.UpdateMouseStuff();
-	
-       	switch(npc->GetVehicle()->GetPlaceTypeId())
-       	{
-       		case TYPE::PLACE::SPACE_ID: 		{ SessionInSpace(npc->GetVehicle()->GetStarSystem(), turn_timer); break; }
-       		case TYPE::PLACE::HYPER_SPACE_ID: 	{ SessionInSpace((StarSystem*)npc->GetVehicle()->GetComplexDrive().GetTarget(), turn_timer); break; }
-       		case TYPE::PLACE::KOSMOPORT_ID:  	{ SessionInKosmoport(); break; }
-       		case TYPE::PLACE::NATURELAND_ID:  	{ SessionInNatureLand(); break; }
-       	}       
-  	
-       	cursor.RenderFocusedObjectInfo();
-       	Screen::Instance().Draw();
+    cursor.Reset();
+    switch(npc->GetVehicle()->GetPlaceTypeId())
+    {
+        case TYPE::PLACE::SPACE_ID: 		{ SessionInSpace(npc->GetVehicle()->GetStarSystem(), turn_timer); break; }
+        case TYPE::PLACE::HYPER_SPACE_ID: 	{ SessionInSpace((StarSystem*)npc->GetVehicle()->GetComplexDrive().GetTarget(), turn_timer); break; }
+        case TYPE::PLACE::KOSMOPORT_ID:  	{ SessionInKosmoport(); break; }
+        case TYPE::PLACE::NATURELAND_ID:  	{ SessionInNatureLand(); break; }
+    }       
+
+	cursor.Update(this);
+    cursor.RenderFocusedObjectInfo();
+    Screen::Instance().Draw();
 }
 
 void Player::ForceStateMachineReset() const
@@ -1217,17 +1204,17 @@ void Player::RenderCollisionRadiusOfVisibleObjects() const
 {
 	enable_BLEND(); 
 	{       
-		for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 		{ visible_STAR_vec[i]->RenderCollisionRadius(); }
-		for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 	{ visible_PLANET_vec[i]->RenderCollisionRadius(); }
 		for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)	{ visible_SPACESTATION_vec[i]->RenderCollisionRadius(); }    		
-		for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)		{ visible_SHIP_vec[i]->RenderCollisionRadius(); } 
-		for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)	{ visible_ASTEROID_vec[i]->RenderCollisionRadius(); } 
-		for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)	{ visible_BLACKHOLE_vec[i]->RenderCollisionRadius(); } 
-		for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++) 	{ visible_SPACESTATION_vec[i]->RenderCollisionRadius(); } 
-		for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)	{ visible_CONTAINER_vec[i]->RenderCollisionRadius(); } 
-		for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)		{ visible_SHIP_vec[i]->RenderCollisionRadius(); } 
-		for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)	{ visible_SATELLITE_vec[i]->RenderCollisionRadius(); } 
-		for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)		{ visible_ROCKET_vec[i]->RenderCollisionRadius(); }
+		for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)		{ visible_SATELLITE_vec[i]->RenderCollisionRadius(); } 
+		for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)			{ visible_SHIP_vec[i]->RenderCollisionRadius(); } 
+		
+		for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)			{ visible_ROCKET_vec[i]->RenderCollisionRadius(); }
+		for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)		{ visible_CONTAINER_vec[i]->RenderCollisionRadius(); } 
+						
+		for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 			{ visible_STAR_vec[i]->RenderCollisionRadius(); }
+		for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 		{ visible_PLANET_vec[i]->RenderCollisionRadius(); }
+		for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)		{ visible_ASTEROID_vec[i]->RenderCollisionRadius(); } 
+		for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)		{ visible_BLACKHOLE_vec[i]->RenderCollisionRadius(); } 
 	}
 	disable_BLEND();
 }
@@ -1364,13 +1351,13 @@ bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
 	return false;
 }
 
-bool isObjectWithinRadarRange(VerticalFlowText* effect, Vehicle* vehicle)
-{
-	float dist = distanceBetween(vehicle->GetCenter(), effect->GetPos());
-	if (dist < vehicle->GetProperties().radar)
-	{
-		return true;
-	}
+//bool isObjectWithinRadarRange(VerticalFlowText* effect, Vehicle* vehicle)
+//{
+	//float dist = distanceBetween(vehicle->GetCenter(), effect->GetPos());
+	//if (dist < vehicle->GetProperties().radar)
+	//{
+		//return true;
+	//}
 	
-	return false;
-}
+	//return false;
+//}

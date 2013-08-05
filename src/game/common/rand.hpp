@@ -32,6 +32,8 @@ int getRandInt(int, int);
 int getRandSign();
 bool getRandBool();
 
+bool isActionShouldHappen(int);
+
 TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE, const std::vector<TYPE::ENTITY>&);
 const std::vector<TYPE::ENTITY>& getAllowedSubTypesByRaceId(TYPE::RACE);
 

@@ -16,41 +16,40 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Cursor.hpp"
-#include "../render/Screen.hpp"
+
+#include <gui/Cursor.hpp>
+
+#include <common/Logger.hpp>
+
+#include <types/GuiTypes.hpp>
+
+#include <render/Render.hpp>
+#include <render/Screen.hpp>
+
 #include <builder/slots/ItemSlotBuilder.hpp>
 
-#include "../items/BaseItem.hpp"
-
-#include "../spaceobjects/RocketBullet.hpp"
-#include "../spaceobjects/Satellite.hpp"
-#include "../spaceobjects/Ship.hpp"
-#include "../spaceobjects/SpaceStation.hpp"
-#include "../spaceobjects/Asteroid.hpp"
-#include "../spaceobjects/Planet.hpp"
-#include "../spaceobjects/Star.hpp"
-#include "../spaceobjects/BlackHole.hpp"
-#include "../spaceobjects/Container.hpp"
-
-#include "../parts/WeaponComplex.hpp"
-#include "ButtonTrigger.hpp"
-#include "../resources/GuiTextureObCollector.hpp"
-#include "../pilots/Player.hpp"
-#include "../pilots/Npc.hpp"
-
-#include "../render/Render.hpp"
-
 #include <slots/ItemSlot.hpp>
+
+#include <items/BaseItem.hpp>
+
+#include <spaceobjects/IncludeSpaceObjects.hpp>
+
+#include <pilots/Player.hpp>
+#include <pilots/Npc.hpp>
+
+#include <parts/WeaponComplex.hpp>
+#include <gui/ButtonTrigger.hpp>
+#include <resources/GuiTextureObCollector.hpp>
 
 
 Cursor::Cursor()
 : 
-BaseGuiElement(),
-focused_ob(nullptr)
+m_FocusedSpaceObject(nullptr),
+m_FocusedGuiElement(nullptr)
 {
-    item_slot = GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY::CARGO_SLOT_ID);
+    m_ItemSlot = GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY::CARGO_SLOT_ID);
     
-    GetBox().SetSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
+    m_Box.SetSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
     
     //ButtonTrigger* button; // EXPERIMENTAL GUI
     //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::ACTION_ATTACK_ID, "attack");  
@@ -82,61 +81,126 @@ focused_ob(nullptr)
     //}
 }
 
+/* virtual */
 Cursor::~Cursor()
-{}
-
-void Cursor::UpdateMouseStuff()
 {
-   	data_mouse.left_click = false;
-   	data_mouse.right_click = false;
-   	
-	sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());
-	
-	data_mouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
-	data_mouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
-	
-	data_mouse.pos_screencoord.Set(mouse_pos.x, Screen::Instance().GetHeight() - mouse_pos.y);
-	data_mouse.pos_worldcoord = data_mouse.pos_screencoord*Screen::Instance().GetScale() + Screen::Instance().GetBottomLeftScreenWC();
+    delete m_ItemSlot;
 }
 
-void Cursor::Update()
+void Cursor::Reset()
 {
-    GetBox().SetCenter(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y);     	
+   	m_DataMouse.left_click  = false;
+    m_DataMouse.right_click = false;
+    
+	m_FocusedSpaceObject = nullptr;
+	m_FocusedGuiElement = nullptr;
+}
+
+void Cursor::Update(Player* player)
+{
+    UpdateMouseStuff();
+    
+    m_Box.SetCenter(m_DataMouse.pos_screencoord.x, m_DataMouse.pos_screencoord.y);  
+        
+    if (m_DataMouse.left_click == true)
+    {
+        if (m_FocusedGuiElement != nullptr)
+        {
+            #if GUI_LOG_ENABLED == 1
+            Logger::Instance().Log("OnPressEventMBL="+getGuiTypeStr(m_FocusedGuiElement->GetSubTypeId()), GUI_LOG_DIP);
+            #endif
+        
+            m_FocusedGuiElement->OnPressEventMBL(player);
+        }
+        
+        if (m_FocusedSpaceObject != nullptr)
+        {
+            //..
+        }
+        
+    }
+    else if (m_DataMouse.right_click == true)
+    {
+        if (m_FocusedGuiElement != nullptr)
+        {
+            #if GUI_LOG_ENABLED == 1
+            Logger::Instance().Log("OnPressEventMBR="+getGuiTypeStr(m_FocusedGuiElement->GetSubTypeId()), GUI_LOG_DIP);
+            #endif
+        
+            m_FocusedGuiElement->OnPressEventMBR(player);
+        }
+                
+        if (m_FocusedSpaceObject != nullptr)
+        {
+            //..
+        }
+        
+    }
+           	
+}
+
+void Cursor::UpdateMouseStuff()
+{	
+	m_DataMouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+	m_DataMouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
+
+	sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());	
+	m_DataMouse.pos_screencoord.Set(mouse_pos.x, Screen::Instance().GetHeight() - mouse_pos.y);
+	m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*Screen::Instance().GetScale() + Screen::Instance().GetBottomLeftScreenWC();
 }
 
 void Cursor::RenderFocusedObjectStuff() const
 {
-	if (focused_ob != nullptr)
-	{
-		enable_BLEND();
-	    {
-        	focused_ob->RenderStuffWhenFocusedInSpace();
-
-			Box2D box(focused_ob->GetCenter(), focused_ob->GetSize());
-			box.SetScale(1.1, 1.1);
-			box.SetAngle(focused_ob->GetAngle().z);
-			drawQuad(GuiTextureObCollector::Instance().mark_target, box);
+    enable_BLEND();
+    {
+        float scale = 1.1;
+        if (m_FocusedSpaceObject != nullptr)
+        {                    
+            m_FocusedSpaceObject->RenderStuffWhenFocusedInSpace();
+            
+            Box2D box(m_FocusedSpaceObject->GetCenter(), m_FocusedSpaceObject->GetSize());
+            box.SetScale(scale, scale);
+            box.SetAngle(m_FocusedSpaceObject->GetAngle().z);
+            
+            drawQuad(GuiTextureObCollector::Instance().mark_target, box);
         }
-        disable_BLEND();   	
-	}
+        
+        if (m_FocusedGuiElement != nullptr)
+        {
+            if (m_FocusedGuiElement->GetTypeId() == TYPE::GUI::BUTTON_ITEMSLOT_ID)
+            {
+                Box2D box(m_FocusedGuiElement->GetBox());
+                box.SetScale(scale, scale);
+            
+                drawQuad(GuiTextureObCollector::Instance().mark_target, box);
+            }
+        }
+    }
+    disable_BLEND();  
 }
 
-void Cursor::RenderFocusedObjectInfo()
+void Cursor::RenderFocusedObjectInfo() const
 {
-	if (focused_ob != nullptr)
-	{
-		enable_BLEND();
-	    {
-        	focused_ob->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC(), Screen::Instance().GetScale());
+    enable_BLEND();
+    {
+        if (m_FocusedSpaceObject != nullptr)
+        {
+        	m_FocusedSpaceObject->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC(), Screen::Instance().GetScale());
         }
-        disable_BLEND();   	
+        
+        if (m_FocusedGuiElement != nullptr)
+        {
+            m_FocusedGuiElement->RenderInfo();
+        }
 	}
-	
-	focused_ob = nullptr;
+    disable_BLEND();  
 }
 
-/* virtual override final */
-void Cursor::RenderUnique(Player* player) const
+void Cursor::RenderItem() const
 {
-    item_slot->RenderItem(GetBox(), Vec3<float>(0,0,0));   
+    enable_BLEND();
+    {
+        m_ItemSlot->RenderItem(m_Box, Vec3<float>(0,0,0));   
+    }
+    disable_BLEND();
 }

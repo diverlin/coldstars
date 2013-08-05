@@ -30,7 +30,7 @@ class MouseData; // to be removed
 class GuiVehicle : public BaseGuiElement
 {
     public:
-        GuiVehicle(GUI::TYPE);
+        GuiVehicle();
         virtual ~GuiVehicle();
         
         Vehicle* GetVehicle() const { return m_Vehicle; };

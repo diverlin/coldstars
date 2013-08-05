@@ -26,6 +26,7 @@
 #include <common/Box2D.hpp>
 class Mesh;
 
+
 void initGl(int, int);
 void resizeGl(int, int);
 
@@ -69,11 +70,13 @@ void drawLine(TextureOb* texOb,
               float angle_inD, 
               int half_h);
 
-void drawSimpleColoredTextWithBackground(const std::string&, 
+void drawColoredTextWithBackground(const std::string&, 
 			   int,
 			   const Vec2<float>&, 
 			   const Color4<int>&);
 			   
+void drawColoredText(const std::string&, int, const Vec2<float>&, const Color4<int>&);
+               
 void drawInfoIn2Column(
                 const std::vector<std::string>& pnfo_title_list, 
                 const std::vector<std::string>& info_value_list, 

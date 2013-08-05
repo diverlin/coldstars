@@ -16,18 +16,20 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef BASEBUTTONITEMSLOT_HPP
 #define BASEBUTTONITEMSLOT_HPP
 
 #include "BaseButton.hpp"
 class ItemSlot;
 
+
 class BaseButtonItemSlot : public BaseButton
 {
 	public:
-        BaseButtonItemSlot(GUI::TYPE subtype_id, const std::string& info)
+        BaseButtonItemSlot(TYPE::GUI type_id, TYPE::GUI subtype_id, const std::string& info)
         :
-        BaseButton(subtype_id, info), 
+        BaseButton(type_id, subtype_id, info), 
         m_ItemSlot(nullptr) 
         {}
                
@@ -42,7 +44,7 @@ class BaseButtonItemSlot : public BaseButton
 
         void UpdateAnimationProgram();
 
-        void RenderMarkEmptySlot(const Vec2<float>&, GUI::TYPE) const;
+        void RenderMarkEmptySlot(const Vec2<float>&, TYPE::GUI) const;
         void RenderMarkTarget() const;
                         
     private:

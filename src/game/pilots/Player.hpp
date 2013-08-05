@@ -16,6 +16,7 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
@@ -159,7 +160,6 @@ bool isPointOnScreen(const Vec2<float>&);
 bool isObjectWithinRadarRange(BaseParticleSystem*, Vehicle*);		                              
 bool isObjectWithinRadarRange(ShockWaveEffect*, Vehicle*);
 bool isObjectWithinRadarRange(LazerTraceEffect*, Vehicle*);
-bool isObjectWithinRadarRange(VerticalFlowText*, Vehicle*);
     		
 #endif 
 

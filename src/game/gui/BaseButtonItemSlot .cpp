@@ -27,6 +27,7 @@
 #include <render/Render.hpp> 
 
 #include <common/common.hpp>
+#include <common/myStr.hpp>
 
     
 bool BaseButtonItemSlot::GetEquiped() const
@@ -79,18 +80,18 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
     }
 }
 
-void BaseButtonItemSlot::RenderMarkEmptySlot(const Vec2<float>& mouse_screen_coord_pos, GUI::TYPE mark_slot_subtype_id) const
+void BaseButtonItemSlot::RenderMarkEmptySlot(const Vec2<float>& mouse_screen_coord_pos, TYPE::GUI mark_slot_subtype_id) const
 {
     if (m_ItemSlot != nullptr)
     {
 		if (GetEquiped() == false) 
 		{
-            GUI::TYPE buton_subtype_id = GetSubTypeId();
+            TYPE::GUI buton_subtype_id = GetSubTypeId();
             for (TYPE::ENTITY type : SLOT_WEAPON_TYPES)
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = GUI::TYPE::WEAPON_SLOT_ID;
+                   buton_subtype_id = TYPE::GUI::WEAPON_SLOT_ID;
                    break;
                 }
             }
@@ -98,7 +99,7 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const Vec2<float>& mouse_screen_coo
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = GUI::TYPE::CARGO_SLOT_ID;
+                   buton_subtype_id = TYPE::GUI::CARGO_SLOT_ID;
                    break;
                 }
             }
@@ -106,14 +107,14 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const Vec2<float>& mouse_screen_coo
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = GUI::TYPE::ARTEFACT_SLOT_ID;
+                   buton_subtype_id = TYPE::GUI::ARTEFACT_SLOT_ID;
                    break;
                 }
             }
                                 
-			if (buton_subtype_id != GUI::TYPE::GATE_SLOT_ID)
+			if (buton_subtype_id != TYPE::GUI::GATE_SLOT_ID)
             {            
-                if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == GUI::TYPE::CARGO_SLOT_ID))  
+                if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == TYPE::GUI::CARGO_SLOT_ID))  
                 {
                    m_ItemSlot->RenderMark(GetBox(), GuiTextureObCollector::Instance().slot_mark_accept);
                 }
@@ -134,11 +135,11 @@ void BaseButtonItemSlot::RenderMarkTarget() const
     if (m_ItemSlot != nullptr)
     {
         if (m_ItemSlot->GetItem() != nullptr)
-        {  
-			Box2D box = GetBox();
-			box.SetScale(1.1, 1.1);
+        {              
+			//box.SetScale(1.5, 1.5);
 			//drawQuadMasked(GuiTextureObCollector::Instance().slot_mark_accept, box, GuiTextureObCollector::Instance().mask_round, 1.0-0.5);
-			drawQuad(GuiTextureObCollector::Instance().mark_target, box);
+			//drawQuad(GuiTextureObCollector::Instance().mark_target_slot, box);
+            drawColoredTextWithBackground(int2str(m_ItemSlot->GetHitProbability()), /*font_size=*/12, GetBox().GetMiddleTop(), Color4<int>(255));
 		}
 	}
 }

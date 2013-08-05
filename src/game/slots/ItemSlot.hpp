@@ -57,6 +57,7 @@ class GoodsPack;
 
 class Box2D;
 
+
 struct UnresolvedDataUniqueItemSlot
 {
 	UnresolvedDataUniqueItemSlot():target_id(NONE_ID), subtarget_id(NONE_ID) 
@@ -75,41 +76,43 @@ class ItemSlot : public BaseSlot
         virtual void PutChildsToGarbage() const;
         
         void SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget = nullptr);
-        void SetTurrel(Turrel* turrel) { this->turrel = turrel; };
+        void SetTurrel(Turrel* turrel) { m_Turrel = turrel; }
         
-        BaseSpaceEntity* GetTarget() const { return target; };
-        ItemSlot* GetSubTarget() const { return subtarget; };          
+        BaseSpaceEntity* GetTarget() const { return m_Target; }
+        ItemSlot* GetSubTarget() const { return m_Subtarget; }        
         
-        Turrel* GetTurrel() const { return turrel; };
+        int GetHitProbability() const { return m_HitProbability; }
         
-        BaseItem* GetItem()                         const { return item; };                
-        RocketEquipment*    GetRocketEquipment()    const { return (RocketEquipment*)item; }
- 		LazerEquipment*     GetLazerEquipment()     const { return (LazerEquipment*)item; }
-		RadarEquipment*     GetRadarEquipment()     const { return (RadarEquipment*)item; }
-		DriveEquipment*     GetDriveEquipment()     const { return (DriveEquipment*)item; }
-		BakEquipment*       GetBakEquipment()       const { return (BakEquipment*)item; }
-		EnergizerEquipment* GetEnergizerEquipment() const { return (EnergizerEquipment*)item; }
-		ProtectorEquipment* GetProtectorEquipment() const { return (ProtectorEquipment*)item; }
-		DroidEquipment*     GetDroidEquipment()     const { return (DroidEquipment*)item; }
-		FreezerEquipment*   GetFreezerEquipment()   const { return (FreezerEquipment*)item; }
-		ScanerEquipment*    GetScanerEquipment()    const { return (ScanerEquipment*)item; }
-		GrappleEquipment*   GetGrappleEquipment()   const { return (GrappleEquipment*)item; }
+        Turrel* GetTurrel() const { return m_Turrel; }
+        
+        BaseItem* GetItem()                         const { return m_Item; }                
+        RocketEquipment*    GetRocketEquipment()    const { return (RocketEquipment*)m_Item; }
+ 		LazerEquipment*     GetLazerEquipment()     const { return (LazerEquipment*)m_Item; }
+		RadarEquipment*     GetRadarEquipment()     const { return (RadarEquipment*)m_Item; }
+		DriveEquipment*     GetDriveEquipment()     const { return (DriveEquipment*)m_Item; }
+		BakEquipment*       GetBakEquipment()       const { return (BakEquipment*)m_Item; }
+		EnergizerEquipment* GetEnergizerEquipment() const { return (EnergizerEquipment*)m_Item; }
+		ProtectorEquipment* GetProtectorEquipment() const { return (ProtectorEquipment*)m_Item; }
+		DroidEquipment*     GetDroidEquipment()     const { return (DroidEquipment*)m_Item; }
+		FreezerEquipment*   GetFreezerEquipment()   const { return (FreezerEquipment*)m_Item; }
+		ScanerEquipment*    GetScanerEquipment()    const { return (ScanerEquipment*)m_Item; }
+		GrappleEquipment*   GetGrappleEquipment()   const { return (GrappleEquipment*)m_Item; }
 
-		RocketModule*       GetRocketModule()       const { return (RocketModule*)item; }
-		LazerModule*        GetLazerModule()        const { return (LazerModule*)item; }
-		RadarModule*        GetRadarModule()        const { return (RadarModule*)item; }
-		DriveModule*        GetDriveModule()        const { return (DriveModule*)item; }
-		BakModule*          GetBakModule()          const { return (BakModule*)item; }
-		EnergizerModule*    GetEnergizerModule()    const { return (EnergizerModule*)item; }
-		ProtectorModule*    GetProtectorModule()    const { return (ProtectorModule*)item; }
-		DroidModule*        GetDroidModule()        const { return (DroidModule*)item; }
-		FreezerModule*      GetFreezerModule()      const { return (FreezerModule*)item; }
-		ScanerModule*       GetScanerModule()       const { return (ScanerModule*)item; }
-		GrappleModule*      GetGrappleModule()      const { return (GrappleModule*)item; }
+		RocketModule*       GetRocketModule()       const { return (RocketModule*)m_Item; }
+		LazerModule*        GetLazerModule()        const { return (LazerModule*)m_Item; }
+		RadarModule*        GetRadarModule()        const { return (RadarModule*)m_Item; }
+		DriveModule*        GetDriveModule()        const { return (DriveModule*)m_Item; }
+		BakModule*          GetBakModule()          const { return (BakModule*)m_Item; }
+		EnergizerModule*    GetEnergizerModule()    const { return (EnergizerModule*)m_Item; }
+		ProtectorModule*    GetProtectorModule()    const { return (ProtectorModule*)m_Item; }
+		DroidModule*        GetDroidModule()        const { return (DroidModule*)m_Item; }
+		FreezerModule*      GetFreezerModule()      const { return (FreezerModule*)m_Item; }
+		ScanerModule*       GetScanerModule()       const { return (ScanerModule*)m_Item; }
+		GrappleModule*      GetGrappleModule()      const { return (GrappleModule*)m_Item; }
 
-		Bomb* GetBomb()           const { return (Bomb*)item; }
+		Bomb* GetBomb()           const { return (Bomb*)m_Item; }
 		//Artefact* GetArtefact() const { return artefact; }
-		GoodsPack* GetGoodsPack() const { return (GoodsPack*)item; }
+		GoodsPack* GetGoodsPack() const { return (GoodsPack*)m_Item; }
                               
 		bool InsertItem(BaseItem*);            
 		void RemoveItem();
@@ -148,14 +151,15 @@ class ItemSlot : public BaseSlot
         int GetItemDamage() const;
            	           			
     private:                               
-        Turrel* turrel;          // only for weapons slot
+        Turrel* m_Turrel;          // only for weapons slot
         
-        BaseItem* item;
+        BaseItem* m_Item;
         
-        BaseSpaceEntity* target;
-        ItemSlot* subtarget;      
+        BaseSpaceEntity* m_Target;
+        ItemSlot* m_Subtarget;      
         
-        PathVisual range_visual;    // !!!
+        int m_HitProbability;
+        PathVisual m_VisualPath;    // !!!
         
         bool CheckItemInsertion(BaseItem*) const;  
         

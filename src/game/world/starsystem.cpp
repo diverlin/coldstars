@@ -762,7 +762,7 @@ void StarSystem::UpdateEntities_s(int time, bool show_effect)
         for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)  	{ effect_LAZERTRACE_vec[i]->update(); }
 	for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { effect_PARTICLESYSTEM_vec[i]->Update(); }
 	for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++) 	{ effect_SHOCKWAVE_vec[i]->Update(); }
-	for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)         { text_DAMAGE_vec[i]->update(); }   
+	for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)         { text_DAMAGE_vec[i]->Update(); }   
 	for (unsigned int i=0; i<distantNebulaEffect_vec.size(); i++) { distantNebulaEffect_vec[i]->Update(); } 
 }  
       
@@ -806,7 +806,7 @@ void StarSystem::FindRenderVisibleEntities_c(Player* player)
 
 void StarSystem::FindRadarVisibleEntities_c(Player* player)
 {	
-	GuiRadar& gui_radar = *(GuiRadar*)GuiManager::Instance().GetGuiElement(GUI::TYPE::GUI_RADAR_ID);
+	GuiRadar& gui_radar = *(GuiRadar*)GuiManager::Instance().GetGuiElement(TYPE::GUI::GUI_RADAR_ID);
 	const Vehicle& vehicle = *player->GetNpc()->GetVehicle();
 	gui_radar.ResetData();
 	

@@ -25,14 +25,15 @@
 #include <render/AnimationEffect2D.hpp>
 
 
-std::map<GUI::TYPE, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
+std::map<TYPE::GUI, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
 
    
-BaseGuiElement::BaseGuiElement(GUI::TYPE subtype_id, const std::string& info, TextureOb* textureOb)
+BaseGuiElement::BaseGuiElement(TYPE::GUI type_id, TYPE::GUI subtype_id, const std::string& info, TextureOb* textureOb)
 :
+m_Type_id(type_id),
+m_Subtype_id(subtype_id),
 m_TextureOb(textureOb),
 m_Info(info),
-m_Subtype_id(subtype_id),
 m_Locked(false),
 m_Pressed(false),
 m_Show(true),
@@ -43,10 +44,10 @@ m_AnimationProgram(nullptr)
 /* virtual */
 BaseGuiElement::~BaseGuiElement()
 {
-	for (std::vector<BaseGuiElement*>::iterator it=m_Child_vec.begin(); it!=m_Child_vec.end(); it++)
-	{
-		delete *it;
-	}
+	//for (std::vector<BaseGuiElement*>::iterator it=m_Child_vec.begin(); it!=m_Child_vec.end(); it++)
+	//{
+		//delete *it;
+	//}
     
     delete m_AnimationProgram;
 }	
@@ -61,9 +62,9 @@ void BaseGuiElement::DeleteAnimationProgram()
 }
 
       	
-BaseGuiElement* BaseGuiElement::GetGuiElement(GUI::TYPE request_subtype_id) const
+BaseGuiElement* BaseGuiElement::GetGuiElement(TYPE::GUI request_subtype_id) const
 {
-	std::map<GUI::TYPE, BaseGuiElement*>::const_iterator it = static_gui_element_map.find(request_subtype_id);
+	std::map<TYPE::GUI, BaseGuiElement*>::const_iterator it = static_gui_element_map.find(request_subtype_id);
 	if (it != static_gui_element_map.cend())
 	{
 		return it->second;
@@ -72,7 +73,7 @@ BaseGuiElement* BaseGuiElement::GetGuiElement(GUI::TYPE request_subtype_id) cons
 	return nullptr;
 }   
 	
-void BaseGuiElement::PressEventMBL_onGuiElement(GUI::TYPE subtype_id, Player* player)
+void BaseGuiElement::PressEventMBL_onGuiElement(TYPE::GUI subtype_id, Player* player)
 {
 	BaseGuiElement* button = GetGuiElement(subtype_id);
 	if (button != nullptr)
@@ -81,7 +82,7 @@ void BaseGuiElement::PressEventMBL_onGuiElement(GUI::TYPE subtype_id, Player* pl
 	}
 }	
 
-void BaseGuiElement::ResetStateEventOnGuiElement(GUI::TYPE subtype_id)
+void BaseGuiElement::ResetStateEventOnGuiElement(TYPE::GUI subtype_id)
 {
 	BaseGuiElement* button = GetGuiElement(subtype_id);
 	if (button != nullptr)

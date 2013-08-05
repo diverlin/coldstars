@@ -24,32 +24,32 @@
 #include <math/Vec2.hpp>
 #include <math/Color4.hpp>
 
+
 class VerticalFlowText
 {
 	public:
 		VerticalFlowText(const std::string&, int, const Vec2<float>&, const Color4<int>&, float);                                   
 		~VerticalFlowText();
 		
-		bool GetAlive() const { return is_alive; };
+		bool GetAlive() const { return m_IsAlive; }
 		
-		const Vec2<float>& GetPos() const { return pos; };
+		const Vec2<float>& GetCenter() const { return m_Center; }
 		
-		void update();
-		void Render(const Vec2<float>&) const;
+		void Update();
+		void Render(const Vec2<float>&, float) const;
 	
 	private:
-		bool is_alive;
-		int live_time;
+		bool m_IsAlive;
+		int m_LiveTime;
 		
-		int font_size;
+		int m_FontSize;
 		
-		std::string str;
-		Color4<int> color;
+		std::string m_Text;
+		Color4<int> m_Color;
 		
-		Vec2<float> offset;
-		Vec2<float> pos;
+		Vec2<float> m_Center;
 		
-		float speed;
+		float m_Speed;
 };
 
 #endif 

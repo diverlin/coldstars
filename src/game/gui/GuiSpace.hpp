@@ -16,8 +16,8 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUISPACE_H
-#define GUISPACE_H
+#ifndef GUISPACE_HPP
+#define GUISPACE_HPP
 
 #include "BaseGuiElement.hpp"
 
@@ -35,8 +35,6 @@ class GuiSpace : public BaseGuiElement
 	public:
 		GuiSpace();
 		~GuiSpace();
-		
-		void SetPlayer(Player*);
 		
 		bool GetInitDone() const { return init_done; };
 		
@@ -64,7 +62,7 @@ class GuiSpace : public BaseGuiElement
 		bool init_done;
 		
 		GuiGalaxyMap* gui_galaxymap_shared;  
-		GuiVehicle*   gui_vehicle_scan_shared;
+		//GuiVehicle*   gui_vehicle_scan_shared;
 		GuiSkills*    gui_skills_shared;
 		Slider*       slider_shared;
 		

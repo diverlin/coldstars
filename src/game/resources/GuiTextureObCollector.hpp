@@ -60,7 +60,8 @@ class GuiTextureObCollector
 		TextureOb* slot_mark_reject;
 		TextureOb* mask_round;
 		TextureOb* mark_target;
-				
+        TextureOb* mark_target_slot;
+                    	
 		static GuiTextureObCollector& Instance();
         	
 	private:
