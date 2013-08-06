@@ -16,14 +16,16 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUIGALAXYMAP_H
-#define GUIGALAXYMAP_H
 
-#include "BaseGuiElement.hpp"
+#ifndef GUIGALAXYMAP_HPP
+#define GUIGALAXYMAP_HPP
+
+#include <gui/BaseGuiElement.hpp>
+#include <gui/MouseData.hpp>
+#include <render/PathVisual.hpp>
+
 class Galaxy;
-#include "../render/PathVisual.hpp"
-#include "../common/rect.hpp"
-#include "MouseData.hpp"
+
 
 class GuiGalaxyMap : public BaseGuiElement
 {
@@ -31,25 +33,21 @@ class GuiGalaxyMap : public BaseGuiElement
 		GuiGalaxyMap();
 		~GuiGalaxyMap();
 		
-		void BindGalaxy(Galaxy* galaxy);
+		void BindGalaxy(Galaxy*);
 		void UnbindGalaxy();
 		   
-		Galaxy* GetGalaxy() const { return galaxy; };
-		   
-		bool UpdateMouseInteraction(const MouseData&);
-		virtual void RenderUnique(Player*) const override final;
+		Galaxy* GetGalaxy() const { return m_Galaxy; }
 
 	private:
-		float scale_parsec2screencoord;
+		float m_ScaleParsecToScreenCoord;
 		
-		Galaxy* galaxy;
+		Galaxy* m_Galaxy;
 		
-		Rect rect;
-		
-		TextureOb* texOb_background;
-		
-		PathVisual visual_hyperjump_range;
-		PathVisual visual_hyperjump_path;
+		PathVisual m_VisualHyperJumpRange;
+		PathVisual m_VisualHyperJumpPath;
+        
+        virtual void UpdateUnique(Player*) override final;
+		virtual void RenderUnique(Player*) const override final;
 };
      		
 #endif 
