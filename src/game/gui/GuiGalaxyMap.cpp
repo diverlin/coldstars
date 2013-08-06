@@ -16,6 +16,7 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "GuiGalaxyMap.hpp"
 #include "MouseData.hpp"
 #include "../config/config.hpp"
@@ -39,17 +40,17 @@
 #include "../pilots/Npc.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 
+
 GuiGalaxyMap::GuiGalaxyMap()
 :
 BaseGuiElement(TYPE::GUI::GALAXYMAP_ID, TYPE::GUI::GALAXYMAP_ID),
-galaxy(nullptr)
+m_Galaxy(nullptr)
 { 
-	rect.Set(GUI::MAP::BORDER_X, GUI::MAP::BORDER_Y, 
-	Config::Instance().SCREEN_WIDTH  - 2 * GUI::MAP::BORDER_X, 
-	Config::Instance().SCREEN_HEIGHT - 2 * GUI::MAP::BORDER_X);
+	GetBox().SetCenter(400, 300);
+	GetBox().SetSize(Config::Instance().SCREEN_WIDTH  - 2 * GUI::MAP::BORDER_X, Config::Instance().SCREEN_HEIGHT - 2 * GUI::MAP::BORDER_X);
 	
-	texOb_background = GuiTextureObCollector::Instance().text_background;
-	scale_parsec2screencoord = 2*Config::Instance().SCREEN_WIDTH/(float)ENTITY::GALAXY::PARSEC;
+	SetTextureOb(GuiTextureObCollector::Instance().text_background);
+	m_ScaleParsecToScreenCoord = Config::Instance().SCREEN_WIDTH/(float)ENTITY::GALAXY::PARSEC;
 }
 
 GuiGalaxyMap::~GuiGalaxyMap()
@@ -57,16 +58,30 @@ GuiGalaxyMap::~GuiGalaxyMap()
 
 void GuiGalaxyMap::BindGalaxy(Galaxy* galaxy)
 {
-	this->galaxy = galaxy;
+	m_Galaxy = galaxy;
 }
                 
 void GuiGalaxyMap::UnbindGalaxy()
 {
-	galaxy = nullptr;
+	m_Galaxy = nullptr;
 }
-                
-bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse)
-{
+        
+/* virtual override final */
+void GuiGalaxyMap::UpdateUnique(Player* player)
+{    
+    //m_VisualHyperJumpRange.FillData(GuiTextureObCollector::Instance().dot_yellow, 
+    //m_ScaleParsecToScreenCoord*player->GetNpc()->GetVehicle()->GetProperties().hyper, 
+    //10);
+
+    if (player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() == TYPE::AISCENARIO::MICRO_JUMP_ID)
+    {
+        //m_VisualHyperJumpPath.FillData(GuiTextureObCollector::Instance().dot_green,
+        //player->GetNpc()->GetVehicle()->GetStarSystem()->GetCenter()*m_ScaleParsecToScreenCoord,
+        //player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTarget()->GetCenter()*m_ScaleParsecToScreenCoord,
+        //10, 
+        //20);    	
+    }
+        
 	/*
 	if (GetPlayer()->GetNpc()->GetVehicle()->GetProperties().hyper > 0)
 	{      
@@ -104,66 +119,59 @@ bool GuiGalaxyMap::UpdateMouseInteraction(const MouseData& data_mouse)
 		}
 	}
 	*/
-	return false;
 }
 
 
 /* vitual override final */
 void GuiGalaxyMap::RenderUnique(Player* player) const
 {
-	drawTexturedRect(texOb_background, rect, -1.0);
+	drawQuad(GetTextureOb(), GetBox());
 	
-	enable_POINTSPRITE();
-	{
-		for (unsigned int i=0; i<galaxy->SECTOR_vec.size(); i++)
-		{   		
-			for (unsigned int j=0; j<galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
-			{   	
-				StarSystem* starsystem = galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
-				
-				TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::DISTANTSTAR_ID, starsystem->STAR_vec[0]->GetColorId()); 
-				
-				drawParticleTextured(texOb_particle->texture, starsystem->GetCenter()*scale_parsec2screencoord, 30.0, -2.0);
-				
-				if (starsystem->GetConquerorRaceId() != TYPE::RACE::NONE_ID)
-				{
-					drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_captured->texture, starsystem->GetCenter()*scale_parsec2screencoord, 20.0, -2.0);
-				}
-				
-				if (starsystem->GetConditionId() == ENTITY::STARSYSTEM::CONDITION::WAR_ID)
-				{
-					drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_war->texture, starsystem->GetCenter()*scale_parsec2screencoord + Vec3<float>(0.0,-13.0, 0.0), 20.0, -2.0);
-				}        		
-			}           	
-		}	 
-		drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player->GetNpc()->GetStarSystem()->GetCenter()*scale_parsec2screencoord, 40.0, -2.0);
-		
-		//visual_hyperjump_range.FillData(GuiTextureObCollector::Instance().dot_yellow, 
-		//scale_parsec2screencoord*player->GetNpc()->GetVehicle()->GetProperties().hyper, 
-		//10);
-		//visual_hyperjump_range.Draw(player->GetNpc()->GetVehicle()->GetStarSystem()->GetCenter()*scale_parsec2screencoord);
-		
-		if (player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() == TYPE::AISCENARIO::MICRO_JUMP_ID)
-		{
-			//visual_hyperjump_path.FillData(GuiTextureObCollector::Instance().dot_green,
-			//player->GetNpc()->GetVehicle()->GetStarSystem()->GetCenter()*scale_parsec2screencoord,
-			//player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTarget()->GetCenter()*scale_parsec2screencoord,
-			//10, 
-			//20);
-			//visual_hyperjump_path.Draw();       	
-		}
-	}
-	disable_POINTSPRITE();
-	
-	int font_size = 10;     
-	for (unsigned int i=0; i<galaxy->SECTOR_vec.size(); i++)
-	{   		
-		for (unsigned int j=0; j<galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
-		{   	
-			StarSystem* starsystem = galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
-			
-			Vec2<float> pos(starsystem->GetCenter().x*scale_parsec2screencoord - 20, starsystem->GetCenter().y*scale_parsec2screencoord - 20);
-			Screen::Instance().DrawText(int2str(starsystem->GetId()), font_size, pos);
-		}
-	} 
+
+    for (unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
+    {   		
+        for (unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
+        {   	
+            const StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
+            Vec3<float> starsystem_pos = (starsystem.GetSector()->GetCenter() + starsystem.GetCenter())*m_ScaleParsecToScreenCoord;
+            starsystem_pos.x += GetBox().GetCenter().x;
+            starsystem_pos.y += GetBox().GetCenter().y;
+                        
+            TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::DISTANTSTAR_ID, starsystem.STAR_vec[0]->GetColorId()); 
+            
+            enable_POINTSPRITE();
+            {                        
+                drawParticleTextured(texOb_particle->texture, starsystem_pos, 30.0, -2.0);
+                
+                if (starsystem.GetConquerorRaceId() != TYPE::RACE::NONE_ID)
+                {
+                    drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_captured->texture, starsystem_pos, 20.0, -2.0);
+                }
+                
+                if (starsystem.GetConditionId() == ENTITY::STARSYSTEM::CONDITION::WAR_ID)
+                {
+                    Vec3<float> offset(0.0, -13.0, 0.0);
+                    drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_war->texture, starsystem_pos + offset, 20.0, -2.0);
+                } 
+            }               
+            disable_POINTSPRITE();   
+
+            int font_size = 10;  
+            Vec3<float> offset(0.0, 13.0, 0.0);
+            Screen::Instance().DrawText(int2str(starsystem.GetId()), font_size, starsystem_pos + offset);
+        }           	
+    }	 
+    
+    enable_POINTSPRITE();
+    {
+        drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player->GetNpc()->GetStarSystem()->GetCenter()*m_ScaleParsecToScreenCoord, 40.0, -2.0);
+        
+        m_VisualHyperJumpRange.Draw(player->GetNpc()->GetVehicle()->GetStarSystem()->GetCenter()*m_ScaleParsecToScreenCoord);
+        
+        if (player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() == TYPE::AISCENARIO::MICRO_JUMP_ID)
+        {
+            m_VisualHyperJumpPath.Draw();       	
+        }
+    }
+    disable_POINTSPRITE();  
 }

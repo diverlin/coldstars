@@ -63,20 +63,12 @@ Galaxy* GalaxyBuilder::GetNewGalaxy(const GalaxyDescription& galaxy_description)
 	
 	return galaxy;
 } 
-
-
         	
 void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy, const GalaxyDescription& galaxy_description) const
 {     
-	Vec3<float> pos;
 	for(unsigned int i=0; i<galaxy_description.sector_descriptions.size(); i++)
 	{  
-		Vec3<float> offset = getRandXYVec3f(2, 20, 0);
-		pos.x += 20;
-		pos.y = 200;
-		pos.z = DEFAULT_ENTITY_ZPOS;
-		
-		Vec3<float> center(pos+offset);                	                
+		Vec3<float> center = getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);
 		
 		Sector* sector = SectorBuilder::Instance().GetNewSector(galaxy_description.sector_descriptions[i]);
 		galaxy->Add(sector, center); 
