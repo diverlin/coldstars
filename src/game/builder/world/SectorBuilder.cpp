@@ -63,9 +63,7 @@ Sector* SectorBuilder::GetNewSector(const SectorDescription& sector_description)
 	
 	return sector;
 } 
-
-
-        	
+    	
 void SectorBuilder::CreateNewInternals(Sector* sector, const SectorDescription& sector_description) const
 {
 	for(unsigned int i=0; i<sector_description.starsystem_descriptions.size(); i++)

@@ -17,28 +17,32 @@
 */
 
 
-#include "GuiGalaxyMap.hpp"
-#include "MouseData.hpp"
-#include "../config/config.hpp"
+#include <gui/GuiGalaxyMap.hpp>
+#include <gui/MouseData.hpp>
+#include <config/config.hpp>
 
 #include <common/constants.hpp>
 #include <common/myStr.hpp>
 #include <types/AiScenarioTypes.hpp>
 
-#include "../resources/GuiTextureObCollector.hpp"
-#include "../pilots/Player.hpp"
-#include "../world/starsystem.hpp"
-#include "../world/Sector.hpp"
-#include "../world/galaxy.hpp"
-#include "../render/Render.hpp"
-#include "../render/Screen.hpp"
-#include "../resources/TextureManager.hpp"
-#include "../ai/Task.hpp"
-#include "../ai/StateMachine.hpp"
+#include <resources/GuiTextureObCollector.hpp>
+#include <resources/TextureManager.hpp>
 
-#include "../spaceobjects/Star.hpp"
-#include "../pilots/Npc.hpp"
-#include "../spaceobjects/Vehicle.hpp"
+#include <world/starsystem.hpp>
+#include <world/Sector.hpp>
+#include <world/galaxy.hpp>
+
+#include <render/Render.hpp>
+#include <render/Screen.hpp>
+
+#include <ai/Task.hpp>
+#include <ai/StateMachine.hpp>
+
+#include <spaceobjects/Star.hpp>
+#include <spaceobjects/Vehicle.hpp>
+
+#include <pilots/Npc.hpp>
+#include <pilots/Player.hpp>
 
 
 GuiGalaxyMap::GuiGalaxyMap()
@@ -46,7 +50,6 @@ GuiGalaxyMap::GuiGalaxyMap()
 BaseGuiElement(TYPE::GUI::GALAXYMAP_ID, TYPE::GUI::GALAXYMAP_ID),
 m_Galaxy(nullptr)
 { 
-	GetBox().SetCenter(400, 300);
 	GetBox().SetSize(Config::Instance().SCREEN_WIDTH  - 2 * GUI::MAP::BORDER_X, Config::Instance().SCREEN_HEIGHT - 2 * GUI::MAP::BORDER_X);
 	
 	SetTextureOb(GuiTextureObCollector::Instance().text_background);
