@@ -25,6 +25,7 @@
 #include <render/PathVisual.hpp>
 
 class Galaxy;
+class StarSystem;
 
 
 class GuiGalaxyMap : public BaseGuiElement
@@ -48,6 +49,8 @@ class GuiGalaxyMap : public BaseGuiElement
         
         virtual void UpdateUnique(Player*) override final;
 		virtual void RenderUnique(Player*) const override final;
+        
+        Vec3<float> GetAbsoluteStarSystemPosition(const StarSystem&) const;
 };
      		
 #endif 
