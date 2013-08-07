@@ -16,13 +16,16 @@
 	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #ifndef BASE_HPP
 #define BASE_HPP
 
+#include <common/NonCopyable.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <struct/IdData.hpp>
 
-class Base
+
+class Base : private NonCopyable
 {
 	public:      
 		Base();
@@ -31,7 +34,7 @@ class Base
 		virtual void PutChildsToGarbage() const = 0;
 		void SetSubSubTypeId(TYPE::ENTITY subsubtype_id) { m_Data_id.subsubtype_id = subsubtype_id; }
 		
-		INTLONGEST GetId()   const { return m_Data_id.id; }   
+		INTLONGEST GetId() const { return m_Data_id.id; }   
 		TYPE::ENTITY GetTypeId()   	const { return m_Data_id.type_id; }
 		TYPE::ENTITY GetSubTypeId() const { return m_Data_id.subtype_id; }
 		TYPE::ENTITY GetSubSubTypeId() const { return m_Data_id.subsubtype_id; }

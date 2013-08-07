@@ -16,15 +16,18 @@
 	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "GalaxyBuilder.hpp"
-#include "SectorBuilder.hpp"
-#include "../CommonBuilderHeaders.hpp"
-#include "../../world/galaxy.hpp"
-#include "../../world/Sector.hpp"
 
-#include "../../config/config.hpp"
+#include <builder/world/GalaxyBuilder.hpp>
+#include <builder/world/SectorBuilder.hpp>
+#include <builder/CommonBuilderHeaders.hpp>
 
-#include "../../struct/GalaxyDescription.hpp"
+#include <world/galaxy.hpp>
+#include <world/Sector.hpp>
+
+#include <config/config.hpp>
+
+#include <struct/GalaxyDescription.hpp>
+
 
 GalaxyBuilder& GalaxyBuilder::Instance()
 {
@@ -74,10 +77,4 @@ void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy, const GalaxyDescription& 
 		galaxy->Add(sector, center); 
 	}
 }
-
-                
-
-
-                
-
 

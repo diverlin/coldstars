@@ -24,7 +24,7 @@
 struct LifeData
 {
 	bool is_alive;
-	unsigned int armor;
+	int armor;
 
 	int life_time;
 	int dying_time;
