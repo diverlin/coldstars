@@ -108,59 +108,59 @@ std::string GrappleEquipment::GetTargetStr() const
  
 void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
 {              		
-       	Vehicle& vehicle = *item_slot->GetOwnerVehicle(); // shortcut
-       			
-        for (std::vector<BaseSpaceEntity*>::iterator it = target_vec.begin(); it != target_vec.end(); ++it)
+    Vehicle& vehicle = *item_slot->GetOwnerVehicle(); // shortcut
+            
+    for (std::vector<BaseSpaceEntity*>::iterator it = target_vec.begin(); it != target_vec.end(); ++it)
+    {
+        if (item_slot->CheckTarget(*it) == TARGET_STATUS::OK)
         {
-        	if (item_slot->CheckTarget(*it) == true)
-        	{
-        	        Vec3<float> impulse_dir(vehicle.GetCenter() - (*it)->GetCenter());
-        		impulse_dir.Normalize();
-        	
-               		(*it)->ApplyImpulse(impulse_dir, 0.001* GetStrength());
-               		
-        		float dist = distanceBetween(vehicle.GetCenter(), (*it)->GetCenter()); 
-       			if (dist < 0.5*vehicle.GetCollisionRadius())
-       			{
-       				switch((*it)->GetTypeId())
-       				{
-      					case TYPE::ENTITY::CONTAINER_ID:
-       					{
-       						Container* container = (Container*)(*it);
-       						if (vehicle.UnpackContainerItemToCargoSlot(container) == true)
-						{
-                                                        it = target_vec.erase(it);
-                                                        return; // hack
-       						}
-       					
-       						break;
-       					}
-        				
-       					//case ENTITY::VEHICLE_ID:
-       					//{
-       						//ItemSlot* _slot = GetEmptyOtsecSlot();
-                                        	//Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];
-       				        	//if (_slot != nullptr)
-       						//{
-       							////_slot->InsertItem(_vehicle);
-       							//starsystem->AddToRemoveFromOuterSpaceQueue(_vehicle);
-       						//}
-						//grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_vehicle);
-       						//break;
-       					//}
-       				}
-       			}
-       		}
-       		else
-       		{
-                        #if GRAPPLE_QUEUE_LOG_ENABLED == 1 
-			Logger::Instance().Log("vehicle_id=" + int2str(item_slot->GetOwnerVehicle()->GetId()) + " " + getTypeStr((*it)->GetTypeId()) + " id = " + int2str((*it)->GetId()) + " grapple->RemoveTarget()", 2); 
-			#endif
-                        
-                        it = target_vec.erase(it);
-                        return; // hack
-       		}
-       	}
+            Vec3<float> impulse_dir(vehicle.GetCenter() - (*it)->GetCenter());
+            impulse_dir.Normalize();
+        
+            (*it)->ApplyImpulse(impulse_dir, 0.001* GetStrength());
+                
+            float dist = distanceBetween(vehicle.GetCenter(), (*it)->GetCenter()); 
+            if (dist < 0.5*vehicle.GetCollisionRadius())
+            {
+                switch((*it)->GetTypeId())
+                {
+                    case TYPE::ENTITY::CONTAINER_ID:
+                    {
+                        Container* container = (Container*)(*it);
+                        if (vehicle.UnpackContainerItemToCargoSlot(container) == true)
+                        {
+                            it = target_vec.erase(it);
+                            return; // hack
+                        }
+                    
+                        break;
+                    }
+                    
+                    //case ENTITY::VEHICLE_ID:
+                    //{
+                        //ItemSlot* _slot = GetEmptyOtsecSlot();
+                                        //Vehicle* _vehicle = (Vehicle*)grapple_slot->GetGrappleEquipment()->target_vec[i];
+                            //if (_slot != nullptr)
+                        //{
+                            ////_slot->InsertItem(_vehicle);
+                            //starsystem->AddToRemoveFromOuterSpaceQueue(_vehicle);
+                        //}
+                    //grapple_slot->GetGrappleEquipment()->AddToRemoveQueue(_vehicle);
+                        //break;
+                    //}
+                }
+            }
+        }
+        else
+        {
+            #if GRAPPLE_QUEUE_LOG_ENABLED == 1 
+            Logger::Instance().Log("vehicle_id=" + int2str(item_slot->GetOwnerVehicle()->GetId()) + " " + getTypeStr((*it)->GetTypeId()) + " id = " + int2str((*it)->GetId()) + " grapple->RemoveTarget()", 2); 
+            #endif
+                    
+            it = target_vec.erase(it);
+            return; // hack
+        }
+    }
 }
 
 void GrappleEquipment::RenderGrabTrail() const

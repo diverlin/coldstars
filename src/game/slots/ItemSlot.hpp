@@ -58,6 +58,9 @@ class GoodsPack;
 class Box2D;
 
 
+enum class TARGET_STATUS { NOTALIVE = 1, NOTINSPACE, WRONG_STARSYSTEM, UNREACHABLE_DISTANCE, OK };
+
+
 struct UnresolvedDataUniqueItemSlot
 {
 	UnresolvedDataUniqueItemSlot():target_id(NONE_ID), subtarget_id(NONE_ID) 
@@ -117,7 +120,7 @@ class ItemSlot : public BaseSlot
 		bool InsertItem(BaseItem*);            
 		void RemoveItem();
 		
-        bool ValidateTarget();                    
+        TARGET_STATUS ValidateTarget();                    
         void ResetTarget();
         bool CheckAmmo() const;
         void FireEvent(float, bool);
@@ -137,9 +140,9 @@ class ItemSlot : public BaseSlot
         void DrawRange(const Vec3<float>&);
         
         bool CheckSubTarget(ItemSlot*) const;
-        bool CheckTarget(BaseSpaceEntity*) const;
-        bool CheckTargetPure(BaseSpaceEntity*) const;
-        
+        TARGET_STATUS CheckTarget(BaseSpaceEntity*) const;
+        TARGET_STATUS CheckTargetPure(BaseSpaceEntity*) const;
+                
         void SelectEvent();
         void DeselectEvent();
         

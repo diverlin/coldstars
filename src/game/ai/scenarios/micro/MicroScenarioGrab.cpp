@@ -51,38 +51,38 @@ void MicroScenarioGrab::Enter(Npc* npc) const
 /* virtual */
 bool MicroScenarioGrab::Validate(Npc* npc) const
 {
-        // shortcut
-        BaseSpaceEntity* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();
-        
-        // check if equipment is able to perform current task
-        bool euipment_is_ok = false;
-        if (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr)
+    // shortcut
+    BaseSpaceEntity* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();
+    
+    // check if equipment is able to perform current task
+    bool euipment_is_ok = false;
+    if (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr)
+    {
+        if (npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->GetFunctioning() == true)
         {
-                if (npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->GetFunctioning() == true)
-                {
-                        euipment_is_ok = true;
-                }
+            euipment_is_ok = true;
         }
+    }
+    
+    // check if target is ok
+    TARGET_STATUS target_status_code = npc->GetVehicle()->GetSlotGrapple()->CheckTargetPure(target);
         
-        // check if target is ok
-        bool target_is_ok = npc->GetVehicle()->GetSlotGrapple()->CheckTargetPure(target);
-        
-	if ( (euipment_is_ok == true) and (target_is_ok == true) )
-        {
-                return true;
-        }
+	if ( (euipment_is_ok == true) and (target_status_code == TARGET_STATUS::OK) )
+    {
+        return true;
+    }
 
-        return false;
+    return false;
 }
 
 /* virtual */
 void MicroScenarioGrab::UpdateInStaticInSpace(Npc* npc) const
 {
 	BaseSpaceEntity* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();
-	if (npc->GetVehicle()->GetSlotGrapple()->CheckTarget(target) == true)
+	if (npc->GetVehicle()->GetSlotGrapple()->CheckTarget(target) == TARGET_STATUS::OK)
 	{
-       		npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->AddTarget(target);
-       	}
+        npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->AddTarget(target);
+    }
 }
 
 /* virtual */
