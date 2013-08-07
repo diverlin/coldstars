@@ -1187,7 +1187,7 @@ void Vehicle::RenderInfoInSpace(const Vec2<float>& scroll_coords, float zoom)
     drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
 	if (m_OwnerNpc != nullptr)
 	{
-        Vec2<float> pos2(pos.x + 200, pos.y);
+        Vec2<float> pos2(pos.x + 300, pos.y);
     	m_OwnerNpc->RenderInfo(pos2);
 	}
 }

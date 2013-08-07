@@ -186,9 +186,14 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
                 {
                     if (weapon_slot.GetTarget() == nullptr)
                     {
-                        if (weapon_slot.CheckTarget(target) == true)
+                        TARGET_STATUS status = weapon_slot.CheckTarget(target);
+                        if (status == TARGET_STATUS::OK)
                         {
                             weapon_slot.SetTarget(target, item_slot);
+                        }
+                        else
+                        {
+                            std::cout<<"blabla="<<(int)weapon_slot.CheckTarget(target)<<std::endl; 
                         }
                     }
                 } 
@@ -206,7 +211,7 @@ void WeaponComplex::Fire(int timer, float attack_rate, bool show_effect)
 			ItemSlot& weapon_slot = **it; // shortcut
 			if (weapon_slot.GetTarget() != nullptr)
 			{
-				if (weapon_slot.ValidateTarget() == true)
+				if (weapon_slot.ValidateTarget() == TARGET_STATUS::OK)
 				{
       				weapon_slot.FireEvent(attack_rate, show_effect);
 					if (weapon_slot.GetSubTarget() == nullptr)
@@ -228,39 +233,39 @@ void WeaponComplex::Fire(int timer, float attack_rate, bool show_effect)
 void WeaponComplex::ValidateAllWeaponsTarget()
 {
 	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
+    {
+        if (slot_weapon_vec[i]->GetTarget() != nullptr) 
         {
-               	if (slot_weapon_vec[i]->GetTarget() != nullptr) 
-               	{
-      			if (slot_weapon_vec[i]->ValidateTarget() == false)
-       			{
-       				slot_weapon_vec[i]->ResetTarget();
-       			}
-               	}
+            if (slot_weapon_vec[i]->ValidateTarget() == TARGET_STATUS::OK)
+            {
+                slot_weapon_vec[i]->ResetTarget();
+            }
         }
+    }
 }
 
 void WeaponComplex::UpdateFireAbility()
 {
-     	total_damage = 0;
-     	total_radius = 0;
-     	radius_min = 0;
-	
-     	for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
-     	{
-     		if (slot_weapon_vec[i]->GetItem() != nullptr)
-		{ 
-			if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
-			{		
-				int radius = slot_weapon_vec[i]->GetItemRadius();
-				if ( (radius < radius_min) or (radius_min == 0) )
-				{
-					radius_min = radius;
-				}
-				total_damage += slot_weapon_vec[i]->GetItemDamage(); 
-				total_radius += slot_weapon_vec[i]->GetItemRadius(); 
-			}
-		}
-     	}
+    total_damage = 0;
+    total_radius = 0;
+    radius_min = 0;
+
+    for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
+    {
+        if (slot_weapon_vec[i]->GetItem() != nullptr)
+        { 
+            if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
+            {		
+                int radius = slot_weapon_vec[i]->GetItemRadius();
+                if ( (radius < radius_min) or (radius_min == 0) )
+                {
+                    radius_min = radius;
+                }
+                total_damage += slot_weapon_vec[i]->GetItemDamage(); 
+                total_radius += slot_weapon_vec[i]->GetItemRadius(); 
+            }
+        }
+    }
 }
 
 void WeaponComplex::RenderTurrels() const

@@ -853,7 +853,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
 			{
 				if (npc->GetVehicle()->GetProperties().grab_radius > 0)
 				{
-					if (npc->GetVehicle()->GetSlotGrapple()->CheckTarget(visible_CONTAINER_vec[i]) == true)
+					if (npc->GetVehicle()->GetSlotGrapple()->CheckTarget(visible_CONTAINER_vec[i]) == TARGET_STATUS::OK)
 					{
 						if (npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->CheckIfTargetAlreadyExistInQueue(visible_CONTAINER_vec[i]) == false)
 						{

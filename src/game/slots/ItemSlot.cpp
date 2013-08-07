@@ -16,6 +16,7 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "ItemSlot.hpp"
 
 #include "../builder/spaceobjects/ContainerBuilder.hpp"
@@ -87,7 +88,7 @@ void ItemSlot::SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget)
 	#endif     
 }
         
-bool ItemSlot::ValidateTarget()
+TARGET_STATUS ItemSlot::ValidateTarget()
 {	
 	#if WEAPONSTARGET_LOG_ENABLED == 1 
 	Log("ValidateTarget");
@@ -449,68 +450,82 @@ bool ItemSlot::CheckSubTarget(ItemSlot* _subtarget) const
 }
 
 
-bool ItemSlot::CheckTarget(BaseSpaceEntity* _target) const
+TARGET_STATUS ItemSlot::CheckTarget(BaseSpaceEntity* target) const
 {
 	#if WEAPONSTARGET_LOG_ENABLED == 1 
-        Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckTarget");
+    Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckTarget");
 	#endif     
 	
-	if (CheckTargetPure(_target) == true)
+	if (IsTargetAlive(target) == false)
     {
-        if (CheckDistanceToTarget(_target) == true)
-        {
-            return true;
-        }
+        return TARGET_STATUS::NOTALIVE;
     }
         
-    return false;
-}
-      
-      
-      
-bool ItemSlot::CheckTargetPure(BaseSpaceEntity* _target) const
+    if (IsTargetInSpace(target) == false)
+    {
+        return TARGET_STATUS::NOTINSPACE;
+    }
+            
+    if (IsTargetInSameStarSystem(target) == false)
+    {
+        return TARGET_STATUS::WRONG_STARSYSTEM;        
+    }
+
+    if (CheckDistanceToTarget(target) == false)
+    {
+        return TARGET_STATUS::UNREACHABLE_DISTANCE;
+    }
+        
+    return TARGET_STATUS::OK;
+}     
+   
+TARGET_STATUS ItemSlot::CheckTargetPure(BaseSpaceEntity* target) const
 {
 	#if WEAPONSTARGET_LOG_ENABLED == 1 
-        Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckTargetPure");
+    Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckTarget");
 	#endif     
 	
-	if (IsTargetAlive(_target) == true)
+	if (IsTargetAlive(target) == false)
     {
-        if (IsTargetInSpace(_target) == true)
-        {
-            if (IsTargetInSameStarSystem(_target) == true)
-            {
-                return true;
-            }
-        }
+        return TARGET_STATUS::NOTALIVE;
     }
-    
-    return false;
-}
-          
-bool ItemSlot::IsTargetAlive(BaseSpaceEntity* _target) const
+        
+    if (IsTargetInSpace(target) == false)
+    {
+        return TARGET_STATUS::NOTINSPACE;
+    }
+            
+    if (IsTargetInSameStarSystem(target) == false)
+    {
+        return TARGET_STATUS::WRONG_STARSYSTEM;        
+    }
+        
+    return TARGET_STATUS::OK;
+} 
+       
+bool ItemSlot::IsTargetAlive(BaseSpaceEntity* target) const
 {
-	return _target->GetAlive();
+	return target->GetAlive();
 }
 
-bool ItemSlot::IsTargetInSpace(BaseSpaceEntity* _target) const  
+bool ItemSlot::IsTargetInSpace(BaseSpaceEntity* target) const  
 {
-	return (_target->GetPlaceTypeId() == TYPE::PLACE::SPACE_ID);
+	return (target->GetPlaceTypeId() == TYPE::PLACE::SPACE_ID);
 }           	
 
-bool ItemSlot::IsTargetInSameStarSystem(BaseSpaceEntity* _target) const
+bool ItemSlot::IsTargetInSameStarSystem(BaseSpaceEntity* target) const
 {
-    return (_target->GetStarSystem()->GetId() == ((Vehicle*)owner)->GetStarSystem()->GetId());
+    return (target->GetStarSystem()->GetId() == GetOwnerVehicle()->GetStarSystem()->GetId());
 }                
 
-bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* _target) const
+bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* target) const
 {
-	if (_target->GetTypeId() == TYPE::ENTITY::STARSYSTEM_ID)
+	if (target->GetTypeId() == TYPE::ENTITY::STARSYSTEM_ID)
 	{
 		return true;
 	}
 	
-    float dist = distanceBetween(GetOwnerVehicle()->GetCenter(), _target->GetCenter());                                               
+    float dist = distanceBetween(GetOwnerVehicle()->GetCenter(), target->GetCenter());                                               
     if (dist < GetItemRadius())
     {
             return true;
