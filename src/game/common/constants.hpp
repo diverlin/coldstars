@@ -26,7 +26,6 @@
 #include <vector>
 #include <types/EntityTypes.hpp>
 #include <types/GuiTypes.hpp>
-//#include <types/MyInt.hpp>
 #include "Converter.hpp"
 
 

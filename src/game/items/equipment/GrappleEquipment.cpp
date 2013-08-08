@@ -112,7 +112,7 @@ void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
             
     for (std::vector<BaseSpaceEntity*>::iterator it = target_vec.begin(); it != target_vec.end(); ++it)
     {
-        if (item_slot->CheckTarget(*it) == TARGET_STATUS::OK)
+        if (item_slot->CheckTarget(*it) == STATUS::TARGET_OK)
         {
             Vec3<float> impulse_dir(vehicle.GetCenter() - (*it)->GetCenter());
             impulse_dir.Normalize();

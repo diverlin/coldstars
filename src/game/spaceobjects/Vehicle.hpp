@@ -21,12 +21,16 @@
 #define VEHICLE_HPP
 
 #include <spaceobjects/BaseSpaceEntity.hpp>
+
 #include <parts/WeaponComplex.hpp>
 #include <parts/DriveComplex.hpp>
 #include <parts/ProtectionComplex.hpp>
+
 #include <struct/VehicleKorpusData.hpp>
 #include <struct/VehiclePropetries.hpp>
 #include <struct/VehicleNeeds.hpp>
+
+#include <types/StatusTypes.hpp>
 
 class VehicleSlot; 
 class BaseLand; 
@@ -179,10 +183,12 @@ class Vehicle : public BaseSpaceEntity
         
         bool TryToConsumeEnergy(int);
         bool TryToGenerateEnergy(int);
-        
+
+        STATUS CheckGrabStatus() const;
+                
         void TEST_DamageAndLockRandItems();
         void TEST_DropRandomItemToSpace(); 
-                    
+        
     protected:
         std::vector<ItemSlot*> m_SlotTotal_vec;
             

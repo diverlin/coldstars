@@ -16,11 +16,13 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include <cmath>
 
 #include "common.hpp"
 #include "constants.hpp"
 #include "Logger.hpp"
+
 
 TYPE::GUI getGuiItemSlotType(TYPE::ENTITY val)
 {
