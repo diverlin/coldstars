@@ -26,17 +26,17 @@ class Vehicle;
 
 class GuiVehicle2 : public BaseGuiElement
 {
-   	public:
+       public:
         GuiVehicle2();
         ~GuiVehicle2() {}
         
         virtual void UpdateUnique(Player*) override final;
-      		
+              
     private:
         Vehicle* m_Vehicle;
 
-		void Reset();
-		void BindVehicle(Vehicle*, float scale = 1.0f); 
+        void Reset();
+        void BindVehicle(Vehicle*, float scale = 1.0f); 
         void CreateFunctionalItemSlotsWithCircleGeometry(Vehicle*, float);
 };
 

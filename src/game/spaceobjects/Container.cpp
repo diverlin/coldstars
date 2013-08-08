@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "Container.hpp"
@@ -40,146 +40,146 @@ Container::Container(int id)
 m_ItemSlot(nullptr),
 m_Velocity(0)    
 {
-	SetId(id);
-	SetTypeId(TYPE::ENTITY::VEHICLE_ID);
-	SetSubTypeId(TYPE::ENTITY::CONTAINER_ID);
+    SetId(id);
+    SetTypeId(TYPE::ENTITY::VEHICLE_ID);
+    SetSubTypeId(TYPE::ENTITY::CONTAINER_ID);
 }
 
 /* virtual */   
 Container::~Container()
 {
-	#if CREATEDESTROY_LOG_ENABLED == 1
-	Logger::Instance().Log("___::~Container("+int2str(GetId())+")");
-	#endif
+    #if CREATEDESTROY_LOG_ENABLED == 1
+    Logger::Instance().Log("___::~Container("+int2str(GetId())+")");
+    #endif
 }
 
 /* virtual override final */
 void Container::PutChildsToGarbage() const
 {
-	EntityGarbage::Instance().Add(m_ItemSlot);
+    EntityGarbage::Instance().Add(m_ItemSlot);
 }
-        	
+            
 void Container::BindItemSlot(ItemSlot* item_slot) 
 { 
-	m_ItemSlot = item_slot; 
-	m_ItemSlot->SetOwner(this); 
+    m_ItemSlot = item_slot; 
+    m_ItemSlot->SetOwner(this); 
 }
 
 /* virtual override final */
 void Container::UpdateInfo()  
 {
-	GetInfo().clear();
-	GetInfo().addTitleStr("CONTAINER");
-	GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()));
-	GetInfo().addNameStr("armor:");       GetInfo().addValueStr(int2str(GetDataLife().armor));
-	GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
+    GetInfo().clear();
+    GetInfo().addTitleStr("CONTAINER");
+    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()));
+    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(int2str(GetDataLife().armor));
+    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 }        
  
-/* virtual override final */       	
+/* virtual override final */           
 void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords, float zoom)
 {
-	UpdateInfo();
-	Vec2<float> pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
+    UpdateInfo();
+    Vec2<float> pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
     pos /= zoom;
-	drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
+    drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     
     Vec2<float> pos2(pos.x + 200, pos.y);
-	m_ItemSlot->GetItem()->RenderInfo(pos2);
+    m_ItemSlot->GetItem()->RenderInfo(pos2);
 }
  
 /* virtual override final */   
 void Container::PostDeathUniqueEvent(bool show_effect)
 {
-	if (m_ItemSlot->GetItem()->GetTypeId() == TYPE::ENTITY::BOMB_ID)
-	{
-		GetStarSystem()->BombExplosionEvent(this, show_effect);  
-	}
-	else
-	{
-		if (show_effect == true)
-		{
-			ExplosionEffect* explosion = getNewExplosionEffect(GetCollisionRadius());
-			GetStarSystem()->Add(explosion, GetCenter()); 
-		}
-	}
+    if (m_ItemSlot->GetItem()->GetTypeId() == TYPE::ENTITY::BOMB_ID)
+    {
+        GetStarSystem()->BombExplosionEvent(this, show_effect);  
+    }
+    else
+    {
+        if (show_effect == true)
+        {
+            ExplosionEffect* explosion = getNewExplosionEffect(GetCollisionRadius());
+            GetStarSystem()->Add(explosion, GetCenter()); 
+        }
+    }
 }
 
 void Container::UpdateInSpace(int time, bool show_effect)
 {
-	CheckDeath(show_effect); 		
-	if (time > 0)
-	{
-		SetCenter(GetCenter() + GetAppliedForce());
-		GetAppliedForce() *= 0.99;
-	}
+    CheckDeath(show_effect);         
+    if (time > 0)
+    {
+        SetCenter(GetCenter() + GetAppliedForce());
+        GetAppliedForce() *= 0.99;
+    }
 }
-       		
+               
 void Container::Render2D()
 { 
-	UpdateRenderAnimation();
-	drawQuad(GetTextureOb(), GetCenter(), GetSize(), GetAngle().z);
+    UpdateRenderAnimation();
+    drawQuad(GetTextureOb(), GetCenter(), GetSize(), GetAngle().z);
 }
 
-void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const	
+void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const    
 {
-	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" Container("+int2str(GetId())+")::SaveDataUniqueContainer", SAVELOAD_LOG_DIP);
-	#endif
-	
-	save_ptree.put(root+"target_pos.x", m_TargetPos.x);
-	save_ptree.put(root+"target_pos.y", m_TargetPos.y);
+    #if SAVELOAD_LOG_ENABLED == 1
+    Logger::Instance().Log(" Container("+int2str(GetId())+")::SaveDataUniqueContainer", SAVELOAD_LOG_DIP);
+    #endif
+    
+    save_ptree.put(root+"target_pos.x", m_TargetPos.x);
+    save_ptree.put(root+"target_pos.y", m_TargetPos.y);
 
-	save_ptree.put(root+"velocity", m_Velocity);
+    save_ptree.put(root+"velocity", m_Velocity);
 }
 
 void Container::LoadDataUniqueContainer(const boost::property_tree::ptree& load_ptree)
 {
-	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" Container("+int2str(GetId())+")::LoadDataUniqueContainer", SAVELOAD_LOG_DIP);
-	#endif
-	
-	m_TargetPos.x   = load_ptree.get<float>("target_pos.x");
-	m_TargetPos.y   = load_ptree.get<float>("target_pos.y");
-	
-	m_Velocity = load_ptree.get<float>("velocity");
+    #if SAVELOAD_LOG_ENABLED == 1
+    Logger::Instance().Log(" Container("+int2str(GetId())+")::LoadDataUniqueContainer", SAVELOAD_LOG_DIP);
+    #endif
+    
+    m_TargetPos.x   = load_ptree.get<float>("target_pos.x");
+    m_TargetPos.y   = load_ptree.get<float>("target_pos.y");
+    
+    m_Velocity = load_ptree.get<float>("velocity");
 }
 
 void Container::ResolveDataUniqueContainer()
 {
-	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" Container("+int2str(GetId())+")::ResolveDataUniqueContainer", SAVELOAD_LOG_DIP);
-	#endif
-	
-	((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddContainer(this, data_unresolved_Orientation.center); 
-}		
+    #if SAVELOAD_LOG_ENABLED == 1
+    Logger::Instance().Log(" Container("+int2str(GetId())+")::ResolveDataUniqueContainer", SAVELOAD_LOG_DIP);
+    #endif
+    
+    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddContainer(this, data_unresolved_Orientation.center); 
+}        
 
 /* virtual override final */
 void Container::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	const std::string root = "container." + int2str(GetId()) + ".";
-	SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueOrientation(save_ptree, root);
-	SaveDataUniqueBaseDrawable(save_ptree, root);
-	SaveDataUniqueBaseSpaceEntity(save_ptree, root);
-	SaveDataUniqueContainer(save_ptree, root);
+    const std::string root = "container." + int2str(GetId()) + ".";
+    SaveDataUniqueBase(save_ptree, root);
+    SaveDataUniqueOrientation(save_ptree, root);
+    SaveDataUniqueBaseDrawable(save_ptree, root);
+    SaveDataUniqueBaseSpaceEntity(save_ptree, root);
+    SaveDataUniqueContainer(save_ptree, root);
 }
 
 /* virtual override final */
 void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-	LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueOrientation(load_ptree);
-	LoadDataUniqueBaseDrawable(load_ptree);
-	LoadDataUniqueBaseSpaceEntity(load_ptree);
-	LoadDataUniqueContainer(load_ptree);
+    LoadDataUniqueBase(load_ptree);
+    LoadDataUniqueOrientation(load_ptree);
+    LoadDataUniqueBaseDrawable(load_ptree);
+    LoadDataUniqueBaseSpaceEntity(load_ptree);
+    LoadDataUniqueContainer(load_ptree);
 }
-	
-/* virtual override final */	
+    
+/* virtual override final */    
 void Container::ResolveData()
 {
-	ResolveDataUniqueBase();
-	ResolveDataUniqueOrientation();
-	ResolveDataUniqueBaseDrawable();
-	ResolveDataUniqueBaseSpaceEntity();
-	ResolveDataUniqueContainer();
+    ResolveDataUniqueBase();
+    ResolveDataUniqueOrientation();
+    ResolveDataUniqueBaseDrawable();
+    ResolveDataUniqueBaseSpaceEntity();
+    ResolveDataUniqueContainer();
 }

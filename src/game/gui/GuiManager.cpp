@@ -42,8 +42,8 @@
 
 GuiManager& GuiManager::Instance()
 {
-	static GuiManager instance;
-	return instance;
+    static GuiManager instance;
+    return instance;
 }
 
 GuiManager::GuiManager()
@@ -51,105 +51,105 @@ GuiManager::GuiManager()
 player(nullptr),
 gui_vehicle_scan(nullptr)
 {   
-	int screen_w = Screen::Instance().GetWidth();
-	int screen_h = Screen::Instance().GetHeight();
-	
-	/* shared gui */
-	{
-		gui_vehicle_scan = new GuiVehicle();
+    int screen_w = Screen::Instance().GetWidth();
+    int screen_h = Screen::Instance().GetHeight();
+    
+    /* shared gui */
+    {
+        gui_vehicle_scan = new GuiVehicle();
 
-		Vec2<float> size(250, 250);	
-		gui_vehicle_scan->SetSize(size);
+        Vec2<float> size(250, 250);    
+        gui_vehicle_scan->SetSize(size);
     
         Vec2<float> offset(screen_w/2, screen_h/2);
-		gui_space.AddChild(gui_vehicle_scan, offset);	
-	} 
-	
-	{
-		gui_galaxymap    = new GuiGalaxyMap();
-		
-		Vec2<float> offset(screen_w/2, screen_h/2);
-		gui_space.AddChild(gui_galaxymap, offset);
-	}
-	
-	gui_skills       = new GuiSkills();
-	slider           = new Slider();  
+        gui_space.AddChild(gui_vehicle_scan, offset);    
+    } 
+    
+    {
+        gui_galaxymap    = new GuiGalaxyMap();
+        
+        Vec2<float> offset(screen_w/2, screen_h/2);
+        gui_space.AddChild(gui_galaxymap, offset);
+    }
+    
+    gui_skills       = new GuiSkills();
+    slider           = new Slider();  
 }
 
 GuiManager::~GuiManager()
 {
-	//delete gui_vehicle_scan;
-	delete gui_skills;
-	delete gui_galaxymap;
-	delete slider;  
+    //delete gui_vehicle_scan;
+    delete gui_skills;
+    delete gui_galaxymap;
+    delete slider;  
 }
-		
+        
 void GuiManager::SetPlayer(Player* player)
-{	
+{    
     this->player = player;
 }
 
 bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mouse)
 {
-	//bool interaction = gui_vehicle_scan->UpdateMouseInteraction(data_mouse);        
-	//if ( (interaction == true) and (gui_vehicle_scan->GetAllowFullControl() == true) )
-	//{
-		//interaction = gui_skills->UpdateMouseInteraction(data_mouse.pos_screencoord);
-		//gui_skills->ButtonsAction(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());
-	//}
+    //bool interaction = gui_vehicle_scan->UpdateMouseInteraction(data_mouse);        
+    //if ( (interaction == true) and (gui_vehicle_scan->GetAllowFullControl() == true) )
+    //{
+        //interaction = gui_skills->UpdateMouseInteraction(data_mouse.pos_screencoord);
+        //gui_skills->ButtonsAction(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());
+    //}
 
-	//return interaction;
+    //return interaction;
     return false;
 }
 
 void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill) const
-{	
-	//if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
-	{
+{    
+    //if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
+    {
         //gui_vehicle_scan->RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId());
-		//player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), Vec2<float>(0, 0));		
-	}
-	//else
-	{
-		//gui_vehicle_scan->RenderVehicle(data_mouse);
-	}
-					
-	//if ( (show_skill == true) and (gui_vehicle_scan->GetVehicle()->GetOwnerNpc() != nullptr) )
-	{
-		//gui_skills->RenderButtons();
-		//gui_skills->RenderSkills(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());
-		//gui_skills->RenderFocusedButtonInfo(data_mouse);
-	}   					                 
+        //player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), Vec2<float>(0, 0));        
+    }
+    //else
+    {
+        //gui_vehicle_scan->RenderVehicle(data_mouse);
+    }
+                    
+    //if ( (show_skill == true) and (gui_vehicle_scan->GetVehicle()->GetOwnerNpc() != nullptr) )
+    {
+        //gui_skills->RenderButtons();
+        //gui_skills->RenderSkills(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());
+        //gui_skills->RenderFocusedButtonInfo(data_mouse);
+    }                                        
 }
 
 void GuiManager::EnterGuiKosmoport()
 {
-	//gui_kosmoport.BindKosmoport((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand());
-	//gui_kosmoport.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
+    //gui_kosmoport.BindKosmoport((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand());
+    //gui_kosmoport.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
 }
         
 void GuiManager::ExitGuiKosmoport()
 {    
-	//gui_kosmoport.UnbindKosmoport();
-	//gui_kosmoport.UnbindSharedGuis();
+    //gui_kosmoport.UnbindKosmoport();
+    //gui_kosmoport.UnbindSharedGuis();
 }
 
 void GuiManager::EnterGuiSpace()
 {
-	//gui_space.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
+    //gui_space.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
 }
 
 void GuiManager::ExitGuiSpace()
 {
-	//gui_space.UnbindSharedGuis();
+    //gui_space.UnbindSharedGuis();
 }
              
 void GuiManager::UpdateSessionInSpace()
 {
-    GuiVehicle* gui_scan_vehicle 	= (GuiVehicle*)GetGuiElement(TYPE::GUI::SCAN_VEHICLE_ID);     
+    GuiVehicle* gui_scan_vehicle     = (GuiVehicle*)GetGuiElement(TYPE::GUI::SCAN_VEHICLE_ID);     
     GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)GetGuiElement(TYPE::GUI::PLAYER_VEHICLE_ID);
-    GuiRadar* gui_radar 			= (GuiRadar*)GetGuiElement(TYPE::GUI::GUI_RADAR_ID);
-    GuiGalaxyMap* gui_galaxymap 	= (GuiGalaxyMap*)GetGuiElement(TYPE::GUI::GALAXYMAP_ID);
+    GuiRadar* gui_radar             = (GuiRadar*)GetGuiElement(TYPE::GUI::GUI_RADAR_ID);
+    GuiGalaxyMap* gui_galaxymap     = (GuiGalaxyMap*)GetGuiElement(TYPE::GUI::GALAXYMAP_ID);
 
     assert(gui_scan_vehicle);
     assert(gui_player_vehicle);
@@ -205,60 +205,60 @@ void GuiManager::UpdateSessionInSpace()
 
 void GuiManager::RunSessionInKosmoport(const MouseData& data_mouse)
 {
-	gui_kosmoport.Update(data_mouse);
-	gui_kosmoport.Render(data_mouse);
+    gui_kosmoport.Update(data_mouse);
+    gui_kosmoport.Render(data_mouse);
 }
 
 void GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 {   
-	/* 	
-	Rect screen_rect(0, 0, Screen::Instance().GetWidth(), Screen::Instance().GetHeight());   
-	Vec2<float> center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);       			
-        			
- 	//UserInputManager::Instance().UpdateInKosmoport(player);
-	//player->GetCursor().Update(); 
-     	    	       	
-	//bool interaction = gui_kosmoport.UpdateMouseInteractionWithButtons(data_mouse);
-	//gui_kosmoport.ButtonsAction();
-	
-									
-	NatureLand* natureland = (NatureLand*)player->GetNpc()->GetVehicle()->GetLand();
-	gui_natureland.BindNatureLand(natureland);
+    /*     
+    Rect screen_rect(0, 0, Screen::Instance().GetWidth(), Screen::Instance().GetHeight());   
+    Vec2<float> center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);                   
+                    
+     //UserInputManager::Instance().UpdateInKosmoport(player);
+    //player->GetCursor().Update(); 
+                            
+    //bool interaction = gui_kosmoport.UpdateMouseInteractionWithButtons(data_mouse);
+    //gui_kosmoport.ButtonsAction();
+    
+                                    
+    NatureLand* natureland = (NatureLand*)player->GetNpc()->GetVehicle()->GetLand();
+    gui_natureland.BindNatureLand(natureland);
 
-	//update  
-	bool interaction = gui_natureland.UpdateMouseInteraction(data_mouse.pos_screencoord);
-	if (interaction == false)
-	{
-		interaction = gui_natureland.UpdateMouseInteractionWithEquipedItemSlots(data_mouse);
-	}
-	gui_natureland.ButtonsAction();
-	
-	//render
-	resetRenderTransformation();
-	gui_natureland.RenderBackground(screen_rect);
-	enable_BLEND();
-	{   
-		gui_natureland.RenderEquipedItemSlots();
-		//gui_natureland.RenderButtons();
-		//gui_natureland.RenderFocusedButtonInfo(data_mouse); 
-	}
-	disable_BLEND(); 
-	*/
+    //update  
+    bool interaction = gui_natureland.UpdateMouseInteraction(data_mouse.pos_screencoord);
+    if (interaction == false)
+    {
+        interaction = gui_natureland.UpdateMouseInteractionWithEquipedItemSlots(data_mouse);
+    }
+    gui_natureland.ButtonsAction();
+    
+    //render
+    resetRenderTransformation();
+    gui_natureland.RenderBackground(screen_rect);
+    enable_BLEND();
+    {   
+        gui_natureland.RenderEquipedItemSlots();
+        //gui_natureland.RenderButtons();
+        //gui_natureland.RenderFocusedButtonInfo(data_mouse); 
+    }
+    disable_BLEND(); 
+    */
 }
 
 
 void GuiManager::PressEventMBL_onGuiElement(TYPE::GUI subtype_id)
 {
-	gui_space.PressEventMBL_onGuiElement(subtype_id, player); 
-}	
+    gui_space.PressEventMBL_onGuiElement(subtype_id, player); 
+}    
 
 void GuiManager::ResetEventOnGuiElement(TYPE::GUI subtype_id)
 {
-	gui_space.ResetStateEventOnGuiElement(subtype_id);
-}	
+    gui_space.ResetStateEventOnGuiElement(subtype_id);
+}    
 
 BaseGuiElement* GuiManager::GetGuiElement(TYPE::GUI request_subtype_id) const
 {
-	return gui_space.GetGuiElement(request_subtype_id);
+    return gui_space.GetGuiElement(request_subtype_id);
 }
-		
+        

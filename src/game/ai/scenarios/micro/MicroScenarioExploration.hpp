@@ -25,16 +25,16 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class MicroScenarioExploration : public BaseScenario
 {
-	public:
-		MicroScenarioExploration();
-		virtual ~MicroScenarioExploration();
-		
-		virtual void Enter(Npc*) const;
-		virtual void UpdateInStaticInSpace(Npc*) const;
-		virtual void UpdateInDynamicInSpace(Npc*) const;	
-		virtual void Exit(Npc*) const;
-		
-		virtual std::string GetDescription(Npc*) const;
+    public:
+        MicroScenarioExploration();
+        virtual ~MicroScenarioExploration();
+        
+        virtual void Enter(Npc*) const;
+        virtual void UpdateInStaticInSpace(Npc*) const;
+        virtual void UpdateInDynamicInSpace(Npc*) const;    
+        virtual void Exit(Npc*) const;
+        
+        virtual std::string GetDescription(Npc*) const;
 };
 
 #endif 

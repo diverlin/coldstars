@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -33,8 +33,8 @@
 
 FreezerEquipmentBuilder& FreezerEquipmentBuilder::Instance()
 {
-	static FreezerEquipmentBuilder instance;
-	return instance;
+    static FreezerEquipmentBuilder instance;
+    return instance;
 }
 
 FreezerEquipmentBuilder::~FreezerEquipmentBuilder()
@@ -42,20 +42,20 @@ FreezerEquipmentBuilder::~FreezerEquipmentBuilder()
 
 FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipmentTemplate(INTLONGEST id) const
 {
-	FreezerEquipment* freezer_equipment = nullptr;
+    FreezerEquipment* freezer_equipment = nullptr;
 
-	if (id == NONE_ID)
-	{
-		id = EntityIdGenerator::Instance().GetNextId();
-	}
+    if (id == NONE_ID)
+    {
+        id = EntityIdGenerator::Instance().GetNextId();
+    }
 
- 	try 
+     try 
         { 
-        	freezer_equipment = new FreezerEquipment(id);
+            freezer_equipment = new FreezerEquipment(id);
         }
         catch(std::bad_alloc)
         {
-        	Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+            Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         EntityManager::Instance().RegisterEntity(freezer_equipment);
         
@@ -64,23 +64,23 @@ FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipmentTemplate(INTLON
     
 FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int freeze_orig) const
 {
-	FreezerEquipment* freezer_equipment = GetNewFreezerEquipmentTemplate();
+    FreezerEquipment* freezer_equipment = GetNewFreezerEquipmentTemplate();
     CreateNewInternals(freezer_equipment, tech_level, race_id, freeze_orig);
     
     return freezer_equipment;
 } 
-    	
+        
 void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int freeze_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
-	}
-	
+    }
+    
     if (tech_level == TYPE::TECHLEVEL::NONE_ID)
     {
         tech_level = TYPE::TECHLEVEL::L0_ID; 
-	}
+    }
 
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::FREEZER_EQUIPMENT_ID);    
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
@@ -88,14 +88,14 @@ void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equip
     freeze_orig     = getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX) * (1 + EQUIPMENT::FREEZER::FREEZE_TECHLEVEL_RATE*(int)tech_level);
     
     ItemCommonData common_data;
-    common_data.tech_level 	    = tech_level;
+    common_data.tech_level         = tech_level;
     common_data.modules_num_max = getRandInt(EQUIPMENT::FREEZER::MODULES_NUM_MIN, EQUIPMENT::FREEZER::MODULES_NUM_MAX);
     common_data.mass            = getRandInt(EQUIPMENT::FREEZER::MASS_MIN,        EQUIPMENT::FREEZER::MASS_MAX);
     common_data.condition_max   = getRandInt(EQUIPMENT::FREEZER::CONDITION_MIN,   EQUIPMENT::FREEZER::CONDITION_MAX);
     common_data.deterioration_normal = 1;
     
     freezer_equipment->SetFreezeOrig(freeze_orig);  
-    freezer_equipment->BindData2D(texOb_item);    	
+    freezer_equipment->BindData2D(texOb_item);        
     freezer_equipment->SetParentSubTypeId(TYPE::ENTITY::FREEZER_SLOT_ID);
     freezer_equipment->SetItemCommonData(common_data);
     freezer_equipment->SetCondition(common_data.condition_max);

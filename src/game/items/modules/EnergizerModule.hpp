@@ -24,29 +24,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class EnergizerModule : public BaseModule
 {
-   	public:   
-      		EnergizerModule(int);
-      		virtual ~EnergizerModule();
+       public:   
+              EnergizerModule(int);
+              virtual ~EnergizerModule();
 
-		void SetEnergyMaxAdd(int energy_max_add)    { this->energy_max_add = energy_max_add; };
-		void SetRestorationAdd(int restoration_add) { this->restoration_add = restoration_add; };
+        void SetEnergyMaxAdd(int energy_max_add)    { this->energy_max_add = energy_max_add; };
+        void SetRestorationAdd(int restoration_add) { this->restoration_add = restoration_add; };
                 
-		int GetEnergyMaxAdd()   const { return energy_max_add; };
-		int GetRestorationAdd() const { return restoration_add; };
-      		
-      		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-      	private:
-      	      	int energy_max_add;
-      		int restoration_add;
-      		
-      		void virtual AddUniqueInfo();
-      		
-      		void SaveDataUniqueEnergizerModule(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueEnergizerModule(const boost::property_tree::ptree&);
-		void ResolveDataUniqueEnergizerModule();
+        int GetEnergyMaxAdd()   const { return energy_max_add; };
+        int GetRestorationAdd() const { return restoration_add; };
+              
+              virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
+          private:
+                    int energy_max_add;
+              int restoration_add;
+              
+              void virtual AddUniqueInfo();
+              
+              void SaveDataUniqueEnergizerModule(boost::property_tree::ptree&, const std::string&) const;
+        void LoadDataUniqueEnergizerModule(const boost::property_tree::ptree&);
+        void ResolveDataUniqueEnergizerModule();
 };
 
 #endif

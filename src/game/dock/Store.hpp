@@ -35,8 +35,8 @@ class Store : public Room
                 
                 virtual void PutChildsToGarbage() const;
 
-		void AddVehicleSlot(VehicleSlot*);                  
-		void AddItemSlot(ItemSlot*);                
+        void AddVehicleSlot(VehicleSlot*);                  
+        void AddItemSlot(ItemSlot*);                
                 bool AddItem(BaseItem*);
                 bool AddVehicle(Vehicle*);
                 
@@ -46,19 +46,19 @@ class Store : public Room
                 int BuyItem(BaseItem*); 
                 void SellVehicle(Npc*, VehicleSlot*, int);
                 
-                void SaveData(boost::property_tree::ptree&) const;		
-		void LoadData(const boost::property_tree::ptree&);
-		void ResolveData();
-		
+                void SaveData(boost::property_tree::ptree&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
+        
         private:             
                 std::vector<ItemSlot*> item_slot_vec;
                 std::vector<VehicleSlot*> vehicle_slot_vec;
                                 
-                void SaveDataUniqueStore(boost::property_tree::ptree&, const std::string&) const;		
-		void LoadDataUniqueStore(const boost::property_tree::ptree&);
-		void ResolveDataUniqueStore();
-		
-	friend class GuiStore;
+                void SaveDataUniqueStore(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadDataUniqueStore(const boost::property_tree::ptree&);
+        void ResolveDataUniqueStore();
+        
+    friend class GuiStore;
 };
         
 #endif

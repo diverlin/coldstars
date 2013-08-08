@@ -25,13 +25,13 @@
 template <class TYPE1, class TYPE2>
 class GuiPair
 {
-	public:
-		TYPE1 first;
-		TYPE2 second;
-		
-	GuiPair(TYPE1 first, TYPE2 second):first(first), second(second) {};
-	GuiPair(const GuiPair& rhs):first(rhs.first), second(rhs.second) {};
-	~GuiPair() {};
+    public:
+        TYPE1 first;
+        TYPE2 second;
+        
+    GuiPair(TYPE1 first, TYPE2 second):first(first), second(second) {};
+    GuiPair(const GuiPair& rhs):first(rhs.first), second(rhs.second) {};
+    ~GuiPair() {};
 };
 
 #endif

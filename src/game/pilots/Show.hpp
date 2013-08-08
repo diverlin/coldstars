@@ -23,37 +23,37 @@
 
 class Show
 {
-	private:
-		bool m_AllPath;
-		bool m_AllOrbits;
-		
-		bool m_InfoShips;                
-		bool m_RangeRadar;
-		bool m_CollisionRadius;
-	
-	public:
-		Show()
-		:          
-		m_AllPath(false),
-		m_AllOrbits(false),                
-		m_InfoShips(false),             
-		m_RangeRadar(false),
-		m_CollisionRadius(false)
-		{}
+    private:
+        bool m_AllPath;
+        bool m_AllOrbits;
+        
+        bool m_InfoShips;                
+        bool m_RangeRadar;
+        bool m_CollisionRadius;
+    
+    public:
+        Show()
+        :          
+        m_AllPath(false),
+        m_AllOrbits(false),                
+        m_InfoShips(false),             
+        m_RangeRadar(false),
+        m_CollisionRadius(false)
+        {}
                 
-		~Show() {}
-                		
-		bool GetAllOrbits()    const { return m_AllOrbits; }
-		bool GetAllPath()      const { return m_AllPath; }
+        ~Show() {}
+                        
+        bool GetAllOrbits()    const { return m_AllOrbits; }
+        bool GetAllPath()      const { return m_AllPath; }
                 
-		//bool GetInfoShips() 	const { return m_InfoShips; }
-		bool GetRangeRadar() 	const { return m_RangeRadar; }
-		bool GetCollisionRadius() 	const { return m_CollisionRadius; }
-						
-		void InverseAllPath() 		{ m_AllPath = !m_AllPath; }
-		void InverseAllOrbits() 	{ m_AllOrbits = !m_AllOrbits; }
-		void InverseRangeRadar() 	{ m_RangeRadar = !m_RangeRadar; }
-		void InverseCollisionRadius() 	{ m_CollisionRadius = !m_CollisionRadius; }
+        //bool GetInfoShips()     const { return m_InfoShips; }
+        bool GetRangeRadar()     const { return m_RangeRadar; }
+        bool GetCollisionRadius()     const { return m_CollisionRadius; }
+                        
+        void InverseAllPath()         { m_AllPath = !m_AllPath; }
+        void InverseAllOrbits()     { m_AllOrbits = !m_AllOrbits; }
+        void InverseRangeRadar()     { m_RangeRadar = !m_RangeRadar; }
+        void InverseCollisionRadius()     { m_CollisionRadius = !m_CollisionRadius; }
 };
 
 #endif 

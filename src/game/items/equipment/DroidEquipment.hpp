@@ -24,33 +24,33 @@
 
 class DroidEquipment : public BaseEquipment
 {
-   	public: 
-     		DroidEquipment(int);
-     		virtual ~DroidEquipment();
+       public: 
+             DroidEquipment(int);
+             virtual ~DroidEquipment();
 
-		void SetRepairOrig(int repair_orig) { this->repair_orig = repair_orig; };
-		int GetRepair() const { return repair; };
+        void SetRepairOrig(int repair_orig) { this->repair_orig = repair_orig; };
+        int GetRepair() const { return repair; };
 
-      		virtual void UpdateProperties();
-      		virtual void UpdateInStatic();
+              virtual void UpdateProperties();
+              virtual void UpdateInStatic();
                 
-      		void CountPrice();
-      		
-      		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-      	private:
-      		int repair_orig;
-      		int repair_add;
-      		int repair;
-      		
-     		void virtual AddUniqueInfo();
-       		std::string GetRepairStr();
+              void CountPrice();
+              
+              virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
+          private:
+              int repair_orig;
+              int repair_add;
+              int repair;
+              
+             void virtual AddUniqueInfo();
+               std::string GetRepairStr();
                 
                 void SaveDataUniqueDroidEquipment(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueDroidEquipment(const boost::property_tree::ptree&);
-		void ResolveDataUniqueDroidEquipment();  
+        void LoadDataUniqueDroidEquipment(const boost::property_tree::ptree&);
+        void ResolveDataUniqueDroidEquipment();  
 };
 
 #endif 

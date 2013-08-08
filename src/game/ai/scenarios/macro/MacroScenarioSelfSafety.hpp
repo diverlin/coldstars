@@ -25,12 +25,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class MacroScenarioSelfSafety : public BaseScenario
 {
-	public:
-		MacroScenarioSelfSafety();
-		virtual ~MacroScenarioSelfSafety();
-		
-		virtual void UpdateInStaticInSpace(Npc*) const;	
-		virtual std::string GetDescription(Npc*) const;
+    public:
+        MacroScenarioSelfSafety();
+        virtual ~MacroScenarioSelfSafety();
+        
+        virtual void UpdateInStaticInSpace(Npc*) const;    
+        virtual std::string GetDescription(Npc*) const;
 }; 
 
 

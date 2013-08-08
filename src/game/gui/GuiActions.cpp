@@ -29,39 +29,39 @@
 /* static */
 void GuiActions::GalaxyMapGuiTransition(Player* player) 
 { 
-	#if GUI_LOG_ENABLED == 1
-	Logger::Instance().Log("GuiActions::GalaxyMapGuiTransition", GUI_LOG_DIP);
-	#endif
-	
-	if (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr)
-	{
-		GuiManager::Instance().GetGuiSpace().EnterGalaxyMap();
+    #if GUI_LOG_ENABLED == 1
+    Logger::Instance().Log("GuiActions::GalaxyMapGuiTransition", GUI_LOG_DIP);
+    #endif
+    
+    if (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr)
+    {
+        GuiManager::Instance().GetGuiSpace().EnterGalaxyMap();
 
-	}
-	else
-	{
-		GuiManager::Instance().GetGuiSpace().ExitGalaxyMap();
-	}
+    }
+    else
+    {
+        GuiManager::Instance().GetGuiSpace().ExitGalaxyMap();
+    }
 }
 
 /* static */
 void GuiActions::SaveEvent(Player* player) 
 { 
-	#if GUI_LOG_ENABLED == 1
-	Logger::Instance().Log("GuiActions::SaveEvent", GUI_LOG_DIP);
-	#endif
-	
-	//EntityManager::Instance().SaveRequest();
+    #if GUI_LOG_ENABLED == 1
+    Logger::Instance().Log("GuiActions::SaveEvent", GUI_LOG_DIP);
+    #endif
+    
+    //EntityManager::Instance().SaveRequest();
 }
 
 /* static */
 void GuiActions::LoadEvent(Player* player) 
 { 
-	#if GUI_LOG_ENABLED == 1
-	Logger::Instance().Log("GuiActions::LoadEvent", GUI_LOG_DIP);
-	#endif
-	
-	//EntityManager::Instance().LoadRequest();
+    #if GUI_LOG_ENABLED == 1
+    Logger::Instance().Log("GuiActions::LoadEvent", GUI_LOG_DIP);
+    #endif
+    
+    //EntityManager::Instance().LoadRequest();
 }
 
 

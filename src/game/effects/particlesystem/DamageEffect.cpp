@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "DamageEffect.hpp"
@@ -22,7 +22,7 @@
 
 DamageEffect::DamageEffect()
 {
-	//subtype_id = DAMAGE_EFFECT_ID;
+    //subtype_id = DAMAGE_EFFECT_ID;
 }
 
 /* virtual override final */
@@ -32,7 +32,7 @@ DamageEffect::~DamageEffect()
 
 void DamageEffect::CreateParticles()
 {
-	for(unsigned int i=0; i<num_particles; i++)
+    for(unsigned int i=0; i<num_particles; i++)
     {  
         Particle* particle = new Particle(data_particle);
         particle->Randomize_d_alpha(0.003, 0.006); //   ??
@@ -44,36 +44,36 @@ void DamageEffect::CreateParticles()
 /* virtual override final */
 void DamageEffect::Update()
 {
-     	is_alive = false;
+         is_alive = false;
         for (unsigned int i=0; i<num_particles; i++)
         {
                 if (particles_vec[i]->GetAlive() == true)
-        	{
-            		particles_vec[i]->Update();
-            		is_alive = true;
-            	}
-            	else
-            	{
-            		if (is_dying == false)
-            		{
-            			particles_vec[i]->Reborn();
-            		}
-            	}
+            {
+                    particles_vec[i]->Update();
+                    is_alive = true;
+                }
+                else
+                {
+                    if (is_dying == false)
+                    {
+                        particles_vec[i]->Reborn();
+                    }
+                }
         }
 }
 
 /* virtual override final */
 void DamageEffect::Render(float scale)
 {
-	glPushMatrix();
+    glPushMatrix();
     {
         glTranslatef(parent->GetCenter().x, parent->GetCenter().y, 0.0);
         glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-		for (unsigned int i=0; i<num_particles; i++)
-		{
+        for (unsigned int i=0; i<num_particles; i++)
+        {
             particles_vec[i]->Render(scale);
         }
-	}
+    }
     glPopMatrix(); 
 }
 
@@ -83,9 +83,9 @@ void DamageEffect::Render(float scale)
 
 DamageEffect* getNewDamageEffect(int color_id, BaseSpaceEntity* parent)
 {
-	int particles_num = 10;
+    int particles_num = 10;
    
-    	ParticleData data_particle;
+        ParticleData data_particle;
         data_particle.size_start = 25;
         data_particle.size_end = 2.0;
         data_particle.d_size = 0.02; 
@@ -95,23 +95,23 @@ DamageEffect* getNewDamageEffect(int color_id, BaseSpaceEntity* parent)
         data_particle.d_velocity   = 0.0;
                 
         data_particle.color_start.r    = 1.0;
-	data_particle.color_start.g    = 1.0;
-	data_particle.color_start.b    = 1.0;
+    data_particle.color_start.g    = 1.0;
+    data_particle.color_start.b    = 1.0;
         data_particle.color_start.a    = 1.0;
 
-	data_particle.color_end.r    = 0.0;
-	data_particle.color_end.g    = 0.0;
-	data_particle.color_end.b    = 0.0;
+    data_particle.color_end.r    = 0.0;
+    data_particle.color_end.g    = 0.0;
+    data_particle.color_end.b    = 0.0;
         data_particle.color_end.a    = 0.1;
 
-	data_particle.color_delta.r    = 0.0;
-	data_particle.color_delta.g    = 0.0;
-	data_particle.color_delta.b    = 0.0;
+    data_particle.color_delta.r    = 0.0;
+    data_particle.color_delta.g    = 0.0;
+    data_particle.color_delta.b    = 0.0;
         data_particle.color_delta.a    = 0.0; // is modifed iduvidually for each particle  
         
         TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, color_id);
                 
-	DamageEffect* damage = new DamageEffect();
+    DamageEffect* damage = new DamageEffect();
         
         damage->SetTextureOb(texOb_particle);        
         damage->SetParticleData(data_particle);
@@ -122,6 +122,6 @@ DamageEffect* getNewDamageEffect(int color_id, BaseSpaceEntity* parent)
                 
         damage->CreateParticles();
                 
-	return damage;
+    return damage;
 }
 

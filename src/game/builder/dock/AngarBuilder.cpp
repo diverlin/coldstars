@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -29,8 +29,8 @@
 
 AngarBuilder& AngarBuilder::Instance()
 {
-	static AngarBuilder instance;
-	return instance;
+    static AngarBuilder instance;
+    return instance;
 }
 
 AngarBuilder::~AngarBuilder()
@@ -38,12 +38,12 @@ AngarBuilder::~AngarBuilder()
 
 Angar* AngarBuilder::GetNewAngarTemplate(INTLONGEST id) const
 {
-	Angar* angar = nullptr;
-	
-	if (id == NONE_ID) 
-	{
-		id = EntityIdGenerator::Instance().GetNextId();
-	}
+    Angar* angar = nullptr;
+    
+    if (id == NONE_ID) 
+    {
+        id = EntityIdGenerator::Instance().GetNextId();
+    }
         
     try 
     { 
@@ -60,33 +60,33 @@ Angar* AngarBuilder::GetNewAngarTemplate(INTLONGEST id) const
 
 Angar* AngarBuilder::GetNewAngar() const
 {
-	Angar* angar = GetNewAngarTemplate();
-	CreateNewInternals(angar);
+    Angar* angar = GetNewAngarTemplate();
+    CreateNewInternals(angar);
         
     return angar;
 } 
-        	
+            
 void AngarBuilder::CreateNewInternals(Angar* angar) const
 { 
- 	for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM; i++)
- 	{
- 		VehicleSlot* vehicle_slot = GetNewVehicleSlot(TYPE::ENTITY::VEHICLE_MILITARY_SLOT_ID); 
- 		angar->AddVehicleSlot(vehicle_slot);
-	}
+     for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM; i++)
+     {
+         VehicleSlot* vehicle_slot = GetNewVehicleSlot(TYPE::ENTITY::VEHICLE_MILITARY_SLOT_ID); 
+         angar->AddVehicleSlot(vehicle_slot);
+    }
 
- 	for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++)
- 	{
- 		VehicleSlot* vehicle_slot = GetNewVehicleSlot(TYPE::ENTITY::VEHICLE_VISITORS_SLOT_ID); 
- 		angar->AddVehicleSlot(vehicle_slot);
-	}
+     for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++)
+     {
+         VehicleSlot* vehicle_slot = GetNewVehicleSlot(TYPE::ENTITY::VEHICLE_VISITORS_SLOT_ID); 
+         angar->AddVehicleSlot(vehicle_slot);
+    }
         
     for (unsigned int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++)
- 	{
- 		ItemSlot* cargo_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID); 
+     {
+         ItemSlot* cargo_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID); 
         angar->AddItemSlot(cargo_slot);
-	}
-	
-	angar->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ANGAR_BACKGROUND_ID));
+    }
+    
+    angar->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ANGAR_BACKGROUND_ID));
 }
 
-  	
+      

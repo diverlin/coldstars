@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "NatureLand.hpp"
@@ -29,8 +29,8 @@
 
 NatureLand::NatureLand(int id)
 {
-	SetId(id);
-	SetTypeId(TYPE::ENTITY::NATURELAND_ID);
+    SetId(id);
+    SetTypeId(TYPE::ENTITY::NATURELAND_ID);
 }
 
 /* virtual */
@@ -40,52 +40,52 @@ NatureLand::~NatureLand()
 /* virtual */ 
 void NatureLand::PutChildsToGarbage() const
 {
-    	for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
-    	{
-    		EntityGarbage::Instance().Add(VEHICLE_vec[i]);
-    	}
+        for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+        {
+            EntityGarbage::Instance().Add(VEHICLE_vec[i]);
+        }
 
-    	for (unsigned int i=0; i<item_slot_vec.size(); i++)
-    	{
-    		EntityGarbage::Instance().Add(item_slot_vec[i]);
-    	}
-    		
+        for (unsigned int i=0; i<item_slot_vec.size(); i++)
+        {
+            EntityGarbage::Instance().Add(item_slot_vec[i]);
+        }
+            
 }
 
 //// ******* TRANSITION ******* 
 bool NatureLand::CanAcceptNewItem() const
 {
-	for (unsigned int i=0; i<item_slot_vec.size(); i++)
-	{
-		if (item_slot_vec[i]->GetItem() == nullptr)
-		{
-			return true;
-		}
-	}
-	
-	return false;
+    for (unsigned int i=0; i<item_slot_vec.size(); i++)
+    {
+        if (item_slot_vec[i]->GetItem() == nullptr)
+        {
+            return true;
+        }
+    }
+    
+    return false;
 }
                 
 void NatureLand::AddItemSlot(ItemSlot* item_slot)
 {
-	item_slot->SetOwner(this);
-	item_slot_vec.push_back(item_slot);
+    item_slot->SetOwner(this);
+    item_slot_vec.push_back(item_slot);
 }
 
 bool NatureLand::AddItem(BaseItem* item)
 {
-	for (unsigned int i=0; i<item_slot_vec.size(); i++)
-	{
-		if (item_slot_vec[i]->GetItem() == nullptr)
-		{
-			item_slot_vec[i]->InsertItem(item);
-			item_slot_vec[i]->SetPosition(Vec2<float>(getRandInt(0, 100), getRandInt(0, 100)));
-			
-			return true;
-		}
-	}
-	
-	return false;
+    for (unsigned int i=0; i<item_slot_vec.size(); i++)
+    {
+        if (item_slot_vec[i]->GetItem() == nullptr)
+        {
+            item_slot_vec[i]->InsertItem(item);
+            item_slot_vec[i]->SetPosition(Vec2<float>(getRandInt(0, 100), getRandInt(0, 100)));
+            
+            return true;
+        }
+    }
+    
+    return false;
 }
 
 
@@ -123,7 +123,7 @@ bool NatureLand::RemoveVehicle(Vehicle* vehicle)
 /* virtual */
 bool NatureLand::GetPermissionToLand() const
 {
-       	return true;
+           return true;
 }
 
 /* virtual */
@@ -133,10 +133,10 @@ void NatureLand::UpdateInStatic()
 /*virtual*/
 std::string NatureLand::GetDockVehicleStr() const
 {
-	std::string str;
+    std::string str;
         for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
         {
-               	str += "_" + int2str(VEHICLE_vec[i]->GetId());
+                   str += "_" + int2str(VEHICLE_vec[i]->GetId());
         }
 
         return str;
@@ -145,40 +145,40 @@ std::string NatureLand::GetDockVehicleStr() const
 /*virtual*/
 void NatureLand::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	const std::string root = "natureland."+int2str(GetId())+".";
+    const std::string root = "natureland."+int2str(GetId())+".";
     SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueBaseLand(save_ptree, root);
-	SaveDataUniqueNatureLand(save_ptree, root);
+    SaveDataUniqueBaseLand(save_ptree, root);
+    SaveDataUniqueNatureLand(save_ptree, root);
 }
 
 /*virtual*/
 void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueBaseLand(load_ptree);
-	LoadDataUniqueNatureLand(load_ptree);
+    LoadDataUniqueBaseLand(load_ptree);
+    LoadDataUniqueNatureLand(load_ptree);
 }
 
 /*virtual*/
 void NatureLand::ResolveData()
 {
     ResolveDataUniqueBase();
-	ResolveDataUniqueBaseLand();
-	ResolveDataUniqueNatureLand();
+    ResolveDataUniqueBaseLand();
+    ResolveDataUniqueNatureLand();
 }
 
 
 void NatureLand::SaveDataUniqueNatureLand(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	save_ptree.put(root+"data_unresolved_NatureLand.textureOb_background_path", textureOb_background->path);
+    save_ptree.put(root+"data_unresolved_NatureLand.textureOb_background_path", textureOb_background->path);
 }
 
 void NatureLand::LoadDataUniqueNatureLand(const boost::property_tree::ptree& load_ptree)
 {
-	data_unresolved_NatureLand.textureOb_background_path = load_ptree.get<std::string>("data_unresolved_NatureLand.textureOb_background_path");
+    data_unresolved_NatureLand.textureOb_background_path = load_ptree.get<std::string>("data_unresolved_NatureLand.textureOb_background_path");
 }
 
 void NatureLand::ResolveDataUniqueNatureLand()
 {
-	textureOb_background = TextureManager::Instance().GetTextureObByPath(data_unresolved_NatureLand.textureOb_background_path);
+    textureOb_background = TextureManager::Instance().GetTextureObByPath(data_unresolved_NatureLand.textureOb_background_path);
 }

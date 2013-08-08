@@ -25,17 +25,17 @@
 
 class GrappleEquipment : public BaseEquipment
 {
-   	public:
-      		GrappleEquipment(int);   
-      		virtual ~GrappleEquipment();
+       public:
+              GrappleEquipment(int);   
+              virtual ~GrappleEquipment();
 
-		void SetStrengthOrig(int strength_orig)     { this->strength_orig   = strength_orig; };
-		void SetRadiusOrig(int radius_orig)         { this->radius_orig     = radius_orig; };
-		void SetSpeedOrig(int speed_orig)           { this->speed_orig      = speed_orig; };
+        void SetStrengthOrig(int strength_orig)     { this->strength_orig   = strength_orig; };
+        void SetRadiusOrig(int radius_orig)         { this->radius_orig     = radius_orig; };
+        void SetSpeedOrig(int speed_orig)           { this->speed_orig      = speed_orig; };
                                 
-		int GetStrength()   const { return strength; };
-		int GetRadius()     const { return radius; };
-		int GetSpeed()      const { return speed; };
+        int GetStrength()   const { return strength; };
+        int GetRadius()     const { return radius; };
+        int GetSpeed()      const { return speed; };
               
                 bool CheckIfTargetAlreadyExistInQueue(BaseSpaceEntity* target) const;
                 void AddTarget(BaseSpaceEntity*);
@@ -43,44 +43,44 @@ class GrappleEquipment : public BaseEquipment
 
                 void RemoveAllTargets();
                                 
-		std::string GetTargetStr() const;
+        std::string GetTargetStr() const;
 
-		void UpdateGrabScenarioProgram_inDynamic();
-		void RenderGrabTrail() const;
-				              
-      		virtual void UpdateProperties();  
+        void UpdateGrabScenarioProgram_inDynamic();
+        void RenderGrabTrail() const;
+                              
+              virtual void UpdateProperties();  
                                 
                 void CountPrice();
-                      		
-      		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-      	private:
-      		int strength_orig;
-      		int strength_add;
-      		int strength;
+                              
+              virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
+          private:
+              int strength_orig;
+              int strength_add;
+              int strength;
 
-      		int radius_orig;
-      		int radius_add;
-      		int radius;
+              int radius_orig;
+              int radius_add;
+              int radius;
 
-      		int speed_orig;
-      		int speed_add;
-      		int speed; 
+              int speed_orig;
+              int speed_add;
+              int speed; 
                 
                 int free_strength;
 
                 std::vector<BaseSpaceEntity*> target_vec;
-                    		
-     		void virtual AddUniqueInfo();
-           	std::string GetStrengthStr();
-           	std::string GetRadiusStr();
-           	std::string GetSpeedStr();
+                            
+             void virtual AddUniqueInfo();
+               std::string GetStrengthStr();
+               std::string GetRadiusStr();
+               std::string GetSpeedStr();
                 
                 void SaveDataUniqueGrappleEquipment(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueGrappleEquipment(const boost::property_tree::ptree&);
-		void ResolveDataUniqueGrappleEquipment(); 
+        void LoadDataUniqueGrappleEquipment(const boost::property_tree::ptree&);
+        void ResolveDataUniqueGrappleEquipment(); 
 };
 
 #endif 

@@ -37,50 +37,50 @@ m_Vehicle(nullptr)
 
 void GuiVehicle2::Reset()
 {
-	for (unsigned int i=0; i<m_Child_vec.size(); i++)
-	{
-		delete m_Child_vec[i];
-	}
-	m_Child_vec.clear();
-	
-	m_Vehicle = nullptr;
+    for (unsigned int i=0; i<m_Child_vec.size(); i++)
+    {
+        delete m_Child_vec[i];
+    }
+    m_Child_vec.clear();
+    
+    m_Vehicle = nullptr;
 }
 
 void GuiVehicle2::BindVehicle(Vehicle* vehicle, float scale)
 {
-	CreateFunctionalItemSlotsWithCircleGeometry(vehicle, scale);
-	
-	m_Vehicle = vehicle;
-}	
-	
+    CreateFunctionalItemSlotsWithCircleGeometry(vehicle, scale);
+    
+    m_Vehicle = vehicle;
+}    
+    
 void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, float scale)
 {   
     Reset();     
     int angle = 0;
-	for (unsigned int i=0; i<vehicle->m_SlotTotal_vec.size(); i++)
-	{	
-		TYPE::ENTITY slot_subtype_id = vehicle->m_SlotTotal_vec[i]->GetSubTypeId();
-		if ( (slot_subtype_id != TYPE::ENTITY::CARGO_SLOT_ID) and (slot_subtype_id != TYPE::ENTITY::ARTEFACT_SLOT_ID) )
-		{  
-			TYPE::ENTITY entity_type_id = slot_subtype_id;
-			if (slot_subtype_id == TYPE::ENTITY::WEAPON_SLOT_ID)
-			{
-				entity_type_id = vehicle->m_SlotTotal_vec[i]->GetSubSubTypeId();
-			}
-						  
-			//TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;
-			ButtonItemSlot2* button = new ButtonItemSlot2(getGuiItemSlotSelectorType(entity_type_id), getEntityTypeStr(entity_type_id), vehicle->m_SlotTotal_vec[i]);  
+    for (unsigned int i=0; i<vehicle->m_SlotTotal_vec.size(); i++)
+    {    
+        TYPE::ENTITY slot_subtype_id = vehicle->m_SlotTotal_vec[i]->GetSubTypeId();
+        if ( (slot_subtype_id != TYPE::ENTITY::CARGO_SLOT_ID) and (slot_subtype_id != TYPE::ENTITY::ARTEFACT_SLOT_ID) )
+        {  
+            TYPE::ENTITY entity_type_id = slot_subtype_id;
+            if (slot_subtype_id == TYPE::ENTITY::WEAPON_SLOT_ID)
+            {
+                entity_type_id = vehicle->m_SlotTotal_vec[i]->GetSubSubTypeId();
+            }
+                          
+            //TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;
+            ButtonItemSlot2* button = new ButtonItemSlot2(getGuiItemSlotSelectorType(entity_type_id), getEntityTypeStr(entity_type_id), vehicle->m_SlotTotal_vec[i]);  
 
             Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
             button->SetSize(size*scale);
 
             Vec2<float> offset = getVec2f(160, angle);
-			AddChild(button, offset*scale);
+            AddChild(button, offset*scale);
 
-		    angle += 20; 
-		}
-	}    	
-}	
+            angle += 20; 
+        }
+    }        
+}    
 
 /* virtual override final */
 void GuiVehicle2::UpdateUnique(Player* player)

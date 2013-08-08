@@ -24,32 +24,32 @@
 
 class ScanerEquipment : public BaseEquipment
 {
-  	public:
-    		ScanerEquipment(int);
-    		virtual ~ScanerEquipment();
+      public:
+            ScanerEquipment(int);
+            virtual ~ScanerEquipment();
 
                 void SetScanOrig(int scan_orig)  { this->scan_orig = scan_orig; };
-		int GetScan() const { return scan; };
-   		
-    		virtual void UpdateProperties();
+        int GetScan() const { return scan; };
+           
+            virtual void UpdateProperties();
                
-    		void CountPrice();
-                    		
-    		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-    	private:
-    		int scan_orig;
-    		int scan_add;
-    		int scan;
+            void CountPrice();
+                            
+            virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
+        private:
+            int scan_orig;
+            int scan_add;
+            int scan;
 
-     		void virtual AddUniqueInfo();
-         	std::string GetScanStr();
+             void virtual AddUniqueInfo();
+             std::string GetScanStr();
                 
                 void SaveDataUniqueScanerEquipment(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueScanerEquipment(const boost::property_tree::ptree&);
-		void ResolveDataUniqueScanerEquipment();  
+        void LoadDataUniqueScanerEquipment(const boost::property_tree::ptree&);
+        void ResolveDataUniqueScanerEquipment();  
 };
 
 #endif 

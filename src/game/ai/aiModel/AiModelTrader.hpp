@@ -25,12 +25,12 @@
 
 class AiModelTrader : public BaseAiModel
 {
-	public:
-		AiModelTrader();
-		virtual ~AiModelTrader();
-		
-		virtual void UpdateInStatic(Npc*) const;
-		virtual std::string GetDescription(Npc*) const;
+    public:
+        AiModelTrader();
+        virtual ~AiModelTrader();
+        
+        virtual void UpdateInStatic(Npc*) const;
+        virtual std::string GetDescription(Npc*) const;
 };
 
 #endif 

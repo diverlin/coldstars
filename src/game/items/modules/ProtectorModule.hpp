@@ -24,26 +24,26 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class ProtectorModule : public BaseModule
 {
-   	public:
-       		ProtectorModule(int);
-       		virtual ~ProtectorModule();
+       public:
+               ProtectorModule(int);
+               virtual ~ProtectorModule();
 
-		void SetProtectionAdd(int protection_add) { this->protection_add = protection_add; };
+        void SetProtectionAdd(int protection_add) { this->protection_add = protection_add; };
                 
-		int GetProtectionAdd() const { return protection_add; };
-       		
-       		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-       	private:
-       	     	int protection_add;
-       	     	
-       		void virtual AddUniqueInfo();
-       		
-        	void SaveDataUniqueProtectorModule(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueProtectorModule(const boost::property_tree::ptree&);
-		void ResolveDataUniqueProtectorModule();    
+        int GetProtectionAdd() const { return protection_add; };
+               
+               virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
+           private:
+                    int protection_add;
+                    
+               void virtual AddUniqueInfo();
+               
+            void SaveDataUniqueProtectorModule(boost::property_tree::ptree&, const std::string&) const;
+        void LoadDataUniqueProtectorModule(const boost::property_tree::ptree&);
+        void ResolveDataUniqueProtectorModule();    
 };
 
 #endif

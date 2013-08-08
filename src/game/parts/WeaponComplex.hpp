@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -30,7 +30,7 @@ class TextureOb;
 
 class WeaponComplex
 {
-	public:
+    public:
         WeaponComplex();
         ~WeaponComplex();
            
@@ -52,8 +52,8 @@ class WeaponComplex
         
         void ActivateAllWeapons();
         void DeactivateAllWeapons();
-		void ActivateWeaponsBySubTypeId(TYPE::ENTITY);
-		void DeactivateWeaponsBySubTypeId(TYPE::ENTITY);
+        void ActivateWeaponsBySubTypeId(TYPE::ENTITY);
+        void DeactivateWeaponsBySubTypeId(TYPE::ENTITY);
 
         bool IsAnyWeaponSelected() const; 
         
@@ -63,7 +63,7 @@ class WeaponComplex
         void RenderWeaponsRange();
         
         void RenderTurrels() const;
-        	
+            
     private:
         int total_damage;
         int total_radius;
@@ -76,7 +76,7 @@ class WeaponComplex
         std::vector<ItemSlot*> slot_weapon_reloaded_vec;
 
         void ReloadAllWeapons();  
-        void ValidateAllWeaponsTarget();      		
+        void ValidateAllWeaponsTarget();              
 };
 
 

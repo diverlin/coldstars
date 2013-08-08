@@ -24,29 +24,29 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class LazerModule : public BaseModule
 {
-    	public:
-	       	LazerModule(int);
-        	virtual ~LazerModule();
+        public:
+               LazerModule(int);
+            virtual ~LazerModule();
 
-		void SetDamageAdd(int damage_add) { this->damage_add = damage_add; };
-		void SetRadiusAdd(int radius_add) { this->radius_add = radius_add; };
+        void SetDamageAdd(int damage_add) { this->damage_add = damage_add; };
+        void SetRadiusAdd(int radius_add) { this->radius_add = radius_add; };
                 
-		int GetDamageAdd() const { return damage_add; };
-		int GetRadiusAdd() const { return radius_add; };
-		
-		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
+        int GetDamageAdd() const { return damage_add; };
+        int GetRadiusAdd() const { return radius_add; };
+        
+        virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
         private:
                 int damage_add;
-        	int radius_add; 
-        	
-        	void virtual AddUniqueInfo();   
-        	
-        	void SaveDataUniqueLazerModule(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueLazerModule(const boost::property_tree::ptree&);
-		void ResolveDataUniqueLazerModule();    
+            int radius_add; 
+            
+            void virtual AddUniqueInfo();   
+            
+            void SaveDataUniqueLazerModule(boost::property_tree::ptree&, const std::string&) const;
+        void LoadDataUniqueLazerModule(const boost::property_tree::ptree&);
+        void ResolveDataUniqueLazerModule();    
 };
 
 #endif

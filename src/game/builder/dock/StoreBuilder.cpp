@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -43,8 +43,8 @@
 
 StoreBuilder& StoreBuilder::Instance()
 {
-	static StoreBuilder instance;
-	return instance;
+    static StoreBuilder instance;
+    return instance;
 }
 
 StoreBuilder::~StoreBuilder()
@@ -52,12 +52,12 @@ StoreBuilder::~StoreBuilder()
 
 Store* StoreBuilder::GetNewStoreTemplate(INTLONGEST id) const
 {
-	Store* store = nullptr;
-	
-	if (id == NONE_ID)
-	{
-		id = EntityIdGenerator::Instance().GetNextId();
-	}
+    Store* store = nullptr;
+    
+    if (id == NONE_ID)
+    {
+        id = EntityIdGenerator::Instance().GetNextId();
+    }
 
     try 
     { 
@@ -75,13 +75,13 @@ Store* StoreBuilder::GetNewStoreTemplate(INTLONGEST id) const
 
 Store* StoreBuilder::GetNewStore() const
 {
-	Store* store = GetNewStoreTemplate();
-	CreateNewInternals(store);
-	PutRandomEquipment(store);
-	        
+    Store* store = GetNewStoreTemplate();
+    CreateNewInternals(store);
+    PutRandomEquipment(store);
+            
         return store;
 } 
-        	
+            
 void StoreBuilder::CreateNewInternals(Store* store) const
 {
     for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++)
@@ -96,7 +96,7 @@ void StoreBuilder::CreateNewInternals(Store* store) const
         store->AddVehicleSlot(vehicle_slot);
     }
         
-	store->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::STORE_BACKGROUND_ID));
+    store->SetTextureObBackground(TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::STORE_BACKGROUND_ID));
 }
 
 
@@ -122,27 +122,27 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
 
         for (unsigned int i=0; i<vehicle_num; i++)
         { 
-       		store->AddVehicle(ShipBuilder::Instance().GetNewShip()); 
+               store->AddVehicle(ShipBuilder::Instance().GetNewShip()); 
         }
                 
         for (unsigned int i=0; i<lazer_num; i++)
         { 
-       		store->AddItem(LazerEquipmentBuilder::Instance().GetNewLazerEquipment()); 
+               store->AddItem(LazerEquipmentBuilder::Instance().GetNewLazerEquipment()); 
         }
 
         for (unsigned int i=0; i<rocket_num; i++)
         { 
-       		store->AddItem(RocketEquipmentBuilder::Instance().GetNewRocketEquipment());
+               store->AddItem(RocketEquipmentBuilder::Instance().GetNewRocketEquipment());
         }
 
         for (unsigned int i=0; i<radar_num; i++)
         { 
-    		store->AddItem(RadarEquipmentBuilder::Instance().GetNewRadarEquipment()); 
+            store->AddItem(RadarEquipmentBuilder::Instance().GetNewRadarEquipment()); 
         }
 
         for (unsigned int i=0; i<grapple_num; i++)
         { 
-      		store->AddItem(GrappleEquipmentBuilder::Instance().GetNewGrappleEquipment()); 
+              store->AddItem(GrappleEquipmentBuilder::Instance().GetNewGrappleEquipment()); 
         }
 
         for (unsigned int i=0; i<drive_num; i++)
@@ -152,7 +152,7 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
 
         for (unsigned int i=0; i<protector_num; i++)
         { 
-   		store->AddItem(ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipment()); 
+           store->AddItem(ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipment()); 
         }
 
         for (unsigned int i=0; i<bak_num; i++)
@@ -162,25 +162,25 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
 
         for (unsigned int i=0; i<droid_num; i++)
         { 
-   		store->AddItem(DroidEquipmentBuilder::Instance().GetNewDroidEquipment()); 
+           store->AddItem(DroidEquipmentBuilder::Instance().GetNewDroidEquipment()); 
         }
 
         for (unsigned int i=0; i<scaner_num; i++)
         { 
-   		store->AddItem(ScanerEquipmentBuilder::Instance().GetNewScanerEquipment()); 
+           store->AddItem(ScanerEquipmentBuilder::Instance().GetNewScanerEquipment()); 
         }
 
         for (unsigned int i=0; i<freezer_num; i++)
         { 
-   		store->AddItem(FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment()); 
+           store->AddItem(FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment()); 
         }
 
         for (unsigned int i=0; i<energyBlock_num; i++) 
         { 
-    		store->AddItem(EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment());  
+            store->AddItem(EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment());  
         }
 }
 
 
 
-  	
+      

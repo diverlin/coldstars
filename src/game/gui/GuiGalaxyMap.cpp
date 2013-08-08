@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -50,10 +50,10 @@ GuiGalaxyMap::GuiGalaxyMap()
 BaseGuiElement(TYPE::GUI::GALAXYMAP_ID, TYPE::GUI::GALAXYMAP_ID),
 m_Galaxy(nullptr)
 { 
-	GetBox().SetSize(Config::Instance().SCREEN_WIDTH  - 2 * GUI::MAP::BORDER_X, Config::Instance().SCREEN_HEIGHT - 2 * GUI::MAP::BORDER_X);
-	
-	SetTextureOb(GuiTextureObCollector::Instance().text_background);
-	m_ScaleParsecToScreenCoord = Config::Instance().SCREEN_WIDTH/(float)ENTITY::GALAXY::PARSEC;
+    GetBox().SetSize(Config::Instance().SCREEN_WIDTH  - 2 * GUI::MAP::BORDER_X, Config::Instance().SCREEN_HEIGHT - 2 * GUI::MAP::BORDER_X);
+    
+    SetTextureOb(GuiTextureObCollector::Instance().text_background);
+    m_ScaleParsecToScreenCoord = Config::Instance().SCREEN_WIDTH/(float)ENTITY::GALAXY::PARSEC;
 }
 
 GuiGalaxyMap::~GuiGalaxyMap()
@@ -70,12 +70,12 @@ Vec3<float> GuiGalaxyMap::GetAbsoluteStarSystemPosition(const StarSystem& starsy
 
 void GuiGalaxyMap::BindGalaxy(Galaxy* galaxy)
 {
-	m_Galaxy = galaxy;
+    m_Galaxy = galaxy;
 }
                 
 void GuiGalaxyMap::UnbindGalaxy()
 {
-	m_Galaxy = nullptr;
+    m_Galaxy = nullptr;
 }
         
 /* virtual override final */
@@ -92,54 +92,54 @@ void GuiGalaxyMap::UpdateUnique(Player* player)
         StarSystem* player_starsystem_target = dynamic_cast<StarSystem*>(player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTarget());
         Vec3<float> player_target_starsystem_pos = GetAbsoluteStarSystemPosition(*player_starsystem_target);
                 
-        m_VisualHyperJumpPath.FillData(GuiTextureObCollector::Instance().dot_green, player_starsystem_pos, player_target_starsystem_pos, /*dot_offset=*/5, /*dot_size=*/6);    	
+        m_VisualHyperJumpPath.FillData(GuiTextureObCollector::Instance().dot_green, player_starsystem_pos, player_target_starsystem_pos, /*dot_offset=*/5, /*dot_size=*/6);        
     }
         
-	if (player->GetNpc()->GetVehicle()->GetProperties().hyper > 0)
-	{      
-		for (unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
-		{
-			for (unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
-			{
-				StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
+    if (player->GetNpc()->GetVehicle()->GetProperties().hyper > 0)
+    {      
+        for (unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
+        {
+            for (unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
+            {
+                StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
                 Vec3<float> starsystem_pos = GetAbsoluteStarSystemPosition(starsystem);
-				if (starsystem.GetId() != player->GetNpc()->GetVehicle()->GetStarSystem()->GetId())
-				{	            			
-					float ss_cursor_dist = distanceBetween(starsystem_pos, data_mouse.pos_screencoord);
-					if (ss_cursor_dist < 10)
-					{ 
-						int ss_ss_dist = distanceBetween(starsystem_pos, player_starsystem_pos);
-						if (ss_ss_dist < player->GetNpc()->GetVehicle()->GetProperties().hyper * m_ScaleParsecToScreenCoord)
-						{
-							if (data_mouse.left_click == true)
-							{ 
-								Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, starsystem.GetId());
-								player->GetNpc()->GetStateMachine().SetCurrentMicroTask(microtask);
-								player->GetNpc()->GetVehicle()->GetComplexDrive().UpdatePath();
-							} 
-							if (data_mouse.right_click == true)
-							{
-								// DEBUG WAY
-								player->GetNpc()->GetVehicle()->HyperJumpEvent(&starsystem);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+                if (starsystem.GetId() != player->GetNpc()->GetVehicle()->GetStarSystem()->GetId())
+                {                            
+                    float ss_cursor_dist = distanceBetween(starsystem_pos, data_mouse.pos_screencoord);
+                    if (ss_cursor_dist < 10)
+                    { 
+                        int ss_ss_dist = distanceBetween(starsystem_pos, player_starsystem_pos);
+                        if (ss_ss_dist < player->GetNpc()->GetVehicle()->GetProperties().hyper * m_ScaleParsecToScreenCoord)
+                        {
+                            if (data_mouse.left_click == true)
+                            { 
+                                Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, starsystem.GetId());
+                                player->GetNpc()->GetStateMachine().SetCurrentMicroTask(microtask);
+                                player->GetNpc()->GetVehicle()->GetComplexDrive().UpdatePath();
+                            } 
+                            if (data_mouse.right_click == true)
+                            {
+                                // DEBUG WAY
+                                player->GetNpc()->GetVehicle()->HyperJumpEvent(&starsystem);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 
 /* vitual override final */
 void GuiGalaxyMap::RenderUnique(Player* player) const
 {
-	drawQuad(GetTextureOb(), GetBox());	
+    drawQuad(GetTextureOb(), GetBox());    
 
     for (unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
-    {   		
+    {           
         for (unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
-        {   	
+        {       
             const StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
             Vec3<float> starsystem_pos = GetAbsoluteStarSystemPosition(starsystem);            
                        
@@ -165,8 +165,8 @@ void GuiGalaxyMap::RenderUnique(Player* player) const
             int font_size = 8;  
             Vec3<float> offset(0.0, 13.0, 0.0);
             Screen::Instance().DrawText(int2str(starsystem.GetId()), font_size, starsystem_pos + offset);
-        }           	
-    }	 
+        }               
+    }     
     
     enable_POINTSPRITE();
     {
@@ -178,7 +178,7 @@ void GuiGalaxyMap::RenderUnique(Player* player) const
         
         if (player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() == TYPE::AISCENARIO::MICRO_JUMP_ID)
         {
-            m_VisualHyperJumpPath.Draw();       	
+            m_VisualHyperJumpPath.Draw();           
         }
     }
     disable_POINTSPRITE();  

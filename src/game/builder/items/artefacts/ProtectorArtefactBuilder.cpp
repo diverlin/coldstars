@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -32,8 +32,8 @@
 
 ProtectorArtefactBuilder& ProtectorArtefactBuilder::Instance()
 {
-	static ProtectorArtefactBuilder instance;
-	return instance;
+    static ProtectorArtefactBuilder instance;
+    return instance;
 }
 
 ProtectorArtefactBuilder::~ProtectorArtefactBuilder()
@@ -41,12 +41,12 @@ ProtectorArtefactBuilder::~ProtectorArtefactBuilder()
 
 ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefactTemplate(INTLONGEST id) const
 {
-	ProtectorArtefact* protector_artefact = nullptr;
-	
-	if (id == NONE_ID)
-	{
-		id = EntityIdGenerator::Instance().GetNextId();
-	}
+    ProtectorArtefact* protector_artefact = nullptr;
+    
+    if (id == NONE_ID)
+    {
+        id = EntityIdGenerator::Instance().GetNextId();
+    }
 
     try 
     { 
@@ -63,12 +63,12 @@ ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefactTemplate(INT
    
 ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefact(int protection) const
 {
-	ProtectorArtefact* protector_artefact = GetNewProtectorArtefactTemplate();
-	CreateNewInternals(protector_artefact, protection);	
+    ProtectorArtefact* protector_artefact = GetNewProtectorArtefactTemplate();
+    CreateNewInternals(protector_artefact, protection);    
         
     return protector_artefact;
 } 
-     	
+         
 void ProtectorArtefactBuilder::CreateNewInternals(ProtectorArtefact* protector_artefact, int protection) const
 { 
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::BAK_EQUIPMENT_ID);    
@@ -79,7 +79,7 @@ void ProtectorArtefactBuilder::CreateNewInternals(ProtectorArtefact* protector_a
     common_data.deterioration_normal = 1;
 
     protector_artefact->SetProtection(protection);
-    protector_artefact->BindData2D(texOb_item);    	
+    protector_artefact->BindData2D(texOb_item);        
     protector_artefact->SetParentSubTypeId(TYPE::ENTITY::ARTEFACT_SLOT_ID);
     protector_artefact->SetItemCommonData(common_data);
     protector_artefact->SetCondition(common_data.condition_max);

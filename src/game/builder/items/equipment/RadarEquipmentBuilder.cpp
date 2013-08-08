@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -35,8 +35,8 @@
 
 RadarEquipmentBuilder& RadarEquipmentBuilder::Instance()
 {
-	static RadarEquipmentBuilder instance;
-	return instance;
+    static RadarEquipmentBuilder instance;
+    return instance;
 }
 
 RadarEquipmentBuilder::~RadarEquipmentBuilder()
@@ -44,12 +44,12 @@ RadarEquipmentBuilder::~RadarEquipmentBuilder()
 
 RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipmentTemplate(INTLONGEST id) const
 {
-	RadarEquipment* radar_equipment = nullptr;
-	
-	if (id == NONE_ID)
-	{
-		id = EntityIdGenerator::Instance().GetNextId();
-	}
+    RadarEquipment* radar_equipment = nullptr;
+    
+    if (id == NONE_ID)
+    {
+        id = EntityIdGenerator::Instance().GetNextId();
+    }
 
     try 
     { 
@@ -67,23 +67,23 @@ RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipmentTemplate(INTLONGEST i
   
 RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int radius_orig) const
 {
-	RadarEquipment* radar_equipment = GetNewRadarEquipmentTemplate();
-	CreateNewInternals(radar_equipment, tech_level, race_id, radius_orig);
+    RadarEquipment* radar_equipment = GetNewRadarEquipmentTemplate();
+    CreateNewInternals(radar_equipment, tech_level, race_id, radius_orig);
         
     return radar_equipment;
 } 
-    	
+        
 void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
-	}
-	
+    }
+    
     if (tech_level == TYPE::TECHLEVEL::NONE_ID)
     {
         tech_level = TYPE::TECHLEVEL::L0_ID; 
-	}
+    }
 
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID);   
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 

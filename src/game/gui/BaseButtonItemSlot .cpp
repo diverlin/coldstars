@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
           
              
@@ -84,8 +84,8 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const Vec2<float>& mouse_screen_coo
 {
     if (m_ItemSlot != nullptr)
     {
-		if (GetEquiped() == false) 
-		{
+        if (GetEquiped() == false) 
+        {
             TYPE::GUI buton_subtype_id = GetSubTypeId();
             for (TYPE::ENTITY type : SLOT_WEAPON_TYPES)
             {
@@ -112,7 +112,7 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const Vec2<float>& mouse_screen_coo
                 }
             }
                                 
-			if (buton_subtype_id != TYPE::GUI::GATE_SLOT_ID)
+            if (buton_subtype_id != TYPE::GUI::GATE_SLOT_ID)
             {            
                 if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == TYPE::GUI::CARGO_SLOT_ID))  
                 {
@@ -126,7 +126,7 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const Vec2<float>& mouse_screen_coo
                     }
                 }
             }
-		}
+        }
     }
 }
 
@@ -136,10 +136,10 @@ void BaseButtonItemSlot::RenderMarkTarget() const
     {
         if (m_ItemSlot->GetItem() != nullptr)
         {              
-			//box.SetScale(1.5, 1.5);
-			//drawQuadMasked(GuiTextureObCollector::Instance().slot_mark_accept, box, GuiTextureObCollector::Instance().mask_round, 1.0-0.5);
-			//drawQuad(GuiTextureObCollector::Instance().mark_target_slot, box);
+            //box.SetScale(1.5, 1.5);
+            //drawQuadMasked(GuiTextureObCollector::Instance().slot_mark_accept, box, GuiTextureObCollector::Instance().mask_round, 1.0-0.5);
+            //drawQuad(GuiTextureObCollector::Instance().mark_target_slot, box);
             drawColoredTextWithBackground(int2str(m_ItemSlot->GetHitProbability()), /*font_size=*/12, GetBox().GetMiddleTop(), Color4<int>(255));
-		}
-	}
+        }
+    }
 }

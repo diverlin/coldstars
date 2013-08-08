@@ -27,24 +27,24 @@ class Npc;
 
 class BaseScenario
 {
-	public:
-		BaseScenario():type_id(TYPE::AISCENARIO::NONE_ID) {};
-		virtual ~BaseScenario() {};
-		
-		TYPE::AISCENARIO GetTypeId() const { return type_id; };
-		
-		virtual void Enter(Npc*) const {};
-		virtual bool Validate(Npc*) const { return true; };
-		virtual void UpdateInStaticInSpace(Npc*) const {};	
-		virtual void UpdateInStaticInDock(Npc*) const {};	
-		virtual void UpdateInDynamicInSpace(Npc*) const {};	
-		virtual void UpdateInDynamicInDock(Npc*) const {};	
-		virtual void Exit(Npc*) const {};
-		
-		virtual std::string GetDescription(Npc*) const { return "_"; };
-		
-	protected:
-		TYPE::AISCENARIO type_id;
+    public:
+        BaseScenario():type_id(TYPE::AISCENARIO::NONE_ID) {};
+        virtual ~BaseScenario() {};
+        
+        TYPE::AISCENARIO GetTypeId() const { return type_id; };
+        
+        virtual void Enter(Npc*) const {};
+        virtual bool Validate(Npc*) const { return true; };
+        virtual void UpdateInStaticInSpace(Npc*) const {};    
+        virtual void UpdateInStaticInDock(Npc*) const {};    
+        virtual void UpdateInDynamicInSpace(Npc*) const {};    
+        virtual void UpdateInDynamicInDock(Npc*) const {};    
+        virtual void Exit(Npc*) const {};
+        
+        virtual std::string GetDescription(Npc*) const { return "_"; };
+        
+    protected:
+        TYPE::AISCENARIO type_id;
 }; 
 
 

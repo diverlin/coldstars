@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include <builder/pilots/NpcBuilder.hpp>
@@ -36,8 +36,8 @@
 
 NpcBuilder& NpcBuilder::Instance()
 {
-	static NpcBuilder instance;
-	return instance;
+    static NpcBuilder instance;
+    return instance;
 }
 
 NpcBuilder::~NpcBuilder()
@@ -45,12 +45,12 @@ NpcBuilder::~NpcBuilder()
 
 Npc* NpcBuilder::GetNewNpcTemplate(TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id, INTLONGEST id) const
 {
-	Npc* npc = nullptr;
-	
-	if (id == NONE_ID)
-	{
-		id = EntityIdGenerator::Instance().GetNextId();
-	}
+    Npc* npc = nullptr;
+    
+    if (id == NONE_ID)
+    {
+        id = EntityIdGenerator::Instance().GetNextId();
+    }
 
     try 
     { 
@@ -60,9 +60,9 @@ Npc* NpcBuilder::GetNewNpcTemplate(TYPE::ENTITY subtype_id, TYPE::ENTITY subsubt
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-	EntityManager::Instance().RegisterEntity(npc);
-	
-	return npc;
+    EntityManager::Instance().RegisterEntity(npc);
+    
+    return npc;
 } 
 
 
@@ -73,9 +73,9 @@ Npc* NpcBuilder::GetNewNpc(TYPE::RACE race_id, TYPE::ENTITY subtype_id, TYPE::EN
     
     return npc;
 }
-        	
+            
 void NpcBuilder::CreateNewInternals(Npc* npc, TYPE::RACE race_id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id) const
-{    	
+{        
     //LifeData data_life;
     
     //TextureOb* texOb_face  = TextureManager::Instance().getRandomFaceTexObWithFolloingAttributes(race_id);
@@ -88,46 +88,46 @@ void NpcBuilder::CreateNewInternals(Npc* npc, TYPE::RACE race_id, TYPE::ENTITY s
     
     npc->ApplySkillsStrategy();
         
-   	if ((race_id != TYPE::RACE::R6_ID) and (race_id != TYPE::RACE::R7_ID))
-   	{
-		switch(subtype_id)
-		{
+       if ((race_id != TYPE::RACE::R6_ID) and (race_id != TYPE::RACE::R7_ID))
+       {
+        switch(subtype_id)
+        {
             case TYPE::ENTITY::RANGER_ID:
-   			{
-   				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));			
+               {
+                   npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));            
                                
                 break;    
-   			}
+               }
                         
-   			case TYPE::ENTITY::WARRIOR_ID:
-   			{
-   				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));    					
+               case TYPE::ENTITY::WARRIOR_ID:
+               {
+                   npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));                        
                                 
                 break;    
-   			}
+               }
                        
-   		   	case TYPE::ENTITY::TRADER_ID: 
-   		   	{
-   		   		npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID)); 
-   		   		
-   		   		break;
-   		   	}
-   		   	
-                        //case ENTITY::DIPLOMAT_ID: 	{}
-   		   	//case ENTITY::PIRAT_ID: 	{}
+                  case TYPE::ENTITY::TRADER_ID: 
+                  {
+                      npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID)); 
+                      
+                      break;
+                  }
+                  
+                        //case ENTITY::DIPLOMAT_ID:     {}
+                  //case ENTITY::PIRAT_ID:     {}
                         
-   		   	default: 
-   		   	{
-   				npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));    					
+                  default: 
+                  {
+                   npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));                        
                                         
                 break;    
-   			}
-   		}
-   	}
-   	else
-   	{
-		npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR_ID));
-   	}
+               }
+           }
+       }
+       else
+       {
+        npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR_ID));
+       }
         
     npc->GetSkills().AddExpirience(getRandInt(10000, 100000));
     while(npc->GetSkills().GetAvailablePoints() != 0)

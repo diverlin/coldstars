@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "RocketEquipment.hpp"
@@ -30,8 +30,8 @@
 #include "../../spaceobjects/RocketBullet.hpp"
 
 void BulletData::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{       	
-	std::string sroot = root+"data_bullet.";
+{           
+    std::string sroot = root+"data_bullet.";
     save_ptree.put(sroot+"damage", damage);        
     save_ptree.put(sroot+"armor", armor); 
     save_ptree.put(sroot+"live_time", live_time); 
@@ -40,7 +40,7 @@ void BulletData::SaveData(boost::property_tree::ptree& save_ptree, const std::st
     save_ptree.put(sroot+"speed_max", speed_max); 
     save_ptree.put(sroot+"d_speed", d_speed); 
     save_ptree.put(sroot+"angular_speed", angular_speed); 
-}	
+}    
 
 void BulletData::LoadData(const boost::property_tree::ptree& load_ptree)
 {
@@ -66,8 +66,8 @@ ammo(0),
 damage_orig(0),
 radius_orig(0)
 {
-	SetId(id);
-	SetTypeId(TYPE::ENTITY::EQUIPMENT_ID); 
+    SetId(id);
+    SetTypeId(TYPE::ENTITY::EQUIPMENT_ID); 
     SetSubTypeId(TYPE::ENTITY::ROCKET_EQUIPMENT_ID);     
 
     fire_atOnce = getRandInt(1, 3);
@@ -88,7 +88,7 @@ void RocketEquipment::UpdateProperties()
     {
         ammo_max_add += ((RocketModule*)modules_vec[i])->GetAmmoMaxAdd();
         damage_add   += ((RocketModule*)modules_vec[i])->GetDamageAdd();
-        radius_add   += ((RocketModule*)modules_vec[i])->GetRadiusAdd();        	
+        radius_add   += ((RocketModule*)modules_vec[i])->GetRadiusAdd();            
     }
         
     ammo_max = ammo_max_orig + ammo_max_add;
@@ -149,17 +149,17 @@ std::string RocketEquipment::GetRadiusStr()
 
 void RocketEquipment::FireEvent(float attack_rate_normalized)
 {
-	int num = 0;
+    int num = 0;
 
-	Vec3<float> start_pos;
-	float angle_inD;
-			
-	if (fire_atOnce>=1)
-	{
-		RocketBullet* rocket_bullet = RocketBulletBuilder::Instance().GetNewRocketBullet(data_bullet);
-		rocket_bullet->SetDamageRate(attack_rate_normalized);
+    Vec3<float> start_pos;
+    float angle_inD;
+            
+    if (fire_atOnce>=1)
+    {
+        RocketBullet* rocket_bullet = RocketBulletBuilder::Instance().GetNewRocketBullet(data_bullet);
+        rocket_bullet->SetDamageRate(attack_rate_normalized);
 
-		if (item_slot->GetOwnerVehicle()->GetDataKorpus().draw_turrels == true)
+        if (item_slot->GetOwnerVehicle()->GetDataKorpus().draw_turrels == true)
         {
             start_pos = item_slot->GetTurrel()->GetCenter(); 
             angle_inD = item_slot->GetTurrel()->GetAngle().z;
@@ -176,12 +176,12 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
         item_slot->GetOwnerVehicle()->GetStarSystem()->AddBullet(rocket_bullet, start_pos, Vec3<float>(0, 0, angle_inD));
         num++;
     }
-    	
+        
     //if (fire_atOnce>=2)
     //{
         //offset = +2.0;
     //RocketBuilder::Instance().CreateNewRocket();
-    //RocketBuilder::Instance().CreateNewInternals(data_bullet);	
+    //RocketBuilder::Instance().CreateNewInternals(data_bullet);    
         //slot->GetOwnerVehicle()->GetStarSystem()->Add(RocketBuilder::Instance().GetRocket(), slot, offset);
         //num++;
     //}
@@ -190,51 +190,51 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
     //{
         //offset = -2.0;
     //RocketBuilder::Instance().CreateNewRocket();
-    //RocketBuilder::Instance().CreateNewInternals(data_bullet);	
+    //RocketBuilder::Instance().CreateNewInternals(data_bullet);    
         //slot->GetOwnerVehicle()->GetStarSystem()->Add(RocketBuilder::Instance().GetRocket(), slot, offset);
         //num++;
-    //}    	
+    //}        
     
     //rocketlaunch.play()
     ammo -= num;
 
-	DeteriorationEvent();
+    DeteriorationEvent();
 }
 
 /*virtual*/
 void RocketEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	std::string root = "rocket_equipment." + int2str(GetId()) + ".";
-	SaveDataUniqueBase(save_ptree, root);
+    std::string root = "rocket_equipment." + int2str(GetId()) + ".";
+    SaveDataUniqueBase(save_ptree, root);
     SaveDataUniqueBaseItem(save_ptree, root);
-	SaveDataUniqueBaseEquipment(save_ptree, root);
-	SaveDataUniqueRocketEquipment(save_ptree, root);
+    SaveDataUniqueBaseEquipment(save_ptree, root);
+    SaveDataUniqueRocketEquipment(save_ptree, root);
 }
 
 /*virtual*/
 void RocketEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-	LoadDataUniqueBase(load_ptree);
+    LoadDataUniqueBase(load_ptree);
     LoadDataUniqueBaseItem(load_ptree);
-	LoadDataUniqueBaseEquipment(load_ptree);
-	LoadDataUniqueRocketEquipment(load_ptree);
+    LoadDataUniqueBaseEquipment(load_ptree);
+    LoadDataUniqueRocketEquipment(load_ptree);
 }
 
 /*virtual*/
 void RocketEquipment::ResolveData()
 {
-	ResolveDataUniqueBase();
+    ResolveDataUniqueBase();
     ResolveDataUniqueBaseItem();
-	ResolveDataUniqueBaseEquipment();
-	ResolveDataUniqueRocketEquipment();
+    ResolveDataUniqueBaseEquipment();
+    ResolveDataUniqueRocketEquipment();
 }
 
 void RocketEquipment::SaveDataUniqueRocketEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" SaveDataUniqueRocketEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
-	#endif
-	
+    #if SAVELOAD_LOG_ENABLED == 1
+    Logger::Instance().Log(" SaveDataUniqueRocketEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    #endif
+    
     save_ptree.put(root+"ammo_max_orig", ammo_max_orig);
     save_ptree.put(root+"ammo", ammo);
     save_ptree.put(root+"damage_orig", damage_orig);
@@ -246,10 +246,10 @@ void RocketEquipment::SaveDataUniqueRocketEquipment(boost::property_tree::ptree&
                 
 void RocketEquipment::LoadDataUniqueRocketEquipment(const boost::property_tree::ptree& load_ptree)
 {
-	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" LoadDataUniqueRocketEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
-	#endif
-	
+    #if SAVELOAD_LOG_ENABLED == 1
+    Logger::Instance().Log(" LoadDataUniqueRocketEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    #endif
+    
     ammo_max_orig = load_ptree.get<int>("ammo_max_orig"); 
     ammo = load_ptree.get<int>("ammo"); 
     damage_orig = load_ptree.get<int>("damage_orig");  
@@ -261,10 +261,10 @@ void RocketEquipment::LoadDataUniqueRocketEquipment(const boost::property_tree::
 
 void RocketEquipment::ResolveDataUniqueRocketEquipment()
 {
-	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" ResolveDataUniqueRocketEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
-	#endif
-	
+    #if SAVELOAD_LOG_ENABLED == 1
+    Logger::Instance().Log(" ResolveDataUniqueRocketEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    #endif
+    
     data_bullet.ResolveData();
 }
 

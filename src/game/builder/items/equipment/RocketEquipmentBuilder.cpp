@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include <builder/items/equipment/RocketEquipmentBuilder.hpp>
@@ -32,8 +32,8 @@
 
 RocketEquipmentBuilder& RocketEquipmentBuilder::Instance()
 {
-	static RocketEquipmentBuilder instance;
-	return instance;
+    static RocketEquipmentBuilder instance;
+    return instance;
 }
 
 RocketEquipmentBuilder::~RocketEquipmentBuilder()
@@ -41,14 +41,14 @@ RocketEquipmentBuilder::~RocketEquipmentBuilder()
 
 RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipmentTemplate(INTLONGEST id) const
 {
-	RocketEquipment* rocket_equipment = nullptr;
+    RocketEquipment* rocket_equipment = nullptr;
 
-	if (id == NONE_ID)
-	{
-		id = EntityIdGenerator::Instance().GetNextId();
-	}
+    if (id == NONE_ID)
+    {
+        id = EntityIdGenerator::Instance().GetNextId();
+    }
 
- 	try 
+     try 
     { 
         rocket_equipment = new RocketEquipment(id);
     }
@@ -64,23 +64,23 @@ RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipmentTemplate(INTLONGES
 
 RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {
-	RocketEquipment* rocket_equipment = GetNewRocketEquipmentTemplate();
-	CreateNewInternals(rocket_equipment, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
-	        
+    RocketEquipment* rocket_equipment = GetNewRocketEquipmentTemplate();
+    CreateNewInternals(rocket_equipment, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
+            
     return rocket_equipment;
 } 
-        	
+            
 void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID)
     {
         race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
-	}
-	
+    }
+    
     if (tech_level == TYPE::TECHLEVEL::NONE_ID)
     {
         tech_level = TYPE::TECHLEVEL::L0_ID; 
-	}
+    }
     
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID);    
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)   
@@ -90,7 +90,7 @@ void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipmen
     radius_orig   = getRandInt(EQUIPMENT::ROCKET::RADIUS_MIN, EQUIPMENT::ROCKET::RADIUS_MAX) * (1 + EQUIPMENT::ROCKET::RADIUS_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
-    common_data.tech_level 	    = tech_level;
+    common_data.tech_level         = tech_level;
     common_data.modules_num_max = getRandInt(EQUIPMENT::ROCKET::MODULES_NUM_MIN, EQUIPMENT::ROCKET::MODULES_NUM_MAX);
     
     common_data.mass = getRandInt(EQUIPMENT::ROCKET::MASS_MIN, EQUIPMENT::ROCKET::MASS_MAX);
@@ -112,7 +112,7 @@ void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipmen
     rocket_equipment->SetRadiusOrig(radius_orig);   
     rocket_equipment->SetBulletData(data_bullet); 
     rocket_equipment->SetAmmo(ammo_max_orig*0.6);                
-    rocket_equipment->BindData2D(texOb_item);    	
+    rocket_equipment->BindData2D(texOb_item);        
     rocket_equipment->SetParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
     rocket_equipment->SetItemCommonData(common_data);
     rocket_equipment->SetCondition(common_data.condition_max);

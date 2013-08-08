@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #ifndef NPC_HPP
@@ -36,42 +36,42 @@ class StarSystem;
 
 struct UnresolvedDataUniqueNpc
 {
-	int vehicle_id;	
-	int aiModel_id;
-	
-	Task macrotask;
-	Task microtask;
+    int vehicle_id;    
+    int aiModel_id;
+    
+    Task macrotask;
+    Task microtask;
 };
 
 class Npc : public Base
 {
-   	public:
-        Npc(int, TYPE::ENTITY, TYPE::ENTITY);              	    
+       public:
+        Npc(int, TYPE::ENTITY, TYPE::ENTITY);                      
         virtual ~Npc();
         
         virtual void PutChildsToGarbage() const {};
         
-        void SetRaceId(TYPE::RACE race_id)			{ this->race_id = race_id; };
-        void SetAiModel(BaseAiModel* ai_model)		{ this->ai_model = ai_model; };
-		void SetAlive(bool is_alive)			{ this->is_alive = is_alive; }
-		void SetScanTarget(Vehicle* vehicle_to_scan)	{ this->vehicle_to_scan = vehicle_to_scan; };
-		void SetPlayer(Player* player) { this->player = player; };
-		void SetVehicle(Vehicle* vehicle) 		{ this->vehicle = vehicle; };
+        void SetRaceId(TYPE::RACE race_id)            { this->race_id = race_id; };
+        void SetAiModel(BaseAiModel* ai_model)        { this->ai_model = ai_model; };
+        void SetAlive(bool is_alive)            { this->is_alive = is_alive; }
+        void SetScanTarget(Vehicle* vehicle_to_scan)    { this->vehicle_to_scan = vehicle_to_scan; };
+        void SetPlayer(Player* player) { this->player = player; };
+        void SetVehicle(Vehicle* vehicle)         { this->vehicle = vehicle; };
 
-		TYPE::RACE GetRaceId()			const { return race_id; };
+        TYPE::RACE GetRaceId()            const { return race_id; };
 
         Player* GetPlayer() const { return player; };
-		Vehicle* GetVehicle()           const { return vehicle; };
-		Skills& GetSkills() 		{ return skills; };
-		Vehicle* GetScanTarget()        const { return vehicle_to_scan; };
-		Observation& GetObservation()   { return observation; };
-		INTLONGEST GetCredits()  const { return credits; };   
-		StateMachine& GetStateMachine() { return state_machine; };
+        Vehicle* GetVehicle()           const { return vehicle; };
+        Skills& GetSkills()         { return skills; };
+        Vehicle* GetScanTarget()        const { return vehicle_to_scan; };
+        Observation& GetObservation()   { return observation; };
+        INTLONGEST GetCredits()  const { return credits; };   
+        StateMachine& GetStateMachine() { return state_machine; };
 
-		StarSystem* GetStarSystem() const;
+        StarSystem* GetStarSystem() const;
 
-		void IncreaseCredits(INTLONGEST credits) { this->credits += credits; };
-		bool WithdrawCredits(INTLONGEST);
+        void IncreaseCredits(INTLONGEST credits) { this->credits += credits; };
+        bool WithdrawCredits(INTLONGEST);
      
         void AddExpirience(int, bool);
         
@@ -107,7 +107,7 @@ class Npc : public Base
         
         std::string GetAgressorSetString() const;              
 
-   	private:
+       private:
         bool is_alive;
         TYPE::RACE race_id;
         INTLONGEST credits; 
@@ -135,7 +135,7 @@ class Npc : public Base
         
         void UpdateInfo();
         
-        void SaveDataUniqueNpc(boost::property_tree::ptree&, const std::string&) const;		
+        void SaveDataUniqueNpc(boost::property_tree::ptree&, const std::string&) const;        
         void LoadDataUniqueNpc(const boost::property_tree::ptree&);
         void ResolveDataUniqueNpc();
 };

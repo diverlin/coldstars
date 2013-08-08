@@ -24,25 +24,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class ScanerModule : public BaseModule
 {
-    	public:
-       		ScanerModule(int);
-       		virtual ~ScanerModule();
+        public:
+               ScanerModule(int);
+               virtual ~ScanerModule();
                 
-		void SetScanAdd(int scan_add) { this->scan_add = scan_add; };                
-		int GetScanAdd() const { return scan_add; };
-     		
-     		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-       	private:
-       		int scan_add;
-       		
-       		void virtual AddUniqueInfo();
-       		
-       		void SaveDataUniqueScanerModule(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueScanerModule(const boost::property_tree::ptree&);
-		void ResolveDataUniqueScanerModule();      
+        void SetScanAdd(int scan_add) { this->scan_add = scan_add; };                
+        int GetScanAdd() const { return scan_add; };
+             
+             virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
+           private:
+               int scan_add;
+               
+               void virtual AddUniqueInfo();
+               
+               void SaveDataUniqueScanerModule(boost::property_tree::ptree&, const std::string&) const;
+        void LoadDataUniqueScanerModule(const boost::property_tree::ptree&);
+        void ResolveDataUniqueScanerModule();      
 };
 
 #endif

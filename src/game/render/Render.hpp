@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -34,7 +34,7 @@ void clearScreen();
 void resetRenderTransformation();
 
 void camera(float x, float y, float z);
-void setColor4f(const Color4<float>&);	
+void setColor4f(const Color4<float>&);    
 void setColor4f(float, float, float, float);
 
 void enable_CULLFACE();
@@ -50,18 +50,18 @@ void enable_POINTSPRITE();
 void disable_POINTSPRITE();
 
 void drawQuad(TextureOb* texOb, 
-		 const Vec3<float>& center,
-		 const Vec3<float>& size, 
-		 float angle=0);
+         const Vec3<float>& center,
+         const Vec3<float>& size, 
+         float angle=0);
          
 void drawQuad(TextureOb* texOb,
-		 const Vec2<float>& center, 
-		 const Vec2<float>& size,
-		 float angle);
-		 	 
+         const Vec2<float>& center, 
+         const Vec2<float>& size,
+         float angle);
+              
 void drawQuad(TextureOb*, const Box2D&);
 void drawQuadMasked(TextureOb*, const Box2D&, TextureOb*, float);
-		 		 		 
+                           
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
 
 void drawLine(TextureOb* texOb, 
@@ -71,10 +71,10 @@ void drawLine(TextureOb* texOb,
               int half_h);
 
 void drawColoredTextWithBackground(const std::string&, 
-			   int,
-			   const Vec2<float>&, 
-			   const Color4<int>&);
-			   
+               int,
+               const Vec2<float>&, 
+               const Color4<int>&);
+               
 void drawColoredText(const std::string&, int, const Vec2<float>&, const Color4<int>&);
                
 void drawInfoIn2Column(

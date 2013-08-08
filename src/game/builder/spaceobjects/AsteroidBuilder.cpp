@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "AsteroidBuilder.hpp"
@@ -24,8 +24,8 @@
 
 AsteroidBuilder& AsteroidBuilder::Instance()
 {
-	static AsteroidBuilder instance;
-	return instance;
+    static AsteroidBuilder instance;
+    return instance;
 }
 
 AsteroidBuilder::~AsteroidBuilder()
@@ -33,12 +33,12 @@ AsteroidBuilder::~AsteroidBuilder()
 
 Asteroid* AsteroidBuilder::GetNewAsteroidTemplate(INTLONGEST id) const
 {
-	Asteroid* asteroid = nullptr;
-	
-	if (id == NONE_ID)
-	{
-		id = EntityIdGenerator::Instance().GetNextId();
-	}
+    Asteroid* asteroid = nullptr;
+    
+    if (id == NONE_ID)
+    {
+        id = EntityIdGenerator::Instance().GetNextId();
+    }
 
     try 
     { 
@@ -55,18 +55,18 @@ Asteroid* AsteroidBuilder::GetNewAsteroidTemplate(INTLONGEST id) const
 
 Asteroid* AsteroidBuilder::GetNewAsteroid() const
 {
-	Asteroid* asteroid = GetNewAsteroidTemplate();
-	CreateNewInternals(asteroid);
+    Asteroid* asteroid = GetNewAsteroidTemplate();
+    CreateNewInternals(asteroid);
         
     return asteroid;
 } 
-       	
+           
 void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
 {           
-	Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPHERE_DEFORMED_ID);
-	
-	LifeData data_life;   
-	data_life.armor      = 10;
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPHERE_DEFORMED_ID);
+    
+    LifeData data_life;   
+    data_life.armor      = 10;
     data_life.dying_time = 50;
     
     PlanetData planet_data;
@@ -79,20 +79,20 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
     planet_data.clockwise     = getRandBool();
     
     asteroid->SetPlanetData(planet_data);
-	asteroid->SetLifeData(data_life);
+    asteroid->SetLifeData(data_life);
 
-	float scale_comp = getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);
-	Vec3<float> scale(scale_comp, scale_comp, scale_comp);
-	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ASTEROID_ID); 
-	      
-	asteroid->BindData3D(mesh, texOb, scale);        
-    asteroid->SetAngle(Vec3<float>(getRandInt(10, 40), getRandInt(10, 40), 0));	        
-	
-	float step = getRandInt(10, 100)*0.01;
-	AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
-	asteroid->SetRenderAnimation(animation_program);
-	asteroid->SetZYX(false);
-				
+    float scale_comp = getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);
+    Vec3<float> scale(scale_comp, scale_comp, scale_comp);
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ASTEROID_ID); 
+          
+    asteroid->BindData3D(mesh, texOb, scale);        
+    asteroid->SetAngle(Vec3<float>(getRandInt(10, 40), getRandInt(10, 40), 0));            
+    
+    float step = getRandInt(10, 100)*0.01;
+    AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
+    asteroid->SetRenderAnimation(animation_program);
+    asteroid->SetZYX(false);
+                
     asteroid->SetGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
 }
 

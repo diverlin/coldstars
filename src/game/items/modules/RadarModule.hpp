@@ -24,25 +24,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class RadarModule : public BaseModule
 {
-   	public:
-      		RadarModule(int);
-      		virtual ~RadarModule();
+       public:
+              RadarModule(int);
+              virtual ~RadarModule();
 
-      		void SetRadiusAdd(int radius_add) { this->radius_add = radius_add; };
-      		int GetRadiusAdd() const { return radius_add; };
+              void SetRadiusAdd(int radius_add) { this->radius_add = radius_add; };
+              int GetRadiusAdd() const { return radius_add; };
 
-		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-      	private:
-      		int radius_add;
-      		
-      		void virtual AddUniqueInfo();
-      		
-        	void SaveDataUniqueRadarModule(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueRadarModule(const boost::property_tree::ptree&);
-		void ResolveDataUniqueRadarModule(); 
+        virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
+          private:
+              int radius_add;
+              
+              void virtual AddUniqueInfo();
+              
+            void SaveDataUniqueRadarModule(boost::property_tree::ptree&, const std::string&) const;
+        void LoadDataUniqueRadarModule(const boost::property_tree::ptree&);
+        void ResolveDataUniqueRadarModule(); 
 };
 
 #endif

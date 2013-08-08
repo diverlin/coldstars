@@ -28,10 +28,10 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class BloomEffect
 {
-	public:
-		Fbo& GetFboFinal() { return fbo_final; };
-		GLuint GetTextureBlured() const { return texture_blured; }
-          	
+    public:
+        Fbo& GetFboFinal() { return fbo_final; };
+        GLuint GetTextureBlured() const { return texture_blured; }
+              
                 BloomEffect();
                 ~BloomEffect();
                 
@@ -40,18 +40,18 @@ class BloomEffect
                 
                 void Proceed(int w, int h, GLuint texture, float brightness_threshold);
                 
-	private:
+    private:
                 int pass_max;
                 int fbo_max_per_pass;
                                 
                 std::vector<std::vector<Fbo*>> vec_vec_fbo;
-          	Fbo fbo_final;	
+              Fbo fbo_final;    
 
-          	GLuint texture_blured;
-          	
-          	GLuint program_blur;
-          	GLuint program_extractBright;
-          	GLuint program_combine;
+              GLuint texture_blured;
+              
+              GLuint program_blur;
+              GLuint program_extractBright;
+              GLuint program_combine;
 
                 void Pass0(int, int, GLuint, float);
                 void RestPasses(int, int);
