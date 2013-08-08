@@ -121,9 +121,8 @@ void SpaceStation::RenderInSpace_2D(float scale)
     if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
     {
         RenderShieldEffect(1.0 - GetColor().a); 
+        GetStarSystem()->RestoreSceneColor();
     }
-        
-    GetStarSystem()->RestoreSceneColor();
 }
 
                          

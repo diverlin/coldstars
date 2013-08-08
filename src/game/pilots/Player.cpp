@@ -81,8 +81,8 @@ Player::~Player()
                            
 void Player::BindNpc(Npc* npc)
 {
-        this->npc = npc;
-        npc->SetPlayer(this);
+    this->npc = npc;
+    npc->SetPlayer(this);
 }
 
 bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) const
@@ -101,22 +101,22 @@ bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) cons
           
 void Player::ClearVisibleEntities()
 {
-        visible_STAR_vec.clear();
-        visible_PLANET_vec.clear();
-        
-        visible_ASTEROID_vec.clear();
-        visible_CONTAINER_vec.clear();
+    visible_STAR_vec.clear();
+    visible_PLANET_vec.clear();
+    
+    visible_ASTEROID_vec.clear();
+    visible_CONTAINER_vec.clear();
 
-        visible_SHIP_vec.clear();
-        visible_SATELLITE_vec.clear();
-        visible_SPACESTATION_vec.clear();
-        visible_ROCKET_vec.clear();
-        visible_BLACKHOLE_vec.clear();
+    visible_SHIP_vec.clear();
+    visible_SATELLITE_vec.clear();
+    visible_SPACESTATION_vec.clear();
+    visible_ROCKET_vec.clear();
+    visible_BLACKHOLE_vec.clear();
 
-        visible_effect_SHOCKWAVE_vec.clear();
-        visible_effect_LAZERTRACE_vec.clear();
-        visible_effect_PARTICLESYSTEM_vec.clear();          
-        visible_text_DAMAGE_vec.clear();
+    visible_effect_SHOCKWAVE_vec.clear();
+    visible_effect_LAZERTRACE_vec.clear();
+    visible_effect_PARTICLESYSTEM_vec.clear();          
+    visible_text_DAMAGE_vec.clear();
 }
             
 void Player::AddIfVisible(Star* star)
@@ -188,7 +188,7 @@ void Player::AddIfVisible(Vehicle* vehicle)
         {
             switch(vehicle->GetSubTypeId())
             {            
-                case TYPE::ENTITY::SHIP_ID:            {     visible_SHIP_vec.push_back((Ship*)vehicle); break; }
+                case TYPE::ENTITY::SHIP_ID:             {     visible_SHIP_vec.push_back((Ship*)vehicle); break; }
                 case TYPE::ENTITY::SATELLITE_ID:        {     visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
                 case TYPE::ENTITY::SPACESTATION_ID:     {     visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
             }
@@ -372,21 +372,20 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             starsystem->DrawBackground(world_coord);           
             camera(world_coord.x, world_coord.y, CAMERA_POS_Z);    
     
-            starsystem->RestoreDefaultColor();
-
             resizeGl(w*scale, h*scale);
             enable_BLEND();
             {
+                starsystem->RestoreDefaultColor();                            
                 for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 
                 { 
                     visible_STAR_vec[i]->Render_NEW();
-                }
+                }                
+                starsystem->RestoreSceneColor();
             }
-            disable_BLEND();
-            starsystem->RestoreSceneColor();
+            disable_BLEND();       
         }
         Screen::Instance().GetFbo0().Deactivate();
-
+                       
         // BLOOM background and star (uses many FBO)
         resizeGl(w, h); 
         Screen::Instance().GetBloom().Proceed(w, h, Screen::Instance().GetFbo0().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
@@ -420,34 +419,34 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
         {
             drawFullScreenTexturedQuad(Screen::Instance().GetFbo1().GetTexture(), w, h, -999.0);
            
-               resizeGl(w*scale, h*scale);     
-              camera(world_coord.x, world_coord.y, CAMERA_POS_Z);    
+            resizeGl(w*scale, h*scale);     
+            camera(world_coord.x, world_coord.y, CAMERA_POS_Z);    
             enable_DEPTH();  
             {
                 for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
                 { 
-                       visible_PLANET_vec[i]->Render_NEW(world_coord); 
+                   visible_PLANET_vec[i]->Render_NEW(world_coord); 
                 }
-            
+
                 for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
                 { 
                     if(visible_SPACESTATION_vec[i]->Is3D())
                     {
-                           visible_SPACESTATION_vec[i]->RenderInSpace_3D(world_coord, 1/scale); 
+                       visible_SPACESTATION_vec[i]->RenderInSpace_3D(world_coord, 1/scale); 
                     }
                 }
                 
                 for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
                 { 
                     if(visible_SHIP_vec[i]->Is3D())
-                       {
-                           visible_SHIP_vec[i]->RenderInSpace_3D(world_coord, 1/scale); 
+                    {
+                       visible_SHIP_vec[i]->RenderInSpace_3D(world_coord, 1/scale); 
                     }
                 }
                     
                 for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
                 { 
-                       visible_ASTEROID_vec[i]->Render_NEW(world_coord); 
+                    visible_ASTEROID_vec[i]->Render_NEW(world_coord); 
                 }
 
                 for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
@@ -463,7 +462,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 { 
                     if(!visible_SPACESTATION_vec[i]->Is3D())
                     {
-                           visible_SPACESTATION_vec[i]->RenderInSpace_2D(1/scale); 
+                        visible_SPACESTATION_vec[i]->RenderInSpace_2D(1/scale); 
                     }
                 }
    
@@ -476,20 +475,20 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
                 { 
                     if(visible_SHIP_vec[i]->Is3D() == false)
-                       {
-                           visible_SHIP_vec[i]->RenderInSpace_2D(1/scale); 
+                    {
+                        visible_SHIP_vec[i]->RenderInSpace_2D(1/scale); 
                     }
                 }
 
                 for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
                 { 
-                       visible_SATELLITE_vec[i]->RenderInSpace(1/scale); 
+                   visible_SATELLITE_vec[i]->RenderInSpace(1/scale); 
                 }
                 
                 for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
                 { 
                     visible_ROCKET_vec[i]->UpdateRenderStuff();
-                       visible_ROCKET_vec[i]->RenderInSpace(1/scale); 
+                    visible_ROCKET_vec[i]->RenderInSpace(1/scale); 
                 } 
 
                 if (show.GetCollisionRadius() == true)

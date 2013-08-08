@@ -115,7 +115,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 
 void Ship::RenderInSpace_2D(float scale) const
 {   
-    setColor4f(GetColor());
+    //setColor4f(GetColor());
     if (GetProperties().grab_radius > 0)
     {
         RenderGrabTrail();
@@ -146,14 +146,14 @@ void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords, float scale)
     UpdateRenderAnimation();
     RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());
 
-    setColor4f(GetColor());
     enable_BLEND();
     if (GetProperties().shield_effect_enabled == true)
-    {
+    {   
+        setColor4f(GetColor());
         RenderShieldEffect(1.0 - GetColor().a); 
+        GetStarSystem()->RestoreSceneColor();
     }
     disable_BLEND();
-    GetStarSystem()->RestoreSceneColor();
 }
 
 void Ship::RenderAtPlanet(const Vec3<float>& center)
