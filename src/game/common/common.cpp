@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include <cmath>
@@ -111,7 +111,7 @@ TYPE::GUI getGuiItemSlotSelectorType(TYPE::ENTITY val)
     
 int getObjectSize(int w, int h)
 {
-	int area = w*h;
+    int area = w*h;
     if(area < SIZE_1_AREA) return SIZE_1_ID;
     if(area < SIZE_2_AREA) return SIZE_2_ID;
     if(area < SIZE_3_AREA) return SIZE_3_ID;
@@ -129,18 +129,18 @@ int getObjectSize(int w, int h)
 
 
 bool get_dPos_ToPoint(const Vec3<float>& p1, const Vec3<float>& p2, float velocity, Vec3<float>& d_pos)
-{   	    
+{           
     Vec3<float> dir(p2-p1);
 
     if (!dir.IsNull())
     {
         dir.Normalize();
-        d_pos.Set(dir * velocity);       		
+        d_pos.Set(dir * velocity);               
         return true;
     }
     else
     {
-        d_pos.Set(0.0, 0.0, 0.0);       		
+        d_pos.Set(0.0, 0.0, 0.0);               
         return false;
     }
 }
@@ -151,7 +151,7 @@ bool get_dPos_ToPoint(const Vec3<float>& p1, const Vec3<float>& p2, float veloci
     Vec3<float> dir(p2-p1);
 
     if (!dir.IsNull())
-    { 	    	
+    {             
         dir.Normalize();
         d_pos.Set(dir * velocity);   
         rTo_angle_inD = atan2(dir.y, dir.x) * RADIAN_TO_DEGREE_RATE;
@@ -164,7 +164,7 @@ bool get_dPos_ToPoint(const Vec3<float>& p1, const Vec3<float>& p2, float veloci
         rTo_angle_inD = atan2(0.0, 0.0) * RADIAN_TO_DEGREE_RATE;
         
         return false;
-    }    	
+    }        
 }
 
 Color4<float> getColor4fById(int color_id)

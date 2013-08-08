@@ -22,42 +22,42 @@
 /* this data is changed during game play, the propetries depends on many factors */
 struct VehiclePropetries
 {    
-	int free_space;
+    int free_space;
 
-	int protection;
-	int radar;
-	float speed;  // depends on mass and drive
+    int protection;
+    int radar;
+    float speed;  // depends on mass and drive
 
-	int energy;
-	int hyper;  // depends on drive and bak
-	//int fuel;   // depends on bak
-	int repair; // depends on droid
-	int freeze; // depends on freezer
-	int scan;   // depends on scaner
+    int energy;
+    int hyper;  // depends on drive and bak
+    //int fuel;   // depends on bak
+    int repair; // depends on droid
+    int freeze; // depends on freezer
+    int scan;   // depends on scaner
 
     int grab_strength;
     int grab_radius;
         
-	int temperature;
-	
-	int artefact_gravity;
-	int artefact_protection;
+    int temperature;
+    
+    int artefact_gravity;
+    int artefact_protection;
 
-	// simplification
-	int average_damage;
-	int average_fire_radius;
+    // simplification
+    int average_damage;
+    int average_fire_radius;
 
-	bool equipment_radar;
-	bool shield_effect_enabled;
-	bool hibernate_mode_enabled;
+    bool equipment_radar;
+    bool shield_effect_enabled;
+    bool hibernate_mode_enabled;
 
-	int total_damage;
+    int total_damage;
     int total_radius;
         
-	VehiclePropetries()
+    VehiclePropetries()
     :
-	free_space(0),
-	protection(0),
+    free_space(0),
+    protection(0),
     radar(0),
     speed(0),
     energy(0),

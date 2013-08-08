@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "BaseVehicleBuilder.hpp"
@@ -62,10 +62,10 @@
 
 
 BaseVehicleBuilder& BaseVehicleBuilder::Instance()
-{	
-	static BaseVehicleBuilder instance;
-	return instance;
-}	
+{    
+    static BaseVehicleBuilder instance;
+    return instance;
+}    
      
 void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
 {     
@@ -162,7 +162,7 @@ void BaseVehicleBuilder::EquipEquipment(Vehicle* vehicle, TYPE::TECHLEVEL tech_l
     unsigned int weapons_num = getRandInt(vehicle->GetDataKorpus().slot_weapon_num/2, vehicle->GetDataKorpus().slot_weapon_num);
     for (unsigned int i=0; i<weapons_num; i++)
     {
-		bool rand = 0; //getRandBool();
+        bool rand = 0; //getRandBool();
         if (rand)
         {
             RocketEquipment* rocket_equipment = RocketEquipmentBuilder::Instance().GetNewRocketEquipment(tech_level);
@@ -185,7 +185,7 @@ void BaseVehicleBuilder::EquipEquipment(Vehicle* vehicle, TYPE::TECHLEVEL tech_l
     {
         RadarEquipment* radar_equipment = RadarEquipmentBuilder::Instance().GetNewRadarEquipment(tech_level);
         if (vehicle->AddAndManageItem(radar_equipment) == false)
-        {	
+        {    
             EntityGarbage::Instance().Add(radar_equipment); 
         }
     }
@@ -260,65 +260,65 @@ void BaseVehicleBuilder::EquipEquipment(Vehicle* vehicle, TYPE::TECHLEVEL tech_l
         {
             EntityGarbage::Instance().Add(grapple_equipment); 
         } 
-   	}
+       }
 }
 
 void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) const
 {
-	for (unsigned int i=0; i<4; i++) 
-	{     
-		if (vehicle->GetEmptyCargoSlot() == nullptr)
-		{
-			return;
-		}
-			
-		TYPE::ENTITY module_subtype_id = getRand(MODULE_TYPES); 
-		switch(module_subtype_id)  
-		{
-			case TYPE::ENTITY::LAZER_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(LazerModuleBuilder::Instance().GetNewLazerModule()); break; }
-			case TYPE::ENTITY::ROCKET_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(RocketModuleBuilder::Instance().GetNewRocketModule()); break; }    		
-			case TYPE::ENTITY::DRIVE_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(DriveModuleBuilder::Instance().GetNewDriveModule()); break; }
-			case TYPE::ENTITY::RADAR_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(RadarModuleBuilder::Instance().GetNewRadarModule()); break; }
-			case TYPE::ENTITY::BAK_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(BakModuleBuilder::Instance().GetNewBakModule()); break; }
-			//case TYPE::ENTITY::ENERGIZER_MODULE_ID:	{ vehicle->AddItemToCargoSlot(EnergizerModuleBuilder::Instance().GetNewEnergizerModule()); break; }
-			case TYPE::ENTITY::PROTECTOR_MODULE_ID: 	{ vehicle->AddItemToCargoSlot(ProtectorModuleBuilder::Instance().GetNewProtectorModule()); break; }
-			case TYPE::ENTITY::DROID_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(DroidModuleBuilder::Instance().GetNewDroidModule()); break; }
-			//case TYPE::ENTITY::FREEZER_MODULE_ID: 	{ vehicle->AddItemToCargoSlot(FreezerModuleBuilder::Instance().GetNewFreezerModule()); break; }
-			case TYPE::ENTITY::GRAPPLE_MODULE_ID: 	{ vehicle->AddItemToCargoSlot(GrappleModuleBuilder::Instance().GetNewGrappleModule()); break; }
-			case TYPE::ENTITY::SCANER_MODULE_ID: 		{ vehicle->AddItemToCargoSlot(ScanerModuleBuilder::Instance().GetNewScanerModule()); break; }
-		}
-	}
+    for (unsigned int i=0; i<4; i++) 
+    {     
+        if (vehicle->GetEmptyCargoSlot() == nullptr)
+        {
+            return;
+        }
+            
+        TYPE::ENTITY module_subtype_id = getRand(MODULE_TYPES); 
+        switch(module_subtype_id)  
+        {
+            case TYPE::ENTITY::LAZER_MODULE_ID:         { vehicle->AddItemToCargoSlot(LazerModuleBuilder::Instance().GetNewLazerModule()); break; }
+            case TYPE::ENTITY::ROCKET_MODULE_ID:         { vehicle->AddItemToCargoSlot(RocketModuleBuilder::Instance().GetNewRocketModule()); break; }            
+            case TYPE::ENTITY::DRIVE_MODULE_ID:         { vehicle->AddItemToCargoSlot(DriveModuleBuilder::Instance().GetNewDriveModule()); break; }
+            case TYPE::ENTITY::RADAR_MODULE_ID:         { vehicle->AddItemToCargoSlot(RadarModuleBuilder::Instance().GetNewRadarModule()); break; }
+            case TYPE::ENTITY::BAK_MODULE_ID:         { vehicle->AddItemToCargoSlot(BakModuleBuilder::Instance().GetNewBakModule()); break; }
+            //case TYPE::ENTITY::ENERGIZER_MODULE_ID:    { vehicle->AddItemToCargoSlot(EnergizerModuleBuilder::Instance().GetNewEnergizerModule()); break; }
+            case TYPE::ENTITY::PROTECTOR_MODULE_ID:     { vehicle->AddItemToCargoSlot(ProtectorModuleBuilder::Instance().GetNewProtectorModule()); break; }
+            case TYPE::ENTITY::DROID_MODULE_ID:         { vehicle->AddItemToCargoSlot(DroidModuleBuilder::Instance().GetNewDroidModule()); break; }
+            //case TYPE::ENTITY::FREEZER_MODULE_ID:     { vehicle->AddItemToCargoSlot(FreezerModuleBuilder::Instance().GetNewFreezerModule()); break; }
+            case TYPE::ENTITY::GRAPPLE_MODULE_ID:     { vehicle->AddItemToCargoSlot(GrappleModuleBuilder::Instance().GetNewGrappleModule()); break; }
+            case TYPE::ENTITY::SCANER_MODULE_ID:         { vehicle->AddItemToCargoSlot(ScanerModuleBuilder::Instance().GetNewScanerModule()); break; }
+        }
+    }
 }
 
 void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) const
 {
-	for (unsigned int i=0; i<2; i++) 
-	{
-		if (vehicle->GetEmptyCargoSlot() == nullptr)
-		{
-			return;
-		}
-					
-		vehicle->AddAndManageItem(GravityArtefactBuilder::Instance().GetNewGravityArtefact());
-	}   
+    for (unsigned int i=0; i<2; i++) 
+    {
+        if (vehicle->GetEmptyCargoSlot() == nullptr)
+        {
+            return;
+        }
+                    
+        vehicle->AddAndManageItem(GravityArtefactBuilder::Instance().GetNewGravityArtefact());
+    }   
 
-	for (unsigned int i=0; i<2; i++) 
-	{        
-		if (vehicle->GetEmptyCargoSlot() == nullptr)
-		{
-			return;
-		}
-			
-		vehicle->AddAndManageItem(ProtectorArtefactBuilder::Instance().GetNewProtectorArtefact());
-	}  
+    for (unsigned int i=0; i<2; i++) 
+    {        
+        if (vehicle->GetEmptyCargoSlot() == nullptr)
+        {
+            return;
+        }
+            
+        vehicle->AddAndManageItem(ProtectorArtefactBuilder::Instance().GetNewProtectorArtefact());
+    }  
 }
 
 void BaseVehicleBuilder::EquipBomb(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) const
 {
-	for (unsigned int i=0; i<2; i++) 
-	{        
-		vehicle->AddItemToCargoSlot(BombBuilder::Instance().GetNewBomb());
-	}    
+    for (unsigned int i=0; i<2; i++) 
+    {        
+        vehicle->AddItemToCargoSlot(BombBuilder::Instance().GetNewBomb());
+    }    
 }
 
 

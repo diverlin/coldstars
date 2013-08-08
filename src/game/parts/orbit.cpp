@@ -46,13 +46,13 @@ const Vec3<float>& Orbit::GetNextTurnPosition() const
 
 void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_phi_inD, bool clockwise)
 {   
-	m_Coords_vec.clear();
-	
+    m_Coords_vec.clear();
+    
     float d_angleInRad = speed / RADIAN_TO_DEGREE_RATE;;
     if (clockwise == true) 
     {
         d_angleInRad *= -1;
-    }     	
+    }         
      
     float orbitPhiInRad = orbit_phi_inD / RADIAN_TO_DEGREE_RATE;
     
@@ -62,16 +62,16 @@ void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_ph
     { 
         new_coord.x = radius_A * cos(angleInRad) * cos(orbitPhiInRad) - radius_B * sin(angleInRad) * sin(orbitPhiInRad);
         new_coord.y = radius_A * cos(angleInRad) * sin(orbitPhiInRad) + radius_B * sin(angleInRad) * cos(orbitPhiInRad);
-        new_coord.z = DEFAULT_ENTITY_ZPOS;         	
+        new_coord.z = DEFAULT_ENTITY_ZPOS;             
         m_Coords_vec.push_back(new_coord);
     }
     m_Len = m_Coords_vec.size();
 }    
 
 void Orbit::CalcPath(float radius, float speed, bool clockwise)
-{   	
-	m_Coords_vec.clear();
-	
+{       
+    m_Coords_vec.clear();
+    
     float d_angleInRad  = speed / RADIAN_TO_DEGREE_RATE;
     if (clockwise == true) 
     {
@@ -92,18 +92,18 @@ void Orbit::CalcPath(float radius, float speed, bool clockwise)
 void Orbit::UpdatePosition()
 {   
     if (m_It < m_Len-1) { m_It++; }
-    else 		        { m_It=0; }
+    else                 { m_It=0; }
 }    
 
 void Orbit::UpdatePathVisualisation()
 {
-	m_VisualOrbitPath.FillData(m_Coords_vec, 30, 10);
+    m_VisualOrbitPath.FillData(m_Coords_vec, 30, 10);
     m_VisualOrbitTurn.FillData(m_Coords_vec, TURN_TIME, 13);
 }
 
 void Orbit::DrawPath()
 {   
-	UpdatePathVisualisation();   // TOO SLOW
+    UpdatePathVisualisation();   // TOO SLOW
     m_VisualOrbitPath.Draw();
     m_VisualOrbitTurn.Draw();
 }

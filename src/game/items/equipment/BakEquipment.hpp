@@ -24,38 +24,38 @@
 
 class BakEquipment : public BaseEquipment
 {
-	public:
-     		BakEquipment(int);
-     		virtual ~BakEquipment();
-		
+    public:
+             BakEquipment(int);
+             virtual ~BakEquipment();
+        
                 void SetFuelMaxOrig(int fuel_max_orig) { this->fuel_max_orig = fuel_max_orig; };
                 void SetFuel(int fuel)                 { this->fuel = fuel; };
-                void IncreaseFuel(int fuel);	
-                int GetFuelMiss() const { return (fuel_max - fuel); };	
+                void IncreaseFuel(int fuel);    
+                int GetFuelMiss() const { return (fuel_max - fuel); };    
                                 
-		int GetFuel() const    { return fuel; };
-		int GetFuelMax() const { return fuel_max; };
-     	
-     	     	virtual void UpdateProperties();
+        int GetFuel() const    { return fuel; };
+        int GetFuelMax() const { return fuel_max; };
+         
+                  virtual void UpdateProperties();
 
-     	     	void CountPrice();
-                     	     		
-     	     	virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-     	private:
-     	     	int fuel_max_orig;
-     		int fuel_max_add;
-     		int fuel_max;
-     		int fuel;
+                  void CountPrice();
+                                      
+                  virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
+         private:
+                  int fuel_max_orig;
+             int fuel_max_add;
+             int fuel_max;
+             int fuel;
 
-     		void virtual AddUniqueInfo();
-          	std::string GetFuelStr();
+             void virtual AddUniqueInfo();
+              std::string GetFuelStr();
                 
                 void SaveDataUniqueBakEquipment(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueBakEquipment(const boost::property_tree::ptree&);
-		void ResolveDataUniqueBakEquipment();
+        void LoadDataUniqueBakEquipment(const boost::property_tree::ptree&);
+        void ResolveDataUniqueBakEquipment();
 };
 
 #endif 

@@ -9,38 +9,38 @@
 
 class SFML_Wrapper
 {
-	public:
-      		SFML_Wrapper();
-      		~SFML_Wrapper();
-      		      		
-        	void wrCreateWindowSpecific(int width, int height, int bpp, bool vert_sync, const std::string&);
+    public:
+              SFML_Wrapper();
+              ~SFML_Wrapper();
+                            
+            void wrCreateWindowSpecific(int width, int height, int bpp, bool vert_sync, const std::string&);
                 
                 int GetWidth() const { return window.getSize().x; };
                 int GetHeight() const { return window.getSize().y; };
                                 
-      		sf::Font& GetFont() { return font; }; 
-      		sf::RenderWindow& GetWindow() { return window; };
-      		
-		float GetElapsedTimeInSeconds() { return clock.getElapsedTime().asSeconds(); };
-				
-		void wrResizeSpecific(int width, int height);
+              sf::Font& GetFont() { return font; }; 
+              sf::RenderWindow& GetWindow() { return window; };
+              
+        float GetElapsedTimeInSeconds() { return clock.getElapsedTime().asSeconds(); };
+                
+        void wrResizeSpecific(int width, int height);
 
-		void wrDrawSpecific();
-		
-		void DrawText(const std::string& str, int font_size, const Vec2<float>& pos);
-		void DrawText(const std::string& str, int font_size, const Vec2<float>& pos, const Color4<int>& color);
+        void wrDrawSpecific();
+        
+        void DrawText(const std::string& str, int font_size, const Vec2<float>& pos);
+        void DrawText(const std::string& str, int font_size, const Vec2<float>& pos, const Color4<int>& color);
 
-    	private:
-      		int bpp;
-      		bool vert_sync;
+        private:
+              int bpp;
+              bool vert_sync;
 
-		freetype::font_data ftfont;
+        freetype::font_data ftfont;
 
-		sf::Text text12;
-      		sf::Clock clock;
-      		sf::Font font;
-      		sf::View view;
-      		sf::RenderWindow window;
+        sf::Text text12;
+              sf::Clock clock;
+              sf::Font font;
+              sf::View view;
+              sf::RenderWindow window;
 };
 
 #endif

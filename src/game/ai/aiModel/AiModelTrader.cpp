@@ -22,7 +22,7 @@
 
 AiModelTrader::AiModelTrader() 
 {
-	type_id = AIMODEL::TRADER_ID;
+    type_id = AIMODEL::TRADER_ID;
 }
 
 AiModelTrader::~AiModelTrader() 
@@ -30,14 +30,14 @@ AiModelTrader::~AiModelTrader()
 
 void AiModelTrader::UpdateInStatic(Npc* npc) const
 {
-	if (npc->GetStateMachine().GetMacroTaskManager().GetScenario() == nullptr)
+    if (npc->GetStateMachine().GetMacroTaskManager().GetScenario() == nullptr)
         {
-        	Task macrotask(TYPE::AISCENARIO::MACRO_GOODSTRADING_ID);
-	        npc->GetStateMachine().SetCurrentMacroTask(macrotask);
+            Task macrotask(TYPE::AISCENARIO::MACRO_GOODSTRADING_ID);
+            npc->GetStateMachine().SetCurrentMacroTask(macrotask);
         }            
 }
 
 std::string AiModelTrader::GetDescription(Npc* npc) const
 {
-	return "AiModelTrader";
+    return "AiModelTrader";
 }

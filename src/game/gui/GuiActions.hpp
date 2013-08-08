@@ -23,15 +23,15 @@ class Player;
 
 class GuiActions
 {
-   	public:
-		GuiActions() {}
-		~GuiActions() {}
+       public:
+        GuiActions() {}
+        ~GuiActions() {}
 
-		static void GalaxyMapGuiTransition(Player* player);
-		static void SaveEvent(Player* player);
-		static void LoadEvent(Player* player);
+        static void GalaxyMapGuiTransition(Player* player);
+        static void SaveEvent(Player* player);
+        static void LoadEvent(Player* player);
 };
-	  		
+              
 #endif 
 
 

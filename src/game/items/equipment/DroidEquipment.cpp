@@ -28,8 +28,8 @@ DroidEquipment::DroidEquipment(int id)
 :
 repair_orig(0)
 {
-	SetId(id);
-	SetTypeId(TYPE::ENTITY::EQUIPMENT_ID); 
+    SetId(id);
+    SetTypeId(TYPE::ENTITY::EQUIPMENT_ID); 
     SetSubTypeId(TYPE::ENTITY::DROID_EQUIPMENT_ID); 
 }
 
@@ -40,111 +40,111 @@ DroidEquipment::~DroidEquipment()
 /* virtual */
 void DroidEquipment::UpdateProperties()
 {
-    	repair_add = 0;
+        repair_add = 0;
         
         for (unsigned int i = 0; i < modules_vec.size(); i++)
-    	{
-    		repair_add += ((DroidModule*)modules_vec[i])->GetRepairAdd();    	
-    	}
-    	
-     	repair = repair_orig + repair_add;
+        {
+            repair_add += ((DroidModule*)modules_vec[i])->GetRepairAdd();        
+        }
+        
+         repair = repair_orig + repair_add;
 }
 
 /* virtual */
 void DroidEquipment::UpdateInStatic()
 {
-	if (GetFunctioning() == true)	
-	{
-		if (item_slot->GetOwnerVehicle()->IsArmorFull() == false)
-		{
-			item_slot->GetOwnerVehicle()->IncreaseArmor(repair);
-			DeteriorationEvent();
-		}
-	}
-	
-	UpdateLock();
+    if (GetFunctioning() == true)    
+    {
+        if (item_slot->GetOwnerVehicle()->IsArmorFull() == false)
+        {
+            item_slot->GetOwnerVehicle()->IncreaseArmor(repair);
+            DeteriorationEvent();
+        }
+    }
+    
+    UpdateLock();
 }
-      		
+              
 void DroidEquipment::CountPrice()
 {
-     	float repair_rate        = (float)repair_orig / EQUIPMENT::DROID::REPAIR_MIN;
-     	float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::DROID::MODULES_NUM_MAX;
+         float repair_rate        = (float)repair_orig / EQUIPMENT::DROID::REPAIR_MIN;
+         float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::DROID::MODULES_NUM_MAX;
 
-     	float effectiveness_rate = EQUIPMENT::DROID::REPAIR_WEIGHT * repair_rate + 
-     				   EQUIPMENT::DROID::MODULES_NUM_WEIGHT * modules_num_rate;
+         float effectiveness_rate = EQUIPMENT::DROID::REPAIR_WEIGHT * repair_rate + 
+                        EQUIPMENT::DROID::MODULES_NUM_WEIGHT * modules_num_rate;
 
-     	float mass_rate          = (float)data_item.mass / EQUIPMENT::DROID::MASS_MIN;
-     	float condition_rate     = (float)condition / data_item.condition_max;
+         float mass_rate          = (float)data_item.mass / EQUIPMENT::DROID::MASS_MIN;
+         float condition_rate     = (float)condition / data_item.condition_max;
 
-     	price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+         price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 void DroidEquipment::AddUniqueInfo()
 {
-    	info.addTitleStr("DROID");
-   	info.addNameStr("repair:");     info.addValueStr(GetRepairStr());
+        info.addTitleStr("DROID");
+       info.addNameStr("repair:");     info.addValueStr(GetRepairStr());
 }
-     		
-     		
+             
+             
 std::string DroidEquipment::GetRepairStr()
 {
-    	if (repair_add == 0)
-        	return int2str(repair_orig);
-    	else
-        	return int2str(repair_orig) + "+" + int2str(repair_add);
+        if (repair_add == 0)
+            return int2str(repair_orig);
+        else
+            return int2str(repair_orig) + "+" + int2str(repair_add);
 }
 
 /*virtual*/
 void DroidEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	std::string root = "droid_equipment." + int2str(GetId()) + ".";
-	SaveDataUniqueBase(save_ptree, root);
+    std::string root = "droid_equipment." + int2str(GetId()) + ".";
+    SaveDataUniqueBase(save_ptree, root);
         SaveDataUniqueBaseItem(save_ptree, root);
-	SaveDataUniqueBaseEquipment(save_ptree, root);
-	SaveDataUniqueDroidEquipment(save_ptree, root);
+    SaveDataUniqueBaseEquipment(save_ptree, root);
+    SaveDataUniqueDroidEquipment(save_ptree, root);
 }
 
 /*virtual*/
 void DroidEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-	LoadDataUniqueBase(load_ptree);
+    LoadDataUniqueBase(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
-	LoadDataUniqueBaseEquipment(load_ptree);
-	LoadDataUniqueDroidEquipment(load_ptree);
+    LoadDataUniqueBaseEquipment(load_ptree);
+    LoadDataUniqueDroidEquipment(load_ptree);
 }
 
 /*virtual*/
 void DroidEquipment::ResolveData()
 {
-	ResolveDataUniqueBase();
+    ResolveDataUniqueBase();
         ResolveDataUniqueBaseItem();
-	ResolveDataUniqueBaseEquipment();
-	ResolveDataUniqueDroidEquipment();
+    ResolveDataUniqueBaseEquipment();
+    ResolveDataUniqueDroidEquipment();
 }
 
 void DroidEquipment::SaveDataUniqueDroidEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" SaveDataUniqueDroidEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
-	#endif
-	
+    #if SAVELOAD_LOG_ENABLED == 1
+    Logger::Instance().Log(" SaveDataUniqueDroidEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    #endif
+    
         save_ptree.put(root+"repair_orig", repair_orig);
 }
                 
 void DroidEquipment::LoadDataUniqueDroidEquipment(const boost::property_tree::ptree& load_ptree)
 {
-	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" LoadDataUniqueDroidEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
-	#endif
-	
+    #if SAVELOAD_LOG_ENABLED == 1
+    Logger::Instance().Log(" LoadDataUniqueDroidEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    #endif
+    
         repair_orig = load_ptree.get<int>("repair_orig");
 }                
 
 void DroidEquipment::ResolveDataUniqueDroidEquipment()
 {
-	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" ResolveDataUniqueDroidEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
-	#endif
+    #if SAVELOAD_LOG_ENABLED == 1
+    Logger::Instance().Log(" ResolveDataUniqueDroidEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    #endif
 }
 
 

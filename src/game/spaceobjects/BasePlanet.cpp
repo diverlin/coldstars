@@ -103,9 +103,9 @@ void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& loa
     Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::LoadDataUniqueBasePlanet", SAVELOAD_LOG_DIP);
     #endif
     
-    m_DataPlanet.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");	
-    m_DataPlanet.orbit_center.y = load_ptree.get<float>("data.orbit_center.y");	
-    m_DataPlanet.radius_A = load_ptree.get<float>("data.radius_A");	
+    m_DataPlanet.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");    
+    m_DataPlanet.orbit_center.y = load_ptree.get<float>("data.orbit_center.y");    
+    m_DataPlanet.radius_A = load_ptree.get<float>("data.radius_A");    
     m_DataPlanet.radius_B = load_ptree.get<float>("data.radius_B");
     m_DataPlanet.orbit_phi_inD = load_ptree.get<float>("data.orbit_phi_inD");
     m_DataPlanet.speed = load_ptree.get<float>("data.speed");

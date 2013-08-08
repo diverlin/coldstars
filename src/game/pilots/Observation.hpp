@@ -33,9 +33,9 @@ class Vehicle;
 template <class TYPE>
 class Pair
 {
-	public:
-		TYPE object;
-		float dist;
+    public:
+        TYPE object;
+        float dist;
             
         Pair(TYPE object, float dist):object(object), dist(dist) {};
         ~Pair() {};
@@ -43,32 +43,32 @@ class Pair
 
 struct VisionStatus
 {
-	VisionStatus()
+    VisionStatus()
     :
     ASTEROID(false),
-	CONTAINER(false),
-	pickable_CONTAINER(false),
-	RANGER(false),
-	WARRIOR(false),
-	TRADER(false),
-	PIRAT(false),
-	DIPLOMAT(false) {}
-	
+    CONTAINER(false),
+    pickable_CONTAINER(false),
+    RANGER(false),
+    WARRIOR(false),
+    TRADER(false),
+    PIRAT(false),
+    DIPLOMAT(false) {}
+    
     bool ASTEROID;
-	bool CONTAINER;
-	bool pickable_CONTAINER;
+    bool CONTAINER;
+    bool pickable_CONTAINER;
 
-	bool RANGER;
-	bool WARRIOR;
-	bool TRADER;  
-	bool PIRAT;
-	bool DIPLOMAT;
+    bool RANGER;
+    bool WARRIOR;
+    bool TRADER;  
+    bool PIRAT;
+    bool DIPLOMAT;
 };
 
 
 class Observation 
 {
-   	public:
+       public:
         Observation();
         ~Observation();
         
@@ -90,14 +90,14 @@ class Observation
         
         template <typename OBSERVED_DATA_TYPE>
         void Sort(std::vector<OBSERVED_DATA_TYPE>&);
-               	
-	private:
-        Npc* npc_owner;	
+                   
+    private:
+        Npc* npc_owner;    
         
         std::vector< Pair<StarSystem*> > visible_STARSYSTEM_pair_vec; 
         std::vector< Pair<Container*> > visible_CONTAINER_pair_vec;                              
         std::vector< Pair<Container*> > visible_pickable_CONTAINER_pair_vec; 
-        std::vector< Pair<Asteroid*> > visible_ASTEROID_pair_vec; 		
+        std::vector< Pair<Asteroid*> > visible_ASTEROID_pair_vec;         
         
         std::vector< Pair<Vehicle*> > visible_VEHICLE_pair_vec;                
         

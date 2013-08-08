@@ -24,25 +24,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class FreezerModule : public BaseModule
 {
-  	public:
-      		FreezerModule(int);
-      		virtual ~FreezerModule();
+      public:
+              FreezerModule(int);
+              virtual ~FreezerModule();
 
-		void SetFreezeAdd(int freeze_add) { this->freeze_add = freeze_add; };
-		int GetFreezeAdd() const { return freeze_add; };
-      		
-      		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-      	private:
-      	      	int freeze_add;
-      	      	
-      	      	void virtual AddUniqueInfo();
-      	      	
-      		void SaveDataUniqueFreezerModule(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueFreezerModule(const boost::property_tree::ptree&);
-		void ResolveDataUniqueFreezerModule();
+        void SetFreezeAdd(int freeze_add) { this->freeze_add = freeze_add; };
+        int GetFreezeAdd() const { return freeze_add; };
+              
+              virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
+          private:
+                    int freeze_add;
+                    
+                    void virtual AddUniqueInfo();
+                    
+              void SaveDataUniqueFreezerModule(boost::property_tree::ptree&, const std::string&) const;
+        void LoadDataUniqueFreezerModule(const boost::property_tree::ptree&);
+        void ResolveDataUniqueFreezerModule();
 };
 
 #endif

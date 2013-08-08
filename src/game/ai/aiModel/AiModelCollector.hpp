@@ -25,19 +25,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class AiModelCollector
 {
-	public:
-		static AiModelCollector& Instance();
-		~AiModelCollector();
-		
-		void RegisterAiModel(BaseAiModel*);
-		BaseAiModel* GetAiModel(int) const;
-                      	 		                
+    public:
+        static AiModelCollector& Instance();
+        ~AiModelCollector();
+        
+        void RegisterAiModel(BaseAiModel*);
+        BaseAiModel* GetAiModel(int) const;
+                                                   
         private:   
-        	std::map<int, BaseAiModel*> aimodel_map;
-        	             
-		AiModelCollector() {};
-		AiModelCollector(const AiModelCollector&) = delete;
-		AiModelCollector& operator=(const AiModelCollector&) = delete;
+            std::map<int, BaseAiModel*> aimodel_map;
+                         
+        AiModelCollector() {};
+        AiModelCollector(const AiModelCollector&) = delete;
+        AiModelCollector& operator=(const AiModelCollector&) = delete;
 }; 
 
 

@@ -24,25 +24,25 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class DroidModule : public BaseModule
 {
-   	public:
-      		DroidModule(int); 
-      		virtual ~DroidModule(); 
+       public:
+              DroidModule(int); 
+              virtual ~DroidModule(); 
 
-		void SetRepairAdd(int repair_add) { this->repair_add = repair_add; };
-		int GetRepairAdd() const { return repair_add; };
-		
-		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-     	private:
-      	      	int repair_add;
-      	      	
-      	      	void virtual AddUniqueInfo();
-      	      	
-      	      	void SaveDataUniqueDroidModule(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueDroidModule(const boost::property_tree::ptree&);
-		void ResolveDataUniqueDroidModule();
+        void SetRepairAdd(int repair_add) { this->repair_add = repair_add; };
+        int GetRepairAdd() const { return repair_add; };
+        
+        virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
+         private:
+                    int repair_add;
+                    
+                    void virtual AddUniqueInfo();
+                    
+                    void SaveDataUniqueDroidModule(boost::property_tree::ptree&, const std::string&) const;
+        void LoadDataUniqueDroidModule(const boost::property_tree::ptree&);
+        void ResolveDataUniqueDroidModule();
 };
 
 #endif

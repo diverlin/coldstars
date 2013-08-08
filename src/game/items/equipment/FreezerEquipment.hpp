@@ -24,31 +24,31 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class FreezerEquipment : public BaseEquipment
 {  
-   	public:
-      		FreezerEquipment(int);
-      		virtual ~FreezerEquipment();
+       public:
+              FreezerEquipment(int);
+              virtual ~FreezerEquipment();
 
-		void SetFreezeOrig(int freeze_orig) { this->freeze_orig = freeze_orig; };
+        void SetFreezeOrig(int freeze_orig) { this->freeze_orig = freeze_orig; };
                 int GetFreeze() const { return freeze; };
-    		
-      		void CountPrice();
-      		virtual void UpdateProperties();  
-      		
-    		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-      		
-      	private:
-      	      	int freeze_orig;
-      		int freeze_add;
-      		int freeze;
-      		
-      		void virtual AddUniqueInfo();
-       		std::string GetFreezeStr();
+            
+              void CountPrice();
+              virtual void UpdateProperties();  
+              
+            virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+              
+          private:
+                    int freeze_orig;
+              int freeze_add;
+              int freeze;
+              
+              void virtual AddUniqueInfo();
+               std::string GetFreezeStr();
                 
                 void SaveDataUniqueFreezerEquipment(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueFreezerEquipment(const boost::property_tree::ptree&);
-		void ResolveDataUniqueFreezerEquipment(); 
+        void LoadDataUniqueFreezerEquipment(const boost::property_tree::ptree&);
+        void ResolveDataUniqueFreezerEquipment(); 
 };
 
 

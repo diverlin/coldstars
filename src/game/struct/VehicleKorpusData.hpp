@@ -22,15 +22,15 @@
 
 struct VehicleKorpusData
 {
-	/* this data depends only on korpus and cannot be changed by artefacts/items */        
-	int space;
-	int armor;
-	int protection; 
-	int temperature;   
+    /* this data depends only on korpus and cannot be changed by artefacts/items */        
+    int space;
+    int armor;
+    int protection; 
+    int temperature;   
 
-	int price;
+    int price;
 
-	bool draw_turrels;
+    bool draw_turrels;
 
     int slot_bak_num;
     int slot_drive_num;
@@ -45,7 +45,7 @@ struct VehicleKorpusData
     int slot_artefact_num;
     int slot_otsec_num;
                 
-	VehicleKorpusData()
+    VehicleKorpusData()
     :
     space(0),
     armor(0),
@@ -68,7 +68,7 @@ struct VehicleKorpusData
     slot_weapon_num(0),
     slot_artefact_num(0),
     slot_otsec_num(0)
-	{}
+    {}
 };
 
 #endif 

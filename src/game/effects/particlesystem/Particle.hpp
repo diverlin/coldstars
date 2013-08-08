@@ -27,44 +27,44 @@
 
 class Particle
 {
-	public:
-		Particle(const ParticleData&);       
-		~Particle();
-		
-		void SetPosition(const Vec2<float>& pos) { this->pos = pos; };      		
-		void SetVelocity(const Vec2<float>& _velocity) { d_pos = _velocity; };
-		
-		bool GetAlive()       const { return is_alive; };
-		float GetAlpha()      const { return color.a; };
-		float GetAlphaStart() const { return data_particle.color_start.a; };
-		
-		void Reborn();      
-		
-		void RandomizeLifeTime(float, float);
-		void Randomize_d_alpha(float, float);
-		
-		
-		void CalcRandomVelocity();            
-		void CalcRandomAccurateVelocity();
-		void CalcRandomDirtyVelocity();
-		//void calcAccurateRandomVelocity2(Vec2<float>);
-		
-		void Update();
-		void Render() const;
-		void Render(float) const;
-		void Render(float, float) const;
-        		
-	private:
-		bool is_alive;
-		
-		Vec2<float> pos;
-		Vec2<float> d_pos;
-		
-		Color4<float> color;
-		
-		float size;
-		
-		ParticleData data_particle;
+    public:
+        Particle(const ParticleData&);       
+        ~Particle();
+        
+        void SetPosition(const Vec2<float>& pos) { this->pos = pos; };              
+        void SetVelocity(const Vec2<float>& _velocity) { d_pos = _velocity; };
+        
+        bool GetAlive()       const { return is_alive; };
+        float GetAlpha()      const { return color.a; };
+        float GetAlphaStart() const { return data_particle.color_start.a; };
+        
+        void Reborn();      
+        
+        void RandomizeLifeTime(float, float);
+        void Randomize_d_alpha(float, float);
+        
+        
+        void CalcRandomVelocity();            
+        void CalcRandomAccurateVelocity();
+        void CalcRandomDirtyVelocity();
+        //void calcAccurateRandomVelocity2(Vec2<float>);
+        
+        void Update();
+        void Render() const;
+        void Render(float) const;
+        void Render(float, float) const;
+                
+    private:
+        bool is_alive;
+        
+        Vec2<float> pos;
+        Vec2<float> d_pos;
+        
+        Color4<float> color;
+        
+        float size;
+        
+        ParticleData data_particle;
 };
 
 

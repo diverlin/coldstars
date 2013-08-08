@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "BaseBackGroundEffect.hpp"
@@ -24,8 +24,8 @@ unsigned long int BaseBackGroundEffect::counter;
 
 BaseBackGroundEffect::BaseBackGroundEffect():textureOb(nullptr), parallax_rate(1.f)
 {
-	counter++;
-	id = counter;
+    counter++;
+    id = counter;
 }
 
 BaseBackGroundEffect::~BaseBackGroundEffect()
@@ -33,40 +33,40 @@ BaseBackGroundEffect::~BaseBackGroundEffect()
 
 void BaseBackGroundEffect::SetTextureOb(TextureOb* textureOb, const Vec3<float>& scale_factor)
 {
-	this->textureOb = textureOb; 
-	size.x = textureOb->GetFrameWidth()  * scale_factor.x;
-	size.y = textureOb->GetFrameHeight() * scale_factor.y;
-	size.z = 1.0 * scale_factor.z; 
+    this->textureOb = textureOb; 
+    size.x = textureOb->GetFrameWidth()  * scale_factor.x;
+    size.y = textureOb->GetFrameHeight() * scale_factor.y;
+    size.z = 1.0 * scale_factor.z; 
 };
-	        
+            
 void BaseBackGroundEffect::SaveDataUniqueBaseBackGroundEffect(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	save_ptree.put(root+"textureOb_path", textureOb->path);
-	
-	save_ptree.put(root+"center.x", center.x);
-	save_ptree.put(root+"center.y", center.y);	
-	save_ptree.put(root+"center.z", center.z);
+    save_ptree.put(root+"textureOb_path", textureOb->path);
+    
+    save_ptree.put(root+"center.x", center.x);
+    save_ptree.put(root+"center.y", center.y);    
+    save_ptree.put(root+"center.z", center.z);
 
-	save_ptree.put(root+"size.x", size.x);
-	save_ptree.put(root+"size.y", size.y);	
-	save_ptree.put(root+"size.z", size.z);
+    save_ptree.put(root+"size.x", size.x);
+    save_ptree.put(root+"size.y", size.y);    
+    save_ptree.put(root+"size.z", size.z);
 }
 
 void BaseBackGroundEffect::LoadDataUniqueBaseBackGroundEffect(const boost::property_tree::ptree& load_ptree)
 {
-	textureOb_path = load_ptree.get<std::string>("textureOb_path");
-				
-	center.x = load_ptree.get<float>("center.x");
-	center.y = load_ptree.get<float>("center.y");
-	center.z = load_ptree.get<float>("center.z");
-	
-	size.x = load_ptree.get<float>("size.x");
-	size.y = load_ptree.get<float>("size.y");
-	size.z = load_ptree.get<float>("size.z");
+    textureOb_path = load_ptree.get<std::string>("textureOb_path");
+                
+    center.x = load_ptree.get<float>("center.x");
+    center.y = load_ptree.get<float>("center.y");
+    center.z = load_ptree.get<float>("center.z");
+    
+    size.x = load_ptree.get<float>("size.x");
+    size.y = load_ptree.get<float>("size.y");
+    size.z = load_ptree.get<float>("size.z");
 }
-		
+        
 void BaseBackGroundEffect::ResolveDataUniqueBaseBackGroundEffect()
 {
-	textureOb = TextureManager::Instance().GetTextureObByPath(textureOb_path);
+    textureOb = TextureManager::Instance().GetTextureObByPath(textureOb_path);
 }
               

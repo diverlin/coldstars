@@ -25,19 +25,19 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class ScenarioCollector
 {
-	public:
-		static ScenarioCollector& Instance();
-		~ScenarioCollector();
-		
-		void RegisterScenario(BaseScenario*);
-		BaseScenario* GetScenario(TYPE::AISCENARIO) const;
-                      	 		                
+    public:
+        static ScenarioCollector& Instance();
+        ~ScenarioCollector();
+        
+        void RegisterScenario(BaseScenario*);
+        BaseScenario* GetScenario(TYPE::AISCENARIO) const;
+                                                   
     private:   
         std::map<TYPE::AISCENARIO, BaseScenario*> scenario_map;
-        	             
-		ScenarioCollector() {};
-		ScenarioCollector(const ScenarioCollector&) = delete;
-		ScenarioCollector& operator=(const ScenarioCollector&) = delete;
+                         
+        ScenarioCollector() {};
+        ScenarioCollector(const ScenarioCollector&) = delete;
+        ScenarioCollector& operator=(const ScenarioCollector&) = delete;
 }; 
 
 

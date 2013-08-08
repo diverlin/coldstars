@@ -41,28 +41,28 @@ item_slot(nullptr)
 /* virtual */
 BaseItem::~BaseItem()
 {
-	#if CREATEDESTROY_LOG_ENABLED == 1
-	Logger::Instance().Log("___::~BaseItem("+int2str(GetId())+")");
-	#endif
+    #if CREATEDESTROY_LOG_ENABLED == 1
+    Logger::Instance().Log("___::~BaseItem("+int2str(GetId())+")");
+    #endif
 }
 
 void BaseItem::LockEvent(int locked_turns)
 {
-	#if ITEMINFLUENCE_LOG_ENABLED == 1
-	Logger::Instance().Log("BaseItem::LockEvent", ITEMINFLUENCE_LOG_DIP);
-	#endif
-	
-	bool was_working = false;
-	if (this->locked_turns == 0)
-	{
-		was_working = true;
-	}
-	
+    #if ITEMINFLUENCE_LOG_ENABLED == 1
+    Logger::Instance().Log("BaseItem::LockEvent", ITEMINFLUENCE_LOG_DIP);
+    #endif
+    
+    bool was_working = false;
+    if (this->locked_turns == 0)
+    {
+        was_working = true;
+    }
+    
     this->locked_turns += locked_turns;
     if (was_working == true)
     {
         item_slot->UpdateVehiclePropetries();        
-	}
+    }
 }
                 
 void BaseItem::UseNormalDeterioration()
@@ -77,9 +77,9 @@ void BaseItem::UseOverloadDeterioration()
  
 void BaseItem::DamageEvent()
 {
-	#if ITEMINFLUENCE_LOG_ENABLED == 1
-	Logger::Instance().Log("BaseItem::DamageEvent", ITEMINFLUENCE_LOG_DIP);
-	#endif
+    #if ITEMINFLUENCE_LOG_ENABLED == 1
+    Logger::Instance().Log("BaseItem::DamageEvent", ITEMINFLUENCE_LOG_DIP);
+    #endif
 
     item_slot->UpdateVehiclePropetries();
 }
@@ -91,7 +91,7 @@ void BaseItem::DeteriorationEvent()
     {
         condition = 0;
         DamageEvent();
-	}
+    }
 }         
                 
 bool BaseItem::RepairEvent()
@@ -116,15 +116,15 @@ void BaseItem::UpdateLock()
 
 void BaseItem::UpdateInfo()
 {
-	info.clear();
+    info.clear();
 
-	AddUniqueInfo();
+    AddUniqueInfo();
     AddCommonInfo();
 }
 
 void BaseItem::RenderInfo(const Vec2<float>& pos)
 {  
-	UpdateInfo();
+    UpdateInfo();
     
     enable_BLEND();
     drawInfoIn2Column(info.title_list, info.value_list, pos);
@@ -134,34 +134,34 @@ void BaseItem::RenderInfo(const Vec2<float>& pos)
 /* virtual */
 void BaseItem::Render(const Box2D& box, const Vec2<float>& gui_offset, bool draw_text)
 {
-	RenderKorpus(box);
+    RenderKorpus(box);
 }
 
 void BaseItem::RenderKorpus(const Box2D& box)
 {
-	if (Is3D())
-	{
-		Vec3<float> v(0.0);
-		Color4<float> c(1.0, 1.0, 1.0, 1.0);
+    if (Is3D())
+    {
+        Vec3<float> v(0.0);
+        Color4<float> c(1.0, 1.0, 1.0, 1.0);
         Vec3<float> center(box.GetCenter().x, box.GetCenter().y, GUI::POS_Z);
-		SetCenter(center);
-		//SetAngle(box.GetAngle());
-		UpdateRenderAnimation();
-		//SetScale(box.GetSize());
-		RenderMeshLight(v, c);
-	}
-	else
-	{
-       		drawQuad(GetTextureOb(), box); 
-	}
+        SetCenter(center);
+        //SetAngle(box.GetAngle());
+        UpdateRenderAnimation();
+        //SetScale(box.GetSize());
+        RenderMeshLight(v, c);
+    }
+    else
+    {
+               drawQuad(GetTextureOb(), box); 
+    }
 }
 
 void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" SaveDataUniqueBaseItem()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
-	#endif
-	
+    #if SAVELOAD_LOG_ENABLED == 1
+    Logger::Instance().Log(" SaveDataUniqueBaseItem()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    #endif
+    
     save_ptree.put(root+"price", price);
     save_ptree.put(root+"condition", condition);
     save_ptree.put(root+"locked_turns", locked_turns);
@@ -175,19 +175,19 @@ void BaseItem::SaveDataUniqueBaseItem(boost::property_tree::ptree& save_ptree, c
     save_ptree.put(root+"data_item.deterioration_overload_rate",    data_item.deterioration_overload_rate);   
     save_ptree.put(root+"data_item.mass",                           data_item.mass);
                     
-	if (GetTextureOb()) 	{ save_ptree.put(root+"unresolved.textureOb_path", GetTextureOb()->path); }
-	else            { save_ptree.put(root+"unresolved.textureOb_path", "none"); }
+    if (GetTextureOb())     { save_ptree.put(root+"unresolved.textureOb_path", GetTextureOb()->path); }
+    else            { save_ptree.put(root+"unresolved.textureOb_path", "none"); }
         
-    if (item_slot) 	{ save_ptree.put(root+"unresolved.item_slot_id", item_slot->GetId()); }
-	else           	{ save_ptree.put(root+"unresolved.item_slot_id", NONE_ID); }
+    if (item_slot)     { save_ptree.put(root+"unresolved.item_slot_id", item_slot->GetId()); }
+    else               { save_ptree.put(root+"unresolved.item_slot_id", NONE_ID); }
 }
 
 void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_ptree)
 {
-	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" LoadDataUniqueBaseItem()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
-	#endif
-	
+    #if SAVELOAD_LOG_ENABLED == 1
+    Logger::Instance().Log(" LoadDataUniqueBaseItem()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    #endif
+    
     price             = load_ptree.get<int>("price");
     condition         = load_ptree.get<int>("condition");
     locked_turns      = load_ptree.get<int>("locked_turns");
@@ -201,23 +201,23 @@ void BaseItem::LoadDataUniqueBaseItem(const boost::property_tree::ptree& load_pt
     data_item.deterioration_overload_rate = load_ptree.get<float>("data_item.deterioration_overload_rate");   
     data_item.mass                 = load_ptree.get<int>("data_item.mass");
                     
-	data_unresolved_BaseItem.textureOb_path = load_ptree.get<std::string>("unresolved.textureOb_path");
-	data_unresolved_BaseItem.item_slot_id   = load_ptree.get<int>("unresolved.item_slot_id");
+    data_unresolved_BaseItem.textureOb_path = load_ptree.get<std::string>("unresolved.textureOb_path");
+    data_unresolved_BaseItem.item_slot_id   = load_ptree.get<int>("unresolved.item_slot_id");
 }
                 
 void BaseItem::ResolveDataUniqueBaseItem()
 {
-	#if SAVELOAD_LOG_ENABLED == 1
-	Logger::Instance().Log(" ResolveDataUniqueBaseItem()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
-	#endif
-	
-	SetTextureOb(TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path));
-	
-	UseNormalDeterioration();	
-	UpdateProperties(); // this function must be performed before inserting to slot!!!
-		
-	if(data_unresolved_BaseItem.item_slot_id != NONE_ID) // item_slot can be nullptr in case of inserted module
-	{
-		((ItemSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseItem.item_slot_id))->InsertItem(this);
-	}
+    #if SAVELOAD_LOG_ENABLED == 1
+    Logger::Instance().Log(" ResolveDataUniqueBaseItem()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    #endif
+    
+    SetTextureOb(TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path));
+    
+    UseNormalDeterioration();    
+    UpdateProperties(); // this function must be performed before inserting to slot!!!
+        
+    if(data_unresolved_BaseItem.item_slot_id != NONE_ID) // item_slot can be nullptr in case of inserted module
+    {
+        ((ItemSlot*)EntityManager::Instance().GetEntityById(data_unresolved_BaseItem.item_slot_id))->InsertItem(this);
+    }
 }

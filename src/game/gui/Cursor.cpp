@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -62,7 +62,7 @@ m_FocusedGuiElement(nullptr)
     //button_map.insert(std::make_pair(button->GetSubTypeId(), button));
     
     //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_blue, GUI::BUTTON::ACTION_GRAB_ID, "grab");  
-    //button_map.insert(std::make_pair(button->GetSubTypeId(), button)); 	   		
+    //button_map.insert(std::make_pair(button->GetSubTypeId(), button));                
     
     //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_yellow, GUI::BUTTON::ACTION_FOLLOW_ID, "follow");  
     //button_map.insert(std::make_pair(button->GetSubTypeId(), button));
@@ -71,10 +71,10 @@ m_FocusedGuiElement(nullptr)
     //for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
     //{
     //float scale = 0.4;
-        //Vec2<float> pos = getVec2f(100*scale, angle);	
+        //Vec2<float> pos = getVec2f(100*scale, angle);    
     //rect.SetCenter(pos);
-    //rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);		    			   
-        //rect.Scale(scale);	
+    //rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);                           
+        //rect.Scale(scale);    
         //iterator->second->SetRect(rect);   
     
     //angle += 360/button_map.size();
@@ -89,11 +89,11 @@ Cursor::~Cursor()
 
 void Cursor::Reset()
 {
-   	m_DataMouse.left_click  = false;
+       m_DataMouse.left_click  = false;
     m_DataMouse.right_click = false;
     
-	m_FocusedSpaceObject = nullptr;
-	m_FocusedGuiElement = nullptr;
+    m_FocusedSpaceObject = nullptr;
+    m_FocusedGuiElement = nullptr;
 }
 
 void Cursor::Update(Player* player)
@@ -136,17 +136,17 @@ void Cursor::Update(Player* player)
         }
         
     }
-           	
+               
 }
 
 void Cursor::UpdateMouseStuff()
-{	
-	m_DataMouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
-	m_DataMouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
+{    
+    m_DataMouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+    m_DataMouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
 
-	sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());	
-	m_DataMouse.pos_screencoord.Set(mouse_pos.x, Screen::Instance().GetHeight() - mouse_pos.y);
-	m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*Screen::Instance().GetScale() + Screen::Instance().GetBottomLeftScreenWC();
+    sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());    
+    m_DataMouse.pos_screencoord.Set(mouse_pos.x, Screen::Instance().GetHeight() - mouse_pos.y);
+    m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*Screen::Instance().GetScale() + Screen::Instance().GetBottomLeftScreenWC();
 }
 
 void Cursor::RenderFocusedObjectStuff() const
@@ -185,14 +185,14 @@ void Cursor::RenderFocusedObjectInfo() const
     {
         if (m_FocusedSpaceObject != nullptr)
         {
-        	m_FocusedSpaceObject->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC(), Screen::Instance().GetScale());
+            m_FocusedSpaceObject->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC(), Screen::Instance().GetScale());
         }
         
         if (m_FocusedGuiElement != nullptr)
         {
             m_FocusedGuiElement->RenderInfo();
         }
-	}
+    }
     disable_BLEND();  
 }
 

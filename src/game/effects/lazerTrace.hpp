@@ -23,39 +23,39 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class LazerTraceEffect
 { 
-    	public:
-       		LazerTraceEffect(TextureOb*, const Vec3<float>* const, const Vec3<float>* const);
-       		~LazerTraceEffect();
+        public:
+               LazerTraceEffect(TextureOb*, const Vec3<float>* const, const Vec3<float>* const);
+               ~LazerTraceEffect();
 
-		void setDamageEffect(DamageEffect* _damage_effect) { damage_effect = _damage_effect; };
-		bool GetAlive() const { return is_alive; };
-		
-		const Vec3<float>& GetStartPos() const { return *pTo_start_pos; };
-		const Vec3<float>& GetEndPos() const { return *pTo_end_pos; };
-				
-       		void update();
-       		void Render();
-            		
- 	private:
- 	       	bool is_alive;
-       		bool is_alreadyInRemoveQueue; 
-       		
- 	       	TextureOb* texOb;
+        void setDamageEffect(DamageEffect* _damage_effect) { damage_effect = _damage_effect; };
+        bool GetAlive() const { return is_alive; };
+        
+        const Vec3<float>& GetStartPos() const { return *pTo_start_pos; };
+        const Vec3<float>& GetEndPos() const { return *pTo_end_pos; };
+                
+               void update();
+               void Render();
+                    
+     private:
+                bool is_alive;
+               bool is_alreadyInRemoveQueue; 
+               
+                TextureOb* texOb;
 
-       		float len; 
-       		float angle_inR;
-       		float d_angle_inR;
-       		float additional_angle_inR;
-       		float angle_inD; 
-       		
-       		int existance_time;
-       		       		
-       		const Vec3<float>* pTo_start_pos;
-       		const Vec3<float>* pTo_end_pos;
-       		       		
-       		DamageEffect* damage_effect;
- 	       		
-           	void updateAngleAndLen();
+               float len; 
+               float angle_inR;
+               float d_angle_inR;
+               float additional_angle_inR;
+               float angle_inD; 
+               
+               int existance_time;
+                              
+               const Vec3<float>* pTo_start_pos;
+               const Vec3<float>* pTo_end_pos;
+                              
+               DamageEffect* damage_effect;
+                    
+               void updateAngleAndLen();
 };
 
 

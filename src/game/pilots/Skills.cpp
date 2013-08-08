@@ -1,19 +1,19 @@
 /*
-	 Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+     Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
 
-	 This program is free software; you can redistribute it and/or
-	 modify it under the terms of the GNU General Public License
-	 as published by the Free Software Foundation; either version 2
-	 of the License, or (at your option) any later version.
+     This program is free software; you can redistribute it and/or
+     modify it under the terms of the GNU General Public License
+     as published by the Free Software Foundation; either version 2
+     of the License, or (at your option) any later version.
 
-	 This program is distributed in the hope that it will be useful,
-	 but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 GNU General Public License for more details.
+     This program is distributed in the hope that it will be useful,
+     but WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+     GNU General Public License for more details.
 
-	 You should have received a copy of the GNU General Public License
-	 along with this program; if not, write to the Free Software
-	 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+     You should have received a copy of the GNU General Public License
+     along with this program; if not, write to the Free Software
+     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -48,7 +48,7 @@ void Skills::BindStrategy(const int* strategy)
 
 void Skills::AddExpirience(unsigned long int addExpirience)
 {
-	expirience += addExpirience;
+    expirience += addExpirience;
     while(CheckLevelUp() == true) 
     {}
 }
@@ -56,13 +56,13 @@ void Skills::AddExpirience(unsigned long int addExpirience)
 bool Skills::CheckLevelUp()
 {
         if (expirience > expirience_nextlevel)
-	{
-		available_points += 1;
-		expirience_nextlevel *= 2;
-		level++;
+    {
+        available_points += 1;
+        expirience_nextlevel *= 2;
+        level++;
                 
                 return true;
-	}
+    }
         
         return false;
 }
@@ -70,124 +70,124 @@ bool Skills::CheckLevelUp()
 //######### ATTACK ###############
 bool Skills::IncrementAttack()
 {
-	if (available_points > 0)
-	{
-		available_points -= 1;
-		attack += 1;
-		return true;
-	}
-	
-	return false;
+    if (available_points > 0)
+    {
+        available_points -= 1;
+        attack += 1;
+        return true;
+    }
+    
+    return false;
 }
 
 void Skills::DecrementAttack()
 {
-	available_points += 1;
-	attack -= 1;
+    available_points += 1;
+    attack -= 1;
 }
 
 
 //######### DEFENCE ###############
 bool Skills::IncrementDefence()
 {
-	if (available_points > 0)
-	{
-		available_points -= 1;
-		defence += 1;
-		return true;
-	}
-	
-	return false;  
+    if (available_points > 0)
+    {
+        available_points -= 1;
+        defence += 1;
+        return true;
+    }
+    
+    return false;  
 } 
 
 void Skills::DecrementDefence()
 {
-	available_points += 1;
-	defence -= 1;
+    available_points += 1;
+    defence -= 1;
 }
 
 
 //######### LEADER ###############
 bool Skills::IncrementLeader()
 {
-	if (available_points > 0)
-	{
-		available_points -= 1;
-		leader += 1;
-		return true;
-	}
-	
-	return false;
+    if (available_points > 0)
+    {
+        available_points -= 1;
+        leader += 1;
+        return true;
+    }
+    
+    return false;
 }
 
 void Skills::DecrementLeader()
 {
-	available_points += 1;
-	leader -= 1;
+    available_points += 1;
+    leader -= 1;
 }
 
 
 //######### TRADER ###############
 bool Skills::IncrementTrader()
 {
-	if (available_points > 0)
-	{
-		available_points -= 1;
-		trader += 1;
-		return true;
-	}
-	
-	return false;
+    if (available_points > 0)
+    {
+        available_points -= 1;
+        trader += 1;
+        return true;
+    }
+    
+    return false;
 }
 
 void Skills::DecrementTrader()
 {
-	available_points += 1;
-	trader -= 1;
+    available_points += 1;
+    trader -= 1;
 }
 
 //######### TECHNIC ###############
 bool Skills::IncrementTechnic()
 {
-	if (available_points > 0)
-	{
-		available_points -= 1;
-		technic += 1;
-		return true;
-	}
-	
-	return false;  
+    if (available_points > 0)
+    {
+        available_points -= 1;
+        technic += 1;
+        return true;
+    }
+    
+    return false;  
 }
 
 void Skills::DecrementTechnic()
 {
-	available_points += 1;
-	technic -= 1;
+    available_points += 1;
+    technic -= 1;
 }
 
 
 //######### DIMPLOMAT ###############
 bool Skills::IncrementDiplomat()
 {
-	if (available_points > 0)
-	{
-		available_points -= 1;
-		diplomat += 1;
-		return true;
-	}
-	
-	return false;
+    if (available_points > 0)
+    {
+        available_points -= 1;
+        diplomat += 1;
+        return true;
+    }
+    
+    return false;
 }
 
 void Skills::DecrementDiplomat()
 {
-	available_points += 1;
-	diplomat -= 1;
+    available_points += 1;
+    diplomat -= 1;
 }
 
 void Skills::SaveData(boost::property_tree::ptree& save_ptree, const std::string& parent_root) const
 {       
-	const std::string root = parent_root+"skill.";
+    const std::string root = parent_root+"skill.";
         save_ptree.put(root+"attack", attack);        
         save_ptree.put(root+"defence", defence); 
         save_ptree.put(root+"leader", leader);
@@ -198,7 +198,7 @@ void Skills::SaveData(boost::property_tree::ptree& save_ptree, const std::string
 
         save_ptree.put(root+"expirience", expirience); 
         save_ptree.put(root+"expirience_nextlevel", expirience_nextlevel); 
-}	
+}    
 
 void Skills::LoadData(const boost::property_tree::ptree& load_ptree)
 {

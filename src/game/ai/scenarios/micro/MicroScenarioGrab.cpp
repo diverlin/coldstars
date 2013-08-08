@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "MicroScenarioGrab.hpp"
@@ -31,21 +31,21 @@
 
 MicroScenarioGrab::MicroScenarioGrab()
 {
-	type_id = TYPE::AISCENARIO::MICRO_GRAB_ID;
+    type_id = TYPE::AISCENARIO::MICRO_GRAB_ID;
 }
 
 /* virtual */
 MicroScenarioGrab::~MicroScenarioGrab()
 {}
 
-/* virtual */		
+/* virtual */        
 void MicroScenarioGrab::Enter(Npc* npc) const
 {
-	npc->GetVehicle()->GetComplexDrive().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::COLLECTING_ID);
-	
+    npc->GetVehicle()->GetComplexDrive().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::COLLECTING_ID);
+    
         #if AISCENARIO_LOG_ENABLED == 1 
-	Logger::Instance().Log("npc_id="+int2str(npc->GetId())+" ENTER MicroScenarioGrab"); 
-	#endif   	 
+    Logger::Instance().Log("npc_id="+int2str(npc->GetId())+" ENTER MicroScenarioGrab"); 
+    #endif        
 }
 
 /* virtual */
@@ -67,7 +67,7 @@ bool MicroScenarioGrab::Validate(Npc* npc) const
     // check if target is ok
     TARGET_STATUS target_status_code = npc->GetVehicle()->GetSlotGrapple()->CheckTargetPure(target);
         
-	if ( (euipment_is_ok == true) and (target_status_code == TARGET_STATUS::OK) )
+    if ( (euipment_is_ok == true) and (target_status_code == TARGET_STATUS::OK) )
     {
         return true;
     }
@@ -78,9 +78,9 @@ bool MicroScenarioGrab::Validate(Npc* npc) const
 /* virtual */
 void MicroScenarioGrab::UpdateInStaticInSpace(Npc* npc) const
 {
-	BaseSpaceEntity* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();
-	if (npc->GetVehicle()->GetSlotGrapple()->CheckTarget(target) == TARGET_STATUS::OK)
-	{
+    BaseSpaceEntity* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();
+    if (npc->GetVehicle()->GetSlotGrapple()->CheckTarget(target) == TARGET_STATUS::OK)
+    {
         npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->AddTarget(target);
     }
 }
@@ -93,12 +93,12 @@ void MicroScenarioGrab::UpdateInDynamicInSpace(Npc* npc) const
 void MicroScenarioGrab::Exit(Npc* npc) const
 {
         #if AISCENARIO_LOG_ENABLED == 1 
-	Logger::Instance().Log("npc_id="+int2str(npc->GetId())+" EXIT MicroScenarioGrab"); 
-	#endif    
+    Logger::Instance().Log("npc_id="+int2str(npc->GetId())+" EXIT MicroScenarioGrab"); 
+    #endif    
 }
 
 /* virtual */
 std::string MicroScenarioGrab::GetDescription(Npc* npc) const 
 {
-	return "MicroScenarioGrab ob_id = " + int2str(npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId());
+    return "MicroScenarioGrab ob_id = " + int2str(npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId());
 }

@@ -41,18 +41,18 @@ class ShockWaveEffect;
 
 struct UnresolvedDataUniqueVehicle
 {
-	int drive_complex_target_id;
-	int drive_complex_action_id;
+    int drive_complex_target_id;
+    int drive_complex_action_id;
 
-	int starsystem_hyper_id;
-	int parent_vehicleslot_id;
-	int land_id;
+    int starsystem_hyper_id;
+    int parent_vehicleslot_id;
+    int land_id;
 };
 
 
 enum class VEHICLE_SPECIAL_ACTION_TYPE
 {
-	NONE_ID=0, INITIATE_DOCKING_ID, INITIATE_LAUNCHING_ID, INITIATE_JUMPIN_ID, INITIATE_JUMPOUT_ID
+    NONE_ID=0, INITIATE_DOCKING_ID, INITIATE_LAUNCHING_ID, INITIATE_JUMPIN_ID, INITIATE_JUMPOUT_ID
 };
 
 
@@ -64,10 +64,10 @@ class Vehicle : public BaseSpaceEntity
 
         void CreateDriveComplexTextureDependedStuff();
         void CreateProtectionComplexTextureDependedStuff(); 
-        		
-		void SetGodMode(bool god_mode) { m_GodMode = god_mode; }
-		void SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE special_action_id) { m_SpecialActionId = special_action_id; }
-		void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { m_ParentVehicleSlot = parent_vehicleslot; }
+                
+        void SetGodMode(bool god_mode) { m_GodMode = god_mode; }
+        void SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE special_action_id) { m_SpecialActionId = special_action_id; }
+        void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { m_ParentVehicleSlot = parent_vehicleslot; }
 
         void SetLand(BaseLand* land) { m_Land = land; }
             
@@ -105,7 +105,7 @@ class Vehicle : public BaseSpaceEntity
         
         void BindOwnerNpc(Npc*);
                 
-		bool IsObjectWithinRadarRange(BaseSpaceEntity*) const;
+        bool IsObjectWithinRadarRange(BaseSpaceEntity*) const;
         
         WeaponComplex& GetComplexWeapon() { return m_ComplexWeapon; }   // !!!
         DriveComplex& GetComplexDrive()   { return m_ComplexDrive; }                
@@ -153,25 +153,25 @@ class Vehicle : public BaseSpaceEntity
         void HyperJumpEvent(StarSystem*);
         void DockingEvent();
         void LaunchingEvent();
-        	
-		void UpdateSpecialEffect();
+            
+        void UpdateSpecialEffect();
         void UpdateLockedItems();
             
-		virtual void RenderStuffWhenFocusedInSpace() override final;
+        virtual void RenderStuffWhenFocusedInSpace() override final;
         virtual void RenderInfoInSpace(const Vec2<float>&, float) override final;
         void RenderInfo(const Vec2<float>&, int, int);
                     
         void RenderRadarRange();
         void RenderGrappleRange();        
 
-		bool IsAbleToJumpTo(StarSystem*) const;
-		
-		bool IsArmorFull() const;
-		int GetArmorMiss() const;
-		void IncreaseArmor(int);
-		
-		bool IsFuelFull() const;
-		int GetFuelMiss() const;
+        bool IsAbleToJumpTo(StarSystem*) const;
+        
+        bool IsArmorFull() const;
+        int GetArmorMiss() const;
+        void IncreaseArmor(int);
+        
+        bool IsFuelFull() const;
+        int GetFuelMiss() const;
                 
         void RepairKorpusOnAmount(int);
         
@@ -182,8 +182,8 @@ class Vehicle : public BaseSpaceEntity
         
         void TEST_DamageAndLockRandItems();
         void TEST_DropRandomItemToSpace(); 
-        	        
-	protected:
+                    
+    protected:
         std::vector<ItemSlot*> m_SlotTotal_vec;
             
         ItemSlot* const GetFuctionalSlot(TYPE::ENTITY) const;
@@ -195,7 +195,7 @@ class Vehicle : public BaseSpaceEntity
         bool ManageFunctionModule(BaseItem*);
         bool ManageFunctionArtefact(BaseItem*);
         bool ManageFunctionGoodsPack(BaseItem*);
-                	
+                    
         virtual void UpdateInfo() = 0;
         
         void RenderGrabTrail() const;
@@ -207,16 +207,16 @@ class Vehicle : public BaseSpaceEntity
         void UpdateGrappleMicroProgram_inDynamic();
         
         virtual void PutChildsToGarbage() const override;
-                	        	                                
+                                                                
         UnresolvedDataUniqueVehicle data_unresolved_Vehicle;
         
-        void SaveDataUniqueVehicle(boost::property_tree::ptree&, const std::string&) const;		
+        void SaveDataUniqueVehicle(boost::property_tree::ptree&, const std::string&) const;        
         void LoadDataUniqueVehicle(const boost::property_tree::ptree&);
-		void ResolveDataUniqueVehicle();
+        void ResolveDataUniqueVehicle();
 
     private:
         bool m_GodMode;
-		VEHICLE_SPECIAL_ACTION_TYPE m_SpecialActionId;
+        VEHICLE_SPECIAL_ACTION_TYPE m_SpecialActionId;
         
         Npc* m_OwnerNpc;
         
@@ -245,9 +245,9 @@ class Vehicle : public BaseSpaceEntity
                                                                                
         void DropRandomItemToSpace();   
         bool MergeIdenticalGoods(BaseItem*);
-             	
+                 
     friend class GuiVehicle;
-    friend class GuiVehicle2;             	
+    friend class GuiVehicle2;                 
 };
 
 std::string getVehicleSpecialActionStr(VEHICLE_SPECIAL_ACTION_TYPE);

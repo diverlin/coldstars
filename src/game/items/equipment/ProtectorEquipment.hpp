@@ -24,32 +24,32 @@
 
 class ProtectorEquipment  : public BaseEquipment
 {
-	public:
-      		ProtectorEquipment(int);
-      		virtual ~ProtectorEquipment();
+    public:
+              ProtectorEquipment(int);
+              virtual ~ProtectorEquipment();
 
                 void SetProtectionOrig(int protection_orig) { this->protection_orig = protection_orig; };
-		int GetProtection() const { return protection; };
-      		
-      		virtual void UpdateProperties();
-      		
+        int GetProtection() const { return protection; };
+              
+              virtual void UpdateProperties();
+              
                 void CountPrice();
                                 
-      		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-      	private:
-      	      	int protection_orig;
-      		int protection_add;
-      		int protection;
+              virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
+          private:
+                    int protection_orig;
+              int protection_add;
+              int protection;
 
-     		void virtual AddUniqueInfo();
-           	std::string GetProtectionStr();
+             void virtual AddUniqueInfo();
+               std::string GetProtectionStr();
                 
                 void SaveDataUniqueProtectorEquipment(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueProtectorEquipment(const boost::property_tree::ptree&);
-		void ResolveDataUniqueProtectorEquipment();                  
+        void LoadDataUniqueProtectorEquipment(const boost::property_tree::ptree&);
+        void ResolveDataUniqueProtectorEquipment();                  
 };
 
 #endif 

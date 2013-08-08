@@ -24,40 +24,40 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class DriveEquipment : public BaseEquipment
 {
-	public:
-      		DriveEquipment(int);      			       
-      		virtual ~DriveEquipment();
+    public:
+              DriveEquipment(int);                         
+              virtual ~DriveEquipment();
 
-		void SetSpeedOrig(int speed_orig) { this->speed_orig = speed_orig; };
-		void SetHyperOrig(int hyper_orig) { this->hyper_orig = hyper_orig; };
+        void SetSpeedOrig(int speed_orig) { this->speed_orig = speed_orig; };
+        void SetHyperOrig(int hyper_orig) { this->hyper_orig = hyper_orig; };
 
-		int GetSpeed() const { return speed; };
-		int GetHyper() const { return hyper; };
-      		
-      		virtual void UpdateProperties();
+        int GetSpeed() const { return speed; };
+        int GetHyper() const { return hyper; };
+              
+              virtual void UpdateProperties();
 
-      		void CountPrice();
-                      		      		
-      		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-      	private:
-      	      	int speed_orig;
-      		int speed_add;
-      		int speed;
+              void CountPrice();
+                                            
+              virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
+          private:
+                    int speed_orig;
+              int speed_add;
+              int speed;
 
-      		int hyper_orig;
-      		int hyper_add;
-      		int hyper;
-      		
-     		void virtual AddUniqueInfo();
-           	std::string GetSpeedStr();
-           	std::string GetHyperStr();   
+              int hyper_orig;
+              int hyper_add;
+              int hyper;
+              
+             void virtual AddUniqueInfo();
+               std::string GetSpeedStr();
+               std::string GetHyperStr();   
                 
                 void SaveDataUniqueDriveEquipment(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueDriveEquipment(const boost::property_tree::ptree&);
-		void ResolveDataUniqueDriveEquipment();  
+        void LoadDataUniqueDriveEquipment(const boost::property_tree::ptree&);
+        void ResolveDataUniqueDriveEquipment();  
 };
 
 

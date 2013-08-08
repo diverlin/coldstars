@@ -22,15 +22,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class BlackHoleEffect : public BaseParticleSystem
 { 
-    	public:
-       		BlackHoleEffect();             
-       		virtual ~BlackHoleEffect();
-		
-       		virtual void update();
-       		virtual void Render();
-       		
-       	private:
-       		void createParticles();
+        public:
+               BlackHoleEffect();             
+               virtual ~BlackHoleEffect();
+        
+               virtual void update();
+               virtual void Render();
+               
+           private:
+               void createParticles();
 };
 
 

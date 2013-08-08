@@ -24,35 +24,35 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class GrappleModule : public BaseModule
 {
-    	public:     
-      		GrappleModule(int);
-      		virtual ~GrappleModule();
+        public:     
+              GrappleModule(int);
+              virtual ~GrappleModule();
 
-		void SetStrengthAdd(int strength_add)     { this->strength_add = strength_add; };
-		void SetRadiusAdd(int radius_add)         { this->radius_add = radius_add; };
-		void SetSpeedAdd(int speed_add)           { this->speed_add = speed_add; };
-		void SetMaxNumItemAdd(int maxNumItem_add) { this->maxNumItem_add = maxNumItem_add; };
+        void SetStrengthAdd(int strength_add)     { this->strength_add = strength_add; };
+        void SetRadiusAdd(int radius_add)         { this->radius_add = radius_add; };
+        void SetSpeedAdd(int speed_add)           { this->speed_add = speed_add; };
+        void SetMaxNumItemAdd(int maxNumItem_add) { this->maxNumItem_add = maxNumItem_add; };
                 
-		int GetStrengthAdd()   const { return strength_add; };
-		int GetRadiusAdd()     const { return radius_add; };
-		int GetSpeedAdd()      const { return speed_add; };
-		int GetMaxNumItemAdd() const { return maxNumItem_add; };
-      		
-      		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		
-      	private: 
-      	       	int strength_add;
-       		int radius_add;
-       		int speed_add;
-       		int maxNumItem_add;
-       		
-       		void virtual AddUniqueInfo();
-       		
-       		void SaveDataUniqueGrappleModule(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueGrappleModule(const boost::property_tree::ptree&);
-		void ResolveDataUniqueGrappleModule();
+        int GetStrengthAdd()   const { return strength_add; };
+        int GetRadiusAdd()     const { return radius_add; };
+        int GetSpeedAdd()      const { return speed_add; };
+        int GetMaxNumItemAdd() const { return maxNumItem_add; };
+              
+              virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+        
+          private: 
+                     int strength_add;
+               int radius_add;
+               int speed_add;
+               int maxNumItem_add;
+               
+               void virtual AddUniqueInfo();
+               
+               void SaveDataUniqueGrappleModule(boost::property_tree::ptree&, const std::string&) const;
+        void LoadDataUniqueGrappleModule(const boost::property_tree::ptree&);
+        void ResolveDataUniqueGrappleModule();
 };
 
 #endif

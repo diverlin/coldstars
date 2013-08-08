@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #ifndef DRIVECOMPLEX_H
@@ -28,7 +28,7 @@ class BaseSpaceEntity;
 
 class DriveComplex
 {
-	public:
+    public:
         DriveComplex();
         ~DriveComplex();
         
@@ -41,7 +41,7 @@ class DriveComplex
         void SetTarget(BaseSpaceEntity*, int);       
         void SetStaticTargetCoords(const Vec3<float>&);
 
-		int GetActionId() const { return action_id; };
+        int GetActionId() const { return action_id; };
         DriveEffect* GetDriveEffect() const { return drive_effect; };
                                     
         ItemSlot* GetDriveSlot() const { return drive_slot; };
@@ -62,7 +62,7 @@ class DriveComplex
 
         void UpdatePathVisualisation();                
         void DrawPath();
-    		
+            
     private:
         ItemSlot* drive_slot;
         ItemSlot* bak_slot;
@@ -70,15 +70,15 @@ class DriveComplex
         Vehicle* owner_vehicle;
         BaseSpaceEntity* target;
 
-		DriveEffect* drive_effect; 
+        DriveEffect* drive_effect; 
 
-		Vec3<float> target_pos;
-		
-		int action_id;
-		float target_distance;   
-		Vec3<float> target_offset;
+        Vec3<float> target_pos;
+        
+        int action_id;
+        float target_distance;   
+        Vec3<float> target_offset;
 
-		//std::vector<Vec2<float>> debug_midLeft_vec;
+        //std::vector<Vec2<float>> debug_midLeft_vec;
         std::vector<Vec3<float>> path_center_vec;
         std::vector<float> angle_inD_vec;
         
@@ -97,7 +97,7 @@ class DriveComplex
         
         void UpdateDynamicTargetCoord();
 
-		void DefineDistance();
+        void DefineDistance();
 };
 
 

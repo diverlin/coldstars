@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "ProtectorModuleBuilder.hpp"
@@ -29,8 +29,8 @@
 
 ProtectorModuleBuilder& ProtectorModuleBuilder::Instance()
 {
-	static ProtectorModuleBuilder instance;
-	return instance;
+    static ProtectorModuleBuilder instance;
+    return instance;
 }
 
 ProtectorModuleBuilder::~ProtectorModuleBuilder()
@@ -38,12 +38,12 @@ ProtectorModuleBuilder::~ProtectorModuleBuilder()
 
 ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModuleTemplate(INTLONGEST id) const
 {
-	ProtectorModule* protector_module = nullptr;
-	
-	if (id == NONE_ID)
-	{
-		id = EntityIdGenerator::Instance().GetNextId();
-	}
+    ProtectorModule* protector_module = nullptr;
+    
+    if (id == NONE_ID)
+    {
+        id = EntityIdGenerator::Instance().GetNextId();
+    }
 
     try 
     { 
@@ -61,16 +61,16 @@ ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModuleTemplate(INTLONGES
 
 ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModule(int protection_add) const
 {
-	ProtectorModule* protector_module = GetNewProtectorModuleTemplate();
-	CreateNewInternals(protector_module, protection_add);
+    ProtectorModule* protector_module = GetNewProtectorModuleTemplate();
+    CreateNewInternals(protector_module, protection_add);
         
         return protector_module;
 } 
-        	
+            
 void ProtectorModuleBuilder::CreateNewInternals(ProtectorModule* protector_module, int protection_add) const
 {     
-    	TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);   
-    	protection_add = getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
+        TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);   
+        protection_add = getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
     
         protector_module->SetParentSubTypeId(TYPE::ENTITY::PROTECTOR_EQUIPMENT_ID);    
         protector_module->BindData2D(texOb);

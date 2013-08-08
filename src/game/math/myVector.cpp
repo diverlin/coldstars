@@ -48,33 +48,33 @@ float distanceBetween(float x1, float y1, float x2, float y2)
 
 Vec2<float> getVec2f(float length, float angle)
 {
-    	angle *= DEGREE_TO_RADIAN_RATE;	
-    	Vec2<float> vec(length*sin(angle), length*cos(angle));
-    	
-    	return vec;
+        angle *= DEGREE_TO_RADIAN_RATE;    
+        Vec2<float> vec(length*sin(angle), length*cos(angle));
+        
+        return vec;
 }
 
 Vec3<float> getVec3f(float length, float angle, float pos_z)
 {
-    	angle *= DEGREE_TO_RADIAN_RATE;	
-    	Vec3<float> vec(length*sin(angle), length*cos(angle), pos_z);
-    	
-    	return vec;
+        angle *= DEGREE_TO_RADIAN_RATE;    
+        Vec3<float> vec(length*sin(angle), length*cos(angle), pos_z);
+        
+        return vec;
 }
 
 float getAngleInD(const Vec2<float>& v_start, const Vec2<float> v_end)
 {
-	return atan2(v_start.y - v_end.y, v_start.x - v_end.x) * RADIAN_TO_DEGREE_RATE;
+    return atan2(v_start.y - v_end.y, v_start.x - v_end.x) * RADIAN_TO_DEGREE_RATE;
 }
 
 float getAngleBetweenUnits(const Vec3<float>& v1, const Vec3<float>& v2)
 {
-	return acos(dotUnits(v1, v2)) * RADIAN_TO_DEGREE_RATE;
+    return acos(dotUnits(v1, v2)) * RADIAN_TO_DEGREE_RATE;
 }
 
 float dotUnits(const Vec3<float>& v1, const Vec3<float>& v2)
 {
-	return (v1.x*v2.x + v1.y*v2.y + v1.z*v2.z);
+    return (v1.x*v2.x + v1.y*v2.y + v1.z*v2.z);
 }
 
 Vec2<float> getRandVec2f(int radius_min, int radius_max)

@@ -25,12 +25,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class AiModelConqueror : public BaseAiModel
 {
-	public:
-		AiModelConqueror();
-		virtual ~AiModelConqueror();
-		
-		virtual void UpdateInStatic(Npc*) const;
-		virtual std::string GetDescription(Npc*) const;
+    public:
+        AiModelConqueror();
+        virtual ~AiModelConqueror();
+        
+        virtual void UpdateInStatic(Npc*) const;
+        virtual std::string GetDescription(Npc*) const;
 }; 
 
 

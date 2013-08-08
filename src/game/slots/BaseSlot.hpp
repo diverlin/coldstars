@@ -30,32 +30,32 @@ class TextureOb;
 
 struct UnresolvedDataUniqueBaseSlot
 {
-	UnresolvedDataUniqueBaseSlot():owner_id(NONE_ID) 
-	{};
-	
-	INTLONGEST owner_id;    
+    UnresolvedDataUniqueBaseSlot():owner_id(NONE_ID) 
+    {};
+    
+    INTLONGEST owner_id;    
 };
 
 
 class BaseSlot : public Base
 {   
-	public:        
-		BaseSlot();
-		virtual ~BaseSlot();
+    public:        
+        BaseSlot();
+        virtual ~BaseSlot();
                 
-		void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
-		void SetOwner(Base* owner) { this->owner = owner; };
-		void SetPosition(const Vec2<float>& position) { this->position = position; };
-		void SelectEvent() { selected = true; };
-		void DeselectEvent() { selected = false; };
-				
-		bool GetSelected() const { return selected; };
-		
-		const Vec2<float>& GetPosition() const { return position; };
-		
-		Vehicle* GetOwnerVehicle() const { return (Vehicle*)owner; };
-		Base* GetOwner() const { return owner; };
-		
+        void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
+        void SetOwner(Base* owner) { this->owner = owner; };
+        void SetPosition(const Vec2<float>& position) { this->position = position; };
+        void SelectEvent() { selected = true; };
+        void DeselectEvent() { selected = false; };
+                
+        bool GetSelected() const { return selected; };
+        
+        const Vec2<float>& GetPosition() const { return position; };
+        
+        Vehicle* GetOwnerVehicle() const { return (Vehicle*)owner; };
+        Base* GetOwner() const { return owner; };
+        
     protected:        
         bool selected;                     
         
@@ -67,8 +67,8 @@ class BaseSlot : public Base
      
         UnresolvedDataUniqueBaseSlot unresolved_BaseSlot;
         void SaveDataUniqueBaseSlot(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueBaseSlot(const boost::property_tree::ptree&);
-		void ResolveDataUniqueBaseSlot();
+        void LoadDataUniqueBaseSlot(const boost::property_tree::ptree&);
+        void ResolveDataUniqueBaseSlot();
 }; 
 
 #endif

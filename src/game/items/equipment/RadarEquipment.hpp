@@ -24,32 +24,32 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class RadarEquipment : public BaseEquipment
 {
-   	public:
-      		RadarEquipment(int);
-  		virtual ~RadarEquipment();
+       public:
+              RadarEquipment(int);
+          virtual ~RadarEquipment();
 
-      		void SetRadiusOrig(int radius_orig)   { this->radius_orig = radius_orig; }; 
-      		int GetRadius() const { return radius; };
+              void SetRadiusOrig(int radius_orig)   { this->radius_orig = radius_orig; }; 
+              int GetRadius() const { return radius; };
 
-      		virtual void UpdateProperties();
-      		
+              virtual void UpdateProperties();
+              
                 void CountPrice();
-      		   
-      		virtual void SaveData(boost::property_tree::ptree&) const;
-		virtual void LoadData(const boost::property_tree::ptree&);
-		virtual void ResolveData();
-		   		
-      	private:
-      	      	int radius_orig;
-     		int radius_add;
-      		int radius;
+                 
+              virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void LoadData(const boost::property_tree::ptree&);
+        virtual void ResolveData();
+                   
+          private:
+                    int radius_orig;
+             int radius_add;
+              int radius;
 
-     		void virtual AddUniqueInfo();
-       		std::string GetRadiusStr();
+             void virtual AddUniqueInfo();
+               std::string GetRadiusStr();
                 
                 void SaveDataUniqueRadarEquipment(boost::property_tree::ptree&, const std::string&) const;
-		void LoadDataUniqueRadarEquipment(const boost::property_tree::ptree&);
-		void ResolveDataUniqueRadarEquipment();  
+        void LoadDataUniqueRadarEquipment(const boost::property_tree::ptree&);
+        void ResolveDataUniqueRadarEquipment();  
 };
 
 #endif 

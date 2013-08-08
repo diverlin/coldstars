@@ -108,7 +108,7 @@ void Planet::UpdateInfo()
     
     GetInfo().addTitleStr("PLANET");
     GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()));
-    GetInfo().addNameStr("armor:");  	  GetInfo().addValueStr(int2str(GetDataLife().armor));
+    GetInfo().addNameStr("armor:");        GetInfo().addValueStr(int2str(GetDataLife().armor));
     GetInfo().addNameStr("population:");  GetInfo().addValueStr(int2str(m_Population));
     GetInfo().addNameStr("dock_veh:");    GetInfo().addValueStr(m_Land->GetDockVehicleStr());
     GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
@@ -149,7 +149,7 @@ void Planet::LoadDataUniquePlanet(const boost::property_tree::ptree& load_ptree)
     #endif
     
     //race_id = SaveManager::Instance().Get<int>(root+"race_id");
-    m_Population = load_ptree.get<unsigned int>("population");	
+    m_Population = load_ptree.get<unsigned int>("population");    
 }
 
 void Planet::ResolveDataUniquePlanet()
@@ -162,7 +162,7 @@ void Planet::ResolveDataUniquePlanet()
 }
 
 /* virtual override final */
-void Planet::SaveData(boost::property_tree::ptree& save_ptree) const		
+void Planet::SaveData(boost::property_tree::ptree& save_ptree) const        
 {
     std::string root = "planet." + int2str(GetId())+".";
     SaveDataUniqueBase(save_ptree, root);

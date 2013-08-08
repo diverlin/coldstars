@@ -1,19 +1,19 @@
 /*
-	Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
-	
-	This program is free software; you can redistribute it and/or
-	modify it under the terms of the GNU General Public License
-	as published by the Free Software Foundation; either version 2
-	of the License, or (at your option) any later version.
-	
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-	
-	You should have received a copy of the GNU General Public License
-	along with this program; if not, write to the Free Software
-	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+    Copyright (C) ColdStars, Aleksandr Pivovarov <<coldstars8@gmail.com>>
+    
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License
+    as published by the Free Software Foundation; either version 2
+    of the License, or (at your option) any later version.
+    
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+    
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
@@ -29,22 +29,22 @@
 
 
 SpaceStationBuilder& SpaceStationBuilder::Instance()
-{	
-	static SpaceStationBuilder instance;
-	return instance;
-}	
+{    
+    static SpaceStationBuilder instance;
+    return instance;
+}    
 
 SpaceStationBuilder::~SpaceStationBuilder() {}
 
 SpaceStation* SpaceStationBuilder::GetNewSpaceStationTemplate(INTLONGEST id) const
 {
-	SpaceStation* spacestation = nullptr;
-	if (id == NONE_ID)
-	{
-		id = EntityIdGenerator::Instance().GetNextId();
-	}
-	        
-	try 
+    SpaceStation* spacestation = nullptr;
+    if (id == NONE_ID)
+    {
+        id = EntityIdGenerator::Instance().GetNextId();
+    }
+            
+    try 
     { 
         spacestation = new SpaceStation(id);
     }
@@ -60,7 +60,7 @@ SpaceStation* SpaceStationBuilder::GetNewSpaceStationTemplate(INTLONGEST id) con
 
 SpaceStation* SpaceStationBuilder::GetNewSpaceStation() const
 {
-	SpaceStation* spacestation = GetNewSpaceStationTemplate();
+    SpaceStation* spacestation = GetNewSpaceStationTemplate();
     CreateNewInternals(spacestation);
     
     return spacestation;
@@ -68,17 +68,17 @@ SpaceStation* SpaceStationBuilder::GetNewSpaceStation() const
 
 void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 {
-	Mesh* mesh = nullptr;
-	TextureOb* texOb = nullptr;
-	if (getRandInt(0, 1))
-	{
+    Mesh* mesh = nullptr;
+    TextureOb* texOb = nullptr;
+    if (getRandInt(0, 1))
+    {
         texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SPACESTATION_ID); 
     }
     else
-    {	
+    {    
         mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPACESTATION_ID);
-		texOb = mesh->GetTextureOb(); 
-	}
+        texOb = mesh->GetTextureOb(); 
+    }
     
     int protection_rate = 50;
     //if (subtype_id == ENTITY::WARRIOR_ID)
@@ -125,21 +125,21 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     spacestation->SetKorpusData(data_korpus);
     spacestation->SetLifeData(data_life);
 
-	if (mesh != nullptr)
-	{
-		float scale_comp = getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX);
-		Vec3<float> scale(scale_comp, scale_comp, scale_comp);
-		spacestation->BindData3D(mesh, mesh->GetTextureOb(), scale);
-		
-		float step = getRandInt(10, 40)*0.01;
-		AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);
-		spacestation->SetRenderAnimation(animation_program);
-		spacestation->SetAngle(Vec3<float>(0, getRandInt(10, 45), getRandInt(10, 45)));	
-		spacestation->SetZYX(true);		
+    if (mesh != nullptr)
+    {
+        float scale_comp = getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX);
+        Vec3<float> scale(scale_comp, scale_comp, scale_comp);
+        spacestation->BindData3D(mesh, mesh->GetTextureOb(), scale);
+        
+        float step = getRandInt(10, 40)*0.01;
+        AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);
+        spacestation->SetRenderAnimation(animation_program);
+        spacestation->SetAngle(Vec3<float>(0, getRandInt(10, 45), getRandInt(10, 45)));    
+        spacestation->SetZYX(true);        
     }
     else
     {
-        spacestation->BindData2D(texOb);    		
+        spacestation->BindData2D(texOb);            
     }
     
     spacestation->SetMass(getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));
@@ -149,5 +149,5 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     
     CreateItemSlots(spacestation);
                 
-	spacestation->BindLand(KosmoportBuilder::Instance().GetNewKosmoport());
+    spacestation->BindLand(KosmoportBuilder::Instance().GetNewKosmoport());
 }

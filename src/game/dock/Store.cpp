@@ -31,8 +31,8 @@
 
 Store::Store(int id)
 {
-	SetId(id);
-	SetTypeId(TYPE::ENTITY::STORE_ID);
+    SetId(id);
+    SetTypeId(TYPE::ENTITY::STORE_ID);
 }
 
 Store::~Store()
@@ -40,52 +40,52 @@ Store::~Store()
 
 /* virtual */
 void Store::PutChildsToGarbage() const
-{			
-	for(unsigned int i=0; i<item_slot_vec.size(); i++)
-	{
-		EntityGarbage::Instance().Add(item_slot_vec[i]);
-	}
+{            
+    for(unsigned int i=0; i<item_slot_vec.size(); i++)
+    {
+        EntityGarbage::Instance().Add(item_slot_vec[i]);
+    }
 }
 
 void Store::AddItemSlot(ItemSlot* item_slot) 
 { 
-	item_slot->SetOwner(this);
-	item_slot_vec.push_back(item_slot); 
+    item_slot->SetOwner(this);
+    item_slot_vec.push_back(item_slot); 
 };     
 
 void Store::AddVehicleSlot(VehicleSlot* vehicle_slot) 
 { 
-	vehicle_slot->SetOwner(this);
-	vehicle_slot_vec.push_back(vehicle_slot); 
+    vehicle_slot->SetOwner(this);
+    vehicle_slot_vec.push_back(vehicle_slot); 
 }; 
-		
+        
 bool Store::AddItem(BaseItem* item)
 {
-	ItemSlot* item_slot = GetEmptyItemSlot();
-	if (item_slot) 
-	{
-		item_slot->InsertItem(item);
-		return true;
-	}
-	     
-	return true;
+    ItemSlot* item_slot = GetEmptyItemSlot();
+    if (item_slot) 
+    {
+        item_slot->InsertItem(item);
+        return true;
+    }
+         
+    return true;
 }
 
 bool Store::AddVehicle(Vehicle* vehicle)
 {
-	VehicleSlot* vehicle_slot = GetEmptyVehicleSlot();
-	if (vehicle_slot) 
-	{
-		//vehicle->SetLand(GetOwnerKosmoport());        
-        	//if (vehicle->GetStarSystem() == nullptr) // used if vehicle added directly after creation
-        	//{
-                	//vehicle->SetStarSystem(GetOwnerKosmoport()->GetOwner()->GetStarSystem());
-        	//}        
-		vehicle_slot->InsertVehicle(vehicle);
-		return true;
-	}
-	     
-	return true;
+    VehicleSlot* vehicle_slot = GetEmptyVehicleSlot();
+    if (vehicle_slot) 
+    {
+        //vehicle->SetLand(GetOwnerKosmoport());        
+            //if (vehicle->GetStarSystem() == nullptr) // used if vehicle added directly after creation
+            //{
+                    //vehicle->SetStarSystem(GetOwnerKosmoport()->GetOwner()->GetStarSystem());
+            //}        
+        vehicle_slot->InsertVehicle(vehicle);
+        return true;
+    }
+         
+    return true;
 }
 
 ItemSlot* Store::GetEmptyItemSlot() const
@@ -95,7 +95,7 @@ ItemSlot* Store::GetEmptyItemSlot() const
                 if (item_slot_vec[i]->GetItem() == nullptr)
                 {
                         return item_slot_vec[i];
-        	}
+            }
         }
       
         return nullptr;
@@ -108,7 +108,7 @@ VehicleSlot* Store::GetEmptyVehicleSlot() const
                 if (vehicle_slot_vec[i]->GetVehicle() == nullptr)
                 {
                         return vehicle_slot_vec[i];
-        	}
+            }
         }
       
         return nullptr;
@@ -116,66 +116,66 @@ VehicleSlot* Store::GetEmptyVehicleSlot() const
 
 int Store::BuyItem(BaseItem* item)
 {
-	ItemSlot* item_slot = GetEmptyItemSlot();	
-	if (item_slot != nullptr)
-	{
-		if (item_slot->InsertItem(item) == true)
-		{
-			return item->GetPrice();
-		}
-	}
+    ItemSlot* item_slot = GetEmptyItemSlot();    
+    if (item_slot != nullptr)
+    {
+        if (item_slot->InsertItem(item) == true)
+        {
+            return item->GetPrice();
+        }
+    }
 
     return 0;
 }
 
 void Store::SellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
 {
-	vehicle_slot->GetVehicle()->GetAllItemsFromVehicle(npc->GetVehicle());
-	vehicle_slot->GetVehicle()->SetStarSystem(npc->GetVehicle()->GetStarSystem());
-	vehicle_slot->GetVehicle()->SetLand(npc->GetVehicle()->GetLand());
-	vehicle_slot->GetVehicle()->SetPlaceTypeId(TYPE::PLACE::KOSMOPORT_ID);
-	
-	VehicleSlot* npc_vehicle_slot = npc->GetVehicle()->GetParentVehicleSlot();
-	npc->GetVehicle()->GetParentVehicleSlot()->SwapVehicle(vehicle_slot);
-	npc_vehicle_slot->GetVehicle()->BindOwnerNpc(npc);  
-		
-	npc->WithdrawCredits(price);  	
+    vehicle_slot->GetVehicle()->GetAllItemsFromVehicle(npc->GetVehicle());
+    vehicle_slot->GetVehicle()->SetStarSystem(npc->GetVehicle()->GetStarSystem());
+    vehicle_slot->GetVehicle()->SetLand(npc->GetVehicle()->GetLand());
+    vehicle_slot->GetVehicle()->SetPlaceTypeId(TYPE::PLACE::KOSMOPORT_ID);
+    
+    VehicleSlot* npc_vehicle_slot = npc->GetVehicle()->GetParentVehicleSlot();
+    npc->GetVehicle()->GetParentVehicleSlot()->SwapVehicle(vehicle_slot);
+    npc_vehicle_slot->GetVehicle()->BindOwnerNpc(npc);  
+        
+    npc->WithdrawCredits(price);      
 }
                 
 
 void Store::SaveDataUniqueStore(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-	//save_ptree.put(root+"unresolved.angar_id",     angar->GetId());
+    //save_ptree.put(root+"unresolved.angar_id",     angar->GetId());
 }
 
 void Store::LoadDataUniqueStore(const boost::property_tree::ptree& load_ptree)
 {
-	//data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
+    //data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
 }
 
 void Store::ResolveDataUniqueStore()
 {
-	((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindStore(this); 
+    ((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindStore(this); 
 }
 
 void Store::SaveData(boost::property_tree::ptree& save_ptree) const
 {
-	std::string root = "store." + int2str(GetId())+".";
-	SaveDataUniqueBase(save_ptree, root);
-	SaveDataUniqueRoom(save_ptree, root);
-	SaveDataUniqueStore(save_ptree, root);
+    std::string root = "store." + int2str(GetId())+".";
+    SaveDataUniqueBase(save_ptree, root);
+    SaveDataUniqueRoom(save_ptree, root);
+    SaveDataUniqueStore(save_ptree, root);
 }
 
 void Store::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-	LoadDataUniqueBase(load_ptree);
-	LoadDataUniqueRoom(load_ptree);
-	LoadDataUniqueStore(load_ptree);
+    LoadDataUniqueBase(load_ptree);
+    LoadDataUniqueRoom(load_ptree);
+    LoadDataUniqueStore(load_ptree);
 }
 
 void Store::ResolveData()
 {
-	ResolveDataUniqueBase();
-	ResolveDataUniqueRoom();
-	ResolveDataUniqueStore();
+    ResolveDataUniqueBase();
+    ResolveDataUniqueRoom();
+    ResolveDataUniqueStore();
 }

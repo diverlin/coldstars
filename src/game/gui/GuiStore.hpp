@@ -32,21 +32,21 @@ class GuiStore : public BaseGuiElement
         public:
                 GuiStore();                      
                 ~GuiStore();
-		
-		void BindStore(Store*);
-		void UnbindStore();
+        
+        void BindStore(Store*);
+        void UnbindStore();
                 
                 Store* GetStore() const { return store; };
                 
                 bool UpdateMouseInteraction(const MouseData&);
 
-        	void RenderSlots(int) const;                
+            void RenderSlots(int) const;                
                 
         private:
                 Store* store;
         
-              	std::vector<GuiPair<Rect, ItemSlot*>> rect_itemslot_vec;          
-              	std::vector<GuiPair<Rect, VehicleSlot*>> rect_vehicleslot_vec;
+                  std::vector<GuiPair<Rect, ItemSlot*>> rect_itemslot_vec;          
+                  std::vector<GuiPair<Rect, VehicleSlot*>> rect_vehicleslot_vec;
 };
 
 #endif
