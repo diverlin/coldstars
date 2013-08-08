@@ -79,36 +79,36 @@ float dotUnits(const Vec3<float>& v1, const Vec3<float>& v2)
 
 Vec2<float> getRandVec2f(int radius_min, int radius_max)
 {
-    	float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
-    	int len = getRandInt(radius_min, radius_max);
-   
- 	Vec2<float> v(sin(alpha) * len, cos(alpha) * len);
-    	
-    	return v;
+    float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
+    int len = getRandInt(radius_min, radius_max);
+    
+    Vec2<float> v(sin(alpha) * len, cos(alpha) * len);
+    
+    return v;
 }
 
 Vec3<float> getRandXYVec3f(int radius_min, int radius_max, float z)
 {
-    	float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
-    	int len = getRandInt(radius_min, radius_max);
-   
- 	Vec3<float> v(sin(alpha)*len, cos(alpha)*len, z);
-    	
-    	return v;
+    float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
+    int len = getRandInt(radius_min, radius_max);
+    
+    Vec3<float> v(sin(alpha)*len, cos(alpha)*len, z);
+    
+    return v;
 }
 
 Vec3<float> getRandXYVec3Unit()
 {
-    	float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
-	Vec3<float> v(sin(alpha), cos(alpha), 0.0);
-    	
-    	return v;
+    float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
+    Vec3<float> v(sin(alpha), cos(alpha), 0.0);
+    
+    return v;
 }
 
 Vec3<float> getXYVec3Unit(float alpha)
-{	
-	alpha *= DEGREE_TO_RADIAN_RATE;
-	Vec3<float> v(sin(alpha), cos(alpha), 0.0);
-    	
-    	return v;
+{
+    alpha *= DEGREE_TO_RADIAN_RATE;
+    Vec3<float> v(sin(alpha), cos(alpha), 0.0);
+    
+    return v;
 }

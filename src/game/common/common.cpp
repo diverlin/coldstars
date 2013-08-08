@@ -169,14 +169,14 @@ bool get_dPos_ToPoint(const Vec3<float>& p1, const Vec3<float>& p2, float veloci
 
 Color4<float> getColor4fById(int color_id)
 {
-	Color4<float> color;
+    Color4<float> color;
     switch(color_id)
-    {	
+    {
         case COLOR::YELLOW_ID:
         {
             color.r = 255/255.0;
             color.g = 255/255.0;
-            color.b = 235/255.0;
+            color.b = 0/255.0; // 235
             color.a = 1.0;
             
             break;
@@ -184,14 +184,14 @@ Color4<float> getColor4fById(int color_id)
 
         case COLOR::BLUE_ID:
         {
-            color.r = 220/255.0;
+            color.r = 0/255.0; // 220
             color.g = 255/255.0;
             color.b = 255/255.0;
             color.a = 1.0;
             
             break;
         }
-	}
-	
-	return color;
+    }
+    
+    return color;
 }

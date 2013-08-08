@@ -163,7 +163,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
 					satellite->BindOwnerNpc(npc);
 				}
 			
-				Vec3<float> orbit_center(0, 0, -500);
+				Vec3<float> orbit_center(0, 0, DEFAULT_ENTITY_ZPOS);
 				Vec3<float> angle(0,0,0);
 				planet->GetStarSystem()->AddVehicle(satellite, orbit_center, angle, planet);
 			}
