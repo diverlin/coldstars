@@ -279,9 +279,9 @@ namespace COLOR
 	};
 	
 	const Color4<float> COLOR4F_WHITE(1.0, 1.0, 1.0, 1.0);
-	const Color4<int> COLOR4I_WHITE(255, 255, 255, 255);	
+	const Color4<int> COLOR4I_WHITE(255, 255, 255, 255);
 	const Color4<int> COLOR4I_RED_LIGHT(255, 128, 128, 255);
-	const Color4<int> COLOR4I_BLUE_LIGHT(128, 128, 255, 255); 	
+	const Color4<int> COLOR4I_BLUE_LIGHT(128, 128, 255, 255);
 		
 
 }

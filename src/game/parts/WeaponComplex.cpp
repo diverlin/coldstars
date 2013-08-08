@@ -170,14 +170,14 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 {                 
     #if WEAPONSTARGET_LOG_ENABLED == 1 
     if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP); 
-	else                        Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " item_subtype_id=" + getTypeStr(item_slot->GetItem()->GetSubTypeId()) + " id=" + int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
-	#endif   
-	
-	target->TakeIntoAccountAgressor(owner_vehicle);
-	
+    else                        Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " item_subtype_id=" + getTypeStr(item_slot->GetItem()->GetSubTypeId()) + " id=" + int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
+    #endif   
+
+    target->TakeIntoAccountAgressor(owner_vehicle);
+
     for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
-		ItemSlot& weapon_slot = *slot_weapon_vec[i]; // shortcut
+        ItemSlot& weapon_slot = *slot_weapon_vec[i]; // shortcut
         if (weapon_slot.GetSelected() == true )
         {
             if (weapon_slot.GetItem() != nullptr)
@@ -191,15 +191,17 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
                         {
                             weapon_slot.SetTarget(target, item_slot);
                         }
+                        #if WEAPONSTARGET_LOG_ENABLED == 1 
                         else
                         {
-                            std::cout<<"blabla="<<(int)weapon_slot.CheckTarget(target)<<std::endl; 
+                            Logger::Instance().Log(getTargetStatusStr(status), WEAPONSTARGET_LOG_DIP); 
                         }
+                        #endif 
                     }
                 } 
             }
-		}
-	}
+        }
+    }
 }
 
 void WeaponComplex::Fire(int timer, float attack_rate, bool show_effect)

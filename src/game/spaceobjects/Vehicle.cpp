@@ -953,11 +953,11 @@ void Vehicle::UpdatePropertiesRadar()
 
 void Vehicle::UpdatePropertiesJump()
 {
-	#if ITEMINFLUENCE_LOG_ENABLED == 1
-	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::UpdatePropertiesJump", ITEMINFLUENCE_LOG_DIP);
-	#endif
-	    
-	m_Properties.hyper = 0;
+    #if ITEMINFLUENCE_LOG_ENABLED == 1
+    Logger::Instance().Log("Vehicle("+int2str(GetId())+")::UpdatePropertiesJump", ITEMINFLUENCE_LOG_DIP);
+    #endif
+        
+    m_Properties.hyper = 0;
 
     if (m_ComplexDrive.GetDriveSlot() != nullptr)
     {
@@ -989,12 +989,12 @@ void Vehicle::UpdatePropertiesJump()
 
 void Vehicle::UpdatePropertiesEnergy()
 {
-	#if ITEMINFLUENCE_LOG_ENABLED == 1
-	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::UpdatePropertiesEnergy", ITEMINFLUENCE_LOG_DIP);
-	#endif
-	
+    #if ITEMINFLUENCE_LOG_ENABLED == 1
+    Logger::Instance().Log("Vehicle("+int2str(GetId())+")::UpdatePropertiesEnergy", ITEMINFLUENCE_LOG_DIP);
+    #endif
+    
     m_Properties.energy = 0;
-	m_Properties.hibernate_mode_enabled = true;
+    m_Properties.hibernate_mode_enabled = true;
 
     if (m_SlotEnergizer->GetItem() != nullptr)
     {
@@ -1010,15 +1010,15 @@ void Vehicle::UpdatePropertiesEnergy()
 
 void Vehicle::UpdatePropertiesProtection()
 {
-	#if ITEMINFLUENCE_LOG_ENABLED == 1
-	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::UpdatePropertiesProtection", ITEMINFLUENCE_LOG_DIP);
-	#endif
-	
+    #if ITEMINFLUENCE_LOG_ENABLED == 1
+    Logger::Instance().Log("Vehicle("+int2str(GetId())+")::UpdatePropertiesProtection", ITEMINFLUENCE_LOG_DIP);
+    #endif
+    
     m_Properties.protection = m_DataKorpus.protection;
     m_Properties.shield_effect_enabled = false;
 
-	if (m_Properties.hibernate_mode_enabled == false)
-	{
+    if (m_Properties.hibernate_mode_enabled == false)
+    {
         if (m_ComplexProtector.GetProtectorSlot()->GetItem() != nullptr)
         {
             if (m_ComplexProtector.GetProtectorSlot()->GetProtectorEquipment()->GetFunctioning() == true)
@@ -1028,7 +1028,7 @@ void Vehicle::UpdatePropertiesProtection()
             }
         }
     }
-     	
+
     if (m_Properties.artefact_protection > 0)
     {
         m_Properties.protection += m_Properties.artefact_protection;
@@ -1037,10 +1037,10 @@ void Vehicle::UpdatePropertiesProtection()
 
 void Vehicle::UpdatePropertiesRepair()
 {
-	#if ITEMINFLUENCE_LOG_ENABLED == 1
-	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::UpdatePropertiesRepair", ITEMINFLUENCE_LOG_DIP);
-	#endif
-	
+    #if ITEMINFLUENCE_LOG_ENABLED == 1
+    Logger::Instance().Log("Vehicle("+int2str(GetId())+")::UpdatePropertiesRepair", ITEMINFLUENCE_LOG_DIP);
+    #endif
+    
     m_Properties.repair = 0;
 
     if (m_SlotDroid->GetItem() != nullptr)
@@ -1055,24 +1055,24 @@ void Vehicle::UpdatePropertiesRepair()
 
 void Vehicle::IncreaseArmor(int repair)
 {
-	#if ITEMINFLUENCE_LOG_ENABLED == 1
-	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::IncreaseArmor", ITEMINFLUENCE_LOG_DIP);
-	#endif
-	
-	GetDataLife().armor += repair;
-	
-	if (GetDataLife().armor > m_DataKorpus.armor)
-	{
-		GetDataLife().armor = m_DataKorpus.armor;
-	}
+    #if ITEMINFLUENCE_LOG_ENABLED == 1
+    Logger::Instance().Log("Vehicle("+int2str(GetId())+")::IncreaseArmor", ITEMINFLUENCE_LOG_DIP);
+    #endif
+    
+    GetDataLife().armor += repair;
+    
+    if (GetDataLife().armor > m_DataKorpus.armor)
+    {
+        GetDataLife().armor = m_DataKorpus.armor;
+    }
 }
 
 void Vehicle::UpdatePropertiesFreeze()
 {
-	#if ITEMINFLUENCE_LOG_ENABLED == 1
-	Logger::Instance().Log("Vehicle("+int2str(GetId())+")::UpdatePropertiesFreeze", ITEMINFLUENCE_LOG_DIP);
-	#endif
-	
+    #if ITEMINFLUENCE_LOG_ENABLED == 1
+    Logger::Instance().Log("Vehicle("+int2str(GetId())+")::UpdatePropertiesFreeze", ITEMINFLUENCE_LOG_DIP);
+    #endif
+    
     m_Properties.freeze = 0;
 
     if (m_SlotFreezer->GetItem() != nullptr)

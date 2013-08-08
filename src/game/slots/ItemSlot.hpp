@@ -20,6 +20,7 @@
 #ifndef ITEMSLOT_HPP
 #define ITEMSLOT_HPP
 
+#include <string>
 #include <types/MyInt.hpp>
 #include <slots/BaseSlot.hpp>
 #include <render/PathVisual.hpp>  // !!!
@@ -59,6 +60,8 @@ class Box2D;
 
 
 enum class TARGET_STATUS { NOTALIVE = 1, NOTINSPACE, WRONG_STARSYSTEM, UNREACHABLE_DISTANCE, OK };
+
+std::string getTargetStatusStr(TARGET_STATUS);
 
 
 struct UnresolvedDataUniqueItemSlot

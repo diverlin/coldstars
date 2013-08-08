@@ -46,6 +46,21 @@
 #include "../world/EntityManager.hpp"
 
 
+std::string getTargetStatusStr(TARGET_STATUS status)
+{
+    switch(status)
+    {
+        case TARGET_STATUS::NOTALIVE:               { return "TARGET_STATUS::NOTALIVE"; break; }
+        case TARGET_STATUS::NOTINSPACE:             { return "TARGET_STATUS::NOTINSPACE"; break; }
+        case TARGET_STATUS::WRONG_STARSYSTEM:       { return "TARGET_STATUS::WRONG_STARSYSTEM"; break; }
+        case TARGET_STATUS::UNREACHABLE_DISTANCE:   { return "TARGET_STATUS::UNREACHABLE_DISTANCE"; break; }
+        case TARGET_STATUS::OK:                     { return "TARGET_STATUS::OK"; break; }
+        
+        default: { return "TARGET_STATUS::UNKNOWN"; break; }
+    }
+}
+
+
 ItemSlot::ItemSlot(INTLONGEST id, TYPE::ENTITY subtype_id)
 :
 m_Turrel(nullptr),	      
