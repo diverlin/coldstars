@@ -46,21 +46,6 @@
 #include "../world/EntityManager.hpp"
 
 
-std::string getTargetStatusStr(TARGET_STATUS status)
-{
-    switch(status)
-    {
-        case TARGET_STATUS::NOTALIVE:               { return "TARGET_STATUS::NOTALIVE"; break; }
-        case TARGET_STATUS::NOTINSPACE:             { return "TARGET_STATUS::NOTINSPACE"; break; }
-        case TARGET_STATUS::WRONG_STARSYSTEM:       { return "TARGET_STATUS::WRONG_STARSYSTEM"; break; }
-        case TARGET_STATUS::UNREACHABLE_DISTANCE:   { return "TARGET_STATUS::UNREACHABLE_DISTANCE"; break; }
-        case TARGET_STATUS::OK:                     { return "TARGET_STATUS::OK"; break; }
-        
-        default: { return "TARGET_STATUS::UNKNOWN"; break; }
-    }
-}
-
-
 ItemSlot::ItemSlot(INTLONGEST id, TYPE::ENTITY subtype_id)
 :
 m_Turrel(nullptr),          
@@ -103,7 +88,7 @@ void ItemSlot::SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget)
     #endif     
 }
         
-TARGET_STATUS ItemSlot::ValidateTarget()
+STATUS ItemSlot::ValidateTarget()
 {    
     #if WEAPONSTARGET_LOG_ENABLED == 1 
     Log("ValidateTarget");
@@ -421,8 +406,7 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
                 InsertItem(tmp_item);
             
                 return true;
-            }
-        
+            }        
         }
 
         if ( (m_Item->GetTypeId() == TYPE::ENTITY::MODULE_ID) and (slot->GetItem()->GetTypeId() == TYPE::ENTITY::EQUIPMENT_ID) )
@@ -465,7 +449,7 @@ bool ItemSlot::CheckSubTarget(ItemSlot* _subtarget) const
 }
 
 
-TARGET_STATUS ItemSlot::CheckTarget(BaseSpaceEntity* target) const
+STATUS ItemSlot::CheckTarget(BaseSpaceEntity* target) const
 {
     #if WEAPONSTARGET_LOG_ENABLED == 1 
     Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckTarget");
@@ -473,49 +457,49 @@ TARGET_STATUS ItemSlot::CheckTarget(BaseSpaceEntity* target) const
     
     if (IsTargetAlive(target) == false)
     {
-        return TARGET_STATUS::NOTALIVE;
+        return STATUS::TARGET_DEAD;
     }
         
     if (IsTargetInSpace(target) == false)
     {
-        return TARGET_STATUS::NOTINSPACE;
+        return STATUS::TARGET_NOTIN_SPACE;
     }
             
     if (IsTargetInSameStarSystem(target) == false)
     {
-        return TARGET_STATUS::WRONG_STARSYSTEM;        
+        return STATUS::TARGET_NOTIN_STARSYSTEM;        
     }
 
     if (CheckDistanceToTarget(target) == false)
     {
-        return TARGET_STATUS::UNREACHABLE_DISTANCE;
+        return STATUS::TARGET_OUTOF_RANGE;
     }
         
-    return TARGET_STATUS::OK;
+    return STATUS::TARGET_OK;
 }     
    
-TARGET_STATUS ItemSlot::CheckTargetPure(BaseSpaceEntity* target) const
+STATUS ItemSlot::CheckTargetPure(BaseSpaceEntity* target) const
 {
     #if WEAPONSTARGET_LOG_ENABLED == 1 
     Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckTarget");
     #endif     
-    
+
     if (IsTargetAlive(target) == false)
     {
-        return TARGET_STATUS::NOTALIVE;
+        return STATUS::TARGET_DEAD;
     }
         
     if (IsTargetInSpace(target) == false)
     {
-        return TARGET_STATUS::NOTINSPACE;
+        return STATUS::TARGET_NOTIN_SPACE;
     }
             
     if (IsTargetInSameStarSystem(target) == false)
     {
-        return TARGET_STATUS::WRONG_STARSYSTEM;        
+        return STATUS::TARGET_NOTIN_STARSYSTEM;        
     }
         
-    return TARGET_STATUS::OK;
+    return STATUS::TARGET_OK;
 } 
        
 bool ItemSlot::IsTargetAlive(BaseSpaceEntity* target) const

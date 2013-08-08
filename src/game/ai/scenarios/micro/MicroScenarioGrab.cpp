@@ -50,24 +50,20 @@ void MicroScenarioGrab::Enter(Npc* npc) const
 
 /* virtual */
 bool MicroScenarioGrab::Validate(Npc* npc) const
-{
-    // shortcut
-    BaseSpaceEntity* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();
+{   
+    // check equipment
+    STATUS equipment_status = npc->GetVehicle()->CheckGrabStatus();
     
-    // check if equipment is able to perform current task
-    bool euipment_is_ok = false;
-    if (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr)
+    if (equipment_status != STATUS::ITEM_OK)
     {
-        if (npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->GetFunctioning() == true)
-        {
-            euipment_is_ok = true;
-        }
+        return false;
     }
     
-    // check if target is ok
-    TARGET_STATUS target_status_code = npc->GetVehicle()->GetSlotGrapple()->CheckTargetPure(target);
+    // check target
+    BaseSpaceEntity* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();     // shortcut
+    STATUS target_status = npc->GetVehicle()->GetSlotGrapple()->CheckTargetPure(target);
         
-    if ( (euipment_is_ok == true) and (target_status_code == TARGET_STATUS::OK) )
+    if ( (equipment_status == STATUS::ITEM_OK) and (target_status == STATUS::TARGET_OK) )
     {
         return true;
     }
@@ -79,7 +75,7 @@ bool MicroScenarioGrab::Validate(Npc* npc) const
 void MicroScenarioGrab::UpdateInStaticInSpace(Npc* npc) const
 {
     BaseSpaceEntity* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();
-    if (npc->GetVehicle()->GetSlotGrapple()->CheckTarget(target) == TARGET_STATUS::OK)
+    if (npc->GetVehicle()->GetSlotGrapple()->CheckTarget(target) == STATUS::TARGET_OK)
     {
         npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->AddTarget(target);
     }
@@ -92,7 +88,7 @@ void MicroScenarioGrab::UpdateInDynamicInSpace(Npc* npc) const
 /* virtual */
 void MicroScenarioGrab::Exit(Npc* npc) const
 {
-        #if AISCENARIO_LOG_ENABLED == 1 
+    #if AISCENARIO_LOG_ENABLED == 1 
     Logger::Instance().Log("npc_id="+int2str(npc->GetId())+" EXIT MicroScenarioGrab"); 
     #endif    
 }

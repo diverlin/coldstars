@@ -17,11 +17,12 @@
 */
 
 
-#ifndef MICROSCENARIOGRAB_H
-#define MICROSCENARIOGRAB_H
+#ifndef MICROSCENARIOGRAB_HPP
+#define MICROSCENARIOGRAB_HPP
 
-#include "../BaseScenario.hpp"
-class Npc; //#include "../../../pilots/Npc.hpp"
+#include <ai/scenarios/BaseScenario.hpp>
+class Npc; 
+
 
 class MicroScenarioGrab : public BaseScenario
 {

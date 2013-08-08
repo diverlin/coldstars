@@ -20,8 +20,9 @@
 #ifndef ITEMSLOT_HPP
 #define ITEMSLOT_HPP
 
-#include <string>
 #include <types/MyInt.hpp>
+#include <types/StatusTypes.hpp>
+
 #include <slots/BaseSlot.hpp>
 #include <render/PathVisual.hpp>  // !!!
 
@@ -57,11 +58,6 @@ class Bomb;
 class GoodsPack; 
 
 class Box2D;
-
-
-enum class TARGET_STATUS { NOTALIVE = 1, NOTINSPACE, WRONG_STARSYSTEM, UNREACHABLE_DISTANCE, OK };
-
-std::string getTargetStatusStr(TARGET_STATUS);
 
 
 struct UnresolvedDataUniqueItemSlot
@@ -123,7 +119,7 @@ class ItemSlot : public BaseSlot
         bool InsertItem(BaseItem*);            
         void RemoveItem();
         
-        TARGET_STATUS ValidateTarget();                    
+        STATUS ValidateTarget();                    
         void ResetTarget();
         bool CheckAmmo() const;
         void FireEvent(float, bool);
@@ -143,8 +139,8 @@ class ItemSlot : public BaseSlot
         void DrawRange(const Vec3<float>&);
         
         bool CheckSubTarget(ItemSlot*) const;
-        TARGET_STATUS CheckTarget(BaseSpaceEntity*) const;
-        TARGET_STATUS CheckTargetPure(BaseSpaceEntity*) const;
+        STATUS CheckTarget(BaseSpaceEntity*) const;
+        STATUS CheckTargetPure(BaseSpaceEntity*) const;
                 
         void SelectEvent();
         void DeselectEvent();

@@ -1368,6 +1368,29 @@ bool Vehicle::TryToGenerateEnergy(int energy)
     return false;
 }
 
+STATUS Vehicle::CheckGrabStatus() const
+{
+    STATUS status = STATUS::ITEM_OK;
+    
+    if (m_SlotGrapple->GetItem() != nullptr)
+    {
+        if (m_SlotGrapple->GetGrappleEquipment()->GetDamaged() == true)
+        {  
+            status = STATUS::ITEM_DAMAGED;
+        }
+        
+        if (m_SlotGrapple->GetGrappleEquipment()->GetLocked() != 0)
+        {  
+            status = STATUS::ITEM_LOCKED;
+        }        
+    }
+    else
+    {
+        status = STATUS::ITEMSLOT_EMPTY;
+    }    
+
+    return status;    
+}
         
 void Vehicle::DropRandomItemToSpace()
 {

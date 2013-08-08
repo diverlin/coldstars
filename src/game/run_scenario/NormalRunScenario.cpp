@@ -45,12 +45,12 @@ void NormalRunScenario::Init(Player* player)
 {
     GalaxyDescription galaxy_description;
     galaxy_description.allow_invasion = true;
-    galaxy_description.sector_num = 10;
+    galaxy_description.sector_num = 1;
     
     for (int i=0; i<galaxy_description.sector_num; i++)
     {
         SectorDescription sector_description;
-        sector_description.starsystem_num = 3;
+        sector_description.starsystem_num = 2;
         
         for (int j=0; j<sector_description.starsystem_num; j++)        
         {

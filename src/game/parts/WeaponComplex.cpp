@@ -186,8 +186,8 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
                 {
                     if (weapon_slot.GetTarget() == nullptr)
                     {
-                        TARGET_STATUS status = weapon_slot.CheckTarget(target);
-                        if (status == TARGET_STATUS::OK)
+                        STATUS status = weapon_slot.CheckTarget(target);
+                        if (status == STATUS::TARGET_OK)
                         {
                             weapon_slot.SetTarget(target, item_slot);
                         }
@@ -213,7 +213,7 @@ void WeaponComplex::Fire(int timer, float attack_rate, bool show_effect)
             ItemSlot& weapon_slot = **it; // shortcut
             if (weapon_slot.GetTarget() != nullptr)
             {
-                if (weapon_slot.ValidateTarget() == TARGET_STATUS::OK)
+                if (weapon_slot.ValidateTarget() == STATUS::TARGET_OK)
                 {
                       weapon_slot.FireEvent(attack_rate, show_effect);
                     if (weapon_slot.GetSubTarget() == nullptr)
@@ -238,7 +238,7 @@ void WeaponComplex::ValidateAllWeaponsTarget()
     {
         if (slot_weapon_vec[i]->GetTarget() != nullptr) 
         {
-            if (slot_weapon_vec[i]->ValidateTarget() == TARGET_STATUS::OK)
+            if (slot_weapon_vec[i]->ValidateTarget() == STATUS::TARGET_OK)
             {
                 slot_weapon_vec[i]->ResetTarget();
             }

@@ -89,7 +89,7 @@ Cursor::~Cursor()
 
 void Cursor::Reset()
 {
-       m_DataMouse.left_click  = false;
+    m_DataMouse.left_click  = false;
     m_DataMouse.right_click = false;
     
     m_FocusedSpaceObject = nullptr;
@@ -98,6 +98,14 @@ void Cursor::Reset()
 
 void Cursor::Update(Player* player)
 {
+    if (m_FocusedSpaceObject != nullptr)
+    {
+        if (m_FocusedSpaceObject->GetAlive() == false)
+        {
+            m_FocusedSpaceObject = nullptr;
+        }
+    }
+        
     UpdateMouseStuff();
     
     m_Box.SetCenter(m_DataMouse.pos_screencoord.x, m_DataMouse.pos_screencoord.y);  
@@ -183,14 +191,14 @@ void Cursor::RenderFocusedObjectInfo() const
 {
     enable_BLEND();
     {
-        if (m_FocusedSpaceObject != nullptr)
-        {
-            m_FocusedSpaceObject->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC(), Screen::Instance().GetScale());
-        }
-        
         if (m_FocusedGuiElement != nullptr)
         {
             m_FocusedGuiElement->RenderInfo();
+        }
+        
+        if (m_FocusedSpaceObject != nullptr)
+        {
+            m_FocusedSpaceObject->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC(), Screen::Instance().GetScale());
         }
     }
     disable_BLEND();  
