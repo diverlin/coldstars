@@ -109,6 +109,7 @@ void Satellite::RenderInSpace(float scale)
     if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
     {
         RenderShieldEffect(1.0 - GetColor().a); 
+        GetStarSystem()->RestoreSceneColor();
     }
 }
 
