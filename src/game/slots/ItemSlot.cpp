@@ -102,7 +102,16 @@ STATUS ItemSlot::ValidateTarget()
         }
     }
     
-    return CheckTarget(m_Target);
+    STATUS status = CheckTarget(m_Target);
+    
+    #if WEAPONSTARGET_LOG_ENABLED == 1 
+    if (status != STATUS::OK)
+    {
+        Logger::Instance().Log(getTargetStatusStr(status), WEAPONSTARGET_LOG_DIP);
+    }
+    #endif  
+     
+    return status;
 }
 
 void ItemSlot::ResetTarget()
@@ -128,7 +137,7 @@ bool ItemSlot::CheckAmmo() const
 
 void ItemSlot::FireEvent(float attack_rate, bool show_effect)
 {    
-        #if WEAPONSTARGET_LOG_ENABLED == 1 
+    #if WEAPONSTARGET_LOG_ENABLED == 1 
     Log("FireEvent");
     #endif   
 
@@ -396,18 +405,15 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
 
     if ( (m_Item != nullptr) and (slot->GetItem() != nullptr) )
     {        
-        //if (item->GetTypeId() == slot->GetItem()->GetTypeId())
-        {
-            BaseItem* tmp_item = slot->GetItem();
-            if ( (slot->CheckItemInsertion(m_Item) == true) and (CheckItemInsertion(tmp_item) == true) )
-            {                  
-                slot->InsertItem(m_Item);
-                tmp_item->SetItemSlot(nullptr);
-                InsertItem(tmp_item);
-            
-                return true;
-            }        
-        }
+        BaseItem* tmp_item = slot->GetItem();
+        if ( (slot->CheckItemInsertion(m_Item) == true) and (CheckItemInsertion(tmp_item) == true) )
+        {                  
+            slot->InsertItem(m_Item);
+            tmp_item->SetItemSlot(nullptr);
+            InsertItem(tmp_item);
+        
+            return true;
+        }        
 
         if ( (m_Item->GetTypeId() == TYPE::ENTITY::MODULE_ID) and (slot->GetItem()->GetTypeId() == TYPE::ENTITY::EQUIPMENT_ID) )
         {
@@ -434,13 +440,13 @@ void ItemSlot::DrawRange(const Vec3<float>& offset)
     m_VisualPath.Draw(offset);
 }
 
-bool ItemSlot::CheckSubTarget(ItemSlot* _subtarget) const
+bool ItemSlot::CheckSubTarget(ItemSlot* subtarget) const
 {
     #if WEAPONSTARGET_LOG_ENABLED == 1 
-        Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckSubTarget");
+    Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckSubTarget", WEAPONSTARGET_LOG_DIP);
     #endif     
     
-    if (_subtarget->GetItem() != nullptr)
+    if (subtarget->GetItem() != nullptr)
     {
         return true;
     }
@@ -452,7 +458,7 @@ bool ItemSlot::CheckSubTarget(ItemSlot* _subtarget) const
 STATUS ItemSlot::CheckTarget(BaseSpaceEntity* target) const
 {
     #if WEAPONSTARGET_LOG_ENABLED == 1 
-    Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckTarget");
+    Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
     #endif     
     
     if (IsTargetAlive(target) == false)
@@ -481,7 +487,7 @@ STATUS ItemSlot::CheckTarget(BaseSpaceEntity* target) const
 STATUS ItemSlot::CheckTargetPure(BaseSpaceEntity* target) const
 {
     #if WEAPONSTARGET_LOG_ENABLED == 1 
-    Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckTarget");
+    Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
     #endif     
 
     if (IsTargetAlive(target) == false)
@@ -609,26 +615,13 @@ void ItemSlot::ResolveDataUniqueItemSlot()
 
 void ItemSlot::Log(const std::string& func_name) const
 {
-    Logger::Instance().Log("ItemSlot("+int2str(GetId())+")::"+func_name+GetDataTypeString());
+    std::string str = "ItemSlot(id="+int2str(GetId())+")::"+func_name+" "+GetDataTypeString();
     
-    if (owner != nullptr)
-    {
-        Logger::Instance().Log(" owner="+owner->GetDataTypeString(), WEAPONSTARGET_LOG_DIP); 
-    }
+    if (owner != nullptr)       { str += " owner:" + owner->GetDataTypeString(); }
+    if (m_Item != nullptr)      { str += " item:" + m_Item->GetDataTypeString();  }
+    if (m_Target != nullptr)    { str += " target:" + m_Target->GetDataTypeString();  }
+    if (m_Subtarget != nullptr) { str += " subtarget:" + m_Subtarget->GetDataTypeString(); }
     
-    if (m_Item != nullptr)
-    {
-        Logger::Instance().Log("item="+m_Item->GetDataTypeString(), WEAPONSTARGET_LOG_DIP); 
-    }
-    
-    if (m_Target != nullptr)
-    {
-        Logger::Instance().Log("target="+m_Target->GetDataTypeString(), WEAPONSTARGET_LOG_DIP);         
-    }
-    
-    if (m_Subtarget != nullptr)
-    {
-        Logger::Instance().Log("subtarget="+m_Subtarget->GetDataTypeString(), WEAPONSTARGET_LOG_DIP);     
-    }
+    Logger::Instance().Log(str, WEAPONSTARGET_LOG_DIP); 
 }
 

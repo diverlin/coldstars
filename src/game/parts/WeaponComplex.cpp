@@ -16,6 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "WeaponComplex.hpp"
 #include "../common/rand.hpp"
 #include "../common/Logger.hpp"
@@ -27,6 +28,7 @@
 #include "../parts/Turrel.hpp"
 #include "../items/BaseItem.hpp"
 #include "../slots/ItemSlot.hpp"
+
 
 WeaponComplex::WeaponComplex()
 { 
@@ -46,15 +48,15 @@ bool WeaponComplex::AddSlot(ItemSlot* slot)
                            
 ItemSlot* WeaponComplex::GetEmptyWeaponSlot() const
 {
-        for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
+    for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
+    {
+        if (slot_weapon_vec[i]->GetItem() == nullptr)
         {
-                if (slot_weapon_vec[i]->GetItem() == nullptr)
-                {
-                        return slot_weapon_vec[i];
-                }
+            return slot_weapon_vec[i];
         }
-        
-        return nullptr;
+    }
+    
+    return nullptr;
 }
 
 ItemSlot* WeaponComplex::GetEquipedWeakestWeaponSlot() const
@@ -169,8 +171,8 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 {                 
     #if WEAPONSTARGET_LOG_ENABLED == 1 
-    if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP); 
-    else                        Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + getTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " item_subtype_id=" + getTypeStr(item_slot->GetItem()->GetSubTypeId()) + " id=" + int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
+    if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + getEntityTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP); 
+    else                        Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + getEntityTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " item_subtype_id=" + getEntityTypeStr(item_slot->GetItem()->GetSubTypeId()) + " id=" + int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
     #endif   
 
     target->TakeIntoAccountAgressor(owner_vehicle);
@@ -215,14 +217,14 @@ void WeaponComplex::Fire(int timer, float attack_rate, bool show_effect)
             {
                 if (weapon_slot.ValidateTarget() == STATUS::TARGET_OK)
                 {
-                      weapon_slot.FireEvent(attack_rate, show_effect);
+                    weapon_slot.FireEvent(attack_rate, show_effect);
                     if (weapon_slot.GetSubTarget() == nullptr)
-                       {
-                           fire_delay += d_fire_delay;
+                    {
+                        fire_delay += d_fire_delay;
                     }
                 }
                 else
-                {
+                {                  
                     weapon_slot.ResetTarget();
                 }    
                     
@@ -238,7 +240,7 @@ void WeaponComplex::ValidateAllWeaponsTarget()
     {
         if (slot_weapon_vec[i]->GetTarget() != nullptr) 
         {
-            if (slot_weapon_vec[i]->ValidateTarget() == STATUS::TARGET_OK)
+            if (slot_weapon_vec[i]->ValidateTarget() != STATUS::TARGET_OK)
             {
                 slot_weapon_vec[i]->ResetTarget();
             }
@@ -272,41 +274,41 @@ void WeaponComplex::UpdateFireAbility()
 
 void WeaponComplex::RenderTurrels() const
 {
-        for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
-        {
-                 if (slot_weapon_vec[i]->GetItem() != nullptr)
+    for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
+    {
+        if (slot_weapon_vec[i]->GetItem() != nullptr)
         { 
             if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
             {    
-                           slot_weapon_vec[i]->GetTurrel()->Render(owner_vehicle->GetAngle().z);        
-                }
+                slot_weapon_vec[i]->GetTurrel()->Render(owner_vehicle->GetAngle().z);        
             }
-        } 
+        }
+    } 
 }
 
 void WeaponComplex::RenderWeaponsRange()
 {
     for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
-           {
-               if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
-                   {
-                       slot_weapon_reloaded_vec[i]->UpdateRange(GuiTextureObCollector::Instance().dot_red);
-                   slot_weapon_reloaded_vec[i]->DrawRange(owner_vehicle->GetCenter());
-            }
+    {
+        if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
+        {
+           slot_weapon_reloaded_vec[i]->UpdateRange(GuiTextureObCollector::Instance().dot_red);
+           slot_weapon_reloaded_vec[i]->DrawRange(owner_vehicle->GetCenter());
+        }
     }
 }
 
 void WeaponComplex::RenderWeaponIcons() const
 {       
-        for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
-        {
-                if (slot_weapon_vec[i]->GetItem() != nullptr ) //?? ideally this is not needed, if item == nullptr< the target set to nullptr
-                {  
-                    if (slot_weapon_vec[i]->GetTarget() != nullptr )
-                    {       
-                            Rect _rect(slot_weapon_vec[i]->GetTarget()->GetCenter().x - 40/2 + 23*i, slot_weapon_vec[i]->GetTarget()->GetCenter().y + 40/2, 20, 20);
-                            drawTexturedRect(slot_weapon_vec[i]->GetItem()->GetTextureOb(), _rect, -2.0);
-                    }        
-            }
+    for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
+    {
+        if (slot_weapon_vec[i]->GetItem() != nullptr ) //?? ideally this is not needed, if item == nullptr< the target set to nullptr
+        {  
+            if (slot_weapon_vec[i]->GetTarget() != nullptr )
+            {       
+                Rect _rect(slot_weapon_vec[i]->GetTarget()->GetCenter().x - 40/2 + 23*i, slot_weapon_vec[i]->GetTarget()->GetCenter().y + 40/2, 20, 20);
+                drawTexturedRect(slot_weapon_vec[i]->GetItem()->GetTextureOb(), _rect, -2.0);
+            }        
         }
+    }
 }

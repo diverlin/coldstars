@@ -40,7 +40,9 @@
 #include <items/equipment/EnergizerEquipment.hpp>
 #include <items/equipment/FreezerEquipment.hpp>
 
-
+#include <common/constants.hpp>
+                     
+                     
 StoreBuilder& StoreBuilder::Instance()
 {
     static StoreBuilder instance;

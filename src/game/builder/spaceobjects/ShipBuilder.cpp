@@ -25,6 +25,8 @@
 
 #include <struct/RaceInformationCollector.hpp>
 
+#include <common/constants.hpp>
+
 
 ShipBuilder& ShipBuilder::Instance()
 {    
