@@ -44,20 +44,22 @@
 void NormalRunScenario::Init(Player* player)
 {
     GalaxyDescription galaxy_description;
-    galaxy_description.allow_invasion = true;
+    galaxy_description.allow_invasion = false;
     galaxy_description.sector_num = 1;
     
     for (int i=0; i<galaxy_description.sector_num; i++)
     {
         SectorDescription sector_description;
-        sector_description.starsystem_num = 2;
+        sector_description.starsystem_num = 1;
         
         for (int j=0; j<sector_description.starsystem_num; j++)        
         {
             StarSystemDescription starsystem_description;
-            starsystem_description.planet_num = 10;
-            starsystem_description.spacestation_num = 3;
+            starsystem_description.planet_num = 5;
+            starsystem_description.spacestation_num = 1;
             starsystem_description.asteroid_num = 3;
+                       
+            starsystem_description.allow_ships         = false;
                         
             starsystem_description.allow_ship_ranger   = false;
             starsystem_description.allow_ship_warrior  = false;
@@ -78,8 +80,8 @@ void NormalRunScenario::Init(Player* player)
         God::Instance().CreateInvasion(galaxy_description);
     }
     
-     bool player2space = true;
-     StarSystem* const starsystem = galaxy->GetRandomSector()->GetRandomStarSystem();
+    bool player2space = true;
+    StarSystem* const starsystem = galaxy->GetRandomSector()->GetRandomStarSystem();
     if (player2space == true)
     {
         Vec3<float> center(500, 500, DEFAULT_ENTITY_ZPOS);
@@ -91,6 +93,6 @@ void NormalRunScenario::Init(Player* player)
         starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
     }
 
-    God::Instance().CreateShips(starsystem, /*ships_num=*/50, TYPE::RACE::R0_ID);
+    //God::Instance().CreateShips(starsystem, /*ships_num=*/50, TYPE::RACE::R0_ID);   // fake
 }
 

@@ -29,6 +29,8 @@
 
 #include <world/EntityManager.hpp>
 
+#include <common/constants.hpp>
+
  
 PlayerBuilder& PlayerBuilder::Instance()
 {

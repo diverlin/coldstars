@@ -17,16 +17,18 @@
 */
 
 
-#ifndef WEAPONCOMPLEX_H
-#define WEAPONCOMPLEX_H
+#ifndef WEAPONCOMPLEX_HPP
+#define WEAPONCOMPLEX_HPP
 
 #include <vector>
+#include <types/EntityTypes.hpp>
+
 class Vehicle;
 class ItemSlot;
 class BaseItem;
 class BaseSpaceEntity;
 class TextureOb;
-#include "../common/constants.hpp"
+
 
 class WeaponComplex
 {
