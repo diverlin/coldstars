@@ -615,6 +615,7 @@ void ItemSlot::ResolveDataUniqueItemSlot()
 
 void ItemSlot::Log(const std::string& func_name) const
 {
+    #if WEAPONSTARGET_LOG_ENABLED == 1 
     std::string str = "ItemSlot(id="+int2str(GetId())+")::"+func_name+" "+GetDataTypeString();
     
     if (owner != nullptr)       { str += " owner:" + owner->GetDataTypeString(); }
@@ -623,5 +624,6 @@ void ItemSlot::Log(const std::string& func_name) const
     if (m_Subtarget != nullptr) { str += " subtarget:" + m_Subtarget->GetDataTypeString(); }
     
     Logger::Instance().Log(str, WEAPONSTARGET_LOG_DIP); 
+    #endif
 }
 
