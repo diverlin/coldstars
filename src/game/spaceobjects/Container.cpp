@@ -41,8 +41,7 @@ m_ItemSlot(nullptr),
 m_Velocity(0)    
 {
     SetId(id);
-    SetTypeId(TYPE::ENTITY::VEHICLE_ID);
-    SetSubTypeId(TYPE::ENTITY::CONTAINER_ID);
+    SetTypeId(TYPE::ENTITY::CONTAINER_ID);
 }
 
 /* virtual */   
@@ -83,8 +82,8 @@ void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords, float zoom)
     pos /= zoom;
     drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     
-    Vec2<float> pos2(pos.x + 200, pos.y);
-    m_ItemSlot->GetItem()->RenderInfo(pos2);
+    pos.x += 300;
+    m_ItemSlot->GetItem()->RenderInfo(pos);
 }
  
 /* virtual override final */   

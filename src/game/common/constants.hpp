@@ -36,7 +36,7 @@ namespace CONVERTER
     const Converter<float> DIST2GRAVITY(Vec2<float>(0, 600), Vec2<float>(1.0, 0.0), 1000);
 };
 
-#define LOG_ENABLED 1
+#define LOG_ENABLED 0
 #if LOG_ENABLED == 1
     #define GRAPPLE_QUEUE_LOG_ENABLED 0
     #define DRIVECOMPLEX_LOG_ENABLED 0
