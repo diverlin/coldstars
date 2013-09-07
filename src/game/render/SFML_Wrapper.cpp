@@ -5,7 +5,7 @@
 #include "../render/Render.hpp"
 #include "../config/config.hpp"
 #include "../common/common.hpp"
-
+#include "../common/constants.hpp"
     
 SFML_Wrapper::SFML_Wrapper()
 {
@@ -13,7 +13,8 @@ SFML_Wrapper::SFML_Wrapper()
     text12.setCharacterSize(12);
     text12.setColor(sf::Color(255,0,0,255));
     
-    ftfont.init("data/font/font.ttf", 20);
+    std::string fontpath = DATA_REL_PATH+"font/font.ttf";
+    ftfont.init(fontpath.c_str(), 20);
         
 }
 

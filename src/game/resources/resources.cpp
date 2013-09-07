@@ -34,38 +34,37 @@
 
 void loadGameData()
 {        
-     int width     = Config::Instance().SCREEN_WIDTH; 
-          int height    = Config::Instance().SCREEN_HEIGHT;
-          int bpp       = Config::Instance().BPP;
-          bool vert_sync = Config::Instance().VSYNC;
-               
-          Screen::Instance().InitBasic(width, height, bpp, vert_sync, GAME_TITLE);
-
+    int width     = Config::Instance().SCREEN_WIDTH; 
+    int height    = Config::Instance().SCREEN_HEIGHT;
+    int bpp       = Config::Instance().BPP;
+    bool vert_sync = Config::Instance().VSYNC;
+    
+    Screen::Instance().InitBasic(width, height, bpp, vert_sync, GAME_TITLE);
+    
     load3DModels();
-        loadImages();
-        if (Config::Instance().MODERN_EFFECTS == true)
+    loadImages();
+    if (Config::Instance().MODERN_EFFECTS == true)
     {
         loadShaders();
         Screen::Instance().InitPostEffects(Screen::Instance().GetWidth(), Screen::Instance().GetHeight());
     }
-        Screen::Instance().GetFont().loadFromFile("data/font/font.ttf");
 }
 
 
 
 void load3DModels()
 {        
-    MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/sphere/sphere.obj", nullptr, TYPE::MESH::SPHERE_ID));
-    MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/sphere_deformed/sphere_deformed.obj", nullptr, TYPE::MESH::SPHERE_DEFORMED_ID));
+    MeshCollector::Instance().RegisterMesh(new Mesh(DATA_REL_PATH+"obj/sphere/sphere.obj", nullptr, TYPE::MESH::SPHERE_ID));
+    MeshCollector::Instance().RegisterMesh(new Mesh(DATA_REL_PATH+"obj/sphere_deformed/sphere_deformed.obj", nullptr, TYPE::MESH::SPHERE_DEFORMED_ID));
     
     {
-    TextureOb* textureOb = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/obj/vehicles/BabylonStation/station_texture/babylonstation.jpg", false);    
-    MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/vehicles/BabylonStation/babylon_station_mod.obj", textureOb, TYPE::MESH::SPACESTATION_ID));
+    TextureOb* textureOb = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"obj/vehicles/BabylonStation/station_texture/babylonstation.jpg", false);    
+    MeshCollector::Instance().RegisterMesh(new Mesh(DATA_REL_PATH+"obj/vehicles/BabylonStation/babylon_station_mod.obj", textureOb, TYPE::MESH::SPACESTATION_ID));
     }
 
     {
-    TextureOb* textureOb = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/obj/vehicles//Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg", false);    
-    MeshCollector::Instance().RegisterMesh(new Mesh("data/obj/vehicles/Anna_V_2.0_variations/anna_mod.obj", textureOb, TYPE::MESH::SPACESTATION_ID));
+    TextureOb* textureOb = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"obj/vehicles//Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg", false);    
+    MeshCollector::Instance().RegisterMesh(new Mesh(DATA_REL_PATH+"obj/vehicles/Anna_V_2.0_variations/anna_mod.obj", textureOb, TYPE::MESH::SPACESTATION_ID));
     }
 }
 
@@ -77,19 +76,19 @@ void loadImages()
 {
     std::vector<int> arg;   
     arg.push_back((int)(int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::TURREL_ID, "data/turrel/turrel1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::TURREL_ID, DATA_REL_PATH+"turrel/turrel1.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::TURREL_ID, "data/turrel/turrel2.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::TURREL_ID, DATA_REL_PATH+"turrel/turrel2.png", true, &arg) );
 }
 
 //{
     //std::vector<int> arg;   
     //arg.push_back((int)TYPE::RACE::R0_ID);
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::TURREL_ID, "data/turrel/esphere-0.png", true, &arg) );
+    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::TURREL_ID, DATA_REL_PATH+"turrel/esphere-0.png", true, &arg) );
 //}
 
 
@@ -97,13 +96,13 @@ void loadImages()
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ITEM_SLOT_ID, "data/other/slot.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ITEM_SLOT_ID, DATA_REL_PATH+"other/slot.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::VEHICLE_SLOT_ID, "data/other/H.png", true, &arg, 3, 2, 3) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::VEHICLE_SLOT_ID, DATA_REL_PATH+"other/H.png", true, &arg, 3, 2, 3) );
 }
 
 //####################################### TYPE::TEXTURE::FACE_ID ################################
@@ -111,91 +110,91 @@ void loadImages()
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, "data/race/0000.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_REL_PATH+"race/0000.png", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, "data/race/0001.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_REL_PATH+"race/0001.png", false, &arg) );
 }
 
 //(int)TYPE::RACE::R1_ID
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R1_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, "data/race/1000.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_REL_PATH+"race/1000.png", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R1_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, "data/race/1001.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_REL_PATH+"race/1001.png", false, &arg) );
 }
 
 //(int)TYPE::RACE::R2_ID
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R2_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, "data/race/2000.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_REL_PATH+"race/2000.png", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R2_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, "data/race/2001.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_REL_PATH+"race/2001.png", false, &arg) );
 }
 
 //(int)TYPE::RACE::R3_ID
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R3_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, "data/race/3000.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_REL_PATH+"race/3000.png", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R3_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, "data/race/3001.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_REL_PATH+"race/3001.png", false, &arg) );
 }
 
 //(int)TYPE::RACE::R4_ID
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R4_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, "data/race/4000.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_REL_PATH+"race/4000.png", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R4_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, "data/race/4001.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_REL_PATH+"race/4001.png", false, &arg) );
 }
 
 //(int)TYPE::RACE::R6_ID
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R6_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, "data/race/6000.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_REL_PATH+"race/6000.png", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R6_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, "data/race/6001.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_REL_PATH+"race/6001.png", false, &arg) );
 }
 
 //(int)TYPE::RACE::R7_ID
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R7_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, "data/race/7000.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_REL_PATH+"race/7000.png", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R7_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, "data/race/7001.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_REL_PATH+"race/7001.png", false, &arg) );
 }
 
 
@@ -203,43 +202,43 @@ void loadImages()
 //####################################### ASTEROID_TEXTURE ################################
 {
     std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ASTEROID_ID, "data/asteroid/a_000.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ASTEROID_ID, DATA_REL_PATH+"asteroid/a_000.png", true, &arg) );
 }
 
 {
     std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ASTEROID_ID, "data/asteroid/a_001.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ASTEROID_ID, DATA_REL_PATH+"asteroid/a_001.png", true, &arg) );
 }
 
 {
     std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ASTEROID_ID, "data/asteroid/a_002.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ASTEROID_ID, DATA_REL_PATH+"asteroid/a_002.png", true, &arg) );
 }
 
 //####################################### MINERAL_TEXTURE ################################
 {
     std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::MINERAL_ID, "data/asteroid/m_000.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::MINERAL_ID, DATA_REL_PATH+"asteroid/m_000.png", true, &arg) );
 }
 
 {
     std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::MINERAL_ID, "data/asteroid/m_001.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::MINERAL_ID, DATA_REL_PATH+"asteroid/m_001.png", true, &arg) );
 }
 
 {
     std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::MINERAL_ID, "data/asteroid/m_002.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::MINERAL_ID, DATA_REL_PATH+"asteroid/m_002.png", true, &arg) );
 }
 
 {
     std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::CONTAINER_ID, "data/item/container.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::CONTAINER_ID, DATA_REL_PATH+"item/container.png", true, &arg) );
 }
 
 {
     std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::BOMB_ID, "data/item/bomb_item.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::BOMB_ID, DATA_REL_PATH+"item/bomb_item.png", true, &arg) );
 }
 
 
@@ -248,37 +247,37 @@ void loadImages()
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, "data/satellite/sa_001.png", true, &arg, 3, 1, 6) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, DATA_REL_PATH+"satellite/sa_001.png", true, &arg, 3, 1, 6) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, "data/satellite/sa_002.png", true, &arg, 4, 1, 8) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, DATA_REL_PATH+"satellite/sa_002.png", true, &arg, 4, 1, 8) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, "data/satellite/sa_003.png", true, &arg, 3, 1, 6) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, DATA_REL_PATH+"satellite/sa_003.png", true, &arg, 3, 1, 6) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, "data/satellite/sa_004.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, DATA_REL_PATH+"satellite/sa_004.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, "data/satellite/sa_005.png", true, &arg, 8, 1, 16) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, DATA_REL_PATH+"satellite/sa_005.png", true, &arg, 8, 1, 16) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, "data/satellite/sa_006.png", true, &arg, 8, 1, 16) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, DATA_REL_PATH+"satellite/sa_006.png", true, &arg, 8, 1, 16) );
 }
 
 
@@ -286,7 +285,7 @@ void loadImages()
 
 {
     std::vector<int> arg;   
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::BLACKHOLE_ID, "data/blackhole/bh_00.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::BLACKHOLE_ID, DATA_REL_PATH+"blackhole/bh_00.png", true, &arg) );
 }
 
 //####################################### SHIP_TEXTURE ####################################
@@ -294,230 +293,230 @@ void loadImages()
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::ENTITY::RANGER_ID);   //COLOR_VIOLET
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_00_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_00_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID);  //COLOR_VIOLET
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_01_0_1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_01_0_1.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::ENTITY::PIRAT_ID);    //COLOR_VIOLET
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_02_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_02_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::ENTITY::TRADER_ID);   //COLOR_VIOLET
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_03_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_03_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::ENTITY::DIPLOMAT_ID); //COLOR_VIOLET
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_04_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_04_0_0.png", true, &arg) );
 }
 
 //################################ race voennye
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R1_ID); arg.push_back((int)TYPE::ENTITY::RANGER_ID);   //COLOR_GREY
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_10_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_10_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R1_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID);  //COLOR_GREY
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_11_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_11_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R1_ID); arg.push_back((int)TYPE::ENTITY::PIRAT_ID);    //COLOR_GREY
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_12_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_12_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R1_ID); arg.push_back((int)TYPE::ENTITY::TRADER_ID);   //COLOR_GREY
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_12_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_12_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R1_ID); arg.push_back((int)TYPE::ENTITY::DIPLOMAT_ID);  //COLOR_GREY
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_14_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_14_0_0.png", true, &arg) );
 }
 
 //################################ race zhuliki
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R2_ID); arg.push_back((int)TYPE::ENTITY::RANGER_ID);    
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/race2_ranger_00.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/race2_ranger_00.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R2_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID);  //COLOR_GREEN
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/race2_warrior_00.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/race2_warrior_00.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R2_ID); arg.push_back((int)TYPE::ENTITY::TRADER_ID);    //COLOR_RED
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/race2_trader_00.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/race2_trader_00.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R2_ID); arg.push_back((int)TYPE::ENTITY::PIRAT_ID);    //COLOR_RED
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/race2_pirat_00.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/race2_pirat_00.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R2_ID); arg.push_back((int)TYPE::ENTITY::DIPLOMAT_ID);   //COLOR_GREEN
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/race2_diplomat_00.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/race2_diplomat_00.png", true, &arg) );
 }
 
 //################################ race cheloveki
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R3_ID); arg.push_back((int)TYPE::ENTITY::RANGER_ID); //COLOR_BLUE
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_30_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_30_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R3_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_BLUE
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_31_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_31_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R3_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_BLUE
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_31_0_1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_31_0_1.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R3_ID); arg.push_back((int)TYPE::ENTITY::PIRAT_ID);   //COLOR_BLUE
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_32_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_32_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R3_ID); arg.push_back((int)TYPE::ENTITY::TRADER_ID);  //COLOR_BLUE
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/_k_33_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/_k_33_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R3_ID); arg.push_back((int)TYPE::ENTITY::DIPLOMAT_ID); //COLOR_BLUE
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/_k_34_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/_k_34_0_0.png", true, &arg) );
 }
 
 //################################ race bio
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R4_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_41_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_41_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R4_ID); arg.push_back((int)TYPE::ENTITY::TRADER_ID);  //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_43_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_43_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R4_ID); arg.push_back((int)TYPE::ENTITY::TRADER_ID);  //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_43_0_1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_43_0_1.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R4_ID); arg.push_back((int)TYPE::ENTITY::DIPLOMAT_ID); //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_44_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_44_0_0.png", true, &arg) );
 }
 
 //################################ enemy 1
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_61_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_61_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_61_0_1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_61_0_1.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_61_0_2.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_61_0_2.png", true, &arg) );
 }
 
 
 //{
     //std::vector<int> arg;   
     //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_61_0_3.png", true, &arg) );
+    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_61_0_3.png", true, &arg) );
 //}
 
 
 //{
     //std::vector<int> arg;   
     //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_61_0_5.png", true, &arg) );
+    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_61_0_5.png", true, &arg) );
 //}
 
 //{
     //std::vector<int> arg;   
     //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_61_0_6.png", true, &arg) );
+    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_61_0_6.png", true, &arg) );
 //}
 
 //{
     //std::vector<int> arg;   
     //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_61_0_7.png", true, &arg) );
+    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_61_0_7.png", true, &arg) );
 //}
 
 //{
     //std::vector<int> arg;   
     //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_61_0_8.png", true, &arg) );
+    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_61_0_8.png", true, &arg) );
 //}
 
 //{
     //std::vector<int> arg;   
     //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_61_0_9.png", true, &arg) );
+    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_61_0_9.png", true, &arg) );
 //}
 
 //{
     //std::vector<int> arg;   
     //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_61_0_10.png", true, &arg) );
+    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_61_0_10.png", true, &arg) );
 //}
 
 //{
     //std::vector<int> arg;   
     //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_61_0_11.png", true, &arg) );
+    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_61_0_11.png", true, &arg) );
 //}
 
 //{
     //std::vector<int> arg;   
     //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_61_0_12.png", true, &arg) );
+    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_61_0_12.png", true, &arg) );
 //}
 
 
@@ -526,63 +525,63 @@ void loadImages()
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R7_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_71_0_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_71_0_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;   
     arg.push_back((int)TYPE::RACE::R7_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, "data/ship/k_71_0_1e.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_REL_PATH+"ship/k_71_0_1e.png", true, &arg) );
 }
 
 //################################# TYPE::TEXTURE::STAR_ID ###############################
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::YELLOW_ID); arg.push_back(1900); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STAR_ID, "data/star/s_000.jpg", false, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STAR_ID, DATA_REL_PATH+"star/s_000.jpg", false, &arg) ); 
 }
 
 {
     std::vector<int> arg; 
     arg.push_back(COLOR::YELLOW_ID); arg.push_back(1825); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STAR_ID, "data/star/s_001.png", false, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STAR_ID, DATA_REL_PATH+"star/s_001.png", false, &arg) ); 
 }
 
 {
     std::vector<int> arg; 
     arg.push_back(COLOR::BLUE_ID); arg.push_back(2525); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STAR_ID, "data/star/s_100.jpg", false, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STAR_ID, DATA_REL_PATH+"star/s_100.jpg", false, &arg) ); 
 }
 
 {
     std::vector<int> arg; 
     arg.push_back(COLOR::BLUE_ID); arg.push_back(1925); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STAR_ID, "data/star/s_101.png", false, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STAR_ID, DATA_REL_PATH+"star/s_101.png", false, &arg) ); 
 }
 
 // STARBASE_TEXTURE_ID
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R0_ID);  
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SPACESTATION_ID, "data/starbase/sb_000.png", false, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SPACESTATION_ID, DATA_REL_PATH+"starbase/sb_000.png", false, &arg) ); 
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SPACESTATION_ID, "data/starbase/sb_001.png", false, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SPACESTATION_ID, DATA_REL_PATH+"starbase/sb_001.png", false, &arg) ); 
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SPACESTATION_ID, "data/starbase/sb_002.png", false, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SPACESTATION_ID, DATA_REL_PATH+"starbase/sb_002.png", false, &arg) ); 
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SPACESTATION_ID, "data/starbase/sb_003.png", false, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SPACESTATION_ID, DATA_REL_PATH+"starbase/sb_003.png", false, &arg) ); 
 }
 
 
@@ -590,115 +589,115 @@ void loadImages()
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::RED_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula1.png", true, &arg) );                                         
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula1.png", true, &arg) );                                         
 }
 
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::GREEN_ID); arg.push_back(1);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula2.png", true, &arg) );   
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula2.png", true, &arg) );   
 }
 
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::YELLOW_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula3.png", true, &arg) );   
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula3.png", true, &arg) );   
 }
 
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::BLUE_ID); arg.push_back(1);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula4.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula4.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::YELLOW_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula5.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula5.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;  
     arg.push_back(COLOR::RED_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula6.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula6.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::BLUE_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula7.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula7.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;  
     arg.push_back(COLOR::BLUE_ID); arg.push_back(1);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula8.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula8.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::BLUE_ID); arg.push_back(1);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula9.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula9.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;  
     arg.push_back(COLOR::RED_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula10.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula10.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::YELLOW_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula11.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula11.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::BLUE_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula12.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula12.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::BLUE_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula13.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula13.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::RED_ID); arg.push_back(1);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula14.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula14.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::YELLOW_ID); arg.push_back(1);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula15.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula15.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::YELLOW_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula16.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula16.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::YELLOW_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula17.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula17.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg; 
     arg.push_back(COLOR::YELLOW_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula18.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula18.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;   
     arg.push_back(COLOR::RED_ID); arg.push_back(0); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, "data/bg_space/nebula.bak/nebula19.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_REL_PATH+"bg_space/nebula.bak/nebula19.png", true, &arg) ); 
 }
 //### size 2 = 512x512
 //### size 4 = 1024x1024 or 512x1024
@@ -706,42 +705,42 @@ void loadImages()
 //################################ TYPE::TEXTURE::LAND_BACKGROUND_ID ###################################
 {
     std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NATURELAND_BACKGROUND_ID, "data/bg_uninhabited/b_000.jpg", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NATURELAND_BACKGROUND_ID, DATA_REL_PATH+"bg_uninhabited/b_000.jpg", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NATURELAND_BACKGROUND_ID, "data/bg_uninhabited/b_001.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NATURELAND_BACKGROUND_ID, DATA_REL_PATH+"bg_uninhabited/b_001.png", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NATURELAND_BACKGROUND_ID, "data/bg_uninhabited/b_002.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NATURELAND_BACKGROUND_ID, DATA_REL_PATH+"bg_uninhabited/b_002.png", false, &arg) );
 }
 
 //################################ KOSMOPORT_BG_TEXTURE_ID ###############################
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ANGAR_BACKGROUND_ID, "data/bg_kosmoport/an_000.jpg", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ANGAR_BACKGROUND_ID, DATA_REL_PATH+"bg_kosmoport/an_000.jpg", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STORE_BACKGROUND_ID, "data/bg_kosmoport/st_000.jpg", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STORE_BACKGROUND_ID, DATA_REL_PATH+"bg_kosmoport/st_000.jpg", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHOP_BACKGROUND_ID, "data/bg_kosmoport/sh_000.jpg", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHOP_BACKGROUND_ID, DATA_REL_PATH+"bg_kosmoport/sh_000.jpg", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID, "data/bg_kosmoport/go_000.jpg", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID, DATA_REL_PATH+"bg_kosmoport/go_000.jpg", false, &arg) );
 }
 
 
@@ -749,42 +748,42 @@ void loadImages()
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::ENTITY::PLANET_MIXED_ID); arg.push_back(5);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, "data/planet/p_0000.png", "data/planet/p_0000_nm.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, DATA_REL_PATH+"planet/p_0000.png", DATA_REL_PATH+"planet/p_0000_nm.png", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::ENTITY::PLANET_WATER_ID); arg.push_back(5);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, "data/planet/p_1000.png", "data/planet/p_1000_nm.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, DATA_REL_PATH+"planet/p_1000.png", DATA_REL_PATH+"planet/p_1000_nm.png", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::ENTITY::PLANET_VULCANIC_ID); arg.push_back(5);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, "data/planet/p_2000.png", "data/planet/p_2000_nm.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, DATA_REL_PATH+"planet/p_2000.png", DATA_REL_PATH+"planet/p_2000_nm.png", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::ENTITY::PLANET_ICE_ID); arg.push_back(5);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, "data/planet/p_3000.png", "data/planet/p_3000_nm.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, DATA_REL_PATH+"planet/p_3000.png", DATA_REL_PATH+"planet/p_3000_nm.png", false, &arg) );
 }
 
 {
     std::vector<int> arg; 
     arg.push_back((int)TYPE::ENTITY::PLANET_GAS_ID); arg.push_back(5);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, "data/planet/p_4000.png", "data/planet/p_4000_nm.png", false, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, DATA_REL_PATH+"planet/p_4000.png", DATA_REL_PATH+"planet/p_4000_nm.png", false, &arg) );
 }
 
 //################################ ATMOSPHERE_TEXTURE ####################################
 {
     std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ATMOSPHERE_ID, "data/planet/atmosphere_000.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ATMOSPHERE_ID, DATA_REL_PATH+"planet/atmosphere_000.png", true, &arg) );
 }
 
 {
     std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ATMOSPHERE_ID, "data/planet/atmosphere_001.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ATMOSPHERE_ID, DATA_REL_PATH+"planet/atmosphere_001.png", true, &arg) );
 }
 
 
@@ -792,73 +791,73 @@ void loadImages()
 {
     std::vector<int> arg;  
     arg.push_back(COLOR::RED_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PARTICLE_EFFECT_ID, "data/effect/particles/particle0.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PARTICLE_EFFECT_ID, DATA_REL_PATH+"effect/particles/particle0.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;  
     arg.push_back(COLOR::BLUE_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PARTICLE_EFFECT_ID, "data/effect/particles/particle1.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PARTICLE_EFFECT_ID, DATA_REL_PATH+"effect/particles/particle1.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;  
     arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PARTICLE_EFFECT_ID, "data/effect/particles/particle2.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PARTICLE_EFFECT_ID, DATA_REL_PATH+"effect/particles/particle2.png", true, &arg) ); 
 }
 
 {
     std::vector<int> arg;  
     arg.push_back(COLOR::GREY_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PARTICLE_EFFECT_ID, "data/effect/particles/particle3.png", true, &arg) ); 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PARTICLE_EFFECT_ID, DATA_REL_PATH+"effect/particles/particle3.png", true, &arg) ); 
 }
 
 //{
     //std::vector<int> arg;  
     //arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::BLUE_ID); 
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID, "data/effect/lazer/l_64_26_000.png", true, &arg, 4, 1, 10) );
+    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID, DATA_REL_PATH+"effect/lazer/l_64_26_000.png", true, &arg, 4, 1, 10) );
 //}
 
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::RED_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID, "data/effect/lazer/l_001.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID, DATA_REL_PATH+"effect/lazer/l_001.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID, "data/effect/lazer/l_002.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID, DATA_REL_PATH+"effect/lazer/l_002.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::BLUE_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID, "data/effect/lazer/l_003.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID, DATA_REL_PATH+"effect/lazer/l_003.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;  
     arg.push_back(COLOR::RED_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIELD_EFFECT_ID, "data/effect/shield/shield0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIELD_EFFECT_ID, DATA_REL_PATH+"effect/shield/shield0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;  
     arg.push_back(COLOR::GREEN_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIELD_EFFECT_ID, "data/effect/shield/shield1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIELD_EFFECT_ID, DATA_REL_PATH+"effect/shield/shield1.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;  
     arg.push_back(COLOR::BLUE_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIELD_EFFECT_ID, "data/effect/shield/shield2.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIELD_EFFECT_ID, DATA_REL_PATH+"effect/shield/shield2.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;  
     arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIELD_EFFECT_ID, "data/effect/shield/shield3.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIELD_EFFECT_ID, DATA_REL_PATH+"effect/shield/shield3.png", true, &arg) );
 }
 
 
@@ -866,25 +865,25 @@ void loadImages()
 {
     std::vector<int> arg;  
     arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DISTANTSTAR_ID, "data/star/s1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DISTANTSTAR_ID, DATA_REL_PATH+"star/s1.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;  
     arg.push_back(COLOR::BLUE_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DISTANTSTAR_ID, "data/star/s2.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DISTANTSTAR_ID, DATA_REL_PATH+"star/s2.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;  
     arg.push_back(COLOR::RED_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DISTANTSTAR_ID, "data/star/s3.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DISTANTSTAR_ID, DATA_REL_PATH+"star/s3.png", true, &arg) );
 }
 
 //{
     //std::vector<int> arg;  
     //arg.push_back(COLOR::RED_ID); 
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DISTANTSTAR_ID, "data/star/s4.png", true, &arg) );
+    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DISTANTSTAR_ID, DATA_REL_PATH+"star/s4.png", true, &arg) );
 //}
 
 //###################################### ITEM TEXTURE ###################################
@@ -894,21 +893,21 @@ void loadImages()
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID);  
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, "data/item/drive/drive_Race0_Tech0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, DATA_REL_PATH+"item/drive/drive_Race0_Tech0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID);  
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, "data/item/drive/drive_Race0_Tech1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, DATA_REL_PATH+"item/drive/drive_Race0_Tech1.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_2
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L2_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, "data/item/drive/drive_Race0_Tech2.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, DATA_REL_PATH+"item/drive/drive_Race0_Tech2.png", true, &arg) );
 }
 
 //#################### RACE1
@@ -927,26 +926,26 @@ void loadImages()
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::RED_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, "data/item/lazer/lazer_Race0_Tech0_Red0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, DATA_REL_PATH+"item/lazer/lazer_Race0_Tech0_Red0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, "data/item/lazer/lazer_Race0_Tech0_Yellow0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, DATA_REL_PATH+"item/lazer/lazer_Race0_Tech0_Yellow0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::BLUE_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, "data/item/lazer/lazer_Race0_Tech0_Blue0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, DATA_REL_PATH+"item/lazer/lazer_Race0_Tech0_Blue0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); arg.push_back(COLOR::BLUE_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, "data/item/lazer/lazer_Race0_Tech1_Blue0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, DATA_REL_PATH+"item/lazer/lazer_Race0_Tech1_Blue0.png", true, &arg) );
 }
 //#################### RACE_1
 //#################### RACE_2
@@ -964,19 +963,19 @@ void loadImages()
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, "data/item/rocket/rocket_Race0_Tech0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, DATA_REL_PATH+"item/rocket/rocket_Race0_Tech0.png", true, &arg) );
 }
 //####### TECH_LEVEL_1
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, "data/item/rocket/rocket_Race0_Tech1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, DATA_REL_PATH+"item/rocket/rocket_Race0_Tech1.png", true, &arg) );
 }
 //####### TECH_LEVEL_2
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, "data/item/rocket/rocket_Race0_Tech2.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, DATA_REL_PATH+"item/rocket/rocket_Race0_Tech2.png", true, &arg) );
 }
 
 //TEXTURE_MANAGER.manageItem( textureOb(TORPED_ITEM_TEXTURE_ID, 'data/item/torped/tl0.png', True, [ 'torpedo',       TYPE::TECHLEVEL::L0_ID, 3, 1, (int)TYPE::RACE::R0_ID, COLOR::YELLOW_ID]) )
@@ -984,22 +983,22 @@ void loadImages()
 
 {
     std::vector<int> arg;  
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID, "data/bullet/r_0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID, DATA_REL_PATH+"bullet/r_0.png", true, &arg) );
 }
 
 {
     std::vector<int> arg;  
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID, "data/bullet/r_1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID, DATA_REL_PATH+"bullet/r_1.png", true, &arg) );
 }
 
 //{
     //std::vector<int> arg;  
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID, "data/bullet/t_0.png", true, &arg) );
+    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID, DATA_REL_PATH+"bullet/t_0.png", true, &arg) );
 //}
 
 //{
     //std::vector<int> arg;  
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID, "data/bullet/t_1.png", true, &arg) );
+    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID, DATA_REL_PATH+"bullet/t_1.png", true, &arg) );
 //}
 //TEXTURE_MANAGER.manage( textureOb(TORPED_BULLET_TEXTURE_ID, 'data/bullet/t_0.png', True, []) )
 //TEXTURE_MANAGER.manage( textureOb(TORPED_BULLET_TEXTURE_ID, 'data/bullet/t_1.png', True, []) )
@@ -1012,27 +1011,27 @@ void loadImages()
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, "data/item/protector/protector_Race0_Tech0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, DATA_REL_PATH+"item/protector/protector_Race0_Tech0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, "data/item/protector/protector_Race0_Tech1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, DATA_REL_PATH+"item/protector/protector_Race0_Tech1.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_2
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L2_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, "data/item/protector/protector_Race0_Tech2.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, DATA_REL_PATH+"item/protector/protector_Race0_Tech2.png", true, &arg) );
 }
 //####### TECH_LEVEL_3
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L3_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, "data/item/protector/protector_Race0_Tech3.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, DATA_REL_PATH+"item/protector/protector_Race0_Tech3.png", true, &arg) );
 }
 
 //############################ DROID_ITEM
@@ -1041,21 +1040,21 @@ void loadImages()
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID, "data/item/droid/droid_Race0_Tech0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID, DATA_REL_PATH+"item/droid/droid_Race0_Tech0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID, "data/item/droid/droid_Race0_Tech1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID, DATA_REL_PATH+"item/droid/droid_Race0_Tech1.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_2
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L2_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID, "data/item/droid/droid_Race0_Tech2.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID, DATA_REL_PATH+"item/droid/droid_Race0_Tech2.png", true, &arg) );
 }
 
 
@@ -1065,14 +1064,14 @@ void loadImages()
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID, "data/item/grapple/grapple_Race0_Tech0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID, DATA_REL_PATH+"item/grapple/grapple_Race0_Tech0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID, "data/item/grapple/grapple_Race0_Tech1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID, DATA_REL_PATH+"item/grapple/grapple_Race0_Tech1.png", true, &arg) );
 }
 
 
@@ -1083,14 +1082,14 @@ void loadImages()
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::BAK_EQUIPMENT_ID, "data/item/bak/bak_Race0_Tech0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::BAK_EQUIPMENT_ID, DATA_REL_PATH+"item/bak/bak_Race0_Tech0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::BAK_EQUIPMENT_ID, "data/item/bak/bak_Race0_Tech1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::BAK_EQUIPMENT_ID, DATA_REL_PATH+"item/bak/bak_Race0_Tech1.png", true, &arg) );
 }
 
 
@@ -1100,14 +1099,14 @@ void loadImages()
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID, "data/item/energyBlock/energyBlock_Race0_Tech0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID, DATA_REL_PATH+"item/energyBlock/energyBlock_Race0_Tech0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID, "data/item/energyBlock/energyBlock_Race0_Tech1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID, DATA_REL_PATH+"item/energyBlock/energyBlock_Race0_Tech1.png", true, &arg) );
 }
 
 
@@ -1117,14 +1116,14 @@ void loadImages()
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FREEZER_EQUIPMENT_ID, "data/item/freezer/freezer_Race0_Tech0.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FREEZER_EQUIPMENT_ID, DATA_REL_PATH+"item/freezer/freezer_Race0_Tech0.png", true, &arg) );
 }
 
 //####### TECH_LEVEL_1
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FREEZER_EQUIPMENT_ID, "data/item/freezer/freezer_Race0_Tech1.png", true, &arg) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FREEZER_EQUIPMENT_ID, DATA_REL_PATH+"item/freezer/freezer_Race0_Tech1.png", true, &arg) );
 }
 
 
@@ -1134,13 +1133,13 @@ void loadImages()
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, "data/item/scaner/scaner_Race0_Tech0.png", true, &arg, 3, 1, 3) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, DATA_REL_PATH+"item/scaner/scaner_Race0_Tech0.png", true, &arg, 3, 1, 3) );
 }
 //####### TECH_LEVEL_1
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, "data/item/scaner/scaner_Race0_Tech1.png", true, &arg, 3, 1, 3) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, DATA_REL_PATH+"item/scaner/scaner_Race0_Tech1.png", true, &arg, 3, 1, 3) );
 }
 
 //############################ FREEZER_ITEM
@@ -1149,166 +1148,166 @@ void loadImages()
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, "data/item/radar/radar_Race0_Tech0.png", true, &arg, 3, 1, 3) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, DATA_REL_PATH+"item/radar/radar_Race0_Tech0.png", true, &arg, 3, 1, 3) );
 }
 
 //####### TECH_LEVEL_1
 {
     std::vector<int> arg;  
     arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, "data/item/radar/radar_Race0_Tech1.png", true, &arg, 3, 1, 3) );
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, DATA_REL_PATH+"item/radar/radar_Race0_Tech1.png", true, &arg, 3, 1, 3) );
 }
 
 
 //################## MODULES
 {
     std::vector<int> arg;  
-    TextureManager::Instance().Add(new TextureOb(TYPE::TEXTURE::MODULE_ID, "data/item/module.png", true, &arg));
+    TextureManager::Instance().Add(new TextureOb(TYPE::TEXTURE::MODULE_ID, DATA_REL_PATH+"item/module.png", true, &arg));
 }
 
 
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().starsystem_mark_war = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/ss_mark_war.png", true, &arg);
+    GuiTextureObCollector::Instance().starsystem_mark_war = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/ss_mark_war.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().starsystem_mark_captured = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/ss_mark_captured.png", true, &arg);
+    GuiTextureObCollector::Instance().starsystem_mark_captured = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/ss_mark_captured.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().starsystem_mark_player = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/mark_player_ss.png", true, &arg);
+    GuiTextureObCollector::Instance().starsystem_mark_player = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/mark_player_ss.png", true, &arg);
 }
 
 
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().icon_minus = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/icon/minus.png", true, &arg);
+    GuiTextureObCollector::Instance().icon_minus = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"icon/minus.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().icon_plus = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/icon/plus.png", true, &arg);
+    GuiTextureObCollector::Instance().icon_plus = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"icon/plus.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().skill = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/skill.png", true, &arg);
+    GuiTextureObCollector::Instance().skill = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/skill.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().skill_transparent = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/skill_transparent.png", true, &arg);
+    GuiTextureObCollector::Instance().skill_transparent = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/skill_transparent.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().icon_map = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/icon/starsystem_ICON.png", true, &arg);
+    GuiTextureObCollector::Instance().icon_map = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"icon/starsystem_ICON.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().grapple_trail = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/effect/grapple_jet.png", true, &arg);
+    GuiTextureObCollector::Instance().grapple_trail = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"effect/grapple_jet.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().dot_blue = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/dot_blue.png", true, &arg);
+    GuiTextureObCollector::Instance().dot_blue = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/dot_blue.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().dot_green = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/dot_green.png", true, &arg);
+    GuiTextureObCollector::Instance().dot_green = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/dot_green.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().dot_red = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/dot_red.png", true, &arg);
+    GuiTextureObCollector::Instance().dot_red = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/dot_red.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().dot_black = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/dot_black.png", true, &arg);
+    GuiTextureObCollector::Instance().dot_black = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/dot_black.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().dot_yellow = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/dot_yellow.png", true, &arg);
+    GuiTextureObCollector::Instance().dot_yellow = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/dot_yellow.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().dot_purple = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/dot_purple.png", true, &arg);
+    GuiTextureObCollector::Instance().dot_purple = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/dot_purple.png", true, &arg);
 }
 
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().radar_screenrect = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/gui/radar_screenrect.png", true, &arg);
+    GuiTextureObCollector::Instance().radar_screenrect = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"gui/radar_screenrect.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().radar_range = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/gui/radar_range.png", true, &arg);
+    GuiTextureObCollector::Instance().radar_range = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"gui/radar_range.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().radar_background = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/gui/radar_background.png", true, &arg);
+    GuiTextureObCollector::Instance().radar_background = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"gui/radar_background.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().radar_bar = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/gui/radar_bar.png", true, &arg);
+    GuiTextureObCollector::Instance().radar_bar = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"gui/radar_bar.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().bar_bottom = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/gui/bar_bottom.png", true, &arg);
+    GuiTextureObCollector::Instance().bar_bottom = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"gui/bar_bottom.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().bar_left = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/gui/bar_left.png", true, &arg);
+    GuiTextureObCollector::Instance().bar_left = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"gui/bar_left.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().bar_top = new TextureOb(TYPE::TEXTURE::NONE_ID, "data/gui/bar_top.png", true, &arg);
+    GuiTextureObCollector::Instance().bar_top = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"gui/bar_top.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().text_background =  new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/text_background.png", true, &arg);
+    GuiTextureObCollector::Instance().text_background =  new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/text_background.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().slot_mark_accept =  new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/slot_mark_accept.png", true, &arg);
+    GuiTextureObCollector::Instance().slot_mark_accept =  new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/slot_mark_accept.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().mask_round =  new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/mask_round.png", true, &arg);
+    GuiTextureObCollector::Instance().mask_round =  new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/mask_round.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().slot_mark_reject =  new TextureOb(TYPE::TEXTURE::NONE_ID, "data/other/slot_mark_reject.png", true, &arg);
+    GuiTextureObCollector::Instance().slot_mark_reject =  new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"other/slot_mark_reject.png", true, &arg);
 }
 
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().mark_target =  new TextureOb(TYPE::TEXTURE::NONE_ID, "data/gui/mark_target.png", true, &arg);
+    GuiTextureObCollector::Instance().mark_target =  new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"gui/mark_target.png", true, &arg);
 }
  
 {
     std::vector<int> arg;  
-    GuiTextureObCollector::Instance().mark_target_slot =  new TextureOb(TYPE::TEXTURE::NONE_ID, "data/gui/mark_target_slot.png", true, &arg);
+    GuiTextureObCollector::Instance().mark_target_slot =  new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_REL_PATH+"gui/mark_target_slot.png", true, &arg);
 }
 }
 
@@ -1317,8 +1316,8 @@ void loadImages()
 void loadShaders()
 {
     {
-    const std::string path_vert = "data/shaders/black2alpha.vert"; 
-    const std::string path_frag = "data/shaders/black2alpha.frag";
+    const std::string path_vert = DATA_REL_PATH+"shaders/black2alpha.vert"; 
+    const std::string path_frag = DATA_REL_PATH+"shaders/black2alpha.frag";
     
     ShaderCollector::Instance().black2alpha = glCreateProgram();
          
@@ -1326,8 +1325,8 @@ void loadShaders()
     }
     
     {
-    const std::string path_vert = "data/shaders/shockwave.vert"; 
-    const std::string path_frag = "data/shaders/shockwave.frag"; 
+    const std::string path_vert = DATA_REL_PATH+"shaders/shockwave.vert"; 
+    const std::string path_frag = DATA_REL_PATH+"shaders/shockwave.frag"; 
 
     ShaderCollector::Instance().shockwave = glCreateProgram();
     
@@ -1335,8 +1334,8 @@ void loadShaders()
     }
 
     {
-    const std::string path_vert = "data/shaders/volumetricLight.vert"; 
-    const std::string path_frag = "data/shaders/volumetricLight.frag"; 
+    const std::string path_vert = DATA_REL_PATH+"shaders/volumetricLight.vert"; 
+    const std::string path_frag = DATA_REL_PATH+"shaders/volumetricLight.frag"; 
 
     ShaderCollector::Instance().volumetriclight = glCreateProgram();
     
@@ -1344,8 +1343,8 @@ void loadShaders()
     }
 
     {
-    const std::string path_vert = "data/shaders/light.vert"; 
-    const std::string path_frag = "data/shaders/light.frag"; 
+    const std::string path_vert = DATA_REL_PATH+"shaders/light.vert"; 
+    const std::string path_frag = DATA_REL_PATH+"shaders/light.frag"; 
 
     ShaderCollector::Instance().light = glCreateProgram();
     
@@ -1353,8 +1352,8 @@ void loadShaders()
     }
 
     {
-    const std::string path_vert = "data/shaders/light_normalmap.vert"; 
-    const std::string path_frag = "data/shaders/light_normalmap.frag"; 
+    const std::string path_vert = DATA_REL_PATH+"shaders/light_normalmap.vert"; 
+    const std::string path_frag = DATA_REL_PATH+"shaders/light_normalmap.frag"; 
 
     ShaderCollector::Instance().light_normalmap = glCreateProgram();
     
@@ -1362,8 +1361,8 @@ void loadShaders()
     }
     
     {
-    const std::string path_vert = "data/shaders/blur.vert"; 
-    const std::string path_frag = "data/shaders/blur.frag"; 
+    const std::string path_vert = DATA_REL_PATH+"shaders/blur.vert"; 
+    const std::string path_frag = DATA_REL_PATH+"shaders/blur.frag"; 
     
     ShaderCollector::Instance().blur = glCreateProgram();
 
@@ -1371,8 +1370,8 @@ void loadShaders()
     }
 
     {
-    const std::string path_vert = "data/shaders/extractBright.vert"; 
-    const std::string path_frag = "data/shaders/extractBright.frag"; 
+    const std::string path_vert = DATA_REL_PATH+"shaders/extractBright.vert"; 
+    const std::string path_frag = DATA_REL_PATH+"shaders/extractBright.frag"; 
 
     ShaderCollector::Instance().extractbright = glCreateProgram();
     
@@ -1380,8 +1379,8 @@ void loadShaders()
     }
 
     {
-    const std::string path_vert = "data/shaders/combine.vert"; 
-    const std::string path_frag = "data/shaders/combine.frag"; 
+    const std::string path_vert = DATA_REL_PATH+"shaders/combine.vert"; 
+    const std::string path_frag = DATA_REL_PATH+"shaders/combine.frag"; 
 
     ShaderCollector::Instance().combine = glCreateProgram();
     
@@ -1389,8 +1388,8 @@ void loadShaders()
     }
 
     {
-    const std::string path_vert = "data/shaders/multitex.vert"; 
-    const std::string path_frag = "data/shaders/multitex.frag"; 
+    const std::string path_vert = DATA_REL_PATH+"shaders/multitex.vert"; 
+    const std::string path_frag = DATA_REL_PATH+"shaders/multitex.frag"; 
 
     ShaderCollector::Instance().multitexturing = glCreateProgram();
     
@@ -1398,8 +1397,8 @@ void loadShaders()
     }
 
     {
-    const std::string path_vert = "data/shaders/blank.vert"; 
-    const std::string path_frag = "data/shaders/blank.frag"; 
+    const std::string path_vert = DATA_REL_PATH+"shaders/blank.vert"; 
+    const std::string path_frag = DATA_REL_PATH+"shaders/blank.frag"; 
 
     ShaderCollector::Instance().blank = glCreateProgram();
     
@@ -1407,8 +1406,8 @@ void loadShaders()
     }
 
     {
-    const std::string path_vert = "data/shaders/fogwarspark.vert"; 
-    const std::string path_frag = "data/shaders/fogwarspark.frag"; 
+    const std::string path_vert = DATA_REL_PATH+"shaders/fogwarspark.vert"; 
+    const std::string path_frag = DATA_REL_PATH+"shaders/fogwarspark.frag"; 
 
     ShaderCollector::Instance().fogwarspark = glCreateProgram();
     
@@ -1416,8 +1415,8 @@ void loadShaders()
     }
 
     {
-    const std::string path_vert = "data/shaders/flash.vert"; 
-    const std::string path_frag = "data/shaders/flash.frag"; 
+    const std::string path_vert = DATA_REL_PATH+"shaders/flash.vert"; 
+    const std::string path_frag = DATA_REL_PATH+"shaders/flash.frag"; 
 
     ShaderCollector::Instance().flash = glCreateProgram();
     
@@ -1425,8 +1424,8 @@ void loadShaders()
     }
 
     {
-    const std::string path_vert = "data/shaders/mask.vert"; 
-    const std::string path_frag = "data/shaders/mask.frag"; 
+    const std::string path_vert = DATA_REL_PATH+"shaders/mask.vert"; 
+    const std::string path_frag = DATA_REL_PATH+"shaders/mask.frag"; 
 
     ShaderCollector::Instance().mask = glCreateProgram();
     

@@ -17,8 +17,8 @@
 */
 
 
-#ifndef RESOURCES_H
-#define RESOURCES_H
+#ifndef RESOURCES_HPP
+#define RESOURCES_HPP
 
 #include <string>
 

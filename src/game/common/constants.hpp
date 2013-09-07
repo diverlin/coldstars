@@ -28,7 +28,9 @@
 #include <types/GuiTypes.hpp>
 #include "Converter.hpp"
 
-
+const std::string DATA_REL_PATH = "../data/";
+       
+        
 namespace CONVERTER
 {
     const Converter<float> RADIUS2FORCE(Vec2<float>(10, 500), Vec2<float>(1.0, 0.0), 1000);
