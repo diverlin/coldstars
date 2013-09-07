@@ -1,3 +1,6 @@
+# TODO
+# copy config to bin
+
 cmake_minimum_required (VERSION 2.8)
 
 set(PROJECT run)

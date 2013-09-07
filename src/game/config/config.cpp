@@ -27,7 +27,7 @@ auto_save_mode(false),
 auto_load_mode(false),
 mouse_camera_scroll(false)        
 {
-    boost::property_tree::info_parser::read_info("config.info", ptree);
+    boost::property_tree::info_parser::read_info("../config/config.info", ptree);
 
     SCREEN_WIDTH     = ptree.get<int>("Window.WIDTH");
     SCREEN_HEIGHT    = ptree.get<int>("Window.HEIGHT");
