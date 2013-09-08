@@ -55,6 +55,7 @@
 
 #include "../pureTest/pureTest.cpp"
 #include "../pureTest/threadTest.cpp"
+#include "../pureTest/vectorPerfomanceTest.cpp"
 
 enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT };
 
@@ -62,7 +63,7 @@ int main()
 {
     //runThreadTest();
     //runSinglethread();    
-    //pureTest4();
+    runVectorPerfomanceTest();
 
     init();        
     GameDate::Instance().SetDate(1,1,4000);
