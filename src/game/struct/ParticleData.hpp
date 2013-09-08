@@ -20,8 +20,7 @@
 #ifndef PARTICLEDATA_HPP
 #define PARTICLEDATA_HPP
 
-#include <math/Color4.hpp>
-
+#include <glm/glm.hpp>  
 
 struct ParticleData
 {
@@ -33,9 +32,9 @@ struct ParticleData
     float velocity_end;
     float d_velocity;
 
-    Color4<float> color_start;
-    Color4<float> color_end;
-    Color4<float> color_delta;
+    glm::vec4 color_start;
+    glm::vec4 color_end;
+    glm::vec4 color_delta;
 
     int frame;
     

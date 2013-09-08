@@ -32,8 +32,8 @@ TYPE::GUI getGuiItemSlotSelectorType(TYPE::ENTITY);
        
 int getObjectSize(int w, int h); 
 
-bool get_dPos_ToPoint(const Vec3<float>&, const Vec3<float>&, float, Vec3<float>&);
-bool get_dPos_ToPoint(const Vec3<float>&, const Vec3<float>&, float, Vec3<float>&, float&);
+bool get_dPos_ToPoint(const glm::vec3&, const glm::vec3&, float, glm::vec3&);
+bool get_dPos_ToPoint(const glm::vec3&, const glm::vec3&, float, glm::vec3&, float&);
 
 template <typename T>
 inline T getMin(T val1, T val2)
@@ -56,7 +56,7 @@ inline T getMin(T val1, T val2, T val3)
     return getMin(min2, val3);
 }
 
-Color4<float> getColor4fById(int);
+glm::vec4 getColor4fById(int);
 
 template <typename T>
 int getIndexWithMinVal(const T* array, unsigned int size)

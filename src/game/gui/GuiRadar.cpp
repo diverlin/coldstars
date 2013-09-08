@@ -26,6 +26,7 @@
 
 #include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
+#include <math/myVector.hpp>
 
 GuiRadar::GuiRadar()
 {
@@ -64,7 +65,7 @@ void GuiRadar::UpdateUnique(Player* player)
     {
         if (data_mouse.left_press == true)
         {
-            Vec2<float> new_global_coord( ( data_mouse.pos_screencoord.x - rect.GetCenter().x - screenrect.GetWidth()/2)/scale, ( data_mouse.pos_screencoord.y - rect.GetCenter().y - screenrect.GetHeight()/2)/scale);
+            glm::vec2 new_global_coord( ( data_mouse.pos_screencoord.x - rect.GetCenter().x - screenrect.GetWidth()/2)/scale, ( data_mouse.pos_screencoord.y - rect.GetCenter().y - screenrect.GetHeight()/2)/scale);
             Screen::Instance().SetBottomLeftScreenWC(new_global_coord);
         }
     }
@@ -88,7 +89,8 @@ void GuiRadar::RenderUnique(Player* player) const
 {
     float range_diameter = 2*player->GetNpc()->GetVehicle()->GetProperties().radar;
     Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
-    range_rect.SetCenter(rect.GetCenter() + player->GetNpc()->GetVehicle()->GetCenter() * scale);
+    
+    range_rect.SetCenter(rect.GetCenter() + vec3ToVec2(player->GetNpc()->GetVehicle()->GetCenter()) * scale);
     
     drawTexturedRect(textureOb_background, rect, -2.0);
     drawTexturedRect(textureOb_bar, rect, -2.0);
@@ -135,7 +137,7 @@ void GuiRadar::RenderUnique(Player* player) const
             }
             
             float scale_render = Screen::Instance().GetScale();
-            drawParticle(rect.GetCenter() + entity_vec[i]->GetCenter()*scale/scale_render, size);            
+            drawParticle(rect.GetCenter() + vec3ToVec2(entity_vec[i]->GetCenter()*scale)/scale_render, size);            
         }
     }
     disable_POINTSPRITE(); 

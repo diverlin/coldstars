@@ -72,7 +72,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 
     PlanetData planet_data;
 
-    planet_data.orbit_center.Set(0, 0, DEFAULT_ENTITY_ZPOS); 
+    planet_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS); 
     planet_data.radius_A      = orbit_radius;
     planet_data.radius_B      = orbit_radius; 
     planet_data.orbit_phi_inD = 0;
@@ -86,10 +86,10 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     planet->SetLifeData(data_life);
 
     float scale_comp = getRandInt(ENTITY::PLANET::SCALE_MIN, ENTITY::PLANET::SCALE_MAX);
-    Vec3<float> scale(scale_comp, scale_comp, scale_comp);
+    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     planet->BindData3D(mesh, textureOb, scale);
     
-    planet->SetAngle(Vec3<float>(-getRandInt(10, 40), -getRandInt(10, 40), 0));    
+    planet->SetAngle(glm::vec3(-getRandInt(10, 40), -getRandInt(10, 40), 0));    
     float step = getRandInt(20, 60)*0.01;
     AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
     planet->SetRenderAnimation(animation_program);

@@ -75,7 +75,7 @@
                  
 
 
-//void  getNewBlackHoleEffect(StarSystem* _starsystem, Vec2<float> _center_pos, int obSize)
+//void  getNewBlackHoleEffect(StarSystem* _starsystem, glm::vec2 _center_pos, int obSize)
 //{
     //////obSize = getRandInt(1,9); // DEBUG
     ////BlackHoleEffect* blackholeEffect;
@@ -143,6 +143,6 @@
     //////explosion.play()
         
                         ////BaseParticleSystem_init(_texOb, _center_pos, _data_particle, _num_particles);
-                        ////TextureOb* _texOb, Vec2<float> _center_pos, ParticleData _data_particle, int _num_particles
+                        ////TextureOb* _texOb, glm::vec2 _center_pos, ParticleData _data_particle, int _num_particles
                         ////createParticles();
 //} 

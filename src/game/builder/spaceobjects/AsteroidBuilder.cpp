@@ -71,7 +71,7 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
     
     PlanetData planet_data;
 
-    planet_data.orbit_center.Set(0, 0, DEFAULT_ENTITY_ZPOS); 
+    planet_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS); 
     planet_data.radius_A      = getRandInt(300, 1200);
     planet_data.radius_B      = getRandInt(300, 1200); 
     planet_data.orbit_phi_inD = getRandInt(0, 360);
@@ -82,11 +82,11 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
     asteroid->SetLifeData(data_life);
 
     float scale_comp = getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);
-    Vec3<float> scale(scale_comp, scale_comp, scale_comp);
+    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ASTEROID_ID); 
           
     asteroid->BindData3D(mesh, texOb, scale);        
-    asteroid->SetAngle(Vec3<float>(getRandInt(10, 40), getRandInt(10, 40), 0));            
+    asteroid->SetAngle(glm::vec3(getRandInt(10, 40), getRandInt(10, 40), 0));            
     
     float step = getRandInt(10, 100)*0.01;
     AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);

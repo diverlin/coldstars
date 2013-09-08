@@ -71,7 +71,7 @@ m_FocusedGuiElement(nullptr)
     //for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
     //{
     //float scale = 0.4;
-        //Vec2<float> pos = getVec2f(100*scale, angle);    
+        //glm::vec2 pos = getVec2f(100*scale, angle);    
     //rect.SetCenter(pos);
     //rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);                           
         //rect.Scale(scale);    
@@ -153,7 +153,7 @@ void Cursor::UpdateMouseStuff()
     m_DataMouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
 
     sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());    
-    m_DataMouse.pos_screencoord.Set(mouse_pos.x, Screen::Instance().GetHeight() - mouse_pos.y);
+    m_DataMouse.pos_screencoord = glm::vec2(mouse_pos.x, Screen::Instance().GetHeight() - mouse_pos.y);
     m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*Screen::Instance().GetScale() + Screen::Instance().GetBottomLeftScreenWC();
 }
 
@@ -166,7 +166,7 @@ void Cursor::RenderFocusedObjectStuff() const
         {                    
             m_FocusedSpaceObject->RenderStuffWhenFocusedInSpace();
             
-            Box2D box(m_FocusedSpaceObject->GetCenter(), m_FocusedSpaceObject->GetSize());
+            Box2D box(vec3ToVec2(m_FocusedSpaceObject->GetCenter()), vec3ToVec2(m_FocusedSpaceObject->GetSize()));
             box.SetScale(scale, scale);
             box.SetAngle(m_FocusedSpaceObject->GetAngle().z);
             
@@ -208,7 +208,7 @@ void Cursor::RenderItem() const
 {
     enable_BLEND();
     {
-        m_ItemSlot->RenderItem(m_Box, Vec3<float>(0,0,0));   
+        m_ItemSlot->RenderItem(m_Box, glm::vec2(0));   
     }
     disable_BLEND();
 }

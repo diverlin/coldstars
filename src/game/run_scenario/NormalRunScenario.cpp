@@ -84,8 +84,8 @@ void NormalRunScenario::Init(Player* player)
     StarSystem* const starsystem = galaxy->GetRandomSector()->GetRandomStarSystem();
     if (player2space == true)
     {
-        Vec3<float> center(500, 500, DEFAULT_ENTITY_ZPOS);
-        Vec3<float> angle(0,0,0);  
+        glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
+        glm::vec3 angle(0,0,0);  
         starsystem->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
     }
     else

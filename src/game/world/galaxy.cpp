@@ -44,7 +44,7 @@ void Galaxy::PutChildsToGarbage() const
     }
 }
 
-void Galaxy::Add(Sector* sector, const Vec3<float>& center) 
+void Galaxy::Add(Sector* sector, const glm::vec3& center) 
 { 
     sector->SetGalaxy(this);
         sector->SetCenter(center);

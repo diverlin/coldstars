@@ -27,8 +27,8 @@ class SFML_Wrapper
 
         void wrDrawSpecific();
         
-        void DrawText(const std::string& str, int font_size, const Vec2<float>& pos);
-        void DrawText(const std::string& str, int font_size, const Vec2<float>& pos, const Color4<int>& color);
+        void DrawText(const std::string& str, int font_size, const glm::vec2& pos);
+        void DrawText(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color);
 
     private:
         int bpp;

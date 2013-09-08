@@ -21,8 +21,7 @@
 #define PARTICLE_HPP
  
 #include <struct/ParticleData.hpp>
-#include <math/Vec2.hpp>
-#include <math/Color4.hpp>
+#include <glm/glm.hpp>
 
 
 class Particle
@@ -31,8 +30,8 @@ class Particle
         Particle(const ParticleData&);       
         ~Particle();
         
-        void SetPosition(const Vec2<float>& pos) { this->pos = pos; };              
-        void SetVelocity(const Vec2<float>& _velocity) { d_pos = _velocity; };
+        void SetPosition(const glm::vec2& pos) { this->pos = pos; };              
+        void SetVelocity(const glm::vec2& _velocity) { d_pos = _velocity; };
         
         bool GetAlive()       const { return is_alive; };
         float GetAlpha()      const { return color.a; };
@@ -47,7 +46,7 @@ class Particle
         void CalcRandomVelocity();            
         void CalcRandomAccurateVelocity();
         void CalcRandomDirtyVelocity();
-        //void calcAccurateRandomVelocity2(Vec2<float>);
+        //void calcAccurateRandomVelocity2(glm::vec2);
         
         void Update();
         void Render() const;
@@ -57,10 +56,10 @@ class Particle
     private:
         bool is_alive;
         
-        Vec2<float> pos;
-        Vec2<float> d_pos;
+        glm::vec2 pos;
+        glm::vec2 d_pos;
         
-        Color4<float> color;
+        glm::vec4 color;
         
         float size;
         

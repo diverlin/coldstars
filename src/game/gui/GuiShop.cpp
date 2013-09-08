@@ -29,7 +29,7 @@
 
 GuiShop::GuiShop():shop(nullptr)
 {
-    //Vec2<float> center(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);
+    //glm::vec2 center(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);
             
     //TextureOb* _texOb = GuiTextureObCollector::Instance().text_background; 
     
@@ -37,8 +37,8 @@ GuiShop::GuiShop():shop(nullptr)
     //float zsize = 1;
     {
         //ButtonSingle* minerals_button = new ButtonSingle(_texOb, GUI::BUTTON::MINERALS_ID, "minerals");  
-        //Vec3<float> center(center.x, center.y - 1*(GUI::ICON_SIZE + 5), zpos);
-        //Vec3<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+        //glm::vec3 center(center.x, center.y - 1*(GUI::ICON_SIZE + 5), zpos);
+        //glm::vec3 size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //minerals_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::MINERALS_ID, minerals_button));
@@ -46,8 +46,8 @@ GuiShop::GuiShop():shop(nullptr)
     
     {
         //ButtonSingle* food_button = new ButtonSingle(_texOb, GUI::BUTTON::FOOD_ID, "food");  
-        //Vec3<float> center(center.x, center.y - 2*(GUI::ICON_SIZE + 5), zpos);
-        //Vec3<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+        //glm::vec3 center(center.x, center.y - 2*(GUI::ICON_SIZE + 5), zpos);
+        //glm::vec3 size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //food_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::FOOD_ID, food_button));
@@ -55,8 +55,8 @@ GuiShop::GuiShop():shop(nullptr)
     
     {
         //ButtonSingle* medicine_button = new ButtonSingle(_texOb, GUI::BUTTON::MEDICINE_ID, "medicine");  
-        //Vec3<float> center(center.x, center.y - 3*(GUI::ICON_SIZE + 5), zpos);
-        //Vec3<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+        //glm::vec3 center(center.x, center.y - 3*(GUI::ICON_SIZE + 5), zpos);
+        //glm::vec3 size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //medicine_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::MEDICINE_ID, medicine_button));
@@ -64,8 +64,8 @@ GuiShop::GuiShop():shop(nullptr)
     
     {
         //ButtonSingle* military_button = new ButtonSingle(_texOb, GUI::BUTTON::MILITARY_ID, "military");  
-        //Vec3<float> center(center.x, center.y - 4*(GUI::ICON_SIZE + 5), zpos);
-        //Vec3<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+        //glm::vec3 center(center.x, center.y - 4*(GUI::ICON_SIZE + 5), zpos);
+        //glm::vec3 size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //military_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::MILITARY_ID, military_button));
@@ -73,8 +73,8 @@ GuiShop::GuiShop():shop(nullptr)
             
     {
         //ButtonSingle* drug_button = new ButtonSingle(_texOb, GUI::BUTTON::DRUG_ID, "drug");  
-        //Vec3<float> center(center.x, center.y - 5*(GUI::ICON_SIZE + 5), zpos);
-        //Vec3<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+        //glm::vec3 center(center.x, center.y - 5*(GUI::ICON_SIZE + 5), zpos);
+        //glm::vec3 size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //drug_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::DRUG_ID, drug_button));  
@@ -82,8 +82,8 @@ GuiShop::GuiShop():shop(nullptr)
     
     {
         //ButtonSingle* exclusive_button = new ButtonSingle(_texOb, GUI::BUTTON::EXCLUSIVE_ID, "exclusive");  
-        //Vec3<float> center(center.x, center.y - 6*(GUI::ICON_SIZE + 5), zpos);
-        //Vec3<float> size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+        //glm::vec3 center(center.x, center.y - 6*(GUI::ICON_SIZE + 5), zpos);
+        //glm::vec3 size(10*GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //exclusive_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::EXCLUSIVE_ID, exclusive_button));  

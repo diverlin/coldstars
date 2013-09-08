@@ -59,7 +59,7 @@ void BaseSlot::LoadDataUniqueBaseSlot(const boost::property_tree::ptree& load_pt
     #endif
        
     unresolved_BaseSlot.owner_id = load_ptree.get<int>("unresolved.owner_id"); 
-    position.Set(load_ptree.get<int>("position.x"), load_ptree.get<int>("position.y"));
+    position = glm::vec2(load_ptree.get<int>("position.x"), load_ptree.get<int>("position.y"));
 
 }
 

@@ -27,7 +27,7 @@ AnimationWiggleAxisX::~AnimationWiggleAxisX()
 {}
 
 /* virtual */
-void AnimationWiggleAxisX::Update(Vec3<float>& angle)
+void AnimationWiggleAxisX::Update(glm::vec3& angle)
 {
     if (clockwise)
     {

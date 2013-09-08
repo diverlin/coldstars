@@ -30,7 +30,7 @@ Atmosphere::Atmosphere(TextureOb* textureOb)
 parent(nullptr),
 textureOb(textureOb)
 {           
-    d_angle.Set(0.0, 0.0, -0.4);
+    d_angle = glm::vec3(0.0, 0.0, -0.4);
 }
 
 Atmosphere::~Atmosphere()
@@ -40,11 +40,11 @@ Atmosphere::~Atmosphere()
     #endif    
 }
              
-void Atmosphere::Render(const Vec2<float>& scroll_coords)
+void Atmosphere::Render(const glm::vec2& scroll_coords)
 {         
     angle += d_angle;
     
-    const Color4<float>& color = parent->GetStarSystem()->GetColor4f(); 
+    const glm::vec4& color = parent->GetStarSystem()->GetColor4f(); 
     float ambient_factor = 0.25;
     
     glUseProgram(ShaderCollector::Instance().light);
@@ -59,7 +59,7 @@ void Atmosphere::Render(const Vec2<float>& scroll_coords)
     glBindTexture(GL_TEXTURE_2D, textureOb->texture);
     glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
     float scale_rate = 1.05;
-    Vec3<float> size(parent->GetSize()*scale_rate);
+    glm::vec3 size(parent->GetSize()*scale_rate);
     
     renderMesh(parent->GetMesh(), parent->GetCenter(), size, angle, false);
     glDisable(GL_BLEND);

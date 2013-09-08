@@ -43,14 +43,14 @@ void ShieldEffect::SetParent(BaseSpaceEntity* parent)
     this->parent = parent; 
     
     float rate = 1.3; 
-    size.Set(parent->GetSize() * rate); 
+    size = glm::vec3(parent->GetSize() * rate); 
 }
 
 
 void ShieldEffect::Update()
 {      
-    if (color.a > alpha_start)     {     color.a -= d_alpha; }
-    else                        {    color.a = alpha_start; }
+    if (color.a > alpha_start)      { color.a -= d_alpha; }
+    else                            { color.a = alpha_start; }
 }
 
 void ShieldEffect::Render(float parent_d_alpha) const

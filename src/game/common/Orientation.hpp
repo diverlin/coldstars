@@ -25,8 +25,8 @@
 
 struct UnresolvedDataUniqueOrientation
 {    
-    Vec3<float> center;
-    Vec3<float> angle; 
+    glm::vec3 center;
+    glm::vec3 angle; 
 };
 
 class Orientation : public Base
@@ -35,28 +35,28 @@ class Orientation : public Base
         Orientation();
         virtual ~Orientation() override;
 
-        void SetParentCenter(float x, float y, float z) { m_ParentCenter.Set(x, y, z); }        
-        void SetParentCenter(Vec3<float> parent_center) { m_ParentCenter.Set(parent_center); }
+        void SetParentCenter(float x, float y, float z) { m_ParentCenter = glm::vec3(x, y, z); }        
+        void SetParentCenter(const glm::vec3& parent_center) { m_ParentCenter = parent_center; }
         
-        void SetCenter(float x, float y, float z)    { m_Center.Set(x, y, z); m_IsUpdated = false; }
-        void SetCenter(const Vec3<float>& center)   { m_Center.Set(center); m_IsUpdated = false; }
+        void SetCenter(float x, float y, float z)    { m_Center = glm::vec3(x, y, z); m_IsUpdated = false; }
+        void SetCenter(const glm::vec3& center)   { m_Center = center; m_IsUpdated = false; }
         
-        void SetAngle(float x, float y, float z) { m_Angle.Set(x, y, z); m_IsUpdated = false; }
-        void SetAngle(const Vec3<float>& angle) { m_Angle.Set(angle); m_IsUpdated = false; }
+        void SetAngle(float x, float y, float z) { m_Angle = glm::vec3(x, y, z); m_IsUpdated = false; }
+        void SetAngle(const glm::vec3& angle) { m_Angle = angle; m_IsUpdated = false; }
         void SetAngleZ(float angle_z)     { m_Angle.z = angle_z; m_IsUpdated = false; }
         
-        void SetSize(float sx, float sy, float sz) { m_Size.Set(sx, sy, sz); m_IsUpdated = false; }
-        void SetSize(const Vec3<float>& size) { m_Size.Set(size); m_IsUpdated = false; }
+        void SetSize(float x, float y, float z) { m_Size = glm::vec3(x, y, z); m_IsUpdated = false; }
+        void SetSize(const glm::vec3& size) { m_Size = size; m_IsUpdated = false; }
         
-        const Vec3<float>& GetAngle() const { return m_Angle; }       
-        Vec3<float>& GetAngle() { return m_Angle; }      // !!!
+        const glm::vec3& GetAngle() const { return m_Angle; }       
+        glm::vec3& GetAngle() { return m_Angle; }      // !!!
         const float* const GetpAngleZ() { return &m_Angle.z; } 
         
-        const Vec3<float>& GetCenter() const { return m_Center; }
-        const Vec3<float>& GetSize()  const { return m_Size; } 
+        const glm::vec3& GetCenter() const { return m_Center; }
+        const glm::vec3& GetSize()  const { return m_Size; } 
         
-        Vec3<float>* const GetpCenter() { return &m_Center; }
-        const Vec3<float>* const GetpParentCenter() { return &m_ParentCenter; }
+        glm::vec3* const GetpCenter() { return &m_Center; }
+        const glm::vec3* const GetpParentCenter() { return &m_ParentCenter; }
                         
            Points& GetPoints()          { return m_Points; }  // !!!
            
@@ -77,13 +77,13 @@ class Orientation : public Base
 
         float m_CollisionRadius;
                 
-        Vec3<float> m_Center;                  
-        Vec3<float> m_Size;
-        Vec3<float> m_Angle;
+        glm::vec3 m_Center;                  
+        glm::vec3 m_Size;
+        glm::vec3 m_Angle;
         
-        Vec3<float> m_Orient;
+        glm::vec3 m_Orient;
         
-        Vec3<float> m_ParentCenter; 
+        glm::vec3 m_ParentCenter; 
 
         Points m_Points;
                                 

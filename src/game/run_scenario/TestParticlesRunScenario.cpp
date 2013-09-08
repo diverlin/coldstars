@@ -83,8 +83,8 @@ void TestParticlesRunScenario::Init(Player* player)
     Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
     God::Instance().SetGalaxy(galaxy);
         
-    Vec3<float> center(500, 500, DEFAULT_ENTITY_ZPOS);
-    Vec3<float> angle(0,0,0); 
+    glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
+    glm::vec3 angle(0,0,0); 
      
     galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
         
@@ -93,7 +93,7 @@ void TestParticlesRunScenario::Init(Player* player)
     {
         Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
 
-        Vec3<float> center(10*i, 200+20, 0);        
+        glm::vec3 center(10*i, 200+20, 0);        
         starsystem->AddContainer(container, center);
     }
 
@@ -101,7 +101,7 @@ void TestParticlesRunScenario::Init(Player* player)
     {
         Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
 
-        Vec3<float> center(10*i, 200-20, 0);        
+        glm::vec3 center(10*i, 200-20, 0);        
         starsystem->AddContainer(container, center);
     }
 }
@@ -118,7 +118,7 @@ void TestParticlesRunScenario::Update_inDynamic(Player* player)
         {
             float radius = 20*i;
             
-            Vec3<float> center(offset, 200, 0);
+            glm::vec3 center(offset, 200, 0);
             ExplosionEffect* explosion = getNewExplosionEffect(radius);
             starsystem->Add(explosion, center);
             

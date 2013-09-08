@@ -19,12 +19,15 @@
 #ifndef COLLISION_HPP
 #define COLLISION_HPP
 
-#include "points.hpp"
+#include <glm/glm.hpp>   
+
+bool checkCollisionDotWithCircle_DIRTY(const glm::vec2& dot, const glm::vec2& center, float radius);
+bool checkCollisionDotWithRectangle(const glm::vec2& dot, const glm::vec2& center, const glm::vec2& size);
 
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision2D(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 {
-    if (checkCollisionDotWithCircle_DIRTY(agressor->GetCenter(), victim->GetCenter(), victim->GetCollisionRadius()) == true)
+    if (checkCollisionDotWithCircle_DIRTY(vec3ToVec2(agressor->GetCenter()), vec3ToVec2(victim->GetCenter()), victim->GetCollisionRadius()) == true)
     {
         victim->Hit(agressor->GetDamage(), show_effect);
         agressor->CollisionEvent(show_effect);
@@ -36,9 +39,6 @@ bool checkCollision2D(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
         return false;
     }
 }
-
-bool checkCollisionDotWithCircle_DIRTY(const Vec2<float>& dot, const Vec2<float>& center, float radius);
-bool checkCollisionDotWithRectangle(const Vec2<float>& dot, const Vec2<float>& center, const Vec2<float>& size);
 
 #endif 
 

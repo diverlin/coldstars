@@ -44,8 +44,8 @@ diplomat_undo(0)
     
     {
         //ButtonSingle* Increment_attack_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_ATTACK_ID, "increment attack");  
-        //Vec3<float> center(0, -button_h, zpos);
-        //Vec3<float> size(button_w, button_h, zsize);
+        //glm::vec3 center(0, -button_h, zpos);
+        //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Increment_attack_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_ATTACK_ID, Increment_attack_button));
@@ -53,8 +53,8 @@ diplomat_undo(0)
     
     {
         //ButtonSingle* Decrement_attack_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_ATTACK_ID, "decrement attack");  
-        //Vec3<float> center(0, -2*button_h, zpos);
-        //Vec3<float> size(button_w, button_h, zsize);
+        //glm::vec3 center(0, -2*button_h, zpos);
+        //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Decrement_attack_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_ATTACK_ID, Decrement_attack_button));
@@ -62,8 +62,8 @@ diplomat_undo(0)
      
     {            
         //ButtonSingle* Increment_defence_button  = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_DEFENCE_ID, "increment defence");  
-        //Vec3<float> center(button_w, -button_h, zpos);
-        //Vec3<float> size(button_w, button_h, zsize);
+        //glm::vec3 center(button_w, -button_h, zpos);
+        //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Increment_defence_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_DEFENCE_ID, Increment_defence_button));
@@ -71,8 +71,8 @@ diplomat_undo(0)
     
     {
         //ButtonSingle* Decrement_defence_button  = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_DEFENCE_ID, "decrement defence");  
-        //Vec3<float> center(button_w, -2*button_h, zpos);
-        //Vec3<float> size(button_w, button_h, zsize);
+        //glm::vec3 center(button_w, -2*button_h, zpos);
+        //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Decrement_defence_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_DEFENCE_ID, Decrement_defence_button));
@@ -80,8 +80,8 @@ diplomat_undo(0)
     
     {        
         //ButtonSingle* Increment_leader_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_LEADER_ID, "increment leader");  
-        //Vec3<float> center(2*button_w, -button_h, zpos);
-        //Vec3<float> size(button_w, button_h, zsize);
+        //glm::vec3 center(2*button_w, -button_h, zpos);
+        //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Increment_leader_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_LEADER_ID, Increment_leader_button));
@@ -89,8 +89,8 @@ diplomat_undo(0)
     
     {
         //ButtonSingle* Decrement_leader_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_LEADER_ID, "decrement leader"); 
-        //Vec3<float> center(2*button_w, -2*button_h, zpos);
-        //Vec3<float> size(button_w, button_h, zsize);
+        //glm::vec3 center(2*button_w, -2*button_h, zpos);
+        //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Decrement_leader_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_LEADER_ID, Decrement_leader_button));
@@ -98,8 +98,8 @@ diplomat_undo(0)
      
     {     
         //ButtonSingle* Increment_trader_button   = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_TRADER_ID, "increment trader");  
-        //Vec3<float> center(3*button_w, -button_h, zpos);
-        //Vec3<float> size(button_w, button_h, zsize);
+        //glm::vec3 center(3*button_w, -button_h, zpos);
+        //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Increment_trader_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_TRADER_ID, Increment_trader_button));
@@ -107,8 +107,8 @@ diplomat_undo(0)
     
     {
         //ButtonSingle* Decrement_trader_button   = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_TRADER_ID, "decrement trader"); 
-        //Vec3<float> center(3*button_w, -2*button_h, zpos);
-        //Vec3<float> size(button_w, button_h, zsize);
+        //glm::vec3 center(3*button_w, -2*button_h, zpos);
+        //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Decrement_trader_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_TRADER_ID, Decrement_trader_button));
@@ -116,8 +116,8 @@ diplomat_undo(0)
     
     {
         //ButtonSingle* Increment_technic_button  = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_TECHNIC_ID, "increment technic");  
-        //Vec3<float> center(4*button_w, -button_h, zpos);
-        //Vec3<float> size(button_w, button_h, zsize);
+        //glm::vec3 center(4*button_w, -button_h, zpos);
+        //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Increment_technic_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_TECHNIC_ID, Increment_technic_button));
@@ -125,8 +125,8 @@ diplomat_undo(0)
     
     {
         //ButtonSingle* Decrement_technic_button  = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_TECHNIC_ID, "decrement technic"); 
-        //Vec3<float> center(4*button_w, -2*button_h, zpos);
-        //Vec3<float> size(button_w, button_h, zsize);
+        //glm::vec3 center(4*button_w, -2*button_h, zpos);
+        //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Decrement_technic_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_TECHNIC_ID, Decrement_technic_button));
@@ -134,8 +134,8 @@ diplomat_undo(0)
     
     {
         //ButtonSingle* Increment_diplomat_button = new ButtonSingle(texOb_icon_plus, GUI::BUTTON::INCREMENT_DIPLOMAT_ID, "increment diplomat");  
-        //Vec3<float> center(5*button_w, -button_h, zpos);
-        //Vec3<float> size(button_w, button_h, zsize);
+        //glm::vec3 center(5*button_w, -button_h, zpos);
+        //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Increment_diplomat_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::INCREMENT_DIPLOMAT_ID, Increment_diplomat_button));
@@ -143,8 +143,8 @@ diplomat_undo(0)
     
     {
         //ButtonSingle* Decrement_diplomat_button = new ButtonSingle(texOb_icon_minus, GUI::BUTTON::DECREMENT_DIPLOMAT_ID, "decrement diplomat");
-        //Vec3<float> center(5*button_w, -2*button_h, zpos);
-        //Vec3<float> size(button_w, button_h, zsize);
+        //glm::vec3 center(5*button_w, -2*button_h, zpos);
+        //glm::vec3 size(button_w, button_h, zsize);
         //Box box(center, size);
         //Decrement_diplomat_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::DECREMENT_DIPLOMAT_ID, Decrement_diplomat_button));    

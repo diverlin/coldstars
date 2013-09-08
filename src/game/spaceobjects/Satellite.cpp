@@ -61,7 +61,7 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
         //printf("sat orbit =%f,%f\n", orbit->getPosition().x, orbit->getPosition().y);
         //if (parent != nullptr)
         //{        
-            Vec3<float> new_pos;
+            glm::vec3 new_pos;
             new_pos.x = GetParent()->GetCenter().x + m_Orbit.GetPosition().x;
             new_pos.y = GetParent()->GetCenter().y + m_Orbit.GetPosition().y;
             new_pos.z = GetParent()->GetCenter().z;

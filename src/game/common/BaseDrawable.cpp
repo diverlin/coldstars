@@ -56,7 +56,7 @@ BaseDrawable::~BaseDrawable()
     delete m_AnimationProgram;
 }
 
-void BaseDrawable::BindData3D(Mesh* mesh, TextureOb* textureOb, const Vec3<float>& size)
+void BaseDrawable::BindData3D(Mesh* mesh, TextureOb* textureOb, const glm::vec3& size)
 {
     m_Mesh = mesh;
     m_TextureOb = textureOb; 
@@ -75,7 +75,7 @@ void BaseDrawable::BindData2D(TextureOb* textureOb)
 void BaseDrawable::RenderCollisionRadius() const
 {
     TextureOb* texOb_collision_radius =  GuiTextureObCollector::Instance().radar_range;
-    drawQuad(texOb_collision_radius, GetCenter(), Vec3<float>(2*GetCollisionRadius(), 2*GetCollisionRadius(), 2*GetCollisionRadius()));
+    drawQuad(texOb_collision_radius, GetCenter(), glm::vec3(2*GetCollisionRadius(), 2*GetCollisionRadius(), 2*GetCollisionRadius()));
 }
 
 void BaseDrawable::UpdateRenderAnimation()
@@ -114,7 +114,7 @@ bool BaseDrawable::UpdateFadeOutEffect()
     }
 }
 
-void BaseDrawable::RenderMeshLight(const Vec2<float>& scroll_coords, const Color4<float>& color) const
+void BaseDrawable::RenderMeshLight(const glm::vec2& scroll_coords, const glm::vec4& color) const
 {
     float ambient_factor = 0.25;
     
@@ -135,7 +135,7 @@ void BaseDrawable::RenderMeshLight(const Vec2<float>& scroll_coords, const Color
     glActiveTexture(GL_TEXTURE0);
 }
         
-void BaseDrawable::RenderMeshLightNormalMap(const Vec2<float>& scroll_coords, const Color4<float>& color) const
+void BaseDrawable::RenderMeshLightNormalMap(const glm::vec2& scroll_coords, const glm::vec4& color) const
 {
     float ambient_factor = 0.25;
     

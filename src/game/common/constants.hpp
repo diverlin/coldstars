@@ -33,9 +33,9 @@ const std::string DATA_REL_PATH = "../data/";
         
 namespace CONVERTER
 {
-    const Converter<float> RADIUS2FORCE(Vec2<float>(10, 500), Vec2<float>(1.0, 0.0), 1000);
-    const Converter<float> SIZE2SIZEID(Vec2<float>(0, 200), Vec2<float>(1.0, 10.0), 1000);
-    const Converter<float> DIST2GRAVITY(Vec2<float>(0, 600), Vec2<float>(1.0, 0.0), 1000);
+    const Converter<glm::vec2, float> RADIUS2FORCE(glm::vec2(10, 500), glm::vec2(1.0, 0.0), 1000);
+    const Converter<glm::vec2, float> SIZE2SIZEID(glm::vec2(0, 200), glm::vec2(1.0, 10.0), 1000);
+    const Converter<glm::vec2, float> DIST2GRAVITY(glm::vec2(0, 600), glm::vec2(1.0, 0.0), 1000);
 };
 
 #define LOG_ENABLED 0
@@ -156,13 +156,13 @@ const unsigned int SHOCKWAVES_MAX_NUM = 10;
 
 const int PRICE_FUEL = 10;
 
-const Vec2<float> GUI_VEHICLE_INSPACE_OFFSET(-180, 0);
-const Vec2<float> GUI_VEHICLE_INANGAR_OFFSET(-180, 0);
-const Vec2<float> GUI_VEHICLE_INSTORE_OFFSET(-180, -200);
+const glm::vec2 GUI_VEHICLE_INSPACE_OFFSET(-180, 0);
+const glm::vec2 GUI_VEHICLE_INANGAR_OFFSET(-180, 0);
+const glm::vec2 GUI_VEHICLE_INSTORE_OFFSET(-180, -200);
 
-const Vec2<float> GUI_SKILLS_INSPACE_OFFSET(100, 0);
-const Vec2<float> GUI_SKILLS_INANGAR_OFFSET(100, 0);
-const Vec2<float> GUI_STORE_OFFSET(-200, 200);
+const glm::vec2 GUI_SKILLS_INSPACE_OFFSET(100, 0);
+const glm::vec2 GUI_SKILLS_INANGAR_OFFSET(100, 0);
+const glm::vec2 GUI_STORE_OFFSET(-200, 200);
 
 const int NATURELAND_ITEM_SLOT_MIN = 2;
 const int NATURELAND_ITEM_SLOT_MAX = 4;
@@ -279,10 +279,10 @@ namespace COLOR
         RED_ID=1, GREEN_ID, BLUE_ID, YELLOW_ID, GREY_ID
     };
     
-    const Color4<float> COLOR4F_WHITE(1.0, 1.0, 1.0, 1.0);
-    const Color4<int> COLOR4I_WHITE(255, 255, 255, 255);
-    const Color4<int> COLOR4I_RED_LIGHT(255, 128, 128, 255);
-    const Color4<int> COLOR4I_BLUE_LIGHT(128, 128, 255, 255);
+    const glm::vec4 COLOR4F_WHITE(1.0, 1.0, 1.0, 1.0);
+    const glm::ivec4 COLOR4I_WHITE(255, 255, 255, 255);
+    const glm::ivec4 COLOR4I_RED_LIGHT(255, 128, 128, 255);
+    const glm::ivec4 COLOR4I_BLUE_LIGHT(128, 128, 255, 255);
         
 
 }

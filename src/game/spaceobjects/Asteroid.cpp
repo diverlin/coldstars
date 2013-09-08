@@ -72,7 +72,7 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
     {      
         Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
         
-        Vec3<float> impulse_dir(getXYVec3Unit(angleZ));
+        glm::vec3 impulse_dir(getXYVec3Unit(angleZ));
         container->ApplyImpulse(impulse_dir, impulse_strength);
         
         GetStarSystem()->AddContainer(container, GetCenter());
@@ -101,7 +101,7 @@ void Asteroid::UpdateInfo()
     GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 }     
 
-void Asteroid::Render_NEW(const Vec2<float>& scroll_coords)
+void Asteroid::Render_NEW(const glm::vec2& scroll_coords)
 {
     UpdateRenderAnimation();
     RenderMeshLightNormalMap(scroll_coords, GetStarSystem()->GetColor4f());

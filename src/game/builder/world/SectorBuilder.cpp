@@ -68,7 +68,7 @@ void SectorBuilder::CreateNewInternals(Sector* sector, const SectorDescription& 
 {
     for(unsigned int i=0; i<sector_description.starsystem_descriptions.size(); i++)
     {  
-        Vec3<float> center(getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));                                    
+        glm::vec3 center(getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));                                    
         
         StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem(sector_description.starsystem_descriptions[i]);
         sector->Add(starsystem, center); 

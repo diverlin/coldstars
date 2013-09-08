@@ -118,8 +118,8 @@ void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
         
         if (item_slot->CheckTarget(&target) == STATUS::TARGET_OK)
         {
-            Vec3<float> impulse_dir(vehicle.GetCenter() - target.GetCenter());
-            impulse_dir.Normalize();
+            glm::vec3 impulse_dir = glm::normalize(vehicle.GetCenter() - target.GetCenter());
+
         
             target.ApplyImpulse(impulse_dir, 0.001* GetStrength());
                 

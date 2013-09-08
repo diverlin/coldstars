@@ -96,6 +96,6 @@ void ButtonItemSlot2::RenderUnique(Player*) const
 {
     if (GetItemSlot() != nullptr)
     {
-        GetItemSlot()->Render(GetBox(), Vec3<float>(0,0,0), false);
+        GetItemSlot()->Render(GetBox(), glm::vec2(0), false);
     }
 }        

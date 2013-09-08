@@ -67,8 +67,8 @@ slider_shared(nullptr)
     
     {
         //ButtonSingle* angar_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::ANGAR_ID, "angar"); 
-        //Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
-        //Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);   
+        //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
+        //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);   
         //Box box(center, size);        
         //angar_screen_button->SetBox(box);                         
         //button_map.insert(std::make_pair(GUI::BUTTON::ANGAR_ID, angar_screen_button));
@@ -76,8 +76,8 @@ slider_shared(nullptr)
     
     {
         //ButtonSingle* store_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::STORE_ID, "store");
-        //Vec3<float> center(screen_w - 2 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos); 
-        //Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);    
+        //glm::vec3 center(screen_w - 2 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos); 
+        //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);    
         //Box box(center, size);        
         //store_screen_button->SetBox(box);         
         //button_map.insert(std::make_pair(GUI::BUTTON::STORE_ID, store_screen_button));
@@ -85,8 +85,8 @@ slider_shared(nullptr)
         
     {                        
         //ButtonSingle* shop_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::SHOP_ID, "shop");
-        //Vec3<float> center(screen_w - 3 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
-        //Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+        //glm::vec3 center(screen_w - 3 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
+        //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //shop_screen_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::SHOP_ID, shop_screen_button));
@@ -94,8 +94,8 @@ slider_shared(nullptr)
     
     {                     
         //ButtonSingle* galaxymap_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::GALAXYMAP_ID, "galaxymap");
-        //Vec3<float> center(screen_w - 4 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos); 
-        //Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+        //glm::vec3 center(screen_w - 4 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos); 
+        //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //galaxymap_screen_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::GALAXYMAP_ID, galaxymap_screen_button));
@@ -103,8 +103,8 @@ slider_shared(nullptr)
     
     {                     
         //ButtonSingle* goverment_screen_button = new ButtonSingle(texOb_button, GUI::BUTTON::GOVERMENT_ID, "goverment");
-        //Vec3<float> center(screen_w - 5 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
-        //Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+        //glm::vec3 center(screen_w - 5 * (GUI::ICON_SIZE + 5), GUI::ICON_SIZE, zpos);
+        //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //goverment_screen_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::GOVERMENT_ID, goverment_screen_button));
@@ -180,7 +180,7 @@ void GuiKosmoport::EnterGuiScanInAngar()
 
     int screen_w = Screen::Instance().GetWidth();
     int screen_h = Screen::Instance().GetHeight();
-    Vec2<float> center_screen(screen_w/2, screen_h/2);
+    glm::vec2 center_screen(screen_w/2, screen_h/2);
     
     //bool allow_full_control = m_Player->IsAbleToGetFullControlOnScanedVehicle();
     //gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
@@ -232,7 +232,7 @@ void GuiKosmoport::EnterGuiStoreScreen()
     
     int screen_w = Screen::Instance().GetWidth();
     int screen_h = Screen::Instance().GetHeight();
-    Vec2<float> center_screen(screen_w/2, screen_h/2);
+    glm::vec2 center_screen(screen_w/2, screen_h/2);
     
     //gui_store.SetOffset(center_screen + GUI_STORE_OFFSET);
     
@@ -479,7 +479,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
 void GuiKosmoport::Render(const MouseData& data_mouse)
 {        /*
     Rect screen_rect(0, 0, Screen::Instance().GetWidth(), Screen::Instance().GetHeight());   
-    Vec2<float> center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);
+    glm::vec2 center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);
 
     switch(active_screen_id)
     {
@@ -518,7 +518,7 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
                 Render(); 
                 RenderChildInfo(data_mouse); 
             disable_BLEND();
-            Screen::Instance().DrawText("credits:"+int2str(player->GetNpc()->GetCredits()), 12, Vec2<float>(600, 200));
+            Screen::Instance().DrawText("credits:"+int2str(player->GetNpc()->GetCredits()), 12, glm::vec2(600, 200));
 
             break;
         }

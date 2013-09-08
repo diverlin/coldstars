@@ -163,8 +163,8 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
                     satellite->BindOwnerNpc(npc);
                 }
             
-                Vec3<float> orbit_center(0, 0, DEFAULT_ENTITY_ZPOS);
-                Vec3<float> angle(0,0,0);
+                glm::vec3 orbit_center(0, 0, DEFAULT_ENTITY_ZPOS);
+                glm::vec3 angle(0,0,0);
                 planet->GetStarSystem()->AddVehicle(satellite, orbit_center, angle, planet);
             }
         }
@@ -223,9 +223,9 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
         Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         spacestation->BindOwnerNpc(npc);
 
-        Vec2<float> center = getRandVec2f(700, 1500);
-        Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
-        Vec3<float> angle(0,0,getRandInt(0, 360));  
+        glm::vec2 center = getRandVec2f(700, 1500);
+        glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
+        glm::vec3 angle(0,0,getRandInt(0, 360));  
                         
         starsystem->AddVehicle(spacestation, center3, angle, nullptr);
         
@@ -236,8 +236,8 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
             Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
             satellite->BindOwnerNpc(new_npc);
             
-            Vec3<float> center(0, 0, DEFAULT_ENTITY_ZPOS);
-            Vec3<float> angle(0, 0, 0);
+            glm::vec3 center(0, 0, DEFAULT_ENTITY_ZPOS);
+            glm::vec3 angle(0, 0, 0);
                             
             starsystem->AddVehicle(satellite, center, angle, spacestation);
         }
@@ -273,8 +273,8 @@ void God::CreateShips(StarSystem* starsystem, int ship_num, TYPE::RACE npc_race_
         Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         new_ship->BindOwnerNpc(new_npc);
 
-        Vec3<float> center = getRandXYVec3f(300, 1200, DEFAULT_ENTITY_ZPOS);
-        Vec3<float> angle(0, 0, getRandInt(0, 360));        
+        glm::vec3 center = getRandXYVec3f(300, 1200, DEFAULT_ENTITY_ZPOS);
+        glm::vec3 angle(0, 0, getRandInt(0, 360));        
         starsystem->AddVehicle(new_ship, center, angle, nullptr);
     }
 }

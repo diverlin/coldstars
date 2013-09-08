@@ -63,7 +63,7 @@ slider_shared(nullptr)
     int screen_h = Screen::Instance().GetHeight();
     
     {
-        Vec2<float> size(screen_w, screen_h);
+        glm::vec2 size(screen_w, screen_h);
         SetSize(size);
     }
     
@@ -72,20 +72,20 @@ slider_shared(nullptr)
         TextureOb* textureOb_bar_top = GuiTextureObCollector::Instance().bar_top;    
         GuiBar* bar_top = new GuiBar(textureOb_bar_top);
     
-        Vec2<float> size(screen_w, GUI::BAR_HEIGHT);
+        glm::vec2 size(screen_w, GUI::BAR_HEIGHT);
         bar_top->SetSize(size);
 
-        Vec2<float> offset(screen_w/2, screen_h-GUI::BAR_HEIGHT/2);
+        glm::vec2 offset(screen_w/2, screen_h-GUI::BAR_HEIGHT/2);
         AddChild(bar_top, offset);    
 
         {
             TextureOb* texOb = GuiTextureObCollector::Instance().icon_map;  
             ButtonTrigger* galaxymap_button = new ButtonTrigger(TYPE::GUI::BUTTON_GALAXYMAP_ID, "galaxy map", GuiActions::GalaxyMapGuiTransition, texOb);
             
-            Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);     
+            glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);     
             galaxymap_button->SetSize(size);        
             
-            Vec3<float> offset(screen_w/2-1*1.1*GUI::ICON_SIZE, 0, 0);
+            glm::vec2 offset(screen_w/2-1*1.1*GUI::ICON_SIZE, 0);
             bar_top->AddChild(galaxymap_button, offset);
         }
         
@@ -93,10 +93,10 @@ slider_shared(nullptr)
             TextureOb* texOb = GuiTextureObCollector::Instance().icon_plus;
             ButtonSingle* load_button = new ButtonSingle(TYPE::GUI::LOAD_ID, "load", GuiActions::LoadEvent, texOb);    
             
-            Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);    
+            glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);    
             load_button->SetSize(size);
             
-            Vec2<float> offset(screen_w/2-2*1.1*GUI::ICON_SIZE, 0);
+            glm::vec2 offset(screen_w/2-2*1.1*GUI::ICON_SIZE, 0);
             bar_top->AddChild(load_button, offset);                     
         }
         
@@ -104,10 +104,10 @@ slider_shared(nullptr)
             TextureOb* texOb = GuiTextureObCollector::Instance().icon_minus;
             ButtonSingle* save_button = new ButtonSingle(TYPE::GUI::SAVE_ID, "save", GuiActions::SaveEvent, texOb);    
 
-            Vec2<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE);    
+            glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);    
             save_button->SetSize(size);    
             
-            Vec2<float> offset(screen_w/2-3*1.1*GUI::ICON_SIZE, 0);                     
+            glm::vec2 offset(screen_w/2-3*1.1*GUI::ICON_SIZE, 0);                     
             bar_top->AddChild(save_button, offset);    
         }
     }
@@ -118,30 +118,30 @@ slider_shared(nullptr)
         TextureOb* textureOb_bar_bottom = GuiTextureObCollector::Instance().bar_bottom;    
         GuiBar* bar_bottom = new GuiBar(textureOb_bar_bottom);
 
-        Vec2<float> size(screen_w, GUI::BAR_HEIGHT);
+        glm::vec2 size(screen_w, GUI::BAR_HEIGHT);
         bar_bottom->SetSize(size);
 
-        Vec2<float> offset(screen_w/2, GUI::BAR_HEIGHT/2);
+        glm::vec2 offset(screen_w/2, GUI::BAR_HEIGHT/2);
         AddChild(bar_bottom, offset);    
     }
         
     {
         GuiRadar* gui_radar = new GuiRadar();
         
-        Vec2<float> size(250, 250);    
+        glm::vec2 size(250, 250);    
         gui_radar->SetSize(size);
     
-        Vec2<float> offset(0, -screen_h/2+GUI::BAR_HEIGHT/2);
+        glm::vec2 offset(0, -screen_h/2+GUI::BAR_HEIGHT/2);
         AddChild(gui_radar, offset);    
     }
     
     {
         GuiVehicle2* gui_vehicle_player = new GuiVehicle2();
         
-        Vec2<float> size(250, 250);    
+        glm::vec2 size(250, 250);    
         gui_vehicle_player->SetSize(size);
     
-        Vec2<float> offset(125, 125);
+        glm::vec2 offset(125, 125);
         AddChild(gui_vehicle_player, offset);    
     }   
 }
@@ -220,7 +220,7 @@ void GuiSpace::EnterGuiScan()
     
     //int screen_w = Screen::Instance().GetWidth();
     //int screen_h = Screen::Instance().GetHeight();
-    //Vec2<float> center_screen(screen_w/2, screen_h/2);
+    //glm::vec2 center_screen(screen_w/2, screen_h/2);
     
     //bool allow_full_control = m_Player->IsAbleToGetFullControlOnScanedVehicle();
     //gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
@@ -257,10 +257,10 @@ void GuiSpace::Resize(int screen_w, int screen_h)
 }
 
 
-void GuiSpace::RenderText(const Vec2<float>& scroll_coords) const
+void GuiSpace::RenderText(const glm::vec2& scroll_coords) const
 {
     const std::string _coord_str = "date:"+ GameDate::Instance().GetDate().GetStr()+" world coord: " + int2str(scroll_coords.x) + "," + int2str(scroll_coords.y);
-    Vec2<float> pos(Screen::Instance().GetWidth() - 400, Screen::Instance().GetHeight() - 5);
+    glm::vec2 pos(Screen::Instance().GetWidth() - 400, Screen::Instance().GetHeight() - 5);
 
     Screen::Instance().DrawText(_coord_str, 12, pos);    
 }
@@ -271,7 +271,7 @@ void GuiSpace::UpdateUnique(Player* player)
     int screen_w = Screen::Instance().GetWidth();
     int screen_h = Screen::Instance().GetHeight();
     Rect screen_rect(0, 0, screen_w, screen_h);   
-    Vec2<float> center_screen(screen_w/2, screen_h/2);
+    glm::vec2 center_screen(screen_w/2, screen_h/2);
 }
                                                 
 //BaseGuiElement* GuiSpace::CheckInteraction(const MouseData& data_mouse)

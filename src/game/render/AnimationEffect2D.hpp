@@ -25,7 +25,7 @@ class Box2D;
 class AnimationEffect2D
 {
     public:
-        AnimationEffect2D(const Vec3<float>& scale_min, const Vec3<float>& scale_max, const Vec3<float>& d_scale, float angle_min, float angle_max, float d_angle):
+        AnimationEffect2D(const glm::vec3& scale_min, const glm::vec3& scale_max, const glm::vec3& d_scale, float angle_min, float angle_max, float d_angle):
         scale_min(scale_min), 
         scale_max(scale_max), 
         d_scale(d_scale), 
@@ -37,17 +37,17 @@ class AnimationEffect2D
         
         ~AnimationEffect2D() {};
     
-        const Vec3<float>& GetScale() const { return scale; };
+        const glm::vec3& GetScale() const { return scale; };
         float GetAngle() const { return angle; };
         
         void Update(Box2D&);
         void Reset();
         
     private:
-        Vec3<float> scale;
-        Vec3<float> scale_min;
-        Vec3<float> scale_max;
-        Vec3<float> d_scale;
+        glm::vec3 scale;
+        glm::vec3 scale_min;
+        glm::vec3 scale_max;
+        glm::vec3 d_scale;
         
         float angle;
         float angle_min;

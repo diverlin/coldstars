@@ -45,7 +45,7 @@ BlackHole::~BlackHole()
     delete shockwave; 
 } 
  
-void BlackHole::SetCenter(const Vec3<float>& center) { SetCenter(center); shockwave->SetCenter(center); }
+void BlackHole::SetCenter(const glm::vec3& center) { SetCenter(center); shockwave->SetCenter(vec3ToVec2(center)); }
          
 void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
@@ -54,7 +54,7 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
     if (time > 0)
     {
         SetCenter(GetCenter()+getRandXYVec3f(1, 2, 0));
-        shockwave->SetCenter(GetCenter());
+        shockwave->SetCenter(vec3ToVec2(GetCenter()));
     
         GetDataLife().life_time--;
         if (GetDataLife().life_time < 0)
@@ -81,7 +81,7 @@ void BlackHole::UpdateInfo()
     GetInfo().addNameStr("pos:");        GetInfo().addValueStr( str(GetCenter()) );
 }
       
-void BlackHole::Render_NEW(const Vec2<float>& scroll_coords)
+void BlackHole::Render_NEW(const glm::vec2& scroll_coords)
 {
     UpdateRenderAnimation();
     RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());

@@ -38,14 +38,14 @@ class Sector : public BaseSpaceEntity
              ~Sector();
                 
                 void SetGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy; };
-                void SetCenter(const Vec3<float>& center) { this->center = center; };
+                void SetCenter(const glm::vec3& center) { this->center = center; };
                 
                 Galaxy* GetGalaxy() const  { return galaxy; };
-                const Vec3<float>& GetCenter() const  { return center; };
+                const glm::vec3& GetCenter() const  { return center; };
                                                         
                 virtual void PutChildsToGarbage() const;
                 
-             void Add(StarSystem*, const Vec3<float>&);
+             void Add(StarSystem*, const glm::vec3&);
              
              StarSystem* GetRandomStarSystem(int condition_id = NONE_ID);
                 StarSystem* GetClosestStarSystemTo(StarSystem*, int condition_id = NONE_ID);
@@ -60,7 +60,7 @@ class Sector : public BaseSpaceEntity
 
          private:
              Galaxy* galaxy;
-             Vec3<float> center;
+             glm::vec3 center;
              
              UnresolvedDataUniqueSector data_unresolved_Sector;
              

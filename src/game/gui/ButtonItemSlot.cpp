@@ -52,7 +52,7 @@ void ButtonItemSlot::UpdateUnique(Player* player)
 /* virtual override final */
 void ButtonItemSlot::RenderUnique(Player* player) const 
 {
-    GetItemSlot()->Render(GetBox(), Vec2<float>(0,0), true);
+    GetItemSlot()->Render(GetBox(), glm::vec2(0,0), true);
     
     if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
     {

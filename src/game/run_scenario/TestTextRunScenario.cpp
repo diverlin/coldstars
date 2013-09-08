@@ -72,8 +72,8 @@ void TestTextRunScenario::Init(Player* player)
     Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
     God::Instance().SetGalaxy(galaxy);
         
-    Vec3<float> center(500, 500, DEFAULT_ENTITY_ZPOS);
-    Vec3<float> angle(0,0,0); 
+    glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
+    glm::vec3 angle(0,0,0); 
      
     galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
 }
@@ -83,10 +83,10 @@ void TestTextRunScenario::Update_inDynamic(Player* player)
 {
     StarSystem* starsystem = player->GetNpc()->GetVehicle()->GetStarSystem(); // shortcut
             
-    Color4<int> color(255, 0, 0, 255);
+    glm::ivec4 color(255, 0, 0, 255);
     while (starsystem->GetTextDamageNum() < 200)
     {    
-        Vec2<float> center(getRandVec2f(100, 600));
+        glm::vec2 center(getRandVec2f(100, 600));
         VerticalFlowText* flow_text = new VerticalFlowText("1", 12, center, color, 10);
                                         
         starsystem->Add(flow_text);

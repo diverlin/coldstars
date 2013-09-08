@@ -72,7 +72,7 @@ void resetRenderTransformation() { glLoadIdentity(); }
 
 void camera(float x, float y, float z) { glTranslatef(-x, -y, -z); }
 
-void setColor4f(const Color4<float>& color) { glColor4f(color.r, color.g, color.b, color.a); }
+void setColor4f(const glm::vec4& color) { glColor4f(color.r, color.g, color.b, color.a); }
 void setColor4f(float r, float g, float b, float a) { glColor4f(r, g, b, a); }
 
 void enable_BLEND()  { glEnable(GL_BLEND);  }
@@ -89,8 +89,8 @@ void disable_POINTSPRITE() { glDisable(GL_POINT_SPRITE); }
 
 
 void drawQuad(TextureOb* texOb,
-         const Vec3<float>& center, 
-         const Vec3<float>& size,
+         const glm::vec3& center, 
+         const glm::vec3& size,
          float angle)
 {
     glBindTexture(GL_TEXTURE_2D, texOb->texture);
@@ -115,8 +115,8 @@ void drawQuad(TextureOb* texOb,
 }
 
 void drawQuad(TextureOb* texOb,
-         const Vec2<float>& center, 
-         const Vec2<float>& size,
+         const glm::vec2& center, 
+         const glm::vec2& size,
          float angle)
 {
     glBindTexture(GL_TEXTURE_2D, texOb->texture);
@@ -142,8 +142,8 @@ void drawQuad(TextureOb* texOb,
 
 
 void drawQuad(TextureOb* texOb,
-         const Vec2<float>& center, 
-         const Vec2<float>& size,
+         const glm::vec2& center, 
+         const glm::vec2& size,
          float angle,
          TextureOb* texOb_mask,
          float threshold)
@@ -207,7 +207,7 @@ void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos)
 
 
 void drawLine(TextureOb* texOb, 
-              const Vec3<float>& start_pos, 
+              const glm::vec3& start_pos, 
               float len, 
               float angle_inD, 
               int half_h)
@@ -228,7 +228,7 @@ void drawLine(TextureOb* texOb,
     glPopMatrix();
 }
 
-void drawColoredTextWithBackground(const std::string& str, int font_size, const Vec2<float>& pos, const Color4<int>& color)
+void drawColoredTextWithBackground(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color)
 {
     float char_w = font_size;
     float char_h = font_size;
@@ -247,7 +247,7 @@ void drawColoredTextWithBackground(const std::string& str, int font_size, const 
     Screen::Instance().DrawText(str, font_size, pos, color);
 }
 
-void drawColoredText(const std::string& str, int font_size, const Vec2<float>& pos, const Color4<int>& color)
+void drawColoredText(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color)
 {
     glPushMatrix();
     {
@@ -260,7 +260,7 @@ void drawColoredText(const std::string& str, int font_size, const Vec2<float>& p
 void drawInfoIn2Column(
                     const std::vector<std::string>& info_title_list, 
                     const std::vector<std::string>& info_value_list, 
-                    const Vec2<float>& pos)
+                    const glm::vec2& pos)
 {        
     int font_size = 13;
     float char_w = font_size;
@@ -286,8 +286,8 @@ void drawInfoIn2Column(
         
     Rect rect(-char_w, -info_total_string_h, info_total_string_w, info_total_string_h + char_h/2);
     
-    Color4<int> color_title(250, 250, 250, 255);
-    Color4<int> color_info(250, 250, 0, 255);
+    glm::ivec4 color_title(250, 250, 250, 255);
+    glm::ivec4 color_info(250, 250, 0, 255);
 
     TextureOb* texOb_textBg = GuiTextureObCollector::Instance().text_background;
                                     
@@ -297,18 +297,18 @@ void drawInfoIn2Column(
     
         drawTexturedRect(texOb_textBg, rect, -2);
     
-        Vec2<float> curpos(info_total_string_w/3, 0.0); 
+        glm::vec2 curpos(info_total_string_w/3, 0.0); 
         Screen::Instance().DrawText(info_title_list[0], font_size+1, curpos);
 
         for (unsigned int i=1; i<info_title_list.size(); i++)
         {
-            Vec2<float> curpos(0.0, -char_h*i); 
+            glm::vec2 curpos(0.0, -char_h*i); 
             Screen::Instance().DrawText(info_title_list[i], font_size, curpos, color_title);
         
         }        
         for (unsigned int i=0; i<info_value_list.size(); i++)
         {
-            Vec2<float> curpos(max_info_title_str_size * (char_w - 1.2), -(char_h*(i + 1))); 
+            glm::vec2 curpos(max_info_title_str_size * (char_w - 1.2), -(char_h*(i + 1))); 
             Screen::Instance().DrawText(info_value_list[i], font_size, curpos, color_info);
         }
     }  
@@ -354,7 +354,7 @@ void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z
 }
     
     
-void renderMesh(const Mesh* const mesh, const Vec3<float>& center, const Vec3<float>& size, const Vec3<float>& angle, bool ZYX)
+void renderMesh(const Mesh* const mesh, const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle, bool ZYX)
 {
     glPushMatrix();
     {
@@ -369,21 +369,21 @@ void renderMesh(const Mesh* const mesh, const Vec3<float>& center, const Vec3<fl
 
 }
 
-void rotateZYX(const Vec3<float>& angle)
+void rotateZYX(const glm::vec3& angle)
 {
     glRotatef(angle.z, 0.0, 0.0, 1.0); 
     glRotatef(angle.y, 0.0, 1.0, 0.0); 
     glRotatef(angle.x, 1.0, 0.0, 0.0); 
 }
 
-void rotateXYZ(const Vec3<float>& angle)
+void rotateXYZ(const glm::vec3& angle)
 {
     glRotatef(angle.x, 1.0, 0.0, 0.0); 
     glRotatef(angle.y, 0.0, 1.0, 0.0); 
     glRotatef(angle.z, 0.0, 0.0, 1.0); 
 }
 
-void drawParticleTextured(GLuint texture, const Vec2<float>& center, float size, float pos_z)
+void drawParticleTextured(GLuint texture, const glm::vec2& center, float size, float pos_z)
 {
     glBindTexture(GL_TEXTURE_2D, texture);
     
@@ -394,7 +394,7 @@ void drawParticleTextured(GLuint texture, const Vec2<float>& center, float size,
     glEnd();
 }
 
-void drawParticle(const Vec2<float>& center, float size, float r, float g, float b, float a)
+void drawParticle(const glm::vec2& center, float size, float r, float g, float b, float a)
 {        
     glPointSize(size);
             
@@ -406,7 +406,7 @@ void drawParticle(const Vec2<float>& center, float size, float r, float g, float
     glEnd();
 }
 
-void drawParticle(const Vec2<float>& center, float size, const Color4<float>& color)
+void drawParticle(const glm::vec2& center, float size, const glm::vec4& color)
 {    
     glPointSize(size);
             
@@ -418,7 +418,7 @@ void drawParticle(const Vec2<float>& center, float size, const Color4<float>& co
     glEnd();
 }
 
-void drawParticle(const Vec2<float>& center, float size)
+void drawParticle(const glm::vec2& center, float size)
 {
     glPointSize(size);
             

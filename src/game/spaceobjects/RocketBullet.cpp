@@ -147,7 +147,7 @@ void RocketBullet::Hit(int damage, bool show_effect)
     if (show_effect == true)
     {
         // improove
-        VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, GetCenter(), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
+        VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, vec3ToVec2(GetCenter()), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
         GetStarSystem()->Add(text); 
     }
 }

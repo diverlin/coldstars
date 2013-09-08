@@ -94,9 +94,9 @@ class BaseItem : public BaseDrawable
         
         void UpdateInfo();
         
-        virtual void Render(const Box2D&, const Vec2<float>&, bool draw_text = true);
+        virtual void Render(const Box2D&, const glm::vec2&, bool draw_text = true);
         void RenderKorpus(const Box2D&);
-        void RenderInfo(const Vec2<float>&); 
+        void RenderInfo(const glm::vec2&); 
 
     protected:
         TYPE::RACE race_id;

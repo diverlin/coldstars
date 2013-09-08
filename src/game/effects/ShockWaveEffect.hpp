@@ -28,14 +28,14 @@ class ShockWaveEffect
         bool is_alive;
               bool is_alreadyInRemoveQueue;
 
-              Vec2<float> center;
+              glm::vec2 center;
                             
-              Vec3<float> parameter;
-              Vec3<float> d_parameter;
+              glm::vec3 parameter;
+              glm::vec3 d_parameter;
               float time, d_time;
               
-              void SetCenter(Vec2<float> center) { this->center = center; };
-              const Vec2<float>& GetCenter() const { return center; };
+              void SetCenter(const glm::vec2& center) { this->center = center; };
+              const glm::vec2& GetCenter() const { return center; };
 
               ShockWaveEffect(float _x, float _y, float _z, float _time, float _d_x, float _d_y, float _d_z, float d_time);
               ~ShockWaveEffect();

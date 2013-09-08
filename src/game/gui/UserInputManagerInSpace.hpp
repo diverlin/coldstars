@@ -21,7 +21,7 @@
 #define UserInputManagerInSpaceINSPACE_HPP
 
 #include <SFML/Window.hpp> // !!!
-#include <math/Vec2.hpp>
+#include <glm/glm.hpp>
 #include <common/constants.hpp>
 
 class Player;
@@ -48,7 +48,7 @@ class UserInputManagerInSpace
         CAMERADIRECTION m_CameraMoveAxisX;
         CAMERADIRECTION m_CameraMoveAxisY;
             
-        Vec2<float> m_ScrollAccel; 
+        glm::vec2 m_ScrollAccel; 
                 
         void Reset();                    
     

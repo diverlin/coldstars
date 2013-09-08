@@ -38,7 +38,7 @@ void DistantNebulaEffect::Update()
 
 void DistantNebulaEffect::Render(float vx, float vy)
 { 
-       drawQuad(textureOb, Vec3<float>(center.x - vx*parallax_rate, center.y - vy*parallax_rate, center.z), size, angle_inD);
+       drawQuad(textureOb, glm::vec3(center.x - vx*parallax_rate, center.y - vy*parallax_rate, center.z), size, angle_inD);
 }
               
 void DistantNebulaEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
@@ -99,7 +99,7 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
         d_angle_inD = getRandInt(8,12)*0.001 * getRandSign();        
     }
     
-    Vec3<float> center((float)getRandInt(0, 1000), (float)getRandInt(0, 1000), -999.0);
+    glm::vec3 center((float)getRandInt(0, 1000), (float)getRandInt(0, 1000), -999.0);
     
     DistantNebulaEffect* dn = new DistantNebulaEffect();
     dn->SetTextureOb(textureOb);

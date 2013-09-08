@@ -94,7 +94,7 @@ class Npc : public Base
         Planet* GetPlanetForDocking();
         StarSystem* GetClosestStarSystem(int);
         
-        void RenderInfo(const Vec2<float>&);
+        void RenderInfo(const glm::vec2&);
         
         //bool BuyArmorAsMuchAsPossible();
         bool BuyGoods();

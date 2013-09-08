@@ -51,7 +51,7 @@ struct UnresolvedDataUniquePlayer
 {
     int npc_id;
     int starsystem_id;
-    Vec2<float> screen_pos;
+    glm::vec2 screen_pos;
 };
 
 
@@ -153,9 +153,9 @@ class Player : public Base
     friend class UserInput;
 };
 
-bool isObjectOnScreen(const Vec3<float>&, const Vec3<float>&);
-bool isObjectOnScreen(const Vec2<float>&, float);
-bool isPointOnScreen(const Vec2<float>&);
+bool isObjectOnScreen(const glm::vec3&, const glm::vec3&);
+bool isObjectOnScreen(const glm::vec2&, float);
+bool isPointOnScreen(const glm::vec2&);
 
 bool isObjectWithinRadarRange(BaseParticleSystem*, Vehicle*);                                      
 bool isObjectWithinRadarRange(ShockWaveEffect*, Vehicle*);

@@ -636,9 +636,9 @@ void Vehicle::LaunchingEvent()
             case TYPE::ENTITY::ANGAR_ID:
             {
                 int angleInD = getRandInt(0, 360);
-                Vec2<float> offset_pos = getRandVec2f(40, 100);
-                Vec3<float> offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
-                Vec3<float> angle(0,0,angleInD);
+                glm::vec2 offset_pos = getRandVec2f(40, 100);
+                glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
+                glm::vec3 angle(0,0,angleInD);
                 GetStarSystem()->AddVehicle(this, ((BaseSpaceEntity*)m_Land->GetOwner())->GetCenter() + offset_pos3, angle, nullptr);
                 m_Land->RemoveVehicle(this);
     
@@ -655,9 +655,9 @@ void Vehicle::LaunchingEvent()
     else
     {
         int angleInD = getRandInt(0, 360);
-        Vec2<float> offset_pos = getRandVec2f(40, 100);
-        Vec3<float> offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
-        Vec3<float> angle(0,0,angleInD);
+        glm::vec2 offset_pos = getRandVec2f(40, 100);
+        glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
+        glm::vec3 angle(0,0,angleInD);
         GetStarSystem()->AddVehicle(this, ((BaseSpaceEntity*)m_Land->GetOwner())->GetCenter() + offset_pos3, angle, nullptr);
         m_Land->RemoveVehicle(this); 
     }
@@ -706,7 +706,7 @@ void Vehicle::Hit(int damage, bool show_effect)
             m_ComplexProtector.GetShieldEffect()->SetAlpha(1.0);
         }           
                
-               VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, GetCenter(), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
+               VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, vec3ToVec2(GetCenter()), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
                GetStarSystem()->Add(text); 
            }
            
@@ -1179,28 +1179,28 @@ void Vehicle::RenderStuffWhenFocusedInSpace()
 }
 
 /* virtual override final */               
-void Vehicle::RenderInfoInSpace(const Vec2<float>& scroll_coords, float zoom)
+void Vehicle::RenderInfoInSpace(const glm::vec2& scroll_coords, float zoom)
 {  
     UpdateInfo(); // virtual
-    Vec2<float> pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
+    glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
     pos /= zoom;
     drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     if (m_OwnerNpc != nullptr)
     {
-        Vec2<float> pos2(pos.x + 300, pos.y);
+        glm::vec2 pos2(pos.x + 300, pos.y);
         m_OwnerNpc->RenderInfo(pos2);
     }
 }
 
-void Vehicle::RenderInfo(const Vec2<float>& center, int offset_x, int offset_y)
+void Vehicle::RenderInfo(const glm::vec2& center, int offset_x, int offset_y)
 {  
     UpdateInfo(); // virtual
-    Vec2<float> pos(center.x - offset_x, center.y - offset_y);
+    glm::vec2 pos(center.x - offset_x, center.y - offset_y);
     drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
 
     if (m_OwnerNpc != nullptr)
     {
-        m_OwnerNpc->RenderInfo(Vec2<float>(center.x + 190 - offset_x, center.y - offset_y));
+        m_OwnerNpc->RenderInfo(glm::vec2(center.x + 190 - offset_x, center.y - offset_y));
     }
 }
 
@@ -1231,7 +1231,7 @@ void Vehicle::RenderRadarRange()
     if (m_Properties.radar > VISIBLE_DISTANCE_WITHOUT_RADAR)
     {
         m_SlotRadar->UpdateRange(GuiTextureObCollector::Instance().dot_yellow);
-        m_SlotRadar->DrawRange(GetCenter());
+        m_SlotRadar->DrawRange(vec3ToVec2(GetCenter()));
     }
 }
 
@@ -1240,7 +1240,7 @@ void Vehicle::RenderGrappleRange()
     if (m_Properties.grab_radius > 0)
     {
         m_SlotGrapple->UpdateRange(GuiTextureObCollector::Instance().dot_blue);
-        m_SlotGrapple->DrawRange(GetCenter());
+        m_SlotGrapple->DrawRange(vec3ToVec2(GetCenter()));
     }
 }
 

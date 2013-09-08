@@ -34,21 +34,23 @@
 #include "../world/starsystem.hpp"
 #include "../effects/particlesystem/DriveEffect.hpp"
 
+#include <math/myVector.hpp>
+
 DriveComplex::DriveComplex()
 {      
     owner_vehicle = nullptr;
-                
+    
     target_distance = 0.0;
     action_id = NAVIGATOR_ACTION::NONE_ID;
     
-        has_target = false;
+    has_target = false;
     direction_list_END = true;
-
+    
     target = nullptr;
     drive_effect = nullptr; 
-        
-        drive_slot = nullptr;
-        bak_slot   = nullptr;
+    
+    drive_slot = nullptr;
+    bak_slot   = nullptr;
 }
 
 DriveComplex::~DriveComplex()
@@ -78,15 +80,15 @@ void DriveComplex::ResetTarget()
     target = nullptr;
             
     target_distance = 0.0;
-    target_offset.Set(0.0, 0.0, 0.0);
-    target_pos.Set(0.0, 0.0, 0.0);
+    target_offset = glm::vec3(0.0);
+    target_pos    = glm::vec3(0.0);
     action_id = NAVIGATOR_ACTION::NONE_ID;
     
         has_target = false;
     direction_list_END = true;
 }
       
-void DriveComplex::SetStaticTargetCoords(const Vec3<float>& target_pos)
+void DriveComplex::SetStaticTargetCoords(const glm::vec3& target_pos)
 {    
         ResetTarget();
         has_target = true;
@@ -216,41 +218,41 @@ void DriveComplex::UpdateDynamicTargetCoord()
     {
         case TYPE::ENTITY::STARSYSTEM_ID:
         {
-            float angleInD = 90-getAngleInD(target->GetCenter(), owner_vehicle->GetStarSystem()->GetCenter()); //??
-                target_pos = getVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angleInD, owner_vehicle->GetStarSystem()->GetCenter().z);
+            float angleInD = 90-getAngleInD(vec3ToVec2(target->GetCenter()), vec3ToVec2(owner_vehicle->GetStarSystem()->GetCenter())); //??
+            target_pos = getVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angleInD, owner_vehicle->GetStarSystem()->GetCenter().z);
             target_distance = COLLISION_RADIUS_FOR_STATIC_COORD;
             
             break;
         }
     
-            case TYPE::ENTITY::PLANET_ID:
-            { 
-                //target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;             
-                target_pos = ((Planet*)target)->GetCenter() + target_offset; 
-                   break;                   
-            } 
+        case TYPE::ENTITY::PLANET_ID:
+        { 
+            //target_pos = ((Planet*)target)->GetOrbit()->GetNextTurnPosition() + target_offset;             
+            target_pos = ((Planet*)target)->GetCenter() + target_offset; 
+            break;                   
+        } 
 
-            case TYPE::ENTITY::ASTEROID_ID:
-            { 
-                target_pos = ((Asteroid*)target)->GetOrbit().GetNextTurnPosition() + target_offset;             
-                break;
-            } 
-             
-            case TYPE::ENTITY::VEHICLE_ID:
-            { 
+        case TYPE::ENTITY::ASTEROID_ID:
+        { 
+            target_pos = ((Asteroid*)target)->GetOrbit().GetNextTurnPosition() + target_offset;             
+            break;
+        } 
+         
+        case TYPE::ENTITY::VEHICLE_ID:
+        { 
             target_pos = target->GetCenter() + target_offset;  
-                break;    
-            }
-
-            case TYPE::ENTITY::CONTAINER_ID:
-            { 
-            target_pos = target->GetCenter() + target_offset;  
-                break;    
-            }
+            break;    
         }
 
+        case TYPE::ENTITY::CONTAINER_ID:
+        { 
+            target_pos = target->GetCenter() + target_offset;  
+            break;    
+        }
+    }
+
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + Vec2<float>2str(target_pos) + " target_center=" + Vec2<float>2str(target->GetCenter()) + " target_offset=" + Vec2<float>2str(target_offset) + "target_distance=" + int2str(target_distance), DRIVECOMPLEX_LOG_DIP); 
+    Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + glm::vec22str(target_pos) + " target_center=" + glm::vec22str(target->GetCenter()) + " target_offset=" + glm::vec22str(target_offset) + "target_distance=" + int2str(target_distance), DRIVECOMPLEX_LOG_DIP); 
     #endif 
 }
 
@@ -259,10 +261,10 @@ bool DriveComplex::CheckTargetEchievement()
 {
     if (target != nullptr)
     {    
-             if (checkCollisionDotWithCircle_DIRTY(owner_vehicle->GetCenter(), target_pos, target_distance) == true)
-             {
-                return true;
-            }
+        if (checkCollisionDotWithCircle_DIRTY(vec3ToVec2(owner_vehicle->GetCenter()), vec3ToVec2(target_pos), target_distance) == true)
+        {
+            return true;
+        }
     }
     
     return false;
@@ -303,13 +305,13 @@ void DriveComplex::CalcPath2()
     
     ClearPath();
         
-        float speed = owner_vehicle->GetProperties().speed;
-        
-        Vec3<float> new_center(owner_vehicle->GetCenter());
-    Vec3<float> target_dir(target_pos - owner_vehicle->GetCenter());
-    target_dir.Normalize();
+    float speed = owner_vehicle->GetProperties().speed;
+    
+    glm::vec3 new_center(owner_vehicle->GetCenter());
+    glm::vec3 target_dir(target_pos - owner_vehicle->GetCenter());
+    target_dir = glm::normalize(target_dir);
     float az = owner_vehicle->GetAngle().z;
-    Vec3<float> orient(cos(az*DEGREE_TO_RADIAN_RATE), sin(az*DEGREE_TO_RADIAN_RATE), 0.0);
+    glm::vec3 orient(cos(az*DEGREE_TO_RADIAN_RATE), sin(az*DEGREE_TO_RADIAN_RATE), 0.0);
 
     // identify sign for rotation
     int sign;
@@ -317,8 +319,8 @@ void DriveComplex::CalcPath2()
         float prob_az1 = az+1;
         float prob_az2 = az-1;
         
-        Vec3<float> prob_orient1(cos(prob_az1*DEGREE_TO_RADIAN_RATE), sin(prob_az1*DEGREE_TO_RADIAN_RATE), 0.0);
-        Vec3<float> prob_orient2(cos(prob_az2*DEGREE_TO_RADIAN_RATE), sin(prob_az2*DEGREE_TO_RADIAN_RATE), 0.0);
+        glm::vec3 prob_orient1(cos(prob_az1*DEGREE_TO_RADIAN_RATE), sin(prob_az1*DEGREE_TO_RADIAN_RATE), 0.0);
+        glm::vec3 prob_orient2(cos(prob_az2*DEGREE_TO_RADIAN_RATE), sin(prob_az2*DEGREE_TO_RADIAN_RATE), 0.0);
         
         float prob_cosa1 = dotUnits(prob_orient1, target_dir);        
         float prob_cosa2 = dotUnits(prob_orient2, target_dir);
@@ -360,8 +362,8 @@ void DriveComplex::CalcPath2()
         
         new_center += orient*speed;
          
-        target_dir.Set(target_pos - new_center);
-        target_dir.Normalize();
+        target_dir = glm::vec3(target_pos - new_center);
+        target_dir = glm::normalize(target_dir);
                  
         path_center_vec.push_back(new_center);
         angle_inD_vec.push_back(az);
@@ -377,27 +379,27 @@ void DriveComplex::CalcPath2()
     }
     
     // direct path
-    Vec3<float> way(target_pos - new_center);
-    while (way.GetLength() > 1.1*speed)
+    glm::vec3 way(target_pos - new_center);
+    while (glm::length(way) > 1.1*speed)
     {
         new_center += target_dir*speed;
 
         path_center_vec.push_back(new_center);
         angle_inD_vec.push_back(az);
                         
-        way.Set(target_pos - new_center);
+        way = glm::vec3(target_pos - new_center);
     }
-             
+            
 
     if (path_center_vec.size() > 1)
     {
         direction_list_END = false;
-               move_it = 0;
-           }
-        else
-        {
-                ClearPath();    
-        }
+        move_it = 0;
+    }
+    else
+    {
+        ClearPath();    
+    }
 }
 
 
@@ -411,13 +413,13 @@ void DriveComplex::CalcPath()
         
         float speed_base = owner_vehicle->GetProperties().speed;
         
-        Vec3<float> new_center(owner_vehicle->GetCenter());
-    Vec3<float> target_dir(target_pos - owner_vehicle->GetCenter());
-    target_dir.Normalize();
+        glm::vec3 new_center(owner_vehicle->GetCenter());
+    glm::vec3 target_dir(target_pos - owner_vehicle->GetCenter());
+    target_dir = glm::normalize(target_dir);
     float az = owner_vehicle->GetAngle().z;
-    Vec3<float> orient(cos(az*DEGREE_TO_RADIAN_RATE), sin(az*DEGREE_TO_RADIAN_RATE), 0.0);
+    glm::vec3 orient(cos(az*DEGREE_TO_RADIAN_RATE), sin(az*DEGREE_TO_RADIAN_RATE), 0.0);
 
-    Vec3<float> gravity;
+    glm::vec3 gravity;
     const StarSystem& starsystem = *owner_vehicle->GetStarSystem();
     int mass = owner_vehicle->GetMass();
     
@@ -425,10 +427,10 @@ void DriveComplex::CalcPath()
     float angle_step = 3.0;
     int round_counter = 0;
     int round_counter_max = 3 + 360/angle_step;
-    while((new_center-target_pos).GetLength() > 5*speed_base)
+    while(glm::length(new_center-target_pos) > 5*speed_base)
     {
-        target_dir.Set(target_pos - new_center);
-        target_dir.Normalize();
+        target_dir = glm::vec3(target_pos - new_center);
+        target_dir = glm::normalize(target_dir);
             
         float cosa = dotUnits(orient, target_dir);
         if (std::fabs(cosa) < 0.999 or (cosa < 0)) // cosa <0 condition works if the orient and target vector is straigforward opposite (dot ~ -1)
@@ -438,8 +440,8 @@ void DriveComplex::CalcPath()
                 float prob_az1 = az+1;
                 float prob_az2 = az-1;
                 
-                Vec3<float> prob_orient1(cos(prob_az1*DEGREE_TO_RADIAN_RATE), sin(prob_az1*DEGREE_TO_RADIAN_RATE), 0.0);
-                Vec3<float> prob_orient2(cos(prob_az2*DEGREE_TO_RADIAN_RATE), sin(prob_az2*DEGREE_TO_RADIAN_RATE), 0.0);
+                glm::vec3 prob_orient1(cos(prob_az1*DEGREE_TO_RADIAN_RATE), sin(prob_az1*DEGREE_TO_RADIAN_RATE), 0.0);
+                glm::vec3 prob_orient2(cos(prob_az2*DEGREE_TO_RADIAN_RATE), sin(prob_az2*DEGREE_TO_RADIAN_RATE), 0.0);
                 
                 float prob_cosa1 = dotUnits(prob_orient1, target_dir);        
                 float prob_cosa2 = dotUnits(prob_orient2, target_dir);

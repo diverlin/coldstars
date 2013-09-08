@@ -24,7 +24,7 @@
 #include "../../common/constants.hpp"
 #include "../../resources/TextureManager.hpp"
 
-DriveEffect::DriveEffect(Vec3<float>* pTo_start_pos, Vec3<float>* pTo_target_pos)
+DriveEffect::DriveEffect(glm::vec3* pTo_start_pos, glm::vec3* pTo_target_pos)
 {
     this->pTo_start_pos  = pTo_start_pos;      //ob.points.midLeft
     this->pTo_target_pos = pTo_target_pos;     //ob.points.midFarLeft
@@ -39,8 +39,8 @@ void DriveEffect::CreateParticles()
     for (unsigned int i=0; i<num_particles; i++)
     {
         Particle* particle = new Particle(data_particle);  
-        particle->SetPosition(*pTo_start_pos);
-        particle->SetVelocity(velocity);
+        particle->SetPosition(vec3ToVec2(*pTo_start_pos));
+        particle->SetVelocity(vec3ToVec2(velocity));
         particles_vec.push_back(particle);
     }
 }
@@ -86,8 +86,8 @@ void DriveEffect::Update()
         }
         else
         {
-            particles_vec[i]->SetPosition(*pTo_start_pos);
-            particles_vec[i]->SetVelocity(velocity);
+            particles_vec[i]->SetPosition(vec3ToVec2(*pTo_start_pos));
+            particles_vec[i]->SetVelocity(vec3ToVec2(velocity));
             particles_vec[i]->Reborn();
         }
     }
@@ -116,7 +116,7 @@ void DriveEffect::Render(float scale, float parent_d_alpha)
 
 
 
-DriveEffect* GetNewDriveEffect(int size_id, Vec3<float>* pTo_pos, Vec3<float>* pTo_target_pos)
+DriveEffect* GetNewDriveEffect(int size_id, glm::vec3* pTo_pos, glm::vec3* pTo_target_pos)
 {
     ParticleData data_particle;        
                    

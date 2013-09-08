@@ -67,15 +67,15 @@ class BaseSpaceEntity : public BaseDrawable
 
         const BaseSpaceEntity* const GetParent() const { return m_Parent; }
 
-        void ApplyImpulse(const Vec3<float>&, float);
+        void ApplyImpulse(const glm::vec3&, float);
 
         virtual void TakeIntoAccountAgressor(Vehicle*) {}
         virtual void Hit(int, bool);
         void SilentKill();
         
         virtual void RenderStuffWhenFocusedInSpace() {};
-        virtual void RenderInfoInSpace(const Vec2<float>&, float);        
-        void RenderInfo(const Vec2<float>&);
+        virtual void RenderInfoInSpace(const glm::vec2&, float);        
+        void RenderInfo(const glm::vec2&);
         void virtual UpdateInfo() {}    
                 
     protected:
@@ -86,8 +86,8 @@ class BaseSpaceEntity : public BaseDrawable
         LifeData& GetDataLife() { return m_DataLife; }
         const LifeData& GetDataLife() const { return m_DataLife; }
         
-        const Vec3<float>& GetAppliedForce() const { return m_AppliedForce; } 
-        Vec3<float>& GetAppliedForce() { return m_AppliedForce; }     // !!!
+        const glm::vec3& GetAppliedForce() const { return m_AppliedForce; } 
+        glm::vec3& GetAppliedForce() { return m_AppliedForce; }     // !!!
                                     
         void CheckDeath(bool);
         virtual void PostDeathUniqueEvent(bool) {}
@@ -100,7 +100,7 @@ class BaseSpaceEntity : public BaseDrawable
     private:
         LifeData m_DataLife;        
 
-        Vec3<float> m_AppliedForce;
+        glm::vec3 m_AppliedForce;
 
         StarSystem* m_Starsystem;
         TYPE::PLACE m_PlaceTypeId;

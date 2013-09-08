@@ -126,8 +126,8 @@ class ItemSlot : public BaseSlot
         
         void UpdateVehiclePropetries() const;
         
-        virtual void Render(const Box2D&, const Vec2<float>&, bool draw_text = true) const;
-        virtual void RenderItem(const Box2D&, const Vec2<float>&, bool draw_text = true) const;
+        virtual void Render(const Box2D&, const glm::vec2&, bool draw_text = true) const;
+        virtual void RenderItem(const Box2D&, const glm::vec2&, bool draw_text = true) const;
         void RenderMark(const Box2D&, TextureOb*) const;
         void RenderTargetMark(const Box2D&, TextureOb*, TextureOb*) const;
         
@@ -136,7 +136,7 @@ class ItemSlot : public BaseSlot
         bool SwapItem(ItemSlot*);
         
         void UpdateRange(TextureOb*);
-        void DrawRange(const Vec3<float>&);
+        void DrawRange(const glm::vec2&);
         
         bool CheckSubTarget(ItemSlot*) const;
         STATUS CheckTarget(BaseSpaceEntity*) const;

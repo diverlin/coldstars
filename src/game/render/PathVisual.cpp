@@ -33,7 +33,7 @@ PathVisual::~PathVisual()
     glDeleteLists(gl_list, sizeof(gl_list));
 }
 
-void PathVisual::FillData(TextureOb* textureOb, const std::vector<Vec3<float>>& vec, int step, int point_size)
+void PathVisual::FillData(TextureOb* textureOb, const std::vector<glm::vec3>& vec, int step, int point_size)
 {  
     glDeleteLists(gl_list, sizeof(gl_list));
 
@@ -47,7 +47,7 @@ void PathVisual::FillData(TextureOb* textureOb, const std::vector<Vec3<float>>& 
             glBindTexture(GL_TEXTURE_2D, textureOb->texture);
             while (i < list_len)
             {                    
-                drawParticle(vec[i], point_size);
+                drawParticle(vec3ToVec2(vec[i]), point_size);
                 i += step;
             }
         }
@@ -56,7 +56,7 @@ void PathVisual::FillData(TextureOb* textureOb, const std::vector<Vec3<float>>& 
     glEndList();
 }
 
-void PathVisual::FillData(const std::vector<Vec3<float>>& vec, int step, int point_size)
+void PathVisual::FillData(const std::vector<glm::vec3>& vec, int step, int point_size)
 {   
     glDeleteLists(gl_list, sizeof(gl_list));
 
@@ -83,7 +83,7 @@ void PathVisual::FillData(const std::vector<Vec3<float>>& vec, int step, int poi
                 }
                 
                 glBindTexture(GL_TEXTURE_2D, texture);
-                drawParticle( vec[i], point_size);
+                drawParticle(vec3ToVec2(vec[i]), point_size);
     
                 i += step;
             }
@@ -105,7 +105,7 @@ void PathVisual::FillData(TextureOb* textureOb, int radius, int point_size)
             glBindTexture(GL_TEXTURE_2D, textureOb->texture);
             for (float a=0.0f; a<=2*PI; a+=da)
               {
-                  drawParticle(Vec2<float>(radius * cos(a), radius * sin(a)), point_size);
+                  drawParticle(glm::vec2(radius * cos(a), radius * sin(a)), point_size);
             }
         }
         disable_POINTSPRITE();
@@ -113,15 +113,15 @@ void PathVisual::FillData(TextureOb* textureOb, int radius, int point_size)
     glEndList();
 }
 
-void PathVisual::FillData(TextureOb* textureOb, const Vec3<float>& start_pos, const Vec3<float>& target_pos, int step, int point_size)
+void PathVisual::FillData(TextureOb* textureOb, const glm::vec3& start_pos, const glm::vec3& target_pos, int step, int point_size)
 {
     glDeleteLists(gl_list, sizeof(gl_list));
     
-    Vec2<float> new_pos(start_pos);
-    Vec2<float> ll(target_pos - start_pos);                
-    Vec2<float> vstep = ll.GetNormalized() * step;
+    glm::vec2 new_pos(start_pos);
+    glm::vec2 ll(target_pos - start_pos);                
+    glm::vec2 vstep = glm::normalize(ll) *(float)step;
     
-    unsigned int it = ll.GetLength() / step;
+    unsigned int it = glm::length(ll) / (float)step;
     glNewList(gl_list, GL_COMPILE);
     {
         enable_POINTSPRITE();
@@ -136,7 +136,7 @@ void PathVisual::FillData(TextureOb* textureOb, const Vec3<float>& start_pos, co
     glEndList();
 }
         
-void PathVisual::Draw(const Vec2<float>& offset) const
+void PathVisual::Draw(const glm::vec2& offset) const
 {
     glPushMatrix();
     {

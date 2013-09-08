@@ -25,7 +25,7 @@ Points::Points()
 Points::~Points()
 {}              
                 
-void Points::Add(Vec3<float>* const point, const Vec3<float>* const point_orig)
+void Points::Add(glm::vec3* const point, const glm::vec3* const point_orig)
 { 
         vector_orig.push_back(point_orig);
         vector.push_back(point);
@@ -33,8 +33,8 @@ void Points::Add(Vec3<float>* const point, const Vec3<float>* const point_orig)
           
 void Points::addMidLeftPoint()
 {
-         midLeft_origin.Set(-0.5, 0.0, DEFAULT_ENTITY_ZPOS);
-         midLeft.Set(-0.5, 0.0, DEFAULT_ENTITY_ZPOS);
+         midLeft_origin = glm::vec3(-0.5, 0.0, DEFAULT_ENTITY_ZPOS);
+         midLeft = glm::vec3(-0.5, 0.0, DEFAULT_ENTITY_ZPOS);
          
          vector_orig.push_back(&midLeft_origin);
          vector.push_back(&midLeft);
@@ -42,17 +42,17 @@ void Points::addMidLeftPoint()
 
 void Points::addMidFarLeftPoint()
 {
-         midFarLeft_origin.Set(-1.0, 0.0, DEFAULT_ENTITY_ZPOS);
-         midFarLeft.Set(-1.0, 0.0, DEFAULT_ENTITY_ZPOS);
+         midFarLeft_origin = glm::vec3(-1.0, 0.0, DEFAULT_ENTITY_ZPOS);
+         midFarLeft = glm::vec3(-1.0, 0.0, DEFAULT_ENTITY_ZPOS);
          
          vector_orig.push_back(&midFarLeft_origin);
          vector.push_back(&midFarLeft);
 }
 
 
-void Points::Update(const Vec3<float>& center, const Vec3<float>& angle, const Vec3<float>& scale, const Vec3<float>& uOrient)
+void Points::Update(const glm::vec3& center, const glm::vec3& angle, const glm::vec3& scale, const glm::vec3& uOrient)
 {
-    Vec3<float> pos = center;
+    glm::vec3 pos = center;
 
     for (unsigned int i=0; i<vector.size(); i++)
     {   

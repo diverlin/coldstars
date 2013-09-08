@@ -33,7 +33,7 @@ class Galaxy : public Base
                 
                 virtual void PutChildsToGarbage() const;
                 
-             void Add(Sector*, const Vec3<float>&);
+             void Add(Sector*, const glm::vec3&);
              
              Sector* GetRandomSector();
                 Sector* GetClosestSectorTo(Sector*);

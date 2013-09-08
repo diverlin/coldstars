@@ -41,7 +41,7 @@ class BaseGuiElement
         
         void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; }         
         
-        void SetSize(Vec2<float> size) { m_Box.SetSize(size); };
+        void SetSize(glm::vec2 size) { m_Box.SetSize(size); };
             
         TYPE::GUI GetTypeId() const { return m_Type_id; }
         TYPE::GUI GetSubTypeId() const { return m_Subtype_id; }
@@ -58,9 +58,9 @@ class BaseGuiElement
 
         BaseGuiElement* GetGuiElement(TYPE::GUI) const;                     
             
-        BaseGuiElement* UpdateMouseInteraction(const Vec2<float>&);
+        BaseGuiElement* UpdateMouseInteraction(const glm::vec2&);
         
-        void AddChild(BaseGuiElement*, const Vec2<float>&);
+        void AddChild(BaseGuiElement*, const glm::vec2&);
 
         void Show() { m_Show = true; }
         void Hide() { m_Show = false; }
@@ -80,7 +80,7 @@ class BaseGuiElement
         
         void SetBox(const Box2D& box) { m_Box = box; }
         
-        void SetScale(const Vec2<float>& scale) { m_Box.SetScale(scale); }        
+        void SetScale(const glm::vec2& scale) { m_Box.SetScale(scale); }        
         void SetRoot(bool root) { m_Root = root; }
         void SetPressed(bool pressed) { m_Pressed = pressed; } 
         void SetLocked(bool locked) { m_Locked = locked; } 
@@ -98,7 +98,7 @@ class BaseGuiElement
         void PressEventMBL_onGuiElement(TYPE::GUI, Player*);
         void ResetStateEventOnGuiElement(TYPE::GUI);            
 
-        void UpdateGeometry(const Vec2<float>&, const Vec2<float>&);    
+        void UpdateGeometry(const glm::vec2&, const glm::vec2&);    
         
         virtual void UpdateUnique(Player*);        
         void UpdateCommon(Player*);
@@ -122,13 +122,13 @@ class BaseGuiElement
         bool m_Show;
         bool m_Root;
         
-        Vec2<float> m_Offset;      
+        glm::vec2 m_Offset;      
         AnimationEffect2D* m_AnimationProgram;
         
         static std::map<TYPE::GUI, BaseGuiElement*> static_gui_element_map;
 
-        void SetOffset(const Vec2<float>& offset) { m_Offset = offset; }    
-        void SetOffset(float x, float y) { m_Offset.Set(x,y); }
+        void SetOffset(const glm::vec2& offset) { m_Offset = offset; }    
+        void SetOffset(float x, float y) { m_Offset.x = x; m_Offset.y = y; }
                         
     friend class GuiManager;
 };

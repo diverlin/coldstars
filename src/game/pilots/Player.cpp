@@ -209,7 +209,7 @@ void Player::AddIfVisible(ShockWaveEffect* effect)
 
 void Player::AddIfVisible(LazerTraceEffect* effect)
 {
-    if ( (isPointOnScreen(effect->GetStartPos()) == true) or (isPointOnScreen(effect->GetEndPos()) == true) )
+    if ( (isPointOnScreen(vec3ToVec2(effect->GetStartPos())) == true) or (isPointOnScreen(vec3ToVec2(effect->GetEndPos())) == true) )
     {
         if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
         {
@@ -330,7 +330,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
             {
                 if (turn_timer.GetTurnEnded() == true)
                 {
-                    Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetCenter());
+                    Screen::Instance().InitiateScrollTo(vec3ToVec2(npc->GetVehicle()->GetCenter()));
                     turn_timer.NextTurn();                
                 }
             }
@@ -342,7 +342,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
         {
             if (turn_timer.GetTurnEnded() == true)
             {
-                Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetCenter());
+                Screen::Instance().InitiateScrollTo(vec3ToVec2(npc->GetVehicle()->GetCenter()));
                 turn_timer.NextTurn();                
             }
             
@@ -358,7 +358,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     float scale = Screen::Instance().GetScale();
     int w = Screen::Instance().GetWidth();
     int h = Screen::Instance().GetHeight();
-    Vec2<float> world_coord(Screen::Instance().GetBottomLeft());
+    glm::vec2 world_coord(Screen::Instance().GetBottomLeft());
     
     enable_CULLFACE();
     {
@@ -623,7 +623,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     
 void Player::RenderInSpace_OLD(StarSystem* starsystem)
 {
-    Vec2<float> world_coord(Screen::Instance().GetBottomLeft());
+    glm::vec2 world_coord(Screen::Instance().GetBottomLeft());
        
     //glLoadIdentity();
     float scale = Screen::Instance().GetScale();
@@ -807,7 +807,7 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
     { 
-        const Vec3<float>& rocket_pos = visible_ROCKET_vec[i]->GetCenter(); // shortcut
+        const glm::vec3& rocket_pos = visible_ROCKET_vec[i]->GetCenter(); // shortcut
         float object_cursor_dist = distanceBetween(rocket_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, rocket_pos.z);
         if (object_cursor_dist < visible_ROCKET_vec[i]->GetCollisionRadius())
         { 
@@ -837,7 +837,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
     { 
-        const Vec3<float>& container_pos = visible_CONTAINER_vec[i]->GetCenter(); // shortcut
+        const glm::vec3& container_pos = visible_CONTAINER_vec[i]->GetCenter(); // shortcut
         float object_cursor_dist = distanceBetween(container_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, container_pos.z);
         if (object_cursor_dist < visible_CONTAINER_vec[i]->GetCollisionRadius())
         {   
@@ -878,7 +878,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
     { 
-        float object_cursor_dist = distanceBetween(visible_SATELLITE_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = distanceBetween(vec3ToVec2(visible_SATELLITE_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SATELLITE_vec[i]->GetCollisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
@@ -928,7 +928,7 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
     { 
-        float object_cursor_dist = distanceBetween(visible_ASTEROID_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = distanceBetween(vec3ToVec2(visible_ASTEROID_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_ASTEROID_vec[i]->GetCollisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_ASTEROID_vec[i]);        
@@ -957,7 +957,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SHIP_vec.size(); i++)
     { 
-        float object_cursor_dist = distanceBetween(visible_SHIP_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = distanceBetween(vec3ToVec2(visible_SHIP_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SHIP_vec[i]->GetCollisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);    
@@ -1018,7 +1018,7 @@ bool Player::MouseInteractionWithBlackHoles(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
     { 
-        float cursor_dist = distanceBetween(visible_BLACKHOLE_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float cursor_dist = distanceBetween(vec3ToVec2(visible_BLACKHOLE_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (cursor_dist < visible_BLACKHOLE_vec[i]->GetCollisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_BLACKHOLE_vec[i]); 
@@ -1034,7 +1034,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
     { 
-        float object_cursor_dist = distanceBetween(visible_SPACESTATION_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = distanceBetween(vec3ToVec2(visible_SPACESTATION_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SPACESTATION_vec[i]); 
@@ -1084,7 +1084,7 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_PLANET_vec.size(); i++)
     { 
-        float object_cursor_dist = distanceBetween(visible_PLANET_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = distanceBetween(vec3ToVec2(visible_PLANET_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_PLANET_vec[i]->GetCollisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_PLANET_vec[i]); 
@@ -1124,7 +1124,7 @@ void Player::MouseNavigation(const MouseData& data_mouse) const
     if (data_mouse.left_click == true)
     {
         ForceStateMachineReset();
-        npc->GetVehicle()->GetComplexDrive().SetStaticTargetCoords(Vec3<float>(data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, npc->GetVehicle()->GetCenter().z));  
+        npc->GetVehicle()->GetComplexDrive().SetStaticTargetCoords(glm::vec3(data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, npc->GetVehicle()->GetCenter().z));  
     }
 }
 
@@ -1278,7 +1278,7 @@ bool isObjectWithinRadarRange(BaseParticleSystem* effect, Vehicle* vehicle)
 
 
 
-bool isObjectOnScreen(const Vec3<float>& center, const Vec3<float>& size)
+bool isObjectOnScreen(const glm::vec3& center, const glm::vec3& size)
 {      
     float scale = Screen::Instance().GetScale();
     if (center.x < (Screen::Instance().GetBottomLeftScreenWC().x - size.x*scale))
@@ -1293,7 +1293,7 @@ bool isObjectOnScreen(const Vec3<float>& center, const Vec3<float>& size)
     return true;
 }
 
-bool isObjectOnScreen(const Vec2<float>& ob_center, const float sizeInPixels)
+bool isObjectOnScreen(const glm::vec2& ob_center, const float sizeInPixels)
 {       
     float scale = Screen::Instance().GetScale();
     if (ob_center.x < (Screen::Instance().GetBottomLeftScreenWC().x - sizeInPixels*scale))
@@ -1308,7 +1308,7 @@ bool isObjectOnScreen(const Vec2<float>& ob_center, const float sizeInPixels)
     return true;
 }
 
-bool isPointOnScreen(const Vec2<float>& p)
+bool isPointOnScreen(const glm::vec2& p)
 {       
     if (p.x < (Screen::Instance().GetBottomLeftScreenWC().x))
         return false;

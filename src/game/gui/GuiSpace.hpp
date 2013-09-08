@@ -50,7 +50,7 @@ class GuiSpace : public BaseGuiElement
         
         virtual void RenderUnique(Player*) const override final;
                 
-        void RenderText(const Vec2<float>&) const;
+        void RenderText(const glm::vec2&) const;
         
         void EnterGalaxyMap();
         void ExitGalaxyMap();
