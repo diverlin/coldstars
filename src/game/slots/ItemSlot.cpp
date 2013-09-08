@@ -292,13 +292,13 @@ void ItemSlot::UpdateVehiclePropetries() const
 }
    
 /* virtual */
-void ItemSlot::Render(const Box2D& box, const Vec2<float>& gui_offset, bool draw_text) const
+void ItemSlot::Render(const Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
 { 
     drawQuad(textureOb, box); 
     RenderItem(box, gui_offset, draw_text);    
 }
 
-void ItemSlot::RenderItem(const Box2D& box, const Vec2<float>& gui_offset, bool draw_text) const
+void ItemSlot::RenderItem(const Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
 {   
     if (m_Item != nullptr)
     {
@@ -379,7 +379,7 @@ void ItemSlot::DropItemToSpace()
 
     Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, m_Item);
     float impulse_strength = 0.5;
-    Vec3<float> impulse_dir(getRandXYVec3Unit());
+    glm::vec3 impulse_dir(getRandXYVec3Unit());
     container->ApplyImpulse(impulse_dir, impulse_strength);        
     GetOwnerVehicle()->GetStarSystem()->AddContainer(container, GetOwnerVehicle()->GetCenter());
     RemoveItem();
@@ -435,7 +435,7 @@ void ItemSlot::UpdateRange(TextureOb* _texOb)
     m_VisualPath.FillData(_texOb, radius, size);
 }
 
-void ItemSlot::DrawRange(const Vec3<float>& offset)
+void ItemSlot::DrawRange(const glm::vec2& offset)
 { 
     m_VisualPath.Draw(offset);
 }

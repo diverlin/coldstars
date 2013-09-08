@@ -73,7 +73,7 @@ void BaseButton::ShadeOff()
 /* virtual override */               
 void BaseButton::RenderInfo() const
 {
-    drawColoredTextWithBackground(GetInfo(), 12, GetBox().GetCenter(), Color4<int>(255, 255, 255, 255));
+    drawColoredTextWithBackground(GetInfo(), 12, GetBox().GetCenter(), glm::ivec4(255, 255, 255, 255));
 }
 
 /* virtual override */
@@ -99,7 +99,7 @@ void BaseButton::RenderUnique(Player*) const
            
     if (GetLabel() != "")
     {
-        Vec2<float> pos(GetBox().GetCenter().x, GetBox().GetCenter().y + GetBox().GetSize().y);
+        glm::vec2 pos(GetBox().GetCenter().x, GetBox().GetCenter().y + GetBox().GetSize().y);
         Screen::Instance().DrawText(GetLabel(), 12, pos);
     }
 }

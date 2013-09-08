@@ -23,7 +23,7 @@
 #include "../render/Screen.hpp"
 #include "../resources/ShaderCollector.hpp"
 
-LazerTraceEffect::LazerTraceEffect(TextureOb* _texOb, const Vec3<float>* const _pTo_start_pos, const Vec3<float>* const _pTo_end_pos)
+LazerTraceEffect::LazerTraceEffect(TextureOb* _texOb, const glm::vec3* const _pTo_start_pos, const glm::vec3* const _pTo_end_pos)
 {
     is_alive = true;
     is_alreadyInRemoveQueue = false; 

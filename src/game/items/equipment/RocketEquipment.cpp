@@ -151,7 +151,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 {
     int num = 0;
 
-    Vec3<float> start_pos;
+    glm::vec3 start_pos;
     float angle_inD;
             
     if (fire_atOnce>=1)
@@ -173,7 +173,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
         rocket_bullet->SetOwnerId(item_slot->GetOwnerVehicle()->GetId());
         rocket_bullet->SetTarget(item_slot->GetTarget());
     
-        item_slot->GetOwnerVehicle()->GetStarSystem()->AddBullet(rocket_bullet, start_pos, Vec3<float>(0, 0, angle_inD));
+        item_slot->GetOwnerVehicle()->GetStarSystem()->AddBullet(rocket_bullet, start_pos, glm::vec3(0, 0, angle_inD));
         num++;
     }
         

@@ -58,17 +58,17 @@ gui_vehicle_scan(nullptr)
     {
         gui_vehicle_scan = new GuiVehicle();
 
-        Vec2<float> size(250, 250);    
+        glm::vec2 size(250, 250);    
         gui_vehicle_scan->SetSize(size);
     
-        Vec2<float> offset(screen_w/2, screen_h/2);
+        glm::vec2 offset(screen_w/2, screen_h/2);
         gui_space.AddChild(gui_vehicle_scan, offset);    
     } 
     
     {
         gui_galaxymap    = new GuiGalaxyMap();
         
-        Vec2<float> offset(screen_w/2, screen_h/2);
+        glm::vec2 offset(screen_w/2, screen_h/2);
         gui_space.AddChild(gui_galaxymap, offset);
     }
     
@@ -107,7 +107,7 @@ void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill)
     //if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
     {
         //gui_vehicle_scan->RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId());
-        //player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), Vec2<float>(0, 0));        
+        //player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), glm::vec2(0, 0));        
     }
     //else
     {
@@ -164,7 +164,7 @@ void GuiManager::UpdateSessionInSpace()
         {               
             if (scan_target->GetTypeId() == TYPE::ENTITY::VEHICLE_ID)
             {
-                gui_scan_vehicle->BindVehicle((Vehicle*)scan_target, /*offset=*/Vec2<float>(0, 0), /*full_control_on*/true);
+                gui_scan_vehicle->BindVehicle((Vehicle*)scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
                 gui_scan_vehicle->Show();  
                 
                 gui_player_vehicle->Hide(); 
@@ -213,7 +213,7 @@ void GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 {   
     /*     
     Rect screen_rect(0, 0, Screen::Instance().GetWidth(), Screen::Instance().GetHeight());   
-    Vec2<float> center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);                   
+    glm::vec2 center_screen(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2);                   
                     
      //UserInputManager::Instance().UpdateInKosmoport(player);
     //player->GetCursor().Update(); 

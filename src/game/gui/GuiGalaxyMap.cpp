@@ -59,9 +59,9 @@ m_Galaxy(nullptr)
 GuiGalaxyMap::~GuiGalaxyMap()
 {}
 
-Vec3<float> GuiGalaxyMap::GetAbsoluteStarSystemPosition(const StarSystem& starsystem) const
+glm::vec3 GuiGalaxyMap::GetAbsoluteStarSystemPosition(const StarSystem& starsystem) const
 {
-    Vec3<float> starsystem_pos = (starsystem.GetSector()->GetCenter() + starsystem.GetCenter())*m_ScaleParsecToScreenCoord;
+    glm::vec3 starsystem_pos = (starsystem.GetSector()->GetCenter() + starsystem.GetCenter())*m_ScaleParsecToScreenCoord;
     starsystem_pos.x += GetBox().GetCenter().x;
     starsystem_pos.y += GetBox().GetCenter().y;
     
@@ -86,11 +86,11 @@ void GuiGalaxyMap::UpdateUnique(Player* player)
     int radius = player->GetNpc()->GetVehicle()->GetProperties().hyper * m_ScaleParsecToScreenCoord;
     m_VisualHyperJumpRange.FillData(GuiTextureObCollector::Instance().dot_yellow, radius, /*dot_size=*/6);
 
-    Vec3<float> player_starsystem_pos = GetAbsoluteStarSystemPosition(*player->GetNpc()->GetVehicle()->GetStarSystem());
+    glm::vec3 player_starsystem_pos = GetAbsoluteStarSystemPosition(*player->GetNpc()->GetVehicle()->GetStarSystem());
     if (player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() == TYPE::AISCENARIO::MICRO_JUMP_ID)
     {
         StarSystem* player_starsystem_target = dynamic_cast<StarSystem*>(player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTarget());
-        Vec3<float> player_target_starsystem_pos = GetAbsoluteStarSystemPosition(*player_starsystem_target);
+        glm::vec3 player_target_starsystem_pos = GetAbsoluteStarSystemPosition(*player_starsystem_target);
                 
         m_VisualHyperJumpPath.FillData(GuiTextureObCollector::Instance().dot_green, player_starsystem_pos, player_target_starsystem_pos, /*dot_offset=*/5, /*dot_size=*/6);        
     }
@@ -102,7 +102,7 @@ void GuiGalaxyMap::UpdateUnique(Player* player)
             for (unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
             {
                 StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
-                Vec3<float> starsystem_pos = GetAbsoluteStarSystemPosition(starsystem);
+                glm::vec3 starsystem_pos = GetAbsoluteStarSystemPosition(starsystem);
                 if (starsystem.GetId() != player->GetNpc()->GetVehicle()->GetStarSystem()->GetId())
                 {                            
                     float ss_cursor_dist = distanceBetween(starsystem_pos, data_mouse.pos_screencoord);
@@ -141,12 +141,12 @@ void GuiGalaxyMap::RenderUnique(Player* player) const
         for (unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
         {       
             const StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
-            Vec3<float> starsystem_pos = GetAbsoluteStarSystemPosition(starsystem);            
-                       
+            glm::vec2 starsystem_pos = vec3ToVec2(GetAbsoluteStarSystemPosition(starsystem));            
+                                   
             TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::DISTANTSTAR_ID, starsystem.STAR_vec[0]->GetColorId()); 
             
             enable_POINTSPRITE();
-            {                        
+            {     
                 drawParticleTextured(texOb_particle->texture, starsystem_pos, 30.0, -2.0);
                 
                 if (starsystem.GetConquerorRaceId() != TYPE::RACE::NONE_ID)
@@ -156,21 +156,21 @@ void GuiGalaxyMap::RenderUnique(Player* player) const
                 
                 if (starsystem.GetConditionId() == ENTITY::STARSYSTEM::CONDITION::WAR_ID)
                 {
-                    Vec3<float> offset(0.0, -13.0, 0.0);
+                    glm::vec2 offset(0.0, -13.0);
                     drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_war->texture, starsystem_pos + offset, 20.0, -2.0);
                 } 
             }               
             disable_POINTSPRITE();   
 
             int font_size = 8;  
-            Vec3<float> offset(0.0, 13.0, 0.0);
+            glm::vec2 offset(0.0, 13.0);
             Screen::Instance().DrawText(int2str(starsystem.GetId()), font_size, starsystem_pos + offset);
         }               
     }     
     
     enable_POINTSPRITE();
     {
-        Vec3<float> player_starsystem_pos = GetAbsoluteStarSystemPosition(*player->GetNpc()->GetVehicle()->GetStarSystem()); 
+        glm::vec2 player_starsystem_pos = vec3ToVec2(GetAbsoluteStarSystemPosition(*player->GetNpc()->GetVehicle()->GetStarSystem())); 
         
         drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player_starsystem_pos, 40.0, -2.0);
         

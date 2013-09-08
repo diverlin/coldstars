@@ -31,14 +31,14 @@ class Atmosphere
         ~Atmosphere();
             
         void SetParent(BaseSpaceEntity* parent) { this->parent = parent; }
-        void Render(const Vec2<float>&);
+        void Render(const glm::vec2&);
         
     private:
         BaseSpaceEntity* parent;
         TextureOb* textureOb;
         
-        Vec3<float> angle;
-        Vec3<float> d_angle;
+        glm::vec3 angle;
+        glm::vec3 d_angle;
 }; 
 
 #endif 

@@ -29,10 +29,10 @@ class BaseBackGroundEffect
         BaseBackGroundEffect();
         ~BaseBackGroundEffect();
         
-        void SetTextureOb(TextureOb* textureOb, const Vec3<float>& scale_factor = Vec3<float>(1.0, 1.0, 1.0));
+        void SetTextureOb(TextureOb* textureOb, const glm::vec3& scale_factor = glm::vec3(1.0, 1.0, 1.0));
         
-        void SetSize(const Vec3<float>& size)         { this->size = size; }
-        void SetCenter(const Vec3<float>& center)        { this->center = center; }
+        void SetSize(const glm::vec3& size)         { this->size = size; }
+        void SetCenter(const glm::vec3& center)        { this->center = center; }
         void SetParallaxRate(float parallax_rate)     { this->parallax_rate = parallax_rate; } 
             
     protected:
@@ -43,8 +43,8 @@ class BaseBackGroundEffect
         TextureOb* textureOb;
         std::string textureOb_path;
         
-        Vec3<float> center;
-        Vec3<float> size;        
+        glm::vec3 center;
+        glm::vec3 size;        
         
         float parallax_rate;
         

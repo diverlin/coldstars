@@ -37,8 +37,8 @@ class ShieldEffect
         void Render(float) const;            
 
     private:       
-        Color4<float> color;
-        Vec3<float> size;
+        glm::vec4 color;
+        glm::vec3 size;
         
         float alpha_start;
         float d_alpha;

@@ -49,7 +49,7 @@ void Sector::PutChildsToGarbage() const
     }
 }
 
-void Sector::Add(StarSystem* starsystem, const Vec3<float>& center) 
+void Sector::Add(StarSystem* starsystem, const glm::vec3& center) 
 { 
     starsystem->SetSector(this);
         starsystem->SetCenter(center);

@@ -69,11 +69,11 @@ class StarSystem : public BaseSpaceEntity
 
         void SetContainerNumMax(int container_num_max) { this->container_num_max = container_num_max; }
         void SetSector(Sector* sector)  { this->sector = sector; }
-        void SetColor(const Color4<float>& color)  { this->color = color; }
-        const Color4<float>& GetColor4f()  { return color; }
+        void SetColor(const glm::vec4& color)  { this->color = color; }
+        const glm::vec4& GetColor4f()  { return color; }
         AsteroidManager& GetAsteroidManager()  { return asteroid_manager; }
                                                 
-        const Color4<float>& GetColor() const { return color; }
+        const glm::vec4& GetColor() const { return color; }
         //bool GetDetailedSimulationFlag() const { return detalied_simulation; }
         int GetConditionId()     const { return condition_id; }
         TYPE::RACE GetRaceId()          const { return race_id; }
@@ -92,18 +92,18 @@ class StarSystem : public BaseSpaceEntity
         void CreateGroupAndShareTask(Npc*, StarSystem*, int) const;
         
         //// TRANSITION
-        void AddVehicle(Vehicle*, const Vec3<float>&, const Vec3<float>&, const BaseSpaceEntity* const parent = nullptr);
-        void AddBullet(RocketBullet*, const Vec3<float>&, const Vec3<float>&);
+        void AddVehicle(Vehicle*, const glm::vec3&, const glm::vec3&, const BaseSpaceEntity* const parent = nullptr);
+        void AddBullet(RocketBullet*, const glm::vec3&, const glm::vec3&);
                                 
         void Add(BasePlanet*, const BaseSpaceEntity* parent = nullptr, int it = 0);
-        void AddContainer(Container*, const Vec3<float>&);
-        void Add(BlackHole*, const Vec3<float>&);
+        void AddContainer(Container*, const glm::vec3&);
+        void Add(BlackHole*, const glm::vec3&);
 
         // effects
         void Add(BaseParticleSystem*);
-        void Add(ShockWaveEffect*, const Vec2<float>&);
-        void Add(ExplosionEffect*, const Vec3<float>&, float, float);
-        void Add(ExplosionEffect*, const Vec3<float>&);
+        void Add(ShockWaveEffect*, const glm::vec2&);
+        void Add(ExplosionEffect*, const glm::vec3&, float, float);
+        void Add(ExplosionEffect*, const glm::vec3&);
         void Add(LazerTraceEffect*);
 
         void Add(DistantNebulaEffect*);
@@ -120,11 +120,11 @@ class StarSystem : public BaseSpaceEntity
         
         void Update(int);
         
-        float CalcResultGravityForce(const Vec3<float>&, const Vec3<float>&, float) const;
+        float CalcResultGravityForce(const glm::vec3&, const glm::vec3&, float) const;
 
             void RestoreDefaultColor();
             void RestoreSceneColor();
-            void DrawBackground(Vec2<float>);
+            void DrawBackground(glm::vec2);
                 void DrawOrbits();
                 void DrawPath();
                 
@@ -133,7 +133,7 @@ class StarSystem : public BaseSpaceEntity
         void ResolveData();
                                                                                            
         // poor
-        Planet* GetClosestInhabitedPlanet(const Vec2<float>&) const;
+        Planet* GetClosestInhabitedPlanet(const glm::vec2&) const;
         Planet* GetRandomInhabitedPlanet() const;
         Planet* GetRandomPlanet() const;
         Vehicle* GetRandomVehicle() const;
@@ -154,7 +154,7 @@ class StarSystem : public BaseSpaceEntity
         unsigned int container_num_max;
         
         Sector* sector;
-        Color4<float> color;
+        glm::vec4 color;
         
         AsteroidManager asteroid_manager;
         
@@ -191,7 +191,7 @@ class StarSystem : public BaseSpaceEntity
             
             void UpdateStates();
             
-            void DamageEventInsideCircle(const Vec3<float>&, float, int, bool);
+            void DamageEventInsideCircle(const glm::vec3&, float, int, bool);
             
             void PostDeathUniqueEvent(bool);
 

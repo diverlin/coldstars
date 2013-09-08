@@ -47,8 +47,8 @@ GuiAngar::GuiAngar():angar(nullptr)
     
     {
         //ButtonSingle* repair_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYARMOR_ID, "buy_repair");
-        //Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 2 * GUI::ICON_SIZE, zpos); 
-        //Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+        //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 2 * GUI::ICON_SIZE, zpos); 
+        //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //repair_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::BUYARMOR_ID, repair_button));
@@ -56,8 +56,8 @@ GuiAngar::GuiAngar():angar(nullptr)
     
     {               
         //ButtonSingle* fuel_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYFUEL_ID, "buy fuel");  
-        //Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 3*GUI::ICON_SIZE, zpos); 
-        //Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+        //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 3*GUI::ICON_SIZE, zpos); 
+        //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //fuel_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::BUYFUEL_ID, fuel_button));
@@ -65,8 +65,8 @@ GuiAngar::GuiAngar():angar(nullptr)
         
     {           
         //ButtonSingle* launch_button = new ButtonSingle(texOb_button, GUI::BUTTON::GETLAUNCH_ID, "launch");
-        //Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 4*GUI::ICON_SIZE, zpos); 
-        //Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+        //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 4*GUI::ICON_SIZE, zpos); 
+        //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);        
         //launch_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH_ID, launch_button));

@@ -22,14 +22,14 @@ class ObjLoader
     
     private:
         /** The data readed directly from file */
-        std::vector<Vec3<float>> positions;
-        std::vector<Vec2<float>> texcoords;
-        std::vector<Vec3<float>> normals;        
+        std::vector<glm::vec3> positions;
+        std::vector<glm::vec2> texcoords;
+        std::vector<glm::vec3> normals;        
         std::vector<MeshFaceIndexesData> faces_indexes;
         /** */
         
               void NormalizePositions();
-              Vec3<float> GetBoundaryBox();
+              glm::vec3 GetBoundaryBox();
         
     friend class Mesh;
 };

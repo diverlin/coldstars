@@ -5,14 +5,14 @@
 #include <ctime>
 #include <cmath>
 #include <glm/glm.hpp> // glm::vec
-#include <math/Vec3.hpp>
+//#include <math/Vec3.hpp>
 
-const int NUM2 = 100000000;
+const int NUM2 = 10000000;
 
 void runVecMath_GLM()
 {
 glm::vec3 t;
-std::cout<<t.x<<" "<<t.y<<" "<<t.z;
+std::cout<<t.r<<" "<<t.g<<" "<<t.b;
 
     glm::vec3 v1(2.0, 1.0, 3.0);
     glm::vec3 v2(2.0);
@@ -26,14 +26,14 @@ std::cout<<t.x<<" "<<t.y<<" "<<t.z;
 
 void runVecMath_CUSTOM()
 {
-    Vec3<float> v1(2.0, 1.0, 3.0);
-    Vec3<float> v2(2.0);
-    Vec3<float> v3(0.0);
-    for (int i=0; i<NUM2; i++)
-    {  
-        v3 += v1.GetNormalized() + v2.GetNormalized() + v1 + v2*v1;
-        v3 *= v1*v3.GetLength();            
-    }
+    //glm::vec3 v1(2.0, 1.0, 3.0);
+    //glm::vec3 v2(2.0);
+    //glm::vec3 v3(0.0);
+    //for (int i=0; i<NUM2; i++)
+    //{  
+        //v3 += v1.GetNormalized() + v2.GetNormalized() + v1 + v2*v1;
+        //v3 *= v1*v3.GetLength();            
+    //}
 }
 
 void runVectorPerfomanceTest()

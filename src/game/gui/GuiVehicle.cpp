@@ -47,10 +47,10 @@ m_Vehicle(nullptr)
     {
         ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(SLOT_WEAPON_TYPES[i]), "ENTITY::WEAPON_SLOT_ID");
         
-        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
 
-        Vec2<float> offset((-2+i)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (2)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);                       
+        glm::vec2 offset((-2+i)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (2)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);                       
         AddChild(button, offset);
     } 
     
@@ -58,90 +58,90 @@ m_Vehicle(nullptr)
     {
         ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::RADAR_SLOT_ID), "ENTITY::RADAR_SLOT_ID");
         
-        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
         
-        Vec2<float> offset((3)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (-0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 offset((3)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (-0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);
     }
 
     {
         ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::SCANER_SLOT_ID), "ENTITY::SCANER_SLOT_ID");
 
-        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
                     
-        Vec2<float> offset((3)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 offset((3)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);
     }
 
     {
         ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::ENERGIZER_SLOT_ID), "ENTITY::ENERGIZER_SLOT_ID");
 
-        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
                 
-        Vec2<float> offset((0)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP); 
+        glm::vec2 offset((0)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP); 
         AddChild(button, offset);
     }
 
     {
         ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::GRAPPLE_SLOT_ID), "ENTITY::GRAPPLE_SLOT_ID");
 
-        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
         
-        Vec2<float> offset((-0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 offset((-0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);
     }
 
     {
         ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::DROID_SLOT_ID), "ENTITY::DROID_SLOT_ID");
 
-        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
                             
-        Vec2<float> offset((0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP,(0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 offset((0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP,(0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);
     }
 
     //{
         //ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(TYPE::ENTITY::FREEZER_SLOT_ID), "ENTITY::FREEZER_SLOT_ID");
 
-        //Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        //glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         //button->SetSize(size);
                 
-        //Vec2<float> offset((-0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP,(-0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        //glm::vec2 offset((-0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP,(-0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         //AddChild(button, offset);
     //}
                 
     {
         ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::PROTECTOR_SLOT_ID), "ENTITY::PROTECTOR_SLOT_ID");
 
-        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
                 
-        Vec2<float> offset((0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP,(-0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 offset((0.75)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP,(-0.75)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);
     }
 
     {
         ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::DRIVE_SLOT_ID), "ENTITY::DRIVE_SLOT_ID");
 
-        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
                             
-        Vec2<float> offset((-2.5)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 offset((-2.5)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);
     }
 
     {
         ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::BAK_SLOT_ID), "ENTITY::BAK_SLOT_ID");
 
-        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
                     
-        Vec2<float> offset((-2.5)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (-0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 offset((-2.5)*dist_rate*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (-0.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);
     }
 
@@ -152,10 +152,10 @@ m_Vehicle(nullptr)
         {
             ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(SLOT_ARTEFACT_TYPES[i]), "ENTITY::ARTEFACT_SLOT_ID");
 
-            Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, GUI::ITEMSLOT::HEIGHT_FOR_SHIP*scale_size);
+            glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, GUI::ITEMSLOT::HEIGHT_FOR_SHIP*scale_size);
             button->SetSize(size);
                              
-            Vec2<float> offset((i+1)*GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, (-2.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+            glm::vec2 offset((i+1)*GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, (-2.5)*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
             AddChild(button, offset);
         }      
     }
@@ -166,10 +166,10 @@ m_Vehicle(nullptr)
         float scale_size =1/1.5;
         ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(SLOT_CARGO_TYPES[i]), "ENTITY::CARGO_SLOT_ID");
         
-        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, GUI::ITEMSLOT::HEIGHT_FOR_SHIP*scale_size);
+        glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, GUI::ITEMSLOT::HEIGHT_FOR_SHIP*scale_size);
         button->SetSize(size);
 
-        Vec2<float> offset((-5+i)*GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, -1.75*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);        
+        glm::vec2 offset((-5+i)*GUI::ITEMSLOT::WIDTH_FOR_SHIP*scale_size, -1.75*dist_rate*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);        
         AddChild(button, offset);
     }
         
@@ -177,10 +177,10 @@ m_Vehicle(nullptr)
     {
         ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::GATE_SLOT_ID), "ENTITY::GATE_SLOT_ID");
         
-        Vec2<float> size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->SetSize(size);
                             
-        Vec2<float> offset((-3.2)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (3.2)*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        glm::vec2 offset((-3.2)*GUI::ITEMSLOT::WIDTH_FOR_SHIP, (3.2)*GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         AddChild(button, offset);          
     }
     
@@ -191,7 +191,7 @@ m_Vehicle(nullptr)
 GuiVehicle::~GuiVehicle()
 {}
 
-void GuiVehicle::BindVehicle(Vehicle* vehicle, const Vec2<float>& gui_offset, bool allow_full_control, bool block_manual_exit, float scale)
+void GuiVehicle::BindVehicle(Vehicle* vehicle, const glm::vec2& gui_offset, bool allow_full_control, bool block_manual_exit, float scale)
 {      
     m_Vehicle = vehicle; 
      

@@ -80,7 +80,7 @@ void Screen::DrawFps()
     }
     
     std::string fps_str = "FPS:" + int2str(fps) + " / game_speed: x" + int2str(Config::Instance().GAME_SPEED);
-    DrawText(fps_str, 14, Vec2<float>(100, GetHeight()-10));
+    DrawText(fps_str, 14, glm::vec2(100, GetHeight()-10));
     //std::cout<<fps<<std::endl; 
 }
     
@@ -110,7 +110,7 @@ void Screen::ResizePostEffects(int width, int height)
     bloom.Resize(width, height);
 }
 
-void Screen::MovingBy(const Vec2<float>& delta)
+void Screen::MovingBy(const glm::vec2& delta)
 {
     rect.MovingBy(delta);
 }
@@ -119,7 +119,7 @@ void Screen::UpdateInSpace()
 {    
     //if (auto_scroll == true)
     //{
-        //Vec2<float> d_pos;
+        //glm::vec2 d_pos;
         //float speed = 15.0;
         //get_dPos_ToPoint(rect.GetCenter(), target_center, speed, d_pos);
         //MovingBy(d_pos);
@@ -152,11 +152,11 @@ void  Screen::IncreaseScale()
     {
         scale += d_scale;
         
-        Vec2<float> center = rect.GetCenter();
+        glm::vec2 center = rect.GetCenter();
         float rate = 0.5*d_scale;
         float offset_x = rect.GetWidth()*rate;
         float offset_y = rect.GetHeight()*rate;
-        Vec2<float> offset(offset_x, offset_y);
+        glm::vec2 offset(offset_x, offset_y);
         rect.SetCenter(center-offset);
     } 
 }
@@ -168,11 +168,11 @@ void Screen::DecreaseScale()
     {
         scale += d_scale;
         
-        Vec2<float> center = rect.GetCenter();
+        glm::vec2 center = rect.GetCenter();
         float rate = 0.5*d_scale;
         float offset_x = rect.GetWidth()*rate;
         float offset_y = rect.GetHeight()*rate;
-        Vec2<float> offset(offset_x, offset_y);
+        glm::vec2 offset(offset_x, offset_y);
         
         rect.SetCenter(center-offset);
     } 

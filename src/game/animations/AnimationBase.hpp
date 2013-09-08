@@ -31,7 +31,7 @@ class AnimationBase
         {}
         virtual ~AnimationBase() {}
 
-        virtual void Update(Vec3<float>&) = 0;
+        virtual void Update(glm::vec3&) = 0;
 
     protected:       
         bool clockwise;

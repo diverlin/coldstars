@@ -153,12 +153,12 @@ void Npc::UpdateInSpaceInStatic()
 
 void Npc::AddExpirience(int expirience, bool show_effect)
 {
-           skills.AddExpirience(expirience);
+    skills.AddExpirience(expirience);
     
     if (show_effect == true)
     {
-               VerticalFlowText* text = new VerticalFlowText(int2str(expirience), 12, vehicle->GetCenter(), COLOR::COLOR4I_BLUE_LIGHT, 10);
-               vehicle->GetStarSystem()->Add(text); 
+        VerticalFlowText* text = new VerticalFlowText(int2str(expirience), 12, vec3ToVec2(vehicle->GetCenter()), COLOR::COLOR4I_BLUE_LIGHT, 10);
+        vehicle->GetStarSystem()->Add(text); 
     }
 }
          
@@ -222,14 +222,14 @@ void Npc::ScenarioFireAsteroid()
 
 Planet* Npc::GetPlanetForDocking()
 {
-         return GetStarSystem()->GetClosestInhabitedPlanet(vehicle->GetCenter());  // improove
+    return GetStarSystem()->GetClosestInhabitedPlanet(vec3ToVec2(vehicle->GetCenter()));  // improove
 }
 
 StarSystem* Npc::GetClosestStarSystem(int requested_condition_id)
 {
-           observation.FindEchievableStarSystems(GetStarSystem()->GetSector()->GetGalaxy());
-            
-           StarSystem* _target_starsystem = observation.GetClosestStarSystem(requested_condition_id);   
+    observation.FindEchievableStarSystems(GetStarSystem()->GetSector()->GetGalaxy());
+    
+    StarSystem* _target_starsystem = observation.GetClosestStarSystem(requested_condition_id);   
     return _target_starsystem;
 }
 
@@ -282,7 +282,7 @@ void Npc::UpdateInfo()
     }
 }
 
-void Npc::RenderInfo(const Vec2<float>& center)
+void Npc::RenderInfo(const glm::vec2& center)
 {
     UpdateInfo();
          drawInfoIn2Column(info.title_list, info.value_list, center);

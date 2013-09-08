@@ -19,7 +19,7 @@
 #include <cmath>
 #include "Collision.hpp"
 
-bool checkCollisionDotWithCircle_DIRTY(const Vec2<float>& dot, const Vec2<float>& center, float radius)
+bool checkCollisionDotWithCircle_DIRTY(const glm::vec2& dot, const glm::vec2& center, float radius)
 {
     if (std::fabs(dot.x - center.x) > radius)
         return false;
@@ -29,7 +29,7 @@ bool checkCollisionDotWithCircle_DIRTY(const Vec2<float>& dot, const Vec2<float>
     return true;
 }
 
-bool checkCollisionDotWithRectangle(const Vec2<float>& dot, const Vec2<float>& center, const Vec2<float>& size)
+bool checkCollisionDotWithRectangle(const glm::vec2& dot, const glm::vec2& center, const glm::vec2& size)
 {
     if (std::fabs(dot.x - center.x) > size.x/2)
         return false;

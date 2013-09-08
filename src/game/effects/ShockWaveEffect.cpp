@@ -25,10 +25,10 @@ ShockWaveEffect::ShockWaveEffect(float x, float y, float z, float time,
     is_alive = true;
     is_alreadyInRemoveQueue = false;
 
-    parameter.Set(x, y, z);
+    parameter = glm::vec3(x, y, z);
     this->time = time; 
 
-    d_parameter.Set(d_x, d_y, d_z);
+    d_parameter = glm::vec3(d_x, d_y, d_z);
     this->d_time = d_time; 
 }
 
@@ -71,7 +71,7 @@ ShockWaveEffect* getNewShockWave(float radius, bool dynamic)
     float dtime = -(0.001 + size_id * 0.0005);     // 10, 1.8, 0.13, 0.0,  0,  0.02, 0.0005, -0.004 
     //float dtime = -(0.0001*obSize + obSize * 0.0003);     // 10, 1.8, 0.13, 0.0,  0,  0.02, 0.0005, -0.004 
         
-        if (dynamic == false)
+    if (dynamic == false)
     {
         x = 100;
         y = 1.8;

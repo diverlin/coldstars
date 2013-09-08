@@ -129,7 +129,13 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
                 break;
             }
     
-            case sf::Keyboard::C: { Screen::Instance().InitiateScrollTo(player->GetNpc()->GetVehicle()->GetCenter()); break; }
+            case sf::Keyboard::C: 
+            { 
+                glm::vec3 player_pos3 = player->GetNpc()->GetVehicle()->GetCenter();
+                glm::vec2 player_pos2(player_pos3.x, player_pos3.y);
+                Screen::Instance().InitiateScrollTo(player_pos2); 
+                break; 
+            }
             case sf::Keyboard::G: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::GRAPPLE_SLOT_SELECTOR_ID); break; }    
             
             case sf::Keyboard::M: {    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::GALAXYMAP_ID); break; }

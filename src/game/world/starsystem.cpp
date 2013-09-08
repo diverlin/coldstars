@@ -162,7 +162,7 @@ void StarSystem::CreateGroupAndShareTask(Npc* npc_leader, StarSystem* target_sta
     }
 }
         
-void StarSystem::AddVehicle(Vehicle* vehicle, const Vec3<float>& center, const Vec3<float>& angle, const BaseSpaceEntity* const parent)
+void StarSystem::AddVehicle(Vehicle* vehicle, const glm::vec3& center, const glm::vec3& angle, const BaseSpaceEntity* const parent)
 {
     #if ENTITY_TRANSACTION_LOG_ENABLED == 1
     Logger::Instance().Log(" StarSystem(" + int2str(GetId()) + ")::AddVehicle(" + int2str(vehicle->GetId())+")", ENTITY_TRANSACTION_LOG_DIP);
@@ -199,7 +199,7 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const Vec3<float>& center, const V
 }
 
 
-void StarSystem::AddBullet(RocketBullet* rocket, const Vec3<float>& center, const Vec3<float>& angle)
+void StarSystem::AddBullet(RocketBullet* rocket, const glm::vec3& center, const glm::vec3& angle)
 {
     rocket->SetPlaceTypeId(TYPE::PLACE::SPACE_ID);
     rocket->SetStarSystem(this);  
@@ -240,7 +240,7 @@ void StarSystem::Add(BasePlanet* object, const BaseSpaceEntity* parent, int it)
     }
 }
                 
-void StarSystem::AddContainer(Container* container, const Vec3<float>& center)
+void StarSystem::AddContainer(Container* container, const glm::vec3& center)
 {
     #if ENTITY_TRANSACTION_LOG_ENABLED == 1
     Logger::Instance().Log(" StarSystem(" + int2str(GetId()) + ")::AddVehicle(" + int2str(container->GetId()) + ")", ENTITY_TRANSACTION_LOG_DIP);
@@ -257,43 +257,43 @@ void StarSystem::AddContainer(Container* container, const Vec3<float>& center)
     #endif
     
     container->SetStarSystem(this);
-        container->SetPlaceTypeId(TYPE::PLACE::SPACE_ID);
-        container->SetCenter(center);
-        
-        CONTAINER_vec.push_back(container);
+    container->SetPlaceTypeId(TYPE::PLACE::SPACE_ID);
+    container->SetCenter(center);
+    
+    CONTAINER_vec.push_back(container);
 }
 
-void StarSystem::Add(BlackHole* blackhole, const Vec3<float>& center)
+void StarSystem::Add(BlackHole* blackhole, const glm::vec3& center)
 {
     blackhole->SetStarSystem(this);
-        blackhole->SetPlaceTypeId(TYPE::PLACE::SPACE_ID);
+    blackhole->SetPlaceTypeId(TYPE::PLACE::SPACE_ID);
     blackhole->SetCenter(center);
     BLACKHOLE_vec.push_back(blackhole);
 }    
             
-void StarSystem::Add(ShockWaveEffect* shockwave, const Vec2<float>& center)           
+void StarSystem::Add(ShockWaveEffect* shockwave, const glm::vec2& center)           
 { 
     shockwave->SetCenter(center); 
     effect_SHOCKWAVE_vec.push_back(shockwave); 
 }
 
-void StarSystem::Add(ExplosionEffect* explosion, const Vec3<float>& center)           
+void StarSystem::Add(ExplosionEffect* explosion, const glm::vec3& center)           
 { 
     float radius_damage = explosion->GetRadius();
     float damage = 0;
     Add(explosion, center, damage, radius_damage);
 }
 
-void StarSystem::Add(ExplosionEffect* explosion, const Vec3<float>& center, float damage, float radius_damage)           
+void StarSystem::Add(ExplosionEffect* explosion, const glm::vec3& center, float damage, float radius_damage)           
 { 
-    explosion->SetCenter(center);
+    explosion->SetCenter(vec3ToVec2(center));
     effect_PARTICLESYSTEM_vec.push_back(explosion); 
     
     float radius_effect = explosion->GetRadius();
     if ((radius_effect > 75) && (GetShockWaveEffectNum() < SHOCKWAVES_MAX_NUM))
     {
         ShockWaveEffect* shockwave = getNewShockWave(radius_effect);
-        Add(shockwave, center);
+        Add(shockwave, vec3ToVec2(center));
     }
     
     if (radius_effect > 25)
@@ -311,7 +311,7 @@ void StarSystem::Add(DistantStarEffect* ds)                  { distantStarEffect
 //// ******* TRANSITION ******* 
                      
 // poor                
-Planet* StarSystem::GetClosestInhabitedPlanet(const Vec2<float>& _pos) const
+Planet* StarSystem::GetClosestInhabitedPlanet(const glm::vec2& _pos) const
 {        
     Planet* requested_planet = nullptr;
     
@@ -464,10 +464,10 @@ void StarSystem::UpdateStates()
         
         if (BLACKHOLE_vec.size() < 5)
         {
-            Vec2<float> center = getRandVec2f(200, 1200);
+            glm::vec2 center = getRandVec2f(200, 1200);
         
             
-            Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
+            glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
             Add(BlackHoleBuilder::Instance().GetNewBlackHole(), center3);
         }
     }
@@ -561,7 +561,7 @@ void StarSystem::UpdateStates()
     }
 }
 
-float StarSystem::CalcResultGravityForce(const Vec3<float>& center, const Vec3<float>& orient, float mass) const
+float StarSystem::CalcResultGravityForce(const glm::vec3& center, const glm::vec3& orient, float mass) const
 {
     float rate = 1; 
     for (unsigned int i=0; i<STAR_vec.size(); i++)
@@ -569,8 +569,8 @@ float StarSystem::CalcResultGravityForce(const Vec3<float>& center, const Vec3<f
         float dist = distanceBetween(center, STAR_vec[i]->GetCenter());
         if (dist < 5*STAR_vec[i]->GetCollisionRadius())
         {
-            Vec3<float> force_dir(STAR_vec[i]->GetCenter() - center);
-            force_dir.Normalize();
+            glm::vec3 force_dir(STAR_vec[i]->GetCenter() - center);
+            force_dir = glm::normalize(force_dir);
             float power1 = dotUnits(force_dir, orient);
             float power2 = CONVERTER::DIST2GRAVITY.GetEquivalent(dist);
                 
@@ -583,8 +583,8 @@ float StarSystem::CalcResultGravityForce(const Vec3<float>& center, const Vec3<f
         float dist = distanceBetween(center, PLANET_vec[i]->GetCenter());
         if (dist < 5*PLANET_vec[i]->GetCollisionRadius())
         {
-            Vec3<float> force_dir(PLANET_vec[i]->GetCenter() - center);
-            force_dir.Normalize();
+            glm::vec3 force_dir(PLANET_vec[i]->GetCenter() - center);
+            force_dir = glm::normalize(force_dir);
             float power1 = dotUnits(force_dir, orient);
             float power2 = CONVERTER::DIST2GRAVITY.GetEquivalent(dist);
             
@@ -829,7 +829,7 @@ void StarSystem::RestoreDefaultColor()
     setColor4f(COLOR::COLOR4F_WHITE);
 }
 
-void StarSystem::DrawBackground(Vec2<float> scroll_coords)
+void StarSystem::DrawBackground(glm::vec2 scroll_coords)
 {   
     // HACK for point sprites
     enable_POINTSPRITE();
@@ -906,9 +906,9 @@ void StarSystem::ShipManager_s(unsigned int num)
     
         new_pship->BindOwnerNpc(new_pnpc);
 
-        Vec2<float> center = getRandVec2f(100, 800);
-        Vec3<float> center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
-        Vec3<float> angle(0,0,getRandInt(0, 360));
+        glm::vec2 center = getRandVec2f(100, 800);
+        glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
+        glm::vec3 angle(0,0,getRandInt(0, 360));
         
         AddVehicle(new_pship, center3, angle);
     }
@@ -1027,7 +1027,7 @@ void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
 {
     float radius = ((Bomb*)container->GetItemSlot()->GetItem())->GetRadius();
     float damage = ((Bomb*)container->GetItemSlot()->GetItem())->GetDamage(); 
-    Vec3<float> center(container->GetCenter());
+    glm::vec3 center(container->GetCenter());
     
     ExplosionEffect* explosion = getNewExplosionEffect(radius);
     Add(explosion, center, radius, damage);
@@ -1047,7 +1047,7 @@ void StarSystem::StarSparkEvent(float radius) const
         }
 }
 
-void StarSystem::DamageEventInsideCircle(const Vec3<float>& center, float radius, int damage, bool show_effect)
+void StarSystem::DamageEventInsideCircle(const glm::vec3& center, float radius, int damage, bool show_effect)
 {
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
         {
@@ -1062,12 +1062,12 @@ void StarSystem::DamageEventInsideCircle(const Vec3<float>& center, float radius
              float dist = distanceBetween(CONTAINER_vec[i]->GetCenter(), center);
              if (dist < radius)
              {
-                      Vec3<float> force_dir(CONTAINER_vec[i]->GetCenter() - center);
-                 force_dir.Normalize();
-                      float force_power = CONVERTER::RADIUS2FORCE.GetEquivalent(dist); 
-                      std::cout<<dist<<" "<<force_power<<" "<<str(force_dir)<<std::endl;                       
+                glm::vec3 force_dir(CONTAINER_vec[i]->GetCenter() - center);
+                force_dir = glm::normalize(force_dir);
+                float force_power = CONVERTER::RADIUS2FORCE.GetEquivalent(dist); 
+                std::cout<<dist<<" "<<force_power<<" "<<str(force_dir)<<std::endl;                       
 
-                 CONTAINER_vec[i]->ApplyImpulse(force_dir, force_power); 
+                CONTAINER_vec[i]->ApplyImpulse(force_dir, force_power); 
              }
          }
          

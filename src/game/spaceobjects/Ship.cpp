@@ -141,7 +141,7 @@ void Ship::RenderInSpace_2D(float scale) const
     }
 }
 
-void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords, float scale)
+void Ship::RenderInSpace_3D(const glm::vec2& scroll_coords, float scale)
 {
     UpdateRenderAnimation();
     RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());
@@ -156,7 +156,7 @@ void Ship::RenderInSpace_3D(const Vec2<float>& scroll_coords, float scale)
     disable_BLEND();
 }
 
-void Ship::RenderAtPlanet(const Vec3<float>& center)
+void Ship::RenderAtPlanet(const glm::vec3& center)
 {
     SetCenter(center);
     SetAngleZ(0);

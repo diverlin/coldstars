@@ -5,8 +5,7 @@
 #include <string>
 #include <vector>
 
-#include <math/Vec2.hpp>
-#include <math/Vec3.hpp>
+#include <glm/glm.hpp>
 
 #include <render/MyGl.hpp>
 #include <types/MeshTypes.hpp>
@@ -16,9 +15,9 @@ class TextureOb;
 
 struct MeshVertexData
 {
-    Vec3<float> position;
-    Vec2<float> texcoord;
-    Vec3<float> normal;
+    glm::vec3 position;
+    glm::vec2 texcoord;
+    glm::vec3 normal;
 };
 
 struct MeshFaceData
@@ -34,7 +33,7 @@ class Mesh
 
         TYPE::MESH GetTypeId() const { return type_id; };
         TextureOb* GetTextureOb() const { return textureOb; };
-        const Vec3<float>& GetBoundaryBox() const { return boundary_box; };
+        const glm::vec3& GetBoundaryBox() const { return boundary_box; };
                         
         void Draw() const;
     
@@ -43,7 +42,7 @@ class Mesh
         
         TextureOb* textureOb;
         std::vector<MeshFaceData> faces; 
-        Vec3<float> boundary_box;
+        glm::vec3 boundary_box;
 
         GLuint glList; 
         GLuint vbo_id;

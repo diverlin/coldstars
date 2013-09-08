@@ -19,12 +19,12 @@
 #ifndef PLANETDATA_H
 #define PLANETDATA_H
 
-#include "../math/Vec3.hpp"
+#include <glm/glm.hpp>
 #include "../common/constants.hpp"
 
 struct PlanetData
 {
-    Vec3<float> orbit_center; 
+    glm::vec3 orbit_center; 
     int radius_A;
     int radius_B; 
     float orbit_phi_inD;
@@ -32,7 +32,7 @@ struct PlanetData
     bool clockwise;
 
     PlanetData():
-    orbit_center(Vec3<float>(0, 0, DEFAULT_ENTITY_ZPOS)),
+    orbit_center(glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS)),
     radius_A(0),
         radius_B(0), 
         orbit_phi_inD(0.0),

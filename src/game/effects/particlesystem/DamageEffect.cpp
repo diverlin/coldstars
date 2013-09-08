@@ -84,44 +84,44 @@ void DamageEffect::Render(float scale)
 DamageEffect* getNewDamageEffect(int color_id, BaseSpaceEntity* parent)
 {
     int particles_num = 10;
-   
-        ParticleData data_particle;
-        data_particle.size_start = 25;
-        data_particle.size_end = 2.0;
-        data_particle.d_size = 0.02; 
-        
-        data_particle.velocity_start = 1.3;
-        data_particle.velocity_end   = 1.3;        
-        data_particle.d_velocity   = 0.0;
-                
-        data_particle.color_start.r    = 1.0;
+    
+    ParticleData data_particle;
+    data_particle.size_start = 25;
+    data_particle.size_end = 2.0;
+    data_particle.d_size = 0.02; 
+    
+    data_particle.velocity_start = 1.3;
+    data_particle.velocity_end   = 1.3;        
+    data_particle.d_velocity   = 0.0;
+    
+    data_particle.color_start.r    = 1.0;
     data_particle.color_start.g    = 1.0;
     data_particle.color_start.b    = 1.0;
-        data_particle.color_start.a    = 1.0;
-
+    data_particle.color_start.a    = 1.0;
+    
     data_particle.color_end.r    = 0.0;
     data_particle.color_end.g    = 0.0;
     data_particle.color_end.b    = 0.0;
-        data_particle.color_end.a    = 0.1;
-
+    data_particle.color_end.a    = 0.1;
+    
     data_particle.color_delta.r    = 0.0;
     data_particle.color_delta.g    = 0.0;
     data_particle.color_delta.b    = 0.0;
-        data_particle.color_delta.a    = 0.0; // is modifed iduvidually for each particle  
-        
-        TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, color_id);
-                
+    data_particle.color_delta.a    = 0.0; // is modifed iduvidually for each particle  
+    
+    TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, color_id);
+    
     DamageEffect* damage = new DamageEffect();
-        
-        damage->SetTextureOb(texOb_particle);        
-        damage->SetParticleData(data_particle);
-        damage->SetParticlesNum(particles_num);
-                
-        damage->SetParent(parent);
-        damage->SetCenter(parent->GetCenter());
-                
-        damage->CreateParticles();
-                
+    
+    damage->SetTextureOb(texOb_particle);        
+    damage->SetParticleData(data_particle);
+    damage->SetParticlesNum(particles_num);
+    
+    damage->SetParent(parent);
+    damage->SetCenter(vec3ToVec2(parent->GetCenter()));
+    
+    damage->CreateParticles();
+    
     return damage;
 }
 

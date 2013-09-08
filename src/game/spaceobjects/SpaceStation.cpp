@@ -126,7 +126,7 @@ void SpaceStation::RenderInSpace_2D(float scale)
 }
 
                          
-void SpaceStation::RenderInSpace_3D(const Vec2<float>& scroll_coords, float scale)
+void SpaceStation::RenderInSpace_3D(const glm::vec2& scroll_coords, float scale)
 {         
     UpdateRenderAnimation();    
     RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());        

@@ -55,10 +55,10 @@ class TextureOb
         std::string path;
         bool use_alpha; 
         
-        std::vector<Vec2<float>> texCoord_bottomLeft_vec;
-        std::vector<Vec2<float>> texCoord_bottomRight_vec;
-        std::vector<Vec2<float>> texCoord_topLeft_vec;
-        std::vector<Vec2<float>> texCoord_topRight_vec;
+        std::vector<glm::vec2> texCoord_bottomLeft_vec;
+        std::vector<glm::vec2> texCoord_bottomRight_vec;
+        std::vector<glm::vec2> texCoord_topLeft_vec;
+        std::vector<glm::vec2> texCoord_topRight_vec;
         
         GLuint texture;
         GLuint normalmap;

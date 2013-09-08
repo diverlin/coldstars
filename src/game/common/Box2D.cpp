@@ -27,7 +27,7 @@ m_Angle(0.0)
     SetScale(1.0, 1.0);
 }
 
-Box2D::Box2D(const Vec2<float>& size)
+Box2D::Box2D(const glm::vec2& size)
 :
 m_Angle(0.0)
 {
@@ -35,7 +35,7 @@ m_Angle(0.0)
     SetScale(1.0, 1.0);
 }
 
-Box2D::Box2D(const Vec2<float>& center, const Vec2<float>& size)
+Box2D::Box2D(const glm::vec2& center, const glm::vec2& size)
 :
 m_Angle(0.0)
 {
@@ -55,15 +55,15 @@ Box2D::Box2D(const Rect& rect)
 :
 m_Angle(0.0)
 {
-    SetCenter(Vec2<float>(rect.GetCenter().x, rect.GetCenter().y));
-    SetSize(Vec2<float>(rect.GetWidth(), rect.GetHeight()));
+    SetCenter(glm::vec2(rect.GetCenter().x, rect.GetCenter().y));
+    SetSize(glm::vec2(rect.GetWidth(), rect.GetHeight()));
     SetScale(1.0, 1.0);
 }
 
 Box2D::~Box2D()
 {}
 
-bool Box2D::CheckInteraction(const Vec2<float>& point) const
+bool Box2D::CheckInteraction(const glm::vec2& point) const
 {           
     return checkCollisionDotWithRectangle(point, m_Center, m_Size*m_Scale);
 }

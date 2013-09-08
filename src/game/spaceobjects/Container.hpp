@@ -30,12 +30,12 @@ class Container : public BaseSpaceEntity
         Container(int);
         virtual ~Container();
         
-        void SetTargetPos(const Vec3<float>& target_pos, float velocity) { m_TargetPos = target_pos; m_Velocity = velocity; }
+        void SetTargetPos(const glm::vec3& target_pos, float velocity) { m_TargetPos = target_pos; m_Velocity = velocity; }
         void BindItemSlot(ItemSlot*);
         
         ItemSlot* const GetItemSlot() const { return m_ItemSlot; }
 
-        virtual void RenderInfoInSpace(const Vec2<float>&, float) override final;
+        virtual void RenderInfoInSpace(const glm::vec2&, float) override final;
         
         virtual void PostDeathUniqueEvent(bool) override final;
             
@@ -50,7 +50,7 @@ class Container : public BaseSpaceEntity
     private:
         ItemSlot* m_ItemSlot;        
         
-        Vec3<float> m_TargetPos;        
+        glm::vec3 m_TargetPos;        
         float m_Velocity;
 
         virtual void UpdateInfo() override final; 

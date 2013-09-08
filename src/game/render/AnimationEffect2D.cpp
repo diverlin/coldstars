@@ -39,12 +39,12 @@ void AnimationEffect2D::Update(Box2D& box)
         scale -= d_scale;
     }
     
-    box.SetScale(scale);
+    box.SetScale(vec3ToVec2(scale));
 }
 
 void AnimationEffect2D::Reset()
 {
-    scale.Set(1.0f, 1.0f, 1.0f);
+    scale = glm::vec3(1.0f);
     angle = 0.0f;
     scale_up = true;
 }

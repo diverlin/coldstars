@@ -97,7 +97,7 @@ void BaseGuiElement::ResetState()
     m_Pressed = false;
 }
 
-void BaseGuiElement::AddChild(BaseGuiElement* child, const Vec2<float>& offset) 
+void BaseGuiElement::AddChild(BaseGuiElement* child, const glm::vec2& offset) 
 { 
     child->SetOffset(offset);
     child->SetRoot(false);
@@ -106,7 +106,7 @@ void BaseGuiElement::AddChild(BaseGuiElement* child, const Vec2<float>& offset)
     static_gui_element_map.insert(std::make_pair(child->GetSubTypeId(), child));
 }
         
-BaseGuiElement* BaseGuiElement::UpdateMouseInteraction(const Vec2<float>& mouse_pos)
+BaseGuiElement* BaseGuiElement::UpdateMouseInteraction(const glm::vec2& mouse_pos)
 {
     if (!m_Show)
     {
@@ -134,15 +134,15 @@ BaseGuiElement* BaseGuiElement::UpdateMouseInteraction(const Vec2<float>& mouse_
     return nullptr;
 }
 
-void BaseGuiElement::UpdateGeometry(const Vec2<float>& parent_offset, const Vec2<float>& parent_scale)
+void BaseGuiElement::UpdateGeometry(const glm::vec2& parent_offset, const glm::vec2& parent_scale)
 {
     if (!m_Show)
     {
         return;
     }
     
-    Vec2<float> next_offset = parent_offset + m_Offset;
-    Vec2<float> next_scale = parent_scale * m_Box.GetScale();
+    glm::vec2 next_offset = parent_offset + m_Offset;
+    glm::vec2 next_scale = parent_scale * m_Box.GetScale();
 
     m_Box.SetCenter(next_offset);
     m_Box.SetScale(next_scale);
@@ -162,7 +162,7 @@ void BaseGuiElement::Update(Player* player)
     
     if (m_Root)
     {
-        UpdateGeometry(m_Offset, Vec2<float>(1,1));
+        UpdateGeometry(m_Offset, glm::vec2(1,1));
     }
     
     UpdateCommon(player);

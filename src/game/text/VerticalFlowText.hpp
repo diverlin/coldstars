@@ -21,22 +21,22 @@
 #define VERTICALFLOWTEXT_HPP
 
 #include <string>
-#include <math/Vec2.hpp>
-#include <math/Color4.hpp>
+
+#include <glm/glm.hpp>
 
 
 class VerticalFlowText
 {
     public:
-        VerticalFlowText(const std::string&, int, const Vec2<float>&, const Color4<int>&, float);                                   
+        VerticalFlowText(const std::string&, int, const glm::vec2&, const glm::ivec4&, float);                                   
         ~VerticalFlowText();
         
         bool GetAlive() const { return m_IsAlive; }
         
-        const Vec2<float>& GetCenter() const { return m_Center; }
+        const glm::vec2& GetCenter() const { return m_Center; }
         
         void Update();
-        void Render(const Vec2<float>&, float) const;
+        void Render(const glm::vec2&, float) const;
     
     private:
         bool m_IsAlive;
@@ -45,9 +45,9 @@ class VerticalFlowText
         int m_FontSize;
         
         std::string m_Text;
-        Color4<int> m_Color;
+        glm::ivec4 m_Color;
         
-        Vec2<float> m_Center;
+        glm::vec2 m_Center;
         
         float m_Speed;
 };

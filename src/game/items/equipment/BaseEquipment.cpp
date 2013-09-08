@@ -33,7 +33,7 @@
 BaseEquipment::BaseEquipment()
 {
     race_id = TYPE::RACE::R0_ID;
-    animation_notfunctioning = new AnimationEffect2D(Vec3<float>(0.8, 0.8, 1.0), Vec3<float>(1.2, 1.2, 1.0), Vec3<float>(0.02, 0.02, 0.0), 0, 0, 0);
+    animation_notfunctioning = new AnimationEffect2D(glm::vec3(0.8, 0.8, 1.0), glm::vec3(1.2, 1.2, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0);
 }
 
 /*virtual */
@@ -93,7 +93,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 } 
 
 /* virtual */
-void BaseEquipment::Render(const Box2D& box, const Vec2<float>& gui_offset, bool draw_text)
+void BaseEquipment::Render(const Box2D& box, const glm::vec2& gui_offset, bool draw_text)
 {        
     RenderKorpus(box);
 
@@ -115,7 +115,7 @@ void BaseEquipment::Render(const Box2D& box, const Vec2<float>& gui_offset, bool
         int font_size = 12;    
         drawQuad(GuiTextureObCollector::Instance().slot_mark_accept, box);
 
-        Vec2<float> pos(box.GetCenter().x - font_size/2 + gui_offset.x, box.GetCenter().y - font_size + gui_offset.y);
+        glm::vec2 pos(box.GetCenter().x - font_size/2 + gui_offset.x, box.GetCenter().y - font_size + gui_offset.y);
         Screen::Instance().DrawText(int2str(locked_turns), font_size, pos);    
     }
 
@@ -123,7 +123,7 @@ void BaseEquipment::Render(const Box2D& box, const Vec2<float>& gui_offset, bool
     {
         if (GetSubTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID)
         {
-            Vec2<float> pos(box.GetCenter().x - box.GetSize().x/2 + gui_offset.x, box.GetCenter().y + gui_offset.y);
+            glm::vec2 pos(box.GetCenter().x - box.GetSize().x/2 + gui_offset.x, box.GetCenter().y + gui_offset.y);
             Screen::Instance().DrawText(int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
         }
     }

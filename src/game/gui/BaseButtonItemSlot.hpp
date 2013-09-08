@@ -44,7 +44,7 @@ class BaseButtonItemSlot : public BaseButton
 
         void UpdateAnimationProgram();
 
-        void RenderMarkEmptySlot(const Vec2<float>&, TYPE::GUI) const;
+        void RenderMarkEmptySlot(const glm::vec2&, TYPE::GUI) const;
         void RenderMarkTarget() const;
                         
     private:

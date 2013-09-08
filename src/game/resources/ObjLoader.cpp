@@ -38,21 +38,21 @@ ObjLoader::ObjLoader(const std::string& path)
         {
             if (type_str == "v")
             {
-                Vec3<float> pos;
+                glm::vec3 pos;
                 line_stream >> pos.x >> pos.y >> pos.z;
                 positions.push_back(pos);
             }
             
             else if (type_str == "vt")
             {
-                Vec2<float> tex;
+                glm::vec2 tex;
                 line_stream >> tex.x >> tex.y;
                 texcoords.push_back(tex);
             }
             
             else if (type_str == "vn")
             {
-                Vec3<float> nor;
+                glm::vec3 nor;
                 line_stream >> nor.x >> nor.y >> nor.z;
                 normals.push_back(nor);
             }
@@ -96,9 +96,9 @@ void ObjLoader::NormalizePositions()
     
 }
 
-Vec3<float> ObjLoader::GetBoundaryBox()
+glm::vec3 ObjLoader::GetBoundaryBox()
 {
-    Vec3<float> boundary_box;
+    glm::vec3 boundary_box;
     for (unsigned int i=0; i<positions.size(); i++)
     {
         if (boundary_box.x < fabs(positions[i].x)) boundary_box.x = fabs(positions[i].x);

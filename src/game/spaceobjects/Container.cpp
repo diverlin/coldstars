@@ -75,10 +75,10 @@ void Container::UpdateInfo()
 }        
  
 /* virtual override final */           
-void Container::RenderInfoInSpace(const Vec2<float>& scroll_coords, float zoom)
+void Container::RenderInfoInSpace(const glm::vec2& scroll_coords, float zoom)
 {
     UpdateInfo();
-    Vec2<float> pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
+    glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
     pos /= zoom;
     drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     

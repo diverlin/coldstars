@@ -130,48 +130,48 @@ int getObjectSize(int w, int h)
 
 
 
-bool get_dPos_ToPoint(const Vec3<float>& p1, const Vec3<float>& p2, float velocity, Vec3<float>& d_pos)
+bool get_dPos_ToPoint(const glm::vec3& p1, const glm::vec3& p2, float velocity, glm::vec3& d_pos)
 {           
-    Vec3<float> dir(p2-p1);
+    glm::vec3 dir(p2-p1);
 
-    if (!dir.IsNull())
+    if (glm::length(dir) > 0)
     {
-        dir.Normalize();
-        d_pos.Set(dir * velocity);               
+        dir = glm::normalize(dir);
+        d_pos = glm::vec3(dir * velocity);               
         return true;
     }
     else
     {
-        d_pos.Set(0.0, 0.0, 0.0);               
+        d_pos = glm::vec3(0.0);               
         return false;
     }
 }
 
 
-bool get_dPos_ToPoint(const Vec3<float>& p1, const Vec3<float>& p2, float velocity, Vec3<float>& d_pos, float& rTo_angle_inD)
+bool get_dPos_ToPoint(const glm::vec3& p1, const glm::vec3& p2, float velocity, glm::vec3& d_pos, float& rTo_angle_inD)
 {
-    Vec3<float> dir(p2-p1);
+    glm::vec3 dir(p2-p1);
 
-    if (!dir.IsNull())
+    if (glm::length(dir) > 0)
     {             
-        dir.Normalize();
-        d_pos.Set(dir * velocity);   
+        dir = glm::normalize(dir);
+        d_pos = glm::vec3(dir * velocity);   
         rTo_angle_inD = atan2(dir.y, dir.x) * RADIAN_TO_DEGREE_RATE;
         
         return true;
     }
     else
     {
-        d_pos.Set(0.0, 0.0, 0.0); 
+        d_pos = glm::vec3(0.0);
         rTo_angle_inD = atan2(0.0, 0.0) * RADIAN_TO_DEGREE_RATE;
         
         return false;
     }        
 }
 
-Color4<float> getColor4fById(int color_id)
+glm::vec4 getColor4fById(int color_id)
 {
-    Color4<float> color;
+    glm::vec4 color;
     switch(color_id)
     {
         case COLOR::YELLOW_ID:

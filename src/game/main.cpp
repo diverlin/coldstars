@@ -63,7 +63,7 @@ int main()
 {
     //runThreadTest();
     //runSinglethread();    
-    runVectorPerfomanceTest();
+    //runVectorPerfomanceTest();
 
     init();        
     GameDate::Instance().SetDate(1,1,4000);

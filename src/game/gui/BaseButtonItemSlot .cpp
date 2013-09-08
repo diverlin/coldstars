@@ -55,7 +55,7 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
                 {
                     if (GetAnimationProgramActive() == false)
                     {
-                        SetAnimationProgram(new AnimationEffect2D(Vec3<float>(0.7, 0.7, 1.0), Vec3<float>(1.3, 1.3, 1.0), Vec3<float>(0.02, 0.02, 0.0), 0, 0, 0));
+                        SetAnimationProgram(new AnimationEffect2D(glm::vec3(0.7, 0.7, 1.0), glm::vec3(1.3, 1.3, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0));
                         return;
                     }                    
                 } 
@@ -80,7 +80,7 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
     }
 }
 
-void BaseButtonItemSlot::RenderMarkEmptySlot(const Vec2<float>& mouse_screen_coord_pos, TYPE::GUI mark_slot_subtype_id) const
+void BaseButtonItemSlot::RenderMarkEmptySlot(const glm::vec2& mouse_screen_coord_pos, TYPE::GUI mark_slot_subtype_id) const
 {
     if (m_ItemSlot != nullptr)
     {
@@ -139,7 +139,7 @@ void BaseButtonItemSlot::RenderMarkTarget() const
             //box.SetScale(1.5, 1.5);
             //drawQuadMasked(GuiTextureObCollector::Instance().slot_mark_accept, box, GuiTextureObCollector::Instance().mask_round, 1.0-0.5);
             //drawQuad(GuiTextureObCollector::Instance().mark_target_slot, box);
-            drawColoredTextWithBackground(int2str(m_ItemSlot->GetHitProbability()), /*font_size=*/12, GetBox().GetMiddleTop(), Color4<int>(255));
+            drawColoredTextWithBackground(int2str(m_ItemSlot->GetHitProbability()), /*font_size=*/12, GetBox().GetMiddleTop(), glm::ivec4(255));
         }
     }
 }

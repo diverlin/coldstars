@@ -32,8 +32,8 @@ class Orbit
         void SetIt(int it) { m_It = it; };
 
         int GetIt() const { return m_It; };
-        const Vec3<float>& GetPosition() const { return m_Coords_vec[m_It]; };
-        const Vec3<float>& GetNextTurnPosition() const; 
+        const glm::vec3& GetPosition() const { return m_Coords_vec[m_It]; };
+        const glm::vec3& GetNextTurnPosition() const; 
 
         void CalcPath(float, float, float, float, bool);
         void CalcPath(float, float, bool);
@@ -47,7 +47,7 @@ class Orbit
         PathVisual m_VisualOrbitPath;
         PathVisual m_VisualOrbitTurn;
                 
-        std::vector<Vec3<float>> m_Coords_vec;
+        std::vector<glm::vec3> m_Coords_vec;
         int m_Len;
         int m_It; 
 };

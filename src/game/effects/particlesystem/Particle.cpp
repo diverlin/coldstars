@@ -88,12 +88,12 @@ void Particle::CalcRandomAccurateVelocity()
 }  
 
 
-//void Particle::calcAccurateRandomVelocity2(Vec2<float> center)
+//void Particle::calcAccurateRandomVelocity2(glm::vec2 center)
 //{
         //float _len   = getRandInt(50, 100);
         //float _angle = getRandInt(0, 360)/RADIAN_TO_DEGREE_RATE;
 
-    //Vec2<float> target;
+    //glm::vec2 target;
     //target = center;
     
         //pos.x = center.x + sin(_angle) * _len;
@@ -111,7 +111,7 @@ void Particle::CalcRandomAccurateVelocity()
 
 void Particle::Reborn()
 {           
-    pos.Set(0.0, 0.0); 
+    pos = glm::vec2(0.0); 
     is_alive = true;
                    
     color = data_particle.color_start;

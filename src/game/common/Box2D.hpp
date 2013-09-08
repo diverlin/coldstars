@@ -19,42 +19,42 @@
 #ifndef BOX2D_HPP
 #define BOX2D_HPP
 
-#include <math/Vec2.hpp>
+#include <glm/glm.hpp>
 class Rect; //tmp  hack
 
 class Box2D
 {  
     public:
         Box2D();
-        Box2D(const Vec2<float>&);
-        Box2D(const Vec2<float>&, const Vec2<float>&);
+        Box2D(const glm::vec2&);
+        Box2D(const glm::vec2&, const glm::vec2&);
         Box2D(const Box2D&);
         Box2D(const Rect&); // depr
         ~Box2D();
         
         void Set(const Box2D&);
         
-        void SetCenter(const Vec2<float>& center)    { m_Center = center; } 
-        void SetCenter(float x, float y)            { m_Center.Set(x,y); } 
-        void SetSize(const Vec2<float>& size)        { m_Size = size; } 
-        void SetSize(float x, float y)                { m_Size.Set(x,y); } 
-        void SetScale(const Vec2<float>& scale)        { m_Scale = scale; }
-        void SetScale(float x, float y)                { m_Scale.Set(x,y); }
-        void SetAngle(float angle)                    { m_Angle = angle; }
+        void SetCenter(const glm::vec2& center)    { m_Center = center; } 
+        void SetCenter(float x, float y)           { m_Center = glm::vec2(x, y); } 
+        void SetSize(const glm::vec2& size)        { m_Size = size; } 
+        void SetSize(float x, float y)             { m_Size = glm::vec2(x, y); } 
+        void SetScale(const glm::vec2& scale)      { m_Scale = scale; }
+        void SetScale(float x, float y)            { m_Scale = glm::vec2(x, y); }
+        void SetAngle(float angle)                 { m_Angle = angle; }
                 
-        const Vec2<float>& GetCenter() const    { return m_Center; }                    
-        const Vec2<float>& GetSize() const        { return m_Size; }
-        const Vec2<float>& GetScale() const        { return m_Scale; }
+        const glm::vec2& GetCenter() const    { return m_Center; }                    
+        const glm::vec2& GetSize() const        { return m_Size; }
+        const glm::vec2& GetScale() const        { return m_Scale; }
         float GetAngle() const        { return m_Angle; }
                 
-        const Vec2<float> GetMiddleTop() const { return m_Center + Vec2<float>(0, m_Size.y/2); }
+        const glm::vec2 GetMiddleTop() const { return m_Center + glm::vec2(0, m_Size.y/2); }
         
-        bool CheckInteraction(const Vec2<float>&) const;    
+        bool CheckInteraction(const glm::vec2&) const;    
                                           
     private:
-        Vec2<float> m_Center;
-        Vec2<float> m_Size;
-        Vec2<float> m_Scale;
+        glm::vec2 m_Center;
+        glm::vec2 m_Size;
+        glm::vec2 m_Scale;
         
         float m_Angle;
 };

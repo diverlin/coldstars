@@ -51,7 +51,7 @@ BaseSpaceEntity::~BaseSpaceEntity()
     #endif
 }
 
-void BaseSpaceEntity::ApplyImpulse(const Vec3<float>& force_dir, float strength)
+void BaseSpaceEntity::ApplyImpulse(const glm::vec3& force_dir, float strength)
 {
     m_AppliedForce += force_dir * strength;
 }
@@ -68,7 +68,7 @@ void BaseSpaceEntity::Hit(int damage, bool show_effect)
 
     if (show_effect == true)
     {    
-        VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, GetCenter(), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
+        VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, vec3ToVec2(GetCenter()), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
         m_Starsystem->Add(text); 
     }
 
@@ -97,14 +97,14 @@ void BaseSpaceEntity::CheckDeath(bool show_effect)
 }
 
 /* virtual */        
-void BaseSpaceEntity::RenderInfoInSpace(const Vec2<float>& scroll_coords, float scale)
+void BaseSpaceEntity::RenderInfoInSpace(const glm::vec2& scroll_coords, float scale)
 { 
     UpdateInfo(); // virtual
-    Vec2<float> pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
+    glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
     drawInfoIn2Column(m_Info.title_list, m_Info.value_list, pos/scale);
 }
 
-void BaseSpaceEntity::RenderInfo(const Vec2<float>& center)
+void BaseSpaceEntity::RenderInfo(const glm::vec2& center)
 { 
     UpdateInfo(); // virtual
     drawInfoIn2Column(m_Info.title_list, m_Info.value_list, center);

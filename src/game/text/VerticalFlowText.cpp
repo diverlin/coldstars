@@ -23,8 +23,8 @@
 
 VerticalFlowText::VerticalFlowText(const std::string& text, 
                                     int font_size,
-                                    const Vec2<float>& center, 
-                                    const Color4<int>& color, 
+                                    const glm::vec2& center, 
+                                    const glm::ivec4& color, 
                                     float collision_radius)
 :
 m_IsAlive(true),
@@ -62,7 +62,7 @@ void VerticalFlowText::Update()
     }
 }
                 
-void VerticalFlowText::Render(const Vec2<float>& scroll_coords, float scale) const
+void VerticalFlowText::Render(const glm::vec2& scroll_coords, float scale) const
 {
     if (m_IsAlive == true)
     {

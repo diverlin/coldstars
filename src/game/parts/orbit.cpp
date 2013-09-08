@@ -30,7 +30,7 @@ m_It(0)
 Orbit::~Orbit()
 {}
  
-const Vec3<float>& Orbit::GetNextTurnPosition() const 
+const glm::vec3& Orbit::GetNextTurnPosition() const 
 { 
     if (m_It + TURN_TIME < m_Len)
     {
@@ -56,7 +56,7 @@ void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_ph
      
     float orbitPhiInRad = orbit_phi_inD / RADIAN_TO_DEGREE_RATE;
     
-    Vec3<float> new_coord;
+    glm::vec3 new_coord;
     
     for(float angleInRad=0; fabs(angleInRad)<2*PI; angleInRad+=d_angleInRad) 
     { 
@@ -78,7 +78,7 @@ void Orbit::CalcPath(float radius, float speed, bool clockwise)
         d_angleInRad *= -1;
     }    
     
-    Vec3<float> new_coord;
+    glm::vec3 new_coord;
     for(float angleInRad=0; fabs(angleInRad)<2*PI; angleInRad+=d_angleInRad) 
     { 
         new_coord.x = radius*(cos(angleInRad) - sin(angleInRad));

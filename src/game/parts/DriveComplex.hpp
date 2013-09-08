@@ -39,7 +39,7 @@ class DriveComplex
         void SetBakSlot(ItemSlot* bak_slot)     { this->bak_slot = bak_slot; };
         
         void SetTarget(BaseSpaceEntity*, int);       
-        void SetStaticTargetCoords(const Vec3<float>&);
+        void SetStaticTargetCoords(const glm::vec3&);
 
         int GetActionId() const { return action_id; };
         DriveEffect* GetDriveEffect() const { return drive_effect; };
@@ -72,14 +72,14 @@ class DriveComplex
 
         DriveEffect* drive_effect; 
 
-        Vec3<float> target_pos;
+        glm::vec3 target_pos;
         
         int action_id;
         float target_distance;   
-        Vec3<float> target_offset;
+        glm::vec3 target_offset;
 
-        //std::vector<Vec2<float>> debug_midLeft_vec;
-        std::vector<Vec3<float>> path_center_vec;
+        //std::vector<glm::vec2> debug_midLeft_vec;
+        std::vector<glm::vec3> path_center_vec;
         std::vector<float> angle_inD_vec;
         
         bool has_target;

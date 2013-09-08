@@ -38,49 +38,49 @@ class Points
         ******************************************/
         
     public:       
-        const Vec3<float>& GetBottomLeft()  const { return bottomLeft; };  
-        const Vec3<float>& GetBottomRight() const { return bottomRight; }; 
-        const Vec3<float>& GetTopRight()    const { return topRight; };    
-        const Vec3<float>& GetTopLeft()     const { return topLeft; };
+        const glm::vec3& GetBottomLeft()  const { return bottomLeft; };  
+        const glm::vec3& GetBottomRight() const { return bottomRight; }; 
+        const glm::vec3& GetTopRight()    const { return topRight; };    
+        const glm::vec3& GetTopLeft()     const { return topLeft; };
         
-        const Vec3<float>& GetMidLeftOrig()    { return midLeft_origin; };    // used in path calc              
-        const Vec3<float>& GetMidLeft()    { return midLeft; };                    // used in path calc                
-        Vec3<float>* GetpMidLeft()    { return &midLeft; };                     // used in drive jet
-        Vec3<float>* GetpMidFarLeft() { return &midFarLeft; };
+        const glm::vec3& GetMidLeftOrig()    { return midLeft_origin; };    // used in path calc              
+        const glm::vec3& GetMidLeft()    { return midLeft; };                    // used in path calc                
+        glm::vec3* GetpMidLeft()    { return &midLeft; };                     // used in drive jet
+        glm::vec3* GetpMidFarLeft() { return &midFarLeft; };
         
         Points();
         ~Points();
         
-        void Add(Vec3<float>* const, const Vec3<float>* const);
+        void Add(glm::vec3* const, const glm::vec3* const);
         
         void addMidLeftPoint();
         void addMidFarLeftPoint();
         
-        void Update(const Vec3<float>& center, const Vec3<float>& angle, const Vec3<float>& scale, const Vec3<float>& uOrient);              
+        void Update(const glm::vec3& center, const glm::vec3& angle, const glm::vec3& scale, const glm::vec3& uOrient);              
                 
     private:
-        std::vector<const Vec3<float>*> vector_orig;
-        std::vector<Vec3<float>*> vector;
+        std::vector<const glm::vec3*> vector_orig;
+        std::vector<glm::vec3*> vector;
         
         // Origin entity rect (for rotation only transformation)
-        Vec3<float> bottomLeft_origin;  
-        Vec3<float> bottomRight_origin; 
-        Vec3<float> topRight_origin;    
-        Vec3<float> topLeft_origin;    
+        glm::vec3 bottomLeft_origin;  
+        glm::vec3 bottomRight_origin; 
+        glm::vec3 topRight_origin;    
+        glm::vec3 topLeft_origin;    
         
         // jet normilized
-        Vec3<float> midLeft_origin;
-        Vec3<float> midFarLeft_origin;
+        glm::vec3 midLeft_origin;
+        glm::vec3 midFarLeft_origin;
         
         // Actual entity rect                       
-        Vec3<float> bottomLeft;  
-        Vec3<float> bottomRight; 
-        Vec3<float> topRight;    
-        Vec3<float> topLeft;
+        glm::vec3 bottomLeft;  
+        glm::vec3 bottomRight; 
+        glm::vec3 topRight;    
+        glm::vec3 topLeft;
         
         // jet actual
-        Vec3<float> midLeft;
-        Vec3<float> midFarLeft;
+        glm::vec3 midLeft;
+        glm::vec3 midFarLeft;
 };
 
 #endif 

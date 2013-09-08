@@ -19,12 +19,12 @@
 #ifndef MOUSEDATA_HPP
 #define MOUSEDATA_HPP
 
-#include "../math/Vec2.hpp"
+#include <glm/glm.hpp>
 
 struct MouseData
 {
-          Vec2<float> pos_screencoord;
-          Vec2<float> pos_worldcoord;
+          glm::vec2 pos_screencoord;
+          glm::vec2 pos_worldcoord;
           
            bool left_click;
            bool right_click;

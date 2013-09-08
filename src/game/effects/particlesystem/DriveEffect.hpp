@@ -25,7 +25,7 @@
 class DriveEffect : public BaseParticleSystem
 {
        public:
-        DriveEffect(Vec3<float>*, Vec3<float>*);
+        DriveEffect(glm::vec3*, glm::vec3*);
         virtual ~DriveEffect() override final;
         
         virtual void Update() override final;
@@ -36,16 +36,16 @@ class DriveEffect : public BaseParticleSystem
         void PutParticlesToInitPos();
                                 
     private:
-        Vec3<float>* pTo_start_pos;      //ob.points.midLeft
-        Vec3<float>* pTo_target_pos;     //ob.points.midFarLeft
+        glm::vec3* pTo_start_pos;      //ob.points.midLeft
+        glm::vec3* pTo_target_pos;     //ob.points.midFarLeft
         
-        Vec3<float> velocity;
+        glm::vec3 velocity;
 
 
            
            
 };  
 
-DriveEffect* GetNewDriveEffect(int, Vec3<float>*, Vec3<float>*);
+DriveEffect* GetNewDriveEffect(int, glm::vec3*, glm::vec3*);
 
 #endif

@@ -23,7 +23,7 @@ Orientation::Orientation()
 :
 m_IsUpdated(false)
 {
-    m_Orient.Set(1.0, 0.0, 0.0); // -> (0 degree)
+    m_Orient = glm::vec3(1.0, 0.0, 0.0); // -> (0 degree)
 }
 
 /* virtual */

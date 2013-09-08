@@ -45,8 +45,8 @@ GuiNatureLand::GuiNatureLand():natureland(nullptr)
     
     {           
         //ButtonSingle* launch_button = new ButtonSingle(texOb_button, GUI::BUTTON::GETLAUNCH_ID, "launch");
-        //Vec3<float> center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 4*GUI::ICON_SIZE, zpos);
-        //Vec3<float> size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
+        //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 4*GUI::ICON_SIZE, zpos);
+        //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
         //Box box(center, size);
         //launch_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH_ID, launch_button));

@@ -22,6 +22,7 @@
 
 #include <common/Orientation.hpp>
 #include <types/MeshTypes.hpp>
+#include <glm/glm.hpp> // glm::vec
 
 class Mesh;
 class TextureOb;
@@ -40,14 +41,14 @@ class BaseDrawable : public Orientation
         BaseDrawable();
         virtual ~BaseDrawable() override;
 
-        void BindData3D(Mesh*, TextureOb*, const Vec3<float>&);
+        void BindData3D(Mesh*, TextureOb*, const glm::vec3&);
         void BindData2D(TextureOb*);    
         void SetRenderAnimation(AnimationBase* animation_program) { m_AnimationProgram = animation_program; }
         void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; }
-        void SetColor(const Color4<float>& color) { m_Color = color; }
+        void SetColor(const glm::vec4& color) { m_Color = color; }
                         
         bool Is3D() const                 { return (m_Mesh != nullptr); }
-        //const Vec3<float>& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
+        //const glm::vec3& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
         const Mesh* const GetMesh() const     { return m_Mesh; }
                 
         void SetZYX(bool ZYX)                { m_ZYX = ZYX; }
@@ -55,7 +56,7 @@ class BaseDrawable : public Orientation
            TextureOb* const GetTextureOb() const { return m_TextureOb; }
            bool GetZYX() const { return m_ZYX; }
         
-        const Color4<float> GetColor() const { return m_Color; }
+        const glm::vec4 GetColor() const { return m_Color; }
                                             
         void RenderCollisionRadius() const;
                 
@@ -67,8 +68,8 @@ class BaseDrawable : public Orientation
         bool UpdateFadeInEffect(); // depr, move to animation program
         bool UpdateFadeOutEffect(); // depr, move to animation program
         
-        void RenderMeshLight(const Vec2<float>&, const Color4<float>&) const;
-        void RenderMeshLightNormalMap(const Vec2<float>&, const Color4<float>&) const;
+        void RenderMeshLight(const glm::vec2&, const glm::vec4&) const;
+        void RenderMeshLightNormalMap(const glm::vec2&, const glm::vec4&) const;
         
         UnresolvedDataUniqueBaseDrawable data_unresolved_BaseDrawable;
         void SaveDataUniqueBaseDrawable(boost::property_tree::ptree&, const std::string&) const;
@@ -78,7 +79,7 @@ class BaseDrawable : public Orientation
     private:
         bool m_ZYX;
                           
-        Color4<float> m_Color;
+        glm::vec4 m_Color;
         
         TextureOb* m_TextureOb;
         Mesh* m_Mesh; 

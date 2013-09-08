@@ -50,7 +50,7 @@ class GuiGalaxyMap : public BaseGuiElement
         virtual void UpdateUnique(Player*) override final;
         virtual void RenderUnique(Player*) const override final;
         
-        Vec3<float> GetAbsoluteStarSystemPosition(const StarSystem&) const;
+        glm::vec3 GetAbsoluteStarSystemPosition(const StarSystem&) const;
 };
              
 #endif 

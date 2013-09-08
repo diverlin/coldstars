@@ -19,14 +19,14 @@
 #ifndef CONVERTER_H
 #define CONVERTER_H
 
-#include "../math/Vec2.hpp"
+#include <glm/glm.hpp>
 #include <iostream>
 
-template <typename VARTYPE>
+template <typename VARTYPE1, typename VARTYPE2>
 class Converter
 {
     public:
-        Converter(const Vec2<VARTYPE>& in, const Vec2<VARTYPE>& out, float slice_num):
+        Converter(const VARTYPE1& in, const VARTYPE1& out, float slice_num):
         in(in),
         out(out)
         {                    
@@ -36,7 +36,7 @@ class Converter
         
         ~Converter() {}
         
-        VARTYPE GetEquivalent(VARTYPE val) const
+        VARTYPE2 GetEquivalent(VARTYPE2 val) const
         {
             if (val < in.x)
             {
@@ -54,8 +54,8 @@ class Converter
         }
         
     private:
-        Vec2<VARTYPE> in;
-        Vec2<VARTYPE> out;
+        VARTYPE1 in;
+        VARTYPE1 out;
         
         float in_slice;
         float out_slice;

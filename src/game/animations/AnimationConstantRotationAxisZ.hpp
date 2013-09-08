@@ -27,7 +27,7 @@ class AnimationConstantRotationAxisZ : public AnimationBase
             AnimationConstantRotationAxisZ(float);
             virtual ~AnimationConstantRotationAxisZ();
 
-            virtual void Update(Vec3<float>&);
+            virtual void Update(glm::vec3&);
       
 };
 

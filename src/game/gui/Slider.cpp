@@ -58,7 +58,7 @@ void Slider::Configure(int ammount_total, int price_for_one)
     this->ammount_total = ammount_total;
     this->price_for_one  = price_for_one;
 
-    //SetOffset(Vec2<float>(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2));
+    //SetOffset(glm::vec2(Screen::Instance().GetWidth()/2, Screen::Instance().GetHeight()/2));
 
     ammount_selected = 0;
     price_selected = 0;
@@ -147,17 +147,17 @@ void Slider::Render() const
     glPopMatrix();
     
     {
-        //Vec2<float> pos(rect.GetBottomLeft().x + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
+        //glm::vec2 pos(rect.GetBottomLeft().x + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
         //Screen::Instance().DrawText("0", 12, pos);
     }
 
     {
-        //Vec2<float> pos(rect.GetBottomLeft().x + rect.GetWidth()/2 - 20 + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
+        //glm::vec2 pos(rect.GetBottomLeft().x + rect.GetWidth()/2 - 20 + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
         //Screen::Instance().DrawText(int2str(ammount_selected)+" :"+int2str(price_selected) + "$", 12, pos);        
     }
 
     {
-        //Vec2<float> pos(rect.GetBottomLeft().x + rect.GetWidth() - 20 + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
+        //glm::vec2 pos(rect.GetBottomLeft().x + rect.GetWidth() - 20 + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
         //Screen::Instance().DrawText(int2str(ammount_total), 12, pos);    
     }    
     

@@ -26,40 +26,40 @@ class Rect
     public:
         Rect();
         Rect(float, float, float, float);
-        Rect(const Vec2<float>&, float, float);
+        Rect(const glm::vec2&, float, float);
         Rect(const Rect&);
         ~Rect();
         
         void Scale(float);
-        void Scale(const Vec2<float>&);
+        void Scale(const glm::vec2&);
         
         bool CheckInteraction(float, float) const;
-        bool CheckInteraction(const Vec2<float>&) const;
-        bool CheckRoundInteraction(const Vec2<float>&, float) const;
+        bool CheckInteraction(const glm::vec2&) const;
+        bool CheckRoundInteraction(const glm::vec2&, float) const;
                             
         void Set(float, float, float, float);
-        void Set(const Vec2<float>&, float, float);
+        void Set(const glm::vec2&, float, float);
         void Set(const Rect&);
             
-        void SetCenter(const Vec2<float>&);
+        void SetCenter(const glm::vec2&);
         void SetCenter(float, float);
         void SetBottomLeftX(float);
-        void SetBottomLeft(const Vec2<float>&);
+        void SetBottomLeft(const glm::vec2&);
         void SetBottomLeft(float, float);
                     
-        const Vec2<float>& GetCenter() const     { return center; }
-        const Vec2<float>& GetBottomLeft() const { return bottomLeft; }
-        const Vec2<float>& GetTopRight() const { return topRight; }
+        const glm::vec2& GetCenter() const     { return center; }
+        const glm::vec2& GetBottomLeft() const { return bottomLeft; }
+        const glm::vec2& GetTopRight() const { return topRight; }
         float GetWidth() const         { return w; }
         float GetHeight() const     { return h; }  
         
         void SetSize(float, float);
-        void MovingBy(const Vec2<float>&);
+        void MovingBy(const glm::vec2&);
                             
     private:
-        Vec2<float> bottomLeft;    
-        Vec2<float> center;  
-        Vec2<float> topRight;
+        glm::vec2 bottomLeft;    
+        glm::vec2 center;  
+        glm::vec2 topRight;
         
         float w, h;
         

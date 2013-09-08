@@ -117,7 +117,7 @@ void Planet::UpdateInfo()
 void Planet::PostDeathUniqueEvent(bool)
 {}
 
-void Planet::Render_NEW(const Vec2<float>& scroll_coords)
+void Planet::Render_NEW(const glm::vec2& scroll_coords)
 {
     UpdateRenderAnimation();
     RenderMeshLightNormalMap(scroll_coords, GetStarSystem()->GetColor4f());

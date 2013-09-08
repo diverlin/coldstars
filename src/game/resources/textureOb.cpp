@@ -191,10 +191,10 @@ void TextureOb::createTextureCoords(int _columns_num, int _rows_num, int _fps)
 
 void TextureOb::addTexCoordQuad(float _w_start, float _h_start, float _w_end, float _h_end)
 {
-         texCoord_bottomLeft_vec.push_back( Vec2<float>(_w_start, _h_start));   // (0, 0)
-         texCoord_bottomRight_vec.push_back(Vec2<float>(_w_end,   _h_start));   // (1, 0)
-         texCoord_topLeft_vec.push_back(    Vec2<float>(_w_start, _h_end));     // (0, 1)
-         texCoord_topRight_vec.push_back(   Vec2<float>(_w_end,   _h_end));     // (1, 1)
+         texCoord_bottomLeft_vec.push_back( glm::vec2(_w_start, _h_start));   // (0, 0)
+         texCoord_bottomRight_vec.push_back(glm::vec2(_w_end,   _h_start));   // (1, 0)
+         texCoord_topLeft_vec.push_back(    glm::vec2(_w_start, _h_end));     // (0, 1)
+         texCoord_topRight_vec.push_back(   glm::vec2(_w_end,   _h_end));     // (1, 1)
 }
 
 int TextureOb::updateAnimationFrame()

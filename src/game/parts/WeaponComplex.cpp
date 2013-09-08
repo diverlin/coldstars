@@ -293,7 +293,7 @@ void WeaponComplex::RenderWeaponsRange()
         if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
         {
            slot_weapon_reloaded_vec[i]->UpdateRange(GuiTextureObCollector::Instance().dot_red);
-           slot_weapon_reloaded_vec[i]->DrawRange(owner_vehicle->GetCenter());
+           slot_weapon_reloaded_vec[i]->DrawRange(vec3ToVec2(owner_vehicle->GetCenter()));
         }
     }
 }

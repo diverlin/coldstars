@@ -31,7 +31,7 @@ BaseBackGroundEffect::BaseBackGroundEffect():textureOb(nullptr), parallax_rate(1
 BaseBackGroundEffect::~BaseBackGroundEffect()
 {}
 
-void BaseBackGroundEffect::SetTextureOb(TextureOb* textureOb, const Vec3<float>& scale_factor)
+void BaseBackGroundEffect::SetTextureOb(TextureOb* textureOb, const glm::vec3& scale_factor)
 {
     this->textureOb = textureOb; 
     size.x = textureOb->GetFrameWidth()  * scale_factor.x;

@@ -79,7 +79,7 @@ bool NatureLand::AddItem(BaseItem* item)
         if (item_slot_vec[i]->GetItem() == nullptr)
         {
             item_slot_vec[i]->InsertItem(item);
-            item_slot_vec[i]->SetPosition(Vec2<float>(getRandInt(0, 100), getRandInt(0, 100)));
+            item_slot_vec[i]->SetPosition(glm::vec2(getRandInt(0, 100), getRandInt(0, 100)));
             
             return true;
         }

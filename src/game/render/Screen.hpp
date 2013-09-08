@@ -36,16 +36,16 @@ class Screen : public SFML_Wrapper
         void InitPostEffects(int, int);
         
         //Rect& GetRect() { return rect; };
-        //Vec2<float> GetBottomLeftScreenWC()    { return rect.GetBottomLeft()*scale; }
-        //Vec2<float> GetTopRightScreenWC()    { return rect.GetTopRight()*scale; }
+        //glm::vec2 GetBottomLeftScreenWC()    { return rect.GetBottomLeft()*scale; }
+        //glm::vec2 GetTopRightScreenWC()    { return rect.GetTopRight()*scale; }
 
-        void SetBottomLeftScreenWC(const Vec2<float>& bl)    { rect.SetBottomLeft(bl); }
+        void SetBottomLeftScreenWC(const glm::vec2& bl)    { rect.SetBottomLeft(bl); }
         
-        Vec2<float> GetBottomLeftScreenWC()    { return rect.GetBottomLeft(); }
-        Vec2<float> GetTopRightScreenWC()    { return (rect.GetBottomLeft()+Vec2<float>(rect.GetWidth()*scale, rect.GetHeight()*scale)); }
+        glm::vec2 GetBottomLeftScreenWC()    { return rect.GetBottomLeft(); }
+        glm::vec2 GetTopRightScreenWC()    { return (rect.GetBottomLeft()+glm::vec2(rect.GetWidth()*scale, rect.GetHeight()*scale)); }
         
-        const Vec2<float>& GetBottomLeft() const    { return rect.GetBottomLeft(); }
-        const Vec2<float>& GetTopRight()    const    { return rect.GetTopRight(); }
+        const glm::vec2& GetBottomLeft() const    { return rect.GetBottomLeft(); }
+        const glm::vec2& GetTopRight()    const    { return rect.GetTopRight(); }
                         
         Fbo& GetFbo0() { return fbo0; };
         Fbo& GetFbo1() { return fbo1; };
@@ -54,8 +54,8 @@ class Screen : public SFML_Wrapper
         Fbo& GetFbo4() { return fbo4; }
         BloomEffect& GetBloom() { return bloom; };    
         
-        void MovingBy(const Vec2<float>&);
-        void InitiateScrollTo(const Vec2<float>& scroll_coord) { target_center = scroll_coord; auto_scroll = true; };
+        void MovingBy(const glm::vec2&);
+        void InitiateScrollTo(const glm::vec2& scroll_coord) { target_center = scroll_coord; auto_scroll = true; };
         void UpdateInSpace();
         
         void Resize(int, int);   
@@ -92,7 +92,7 @@ class Screen : public SFML_Wrapper
         float scale;
         float d_scale;
         Rect rect;
-        Vec2<float> target_center;
+        glm::vec2 target_center;
         
         void DrawFps();
 };

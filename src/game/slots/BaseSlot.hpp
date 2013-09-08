@@ -22,7 +22,7 @@
 
 #include <common/Base.hpp>
 #include <types/MyInt.hpp>
-#include <math/Vec2.hpp>
+#include <glm/glm.hpp>
 
 class Vehicle;
 class TextureOb;
@@ -45,13 +45,13 @@ class BaseSlot : public Base
                 
         void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
         void SetOwner(Base* owner) { this->owner = owner; };
-        void SetPosition(const Vec2<float>& position) { this->position = position; };
+        void SetPosition(const glm::vec2& position) { this->position = position; };
         void SelectEvent() { selected = true; };
         void DeselectEvent() { selected = false; };
                 
         bool GetSelected() const { return selected; };
         
-        const Vec2<float>& GetPosition() const { return position; };
+        const glm::vec2& GetPosition() const { return position; };
         
         Vehicle* GetOwnerVehicle() const { return (Vehicle*)owner; };
         Base* GetOwner() const { return owner; };
@@ -63,7 +63,7 @@ class BaseSlot : public Base
                         
         Base* owner; 
         
-        Vec2<float> position;
+        glm::vec2 position;
      
         UnresolvedDataUniqueBaseSlot unresolved_BaseSlot;
         void SaveDataUniqueBaseSlot(boost::property_tree::ptree&, const std::string&) const;
