@@ -26,6 +26,42 @@
 #include <common/Box2D.hpp>
 class Mesh;
 
+class Render
+{
+    public:
+        Render() {}
+        ~Render() {}
+
+        void ApplyViewMatrix(const glm::mat4& Vm)  { m_Vm = Vm; UpdateProjectionViewMatrix(); }
+                                
+    private:
+        glm::mat4 m_Pm;
+        glm::mat4 m_Vm;
+        glm::mat4 m_PVm;
+        
+        glm::mat4 m_PVMm;
+       
+        void UpdateProjectionViewMatrix() { m_PVm = m_Pm * m_Vm; }
+                
+        void ApplyMatrixToOpengl(const glm::mat4& Mm) 
+        { 
+            m_PVMm = m_PVm * Mm;
+            glLoadMatrixf(&m_PVMm[0][0]);     
+        }
+};
+
+class Camera
+{
+    public:
+        Camera() {}
+        ~Camera() {}
+
+        const glm::mat4& GetViewMatrix() { return m_Vm; }  
+            
+    private:
+        glm::mat4 m_Vm;
+  
+};
 
 void initGl(int, int);
 void resizeGl(int, int);

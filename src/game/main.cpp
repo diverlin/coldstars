@@ -56,6 +56,7 @@
 #include "../pureTest/pureTest.cpp"
 #include "../pureTest/threadTest.cpp"
 #include "../pureTest/vectorPerfomanceTest.cpp"
+#include "../pureTest/matrixPerfomanceTest.cpp"
 
 enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT };
 
@@ -65,7 +66,10 @@ int main()
     //runSinglethread();    
     //runVectorPerfomanceTest();
 
-    init();        
+    init();    
+    
+    runMatrixPerfomanceTest();
+            
     GameDate::Instance().SetDate(1,1,4000);
         
     Player* player = PlayerBuilder::Instance().GetNewPlayer();
