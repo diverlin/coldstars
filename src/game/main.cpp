@@ -68,7 +68,7 @@ int main()
 
     init();    
     
-    runMatrixPerfomanceTest();
+    //runMatrixPerfomanceTest();
             
     GameDate::Instance().SetDate(1,1,4000);
         

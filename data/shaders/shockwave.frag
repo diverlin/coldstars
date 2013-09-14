@@ -8,7 +8,7 @@ uniform int distortion_num;     /* how many shaders */
  
 void main()
 {
-	float diffTime = 0;
+	float diffTime = 0.0;
 	vec2 diffUV;
 	
   	vec2 uv = gl_TexCoord[0].xy;

@@ -360,12 +360,12 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     int h = Screen::Instance().GetHeight();
     glm::vec2 world_coord(Screen::Instance().GetBottomLeft());
     
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
     enable_CULLFACE();
     {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
         // render background and star to FBO0
-        Screen::Instance().GetFbo0().Activate(w, h);
+        //Screen::Instance().GetFbo0().Activate(w, h);
         {
             resizeGl(w*(1+scale/100.0), h*(1+scale/100.0));
                 
@@ -384,8 +384,8 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             }
             disable_BLEND();       
         }
-        Screen::Instance().GetFbo0().Deactivate();
-                       
+        //Screen::Instance().GetFbo0().Deactivate();
+/*
         // BLOOM background and star (uses many FBO)
         resizeGl(w, h); 
         Screen::Instance().GetBloom().Proceed(w, h, Screen::Instance().GetFbo0().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
@@ -614,142 +614,20 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
         }   
                     
         starsystem->RestoreSceneColor();
-        
+    */    
     }
     disable_CULLFACE();
     
     resizeGl(w, h); 
 }
     
-void Player::RenderInSpace_OLD(StarSystem* starsystem)
-{
-    glm::vec2 world_coord(Screen::Instance().GetBottomLeft());
-       
-    //glLoadIdentity();
-    float scale = Screen::Instance().GetScale();
-    float w = Screen::Instance().GetWidth();
-    float h = Screen::Instance().GetHeight();
-        
-    resizeGl(w*scale, h*scale);
-    
-    starsystem->DrawBackground(world_coord);
-    
-    camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
-    
-    disable_BLEND();
-        //enable_DEPTH();
-        //for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 
-        //{ 
-                //visible_STAR_vec[i]->Render_OLD(); 
-            //}
-
-            //for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
-            //{ 
-                   //visible_PLANET_vec[i]->Render_OLD(); 
-            //}
-
-                //for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
-            //{ 
-                    //if (visible_SPACESTATION_vec[i]->Is3D())
-                //{
-                    //visible_SPACESTATION_vec[i]->RenderInSpace_3D(world_coord); 
-                //}
-            //}
-            
-            //for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
-            //{ 
-                    //if (visible_SHIP_vec[i]->Is3D())
-                //{                
-                       //visible_SHIP_vec[i]->RenderInSpace_3D(world_coord); 
-                //}
-            //}
-            
-            //for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
-            //{ 
-                   //visible_ASTEROID_vec[i]->Render_OLD(); 
-            //}
-
-                //for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
-        //{ 
-                //visible_BLACKHOLE_vec[i]->Render_OLD(); 
-            //}            
-        //disable_DEPTH();
-
-        //enable_BLEND();
-                //for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
-            //{ 
-                    //if (!visible_SPACESTATION_vec[i]->Is3D())
-                //{
-                    //visible_SPACESTATION_vec[i]->RenderInSpace_2D(); 
-                //}
-            //}
-           
-            //for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
-            //{ 
-                //visible_CONTAINER_vec[i]->Render2D(); 
-            //}      
-           
-            //for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
-            //{ 
-                    //if (!visible_SHIP_vec[i]->Is3D())
-                //{                
-                       //visible_SHIP_vec[i]->RenderInSpace_2D(); 
-                //}
-            //}
-
-        //for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
-            //{ 
-                //visible_SATELLITE_vec[i]->UpdateRenderStuff(); 
-                   //visible_SATELLITE_vec[i]->RenderInSpace(); 
-                //starsystem->RestoreSceneColor();
-                //}
-                        
-            //for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
-            //{ 
-                        //visible_ROCKET_vec[i]->UpdateRenderStuff();
-                   //visible_ROCKET_vec[i]->RenderInSpace(); 
-                        //starsystem->RestoreSceneColor();
-            //}
-
-            //for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
-            //{ 
-                //visible_effect_LAZERTRACE_vec[i]->Render(); 
-            //}
-        //disable_BLEND();
-
-
-    //enable_BLEND();
-            //enable_POINTSPRITE();
-                //for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
-                //{ 
-                    //visible_effect_PARTICLESYSTEM_vec[i]->Render(); 
-                //}
-            //disable_POINTSPRITE();            
-        //disable_BLEND();
-
-    // text
-        //for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
-        //{ 
-            //visible_text_DAMAGE_vec[i]->Render(world_coord); 
-        //}            
-        //starsystem->RestoreSceneColor();
-}
-
-
 void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
     float scale = Screen::Instance().GetScale();
     int w = Screen::Instance().GetWidth();
     int h = Screen::Instance().GetHeight();
          
-    if (Config::Instance().MODERN_EFFECTS == true)
-    {
-        RenderInSpace_NEW(starsystem);
-    }
-    else
-    {
-        RenderInSpace_OLD(starsystem); 
-    }        
+    RenderInSpace_NEW(starsystem);
 
     resizeGl(w*scale, h*scale); 
     enable_BLEND();   
