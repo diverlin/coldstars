@@ -188,12 +188,23 @@ void runMatrixPerfomanceTest()
 	exit(0);
 }     	
 
+//const int NUM3 = 1000000; 
+
 //standart
+// athlon x4 2.4Ghz
 //GLM1 time in sec: 10.4
 //GLM2 time in sec: 10.74
 //GLM3 time in sec: 4.6
 //GLM_QUATERNIONS time in sec: 5.06
 //GL time in sec: 0.35
+
+//Trinity x4 3.4Ghz
+//GLM1 time in sec: 5.27
+//GLM2 time in sec: 5.47
+//GLM3 time in sec: 2.42
+//GLM_QUATERNIONS time in sec: 2.49
+//GL time in sec: 0.2
+
 
 // O2,-native
 //GLM1 time in sec: 0.46
@@ -204,18 +215,33 @@ void runMatrixPerfomanceTest()
 
 
 // O3,-native
+// athlon x4 2.4Ghz
 //GLM1 time in sec: 0.17
 //GLM2 time in sec: 0.08
 //GLM3 time in sec: 0.12
 //GLM_QUATERNIONS time in sec: 0.12
 //GL time in sec: 0.33
    
+//Trinity x4 3.4Ghz   
+//GLM1 time in sec: 0.09
+//GLM2 time in sec: 0.06
+//GLM3 time in sec: 0.06
+//GLM_QUATERNIONS time in sec: 0.08
+//GL time in sec: 0.2
+
+
 // Ofast,-native
-//const int NUM3 = 1000000; 
+//Athlon x4 2.4Ghz
 //GLM1 time in sec: 0.16
 //GLM2 time in sec: 0.08
 //GLM3 time in sec: 0.12
 //GLM_QUATERNIONS time in sec: 0.06
 //GL time in sec: 0.32
 
+//Trinity x4 3.4Ghz 
+//GLM1 time in sec: 0.09
+//GLM2 time in sec: 0.05
+//GLM3 time in sec: 0.06
+//GLM_QUATERNIONS time in sec: 0.05
+//GL time in sec: 0.2
 

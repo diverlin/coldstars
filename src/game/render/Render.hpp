@@ -33,7 +33,12 @@ class Render
         ~Render() {}
 
         void ApplyViewMatrix(const glm::mat4& Vm)  { m_Vm = Vm; UpdateProjectionViewMatrix(); }
-                                
+        void ApplyMatrixToOpengl(const glm::mat4& Mm) 
+        { 
+            m_PVMm = m_PVm * Mm;
+            glLoadMatrixf(&m_PVMm[0][0]);     
+        }
+                                 
     private:
         glm::mat4 m_Pm;
         glm::mat4 m_Vm;
@@ -41,13 +46,8 @@ class Render
         
         glm::mat4 m_PVMm;
        
-        void UpdateProjectionViewMatrix() { m_PVm = m_Pm * m_Vm; }
-                
-        void ApplyMatrixToOpengl(const glm::mat4& Mm) 
-        { 
-            m_PVMm = m_PVm * Mm;
-            glLoadMatrixf(&m_PVMm[0][0]);     
-        }
+        void UpdateProjectionViewMatrix() { m_PVm = m_Pm * m_Vm; }               
+
 };
 
 class Camera

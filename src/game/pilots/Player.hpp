@@ -126,7 +126,6 @@ class Player : public Base
     
         void RenderInSpace(StarSystem*, bool, bool, bool); 
             void RenderInSpace_NEW(StarSystem*);
-            void RenderInSpace_OLD(StarSystem*);
             void RenderCollisionRadiusOfVisibleObjects() const;
                         
         void SessionInSpace(StarSystem*, const TurnTimer&);
