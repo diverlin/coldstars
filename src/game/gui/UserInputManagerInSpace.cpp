@@ -280,93 +280,45 @@ void UserInputManagerInSpace::ManageRealTimeInputsInSpace(Player* player)
 
 void UserInputManagerInSpace::ScrollCamera(Player* player)
 {
-    int SCROLL_VELOCITY_STEP = Config::Instance().SCROLL_VELOCITY_STEP;
-    int SCROLL_VELOCITY_MAX  = Config::Instance().SCROLL_VELOCITY_MAX;    
+    int SCROLL_VELOCITY_STEP = Config::Instance().SCROLL_VELOCITY_STEP; 
 
-        // SCROLLING X AXIS         
-        switch (m_CameraMoveAxisX)
+    Camera& camera = Screen::Instance().GetCamera();
+    
+    
+    // SCROLLING X AXIS         
+    switch (m_CameraMoveAxisX)
+    {
+        case CAMERADIRECTION::LEFT:
         {
-            case CAMERADIRECTION::LEFT:
-            {
-                    m_ScrollAccel.x -= SCROLL_VELOCITY_STEP;
-                    if (fabs(m_ScrollAccel.x) > fabs(SCROLL_VELOCITY_MAX))
-                    {
-                        m_ScrollAccel.x = -SCROLL_VELOCITY_MAX;
-                    }
-                    
-                    break;
-            }
-        
-            case CAMERADIRECTION::RIGHT:
-            {
-                    m_ScrollAccel.x += SCROLL_VELOCITY_STEP;
-                    if (fabs(m_ScrollAccel.x) > fabs(SCROLL_VELOCITY_MAX))
-                    {
-                        m_ScrollAccel.x = SCROLL_VELOCITY_MAX;
-                    }
-     
-             break;
-            }
-
-        case CAMERADIRECTION::NONE:
-        {
-            if (m_ScrollAccel.x != 0)
-                    {
-                        if (m_ScrollAccel.x > 0)
-                        {
-                                m_ScrollAccel.x -= SCROLL_VELOCITY_STEP; 
-                        } 
-                        else if (m_ScrollAccel.x < 0)
-                        {
-                                m_ScrollAccel.x += SCROLL_VELOCITY_STEP; 
-                        }   
-                    }
-                    
-                    break;    
+            camera.AddMoveSpeed(glm::vec3(-SCROLL_VELOCITY_STEP, 0.0f, 0.0f));
+            
+            break;
         }
+        
+        case CAMERADIRECTION::RIGHT:
+        {
+            camera.AddMoveSpeed(glm::vec3(SCROLL_VELOCITY_STEP, 0.0f, 0.0f));
+            
+            break;
+        }       
     }
 
     switch(m_CameraMoveAxisY)
     {
-            case CAMERADIRECTION::UP:
-            {
-                    m_ScrollAccel.y += SCROLL_VELOCITY_STEP;
-                    if (fabs(m_ScrollAccel.y) > fabs(SCROLL_VELOCITY_MAX))
-                    {
-                        m_ScrollAccel.y = SCROLL_VELOCITY_MAX;
-                    }
-                    
-                    break;
-            }
-            
-            case CAMERADIRECTION::DOWN:
-            {
-                    m_ScrollAccel.y -= SCROLL_VELOCITY_STEP;
-                    if (fabs(m_ScrollAccel.y) > fabs(SCROLL_VELOCITY_MAX))
-                    {
-                        m_ScrollAccel.y = -SCROLL_VELOCITY_MAX;
-                    }
-                    
-                    break;
-            }
-            
-            case CAMERADIRECTION::NONE:
-            {
-                    if (m_ScrollAccel.y != 0)
-                    {
-                        if (m_ScrollAccel.y > 0)
-                        {
-                                m_ScrollAccel.y -= SCROLL_VELOCITY_STEP; 
-                        } 
-                        else if (m_ScrollAccel.y < 0)
-                        {
-                                m_ScrollAccel.y += SCROLL_VELOCITY_STEP; 
-                        }   
-                    }
+        case CAMERADIRECTION::UP:
+        {
+            camera.AddMoveSpeed(glm::vec3(0.0f, SCROLL_VELOCITY_STEP, 0.0f));
                 
-                break;
-            }
+            break;
+        }
+            
+        case CAMERADIRECTION::DOWN:
+        {
+            camera.AddMoveSpeed(glm::vec3(0.0f, -SCROLL_VELOCITY_STEP, 0.0f));
+                
+            break;
+        }
     }
      
-          Screen::Instance().MovingBy(m_ScrollAccel);
+    Screen::Instance().MovingBy(m_ScrollAccel);
 }

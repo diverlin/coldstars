@@ -20,51 +20,41 @@
 #ifndef RENDER_HPP
 #define RENDER_HPP
 
-#include <GL/glew.h>
+#include <common/NonCopyable.hpp>
+#include <render/MyGl.hpp>
 #include "../resources/textureOb.hpp"
 #include "../common/rect.hpp"
 #include <common/Box2D.hpp>
 class Mesh;
 
-class Render
+enum class PROJECTION_TYPE { PERSPECTIVE, ORTHOGONAL};
+
+class Render : public NonCopyable
 {
     public:
-        Render() {}
-        ~Render() {}
+        Render();
+        ~Render();
 
-        void ApplyViewMatrix(const glm::mat4& Vm)  { m_Vm = Vm; UpdateProjectionViewMatrix(); }
-        void ApplyMatrixToOpengl(const glm::mat4& Mm) 
-        { 
-            m_PVMm = m_PVm * Mm;
-            glLoadMatrixf(&m_PVMm[0][0]);     
-        }
-                                 
+        void Init();
+        
+        void SetPerspectiveProjection(float, float);
+        void SetOrthogonalProjection(float, float);
+                
+        void ComposeViewMatrix(const glm::mat4&);
+        
+        void DrawQuad(TextureOb*, const glm::mat4&) const;
+        void RenderMeshGeometry(const Mesh*, const glm::mat4&) const;
+        void DrawParticleTextured(TextureOb*, const glm::vec3&, float) const;
+                                                         
     private:
         glm::mat4 m_Pm;
         glm::mat4 m_Vm;
         glm::mat4 m_PVm;
-        
-        glm::mat4 m_PVMm;
        
-        void UpdateProjectionViewMatrix() { m_PVm = m_Pm * m_Vm; }               
-
+        void ComposeModelMatrix(const glm::mat4&) const;
+        void UpdateProjectionViewMatrix();
+        
 };
-
-class Camera
-{
-    public:
-        Camera() {}
-        ~Camera() {}
-
-        const glm::mat4& GetViewMatrix() { return m_Vm; }  
-            
-    private:
-        glm::mat4 m_Vm;
-  
-};
-
-void initGl(int, int);
-void resizeGl(int, int);
 
 void clearScreen();
 void resetRenderTransformation();

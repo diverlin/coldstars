@@ -16,33 +16,36 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#ifndef CAMERA_HPP
+#define CAMERA_HPP
 
-#ifndef DISTANTSTAREFFECT_HPP
-#define DISTANTSTAREFFECT_HPP
+#include <common/NonCopyable.hpp>
+#include <glm/glm.hpp>
 
-#include <effects/BaseBackGroundEffect.hpp>    
-#include <types/MyInt.hpp>
-#include <render/Render.hpp>
-
-class DistantStarEffect : public BaseBackGroundEffect
-{   
+class Camera : public NonCopyable
+{
     public:
-        DistantStarEffect();
-        ~DistantStarEffect();
+        Camera();
+        ~Camera();
+
+        const glm::mat4& GetViewMatrix() { return m_Vm; }
+         
+        void AddMoveSpeed(const glm::vec3&);
         
-        void Render1(const Render&) const;
-        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
-    
+        void Update();  
+                    
     private:
-        void SaveDataUniqueDistantStarEffect(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueDistantStarEffect(const boost::property_tree::ptree&);
-        void ResolveDataUniqueDistantStarEffect();
-}; 
-
-DistantStarEffect* GetNewDistantStarEffect(int color_id = NONE_ID);
-
+        glm::vec3 m_Pos;
+        glm::vec3 m_Dir;
+        glm::vec3 m_Up;
+        
+        float m_InertiaFactor;
+        glm::vec3 m_MoveSpeed;
+        float m_SpeedMax;
+        
+        glm::mat4 m_Vm; 
+};
 
 #endif 
+
+

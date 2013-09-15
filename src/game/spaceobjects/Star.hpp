@@ -21,6 +21,7 @@
 #define STAR_HPP
 
 #include <spaceobjects/BasePlanet.hpp>
+#include <render/Render.hpp>
 
 class Star : public BasePlanet
 {
@@ -39,7 +40,7 @@ class Star : public BasePlanet
         void UpdateInSpaceInStatic();    
         void UpdateInSpace(int, bool);
         
-        void Render_NEW() const;
+        void Render_NEW(const Render&) const;
         void Render_OLD() const;
         
         virtual void SaveData(boost::property_tree::ptree&) const override final;

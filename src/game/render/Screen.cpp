@@ -34,7 +34,13 @@ Screen& Screen::Instance()
     return instance;
 }
     
-Screen::Screen():fps(0), frames_counter(0), last_time(0.0), scale(1.0), d_scale(0.0)
+Screen::Screen()
+:
+fps(0), 
+frames_counter(0), 
+last_time(0.0), 
+scale(1.0), 
+d_scale(0.0)
 {}
 
 Screen::~Screen()
@@ -47,14 +53,15 @@ void Screen::InitBasic(int width, int height, int bpp, bool vert_sync, const std
     wrCreateWindowSpecific(width, height, bpp, vert_sync, title);
     
     glewInit();             
-    initGl(width, height);
+    m_Render.Init();
+    m_Render.SetOrthogonalProjection(width, height);
     
     rect.Set(0.0, 0.0, width, height);
 }
 
 void Screen::InitPostEffects(int width, int height)
 {
-     fbo0.Create();
+    fbo0.Create();
     fbo1.Create();    
     fbo2.Create();
     fbo3.Create();
@@ -88,7 +95,7 @@ void Screen::DrawFps()
      
 void Screen::Resize(int width, int height)
 {
-    resizeGl(width, height);
+    m_Render.SetOrthogonalProjection(width, height);
     
     wrResizeSpecific(width, height);
     

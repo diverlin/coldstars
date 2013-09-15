@@ -829,33 +829,36 @@ void StarSystem::RestoreDefaultColor()
     setColor4f(COLOR::COLOR4F_WHITE);
 }
 
-void StarSystem::DrawBackground(glm::vec2 scroll_coords)
+void StarSystem::DrawBackground(const Render& render, const glm::vec2& scroll_coords)
 {   
-    // HACK for point sprites
+// HACK for point sprites
+if (distantStarEffect_vec.size()>0) 
+{
     enable_POINTSPRITE();
     {
-        if (distantStarEffect_vec.size()>0) distantStarEffect_vec[0]->Render(scroll_coords.x, scroll_coords.y); 
+        distantStarEffect_vec[0]->Render1(render);
     }
     disable_POINTSPRITE();
-    // HACK for point sprites
+    clearScreen();                
+} 
+// HACK for point sprites
 
-    clearScreen();
-    resetRenderTransformation();
-    RestoreSceneColor();
+    //resetRenderTransformation();
+    //RestoreSceneColor();
 
     enable_BLEND();
     glDepthMask(false);
 
     for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++)
     { 
-        distantNebulaEffect_vec[i]->Render(scroll_coords.x, scroll_coords.y); 
+        distantNebulaEffect_vec[i]->Render1(render); 
     }
 
     enable_POINTSPRITE();
     {
         for(unsigned int i = 0; i<distantStarEffect_vec.size(); i++)
         { 
-            distantStarEffect_vec[i]->Render(scroll_coords.x, scroll_coords.y); 
+            distantStarEffect_vec[i]->Render1(render); 
         }
     }
     disable_POINTSPRITE();

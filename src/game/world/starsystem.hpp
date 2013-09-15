@@ -27,6 +27,7 @@
 #include <world/HyperSpace.hpp>
 #include <world/AsteroidManager.hpp>
 #include <types/RaceTypes.hpp>
+#include <render/Render.hpp>
 
 class RocketBullet;
 class BasePlanet;
@@ -122,9 +123,9 @@ class StarSystem : public BaseSpaceEntity
         
         float CalcResultGravityForce(const glm::vec3&, const glm::vec3&, float) const;
 
-            void RestoreDefaultColor();
-            void RestoreSceneColor();
-            void DrawBackground(glm::vec2);
+        void RestoreDefaultColor();
+        void RestoreSceneColor();
+        void DrawBackground(const Render&, const glm::vec2&);
                 void DrawOrbits();
                 void DrawPath();
                 

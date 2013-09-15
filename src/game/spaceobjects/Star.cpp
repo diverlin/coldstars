@@ -29,6 +29,7 @@
 #include <resources/ShaderCollector.hpp>
 
 #include <render/Render.hpp>
+#include <glm/gtx/transform.hpp>
 
    
 Star::Star(int id)
@@ -126,7 +127,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
     //UpdateRotation(); // not relevant for render NEW
 }    
     
-void Star::Render_NEW() const
+void Star::Render_NEW(const Render& render) const
 {
     glUseProgram(ShaderCollector::Instance().multitexturing);
     
@@ -140,7 +141,14 @@ void Star::Render_NEW() const
     
     glUniform2f(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "displ"), m_TextureOffset1, m_TextureOffset2);
     
-    renderMesh(GetMesh(), GetCenter(), GetSize(), GetAngle(), false);
+    
+    glm::mat4 Tm = glm::translate(GetCenter());
+    glm::mat4 Rm = glm::rotate(0.0f, glm::vec3(0.0, 0.0, 1.0));
+    glm::mat4 Sm = glm::scale(GetSize());
+      
+    glm::mat4 Mm = Tm * Rm * Sm;
+    
+    render.RenderMeshGeometry(GetMesh(), Mm);
     
     glUseProgram(0);
     glActiveTexture(GL_TEXTURE0);

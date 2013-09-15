@@ -29,15 +29,9 @@ DistantStarEffect::DistantStarEffect()
 DistantStarEffect::~DistantStarEffect()
 {}
 
-void DistantStarEffect::Render(float vx, float vy)
+void DistantStarEffect::Render1(const Render& render) const
 {   
-    glPointSize(size.x);
-    //glglm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-    glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-    
-    glBegin(GL_POINTS);
-        glVertex3f(center.x - vx*parallax_rate, center.y - vy*parallax_rate , center.z);
-    glEnd();
+    render.DrawParticleTextured(m_TextureOb, m_Center, m_Size.x);
 }
 
    
@@ -77,18 +71,17 @@ void DistantStarEffect::ResolveDataUniqueDistantStarEffect()
 DistantStarEffect* GetNewDistantStarEffect(int color_id)
 {
     TextureOb* textureOb = nullptr;
-    if (color_id == NONE_ID) textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DISTANTSTAR_ID);
-    else                 textureOb = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::DISTANTSTAR_ID, color_id);
+    if (color_id == NONE_ID)    textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DISTANTSTAR_ID);
+    else                        textureOb = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::DISTANTSTAR_ID, color_id);
         
     float size_x = (float)getRandInt(ENTITY::GALAXY::DISTANTSTAR_SIZE_MIN, ENTITY::GALAXY::DISTANTSTAR_SIZE_MAX);
     glm::vec3 size(size_x, size_x, 1.0);
-    glm::vec3 center(getRandInt(0, 1000), getRandInt(0, 1000), -2.0);        
+    glm::vec3 center(getRandSign()*getRandInt(0, 1000), getRandSign()*getRandInt(0, 1000), -getRandInt(200, 499));        
             
     DistantStarEffect* ds = new DistantStarEffect();
     ds->SetTextureOb(textureOb);
     ds->SetCenter(center);
     ds->SetSize(size);
-    ds->SetParallaxRate(size_x/1000.f);
     
     return ds;
 }
