@@ -63,11 +63,12 @@
 #include <gui/UserInput.hpp>
 #include <gui/UserInputManagerInSpace.hpp>
 
+#include <glm/gtc/matrix_transform.hpp>
 
 Player::Player(int id)
 :
 npc(nullptr),
-starsystem(nullptr)        
+starsystem(nullptr)     
 { 
     SetId(id);
     SetTypeId(TYPE::ENTITY::PLAYER_ID);
@@ -355,6 +356,12 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
              
 void Player::RenderInSpace_NEW(StarSystem* starsystem)
 {   
+    Render& render = Screen::Instance().GetRender();
+    Camera& camera = Screen::Instance().GetCamera();
+    camera.Update();
+    
+    render.ComposeViewMatrix(camera.GetViewMatrix());
+    
     float scale = Screen::Instance().GetScale();
     int w = Screen::Instance().GetWidth();
     int h = Screen::Instance().GetHeight();
@@ -367,18 +374,18 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
         // render background and star to FBO0
         //Screen::Instance().GetFbo0().Activate(w, h);
         {
-            resizeGl(w*(1+scale/100.0), h*(1+scale/100.0));
+            render.SetPerspectiveProjection(w, h);
                 
-            starsystem->DrawBackground(world_coord);           
-            camera(world_coord.x, world_coord.y, CAMERA_POS_Z);    
+            starsystem->DrawBackground(render, world_coord);           
+            //camera(world_coord.x, world_coord.y, CAMERA_POS_Z);    
     
-            resizeGl(w*scale, h*scale);
+            render.SetOrthogonalProjection(w*scale, h*scale);
             enable_BLEND();
             {
                 starsystem->RestoreDefaultColor();                            
                 for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 
                 { 
-                    visible_STAR_vec[i]->Render_NEW();
+                    visible_STAR_vec[i]->Render_NEW(render);
                 }                
                 starsystem->RestoreSceneColor();
             }
@@ -618,17 +625,17 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     }
     disable_CULLFACE();
     
-    resizeGl(w, h); 
+    //render.SetOrthogonalProjection(w, h); 
 }
     
 void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
-    float scale = Screen::Instance().GetScale();
-    int w = Screen::Instance().GetWidth();
-    int h = Screen::Instance().GetHeight();
+    //float scale = Screen::Instance().GetScale();
+    //int w = Screen::Instance().GetWidth();
+    //int h = Screen::Instance().GetHeight();
          
     RenderInSpace_NEW(starsystem);
-
+/*
     resizeGl(w*scale, h*scale); 
     enable_BLEND();   
     {           
@@ -663,6 +670,7 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
     }
     disable_BLEND();  
     resizeGl(w, h); 
+*/
 } 
 
 bool Player::MouseInteractionWithSpaceObjectsInSpace(const MouseData& data_mouse) 
@@ -1040,9 +1048,9 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
     RenderInSpace(starsystem, turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath());
     
     GuiManager::Instance().UpdateSessionInSpace();
-     GuiManager::Instance().GetGuiSpace().Render(this); 
+    //GuiManager::Instance().GetGuiSpace().Render(this); 
     
-    cursor.RenderItem();
+    //cursor.RenderItem();
 }
 
 
@@ -1068,7 +1076,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
     }       
 
     cursor.Update(this);
-    cursor.RenderFocusedObjectInfo();
+    //cursor.RenderFocusedObjectInfo();
     Screen::Instance().Draw();
 }
 

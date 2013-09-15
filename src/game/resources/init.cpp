@@ -41,6 +41,8 @@
 #include "../ai/scenarios/micro/MicroScenarioLaunching.hpp"
 #include "../ai/scenarios/micro/MicroScenarioExploration.hpp"
 
+#include "render/Screen.hpp"
+
 void init()
 {
     srand(time(0));

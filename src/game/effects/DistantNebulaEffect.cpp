@@ -25,7 +25,12 @@
 
 #include "../render/Render.hpp"
 
-DistantNebulaEffect::DistantNebulaEffect():angle_inD(0.f), d_angle_inD(0.f)
+#include <glm/gtx/transform.hpp>
+
+DistantNebulaEffect::DistantNebulaEffect()
+:
+m_Angle(0.f), 
+m_DeltaAngle(0.f)
 {}
    
 DistantNebulaEffect::~DistantNebulaEffect()
@@ -33,12 +38,20 @@ DistantNebulaEffect::~DistantNebulaEffect()
    
 void DistantNebulaEffect::Update()
 {
-         angle_inD += d_angle_inD;  
+    m_Angle += m_DeltaAngle;  
 }        
 
-void DistantNebulaEffect::Render(float vx, float vy)
-{ 
-       drawQuad(textureOb, glm::vec3(center.x - vx*parallax_rate, center.y - vy*parallax_rate, center.z), size, angle_inD);
+void DistantNebulaEffect::Render1(const Render& render)
+{
+    float rate = 2.0f;   
+    glm::vec3 center(m_Center.x*rate, m_Center.y*rate, m_Center.z);
+    glm::mat4 Tm = glm::translate(m_Center);
+    glm::mat4 Rm = glm::rotate(m_Angle, glm::vec3(0.0, 0.0, 1.0));
+    glm::mat4 Sm = glm::scale(m_Size*rate);
+      
+    glm::mat4 Mm = Tm * Rm * Sm;
+    
+    render.DrawQuad(m_TextureOb, Mm);
 }
               
 void DistantNebulaEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
@@ -61,20 +74,22 @@ void DistantNebulaEffect::ResolveData()
     ResolveDataUniqueDistantNebulaEffect();
 }
 
- void DistantNebulaEffect::SaveDataUniqueDistantNebulaEffect(boost::property_tree::ptree& save_ptree, const std::string& root) const        
+void DistantNebulaEffect::SaveDataUniqueDistantNebulaEffect(boost::property_tree::ptree& save_ptree, const std::string& root) const        
 {
-    save_ptree.put(root+"angle_inD", angle_inD);
-    save_ptree.put(root+"d_angle_inD", d_angle_inD);
+    save_ptree.put(root+"m_Angle", m_Angle);
+    save_ptree.put(root+"m_DeltaAngle", m_DeltaAngle);
 }
 
 void DistantNebulaEffect::LoadDataUniqueDistantNebulaEffect(const boost::property_tree::ptree& load_ptree)
 {
-    angle_inD = load_ptree.get<float>("angle_inD");
-    d_angle_inD = load_ptree.get<float>("d_angle_inD");
+    m_Angle = load_ptree.get<float>("m_Angle");
+    m_DeltaAngle = load_ptree.get<float>("m_DeltaAngle");
 }
 
 void DistantNebulaEffect::ResolveDataUniqueDistantNebulaEffect()
 {}
+
+
 
 DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
 {
@@ -82,31 +97,20 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
     if (color_id == NONE_ID)     textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID);
     else                         textureOb = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, color_id);    
            
-    float parallax_rate;
-    if(textureOb->GetFrameWidth() * textureOb->GetFrameHeight() > 300000)
-    {
-        parallax_rate =  1.0/getRandInt(50, 70); 
-    }
-    else
-    {
-        parallax_rate =  1.0/getRandInt(30, 50);
-    }
-    
-    float angle_inD = getRandInt(0, 360);
-    float d_angle_inD = 0.0;
+    float angle = getRandInt(0, 360);
+    float delta_angle = 0.0;
     if(textureOb->is_rotated)
     {
-        d_angle_inD = getRandInt(8,12)*0.001 * getRandSign();        
+        delta_angle = getRandInt(8,12)*0.001 * getRandSign();        
     }
     
-    glm::vec3 center((float)getRandInt(0, 1000), (float)getRandInt(0, 1000), -999.0);
+    glm::vec3 center(getRandSign()*(float)getRandInt(0, 1000), getRandSign()*(float)getRandInt(0, 1000), -getRandInt(200, 499));
     
     DistantNebulaEffect* dn = new DistantNebulaEffect();
     dn->SetTextureOb(textureOb);
     dn->SetCenter(center);
-    dn->SetParallaxRate(parallax_rate);
-    dn->SetAngle(angle_inD);
-    dn->SetDAngle(d_angle_inD);
+    dn->SetAngle(angle);
+    dn->SetDeltaAngle(delta_angle);
     
     return dn;
 }

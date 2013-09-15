@@ -22,6 +22,7 @@
 
 #include <effects/BaseBackGroundEffect.hpp>    
 #include <types/MyInt.hpp>
+#include <render/Render.hpp>
 
 class DistantNebulaEffect : public BaseBackGroundEffect
 {
@@ -29,18 +30,19 @@ class DistantNebulaEffect : public BaseBackGroundEffect
         DistantNebulaEffect();
         ~DistantNebulaEffect();
         
-        void SetAngle(float angle_inD)     { this->angle_inD = angle_inD; };                        
-        void SetDAngle(float d_angle_inD)     { this->d_angle_inD = d_angle_inD; };
+        void SetAngle(float angle)              { m_Angle = angle; }                       
+        void SetDeltaAngle(float delta_angle)   { m_DeltaAngle = delta_angle; }
         
         void Update();
-        void Render(float vx, float vy);
+        void Render1(const Render&);
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;        
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();
         
     private:
-        float angle_inD, d_angle_inD;
+        float m_Angle;
+        float m_DeltaAngle;
                 
         void SaveDataUniqueDistantNebulaEffect(boost::property_tree::ptree&, const std::string&) const;        
         void LoadDataUniqueDistantNebulaEffect(const boost::property_tree::ptree&);

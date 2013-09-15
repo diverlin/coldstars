@@ -22,6 +22,8 @@
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 
+#include <glm/gtc/matrix_transform.hpp>
+
 #include <resources/GuiTextureObCollector.hpp>
 #include <resources/ShaderCollector.hpp>
 
@@ -29,42 +31,100 @@
 #include "../common/constants.hpp"
 
 
-void initGl(int width, int height)
-{   
-      // Set color and depth clear value
-      //glClearDepth(1.f);
-      glClearColor(0.f, 0.f, 0.f, 0.f);
+Render::Render() 
+{}
 
-      // Enable Z-buffer read and write
-      //glEnable(GL_DEPTH_TEST);
-      glDepthMask(GL_TRUE);
+Render::~Render() 
+{}
+
+void Render::Init()
+{
+    glClearColor(0.f, 0.f, 0.f, 0.f);
+    
+    // Enable Z-buffer read and write
+    //glEnable(GL_DEPTH_TEST);
+    glDepthMask(GL_TRUE);
     glClearDepth(1.f);
     
-      glEnable(GL_TEXTURE_2D);
-      glEnable(GL_BLEND);
-      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-      glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
-  
-    glShadeModel(GL_SMOOTH);
-    //glDisable(GL_LIGHTING); 
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    resizeGl(width, height); 
+    glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
+    
+    glShadeModel(GL_SMOOTH);
     
     glCullFace(GL_BACK); 
-}   
-
-void resizeGl(int width, int height)
-{
-      // Setup a perspective projection
-      glMatrixMode(GL_PROJECTION);
-      glLoadIdentity();
-
-      //gluPerspective(60.f, 4./3., 1.f, 1000.f);
-       glOrtho(0, width, 0, height, 0.1f, 1000.0f);
-      
-      glMatrixMode(GL_MODELVIEW);
 }
+
+void Render::SetPerspectiveProjection(float w, float h) 
+{        
+    m_Pm = glm::perspective(90.0f, w/h, 0.1f, 1000.0f);
+ 
+    UpdateProjectionViewMatrix();
+}
+
+void Render::SetOrthogonalProjection(float w, float h) 
+{        
+    m_Pm = glm::ortho(0.0f, w, 0.0f, h, 0.1f, 1000.0f);
+
+    UpdateProjectionViewMatrix();
+}
+
+void Render::ComposeViewMatrix(const glm::mat4& Vm)  
+{ 
+    m_Vm = Vm; 
+    UpdateProjectionViewMatrix(); 
+}
+
+void Render::ComposeModelMatrix(const glm::mat4& Mm) const
+{ 
+    glm::mat4 PVMm = m_PVm * Mm; // needs to be done inside vertex shader
+    glLoadMatrixf(&PVMm[0][0]);     
+}
+                                 
+void Render::UpdateProjectionViewMatrix() 
+{ 
+    m_PVm = m_Pm * m_Vm; 
+}
+
+
+
+void Render::DrawQuad(TextureOb* texOb, const glm::mat4& Mm) const
+{
+    glBindTexture(GL_TEXTURE_2D, texOb->texture);
+    int frame = texOb->updateAnimationFrame();
+   
+    ComposeModelMatrix(Mm);
+    
+    glBegin(GL_QUADS);
+    {   
+        glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
+        glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
+        glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
+        glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
+    }
+    glEnd();
+}
+
+void Render::RenderMeshGeometry(const Mesh* mesh, const glm::mat4& Mm) const
+{
+    ComposeModelMatrix(Mm);                     
+    mesh->Draw();
+}
+
+void Render::DrawParticleTextured(TextureOb* texOb, const glm::vec3& center, float size) const
+{
+    glBindTexture(GL_TEXTURE_2D, texOb->texture);
+    
+    glPointSize(size);
+        
+    glLoadMatrixf(&m_PVm[0][0]);  // point sprites doesn't use Model Matrix
+    
+    glBegin(GL_POINTS);
+        glVertex3f(center.x, center.y, center.z);
+    glEnd();
+}    
 
 void clearScreen() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 void resetRenderTransformation() { glLoadIdentity(); }

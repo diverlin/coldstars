@@ -20,8 +20,9 @@
 #define BASEBACKGROUNDEFFECT_HPP
 
 #include <boost/property_tree/ptree.hpp>
-#include "../resources/textureOb.hpp"
-#include "../math/myVector.hpp"
+#include <glm/glm.hpp>
+class TextureOb;
+
 
 class BaseBackGroundEffect
 {
@@ -30,23 +31,20 @@ class BaseBackGroundEffect
         ~BaseBackGroundEffect();
         
         void SetTextureOb(TextureOb* textureOb, const glm::vec3& scale_factor = glm::vec3(1.0, 1.0, 1.0));
-        
-        void SetSize(const glm::vec3& size)         { this->size = size; }
-        void SetCenter(const glm::vec3& center)        { this->center = center; }
-        void SetParallaxRate(float parallax_rate)     { this->parallax_rate = parallax_rate; } 
+
+        void SetCenter(const glm::vec3& center)     { m_Center = center; }        
+        void SetSize(const glm::vec3& size)         { m_Size = size; }
             
     protected:
         unsigned long int id;
         
         static unsigned long int counter;
         
-        TextureOb* textureOb;
-        std::string textureOb_path;
+        TextureOb* m_TextureOb;
+        std::string m_TextureObPath;
         
-        glm::vec3 center;
-        glm::vec3 size;        
-        
-        float parallax_rate;
+        glm::vec3 m_Center;
+        glm::vec3 m_Size;        
         
         void SaveDataUniqueBaseBackGroundEffect(boost::property_tree::ptree&, const std::string&) const;        
         void LoadDataUniqueBaseBackGroundEffect(const boost::property_tree::ptree&);

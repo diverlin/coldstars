@@ -25,6 +25,7 @@
 #include <common/Base.hpp>
 #include <gui/Cursor.hpp>
 #include <pilots/Show.hpp>
+#include <render/Render.hpp>
 
 class TurnTimer;
 
@@ -57,7 +58,7 @@ struct UnresolvedDataUniquePlayer
 
 class Player : public Base
 {
-       public:
+    public:
         Player(int);
         ~Player();
 
@@ -91,7 +92,7 @@ class Player : public Base
         
         void ForceStateMachineReset() const;
                 
-          void UpdatePostTransaction();        
+        void UpdatePostTransaction();        
         void UpdatePostTransactionEvent(TurnTimer&);
                                                 
         void SaveData(boost::property_tree::ptree&) const;        

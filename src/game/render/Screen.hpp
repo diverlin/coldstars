@@ -25,6 +25,10 @@
 #include "../render/Fbo.hpp"
 #include "../render/Bloom.hpp"
 #include "../common/rect.hpp"
+
+#include <render/Render.hpp>
+#include <render/Camera.hpp>
+
 #include "SFML_Wrapper.hpp"
 
 
@@ -38,7 +42,9 @@ class Screen : public SFML_Wrapper
         //Rect& GetRect() { return rect; };
         //glm::vec2 GetBottomLeftScreenWC()    { return rect.GetBottomLeft()*scale; }
         //glm::vec2 GetTopRightScreenWC()    { return rect.GetTopRight()*scale; }
-
+        Render& GetRender() { return m_Render; }
+        Camera& GetCamera() { return m_Camera; }
+        
         void SetBottomLeftScreenWC(const glm::vec2& bl)    { rect.SetBottomLeft(bl); }
         
         glm::vec2 GetBottomLeftScreenWC()    { return rect.GetBottomLeft(); }
@@ -74,6 +80,9 @@ class Screen : public SFML_Wrapper
         ~Screen();
         Screen(const Screen&) = delete;
         Screen& operator=(const Screen&) = delete;
+        
+        Render m_Render;
+        Camera m_Camera;
         
         bool auto_scroll;
         

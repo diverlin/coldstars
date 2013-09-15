@@ -22,7 +22,9 @@
 
 unsigned long int BaseBackGroundEffect::counter;
 
-BaseBackGroundEffect::BaseBackGroundEffect():textureOb(nullptr), parallax_rate(1.f)
+BaseBackGroundEffect::BaseBackGroundEffect()
+:
+m_TextureOb(nullptr)
 {
     counter++;
     id = counter;
@@ -33,40 +35,40 @@ BaseBackGroundEffect::~BaseBackGroundEffect()
 
 void BaseBackGroundEffect::SetTextureOb(TextureOb* textureOb, const glm::vec3& scale_factor)
 {
-    this->textureOb = textureOb; 
-    size.x = textureOb->GetFrameWidth()  * scale_factor.x;
-    size.y = textureOb->GetFrameHeight() * scale_factor.y;
-    size.z = 1.0 * scale_factor.z; 
+    m_TextureOb = textureOb; 
+    m_Size.x = m_TextureOb->GetFrameWidth()  * scale_factor.x;
+    m_Size.y = m_TextureOb->GetFrameHeight() * scale_factor.y;
+    m_Size.z = 1.0 * scale_factor.z; 
 };
             
 void BaseBackGroundEffect::SaveDataUniqueBaseBackGroundEffect(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    save_ptree.put(root+"textureOb_path", textureOb->path);
+    save_ptree.put(root+"textureOb_path", m_TextureOb->path);
     
-    save_ptree.put(root+"center.x", center.x);
-    save_ptree.put(root+"center.y", center.y);    
-    save_ptree.put(root+"center.z", center.z);
+    save_ptree.put(root+"center.x", m_Center.x);
+    save_ptree.put(root+"center.y", m_Center.y);    
+    save_ptree.put(root+"center.z", m_Center.z);
 
-    save_ptree.put(root+"size.x", size.x);
-    save_ptree.put(root+"size.y", size.y);    
-    save_ptree.put(root+"size.z", size.z);
+    save_ptree.put(root+"size.x", m_Size.x);
+    save_ptree.put(root+"size.y", m_Size.y);    
+    save_ptree.put(root+"size.z", m_Size.z);
 }
 
 void BaseBackGroundEffect::LoadDataUniqueBaseBackGroundEffect(const boost::property_tree::ptree& load_ptree)
 {
-    textureOb_path = load_ptree.get<std::string>("textureOb_path");
+    m_TextureObPath = load_ptree.get<std::string>("textureOb_path");
                 
-    center.x = load_ptree.get<float>("center.x");
-    center.y = load_ptree.get<float>("center.y");
-    center.z = load_ptree.get<float>("center.z");
+    m_Center.x = load_ptree.get<float>("center.x");
+    m_Center.y = load_ptree.get<float>("center.y");
+    m_Center.z = load_ptree.get<float>("center.z");
     
-    size.x = load_ptree.get<float>("size.x");
-    size.y = load_ptree.get<float>("size.y");
-    size.z = load_ptree.get<float>("size.z");
+    m_Size.x = load_ptree.get<float>("size.x");
+    m_Size.y = load_ptree.get<float>("size.y");
+    m_Size.z = load_ptree.get<float>("size.z");
 }
         
 void BaseBackGroundEffect::ResolveDataUniqueBaseBackGroundEffect()
 {
-    textureOb = TextureManager::Instance().GetTextureObByPath(textureOb_path);
+    m_TextureOb = TextureManager::Instance().GetTextureObByPath(m_TextureObPath);
 }
               
