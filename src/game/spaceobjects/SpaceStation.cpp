@@ -107,29 +107,29 @@ void SpaceStation::UpdateRenderStuff_2D()
     //}
 }
 
-void SpaceStation::RenderInSpace_2D(float scale)
+void SpaceStation::RenderInSpace_2D(const Render& render, float scale)
 {     
-    UpdateRenderStuff_2D();
+    //UpdateRenderStuff_2D();
         
-    RenderKorpus();
+    RenderKorpus(render);
         
-    if (GetDataKorpus().draw_turrels == true)
-    {
-        GetComplexWeapon().RenderTurrels();
-    }
+    //if (GetDataKorpus().draw_turrels == true)
+    //{
+        //GetComplexWeapon().RenderTurrels();
+    //}
     
-    if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
-    {
-        RenderShieldEffect(1.0 - GetColor().a); 
-        GetStarSystem()->RestoreSceneColor();
-    }
+    //if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
+    //{
+        //RenderShieldEffect(1.0 - GetColor().a); 
+        //GetStarSystem()->RestoreSceneColor();
+    //}
 }
 
                          
-void SpaceStation::RenderInSpace_3D(const glm::vec2& scroll_coords, float scale)
+void SpaceStation::RenderInSpace_3D(const Render& render, const glm::vec2& scroll_coords, float scale)
 {         
-    UpdateRenderAnimation();    
-    RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());        
+    //UpdateRenderAnimation();    
+    //RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());        
 }
 
 void SpaceStation::SaveDataUniqueSpaceStation(boost::property_tree::ptree& save_ptree, const std::string& root) const

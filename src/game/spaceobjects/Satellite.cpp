@@ -95,11 +95,11 @@ void Satellite::UpdateRenderStuff()
     UpdateOrientation();
 }
 
-void Satellite::RenderInSpace(float scale)
+void Satellite::RenderInSpace(const Render& render, float scale)
 {   
     UpdateRenderAnimation();
         
-    RenderKorpus();
+    RenderKorpus(render);
     
     if (GetDataKorpus().draw_turrels == true)
     {
@@ -113,9 +113,9 @@ void Satellite::RenderInSpace(float scale)
     }
 }
 
-void Satellite::RenderAtPlanet() const
+void Satellite::RenderAtPlanet(const Render& render)
 {
-    RenderKorpus();
+    RenderKorpus(render);
     
     if (GetDataKorpus().draw_turrels == true)
     {

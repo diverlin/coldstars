@@ -42,6 +42,7 @@ class BaseEquipment;
 class BaseParticleSystem;
 class ShockWaveEffect;
 
+class Render;
 
 struct UnresolvedDataUniqueVehicle
 {
@@ -205,7 +206,7 @@ class Vehicle : public BaseSpaceEntity
         virtual void UpdateInfo() = 0;
         
         void RenderGrabTrail() const;
-        void RenderKorpus() const;
+        void RenderKorpus(const Render&);
         void RenderTurrels() const;
         void RenderDriveEffect(float scale, float parent_d_alpha = 0.0) const;
         void RenderShieldEffect(float parent_d_alpha = 0.0) const;          

@@ -218,8 +218,8 @@ void DriveComplex::UpdateDynamicTargetCoord()
     {
         case TYPE::ENTITY::STARSYSTEM_ID:
         {
-            float angleInD = 90-getAngleInD(vec3ToVec2(target->GetCenter()), vec3ToVec2(owner_vehicle->GetStarSystem()->GetCenter())); //??
-            target_pos = getVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angleInD, owner_vehicle->GetStarSystem()->GetCenter().z);
+            float angle = M_PI/2 - getAngle(vec3ToVec2(target->GetCenter()), vec3ToVec2(owner_vehicle->GetStarSystem()->GetCenter())); //??    use cross()
+            target_pos = getVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angle, owner_vehicle->GetStarSystem()->GetCenter().z);
             target_distance = COLLISION_RADIUS_FOR_STATIC_COORD;
             
             break;
@@ -351,14 +351,14 @@ void DriveComplex::CalcPath2()
 
     // rotated path
     float cosa = dotUnits(orient, target_dir);
-    float angle_step = 3.0;
+    float angle_step = 3.0 * DEGREE_TO_RADIAN_RATE;
     int counter_max = 3 + 360/angle_step;
     int i = 0;
     while (std::fabs(cosa) < 0.999 or (cosa < 0)) // cosa <0 condition works if the orient and target vector is straigforward opposite (dot ~ -1)
     {
         az += sign*angle_step;
-        orient.x = cos(az*DEGREE_TO_RADIAN_RATE);
-        orient.y = sin(az*DEGREE_TO_RADIAN_RATE);
+        orient.x = cos(az);
+        orient.y = sin(az);
         
         new_center += orient*speed;
          
@@ -424,9 +424,9 @@ void DriveComplex::CalcPath()
     int mass = owner_vehicle->GetMass();
     
     int sign = 1;
-    float angle_step = 3.0;
+    float angle_step = 3.0*DEGREE_TO_RADIAN_RATE;
     int round_counter = 0;
-    int round_counter_max = 3 + 360/angle_step;
+    int round_counter_max = 2 + M_PI/angle_step;
     while(glm::length(new_center-target_pos) > 5*speed_base)
     {
         target_dir = glm::vec3(target_pos - new_center);
@@ -440,8 +440,8 @@ void DriveComplex::CalcPath()
                 float prob_az1 = az+1;
                 float prob_az2 = az-1;
                 
-                glm::vec3 prob_orient1(cos(prob_az1*DEGREE_TO_RADIAN_RATE), sin(prob_az1*DEGREE_TO_RADIAN_RATE), 0.0);
-                glm::vec3 prob_orient2(cos(prob_az2*DEGREE_TO_RADIAN_RATE), sin(prob_az2*DEGREE_TO_RADIAN_RATE), 0.0);
+                glm::vec3 prob_orient1(cos(prob_az1), sin(prob_az1), 0.0);
+                glm::vec3 prob_orient2(cos(prob_az2), sin(prob_az2), 0.0);
                 
                 float prob_cosa1 = dotUnits(prob_orient1, target_dir);        
                 float prob_cosa2 = dotUnits(prob_orient2, target_dir);
@@ -459,8 +459,8 @@ void DriveComplex::CalcPath()
             }
         
             az += sign*angle_step;
-            orient.x = cos(az*DEGREE_TO_RADIAN_RATE);
-            orient.y = sin(az*DEGREE_TO_RADIAN_RATE);
+            orient.x = cos(az);
+            orient.y = sin(az);
         
             cosa = dotUnits(orient, target_dir);
             

@@ -212,14 +212,10 @@ const glm::mat4& BaseDrawable::GetActualModelMatrix()
 {
     m_Tm = glm::translate(GetCenter());
       
-    QuatFromAngleAndAxis(m_Qx, 75.0f, AXIS_Y);
-    QuatFromAngleAndAxis(m_Qy, -30.0f, AXIS_Y);   
-    QuatFromAngleAndAxis(m_Qz, GetAngle().z/40.0, AXIS_Z); 
+    QuatFromAngleAndAxis(m_Qx, GetAngle().x, AXIS_X);
+    QuatFromAngleAndAxis(m_Qy, GetAngle().y, AXIS_Y);   
+    QuatFromAngleAndAxis(m_Qz, GetAngle().z, AXIS_Z); 
        
-    //glm::mat4 Rxm = glm::rotate(GetAngle().x, glm::vec3(1.0, 0.0, 0.0));
-    //glm::mat4 Rym = glm::rotate(GetAngle().y, glm::vec3(0.0, 1.0, 0.0));
-    //glm::mat4 Rzm = glm::rotate(GetAngle().z, glm::vec3(0.0, 0.0, 1.0));
-    //m_Rm = Rxm*Rym*Rzm;
     m_Rm = glm::toMat4(m_Qx*m_Qy*m_Qz);
     
     m_Sm = glm::scale(GetSize());

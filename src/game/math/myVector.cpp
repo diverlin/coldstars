@@ -79,15 +79,19 @@ glm::vec2 getVec2f(float length, float angle)
 
 glm::vec3 getVec3f(float length, float angle, float pos_z)
 {
-    angle *= DEGREE_TO_RADIAN_RATE;    
     glm::vec3 vec(length*sin(angle), length*cos(angle), pos_z);
     
     return vec;
 }
 
-float getAngleInD(const glm::vec2& v_start, const glm::vec2 v_end)
+float getAngleInD(const glm::vec2& v_start, const glm::vec2 v_end)  // depr
 {
     return atan2(v_start.y - v_end.y, v_start.x - v_end.x) * RADIAN_TO_DEGREE_RATE;
+}
+
+float getAngle(const glm::vec2& v_start, const glm::vec2 v_end)
+{
+    return atan2(v_start.y - v_end.y, v_start.x - v_end.x);
 }
 
 float getAngleBetweenUnits(const glm::vec3& v1, const glm::vec3& v2)

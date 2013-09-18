@@ -72,11 +72,11 @@ void VehicleSlot::SwapVehicle(VehicleSlot* vehicle_slot)
 
 void VehicleSlot::Render(const Rect& rect) const
 {
-         drawTexturedRect(textureOb, rect, -1);
-         if (vehicle != nullptr)
-         {
-             glm::vec3 center(rect.GetCenter().x, rect.GetCenter().y, -2.0);
-                    ((Ship*)vehicle)->RenderAtPlanet(center);
+    drawTexturedRect(textureOb, rect, -1);
+    if (vehicle != nullptr)
+    {
+        glm::vec3 center(rect.GetCenter().x, rect.GetCenter().y, -2.0);
+        //((Ship*)vehicle)->RenderAtPlanet(center);
     }
 }
 
