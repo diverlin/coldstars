@@ -35,6 +35,8 @@
 
 #include <pilots/Npc.hpp>
 
+#include <render/Render.hpp>
+
 
 Ship::Ship(int id)
 {
@@ -113,56 +115,56 @@ void Ship::UpdateInSpace(int time, bool show_effect)
     }
 }
 
-void Ship::RenderInSpace_2D(float scale) const
+void Ship::RenderInSpace_2D(const Render& render, float scale)
 {   
     //setColor4f(GetColor());
-    if (GetProperties().grab_radius > 0)
-    {
-        RenderGrabTrail();
-    }
+    //if (GetProperties().grab_radius > 0)
+    //{
+        //RenderGrabTrail();
+    //}
         
-    RenderKorpus();
+    RenderKorpus(render);
     
-    if (GetDataKorpus().draw_turrels == true)
-    {
-        GetComplexWeapon().RenderTurrels();
-    }
+    //if (GetDataKorpus().draw_turrels == true)
+    //{
+        //GetComplexWeapon().RenderTurrels();
+    //}
     
-    if (GetProperties().speed > 0)
-    {
-        RenderDriveEffect(scale , 1.0 - GetColor().a);
-        GetStarSystem()->RestoreSceneColor();
-    }
+    //if (GetProperties().speed > 0)
+    //{
+        //RenderDriveEffect(scale , 1.0 - GetColor().a);
+        //GetStarSystem()->RestoreSceneColor();
+    //}
     
-    if (GetProperties().shield_effect_enabled == true)
-    {
-        RenderShieldEffect(1.0 - GetColor().a); 
-        GetStarSystem()->RestoreSceneColor();
-    }
+    //if (GetProperties().shield_effect_enabled == true)
+    //{
+        //RenderShieldEffect(1.0 - GetColor().a); 
+        //GetStarSystem()->RestoreSceneColor();
+    //}
 }
 
-void Ship::RenderInSpace_3D(const glm::vec2& scroll_coords, float scale)
+void Ship::RenderInSpace_3D(const Render& render, const glm::vec2& scroll_coords, float scale)
 {
-    UpdateRenderAnimation();
-    RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());
+    //UpdateRenderAnimation();
+    //RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());
 
-    enable_BLEND();
-    if (GetProperties().shield_effect_enabled == true)
-    {   
-        setColor4f(GetColor());
-        RenderShieldEffect(1.0 - GetColor().a); 
-        GetStarSystem()->RestoreSceneColor();
-    }
-    disable_BLEND();
+    //enable_BLEND();
+    //if (GetProperties().shield_effect_enabled == true)
+    //{   
+        //setColor4f(GetColor());
+        //RenderShieldEffect(1.0 - GetColor().a); 
+        //GetStarSystem()->RestoreSceneColor();
+    //}
+    //disable_BLEND();
 }
 
-void Ship::RenderAtPlanet(const glm::vec3& center)
+void Ship::RenderAtPlanet(const Render& render, const glm::vec3& center)
 {
     SetCenter(center);
     SetAngleZ(0);
     UpdateOrientation();
     
-    RenderKorpus();
+    RenderKorpus(render);
     
     if (GetDataKorpus().draw_turrels == true)
     {

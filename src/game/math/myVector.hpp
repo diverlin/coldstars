@@ -20,6 +20,8 @@ glm::vec2 getVec2f(float length, float angle);
 glm::vec3 getVec3f(float length, float angle, float);
 float getAngleInD(const glm::vec2& v_start, const glm::vec2 v_end);
 
+float getAngle(const glm::vec2&, const glm::vec2);
+
 float getAngleBetweenUnits(const glm::vec3&, const glm::vec3&);
 float dotUnits(const glm::vec3& v1, const glm::vec3& v2);
 

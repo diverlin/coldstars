@@ -90,14 +90,14 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     planet->BindData3D(mesh, textureOb, scale);
     
     planet->SetAngle(glm::vec3(-getRandInt(10, 40), -getRandInt(10, 40), 0));    
-    float step = getRandInt(20, 60)*0.01;
+    float step = getRandInt(20, 60)*0.0001;
     AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
     planet->SetRenderAnimation(animation_program);
     planet->SetZYX(false);
     
     //if (getRandBool()) 
     {
-            TextureOb* textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ATMOSPHERE_ID); 
+        TextureOb* textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ATMOSPHERE_ID); 
         Atmosphere* atmosphere = new Atmosphere(textureOb_atmosphere);
         planet->BindAtmosphere(atmosphere);
     }

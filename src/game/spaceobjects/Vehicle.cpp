@@ -65,6 +65,7 @@
 #include <dock/Store.hpp>
 #include <dock/NatureLand.hpp>
 
+#include <render/Render.hpp>
 
 Vehicle::Vehicle()
 :
@@ -1209,9 +1210,9 @@ void Vehicle::RenderGrabTrail() const
     m_SlotGrapple->GetGrappleEquipment()->RenderGrabTrail();
 }
         
-void Vehicle::RenderKorpus() const
+void Vehicle::RenderKorpus(const Render& render)
 {
-    drawQuad(GetTextureOb(), GetCenter(), GetSize(), GetAngle().z);
+    render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
 }
 
 void Vehicle::RenderDriveEffect(float scale, float parent_d_alpha) const

@@ -183,9 +183,9 @@ void Player::AddIfVisible(BlackHole* blackhole)
 
 void Player::AddIfVisible(Vehicle* vehicle) 
 {
-    if (isObjectOnScreen(vehicle->GetCenter(), vehicle->GetSize()))
+    //if (isObjectOnScreen(vehicle->GetCenter(), vehicle->GetSize()))
     {      
-        if ( npc->GetVehicle()->IsObjectWithinRadarRange(vehicle) )
+        //if ( npc->GetVehicle()->IsObjectWithinRadarRange(vehicle) )
         {
             switch(vehicle->GetSubTypeId())
             {            
@@ -435,23 +435,23 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 { 
                    visible_PLANET_vec[i]->Render_OLD(render); 
                 }
-/*
+
                 for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
                 { 
                     if(visible_SPACESTATION_vec[i]->Is3D())
                     {
-                       visible_SPACESTATION_vec[i]->RenderInSpace_3D(world_coord, 1/scale); 
+                       visible_SPACESTATION_vec[i]->RenderInSpace_3D(render, world_coord, 1/scale); 
                     }
                 }
-                
+         
                 for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
                 { 
                     if(visible_SHIP_vec[i]->Is3D())
                     {
-                       visible_SHIP_vec[i]->RenderInSpace_3D(world_coord, 1/scale); 
+                       visible_SHIP_vec[i]->RenderInSpace_3D(render, world_coord, 1/scale); 
                     }
                 }
-                    
+      /*                     
                 for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
                 { 
                     visible_ASTEROID_vec[i]->Render_NEW(world_coord); 
@@ -464,31 +464,32 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 */     
             }
             disable_DEPTH();
-            /*
+
             enable_BLEND();    
             {    
+
                 for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
                 { 
                     if(!visible_SPACESTATION_vec[i]->Is3D())
                     {
-                        visible_SPACESTATION_vec[i]->RenderInSpace_2D(1/scale); 
+                        visible_SPACESTATION_vec[i]->RenderInSpace_2D(render, 1/scale); 
                     }
                 }
-   
+            /*   
                 for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
                 { 
                     visible_CONTAINER_vec[i]->Render2D(); 
                 }      
-           
+            */
 
                 for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
                 { 
                     if(visible_SHIP_vec[i]->Is3D() == false)
                     {
-                        visible_SHIP_vec[i]->RenderInSpace_2D(1/scale); 
+                        visible_SHIP_vec[i]->RenderInSpace_2D(render, 1/scale); 
                     }
                 }
-
+              /*
                 for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
                 { 
                    visible_SATELLITE_vec[i]->RenderInSpace(1/scale); 
@@ -504,8 +505,10 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 {
                     RenderCollisionRadiusOfVisibleObjects();
                 }
+                */
             }
             disable_BLEND();
+            /*
         }
         Screen::Instance().GetFbo2().Deactivate();
 
