@@ -20,11 +20,16 @@
 #include "../resources/TextureManager.hpp"
 #include "../render/Render.hpp"
 
+#include <glm/gtx/transform.hpp>
+
+
 unsigned long int BaseBackGroundEffect::counter;
 
 BaseBackGroundEffect::BaseBackGroundEffect()
 :
-m_TextureOb(nullptr)
+m_TextureOb(nullptr),
+m_Angle(0.0f), 
+m_DeltaAngle(0.0f)
 {
     counter++;
     id = counter;
@@ -33,6 +38,17 @@ m_TextureOb(nullptr)
 BaseBackGroundEffect::~BaseBackGroundEffect()
 {}
 
+const glm::mat4& BaseBackGroundEffect::GetActualModelMatrix()
+{
+    m_Tm = glm::translate(m_Center);
+    m_Rm = glm::rotate(m_Angle, glm::vec3(0.0, 0.0, 1.0));
+    m_Sm = glm::scale(m_Size);
+      
+    m_Mm = m_Tm * m_Rm * m_Sm;
+    
+    return m_Mm;
+}
+        
 void BaseBackGroundEffect::SetTextureOb(TextureOb* textureOb, const glm::vec3& scale_factor)
 {
     m_TextureOb = textureOb; 

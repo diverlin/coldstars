@@ -58,7 +58,7 @@ class Orientation : public Base
         glm::vec3* const GetpCenter() { return &m_Center; }
         const glm::vec3* const GetpParentCenter() { return &m_ParentCenter; }
                         
-           Points& GetPoints()          { return m_Points; }  // !!!
+        Points& GetPoints()          { return m_Points; }  // !!!
            
         float GetCollisionRadius() const  { return m_CollisionRadius; }
 

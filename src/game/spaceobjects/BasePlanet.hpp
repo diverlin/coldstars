@@ -23,6 +23,7 @@
 #include <spaceobjects/BaseSpaceEntity.hpp>
 #include <parts/orbit.hpp>
 #include <struct/PlanetData.hpp>
+#include <render/Render.hpp>
 
 
 struct UnresolvedDataBasePlanet
@@ -47,7 +48,7 @@ class BasePlanet : public BaseSpaceEntity
         
         virtual void RenderStuffWhenFocusedInSpace() override final;
         
-        void RenderMesh_OLD() const;
+        void RenderMesh_OLD(const Render&);
         
     protected:
         virtual void PutChildsToGarbage() const {}

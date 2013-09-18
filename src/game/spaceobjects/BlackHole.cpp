@@ -87,9 +87,9 @@ void BlackHole::Render_NEW(const glm::vec2& scroll_coords)
     RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());
 }
     
-void BlackHole::Render_OLD() const
+void BlackHole::Render_OLD(const Render& render)
 {
-    RenderMesh_OLD();    
+    RenderMesh_OLD(render);    
 }
      
 void BlackHole::SaveDataUniqueBlackHole(boost::property_tree::ptree& save_ptree, const std::string& root) const

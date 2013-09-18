@@ -428,13 +428,14 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
            
             resizeGl(w*scale, h*scale);     
             camera(world_coord.x, world_coord.y, CAMERA_POS_Z);    
+*/
             enable_DEPTH();  
             {
                 for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
                 { 
-                   visible_PLANET_vec[i]->Render_NEW(world_coord); 
+                   visible_PLANET_vec[i]->Render_OLD(render); 
                 }
-
+/*
                 for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
                 { 
                     if(visible_SPACESTATION_vec[i]->Is3D())
@@ -459,10 +460,11 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
                 { 
                     visible_BLACKHOLE_vec[i]->Render_NEW(world_coord);                     
-                }      
+                } 
+                */     
             }
             disable_DEPTH();
-
+            /*
             enable_BLEND();    
             {    
                 for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)

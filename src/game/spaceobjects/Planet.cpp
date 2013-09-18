@@ -127,9 +127,12 @@ void Planet::Render_NEW(const glm::vec2& scroll_coords)
     }
 }
 
-void Planet::Render_OLD() const
+void Planet::Render_OLD(const Render& render)
 {
-    RenderMesh_OLD();
+    UpdateRenderAnimation();
+    RenderMesh_OLD(render);
+    
+    DrawAxis();
 }
 
 void Planet::SaveDataUniquePlanet(boost::property_tree::ptree& save_ptree, const std::string& root) const

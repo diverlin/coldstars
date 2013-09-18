@@ -107,9 +107,9 @@ void Asteroid::Render_NEW(const glm::vec2& scroll_coords)
     RenderMeshLightNormalMap(scroll_coords, GetStarSystem()->GetColor4f());
 }
     
-void Asteroid::Render_OLD() const
+void Asteroid::Render_OLD(const Render& render)
 {
-    RenderMesh_OLD();    
+    RenderMesh_OLD(render);    
 }
 
 void Asteroid::SaveDataUniqueAsteroid(boost::property_tree::ptree& save_ptree, const std::string& root) const

@@ -23,11 +23,15 @@
 #include <common/Orientation.hpp>
 #include <types/MeshTypes.hpp>
 #include <glm/glm.hpp> // glm::vec
+#include <glm/gtx/quaternion.hpp>
 
 class Mesh;
 class TextureOb;
 class AnimationBase;
 
+const glm::vec3 AXIS_X = glm::vec3(1.0f, 0.0f, 0.0f);
+const glm::vec3 AXIS_Y = glm::vec3(0.0f, 1.0f, 0.0f);
+const glm::vec3 AXIS_Z = glm::vec3(0.0f, 0.0f, 1.0f);
 
 struct UnresolvedDataUniqueBaseDrawable
 {
@@ -53,12 +57,13 @@ class BaseDrawable : public Orientation
                 
         void SetZYX(bool ZYX)                { m_ZYX = ZYX; }
 
-           TextureOb* const GetTextureOb() const { return m_TextureOb; }
-           bool GetZYX() const { return m_ZYX; }
+        TextureOb* const GetTextureOb() const { return m_TextureOb; }
+        bool GetZYX() const { return m_ZYX; }
         
         const glm::vec4 GetColor() const { return m_Color; }
                                             
         void RenderCollisionRadius() const;
+        void DrawAxis() const;
                 
     protected:
         void SetTransparency(float alpha)  { m_Color.a = alpha; }
@@ -70,7 +75,9 @@ class BaseDrawable : public Orientation
         
         void RenderMeshLight(const glm::vec2&, const glm::vec4&) const;
         void RenderMeshLightNormalMap(const glm::vec2&, const glm::vec4&) const;
-        
+
+        const glm::mat4& GetActualModelMatrix();
+                
         UnresolvedDataUniqueBaseDrawable data_unresolved_BaseDrawable;
         void SaveDataUniqueBaseDrawable(boost::property_tree::ptree&, const std::string&) const;
         void LoadDataUniqueBaseDrawable(const boost::property_tree::ptree&);
@@ -85,7 +92,16 @@ class BaseDrawable : public Orientation
         Mesh* m_Mesh; 
         
         AnimationBase* m_AnimationProgram;
-                        
+        
+        glm::mat4 m_Mm;     
+        glm::mat4 m_Tm;
+        glm::mat4 m_Rm;
+        glm::mat4 m_Sm;
+
+        glm::quat m_Qx;        
+        glm::quat m_Qy;
+        glm::quat m_Qz;
+                                                
     friend class BaseVehicleBuilder;
 };
 

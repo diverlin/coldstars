@@ -25,12 +25,8 @@
 
 #include "../render/Render.hpp"
 
-#include <glm/gtx/transform.hpp>
 
 DistantNebulaEffect::DistantNebulaEffect()
-:
-m_Angle(0.f), 
-m_DeltaAngle(0.f)
 {}
    
 DistantNebulaEffect::~DistantNebulaEffect()
@@ -42,16 +38,8 @@ void DistantNebulaEffect::Update()
 }        
 
 void DistantNebulaEffect::Render1(const Render& render)
-{
-    float rate = 2.0f;   
-    glm::vec3 center(m_Center.x*rate, m_Center.y*rate, m_Center.z);
-    glm::mat4 Tm = glm::translate(m_Center);
-    glm::mat4 Rm = glm::rotate(m_Angle, glm::vec3(0.0, 0.0, 1.0));
-    glm::mat4 Sm = glm::scale(m_Size*rate);
-      
-    glm::mat4 Mm = Tm * Rm * Sm;
-    
-    render.DrawQuad(m_TextureOb, Mm);
+{   
+    render.DrawQuad(m_TextureOb, GetActualModelMatrix());
 }
               
 void DistantNebulaEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
@@ -87,9 +75,7 @@ void DistantNebulaEffect::LoadDataUniqueDistantNebulaEffect(const boost::propert
 }
 
 void DistantNebulaEffect::ResolveDataUniqueDistantNebulaEffect()
-{}
-
-
+{}     
 
 DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
 {
@@ -104,10 +90,13 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
         delta_angle = getRandInt(8,12)*0.001 * getRandSign();        
     }
     
-    glm::vec3 center(getRandSign()*(float)getRandInt(0, 1000), getRandSign()*(float)getRandInt(0, 1000), -getRandInt(200, 499));
+    float z = -getRandInt(200, 499);
+    float rate = abs(z)/100.0;
+    
+    glm::vec3 center(getRandSign()*(float)getRandInt(0, 500*rate), getRandSign()*(float)getRandInt(0, 500*rate), z);
     
     DistantNebulaEffect* dn = new DistantNebulaEffect();
-    dn->SetTextureOb(textureOb);
+    dn->SetTextureOb(textureOb, glm::vec3(rate));
     dn->SetCenter(center);
     dn->SetAngle(angle);
     dn->SetDeltaAngle(delta_angle);

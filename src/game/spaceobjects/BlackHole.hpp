@@ -25,9 +25,9 @@
 
 class BlackHole : public BasePlanet
 {
-        public:  
-            BlackHole(int);
-            virtual ~BlackHole();
+    public:  
+        BlackHole(int);
+        virtual ~BlackHole();
 
         void BindShockWaveEffect(ShockWaveEffect* shockwave) { this->shockwave = shockwave; };
         
@@ -37,19 +37,19 @@ class BlackHole : public BasePlanet
         
         void UpdateInSpace(int, bool);
             
-            void Render_NEW(const glm::vec2& scroll_coords);    
-        void Render_OLD() const;
+        void Render_NEW(const glm::vec2& scroll_coords);    
+        void Render_OLD(const Render&);
         
-            virtual void SaveData(boost::property_tree::ptree&) const;
+        virtual void SaveData(boost::property_tree::ptree&) const;
         virtual void LoadData(const boost::property_tree::ptree&);
         virtual void ResolveData();
         
-        private:
-            ShockWaveEffect* shockwave;
-            
-             void UpdateInfo();    
-             
-             void SaveDataUniqueBlackHole(boost::property_tree::ptree&, const std::string&) const;        
+    private:
+        ShockWaveEffect* shockwave;
+        
+        void UpdateInfo();    
+        
+        void SaveDataUniqueBlackHole(boost::property_tree::ptree&, const std::string&) const;        
         void LoadDataUniqueBlackHole(const boost::property_tree::ptree&);
         void ResolveDataUniqueBlackHole();
 };

@@ -38,6 +38,24 @@
 #include <render/Mesh.hpp>
 
 
+#include <glm/gtx/transform.hpp>
+
+
+void QuatFromAngleAndAxis(glm::quat& quat, float angle, const glm::vec3& axis)
+{
+    // Here we calculate the sin( theta / 2) once for optimization
+    float result = sin(angle/2.0);
+
+    // Calculate the x, y and z of the quaternion
+    quat.x = axis.x * result;
+    quat.y = axis.y * result;
+    quat.z = axis.z * result;
+
+    // Calcualte the w value by cos( theta / 2 )
+    quat.w = cos(angle/2.0);
+    glm::normalize(quat); // ??
+}
+
 BaseDrawable::BaseDrawable()
 :
 m_ZYX(false),
@@ -158,6 +176,57 @@ void BaseDrawable::RenderMeshLightNormalMap(const glm::vec2& scroll_coords, cons
     
     glUseProgram(0);
     glActiveTexture(GL_TEXTURE0);
+}
+
+void BaseDrawable::DrawAxis() const
+{   glDisable(GL_TEXTURE_2D);
+    glLineWidth(10);
+
+    float r = 2.0f;
+    // draw axis X
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glBegin(GL_LINES);
+        glVertex3f(0.0f, 0.0f, 0.0f);
+        glVertex3f(r, 0.0f, 0.0f);
+    glEnd();
+                
+    // draw axis Y    
+    glColor3f(0.0f, 1.0f, 0.0f);    
+    glBegin(GL_LINES);        
+        glVertex3f(0.0f, 0.0f, 0.0f);
+        glVertex3f(0.0f, r, 0.0f);
+    glEnd();
+
+    // draw axis Z    
+    glColor3f(0.0f, 0.0f, 1.0f);    
+    glBegin(GL_LINES);        
+        glVertex3f(0.0f, 0.0f, 0.0f);
+        glVertex3f(0.0f, 0.0f, r);
+    glEnd();
+    glEnable(GL_TEXTURE_2D);
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+}
+
+const glm::mat4& BaseDrawable::GetActualModelMatrix()
+{
+    m_Tm = glm::translate(GetCenter());
+      
+    QuatFromAngleAndAxis(m_Qx, 75.0f, AXIS_Y);
+    QuatFromAngleAndAxis(m_Qy, -30.0f, AXIS_Y);   
+    QuatFromAngleAndAxis(m_Qz, GetAngle().z/40.0, AXIS_Z); 
+       
+    //glm::mat4 Rxm = glm::rotate(GetAngle().x, glm::vec3(1.0, 0.0, 0.0));
+    //glm::mat4 Rym = glm::rotate(GetAngle().y, glm::vec3(0.0, 1.0, 0.0));
+    //glm::mat4 Rzm = glm::rotate(GetAngle().z, glm::vec3(0.0, 0.0, 1.0));
+    //m_Rm = Rxm*Rym*Rzm;
+    m_Rm = glm::toMat4(m_Qx*m_Qy*m_Qz);
+    
+    m_Sm = glm::scale(GetSize());
+      
+    m_Mm = m_Tm * m_Rm * m_Sm;
+    
+    return m_Mm;
 }
 
 void BaseDrawable::SaveDataUniqueBaseDrawable(boost::property_tree::ptree& save_ptree, const std::string& root) const
