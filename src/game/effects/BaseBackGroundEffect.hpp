@@ -29,12 +29,15 @@ class BaseBackGroundEffect
     public:
         BaseBackGroundEffect();
         ~BaseBackGroundEffect();
-        
+
         void SetTextureOb(TextureOb* textureOb, const glm::vec3& scale_factor = glm::vec3(1.0, 1.0, 1.0));
 
         void SetCenter(const glm::vec3& center)     { m_Center = center; }        
         void SetSize(const glm::vec3& size)         { m_Size = size; }
-            
+        
+        void SetAngle(float angle)              { m_Angle = angle; }                       
+        void SetDeltaAngle(float delta_angle)   { m_DeltaAngle = delta_angle; }
+                
     protected:
         unsigned long int id;
         
@@ -44,7 +47,16 @@ class BaseBackGroundEffect
         std::string m_TextureObPath;
         
         glm::vec3 m_Center;
-        glm::vec3 m_Size;        
+        glm::vec3 m_Size;   
+        float m_Angle;
+        float m_DeltaAngle;
+           
+        glm::mat4 m_Mm;     
+        glm::mat4 m_Tm;
+        glm::mat4 m_Rm;
+        glm::mat4 m_Sm;
+        
+        const glm::mat4& GetActualModelMatrix();
         
         void SaveDataUniqueBaseBackGroundEffect(boost::property_tree::ptree&, const std::string&) const;        
         void LoadDataUniqueBaseBackGroundEffect(const boost::property_tree::ptree&);
