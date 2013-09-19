@@ -16,7 +16,7 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
+#include <render/Render.hpp>
 #include <items/equipment/GrappleEquipment.hpp>
 #include <items/modules/GrappleModule.hpp>
 
@@ -27,7 +27,6 @@
 #include <slots/ItemSlot.hpp>
 #include <spaceobjects/Vehicle.hpp>
 #include <resources/GuiTextureObCollector.hpp>
-#include <render/Render.hpp>
 
 
 GrappleEquipment::GrappleEquipment(int id)
@@ -167,25 +166,25 @@ void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
     }
 }
 
-void GrappleEquipment::RenderGrabTrail() const
+void GrappleEquipment::RenderGrabTrail(const Renderer& render)
 {
-    for (unsigned int i=0; i<target_vec.size(); i++)
-    {
-        float xl = target_vec[i]->GetCenter().x - item_slot->GetOwnerVehicle()->GetCenter().x;
-        float yl = target_vec[i]->GetCenter().y - item_slot->GetOwnerVehicle()->GetCenter().y;
+    //for (unsigned int i=0; i<target_vec.size(); i++)
+    //{
+        //float xl = target_vec[i]->GetCenter().x - item_slot->GetOwnerVehicle()->GetCenter().x;
+        //float yl = target_vec[i]->GetCenter().y - item_slot->GetOwnerVehicle()->GetCenter().y;
         
-        float len = sqrt((xl*xl) + (yl*yl));
+        //float len = sqrt((xl*xl) + (yl*yl));
         
-        float angle_inR = atan2(yl, xl);
+        //float angle_inR = atan2(yl, xl);
         
-        float angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
+        //float angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
         
-        drawLine(GuiTextureObCollector::Instance().grapple_trail, 
-                 item_slot->GetOwnerVehicle()->GetCenter(), 
-                 len, 
-                 angle_inD, 
-                 8);
-    }
+        //drawLine(GuiTextureObCollector::Instance().grapple_trail, 
+                 //item_slot->GetOwnerVehicle()->GetCenter(), 
+                 //len, 
+                 //angle_inD, 
+                 //8);
+    //}
 }
 
 

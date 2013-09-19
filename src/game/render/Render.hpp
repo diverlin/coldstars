@@ -29,11 +29,11 @@ class Mesh;
 
 enum class PROJECTION_TYPE { PERSPECTIVE, ORTHOGONAL};
 
-class Render : public NonCopyable
+class Renderer : public NonCopyable
 {
     public:
-        Render();
-        ~Render();
+        Renderer();
+        ~Renderer();
 
         void Init();
         
@@ -45,6 +45,8 @@ class Render : public NonCopyable
         void DrawQuad(TextureOb*, const glm::mat4&) const;
         void RenderMeshGeometry(const Mesh*, const glm::mat4&) const;
         void DrawParticleTextured(TextureOb*, const glm::vec3&, float) const;
+        
+        void DrawAxis(const glm::mat4&) const;
                                                          
     private:
         glm::mat4 m_Pm;

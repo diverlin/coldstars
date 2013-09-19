@@ -294,7 +294,7 @@ void DriveComplex::ClearPath()
 {
     path_center_vec.clear();
     //debug_midLeft_vec.clear();
-    angle_inD_vec.clear();
+    angle_vec.clear();
 }
 
 void DriveComplex::CalcPath2()
@@ -366,7 +366,7 @@ void DriveComplex::CalcPath2()
         target_dir = glm::normalize(target_dir);
                  
         path_center_vec.push_back(new_center);
-        angle_inD_vec.push_back(az);
+        angle_vec.push_back(az);
         
         cosa = dotUnits(orient, target_dir);
         
@@ -385,7 +385,7 @@ void DriveComplex::CalcPath2()
         new_center += target_dir*speed;
 
         path_center_vec.push_back(new_center);
-        angle_inD_vec.push_back(az);
+        angle_vec.push_back(az);
                         
         way = glm::vec3(target_pos - new_center);
     }
@@ -483,7 +483,7 @@ if (path_center_vec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<
         new_center += orient*speed_base*gravity_rate;
                 
         path_center_vec.push_back(new_center);
-        angle_inD_vec.push_back(az);
+        angle_vec.push_back(az);
     }           
 
     if (path_center_vec.size() > 1)
@@ -504,7 +504,7 @@ void DriveComplex::UpdatePosition()
         if (move_it < path_center_vec.size())
         {
             owner_vehicle->SetCenter(path_center_vec[move_it]);
-            owner_vehicle->SetAngleZ(angle_inD_vec[move_it]);
+            owner_vehicle->SetAngleZ(angle_vec[move_it]);
             move_it++;
         }
         else
@@ -518,17 +518,17 @@ void DriveComplex::UpdatePathVisualisation()
 {        
         visual_center_path.FillData(path_center_vec, 10, 10);
         visual_center_turn.FillData(path_center_vec, TURN_TIME, 14);
-           //visual_debug_midLeft_path.FillData(GuiTextureObCollector::Instance().dot_red->texture, &debug_midLeft_vec, 10, 10);}
+       //visual_debug_midLeft_path.FillData(GuiTextureObCollector::Instance().dot_red->texture, &debug_midLeft_vec, 10, 10);}
 }
 
 void DriveComplex::DrawPath()
 {
-        if (direction_list_END == false)
-        {
-                this->UpdatePathVisualisation();
-                visual_center_path.Draw();
-                visual_center_turn.Draw();
-                //visual_debug_midLeft_path.Draw();
-        }
+    if (direction_list_END == false)
+    {
+        this->UpdatePathVisualisation();
+        visual_center_path.Draw();
+        visual_center_turn.Draw();
+        //visual_debug_midLeft_path.Draw();
+    }
 }
 

@@ -38,7 +38,7 @@ class BlackHole : public BasePlanet
         void UpdateInSpace(int, bool);
             
         void Render_NEW(const glm::vec2& scroll_coords);    
-        void Render_OLD(const Render&);
+        void Render_OLD(const Renderer&);
         
         virtual void SaveData(boost::property_tree::ptree&) const;
         virtual void LoadData(const boost::property_tree::ptree&);

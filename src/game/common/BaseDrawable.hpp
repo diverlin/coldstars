@@ -22,6 +22,7 @@
 
 #include <common/Orientation.hpp>
 #include <types/MeshTypes.hpp>
+#include <render/Render.hpp>
 #include <glm/glm.hpp> // glm::vec
 #include <glm/gtx/quaternion.hpp>
 
@@ -62,8 +63,8 @@ class BaseDrawable : public Orientation
         
         const glm::vec4 GetColor() const { return m_Color; }
                                             
-        void RenderCollisionRadius() const;
-        void DrawAxis() const;
+        void RenderCollisionRadius(const Renderer&) const;
+        void RenderAxis(const Renderer&) const;
                 
     protected:
         void SetTransparency(float alpha)  { m_Color.a = alpha; }
@@ -104,5 +105,7 @@ class BaseDrawable : public Orientation
                                                 
     friend class BaseVehicleBuilder;
 };
+
+glm::mat4 getModelMatrix(const glm::vec3&, const glm::vec3&, const glm::vec3&);  // slow, mainly used for debug (draw collision radius, draw axis)
 
 #endif 

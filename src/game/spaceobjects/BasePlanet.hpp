@@ -48,7 +48,7 @@ class BasePlanet : public BaseSpaceEntity
         
         virtual void RenderStuffWhenFocusedInSpace() override final;
         
-        void RenderMesh_OLD(const Render&);
+        void RenderMesh_OLD(const Renderer&);
         
     protected:
         virtual void PutChildsToGarbage() const {}

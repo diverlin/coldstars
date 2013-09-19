@@ -356,7 +356,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
              
 void Player::RenderInSpace_NEW(StarSystem* starsystem)
 {   
-    Render& render = Screen::Instance().GetRender();
+    Renderer& render = Screen::Instance().GetRender();
     Camera& camera = Screen::Instance().GetCamera();
     camera.Update();
     
@@ -500,12 +500,13 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                     visible_ROCKET_vec[i]->UpdateRenderStuff();
                     visible_ROCKET_vec[i]->RenderInSpace(1/scale); 
                 } 
-
-                if (show.GetCollisionRadius() == true)
-                {
-                    RenderCollisionRadiusOfVisibleObjects();
-                }
                 */
+                //if (show.GetCollisionRadius() == true)
+                {
+                    RenderAxis(render);
+                    RenderCollisionRadius(render);
+                }
+
             }
             disable_BLEND();
             /*
@@ -1090,25 +1091,41 @@ void Player::ForceStateMachineReset() const
     npc->GetStateMachine().ForceReset();
 }    
 
-void Player::RenderCollisionRadiusOfVisibleObjects() const
+void Player::RenderCollisionRadius(const Renderer& render) const
 {
     enable_BLEND(); 
     {       
-        for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)    { visible_SPACESTATION_vec[i]->RenderCollisionRadius(); }            
-        for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)        { visible_SATELLITE_vec[i]->RenderCollisionRadius(); } 
-        for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)            { visible_SHIP_vec[i]->RenderCollisionRadius(); } 
+        for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)   { visible_SPACESTATION_vec[i]->RenderCollisionRadius(render); }            
+        for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)      { visible_SATELLITE_vec[i]->RenderCollisionRadius(render); } 
+        for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)           { visible_SHIP_vec[i]->RenderCollisionRadius(render); } 
         
-        for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)            { visible_ROCKET_vec[i]->RenderCollisionRadius(); }
-        for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)        { visible_CONTAINER_vec[i]->RenderCollisionRadius(); } 
+        for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)         { visible_ROCKET_vec[i]->RenderCollisionRadius(render); }
+        for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)      { visible_CONTAINER_vec[i]->RenderCollisionRadius(render); } 
                         
-        for(unsigned int i=0; i<visible_STAR_vec.size(); i++)             { visible_STAR_vec[i]->RenderCollisionRadius(); }
-        for(unsigned int i=0; i<visible_PLANET_vec.size(); i++)         { visible_PLANET_vec[i]->RenderCollisionRadius(); }
-        for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)        { visible_ASTEROID_vec[i]->RenderCollisionRadius(); } 
-        for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)        { visible_BLACKHOLE_vec[i]->RenderCollisionRadius(); } 
+        for(unsigned int i=0; i<visible_STAR_vec.size(); i++)           { visible_STAR_vec[i]->RenderCollisionRadius(render); }
+        for(unsigned int i=0; i<visible_PLANET_vec.size(); i++)         { visible_PLANET_vec[i]->RenderCollisionRadius(render); }
+        for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)       { visible_ASTEROID_vec[i]->RenderCollisionRadius(render); } 
+        for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)      { visible_BLACKHOLE_vec[i]->RenderCollisionRadius(render); } 
     }
     disable_BLEND();
 }
-         
+
+void Player::RenderAxis(const Renderer& render) const
+{    
+    enable_DEPTH(); 
+        for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)   { visible_SPACESTATION_vec[i]->RenderAxis(render); }            
+        for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)      { visible_SATELLITE_vec[i]->RenderAxis(render); } 
+        for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)           { visible_SHIP_vec[i]->RenderAxis(render); } 
+        
+        for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)         { visible_ROCKET_vec[i]->RenderAxis(render); }
+        for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)      { visible_CONTAINER_vec[i]->RenderAxis(render); } 
+                        
+        for(unsigned int i=0; i<visible_STAR_vec.size(); i++)           { visible_STAR_vec[i]->RenderAxis(render); }
+        for(unsigned int i=0; i<visible_PLANET_vec.size(); i++)         { visible_PLANET_vec[i]->RenderAxis(render); }
+        for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)       { visible_ASTEROID_vec[i]->RenderAxis(render); } 
+        for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)      { visible_BLACKHOLE_vec[i]->RenderAxis(render); } 
+    disable_DEPTH(); 
+}         
 
 void Player::SaveData(boost::property_tree::ptree& save_ptree) const
 {

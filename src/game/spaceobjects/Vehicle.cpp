@@ -1205,12 +1205,12 @@ void Vehicle::RenderInfo(const glm::vec2& center, int offset_x, int offset_y)
     }
 }
 
-void Vehicle::RenderGrabTrail() const
+void Vehicle::RenderGrabTrail(const Renderer& render) const
 {
-    m_SlotGrapple->GetGrappleEquipment()->RenderGrabTrail();
+    m_SlotGrapple->GetGrappleEquipment()->RenderGrabTrail(render);
 }
         
-void Vehicle::RenderKorpus(const Render& render)
+void Vehicle::RenderKorpus(const Renderer& render)
 {
     render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
 }

@@ -36,8 +36,8 @@ class SpaceStation : public Vehicle
         
         virtual void UpdateInSpace(int, bool) override final;
         
-        void RenderInSpace_2D(const Render&, float);
-        void RenderInSpace_3D(const Render&, const glm::vec2&, float);         
+        void RenderInSpace_2D(const Renderer&, float);
+        void RenderInSpace_3D(const Renderer&, const glm::vec2&, float);         
                 
         virtual void SaveData(boost::property_tree::ptree&) const override final;
         virtual void LoadData(const boost::property_tree::ptree&) override final;

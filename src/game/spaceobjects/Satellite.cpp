@@ -95,7 +95,7 @@ void Satellite::UpdateRenderStuff()
     UpdateOrientation();
 }
 
-void Satellite::RenderInSpace(const Render& render, float scale)
+void Satellite::RenderInSpace(const Renderer& render, float scale)
 {   
     UpdateRenderAnimation();
         
@@ -113,7 +113,7 @@ void Satellite::RenderInSpace(const Render& render, float scale)
     }
 }
 
-void Satellite::RenderAtPlanet(const Render& render)
+void Satellite::RenderAtPlanet(const Renderer& render)
 {
     RenderKorpus(render);
     

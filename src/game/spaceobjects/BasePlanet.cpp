@@ -73,7 +73,7 @@ void BasePlanet::RenderStuffWhenFocusedInSpace()
     m_Orbit.DrawPath();
 }
 
-void BasePlanet::RenderMesh_OLD(const Render& render)
+void BasePlanet::RenderMesh_OLD(const Renderer& render)
 {
     glBindTexture(GL_TEXTURE_2D, GetTextureOb()->texture);
     render.RenderMeshGeometry(GetMesh(), GetActualModelMatrix());

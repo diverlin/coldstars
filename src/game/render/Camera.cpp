@@ -23,8 +23,8 @@
 
 Camera::Camera()
 :
-m_InertiaFactor(0.95),
-m_SpeedMax(5.0)
+m_InertiaFactor(CAMERA_INERTIA),
+m_SpeedMax(CAMERA_SPEED_MAX)
 {
     m_Pos  = glm::vec3(0.0f, 0.0f, 499.0f);
     m_Dir  = glm::vec3(0.0f, 0.0f, -1.0f); 
