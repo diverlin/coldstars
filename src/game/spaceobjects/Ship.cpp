@@ -24,8 +24,6 @@
 
 #include <world/starsystem.hpp>
 
-#include <render/Render.hpp>
-
 #include <effects/Shield.hpp>
 
 #include <items/equipment/GrappleEquipment.hpp>
@@ -97,6 +95,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 {   
     CheckDeath(show_effect);
     GetComplexProtector().GetShieldEffect()->Update();
+GetComplexDrive().UpdatePosition(); // debug
             
     if (time > 0)
     {
@@ -115,12 +114,13 @@ void Ship::UpdateInSpace(int time, bool show_effect)
     }
 }
 
-void Ship::RenderInSpace_2D(const Render& render, float scale)
+void Ship::RenderInSpace_2D(const Renderer& render, float scale)
 {   
-    //setColor4f(GetColor());
+    UpdateRenderAnimation();
+    setColor4f(GetColor());
     //if (GetProperties().grab_radius > 0)
     //{
-        //RenderGrabTrail();
+        //RenderGrabTrail(render);
     //}
         
     RenderKorpus(render);
@@ -143,7 +143,7 @@ void Ship::RenderInSpace_2D(const Render& render, float scale)
     //}
 }
 
-void Ship::RenderInSpace_3D(const Render& render, const glm::vec2& scroll_coords, float scale)
+void Ship::RenderInSpace_3D(const Renderer& render, const glm::vec2& scroll_coords, float scale)
 {
     //UpdateRenderAnimation();
     //RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());
@@ -158,7 +158,7 @@ void Ship::RenderInSpace_3D(const Render& render, const glm::vec2& scroll_coords
     //disable_BLEND();
 }
 
-void Ship::RenderAtPlanet(const Render& render, const glm::vec3& center)
+void Ship::RenderAtPlanet(const Renderer& render, const glm::vec3& center)
 {
     SetCenter(center);
     SetAngleZ(0);

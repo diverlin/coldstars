@@ -30,7 +30,7 @@ class DistantStarEffect : public BaseBackGroundEffect
         DistantStarEffect();
         ~DistantStarEffect();
         
-        void Render1(const Render&) const;
+        void Render(const Renderer&) const;
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;        
         void LoadData(const boost::property_tree::ptree&);

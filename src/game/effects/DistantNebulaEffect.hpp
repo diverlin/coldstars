@@ -32,7 +32,7 @@ class DistantNebulaEffect : public BaseBackGroundEffect
         
         void Update();
         
-        void Render1(const Render&);
+        void Render(const Renderer&);
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;        
         void LoadData(const boost::property_tree::ptree&);

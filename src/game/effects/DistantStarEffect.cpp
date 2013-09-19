@@ -29,7 +29,7 @@ DistantStarEffect::DistantStarEffect()
 DistantStarEffect::~DistantStarEffect()
 {}
 
-void DistantStarEffect::Render1(const Render& render) const
+void DistantStarEffect::Render(const Renderer& render) const
 {   
     render.DrawParticleTextured(m_TextureOb, m_Center, m_Size.x);
 }

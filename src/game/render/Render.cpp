@@ -31,13 +31,13 @@
 #include "../common/constants.hpp"
 
 
-Render::Render() 
+Renderer::Renderer() 
 {}
 
-Render::~Render() 
+Renderer::~Renderer() 
 {}
 
-void Render::Init()
+void Renderer::Init()
 {
     glClearColor(0.f, 0.f, 0.f, 0.f);
     
@@ -57,40 +57,40 @@ void Render::Init()
     glCullFace(GL_BACK); 
 }
 
-void Render::SetPerspectiveProjection(float w, float h) 
+void Renderer::SetPerspectiveProjection(float w, float h) 
 {        
     m_Pm = glm::perspective(90.0f, w/h, 0.1f, 1000.0f);
  
     UpdateProjectionViewMatrix();
 }
 
-void Render::SetOrthogonalProjection(float w, float h) 
+void Renderer::SetOrthogonalProjection(float w, float h) 
 {        
     m_Pm = glm::ortho(0.0f, w, 0.0f, h, 0.1f, 1000.0f);
 
     UpdateProjectionViewMatrix();
 }
 
-void Render::ComposeViewMatrix(const glm::mat4& Vm)  
+void Renderer::ComposeViewMatrix(const glm::mat4& Vm)  
 { 
     m_Vm = Vm; 
     UpdateProjectionViewMatrix(); 
 }
 
-void Render::ComposeModelMatrix(const glm::mat4& Mm) const
+void Renderer::ComposeModelMatrix(const glm::mat4& Mm) const
 { 
     glm::mat4 PVMm = m_PVm * Mm; // needs to be done inside vertex shader
     glLoadMatrixf(&PVMm[0][0]);     
 }
                                  
-void Render::UpdateProjectionViewMatrix() 
+void Renderer::UpdateProjectionViewMatrix() 
 { 
     m_PVm = m_Pm * m_Vm; 
 }
 
 
 
-void Render::DrawQuad(TextureOb* texOb, const glm::mat4& Mm) const
+void Renderer::DrawQuad(TextureOb* texOb, const glm::mat4& Mm) const
 {
     glBindTexture(GL_TEXTURE_2D, texOb->texture);
     int frame = texOb->updateAnimationFrame();
@@ -107,13 +107,13 @@ void Render::DrawQuad(TextureOb* texOb, const glm::mat4& Mm) const
     glEnd();
 }
 
-void Render::RenderMeshGeometry(const Mesh* mesh, const glm::mat4& Mm) const
+void Renderer::RenderMeshGeometry(const Mesh* mesh, const glm::mat4& Mm) const
 {
     ComposeModelMatrix(Mm);                     
     mesh->Draw();
 }
 
-void Render::DrawParticleTextured(TextureOb* texOb, const glm::vec3& center, float size) const
+void Renderer::DrawParticleTextured(TextureOb* texOb, const glm::vec3& center, float size) const
 {
     glBindTexture(GL_TEXTURE_2D, texOb->texture);
     
@@ -126,6 +126,40 @@ void Render::DrawParticleTextured(TextureOb* texOb, const glm::vec3& center, flo
     glEnd();
 }    
 
+void Renderer::DrawAxis(const glm::mat4& Mm) const
+{
+    ComposeModelMatrix(Mm); 
+    
+    glDisable(GL_TEXTURE_2D);
+    glLineWidth(4);
+
+    float r = 1.5f;
+    // draw axis X
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glBegin(GL_LINES);
+        glVertex3f(0.0f, 0.0f, 0.0f);
+        glVertex3f(r, 0.0f, 0.0f);
+    glEnd();
+                
+    // draw axis Y    
+    glColor3f(0.0f, 1.0f, 0.0f);    
+    glBegin(GL_LINES);        
+        glVertex3f(0.0f, 0.0f, 0.0f);
+        glVertex3f(0.0f, r, 0.0f);
+    glEnd();
+
+    // draw axis Z    
+    glColor3f(0.0f, 0.0f, 1.0f);    
+    glBegin(GL_LINES);        
+        glVertex3f(0.0f, 0.0f, 0.0f);
+        glVertex3f(0.0f, 0.0f, r);
+    glEnd();
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+
+    glEnable(GL_TEXTURE_2D);
+}
+        
 void clearScreen() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 void resetRenderTransformation() { glLoadIdentity(); }
 

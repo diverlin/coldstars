@@ -125,7 +125,7 @@ class StarSystem : public BaseSpaceEntity
 
         void RestoreDefaultColor();
         void RestoreSceneColor();
-        void DrawBackground(const Render&, const glm::vec2&);
+        void DrawBackground(const Renderer&, const glm::vec2&);
                 void DrawOrbits();
                 void DrawPath();
                 

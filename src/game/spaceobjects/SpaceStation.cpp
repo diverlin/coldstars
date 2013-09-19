@@ -107,7 +107,7 @@ void SpaceStation::UpdateRenderStuff_2D()
     //}
 }
 
-void SpaceStation::RenderInSpace_2D(const Render& render, float scale)
+void SpaceStation::RenderInSpace_2D(const Renderer& render, float scale)
 {     
     //UpdateRenderStuff_2D();
         
@@ -126,7 +126,7 @@ void SpaceStation::RenderInSpace_2D(const Render& render, float scale)
 }
 
                          
-void SpaceStation::RenderInSpace_3D(const Render& render, const glm::vec2& scroll_coords, float scale)
+void SpaceStation::RenderInSpace_3D(const Renderer& render, const glm::vec2& scroll_coords, float scale)
 {         
     //UpdateRenderAnimation();    
     //RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());        

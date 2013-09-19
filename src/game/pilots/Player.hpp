@@ -86,7 +86,7 @@ class Player : public Base
         void AddIfVisible(BaseParticleSystem*); 
         void AddIfVisible(VerticalFlowText*); 
           
-          bool IsAbleToGetFullControlOnScanedVehicle(bool force_full_control = false) const;
+        bool IsAbleToGetFullControlOnScanedVehicle(bool force_full_control = false) const;
           
         void RunSession(const TurnTimer&); 
         
@@ -127,8 +127,9 @@ class Player : public Base
     
         void RenderInSpace(StarSystem*, bool, bool, bool); 
             void RenderInSpace_NEW(StarSystem*);
-            void RenderCollisionRadiusOfVisibleObjects() const;
-                        
+            void RenderCollisionRadius(const Renderer&) const;
+            void RenderAxis(const Renderer&) const;
+                                    
         void SessionInSpace(StarSystem*, const TurnTimer&);
         void SessionInKosmoport();
         void SessionInNatureLand();

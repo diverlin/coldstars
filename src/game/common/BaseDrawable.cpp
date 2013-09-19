@@ -90,10 +90,18 @@ void BaseDrawable::BindData2D(TextureOb* textureOb)
 } 
 
 
-void BaseDrawable::RenderCollisionRadius() const
+void BaseDrawable::RenderCollisionRadius(const Renderer& render) const
 {
     TextureOb* texOb_collision_radius =  GuiTextureObCollector::Instance().radar_range;
-    drawQuad(texOb_collision_radius, GetCenter(), glm::vec3(2*GetCollisionRadius(), 2*GetCollisionRadius(), 2*GetCollisionRadius()));
+    glm::vec3 zero;
+    glm::mat4 Mm = getModelMatrix(GetCenter(), glm::vec3(2*GetCollisionRadius()), zero); 
+    render.DrawQuad(texOb_collision_radius, Mm);
+}
+
+void BaseDrawable::RenderAxis(const Renderer& render) const
+{
+    glm::mat4 Mm = getModelMatrix(GetCenter(), glm::vec3(2*GetCollisionRadius()), GetAngle()); 
+    render.DrawAxis(Mm);
 }
 
 void BaseDrawable::UpdateRenderAnimation()
@@ -178,36 +186,6 @@ void BaseDrawable::RenderMeshLightNormalMap(const glm::vec2& scroll_coords, cons
     glActiveTexture(GL_TEXTURE0);
 }
 
-void BaseDrawable::DrawAxis() const
-{   glDisable(GL_TEXTURE_2D);
-    glLineWidth(10);
-
-    float r = 2.0f;
-    // draw axis X
-    glColor3f(1.0f, 0.0f, 0.0f);
-    glBegin(GL_LINES);
-        glVertex3f(0.0f, 0.0f, 0.0f);
-        glVertex3f(r, 0.0f, 0.0f);
-    glEnd();
-                
-    // draw axis Y    
-    glColor3f(0.0f, 1.0f, 0.0f);    
-    glBegin(GL_LINES);        
-        glVertex3f(0.0f, 0.0f, 0.0f);
-        glVertex3f(0.0f, r, 0.0f);
-    glEnd();
-
-    // draw axis Z    
-    glColor3f(0.0f, 0.0f, 1.0f);    
-    glBegin(GL_LINES);        
-        glVertex3f(0.0f, 0.0f, 0.0f);
-        glVertex3f(0.0f, 0.0f, r);
-    glEnd();
-    glEnable(GL_TEXTURE_2D);
-
-    glColor3f(1.0f, 1.0f, 1.0f);
-}
-
 const glm::mat4& BaseDrawable::GetActualModelMatrix()
 {
     m_Tm = glm::translate(GetCenter());
@@ -260,4 +238,24 @@ void BaseDrawable::ResolveDataUniqueBaseDrawable()
     }
     
     m_TextureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseDrawable.textureOb_path);
+}
+
+
+glm::mat4 getModelMatrix(const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle)
+{
+    glm::mat4 Tm = glm::translate(center);
+     
+    glm::quat Qx, Qy, Qz;
+    
+    QuatFromAngleAndAxis(Qx, angle.x, AXIS_X);
+    QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);   
+    QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z); 
+       
+    glm::mat4 Rm = glm::toMat4(Qx*Qy*Qz);
+    
+    glm::mat4 Sm = glm::scale(size);
+      
+    glm::mat4 Mm = Tm * Rm * Sm;
+    
+    return Mm;
 }

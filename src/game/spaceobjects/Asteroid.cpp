@@ -107,7 +107,7 @@ void Asteroid::Render_NEW(const glm::vec2& scroll_coords)
     RenderMeshLightNormalMap(scroll_coords, GetStarSystem()->GetColor4f());
 }
     
-void Asteroid::Render_OLD(const Render& render)
+void Asteroid::Render_OLD(const Renderer& render)
 {
     RenderMesh_OLD(render);    
 }

@@ -22,13 +22,17 @@
 #include <common/NonCopyable.hpp>
 #include <glm/glm.hpp>
 
+const float CAMERA_SPEED_MAX = 10.0f;
+const float CAMERA_INERTIA = 0.95f;
+
 class Camera : public NonCopyable
 {
     public:
         Camera();
         ~Camera();
 
-        const glm::mat4& GetViewMatrix() { return m_Vm; }
+        const glm::vec3& GetPos() const { return m_Pos; }
+        const glm::mat4& GetViewMatrix() const { return m_Vm; }
          
         void AddMoveSpeed(const glm::vec3&);
         

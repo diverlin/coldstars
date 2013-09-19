@@ -127,7 +127,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
     //UpdateRotation(); // not relevant for render NEW
 }    
     
-void Star::Render_NEW(const Render& render) const
+void Star::Render_NEW(const Renderer& render) const
 {
     glUseProgram(ShaderCollector::Instance().multitexturing);
     

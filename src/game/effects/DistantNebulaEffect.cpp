@@ -37,7 +37,7 @@ void DistantNebulaEffect::Update()
     m_Angle += m_DeltaAngle;  
 }        
 
-void DistantNebulaEffect::Render1(const Render& render)
+void DistantNebulaEffect::Render(const Renderer& render)
 {   
     render.DrawQuad(m_TextureOb, GetActualModelMatrix());
 }

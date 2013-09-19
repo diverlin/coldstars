@@ -123,7 +123,8 @@ void Screen::MovingBy(const glm::vec2& delta)
 }
 
 void Screen::UpdateInSpace()
-{    
+{   
+    rect.SetBottomLeft(m_Camera.GetPos().x, m_Camera.GetPos().y);
     //if (auto_scroll == true)
     //{
         //glm::vec2 d_pos;
@@ -148,8 +149,8 @@ void Screen::Draw()
     //drawTexturedRect(texOb, rect2, -2.0);
     //glPopMatrix();
     
-      DrawFps();
-      wrDrawSpecific();
+    DrawFps();
+    wrDrawSpecific();
 }
 
 void  Screen::IncreaseScale() 

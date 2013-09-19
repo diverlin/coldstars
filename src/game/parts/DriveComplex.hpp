@@ -80,7 +80,7 @@ class DriveComplex
 
         //std::vector<glm::vec2> debug_midLeft_vec;
         std::vector<glm::vec3> path_center_vec;
-        std::vector<float> angle_inD_vec;
+        std::vector<float> angle_vec;
         
         bool has_target;
         bool direction_list_END;

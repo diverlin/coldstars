@@ -158,6 +158,9 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id,  TYPE::ENTI
     
     ship->CreateDriveComplexTextureDependedStuff();
     ship->CreateProtectionComplexTextureDependedStuff();
-                            
+     
+    //AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(0.02);
+    //ship->SetRenderAnimation(animation_program);
+                           
     CreateItemSlots(ship);
 }

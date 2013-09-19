@@ -16,8 +16,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef LAZEREQUIPMENT_H
-#define LAZEREQUIPMENT_H
+#ifndef LAZEREQUIPMENT_HPP
+#define LAZEREQUIPMENT_HPP
 
 #include "BaseEquipment.hpp"
 class BaseSpaceEntity;

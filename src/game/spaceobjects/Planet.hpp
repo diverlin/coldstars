@@ -44,7 +44,7 @@ class Planet : public BasePlanet
         void UpdateInSpaceInStatic();
         
         void Render_NEW(const glm::vec2&);
-        void Render_OLD(const Render&);
+        void Render_OLD(const Renderer&);
         
         virtual void SaveData(boost::property_tree::ptree&) const override final;
         virtual void LoadData(const boost::property_tree::ptree&) override final;
