@@ -39,26 +39,11 @@
 
 
 #include <glm/gtx/transform.hpp>
+#include <math/QuaternionUtils.hpp>
 
-
-void QuatFromAngleAndAxis(glm::quat& quat, float angle, const glm::vec3& axis)
-{
-    // Here we calculate the sin( theta / 2) once for optimization
-    float result = sin(angle/2.0);
-
-    // Calculate the x, y and z of the quaternion
-    quat.x = axis.x * result;
-    quat.y = axis.y * result;
-    quat.z = axis.z * result;
-
-    // Calcualte the w value by cos( theta / 2 )
-    quat.w = cos(angle/2.0);
-    glm::normalize(quat); // ??
-}
 
 BaseDrawable::BaseDrawable()
 :
-m_ZYX(false),
 m_TextureOb(nullptr), 
 m_Mesh(nullptr), 
 m_AnimationProgram(nullptr)
@@ -101,7 +86,9 @@ void BaseDrawable::RenderCollisionRadius(const Renderer& render) const
 void BaseDrawable::RenderAxis(const Renderer& render) const
 {
     glm::mat4 Mm = getModelMatrix(GetCenter(), glm::vec3(2*GetCollisionRadius()), GetAngle()); 
-    render.DrawAxis(Mm);
+    render.DrawAxis(Mm, /*width*/4);
+    //render.DrawVector(GetDir(), GetCenter(), GetSize().x, /*width*/6);
+    render.DrawVector(GetAxis(), Mm, /*width*/6);
 }
 
 void BaseDrawable::UpdateRenderAnimation()
@@ -141,21 +128,25 @@ bool BaseDrawable::UpdateFadeOutEffect()
 }
 
 const glm::mat4& BaseDrawable::GetActualModelMatrix()
-{
-    m_Tm = glm::translate(GetCenter());
+{    
+    glm::vec3 orient(1.0f, 1.0f, 1.0f);
       
-    QuatFromAngleAndAxis(m_Qx, GetAngle().x, GetDir());
+    RotationBetweenVectors(m_QuatPosition, GetAxisOrigin(), glm::normalize(GetAxis()));
+    QuatFromAngleAndAxis(m_QuatAnimation, GetAngle().z, GetAxisOrigin());
+    
     //QuatFromAngleAndAxis(m_Qx, GetAngle().x, AXIS_X);
     //QuatFromAngleAndAxis(m_Qy, GetAngle().y, AXIS_Y);   
-    QuatFromAngleAndAxis(m_Qz, GetAngle().z, AXIS_Z); 
+    //QuatFromAngleAndAxis(m_Qz, GetAngle().z, AXIS_Z); 
        
-    m_Rm = glm::toMat4(m_Qz*m_Qy*m_Qx);
-    
-    m_Sm = glm::scale(GetSize());
+    //m_Rm = glm::toMat4(m_Qz*m_Qy*m_Qx*Q);
+
+    m_MatrixTranslate = glm::translate(GetCenter());    
+    m_MatrixRotate    = glm::toMat4(m_QuatPosition * m_QuatAnimation); 
+    m_MatrixScale     = glm::scale(GetSize());
       
-    m_Mm = m_Tm * m_Rm * m_Sm;
+    m_MatrixModel = m_MatrixTranslate * m_MatrixRotate * m_MatrixScale;
     
-    return m_Mm;
+    return m_MatrixModel;
 }
 
 void BaseDrawable::SaveDataUniqueBaseDrawable(boost::property_tree::ptree& save_ptree, const std::string& root) const
@@ -202,9 +193,9 @@ glm::mat4 getModelMatrix(const glm::vec3& center, const glm::vec3& size, const g
      
     glm::quat Qx, Qy, Qz;
     
-    QuatFromAngleAndAxis(Qx, angle.x, AXIS_X);
-    QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);   
-    QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z); 
+    //QuatFromAngleAndAxis(Qx, angle.x, AXIS_X);
+    //QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);   
+    //QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z); 
        
     glm::mat4 Rm = glm::toMat4(Qx*Qy*Qz);
     

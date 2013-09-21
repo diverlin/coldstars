@@ -94,7 +94,6 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     glm::vec3 step3 = glm::vec3(0.0f, 0.0f, step);
     AnimationConstantRotation* animation_program = new AnimationConstantRotation(step3);
     planet->SetRenderAnimation(animation_program);
-    planet->SetZYX(false);
     
     //if (getRandBool()) 
     {

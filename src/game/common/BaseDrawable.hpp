@@ -55,11 +55,8 @@ class BaseDrawable : public Orientation
         bool Is3D() const                 { return (m_Mesh != nullptr); }
         //const glm::vec3& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
         const Mesh* const GetMesh() const     { return m_Mesh; }
-                
-        void SetZYX(bool ZYX)                { m_ZYX = ZYX; }
 
         TextureOb* const GetTextureOb() const { return m_TextureOb; }
-        bool GetZYX() const { return m_ZYX; }
         
         const glm::vec4 GetColor() const { return m_Color; }
                                             
@@ -82,8 +79,6 @@ class BaseDrawable : public Orientation
         void ResolveDataUniqueBaseDrawable();
 
     private:
-        bool m_ZYX;
-                          
         glm::vec4 m_Color;
         
         TextureOb* m_TextureOb;
@@ -91,14 +86,14 @@ class BaseDrawable : public Orientation
         
         AnimationBase* m_AnimationProgram;
         
-        glm::mat4 m_Mm;     
-        glm::mat4 m_Tm;
-        glm::mat4 m_Rm;
-        glm::mat4 m_Sm;
+        glm::mat4 m_MatrixModel;     
+        glm::mat4 m_MatrixTranslate;
+        glm::mat4 m_MatrixRotate;
+        glm::mat4 m_MatrixScale;
 
-        glm::quat m_Qx;        
-        glm::quat m_Qy;
-        glm::quat m_Qz;
+        //glm::quat m_QuatOrigin;        
+        glm::quat m_QuatPosition;
+        glm::quat m_QuatAnimation;        
                                                 
     friend class BaseVehicleBuilder;
 };

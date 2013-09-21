@@ -92,7 +92,6 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
     glm::vec3 step3 = glm::vec3(0.0f, 0.0f, step);
     AnimationConstantRotation* animation_program = new AnimationConstantRotation(step3);
     asteroid->SetRenderAnimation(animation_program);
-    asteroid->SetZYX(false);
                 
     asteroid->SetGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
 }

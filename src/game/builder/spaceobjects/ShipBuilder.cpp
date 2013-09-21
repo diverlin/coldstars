@@ -143,7 +143,6 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id,  TYPE::ENTI
         float threshold = 10;
         AnimationWiggleAxisX* animation_program = new AnimationWiggleAxisX(step3, threshold);
         ship->SetRenderAnimation(animation_program);
-        ship->SetZYX(true);
 
         ship->BindData3D(mesh, mesh->GetTextureOb(), scale);
     }

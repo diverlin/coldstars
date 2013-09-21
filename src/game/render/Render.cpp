@@ -179,14 +179,16 @@ void Renderer::DrawParticleTextured(TextureOb* texOb, const glm::vec3& center, f
     glEnd();
 }    
 
-void Renderer::DrawAxis(const glm::mat4& Mm) const
+void Renderer::DrawAxis(const glm::mat4& Mm, float width) const
 {
-    ComposeModelMatrix(Mm); 
+    float r = 1.5f;
     
     glDisable(GL_TEXTURE_2D);
-    glLineWidth(4);
+    
+    ComposeModelMatrix(Mm); 
+    
+    glLineWidth(width);
 
-    float r = 1.5f;
     // draw axis X
     glColor3f(1.0f, 0.0f, 0.0f);
     glBegin(GL_LINES);
@@ -209,10 +211,45 @@ void Renderer::DrawAxis(const glm::mat4& Mm) const
     glEnd();
 
     glColor3f(1.0f, 1.0f, 1.0f);
-
+    
     glEnable(GL_TEXTURE_2D);
 }
-        
+      
+      
+void Renderer::DrawVector(const glm::vec3& v, const glm::vec3& pos, float length, float width) const
+{
+    glDisable(GL_TEXTURE_2D);
+    
+    ComposeModelMatrix(glm::mat4(1.0f)); 
+    
+    glLineWidth(width); 
+    glColor3f(1.0f, 1.0f, 1.0f);
+    
+    glBegin(GL_LINES);  
+        glVertex3f(pos.x, pos.y, pos.z);
+        glVertex3f(pos.x+length*v.x, pos.y+length*v.y, pos.z+length*v.z);
+    glEnd();
+    
+    glEnable(GL_TEXTURE_2D);
+}
+
+void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) const
+{
+    glDisable(GL_TEXTURE_2D);
+    
+    ComposeModelMatrix(Mm); 
+    
+    glLineWidth(width); 
+    glColor3f(1.0f, 1.0f, 1.0f);
+    
+    glBegin(GL_LINES);        
+        glVertex3f(0.0f, 0.0f, 0.0f);
+        glVertex3f(v.x, v.y, v.z);
+    glEnd();
+    
+    glEnable(GL_TEXTURE_2D);
+}
+  
 void clearScreen() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 void resetRenderTransformation() { glLoadIdentity(); }
 
