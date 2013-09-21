@@ -28,7 +28,7 @@
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
 
-#include <animations/AnimationConstantRotationAxisX.hpp>
+#include <animations/AnimationConstantRotation.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 #include <render/Mesh.hpp>
@@ -114,9 +114,9 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
         glm::vec3 scale(50);
         drive_equipment->BindData3D(mesh, mesh->GetTextureOb(), scale);
         
-        float step = getRandInt(10, 40)*0.01;
-        AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);
-        drive_equipment->SetRenderAnimation(animation_program);
+        //float step = getRandInt(10, 40)*0.01;
+        //AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);
+        //drive_equipment->SetRenderAnimation(animation_program);
         drive_equipment->SetAngle(glm::vec3(0, getRandInt(10, 45), getRandInt(10, 45)));    
         drive_equipment->SetZYX(true);        
     }

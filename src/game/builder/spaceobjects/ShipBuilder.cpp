@@ -86,11 +86,11 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id,  TYPE::ENTI
     TextureOb* texOb = nullptr;
     //if (getRandBool() == true)
     //{
-        texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
-           //}
-           //else
-           //{    
-               //mesh = MeshCollector::Instance().GetMeshByTypeId(MESH::SPACESTATION_ID);
+        //texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
+   //}
+   //else
+   //{    
+        mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPACESTATION_ID);
     //}
 
     float protection_rate = 1;
@@ -139,8 +139,9 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id,  TYPE::ENTI
         glm::vec3 scale(scale_comp, scale_comp, scale_comp);
         
         float step = getRandInt(10, 20)*0.01;
+        glm::vec3 step3(step, 0.0f, 0.0f);
         float threshold = 10;
-        AnimationWiggleAxisX* animation_program = new AnimationWiggleAxisX(step, threshold);
+        AnimationWiggleAxisX* animation_program = new AnimationWiggleAxisX(step3, threshold);
         ship->SetRenderAnimation(animation_program);
         ship->SetZYX(true);
 
@@ -159,8 +160,8 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id,  TYPE::ENTI
     ship->CreateDriveComplexTextureDependedStuff();
     ship->CreateProtectionComplexTextureDependedStuff();
      
-    //AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(0.02);
-    //ship->SetRenderAnimation(animation_program);
+    AnimationConstantRotation* animation_program = new AnimationConstantRotation(glm::vec3(0.02f, 0.0f, 0.0f));
+    ship->SetRenderAnimation(animation_program);
                            
     CreateItemSlots(ship);
 }

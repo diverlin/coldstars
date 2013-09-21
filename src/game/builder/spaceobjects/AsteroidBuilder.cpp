@@ -89,7 +89,8 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
     asteroid->SetAngle(glm::vec3(getRandInt(10, 40), getRandInt(10, 40), 0));            
     
     float step = getRandInt(10, 100)*0.01;
-    AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
+    glm::vec3 step3 = glm::vec3(0.0f, 0.0f, step);
+    AnimationConstantRotation* animation_program = new AnimationConstantRotation(step3);
     asteroid->SetRenderAnimation(animation_program);
     asteroid->SetZYX(false);
                 

@@ -113,6 +113,59 @@ void Renderer::RenderMeshGeometry(const Mesh* mesh, const glm::mat4& Mm) const
     mesh->Draw();
 }
 
+void Renderer::RenderMeshLight(const Mesh* mesh, const TextureOb* textureOb, const glm::mat4& Mm, const glm::vec2& scroll_coords, const glm::vec4& color) const
+{
+    float ambient_factor = 0.25;       
+        
+    glm::vec3 eye_pos = Screen::Instance().GetCamera().GetPos();
+    
+    glUseProgram(ShaderCollector::Instance().light);
+    {
+        glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(Mm)));
+    
+        glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().light, "u_ModelMatrix"), 1, GL_FALSE, &Mm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().light, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);
+        glUniformMatrix3fv(glGetUniformLocation(ShaderCollector::Instance().light, "u_NormalModelMatrix"), 1, GL_FALSE, &NormalModelMatrix[0][0]);
+                
+        glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "u_LightPos"), 0.0f, 0.0f, 200.0);
+        glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "u_EyePos"), eye_pos.x, eye_pos.y, eye_pos.z);
+        
+        glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "u_DiffColor"), color.r, color.g, color.b, color.a);
+        glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "u_AmbientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
+        
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textureOb->texture); // ???
+        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "u_Texture0"), 0);
+                            
+        mesh->Draw();
+    }
+    glUseProgram(0);
+}
+
+void Renderer::RenderMeshLightNormalMap(const Mesh* mesh, const TextureOb* textureOb, const glm::mat4& Mm, const glm::vec2& scroll_coords, const glm::vec4& color) const
+{
+    float ambient_factor = 0.25;
+    
+    glUseProgram(ShaderCollector::Instance().light_normalmap);
+    {
+        glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_lightPos"), -scroll_coords.x, -scroll_coords.y, 0.0);
+        glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_eyePos"), -scroll_coords.x, -scroll_coords.y, 0.0);
+        glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_diffColor"), color.r, color.g, color.b, color.a);
+        glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
+                
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_texture"), 0);
+        
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, textureOb->normalmap);
+        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_normalmap"), 1);
+                
+        RenderMeshGeometry(mesh, Mm);
+    }
+    glUseProgram(0);
+}
+        
 void Renderer::DrawParticleTextured(TextureOb* texOb, const glm::vec3& center, float size) const
 {
     glBindTexture(GL_TEXTURE_2D, texOb->texture);

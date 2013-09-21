@@ -19,7 +19,10 @@
 #include "AnimationWiggleAxisX.hpp"
 #include <cmath>
 
-AnimationWiggleAxisX::AnimationWiggleAxisX(float step, float threshold):AnimationBase(step), threshold(threshold)
+AnimationWiggleAxisX::AnimationWiggleAxisX(const glm::vec3& delta, float threshold)
+:
+AnimationBase(delta), 
+threshold(threshold)
 {}
 
 /* virtual */
@@ -31,7 +34,7 @@ void AnimationWiggleAxisX::Update(glm::vec3& angle)
 {
     if (clockwise)
     {
-        angle.x += step;
+        angle.x += m_Delta.x;
         if (angle.x > threshold)
         {
             clockwise = false;
@@ -39,7 +42,7 @@ void AnimationWiggleAxisX::Update(glm::vec3& angle)
     }
     else
     {
-        angle.x -= step;
+        angle.x -= m_Delta.y;
         if (fabs(angle.x) > threshold)
         {
             clockwise = true;

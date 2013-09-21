@@ -16,20 +16,21 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ANIMATIONWIGGLEAXISX_H
-#define ANIMATIONWIGGLEAXISX_H
+#ifndef ANIMATIONWIGGLEAXISX_HPP
+#define ANIMATIONWIGGLEAXISX_HPP
 
 #include "AnimationBase.hpp"
 
 class AnimationWiggleAxisX : public AnimationBase 
 {  
          public:
-            AnimationWiggleAxisX(float, float);
+            AnimationWiggleAxisX(const glm::vec3&, float);
             virtual ~AnimationWiggleAxisX();
 
             virtual void Update(glm::vec3&);
         
         private:
+            bool clockwise;
             float threshold;
       
 };
