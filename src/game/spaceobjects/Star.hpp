@@ -40,8 +40,8 @@ class Star : public BasePlanet
         void UpdateInSpaceInStatic();    
         void UpdateInSpace(int, bool);
         
-        void Render_NEW(const Renderer&) const;
-        void Render_OLD() const;
+        void Render_NEW(const Renderer&);
+        void Render_OLD(const Renderer&);
         
         virtual void SaveData(boost::property_tree::ptree&) const override final;
         virtual void LoadData(const boost::property_tree::ptree&) override final;
