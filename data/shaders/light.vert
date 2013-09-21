@@ -1,21 +1,26 @@
+uniform mat4 u_ModelMatrix;
+uniform mat4 u_ProjectionViewMatrix;
+uniform mat3 u_NormalModelMatrix;
 
-uniform vec3 iLightPos;
-uniform vec3 iEyePos;
+uniform vec3 u_LightPos;
+uniform vec3 u_EyePos;
 
-varying vec3 vVert2light_n; 
-varying vec3 vVert2eye_n; 
-varying vec3 vNormal_n;
+out vec3 vVert2light_n; 
+out vec3 vVert2eye_n; 
+out vec3 vNormal_n;
+out vec2 vTexcoord;
  
 void main(void)
 {
-    	vec3 vertexPos = vec3(gl_ModelViewMatrix * gl_Vertex);      /* transformed vertex to world space */ 
-   	vVert2light_n = normalize(iLightPos - vertexPos);              
-    	vVert2eye_n   = normalize(iEyePos   - vertexPos);                              
-    	vNormal_n      = normalize(gl_NormalMatrix * gl_Normal);                            
-    	
-    	gl_TexCoord[0] = gl_MultiTexCoord0;                                                         
+    vec4 vertexPos = u_ModelMatrix * gl_Vertex;      /* transformed vertex to world space */ 
+    
+    vVert2light_n = normalize(u_LightPos - vertexPos.xyz);              
+    vVert2eye_n   = normalize(u_EyePos   - vertexPos.xyz);                              
+    vNormal_n     = normalize(u_NormalModelMatrix * gl_Normal);   
+        	
+    vTexcoord = gl_MultiTexCoord0;                                                         
  
-    	gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;                                    
+    gl_Position = u_ProjectionViewMatrix * vertexPos;                                    
 }
 
 

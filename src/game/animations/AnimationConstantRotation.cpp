@@ -16,23 +16,20 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ANIMATIONCONSTANTROTATIONAXISZ_H
-#define ANIMATIONCONSTANTROTATIONAXISZ_H
+#include "AnimationConstantRotation.hpp"
+#include <cmath>
 
-#include "AnimationBase.hpp"
+AnimationConstantRotation::AnimationConstantRotation(const glm::vec3& step)
+:
+AnimationBase(step)
+{}
 
-class AnimationConstantRotationAxisZ : public AnimationBase 
-{  
-         public:
-            AnimationConstantRotationAxisZ(float);
-            virtual ~AnimationConstantRotationAxisZ();
+/* virtual */
+AnimationConstantRotation::~AnimationConstantRotation()
+{}
 
-            virtual void Update(glm::vec3&);
-      
-};
-
-#endif 
-
-
-
-
+/* virtual */
+void AnimationConstantRotation::Update(glm::vec3& angle)
+{
+    angle += m_Delta;
+}

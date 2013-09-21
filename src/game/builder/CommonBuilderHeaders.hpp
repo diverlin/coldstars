@@ -32,8 +32,7 @@
 
 #include <world/EntityManager.hpp>
 
-#include <animations/AnimationConstantRotationAxisX.hpp>
-#include <animations/AnimationConstantRotationAxisZ.hpp>
+#include <animations/AnimationConstantRotation.hpp>
 #include <animations/AnimationWiggleAxisX.hpp>
 
 #endif    

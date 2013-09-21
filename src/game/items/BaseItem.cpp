@@ -148,7 +148,7 @@ void BaseItem::RenderKorpus(const Box2D& box)
         //SetAngle(box.GetAngle());
         UpdateRenderAnimation();
         //SetScale(box.GetSize());
-        RenderMeshLight(v, c);
+        //RenderMeshLight(v, c);
     }
     else
     {

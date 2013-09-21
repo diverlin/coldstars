@@ -433,7 +433,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             {
                 for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
                 { 
-                   visible_PLANET_vec[i]->Render_OLD(render); 
+                   visible_PLANET_vec[i]->Render_NEW(render, world_coord); 
                 }
 
                 for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)

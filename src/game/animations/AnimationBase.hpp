@@ -16,26 +16,24 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ANIMATIONBASE_H
-#define ANIMATIONBASE_H
+#ifndef ANIMATIONBASE_HPP
+#define ANIMATIONBASE_HPP
 
-#include "../math/myVector.hpp"
+#include <glm/glm.hpp>
 
 class AnimationBase
 {  
     public:
-        AnimationBase(float step)
+        AnimationBase(const glm::vec3& delta)
         :
-        clockwise(true),
-        step(step)
+        m_Delta(delta)
         {}
         virtual ~AnimationBase() {}
 
         virtual void Update(glm::vec3&) = 0;
 
     protected:       
-        bool clockwise;
-        float step;      
+        glm::vec3 m_Delta;      
 };
 
 #endif 

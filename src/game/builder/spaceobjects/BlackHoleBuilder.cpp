@@ -84,9 +84,9 @@ void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);    
     blackhole->BindData3D(mesh, texOb, scale);    
     
-    float step = 10;
-    AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
-    blackhole->SetRenderAnimation(animation_program);
+    //float step = 10;
+    //AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
+    //blackhole->SetRenderAnimation(animation_program);
     blackhole->SetZYX(false);
 }
 

@@ -33,7 +33,7 @@ class Asteroid : public BasePlanet
         void UpdateInSpace(int, bool);            
         void CollisionEvent(bool);
 
-        void Render_NEW(const glm::vec2& scroll_coords);    
+        void Render_NEW(const Renderer&, const glm::vec2& scroll_coords);    
         void Render_OLD(const Renderer&);
 
         virtual void SaveData(boost::property_tree::ptree&) const override final;

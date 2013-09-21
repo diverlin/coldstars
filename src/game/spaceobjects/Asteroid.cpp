@@ -101,10 +101,10 @@ void Asteroid::UpdateInfo()
     GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 }     
 
-void Asteroid::Render_NEW(const glm::vec2& scroll_coords)
+void Asteroid::Render_NEW(const Renderer& render, const glm::vec2& scroll_coords)
 {
     UpdateRenderAnimation();
-    RenderMeshLightNormalMap(scroll_coords, GetStarSystem()->GetColor4f());
+    render.RenderMeshLightNormalMap(GetMesh(), GetTextureOb(), GetActualModelMatrix(), scroll_coords, GetStarSystem()->GetColor4f());
 }
     
 void Asteroid::Render_OLD(const Renderer& render)

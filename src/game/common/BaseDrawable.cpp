@@ -140,61 +140,16 @@ bool BaseDrawable::UpdateFadeOutEffect()
     }
 }
 
-void BaseDrawable::RenderMeshLight(const glm::vec2& scroll_coords, const glm::vec4& color) const
-{
-    float ambient_factor = 0.25;
-    
-    glUseProgram(ShaderCollector::Instance().light);
-    {
-        glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "iLightPos"), -scroll_coords.x, -scroll_coords.y, -200.0);
-        glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "iEyePos"), -scroll_coords.x, -scroll_coords.y, -200.0);
-        glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "iDiffColor"), color.r, color.g, color.b, color.a);
-        glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "iAmbientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
-        
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, m_TextureOb->texture); // ???
-        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "iTexture_0"), 0);
-        
-        renderMesh(m_Mesh, GetCenter(), GetSize(), GetAngle(), m_ZYX);
-    }
-    glUseProgram(0);
-    glActiveTexture(GL_TEXTURE0);
-}
-        
-void BaseDrawable::RenderMeshLightNormalMap(const glm::vec2& scroll_coords, const glm::vec4& color) const
-{
-    float ambient_factor = 0.25;
-    
-    glUseProgram(ShaderCollector::Instance().light_normalmap);
-    
-    glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_lightPos"), -scroll_coords.x, -scroll_coords.y, 0.0);
-    glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_eyePos"), -scroll_coords.x, -scroll_coords.y, 0.0);
-    glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_diffColor"), color.r, color.g, color.b, color.a);
-    glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
-            
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, m_TextureOb->texture);
-    glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_texture"), 0);
-    
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, m_TextureOb->normalmap);
-    glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_normalmap"), 1);
-            
-    renderMesh(m_Mesh, GetCenter(), GetSize(), GetAngle(), m_ZYX);
-    
-    glUseProgram(0);
-    glActiveTexture(GL_TEXTURE0);
-}
-
 const glm::mat4& BaseDrawable::GetActualModelMatrix()
 {
     m_Tm = glm::translate(GetCenter());
       
-    QuatFromAngleAndAxis(m_Qx, GetAngle().x, AXIS_X);
-    QuatFromAngleAndAxis(m_Qy, GetAngle().y, AXIS_Y);   
+    QuatFromAngleAndAxis(m_Qx, GetAngle().x, GetDir());
+    //QuatFromAngleAndAxis(m_Qx, GetAngle().x, AXIS_X);
+    //QuatFromAngleAndAxis(m_Qy, GetAngle().y, AXIS_Y);   
     QuatFromAngleAndAxis(m_Qz, GetAngle().z, AXIS_Z); 
        
-    m_Rm = glm::toMat4(m_Qx*m_Qy*m_Qz);
+    m_Rm = glm::toMat4(m_Qz*m_Qy*m_Qx);
     
     m_Sm = glm::scale(GetSize());
       

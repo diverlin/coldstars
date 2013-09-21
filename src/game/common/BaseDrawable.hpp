@@ -73,9 +73,6 @@ class BaseDrawable : public Orientation
                 
         bool UpdateFadeInEffect(); // depr, move to animation program
         bool UpdateFadeOutEffect(); // depr, move to animation program
-        
-        void RenderMeshLight(const glm::vec2&, const glm::vec4&) const;
-        void RenderMeshLightNormalMap(const glm::vec2&, const glm::vec4&) const;
 
         const glm::mat4& GetActualModelMatrix();
                 

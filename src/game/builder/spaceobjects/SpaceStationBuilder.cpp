@@ -132,7 +132,8 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
         spacestation->BindData3D(mesh, mesh->GetTextureOb(), scale);
         
         float step = getRandInt(10, 40)*0.01;
-        AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);
+        glm::vec3 step3 = glm::vec3(step, 0.0f, 0.0f);
+        AnimationConstantRotation* animation_program = new AnimationConstantRotation(step3);
         spacestation->SetRenderAnimation(animation_program);
         spacestation->SetAngle(glm::vec3(0, getRandInt(10, 45), getRandInt(10, 45)));    
         spacestation->SetZYX(true);        
