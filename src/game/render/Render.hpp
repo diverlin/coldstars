@@ -49,8 +49,10 @@ class Renderer : public NonCopyable
 
         void DrawParticleTextured(TextureOb*, const glm::vec3&, float) const;
         
-        void DrawAxis(const glm::mat4&) const;
-                                                         
+        void DrawAxis(const glm::mat4&, float) const;
+        void DrawVector(const glm::vec3&, const glm::vec3&, float, float) const;                                             
+        void DrawVector(const glm::vec3&, const glm::mat4&, float) const;  
+                                                                 
     private:
         glm::mat4 m_Pm;
         glm::mat4 m_Vm;

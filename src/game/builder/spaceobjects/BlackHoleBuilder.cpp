@@ -87,7 +87,6 @@ void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
     //float step = 10;
     //AnimationConstantRotationAxisZ* animation_program = new AnimationConstantRotationAxisZ(step);
     //blackhole->SetRenderAnimation(animation_program);
-    blackhole->SetZYX(false);
 }
 
 

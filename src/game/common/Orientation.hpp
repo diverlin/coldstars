@@ -47,8 +47,13 @@ class Orientation : public Base
         
         void SetSize(float x, float y, float z) { m_Size = glm::vec3(x, y, z); m_IsUpdated = false; }
         void SetSize(const glm::vec3& size) { m_Size = size; m_IsUpdated = false; }
+
+        void SetAxisOrigin(const glm::vec3& axis_origin) { m_AxisOrigin = axis_origin; }        
+        void SetAxis(const glm::vec3& axis)              { m_Axis = axis; }
         
-        const glm::vec3& GetDir() const { return m_Orient; }
+        const glm::vec3& GetAxisOrigin() const { return m_AxisOrigin; }        
+        const glm::vec3& GetAxis() const { return m_Axis; }
+        
         const glm::vec3& GetAngle() const { return m_Angle; }       
         glm::vec3& GetAngle() { return m_Angle; }      // !!!
         const float* const GetpAngleZ() { return &m_Angle.z; } 
@@ -81,8 +86,9 @@ class Orientation : public Base
         glm::vec3 m_Center;                  
         glm::vec3 m_Size;
         glm::vec3 m_Angle;
-        
-        glm::vec3 m_Orient;
+
+        glm::vec3 m_AxisOrigin;        
+        glm::vec3 m_Axis;
         
         glm::vec3 m_ParentCenter; 
 

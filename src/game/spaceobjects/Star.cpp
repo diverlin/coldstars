@@ -157,7 +157,7 @@ void Star::Render_NEW(const Renderer& render) const
 void Star::Render_OLD() const
 {    
     glBindTexture(GL_TEXTURE_2D, GetTextureOb()->texture);              
-    renderMesh(GetMesh(), GetCenter(),GetSize(), GetAngle(), GetZYX());
+    //renderMesh(GetMesh(), GetCenter(),GetSize(), GetAngle(), GetZYX());
 }
 
 /* virtual override final */

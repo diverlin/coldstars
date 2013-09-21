@@ -23,7 +23,8 @@ Orientation::Orientation()
 :
 m_IsUpdated(false)
 {
-    m_Orient = glm::vec3(1.0, 0.0, 0.0); // -> (0 degree)
+    m_AxisOrigin = glm::vec3(0.0f, 0.0f, 1.0f);
+    m_Axis       = glm::vec3(1.0f, 1.0f, 1.0f); 
 }
 
 /* virtual */
@@ -40,11 +41,11 @@ void Orientation::UpdateOrientation()
     {   
         float angle_radian = m_Angle.z/RADIAN_TO_DEGREE_RATE;
         
-        m_Orient.x = cos(angle_radian);
-        m_Orient.y = sin(angle_radian);
-        m_Orient.z = 0.0; 
+        m_Axis.x = cos(angle_radian);
+        m_Axis.y = sin(angle_radian);
+        m_Axis.z = 0.0; 
         
-        m_Points.Update(m_Center, m_Angle, m_Size, m_Orient);
+        m_Points.Update(m_Center, m_Angle, m_Size, m_Axis);
         
         m_IsUpdated = true;
     }
