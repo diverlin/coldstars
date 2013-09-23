@@ -119,7 +119,6 @@ void Planet::PostDeathUniqueEvent(bool)
 
 void Planet::Render_NEW(const Renderer& render, const glm::vec2& scroll_coords)
 {
-    UpdateRenderAnimation();
     render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix(), glm::vec2(0.0f), GetStarSystem()->GetColor4f());
     if (m_Atmosphere != nullptr)
     {
@@ -129,7 +128,6 @@ void Planet::Render_NEW(const Renderer& render, const glm::vec2& scroll_coords)
 
 void Planet::Render_OLD(const Renderer& render)
 {
-    UpdateRenderAnimation();
     RenderMesh_OLD(render);
 }
 

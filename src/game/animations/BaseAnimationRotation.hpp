@@ -16,21 +16,18 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ANIMATIONCONSTANTROTATION_HPP
-#define ANIMATIONCONSTANTROTATION_HPP
+#ifndef BASEANIMATIONROTATION_HPP
+#define BASEANIMATIONROTATION_HPP
 
-#include "BaseAnimationRotation.hpp"
+#include <glm/gtx/quaternion.hpp>
 
-class AnimationConstantRotation : public BaseAnimationRotation 
+class BaseAnimationRotation
 {  
-     public:
-        AnimationConstantRotation();
-        virtual ~AnimationConstantRotation();
+    public:
+        BaseAnimationRotation() {}
+        virtual ~BaseAnimationRotation() {}
 
-        virtual void Update(glm::quat&, const glm::vec3&);   
-    
-    private:
-        float m_Angle;
+        virtual void Update(glm::quat&, const glm::vec3&) = 0;
 };
 
 #endif 

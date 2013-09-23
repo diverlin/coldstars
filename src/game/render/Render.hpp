@@ -46,7 +46,8 @@ class Renderer : public NonCopyable
         void RenderMeshGeometry(const Mesh*, const glm::mat4&) const;
         void RenderMeshLight(const Mesh*, const TextureOb*, const glm::mat4&, const glm::vec2&, const glm::vec4&) const;
         void RenderMeshLightNormalMap(const Mesh*, const TextureOb*, const glm::mat4&, const glm::vec2&, const glm::vec4&) const;
-
+        void RenderMeshMultiTextured(const Mesh*, const TextureOb*, const glm::mat4&, float) const;
+        
         void DrawParticleTextured(TextureOb*, const glm::vec3&, float) const;
         
         void DrawAxis(const glm::mat4&, float) const;

@@ -17,11 +17,13 @@
 */
 
 #include "AnimationConstantRotation.hpp"
-#include <cmath>
 
-AnimationConstantRotation::AnimationConstantRotation(const glm::vec3& step)
+#include <math/QuaternionUtils.hpp>
+
+
+AnimationConstantRotation::AnimationConstantRotation()
 :
-AnimationBase(step)
+m_Angle(0.0f)
 {}
 
 /* virtual */
@@ -29,7 +31,8 @@ AnimationConstantRotation::~AnimationConstantRotation()
 {}
 
 /* virtual */
-void AnimationConstantRotation::Update(glm::vec3& angle)
+void AnimationConstantRotation::Update(glm::quat& quat, const glm::vec3& axis)
 {
-    angle += m_Delta;
+    m_Angle += 0.1;
+    QuatFromAngleAndAxis(quat, m_Angle, axis);
 }

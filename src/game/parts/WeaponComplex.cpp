@@ -280,7 +280,7 @@ void WeaponComplex::RenderTurrels() const
         { 
             if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
             {    
-                slot_weapon_vec[i]->GetTurrel()->Render(owner_vehicle->GetAngle().z);        
+                //slot_weapon_vec[i]->GetTurrel()->Render(owner_vehicle->GetAngle().z);    // angle    
             }
         }
     } 

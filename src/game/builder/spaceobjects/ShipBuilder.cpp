@@ -138,11 +138,11 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id,  TYPE::ENTI
         float scale_comp = getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
         glm::vec3 scale(scale_comp, scale_comp, scale_comp);
         
-        float step = getRandInt(10, 20)*0.01;
-        glm::vec3 step3(step, 0.0f, 0.0f);
-        float threshold = 10;
-        AnimationWiggleAxisX* animation_program = new AnimationWiggleAxisX(step3, threshold);
-        ship->SetRenderAnimation(animation_program);
+        //float step = getRandInt(10, 20)*0.01;
+        //glm::vec3 step3(step, 0.0f, 0.0f);
+        //float threshold = 10;
+        //AnimationWiggleAxisX* animation_program = new AnimationWiggleAxisX(step3, threshold);
+        //ship->SetRenderAnimation(animation_program);
 
         ship->BindData3D(mesh, mesh->GetTextureOb(), scale);
     }
@@ -159,8 +159,8 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id,  TYPE::ENTI
     ship->CreateDriveComplexTextureDependedStuff();
     ship->CreateProtectionComplexTextureDependedStuff();
      
-    AnimationConstantRotation* animation_program = new AnimationConstantRotation(glm::vec3(0.02f, 0.0f, 0.0f));
-    ship->SetRenderAnimation(animation_program);
+    //AnimationConstantRotation* animation_program = new AnimationConstantRotation(glm::vec3(0.02f, 0.0f, 0.0f));
+    //ship->SetRenderAnimation(animation_program);
                            
     CreateItemSlots(ship);
 }

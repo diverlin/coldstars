@@ -89,11 +89,9 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     planet->BindData3D(mesh, textureOb, scale);
     
-    planet->SetAngle(glm::vec3(-getRandInt(10, 40), -getRandInt(10, 40), 0));    
-    float step = getRandInt(20, 60)*0.0001;
-    glm::vec3 step3 = glm::vec3(0.0f, 0.0f, step);
-    AnimationConstantRotation* animation_program = new AnimationConstantRotation(step3);
-    planet->SetRenderAnimation(animation_program);
+    planet->SetOrientation(glm::vec3(1.0f));    
+    AnimationConstantRotation* animation_rotation = new AnimationConstantRotation();
+    planet->SetAnimationRotation(animation_rotation);
     
     //if (getRandBool()) 
     {

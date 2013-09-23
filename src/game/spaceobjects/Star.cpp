@@ -34,8 +34,7 @@
    
 Star::Star(int id)
 :
-m_TextureOffset1(0.0),
-m_TextureOffset2(0.0),
+m_TextureOffset(0.0),
 m_DeltaColor(0.0),
 m_SparkActive(false),
 m_SparkGrows(false),
@@ -88,8 +87,7 @@ void Star::UpdateInSpaceInStatic()
                
 void Star::UpdateInSpace(int time, bool show_effect)
 {
-    m_TextureOffset1 += 0.0002;
-    m_TextureOffset2 += 0.0003;
+    m_TextureOffset += 0.0002;
 
     if (m_SparkActive == true)
     {
@@ -129,21 +127,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
     
 void Star::Render_NEW(const Renderer& render)
 {
-    glUseProgram(ShaderCollector::Instance().multitexturing);
-    
-    glActiveTexture(GL_TEXTURE0);                                
-    glBindTexture(GL_TEXTURE_2D, GetTextureOb()->texture);
-    glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_0"), 0);
-    
-    glActiveTexture(GL_TEXTURE1);                                
-    glBindTexture(GL_TEXTURE_2D, GetTextureOb()->texture);
-    glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_1"), 1);
-    
-    glUniform2f(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "displ"), m_TextureOffset1, m_TextureOffset2);
-    
-    render.RenderMeshGeometry(GetMesh(), GetActualModelMatrix());
-    
-    glUseProgram(0);
+    render.RenderMeshMultiTextured(GetMesh(), GetTextureOb(), GetActualModelMatrix(), m_TextureOffset);
 }
         
 void Star::Render_OLD(const Renderer& render)

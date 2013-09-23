@@ -86,12 +86,12 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
     TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ASTEROID_ID); 
           
     asteroid->BindData3D(mesh, texOb, scale);        
-    asteroid->SetAngle(glm::vec3(getRandInt(10, 40), getRandInt(10, 40), 0));            
+    asteroid->SetOrientation(glm::vec3(1.0f));            
     
-    float step = getRandInt(10, 100)*0.01;
-    glm::vec3 step3 = glm::vec3(0.0f, 0.0f, step);
-    AnimationConstantRotation* animation_program = new AnimationConstantRotation(step3);
-    asteroid->SetRenderAnimation(animation_program);
+    //float step = getRandInt(10, 100)*0.01;
+    //glm::vec3 step3 = glm::vec3(0.0f, 0.0f, step);
+    //AnimationConstantRotation* animation_program = new AnimationConstantRotation(step3);
+    //asteroid->SetRenderAnimation(animation_program);
                 
     asteroid->SetGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
 }

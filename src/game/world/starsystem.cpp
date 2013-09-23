@@ -181,7 +181,7 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const glm::vec3& center, const glm
     vehicle->SetStarSystem(this);  
     
     vehicle->SetCenter(center); 
-    vehicle->SetAngle(angle);   
+    //vehicle->SetAngle(angle);   
     vehicle->UpdateOrientation();  
     
     vehicle->SetColor(color);
@@ -205,7 +205,7 @@ void StarSystem::AddBullet(RocketBullet* rocket, const glm::vec3& center, const 
     rocket->SetStarSystem(this);  
             
     rocket->SetCenter(center); 
-    rocket->SetAngle(angle);   
+    //rocket->SetAngle(angle);   
     rocket->UpdateOrientation();          
 
     ROCKET_vec.push_back(rocket);  

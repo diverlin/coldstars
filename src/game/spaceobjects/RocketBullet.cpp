@@ -84,7 +84,7 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
         
             if (CheckTarget() == true)
             {
-                SetAngleZ(angle);
+                //SetAngleZ(angle);
             }
             else
             {
@@ -167,7 +167,7 @@ void RocketBullet::UpdateRenderStuff()
 
 void RocketBullet::RenderInSpace(float scale) const
 {  
-    drawQuad(GetTextureOb(), GetCenter(), GetSize(), GetAngle().z);
+   // drawQuad(GetTextureOb(), GetCenter(), GetSize(), GetAngle().z);
 
     m_EffectDrive->Update();
     m_EffectDrive->Render(scale, 0.0f);
@@ -203,7 +203,7 @@ void RocketBullet::ResolveDataUniqueRocketBullet()
         m_Target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_RocketBullet_target_id);
     }
     
-    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddBullet(this, data_unresolved_Orientation.center, data_unresolved_Orientation.angle); 
+    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddBullet(this, data_unresolved_Orientation.center, data_unresolved_Orientation.orient); 
 }
    
    

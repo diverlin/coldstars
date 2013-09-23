@@ -165,6 +165,25 @@ void Renderer::RenderMeshLightNormalMap(const Mesh* mesh, const TextureOb* textu
     }
     glUseProgram(0);
 }
+
+void Renderer::RenderMeshMultiTextured(const Mesh* mesh, const TextureOb* textureOb, const glm::mat4& modelMatrix, float offset) const
+{
+    glUseProgram(ShaderCollector::Instance().multitexturing);
+    {    
+        glActiveTexture(GL_TEXTURE0);                                
+        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_0"), 0);
+        
+        glActiveTexture(GL_TEXTURE1);                                
+        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_1"), 1);
+        
+        glUniform2f(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "displ"), offset, -offset);
+        
+        RenderMeshGeometry(mesh, modelMatrix);
+    }
+    glUseProgram(0);
+}        
         
 void Renderer::DrawParticleTextured(TextureOb* texOb, const glm::vec3& center, float size) const
 {

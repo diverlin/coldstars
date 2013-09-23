@@ -89,10 +89,8 @@ void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textu
     container->SetLifeData(data_life);
     container->BindData2D(textureOb);
     
-    float step = getRandInt(10, 100)*0.01;
-    glm::vec3 step3 = glm::vec3(0.0f, 0.0f, step);
-    AnimationConstantRotation* animation_program = new AnimationConstantRotation(step3);
-    container->SetRenderAnimation(animation_program);
+    AnimationConstantRotation* animation_rotation = new AnimationConstantRotation();
+    container->SetAnimationRotation(animation_rotation);
     
     container->SetGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
     

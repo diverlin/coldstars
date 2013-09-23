@@ -117,7 +117,7 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
         //float step = getRandInt(10, 40)*0.01;
         //AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);
         //drive_equipment->SetRenderAnimation(animation_program);
-        drive_equipment->SetAngle(glm::vec3(0, getRandInt(10, 45), getRandInt(10, 45))); 
+        drive_equipment->SetOrientation(glm::vec3(1.0f)); 
     }
     else
     {

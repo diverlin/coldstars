@@ -115,8 +115,7 @@ void Container::UpdateInSpace(int time, bool show_effect)
                
 void Container::Render2D()
 { 
-    UpdateRenderAnimation();
-    drawQuad(GetTextureOb(), GetCenter(), GetSize(), GetAngle().z);
+    //drawQuad(GetTextureOb(), GetCenter(), GetSize(), GetAngle().z);
 }
 
 void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const    

@@ -23,8 +23,8 @@ Orientation::Orientation()
 :
 m_IsUpdated(false)
 {
-    m_AxisOrigin = glm::vec3(0.0f, 0.0f, 1.0f);
-    m_Axis       = glm::vec3(1.0f, 1.0f, 1.0f); 
+    m_OrientOrigin = glm::vec3(0.0f, 0.0f, 1.0f);
+    m_Orient       = glm::vec3(1.0f, 1.0f, 1.0f); 
 }
 
 /* virtual */
@@ -39,13 +39,13 @@ void Orientation::UpdateOrientation()
 {
     if (m_IsUpdated == false)
     {   
-        float angle_radian = m_Angle.z/RADIAN_TO_DEGREE_RATE;
+        //float angle_radian = m_Angle.z/RADIAN_TO_DEGREE_RATE;
         
-        m_Axis.x = cos(angle_radian);
-        m_Axis.y = sin(angle_radian);
-        m_Axis.z = 0.0; 
+        //m_Axis.x = cos(angle_radian);
+        //m_Axis.y = sin(angle_radian);
+        //m_Axis.z = 0.0; 
         
-        m_Points.Update(m_Center, m_Angle, m_Size, m_Axis);
+        //m_Points.Update(m_Center, m_Angle, m_Size, m_Axis);
         
         m_IsUpdated = true;
     }
@@ -62,9 +62,9 @@ void Orientation::SaveDataUniqueOrientation(boost::property_tree::ptree& save_pt
     save_ptree.put(root+"data_unresolved_Orientation.center.y", m_Center.y);
     save_ptree.put(root+"data_unresolved_Orientation.center.z", m_Center.z);
     
-    save_ptree.put(root+"data_unresolved_Orientation.angle.x", m_Angle.x);
-    save_ptree.put(root+"data_unresolved_Orientation.angle.y", m_Angle.y);
-    save_ptree.put(root+"data_unresolved_Orientation.angle.z", m_Angle.z);
+    save_ptree.put(root+"data_unresolved_Orientation.orient.x", m_Orient.x);
+    save_ptree.put(root+"data_unresolved_Orientation.orient.y", m_Orient.y);
+    save_ptree.put(root+"data_unresolved_Orientation.orient.z", m_Orient.z);
         
 }
 
@@ -78,9 +78,9 @@ void Orientation::LoadDataUniqueOrientation(const boost::property_tree::ptree& l
     data_unresolved_Orientation.center.y = load_ptree.get<float>("data_unresolved_Orientation.center.y");
     data_unresolved_Orientation.center.z = load_ptree.get<float>("data_unresolved_Orientation.center.y");
     
-    data_unresolved_Orientation.angle.x = load_ptree.get<float>("data_unresolved_Orientation.angle.x");
-    data_unresolved_Orientation.angle.y = load_ptree.get<float>("data_unresolved_Orientation.angle.y");
-    data_unresolved_Orientation.angle.z = load_ptree.get<float>("data_unresolved_Orientation.angle.z");
+    data_unresolved_Orientation.orient.x = load_ptree.get<float>("data_unresolved_Orientation.orient.x");
+    data_unresolved_Orientation.orient.y = load_ptree.get<float>("data_unresolved_Orientation.orient.y");
+    data_unresolved_Orientation.orient.z = load_ptree.get<float>("data_unresolved_Orientation.orient.z");
 }
 
 void Orientation::ResolveDataUniqueOrientation()

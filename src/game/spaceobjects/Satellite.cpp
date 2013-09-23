@@ -96,9 +96,7 @@ void Satellite::UpdateRenderStuff()
 }
 
 void Satellite::RenderInSpace(const Renderer& render, float scale)
-{   
-    UpdateRenderAnimation();
-        
+{      
     RenderKorpus(render);
     
     if (GetDataKorpus().draw_turrels == true)

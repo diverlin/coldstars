@@ -97,10 +97,10 @@ void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const
     //int size_threshold = 2; 
     data_korpus.draw_turrels = true;       
     
-    float step = getRandInt(10, 100)*0.01;
-    glm::vec3 step3 = glm::vec3(0.0f, 0.0f, step);
-    AnimationConstantRotation* animation_program = new AnimationConstantRotation(step3);
-    satellite->SetRenderAnimation(animation_program);
+    //float step = getRandInt(10, 100)*0.01;
+    //glm::vec3 step3 = glm::vec3(0.0f, 0.0f, step);
+    //AnimationConstantRotation* animation_program = new AnimationConstantRotation(step3);
+    //satellite->SetRenderAnimation(animation_program);
     
     satellite->SetKorpusData(data_korpus);
     satellite->SetLifeData(data_life);

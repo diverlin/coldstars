@@ -116,7 +116,6 @@ GetComplexDrive().UpdatePosition(); // debug
 
 void Ship::RenderInSpace_2D(const Renderer& render, float scale)
 {   
-    UpdateRenderAnimation();
     setColor4f(GetColor());
     //if (GetProperties().grab_radius > 0)
     //{
@@ -145,7 +144,6 @@ void Ship::RenderInSpace_2D(const Renderer& render, float scale)
 
 void Ship::RenderInSpace_3D(const Renderer& render, const glm::vec2& scroll_coords, float scale)
 {
-    UpdateRenderAnimation();
     render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix(), scroll_coords, GetStarSystem()->GetColor4f());
 
     //enable_BLEND();
@@ -161,7 +159,7 @@ void Ship::RenderInSpace_3D(const Renderer& render, const glm::vec2& scroll_coor
 void Ship::RenderAtPlanet(const Renderer& render, const glm::vec3& center)
 {
     SetCenter(center);
-    SetAngleZ(0);
+    //SetAngleZ(0);
     UpdateOrientation();
     
     RenderKorpus(render);
