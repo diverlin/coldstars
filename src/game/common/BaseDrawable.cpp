@@ -33,7 +33,7 @@
 
 #include <render/Render.hpp>
 
-#include <animations/AnimationBase.hpp>
+#include <animations/BaseAnimationRotation.hpp>
 
 #include <render/Mesh.hpp>
 
@@ -46,7 +46,7 @@ BaseDrawable::BaseDrawable()
 :
 m_TextureOb(nullptr), 
 m_Mesh(nullptr), 
-m_AnimationProgram(nullptr)
+m_AnimationRotation(nullptr)
 {}
 
 /* virtual */
@@ -56,7 +56,7 @@ BaseDrawable::~BaseDrawable()
     Logger::Instance().Log("___::~BaseDrawable("+int2str(GetId())+")");
     #endif
     
-    delete m_AnimationProgram;
+    delete m_AnimationRotation;
 }
 
 void BaseDrawable::BindData3D(Mesh* mesh, TextureOb* textureOb, const glm::vec3& size)
@@ -85,17 +85,17 @@ void BaseDrawable::RenderCollisionRadius(const Renderer& render) const
 
 void BaseDrawable::RenderAxis(const Renderer& render) const
 {
-    glm::mat4 Mm = getModelMatrix(GetCenter(), glm::vec3(2*GetCollisionRadius()), GetAngle()); 
+    glm::mat4 Mm = getModelMatrix(GetCenter(), glm::vec3(2*GetCollisionRadius()), glm::vec3(0.0f));    // angle
     render.DrawAxis(Mm, /*width*/4);
     //render.DrawVector(GetDir(), GetCenter(), GetSize().x, /*width*/6);
-    render.DrawVector(GetAxis(), Mm, /*width*/6);
+    render.DrawVector(GetOrient(), Mm, /*width*/6);
 }
 
 void BaseDrawable::UpdateRenderAnimation()
 {
-    if (m_AnimationProgram != nullptr)
+    if (m_AnimationRotation != nullptr)
     {
-        m_AnimationProgram->Update(GetAngle());
+        //m_AnimationRotation->Update(GetAngle());
     }
 }
           
@@ -128,23 +128,18 @@ bool BaseDrawable::UpdateFadeOutEffect()
 }
 
 const glm::mat4& BaseDrawable::GetActualModelMatrix()
-{    
-    glm::vec3 orient(1.0f, 1.0f, 1.0f);
-      
-    RotationBetweenVectors(m_QuatPosition, GetAxisOrigin(), glm::normalize(GetAxis()));
-    QuatFromAngleAndAxis(m_QuatAnimation, GetAngle().z, GetAxisOrigin());
+{     
+    RotationBetweenVectors(m_QuatPosition, GetOrientOrigin(), glm::normalize(GetOrient()));
+    if (m_AnimationRotation != nullptr)
+    {
+        m_AnimationRotation->Update(m_QuatAnimation, glm::normalize(GetOrientOrigin()));        
+    }
     
-    //QuatFromAngleAndAxis(m_Qx, GetAngle().x, AXIS_X);
-    //QuatFromAngleAndAxis(m_Qy, GetAngle().y, AXIS_Y);   
-    //QuatFromAngleAndAxis(m_Qz, GetAngle().z, AXIS_Z); 
-       
-    //m_Rm = glm::toMat4(m_Qz*m_Qy*m_Qx*Q);
-
     m_MatrixTranslate = glm::translate(GetCenter());    
     m_MatrixRotate    = glm::toMat4(m_QuatPosition * m_QuatAnimation); 
     m_MatrixScale     = glm::scale(GetSize());
       
-    m_MatrixModel = m_MatrixTranslate * m_MatrixRotate * m_MatrixScale;
+    m_MatrixModel = m_MatrixTranslate * m_MatrixScale * m_MatrixRotate;
     
     return m_MatrixModel;
 }
@@ -158,7 +153,7 @@ void BaseDrawable::SaveDataUniqueBaseDrawable(boost::property_tree::ptree& save_
     if (m_Mesh) save_ptree.put(root+"data_unresolved_BaseDrawable.mesh_type_id", (int)m_Mesh->GetTypeId());
     else        save_ptree.put(root+"data_unresolved_BaseDrawable.mesh_type_id", (int)TYPE::MESH::NONE_ID);
     
-    if (m_TextureOb)     save_ptree.put(root+"data_unresolved_BaseDrawable.textureOb_path", m_TextureOb->path);
+    if (m_TextureOb)    save_ptree.put(root+"data_unresolved_BaseDrawable.textureOb_path", m_TextureOb->path);
     else                save_ptree.put(root+"data_unresolved_BaseDrawable.textureOb_path", "none");
 }
 

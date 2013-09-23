@@ -310,7 +310,7 @@ void DriveComplex::CalcPath2()
     glm::vec3 new_center(owner_vehicle->GetCenter());
     glm::vec3 target_dir(target_pos - owner_vehicle->GetCenter());
     target_dir = glm::normalize(target_dir);
-    float az = owner_vehicle->GetAngle().z;
+    float az = 0; //float az = owner_vehicle->GetAngle().z; // angle
     glm::vec3 orient(cos(az*DEGREE_TO_RADIAN_RATE), sin(az*DEGREE_TO_RADIAN_RATE), 0.0);
 
     // identify sign for rotation
@@ -416,7 +416,7 @@ void DriveComplex::CalcPath()
         glm::vec3 new_center(owner_vehicle->GetCenter());
     glm::vec3 target_dir(target_pos - owner_vehicle->GetCenter());
     target_dir = glm::normalize(target_dir);
-    float az = owner_vehicle->GetAngle().z;
+    float az = 0; //float az = owner_vehicle->GetAngle().z; //angle
     glm::vec3 orient(cos(az*DEGREE_TO_RADIAN_RATE), sin(az*DEGREE_TO_RADIAN_RATE), 0.0);
 
     glm::vec3 gravity;
@@ -504,7 +504,7 @@ void DriveComplex::UpdatePosition()
         if (move_it < path_center_vec.size())
         {
             owner_vehicle->SetCenter(path_center_vec[move_it]);
-            owner_vehicle->SetAngleZ(angle_vec[move_it]);
+            //owner_vehicle->SetAngleZ(angle_vec[move_it]);  // angle
             move_it++;
         }
         else

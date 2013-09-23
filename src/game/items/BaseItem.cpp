@@ -146,7 +146,6 @@ void BaseItem::RenderKorpus(const Box2D& box)
         glm::vec3 center(box.GetCenter().x, box.GetCenter().y, GUI::POS_Z);
         SetCenter(center);
         //SetAngle(box.GetAngle());
-        UpdateRenderAnimation();
         //SetScale(box.GetSize());
         //RenderMeshLight(v, c);
     }

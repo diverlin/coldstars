@@ -1523,7 +1523,7 @@ void Vehicle::ResolveDataUniqueVehicle()
     {
         case TYPE::PLACE::SPACE_ID: 
         {
-            GetStarSystem()->AddVehicle(this, data_unresolved_Orientation.center, data_unresolved_Orientation.angle, GetParent()); 
+            GetStarSystem()->AddVehicle(this, data_unresolved_Orientation.center, data_unresolved_Orientation.orient, GetParent()); 
             break;
         }
         

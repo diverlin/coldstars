@@ -168,7 +168,7 @@ void Cursor::RenderFocusedObjectStuff() const
             
             Box2D box(vec3ToVec2(m_FocusedSpaceObject->GetCenter()), vec3ToVec2(m_FocusedSpaceObject->GetSize()));
             box.SetScale(scale, scale);
-            box.SetAngle(m_FocusedSpaceObject->GetAngle().z);
+            //box.SetAngle(m_FocusedSpaceObject->GetAngle().z);
             
             drawQuad(GuiTextureObCollector::Instance().mark_target, box);
         }

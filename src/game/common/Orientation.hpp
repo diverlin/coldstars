@@ -26,7 +26,7 @@
 struct UnresolvedDataUniqueOrientation
 {    
     glm::vec3 center;
-    glm::vec3 angle; 
+    glm::vec3 orient; 
 };
 
 class Orientation : public Base
@@ -41,23 +41,15 @@ class Orientation : public Base
         void SetCenter(float x, float y, float z)    { m_Center = glm::vec3(x, y, z); m_IsUpdated = false; }
         void SetCenter(const glm::vec3& center)   { m_Center = center; m_IsUpdated = false; }
         
-        void SetAngle(float x, float y, float z) { m_Angle = glm::vec3(x, y, z); m_IsUpdated = false; }
-        void SetAngle(const glm::vec3& angle) { m_Angle = angle; m_IsUpdated = false; }
-        void SetAngleZ(float angle_z)     { m_Angle.z = angle_z; m_IsUpdated = false; }
-        
         void SetSize(float x, float y, float z) { m_Size = glm::vec3(x, y, z); m_IsUpdated = false; }
         void SetSize(const glm::vec3& size) { m_Size = size; m_IsUpdated = false; }
 
-        void SetAxisOrigin(const glm::vec3& axis_origin) { m_AxisOrigin = axis_origin; }        
-        void SetAxis(const glm::vec3& axis)              { m_Axis = axis; }
+        void SetOrientationOrigin(const glm::vec3& orient_origin) { m_OrientOrigin = orient_origin; m_IsUpdated = false; }        
+        void SetOrientation(const glm::vec3& orient)              { m_Orient = orient; m_IsUpdated = false; }
         
-        const glm::vec3& GetAxisOrigin() const { return m_AxisOrigin; }        
-        const glm::vec3& GetAxis() const { return m_Axis; }
-        
-        const glm::vec3& GetAngle() const { return m_Angle; }       
-        glm::vec3& GetAngle() { return m_Angle; }      // !!!
-        const float* const GetpAngleZ() { return &m_Angle.z; } 
-        
+        const glm::vec3& GetOrientOrigin() const { return m_OrientOrigin; }        
+        const glm::vec3& GetOrient() const { return m_Orient; }
+       
         const glm::vec3& GetCenter() const { return m_Center; }
         const glm::vec3& GetSize()  const { return m_Size; } 
         
@@ -85,10 +77,9 @@ class Orientation : public Base
                 
         glm::vec3 m_Center;                  
         glm::vec3 m_Size;
-        glm::vec3 m_Angle;
 
-        glm::vec3 m_AxisOrigin;        
-        glm::vec3 m_Axis;
+        glm::vec3 m_OrientOrigin;        
+        glm::vec3 m_Orient;
         
         glm::vec3 m_ParentCenter; 
 

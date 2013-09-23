@@ -152,7 +152,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
     int num = 0;
 
     glm::vec3 start_pos;
-    float angle_inD;
+    float angle_inD = 0; // fake
             
     if (fire_atOnce>=1)
     {
@@ -162,12 +162,12 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
         if (item_slot->GetOwnerVehicle()->GetDataKorpus().draw_turrels == true)
         {
             start_pos = item_slot->GetTurrel()->GetCenter(); 
-            angle_inD = item_slot->GetTurrel()->GetAngle().z;
+            //angle_inD = item_slot->GetTurrel()->GetAngle().z;
         }
         else
         {
             start_pos = item_slot->GetOwnerVehicle()->GetCenter();
-            angle_inD = item_slot->GetOwnerVehicle()->GetAngle().z;
+            //angle_inD = item_slot->GetOwnerVehicle()->GetAngle().z;
         }  
         
         rocket_bullet->SetOwnerId(item_slot->GetOwnerVehicle()->GetId());

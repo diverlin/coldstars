@@ -48,8 +48,7 @@ class Star : public BasePlanet
         virtual void ResolveData() override final;
                 
     private:
-        float m_TextureOffset1;
-        float m_TextureOffset2;
+        float m_TextureOffset;
          
         float m_DeltaColor;
         

@@ -28,7 +28,7 @@
 
 class Mesh;
 class TextureOb;
-class AnimationBase;
+class BaseAnimationRotation;
 
 const glm::vec3 AXIS_X = glm::vec3(1.0f, 0.0f, 0.0f);
 const glm::vec3 AXIS_Y = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -48,7 +48,7 @@ class BaseDrawable : public Orientation
 
         void BindData3D(Mesh*, TextureOb*, const glm::vec3&);
         void BindData2D(TextureOb*);    
-        void SetRenderAnimation(AnimationBase* animation_program) { m_AnimationProgram = animation_program; }
+        void SetAnimationRotation(BaseAnimationRotation* animation_rotation) { m_AnimationRotation = animation_rotation; }
         void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; }
         void SetColor(const glm::vec4& color) { m_Color = color; }
                         
@@ -65,8 +65,6 @@ class BaseDrawable : public Orientation
                 
     protected:
         void SetTransparency(float alpha)  { m_Color.a = alpha; }
-    
-        void UpdateRenderAnimation();
                 
         bool UpdateFadeInEffect(); // depr, move to animation program
         bool UpdateFadeOutEffect(); // depr, move to animation program
@@ -84,7 +82,7 @@ class BaseDrawable : public Orientation
         TextureOb* m_TextureOb;
         Mesh* m_Mesh; 
         
-        AnimationBase* m_AnimationProgram;
+        BaseAnimationRotation* m_AnimationRotation;
         
         glm::mat4 m_MatrixModel;     
         glm::mat4 m_MatrixTranslate;
@@ -94,7 +92,9 @@ class BaseDrawable : public Orientation
         //glm::quat m_QuatOrigin;        
         glm::quat m_QuatPosition;
         glm::quat m_QuatAnimation;        
-                                                
+
+        void UpdateRenderAnimation();
+                                                        
     friend class BaseVehicleBuilder;
 };
 
