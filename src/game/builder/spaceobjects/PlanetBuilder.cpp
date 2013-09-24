@@ -79,7 +79,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     planet_data.speed         = (float)getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / (float)orbit_radius;
     planet_data.clockwise     = getRandBool();
 
-    TextureOb* textureOb             = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::PLANET_ID); 
+    TextureOb* textureOb      = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::PLANET_ID); 
     
     planet->SetPlanetData(planet_data);
     
@@ -89,7 +89,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     planet->BindData3D(mesh, textureOb, scale);
     
-    planet->SetOrientation(glm::vec3(1.0f));    
+    planet->SetOrientation(glm::normalize(glm::vec3(1.0f)));    
     AnimationConstantRotation* animation_rotation = new AnimationConstantRotation();
     planet->SetAnimationRotation(animation_rotation);
     
