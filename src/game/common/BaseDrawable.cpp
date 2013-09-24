@@ -129,10 +129,10 @@ bool BaseDrawable::UpdateFadeOutEffect()
 
 const glm::mat4& BaseDrawable::GetActualModelMatrix()
 {     
-    RotationBetweenVectors(m_QuatPosition, GetOrientOrigin(), glm::normalize(GetOrient()));
+    RotationBetweenVectors(m_QuatPosition, GetOrientOrigin(), GetOrient());
     if (m_AnimationRotation != nullptr)
     {
-        m_AnimationRotation->Update(m_QuatAnimation, glm::normalize(GetOrientOrigin()));        
+        m_AnimationRotation->Update(m_QuatAnimation, GetOrientOrigin());        
     }
     
     m_MatrixTranslate = glm::translate(GetCenter());    

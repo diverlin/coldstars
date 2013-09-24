@@ -32,7 +32,8 @@ void QuatFromAngleAndAxis(glm::quat& quat, float angle, const glm::vec3& axis)
 
     // Calcualte the w value by cos( theta / 2 )
     quat.w = cos(angle/2.0);
-    glm::normalize(quat); // ??
+    
+    quat = glm::normalize(quat); 
 }
 
 
@@ -44,5 +45,4 @@ void RotationBetweenVectors(glm::quat& quat, const glm::vec3& start, const glm::
     glm::vec3 rotationAxis = glm::cross(start, dest);
 
     QuatFromAngleAndAxis(quat, acos(cosTheta), rotationAxis);
-
 }
