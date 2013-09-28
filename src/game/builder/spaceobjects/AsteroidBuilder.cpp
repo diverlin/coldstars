@@ -88,10 +88,10 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
     asteroid->BindData3D(mesh, texOb, scale);        
     asteroid->SetOrientation(glm::vec3(1.0f));            
     
-    //float step = getRandInt(10, 100)*0.01;
-    //glm::vec3 step3 = glm::vec3(0.0f, 0.0f, step);
-    //AnimationConstantRotation* animation_program = new AnimationConstantRotation(step3);
-    //asteroid->SetRenderAnimation(animation_program);
+    asteroid->SetOrientation(glm::normalize(glm::vec3(1.0f)));
+    float delta_angle = 0.0001*getRandInt(20, 60);
+    AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
+    asteroid->SetAnimationRotation(animation_rotation);
                 
     asteroid->SetGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
 }

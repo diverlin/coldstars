@@ -21,9 +21,9 @@
 #include <math/QuaternionUtils.hpp>
 
 
-AnimationConstantRotation::AnimationConstantRotation()
+AnimationConstantRotation::AnimationConstantRotation(float delta_angle)
 :
-m_Angle(0.0f)
+BaseAnimationRotation(delta_angle)
 {}
 
 /* virtual */
@@ -33,6 +33,16 @@ AnimationConstantRotation::~AnimationConstantRotation()
 /* virtual */
 void AnimationConstantRotation::Update(glm::quat& quat, const glm::vec3& axis)
 {
-    m_Angle += 0.1;
+    m_Angle += GetDeltaAngle();
+    if (m_Angle > 2*M_PI)
+    {
+        m_Angle -= 2*M_PI;
+    }
+
+    if (m_Angle < -2*M_PI)
+    {
+        m_Angle += 2*M_PI;
+    }    
+    
     QuatFromAngleAndAxis(quat, m_Angle, axis);
 }

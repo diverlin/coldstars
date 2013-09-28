@@ -108,7 +108,7 @@ void Asteroid::Render_NEW(const Renderer& render, const glm::vec2& scroll_coords
     
 void Asteroid::Render_OLD(const Renderer& render)
 {
-    RenderMesh_OLD(render);    
+    render.RenderMeshGeometry(GetMesh(), GetTextureOb(), GetActualModelMatrix());       
 }
 
 void Asteroid::SaveDataUniqueAsteroid(boost::property_tree::ptree& save_ptree, const std::string& root) const

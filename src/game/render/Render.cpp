@@ -113,6 +113,12 @@ void Renderer::RenderMeshGeometry(const Mesh* mesh, const glm::mat4& Mm) const
     mesh->Draw();
 }
 
+void Renderer::RenderMeshGeometry(const Mesh* mesh, const TextureOb* textureOb, const glm::mat4& Mm) const
+{
+    glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+    RenderMeshGeometry(mesh, Mm);
+}
+
 void Renderer::RenderMeshLight(const Mesh* mesh, const TextureOb* textureOb, const glm::mat4& Mm, const glm::vec2& scroll_coords, const glm::vec4& color) const
 {
     float ambient_factor = 0.25;       

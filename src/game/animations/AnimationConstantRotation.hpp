@@ -24,13 +24,11 @@
 class AnimationConstantRotation : public BaseAnimationRotation 
 {  
      public:
-        AnimationConstantRotation();
+        AnimationConstantRotation(float);
         virtual ~AnimationConstantRotation();
 
         virtual void Update(glm::quat&, const glm::vec3&);   
     
-    private:
-        float m_Angle;
 };
 
 #endif 

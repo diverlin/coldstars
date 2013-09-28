@@ -131,11 +131,11 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
         glm::vec3 scale(scale_comp, scale_comp, scale_comp);
         spacestation->BindData3D(mesh, mesh->GetTextureOb(), scale);
         
-        //float step = getRandInt(10, 40)*0.01;
-        //glm::vec3 step3 = glm::vec3(step, 0.0f, 0.0f);
-        //AnimationConstantRotation* animation_program = new AnimationConstantRotation(step3);
-        //spacestation->SetRenderAnimation(animation_program);
-        spacestation->SetOrientation(glm::vec3(1.0f));
+        spacestation->SetOrientation(glm::normalize(glm::vec3(1.0f)));
+        
+        float delta_angle = 0.0001*getRandInt(20, 60);
+        AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
+        spacestation->SetAnimationRotation(animation_rotation);
     }
     else
     {

@@ -451,19 +451,19 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                        visible_SHIP_vec[i]->RenderInSpace_3D(render, world_coord, 1/scale); 
                     }
                 }
-      /*                     
+                     
                 for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
                 { 
-                    visible_ASTEROID_vec[i]->Render_NEW(world_coord); 
+                    visible_ASTEROID_vec[i]->Render_NEW(render, world_coord); 
                 }
-
+                
                 for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
                 { 
-                    visible_BLACKHOLE_vec[i]->Render_NEW(world_coord);                     
+                    visible_BLACKHOLE_vec[i]->Render_NEW(render, world_coord);                     
                 } 
-                */     
+                     
             }
-            disable_DEPTH();
+            //disable_DEPTH();
 
             enable_BLEND();    
             {    
@@ -475,12 +475,11 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                         visible_SPACESTATION_vec[i]->RenderInSpace_2D(render, 1/scale); 
                     }
                 }
-            /*   
+
                 for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
                 { 
-                    visible_CONTAINER_vec[i]->Render2D(); 
+                    visible_CONTAINER_vec[i]->Render2D(render); 
                 }      
-            */
 
                 for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
                 { 
@@ -489,18 +488,17 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                         visible_SHIP_vec[i]->RenderInSpace_2D(render, 1/scale); 
                     }
                 }
-              /*
+
                 for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
                 { 
-                   visible_SATELLITE_vec[i]->RenderInSpace(1/scale); 
+                   visible_SATELLITE_vec[i]->RenderInSpace(render, 1/scale); 
                 }
-                
+               
                 for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
                 { 
-                    visible_ROCKET_vec[i]->UpdateRenderStuff();
-                    visible_ROCKET_vec[i]->RenderInSpace(1/scale); 
+                    visible_ROCKET_vec[i]->RenderInSpace(render, 1/scale); 
                 } 
-                */
+                
                 //if (show.GetCollisionRadius() == true)
                 {
                     RenderAxis(render);

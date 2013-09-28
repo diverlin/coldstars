@@ -90,7 +90,8 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     planet->BindData3D(mesh, textureOb, scale);
     
     planet->SetOrientation(glm::normalize(glm::vec3(1.0f)));    
-    AnimationConstantRotation* animation_rotation = new AnimationConstantRotation();
+    float delta_angle = 0.0001*getRandInt(20, 60);
+    AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
     planet->SetAnimationRotation(animation_rotation);
     
     //if (getRandBool()) 

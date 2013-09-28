@@ -33,6 +33,6 @@
 #include <world/EntityManager.hpp>
 
 #include <animations/AnimationConstantRotation.hpp>
-#include <animations/AnimationWiggleAxisX.hpp>
+#include <animations/AnimationWiggle.hpp>
 
 #endif    

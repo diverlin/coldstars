@@ -73,13 +73,6 @@ void BasePlanet::RenderStuffWhenFocusedInSpace()
     m_Orbit.DrawPath();
 }
 
-void BasePlanet::RenderMesh_OLD(const Renderer& render)
-{
-    glBindTexture(GL_TEXTURE_2D, GetTextureOb()->texture);
-    render.RenderMeshGeometry(GetMesh(), GetActualModelMatrix());
-}
-
-
 void BasePlanet::SaveDataUniqueBasePlanet(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1

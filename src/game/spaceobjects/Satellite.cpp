@@ -99,26 +99,26 @@ void Satellite::RenderInSpace(const Renderer& render, float scale)
 {      
     RenderKorpus(render);
     
-    if (GetDataKorpus().draw_turrels == true)
-    {
-        GetComplexWeapon().RenderTurrels();
-    }
+    //if (GetDataKorpus().draw_turrels == true)
+    //{
+        //GetComplexWeapon().RenderTurrels();
+    //}
 
-    if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
-    {
-        RenderShieldEffect(1.0 - GetColor().a); 
-        GetStarSystem()->RestoreSceneColor();
-    }
+    //if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
+    //{
+        //RenderShieldEffect(1.0 - GetColor().a); 
+        //GetStarSystem()->RestoreSceneColor();
+    //}
 }
 
 void Satellite::RenderAtPlanet(const Renderer& render)
 {
     RenderKorpus(render);
     
-    if (GetDataKorpus().draw_turrels == true)
-    {
-        GetComplexWeapon().RenderTurrels();
-    }
+    //if (GetDataKorpus().draw_turrels == true)
+    //{
+        //GetComplexWeapon().RenderTurrels();
+    //}
 }        
 
 

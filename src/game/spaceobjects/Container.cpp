@@ -113,9 +113,9 @@ void Container::UpdateInSpace(int time, bool show_effect)
     }
 }
                
-void Container::Render2D()
+void Container::Render2D(const Renderer& render)
 { 
-    //drawQuad(GetTextureOb(), GetCenter(), GetSize(), GetAngle().z);
+    render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
 }
 
 void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const    
