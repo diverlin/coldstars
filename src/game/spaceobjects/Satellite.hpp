@@ -23,6 +23,7 @@
 #include <spaceobjects/Vehicle.hpp>
 #include <parts/orbit.hpp>
 
+
 class Satellite : public Vehicle
 {
     public:  
@@ -44,7 +45,7 @@ class Satellite : public Vehicle
         Orbit m_Orbit;
 
         virtual void UpdateInfo() override final;
-        void UpdateRenderStuff();
+        void UpdateRenderStuff();     
                         
         void SaveDataUniqueSatellite(boost::property_tree::ptree&, const std::string&) const;
         void LoadDataUniqueSatellite(const boost::property_tree::ptree&);

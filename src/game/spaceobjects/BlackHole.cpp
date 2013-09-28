@@ -81,14 +81,14 @@ void BlackHole::UpdateInfo()
     GetInfo().addNameStr("pos:");        GetInfo().addValueStr( str(GetCenter()) );
 }
       
-void BlackHole::Render_NEW(const glm::vec2& scroll_coords)
+void BlackHole::Render_NEW(const Renderer& render, const glm::vec2& scroll_coords)
 {
-    //RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());
+    render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix(), glm::vec2(0.0f), GetStarSystem()->GetColor4f());
 }
     
 void BlackHole::Render_OLD(const Renderer& render)
 {
-    RenderMesh_OLD(render);    
+    render.RenderMeshGeometry(GetMesh(), GetTextureOb(), GetActualModelMatrix());    
 }
      
 void BlackHole::SaveDataUniqueBlackHole(boost::property_tree::ptree& save_ptree, const std::string& root) const

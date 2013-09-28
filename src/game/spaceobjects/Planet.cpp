@@ -120,15 +120,15 @@ void Planet::PostDeathUniqueEvent(bool)
 void Planet::Render_NEW(const Renderer& render, const glm::vec2& scroll_coords)
 {
     render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix(), glm::vec2(0.0f), GetStarSystem()->GetColor4f());
-    if (m_Atmosphere != nullptr)
-    {
-        m_Atmosphere->Render(scroll_coords);
-    }
+    //if (m_Atmosphere != nullptr)
+    //{
+        //m_Atmosphere->Render(scroll_coords);
+    //}
 }
 
 void Planet::Render_OLD(const Renderer& render)
 {
-    RenderMesh_OLD(render);
+    render.RenderMeshGeometry(GetMesh(), GetTextureOb(), GetActualModelMatrix());    
 }
 
 void Planet::SaveDataUniquePlanet(boost::property_tree::ptree& save_ptree, const std::string& root) const

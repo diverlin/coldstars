@@ -16,28 +16,41 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ANIMATIONBASE_HPP
-#define ANIMATIONBASE_HPP
+#include "AnimationWiggle.hpp"
+#include <cmath>
 
-#include <glm/glm.hpp>
+#include <math/QuaternionUtils.hpp>
 
-class AnimationBase
-{  
-    public:
-        AnimationBase(const glm::vec3& delta)
-        :
-        m_Delta(delta)
-        {}
-        virtual ~AnimationBase() {}
+AnimationWiggle::AnimationWiggle(float delta, float threshold)
+:
+BaseAnimationRotation(delta), 
+m_Clockwise(true),
+m_Threshold(threshold)
+{}
 
-        virtual void Update(glm::vec3&) = 0;
+/* virtual */
+AnimationWiggle::~AnimationWiggle()
+{}
 
-    protected:       
-        glm::vec3 m_Delta;      
-};
-
-#endif 
-
-
-
-
+/* virtual override final */
+void AnimationWiggle::Update(glm::quat& quat, const glm::vec3& axis)
+{
+    if (m_Clockwise)
+    {
+        m_Angle += GetDeltaAngle();
+        if (m_Angle > m_Threshold)
+        {
+            m_Clockwise = false;
+        }
+    }
+    else
+    {
+        m_Angle -= GetDeltaAngle();
+        if (m_Angle < -m_Threshold)
+        {
+            m_Clockwise = true;
+        }        
+    }
+    
+    QuatFromAngleAndAxis(quat, m_Angle, axis);
+}

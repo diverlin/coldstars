@@ -162,12 +162,9 @@ void RocketBullet::PostDeathUniqueEvent(bool show_effect)
     }
 }
 
-void RocketBullet::UpdateRenderStuff()
-{}
-
-void RocketBullet::RenderInSpace(float scale) const
+void RocketBullet::RenderInSpace(const Renderer& render, float scale)
 {  
-   // drawQuad(GetTextureOb(), GetCenter(), GetSize(), GetAngle().z);
+    render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
 
     m_EffectDrive->Update();
     m_EffectDrive->Render(scale, 0.0f);

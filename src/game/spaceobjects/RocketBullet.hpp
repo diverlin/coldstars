@@ -48,8 +48,7 @@ class RocketBullet : public BaseSpaceEntity
         virtual void Hit(int, bool) override final;
         virtual void PostDeathUniqueEvent(bool) override final;  
         
-        void UpdateRenderStuff();
-        void RenderInSpace(float) const;
+        void RenderInSpace(const Renderer&, float);
         
         virtual void SaveData(boost::property_tree::ptree&) const override final;
         virtual void LoadData(const boost::property_tree::ptree&) override final;

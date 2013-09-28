@@ -24,10 +24,23 @@
 class BaseAnimationRotation
 {  
     public:
-        BaseAnimationRotation() {}
+        BaseAnimationRotation(float delta_angle)
+        :
+        m_Angle(0.0f),
+        m_DeltaAngle(delta_angle) 
+        {}
+        
         virtual ~BaseAnimationRotation() {}
 
         virtual void Update(glm::quat&, const glm::vec3&) = 0;
+    
+    protected:
+        float GetDeltaAngle() const { return m_DeltaAngle; }
+        float m_Angle;
+            
+    private:
+        float m_DeltaAngle;   
+        
 };
 
 #endif 

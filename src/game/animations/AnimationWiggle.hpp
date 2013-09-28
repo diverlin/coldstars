@@ -16,36 +16,27 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "AnimationWiggleAxisX.hpp"
-#include <cmath>
+#ifndef ANIMATIONWIGGLE_HPP
+#define ANIMATIONWIGGLE_HPP
 
-AnimationWiggleAxisX::AnimationWiggleAxisX(const glm::vec3& delta, float threshold)
-:
-AnimationBase(delta), 
-threshold(threshold)
-{}
+#include "BaseAnimationRotation.hpp"
 
-/* virtual */
-AnimationWiggleAxisX::~AnimationWiggleAxisX()
-{}
+class AnimationWiggle : public BaseAnimationRotation 
+{  
+         public:
+            AnimationWiggle(float, float);
+            virtual ~AnimationWiggle();
 
-/* virtual */
-void AnimationWiggleAxisX::Update(glm::vec3& angle)
-{
-    if (clockwise)
-    {
-        angle.x += m_Delta.x;
-        if (angle.x > threshold)
-        {
-            clockwise = false;
-        }
-    }
-    else
-    {
-        angle.x -= m_Delta.y;
-        if (fabs(angle.x) > threshold)
-        {
-            clockwise = true;
-        }        
-    }
-}
+            virtual void Update(glm::quat&, const glm::vec3&) override final;
+        
+        private:
+            bool m_Clockwise;
+            float m_Threshold;
+      
+};
+
+#endif 
+
+
+
+
