@@ -19,11 +19,12 @@
 #ifndef DRIVECOMPLEX_HPP
 #define DRIVECOMPLEX_HPP
 
+#include <render/PathVisual.hpp> 
+#include <math/myVector.hpp> 
+
 class Vehicle;
 class DriveEffect;
 class ItemSlot; 
-#include "../render/PathVisual.hpp" 
-#include "../math/myVector.hpp" 
 class BaseSpaceEntity;
 
 class DriveComplex
@@ -32,22 +33,22 @@ class DriveComplex
         DriveComplex();
         ~DriveComplex();
         
-        void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
-        void SetDriveEffect(DriveEffect* drive_effect) { this->drive_effect = drive_effect; };
+        void SetOwnerVehicle(Vehicle* owner_vehicle)    { m_OwnerVehicle = owner_vehicle; };
+        void SetDriveEffect(DriveEffect* drive_effect)  { m_EffectDrive = drive_effect; };
         
-        void SetDriveSlot(ItemSlot* drive_slot) { this->drive_slot = drive_slot; };
-        void SetBakSlot(ItemSlot* bak_slot)     { this->bak_slot = bak_slot; };
+        void SetDriveSlot(ItemSlot* drive_slot) { m_DriveSlot = drive_slot; };
+        void SetBakSlot(ItemSlot* bak_slot)     { m_BakSlot = bak_slot; };
         
         void SetTarget(BaseSpaceEntity*, int);       
         void SetStaticTargetCoords(const glm::vec3&);
 
-        int GetActionId() const { return action_id; };
-        DriveEffect* GetDriveEffect() const { return drive_effect; };
+        int GetActionId() const { return m_ActionId; };
+        DriveEffect* GetDriveEffect() const { return m_EffectDrive; };
                                     
-        ItemSlot* GetDriveSlot() const { return drive_slot; };
-        ItemSlot* GetBakSlot()   const { return bak_slot; };
+        ItemSlot* GetDriveSlot() const { return m_DriveSlot; };
+        ItemSlot* GetBakSlot()   const { return m_BakSlot; };
               
-        BaseSpaceEntity* GetTarget() const { return target; };                
+        BaseSpaceEntity* GetTarget() const { return m_Target; };                
                     
         bool PathExists() const;
         
@@ -56,7 +57,6 @@ class DriveComplex
     
         void ResetTarget();
 
-        //void CalcAcceleratedPath(); // used for hyper jump effect
         void UpdatePath();
         void UpdatePosition();
 
@@ -64,31 +64,29 @@ class DriveComplex
         void DrawPath();
             
     private:
-        ItemSlot* drive_slot;
-        ItemSlot* bak_slot;
+        ItemSlot* m_DriveSlot;
+        ItemSlot* m_BakSlot;
         
-        Vehicle* owner_vehicle;
-        BaseSpaceEntity* target;
+        Vehicle* m_OwnerVehicle;
+        BaseSpaceEntity* m_Target;
 
-        DriveEffect* drive_effect; 
+        DriveEffect* m_EffectDrive; 
 
-        glm::vec3 target_pos;
+        glm::vec3 m_TargetPos;
         
-        int action_id;
-        float target_distance;   
-        glm::vec3 target_offset;
+        int m_ActionId;
+        float m_TargetDistance;   
+        glm::vec3 m_TargetOffset;
 
-        //std::vector<glm::vec2> debug_midLeft_vec;
-        std::vector<glm::vec3> path_center_vec;
-        std::vector<float> angle_vec;
-        
-        bool has_target;
-        bool direction_list_END;
-        unsigned int move_it;
+        std::vector<glm::vec3> m_PathCenterVec;
+        std::vector<float> m_PathAngleVec;
+        bool m_PathEnd;
+        unsigned int m_PathIndex;
+                
+        bool m_HasTarget;
         
         PathVisual visual_center_path;
         PathVisual visual_center_turn;
-        //PathVisual visual_debug_midLeft_path;
         
         void ClearPath();
         void CalcPath();      
@@ -99,6 +97,5 @@ class DriveComplex
 
         void DefineDistance();
 };
-
 
 #endif
