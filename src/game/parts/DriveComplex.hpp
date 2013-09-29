@@ -85,8 +85,8 @@ class DriveComplex
                 
         bool m_HasTarget;
         
-        PathVisual visual_center_path;
-        PathVisual visual_center_turn;
+        PathVisual m_PathVisualCenter;
+        PathVisual m_PathVisualTurn;
         
         void ClearPath();
         void CalcPath();      

@@ -513,8 +513,8 @@ void DriveComplex::UpdatePosition()
 
 void DriveComplex::UpdatePathVisualisation()
 {        
-    visual_center_path.FillData(m_PathCenterVec, 10, 10);
-    visual_center_turn.FillData(m_PathCenterVec, TURN_TIME, 14);
+    m_PathVisualCenter.FillData(m_PathCenterVec, 10, 10);
+    m_PathVisualTurn.FillData(m_PathCenterVec, TURN_TIME, 14);
     //visual_debug_midLeft_path.FillData(GuiTextureObCollector::Instance().dot_red->texture, &debug_midLeft_vec, 10, 10);}
 }
 
@@ -523,8 +523,8 @@ void DriveComplex::DrawPath()
     if (m_PathEnd == false)
     {
         this->UpdatePathVisualisation();
-        visual_center_path.Draw();
-        visual_center_turn.Draw();
+        m_PathVisualCenter.Draw();
+        m_PathVisualTurn.Draw();
         //visual_debug_midLeft_path.Draw();
     }
 }
