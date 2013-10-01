@@ -45,7 +45,7 @@ class Renderer : public NonCopyable
         void DrawQuad(TextureOb*, const glm::mat4&) const;
         void RenderMeshGeometry(const Mesh*, const glm::mat4&) const;
         void RenderMeshGeometry(const Mesh*, const TextureOb*, const glm::mat4&) const;
-        void RenderMeshLight(const Mesh*, const TextureOb*, const glm::mat4&, const glm::vec2&, const glm::vec4&) const;
+        void RenderMeshLight(const Mesh*, const TextureOb*, const glm::mat4&) const;
         void RenderMeshLightNormalMap(const Mesh*, const TextureOb*, const glm::mat4&, const glm::vec2&, const glm::vec4&) const;
         void RenderMeshMultiTextured(const Mesh*, const TextureOb*, const glm::mat4&, float) const;
         
@@ -59,6 +59,8 @@ class Renderer : public NonCopyable
         glm::mat4 m_Pm;
         glm::mat4 m_Vm;
         glm::mat4 m_PVm;
+        
+        glm::vec4 m_Color;
        
         void ComposeModelMatrix(const glm::mat4&) const;
         void UpdateProjectionViewMatrix();

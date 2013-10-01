@@ -16,13 +16,14 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef PATHVISUAL_H
-#define PATHVISUAL_H
+#ifndef PATHVISUAL_HPP
+#define PATHVISUAL_HPP
+
+class TextureOb;
 
 #include <vector>
-#include <GL/glew.h>
-class TextureOb;
-#include "../math/myVector.hpp"
+#include <render/MyGl.hpp>
+#include <math/myVector.hpp>
 
 class PathVisual
 {

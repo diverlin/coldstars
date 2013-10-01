@@ -31,7 +31,9 @@
 #include "../common/constants.hpp"
 
 
-Renderer::Renderer() 
+Renderer::Renderer()
+:
+m_Color(1.0f) 
 {}
 
 Renderer::~Renderer() 
@@ -119,7 +121,7 @@ void Renderer::RenderMeshGeometry(const Mesh* mesh, const TextureOb* textureOb, 
     RenderMeshGeometry(mesh, Mm);
 }
 
-void Renderer::RenderMeshLight(const Mesh* mesh, const TextureOb* textureOb, const glm::mat4& Mm, const glm::vec2& scroll_coords, const glm::vec4& color) const
+void Renderer::RenderMeshLight(const Mesh* mesh, const TextureOb* textureOb, const glm::mat4& Mm) const
 {
     float ambient_factor = 0.25;       
         
@@ -136,8 +138,8 @@ void Renderer::RenderMeshLight(const Mesh* mesh, const TextureOb* textureOb, con
         glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "u_LightPos"), 0.0f, 0.0f, 200.0);
         glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "u_EyePos"), eye_pos.x, eye_pos.y, eye_pos.z);
         
-        glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "u_DiffColor"), color.r, color.g, color.b, color.a);
-        glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "u_AmbientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
+        glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "u_DiffColor"), m_Color.r, m_Color.g, m_Color.b, m_Color.a);
+        glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "u_AmbientColor"), ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
         
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textureOb->texture); // ???

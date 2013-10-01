@@ -18,10 +18,10 @@
 
 #include "PathVisual.hpp"
 #include <cmath>
-#include "Render.hpp"
-#include "../common/constants.hpp"
-#include "../resources/GuiTextureObCollector.hpp"
-#include "../math/myVector.hpp"
+#include <render/Render.hpp>
+#include <common/constants.hpp>
+#include <resources/GuiTextureObCollector.hpp>
+#include <math/myVector.hpp>
 
 PathVisual::PathVisual()  
 { 
@@ -75,11 +75,11 @@ void PathVisual::FillData(const std::vector<glm::vec3>& vec, int step, int point
             {
                 if (i < TURN_TIME)
                 {
-                        texture = texture_green;
+                    texture = texture_green;
                 }
                 else
                 {
-                        texture = texture_blue;                                
+                    texture = texture_blue;                                
                 }
                 
                 glBindTexture(GL_TEXTURE_2D, texture);
@@ -97,14 +97,14 @@ void PathVisual::FillData(TextureOb* textureOb, int radius, int point_size)
 {
     glDeleteLists(gl_list, sizeof(gl_list));
 
-    float da = 4.0f/RADIAN_TO_DEGREE_RATE;
+    float da = 4.0f * DEGREE_TO_RADIAN_RATE;
     glNewList(gl_list, GL_COMPILE);
     {
         enable_POINTSPRITE();
         {
             glBindTexture(GL_TEXTURE_2D, textureOb->texture);
             for (float a=0.0f; a<=2*PI; a+=da)
-              {
+            {
                   drawParticle(glm::vec2(radius * cos(a), radius * sin(a)), point_size);
             }
         }
@@ -150,5 +150,4 @@ void PathVisual::Draw() const
 {
     glCallList(gl_list);
 }
-
 

@@ -143,6 +143,14 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id,  TYPE::ENTI
         //float threshold = 10;
         //AnimationWiggleAxisX* animation_program = new AnimationWiggleAxisX(step3, threshold);
         //ship->SetRenderAnimation(animation_program);
+        
+        float delta_angle = 0.001*getRandInt(20, 60);
+        AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
+        ship->SetAnimationRotation(animation_rotation);
+        
+        ship->SetOrientationOrigin(glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+        ship->SetOrientation(glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+        //ship->SetOrientation(glm::normalize(glm::vec3()));    
 
         ship->BindData3D(mesh, mesh->GetTextureOb(), scale);
     }

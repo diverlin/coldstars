@@ -25,13 +25,10 @@
 
 #include "../common/Logger.hpp"
 
-Atmosphere::Atmosphere(TextureOb* textureOb)
+Atmosphere::Atmosphere()
 :
-parent(nullptr),
-textureOb(textureOb)
-{           
-    d_angle = glm::vec3(0.0, 0.0, -0.4);
-}
+m_Parent(nullptr)
+{}
 
 Atmosphere::~Atmosphere()
 {
@@ -40,31 +37,34 @@ Atmosphere::~Atmosphere()
     #endif    
 }
              
-void Atmosphere::Render(const glm::vec2& scroll_coords)
-{         
-    angle += d_angle;
+void Atmosphere::Render(const Renderer& render)
+{      
+    SetCenter(m_Parent->GetCenter());
+    render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+       
+    //angle += d_angle;
     
-    const glm::vec4& color = parent->GetStarSystem()->GetColor4f(); 
-    float ambient_factor = 0.25;
+    //const glm::vec4& color = parent->GetStarSystem()->GetColor4f(); 
+    //float ambient_factor = 0.25;
     
-    glUseProgram(ShaderCollector::Instance().light);
+    //glUseProgram(ShaderCollector::Instance().light);
     
-    glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0);
-    glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0);
-    glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "diffColor"), color.r, color.g, color.b, color.a);
-    glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
+    //glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "lightPos"), -scroll_coords.x, -scroll_coords.y, -200.0);
+    //glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "eyePos"), -scroll_coords.x, -scroll_coords.y, -200.0);
+    //glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "diffColor"), color.r, color.g, color.b, color.a);
+    //glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
     
-    glEnable(GL_BLEND);
-    glActiveTexture(GL_TEXTURE0);                                
-    glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-    glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
-    float scale_rate = 1.05;
-    glm::vec3 size(parent->GetSize()*scale_rate);
+    //glEnable(GL_BLEND);
+    //glActiveTexture(GL_TEXTURE0);                                
+    //glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+    //glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "Texture_0"), 0);
+    //float scale_rate = 1.05;
+    //glm::vec3 size(parent->GetSize()*scale_rate);
     
-    renderMesh(parent->GetMesh(), parent->GetCenter(), size, angle, false);
-    glDisable(GL_BLEND);
+    //renderMesh(parent->GetMesh(), parent->GetCenter(), size, angle, false);
+    //glDisable(GL_BLEND);
     
-    glUseProgram(0);
-    glActiveTexture(GL_TEXTURE0);
+    //glUseProgram(0);
+    //glActiveTexture(GL_TEXTURE0);
 }
 

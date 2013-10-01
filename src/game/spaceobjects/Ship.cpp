@@ -142,9 +142,9 @@ void Ship::RenderInSpace_2D(const Renderer& render, float scale)
     //}
 }
 
-void Ship::RenderInSpace_3D(const Renderer& render, const glm::vec2& scroll_coords, float scale)
+void Ship::RenderInSpace_3D(const Renderer& render, float scale)
 {
-    render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix(), scroll_coords, GetStarSystem()->GetColor4f());
+    render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 
     //enable_BLEND();
     //if (GetProperties().shield_effect_enabled == true)

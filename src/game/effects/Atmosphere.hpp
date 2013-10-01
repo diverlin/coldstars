@@ -17,28 +17,25 @@
 */
 
 
-#ifndef ATMOSPHERE_H
-#define ATMOSPHERE_H
+#ifndef ATMOSPHERE_HPP
+#define ATMOSPHERE_HPP
 
+#include <common/BaseDrawable.hpp>
+
+class Renderer;
 class BaseSpaceEntity;
-class TextureOb;
-#include "../math/myVector.hpp"
 
-class Atmosphere
+class Atmosphere : public BaseDrawable
 {
     public:
-        Atmosphere(TextureOb*);
+        Atmosphere();
         ~Atmosphere();
             
-        void SetParent(BaseSpaceEntity* parent) { this->parent = parent; }
-        void Render(const glm::vec2&);
+        void SetParent(BaseSpaceEntity* parent) { m_Parent = parent; }
+        void Render(const Renderer&);
         
     private:
-        BaseSpaceEntity* parent;
-        TextureOb* textureOb;
-        
-        glm::vec3 angle;
-        glm::vec3 d_angle;
+        BaseSpaceEntity* m_Parent;
 }; 
 
 #endif 
