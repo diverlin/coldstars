@@ -117,13 +117,13 @@ void Planet::UpdateInfo()
 void Planet::PostDeathUniqueEvent(bool)
 {}
 
-void Planet::Render_NEW(const Renderer& render, const glm::vec2& scroll_coords)
+void Planet::Render_NEW(const Renderer& render)
 {
-    render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix(), glm::vec2(0.0f), GetStarSystem()->GetColor4f());
-    //if (m_Atmosphere != nullptr)
-    //{
-        //m_Atmosphere->Render(scroll_coords);
-    //}
+    render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    if (m_Atmosphere != nullptr)
+    {
+        m_Atmosphere->Render(render);
+    }
 }
 
 void Planet::Render_OLD(const Renderer& render)

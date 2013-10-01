@@ -79,7 +79,8 @@ class DriveComplex
         glm::vec3 m_TargetOffset;
 
         std::vector<glm::vec3> m_PathCenterVec;
-        std::vector<float> m_PathAngleVec;
+        std::vector<glm::vec3> m_PathOrientVec;
+
         bool m_PathEnd;
         unsigned int m_PathIndex;
                 
@@ -90,7 +91,7 @@ class DriveComplex
         
         void ClearPath();
         void CalcPath();      
-        void CalcPath2();  
+
         bool ValidateTarget() const;
         
         void UpdateDynamicTargetCoord();

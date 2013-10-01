@@ -58,9 +58,9 @@ Planet* PlanetBuilder::GetNewPlanetTemplate(INTLONGEST id) const
 Planet* PlanetBuilder::GetNewPlanet(float orbit_radius) const
 {
     Planet* planet = GetNewPlanetTemplate();
-        CreateNewInternals(planet, orbit_radius);
-        
-        return planet;
+    CreateNewInternals(planet, orbit_radius);
+    
+    return planet;
 } 
      
 void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
@@ -97,7 +97,8 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     //if (getRandBool()) 
     {
         TextureOb* textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ATMOSPHERE_ID); 
-        Atmosphere* atmosphere = new Atmosphere(textureOb_atmosphere);
+        Atmosphere* atmosphere = new Atmosphere();
+        atmosphere->BindData3D(mesh, textureOb_atmosphere, 1.1f*scale);
         planet->BindAtmosphere(atmosphere);
     }
 }

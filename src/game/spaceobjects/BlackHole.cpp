@@ -81,9 +81,9 @@ void BlackHole::UpdateInfo()
     GetInfo().addNameStr("pos:");        GetInfo().addValueStr( str(GetCenter()) );
 }
       
-void BlackHole::Render_NEW(const Renderer& render, const glm::vec2& scroll_coords)
+void BlackHole::Render_NEW(const Renderer& render)
 {
-    render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix(), glm::vec2(0.0f), GetStarSystem()->GetColor4f());
+    render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
     
 void BlackHole::Render_OLD(const Renderer& render)

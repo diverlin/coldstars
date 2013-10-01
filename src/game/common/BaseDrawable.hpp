@@ -49,7 +49,6 @@ class BaseDrawable : public Orientation
         void BindData3D(Mesh*, TextureOb*, const glm::vec3&);
         void BindData2D(TextureOb*);    
         void SetAnimationRotation(BaseAnimationRotation* animation_rotation) { m_AnimationRotation = animation_rotation; }
-        void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; }
         void SetColor(const glm::vec4& color) { m_Color = color; }
                         
         bool Is3D() const                 { return (m_Mesh != nullptr); }
@@ -88,8 +87,7 @@ class BaseDrawable : public Orientation
         glm::mat4 m_MatrixTranslate;
         glm::mat4 m_MatrixRotate;
         glm::mat4 m_MatrixScale;
-
-        //glm::quat m_QuatOrigin;        
+ 
         glm::quat m_QuatPosition;
         glm::quat m_QuatAnimation;        
 

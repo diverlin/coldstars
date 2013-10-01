@@ -24,7 +24,7 @@ Orientation::Orientation()
 m_IsUpdated(false)
 {
     m_OrientOrigin = glm::vec3(0.0f, 0.0f, 1.0f);
-    m_Orient       = glm::vec3(1.0f, 1.0f, 1.0f); 
+    m_Orient       = glm::vec3(0.0f, 0.0f, 1.0f); 
 }
 
 /* virtual */

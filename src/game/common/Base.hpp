@@ -31,7 +31,7 @@ class Base : private NonCopyable
         Base();
         virtual ~Base();
 
-        virtual void PutChildsToGarbage() const = 0;
+        virtual void PutChildsToGarbage() const {};
         void SetSubSubTypeId(TYPE::ENTITY subsubtype_id) { m_Data_id.subsubtype_id = subsubtype_id; }
         
         INTLONGEST GetId() const { return m_Data_id.id; }   
@@ -41,9 +41,9 @@ class Base : private NonCopyable
                     
         std::string GetDataTypeString() const;
 
-        virtual void SaveData(boost::property_tree::ptree&) const = 0;
-        virtual void LoadData(const boost::property_tree::ptree&) = 0;
-        virtual void ResolveData() = 0;
+        virtual void SaveData(boost::property_tree::ptree&) const {};
+        virtual void LoadData(const boost::property_tree::ptree&) {};
+        virtual void ResolveData() {};
         
     protected:
         void SetId(INTLONGEST id)                  { m_Data_id.id = id; }

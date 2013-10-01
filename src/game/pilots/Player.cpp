@@ -433,7 +433,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             {
                 for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
                 { 
-                   visible_PLANET_vec[i]->Render_NEW(render, world_coord); 
+                   visible_PLANET_vec[i]->Render_NEW(render); 
                 }
 
                 for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
@@ -448,7 +448,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 { 
                     if(visible_SHIP_vec[i]->Is3D())
                     {
-                       visible_SHIP_vec[i]->RenderInSpace_3D(render, world_coord, 1/scale); 
+                       visible_SHIP_vec[i]->RenderInSpace_3D(render, 1/scale); 
                     }
                 }
                      
@@ -459,7 +459,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 
                 for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
                 { 
-                    visible_BLACKHOLE_vec[i]->Render_NEW(render, world_coord);                     
+                    visible_BLACKHOLE_vec[i]->Render_NEW(render);                     
                 } 
                      
             }
