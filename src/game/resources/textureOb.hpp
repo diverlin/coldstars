@@ -22,10 +22,9 @@
 
 #include <string>
 #include <vector>
-#include "GL/glew.h"
-
-#include "../math/myVector.hpp"
-
+#include <render/MyGl.hpp>
+#include <glm/glm.hpp>
+ 
 #include <types/TextureTypes.hpp>
 #include <types/RaceTypes.hpp>
 #include <types/EntityTypes.hpp>

@@ -54,6 +54,7 @@ void loadGameData()
 
 void load3DModels()
 {        
+    MeshCollector::Instance().RegisterMesh(new Mesh(DATA_REL_PATH+"obj/plane/plane.obj", nullptr, TYPE::MESH::PLANE_ID));
     MeshCollector::Instance().RegisterMesh(new Mesh(DATA_REL_PATH+"obj/sphere/sphere.obj", nullptr, TYPE::MESH::SPHERE_ID));
     MeshCollector::Instance().RegisterMesh(new Mesh(DATA_REL_PATH+"obj/sphere_deformed/sphere_deformed.obj", nullptr, TYPE::MESH::SPHERE_DEFORMED_ID));
     
@@ -786,6 +787,11 @@ void loadImages()
     TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ATMOSPHERE_ID, DATA_REL_PATH+"planet/atmosphere_001.png", true, &arg) );
 }
 
+//################################ RING_TEXTURE ####################################
+{
+    std::vector<int> arg; 
+    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::RING_ID, DATA_REL_PATH+"planet/ring.png", true, &arg) );
+}
 
 //################################ EFFECTS TEXTURE ###################################
 {

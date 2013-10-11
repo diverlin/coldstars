@@ -44,8 +44,8 @@ class Orientation : public Base
         void SetSize(float x, float y, float z) { m_Size = glm::vec3(x, y, z); m_IsUpdated = false; }
         void SetSize(const glm::vec3& size) { m_Size = size; m_IsUpdated = false; }
 
-        void SetOrientationOrigin(const glm::vec3& orient_origin) { m_OrientOrigin = orient_origin; m_IsUpdated = false; }        
-        void SetOrientation(const glm::vec3& orient)              { m_Orient = orient; m_IsUpdated = false; }
+        void SetOrientOrigin(const glm::vec3& orient_origin) { m_OrientOrigin = orient_origin; m_IsUpdated = false; }        
+        void SetOrient(const glm::vec3& orient)              { m_Orient = orient; m_IsUpdated = false; }
         
         const glm::vec3& GetOrientOrigin() const { return m_OrientOrigin; }        
         const glm::vec3& GetOrient() const { return m_Orient; }

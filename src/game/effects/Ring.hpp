@@ -17,16 +17,16 @@
 */
 
 
-#ifndef ATMOSPHERE_HPP
-#define ATMOSPHERE_HPP
+#ifndef RING_HPP
+#define RING_HPP
 
 #include <effects/BaseDecor.hpp>
 
-class Atmosphere : public BaseDecor
+class Ring : public BaseDecor
 {
     public:
-        Atmosphere();
-        virtual ~Atmosphere();
+        Ring();
+        virtual ~Ring();
             
         virtual void Render(const Renderer&, const glm::vec3&) override final;
 }; 

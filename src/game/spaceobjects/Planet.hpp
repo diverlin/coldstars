@@ -22,7 +22,7 @@
 
 #include "BasePlanet.hpp"
 class BaseLand;
-class Atmosphere;
+class BaseDecor;
 
 
 class Planet : public BasePlanet
@@ -31,7 +31,8 @@ class Planet : public BasePlanet
         Planet(int);
         virtual ~Planet();
         
-        void BindAtmosphere(Atmosphere*);
+        void AddDecoration(BaseDecor* decor) { m_Decorations.push_back(decor); }
+        
         void BindLand(BaseLand*);
         void SetPopulation(unsigned long int population)  { m_Population = population; }
         
@@ -52,7 +53,7 @@ class Planet : public BasePlanet
         
     private:
         BaseLand* m_Land; 
-        Atmosphere* m_Atmosphere;
+        std::vector<BaseDecor*> m_Decorations;
         
         unsigned long int m_Population;
         
