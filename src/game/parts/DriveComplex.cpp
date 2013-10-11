@@ -398,7 +398,7 @@ void DriveComplex::UpdatePosition()
         if (m_PathIndex < m_PathCenterVec.size())
         {
             m_OwnerVehicle->SetCenter(m_PathCenterVec[m_PathIndex]);
-            m_OwnerVehicle->SetOrientation(m_PathOrientVec[m_PathIndex]);
+            m_OwnerVehicle->SetOrient(m_PathOrientVec[m_PathIndex]);
             m_PathIndex++;
         }
         else

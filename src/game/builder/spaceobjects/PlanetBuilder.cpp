@@ -19,7 +19,9 @@
 #include "PlanetBuilder.hpp"
 #include "../CommonBuilderHeaders.hpp"
 #include "../../spaceobjects/Planet.hpp"
-#include "../../effects/Atmosphere.hpp"
+
+#include <effects/Atmosphere.hpp>
+#include <effects/Ring.hpp>
 
 #include <types/MeshTypes.hpp>
 
@@ -89,18 +91,30 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     planet->BindData3D(mesh, textureOb, scale);
     
-    planet->SetOrientation(glm::normalize(glm::vec3(1.0f)));    
+    planet->SetOrient(glm::normalize(glm::vec3(1.0f)));    
     float delta_angle = 0.0001*getRandInt(20, 60);
     AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
     planet->SetAnimationRotation(animation_rotation);
     
     //if (getRandBool()) 
     {
-        TextureOb* textureOb_atmosphere = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ATMOSPHERE_ID); 
+        TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ATMOSPHERE_ID); 
         Atmosphere* atmosphere = new Atmosphere();
-        atmosphere->BindData3D(mesh, textureOb_atmosphere, 1.1f*scale);
-        planet->BindAtmosphere(atmosphere);
+        atmosphere->BindData3D(mesh, textureOb, 1.04f*scale);
+        planet->AddDecoration(atmosphere);
     }
+
+    {
+        Mesh* mesh_plane = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+        
+        TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::RING_ID); 
+        Ring* ring = new Ring();
+        ring->BindData3D(mesh_plane, textureOb, 1.5f*scale);
+        //ring->SetOrient(glm::normalize(glm::vec3(1.0f)));
+        ring->SetOrient(glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
+        planet->AddDecoration(ring);
+    }
+    
 }
 
 

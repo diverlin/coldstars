@@ -85,6 +85,7 @@ class TextureManager
             std::vector<TextureOb*> star_texOb_vec;
         std::vector<TextureOb*> planet_texOb_vec;
         std::vector<TextureOb*> atmosphere_texOb_vec;
+        std::vector<TextureOb*> ring_texOb_vec;
         std::vector<TextureOb*> asteroid_texOb_vec;  
         std::vector<TextureOb*> mineral_texOb_vec;   
         std::vector<TextureOb*> container_texOb_vec;  

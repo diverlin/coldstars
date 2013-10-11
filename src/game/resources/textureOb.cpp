@@ -94,7 +94,7 @@ void TextureOb::Manage(TYPE::TEXTURE type_id, const std::string& path, const std
         
         // KOSMOPORT
         case TYPE::TEXTURE::ANGAR_BACKGROUND_ID: { angarBgArgManager(args); break; }
-           case TYPE::TEXTURE::STORE_BACKGROUND_ID: { storeBgArgManager(args); break; }
+        case TYPE::TEXTURE::STORE_BACKGROUND_ID: { storeBgArgManager(args); break; }
         case TYPE::TEXTURE::SHOP_BACKGROUND_ID:  { shopBgArgManager(args);  break; }
         case TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID: { govermentBgArgManager(args); break; }
         case TYPE::TEXTURE::FACE_ID:         { faceArgManager(args); break; }
@@ -112,7 +112,7 @@ void TextureOb::Manage(TYPE::TEXTURE type_id, const std::string& path, const std
         case TYPE::TEXTURE::LAZER_EQUIPMENT_ID:  { LazerEquipmentArgManager(args); break; }
         case TYPE::TEXTURE::ROCKET_EQUIPMENT_ID: { RocketEquipmentArgManager(args); break; }
         case TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID: { ProtectorEquipmentArgManager(args); break; }
-           case TYPE::TEXTURE::DROID_EQUIPMENT_ID:  { DroidEquipmentArgManager(args); break; }
+        case TYPE::TEXTURE::DROID_EQUIPMENT_ID:  { DroidEquipmentArgManager(args); break; }
         case TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID: { GrappleEquipmentArgManager(args); break; }
         case TYPE::TEXTURE::BAK_EQUIPMENT_ID:     { BakEquipmentArgManager(args); break; }
         case TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID: { energyBlockItemArgManager(args); break; }

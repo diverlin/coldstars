@@ -53,6 +53,7 @@ void TextureManager::Add(TextureOb* texOb)
         case TYPE::TEXTURE::STAR_ID:        { star_texOb_vec.push_back(texOb);           break; } 
         case TYPE::TEXTURE::PLANET_ID:      { planet_texOb_vec.push_back(texOb);         break; }
         case TYPE::TEXTURE::ATMOSPHERE_ID:  { atmosphere_texOb_vec.push_back(texOb);     break; }
+        case TYPE::TEXTURE::RING_ID:  { ring_texOb_vec.push_back(texOb);     break; }
         case TYPE::TEXTURE::SHIP_ID:        
         {  
             switch(texOb->race_id) 
@@ -462,6 +463,7 @@ TextureOb* TextureManager::GetRandomTextureOb(TYPE::TEXTURE texture_type_id)
         case TYPE::TEXTURE::STAR_ID:             { requested_texOb = GetRandomTextureObFromVec(star_texOb_vec);                 break; }
         case TYPE::TEXTURE::PLANET_ID:           { requested_texOb = GetRandomTextureObFromVec(planet_texOb_vec);               break; }
         case TYPE::TEXTURE::ATMOSPHERE_ID:       { requested_texOb = GetRandomTextureObFromVec(atmosphere_texOb_vec);           break; }
+        case TYPE::TEXTURE::RING_ID:       { requested_texOb = GetRandomTextureObFromVec(ring_texOb_vec);           break; }
         case TYPE::TEXTURE::ASTEROID_ID:         { requested_texOb = GetRandomTextureObFromVec(asteroid_texOb_vec);             break; }
         case TYPE::TEXTURE::MINERAL_ID:          { requested_texOb = GetRandomTextureObFromVec(mineral_texOb_vec);              break; }
         case TYPE::TEXTURE::BOMB_ID:             { requested_texOb = GetRandomTextureObFromVec(bomb_texOb_vec);                 break; }

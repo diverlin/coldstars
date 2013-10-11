@@ -148,8 +148,8 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id,  TYPE::ENTI
         AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
         ship->SetAnimationRotation(animation_rotation);
         
-        ship->SetOrientationOrigin(glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
-        ship->SetOrientation(glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+        ship->SetOrientOrigin(glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
+        ship->SetOrient(glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
         //ship->SetOrientation(glm::normalize(glm::vec3()));    
 
         ship->BindData3D(mesh, mesh->GetTextureOb(), scale);

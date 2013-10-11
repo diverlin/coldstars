@@ -17,18 +17,20 @@
 */
 
 
-#ifndef ATMOSPHERE_HPP
-#define ATMOSPHERE_HPP
+#ifndef BASEDECOR_HPP
+#define BASEDECOR_HPP
 
-#include <effects/BaseDecor.hpp>
+#include <common/BaseDrawable.hpp>
 
-class Atmosphere : public BaseDecor
+class Renderer;
+
+class BaseDecor : public BaseDrawable
 {
     public:
-        Atmosphere();
-        virtual ~Atmosphere();
+        BaseDecor() {}
+        ~BaseDecor() {}
             
-        virtual void Render(const Renderer&, const glm::vec3&) override final;
+        virtual void Render(const Renderer&, const glm::vec3&) = 0;
 }; 
 
 #endif 

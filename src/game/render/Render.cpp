@@ -56,7 +56,7 @@ void Renderer::Init()
     
     glShadeModel(GL_SMOOTH);
     
-    glCullFace(GL_BACK); 
+    //glCullFace(GL_BACK); 
 }
 
 void Renderer::SetPerspectiveProjection(float w, float h) 
@@ -121,6 +121,14 @@ void Renderer::RenderMeshGeometry(const Mesh* mesh, const TextureOb* textureOb, 
     RenderMeshGeometry(mesh, Mm);
 }
 
+void Renderer::RenderTransparentMeshGeometry(const Mesh* mesh, const TextureOb* textureOb, const glm::mat4& Mm) const
+{
+    enable_BLEND();
+        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+        RenderMeshGeometry(mesh, Mm);
+    disable_BLEND();
+}
+
 void Renderer::RenderMeshLight(const Mesh* mesh, const TextureOb* textureOb, const glm::mat4& Mm) const
 {
     float ambient_factor = 0.25;       
@@ -172,6 +180,13 @@ void Renderer::RenderMeshLightNormalMap(const Mesh* mesh, const TextureOb* textu
         RenderMeshGeometry(mesh, Mm);
     }
     glUseProgram(0);
+}
+
+void Renderer::RenderTransparentMeshLight(const Mesh* mesh, const TextureOb* textureOb, const glm::mat4& Mm) const
+{
+    enable_BLEND();
+        RenderMeshLight(mesh, textureOb, Mm);
+    disable_BLEND();
 }
 
 void Renderer::RenderMeshMultiTextured(const Mesh* mesh, const TextureOb* textureOb, const glm::mat4& modelMatrix, float offset) const
@@ -289,8 +304,8 @@ void setColor4f(float r, float g, float b, float a) { glColor4f(r, g, b, a); }
 void enable_BLEND()  { glEnable(GL_BLEND);  }
 void disable_BLEND() { glDisable(GL_BLEND); }
 
-void enable_CULLFACE()  { glEnable(GL_CULL_FACE); }
-void disable_CULLFACE() { glDisable(GL_CULL_FACE); }
+void enable_CULLFACE()  { /*glEnable(GL_CULL_FACE);*/ }
+void disable_CULLFACE() { /*glDisable(GL_CULL_FACE);*/ }
 
 void enable_DEPTH()  { glEnable(GL_DEPTH_TEST); }
 void disable_DEPTH() { glDisable(GL_DEPTH_TEST); }

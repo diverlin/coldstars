@@ -24,7 +24,7 @@
   
 #include <dock/Kosmoport.hpp>
 
-#include <effects/Atmosphere.hpp>
+#include <effects/BaseDecor.hpp>
 
 #include <world/EntityManager.hpp>
 #include <world/starsystem.hpp>
@@ -41,7 +41,6 @@
 Planet::Planet(int id)
 :
 m_Land(nullptr),
-m_Atmosphere(nullptr),
 m_Population(0)
 {    
     SetId(id);
@@ -54,20 +53,18 @@ Planet::~Planet()
     #if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~Planet("+int2str(GetId())+")");
     #endif
-    
-    delete m_Atmosphere;
+   
+    for (BaseDecor* decor : m_Decorations)
+    {
+        delete decor;
+    } 
+    m_Decorations.clear();
 }
 
 /* virtual override final */
 void Planet::PutChildsToGarbage() const
 {
     EntityGarbage::Instance().Add(m_Land);
-}
-
-void Planet::BindAtmosphere(Atmosphere* atmosphere) 
-{
-    m_Atmosphere = atmosphere; 
-    m_Atmosphere->SetParent(this);
 }
 
 void Planet::BindLand(BaseLand* land)
@@ -120,9 +117,9 @@ void Planet::PostDeathUniqueEvent(bool)
 void Planet::Render_NEW(const Renderer& render)
 {
     render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-    if (m_Atmosphere != nullptr)
+    for (BaseDecor* decor : m_Decorations)
     {
-        m_Atmosphere->Render(render);
+        decor->Render(render, GetCenter());
     }
 }
 
