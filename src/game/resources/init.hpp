@@ -17,9 +17,9 @@
 */
 
 
-#ifndef INIT_H
-#define INIT_H
+#ifndef INIT_HPP
+#define INIT_HPP
 
-void init();
+void initGameStuff();
 
 #endif

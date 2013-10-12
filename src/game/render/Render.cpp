@@ -33,7 +33,9 @@
 
 Renderer::Renderer()
 :
-m_Color(1.0f) 
+m_Color(1.0f),
+m_ProgramLight(0),
+m_ProgramBlur(0) 
 {}
 
 Renderer::~Renderer() 
@@ -57,8 +59,16 @@ void Renderer::Init()
     glShadeModel(GL_SMOOTH);
     
     //glCullFace(GL_BACK); 
+    
+
 }
 
+void Renderer::MakeShortCuts()
+{
+    m_ProgramLight = ShaderCollector::Instance().light;
+    m_ProgramBlur  = ShaderCollector::Instance().blur;
+}
+        
 void Renderer::SetPerspectiveProjection(float w, float h) 
 {        
     m_Pm = glm::perspective(90.0f, w/h, 0.1f, 1000.0f);
@@ -135,23 +145,23 @@ void Renderer::RenderMeshLight(const Mesh* mesh, const TextureOb* textureOb, con
         
     glm::vec3 eye_pos = Screen::Instance().GetCamera().GetPos();
     
-    glUseProgram(ShaderCollector::Instance().light);
+    glUseProgram(m_ProgramLight);
     {
         glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(Mm)));
     
-        glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().light, "u_ModelMatrix"), 1, GL_FALSE, &Mm[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().light, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);
-        glUniformMatrix3fv(glGetUniformLocation(ShaderCollector::Instance().light, "u_NormalModelMatrix"), 1, GL_FALSE, &NormalModelMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_ProgramLight, "u_ModelMatrix"), 1, GL_FALSE, &Mm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_ProgramLight, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);
+        glUniformMatrix3fv(glGetUniformLocation(m_ProgramLight, "u_NormalModelMatrix"), 1, GL_FALSE, &NormalModelMatrix[0][0]);
                 
-        glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "u_LightPos"), 0.0f, 0.0f, 200.0);
-        glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light, "u_EyePos"), eye_pos.x, eye_pos.y, eye_pos.z);
+        glUniform3f(glGetUniformLocation(m_ProgramLight, "u_LightPos"), 0.0f, 0.0f, 200.0);
+        glUniform3f(glGetUniformLocation(m_ProgramLight, "u_EyePos"), eye_pos.x, eye_pos.y, eye_pos.z);
         
-        glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "u_DiffColor"), m_Color.r, m_Color.g, m_Color.b, m_Color.a);
-        glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light, "u_AmbientColor"), ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
+        glUniform4f(glGetUniformLocation(m_ProgramLight, "u_DiffColor"), m_Color.r, m_Color.g, m_Color.b, m_Color.a);
+        glUniform4f(glGetUniformLocation(m_ProgramLight, "u_AmbientColor"), ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
         
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textureOb->texture); // ???
-        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light, "u_Texture0"), 0);
+        glUniform1i(glGetUniformLocation(m_ProgramLight, "u_Texture0"), 0);
                             
         mesh->Draw();
     }
@@ -207,7 +217,47 @@ void Renderer::RenderMeshMultiTextured(const Mesh* mesh, const TextureOb* textur
     }
     glUseProgram(0);
 }        
-        
+
+void Renderer::DrawFullScreenQuad(int w, int h, float pos_z) const
+{
+    glLoadMatrixf(&m_Pm[0][0]); 
+    
+    glBegin(GL_QUADS);
+    {
+        glTexCoord3f(0, 0, 0); glVertex3f(0, 0, pos_z);
+        glTexCoord3f(1, 0, 0); glVertex3f(w, 0, pos_z);
+        glTexCoord3f(1, 1, 0); glVertex3f(w, h, pos_z);
+        glTexCoord3f(0, 1, 0); glVertex3f(0, h, pos_z); 
+    }   
+    glEnd();
+}
+
+       
+void Renderer::DrawFullScreenTexturedQuad(GLuint texture, int w, int h, float pos_z) const
+{
+    glBindTexture(GL_TEXTURE_2D, texture);
+    DrawFullScreenQuad(w, h, pos_z);
+}
+
+
+void Renderer::DrawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z) const
+{
+    glUseProgram(m_ProgramBlur);
+    
+    glActiveTexture(GL_TEXTURE0);                              
+    glBindTexture(GL_TEXTURE_2D, texture);
+    
+    glUniform1i(glGetUniformLocation(m_ProgramBlur, "sceneTex"), 0);
+    
+    glUniform1f(glGetUniformLocation(m_ProgramBlur, "rt_w"), 3*w); 
+    glUniform1f(glGetUniformLocation(m_ProgramBlur, "rt_h"), 3*h);
+    glUniform1f(glGetUniformLocation(m_ProgramBlur, "vx_offset"), 1.0);
+    
+    DrawFullScreenQuad(w, h, pos_z);
+    
+    glUseProgram(0);
+}
+ 
 void Renderer::DrawParticleTextured(TextureOb* texOb, const glm::vec3& center, float size) const
 {
     glBindTexture(GL_TEXTURE_2D, texOb->texture);
@@ -541,44 +591,6 @@ void drawInfoIn2Column(
     glPopMatrix();
 }
 
-void drawFullScreenQuad(int w, int h, float pos_z)
-{
-    glBegin(GL_QUADS);
-    {
-        glTexCoord3f(0, 0, 0); glVertex3f(0, 0, pos_z);
-        glTexCoord3f(1, 0, 0); glVertex3f(w, 0, pos_z);
-        glTexCoord3f(1, 1, 0); glVertex3f(w, h, pos_z);
-        glTexCoord3f(0, 1, 0); glVertex3f(0, h, pos_z); 
-    }   
-    glEnd();
-}
-
-
-void drawFullScreenTexturedQuad(GLuint texture, int w, int h, float pos_z)
-{
-    glBindTexture(GL_TEXTURE_2D, texture);
-    drawFullScreenQuad(w, h, pos_z);
-}
-
-
-void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z, GLuint program_blur)
-{
-    glUseProgram(program_blur);
-    
-    glActiveTexture(GL_TEXTURE0);                              
-    glBindTexture(GL_TEXTURE_2D, texture);
-    
-    glUniform1i(glGetUniformLocation(program_blur, "sceneTex"), 0);
-    
-    glUniform1f(glGetUniformLocation(program_blur, "rt_w"), 3*w); 
-    glUniform1f(glGetUniformLocation(program_blur, "rt_h"), 3*h);
-    glUniform1f(glGetUniformLocation(program_blur, "vx_offset"), 1.0);
-    
-    drawFullScreenQuad(w, h, pos_z);
-    
-    glUseProgram(0);
-}
-    
     
 void renderMesh(const Mesh* const mesh, const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle, bool ZYX)
 {

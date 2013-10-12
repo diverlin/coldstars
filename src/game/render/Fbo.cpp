@@ -61,7 +61,7 @@ void Fbo::Activate(int width, int height)
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);     // bind fbo
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
+    //glLoadIdentity();
     
     glPushAttrib(GL_VIEWPORT_BIT);               // viewport is shared with the main context
     glViewport(0, 0, width, height);
@@ -71,6 +71,7 @@ void Fbo::Deactivate()
 {
     glActiveTexture(GL_TEXTURE0);                // debug
     glPopAttrib();                               // restore viewport
+    glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
 }
 
 

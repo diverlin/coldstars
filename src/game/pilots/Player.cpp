@@ -372,7 +372,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     enable_CULLFACE();
     {
         // render background and star to FBO0
-        //Screen::Instance().GetFbo0().Activate(w, h);
+        Screen::Instance().GetFbo0().Activate(w, h);
         {
             render.SetPerspectiveProjection(w, h);
                 
@@ -391,14 +391,13 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             }
             disable_BLEND();       
         }
-        //Screen::Instance().GetFbo0().Deactivate();
-/*
-        // BLOOM background and star (uses many FBO)
-        resizeGl(w, h); 
-        Screen::Instance().GetBloom().Proceed(w, h, Screen::Instance().GetFbo0().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
+        Screen::Instance().GetFbo0().Deactivate();
 
+        // BLOOM background and star (uses many FBO)
+  //      resizeGl(w, h); 
+        Screen::Instance().GetBloom().Proceed(render, w, h, Screen::Instance().GetFbo0().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
         // VOLUMETRIC LIGHT to FBO1
-        resizeGl(w, h); 
+  //      resizeGl(w, h); 
         Screen::Instance().GetFbo1().Activate(w, h);
         {
             glUseProgram(ShaderCollector::Instance().volumetriclight);
@@ -414,21 +413,21 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 glUniform4f(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "sun_pos"), -world_coord.x/(w*scale), -world_coord.y/(h*scale), -100.0, 1.0);
           
                 glActiveTexture(GL_TEXTURE0);
-                drawFullScreenQuad(w, h, -999.0);
+                render.DrawFullScreenQuad(w, h, -499.0);
             }
             glUseProgram(0);
             glActiveTexture(GL_TEXTURE0);
         }
         Screen::Instance().GetFbo1().Deactivate();    
-                            
+
         // render space entites to FBO2     
         Screen::Instance().GetFbo2().Activate(w, h);
         {
-            drawFullScreenTexturedQuad(Screen::Instance().GetFbo1().GetTexture(), w, h, -999.0);
+            render.DrawFullScreenTexturedQuad(Screen::Instance().GetFbo1().GetTexture(), w, h, -499.0);
            
-            resizeGl(w*scale, h*scale);     
-            camera(world_coord.x, world_coord.y, CAMERA_POS_Z);    
-*/
+           // resizeGl(w*scale, h*scale);     
+            //camera(world_coord.x, world_coord.y, CAMERA_POS_Z);    
+//
             enable_DEPTH();  
             {
                 for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
@@ -507,10 +506,14 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
             }
             disable_BLEND();
-            /*
+
         }
         Screen::Instance().GetFbo2().Deactivate();
-
+            
+            render.DrawFullScreenTexturedQuad(Screen::Instance().GetFbo2().GetTexture(), w, h, -499.0);
+                
+                
+        /*
 
         // SHOCKWAVE post process to Fbo3
         resizeGl(w, h); 

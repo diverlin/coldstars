@@ -65,12 +65,13 @@ int main()
     //runThreadTest();
     //runSinglethread();    
     //runVectorPerfomanceTest();
-
-    init();    
     
+    Screen::Instance().InitRenderStuff();
+    initGameStuff(); 
+    Screen::Instance().InitPostEffects();  
+    Screen::Instance().GetRender().MakeShortCuts();
+        
     //runMatrixPerfomanceTest();
-            
-    GameDate::Instance().SetDate(1,1,4000);
         
     Player* player = PlayerBuilder::Instance().GetNewPlayer();
     

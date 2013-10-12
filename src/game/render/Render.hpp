@@ -36,6 +36,7 @@ class Renderer : public NonCopyable
         ~Renderer();
 
         void Init();
+        void MakeShortCuts();
         
         void SetPerspectiveProjection(float, float);
         void SetOrthogonalProjection(float, float);
@@ -50,7 +51,11 @@ class Renderer : public NonCopyable
         void RenderMeshLightNormalMap(const Mesh*, const TextureOb*, const glm::mat4&, const glm::vec2&, const glm::vec4&) const;
         void RenderTransparentMeshLight(const Mesh*, const TextureOb*, const glm::mat4&) const;
         void RenderMeshMultiTextured(const Mesh*, const TextureOb*, const glm::mat4&, float) const;
-        
+
+        void DrawFullScreenQuad(int w, int h, float pos_z) const;        
+        void DrawFullScreenTexturedQuad(GLuint texture, int w, int h, float pos_z) const;
+        void DrawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z) const;
+                
         void DrawParticleTextured(TextureOb*, const glm::vec3&, float) const;
         
         void DrawAxis(const glm::mat4&, float) const;
@@ -66,6 +71,9 @@ class Renderer : public NonCopyable
        
         void ComposeModelMatrix(const glm::mat4&) const;
         void UpdateProjectionViewMatrix();
+        
+        GLuint m_ProgramLight;
+        GLuint m_ProgramBlur;
         
 };
 
@@ -120,14 +128,6 @@ void drawInfoIn2Column(
                 const std::vector<std::string>& pnfo_title_list, 
                 const std::vector<std::string>& info_value_list, 
                 const glm::vec2& pos);
-
-void drawFullScreenQuad(int w, int h, float pos_z);
-
-
-void drawFullScreenTexturedQuad(GLuint texture, int w, int h, float pos_z);
-
-
-void drawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z, GLuint program_blur);
 
 void renderMesh(const Mesh* const mesh, const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle, bool ZYX);
 void rotateZYX(const glm::vec3&);

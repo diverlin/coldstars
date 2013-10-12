@@ -20,11 +20,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #ifndef BLOOM_H
 #define BLOOM_H
 
-#include <GL/glew.h>
+#include <render/MyGl.hpp>
 #include <vector>
 
-#include "../math/myVector.hpp"
-#include "Fbo.hpp"
+#include <math/myVector.hpp>
+#include <render/Fbo.hpp>
+class Renderer;
 
 class BloomEffect
 {
@@ -32,30 +33,30 @@ class BloomEffect
         Fbo& GetFboFinal() { return fbo_final; };
         GLuint GetTextureBlured() const { return texture_blured; }
               
-                BloomEffect();
-                ~BloomEffect();
-                
-                void Create(GLuint, GLuint, GLuint);
-                void Resize(int, int);
-                
-                void Proceed(int w, int h, GLuint texture, float brightness_threshold);
+        BloomEffect();
+        ~BloomEffect();
+        
+        void Create(GLuint, GLuint, GLuint);
+        void Resize(int, int);
+        
+        void Proceed(const Renderer&, int w, int h, GLuint texture, float brightness_threshold);
                 
     private:
-                int pass_max;
-                int fbo_max_per_pass;
-                                
-                std::vector<std::vector<Fbo*>> vec_vec_fbo;
-              Fbo fbo_final;    
-
-              GLuint texture_blured;
-              
-              GLuint program_blur;
-              GLuint program_extractBright;
-              GLuint program_combine;
-
-                void Pass0(int, int, GLuint, float);
-                void RestPasses(int, int);
-                void Combine(int, int, GLuint);
+        int pass_max;
+        int fbo_max_per_pass;
+        
+        std::vector<std::vector<Fbo*>> vec_vec_fbo;
+        Fbo fbo_final;    
+        
+        GLuint texture_blured;
+        
+        GLuint program_blur;
+        GLuint program_extractBright;
+        GLuint program_combine;
+        
+        void Pass0(const Renderer&, int, int, GLuint, float);
+        void RestPasses(const Renderer&, int, int);
+        void Combine(const Renderer&, int, int, GLuint);
 };
  
 // HDR http://prideout.net/archive/bloom/  
