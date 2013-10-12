@@ -34,20 +34,9 @@
 
 void loadGameData()
 {        
-    int width     = Config::Instance().SCREEN_WIDTH; 
-    int height    = Config::Instance().SCREEN_HEIGHT;
-    int bpp       = Config::Instance().BPP;
-    bool vert_sync = Config::Instance().VSYNC;
-    
-    Screen::Instance().InitBasic(width, height, bpp, vert_sync, GAME_TITLE);
-    
     load3DModels();
     loadImages();
-    if (Config::Instance().MODERN_EFFECTS == true)
-    {
-        loadShaders();
-        Screen::Instance().InitPostEffects(Screen::Instance().GetWidth(), Screen::Instance().GetHeight());
-    }
+    loadShaders();
 }
 
 

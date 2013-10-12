@@ -104,7 +104,8 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
         planet->AddDecoration(atmosphere);
     }
 
-    {
+   /* 
+   {
         Mesh* mesh_plane = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
         
         TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::RING_ID); 
@@ -114,6 +115,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
         ring->SetOrient(glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
         planet->AddDecoration(ring);
     }
+    */
     
 }
 

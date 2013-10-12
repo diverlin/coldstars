@@ -19,7 +19,7 @@
 #ifndef SCREEN_HPP
 #define SCREEN_HPP
 
-#include <GL/glew.h>
+#include <render/MyGl.hpp>
 
 #include "../math/myVector.hpp"
 #include "../render/Fbo.hpp"
@@ -36,8 +36,7 @@ class Screen : public SFML_Wrapper
 {
     public:
         static Screen& Instance();
-        void InitBasic(int width, int height, int bpp, bool vert_sync, const std::string&);
-        void InitPostEffects(int, int);
+        void InitRenderStuff();
         
         //Rect& GetRect() { return rect; };
         //glm::vec2 GetBottomLeftScreenWC()    { return rect.GetBottomLeft()*scale; }
@@ -73,6 +72,7 @@ class Screen : public SFML_Wrapper
         void IncreaseScale();
         void DecreaseScale();
 
+        void InitPostEffects();
         void ResizePostEffects(int, int);
                     
     private:

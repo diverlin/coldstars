@@ -46,11 +46,16 @@ d_scale(0.0)
 Screen::~Screen()
 {}
 
-void Screen::InitBasic(int width, int height, int bpp, bool vert_sync, const std::string& title)
-{    
+void Screen::InitRenderStuff()
+{   
+    int width      = Config::Instance().SCREEN_WIDTH; 
+    int height     = Config::Instance().SCREEN_HEIGHT;
+    int bpp        = Config::Instance().BPP;
+    bool vert_sync = Config::Instance().VSYNC;
+ 
     auto_scroll = false;
     
-    wrCreateWindowSpecific(width, height, bpp, vert_sync, title);
+    wrCreateWindowSpecific(width, height, bpp, vert_sync, "coldstars");
     
     glewInit();             
     m_Render.Init();
@@ -59,7 +64,7 @@ void Screen::InitBasic(int width, int height, int bpp, bool vert_sync, const std
     rect.Set(0.0, 0.0, width, height);
 }
 
-void Screen::InitPostEffects(int width, int height)
+void Screen::InitPostEffects()
 {
     fbo0.Create();
     fbo1.Create();    
@@ -69,6 +74,8 @@ void Screen::InitPostEffects(int width, int height)
         
     bloom.Create(ShaderCollector::Instance().blur, ShaderCollector::Instance().extractbright, ShaderCollector::Instance().combine);
     
+    int width      = Config::Instance().SCREEN_WIDTH; 
+    int height     = Config::Instance().SCREEN_HEIGHT;
     ResizePostEffects(width, height);
 }
                

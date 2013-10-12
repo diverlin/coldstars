@@ -43,9 +43,12 @@
 
 #include "render/Screen.hpp"
 
-void init()
+#include "common/TurnTimer.hpp"
+
+void initGameStuff()
 {
     srand(time(0));
+    GameDate::Instance().SetDate(1,1,4000);
     
     RaceInformationCollector::Instance().RACES_ALL_vec.push_back(TYPE::RACE::R0_ID);
     RaceInformationCollector::Instance().RACES_ALL_vec.push_back(TYPE::RACE::R1_ID);
@@ -68,8 +71,7 @@ void init()
     RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);  
     RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);  
     RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);  
-    
-    loadGameData();           
+      
     TextureManager::Instance().FillShipSubTypeList();        
         
         
@@ -91,6 +93,8 @@ void init()
     AiModelCollector::Instance().RegisterAiModel(new AiModelRanger());
     AiModelCollector::Instance().RegisterAiModel(new AiModelConqueror());  
     AiModelCollector::Instance().RegisterAiModel(new AiModelTrader());  
+    
+    loadGameData(); 
 }
 
 
