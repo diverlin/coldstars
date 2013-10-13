@@ -241,8 +241,10 @@ void Renderer::RenderMeshMultiTextured(const Mesh* mesh, const TextureOb* textur
     glUseProgram(0);
 }        
 
-void Renderer::DrawFullScreenQuad(int w, int h, float pos_z) const
+void Renderer::DrawQuad(int w, int h) const
 {
+    float pos_z = -499.0f;
+    
     glLoadMatrixf(&m_Pm[0][0]); 
     
     glBegin(GL_QUADS);
@@ -254,17 +256,23 @@ void Renderer::DrawFullScreenQuad(int w, int h, float pos_z) const
     }   
     glEnd();
 }
-
-       
-void Renderer::DrawFullScreenTexturedQuad(GLuint texture, int w, int h, float pos_z) const
-{
+    
+void Renderer::DrawQuadTextured(GLuint texture, int w, int h) const
+{   
     glBindTexture(GL_TEXTURE_2D, texture);
-    DrawFullScreenQuad(w, h, pos_z);
+    DrawQuad(w, h);
 }
 
-
-void Renderer::DrawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z) const
+void Renderer::DrawQuadTexturedFullScreen(GLuint texture) const
 {
+    int w = Screen::Instance().GetWidth(); 
+    int h = Screen::Instance().GetHeight(); 
+    
+    DrawQuadTextured(texture, w, h);
+}
+
+void Renderer::DrawQuadTexturedBlurred(GLuint texture, int w, int h) const
+{    
     glUseProgram(m_ProgramBlur);
     
     glActiveTexture(GL_TEXTURE0);                              
@@ -276,7 +284,7 @@ void Renderer::DrawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, f
     glUniform1f(glGetUniformLocation(m_ProgramBlur, "rt_h"), 3*h);
     glUniform1f(glGetUniformLocation(m_ProgramBlur, "vx_offset"), 1.0);
     
-    DrawFullScreenQuad(w, h, pos_z);
+    DrawQuad(w, h);
     
     glUseProgram(0);
 }

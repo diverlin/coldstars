@@ -52,10 +52,11 @@ class Renderer : public NonCopyable
         void RenderTransparentMeshLight(const Mesh*, const TextureOb*, const glm::mat4&) const;
         void RenderMeshMultiTextured(const Mesh*, const TextureOb*, const glm::mat4&, float) const;
 
-        void DrawFullScreenQuad(int w, int h, float pos_z) const;        
-        void DrawFullScreenTexturedQuad(GLuint texture, int w, int h, float pos_z) const;
-        void DrawFullScreenTexturedQuadBlurred(GLuint texture, int w, int h, float pos_z) const;
-                
+        void DrawQuad(int, int) const;        
+        void DrawQuadTextured(GLuint, int, int) const; 
+        void DrawQuadTexturedFullScreen(GLuint) const;
+        void DrawQuadTexturedBlurred(GLuint, int, int) const;
+                        
         void DrawParticleTextured(TextureOb*, const glm::vec3&, float) const;
         
         void DrawAxis(const glm::mat4&, float) const;
