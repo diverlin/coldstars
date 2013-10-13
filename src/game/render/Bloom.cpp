@@ -95,7 +95,7 @@ void BloomEffect::Pass0(const Renderer& render, int width, int height, GLuint _o
 
     glUniform1f(glGetUniformLocation(program_extractBright, "threshold"), brightThreshold);
     
-    render.DrawFullScreenQuad(width, height, -499.0);
+    render.DrawQuad(width, height);
     glUseProgram(0);
 
     (vec_vec_fbo[0])[0]->Deactivate();
@@ -104,7 +104,7 @@ void BloomEffect::Pass0(const Renderer& render, int width, int height, GLuint _o
     for(int fbo_num = 1; fbo_num < fbo_max_per_pass; fbo_num++)
     {
         (vec_vec_fbo[0])[fbo_num]->Activate(width, height);
-        render.DrawFullScreenTexturedQuad((vec_vec_fbo[0])[0]->GetTexture(), width/div, height/div, -499.0);
+        render.DrawQuadTextured((vec_vec_fbo[0])[0]->GetTexture(), width/div, height/div);
         (vec_vec_fbo[0])[fbo_num]->Deactivate();
          
         div *= 2;
@@ -119,7 +119,7 @@ void BloomEffect::RestPasses(const Renderer& render, int width, int height)
         for(int fbo_num = 0; fbo_num < fbo_max_per_pass; fbo_num++)
         {
             (vec_vec_fbo[pass_num])[fbo_num]->Activate(width, height);
-            render.DrawFullScreenTexturedQuadBlurred((vec_vec_fbo[pass_num-1])[fbo_num]->GetTexture(), width/div, height/div, -499.0);
+            render.DrawQuadTexturedBlurred((vec_vec_fbo[pass_num-1])[fbo_num]->GetTexture(), width/div, height/div);
             (vec_vec_fbo[pass_num])[fbo_num]->Deactivate();
           
             div *= 2;
@@ -191,7 +191,7 @@ void BloomEffect::Combine(const Renderer& render, int width, int height, GLuint 
       glBindTexture(GL_TEXTURE_2D, (vec_vec_fbo[2])[3]->GetTexture());
       glUniform1i(glGetUniformLocation(program_combine, "u_Pass2_tex4"), 12);
 
-      render.DrawFullScreenQuad(width, height, -499.0);
+      render.DrawQuad(width, height);
 
       fbo_final.Deactivate();
       //texture_blured = fbo_final->texture; //(vec_vec_fbo[pass_num])[fbo_num]->texture; // improove, blured texture is needed for volumetric shader

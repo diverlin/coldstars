@@ -406,7 +406,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 glUniform4f(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "sun_pos"), -world_coord.x/(w*scale), -world_coord.y/(h*scale), -100.0, 1.0);
           
                 glActiveTexture(GL_TEXTURE0);
-                render.DrawFullScreenQuad(w, h, -499.0);
+                render.DrawQuad(w, h);
             }
             glUseProgram(0);
             glActiveTexture(GL_TEXTURE0);
@@ -416,7 +416,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
         // render space entites to FBO2     
         Screen::Instance().GetFbo2().Activate(w, h);
         {
-            render.DrawFullScreenTexturedQuad(Screen::Instance().GetFbo1().GetTexture(), w, h, -499.0);
+            render.DrawQuadTexturedFullScreen(Screen::Instance().GetFbo1().GetTexture());
            
             // resizeGl(w*scale, h*scale);     
             enable_DEPTH();  
@@ -501,7 +501,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
         }
         Screen::Instance().GetFbo2().Deactivate();
             
-            render.DrawFullScreenTexturedQuad(Screen::Instance().GetFbo2().GetTexture(), w, h, -499.0);
+            render.DrawQuadTexturedFullScreen(Screen::Instance().GetFbo2().GetTexture());
                 
                 
         /*
