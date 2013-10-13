@@ -168,7 +168,6 @@ void RocketBullet::RenderInSpace(const Renderer& render, float scale)
 
     m_EffectDrive->Update();
     m_EffectDrive->Render(scale, 0.0f);
-    GetStarSystem()->RestoreSceneColor();
 }
 
 

@@ -35,6 +35,14 @@ Renderer::Renderer()
 :
 m_Color(1.0f),
 m_ProgramLight(0),
+m_ProgramLightLocation_uProjectionViewMatrix(-1),
+m_ProgramLightLocation_uModelMatrix(-1),
+m_ProgramLightLocation_uNormalMatrix(-1),
+m_ProgramLightLocation_uLightPos(-1),
+m_ProgramLightLocation_uEyePos(-1),
+m_ProgramLightLocation_uDiffColor(-1),
+m_ProgramLightLocation_uAmbientColor(-1), 
+m_ProgramLightLocation_uTexture(-1), 
 m_ProgramBlur(0) 
 {}
 
@@ -65,7 +73,22 @@ void Renderer::Init()
 
 void Renderer::MakeShortCuts()
 {
+    {
     m_ProgramLight = ShaderCollector::Instance().light;
+    m_ProgramLightLocation_uProjectionViewMatrix = glGetUniformLocation(m_ProgramLight, "u_ProjectionViewMatrix");
+    m_ProgramLightLocation_uModelMatrix          = glGetUniformLocation(m_ProgramLight, "u_ModelMatrix");
+    m_ProgramLightLocation_uNormalMatrix         = glGetUniformLocation(m_ProgramLight, "u_NormalModelMatrix");
+            
+    m_ProgramLightLocation_uLightPos = glGetUniformLocation(m_ProgramLight, "u_LightPos");
+    m_ProgramLightLocation_uEyePos   = glGetUniformLocation(m_ProgramLight, "u_EyePos");
+    
+    m_ProgramLightLocation_uDiffColor     = glGetUniformLocation(m_ProgramLight, "u_DiffColor");
+    m_ProgramLightLocation_uAmbientColor  = glGetUniformLocation(m_ProgramLight, "u_AmbientColor");                    
+        
+    m_ProgramLightLocation_uTexture  = glGetUniformLocation(m_ProgramLight, "u_Texture0"); 
+    }    
+    
+    
     m_ProgramBlur  = ShaderCollector::Instance().blur;
 }
         
@@ -144,24 +167,24 @@ void Renderer::RenderMeshLight(const Mesh* mesh, const TextureOb* textureOb, con
     float ambient_factor = 0.25;       
         
     glm::vec3 eye_pos = Screen::Instance().GetCamera().GetPos();
-    
+ 
     glUseProgram(m_ProgramLight);
     {
         glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(Mm)));
     
-        glUniformMatrix4fv(glGetUniformLocation(m_ProgramLight, "u_ModelMatrix"), 1, GL_FALSE, &Mm[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_ProgramLight, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);
-        glUniformMatrix3fv(glGetUniformLocation(m_ProgramLight, "u_NormalModelMatrix"), 1, GL_FALSE, &NormalModelMatrix[0][0]);
+        glUniformMatrix4fv(m_ProgramLightLocation_uProjectionViewMatrix, 1, GL_FALSE, &m_PVm[0][0]);
+        glUniformMatrix4fv(m_ProgramLightLocation_uModelMatrix         , 1, GL_FALSE, &Mm[0][0]);
+        glUniformMatrix3fv(m_ProgramLightLocation_uNormalMatrix        , 1, GL_FALSE, &NormalModelMatrix[0][0]);
                 
-        glUniform3f(glGetUniformLocation(m_ProgramLight, "u_LightPos"), 0.0f, 0.0f, 200.0);
-        glUniform3f(glGetUniformLocation(m_ProgramLight, "u_EyePos"), eye_pos.x, eye_pos.y, eye_pos.z);
+        glUniform3f(m_ProgramLightLocation_uLightPos, 0.0f, 0.0f, 200.0);
+        glUniform3f(m_ProgramLightLocation_uEyePos  , eye_pos.x, eye_pos.y, eye_pos.z);
         
-        glUniform4f(glGetUniformLocation(m_ProgramLight, "u_DiffColor"), m_Color.r, m_Color.g, m_Color.b, m_Color.a);
-        glUniform4f(glGetUniformLocation(m_ProgramLight, "u_AmbientColor"), ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
+        glUniform4f(m_ProgramLightLocation_uDiffColor,    m_Color.r, m_Color.g, m_Color.b, m_Color.a);
+        glUniform4f(m_ProgramLightLocation_uAmbientColor, ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
         
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureOb->texture); // ???
-        glUniform1i(glGetUniformLocation(m_ProgramLight, "u_Texture0"), 0);
+        glBindTexture(GL_TEXTURE_2D, textureOb->texture); 
+        glUniform1i(m_ProgramLightLocation_uTexture, 0);
                             
         mesh->Draw();
     }
@@ -348,8 +371,8 @@ void resetRenderTransformation() { glLoadIdentity(); }
 
 void camera(float x, float y, float z) { glTranslatef(-x, -y, -z); }
 
-void setColor4f(const glm::vec4& color) { glColor4f(color.r, color.g, color.b, color.a); }
-void setColor4f(float r, float g, float b, float a) { glColor4f(r, g, b, a); }
+//void setColor4f(const glm::vec4& color) { glColor4f(color.r, color.g, color.b, color.a); }
+//void setColor4f(float r, float g, float b, float a) { glColor4f(r, g, b, a); }
 
 void enable_BLEND()  { glEnable(GL_BLEND);  }
 void disable_BLEND() { glDisable(GL_BLEND); }

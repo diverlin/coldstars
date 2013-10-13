@@ -116,7 +116,7 @@ GetComplexDrive().UpdatePosition(); // debug
 
 void Ship::RenderInSpace_2D(const Renderer& render, float scale)
 {   
-    setColor4f(GetColor());
+    //setColor4f(GetColor());
     //if (GetProperties().grab_radius > 0)
     //{
         //RenderGrabTrail(render);

@@ -818,16 +818,6 @@ void StarSystem::FindRadarVisibleEntities_c(Player* player)
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)     { gui_radar.AddIfWithinRadarRange(VEHICLE_vec[i], vehicle); }        
 }
 
-      
-void StarSystem::RestoreSceneColor()
-{
-        setColor4f(color);
-}     
-
-void StarSystem::RestoreDefaultColor()
-{
-    setColor4f(COLOR::COLOR4F_WHITE);
-}
 
 void StarSystem::DrawBackground(const Renderer& render, const glm::vec2& scroll_coords)
 {   

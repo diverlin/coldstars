@@ -79,23 +79,23 @@ void BaseButton::RenderInfo() const
 /* virtual override */
 void BaseButton::RenderUnique(Player*) const
 {      
-    setColor4f(1.0f, 1.0f, 1.0f, m_Alpha);
+    //setColor4f(1.0f, 1.0f, 1.0f, m_Alpha);
 
     if (GetTextureOb() != nullptr)
     {
-           drawQuad(GetTextureOb(), GetBox());
-       }
-    
-       if (m_TextureOb_additional != nullptr)
-       {
-              drawQuad(m_TextureOb_additional, GetBox());
-       }
-    setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+       drawQuad(GetTextureOb(), GetBox());
+   }
 
-       if (m_TextureOb_mask)
-       {
-              drawQuad(m_TextureOb_mask, GetBox());
-       }
+   if (m_TextureOb_additional != nullptr)
+   {
+          drawQuad(m_TextureOb_additional, GetBox());
+   }
+    //setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+
+   if (m_TextureOb_mask)
+   {
+          drawQuad(m_TextureOb_mask, GetBox());
+   }
            
     if (GetLabel() != "")
     {
