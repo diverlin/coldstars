@@ -72,7 +72,16 @@ class Renderer : public NonCopyable
         void ComposeModelMatrix(const glm::mat4&) const;
         void UpdateProjectionViewMatrix();
         
-        GLuint m_ProgramLight;
+        GLuint m_ProgramLight;          
+        GLint m_ProgramLightLocation_uProjectionViewMatrix;
+        GLint m_ProgramLightLocation_uModelMatrix;
+        GLint m_ProgramLightLocation_uNormalMatrix;
+        GLint m_ProgramLightLocation_uLightPos;
+        GLint m_ProgramLightLocation_uEyePos;
+        GLint m_ProgramLightLocation_uDiffColor;
+        GLint m_ProgramLightLocation_uAmbientColor; 
+        GLint m_ProgramLightLocation_uTexture; 
+    
         GLuint m_ProgramBlur;
         
 };
@@ -81,8 +90,8 @@ void clearScreen();
 void resetRenderTransformation();
 
 void camera(float x, float y, float z);
-void setColor4f(const glm::vec4&);    
-void setColor4f(float, float, float, float);
+//void setColor4f(const glm::vec4&);    
+//void setColor4f(float, float, float, float);
 
 void enable_CULLFACE();
 void disable_CULLFACE();

@@ -71,7 +71,6 @@ class StarSystem : public BaseSpaceEntity
         void SetContainerNumMax(int container_num_max) { this->container_num_max = container_num_max; }
         void SetSector(Sector* sector)  { this->sector = sector; }
         void SetColor(const glm::vec4& color)  { this->color = color; }
-        const glm::vec4& GetColor4f()  { return color; }
         AsteroidManager& GetAsteroidManager()  { return asteroid_manager; }
                                                 
         const glm::vec4& GetColor() const { return color; }
@@ -123,8 +122,6 @@ class StarSystem : public BaseSpaceEntity
         
         float CalcResultGravityForce(const glm::vec3&, const glm::vec3&, float) const;
 
-        void RestoreDefaultColor();
-        void RestoreSceneColor();
         void DrawBackground(const Renderer&, const glm::vec2&);
                 void DrawOrbits();
                 void DrawPath();
