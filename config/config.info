@@ -1,0 +1,32 @@
+Window
+{
+	WIDTH  1024
+	HEIGHT 768
+	BPP 32
+
+	VSYNC 0
+	FPS_LIMIT 60
+	MODERN_EFFECTS 1
+}
+
+General
+{
+	DEBUG_MODE 0
+	game_mode 0 		# 0 = NORMAL_RUN 1 = SIMPLE_RUN 2 = CRASH_TEST
+	log_mode 1		# 0 = NONE, 1 = SCREEN, 2 = FILE, 3 = SCREENFILE
+}
+
+Gameplay
+{
+	AUTO_TURN_MODE 0
+	auto_save_mode 0
+	auto_load_mode 0
+	GAME_SPEED 1 		# 1-10
+}
+
+Control
+{
+	SCROLL_VELOCITY_MAX 20
+	SCROLL_VELOCITY_STEP 1
+	mouse_camera_scroll 0  
+}

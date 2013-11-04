@@ -1,0 +1,16 @@
+#####################################################################
+# Project:      freeorion
+# License:	see in << /data/license/freeorion_info.txt >>
+##################################
+filename     << original filename 
+lazer_Race0_Tech1_Blue0.png    << ion_cannon.png
+lazer_Race0_Tech0_Blue0.png,
+lazer_Race0_Tech0_Red0.png,
+lazer_Race0_Tech0_Yellow0.png  << laser.png
+##################################
+
+
+
+
+
+

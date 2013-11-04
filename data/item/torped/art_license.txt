@@ -1,0 +1,10 @@
+#####################################################################
+# Project:      freeorion
+# License:	see in << /data/license/freeorion_info.txt >>
+##################################
+filename     << original filename 
+tl0.png, tl1.png     << ammo.png
+##################################
+
+
+

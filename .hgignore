@@ -1,0 +1,11 @@
+syntax: glob
+build/
+install/
+externals/
+bin/
+.*.swp
+*~
+*.o
+save*.info
+*.log
+coldstars
