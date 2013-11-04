@@ -31,21 +31,21 @@ class Mesh
         Mesh(const std::string&, TextureOb* textureOb, TYPE::MESH);
         ~Mesh();
 
-        TYPE::MESH GetTypeId() const { return type_id; };
-        TextureOb* GetTextureOb() const { return textureOb; };
-        const glm::vec3& GetBoundaryBox() const { return boundary_box; };
+        TYPE::MESH GetTypeId() const { return m_TypeId; };
+        TextureOb* GetTextureOb() const { return m_TextureOb; };
+        const glm::vec3& GetBoundaryBox() const { return m_BoundaryBox; };
                         
         void Draw() const;
     
     private:
-        TYPE::MESH type_id;
+        TYPE::MESH m_TypeId;
         
-        TextureOb* textureOb;
-        std::vector<MeshFaceData> faces; 
-        glm::vec3 boundary_box;
+        TextureOb* m_TextureOb;
+        std::vector<MeshFaceData> m_Faces; 
+        glm::vec3 m_BoundaryBox;
 
-        GLuint glList; 
-        GLuint vbo_id;
+        GLuint m_GlList; 
+        GLuint m_VboId;
               
         void BuildFaces(const ObjLoader&);
         void CreateGlList(); 
