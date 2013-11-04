@@ -83,8 +83,7 @@ class Renderer : public NonCopyable
         GLint m_ProgramLightLocation_uAmbientColor; 
         GLint m_ProgramLightLocation_uTexture; 
     
-        GLuint m_ProgramBlur;
-        
+        GLuint m_ProgramBlur;        
 };
 
 void clearScreen();
