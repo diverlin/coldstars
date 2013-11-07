@@ -1,5 +1,5 @@
 #!/bin/bash 
-cd build
-cmake ..
+cd ../coldstars_build
+cmake ../coldstars
 make -j5
 
