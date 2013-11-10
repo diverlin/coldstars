@@ -10,6 +10,10 @@
 #include <render/MyGl.hpp>
 #include <types/MeshTypes.hpp>
 
+#define VERT_POSITION  0
+#define VERT_TEXCOORD  1
+#define VERT_NORMAL    2
+
 class ObjLoader;
 class TextureOb;
 
@@ -43,16 +47,16 @@ class Mesh
         TextureOb* m_TextureOb;
         std::vector<MeshFaceData> m_Faces; 
         glm::vec3 m_BoundaryBox;
+    
+        uint32_t m_Icount;
 
-        GLuint m_GlList; 
+        GLuint m_VaoId;        
         GLuint m_VboId;
-              
+                              
         void BuildFaces(const ObjLoader&);
-        void CreateGlList(); 
         void CreateVbo(); 
-
+        
         void DrawVbo() const;
-        void DrawGlList() const;
 };
 
 #endif
