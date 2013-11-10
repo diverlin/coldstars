@@ -5,14 +5,13 @@
 
 #include <common/myStr.hpp>
 #include <resources/ObjLoader.hpp>
-  
-const int POLYGON_VERT_NUM = 3;
-  
+
 
 Mesh::Mesh(const std::string& path, TextureOb* textureOb, TYPE::MESH type_id)
 :
 m_TypeId(type_id),
 m_TextureOb(textureOb),
+m_ListId(0),
 m_VaoId(0),        
 m_VboId(0)
 {        
@@ -20,7 +19,8 @@ m_VboId(0)
     
     BuildFaces(objLoader);
     m_BoundaryBox = objLoader.GetBoundaryBox();
-        
+     
+    //CreateList();   
     CreateVbo();
 }
 
@@ -29,7 +29,7 @@ void Mesh::BuildFaces(const ObjLoader& objLoader)
     for(unsigned int i=0; i<objLoader.faces_indexes.size(); ++i)
     {
         MeshFaceData face;
-        for(unsigned int j=0; j<POLYGON_VERT_NUM; ++j)
+        for(unsigned int j=0; j<VERTECIES_PER_POLYGON_NUM; ++j)
         {
             face.vertices[j].position = objLoader.positions[objLoader.faces_indexes[i].position_index[j] - 1];
             face.vertices[j].texcoord = objLoader.texcoords[objLoader.faces_indexes[i].texcoord_index[j] - 1];
@@ -38,12 +38,31 @@ void Mesh::BuildFaces(const ObjLoader& objLoader)
         m_Faces.push_back(face);
     }
 }
+
+void Mesh::CreateList()
+{
+    m_ListId = glGenLists(1);
+    glNewList(m_ListId, GL_COMPILE);
+    for(unsigned int i=0; i<m_Faces.size(); i++)
+    { 
+        glBegin(GL_POLYGON);
+        for (unsigned int j=0; j<VERTECIES_PER_POLYGON_NUM; j++)
+        {
+            glNormal3f(  m_Faces[i].vertices[j].normal.x,   m_Faces[i].vertices[j].normal.y,   m_Faces[i].vertices[j].normal.z);
+            glTexCoord2f(m_Faces[i].vertices[j].texcoord.x, m_Faces[i].vertices[j].texcoord.y);
+            glVertex3f(  m_Faces[i].vertices[j].position.x, m_Faces[i].vertices[j].position.y, m_Faces[i].vertices[j].position.z);
+        }  
+        glEnd();   
+    }    
+    glEndList();
+}
+
   
 void Mesh::CreateVbo()
 {    
-    int positions_buffer_length = m_Faces.size() * POLYGON_VERT_NUM * 3;
-    int texcoords_buffer_length = m_Faces.size() * POLYGON_VERT_NUM * 2;
-    int normals_buffer_length   = m_Faces.size() * POLYGON_VERT_NUM * 3;
+    int positions_buffer_length = m_Faces.size() * VERTECIES_PER_POLYGON_NUM * 3;
+    int texcoords_buffer_length = m_Faces.size() * VERTECIES_PER_POLYGON_NUM * 2;
+    int normals_buffer_length   = m_Faces.size() * VERTECIES_PER_POLYGON_NUM * 3;
     
     int data_buffer_lenght = positions_buffer_length + texcoords_buffer_length + normals_buffer_length;  
     GLfloat data_array[data_buffer_lenght];        
@@ -51,7 +70,7 @@ void Mesh::CreateVbo()
     uint32_t k=0;
     for (unsigned int i=0; i<m_Faces.size(); i++)
     {
-        for (unsigned int j=0; j<POLYGON_VERT_NUM; j++)
+        for (unsigned int j=0; j<VERTECIES_PER_POLYGON_NUM; j++)
         {
             data_array[k++] = m_Faces[i].vertices[j].position.x; 
             data_array[k++] = m_Faces[i].vertices[j].position.y;
@@ -88,9 +107,14 @@ void Mesh::CreateVbo()
 void Mesh::DrawVbo() const
 {
     glBindVertexArray(m_VaoId);
-    glDrawArrays(GL_TRIANGLES, 0, m_Faces.size()*POLYGON_VERT_NUM); 
+    glDrawArrays(GL_TRIANGLES, 0, m_Faces.size()*VERTECIES_PER_POLYGON_NUM); 
 }
 
+void Mesh::DrawList() const
+{
+    glCallList(m_ListId);
+}
+        
 void Mesh::Draw() const
 {
     DrawVbo();

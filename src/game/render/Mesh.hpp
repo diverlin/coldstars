@@ -10,9 +10,11 @@
 #include <render/MyGl.hpp>
 #include <types/MeshTypes.hpp>
 
-#define VERT_POSITION  0
-#define VERT_TEXCOORD  1
-#define VERT_NORMAL    2
+const int VERTECIES_PER_POLYGON_NUM = 3;
+
+const int VERT_POSITION = 0;
+const int VERT_TEXCOORD = 1;
+const int VERT_NORMAL   = 2;
 
 class ObjLoader;
 class TextureOb;
@@ -50,12 +52,16 @@ class Mesh
     
         uint32_t m_Icount;
 
+        GLuint m_ListId;
         GLuint m_VaoId;        
         GLuint m_VboId;
                               
         void BuildFaces(const ObjLoader&);
+
+        void CreateList();      // for debug
         void CreateVbo(); 
-        
+                
+        void DrawList() const;  // fo debug
         void DrawVbo() const;
 };
 
