@@ -46,22 +46,16 @@ std::string file2String(const std::string& fpath)
     std::ifstream file(fpath.c_str());
     if (!file.is_open())
     {
-        std::cout<<"Failed to open "<<fpath<<std::endl;
         file.close();
-        return " ";
+        std::cout<<"Failed to open "<<fpath<<std::endl;
+        exit(1);
     }
 
-    std::string line = "";
-    std::string result = "";
+    std::string line;
+    std::string result;
     while(getline(file, line))
     {
-        if(line.find("//") != std::string::npos)
-        {
-              line.replace(line.find("//"), line.length(), "");
-        }
-        //std::cout<<line<<std::endl;
-        result += line;
-        result += "\n";
+        result += line + "\n";
     }
 
     file.close();
