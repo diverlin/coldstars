@@ -44,7 +44,8 @@ void loadGameData()
 void load3DModels()
 {        
     MeshCollector::Instance().RegisterMesh(new Mesh(DATA_REL_PATH+"obj/plane/plane.obj", nullptr, TYPE::MESH::PLANE_ID));
-    MeshCollector::Instance().RegisterMesh(new Mesh(DATA_REL_PATH+"obj/sphere/sphere.obj", nullptr, TYPE::MESH::SPHERE_ID));
+    //MeshCollector::Instance().RegisterMesh(new Mesh(DATA_REL_PATH+"obj/sphere/sphere.obj", nullptr, TYPE::MESH::SPHERE_ID));
+    MeshCollector::Instance().RegisterMesh(new Mesh(DATA_REL_PATH+"obj/plane/plane.obj", nullptr, TYPE::MESH::SPHERE_ID));
     MeshCollector::Instance().RegisterMesh(new Mesh(DATA_REL_PATH+"obj/sphere_deformed/sphere_deformed.obj", nullptr, TYPE::MESH::SPHERE_DEFORMED_ID));
     
     {

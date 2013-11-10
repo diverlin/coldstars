@@ -1,5 +1,8 @@
 #version 330 core
 
+#define FRAG_OUTPUT0 0
+layout(location = FRAG_OUTPUT0) out vec4 color;
+
 uniform sampler2D u_Texture0;
 
 uniform vec4 u_DiffColor;
@@ -9,8 +12,6 @@ in vec3 vVert2light_n;
 in vec3 vVert2eye_n; 
 in vec3 vNormal_n;
 in vec2 vTexcoord;
- 
-out vec4 color;
  
 void main (void)
 {  	

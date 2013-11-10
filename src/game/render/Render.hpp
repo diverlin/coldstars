@@ -90,8 +90,6 @@ void clearScreen();
 void resetRenderTransformation();
 
 void camera(float x, float y, float z);
-//void setColor4f(const glm::vec4&);    
-//void setColor4f(float, float, float, float);
 
 void enable_CULLFACE();
 void disable_CULLFACE();
