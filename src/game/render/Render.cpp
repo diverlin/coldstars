@@ -71,10 +71,6 @@ void Renderer::Init()
     glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
     
     glShadeModel(GL_SMOOTH);
-    
-    //glCullFace(GL_BACK); 
-    
-
 }
 
 void Renderer::MakeShortCuts()
@@ -329,7 +325,14 @@ void Renderer::DrawParticleTextured(TextureOb* texOb, const glm::vec3& center, f
     glBegin(GL_POINTS);
         glVertex3f(center.x, center.y, center.z);
     glEnd();
-}    
+} 
+
+void Renderer::DrawPoints(Mesh* mesh, TextureOb* textureOb) const
+{
+    glm::mat4 Mm;
+    RenderMeshGeometry(mesh, textureOb, Mm);
+}
+   
 
 void Renderer::DrawAxis(const glm::mat4& Mm, float width) const
 {

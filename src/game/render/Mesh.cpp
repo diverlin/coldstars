@@ -28,6 +28,22 @@ m_HasNormals(true)
     m_BoundaryBox = objLoader.GetBoundaryBox();
 }
 
+Mesh::Mesh()
+:
+m_TypeId(TYPE::MESH::PLANE_ID),
+m_PrimitiveType(GL_TRIANGLES),
+m_TextureOb(nullptr),
+m_VertexCount(0),
+m_ListId(0),
+m_VaoId(0),        
+m_VboId(0),
+m_HasNormals(true)
+{     
+    m_ListId = glGenLists(1);   
+ 	glGenVertexArrays(1, &m_VaoId);
+    glGenBuffers(1, &m_VboId);
+}
+
 Mesh::~Mesh()
 {
    glDeleteVertexArrays(1, &m_VaoId);
@@ -63,7 +79,8 @@ void Mesh::FillVertices(const ObjLoader& objLoader)
 void Mesh::FillVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec2>& texcoords)
 {
     m_PrimitiveType = GL_POINTS;
-
+    glPointSize(20.0f);
+    
     m_HasNormals = false;
 
     m_Vertices.clear();
