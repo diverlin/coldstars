@@ -58,6 +58,7 @@ class Bomb;
 class GoodsPack; 
 
 class Box2D;
+class Renderer;
 
 
 struct UnresolvedDataUniqueItemSlot
@@ -126,10 +127,10 @@ class ItemSlot : public BaseSlot
         
         void UpdateVehiclePropetries() const;
         
-        virtual void Render(const Box2D&, const glm::vec2&, bool draw_text = true) const;
-        virtual void RenderItem(const Box2D&, const glm::vec2&, bool draw_text = true) const;
-        void RenderMark(const Box2D&, TextureOb*) const;
-        void RenderTargetMark(const Box2D&, TextureOb*, TextureOb*) const;
+        virtual void Render(const Renderer&, const Box2D&, const glm::vec2&, bool draw_text = true) const;
+        virtual void RenderItem(const Renderer&, const Box2D&, const glm::vec2&, bool draw_text = true) const;
+        void RenderMark(const Renderer&, const Box2D&, TextureOb*) const;
+        void RenderTargetMark(const Renderer&, const Box2D&, TextureOb*, TextureOb*) const;
         
         void DropItemToSpace();
         

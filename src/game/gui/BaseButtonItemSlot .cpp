@@ -80,7 +80,7 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
     }
 }
 
-void BaseButtonItemSlot::RenderMarkEmptySlot(const glm::vec2& mouse_screen_coord_pos, TYPE::GUI mark_slot_subtype_id) const
+void BaseButtonItemSlot::RenderMarkEmptySlot(const Renderer& render, const glm::vec2& mouse_screen_coord_pos, TYPE::GUI mark_slot_subtype_id) const
 {
     if (m_ItemSlot != nullptr)
     {
@@ -116,13 +116,13 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const glm::vec2& mouse_screen_coord
             {            
                 if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == TYPE::GUI::CARGO_SLOT_ID))  
                 {
-                   m_ItemSlot->RenderMark(GetBox(), GuiTextureObCollector::Instance().slot_mark_accept);
+                   m_ItemSlot->RenderMark(render, GetBox(), GuiTextureObCollector::Instance().slot_mark_accept);
                 }
                 else
                 {
                     if (GetBox().CheckInteraction(mouse_screen_coord_pos) == true)
                     {
-                        m_ItemSlot->RenderMark(GetBox(), GuiTextureObCollector::Instance().slot_mark_reject);
+                        m_ItemSlot->RenderMark(render, GetBox(), GuiTextureObCollector::Instance().slot_mark_reject);
                     }
                 }
             }

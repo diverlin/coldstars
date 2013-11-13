@@ -207,11 +207,11 @@ void BaseGuiElement::Render(const Renderer& render, Player* player) const
 }
 
 /* virtual */
-void BaseGuiElement::RenderUnique(const Renderer&, Player* player) const
+void BaseGuiElement::RenderUnique(const Renderer& render, Player* player) const
 {
     if (m_TextureOb)
     {
-        drawQuad(m_TextureOb, m_Box);
+        render.DrawQuad(m_TextureOb, m_Box);
     }
 }
 

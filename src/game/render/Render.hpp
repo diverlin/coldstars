@@ -25,6 +25,7 @@
 #include "../resources/textureOb.hpp"
 #include "../common/rect.hpp"
 #include <common/Box2D.hpp>
+
 class Mesh;
 
 enum class PROJECTION_TYPE { PERSPECTIVE, ORTHOGONAL};
@@ -58,6 +59,8 @@ class Renderer : public NonCopyable
         void ComposeViewMatrix(const glm::mat4&);
         
         void DrawQuad(TextureOb*, const glm::mat4&) const;
+        void DrawQuad(TextureOb*, const Box2D&) const;
+
         void RenderMeshGeometry(const Mesh*, const glm::mat4&) const;
         void RenderMeshGeometry(const Mesh*, const TextureOb*, const glm::mat4&) const;
         void RenderTransparentMeshGeometry(const Mesh*, const TextureOb*, const glm::mat4&) const;
@@ -100,18 +103,18 @@ class Renderer : public NonCopyable
         GLuint m_ProgramBlur;        
 };
 
-void drawQuad(TextureOb* texOb, 
-         const glm::vec3& center,
-         const glm::vec3& size, 
-         float angle=0);
+//void drawQuad(TextureOb* texOb, 
+         //const glm::vec3& center,
+         //const glm::vec3& size, 
+         //float angle=0);
          
-void drawQuad(TextureOb* texOb,
-         const glm::vec2& center, 
-         const glm::vec2& size,
-         float angle);
+//void drawQuad(TextureOb* texOb,
+         //const glm::vec2& center, 
+         //const glm::vec2& size,
+         //float angle);
               
-void drawQuad(TextureOb*, const Box2D&);
-void drawQuadMasked(TextureOb*, const Box2D&, TextureOb*, float);
+//void drawQuad(TextureOb*, const Box2D&);
+//void drawQuadMasked(TextureOb*, const Box2D&, TextureOb*, float);
                            
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
 

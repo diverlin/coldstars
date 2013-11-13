@@ -30,6 +30,12 @@
 #include "Mesh.hpp"
 #include "../common/constants.hpp"
 
+// for ugly
+#include <glm/glm.hpp> // glm::vec
+#include <glm/gtx/quaternion.hpp>
+#include <glm/gtx/transform.hpp>
+#include <math/QuaternionUtils.hpp>
+// for ugly
 
 Renderer::Renderer()
 :
@@ -140,6 +146,29 @@ void Renderer::DrawQuad(TextureOb* texOb, const glm::mat4& Mm) const
         glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
     }
     glEnd();
+}
+
+void Renderer::DrawQuad(TextureOb* texOb, const Box2D& box) const
+{
+    // ugly start
+    glm::vec2 pos = box.GetCenter();
+    glm::mat4 Tm = glm::translate(glm::vec3(pos.x, pos.y, -2.0f));
+     
+    glm::quat Qx, Qy, Qz;
+    
+    //QuatFromAngleAndAxis(Qx, angle.x, AXIS_X);
+    //QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);   
+    //QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z); 
+       
+    glm::mat4 Rm = glm::toMat4(Qx*Qy*Qz);
+    
+    glm::vec2 size = box.GetSize()*box.GetScale();
+    glm::mat4 Sm = glm::scale(glm::vec3(size.x, size.y, 1.0f));
+      
+    glm::mat4 Mm = Tm * Rm * Sm;
+    // ugly end
+
+    DrawQuad(texOb, Mm);
 }
 
 void Renderer::RenderMeshGeometry(const Mesh* mesh, const glm::mat4& Mm) const
@@ -373,109 +402,109 @@ void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) 
     glEnable(GL_TEXTURE_2D);
 }
   
-void drawQuad(TextureOb* texOb,
-         const glm::vec3& center, 
-         const glm::vec3& size,
-         float angle)
-{
-    glBindTexture(GL_TEXTURE_2D, texOb->texture);
-    int frame = texOb->updateAnimationFrame();
+//void drawQuad(TextureOb* texOb,
+         //const glm::vec3& center, 
+         //const glm::vec3& size,
+         //float angle)
+//{
+    //glBindTexture(GL_TEXTURE_2D, texOb->texture);
+    //int frame = texOb->updateAnimationFrame();
     
-    glPushMatrix();
-    {
-        glTranslatef(center.x, center.y, center.z);
-        glRotatef(angle, 0.0, 0.0, 1.0);
-        glScalef(size.x, size.y, size.z);
+    //glPushMatrix();
+    //{
+        //glTranslatef(center.x, center.y, center.z);
+        //glRotatef(angle, 0.0, 0.0, 1.0);
+        //glScalef(size.x, size.y, size.z);
                                     
-        glBegin(GL_QUADS);
-        {   
-            glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
-            glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
-            glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
-            glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
-        }
-        glEnd();
-    }
-    glPopMatrix();
-}
+        //glBegin(GL_QUADS);
+        //{   
+            //glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
+            //glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
+            //glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
+            //glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
+        //}
+        //glEnd();
+    //}
+    //glPopMatrix();
+//}
 
-void drawQuad(TextureOb* texOb,
-         const glm::vec2& center, 
-         const glm::vec2& size,
-         float angle)
-{
-    glBindTexture(GL_TEXTURE_2D, texOb->texture);
-    int frame = texOb->updateAnimationFrame();
+//void drawQuad(TextureOb* texOb,
+         //const glm::vec2& center, 
+         //const glm::vec2& size,
+         //float angle)
+//{
+    //glBindTexture(GL_TEXTURE_2D, texOb->texture);
+    //int frame = texOb->updateAnimationFrame();
     
-    glPushMatrix();
-    {
-        glTranslatef(center.x, center.y, GUI::POS_Z);
-        glRotatef(angle, 0.0, 0.0, 1.0);
-        glScalef(size.x, size.y, 1.0);
+    //glPushMatrix();
+    //{
+        //glTranslatef(center.x, center.y, GUI::POS_Z);
+        //glRotatef(angle, 0.0, 0.0, 1.0);
+        //glScalef(size.x, size.y, 1.0);
                                     
-        glBegin(GL_QUADS);
-        {   
-            glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
-            glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
-            glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
-            glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
-        }
-        glEnd();
-    }
-    glPopMatrix();
-}
+        //glBegin(GL_QUADS);
+        //{   
+            //glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
+            //glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
+            //glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
+            //glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
+        //}
+        //glEnd();
+    //}
+    //glPopMatrix();
+//}
 
 
-void drawQuad(TextureOb* texOb,
-         const glm::vec2& center, 
-         const glm::vec2& size,
-         float angle,
-         TextureOb* texOb_mask,
-         float threshold)
-{
-    glUseProgram(ShaderCollector::Instance().mask);
-    {    
-        int frame = 0;
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texOb_mask->texture);
-        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().mask, "u_TextureMask"), 0);
+//void drawQuad(TextureOb* texOb,
+         //const glm::vec2& center, 
+         //const glm::vec2& size,
+         //float angle,
+         //TextureOb* texOb_mask,
+         //float threshold)
+//{
+    //glUseProgram(ShaderCollector::Instance().mask);
+    //{    
+        //int frame = 0;
+        //glActiveTexture(GL_TEXTURE0);
+        //glBindTexture(GL_TEXTURE_2D, texOb_mask->texture);
+        //glUniform1i(glGetUniformLocation(ShaderCollector::Instance().mask, "u_TextureMask"), 0);
         
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texOb->texture);        
-        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().mask, "u_TextureTarget"), 1);
+        //glActiveTexture(GL_TEXTURE1);
+        //glBindTexture(GL_TEXTURE_2D, texOb->texture);        
+        //glUniform1i(glGetUniformLocation(ShaderCollector::Instance().mask, "u_TextureTarget"), 1);
 
-        glUniform1f(glGetUniformLocation(ShaderCollector::Instance().mask, "u_Threshold"), threshold);
+        //glUniform1f(glGetUniformLocation(ShaderCollector::Instance().mask, "u_Threshold"), threshold);
                         
-        glPushMatrix();
-        {
-            glTranslatef(center.x, center.y, GUI::POS_Z);
-            glRotatef(angle, 0.0, 0.0, 1.0);
-            glScalef(size.x, size.y, 1.0);
+        //glPushMatrix();
+        //{
+            //glTranslatef(center.x, center.y, GUI::POS_Z);
+            //glRotatef(angle, 0.0, 0.0, 1.0);
+            //glScalef(size.x, size.y, 1.0);
                                         
-            glBegin(GL_QUADS);
-            {   
-                glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
-                glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
-                glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
-                glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
-            }
-            glEnd();
-        }
-        glPopMatrix();
-    }
-    glUseProgram(0);
-    glActiveTexture(GL_TEXTURE0);
-}
+            //glBegin(GL_QUADS);
+            //{   
+                //glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
+                //glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
+                //glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
+                //glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
+            //}
+            //glEnd();
+        //}
+        //glPopMatrix();
+    //}
+    //glUseProgram(0);
+    //glActiveTexture(GL_TEXTURE0);
+//}
 
-void drawQuad(TextureOb* texOb, const Box2D& box)
-{
-    drawQuad(texOb, box.GetCenter(), box.GetSize()*box.GetScale(), box.GetAngle());
-}
+//void drawQuad(TextureOb* texOb, const Box2D& box)
+//{
+    //drawQuad(texOb, box.GetCenter(), box.GetSize()*box.GetScale(), box.GetAngle());
+//}
 
-void drawQuadMasked(TextureOb* texOb, const Box2D& box, TextureOb* texOb_mask, float threshold)
-{
-    drawQuad(texOb, box.GetCenter(), box.GetSize()*box.GetScale(), box.GetAngle(), texOb_mask, threshold);
-}
+//void drawQuadMasked(TextureOb* texOb, const Box2D& box, TextureOb* texOb_mask, float threshold)
+//{
+    //drawQuad(texOb, box.GetCenter(), box.GetSize()*box.GetScale(), box.GetAngle(), texOb_mask, threshold);
+//}
 
 void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos)
 {

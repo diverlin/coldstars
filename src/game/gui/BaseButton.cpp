@@ -77,26 +77,26 @@ void BaseButton::RenderInfo(const Renderer&) const
 }
 
 /* virtual override */
-void BaseButton::RenderUnique(const Renderer&, Player*) const
+void BaseButton::RenderUnique(const Renderer& render, Player*) const
 {      
     //setColor4f(1.0f, 1.0f, 1.0f, m_Alpha);
-
+    
     if (GetTextureOb() != nullptr)
     {
-       drawQuad(GetTextureOb(), GetBox());
-   }
-
-   if (m_TextureOb_additional != nullptr)
-   {
-          drawQuad(m_TextureOb_additional, GetBox());
-   }
+        render.DrawQuad(GetTextureOb(), GetBox());
+    }
+    
+    if (m_TextureOb_additional != nullptr)
+    {
+        render.DrawQuad(m_TextureOb_additional, GetBox());
+    }
     //setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-
-   if (m_TextureOb_mask)
-   {
-          drawQuad(m_TextureOb_mask, GetBox());
-   }
-           
+    
+    if (m_TextureOb_mask)
+    {
+        render.DrawQuad(m_TextureOb_mask, GetBox());
+    }
+    
     if (GetLabel() != "")
     {
         glm::vec2 pos(GetBox().GetCenter().x, GetBox().GetCenter().y + GetBox().GetSize().y);

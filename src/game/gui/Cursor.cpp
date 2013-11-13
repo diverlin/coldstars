@@ -170,7 +170,7 @@ void Cursor::RenderFocusedObjectStuff(const Renderer& render) const
             box.SetScale(scale, scale);
             //box.SetAngle(m_FocusedSpaceObject->GetAngle().z);
             
-            drawQuad(GuiTextureObCollector::Instance().mark_target, box);
+            render.DrawQuad(GuiTextureObCollector::Instance().mark_target, box);
         }
         
         if (m_FocusedGuiElement != nullptr)
@@ -180,7 +180,7 @@ void Cursor::RenderFocusedObjectStuff(const Renderer& render) const
                 Box2D box(m_FocusedGuiElement->GetBox());
                 box.SetScale(scale, scale);
             
-                drawQuad(GuiTextureObCollector::Instance().mark_target, box);
+                render.DrawQuad(GuiTextureObCollector::Instance().mark_target, box);
             }
         }
     }
@@ -208,7 +208,7 @@ void Cursor::RenderItem(const Renderer& render) const
 {
     render.enable_BLEND();
     {
-        m_ItemSlot->RenderItem(m_Box, glm::vec2(0));   
+        m_ItemSlot->RenderItem(render, m_Box, glm::vec2(0));   
     }
     render.disable_BLEND();
 }

@@ -94,8 +94,8 @@ class BaseItem : public BaseDrawable
         
         void UpdateInfo();
         
-        virtual void Render(const Box2D&, const glm::vec2&, bool draw_text = true);
-        void RenderKorpus(const Box2D&);
+        virtual void Render(const Renderer&, const Box2D&, const glm::vec2&, bool draw_text = true);
+        void RenderKorpus(const Renderer&, const Box2D&);
         void RenderInfo(const Renderer&, const glm::vec2&); 
 
     protected:

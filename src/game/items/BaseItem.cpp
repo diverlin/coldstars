@@ -132,12 +132,12 @@ void BaseItem::RenderInfo(const Renderer& render, const glm::vec2& pos)
 }
 
 /* virtual */
-void BaseItem::Render(const Box2D& box, const glm::vec2& gui_offset, bool draw_text)
+void BaseItem::Render(const Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text)
 {
-    RenderKorpus(box);
+    RenderKorpus(render, box);
 }
 
-void BaseItem::RenderKorpus(const Box2D& box)
+void BaseItem::RenderKorpus(const Renderer& render, const Box2D& box)
 {
     if (Is3D())
     {
@@ -151,7 +151,7 @@ void BaseItem::RenderKorpus(const Box2D& box)
     }
     else
     {
-               drawQuad(GetTextureOb(), box); 
+        render.DrawQuad(GetTextureOb(), box); 
     }
 }
 
