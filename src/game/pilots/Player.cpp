@@ -434,6 +434,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                     }
                 }
          
+                if (getRandInt(0, 30) == 0) std::cout<<"ship num rendered="<<visible_SHIP_vec.size()<<std::endl; 
                 for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
                 { 
                     if(visible_SHIP_vec[i]->Is3D())
@@ -453,7 +454,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 } 
                      
             }
-            //render.disable_DEPTH();
+            render.disable_DEPTH();
 
             render.enable_BLEND();    
             {    
@@ -489,7 +490,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                     visible_ROCKET_vec[i]->RenderInSpace(render, 1/scale); 
                 } 
                 
-                //if (show.GetCollisionRadius() == true)
+                if (show.GetCollisionRadius() == true)
                 {
                     RenderAxis(render);
                     RenderCollisionRadius(render);
@@ -1141,10 +1142,10 @@ void Player::ResolveData()
         
 void Player::SaveDataUniquePlayer(boost::property_tree::ptree& save_ptree, const std::string& root) const    
 {
-        save_ptree.put(root+"unresolved.npc_id", npc->GetId());
-        save_ptree.put(root+"unresolved.starsystem_id", starsystem->GetId());
-        save_ptree.put(root+"unresolved.screen_pos_x", Screen::Instance().GetBottomLeft().x);
-        save_ptree.put(root+"unresolved.screen_pos_y", Screen::Instance().GetBottomLeft().y);
+    save_ptree.put(root+"unresolved.npc_id", npc->GetId());
+    save_ptree.put(root+"unresolved.starsystem_id", starsystem->GetId());
+    save_ptree.put(root+"unresolved.screen_pos_x", Screen::Instance().GetBottomLeft().x);
+    save_ptree.put(root+"unresolved.screen_pos_y", Screen::Instance().GetBottomLeft().y);
 }
 
 void Player::LoadDataUniquePlayer(const boost::property_tree::ptree& load_ptree)

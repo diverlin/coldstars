@@ -23,12 +23,12 @@ SFML_Wrapper::~SFML_Wrapper()
 
 void SFML_Wrapper::wrCreateWindowSpecific(int width, int height, int bpp, bool vert_sync, const std::string& title)
 {    
-          this->bpp = bpp;
-          this->vert_sync = vert_sync;
-          
-          window.create(sf::VideoMode(width, height, bpp), title);
-          window.setFramerateLimit(Config::Instance().FPS_LIMIT); 
-        window.setVerticalSyncEnabled(vert_sync);
+    this->bpp = bpp;
+    this->vert_sync = vert_sync;
+    
+    window.create(sf::VideoMode(width, height, bpp), title);
+    window.setFramerateLimit(Config::Instance().FPS_LIMIT); 
+    window.setVerticalSyncEnabled(vert_sync);
 }
          
 void SFML_Wrapper::wrResizeSpecific(int width, int height)
@@ -45,10 +45,9 @@ void SFML_Wrapper::wrDrawSpecific()
 }
 
 void SFML_Wrapper::DrawText(const std::string& str, int font_size, const glm::vec2& pos)
-{
-
-         glm::ivec4 color(255, 255, 255, 255);
-         DrawText(str, font_size, pos, color);
+{    
+    glm::ivec4 color(255, 255, 255, 255);
+    DrawText(str, font_size, pos, color);
 }
         
 void SFML_Wrapper::DrawText(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color)
