@@ -24,7 +24,7 @@
 Room::Room()
 {    
     owner_kosmoport = nullptr;
-        textureOb_background = nullptr;
+    textureOb_background = nullptr;
 }
 
 Room::~Room()
@@ -32,7 +32,7 @@ Room::~Room()
 
 void Room::RenderBackground(const Rect& rect) const
 {
-         drawTexturedRect(textureOb_background, rect, -2);  
+    //drawTexturedRect(textureOb_background, rect, -2);  
 }
            
 void Room::SaveDataUniqueRoom(boost::property_tree::ptree& save_ptree, const std::string& root) const

@@ -39,6 +39,9 @@ class Renderer : public NonCopyable
         void Init();
         void MakeShortCuts();
 
+        void SetPerspectiveProjection(float, float);
+        void SetOrthogonalProjection(float, float);
+
         void ClearScreen() const { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
         
         void enable_CULLFACE() const    { /*glEnable(GL_CULL_FACE);*/ }
@@ -52,14 +55,8 @@ class Renderer : public NonCopyable
         
         void enable_POINTSPRITE() const     { glEnable(GL_POINT_SPRITE);  }    
         void disable_POINTSPRITE() const    { glDisable(GL_POINT_SPRITE); }   
-
-        void SetPerspectiveProjection(float, float);
-        void SetOrthogonalProjection(float, float);
                 
         void ComposeViewMatrix(const glm::mat4&);
-        
-        void DrawQuad(TextureOb*, const glm::mat4&) const;
-        void DrawQuad(TextureOb*, const Box2D&) const;
 
         void RenderMeshGeometry(const Mesh*, const glm::mat4&) const;
         void RenderMeshGeometry(const Mesh*, const TextureOb*, const glm::mat4&) const;
@@ -68,6 +65,9 @@ class Renderer : public NonCopyable
         void RenderMeshLightNormalMap(const Mesh*, const TextureOb*, const glm::mat4&, const glm::vec2&, const glm::vec4&) const;
         void RenderTransparentMeshLight(const Mesh*, const TextureOb*, const glm::mat4&) const;
         void RenderMeshMultiTextured(const Mesh*, const TextureOb*, const glm::mat4&, float) const;
+
+        void DrawQuad(TextureOb*, const glm::mat4&) const;
+        void DrawQuad(TextureOb*, const Box2D&) const;
 
         void DrawQuad(int, int) const;        
         void DrawQuadTextured(GLuint, int, int) const; 
@@ -116,14 +116,16 @@ class Renderer : public NonCopyable
 //void drawQuad(TextureOb*, const Box2D&);
 //void drawQuadMasked(TextureOb*, const Box2D&, TextureOb*, float);
                            
-void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
+//void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
 
+// LINE
 void drawLine(TextureOb* texOb, 
               const glm::vec3& start_pos, 
               float len, 
               float angle_inD, 
               int half_h);
 
+// TEXT
 void drawColoredTextWithBackground(const std::string&, 
                int,
                const glm::vec2&, 
@@ -136,6 +138,7 @@ void drawInfoIn2Column(
                 const std::vector<std::string>& info_value_list, 
                 const glm::vec2& pos);
 
+// PARTICLES
 void drawParticleTextured(GLuint texture, const glm::vec2& _center, float size, float pos_z);
 void drawParticle(const glm::vec2&, float, float r, float g, float b, float a);
 void drawParticle(const glm::vec2&, float, const glm::vec4&);

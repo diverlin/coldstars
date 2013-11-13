@@ -92,10 +92,10 @@ void GuiRadar::RenderUnique(const Renderer& render, Player* player) const
     
     range_rect.SetCenter(rect.GetCenter() + vec3ToVec2(player->GetNpc()->GetVehicle()->GetCenter()) * scale);
     
-    drawTexturedRect(textureOb_background, rect, -2.0);
-    drawTexturedRect(textureOb_bar, rect, -2.0);
-    drawTexturedRect(textureOb_screenrect, screenrect, -2.0);
-    drawTexturedRect(textureOb_range, range_rect, -2.0);
+    //drawTexturedRect(textureOb_background, rect, -2.0);
+    //drawTexturedRect(textureOb_bar, rect, -2.0);
+    //drawTexturedRect(textureOb_screenrect, screenrect, -2.0);
+    //drawTexturedRect(textureOb_range, range_rect, -2.0);
             
     float size, size_base = 7;
     render.enable_POINTSPRITE();  

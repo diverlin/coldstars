@@ -138,13 +138,13 @@ void Slider::CheckButtonsLock()
               
 void Slider::Render() const
 {
-    glPushMatrix();
-    {
-        //glTranslatef(GetOffset().x, GetOffset().y, 0);
-        drawTexturedRect(textureOb, rect, -1);
-        drawTexturedRect(textureOb_scale, rect_slide, -1);
-    }
-    glPopMatrix();
+    //glPushMatrix();
+    //{
+        ////glTranslatef(GetOffset().x, GetOffset().y, 0);
+        //drawTexturedRect(textureOb, rect, -1);
+        //drawTexturedRect(textureOb_scale, rect_slide, -1);
+    //}
+    //glPopMatrix();
     
     {
         //glm::vec2 pos(rect.GetBottomLeft().x + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);

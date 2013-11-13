@@ -506,18 +506,18 @@ void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) 
     //drawQuad(texOb, box.GetCenter(), box.GetSize()*box.GetScale(), box.GetAngle(), texOb_mask, threshold);
 //}
 
-void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos)
-{
-    glBindTexture(GL_TEXTURE_2D, texOb->texture);
-    int frame = texOb->updateAnimationFrame();
+//void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos)
+//{
+    //glBindTexture(GL_TEXTURE_2D, texOb->texture);
+    //int frame = texOb->updateAnimationFrame();
     
-    glBegin(GL_QUADS);
-        glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(rect.GetBottomLeft().x,                        rect.GetBottomLeft().y + rect.GetHeight(),     z_pos);
-        glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(),     rect.GetBottomLeft().y + rect.GetHeight(),     z_pos);
-        glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(),     rect.GetBottomLeft().y,                       z_pos);
-        glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(rect.GetBottomLeft().x,                         rect.GetBottomLeft().y,                      z_pos);
-    glEnd();
-}
+    //glBegin(GL_QUADS);
+        //glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(rect.GetBottomLeft().x,                        rect.GetBottomLeft().y + rect.GetHeight(),     z_pos);
+        //glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(),     rect.GetBottomLeft().y + rect.GetHeight(),     z_pos);
+        //glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(),     rect.GetBottomLeft().y,                       z_pos);
+        //glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(rect.GetBottomLeft().x,                         rect.GetBottomLeft().y,                      z_pos);
+    //glEnd();
+//}
 
 
 void drawLine(TextureOb* texOb, 
@@ -598,18 +598,18 @@ void drawInfoIn2Column(
     float info_total_string_w = char_w * max_info_total_str_size;
     float info_total_string_h = char_h * info_title_list.size();
         
-    Rect rect(-char_w, -info_total_string_h, info_total_string_w, info_total_string_h + char_h/2);
+    //Rect rect(-char_w, -info_total_string_h, info_total_string_w, info_total_string_h + char_h/2);
     
     glm::ivec4 color_title(250, 250, 250, 255);
     glm::ivec4 color_info(250, 250, 0, 255);
 
     TextureOb* texOb_textBg = GuiTextureObCollector::Instance().text_background;
                                     
-    glPushMatrix();
+    //glPushMatrix();
     {
-        glTranslatef(pos.x, pos.y, 0.0);
+        //glTranslatef(pos.x, pos.y, 0.0);
     
-        drawTexturedRect(texOb_textBg, rect, -2);
+        //drawTexturedRect(texOb_textBg, rect, -2);
     
         glm::vec2 curpos(info_total_string_w/3, 0.0); 
         Screen::Instance().DrawText(info_title_list[0], font_size+1, curpos);
@@ -626,7 +626,7 @@ void drawInfoIn2Column(
             Screen::Instance().DrawText(info_value_list[i], font_size, curpos, color_info);
         }
     }  
-    glPopMatrix();
+    //glPopMatrix();
 }
 
     
