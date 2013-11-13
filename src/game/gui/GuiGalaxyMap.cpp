@@ -134,7 +134,7 @@ void GuiGalaxyMap::UpdateUnique(Player* player)
 /* vitual override final */
 void GuiGalaxyMap::RenderUnique(const Renderer& render, Player* player) const
 {
-    drawQuad(GetTextureOb(), GetBox());    
+    render.DrawQuad(GetTextureOb(), GetBox());    
 
     for (unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
     {           

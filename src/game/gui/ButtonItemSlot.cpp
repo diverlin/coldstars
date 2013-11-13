@@ -52,11 +52,11 @@ void ButtonItemSlot::UpdateUnique(Player* player)
 /* virtual override final */
 void ButtonItemSlot::RenderUnique(const Renderer& render, Player* player) const 
 {
-    GetItemSlot()->Render(GetBox(), glm::vec2(0,0), true);
+    GetItemSlot()->Render(render, GetBox(), glm::vec2(0,0), true);
     
     if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
     {
-        RenderMarkEmptySlot(player->GetCursor().GetMouseData().pos_screencoord, getGuiItemSlotType(player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId()));
+        RenderMarkEmptySlot(render, player->GetCursor().GetMouseData().pos_screencoord, getGuiItemSlotType(player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId()));
     }
     
     if (player->GetNpc()->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)

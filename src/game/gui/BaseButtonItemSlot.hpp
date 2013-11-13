@@ -21,8 +21,9 @@
 #define BASEBUTTONITEMSLOT_HPP
 
 #include "BaseButton.hpp"
-class ItemSlot;
 
+class ItemSlot;
+class Renderer;
 
 class BaseButtonItemSlot : public BaseButton
 {
@@ -44,7 +45,7 @@ class BaseButtonItemSlot : public BaseButton
 
         void UpdateAnimationProgram();
 
-        void RenderMarkEmptySlot(const glm::vec2&, TYPE::GUI) const;
+        void RenderMarkEmptySlot(const Renderer&, const glm::vec2&, TYPE::GUI) const;
         void RenderMarkTarget() const;
                         
     private:

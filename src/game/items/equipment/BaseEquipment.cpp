@@ -93,9 +93,9 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 } 
 
 /* virtual */
-void BaseEquipment::Render(const Box2D& box, const glm::vec2& gui_offset, bool draw_text)
+void BaseEquipment::Render(const Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text)
 {        
-    RenderKorpus(box);
+    RenderKorpus(render, box);
 
     for (unsigned int i=0; i<modules_vec.size(); i++)
     {
@@ -108,12 +108,12 @@ void BaseEquipment::Render(const Box2D& box, const glm::vec2& gui_offset, bool d
         
     if (condition == 0)
     {
-        drawQuad(GuiTextureObCollector::Instance().slot_mark_reject, box);
+        render.DrawQuad(GuiTextureObCollector::Instance().slot_mark_reject, box);
     }
     if (GetLocked() == true)
     {
         int font_size = 12;    
-        drawQuad(GuiTextureObCollector::Instance().slot_mark_accept, box);
+        render.DrawQuad(GuiTextureObCollector::Instance().slot_mark_accept, box);
 
         glm::vec2 pos(box.GetCenter().x - font_size/2 + gui_offset.x, box.GetCenter().y - font_size + gui_offset.y);
         Screen::Instance().DrawText(int2str(locked_turns), font_size, pos);    

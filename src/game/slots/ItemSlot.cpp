@@ -292,28 +292,29 @@ void ItemSlot::UpdateVehiclePropetries() const
 }
    
 /* virtual */
-void ItemSlot::Render(const Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
+void ItemSlot::Render(const Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
 { 
-    drawQuad(textureOb, box); 
-    RenderItem(box, gui_offset, draw_text);    
+    render.DrawQuad(textureOb, box); 
+    RenderItem(render, box, gui_offset, draw_text);    
 }
 
-void ItemSlot::RenderItem(const Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
+void ItemSlot::RenderItem(const Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
 {   
     if (m_Item != nullptr)
     {
-        m_Item->Render(box, gui_offset, draw_text);    
+        m_Item->Render(render, box, gui_offset, draw_text);    
     }
 }
 
-void ItemSlot::RenderMark(const Box2D& box, TextureOb* textureOb_mark) const
+void ItemSlot::RenderMark(const Renderer& render, const Box2D& box, TextureOb* textureOb_mark) const
 {
-    drawQuad(textureOb_mark, box); 
+    render.DrawQuad(textureOb_mark, box); 
 }      
 
-void ItemSlot::RenderTargetMark(const Box2D& box, TextureOb* textureOb_mask, TextureOb* textureOb) const
+void ItemSlot::RenderTargetMark(const Renderer& render, const Box2D& box, TextureOb* textureOb_mask, TextureOb* textureOb) const
 {
-    drawQuadMasked(textureOb, box, textureOb_mask, 0.5); 
+    render.DrawQuad(textureOb, box); 
+    render.DrawQuad(textureOb_mask, box); 
 }     
         
 int ItemSlot::GetItemRadius() const
