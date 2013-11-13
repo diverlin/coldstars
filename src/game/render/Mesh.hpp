@@ -35,6 +35,10 @@ class Mesh
         TYPE::MESH GetTypeId() const { return m_TypeId; };
         TextureOb* GetTextureOb() const { return m_TextureOb; };
         const glm::vec3& GetBoundaryBox() const { return m_BoundaryBox; };
+
+        void FillVertices(const ObjLoader&);
+        void FillVertices(const std::vector<glm::vec3>&, const std::vector<glm::vec2>&);
+        void FillVerticesFast(const std::vector<glm::vec3>&, const std::vector<glm::vec2>&) const;
                         
         void Draw() const;
     
@@ -51,11 +55,11 @@ class Mesh
         GLuint m_ListId;
         GLuint m_VaoId;        
         GLuint m_VboId;
-                              
-        void BuildFaces(const ObjLoader&);
 
-        void CreateList();      // for debug
-        void CreateVbo(); 
+        bool m_HasNormals;
+
+        void UpdateList();      // for debug
+        void UpdateVbo(); 
                 
         void DrawList() const;  // fo debug
         void DrawVbo() const;
