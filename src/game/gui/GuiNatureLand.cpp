@@ -119,7 +119,7 @@ bool GuiNatureLand::UpdateMouseInteractionWithEquipedItemSlots(const MouseData& 
 
 void GuiNatureLand::RenderBackground(const Rect& rect) const
 {
-         drawTexturedRect(natureland->GetBackgroundTextureOb(), rect, -2);  
+    //drawTexturedRect(natureland->GetBackgroundTextureOb(), rect, -2);  
 }
            
 

@@ -99,11 +99,11 @@ void BaseEquipment::Render(const Renderer& render, const Box2D& box, const glm::
 
     for (unsigned int i=0; i<modules_vec.size(); i++)
     {
-        Rect module_rect(box.GetCenter().x + (1.1 * GUI::INSERTED_MODULE_SIZE) * (i), 
-                     box.GetCenter().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
-                 GUI::INSERTED_MODULE_SIZE, 
-                 GUI::INSERTED_MODULE_SIZE);
-        drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1.0f);
+        //Rect module_rect(box.GetCenter().x + (1.1 * GUI::INSERTED_MODULE_SIZE) * (i), 
+                     //box.GetCenter().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
+                 //GUI::INSERTED_MODULE_SIZE, 
+                 //GUI::INSERTED_MODULE_SIZE);
+        //drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1.0f);
     }
         
     if (condition == 0)
