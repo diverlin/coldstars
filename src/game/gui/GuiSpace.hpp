@@ -29,6 +29,7 @@ class GuiVehicle;
 class GuiSkills;
 class GuiGalaxyMap;
 class Slider;
+class Renderer;
 
 class GuiSpace : public BaseGuiElement
 {
@@ -48,7 +49,7 @@ class GuiSpace : public BaseGuiElement
         void Resize(int, int);
         void ButtonsAction(Player*) const;
         
-        virtual void RenderUnique(Player*) const override final;
+        virtual void RenderUnique(const Renderer&, Player*) const override final;
                 
         void RenderText(const glm::vec2&) const;
         

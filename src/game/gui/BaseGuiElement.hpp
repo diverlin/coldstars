@@ -29,6 +29,7 @@
 class Player;
 class AnimationEffect2D;
 class TextureOb;
+class Renderer;
 
           
 class BaseGuiElement
@@ -70,8 +71,8 @@ class BaseGuiElement
         virtual void ResetState();
 
         void Update(Player*);
-        void Render(Player*) const;        
-        virtual void RenderInfo() const {};
+        void Render(const Renderer&, Player*) const;        
+        virtual void RenderInfo(const Renderer&) const {};
                 
     protected:
         std::vector<BaseGuiElement*> m_Child_vec;
@@ -103,8 +104,8 @@ class BaseGuiElement
         virtual void UpdateUnique(Player*);        
         void UpdateCommon(Player*);
                         
-        virtual void RenderUnique(Player*) const;        
-        void RenderCommon(Player*) const;
+        virtual void RenderUnique(const Renderer&, Player*) const;        
+        void RenderCommon(const Renderer&, Player*) const;
                           
     private: 
         TYPE::GUI m_Type_id;

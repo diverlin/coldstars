@@ -334,13 +334,13 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
 */   
      
 /* virtual override final */
-void GuiVehicle::RenderUnique(Player* player) const
+void GuiVehicle::RenderUnique(const Renderer& render, Player* player) const
 {
-    enable_BLEND(); 
-    {
-        drawQuad(GetTextureOb(), GetBox());
-    }
-    disable_BLEND();
+    //enable_BLEND(); 
+    //{
+        //drawQuad(GetTextureOb(), GetBox());
+    //}
+    //disable_BLEND();
 }        
         
 

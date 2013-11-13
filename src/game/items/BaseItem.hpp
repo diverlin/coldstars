@@ -96,7 +96,7 @@ class BaseItem : public BaseDrawable
         
         virtual void Render(const Box2D&, const glm::vec2&, bool draw_text = true);
         void RenderKorpus(const Box2D&);
-        void RenderInfo(const glm::vec2&); 
+        void RenderInfo(const Renderer&, const glm::vec2&); 
 
     protected:
         TYPE::RACE race_id;

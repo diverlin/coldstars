@@ -163,7 +163,7 @@ class Vehicle : public BaseSpaceEntity
         void UpdateLockedItems();
             
         virtual void RenderStuffWhenFocusedInSpace() override final;
-        virtual void RenderInfoInSpace(const glm::vec2&, float) override final;
+        virtual void RenderInfoInSpace(const Renderer&, const glm::vec2&, float) override final;
         void RenderInfo(const glm::vec2&, int, int);
                     
         void RenderRadarRange();

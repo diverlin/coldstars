@@ -373,19 +373,6 @@ void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) 
     glEnable(GL_TEXTURE_2D);
 }
   
-void enable_BLEND()  { glEnable(GL_BLEND);  }
-void disable_BLEND() { glDisable(GL_BLEND); }
-
-void enable_CULLFACE()  { /*glEnable(GL_CULL_FACE);*/ }
-void disable_CULLFACE() { /*glDisable(GL_CULL_FACE);*/ }
-
-void enable_DEPTH()  { glEnable(GL_DEPTH_TEST); }
-void disable_DEPTH() { glDisable(GL_DEPTH_TEST); }
-
-void enable_POINTSPRITE()  { glEnable(GL_POINT_SPRITE);  }
-void disable_POINTSPRITE() { glDisable(GL_POINT_SPRITE); }
-
-
 void drawQuad(TextureOb* texOb,
          const glm::vec3& center, 
          const glm::vec3& size,
@@ -528,21 +515,21 @@ void drawLine(TextureOb* texOb,
 
 void drawColoredTextWithBackground(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color)
 {
-    float char_w = font_size;
-    float char_h = font_size;
+    //float char_w = font_size;
+    //float char_h = font_size;
             
-    float string_w = char_w * str.size();
+    //float string_w = char_w * str.size();
 
-    TextureOb* texOb_textBg = GuiTextureObCollector::Instance().text_background;
-    Rect rect(pos.x - char_w, pos.y - char_h, string_w, 2*char_h);
+    //TextureOb* texOb_textBg = GuiTextureObCollector::Instance().text_background;
+    //Rect rect(pos.x - char_w, pos.y - char_h, string_w, 2*char_h);
         
-    enable_BLEND();
-    {
-        drawTexturedRect(texOb_textBg, rect, GUI::POS_Z);
-    }
-    disable_BLEND();
+    //enable_BLEND();
+    //{
+        //drawTexturedRect(texOb_textBg, rect, GUI::POS_Z);
+    //}
+    //disable_BLEND();
     
-    Screen::Instance().DrawText(str, font_size, pos, color);
+    //Screen::Instance().DrawText(str, font_size, pos, color);
 }
 
 void drawColoredText(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color)

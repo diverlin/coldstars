@@ -75,7 +75,7 @@ void Container::UpdateInfo()
 }        
  
 /* virtual override final */           
-void Container::RenderInfoInSpace(const glm::vec2& scroll_coords, float zoom)
+void Container::RenderInfoInSpace(const Renderer& render, const glm::vec2& scroll_coords, float zoom)
 {
     UpdateInfo();
     glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
@@ -83,7 +83,7 @@ void Container::RenderInfoInSpace(const glm::vec2& scroll_coords, float zoom)
     drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     
     pos.x += 300;
-    m_ItemSlot->GetItem()->RenderInfo(pos);
+    m_ItemSlot->GetItem()->RenderInfo(render, pos);
 }
  
 /* virtual override final */   

@@ -157,9 +157,9 @@ void Cursor::UpdateMouseStuff()
     m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*Screen::Instance().GetScale() + Screen::Instance().GetBottomLeftScreenWC();
 }
 
-void Cursor::RenderFocusedObjectStuff() const
+void Cursor::RenderFocusedObjectStuff(const Renderer& render) const
 {
-    enable_BLEND();
+    render.enable_BLEND();
     {
         float scale = 1.1;
         if (m_FocusedSpaceObject != nullptr)
@@ -184,31 +184,31 @@ void Cursor::RenderFocusedObjectStuff() const
             }
         }
     }
-    disable_BLEND();  
+    render.disable_BLEND();  
 }
 
-void Cursor::RenderFocusedObjectInfo() const
+void Cursor::RenderFocusedObjectInfo(const Renderer& render) const
 {
-    enable_BLEND();
+    render.enable_BLEND();
     {
         if (m_FocusedGuiElement != nullptr)
         {
-            m_FocusedGuiElement->RenderInfo();
+            m_FocusedGuiElement->RenderInfo(render);
         }
         
         if (m_FocusedSpaceObject != nullptr)
         {
-            m_FocusedSpaceObject->RenderInfoInSpace(Screen::Instance().GetBottomLeftScreenWC(), Screen::Instance().GetScale());
+            m_FocusedSpaceObject->RenderInfoInSpace(render, Screen::Instance().GetBottomLeftScreenWC(), Screen::Instance().GetScale());
         }
     }
-    disable_BLEND();  
+    render.disable_BLEND();  
 }
 
-void Cursor::RenderItem() const
+void Cursor::RenderItem(const Renderer& render) const
 {
-    enable_BLEND();
+    render.enable_BLEND();
     {
         m_ItemSlot->RenderItem(m_Box, glm::vec2(0));   
     }
-    disable_BLEND();
+    render.disable_BLEND();
 }

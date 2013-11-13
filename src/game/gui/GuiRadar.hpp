@@ -24,6 +24,7 @@
 
 class BaseSpaceEntity;
 class Vehicle;
+class Renderer;
 
 class GuiRadar : public BaseGuiElement
 {
@@ -41,7 +42,7 @@ class GuiRadar : public BaseGuiElement
 
         virtual void UpdateUnique(Player*) override final;
                      
-        virtual void RenderUnique(Player*) const override final;
+        virtual void RenderUnique(const Renderer&, Player*) const override final;
             
     private:
         float scale;

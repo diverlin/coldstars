@@ -96,20 +96,20 @@ void DriveEffect::Update()
 
 void DriveEffect::Render(float scale, float parent_d_alpha)
 {
-    glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-    enable_POINTSPRITE(); 
-    {     
-        glPushMatrix();
-        {
-            glTranslatef(pTo_start_pos->x, pTo_start_pos->y, 0.0);     
-            for (unsigned int i=0; i<particles_vec.size(); i++) 
-            {
-                particles_vec[i]->Render(scale, parent_d_alpha);
-            }
-        }
-        glPopMatrix();
-    }
-    disable_POINTSPRITE();
+    //glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+    //enable_POINTSPRITE(); 
+    //{     
+        //glPushMatrix();
+        //{
+            //glTranslatef(pTo_start_pos->x, pTo_start_pos->y, 0.0);     
+            //for (unsigned int i=0; i<particles_vec.size(); i++) 
+            //{
+                //particles_vec[i]->Render(scale, parent_d_alpha);
+            //}
+        //}
+        //glPopMatrix();
+    //}
+    //disable_POINTSPRITE();
 }
 
 

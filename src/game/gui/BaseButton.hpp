@@ -22,35 +22,37 @@
 
 #include "BaseGuiElement.hpp"
 
+class Renderer;
+
 class BaseButton : public BaseGuiElement
 {
     public:
-               BaseButton(TYPE::GUI, TYPE::GUI, const std::string&,void (*pAction)(Player*) = nullptr, TextureOb* textureOb = nullptr);                      
-               virtual ~BaseButton();  
-
-            void SetTextureObAdditional(TextureOb* textureOb_additional) { m_TextureOb_additional = textureOb_additional; }
-            void SetTextureObMask(TextureOb* textureOb_mask) { m_TextureOb_mask = textureOb_mask; }
-              
-              //void SetCallBack(void (*funcp)()) { this->pAction = pAction; }              
-               void LockOn();
-               void LockOff();
-
-            virtual void ResetState() override;
+        BaseButton(TYPE::GUI, TYPE::GUI, const std::string&,void (*pAction)(Player*) = nullptr, TextureOb* textureOb = nullptr);                      
+        virtual ~BaseButton();  
         
-               virtual void RenderInfo() const override;                
-               virtual void RenderUnique(Player*) const override;   
+        void SetTextureObAdditional(TextureOb* textureOb_additional) { m_TextureOb_additional = textureOb_additional; }
+        void SetTextureObMask(TextureOb* textureOb_mask) { m_TextureOb_mask = textureOb_mask; }
+        
+        //void SetCallBack(void (*funcp)()) { this->pAction = pAction; }              
+        void LockOn();
+        void LockOff();
+        
+        virtual void ResetState() override;
+        
+        virtual void RenderInfo(const Renderer&) const override;                
+        virtual void RenderUnique(const Renderer&, Player*) const override;   
                        
     protected:          
-            float m_Alpha;                        
-
-            TextureOb* m_TextureOb_additional;
-            TextureOb* m_TextureOb_mask;
-               
-               void (*m_pAction)(Player*);
-                
-             void FullShadeOn();
-             void ShadeOn();
-             void ShadeOff();
+        float m_Alpha;                        
+        
+        TextureOb* m_TextureOb_additional;
+        TextureOb* m_TextureOb_mask;
+        
+        void (*m_pAction)(Player*);
+        
+        void FullShadeOn();
+        void ShadeOn();
+        void ShadeOff();
 };
 
 #endif

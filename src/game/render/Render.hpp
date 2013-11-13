@@ -38,8 +38,20 @@ class Renderer : public NonCopyable
         void Init();
         void MakeShortCuts();
 
-        void ClearScreen() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); } const
+        void ClearScreen() const { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
         
+        void enable_CULLFACE() const    { /*glEnable(GL_CULL_FACE);*/ }
+        void disable_CULLFACE() const   { /*glDisable(GL_CULL_FACE);*/ }
+        
+        void enable_BLEND() const   { glEnable(GL_BLEND);  }
+        void disable_BLEND() const  { glDisable(GL_BLEND); }
+        
+        void enable_DEPTH() const   { glEnable(GL_DEPTH_TEST); }
+        void disable_DEPTH() const  { glDisable(GL_DEPTH_TEST); }
+        
+        void enable_POINTSPRITE() const     { glEnable(GL_POINT_SPRITE);  }    
+        void disable_POINTSPRITE() const    { glDisable(GL_POINT_SPRITE); }   
+
         void SetPerspectiveProjection(float, float);
         void SetOrthogonalProjection(float, float);
                 
@@ -87,19 +99,6 @@ class Renderer : public NonCopyable
     
         GLuint m_ProgramBlur;        
 };
-
-
-void enable_CULLFACE();
-void disable_CULLFACE();
-
-void enable_BLEND();
-void disable_BLEND();
-
-void enable_DEPTH();
-void disable_DEPTH();
-
-void enable_POINTSPRITE();
-void disable_POINTSPRITE();
 
 void drawQuad(TextureOb* texOb, 
          const glm::vec3& center,
