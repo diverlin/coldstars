@@ -195,7 +195,7 @@ void BaseGuiElement::Render(Player* player) const
     
     if (m_Root)
     {
-        resetRenderTransformation();
+        //resetRenderTransformation();
     }
     
     enable_BLEND();

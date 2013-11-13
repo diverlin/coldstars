@@ -373,15 +373,6 @@ void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) 
     glEnable(GL_TEXTURE_2D);
 }
   
-void clearScreen() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
-void resetRenderTransformation() { glLoadIdentity(); }
-
-
-void camera(float x, float y, float z) { glTranslatef(-x, -y, -z); }
-
-//void setColor4f(const glm::vec4& color) { glColor4f(color.r, color.g, color.b, color.a); }
-//void setColor4f(float r, float g, float b, float a) { glColor4f(r, g, b, a); }
-
 void enable_BLEND()  { glEnable(GL_BLEND);  }
 void disable_BLEND() { glDisable(GL_BLEND); }
 
@@ -623,34 +614,34 @@ void drawInfoIn2Column(
 }
 
     
-void renderMesh(const Mesh* const mesh, const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle, bool ZYX)
-{
-    glPushMatrix();
-    {
-        glTranslatef(center.x, center.y, center.z);        
-        glScalef(size.x, size.y, size.z); 
-        if (ZYX)     {    rotateZYX(angle); } // animation rotation along axis X
-        else        {    rotateXYZ(angle); } // animation rotation along axis z
+//void renderMesh(const Mesh* const mesh, const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle, bool ZYX)
+//{
+    //glPushMatrix();
+    //{
+        //glTranslatef(center.x, center.y, center.z);        
+        //glScalef(size.x, size.y, size.z); 
+        //if (ZYX)     {    rotateZYX(angle); } // animation rotation along axis X
+        //else        {    rotateXYZ(angle); } // animation rotation along axis z
                         
-        mesh->Draw();
-    }
-    glPopMatrix();
+        //mesh->Draw();
+    //}
+    //glPopMatrix();
 
-}
+//}
 
-void rotateZYX(const glm::vec3& angle)
-{
-    glRotatef(angle.z, 0.0, 0.0, 1.0); 
-    glRotatef(angle.y, 0.0, 1.0, 0.0); 
-    glRotatef(angle.x, 1.0, 0.0, 0.0); 
-}
+//void rotateZYX(const glm::vec3& angle)
+//{
+    //glRotatef(angle.z, 0.0, 0.0, 1.0); 
+    //glRotatef(angle.y, 0.0, 1.0, 0.0); 
+    //glRotatef(angle.x, 1.0, 0.0, 0.0); 
+//}
 
-void rotateXYZ(const glm::vec3& angle)
-{
-    glRotatef(angle.x, 1.0, 0.0, 0.0); 
-    glRotatef(angle.y, 0.0, 1.0, 0.0); 
-    glRotatef(angle.z, 0.0, 0.0, 1.0); 
-}
+//void rotateXYZ(const glm::vec3& angle)
+//{
+    //glRotatef(angle.x, 1.0, 0.0, 0.0); 
+    //glRotatef(angle.y, 0.0, 1.0, 0.0); 
+    //glRotatef(angle.z, 0.0, 0.0, 1.0); 
+//}
 
 void drawParticleTextured(GLuint texture, const glm::vec2& center, float size, float pos_z)
 {

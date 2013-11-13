@@ -37,6 +37,8 @@ class Renderer : public NonCopyable
 
         void Init();
         void MakeShortCuts();
+
+        void ClearScreen() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); } const
         
         void SetPerspectiveProjection(float, float);
         void SetOrthogonalProjection(float, float);
@@ -86,10 +88,6 @@ class Renderer : public NonCopyable
         GLuint m_ProgramBlur;        
 };
 
-void clearScreen();
-void resetRenderTransformation();
-
-void camera(float x, float y, float z);
 
 void enable_CULLFACE();
 void disable_CULLFACE();
@@ -135,10 +133,6 @@ void drawInfoIn2Column(
                 const std::vector<std::string>& pnfo_title_list, 
                 const std::vector<std::string>& info_value_list, 
                 const glm::vec2& pos);
-
-void renderMesh(const Mesh* const mesh, const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle, bool ZYX);
-void rotateZYX(const glm::vec3&);
-void rotateXYZ(const glm::vec3&);
 
 void drawParticleTextured(GLuint texture, const glm::vec2& _center, float size, float pos_z);
 void drawParticle(const glm::vec2&, float, float r, float g, float b, float a);
