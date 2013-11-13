@@ -1,0 +1,23 @@
+##################################
+# Project:      freeorion
+# License:	Creative Commons Attribution - Attribution-ShareAlike 3.0 licence
+################################
+# filename  << original filename
+# a_000.png 
+# a_001.png 
+# a_002.png << Barren02.png
+##################################
+# Detalies see in << /data/license/freeorion_info.txt >>
+##################################
+
+
+##################################
+# Project:      PyCaptain (pyfl)
+# License:	see in << /data/license/PyCaptain(pyfl)_info.txt >>
+##################################
+filename  << original filename 
+m_000.png << 1.png
+m_001.png << 2.png
+m_002.png << 4.png
+##################################
+
