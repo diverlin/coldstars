@@ -28,6 +28,12 @@ m_HasNormals(true)
     m_BoundaryBox = objLoader.GetBoundaryBox();
 }
 
+Mesh::~Mesh()
+{
+   glDeleteVertexArrays(1, &m_VaoId);
+   glDeleteVertexArrays(1, &m_VboId);
+}
+
 void Mesh::FillVertices(const ObjLoader& objLoader)
 {
     m_PrimitiveType = GL_TRIANGLES;
@@ -191,3 +197,16 @@ void Mesh::Draw() const
 {
     DrawVbo();
 }    
+
+
+//initialization:
+    //for each batch
+        //generate, store, and bind a VAO
+        //bind all the buffers needed for a draw call
+        //unbind the VAO
+
+//main loop/whenever you render:
+    //for each batch
+        //bind VAO
+        //glDrawArrays(...); or glDrawElements(...); etc.
+    //unbind VAO
