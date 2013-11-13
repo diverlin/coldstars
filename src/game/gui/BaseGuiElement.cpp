@@ -186,7 +186,7 @@ void BaseGuiElement::UpdateCommon(Player* player)
        }
 }
 
-void BaseGuiElement::Render(Player* player) const
+void BaseGuiElement::Render(const Renderer& render, Player* player) const
 {
     if (!m_Show)
     {
@@ -198,27 +198,27 @@ void BaseGuiElement::Render(Player* player) const
         //resetRenderTransformation();
     }
     
-    enable_BLEND();
+    render.enable_BLEND();
     {
-        RenderUnique(player);
-        RenderCommon(player);
+        RenderUnique(render, player);
+        RenderCommon(render, player);
     }
-    disable_BLEND();
+    render.disable_BLEND();
 }
 
 /* virtual */
-void BaseGuiElement::RenderUnique(Player* player) const
+void BaseGuiElement::RenderUnique(const Renderer&, Player* player) const
 {
     if (m_TextureOb)
     {
         drawQuad(m_TextureOb, m_Box);
-       }
+    }
 }
 
-void BaseGuiElement::RenderCommon(Player* player) const
+void BaseGuiElement::RenderCommon(const Renderer& render, Player* player) const
 {
-       for (const auto &gui_element : m_Child_vec)
+    for (const auto &gui_element : m_Child_vec)
     {
-        gui_element->Render(player);
+        gui_element->Render(render, player);
     }
 }

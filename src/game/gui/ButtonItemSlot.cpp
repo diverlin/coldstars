@@ -50,7 +50,7 @@ void ButtonItemSlot::UpdateUnique(Player* player)
 }
 
 /* virtual override final */
-void ButtonItemSlot::RenderUnique(Player* player) const 
+void ButtonItemSlot::RenderUnique(const Renderer& render, Player* player) const 
 {
     GetItemSlot()->Render(GetBox(), glm::vec2(0,0), true);
     
@@ -66,13 +66,13 @@ void ButtonItemSlot::RenderUnique(Player* player) const
 }
   
 /* virtual override final */
-void ButtonItemSlot::RenderInfo() const
+void ButtonItemSlot::RenderInfo(const Renderer& render) const
 {
     if (GetItemSlot() != nullptr)
     {
         if (GetItemSlot()->GetItem() != nullptr)
         {
-            GetItemSlot()->GetItem()->RenderInfo(GetBox().GetCenter()); 
+            GetItemSlot()->GetItem()->RenderInfo(render, GetBox().GetCenter()); 
         }
         else
         {

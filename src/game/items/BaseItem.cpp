@@ -122,13 +122,13 @@ void BaseItem::UpdateInfo()
     AddCommonInfo();
 }
 
-void BaseItem::RenderInfo(const glm::vec2& pos)
+void BaseItem::RenderInfo(const Renderer& render, const glm::vec2& pos)
 {  
     UpdateInfo();
     
-    enable_BLEND();
+    render.enable_BLEND();
     drawInfoIn2Column(info.title_list, info.value_list, pos);
-    disable_BLEND();
+    render.disable_BLEND();
 }
 
 /* virtual */

@@ -369,7 +369,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    enable_CULLFACE();
+    render.enable_CULLFACE();
     {
         // render background and star to FBO0
         Screen::Instance().GetFbo0().Activate(w, h);
@@ -419,7 +419,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             render.DrawQuadTexturedFullScreen(Screen::Instance().GetFbo1().GetTexture());
            
             // resizeGl(w*scale, h*scale);     
-            enable_DEPTH();  
+            render.enable_DEPTH();  
             {
                 for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
                 { 
@@ -453,9 +453,9 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 } 
                      
             }
-            //disable_DEPTH();
+            //render.disable_DEPTH();
 
-            enable_BLEND();    
+            render.enable_BLEND();    
             {    
 
                 for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
@@ -496,12 +496,12 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 }
 
             }
-            disable_BLEND();
+            render.disable_BLEND();
 
         }
         Screen::Instance().GetFbo2().Deactivate();
             
-            render.DrawQuadTexturedFullScreen(Screen::Instance().GetFbo2().GetTexture());
+        render.DrawQuadTexturedFullScreen(Screen::Instance().GetFbo2().GetTexture());
                 
                 
         /*
@@ -621,7 +621,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
         starsystem->RestoreSceneColor();
     */    
     }
-    disable_CULLFACE();
+    render.disable_CULLFACE();
     
     //render.SetOrthogonalProjection(w, h); 
 }
@@ -1085,7 +1085,7 @@ void Player::ForceStateMachineReset() const
 
 void Player::RenderCollisionRadius(const Renderer& render) const
 {
-    enable_BLEND(); 
+    render.enable_BLEND(); 
     {       
         for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)   { visible_SPACESTATION_vec[i]->RenderCollisionRadius(render); }            
         for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)      { visible_SATELLITE_vec[i]->RenderCollisionRadius(render); } 
@@ -1099,12 +1099,12 @@ void Player::RenderCollisionRadius(const Renderer& render) const
         for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)       { visible_ASTEROID_vec[i]->RenderCollisionRadius(render); } 
         for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)      { visible_BLACKHOLE_vec[i]->RenderCollisionRadius(render); } 
     }
-    disable_BLEND();
+    render.disable_BLEND();
 }
 
 void Player::RenderAxis(const Renderer& render) const
 {    
-    enable_DEPTH(); 
+    render.enable_DEPTH(); 
         for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)   { visible_SPACESTATION_vec[i]->RenderAxis(render); }            
         for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)      { visible_SATELLITE_vec[i]->RenderAxis(render); } 
         for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)           { visible_SHIP_vec[i]->RenderAxis(render); } 
@@ -1116,7 +1116,7 @@ void Player::RenderAxis(const Renderer& render) const
         for(unsigned int i=0; i<visible_PLANET_vec.size(); i++)         { visible_PLANET_vec[i]->RenderAxis(render); }
         for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)       { visible_ASTEROID_vec[i]->RenderAxis(render); } 
         for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)      { visible_BLACKHOLE_vec[i]->RenderAxis(render); } 
-    disable_DEPTH(); 
+    render.disable_DEPTH(); 
 }         
 
 void Player::SaveData(boost::property_tree::ptree& save_ptree) const

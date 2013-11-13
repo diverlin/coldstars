@@ -85,7 +85,7 @@ void GuiRadar::AddIfWithinRadarRange(BaseSpaceEntity* object, const Vehicle& veh
 }             
             
 /* virtual override final */
-void GuiRadar::RenderUnique(Player* player) const
+void GuiRadar::RenderUnique(const Renderer& render, Player* player) const
 {
     float range_diameter = 2*player->GetNpc()->GetVehicle()->GetProperties().radar;
     Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
@@ -98,7 +98,7 @@ void GuiRadar::RenderUnique(Player* player) const
     drawTexturedRect(textureOb_range, range_rect, -2.0);
             
     float size, size_base = 7;
-    enable_POINTSPRITE();  
+    render.enable_POINTSPRITE();  
     {         
         for (unsigned int i=0; i<entity_vec.size(); i++)
         {
@@ -140,5 +140,5 @@ void GuiRadar::RenderUnique(Player* player) const
             drawParticle(rect.GetCenter() + vec3ToVec2(entity_vec[i]->GetCenter()*scale)/scale_render, size);            
         }
     }
-    disable_POINTSPRITE(); 
+    render.disable_POINTSPRITE(); 
 }

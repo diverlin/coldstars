@@ -71,13 +71,13 @@ void BaseButton::ShadeOff()
 }      
    
 /* virtual override */               
-void BaseButton::RenderInfo() const
+void BaseButton::RenderInfo(const Renderer&) const
 {
     drawColoredTextWithBackground(GetInfo(), 12, GetBox().GetCenter(), glm::ivec4(255, 255, 255, 255));
 }
 
 /* virtual override */
-void BaseButton::RenderUnique(Player*) const
+void BaseButton::RenderUnique(const Renderer&, Player*) const
 {      
     //setColor4f(1.0f, 1.0f, 1.0f, m_Alpha);
 

@@ -97,7 +97,7 @@ void BaseSpaceEntity::CheckDeath(bool show_effect)
 }
 
 /* virtual */        
-void BaseSpaceEntity::RenderInfoInSpace(const glm::vec2& scroll_coords, float scale)
+void BaseSpaceEntity::RenderInfoInSpace(const Renderer&, const glm::vec2& scroll_coords, float scale)
 { 
     UpdateInfo(); // virtual
     glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);

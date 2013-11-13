@@ -323,7 +323,7 @@ void GuiSpace::UpdateUnique(Player* player)
 //}
 
 /* virtual final */
-void GuiSpace::RenderUnique(Player* player) const
+void GuiSpace::RenderUnique(const Renderer&, Player* player) const
 {
     //if (show_gui_radar == true)  
     //{

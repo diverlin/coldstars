@@ -21,7 +21,9 @@
 #define CONTAINER_HPP
 
 #include <spaceobjects/BaseSpaceEntity.hpp>
+
 class ItemSlot;
+class Renderer;
 
 
 class Container : public BaseSpaceEntity
@@ -35,7 +37,7 @@ class Container : public BaseSpaceEntity
         
         ItemSlot* const GetItemSlot() const { return m_ItemSlot; }
 
-        virtual void RenderInfoInSpace(const glm::vec2&, float) override final;
+        virtual void RenderInfoInSpace(const Renderer&, const glm::vec2&, float) override final;
         
         virtual void PostDeathUniqueEvent(bool) override final;
             

@@ -1180,7 +1180,7 @@ void Vehicle::RenderStuffWhenFocusedInSpace()
 }
 
 /* virtual override final */               
-void Vehicle::RenderInfoInSpace(const glm::vec2& scroll_coords, float zoom)
+void Vehicle::RenderInfoInSpace(const Renderer& render, const glm::vec2& scroll_coords, float zoom)
 {  
     UpdateInfo(); // virtual
     glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);

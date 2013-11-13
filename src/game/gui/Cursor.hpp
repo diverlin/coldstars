@@ -27,6 +27,7 @@ class ItemSlot;
 class BaseSpaceEntity;
 class BaseGuiElement;
 class Player;
+class Renderer;
 
 
 class Cursor
@@ -46,10 +47,10 @@ class Cursor
         void Reset();    
         void Update(Player*);
         
-        void RenderFocusedObjectStuff() const;
-        void RenderFocusedObjectInfo() const;
+        void RenderFocusedObjectStuff(const Renderer&) const;
+        void RenderFocusedObjectInfo(const Renderer&) const;
         
-        void RenderItem() const;
+        void RenderItem(const Renderer&) const;
                 
     private:           
         ItemSlot* m_ItemSlot;  

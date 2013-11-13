@@ -21,6 +21,8 @@
 
 #include "BaseButtonItemSlot.hpp"
 
+class Renderer;
+
 class ButtonItemSlot2 : public BaseButtonItemSlot
 {
     public:
@@ -37,7 +39,7 @@ class ButtonItemSlot2 : public BaseButtonItemSlot
         virtual void ResetState() override final;
         virtual void UpdateUnique(Player*) override final;
         
-        virtual void RenderUnique(Player*) const override final; 
+        virtual void RenderUnique(const Renderer&, Player*) const override final; 
         
     private:
 

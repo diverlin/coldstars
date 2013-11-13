@@ -824,37 +824,34 @@ void StarSystem::DrawBackground(const Renderer& render, const glm::vec2& scroll_
 // HACK for point sprites
 if (distantStarEffect_vec.size()>0) 
 {
-    enable_POINTSPRITE();
+    render.enable_POINTSPRITE();
     {
         distantStarEffect_vec[0]->Render(render);
     }
-    disable_POINTSPRITE();
-    clearScreen();                
+    render.disable_POINTSPRITE();
+    render.ClearScreen();                
 } 
 // HACK for point sprites
 
-    //resetRenderTransformation();
-    //RestoreSceneColor();
-
-    enable_BLEND();
-    glDepthMask(false);
+    render.enable_BLEND();
+    glDepthMask(false);   // FIXME MOVE TO RENDER
 
     for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++)
     { 
         distantNebulaEffect_vec[i]->Render(render); 
     }
 
-    enable_POINTSPRITE();
+    render.enable_POINTSPRITE();
     {
         for(unsigned int i = 0; i<distantStarEffect_vec.size(); i++)
         { 
             distantStarEffect_vec[i]->Render(render); 
         }
     }
-    disable_POINTSPRITE();
+    render.disable_POINTSPRITE();
         
-    glDepthMask(true);
-    disable_BLEND();
+    glDepthMask(true);  // FIXME MOVE TO RENDER
+    render.disable_BLEND();
 }
     
 void StarSystem::DrawOrbits()

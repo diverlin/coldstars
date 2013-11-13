@@ -30,6 +30,7 @@ class Mesh;
 class TextureOb;
 class Vehicle;
 class AnimationBase;
+class Renderer;
 
 
 struct UnresolvedDataUniqueBaseSpaceEntity
@@ -74,7 +75,7 @@ class BaseSpaceEntity : public BaseDrawable
         void SilentKill();
         
         virtual void RenderStuffWhenFocusedInSpace() {};
-        virtual void RenderInfoInSpace(const glm::vec2&, float);        
+        virtual void RenderInfoInSpace(const Renderer&, const glm::vec2&, float);        
         void RenderInfo(const glm::vec2&);
         void virtual UpdateInfo() {}    
                 
