@@ -59,6 +59,7 @@
 
 #include <struct/RaceInformationCollector.hpp>
 
+#include <render/Mesh.hpp>
 
 int StarSystem::counter = 0;
 
@@ -843,10 +844,22 @@ if (distantStarEffect_vec.size()>0)
 
     render.enable_POINTSPRITE();
     {
+        //for(unsigned int i = 0; i<distantStarEffect_vec.size(); i++)
+        //{ 
+            //distantStarEffect_vec[i]->Render(render); 
+        //}
+
+        std::vector<glm::vec3> positions;
+        std::vector<glm::vec2> texcoords;
         for(unsigned int i = 0; i<distantStarEffect_vec.size(); i++)
         { 
-            distantStarEffect_vec[i]->Render(render); 
+            positions.push_back(distantStarEffect_vec[i]->GetCenter());
+            texcoords.push_back(glm::vec2(0.0f)); 
         }
+        Mesh mesh;
+        mesh.FillVertices(positions, texcoords);
+        render.DrawPoints(&mesh, distantStarEffect_vec[0]->GetTextureOb());
+
     }
     render.disable_POINTSPRITE();
         

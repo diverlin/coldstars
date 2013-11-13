@@ -30,6 +30,7 @@ class Mesh
 { 
     public:
         Mesh(const std::string&, TextureOb* textureOb, TYPE::MESH);
+        Mesh();
         ~Mesh();
 
         TYPE::MESH GetTypeId() const { return m_TypeId; };

@@ -308,33 +308,6 @@ namespace ENTITY
         const int DISTANTSTAR_SIZE_MAX = 15;
     }
 
-    namespace STARSYSTEM
-    {
-        const int JUMPRADIUS = 1200;
-        
-        const int PLANET_NUM_MIN = 3;
-        const int PLANET_NUM_MAX = 5;
-        
-        const int SHIP_INIT_MIN = 4;
-        const int SHIP_INIT_MAX = 7;
-        const int SHIPENEMY_INIT_MIN = 50;
-        const int SHIPENEMY_INIT_MAX = 100;
-
-        const int SPACESTATION_NUM_MIN = 1;
-        const int SPACESTATION_NUM_MAX = 3;
-            
-        const int DISTANT_NEBULA_MIN = 6;
-        const int DISTANT_NEBULA_MAX = 8;
-        
-        const int DISTANT_STAR_MIN = 40;
-        const int DISTANT_STAR_MAX = 60;
-        
-        enum CONDITION
-        {
-            WAR_ID=1, CAPTURED_ID, SAFE_ID
-        };
-
-    }
     
     namespace SATELLITE
     {

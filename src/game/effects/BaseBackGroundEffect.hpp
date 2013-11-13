@@ -34,9 +34,12 @@ class BaseBackGroundEffect
 
         void SetCenter(const glm::vec3& center)     { m_Center = center; }        
         void SetSize(const glm::vec3& size)         { m_Size = size; }
-        
+
         void SetAngle(float angle)              { m_Angle = angle; }                       
         void SetDeltaAngle(float delta_angle)   { m_DeltaAngle = delta_angle; }
+
+        const glm::vec3& GetCenter() const { return m_Center; }
+        TextureOb* GetTextureOb() const { return m_TextureOb; }
                 
     protected:
         unsigned long int id;
