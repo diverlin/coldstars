@@ -56,7 +56,7 @@ void NormalRunScenario::Init(Player* player)
         {
             StarSystemDescription starsystem_description;
             starsystem_description.planet_num = 5;
-            starsystem_description.spacestation_num = 1;
+            starsystem_description.spacestation_num = 3;
             starsystem_description.asteroid_num = 3;
                        
             starsystem_description.allow_ships         = false;
@@ -93,6 +93,6 @@ void NormalRunScenario::Init(Player* player)
         starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
     }
 
-    //God::Instance().CreateShips(starsystem, /*ships_num=*/50, TYPE::RACE::R0_ID);   // fake
+    God::Instance().CreateShips(starsystem, /*ships_num=*/50, TYPE::RACE::R0_ID);   // fake
 }
 

@@ -19,16 +19,11 @@ const int VERT_NORMAL   = 2;
 class ObjLoader;
 class TextureOb;
 
-struct MeshVertexData
+struct Vertex
 {
     glm::vec3 position;
     glm::vec2 texcoord;
     glm::vec3 normal;
-};
-
-struct MeshFaceData
-{
-    MeshVertexData vertices[3];
 };
 
 class Mesh
@@ -45,12 +40,13 @@ class Mesh
     
     private:
         TYPE::MESH m_TypeId;
+        GLenum m_PrimitiveType;
         
         TextureOb* m_TextureOb;
-        std::vector<MeshFaceData> m_Faces; 
+        std::vector<Vertex> m_Vertices; 
         glm::vec3 m_BoundaryBox;
     
-        uint32_t m_Icount;
+        uint32_t m_VertexCount;
 
         GLuint m_ListId;
         GLuint m_VaoId;        

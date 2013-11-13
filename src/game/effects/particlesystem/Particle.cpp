@@ -19,6 +19,7 @@
 #include "Particle.hpp"
 #include "../../common/rand.hpp"
 #include "../../render/Render.hpp"
+#include <common/constants.hpp>
 
 Particle::Particle(const ParticleData& data_particle)
 {
