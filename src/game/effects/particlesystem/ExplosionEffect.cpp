@@ -20,7 +20,7 @@
 
 #include "../../common/constants.hpp"
 #include "../../resources/TextureManager.hpp"
-#include "../../common/rand.hpp"
+#include <math/rand.hpp>
 
 ExplosionSlice::ExplosionSlice()
 {}

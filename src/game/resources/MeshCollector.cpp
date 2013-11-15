@@ -17,8 +17,8 @@
 */
 
 #include "MeshCollector.hpp"
-#include "../render/Mesh.hpp"
-#include "../common/rand.hpp"
+#include <render/Mesh.hpp>
+#include <math/rand.hpp>
 
 MeshCollector& MeshCollector::Instance()
 {

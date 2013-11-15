@@ -1,5 +1,5 @@
 #include "myVector.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 #include <sstream>
       
 float distanceBetween(const glm::vec3& center1, const glm::vec3& center2)

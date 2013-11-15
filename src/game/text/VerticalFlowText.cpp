@@ -17,7 +17,7 @@
 */
 
 #include "VerticalFlowText.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../render/Render.hpp"
 #include "../render/Screen.hpp"
 

@@ -29,7 +29,7 @@
 #include "../common/constants.hpp"
 #include "../common/Logger.hpp"
 #include "../common/myStr.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 
 #include "../world/starsystem.hpp"
 #include "../effects/particlesystem/DriveEffect.hpp"

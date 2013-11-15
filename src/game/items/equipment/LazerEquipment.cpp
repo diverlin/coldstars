@@ -22,7 +22,8 @@
 #include <common/myStr.hpp>
 #include <common/Logger.hpp>
 #include <common/Logger.hpp>
-#include <common/rand.hpp>
+
+#include <math/rand.hpp>
 
 #include "../../resources/TextureManager.hpp"
 #include "../../items/modules/LazerModule.hpp"

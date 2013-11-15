@@ -19,7 +19,7 @@
 #include <cmath>
 
 #include "BaseParticleSystem.hpp"
-#include "../../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../../common/constants.hpp"
 
 BaseParticleSystem::BaseParticleSystem():

@@ -27,7 +27,7 @@
 #include "../world/starsystem.hpp"
 #include "../world/EntityManager.hpp"
 
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../common/myStr.hpp"
 #include "../common/TurnTimer.hpp"
 #include "../common/Logger.hpp"

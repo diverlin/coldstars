@@ -21,7 +21,7 @@
 #include "Kosmoport.hpp"
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../world/EntityManager.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../items/others/GoodsPack.hpp"

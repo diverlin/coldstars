@@ -20,7 +20,7 @@
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
-#include <common/rand.hpp>
+#include <math/rand.hpp>
 
 #include <resources/TextureManager.hpp>
 

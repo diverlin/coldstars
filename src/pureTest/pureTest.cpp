@@ -2,7 +2,7 @@
 #include <vector>
 #include <iostream>
 #include "items/equipment/RadarEquipment.hpp"
-#include "common/rand.hpp"
+#include <math/rand.hpp>
 #include "common/myStr.hpp"
 
 void pureTest1()

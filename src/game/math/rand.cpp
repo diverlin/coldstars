@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <cmath>
 
-#include "constants.hpp"
+#include <common/constants.hpp>
 #include <types/MyInt.hpp>
 #include <struct/RaceInformationCollector.hpp>
 

@@ -24,7 +24,7 @@
 #include "../config/config.hpp"
 #include "../common/common.hpp"
 #include "../common/constants.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 
 #include "../resources/GuiTextureObCollector.hpp"
 

@@ -20,7 +20,7 @@
 #include "starsystem.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../common/constants.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 
 HyperSpace::HyperSpace()
 {}

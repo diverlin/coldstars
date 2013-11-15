@@ -20,7 +20,7 @@
 #include "../../../common/constants.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/myStr.hpp"
-#include "../../../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../../../spaceobjects/Vehicle.hpp"
 
 MicroScenarioExploration::MicroScenarioExploration()
