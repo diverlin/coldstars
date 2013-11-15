@@ -74,8 +74,8 @@ namespace ENTITY
         const int DISTANT_NEBULA_MIN = 6;
         const int DISTANT_NEBULA_MAX = 8;
         
-        const int DISTANT_STAR_MIN = 10;
-        const int DISTANT_STAR_MAX = 10;
+        const int DISTANT_STAR_MIN = 10000;
+        const int DISTANT_STAR_MAX = 10000;
         
         enum CONDITION
         {

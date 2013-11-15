@@ -329,10 +329,23 @@ void Renderer::DrawParticleTextured(TextureOb* texOb, const glm::vec3& center, f
 
 void Renderer::DrawPoints(Mesh* mesh, TextureOb* textureOb) const
 {
-    glm::mat4 Mm;
-    RenderMeshGeometry(mesh, textureOb, Mm);
+    glPointSize(12.0f);
+
+    glUseProgram(ShaderCollector::Instance().point);
+    {    
+        glActiveTexture(GL_TEXTURE0);                                
+        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().point, "uTexture_0"), 0);
+ 
+        glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().point, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);       
+  
+        mesh->Draw();
+    }
+    glUseProgram(0);
 }
    
+
+
 
 void Renderer::DrawAxis(const glm::mat4& Mm, float width) const
 {

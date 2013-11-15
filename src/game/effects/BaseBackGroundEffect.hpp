@@ -40,6 +40,8 @@ class BaseBackGroundEffect
 
         const glm::vec3& GetCenter() const { return m_Center; }
         TextureOb* GetTextureOb() const { return m_TextureOb; }
+
+        const glm::vec4& GetColor() const { return m_Color; }
                 
     protected:
         unsigned long int id;
@@ -50,7 +52,9 @@ class BaseBackGroundEffect
         std::string m_TextureObPath;
         
         glm::vec3 m_Center;
-        glm::vec3 m_Size;   
+        glm::vec3 m_Size;  
+        glm::vec4 m_Color; 
+        
         float m_Angle;
         float m_DeltaAngle;
            

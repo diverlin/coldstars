@@ -12,9 +12,10 @@
 
 const int VERTECIES_PER_POLYGON_NUM = 3;
 
-const int VERT_POSITION = 0;
-const int VERT_TEXCOORD = 1;
-const int VERT_NORMAL   = 2;
+const int VERTEX_POSITION_LOCATION = 0;
+const int VERTEX_TEXCOORD_LOCATION = 1;
+const int VERTEX_NORMAL_LOCATION   = 2;
+const int VERTEX_COLOR_LOCATION    = 3;
 
 class ObjLoader;
 class TextureOb;
@@ -24,6 +25,7 @@ struct Vertex
     glm::vec3 position;
     glm::vec2 texcoord;
     glm::vec3 normal;
+    glm::vec4 color;
 };
 
 class Mesh
@@ -38,8 +40,8 @@ class Mesh
         const glm::vec3& GetBoundaryBox() const { return m_BoundaryBox; };
 
         void FillVertices(const ObjLoader&);
-        void FillVertices(const std::vector<glm::vec3>&, const std::vector<glm::vec2>&);
-        void FillVerticesFast(const std::vector<glm::vec3>&, const std::vector<glm::vec2>&) const;
+        void FillVertices(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&);
+        //void FillVerticesFast(const std::vector<glm::vec3>&, const std::vector<glm::vec2>&) const;
                         
         void Draw() const;
     
@@ -57,7 +59,9 @@ class Mesh
         GLuint m_VaoId;        
         GLuint m_VboId;
 
+        bool m_HasTexCoords;
         bool m_HasNormals;
+        bool m_HasColors;
 
         void UpdateList();      // for debug
         void UpdateVbo(); 
