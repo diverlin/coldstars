@@ -176,14 +176,19 @@ void Renderer::RenderMeshGeometry(const Mesh& mesh, const glm::mat4& Mm) const
 void Renderer::RenderMeshGeometry(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     glBindTexture(GL_TEXTURE_2D, textureOb.texture);
-    RenderMeshGeometry(mesh, Mm);
+    
+ComposeModelMatrix(Mm);                     
+    mesh.Draw();
 }
 
 void Renderer::RenderTransparentMeshGeometry(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     enable_BLEND();
         glBindTexture(GL_TEXTURE_2D, textureOb.texture);
-        RenderMeshGeometry(mesh, Mm);
+
+        ComposeModelMatrix(Mm);                     
+        mesh.Draw();
+
     disable_BLEND();
 }
 
@@ -235,7 +240,8 @@ void Renderer::RenderMeshLightNormalMap(const Mesh& mesh, const TextureOb& textu
         glBindTexture(GL_TEXTURE_2D, textureOb.normalmap);
         glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_normalmap"), 1);
                 
-        RenderMeshGeometry(mesh, Mm);
+        ComposeModelMatrix(Mm);                     
+        mesh.Draw();
     }
     glUseProgram(0);
 }
@@ -247,7 +253,7 @@ void Renderer::RenderTransparentMeshLight(const Mesh& mesh, const TextureOb& tex
     disable_BLEND();
 }
 
-void Renderer::RenderMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& modelMatrix, float offset) const
+void Renderer::RenderMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm, float offset) const
 {
     glUseProgram(ShaderCollector::Instance().multitexturing);
     {    
@@ -261,7 +267,8 @@ void Renderer::RenderMeshMultiTextured(const Mesh& mesh, const TextureOb& textur
         
         glUniform2f(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "displ"), offset, -offset);
         
-        RenderMeshGeometry(mesh, modelMatrix);
+        ComposeModelMatrix(Mm);                     
+        mesh.Draw();
     }
     glUseProgram(0);
 }        
