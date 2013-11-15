@@ -20,7 +20,7 @@
 #include "../spaceobjects/Vehicle.hpp"
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../resources/TextureManager.hpp"
 #include "../resources/textureOb.hpp"
 

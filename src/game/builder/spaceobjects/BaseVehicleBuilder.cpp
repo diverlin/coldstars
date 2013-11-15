@@ -53,7 +53,7 @@
 
 #include <builder/slots/ItemSlotBuilder.hpp>
 
-#include "../../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../../effects/particlesystem/DriveEffect.hpp"
 
 #include <slots/ItemSlot.hpp>

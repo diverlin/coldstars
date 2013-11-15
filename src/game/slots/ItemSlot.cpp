@@ -40,7 +40,7 @@
 #include "../dock/Angar.hpp"
 
 #include "../common/Logger.hpp"
-#include "../common/rand.hpp" // (tmp) move to builder
+#include <math/rand.hpp>
 
 #include "../garbage/EntityGarbage.hpp"
 #include "../world/EntityManager.hpp"

@@ -22,7 +22,7 @@
 #include <types/MeshTypes.hpp>
 
 #include <common/common.hpp>
-#include <common/rand.hpp>
+#include <math/rand.hpp>
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
 

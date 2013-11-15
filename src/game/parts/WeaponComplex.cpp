@@ -18,7 +18,7 @@
 
 
 #include "WeaponComplex.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../common/Logger.hpp"
 #include "../common/myStr.hpp"
 #include "../spaceobjects/Vehicle.hpp"

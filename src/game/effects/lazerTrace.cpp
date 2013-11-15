@@ -17,7 +17,7 @@
 */
 
 #include "lazerTrace.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../common/constants.hpp"
 #include "../render/Render.hpp"
 #include "../render/Screen.hpp"

@@ -21,7 +21,7 @@
 #include "../resources/TextureManager.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../common/constants.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../common/common.hpp"
 #include "../common/myStr.hpp"
 #include "../world/EntityManager.hpp"

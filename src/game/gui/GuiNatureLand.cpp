@@ -23,7 +23,7 @@
 #include "../items/BaseItem.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../pilots/Player.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 
 #include "../pilots/Npc.hpp"
 #include "../spaceobjects/Vehicle.hpp"

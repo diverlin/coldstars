@@ -17,7 +17,7 @@
 */
 
 #include "InfoTable.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../render/Render.hpp"
 
 InfoTable::InfoTable()

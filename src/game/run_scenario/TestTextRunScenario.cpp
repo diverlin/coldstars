@@ -33,7 +33,7 @@
 #include "../struct/GalaxyDescription.hpp"
 #include "../text/VerticalFlowText.hpp"
 
-#include <common/rand.hpp>
+#include <math/rand.hpp>
 
 #include <iostream>
     

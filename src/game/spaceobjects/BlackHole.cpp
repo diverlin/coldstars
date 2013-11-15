@@ -20,7 +20,7 @@
 #include "../resources/MeshCollector.hpp"
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../common/Logger.hpp"
 
 #include "../common/IdGenerator.hpp"

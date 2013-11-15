@@ -20,7 +20,7 @@
 #include "Sector.hpp"
 #include "../common/constants.hpp"
 #include "../world/EntityManager.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../common/myStr.hpp"
 
 #include "../garbage/EntityGarbage.hpp"

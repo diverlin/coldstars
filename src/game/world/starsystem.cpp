@@ -28,7 +28,7 @@
 
 #include <common/Logger.hpp>
 #include <common/Collision.hpp>
-#include <common/rand.hpp>
+#include <math/rand.hpp>
 #include <common/myStr.hpp>
 
 #include <world/EntityManager.hpp>

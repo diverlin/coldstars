@@ -21,7 +21,7 @@
 #include "../world/starsystem.hpp"
 #include "../world/Sector.hpp"
 #include "../common/myStr.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../world/EntityManager.hpp"
 #include "../common/Logger.hpp"
 #include "../common/common.hpp"

@@ -19,7 +19,7 @@
 #include "DistantStarEffect.hpp"
 #include "../common/myStr.hpp"
 #include "../common/constants.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 
 #include "../resources/TextureManager.hpp"                                           
 #include <render/Mesh.hpp>

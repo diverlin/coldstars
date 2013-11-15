@@ -17,7 +17,7 @@
 */
 
 #include "Satellite.hpp"
-#include "../common/rand.hpp"
+#include <math/rand.hpp>
 #include "../common/myStr.hpp"
 #include "../common/Logger.hpp"
 #include "../world/EntityManager.hpp"

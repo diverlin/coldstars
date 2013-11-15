@@ -21,7 +21,7 @@
 #include <types/TextureTypes.hpp>
 #include <types/RaceTypes.hpp>
 
-#include <common/rand.hpp>
+#include <math/rand.hpp>
 #include <common/Logger.hpp>
 #include <common/constants.hpp>
 
