@@ -24,8 +24,8 @@
 #include <types/MyInt.hpp>
 #include <render/Render.hpp>
 
-const int DISTANT_STAR_MIN = 100000;
-const int DISTANT_STAR_MAX = 100000;
+const int DISTANT_STAR_MIN = 10000;
+const int DISTANT_STAR_MAX = 10000;
 
 class DistantStarEffect : public BaseBackGroundEffect
 {   

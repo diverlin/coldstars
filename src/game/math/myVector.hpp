@@ -25,10 +25,6 @@ float getAngle(const glm::vec2&, const glm::vec2);
 float getAngleBetweenUnits(const glm::vec3&, const glm::vec3&);
 float dotUnits(const glm::vec3& v1, const glm::vec3& v2);
 
-glm::vec2 getRandVec2f(int radius_min, int radius_max);
-glm::vec3 getRandXYVec3f(int radius_min, int radius_max, float z);
-glm::vec3 getRandXYVec3Unit();
-
 glm::vec3 getXYVec3Unit(float);
 
 

@@ -25,12 +25,18 @@
 #include <types/RaceTypes.hpp>
 #include <types/EntityTypes.hpp>
 
+#include <glm/glm.hpp>
+
 int getRandIntFromVec(const std::vector<int>&);
 
 float getRandFloat(float, float);
 int getRandInt(int, int);
 int getRandSign();
 bool getRandBool();
+
+glm::vec2 getRandVec2f(int radius_min, int radius_max);
+glm::vec3 getRandXYVec3f(int radius_min, int radius_max, float z);
+glm::vec3 getRandXYVec3Unit();
 
 bool isActionShouldHappen(int);
 
