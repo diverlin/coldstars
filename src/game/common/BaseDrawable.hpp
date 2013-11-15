@@ -53,7 +53,7 @@ class BaseDrawable : public Orientation
                         
         bool Is3D() const                 { return (m_Mesh != nullptr); }
         //const glm::vec3& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
-        const Mesh* const GetMesh() const     { return m_Mesh; }
+        const Mesh& GetMesh() const     { return *m_Mesh; }
 
         TextureOb* const GetTextureOb() const { return m_TextureOb; }
         
