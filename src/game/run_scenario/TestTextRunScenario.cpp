@@ -33,6 +33,8 @@
 #include "../struct/GalaxyDescription.hpp"
 #include "../text/VerticalFlowText.hpp"
 
+#include <common/rand.hpp>
+
 #include <iostream>
     
 #include "TestTextRunScenario.hpp"

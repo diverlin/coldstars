@@ -92,15 +92,14 @@ DistantStarEffect* GetNewDistantStarEffect(int color_id)
 
     for (int i=0; i<distStar_num; i++)
     {
-        float x = getRandSign()*getRandInt(0, 1000);
-        float y = getRandSign()*getRandInt(0, 1000);
         float z = -getRandInt(200, 499);
+        glm::vec3 position = getRandXYVec3f(0, 3000, z);
 
-        float r = getRandInt(500, 1000)/1000.0;
-        float g = getRandInt(500, 1000)/1000.0;
-        float b = getRandInt(500, 1000)/1000.0;
+        float r = getRandFloat(0.5, 1.0);
+        float g = getRandFloat(0.5, 1.0);
+        float b = getRandFloat(0.5, 1.0);
         
-        positions.push_back(glm::vec3(x, y, z));
+        positions.push_back(position);
         colors.push_back(glm::vec4(r, g, b, 1.0f));
     }
             

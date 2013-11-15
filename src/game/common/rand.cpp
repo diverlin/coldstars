@@ -119,3 +119,39 @@ TYPE::ENTITY getRandNpcSubSubTypeId(TYPE::ENTITY subtype_id)
     }
 }
 
+
+glm::vec2 getRandVec2f(int radius_min, int radius_max)
+{
+    float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
+    int len = getRandInt(radius_min, radius_max);
+    
+    glm::vec2 v(sin(alpha) * len, cos(alpha) * len);
+    
+    return v;
+}
+
+glm::vec3 getRandXYVec3f(int radius_min, int radius_max, float z)
+{
+    float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
+    int len = getRandInt(radius_min, radius_max);
+    
+    glm::vec3 v(sin(alpha)*len, cos(alpha)*len, z);
+    
+    return v;
+}
+
+glm::vec3 getRandXYVec3Unit()
+{
+    float alpha = (float)getRandInt(0, 360) * DEGREE_TO_RADIAN_RATE;
+    glm::vec3 v(sin(alpha), cos(alpha), 0.0);
+    
+    return v;
+}
+
+glm::vec3 getXYVec3Unit(float alpha)
+{
+    alpha *= DEGREE_TO_RADIAN_RATE;
+    glm::vec3 v(sin(alpha), cos(alpha), 0.0);
+    
+    return v;
+}
