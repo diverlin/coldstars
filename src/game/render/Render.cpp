@@ -327,7 +327,7 @@ void Renderer::DrawParticleTextured(TextureOb* texOb, const glm::vec3& center, f
     glEnd();
 } 
 
-void Renderer::DrawPoints(Mesh* mesh, TextureOb* textureOb) const
+void Renderer::DrawPoints(const Mesh& mesh, TextureOb* textureOb) const
 {
     glPointSize(12.0f);
 
@@ -339,7 +339,7 @@ void Renderer::DrawPoints(Mesh* mesh, TextureOb* textureOb) const
  
         glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().point, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);       
   
-        mesh->Draw();
+        mesh.Draw();
     }
     glUseProgram(0);
 }

@@ -24,10 +24,13 @@
 #include <types/MyInt.hpp>
 #include <render/Render.hpp>
 
+const int DISTANT_STAR_MIN = 100000;
+const int DISTANT_STAR_MAX = 100000;
+
 class DistantStarEffect : public BaseBackGroundEffect
 {   
     public:
-        DistantStarEffect();
+        DistantStarEffect(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&);
         ~DistantStarEffect();
         
         void Render(const Renderer&) const;
@@ -37,6 +40,9 @@ class DistantStarEffect : public BaseBackGroundEffect
         void ResolveData();
     
     private:
+        std::vector<glm::vec3> m_Positions;
+        std::vector<glm::vec4> m_Colors;
+
         void SaveDataUniqueDistantStarEffect(boost::property_tree::ptree&, const std::string&) const;        
         void LoadDataUniqueDistantStarEffect(const boost::property_tree::ptree&);
         void ResolveDataUniqueDistantStarEffect();

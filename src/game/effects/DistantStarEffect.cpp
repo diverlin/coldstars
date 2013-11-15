@@ -21,22 +21,30 @@
 #include "../common/constants.hpp"
 #include "../common/rand.hpp"
 
-#include "../resources/TextureManager.hpp"
+#include "../resources/TextureManager.hpp"                                           
+#include <render/Mesh.hpp>
 
-DistantStarEffect::DistantStarEffect()
+
+DistantStarEffect::DistantStarEffect(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors)
 {
-    float r = getRandInt(500, 1000)/1000.0;
-    float g = getRandInt(500, 1000)/1000.0;
-    float b = getRandInt(500, 1000)/1000.0;
-    m_Color = glm::vec4(r, g, b, 1.0f);
+    for (unsigned int i=0; i<positions.size(); i++)
+    {
+        m_Positions.push_back(positions[i]);
+        m_Colors.push_back(colors[i]);
+    }
+
+    m_Mesh = new Mesh();
+    m_Mesh->FillVertices(m_Positions, m_Colors);
 }
 
 DistantStarEffect::~DistantStarEffect()
-{}
+{
+    delete m_Mesh;
+}
 
 void DistantStarEffect::Render(const Renderer& render) const
 {   
-    render.DrawParticleTextured(m_TextureOb, m_Center, m_Size.x);
+    render.DrawPoints(GetMesh(), GetTextureOb());
 }
 
    
@@ -75,18 +83,29 @@ void DistantStarEffect::ResolveDataUniqueDistantStarEffect()
    
 DistantStarEffect* GetNewDistantStarEffect(int color_id)
 {
-    TextureOb* textureOb = nullptr;
-    if (color_id == NONE_ID)    textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DISTANTSTAR_ID);
-    else                        textureOb = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::DISTANTSTAR_ID, color_id);
+    int distStar_num = getRandInt(DISTANT_STAR_MIN, DISTANT_STAR_MAX);
+
+    TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DISTANTSTAR_ID);
+
+    std::vector<glm::vec3> positions;
+    std::vector<glm::vec4> colors;
+
+    for (int i=0; i<distStar_num; i++)
+    {
+        float x = getRandSign()*getRandInt(0, 1000);
+        float y = getRandSign()*getRandInt(0, 1000);
+        float z = -getRandInt(200, 499);
+
+        float r = getRandInt(500, 1000)/1000.0;
+        float g = getRandInt(500, 1000)/1000.0;
+        float b = getRandInt(500, 1000)/1000.0;
         
-    float size_x = (float)getRandInt(ENTITY::GALAXY::DISTANTSTAR_SIZE_MIN, ENTITY::GALAXY::DISTANTSTAR_SIZE_MAX);
-    glm::vec3 size(size_x, size_x, 1.0);
-    glm::vec3 center(getRandSign()*getRandInt(0, 1000), getRandSign()*getRandInt(0, 1000), -getRandInt(200, 499));        
+        positions.push_back(glm::vec3(x, y, z));
+        colors.push_back(glm::vec4(r, g, b, 1.0f));
+    }
             
-    DistantStarEffect* ds = new DistantStarEffect();
+    DistantStarEffect* ds = new DistantStarEffect(positions, colors);
     ds->SetTextureOb(textureOb);
-    ds->SetCenter(center);
-    ds->SetSize(size);
     
     return ds;
 }

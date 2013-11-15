@@ -832,22 +832,10 @@ void StarSystem::DrawBackground(const Renderer& render, const glm::vec2& scroll_
 
     render.enable_POINTSPRITE();
     {
-        //for(unsigned int i = 0; i<distantStarEffect_vec.size(); i++)
-        //{ 
-            //distantStarEffect_vec[i]->Render(render); 
-        //}
-
-        std::vector<glm::vec3> positions;
-        std::vector<glm::vec4> colors;
         for(unsigned int i = 0; i<distantStarEffect_vec.size(); i++)
         { 
-            positions.push_back(distantStarEffect_vec[i]->GetCenter());
-            colors.push_back(distantStarEffect_vec[i]->GetColor()); 
+            distantStarEffect_vec[i]->Render(render); 
         }
-        Mesh mesh;
-        mesh.FillVertices(positions, colors);
-        render.DrawPoints(&mesh, distantStarEffect_vec[0]->GetTextureOb());
-
     }
     render.disable_POINTSPRITE();
         
