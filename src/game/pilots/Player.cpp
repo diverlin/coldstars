@@ -199,13 +199,13 @@ void Player::AddIfVisible(Vehicle* vehicle)
         
 void Player::AddIfVisible(ShockWaveEffect* effect)
 {
-    if (isObjectOnScreen(effect->GetCenter(), 600))
-    {
-        if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
-        {
-            visible_effect_SHOCKWAVE_vec.push_back(effect);
-        }
-    }
+    //if (isObjectOnScreen(effect->GetCenter(), 600))
+    //{
+        //if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
+        //{
+            //visible_effect_SHOCKWAVE_vec.push_back(effect);
+        //}
+    //}
 }
 
 void Player::AddIfVisible(LazerTraceEffect* effect)
@@ -1194,7 +1194,7 @@ bool isObjectOnScreen(const glm::vec3& center, const glm::vec3& size)
     return true;
 }
 
-bool isObjectOnScreen(const glm::vec2& ob_center, const float sizeInPixels)
+bool isObjectOnScreen(const glm::vec3& ob_center, const float sizeInPixels)
 {       
     float scale = Screen::Instance().GetScale();
     if (ob_center.x < (Screen::Instance().GetBottomLeftScreenWC().x - sizeInPixels*scale))

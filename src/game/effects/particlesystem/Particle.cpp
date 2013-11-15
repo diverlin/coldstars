@@ -22,14 +22,13 @@
 #include <common/constants.hpp>
 
 Particle::Particle(const ParticleData& data_particle)
+:
+m_IsAlive(true),
+m_Color(data_particle.color_start),
+m_Size(data_particle.size_start),
+m_DataParticle(data_particle)
 {
-    is_alive = true;
-    
-    this->data_particle = data_particle;
-    
-    color = data_particle.color_start;
-            
-    size  = data_particle.size_start;
+
 } 
       
 Particle::~Particle()
@@ -38,8 +37,8 @@ Particle::~Particle()
 void Particle::RandomizeLifeTime(float low, float high)
 {
     float speed_rate              = getRandFloat(low, high);   // 0.5, 0.8
-    data_particle.d_size         *= speed_rate;
-    data_particle.velocity_start *= speed_rate;
+    m_DataParticle.d_size         *= speed_rate;
+    m_DataParticle.velocity_start *= speed_rate;
 }
 
 void Particle::Randomize_d_alpha(float val1_f, float val2_f)
@@ -47,7 +46,7 @@ void Particle::Randomize_d_alpha(float val1_f, float val2_f)
     float val1_i = val1_f*10000;
     float val2_i = val2_f*10000;
         
-    data_particle.color_delta.a = getRandInt(val1_i, val2_i)/1000.0;
+    m_DataParticle.color_delta.a = getRandInt(val1_i, val2_i)/1000.0;
 }                
               
                 
@@ -68,8 +67,9 @@ void Particle::CalcRandomDirtyVelocity()
     float dx_n = getRandFloat(0.1, 1.0)*getRandSign();
     float dy_n = getRandFloat(0.1, 1.0)*getRandSign();
     
-    d_pos.x = dx_n * data_particle.velocity_start;
-    d_pos.y = dy_n * data_particle.velocity_start;
+    m_Velocity.x = dx_n * m_DataParticle.velocity_start;
+    m_Velocity.y = dy_n * m_DataParticle.velocity_start;
+    m_Velocity.z = 0;
 }
 
 
@@ -84,75 +84,86 @@ void Particle::CalcRandomAccurateVelocity()
     float dx_n = target_x/_len;
     float dy_n = target_y/_len;
     
-    d_pos.x = dx_n * data_particle.velocity_start;
-    d_pos.y = dy_n * data_particle.velocity_start;
+    m_Velocity.x = dx_n * m_DataParticle.velocity_start;
+    m_Velocity.y = dy_n * m_DataParticle.velocity_start;
+    m_Velocity.z = 0;
 }  
 
 
 //void Particle::calcAccurateRandomVelocity2(glm::vec2 center)
 //{
-        //float _len   = getRandInt(50, 100);
-        //float _angle = getRandInt(0, 360)/RADIAN_TO_DEGREE_RATE;
-
+    //float _len   = getRandInt(50, 100);
+    //float _angle = getRandInt(0, 360)/RADIAN_TO_DEGREE_RATE;
+    
     //glm::vec2 target;
     //target = center;
     
-        //pos.x = center.x + sin(_angle) * _len;
-        //pos.y = center.y + cos(_angle) * _len;
-
-        //float xl = (target.x - pos.x);
-        //float yl = (target.y - pos.y);
-
-        //float dx_n = xl/_len;
-        //float dy_n = yl/_len;
-
-        //d_pos.x = dx_n * data_particle.velocity_start;
-        //d_pos.y = dy_n * data_particle.velocity_start;
+    //pos.x = center.x + sin(_angle) * _len;
+    //pos.y = center.y + cos(_angle) * _len;
+    
+    //float xl = (target.x - pos.x);
+    //float yl = (target.y - pos.y);
+    
+    //float dx_n = xl/_len;
+    //float dy_n = yl/_len;
+    
+    //m_Velocity.x = dx_n * m_DataParticle.velocity_start;
+    //m_Velocity.y = dy_n * m_DataParticle.velocity_start;
+    //m_Velocity.z = 0;
 //}  
 
 void Particle::Reborn()
-{           
-    pos = glm::vec2(0.0); 
-    is_alive = true;
+{   
+    m_Position = glm::vec3(0.0f);  
+    m_IsAlive = true;
                    
-    color = data_particle.color_start;
-    size  = data_particle.size_start;
+    m_Color = m_DataParticle.color_start;
+    m_Size  = m_DataParticle.size_start;
 }
               
 
 void Particle::Update()
 {
-    pos += d_pos;
+    if (m_IsAlive)  
+    {
+        m_Position += m_Velocity;    
+        m_Color.a  -= m_DataParticle.color_delta.a;
+        m_Size     -= m_DataParticle.d_size;     
+
+        if (m_Color.a < m_DataParticle.color_end.a)
+        {
+            m_Color.a = m_DataParticle.color_end.a;
+            m_IsAlive = false;
+        }
     
-    color.a -= data_particle.color_delta.a;
-    size  -= data_particle.d_size;
-      
-    if ((color.a < data_particle.color_end.a) or (size < data_particle.size_end))
-    {
-            is_alive = false;
+        if (m_Size < m_DataParticle.size_end)
+        {
+            m_Size = m_DataParticle.size_end;
+            m_IsAlive = false;
+        }
     }
 }
 
-void Particle::Render() const
-{
-    if (is_alive == true)
-    {
-        drawParticle(pos, size, color);
-    }
-}
+//void Particle::Render() const
+//{
+    ////if (is_alive == true)
+    ////{
+        ////drawParticle(pos, size, color);
+    ////}
+//}
 
-void Particle::Render(float scale) const
-{
-    if (is_alive == true)
-    {
-        drawParticle(pos, size*scale, color.r, color.g, color.b, color.a);
-    }
-}
+//void Particle::Render(float scale) const
+//{
+    ////if (is_alive == true)
+    ////{
+        ////drawParticle(pos, size*scale, color.r, color.g, color.b, color.a);
+    ////}
+//}
 
-void Particle::Render(float scale, float parent_d_alpha) const
-{
-    if (is_alive == true)
-    {
-        drawParticle(pos, size*scale, color.r, color.g, color.b, color.a - parent_d_alpha);
-    }
-}
+//void Particle::Render(float scale, float parent_d_alpha) const
+//{
+    ////if (is_alive == true)
+    ////{
+        ////drawParticle(pos, size*scale, color.r, color.g, color.b, color.a - parent_d_alpha);
+    ////}
+//}

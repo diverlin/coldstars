@@ -36,12 +36,12 @@ DriveEffect::~DriveEffect()
 
 void DriveEffect::CreateParticles()
 {
-    for (unsigned int i=0; i<num_particles; i++)
+    for (unsigned int i=0; i<GetParticlesNum(); i++)
     {
-        Particle* particle = new Particle(data_particle);  
-        particle->SetPosition(vec3ToVec2(*pTo_start_pos));
-        particle->SetVelocity(vec3ToVec2(velocity));
-        particles_vec.push_back(particle);
+        Particle* particle = new Particle(m_DataParticle);  
+        particle->SetPosition(*pTo_start_pos);
+        particle->SetVelocity(velocity);
+        m_Particles.push_back(particle);
     }
 }
 
@@ -55,22 +55,23 @@ void DriveEffect::UpdateVelocity()
     float d_xn = xl / l;
     float d_yn = yl / l;
 
-    velocity.x = d_xn * data_particle.velocity_start;
-    velocity.y = d_yn * data_particle.velocity_start;
+    m_Dir.x = d_xn * m_DataParticle.velocity_start;
+    m_Dir.y = d_yn * m_DataParticle.velocity_start;
+    m_Dir.z = 0;
 }
 
 
 void DriveEffect::PutParticlesToInitPos()
 {
-    float particle_offset = (data_particle.color_start.a - data_particle.color_end.a) / num_particles; 
+    //float particle_offset = (data_particle.color_start.a - data_particle.color_end.a) / num_particles; 
     
-    for (unsigned int i = 0; i < particles_vec.size(); i++) 
-    {
-        while ( particles_vec[i]->GetAlpha() > ( particles_vec[i]->GetAlphaStart() - i * particle_offset) ) 
-        {
-            particles_vec[i]->Update();
-        }     
-    }
+    //for (unsigned int i = 0; i < particles_vec.size(); i++) 
+    //{
+        //while ( particles_vec[i]->GetAlpha() > ( particles_vec[i]->GetAlphaStart() - i * particle_offset) ) 
+        //{
+            //particles_vec[i]->Update();
+        //}     
+    //}
 }
 
 /* virtual override final */
@@ -78,17 +79,17 @@ void DriveEffect::Update()
 {
     UpdateVelocity();
 
-    for (unsigned int i=0; i<particles_vec.size(); i++) 
+    for (unsigned int i=0; i<m_Particles.size(); i++) 
     {
-        if (particles_vec[i]->GetAlive() == true)
+        if (m_Particles[i]->GetIsAlive() == true)
         {
-            particles_vec[i]->Update();
+            m_Particles[i]->Update();
         }
         else
         {
-            particles_vec[i]->SetPosition(vec3ToVec2(*pTo_start_pos));
-            particles_vec[i]->SetVelocity(vec3ToVec2(velocity));
-            particles_vec[i]->Reborn();
+            m_Particles[i]->SetPosition(*pTo_start_pos);
+            m_Particles[i]->SetVelocity(velocity);
+            m_Particles[i]->Reborn();
         }
     }
 }
