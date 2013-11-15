@@ -294,7 +294,7 @@ void ItemSlot::UpdateVehiclePropetries() const
 /* virtual */
 void ItemSlot::Render(const Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
 { 
-    render.DrawQuad(textureOb, box); 
+    render.DrawQuad(*textureOb, box); 
     RenderItem(render, box, gui_offset, draw_text);    
 }
 
@@ -308,13 +308,13 @@ void ItemSlot::RenderItem(const Renderer& render, const Box2D& box, const glm::v
 
 void ItemSlot::RenderMark(const Renderer& render, const Box2D& box, TextureOb* textureOb_mark) const
 {
-    render.DrawQuad(textureOb_mark, box); 
+    render.DrawQuad(*textureOb_mark, box); 
 }      
 
 void ItemSlot::RenderTargetMark(const Renderer& render, const Box2D& box, TextureOb* textureOb_mask, TextureOb* textureOb) const
 {
-    render.DrawQuad(textureOb, box); 
-    render.DrawQuad(textureOb_mask, box); 
+    render.DrawQuad(*textureOb, box); 
+    render.DrawQuad(*textureOb_mask, box); 
 }     
         
 int ItemSlot::GetItemRadius() const

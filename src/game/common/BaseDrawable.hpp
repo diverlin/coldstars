@@ -55,7 +55,8 @@ class BaseDrawable : public Orientation
         //const glm::vec3& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
         const Mesh& GetMesh() const     { return *m_Mesh; }
 
-        TextureOb* const GetTextureOb() const { return m_TextureOb; }
+        const TextureOb& GetTextureOb() const { return *m_TextureOb; }
+        bool HasTextureOb() const { return (m_TextureOb != 0); }
         
         const glm::vec4 GetColor() const { return m_Color; }
                                             

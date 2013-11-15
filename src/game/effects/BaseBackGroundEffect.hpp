@@ -41,7 +41,7 @@ class BaseBackGroundEffect
         void SetDeltaAngle(float delta_angle)   { m_DeltaAngle = delta_angle; }
 
         const glm::vec3& GetCenter() const { return m_Center; }
-        TextureOb* GetTextureOb() const { return m_TextureOb; }
+        const TextureOb& GetTextureOb() const { return *m_TextureOb; }
 
         const glm::vec4& GetColor() const { return m_Color; }
 

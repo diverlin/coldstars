@@ -54,13 +54,13 @@ Star::~Star()
     #endif    
 }
 
-int Star::GetColorId() const { return GetTextureOb()->color_id; }
+int Star::GetColorId() const { return GetTextureOb().color_id; }
 
-float Star::GetBrightThreshold() const { return GetTextureOb()->brightThreshold; }
+float Star::GetBrightThreshold() const { return GetTextureOb().brightThreshold; }
             
 void Star::CalcColor()
 {
-    SetColor(getColor4fById(GetTextureOb()->color_id));
+    SetColor(getColor4fById(GetTextureOb().color_id));
 }
        
 void Star::InitiateSpark()
@@ -132,7 +132,7 @@ void Star::Render_NEW(const Renderer& render)
         
 void Star::Render_OLD(const Renderer& render)
 {    
-    glBindTexture(GL_TEXTURE_2D, GetTextureOb()->texture);              
+    glBindTexture(GL_TEXTURE_2D, GetTextureOb().texture);              
     render.RenderMeshGeometry(GetMesh(), GetActualModelMatrix());
 }
 

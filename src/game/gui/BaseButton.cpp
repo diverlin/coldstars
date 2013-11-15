@@ -81,20 +81,20 @@ void BaseButton::RenderUnique(const Renderer& render, Player*) const
 {      
     //setColor4f(1.0f, 1.0f, 1.0f, m_Alpha);
     
-    if (GetTextureOb() != nullptr)
+    if (HasTextureOb() == true)
     {
         render.DrawQuad(GetTextureOb(), GetBox());
     }
     
     if (m_TextureOb_additional != nullptr)
     {
-        render.DrawQuad(m_TextureOb_additional, GetBox());
+        render.DrawQuad(*m_TextureOb_additional, GetBox());
     }
     //setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     
     if (m_TextureOb_mask)
     {
-        render.DrawQuad(m_TextureOb_mask, GetBox());
+        render.DrawQuad(*m_TextureOb_mask, GetBox());
     }
     
     if (GetLabel() != "")

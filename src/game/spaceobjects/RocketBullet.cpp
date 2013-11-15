@@ -61,7 +61,7 @@ void RocketBullet::CreateDriveComplexTextureDependedStuff()
     GetPoints().addMidLeftPoint();
     GetPoints().addMidFarLeftPoint();
         
-    m_EffectDrive = GetNewDriveEffect(GetTextureOb()->size_id/2, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
+    m_EffectDrive = GetNewDriveEffect(GetTextureOb().size_id/2, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
 }    
 
 void RocketBullet::UpdateInSpace(int time, bool show_effect)

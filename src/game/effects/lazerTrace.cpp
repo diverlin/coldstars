@@ -108,7 +108,7 @@ void LazerTraceEffect::Render()
         
         glActiveTexture(GL_TEXTURE0);        
         
-        drawLine(texOb, *pTo_start_pos, len, angle_inD, texOb->GetFrameHeight()/4);            
+        drawLine(*texOb, *pTo_start_pos, len, angle_inD, texOb->GetFrameHeight()/4);            
         
         glUseProgram(0);
         glActiveTexture(GL_TEXTURE0);

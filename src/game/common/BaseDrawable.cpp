@@ -80,7 +80,7 @@ void BaseDrawable::RenderCollisionRadius(const Renderer& render) const
     TextureOb* texOb_collision_radius =  GuiTextureObCollector::Instance().radar_range;
     glm::vec3 zero;
     glm::mat4 Mm = getModelMatrix(GetCenter(), glm::vec3(2*GetCollisionRadius()), zero); 
-    render.DrawQuad(texOb_collision_radius, Mm);
+    render.DrawQuad(*texOb_collision_radius, Mm);
 }
 
 void BaseDrawable::RenderAxis(const Renderer& render) const

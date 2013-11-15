@@ -58,24 +58,24 @@ class Renderer : public NonCopyable
                 
         void ComposeViewMatrix(const glm::mat4&);
 
-        void RenderMeshGeometry(const Mesh&, const glm::mat4&) const;
-        void RenderMeshGeometry(const Mesh&, const TextureOb*, const glm::mat4&) const;
-        void RenderTransparentMeshGeometry(const Mesh&, const TextureOb*, const glm::mat4&) const;
-        void RenderMeshLight(const Mesh&, const TextureOb*, const glm::mat4&) const;
-        void RenderMeshLightNormalMap(const Mesh&, const TextureOb*, const glm::mat4&, const glm::vec2&, const glm::vec4&) const;
-        void RenderTransparentMeshLight(const Mesh&, const TextureOb*, const glm::mat4&) const;
-        void RenderMeshMultiTextured(const Mesh&, const TextureOb*, const glm::mat4&, float) const;
+        void RenderMeshGeometry           (const Mesh&, const glm::mat4&) const;
+        void RenderMeshGeometry           (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void RenderTransparentMeshGeometry(const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void RenderMeshLight              (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void RenderMeshLightNormalMap     (const Mesh&, const TextureOb&, const glm::mat4&, const glm::vec2&, const glm::vec4&) const;
+        void RenderTransparentMeshLight   (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void RenderMeshMultiTextured      (const Mesh&, const TextureOb&, const glm::mat4&, float) const;
 
-        void DrawQuad(TextureOb*, const glm::mat4&) const;
-        void DrawQuad(TextureOb*, const Box2D&) const;
+        void DrawQuad(const TextureOb&, const glm::mat4&) const;
+        void DrawQuad(const TextureOb&, const Box2D&) const;
 
         void DrawQuad(int, int) const;        
         void DrawQuadTextured(GLuint, int, int) const; 
         void DrawQuadTexturedFullScreen(GLuint) const;
         void DrawQuadTexturedBlurred(GLuint, int, int) const;
                         
-        void DrawParticleTextured(TextureOb*, const glm::vec3&, float) const;
-        void DrawPoints(const Mesh&, TextureOb*) const;
+        void DrawParticleTextured(const TextureOb&, const glm::vec3&, float) const;
+        void DrawPoints(const Mesh&, const TextureOb&) const;
         
         void DrawAxis(const glm::mat4&, float) const;
         void DrawVector(const glm::vec3&, const glm::vec3&, float, float) const;                                             
@@ -104,23 +104,23 @@ class Renderer : public NonCopyable
         GLuint m_ProgramBlur;        
 };
 
-//void drawQuad(TextureOb* texOb, 
+//void drawQuad(const TextureOb& texOb, 
          //const glm::vec3& center,
          //const glm::vec3& size, 
          //float angle=0);
          
-//void drawQuad(TextureOb* texOb,
+//void drawQuad(const TextureOb& texOb,
          //const glm::vec2& center, 
          //const glm::vec2& size,
          //float angle);
               
-//void drawQuad(TextureOb*, const Box2D&);
-//void drawQuadMasked(TextureOb*, const Box2D&, TextureOb*, float);
+//void drawQuad(const TextureOb&, const Box2D&);
+//void drawQuadMasked(const TextureOb&, const Box2D&, TextureOb*, float);
                            
-//void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos);   
+//void drawTexturedRect(const TextureOb& texOb, const Rect& rect, float z_pos);   
 
 // LINE
-void drawLine(TextureOb* texOb, 
+void drawLine(const TextureOb& texOb, 
               const glm::vec3& start_pos, 
               float len, 
               float angle_inD, 
