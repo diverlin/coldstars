@@ -30,12 +30,12 @@ class Particle
         Particle(const ParticleData&);       
         ~Particle();
         
-        void SetPosition(const glm::vec2& pos) { this->pos = pos; };              
-        void SetVelocity(const glm::vec2& _velocity) { d_pos = _velocity; };
+        void SetPosition(const glm::vec3& position) { m_Position = position; };              
+        void SetVelocity(const glm::vec3& velocity) { m_Velocity = velocity; };
         
-        bool GetAlive()       const { return is_alive; };
-        float GetAlpha()      const { return color.a; };
-        float GetAlphaStart() const { return data_particle.color_start.a; };
+        bool GetIsAlive()     const { return m_IsAlive; };
+        float GetAlpha()      const { return m_Color.a; };
+        //float GetAlphaStart() const { return m_DataParticle.color_start.a; };
         
         void Reborn();      
         
@@ -49,22 +49,23 @@ class Particle
         //void calcAccurateRandomVelocity2(glm::vec2);
         
         void Update();
-        void Render() const;
-        void Render(float) const;
-        void Render(float, float) const;
+
+        //void Render() const;
+        //void Render(float) const;
+        //void Render(float, float) const;
                 
     private:
-        bool is_alive;
+        bool m_IsAlive;
         
-        glm::vec2 pos;
-        glm::vec2 d_pos;
+        glm::vec3 m_Position;
+        glm::vec3 m_Velocity;
+        glm::vec3 m_Force;
         
-        glm::vec4 color;
+        glm::vec4 m_Color;
         
-        float size;
+        float m_Size;
         
-        ParticleData data_particle;
+        ParticleData m_DataParticle;
 };
-
-
+  
 #endif 

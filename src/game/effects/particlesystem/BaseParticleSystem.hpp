@@ -17,14 +17,14 @@
 */
 
 
-#ifndef BASEPARTICLESYSTEM_H
-#define BASEPARTICLESYSTEM_H
+#ifndef BASEPARTICLESYSTEM_HPP
+#define BASEPARTICLESYSTEM_HPP
 
 #include <vector>
 
-#include "Particle.hpp"
-#include "../../resources/textureOb.hpp"
-#include "../../spaceobjects/BaseSpaceEntity.hpp"
+#include <effects/particlesystem/Particle.hpp>
+#include <resources/textureOb.hpp>
+#include <spaceobjects/BaseSpaceEntity.hpp>
 
 class BaseParticleSystem 
 {
@@ -32,33 +32,39 @@ class BaseParticleSystem
         BaseParticleSystem();
         virtual ~BaseParticleSystem();
         
-        void SetDying() { is_dying = true; }
-        void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; }
-        void SetParent(BaseSpaceEntity* parent) { this->parent = parent; }
-        void SetCenter(const glm::vec2& center) { this->center = center; }
-        void SetParticlesNum(int num_particles)  { this->num_particles = num_particles; }
-        void SetParticleData(const ParticleData& data_particle) { this->data_particle = data_particle; }
+        void SetDying() { m_IsDying = true; }
+        void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; }
+        void SetParent(BaseSpaceEntity* parent) { m_Parent = parent; }
+        void SetCenter(const glm::vec3& center) { m_Center = center; }
+        void SetParticlesNum(unsigned int particles_num)  { m_ParticlesNum = particles_num; }
+        void SetParticleData(const ParticleData& data_particle) { m_DataParticle = data_particle; }
         
-        int GetTypeId() const { return type_id; }
-        bool GetAlive() const { return is_alive; }
-        const glm::vec2& GetCenter() const { return center; }
+        int GetTypeId() const { return m_TypeId; }
+        bool GetAlive() const { return m_IsAlive; }
+        const glm::vec3& GetCenter() const { return m_Center; }
+
+        unsigned int GetParticlesNum() const { return m_ParticlesNum; }
         
         virtual void Update() = 0;
         virtual void Render(float) {}
     
     protected:
-        int type_id;
-        unsigned int num_particles;
+        int m_TypeId;
+        unsigned int m_ParticlesNum;
         
-        TextureOb* textureOb;
-        ParticleData data_particle;
-        glm::vec2 center;
-        BaseSpaceEntity* parent;
+        TextureOb* m_TextureOb;
+        ParticleData m_DataParticle;
+
+        glm::vec3 m_Center;
+        glm::vec3 m_Velocity;
+        glm::vec3 m_Dir; 
+
+        BaseSpaceEntity* m_Parent;
         
-        bool is_alive;
-        bool is_dying;
+        bool m_IsAlive;
+        bool m_IsDying;
         
-        std::vector<Particle*> particles_vec;  
+        std::vector<Particle*> m_Particles;  
 };
 
 

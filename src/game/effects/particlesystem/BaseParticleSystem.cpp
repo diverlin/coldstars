@@ -23,18 +23,18 @@
 #include "../../common/constants.hpp"
 
 BaseParticleSystem::BaseParticleSystem():
-type_id(NONE_ID),
-parent(nullptr),
-is_alive(true),
-is_dying(false)
+m_TypeId(NONE_ID),
+m_Parent(nullptr),
+m_IsAlive(true),
+m_IsDying(false)
 {}
  
 /* virtual */
 BaseParticleSystem::~BaseParticleSystem()
 {
-    for (unsigned int i=0; i<particles_vec.size(); i++) 
+    for (unsigned int i=0; i<m_Particles.size(); i++) 
     {
-        delete particles_vec[i];
+        delete m_Particles[i];
     }
 }
 

@@ -287,7 +287,7 @@ void StarSystem::Add(ExplosionEffect* explosion, const glm::vec3& center)
 
 void StarSystem::Add(ExplosionEffect* explosion, const glm::vec3& center, float damage, float radius_damage)           
 { 
-    explosion->SetCenter(vec3ToVec2(center));
+    explosion->SetCenter(center);
     effect_PARTICLESYSTEM_vec.push_back(explosion); 
     
     float radius_effect = explosion->GetRadius();

@@ -155,7 +155,7 @@ class Player : public Base
 };
 
 bool isObjectOnScreen(const glm::vec3&, const glm::vec3&);
-bool isObjectOnScreen(const glm::vec2&, float);
+bool isObjectOnScreen(const glm::vec3&, float);
 bool isPointOnScreen(const glm::vec2&);
 
 bool isObjectWithinRadarRange(BaseParticleSystem*, Vehicle*);                                      

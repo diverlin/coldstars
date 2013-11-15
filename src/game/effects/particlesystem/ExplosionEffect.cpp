@@ -18,59 +18,18 @@
 
 #include "ExplosionEffect.hpp"
 
-#include "../../common/constants.hpp"
-#include "../../resources/TextureManager.hpp"
+#include <common/constants.hpp>
+#include <resources/TextureManager.hpp>
+
 #include <math/rand.hpp>
 
-ExplosionSlice::ExplosionSlice()
-{}
- 
-/* virtual override final */
-ExplosionSlice::~ExplosionSlice()
-{}
-
-void ExplosionSlice::CreateParticles()
+ExplosionEffect::ExplosionEffect(float radius)
+:
+m_Radius(radius)
 {
-    for(unsigned int i=0; i<num_particles; i++)
-    {  
-        Particle* particle = new Particle(data_particle);
-        particle->CalcRandomVelocity();
-        particles_vec.push_back(particle);
-    }
-}
-
-/* virtual override final */
-void ExplosionSlice::Update()
-{
-    is_alive = false;
-    for (unsigned int i=0; i<num_particles; i++)
-    {
-        if (particles_vec[i]->GetAlive() == true)
-        {
-            particles_vec[i]->Update();
-            is_alive = true;
-        }
-    }  
-}     
-
-/* virtual override final */
-void ExplosionSlice::Render(float scale)
-{
-    glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-    for(unsigned int i=0; i<num_particles; i++)
-    {
-        particles_vec[i]->Render(scale);
-    }  
-}  
-     
-
-
-
-ExplosionEffect::ExplosionEffect(float radius):
-radius(radius)
-{
-    type_id = EFFECT::EXPLOSION_ID;
+    m_TypeId = EFFECT::EXPLOSION_ID;
     
+    /*
     TextureOb* texOb_particle; 
     ParticleData  data_particle;
     int particles_num;
@@ -111,7 +70,7 @@ radius(radius)
 
         texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
         
-        ExplosionSlice* explosion_slice = new ExplosionSlice();
+        ExplosionEffect* explosion_slice = new ExplosionEffect();
         explosion_slice->SetTextureOb(texOb_particle);
         explosion_slice->SetParticleData(data_particle);
         explosion_slice->SetParticlesNum(particles_num);
@@ -120,7 +79,7 @@ radius(radius)
         
         Add(explosion_slice);
     }
-        else    
+    else    
     {
         {
         particles_num = 40;
@@ -128,7 +87,7 @@ radius(radius)
         
         texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
         
-        ExplosionSlice* explosion_slice = new ExplosionSlice();
+        ExplosionEffect* explosion_slice = new ExplosionEffect();
         explosion_slice->SetTextureOb(texOb_particle);
         explosion_slice->SetParticleData(data_particle);
         explosion_slice->SetParticlesNum(particles_num);
@@ -144,7 +103,7 @@ radius(radius)
         
         texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::YELLOW_ID);
         
-        ExplosionSlice* explosion_slice = new ExplosionSlice();
+        ExplosionEffect* explosion_slice = new ExplosionEffect();
         explosion_slice->SetTextureOb(texOb_particle);
         explosion_slice->SetParticleData(data_particle);
         explosion_slice->SetParticlesNum(particles_num);
@@ -160,7 +119,7 @@ radius(radius)
         
         texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
         
-        ExplosionSlice* explosion_slice = new ExplosionSlice();
+        ExplosionEffect* explosion_slice = new ExplosionEffect();
         explosion_slice->SetTextureOb(texOb_particle);
         explosion_slice->SetParticleData(data_particle);
         explosion_slice->SetParticlesNum(particles_num);
@@ -169,48 +128,54 @@ radius(radius)
         
         Add(explosion_slice);
         }
-    }        
+    } 
+*/      
 
 
 }
  
 /* virtual override final */
 ExplosionEffect::~ExplosionEffect()
+{}
+
+void ExplosionEffect::CreateParticles()
 {
-    for (unsigned int i=0; i<slice_vec.size(); i++)
-    {
-        delete slice_vec[i];
+    for(unsigned int i=0; i<m_ParticlesNum; i++)
+    {  
+        Particle* particle = new Particle(m_DataParticle);
+        particle->CalcRandomVelocity();
+        m_Particles.push_back(particle);
     }
 }
 
 /* virtual override final */
 void ExplosionEffect::Update()
 {
-    is_alive = false;
-    for (unsigned int i=0; i<slice_vec.size(); i++)
+    m_IsAlive = false;
+    for (unsigned int i=0; i<m_ParticlesNum; i++)
     {
-        if (slice_vec[i]->GetAlive() == true)
+        if (m_Particles[i]->GetIsAlive() == true)
         {
-            slice_vec[i]->Update();
-            is_alive = true;
-        }            
+            m_Particles[i]->Update();
+            m_IsAlive = true;
+        }
     }  
-}     
-    
+}
+
 /* virtual override final */
 void ExplosionEffect::Render(float scale)
 {
-    glPushMatrix();
-    {
-        glTranslatef(center.x, center.y, 0.0);    
-           for (unsigned int i=0; i<slice_vec.size(); i++)
-           {
-               slice_vec[i]->Render(scale);
-           }         
-    }
-    glPopMatrix();  
-}  
+    //glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+    //for(unsigned int i=0; i<num_particles; i++)
+    //{
+        //particles_vec[i]->Render(scale);
+    //}  
+}          
 
+
+
+ 
+    
 ExplosionEffect* getNewExplosionEffect(float radius)
 {
     //size_id = getRandInt(1,9); // DEBUG

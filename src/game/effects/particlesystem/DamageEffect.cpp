@@ -32,49 +32,50 @@ DamageEffect::~DamageEffect()
 
 void DamageEffect::CreateParticles()
 {
-    for(unsigned int i=0; i<num_particles; i++)
+    for(unsigned int i=0; i<GetParticlesNum(); i++)
     {  
-        Particle* particle = new Particle(data_particle);
+        Particle* particle = new Particle(m_DataParticle);
         particle->Randomize_d_alpha(0.003, 0.006); //   ??
         particle->CalcRandomVelocity();
-        particles_vec.push_back(particle);
+
+        m_Particles.push_back(particle);
     }
 }
 
 /* virtual override final */
 void DamageEffect::Update()
 {
-         is_alive = false;
-        for (unsigned int i=0; i<num_particles; i++)
+    m_IsAlive = false;
+    for (unsigned int i=0; i<GetParticlesNum(); i++)
+    {
+        if (m_Particles[i]->GetIsAlive() == true)
         {
-                if (particles_vec[i]->GetAlive() == true)
-            {
-                    particles_vec[i]->Update();
-                    is_alive = true;
-                }
-                else
-                {
-                    if (is_dying == false)
-                    {
-                        particles_vec[i]->Reborn();
-                    }
-                }
+            m_Particles[i]->Update();
+            m_IsAlive = true;
         }
+        else
+        {
+            if (m_IsDying == false)
+            {
+                m_Particles[i]->Reborn();
+            }
+        }
+    }
 }
 
 /* virtual override final */
 void DamageEffect::Render(float scale)
 {
-    glPushMatrix();
-    {
-        glTranslatef(parent->GetCenter().x, parent->GetCenter().y, 0.0);
-        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-        for (unsigned int i=0; i<num_particles; i++)
-        {
-            particles_vec[i]->Render(scale);
-        }
-    }
-    glPopMatrix(); 
+    //glPushMatrix();
+    //{
+        //glTranslatef(parent->GetCenter().x, parent->GetCenter().y, 0.0);
+        //glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+        //for (unsigned int i=0; i<num_particles; i++)
+        //{
+            //particles_vec[i]->Render(scale);
+        //}
+    //}
+    //glPopMatrix(); 
 }
 
 
@@ -118,7 +119,7 @@ DamageEffect* getNewDamageEffect(int color_id, BaseSpaceEntity* parent)
     damage->SetParticlesNum(particles_num);
     
     damage->SetParent(parent);
-    damage->SetCenter(vec3ToVec2(parent->GetCenter()));
+    damage->SetCenter(parent->GetCenter());
     
     damage->CreateParticles();
     
