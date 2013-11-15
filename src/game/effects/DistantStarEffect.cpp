@@ -24,7 +24,12 @@
 #include "../resources/TextureManager.hpp"
 
 DistantStarEffect::DistantStarEffect()
-{}
+{
+    float r = getRandInt(500, 1000)/1000.0;
+    float g = getRandInt(500, 1000)/1000.0;
+    float b = getRandInt(500, 1000)/1000.0;
+    m_Color = glm::vec4(r, g, b, 1.0f);
+}
 
 DistantStarEffect::~DistantStarEffect()
 {}

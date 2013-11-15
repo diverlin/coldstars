@@ -822,18 +822,6 @@ void StarSystem::FindRadarVisibleEntities_c(Player* player)
 
 void StarSystem::DrawBackground(const Renderer& render, const glm::vec2& scroll_coords)
 {   
-// HACK for point sprites
-if (distantStarEffect_vec.size()>0) 
-{
-    render.enable_POINTSPRITE();
-    {
-        distantStarEffect_vec[0]->Render(render);
-    }
-    render.disable_POINTSPRITE();
-    render.ClearScreen();                
-} 
-// HACK for point sprites
-
     render.enable_BLEND();
     glDepthMask(false);   // FIXME MOVE TO RENDER
 
@@ -850,14 +838,14 @@ if (distantStarEffect_vec.size()>0)
         //}
 
         std::vector<glm::vec3> positions;
-        std::vector<glm::vec2> texcoords;
+        std::vector<glm::vec4> colors;
         for(unsigned int i = 0; i<distantStarEffect_vec.size(); i++)
         { 
             positions.push_back(distantStarEffect_vec[i]->GetCenter());
-            texcoords.push_back(glm::vec2(0.0f)); 
+            colors.push_back(distantStarEffect_vec[i]->GetColor()); 
         }
         Mesh mesh;
-        mesh.FillVertices(positions, texcoords);
+        mesh.FillVertices(positions, colors);
         render.DrawPoints(&mesh, distantStarEffect_vec[0]->GetTextureOb());
 
     }

@@ -40,6 +40,7 @@ class ShaderCollector
         GLuint fogwarspark;
         GLuint flash;
         GLuint mask;
+        GLuint point;
                         
     private:
         ShaderCollector() {};
