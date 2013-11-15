@@ -127,24 +127,24 @@ void Renderer::UpdateProjectionViewMatrix()
 
 
 
-void Renderer::DrawQuad(TextureOb* texOb, const glm::mat4& Mm) const
+void Renderer::DrawQuad(const TextureOb& texOb, const glm::mat4& Mm) const
 {
-    glBindTexture(GL_TEXTURE_2D, texOb->texture);
-    int frame = texOb->updateAnimationFrame();
+    glBindTexture(GL_TEXTURE_2D, texOb.texture);
+    int frame = 0; //texOb.updateAnimationFrame();
    
     ComposeModelMatrix(Mm);
     
     glBegin(GL_QUADS);
     {   
-        glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
-        glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
-        glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
-        glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
+        glTexCoord3f(texOb.texCoord_bottomLeft_vec[frame].x,  texOb.texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
+        glTexCoord3f(texOb.texCoord_bottomRight_vec[frame].x, texOb.texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
+        glTexCoord3f(texOb.texCoord_topRight_vec[frame].x,    texOb.texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
+        glTexCoord3f(texOb.texCoord_topLeft_vec[frame].x,     texOb.texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
     }
     glEnd();
 }
 
-void Renderer::DrawQuad(TextureOb* texOb, const Box2D& box) const
+void Renderer::DrawQuad(const TextureOb& texOb, const Box2D& box) const
 {
     // ugly start
     glm::vec2 pos = box.GetCenter();
@@ -173,21 +173,21 @@ void Renderer::RenderMeshGeometry(const Mesh& mesh, const glm::mat4& Mm) const
     mesh.Draw();
 }
 
-void Renderer::RenderMeshGeometry(const Mesh& mesh, const TextureOb* textureOb, const glm::mat4& Mm) const
+void Renderer::RenderMeshGeometry(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
-    glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+    glBindTexture(GL_TEXTURE_2D, textureOb.texture);
     RenderMeshGeometry(mesh, Mm);
 }
 
-void Renderer::RenderTransparentMeshGeometry(const Mesh& mesh, const TextureOb* textureOb, const glm::mat4& Mm) const
+void Renderer::RenderTransparentMeshGeometry(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     enable_BLEND();
-        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.texture);
         RenderMeshGeometry(mesh, Mm);
     disable_BLEND();
 }
 
-void Renderer::RenderMeshLight(const Mesh& mesh, const TextureOb* textureOb, const glm::mat4& Mm) const
+void Renderer::RenderMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     float ambient_factor = 0.25;       
         
@@ -208,7 +208,7 @@ void Renderer::RenderMeshLight(const Mesh& mesh, const TextureOb* textureOb, con
         glUniform4f(m_ProgramLightLocation_uAmbientColor, ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
         
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureOb->texture); 
+        glBindTexture(GL_TEXTURE_2D, textureOb.texture); 
         glUniform1i(m_ProgramLightLocation_uTexture, 0);
                             
         mesh.Draw();
@@ -216,7 +216,7 @@ void Renderer::RenderMeshLight(const Mesh& mesh, const TextureOb* textureOb, con
     glUseProgram(0);
 }
 
-void Renderer::RenderMeshLightNormalMap(const Mesh& mesh, const TextureOb* textureOb, const glm::mat4& Mm, const glm::vec2& scroll_coords, const glm::vec4& color) const
+void Renderer::RenderMeshLightNormalMap(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm, const glm::vec2& scroll_coords, const glm::vec4& color) const
 {
     float ambient_factor = 0.25;
     
@@ -228,11 +228,11 @@ void Renderer::RenderMeshLightNormalMap(const Mesh& mesh, const TextureOb* textu
         glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
                 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.texture);
         glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_texture"), 0);
         
         glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, textureOb->normalmap);
+        glBindTexture(GL_TEXTURE_2D, textureOb.normalmap);
         glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_normalmap"), 1);
                 
         RenderMeshGeometry(mesh, Mm);
@@ -240,23 +240,23 @@ void Renderer::RenderMeshLightNormalMap(const Mesh& mesh, const TextureOb* textu
     glUseProgram(0);
 }
 
-void Renderer::RenderTransparentMeshLight(const Mesh& mesh, const TextureOb* textureOb, const glm::mat4& Mm) const
+void Renderer::RenderTransparentMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     enable_BLEND();
         RenderMeshLight(mesh, textureOb, Mm);
     disable_BLEND();
 }
 
-void Renderer::RenderMeshMultiTextured(const Mesh& mesh, const TextureOb* textureOb, const glm::mat4& modelMatrix, float offset) const
+void Renderer::RenderMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& modelMatrix, float offset) const
 {
     glUseProgram(ShaderCollector::Instance().multitexturing);
     {    
         glActiveTexture(GL_TEXTURE0);                                
-        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.texture);
         glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_0"), 0);
         
         glActiveTexture(GL_TEXTURE1);                                
-        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.texture);
         glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_1"), 1);
         
         glUniform2f(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "displ"), offset, -offset);
@@ -314,9 +314,9 @@ void Renderer::DrawQuadTexturedBlurred(GLuint texture, int w, int h) const
     glUseProgram(0);
 }
  
-void Renderer::DrawParticleTextured(TextureOb* texOb, const glm::vec3& center, float size) const
+void Renderer::DrawParticleTextured(const TextureOb& texOb, const glm::vec3& center, float size) const
 {
-    glBindTexture(GL_TEXTURE_2D, texOb->texture);
+    glBindTexture(GL_TEXTURE_2D, texOb.texture);
     
     glPointSize(size);
         
@@ -327,14 +327,14 @@ void Renderer::DrawParticleTextured(TextureOb* texOb, const glm::vec3& center, f
     glEnd();
 } 
 
-void Renderer::DrawPoints(const Mesh& mesh, TextureOb* textureOb) const
+void Renderer::DrawPoints(const Mesh& mesh, const TextureOb& textureOb) const
 {
     glPointSize(12.0f);
 
     glUseProgram(ShaderCollector::Instance().point);
     {    
         glActiveTexture(GL_TEXTURE0);                                
-        glBindTexture(GL_TEXTURE_2D, textureOb->texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.texture);
         glUniform1i(glGetUniformLocation(ShaderCollector::Instance().point, "uTexture_0"), 0);
  
         glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().point, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);       
@@ -418,7 +418,7 @@ void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) 
     glEnable(GL_TEXTURE_2D);
 }
   
-//void drawQuad(TextureOb* texOb,
+//void drawQuad(const TextureOb& texOb,
          //const glm::vec3& center, 
          //const glm::vec3& size,
          //float angle)
@@ -444,7 +444,7 @@ void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) 
     //glPopMatrix();
 //}
 
-//void drawQuad(TextureOb* texOb,
+//void drawQuad(const TextureOb& texOb,
          //const glm::vec2& center, 
          //const glm::vec2& size,
          //float angle)
@@ -471,11 +471,11 @@ void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) 
 //}
 
 
-//void drawQuad(TextureOb* texOb,
+//void drawQuad(const TextureOb& texOb,
          //const glm::vec2& center, 
          //const glm::vec2& size,
          //float angle,
-         //TextureOb* texOb_mask,
+         //const TextureOb& texOb_mask,
          //float threshold)
 //{
     //glUseProgram(ShaderCollector::Instance().mask);
@@ -512,17 +512,17 @@ void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) 
     //glActiveTexture(GL_TEXTURE0);
 //}
 
-//void drawQuad(TextureOb* texOb, const Box2D& box)
+//void drawQuad(const TextureOb& texOb, const Box2D& box)
 //{
     //drawQuad(texOb, box.GetCenter(), box.GetSize()*box.GetScale(), box.GetAngle());
 //}
 
-//void drawQuadMasked(TextureOb* texOb, const Box2D& box, TextureOb* texOb_mask, float threshold)
+//void drawQuadMasked(const TextureOb& texOb, const Box2D& box, const TextureOb& texOb_mask, float threshold)
 //{
     //drawQuad(texOb, box.GetCenter(), box.GetSize()*box.GetScale(), box.GetAngle(), texOb_mask, threshold);
 //}
 
-//void drawTexturedRect(TextureOb* texOb, const Rect& rect, float z_pos)
+//void drawTexturedRect(const TextureOb& texOb, const Rect& rect, float z_pos)
 //{
     //glBindTexture(GL_TEXTURE_2D, texOb->texture);
     //int frame = texOb->updateAnimationFrame();
@@ -536,24 +536,24 @@ void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) 
 //}
 
 
-void drawLine(TextureOb* texOb, 
+void drawLine(const TextureOb& texOb, 
               const glm::vec3& start_pos, 
               float len, 
               float angle_inD, 
               int half_h)
 {
-    glBindTexture(GL_TEXTURE_2D, texOb->texture);
-    int frame = texOb->updateAnimationFrame();
+    glBindTexture(GL_TEXTURE_2D, texOb.texture);
+    int frame = 0;//texOb.updateAnimationFrame();
         
     glPushMatrix();
         glTranslatef(start_pos.x, start_pos.y, start_pos.z);
         glRotatef(angle_inD, 0.0, 0.0, 1.0);
     
         glBegin(GL_QUADS);
-            glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(0,   -half_h, 0.0);
-            glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f(len, -half_h, 0.0);
-            glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f(len,  half_h, 0.0);
-            glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(0,    half_h, 0.0);
+            glTexCoord3f(texOb.texCoord_bottomLeft_vec[frame].x,  texOb.texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(0,   -half_h, 0.0);
+            glTexCoord3f(texOb.texCoord_bottomRight_vec[frame].x, texOb.texCoord_bottomRight_vec[frame].y, 0); glVertex3f(len, -half_h, 0.0);
+            glTexCoord3f(texOb.texCoord_topRight_vec[frame].x,    texOb.texCoord_topRight_vec[frame].y,    0); glVertex3f(len,  half_h, 0.0);
+            glTexCoord3f(texOb.texCoord_topLeft_vec[frame].x,     texOb.texCoord_topLeft_vec[frame].y,     0); glVertex3f(0,    half_h, 0.0);
         glEnd();
     glPopMatrix();
 }
@@ -565,7 +565,7 @@ void drawColoredTextWithBackground(const std::string& str, int font_size, const 
             
     //float string_w = char_w * str.size();
 
-    //TextureOb* texOb_textBg = GuiTextureObCollector::Instance().text_background;
+    //const TextureOb& texOb_textBg = GuiTextureObCollector::Instance().text_background;
     //Rect rect(pos.x - char_w, pos.y - char_h, string_w, 2*char_h);
         
     //enable_BLEND();
@@ -619,7 +619,7 @@ void drawInfoIn2Column(
     glm::ivec4 color_title(250, 250, 250, 255);
     glm::ivec4 color_info(250, 250, 0, 255);
 
-    TextureOb* texOb_textBg = GuiTextureObCollector::Instance().text_background;
+    const TextureOb& texOb_textBg = *GuiTextureObCollector::Instance().text_background;
                                     
     //glPushMatrix();
     {

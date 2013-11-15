@@ -50,7 +50,7 @@ class BaseGuiElement
         const Box2D& GetBox() const { return m_Box; }
         Box2D& GetBox() { return m_Box; } // !!!
                 
-        TextureOb* GetTextureOb() const { return m_TextureOb; }
+        const TextureOb& GetTextureOb() const { return *m_TextureOb; }
                 
         bool GetLock() const { return m_Locked; }
         bool GetPressed() const { return m_Pressed; }
@@ -87,6 +87,8 @@ class BaseGuiElement
         void SetLocked(bool locked) { m_Locked = locked; } 
                  
         void SetAnimationProgram(AnimationEffect2D* animation_program) { m_AnimationProgram = animation_program; }
+
+        bool HasTextureOb() const { return (m_TextureOb != nullptr); }
 
         const std::string& GetInfo() const { return m_Info; }
         const std::string& GetLabel() const { return m_Label; }

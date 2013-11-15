@@ -39,7 +39,7 @@ void DistantNebulaEffect::Update()
 
 void DistantNebulaEffect::Render(const Renderer& render)
 {   
-    render.DrawQuad(m_TextureOb, GetActualModelMatrix());
+    render.DrawQuad(*m_TextureOb, GetActualModelMatrix());
 }
               
 void DistantNebulaEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

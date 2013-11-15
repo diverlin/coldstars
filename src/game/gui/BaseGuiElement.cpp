@@ -211,7 +211,7 @@ void BaseGuiElement::RenderUnique(const Renderer& render, Player* player) const
 {
     if (m_TextureOb)
     {
-        render.DrawQuad(m_TextureOb, m_Box);
+        render.DrawQuad(*m_TextureOb, m_Box);
     }
 }
 
