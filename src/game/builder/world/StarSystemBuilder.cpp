@@ -78,8 +78,7 @@ void StarSystemBuilder::CreateNewInternals(StarSystem* starsystem, const StarSys
     CreateStar(starsystem);
     
     int distNebula_num = getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
-    int distStar_num = getRandInt(ENTITY::STARSYSTEM::DISTANT_STAR_MIN, ENTITY::STARSYSTEM::DISTANT_STAR_MAX);
-    CreateBackground(starsystem, distNebula_num, distStar_num, starsystem->GetStar()->GetColorId());
+    CreateBackground(starsystem, distNebula_num, /*distStar_num*/1, starsystem->GetStar()->GetColorId());
       
     CreatePlanets(starsystem, starsystem_description.planet_num);
 }

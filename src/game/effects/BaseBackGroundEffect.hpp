@@ -21,7 +21,9 @@
 
 #include <boost/property_tree/ptree.hpp>
 #include <glm/glm.hpp>
+
 class TextureOb;
+class Mesh;
 
 
 class BaseBackGroundEffect
@@ -42,6 +44,8 @@ class BaseBackGroundEffect
         TextureOb* GetTextureOb() const { return m_TextureOb; }
 
         const glm::vec4& GetColor() const { return m_Color; }
+
+        const Mesh& GetMesh() const { return *m_Mesh; } 
                 
     protected:
         unsigned long int id;
@@ -62,6 +66,8 @@ class BaseBackGroundEffect
         glm::mat4 m_Tm;
         glm::mat4 m_Rm;
         glm::mat4 m_Sm;
+
+        Mesh* m_Mesh;
         
         const glm::mat4& GetActualModelMatrix();
         
