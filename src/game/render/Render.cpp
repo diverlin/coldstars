@@ -336,19 +336,25 @@ void Renderer::DrawParticleTextured(const TextureOb& texOb, const glm::vec3& cen
 
 void Renderer::DrawPoints(const Mesh& mesh, const TextureOb& textureOb) const
 {
-    glPointSize(12.0f);
-
-    glUseProgram(ShaderCollector::Instance().point);
-    {    
-        glActiveTexture(GL_TEXTURE0);                                
-        glBindTexture(GL_TEXTURE_2D, textureOb.texture);
-        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().point, "uTexture_0"), 0);
- 
-        glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().point, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);       
-  
-        mesh.Draw();
+    enable_BLEND();
+    enable_POINTSPRITE();
+    {
+        glPointSize(12.0f);
+    
+        glUseProgram(ShaderCollector::Instance().point);
+        {    
+            glActiveTexture(GL_TEXTURE0);                                
+            glBindTexture(GL_TEXTURE_2D, textureOb.texture);
+            glUniform1i(glGetUniformLocation(ShaderCollector::Instance().point, "uTexture_0"), 0);
+     
+            glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().point, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);       
+      
+            mesh.Draw();
+        }
+        glUseProgram(0);
     }
-    glUseProgram(0);
+    disable_POINTSPRITE();
+    disable_BLEND();
 }
    
 

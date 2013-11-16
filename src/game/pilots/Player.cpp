@@ -221,13 +221,13 @@ void Player::AddIfVisible(LazerTraceEffect* effect)
  
 void Player::AddIfVisible(BaseParticleSystem* effect)
 {
-    if (isObjectOnScreen(effect->GetCenter(), 600))
-    {
-        if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
-        {
+    //if (isObjectOnScreen(effect->GetCenter(), 600))
+    //{
+        //if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
+        //{
             visible_effect_PARTICLESYSTEM_vec.push_back(effect);
-        }
-    }
+        //}
+    //}
 }
 
 void Player::AddIfVisible(VerticalFlowText* effect)
@@ -563,24 +563,26 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             drawFullScreenTexturedQuad(Screen::Instance().GetFbo3().GetTexture(), w, h, -999.0);
 
             resizeGl(w*scale, h*scale);             
-            camera(world_coord.x, world_coord.y, CAMERA_POS_Z);            
-            enable_BLEND();
-            {
-                for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
-                { 
-                    visible_effect_LAZERTRACE_vec[i]->Render(); 
-                }
+            camera(world_coord.x, world_coord.y, CAMERA_POS_Z); 
+            */           
+            //render.enable_BLEND();
+            //{
+                //for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
+                //{ 
+                    //visible_effect_LAZERTRACE_vec[i]->Render(); 
+                //}
         
-                enable_POINTSPRITE();
-                {
+                //render.enable_POINTSPRITE();
+                //{
                     for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
-                    { 
-                        visible_effect_PARTICLESYSTEM_vec[i]->Render(1/scale); 
+                    {     
+                        render.DrawPoints(visible_effect_PARTICLESYSTEM_vec[i]->GetMesh(), visible_effect_PARTICLESYSTEM_vec[i]->GetTextureOb()); 
                     }
-                }
-                disable_POINTSPRITE();
-            }
-            disable_BLEND();
+                //}
+                //render.disable_POINTSPRITE();
+            //}
+            //render.disable_BLEND();
+            /*
         }
         Screen::Instance().GetFbo4().Deactivate();
         

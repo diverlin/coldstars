@@ -80,7 +80,7 @@ void Mesh::FillVertices(const ObjLoader& objLoader)
     UpdateVbo();
 }
 
-void Mesh::FillVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors)
+void Mesh::FillPointVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors)
 {
     m_PrimitiveType = GL_POINTS;
     
@@ -103,38 +103,40 @@ void Mesh::FillVertices(const std::vector<glm::vec3>& positions, const std::vect
     UpdateVbo();
 }
 
-//void FillVerticesFast(const std::vector<glm::vec3>& positions, const std::vector<glm::vec2>& texcoords) const
-//{
-    //m_VertexCount = positions.size();
+void Mesh::FillPointVerticesFast(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors)
+{  
+    m_PrimitiveType = GL_POINTS;
 
-    //int positions_buffer_length = m_VertexCount * 3;
-    //int texcoords_buffer_length = m_VertexCount * 2;
+    m_VertexCount = positions.size();
+
+    int stride = STRIDE_POSITION + STRIDE_COLOR;
     
-    //int data_buffer_lenght = positions_buffer_length + texcoords_buffer_length;  
-    //GLfloat data_array[data_buffer_lenght];        
+    GLfloat data_array[m_VertexCount * stride];        
            
-    //uint32_t k=0;
-    //for (uint32_t i=0; i<m_VertexCount; i++)
-    //{
-        //data_array[k++] = positions[i].x; 
-        //data_array[k++] = positions[i].y;
-        //data_array[k++] = positions[i].z;
+    uint32_t k=0;
+    for (uint32_t i=0; i<m_VertexCount; i++)
+    {
+        data_array[k++] = positions[i].x; 
+        data_array[k++] = positions[i].y;
+        data_array[k++] = positions[i].z;
         
-        //data_array[k++] = texcoords[i].x; 
-        //data_array[k++] = texcoords[i].y;
-    //}
+        data_array[k++] = colors[i].r; 
+        data_array[k++] = colors[i].g;
+        data_array[k++] = colors[i].b;
+        data_array[k++] = colors[i].a;
+    }
 
-	//glBindVertexArray(m_VaoId);
-    //glBindBuffer(GL_ARRAY_BUFFER, m_VboId);
-    //glBufferData(GL_ARRAY_BUFFER, sizeof(data_array), data_array, GL_STATIC_DRAW);      
+	glBindVertexArray(m_VaoId);
+    glBindBuffer(GL_ARRAY_BUFFER, m_VboId);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(data_array), data_array, GL_DYNAMIC_DRAW);
 
-    //// attribute pointers    
-    //glVertexAttribPointer(VERTEX_POSITION_LOCATION, 3, GL_FLOAT, GL_FALSE, (3+2+3)*sizeof(GLfloat), (const GLvoid*)0);
-	//glEnableVertexAttribArray(VERTEX_POSITION_LOCATION);
+    // attribute pointers    
+    glVertexAttribPointer(VERTEX_POSITION_LOCATION, STRIDE_POSITION, GL_FLOAT, GL_FALSE, stride*sizeof(GLfloat), (const GLvoid*)0); 
+    glVertexAttribPointer(VERTEX_COLOR_LOCATION,    STRIDE_COLOR,    GL_FLOAT, GL_FALSE, stride*sizeof(GLfloat), (const GLvoid*)(STRIDE_POSITION*sizeof(GLfloat)));
 
-	//glVertexAttribPointer(VERTEX_TEXCOORD_LOCATION, 2, GL_FLOAT, GL_FALSE, (3+2+3)*sizeof(GLfloat), (const GLvoid*)(3*sizeof(GLfloat)));
-	//glEnableVertexAttribArray(VERTEX_TEXCOORD_LOCATION);
-//}
+	glEnableVertexAttribArray(VERTEX_POSITION_LOCATION);
+    glEnableVertexAttribArray(VERTEX_COLOR_LOCATION);
+}
 
 void Mesh::UpdateList()
 {
@@ -155,14 +157,13 @@ void Mesh::UpdateList()
   
 void Mesh::UpdateVbo()
 {    
-    int positions_buffer_length = m_VertexCount * 3;
-    int texcoords_buffer_length = m_VertexCount * 2;
-    int normals_buffer_length   = m_VertexCount * 3;
-    int colors_buffer_length    = m_VertexCount * 4;
+    int stride = STRIDE_POSITION;
     
-    int data_buffer_lenght = positions_buffer_length + texcoords_buffer_length + normals_buffer_length + colors_buffer_length;
+    if (m_HasTexCoords) { stride += STRIDE_TEXCOORD; }
+    if (m_HasNormals)   { stride += STRIDE_NORMAL; }
+    if (m_HasColors)    { stride += STRIDE_COLOR; }
 
-    GLfloat data_array[data_buffer_lenght];        
+    GLfloat data_array[m_VertexCount * stride];        
            
     uint32_t k=0;
     for (uint32_t i=0; i<m_VertexCount; i++)
@@ -171,43 +172,57 @@ void Mesh::UpdateVbo()
         data_array[k++] = m_Vertices[i].position.y;
         data_array[k++] = m_Vertices[i].position.z;
         
-        data_array[k++] = m_Vertices[i].texcoord.x; 
-        data_array[k++] = m_Vertices[i].texcoord.y;
-      
-        data_array[k++] = m_Vertices[i].normal.x; 
-        data_array[k++] = m_Vertices[i].normal.y;
-        data_array[k++] = m_Vertices[i].normal.z;
+        if (m_HasTexCoords)
+        {
+            data_array[k++] = m_Vertices[i].texcoord.x; 
+            data_array[k++] = m_Vertices[i].texcoord.y;
+        }
 
-        data_array[k++] = m_Vertices[i].color.r; 
-        data_array[k++] = m_Vertices[i].color.g;
-        data_array[k++] = m_Vertices[i].color.b;
-        data_array[k++] = m_Vertices[i].color.a;
+        if (m_HasNormals)
+        {
+            data_array[k++] = m_Vertices[i].normal.x; 
+            data_array[k++] = m_Vertices[i].normal.y;
+            data_array[k++] = m_Vertices[i].normal.z;
+        }
+
+        if (m_HasColors)
+        {
+            data_array[k++] = m_Vertices[i].color.r; 
+            data_array[k++] = m_Vertices[i].color.g;
+            data_array[k++] = m_Vertices[i].color.b;
+            data_array[k++] = m_Vertices[i].color.a;
+        }
     }
  
 	glBindVertexArray(m_VaoId);
     glBindBuffer(GL_ARRAY_BUFFER, m_VboId);
     glBufferData(GL_ARRAY_BUFFER, sizeof(data_array), data_array, GL_STATIC_DRAW);      
 
-    // attribute pointers    
-    glVertexAttribPointer(VERTEX_POSITION_LOCATION, 3, GL_FLOAT, GL_FALSE, (3+2+3+4)*sizeof(GLfloat), (const GLvoid*)0);
+    // attribute pointers 
+    int offset = 0;
+    glVertexAttribPointer(VERTEX_POSITION_LOCATION, STRIDE_POSITION, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), (const GLvoid*)(offset * sizeof(GLfloat)));
 	glEnableVertexAttribArray(VERTEX_POSITION_LOCATION);
+    offset += STRIDE_POSITION;
 
     if (m_HasTexCoords)
     {
-        glVertexAttribPointer(VERTEX_TEXCOORD_LOCATION, 2, GL_FLOAT, GL_FALSE, (3+2+3+4)*sizeof(GLfloat), (const GLvoid*)(3*sizeof(GLfloat)));
+        glVertexAttribPointer(VERTEX_TEXCOORD_LOCATION, STRIDE_TEXCOORD, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), (const GLvoid*)(offset * sizeof(GLfloat)));
         glEnableVertexAttribArray(VERTEX_TEXCOORD_LOCATION);
+        offset += STRIDE_TEXCOORD;
     }
 
     if (m_HasNormals)
     { 
-	    glVertexAttribPointer(VERTEX_NORMAL_LOCATION, 3, GL_FLOAT, GL_FALSE,   (3+2+3+4)*sizeof(GLfloat), (const GLvoid*)((3 + 2)*sizeof(GLfloat)));
+	    glVertexAttribPointer(VERTEX_NORMAL_LOCATION, STRIDE_NORMAL, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), (const GLvoid*)(offset * sizeof(GLfloat)));
 	    glEnableVertexAttribArray(VERTEX_NORMAL_LOCATION);
+        offset += STRIDE_NORMAL;
     }
 
     if (m_HasColors)
     { 
-	    glVertexAttribPointer(VERTEX_COLOR_LOCATION, 3, GL_FLOAT, GL_FALSE,   (3+2+3+4)*sizeof(GLfloat), (const GLvoid*)((3 + 2 + 3)*sizeof(GLfloat)));
+	    glVertexAttribPointer(VERTEX_COLOR_LOCATION, STRIDE_COLOR, GL_FLOAT, GL_FALSE, stride*sizeof(GLfloat), (const GLvoid*)(offset * sizeof(GLfloat)));
 	    glEnableVertexAttribArray(VERTEX_COLOR_LOCATION);
+        offset += STRIDE_COLOR;
     }
 }     
   

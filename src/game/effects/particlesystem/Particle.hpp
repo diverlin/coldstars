@@ -35,24 +35,20 @@ class Particle
         
         bool GetIsAlive()     const { return m_IsAlive; };
         float GetAlpha()      const { return m_Color.a; };
-        //float GetAlphaStart() const { return m_DataParticle.color_start.a; };
         
+        const glm::vec3& GetPosition() const { return m_Position; }
+        const glm::vec4& GetColor() const { return m_Color; }
+
         void Reborn();      
         
         void RandomizeLifeTime(float, float);
-        void Randomize_d_alpha(float, float);
-        
+        void Randomize_d_alpha(float, float);        
         
         void CalcRandomVelocity();            
         void CalcRandomAccurateVelocity();
         void CalcRandomDirtyVelocity();
-        //void calcAccurateRandomVelocity2(glm::vec2);
         
         void Update();
-
-        //void Render() const;
-        //void Render(float) const;
-        //void Render(float, float) const;
                 
     private:
         bool m_IsAlive;

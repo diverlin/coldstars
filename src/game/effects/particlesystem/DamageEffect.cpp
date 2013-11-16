@@ -17,8 +17,10 @@
 */
 
 #include "DamageEffect.hpp"
-#include "../../resources/TextureManager.hpp"
-#include "../../common/constants.hpp"
+#include <effects/particlesystem/Particle.hpp>
+#include <resources/TextureManager.hpp>
+#include <common/constants.hpp>
+#include <spaceobjects/BaseSpaceEntity.hpp>
 
 DamageEffect::DamageEffect()
 {

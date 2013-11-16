@@ -34,7 +34,7 @@ DistantStarEffect::DistantStarEffect(const std::vector<glm::vec3>& positions, co
     }
 
     m_Mesh = new Mesh();
-    m_Mesh->FillVertices(m_Positions, m_Colors);
+    m_Mesh->FillPointVertices(m_Positions, m_Colors);
 }
 
 DistantStarEffect::~DistantStarEffect()

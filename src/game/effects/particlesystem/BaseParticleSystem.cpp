@@ -16,26 +16,52 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <cmath>
-
 #include "BaseParticleSystem.hpp"
-#include <math/rand.hpp>
-#include "../../common/constants.hpp"
+#include <effects/particlesystem/Particle.hpp>
 
-BaseParticleSystem::BaseParticleSystem():
+#include <math/rand.hpp>
+#include <common/constants.hpp>
+
+#include <resources/textureOb.hpp>
+#include <spaceobjects/BaseSpaceEntity.hpp>
+
+#include <render/Mesh.hpp>
+
+
+BaseParticleSystem::BaseParticleSystem()
+:
 m_TypeId(NONE_ID),
+m_Mesh(nullptr),
 m_Parent(nullptr),
 m_IsAlive(true),
 m_IsDying(false)
-{}
+{
+    m_Mesh = new Mesh();
+}
  
 /* virtual */
 BaseParticleSystem::~BaseParticleSystem()
 {
+    //delete m_Mesh;
+
     for (unsigned int i=0; i<m_Particles.size(); i++) 
     {
         delete m_Particles[i];
     }
+}
+
+void BaseParticleSystem::Update()
+{  
+    std::vector<glm::vec3> positions;
+    std::vector<glm::vec4> colors;
+
+    for (unsigned int i=0; i<m_Particles.size(); i++) 
+    {
+        positions.push_back(m_Particles[i]->GetPosition());
+        colors.push_back(m_Particles[i]->GetColor());
+    }
+
+    m_Mesh->FillPointVerticesFast(positions, colors);
 }
 
 
