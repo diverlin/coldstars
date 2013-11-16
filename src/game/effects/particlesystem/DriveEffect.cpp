@@ -19,10 +19,11 @@
 #include <cmath>
 
 #include "DriveEffect.hpp"
-#include "../../render/Render.hpp"
-#include "../../render/Screen.hpp"
-#include "../../common/constants.hpp"
-#include "../../resources/TextureManager.hpp"
+#include "effects/particlesystem/Particle.hpp"
+#include <render/Render.hpp> // depr
+#include <render/Screen.hpp>  // depr
+#include <common/constants.hpp>  // depr
+#include <resources/TextureManager.hpp>  // depr
 
 DriveEffect::DriveEffect(glm::vec3* pTo_start_pos, glm::vec3* pTo_target_pos)
 {

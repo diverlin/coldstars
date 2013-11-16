@@ -17,7 +17,7 @@
 */
 
 #include "ExplosionEffect.hpp"
-
+#include "effects/particlesystem/Particle.hpp"
 #include <common/constants.hpp>
 #include <resources/TextureManager.hpp>
 
@@ -29,109 +29,90 @@ m_Radius(radius)
 {
     m_TypeId = EFFECT::EXPLOSION_ID;
     
-    /*
-    TextureOb* texOb_particle; 
-    ParticleData  data_particle;
-    int particles_num;
+    m_TextureOb = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);; 
+    m_ParticlesNum = 1000;
     
-    this->radius = radius;
-    
-    int size_id = CONVERTER::SIZE2SIZEID.GetEquivalent(this->radius);
+    int size_id = CONVERTER::SIZE2SIZEID.GetEquivalent(m_Radius);
      
     //data_particle.velocity_start = getRandInt(13,17) * 0.1;   
-    data_particle.velocity_start = (float)size_id*0.1f + getRandInt(40,90) * 0.01;
-    data_particle.velocity_end   = data_particle.velocity_start;
-    data_particle.d_velocity     = 0;
+    m_DataParticle.velocity_start = (float)size_id*0.1f + getRandInt(40,90) * 0.01;
+    m_DataParticle.velocity_end   = m_DataParticle.velocity_start;
+    m_DataParticle.d_velocity     = 0;
 
-    data_particle.color_start.r    = 1.0;
-    data_particle.color_start.g    = 1.0;
-    data_particle.color_start.b    = 1.0;
-    data_particle.color_start.a    = 1.0;
+    m_DataParticle.color_start.r    = 1.0;
+    m_DataParticle.color_start.g    = 1.0;
+    m_DataParticle.color_start.b    = 1.0;
+    m_DataParticle.color_start.a    = 1.0;
 
-    data_particle.color_end.r    = 0.0;
-    data_particle.color_end.g    = 0.0;
-    data_particle.color_end.b    = 0.0;
-    data_particle.color_end.a    = 0.0;
+    m_DataParticle.color_end.r    = 0.0;
+    m_DataParticle.color_end.g    = 0.0;
+    m_DataParticle.color_end.b    = 0.0;
+    m_DataParticle.color_end.a    = 0.0;
 
-    data_particle.color_delta.r    = 0.0;
-    data_particle.color_delta.g    = 0.0;
-    data_particle.color_delta.b    = 0.0;
-    data_particle.color_delta.a    = getRandInt(20,30) * 0.0004;
+    m_DataParticle.color_delta.r    = 0.0;
+    m_DataParticle.color_delta.g    = 0.0;
+    m_DataParticle.color_delta.b    = 0.0;
+    m_DataParticle.color_delta.a    = getRandInt(20,30) * 0.0004;
 
     
     //data_particle.size_start
-    data_particle.size_end          = 2.0;        
-    data_particle.d_size          = (float)size_id*0.4f + getRandInt(30,50) * 0.02;  
+    m_DataParticle.size_end          = 2.0;        
+    m_DataParticle.d_size          = (float)size_id*0.4f + getRandInt(30,50) * 0.02;  
         
-    if (size_id == 1)
-    {
-        particles_num = 30;    
-        data_particle.size_start  = 50 * size_id;                                         
 
-        texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
+    m_DataParticle.size_start  = 50 * size_id;                                         
         
-        ExplosionEffect* explosion_slice = new ExplosionEffect();
-        explosion_slice->SetTextureOb(texOb_particle);
-        explosion_slice->SetParticleData(data_particle);
-        explosion_slice->SetParticlesNum(particles_num);
+    CreateParticles();
+    //else    
+    //{
+        //{
+        //particles_num = 40;
+        //data_particle.size_start  = 50 * size_id;
         
-        explosion_slice->CreateParticles();
+        //texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
         
-        Add(explosion_slice);
-    }
-    else    
-    {
-        {
-        particles_num = 40;
-        data_particle.size_start  = 50 * size_id;
+        //ExplosionEffect* explosion_slice = new ExplosionEffect();
+        //explosion_slice->SetTextureOb(texOb_particle);
+        //explosion_slice->SetParticleData(data_particle);
+        //explosion_slice->SetParticlesNum(particles_num);
         
-        texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
+        //explosion_slice->CreateParticles();
         
-        ExplosionEffect* explosion_slice = new ExplosionEffect();
-        explosion_slice->SetTextureOb(texOb_particle);
-        explosion_slice->SetParticleData(data_particle);
-        explosion_slice->SetParticlesNum(particles_num);
-        
-        explosion_slice->CreateParticles();
-        
-        Add(explosion_slice);
-        }
+        //Add(explosion_slice);
+        //}
 
-        {
-        particles_num = 50;
-        data_particle.size_start  = 40 * size_id;
+        //{
+        //particles_num = 50;
+        //data_particle.size_start  = 40 * size_id;
         
-        texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::YELLOW_ID);
+        //texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::YELLOW_ID);
         
-        ExplosionEffect* explosion_slice = new ExplosionEffect();
-        explosion_slice->SetTextureOb(texOb_particle);
-        explosion_slice->SetParticleData(data_particle);
-        explosion_slice->SetParticlesNum(particles_num);
+        //ExplosionEffect* explosion_slice = new ExplosionEffect();
+        //explosion_slice->SetTextureOb(texOb_particle);
+        //explosion_slice->SetParticleData(data_particle);
+        //explosion_slice->SetParticlesNum(particles_num);
         
-        explosion_slice->CreateParticles();
+        //explosion_slice->CreateParticles();
         
-        Add(explosion_slice);
-        }
+        //Add(explosion_slice);
+        //}
     
-        {
-        particles_num = 60;                              
-        data_particle.size_start  = 30 * size_id;
+        //{
+        //particles_num = 60;                              
+        //data_particle.size_start  = 30 * size_id;
         
-        texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
+        //texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
         
-        ExplosionEffect* explosion_slice = new ExplosionEffect();
-        explosion_slice->SetTextureOb(texOb_particle);
-        explosion_slice->SetParticleData(data_particle);
-        explosion_slice->SetParticlesNum(particles_num);
+        //ExplosionEffect* explosion_slice = new ExplosionEffect();
+        //explosion_slice->SetTextureOb(texOb_particle);
+        //explosion_slice->SetParticleData(data_particle);
+        //explosion_slice->SetParticlesNum(particles_num);
         
-        explosion_slice->CreateParticles();
+        //explosion_slice->CreateParticles();
         
-        Add(explosion_slice);
-        }
-    } 
-*/      
-
-
+        //Add(explosion_slice);
+        //}
+    //} 
 }
  
 /* virtual override final */
@@ -151,6 +132,8 @@ void ExplosionEffect::CreateParticles()
 /* virtual override final */
 void ExplosionEffect::Update()
 {
+    BaseParticleSystem::Update();
+
     m_IsAlive = false;
     for (unsigned int i=0; i<m_ParticlesNum; i++)
     {

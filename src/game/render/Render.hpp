@@ -22,9 +22,8 @@
 
 #include <common/NonCopyable.hpp>
 #include <render/MyGl.hpp>
-#include "../resources/textureOb.hpp"
-//#include "../common/rect.hpp"
-#include <common/Box2D.hpp>
+#include "../resources/textureOb.hpp" // to be removed
+#include <common/Box2D.hpp>           // to be removed
 
 class Mesh;
 

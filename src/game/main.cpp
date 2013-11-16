@@ -76,13 +76,13 @@ int main()
     Player* player = PlayerBuilder::Instance().GetNewPlayer();
     
     BaseRunScenario* run_scenario = nullptr;
-    RUN_SCENARIO scenario_type = RUN_SCENARIO::NORMAL_RUN;
+    RUN_SCENARIO scenario_type = RUN_SCENARIO::TEST_PARTICLES;
     switch(scenario_type)
     {
         case RUN_SCENARIO::NORMAL_RUN:         { run_scenario = new NormalRunScenario(); break; }
         case RUN_SCENARIO::TEST_PARTICLES:     { run_scenario = new TestParticlesRunScenario(); break; }    
-        case RUN_SCENARIO::TEST_TEXT:         { run_scenario = new TestTextRunScenario(); break; }
-        default:                             { std::cout<<"INVALID_RUNSCENARIO"<<std::endl; return EXIT_FAILURE; break; }    
+        case RUN_SCENARIO::TEST_TEXT:          { run_scenario = new TestTextRunScenario(); break; }
+        default:                               { std::cout<<"INVALID_RUNSCENARIO"<<std::endl; return EXIT_FAILURE; break; }    
     }
     run_scenario->Init(player);
     

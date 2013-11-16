@@ -22,9 +22,12 @@
 
 #include <vector>
 
-#include <effects/particlesystem/Particle.hpp>
-#include <resources/textureOb.hpp>
-#include <spaceobjects/BaseSpaceEntity.hpp>
+#include <struct/ParticleData.hpp>
+
+class Particle;
+class TextureOb;
+class Mesh;
+class BaseSpaceEntity;
 
 class BaseParticleSystem 
 {
@@ -42,6 +45,8 @@ class BaseParticleSystem
         int GetTypeId() const { return m_TypeId; }
         bool GetAlive() const { return m_IsAlive; }
         const glm::vec3& GetCenter() const { return m_Center; }
+        const Mesh& GetMesh() const { return *m_Mesh; }
+        const TextureOb& GetTextureOb() const { return *m_TextureOb; }
 
         unsigned int GetParticlesNum() const { return m_ParticlesNum; }
         
@@ -53,6 +58,7 @@ class BaseParticleSystem
         unsigned int m_ParticlesNum;
         
         TextureOb* m_TextureOb;
+        Mesh* m_Mesh;
         ParticleData m_DataParticle;
 
         glm::vec3 m_Center;

@@ -10,15 +10,22 @@
 #include <render/MyGl.hpp>
 #include <types/MeshTypes.hpp>
 
+class ObjLoader;
+class TextureOb;
+
+
 const int VERTECIES_PER_POLYGON_NUM = 3;
 
 const int VERTEX_POSITION_LOCATION = 0;
 const int VERTEX_TEXCOORD_LOCATION = 1;
 const int VERTEX_NORMAL_LOCATION   = 2;
 const int VERTEX_COLOR_LOCATION    = 3;
+                              
+const int STRIDE_POSITION = 3;
+const int STRIDE_TEXCOORD = 2;
+const int STRIDE_NORMAL   = 3;
+const int STRIDE_COLOR    = 4;
 
-class ObjLoader;
-class TextureOb;
 
 struct Vertex
 {
@@ -40,8 +47,8 @@ class Mesh
         const glm::vec3& GetBoundaryBox() const { return m_BoundaryBox; };
 
         void FillVertices(const ObjLoader&);
-        void FillVertices(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&);
-        //void FillVerticesFast(const std::vector<glm::vec3>&, const std::vector<glm::vec2>&) const;
+        void FillPointVertices(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&);
+        void FillPointVerticesFast(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&);
                         
         void Draw() const;
     

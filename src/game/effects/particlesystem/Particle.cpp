@@ -27,9 +27,7 @@ m_IsAlive(true),
 m_Color(data_particle.color_start),
 m_Size(data_particle.size_start),
 m_DataParticle(data_particle)
-{
-
-} 
+{} 
       
 Particle::~Particle()
 {}
@@ -143,27 +141,3 @@ void Particle::Update()
         }
     }
 }
-
-//void Particle::Render() const
-//{
-    ////if (is_alive == true)
-    ////{
-        ////drawParticle(pos, size, color);
-    ////}
-//}
-
-//void Particle::Render(float scale) const
-//{
-    ////if (is_alive == true)
-    ////{
-        ////drawParticle(pos, size*scale, color.r, color.g, color.b, color.a);
-    ////}
-//}
-
-//void Particle::Render(float scale, float parent_d_alpha) const
-//{
-    ////if (is_alive == true)
-    ////{
-        ////drawParticle(pos, size*scale, color.r, color.g, color.b, color.a - parent_d_alpha);
-    ////}
-//}
