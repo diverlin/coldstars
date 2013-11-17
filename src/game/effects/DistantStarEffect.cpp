@@ -44,7 +44,7 @@ DistantStarEffect::~DistantStarEffect()
 
 void DistantStarEffect::Render(const Renderer& render) const
 {   
-    render.DrawPoints(GetMesh(), GetTextureOb());
+    //render.DrawParticles(GetMesh(), GetTextureOb());
 }
 
    
