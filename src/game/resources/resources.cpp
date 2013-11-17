@@ -1432,8 +1432,8 @@ void loadShaders()
     const std::string path_vert = DATA_REL_PATH+"shaders/point.vert"; 
     const std::string path_frag = DATA_REL_PATH+"shaders/point.frag"; 
 
-    ShaderCollector::Instance().point = glCreateProgram();
+    ShaderCollector::Instance().particle = glCreateProgram();
     
-    compileProgram(path_vert, path_frag, ShaderCollector::Instance().point);
+    compileProgram(path_vert, path_frag, ShaderCollector::Instance().particle);
     }
 }

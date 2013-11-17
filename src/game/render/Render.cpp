@@ -341,14 +341,14 @@ void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const
     {
         glPointSize(12.0f);
     
-        glUseProgram(ShaderCollector::Instance().point);
+        glUseProgram(ShaderCollector::Instance().particle);
         {    
             glActiveTexture(GL_TEXTURE0);                                
             glBindTexture(GL_TEXTURE_2D, textureOb.texture);
-            glUniform1i(glGetUniformLocation(ShaderCollector::Instance().point, "uTexture_0"), 0);
+            glUniform1i(glGetUniformLocation(ShaderCollector::Instance().particle, "uTexture_0"), 0);
 
-            glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().point, "u_ModelMatrix"), 1, GL_FALSE, &Mm[0][0]);      
-            glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().point, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);       
+            glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().particle, "u_ModelMatrix"), 1, GL_FALSE, &Mm[0][0]);      
+            glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);       
       
             mesh.Draw();
         }
