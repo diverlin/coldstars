@@ -49,7 +49,9 @@ class BaseParticleSystem
         const TextureOb& GetTextureOb() const { return *m_TextureOb; }
 
         unsigned int GetParticlesNum() const { return m_ParticlesNum; }
-        
+
+        const glm::mat4& GetActualModelMatrix();
+       
         virtual void Update() = 0;
         virtual void Render(float) {}
     
@@ -64,6 +66,8 @@ class BaseParticleSystem
         glm::vec3 m_Center;
         glm::vec3 m_Velocity;
         glm::vec3 m_Dir; 
+
+        glm::mat4 m_MatrixModel;
 
         BaseSpaceEntity* m_Parent;
         

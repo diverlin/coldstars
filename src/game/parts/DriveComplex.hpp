@@ -79,7 +79,7 @@ class DriveComplex
         glm::vec3 m_TargetOffset;
 
         std::vector<glm::vec3> m_PathCenterVec;
-        std::vector<glm::vec3> m_PathOrientVec;
+        std::vector<glm::vec3> m_PathDirectionVec;
 
         bool m_PathEnd;
         unsigned int m_PathIndex;

@@ -26,7 +26,7 @@
 struct UnresolvedDataUniqueOrientation
 {    
     glm::vec3 center;
-    glm::vec3 orient; 
+    glm::vec3 direction; 
 };
 
 class Orientation : public Base
@@ -44,11 +44,11 @@ class Orientation : public Base
         void SetSize(float x, float y, float z) { m_Size = glm::vec3(x, y, z); m_IsUpdated = false; }
         void SetSize(const glm::vec3& size) { m_Size = size; m_IsUpdated = false; }
 
-        void SetOrientOrigin(const glm::vec3& orient_origin) { m_OrientOrigin = orient_origin; m_IsUpdated = false; }        
-        void SetOrient(const glm::vec3& orient)              { m_Orient = orient; m_IsUpdated = false; }
+        void SetDirectionOrigin(const glm::vec3& direction_origin) { m_DirectionOrigin = direction_origin; m_IsUpdated = false; }        
+        void SetDirection(const glm::vec3& direction)              { m_Direction = direction; m_IsUpdated = false; }
         
-        const glm::vec3& GetOrientOrigin() const { return m_OrientOrigin; }        
-        const glm::vec3& GetOrient() const { return m_Orient; }
+        const glm::vec3& GetDirectionOrigin() const { return m_DirectionOrigin; }        
+        const glm::vec3& GetDirection() const { return m_Direction; }
        
         const glm::vec3& GetCenter() const { return m_Center; }
         const glm::vec3& GetSize()  const { return m_Size; } 
@@ -56,11 +56,11 @@ class Orientation : public Base
         glm::vec3* const GetpCenter() { return &m_Center; }
         const glm::vec3* const GetpParentCenter() { return &m_ParentCenter; }
                         
-        Points& GetPoints()          { return m_Points; }  // !!!
+        Points& GetPoints()          { return m_Points; }  // depr !!!
            
         float GetCollisionRadius() const  { return m_CollisionRadius; }
 
-        void UpdateOrientation();
+        void UpdateOrientation();     //depr
                                 
     protected:            
         UnresolvedDataUniqueOrientation data_unresolved_Orientation;
@@ -78,8 +78,8 @@ class Orientation : public Base
         glm::vec3 m_Center;                  
         glm::vec3 m_Size;
 
-        glm::vec3 m_OrientOrigin;        
-        glm::vec3 m_Orient;
+        glm::vec3 m_DirectionOrigin;        
+        glm::vec3 m_Direction;
         
         glm::vec3 m_ParentCenter; 
 

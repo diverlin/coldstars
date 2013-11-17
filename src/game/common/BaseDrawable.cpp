@@ -88,7 +88,7 @@ void BaseDrawable::RenderAxis(const Renderer& render) const
     glm::mat4 Mm = getModelMatrix(GetCenter(), glm::vec3(2*GetCollisionRadius()), glm::vec3(0.0f));    // angle
     render.DrawAxis(Mm, /*width*/4);
     //render.DrawVector(GetDir(), GetCenter(), GetSize().x, /*width*/6);
-    render.DrawVector(GetOrient(), Mm, /*width*/6);
+    render.DrawVector(GetDirection(), Mm, /*width*/6);
 }
 
 void BaseDrawable::UpdateRenderAnimation()
@@ -129,10 +129,10 @@ bool BaseDrawable::UpdateFadeOutEffect()
 
 const glm::mat4& BaseDrawable::GetActualModelMatrix()
 {     
-    RotationBetweenVectors(m_QuatPosition, GetOrientOrigin(), GetOrient());
+    RotationBetweenVectors(m_QuatPosition, GetDirectionOrigin(), GetDirection());
     if (m_AnimationRotation != nullptr)
     {
-        m_AnimationRotation->Update(m_QuatAnimation, GetOrientOrigin());        
+        m_AnimationRotation->Update(m_QuatAnimation, GetDirectionOrigin());        
     }
     
     m_MatrixTranslate = glm::translate(GetCenter());    

@@ -87,7 +87,7 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
           
     asteroid->BindData3D(mesh, texOb, scale);        
     
-    asteroid->SetOrient(glm::normalize(glm::vec3(1.0f)));
+    asteroid->SetDirection(glm::normalize(glm::vec3(1.0f)));
     float delta_angle = 0.0001*getRandInt(20, 60);
     AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
     asteroid->SetAnimationRotation(animation_rotation);

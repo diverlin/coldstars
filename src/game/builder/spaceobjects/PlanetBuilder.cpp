@@ -91,7 +91,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     planet->BindData3D(mesh, textureOb, scale);
     
-    planet->SetOrient(glm::normalize(glm::vec3(1.0f)));    
+    planet->SetDirection(glm::normalize(glm::vec3(1.0f)));    
     float delta_angle = 0.0001*getRandInt(20, 60);
     AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
     planet->SetAnimationRotation(animation_rotation);
@@ -111,8 +111,8 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
         TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::RING_ID); 
         Ring* ring = new Ring();
         ring->BindData3D(mesh_plane, textureOb, 1.5f*scale);
-        //ring->SetOrient(glm::normalize(glm::vec3(1.0f)));
-        ring->SetOrient(glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
+        //ring->SetDirection(glm::normalize(glm::vec3(1.0f)));
+        ring->SetDirection(glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
         planet->AddDecoration(ring);
     }
     */

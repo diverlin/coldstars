@@ -58,7 +58,7 @@ class BaseDrawable : public Orientation
         const TextureOb& GetTextureOb() const { return *m_TextureOb; }
         bool HasTextureOb() const { return (m_TextureOb != 0); }
         
-        const glm::vec4 GetColor() const { return m_Color; }
+        const glm::vec4& GetColor() const { return m_Color; }
                                             
         void RenderCollisionRadius(const Renderer&) const;
         void RenderAxis(const Renderer&) const;
