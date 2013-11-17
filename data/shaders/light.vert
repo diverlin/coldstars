@@ -23,7 +23,7 @@ out vec2 vTexcoord;
  
 void main(void)
 {
-    vec4 vertexPos = u_ModelMatrix * vec4(position, 1.0f);      /* transformed vertex to world space */ 
+    vec4 vertexPos = u_ModelMatrix * vec4(position, 1.0f);      
     gl_Position = u_ProjectionViewMatrix * vertexPos; 
         
     vVert2light_n = normalize(u_LightPos - vertexPos.xyz);              
