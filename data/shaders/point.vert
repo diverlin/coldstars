@@ -5,6 +5,7 @@
 #define VERTEX_NORMAL_LOCATION   2
 #define VERTEX_COLOR_LOCATION    3
 
+uniform mat4 u_ModelMatrix;
 uniform mat4 u_ProjectionViewMatrix;
 
 layout(location = VERTEX_POSITION_LOCATION) in vec3 position;
@@ -14,7 +15,8 @@ out vec4 vColor;
  
 void main(void)
 {
-    gl_Position = u_ProjectionViewMatrix * vec4(position, 1.0f);
+    vec4 vertexPos = u_ModelMatrix * vec4(position, 1.0f);     
+    gl_Position = u_ProjectionViewMatrix * vertexPos; 
 
     vColor = color; 
 }

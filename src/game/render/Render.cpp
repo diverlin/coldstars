@@ -334,7 +334,7 @@ void Renderer::DrawParticleTextured(const TextureOb& texOb, const glm::vec3& cen
     glEnd();
 } 
 
-void Renderer::DrawPoints(const Mesh& mesh, const TextureOb& textureOb) const
+void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     enable_BLEND();
     enable_POINTSPRITE();
@@ -346,7 +346,8 @@ void Renderer::DrawPoints(const Mesh& mesh, const TextureOb& textureOb) const
             glActiveTexture(GL_TEXTURE0);                                
             glBindTexture(GL_TEXTURE_2D, textureOb.texture);
             glUniform1i(glGetUniformLocation(ShaderCollector::Instance().point, "uTexture_0"), 0);
-     
+
+            glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().point, "u_ModelMatrix"), 1, GL_FALSE, &Mm[0][0]);      
             glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().point, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);       
       
             mesh.Draw();

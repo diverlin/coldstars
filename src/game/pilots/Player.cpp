@@ -575,8 +575,8 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 //render.enable_POINTSPRITE();
                 //{
                     for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
-                    {     
-                        render.DrawPoints(visible_effect_PARTICLESYSTEM_vec[i]->GetMesh(), visible_effect_PARTICLESYSTEM_vec[i]->GetTextureOb()); 
+                    {    
+                        //render.DrawParticles(visible_effect_PARTICLESYSTEM_vec[i]->GetMesh(), visible_effect_PARTICLESYSTEM_vec[i]->GetTextureOb(), visible_effect_PARTICLESYSTEM_vec[i]->GetModelMatrix()); 
                     }
                 //}
                 //render.disable_POINTSPRITE();
