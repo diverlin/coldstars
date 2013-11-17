@@ -89,7 +89,7 @@ void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textu
     container->SetLifeData(data_life);
     container->BindData2D(textureOb);
     
-    container->SetOrient(glm::normalize(glm::vec3(0.0f, 0.0f, 1.0f)));
+    container->SetDirection(glm::normalize(glm::vec3(0.0f, 0.0f, 1.0f)));
     float delta_angle = 0.0001*getRandInt(20, 60);
     AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
     container->SetAnimationRotation(animation_rotation);

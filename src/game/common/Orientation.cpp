@@ -23,8 +23,8 @@ Orientation::Orientation()
 :
 m_IsUpdated(false)
 {
-    m_OrientOrigin = glm::vec3(0.0f, 0.0f, 1.0f);
-    m_Orient       = glm::vec3(0.0f, 0.0f, 1.0f); 
+    m_DirectionOrigin = glm::vec3(0.0f, 0.0f, 1.0f);
+    m_Direction       = glm::vec3(0.0f, 0.0f, 1.0f); 
 }
 
 /* virtual */
@@ -62,9 +62,9 @@ void Orientation::SaveDataUniqueOrientation(boost::property_tree::ptree& save_pt
     save_ptree.put(root+"data_unresolved_Orientation.center.y", m_Center.y);
     save_ptree.put(root+"data_unresolved_Orientation.center.z", m_Center.z);
     
-    save_ptree.put(root+"data_unresolved_Orientation.orient.x", m_Orient.x);
-    save_ptree.put(root+"data_unresolved_Orientation.orient.y", m_Orient.y);
-    save_ptree.put(root+"data_unresolved_Orientation.orient.z", m_Orient.z);
+    save_ptree.put(root+"data_unresolved_Orientation.direction.x", m_Direction.x);
+    save_ptree.put(root+"data_unresolved_Orientation.direction.y", m_Direction.y);
+    save_ptree.put(root+"data_unresolved_Orientation.direction.z", m_Direction.z);
         
 }
 
@@ -78,9 +78,9 @@ void Orientation::LoadDataUniqueOrientation(const boost::property_tree::ptree& l
     data_unresolved_Orientation.center.y = load_ptree.get<float>("data_unresolved_Orientation.center.y");
     data_unresolved_Orientation.center.z = load_ptree.get<float>("data_unresolved_Orientation.center.y");
     
-    data_unresolved_Orientation.orient.x = load_ptree.get<float>("data_unresolved_Orientation.orient.x");
-    data_unresolved_Orientation.orient.y = load_ptree.get<float>("data_unresolved_Orientation.orient.y");
-    data_unresolved_Orientation.orient.z = load_ptree.get<float>("data_unresolved_Orientation.orient.z");
+    data_unresolved_Orientation.direction.x = load_ptree.get<float>("data_unresolved_Orientation.orient.x");
+    data_unresolved_Orientation.direction.y = load_ptree.get<float>("data_unresolved_Orientation.orient.y");
+    data_unresolved_Orientation.direction.z = load_ptree.get<float>("data_unresolved_Orientation.orient.z");
 }
 
 void Orientation::ResolveDataUniqueOrientation()

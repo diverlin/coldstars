@@ -290,7 +290,7 @@ bool DriveComplex::GetDockingPermission()
 void DriveComplex::ClearPath()
 {
     m_PathCenterVec.clear();
-    m_PathOrientVec.clear();
+    m_PathDirectionVec.clear();
 }
 
 void DriveComplex::CalcPath()
@@ -307,11 +307,11 @@ void DriveComplex::CalcPath()
     glm::vec3 target_dir(m_TargetPos - m_OwnerVehicle->GetCenter());
     target_dir = glm::normalize(target_dir);
     
-    float az = atan2(m_OwnerVehicle->GetOrient().y, m_OwnerVehicle->GetOrient().x);
-    //float az = acos(glm::dot(m_OwnerVehicle->GetOrient(), glm::vec3(1.0f, 0.0f, 0.0f)));
+    float az = atan2(m_OwnerVehicle->GetDirection().y, m_OwnerVehicle->GetDirection().x);
+    //float az = acos(glm::dot(m_OwnerVehicle->GetDirection(), glm::vec3(1.0f, 0.0f, 0.0f)));
     
     //glm::vec3 orient(cos(az), sin(az), 0.0f);
-    glm::vec3 orient = m_OwnerVehicle->GetOrient();
+    glm::vec3 direction = m_OwnerVehicle->GetDirection();
         
     glm::vec3 gravity;
     const StarSystem& starsystem = *m_OwnerVehicle->GetStarSystem();
@@ -325,7 +325,7 @@ void DriveComplex::CalcPath()
     {
         target_dir = glm::normalize(glm::vec3(m_TargetPos - new_center));
             
-        float cosa = glm::dot(orient, target_dir);
+        float cosa = glm::dot(direction, target_dir);
         if (std::fabs(cosa) < 0.999) 
         {
             if (round_counter == 0)
@@ -333,11 +333,11 @@ void DriveComplex::CalcPath()
                 float prob_az1 = az + angle_step;
                 float prob_az2 = az - angle_step;
                 
-                glm::vec3 prob_orient1(cos(prob_az1), sin(prob_az1), 0.0);
-                glm::vec3 prob_orient2(cos(prob_az2), sin(prob_az2), 0.0);
+                glm::vec3 prob_direction1(cos(prob_az1), sin(prob_az1), 0.0);
+                glm::vec3 prob_direction2(cos(prob_az2), sin(prob_az2), 0.0);
                 
-                float prob_cosa1 = glm::dot(prob_orient1, target_dir);        
-                float prob_cosa2 = glm::dot(prob_orient2, target_dir);
+                float prob_cosa1 = glm::dot(prob_direction1, target_dir);        
+                float prob_cosa2 = glm::dot(prob_direction2, target_dir);
                         
                 if (prob_cosa1 > 0)
                 {
@@ -353,10 +353,10 @@ void DriveComplex::CalcPath()
         
             az += sign*angle_step;
             std::cout<<az<<std::endl;
-            orient.x = cos(az);
-            orient.y = sin(az);
+            direction.x = cos(az);
+            direction.y = sin(az);
         
-            cosa = glm::dot(orient, target_dir);
+            cosa = glm::dot(direction, target_dir);
             
             round_counter++;
             if (round_counter > round_counter_max) // target_pos is not reachable (within circle)
@@ -372,12 +372,12 @@ void DriveComplex::CalcPath()
 
 /* UGLY */ if (m_PathCenterVec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<<m_OwnerVehicle->GetId()<<std::endl; break; }
 
-        float gravity_rate = starsystem.CalcResultGravityForce(new_center, orient, mass);        
+        float gravity_rate = starsystem.CalcResultGravityForce(new_center, direction, mass);        
         
-        new_center += orient*speed_base*gravity_rate;
+        new_center += direction*speed_base*gravity_rate;
                 
         m_PathCenterVec.push_back(new_center);
-        m_PathOrientVec.push_back(orient);
+        m_PathDirectionVec.push_back(direction);
     }           
 
     if (m_PathCenterVec.size() > 1)
@@ -398,7 +398,7 @@ void DriveComplex::UpdatePosition()
         if (m_PathIndex < m_PathCenterVec.size())
         {
             m_OwnerVehicle->SetCenter(m_PathCenterVec[m_PathIndex]);
-            m_OwnerVehicle->SetOrient(m_PathOrientVec[m_PathIndex]);
+            m_OwnerVehicle->SetDirection(m_PathDirectionVec[m_PathIndex]);
             m_PathIndex++;
         }
         else

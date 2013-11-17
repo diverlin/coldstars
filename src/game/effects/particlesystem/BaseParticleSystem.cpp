@@ -27,6 +27,7 @@
 
 #include <render/Mesh.hpp>
 
+#include <glm/gtx/transform.hpp>
 
 BaseParticleSystem::BaseParticleSystem()
 :
@@ -64,4 +65,14 @@ void BaseParticleSystem::Update()
     m_Mesh->FillPointVerticesFast(positions, colors);
 }
 
+const glm::mat4& BaseParticleSystem::GetActualModelMatrix()
+{ 
+    m_MatrixModel = glm::translate(GetCenter());    
+    //m_MatrixRotate    = glm::toMat4(m_QuatPosition * m_QuatAnimation); 
+    //m_MatrixScale     = glm::scale(GetSize());
+      
+    //m_MatrixModel = m_MatrixTranslate * m_MatrixScale * m_MatrixRotate;
+    
+    return m_MatrixModel;
+}
 
