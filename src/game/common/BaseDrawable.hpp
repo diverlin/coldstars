@@ -34,7 +34,7 @@ const glm::vec3 AXIS_X = glm::vec3(1.0f, 0.0f, 0.0f);
 const glm::vec3 AXIS_Y = glm::vec3(0.0f, 1.0f, 0.0f);
 const glm::vec3 AXIS_Z = glm::vec3(0.0f, 0.0f, 1.0f);
 
-struct UnresolvedDataUniqueBaseDrawable
+struct UnresolvedDataBaseDrawable
 {
     TYPE::MESH mesh_type_id;
     std::string textureOb_path;
@@ -71,10 +71,10 @@ class BaseDrawable : public Orientation
 
         const glm::mat4& GetActualModelMatrix();
                 
-        UnresolvedDataUniqueBaseDrawable data_unresolved_BaseDrawable;
-        void SaveDataUniqueBaseDrawable(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueBaseDrawable(const boost::property_tree::ptree&);
-        void ResolveDataUniqueBaseDrawable();
+        UnresolvedDataBaseDrawable data_unresolved_BaseDrawable;
+        void Save(boost::property_tree::ptree&, const std::string&) const;
+        void Load(const boost::property_tree::ptree&);
+        void Resolve();
 
     private:
         glm::vec4 m_Color;

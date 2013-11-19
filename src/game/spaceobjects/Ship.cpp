@@ -197,7 +197,7 @@ void Ship::SaveData(boost::property_tree::ptree& save_ptree) const
     const std::string root = "ship."+int2str(GetId())+".";
     Base::Save(save_ptree, root);
     Orientation::Save(save_ptree, root);
-    SaveDataUniqueBaseDrawable(save_ptree, root);
+    BaseDrawable::Save(save_ptree, root);
     SaveDataUniqueBaseSpaceEntity(save_ptree, root);
     SaveDataUniqueVehicle(save_ptree, root);
     SaveDataUniqueShip(save_ptree, root);
@@ -208,7 +208,7 @@ void Ship::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     Base::Load(load_ptree);
     Orientation::Load(load_ptree);
-    LoadDataUniqueBaseDrawable(load_ptree);
+    BaseDrawable::Load(load_ptree);
     LoadDataUniqueBaseSpaceEntity(load_ptree);
     LoadDataUniqueVehicle(load_ptree);
     LoadDataUniqueShip(load_ptree);
@@ -219,7 +219,7 @@ void Ship::ResolveData()
 {
     Base::Resolve();
     Orientation::Resolve();
-    ResolveDataUniqueBaseDrawable();
+    BaseDrawable::Resolve();
     ResolveDataUniqueBaseSpaceEntity();
     ResolveDataUniqueVehicle();
     ResolveDataUniqueShip();
