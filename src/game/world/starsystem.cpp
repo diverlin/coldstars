@@ -1133,7 +1133,7 @@ void StarSystem::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "starsystem." + int2str(GetStarSystem()->GetId())+".";
     Base::Save(save_ptree, root);
-    BaseSpaceEntity::Save((save_ptree, root);
+    BaseSpaceEntity::Save(save_ptree, root);
     SaveDataUniqueStarSystem(save_ptree, root);
 }
 
