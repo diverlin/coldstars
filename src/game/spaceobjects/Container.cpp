@@ -118,10 +118,10 @@ void Container::Render2D(const Renderer& render)
     render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
 }
 
-void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree, const std::string& root) const    
+void Container::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Container("+int2str(GetId())+")::SaveDataUniqueContainer", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Container("+int2str(GetId())+")::SaveData()", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"target_pos.x", m_TargetPos.x);
@@ -130,10 +130,10 @@ void Container::SaveDataUniqueContainer(boost::property_tree::ptree& save_ptree,
     save_ptree.put(root+"velocity", m_Velocity);
 }
 
-void Container::LoadDataUniqueContainer(const boost::property_tree::ptree& load_ptree)
+void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Container("+int2str(GetId())+")::LoadDataUniqueContainer", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Container("+int2str(GetId())+")::LoadData()", SAVELOAD_LOG_DIP);
     #endif
     
     m_TargetPos.x   = load_ptree.get<float>("target_pos.x");
@@ -142,10 +142,10 @@ void Container::LoadDataUniqueContainer(const boost::property_tree::ptree& load_
     m_Velocity = load_ptree.get<float>("velocity");
 }
 
-void Container::ResolveDataUniqueContainer()
+void Container::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Container("+int2str(GetId())+")::ResolveDataUniqueContainer", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Container("+int2str(GetId())+")::ResolveData()", SAVELOAD_LOG_DIP);
     #endif
     
     ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddContainer(this, data_unresolved_Orientation.center); 

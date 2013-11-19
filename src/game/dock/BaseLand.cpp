@@ -30,17 +30,17 @@ BaseLand::~BaseLand()
 {}
 
 
-void BaseLand::SaveDataUniqueBaseLand(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void BaseLand::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     save_ptree.put(root+"data_unresolved_BaseLand.owner_id", owner->GetId());
 }
 
-void BaseLand::LoadDataUniqueBaseLand(const boost::property_tree::ptree& load_ptree)
+void BaseLand::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     data_unresolved_BaseLand.owner_id = load_ptree.get<int>("data_unresolved_BaseLand.owner_id");
 }
 
-void BaseLand::ResolveDataUniqueBaseLand()
+void BaseLand::ResolveData()
 {
     Base* owner = EntityManager::Instance().GetEntityById(data_unresolved_BaseLand.owner_id);
     switch(owner->GetTypeId())

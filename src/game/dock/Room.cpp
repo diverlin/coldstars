@@ -35,19 +35,19 @@ void Room::RenderBackground(const Rect& rect) const
     //drawTexturedRect(textureOb_background, rect, -2);  
 }
            
-void Room::SaveDataUniqueRoom(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Room::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     save_ptree.put(root+"unresolved.textureOb_background_path", textureOb_background->path);
     save_ptree.put(root+"unresolved.owner_kosmoport_id", owner_kosmoport->GetId());
 }
 
-void Room::LoadDataUniqueRoom(const boost::property_tree::ptree& load_ptree)
+void Room::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     data_unresolved_Room.textureOb_background_path = load_ptree.get<std::string>("unresolved.textureOb_background_path");
     data_unresolved_Room.owner_kosmoport_id = load_ptree.get<int>("unresolved.owner_kosmoport_id");
 }
 
-void Room::ResolveDataUniqueRoom()
+void Room::ResolveData()
 {
     textureOb_background = TextureManager::Instance().GetTextureObByPath(data_unresolved_Room.textureOb_background_path);
 }

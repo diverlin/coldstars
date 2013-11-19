@@ -154,7 +154,7 @@ void Star::PostDeathUniqueEvent(bool)
 void Star::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Star("+int2str(GetId())+")::SaveDataUniqueStar", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Star("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"m_TurnSinceLastSparkCounter", m_TurnSinceLastSparkCounter);
@@ -164,7 +164,7 @@ void Star::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
 void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Star("+int2str(GetId())+")::LoadDataUniqueStar", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Star("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
     
     m_TurnSinceLastSparkCounter = load_ptree.get<int>("m_TurnSinceLastSparkCounter");
@@ -174,7 +174,7 @@ void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 void Star::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Star("+int2str(GetId())+")::ResolveDataUniqueStar", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Star("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this);     
@@ -205,7 +205,7 @@ void Star::Load(const boost::property_tree::ptree& load_ptree)
 }
 
 /* virtual override final */
-void Star::Load()
+void Star::Resolve()
 {
     Base::ResolveData();
     Orientation::ResolveData();

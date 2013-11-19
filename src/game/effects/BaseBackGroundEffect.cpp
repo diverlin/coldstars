@@ -57,7 +57,7 @@ void BaseBackGroundEffect::SetTextureOb(TextureOb* textureOb, const glm::vec3& s
     m_Size.z = 1.0 * scale_factor.z; 
 };
             
-void BaseBackGroundEffect::SaveDataUniqueBaseBackGroundEffect(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void BaseBackGroundEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     save_ptree.put(root+"textureOb_path", m_TextureOb->path);
     
@@ -70,7 +70,7 @@ void BaseBackGroundEffect::SaveDataUniqueBaseBackGroundEffect(boost::property_tr
     save_ptree.put(root+"size.z", m_Size.z);
 }
 
-void BaseBackGroundEffect::LoadDataUniqueBaseBackGroundEffect(const boost::property_tree::ptree& load_ptree)
+void BaseBackGroundEffect::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     m_TextureObPath = load_ptree.get<std::string>("textureOb_path");
                 
@@ -83,7 +83,7 @@ void BaseBackGroundEffect::LoadDataUniqueBaseBackGroundEffect(const boost::prope
     m_Size.z = load_ptree.get<float>("size.z");
 }
         
-void BaseBackGroundEffect::ResolveDataUniqueBaseBackGroundEffect()
+void BaseBackGroundEffect::ResolveData()
 {
     m_TextureOb = TextureManager::Instance().GetTextureObByPath(m_TextureObPath);
 }

@@ -16,8 +16,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GOVERMENT_H
-#define GOVERMENT_H
+#ifndef GOVERMENT_HPP
+#define GOVERMENT_HPP
 
 #include "Room.hpp"
 
@@ -31,14 +31,14 @@ class Goverment : public Room
            
                 void Save(boost::property_tree::ptree&) const;        
         void Load(const boost::property_tree::ptree&);
-        void Load();
+        void Resolve();
         
         private:
                 TextureOb* textureOb_face;
                 
-                void SaveDataUniqueGoverment(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueGoverment(const boost::property_tree::ptree&);
-        void ResolveDataUniqueGoverment();
+                void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 };
 
 #endif

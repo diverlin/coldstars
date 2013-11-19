@@ -26,7 +26,7 @@
 
 class BaseEquipment;
 
-struct UnresolvedDataUniqueBaseModule
+struct UnresolvedDataBaseModule
 {
     INTLONGEST equipment_owner_id;
 };
@@ -42,13 +42,13 @@ class BaseModule : public BaseItem
     protected:         
         BaseEquipment* equipment_owner;
         
-        UnresolvedDataUniqueBaseModule data_unresolved_BaseModule;
+        UnresolvedDataBaseModule data_unresolved_BaseModule;
         
         void AddCommonInfo();   
         
-        void SaveDataUniqueBaseModule(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueBaseModule(const boost::property_tree::ptree&);
-        void ResolveDataUniqueBaseModule();                
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();                
 };
 
 #endif

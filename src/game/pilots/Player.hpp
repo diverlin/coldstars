@@ -48,7 +48,7 @@ class BaseParticleSystem;
 class VerticalFlowText;
 
 
-struct UnresolvedDataUniquePlayer
+struct UnresolvedDataPlayer
 {
     int npc_id;
     int starsystem_id;
@@ -97,7 +97,7 @@ class Player : public Base
                                                 
         void Save(boost::property_tree::ptree&) const;        
         void Load(const boost::property_tree::ptree&);
-        void Load();
+        void Resolve();
                  
     private:
         Npc* npc;
@@ -146,10 +146,10 @@ class Player : public Base
         bool MouseInteractionWithStars(const MouseData&);
         void MouseNavigation(const MouseData&) const;
 
-        UnresolvedDataUniquePlayer data_unresolved_player;            
-        void SaveDataUniquePlayer(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniquePlayer(const boost::property_tree::ptree&);
-        void ResolveDataUniquePlayer();
+        UnresolvedDataPlayer data_unresolved_player;            
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 
     friend class UserInput;
 };

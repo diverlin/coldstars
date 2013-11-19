@@ -37,7 +37,7 @@ class ScanerEquipment : public BaseEquipment
                             
             virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
         private:
             int scan_orig;
@@ -47,9 +47,9 @@ class ScanerEquipment : public BaseEquipment
              void virtual AddUniqueInfo();
              std::string GetScanStr();
                 
-                void SaveDataUniqueScanerEquipment(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueScanerEquipment(const boost::property_tree::ptree&);
-        void ResolveDataUniqueScanerEquipment();  
+                void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();  
 };
 
 #endif 

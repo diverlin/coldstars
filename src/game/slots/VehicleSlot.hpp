@@ -44,14 +44,14 @@ class VehicleSlot : public BaseSlot
         
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
     private:
         Vehicle* vehicle;
         
-        void SaveDataUniqueVehicleSlot(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueVehicleSlot(const boost::property_tree::ptree&);
-        void ResolveDataUniqueVehicleSlot();     
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();     
 }; 
 
 #endif

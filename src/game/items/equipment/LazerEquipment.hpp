@@ -43,7 +43,7 @@ class LazerEquipment : public BaseEquipment
             
             virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
           private:
                     int damage_orig;
@@ -61,9 +61,9 @@ class LazerEquipment : public BaseEquipment
                std::string GetDamageStr();
                std::string GetRadiusStr();   
                 
-                void SaveDataUniqueLazerEquipment(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueLazerEquipment(const boost::property_tree::ptree&);
-        void ResolveDataUniqueLazerEquipment();      
+                void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();      
 };
 
 #endif 

@@ -81,7 +81,7 @@ namespace ENTITY
     }
 }
 
-struct UnresolvedDataUniqueStarSystem
+struct UnresolvedData
 {
     int sector_id;
 };
@@ -155,7 +155,7 @@ class StarSystem : public BaseSpaceEntity
                 
         void Save(boost::property_tree::ptree&) const;
         void Load(const boost::property_tree::ptree&);
-        void Load();
+        void Resolve();
                                                                                            
         // poor
         Planet* GetClosestInhabitedPlanet(const glm::vec2&) const;
@@ -207,7 +207,7 @@ class StarSystem : public BaseSpaceEntity
                                   
             GarbageEffects  garbage_effects;
                                  
-            UnresolvedDataUniqueStarSystem data_unresolved_StarSystem;
+            UnresolvedData data_unresolved_StarSystem;
                                     
                 void LaunchingEvent() const;
             
@@ -229,9 +229,9 @@ class StarSystem : public BaseSpaceEntity
         void asteroidCollision_s(bool);
         void ExternalForcesAffection_s(bool);
         
-        void SaveDataUniqueStarSystem(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueStarSystem(const boost::property_tree::ptree&);
-        void ResolveDataUniqueStarSystem();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
         
     friend class GuiGalaxyMap;
     friend class Observation;

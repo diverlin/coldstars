@@ -73,10 +73,10 @@ void BasePlanet::RenderStuffWhenFocusedInSpace()
     m_Orbit.DrawPath();
 }
 
-void BasePlanet::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void BasePlanet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::SaveDataUniqueBasePlanet", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"data.m_Orbit_center.x", m_DataPlanet.orbit_center.x);
@@ -90,10 +90,10 @@ void BasePlanet::Save(boost::property_tree::ptree& save_ptree, const std::string
     save_ptree.put(root+"unresolved.orbit_it", m_Orbit.GetIt());
 }
 
-void BasePlanet::Load(const boost::property_tree::ptree& load_ptree)
+void BasePlanet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::LoadDataUniqueBasePlanet", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
     
     m_DataPlanet.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");    
@@ -107,10 +107,10 @@ void BasePlanet::Load(const boost::property_tree::ptree& load_ptree)
     data_unresolved_BasePlanet.orbit_it = load_ptree.get<int>("unresolved.orbit_it");
 }
 
-void BasePlanet::Resolve()
+void BasePlanet::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::ResolveDataUniqueBasePlanet", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
 }
 

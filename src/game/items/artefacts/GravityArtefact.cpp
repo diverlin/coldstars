@@ -37,14 +37,14 @@ GravityArtefact::~GravityArtefact ()
 /* virtual */
 void GravityArtefact::AddUniqueInfo()
 {
-        info.addTitleStr("gravity artefact");
-        info.addNameStr("gravity:");      info.addValueStr( int2str(gravity) );
+    info.addTitleStr("gravity artefact");
+    info.addNameStr("gravity:");      info.addValueStr( int2str(gravity) );
 }
 
 /* virtual */
 void GravityArtefact::AddCommonInfo()
 {
-        info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
+    info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
 }
 
 /* virtual */
@@ -53,7 +53,7 @@ void GravityArtefact::Save(boost::property_tree::ptree& save_ptree) const
     std::string root = "gravity_artefact." + int2str(GetId()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueGravityArtefact(save_ptree, root);
+    GravityArtefact::SaveData(save_ptree, root);
 }
 
 /* virtual */
@@ -61,38 +61,38 @@ void GravityArtefact::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     BaseItem::LoadData(load_ptree);
-    LoadDataUniqueGravityArtefact(load_ptree);
+    GravityArtefact::LoadData(load_ptree);
 }
 
 /* virtual */
-void GravityArtefact::Load()
+void GravityArtefact::Resolve()
 {
     Base::ResolveData();
     BaseItem::ResolveData();
-    ResolveDataUniqueGravityArtefact();
+    GravityArtefact::ResolveData();
 }        
         
-void GravityArtefact::SaveDataUniqueGravityArtefact(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void GravityArtefact::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueGravityArtefact()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GravityArtefact::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-        save_ptree.put(root+"gravity", gravity); 
+    save_ptree.put(root+"gravity", gravity); 
 }
 
-void GravityArtefact::LoadDataUniqueGravityArtefact(const boost::property_tree::ptree& load_ptree)
+void GravityArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueGravityArtefact()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GravityArtefact::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     gravity = load_ptree.get<int>("gravity");
 }
 
-void GravityArtefact::ResolveDataUniqueGravityArtefact()
+void GravityArtefact::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueGravityArtefact()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GravityArtefact::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

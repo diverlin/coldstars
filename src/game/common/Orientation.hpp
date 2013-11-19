@@ -64,9 +64,9 @@ class Orientation : public Base
                                 
     protected:            
         UnresolvedDataOrientation data_unresolved_Orientation;
-        void Save(boost::property_tree::ptree&, const std::string&) const;
-        void Load(const boost::property_tree::ptree&);
-        void Resolve();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 
         void SetCollisionRadius(float collision_radius) { m_CollisionRadius = collision_radius; }    
                         

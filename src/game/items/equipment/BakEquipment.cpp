@@ -39,106 +39,107 @@ BakEquipment::~BakEquipment()
 void BakEquipment::IncreaseFuel(int fuel)        
 {
     this->fuel += fuel; 
-        if (this->fuel > fuel_max)
-        { 
-            this->fuel = fuel_max; // not sure if it's needed
-        }                           
+    if (this->fuel > fuel_max)
+    { 
+        this->fuel = fuel_max; // not sure if it's needed
+    }                           
 }    
                                     
 /* virtual */            
 void BakEquipment::UpdateProperties()
 {
-        fuel_max_add = 0;
-        
-        for (unsigned int i = 0; i<modules_vec.size(); i++)
-        {
-            fuel_max_add += ((BakModule*)modules_vec[i])->GetFuelMaxAdd();
-        }
-        
-        fuel_max = fuel_max_orig + fuel_max_add;        
+    fuel_max_add = 0;
+    
+    for (unsigned int i = 0; i<modules_vec.size(); i++)
+    {
+        fuel_max_add += ((BakModule*)modules_vec[i])->GetFuelMaxAdd();
+    }
+    
+    fuel_max = fuel_max_orig + fuel_max_add;        
 }
 
 void BakEquipment::CountPrice()
 {
-        float fuel_rate          = (float)fuel_max_orig / EQUIPMENT::BAK::FUEL_MIN;
-        float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::BAK::MODULES_NUM_MAX;
-
-        float effectiveness_rate = EQUIPMENT::BAK::FUEL_WEIGHT * fuel_rate + 
-                       EQUIPMENT::BAK::MODULES_NUM_WEIGHT * modules_num_rate;
-
-        float mass_rate          = (float)data_item.mass / EQUIPMENT::BAK::MASS_MIN;
-        float condition_rate     = (float)condition / data_item.condition_max;
-
-       price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    float fuel_rate          = (float)fuel_max_orig / EQUIPMENT::BAK::FUEL_MIN;
+    float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::BAK::MODULES_NUM_MAX;
+    
+    float effectiveness_rate = EQUIPMENT::BAK::FUEL_WEIGHT * fuel_rate + 
+                               EQUIPMENT::BAK::MODULES_NUM_WEIGHT * modules_num_rate;
+    
+    float mass_rate          = (float)data_item.mass / EQUIPMENT::BAK::MASS_MIN;
+    float condition_rate     = (float)condition / data_item.condition_max;
+    
+    price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 void BakEquipment::AddUniqueInfo()
 {
-        info.addTitleStr("BAK");
-        info.addNameStr("fuel:");      info.addValueStr( GetFuelStr() );
+    info.addTitleStr("BAK");
+    info.addNameStr("fuel:");      info.addValueStr( GetFuelStr() );
 }
 
 
 std::string BakEquipment::GetFuelStr()
 {
-         if (fuel_max_add == 0)
-            return int2str(fuel_max_orig) + "/" + int2str(fuel);
-         else
-            return int2str(fuel_max_orig) + "+" + int2str(fuel_max_add) + "/" + int2str(fuel);
+     if (fuel_max_add == 0)
+        return int2str(fuel_max_orig) + "/" + int2str(fuel);
+     else
+        return int2str(fuel_max_orig) + "+" + int2str(fuel_max_add) + "/" + int2str(fuel);
 }
 
 /*virtual*/
 void BakEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "bak_equipment." + int2str(GetId()) + ".";
+
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseEquipment(save_ptree, root);
-    SaveDataUniqueBakEquipment(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    BaseEquipment::SaveData(save_ptree, root);
+    BakEquipment::SaveData(save_ptree, root);
 }
 
 /*virtual*/
 void BakEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseEquipment(load_ptree);
-    LoadDataUniqueBakEquipment(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    BaseEquipment::LoadData(load_ptree);
+    BakEquipment::LoadData(load_ptree);
 }
 
 /*virtual*/
-void BakEquipment::Load()
+void BakEquipment::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueBaseEquipment();
-    ResolveDataUniqueBakEquipment();
+    BaseItem::ResolveData();
+    BaseEquipment::ResolveData();
+    BakEquipment::ResolveData();
 }
 
-void BakEquipment::SaveDataUniqueBakEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void BakEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueBakEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BakEquipment::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-        save_ptree.put(root+"fuel_max_orig", fuel_max_orig);
-        save_ptree.put(root+"fuel", fuel);
+    save_ptree.put(root+"fuel_max_orig", fuel_max_orig);
+    save_ptree.put(root+"fuel", fuel);
 }
                 
-void BakEquipment::LoadDataUniqueBakEquipment(const boost::property_tree::ptree& load_ptree)
+void BakEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueBakEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BakEquipment::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-        fuel_max_orig = load_ptree.get<int>("fuel_max_orig");
-        fuel = load_ptree.get<int>("fuel");
+    fuel_max_orig = load_ptree.get<int>("fuel_max_orig");
+    fuel = load_ptree.get<int>("fuel");
 }                
 
-void BakEquipment::ResolveDataUniqueBakEquipment()
+void BakEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueBakEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BakEquipment::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

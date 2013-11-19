@@ -46,7 +46,7 @@ class BulletData
     
         void Save(boost::property_tree::ptree&, const std::string&) const;
         void Load(const boost::property_tree::ptree&);
-        void Load();
+        void Resolve();
 };
 
 #endif 

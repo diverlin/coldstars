@@ -51,7 +51,7 @@ class RocketEquipment : public BaseEquipment
         
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
               
     private:
         int ammo_max_orig;
@@ -76,9 +76,9 @@ class RocketEquipment : public BaseEquipment
         std::string GetDamageStr();
         std::string GetRadiusStr();
         
-        void SaveDataUniqueRocketEquipment(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueRocketEquipment(const boost::property_tree::ptree&);
-        void ResolveDataUniqueRocketEquipment();  
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();  
 };
 
 #endif 

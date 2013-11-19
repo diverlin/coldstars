@@ -57,7 +57,7 @@ class GrappleEquipment : public BaseEquipment
         
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
     private:
         int strength_orig;
@@ -81,9 +81,9 @@ class GrappleEquipment : public BaseEquipment
         std::string GetRadiusStr();
         std::string GetSpeedStr();
         
-        void SaveDataUniqueGrappleEquipment(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueGrappleEquipment(const boost::property_tree::ptree&);
-        void ResolveDataUniqueGrappleEquipment(); 
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData(); 
 };
 
 #endif 

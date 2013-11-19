@@ -37,8 +37,8 @@ RadarModule::~RadarModule()
 /* virtual */
 void RadarModule::AddUniqueInfo()
 {
-        info.addTitleStr("radar module");
-        info.addNameStr("radius_add:");   info.addValueStr(int2str(radius_add));
+    info.addTitleStr("radar module");
+    info.addNameStr("radius_add:");   info.addValueStr(int2str(radius_add));
 }
 
 /*virtual*/
@@ -46,51 +46,51 @@ void RadarModule::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "radar_module." + int2str(GetId()) + ".";
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseModule(save_ptree, root);
-    SaveDataUniqueRadarModule(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    BaseModule::SaveData(save_ptree, root);
+    RadarModule::SaveData(save_ptree, root);
 }
 
 /*virtual*/        
 void RadarModule::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseModule(load_ptree);
-    LoadDataUniqueRadarModule(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    BaseModule::LoadData(load_ptree);
+    RadarModule::LoadData(load_ptree);
 }
     
 /*virtual*/    
-void RadarModule::Load()
+void RadarModule::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueBaseModule();
-    ResolveDataUniqueRadarModule();
+    BaseItem::ResolveData();
+    BaseModule::ResolveData();
+    RadarModule::ResolveData();
 }
 
-void RadarModule::SaveDataUniqueRadarModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void RadarModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueRadarModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RadarModule::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"radius_add", radius_add);
 }
 
-void RadarModule::LoadDataUniqueRadarModule(const boost::property_tree::ptree& load_ptree)
+void RadarModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueRadarModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RadarModule::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     radius_add = load_ptree.get<int>("radius_add");
 }
 
-void RadarModule::ResolveDataUniqueRadarModule()
+void RadarModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueRadarModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RadarModule::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

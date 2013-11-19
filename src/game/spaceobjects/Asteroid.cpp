@@ -114,21 +114,21 @@ void Asteroid::Render_OLD(const Renderer& render)
 void Asteroid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::SaveDataUniqueAsteroid", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void Asteroid::LoadData(const boost::property_tree::ptree& ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::LoadDataUniqueAsteroid", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void Asteroid::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::ResolveDataUniqueAsteroid", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, GetParent(), data_unresolved_BasePlanet.orbit_it); 
@@ -159,7 +159,7 @@ void Asteroid::Load(const boost::property_tree::ptree& load_ptree)
 }
 
 /* virtual override final */    
-void Asteroid::Load()
+void Asteroid::Resolve()
 {
     Base::ResolveData();
     Orientation::ResolveData();

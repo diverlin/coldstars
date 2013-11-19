@@ -33,7 +33,7 @@ class GravityArtefact : public BaseItem
         
              virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
     private:  
         int gravity;
@@ -41,9 +41,9 @@ class GravityArtefact : public BaseItem
              virtual void AddUniqueInfo();  
              virtual void AddCommonInfo();   
              
-             void SaveDataUniqueGravityArtefact(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueGravityArtefact(const boost::property_tree::ptree&);
-        void ResolveDataUniqueGravityArtefact();                
+             void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();                
 };
 
 #endif

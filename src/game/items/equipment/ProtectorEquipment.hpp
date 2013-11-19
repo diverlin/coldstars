@@ -37,7 +37,7 @@ class ProtectorEquipment  : public BaseEquipment
                                 
               virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
           private:
                     int protection_orig;
@@ -47,9 +47,9 @@ class ProtectorEquipment  : public BaseEquipment
              void virtual AddUniqueInfo();
                std::string GetProtectionStr();
                 
-                void SaveDataUniqueProtectorEquipment(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueProtectorEquipment(const boost::property_tree::ptree&);
-        void ResolveDataUniqueProtectorEquipment();                  
+                void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();                  
 };
 
 #endif 

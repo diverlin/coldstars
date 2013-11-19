@@ -38,7 +38,7 @@ class Bomb : public BaseItem
             
                   virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
         private:
             int damage;
@@ -47,9 +47,9 @@ class Bomb : public BaseItem
             virtual void AddCommonInfo();
          virtual void AddUniqueInfo(); 
          
-         void SaveDataUniqueBomb(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueBomb(const boost::property_tree::ptree&);
-        void ResolveDataUniqueBomb();
+         void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 };
 
 #endif 

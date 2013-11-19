@@ -132,24 +132,24 @@ void SpaceStation::RenderInSpace_3D(const Renderer& render, const glm::vec2& scr
     //RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());        
 }
 
-void SpaceStation::SaveDataUniqueSpaceStation(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SpaceStation("+int2str(GetId())+")::SaveDataUniqueSpaceStation", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" SpaceStation("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void SpaceStation::LoadDataUniqueSpaceStation(const boost::property_tree::ptree& load_ptree)
+void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SpaceStation("+int2str(GetId())+")::LoadDataUniqueSpaceStation", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" SpaceStation("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void SpaceStation::ResolveDataUniqueSpaceStation()
+void SpaceStation::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SpaceStation("+int2str(GetId())+")::ResolveDataUniqueSpaceStation", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" SpaceStation("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
 }
 

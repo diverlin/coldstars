@@ -41,18 +41,18 @@ void Bomb::UpdateOwnerAbilities() {}
 /* virtual */         
 void Bomb::AddCommonInfo()
 {
-        info.addNameStr("mass:");        info.addValueStr(int2str(data_item.mass));
+    info.addNameStr("mass:");        info.addValueStr(int2str(data_item.mass));
 }
 
 /* virtual */
 void Bomb::AddUniqueInfo()
 {
-        info.addTitleStr("BOMB");
+    info.addTitleStr("BOMB");
 
-        //info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
-        info.addNameStr("id:");          info.addValueStr(int2str(GetId()));
-        info.addNameStr("damage:");      info.addValueStr(int2str(damage));
-        //info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
+    //info.addNameStr("id/ss_id:");    info.addValueStr(int2str(data_id.id) + " / " + int2str(starsystem->GetId()));
+    info.addNameStr("id:");          info.addValueStr(int2str(GetId()));
+    info.addNameStr("damage:");      info.addValueStr(int2str(damage));
+    //info.addNameStr("armor:");       info.addValueStr(int2str(data_life.armor));
 }         
 
 /*virtual*/
@@ -60,50 +60,50 @@ void Bomb::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "bomb." + int2str(GetId()) + ".";
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBomb(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    Bomb::SaveData(save_ptree, root);
 }
 
 /*virtual*/
 void Bomb::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBomb(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    LoadData(load_ptree);
 }
     
 /*virtual*/
-void Bomb::Load()
+void Bomb::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueBomb();
+    BaseItem::ResolveData();
+    Bomb::ResolveData();
 }
 
-void Bomb::SaveDataUniqueBomb(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Bomb::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueBomb()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Bomb::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-        save_ptree.put(root+"damage", damage);
-        save_ptree.put(root+"radius", radius);
+    save_ptree.put(root+"damage", damage);
+    save_ptree.put(root+"radius", radius);
 }
          
-void Bomb::LoadDataUniqueBomb(const boost::property_tree::ptree& load_ptree)
+void Bomb::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueBomb()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Bomb::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-        damage = load_ptree.get<int>("damage");
-        radius = load_ptree.get<int>("radius");
+    damage = load_ptree.get<int>("damage");
+    radius = load_ptree.get<int>("radius");
 }
 
-void Bomb::ResolveDataUniqueBomb()
+void Bomb::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueBomb()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Bomb::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

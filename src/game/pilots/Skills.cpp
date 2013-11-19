@@ -214,7 +214,7 @@ void Skills::Load(const boost::property_tree::ptree& load_ptree)
         expirience_nextlevel = load_ptree.get<int>("expirience_nextlevel"); 
 }
 
-void Skills::Load()
+void Skills::Resolve()
 {}
 
 void Skills::ManageAccordingToStrategy()

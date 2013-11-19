@@ -44,14 +44,14 @@ class Galaxy : public Base
 
             void Save(boost::property_tree::ptree&) const;
             void Load(const boost::property_tree::ptree&);
-            void Load();
+            void Resolve();
 
          private:
                std::vector<Sector*> SECTOR_vec;
         
-            void SaveDataUniqueGalaxy(boost::property_tree::ptree&, const std::string&) const;
-            void LoadDataUniqueGalaxy(const boost::property_tree::ptree&);
-            void ResolveDataUniqueGalaxy();
+            void SaveData(boost::property_tree::ptree&, const std::string&) const;
+            void LoadData(const boost::property_tree::ptree&);
+            void ResolveData();
                            
                friend class GuiGalaxyMap;
                friend class Observation;

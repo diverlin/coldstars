@@ -63,7 +63,7 @@ void DistantStarEffect::Save(boost::property_tree::ptree& save_ptree, const std:
 {
     std::string droot = root + "distant_star_effect."+int2str(id)+".";
     
-    BaseBackGroundEffectSaveData(save_ptree, droot);
+    BaseBackGroundEffect::SaveData(save_ptree, droot);
     DistantStarEffect::SaveData(save_ptree, droot);
 }    
 

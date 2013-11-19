@@ -24,7 +24,7 @@
 class ItemSlot;
 class BaseItem;
 
-struct UnresolvedDataUniqueNatureLand
+struct UnresolvedDataNatureLand
 {
     std::string textureOb_background_path;
 };
@@ -57,7 +57,7 @@ class NatureLand : public BaseLand
                                 
                 void Save(boost::property_tree::ptree&) const;
             void Load(const boost::property_tree::ptree&);
-            void Load(); 
+            void Resolve(); 
         
         private:
             TextureOb* textureOb_background;
@@ -65,10 +65,10 @@ class NatureLand : public BaseLand
             std::vector<Vehicle*> VEHICLE_vec;
             std::vector<ItemSlot*> item_slot_vec;
 
-        UnresolvedDataUniqueNatureLand data_unresolved_NatureLand;
-        void SaveDataUniqueNatureLand(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueNatureLand(const boost::property_tree::ptree&);
-        void ResolveDataUniqueNatureLand();
+        UnresolvedDataNatureLand data_unresolved_NatureLand;
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
         
         friend class GuiNatureLand;
 };

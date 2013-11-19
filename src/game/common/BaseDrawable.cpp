@@ -144,10 +144,10 @@ const glm::mat4& BaseDrawable::GetActualModelMatrix()
     return m_MatrixModel;
 }
 
-void BaseDrawable::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void BaseDrawable::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::SaveDataUniqueBaseDrawable", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
         
     if (m_Mesh) save_ptree.put(root+"data_unresolved_BaseDrawable.mesh_type_id", (int)m_Mesh->GetTypeId());
@@ -157,20 +157,20 @@ void BaseDrawable::Save(boost::property_tree::ptree& save_ptree, const std::stri
     else                save_ptree.put(root+"data_unresolved_BaseDrawable.textureOb_path", "none");
 }
 
-void BaseDrawable::Load(const boost::property_tree::ptree& load_ptree)
+void BaseDrawable::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::LoadDataUniqueBaseDrawable", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 
     data_unresolved_BaseDrawable.mesh_type_id = (TYPE::MESH)load_ptree.get<int>("data_unresolved_BaseDrawable.mesh_type_id");
     data_unresolved_BaseDrawable.textureOb_path = load_ptree.get<std::string>("data_unresolved_BaseDrawable.textureOb_path");
 }
 
-void BaseDrawable::Resolve()
+void BaseDrawable::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::ResolveDataUniqueBaseDrawable", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     if (data_unresolved_BaseDrawable.mesh_type_id != TYPE::MESH::NONE_ID)

@@ -36,7 +36,7 @@ class FreezerEquipment : public BaseEquipment
               
             virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
               
           private:
                     int freeze_orig;
@@ -46,9 +46,9 @@ class FreezerEquipment : public BaseEquipment
               void virtual AddUniqueInfo();
                std::string GetFreezeStr();
                 
-                void SaveDataUniqueFreezerEquipment(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueFreezerEquipment(const boost::property_tree::ptree&);
-        void ResolveDataUniqueFreezerEquipment(); 
+                void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData(); 
 };
 
 

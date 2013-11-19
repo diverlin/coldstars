@@ -36,7 +36,7 @@ class DriveModule : public BaseModule
 
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
           private:
               int speed_add;
@@ -44,9 +44,9 @@ class DriveModule : public BaseModule
 
               void virtual AddUniqueInfo();
               
-              void SaveDataUniqueDriveModule(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueDriveModule(const boost::property_tree::ptree&);
-        void ResolveDataUniqueDriveModule();
+              void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 };
 
 #endif

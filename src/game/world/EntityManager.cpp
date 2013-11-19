@@ -667,7 +667,7 @@ void EntityManager::LoadPass1() const
     for (std::map<unsigned long int, Base*>::const_iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
     {
         Logger::Instance().Log("Load() in " + iterator->second->GetDataTypeString());
-        iterator->second->Load();
+        iterator->second->Resolve();
     }
 
     Logger::Instance().Log("RESOLVING DEPENDENCY FINISHED");

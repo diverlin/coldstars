@@ -47,7 +47,7 @@ class EnergizerEquipment : public BaseEquipment
                     
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
     private:
         int energy_max_orig;
@@ -63,9 +63,9 @@ class EnergizerEquipment : public BaseEquipment
         std::string GetEnergyStr();
         std::string GetRestorationStr();
         
-        void SaveDataUniqueEnergizerEquipment(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueEnergizerEquipment(const boost::property_tree::ptree&);
-        void ResolveDataUniqueEnergizerEquipment(); 
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData(); 
 };
 
 

@@ -81,51 +81,51 @@ void ProtectorEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "protector_equipment." + int2str(GetId()) + ".";
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseEquipment(save_ptree, root);
-    SaveDataUniqueProtectorEquipment(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    BaseEquipment::SaveData(save_ptree, root);
+    ProtectorEquipment::SaveData(save_ptree, root);
 }
 
 /*virtual*/
 void ProtectorEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseEquipment(load_ptree);
-    LoadDataUniqueProtectorEquipment(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    BaseEquipment::LoadData(load_ptree);
+    ProtectorEquipment::LoadData(load_ptree);
 }
 
 /*virtual*/
-void ProtectorEquipment::Load()
+void ProtectorEquipment::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueBaseEquipment();
-    ResolveDataUniqueProtectorEquipment();
+    BaseItem::ResolveData();
+    BaseEquipment::ResolveData();
+    ProtectorEquipment::ResolveData();
 }
 
-void ProtectorEquipment::SaveDataUniqueProtectorEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void ProtectorEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueProtectorEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorEquipment::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
         save_ptree.put(root+"protection_orig", protection_orig);
 }
                 
-void ProtectorEquipment::LoadDataUniqueProtectorEquipment(const boost::property_tree::ptree& load_ptree)
+void ProtectorEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueProtectorEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorEquipment::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
         protection_orig = load_ptree.get<int>("protection_orig");     
 }                
 
-void ProtectorEquipment::ResolveDataUniqueProtectorEquipment()
+void ProtectorEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueProtectorEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorEquipment::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

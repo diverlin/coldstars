@@ -37,60 +37,61 @@ DroidModule::~DroidModule()
 /* virtual */    
 void DroidModule::AddUniqueInfo()
 {
-        info.addTitleStr("droid module");
-        info.addNameStr("repair_add:");   info.addValueStr( int2str(repair_add) );
+    info.addTitleStr("droid module");
+    info.addNameStr("repair_add:");   info.addValueStr( int2str(repair_add) );
 }
 
 /*virtual*/
 void DroidModule::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "droid_module." + int2str(GetId()) + ".";
+    
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseModule(save_ptree, root);
-    SaveDataUniqueDroidModule(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    BaseModule::SaveData(save_ptree, root);
+    DroidModule::SaveData(save_ptree, root);
 }
 
 /*virtual*/        
 void DroidModule::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseModule(load_ptree);
-    LoadDataUniqueDroidModule(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    BaseModule::LoadData(load_ptree);
+    DroidModule::LoadData(load_ptree);
 }
     
 /*virtual*/    
-void DroidModule::Load()
+void DroidModule::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueBaseModule();
-    ResolveDataUniqueDroidModule();
+    BaseItem::ResolveData();
+    BaseModule::ResolveData();
+    DroidModule::ResolveData();
 }
 
-void DroidModule::SaveDataUniqueDroidModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void DroidModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueDroidModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidModule::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"repair_add", repair_add);
 }
 
-void DroidModule::LoadDataUniqueDroidModule(const boost::property_tree::ptree& load_ptree)
+void DroidModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueDroidModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidModule::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     repair_add = load_ptree.get<int>("repair_add");
 }
 
-void DroidModule::ResolveDataUniqueDroidModule()
+void DroidModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueDroidModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidModule::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

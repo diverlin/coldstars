@@ -109,21 +109,21 @@ void VehicleSlot::Resolve()
 void VehicleSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::SaveDataUniqueVehicleSlot", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void VehicleSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::LoadDataUniqueVehicleSlot", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void VehicleSlot::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::ResolveDataUniqueVehicleSlot", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
 
         switch(owner->GetTypeId())

@@ -34,7 +34,7 @@ class StarSystem;
 #include "../text/InfoTable.hpp"
 #include "../pilots/AgressorData.hpp"
 
-struct UnresolvedDataUniqueNpc
+struct UnresolvedDataNpc
 {
     int vehicle_id;    
     int aiModel_id;
@@ -101,7 +101,7 @@ class Npc : public Base
         
         void Save(boost::property_tree::ptree&) const;
         void Load(const boost::property_tree::ptree&);
-        void Load();
+        void Resolve();
         
         void ApplySkillsStrategy();
         
@@ -128,16 +128,16 @@ class Npc : public Base
         
         Observation observation;
         
-        UnresolvedDataUniqueNpc data_unresolved_npc;
+        UnresolvedDataNpc data_unresolved_npc;
         
         void ScenarioFireVehicleAgressor();
         void ScenarioFireAsteroid();
         
         void UpdateInfo();
         
-        void SaveDataUniqueNpc(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueNpc(const boost::property_tree::ptree&);
-        void ResolveDataUniqueNpc();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 };
 
 

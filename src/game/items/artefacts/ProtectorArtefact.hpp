@@ -31,9 +31,9 @@ class ProtectorArtefact : public BaseItem
         
         int GetProtection() const { return protection; };
         
-             virtual void Save(boost::property_tree::ptree&) const;
+            virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
     private:  
         int protection;
@@ -41,9 +41,9 @@ class ProtectorArtefact : public BaseItem
              virtual void AddUniqueInfo();  
              virtual void AddCommonInfo();   
              
-             void SaveDataUniqueProtectorArtefact(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueProtectorArtefact(const boost::property_tree::ptree&);
-        void ResolveDataUniqueProtectorArtefact();                
+             void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();                
 };
 
 #endif

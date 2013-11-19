@@ -39,69 +39,70 @@ EnergizerModule::~EnergizerModule()
 /* virtual */
 void EnergizerModule::AddUniqueInfo()
 {
-        info.addTitleStr("energizer module");
-        if (energy_max_add != 0)
-        { 
-            info.addNameStr("energy_max_add:");  info.addValueStr( int2str(energy_max_add) );
-        }
-        if (restoration_add != 0)
-        {
-            info.addNameStr("restoration_add:"); info.addValueStr( int2str(restoration_add) );
-        } 
+    info.addTitleStr("energizer module");
+    if (energy_max_add != 0)
+    { 
+        info.addNameStr("energy_max_add:");  info.addValueStr( int2str(energy_max_add) );
+    }
+    if (restoration_add != 0)
+    {
+        info.addNameStr("restoration_add:"); info.addValueStr( int2str(restoration_add) );
+    } 
 }
 
 /*virtual*/
 void EnergizerModule::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "energizer_module." + int2str(GetId()) + ".";
+    
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseModule(save_ptree, root);
-    SaveDataUniqueEnergizerModule(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    BaseModule::SaveData(save_ptree, root);
+    EnergizerModule::SaveData(save_ptree, root);
 }
 
 /*virtual*/        
 void EnergizerModule::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseModule(load_ptree);
-    LoadDataUniqueEnergizerModule(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    BaseModule::LoadData(load_ptree);
+    EnergizerModule::LoadData(load_ptree);
 }
     
 /*virtual*/    
-void EnergizerModule::Load()
+void EnergizerModule::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueBaseModule();
-    ResolveDataUniqueEnergizerModule();
+    BaseItem::ResolveData();
+    BaseModule::ResolveData();
+    EnergizerModule::ResolveData();
 }
 
-void EnergizerModule::SaveDataUniqueEnergizerModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void EnergizerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueEnergizerModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" EnergizerModule::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"energy_max_add", energy_max_add);
     save_ptree.put(root+"restoration_add", restoration_add);
 }
 
-void EnergizerModule::LoadDataUniqueEnergizerModule(const boost::property_tree::ptree& load_ptree)
+void EnergizerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueEnergizerModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" EnergizerModule::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     energy_max_add = load_ptree.get<int>("energy_max_add");
     restoration_add = load_ptree.get<int>("restoration_add");
 }
 
-void EnergizerModule::ResolveDataUniqueEnergizerModule()
+void EnergizerModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueEnergizerModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" EnergizerModule::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

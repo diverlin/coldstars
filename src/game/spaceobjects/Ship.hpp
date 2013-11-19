@@ -40,12 +40,12 @@ class Ship : public Vehicle
         
         virtual void Save(boost::property_tree::ptree&) const override final;
         virtual void Load(const boost::property_tree::ptree&) override final;
-        virtual void Load() override final;
+        virtual void Resolve() override final;
          
     private:        
-        void SaveDataUniqueShip(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueShip(const boost::property_tree::ptree&);
-        void ResolveDataUniqueShip();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 };
 
 #endif 

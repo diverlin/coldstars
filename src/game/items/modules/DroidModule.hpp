@@ -33,16 +33,16 @@ class DroidModule : public BaseModule
         
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
          private:
                     int repair_add;
                     
                     void virtual AddUniqueInfo();
                     
-                    void SaveDataUniqueDroidModule(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueDroidModule(const boost::property_tree::ptree&);
-        void ResolveDataUniqueDroidModule();
+                    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 };
 
 #endif

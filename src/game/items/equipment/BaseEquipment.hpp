@@ -42,9 +42,9 @@ class BaseEquipment : public BaseItem
         
         virtual void AddCommonInfo();
         
-        void SaveDataUniqueBaseEquipment(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueBaseEquipment(const boost::property_tree::ptree&);
-        void ResolveDataUniqueBaseEquipment();   
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();   
 };
 
 #endif 

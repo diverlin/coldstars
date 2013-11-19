@@ -41,7 +41,7 @@ class SpaceStation : public Vehicle
                 
         virtual void Save(boost::property_tree::ptree&) const override final;
         virtual void Load(const boost::property_tree::ptree&) override final;
-        virtual void Load() override final;
+        virtual void Resolve() override final;
             
     private:
         BaseLand* m_Land;
@@ -51,9 +51,9 @@ class SpaceStation : public Vehicle
             
         virtual void PutChildsToGarbage() const override final;
             
-        void SaveDataUniqueSpaceStation(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueSpaceStation(const boost::property_tree::ptree&);
-        void ResolveDataUniqueSpaceStation();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 };
 
 

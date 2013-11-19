@@ -39,7 +39,7 @@ class Satellite : public Vehicle
                 
         virtual void Save(boost::property_tree::ptree&) const override final;
         virtual void Load(const boost::property_tree::ptree&) override final;
-        virtual void Load() override final;
+        virtual void Resolve() override final;
             
     private:
         Orbit m_Orbit;
@@ -47,9 +47,9 @@ class Satellite : public Vehicle
         virtual void UpdateInfo() override final;
         void UpdateRenderStuff();     
                         
-        void SaveDataUniqueSatellite(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueSatellite(const boost::property_tree::ptree&);
-        void ResolveDataUniqueSatellite();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 };
 
 

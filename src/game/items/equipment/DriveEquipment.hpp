@@ -40,7 +40,7 @@ class DriveEquipment : public BaseEquipment
                                             
               virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
           private:
                     int speed_orig;
@@ -55,9 +55,9 @@ class DriveEquipment : public BaseEquipment
                std::string GetSpeedStr();
                std::string GetHyperStr();   
                 
-                void SaveDataUniqueDriveEquipment(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueDriveEquipment(const boost::property_tree::ptree&);
-        void ResolveDataUniqueDriveEquipment();  
+                void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();  
 };
 
 
