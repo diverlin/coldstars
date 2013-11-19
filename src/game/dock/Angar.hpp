@@ -54,9 +54,9 @@ class Angar : public Room
                              
                 std::string GetDockVehicleStr() const;
                                                         
-                void SaveData(boost::property_tree::ptree&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+                void Save(boost::property_tree::ptree&) const;
+        void Load(const boost::property_tree::ptree&);
+        void Load();
         
         private:               
                 std::vector<VehicleSlot*> vehicle_total_slot_vec;

@@ -37,9 +37,9 @@ class Turrel : public BaseDrawable
         
         virtual void PutChildsToGarbage() const {};
         
-        virtual void SaveData(boost::property_tree::ptree&) const {};
-        virtual void LoadData(const boost::property_tree::ptree&) {};
-        virtual void ResolveData() {};
+        virtual void Save(boost::property_tree::ptree&) const {};
+        virtual void Load(const boost::property_tree::ptree&) {};
+        virtual void Load() {};
            
     private:                       
         ItemSlot* slot;

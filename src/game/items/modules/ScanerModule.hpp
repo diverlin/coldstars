@@ -31,9 +31,9 @@ class ScanerModule : public BaseModule
         void SetScanAdd(int scan_add) { this->scan_add = scan_add; };                
         int GetScanAdd() const { return scan_add; };
              
-             virtual void SaveData(boost::property_tree::ptree&) const;
-        virtual void LoadData(const boost::property_tree::ptree&);
-        virtual void ResolveData();
+             virtual void Save(boost::property_tree::ptree&) const;
+        virtual void Load(const boost::property_tree::ptree&);
+        virtual void Load();
         
            private:
                int scan_add;

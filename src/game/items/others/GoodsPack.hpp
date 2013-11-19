@@ -33,9 +33,9 @@ class GoodsPack : public BaseItem
 
         virtual void UpdateOwnerAbilities();
         
-        virtual void SaveData(boost::property_tree::ptree&) const;
-        virtual void LoadData(const boost::property_tree::ptree&);
-        virtual void ResolveData();
+        virtual void Save(boost::property_tree::ptree&) const;
+        virtual void Load(const boost::property_tree::ptree&);
+        virtual void Load();
         
     private:
         virtual void AddCommonInfo();

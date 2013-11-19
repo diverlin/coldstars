@@ -1070,7 +1070,7 @@ bool StarSystem::IsAnyActiveParticlesEffectPresent(int request_type_id) const
 void StarSystem::PostDeathUniqueEvent(bool) 
 {}
 
-void StarSystem::SaveDataUniqueStarSystem(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void StarSystem::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     save_ptree.put(root+"sector_id", sector->GetId());
     
@@ -1081,17 +1081,17 @@ void StarSystem::SaveDataUniqueStarSystem(boost::property_tree::ptree& save_ptre
             
     for (unsigned int i=0; i<distantStarEffect_vec.size(); i++)
     {
-        distantStarEffect_vec[i]->SaveData(save_ptree, root);
+        distantStarEffect_vec[i]->Save(save_ptree, root);
     }
 
     for (unsigned int i = 0; i<distantNebulaEffect_vec.size(); i++)
     {
-        distantNebulaEffect_vec[i]->SaveData(save_ptree, root);
+        distantNebulaEffect_vec[i]->Save(save_ptree, root);
     }
 
 }
 
-void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& load_ptree)
+void StarSystem::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     data_unresolved_StarSystem.sector_id = load_ptree.get<int>("sector_id");
     
@@ -1106,8 +1106,8 @@ void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& loa
         for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_nebula_effect"))
         {
             DistantNebulaEffect* dn = GetNewDistantNebulaEffect(NONE_ID);
-            dn->LoadData(v.second);
-            dn->ResolveData();
+            dn->Load(v.second);
+            dn->Load();
             Add(dn);
         }
     }
@@ -1117,37 +1117,38 @@ void StarSystem::LoadDataUniqueStarSystem(const boost::property_tree::ptree& loa
         for (boost::property_tree::ptree::value_type &v : tmp_ptree.get_child("distant_star_effect"))
         {
             DistantStarEffect* ds = GetNewDistantStarEffect(NONE_ID);
-            ds->LoadData(v.second);
-            ds->ResolveData();
+            ds->Load(v.second);
+            ds->Load();
             Add(ds);
         }
     }
 }
 
-void StarSystem::ResolveDataUniqueStarSystem()
+void StarSystem::ResolveData()
 {
     ((Sector*)EntityManager::Instance().GetEntityById(data_unresolved_StarSystem.sector_id))->Add(this, data_unresolved_Orientation.center);
 }
 
-void StarSystem::SaveData(boost::property_tree::ptree& save_ptree) const
+void StarSystem::Save(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "starsystem." + int2str(GetStarSystem()->GetId())+".";
-    Base::Save(save_ptree, root);
-    BaseSpaceEntity::Save(save_ptree, root);
-    SaveDataUniqueStarSystem(save_ptree, root);
+
+    Base::SaveData(save_ptree, root);
+    BaseSpaceEntity::SaveData(save_ptree, root);
+    StarSystem::SaveData(save_ptree, root);
 }
 
-void StarSystem::LoadData(const boost::property_tree::ptree& load_ptree)
+void StarSystem::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    BaseSpaceEntity::Load(load_ptree);
-    LoadDataUniqueStarSystem(load_ptree);
+    Base::LoadData(load_ptree);
+    BaseSpaceEntity::LoadData(load_ptree);
+    StarSystem::LoadData(load_ptree);
 }
 
-void StarSystem::ResolveData()
+void StarSystem::Resolve()
 {
-    Base::Resolve(); 
-    BaseSpaceEntity::Resolve(); 
-    ResolveDataUniqueStarSystem(); 
+    Base::ResolveData(); 
+    BaseSpaceEntity::ResolveData(); 
+    StarSystem::ResolveData(); 
 }        
 

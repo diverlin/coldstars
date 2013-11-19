@@ -39,9 +39,9 @@ class SpaceStation : public Vehicle
         void RenderInSpace_2D(const Renderer&, float);
         void RenderInSpace_3D(const Renderer&, const glm::vec2&, float);         
                 
-        virtual void SaveData(boost::property_tree::ptree&) const override final;
-        virtual void LoadData(const boost::property_tree::ptree&) override final;
-        virtual void ResolveData() override final;
+        virtual void Save(boost::property_tree::ptree&) const override final;
+        virtual void Load(const boost::property_tree::ptree&) override final;
+        virtual void Load() override final;
             
     private:
         BaseLand* m_Land;

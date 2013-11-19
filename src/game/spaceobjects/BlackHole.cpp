@@ -91,21 +91,21 @@ void BlackHole::Render_OLD(const Renderer& render)
     render.RenderMeshGeometry(GetMesh(), GetTextureOb(), GetActualModelMatrix());    
 }
      
-void BlackHole::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void BlackHole::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::SaveDataUniqueBlackHole", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void BlackHole::Load(const boost::property_tree::ptree& load_ptree)
+void BlackHole::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::LoadDataUniqueBlackHole", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void BlackHole::Resolve()
+void BlackHole::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::ResolveDataUniqueBlackHole", SAVELOAD_LOG_DIP);
@@ -115,35 +115,36 @@ void BlackHole::Resolve()
 }
  
 /*virtual*/
-void BlackHole::SaveData(boost::property_tree::ptree& save_ptree) const
+void BlackHole::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "blackhole." + int2str(GetId())+".";
-    Base::Save(save_ptree, root);
-    Orientation::Save(save_ptree, root);
-    BaseDrawable::Save(save_ptree, root);
-    BaseSpaceEntity::Save(save_ptree, root);
-    BasePlanet::Save(save_ptree, root);
-    Save(save_ptree, root);
+
+    Base::SaveData(save_ptree, root);
+    Orientation::SaveData(save_ptree, root);
+    BaseDrawable::SaveData(save_ptree, root);
+    BaseSpaceEntity::SaveData(save_ptree, root);
+    BasePlanet::SaveData(save_ptree, root);
+    BlackHole::SaveData(save_ptree, root);
 }
 
 /*virtual*/        
-void BlackHole::LoadData(const boost::property_tree::ptree& load_ptree)
+void BlackHole::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    Orientation::Load(load_ptree);
-    BaseDrawable::Load(load_ptree);
-    BaseSpaceEntity::Load(load_ptree);
-    BasePlanet::Load(load_ptree);
-    Load(load_ptree);
+    Base::LoadData(load_ptree);
+    Orientation::LoadData(load_ptree);
+    BaseDrawable::LoadData(load_ptree);
+    BaseSpaceEntity::LoadData(load_ptree);
+    BasePlanet::LoadData(load_ptree);
+    BlackHole::LoadData(load_ptree);
 }
     
 /*virtual*/    
-void BlackHole::ResolveData()
+void BlackHole::Resolve()
 {
-    Base::Resolve();
-    Orientation::Resolve();
-    BaseDrawable::Resolve();
-    BaseSpaceEntity::Resolve();
-    BasePlanet::Resolve();
-    Resolve();
+    Base::ResolveData();
+    Orientation::ResolveData();
+    BaseDrawable::ResolveData();
+    BaseSpaceEntity::ResolveData();
+    BasePlanet::ResolveData();
+    BlackHole::ResolveData();
 }

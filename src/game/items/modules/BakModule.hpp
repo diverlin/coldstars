@@ -31,9 +31,9 @@ class BakModule : public BaseModule
          void SetFuelMaxAdd(int fuel_max_add) { this->fuel_max_add = fuel_max_add; };
          int GetFuelMaxAdd() const { return fuel_max_add; };
 
-        virtual void SaveData(boost::property_tree::ptree&) const;
-        virtual void LoadData(const boost::property_tree::ptree&);
-        virtual void ResolveData();
+        virtual void Save(boost::property_tree::ptree&) const;
+        virtual void Load(const boost::property_tree::ptree&);
+        virtual void Load();
         
          private:
               int fuel_max_add;

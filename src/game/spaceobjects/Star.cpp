@@ -151,7 +151,7 @@ void Star::PostDeathUniqueEvent(bool)
 {}
 
    
-void Star::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Star::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Star("+int2str(GetId())+")::SaveDataUniqueStar", SAVELOAD_LOG_DIP);
@@ -161,7 +161,7 @@ void Star::Save(boost::property_tree::ptree& save_ptree, const std::string& root
     save_ptree.put(root+"m_TurnSparkThreshold", m_TurnSparkThreshold);
 }
 
-void Star::Load(const boost::property_tree::ptree& load_ptree)
+void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Star("+int2str(GetId())+")::LoadDataUniqueStar", SAVELOAD_LOG_DIP);
@@ -171,7 +171,7 @@ void Star::Load(const boost::property_tree::ptree& load_ptree)
     m_TurnSparkThreshold = load_ptree.get<int>("m_TurnSparkThreshold");    
 }
 
-void Star::Resolve()
+void Star::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Star("+int2str(GetId())+")::ResolveDataUniqueStar", SAVELOAD_LOG_DIP);
@@ -181,35 +181,36 @@ void Star::Resolve()
 }
 
 /* virtual override final */
-void Star::SaveData(boost::property_tree::ptree& save_ptree) const
+void Star::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "star." + int2str(GetId())+".";
-    Base::Save(save_ptree, root);
-    Orientation::Save(save_ptree, root);
-    BaseDrawable::Save(save_ptree, root);
-    BaseSpaceEntity::Save(save_ptree, root);
-    BasePlanet::Save(save_ptree, root);
-    Save(save_ptree, root);
+
+    Base::SaveData(save_ptree, root);
+    Orientation::SaveData(save_ptree, root);
+    BaseDrawable::SaveData(save_ptree, root);
+    BaseSpaceEntity::SaveData(save_ptree, root);
+    BasePlanet::SaveData(save_ptree, root);
+    Star::SaveData(save_ptree, root);
 }
 
 /* virtual override final */
-void Star::LoadData(const boost::property_tree::ptree& load_ptree)
+void Star::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    Orientation::Load(load_ptree);
-    BaseDrawable::Load(load_ptree);
-    BaseSpaceEntity::Load(load_ptree);
-    BasePlanet::Load(load_ptree);
-    Load(load_ptree);
+    Base::LoadData(load_ptree);
+    Orientation::LoadData(load_ptree);
+    BaseDrawable::LoadData(load_ptree);
+    BaseSpaceEntity::LoadData(load_ptree);
+    BasePlanet::LoadData(load_ptree);
+    Star::LoadData(load_ptree);
 }
 
 /* virtual override final */
-void Star::ResolveData()
+void Star::Load()
 {
-    Base::Resolve();
-    Orientation::Resolve();
-    BaseDrawable::Resolve();
-    BaseSpaceEntity::Resolve();
-    BasePlanet::Resolve();
-    Resolve();
+    Base::ResolveData();
+    Orientation::ResolveData();
+    BaseDrawable::ResolveData();
+    BaseSpaceEntity::ResolveData();
+    BasePlanet::ResolveData();
+    Star::ResolveData();
 }

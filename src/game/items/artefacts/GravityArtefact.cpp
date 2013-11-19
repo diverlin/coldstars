@@ -48,27 +48,27 @@ void GravityArtefact::AddCommonInfo()
 }
 
 /* virtual */
-void GravityArtefact::SaveData(boost::property_tree::ptree& save_ptree) const
+void GravityArtefact::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "gravity_artefact." + int2str(GetId()) + ".";
-    Base::Save(save_ptree, root);
-    SaveDataUniqueBaseItem(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
     SaveDataUniqueGravityArtefact(save_ptree, root);
 }
 
 /* virtual */
-void GravityArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
+void GravityArtefact::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    LoadDataUniqueBaseItem(load_ptree);
+    Base::LoadData(load_ptree);
+    BaseItem::LoadData(load_ptree);
     LoadDataUniqueGravityArtefact(load_ptree);
 }
 
 /* virtual */
-void GravityArtefact::ResolveData()
+void GravityArtefact::Load()
 {
-    Base::Resolve();
-    ResolveDataUniqueBaseItem();
+    Base::ResolveData();
+    BaseItem::ResolveData();
     ResolveDataUniqueGravityArtefact();
 }        
         

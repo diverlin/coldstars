@@ -48,27 +48,27 @@ void ProtectorArtefact::AddCommonInfo()
 }
 
 /* virtual */
-void ProtectorArtefact::SaveData(boost::property_tree::ptree& save_ptree) const
+void ProtectorArtefact::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "protector_artefact." + int2str(GetId()) + ".";    
-    Base::Save(save_ptree, root);
-        SaveDataUniqueBaseItem(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+        BaseItem::SaveData(save_ptree, root);
     SaveDataUniqueProtectorArtefact(save_ptree, root);
 }
 
 /* virtual */
-void ProtectorArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
+void ProtectorArtefact::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-        LoadDataUniqueBaseItem(load_ptree);
+    Base::LoadData(load_ptree);
+        BaseItem::LoadData(load_ptree);
     LoadDataUniqueProtectorArtefact(load_ptree);
 }
 
 /* virtual */
-void ProtectorArtefact::ResolveData()
+void ProtectorArtefact::Load()
 {
-    Base::Resolve();
-        ResolveDataUniqueBaseItem();
+    Base::ResolveData();
+        BaseItem::ResolveData();
     ResolveDataUniqueProtectorArtefact();
 }        
         

@@ -42,29 +42,29 @@ void RadarModule::AddUniqueInfo()
 }
 
 /*virtual*/
-void RadarModule::SaveData(boost::property_tree::ptree& save_ptree) const
+void RadarModule::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "radar_module." + int2str(GetId()) + ".";
-    Base::Save(save_ptree, root);
-        SaveDataUniqueBaseItem(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+        BaseItem::SaveData(save_ptree, root);
     SaveDataUniqueBaseModule(save_ptree, root);
     SaveDataUniqueRadarModule(save_ptree, root);
 }
 
 /*virtual*/        
-void RadarModule::LoadData(const boost::property_tree::ptree& load_ptree)
+void RadarModule::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-        LoadDataUniqueBaseItem(load_ptree);
+    Base::LoadData(load_ptree);
+        BaseItem::LoadData(load_ptree);
     LoadDataUniqueBaseModule(load_ptree);
     LoadDataUniqueRadarModule(load_ptree);
 }
     
 /*virtual*/    
-void RadarModule::ResolveData()
+void RadarModule::Load()
 {
-    Base::Resolve();
-        ResolveDataUniqueBaseItem();
+    Base::ResolveData();
+        BaseItem::ResolveData();
     ResolveDataUniqueBaseModule();
     ResolveDataUniqueRadarModule();
 }

@@ -35,41 +35,42 @@ Goverment::~Goverment()
 {}
 
 
-void Goverment::SaveDataUniqueGoverment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Goverment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     //save_ptree.put(root+"unresolved.angar_id",     angar->GetId());
 
 }
 
-void Goverment::LoadDataUniqueGoverment(const boost::property_tree::ptree& load_ptree)
+void Goverment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     //data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
 }
 
-void Goverment::ResolveDataUniqueGoverment()
+void Goverment::ResolveData()
 {
     ((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindGoverment(this); 
 }
 
-void Goverment::SaveData(boost::property_tree::ptree& save_ptree) const
+void Goverment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "goverment." + int2str(GetId())+".";
-    Base::Save(save_ptree, root);
-    SaveDataUniqueRoom(save_ptree, root);
-    SaveDataUniqueGoverment(save_ptree, root);
+    
+    Base::SaveData(save_ptree, root);
+    Room::SaveData(save_ptree, root);
+    Goverment::SaveData(save_ptree, root);
 }
 
-void Goverment::LoadData(const boost::property_tree::ptree& load_ptree)
+void Goverment::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    LoadDataUniqueRoom(load_ptree);
-    LoadDataUniqueGoverment(load_ptree);
+    Base::LoadData(load_ptree);
+    Room::LoadDataUniqueRoom(load_ptree);
+    Goverment::LoadData(load_ptree);
 }
 
-void Goverment::ResolveData()
+void Goverment::Resolve()
 {
-    Base::Resolve();
-    ResolveDataUniqueRoom();
-    ResolveDataUniqueGoverment();
+    Base::ResolveData();
+    Room::ResolveData();
+    Goverment::ResolveData();
 }
 

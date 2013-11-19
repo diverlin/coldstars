@@ -29,7 +29,7 @@
 #include "../../spaceobjects/Vehicle.hpp"
 #include "../../spaceobjects/RocketBullet.hpp"
 
-void BulletData::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void BulletData::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {           
     std::string sroot = root+"data_bullet.";
     save_ptree.put(sroot+"damage", damage);        
@@ -42,7 +42,7 @@ void BulletData::SaveData(boost::property_tree::ptree& save_ptree, const std::st
     save_ptree.put(sroot+"angular_speed", angular_speed); 
 }    
 
-void BulletData::LoadData(const boost::property_tree::ptree& load_ptree)
+void BulletData::Load(const boost::property_tree::ptree& load_ptree)
 {
     damage = load_ptree.get<int>("damage"); 
     armor = load_ptree.get<int>("armor"); 
@@ -54,7 +54,7 @@ void BulletData::LoadData(const boost::property_tree::ptree& load_ptree)
     angular_speed = load_ptree.get<float>("angular_speed"); 
 }
 
-void BulletData::ResolveData()
+void BulletData::Load()
 {}
 
 
@@ -202,29 +202,29 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 }
 
 /*virtual*/
-void RocketEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
+void RocketEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "rocket_equipment." + int2str(GetId()) + ".";
-    Base::Save(save_ptree, root);
-    SaveDataUniqueBaseItem(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
     SaveDataUniqueBaseEquipment(save_ptree, root);
     SaveDataUniqueRocketEquipment(save_ptree, root);
 }
 
 /*virtual*/
-void RocketEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
+void RocketEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    LoadDataUniqueBaseItem(load_ptree);
+    Base::LoadData(load_ptree);
+    BaseItem::LoadData(load_ptree);
     LoadDataUniqueBaseEquipment(load_ptree);
     LoadDataUniqueRocketEquipment(load_ptree);
 }
 
 /*virtual*/
-void RocketEquipment::ResolveData()
+void RocketEquipment::Load()
 {
-    Base::Resolve();
-    ResolveDataUniqueBaseItem();
+    Base::ResolveData();
+    BaseItem::ResolveData();
     ResolveDataUniqueBaseEquipment();
     ResolveDataUniqueRocketEquipment();
 }
@@ -241,7 +241,7 @@ void RocketEquipment::SaveDataUniqueRocketEquipment(boost::property_tree::ptree&
     save_ptree.put(root+"radius_orig", radius_orig);
     save_ptree.put(root+"fire_atOnce", fire_atOnce);
     
-    data_bullet.SaveData(save_ptree, root);
+    data_bullet.Save(save_ptree, root);
 }
                 
 void RocketEquipment::LoadDataUniqueRocketEquipment(const boost::property_tree::ptree& load_ptree)
@@ -256,7 +256,7 @@ void RocketEquipment::LoadDataUniqueRocketEquipment(const boost::property_tree::
     radius_orig = load_ptree.get<int>("radius_orig");   
     fire_atOnce = load_ptree.get<int>("fire_atOnce");  
 
-    data_bullet.LoadData(load_ptree.get_child("data_bullet"));
+    data_bullet.Load(load_ptree.get_child("data_bullet"));
 }                
 
 void RocketEquipment::ResolveDataUniqueRocketEquipment()
@@ -265,7 +265,7 @@ void RocketEquipment::ResolveDataUniqueRocketEquipment()
     Logger::Instance().Log(" ResolveDataUniqueRocketEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-    data_bullet.ResolveData();
+    data_bullet.Load();
 }
 
 

@@ -28,7 +28,7 @@ void Task::Reset()
     expiriance = 0;
 }
 
-void Task::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    
+void Task::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const    
 {
     save_ptree.put(root+"result",     result);
     save_ptree.put(root+"reward",     reward);
@@ -37,7 +37,7 @@ void Task::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
     save_ptree.put(root+"target_id", target_id);    
 }
 
-void Task::LoadData(const boost::property_tree::ptree& load_ptree)
+void Task::Load(const boost::property_tree::ptree& load_ptree)
 {
     result     = load_ptree.get<int>("result");
     reward     = load_ptree.get<int>("reward");

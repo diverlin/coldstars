@@ -138,38 +138,39 @@ void Sector::Update(int time)
     //}
 //}
         
-void Sector::SaveDataUniqueSector(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Sector::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     save_ptree.put(root+"galaxy_id", galaxy->GetId());
 }
 
-void Sector::LoadDataUniqueSector(const boost::property_tree::ptree& load_ptree)
+void Sector::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     data_unresolved_Sector.galaxy_id = load_ptree.get<int>("galaxy_id");
 }
 
-void Sector::ResolveDataUniqueSector()
+void Sector::ResolveData()
 {
     ((Galaxy*)EntityManager::Instance().GetEntityById(data_unresolved_Sector.galaxy_id))->Add(this, data_unresolved_Orientation.center);
 }
 
-void Sector::SaveData(boost::property_tree::ptree& save_ptree) const
+void Sector::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "sector." + int2str(GetId())+".";
-    Base::Save(save_ptree, root); 
-    SaveDataUniqueSector(save_ptree, root); 
+
+    Base::SaveData(save_ptree, root); 
+    Sector::SaveData(save_ptree, root); 
 }
 
-void Sector::LoadData(const boost::property_tree::ptree& load_ptree)
+void Sector::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree); 
-    LoadDataUniqueSector(load_ptree); 
+    Base::LoadData(load_ptree); 
+    Sector::LoadData(load_ptree); 
 }
 
-void Sector::ResolveData()
+void Sector::Resolve()
 {
-    Base::Resolve();  
-    ResolveDataUniqueSector();  
+    Base::ResolveData();  
+    Sector::ResolveData();  
 }
             
             

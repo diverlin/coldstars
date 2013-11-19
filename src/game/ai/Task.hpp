@@ -46,8 +46,8 @@ class Task
         
         void Reset();
                 
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
+        void Save(boost::property_tree::ptree&, const std::string&) const;
+        void Load(const boost::property_tree::ptree&);
                 
     protected:
         int result;

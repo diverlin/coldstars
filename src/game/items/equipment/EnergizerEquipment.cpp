@@ -109,29 +109,29 @@ std::string EnergizerEquipment::GetRestorationStr()
 }
 
 /*virtual*/
-void EnergizerEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
+void EnergizerEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "energizer_equipment." + int2str(GetId()) + ".";
-    Base::Save(save_ptree, root);
-        SaveDataUniqueBaseItem(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+        BaseItem::SaveData(save_ptree, root);
     SaveDataUniqueBaseEquipment(save_ptree, root);
     SaveDataUniqueEnergizerEquipment(save_ptree, root);
 }
 
 /*virtual*/
-void EnergizerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
+void EnergizerEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-        LoadDataUniqueBaseItem(load_ptree);
+    Base::LoadData(load_ptree);
+        BaseItem::LoadData(load_ptree);
     LoadDataUniqueBaseEquipment(load_ptree);
     LoadDataUniqueEnergizerEquipment(load_ptree);
 }
 
 /*virtual*/
-void EnergizerEquipment::ResolveData()
+void EnergizerEquipment::Load()
 {
-    Base::Resolve();
-        ResolveDataUniqueBaseItem();
+    Base::ResolveData();
+        BaseItem::ResolveData();
     ResolveDataUniqueBaseEquipment();
     ResolveDataUniqueEnergizerEquipment();
 }

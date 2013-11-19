@@ -38,9 +38,9 @@ class GrappleModule : public BaseModule
         int GetSpeedAdd()      const { return speed_add; };
         int GetMaxNumItemAdd() const { return maxNumItem_add; };
               
-              virtual void SaveData(boost::property_tree::ptree&) const;
-        virtual void LoadData(const boost::property_tree::ptree&);
-        virtual void ResolveData();
+              virtual void Save(boost::property_tree::ptree&) const;
+        virtual void Load(const boost::property_tree::ptree&);
+        virtual void Load();
         
           private: 
                      int strength_add;

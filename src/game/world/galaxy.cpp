@@ -105,32 +105,33 @@ void Galaxy::FillStarSystemsCondition(StarSystemsConditionData& data_starsystems
     //}
 }
         
-void Galaxy::SaveDataUniqueGalaxy(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Galaxy::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {}
-
-void Galaxy::LoadDataUniqueGalaxy(const boost::property_tree::ptree& load_ptree)
-{}
-
-void Galaxy::ResolveDataUniqueGalaxy()
-{}
-
-void Galaxy::SaveData(boost::property_tree::ptree& save_ptree) const
-{
-    std::string root = "galaxy." + int2str(GetId())+".";
-    Base::Save(save_ptree, root); 
-    SaveDataUniqueGalaxy(save_ptree, root); 
-}
 
 void Galaxy::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    Base::Load(load_ptree); 
-    LoadDataUniqueGalaxy(load_ptree); 
-}
+{}
 
 void Galaxy::ResolveData()
+{}
+
+void Galaxy::Save(boost::property_tree::ptree& save_ptree) const
 {
-    Base::Resolve();  
-    ResolveDataUniqueGalaxy();  
+    std::string root = "galaxy." + int2str(GetId())+".";
+
+    Base::SaveData(save_ptree, root); 
+    Galaxy::SaveData(save_ptree, root); 
+}
+
+void Galaxy::Load(const boost::property_tree::ptree& load_ptree)
+{
+    Base::LoadData(load_ptree); 
+    Galaxy::LoadData(load_ptree); 
+}
+
+void Galaxy::Resolve()
+{
+    Base::ResolveData();  
+    Galaxy::ResolveData();  
 }
             
             

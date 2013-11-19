@@ -49,9 +49,9 @@ class Shop : public Room
             bool SellGoods(Npc*, TYPE::ENTITY, int);
             int BuyGoods(GoodsPack*);
                             
-                void SaveData(boost::property_tree::ptree&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+                void Save(boost::property_tree::ptree&) const;        
+        void Load(const boost::property_tree::ptree&);
+        void Load();
         
         private:   
                 int minerals_amount;

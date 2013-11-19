@@ -125,34 +125,35 @@ std::string Kosmoport::GetDockVehicleStr() const
 }                
 
 
-void Kosmoport::SaveDataUniqueKosmoport(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Kosmoport::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {}
-
-void Kosmoport::LoadDataUniqueKosmoport(const boost::property_tree::ptree& load_ptree)
-{}
-
-void Kosmoport::ResolveDataUniqueKosmoport()
-{}
-
-
-void Kosmoport::SaveData(boost::property_tree::ptree& save_ptree) const
-{
-    std::string root = "kosmoport." + int2str(GetId())+".";
-    Base::Save(save_ptree, root);
-    SaveDataUniqueBaseLand(save_ptree, root);
-    SaveDataUniqueKosmoport(save_ptree, root);
-}
 
 void Kosmoport::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    Base::Load(load_ptree);
-    LoadDataUniqueBaseLand(load_ptree);
-    LoadDataUniqueKosmoport(load_ptree);
-}
+{}
 
 void Kosmoport::ResolveData()
+{}
+
+
+void Kosmoport::Save(boost::property_tree::ptree& save_ptree) const
 {
-    Base::Resolve();
-    ResolveDataUniqueBaseLand();
-    ResolveDataUniqueKosmoport();
+    std::string root = "kosmoport." + int2str(GetId())+".";
+
+    Base::SaveData(save_ptree, root);
+    BaseLand::SaveData(save_ptree, root);
+    Kosmoport::SaveData(save_ptree, root);
+}
+
+void Kosmoport::Load(const boost::property_tree::ptree& load_ptree)
+{
+    Base::LoadData(load_ptree);
+    BaseLand::LoadData(load_ptree);
+    Kosmoport::LoadData(load_ptree);
+}
+
+void Kosmoport::Resolve()
+{
+    Base::ResolveData();
+    BaseLand::ResolveData();
+    Kosmoport::ResolveData();
 }

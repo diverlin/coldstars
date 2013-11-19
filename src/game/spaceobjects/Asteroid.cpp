@@ -111,21 +111,21 @@ void Asteroid::Render_OLD(const Renderer& render)
     render.RenderMeshGeometry(GetMesh(), GetTextureOb(), GetActualModelMatrix());       
 }
 
-void Asteroid::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Asteroid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::SaveDataUniqueAsteroid", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void Asteroid::Load(const boost::property_tree::ptree& ptree)
+void Asteroid::LoadData(const boost::property_tree::ptree& ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::LoadDataUniqueAsteroid", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void Asteroid::Resolve()
+void Asteroid::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::ResolveDataUniqueAsteroid", SAVELOAD_LOG_DIP);
@@ -135,38 +135,38 @@ void Asteroid::Resolve()
 }
 
 /* virtual override final */    
-void Asteroid::SaveData(boost::property_tree::ptree& save_ptree) const        
+void Asteroid::Save(boost::property_tree::ptree& save_ptree) const        
 {
     std::string root = "asteroid." + int2str(GetId())+".";
 
-    Base::Save(save_ptree, root);
-    Orientation::Save(save_ptree, root);
-    BaseDrawable::Save(save_ptree, root);
-    BaseSpaceEntity::Save(save_ptree, root);
-    BasePlanet::Save(save_ptree, root);
-    Save(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+    Orientation::SaveData(save_ptree, root);
+    BaseDrawable::SaveData(save_ptree, root);
+    BaseSpaceEntity::SaveData(save_ptree, root);
+    BasePlanet::SaveData(save_ptree, root);
+    Asteroid::SaveData(save_ptree, root);
 }
 
 /* virtual override final */    
-void Asteroid::LoadData(const boost::property_tree::ptree& load_ptree)
+void Asteroid::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    Orientation::Load(load_ptree);
-    BaseDrawable::Load(load_ptree);
-    BaseSpaceEntity::Load(load_ptree);
-    BasePlanet::Load(load_ptree);
-    Load(load_ptree);
+    Base::LoadData(load_ptree);
+    Orientation::LoadData(load_ptree);
+    BaseDrawable::LoadData(load_ptree);
+    BaseSpaceEntity::LoadData(load_ptree);
+    BasePlanet::LoadData(load_ptree);
+    Asteroid::LoadData(load_ptree);
 }
 
 /* virtual override final */    
-void Asteroid::ResolveData()
+void Asteroid::Load()
 {
-    Base::Resolve();
-    Orientation::Resolve();
-    BaseDrawable::Resolve();
-    BaseSpaceEntity::Resolve();
-    BasePlanet::Resolve();
-    Resolve();
+    Base::ResolveData();
+    Orientation::ResolveData();
+    BaseDrawable::ResolveData();
+    BaseSpaceEntity::ResolveData();
+    BasePlanet::ResolveData();
+    Asteroid::ResolveData();
 }    
         
 
