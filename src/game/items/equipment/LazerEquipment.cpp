@@ -155,7 +155,7 @@ void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, flo
 void LazerEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "lazer_equipment." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
     SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueBaseEquipment(save_ptree, root);
     SaveDataUniqueLazerEquipment(save_ptree, root);
@@ -164,7 +164,7 @@ void LazerEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/
 void LazerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
     LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueBaseEquipment(load_ptree);
     LoadDataUniqueLazerEquipment(load_ptree);
@@ -173,7 +173,7 @@ void LazerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/
 void LazerEquipment::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
     ResolveDataUniqueBaseItem();
     ResolveDataUniqueBaseEquipment();
     ResolveDataUniqueLazerEquipment();

@@ -146,7 +146,7 @@ std::string NatureLand::GetDockVehicleStr() const
 void NatureLand::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "natureland."+int2str(GetId())+".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
     SaveDataUniqueBaseLand(save_ptree, root);
     SaveDataUniqueNatureLand(save_ptree, root);
 }
@@ -154,7 +154,7 @@ void NatureLand::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/
 void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
     LoadDataUniqueBaseLand(load_ptree);
     LoadDataUniqueNatureLand(load_ptree);
 }
@@ -162,7 +162,7 @@ void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/
 void NatureLand::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
     ResolveDataUniqueBaseLand();
     ResolveDataUniqueNatureLand();
 }

@@ -98,7 +98,7 @@ std::string DroidEquipment::GetRepairStr()
 void DroidEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "droid_equipment." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
         SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueBaseEquipment(save_ptree, root);
     SaveDataUniqueDroidEquipment(save_ptree, root);
@@ -107,7 +107,7 @@ void DroidEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/
 void DroidEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueBaseEquipment(load_ptree);
     LoadDataUniqueDroidEquipment(load_ptree);
@@ -116,7 +116,7 @@ void DroidEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/
 void DroidEquipment::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
         ResolveDataUniqueBaseItem();
     ResolveDataUniqueBaseEquipment();
     ResolveDataUniqueDroidEquipment();

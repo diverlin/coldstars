@@ -265,7 +265,7 @@ std::string GrappleEquipment::GetSpeedStr()
 void GrappleEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "grapple_equipment." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
     SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueBaseEquipment(save_ptree, root);
     SaveDataUniqueGrappleEquipment(save_ptree, root);
@@ -274,7 +274,7 @@ void GrappleEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/
 void GrappleEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
     LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueBaseEquipment(load_ptree);
     LoadDataUniqueGrappleEquipment(load_ptree);
@@ -283,7 +283,7 @@ void GrappleEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/
 void GrappleEquipment::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
     ResolveDataUniqueBaseItem();
     ResolveDataUniqueBaseEquipment();
     ResolveDataUniqueGrappleEquipment();

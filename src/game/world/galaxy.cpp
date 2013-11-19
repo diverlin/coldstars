@@ -117,19 +117,19 @@ void Galaxy::ResolveDataUniqueGalaxy()
 void Galaxy::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "galaxy." + int2str(GetId())+".";
-    SaveDataUniqueBase(save_ptree, root); 
+    Base::Save(save_ptree, root); 
     SaveDataUniqueGalaxy(save_ptree, root); 
 }
 
 void Galaxy::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree); 
+    Base::Load(load_ptree); 
     LoadDataUniqueGalaxy(load_ptree); 
 }
 
 void Galaxy::ResolveData()
 {
-    ResolveDataUniqueBase();  
+    Base::Resolve();  
     ResolveDataUniqueGalaxy();  
 }
             

@@ -544,7 +544,7 @@ bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* target) const
 void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "item_slot." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
     SaveDataUniqueBaseSlot(save_ptree, root);
     SaveDataUniqueItemSlot(save_ptree, root);
 }
@@ -552,7 +552,7 @@ void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/        
 void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
     LoadDataUniqueBaseSlot(load_ptree);
     LoadDataUniqueItemSlot(load_ptree);
 }
@@ -560,7 +560,7 @@ void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/    
 void ItemSlot::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
     ResolveDataUniqueBaseSlot();
     ResolveDataUniqueItemSlot();
 }

@@ -156,19 +156,19 @@ void Sector::ResolveDataUniqueSector()
 void Sector::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "sector." + int2str(GetId())+".";
-    SaveDataUniqueBase(save_ptree, root); 
+    Base::Save(save_ptree, root); 
     SaveDataUniqueSector(save_ptree, root); 
 }
 
 void Sector::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree); 
+    Base::Load(load_ptree); 
     LoadDataUniqueSector(load_ptree); 
 }
 
 void Sector::ResolveData()
 {
-    ResolveDataUniqueBase();  
+    Base::Resolve();  
     ResolveDataUniqueSector();  
 }
             

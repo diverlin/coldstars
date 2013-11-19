@@ -1126,19 +1126,19 @@ void Player::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "player."+int2str(GetId())+".";
     
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
     SaveDataUniquePlayer(save_ptree, root);    
 }        
 
 void Player::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
     LoadDataUniquePlayer(load_ptree);       
 }        
 
 void Player::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
     ResolveDataUniquePlayer();    
 }
         

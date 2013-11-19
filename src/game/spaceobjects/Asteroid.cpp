@@ -138,7 +138,7 @@ void Asteroid::ResolveDataUniqueAsteroid()
 void Asteroid::SaveData(boost::property_tree::ptree& save_ptree) const        
 {
     std::string root = "asteroid." + int2str(GetId())+".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
     SaveDataUniqueOrientation(save_ptree, root);
     SaveDataUniqueBaseDrawable(save_ptree, root);
     SaveDataUniqueBaseSpaceEntity(save_ptree, root);
@@ -149,7 +149,7 @@ void Asteroid::SaveData(boost::property_tree::ptree& save_ptree) const
 /* virtual override final */    
 void Asteroid::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
     LoadDataUniqueOrientation(load_ptree);
     LoadDataUniqueBaseDrawable(load_ptree);
     LoadDataUniqueBaseSpaceEntity(load_ptree);
@@ -160,7 +160,7 @@ void Asteroid::LoadData(const boost::property_tree::ptree& load_ptree)
 /* virtual override final */    
 void Asteroid::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
     ResolveDataUniqueOrientation();
     ResolveDataUniqueBaseDrawable();
     ResolveDataUniqueBaseSpaceEntity();

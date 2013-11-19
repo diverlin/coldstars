@@ -161,21 +161,21 @@ void Store::ResolveDataUniqueStore()
 void Store::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "store." + int2str(GetId())+".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
     SaveDataUniqueRoom(save_ptree, root);
     SaveDataUniqueStore(save_ptree, root);
 }
 
 void Store::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
     LoadDataUniqueRoom(load_ptree);
     LoadDataUniqueStore(load_ptree);
 }
 
 void Store::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
     ResolveDataUniqueRoom();
     ResolveDataUniqueStore();
 }

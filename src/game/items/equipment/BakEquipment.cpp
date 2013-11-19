@@ -91,7 +91,7 @@ std::string BakEquipment::GetFuelStr()
 void BakEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "bak_equipment." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
         SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueBaseEquipment(save_ptree, root);
     SaveDataUniqueBakEquipment(save_ptree, root);
@@ -100,7 +100,7 @@ void BakEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/
 void BakEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueBaseEquipment(load_ptree);
     LoadDataUniqueBakEquipment(load_ptree);
@@ -109,7 +109,7 @@ void BakEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/
 void BakEquipment::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
         ResolveDataUniqueBaseItem();
     ResolveDataUniqueBaseEquipment();
     ResolveDataUniqueBakEquipment();

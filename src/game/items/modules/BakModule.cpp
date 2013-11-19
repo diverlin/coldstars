@@ -45,7 +45,7 @@ void BakModule::AddUniqueInfo()
 void BakModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "bak_module." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
     SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueBaseModule(save_ptree, root);
     SaveDataUniqueBakModule(save_ptree, root);
@@ -54,7 +54,7 @@ void BakModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/        
 void BakModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-        LoadDataUniqueBase(load_ptree);
+        Base::Load(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueBaseModule(load_ptree);
     LoadDataUniqueBakModule(load_ptree);
@@ -63,7 +63,7 @@ void BakModule::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/    
 void BakModule::ResolveData()
 {
-        ResolveDataUniqueBase();
+        Base::Resolve();
         ResolveDataUniqueBaseItem();
     ResolveDataUniqueBaseModule();
     ResolveDataUniqueBakModule();

@@ -53,7 +53,7 @@ void LazerModule::AddUniqueInfo()
 void LazerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "lazer_module." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
         SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueBaseModule(save_ptree, root);
     SaveDataUniqueLazerModule(save_ptree, root);
@@ -62,7 +62,7 @@ void LazerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/        
 void LazerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueBaseModule(load_ptree);
     LoadDataUniqueLazerModule(load_ptree);
@@ -71,7 +71,7 @@ void LazerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/    
 void LazerModule::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
         ResolveDataUniqueBaseItem();
     ResolveDataUniqueBaseModule();
     ResolveDataUniqueLazerModule();

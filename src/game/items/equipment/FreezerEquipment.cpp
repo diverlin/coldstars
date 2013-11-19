@@ -80,7 +80,7 @@ std::string FreezerEquipment::GetFreezeStr()
 void FreezerEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "freezer_equipment." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
         SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueBaseEquipment(save_ptree, root);
     SaveDataUniqueFreezerEquipment(save_ptree, root);
@@ -89,7 +89,7 @@ void FreezerEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/
 void FreezerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueBaseEquipment(load_ptree);
     LoadDataUniqueFreezerEquipment(load_ptree);
@@ -98,7 +98,7 @@ void FreezerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/
 void FreezerEquipment::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
         ResolveDataUniqueBaseItem();
     ResolveDataUniqueBaseEquipment();
     ResolveDataUniqueFreezerEquipment();

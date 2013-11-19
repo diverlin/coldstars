@@ -311,19 +311,19 @@ bool Npc::BuyGoods()
 void Npc::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "npc."+int2str(GetId())+".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
     SaveDataUniqueNpc(save_ptree, root);    
 }        
 
 void Npc::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
     LoadDataUniqueNpc(load_ptree);       
 }        
 
 void Npc::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
     ResolveDataUniqueNpc();    
 }
   

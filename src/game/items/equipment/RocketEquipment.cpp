@@ -205,7 +205,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 void RocketEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "rocket_equipment." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
     SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueBaseEquipment(save_ptree, root);
     SaveDataUniqueRocketEquipment(save_ptree, root);
@@ -214,7 +214,7 @@ void RocketEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/
 void RocketEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
     LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueBaseEquipment(load_ptree);
     LoadDataUniqueRocketEquipment(load_ptree);
@@ -223,7 +223,7 @@ void RocketEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/
 void RocketEquipment::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
     ResolveDataUniqueBaseItem();
     ResolveDataUniqueBaseEquipment();
     ResolveDataUniqueRocketEquipment();
