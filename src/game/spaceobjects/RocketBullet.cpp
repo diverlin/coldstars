@@ -210,7 +210,7 @@ void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
     Base::Save(save_ptree, root);
     Orientation::Save(save_ptree, root);
     BaseDrawable::Save(save_ptree, root);
-    BaseSpaceEntity::Save((save_ptree, root);
+    BaseSpaceEntity::Save(save_ptree, root);
     SaveDataUniqueRocketBullet(save_ptree, root);
 }
 

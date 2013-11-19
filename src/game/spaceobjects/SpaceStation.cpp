@@ -161,7 +161,7 @@ void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const
     Base::Save(save_ptree, root);
     Orientation::Save(save_ptree, root);
     BaseDrawable::Save(save_ptree, root);
-    BaseSpaceEntity::Save((save_ptree, root);
+    BaseSpaceEntity::Save(save_ptree, root);
     SaveDataUniqueVehicle(save_ptree, root);
     SaveDataUniqueSpaceStation(save_ptree, root);
 }
