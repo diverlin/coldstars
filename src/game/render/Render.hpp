@@ -103,13 +103,6 @@ class Renderer : public NonCopyable
         GLuint m_ProgramBlur;        
 };
 
-// LINE
-void drawLine(const TextureOb& texOb, 
-              const glm::vec3& start_pos, 
-              float len, 
-              float angle_inD, 
-              int half_h);
-
 // TEXT
 void drawColoredTextWithBackground(const std::string&, 
                int,

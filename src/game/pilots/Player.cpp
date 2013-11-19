@@ -569,10 +569,11 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             */           
             //render.enable_BLEND();
             //{
-                //for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
-                //{ 
-                    //visible_effect_LAZERTRACE_vec[i]->Render(); 
-                //}
+                for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
+                { 
+                    LazerTraceEffect& lazer_trace = *visible_effect_LAZERTRACE_vec[i];
+                    render.RenderMeshGeometry(lazer_trace.GetMesh(), lazer_trace.GetTextureOb(), lazer_trace.GetActualModelMatrix()); 
+                }
         
                 //render.enable_POINTSPRITE();
                 //{
