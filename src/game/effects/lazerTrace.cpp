@@ -21,7 +21,10 @@
 #include <glm/gtx/transform.hpp>
 #include <math/QuaternionUtils.hpp>
 
-#include <effects/particlesystem/BaseParticleSystem.hpp>
+#include <effects/particlesystem/BaseParticleSystem.hpp> 
+
+
+#include <resources/MeshCollector.hpp>     // remove
 
 
 LazerTraceEffect::LazerTraceEffect(TextureOb* textureOb, const glm::vec3* const start_pos, const glm::vec3* const end_pos)
@@ -31,6 +34,7 @@ m_TextureOb(textureOb),
 m_pStartPos(start_pos),
 m_pEndPos(end_pos)
 {
+    MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
     m_LiveTime = 40;
 }
 

@@ -22,6 +22,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 
+class Mesh;
 class TextureOb;
 class BaseParticleSystem;
 
@@ -31,20 +32,24 @@ class LazerTraceEffect
         LazerTraceEffect(TextureOb*, const glm::vec3* const, const glm::vec3* const);
         ~LazerTraceEffect();
 
-        bool GetIsAlive() const { return m_IsAlive; };
+        bool GetIsAlive() const { return m_IsAlive; }
 
         void BindParticleSystem(BaseParticleSystem* particle_system) { m_ParticleSystem = particle_system; }
         
-        const glm::vec3& GetStartPos() const { return *m_pStartPos; };
-        const glm::vec3& GetEndPos() const { return *m_pEndPos; };
-                
-        void Update();
+        const glm::vec3& GetStartPos() const { return *m_pStartPos; }
+        const glm::vec3& GetEndPos() const { return *m_pEndPos; }
+
         const glm::mat4& GetActualModelMatrix();
+        const Mesh& GetMesh() const { return *m_Mesh; }                
+        const TextureOb& GetTextureOb() const { return *m_TextureOb; }  
+
+        void Update();
                     
      private:
         bool m_IsAlive;
         int m_LiveTime;
         
+        Mesh* m_Mesh;
         TextureOb* m_TextureOb;
         BaseParticleSystem* m_ParticleSystem;
 

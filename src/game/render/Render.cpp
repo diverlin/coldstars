@@ -433,30 +433,6 @@ void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) 
     glEnable(GL_TEXTURE_2D);
 }
 
-void drawLine(const TextureOb& texOb, 
-              const glm::vec3& start_pos, 
-              float len, 
-              float angle_inD, 
-              int half_h)
-{
-    /*
-    glBindTexture(GL_TEXTURE_2D, texOb.texture);
-    int frame = 0;//texOb.updateAnimationFrame();
-        
-    glPushMatrix();
-        glTranslatef(start_pos.x, start_pos.y, start_pos.z);
-        glRotatef(angle_inD, 0.0, 0.0, 1.0);
-    
-        glBegin(GL_QUADS);
-            glTexCoord3f(texOb.texCoord_bottomLeft_vec[frame].x,  texOb.texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(0,   -half_h, 0.0);
-            glTexCoord3f(texOb.texCoord_bottomRight_vec[frame].x, texOb.texCoord_bottomRight_vec[frame].y, 0); glVertex3f(len, -half_h, 0.0);
-            glTexCoord3f(texOb.texCoord_topRight_vec[frame].x,    texOb.texCoord_topRight_vec[frame].y,    0); glVertex3f(len,  half_h, 0.0);
-            glTexCoord3f(texOb.texCoord_topLeft_vec[frame].x,     texOb.texCoord_topLeft_vec[frame].y,     0); glVertex3f(0,    half_h, 0.0);
-        glEnd();
-    glPopMatrix();
-    */
-}
-
 void drawColoredTextWithBackground(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color)
 {
     //float char_w = font_size;
