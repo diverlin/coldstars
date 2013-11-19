@@ -45,7 +45,7 @@ void FreezerModule::AddUniqueInfo()
 void FreezerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "freezer_module." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
         SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueBaseModule(save_ptree, root);
     SaveDataUniqueFreezerModule(save_ptree, root);
@@ -54,7 +54,7 @@ void FreezerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/        
 void FreezerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueBaseModule(load_ptree);
     LoadDataUniqueFreezerModule(load_ptree);
@@ -63,7 +63,7 @@ void FreezerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/    
 void FreezerModule::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
         ResolveDataUniqueBaseItem();
     ResolveDataUniqueBaseModule();
     ResolveDataUniqueFreezerModule();

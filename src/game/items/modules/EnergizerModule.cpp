@@ -54,7 +54,7 @@ void EnergizerModule::AddUniqueInfo()
 void EnergizerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "energizer_module." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
         SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueBaseModule(save_ptree, root);
     SaveDataUniqueEnergizerModule(save_ptree, root);
@@ -63,7 +63,7 @@ void EnergizerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/        
 void EnergizerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueBaseModule(load_ptree);
     LoadDataUniqueEnergizerModule(load_ptree);
@@ -72,7 +72,7 @@ void EnergizerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/    
 void EnergizerModule::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
         ResolveDataUniqueBaseItem();
     ResolveDataUniqueBaseModule();
     ResolveDataUniqueEnergizerModule();

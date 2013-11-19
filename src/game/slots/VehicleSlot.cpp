@@ -84,7 +84,7 @@ void VehicleSlot::Render(const Rect& rect) const
 void VehicleSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "vehicle_slot." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
     SaveDataUniqueBaseSlot(save_ptree, root);
     SaveDataUniqueVehicleSlot(save_ptree, root);
 }
@@ -92,7 +92,7 @@ void VehicleSlot::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/        
 void VehicleSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
     LoadDataUniqueBaseSlot(load_ptree);
     LoadDataUniqueVehicleSlot(load_ptree);
 }
@@ -100,7 +100,7 @@ void VehicleSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/    
 void VehicleSlot::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
     ResolveDataUniqueBaseSlot();
     ResolveDataUniqueVehicleSlot();
 }

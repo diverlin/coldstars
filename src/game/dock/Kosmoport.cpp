@@ -138,21 +138,21 @@ void Kosmoport::ResolveDataUniqueKosmoport()
 void Kosmoport::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "kosmoport." + int2str(GetId())+".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
     SaveDataUniqueBaseLand(save_ptree, root);
     SaveDataUniqueKosmoport(save_ptree, root);
 }
 
 void Kosmoport::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
     LoadDataUniqueBaseLand(load_ptree);
     LoadDataUniqueKosmoport(load_ptree);
 }
 
 void Kosmoport::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
     ResolveDataUniqueBaseLand();
     ResolveDataUniqueKosmoport();
 }

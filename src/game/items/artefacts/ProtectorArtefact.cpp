@@ -51,7 +51,7 @@ void ProtectorArtefact::AddCommonInfo()
 void ProtectorArtefact::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "protector_artefact." + int2str(GetId()) + ".";    
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
         SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueProtectorArtefact(save_ptree, root);
 }
@@ -59,7 +59,7 @@ void ProtectorArtefact::SaveData(boost::property_tree::ptree& save_ptree) const
 /* virtual */
 void ProtectorArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueProtectorArtefact(load_ptree);
 }
@@ -67,7 +67,7 @@ void ProtectorArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
 /* virtual */
 void ProtectorArtefact::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
         ResolveDataUniqueBaseItem();
     ResolveDataUniqueProtectorArtefact();
 }        

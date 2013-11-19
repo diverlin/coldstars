@@ -158,7 +158,7 @@ void SpaceStation::ResolveDataUniqueSpaceStation()
 void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "spacestation."+int2str(GetId())+".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
     SaveDataUniqueOrientation(save_ptree, root);
     SaveDataUniqueBaseDrawable(save_ptree, root);
     SaveDataUniqueBaseSpaceEntity(save_ptree, root);
@@ -169,7 +169,7 @@ void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree) const
 /* virtual override final */
 void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
     LoadDataUniqueOrientation(load_ptree);
     LoadDataUniqueBaseDrawable(load_ptree);
     LoadDataUniqueBaseSpaceEntity(load_ptree);
@@ -180,7 +180,7 @@ void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
 /* virtual override final */
 void SpaceStation::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
     ResolveDataUniqueOrientation();
     ResolveDataUniqueBaseDrawable();
     ResolveDataUniqueBaseSpaceEntity();

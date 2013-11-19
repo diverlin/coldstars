@@ -254,21 +254,21 @@ void Shop::ResolveDataUniqueShop()
 void Shop::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "shop." + int2str(GetId())+".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
     SaveDataUniqueRoom(save_ptree, root);
     SaveDataUniqueShop(save_ptree, root);
 }
 
 void Shop::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
     LoadDataUniqueRoom(load_ptree);
     LoadDataUniqueShop(load_ptree);
 }
 
 void Shop::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
     ResolveDataUniqueRoom();
     ResolveDataUniqueShop();
 }

@@ -59,7 +59,7 @@ void RocketModule::AddUniqueInfo()
 void RocketModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "rocket_module." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
         SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueBaseModule(save_ptree, root);
     SaveDataUniqueRocketModule(save_ptree, root);
@@ -68,7 +68,7 @@ void RocketModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/        
 void RocketModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueBaseModule(load_ptree);
     LoadDataUniqueRocketModule(load_ptree);
@@ -77,7 +77,7 @@ void RocketModule::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/    
 void RocketModule::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
         ResolveDataUniqueBaseItem();
     ResolveDataUniqueBaseModule();
     ResolveDataUniqueRocketModule();

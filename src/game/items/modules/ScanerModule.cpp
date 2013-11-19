@@ -45,7 +45,7 @@ void ScanerModule::AddUniqueInfo()
 void ScanerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "scaner_module." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
         SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueBaseModule(save_ptree, root);
     SaveDataUniqueScanerModule(save_ptree, root);
@@ -54,7 +54,7 @@ void ScanerModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/        
 void ScanerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueBaseModule(load_ptree);
     LoadDataUniqueScanerModule(load_ptree);
@@ -63,7 +63,7 @@ void ScanerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/    
 void ScanerModule::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
         ResolveDataUniqueBaseItem();
     ResolveDataUniqueBaseModule();
     ResolveDataUniqueScanerModule();

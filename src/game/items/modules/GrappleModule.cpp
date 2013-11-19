@@ -63,7 +63,7 @@ void GrappleModule::AddUniqueInfo()
 void GrappleModule::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "grapple_module." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
         SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueBaseModule(save_ptree, root);
     SaveDataUniqueGrappleModule(save_ptree, root);
@@ -72,7 +72,7 @@ void GrappleModule::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/        
 void GrappleModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueBaseModule(load_ptree);
     LoadDataUniqueGrappleModule(load_ptree);
@@ -81,7 +81,7 @@ void GrappleModule::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/    
 void GrappleModule::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
         ResolveDataUniqueBaseItem();
     ResolveDataUniqueBaseModule();
     ResolveDataUniqueGrappleModule();

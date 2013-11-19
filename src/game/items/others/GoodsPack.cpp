@@ -69,7 +69,7 @@ void GoodsPack::AddCommonInfo()
 void GoodsPack::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "goods_pack." + int2str(GetId()) + ".";
-    SaveDataUniqueBase(save_ptree, root);
+    Base::Save(save_ptree, root);
         SaveDataUniqueBaseItem(save_ptree, root);
     SaveDataUniqueGoodsPack(save_ptree, root);
 }
@@ -77,7 +77,7 @@ void GoodsPack::SaveData(boost::property_tree::ptree& save_ptree) const
 /*virtual*/
 void GoodsPack::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBase(load_ptree);
+    Base::Load(load_ptree);
         LoadDataUniqueBaseItem(load_ptree);
     LoadDataUniqueGoodsPack(load_ptree);
 }
@@ -85,7 +85,7 @@ void GoodsPack::LoadData(const boost::property_tree::ptree& load_ptree)
 /*virtual*/
 void GoodsPack::ResolveData()
 {
-    ResolveDataUniqueBase();
+    Base::Resolve();
         ResolveDataUniqueBaseItem();
     ResolveDataUniqueGoodsPack();
 }

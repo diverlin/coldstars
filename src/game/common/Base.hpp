@@ -50,9 +50,9 @@ class Base : private NonCopyable
         void SetTypeId(TYPE::ENTITY type_id)       { m_Data_id.type_id = type_id; }
         void SetSubTypeId(TYPE::ENTITY subtype_id) { m_Data_id.subtype_id = subtype_id; }
         
-        void SaveDataUniqueBase(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueBase(const boost::property_tree::ptree&);
-        void ResolveDataUniqueBase();
+        void Save(boost::property_tree::ptree&, const std::string&) const;
+        void Load(const boost::property_tree::ptree&);
+        void Resolve();
 
     private:
         IdData m_Data_id;    
