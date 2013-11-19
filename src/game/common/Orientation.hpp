@@ -23,7 +23,7 @@
 #include <common/Base.hpp>
 #include <common/points.hpp>
 
-struct UnresolvedDataUniqueOrientation
+struct UnresolvedDataOrientation
 {    
     glm::vec3 center;
     glm::vec3 direction; 
@@ -63,10 +63,10 @@ class Orientation : public Base
         void UpdateOrientation();     //depr
                                 
     protected:            
-        UnresolvedDataUniqueOrientation data_unresolved_Orientation;
-        void SaveDataUniqueOrientation(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueOrientation(const boost::property_tree::ptree&);
-        void ResolveDataUniqueOrientation();
+        UnresolvedDataOrientation data_unresolved_Orientation;
+        void Save(boost::property_tree::ptree&, const std::string&) const;
+        void Load(const boost::property_tree::ptree&);
+        void Resolve();
 
         void SetCollisionRadius(float collision_radius) { m_CollisionRadius = collision_radius; }    
                         

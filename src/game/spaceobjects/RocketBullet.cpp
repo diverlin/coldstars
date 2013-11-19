@@ -208,7 +208,7 @@ void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "rocketbullet."+int2str(GetId())+".";
     Base::Save(save_ptree, root);
-    SaveDataUniqueOrientation(save_ptree, root);
+    Orientation::Save(save_ptree, root);
     SaveDataUniqueBaseDrawable(save_ptree, root);
     SaveDataUniqueBaseSpaceEntity(save_ptree, root);
     SaveDataUniqueRocketBullet(save_ptree, root);
@@ -218,7 +218,7 @@ void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
 void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     Base::Load(load_ptree);
-    LoadDataUniqueOrientation(load_ptree);
+    Orientation::Load(load_ptree);
     LoadDataUniqueBaseDrawable(load_ptree);
     LoadDataUniqueBaseSpaceEntity(load_ptree);
     LoadDataUniqueRocketBullet(load_ptree);
@@ -228,7 +228,7 @@ void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
 void RocketBullet::ResolveData()
 {
     Base::Resolve();
-    ResolveDataUniqueOrientation();
+    Orientation::Resolve();
     ResolveDataUniqueBaseDrawable();
     ResolveDataUniqueBaseSpaceEntity();
     ResolveDataUniqueRocketBullet();
