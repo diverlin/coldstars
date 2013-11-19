@@ -63,9 +63,9 @@ class Planet : public BasePlanet
         
         void PostDeathUniqueEvent(bool);
         
-        void SaveDataUniquePlanet(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniquePlanet(const boost::property_tree::ptree&);
-        void ResolveDataUniquePlanet();
+        void Save(boost::property_tree::ptree&, const std::string&) const;
+        void Load(const boost::property_tree::ptree&);
+        void Resolve();
 }; 
  
 #endif 

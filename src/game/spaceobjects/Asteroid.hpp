@@ -45,9 +45,9 @@ class Asteroid : public BasePlanet
 
         virtual void UpdateInfo() override final;
         
-        void SaveDataUniqueAsteroid(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueAsteroid(const boost::property_tree::ptree&);
-        void ResolveDataUniqueAsteroid();
+        void Save(boost::property_tree::ptree&, const std::string&) const;        
+        void Load(const boost::property_tree::ptree&);
+        void Resolve();
 }; 
 
 #endif 

@@ -61,9 +61,9 @@ class Star : public BasePlanet
         virtual void UpdateInfo() override final;
         virtual void PostDeathUniqueEvent(bool) override final;
         
-        void SaveDataUniqueStar(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueStar(const boost::property_tree::ptree&);
-        void ResolveDataUniqueStar();
+        void Save(boost::property_tree::ptree&, const std::string&) const;        
+        void Load(const boost::property_tree::ptree&);
+        void Resolve();
 }; 
 
 

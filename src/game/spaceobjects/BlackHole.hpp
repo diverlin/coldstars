@@ -17,11 +17,11 @@
 */
 
 
-#ifndef BLACKHOLE_H
-#define BLACKHOLE_H
+#ifndef BLACKHOLE_HPP
+#define BLACKHOLE_HPP
 
-#include "../effects/ShockWaveEffect.hpp"
-#include "BasePlanet.hpp"
+#include <effects/ShockWaveEffect.hpp> //depr
+#include <spaceobjects/BasePlanet.hpp>
 
 class BlackHole : public BasePlanet
 {
@@ -49,9 +49,9 @@ class BlackHole : public BasePlanet
         
         void UpdateInfo();    
         
-        void SaveDataUniqueBlackHole(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueBlackHole(const boost::property_tree::ptree&);
-        void ResolveDataUniqueBlackHole();
+        void Save(boost::property_tree::ptree&, const std::string&) const;        
+        void Load(const boost::property_tree::ptree&);
+        void Resolve();
 };
 
 #endif 

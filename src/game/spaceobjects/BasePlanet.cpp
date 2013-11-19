@@ -73,7 +73,7 @@ void BasePlanet::RenderStuffWhenFocusedInSpace()
     m_Orbit.DrawPath();
 }
 
-void BasePlanet::SaveDataUniqueBasePlanet(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void BasePlanet::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::SaveDataUniqueBasePlanet", SAVELOAD_LOG_DIP);
@@ -90,7 +90,7 @@ void BasePlanet::SaveDataUniqueBasePlanet(boost::property_tree::ptree& save_ptre
     save_ptree.put(root+"unresolved.orbit_it", m_Orbit.GetIt());
 }
 
-void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& load_ptree)
+void BasePlanet::Load(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::LoadDataUniqueBasePlanet", SAVELOAD_LOG_DIP);
@@ -107,7 +107,7 @@ void BasePlanet::LoadDataUniqueBasePlanet(const boost::property_tree::ptree& loa
     data_unresolved_BasePlanet.orbit_it = load_ptree.get<int>("unresolved.orbit_it");
 }
 
-void BasePlanet::ResolveDataUniqueBasePlanet()
+void BasePlanet::Resolve()
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BasePlanet("+int2str(GetId())+")::ResolveDataUniqueBasePlanet", SAVELOAD_LOG_DIP);

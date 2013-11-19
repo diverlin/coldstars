@@ -91,21 +91,21 @@ void BlackHole::Render_OLD(const Renderer& render)
     render.RenderMeshGeometry(GetMesh(), GetTextureOb(), GetActualModelMatrix());    
 }
      
-void BlackHole::SaveDataUniqueBlackHole(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void BlackHole::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::SaveDataUniqueBlackHole", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void BlackHole::LoadDataUniqueBlackHole(const boost::property_tree::ptree& load_ptree)
+void BlackHole::Load(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::LoadDataUniqueBlackHole", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void BlackHole::ResolveDataUniqueBlackHole()
+void BlackHole::Resolve()
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::ResolveDataUniqueBlackHole", SAVELOAD_LOG_DIP);
@@ -122,8 +122,8 @@ void BlackHole::SaveData(boost::property_tree::ptree& save_ptree) const
     Orientation::Save(save_ptree, root);
     BaseDrawable::Save(save_ptree, root);
     BaseSpaceEntity::Save(save_ptree, root);
-    SaveDataUniqueBasePlanet(save_ptree, root);
-    SaveDataUniqueBlackHole(save_ptree, root);
+    BasePlanet::Save(save_ptree, root);
+    Save(save_ptree, root);
 }
 
 /*virtual*/        
@@ -133,8 +133,8 @@ void BlackHole::LoadData(const boost::property_tree::ptree& load_ptree)
     Orientation::Load(load_ptree);
     BaseDrawable::Load(load_ptree);
     BaseSpaceEntity::Load(load_ptree);
-    LoadDataUniqueBasePlanet(load_ptree);
-    LoadDataUniqueBlackHole(load_ptree);
+    BasePlanet::Load(load_ptree);
+    Load(load_ptree);
 }
     
 /*virtual*/    
@@ -144,6 +144,6 @@ void BlackHole::ResolveData()
     Orientation::Resolve();
     BaseDrawable::Resolve();
     BaseSpaceEntity::Resolve();
-    ResolveDataUniqueBasePlanet();
-    ResolveDataUniqueBlackHole();
+    BasePlanet::Resolve();
+    Resolve();
 }
