@@ -26,13 +26,13 @@ const int STRIDE_TEXCOORD = 2;
 const int STRIDE_NORMAL   = 3;
 const int STRIDE_COLOR    = 4;
 
-
 struct Vertex
 {
     glm::vec3 position;
     glm::vec2 texcoord;
     glm::vec3 normal;
     glm::vec4 color;
+    float size;
 };
 
 class Mesh
@@ -47,8 +47,8 @@ class Mesh
         const glm::vec3& GetBoundaryBox() const { return m_BoundaryBox; };
 
         void FillVertices(const ObjLoader&);
-        void FillPointVertices(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&);
-        void FillPointVerticesFast(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&);
+        void FillPointVertices(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
+        void FillPointVerticesFast(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
                         
         void Draw() const;
     
@@ -69,6 +69,7 @@ class Mesh
         bool m_HasTexCoords;
         bool m_HasNormals;
         bool m_HasColors;
+        bool m_HasPointsSize;
 
         void UpdateList();      // for debug
         void UpdateVbo(); 

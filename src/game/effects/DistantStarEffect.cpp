@@ -25,28 +25,23 @@
 #include <render/Mesh.hpp>
 
 
-DistantStarEffect::DistantStarEffect(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors)
+DistantStarEffect::DistantStarEffect(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors, const std::vector<float>& sizes)
 {
     for (unsigned int i=0; i<positions.size(); i++)
     {
         m_Positions.push_back(positions[i]);
         m_Colors.push_back(colors[i]);
+        m_Sizes.push_back(sizes[i]);
     }
 
     m_Mesh = new Mesh();
-    m_Mesh->FillPointVertices(m_Positions, m_Colors);
+    m_Mesh->FillPointVertices(m_Positions, m_Colors, m_Sizes);
 }
 
 DistantStarEffect::~DistantStarEffect()
 {
     delete m_Mesh;
 }
-
-void DistantStarEffect::Render(const Renderer& render) const
-{   
-    //render.DrawParticles(GetMesh(), GetTextureOb());
-}
-            
 
 void DistantStarEffect::SaveData(boost::property_tree::ptree&, const std::string&) const        
 {}
@@ -88,6 +83,7 @@ DistantStarEffect* GetNewDistantStarEffect(int color_id)
 
     std::vector<glm::vec3> positions;
     std::vector<glm::vec4> colors;
+    std::vector<float> sizes;
 
     for (int i=0; i<distStar_num; i++)
     {
@@ -100,9 +96,10 @@ DistantStarEffect* GetNewDistantStarEffect(int color_id)
         
         positions.push_back(position);
         colors.push_back(glm::vec4(r, g, b, 1.0f));
+        sizes.push_back(getRandFloat(5.0, 25.0));
     }
             
-    DistantStarEffect* ds = new DistantStarEffect(positions, colors);
+    DistantStarEffect* ds = new DistantStarEffect(positions, colors, sizes);
     ds->SetTextureOb(textureOb);
     
     return ds;

@@ -43,7 +43,7 @@ m_IsDying(false)
 /* virtual */
 BaseParticleSystem::~BaseParticleSystem()
 {
-    //delete m_Mesh;
+    //delete m_Mesh; FIXME cause bug
 
     for (unsigned int i=0; i<m_Particles.size(); i++) 
     {
@@ -55,14 +55,18 @@ void BaseParticleSystem::Update()
 {  
     std::vector<glm::vec3> positions;
     std::vector<glm::vec4> colors;
+    std::vector<float> sizes;
 
     for (unsigned int i=0; i<m_Particles.size(); i++) 
     {
-        positions.push_back(m_Particles[i]->GetPosition());
-        colors.push_back(m_Particles[i]->GetColor());
+        const Particle& particle = *m_Particles[i];
+
+        positions.push_back(particle.GetPosition());
+        colors.push_back(particle.GetColor());
+        sizes.push_back(particle.GetSize());
     }
 
-    m_Mesh->FillPointVerticesFast(positions, colors);
+    m_Mesh->FillPointVerticesFast(positions, colors, sizes);
 }
 
 const glm::mat4& BaseParticleSystem::GetActualModelMatrix()

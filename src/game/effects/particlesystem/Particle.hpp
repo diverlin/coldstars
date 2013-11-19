@@ -38,6 +38,8 @@ class Particle
         
         const glm::vec3& GetPosition() const { return m_Position; }
         const glm::vec4& GetColor() const { return m_Color; }
+        
+        float GetSize() const { return m_Size; }
 
         void Reborn();      
         

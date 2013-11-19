@@ -46,6 +46,8 @@ class BaseBackGroundEffect
         const glm::vec4& GetColor() const { return m_Color; }
 
         const Mesh& GetMesh() const { return *m_Mesh; } 
+
+        const glm::mat4& GetActualModelMatrix();
                 
     protected:
         unsigned long int id;
@@ -68,8 +70,6 @@ class BaseBackGroundEffect
         glm::mat4 m_Sm;
 
         Mesh* m_Mesh;
-        
-        const glm::mat4& GetActualModelMatrix();
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;        
         void LoadData(const boost::property_tree::ptree&);

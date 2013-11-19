@@ -57,10 +57,10 @@ m_Radius(radius)
     
     //data_particle.size_start
     m_DataParticle.size_end          = 2.0;        
-    m_DataParticle.d_size          = (float)size_id*0.4f + getRandInt(30,50) * 0.02;  
+    m_DataParticle.d_size          = (float)size_id*0.04f + getRandInt(30,50) * 0.002;  
         
 
-    m_DataParticle.size_start  = 50 * size_id;                                         
+    m_DataParticle.size_start  = 10 * size_id;                                         
         
     CreateParticles();
     //else    
@@ -145,20 +145,7 @@ void ExplosionEffect::Update()
     }  
 }
 
-/* virtual override final */
-void ExplosionEffect::Render(float scale)
-{
-    //glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-    //for(unsigned int i=0; i<num_particles; i++)
-    //{
-        //particles_vec[i]->Render(scale);
-    //}  
-}          
-
-
-
- 
-    
+   
 ExplosionEffect* getNewExplosionEffect(float radius)
 {
     //size_id = getRandInt(1,9); // DEBUG

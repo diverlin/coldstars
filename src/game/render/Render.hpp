@@ -52,8 +52,8 @@ class Renderer : public NonCopyable
         void enable_DEPTH() const   { glEnable(GL_DEPTH_TEST); }
         void disable_DEPTH() const  { glDisable(GL_DEPTH_TEST); }
         
-        void enable_POINTSPRITE() const     { glEnable(GL_POINT_SPRITE);  }    
-        void disable_POINTSPRITE() const    { glDisable(GL_POINT_SPRITE); }   
+        void enable_POINTSPRITE() const     { glEnable(GL_POINT_SPRITE); glEnable(GL_PROGRAM_POINT_SIZE); }    
+        void disable_POINTSPRITE() const    { glDisable(GL_POINT_SPRITE); glDisable(GL_PROGRAM_POINT_SIZE); }   
                 
         void ComposeViewMatrix(const glm::mat4&);
 
