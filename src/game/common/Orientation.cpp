@@ -52,7 +52,7 @@ void Orientation::UpdateOrientation()
             
 }        
 
-void Orientation::SaveDataUniqueOrientation(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Orientation::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Orientation("+int2str(GetId())+")::SaveDataUniqueOrientation", SAVELOAD_LOG_DIP);
@@ -68,7 +68,7 @@ void Orientation::SaveDataUniqueOrientation(boost::property_tree::ptree& save_pt
         
 }
 
-void Orientation::LoadDataUniqueOrientation(const boost::property_tree::ptree& load_ptree)
+void Orientation::Load(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Orientation("+int2str(GetId())+")::LoadDataUniqueOrientation", SAVELOAD_LOG_DIP);
@@ -83,7 +83,7 @@ void Orientation::LoadDataUniqueOrientation(const boost::property_tree::ptree& l
     data_unresolved_Orientation.direction.z = load_ptree.get<float>("data_unresolved_Orientation.orient.z");
 }
 
-void Orientation::ResolveDataUniqueOrientation()
+void Orientation::Resolve()
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Orientation("+int2str(GetId())+")::ResolveDataUniqueOrientation", SAVELOAD_LOG_DIP);

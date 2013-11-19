@@ -119,7 +119,7 @@ void BlackHole::SaveData(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "blackhole." + int2str(GetId())+".";
     Base::Save(save_ptree, root);
-    SaveDataUniqueOrientation(save_ptree, root);
+    Orientation::Save(save_ptree, root);
     SaveDataUniqueBaseDrawable(save_ptree, root);
     SaveDataUniqueBaseSpaceEntity(save_ptree, root);
     SaveDataUniqueBasePlanet(save_ptree, root);
@@ -130,7 +130,7 @@ void BlackHole::SaveData(boost::property_tree::ptree& save_ptree) const
 void BlackHole::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     Base::Load(load_ptree);
-    LoadDataUniqueOrientation(load_ptree);
+    Orientation::Load(load_ptree);
     LoadDataUniqueBaseDrawable(load_ptree);
     LoadDataUniqueBaseSpaceEntity(load_ptree);
     LoadDataUniqueBasePlanet(load_ptree);
@@ -141,7 +141,7 @@ void BlackHole::LoadData(const boost::property_tree::ptree& load_ptree)
 void BlackHole::ResolveData()
 {
     Base::Resolve();
-    ResolveDataUniqueOrientation();
+    Orientation::Resolve();
     ResolveDataUniqueBaseDrawable();
     ResolveDataUniqueBaseSpaceEntity();
     ResolveDataUniqueBasePlanet();
