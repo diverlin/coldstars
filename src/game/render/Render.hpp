@@ -73,7 +73,6 @@ class Renderer : public NonCopyable
         void DrawQuadTexturedFullScreen(GLuint) const;
         void DrawQuadTexturedBlurred(GLuint, int, int) const;
                         
-        void DrawParticleTextured(const TextureOb&, const glm::vec3&, float) const;
         void DrawParticles(const Mesh&, const TextureOb&, const glm::mat4&) const;
         
         void DrawAxis(const glm::mat4&, float) const;
