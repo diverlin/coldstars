@@ -46,9 +46,9 @@ class Store : public Room
                 int BuyItem(BaseItem*); 
                 void SellVehicle(Npc*, VehicleSlot*, int);
                 
-                void SaveData(boost::property_tree::ptree&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+                void Save(boost::property_tree::ptree&) const;        
+        void Load(const boost::property_tree::ptree&);
+        void Load();
         
         private:             
                 std::vector<ItemSlot*> item_slot_vec;

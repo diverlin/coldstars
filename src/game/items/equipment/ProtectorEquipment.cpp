@@ -77,29 +77,29 @@ std::string ProtectorEquipment::GetProtectionStr()
 }
 
 /*virtual*/
-void ProtectorEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
+void ProtectorEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "protector_equipment." + int2str(GetId()) + ".";
-    Base::Save(save_ptree, root);
-        SaveDataUniqueBaseItem(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+        BaseItem::SaveData(save_ptree, root);
     SaveDataUniqueBaseEquipment(save_ptree, root);
     SaveDataUniqueProtectorEquipment(save_ptree, root);
 }
 
 /*virtual*/
-void ProtectorEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
+void ProtectorEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-        LoadDataUniqueBaseItem(load_ptree);
+    Base::LoadData(load_ptree);
+        BaseItem::LoadData(load_ptree);
     LoadDataUniqueBaseEquipment(load_ptree);
     LoadDataUniqueProtectorEquipment(load_ptree);
 }
 
 /*virtual*/
-void ProtectorEquipment::ResolveData()
+void ProtectorEquipment::Load()
 {
-    Base::Resolve();
-        ResolveDataUniqueBaseItem();
+    Base::ResolveData();
+        BaseItem::ResolveData();
     ResolveDataUniqueBaseEquipment();
     ResolveDataUniqueProtectorEquipment();
 }

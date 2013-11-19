@@ -36,9 +36,9 @@ class RocketModule : public BaseModule
         int GetDamageAdd()  const { return damage_add; };
         int GetRadiusAdd()  const { return radius_add; };
         
-        virtual void SaveData(boost::property_tree::ptree&) const;
-        virtual void LoadData(const boost::property_tree::ptree&);
-        virtual void ResolveData();
+        virtual void Save(boost::property_tree::ptree&) const;
+        virtual void Load(const boost::property_tree::ptree&);
+        virtual void Load();
                
            private:
                int ammo_max_add;

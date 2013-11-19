@@ -153,9 +153,9 @@ class StarSystem : public BaseSpaceEntity
                 void DrawOrbits();
                 void DrawPath();
                 
-        void SaveData(boost::property_tree::ptree&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+        void Save(boost::property_tree::ptree&) const;
+        void Load(const boost::property_tree::ptree&);
+        void Load();
                                                                                            
         // poor
         Planet* GetClosestInhabitedPlanet(const glm::vec2&) const;

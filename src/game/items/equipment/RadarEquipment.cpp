@@ -81,29 +81,29 @@ std::string RadarEquipment::GetRadiusStr()
 }
 
 /*virtual*/
-void RadarEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
+void RadarEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "radar_equipment." + int2str(GetId()) + ".";
-    Base::Save(save_ptree, root);
-        SaveDataUniqueBaseItem(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+        BaseItem::SaveData(save_ptree, root);
     SaveDataUniqueBaseEquipment(save_ptree, root);
     SaveDataUniqueRadarEquipment(save_ptree, root);
 }
 
 /*virtual*/
-void RadarEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
+void RadarEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-        LoadDataUniqueBaseItem(load_ptree);
+    Base::LoadData(load_ptree);
+        BaseItem::LoadData(load_ptree);
     LoadDataUniqueBaseEquipment(load_ptree);
     LoadDataUniqueRadarEquipment(load_ptree);
 }
 
 /*virtual*/
-void RadarEquipment::ResolveData()
+void RadarEquipment::Load()
 {
-    Base::Resolve();
-        ResolveDataUniqueBaseItem();
+    Base::ResolveData();
+        BaseItem::ResolveData();
     ResolveDataUniqueBaseEquipment();
     ResolveDataUniqueRadarEquipment();
 }

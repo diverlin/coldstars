@@ -29,9 +29,9 @@ class Goverment : public Room
                 
                 void SetTextureObFace(TextureOb* textureOb_face) { this->textureOb_face = textureOb_face; };
            
-                void SaveData(boost::property_tree::ptree&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+                void Save(boost::property_tree::ptree&) const;        
+        void Load(const boost::property_tree::ptree&);
+        void Load();
         
         private:
                 TextureOb* textureOb_face;

@@ -142,43 +142,43 @@ std::string NatureLand::GetDockVehicleStr() const
         return str;
 }
               
-/*virtual*/
-void NatureLand::SaveData(boost::property_tree::ptree& save_ptree) const
+/* virtual override final */
+void NatureLand::Save(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "natureland."+int2str(GetId())+".";
-    Base::Save(save_ptree, root);
-    SaveDataUniqueBaseLand(save_ptree, root);
-    SaveDataUniqueNatureLand(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+    BaseLand::SaveData(save_ptree, root);
+    NatureLand::SaveData(save_ptree, root);
 }
 
-/*virtual*/
-void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)
+/* virtual override final */
+void NatureLand::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    LoadDataUniqueBaseLand(load_ptree);
-    LoadDataUniqueNatureLand(load_ptree);
+    Base::LoadData(load_ptree);
+    BaseLand::LoadData(load_ptree);
+    NatureLand::LoadData(load_ptree);
 }
 
-/*virtual*/
-void NatureLand::ResolveData()
+/* virtual override final */
+void NatureLand::Resolve()
 {
-    Base::Resolve();
-    ResolveDataUniqueBaseLand();
-    ResolveDataUniqueNatureLand();
+    Base::ResolveData();
+    BaseLand::ResolveData();
+    NatureLand::ResolveData();
 }
 
 
-void NatureLand::SaveDataUniqueNatureLand(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void NatureLand::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     save_ptree.put(root+"data_unresolved_NatureLand.textureOb_background_path", textureOb_background->path);
 }
 
-void NatureLand::LoadDataUniqueNatureLand(const boost::property_tree::ptree& load_ptree)
+void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     data_unresolved_NatureLand.textureOb_background_path = load_ptree.get<std::string>("data_unresolved_NatureLand.textureOb_background_path");
 }
 
-void NatureLand::ResolveDataUniqueNatureLand()
+void NatureLand::ResolveData()
 {
     textureOb_background = TextureManager::Instance().GetTextureObByPath(data_unresolved_NatureLand.textureOb_background_path);
 }

@@ -178,7 +178,7 @@ void RocketBullet::SaveDataUniqueRocketBullet(boost::property_tree::ptree& save_
     if (m_Target != nullptr)     { save_ptree.put(root+"target_id", m_Target->GetId()); }
     else                        { save_ptree.put(root+"target_id", NONE_ID); }
     
-    m_DataBullet.SaveData(save_ptree, root);
+    m_DataBullet.Save(save_ptree, root);
 }
 
 void RocketBullet::LoadDataUniqueRocketBullet(const boost::property_tree::ptree& load_ptree)
@@ -187,7 +187,7 @@ void RocketBullet::LoadDataUniqueRocketBullet(const boost::property_tree::ptree&
     m_OwnerId = load_ptree.get<int>("owner_id");  
     unresolved_RocketBullet_target_id = load_ptree.get<int>("target_id");  
     
-    m_DataBullet.LoadData(load_ptree.get_child("data_bullet"));
+    m_DataBullet.Load(load_ptree.get_child("data_bullet"));
 }
 
 void RocketBullet::ResolveDataUniqueRocketBullet()
@@ -204,32 +204,33 @@ void RocketBullet::ResolveDataUniqueRocketBullet()
    
    
 /* virtual override final */
-void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree) const
+void RocketBullet::Save(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "rocketbullet."+int2str(GetId())+".";
-    Base::Save(save_ptree, root);
-    Orientation::Save(save_ptree, root);
-    BaseDrawable::Save(save_ptree, root);
-    BaseSpaceEntity::Save(save_ptree, root);
-    SaveDataUniqueRocketBullet(save_ptree, root);
+
+    Base::SaveData(save_ptree, root);
+    Orientation::SaveData(save_ptree, root);
+    BaseDrawable::SaveData(save_ptree, root);
+    BaseSpaceEntity::SaveData(save_ptree, root);
+    RocketBullet::SaveData(save_ptree, root);
 }
 
 /* virtual override final */
-void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
+void RocketBullet::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    Orientation::Load(load_ptree);
-    BaseDrawable::Load(load_ptree);
-    BaseSpaceEntity::Load(load_ptree);
-    LoadDataUniqueRocketBullet(load_ptree);
+    Base::LoadData(load_ptree);
+    Orientation::LoadData(load_ptree);
+    BaseDrawable::LoadData(load_ptree);
+    BaseSpaceEntity::LoadData(load_ptree);
+    RocketBullet::LoadData(load_ptree);
 }
 
 /* virtual override final */
-void RocketBullet::ResolveData()
+void RocketBullet::Resolve()
 {
-    Base::Resolve();
-    Orientation::Resolve();
-    BaseDrawable::Resolve();
-    BaseSpaceEntity::Resolve();
-    ResolveDataUniqueRocketBullet();
+    Base::ResolveData();
+    Orientation::ResolveData();
+    BaseDrawable::ResolveData();
+    BaseSpaceEntity::ResolveData();
+    RocketBullet::ResolveData();
 }

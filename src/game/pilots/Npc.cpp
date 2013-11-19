@@ -308,73 +308,73 @@ bool Npc::BuyGoods()
     return true;
 }
   
-void Npc::SaveData(boost::property_tree::ptree& save_ptree) const
+void Npc::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "npc."+int2str(GetId())+".";
-    Base::Save(save_ptree, root);
-    SaveDataUniqueNpc(save_ptree, root);    
+    Base::SaveData(save_ptree, root);
+    Npc::SaveData(save_ptree, root);    
 }        
 
-void Npc::LoadData(const boost::property_tree::ptree& load_ptree)
+void Npc::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    LoadDataUniqueNpc(load_ptree);       
+    Base::LoadData(load_ptree);
+    Npc::LoadData(load_ptree);       
 }        
 
-void Npc::ResolveData()
+void Npc::Resolve()
 {
-    Base::Resolve();
-    ResolveDataUniqueNpc();    
+    Base::ResolveData();
+    Npc::ResolveData();    
 }
   
-void Npc::SaveDataUniqueNpc(boost::property_tree::ptree& save_ptree, const std::string& root) const    
+void Npc::SaveDat(boost::property_tree::ptree& save_ptree, const std::string& root) const    
 {
     save_ptree.put(root+"is_alive", is_alive);
     save_ptree.put(root+"race_id", (int)race_id);
     save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
     save_ptree.put(root+"unresolved.aiModel_id", ai_model->GetTypeId());
-    skills.SaveData(save_ptree, root);
+    skills.Save(save_ptree, root);
     if (state_machine.GetMacroTaskManager().GetScenario() != nullptr)
     {
         const std::string child_root = root + "macrotask.";
-        state_machine.GetMacroTaskManager().GetTask().SaveData(save_ptree, child_root);
+        state_machine.GetMacroTaskManager().GetTask().Save(save_ptree, child_root);
     }
     
     if (state_machine.GetMicroTaskManager().GetScenario() != nullptr)    
     {
         const std::string child_root = root + "microtask.";
-        state_machine.GetMicroTaskManager().GetTask().SaveData(save_ptree, child_root);
+        state_machine.GetMicroTaskManager().GetTask().Save(save_ptree, child_root);
     }
 }
 
-void Npc::LoadDataUniqueNpc(const boost::property_tree::ptree& load_ptree)
+void Npc::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     is_alive = load_ptree.get<bool>("is_alive");
     race_id  = (TYPE::RACE)load_ptree.get<int>("race_id");
     data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
     data_unresolved_npc.aiModel_id = load_ptree.get<int>("unresolved.aiModel_id");
     
-    skills.LoadData(load_ptree.get_child("skill"));
+    skills.Load(load_ptree.get_child("skill"));
 
     if (load_ptree.get_child_optional("macrotask"))
     {
-        data_unresolved_npc.macrotask.LoadData(load_ptree.get_child("macrotask"));
+        data_unresolved_npc.macrotask.Load(load_ptree.get_child("macrotask"));
     }
     
     if (load_ptree.get_child_optional("microtask"))
     {
-        data_unresolved_npc.microtask.LoadData(load_ptree.get_child("microtask"));
+        data_unresolved_npc.microtask.Load(load_ptree.get_child("microtask"));
     }
 }
 
-void Npc::ResolveDataUniqueNpc()
+void Npc::ResolveData()
 {
     ApplySkillsStrategy();
     
     ((Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
     SetAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
-    skills.ResolveData();
+    skills.Load();
     
     if (data_unresolved_npc.macrotask.GetScenarioTypeId() != TYPE::AISCENARIO::NONE_ID)
     {

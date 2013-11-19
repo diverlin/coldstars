@@ -229,37 +229,38 @@ std::string Angar::GetDockVehicleStr() const
 }
                 
 
-void Angar::SaveDataUniqueAngar(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Angar::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {}
 
-void Angar::LoadDataUniqueAngar(const boost::property_tree::ptree& load_ptree)
+void Angar::LoadData(const boost::property_tree::ptree& load_ptree)
 {}
 
-void Angar::ResolveDataUniqueAngar()
+void Angar::ResolveData()
 {
     ((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindAngar(this); 
 }
 
 
-void Angar::SaveData(boost::property_tree::ptree& save_ptree) const
+void Angar::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "angar." + int2str(GetId())+".";
-    Base::Save(save_ptree, root);
-    SaveDataUniqueRoom(save_ptree, root);
-    SaveDataUniqueAngar(save_ptree, root);
+
+    Base::SaveData(save_ptree, root);
+    Room::SaveData(save_ptree, root);
+    Angar::SaveData(save_ptree, root);
 }
 
-void Angar::LoadData(const boost::property_tree::ptree& load_ptree)
+void Angar::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    LoadDataUniqueRoom(load_ptree);
-    LoadDataUniqueAngar(load_ptree);
+    Base::LoadData(load_ptree);
+    Room::LoadData(load_ptree);
+    Angar::LoadData(load_ptree);
 }
 
-void Angar::ResolveData()
+void Angar::Resolve()
 {
-    Base::Resolve();
-    ResolveDataUniqueRoom();
-    ResolveDataUniqueAngar();
+    Base::ResolveData();
+    Room::ResolveData();
+    Angar::ResolveData();
 }
 

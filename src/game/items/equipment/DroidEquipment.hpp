@@ -36,9 +36,9 @@ class DroidEquipment : public BaseEquipment
                 
               void CountPrice();
               
-              virtual void SaveData(boost::property_tree::ptree&) const;
-        virtual void LoadData(const boost::property_tree::ptree&);
-        virtual void ResolveData();
+              virtual void Save(boost::property_tree::ptree&) const;
+        virtual void Load(const boost::property_tree::ptree&);
+        virtual void Load();
         
           private:
               int repair_orig;

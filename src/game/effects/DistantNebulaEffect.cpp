@@ -42,39 +42,39 @@ void DistantNebulaEffect::Render(const Renderer& render)
     render.DrawQuad(*m_TextureOb, GetActualModelMatrix());
 }
               
-void DistantNebulaEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void DistantNebulaEffect::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     std::string droot = root + "distant_nebula_effect."+int2str(id)+".";
     
-    SaveDataUniqueBaseBackGroundEffect(save_ptree, droot);
-    SaveDataUniqueDistantNebulaEffect(save_ptree, droot);
+    BaseBackGroundEffect::SaveData(save_ptree, droot);
+    DistantNebulaEffect::SaveData(save_ptree, droot);
 }    
 
-void DistantNebulaEffect::LoadData(const boost::property_tree::ptree& load_ptree)
+void DistantNebulaEffect::Load(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBaseBackGroundEffect(load_ptree);
-    LoadDataUniqueDistantNebulaEffect(load_ptree);
+    BaseBackGroundEffect::LoadData(load_ptree);
+    DistantNebulaEffect::LoadData(load_ptree);
 }
 
-void DistantNebulaEffect::ResolveData()
+void DistantNebulaEffect::Resolve()
 {
-    ResolveDataUniqueBaseBackGroundEffect();
-    ResolveDataUniqueDistantNebulaEffect();
+    BaseBackGroundEffect::ResolveData();
+    DistantNebulaEffect::ResolveData();
 }
 
-void DistantNebulaEffect::SaveDataUniqueDistantNebulaEffect(boost::property_tree::ptree& save_ptree, const std::string& root) const        
+void DistantNebulaEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const        
 {
     save_ptree.put(root+"m_Angle", m_Angle);
     save_ptree.put(root+"m_DeltaAngle", m_DeltaAngle);
 }
 
-void DistantNebulaEffect::LoadDataUniqueDistantNebulaEffect(const boost::property_tree::ptree& load_ptree)
+void DistantNebulaEffect::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     m_Angle = load_ptree.get<float>("m_Angle");
     m_DeltaAngle = load_ptree.get<float>("m_DeltaAngle");
 }
 
-void DistantNebulaEffect::ResolveDataUniqueDistantNebulaEffect()
+void DistantNebulaEffect::ResolveData()
 {}     
 
 DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)

@@ -93,29 +93,29 @@ std::string DriveEquipment::GetHyperStr()
 
 
 /*virtual*/
-void DriveEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
+void DriveEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "drive_equipment." + int2str(GetId()) + ".";
-    Base::Save(save_ptree, root);
-        SaveDataUniqueBaseItem(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+        BaseItem::SaveData(save_ptree, root);
     SaveDataUniqueBaseEquipment(save_ptree, root);
     SaveDataUniqueDriveEquipment(save_ptree, root);
 }
 
 /*virtual*/
-void DriveEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
+void DriveEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-        LoadDataUniqueBaseItem(load_ptree);
+    Base::LoadData(load_ptree);
+        BaseItem::LoadData(load_ptree);
     LoadDataUniqueBaseEquipment(load_ptree);
     LoadDataUniqueDriveEquipment(load_ptree);
 }
 
 /*virtual*/    
-void DriveEquipment::ResolveData()
+void DriveEquipment::Load()
 {
-    Base::Resolve();
-        ResolveDataUniqueBaseItem();
+    Base::ResolveData();
+        BaseItem::ResolveData();
     ResolveDataUniqueBaseEquipment();
     ResolveDataUniqueDriveEquipment();
 }

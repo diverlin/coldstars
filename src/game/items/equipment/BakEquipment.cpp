@@ -88,29 +88,29 @@ std::string BakEquipment::GetFuelStr()
 }
 
 /*virtual*/
-void BakEquipment::SaveData(boost::property_tree::ptree& save_ptree) const
+void BakEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "bak_equipment." + int2str(GetId()) + ".";
-    Base::Save(save_ptree, root);
-        SaveDataUniqueBaseItem(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+        BaseItem::SaveData(save_ptree, root);
     SaveDataUniqueBaseEquipment(save_ptree, root);
     SaveDataUniqueBakEquipment(save_ptree, root);
 }
 
 /*virtual*/
-void BakEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
+void BakEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-        LoadDataUniqueBaseItem(load_ptree);
+    Base::LoadData(load_ptree);
+        BaseItem::LoadData(load_ptree);
     LoadDataUniqueBaseEquipment(load_ptree);
     LoadDataUniqueBakEquipment(load_ptree);
 }
 
 /*virtual*/
-void BakEquipment::ResolveData()
+void BakEquipment::Load()
 {
-    Base::Resolve();
-        ResolveDataUniqueBaseItem();
+    Base::ResolveData();
+        BaseItem::ResolveData();
     ResolveDataUniqueBaseEquipment();
     ResolveDataUniqueBakEquipment();
 }

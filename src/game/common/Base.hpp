@@ -41,9 +41,9 @@ class Base : private NonCopyable
                     
         std::string GetDataTypeString() const;
 
-        virtual void SaveData(boost::property_tree::ptree&) const {};
-        virtual void LoadData(const boost::property_tree::ptree&) {};
-        virtual void ResolveData() {};
+        virtual void Save(boost::property_tree::ptree&) const {};
+        virtual void Load(const boost::property_tree::ptree&) {};
+        virtual void Load() {};
         
     protected:
         void SetId(INTLONGEST id)                  { m_Data_id.id = id; }

@@ -540,32 +540,32 @@ bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* target) const
     return false;
 }
 
-/*virtual*/
-void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree) const
+/* virtual override final */
+void ItemSlot::Save(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "item_slot." + int2str(GetId()) + ".";
-    Base::Save(save_ptree, root);
-    SaveDataUniqueBaseSlot(save_ptree, root);
-    SaveDataUniqueItemSlot(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+    BaseSlot::SaveData(save_ptree, root);
+    ItemSlot::SaveData(save_ptree, root);
 }
 
-/*virtual*/        
-void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
+/* virtual override final */      
+void ItemSlot::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    LoadDataUniqueBaseSlot(load_ptree);
-    LoadDataUniqueItemSlot(load_ptree);
+    Base::LoadData(load_ptree);
+    BaseSlot::LoadData(load_ptree);
+    ItemSlot::LoadData(load_ptree);
 }
     
-/*virtual*/    
-void ItemSlot::ResolveData()
+/* virtual override final */ 
+void ItemSlot::Resolve()
 {
-    Base::Resolve();
-    ResolveDataUniqueBaseSlot();
-    ResolveDataUniqueItemSlot();
+    Base::ResolveData();
+    BaseSlot::ResolveData();
+    ItemSlot::ResolveData();
 }
 
-void ItemSlot::SaveDataUniqueItemSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::SaveDataUniqueItemSlot", SAVELOAD_LOG_DIP);
@@ -575,10 +575,10 @@ void ItemSlot::SaveDataUniqueItemSlot(boost::property_tree::ptree& save_ptree, c
     else                        { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE_ID); }
 
     if (m_Subtarget != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", m_Subtarget->GetId()); }
-    else                          { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE_ID); }
+    else                        { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE_ID); }
 }
 
-void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_ptree)
+void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::LoadDataUniqueItemSlot", SAVELOAD_LOG_DIP);
@@ -588,7 +588,7 @@ void ItemSlot::LoadDataUniqueItemSlot(const boost::property_tree::ptree& load_pt
     unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id"); 
 }
 
-void ItemSlot::ResolveDataUniqueItemSlot()
+void ItemSlot::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::ResolveDataUniqueItemSlot", SAVELOAD_LOG_DIP);

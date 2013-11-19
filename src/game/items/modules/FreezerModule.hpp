@@ -31,9 +31,9 @@ class FreezerModule : public BaseModule
         void SetFreezeAdd(int freeze_add) { this->freeze_add = freeze_add; };
         int GetFreezeAdd() const { return freeze_add; };
               
-              virtual void SaveData(boost::property_tree::ptree&) const;
-        virtual void LoadData(const boost::property_tree::ptree&);
-        virtual void ResolveData();
+              virtual void Save(boost::property_tree::ptree&) const;
+        virtual void Load(const boost::property_tree::ptree&);
+        virtual void Load();
         
           private:
                     int freeze_add;

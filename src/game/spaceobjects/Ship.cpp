@@ -192,35 +192,36 @@ void Ship::ResolveDataUniqueShip()
 }
 
 /* virtual override final */
-void Ship::SaveData(boost::property_tree::ptree& save_ptree) const
+void Ship::Save(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "ship."+int2str(GetId())+".";
-    Base::Save(save_ptree, root);
-    Orientation::Save(save_ptree, root);
-    BaseDrawable::Save(save_ptree, root);
-    BaseSpaceEntity::Save(save_ptree, root);
-    SaveDataUniqueVehicle(save_ptree, root);
-    SaveDataUniqueShip(save_ptree, root);
+
+    Base::SaveData(save_ptree, root);
+    Orientation::SaveData(save_ptree, root);
+    BaseDrawable::SaveData(save_ptree, root);
+    BaseSpaceEntity::SaveData(save_ptree, root);
+    Vehicle::SaveData(save_ptree, root);
+    Ship::SaveData(save_ptree, root);
 }
 
 /* virtual override final */
-void Ship::LoadData(const boost::property_tree::ptree& load_ptree)
+void Ship::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    Orientation::Load(load_ptree);
-    BaseDrawable::Load(load_ptree);
-    BaseSpaceEntity::Load(load_ptree);
-    LoadDataUniqueVehicle(load_ptree);
-    LoadDataUniqueShip(load_ptree);
+    Base::LoadData(load_ptree);
+    Orientation::LoadData(load_ptree);
+    BaseDrawable::LoadData(load_ptree);
+    BaseSpaceEntity::LoadData(load_ptree);
+    Vehicle::LoadData(load_ptree);
+    Ship::LoadData(load_ptree);
 }
 
 /* virtual override final */
-void Ship::ResolveData()
+void Ship::Resolve()
 {
-    Base::Resolve();
-    Orientation::Resolve();
-    BaseDrawable::Resolve();
-    BaseSpaceEntity::Resolve();
-    ResolveDataUniqueVehicle();
-    ResolveDataUniqueShip();
+    Base::ResolveData();
+    Orientation::ResolveData();
+    BaseDrawable::ResolveData();
+    BaseSpaceEntity::ResolveData();
+    Vehicle::ResolveData();
+    Ship::ResolveData();
 }

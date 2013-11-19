@@ -46,41 +46,40 @@ void DistantStarEffect::Render(const Renderer& render) const
 {   
     //render.DrawParticles(GetMesh(), GetTextureOb());
 }
+            
 
-   
-void DistantStarEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void DistantStarEffect::SaveData(boost::property_tree::ptree&, const std::string&) const        
+{}
+
+void DistantStarEffect::LoadData(const boost::property_tree::ptree&)
+{}
+
+void DistantStarEffect::ResolveData()
+{}        
+        
+  
+ 
+void DistantStarEffect::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     std::string droot = root + "distant_star_effect."+int2str(id)+".";
     
-    SaveDataUniqueBaseBackGroundEffect(save_ptree, droot);
-    SaveDataUniqueDistantStarEffect(save_ptree, droot);
+    BaseBackGroundEffectSaveData(save_ptree, droot);
+    DistantStarEffect::SaveData(save_ptree, droot);
 }    
 
-void DistantStarEffect::LoadData(const boost::property_tree::ptree& load_ptree)
+void DistantStarEffect::Load(const boost::property_tree::ptree& load_ptree)
 {
-    LoadDataUniqueBaseBackGroundEffect(load_ptree);
-    LoadDataUniqueDistantStarEffect(load_ptree);
+    BaseBackGroundEffect::LoadData(load_ptree);
+    DistantStarEffect::LoadData(load_ptree);
 }
 
-void DistantStarEffect::ResolveData()
+void DistantStarEffect::Resolve()
 {
-    ResolveDataUniqueBaseBackGroundEffect();
-    ResolveDataUniqueDistantStarEffect();
+    BaseBackGroundEffect::ResolveData();
+    DistantStarEffect::ResolveData();
 }
 
-
-        
-
-void DistantStarEffect::SaveDataUniqueDistantStarEffect(boost::property_tree::ptree&, const std::string&) const        
-{}
-
-void DistantStarEffect::LoadDataUniqueDistantStarEffect(const boost::property_tree::ptree&)
-{}
-
-void DistantStarEffect::ResolveDataUniqueDistantStarEffect()
-{}        
-        
-   
+ 
 DistantStarEffect* GetNewDistantStarEffect(int color_id)
 {
     int distStar_num = getRandInt(DISTANT_STAR_MIN, DISTANT_STAR_MAX);

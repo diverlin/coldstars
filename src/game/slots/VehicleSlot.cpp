@@ -81,46 +81,46 @@ void VehicleSlot::Render(const Rect& rect) const
 }
 
 /*virtual*/
-void VehicleSlot::SaveData(boost::property_tree::ptree& save_ptree) const
+void VehicleSlot::Save(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "vehicle_slot." + int2str(GetId()) + ".";
-    Base::Save(save_ptree, root);
-    SaveDataUniqueBaseSlot(save_ptree, root);
-    SaveDataUniqueVehicleSlot(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+    BaseSlot::SaveData(save_ptree, root);
+    VehicleSlot::SaveData(save_ptree, root);
 }
 
 /*virtual*/        
-void VehicleSlot::LoadData(const boost::property_tree::ptree& load_ptree)
+void VehicleSlot::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    LoadDataUniqueBaseSlot(load_ptree);
-    LoadDataUniqueVehicleSlot(load_ptree);
+    Base::LoadData(load_ptree);
+    BaseSlot::LoadData(load_ptree);
+    VehicleSlot::LoadData(load_ptree);
 }
     
 /*virtual*/    
-void VehicleSlot::ResolveData()
+void VehicleSlot::Resolve()
 {
-    Base::Resolve();
-    ResolveDataUniqueBaseSlot();
-    ResolveDataUniqueVehicleSlot();
+    Base::ResolveData();
+    BaseSlot::ResolveData();
+    VehicleSlot::ResolveData();
 }
 
 
-void VehicleSlot::SaveDataUniqueVehicleSlot(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void VehicleSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::SaveDataUniqueVehicleSlot", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void VehicleSlot::LoadDataUniqueVehicleSlot(const boost::property_tree::ptree& load_ptree)
+void VehicleSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::LoadDataUniqueVehicleSlot", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void VehicleSlot::ResolveDataUniqueVehicleSlot()
+void VehicleSlot::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::ResolveDataUniqueVehicleSlot", SAVELOAD_LOG_DIP);

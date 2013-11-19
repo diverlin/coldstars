@@ -40,9 +40,9 @@ class BlackHole : public BasePlanet
         void Render_NEW(const Renderer&);    
         void Render_OLD(const Renderer&);
         
-        virtual void SaveData(boost::property_tree::ptree&) const;
-        virtual void LoadData(const boost::property_tree::ptree&);
-        virtual void ResolveData();
+        virtual void Save(boost::property_tree::ptree&) const;
+        virtual void Load(const boost::property_tree::ptree&);
+        virtual void Load();
         
     private:
         ShockWaveEffect* shockwave;

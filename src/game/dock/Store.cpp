@@ -143,39 +143,39 @@ void Store::SellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
 }
                 
 
-void Store::SaveDataUniqueStore(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Store::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     //save_ptree.put(root+"unresolved.angar_id",     angar->GetId());
 }
 
-void Store::LoadDataUniqueStore(const boost::property_tree::ptree& load_ptree)
+void Store::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     //data_unresolved_Kosmoport.angar_id = load_ptree.get<int>("unresolved.angar_id");
 }
 
-void Store::ResolveDataUniqueStore()
+void Store::ResolveData()
 {
     ((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindStore(this); 
 }
 
-void Store::SaveData(boost::property_tree::ptree& save_ptree) const
+void Store::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "store." + int2str(GetId())+".";
-    Base::Save(save_ptree, root);
-    SaveDataUniqueRoom(save_ptree, root);
-    SaveDataUniqueStore(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+    Room::SaveData(save_ptree, root);
+    Store::SaveData(save_ptree, root);
 }
 
-void Store::LoadData(const boost::property_tree::ptree& load_ptree)
+void Store::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    LoadDataUniqueRoom(load_ptree);
-    LoadDataUniqueStore(load_ptree);
+    Base::LoadData(load_ptree);
+    Room::LoadData(load_ptree);
+    Store::LoadData(load_ptree);
 }
 
-void Store::ResolveData()
+void Store::Resolve()
 {
-    Base::Resolve();
-    ResolveDataUniqueRoom();
-    ResolveDataUniqueStore();
+    Base::ResolveData();
+    Room::ResolveData();
+    Store::ResolveData();
 }

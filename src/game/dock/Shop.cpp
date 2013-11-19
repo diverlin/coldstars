@@ -225,7 +225,7 @@ void Shop::UpdateExclusivePrice()
         exclusive_price = PRICE::EXCLUSIVE_MAX * (1.0 - atan((float)exclusive_amount/EXCLUSIVE_AMOUNT_MAX)/1.6);   
 }            
 
-void Shop::SaveDataUniqueShop(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Shop::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     save_ptree.put(root+"minerals_amount", minerals_amount);
     save_ptree.put(root+"food_amount",     food_amount);
@@ -235,7 +235,7 @@ void Shop::SaveDataUniqueShop(boost::property_tree::ptree& save_ptree, const std
     save_ptree.put(root+"exclusive_amount", exclusive_amount);
 }
 
-void Shop::LoadDataUniqueShop(const boost::property_tree::ptree& load_ptree)
+void Shop::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     minerals_amount = load_ptree.get<int>("minerals_amount");
     food_amount     = load_ptree.get<int>("food_amount");
@@ -245,32 +245,32 @@ void Shop::LoadDataUniqueShop(const boost::property_tree::ptree& load_ptree)
     exclusive_amount = load_ptree.get<int>("exclusive_amount");
 }
 
-void Shop::ResolveDataUniqueShop()
+void Shop::ResolveData()
 {
     UpdateAllPrices();
     ((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindShop(this); 
 }
 
-void Shop::SaveData(boost::property_tree::ptree& save_ptree) const
+void Shop::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "shop." + int2str(GetId())+".";
-    Base::Save(save_ptree, root);
-    SaveDataUniqueRoom(save_ptree, root);
-    SaveDataUniqueShop(save_ptree, root);
+    Base::SaveData(save_ptree, root);
+    Room::SaveData(save_ptree, root);
+    Shop::SaveData(save_ptree, root);
 }
 
-void Shop::LoadData(const boost::property_tree::ptree& load_ptree)
+void Shop::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::Load(load_ptree);
-    LoadDataUniqueRoom(load_ptree);
-    LoadDataUniqueShop(load_ptree);
+    Base::LoadData(load_ptree);
+    Room::LoadData(load_ptree);
+    Shop::LoadData(load_ptree);
 }
 
-void Shop::ResolveData()
+void Shop::Resolve()
 {
-    Base::Resolve();
-    ResolveDataUniqueRoom();
-    ResolveDataUniqueShop();
+    Base::ResolveData();
+    Room::ResolveData();
+    Shop::ResolveData();
 }
 
 

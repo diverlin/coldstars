@@ -55,9 +55,9 @@ class NatureLand : public BaseLand
                 
                 virtual std::string GetDockVehicleStr() const;
                                 
-                void SaveData(boost::property_tree::ptree&) const;
-            void LoadData(const boost::property_tree::ptree&);
-            void ResolveData(); 
+                void Save(boost::property_tree::ptree&) const;
+            void Load(const boost::property_tree::ptree&);
+            void Load(); 
         
         private:
             TextureOb* textureOb_background;

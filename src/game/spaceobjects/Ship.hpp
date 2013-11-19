@@ -38,9 +38,9 @@ class Ship : public Vehicle
         void RenderInSpace_3D(const Renderer&, float);
         void RenderAtPlanet(const Renderer&, const glm::vec3&);       
         
-        virtual void SaveData(boost::property_tree::ptree&) const override final;
-        virtual void LoadData(const boost::property_tree::ptree&) override final;
-        virtual void ResolveData() override final;
+        virtual void Save(boost::property_tree::ptree&) const override final;
+        virtual void Load(const boost::property_tree::ptree&) override final;
+        virtual void Load() override final;
          
     private:        
         void SaveDataUniqueShip(boost::property_tree::ptree&, const std::string&) const;        
