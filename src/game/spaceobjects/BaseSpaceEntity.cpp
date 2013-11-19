@@ -110,10 +110,10 @@ void BaseSpaceEntity::RenderInfo(const glm::vec2& center)
     drawInfoIn2Column(m_Info.title_list, m_Info.value_list, center);
 }
     
-void BaseSpaceEntity::SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void BaseSpaceEntity::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseSpaceEntity("+int2str(GetId())+")::SaveDataUniqueBaseSpaceEntity", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseSpaceEntity("+int2str(GetId())+")::BaseSpaceEntity::Save(", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"data_life.is_alive",   m_DataLife.is_alive);
@@ -135,7 +135,7 @@ void BaseSpaceEntity::SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree&
 
 
 
-void BaseSpaceEntity::LoadDataUniqueBaseSpaceEntity(const boost::property_tree::ptree& load_ptree)
+void BaseSpaceEntity::Load(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BaseSpaceEntity("+int2str(GetId())+")::LoadDataUniqueBaseSpaceEntity", SAVELOAD_LOG_DIP);
@@ -154,7 +154,7 @@ void BaseSpaceEntity::LoadDataUniqueBaseSpaceEntity(const boost::property_tree::
     data_unresolved_BaseSpaceEntity.starsystem_id = load_ptree.get<int>("data_unresolved_BaseSpaceEntity.starsystem_id");
 }
 
-void BaseSpaceEntity::ResolveDataUniqueBaseSpaceEntity()
+void BaseSpaceEntity::Resolve()
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BaseSpaceEntity("+int2str(GetId())+")::ResolveDataUniqueBaseSpaceEntity", SAVELOAD_LOG_DIP);

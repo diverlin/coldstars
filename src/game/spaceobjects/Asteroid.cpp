@@ -141,7 +141,7 @@ void Asteroid::SaveData(boost::property_tree::ptree& save_ptree) const
     Base::Save(save_ptree, root);
     Orientation::Save(save_ptree, root);
     BaseDrawable::Save(save_ptree, root);
-    SaveDataUniqueBaseSpaceEntity(save_ptree, root);
+    BaseSpaceEntity::Save((save_ptree, root);
     SaveDataUniqueBasePlanet(save_ptree, root);
     SaveDataUniqueAsteroid(save_ptree, root);
 }
@@ -152,7 +152,7 @@ void Asteroid::LoadData(const boost::property_tree::ptree& load_ptree)
     Base::Load(load_ptree);
     Orientation::Load(load_ptree);
     BaseDrawable::Load(load_ptree);
-    LoadDataUniqueBaseSpaceEntity(load_ptree);
+    BaseSpaceEntity::Load(load_ptree);
     LoadDataUniqueBasePlanet(load_ptree);
     LoadDataUniqueAsteroid(load_ptree);
 }
@@ -163,7 +163,7 @@ void Asteroid::ResolveData()
     Base::Resolve();
     Orientation::Resolve();
     BaseDrawable::Resolve();
-    ResolveDataUniqueBaseSpaceEntity();
+    BaseSpaceEntity::Resolve();
     ResolveDataUniqueBasePlanet();
     ResolveDataUniqueAsteroid();
 }    

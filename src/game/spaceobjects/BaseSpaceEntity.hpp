@@ -17,8 +17,8 @@
 */
 
 
-#ifndef BASEGAMEENTITY_HPP
-#define BASEGAMEENTITY_HPP
+#ifndef BASESPACEENTITY_HPP
+#define BASESPACEENTITY_HPP
 
 #include <common/BaseDrawable.hpp>
 #include <struct/LifeData.hpp>
@@ -33,7 +33,7 @@ class AnimationBase;
 class Renderer;
 
 
-struct UnresolvedDataUniqueBaseSpaceEntity
+struct UnresolvedDataBaseSpaceEntity
 {
     int parent_id;
     int starsystem_id;     
@@ -93,10 +93,10 @@ class BaseSpaceEntity : public BaseDrawable
         void CheckDeath(bool);
         virtual void PostDeathUniqueEvent(bool) {}
 
-        UnresolvedDataUniqueBaseSpaceEntity data_unresolved_BaseSpaceEntity;
-        void SaveDataUniqueBaseSpaceEntity(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueBaseSpaceEntity(const boost::property_tree::ptree&);
-        void ResolveDataUniqueBaseSpaceEntity();
+        UnresolvedDataBaseSpaceEntity data_unresolved_BaseSpaceEntity;
+        void Save(boost::property_tree::ptree&, const std::string&) const;
+        void Load(const boost::property_tree::ptree&);
+        void Resolve();
     
     private:
         LifeData m_DataLife;        
