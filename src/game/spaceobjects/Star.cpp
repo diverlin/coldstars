@@ -27,6 +27,7 @@
 #include <world/starsystem.hpp>
 
 #include <resources/ShaderCollector.hpp>
+#include <resources/textureOb.hpp>
 
 #include <render/Render.hpp>
 #include <glm/gtx/transform.hpp>

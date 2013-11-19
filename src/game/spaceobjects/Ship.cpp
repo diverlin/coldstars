@@ -35,6 +35,8 @@
 
 #include <render/Render.hpp>
 
+#include <resources/textureOb.hpp>
+
 
 Ship::Ship(int id)
 {

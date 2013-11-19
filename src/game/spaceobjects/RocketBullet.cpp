@@ -32,6 +32,8 @@
 #include <render/Render.hpp>
 
 #include <text/VerticalFlowText.hpp> 
+#include <resources/textureOb.hpp>
+
 
 RocketBullet::RocketBullet(int id)
 :

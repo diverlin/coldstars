@@ -25,6 +25,8 @@
 
 #include "../render/Render.hpp"
 
+#include "../resources/textureOb.hpp"
+
 
 DistantNebulaEffect::DistantNebulaEffect()
 {}

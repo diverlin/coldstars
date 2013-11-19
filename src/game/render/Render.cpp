@@ -24,11 +24,14 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "../resources/textureOb.hpp" // to be removed
 #include <resources/GuiTextureObCollector.hpp>
 #include <resources/ShaderCollector.hpp>
 
 #include "Mesh.hpp"
 #include "../common/constants.hpp"
+
+#include "../config/config.hpp"
 
 // for ugly
 #include <glm/glm.hpp> // glm::vec
@@ -49,11 +52,44 @@ m_ProgramLightLocation_uEyePos(-1),
 m_ProgramLightLocation_uDiffColor(-1),
 m_ProgramLightLocation_uAmbientColor(-1), 
 m_ProgramLightLocation_uTexture(-1), 
-m_ProgramBlur(0) 
+m_ProgramBlur(0),
+m_FboNum(5),
+m_IndexFboLastActivated(-1),
+m_IndexFboLastDeactivated(-1) 
 {}
 
 Renderer::~Renderer() 
 {}
+
+void Renderer::ActivateFbo(int index, int w, int h)
+{
+    if ( (index < 0) or (index >= m_FboNum) )
+    {
+        std::cout<<"wrong fbo index"; 
+        exit(1); 
+    }
+
+    m_Fbos[index].Activate(w, h);
+    m_IndexFboLastActivated = index;
+}
+
+void Renderer::DeactivateFbo(int index)
+{
+    if ((index < 0) or (index >= m_FboNum))
+    {
+        std::cout<<"wrong fbo index"; 
+        exit(1); 
+    }
+
+    if (m_IndexFboLastActivated != index)
+    {
+        std::cout<<"you are trying to deactivate not active fbo"; 
+        exit(1); 
+    }
+    
+    m_Fbos[index].Deactivate();
+    m_IndexFboLastDeactivated = index;
+}
 
 void Renderer::Init()
 {
@@ -72,6 +108,32 @@ void Renderer::Init()
     
     glShadeModel(GL_SMOOTH);
 }
+
+
+void Renderer::InitPostEffects()
+{
+    for (int i=0; i<m_FboNum; i++)
+    {
+        m_Fbos[i].Create();
+    }
+        
+    m_Bloom.Create(ShaderCollector::Instance().blur, ShaderCollector::Instance().extractbright, ShaderCollector::Instance().combine);
+    
+    int width      = Config::Instance().SCREEN_WIDTH; 
+    int height     = Config::Instance().SCREEN_HEIGHT;
+    ResizePostEffects(width, height);
+}
+ 
+  
+void Renderer::ResizePostEffects(int width, int height)
+{
+    for (int i=0; i<m_FboNum; i++)
+    {
+        m_Fbos[i].Resize(width, height);
+    }
+        
+    m_Bloom.Resize(width, height);
+} 
 
 void Renderer::MakeShortCuts()
 {
