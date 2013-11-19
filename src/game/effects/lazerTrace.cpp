@@ -17,102 +17,77 @@
 */
 
 #include "lazerTrace.hpp"
-#include <math/rand.hpp>
-#include "../common/constants.hpp"
-#include "../render/Render.hpp"
-#include "../render/Screen.hpp"
-#include "../resources/ShaderCollector.hpp"
 
-LazerTraceEffect::LazerTraceEffect(TextureOb* _texOb, const glm::vec3* const _pTo_start_pos, const glm::vec3* const _pTo_end_pos)
+#include <glm/gtx/transform.hpp>
+#include <math/QuaternionUtils.hpp>
+
+#include <effects/particlesystem/BaseParticleSystem.hpp>
+
+
+LazerTraceEffect::LazerTraceEffect(TextureOb* textureOb, const glm::vec3* const start_pos, const glm::vec3* const end_pos)
+:
+m_IsAlive(true),
+m_TextureOb(textureOb),
+m_pStartPos(start_pos),
+m_pEndPos(end_pos)
 {
-    is_alive = true;
-    is_alreadyInRemoveQueue = false; 
-    
-    texOb = _texOb;
-    
-    existance_time = getRandInt(40, 45);
-    
-    if (getRandInt(1,2) == 1)
-        d_angle_inR = 0.0005 * 3;  //self.target.size
-    else
-        d_angle_inR = -0.0005 * 3; // self.target.size
-    
-    
-    additional_angle_inR = 0;
-    
-    pTo_start_pos = _pTo_start_pos;
-    pTo_end_pos   = _pTo_end_pos;
-    
-    damage_effect = nullptr;
-    
-    updateAngleAndLen();
+    m_LiveTime = 40;
 }
 
 LazerTraceEffect::~LazerTraceEffect()
 {}
 
-void LazerTraceEffect::update()
+void LazerTraceEffect::Update()
 {
-    updateAngleAndLen();
-
-        if (existance_time < 0)
+    if (m_IsAlive)
+    {
+        if (m_LiveTime < 0)
         {
-               is_alive = false;
-               if (is_alreadyInRemoveQueue == false)
-               { 
-                  damage_effect->SetDying();
-                  is_alreadyInRemoveQueue = true;
-               }
-        } 
-    
-        existance_time -= 1;
-}
+            m_IsAlive = false;
+            if (m_ParticleSystem != nullptr)
+            {
+                //m_ParticleSystem->StartDying();
+            }
+        }
 
-void LazerTraceEffect::updateAngleAndLen()
-{
-        // performs within game loop
-        float xl = pTo_end_pos->x - pTo_start_pos->x;
-        float yl = pTo_end_pos->y - pTo_start_pos->y;
-
-        len = sqrt((xl*xl) + (yl*yl));
-
-        angle_inR = atan2(yl, xl);
-        angle_inR += additional_angle_inR;
-
-        angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
-
-        //additional_angle_inR += d_angle_inR;
-
-        //self.ex = sin(HALF_PI - self.angle_radian) * self.Len + self.owner.points.center[0]
-        //self.ey = sin(self.angle_radian) * self.Len + self.owner.points.center[1]
-
-        //# NEW !!!!
-        //if self.damage_effect == None:
-    //###                                                    texture,             starsystem,      center,  num_particles, pSize,              velocity_max, alpha_init, alpha_end, d_alpha):
-             //#self.damage_effect = tinyExplosionEffect(self.particle_texOb  self.starsystem, self.p2, 10,             15,                1.5,          1.0,        0.2,       0.05)
-             //self.damage_effect = tinyExplosionEffect(self.particle_texOb,  self.starsystem, self.p2, 5,             self.pSize, 0.5,          0.7,        0.2,       0.1)              
-             //self.starsystem.effect_DAMAGE_list.append(self.damage_effect)
-
-        //self.damage_effect.setNewCenter([self.ex, self.ey])
-}
-
-
-void LazerTraceEffect::Render()
-{
-    if (is_alive == true)
-    {         
-        glUseProgram(ShaderCollector::Instance().flash);
-        
-        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().flash, "iTexture_0"), 0);
-        glUniform1f(glGetUniformLocation(ShaderCollector::Instance().flash, "iTime"), Screen::Instance().GetElapsedTimeInSeconds()*10.0);
-        
-        glActiveTexture(GL_TEXTURE0);        
-        
-        drawLine(*texOb, *pTo_start_pos, len, angle_inD, texOb->GetFrameHeight()/4);            
-        
-        glUseProgram(0);
-        glActiveTexture(GL_TEXTURE0);
+        m_LiveTime -= 1;
     }
 }
+
+const glm::mat4& LazerTraceEffect::GetActualModelMatrix()
+{
+    m_MatrixTranslate = glm::translate(*m_pStartPos);
+
+    const glm::vec3& origin_dir = glm::vec3(1.0f, 0.0f, 0.0f);
+    RotationBetweenVectors(m_QuatPosition, origin_dir, glm::normalize(*m_pEndPos));
+
+    m_MatrixRotate = glm::toMat4(m_QuatPosition);
+
+    float length = glm::length(*m_pEndPos - *m_pStartPos);
+    m_MatrixScale = glm::scale(glm::vec3(length, 6.0, 0.0f));
+
+    m_MatrixModel = m_MatrixTranslate * m_MatrixRotate * m_MatrixScale;
+
+    return m_MatrixModel;
+}
+
+
+//void LazerTraceEffect::Render()
+//{
+    //if (m_IsAlive == true)
+    //{         
+        //glUseProgram(ShaderCollector::Instance().flash);
+        
+        //glUniform1i(glGetUniformLocation(ShaderCollector::Instance().flash, "iTexture_0"), 0);
+        //glUniform1f(glGetUniformLocation(ShaderCollector::Instance().flash, "iTime"), Screen::Instance().GetElapsedTimeInSeconds()*10.0);
+        
+        //glActiveTexture(GL_TEXTURE0);        
+        
+        ////drawLine(*texOb, *pTo_start_pos, len, angle_inD, texOb->GetFrameHeight()/4);            
+        
+        //glUseProgram(0);
+        //glActiveTexture(GL_TEXTURE0);
+    //}
+//}
 
 

@@ -23,6 +23,7 @@
 #include <common/Orientation.hpp>
 #include <types/MeshTypes.hpp>
 #include <render/Render.hpp>
+
 #include <glm/glm.hpp> // glm::vec
 #include <glm/gtx/quaternion.hpp>
 

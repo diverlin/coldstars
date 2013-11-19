@@ -65,6 +65,8 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <effects/particlesystem/BaseParticleSystem.hpp>
+
 Player::Player(int id)
 :
 npc(nullptr),

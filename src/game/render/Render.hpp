@@ -103,21 +103,6 @@ class Renderer : public NonCopyable
         GLuint m_ProgramBlur;        
 };
 
-//void drawQuad(const TextureOb& texOb, 
-         //const glm::vec3& center,
-         //const glm::vec3& size, 
-         //float angle=0);
-         
-//void drawQuad(const TextureOb& texOb,
-         //const glm::vec2& center, 
-         //const glm::vec2& size,
-         //float angle);
-              
-//void drawQuad(const TextureOb&, const Box2D&);
-//void drawQuadMasked(const TextureOb&, const Box2D&, TextureOb*, float);
-                           
-//void drawTexturedRect(const TextureOb& texOb, const Rect& rect, float z_pos);   
-
 // LINE
 void drawLine(const TextureOb& texOb, 
               const glm::vec3& start_pos, 
@@ -137,12 +122,6 @@ void drawInfoIn2Column(
                 const std::vector<std::string>& pnfo_title_list, 
                 const std::vector<std::string>& info_value_list, 
                 const glm::vec2& pos);
-
-// PARTICLES
-void drawParticleTextured(GLuint texture, const glm::vec2& _center, float size, float pos_z);
-void drawParticle(const glm::vec2&, float, float r, float g, float b, float a);
-void drawParticle(const glm::vec2&, float, const glm::vec4&);
-void drawParticle(const glm::vec2&, float);
 
 #endif 
 

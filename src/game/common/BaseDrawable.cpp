@@ -37,7 +37,6 @@
 
 #include <render/Mesh.hpp>
 
-
 #include <glm/gtx/transform.hpp>
 #include <math/QuaternionUtils.hpp>
 

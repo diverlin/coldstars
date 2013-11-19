@@ -33,6 +33,8 @@
 #include "../../world/starsystem.hpp"
 #include "../../parts/Turrel.hpp"
 
+#include <effects/particlesystem/DamageEffect.hpp>
+
 
 LazerEquipment::LazerEquipment(int id)
 :
@@ -144,9 +146,9 @@ void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, flo
             item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_lazer_trace_effect);
             
             // DamageEffect
-            DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, item_slot->GetTarget());
-            _lazer_trace_effect->setDamageEffect(_damage_effect);
-            item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_damage_effect);
+            //DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, item_slot->GetTarget());
+            //_lazer_trace_effect->SetDamageEffect(_damage_effect);
+            //item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_damage_effect);
         }
     }
 } 
