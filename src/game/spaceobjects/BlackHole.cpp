@@ -94,21 +94,21 @@ void BlackHole::Render_OLD(const Renderer& render)
 void BlackHole::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::SaveDataUniqueBlackHole", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void BlackHole::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::LoadDataUniqueBlackHole", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void BlackHole::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::ResolveDataUniqueBlackHole", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BlackHole("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     GetStarSystem()->Add(this, data_unresolved_Orientation.center); 

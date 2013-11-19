@@ -39,19 +39,19 @@ RocketModule::~RocketModule()
 /* virtual */
 void RocketModule::AddUniqueInfo()
 {
-        info.addTitleStr("rocket module"); 
-        if (ammo_max_add != 0)
-        {
-            info.addNameStr("ammo_max_add:");   info.addValueStr(int2str(ammo_max_add));
-        }
-        if (damage_add != 0)
-        {
-            info.addNameStr("damage_add:");     info.addValueStr(int2str(damage_add));
-        }
-        if (radius_add != 0)
-        {
-            info.addNameStr("radius_add:");     info.addValueStr(int2str(radius_add));
-        } 
+    info.addTitleStr("rocket module"); 
+    if (ammo_max_add != 0)
+    {
+        info.addNameStr("ammo_max_add:");   info.addValueStr(int2str(ammo_max_add));
+    }
+    if (damage_add != 0)
+    {
+        info.addNameStr("damage_add:");     info.addValueStr(int2str(damage_add));
+    }
+    if (radius_add != 0)
+    {
+        info.addNameStr("radius_add:");     info.addValueStr(int2str(radius_add));
+    } 
 }
 
 
@@ -60,33 +60,33 @@ void RocketModule::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "rocket_module." + int2str(GetId()) + ".";
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseModule(save_ptree, root);
-    SaveDataUniqueRocketModule(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    BaseModule::SaveData(save_ptree, root);
+    RocketModule::SaveData(save_ptree, root);
 }
 
 /*virtual*/        
 void RocketModule::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseModule(load_ptree);
-    LoadDataUniqueRocketModule(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    BaseModule::LoadData(load_ptree);
+    RocketModule::LoadData(load_ptree);
 }
     
 /*virtual*/    
-void RocketModule::Load()
+void RocketModule::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueBaseModule();
-    ResolveDataUniqueRocketModule();
+    BaseItem::ResolveData();
+    BaseModule::ResolveData();
+    RocketModule::ResolveData();
 }
 
-void RocketModule::SaveDataUniqueRocketModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void RocketModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueRocketModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketModule::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"ammo_max_add", ammo_max_add);
@@ -94,10 +94,10 @@ void RocketModule::SaveDataUniqueRocketModule(boost::property_tree::ptree& save_
     save_ptree.put(root+"radius_add", radius_add);
 }
 
-void RocketModule::LoadDataUniqueRocketModule(const boost::property_tree::ptree& load_ptree)
+void RocketModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueRocketModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketModule::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     ammo_max_add = load_ptree.get<int>("ammo_max_add");
@@ -105,10 +105,10 @@ void RocketModule::LoadDataUniqueRocketModule(const boost::property_tree::ptree&
     radius_add = load_ptree.get<int>("radius_add");
 }
 
-void RocketModule::ResolveDataUniqueRocketModule()
+void RocketModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueRocketModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketModule::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

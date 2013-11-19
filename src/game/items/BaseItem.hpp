@@ -49,7 +49,7 @@ struct ItemCommonData
     unsigned int mass; 
 };
 
-struct UnresolvedDataUniqueBaseItem
+struct UnresolvedDataBaseItem
 {
     std::string textureOb_path;
     INTLONGEST item_slot_id;
@@ -115,16 +115,16 @@ class BaseItem : public BaseDrawable
         
         InfoTable info;  
         
-        UnresolvedDataUniqueBaseItem data_unresolved_BaseItem;
+        UnresolvedDataBaseItem data_unresolved_BaseItem;
         
         void UpdateLock();
         
         virtual void AddCommonInfo()=0;
         virtual void AddUniqueInfo()=0;   
         
-        void SaveDataUniqueBaseItem(boost::property_tree::ptree&, const std::string&) const; 
-        void LoadDataUniqueBaseItem(const boost::property_tree::ptree&); 
-        void ResolveDataUniqueBaseItem();                   
+        void SaveData(boost::property_tree::ptree&, const std::string&) const; 
+        void LoadData(const boost::property_tree::ptree&); 
+        void ResolveData();                   
 };
 
 #endif

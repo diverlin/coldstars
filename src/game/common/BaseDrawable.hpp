@@ -72,9 +72,9 @@ class BaseDrawable : public Orientation
         const glm::mat4& GetActualModelMatrix();
                 
         UnresolvedDataBaseDrawable data_unresolved_BaseDrawable;
-        void Save(boost::property_tree::ptree&, const std::string&) const;
-        void Load(const boost::property_tree::ptree&);
-        void Resolve();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 
     private:
         glm::vec4 m_Color;

@@ -39,7 +39,7 @@ class Turrel : public BaseDrawable
         
         virtual void Save(boost::property_tree::ptree&) const {};
         virtual void Load(const boost::property_tree::ptree&) {};
-        virtual void Load() {};
+        virtual void Resolve() {};
            
     private:                       
         ItemSlot* slot;

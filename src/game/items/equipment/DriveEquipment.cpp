@@ -96,54 +96,55 @@ std::string DriveEquipment::GetHyperStr()
 void DriveEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "drive_equipment." + int2str(GetId()) + ".";
+
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseEquipment(save_ptree, root);
-    SaveDataUniqueDriveEquipment(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    BaseEquipment::SaveData(save_ptree, root);
+    DriveEquipment::SaveData(save_ptree, root);
 }
 
 /*virtual*/
 void DriveEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseEquipment(load_ptree);
-    LoadDataUniqueDriveEquipment(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    BaseEquipment::LoadData(load_ptree);
+    DriveEquipment::LoadData(load_ptree);
 }
 
 /*virtual*/    
-void DriveEquipment::Load()
+void DriveEquipment::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueBaseEquipment();
-    ResolveDataUniqueDriveEquipment();
+    BaseItem::ResolveData();
+    BaseEquipment::ResolveData();
+    DriveEquipment::ResolveData();
 }
 
-void DriveEquipment::SaveDataUniqueDriveEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void DriveEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueDriveEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DriveEquipment::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-        save_ptree.put(root+"speed_orig", speed_orig);
-        save_ptree.put(root+"hyper_orig", hyper_orig);
+    save_ptree.put(root+"speed_orig", speed_orig);
+    save_ptree.put(root+"hyper_orig", hyper_orig);
 }
                 
-void DriveEquipment::LoadDataUniqueDriveEquipment(const boost::property_tree::ptree& load_ptree)
+void DriveEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueDriveEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DriveEquipment::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-        speed_orig = load_ptree.get<int>("speed_orig");
-        hyper_orig = load_ptree.get<int>("hyper_orig");
+    speed_orig = load_ptree.get<int>("speed_orig");
+    hyper_orig = load_ptree.get<int>("hyper_orig");
 }                
 
-void DriveEquipment::ResolveDataUniqueDriveEquipment()
+void DriveEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueDriveEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DriveEquipment::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

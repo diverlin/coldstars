@@ -157,8 +157,8 @@ void LazerEquipment::Save(boost::property_tree::ptree& save_ptree) const
     std::string root = "lazer_equipment." + int2str(GetId()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseEquipment(save_ptree, root);
-    SaveDataUniqueLazerEquipment(save_ptree, root);
+    BaseEquipment::SaveData(save_ptree, root);
+    LazerEquipment::SaveData(save_ptree, root);
 }
 
 /*virtual*/
@@ -166,43 +166,43 @@ void LazerEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseEquipment(load_ptree);
-    LoadDataUniqueLazerEquipment(load_ptree);
+    BaseEquipment::LoadData(load_ptree);
+    LazerEquipment::LoadData(load_ptree);
 }
 
 /*virtual*/
-void LazerEquipment::Load()
+void LazerEquipment::Resolve()
 {
     Base::ResolveData();
     BaseItem::ResolveData();
-    ResolveDataUniqueBaseEquipment();
-    ResolveDataUniqueLazerEquipment();
+    BaseEquipment::ResolveData();
+    LazerEquipment::ResolveData();
 }
 
-void LazerEquipment::SaveDataUniqueLazerEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void LazerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueLazerEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerEquipment::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"damage_orig", damage_orig);
     save_ptree.put(root+"radius_orig", radius_orig);
 }
                 
-void LazerEquipment::LoadDataUniqueLazerEquipment(const boost::property_tree::ptree& load_ptree)
+void LazerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueLazerEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerEquipment::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     damage_orig = load_ptree.get<int>("damage_orig");     
     radius_orig = load_ptree.get<int>("radius_orig");   
 }                
 
-void LazerEquipment::ResolveDataUniqueLazerEquipment()
+void LazerEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueLazerEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerEquipment::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

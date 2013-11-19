@@ -44,55 +44,56 @@ void ProtectorArtefact::AddUniqueInfo()
 /* virtual */
 void ProtectorArtefact::AddCommonInfo()
 {
-        info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
+    info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
 }
 
 /* virtual */
 void ProtectorArtefact::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "protector_artefact." + int2str(GetId()) + ".";    
+    std::string root = "protector_artefact." + int2str(GetId()) + "."; 
+   
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueProtectorArtefact(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    ProtectorArtefact::SaveData(save_ptree, root);
 }
 
 /* virtual */
 void ProtectorArtefact::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueProtectorArtefact(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    ProtectorArtefact::LoadData(load_ptree);
 }
 
 /* virtual */
-void ProtectorArtefact::Load()
+void ProtectorArtefact::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueProtectorArtefact();
+    BaseItem::ResolveData();
+    ProtectorArtefact::ResolveData();
 }        
         
-void ProtectorArtefact::SaveDataUniqueProtectorArtefact(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void ProtectorArtefact::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueProtectorArtefact()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorArtefact::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-        save_ptree.put(root+"protection", protection); 
+    save_ptree.put(root+"protection", protection); 
 }
 
-void ProtectorArtefact::LoadDataUniqueProtectorArtefact(const boost::property_tree::ptree& load_ptree)
+void ProtectorArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueProtectorArtefact()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorArtefact::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     protection = load_ptree.get<int>("protection");
 }
 
-void ProtectorArtefact::ResolveDataUniqueProtectorArtefact()
+void ProtectorArtefact::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueProtectorArtefact()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorArtefact::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

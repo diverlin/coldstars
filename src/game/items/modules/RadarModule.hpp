@@ -33,16 +33,16 @@ class RadarModule : public BaseModule
 
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
           private:
               int radius_add;
               
               void virtual AddUniqueInfo();
               
-            void SaveDataUniqueRadarModule(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueRadarModule(const boost::property_tree::ptree&);
-        void ResolveDataUniqueRadarModule(); 
+            void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData(); 
 };
 
 #endif

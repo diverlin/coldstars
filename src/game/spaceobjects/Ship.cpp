@@ -170,24 +170,24 @@ void Ship::RenderAtPlanet(const Renderer& render, const glm::vec3& center)
     }
 }        
 
-void Ship::SaveDataUniqueShip(boost::property_tree::ptree&, const std::string&) const
+void Ship::SaveData(boost::property_tree::ptree&, const std::string&) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Ship("+int2str(GetId())+")::SaveDataUniqueShip", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Ship("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void Ship::LoadDataUniqueShip(const boost::property_tree::ptree&)
+void Ship::LoadData(const boost::property_tree::ptree&)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Ship("+int2str(GetId())+")::LoadDataUniqueShip", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Ship("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void Ship::ResolveDataUniqueShip()
+void Ship::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Ship("+int2str(GetId())+")::ResolveDataUniqueShip", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Ship("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
 }
 

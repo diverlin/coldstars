@@ -71,9 +71,9 @@ class BaseBackGroundEffect
         
         const glm::mat4& GetActualModelMatrix();
         
-        void SaveDataUniqueBaseBackGroundEffect(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueBaseBackGroundEffect(const boost::property_tree::ptree&);
-        void ResolveDataUniqueBaseBackGroundEffect();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
     
 };
 

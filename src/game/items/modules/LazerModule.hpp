@@ -36,7 +36,7 @@ class LazerModule : public BaseModule
         
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
         private:
                 int damage_add;
@@ -44,9 +44,9 @@ class LazerModule : public BaseModule
             
             void virtual AddUniqueInfo();   
             
-            void SaveDataUniqueLazerModule(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueLazerModule(const boost::property_tree::ptree&);
-        void ResolveDataUniqueLazerModule();    
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();    
 };
 
 #endif

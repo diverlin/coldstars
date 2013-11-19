@@ -34,16 +34,16 @@ class ProtectorModule : public BaseModule
                
                virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
            private:
                     int protection_add;
                     
                void virtual AddUniqueInfo();
                
-            void SaveDataUniqueProtectorModule(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueProtectorModule(const boost::property_tree::ptree&);
-        void ResolveDataUniqueProtectorModule();    
+            void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();    
 };
 
 #endif

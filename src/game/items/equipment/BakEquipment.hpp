@@ -42,7 +42,7 @@ class BakEquipment : public BaseEquipment
                                       
                   virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
          private:
                   int fuel_max_orig;
@@ -53,9 +53,9 @@ class BakEquipment : public BaseEquipment
              void virtual AddUniqueInfo();
               std::string GetFuelStr();
                 
-                void SaveDataUniqueBakEquipment(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueBakEquipment(const boost::property_tree::ptree&);
-        void ResolveDataUniqueBakEquipment();
+                void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 };
 
 #endif 

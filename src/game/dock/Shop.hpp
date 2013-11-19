@@ -51,7 +51,7 @@ class Shop : public Room
                             
                 void Save(boost::property_tree::ptree&) const;        
         void Load(const boost::property_tree::ptree&);
-        void Load();
+        void Resolve();
         
         private:   
                 int minerals_amount;
@@ -78,9 +78,9 @@ class Shop : public Room
             void UpdateDrugPrice();
             void UpdateExclusivePrice();
         
-                void SaveDataUniqueShop(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueShop(const boost::property_tree::ptree&);
-        void ResolveDataUniqueShop();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
         
 };
 

@@ -131,7 +131,7 @@ void Planet::Render_OLD(const Renderer& render)
 void Planet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Planet("+int2str(GetId())+")::SaveDataUniquePlanet", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Planet("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
     
     //SaveManager::Instance().Put(root+"race_id", race_id);
@@ -141,7 +141,7 @@ void Planet::SaveData(boost::property_tree::ptree& save_ptree, const std::string
 void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Planet("+int2str(GetId())+")::LoadDataUniquePlanet", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Planet("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
     
     //race_id = SaveManager::Instance().Get<int>(root+"race_id");
@@ -151,7 +151,7 @@ void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
 void Planet::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Planet("+int2str(GetId())+")::ResolveDataUniquePlanet", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Planet("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, GetParent(), data_unresolved_BasePlanet.orbit_it); 

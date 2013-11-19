@@ -44,7 +44,7 @@ class ShockWaveEffect;
 
 class Renderer;
 
-struct UnresolvedDataUniqueVehicle
+struct UnresolvedDataVehicle
 {
     int drive_complex_target_id;
     int drive_complex_action_id;
@@ -215,11 +215,11 @@ class Vehicle : public BaseSpaceEntity
         
         virtual void PutChildsToGarbage() const override;
                                                                 
-        UnresolvedDataUniqueVehicle data_unresolved_Vehicle;
+        UnresolvedDataVehicle data_unresolved_Vehicle;
         
-        void SaveDataUniqueVehicle(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueVehicle(const boost::property_tree::ptree&);
-        void ResolveDataUniqueVehicle();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 
     private:
         bool m_GodMode;

@@ -33,16 +33,16 @@ class BakModule : public BaseModule
 
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
          private:
               int fuel_max_add;
               
               void virtual AddUniqueInfo();
 
-        void SaveDataUniqueBakModule(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueBakModule(const boost::property_tree::ptree&);
-        void ResolveDataUniqueBakModule();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 };
 
 #endif

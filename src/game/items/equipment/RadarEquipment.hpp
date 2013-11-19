@@ -37,7 +37,7 @@ class RadarEquipment : public BaseEquipment
                  
               virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
                    
           private:
                     int radius_orig;
@@ -47,9 +47,9 @@ class RadarEquipment : public BaseEquipment
              void virtual AddUniqueInfo();
                std::string GetRadiusStr();
                 
-                void SaveDataUniqueRadarEquipment(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueRadarEquipment(const boost::property_tree::ptree&);
-        void ResolveDataUniqueRadarEquipment();  
+                void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();  
 };
 
 #endif 

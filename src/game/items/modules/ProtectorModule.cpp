@@ -37,59 +37,60 @@ ProtectorModule::~ProtectorModule ()
 /* virtual */        
 void ProtectorModule::AddUniqueInfo()
 {
-        info.addTitleStr("protector module");
-        info.addNameStr("protection_add:");  info.addValueStr( int2str(protection_add) );
+    info.addTitleStr("protector module");
+    info.addNameStr("protection_add:");  info.addValueStr( int2str(protection_add) );
 }
 
 /*virtual*/
 void ProtectorModule::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "protector_module." + int2str(GetId()) + ".";
+    
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseModule(save_ptree, root);
-    SaveDataUniqueProtectorModule(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    BaseModule::SaveData(save_ptree, root);
+    ProtectorModule::SaveData(save_ptree, root);
 }
 
 /*virtual*/
 void ProtectorModule::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseModule(load_ptree);
-    LoadDataUniqueProtectorModule(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    BaseModule::LoadData(load_ptree);
+    ProtectorModule::LoadData(load_ptree);
 }
 
 /*virtual*/
-void ProtectorModule::Load()
+void ProtectorModule::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueBaseModule();
-    ResolveDataUniqueProtectorModule();
+    BaseItem::ResolveData();
+    BaseModule::ResolveData();
+    ProtectorModule::ResolveData();
 }
 
-void ProtectorModule::SaveDataUniqueProtectorModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void ProtectorModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueProtectorModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorModule::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"protection_add", protection_add);
 }
 
-void ProtectorModule::LoadDataUniqueProtectorModule(const boost::property_tree::ptree& load_ptree)
+void ProtectorModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueProtectorModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorModule::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     protection_add = load_ptree.get<int>("protection_add");
 }
 
-void ProtectorModule::ResolveDataUniqueProtectorModule()
+void ProtectorModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueProtectorModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorModule::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

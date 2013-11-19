@@ -38,16 +38,16 @@ class Asteroid : public BasePlanet
 
         virtual void Save(boost::property_tree::ptree&) const override final;
         virtual void Load(const boost::property_tree::ptree&) override final;
-        virtual void Load() override final;
+        virtual void Resolve() override final;
         
     private:          
         void PostDeathUniqueEvent(bool);
 
         virtual void UpdateInfo() override final;
         
-        void Save(boost::property_tree::ptree&, const std::string&) const;        
-        void Load(const boost::property_tree::ptree&);
-        void Resolve();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 }; 
 
 #endif 

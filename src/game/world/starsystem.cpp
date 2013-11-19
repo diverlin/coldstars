@@ -1107,7 +1107,7 @@ void StarSystem::LoadData(const boost::property_tree::ptree& load_ptree)
         {
             DistantNebulaEffect* dn = GetNewDistantNebulaEffect(NONE_ID);
             dn->Load(v.second);
-            dn->Load();
+            dn->Resolve();
             Add(dn);
         }
     }
@@ -1118,7 +1118,7 @@ void StarSystem::LoadData(const boost::property_tree::ptree& load_ptree)
         {
             DistantStarEffect* ds = GetNewDistantStarEffect(NONE_ID);
             ds->Load(v.second);
-            ds->Load();
+            ds->Resolve();
             Add(ds);
         }
     }

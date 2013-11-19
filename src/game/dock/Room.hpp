@@ -25,7 +25,7 @@
 class TextureOb; 
 class Kosmoport;
 
-struct UnresolvedDataUniqueRoom
+struct UnresolvedDataRoom
 {
     std::string textureOb_background_path;
     int owner_kosmoport_id;
@@ -51,10 +51,10 @@ class Room : public Base
             Kosmoport* owner_kosmoport;
                 TextureOb* textureOb_background;
                 
-                UnresolvedDataUniqueRoom data_unresolved_Room;
-                void SaveDataUniqueRoom(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueRoom(const boost::property_tree::ptree&);
-        void ResolveDataUniqueRoom();
+                UnresolvedDataRoom data_unresolved_Room;
+                void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 };
 
 #endif 

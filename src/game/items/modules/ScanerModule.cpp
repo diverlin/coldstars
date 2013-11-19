@@ -37,8 +37,8 @@ ScanerModule::~ScanerModule()
 /* virtual */        
 void ScanerModule::AddUniqueInfo()
 {
-        info.addTitleStr("scaner module");
-        info.addNameStr("scan_add:");      info.addValueStr( int2str(scan_add) );
+    info.addTitleStr("scaner module");
+    info.addNameStr("scan_add:");      info.addValueStr( int2str(scan_add) );
 }
 
 /*virtual*/
@@ -46,50 +46,50 @@ void ScanerModule::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "scaner_module." + int2str(GetId()) + ".";
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseModule(save_ptree, root);
-    SaveDataUniqueScanerModule(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    BaseModule::SaveData(save_ptree, root);
+    ScanerModule::SaveData(save_ptree, root);
 }
 
 /*virtual*/        
 void ScanerModule::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseModule(load_ptree);
-    LoadDataUniqueScanerModule(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    BaseModule::LoadData(load_ptree);
+    ScanerModule::LoadData(load_ptree);
 }
     
 /*virtual*/    
-void ScanerModule::Load()
+void ScanerModule::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueBaseModule();
-    ResolveDataUniqueScanerModule();
+    BaseItem::ResolveData();
+    BaseModule::ResolveData();
+    ScanerModule::ResolveData();
 }
 
-void ScanerModule::SaveDataUniqueScanerModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void ScanerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueScanerModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ScanerModule::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"scan_add", scan_add);
 }
 
-void ScanerModule::LoadDataUniqueScanerModule(const boost::property_tree::ptree& load_ptree)
+void ScanerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueScanerModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ScanerModule::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     scan_add = load_ptree.get<int>("scan_add");
 }
 
-void ScanerModule::ResolveDataUniqueScanerModule()
+void ScanerModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueScanerModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ScanerModule::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

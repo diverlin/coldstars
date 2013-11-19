@@ -38,7 +38,7 @@ class RocketModule : public BaseModule
         
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
                
            private:
                int ammo_max_add;
@@ -47,9 +47,9 @@ class RocketModule : public BaseModule
                
                void virtual AddUniqueInfo();
                
-               void SaveDataUniqueRocketModule(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueRocketModule(const boost::property_tree::ptree&);
-        void ResolveDataUniqueRocketModule(); 
+               void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData(); 
 };
 
 #endif

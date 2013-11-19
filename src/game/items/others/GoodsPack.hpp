@@ -35,15 +35,15 @@ class GoodsPack : public BaseItem
         
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
     private:
         virtual void AddCommonInfo();
          virtual void AddUniqueInfo();   
          
-         void SaveDataUniqueGoodsPack(boost::property_tree::ptree&, const std::string&) const;
-         void LoadDataUniqueGoodsPack(const boost::property_tree::ptree& load_ptree);
-         void ResolveDataUniqueGoodsPack();
+         void SaveData(boost::property_tree::ptree&, const std::string&) const;
+         void LoadData(const boost::property_tree::ptree& load_ptree);
+         void ResolveData();
          
 };
 

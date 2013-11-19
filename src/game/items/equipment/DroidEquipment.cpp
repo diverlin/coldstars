@@ -98,52 +98,53 @@ std::string DroidEquipment::GetRepairStr()
 void DroidEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "droid_equipment." + int2str(GetId()) + ".";
+
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseEquipment(save_ptree, root);
-    SaveDataUniqueDroidEquipment(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    BaseEquipment::SaveData(save_ptree, root);
+    DroidEquipment::SaveData(save_ptree, root);
 }
 
 /*virtual*/
 void DroidEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseEquipment(load_ptree);
-    LoadDataUniqueDroidEquipment(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    BaseEquipment::LoadData(load_ptree);
+    DroidEquipment::LoadData(load_ptree);
 }
 
 /*virtual*/
-void DroidEquipment::Load()
+void DroidEquipment::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueBaseEquipment();
-    ResolveDataUniqueDroidEquipment();
+    BaseItem::ResolveData();
+    BaseEquipment::ResolveData();
+    DroidEquipment::ResolveData();
 }
 
-void DroidEquipment::SaveDataUniqueDroidEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void DroidEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueDroidEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidEquipment::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
         save_ptree.put(root+"repair_orig", repair_orig);
 }
                 
-void DroidEquipment::LoadDataUniqueDroidEquipment(const boost::property_tree::ptree& load_ptree)
+void DroidEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueDroidEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidEquipment::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-        repair_orig = load_ptree.get<int>("repair_orig");
+    repair_orig = load_ptree.get<int>("repair_orig");
 }                
 
-void DroidEquipment::ResolveDataUniqueDroidEquipment()
+void DroidEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueDroidEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidEquipment::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

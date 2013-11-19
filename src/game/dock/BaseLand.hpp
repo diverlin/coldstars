@@ -24,7 +24,7 @@
 
 class Vehicle;
 
-struct UnresolvedDataUniqueBaseLand
+struct UnresolvedDataBaseLand
 {
     int owner_id;
 };
@@ -50,10 +50,10 @@ class BaseLand : public Base
         protected:
                 BaseSpaceEntity* owner;
              
-                 UnresolvedDataUniqueBaseLand data_unresolved_BaseLand;
-                void SaveDataUniqueBaseLand(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueBaseLand(const boost::property_tree::ptree&);
-        void ResolveDataUniqueBaseLand();
+                 UnresolvedDataBaseLand data_unresolved_BaseLand;
+                void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 };
 
 #endif

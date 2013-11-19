@@ -28,10 +28,12 @@ class Vehicle;
 class TextureOb;
 
 
-struct UnresolvedDataUniqueBaseSlot
+struct UnresolvedDataBaseSlot
 {
-    UnresolvedDataUniqueBaseSlot():owner_id(NONE_ID) 
-    {};
+    UnresolvedDataBaseSlot()
+    :
+    owner_id(NONE_ID) 
+    {}
     
     INTLONGEST owner_id;    
 };
@@ -65,10 +67,10 @@ class BaseSlot : public Base
         
         glm::vec2 position;
      
-        UnresolvedDataUniqueBaseSlot unresolved_BaseSlot;
-        void SaveDataUniqueBaseSlot(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueBaseSlot(const boost::property_tree::ptree&);
-        void ResolveDataUniqueBaseSlot();
+        UnresolvedDataBaseSlot unresolved_BaseSlot;
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 }; 
 
 #endif

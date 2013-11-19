@@ -265,10 +265,11 @@ std::string GrappleEquipment::GetSpeedStr()
 void GrappleEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "grapple_equipment." + int2str(GetId()) + ".";
+
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseEquipment(save_ptree, root);
-    SaveDataUniqueGrappleEquipment(save_ptree, root);
+    BaseEquipment::SaveData(save_ptree, root);
+    GrappleEquipment::SaveData(save_ptree, root);
 }
 
 /*virtual*/
@@ -276,23 +277,23 @@ void GrappleEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseEquipment(load_ptree);
-    LoadDataUniqueGrappleEquipment(load_ptree);
+    BaseEquipment::LoadData(load_ptree);
+    GrappleEquipment::LoadData(load_ptree);
 }
 
 /*virtual*/
-void GrappleEquipment::Load()
+void GrappleEquipment::Resolve()
 {
     Base::ResolveData();
     BaseItem::ResolveData();
-    ResolveDataUniqueBaseEquipment();
-    ResolveDataUniqueGrappleEquipment();
+    BaseEquipment::ResolveData();
+    GrappleEquipment::ResolveData();
 }
 
-void GrappleEquipment::SaveDataUniqueGrappleEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void GrappleEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueGrappleEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleEquipment::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"strength_orig", strength_orig);
@@ -300,10 +301,10 @@ void GrappleEquipment::SaveDataUniqueGrappleEquipment(boost::property_tree::ptre
     save_ptree.put(root+"speed_orig", speed_orig);
 }
                 
-void GrappleEquipment::LoadDataUniqueGrappleEquipment(const boost::property_tree::ptree& load_ptree)
+void GrappleEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueGrappleEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleEquipment::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     strength_orig = load_ptree.get<int>("strength_orig");     
@@ -311,10 +312,10 @@ void GrappleEquipment::LoadDataUniqueGrappleEquipment(const boost::property_tree
     speed_orig = load_ptree.get<int>("speed_orig");           
 }                
 
-void GrappleEquipment::ResolveDataUniqueGrappleEquipment()
+void GrappleEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueGrappleEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleEquipment::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

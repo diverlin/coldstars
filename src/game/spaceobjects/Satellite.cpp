@@ -122,24 +122,24 @@ void Satellite::RenderAtPlanet(const Renderer& render)
 }        
 
 
-void Satellite::SaveDataUniqueSatellite(boost::property_tree::ptree&, const std::string&) const
+void Satellite::SaveData(boost::property_tree::ptree&, const std::string&) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Satellite("+int2str(GetId())+")::SaveDataUniqueSatellite", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Satellite("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void Satellite::LoadDataUniqueSatellite(const boost::property_tree::ptree&)
+void Satellite::LoadData(const boost::property_tree::ptree&)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Satellite("+int2str(GetId())+")::LoadDataUniqueSatellite", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Satellite("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void Satellite::ResolveDataUniqueSatellite()
+void Satellite::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Satellite("+int2str(GetId())+")::ResolveDataUniqueSatellite", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Satellite("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
 }
 

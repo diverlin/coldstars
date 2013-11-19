@@ -38,16 +38,16 @@ DriveModule::~DriveModule()
 /* virtual */
 void DriveModule::AddUniqueInfo()
 { 
-        info.addTitleStr("drive module"); 
-        if (speed_add != 0)
-        { 
-            info.addNameStr("speed_add:");       info.addValueStr( int2str(speed_add) );
-        } 
-        
-        if (hyper_add != 0)
-        { 
-            info.addNameStr("hyper_add:");       info.addValueStr( int2str(hyper_add) );
-        }
+    info.addTitleStr("drive module"); 
+    if (speed_add != 0)
+    { 
+        info.addNameStr("speed_add:");       info.addValueStr( int2str(speed_add) );
+    } 
+    
+    if (hyper_add != 0)
+    { 
+        info.addNameStr("hyper_add:");       info.addValueStr( int2str(hyper_add) );
+    }
 }
 
 
@@ -55,54 +55,55 @@ void DriveModule::AddUniqueInfo()
 void DriveModule::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "drive_module." + int2str(GetId()) + ".";
+    
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseModule(save_ptree, root);
-    SaveDataUniqueDriveModule(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    BaseModule::SaveData(save_ptree, root);
+    DriveModule::SaveData(save_ptree, root);
 }
 
 /*virtual*/        
 void DriveModule::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseModule(load_ptree);
-    LoadDataUniqueDriveModule(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    BaseModule::LoadData(load_ptree);
+    DriveModule::LoadData(load_ptree);
 }
     
 /*virtual*/    
-void DriveModule::Load()
+void DriveModule::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueBaseModule();
-    ResolveDataUniqueDriveModule();
+    BaseItem::ResolveData();
+    BaseModule::ResolveData();
+    DriveModule::ResolveData();
 }
 
-void DriveModule::SaveDataUniqueDriveModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void DriveModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueDriveModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DriveModule::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"speed_add", speed_add);
     save_ptree.put(root+"hyper_add", hyper_add);
 }
 
-void DriveModule::LoadDataUniqueDriveModule(const boost::property_tree::ptree& load_ptree)
+void DriveModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueDriveModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DriveModule::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     speed_add = load_ptree.get<int>("speed_add");
     hyper_add = load_ptree.get<int>("hyper_add");
 }
 
-void DriveModule::ResolveDataUniqueDriveModule()
+void DriveModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueDriveModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DriveModule::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

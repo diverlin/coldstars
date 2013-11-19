@@ -44,24 +44,24 @@ void GoodsPack::UpdateOwnerAbilities() { /* do nothing*/ }
 /* virtual */
 void GoodsPack::AddUniqueInfo() 
 {
-        info.addTitleStr("GOODS");
-        switch(GetSubTypeId())
-        {
-            case TYPE::ENTITY::MINERALS_ID:     { info.addNameStr("mineral:"); info.addValueStr(int2str(data_item.mass)); break; }
-            case TYPE::ENTITY::FOOD_ID:         { info.addNameStr("food:"); info.addValueStr(int2str(data_item.mass)); break; }
-            case TYPE::ENTITY::MEDICINE_ID:     { info.addNameStr("medicine:"); info.addValueStr(int2str(data_item.mass)); break; }
-            case TYPE::ENTITY::MILITARY_ID:     { info.addNameStr("military:"); info.addValueStr(int2str(data_item.mass)); break; }
-            case TYPE::ENTITY::DRUG_ID:         { info.addNameStr("drug:"); info.addValueStr(int2str(data_item.mass)); break; }
-            case TYPE::ENTITY::EXCLUSIVE_ID:     { info.addNameStr("exclusive:"); info.addValueStr(int2str(data_item.mass)); break; }
-            
-            default: { info.addNameStr("UNKNOWN:"); info.addValueStr("fix the bug"); break; }
-        }
+    info.addTitleStr("GOODS");
+    switch(GetSubTypeId())
+    {
+        case TYPE::ENTITY::MINERALS_ID:     { info.addNameStr("mineral:"); info.addValueStr(int2str(data_item.mass)); break; }
+        case TYPE::ENTITY::FOOD_ID:         { info.addNameStr("food:"); info.addValueStr(int2str(data_item.mass)); break; }
+        case TYPE::ENTITY::MEDICINE_ID:     { info.addNameStr("medicine:"); info.addValueStr(int2str(data_item.mass)); break; }
+        case TYPE::ENTITY::MILITARY_ID:     { info.addNameStr("military:"); info.addValueStr(int2str(data_item.mass)); break; }
+        case TYPE::ENTITY::DRUG_ID:         { info.addNameStr("drug:"); info.addValueStr(int2str(data_item.mass)); break; }
+        case TYPE::ENTITY::EXCLUSIVE_ID:     { info.addNameStr("exclusive:"); info.addValueStr(int2str(data_item.mass)); break; }
+        
+        default: { info.addNameStr("UNKNOWN:"); info.addValueStr("fix the bug"); break; }
+    }
 }
      
 /* virtual */    
 void GoodsPack::AddCommonInfo()
 {
-        //info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
+    //info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
 }
 
  
@@ -70,44 +70,44 @@ void GoodsPack::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "goods_pack." + int2str(GetId()) + ".";
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueGoodsPack(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    GoodsPack::SaveData(save_ptree, root);
 }
 
 /*virtual*/
 void GoodsPack::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueGoodsPack(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    GoodsPack::LoadData(load_ptree);
 }
     
 /*virtual*/
-void GoodsPack::Load()
+void GoodsPack::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueGoodsPack();
+    BaseItem::ResolveData();
+    GoodsPack::ResolveData();
 }
 
-void GoodsPack::SaveDataUniqueGoodsPack(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void GoodsPack::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueGoodsPack()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GoodsPack::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
          
-void GoodsPack::LoadDataUniqueGoodsPack(const boost::property_tree::ptree& load_ptree)
+void GoodsPack::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueGoodsPack()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GoodsPack::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 
-void GoodsPack::ResolveDataUniqueGoodsPack()
+void GoodsPack::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueGoodsPack()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GoodsPack::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

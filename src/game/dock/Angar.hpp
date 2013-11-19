@@ -56,7 +56,7 @@ class Angar : public Room
                                                         
                 void Save(boost::property_tree::ptree&) const;
         void Load(const boost::property_tree::ptree&);
-        void Load();
+        void Resolve();
         
         private:               
                 std::vector<VehicleSlot*> vehicle_total_slot_vec;
@@ -67,9 +67,9 @@ class Angar : public Room
                                                                                 
                 int price_fuel;
                 
-                void SaveDataUniqueAngar(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueAngar(const boost::property_tree::ptree&);
-        void ResolveDataUniqueAngar();
+                void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
         
         friend class GuiAngar;
 };

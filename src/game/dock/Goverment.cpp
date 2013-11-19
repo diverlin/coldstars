@@ -63,7 +63,7 @@ void Goverment::Save(boost::property_tree::ptree& save_ptree) const
 void Goverment::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    Room::LoadDataUniqueRoom(load_ptree);
+    Room::LoadData(load_ptree);
     Goverment::LoadData(load_ptree);
 }
 

@@ -54,7 +54,7 @@ void BulletData::Load(const boost::property_tree::ptree& load_ptree)
     angular_speed = load_ptree.get<float>("angular_speed"); 
 }
 
-void BulletData::Load()
+void BulletData::Resolve()
 {}
 
 
@@ -205,10 +205,11 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 void RocketEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "rocket_equipment." + int2str(GetId()) + ".";
+
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseEquipment(save_ptree, root);
-    SaveDataUniqueRocketEquipment(save_ptree, root);
+    BaseEquipment::SaveData(save_ptree, root);
+    RocketEquipment::SaveData(save_ptree, root);
 }
 
 /*virtual*/
@@ -216,23 +217,23 @@ void RocketEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseEquipment(load_ptree);
-    LoadDataUniqueRocketEquipment(load_ptree);
+    BaseEquipment::LoadData(load_ptree);
+    RocketEquipment::LoadData(load_ptree);
 }
 
 /*virtual*/
-void RocketEquipment::Load()
+void RocketEquipment::Resolve()
 {
     Base::ResolveData();
     BaseItem::ResolveData();
-    ResolveDataUniqueBaseEquipment();
-    ResolveDataUniqueRocketEquipment();
+    BaseEquipment::ResolveData();
+    RocketEquipment::ResolveData();
 }
 
-void RocketEquipment::SaveDataUniqueRocketEquipment(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void RocketEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueRocketEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketEquipment::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"ammo_max_orig", ammo_max_orig);
@@ -244,10 +245,10 @@ void RocketEquipment::SaveDataUniqueRocketEquipment(boost::property_tree::ptree&
     data_bullet.Save(save_ptree, root);
 }
                 
-void RocketEquipment::LoadDataUniqueRocketEquipment(const boost::property_tree::ptree& load_ptree)
+void RocketEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueRocketEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketEquipment::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     ammo_max_orig = load_ptree.get<int>("ammo_max_orig"); 
@@ -259,13 +260,13 @@ void RocketEquipment::LoadDataUniqueRocketEquipment(const boost::property_tree::
     data_bullet.Load(load_ptree.get_child("data_bullet"));
 }                
 
-void RocketEquipment::ResolveDataUniqueRocketEquipment()
+void RocketEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueRocketEquipment()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketEquipment::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-    data_bullet.Load();
+    data_bullet.Resolve();
 }
 
 

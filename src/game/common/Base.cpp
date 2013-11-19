@@ -41,7 +41,7 @@ std::string Base::GetDataTypeString() const
     return str;
 }
 
-void Base::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Base("+int2str(GetId())+")::SaveDataUniqueBase", SAVELOAD_LOG_DIP);
@@ -53,7 +53,7 @@ void Base::Save(boost::property_tree::ptree& save_ptree, const std::string& root
     save_ptree.put(root+"data_id.subsubtype_id", (int)m_Data_id.subsubtype_id);
 }
 
-void Base::Load(const boost::property_tree::ptree& load_ptree)
+void Base::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Base("+int2str(GetId())+")::LoadDataUniqueBase", SAVELOAD_LOG_DIP);
@@ -65,7 +65,7 @@ void Base::Load(const boost::property_tree::ptree& load_ptree)
     m_Data_id.subsubtype_id   = (TYPE::ENTITY)load_ptree.get<int>("data_id.subsubtype_id");
 }
 
-void Base::Resolve()
+void Base::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Base("+int2str(GetId())+")::ResolveDataUniqueBase", SAVELOAD_LOG_DIP);

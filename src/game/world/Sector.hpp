@@ -22,11 +22,12 @@
 
 #include "../spaceobjects/BaseSpaceEntity.hpp"
 #include "../common/constants.hpp"
+
 class Galaxy;
 class StarSystem;
 class StarSystemsConditionData;
 
-struct UnresolvedDataUniqueSector
+struct UnresolvedDataSector
 {
     int galaxy_id;
 };
@@ -56,19 +57,19 @@ class Sector : public BaseSpaceEntity
 
             void Save(boost::property_tree::ptree&) const;
             void Load(const boost::property_tree::ptree&);
-            void Load();
+            void Resolve();
 
          private:
              Galaxy* galaxy;
              glm::vec3 center;
              
-             UnresolvedDataUniqueSector data_unresolved_Sector;
+             UnresolvedDataSector data_unresolved_Sector;
              
                std::vector<StarSystem*> STARSYSTEM_vec;
         
-            void SaveDataUniqueSector(boost::property_tree::ptree&, const std::string&) const;
-            void LoadDataUniqueSector(const boost::property_tree::ptree&);
-            void ResolveDataUniqueSector();
+            void SaveData(boost::property_tree::ptree&, const std::string&) const;
+            void LoadData(const boost::property_tree::ptree&);
+            void ResolveData();
                            
                friend class GuiGalaxyMap;
                friend class Observation;

@@ -37,15 +37,15 @@ class DistantStarEffect : public BaseBackGroundEffect
         
         void Save(boost::property_tree::ptree&, const std::string&) const;        
         void Load(const boost::property_tree::ptree&);
-        void Load();
+        void Resolve();
     
     private:
         std::vector<glm::vec3> m_Positions;
         std::vector<glm::vec4> m_Colors;
 
-        void SaveDataUniqueDistantStarEffect(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueDistantStarEffect(const boost::property_tree::ptree&);
-        void ResolveDataUniqueDistantStarEffect();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 }; 
 
 DistantStarEffect* GetNewDistantStarEffect(int color_id = NONE_ID);

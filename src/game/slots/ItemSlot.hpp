@@ -61,9 +61,9 @@ class Box2D;
 class Renderer;
 
 
-struct UnresolvedDataUniqueItemSlot
+struct UnresolvedDataItemSlot
 {
-    UnresolvedDataUniqueItemSlot():target_id(NONE_ID), subtarget_id(NONE_ID) 
+    UnresolvedDataItemSlot():target_id(NONE_ID), subtarget_id(NONE_ID) 
     {};
     
     INTLONGEST target_id;    
@@ -148,7 +148,7 @@ class ItemSlot : public BaseSlot
         
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
-        virtual void Load();
+        virtual void Resolve();
         
         int GetItemRadius() const;
         int GetItemDamage() const;
@@ -171,10 +171,10 @@ class ItemSlot : public BaseSlot
         bool IsTargetInSameStarSystem(BaseSpaceEntity*) const;
         bool CheckDistanceToTarget(BaseSpaceEntity*) const;
         
-        UnresolvedDataUniqueItemSlot unresolved_ItemSlot;
-        void SaveDataUniqueItemSlot(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueItemSlot(const boost::property_tree::ptree&);
-        void ResolveDataUniqueItemSlot();
+        UnresolvedDataItemSlot unresolved_ItemSlot;
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
         
         void Log(const std::string&) const;
 }; 

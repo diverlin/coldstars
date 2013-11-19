@@ -45,51 +45,52 @@ void BakModule::AddUniqueInfo()
 void BakModule::Save(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "bak_module." + int2str(GetId()) + ".";
+
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseModule(save_ptree, root);
-    SaveDataUniqueBakModule(save_ptree, root);
+    BaseModule::SaveData(save_ptree, root);
+    BakModule::SaveData(save_ptree, root);
 }
 
 /*virtual*/        
 void BakModule::Load(const boost::property_tree::ptree& load_ptree)
 {
-        Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseModule(load_ptree);
-    LoadDataUniqueBakModule(load_ptree);
+    Base::LoadData(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    BaseModule::LoadData(load_ptree);
+    BakModule::LoadData(load_ptree);
 }
     
 /*virtual*/    
-void BakModule::Load()
+void BakModule::Resolve()
 {
-        Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueBaseModule();
-    ResolveDataUniqueBakModule();
+    Base::ResolveData();
+    BaseItem::ResolveData();
+    BaseModule::ResolveData();
+    BakModule::ResolveData();
 }
 
-void BakModule::SaveDataUniqueBakModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void BakModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueBakModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BakModule::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"fuel_max_add", fuel_max_add);
 }
 
-void BakModule::LoadDataUniqueBakModule(const boost::property_tree::ptree& load_ptree)
+void BakModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueBakModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BakModule::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     fuel_max_add = load_ptree.get<int>("fuel_max_add");
 }
 
-void BakModule::ResolveDataUniqueBakModule()
+void BakModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueBakModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BakModule::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

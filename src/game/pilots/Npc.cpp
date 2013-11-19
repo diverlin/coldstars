@@ -327,7 +327,7 @@ void Npc::Resolve()
     Npc::ResolveData();    
 }
   
-void Npc::SaveDat(boost::property_tree::ptree& save_ptree, const std::string& root) const    
+void Npc::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    
 {
     save_ptree.put(root+"is_alive", is_alive);
     save_ptree.put(root+"race_id", (int)race_id);
@@ -374,7 +374,7 @@ void Npc::ResolveData()
     ((Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
     SetAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
-    skills.Load();
+    skills.Resolve();
     
     if (data_unresolved_npc.macrotask.GetScenarioTypeId() != TYPE::AISCENARIO::NONE_ID)
     {

@@ -54,7 +54,7 @@ class Kosmoport : public BaseLand
                         
         void Save(boost::property_tree::ptree&) const;        
         void Load(const boost::property_tree::ptree&);
-        void Load();
+        void Resolve();
         
     private:
         TYPE::RACE race_id;
@@ -66,9 +66,9 @@ class Kosmoport : public BaseLand
 
         virtual void PutChildsToGarbage() const;
                 
-        void SaveDataUniqueKosmoport(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueKosmoport(const boost::property_tree::ptree&);
-        void ResolveDataUniqueKosmoport();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 };
 
 #endif

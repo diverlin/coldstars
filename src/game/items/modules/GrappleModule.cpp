@@ -63,34 +63,35 @@ void GrappleModule::AddUniqueInfo()
 void GrappleModule::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "grapple_module." + int2str(GetId()) + ".";
+
     Base::SaveData(save_ptree, root);
-        BaseItem::SaveData(save_ptree, root);
-    SaveDataUniqueBaseModule(save_ptree, root);
-    SaveDataUniqueGrappleModule(save_ptree, root);
+    BaseItem::SaveData(save_ptree, root);
+    BaseModule::SaveData(save_ptree, root);
+    GrappleModule::SaveData(save_ptree, root);
 }
 
 /*virtual*/        
 void GrappleModule::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-        BaseItem::LoadData(load_ptree);
-    LoadDataUniqueBaseModule(load_ptree);
-    LoadDataUniqueGrappleModule(load_ptree);
+    BaseItem::LoadData(load_ptree);
+    BaseModule::LoadData(load_ptree);
+    GrappleModule::LoadData(load_ptree);
 }
     
 /*virtual*/    
-void GrappleModule::Load()
+void GrappleModule::Resolve()
 {
     Base::ResolveData();
-        BaseItem::ResolveData();
-    ResolveDataUniqueBaseModule();
-    ResolveDataUniqueGrappleModule();
+    BaseItem::ResolveData();
+    BaseModule::ResolveData();
+    GrappleModule::ResolveData();
 }
 
-void GrappleModule::SaveDataUniqueGrappleModule(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void GrappleModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SaveDataUniqueGrappleModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleModule::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"strength_add", strength_add);
@@ -99,10 +100,10 @@ void GrappleModule::SaveDataUniqueGrappleModule(boost::property_tree::ptree& sav
     save_ptree.put(root+"maxNumItem_add", maxNumItem_add);
 }
 
-void GrappleModule::LoadDataUniqueGrappleModule(const boost::property_tree::ptree& load_ptree)
+void GrappleModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LoadDataUniqueGrappleModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleModule::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     strength_add = load_ptree.get<int>("strength_add");
@@ -111,10 +112,10 @@ void GrappleModule::LoadDataUniqueGrappleModule(const boost::property_tree::ptre
     maxNumItem_add = load_ptree.get<int>("maxNumItem_add");
 }
 
-void GrappleModule::ResolveDataUniqueGrappleModule()
+void GrappleModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ResolveDataUniqueGrappleModule()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleModule::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

@@ -568,7 +568,7 @@ void ItemSlot::Resolve()
 void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::SaveDataUniqueItemSlot", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 
     if (m_Target != nullptr)    { save_ptree.put(root+"unresolved_ItemSlot.target_id", m_Target->GetId()); }
@@ -581,7 +581,7 @@ void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
 void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::LoadDataUniqueItemSlot", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
     
     unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id"); 
@@ -591,7 +591,7 @@ void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 void ItemSlot::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::ResolveDataUniqueItemSlot", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ItemSlot("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     if (unresolved_ItemSlot.target_id != NONE_ID)

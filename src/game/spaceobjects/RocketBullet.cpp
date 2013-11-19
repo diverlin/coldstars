@@ -171,7 +171,7 @@ void RocketBullet::RenderInSpace(const Renderer& render, float scale)
 }
 
 
-void RocketBullet::SaveDataUniqueRocketBullet(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     save_ptree.put(root+"speed", m_Speed);
     save_ptree.put(root+"owner_id", m_OwnerId);
@@ -181,7 +181,7 @@ void RocketBullet::SaveDataUniqueRocketBullet(boost::property_tree::ptree& save_
     m_DataBullet.Save(save_ptree, root);
 }
 
-void RocketBullet::LoadDataUniqueRocketBullet(const boost::property_tree::ptree& load_ptree)
+void RocketBullet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     m_Speed = load_ptree.get<float>("speed");  
     m_OwnerId = load_ptree.get<int>("owner_id");  
@@ -190,7 +190,7 @@ void RocketBullet::LoadDataUniqueRocketBullet(const boost::property_tree::ptree&
     m_DataBullet.Load(load_ptree.get_child("data_bullet"));
 }
 
-void RocketBullet::ResolveDataUniqueRocketBullet()
+void RocketBullet::ResolveData()
 {           
     CreateDriveComplexTextureDependedStuff();
                 

@@ -47,7 +47,7 @@ class Container : public BaseSpaceEntity
                             
         virtual void Save(boost::property_tree::ptree&) const override final;
         virtual void Load(const boost::property_tree::ptree&) override final;
-        virtual void Load() override final;
+        virtual void Resolve() override final;
         
     private:
         ItemSlot* m_ItemSlot;        
@@ -59,9 +59,9 @@ class Container : public BaseSpaceEntity
          
         virtual void PutChildsToGarbage() const override final;
                         
-        void SaveDataUniqueContainer(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadDataUniqueContainer(const boost::property_tree::ptree&);
-        void ResolveDataUniqueContainer();
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
 };
 
 #endif 
