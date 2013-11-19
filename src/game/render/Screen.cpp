@@ -39,12 +39,25 @@ Screen::Screen()
 fps(0), 
 frames_counter(0), 
 last_time(0.0), 
+m_LastFbo(nullptr),
 scale(1.0), 
 d_scale(0.0)
-{}
+{
+    fbo0 = new Fbo();
+    fbo1 = new Fbo();
+    fbo2 = new Fbo();
+    fbo3 = new Fbo();
+    fbo4 = new Fbo();
+}
 
 Screen::~Screen()
-{}
+{
+    delete fbo0;
+    delete fbo1;
+    delete fbo2;
+    delete fbo3;
+    delete fbo4;
+}
 
 void Screen::InitRenderStuff()
 {   
@@ -66,11 +79,11 @@ void Screen::InitRenderStuff()
 
 void Screen::InitPostEffects()
 {
-    fbo0.Create();
-    fbo1.Create();    
-    fbo2.Create();
-    fbo3.Create();
-    fbo4.Create();
+    fbo0->Create();
+    fbo1->Create();    
+    fbo2->Create();
+    fbo3->Create();
+    fbo4->Create();
         
     bloom.Create(ShaderCollector::Instance().blur, ShaderCollector::Instance().extractbright, ShaderCollector::Instance().combine);
     
@@ -115,11 +128,11 @@ void Screen::Resize(int width, int height)
     
 void Screen::ResizePostEffects(int width, int height)
 {
-    fbo0.Resize(width, height);
-    fbo1.Resize(width, height);    
-    fbo2.Resize(width, height);
-    fbo3.Resize(width, height);
-    fbo4.Resize(width, height);
+    fbo0->Resize(width, height);
+    fbo1->Resize(width, height);    
+    fbo2->Resize(width, height);
+    fbo3->Resize(width, height);
+    fbo4->Resize(width, height);
         
     bloom.Resize(width, height);
 }

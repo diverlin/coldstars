@@ -385,11 +385,12 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 visible_STAR_vec[i]->Render_NEW(render);                                   
             }
         }
+        Screen::Instance().SetLastFbo(&Screen::Instance().GetFbo0());
         Screen::Instance().GetFbo0().Deactivate();
 
         // BLOOM background and star (uses many FBO)
         // resizeGl(w, h); 
-        Screen::Instance().GetBloom().Proceed(render, w, h, Screen::Instance().GetFbo0().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
+        Screen::Instance().GetBloom().Proceed(render, w, h, Screen::Instance().GetLastFbo().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
         
         // VOLUMETRIC LIGHT to FBO1
         // resizeGl(w, h); 
@@ -413,12 +414,13 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             glUseProgram(0);
             glActiveTexture(GL_TEXTURE0);
         }
+        Screen::Instance().SetLastFbo(&Screen::Instance().GetFbo1());
         Screen::Instance().GetFbo1().Deactivate();    
 
         // render space entites to FBO2     
         Screen::Instance().GetFbo2().Activate(w, h);
         {
-            render.DrawQuadTexturedFullScreen(Screen::Instance().GetFbo1().GetTexture());
+            render.DrawQuadTexturedFullScreen(Screen::Instance().GetLastFbo().GetTexture());
            
             // resizeGl(w*scale, h*scale);     
             render.enable_DEPTH();  
@@ -502,9 +504,10 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             render.disable_BLEND();
 
         }
+        Screen::Instance().SetLastFbo(&Screen::Instance().GetFbo2());
         Screen::Instance().GetFbo2().Deactivate();
             
-        render.DrawQuadTexturedFullScreen(Screen::Instance().GetFbo2().GetTexture());
+        render.DrawQuadTexturedFullScreen(Screen::Instance().GetLastFbo().GetTexture());
                 
                 
         /*
@@ -544,7 +547,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             glUseProgram(ShaderCollector::Instance().shockwave);
             {
                 glActiveTexture(GL_TEXTURE0);                                
-                glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetFbo2().GetTexture());
+                glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetLastFbo().GetTexture());
                 glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "sceneTex"), 0);
     
                 glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "distortion_num"), i);
@@ -556,38 +559,32 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             }
             glUseProgram(0);
         }
+        Screen::Instance().SetLastFbo(&Screen::Instance().GetFbo3());
         Screen::Instance().GetFbo3().Deactivate();
 
         // render effects not distorted by SHOCKWAVE
         Screen::Instance().GetFbo4().Activate(w, h);
         {
             resizeGl(w, h); 
-            drawFullScreenTexturedQuad(Screen::Instance().GetFbo3().GetTexture(), w, h, -999.0);
+            drawFullScreenTexturedQuad(Screen::Instance().GetLastFbo().GetTexture(), w, h, -999.0);
 
             resizeGl(w*scale, h*scale);             
             camera(world_coord.x, world_coord.y, CAMERA_POS_Z); 
             */           
-            //render.enable_BLEND();
-            //{
-                for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
-                { 
-                    LazerTraceEffect& lazer_trace = *visible_effect_LAZERTRACE_vec[i];
-                    render.RenderMeshGeometry(lazer_trace.GetMesh(), lazer_trace.GetTextureOb(), lazer_trace.GetActualModelMatrix()); 
-                }
-        
-                //render.enable_POINTSPRITE();
-                //{
-                    for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
-                    {   
-                        BaseParticleSystem& ps = *visible_effect_PARTICLESYSTEM_vec[i];
-                        render.DrawParticles(ps.GetMesh(), ps.GetTextureOb(), ps.GetActualModelMatrix()); 
-                    }
-                //}
-                //render.disable_POINTSPRITE();
-            //}
-            //render.disable_BLEND();
+            for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
+            { 
+                LazerTraceEffect& lazer_trace = *visible_effect_LAZERTRACE_vec[i];
+                render.RenderMeshGeometry(lazer_trace.GetMesh(), lazer_trace.GetTextureOb(), lazer_trace.GetActualModelMatrix()); 
+            }
+            
+            for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
+            {   
+                BaseParticleSystem& ps = *visible_effect_PARTICLESYSTEM_vec[i];
+                render.DrawParticles(ps.GetMesh(), ps.GetTextureOb(), ps.GetActualModelMatrix()); 
+            }
             /*
         }
+        Screen::Instance().SetLastFbo(&Screen::Instance().GetFbo4());
         Screen::Instance().GetFbo4().Deactivate();
         
         
@@ -603,7 +600,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
         glUseProgram(ShaderCollector::Instance().fogwarspark);
         {
             glActiveTexture(GL_TEXTURE0);                                
-            glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetFbo4().GetTexture());
+            glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetLastFbo().GetTexture());
             glUniform1i (glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "sceneTex"), 0);
     
             glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "resolution"), w, h);

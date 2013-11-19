@@ -322,19 +322,6 @@ void Renderer::DrawQuadTexturedBlurred(GLuint texture, int w, int h) const
     glUseProgram(0);
 }
  
-void Renderer::DrawParticleTextured(const TextureOb& texOb, const glm::vec3& center, float size) const
-{
-    glBindTexture(GL_TEXTURE_2D, texOb.texture);
-    
-    glPointSize(size);
-        
-    glLoadMatrixf(&m_PVm[0][0]);  // point sprites doesn't use Model Matrix
-    
-    glBegin(GL_POINTS);
-        glVertex3f(center.x, center.y, center.z);
-    glEnd();
-} 
-
 void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     enable_BLEND();
@@ -432,6 +419,13 @@ void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) 
     
     glEnable(GL_TEXTURE_2D);
 }
+
+
+
+
+
+
+// TODO BELOW
 
 void drawColoredTextWithBackground(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color)
 {
