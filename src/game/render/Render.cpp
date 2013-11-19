@@ -177,18 +177,19 @@ void Renderer::RenderMeshGeometry(const Mesh& mesh, const TextureOb& textureOb, 
 {
     glBindTexture(GL_TEXTURE_2D, textureOb.texture);
     
-ComposeModelMatrix(Mm);                     
+    ComposeModelMatrix(Mm);                     
     mesh.Draw();
 }
 
 void Renderer::RenderTransparentMeshGeometry(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     enable_BLEND();
+    {
         glBindTexture(GL_TEXTURE_2D, textureOb.texture);
 
         ComposeModelMatrix(Mm);                     
         mesh.Draw();
-
+    }
     disable_BLEND();
 }
 

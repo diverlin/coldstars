@@ -31,7 +31,6 @@ class ExplosionEffect : public BaseParticleSystem
         float GetRadius() const { return m_Radius; }
 
         virtual void Update() override final;
-        virtual void Render(float) override final;
         
         void CreateParticles();
 

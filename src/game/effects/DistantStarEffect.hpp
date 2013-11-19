@@ -22,7 +22,6 @@
 
 #include <effects/BaseBackGroundEffect.hpp>    
 #include <types/MyInt.hpp>
-#include <render/Render.hpp>
 
 const int DISTANT_STAR_MIN = 10000;
 const int DISTANT_STAR_MAX = 10000;
@@ -30,10 +29,8 @@ const int DISTANT_STAR_MAX = 10000;
 class DistantStarEffect : public BaseBackGroundEffect
 {   
     public:
-        DistantStarEffect(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&);
+        DistantStarEffect(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
         ~DistantStarEffect();
-        
-        void Render(const Renderer&) const;
         
         void Save(boost::property_tree::ptree&, const std::string&) const;        
         void Load(const boost::property_tree::ptree&);
@@ -42,6 +39,7 @@ class DistantStarEffect : public BaseBackGroundEffect
     private:
         std::vector<glm::vec3> m_Positions;
         std::vector<glm::vec4> m_Colors;
+        std::vector<float> m_Sizes;
 
         void SaveData(boost::property_tree::ptree&, const std::string&) const;        
         void LoadData(const boost::property_tree::ptree&);
