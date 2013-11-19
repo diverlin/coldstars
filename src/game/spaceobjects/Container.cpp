@@ -158,7 +158,7 @@ void Container::SaveData(boost::property_tree::ptree& save_ptree) const
 
     Base::Save(save_ptree, root);
     Orientation::Save(save_ptree, root);
-    SaveDataUniqueBaseDrawable(save_ptree, root);
+    BaseDrawable::Save(save_ptree, root);
     SaveDataUniqueBaseSpaceEntity(save_ptree, root);
     SaveDataUniqueContainer(save_ptree, root);
 }
@@ -168,7 +168,7 @@ void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     Base::Load(load_ptree);
     Orientation::Load(load_ptree);
-    LoadDataUniqueBaseDrawable(load_ptree);
+    BaseDrawable::Load(load_ptree);
     LoadDataUniqueBaseSpaceEntity(load_ptree);
     LoadDataUniqueContainer(load_ptree);
 }
@@ -178,7 +178,7 @@ void Container::ResolveData()
 {
     Base::Resolve();
     Orientation::Resolve();
-    ResolveDataUniqueBaseDrawable();
+    BaseDrawable::Resolve();
     ResolveDataUniqueBaseSpaceEntity();
     ResolveDataUniqueContainer();
 }
