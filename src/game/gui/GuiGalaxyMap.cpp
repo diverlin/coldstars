@@ -147,17 +147,17 @@ void GuiGalaxyMap::RenderUnique(const Renderer& render, Player* player) const
             
             render.enable_POINTSPRITE();
             {     
-                drawParticleTextured(texOb_particle->texture, starsystem_pos, 30.0, -2.0);
+                //drawParticleTextured(texOb_particle->texture, starsystem_pos, 30.0, -2.0);
                 
                 if (starsystem.GetConquerorRaceId() != TYPE::RACE::NONE_ID)
                 {
-                    drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_captured->texture, starsystem_pos, 20.0, -2.0);
+                    //drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_captured->texture, starsystem_pos, 20.0, -2.0);
                 }
                 
                 if (starsystem.GetConditionId() == ENTITY::STARSYSTEM::CONDITION::WAR_ID)
                 {
                     glm::vec2 offset(0.0, -13.0);
-                    drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_war->texture, starsystem_pos + offset, 20.0, -2.0);
+                    //drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_war->texture, starsystem_pos + offset, 20.0, -2.0);
                 } 
             }               
             render.disable_POINTSPRITE();   
@@ -172,7 +172,7 @@ void GuiGalaxyMap::RenderUnique(const Renderer& render, Player* player) const
     {
         glm::vec2 player_starsystem_pos = vec3ToVec2(GetAbsoluteStarSystemPosition(*player->GetNpc()->GetVehicle()->GetStarSystem())); 
         
-        drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player_starsystem_pos, 40.0, -2.0);
+        //drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player_starsystem_pos, 40.0, -2.0);
         
         m_VisualHyperJumpRange.Draw(player_starsystem_pos);
         

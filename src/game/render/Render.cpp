@@ -432,124 +432,6 @@ void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) 
     
     glEnable(GL_TEXTURE_2D);
 }
-  
-//void drawQuad(const TextureOb& texOb,
-         //const glm::vec3& center, 
-         //const glm::vec3& size,
-         //float angle)
-//{
-    //glBindTexture(GL_TEXTURE_2D, texOb->texture);
-    //int frame = texOb->updateAnimationFrame();
-    
-    //glPushMatrix();
-    //{
-        //glTranslatef(center.x, center.y, center.z);
-        //glRotatef(angle, 0.0, 0.0, 1.0);
-        //glScalef(size.x, size.y, size.z);
-                                    
-        //glBegin(GL_QUADS);
-        //{   
-            //glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
-            //glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
-            //glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
-            //glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
-        //}
-        //glEnd();
-    //}
-    //glPopMatrix();
-//}
-
-//void drawQuad(const TextureOb& texOb,
-         //const glm::vec2& center, 
-         //const glm::vec2& size,
-         //float angle)
-//{
-    //glBindTexture(GL_TEXTURE_2D, texOb->texture);
-    //int frame = texOb->updateAnimationFrame();
-    
-    //glPushMatrix();
-    //{
-        //glTranslatef(center.x, center.y, GUI::POS_Z);
-        //glRotatef(angle, 0.0, 0.0, 1.0);
-        //glScalef(size.x, size.y, 1.0);
-                                    
-        //glBegin(GL_QUADS);
-        //{   
-            //glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
-            //glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
-            //glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
-            //glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
-        //}
-        //glEnd();
-    //}
-    //glPopMatrix();
-//}
-
-
-//void drawQuad(const TextureOb& texOb,
-         //const glm::vec2& center, 
-         //const glm::vec2& size,
-         //float angle,
-         //const TextureOb& texOb_mask,
-         //float threshold)
-//{
-    //glUseProgram(ShaderCollector::Instance().mask);
-    //{    
-        //int frame = 0;
-        //glActiveTexture(GL_TEXTURE0);
-        //glBindTexture(GL_TEXTURE_2D, texOb_mask->texture);
-        //glUniform1i(glGetUniformLocation(ShaderCollector::Instance().mask, "u_TextureMask"), 0);
-        
-        //glActiveTexture(GL_TEXTURE1);
-        //glBindTexture(GL_TEXTURE_2D, texOb->texture);        
-        //glUniform1i(glGetUniformLocation(ShaderCollector::Instance().mask, "u_TextureTarget"), 1);
-
-        //glUniform1f(glGetUniformLocation(ShaderCollector::Instance().mask, "u_Threshold"), threshold);
-                        
-        //glPushMatrix();
-        //{
-            //glTranslatef(center.x, center.y, GUI::POS_Z);
-            //glRotatef(angle, 0.0, 0.0, 1.0);
-            //glScalef(size.x, size.y, 1.0);
-                                        
-            //glBegin(GL_QUADS);
-            //{   
-                //glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
-                //glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
-                //glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
-                //glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
-            //}
-            //glEnd();
-        //}
-        //glPopMatrix();
-    //}
-    //glUseProgram(0);
-    //glActiveTexture(GL_TEXTURE0);
-//}
-
-//void drawQuad(const TextureOb& texOb, const Box2D& box)
-//{
-    //drawQuad(texOb, box.GetCenter(), box.GetSize()*box.GetScale(), box.GetAngle());
-//}
-
-//void drawQuadMasked(const TextureOb& texOb, const Box2D& box, const TextureOb& texOb_mask, float threshold)
-//{
-    //drawQuad(texOb, box.GetCenter(), box.GetSize()*box.GetScale(), box.GetAngle(), texOb_mask, threshold);
-//}
-
-//void drawTexturedRect(const TextureOb& texOb, const Rect& rect, float z_pos)
-//{
-    //glBindTexture(GL_TEXTURE_2D, texOb->texture);
-    //int frame = texOb->updateAnimationFrame();
-    
-    //glBegin(GL_QUADS);
-        //glTexCoord3f(texOb->texCoord_bottomLeft_vec[frame].x,  texOb->texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(rect.GetBottomLeft().x,                        rect.GetBottomLeft().y + rect.GetHeight(),     z_pos);
-        //glTexCoord3f(texOb->texCoord_bottomRight_vec[frame].x, texOb->texCoord_bottomRight_vec[frame].y, 0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(),     rect.GetBottomLeft().y + rect.GetHeight(),     z_pos);
-        //glTexCoord3f(texOb->texCoord_topRight_vec[frame].x,    texOb->texCoord_topRight_vec[frame].y,    0); glVertex3f(rect.GetBottomLeft().x + rect.GetWidth(),     rect.GetBottomLeft().y,                       z_pos);
-        //glTexCoord3f(texOb->texCoord_topLeft_vec[frame].x,     texOb->texCoord_topLeft_vec[frame].y,     0); glVertex3f(rect.GetBottomLeft().x,                         rect.GetBottomLeft().y,                      z_pos);
-    //glEnd();
-//}
-
 
 void drawLine(const TextureOb& texOb, 
               const glm::vec3& start_pos, 
@@ -557,6 +439,7 @@ void drawLine(const TextureOb& texOb,
               float angle_inD, 
               int half_h)
 {
+    /*
     glBindTexture(GL_TEXTURE_2D, texOb.texture);
     int frame = 0;//texOb.updateAnimationFrame();
         
@@ -571,6 +454,7 @@ void drawLine(const TextureOb& texOb,
             glTexCoord3f(texOb.texCoord_topLeft_vec[frame].x,     texOb.texCoord_topLeft_vec[frame].y,     0); glVertex3f(0,    half_h, 0.0);
         glEnd();
     glPopMatrix();
+    */
 }
 
 void drawColoredTextWithBackground(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color)
@@ -594,19 +478,19 @@ void drawColoredTextWithBackground(const std::string& str, int font_size, const 
 
 void drawColoredText(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color)
 {
-    glPushMatrix();
-    {
-        glLoadIdentity();
-        Screen::Instance().DrawText(str, font_size, pos, color);
-    }
-    glPopMatrix();
+    //glPushMatrix();
+    //{
+        //glLoadIdentity();
+        //Screen::Instance().DrawText(str, font_size, pos, color);
+    //}
+    //glPopMatrix();
 }
 
 void drawInfoIn2Column(
                     const std::vector<std::string>& info_title_list, 
                     const std::vector<std::string>& info_value_list, 
                     const glm::vec2& pos)
-{        
+{ /*       
     int font_size = 13;
     float char_w = font_size;
     float char_h = 2*font_size;
@@ -658,80 +542,8 @@ void drawInfoIn2Column(
         }
     }  
     //glPopMatrix();
+
+*/
 }
 
-    
-//void renderMesh(const Mesh* const mesh, const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle, bool ZYX)
-//{
-    //glPushMatrix();
-    //{
-        //glTranslatef(center.x, center.y, center.z);        
-        //glScalef(size.x, size.y, size.z); 
-        //if (ZYX)     {    rotateZYX(angle); } // animation rotation along axis X
-        //else        {    rotateXYZ(angle); } // animation rotation along axis z
-                        
-        //mesh->Draw();
-    //}
-    //glPopMatrix();
-
-//}
-
-//void rotateZYX(const glm::vec3& angle)
-//{
-    //glRotatef(angle.z, 0.0, 0.0, 1.0); 
-    //glRotatef(angle.y, 0.0, 1.0, 0.0); 
-    //glRotatef(angle.x, 1.0, 0.0, 0.0); 
-//}
-
-//void rotateXYZ(const glm::vec3& angle)
-//{
-    //glRotatef(angle.x, 1.0, 0.0, 0.0); 
-    //glRotatef(angle.y, 0.0, 1.0, 0.0); 
-    //glRotatef(angle.z, 0.0, 0.0, 1.0); 
-//}
-
-void drawParticleTextured(GLuint texture, const glm::vec2& center, float size, float pos_z)
-{
-    glBindTexture(GL_TEXTURE_2D, texture);
-    
-    glPointSize(size);
-        
-    glBegin(GL_POINTS);
-        glVertex3f(center.x, center.y, pos_z);
-    glEnd();
-}
-
-void drawParticle(const glm::vec2& center, float size, float r, float g, float b, float a)
-{        
-    glPointSize(size);
-            
-    glBegin(GL_POINTS);  
-    {                 
-        glColor4f(r, g, b, a);
-        glVertex3f(center.x, center.y, -2);
-    }
-    glEnd();
-}
-
-void drawParticle(const glm::vec2& center, float size, const glm::vec4& color)
-{    
-    glPointSize(size);
-            
-    glBegin(GL_POINTS);   
-    {            
-        glColor4f(color.r, color.g, color.b, color.a);
-        glVertex3f(center.x, center.y, -2);
-    }
-    glEnd();
-}
-
-void drawParticle(const glm::vec2& center, float size)
-{
-    glPointSize(size);
-            
-    glBegin(GL_POINTS); 
-    {                  
-        glVertex3f(center.x, center.y, -2);
-    }
-    glEnd();
-}
+  
