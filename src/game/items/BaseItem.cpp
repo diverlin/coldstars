@@ -26,7 +26,7 @@
 #include "../slots/ItemSlot.hpp"
 #include "../render/Render.hpp"
 #include "../resources/TextureManager.hpp"
-
+#include "../resources/textureOb.hpp"
 
 BaseItem::BaseItem()
 :

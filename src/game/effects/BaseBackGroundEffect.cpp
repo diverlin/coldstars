@@ -18,6 +18,7 @@
 
 #include "BaseBackGroundEffect.hpp"
 #include "../resources/TextureManager.hpp"
+#include "../resources/textureOb.hpp"
 #include "../render/Render.hpp"
 
 #include <glm/gtx/transform.hpp>

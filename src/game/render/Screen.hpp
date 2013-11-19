@@ -22,8 +22,6 @@
 #include <render/MyGl.hpp>
 
 #include "../math/myVector.hpp"
-#include "../render/Fbo.hpp"
-#include "../render/Bloom.hpp"
 #include "../common/rect.hpp"
 
 #include <render/Render.hpp>
@@ -36,10 +34,10 @@ class Screen : public SFML_Wrapper
 {
     public:
         static Screen& Instance();
-        void InitRenderStuff();
-       
-        void SetLastFbo(Fbo* fbo) { m_LastFbo = fbo; }
  
+
+        void InitRenderStuff();
+
         //Rect& GetRect() { return rect; };
         //glm::vec2 GetBottomLeftScreenWC()    { return rect.GetBottomLeft()*scale; }
         //glm::vec2 GetTopRightScreenWC()    { return rect.GetTopRight()*scale; }
@@ -53,15 +51,6 @@ class Screen : public SFML_Wrapper
         
         const glm::vec2& GetBottomLeft() const    { return rect.GetBottomLeft(); }
         const glm::vec2& GetTopRight()    const    { return rect.GetTopRight(); }
-
-        const Fbo& GetLastFbo() { return *m_LastFbo; }
-                        
-        Fbo& GetFbo0() { return *fbo0; }
-        Fbo& GetFbo1() { return *fbo1; }
-        Fbo& GetFbo2() { return *fbo2; }
-        Fbo& GetFbo3() { return *fbo3; }
-        Fbo& GetFbo4() { return *fbo4; }
-        BloomEffect& GetBloom() { return bloom; };    
         
         void MovingBy(const glm::vec2&);
         void InitiateScrollTo(const glm::vec2& scroll_coord) { target_center = scroll_coord; auto_scroll = true; };
@@ -75,9 +64,6 @@ class Screen : public SFML_Wrapper
         float GetScale() const { return scale; }
         void IncreaseScale();
         void DecreaseScale();
-
-        void InitPostEffects();
-        void ResizePostEffects(int, int);
                     
     private:
         Screen();
@@ -93,15 +79,6 @@ class Screen : public SFML_Wrapper
         int fps;
         int frames_counter;        
         float last_time;
-        
-        Fbo* m_LastFbo;
-        Fbo* fbo0;
-        Fbo* fbo1;
-        Fbo* fbo2;
-        Fbo* fbo3;
-        Fbo* fbo4;
-        
-        BloomEffect bloom;
         
         float scale;
         float d_scale;

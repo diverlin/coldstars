@@ -68,7 +68,7 @@ int main()
     
     Screen::Instance().InitRenderStuff();
     initGameStuff(); 
-    Screen::Instance().InitPostEffects();  
+    Screen::Instance().GetRender().InitPostEffects();  
     Screen::Instance().GetRender().MakeShortCuts();
         
     //runMatrixPerfomanceTest();

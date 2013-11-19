@@ -374,7 +374,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     render.enable_CULLFACE();
     {
         // render background and star to FBO0
-        Screen::Instance().GetFbo0().Activate(w, h);
+        render.ActivateFbo(0, w, h);
         {
             render.SetPerspectiveProjection(w, h);                
             starsystem->DrawBackground(render, world_coord);
@@ -385,25 +385,24 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 visible_STAR_vec[i]->Render_NEW(render);                                   
             }
         }
-        Screen::Instance().SetLastFbo(&Screen::Instance().GetFbo0());
-        Screen::Instance().GetFbo0().Deactivate();
+        render.DeactivateFbo(0);
 
         // BLOOM background and star (uses many FBO)
         // resizeGl(w, h); 
-        Screen::Instance().GetBloom().Proceed(render, w, h, Screen::Instance().GetLastFbo().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
+        render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
         
         // VOLUMETRIC LIGHT to FBO1
         // resizeGl(w, h); 
-        Screen::Instance().GetFbo1().Activate(w, h);
+        render.ActivateFbo(1, w, h);
         {
             glUseProgram(ShaderCollector::Instance().volumetriclight);
             {
                 glActiveTexture(GL_TEXTURE0);                                
-                glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom().GetFboFinal().GetTexture());
+                glBindTexture(GL_TEXTURE_2D, render.GetBloom().GetFboFinal().GetTexture());
                 glUniform1i(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "FullSampler"), 0);
         
                 glActiveTexture(GL_TEXTURE1);                                
-                glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetBloom().GetTextureBlured());
+                glBindTexture(GL_TEXTURE_2D, render.GetBloom().GetTextureBlured());
                 glUniform1i(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "BlurSampler"), 1);
         
                 glUniform4f(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "sun_pos"), -world_coord.x/(w*scale), -world_coord.y/(h*scale), -100.0, 1.0);
@@ -414,13 +413,12 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             glUseProgram(0);
             glActiveTexture(GL_TEXTURE0);
         }
-        Screen::Instance().SetLastFbo(&Screen::Instance().GetFbo1());
-        Screen::Instance().GetFbo1().Deactivate();    
+        render.DeactivateFbo(1);
 
         // render space entites to FBO2     
-        Screen::Instance().GetFbo2().Activate(w, h);
+        render.ActivateFbo(2, w, h);
         {
-            render.DrawQuadTexturedFullScreen(Screen::Instance().GetLastFbo().GetTexture());
+            render.DrawQuadTexturedFullScreen(render.GetLastFbo().GetTexture());
            
             // resizeGl(w*scale, h*scale);     
             render.enable_DEPTH();  
@@ -504,17 +502,16 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             render.disable_BLEND();
 
         }
-        Screen::Instance().SetLastFbo(&Screen::Instance().GetFbo2());
-        Screen::Instance().GetFbo2().Deactivate();
+        render.DeactivateFbo(2);
             
-        render.DrawQuadTexturedFullScreen(Screen::Instance().GetLastFbo().GetTexture());
+        render.DrawQuadTexturedFullScreen(render.GetLastFbo().GetTexture());
                 
                 
         /*
 
         // SHOCKWAVE post process to Fbo3
         resizeGl(w, h); 
-        Screen::Instance().GetFbo3().Activate(w, h);
+        render.ActivateFbo(3, w, h);
         {
             float center_array[SHOCKWAVES_MAX_NUM][2];
             float xyz_array[SHOCKWAVES_MAX_NUM][3];
@@ -559,11 +556,10 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             }
             glUseProgram(0);
         }
-        Screen::Instance().SetLastFbo(&Screen::Instance().GetFbo3());
-        Screen::Instance().GetFbo3().Deactivate();
+        render.DeactivateFbo(3);
 
         // render effects not distorted by SHOCKWAVE
-        Screen::Instance().GetFbo4().Activate(w, h);
+        render.ActivateFbo(4, w, h);
         {
             resizeGl(w, h); 
             drawFullScreenTexturedQuad(Screen::Instance().GetLastFbo().GetTexture(), w, h, -999.0);
@@ -584,8 +580,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             }
             /*
         }
-        Screen::Instance().SetLastFbo(&Screen::Instance().GetFbo4());
-        Screen::Instance().GetFbo4().Deactivate();
+        render.DeactivateFbo(4);
         
         
         // FOGWAR and STARSPARK to final scene
@@ -600,7 +595,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
         glUseProgram(ShaderCollector::Instance().fogwarspark);
         {
             glActiveTexture(GL_TEXTURE0);                                
-            glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetLastFbo().GetTexture());
+            glBindTexture(GL_TEXTURE_2D, render.GetLastFbo().GetTexture());
             glUniform1i (glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "sceneTex"), 0);
     
             glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "resolution"), w, h);

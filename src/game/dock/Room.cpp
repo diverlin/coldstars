@@ -21,6 +21,8 @@
 #include "../render/Render.hpp"
 #include "../resources/TextureManager.hpp"
  
+#include "../resources/textureOb.hpp"
+
 Room::Room()
 {    
     owner_kosmoport = nullptr;

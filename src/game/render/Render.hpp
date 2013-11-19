@@ -22,10 +22,12 @@
 
 #include <common/NonCopyable.hpp>
 #include <render/MyGl.hpp>
-#include "../resources/textureOb.hpp" // to be removed
 #include <common/Box2D.hpp>           // to be removed
+#include <render/Fbo.hpp>
+#include <render/Bloom.hpp>
 
 class Mesh;
+class TextureOb;
 
 enum class PROJECTION_TYPE { PERSPECTIVE, ORTHOGONAL};
 
@@ -34,8 +36,15 @@ class Renderer : public NonCopyable
     public:
         Renderer();
         ~Renderer();
+                        
+        void ActivateFbo(int, int, int);
+        void DeactivateFbo(int);
+
+        BloomEffect& GetBloom() { return m_Bloom; };
+        const Fbo& GetLastFbo() const { return m_Fbos[m_IndexFboLastDeactivated]; };
 
         void Init();
+        void InitPostEffects();
         void MakeShortCuts();
 
         void SetPerspectiveProjection(float, float);
@@ -85,9 +94,6 @@ class Renderer : public NonCopyable
         glm::mat4 m_PVm;
         
         glm::vec4 m_Color;
-       
-        void ComposeModelMatrix(const glm::mat4&) const;
-        void UpdateProjectionViewMatrix();
         
         GLuint m_ProgramLight;          
         GLint m_ProgramLightLocation_uProjectionViewMatrix;
@@ -99,7 +105,20 @@ class Renderer : public NonCopyable
         GLint m_ProgramLightLocation_uAmbientColor; 
         GLint m_ProgramLightLocation_uTexture; 
     
-        GLuint m_ProgramBlur;        
+        GLuint m_ProgramBlur;   
+
+        int m_FboNum;
+        Fbo m_Fbos[5];
+ 
+        int m_IndexFboLastActivated;
+        int m_IndexFboLastDeactivated;
+
+        BloomEffect m_Bloom;
+
+        void ComposeModelMatrix(const glm::mat4&) const;
+        void UpdateProjectionViewMatrix();
+
+        void ResizePostEffects(int, int);
 };
 
 // TEXT
