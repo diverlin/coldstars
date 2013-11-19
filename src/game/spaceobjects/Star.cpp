@@ -151,7 +151,7 @@ void Star::PostDeathUniqueEvent(bool)
 {}
 
    
-void Star::SaveDataUniqueStar(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Star::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Star("+int2str(GetId())+")::SaveDataUniqueStar", SAVELOAD_LOG_DIP);
@@ -161,7 +161,7 @@ void Star::SaveDataUniqueStar(boost::property_tree::ptree& save_ptree, const std
     save_ptree.put(root+"m_TurnSparkThreshold", m_TurnSparkThreshold);
 }
 
-void Star::LoadDataUniqueStar(const boost::property_tree::ptree& load_ptree)
+void Star::Load(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Star("+int2str(GetId())+")::LoadDataUniqueStar", SAVELOAD_LOG_DIP);
@@ -171,7 +171,7 @@ void Star::LoadDataUniqueStar(const boost::property_tree::ptree& load_ptree)
     m_TurnSparkThreshold = load_ptree.get<int>("m_TurnSparkThreshold");    
 }
 
-void Star::ResolveDataUniqueStar()
+void Star::Resolve()
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Star("+int2str(GetId())+")::ResolveDataUniqueStar", SAVELOAD_LOG_DIP);
@@ -188,8 +188,8 @@ void Star::SaveData(boost::property_tree::ptree& save_ptree) const
     Orientation::Save(save_ptree, root);
     BaseDrawable::Save(save_ptree, root);
     BaseSpaceEntity::Save(save_ptree, root);
-    SaveDataUniqueBasePlanet(save_ptree, root);
-    SaveDataUniqueStar(save_ptree, root);
+    BasePlanet::Save(save_ptree, root);
+    Save(save_ptree, root);
 }
 
 /* virtual override final */
@@ -199,8 +199,8 @@ void Star::LoadData(const boost::property_tree::ptree& load_ptree)
     Orientation::Load(load_ptree);
     BaseDrawable::Load(load_ptree);
     BaseSpaceEntity::Load(load_ptree);
-    LoadDataUniqueBasePlanet(load_ptree);
-    LoadDataUniqueStar(load_ptree);
+    BasePlanet::Load(load_ptree);
+    Load(load_ptree);
 }
 
 /* virtual override final */
@@ -210,6 +210,6 @@ void Star::ResolveData()
     Orientation::Resolve();
     BaseDrawable::Resolve();
     BaseSpaceEntity::Resolve();
-    ResolveDataUniqueBasePlanet();
-    ResolveDataUniqueStar();
+    BasePlanet::Resolve();
+    Resolve();
 }

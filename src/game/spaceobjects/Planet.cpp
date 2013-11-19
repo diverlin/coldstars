@@ -128,7 +128,7 @@ void Planet::Render_OLD(const Renderer& render)
     render.RenderMeshGeometry(GetMesh(), GetTextureOb(), GetActualModelMatrix());    
 }
 
-void Planet::SaveDataUniquePlanet(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Planet::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Planet("+int2str(GetId())+")::SaveDataUniquePlanet", SAVELOAD_LOG_DIP);
@@ -138,7 +138,7 @@ void Planet::SaveDataUniquePlanet(boost::property_tree::ptree& save_ptree, const
     save_ptree.put(root+"population", m_Population);
 }
 
-void Planet::LoadDataUniquePlanet(const boost::property_tree::ptree& load_ptree)
+void Planet::Load(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Planet("+int2str(GetId())+")::LoadDataUniquePlanet", SAVELOAD_LOG_DIP);
@@ -148,7 +148,7 @@ void Planet::LoadDataUniquePlanet(const boost::property_tree::ptree& load_ptree)
     m_Population = load_ptree.get<unsigned int>("population");    
 }
 
-void Planet::ResolveDataUniquePlanet()
+void Planet::Resolve()
 {
     #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Planet("+int2str(GetId())+")::ResolveDataUniquePlanet", SAVELOAD_LOG_DIP);
@@ -165,8 +165,8 @@ void Planet::SaveData(boost::property_tree::ptree& save_ptree) const
     Orientation::Save(save_ptree, root);
     BaseDrawable::Save(save_ptree, root);
     BaseSpaceEntity::Save(save_ptree, root);
-    SaveDataUniqueBasePlanet(save_ptree, root);
-    SaveDataUniquePlanet(save_ptree, root);
+    BasePlanet::Save(save_ptree, root);
+    Save(save_ptree, root);
 }
 
 /* virtual override final */
@@ -176,8 +176,8 @@ void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
     Orientation::Load(load_ptree);
     BaseDrawable::Load(load_ptree);
     BaseSpaceEntity::Load(load_ptree);
-    LoadDataUniqueBasePlanet(load_ptree);
-    LoadDataUniquePlanet(load_ptree);
+    BasePlanet::Load(load_ptree);
+    Load(load_ptree);
 }
 
 /* virtual override final */
@@ -187,6 +187,6 @@ void Planet::ResolveData()
     Orientation::Resolve();
     BaseDrawable::Resolve();
     BaseSpaceEntity::Resolve();
-    ResolveDataUniqueBasePlanet();
-    ResolveDataUniquePlanet();
+    BasePlanet::Resolve();
+    Resolve();
 }

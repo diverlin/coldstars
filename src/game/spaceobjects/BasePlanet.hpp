@@ -55,9 +55,9 @@ class BasePlanet : public BaseSpaceEntity
         void UpdatePosition();
         
         UnresolvedDataBasePlanet data_unresolved_BasePlanet;
-        void SaveDataUniqueBasePlanet(boost::property_tree::ptree&, const std::string&) const;
-        void LoadDataUniqueBasePlanet(const boost::property_tree::ptree&);
-        void ResolveDataUniqueBasePlanet();
+        void Save(boost::property_tree::ptree&, const std::string&) const;
+        void Load(const boost::property_tree::ptree&);
+        void Resolve();
         
     private:
         PlanetData m_DataPlanet;   
