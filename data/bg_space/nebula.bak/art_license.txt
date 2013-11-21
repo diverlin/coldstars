@@ -1,0 +1,7 @@
+##################################
+# Project:      freeorion
+# License:	see in << /data/license/new_art_info.txt >>
+##################################
+all pngs
+##################################
+
