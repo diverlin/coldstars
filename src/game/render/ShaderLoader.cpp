@@ -4,8 +4,9 @@
 #include <fstream>
 #include <vector>
 
-void compileProgram(const std::string& fname_vert, const std::string& fname_frag, GLuint program)
+GLuint compileProgram(const std::string& fname_vert, const std::string& fname_frag)
 {
+    GLuint program = glCreateProgram();
     if (program)
     {    
         std::cout<<fname_vert<<" "<<fname_frag<<std::endl;
@@ -27,6 +28,12 @@ void compileProgram(const std::string& fname_vert, const std::string& fname_frag
         glDeleteShader(vertex_shader);
         glDeleteShader(fragment_shader);
     }
+    else
+    {
+        std::cout<<"Shader program fail to generate"<<std::endl;        
+    }
+    
+    return program;
 }
 
 

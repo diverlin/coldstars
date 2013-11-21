@@ -4,7 +4,7 @@
 #include "MyGl.hpp"
 #include <string>
 
-void compileProgram(const std::string& vertex_fname, const std::string& fragment_fname, GLuint program);
+GLuint compileProgram(const std::string& vertex_fname, const std::string& fragment_fname);
 GLuint compileShader(const GLchar* source, GLenum shader_type);
 std::string file2String(const std::string&);
 

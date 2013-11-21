@@ -22,7 +22,6 @@
 #include <resources/MeshCollector.hpp>
 #include <resources/TextureManager.hpp>
 #include <resources/GuiTextureObCollector.hpp>
-#include <resources/ShaderCollector.hpp>
 
 #include <common/constants.hpp>
 #include <math/rand.hpp>

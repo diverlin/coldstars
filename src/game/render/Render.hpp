@@ -22,9 +22,11 @@
 
 #include <common/NonCopyable.hpp>
 #include <render/MyGl.hpp>
+
 #include <common/Box2D.hpp>           // to be removed
 #include <render/Fbo.hpp>
 #include <render/Bloom.hpp>
+#include <render/Shaders.hpp>
 
 class Mesh;
 class TextureOb;
@@ -39,17 +41,19 @@ class Renderer : public NonCopyable
                         
         void ActivateFbo(int, int, int);
         void DeactivateFbo(int);
-
-        BloomEffect& GetBloom() { return m_Bloom; };
-        const Fbo& GetLastFbo() const { return m_Fbos[m_IndexFboLastDeactivated]; };
-
+        
         void Init();
         void InitPostEffects();
         void MakeShortCuts();
 
         void SetPerspectiveProjection(float, float);
         void SetOrthogonalProjection(float, float);
-
+        void SetShaders(const Shaders& shaders) { m_Shaders = shaders; }
+        
+        BloomEffect& GetBloom() { return m_Bloom; };
+        const Fbo& GetLastFbo() const { return m_Fbos[m_IndexFboLastDeactivated]; };
+        const Shaders& GetShaders() const { return m_Shaders; }
+        
         void ClearScreen() const { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
         
         void enable_CULLFACE() const    { /*glEnable(GL_CULL_FACE);*/ }
@@ -94,6 +98,8 @@ class Renderer : public NonCopyable
         glm::mat4 m_PVm;
         
         glm::vec4 m_Color;
+        
+        Shaders m_Shaders;
         
         GLuint m_ProgramLight;          
         GLint m_ProgramLightLocation_uProjectionViewMatrix;

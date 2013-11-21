@@ -26,7 +26,7 @@
 
 #include "../resources/textureOb.hpp" // to be removed
 #include <resources/GuiTextureObCollector.hpp>
-#include <resources/ShaderCollector.hpp>
+#include <render/Shaders.hpp>
 
 #include "Mesh.hpp"
 #include "../common/constants.hpp"
@@ -117,7 +117,7 @@ void Renderer::InitPostEffects()
         m_Fbos[i].Create();
     }
         
-    m_Bloom.Create(ShaderCollector::Instance().blur, ShaderCollector::Instance().extractbright, ShaderCollector::Instance().combine);
+    m_Bloom.Create(m_Shaders.blur, m_Shaders.extractbright, m_Shaders.combine);
     
     int width      = Config::Instance().SCREEN_WIDTH; 
     int height     = Config::Instance().SCREEN_HEIGHT;
@@ -138,7 +138,7 @@ void Renderer::ResizePostEffects(int width, int height)
 void Renderer::MakeShortCuts()
 {
     {
-    m_ProgramLight = ShaderCollector::Instance().light;
+    m_ProgramLight = m_Shaders.light;
     m_ProgramLightLocation_uProjectionViewMatrix = glGetUniformLocation(m_ProgramLight, "u_ProjectionViewMatrix");
     m_ProgramLightLocation_uModelMatrix          = glGetUniformLocation(m_ProgramLight, "u_ModelMatrix");
     m_ProgramLightLocation_uNormalMatrix         = glGetUniformLocation(m_ProgramLight, "u_NormalModelMatrix");
@@ -153,7 +153,7 @@ void Renderer::MakeShortCuts()
     }    
     
     
-    m_ProgramBlur  = ShaderCollector::Instance().blur;
+    m_ProgramBlur  = m_Shaders.blur;
 }
         
 void Renderer::SetPerspectiveProjection(float w, float h) 
@@ -288,20 +288,20 @@ void Renderer::RenderMeshLightNormalMap(const Mesh& mesh, const TextureOb& textu
 {
     float ambient_factor = 0.25;
     
-    glUseProgram(ShaderCollector::Instance().light_normalmap);
+    glUseProgram(m_Shaders.light_normalmap);
     {
-        glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_lightPos"), -scroll_coords.x, -scroll_coords.y, 0.0);
-        glUniform3f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_eyePos"), -scroll_coords.x, -scroll_coords.y, 0.0);
-        glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_diffColor"), color.r, color.g, color.b, color.a);
-        glUniform4f(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
+        glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_lightPos"), -scroll_coords.x, -scroll_coords.y, 0.0);
+        glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_eyePos"), -scroll_coords.x, -scroll_coords.y, 0.0);
+        glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_diffColor"), color.r, color.g, color.b, color.a);
+        glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
                 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textureOb.texture);
-        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_texture"), 0);
+        glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_texture"), 0);
         
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, textureOb.normalmap);
-        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().light_normalmap, "u_normalmap"), 1);
+        glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_normalmap"), 1);
                 
         ComposeModelMatrix(Mm);                     
         mesh.Draw();
@@ -318,17 +318,17 @@ void Renderer::RenderTransparentMeshLight(const Mesh& mesh, const TextureOb& tex
 
 void Renderer::RenderMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm, float offset) const
 {
-    glUseProgram(ShaderCollector::Instance().multitexturing);
+    glUseProgram(m_Shaders.multitexturing);
     {    
         glActiveTexture(GL_TEXTURE0);                                
         glBindTexture(GL_TEXTURE_2D, textureOb.texture);
-        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_0"), 0);
+        glUniform1i(glGetUniformLocation(m_Shaders.multitexturing, "Texture_0"), 0);
         
         glActiveTexture(GL_TEXTURE1);                                
         glBindTexture(GL_TEXTURE_2D, textureOb.texture);
-        glUniform1i(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "Texture_1"), 1);
+        glUniform1i(glGetUniformLocation(m_Shaders.multitexturing, "Texture_1"), 1);
         
-        glUniform2f(glGetUniformLocation(ShaderCollector::Instance().multitexturing, "displ"), offset, -offset);
+        glUniform2f(glGetUniformLocation(m_Shaders.multitexturing, "displ"), offset, -offset);
         
         ComposeModelMatrix(Mm);                     
         mesh.Draw();
@@ -391,14 +391,14 @@ void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const
     {
         glPointSize(12.0f);
     
-        glUseProgram(ShaderCollector::Instance().particle);
+        glUseProgram(m_Shaders.particle);
         {    
             glActiveTexture(GL_TEXTURE0);                                
             glBindTexture(GL_TEXTURE_2D, textureOb.texture);
-            glUniform1i(glGetUniformLocation(ShaderCollector::Instance().particle, "uTexture_0"), 0);
+            glUniform1i(glGetUniformLocation(m_Shaders.particle, "uTexture_0"), 0);
 
-            glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().particle, "u_ModelMatrix"), 1, GL_FALSE, &Mm[0][0]);      
-            glUniformMatrix4fv(glGetUniformLocation(ShaderCollector::Instance().particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);       
+            glUniformMatrix4fv(glGetUniformLocation(m_Shaders.particle, "u_ModelMatrix"), 1, GL_FALSE, &Mm[0][0]);      
+            glUniformMatrix4fv(glGetUniformLocation(m_Shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);       
       
             mesh.Draw();
         }

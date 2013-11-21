@@ -1,7 +1,6 @@
 #include "SFML_Wrapper.hpp"
 //#include <boost/lexical_cast.hpp>
 
-#include "../resources/ShaderCollector.hpp"
 #include "../render/Render.hpp"
 #include "../config/config.hpp"
 #include "../common/common.hpp"
@@ -13,7 +12,7 @@ SFML_Wrapper::SFML_Wrapper()
     text12.setCharacterSize(12);
     text12.setColor(sf::Color(255,0,0,255));
     
-    std::string fontpath = DATA_REL_PATH+"font/font.ttf";
+    std::string fontpath = DATA_PATH+"font/font.ttf";
     ftfont.init(fontpath.c_str(), 20);
         
 }

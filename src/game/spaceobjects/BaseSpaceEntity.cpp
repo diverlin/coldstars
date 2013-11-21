@@ -29,7 +29,6 @@
 #include "../render/Render.hpp"
 #include "../text/VerticalFlowText.hpp" 
 #include "../common/Logger.hpp"
-#include "../resources/ShaderCollector.hpp"
 #include "../animations/BaseAnimationRotation.hpp"
 
 #include <render/Screen.hpp>

@@ -18,7 +18,6 @@
 
 
 #include "BasePlanet.hpp"
-#include <resources/ShaderCollector.hpp>
 
 #include <render/Render.hpp>
 
