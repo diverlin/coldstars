@@ -21,6 +21,7 @@
 
 #include "textureOb.hpp"
 #include <types/TextureTypes.hpp>
+
 #include "../common/IdGenerator.hpp"
 #include "../common/common.hpp"
 #include "../render/Screen.hpp"
