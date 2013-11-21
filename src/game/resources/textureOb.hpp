@@ -30,6 +30,11 @@
 #include <types/EntityTypes.hpp>
 #include <types/TechLevelTypes.hpp>
 
+//struct MaterialData
+//{
+
+//}
+
 
 class TextureOb
 {
