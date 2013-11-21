@@ -19,7 +19,6 @@
 
 #include "Player.hpp"
 #include "../config/config.hpp"
-#include "../resources/ShaderCollector.hpp"
 
 #include "../render/Render.hpp"
 #include "../render/Screen.hpp"
@@ -395,17 +394,17 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
         // resizeGl(w, h); 
         render.ActivateFbo(1, w, h);
         {
-            glUseProgram(ShaderCollector::Instance().volumetriclight);
+            glUseProgram(render.GetShaders().volumetriclight);
             {
                 glActiveTexture(GL_TEXTURE0);                                
                 glBindTexture(GL_TEXTURE_2D, render.GetBloom().GetFboFinal().GetTexture());
-                glUniform1i(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "FullSampler"), 0);
+                glUniform1i(glGetUniformLocation(render.GetShaders().volumetriclight, "FullSampler"), 0);
         
                 glActiveTexture(GL_TEXTURE1);                                
                 glBindTexture(GL_TEXTURE_2D, render.GetBloom().GetTextureBlured());
-                glUniform1i(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "BlurSampler"), 1);
+                glUniform1i(glGetUniformLocation(render.GetShaders().volumetriclight, "BlurSampler"), 1);
         
-                glUniform4f(glGetUniformLocation(ShaderCollector::Instance().volumetriclight, "sun_pos"), -world_coord.x/(w*scale), -world_coord.y/(h*scale), -100.0, 1.0);
+                glUniform4f(glGetUniformLocation(render.GetShaders().volumetriclight, "sun_pos"), -world_coord.x/(w*scale), -world_coord.y/(h*scale), -100.0, 1.0);
           
                 glActiveTexture(GL_TEXTURE0);
                 render.DrawQuad(w, h);

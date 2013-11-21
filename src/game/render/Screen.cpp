@@ -19,7 +19,6 @@
 #include "Screen.hpp"
 #include "../common/myStr.hpp"
 
-#include "../resources/ShaderCollector.hpp"
 #include "../render/Render.hpp"
 #include "../config/config.hpp"
 #include "../common/common.hpp"

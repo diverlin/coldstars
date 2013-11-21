@@ -29,8 +29,6 @@
 #include <world/EntityManager.hpp>
 #include <world/starsystem.hpp>
 
-#include <resources/ShaderCollector.hpp>
-
 #include <spaceobjects/Vehicle.hpp>
 
 #include <garbage/EntityGarbage.hpp>

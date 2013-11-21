@@ -17,37 +17,27 @@
 */
 
 
-#ifndef SHADERCOLLECTOR_HPP
-#define SHADERCOLLECTOR_HPP
+#ifndef SHADERS_HPP
+#define SHADERS_HPP
 
 #include <render/MyGl.hpp>
 
-class ShaderCollector
-{
-    public:
-        static ShaderCollector& Instance();
-        
-        GLuint black2alpha;
-        GLuint shockwave;
-        GLuint volumetriclight;
-        GLuint light;
-        GLuint light_normalmap;
-        GLuint blur;
-        GLuint extractbright;
-        GLuint combine;
-        GLuint multitexturing;
-        GLuint blank;
-        GLuint fogwarspark;
-        GLuint flash;
-        GLuint mask;
-        GLuint particle;
-                        
-    private:
-        ShaderCollector() {};
-        ~ShaderCollector() {};
-
-        ShaderCollector(const ShaderCollector&) = delete;
-        ShaderCollector& operator=(const ShaderCollector&) = delete;
+struct Shaders
+{      
+    GLuint black2alpha;
+    GLuint shockwave;
+    GLuint volumetriclight;
+    GLuint light;
+    GLuint light_normalmap;
+    GLuint blur;
+    GLuint extractbright;
+    GLuint combine;
+    GLuint multitexturing;
+    GLuint blank;
+    GLuint fogwarspark;
+    GLuint flash;
+    GLuint mask;
+    GLuint particle;
 };
 
 #endif 

@@ -26,7 +26,6 @@
 #include <world/EntityManager.hpp>
 #include <world/starsystem.hpp>
 
-#include <resources/ShaderCollector.hpp>
 #include <resources/textureOb.hpp>
 
 #include <render/Render.hpp>

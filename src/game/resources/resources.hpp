@@ -20,7 +20,7 @@
 #ifndef RESOURCES_HPP
 #define RESOURCES_HPP
 
-#include <string>
+#include <string> 
 
 void loadGameData();
 
