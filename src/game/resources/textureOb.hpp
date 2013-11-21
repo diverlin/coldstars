@@ -30,10 +30,63 @@
 #include <types/EntityTypes.hpp>
 #include <types/TechLevelTypes.hpp>
 
-//struct MaterialData
-//{
+struct MaterialData
+{
+    int id;
+    int w, h;
+    int w_slice, h_slice;
+    
+    glm::vec4 color;
 
-//}
+    GLuint texture;
+    GLuint normalmap;
+
+    bool is_animated;        
+    bool is_loaded;
+    bool is_shared;
+    bool use_alpha; 
+
+    std::vector<glm::vec2> texCoord_bottomLeft_vec;
+    std::vector<glm::vec2> texCoord_bottomRight_vec;
+    std::vector<glm::vec2> texCoord_topLeft_vec;
+    std::vector<glm::vec2> texCoord_topRight_vec;
+    
+    std::string path; 
+    
+    float brightThreshold;
+    int color_id;
+
+    MaterialData()
+    :
+    id(0),
+    w(1), h(1),
+    w_slice(1), h_slice(1),    
+    color(1.0f),
+    texture(0),
+    normalmap(0),
+    is_animated(false),        
+    use_alpha(false),
+    brightThreshold(1.0f),
+    color_id(0)
+    {}
+    
+};
+
+struct MaterialAssociation
+{
+    TYPE::TEXTURE type_id;
+    TYPE::ENTITY subtype_id;   //# warrior/trader and so on
+    TYPE::RACE race_id;
+    TYPE::TECHLEVEL tech_level_id;
+
+    MaterialAssociation()
+    :
+    type_id(TYPE::TEXTURE::NONE_ID),
+    subtype_id(TYPE::ENTITY::NONE_ID),
+    race_id(TYPE::RACE::NONE_ID),
+    tech_level_id(TYPE::TECHLEVEL::NONE_ID)
+    {}
+};
 
 
 class TextureOb

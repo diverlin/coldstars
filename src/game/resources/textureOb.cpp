@@ -44,7 +44,7 @@ void TextureOb::Manage(TYPE::TEXTURE type_id, const std::string& path, const std
 {
         // textureOb attributes INIT
         race_id = TYPE::RACE::NONE_ID;
-        tech_level_id = (TYPE::TECHLEVEL)TYPE::TECHLEVEL::NONE_ID;
+        tech_level_id = TYPE::TECHLEVEL::NONE_ID;
 
         color_id = NONE_ID;
         is_rotated = false;
