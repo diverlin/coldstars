@@ -62,10 +62,10 @@ void Ship::UpdateInfo()
     GetInfo().addTitleStr("SHIP");
     if (GetStarSystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()) ); }
     else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( int2str(GetId()) ); }
-    GetInfo().addNameStr("race:");          GetInfo().addValueStr( getRaceStr(GetTextureOb().race_id) ); 
+    GetInfo().addNameStr("race:");          GetInfo().addValueStr( getRaceStr(GetTextureOb().GetAssociation().race_id) ); 
     GetInfo().addNameStr("class:");         GetInfo().addValueStr( getEntityTypeStr(GetSubSubTypeId()) );         
     GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( int2str(GetDataLife().armor) + "/" + int2str(GetDataKorpus().armor) );
-    GetInfo().addNameStr("size id:");       GetInfo().addValueStr( int2str(GetTextureOb().size_id) );
+    GetInfo().addNameStr("size id:");       GetInfo().addValueStr( int2str(GetTextureOb().GetData().size_id) );
     GetInfo().addNameStr("space/free:");    GetInfo().addValueStr( int2str(GetDataKorpus().space) + "/" + int2str(GetProperties().free_space) );
     GetInfo().addNameStr("mass:");          GetInfo().addValueStr( int2str(GetMass()) );
     GetInfo().addNameStr("speedx100:");     GetInfo().addValueStr( int2str(GetProperties().speed*100) );

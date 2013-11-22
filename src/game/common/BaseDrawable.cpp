@@ -151,7 +151,7 @@ void BaseDrawable::SaveData(boost::property_tree::ptree& save_ptree, const std::
     if (m_Mesh) save_ptree.put(root+"data_unresolved_BaseDrawable.mesh_type_id", (int)m_Mesh->GetTypeId());
     else        save_ptree.put(root+"data_unresolved_BaseDrawable.mesh_type_id", (int)TYPE::MESH::NONE_ID);
     
-    if (m_TextureOb)    save_ptree.put(root+"data_unresolved_BaseDrawable.textureOb_path", m_TextureOb->path);
+    if (m_TextureOb)    save_ptree.put(root+"data_unresolved_BaseDrawable.textureOb_path", m_TextureOb->GetData().texture_path);
     else                save_ptree.put(root+"data_unresolved_BaseDrawable.textureOb_path", "none");
 }
 
