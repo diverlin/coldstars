@@ -170,7 +170,7 @@ void NatureLand::Resolve()
 
 void NatureLand::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    save_ptree.put(root+"data_unresolved_NatureLand.textureOb_background_path", textureOb_background->path);
+    save_ptree.put(root+"data_unresolved_NatureLand.textureOb_background_path", textureOb_background->GetData().texture_path);
 }
 
 void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)

@@ -40,7 +40,7 @@ void TextureManager::Add(TextureOb* texOb)
 {
     textureOb_total_vec.push_back(texOb);
 
-    switch(texOb->type_id)
+    switch(texOb->GetAssociation().type_id)
     {
         case TYPE::TEXTURE::SPACESTATION_ID: { spacestation_texOb_vec.push_back(texOb);    break; }       
         case TYPE::TEXTURE::SATELLITE_ID:    { satellite_texOb_vec.push_back(texOb);   break; }       
@@ -56,17 +56,17 @@ void TextureManager::Add(TextureOb* texOb)
         case TYPE::TEXTURE::RING_ID:  { ring_texOb_vec.push_back(texOb);     break; }
         case TYPE::TEXTURE::SHIP_ID:        
         {  
-            switch(texOb->race_id) 
+            switch(texOb->GetAssociation().race_id) 
             {
                     case TYPE::RACE::R0_ID:
                     {
-                        switch(texOb->subtype_id)
+                        switch(texOb->GetAssociation().subtype_id)
                         {
                             case TYPE::ENTITY::RANGER_ID:   { ship_race0_ranger_texOb_vec.push_back(texOb);   break; }
                             case TYPE::ENTITY::WARRIOR_ID:  { ship_race0_warrior_texOb_vec.push_back(texOb);  break; }
-                               case TYPE::ENTITY::TRADER_ID:   { ship_race0_trader_texOb_vec.push_back(texOb);   break; }
-                               case TYPE::ENTITY::PIRAT_ID:    { ship_race0_pirat_texOb_vec.push_back(texOb);    break; }
-                               case TYPE::ENTITY::DIPLOMAT_ID: { ship_race0_diplomat_texOb_vec.push_back(texOb); break; }
+                            case TYPE::ENTITY::TRADER_ID:   { ship_race0_trader_texOb_vec.push_back(texOb);   break; }
+                            case TYPE::ENTITY::PIRAT_ID:    { ship_race0_pirat_texOb_vec.push_back(texOb);    break; }
+                            case TYPE::ENTITY::DIPLOMAT_ID: { ship_race0_diplomat_texOb_vec.push_back(texOb); break; }
                         }
                         
                         break;
@@ -75,7 +75,7 @@ void TextureManager::Add(TextureOb* texOb)
 
                     case TYPE::RACE::R1_ID:
                     {
-                             switch(texOb->subtype_id)
+                             switch(texOb->GetAssociation().subtype_id)
                              {
                                  case TYPE::ENTITY::RANGER_ID:   { ship_race1_ranger_texOb_vec.push_back(texOb);   break; }
                                case TYPE::ENTITY::WARRIOR_ID:  { ship_race1_warrior_texOb_vec.push_back(texOb);  break; }
@@ -89,7 +89,7 @@ void TextureManager::Add(TextureOb* texOb)
 
                     case TYPE::RACE::R2_ID:
                     {
-                             switch(texOb->subtype_id)
+                             switch(texOb->GetAssociation().subtype_id)
                              {
                                  case TYPE::ENTITY::RANGER_ID: { ship_race2_ranger_texOb_vec.push_back(texOb); break; }
                                case TYPE::ENTITY::WARRIOR_ID: { ship_race2_warrior_texOb_vec.push_back(texOb); break; }
@@ -104,7 +104,7 @@ void TextureManager::Add(TextureOb* texOb)
                     
                 case TYPE::RACE::R3_ID:
                 {
-                    switch(texOb->subtype_id)
+                    switch(texOb->GetAssociation().subtype_id)
                     {
                         case TYPE::ENTITY::RANGER_ID:  { ship_race3_ranger_texOb_vec.push_back(texOb);    break; }
                                case TYPE::ENTITY::WARRIOR_ID: { ship_race3_warrior_texOb_vec.push_back(texOb);   break; }
@@ -118,7 +118,7 @@ void TextureManager::Add(TextureOb* texOb)
 
                     case TYPE::RACE::R4_ID:
                     {
-                        switch(texOb->subtype_id)
+                        switch(texOb->GetAssociation().subtype_id)
                         {    
                             case TYPE::ENTITY::RANGER_ID:   { ship_race4_ranger_texOb_vec.push_back(texOb);   break; }
                                case TYPE::ENTITY::WARRIOR_ID:  { ship_race4_warrior_texOb_vec.push_back(texOb);  break; }
@@ -132,7 +132,7 @@ void TextureManager::Add(TextureOb* texOb)
             
                 case TYPE::RACE::R6_ID:
                 {    
-                    switch(texOb->subtype_id)
+                    switch(texOb->GetAssociation().subtype_id)
                     {
                         case TYPE::ENTITY::RANGER_ID:   { ship_race6_ranger_texOb_vec.push_back(texOb);   break; }
                                case TYPE::ENTITY::WARRIOR_ID:  { ship_race6_warrior_texOb_vec.push_back(texOb);  break; }
@@ -146,7 +146,7 @@ void TextureManager::Add(TextureOb* texOb)
 
                 case TYPE::RACE::R7_ID:
                 {    
-                    switch(texOb->subtype_id)
+                    switch(texOb->GetAssociation().subtype_id)
                     {
                         case TYPE::ENTITY::RANGER_ID:   { ship_race7_ranger_texOb_vec.push_back(texOb);   break; }
                                case TYPE::ENTITY::WARRIOR_ID:  { ship_race7_warrior_texOb_vec.push_back(texOb);  break; }
@@ -202,7 +202,7 @@ void TextureManager::Add(TextureOb* texOb)
                 
         case TYPE::TEXTURE::FACE_ID:
         {
-            switch(texOb->race_id)
+            switch(texOb->GetAssociation().race_id)
             {
                        case TYPE::RACE::R0_ID: { face_race0_texOb_vec.push_back(texOb); break; } 
                        case TYPE::RACE::R1_ID: { face_race1_texOb_vec.push_back(texOb); break; } 
@@ -272,7 +272,7 @@ TextureOb* TextureManager::GetShipTexObBySizeFromVec(const std::vector<TextureOb
     TextureOb* requested_texOb = nullptr;
     for (unsigned int i=0; i<textureOb_vec.size(); i++)
            {
-               if (textureOb_vec[i]->size_id == size_id)
+               if (textureOb_vec[i]->GetData().size_id == size_id)
                {
                     requested_texOb = textureOb_vec[i];
                     break;
@@ -435,7 +435,7 @@ TextureOb* TextureManager::GetTexObByColorId(TYPE::TEXTURE _type_id, int _color_
     
          for(unsigned int i=0; i<requested_vec->size(); i++)
          {
-             if ((*requested_vec)[i]->color_id == _color_id)
+             if ((*requested_vec)[i]->GetData().color_id == _color_id)
              {
                     requested_texOb = (*requested_vec)[i]; 
                 }
@@ -558,7 +558,7 @@ TextureOb* TextureManager::GetTextureObByPath(const std::string& path)
     TextureOb* requested_texOb = nullptr;
     for (unsigned int i = 0; i<textureOb_total_vec.size(); i++)
     {
-        if (textureOb_total_vec[i]->path == path)
+        if (textureOb_total_vec[i]->GetData().texture_path == path)
         {
             requested_texOb = textureOb_total_vec[i];
             break;

@@ -106,31 +106,31 @@ void GuiRadar::RenderUnique(const Renderer& render, Player* player) const
             {
                 case TYPE::ENTITY::STAR_ID:
                 {
-                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_yellow->texture);
+                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_yellow->GetData().texture);
                     size = 2*size_base;
                     break;
                 }
                 case TYPE::ENTITY::PLANET_ID:
                 {
-                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_blue->texture);
+                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_blue->GetData().texture);
                     size = 1.5*size_base;
                     break;                
                 }
                 case TYPE::ENTITY::ASTEROID_ID:
                 {
-                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_red->texture);
+                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_red->GetData().texture);
                     size = 1.25*size_base;
                     break;                
                 }
                 case TYPE::ENTITY::BLACKHOLE_ID:
                 {
-                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_purple->texture);
+                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_purple->GetData().texture);
                     size = 1.5*size_base;
                     break;                
                 }
                 case TYPE::ENTITY::VEHICLE_ID:
                 {
-                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_green->texture);
+                    glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_green->GetData().texture);
                     size = 1*size_base;
                     break;                
                 }

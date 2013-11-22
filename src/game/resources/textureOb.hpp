@@ -35,7 +35,11 @@ struct MaterialData
     int id;
     int w, h;
     int w_slice, h_slice;
-    
+    float fps;
+    int col_num;
+    int row_num;
+    int size_id;
+
     glm::vec4 color;
 
     GLuint texture;
@@ -51,23 +55,30 @@ struct MaterialData
     std::vector<glm::vec2> texCoord_topLeft_vec;
     std::vector<glm::vec2> texCoord_topRight_vec;
     
-    std::string path; 
+    std::string texture_path; 
+    std::string normalmap_path; 
     
     float brightThreshold;
     int color_id;
+    bool is_rotated;
 
     MaterialData()
     :
     id(0),
     w(1), h(1),
-    w_slice(1), h_slice(1),    
+    w_slice(1), h_slice(1),
+    fps(0.0f),
+    col_num(1),
+    row_num(1),    
+    size_id(0),
     color(1.0f),
     texture(0),
     normalmap(0),
     is_animated(false),        
     use_alpha(false),
     brightThreshold(1.0f),
-    color_id(0)
+    color_id(0),
+    is_rotated(false)
     {}
     
 };
@@ -92,114 +103,34 @@ struct MaterialAssociation
 class TextureOb
 {
     public:
-        // textureOb attributes
-        TYPE::TEXTURE type_id;
-        TYPE::ENTITY subtype_id;   //# warrior/trader and so on
-        int mod_id;       // is not used for now
-        TYPE::RACE race_id;
-        TYPE::TECHLEVEL tech_level_id;
-        int size_id;      // counting from wxh of sprite
+        TextureOb(const MaterialData& data);
+        ~TextureOb();
+
+        int GetFrameWidth() const  { return m_Data.w_slice; }
+        int GetFrameHeight() const { return m_Data.h_slice; }
         
-        int color_id;     // probably color_rgb will be more usefull
-        //std::vector<int> color_id_vec; // used for particles sprite sheet
-        bool is_rotated;
+        void RemoveFromVRAM();
         
-        float brightThreshold;
-        //
-        
-        int id;
-        
-        std::string path;
-        bool use_alpha; 
-        
-        std::vector<glm::vec2> texCoord_bottomLeft_vec;
-        std::vector<glm::vec2> texCoord_bottomRight_vec;
-        std::vector<glm::vec2> texCoord_topLeft_vec;
-        std::vector<glm::vec2> texCoord_topRight_vec;
-        
-        GLuint texture;
-        GLuint normalmap;
-        
-        bool is_loaded, is_shared;
-        
-        TextureOb();
-        TextureOb(TYPE::TEXTURE type_id, const std::string& path, bool use_alpha, std::vector<int>* args = nullptr, int columns_num = 1, int rows_num = 1, int fps = 0);
-        TextureOb(TYPE::TEXTURE type_id, const std::string& path, const std::string& path_normalmap, bool use_alpha, std::vector<int>* args = nullptr, int columns_num = 1, int rows_num = 1, int fps = 0);
-        
-        int GetFrameWidth() const;
-        int GetFrameHeight() const;
-        
-        void removeFromVRAM();
-        
-        int updateAnimationFrame();
-        
-        //int getParticleFrameNumByColorId(int);
+        int UpdateAnimationFrame(float);
+
+        const MaterialData& GetData() const { return m_Data; }
+        const MaterialAssociation& GetAssociation() const { return m_Association; }
+
+        //void SetData(const MaterialData& data) { m_Data = data; } 
+        void SetAssociasion(const MaterialAssociation& association) { m_Association = association; }
 
     private:
-        int w, h;
-        int w_slice, h_slice;
-        
-        bool is_animated;
-        float fps;
+        MaterialAssociation m_Association;
+        MaterialData m_Data;
 
-        unsigned int frame;
-        unsigned int frames_total_num; 
-        float last_update_time;
-        float delay; 
-        
-        void Manage(TYPE::TEXTURE type_id, const std::string& path, const std::string& path_normalmap, bool use_alpha, std::vector<int>* args, int columns_num, int rows_num, int fps);
+        unsigned int m_CurrentFrame;
+        unsigned int m_FramesCount; 
+        float m_LastUpdateTime;
+        float m_Delay;
+        float m_Fps; 
                     
-        void createTextureCoords(int _rows_num, int _columns_num, int _fps);
-        void addTexCoordQuad(float _w_start, float _h_start, float _w_offset, float _h_offset);
-                        
-        void itemslotArgManager(std::vector<int>*);
-        void vehicleslotArgManager(std::vector<int>*);
-        void turrelArgManager(std::vector<int>*);
-        
-        // SPACE OBJECTS
-        void spacestationArgManager(std::vector<int>*); 
-        void satelliteArgManager(std::vector<int>*); 
-        void shipArgManager(std::vector<int>*); 
-
-        void nebulaArgManager(std::vector<int>*);
-        void starArgManager(std::vector<int>*); 
-
-        void planetArgManager(std::vector<int>*);
-        void atmosphereArgManager(std::vector<int>*);
-        void asteroidArgManager(std::vector<int>*); 
-        void mineralArgManager(std::vector<int>*); 
-        void containerArgManager(std::vector<int>*); 
-        void bombArgManager(std::vector<int>*); 
-        void blackholeArgManager(std::vector<int>*); 
-
-        // KOSMOPORT
-        void landBgArgManager(std::vector<int>*);
-        void angarBgArgManager(std::vector<int>*);
-        void storeBgArgManager(std::vector<int>*);
-        void shopBgArgManager(std::vector<int>*);
-        void govermentBgArgManager(std::vector<int>*);
-        void faceArgManager(std::vector<int>*); 
-
-        // ITEMS
-        void DriveEquipmentArgManager(std::vector<int>*); 
-        void LazerEquipmentArgManager(std::vector<int>*); 
-        void RocketEquipmentArgManager(std::vector<int>*); 
-        void ProtectorEquipmentArgManager(std::vector<int>*); 
-        void DroidEquipmentArgManager(std::vector<int>*);
-        void GrappleEquipmentArgManager(std::vector<int>*); 
-        void BakEquipmentArgManager(std::vector<int>*); 
-        void energyBlockItemArgManager(std::vector<int>*); 
-        void FreezerEquipmentArgManager(std::vector<int>*); 
-        void RadarEquipmentArgManager(std::vector<int>*); 
-        void ScanerEquipmentArgManager(std::vector<int>*); 
-
-        // BULLETS
-        void rocketBulletArgManager(std::vector<int>*); 
-        void torpedBulletArgManager(std::vector<int>*); 
-        void particleArgManager(std::vector<int>*); 
-        void distStarArgManager(std::vector<int>*); 
-        void lazerEffectArgManager(std::vector<int>*); 
-        void shieldEffectArgManager(std::vector<int>*); 
+        void CreateTextureCoords(int _rows_num, int _columns_num, int _fps);
+        void AddTexCoordQuad(float _w_start, float _h_start, float _w_offset, float _h_offset);
 };
 
 void loadToVRAM(const std::string&, GLuint&, int&, int&);
