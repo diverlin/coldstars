@@ -143,7 +143,7 @@ void GuiGalaxyMap::RenderUnique(const Renderer& render, Player* player) const
             const StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
             glm::vec2 starsystem_pos = vec3ToVec2(GetAbsoluteStarSystemPosition(starsystem));            
                                    
-            TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::DISTANTSTAR_ID, starsystem.STAR_vec[0]->GetColorId()); 
+            //TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::DISTANTSTAR_ID, starsystem.STAR_vec[0]->GetColorId()); 
             
             render.enable_POINTSPRITE();
             {     

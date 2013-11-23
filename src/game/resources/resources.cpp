@@ -43,18 +43,24 @@ void loadGameData()
 void load3DModels()
 {        
     MeshCollector::Instance().RegisterMesh(new Mesh(DATA_PATH+"obj/plane/plane.obj", nullptr, TYPE::MESH::PLANE_ID));
-    //MeshCollector::Instance().RegisterMesh(new Mesh(DATA_PATH+"obj/sphere/sphere.obj", nullptr, TYPE::MESH::SPHERE_ID));
-    MeshCollector::Instance().RegisterMesh(new Mesh(DATA_PATH+"obj/plane/plane.obj", nullptr, TYPE::MESH::SPHERE_ID));
+    MeshCollector::Instance().RegisterMesh(new Mesh(DATA_PATH+"obj/sphere/sphere.obj", nullptr, TYPE::MESH::SPHERE_ID));
+    //MeshCollector::Instance().RegisterMesh(new Mesh(DATA_PATH+"obj/plane/plane.obj", nullptr, TYPE::MESH::SPHERE_ID));
     MeshCollector::Instance().RegisterMesh(new Mesh(DATA_PATH+"obj/sphere_deformed/sphere_deformed.obj", nullptr, TYPE::MESH::SPHERE_DEFORMED_ID));
     
     {
-    TextureOb* textureOb = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"obj/vehicles/BabylonStation/station_texture/babylonstation.jpg", false);    
-    MeshCollector::Instance().RegisterMesh(new Mesh(DATA_PATH+"obj/vehicles/BabylonStation/babylon_station_mod.obj", textureOb, TYPE::MESH::SPACESTATION_ID));
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"obj/vehicles/BabylonStation/station_texture/babylonstation.jpg";
+    TextureOb* textureOb = new TextureOb(material_data); 
+    Mesh* mesh = new Mesh(DATA_PATH+"obj/vehicles/BabylonStation/babylon_station_mod.obj", textureOb, TYPE::MESH::SPACESTATION_ID);   
+    MeshCollector::Instance().RegisterMesh(mesh);
     }
 
     {
-    TextureOb* textureOb = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"obj/vehicles//Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg", false);    
-    MeshCollector::Instance().RegisterMesh(new Mesh(DATA_PATH+"obj/vehicles/Anna_V_2.0_variations/anna_mod.obj", textureOb, TYPE::MESH::SPACESTATION_ID));
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"obj/vehicles/Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg";
+    TextureOb* textureOb = new TextureOb(material_data);
+    Mesh* mesh = new Mesh(DATA_PATH+"obj/vehicles/Anna_V_2.0_variations/anna_mod.obj", textureOb, TYPE::MESH::SPACESTATION_ID);
+    MeshCollector::Instance().RegisterMesh(mesh);
     }
 }
 
@@ -64,393 +70,914 @@ void loadImages()
 {
 //####################################### TURREL_TEXTURE ###################################
 {
-    std::vector<int> arg;   
-    arg.push_back((int)(int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::TURREL_ID, DATA_PATH+"turrel/turrel1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"turrel/turrel1.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::TURREL_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::TURREL_ID, DATA_PATH+"turrel/turrel2.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"turrel/turrel2.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::TURREL_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
-//{
-    //std::vector<int> arg;   
-    //arg.push_back((int)TYPE::RACE::R0_ID);
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::TURREL_ID, DATA_PATH+"turrel/esphere-0.png", true, &arg) );
-//}
+{
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"turrel/esphere-0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::TURREL_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
+}
 
 
 //####################################### SLOT_TEXTURE ###################################
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ITEM_SLOT_ID, DATA_PATH+"other/slot.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/slot.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::ITEM_SLOT_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::VEHICLE_SLOT_ID, DATA_PATH+"other/H.png", true, &arg, 3, 2, 3) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/H.png";
+    material_data.use_alpha = true;
+    material_data.col_num = 3;
+    material_data.row_num = 2;
+    material_data.fps = 3.0;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::VEHICLE_SLOT_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####################################### TYPE::TEXTURE::FACE_ID ################################
-//(int)TYPE::RACE::R0_ID
+// TYPE::RACE::R0_ID
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_PATH+"race/0000.png", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"race/0000.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::FACE_ID; 
+    association_data.race_id = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_PATH+"race/0001.png", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"race/0001.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::FACE_ID; 
+    association_data.race_id = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
-//(int)TYPE::RACE::R1_ID
+// TYPE::RACE::R1_ID
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R1_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_PATH+"race/1000.png", false, &arg) );
-}
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"race/1000.png";
+    TextureOb* textureOb = new TextureOb(material_data);
 
-{
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R1_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_PATH+"race/1001.png", false, &arg) );
-}
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::FACE_ID; 
+    association_data.race_id = TYPE::RACE::R1_ID; 
+    textureOb->SetAssociation(association_data);
 
-//(int)TYPE::RACE::R2_ID
-{
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R2_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_PATH+"race/2000.png", false, &arg) );
-}
-
-{
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R2_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_PATH+"race/2001.png", false, &arg) );
-}
-
-//(int)TYPE::RACE::R3_ID
-{
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R3_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_PATH+"race/3000.png", false, &arg) );
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R3_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_PATH+"race/3001.png", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"race/1001.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::FACE_ID; 
+    association_data.race_id = TYPE::RACE::R1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
-//(int)TYPE::RACE::R4_ID
+// TYPE::RACE::R2_ID
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R4_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_PATH+"race/4000.png", false, &arg) );
-}
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"race/2000.png";
+    TextureOb* textureOb = new TextureOb(material_data);
 
-{
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R4_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_PATH+"race/4001.png", false, &arg) );
-}
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::FACE_ID; 
+    association_data.race_id = TYPE::RACE::R2_ID; 
+    textureOb->SetAssociation(association_data);
 
-//(int)TYPE::RACE::R6_ID
-{
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R6_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_PATH+"race/6000.png", false, &arg) );
-}
-
-{
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R6_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_PATH+"race/6001.png", false, &arg) );
-}
-
-//(int)TYPE::RACE::R7_ID
-{
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R7_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_PATH+"race/7000.png", false, &arg) );
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R7_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FACE_ID, DATA_PATH+"race/7001.png", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"race/2001.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::FACE_ID; 
+    association_data.race_id = TYPE::RACE::R2_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
+}
+
+// TYPE::RACE::R3_ID
+{
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"race/3000.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::FACE_ID; 
+    association_data.race_id = TYPE::RACE::R3_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
+}
+
+{
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"race/3001.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::FACE_ID; 
+    association_data.race_id = TYPE::RACE::R3_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
+}
+
+// TYPE::RACE::R4_ID
+{
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"race/4000.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::FACE_ID; 
+    association_data.race_id = TYPE::RACE::R4_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
+}
+
+{
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"race/4001.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::FACE_ID; 
+    association_data.race_id = TYPE::RACE::R4_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
+}
+
+// TYPE::RACE::R6_ID
+{
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"race/6000.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::FACE_ID; 
+    association_data.race_id = TYPE::RACE::R6_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
+}
+
+{
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"race/6001.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::FACE_ID; 
+    association_data.race_id = TYPE::RACE::R6_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
+}
+
+// TYPE::RACE::R7_ID
+{
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"race/7000.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::FACE_ID; 
+    association_data.race_id = TYPE::RACE::R7_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
+}
+
+{
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"race/7001.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::FACE_ID; 
+    association_data.race_id = TYPE::RACE::R7_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 
 
 //####################################### ASTEROID_TEXTURE ################################
 {
-    std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ASTEROID_ID, DATA_PATH+"asteroid/a_000.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"asteroid/a_000.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::ASTEROID_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ASTEROID_ID, DATA_PATH+"asteroid/a_001.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"asteroid/a_001.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::ASTEROID_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ASTEROID_ID, DATA_PATH+"asteroid/a_002.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"asteroid/a_002.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::ASTEROID_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####################################### MINERAL_TEXTURE ################################
 {
-    std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::MINERAL_ID, DATA_PATH+"asteroid/m_000.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"asteroid/m_000.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::MINERAL_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::MINERAL_ID, DATA_PATH+"asteroid/m_001.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"asteroid/m_001.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::MINERAL_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::MINERAL_ID, DATA_PATH+"asteroid/m_002.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"asteroid/m_002.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::MINERAL_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::CONTAINER_ID, DATA_PATH+"item/container.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/container.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::CONTAINER_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::BOMB_ID, DATA_PATH+"item/bomb_item.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/bomb_item.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::BOMB_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 
 
 //####################################### TYPE::TEXTURE::SATELLITE_ID ################################
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, DATA_PATH+"satellite/sa_001.png", true, &arg, 3, 1, 6) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"satellite/sa_001.png";
+    material_data.use_alpha = true;
+    material_data.col_num = 3;
+    material_data.row_num = 1;
+    material_data.fps = 6.0;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::SATELLITE_ID; 
+    association_data.race_id = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, DATA_PATH+"satellite/sa_002.png", true, &arg, 4, 1, 8) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"satellite/sa_002.png";
+    material_data.use_alpha = true;
+    material_data.col_num = 4;
+    material_data.row_num = 1;
+    material_data.fps = 8.0;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::SATELLITE_ID; 
+    association_data.race_id = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, DATA_PATH+"satellite/sa_003.png", true, &arg, 3, 1, 6) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"satellite/sa_003.png";
+    material_data.use_alpha = true;
+    material_data.col_num = 3;
+    material_data.row_num = 1;
+    material_data.fps = 6.0;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::SATELLITE_ID; 
+    association_data.race_id = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, DATA_PATH+"satellite/sa_004.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"satellite/sa_004.png";
+    material_data.use_alpha = true;
+    material_data.col_num = 4;
+    material_data.row_num = 1;
+    material_data.fps = 8.0;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::SATELLITE_ID; 
+    association_data.race_id = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, DATA_PATH+"satellite/sa_005.png", true, &arg, 8, 1, 16) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"satellite/sa_005.png";
+    material_data.use_alpha = true;
+    material_data.col_num = 8;
+    material_data.row_num = 1;
+    material_data.fps = 16.0;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::SATELLITE_ID; 
+    association_data.race_id = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SATELLITE_ID, DATA_PATH+"satellite/sa_006.png", true, &arg, 8, 1, 16) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"satellite/sa_006.png";
+    material_data.use_alpha = true;
+    material_data.col_num = 8;
+    material_data.row_num = 1;
+    material_data.fps = 16.0;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::SATELLITE_ID; 
+    association_data.race_id = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 
 // BLACKHOLE
-
 {
-    std::vector<int> arg;   
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::BLACKHOLE_ID, DATA_PATH+"blackhole/bh_00.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"blackhole/bh_00.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::BLACKHOLE_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####################################### SHIP_TEXTURE ####################################
 //################################ race texnologi
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::ENTITY::RANGER_ID);   //COLOR_VIOLET
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_00_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_00_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::RANGER_ID; 
+    association_data.race_id    = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID);  //COLOR_VIOLET
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_01_0_1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_01_0_1.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID; 
+    association_data.race_id    = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::ENTITY::PIRAT_ID);    //COLOR_VIOLET
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_02_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_02_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::PIRAT_ID; 
+    association_data.race_id    = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::ENTITY::TRADER_ID);   //COLOR_VIOLET
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_03_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_03_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::TRADER_ID; 
+    association_data.race_id    = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::ENTITY::DIPLOMAT_ID); //COLOR_VIOLET
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_04_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_04_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::DIPLOMAT_ID; 
+    association_data.race_id    = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //################################ race voennye
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R1_ID); arg.push_back((int)TYPE::ENTITY::RANGER_ID);   //COLOR_GREY
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_10_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_10_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::RANGER_ID; 
+    association_data.race_id    = TYPE::RACE::R1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R1_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID);  //COLOR_GREY
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_11_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_11_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID; 
+    association_data.race_id    = TYPE::RACE::R1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R1_ID); arg.push_back((int)TYPE::ENTITY::PIRAT_ID);    //COLOR_GREY
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_12_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_12_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::PIRAT_ID; 
+    association_data.race_id    = TYPE::RACE::R1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R1_ID); arg.push_back((int)TYPE::ENTITY::TRADER_ID);   //COLOR_GREY
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_12_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_12_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::TRADER_ID; 
+    association_data.race_id    = TYPE::RACE::R1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R1_ID); arg.push_back((int)TYPE::ENTITY::DIPLOMAT_ID);  //COLOR_GREY
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_14_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_14_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::DIPLOMAT_ID; 
+    association_data.race_id    = TYPE::RACE::R1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //################################ race zhuliki
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R2_ID); arg.push_back((int)TYPE::ENTITY::RANGER_ID);    
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/race2_ranger_00.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/race2_ranger_00.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::RANGER_ID; 
+    association_data.race_id    = TYPE::RACE::R2_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R2_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID);  //COLOR_GREEN
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/race2_warrior_00.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/race2_warrior_00.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID; 
+    association_data.race_id    = TYPE::RACE::R2_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R2_ID); arg.push_back((int)TYPE::ENTITY::TRADER_ID);    //COLOR_RED
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/race2_trader_00.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/race2_trader_00.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::TRADER_ID; 
+    association_data.race_id    = TYPE::RACE::R2_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R2_ID); arg.push_back((int)TYPE::ENTITY::PIRAT_ID);    //COLOR_RED
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/race2_pirat_00.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/race2_pirat_00.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::PIRAT_ID; 
+    association_data.race_id    = TYPE::RACE::R2_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R2_ID); arg.push_back((int)TYPE::ENTITY::DIPLOMAT_ID);   //COLOR_GREEN
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/race2_diplomat_00.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/race2_diplomat_00.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::DIPLOMAT_ID; 
+    association_data.race_id    = TYPE::RACE::R2_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //################################ race cheloveki
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R3_ID); arg.push_back((int)TYPE::ENTITY::RANGER_ID); //COLOR_BLUE
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_30_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_30_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::RANGER_ID; 
+    association_data.race_id    = TYPE::RACE::R3_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R3_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_BLUE
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_31_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_31_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID; 
+    association_data.race_id    = TYPE::RACE::R3_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R3_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_BLUE
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_31_0_1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_31_0_1.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID; 
+    association_data.race_id    = TYPE::RACE::R3_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R3_ID); arg.push_back((int)TYPE::ENTITY::PIRAT_ID);   //COLOR_BLUE
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_32_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_32_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::PIRAT_ID; 
+    association_data.race_id    = TYPE::RACE::R3_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R3_ID); arg.push_back((int)TYPE::ENTITY::TRADER_ID);  //COLOR_BLUE
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/_k_33_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/_k_33_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::TRADER_ID; 
+    association_data.race_id    = TYPE::RACE::R3_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R3_ID); arg.push_back((int)TYPE::ENTITY::DIPLOMAT_ID); //COLOR_BLUE
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/_k_34_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/_k_34_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::DIPLOMAT_ID; 
+    association_data.race_id    = TYPE::RACE::R3_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //################################ race bio
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R4_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_41_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_41_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID; 
+    association_data.race_id    = TYPE::RACE::R4_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R4_ID); arg.push_back((int)TYPE::ENTITY::TRADER_ID);  //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_43_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_43_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::TRADER_ID; 
+    association_data.race_id    = TYPE::RACE::R4_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R4_ID); arg.push_back((int)TYPE::ENTITY::TRADER_ID);  //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_43_0_1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_43_0_1.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::TRADER_ID; 
+    association_data.race_id    = TYPE::RACE::R4_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R4_ID); arg.push_back((int)TYPE::ENTITY::DIPLOMAT_ID); //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_44_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_44_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::DIPLOMAT_ID; 
+    association_data.race_id    = TYPE::RACE::R4_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //################################ enemy 1
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_61_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID; 
+    association_data.race_id    = TYPE::RACE::R6_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_61_0_1.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID; 
+    association_data.race_id    = TYPE::RACE::R6_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_2.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_61_0_2.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID; 
+    association_data.race_id    = TYPE::RACE::R6_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 
@@ -513,298 +1040,697 @@ void loadImages()
 
 //################################ enemy 2
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R7_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_71_0_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_71_0_0.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID; 
+    association_data.race_id    = TYPE::RACE::R7_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back((int)TYPE::RACE::R7_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_71_0_1e.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"ship/k_71_0_1e.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHIP_ID; 
+    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID; 
+    association_data.race_id    = TYPE::RACE::R7_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //################################# TYPE::TEXTURE::STAR_ID ###############################
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::YELLOW_ID); arg.push_back(1900); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STAR_ID, DATA_PATH+"star/s_000.jpg", false, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"star/s_000.jpg";
+    material_data.brightThreshold = 1.9f;
+    material_data.color_id = COLOR::YELLOW_ID;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::STAR_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back(COLOR::YELLOW_ID); arg.push_back(1825); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STAR_ID, DATA_PATH+"star/s_001.png", false, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"star/s_001.png";
+    material_data.brightThreshold = 1.825f;
+    material_data.color_id = COLOR::YELLOW_ID;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::STAR_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back(COLOR::BLUE_ID); arg.push_back(2525); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STAR_ID, DATA_PATH+"star/s_100.jpg", false, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"star/s_100.jpg";
+    material_data.brightThreshold = 2.525f;
+    material_data.color_id = COLOR::BLUE_ID;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::STAR_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back(COLOR::BLUE_ID); arg.push_back(1925); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STAR_ID, DATA_PATH+"star/s_101.png", false, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"star/s_101.png";
+    material_data.brightThreshold = 1.925f;
+    material_data.color_id = COLOR::BLUE_ID;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::STAR_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 // STARBASE_TEXTURE_ID
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R0_ID);  
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SPACESTATION_ID, DATA_PATH+"starbase/sb_000.png", false, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"starbase/sb_000.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SPACESTATION_ID; 
+    association_data.race_id    = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SPACESTATION_ID, DATA_PATH+"starbase/sb_001.png", false, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"starbase/sb_001.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SPACESTATION_ID; 
+    association_data.race_id    = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SPACESTATION_ID, DATA_PATH+"starbase/sb_002.png", false, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"starbase/sb_002.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SPACESTATION_ID; 
+    association_data.race_id    = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SPACESTATION_ID, DATA_PATH+"starbase/sb_003.png", false, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"starbase/sb_003.png";
+    material_data.use_alpha = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SPACESTATION_ID; 
+    association_data.race_id    = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 
 //################################## NEBULA EFFECT ################################
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::RED_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula1.png", true, &arg) );                                         
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula1.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::RED_ID;
+    material_data.is_rotated = false;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::GREEN_ID); arg.push_back(1);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula2.png", true, &arg) );   
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula2.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::GREEN_ID;
+    material_data.is_rotated = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::YELLOW_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula3.png", true, &arg) );   
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula3.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::YELLOW_ID;
+    material_data.is_rotated = false;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::BLUE_ID); arg.push_back(1);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula4.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula4.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::BLUE_ID;
+    material_data.is_rotated = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::YELLOW_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula5.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula5.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::YELLOW_ID;
+    material_data.is_rotated = false;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back(COLOR::RED_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula6.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula6.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::RED_ID;
+    material_data.is_rotated = false;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::BLUE_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula7.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula7.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::BLUE_ID;
+    material_data.is_rotated = false;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back(COLOR::BLUE_ID); arg.push_back(1);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula8.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula8.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::BLUE_ID;
+    material_data.is_rotated = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::BLUE_ID); arg.push_back(1);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula9.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula9.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::BLUE_ID;
+    material_data.is_rotated = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back(COLOR::RED_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula10.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula10.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::RED_ID;
+    material_data.is_rotated = false;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::YELLOW_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula11.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula11.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::YELLOW_ID;
+    material_data.is_rotated = false;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::BLUE_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula12.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula12.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::BLUE_ID;
+    material_data.is_rotated = false;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::BLUE_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula13.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula13.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::BLUE_ID;
+    material_data.is_rotated = false;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::RED_ID); arg.push_back(1);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula14.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula14.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::RED_ID;
+    material_data.is_rotated = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::YELLOW_ID); arg.push_back(1);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula15.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula15.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::YELLOW_ID;
+    material_data.is_rotated = true;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::YELLOW_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula16.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula16.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::YELLOW_ID;
+    material_data.is_rotated = false;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::YELLOW_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula17.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula17.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::YELLOW_ID;
+    material_data.is_rotated = false;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back(COLOR::YELLOW_ID); arg.push_back(0);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula18.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula18.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::YELLOW_ID;
+    material_data.is_rotated = false;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;   
-    arg.push_back(COLOR::RED_ID); arg.push_back(0); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, DATA_PATH+"bg_space/nebula.bak/nebula19.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_space/nebula.bak/nebula19.png";
+    material_data.use_alpha = true;
+    material_data.color_id = COLOR::RED_ID;
+    material_data.is_rotated = false;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 //### size 2 = 512x512
 //### size 4 = 1024x1024 or 512x1024
 
 //################################ TYPE::TEXTURE::LAND_BACKGROUND_ID ###################################
 {
-    std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NATURELAND_BACKGROUND_ID, DATA_PATH+"bg_uninhabited/b_000.jpg", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_uninhabited/b_000.jpg";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NATURELAND_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NATURELAND_BACKGROUND_ID, DATA_PATH+"bg_uninhabited/b_001.png", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_uninhabited/b_001.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NATURELAND_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::NATURELAND_BACKGROUND_ID, DATA_PATH+"bg_uninhabited/b_002.png", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_uninhabited/b_002.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::NATURELAND_BACKGROUND_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //################################ KOSMOPORT_BG_TEXTURE_ID ###############################
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ANGAR_BACKGROUND_ID, DATA_PATH+"bg_kosmoport/an_000.jpg", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_kosmoport/an_000.jpg";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::ANGAR_BACKGROUND_ID; 
+    association_data.race_id    = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::STORE_BACKGROUND_ID, DATA_PATH+"bg_kosmoport/st_000.jpg", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_kosmoport/st_000.jpg";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::STORE_BACKGROUND_ID; 
+    association_data.race_id    = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHOP_BACKGROUND_ID, DATA_PATH+"bg_kosmoport/sh_000.jpg", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_kosmoport/sh_000.jpg";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::SHOP_BACKGROUND_ID; 
+    association_data.race_id    = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::RACE::R0_ID);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID, DATA_PATH+"bg_kosmoport/go_000.jpg", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bg_kosmoport/go_000.jpg";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID; 
+    association_data.race_id    = TYPE::RACE::R0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 
 //################################ PLANET_TEXTURE ####################################
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::ENTITY::PLANET_MIXED_ID); arg.push_back(5);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, DATA_PATH+"planet/p_0000.png", DATA_PATH+"planet/p_0000_nm.png", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path      = DATA_PATH+"planet/p_0000.png";
+    material_data.normalmap_path    = DATA_PATH+"planet/p_0000_nm.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::PLANET_ID; 
+    association_data.subtype_id = TYPE::ENTITY::PLANET_MIXED_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::ENTITY::PLANET_WATER_ID); arg.push_back(5);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, DATA_PATH+"planet/p_1000.png", DATA_PATH+"planet/p_1000_nm.png", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path      = DATA_PATH+"planet/p_1000.png";
+    material_data.normalmap_path    = DATA_PATH+"planet/p_1000_nm.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::PLANET_ID; 
+    association_data.subtype_id = TYPE::ENTITY::PLANET_WATER_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::ENTITY::PLANET_VULCANIC_ID); arg.push_back(5);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, DATA_PATH+"planet/p_2000.png", DATA_PATH+"planet/p_2000_nm.png", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path      = DATA_PATH+"planet/p_2000.png";
+    material_data.normalmap_path    = DATA_PATH+"planet/p_2000_nm.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::PLANET_ID; 
+    association_data.subtype_id = TYPE::ENTITY::PLANET_VULCANIC_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
+
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::ENTITY::PLANET_ICE_ID); arg.push_back(5);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, DATA_PATH+"planet/p_3000.png", DATA_PATH+"planet/p_3000_nm.png", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path      = DATA_PATH+"planet/p_3000.png";
+    material_data.normalmap_path    = DATA_PATH+"planet/p_3000_nm.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::PLANET_ID; 
+    association_data.subtype_id = TYPE::ENTITY::PLANET_ICE_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    arg.push_back((int)TYPE::ENTITY::PLANET_GAS_ID); arg.push_back(5);
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PLANET_ID, DATA_PATH+"planet/p_4000.png", DATA_PATH+"planet/p_4000_nm.png", false, &arg) );
+    MaterialData material_data;
+    material_data.texture_path      = DATA_PATH+"planet/p_4000.png";
+    material_data.normalmap_path    = DATA_PATH+"planet/p_4000_nm.png";
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::PLANET_ID; 
+    association_data.subtype_id = TYPE::ENTITY::PLANET_GAS_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //################################ ATMOSPHERE_TEXTURE ####################################
 {
-    std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ATMOSPHERE_ID, DATA_PATH+"planet/atmosphere_000.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"planet/atmosphere_000.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::ATMOSPHERE_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ATMOSPHERE_ID, DATA_PATH+"planet/atmosphere_001.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"planet/atmosphere_001.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::ATMOSPHERE_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //################################ RING_TEXTURE ####################################
 {
-    std::vector<int> arg; 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::RING_ID, DATA_PATH+"planet/ring.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"planet/ring.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::RING_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //################################ EFFECTS TEXTURE ###################################
 {
-    std::vector<int> arg;  
-    arg.push_back(COLOR::RED_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PARTICLE_EFFECT_ID, DATA_PATH+"effect/particles/particle0.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"effect/particles/particle0.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::RED_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::PARTICLE_EFFECT_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back(COLOR::BLUE_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PARTICLE_EFFECT_ID, DATA_PATH+"effect/particles/particle1.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"effect/particles/particle1.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::BLUE_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::PARTICLE_EFFECT_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PARTICLE_EFFECT_ID, DATA_PATH+"effect/particles/particle2.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"effect/particles/particle2.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::YELLOW_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::PARTICLE_EFFECT_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back(COLOR::GREY_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PARTICLE_EFFECT_ID, DATA_PATH+"effect/particles/particle3.png", true, &arg) ); 
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"effect/particles/particle3.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::GREY_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id    = TYPE::TEXTURE::PARTICLE_EFFECT_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //{
@@ -814,95 +1740,199 @@ void loadImages()
 //}
 
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::RED_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID, DATA_PATH+"effect/lazer/l_001.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"effect/lazer/l_001.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::RED_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::LAZER_EFFECT_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID, DATA_PATH+"effect/lazer/l_002.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"effect/lazer/l_002.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::YELLOW_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::LAZER_EFFECT_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::BLUE_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID, DATA_PATH+"effect/lazer/l_003.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"effect/lazer/l_003.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::BLUE_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::LAZER_EFFECT_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back(COLOR::RED_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIELD_EFFECT_ID, DATA_PATH+"effect/shield/shield0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"effect/shield/shield0.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::RED_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::SHIELD_EFFECT_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back(COLOR::GREEN_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIELD_EFFECT_ID, DATA_PATH+"effect/shield/shield1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"effect/shield/shield1.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::GREEN_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::SHIELD_EFFECT_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back(COLOR::BLUE_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIELD_EFFECT_ID, DATA_PATH+"effect/shield/shield2.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"effect/shield/shield2.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::BLUE_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::SHIELD_EFFECT_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SHIELD_EFFECT_ID, DATA_PATH+"effect/shield/shield3.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"effect/shield/shield3.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::YELLOW_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::SHIELD_EFFECT_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 
 // TYPE::TEXTURE::DISTANTSTAR_ID
 {
-    std::vector<int> arg;  
-    arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DISTANTSTAR_ID, DATA_PATH+"star/s1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"star/s1.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::YELLOW_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::DISTANTSTAR_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back(COLOR::BLUE_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DISTANTSTAR_ID, DATA_PATH+"star/s2.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"star/s2.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::BLUE_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::DISTANTSTAR_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back(COLOR::RED_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DISTANTSTAR_ID, DATA_PATH+"star/s3.png", true, &arg) );
-}
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"star/s3.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::RED_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
 
-//{
-    //std::vector<int> arg;  
-    //arg.push_back(COLOR::RED_ID); 
-    //TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DISTANTSTAR_ID, DATA_PATH+"star/s4.png", true, &arg) );
-//}
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::DISTANTSTAR_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
+}
 
 //###################################### ITEM TEXTURE ###################################
 //############################ DRIVE_ITEM
 //#################### RACE_0
 //####### TECH_LEVEL_0
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID);  
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, DATA_PATH+"item/drive/drive_Race0_Tech0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/drive/drive_Race0_Tech0.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::DRIVE_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####### TECH_LEVEL_1
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID);  
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, DATA_PATH+"item/drive/drive_Race0_Tech1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/drive/drive_Race0_Tech1.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::DRIVE_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####### TECH_LEVEL_2
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L2_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, DATA_PATH+"item/drive/drive_Race0_Tech2.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/drive/drive_Race0_Tech2.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::DRIVE_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L2_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //#################### RACE1
@@ -919,28 +1949,68 @@ void loadImages()
 //#################### RACE_0
 //####### TECH_LEVEL_0
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::RED_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, DATA_PATH+"item/lazer/lazer_Race0_Tech0_Red0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/lazer/lazer_Race0_Tech0_Red0.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::RED_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::LAZER_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, DATA_PATH+"item/lazer/lazer_Race0_Tech0_Yellow0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/lazer/lazer_Race0_Tech0_Yellow0.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::YELLOW_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::LAZER_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::BLUE_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, DATA_PATH+"item/lazer/lazer_Race0_Tech0_Blue0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/lazer/lazer_Race0_Tech0_Blue0.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::BLUE_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::LAZER_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####### TECH_LEVEL_1
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); arg.push_back(COLOR::BLUE_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, DATA_PATH+"item/lazer/lazer_Race0_Tech1_Blue0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/lazer/lazer_Race0_Tech1_Blue0.png";
+    material_data.use_alpha = true; 
+    material_data.color_id = COLOR::BLUE_ID; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::LAZER_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 //#################### RACE_1
 //#################### RACE_2
@@ -952,38 +2022,81 @@ void loadImages()
 
 
 
-//############################ LAZER_ITEM
+//############################ ROCKET_ITEM
 //#################### RACE_0
 //####### TECH_LEVEL_0
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, DATA_PATH+"item/rocket/rocket_Race0_Tech0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/rocket/rocket_Race0_Tech0.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::ROCKET_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 //####### TECH_LEVEL_1
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, DATA_PATH+"item/rocket/rocket_Race0_Tech1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/rocket/rocket_Race0_Tech1.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::ROCKET_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 //####### TECH_LEVEL_2
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); arg.push_back(COLOR::YELLOW_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, DATA_PATH+"item/rocket/rocket_Race0_Tech2.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/rocket/rocket_Race0_Tech2.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::ROCKET_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L2_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //TEXTURE_MANAGER.manageItem( textureOb(TORPED_ITEM_TEXTURE_ID, 'data/item/torped/tl0.png', True, [ 'torpedo',       TYPE::TECHLEVEL::L0_ID, 3, 1, (int)TYPE::RACE::R0_ID, COLOR::YELLOW_ID]) )
 //TEXTURE_MANAGER.manageItem( textureOb(TORPED_ITEM_TEXTURE_ID, 'data/item/torped/tl1.png', True, [ 'torpedo',       TYPE::TECHLEVEL::L0_ID, 3, 1, (int)TYPE::RACE::R0_ID, COLOR::YELLOW_ID]) )
 
 {
-    std::vector<int> arg;  
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID, DATA_PATH+"bullet/r_0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bullet/r_0.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::ROCKET_BULLET_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 {
-    std::vector<int> arg;  
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID, DATA_PATH+"bullet/r_1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"bullet/r_1.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::ROCKET_BULLET_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //{
@@ -1000,309 +2113,611 @@ void loadImages()
 
 
 
-//############################ PROTECTOR_ITEM
+//############################ PROTECTOR_EQUIPMENT
 //#################### RACE_0
 //####### TECH_LEVEL_0
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, DATA_PATH+"item/protector/protector_Race0_Tech0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/protector/protector_Race0_Tech0.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####### TECH_LEVEL_1
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, DATA_PATH+"item/protector/protector_Race0_Tech1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/protector/protector_Race0_Tech1.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####### TECH_LEVEL_2
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L2_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, DATA_PATH+"item/protector/protector_Race0_Tech2.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/protector/protector_Race0_Tech2.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L2_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 //####### TECH_LEVEL_3
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L3_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, DATA_PATH+"item/protector/protector_Race0_Tech3.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/protector/protector_Race0_Tech3.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L3_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
-//############################ DROID_ITEM
+//############################ DROID_EQUIPMENT
 //#################### RACE_0
 //####### TECH_LEVEL_0
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID, DATA_PATH+"item/droid/droid_Race0_Tech0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/droid/droid_Race0_Tech0.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::DROID_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####### TECH_LEVEL_1
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID, DATA_PATH+"item/droid/droid_Race0_Tech1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/droid/droid_Race0_Tech1.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::DROID_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####### TECH_LEVEL_2
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L2_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID, DATA_PATH+"item/droid/droid_Race0_Tech2.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/droid/droid_Race0_Tech2.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::DROID_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L2_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 
-//############################ GRAPPLE_ITEM
+//############################ GRAPPLE_EQUIPMENT
 //#################### RACE_0
 //####### TECH_LEVEL_0
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID, DATA_PATH+"item/grapple/grapple_Race0_Tech0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/grapple/grapple_Race0_Tech0.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####### TECH_LEVEL_1
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID, DATA_PATH+"item/grapple/grapple_Race0_Tech1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/grapple/grapple_Race0_Tech1.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 
 
-//############################ BAK_ITEM
+//############################ BAK_EQUIPMENT
 //#################### RACE_0
 //####### TECH_LEVEL_0
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::BAK_EQUIPMENT_ID, DATA_PATH+"item/bak/bak_Race0_Tech0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/bak/bak_Race0_Tech0.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::BAK_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####### TECH_LEVEL_1
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::BAK_EQUIPMENT_ID, DATA_PATH+"item/bak/bak_Race0_Tech1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/bak/bak_Race0_Tech1.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::BAK_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 
-//############################ ENERGYBLOCK_ITEM
+//############################ ENERGIZER_EQUIPMENT
 //#################### RACE_0
 //####### TECH_LEVEL_0
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID, DATA_PATH+"item/energyBlock/energyBlock_Race0_Tech0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/energyBlock/energyBlock_Race0_Tech0.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####### TECH_LEVEL_1
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID, DATA_PATH+"item/energyBlock/energyBlock_Race0_Tech1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/energyBlock/energyBlock_Race0_Tech1.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 
-//############################ FREEZER_ITEM
+//############################ FREEZER_EQUIPMENT
 //#################### RACE_0
 //####### TECH_LEVEL_0
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FREEZER_EQUIPMENT_ID, DATA_PATH+"item/freezer/freezer_Race0_Tech0.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/freezer/freezer_Race0_Tech0.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::FREEZER_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####### TECH_LEVEL_1
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::FREEZER_EQUIPMENT_ID, DATA_PATH+"item/freezer/freezer_Race0_Tech1.png", true, &arg) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/freezer/freezer_Race0_Tech1.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::FREEZER_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 
-//############################ FREEZER_ITEM
+//############################ SCANER_EQUIPMENT
 //#################### RACE_0
 //####### TECH_LEVEL_0
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, DATA_PATH+"item/scaner/scaner_Race0_Tech0.png", true, &arg, 3, 1, 3) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/scaner/scaner_Race0_Tech0.png";
+    material_data.use_alpha = true; 
+    material_data.col_num = 3;
+    material_data.row_num = 1;
+    material_data.fps = 3.0f;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::SCANER_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 //####### TECH_LEVEL_1
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, DATA_PATH+"item/scaner/scaner_Race0_Tech1.png", true, &arg, 3, 1, 3) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/scaner/scaner_Race0_Tech1.png";
+    material_data.use_alpha = true; 
+    material_data.col_num = 3;
+    material_data.row_num = 1;
+    material_data.fps = 3.0f;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::SCANER_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
-//############################ FREEZER_ITEM
+//############################ RADAR_EQUIPMENT
 //#################### RACE_0
 //####### TECH_LEVEL_0
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L0_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, DATA_PATH+"item/radar/radar_Race0_Tech0.png", true, &arg, 3, 1, 3) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/radar/radar_Race0_Tech0.png";
+    material_data.use_alpha = true; 
+    material_data.col_num = 3;
+    material_data.row_num = 1;
+    material_data.fps = 3.0f;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::RADAR_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 //####### TECH_LEVEL_1
 {
-    std::vector<int> arg;  
-    arg.push_back((int)TYPE::RACE::R0_ID); arg.push_back((int)TYPE::TECHLEVEL::L1_ID); 
-    TextureManager::Instance().Add( new TextureOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, DATA_PATH+"item/radar/radar_Race0_Tech1.png", true, &arg, 3, 1, 3) );
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/radar/radar_Race0_Tech1.png";
+    material_data.use_alpha = true; 
+    material_data.col_num = 3;
+    material_data.row_num = 1;
+    material_data.fps = 3.0f;
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id        = TYPE::TEXTURE::RADAR_EQUIPMENT_ID; 
+    association_data.race_id        = TYPE::RACE::R0_ID; 
+    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 
 //################## MODULES
 {
-    std::vector<int> arg;  
-    TextureManager::Instance().Add(new TextureOb(TYPE::TEXTURE::MODULE_ID, DATA_PATH+"item/module.png", true, &arg));
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"item/module.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    MaterialAssociation association_data;
+    association_data.type_id = TYPE::TEXTURE::MODULE_ID; 
+    textureOb->SetAssociation(association_data);
+
+    TextureManager::Instance().Add(textureOb);
 }
 
 
 
+// UNIQUE TEXTURES
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().starsystem_mark_war = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/ss_mark_war.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/ss_mark_war.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    GuiTextureObCollector::Instance().starsystem_mark_war = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().starsystem_mark_captured = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/ss_mark_captured.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/ss_mark_captured.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+ 
+    GuiTextureObCollector::Instance().starsystem_mark_captured = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().starsystem_mark_player = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/mark_player_ss.png", true, &arg);
-}
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/mark_player_ss.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
 
-
-
-{
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().icon_minus = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"icon/minus.png", true, &arg);
+    GuiTextureObCollector::Instance().starsystem_mark_player = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().icon_plus = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"icon/plus.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"icon/minus.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+ 
+    GuiTextureObCollector::Instance().icon_minus = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().skill = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/skill.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"icon/plus.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    GuiTextureObCollector::Instance().icon_plus = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().skill_transparent = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/skill_transparent.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/skill.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    GuiTextureObCollector::Instance().skill = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().icon_map = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"icon/starsystem_ICON.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/skill_transparent.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+ 
+    GuiTextureObCollector::Instance().skill_transparent = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().grapple_trail = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"effect/grapple_jet.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"icon/starsystem_ICON.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    GuiTextureObCollector::Instance().icon_map = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().dot_blue = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/dot_blue.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"effect/grapple_jet.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    GuiTextureObCollector::Instance().grapple_trail = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().dot_green = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/dot_green.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/dot_blue.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+ 
+    GuiTextureObCollector::Instance().dot_blue = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().dot_red = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/dot_red.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/dot_green.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    GuiTextureObCollector::Instance().dot_green = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().dot_black = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/dot_black.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/dot_red.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+ 
+    GuiTextureObCollector::Instance().dot_red = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().dot_yellow = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/dot_yellow.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/dot_black.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+ 
+    GuiTextureObCollector::Instance().dot_black = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().dot_purple = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/dot_purple.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/dot_yellow.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+  
+    GuiTextureObCollector::Instance().dot_yellow = textureOb;
+}
+
+{
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/dot_purple.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+ 
+    GuiTextureObCollector::Instance().dot_purple = textureOb;
 }
 
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().radar_screenrect = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"gui/radar_screenrect.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"gui/radar_screenrect.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    GuiTextureObCollector::Instance().radar_screenrect = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().radar_range = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"gui/radar_range.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"gui/radar_range.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    GuiTextureObCollector::Instance().radar_range = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().radar_background = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"gui/radar_background.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"gui/radar_background.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+ 
+    GuiTextureObCollector::Instance().radar_background = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().radar_bar = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"gui/radar_bar.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"gui/radar_bar.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    GuiTextureObCollector::Instance().radar_bar = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().bar_bottom = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"gui/bar_bottom.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"gui/bar_bottom.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    GuiTextureObCollector::Instance().bar_bottom = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().bar_left = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"gui/bar_left.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"gui/bar_left.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    GuiTextureObCollector::Instance().bar_left = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().bar_top = new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"gui/bar_top.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"gui/bar_top.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+ 
+    GuiTextureObCollector::Instance().bar_top = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().text_background =  new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/text_background.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/text_background.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+  
+    GuiTextureObCollector::Instance().text_background = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().slot_mark_accept =  new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/slot_mark_accept.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/slot_mark_accept.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+ 
+    GuiTextureObCollector::Instance().slot_mark_accept = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().mask_round =  new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/mask_round.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/mask_round.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    GuiTextureObCollector::Instance().mask_round = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().slot_mark_reject =  new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"other/slot_mark_reject.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"other/slot_mark_reject.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+ 
+    GuiTextureObCollector::Instance().slot_mark_reject = textureOb;
 }
 
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().mark_target =  new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"gui/mark_target.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"gui/mark_target.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+  
+    GuiTextureObCollector::Instance().mark_target = textureOb;
 }
  
 {
-    std::vector<int> arg;  
-    GuiTextureObCollector::Instance().mark_target_slot =  new TextureOb(TYPE::TEXTURE::NONE_ID, DATA_PATH+"gui/mark_target_slot.png", true, &arg);
+    MaterialData material_data;
+    material_data.texture_path = DATA_PATH+"gui/mark_target_slot.png";
+    material_data.use_alpha = true; 
+    TextureOb* textureOb = new TextureOb(material_data);
+
+    GuiTextureObCollector::Instance().mark_target_slot = textureOb;
 }
 }
 

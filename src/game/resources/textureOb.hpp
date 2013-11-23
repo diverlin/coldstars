@@ -117,7 +117,7 @@ class TextureOb
         const MaterialAssociation& GetAssociation() const { return m_Association; }
 
         //void SetData(const MaterialData& data) { m_Data = data; } 
-        void SetAssociasion(const MaterialAssociation& association) { m_Association = association; }
+        void SetAssociation(const MaterialAssociation& association) { m_Association = association; }
 
     private:
         MaterialAssociation m_Association;

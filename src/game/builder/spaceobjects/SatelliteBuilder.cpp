@@ -92,7 +92,7 @@ void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const
     
     LifeData data_life;
     data_life.armor      = data_korpus.armor;
-    data_life.dying_time = 10*texOb->size_id;
+    data_life.dying_time = 10*texOb->GetData().size_id;
     
     //int size_threshold = 2; 
     data_korpus.draw_turrels = true;       
