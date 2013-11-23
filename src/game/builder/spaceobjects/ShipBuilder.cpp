@@ -125,7 +125,7 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id,  TYPE::ENTI
     data_korpus.draw_turrels = false;
     if (mesh == nullptr)
     {
-        if (texOb->size_id > size_threshold)
+        if (texOb->GetData().size_id > size_threshold)
         {
             data_korpus.draw_turrels = true; 
         }

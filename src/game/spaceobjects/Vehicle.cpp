@@ -111,7 +111,7 @@ void Vehicle::CreateDriveComplexTextureDependedStuff()
     GetPoints().addMidLeftPoint();
     GetPoints().addMidFarLeftPoint();
         
-    DriveEffect* drive_effect = GetNewDriveEffect(GetTextureOb().size_id, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
+    DriveEffect* drive_effect = GetNewDriveEffect(GetTextureOb().GetData().size_id, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
     m_ComplexDrive.SetDriveEffect(drive_effect);
 }    
 

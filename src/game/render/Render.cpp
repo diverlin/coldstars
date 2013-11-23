@@ -189,19 +189,19 @@ void Renderer::UpdateProjectionViewMatrix()
 
 
 
-void Renderer::DrawQuad(const TextureOb& texOb, const glm::mat4& Mm) const
+void Renderer::DrawQuad(const TextureOb& textureOb, const glm::mat4& Mm) const
 {
-    glBindTexture(GL_TEXTURE_2D, texOb.texture);
+    glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
     int frame = 0; //texOb.updateAnimationFrame();
    
     ComposeModelMatrix(Mm);
     
     glBegin(GL_QUADS);
     {   
-        glTexCoord3f(texOb.texCoord_bottomLeft_vec[frame].x,  texOb.texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
-        glTexCoord3f(texOb.texCoord_bottomRight_vec[frame].x, texOb.texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
-        glTexCoord3f(texOb.texCoord_topRight_vec[frame].x,    texOb.texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
-        glTexCoord3f(texOb.texCoord_topLeft_vec[frame].x,     texOb.texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
+        glTexCoord3f(textureOb.GetData().texCoord_bottomLeft_vec[frame].x,  textureOb.GetData().texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
+        glTexCoord3f(textureOb.GetData().texCoord_bottomRight_vec[frame].x, textureOb.GetData().texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
+        glTexCoord3f(textureOb.GetData().texCoord_topRight_vec[frame].x,    textureOb.GetData().texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
+        glTexCoord3f(textureOb.GetData().texCoord_topLeft_vec[frame].x,     textureOb.GetData().texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
     }
     glEnd();
 }
@@ -237,7 +237,7 @@ void Renderer::RenderMeshGeometry(const Mesh& mesh, const glm::mat4& Mm) const
 
 void Renderer::RenderMeshGeometry(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
-    glBindTexture(GL_TEXTURE_2D, textureOb.texture);
+    glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
     
     ComposeModelMatrix(Mm);                     
     mesh.Draw();
@@ -247,7 +247,7 @@ void Renderer::RenderTransparentMeshGeometry(const Mesh& mesh, const TextureOb& 
 {
     enable_BLEND();
     {
-        glBindTexture(GL_TEXTURE_2D, textureOb.texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
 
         ComposeModelMatrix(Mm);                     
         mesh.Draw();
@@ -276,7 +276,7 @@ void Renderer::RenderMeshLight(const Mesh& mesh, const TextureOb& textureOb, con
         glUniform4f(m_ProgramLightLocation_uAmbientColor, ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
         
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureOb.texture); 
+        glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture); 
         glUniform1i(m_ProgramLightLocation_uTexture, 0);
                             
         mesh.Draw();
@@ -296,11 +296,11 @@ void Renderer::RenderMeshLightNormalMap(const Mesh& mesh, const TextureOb& textu
         glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
                 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureOb.texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
         glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_texture"), 0);
         
         glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, textureOb.normalmap);
+        glBindTexture(GL_TEXTURE_2D, textureOb.GetData().normalmap);
         glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_normalmap"), 1);
                 
         ComposeModelMatrix(Mm);                     
@@ -321,11 +321,11 @@ void Renderer::RenderMeshMultiTextured(const Mesh& mesh, const TextureOb& textur
     glUseProgram(m_Shaders.multitexturing);
     {    
         glActiveTexture(GL_TEXTURE0);                                
-        glBindTexture(GL_TEXTURE_2D, textureOb.texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
         glUniform1i(glGetUniformLocation(m_Shaders.multitexturing, "Texture_0"), 0);
         
         glActiveTexture(GL_TEXTURE1);                                
-        glBindTexture(GL_TEXTURE_2D, textureOb.texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
         glUniform1i(glGetUniformLocation(m_Shaders.multitexturing, "Texture_1"), 1);
         
         glUniform2f(glGetUniformLocation(m_Shaders.multitexturing, "displ"), offset, -offset);
@@ -388,13 +388,11 @@ void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const
 {
     enable_BLEND();
     enable_POINTSPRITE();
-    {
-        glPointSize(12.0f);
-    
+    {   
         glUseProgram(m_Shaders.particle);
         {    
             glActiveTexture(GL_TEXTURE0);                                
-            glBindTexture(GL_TEXTURE_2D, textureOb.texture);
+            glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
             glUniform1i(glGetUniformLocation(m_Shaders.particle, "uTexture_0"), 0);
 
             glUniformMatrix4fv(glGetUniformLocation(m_Shaders.particle, "u_ModelMatrix"), 1, GL_FALSE, &Mm[0][0]);      
