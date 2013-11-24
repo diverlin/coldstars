@@ -83,16 +83,15 @@ void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textu
     data_life.armor = 1;
     data_life.dying_time = 30;
     
-    glm::vec3 d_angle;
-    d_angle.z = -getRandInt(10, 100)*0.01;      
-    
     container->SetLifeData(data_life);
-    container->BindData2D(textureOb);
-    
-    container->SetDirection(glm::normalize(glm::vec3(0.0f, 0.0f, 1.0f)));
+    //container->BindData2D(textureOb);
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    glm::vec3 size(10.0f, 10.0f, 1.0f);
+    container->BindData3D(mesh, textureOb, size);
+ 
     float delta_angle = 0.0001*getRandInt(20, 60);
-    AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
-    container->SetAnimationRotation(animation_rotation);
+    //AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
+    //container->SetAnimationRotation(animation_rotation);
     
     container->SetGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
     

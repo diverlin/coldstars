@@ -104,12 +104,12 @@ void Asteroid::UpdateInfo()
 void Asteroid::Render_NEW(const Renderer& render, const glm::vec2& scroll_coords)
 {
     //render.RenderMeshLightNormalMap(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-    render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
     
 void Asteroid::Render_OLD(const Renderer& render)
 {
-    render.RenderMeshGeometry(GetMesh(), GetTextureOb(), GetActualModelMatrix());       
+    render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());       
 }
 
 void Asteroid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

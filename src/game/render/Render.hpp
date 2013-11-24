@@ -70,13 +70,13 @@ class Renderer : public NonCopyable
                 
         void ComposeViewMatrix(const glm::mat4&);
 
-        void RenderMeshGeometry           (const Mesh&, const glm::mat4&) const;
-        void RenderMeshGeometry           (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void RenderTransparentMeshGeometry(const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void RenderMeshLight              (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void RenderMeshLightNormalMap     (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void RenderTransparentMeshLight   (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void RenderMeshMultiTextured      (const Mesh&, const TextureOb&, const glm::mat4&, float) const;
+        void DrawMesh                   (const Mesh&, const glm::mat4&) const;
+        void DrawMesh                   (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void DrawTransparentMesh        (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void DrawMeshLight              (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void DrawMeshLightNormalMap     (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void DrawTransparentMeshLight   (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void DrawMeshMultiTextured      (const Mesh&, const TextureOb&, const glm::mat4&, float) const;
 
         void DrawQuad(const TextureOb&, const glm::mat4&) const;
         void DrawQuad(const TextureOb&, const Box2D&) const;

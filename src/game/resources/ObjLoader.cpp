@@ -39,8 +39,8 @@ ObjLoader::ObjLoader(const std::string& path)
             if (type_str == "v")
             {
                 glm::vec3 pos;
-                line_stream >> pos.x >> pos.y >> pos.z;
-                positions.push_back(pos);
+                line_stream >> pos.x >> pos.z >> pos.y;                
+                positions.push_back(pos);             
             }
             
             else if (type_str == "vt")
@@ -53,7 +53,7 @@ ObjLoader::ObjLoader(const std::string& path)
             else if (type_str == "vn")
             {
                 glm::vec3 nor;
-                line_stream >> nor.x >> nor.y >> nor.z;
+                line_stream >> nor.x >> nor.z >> nor.y;
                 normals.push_back(nor);
             }
             

@@ -7,11 +7,12 @@
 #include <resources/ObjLoader.hpp>
 
 
-Mesh::Mesh(const std::string& path, TextureOb* textureOb, TYPE::MESH type_id)
+Mesh::Mesh(TYPE::MESH type_id, const std::string& path, const glm::vec3& direction, TextureOb* textureOb)
 :
 m_TypeId(type_id),
 m_PrimitiveType(GL_TRIANGLES),
 m_TextureOb(textureOb),
+m_Direction(direction),
 m_VertexCount(0),
 m_ListId(0),
 m_VaoId(0),        

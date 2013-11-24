@@ -63,6 +63,7 @@ void BaseDrawable::BindData3D(Mesh* mesh, TextureOb* textureOb, const glm::vec3&
     m_TextureOb = textureOb; 
     SetSize(size);
     SetCollisionRadius((size.x + size.y) / 4.0);
+    SetDirection(mesh->GetDirection());
 }
 
 void BaseDrawable::BindData2D(TextureOb* textureOb)
@@ -126,11 +127,14 @@ bool BaseDrawable::UpdateFadeOutEffect()
 }
 
 const glm::mat4& BaseDrawable::GetActualModelMatrix()
-{     
-    RotationBetweenVectors(m_QuatPosition, GetDirectionOrigin(), GetDirection());
-    if (m_AnimationRotation != nullptr)
+{    
+    if (m_Mesh) // hack  (in future each ob will have mesh, for example for 2D it's plane)
     {
-        m_AnimationRotation->Update(m_QuatAnimation, GetDirectionOrigin());        
+        RotationBetweenVectors(m_QuatPosition, m_Mesh->GetDirection(), GetDirection());
+        if (m_AnimationRotation != nullptr)
+        {
+            m_AnimationRotation->Update(m_QuatAnimation, m_Mesh->GetDirection());        
+        }
     }
     
     m_MatrixTranslate = glm::translate(GetCenter());    

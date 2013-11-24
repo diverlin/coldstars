@@ -127,13 +127,13 @@ void Star::UpdateInSpace(int time, bool show_effect)
     
 void Star::Render_NEW(const Renderer& render)
 {
-    render.RenderMeshMultiTextured(GetMesh(), GetTextureOb(), GetActualModelMatrix(), m_TextureOffset);
+    render.DrawMeshMultiTextured(GetMesh(), GetTextureOb(), GetActualModelMatrix(), m_TextureOffset);
 }
         
 void Star::Render_OLD(const Renderer& render)
 {    
     glBindTexture(GL_TEXTURE_2D, GetTextureOb().GetData().texture);              
-    render.RenderMeshGeometry(GetMesh(), GetActualModelMatrix());
+    render.DrawMesh(GetMesh(), GetActualModelMatrix());
 }
 
 /* virtual override final */

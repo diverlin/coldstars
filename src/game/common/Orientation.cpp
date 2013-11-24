@@ -23,8 +23,7 @@ Orientation::Orientation()
 :
 m_IsUpdated(false)
 {
-    m_DirectionOrigin = glm::vec3(0.0f, 0.0f, 1.0f);
-    m_Direction       = glm::vec3(0.0f, 0.0f, 1.0f); 
+    //m_Direction       = glm::vec3(0.0f, 0.0f, 1.0f); 
 }
 
 /* virtual */

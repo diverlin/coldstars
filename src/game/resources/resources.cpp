@@ -42,16 +42,16 @@ void loadGameData()
 
 void load3DModels()
 {        
-    MeshCollector::Instance().RegisterMesh(new Mesh(DATA_PATH+"obj/plane/plane.obj", nullptr, TYPE::MESH::PLANE_ID));
-    MeshCollector::Instance().RegisterMesh(new Mesh(DATA_PATH+"obj/sphere/sphere.obj", nullptr, TYPE::MESH::SPHERE_ID));
-    //MeshCollector::Instance().RegisterMesh(new Mesh(DATA_PATH+"obj/plane/plane.obj", nullptr, TYPE::MESH::SPHERE_ID));
-    MeshCollector::Instance().RegisterMesh(new Mesh(DATA_PATH+"obj/sphere_deformed/sphere_deformed.obj", nullptr, TYPE::MESH::SPHERE_DEFORMED_ID));
+    MeshCollector::Instance().RegisterMesh(new Mesh(TYPE::MESH::PLANE_ID,           DATA_PATH+"obj/plane/plane.obj",   glm::vec3(1.0f, 0.0f, 0.0f), nullptr));
+    MeshCollector::Instance().RegisterMesh(new Mesh(TYPE::MESH::SPHERE_ID,          DATA_PATH+"obj/sphere/sphere.obj", glm::vec3(1.0f, 0.0f, 0.0f), nullptr));
+    MeshCollector::Instance().RegisterMesh(new Mesh(TYPE::MESH::SPHERE_DEFORMED_ID, DATA_PATH+"obj/sphere_deformed/sphere_deformed.obj", glm::vec3(1.0f, 0.0f, 0.0f), nullptr));
     
     {
     MaterialData material_data;
     material_data.texture_path = DATA_PATH+"obj/vehicles/BabylonStation/station_texture/babylonstation.jpg";
     TextureOb* textureOb = new TextureOb(material_data); 
-    Mesh* mesh = new Mesh(DATA_PATH+"obj/vehicles/BabylonStation/babylon_station_mod.obj", textureOb, TYPE::MESH::SPACESTATION_ID);   
+    Mesh* mesh = new Mesh(TYPE::MESH::SPACESTATION_ID, DATA_PATH+"obj/vehicles/BabylonStation/babylon_station_mod.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);  
+//Mesh* mesh = new Mesh(TYPE::MESH::SPACESTATION_ID, DATA_PATH+"obj/plane/plane.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);    
     MeshCollector::Instance().RegisterMesh(mesh);
     }
 
@@ -59,7 +59,8 @@ void load3DModels()
     MaterialData material_data;
     material_data.texture_path = DATA_PATH+"obj/vehicles/Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg";
     TextureOb* textureOb = new TextureOb(material_data);
-    Mesh* mesh = new Mesh(DATA_PATH+"obj/vehicles/Anna_V_2.0_variations/anna_mod.obj", textureOb, TYPE::MESH::SPACESTATION_ID);
+    Mesh* mesh = new Mesh(TYPE::MESH::SPACESTATION_ID, DATA_PATH+"obj/vehicles/Anna_V_2.0_variations/anna_mod.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);
+//Mesh* mesh = new Mesh(TYPE::MESH::SPACESTATION_ID, DATA_PATH+"obj/plane/plane.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);    
     MeshCollector::Instance().RegisterMesh(mesh);
     }
 }

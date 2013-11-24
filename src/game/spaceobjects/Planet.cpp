@@ -114,8 +114,8 @@ void Planet::PostDeathUniqueEvent(bool)
 
 void Planet::Render_NEW(const Renderer& render)
 {
-    render.RenderMeshLightNormalMap(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-    //render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    //render.DrawMeshLightNormalMap(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
     for (BaseDecor* decor : m_Decorations)
     {
         decor->Render(render, GetCenter());
@@ -124,7 +124,7 @@ void Planet::Render_NEW(const Renderer& render)
 
 void Planet::Render_OLD(const Renderer& render)
 {
-    render.RenderMeshGeometry(GetMesh(), GetTextureOb(), GetActualModelMatrix());    
+    render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());    
 }
 
 void Planet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

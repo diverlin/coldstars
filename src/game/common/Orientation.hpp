@@ -43,11 +43,7 @@ class Orientation : public Base
         
         void SetSize(float x, float y, float z) { m_Size = glm::vec3(x, y, z); m_IsUpdated = false; }
         void SetSize(const glm::vec3& size) { m_Size = size; m_IsUpdated = false; }
-
-        void SetDirectionOrigin(const glm::vec3& direction_origin) { m_DirectionOrigin = direction_origin; m_IsUpdated = false; }        
-        void SetDirection(const glm::vec3& direction)              { m_Direction = direction; m_IsUpdated = false; }
-        
-        const glm::vec3& GetDirectionOrigin() const { return m_DirectionOrigin; }        
+    
         const glm::vec3& GetDirection() const { return m_Direction; }
        
         const glm::vec3& GetCenter() const { return m_Center; }
@@ -68,6 +64,7 @@ class Orientation : public Base
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();
 
+        void SetDirection(const glm::vec3& direction)   { m_Direction = glm::normalize(direction); m_IsUpdated = false; }
         void SetCollisionRadius(float collision_radius) { m_CollisionRadius = collision_radius; }    
                         
     private:
@@ -77,8 +74,7 @@ class Orientation : public Base
                 
         glm::vec3 m_Center;                  
         glm::vec3 m_Size;
-
-        glm::vec3 m_DirectionOrigin;        
+     
         glm::vec3 m_Direction;
         
         glm::vec3 m_ParentCenter; 
@@ -86,6 +82,7 @@ class Orientation : public Base
         Points m_Points;
                                 
     friend class BaseVehicleBuilder;
+    friend class DriveComplex;
 };
 
 #endif 

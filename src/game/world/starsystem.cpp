@@ -1028,26 +1028,26 @@ void StarSystem::StarSparkEvent(float radius) const
 void StarSystem::DamageEventInsideCircle(const glm::vec3& center, float radius, int damage, bool show_effect)
 {
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+    {
+        if ( distanceBetween(VEHICLE_vec[i]->GetCenter(), center) < radius )
         {
-                   if ( distanceBetween(VEHICLE_vec[i]->GetCenter(), center) < radius )
-                   {
-                   VEHICLE_vec[i]->Hit(damage, show_effect); 
-               }
+            VEHICLE_vec[i]->Hit(damage, show_effect); 
         }
+    }
         
-        for (unsigned int i=0; i<CONTAINER_vec.size(); i++)           
+    for (unsigned int i=0; i<CONTAINER_vec.size(); i++)           
+     {
+         float dist = distanceBetween(CONTAINER_vec[i]->GetCenter(), center);
+         if (dist < radius)
          {
-             float dist = distanceBetween(CONTAINER_vec[i]->GetCenter(), center);
-             if (dist < radius)
-             {
-                glm::vec3 force_dir(CONTAINER_vec[i]->GetCenter() - center);
-                force_dir = glm::normalize(force_dir);
-                float force_power = CONVERTER::RADIUS2FORCE.GetEquivalent(dist); 
-                std::cout<<dist<<" "<<force_power<<" "<<str(force_dir)<<std::endl;                       
-
-                CONTAINER_vec[i]->ApplyImpulse(force_dir, force_power); 
-             }
+            glm::vec3 force_dir(CONTAINER_vec[i]->GetCenter() - center);
+            force_dir = glm::normalize(force_dir);
+            float force_power = CONVERTER::RADIUS2FORCE.GetEquivalent(dist); 
+            std::cout<<dist<<" "<<force_power<<" "<<str(force_dir)<<std::endl;                       
+    
+            CONTAINER_vec[i]->ApplyImpulse(force_dir, force_power); 
          }
+     }
          
 }
 

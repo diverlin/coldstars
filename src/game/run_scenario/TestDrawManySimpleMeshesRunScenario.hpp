@@ -16,24 +16,20 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Atmosphere.hpp"  
-#include <render/Render.hpp>
+#ifndef TestDrawManySimpleMeshesRunScenario_HPP
+#define TestDrawManySimpleMeshesRunScenario_HPP
+    
+#include "BaseRunScenario.hpp"
 
-Atmosphere::Atmosphere()
-{}
-
-/* virtual */
-Atmosphere::~Atmosphere()
+class TestDrawManySimpleMeshesRunScenario : public BaseRunScenario
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Atmosphere");
-    #endif    
-}
- 
- /* virtual override final */            
-void Atmosphere::Render(const Renderer& render, const glm::vec3& center)
-{      
-    SetCenter(center);
-    render.DrawTransparentMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-}
+    public:
+        TestDrawManySimpleMeshesRunScenario() {}
+        ~TestDrawManySimpleMeshesRunScenario() {}
+            
+        virtual void Init(Player*);
+        virtual void Update_inDynamic(Player*);
+        virtual void Update_inStatic(Player*) {}
+};
 
+#endif

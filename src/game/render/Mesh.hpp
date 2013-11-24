@@ -38,13 +38,14 @@ struct Vertex
 class Mesh
 { 
     public:
-        Mesh(const std::string&, TextureOb* textureOb, TYPE::MESH);
+        Mesh(TYPE::MESH, const std::string&, const glm::vec3&, TextureOb*);
         Mesh();
         ~Mesh();
 
-        TYPE::MESH GetTypeId() const { return m_TypeId; };
-        TextureOb* GetTextureOb() const { return m_TextureOb; };
-        const glm::vec3& GetBoundaryBox() const { return m_BoundaryBox; };
+        TYPE::MESH GetTypeId() const { return m_TypeId; }
+        TextureOb* GetTextureOb() const { return m_TextureOb; }
+        const glm::vec3& GetBoundaryBox() const { return m_BoundaryBox; }
+        const glm::vec3& GetDirection() const { return m_Direction; }
 
         void FillVertices(const ObjLoader&);
         void FillPointVertices(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
@@ -59,6 +60,8 @@ class Mesh
         TextureOb* m_TextureOb;
         std::vector<Vertex> m_Vertices; 
         glm::vec3 m_BoundaryBox;
+
+        glm::vec3 m_Direction;
     
         uint32_t m_VertexCount;
 
