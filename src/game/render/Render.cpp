@@ -149,7 +149,7 @@ void Renderer::MakeShortCuts()
     m_ProgramLightLocation_uDiffColor     = glGetUniformLocation(m_ProgramLight, "u_DiffColor");
     m_ProgramLightLocation_uAmbientColor  = glGetUniformLocation(m_ProgramLight, "u_AmbientColor");                    
         
-    m_ProgramLightLocation_uTexture  = glGetUniformLocation(m_ProgramLight, "u_Texture0"); 
+    m_ProgramLightLocation_uTexture  = glGetUniformLocation(m_ProgramLight, "u_Texture"); 
     }    
     
     
@@ -259,7 +259,7 @@ void Renderer::RenderMeshLight(const Mesh& mesh, const TextureOb& textureOb, con
 {
     float ambient_factor = 0.25;       
         
-    glm::vec3 eye_pos = Screen::Instance().GetCamera().GetPos();
+    const glm::vec3& eye_pos = Screen::Instance().GetCamera().GetPos();
  
     glUseProgram(m_ProgramLight);
     {
@@ -284,16 +284,18 @@ void Renderer::RenderMeshLight(const Mesh& mesh, const TextureOb& textureOb, con
     glUseProgram(0);
 }
 
-void Renderer::RenderMeshLightNormalMap(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm, const glm::vec2& scroll_coords, const glm::vec4& color) const
+void Renderer::RenderMeshLightNormalMap(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     float ambient_factor = 0.25;
-    
+ 
+    const glm::vec3& eye_pos = Screen::Instance().GetCamera().GetPos();
+   
     glUseProgram(m_Shaders.light_normalmap);
     {
-        glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_lightPos"), -scroll_coords.x, -scroll_coords.y, 0.0);
-        glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_eyePos"), -scroll_coords.x, -scroll_coords.y, 0.0);
-        glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_diffColor"), color.r, color.g, color.b, color.a);
-        glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_ambientColor"), ambient_factor*color.r, ambient_factor*color.g, ambient_factor*color.b, ambient_factor*color.a);
+        glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_lightPos"), 0.0f, 0.0f, 200.0);
+        glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_eyePos"), eye_pos.x, eye_pos.y, eye_pos.z);
+        glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_diffColor"), m_Color.r, m_Color.g, m_Color.b, m_Color.a);
+        glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_ambientColor"), ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
                 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);

@@ -114,7 +114,8 @@ void Planet::PostDeathUniqueEvent(bool)
 
 void Planet::Render_NEW(const Renderer& render)
 {
-    render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    render.RenderMeshLightNormalMap(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    //render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
     for (BaseDecor* decor : m_Decorations)
     {
         decor->Render(render, GetCenter());

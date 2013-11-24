@@ -103,7 +103,8 @@ void Asteroid::UpdateInfo()
 
 void Asteroid::Render_NEW(const Renderer& render, const glm::vec2& scroll_coords)
 {
-    render.RenderMeshLightNormalMap(GetMesh(), GetTextureOb(), GetActualModelMatrix(), scroll_coords, GetStarSystem()->GetColor());
+    //render.RenderMeshLightNormalMap(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
     
 void Asteroid::Render_OLD(const Renderer& render)
