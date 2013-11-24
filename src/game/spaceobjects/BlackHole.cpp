@@ -83,12 +83,12 @@ void BlackHole::UpdateInfo()
       
 void BlackHole::Render_NEW(const Renderer& render)
 {
-    render.RenderMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
     
 void BlackHole::Render_OLD(const Renderer& render)
 {
-    render.RenderMeshGeometry(GetMesh(), GetTextureOb(), GetActualModelMatrix());    
+    render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());    
 }
      
 void BlackHole::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

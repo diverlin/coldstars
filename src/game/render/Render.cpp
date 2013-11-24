@@ -229,13 +229,13 @@ void Renderer::DrawQuad(const TextureOb& texOb, const Box2D& box) const
     DrawQuad(texOb, Mm);
 }
 
-void Renderer::RenderMeshGeometry(const Mesh& mesh, const glm::mat4& Mm) const
+void Renderer::DrawMesh(const Mesh& mesh, const glm::mat4& Mm) const
 {
     ComposeModelMatrix(Mm);                     
     mesh.Draw();
 }
 
-void Renderer::RenderMeshGeometry(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
+void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
     
@@ -243,7 +243,7 @@ void Renderer::RenderMeshGeometry(const Mesh& mesh, const TextureOb& textureOb, 
     mesh.Draw();
 }
 
-void Renderer::RenderTransparentMeshGeometry(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
+void Renderer::DrawTransparentMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     enable_BLEND();
     {
@@ -255,7 +255,7 @@ void Renderer::RenderTransparentMeshGeometry(const Mesh& mesh, const TextureOb& 
     disable_BLEND();
 }
 
-void Renderer::RenderMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
+void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     float ambient_factor = 0.25;       
         
@@ -284,7 +284,7 @@ void Renderer::RenderMeshLight(const Mesh& mesh, const TextureOb& textureOb, con
     glUseProgram(0);
 }
 
-void Renderer::RenderMeshLightNormalMap(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
+void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     float ambient_factor = 0.25;
  
@@ -311,14 +311,14 @@ void Renderer::RenderMeshLightNormalMap(const Mesh& mesh, const TextureOb& textu
     glUseProgram(0);
 }
 
-void Renderer::RenderTransparentMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
+void Renderer::DrawTransparentMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     enable_BLEND();
-        RenderMeshLight(mesh, textureOb, Mm);
+        DrawMeshLight(mesh, textureOb, Mm);
     disable_BLEND();
 }
 
-void Renderer::RenderMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm, float offset) const
+void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm, float offset) const
 {
     glUseProgram(m_Shaders.multitexturing);
     {    

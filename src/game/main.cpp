@@ -52,13 +52,14 @@
 #include "run_scenario/NormalRunScenario.hpp"
 #include "run_scenario/TestParticlesRunScenario.hpp"
 #include "run_scenario/TestTextRunScenario.hpp"
+#include "run_scenario/TestDrawManySimpleMeshesRunScenario.hpp"
 
 #include "../pureTest/pureTest.cpp"
 #include "../pureTest/threadTest.cpp"
 #include "../pureTest/vectorPerfomanceTest.cpp"
 #include "../pureTest/matrixPerfomanceTest.cpp"
 
-enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT };
+enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
 
 int main()
 {
@@ -76,12 +77,13 @@ int main()
     Player* player = PlayerBuilder::Instance().GetNewPlayer();
     
     BaseRunScenario* run_scenario = nullptr;
-    RUN_SCENARIO scenario_type = RUN_SCENARIO::NORMAL_RUN;
+    RUN_SCENARIO scenario_type = RUN_SCENARIO::TEST_MANY_VAO;
     switch(scenario_type)
     {
         case RUN_SCENARIO::NORMAL_RUN:         { run_scenario = new NormalRunScenario(); break; }
         case RUN_SCENARIO::TEST_PARTICLES:     { run_scenario = new TestParticlesRunScenario(); break; }    
         case RUN_SCENARIO::TEST_TEXT:          { run_scenario = new TestTextRunScenario(); break; }
+        case RUN_SCENARIO::TEST_MANY_VAO:      { run_scenario = new TestDrawManySimpleMeshesRunScenario(); break; }
         default:                               { std::cout<<"INVALID_RUNSCENARIO"<<std::endl; return EXIT_FAILURE; break; }    
     }
     run_scenario->Init(player);

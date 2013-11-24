@@ -80,7 +80,7 @@ Ship* ShipBuilder::GetNewShip() const
     return ship;
 }
 
-void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id,  TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const
+void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const
 {
     Mesh* mesh = nullptr;
     TextureOb* texOb = nullptr;
@@ -147,10 +147,6 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id,  TYPE::ENTI
         float delta_angle = 0.001*getRandInt(20, 60);
         AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
         ship->SetAnimationRotation(animation_rotation);
-        
-        ship->SetDirectionOrigin(glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
-        ship->SetDirection(glm::normalize(glm::vec3(1.0f, 0.0f, 0.0f)));
-        //ship->SetOrientation(glm::normalize(glm::vec3()));    
 
         ship->BindData3D(mesh, mesh->GetTextureOb(), scale);
     }
