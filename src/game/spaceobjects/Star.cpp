@@ -28,13 +28,11 @@
 
 #include <resources/textureOb.hpp>
 
-#include <render/Render.hpp>
 #include <glm/gtx/transform.hpp>
 
    
 Star::Star(int id)
 :
-m_TextureOffset(0.0),
 m_DeltaColor(0.0),
 m_SparkActive(false),
 m_SparkGrows(false),
@@ -87,8 +85,6 @@ void Star::UpdateInSpaceInStatic()
                
 void Star::UpdateInSpace(int time, bool show_effect)
 {
-    m_TextureOffset += 0.0002;
-
     if (m_SparkActive == true)
     {
         if (show_effect == true)
@@ -125,17 +121,6 @@ void Star::UpdateInSpace(int time, bool show_effect)
     //UpdateRotation(); // not relevant for render NEW
 }    
     
-void Star::Render_NEW(const Renderer& render)
-{
-    render.DrawMeshMultiTextured(GetMesh(), GetTextureOb(), GetActualModelMatrix(), m_TextureOffset);
-}
-        
-void Star::Render_OLD(const Renderer& render)
-{    
-    glBindTexture(GL_TEXTURE_2D, GetTextureOb().GetData().texture);              
-    render.DrawMesh(GetMesh(), GetActualModelMatrix());
-}
-
 /* virtual override final */
 void Star::UpdateInfo()
 { 

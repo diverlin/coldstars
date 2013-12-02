@@ -115,7 +115,7 @@ void Container::UpdateInSpace(int time, bool show_effect)
                
 void Container::Render2D(const Renderer& render)
 { 
-    render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    render.DrawTransparentMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
     //render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
 }
 

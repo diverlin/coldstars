@@ -21,7 +21,6 @@
 #define STAR_HPP
 
 #include <spaceobjects/BasePlanet.hpp>
-#include <render/Render.hpp>
 
 class Star : public BasePlanet
 {
@@ -40,16 +39,11 @@ class Star : public BasePlanet
         void UpdateInSpaceInStatic();    
         void UpdateInSpace(int, bool);
         
-        void Render_NEW(const Renderer&);
-        void Render_OLD(const Renderer&);
-        
         virtual void Save(boost::property_tree::ptree&) const override final;
         virtual void Load(const boost::property_tree::ptree&) override final;
         virtual void Resolve() override final;
                 
     private:
-        float m_TextureOffset;
-         
         float m_DeltaColor;
         
         bool m_SparkActive;
