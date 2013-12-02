@@ -70,13 +70,13 @@ class Renderer : public NonCopyable
                 
         void ComposeViewMatrix(const glm::mat4&);
 
-        void DrawMesh                   (const Mesh&, const glm::mat4&) const;
+        //void DrawMesh                   (const Mesh&, const glm::mat4&) const;
         void DrawMesh                   (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawTransparentMesh        (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawMeshLight              (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void DrawMeshLightNormalMap     (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        //void DrawMeshLightNormalMap     (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawTransparentMeshLight   (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void DrawMeshMultiTextured      (const Mesh&, const TextureOb&, const glm::mat4&, float) const;
+        void DrawMeshMultiTextured      (const Mesh&, const TextureOb&, const glm::mat4&) const;
 
         void DrawQuad(const TextureOb&, const glm::mat4&) const;
         void DrawQuad(const TextureOb&, const Box2D&) const;
@@ -121,7 +121,7 @@ class Renderer : public NonCopyable
 
         BloomEffect m_Bloom;
 
-        void ComposeModelMatrix(const glm::mat4&) const;
+        //void ComposeModelMatrix(const glm::mat4&) const;
         void UpdateProjectionViewMatrix();
 
         void ResizePostEffects(int, int);

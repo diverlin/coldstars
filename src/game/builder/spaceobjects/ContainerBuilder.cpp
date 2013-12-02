@@ -90,8 +90,8 @@ void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textu
     container->BindData3D(mesh, textureOb, size);
  
     float delta_angle = 0.0001*getRandInt(20, 60);
-    //AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
-    //container->SetAnimationRotation(animation_rotation);
+    AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
+    container->SetAnimationRotation(animation_rotation);
     
     container->SetGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
     

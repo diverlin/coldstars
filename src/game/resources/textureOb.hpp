@@ -45,6 +45,8 @@ struct MaterialData
     GLuint texture;
     GLuint normalmap;
 
+    glm::vec2 texture_offset;
+
     bool is_animated;        
     bool is_loaded;
     bool is_shared;

@@ -24,6 +24,7 @@
 
 struct Shaders
 {      
+    GLuint base;
     GLuint black2alpha;
     GLuint shockwave;
     GLuint volumetriclight;

@@ -176,11 +176,11 @@ void Renderer::ComposeViewMatrix(const glm::mat4& Vm)
     UpdateProjectionViewMatrix(); 
 }
 
-void Renderer::ComposeModelMatrix(const glm::mat4& Mm) const
-{ 
-    glm::mat4 PVMm = m_PVm * Mm; // needs to be done inside vertex shader
-    glLoadMatrixf(&PVMm[0][0]);     
-}
+//void Renderer::ComposeModelMatrix(const glm::mat4& Mm) const
+//{ 
+    //glm::mat4 PVMm = m_PVm * Mm; // needs to be done inside vertex shader
+    //glLoadMatrixf(&PVMm[0][0]);     
+//}
                                  
 void Renderer::UpdateProjectionViewMatrix() 
 { 
@@ -191,19 +191,19 @@ void Renderer::UpdateProjectionViewMatrix()
 
 void Renderer::DrawQuad(const TextureOb& textureOb, const glm::mat4& Mm) const
 {
-    glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
-    int frame = 0; //texOb.updateAnimationFrame();
+    //glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
+    //int frame = 0; //texOb.updateAnimationFrame();
    
-    ComposeModelMatrix(Mm);
+    //ComposeModelMatrix(Mm);
     
-    glBegin(GL_QUADS);
-    {   
-        glTexCoord3f(textureOb.GetData().texCoord_bottomLeft_vec[frame].x,  textureOb.GetData().texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
-        glTexCoord3f(textureOb.GetData().texCoord_bottomRight_vec[frame].x, textureOb.GetData().texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
-        glTexCoord3f(textureOb.GetData().texCoord_topRight_vec[frame].x,    textureOb.GetData().texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
-        glTexCoord3f(textureOb.GetData().texCoord_topLeft_vec[frame].x,     textureOb.GetData().texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
-    }
-    glEnd();
+    //glBegin(GL_QUADS);
+    //{   
+        //glTexCoord3f(textureOb.GetData().texCoord_bottomLeft_vec[frame].x,  textureOb.GetData().texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
+        //glTexCoord3f(textureOb.GetData().texCoord_bottomRight_vec[frame].x, textureOb.GetData().texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
+        //glTexCoord3f(textureOb.GetData().texCoord_topRight_vec[frame].x,    textureOb.GetData().texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
+        //glTexCoord3f(textureOb.GetData().texCoord_topLeft_vec[frame].x,     textureOb.GetData().texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
+    //}
+    //glEnd();
 }
 
 void Renderer::DrawQuad(const TextureOb& texOb, const Box2D& box) const
@@ -229,17 +229,25 @@ void Renderer::DrawQuad(const TextureOb& texOb, const Box2D& box) const
     DrawQuad(texOb, Mm);
 }
 
-void Renderer::DrawMesh(const Mesh& mesh, const glm::mat4& Mm) const
-{
-    ComposeModelMatrix(Mm);                     
-    mesh.Draw();
-}
+//void Renderer::DrawMesh(const Mesh& mesh, const glm::mat4& Mm) const
+//{
+//}
 
 void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
-    glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
-    
-    ComposeModelMatrix(Mm);                     
+    glUseProgram(m_Shaders.base);
+    {
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &Mm[0][0]);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture); 
+        glUniform1i(m_ProgramLightLocation_uTexture, 0);
+                            
+        mesh.Draw();
+    }
+    glUseProgram(0);
+                    
     mesh.Draw();
 }
 
@@ -247,10 +255,7 @@ void Renderer::DrawTransparentMesh(const Mesh& mesh, const TextureOb& textureOb,
 {
     enable_BLEND();
     {
-        glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
-
-        ComposeModelMatrix(Mm);                     
-        mesh.Draw();
+        DrawMesh(mesh, textureOb, Mm);
     }
     disable_BLEND();
 }
@@ -283,7 +288,7 @@ void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
     }
     glUseProgram(0);
 }
-
+/*
 void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     float ambient_factor = 0.25;
@@ -309,7 +314,7 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
         mesh.Draw();
     }
     glUseProgram(0);
-}
+} */
 
 void Renderer::DrawTransparentMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
@@ -318,10 +323,13 @@ void Renderer::DrawTransparentMeshLight(const Mesh& mesh, const TextureOb& textu
     disable_BLEND();
 }
 
-void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm, float offset) const
+void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
     glUseProgram(m_Shaders.multitexturing);
-    {    
+    {
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.multitexturing, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.multitexturing, "u_ModelMatrix")         , 1, GL_FALSE, &Mm[0][0]);
+
         glActiveTexture(GL_TEXTURE0);                                
         glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
         glUniform1i(glGetUniformLocation(m_Shaders.multitexturing, "Texture_0"), 0);
@@ -330,10 +338,11 @@ void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureO
         glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
         glUniform1i(glGetUniformLocation(m_Shaders.multitexturing, "Texture_1"), 1);
         
-        glUniform2f(glGetUniformLocation(m_Shaders.multitexturing, "displ"), offset, -offset);
-        
-        ComposeModelMatrix(Mm);                     
+        glUniform2f(glGetUniformLocation(m_Shaders.multitexturing, "displ"), textureOb.GetData().texture_offset.x, textureOb.GetData().texture_offset.y);        
+                  
         mesh.Draw();
+
+        glActiveTexture(0); 
     }
     glUseProgram(0);
 }        
@@ -413,73 +422,73 @@ void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const
 
 void Renderer::DrawAxis(const glm::mat4& Mm, float width) const
 {
-    float r = 1.5f;
+    //float r = 1.5f;
     
-    glDisable(GL_TEXTURE_2D);
+    //glDisable(GL_TEXTURE_2D);
     
-    ComposeModelMatrix(Mm); 
+    //ComposeModelMatrix(Mm); 
     
-    glLineWidth(width);
+    //glLineWidth(width);
 
-    // draw axis X
-    glColor3f(1.0f, 0.0f, 0.0f);
-    glBegin(GL_LINES);
-        glVertex3f(0.0f, 0.0f, 0.0f);
-        glVertex3f(r, 0.0f, 0.0f);
-    glEnd();
+    //// draw axis X
+    //glColor3f(1.0f, 0.0f, 0.0f);
+    //glBegin(GL_LINES);
+        //glVertex3f(0.0f, 0.0f, 0.0f);
+        //glVertex3f(r, 0.0f, 0.0f);
+    //glEnd();
                 
-    // draw axis Y    
-    glColor3f(0.0f, 1.0f, 0.0f);    
-    glBegin(GL_LINES);        
-        glVertex3f(0.0f, 0.0f, 0.0f);
-        glVertex3f(0.0f, r, 0.0f);
-    glEnd();
+    //// draw axis Y    
+    //glColor3f(0.0f, 1.0f, 0.0f);    
+    //glBegin(GL_LINES);        
+        //glVertex3f(0.0f, 0.0f, 0.0f);
+        //glVertex3f(0.0f, r, 0.0f);
+    //glEnd();
 
-    // draw axis Z    
-    glColor3f(0.0f, 0.0f, 1.0f);    
-    glBegin(GL_LINES);        
-        glVertex3f(0.0f, 0.0f, 0.0f);
-        glVertex3f(0.0f, 0.0f, r);
-    glEnd();
+    //// draw axis Z    
+    //glColor3f(0.0f, 0.0f, 1.0f);    
+    //glBegin(GL_LINES);        
+        //glVertex3f(0.0f, 0.0f, 0.0f);
+        //glVertex3f(0.0f, 0.0f, r);
+    //glEnd();
 
-    glColor3f(1.0f, 1.0f, 1.0f);
+    //glColor3f(1.0f, 1.0f, 1.0f);
     
-    glEnable(GL_TEXTURE_2D);
+    //glEnable(GL_TEXTURE_2D);
 }
       
       
 void Renderer::DrawVector(const glm::vec3& v, const glm::vec3& pos, float length, float width) const
 {
-    glDisable(GL_TEXTURE_2D);
+    //glDisable(GL_TEXTURE_2D);
     
-    ComposeModelMatrix(glm::mat4(1.0f)); 
+    //ComposeModelMatrix(glm::mat4(1.0f)); 
     
-    glLineWidth(width); 
-    glColor3f(1.0f, 1.0f, 1.0f);
+    //glLineWidth(width); 
+    //glColor3f(1.0f, 1.0f, 1.0f);
     
-    glBegin(GL_LINES);  
-        glVertex3f(pos.x, pos.y, pos.z);
-        glVertex3f(pos.x+length*v.x, pos.y+length*v.y, pos.z+length*v.z);
-    glEnd();
+    //glBegin(GL_LINES);  
+        //glVertex3f(pos.x, pos.y, pos.z);
+        //glVertex3f(pos.x+length*v.x, pos.y+length*v.y, pos.z+length*v.z);
+    //glEnd();
     
-    glEnable(GL_TEXTURE_2D);
+    //glEnable(GL_TEXTURE_2D);
 }
 
 void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) const
 {
-    glDisable(GL_TEXTURE_2D);
+    //glDisable(GL_TEXTURE_2D);
     
-    ComposeModelMatrix(Mm); 
+    //ComposeModelMatrix(Mm); 
     
-    glLineWidth(width); 
-    glColor3f(1.0f, 1.0f, 1.0f);
+    //glLineWidth(width); 
+    //glColor3f(1.0f, 1.0f, 1.0f);
     
-    glBegin(GL_LINES);        
-        glVertex3f(0.0f, 0.0f, 0.0f);
-        glVertex3f(v.x, v.y, v.z);
-    glEnd();
+    //glBegin(GL_LINES);        
+        //glVertex3f(0.0f, 0.0f, 0.0f);
+        //glVertex3f(v.x, v.y, v.z);
+    //glEnd();
     
-    glEnable(GL_TEXTURE_2D);
+    //glEnable(GL_TEXTURE_2D);
 }
 
 

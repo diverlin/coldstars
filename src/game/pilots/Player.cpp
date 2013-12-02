@@ -381,7 +381,8 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                         
             for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 
             { 
-                visible_STAR_vec[i]->Render_NEW(render);                                   
+                Star& star = *visible_STAR_vec[i];
+                render.DrawMeshMultiTextured(star.GetMesh(), star.GetTextureOb(), star.GetActualModelMatrix());
             }
         }
         render.DeactivateFbo(0);
@@ -457,7 +458,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
             }
             render.disable_DEPTH();
 
-            render.enable_BLEND();    
+            //render.enable_BLEND();    
             {    
 
                 for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
@@ -498,7 +499,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
                 }
 
             }
-            render.disable_BLEND();
+            //render.disable_BLEND();
 
         }
         render.DeactivateFbo(2);

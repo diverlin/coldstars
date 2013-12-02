@@ -51,6 +51,8 @@ class BaseDrawable : public Orientation
         void BindData2D(TextureOb*);    
         void SetAnimationRotation(BaseAnimationRotation* animation_rotation) { m_AnimationRotation = animation_rotation; }
         void SetColor(const glm::vec4& color) { m_Color = color; }
+
+        const glm::mat4& GetActualModelMatrix();
                         
         bool Is3D() const                 { return (m_Mesh != nullptr); }
         //const glm::vec3& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
@@ -69,8 +71,6 @@ class BaseDrawable : public Orientation
                 
         bool UpdateFadeInEffect(); // depr, move to animation program
         bool UpdateFadeOutEffect(); // depr, move to animation program
-
-        const glm::mat4& GetActualModelMatrix();
                 
         UnresolvedDataBaseDrawable data_unresolved_BaseDrawable;
         void SaveData(boost::property_tree::ptree&, const std::string&) const;

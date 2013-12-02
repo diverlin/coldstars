@@ -42,7 +42,7 @@ void loadGameData()
 
 void load3DModels()
 {        
-    MeshCollector::Instance().RegisterMesh(new Mesh(TYPE::MESH::PLANE_ID,           DATA_PATH+"obj/plane/plane.obj",   glm::vec3(1.0f, 0.0f, 0.0f), nullptr));
+    MeshCollector::Instance().RegisterMesh(new Mesh(TYPE::MESH::PLANE_ID,           DATA_PATH+"obj/plane/plane.obj",   glm::vec3(0.0f, 0.0f, 1.0f), nullptr));
     MeshCollector::Instance().RegisterMesh(new Mesh(TYPE::MESH::SPHERE_ID,          DATA_PATH+"obj/sphere/sphere.obj", glm::vec3(1.0f, 0.0f, 0.0f), nullptr));
     MeshCollector::Instance().RegisterMesh(new Mesh(TYPE::MESH::SPHERE_DEFORMED_ID, DATA_PATH+"obj/sphere_deformed/sphere_deformed.obj", glm::vec3(1.0f, 0.0f, 0.0f), nullptr));
     
@@ -2727,6 +2727,7 @@ void loadImages()
 void loadShaders()
 {
     Shaders shaders;
+    shaders.base            = compileProgram(SHADERS_PATH+"base.vert",              SHADERS_PATH+"base.frag");
     shaders.black2alpha     = compileProgram(SHADERS_PATH+"black2alpha.vert",       SHADERS_PATH+"black2alpha.frag");
     shaders.shockwave       = compileProgram(SHADERS_PATH+"shockwave.vert",         SHADERS_PATH+"shockwave.frag");
     shaders.volumetriclight = compileProgram(SHADERS_PATH+"volumetricLight.vert",   SHADERS_PATH+"volumetricLight.frag");
