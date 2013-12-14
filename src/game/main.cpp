@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include "resources/init.hpp"
+#include "resources/MeshCollector.hpp"
 
 #include "builder/world/GalaxyBuilder.hpp"
 #include "builder/pilots/PlayerBuilder.hpp"
@@ -71,6 +72,7 @@ int main()
     initGameStuff(); 
     Screen::Instance().GetRender().InitPostEffects();  
     Screen::Instance().GetRender().MakeShortCuts();
+    Screen::Instance().GetRender().SetMeshQuad(MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID));
         
     //runMatrixPerfomanceTest();
         

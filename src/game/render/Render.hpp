@@ -45,6 +45,7 @@ class Renderer : public NonCopyable
         void Init();
         void InitPostEffects();
         void MakeShortCuts();
+        void SetMeshQuad(Mesh* mesh) { m_MeshQuad = mesh; }
 
         void SetPerspectiveProjection(float, float);
         void SetOrthogonalProjection(float, float);
@@ -93,6 +94,8 @@ class Renderer : public NonCopyable
         void DrawVector(const glm::vec3&, const glm::mat4&, float) const;  
                                                                  
     private:
+        Mesh* m_MeshQuad;
+
         glm::mat4 m_Pm;
         glm::mat4 m_Vm;
         glm::mat4 m_PVm;
