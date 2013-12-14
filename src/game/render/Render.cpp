@@ -226,12 +226,8 @@ void Renderer::DrawQuad(const TextureOb& texOb, const Box2D& box) const
     glm::mat4 Mm = Tm * Rm * Sm;
     // ugly end
 
-    DrawQuad(texOb, Mm);
+    DrawMesh(*m_MeshQuad, texOb, Mm);
 }
-
-//void Renderer::DrawMesh(const Mesh& mesh, const glm::mat4& Mm) const
-//{
-//}
 
 void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
 {
@@ -378,20 +374,29 @@ void Renderer::DrawQuadTexturedFullScreen(GLuint texture) const
 }
 
 void Renderer::DrawQuadTexturedBlurred(GLuint texture, int w, int h) const
-{    
+{  
+    // ugly  
+    glm::mat4 Tm = glm::translate(glm::vec3(w/2, h/2, -499.0f));
+    glm::mat4 Sm = glm::scale(glm::vec3(w/2, h/2, 1.0f));
+    glm::mat4 Mm = Tm*Sm;
+    // ugly
+
     glUseProgram(m_ProgramBlur);
-    
-    glActiveTexture(GL_TEXTURE0);                              
-    glBindTexture(GL_TEXTURE_2D, texture);
-    
-    glUniform1i(glGetUniformLocation(m_ProgramBlur, "sceneTex"), 0);
-    
-    glUniform1f(glGetUniformLocation(m_ProgramBlur, "rt_w"), 3*w); 
-    glUniform1f(glGetUniformLocation(m_ProgramBlur, "rt_h"), 3*h);
-    glUniform1f(glGetUniformLocation(m_ProgramBlur, "vx_offset"), 1.0);
-    
-    DrawQuad(w, h);
-    
+    {    
+        glActiveTexture(GL_TEXTURE0);                              
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glUniform1i(glGetUniformLocation(m_ProgramBlur, "sceneTex"), 0);
+        
+        glUniformMatrix4fv(glGetUniformLocation(m_ProgramBlur, "u_ProjectionMatrix"), 1, GL_FALSE, &m_Pm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_ProgramBlur, "u_ModelMatrix")         , 1, GL_FALSE, &Mm[0][0]);
+
+        glUniform1f(glGetUniformLocation(m_ProgramBlur, "rt_w"), 3*w); 
+        glUniform1f(glGetUniformLocation(m_ProgramBlur, "rt_h"), 3*h);
+        glUniform1f(glGetUniformLocation(m_ProgramBlur, "vx_offset"), 1.0);
+        
+        //DrawQuad(w, h);
+        m_MeshQuad->Draw();
+    }
     glUseProgram(0);
 }
  
