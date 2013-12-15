@@ -17,14 +17,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef BLOOM_H
-#define BLOOM_H
+#ifndef BLOOM_HPP
+#define BLOOM_HPP
 
 #include <render/MyGl.hpp>
 #include <vector>
 
 #include <math/myVector.hpp>
 #include <render/Fbo.hpp>
+
 class Renderer;
 
 class BloomEffect

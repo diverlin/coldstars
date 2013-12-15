@@ -395,30 +395,14 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
         // resizeGl(w, h); 
         render.ActivateFbo(1, w, h);
         {
-            glUseProgram(render.GetShaders().volumetriclight);
-            {
-                glActiveTexture(GL_TEXTURE0);                                
-                glBindTexture(GL_TEXTURE_2D, render.GetBloom().GetFboFinal().GetTexture());
-                glUniform1i(glGetUniformLocation(render.GetShaders().volumetriclight, "FullSampler"), 0);
-        
-                glActiveTexture(GL_TEXTURE1);                                
-                glBindTexture(GL_TEXTURE_2D, render.GetBloom().GetTextureBlured());
-                glUniform1i(glGetUniformLocation(render.GetShaders().volumetriclight, "BlurSampler"), 1);
-        
-                glUniform4f(glGetUniformLocation(render.GetShaders().volumetriclight, "sun_pos"), -world_coord.x/(w*scale), -world_coord.y/(h*scale), -100.0, 1.0);
-          
-                glActiveTexture(GL_TEXTURE0);
-                render.DrawQuad(w, h);
-            }
-            glUseProgram(0);
-            glActiveTexture(GL_TEXTURE0);
+            render.DrawScreenQuadVolumetricLight(world_coord, w, h);
         }
         render.DeactivateFbo(1);
 
         // render space entites to FBO2     
         render.ActivateFbo(2, w, h);
         {
-            render.DrawQuadTexturedFullScreen(render.GetLastFbo().GetTexture());
+            render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
            
             // resizeGl(w*scale, h*scale);     
             render.enable_DEPTH();  
@@ -504,7 +488,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
         }
         render.DeactivateFbo(2);
             
-        render.DrawQuadTexturedFullScreen(render.GetLastFbo().GetTexture());
+        render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
                 
                 
         /*

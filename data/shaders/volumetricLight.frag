@@ -1,3 +1,10 @@
+#version 330 core
+
+#define FRAG_OUTPUT0 0
+
+layout(location = FRAG_OUTPUT0) out vec4 color;
+
+in vec2 v_Texcoord;
 
 uniform sampler2D FullSampler;
 uniform sampler2D BlurSampler;
@@ -16,7 +23,7 @@ void main(void)
 	vec2  sunPosProj = sun_pos.xy;
 	float sign = sun_pos.w;
  
-	vec2  tc = gl_TexCoord[0].xy;
+	vec2  tc = v_Texcoord;
  
 	vec2  sunVec = sunPosProj.xy - tc; /* + vec2(0.5,0.5); */
 	float sunDist = saturate(sign) * (1.0 - saturate(dot(sunVec,sunVec) * ShaftParams.y));
@@ -42,8 +49,8 @@ void main(void)
  
 	accum  *= 1.65 * sunDist;
  
-	vec4 cScreen = texture2D(FullSampler, gl_TexCoord[0].xy);
+	vec4 cScreen = texture2D(FullSampler, v_Texcoord);
 	accum = cScreen + accum * ShaftParams.w * sunColor * ( 1.0 - cScreen );
  
-	gl_FragColor = accum;
+    color = accum;
 }
