@@ -71,21 +71,23 @@ class Renderer : public NonCopyable
                 
         void ComposeViewMatrix(const glm::mat4&);
 
-        //void DrawMesh                   (const Mesh&, const glm::mat4&) const;
+        //void DrawMesh                 (const Mesh&, const glm::mat4&) const;
         void DrawMesh                   (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawTransparentMesh        (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawMeshLight              (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        //void DrawMeshLightNormalMap     (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        //void DrawMeshLightNormalMap   (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawTransparentMeshLight   (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawMeshMultiTextured      (const Mesh&, const TextureOb&, const glm::mat4&) const;
 
         void DrawQuad(const TextureOb&, const glm::mat4&) const;
         void DrawQuad(const TextureOb&, const Box2D&) const;
 
-        void DrawQuad(int, int) const;        
-        void DrawQuadTextured(GLuint, int, int) const; 
-        void DrawQuadTexturedFullScreen(GLuint) const;
-        void DrawQuadTexturedBlurred(GLuint, int, int) const;
+        void DrawScreenQuadBright(GLuint, int, int, float) const;
+        void DrawScreenQuadCombined(const std::vector<GLuint>&, int, int) const; 
+        void DrawScreenQuadCombinedDebug(const std::vector<GLuint>&, int, int) const; 
+        void DrawScreenQuadVolumetricLight(const glm::vec2&, int, int);
+        void DrawScreenQuadTextured(GLuint, int, int) const;
+        void DrawScreenQuadTexturedBlurred(GLuint, int, int) const;
                         
         void DrawParticles(const Mesh&, const TextureOb&, const glm::mat4&) const;
         
