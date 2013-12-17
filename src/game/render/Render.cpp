@@ -448,8 +448,8 @@ void Renderer::DrawPostEffectCombinedDebug(const std::vector<GLuint>& textures, 
         for (unsigned int j=0; j<quad_num_h; ++j)
         {
             // ugly 
-            glm::mat4 TranslateMatrix = glm::translate(glm::vec3(0.5f*size_w+i*size_w, 0.5f*size_h+j*size_h, -499.0f));
-            glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(0.5f*size_w, 0.5f*size_h, 1.0f));
+            glm::mat4 TranslateMatrix = glm::translate(glm::vec3(size_w+i*size_w, size_h+j*size_h, -499.0f));
+            glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(size_w, size_h, 1.0f));
             glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
             // ugly 
     
