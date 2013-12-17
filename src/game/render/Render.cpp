@@ -181,7 +181,7 @@ void Renderer::UpdateProjectionViewMatrix()
 
 
 
-void Renderer::DrawQuad(const TextureOb& textureOb, const glm::mat4& Mm) const
+void Renderer::DrawQuad(const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     //glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
     //int frame = 0; //texOb.updateAnimationFrame();
@@ -202,7 +202,7 @@ void Renderer::DrawQuad(const TextureOb& texOb, const Box2D& box) const
 {
     // ugly start
     glm::vec2 pos = box.GetCenter();
-    glm::mat4 Tm = glm::translate(glm::vec3(pos.x, pos.y, -2.0f));
+    glm::mat4 TranslationMatrix = glm::translate(glm::vec3(pos.x, pos.y, -2.0f));
      
     glm::quat Qx, Qy, Qz;
     
@@ -210,23 +210,23 @@ void Renderer::DrawQuad(const TextureOb& texOb, const Box2D& box) const
     //QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);   
     //QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z); 
        
-    glm::mat4 Rm = glm::toMat4(Qx*Qy*Qz);
+    glm::mat4 RotationMatrix = glm::toMat4(Qx*Qy*Qz);
     
     glm::vec2 size = box.GetSize()*box.GetScale();
-    glm::mat4 Sm = glm::scale(glm::vec3(size.x, size.y, 1.0f));
+    glm::mat4 ScaleMatrix = glm::scale(glm::vec3(size.x, size.y, 1.0f));
       
-    glm::mat4 Mm = Tm * Rm * Sm;
+    glm::mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScaleMatrix;
     // ugly end
 
-    DrawMesh(*m_MeshQuad, texOb, Mm);
+    DrawMesh(*m_MeshQuad, texOb, ModelMatrix);
 }
 
-void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
+void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     glUseProgram(m_Shaders.base);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &Mm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture); 
@@ -237,16 +237,16 @@ void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm:
     glUseProgram(0);
 }
 
-void Renderer::DrawTransparentMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
+void Renderer::DrawTransparentMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     enable_BLEND();
     {
-        DrawMesh(mesh, textureOb, Mm);
+        DrawMesh(mesh, textureOb, ModelMatrix);
     }
     disable_BLEND();
 }
 
-void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
+void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     float ambient_factor = 0.25;       
         
@@ -254,10 +254,10 @@ void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
  
     glUseProgram(m_ProgramLight);
     {
-        glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(Mm)));
+        glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(ModelMatrix)));
     
         glUniformMatrix4fv(m_ProgramLightLocation_uProjectionViewMatrix, 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
-        glUniformMatrix4fv(m_ProgramLightLocation_uModelMatrix         , 1, GL_FALSE, &Mm[0][0]);
+        glUniformMatrix4fv(m_ProgramLightLocation_uModelMatrix         , 1, GL_FALSE, &ModelMatrix[0][0]);
         glUniformMatrix3fv(m_ProgramLightLocation_uNormalMatrix        , 1, GL_FALSE, &NormalModelMatrix[0][0]);
                 
         glUniform3f(m_ProgramLightLocation_uLightPos, 0.0f, 0.0f, 200.0);
@@ -275,7 +275,7 @@ void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
     glUseProgram(0);
 }
 /*
-void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
+void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     float ambient_factor = 0.25;
  
@@ -296,25 +296,25 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
         glBindTexture(GL_TEXTURE_2D, textureOb.GetData().normalmap);
         glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_normalmap"), 1);
                 
-        ComposeModelMatrix(Mm);                     
+        ComposeModelMatrix(ModelMatrix);                     
         mesh.Draw();
     }
     glUseProgram(0);
 } */
 
-void Renderer::DrawTransparentMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
+void Renderer::DrawTransparentMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     enable_BLEND();
-        DrawMeshLight(mesh, textureOb, Mm);
+        DrawMeshLight(mesh, textureOb, ModelMatrix);
     disable_BLEND();
 }
 
-void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
+void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     glUseProgram(m_Shaders.multitexturing);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.multitexturing, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.multitexturing, "u_ModelMatrix")         , 1, GL_FALSE, &Mm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.multitexturing, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
 
         glActiveTexture(GL_TEXTURE0);                                
         glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
@@ -336,15 +336,15 @@ void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureO
 void Renderer::DrawPostEffectCombined(const std::vector<GLuint>& textures, int w, int h) const 
 {
     // ugly 
-    glm::mat4 Tm = glm::translate(glm::vec3(w/2, h/2, -499.0f));
-    glm::mat4 Sm = glm::scale(glm::vec3(w/2, h/2, 1.0f));
-    glm::mat4 Mm = Tm*Sm;
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, -499.0f));
+    glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
+    glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly 
 
     glUseProgram(m_Shaders.combine);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.combine, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.combine, "u_ModelMatrix")     , 1, GL_FALSE, &Mm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.combine, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
         
         glActiveTexture(GL_TEXTURE0);                                
         glBindTexture(GL_TEXTURE_2D, textures[0]);
@@ -412,15 +412,15 @@ void Renderer::DrawPostEffectExtractBright(GLuint scene_texture, int w, int h, f
 {
     // ugly 
     float scale = 1.0;
-    glm::mat4 Tm = glm::translate(glm::vec3(w/2, h/2, -499.0f));
-    glm::mat4 Sm = glm::scale(glm::vec3(w/2, h/2, 1.0f));
-    glm::mat4 Mm = Tm*Sm;
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, -499.0f));
+    glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
+    glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
-
+                             
     glUseProgram(m_Shaders.extractbright);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.extractbright, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.extractbright, "u_ModelMatrix")     , 1, GL_FALSE, &Mm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.extractbright, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
 
         glActiveTexture(GL_TEXTURE0);                                
         glBindTexture(GL_TEXTURE_2D, scene_texture);
@@ -448,15 +448,15 @@ void Renderer::DrawPostEffectCombinedDebug(const std::vector<GLuint>& textures, 
         for (unsigned int j=0; j<quad_num_h; ++j)
         {
             // ugly 
-            glm::mat4 Tm = glm::translate(glm::vec3(0.5f*size_w+i*size_w, 0.5f*size_h+j*size_h, -499.0f));
-            glm::mat4 Sm = glm::scale(glm::vec3(0.5f*size_w, 0.5f*size_h, 1.0f));
-            glm::mat4 Mm = Tm*Sm;
+            glm::mat4 TranslateMatrix = glm::translate(glm::vec3(0.5f*size_w+i*size_w, 0.5f*size_h+j*size_h, -499.0f));
+            glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(0.5f*size_w, 0.5f*size_h, 1.0f));
+            glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
             // ugly 
     
             glUseProgram(m_Shaders.base);
             {
                 glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
-                glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &Mm[0][0]);
+                glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
                 
                 glActiveTexture(GL_TEXTURE0);                                
                 glBindTexture(GL_TEXTURE_2D, textures[i+j]);
@@ -473,15 +473,15 @@ void Renderer::DrawPostEffectVolumetricLight(const glm::vec2& world_coord, int w
 {
     // ugly 
     float scale = 1.0;
-    glm::mat4 Tm = glm::translate(glm::vec3(w/2, h/2, -499.0f));
-    glm::mat4 Sm = glm::scale(glm::vec3(w/2, h/2, 1.0f));
-    glm::mat4 Mm = Tm*Sm;
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, -499.0f));
+    glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
+    glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
     
     glUseProgram(m_Shaders.volumetriclight);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.volumetriclight, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.volumetriclight, "u_ModelMatrix")     , 1, GL_FALSE, &Mm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.volumetriclight, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
 
         glActiveTexture(GL_TEXTURE0);                                
         glBindTexture(GL_TEXTURE_2D, m_Bloom.GetFboFinal().GetTexture());
@@ -503,9 +503,9 @@ void Renderer::DrawPostEffectVolumetricLight(const glm::vec2& world_coord, int w
 void Renderer::DrawPostEffectBlur(GLuint texture, int w, int h) const
 {  
     // ugly  
-    glm::mat4 Tm = glm::translate(glm::vec3(w/2, h/2, -499.0f));
-    glm::mat4 Sm = glm::scale(glm::vec3(w/2, h/2, 1.0f));
-    glm::mat4 Mm = Tm*Sm;
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, -499.0f));
+    glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
+    glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
 
     glUseProgram(m_ProgramBlur);
@@ -515,7 +515,7 @@ void Renderer::DrawPostEffectBlur(GLuint texture, int w, int h) const
         glUniform1i(glGetUniformLocation(m_ProgramBlur, "sceneTex"), 0);
         
         glUniformMatrix4fv(glGetUniformLocation(m_ProgramBlur, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_ProgramBlur, "u_ModelMatrix")     , 1, GL_FALSE, &Mm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_ProgramBlur, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
 
         glUniform1f(glGetUniformLocation(m_ProgramBlur, "rt_w"), 3*w); 
         glUniform1f(glGetUniformLocation(m_ProgramBlur, "rt_h"), 3*h);
@@ -529,15 +529,15 @@ void Renderer::DrawPostEffectBlur(GLuint texture, int w, int h) const
 void Renderer::DrawScreenQuadTextured(GLuint texture, int w, int h) const
 {
     // ugly 
-    glm::mat4 Tm = glm::translate(glm::vec3(w/2, h/2, -499.0f));
-    glm::mat4 Sm = glm::scale(glm::vec3(w/2, h/2, 1.0f));
-    glm::mat4 Mm = Tm*Sm;
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, -499.0f));
+    glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
+    glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
 
     glUseProgram(m_Shaders.base);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &Mm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, texture); 
@@ -548,7 +548,7 @@ void Renderer::DrawScreenQuadTextured(GLuint texture, int w, int h) const
     glUseProgram(0);
 }
  
-void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& Mm) const
+void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     enable_BLEND();
     enable_POINTSPRITE();
@@ -560,7 +560,7 @@ void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const
             glUniform1i(glGetUniformLocation(m_Shaders.particle, "uTexture_0"), 0);
 
             glUniformMatrix4fv(glGetUniformLocation(m_Shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);  
-            glUniformMatrix4fv(glGetUniformLocation(m_Shaders.particle, "u_ModelMatrix"),          1, GL_FALSE, &Mm[0][0]);      
+            glUniformMatrix4fv(glGetUniformLocation(m_Shaders.particle, "u_ModelMatrix"),          1, GL_FALSE, &ModelMatrix[0][0]);      
       
             mesh.Draw();
         }
@@ -573,7 +573,7 @@ void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const
 
 
 
-void Renderer::DrawAxis(const glm::mat4& Mm, float width) const
+void Renderer::DrawAxis(const glm::mat4& ModelMatrix, float width) const
 {
     //float r = 1.5f;
     
@@ -627,7 +627,7 @@ void Renderer::DrawVector(const glm::vec3& v, const glm::vec3& pos, float length
     //glEnable(GL_TEXTURE_2D);
 }
 
-void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& Mm, float width) const
+void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& ModelMatrix, float width) const
 {
     //glDisable(GL_TEXTURE_2D);
     
