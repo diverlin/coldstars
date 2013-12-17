@@ -23,7 +23,11 @@
 
 #include "../../common/IdGenerator.hpp"
 #include "../../world/EntityManager.hpp"
-#include "../../resources/TextureManager.hpp"
+
+#include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
+
 
 GoodsPack::GoodsPack(int id, TYPE::ENTITY subtype_id)
 {
@@ -118,11 +122,12 @@ GoodsPack* GetNewGoodsPack(TYPE::ENTITY subtype_id, INTLONGEST id)
     {
         id = EntityIdGenerator::Instance().GetNextId();
     }
-        
+
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);         
     TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::CONTAINER_ID); 
     
     GoodsPack* goodsPack = new GoodsPack(id, subtype_id);
-    goodsPack->BindData2D(texOb);
+    goodsPack->SetRenderData(mesh, texOb, texOb->GetSize());
     
     EntityManager::Instance().RegisterEntity(goodsPack);
             

@@ -70,14 +70,20 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 {
     Mesh* mesh = nullptr;
     TextureOb* texOb = nullptr;
+    glm::vec3 size;
+
     if (getRandInt(0, 1))
     {
-        texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SPACESTATION_ID); 
+        mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+        texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SPACESTATION_ID);
+        size = texOb->GetSize(); 
     }
     else
     {    
         mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPACESTATION_ID);
         texOb = mesh->GetTextureOb(); 
+        float scale_comp = getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX);
+        size = glm::vec3(scale_comp, scale_comp, scale_comp);
     }
     
     int protection_rate = 50;
@@ -125,20 +131,12 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     spacestation->SetKorpusData(data_korpus);
     spacestation->SetLifeData(data_life);
 
-    if (mesh != nullptr)
-    {
-        float scale_comp = getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX);
-        glm::vec3 scale(scale_comp, scale_comp, scale_comp);
-        spacestation->BindData3D(mesh, mesh->GetTextureOb(), scale);
+    spacestation->SetRenderData(mesh, texOb, size);
         
-        float delta_angle = 0.0001*getRandInt(20, 60);
-        AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
-        spacestation->SetAnimationRotation(animation_rotation);
-    }
-    else
-    {
-        spacestation->BindData2D(texOb);            
-    }
+    float delta_angle = 0.0001*getRandInt(20, 60);
+    AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
+    spacestation->SetAnimationRotation(animation_rotation);
+
     
     spacestation->SetMass(getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));
     

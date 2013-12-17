@@ -22,6 +22,7 @@
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
 
+#include <resources/MeshCollector.hpp>
 #include <resources/TextureManager.hpp>
 #include <resources/textureOb.hpp>
 
@@ -56,18 +57,19 @@ ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
     if (subtype_id == TYPE::ENTITY::WEAPON_SLOT_ID)
     {
         Turrel* turrel = nullptr;
+        Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);  
         TextureOb* texOb_turrel = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::TURREL_ID); 
         try 
         { 
-                turrel = new Turrel(item_slot); 
+            turrel = new Turrel(item_slot); 
         }
         catch(std::bad_alloc)
         {
             Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
     
-            turrel->BindData2D(texOb_turrel);       
-            item_slot->SetTurrel(turrel);
+        turrel->SetRenderData(mesh, texOb_turrel, texOb_turrel->GetSize());       
+        item_slot->SetTurrel(turrel);
     }
     
     return item_slot;

@@ -26,7 +26,10 @@
 #include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
+
 #include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -83,6 +86,7 @@ void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipmen
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);   
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
 
@@ -96,7 +100,7 @@ void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipmen
     common_data.deterioration_normal = 1;
     
     scaner_equipment->SetScanOrig(scan_orig);  
-    scaner_equipment->BindData2D(texOb_item);        
+    scaner_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());        
     scaner_equipment->SetParentSubTypeId(TYPE::ENTITY::SCANER_SLOT_ID);
     scaner_equipment->SetItemCommonData(common_data);
     scaner_equipment->SetCondition(common_data.condition_max);

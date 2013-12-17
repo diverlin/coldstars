@@ -26,9 +26,10 @@
 #include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
-
+         
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -85,6 +86,7 @@ void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, 
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID);   
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
 
@@ -98,7 +100,7 @@ void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, 
     common_data.deterioration_normal = 1;
 
     radar_equipment->SetRadiusOrig(radius_orig);
-    radar_equipment->BindData2D(texOb_item);
+    radar_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
     radar_equipment->SetParentSubTypeId(TYPE::ENTITY::RADAR_SLOT_ID);
     radar_equipment->SetItemCommonData(common_data);
     radar_equipment->SetCondition(common_data.condition_max);

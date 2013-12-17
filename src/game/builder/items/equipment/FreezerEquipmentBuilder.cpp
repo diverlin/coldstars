@@ -26,7 +26,10 @@
 #include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
+
 #include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -82,6 +85,7 @@ void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equip
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID); 
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::FREEZER_EQUIPMENT_ID);    
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
 
@@ -95,7 +99,7 @@ void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equip
     common_data.deterioration_normal = 1;
     
     freezer_equipment->SetFreezeOrig(freeze_orig);  
-    freezer_equipment->BindData2D(texOb_item);        
+    freezer_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());        
     freezer_equipment->SetParentSubTypeId(TYPE::ENTITY::FREEZER_SLOT_ID);
     freezer_equipment->SetItemCommonData(common_data);
     freezer_equipment->SetCondition(common_data.condition_max);

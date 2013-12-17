@@ -62,6 +62,7 @@ Satellite* SatelliteBuilder::GetNewSatellite() const
 
 void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const 
 {
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
     TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SATELLITE_ID);  
 
     int protection_rate = 1;
@@ -103,7 +104,7 @@ void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const
     
     satellite->SetKorpusData(data_korpus);
     satellite->SetLifeData(data_life);
-    satellite->BindData2D(texOb);    
+    satellite->SetRenderData(mesh, texOb, texOb->GetSize());    
 
     satellite->CreateDriveComplexTextureDependedStuff();
     satellite->CreateProtectionComplexTextureDependedStuff();

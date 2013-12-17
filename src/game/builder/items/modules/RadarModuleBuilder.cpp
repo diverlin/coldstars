@@ -25,7 +25,10 @@
 #include <common/constants.hpp>
 
 #include "../../../world/EntityManager.hpp"
-#include "../../../resources/TextureManager.hpp"
+
+#include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
 
 RadarModuleBuilder& RadarModuleBuilder::Instance()
 {
@@ -68,12 +71,13 @@ RadarModule* RadarModuleBuilder::GetNewRadarModule(int radius_add) const
 } 
             
 void RadarModuleBuilder::CreateNewInternals(RadarModule* radar_module, int radius_add) const
-{     
+{  
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);     
     TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);   
     radius_add  = getRandInt(MODULE::RADAR::RADIUS_MIN, MODULE::RADAR::RADIUS_MAX);
 
     radar_module->SetParentSubTypeId(TYPE::ENTITY::RADAR_EQUIPMENT_ID);    
-    radar_module->BindData2D(texOb);
+    radar_module->SetRenderData(mesh, texOb, texOb->GetSize());
     radar_module->SetRadiusAdd(radius_add);
 }
 

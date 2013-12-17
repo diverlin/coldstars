@@ -25,7 +25,10 @@
 #include <common/constants.hpp>
 
 #include "../../../world/EntityManager.hpp"
-#include "../../../resources/TextureManager.hpp"
+
+#include <resources/MeshCollector.hpp>
+#include <resources/TextureManager.hpp>
+#include <resources/textureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -80,6 +83,7 @@ void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);  
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID);   
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
 
@@ -96,7 +100,7 @@ void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer
     energizer_equipment->SetEnergyMaxOrig(energy_max_orig);
     energizer_equipment->SetRestorationOrig(restoration_orig);
     energizer_equipment->SetEnergy(0.5*energy_max_orig);
-    energizer_equipment->BindData2D(texOb_item);        
+    energizer_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());        
     energizer_equipment->SetParentSubTypeId(TYPE::ENTITY::ENERGIZER_SLOT_ID);
     energizer_equipment->SetItemCommonData(common_data);
     energizer_equipment->SetCondition(common_data.condition_max);

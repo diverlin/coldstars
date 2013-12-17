@@ -22,7 +22,9 @@
 #include "../../../common/IdGenerator.hpp"
 #include "../../../world/EntityManager.hpp"
 
-#include "../../../resources/TextureManager.hpp"
+#include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
 
 BombBuilder& BombBuilder::Instance()
 {
@@ -65,11 +67,12 @@ Bomb* BombBuilder::GetNewBomb(int damage, int radius) const
             
 void BombBuilder::CreateNewInternals(Bomb* bomb, int damage, int radius) const
 {     
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);  
     TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::BOMB_ID); 
     damage = 300;
     radius = 300;
         
-    bomb->BindData2D(texOb);
+    bomb->SetRenderData(mesh, texOb, texOb->GetSize());
     bomb->SetDamage(damage);
     bomb->SetRadius(radius);
     bomb->SetParentSubTypeId(TYPE::ENTITY::CARGO_SLOT_ID);

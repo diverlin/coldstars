@@ -57,7 +57,7 @@ BaseDrawable::~BaseDrawable()
     delete m_AnimationRotation;
 }
 
-void BaseDrawable::BindData3D(Mesh* mesh, TextureOb* textureOb, const glm::vec3& size)
+void BaseDrawable::SetRenderData(Mesh* mesh, TextureOb* textureOb, const glm::vec3& size)
 {
     m_Mesh = mesh;
     m_TextureOb = textureOb; 
@@ -66,12 +66,12 @@ void BaseDrawable::BindData3D(Mesh* mesh, TextureOb* textureOb, const glm::vec3&
     SetDirection(mesh->GetDirection());
 }
 
-void BaseDrawable::BindData2D(TextureOb* textureOb)
-{
-    m_TextureOb = textureOb; 
-    SetSize(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0);
-    SetCollisionRadius((textureOb->GetFrameWidth() + textureOb->GetFrameHeight()) / 4.0);
-} 
+//void BaseDrawable::BindData2D(TextureOb* textureOb)
+//{
+    //m_TextureOb = textureOb; 
+    //SetSize(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0);
+    //SetCollisionRadius((textureOb->GetFrameWidth() + textureOb->GetFrameHeight()) / 4.0);
+//} 
 
 
 void BaseDrawable::RenderCollisionRadius(const Renderer& render) const

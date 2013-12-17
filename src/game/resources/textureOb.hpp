@@ -108,6 +108,8 @@ class TextureOb
         TextureOb(const MaterialData& data);
         ~TextureOb();
 
+        const glm::vec3 GetSize() const { return glm::vec3(GetFrameWidth(), GetFrameHeight(), 1.0f); }     // ugly
+
         int GetFrameWidth() const  { return m_Data.w_slice; }
         int GetFrameHeight() const { return m_Data.h_slice; }
         

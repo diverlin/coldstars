@@ -26,7 +26,10 @@
 #include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
+
 #include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -83,6 +86,7 @@ void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, 
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID); 
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID);     
 
@@ -98,13 +102,13 @@ void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, 
                                                    
     lazer_equipment->SetDamageOrig(damage_orig);  
     lazer_equipment->SetRadiusOrig(radius_orig);  
-    lazer_equipment->BindData2D(texOb_item);        
+    lazer_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());        
     lazer_equipment->SetParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
     lazer_equipment->SetItemCommonData(common_data);
     lazer_equipment->SetCondition(common_data.condition_max);
                 
-       lazer_equipment->UpdateProperties();
-       lazer_equipment->CountPrice();
+   lazer_equipment->UpdateProperties();
+   lazer_equipment->CountPrice();
 }
 
 

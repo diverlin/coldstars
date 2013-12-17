@@ -84,18 +84,14 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
-    Mesh* mesh = nullptr;
-    TextureOb* texOb = nullptr;
-    if (0)
-    {
-        texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID); 
-    }
-    else
-    {    
-        mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPACESTATION_ID);
-        texOb = mesh->GetTextureOb(); 
-    }
+    //Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    //TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID); 
+    //glm::vec3 size = texOb->GetSize();
     
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPACESTATION_ID);
+    TextureOb* texOb = mesh->GetTextureOb(); 
+    glm::vec3 size = glm::vec3(50);
+
     //texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 
 
     speed_orig      = getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * (1 + EQUIPMENT::DRIVE::SPEED_TECHLEVEL_RATE * (int)tech_level);
@@ -109,19 +105,11 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
     common_data.deterioration_normal = 1;
     common_data.deterioration_overload_rate = EQUIPMENT::DRIVE::OVERLOAD_DETERIORATION_RATE;
 
-    if (mesh != nullptr)
-    {
-        glm::vec3 scale(50);
-        drive_equipment->BindData3D(mesh, mesh->GetTextureOb(), scale);
-        
-        //float step = getRandInt(10, 40)*0.01;
-        //AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);
-        //drive_equipment->SetRenderAnimation(animation_program);
-    }
-    else
-    {
-        drive_equipment->BindData2D(texOb);            
-    }
+    drive_equipment->SetRenderData(mesh, texOb, size);
+    
+    //float step = getRandInt(10, 40)*0.01;
+    //AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);
+    //drive_equipment->SetRenderAnimation(animation_program);
             
     drive_equipment->SetSpeedOrig(speed_orig);  
     drive_equipment->SetHyperOrig(hyper_orig);

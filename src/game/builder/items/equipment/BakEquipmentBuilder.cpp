@@ -26,8 +26,10 @@
 #include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
+
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -83,6 +85,7 @@ void BakEquipmentBuilder::CreateNewInternals(BakEquipment* bak_equipment, TYPE::
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID); 
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::BAK_EQUIPMENT_ID);    
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
     
@@ -97,7 +100,7 @@ void BakEquipmentBuilder::CreateNewInternals(BakEquipment* bak_equipment, TYPE::
 
     bak_equipment->SetFuelMaxOrig(fuel_max_orig);
     bak_equipment->SetFuel(fuel_max_orig);
-    bak_equipment->BindData2D(texOb_item);        
+    bak_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());        
     bak_equipment->SetParentSubTypeId(TYPE::ENTITY::BAK_SLOT_ID);
     bak_equipment->SetItemCommonData(common_data);
     bak_equipment->SetCondition(common_data.condition_max);
