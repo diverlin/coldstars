@@ -113,10 +113,9 @@ void Container::UpdateInSpace(int time, bool show_effect)
     }
 }
                
-void Container::Render2D(const Renderer& render)
+void Container::Render(const Renderer& render)
 { 
-    render.DrawTransparentMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-    //render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
+    render.DrawTransparentMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
 
 void Container::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    

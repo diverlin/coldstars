@@ -183,19 +183,7 @@ void Renderer::UpdateProjectionViewMatrix()
 
 void Renderer::DrawQuad(const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
-    //glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
-    //int frame = 0; //texOb.updateAnimationFrame();
-   
-    //ComposeModelMatrix(Mm);
-    
-    //glBegin(GL_QUADS);
-    //{   
-        //glTexCoord3f(textureOb.GetData().texCoord_bottomLeft_vec[frame].x,  textureOb.GetData().texCoord_bottomLeft_vec[frame].y,  0); glVertex3f(-0.5, -0.5, 0.0);
-        //glTexCoord3f(textureOb.GetData().texCoord_bottomRight_vec[frame].x, textureOb.GetData().texCoord_bottomRight_vec[frame].y, 0); glVertex3f( 0.5, -0.5, 0.0);
-        //glTexCoord3f(textureOb.GetData().texCoord_topRight_vec[frame].x,    textureOb.GetData().texCoord_topRight_vec[frame].y,    0); glVertex3f( 0.5,  0.5, 0.0);
-        //glTexCoord3f(textureOb.GetData().texCoord_topLeft_vec[frame].x,     textureOb.GetData().texCoord_topLeft_vec[frame].y,     0); glVertex3f(-0.5,  0.5, 0.0);      
-    //}
-    //glEnd();
+    DrawMesh(*m_MeshQuad, textureOb, ModelMatrix);
 }
 
 void Renderer::DrawQuad(const TextureOb& texOb, const Box2D& box) const
