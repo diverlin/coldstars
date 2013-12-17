@@ -82,12 +82,12 @@ class Renderer : public NonCopyable
         void DrawQuad(const TextureOb&, const glm::mat4&) const;
         void DrawQuad(const TextureOb&, const Box2D&) const;
 
-        void DrawScreenQuadBright(GLuint, int, int, float) const;
-        void DrawScreenQuadCombined(const std::vector<GLuint>&, int, int) const; 
-        void DrawScreenQuadCombinedDebug(const std::vector<GLuint>&, int, int) const; 
-        void DrawScreenQuadVolumetricLight(const glm::vec2&, int, int);
+        void DrawPostEffectExtractBright(GLuint, int, int, float) const;
+        void DrawPostEffectCombined(const std::vector<GLuint>&, int, int) const; 
+        void DrawPostEffectCombinedDebug(const std::vector<GLuint>&, int, int) const; 
+        void DrawPostEffectVolumetricLight(const glm::vec2&, int, int);
+        void DrawPostEffectBlur(GLuint, int, int) const;
         void DrawScreenQuadTextured(GLuint, int, int) const;
-        void DrawScreenQuadTexturedBlurred(GLuint, int, int) const;
                         
         void DrawParticles(const Mesh&, const TextureOb&, const glm::mat4&) const;
         
