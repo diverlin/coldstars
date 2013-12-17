@@ -395,7 +395,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
         // resizeGl(w, h); 
         render.ActivateFbo(1, w, h);
         {
-            render.DrawScreenQuadVolumetricLight(world_coord, w, h);
+            render.DrawPostEffectVolumetricLight(world_coord, w, h);
         }
         render.DeactivateFbo(1);
 
