@@ -43,7 +43,7 @@ class Container : public BaseSpaceEntity
             
         void UpdateInSpace(int, bool);
 
-        void Render2D(const Renderer&);
+        void Render(const Renderer&);
                             
         virtual void Save(boost::property_tree::ptree&) const override final;
         virtual void Load(const boost::property_tree::ptree&) override final;

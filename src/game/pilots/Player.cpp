@@ -455,7 +455,7 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
 
                 for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
                 { 
-                    visible_CONTAINER_vec[i]->Render2D(render); 
+                    visible_CONTAINER_vec[i]->Render(render); 
                 }      
 
                 for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
