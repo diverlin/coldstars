@@ -71,7 +71,6 @@ class Renderer : public NonCopyable
                 
         void ComposeViewMatrix(const glm::mat4&);
 
-        //void DrawMesh                 (const Mesh&, const glm::mat4&) const;
         void DrawMesh                   (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawTransparentMesh        (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawMeshLight              (const Mesh&, const TextureOb&, const glm::mat4&) const;
@@ -98,9 +97,9 @@ class Renderer : public NonCopyable
     private:
         Mesh* m_MeshQuad;
 
-        glm::mat4 m_Pm;
-        glm::mat4 m_Vm;
-        glm::mat4 m_PVm;
+        glm::mat4 m_ProjectionMatrix;
+        glm::mat4 m_ViewMatrix;
+        glm::mat4 m_ProjectionViewMatrix;
         
         glm::vec4 m_Color;
         

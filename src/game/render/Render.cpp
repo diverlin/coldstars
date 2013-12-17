@@ -158,27 +158,25 @@ void Renderer::MakeShortCuts()
         
 void Renderer::SetPerspectiveProjection(float w, float h) 
 {        
-    m_Pm = glm::perspective(90.0f, w/h, 0.1f, 1000.0f);
- 
+    m_ProjectionMatrix = glm::perspective(90.0f, w/h, 0.1f, 1000.0f); 
     UpdateProjectionViewMatrix();
 }
 
 void Renderer::SetOrthogonalProjection(float w, float h) 
 {        
-    m_Pm = glm::ortho(0.0f, w, 0.0f, h, 0.1f, 1000.0f);
-
+    m_ProjectionMatrix = glm::ortho(0.0f, w, 0.0f, h, 0.1f, 1000.0f);
     UpdateProjectionViewMatrix();
 }
 
 void Renderer::ComposeViewMatrix(const glm::mat4& Vm)  
 { 
-    m_Vm = Vm; 
+    m_ViewMatrix = Vm; 
     UpdateProjectionViewMatrix(); 
 } 
                                 
 void Renderer::UpdateProjectionViewMatrix() 
 { 
-    m_PVm = m_Pm * m_Vm; 
+    m_ProjectionViewMatrix = m_ProjectionMatrix * m_ViewMatrix; 
 }
 
 
@@ -227,7 +225,7 @@ void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm:
 {
     glUseProgram(m_Shaders.base);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &Mm[0][0]);
 
         glActiveTexture(GL_TEXTURE0);
@@ -258,7 +256,7 @@ void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
     {
         glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(Mm)));
     
-        glUniformMatrix4fv(m_ProgramLightLocation_uProjectionViewMatrix, 1, GL_FALSE, &m_PVm[0][0]);
+        glUniformMatrix4fv(m_ProgramLightLocation_uProjectionViewMatrix, 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
         glUniformMatrix4fv(m_ProgramLightLocation_uModelMatrix         , 1, GL_FALSE, &Mm[0][0]);
         glUniformMatrix3fv(m_ProgramLightLocation_uNormalMatrix        , 1, GL_FALSE, &NormalModelMatrix[0][0]);
                 
@@ -315,7 +313,7 @@ void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureO
 {
     glUseProgram(m_Shaders.multitexturing);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.multitexturing, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.multitexturing, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.multitexturing, "u_ModelMatrix")         , 1, GL_FALSE, &Mm[0][0]);
 
         glActiveTexture(GL_TEXTURE0);                                
@@ -345,8 +343,8 @@ void Renderer::DrawPostEffectCombined(const std::vector<GLuint>& textures, int w
 
     glUseProgram(m_Shaders.combine);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.combine, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_Pm[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.combine, "u_ModelMatrix")         , 1, GL_FALSE, &Mm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.combine, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.combine, "u_ModelMatrix")     , 1, GL_FALSE, &Mm[0][0]);
         
         glActiveTexture(GL_TEXTURE0);                                
         glBindTexture(GL_TEXTURE_2D, textures[0]);
@@ -421,8 +419,8 @@ void Renderer::DrawPostEffectExtractBright(GLuint scene_texture, int w, int h, f
 
     glUseProgram(m_Shaders.extractbright);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.extractbright, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_Pm[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.extractbright, "u_ModelMatrix")         , 1, GL_FALSE, &Mm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.extractbright, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.extractbright, "u_ModelMatrix")     , 1, GL_FALSE, &Mm[0][0]);
 
         glActiveTexture(GL_TEXTURE0);                                
         glBindTexture(GL_TEXTURE_2D, scene_texture);
@@ -457,7 +455,7 @@ void Renderer::DrawPostEffectCombinedDebug(const std::vector<GLuint>& textures, 
     
             glUseProgram(m_Shaders.base);
             {
-                glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_Pm[0][0]);
+                glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
                 glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &Mm[0][0]);
                 
                 glActiveTexture(GL_TEXTURE0);                                
@@ -482,8 +480,8 @@ void Renderer::DrawPostEffectVolumetricLight(const glm::vec2& world_coord, int w
     
     glUseProgram(m_Shaders.volumetriclight);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.volumetriclight, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_Pm[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.volumetriclight, "u_ModelMatrix")         , 1, GL_FALSE, &Mm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.volumetriclight, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.volumetriclight, "u_ModelMatrix")     , 1, GL_FALSE, &Mm[0][0]);
 
         glActiveTexture(GL_TEXTURE0);                                
         glBindTexture(GL_TEXTURE_2D, m_Bloom.GetFboFinal().GetTexture());
@@ -516,7 +514,7 @@ void Renderer::DrawPostEffectBlur(GLuint texture, int w, int h) const
         glBindTexture(GL_TEXTURE_2D, texture);
         glUniform1i(glGetUniformLocation(m_ProgramBlur, "sceneTex"), 0);
         
-        glUniformMatrix4fv(glGetUniformLocation(m_ProgramBlur, "u_ProjectionMatrix"), 1, GL_FALSE, &m_Pm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_ProgramBlur, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_ProgramBlur, "u_ModelMatrix")     , 1, GL_FALSE, &Mm[0][0]);
 
         glUniform1f(glGetUniformLocation(m_ProgramBlur, "rt_w"), 3*w); 
@@ -538,7 +536,7 @@ void Renderer::DrawScreenQuadTextured(GLuint texture, int w, int h) const
 
     glUseProgram(m_Shaders.base);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_Pm[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &Mm[0][0]);
 
         glActiveTexture(GL_TEXTURE0);
@@ -561,8 +559,8 @@ void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const
             glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
             glUniform1i(glGetUniformLocation(m_Shaders.particle, "uTexture_0"), 0);
 
-            glUniformMatrix4fv(glGetUniformLocation(m_Shaders.particle, "u_ModelMatrix"), 1, GL_FALSE, &Mm[0][0]);      
-            glUniformMatrix4fv(glGetUniformLocation(m_Shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_PVm[0][0]);       
+            glUniformMatrix4fv(glGetUniformLocation(m_Shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);  
+            glUniformMatrix4fv(glGetUniformLocation(m_Shaders.particle, "u_ModelMatrix"),          1, GL_FALSE, &Mm[0][0]);      
       
             mesh.Draw();
         }
