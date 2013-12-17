@@ -25,7 +25,10 @@
 #include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
+
 #include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -81,7 +84,8 @@ void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipmen
     {
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
-    
+   
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);   
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID);    
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)   
     
@@ -112,7 +116,7 @@ void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipmen
     rocket_equipment->SetRadiusOrig(radius_orig);   
     rocket_equipment->SetBulletData(data_bullet); 
     rocket_equipment->SetAmmo(ammo_max_orig*0.6);                
-    rocket_equipment->BindData2D(texOb_item);        
+    rocket_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());        
     rocket_equipment->SetParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
     rocket_equipment->SetItemCommonData(common_data);
     rocket_equipment->SetCondition(common_data.condition_max);

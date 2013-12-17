@@ -84,21 +84,27 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTIT
 {
     Mesh* mesh = nullptr;
     TextureOb* texOb = nullptr;
-    //if (getRandBool() == true)
-    //{
-        //texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
-   //}
-   //else
-   //{    
+    glm::vec3 size;
+    if (0)
+    {
+        mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+        texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
+        size = texOb->GetSize(); 
+    }
+    else
+    {    
         mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPACESTATION_ID);
-    //}
+        texOb = mesh->GetTextureOb(); 
+        float scale_comp = getRandInt(40, 100);
+        size = glm::vec3(scale_comp, scale_comp, scale_comp);
+    }
 
     float protection_rate = 1;
     float otsec_rate      = 1;
     switch (subsubtype_id)
     {
-            case TYPE::ENTITY::WARRIOR_ID: { protection_rate = 2; break; }
-            case TYPE::ENTITY::TRADER_ID:  { otsec_rate = 1.5; break; }
+        case TYPE::ENTITY::WARRIOR_ID: { protection_rate = 2; break; }
+        case TYPE::ENTITY::TRADER_ID:  { otsec_rate = 1.5; break; }
     }
     
     VehicleKorpusData data_korpus;
@@ -123,7 +129,7 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTIT
     
     int size_threshold = 2; 
     data_korpus.draw_turrels = false;
-    if (mesh == nullptr)
+    if (mesh == nullptr)      // BROKEN
     {
         if (texOb->GetData().size_id > size_threshold)
         {
@@ -133,27 +139,23 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTIT
 
     ship->SetSubSubTypeId(subsubtype_id);
     ship->SetKorpusData(data_korpus);
-    if (mesh != nullptr)
-    {
-        float scale_comp = getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
-        glm::vec3 scale(scale_comp, scale_comp, scale_comp);
-        
-        //float step = getRandInt(10, 20)*0.01;
-        //glm::vec3 step3(step, 0.0f, 0.0f);
-        //float threshold = 10;
-        //AnimationWiggleAxisX* animation_program = new AnimationWiggleAxisX(step3, threshold);
-        //ship->SetRenderAnimation(animation_program);
-        
-        float delta_angle = 0.001*getRandInt(20, 60);
-        AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
-        ship->SetAnimationRotation(animation_rotation);
 
-        ship->BindData3D(mesh, mesh->GetTextureOb(), scale);
-    }
-    else
-    {
-        ship->BindData2D(texOb);    
-    }
+
+    float scale_comp = getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
+    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
+    
+    //float step = getRandInt(10, 20)*0.01;
+    //glm::vec3 step3(step, 0.0f, 0.0f);
+    //float threshold = 10;
+    //AnimationWiggleAxisX* animation_program = new AnimationWiggleAxisX(step3, threshold);
+    //ship->SetRenderAnimation(animation_program);
+    
+    float delta_angle = 0.001*getRandInt(20, 60);
+    AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
+    ship->SetAnimationRotation(animation_rotation);
+
+    ship->SetRenderData(mesh, mesh->GetTextureOb(), scale);
+
 
     LifeData data_life;
     data_life.armor      = data_korpus.armor * 0.1;

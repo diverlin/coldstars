@@ -26,7 +26,10 @@
 #include <common/constants.hpp>
 
 #include "../../../world/EntityManager.hpp"
-#include "../../../resources/TextureManager.hpp"
+
+#include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -71,6 +74,7 @@ ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefact(int protect
          
 void ProtectorArtefactBuilder::CreateNewInternals(ProtectorArtefact* protector_artefact, int protection) const
 { 
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);  
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::BAK_EQUIPMENT_ID);    
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
     protection = getRandInt(ARTEFACT::PROTECTOR::PROTECTION_MIN, ARTEFACT::PROTECTOR::PROTECTION_MAX);
@@ -79,7 +83,7 @@ void ProtectorArtefactBuilder::CreateNewInternals(ProtectorArtefact* protector_a
     common_data.deterioration_normal = 1;
 
     protector_artefact->SetProtection(protection);
-    protector_artefact->BindData2D(texOb_item);        
+    protector_artefact->SetRenderData(mesh, texOb_item, texOb_item->GetSize());        
     protector_artefact->SetParentSubTypeId(TYPE::ENTITY::ARTEFACT_SLOT_ID);
     protector_artefact->SetItemCommonData(common_data);
     protector_artefact->SetCondition(common_data.condition_max);

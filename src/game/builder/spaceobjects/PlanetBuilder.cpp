@@ -89,7 +89,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 
     float scale_comp = getRandInt(ENTITY::PLANET::SCALE_MIN, ENTITY::PLANET::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
-    planet->BindData3D(mesh, textureOb, scale);
+    planet->SetRenderData(mesh, textureOb, scale);
  
     float delta_angle = 0.0001*getRandInt(20, 60);
     AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
@@ -99,7 +99,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     {
         TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ATMOSPHERE_ID); 
         Atmosphere* atmosphere = new Atmosphere();
-        atmosphere->BindData3D(mesh, textureOb, 1.04f*scale);
+        atmosphere->SetRenderData(mesh, textureOb, 1.04f*scale);
         planet->AddDecoration(atmosphere);
     }
 

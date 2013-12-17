@@ -25,7 +25,10 @@
 #include <common/constants.hpp>
 
 #include "../../../world/EntityManager.hpp"
-#include "../../../resources/TextureManager.hpp"
+
+#include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
 
 DroidModuleBuilder& DroidModuleBuilder::Instance()
 {
@@ -68,12 +71,13 @@ DroidModule* DroidModuleBuilder::GetNewDroidModule(int repair_add) const
 } 
      
 void DroidModuleBuilder::CreateNewInternals(DroidModule* droid_module, int repair_add) const
-{     
+{
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);     
     TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);   
     repair_add  = getRandInt(MODULE::DROID::REPAIR_MIN, MODULE::DROID::REPAIR_MAX);
 
     droid_module->SetParentSubTypeId(TYPE::ENTITY::DROID_EQUIPMENT_ID);    
-    droid_module->BindData2D(texOb);
+    droid_module->SetRenderData(mesh, texOb, texOb->GetSize());
     droid_module->SetRepairAdd(repair_add);
 }
 

@@ -26,7 +26,10 @@
 #include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
+
 #include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -81,6 +84,7 @@ void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, 
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID);    
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID, revision_id)
 
@@ -94,7 +98,7 @@ void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, 
     common_data.deterioration_normal = 1;
    
     droid_equipment->SetRepairOrig(repair_orig);  
-    droid_equipment->BindData2D(texOb_item);        
+    droid_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());        
     droid_equipment->SetParentSubTypeId(TYPE::ENTITY::DROID_SLOT_ID);
     droid_equipment->SetItemCommonData(common_data);
     droid_equipment->SetCondition(common_data.condition_max);

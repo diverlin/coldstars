@@ -210,7 +210,7 @@ void BaseItem::ResolveData()
     Logger::Instance().Log(" BaseItem::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-    BindData2D(TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path));
+    //BindData2D(TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path));
     
     UseNormalDeterioration();    
     UpdateProperties(); // this function must be performed before inserting to slot!!!

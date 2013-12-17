@@ -47,8 +47,8 @@ class BaseDrawable : public Orientation
         BaseDrawable();
         virtual ~BaseDrawable() override;
 
-        void BindData3D(Mesh*, TextureOb*, const glm::vec3&);
-        void BindData2D(TextureOb*);    
+        void SetRenderData(Mesh*, TextureOb*, const glm::vec3&);
+        //void BindData2D(TextureOb*);    
         void SetAnimationRotation(BaseAnimationRotation* animation_rotation) { m_AnimationRotation = animation_rotation; }
         void SetColor(const glm::vec4& color) { m_Color = color; }
 

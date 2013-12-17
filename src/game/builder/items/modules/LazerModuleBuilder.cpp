@@ -25,7 +25,11 @@
 #include <common/constants.hpp>
 
 #include "../../../world/EntityManager.hpp"
-#include "../../../resources/TextureManager.hpp"
+
+#include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
+
 
 LazerModuleBuilder& LazerModuleBuilder::Instance()
 {
@@ -68,13 +72,15 @@ LazerModule* LazerModuleBuilder::GetNewLazerModule(int damage_add, int radius_ad
 } 
             
 void LazerModuleBuilder::CreateNewInternals(LazerModule* lazer_module, int damage_add, int radius_add) const
-{     
-    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);   
+{  
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);     
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID); 
+  
     damage_add = getRandInt(MODULE::LAZER::DAMAGE_MIN, MODULE::LAZER::DAMAGE_MAX);
     radius_add = getRandInt(MODULE::LAZER::RADIUS_MIN, MODULE::LAZER::RADIUS_MAX);
 
     lazer_module->SetParentSubTypeId(TYPE::ENTITY::LAZER_EQUIPMENT_ID);    
-    lazer_module->BindData2D(texOb);
+    lazer_module->SetRenderData(mesh, texOb, texOb->GetSize()); 
     lazer_module->SetDamageAdd(damage_add);
     lazer_module->SetRadiusAdd(radius_add);
 }

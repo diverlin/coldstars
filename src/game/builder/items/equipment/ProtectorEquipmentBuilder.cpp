@@ -26,8 +26,10 @@
 #include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
+
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -83,6 +85,7 @@ void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);  
     TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID);   
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, revision_id) 
 
@@ -96,7 +99,7 @@ void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector
     common_data.deterioration_normal = 1;
 
     protector_equipment->SetProtectionOrig(protection_orig);  
-    protector_equipment->BindData2D(texOb_item);
+    protector_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
     protector_equipment->SetParentSubTypeId(TYPE::ENTITY::PROTECTOR_SLOT_ID);
     protector_equipment->SetItemCommonData(common_data);
     protector_equipment->SetCondition(common_data.condition_max);

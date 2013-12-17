@@ -25,7 +25,10 @@
 #include <common/constants.hpp>
 
 #include "../../../world/EntityManager.hpp"
-#include "../../../resources/TextureManager.hpp"
+
+#include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
 
 GrappleModuleBuilder& GrappleModuleBuilder::Instance()
 {
@@ -68,14 +71,15 @@ GrappleModule* GrappleModuleBuilder::GetNewGrappleModule(int strength_add, int r
 } 
             
 void GrappleModuleBuilder::CreateNewInternals(GrappleModule* grapple_module, int strength_add, int radius_add, int speed_add) const
-{     
+{   
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);   
     TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);   
     strength_add   = getRandInt(MODULE::GRAPPLE::STRENGTH_MIN, MODULE::GRAPPLE::STRENGTH_MAX);
     radius_add     = getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
     speed_add      = getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);
 
     grapple_module->SetParentSubTypeId(TYPE::ENTITY::GRAPPLE_EQUIPMENT_ID);    
-    grapple_module->BindData2D(texOb);
+    grapple_module->SetRenderData(mesh, texOb, texOb->GetSize());
     grapple_module->SetStrengthAdd(strength_add);
     grapple_module->SetRadiusAdd(radius_add);
     grapple_module->SetSpeedAdd(speed_add);

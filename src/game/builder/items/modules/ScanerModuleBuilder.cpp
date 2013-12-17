@@ -25,7 +25,10 @@
 #include <common/constants.hpp>
 
 #include "../../../world/EntityManager.hpp"
-#include "../../../resources/TextureManager.hpp"
+
+#include <resources/TextureManager.hpp>
+#include <resources/MeshCollector.hpp>
+#include <resources/textureOb.hpp>
 
 ScanerModuleBuilder& ScanerModuleBuilder::Instance()
 {
@@ -68,12 +71,13 @@ ScanerModule* ScanerModuleBuilder::GetNewScanerModule(int scan_add) const
 } 
            
 void ScanerModuleBuilder::CreateNewInternals(ScanerModule* scaner_module, int scan_add) const
-{     
+{  
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);   
     TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);   
     scan_add = getRandInt(MODULE::SCANER::SCAN_MIN, MODULE::SCANER::SCAN_MAX);
 
     scaner_module->SetParentSubTypeId(TYPE::ENTITY::SCANER_EQUIPMENT_ID);    
-    scaner_module->BindData2D(texOb);
+    scaner_module->SetRenderData(mesh, texOb, texOb->GetSize());
     scaner_module->SetScanAdd(scan_add);
 }
 
