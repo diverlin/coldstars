@@ -126,7 +126,7 @@ class Player : public Base
         //  
     
         void RenderInSpace(StarSystem*, bool, bool, bool); 
-            void RenderInSpace_NEW(StarSystem*);
+            void RenderInSpace_NEW(Renderer&, StarSystem*);
             void RenderCollisionRadius(const Renderer&) const;
             void RenderAxis(const Renderer&) const;
                                     

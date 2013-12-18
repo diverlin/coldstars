@@ -174,11 +174,11 @@ void GuiGalaxyMap::RenderUnique(const Renderer& render, Player* player) const
         
         //drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player_starsystem_pos, 40.0, -2.0);
         
-        m_VisualHyperJumpRange.Draw(player_starsystem_pos);
+        //m_VisualHyperJumpRange.Draw(player_starsystem_pos);
         
         if (player->GetNpc()->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() == TYPE::AISCENARIO::MICRO_JUMP_ID)
         {
-            m_VisualHyperJumpPath.Draw();           
+            //m_VisualHyperJumpPath.Draw();           
         }
     }
     render.disable_POINTSPRITE();  

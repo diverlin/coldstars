@@ -67,9 +67,9 @@ void BasePlanet::UpdatePosition()
 }
 
 /* virtual override final */
-void BasePlanet::RenderStuffWhenFocusedInSpace()
+void BasePlanet::RenderStuffWhenFocusedInSpace(const Renderer& render)
 {
-    m_Orbit.DrawPath();
+    m_Orbit.DrawPath(render);
 }
 
 void BasePlanet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

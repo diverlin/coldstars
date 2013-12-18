@@ -18,136 +18,106 @@
 
 #include "PathVisual.hpp"
 #include <cmath>
+
 #include <render/Render.hpp>
+#include <render/Mesh.hpp>
+
 #include <common/constants.hpp>
 #include <resources/GuiTextureObCollector.hpp>
 #include <math/myVector.hpp>
 
-PathVisual::PathVisual()  
-{ 
-    gl_list = glGenLists(1); 
+#include <glm/gtx/transform.hpp>
+
+PathVisual::PathVisual()
+:
+m_TextureOb(nullptr)  
+{
+    m_Mesh = new Mesh();
+    m_TextureOb = GuiTextureObCollector::Instance().dot_green; 
+
+    m_PointSize = 10.0f;
 }
 
 PathVisual::~PathVisual() 
 {
-    glDeleteLists(gl_list, sizeof(gl_list));
+    delete m_Mesh;
 }
 
 void PathVisual::FillData(TextureOb* textureOb, const std::vector<glm::vec3>& vec, int step, int point_size)
 {  
-    //glDeleteLists(gl_list, sizeof(gl_list));
+    m_TextureOb = textureOb; 
 
-    //int i = 0;
-    //int list_len = vec.size();              
-                            
-    //glNewList(gl_list, GL_COMPILE);
-    //{
-        //enable_POINTSPRITE();
-        //{
-            //glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-            //while (i < list_len)
-            //{                    
-                //drawParticle(vec3ToVec2(vec[i]), point_size);
-                //i += step;
-            //}
-        //}
-        //disable_POINTSPRITE();
-    //}
-    //glEndList();
+    FillData(vec, step, point_size);
 }
 
 void PathVisual::FillData(const std::vector<glm::vec3>& vec, int step, int point_size)
 {   
-    //glDeleteLists(gl_list, sizeof(gl_list));
+    std::vector<glm::vec3> points;
+    std::vector<glm::vec4> colors;
+    std::vector<float> sizes;
 
-    //int i = 0;
-    //int list_len = vec.size();
-          
-    //GLuint texture_green = GuiTextureObCollector::Instance().dot_green->texture;
-    //GLuint texture_blue = GuiTextureObCollector::Instance().dot_blue->texture;
-    //GLuint texture;
-                            
-    //glNewList(gl_list, GL_COMPILE);
-    //{
-        //enable_POINTSPRITE();
-        //{
-            //while (i < list_len)
-            //{
-                //if (i < TURN_TIME)
-                //{
-                    //texture = texture_green;
-                //}
-                //else
-                //{
-                    //texture = texture_blue;                                
-                //}
-                
-                //glBindTexture(GL_TEXTURE_2D, texture);
-                //drawParticle(vec3ToVec2(vec[i]), point_size);
-    
-                //i += step;
-            //}
-        //}
-        //disable_POINTSPRITE();
-    //}
-    //glEndList();
+    for (unsigned int i=0; i<vec.size(); i+=step)
+    {
+        points.push_back(vec[i]);
+        colors.push_back(glm::vec4(1.0f));
+        sizes.push_back(m_PointSize);
+    }
+
+    m_Mesh->FillPointVertices(points, colors, sizes);
 }
 
 void PathVisual::FillData(TextureOb* textureOb, int radius, int point_size)    
 {
-    //glDeleteLists(gl_list, sizeof(gl_list));
+    m_TextureOb = textureOb; 
 
-    //float da = 4.0f * DEGREE_TO_RADIAN_RATE;
-    //glNewList(gl_list, GL_COMPILE);
-    //{
-        //enable_POINTSPRITE();
-        //{
-            //glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-            //for (float a=0.0f; a<=2*PI; a+=da)
-            //{
-                  //drawParticle(glm::vec2(radius * cos(a), radius * sin(a)), point_size);
-            //}
-        //}
-        //disable_POINTSPRITE();
-    //}
-    //glEndList();
+    std::vector<glm::vec3> points;
+    std::vector<glm::vec4> colors;
+    std::vector<float> sizes;
+
+    float da = 4.0f * DEGREE_TO_RADIAN_RATE; 
+    for (float a=0.0f; a<=2*PI; a+=da)
+    {
+        points.push_back(glm::vec3(radius * cos(a), radius * sin(a), 0.0f));
+        colors.push_back(glm::vec4(1.0f));
+        sizes.push_back(m_PointSize);
+    }
+
+    m_Mesh->FillPointVertices(points, colors, sizes);
 }
 
 void PathVisual::FillData(TextureOb* textureOb, const glm::vec3& start_pos, const glm::vec3& target_pos, int step, int point_size)
 {
-    //glDeleteLists(gl_list, sizeof(gl_list));
+    m_TextureOb = textureOb; 
+
+    std::vector<glm::vec3> points;
+    std::vector<glm::vec4> colors;
+    std::vector<float> sizes;
+
+    glm::vec3 point(start_pos);
+    glm::vec3 ll(target_pos - start_pos);                
+    glm::vec3 vstep = glm::normalize(ll) *(float)step;
     
-    //glm::vec2 new_pos(start_pos);
-    //glm::vec2 ll(target_pos - start_pos);                
-    //glm::vec2 vstep = glm::normalize(ll) *(float)step;
-    
-    //unsigned int it = glm::length(ll) / (float)step;
-    //glNewList(gl_list, GL_COMPILE);
-    //{
-        //enable_POINTSPRITE();
-        //glBindTexture(GL_TEXTURE_2D, textureOb->texture);    
-        //for (unsigned int i=0; i<it; i++)
-        //{
-            //new_pos += vstep;
-            //drawParticle(new_pos, point_size);
-        //}
-        //disable_POINTSPRITE();
-    //}
-    //glEndList();
-}
-        
-void PathVisual::Draw(const glm::vec2& offset) const
-{
-    //glPushMatrix();
-    //{
-        //glTranslatef(offset.x, offset.y, 0.0f);
-        //glCallList(gl_list);
-    //}
-    //glPopMatrix();
+    unsigned int num = glm::length(ll) / (float)step;
+    for (unsigned int i=0; i<num; i++)
+    {
+        points.push_back(point);
+        colors.push_back(glm::vec4(1.0f));
+        sizes.push_back(m_PointSize); 
+
+        point += vstep;
+    }
+
+    m_Mesh->FillPointVertices(points, colors, sizes);
 }
 
-void PathVisual::Draw() const
+
+void PathVisual::Draw(const Renderer& renderer, const glm::vec3& offset)
 {
-    //glCallList(gl_list);
+    m_ModelMatrix = glm::translate(offset);
+    renderer.DrawParticles(*m_Mesh, *m_TextureOb, m_ModelMatrix);
 }
 
+void PathVisual::Draw(const Renderer& renderer) const
+{
+    renderer.DrawParticles(*m_Mesh, *m_TextureOb, m_ModelMatrix);
+}

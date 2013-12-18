@@ -414,13 +414,13 @@ void DriveComplex::UpdatePathVisualisation()
     m_PathVisualTurn.FillData(m_PathCenterVec, TURN_TIME, 14);
 }
 
-void DriveComplex::DrawPath()
+void DriveComplex::DrawPath(const Renderer& render)
 {
     if (m_PathEnd == false)
     {
         UpdatePathVisualisation();
-        m_PathVisualCenter.Draw();
-        m_PathVisualTurn.Draw();
+        m_PathVisualCenter.Draw(render);
+        m_PathVisualTurn.Draw(render);
     }
 }
 

@@ -19,6 +19,7 @@
 #include <cmath>
 #include "orbit.hpp"
 #include "../common/constants.hpp"
+#include <render/Render.hpp>
 
 
 Orbit::Orbit()
@@ -101,11 +102,11 @@ void Orbit::UpdatePathVisualisation()
     m_VisualOrbitTurn.FillData(m_Coords_vec, TURN_TIME, 13);
 }
 
-void Orbit::DrawPath()
+void Orbit::DrawPath(const Renderer& render)
 {   
     UpdatePathVisualisation();   // TOO SLOW
-    m_VisualOrbitPath.Draw();
-    m_VisualOrbitTurn.Draw();
+    m_VisualOrbitPath.Draw(render);
+    m_VisualOrbitTurn.Draw(render);
 }
 
 

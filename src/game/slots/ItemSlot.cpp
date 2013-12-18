@@ -438,7 +438,7 @@ void ItemSlot::UpdateRange(TextureOb* _texOb)
 
 void ItemSlot::DrawRange(const glm::vec2& offset)
 { 
-    m_VisualPath.Draw(offset);
+    //m_VisualPath.Draw(offset);
 }
 
 bool ItemSlot::CheckSubTarget(ItemSlot* subtarget) const

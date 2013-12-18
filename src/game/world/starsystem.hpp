@@ -150,8 +150,8 @@ class StarSystem : public BaseSpaceEntity
         float CalcResultGravityForce(const glm::vec3&, const glm::vec3&, float) const;
 
         void DrawBackground(const Renderer&, const glm::vec2&);
-                void DrawOrbits();
-                void DrawPath();
+            void DrawOrbits(const Renderer&);
+            void DrawPath();
                 
         void Save(boost::property_tree::ptree&) const;
         void Load(const boost::property_tree::ptree&);

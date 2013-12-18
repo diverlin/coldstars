@@ -74,7 +74,7 @@ class BaseSpaceEntity : public BaseDrawable
         virtual void Hit(int, bool);
         void SilentKill();
         
-        virtual void RenderStuffWhenFocusedInSpace() {};
+        virtual void RenderStuffWhenFocusedInSpace(const Renderer&) {};
         virtual void RenderInfoInSpace(const Renderer&, const glm::vec2&, float);        
         void RenderInfo(const glm::vec2&);
         void virtual UpdateInfo() {}    

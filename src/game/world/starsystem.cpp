@@ -842,16 +842,16 @@ void StarSystem::DrawBackground(const Renderer& render, const glm::vec2& scroll_
     render.disable_BLEND();
 }
     
-void StarSystem::DrawOrbits()
+void StarSystem::DrawOrbits(const Renderer& render)
 {
-        for(unsigned int i = 0; i < PLANET_vec.size(); i++) 
+    for(unsigned int i = 0; i < PLANET_vec.size(); i++) 
     { 
-        PLANET_vec[i]->GetOrbit().DrawPath(); 
+        PLANET_vec[i]->GetOrbit().DrawPath(render); 
     }
 
     for(unsigned int i = 0; i < ASTEROID_vec.size(); i++)
     { 
-        ASTEROID_vec[i]->GetOrbit().DrawPath(); 
+        ASTEROID_vec[i]->GetOrbit().DrawPath(render); 
     }
 }
  
