@@ -1169,14 +1169,14 @@ void Vehicle::UpdateArtefactInfluence()
 }
 
 /* virtual override final */
-void Vehicle::RenderStuffWhenFocusedInSpace() 
+void Vehicle::RenderStuffWhenFocusedInSpace(const Renderer& render) 
 {
     m_ComplexWeapon.RenderWeaponIcons();
     
     RenderRadarRange(); 
     m_ComplexWeapon.RenderWeaponsRange(); 
     
-    m_ComplexDrive.DrawPath(); 
+    m_ComplexDrive.DrawPath(render); 
 }
 
 /* virtual override final */               

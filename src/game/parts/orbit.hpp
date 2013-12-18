@@ -22,6 +22,7 @@
 
 #include <render/PathVisual.hpp>
 
+class Renderer;
 
 class Orbit
 {
@@ -41,7 +42,7 @@ class Orbit
         void UpdatePosition();
 
         void UpdatePathVisualisation();
-        void DrawPath();
+        void DrawPath(const Renderer&);
 
     private:
         PathVisual m_VisualOrbitPath;

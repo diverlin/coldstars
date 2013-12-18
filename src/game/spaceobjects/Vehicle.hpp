@@ -162,7 +162,7 @@ class Vehicle : public BaseSpaceEntity
         void UpdateSpecialEffect();
         void UpdateLockedItems();
             
-        virtual void RenderStuffWhenFocusedInSpace() override final;
+        virtual void RenderStuffWhenFocusedInSpace(const Renderer&) override final;
         virtual void RenderInfoInSpace(const Renderer&, const glm::vec2&, float) override final;
         void RenderInfo(const glm::vec2&, int, int);
                     

@@ -52,6 +52,7 @@ class Mesh
         void FillPointVerticesFast(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
                         
         void Draw() const;
+        void Draw(GLenum) const;
     
     private:
         TYPE::MESH m_TypeId;
@@ -74,11 +75,10 @@ class Mesh
         bool m_HasColors;
         bool m_HasPointsSize;
 
-        void UpdateList();      // for debug
         void UpdateVbo(); 
                 
-        void DrawList() const;  // fo debug
         void DrawVbo() const;
+        void DrawVbo(GLenum) const;
 };
 
 #endif

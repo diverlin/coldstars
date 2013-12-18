@@ -550,16 +550,13 @@ void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const
             glUniformMatrix4fv(glGetUniformLocation(m_Shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);  
             glUniformMatrix4fv(glGetUniformLocation(m_Shaders.particle, "u_ModelMatrix"),          1, GL_FALSE, &ModelMatrix[0][0]);      
       
-            mesh.Draw();
+            mesh.Draw(GL_POINTS);
         }
         glUseProgram(0);
     }
     disable_POINTSPRITE();
     disable_BLEND();
 }
-   
-
-
 
 void Renderer::DrawAxis(const glm::mat4& ModelMatrix, float width) const
 {

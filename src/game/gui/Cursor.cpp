@@ -164,7 +164,7 @@ void Cursor::RenderFocusedObjectStuff(const Renderer& render) const
         float scale = 1.1;
         if (m_FocusedSpaceObject != nullptr)
         {                    
-            m_FocusedSpaceObject->RenderStuffWhenFocusedInSpace();
+            m_FocusedSpaceObject->RenderStuffWhenFocusedInSpace(render);
             
             Box2D box(vec3ToVec2(m_FocusedSpaceObject->GetCenter()), vec3ToVec2(m_FocusedSpaceObject->GetSize()));
             box.SetScale(scale, scale);

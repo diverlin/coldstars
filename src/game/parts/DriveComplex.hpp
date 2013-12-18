@@ -26,6 +26,7 @@ class Vehicle;
 class DriveEffect;
 class ItemSlot; 
 class BaseSpaceEntity;
+class Renderer;
 
 class DriveComplex
 {
@@ -61,7 +62,7 @@ class DriveComplex
         void UpdatePosition();
 
         void UpdatePathVisualisation();                
-        void DrawPath();
+        void DrawPath(const Renderer&);
             
     private:
         ItemSlot* m_DriveSlot;

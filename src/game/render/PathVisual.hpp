@@ -19,11 +19,11 @@
 #ifndef PATHVISUAL_HPP
 #define PATHVISUAL_HPP
 
-class TextureOb;
-
-#include <vector>
-#include <render/MyGl.hpp>
 #include <math/myVector.hpp>
+#include <render/Render.hpp>
+
+class TextureOb;
+class Mesh;
 
 class PathVisual
 {
@@ -36,11 +36,15 @@ class PathVisual
         void FillData(TextureOb*, int radius, int point_size);    
         void FillData(TextureOb*, const glm::vec3&, const glm::vec3&, int step, int point_size);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
         
-        void Draw(const glm::vec2&) const;
-        void Draw() const;
-        
+        void Draw(const Renderer&, const glm::vec3&);
+        void Draw(const Renderer&) const;
+
     private:
-        GLuint gl_list;
+        Mesh* m_Mesh;
+        TextureOb* m_TextureOb;
+        glm::mat4 m_ModelMatrix;
+
+        float m_PointSize;
 };
 
 #endif 

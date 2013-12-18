@@ -355,14 +355,8 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
     Screen::Instance().UpdateInSpace();
 }
              
-void Player::RenderInSpace_NEW(StarSystem* starsystem)
+void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
 {   
-    Renderer& render = Screen::Instance().GetRender();
-    Camera& camera = Screen::Instance().GetCamera();
-    camera.Update();
-    
-    render.ComposeViewMatrix(camera.GetViewMatrix());
-    
     float scale = Screen::Instance().GetScale();
     int w = Screen::Instance().GetWidth();
     int h = Screen::Instance().GetHeight();
@@ -611,20 +605,26 @@ void Player::RenderInSpace_NEW(StarSystem* starsystem)
     
 void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
+    Renderer& renderer = Screen::Instance().GetRender();
+    Camera& camera = Screen::Instance().GetCamera();
+    camera.Update();
+    
+    renderer.ComposeViewMatrix(camera.GetViewMatrix());
+
     //float scale = Screen::Instance().GetScale();
     //int w = Screen::Instance().GetWidth();
     //int h = Screen::Instance().GetHeight();
          
-    RenderInSpace_NEW(starsystem);
-/*
-    resizeGl(w*scale, h*scale); 
-    enable_BLEND();   
+    RenderInSpace_NEW(renderer, starsystem);
+
+    //resizeGl(w*scale, h*scale); 
+    //enable_BLEND();   
     {           
         if (turn_ended == true)
         {
             if (forceDraw_orbits == true)
             {
-                starsystem->DrawOrbits();
+                starsystem->DrawOrbits(renderer);
             }
             
             if (forceDraw_path == true)
@@ -632,7 +632,7 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
                 starsystem->DrawPath();
             }
             
-            npc->GetVehicle()->GetComplexDrive().DrawPath();
+            npc->GetVehicle()->GetComplexDrive().DrawPath(renderer);
             npc->GetVehicle()->GetComplexWeapon().RenderWeaponsRange();
             npc->GetVehicle()->GetComplexWeapon().RenderWeaponIcons(); 
         
@@ -647,11 +647,10 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
             }
         }
     
-        cursor.RenderFocusedObjectStuff();
+        //cursor.RenderFocusedObjectStuff();
     }
-    disable_BLEND();  
-    resizeGl(w, h); 
-*/
+    //disable_BLEND();  
+    //resizeGl(w, h); 
 } 
 
 bool Player::MouseInteractionWithSpaceObjectsInSpace(const MouseData& data_mouse) 

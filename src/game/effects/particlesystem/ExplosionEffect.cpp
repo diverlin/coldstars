@@ -29,7 +29,7 @@ m_Radius(radius)
 {
     m_TypeId = EFFECT::EXPLOSION_ID;
     
-    m_TextureOb = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);; 
+    m_TextureOb = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID); 
     m_ParticlesNum = 1000;
     
     int size_id = CONVERTER::SIZE2SIZEID.GetEquivalent(m_Radius);

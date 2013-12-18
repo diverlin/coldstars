@@ -153,23 +153,7 @@ void Mesh::FillPointVerticesFast(const std::vector<glm::vec3>& positions, const 
     glEnableVertexAttribArray(VERTEX_COLOR_LOCATION);
 }
 
-void Mesh::UpdateList()
-{
-    //glNewList(m_ListId, GL_COMPILE);
-    //for(unsigned int i=0; i<m_Vertices.size(); i++)
-    //{ 
-        //glBegin(m_PrimitiveType);
-        //{
-            //glNormal3f(  m_Vertices[i].normal.x,   m_Vertices[i].normal.y,   m_Vertices[i].normal.z);
-            //glTexCoord2f(m_Vertices[i].texcoord.x, m_Vertices[i].texcoord.y);
-            //glVertex3f(  m_Vertices[i].position.x, m_Vertices[i].position.y, m_Vertices[i].position.z);
-        //}
-        //glEnd();   
-    //}    
-    //glEndList();
-}
-
-  
+ 
 void Mesh::UpdateVbo()
 {    
     int stride = STRIDE_POSITION;
@@ -256,9 +240,10 @@ void Mesh::DrawVbo() const
     glDrawArrays(m_PrimitiveType, 0, m_VertexCount); 
 }
 
-void Mesh::DrawList() const
+void Mesh::DrawVbo(GLenum primitive_type) const
 {
-    glCallList(m_ListId);
+    glBindVertexArray(m_VaoId);
+    glDrawArrays(primitive_type, 0, m_VertexCount); 
 }
         
 void Mesh::Draw() const
@@ -266,6 +251,10 @@ void Mesh::Draw() const
     DrawVbo();
 }    
 
+void Mesh::Draw(GLenum primitive_type) const
+{
+    DrawVbo(primitive_type);
+}  
 
 //initialization:
     //for each batch
