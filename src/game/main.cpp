@@ -79,7 +79,7 @@ int main()
     Player* player = PlayerBuilder::Instance().GetNewPlayer();
     
     BaseRunScenario* run_scenario = nullptr;
-    RUN_SCENARIO scenario_type = RUN_SCENARIO::TEST_MANY_VAO;
+    RUN_SCENARIO scenario_type = RUN_SCENARIO::NORMAL_RUN;
     switch(scenario_type)
     {
         case RUN_SCENARIO::NORMAL_RUN:         { run_scenario = new NormalRunScenario(); break; }

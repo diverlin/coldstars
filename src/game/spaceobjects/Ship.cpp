@@ -116,9 +116,8 @@ GetComplexDrive().UpdatePosition(); // debug
     }
 }
 
-void Ship::RenderInSpace_2D(const Renderer& render, float scale)
+void Ship::RenderInSpace(const Renderer& render, float scale)
 {   
-    //setColor4f(GetColor());
     //if (GetProperties().grab_radius > 0)
     //{
         //RenderGrabTrail(render);
@@ -137,25 +136,10 @@ void Ship::RenderInSpace_2D(const Renderer& render, float scale)
         //GetStarSystem()->RestoreSceneColor();
     //}
     
-    //if (GetProperties().shield_effect_enabled == true)
-    //{
-        //RenderShieldEffect(1.0 - GetColor().a); 
-        //GetStarSystem()->RestoreSceneColor();
-    //}
-}
-
-void Ship::RenderInSpace_3D(const Renderer& render, float scale)
-{
-    render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-
-    //enable_BLEND();
-    //if (GetProperties().shield_effect_enabled == true)
-    //{   
-        //setColor4f(GetColor());
-        //RenderShieldEffect(1.0 - GetColor().a); 
-        //GetStarSystem()->RestoreSceneColor();
-    //}
-    //disable_BLEND();
+    if (GetProperties().shield_effect_enabled == true)
+    {
+        RenderShieldEffect(render, 1.0f - GetColor().a); 
+    }
 }
 
 void Ship::RenderAtPlanet(const Renderer& render, const glm::vec3& center)

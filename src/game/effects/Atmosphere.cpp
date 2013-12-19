@@ -34,6 +34,6 @@ Atmosphere::~Atmosphere()
 void Atmosphere::Render(const Renderer& render, const glm::vec3& center)
 {      
     SetCenter(center);
-    render.DrawTransparentMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    render.DrawMeshTransparentLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
 

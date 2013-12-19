@@ -1212,7 +1212,8 @@ void Vehicle::RenderGrabTrail(const Renderer& render) const
         
 void Vehicle::RenderKorpus(const Renderer& render)
 {
-    render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
+    //render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
+    render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
 
 void Vehicle::RenderDriveEffect(float scale, float parent_d_alpha) const
@@ -1222,9 +1223,9 @@ void Vehicle::RenderDriveEffect(float scale, float parent_d_alpha) const
 }
 
 
-void Vehicle::RenderShieldEffect(float parent_d_alpha) const
+void Vehicle::RenderShieldEffect(const Renderer& renderer, float parent_d_alpha) const
 {
-    m_ComplexProtector.GetShieldEffect()->Render(parent_d_alpha);
+    m_ComplexProtector.GetShieldEffect()->Render(renderer, parent_d_alpha);
 }
 
 void Vehicle::RenderRadarRange()

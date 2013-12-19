@@ -34,8 +34,7 @@ class Ship : public Vehicle
         
         virtual void UpdateInfo() override final;  
         
-        void RenderInSpace_2D(const Renderer&, float);            
-        void RenderInSpace_3D(const Renderer&, float);
+        void RenderInSpace(const Renderer&, float);            
         void RenderAtPlanet(const Renderer&, const glm::vec3&);       
         
         virtual void Save(boost::property_tree::ptree&) const override final;

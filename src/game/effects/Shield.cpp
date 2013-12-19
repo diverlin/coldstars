@@ -20,6 +20,7 @@
 #include "../render/Render.hpp"
 #include "../resources/textureOb.hpp"
 #include "../spaceobjects/BaseSpaceEntity.hpp"
+#include <render/Render.hpp>
 
 ShieldEffect::ShieldEffect()
 {       
@@ -53,10 +54,9 @@ void ShieldEffect::Update()
     else                            { color.a = alpha_start; }
 }
 
-void ShieldEffect::Render(float parent_d_alpha) const
+void ShieldEffect::Render(const Renderer& renderer, float parent_d_alpha) const
 {
-    //setColor4f(color.r, color.g, color.b, color.a - parent_d_alpha);    
-    //drawQuad(textureOb, parent->GetCenter(), size, parent->GetAngle().z);
+    renderer.DrawQuadTransparent(*textureOb, parent->GetModelMatrix());
 }
 
 

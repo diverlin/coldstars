@@ -180,6 +180,10 @@ void Renderer::UpdateProjectionViewMatrix()
 }
 
 
+void Renderer::DrawQuadTransparent(const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
+{
+    DrawMeshTransparent(*m_MeshQuad, textureOb, ModelMatrix);
+}
 
 void Renderer::DrawQuad(const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
@@ -225,7 +229,7 @@ void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm:
     glUseProgram(0);
 }
 
-void Renderer::DrawTransparentMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
+void Renderer::DrawMeshTransparent(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     enable_BLEND();
     {
@@ -290,7 +294,7 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
     glUseProgram(0);
 } */
 
-void Renderer::DrawTransparentMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
+void Renderer::DrawMeshTransparentLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     enable_BLEND();
         DrawMeshLight(mesh, textureOb, ModelMatrix);
