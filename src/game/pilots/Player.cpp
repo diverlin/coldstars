@@ -417,10 +417,7 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
                 if (getRandInt(0, 30) == 0) std::cout<<"ship num rendered="<<visible_SHIP_vec.size()<<std::endl; 
                 for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
                 { 
-                    if(visible_SHIP_vec[i]->Is3D())
-                    {
-                       visible_SHIP_vec[i]->RenderInSpace_3D(render, 1/scale); 
-                    }
+                    visible_SHIP_vec[i]->RenderInSpace(render, 1/scale); 
                 }
                      
                 for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
@@ -451,14 +448,6 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
                 { 
                     visible_CONTAINER_vec[i]->Render(render); 
                 }      
-
-                for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
-                { 
-                    if(visible_SHIP_vec[i]->Is3D() == false)
-                    {
-                        visible_SHIP_vec[i]->RenderInSpace_2D(render, 1/scale); 
-                    }
-                }
 
                 for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
                 { 

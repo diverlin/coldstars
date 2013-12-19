@@ -34,7 +34,7 @@ Ring::~Ring()
 void Ring::Render(const Renderer& render, const glm::vec3& center)
 {      
     SetCenter(center);
-    render.DrawTransparentMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    render.DrawMeshTransparent(GetMesh(), GetTextureOb(), GetActualModelMatrix());
     //render.RenderMeshGeometry(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
 

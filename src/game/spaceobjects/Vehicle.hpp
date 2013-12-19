@@ -209,7 +209,7 @@ class Vehicle : public BaseSpaceEntity
         void RenderKorpus(const Renderer&);
         void RenderTurrels() const;
         void RenderDriveEffect(float scale, float parent_d_alpha = 0.0) const;
-        void RenderShieldEffect(float parent_d_alpha = 0.0) const;          
+        void RenderShieldEffect(const Renderer&, float parent_d_alpha = 0.0) const;          
         
         void UpdateGrappleMicroProgram_inDynamic();
         

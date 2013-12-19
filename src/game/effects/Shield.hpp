@@ -16,12 +16,14 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SHIELD_H
-#define SHIELD_H
+#ifndef SHIELD_HPP
+#define SHIELD_HPP
 
 #include "../math/myVector.hpp"
+
 class TextureOb;
 class BaseSpaceEntity;
+class Renderer;
 
 class ShieldEffect
 {  
@@ -32,9 +34,9 @@ class ShieldEffect
         void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
         void SetAlpha(float alpha) { color.a = alpha; };
         void SetParent(BaseSpaceEntity*);
-        
+            
         void Update();
-        void Render(float) const;            
+        void Render(const Renderer&, float) const;  
 
     private:       
         glm::vec4 color;

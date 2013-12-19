@@ -72,12 +72,13 @@ class Renderer : public NonCopyable
         void ComposeViewMatrix(const glm::mat4&);
 
         void DrawMesh                   (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void DrawTransparentMesh        (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void DrawMeshTransparent        (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawMeshLight              (const Mesh&, const TextureOb&, const glm::mat4&) const;
         //void DrawMeshLightNormalMap   (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void DrawTransparentMeshLight   (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void DrawMeshTransparentLight   (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawMeshMultiTextured      (const Mesh&, const TextureOb&, const glm::mat4&) const;
 
+        void DrawQuadTransparent(const TextureOb&, const glm::mat4&) const;
         void DrawQuad(const TextureOb&, const glm::mat4&) const;
         void DrawQuad(const TextureOb&, const Box2D&) const;
 
