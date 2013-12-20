@@ -507,17 +507,15 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
         }
         render.DeactivateFbo(3);
 
-        render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
-/*
         // render effects not distorted by SHOCKWAVE
         render.ActivateFbo(4, w, h);
         {
-            resizeGl(w, h); 
-            drawFullScreenTexturedQuad(Screen::Instance().GetLastFbo().GetTexture(), w, h, -999.0);
+            //resizeGl(w, h); 
+            render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
 
-            resizeGl(w*scale, h*scale);             
-            camera(world_coord.x, world_coord.y, CAMERA_POS_Z); 
-            */           
+            //resizeGl(w*scale, h*scale);             
+            //camera(world_coord.x, world_coord.y, CAMERA_POS_Z); 
+                       
             for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
             { 
                 LazerTraceEffect& lazer_trace = *visible_effect_LAZERTRACE_vec[i];
@@ -528,48 +526,32 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
             {   
                 BaseParticleSystem& ps = *visible_effect_PARTICLESYSTEM_vec[i];
                 render.DrawParticles(ps.GetMesh(), ps.GetTextureOb(), ps.GetActualModelMatrix()); 
-            }
-            /*
+            }             
         }
         render.DeactivateFbo(4);
-        
-        
+       
+ //       render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
+  
         // FOGWAR and STARSPARK to final scene
-        resizeGl(w, h); 
+        //resizeGl(w, h); 
             
         glEnable(GL_TEXTURE_2D);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);      // unbind fbo
         
-        clearScreen();
-        resetRenderTransformation();    
+        render.ClearScreen();
+        //resetRenderTransformation();    
         
-        glUseProgram(ShaderCollector::Instance().fogwarspark);
-        {
-            glActiveTexture(GL_TEXTURE0);                                
-            glBindTexture(GL_TEXTURE_2D, render.GetLastFbo().GetTexture());
-            glUniform1i (glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "sceneTex"), 0);
-    
-            glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "resolution"), w, h);
-            glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "center"), npc->GetVehicle()->GetCenter().x/(w*scale), npc->GetVehicle()->GetCenter().y/(h*scale));
-            glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "radius"), (float)npc->GetVehicle()->GetProperties().radar/(h*scale));
-            glUniform2f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "world_coord"), world_coord.x/(w*scale), world_coord.y/(h*scale));
-    
-            glUniform1f(glGetUniformLocation(ShaderCollector::Instance().fogwarspark, "dcolor"), npc->GetVehicle()->GetStarSystem()->GetStar()->GetDeltaColor());
-    
-            drawFullScreenQuad(w, h, -999.0);
-        }
-        glUseProgram(0);             
+        render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->GetVehicle()->GetCenter(), world_coord, 200 /*npc->GetVehicle()->GetProperties().radius*/);         
        
         // render text
-        resizeGl(w*scale, h*scale); 
-        camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
+        //resizeGl(w*scale, h*scale); 
+        //camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
         for(unsigned int i = 0; i<visible_text_DAMAGE_vec.size(); i++)
         { 
-            visible_text_DAMAGE_vec[i]->Render(world_coord, 1/scale); 
+            //visible_text_DAMAGE_vec[i]->Render(world_coord, 1/scale); 
         }   
                     
-        starsystem->RestoreSceneColor();
-    */    
+        //starsystem->RestoreSceneColor();
     }
     render.disable_CULLFACE();
     
