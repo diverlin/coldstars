@@ -470,14 +470,9 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
 
         }
         render.DeactivateFbo(2);
-            
-        render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
-                
-                
-        /*
 
         // SHOCKWAVE post process to Fbo3
-        resizeGl(w, h); 
+        //resizeGl(w, h); 
         render.ActivateFbo(3, w, h);
         {
             float center_array[SHOCKWAVES_MAX_NUM][2];
@@ -508,23 +503,12 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
                 time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time;
             }
            
-            glUseProgram(ShaderCollector::Instance().shockwave);
-            {
-                glActiveTexture(GL_TEXTURE0);                                
-                glBindTexture(GL_TEXTURE_2D, Screen::Instance().GetLastFbo().GetTexture());
-                glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "sceneTex"), 0);
-    
-                glUniform1i (glGetUniformLocation(ShaderCollector::Instance().shockwave, "distortion_num"), i);
-                glUniform2fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "center"),      i, *center_array);
-                glUniform3fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "shockParams"), i, *xyz_array);
-                glUniform1fv(glGetUniformLocation(ShaderCollector::Instance().shockwave, "time"),        i, time_array);
-    
-                drawFullScreenQuad(w, h, -999.0);
-            }
-            glUseProgram(0);
+            render.DrawPostEffectShockWaves(render.GetLastFbo().GetTexture(), w, h, i, center_array, xyz_array, time_array);
         }
         render.DeactivateFbo(3);
 
+        render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
+/*
         // render effects not distorted by SHOCKWAVE
         render.ActivateFbo(4, w, h);
         {
