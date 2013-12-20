@@ -82,6 +82,7 @@ class Renderer : public NonCopyable
         void DrawQuad(const TextureOb&, const glm::mat4&) const;
         void DrawQuad(const TextureOb&, const Box2D&) const;
 
+        void DrawPostEffectFogWar(GLuint, int, int, const glm::vec3&, const glm::vec2&, float) const;
         void DrawPostEffectShockWaves(GLuint, int, int, int, float[10][2], float[10][3], float[10]) const;
         void DrawPostEffectExtractBright(GLuint, int, int, float) const;
         void DrawPostEffectCombined(const std::vector<GLuint>&, int, int) const; 

@@ -400,6 +400,37 @@ void Renderer::DrawPostEffectCombined(const std::vector<GLuint>& textures, int w
     glUseProgram(0);
 }
 
+void Renderer::DrawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec3& center, const glm::vec2& world_coord, float radius) const
+{
+    // ugly 
+    float scale = 1.0;
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, -499.0f));
+    glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
+    glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
+    // ugly
+
+    glUseProgram(m_Shaders.fogwarspark);
+    {
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.fogwarspark, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.fogwarspark, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
+
+        glActiveTexture(GL_TEXTURE0);                                
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glUniform1i (glGetUniformLocation(m_Shaders.fogwarspark, "sceneTex"), 0);
+
+        glUniform2f(glGetUniformLocation(m_Shaders.fogwarspark, "resolution"), w, h);
+        glUniform2f(glGetUniformLocation(m_Shaders.fogwarspark, "center"), center.x/(w*scale), center.y/(h*scale));
+        glUniform1f(glGetUniformLocation(m_Shaders.fogwarspark, "radius"), radius/(h*scale));
+        glUniform2f(glGetUniformLocation(m_Shaders.fogwarspark, "world_coord"), world_coord.x/(w*scale), world_coord.y/(h*scale));
+
+        glUniform1f(glGetUniformLocation(m_Shaders.fogwarspark, "dcolor"), 0.5f/*npc->GetVehicle()->GetStarSystem()->GetStar()->GetDeltaColor()*/);
+
+        m_MeshQuad->Draw();
+    }
+    glUseProgram(0);    
+}
+
+
 void Renderer::DrawPostEffectShockWaves(GLuint scene_texture, int w, int h, int i, float center_array[10][2], float xyz_array[10][3], float time_array[10]) const
 {
     // ugly 
