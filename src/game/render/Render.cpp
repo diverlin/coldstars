@@ -400,6 +400,36 @@ void Renderer::DrawPostEffectCombined(const std::vector<GLuint>& textures, int w
     glUseProgram(0);
 }
 
+void Renderer::DrawPostEffectShockWaves(GLuint scene_texture, int w, int h, int i, float center_array[10][2], float xyz_array[10][3], float time_array[10]) const
+{
+    // ugly 
+    float scale = 1.0;
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, -499.0f));
+    glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
+    glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
+    // ugly
+   
+    glUseProgram(m_Shaders.shockwave);
+    {
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.shockwave, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.shockwave, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
+
+        glActiveTexture(GL_TEXTURE0);                                
+        glBindTexture(GL_TEXTURE_2D, scene_texture);
+        glUniform1i (glGetUniformLocation(m_Shaders.shockwave, "u_Texture"), 0);
+    
+        glUniform1i (glGetUniformLocation(m_Shaders.shockwave, "distortion_num"), i);
+        glUniform2fv(glGetUniformLocation(m_Shaders.shockwave, "center"),      i, *center_array);
+        glUniform3fv(glGetUniformLocation(m_Shaders.shockwave, "shockParams"), i, *xyz_array);
+        glUniform1fv(glGetUniformLocation(m_Shaders.shockwave, "time"),        i, time_array);
+    
+        m_MeshQuad->Draw();
+    }
+    glUseProgram(0);
+}
+
+
+
 void Renderer::DrawPostEffectExtractBright(GLuint scene_texture, int w, int h, float brightThreshold) const
 {
     // ugly 
