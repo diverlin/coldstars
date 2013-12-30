@@ -118,7 +118,8 @@ class Renderer : public NonCopyable
         GLint m_ProgramLightLocation_uAmbientColor; 
         GLint m_ProgramLightLocation_uTexture; 
     
-        GLuint m_ProgramBlur;   
+        GLuint m_ProgramBlur; 
+        mutable GLuint m_ActiveProgram;  
 
         int m_FboNum;
         Fbo m_Fbos[5];

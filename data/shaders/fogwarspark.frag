@@ -29,6 +29,6 @@ void main(void)
 		color -= vec4(0.1, 0.1, 0.1, 0.0);
 	}
 
-	color += dcolor;
+	//color += dcolor;
 }
 
