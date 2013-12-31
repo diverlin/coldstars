@@ -22,6 +22,7 @@
 #include "../common/myStr.hpp"
 
 #include "../resources/TextureManager.hpp"
+#include <resources/MeshCollector.hpp>
 
 #include "../render/Render.hpp"
 
@@ -36,44 +37,45 @@ DistantNebulaEffect::~DistantNebulaEffect()
    
 void DistantNebulaEffect::Update()
 {
-    m_Angle += m_DeltaAngle;  
+    //m_Angle += m_DeltaAngle;  
 }        
 
-void DistantNebulaEffect::Render(const Renderer& render)
+/* virtual override */
+void DistantNebulaEffect::Render(const Renderer& render, const glm::vec3&)
 {   
-    render.DrawQuad(*m_TextureOb, GetActualModelMatrix());
+    render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
               
 void DistantNebulaEffect::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    std::string droot = root + "distant_nebula_effect."+int2str(id)+".";
+    std::string droot = root + "distant_nebula_effect."+int2str(GetId())+".";
     
-    BaseBackGroundEffect::SaveData(save_ptree, droot);
+    //BaseBackGroundEffect::SaveData(save_ptree, droot);
     DistantNebulaEffect::SaveData(save_ptree, droot);
 }    
 
 void DistantNebulaEffect::Load(const boost::property_tree::ptree& load_ptree)
 {
-    BaseBackGroundEffect::LoadData(load_ptree);
+    //BaseBackGroundEffect::LoadData(load_ptree);
     DistantNebulaEffect::LoadData(load_ptree);
 }
 
 void DistantNebulaEffect::Resolve()
 {
-    BaseBackGroundEffect::ResolveData();
+    //BaseBackGroundEffect::ResolveData();
     DistantNebulaEffect::ResolveData();
 }
 
 void DistantNebulaEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const        
 {
-    save_ptree.put(root+"m_Angle", m_Angle);
-    save_ptree.put(root+"m_DeltaAngle", m_DeltaAngle);
+    //save_ptree.put(root+"m_Angle", m_Angle);
+    //save_ptree.put(root+"m_DeltaAngle", m_DeltaAngle);
 }
 
 void DistantNebulaEffect::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    m_Angle = load_ptree.get<float>("m_Angle");
-    m_DeltaAngle = load_ptree.get<float>("m_DeltaAngle");
+    //m_Angle = load_ptree.get<float>("m_Angle");
+    //m_DeltaAngle = load_ptree.get<float>("m_DeltaAngle");
 }
 
 void DistantNebulaEffect::ResolveData()
@@ -81,6 +83,8 @@ void DistantNebulaEffect::ResolveData()
 
 DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
 {
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+
     TextureOb* textureOb = nullptr;
     if (color_id == NONE_ID)     textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID);
     else                         textureOb = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, color_id);    
@@ -93,15 +97,17 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
     }
     
     float z = -getRandInt(200, 499);
-    float rate = abs(z)/100.0;
+    float rate = 5;
     
-    glm::vec3 center(getRandSign()*(float)getRandInt(0, 500*rate), getRandSign()*(float)getRandInt(0, 500*rate), z);
+    glm::vec3 center(getRandSign()*(float)getRandInt(100, 500*rate), getRandSign()*(float)getRandInt(100, 500*rate), z);
     
     DistantNebulaEffect* dn = new DistantNebulaEffect();
-    dn->SetTextureOb(textureOb, glm::vec3(rate));
+    glm::vec3 size = textureOb->GetSize();
+    dn->SetRenderData(mesh, textureOb, size*=3);
+
     dn->SetCenter(center);
-    dn->SetAngle(angle);
-    dn->SetDeltaAngle(delta_angle);
+    //dn->SetAngle(angle);
+    //dn->SetDeltaAngle(delta_angle);
     
     return dn;
 }

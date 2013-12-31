@@ -93,6 +93,6 @@ void NormalRunScenario::Init(Player* player)
         starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
     }
 
-    God::Instance().CreateShips(starsystem, /*ships_num=*/50, TYPE::RACE::R0_ID);   // fake
+    God::Instance().CreateShips(starsystem, /*ships_num=*/20, TYPE::RACE::R0_ID);   // fake
 }
 
