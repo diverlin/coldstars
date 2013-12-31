@@ -263,30 +263,36 @@ void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
 	    mesh.Draw();
 	}
 }
-/*
+
 void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     float ambient_factor = 0.25; 
     const glm::vec3& eye_pos = Screen::Instance().GetCamera().GetPos();
    
     UseProgram(m_Shaders.light_normalmap);
-
-	glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_lightPos"), 0.0f, 0.0f, 200.0);
-	glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_eyePos"), eye_pos.x, eye_pos.y, eye_pos.z);
-	glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_diffColor"), m_Color.r, m_Color.g, m_Color.b, m_Color.a);
-	glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_ambientColor"), ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
-			
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
-	glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_texture"), 0);
+	{
+	    glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(ModelMatrix)));
 	
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, textureOb.GetData().normalmap);
-	glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_normalmap"), 1);
-			
-	ComposeModelMatrix(ModelMatrix);                     
-	mesh.Draw();
-} */
+	    glUniformMatrix4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
+	    glUniformMatrix4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
+	    glUniformMatrix3fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_NormalModelMatrix")   , 1, GL_FALSE, &NormalModelMatrix[0][0]);
+      
+		glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_lightPos"), 0.0f, 0.0f, 200.0);
+		glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_eyePos"), eye_pos.x, eye_pos.y, eye_pos.z);
+		glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_diffColor"), m_Color.r, m_Color.g, m_Color.b, m_Color.a);
+		glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_ambientColor"), ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
+				
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
+		glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_texture"), 0);
+		
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, textureOb.GetData().normalmap);
+		glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_normalmap"), 1);
+                  
+		mesh.Draw();
+	}
+} 
 
 void Renderer::DrawMeshTransparentLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
