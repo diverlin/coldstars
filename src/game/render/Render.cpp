@@ -33,6 +33,8 @@
 
 #include "../config/config.hpp"
 
+#include <glm/gtc/type_ptr.hpp>
+
 // for ugly
 #include <glm/glm.hpp> // glm::vec
 #include <glm/gtx/quaternion.hpp>
@@ -233,7 +235,6 @@ void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
     const glm::vec3& eye_pos = Screen::Instance().GetCamera().GetPos();
  
  	UseTransparentMode(textureOb.GetData().use_alpha);
- 	//UseTransparentMode(false);
  	 	
     UseProgram(m_ProgramLight);
     {
@@ -244,10 +245,11 @@ void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
 	    glUniformMatrix3fv(m_ProgramLightLocation_uNormalMatrix        , 1, GL_FALSE, &NormalModelMatrix[0][0]);
 	            
 	    glUniform3f(m_ProgramLightLocation_uLightPos, 0.0f, 0.0f, 200.0);
-	    glUniform3f(m_ProgramLightLocation_uEyePos  , eye_pos.x, eye_pos.y, eye_pos.z);
+	    glUniform3fv(m_ProgramLightLocation_uEyePos, 1, glm::value_ptr(eye_pos));
 	    
-	    glUniform4f(m_ProgramLightLocation_uDiffColor,    m_Color.r, m_Color.g, m_Color.b, m_Color.a);
-	    glUniform4f(m_ProgramLightLocation_uAmbientColor, ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
+	    glUniform4fv(m_ProgramLightLocation_uDiffColor, 1, glm::value_ptr(m_Color));
+        glm::vec4 c = ambient_factor*m_Color;
+	    glUniform4fv(m_ProgramLightLocation_uAmbientColor, 1, glm::value_ptr(c));
 	    
 	    glActiveTexture(GL_TEXTURE0);
 	    glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture); 
@@ -273,10 +275,11 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
 	    glUniformMatrix3fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_NormalModelMatrix")   , 1, GL_FALSE, &NormalModelMatrix[0][0]);
       
 		glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_lightPos"), 0.0f, 0.0f, 200.0);
-		glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_eyePos"), eye_pos.x, eye_pos.y, eye_pos.z);
-		glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_diffColor"), m_Color.r, m_Color.g, m_Color.b, m_Color.a);
-		glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_ambientColor"), ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
-				
+		glUniform3fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_eyePos"), 1, glm::value_ptr(eye_pos));
+		glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_diffColor"), 1, glm::value_ptr(m_Color));
+        glm::vec4 c = ambient_factor*m_Color;
+		glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_ambientColor"), 1, glm::value_ptr(c));
+
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
 		glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_texture"), 0);
@@ -418,7 +421,7 @@ void Renderer::DrawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec
 }
 
 
-void Renderer::DrawPostEffectShockWaves(GLuint scene_texture, int w, int h, int i, float center_array[10][2], float xyz_array[10][3], float time_array[10]) const
+void Renderer::DrawPostEffectShockWaves(GLuint scene_texture, int w, int h, int count, float center_array[10][2], float xyz_array[10][3], float time_array[10]) const
 {
     // ugly 
     //float scale = 1.0;
@@ -438,10 +441,10 @@ void Renderer::DrawPostEffectShockWaves(GLuint scene_texture, int w, int h, int 
 		glBindTexture(GL_TEXTURE_2D, scene_texture);
 		glUniform1i (glGetUniformLocation(m_Shaders.shockwave, "u_Texture"), 0);
 	
-		glUniform1i (glGetUniformLocation(m_Shaders.shockwave, "distortion_num"), i);
-		glUniform2fv(glGetUniformLocation(m_Shaders.shockwave, "center"),      i, *center_array);
-		glUniform3fv(glGetUniformLocation(m_Shaders.shockwave, "shockParams"), i, *xyz_array);
-		glUniform1fv(glGetUniformLocation(m_Shaders.shockwave, "time"),        i, time_array);
+		glUniform1i (glGetUniformLocation(m_Shaders.shockwave, "distortion_num"), count);
+		glUniform2fv(glGetUniformLocation(m_Shaders.shockwave, "center"),      count, *center_array);
+		glUniform3fv(glGetUniformLocation(m_Shaders.shockwave, "shockParams"), count, *xyz_array);
+		glUniform1fv(glGetUniformLocation(m_Shaders.shockwave, "time"),        count, time_array);
 	
 		m_MeshQuad->Draw();
 	}

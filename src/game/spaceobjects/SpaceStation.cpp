@@ -107,7 +107,7 @@ void SpaceStation::UpdateRenderStuff_2D()
     //}
 }
 
-void SpaceStation::RenderInSpace_2D(const Renderer& render, float scale)
+void SpaceStation::RenderInSpace(const Renderer& render, float scale)
 {     
     //UpdateRenderStuff_2D();
         
@@ -123,13 +123,6 @@ void SpaceStation::RenderInSpace_2D(const Renderer& render, float scale)
         //RenderShieldEffect(1.0 - GetColor().a); 
         //GetStarSystem()->RestoreSceneColor();
     //}
-}
-
-                         
-void SpaceStation::RenderInSpace_3D(const Renderer& render, const glm::vec2& scroll_coords, float scale)
-{         
-    //UpdateRenderAnimation();    
-    //RenderMeshLight(scroll_coords, GetStarSystem()->GetColor4f());        
 }
 
 void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

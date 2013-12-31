@@ -20,6 +20,15 @@ out vec3 v_VertPos2lightPos_n;
 out vec3 v_VertPos2eyePos_n; 
 out vec3 v_Normal_n;
 out vec2 v_Texcoord;
+
+struct Color
+{
+    vec4  position;
+    vec4  ambient;
+    vec4  diffuse;
+    vec4  specular;
+    vec3  attenuation;
+};
  
 void main(void)
 {
