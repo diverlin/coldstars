@@ -62,9 +62,9 @@ m_IndexFboLastActivated(-1),
 m_IndexFboLastDeactivated(-1) 
 {
     m_Light.position    = glm::vec3(0.0f, 0.0f, 200.0f);
-    m_Light.ambient     = glm::vec4(1.0f);
-    m_Light.diffuse     = glm::vec4(1.0f);
-    m_Light.specular    = glm::vec4(1.0f);
+    m_Light.ambient     = glm::vec4(0.2f);
+    m_Light.diffuse     = glm::vec4(0.8f);
+    m_Light.specular    = glm::vec4(0.5f);
     m_Light.attenuation = glm::vec3(0.0f);
 }
 
@@ -257,11 +257,12 @@ void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
         glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Light.specular"), 1, glm::value_ptr(m_Light.specular));
         glUniform3fv(glGetUniformLocation(m_ProgramLight, "u_Light.attenuation"), 1, glm::value_ptr(m_Light.attenuation));
 
-        //glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.ambient"),  1, glm::value_ptr(material.ambient));
-        //glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.diffuse"),  1, glm::value_ptr(material.diffuse));
-        //glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.specular"), 1, glm::value_ptr(material.specular));
-        //glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.emission"), 1, glm::value_ptr(material.emission));
-        //glUniform1f(glGetUniformLocation(m_ProgramLight,  "u_Material.shininess"), material.shininess);
+        const MaterialData& material = textureOb.GetData();
+        glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.ambient"),  1, glm::value_ptr(material.ambient));
+        glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.diffuse"),  1, glm::value_ptr(material.diffuse));
+        glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.specular"), 1, glm::value_ptr(material.specular));
+        glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.emission"), 1, glm::value_ptr(material.emission));
+        glUniform1f(glGetUniformLocation(m_ProgramLight,  "u_Material.shininess"), material.shininess);
 
 	    glActiveTexture(GL_TEXTURE0);
 	    glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture); 
