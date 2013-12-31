@@ -198,12 +198,12 @@ void BaseGuiElement::Render(const Renderer& render, Player* player) const
         //resetRenderTransformation();
     }
     
-    render.enable_BLEND();
+    //render.enable_BLEND();
     {
         RenderUnique(render, player);
         RenderCommon(render, player);
     }
-    render.disable_BLEND();
+    //render.disable_BLEND();
 }
 
 /* virtual */

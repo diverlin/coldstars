@@ -56,7 +56,7 @@ void ShieldEffect::Update()
 
 void ShieldEffect::Render(const Renderer& renderer, float parent_d_alpha) const
 {
-    renderer.DrawQuadTransparent(*textureOb, parent->GetModelMatrix());
+    renderer.DrawQuad(*textureOb, parent->GetModelMatrix());
 }
 
 

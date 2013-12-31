@@ -126,9 +126,9 @@ void BaseItem::RenderInfo(const Renderer& render, const glm::vec2& pos)
 {  
     UpdateInfo();
     
-    render.enable_BLEND();
+    //render.enable_BLEND();
     drawInfoIn2Column(info.title_list, info.value_list, pos);
-    render.disable_BLEND();
+    //render.disable_BLEND();
 }
 
 /* virtual */

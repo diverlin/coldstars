@@ -54,6 +54,8 @@ m_ProgramLightLocation_uAmbientColor(-1),
 m_ProgramLightLocation_uTexture(-1), 
 m_ProgramBlur(0),
 m_ActiveProgram(0),
+m_TransparentModeOn(-1),
+m_PostEffectModeOn(-1),
 m_FboNum(5),
 m_IndexFboLastActivated(-1),
 m_IndexFboLastDeactivated(-1) 
@@ -97,7 +99,7 @@ void Renderer::Init()
     glClearColor(0.f, 0.f, 0.f, 0.f);
     
     // Enable Z-buffer read and write
-    //glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
     glDepthMask(GL_TRUE);
     glClearDepth(1.f);
     
@@ -180,11 +182,6 @@ void Renderer::UpdateProjectionViewMatrix()
 }
 
 
-void Renderer::DrawQuadTransparent(const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
-{
-    DrawMeshTransparent(*m_MeshQuad, textureOb, ModelMatrix);
-}
-
 void Renderer::DrawQuad(const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     DrawMesh(*m_MeshQuad, textureOb, ModelMatrix);
@@ -215,6 +212,8 @@ void Renderer::DrawQuad(const TextureOb& texOb, const Box2D& box) const
 
 void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
+ 	UseTransparentMode(textureOb.GetData().use_alpha);
+ 	
     UseProgram(m_Shaders.base);
 	{
 	    glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
@@ -228,20 +227,14 @@ void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm:
 	}
 }
 
-void Renderer::DrawMeshTransparent(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
-{
-    enable_BLEND();
-    {
-        DrawMesh(mesh, textureOb, ModelMatrix);
-    }
-    disable_BLEND();
-}
-
 void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     float ambient_factor = 0.25;       
     const glm::vec3& eye_pos = Screen::Instance().GetCamera().GetPos();
  
+ 	UseTransparentMode(textureOb.GetData().use_alpha);
+ 	//UseTransparentMode(false);
+ 	 	
     UseProgram(m_ProgramLight);
     {
 	    glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(ModelMatrix)));
@@ -269,6 +262,8 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
     float ambient_factor = 0.25; 
     const glm::vec3& eye_pos = Screen::Instance().GetCamera().GetPos();
    
+ 	UseTransparentMode(textureOb.GetData().use_alpha);
+    	
     UseProgram(m_Shaders.light_normalmap);
 	{
 	    glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(ModelMatrix)));
@@ -294,15 +289,10 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
 	}
 } 
 
-void Renderer::DrawMeshTransparentLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
-{
-    enable_BLEND();
-        DrawMeshLight(mesh, textureOb, ModelMatrix);
-    disable_BLEND();
-}
-
 void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
+ 	UseTransparentMode(textureOb.GetData().use_alpha);
+ 	
     UseProgram(m_Shaders.multitexturing);
 	{
 		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.multitexturing, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
@@ -330,6 +320,8 @@ void Renderer::DrawPostEffectCombined(const std::vector<GLuint>& textures, int w
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly 
 
+ 	UsePostEffectMode(true);
+ 	
     UseProgram(m_Shaders.combine);
     {
 		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.combine, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
@@ -403,6 +395,8 @@ void Renderer::DrawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
 
+ 	UsePostEffectMode(true);
+ 	
     UseProgram(m_Shaders.fogwarspark);
 	{
 		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.fogwarspark, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
@@ -427,12 +421,14 @@ void Renderer::DrawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec
 void Renderer::DrawPostEffectShockWaves(GLuint scene_texture, int w, int h, int i, float center_array[10][2], float xyz_array[10][3], float time_array[10]) const
 {
     // ugly 
-    float scale = 1.0;
+    //float scale = 1.0;
     glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, -499.0f));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
    
+ 	UsePostEffectMode(true);
+    	
     UseProgram(m_Shaders.shockwave);
 	{
 		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.shockwave, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
@@ -456,12 +452,14 @@ void Renderer::DrawPostEffectShockWaves(GLuint scene_texture, int w, int h, int 
 void Renderer::DrawPostEffectExtractBright(GLuint scene_texture, int w, int h, float brightThreshold) const
 {
     // ugly 
-    float scale = 1.0;
+    //float scale = 1.0;
     glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, -499.0f));
     glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
-                             
+      
+ 	UsePostEffectMode(true);
+       	                       
     UseProgram(m_Shaders.extractbright);
 	{
 		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.extractbright, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
@@ -479,7 +477,7 @@ void Renderer::DrawPostEffectExtractBright(GLuint scene_texture, int w, int h, f
 
 void Renderer::DrawPostEffectCombinedDebug(const std::vector<GLuint>& textures, int w, int h) const 
 {
-    float ratio = (float)h/w;
+    //float ratio = (float)h/w;
     unsigned int quad_num = textures.size();
     unsigned int quad_num_w = quad_num / 3;
     unsigned int quad_num_h = quad_num / 4;
@@ -497,6 +495,8 @@ void Renderer::DrawPostEffectCombinedDebug(const std::vector<GLuint>& textures, 
             glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
             // ugly 
     
+		 	UsePostEffectMode(true);
+     	
             UseProgram(m_Shaders.base);
 			{
 				glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
@@ -521,6 +521,8 @@ void Renderer::DrawPostEffectVolumetricLight(const glm::vec2& world_coord, int w
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
     
+ 	UsePostEffectMode(true);
+     	
     UseProgram(m_Shaders.volumetriclight);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.volumetriclight, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
@@ -548,6 +550,8 @@ void Renderer::DrawPostEffectBlur(GLuint texture, int w, int h) const
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
 
+ 	UsePostEffectMode(true);
+ 	
     UseProgram(m_ProgramBlur);
     {    
         glActiveTexture(GL_TEXTURE0);                              
@@ -573,6 +577,8 @@ void Renderer::DrawScreenQuadTextured(GLuint texture, int w, int h) const
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
 
+ 	UsePostEffectMode(true);
+ 	
     UseProgram(m_Shaders.base);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
@@ -588,9 +594,11 @@ void Renderer::DrawScreenQuadTextured(GLuint texture, int w, int h) const
  
 void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
-    enable_BLEND();
+    //enable_BLEND();
     enable_POINTSPRITE();
     {   
+     	UseTransparentMode(true);
+     	
         UseProgram(m_Shaders.particle);
         {    
             glActiveTexture(GL_TEXTURE0);                                
@@ -604,7 +612,7 @@ void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const
         }
     }
     disable_POINTSPRITE();
-    disable_BLEND();
+    //disable_BLEND();
 }
 
 void Renderer::UseProgram(GLuint program) const
@@ -615,7 +623,46 @@ void Renderer::UseProgram(GLuint program) const
         m_ActiveProgram = program; 
     }
 }
-        
+ 
+void Renderer::UseTransparentMode(bool transparent_mode_on) const
+{
+	if (m_TransparentModeOn != transparent_mode_on)
+	{
+		if (transparent_mode_on == true)
+		{
+			glEnable(GL_BLEND);
+			glDepthMask(GL_FALSE); // turn off depth buffer writing
+			//glDisable(GL_CULL_FACE);					
+		}
+		else
+		{
+			glDisable(GL_BLEND);
+			glDepthMask(GL_TRUE); // turn on depth buffer writing
+			//glEnable(GL_CULL_FACE);		
+		}
+
+		m_TransparentModeOn = transparent_mode_on;
+	}
+	
+	m_PostEffectModeOn = -1;
+}
+
+void Renderer::UsePostEffectMode(bool posteffect_mode_on) const
+{
+	if (m_PostEffectModeOn != posteffect_mode_on)
+	{
+		if (posteffect_mode_on == true)
+		{
+			glDisable(GL_BLEND);
+			glDepthMask(GL_FALSE);
+		}
+
+		m_PostEffectModeOn = posteffect_mode_on;
+	}
+	
+	m_TransparentModeOn = -1;
+}
+       
 void Renderer::DrawAxis(const glm::mat4& ModelMatrix, float width) const
 {
     //float r = 1.5f;
