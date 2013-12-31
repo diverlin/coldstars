@@ -27,6 +27,7 @@
 #include <render/Fbo.hpp>
 #include <render/Bloom.hpp>
 #include <render/Shaders.hpp>
+#include <render/Light.hpp>
 
 class Mesh;
 class TextureOb;
@@ -94,7 +95,7 @@ class Renderer : public NonCopyable
         glm::mat4 m_ViewMatrix;
         glm::mat4 m_ProjectionViewMatrix;
         
-        glm::vec4 m_Color;
+        Light m_Light;
         
         Shaders m_Shaders;
         

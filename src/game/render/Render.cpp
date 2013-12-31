@@ -44,7 +44,6 @@
 
 Renderer::Renderer()
 :
-m_Color(1.0f),
 m_ProgramLight(0),
 m_ProgramLightLocation_uProjectionViewMatrix(-1),
 m_ProgramLightLocation_uModelMatrix(-1),
@@ -61,7 +60,13 @@ m_PostEffectModeOn(-1),
 m_FboNum(5),
 m_IndexFboLastActivated(-1),
 m_IndexFboLastDeactivated(-1) 
-{}
+{
+    m_Light.position    = glm::vec3(0.0f, 0.0f, 200.0f);
+    m_Light.ambient     = glm::vec4(1.0f);
+    m_Light.diffuse     = glm::vec4(1.0f);
+    m_Light.specular    = glm::vec4(1.0f);
+    m_Light.attenuation = glm::vec3(0.0f);
+}
 
 Renderer::~Renderer() 
 {}
@@ -244,13 +249,20 @@ void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
 	    glUniformMatrix4fv(m_ProgramLightLocation_uModelMatrix         , 1, GL_FALSE, &ModelMatrix[0][0]);
 	    glUniformMatrix3fv(m_ProgramLightLocation_uNormalMatrix        , 1, GL_FALSE, &NormalModelMatrix[0][0]);
 	            
-	    glUniform3f(m_ProgramLightLocation_uLightPos, 0.0f, 0.0f, 200.0);
 	    glUniform3fv(m_ProgramLightLocation_uEyePos, 1, glm::value_ptr(eye_pos));
-	    
-	    glUniform4fv(m_ProgramLightLocation_uDiffColor, 1, glm::value_ptr(m_Color));
-        glm::vec4 c = ambient_factor*m_Color;
-	    glUniform4fv(m_ProgramLightLocation_uAmbientColor, 1, glm::value_ptr(c));
-	    
+
+        glUniform3fv(glGetUniformLocation(m_ProgramLight, "u_Light.position"), 1, glm::value_ptr(m_Light.position));
+        glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Light.ambient"),  1, glm::value_ptr(m_Light.ambient));
+        glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Light.diffuse"),  1, glm::value_ptr(m_Light.diffuse));
+        glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Light.specular"), 1, glm::value_ptr(m_Light.specular));
+        glUniform3fv(glGetUniformLocation(m_ProgramLight, "u_Light.attenuation"), 1, glm::value_ptr(m_Light.attenuation));
+
+        //glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.ambient"),  1, glm::value_ptr(material.ambient));
+        //glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.diffuse"),  1, glm::value_ptr(material.diffuse));
+        //glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.specular"), 1, glm::value_ptr(material.specular));
+        //glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.emission"), 1, glm::value_ptr(material.emission));
+        //glUniform1f(glGetUniformLocation(m_ProgramLight,  "u_Material.shininess"), material.shininess);
+
 	    glActiveTexture(GL_TEXTURE0);
 	    glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture); 
 	    glUniform1i(m_ProgramLightLocation_uTexture, 0);
@@ -276,9 +288,8 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
       
 		glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_lightPos"), 0.0f, 0.0f, 200.0);
 		glUniform3fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_eyePos"), 1, glm::value_ptr(eye_pos));
-		glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_diffColor"), 1, glm::value_ptr(m_Color));
-        glm::vec4 c = ambient_factor*m_Color;
-		glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_ambientColor"), 1, glm::value_ptr(c));
+		glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_diffColor"), 1, glm::value_ptr(m_Light.diffuse));
+		glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_ambientColor"), 1, glm::value_ptr(m_Light.ambient));
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
