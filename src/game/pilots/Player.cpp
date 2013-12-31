@@ -403,18 +403,15 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
             {
                 for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
                 { 
-                   visible_PLANET_vec[i]->Render_NEW(render); 
+                    visible_PLANET_vec[i]->Render_NEW(render); 
                 }
 
                 for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
                 { 
-                    if(visible_SPACESTATION_vec[i]->Is3D())
-                    {
-                       visible_SPACESTATION_vec[i]->RenderInSpace_3D(render, world_coord, 1/scale); 
-                    }
+                    visible_SPACESTATION_vec[i]->RenderInSpace(render, 1/scale); 
                 }
          
-                if (getRandInt(0, 30) == 0) std::cout<<"ship num rendered="<<visible_SHIP_vec.size()<<std::endl; 
+                //if (getRandInt(0, 30) == 0) std::cout<<"ship num rendered="<<visible_SHIP_vec.size()<<std::endl; 
                 for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
                 { 
                     visible_SHIP_vec[i]->RenderInSpace(render, 1/scale); 
@@ -434,16 +431,7 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
             //render.disable_DEPTH();
 
             //render.enable_BLEND();    
-            {    
-
-                for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
-                { 
-                    if(!visible_SPACESTATION_vec[i]->Is3D())
-                    {
-                        visible_SPACESTATION_vec[i]->RenderInSpace_2D(render, 1/scale); 
-                    }
-                }
-
+            {
                 for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
                 { 
                     visible_CONTAINER_vec[i]->Render(render); 
