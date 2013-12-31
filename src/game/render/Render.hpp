@@ -133,6 +133,8 @@ class Renderer : public NonCopyable
         void UpdateProjectionViewMatrix();
 
         void ResizePostEffects(int, int);
+        
+        void UseProgram(GLuint) const;
 };
 
 // TEXT

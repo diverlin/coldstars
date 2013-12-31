@@ -215,21 +215,17 @@ void Renderer::DrawQuad(const TextureOb& texOb, const Box2D& box) const
 
 void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
-    if (m_ActiveProgram != m_Shaders.base)
-    {
-        glUseProgram(0);
-        glUseProgram(m_Shaders.base);
-        m_ActiveProgram = m_Shaders.base; 
-    }
-
-    glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
-    glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
-
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture); 
-    glUniform1i(glGetUniformLocation(m_Shaders.base, "u_Texture"), 0);
-                        
-    mesh.Draw();
+    UseProgram(m_Shaders.base);
+	{
+	    glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
+	    glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
+	
+	    glActiveTexture(GL_TEXTURE0);
+	    glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture); 
+	    glUniform1i(glGetUniformLocation(m_Shaders.base, "u_Texture"), 0);
+	                        
+	    mesh.Draw();
+	}
 }
 
 void Renderer::DrawMeshTransparent(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
@@ -244,59 +240,52 @@ void Renderer::DrawMeshTransparent(const Mesh& mesh, const TextureOb& textureOb,
 void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     float ambient_factor = 0.25;       
-        
     const glm::vec3& eye_pos = Screen::Instance().GetCamera().GetPos();
  
-    if (m_ActiveProgram != m_ProgramLight)
+    UseProgram(m_ProgramLight);
     {
-        glUseProgram(m_ProgramLight);
-        m_ActiveProgram = m_ProgramLight; 
-    }
-
-    glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(ModelMatrix)));
-
-    glUniformMatrix4fv(m_ProgramLightLocation_uProjectionViewMatrix, 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
-    glUniformMatrix4fv(m_ProgramLightLocation_uModelMatrix         , 1, GL_FALSE, &ModelMatrix[0][0]);
-    glUniformMatrix3fv(m_ProgramLightLocation_uNormalMatrix        , 1, GL_FALSE, &NormalModelMatrix[0][0]);
-            
-    glUniform3f(m_ProgramLightLocation_uLightPos, 0.0f, 0.0f, 200.0);
-    glUniform3f(m_ProgramLightLocation_uEyePos  , eye_pos.x, eye_pos.y, eye_pos.z);
-    
-    glUniform4f(m_ProgramLightLocation_uDiffColor,    m_Color.r, m_Color.g, m_Color.b, m_Color.a);
-    glUniform4f(m_ProgramLightLocation_uAmbientColor, ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
-    
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture); 
-    glUniform1i(m_ProgramLightLocation_uTexture, 0);
-                        
-    mesh.Draw();
+	    glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(ModelMatrix)));
+	
+	    glUniformMatrix4fv(m_ProgramLightLocation_uProjectionViewMatrix, 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
+	    glUniformMatrix4fv(m_ProgramLightLocation_uModelMatrix         , 1, GL_FALSE, &ModelMatrix[0][0]);
+	    glUniformMatrix3fv(m_ProgramLightLocation_uNormalMatrix        , 1, GL_FALSE, &NormalModelMatrix[0][0]);
+	            
+	    glUniform3f(m_ProgramLightLocation_uLightPos, 0.0f, 0.0f, 200.0);
+	    glUniform3f(m_ProgramLightLocation_uEyePos  , eye_pos.x, eye_pos.y, eye_pos.z);
+	    
+	    glUniform4f(m_ProgramLightLocation_uDiffColor,    m_Color.r, m_Color.g, m_Color.b, m_Color.a);
+	    glUniform4f(m_ProgramLightLocation_uAmbientColor, ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
+	    
+	    glActiveTexture(GL_TEXTURE0);
+	    glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture); 
+	    glUniform1i(m_ProgramLightLocation_uTexture, 0);
+	                        
+	    mesh.Draw();
+	}
 }
 /*
 void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
-    float ambient_factor = 0.25;
- 
+    float ambient_factor = 0.25; 
     const glm::vec3& eye_pos = Screen::Instance().GetCamera().GetPos();
    
-    glUseProgram(m_Shaders.light_normalmap);
-    {
-        glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_lightPos"), 0.0f, 0.0f, 200.0);
-        glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_eyePos"), eye_pos.x, eye_pos.y, eye_pos.z);
-        glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_diffColor"), m_Color.r, m_Color.g, m_Color.b, m_Color.a);
-        glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_ambientColor"), ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
-                
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
-        glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_texture"), 0);
-        
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, textureOb.GetData().normalmap);
-        glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_normalmap"), 1);
-                
-        ComposeModelMatrix(ModelMatrix);                     
-        mesh.Draw();
-    }
-    glUseProgram(0);
+    UseProgram(m_Shaders.light_normalmap);
+
+	glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_lightPos"), 0.0f, 0.0f, 200.0);
+	glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_eyePos"), eye_pos.x, eye_pos.y, eye_pos.z);
+	glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_diffColor"), m_Color.r, m_Color.g, m_Color.b, m_Color.a);
+	glUniform4f(glGetUniformLocation(m_Shaders.light_normalmap, "u_ambientColor"), ambient_factor*m_Color.r, ambient_factor*m_Color.g, ambient_factor*m_Color.b, ambient_factor*m_Color.a);
+			
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
+	glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_texture"), 0);
+	
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, textureOb.GetData().normalmap);
+	glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_normalmap"), 1);
+			
+	ComposeModelMatrix(ModelMatrix);                     
+	mesh.Draw();
 } */
 
 void Renderer::DrawMeshTransparentLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
@@ -308,26 +297,23 @@ void Renderer::DrawMeshTransparentLight(const Mesh& mesh, const TextureOb& textu
 
 void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
-    glUseProgram(m_Shaders.multitexturing);
-    {
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.multitexturing, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.multitexturing, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
-
-        glActiveTexture(GL_TEXTURE0);                                
-        glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
-        glUniform1i(glGetUniformLocation(m_Shaders.multitexturing, "Texture_0"), 0);
-        
-        glActiveTexture(GL_TEXTURE1);                                
-        glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
-        glUniform1i(glGetUniformLocation(m_Shaders.multitexturing, "Texture_1"), 1);
-        
-        glUniform2f(glGetUniformLocation(m_Shaders.multitexturing, "displ"), textureOb.GetData().texture_offset.x, textureOb.GetData().texture_offset.y);        
-                  
-        mesh.Draw();
-
-        glActiveTexture(GL_TEXTURE0); 
-    }
-    glUseProgram(0);
+    UseProgram(m_Shaders.multitexturing);
+	{
+		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.multitexturing, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.multitexturing, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
+	
+		glActiveTexture(GL_TEXTURE0);                                
+		glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
+		glUniform1i(glGetUniformLocation(m_Shaders.multitexturing, "Texture_0"), 0);
+		
+		glActiveTexture(GL_TEXTURE1);                                
+		glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
+		glUniform1i(glGetUniformLocation(m_Shaders.multitexturing, "Texture_1"), 1);
+		
+		glUniform2f(glGetUniformLocation(m_Shaders.multitexturing, "displ"), textureOb.GetData().texture_offset.x, textureOb.GetData().texture_offset.y);        
+				  
+		mesh.Draw();
+	}
 }  
 
 void Renderer::DrawPostEffectCombined(const std::vector<GLuint>& textures, int w, int h) const 
@@ -338,71 +324,68 @@ void Renderer::DrawPostEffectCombined(const std::vector<GLuint>& textures, int w
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly 
 
-    glUseProgram(m_Shaders.combine);
+    UseProgram(m_Shaders.combine);
     {
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.combine, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.combine, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
-        
-        glActiveTexture(GL_TEXTURE0);                                
-        glBindTexture(GL_TEXTURE_2D, textures[0]);
-        glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_TextureScene"), 0);
-
-        
-        glActiveTexture(GL_TEXTURE1);                                
-        glBindTexture(GL_TEXTURE_2D, textures[1]);
-        glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass0_tex1"), 1);
-        
-        glActiveTexture(GL_TEXTURE2);        
-        glBindTexture(GL_TEXTURE_2D, textures[2]);
-        glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass0_tex2"), 2);
-        
-        glActiveTexture(GL_TEXTURE3);                                
-        glBindTexture(GL_TEXTURE_2D, textures[3]);
-        glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass0_tex3"), 3);
-        
-        glActiveTexture(GL_TEXTURE4);                                
-        glBindTexture(GL_TEXTURE_2D, textures[4]);
-        glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass0_tex4"), 4);
-        
-        
-        glActiveTexture(GL_TEXTURE5);                                
-        glBindTexture(GL_TEXTURE_2D, textures[5]);
-        glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass1_tex1"), 5);
-        
-        glActiveTexture(GL_TEXTURE6);                                
-        glBindTexture(GL_TEXTURE_2D, textures[6]);
-        glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass1_tex2"), 6);
-        
-        glActiveTexture(GL_TEXTURE7);                                
-        glBindTexture(GL_TEXTURE_2D, textures[7]);
-        glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass1_tex3"), 7);
-        
-        glActiveTexture(GL_TEXTURE8);                                
-        glBindTexture(GL_TEXTURE_2D, textures[8]);
-        glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass1_tex4"), 8);
-        
-        
-        glActiveTexture(GL_TEXTURE9);                                
-        glBindTexture(GL_TEXTURE_2D, textures[9]);
-        glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass2_tex1"), 9);
-        
-        glActiveTexture(GL_TEXTURE10);                                
-        glBindTexture(GL_TEXTURE_2D, textures[10]);
-        glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass2_tex2"), 10);
-        
-        glActiveTexture(GL_TEXTURE11);                                
-        glBindTexture(GL_TEXTURE_2D, textures[11]);
-        glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass2_tex3"), 11);
-        
-        glActiveTexture(GL_TEXTURE12);                                
-        glBindTexture(GL_TEXTURE_2D, textures[12]);
-        glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass2_tex4"), 12);
-
-        m_MeshQuad->Draw();
-
-        glActiveTexture(GL_TEXTURE0);
-    }
-    glUseProgram(0);
+		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.combine, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.combine, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
+		
+		glActiveTexture(GL_TEXTURE0);                                
+		glBindTexture(GL_TEXTURE_2D, textures[0]);
+		glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_TextureScene"), 0);
+	
+		
+		glActiveTexture(GL_TEXTURE1);                                
+		glBindTexture(GL_TEXTURE_2D, textures[1]);
+		glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass0_tex1"), 1);
+		
+		glActiveTexture(GL_TEXTURE2);        
+		glBindTexture(GL_TEXTURE_2D, textures[2]);
+		glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass0_tex2"), 2);
+		
+		glActiveTexture(GL_TEXTURE3);                                
+		glBindTexture(GL_TEXTURE_2D, textures[3]);
+		glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass0_tex3"), 3);
+		
+		glActiveTexture(GL_TEXTURE4);                                
+		glBindTexture(GL_TEXTURE_2D, textures[4]);
+		glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass0_tex4"), 4);
+		
+		
+		glActiveTexture(GL_TEXTURE5);                                
+		glBindTexture(GL_TEXTURE_2D, textures[5]);
+		glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass1_tex1"), 5);
+		
+		glActiveTexture(GL_TEXTURE6);                                
+		glBindTexture(GL_TEXTURE_2D, textures[6]);
+		glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass1_tex2"), 6);
+		
+		glActiveTexture(GL_TEXTURE7);                                
+		glBindTexture(GL_TEXTURE_2D, textures[7]);
+		glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass1_tex3"), 7);
+		
+		glActiveTexture(GL_TEXTURE8);                                
+		glBindTexture(GL_TEXTURE_2D, textures[8]);
+		glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass1_tex4"), 8);
+		
+		
+		glActiveTexture(GL_TEXTURE9);                                
+		glBindTexture(GL_TEXTURE_2D, textures[9]);
+		glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass2_tex1"), 9);
+		
+		glActiveTexture(GL_TEXTURE10);                                
+		glBindTexture(GL_TEXTURE_2D, textures[10]);
+		glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass2_tex2"), 10);
+		
+		glActiveTexture(GL_TEXTURE11);                                
+		glBindTexture(GL_TEXTURE_2D, textures[11]);
+		glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass2_tex3"), 11);
+		
+		glActiveTexture(GL_TEXTURE12);                                
+		glBindTexture(GL_TEXTURE_2D, textures[12]);
+		glUniform1i(glGetUniformLocation(m_Shaders.combine, "u_Pass2_tex4"), 12);
+	
+		m_MeshQuad->Draw();
+	}
 }
 
 void Renderer::DrawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec3& center, const glm::vec2& world_coord, float radius) const
@@ -414,25 +397,24 @@ void Renderer::DrawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
 
-    glUseProgram(m_Shaders.fogwarspark);
-    {
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.fogwarspark, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.fogwarspark, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
-
-        glActiveTexture(GL_TEXTURE0);                                
-        glBindTexture(GL_TEXTURE_2D, texture);
-        glUniform1i (glGetUniformLocation(m_Shaders.fogwarspark, "sceneTex"), 0);
-
-        glUniform2f(glGetUniformLocation(m_Shaders.fogwarspark, "resolution"), w, h);
-        glUniform2f(glGetUniformLocation(m_Shaders.fogwarspark, "center"), center.x/(w*scale), center.y/(h*scale));
-        glUniform1f(glGetUniformLocation(m_Shaders.fogwarspark, "radius"), radius/(h*scale));
-        glUniform2f(glGetUniformLocation(m_Shaders.fogwarspark, "world_coord"), world_coord.x/(w*scale), world_coord.y/(h*scale));
-
-        glUniform1f(glGetUniformLocation(m_Shaders.fogwarspark, "dcolor"), 0.5f/*npc->GetVehicle()->GetStarSystem()->GetStar()->GetDeltaColor()*/);
-
-        m_MeshQuad->Draw();
-    }
-    glUseProgram(0);    
+    UseProgram(m_Shaders.fogwarspark);
+	{
+		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.fogwarspark, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.fogwarspark, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
+	
+		glActiveTexture(GL_TEXTURE0);                                
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glUniform1i (glGetUniformLocation(m_Shaders.fogwarspark, "sceneTex"), 0);
+	
+		glUniform2f(glGetUniformLocation(m_Shaders.fogwarspark, "resolution"), w, h);
+		glUniform2f(glGetUniformLocation(m_Shaders.fogwarspark, "center"), center.x/(w*scale), center.y/(h*scale));
+		glUniform1f(glGetUniformLocation(m_Shaders.fogwarspark, "radius"), radius/(h*scale));
+		glUniform2f(glGetUniformLocation(m_Shaders.fogwarspark, "world_coord"), world_coord.x/(w*scale), world_coord.y/(h*scale));
+	
+		glUniform1f(glGetUniformLocation(m_Shaders.fogwarspark, "dcolor"), 0.5f/*npc->GetVehicle()->GetStarSystem()->GetStar()->GetDeltaColor()*/);
+	
+		m_MeshQuad->Draw();
+	}
 }
 
 
@@ -445,23 +427,22 @@ void Renderer::DrawPostEffectShockWaves(GLuint scene_texture, int w, int h, int 
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
    
-    glUseProgram(m_Shaders.shockwave);
-    {
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.shockwave, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.shockwave, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
-
-        glActiveTexture(GL_TEXTURE0);                                
-        glBindTexture(GL_TEXTURE_2D, scene_texture);
-        glUniform1i (glGetUniformLocation(m_Shaders.shockwave, "u_Texture"), 0);
-    
-        glUniform1i (glGetUniformLocation(m_Shaders.shockwave, "distortion_num"), i);
-        glUniform2fv(glGetUniformLocation(m_Shaders.shockwave, "center"),      i, *center_array);
-        glUniform3fv(glGetUniformLocation(m_Shaders.shockwave, "shockParams"), i, *xyz_array);
-        glUniform1fv(glGetUniformLocation(m_Shaders.shockwave, "time"),        i, time_array);
-    
-        m_MeshQuad->Draw();
-    }
-    glUseProgram(0);
+    UseProgram(m_Shaders.shockwave);
+	{
+		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.shockwave, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.shockwave, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
+	
+		glActiveTexture(GL_TEXTURE0);                                
+		glBindTexture(GL_TEXTURE_2D, scene_texture);
+		glUniform1i (glGetUniformLocation(m_Shaders.shockwave, "u_Texture"), 0);
+	
+		glUniform1i (glGetUniformLocation(m_Shaders.shockwave, "distortion_num"), i);
+		glUniform2fv(glGetUniformLocation(m_Shaders.shockwave, "center"),      i, *center_array);
+		glUniform3fv(glGetUniformLocation(m_Shaders.shockwave, "shockParams"), i, *xyz_array);
+		glUniform1fv(glGetUniformLocation(m_Shaders.shockwave, "time"),        i, time_array);
+	
+		m_MeshQuad->Draw();
+	}
 }
 
 
@@ -475,20 +456,19 @@ void Renderer::DrawPostEffectExtractBright(GLuint scene_texture, int w, int h, f
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
                              
-    glUseProgram(m_Shaders.extractbright);
-    {
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.extractbright, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
-        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.extractbright, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
-
-        glActiveTexture(GL_TEXTURE0);                                
-        glBindTexture(GL_TEXTURE_2D, scene_texture);
-        glUniform1i(glGetUniformLocation(m_Shaders.extractbright, "source"), 0);
-    
-        glUniform1f(glGetUniformLocation(m_Shaders.extractbright, "threshold"), brightThreshold);
-        
-        m_MeshQuad->Draw();
-    }
-    glUseProgram(0);
+    UseProgram(m_Shaders.extractbright);
+	{
+		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.extractbright, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
+		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.extractbright, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
+	
+		glActiveTexture(GL_TEXTURE0);                                
+		glBindTexture(GL_TEXTURE_2D, scene_texture);
+		glUniform1i(glGetUniformLocation(m_Shaders.extractbright, "source"), 0);
+	
+		glUniform1f(glGetUniformLocation(m_Shaders.extractbright, "threshold"), brightThreshold);
+		
+		m_MeshQuad->Draw();
+	}
 }
 
 void Renderer::DrawPostEffectCombinedDebug(const std::vector<GLuint>& textures, int w, int h) const 
@@ -511,18 +491,17 @@ void Renderer::DrawPostEffectCombinedDebug(const std::vector<GLuint>& textures, 
             glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
             // ugly 
     
-            glUseProgram(m_Shaders.base);
-            {
-                glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
-                glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
-                
-                glActiveTexture(GL_TEXTURE0);                                
-                glBindTexture(GL_TEXTURE_2D, textures[i+j]);
-                glUniform1i(glGetUniformLocation(m_Shaders.base, "u_TextureScene"), 0);
-        
-                m_MeshQuad->Draw();
-            }
-            glUseProgram(0);
+            UseProgram(m_Shaders.base);
+			{
+				glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
+				glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
+				
+				glActiveTexture(GL_TEXTURE0);                                
+				glBindTexture(GL_TEXTURE_2D, textures[i+j]);
+				glUniform1i(glGetUniformLocation(m_Shaders.base, "u_TextureScene"), 0);
+		
+				m_MeshQuad->Draw();
+			}
         }
     }
 }
@@ -536,7 +515,7 @@ void Renderer::DrawPostEffectVolumetricLight(const glm::vec2& world_coord, int w
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
     
-    glUseProgram(m_Shaders.volumetriclight);
+    UseProgram(m_Shaders.volumetriclight);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.volumetriclight, "u_ProjectionMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.volumetriclight, "u_ModelMatrix")     , 1, GL_FALSE, &ModelMatrix[0][0]);
@@ -552,10 +531,7 @@ void Renderer::DrawPostEffectVolumetricLight(const glm::vec2& world_coord, int w
         glUniform4f(glGetUniformLocation(m_Shaders.volumetriclight, "sun_pos"), -world_coord.x/(w*scale), -world_coord.y/(h*scale), -100.0, 1.0);
 
         m_MeshQuad->Draw(); 
- 
-        glActiveTexture(GL_TEXTURE0);
     }
-    glUseProgram(0);
 }
 
 void Renderer::DrawPostEffectBlur(GLuint texture, int w, int h) const
@@ -566,7 +542,7 @@ void Renderer::DrawPostEffectBlur(GLuint texture, int w, int h) const
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
 
-    glUseProgram(m_ProgramBlur);
+    UseProgram(m_ProgramBlur);
     {    
         glActiveTexture(GL_TEXTURE0);                              
         glBindTexture(GL_TEXTURE_2D, texture);
@@ -581,7 +557,6 @@ void Renderer::DrawPostEffectBlur(GLuint texture, int w, int h) const
         
         m_MeshQuad->Draw();
     }
-    glUseProgram(0);
 }
 
 void Renderer::DrawScreenQuadTextured(GLuint texture, int w, int h) const
@@ -592,7 +567,7 @@ void Renderer::DrawScreenQuadTextured(GLuint texture, int w, int h) const
     glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
     // ugly
 
-    glUseProgram(m_Shaders.base);
+    UseProgram(m_Shaders.base);
     {
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
         glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
@@ -603,7 +578,6 @@ void Renderer::DrawScreenQuadTextured(GLuint texture, int w, int h) const
                     
         m_MeshQuad->Draw();
     }
-    glUseProgram(0);
 }
  
 void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
@@ -611,7 +585,7 @@ void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const
     enable_BLEND();
     enable_POINTSPRITE();
     {   
-        glUseProgram(m_Shaders.particle);
+        UseProgram(m_Shaders.particle);
         {    
             glActiveTexture(GL_TEXTURE0);                                
             glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
@@ -622,12 +596,20 @@ void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const
       
             mesh.Draw(GL_POINTS);
         }
-        glUseProgram(0);
     }
     disable_POINTSPRITE();
     disable_BLEND();
 }
 
+void Renderer::UseProgram(GLuint program) const
+{
+	if (m_ActiveProgram != program)
+    {
+        glUseProgram(program);
+        m_ActiveProgram = program; 
+    }
+}
+        
 void Renderer::DrawAxis(const glm::mat4& ModelMatrix, float width) const
 {
     //float r = 1.5f;
