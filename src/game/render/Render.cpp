@@ -149,15 +149,11 @@ void Renderer::MakeShortCuts()
 {
     {
     m_ProgramLight = m_Shaders.light;
-    m_ProgramLightLocation_uProjectionViewMatrix = glGetUniformLocation(m_ProgramLight, "u_ProjectionViewMatrix");
-    m_ProgramLightLocation_uModelMatrix          = glGetUniformLocation(m_ProgramLight, "u_ModelMatrix");
-    m_ProgramLightLocation_uNormalMatrix         = glGetUniformLocation(m_ProgramLight, "u_NormalModelMatrix");
+    m_ProgramLightLocation_uProjectionViewMatrix = glGetUniformLocation(m_ProgramLight, "u_Matrices.projectionView");
+    m_ProgramLightLocation_uModelMatrix          = glGetUniformLocation(m_ProgramLight, "u_Matrices.model");
+    m_ProgramLightLocation_uNormalMatrix         = glGetUniformLocation(m_ProgramLight, "u_Matrices.normal");
             
-    m_ProgramLightLocation_uLightPos = glGetUniformLocation(m_ProgramLight, "u_LightPos");
     m_ProgramLightLocation_uEyePos   = glGetUniformLocation(m_ProgramLight, "u_EyePos");
-    
-    m_ProgramLightLocation_uDiffColor     = glGetUniformLocation(m_ProgramLight, "u_DiffColor");
-    m_ProgramLightLocation_uAmbientColor  = glGetUniformLocation(m_ProgramLight, "u_AmbientColor");                    
         
     m_ProgramLightLocation_uTexture  = glGetUniformLocation(m_ProgramLight, "u_Texture"); 
     }            
