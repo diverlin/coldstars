@@ -11,20 +11,20 @@ struct Light
     vec3  attenuation;
 };
 
-//struct Material
-//{
-    //vec4  ambient;
-    //vec4  diffuse;
-    //vec4  specular;
-    //vec4  emission;
-    //float shininess;
-//};
+struct Material
+{
+    vec4  ambient;
+    vec4  diffuse;
+    vec4  specular;
+    vec4  emission;
+    float shininess;
+};
 
 layout(location = FRAG_OUTPUT0) out vec4 color;
 
 uniform sampler2D u_Texture;
 uniform Light u_Light;
-//uniform Material u_Material;
+uniform Material u_Material;
 
 in vec3 v_VertPos2lightPos_n; 
 in vec3 v_VertPos2eyePos_n; 

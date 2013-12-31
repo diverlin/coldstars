@@ -40,7 +40,11 @@ struct MaterialData
     int row_num;
     int size_id;
 
-    glm::vec4 color;
+    glm::vec4 ambient;
+    glm::vec4 diffuse;
+    glm::vec4 specular;
+    glm::vec4 emission;
+    float shininess;
 
     GLuint texture;
     GLuint normalmap;
@@ -73,7 +77,11 @@ struct MaterialData
     col_num(1),
     row_num(1),    
     size_id(0),
-    color(1.0f),
+    ambient(0.2f),
+    diffuse(0.8f),
+    specular(0.5f),
+    emission(1.0f),
+    shininess(1.0f),
     texture(0),
     normalmap(0),
     is_animated(false),        

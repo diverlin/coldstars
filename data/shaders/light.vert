@@ -14,14 +14,14 @@ struct Light
     vec3  attenuation;
 };
 
-//struct Material
-//{
-    //vec4  ambient;
-    //vec4  diffuse;
-    //vec4  specular;
-    //vec4  emission;
-    //float shininess;
-//};
+struct Material
+{
+    vec4  ambient;
+    vec4  diffuse;
+    vec4  specular;
+    vec4  emission;
+    float shininess;
+};
 
 uniform mat4 u_ModelMatrix;
 uniform mat4 u_ProjectionViewMatrix;
@@ -30,7 +30,7 @@ uniform mat3 u_NormalModelMatrix;
 uniform vec3 u_EyePos;
 
 uniform Light u_Light;
-//uniform Material u_Material;
+uniform Material u_Material;
 
 layout(location = VERTEX_POSITION_LOCATION) in vec3 position;
 layout(location = VERTEX_TEXCOORD_LOCATION) in vec2 texcoord;
