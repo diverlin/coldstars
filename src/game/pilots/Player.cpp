@@ -369,8 +369,7 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
         // render background and star to FBO0
         render.ActivateFbo(0, w, h);
         {
-            //render.SetPerspectiveProjection(w, h);                
-            render.SetOrthogonalProjection(w*scale, h*scale);
+            render.SetPerspectiveProjection(w, h);                
             starsystem->DrawBackground(render, world_coord);
             render.SetOrthogonalProjection(w*scale, h*scale);
                         

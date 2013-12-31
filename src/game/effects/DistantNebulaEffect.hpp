@@ -20,19 +20,19 @@
 #ifndef DISTANTNEBULAEFFECT_HPP
 #define DISTANTNEBULAEFFECT_HPP
 
-#include <effects/BaseBackGroundEffect.hpp>    
-#include <types/MyInt.hpp>
-#include <render/Render.hpp>
+#include <effects/BaseDecor.hpp>    
+//#include <types/MyInt.hpp>
+//#include <render/Render.hpp>
 
-class DistantNebulaEffect : public BaseBackGroundEffect
+class DistantNebulaEffect : public BaseDecor
 {
     public:
         DistantNebulaEffect();
-        ~DistantNebulaEffect(); 
+        virtual ~DistantNebulaEffect(); 
         
         void Update();
         
-        void Render(const Renderer&);
+        virtual void Render(const Renderer&, const glm::vec3&) override;
         
         void Save(boost::property_tree::ptree&, const std::string&) const;        
         void Load(const boost::property_tree::ptree&);

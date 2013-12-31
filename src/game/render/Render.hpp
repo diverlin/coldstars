@@ -31,6 +31,11 @@
 class Mesh;
 class TextureOb;
 
+const float SCREEM_QUAD_ZPOS = -999.0f;
+const float ZNEAR = 0.1f;
+const float ZFAR = 1000.0f;
+
+
 enum class PROJECTION_TYPE { PERSPECTIVE, ORTHOGONAL};
 
 class Renderer : public NonCopyable

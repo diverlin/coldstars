@@ -824,7 +824,7 @@ void StarSystem::DrawBackground(const Renderer& render, const glm::vec2& scroll_
 {   
     for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++)
     { 
-        distantNebulaEffect_vec[i]->Render(render); 
+        distantNebulaEffect_vec[i]->Render(render, glm::vec3(1.0f)); 
     }
 
     for(unsigned int i=0; i<distantStarEffect_vec.size(); i++)
