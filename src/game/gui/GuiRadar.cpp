@@ -98,7 +98,7 @@ void GuiRadar::RenderUnique(const Renderer& render, Player* player) const
     //drawTexturedRect(textureOb_range, range_rect, -2.0);
             
     float size, size_base = 7;
-    render.enable_POINTSPRITE();  
+    //render.enable_POINTSPRITE();  
     {         
         for (unsigned int i=0; i<entity_vec.size(); i++)
         {
@@ -140,5 +140,5 @@ void GuiRadar::RenderUnique(const Renderer& render, Player* player) const
             //drawParticle(rect.GetCenter() + vec3ToVec2(entity_vec[i]->GetCenter()*scale)/scale_render, size);            
         }
     }
-    render.disable_POINTSPRITE(); 
+    //render.disable_POINTSPRITE(); 
 }

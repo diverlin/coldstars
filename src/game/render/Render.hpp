@@ -55,30 +55,15 @@ class Renderer : public NonCopyable
         const Fbo& GetLastFbo() const { return m_Fbos[m_IndexFboLastDeactivated]; };
         const Shaders& GetShaders() const { return m_Shaders; }
         
-        void ClearScreen() const { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
-        
-        void enable_CULLFACE() const    { /*glEnable(GL_CULL_FACE);*/ }
-        void disable_CULLFACE() const   { /*glDisable(GL_CULL_FACE);*/ }
-        
-        void enable_BLEND() const   { glEnable(GL_BLEND);  }
-        void disable_BLEND() const  { glDisable(GL_BLEND); }
-        
-        void enable_DEPTH() const   { glEnable(GL_DEPTH_TEST); }
-        void disable_DEPTH() const  { glDisable(GL_DEPTH_TEST); }
-        
-        void enable_POINTSPRITE() const     { glEnable(GL_POINT_SPRITE); glEnable(GL_PROGRAM_POINT_SIZE); }    
-        void disable_POINTSPRITE() const    { glDisable(GL_POINT_SPRITE); glDisable(GL_PROGRAM_POINT_SIZE); }   
-                
+        void ClearColorAndDepthBuffers() const { glDepthMask(GL_TRUE); glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
+                       
         void ComposeViewMatrix(const glm::mat4&);
 
         void DrawMesh                (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void DrawMeshTransparent     (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawMeshLight           (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawMeshLightNormalMap  (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void DrawMeshTransparentLight(const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawMeshMultiTextured   (const Mesh&, const TextureOb&, const glm::mat4&) const;
 
-        void DrawQuadTransparent(const TextureOb&, const glm::mat4&) const;
         void DrawQuad(const TextureOb&, const glm::mat4&) const;
         void DrawQuad(const TextureOb&, const Box2D&) const;
 
@@ -119,8 +104,10 @@ class Renderer : public NonCopyable
         GLint m_ProgramLightLocation_uTexture; 
     
         GLuint m_ProgramBlur; 
-        mutable GLuint m_ActiveProgram;  
-
+        mutable GLuint m_ActiveProgram; 
+        mutable int m_TransparentModeOn; 
+        mutable int m_PostEffectModeOn; 
+        
         int m_FboNum;
         Fbo m_Fbos[5];
  
@@ -134,6 +121,11 @@ class Renderer : public NonCopyable
         void ResizePostEffects(int, int);
         
         void UseProgram(GLuint) const;
+        void UseTransparentMode(bool) const;
+        void UsePostEffectMode(bool) const;
+                
+		void enable_POINTSPRITE() const     { glEnable(GL_POINT_SPRITE); glEnable(GL_PROGRAM_POINT_SIZE); }    
+        void disable_POINTSPRITE() const    { glDisable(GL_POINT_SPRITE); glDisable(GL_PROGRAM_POINT_SIZE); }   
 };
 
 // TEXT

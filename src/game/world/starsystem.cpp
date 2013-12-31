@@ -822,24 +822,16 @@ void StarSystem::FindRadarVisibleEntities_c(Player* player)
 
 void StarSystem::DrawBackground(const Renderer& render, const glm::vec2& scroll_coords)
 {   
-    render.enable_BLEND();
-    {
-        glDepthMask(false);   // FIXME MOVE TO RENDER
-    
-        for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++)
-        { 
-            distantNebulaEffect_vec[i]->Render(render); 
-        }
-    
-        for(unsigned int i=0; i<distantStarEffect_vec.size(); i++)
-        { 
-            DistantStarEffect& ds = *distantStarEffect_vec[i]; 
-            render.DrawParticles(ds.GetMesh(), ds.GetTextureOb(), ds.GetActualModelMatrix()); 
-        }
-           
-        glDepthMask(true);  // FIXME MOVE TO RENDER
+    for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++)
+    { 
+        distantNebulaEffect_vec[i]->Render(render); 
     }
-    render.disable_BLEND();
+
+    for(unsigned int i=0; i<distantStarEffect_vec.size(); i++)
+    { 
+        DistantStarEffect& ds = *distantStarEffect_vec[i]; 
+        render.DrawParticles(ds.GetMesh(), ds.GetTextureOb(), ds.GetActualModelMatrix()); 
+    }
 }
     
 void StarSystem::DrawOrbits(const Renderer& render)

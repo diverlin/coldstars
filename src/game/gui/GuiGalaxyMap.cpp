@@ -145,7 +145,7 @@ void GuiGalaxyMap::RenderUnique(const Renderer& render, Player* player) const
                                    
             //TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::DISTANTSTAR_ID, starsystem.STAR_vec[0]->GetColorId()); 
             
-            render.enable_POINTSPRITE();
+            //render.enable_POINTSPRITE();
             {     
                 //drawParticleTextured(texOb_particle->texture, starsystem_pos, 30.0, -2.0);
                 
@@ -160,7 +160,7 @@ void GuiGalaxyMap::RenderUnique(const Renderer& render, Player* player) const
                     //drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_war->texture, starsystem_pos + offset, 20.0, -2.0);
                 } 
             }               
-            render.disable_POINTSPRITE();   
+            //render.disable_POINTSPRITE();   
 
             int font_size = 8;  
             glm::vec2 offset(0.0, 13.0);
@@ -168,7 +168,7 @@ void GuiGalaxyMap::RenderUnique(const Renderer& render, Player* player) const
         }               
     }     
     
-    render.enable_POINTSPRITE();
+    //render.enable_POINTSPRITE();
     {
         glm::vec2 player_starsystem_pos = vec3ToVec2(GetAbsoluteStarSystemPosition(*player->GetNpc()->GetVehicle()->GetStarSystem())); 
         
@@ -181,5 +181,5 @@ void GuiGalaxyMap::RenderUnique(const Renderer& render, Player* player) const
             //m_VisualHyperJumpPath.Draw();           
         }
     }
-    render.disable_POINTSPRITE();  
+    //render.disable_POINTSPRITE();  
 }

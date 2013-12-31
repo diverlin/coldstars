@@ -159,7 +159,7 @@ void Cursor::UpdateMouseStuff()
 
 void Cursor::RenderFocusedObjectStuff(const Renderer& render) const
 {
-    render.enable_BLEND();
+    //render.enable_BLEND();
     {
         float scale = 1.1;
         if (m_FocusedSpaceObject != nullptr)
@@ -184,12 +184,12 @@ void Cursor::RenderFocusedObjectStuff(const Renderer& render) const
             }
         }
     }
-    render.disable_BLEND();  
+    //render.disable_BLEND();  
 }
 
 void Cursor::RenderFocusedObjectInfo(const Renderer& render) const
 {
-    render.enable_BLEND();
+    //render.enable_BLEND();
     {
         if (m_FocusedGuiElement != nullptr)
         {
@@ -201,14 +201,14 @@ void Cursor::RenderFocusedObjectInfo(const Renderer& render) const
             m_FocusedSpaceObject->RenderInfoInSpace(render, Screen::Instance().GetBottomLeftScreenWC(), Screen::Instance().GetScale());
         }
     }
-    render.disable_BLEND();  
+    //render.disable_BLEND();  
 }
 
 void Cursor::RenderItem(const Renderer& render) const
 {
-    render.enable_BLEND();
+    //render.enable_BLEND();
     {
         m_ItemSlot->RenderItem(render, m_Box, glm::vec2(0));   
     }
-    render.disable_BLEND();
+    //render.disable_BLEND();
 }
