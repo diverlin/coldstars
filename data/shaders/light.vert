@@ -38,21 +38,31 @@ layout(location = VERTEX_NORMAL_LOCATION)   in vec3 normal;
 
 out struct Vertex
 {
-    vec3 normal_n;
     vec2 texcoord;
+    vec3 normal_n;
     vec3 lightDir_n; 
     vec3 eyeDir_n; 
+    float attenuation;
 } v_Vertex;
 
 void main(void)
 {
     vec4 vertexPos = u_Matrices.model * vec4(position, 1.0f);      
-    gl_Position    = u_Matrices.projectionView * vertexPos; 
 
-    v_Vertex.normal_n   = normalize(u_Matrices.normal * normal);   
-    v_Vertex.texcoord   = texcoord;           
-    v_Vertex.lightDir_n = normalize(u_Light.position - vertexPos.xyz);              
-    v_Vertex.eyeDir_n   = normalize(u_EyePos         - vertexPos.xyz);   
+    vec3 lightDir = u_Light.position - vertexPos.xyz;  
+
+    v_Vertex.texcoord   = texcoord;   
+    v_Vertex.normal_n   = normalize(u_Matrices.normal * normal); 
+    v_Vertex.lightDir_n = normalize(lightDir);              
+    v_Vertex.eyeDir_n   = normalize(u_EyePos - vertexPos.xyz);   
+    
+    float distance   = length(lightDir);
+
+    v_Vertex.attenuation = 1.0f / (u_Light.attenuation[0] +
+                                   u_Light.attenuation[1] * distance +
+                                   u_Light.attenuation[2] * distance * distance);
+
+    gl_Position = u_Matrices.projectionView * vertexPos;
 }
 
 

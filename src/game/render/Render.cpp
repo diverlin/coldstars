@@ -63,9 +63,9 @@ m_IndexFboLastDeactivated(-1)
 {
     m_Light.position    = glm::vec3(0.0f, 0.0f, 200.0f);
     m_Light.ambient     = glm::vec4(0.2f);
-    m_Light.diffuse     = glm::vec4(0.8f);
-    m_Light.specular    = glm::vec4(0.5f);
-    m_Light.attenuation = glm::vec3(0.0f);
+    m_Light.diffuse     = glm::vec4(1.0f);
+    m_Light.specular    = glm::vec4(1.5f);
+    m_Light.attenuation = glm::vec3(0.1f);
 }
 
 Renderer::~Renderer() 
