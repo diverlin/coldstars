@@ -283,10 +283,20 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
 	    glUniformMatrix4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Matrices.model")         , 1, GL_FALSE, &ModelMatrix[0][0]);
 	    glUniformMatrix3fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Matrices.normal")        , 1, GL_FALSE, &NormalModelMatrix[0][0]);
       
-		glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_lightPos"), 0.0f, 0.0f, 200.0);
-		glUniform3fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_eyePos"), 1, glm::value_ptr(eye_pos));
-		glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_diffColor"), 1, glm::value_ptr(m_Light.diffuse));
-		glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_ambientColor"), 1, glm::value_ptr(m_Light.ambient));
+	    glUniform3fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_EyePos"), 1, glm::value_ptr(eye_pos));
+
+        glUniform3fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Light.position"), 1, glm::value_ptr(m_Light.position));
+        glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Light.ambient"),  1, glm::value_ptr(m_Light.ambient));
+        glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Light.diffuse"),  1, glm::value_ptr(m_Light.diffuse));
+        glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Light.specular"), 1, glm::value_ptr(m_Light.specular));
+        glUniform3fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Light.attenuation"), 1, glm::value_ptr(m_Light.attenuation));
+
+        const MaterialData& material = textureOb.GetData();
+        glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Material.ambient"),  1, glm::value_ptr(material.ambient));
+        glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Material.diffuse"),  1, glm::value_ptr(material.diffuse));
+        glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Material.specular"), 1, glm::value_ptr(material.specular));
+        glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Material.emission"), 1, glm::value_ptr(material.emission));
+        glUniform1f(glGetUniformLocation(m_Shaders.light_normalmap,  "u_Material.shininess"), material.shininess);
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
