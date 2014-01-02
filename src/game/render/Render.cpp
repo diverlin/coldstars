@@ -233,8 +233,8 @@ void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm:
 void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     float ambient_factor = 0.25;       
-    const glm::vec3& eye_pos = Screen::Instance().GetCamera().GetPos();
- 
+    const glm::vec3& eye_pos = Screen::Instance().GetCamera().GetEyePos();
+
  	UseTransparentMode(textureOb.GetData().use_alpha);
  	 	
     UseProgram(m_ProgramLight);

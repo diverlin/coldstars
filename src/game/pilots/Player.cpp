@@ -550,7 +550,9 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
 {   
     Renderer& renderer = Screen::Instance().GetRender();
     Camera& camera = Screen::Instance().GetCamera();
-    camera.Update();
+    int w = Screen::Instance().GetWidth();
+    int h = Screen::Instance().GetHeight();
+    camera.Update(w, h);
     
     renderer.ComposeViewMatrix(camera.GetViewMatrix());
 

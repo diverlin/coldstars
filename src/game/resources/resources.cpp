@@ -51,7 +51,7 @@ void load3DModels()
     material_data.texture_path = DATA_PATH+"obj/vehicles/BabylonStation/station_texture/babylonstation.jpg";
     TextureOb* textureOb = new TextureOb(material_data); 
     Mesh* mesh = new Mesh(TYPE::MESH::SPACESTATION_ID, DATA_PATH+"obj/vehicles/BabylonStation/babylon_station_mod.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);  
-//Mesh* mesh = new Mesh(TYPE::MESH::SPACESTATION_ID, DATA_PATH+"obj/plane/plane.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);    
+//Mesh* mesh = new Mesh(TYPE::MESH::SPACESTATION_ID, DATA_PATH+"obj/sphere/sphere.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);    
     MeshCollector::Instance().RegisterMesh(mesh);
     }
 
@@ -63,6 +63,7 @@ void load3DModels()
 //Mesh* mesh = new Mesh(TYPE::MESH::SPACESTATION_ID, DATA_PATH+"obj/plane/plane.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);    
     MeshCollector::Instance().RegisterMesh(mesh);
     }
+
 }
 
 

@@ -42,10 +42,14 @@ void Camera::AddMoveSpeed(const glm::vec3& speed)
     }
 }
 
-void Camera::Update()
+void Camera::Update(int w, int h)
 {
     m_MoveSpeed *= m_InertiaFactor;
     m_Pos += m_MoveSpeed; 
     
-    m_Vm = glm::lookAt(m_Pos, m_Pos+m_Dir, m_Up);
+    m_Vm = glm::lookAt(m_Pos, m_Pos + m_Dir, m_Up);
+
+    m_EyePos = m_Pos;
+    m_EyePos.x += w/2;
+    m_EyePos.y += h/2;
 }

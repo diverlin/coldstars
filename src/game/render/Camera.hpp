@@ -32,13 +32,16 @@ class Camera : public NonCopyable
         ~Camera();
 
         const glm::vec3& GetPos() const { return m_Pos; }
+        const glm::vec3& GetEyePos() const { return m_EyePos; }
         const glm::mat4& GetViewMatrix() const { return m_Vm; }
          
         void AddMoveSpeed(const glm::vec3&);
         
-        void Update();  
+        void Update(int, int);  
                     
     private:
+        glm::vec3 m_EyePos;
+
         glm::vec3 m_Pos;
         glm::vec3 m_Dir;
         glm::vec3 m_Up;
