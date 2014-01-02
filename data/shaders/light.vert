@@ -48,6 +48,7 @@ out struct Vertex
 void main(void)
 {
     vec4 vertexPos = u_Matrices.model * vec4(position, 1.0f);      
+   gl_Position = u_Matrices.projectionView * vertexPos;
 
     v_Vertex.texcoord = texcoord;   
     v_Vertex.normal   = u_Matrices.normal * normal; 
@@ -59,8 +60,6 @@ void main(void)
     v_Vertex.attenuation = 1.0f / (u_Light.attenuation[0] +
                                    u_Light.attenuation[1] * distance +
                                    u_Light.attenuation[2] * distance * distance);
-
-    gl_Position = u_Matrices.projectionView * vertexPos;
 }
 
 

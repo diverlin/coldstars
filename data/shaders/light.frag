@@ -2,8 +2,6 @@
 
 #define FRAG_OUTPUT0 0
 
-layout(location = FRAG_OUTPUT0) out vec4 color;
-
 uniform sampler2D u_Texture;
 
 uniform struct Light
@@ -33,6 +31,8 @@ in struct Vertex
     float attenuation;
 } v_Vertex;
  
+layout(location = FRAG_OUTPUT0) out vec4 color;
+
 void main (void)
 {  	
     vec3 normal_n   = normalize(v_Vertex.normal); 

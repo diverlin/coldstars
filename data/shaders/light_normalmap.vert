@@ -12,33 +12,48 @@ uniform struct Matrices
     mat3 normal;
 } u_Matrices;
 
-uniform vec3 u_LightPos;
 uniform vec3 u_EyePos;
+
+uniform struct Light
+{
+    vec3  position;
+    vec4  ambient;
+    vec4  diffuse;
+    vec4  specular;
+    vec3  attenuation;
+} u_Light;
+
+uniform struct Material
+{
+    vec4  ambient;
+    vec4  diffuse;
+    vec4  specular;
+    vec4  emission;
+    float shininess;
+} u_Material;
 
 layout(location = VERTEX_POSITION_LOCATION) in vec3 position;
 layout(location = VERTEX_TEXCOORD_LOCATION) in vec2 texcoord;
 layout(location = VERTEX_NORMAL_LOCATION)   in vec3 normal;
 
-out vec2 v_Texcoord;
-out vec3 v_Normal_n;
-out vec3 v_VertPos2lightPos_n; 
-out vec3 v_VertPos2eyePos_n; 
-
-out vec3 v_VertPos2lightPos_ts_n;
-out vec3 v_VertPos2eyePos_ts_n;
-
+out struct Vertex
+{
+    vec2 texcoord;
+    vec3 normal;
+    vec3 lightDir_ts; 
+    vec3 eyeDir_ts; 
+    float attenuation;
+} v_Vertex;
  
 void main(void)
 {
     vec4 vertexPos = u_Matrices.model * vec4(position, 1.0f);      
     gl_Position = u_Matrices.projectionView * vertexPos;      
       
-    v_Normal_n = normalize(u_Matrices.normal * normal);                            
-
-   	v_VertPos2lightPos_n = normalize(u_LightPos - vertexPos.xyz);              
-    v_VertPos2eyePos_n   = normalize(u_EyePos   - vertexPos.xyz); 
-
-    v_Texcoord = texcoord;                                                       
+    v_Vertex.texcoord = texcoord; 
+    v_Vertex.normal = u_Matrices.normal * normal;                            
+   	vec3 lightDir = vertexPos.xyz - u_Light.position;              
+    vec3 eyeDir   = vertexPos.xyz - u_EyePos; 
 
     // tangent space
     vec3 tangent;
@@ -53,12 +68,8 @@ void main(void)
     vec3 b = cross(n,t);
     mat3 tangent_mat = mat3(t.x, b.x, n.x, t.y, b.y, n.y, t.z, b.z, n.z);
     
-    v_VertPos2lightPos_ts_n = normalize(tangent_mat * v_VertPos2lightPos_n);
-    
-    vec3 vector = normalize(-vertexPos.xyz);
-
-    //v_VertPos2eyePos_ts_n = vec3(1.0);//tangent_mat*vector;  
-    v_VertPos2eyePos_ts_n = tangent_mat * vector; 
+    v_Vertex.lightDir_ts = normalize(tangent_mat * lightDir);
+    v_Vertex.eyeDir_ts   = normalize(tangent_mat * eyeDir); 
 }
 
 
