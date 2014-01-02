@@ -300,11 +300,11 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
-		glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_texture"), 0);
+		glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_Texture"), 0);
 		
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, textureOb.GetData().normalmap);
-		glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_normalmap"), 1);
+		glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_Normalmap"), 1);
                   
 		mesh.Draw();
 	}
