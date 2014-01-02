@@ -277,11 +277,11 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
     	
     UseProgram(m_Shaders.light_normalmap);
 	{
-	    glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(ModelMatrix)));
-	
-	    glUniformMatrix4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
-	    glUniformMatrix4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
-	    glUniformMatrix3fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_NormalModelMatrix")   , 1, GL_FALSE, &NormalModelMatrix[0][0]);
+	    glm::mat3 NormalModelMatrix = glm::transpose(glm::mat3(glm::inverse(ModelMatrix)));          
+
+	    glUniformMatrix4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Matrices.projectionView"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);
+	    glUniformMatrix4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Matrices.model")         , 1, GL_FALSE, &ModelMatrix[0][0]);
+	    glUniformMatrix3fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Matrices.normal")        , 1, GL_FALSE, &NormalModelMatrix[0][0]);
       
 		glUniform3f(glGetUniformLocation(m_Shaders.light_normalmap, "u_lightPos"), 0.0f, 0.0f, 200.0);
 		glUniform3fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_eyePos"), 1, glm::value_ptr(eye_pos));
