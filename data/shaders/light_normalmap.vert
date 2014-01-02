@@ -5,9 +5,12 @@
 #define VERTEX_NORMAL_LOCATION   2
 #define VERTEX_COLOR_LOCATION    3
 
-uniform mat4 u_ModelMatrix;
-uniform mat4 u_ProjectionViewMatrix;
-uniform mat3 u_NormalModelMatrix;
+uniform struct Matrices
+{
+    mat4 model;
+    mat4 projectionView;
+    mat3 normal;
+} u_Matrices;
 
 uniform vec3 u_LightPos;
 uniform vec3 u_EyePos;
@@ -27,10 +30,10 @@ out vec3 v_VertPos2eyePos_ts_n;
  
 void main(void)
 {
-    vec4 vertexPos = u_ModelMatrix * vec4(position, 1.0f);      
-    gl_Position = u_ProjectionViewMatrix * vertexPos;      
+    vec4 vertexPos = u_Matrices.model * vec4(position, 1.0f);      
+    gl_Position = u_Matrices.projectionView * vertexPos;      
       
-    v_Normal_n = normalize(u_NormalModelMatrix * normal);                            
+    v_Normal_n = normalize(u_Matrices.normal * normal);                            
 
    	v_VertPos2lightPos_n = normalize(u_LightPos - vertexPos.xyz);              
     v_VertPos2eyePos_n   = normalize(u_EyePos   - vertexPos.xyz); 
@@ -45,8 +48,8 @@ void main(void)
     if(length(v1)>length(v2)) tangent=v1;
     else                      tangent=v2;
     
-    vec3 n = normalize(u_NormalModelMatrix * normal);
-    vec3 t = normalize(u_NormalModelMatrix * tangent);
+    vec3 n = normalize(u_Matrices.normal * normal);
+    vec3 t = normalize(u_Matrices.normal * tangent);
     vec3 b = cross(n,t);
     mat3 tangent_mat = mat3(t.x, b.x, n.x, t.y, b.y, n.y, t.z, b.z, n.z);
     
