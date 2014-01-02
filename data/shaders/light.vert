@@ -39,9 +39,9 @@ layout(location = VERTEX_NORMAL_LOCATION)   in vec3 normal;
 out struct Vertex
 {
     vec2 texcoord;
-    vec3 normal_n;
-    vec3 lightDir_n; 
-    vec3 eyeDir_n; 
+    vec3 normal;
+    vec3 lightDir; 
+    vec3 eyeDir; 
     float attenuation;
 } v_Vertex;
 
@@ -49,14 +49,12 @@ void main(void)
 {
     vec4 vertexPos = u_Matrices.model * vec4(position, 1.0f);      
 
-    vec3 lightDir = u_Light.position - vertexPos.xyz;  
-
-    v_Vertex.texcoord   = texcoord;   
-    v_Vertex.normal_n   = normalize(u_Matrices.normal * normal); 
-    v_Vertex.lightDir_n = normalize(lightDir);              
-    v_Vertex.eyeDir_n   = normalize(u_EyePos - vertexPos.xyz);   
+    v_Vertex.texcoord = texcoord;   
+    v_Vertex.normal   = u_Matrices.normal * normal; 
+    v_Vertex.lightDir = vertexPos.xyz - u_Light.position;              
+    v_Vertex.eyeDir   = vertexPos.xyz - u_EyePos;   
     
-    float distance   = length(lightDir);
+    float distance = length(v_Vertex.lightDir);
 
     v_Vertex.attenuation = 1.0f / (u_Light.attenuation[0] +
                                    u_Light.attenuation[1] * distance +
