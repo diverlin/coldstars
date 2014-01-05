@@ -35,6 +35,7 @@
 #include "../effects/particlesystem/DriveEffect.hpp"
 
 #include <math/myVector.hpp>
+#include <math/QuaternionUtils.hpp>
 
 DriveComplex::DriveComplex()
 :
@@ -300,85 +301,117 @@ void DriveComplex::CalcPath()
     #endif   
     
     ClearPath();
-        
+
+    int round_counter_max = 2000;//2 + 2*M_PI/angle_step;
+    int round_counter = 0;
+
     float speed_base = m_OwnerVehicle->GetProperties().speed;
     
     glm::vec3 new_center(m_OwnerVehicle->GetCenter());
-    glm::vec3 target_dir(m_TargetPos - m_OwnerVehicle->GetCenter());
-    target_dir = glm::normalize(target_dir);
-    
-    float az = atan2(m_OwnerVehicle->GetDirection().y, m_OwnerVehicle->GetDirection().x);
-    //float az = acos(glm::dot(m_OwnerVehicle->GetDirection(), glm::vec3(1.0f, 0.0f, 0.0f)));
-    
-    //glm::vec3 orient(cos(az), sin(az), 0.0f);
-    glm::vec3 direction = m_OwnerVehicle->GetDirection();
-        
-    glm::vec3 gravity;
-    const StarSystem& starsystem = *m_OwnerVehicle->GetStarSystem();
-    int mass = m_OwnerVehicle->GetMass();
-    
-    int sign = 1;
-    float angle_step = 1.0f * DEGREE_TO_RADIAN_RATE;
-    int round_counter = 0;
-    int round_counter_max = 2 + 2*M_PI/angle_step;
-    while(glm::length(new_center-m_TargetPos) > 2*speed_base)
+    glm::vec3 target_dir = glm::normalize(m_TargetPos - m_OwnerVehicle->GetCenter());
+
+    glm::quat zero_quat;    
+    glm::quat target_quat;
+
+    glm::vec3 direction = glm::normalize(m_OwnerVehicle->GetDirection());
+
+    RotationBetweenVectors(target_quat, direction, target_dir);
+    glm::quat interpolated_quat = glm::lerp(zero_quat, target_quat, 0.02f);
+    while (std::fabs(glm::dot(direction, target_dir)) < 0.9999) 
     {
-        target_dir = glm::normalize(glm::vec3(m_TargetPos - new_center));
-            
-        float cosa = glm::dot(direction, target_dir);
-        if (std::fabs(cosa) < 0.999) 
-        {
-            if (round_counter == 0)
-            {
-                float prob_az1 = az + angle_step;
-                float prob_az2 = az - angle_step;
-                
-                glm::vec3 prob_direction1(cos(prob_az1), sin(prob_az1), 0.0);
-                glm::vec3 prob_direction2(cos(prob_az2), sin(prob_az2), 0.0);
-                
-                float prob_cosa1 = glm::dot(prob_direction1, target_dir);        
-                float prob_cosa2 = glm::dot(prob_direction2, target_dir);
-                        
-                if (prob_cosa1 > 0)
-                {
-                    if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))      { sign = -1; }
-                    else                                                    { sign = 1; }
-                }
-                else
-                {
-                    if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))      { sign = 1; }
-                    else                                                    { sign = -1; }
-                }
-            }
-        
-            az += sign*angle_step;
-            std::cout<<az<<std::endl;
-            direction.x = cos(az);
-            direction.y = sin(az);
-        
-            cosa = glm::dot(direction, target_dir);
-            
-            round_counter++;
-            if (round_counter > round_counter_max) // target_pos is not reachable (within circle)
-            {
-                ClearPath();
-                return;
-            }        
-        }
-        else
-        {
-            round_counter = 0;
-        }
+        direction = interpolated_quat * direction;
+ 
+        new_center += direction * speed_base/* * gravity_rate*/;
+        target_dir = glm::normalize(m_TargetPos - new_center);
 
-/* UGLY */ if (m_PathCenterVec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<<m_OwnerVehicle->GetId()<<std::endl; break; }
+        m_PathCenterVec.push_back(new_center);
+        m_PathDirectionVec.push_back(direction);
 
-        float gravity_rate = starsystem.CalcResultGravityForce(new_center, direction, mass);        
+        round_counter++;
+        if (round_counter > round_counter_max) // target_pos is not reachable (within circle)
+        {
+            //ClearPath();
+            break;
+            //return;
+        } 
+    }
+
+    //float az = atan2(m_OwnerVehicle->GetDirection().y, m_OwnerVehicle->GetDirection().x);
+    ////float az = acos(glm::dot(glm::vec3(1.0f, 0.0f, 0.0f), m_OwnerVehicle->GetDirection()));
+    //std::cout<<"angle= "<<glm::degrees(az)<<std::endl;
+
+    //glm::vec3 direction = m_OwnerVehicle->GetDirection();
         
-        new_center += direction*speed_base*gravity_rate;
+    //glm::vec3 gravity;
+    //const StarSystem& starsystem = *m_OwnerVehicle->GetStarSystem();
+    //int mass = m_OwnerVehicle->GetMass();
+    
+    //int sign = 1;
+    //float angle_step = glm::radians(1.0f);
+
+    //int round_counter_max = 2 + 2*M_PI/angle_step;
+    //int round_counter = 0;
+    //while (std::fabs(glm::dot(direction, target_dir)) < 0.999) 
+    //{
+        //if (round_counter == 0)
+        //{
+            //float prob_az1 = az + angle_step;
+            //float prob_az2 = az - angle_step;
+            
+            //glm::vec3 prob_direction1(cos(prob_az1), sin(prob_az1), 0.0);
+            //glm::vec3 prob_direction2(cos(prob_az2), sin(prob_az2), 0.0);
+            
+            //float prob_cosa1 = glm::dot(prob_direction1, target_dir);        
+            //float prob_cosa2 = glm::dot(prob_direction2, target_dir);
+                    
+            //if (prob_cosa1 > 0)
+            //{
+                //if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))      { sign = -1; }
+                //else                                                    { sign = 1; }
+            //}
+            //else
+            //{
+                //if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))      { sign = 1; }
+                //else                                                    { sign = -1; }
+            //}
+        //}        
+    
+        //az += sign * angle_step;
+
+        //direction.x = cos(az);
+        //direction.y = sin(az);
+        
+        //round_counter++;
+        //if (round_counter > round_counter_max) // target_pos is not reachable (within circle)
+        //{
+            //ClearPath();
+            //return;
+        //}  
+
+        ////float gravity_rate = starsystem.CalcResultGravityForce(new_center, direction, mass);        
+        
+        //new_center += direction * speed_base/* * gravity_rate*/;
+
+        //m_PathCenterVec.push_back(new_center);
+        //m_PathDirectionVec.push_back(direction);
+    //}
+
+
+/*
+
+    while(glm::length(m_TargetPos - new_center) > 2*speed_base)
+    {
+
+// UGLY
+if (m_PathCenterVec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<<m_OwnerVehicle->GetId()<<std::endl; break; }
+
+
+        new_center += direction * speed_base * gravity_rate;
                 
         m_PathCenterVec.push_back(new_center);
         m_PathDirectionVec.push_back(direction);
     }           
+*/
 
     if (m_PathCenterVec.size() > 1)
     {
@@ -388,6 +421,57 @@ void DriveComplex::CalcPath()
     else
     {
         ClearPath();    
+    }
+}
+
+void DriveComplex::CalcPath_DEBUG()
+{       
+
+    glm::vec3 direction  = glm::vec3(1.0, 0.0, 0.0);
+    float alphatarget = M_PI;    
+    glm::vec3 target_dir = glm::normalize(glm::vec3(cos(alphatarget), sin(alphatarget), 0.0));
+  
+    std::cout<<target_dir.x<<" "<<target_dir.y<<std::endl;
+      
+   // float az = 0.0;
+
+    int sign = 1;
+    float angle_step = 0.1;
+
+    float cosa = glm::dot(direction, target_dir);
+    float a = acos(cosa);
+    for (int i=0; i<32; i++) 
+    {/*
+        if (round_counter == 0)
+        {
+            float prob_az1 = az + angle_step;
+            float prob_az2 = az - angle_step;
+            
+            glm::vec3 prob_direction1(cos(prob_az1), sin(prob_az1), 0.0);
+            glm::vec3 prob_direction2(cos(prob_az2), sin(prob_az2), 0.0);
+            
+            float prob_cosa1 = glm::dot(prob_direction1, target_dir);        
+            float prob_cosa2 = glm::dot(prob_direction2, target_dir);
+                    
+            if (prob_cosa1 > 0)
+            {
+                if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))      { sign = -1; }
+                else                                                    { sign = 1; }
+            }
+            else
+            {
+                if (std::fabs(prob_cosa2) > std::fabs(prob_cosa1))      { sign = 1; }
+                else                                                    { sign = -1; }
+            }
+        }
+    */
+
+        a += sign*angle_step;
+        std::cout<<"alpha="<<glm::degrees(a)<<" dir="<<direction.x<<" "<<direction.y<<std::endl;
+        direction.x = cos(a);
+        direction.y = sin(a);
+    
+
     }
 }
 

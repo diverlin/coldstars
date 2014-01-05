@@ -92,6 +92,7 @@ class DriveComplex
         
         void ClearPath();
         void CalcPath();      
+        void CalcPath_DEBUG();      
 
         bool ValidateTarget() const;
         
