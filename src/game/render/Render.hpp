@@ -36,6 +36,7 @@ const float SCREEM_QUAD_ZPOS = -999.0f;
 const float ZNEAR = 0.1f;
 const float ZFAR = 1000.0f;
 
+const int FBO_NUM = 6;
 
 enum class PROJECTION_TYPE { PERSPECTIVE, ORTHOGONAL};
 
@@ -87,6 +88,8 @@ class Renderer : public NonCopyable
         void DrawAxis(const glm::mat4&, float) const;
         void DrawVector(const glm::vec3&, const glm::vec3&, float, float) const;                                             
         void DrawVector(const glm::vec3&, const glm::mat4&, float) const;  
+
+        void DrawStarField(int, int, float, float) const;
                                                                  
     private:
         Mesh* m_MeshQuad;
@@ -115,7 +118,7 @@ class Renderer : public NonCopyable
         mutable int m_PostEffectModeOn; 
         
         int m_FboNum;
-        Fbo m_Fbos[5];
+        Fbo m_Fbos[FBO_NUM];
  
         int m_IndexFboLastActivated;
         int m_IndexFboLastDeactivated;

@@ -367,6 +367,7 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
     //render.enable_CULLFACE();
     {
         // render background and star to FBO0
+/*
         render.ActivateFbo(0, w, h);
         {
             render.SetPerspectiveProjection(w, h);                
@@ -380,26 +381,32 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
             }
         }
         render.DeactivateFbo(0);
-
+*/
         // BLOOM background and star (uses many FBO)
         // resizeGl(w, h); 
-        render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
+        //render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
         
         // VOLUMETRIC LIGHT to FBO1
         // resizeGl(w, h); 
         render.ActivateFbo(1, w, h);
         {
-            render.DrawPostEffectVolumetricLight(world_coord, w, h);
+            render.DrawStarField(w/2, h/2, -world_coord.x/10000.0f, -world_coord.y/10000.0f); 
+            //render.DrawPostEffectVolumetricLight(world_coord, w, h);
         }
         render.DeactivateFbo(1);
 
-        // render space entites to FBO2     
         render.ActivateFbo(2, w, h);
+        {
+            render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w*2, h*2);
+        }
+        render.DeactivateFbo(2); 
+
+        // render space entites to FBO2     
+        render.ActivateFbo(3, w, h);
         {
             render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
            
             // resizeGl(w*scale, h*scale);     
-            //render.enable_DEPTH();  
             {
                 for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
                 { 
@@ -411,7 +418,7 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
                     visible_SPACESTATION_vec[i]->RenderInSpace(render, 1/scale); 
                 }
          
-                //if (getRandInt(0, 30) == 0) std::cout<<"ship num rendered="<<visible_SHIP_vec.size()<<std::endl; 
+                if (getRandInt(0, 30) == 0) std::cout<<"ship num rendered="<<visible_SHIP_vec.size()<<std::endl; 
                 for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
                 { 
                     visible_SHIP_vec[i]->RenderInSpace(render, 1/scale); 
@@ -428,9 +435,7 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
                 } 
                      
             }
-            //render.disable_DEPTH();
-
-            //render.enable_BLEND();    
+  
             {
                 for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
                 { 
@@ -454,14 +459,13 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
                 }
 
             }
-            //render.disable_BLEND();
 
         }
-        render.DeactivateFbo(2);
+        render.DeactivateFbo(3);
 
         // SHOCKWAVE post process to Fbo3
         //resizeGl(w, h); 
-        render.ActivateFbo(3, w, h);
+        render.ActivateFbo(4, w, h);
         {
             float center_array[SHOCKWAVES_MAX_NUM][2];
             float xyz_array[SHOCKWAVES_MAX_NUM][3];
@@ -493,10 +497,10 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
            
             render.DrawPostEffectShockWaves(render.GetLastFbo().GetTexture(), w, h, i, center_array, xyz_array, time_array);
         }
-        render.DeactivateFbo(3);
+        render.DeactivateFbo(4);
 
         // render effects not distorted by SHOCKWAVE
-        render.ActivateFbo(4, w, h);
+        render.ActivateFbo(5, w, h);
         {
             //resizeGl(w, h); 
             render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
@@ -516,20 +520,16 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
                 render.DrawParticles(ps.GetMesh(), ps.GetTextureOb(), ps.GetActualModelMatrix()); 
             }             
         }
-        render.DeactivateFbo(4);
-       
- //       render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
+        render.DeactivateFbo(5);
+
+        render.ClearColorAndDepthBuffers();       
+        render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
   
         // FOGWAR and STARSPARK to final scene
         //resizeGl(w, h); 
             
-        glEnable(GL_TEXTURE_2D);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);      // unbind fbo
-        
-        render.ClearColorAndDepthBuffers();
-        //resetRenderTransformation();    
-        
-        render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->GetVehicle()->GetCenter(), world_coord, 200 /*npc->GetVehicle()->GetProperties().radius*/);         
+      
+        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->GetVehicle()->GetCenter(), world_coord, 200 /*npc->GetVehicle()->GetProperties().radius*/);         
        
         // render text
         //resizeGl(w*scale, h*scale); 

@@ -2743,6 +2743,7 @@ void loadShaders()
     shaders.flash           = compileProgram(SHADERS_PATH+"flash.vert",             SHADERS_PATH+"flash.frag");
     shaders.mask            = compileProgram(SHADERS_PATH+"mask.vert",              SHADERS_PATH+"mask.frag");
     shaders.particle        = compileProgram(SHADERS_PATH+"particle.vert",          SHADERS_PATH+"particle.frag");
+    shaders.starfield       = compileProgram(SHADERS_PATH+"starfield.vert",         SHADERS_PATH+"starfield.frag");
     
     Screen::Instance().GetRender().SetShaders(shaders);
 }
