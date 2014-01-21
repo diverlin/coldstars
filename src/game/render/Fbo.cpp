@@ -69,9 +69,9 @@ void Fbo::Activate(int width, int height)
 
 void Fbo::Deactivate()
 {
-    glActiveTexture(GL_TEXTURE0);                // debug
+    glActiveTexture(GL_TEXTURE0);                // debug     ???
     glPopAttrib();                               // restore viewport
-    glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 

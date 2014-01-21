@@ -57,7 +57,7 @@ m_ProgramBlur(0),
 m_ActiveProgram(0),
 m_TransparentModeOn(-1),
 m_PostEffectModeOn(-1),
-m_FboNum(5),
+m_FboNum(FBO_NUM),
 m_IndexFboLastActivated(-1),
 m_IndexFboLastDeactivated(-1) 
 {
@@ -634,6 +634,30 @@ void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const
     disable_POINTSPRITE();
 }
 
+void Renderer::DrawStarField(int w, int h, float pos_x, float pos_y) const
+{
+    // ugly 
+    glm::mat4 TranslateMatrix = glm::translate(glm::vec3(w/2, h/2, SCREEM_QUAD_ZPOS));
+    glm::mat4 ScaleMatrix     = glm::scale(glm::vec3(w/2, h/2, 1.0f));
+    glm::mat4 ModelMatrix     = TranslateMatrix * ScaleMatrix;
+    // ugly
+
+ 	UsePostEffectMode(true);
+ 	
+    UseProgram(m_Shaders.starfield); 
+    {
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.starfield, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionMatrix[0][0]);
+        glUniformMatrix4fv(glGetUniformLocation(m_Shaders.starfield, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
+
+        glUniform2f(glGetUniformLocation(m_Shaders.starfield, "resolution")   , w, h);
+        glUniform2f(glGetUniformLocation(m_Shaders.starfield, "mouse")   , pos_x, pos_y);
+        glUniform1f(glGetUniformLocation(m_Shaders.starfield, "time"), 1.0f);
+                    
+        m_MeshQuad->Draw();
+    }
+}
+
+
 void Renderer::UseProgram(GLuint program) const
 {
 	if (m_ActiveProgram != program)
@@ -752,9 +776,6 @@ void Renderer::DrawVector(const glm::vec3& v, const glm::mat4& ModelMatrix, floa
     
     //glEnable(GL_TEXTURE_2D);
 }
-
-
-
 
 
 

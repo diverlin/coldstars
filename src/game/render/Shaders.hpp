@@ -39,6 +39,7 @@ struct Shaders
     GLuint flash;
     GLuint mask;
     GLuint particle;
+    GLuint starfield;
 };
 
 #endif 
