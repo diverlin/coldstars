@@ -12,7 +12,7 @@ Mesh::Mesh(TYPE::MESH type_id, const std::string& path, const glm::vec3& directi
 m_TypeId(type_id),
 m_PrimitiveType(GL_TRIANGLES),
 m_TextureOb(textureOb),
-m_Direction(direction),
+m_OriginDirection(direction),
 m_VertexCount(0),
 m_ListId(0),
 m_VaoId(0),        

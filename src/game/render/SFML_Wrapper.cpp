@@ -34,8 +34,7 @@ void SFML_Wrapper::wrResizeSpecific(int width, int height)
 {    
     view.setViewport(sf::FloatRect(0, 0, width, height));
     window.setView(view);
-    sf::Vector2u size(width, height);
-    window.setSize(size);
+    window.setSize(sf::Vector2u(width, height));
 }
         
 void SFML_Wrapper::wrDrawSpecific()

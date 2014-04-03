@@ -90,7 +90,7 @@ class BaseDrawable : public Orientation
         glm::mat4 m_MatrixRotate;
         glm::mat4 m_MatrixScale;
  
-        glm::quat m_QuatPosition;
+        glm::quat m_QuatDirection;
         glm::quat m_QuatAnimation;        
 
         void UpdateRenderAnimation();

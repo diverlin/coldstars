@@ -45,7 +45,7 @@ class Mesh
         TYPE::MESH GetTypeId() const { return m_TypeId; }
         TextureOb* GetTextureOb() const { return m_TextureOb; }
         const glm::vec3& GetBoundaryBox() const { return m_BoundaryBox; }
-        const glm::vec3& GetDirection() const { return m_Direction; }
+        const glm::vec3& GetOriginDirection() const { return m_OriginDirection; }
 
         void FillVertices(const ObjLoader&);
         void FillPointVertices(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
@@ -62,7 +62,7 @@ class Mesh
         std::vector<Vertex> m_Vertices; 
         glm::vec3 m_BoundaryBox;
 
-        glm::vec3 m_Direction;
+        glm::vec3 m_OriginDirection;
     
         uint32_t m_VertexCount;
 
