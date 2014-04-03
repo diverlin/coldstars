@@ -63,7 +63,7 @@ void BaseDrawable::SetRenderData(Mesh* mesh, TextureOb* textureOb, const glm::ve
     m_TextureOb = textureOb; 
     SetSize(size);
     SetCollisionRadius((size.x + size.y) / 4.0);
-    SetDirection(mesh->GetDirection());
+    SetDirection(mesh->GetOriginDirection());
 }
 
 //void BaseDrawable::BindData2D(TextureOb* textureOb)
@@ -130,15 +130,15 @@ const glm::mat4& BaseDrawable::GetActualModelMatrix()
 {    
     if (m_Mesh) // hack  (in future each ob will have mesh, for example for 2D it's plane)
     {
-        RotationBetweenVectors(m_QuatPosition, m_Mesh->GetDirection(), GetDirection());
+        RotationBetweenVectors(m_QuatDirection, m_Mesh->GetOriginDirection(), GetDirection());
         if (m_AnimationRotation != nullptr)
         {
-            m_AnimationRotation->Update(m_QuatAnimation, m_Mesh->GetDirection());        
+            m_AnimationRotation->Update(m_QuatAnimation, m_Mesh->GetOriginDirection());
         }
     }
     
     m_MatrixTranslate = glm::translate(GetCenter());    
-    m_MatrixRotate    = glm::toMat4(m_QuatPosition * m_QuatAnimation); 
+    m_MatrixRotate    = glm::toMat4(m_QuatDirection * m_QuatAnimation);
     m_MatrixScale     = glm::scale(GetSize());
       
     m_MatrixModel = m_MatrixTranslate * m_MatrixScale * m_MatrixRotate;
