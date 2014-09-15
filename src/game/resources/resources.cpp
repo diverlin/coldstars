@@ -38,8 +38,6 @@ void loadGameData()
     loadShaders();
 }
 
-
-
 void load3DModels()
 {        
     MeshCollector::Instance().RegisterMesh(new Mesh(TYPE::MESH::PLANE_ID,           DATA_PATH+"obj/plane/plane.obj",   glm::vec3(0.0f, 0.0f, 1.0f), nullptr));
