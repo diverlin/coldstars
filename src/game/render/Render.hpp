@@ -62,7 +62,8 @@ class Renderer : public NonCopyable
         const Fbo& GetLastFbo() const { return m_Fbos[m_IndexFboLastDeactivated]; };
         const Shaders& GetShaders() const { return m_Shaders; }
         
-        void ClearColorAndDepthBuffers() const { glDepthMask(GL_TRUE); glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
+        void ClearColorAndDepthBuffers() const
+        { glDepthMask(GL_TRUE); glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
                        
         void ComposeViewMatrix(const glm::mat4&);
 
