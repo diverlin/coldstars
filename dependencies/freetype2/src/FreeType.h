@@ -2,11 +2,11 @@
 #define FREE_NEHE_H
 
 //FreeType Headers
-#include <freetype2/ft2build.h>
-#include <freetype/freetype.h>
-#include <freetype/ftglyph.h>
-#include <freetype/ftoutln.h>
-#include <freetype/fttrigon.h>
+#include <ft2build.h>
+#include <freetype.h>
+#include <ftglyph.h>
+#include <ftoutln.h>
+#include <fttrigon.h>
 
 //OpenGL Headers 
 #include <GL/gl.h>
