@@ -30,6 +30,8 @@
 #include <types/EntityTypes.hpp>
 #include <types/TechLevelTypes.hpp>
 
+const bool FALSE_RESOURCES = false;
+
 struct MaterialData
 {
     int id;

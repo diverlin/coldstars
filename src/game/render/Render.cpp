@@ -235,7 +235,9 @@ void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
     float ambient_factor = 0.25;       
     const glm::vec3& eye_pos = Screen::Instance().GetCamera().GetEyePos();
 
- 	UseTransparentMode(textureOb.GetData().use_alpha);
+    const MaterialData& material = textureOb.GetData();
+
+    UseTransparentMode(material.use_alpha);
  	 	
     UseProgram(m_ProgramLight);
     {
@@ -253,7 +255,6 @@ void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
         glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Light.specular"), 1, glm::value_ptr(m_Light.specular));
         glUniform3fv(glGetUniformLocation(m_ProgramLight, "u_Light.attenuation"), 1, glm::value_ptr(m_Light.attenuation));
 
-        const MaterialData& material = textureOb.GetData();
         glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.ambient"),  1, glm::value_ptr(material.ambient));
         glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.diffuse"),  1, glm::value_ptr(material.diffuse));
         glUniform4fv(glGetUniformLocation(m_ProgramLight, "u_Material.specular"), 1, glm::value_ptr(material.specular));

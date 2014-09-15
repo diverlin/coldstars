@@ -60,7 +60,7 @@ class TextureManager
         std::vector<TextureOb*> vehicleslot_texOb_vec;
         std::vector<TextureOb*> turrel_texOb_vec;
             
-            std::vector<TextureOb*> particles_texOb_vec;
+        std::vector<TextureOb*> particles_texOb_vec;
 
         // BACKGROUND 
         std::vector<TextureOb*> nebulaBgEffect_texOb_vec;
@@ -82,7 +82,7 @@ class TextureManager
         // SPACE OBJECTS
         std::vector<TextureOb*> spacestation_texOb_vec;
         std::vector<TextureOb*> satellite_texOb_vec;
-            std::vector<TextureOb*> star_texOb_vec;
+        std::vector<TextureOb*> star_texOb_vec;
         std::vector<TextureOb*> planet_texOb_vec;
         std::vector<TextureOb*> atmosphere_texOb_vec;
         std::vector<TextureOb*> ring_texOb_vec;
@@ -159,9 +159,11 @@ class TextureManager
         std::vector<TextureOb*> face_race6_texOb_vec;
         std::vector<TextureOb*> face_race7_texOb_vec;
     
-        TextureOb* GetRandomTextureObFromVec(const std::vector<TextureOb*>&);
-        TextureOb* GetShipTexObByClosestSizeFromVec(const std::vector<TextureOb*>&, int);
-        TextureOb* GetShipTexObBySizeFromVec(const std::vector<TextureOb*>&, int);
+        TextureOb* _GetRandomTextureObFromVec(const std::vector<TextureOb*>&);
+        TextureOb* _TryGetRandomTextureObFromVec(const std::vector<TextureOb*>&);
+        TextureOb* _GetShipTexObByClosestSizeFromVec(const std::vector<TextureOb*>&, int);
+        TextureOb* _GetShipTexObBySizeFromVec(const std::vector<TextureOb*>&, int);
+        TextureOb* _TryGetShipTexObBySizeFromVec(const std::vector<TextureOb*>&, int);
 };
 
 #endif 

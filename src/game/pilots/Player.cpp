@@ -576,8 +576,6 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
     renderer.ComposeViewMatrix(camera.GetViewMatrix());
 
     //float scale = Screen::Instance().GetScale();
-    //int w = Screen::Instance().GetWidth();
-    //int h = Screen::Instance().GetHeight();
 
     RenderInSpace_NEW(renderer, starsystem);
 

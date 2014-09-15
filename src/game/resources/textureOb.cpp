@@ -24,6 +24,7 @@
 
 #include "../common/IdGenerator.hpp"
 #include "../common/common.hpp"
+#include <math/rand.hpp>
 #include "../render/Screen.hpp"
 
 TextureOb::TextureOb(const MaterialData& data)
@@ -40,12 +41,27 @@ TextureOb::TextureOb(const MaterialData& data)
     {
         m_Data.is_animated = true;
     }   
-    
-    if (m_Data.normalmap_path != "")
+
+    if (!FALSE_RESOURCES)
     {
-        loadToVRAM(m_Data.normalmap_path, m_Data.normalmap, m_Data.w, m_Data.h); 
+        if (m_Data.normalmap_path != "")
+        {
+            loadToVRAM(m_Data.normalmap_path, m_Data.normalmap, m_Data.w, m_Data.h);
+        }
+        loadToVRAM(m_Data.texture_path, m_Data.texture, m_Data.w, m_Data.h);
     }
-    loadToVRAM(m_Data.texture_path, m_Data.texture, m_Data.w, m_Data.h); 
+    else
+    {
+        switch(getRandInt(0, 4))
+        {
+            case 0: { m_Data.texture_path = "/home/diverlin/workspace/coldstars/data/effect/particles/particle.png"; break; }
+            case 1: { m_Data.texture_path = "/home/diverlin/workspace/coldstars/data/effect/particles/particle0.png"; break; }
+            case 2: { m_Data.texture_path = "/home/diverlin/workspace/coldstars/data/effect/particles/particle1.png"; break; }
+            case 3: { m_Data.texture_path = "/home/diverlin/workspace/coldstars/data/effect/particles/particle2.png"; break; }
+            default: { m_Data.texture_path = "/home/diverlin/workspace/coldstars/data/effect/particles/particle3.png"; break; }
+        }
+        loadToVRAM(m_Data.texture_path, m_Data.texture, m_Data.w, m_Data.h);
+    }
     
     CreateTextureCoords(m_Data.col_num, m_Data.row_num, m_Data.fps); 
     

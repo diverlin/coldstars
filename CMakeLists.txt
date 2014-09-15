@@ -5,7 +5,8 @@ set(PROJECT run)
 
 project (${PROJECT})
 
-#set ( CMAKE_VERBOSE_MAKEFILE true )
+#set( CMAKE_VERBOSE_MAKEFILE true )
+set(CMAKE_BUILD_TYPE Debug)
 
 set(DEPLOY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 set(SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}")
@@ -14,7 +15,7 @@ find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
 #add_definitions(-DGL_GLEXT_PROTOTYPES -DGL3_PROTOTYPES)
 
-set(COLDSTARS_DEPENDENCIES_ROOT "/home/balda/workspace/cold_star/coldstars_thirdparty_build/dist")
+set(COLDSTARS_DEPENDENCIES_ROOT "/home/diverlin/coldstars/coldstars_thirdparty_build/dist")
 
 set(SFML_ROOT ${COLDSTARS_DEPENDENCIES_ROOT})
 set(GLEW_ROOT ${COLDSTARS_DEPENDENCIES_ROOT})
