@@ -357,6 +357,13 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
              
 void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
 {   
+    bool draw_background    = true;
+    bool draw_volumetric    = true;
+    bool draw_something     = false;
+    bool draw_spaceObjects  = true;
+    bool draw_shockwave     = true;
+    bool draw_robustSpaceObjects = true;
+
     float scale = Screen::Instance().GetScale();
     int w = Screen::Instance().GetWidth();
     int h = Screen::Instance().GetHeight();
@@ -366,161 +373,173 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
     
     //render.enable_CULLFACE();
     {
-        // render background and star to FBO0
-/*
-        render.ActivateFbo(0, w, h);
+        if (draw_background)
         {
-            render.SetPerspectiveProjection(w, h);                
-            starsystem->DrawBackground(render, world_coord);
-            render.SetOrthogonalProjection(w*scale, h*scale);
-                        
-            for(unsigned int i=0; i<visible_STAR_vec.size(); i++) 
-            { 
-                Star& star = *visible_STAR_vec[i];
-                render.DrawMeshMultiTextured(star.GetMesh(), star.GetTextureOb(), star.GetActualModelMatrix());
+            // render background and star to FBO0
+            render.ActivateFbo(0, w, h);
+            {
+                render.SetPerspectiveProjection(w, h);
+                starsystem->DrawBackground(render, world_coord);
+                render.SetOrthogonalProjection(w*scale, h*scale);
+
+                for(Star* star : visible_STAR_vec)
+                {
+                    render.DrawMeshMultiTextured(star->GetMesh(), star->GetTextureOb(), star->GetActualModelMatrix());
+                }
             }
+            render.DeactivateFbo(0);
+
+            // BLOOM background and star (uses many FBO)
+            //resizeGl(w, h);
+            render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
         }
-        render.DeactivateFbo(0);
-*/
-        // BLOOM background and star (uses many FBO)
-        // resizeGl(w, h); 
-        //render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
-        
+
         // VOLUMETRIC LIGHT to FBO1
-        // resizeGl(w, h); 
-        render.ActivateFbo(1, w, h);
+        if (draw_volumetric)
         {
-            render.DrawStarField(w/2, h/2, -world_coord.x/10000.0f, -world_coord.y/10000.0f); 
-            //render.DrawPostEffectVolumetricLight(world_coord, w, h);
-        }
-        render.DeactivateFbo(1);
-
-        render.ActivateFbo(2, w, h);
-        {
-            render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w*2, h*2);
-        }
-        render.DeactivateFbo(2); 
-
-        // render space entites to FBO2     
-        render.ActivateFbo(3, w, h);
-        {
-            render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
-           
-            // resizeGl(w*scale, h*scale);     
+            //resizeGl(w, h);
+            render.ActivateFbo(1, w, h);
             {
-                for(unsigned int i=0; i<visible_PLANET_vec.size(); i++) 
-                { 
-                    visible_PLANET_vec[i]->Render_NEW(render); 
-                }
-
-                for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
-                { 
-                    visible_SPACESTATION_vec[i]->RenderInSpace(render, 1/scale); 
-                }
-         
-                if (getRandInt(0, 30) == 0) std::cout<<"ship num rendered="<<visible_SHIP_vec.size()<<std::endl; 
-                for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)
-                { 
-                    visible_SHIP_vec[i]->RenderInSpace(render, 1/scale); 
-                }
-                     
-                for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
-                { 
-                    visible_ASTEROID_vec[i]->Render_NEW(render, world_coord); 
-                }
-                
-                for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
-                { 
-                    visible_BLACKHOLE_vec[i]->Render_NEW(render);                     
-                } 
-                     
+                //render.DrawStarField(w/2, h/2, -world_coord.x/10000.0f, -world_coord.y/10000.0f);
+                render.DrawPostEffectVolumetricLight(world_coord, w, h);
             }
-  
-            {
-                for(unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
-                { 
-                    visible_CONTAINER_vec[i]->Render(render); 
-                }      
+            render.DeactivateFbo(1);
+        }
 
-                for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
-                { 
-                   visible_SATELLITE_vec[i]->RenderInSpace(render, 1/scale); 
+        if (draw_something)
+        {
+//            render.ActivateFbo(2, w, h);
+//            {
+//                render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w*2, h*2);
+//            }
+//            render.DeactivateFbo(2);
+        }
+
+        if (draw_spaceObjects)
+        {
+            // render space entites to FBO2
+            render.ActivateFbo(3, w, h);
+            {
+                render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
+
+                // resizeGl(w*scale, h*scale);
+                {
+                    for(Planet* planet : visible_PLANET_vec)
+                    {
+                        planet->Render_NEW(render);
+                    }
+
+                    for(SpaceStation* spacestation : visible_SPACESTATION_vec)
+                    {
+                        spacestation->RenderInSpace(render, 1/scale);
+                    }
+
+                    //if (getRandInt(0, 30) == 0) std::cout<<"ship num rendered="<<visible_SHIP_vec.size()<<std::endl;
+                    for(Ship* ship : visible_SHIP_vec)
+                    {
+                        ship->RenderInSpace(render, 1/scale);
+                    }
+
+                    for(Asteroid* asteroid : visible_ASTEROID_vec)
+                    {
+                        asteroid->Render_NEW(render, world_coord);
+                    }
+
+                    for(BlackHole* blackhole : visible_BLACKHOLE_vec)
+                    {
+                        blackhole->Render_NEW(render);
+                    }
                 }
-               
-                for(unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
-                { 
-                    visible_ROCKET_vec[i]->RenderInSpace(render, 1/scale); 
-                } 
-                
+
+                {
+                    for(Container* container : visible_CONTAINER_vec)
+                    {
+                        container->Render(render);
+                    }
+
+                    for(Satellite* satellite : visible_SATELLITE_vec)
+                    {
+                        satellite->RenderInSpace(render, 1/scale);
+                    }
+
+                    for(RocketBullet* rocket : visible_ROCKET_vec)
+                    {
+                        rocket->RenderInSpace(render, 1/scale);
+                    }
+                }
                 if (show.GetCollisionRadius() == true)
                 {
                     RenderAxis(render);
                     RenderCollisionRadius(render);
                 }
-
             }
-
+            render.DeactivateFbo(3);
         }
-        render.DeactivateFbo(3);
 
-        // SHOCKWAVE post process to Fbo3
-        //resizeGl(w, h); 
-        render.ActivateFbo(4, w, h);
+        if (draw_shockwave)
         {
-            float center_array[SHOCKWAVES_MAX_NUM][2];
-            float xyz_array[SHOCKWAVES_MAX_NUM][3];
-            float time_array[SHOCKWAVES_MAX_NUM];
-    
-            unsigned int i=0;
-            for (i=0; ((i<visible_BLACKHOLE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); i++)
-            {         
-                ShockWaveEffect* shockwave = visible_BLACKHOLE_vec[i]->GetShockWaveEffect();
-                
-                center_array[i][0] = (shockwave->center.x - world_coord.x)/w;
-                center_array[i][1] = (shockwave->center.y - world_coord.y)/h;
-                xyz_array[i][0] = shockwave->parameter.x;
-                xyz_array[i][1] = shockwave->parameter.y;
-                xyz_array[i][2] = shockwave->parameter.z;
-                    
-                time_array[i] = shockwave->time;
-            }
-            for (unsigned int j=0; ((j<visible_effect_SHOCKWAVE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
-            {         
-                center_array[i][0] = (visible_effect_SHOCKWAVE_vec[j]->center.x - world_coord.x)/(w*scale);
-                center_array[i][1] = (visible_effect_SHOCKWAVE_vec[j]->center.y - world_coord.y)/(h*scale);
-                xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[j]->parameter.x;
-                xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[j]->parameter.y;
-                xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[j]->parameter.z/scale;
-                    
-                time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time;
-            }
-           
-            render.DrawPostEffectShockWaves(render.GetLastFbo().GetTexture(), w, h, i, center_array, xyz_array, time_array);
-        }
-        render.DeactivateFbo(4);
+            // SHOCKWAVE post process to Fbo3
+            //resizeGl(w, h);
+            render.ActivateFbo(4, w, h);
+            {
+                float center_array[SHOCKWAVES_MAX_NUM][2];
+                float xyz_array[SHOCKWAVES_MAX_NUM][3];
+                float time_array[SHOCKWAVES_MAX_NUM];
 
-        // render effects not distorted by SHOCKWAVE
-        render.ActivateFbo(5, w, h);
+                unsigned int i=0;
+                for (i=0; ((i<visible_BLACKHOLE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); i++)
+                {
+                    ShockWaveEffect* shockwave = visible_BLACKHOLE_vec[i]->GetShockWaveEffect();
+
+                    center_array[i][0] = (shockwave->center.x - world_coord.x)/w;
+                    center_array[i][1] = (shockwave->center.y - world_coord.y)/h;
+                    xyz_array[i][0] = shockwave->parameter.x;
+                    xyz_array[i][1] = shockwave->parameter.y;
+                    xyz_array[i][2] = shockwave->parameter.z;
+                    
+                    time_array[i] = shockwave->time;
+                }
+                for (unsigned int j=0; ((j<visible_effect_SHOCKWAVE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
+                {
+                    center_array[i][0] = (visible_effect_SHOCKWAVE_vec[j]->center.x - world_coord.x)/(w*scale);
+                    center_array[i][1] = (visible_effect_SHOCKWAVE_vec[j]->center.y - world_coord.y)/(h*scale);
+                    xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[j]->parameter.x;
+                    xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[j]->parameter.y;
+                    xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[j]->parameter.z/scale;
+                    
+                    time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time;
+                }
+
+                render.DrawPostEffectShockWaves(render.GetLastFbo().GetTexture(), w, h, i, center_array, xyz_array, time_array);
+            }
+            render.DeactivateFbo(4);
+        }
+
+        if (draw_robustSpaceObjects)
         {
-            //resizeGl(w, h); 
-            render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
+            // render effects not distorted by SHOCKWAVE
+            render.ActivateFbo(5, w, h);
+            {
+                //resizeGl(w, h);
+                render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
 
-            //resizeGl(w*scale, h*scale);             
-            //camera(world_coord.x, world_coord.y, CAMERA_POS_Z); 
-                       
-            for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
-            { 
-                LazerTraceEffect& lazer_trace = *visible_effect_LAZERTRACE_vec[i];
-                render.DrawMesh(lazer_trace.GetMesh(), lazer_trace.GetTextureOb(), lazer_trace.GetActualModelMatrix()); 
+                //resizeGl(w*scale, h*scale);
+                //camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
+
+                for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
+                {
+                    LazerTraceEffect& lazer_trace = *visible_effect_LAZERTRACE_vec[i];
+                    render.DrawMesh(lazer_trace.GetMesh(), lazer_trace.GetTextureOb(), lazer_trace.GetActualModelMatrix());
+                }
+
+                for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
+                {
+                    BaseParticleSystem& ps = *visible_effect_PARTICLESYSTEM_vec[i];
+                    render.DrawParticles(ps.GetMesh(), ps.GetTextureOb(), ps.GetActualModelMatrix());
+                }
             }
-            
-            for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
-            {   
-                BaseParticleSystem& ps = *visible_effect_PARTICLESYSTEM_vec[i];
-                render.DrawParticles(ps.GetMesh(), ps.GetTextureOb(), ps.GetActualModelMatrix()); 
-            }             
+            render.DeactivateFbo(5);
         }
-        render.DeactivateFbo(5);
 
         render.ClearColorAndDepthBuffers();       
         render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
@@ -559,7 +578,7 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
     //float scale = Screen::Instance().GetScale();
     //int w = Screen::Instance().GetWidth();
     //int h = Screen::Instance().GetHeight();
-         
+
     RenderInSpace_NEW(renderer, starsystem);
 
     //resizeGl(w*scale, h*scale); 
@@ -594,7 +613,7 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
     
         //cursor.RenderFocusedObjectStuff();
     }
-    //disable_BLEND();  
+    //disable_BLEND();
     //resizeGl(w, h); 
 } 
 
