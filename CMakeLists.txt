@@ -5,10 +5,11 @@ set(PROJECT run)
 
 project (${PROJECT})
 
-set(BIN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bin/ )
-                      
 #set ( CMAKE_VERBOSE_MAKEFILE true )
-                                 
+
+set(DEPLOY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
+set(SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}")
+
 find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
 #add_definitions(-DGL_GLEXT_PROTOTYPES -DGL3_PROTOTYPES)
