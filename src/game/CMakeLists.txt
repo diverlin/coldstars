@@ -8,9 +8,21 @@ target_link_libraries(${PROJECT} ${SFML_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LI
 #SET_TARGET_PROPERTIES(${PROJECT} PROPERTIES COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -Ofast -march=native")
 SET_TARGET_PROPERTIES(${PROJECT} PROPERTIES COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
    
+# deploy
 ADD_CUSTOM_COMMAND(
-TARGET ${PROJECT}
-POST_BUILD
-COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT} ${BIN_DIR}
+    TARGET ${PROJECT}
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT} ${DEPLOY_DIR}
 )
 
+ADD_CUSTOM_COMMAND(
+    TARGET ${PROJECT}
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E create_symlink ${SOURCE_ROOT}/data ${DEPLOY_DIR}/data
+)
+
+ADD_CUSTOM_COMMAND(
+    TARGET ${PROJECT}
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E create_symlink ${SOURCE_ROOT}/config/config.info ${DEPLOY_DIR}/config.info
+)
