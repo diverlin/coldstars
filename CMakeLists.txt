@@ -18,6 +18,10 @@ include_directories(dependencies/freetype2/)
 
 add_library(freetyperender dependencies/freetype2/src/FreeType.cpp)
 include_directories(dependencies/freetype2/src)
+include_directories(dependencies/freetype2/freetype)
+include_directories(/usr/include/freetype2/)
+
+
 SET_TARGET_PROPERTIES(freetyperender PROPERTIES COMPILE_FLAGS "-std=c++11 -std=gnu++11")
 
 

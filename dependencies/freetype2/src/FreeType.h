@@ -2,7 +2,7 @@
 #define FREE_NEHE_H
 
 //FreeType Headers
-#include <ft2build.h>
+#include <freetype2/ft2build.h>
 #include <freetype/freetype.h>
 #include <freetype/ftglyph.h>
 #include <freetype/ftoutln.h>
