@@ -171,8 +171,8 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 {                 
     #if WEAPONSTARGET_LOG_ENABLED == 1 
-    if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + getEntityTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP); 
-    else                        Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + getEntityTypeStr(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " item_subtype_id=" + getEntityTypeStr(item_slot->GetItem()->GetSubTypeId()) + " id=" + int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP); 
+    if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + str(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP);
+    else                        Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " item_subtype_id=" + str(item_slot->GetItem()->GetSubTypeId()) + " id=" + int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP);
     #endif   
 
     target->TakeIntoAccountAgressor(owner_vehicle);

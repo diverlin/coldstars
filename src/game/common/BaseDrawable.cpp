@@ -61,7 +61,11 @@ void BaseDrawable::SetRenderData(Mesh* mesh, TextureOb* textureOb, const glm::ve
 {
     m_Mesh = mesh;
     m_TextureOb = textureOb; 
-    SetSize(size);
+    if (m_Mesh->GetTypeId() == TYPE::MESH::PLANE_ID) {
+        SetSize(textureOb->GetSize());
+    } else {
+        SetSize(size);
+    }
     SetCollisionRadius((size.x + size.y) / 4.0);
     SetDirection(mesh->GetOriginDirection());
 }

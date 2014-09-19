@@ -154,7 +154,7 @@ TYPE::ENTITY::GRAPPLE_MODULE_ID,
 TYPE::ENTITY::SCANER_MODULE_ID
 };    
 
-std::string getEntityTypeStr(TYPE::ENTITY);
+std::string getStr(TYPE::ENTITY);
 
 #endif
 

@@ -88,7 +88,7 @@ void SpaceStation::UpdateInfo()
 {
     GetInfo().clear();
 
-    GetInfo().addTitleStr("StarBase" + getEntityTypeStr(GetSubTypeId()));
+    GetInfo().addTitleStr("StarBase" + getStr(GetSubTypeId()));
 
     GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()));
     GetInfo().addNameStr("id:");          GetInfo().addValueStr(int2str(GetId()));

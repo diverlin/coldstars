@@ -262,8 +262,8 @@ void Npc::UpdateInfo()
     info.addTitleStr("NPC");
     info.addNameStr("id:");           info.addValueStr( int2str(GetId())  );
     info.addNameStr("race:");         info.addValueStr( getRaceStr(race_id) ); 
-    info.addNameStr("subype_id:");    info.addValueStr( getEntityTypeStr(GetSubTypeId()) );  
-    info.addNameStr("subsubype_id:"); info.addValueStr( getEntityTypeStr(GetSubSubTypeId()) );  
+    info.addNameStr("subype_id:");    info.addValueStr( getStr(GetSubTypeId()) );
+    info.addNameStr("subsubype_id:"); info.addValueStr( getStr(GetSubSubTypeId()) );
     info.addNameStr("model_ai:");     info.addValueStr( getAiModelStr(ai_model->GetTypeId()) );  
     info.addNameStr("credits:");         info.addValueStr( int2str(credits) );    
     info.addNameStr("expirience:");   info.addValueStr( int2str(skills.GetExpirience()) + " / " + int2str(skills.GetExpirienceNextLevel()) );    
