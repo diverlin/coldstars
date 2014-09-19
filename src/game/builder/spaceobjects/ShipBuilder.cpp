@@ -40,17 +40,14 @@ Ship* ShipBuilder::GetNewShipTemplate(INTLONGEST id) const
 {
     Ship* ship = nullptr;
 
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         ship = new Ship(id);
     }
-    catch(std::bad_alloc)
-    {
+    catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
@@ -62,7 +59,7 @@ Ship* ShipBuilder::GetNewShipTemplate(INTLONGEST id) const
 Ship* ShipBuilder::GetNewShip(TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const
 {
     Ship* ship = GetNewShipTemplate();
-    CreateNewInternals(ship, race_id, subsubtype_id, size_id, weapons_num);     
+    _CreateNewInternals(ship, race_id, subsubtype_id, size_id, weapons_num);
     
     return ship;
 }
@@ -75,12 +72,12 @@ Ship* ShipBuilder::GetNewShip() const
     int weapons_num = size_id;
             
     Ship* ship = GetNewShipTemplate();
-    CreateNewInternals(ship, race_id, subsubtype_id, size_id, weapons_num);     
+    _CreateNewInternals(ship, race_id, subsubtype_id, size_id, weapons_num);
     
     return ship;
 }
 
-void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const
+void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const
 {
     Mesh* mesh = nullptr;
     TextureOb* texOb = nullptr;
@@ -154,8 +151,7 @@ void ShipBuilder::CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTIT
     AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
     ship->SetAnimationRotation(animation_rotation);
 
-    ship->SetRenderData(mesh, mesh->GetTextureOb(), scale);
-
+    ship->SetRenderData(mesh, texOb, scale);
 
     LifeData data_life;
     data_life.armor      = data_korpus.armor * 0.1;

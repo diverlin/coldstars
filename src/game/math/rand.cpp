@@ -109,12 +109,10 @@ const std::vector<TYPE::ENTITY>& getAllowedSubTypesByRaceId(TYPE::RACE race_id)
 
 TYPE::ENTITY getRandNpcSubSubTypeId(TYPE::ENTITY subtype_id)
 {
-    if (subtype_id == TYPE::ENTITY::RANGER_ID)
-    {
+    if (subtype_id == TYPE::ENTITY::RANGER_ID) {
         return getRand(RaceInformationCollector::Instance().SUBSUBTYPE_vec);
     }
-    else
-    {
+    else {
         return subtype_id;
     }
 }

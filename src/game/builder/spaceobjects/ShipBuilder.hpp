@@ -53,7 +53,7 @@ class ShipBuilder : public BaseVehicleBuilder
         ShipBuilder(const ShipBuilder&) = delete; 
         ShipBuilder& operator=(const ShipBuilder&) = delete;
             
-        void CreateNewInternals(Ship*, TYPE::RACE, TYPE::ENTITY, int, int) const;  
+        void _CreateNewInternals(Ship*, TYPE::RACE, TYPE::ENTITY, int, int) const;
 }; 
 
 #endif 

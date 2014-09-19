@@ -91,8 +91,7 @@ struct MaterialData
     brightThreshold(1.0f),
     color_id(0),
     is_rotated(false)
-    {}
-    
+    {}    
 };
 
 struct MaterialAssociation

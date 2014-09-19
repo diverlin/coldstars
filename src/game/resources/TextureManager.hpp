@@ -93,47 +93,11 @@ class TextureManager
         std::vector<TextureOb*> blackhole_texOb_vec;  
         
         // SHIPS
-        std::vector<TextureOb*> ship_race0_ranger_texOb_vec;
-        std::vector<TextureOb*> ship_race0_warrior_texOb_vec;
-        std::vector<TextureOb*> ship_race0_trader_texOb_vec;
-        std::vector<TextureOb*> ship_race0_pirat_texOb_vec;
-        std::vector<TextureOb*> ship_race0_diplomat_texOb_vec;
-
-        std::vector<TextureOb*> ship_race1_ranger_texOb_vec;
-        std::vector<TextureOb*> ship_race1_warrior_texOb_vec;
-        std::vector<TextureOb*> ship_race1_trader_texOb_vec;
-        std::vector<TextureOb*> ship_race1_pirat_texOb_vec;
-        std::vector<TextureOb*> ship_race1_diplomat_texOb_vec;
-
-        std::vector<TextureOb*> ship_race2_ranger_texOb_vec;
-        std::vector<TextureOb*> ship_race2_warrior_texOb_vec;
-        std::vector<TextureOb*> ship_race2_trader_texOb_vec;
-        std::vector<TextureOb*> ship_race2_pirat_texOb_vec;
-        std::vector<TextureOb*> ship_race2_diplomat_texOb_vec;
-
-        std::vector<TextureOb*> ship_race3_ranger_texOb_vec;
-        std::vector<TextureOb*> ship_race3_warrior_texOb_vec;
-        std::vector<TextureOb*> ship_race3_trader_texOb_vec;
-        std::vector<TextureOb*> ship_race3_pirat_texOb_vec;
-        std::vector<TextureOb*> ship_race3_diplomat_texOb_vec;
-
-        std::vector<TextureOb*> ship_race4_ranger_texOb_vec;
-        std::vector<TextureOb*> ship_race4_warrior_texOb_vec;
-        std::vector<TextureOb*> ship_race4_trader_texOb_vec;
-        std::vector<TextureOb*> ship_race4_pirat_texOb_vec;
-        std::vector<TextureOb*> ship_race4_diplomat_texOb_vec;
-
-        std::vector<TextureOb*> ship_race6_ranger_texOb_vec;
-        std::vector<TextureOb*> ship_race6_warrior_texOb_vec;
-        std::vector<TextureOb*> ship_race6_trader_texOb_vec;
-        std::vector<TextureOb*> ship_race6_pirat_texOb_vec;
-        std::vector<TextureOb*> ship_race6_diplomat_texOb_vec;
-
-        std::vector<TextureOb*> ship_race7_ranger_texOb_vec;
-        std::vector<TextureOb*> ship_race7_warrior_texOb_vec;
-        std::vector<TextureOb*> ship_race7_trader_texOb_vec;
-        std::vector<TextureOb*> ship_race7_pirat_texOb_vec;
-        std::vector<TextureOb*> ship_race7_diplomat_texOb_vec;
+        std::vector<TextureOb*> ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
+        std::vector<TextureOb*> ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
+        std::vector<TextureOb*> ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
+        std::vector<TextureOb*> ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
+        std::vector<TextureOb*> ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
 
         // ITEMS
         std::vector<TextureOb*> lazerEquipment_texOb_vec;

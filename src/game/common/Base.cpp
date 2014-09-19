@@ -35,9 +35,9 @@ std::string Base::GetDataTypeString() const
 {
     std::string str;
     str += "id=" + int2str(GetId());
-    str += "/t=" + getEntityTypeStr(GetTypeId());
-    str += "/st=" + getEntityTypeStr(GetSubTypeId());    
-    str += "/sst=" + getEntityTypeStr(GetSubSubTypeId());    
+    str += "/t=" + getStr(GetTypeId());
+    str += "/st=" + getStr(GetSubTypeId());
+    str += "/sst=" + getStr(GetSubSubTypeId());
     return str;
 }
 
@@ -48,9 +48,9 @@ void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
     #endif
     
     save_ptree.put(root+"data_id.id",            m_Data_id.id);
-    save_ptree.put(root+"data_id.type_id",       (int)m_Data_id.type_id);
-    save_ptree.put(root+"data_id.subtype_id",    (int)m_Data_id.subtype_id);
-    save_ptree.put(root+"data_id.subsubtype_id", (int)m_Data_id.subsubtype_id);
+    save_ptree.put(root+"data_id.type_id",       static_cast<int>(m_Data_id.type_id));
+    save_ptree.put(root+"data_id.subtype_id",    static_cast<int>(m_Data_id.subtype_id));
+    save_ptree.put(root+"data_id.subsubtype_id", static_cast<int>(m_Data_id.subsubtype_id));
 }
 
 void Base::LoadData(const boost::property_tree::ptree& load_ptree)

@@ -63,7 +63,7 @@ void Ship::UpdateInfo()
     if (GetStarSystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()) ); }
     else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( int2str(GetId()) ); }
     GetInfo().addNameStr("race:");          GetInfo().addValueStr( getRaceStr(GetTextureOb().GetAssociation().race_id) ); 
-    GetInfo().addNameStr("class:");         GetInfo().addValueStr( getEntityTypeStr(GetSubSubTypeId()) );         
+    GetInfo().addNameStr("class:");         GetInfo().addValueStr( getStr(GetSubSubTypeId()) );
     GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( int2str(GetDataLife().armor) + "/" + int2str(GetDataKorpus().armor) );
     GetInfo().addNameStr("size id:");       GetInfo().addValueStr( int2str(GetTextureOb().GetData().size_id) );
     GetInfo().addNameStr("space/free:");    GetInfo().addValueStr( int2str(GetDataKorpus().space) + "/" + int2str(GetProperties().free_space) );
@@ -136,10 +136,10 @@ void Ship::RenderInSpace(const Renderer& render, float scale)
         //GetStarSystem()->RestoreSceneColor();
     //}
     
-    if (GetProperties().shield_effect_enabled == true)
-    {
-        RenderShieldEffect(render, 1.0f - GetColor().a); 
-    }
+//    if (GetProperties().shield_effect_enabled == true)
+//    {
+//        RenderShieldEffect(render, 1.0f - GetColor().a);
+//    }
 }
 
 void Ship::RenderAtPlanet(const Renderer& render, const glm::vec3& center)

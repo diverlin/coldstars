@@ -18,7 +18,7 @@
 
 #include "EntityTypes.hpp"
 
-std::string getEntityTypeStr(TYPE::ENTITY type_id)
+std::string getStr(TYPE::ENTITY type_id)
 {
     switch(type_id)
     {

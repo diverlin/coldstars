@@ -251,21 +251,32 @@ void God::CreateShips(StarSystem* starsystem, int ship_num, TYPE::RACE npc_race_
 
     for (int i=0; i<ship_num; i++)
     {     
-        if (subtype_id == TYPE::ENTITY::NONE_ID)
-        {
+
+        // VERY UGLY LOGIC START (TODO)
+        if (subtype_id == TYPE::ENTITY::NONE_ID) {
             npc_subtype_id    = getRandNpcSubTypeId(npc_race_id);
-            npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
         }
-        else
-        {
+        else {
             npc_subtype_id    = subtype_id;
-            npc_subsubtype_id = subsubtype_id;
         }   
 
-        TYPE::RACE ship_race_id    = npc_race_id;         
-        TYPE::ENTITY ship_subtype_id = npc_subtype_id;  
-        int ship_size_id = getRandInt(1, 9);
-        int weapons_num = getRandInt(1, 5);
+        if (subsubtype_id == TYPE::ENTITY::NONE_ID) {
+            npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
+        }
+        else {
+            npc_subsubtype_id = subsubtype_id;
+        }
+        // VERY UGLY LOGIC END
+
+        TYPE::RACE ship_race_id         = npc_race_id;
+        TYPE::ENTITY ship_subtype_id    = npc_subsubtype_id;
+        int ship_size_id    = getRandInt(1, 9);
+        int weapons_num     = getRandInt(1, 5);
+
+        // VERY UGLY LOGIC START (TODO)
+        if (ship_subtype_id == TYPE::ENTITY::NONE_ID)
+            ship_subtype_id = TYPE::ENTITY::RANGER_ID;
+        // VERY UGLY LOGIC END
 
         Ship* new_ship = ShipBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
         ShipBuilder::Instance().EquipEquipment(new_ship); // improove
