@@ -41,26 +41,24 @@
 
 
 BaseDrawable::BaseDrawable()
-:
-m_TextureOb(nullptr), 
-m_Mesh(nullptr), 
-m_AnimationRotation(nullptr)
+    :
+      m_TextureOb(nullptr),
+      m_Mesh(nullptr),
+      m_AnimationRotation(nullptr)
 {}
 
 /* virtual */
-BaseDrawable::~BaseDrawable()
-{
-    #if CREATEDESTROY_LOG_ENABLED == 1
+BaseDrawable::~BaseDrawable() {
+#if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~BaseDrawable("+int2str(GetId())+")");
-    #endif
+#endif
     
     delete m_AnimationRotation;
 }
 
-void BaseDrawable::SetRenderData(Mesh* mesh, TextureOb* textureOb, const glm::vec3& size)
-{
+void BaseDrawable::SetRenderData(Mesh* mesh, TextureOb* textureOb, const glm::vec3& size) {
     m_Mesh = mesh;
-    m_TextureOb = textureOb; 
+    m_TextureOb = textureOb;
     if (m_Mesh->GetTypeId() == TYPE::MESH::PLANE_ID) {
         SetSize(textureOb->GetSize());
     } else {
@@ -70,11 +68,19 @@ void BaseDrawable::SetRenderData(Mesh* mesh, TextureOb* textureOb, const glm::ve
     SetDirection(mesh->GetOriginDirection());
 }
 
+void BaseDrawable::ValidateResources() const
+{
+    assert(m_TextureOb);
+    if (!m_TextureOb->GetIsLoaded()) {
+        m_TextureOb->Load();
+    }
+}
+
 //void BaseDrawable::BindData2D(TextureOb* textureOb)
 //{
-    //m_TextureOb = textureOb; 
-    //SetSize(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0);
-    //SetCollisionRadius((textureOb->GetFrameWidth() + textureOb->GetFrameHeight()) / 4.0);
+//m_TextureOb = textureOb;
+//SetSize(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0);
+//SetCollisionRadius((textureOb->GetFrameWidth() + textureOb->GetFrameHeight()) / 4.0);
 //} 
 
 
@@ -82,7 +88,7 @@ void BaseDrawable::RenderCollisionRadius(const Renderer& render) const
 {
     TextureOb* texOb_collision_radius =  GuiTextureObCollector::Instance().radar_range;
     glm::vec3 zero;
-    glm::mat4 Mm = getModelMatrix(GetCenter(), glm::vec3(2*GetCollisionRadius()), zero); 
+    glm::mat4 Mm = getModelMatrix(GetCenter(), glm::vec3(2*GetCollisionRadius()), zero);
     render.DrawQuad(*texOb_collision_radius, Mm);
 }
 
@@ -101,16 +107,13 @@ void BaseDrawable::UpdateRenderAnimation()
         //m_AnimationRotation->Update(GetAngle());
     }
 }
-          
+
 bool BaseDrawable::UpdateFadeInEffect()
 {
-    if (m_Color.a > 0.01)
-    {
+    if (m_Color.a > 0.01) {
         m_Color.a -= 0.02;
         return false;
-    }
-    else
-    {
+    } else {
         m_Color.a = 0.0;
         return true;
     }
@@ -118,13 +121,10 @@ bool BaseDrawable::UpdateFadeInEffect()
 
 bool BaseDrawable::UpdateFadeOutEffect()
 {
-    if (m_Color.a < 1.0)
-    {
+    if (m_Color.a < 1.0) {
         m_Color.a += 0.02;
         return false;
-    }
-    else
-    {
+    } else {
         m_Color.a = 1.0;
         return true;
     }
@@ -132,19 +132,15 @@ bool BaseDrawable::UpdateFadeOutEffect()
 
 const glm::mat4& BaseDrawable::GetActualModelMatrix()
 {    
-    if (m_Mesh) // hack  (in future each ob will have mesh, for example for 2D it's plane)
-    {
-        RotationBetweenVectors(m_QuatDirection, m_Mesh->GetOriginDirection(), GetDirection());
-        if (m_AnimationRotation != nullptr)
-        {
-            m_AnimationRotation->Update(m_QuatAnimation, m_Mesh->GetOriginDirection());
-        }
+    RotationBetweenVectors(m_QuatDirection, m_Mesh->GetOriginDirection(), GetDirection());
+    if (m_AnimationRotation != nullptr) {
+        m_AnimationRotation->Update(m_QuatAnimation, m_Mesh->GetOriginDirection());
     }
     
-    m_MatrixTranslate = glm::translate(GetCenter());    
+    m_MatrixTranslate = glm::translate(GetCenter());
     m_MatrixRotate    = glm::toMat4(m_QuatDirection * m_QuatAnimation);
     m_MatrixScale     = glm::scale(GetSize());
-      
+
     m_MatrixModel = m_MatrixTranslate * m_MatrixScale * m_MatrixRotate;
     
     return m_MatrixModel;
@@ -152,10 +148,10 @@ const glm::mat4& BaseDrawable::GetActualModelMatrix()
 
 void BaseDrawable::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
-    #endif
-        
+#endif
+
     if (m_Mesh) save_ptree.put(root+"data_unresolved_BaseDrawable.mesh_type_id", (int)m_Mesh->GetTypeId());
     else        save_ptree.put(root+"data_unresolved_BaseDrawable.mesh_type_id", (int)TYPE::MESH::NONE_ID);
     
@@ -165,9 +161,9 @@ void BaseDrawable::SaveData(boost::property_tree::ptree& save_ptree, const std::
 
 void BaseDrawable::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
-    #endif
+#endif
 
     data_unresolved_BaseDrawable.mesh_type_id = (TYPE::MESH)load_ptree.get<int>("data_unresolved_BaseDrawable.mesh_type_id");
     data_unresolved_BaseDrawable.textureOb_path = load_ptree.get<std::string>("data_unresolved_BaseDrawable.textureOb_path");
@@ -175,13 +171,12 @@ void BaseDrawable::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void BaseDrawable::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
-    #endif
+#endif
     
-    if (data_unresolved_BaseDrawable.mesh_type_id != TYPE::MESH::NONE_ID)
-    {
-        m_Mesh = MeshCollector::Instance().GetMeshByTypeId(data_unresolved_BaseDrawable.mesh_type_id); 
+    if (data_unresolved_BaseDrawable.mesh_type_id != TYPE::MESH::NONE_ID) {
+        m_Mesh = MeshCollector::Instance().GetMeshByTypeId(data_unresolved_BaseDrawable.mesh_type_id);
     }
     
     m_TextureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseDrawable.textureOb_path);
@@ -191,18 +186,19 @@ void BaseDrawable::ResolveData()
 glm::mat4 getModelMatrix(const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle)
 {
     glm::mat4 Tm = glm::translate(center);
-     
+
     glm::quat Qx, Qy, Qz;
     
     //QuatFromAngleAndAxis(Qx, angle.x, AXIS_X);
-    //QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);   
-    //QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z); 
-       
+    //QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);
+    //QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z);
+
     glm::mat4 Rm = glm::toMat4(Qx*Qy*Qz);
     
     glm::mat4 Sm = glm::scale(size);
-      
+
     glm::mat4 Mm = Tm * Rm * Sm;
     
     return Mm;
 }
+

@@ -27,41 +27,20 @@
 #include <math/rand.hpp>
 #include "../render/Screen.hpp"
 
-TextureOb::TextureOb(const MaterialData& data)
+TextureOb::TextureOb(const MaterialDrawData& data)
+    :
+      m_IsLoaded(false),
+      m_Data(data)
 { 
-    m_Data = data;
-
     m_Data.id = TextureIdGenerator::Instance().GetNextId();
     
-    if ( ((m_Data.col_num == 1) and (m_Data.row_num == 1)) or (m_Data.fps == 0) )
-    {
+    if ( ((m_Data.col_num == 1) and (m_Data.row_num == 1)) or (m_Data.fps == 0) ) {
         m_Data.is_animated = false;
-    }
-    else
-    {
+    } else {
         m_Data.is_animated = true;
     }   
 
-    if (!FALSE_RESOURCES)
-    {
-        if (m_Data.normalmap_path != "")
-        {
-            loadToVRAM(m_Data.normalmap_path, m_Data.normalmap, m_Data.w, m_Data.h);
-        }
-        loadToVRAM(m_Data.texture_path, m_Data.texture, m_Data.w, m_Data.h);
-    }
-    else
-    {
-        switch(getRandInt(0, 4))
-        {
-            case 0: { m_Data.texture_path = "/home/diverlin/workspace/coldstars/data/effect/particles/particle.png"; break; }
-            case 1: { m_Data.texture_path = "/home/diverlin/workspace/coldstars/data/effect/particles/particle0.png"; break; }
-            case 2: { m_Data.texture_path = "/home/diverlin/workspace/coldstars/data/effect/particles/particle1.png"; break; }
-            case 3: { m_Data.texture_path = "/home/diverlin/workspace/coldstars/data/effect/particles/particle2.png"; break; }
-            default: { m_Data.texture_path = "/home/diverlin/workspace/coldstars/data/effect/particles/particle3.png"; break; }
-        }
-        loadToVRAM(m_Data.texture_path, m_Data.texture, m_Data.w, m_Data.h);
-    }
+    //Load();
     
     CreateTextureCoords(m_Data.col_num, m_Data.row_num, m_Data.fps); 
     
@@ -72,9 +51,21 @@ TextureOb::~TextureOb()
 { 
 
 }
- 
+
+void TextureOb::Load()
+{
+    loadToVRAM(m_Data.texture_path, m_Data.texture, m_Data.w, m_Data.h);
+    if (m_Data.normalmap_path != "") {
+        loadToVRAM(m_Data.normalmap_path, m_Data.normalmap, m_Data.w, m_Data.h);
+    }
+
+    m_IsLoaded = true;
+}
+
 void TextureOb::RemoveFromVRAM()
-{}         
+{
+    m_IsLoaded = false;
+}
 
 
 void TextureOb::CreateTextureCoords(int col_num, int row_num, int fps)
@@ -151,28 +142,28 @@ int TextureOb::UpdateAnimationFrame(float elapsed_time)
     } 
 }
 
-           
+
 void loadToVRAM(const std::string& path, GLuint& texture, int& w, int& h)
 {
     sf::Image image;
-    if (!image.loadFromFile(path))
-     {
-         std::cout<<"FAULT: Not abe to open file:"<<path;
-         exit(EXIT_FAILURE);
-     }
-         
+    if (!image.loadFromFile(path)) {
+        std::cout<<"FAULT: Not abe to open file:"<<path;
+        exit(EXIT_FAILURE);
+    }
+
     image.flipVertically();
-    
+
     w = image.getSize().x;
     h = image.getSize().y;
 
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, w, h, GL_RGBA, GL_UNSIGNED_BYTE, image.getPixelsPtr());
-     
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-}         
+}
+
 
 
 

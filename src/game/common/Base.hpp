@@ -35,7 +35,7 @@ class Base : private NonCopyable
         void SetSubSubTypeId(TYPE::ENTITY subsubtype_id) { m_Data_id.subsubtype_id = subsubtype_id; }
         
         INTLONGEST GetId() const { return m_Data_id.id; }   
-        TYPE::ENTITY GetTypeId()       const { return m_Data_id.type_id; }
+        TYPE::ENTITY GetTypeId() const { return m_Data_id.type_id; }
         TYPE::ENTITY GetSubTypeId() const { return m_Data_id.subtype_id; }
         TYPE::ENTITY GetSubSubTypeId() const { return m_Data_id.subsubtype_id; }
                     

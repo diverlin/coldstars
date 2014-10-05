@@ -641,49 +641,49 @@ void StarSystem::Update(int time)
 
 void StarSystem::rocketCollision_s(bool show_effect)
 {
-        bool collide = false;
-        for (unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
+    bool collide = false;
+    for (unsigned int ri = 0; ri < ROCKET_vec.size(); ri++)
+    {
+        if (ROCKET_vec[ri]->GetAlive() == true)
         {
-                if (ROCKET_vec[ri]->GetAlive() == true) 
+            // vehicle
+            if (collide == false)
+            {
+                for (unsigned int vi = 0; vi < VEHICLE_vec.size(); vi++)
                 {
-                    // vehicle
-                    if (collide == false)
+                    if (ROCKET_vec[ri]->GetOwnerId() != VEHICLE_vec[vi]->GetId())
                     {
-                        for (unsigned int vi = 0; vi < VEHICLE_vec.size(); vi++)
-                        {
-                                if (ROCKET_vec[ri]->GetOwnerId() != VEHICLE_vec[vi]->GetId())
-                                {                        
-                                    collide = checkCollision2D(ROCKET_vec[ri], VEHICLE_vec[vi], show_effect);
-                                    if (collide == true) { break; }                        
-                                }
-                        }
+                        collide = checkCollision2D(ROCKET_vec[ri], VEHICLE_vec[vi], show_effect);
+                        if (collide == true) { break; }
                     }
-                    else  { continue; }   
-                    //
-                    
-                    
-                    if (collide == false)
-                    {
-                            for (unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
-                            {
-                                collide = checkCollision2D(ROCKET_vec[ri], ASTEROID_vec[ai], show_effect);
-                                if (collide == true) { break; }
-                            }
-                    }
-                    else  { continue; }
-                    
-                    
-                    if (collide == false)
-                    {
-                            for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
-                            {
-                                collide = checkCollision2D(ROCKET_vec[ri], CONTAINER_vec[ci], show_effect);
-                                if (collide == true) {     break; }
-                            }
-                    }
-                    else  { continue; }
                 }
+            }
+            else  { continue; }
+            //
+
+
+            if (collide == false)
+            {
+                for (unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
+                {
+                    collide = checkCollision2D(ROCKET_vec[ri], ASTEROID_vec[ai], show_effect);
+                    if (collide == true) { break; }
+                }
+            }
+            else  { continue; }
+
+
+            if (collide == false)
+            {
+                for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
+                {
+                    collide = checkCollision2D(ROCKET_vec[ri], CONTAINER_vec[ci], show_effect);
+                    if (collide == true) {     break; }
+                }
+            }
+            else  { continue; }
         }
+    }
 }
 
 
@@ -695,42 +695,42 @@ void StarSystem::asteroidCollision_s(bool show_effect)
 {
     bool collide = false;
     
-        for(unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
+    for(unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
+    {
+        if (ASTEROID_vec[ai]->GetAlive() == true)
         {
-                if (ASTEROID_vec[ai]->GetAlive() == true) 
+            if (collide == false)
+            {
+                for (unsigned int vi = 0; vi < VEHICLE_vec.size(); vi++)
                 {
-                    if (collide == false)
-                    {
-                            for (unsigned int vi = 0; vi < VEHICLE_vec.size(); vi++)
-                            {
-                                    collide = checkCollision2D(ASTEROID_vec[ai], VEHICLE_vec[vi], show_effect);
-                                if (collide == true) { break; }
-                            }                            
-                    }
-                    else { continue; }            
-                                        
-                    if (collide == false)
-                    {
-                            for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
-                            {
-                                    collide = checkCollision2D(ASTEROID_vec[ai], PLANET_vec[pi], show_effect);
-                                if (collide == true) { break; }
-                            }                            
-                    }
-                    else { continue; }
-                    
-                    
-                    
-                    if (collide == false)
-                    {
-                            for (unsigned int si = 0; si < STAR_vec.size(); si++)
-                            {
-                                    collide = checkCollision2D(ASTEROID_vec[ai], STAR_vec[si], show_effect);
-                                if (collide == true) { break; }
-                            }                            
-                    }
-                    else { continue; }
+                    collide = checkCollision2D(ASTEROID_vec[ai], VEHICLE_vec[vi], show_effect);
+                    if (collide == true) { break; }
                 }
+            }
+            else { continue; }
+
+            if (collide == false)
+            {
+                for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
+                {
+                    collide = checkCollision2D(ASTEROID_vec[ai], PLANET_vec[pi], show_effect);
+                    if (collide == true) { break; }
+                }
+            }
+            else { continue; }
+
+
+
+            if (collide == false)
+            {
+                for (unsigned int si = 0; si < STAR_vec.size(); si++)
+                {
+                    collide = checkCollision2D(ASTEROID_vec[ai], STAR_vec[si], show_effect);
+                    if (collide == true) { break; }
+                }
+            }
+            else { continue; }
+        }
     }
 }
 
@@ -750,6 +750,8 @@ void StarSystem::ExternalForcesAffection_s(bool detalied_simulation)
 
 void StarSystem::UpdateEntities_s(int time, bool show_effect)
 {
+    LoadEntitiesResource(); // hack for speed run
+
     for (unsigned int i=0; i<STAR_vec.size(); i++)             { STAR_vec[i]->UpdateInSpace(time, show_effect);  }    
     for (unsigned int i=0; i<PLANET_vec.size(); i++)           { PLANET_vec[i]->UpdateInSpace(time, show_effect); }
     for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++)         { BLACKHOLE_vec[i]->UpdateInSpace(time, show_effect); }
@@ -765,7 +767,28 @@ void StarSystem::UpdateEntities_s(int time, bool show_effect)
     for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)     { effect_SHOCKWAVE_vec[i]->Update(); }
     for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)         { text_DAMAGE_vec[i]->Update(); }   
     for (unsigned int i=0; i<distantNebulaEffect_vec.size(); i++) { distantNebulaEffect_vec[i]->Update(); } 
-}  
+}
+
+void StarSystem::LoadEntitiesResource()
+{
+    for (unsigned int i=0; i<STAR_vec.size(); i++)      { STAR_vec[i]->ValidateResources();  }
+    for (unsigned int i=0; i<PLANET_vec.size(); i++)    { PLANET_vec[i]->ValidateResources(); }
+    for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++) { BLACKHOLE_vec[i]->ValidateResources(); }
+    for (unsigned int i=0; i<CONTAINER_vec.size(); i++) { CONTAINER_vec[i]->ValidateResources(); }
+    for (unsigned int i=0; i<ASTEROID_vec.size(); i++)  { ASTEROID_vec[i]->ValidateResources(); }
+
+    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)   { VEHICLE_vec[i]->ValidateResources(); }
+    for (unsigned int i=0; i<ROCKET_vec.size(); i++)    { ROCKET_vec[i]->ValidateResources(); }
+
+    // effects
+    //for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)      { effect_LAZERTRACE_vec[i]->ValidateResources(); }
+    for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { effect_PARTICLESYSTEM_vec[i]->ValidateResources(); }
+    //for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)     { effect_SHOCKWAVE_vec[i]->ValidateResources(); }
+    //for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)         { text_DAMAGE_vec[i]->ValidateResources(); }
+    for (unsigned int i=0; i<distantNebulaEffect_vec.size(); i++) { distantNebulaEffect_vec[i]->ValidateResources(); }
+    for (unsigned int i=0; i<distantStarEffect_vec.size(); i++) { distantStarEffect_vec[i]->ValidateResources(); }
+
+}
       
 void StarSystem::UpdateInSpaceInStatic_s()
 {

@@ -16,19 +16,16 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #ifndef NONCOPYABLE_HPP
 #define NONCOPYABLE_HPP
 
+class NonCopyable {
+protected:
+    NonCopyable() {};
 
-class NonCopyable
-{
-    protected:
-        NonCopyable() {};
-        
-    private:      
-       NonCopyable(const NonCopyable&) = delete;
-       NonCopyable& operator =(const NonCopyable&) = delete;
+private:
+    NonCopyable(const NonCopyable&) = delete;
+    NonCopyable& operator =(const NonCopyable&) = delete;
 };
 
 #endif 

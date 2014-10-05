@@ -56,34 +56,34 @@ class LazerTraceEffect;
 
 namespace ENTITY 
 {
-    namespace STARSYSTEM
-    {
-        const int JUMPRADIUS = 1200;
-        
-        const int PLANET_NUM_MIN = 3;
-        const int PLANET_NUM_MAX = 5;
-        
-        const int SHIP_INIT_MIN = 4;
-        const int SHIP_INIT_MAX = 7;
-        const int SHIPENEMY_INIT_MIN = 50;
-        const int SHIPENEMY_INIT_MAX = 100;
+namespace STARSYSTEM
+{
+const int JUMPRADIUS = 1200;
 
-        const int SPACESTATION_NUM_MIN = 1;
-        const int SPACESTATION_NUM_MAX = 3;
-            
-        const int DISTANT_NEBULA_MIN = 6;
-        const int DISTANT_NEBULA_MAX = 8;
-        
-        enum CONDITION
-        {
-            WAR_ID=1, CAPTURED_ID, SAFE_ID
-        };
-    }
+const int PLANET_NUM_MIN = 3;
+const int PLANET_NUM_MAX = 5;
+
+const int SHIP_INIT_MIN = 4;
+const int SHIP_INIT_MAX = 7;
+const int SHIPENEMY_INIT_MIN = 50;
+const int SHIPENEMY_INIT_MAX = 100;
+
+const int SPACESTATION_NUM_MIN = 1;
+const int SPACESTATION_NUM_MAX = 3;
+
+const int DISTANT_NEBULA_MIN = 6;
+const int DISTANT_NEBULA_MAX = 8;
+
+enum CONDITION
+{
+    WAR_ID=1, CAPTURED_ID, SAFE_ID
+};
+}
 }
 
 struct UnresolvedData
 {
-    int sector_id;
+        int sector_id;
 };
 
 
@@ -99,20 +99,20 @@ class StarSystem : public BaseSpaceEntity
         void SetSector(Sector* sector)  { this->sector = sector; }
         void SetColor(const glm::vec4& color)  { this->color = color; }
         AsteroidManager& GetAsteroidManager()  { return asteroid_manager; }
-                                                
+
         const glm::vec4& GetColor() const { return color; }
         //bool GetDetailedSimulationFlag() const { return detalied_simulation; }
         int GetConditionId()     const { return condition_id; }
         TYPE::RACE GetRaceId()          const { return race_id; }
-        TYPE::RACE GetConquerorRaceId() const { return conqueror_race_id; } 
-        Star* GetStar()          const { return STAR_vec[0]; }    
+        TYPE::RACE GetConquerorRaceId() const { return conqueror_race_id; }
+        Star* GetStar()          const { return STAR_vec[0]; }
         Sector* GetSector()      const { return sector; }
         unsigned int GetShockWaveEffectNum()    const { return effect_SHOCKWAVE_vec.size(); }
         unsigned int GetAsteroidNum()     const { return ASTEROID_vec.size(); }
         unsigned int GetExplosionEffectNum()     const { return effect_PARTICLESYSTEM_vec.size(); }
         unsigned int GetTextDamageNum()     const { return text_DAMAGE_vec.size(); }
-        bool IsAnyActiveParticlesEffectPresent(int) const; 
-                        
+        bool IsAnyActiveParticlesEffectPresent(int) const;
+
         HyperSpace& GetHyperSpace() { return hyperspace; };
         
         Npc* GetFreeLeaderByRaceId(TYPE::RACE) const;
@@ -121,7 +121,7 @@ class StarSystem : public BaseSpaceEntity
         //// TRANSITION
         void AddVehicle(Vehicle*, const glm::vec3&, const glm::vec3&, const BaseSpaceEntity* const parent = nullptr);
         void AddBullet(RocketBullet*, const glm::vec3&, const glm::vec3&);
-                                
+
         void Add(BasePlanet*, const BaseSpaceEntity* parent = nullptr, int it = 0);
         void AddContainer(Container*, const glm::vec3&);
         void Add(BlackHole*, const glm::vec3&);
@@ -142,21 +142,22 @@ class StarSystem : public BaseSpaceEntity
         void BombExplosionEvent(Container*, bool);
         void StarSparkEvent(float) const;
         
-        void FindRenderVisibleEntities_c(Player*);  
-        void FindRadarVisibleEntities_c(Player*);  
+        void FindRenderVisibleEntities_c(Player*);
+        void FindRadarVisibleEntities_c(Player*);
         
         void Update(int);
-        
+        void LoadEntitiesResource();
+
         float CalcResultGravityForce(const glm::vec3&, const glm::vec3&, float) const;
 
         void DrawBackground(const Renderer&, const glm::vec2&);
-            void DrawOrbits(const Renderer&);
-            void DrawPath();
-                
+        void DrawOrbits(const Renderer&);
+        void DrawPath();
+
         void Save(boost::property_tree::ptree&) const;
         void Load(const boost::property_tree::ptree&);
         void Resolve();
-                                                                                           
+
         // poor
         Planet* GetClosestInhabitedPlanet(const glm::vec2&) const;
         Planet* GetRandomInhabitedPlanet() const;
@@ -165,7 +166,7 @@ class StarSystem : public BaseSpaceEntity
         Vehicle* GetRandomVehicleExcludingNpcRaceId(TYPE::RACE) const;
         Vehicle* GetRandomVehicleByNpcRaceId(TYPE::RACE) const;
         Vehicle* GetRandomVehicle(const std::vector<TYPE::RACE>&) const;
-        // 
+        //
     private:
         static int counter;
         
@@ -194,31 +195,31 @@ class StarSystem : public BaseSpaceEntity
         std::vector<BlackHole*>    BLACKHOLE_vec;
         
         std::vector<Vehicle*> VEHICLE_vec;
-                HyperSpace hyperspace;
-                               
-            // effects
-                std::vector<DistantNebulaEffect*> distantNebulaEffect_vec;
-            std::vector<DistantStarEffect*>   distantStarEffect_vec;
-            
-            std::vector<LazerTraceEffect*>    effect_LAZERTRACE_vec;
-            std::vector<BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
-            std::vector<ShockWaveEffect*>     effect_SHOCKWAVE_vec;            
-            std::vector<VerticalFlowText*>       text_DAMAGE_vec;
-                                  
-            GarbageEffects  garbage_effects;
-                                 
-            UnresolvedData data_unresolved_StarSystem;
-                                    
-                void LaunchingEvent() const;
-            
-            void UpdateInSpaceInStatic_s();
-            void UpdateEntities_s(int, bool);
-            
-            void UpdateStates();
-            
-            void DamageEventInsideCircle(const glm::vec3&, float, int, bool);
-            
-            void PostDeathUniqueEvent(bool);
+        HyperSpace hyperspace;
+
+        // effects
+        std::vector<DistantNebulaEffect*> distantNebulaEffect_vec;
+        std::vector<DistantStarEffect*>   distantStarEffect_vec;
+
+        std::vector<LazerTraceEffect*>    effect_LAZERTRACE_vec;
+        std::vector<BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
+        std::vector<ShockWaveEffect*>     effect_SHOCKWAVE_vec;
+        std::vector<VerticalFlowText*>    text_DAMAGE_vec;
+
+        GarbageEffects  garbage_effects;
+
+        UnresolvedData data_unresolved_StarSystem;
+
+        void LaunchingEvent() const;
+
+        void UpdateInSpaceInStatic_s();
+        void UpdateEntities_s(int, bool);
+
+        void UpdateStates();
+
+        void DamageEventInsideCircle(const glm::vec3&, float, int, bool);
+
+        void PostDeathUniqueEvent(bool);
 
         void ShipManager_s(unsigned int);
         
@@ -233,10 +234,10 @@ class StarSystem : public BaseSpaceEntity
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();
         
-    friend class GuiGalaxyMap;
-    friend class Observation;
-    friend class Player;
-    friend class God;
+        friend class GuiGalaxyMap;
+        friend class Observation;
+        friend class Player;
+        friend class God;
 };
 
 #endif 
