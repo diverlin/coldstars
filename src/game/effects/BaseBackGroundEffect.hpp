@@ -32,6 +32,7 @@ class BaseBackGroundEffect
         BaseBackGroundEffect();
         ~BaseBackGroundEffect();
 
+        void ValidateResources() const;
         void SetTextureOb(TextureOb* textureOb, const glm::vec3& scale_factor = glm::vec3(1.0, 1.0, 1.0));
 
         void SetCenter(const glm::vec3& center)     { m_Center = center; }        

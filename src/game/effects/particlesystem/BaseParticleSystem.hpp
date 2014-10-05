@@ -35,6 +35,7 @@ class BaseParticleSystem
         BaseParticleSystem();
         virtual ~BaseParticleSystem();
         
+        void ValidateResources() const;
         void SetDying() { m_IsDying = true; }
         void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; }
         void SetParent(BaseSpaceEntity* parent) { m_Parent = parent; }

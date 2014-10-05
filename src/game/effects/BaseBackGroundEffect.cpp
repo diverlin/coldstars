@@ -39,6 +39,14 @@ m_DeltaAngle(0.0f)
 BaseBackGroundEffect::~BaseBackGroundEffect()
 {}
 
+void BaseBackGroundEffect::ValidateResources() const
+{
+    assert(m_TextureOb);
+    if (!m_TextureOb->GetIsLoaded()) {
+        m_TextureOb->Load();
+    }
+}
+
 const glm::mat4& BaseBackGroundEffect::GetActualModelMatrix()
 {
     m_Tm = glm::translate(m_Center);

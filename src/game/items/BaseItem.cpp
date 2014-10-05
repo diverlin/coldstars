@@ -139,20 +139,13 @@ void BaseItem::Render(const Renderer& render, const Box2D& box, const glm::vec2&
 
 void BaseItem::RenderKorpus(const Renderer& render, const Box2D& box)
 {
-    if (Is3D())
-    {
-        glm::vec2 v(0.0);
-        glm::vec4 c(1.0, 1.0, 1.0, 1.0);
-        glm::vec3 center(box.GetCenter().x, box.GetCenter().y, GUI::POS_Z);
-        SetCenter(center);
-        //SetAngle(box.GetAngle());
-        //SetScale(box.GetSize());
-        //RenderMeshLight(v, c);
-    }
-    else
-    {
-        render.DrawQuad(GetTextureOb(), box); 
-    }
+    glm::vec2 v(0.0);
+    glm::vec4 c(1.0, 1.0, 1.0, 1.0);
+    glm::vec3 center(box.GetCenter().x, box.GetCenter().y, GUI::POS_Z);
+    SetCenter(center);
+    //SetAngle(box.GetAngle());
+    //SetScale(box.GetSize());
+    //RenderMeshLight(v, c);
 }
 
 void BaseItem::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

@@ -32,7 +32,7 @@
 
 const bool FALSE_RESOURCES = false;
 
-struct MaterialData
+struct MaterialDrawData
 {
     int id;
     int w, h;
@@ -70,7 +70,7 @@ struct MaterialData
     int color_id;
     bool is_rotated;
 
-    MaterialData()
+    MaterialDrawData()
     :
     id(0),
     w(1), h(1),
@@ -94,14 +94,14 @@ struct MaterialData
     {}    
 };
 
-struct MaterialAssociation
+struct MaterialAssociationData
 {
     TYPE::TEXTURE type_id;
     TYPE::ENTITY subtype_id;   //# warrior/trader and so on
     TYPE::RACE race_id;
     TYPE::TECHLEVEL tech_level_id;
 
-    MaterialAssociation()
+    MaterialAssociationData()
     :
     type_id(TYPE::TEXTURE::NONE_ID),
     subtype_id(TYPE::ENTITY::NONE_ID),
@@ -114,7 +114,7 @@ struct MaterialAssociation
 class TextureOb
 {
     public:
-        TextureOb(const MaterialData& data);
+        TextureOb(const MaterialDrawData& data);
         ~TextureOb();
 
         const glm::vec3 GetSize() const { return glm::vec3(0.5*m_Data.w_slice, 0.5*m_Data.h_slice, 1.0f); }     // ugly
@@ -122,19 +122,23 @@ class TextureOb
         int GetFrameWidth() const  { return m_Data.w_slice; }
         int GetFrameHeight() const { return m_Data.h_slice; }
         
+        bool GetIsLoaded() const { return m_IsLoaded; }
+        void Load();
         void RemoveFromVRAM();
-        
+
         int UpdateAnimationFrame(float);
 
-        const MaterialData& GetData() const { return m_Data; }
-        const MaterialAssociation& GetAssociation() const { return m_Association; }
+        const MaterialDrawData& GetData() const { return m_Data; }
+        const MaterialAssociationData& GetAssociation() const { return m_Association; }
 
         //void SetData(const MaterialData& data) { m_Data = data; } 
-        void SetAssociation(const MaterialAssociation& association) { m_Association = association; }
+        void SetAssociation(const MaterialAssociationData& association) { m_Association = association; }
 
     private:
-        MaterialAssociation m_Association;
-        MaterialData m_Data;
+        MaterialAssociationData m_Association;
+        MaterialDrawData m_Data;
+
+        bool m_IsLoaded;
 
         unsigned int m_CurrentFrame;
         unsigned int m_FramesCount; 
