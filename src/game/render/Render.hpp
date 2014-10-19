@@ -70,7 +70,7 @@ class Renderer : public NonCopyable
         void DrawMesh                (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawMeshLight           (const Mesh&, const TextureOb&, const glm::mat4&) const;
         void DrawMeshLightNormalMap  (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void DrawMeshMultiTextured   (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void DrawMeshMultiTextured   (const Mesh&, const TextureOb&, const glm::mat4&, float offset) const;
 
         void DrawQuad(const TextureOb&, const glm::mat4&) const;
         void DrawQuad(const TextureOb&, const Box2D&) const;

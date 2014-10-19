@@ -40,7 +40,7 @@ TextureOb::TextureOb(const MaterialDrawData& data)
         m_Data.is_animated = true;
     }   
 
-    //Load();
+    Load();
     
     CreateTextureCoords(m_Data.col_num, m_Data.row_num, m_Data.fps); 
     

@@ -384,7 +384,7 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
 
                 for(Star* star : visible_STAR_vec)
                 {
-                    render.DrawMeshMultiTextured(star->GetMesh(), star->GetTextureOb(), star->GetActualModelMatrix());
+                    render.DrawMeshMultiTextured(star->GetMesh(), star->GetTextureOb(), star->GetActualModelMatrix(), star->GetOffset());
                 }
             }
             render.DeactivateFbo(0);

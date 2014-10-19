@@ -28,6 +28,7 @@ class Star : public BasePlanet
         Star(int);
         virtual ~Star();
         
+        float GetOffset() const { return m_Offset; }
         int GetColorId() const;
         float GetBrightThreshold() const;
         float GetDeltaColor() const { return m_DeltaColor; }
@@ -38,12 +39,15 @@ class Star : public BasePlanet
         void CalcColor();        
         void UpdateInSpaceInStatic();    
         void UpdateInSpace(int, bool);
-        
+        void Update();
+
         virtual void Save(boost::property_tree::ptree&) const override final;
         virtual void Load(const boost::property_tree::ptree&) override final;
         virtual void Resolve() override final;
                 
     private:
+        float m_Offset;
+
         float m_DeltaColor;
         
         bool m_SparkActive;

@@ -311,7 +311,7 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
 	}
 } 
 
-void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
+void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix, float offset) const
 {
  	UseTransparentMode(textureOb.GetData().use_alpha);
  	
@@ -328,7 +328,7 @@ void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureO
 		glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
 		glUniform1i(glGetUniformLocation(m_Shaders.multitexturing, "Texture_1"), 1);
 		
-		glUniform2f(glGetUniformLocation(m_Shaders.multitexturing, "displ"), textureOb.GetData().texture_offset.x, textureOb.GetData().texture_offset.y);        
+        glUniform2f(glGetUniformLocation(m_Shaders.multitexturing, "displ"), offset, offset);
 				  
 		mesh.Draw();
 	}

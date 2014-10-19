@@ -33,6 +33,7 @@
    
 Star::Star(int id)
 :
+m_Offset(0.0),
 m_DeltaColor(0.0),
 m_SparkActive(false),
 m_SparkGrows(false),
@@ -85,42 +86,14 @@ void Star::UpdateInSpaceInStatic()
                
 void Star::UpdateInSpace(int time, bool show_effect)
 {
-    if (m_SparkActive == true)
-    {
-        if (show_effect == true)
-        {
-            if (m_SparkGrows == true)
-            {
-                m_DeltaColor += 0.02;
-                //scale += 0.2;
-                if (m_DeltaColor > 1.0)
-                {
-                    m_DeltaColor = 1.0;
-                    GetStarSystem()->StarSparkEvent(getRandInt(600, 1200));
-                    m_SparkGrows = false;
-                }
-            } 
-            else
-            {        
-                m_DeltaColor -= 0.005;    
-                //scale -= 0.05;
-                if (m_DeltaColor < 0.0)
-                {
-                    m_DeltaColor = 0;
-                    m_SparkActive = false;
-                } 
-            }
-        }
-        else
-        {
-            GetStarSystem()->StarSparkEvent(getRandInt(600, 1200));
-            m_SparkActive = false;
-        }
-    }
 
-    //UpdateRotation(); // not relevant for render NEW
 }    
-    
+
+void Star::Update()
+{
+   m_Offset += getRandFloat(0.0001, 0.0005);
+}
+
 /* virtual override final */
 void Star::UpdateInfo()
 { 

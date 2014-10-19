@@ -20,153 +20,90 @@
 #include "resources/init.hpp"
 #include "resources/MeshCollector.hpp"
 
-#include "builder/world/GalaxyBuilder.hpp"
-#include "builder/pilots/PlayerBuilder.hpp"
-#include "config/config.hpp"
+#include "builder/spaceobjects/StarBuilder.hpp"
+#include "spaceobjects/Star.hpp"
 
 #include "render/Screen.hpp"
 #include "render/GlErrorHelper.hpp"
-
-#include "gui/UserInputManagerInSpace.hpp"
-#include "gui/ButtonTrigger.hpp"
-#include "gui/GuiActions.hpp"
+#include "resources/TextureManager.hpp"
+#include "resources/textureOb.hpp"
 
 #include "common/TurnTimer.hpp"
 
-#include "pilots/Npc.hpp"
-#include "pilots/Player.hpp"
+#include "gui/UserInput.hpp"
+#include "gui/UserInputManagerInSpace.hpp"
 
-#include "spaceobjects/Planet.hpp"
-#include "spaceobjects/Vehicle.hpp"
 
-#include "world/EntityManager.hpp"
-#include "world/galaxy.hpp"
-#include "world/Sector.hpp"
-#include "world/starsystem.hpp"
-#include "world/God.hpp"
+void renderStar_NEW(Renderer& render, Star* star)
+{
+    int w = Screen::Instance().GetWidth();
+    int h = Screen::Instance().GetHeight();
+    glm::vec2 world_coord(Screen::Instance().GetBottomLeft());
 
-#include "garbage/EntityGarbage.hpp"
+    render.ClearColorAndDepthBuffers();
 
-#include "struct/GalaxyDescription.hpp"
-#include "dock/BaseLand.hpp"
+    // apply projection matrix
+    render.SetOrthogonalProjection(w, h);
 
-#include "run_scenario/NormalRunScenario.hpp"
-#include "run_scenario/TestParticlesRunScenario.hpp"
-#include "run_scenario/TestTextRunScenario.hpp"
-#include "run_scenario/TestDrawManySimpleMeshesRunScenario.hpp"
+    // apply view matrix
+    Camera& camera = Screen::Instance().GetCamera();
+    camera.Update(w, h);
+    render.ComposeViewMatrix(camera.GetViewMatrix());
 
-#include "../pureTest/pureTest.cpp"
-#include "../pureTest/threadTest.cpp"
-#include "../pureTest/vectorPerfomanceTest.cpp"
-#include "../pureTest/matrixPerfomanceTest.cpp"
+    // render star to FBO0
+    render.ActivateFbo(0, w, h);
+    {
+        render.DrawMeshMultiTextured(star->GetMesh(), star->GetTextureOb(), star->GetActualModelMatrix(), star->GetOffset());
+    }
+    render.DeactivateFbo(0);
 
-enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
+    // apply BLOOM star (uses many internal FBO inside)
+    render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), star->GetBrightThreshold());
+
+    // apply VOLUMETRIC LIGHT to FBO1
+    render.ActivateFbo(1, w, h);
+    {
+        render.DrawPostEffectVolumetricLight(world_coord, w, h);
+    }
+    render.DeactivateFbo(1);
+
+    // compose final scene
+    render.ClearColorAndDepthBuffers();
+    render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
+}
+
 
 int main()
-{
-    //runThreadTest();
-    //runSinglethread();    
-    //runVectorPerfomanceTest();
-    
+{   
+    // init stuff (load, data, shaders and so on)
     Screen::Instance().InitRenderStuff();
     initGameStuff(); 
-    Screen::Instance().GetRender().InitPostEffects();  
-    Screen::Instance().GetRender().MakeShortCuts();
-    Screen::Instance().GetRender().SetMeshQuad(MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID));
-        
-    //runMatrixPerfomanceTest();
-        
-    Player* player = PlayerBuilder::Instance().GetNewPlayer();
-    
-    BaseRunScenario* run_scenario = nullptr;
-    RUN_SCENARIO scenario_type = RUN_SCENARIO::NORMAL_RUN;
-    switch(scenario_type)
-    {
-        case RUN_SCENARIO::NORMAL_RUN:         { run_scenario = new NormalRunScenario(); break; }
-        case RUN_SCENARIO::TEST_PARTICLES:     { run_scenario = new TestParticlesRunScenario(); break; }    
-        case RUN_SCENARIO::TEST_TEXT:          { run_scenario = new TestTextRunScenario(); break; }
-        case RUN_SCENARIO::TEST_MANY_VAO:      { run_scenario = new TestDrawManySimpleMeshesRunScenario(); break; }
-        default:                               { std::cout<<"INVALID_RUNSCENARIO"<<std::endl; return EXIT_FAILURE; break; }    
-    }
-    run_scenario->Init(player);
-    
-    Galaxy* galaxy = player->GetNpc()->GetVehicle()->GetStarSystem()->GetSector()->GetGalaxy();       
-        
-    player->GetNpc()->GetVehicle()->SetGodMode(true);
-    //player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
-    player->GetNpc()->GetVehicle()->TEST_DropRandomItemToSpace();
 
-    //Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
-    
-    /** */
-    //ButtonTrigger* button = new ButtonTrigger(/*subtype_id=*/1, /*info*/"info", /*pAction=*/GuiActions::Test, /*textureOb*/NULL);
-    //button->OnPressEventMBL(player);
-    //button->OnPressEventMBL(player);
+    // prepare renderer
+    Renderer& renderer = Screen::Instance().GetRender();
+    renderer.InitPostEffects();
+    renderer.MakeShortCuts();
+    renderer.SetMeshQuad(MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID));
 
-    //ButtonTrigger* button2 = new ButtonTrigger(/*subtype_id=*/2, /*info*/"info", /*pAction=*/GuiActions::Test2, /*textureOb*/NULL);
-    //button2->OnPressEventMBL(player);
-    
-    ////GuiActions::GalaxyMapGuiTransition(player);
-    ////player->GetGuiManager().EnterGuiSpace();
-    ////player->GetGuiManager().GetGuiSpace().EnterGalaxyMap();
-    /** */
-    
+    // create objects
+    Star* star = StarBuilder::Instance().GetNewStar();
+
     // GAME LOOP
     while (Screen::Instance().GetWindow().isOpen())
     {    
-        //std::cout<<player->GetNpc()->GetVehicle()->GetCenter().x<<std::endl;
-        //std::cout<<player->GetNpc()->GetVehicle()->GetProperties().radar<<std::endl;
-                
-        /* server code start */
-        TurnTimer::Instance().Update();
+        // manage the user input
+        UserInputManagerInSpace::Instance().UpdateInSpace(nullptr);
+        Screen::Instance().UpdateInSpace();
 
-        God::Instance().Update(GameDate::Instance().GetDate());
-        for (int i=0; i<Config::Instance().GAME_SPEED; i++)  // fake implementation (static ai should not be run several times at once)
-        {
-            galaxy->Update(TurnTimer::Instance().GetTurnTick());
-        }
+        // render gl
+        star->Update();
+        renderStar_NEW(renderer, star);
 
-        if ((TurnTimer::Instance().GetTurnEnded() == true) and (UserInputManagerInSpace::Instance().GetNextTurnReady()))
-        {
-            TurnTimer::Instance().NextTurn();
-        } 
-        /* server code end */
-
-        /* client code start */
-        player->UpdatePostTransaction();   
-        player->RunSession(TurnTimer::Instance());  
-        player->UpdatePostTransactionEvent(TurnTimer::Instance()); 
-        /* client code end */
-        
-        if (TurnTimer::Instance().GetTurnEnded() == true)
-        {
-            EntityGarbage::Instance().Clear();
-
-            bool save_event = EntityManager::Instance().UpdateSaveRequest();
-            bool load_event = EntityManager::Instance().UpdateLoadRequest();
-            if (load_event == true)
-            {
-                player = EntityManager::Instance().GetPlayer();
-                galaxy = player->GetNpc()->GetVehicle()->GetStarSystem()->GetSector()->GetGalaxy();
-            }
-            if (save_event == true)
-            {
-            
-            }
-        }
-
-        if (TurnTimer::Instance().GetTurnTick() > 1) // hack
-        {
-            run_scenario->Update_inDynamic(player);
-        }
-        else
-        {
-            run_scenario->Update_inStatic(player);        
-        }
+        // send smfl draw command
+        Screen::Instance().Draw();
 
         checkOpenglErrors(__FILE__,__LINE__);
     }
 
     return EXIT_SUCCESS;
 }
-

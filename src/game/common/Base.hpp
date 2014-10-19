@@ -24,9 +24,6 @@
 #include <boost/property_tree/ptree.hpp>
 #include <struct/IdData.hpp>
 
-namespace cs_core
-{
-
 class Base : private NonCopyable
 {
     public:      
@@ -59,7 +56,5 @@ class Base : private NonCopyable
     private:
         IdData m_Data_id;    
 };
-
-}
 
 #endif 
