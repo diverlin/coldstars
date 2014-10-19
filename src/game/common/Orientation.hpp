@@ -57,16 +57,16 @@ class Orientation : public Base
         float GetCollisionRadius() const  { return m_CollisionRadius; }
 
         void UpdateOrientation();     //depr
-                                
+
+        void SetDirection(const glm::vec3& direction)   { m_Direction = glm::normalize(direction); m_IsUpdated = false; }
+        void SetCollisionRadius(float collision_radius) { m_CollisionRadius = collision_radius; }
+
     protected:            
         UnresolvedDataOrientation data_unresolved_Orientation;
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();
 
-        void SetDirection(const glm::vec3& direction)   { m_Direction = glm::normalize(direction); m_IsUpdated = false; }
-        void SetCollisionRadius(float collision_radius) { m_CollisionRadius = collision_radius; }    
-                        
     private:
         bool m_IsUpdated;
 
