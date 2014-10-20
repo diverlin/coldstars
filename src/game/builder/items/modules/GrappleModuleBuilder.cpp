@@ -79,7 +79,7 @@ void GrappleModuleBuilder::CreateNewInternals(GrappleModule* grapple_module, int
     speed_add      = getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);
 
     grapple_module->SetParentSubTypeId(TYPE::ENTITY::GRAPPLE_EQUIPMENT_ID);    
-    grapple_module->SetRenderData(mesh, texOb, texOb->GetSize());
+    //alpitodorender grapple_module->SetRenderData(mesh, texOb, texOb->GetSize());
     grapple_module->SetStrengthAdd(strength_add);
     grapple_module->SetRadiusAdd(radius_add);
     grapple_module->SetSpeedAdd(speed_add);

@@ -77,7 +77,7 @@ void DroidModuleBuilder::CreateNewInternals(DroidModule* droid_module, int repai
     repair_add  = getRandInt(MODULE::DROID::REPAIR_MIN, MODULE::DROID::REPAIR_MAX);
 
     droid_module->SetParentSubTypeId(TYPE::ENTITY::DROID_EQUIPMENT_ID);    
-    droid_module->SetRenderData(mesh, texOb, texOb->GetSize());
+    //alpitodorender droid_module->SetRenderData(mesh, texOb, texOb->GetSize());
     droid_module->SetRepairAdd(repair_add);
 }
 

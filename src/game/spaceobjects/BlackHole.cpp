@@ -83,12 +83,12 @@ void BlackHole::UpdateInfo()
       
 void BlackHole::Render_NEW(const Renderer& render)
 {
-    render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    //alpitodorender render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
     
 void BlackHole::Render_OLD(const Renderer& render)
 {
-    render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());    
+    //alpitodorender render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
      
 void BlackHole::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
@@ -121,7 +121,7 @@ void BlackHole::Save(boost::property_tree::ptree& save_ptree) const
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);
-    BaseDrawable::SaveData(save_ptree, root);
+//    BaseDrawable::SaveData(save_ptree, root);
     BaseSpaceEntity::SaveData(save_ptree, root);
     BasePlanet::SaveData(save_ptree, root);
     BlackHole::SaveData(save_ptree, root);
@@ -132,7 +132,7 @@ void BlackHole::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Orientation::LoadData(load_ptree);
-    BaseDrawable::LoadData(load_ptree);
+//    BaseDrawable::LoadData(load_ptree);
     BaseSpaceEntity::LoadData(load_ptree);
     BasePlanet::LoadData(load_ptree);
     BlackHole::LoadData(load_ptree);
@@ -143,7 +143,7 @@ void BlackHole::Resolve()
 {
     Base::ResolveData();
     Orientation::ResolveData();
-    BaseDrawable::ResolveData();
+//    BaseDrawable::ResolveData();
     BaseSpaceEntity::ResolveData();
     BasePlanet::ResolveData();
     BlackHole::ResolveData();

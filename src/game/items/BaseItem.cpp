@@ -166,9 +166,10 @@ void BaseItem::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
     save_ptree.put(root+"data_item.deterioration_normal",           data_item.deterioration_normal);   
     save_ptree.put(root+"data_item.deterioration_overload_rate",    data_item.deterioration_overload_rate);   
     save_ptree.put(root+"data_item.mass",                           data_item.mass);
-                    
-    if (HasTextureOb())     { save_ptree.put(root+"unresolved.textureOb_path", GetTextureOb().GetData().texture_path); }
-    else                    { save_ptree.put(root+"unresolved.textureOb_path", "none"); }
+
+    //alpitodorender
+//    if (HasTextureOb())     { save_ptree.put(root+"unresolved.textureOb_path", GetTextureOb().GetData().texture_path); }
+//    else                    { save_ptree.put(root+"unresolved.textureOb_path", "none"); }
         
     if (item_slot)     { save_ptree.put(root+"unresolved.item_slot_id", item_slot->GetId()); }
     else               { save_ptree.put(root+"unresolved.item_slot_id", NONE_ID); }

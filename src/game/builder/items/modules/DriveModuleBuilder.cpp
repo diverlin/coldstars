@@ -78,7 +78,7 @@ void DriveModuleBuilder::CreateNewInternals(DriveModule* drive_module, int speed
     hyper_add = getRandInt(MODULE::DRIVE::HYPER_MIN, MODULE::DRIVE::HYPER_MAX);
     
     drive_module->SetParentSubTypeId(TYPE::ENTITY::DRIVE_EQUIPMENT_ID);    
-    drive_module->SetRenderData(mesh, texOb, texOb->GetSize());
+    //alpitodorender drive_module->SetRenderData(mesh, texOb, texOb->GetSize());
     drive_module->SetSpeedAdd(speed_add);
     drive_module->SetHyperAdd(hyper_add);
 }

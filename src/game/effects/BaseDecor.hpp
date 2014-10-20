@@ -20,11 +20,11 @@
 #ifndef BASEDECOR_HPP
 #define BASEDECOR_HPP
 
-#include <common/BaseDrawable.hpp>
+#include <common/Orientation.hpp>
 
 class Renderer;
 
-class BaseDecor : public BaseDrawable
+class BaseDecor : public Orientation
 {
     public:
         BaseDecor() {}

@@ -85,11 +85,11 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ASTEROID_ID); 
           
-    asteroid->SetRenderData(mesh, texOb, scale);        
+    //alpitodorender asteroid->SetRenderData(mesh, texOb, scale);
 
     float delta_angle = 0.0001*getRandInt(20, 60);
     AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
-    asteroid->SetAnimationRotation(animation_rotation);
+    //alpitodorender asteroid->SetAnimationRotation(animation_rotation);
                 
     asteroid->SetGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
 }

@@ -20,7 +20,7 @@
 #ifndef BASESPACEENTITY_HPP
 #define BASESPACEENTITY_HPP
 
-#include <common/BaseDrawable.hpp>
+#include <common/Orientation.hpp>
 #include <struct/LifeData.hpp>
 #include <text/InfoTable.hpp>
 #include <types/PlaceTypes.hpp>
@@ -39,7 +39,7 @@ struct UnresolvedDataBaseSpaceEntity
     int starsystem_id;     
 }; 
 
-class BaseSpaceEntity : public BaseDrawable
+class BaseSpaceEntity : public Orientation
 {
     public:      
         BaseSpaceEntity();

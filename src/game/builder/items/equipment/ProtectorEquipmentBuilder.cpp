@@ -99,7 +99,7 @@ void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector
     common_data.deterioration_normal = 1;
 
     protector_equipment->SetProtectionOrig(protection_orig);  
-    protector_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
+    //alpitodorender protector_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
     protector_equipment->SetParentSubTypeId(TYPE::ENTITY::PROTECTOR_SLOT_ID);
     protector_equipment->SetItemCommonData(common_data);
     protector_equipment->SetCondition(common_data.condition_max);

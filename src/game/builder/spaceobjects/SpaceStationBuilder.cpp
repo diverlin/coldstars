@@ -131,11 +131,11 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     spacestation->SetKorpusData(data_korpus);
     spacestation->SetLifeData(data_life);
 
-    spacestation->SetRenderData(mesh, texOb, size);
+    //alpitodorender spacestation->SetRenderData(mesh, texOb, size);
         
     float delta_angle = 0.0001*getRandInt(20, 60);
     AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
-    spacestation->SetAnimationRotation(animation_rotation);
+    //alpitodorender spacestation->SetAnimationRotation(animation_rotation);
 
     
     spacestation->SetMass(getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));

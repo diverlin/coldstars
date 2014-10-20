@@ -19,7 +19,8 @@
 #ifndef BASEITEM_HPP
 #define BASEITEM_HPP
 
-#include <common/BaseDrawable.hpp>
+#include <common/Orientation.hpp>
+#include <render/Render.hpp>
 
 #include <types/MyInt.hpp>
 #include <types/TechLevelTypes.hpp>
@@ -55,7 +56,7 @@ struct UnresolvedDataBaseItem
     INTLONGEST item_slot_id;
 };
 
-class BaseItem : public BaseDrawable
+class BaseItem : public Orientation
 {
     public:
         BaseItem();

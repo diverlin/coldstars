@@ -78,7 +78,7 @@ void StarSystemBuilder::CreateNewInternals(StarSystem* starsystem, const StarSys
     CreateStar(starsystem);
     
     int distNebula_num = getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
-    CreateBackground(starsystem, distNebula_num, /*distStar_num*/1, starsystem->GetStar()->GetColorId());
+    // alpitodorender CreateBackground(starsystem, distNebula_num, /*distStar_num*/1, starsystem->GetStar()->GetColorId());
       
     CreatePlanets(starsystem, starsystem_description.planet_num);
 }
@@ -102,7 +102,7 @@ void StarSystemBuilder::CreateStar(StarSystem* starsystem) const
 {
     Star* star = StarBuilder::Instance().GetNewStar(); 
     starsystem->Add(star);
-    starsystem->SetColor(star->GetColor());
+    //alpitodorender starsystem->SetColor(star->GetColor());
 }
 
 void StarSystemBuilder::CreatePlanets(StarSystem* starsystem, int planet_per_system) const

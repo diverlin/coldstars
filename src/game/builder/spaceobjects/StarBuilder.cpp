@@ -82,9 +82,9 @@ void StarBuilder::CreateNewInternals(Star* star) const
     star->SetLifeData(data_life);
     float scale_comp = getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX); 
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
-    star->SetRenderData(mesh, texOb, scale);    
+    //alpitodorender star->SetRenderData(mesh, texOb, scale);
  
-    star->CalcColor();
+    // alpitodorender star->CalcColor();
 }
 
 

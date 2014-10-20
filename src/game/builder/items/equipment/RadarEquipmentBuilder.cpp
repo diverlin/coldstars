@@ -100,7 +100,7 @@ void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, 
     common_data.deterioration_normal = 1;
 
     radar_equipment->SetRadiusOrig(radius_orig);
-    radar_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
+    //alpitodorender radar_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
     radar_equipment->SetParentSubTypeId(TYPE::ENTITY::RADAR_SLOT_ID);
     radar_equipment->SetItemCommonData(common_data);
     radar_equipment->SetCondition(common_data.condition_max);

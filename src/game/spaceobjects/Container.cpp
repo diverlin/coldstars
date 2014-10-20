@@ -115,7 +115,7 @@ void Container::UpdateInSpace(int time, bool show_effect)
                
 void Container::Render(const Renderer& render)
 { 
-    render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    //alpitodorender render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
 
 void Container::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    
@@ -158,7 +158,7 @@ void Container::Save(boost::property_tree::ptree& save_ptree) const
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);
-    BaseDrawable::SaveData(save_ptree, root);
+//    BaseDrawable::SaveData(save_ptree, root);
     BaseSpaceEntity::SaveData(save_ptree, root);
     Container::SaveData(save_ptree, root);
 }
@@ -168,7 +168,7 @@ void Container::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Orientation::LoadData(load_ptree);
-    BaseDrawable::LoadData(load_ptree);
+//    BaseDrawable::LoadData(load_ptree);
     BaseSpaceEntity::LoadData(load_ptree);
     Container::LoadData(load_ptree);
 }
@@ -178,7 +178,7 @@ void Container::Resolve()
 {
     Base::ResolveData();
     Orientation::ResolveData();
-    BaseDrawable::ResolveData();
+//    BaseDrawable::ResolveData();
     BaseSpaceEntity::ResolveData();
     Container::ResolveData();
 }

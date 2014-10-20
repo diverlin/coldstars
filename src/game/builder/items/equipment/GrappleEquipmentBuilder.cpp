@@ -104,7 +104,7 @@ void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equip
     grapple_equipment->SetRadiusOrig(radius_orig);
     grapple_equipment->SetSpeedOrig(speed_orig);
 
-    grapple_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());    
+    //alpitodorender grapple_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
     grapple_equipment->SetParentSubTypeId(TYPE::ENTITY::GRAPPLE_SLOT_ID);
     grapple_equipment->SetItemCommonData(common_data);        
     grapple_equipment->SetCondition(common_data.condition_max);

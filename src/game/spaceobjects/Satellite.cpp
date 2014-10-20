@@ -150,7 +150,7 @@ void Satellite::Save(boost::property_tree::ptree& save_ptree) const
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);
-    BaseDrawable::SaveData(save_ptree, root);
+//    BaseDrawable::SaveData(save_ptree, root);
     BaseSpaceEntity::SaveData(save_ptree, root);
     Vehicle::SaveData(save_ptree, root);
     Satellite::SaveData(save_ptree, root);
@@ -161,7 +161,7 @@ void Satellite::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Orientation::LoadData(load_ptree);
-    BaseDrawable::LoadData(load_ptree);
+//    BaseDrawable::LoadData(load_ptree);
     BaseSpaceEntity::LoadData(load_ptree);
     Vehicle::LoadData(load_ptree);
     Satellite::LoadData(load_ptree);
@@ -172,7 +172,7 @@ void Satellite::Resolve()
 {
     Base::ResolveData();
     Orientation::ResolveData();
-    BaseDrawable::ResolveData();
+//    BaseDrawable::ResolveData();
     BaseSpaceEntity::ResolveData();
     Vehicle::ResolveData();
     Satellite::ResolveData();

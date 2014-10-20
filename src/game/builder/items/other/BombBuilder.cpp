@@ -72,7 +72,7 @@ void BombBuilder::CreateNewInternals(Bomb* bomb, int damage, int radius) const
     damage = 300;
     radius = 300;
         
-    bomb->SetRenderData(mesh, texOb, texOb->GetSize());
+    //alpitodorender bomb->SetRenderData(mesh, texOb, texOb->GetSize());
     bomb->SetDamage(damage);
     bomb->SetRadius(radius);
     bomb->SetParentSubTypeId(TYPE::ENTITY::CARGO_SLOT_ID);

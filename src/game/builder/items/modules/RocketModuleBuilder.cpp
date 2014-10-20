@@ -78,7 +78,7 @@ void RocketModuleBuilder::CreateNewInternals(RocketModule* rocket_module, int am
     radius_add = getRandInt(MODULE::ROCKET::RADIUS_MIN, MODULE::ROCKET::RADIUS_MAX);
 
     rocket_module->SetParentSubTypeId(TYPE::ENTITY::ROCKET_EQUIPMENT_ID);    
-    rocket_module->SetRenderData(mesh, texOb, texOb->GetSize());
+    // alpitodorender rocket_module->SetRenderData(mesh, texOb, texOb->GetSize());
     rocket_module->SetAmmoMaxAdd(ammo_max_add);
     rocket_module->SetDamageAdd(damage_add);
     rocket_module->SetRadiusAdd(radius_add);

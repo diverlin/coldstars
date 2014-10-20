@@ -525,7 +525,7 @@ void Vehicle::UpdateSpecialAction()
         
         case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID:
         {
-            if (UpdateFadeInEffect() == true)
+            // alpitodorender if (UpdateFadeInEffect() == true)
             {
                 DockingEvent();
                 m_SpecialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
@@ -536,7 +536,7 @@ void Vehicle::UpdateSpecialAction()
                     
         case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:
         {
-            if (UpdateFadeOutEffect() == true)
+            // alpitodorender if (UpdateFadeOutEffect() == true)
             {
                 m_SpecialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
             }
@@ -546,7 +546,7 @@ void Vehicle::UpdateSpecialAction()
 
         case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID:
         {
-            if (UpdateFadeInEffect() == true)
+            // alpitodorender if (UpdateFadeInEffect() == true)
             {
                 HyperJumpEvent(m_ComplexDrive.GetTarget()->GetStarSystem());
             }
@@ -556,7 +556,7 @@ void Vehicle::UpdateSpecialAction()
         
         case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:
         {
-            if (UpdateFadeOutEffect() == true)
+            // alpitodorender if (UpdateFadeOutEffect() == true)
             {
                 m_SpecialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
             }
@@ -664,7 +664,7 @@ void Vehicle::LaunchingEvent()
     }
 
     SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID);
-    SetTransparency(0.1);
+    // alpitodorender SetTransparency(0.1);
 }
 //// 
 
@@ -1213,7 +1213,7 @@ void Vehicle::RenderGrabTrail(const Renderer& render) const
 void Vehicle::RenderKorpus(const Renderer& render)
 {
     //render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
-    render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    //alpitodorender render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
 
 void Vehicle::RenderDriveEffect(float scale, float parent_d_alpha) const

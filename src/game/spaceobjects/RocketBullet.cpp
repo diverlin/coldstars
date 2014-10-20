@@ -63,7 +63,7 @@ void RocketBullet::CreateDriveComplexTextureDependedStuff()
     GetPoints().addMidLeftPoint();
     GetPoints().addMidFarLeftPoint();
         
-    m_EffectDrive = GetNewDriveEffect(GetTextureOb().GetData().size_id/2, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
+    //alpitodorender m_EffectDrive = GetNewDriveEffect(GetTextureOb().GetData().size_id/2, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
 }    
 
 void RocketBullet::UpdateInSpace(int time, bool show_effect)
@@ -166,7 +166,7 @@ void RocketBullet::PostDeathUniqueEvent(bool show_effect)
 
 void RocketBullet::RenderInSpace(const Renderer& render, float scale)
 {  
-    render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
+    //alpitodorender render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
 
     m_EffectDrive->Update();
     m_EffectDrive->Render(scale, 0.0f);
@@ -212,7 +212,7 @@ void RocketBullet::Save(boost::property_tree::ptree& save_ptree) const
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);
-    BaseDrawable::SaveData(save_ptree, root);
+//    BaseDrawable::SaveData(save_ptree, root);
     BaseSpaceEntity::SaveData(save_ptree, root);
     RocketBullet::SaveData(save_ptree, root);
 }
@@ -222,7 +222,7 @@ void RocketBullet::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Orientation::LoadData(load_ptree);
-    BaseDrawable::LoadData(load_ptree);
+//    BaseDrawable::LoadData(load_ptree);
     BaseSpaceEntity::LoadData(load_ptree);
     RocketBullet::LoadData(load_ptree);
 }
@@ -232,7 +232,7 @@ void RocketBullet::Resolve()
 {
     Base::ResolveData();
     Orientation::ResolveData();
-    BaseDrawable::ResolveData();
+//    BaseDrawable::ResolveData();
     BaseSpaceEntity::ResolveData();
     RocketBullet::ResolveData();
 }

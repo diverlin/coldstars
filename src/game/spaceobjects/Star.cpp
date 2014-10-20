@@ -52,6 +52,9 @@ Star::~Star()
     #endif    
 }
 
+
+//alpitodorender
+/*
 int Star::GetColorId() const { return GetTextureOb().GetData().color_id; }
 
 float Star::GetBrightThreshold() const { return GetTextureOb().GetData().brightThreshold; }
@@ -60,7 +63,7 @@ void Star::CalcColor()
 {
     SetColor(getColor4fById(GetTextureOb().GetData().color_id));
 }
-       
+*/
 void Star::InitiateSpark()
 {
     m_SparkActive = true;
@@ -172,7 +175,7 @@ void Star::Save(boost::property_tree::ptree& save_ptree) const
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);
-    BaseDrawable::SaveData(save_ptree, root);
+//    BaseDrawable::SaveData(save_ptree, root);
     BaseSpaceEntity::SaveData(save_ptree, root);
     BasePlanet::SaveData(save_ptree, root);
     Star::SaveData(save_ptree, root);
@@ -183,7 +186,7 @@ void Star::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Orientation::LoadData(load_ptree);
-    BaseDrawable::LoadData(load_ptree);
+//    BaseDrawable::LoadData(load_ptree);
     BaseSpaceEntity::LoadData(load_ptree);
     BasePlanet::LoadData(load_ptree);
     Star::LoadData(load_ptree);
@@ -194,7 +197,7 @@ void Star::Resolve()
 {
     Base::ResolveData();
     Orientation::ResolveData();
-    BaseDrawable::ResolveData();
+//    BaseDrawable::ResolveData();
     BaseSpaceEntity::ResolveData();
     BasePlanet::ResolveData();
     Star::ResolveData();

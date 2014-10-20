@@ -83,7 +83,7 @@ void ProtectorArtefactBuilder::CreateNewInternals(ProtectorArtefact* protector_a
     common_data.deterioration_normal = 1;
 
     protector_artefact->SetProtection(protection);
-    protector_artefact->SetRenderData(mesh, texOb_item, texOb_item->GetSize());        
+    // alpitodorender protector_artefact->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
     protector_artefact->SetParentSubTypeId(TYPE::ENTITY::ARTEFACT_SLOT_ID);
     protector_artefact->SetItemCommonData(common_data);
     protector_artefact->SetCondition(common_data.condition_max);
