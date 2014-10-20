@@ -105,7 +105,7 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
     common_data.deterioration_normal = 1;
     common_data.deterioration_overload_rate = EQUIPMENT::DRIVE::OVERLOAD_DETERIORATION_RATE;
 
-    drive_equipment->SetRenderData(mesh, texOb, size);
+    // alpitodorender drive_equipment->SetRenderData(mesh, texOb, size);
     
     //float step = getRandInt(10, 40)*0.01;
     //AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);

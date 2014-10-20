@@ -100,7 +100,7 @@ void BakEquipmentBuilder::CreateNewInternals(BakEquipment* bak_equipment, TYPE::
 
     bak_equipment->SetFuelMaxOrig(fuel_max_orig);
     bak_equipment->SetFuel(fuel_max_orig);
-    bak_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());        
+    // alpitodorender bak_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
     bak_equipment->SetParentSubTypeId(TYPE::ENTITY::BAK_SLOT_ID);
     bak_equipment->SetItemCommonData(common_data);
     bak_equipment->SetCondition(common_data.condition_max);

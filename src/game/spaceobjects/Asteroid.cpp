@@ -104,12 +104,12 @@ void Asteroid::UpdateInfo()
 void Asteroid::Render_NEW(const Renderer& render, const glm::vec2& scroll_coords)
 {
     //render.RenderMeshLightNormalMap(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-    render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    //alpitodorender render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
     
 void Asteroid::Render_OLD(const Renderer& render)
 {
-    render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());       
+    //alpitodorender render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
 
 void Asteroid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
@@ -142,7 +142,7 @@ void Asteroid::Save(boost::property_tree::ptree& save_ptree) const
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);
-    BaseDrawable::SaveData(save_ptree, root);
+//    BaseDrawable::SaveData(save_ptree, root);
     BaseSpaceEntity::SaveData(save_ptree, root);
     BasePlanet::SaveData(save_ptree, root);
     Asteroid::SaveData(save_ptree, root);
@@ -153,7 +153,7 @@ void Asteroid::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Orientation::LoadData(load_ptree);
-    BaseDrawable::LoadData(load_ptree);
+//    BaseDrawable::LoadData(load_ptree);
     BaseSpaceEntity::LoadData(load_ptree);
     BasePlanet::LoadData(load_ptree);
     Asteroid::LoadData(load_ptree);
@@ -164,7 +164,7 @@ void Asteroid::Resolve()
 {
     Base::ResolveData();
     Orientation::ResolveData();
-    BaseDrawable::ResolveData();
+//    BaseDrawable::ResolveData();
     BaseSpaceEntity::ResolveData();
     BasePlanet::ResolveData();
     Asteroid::ResolveData();

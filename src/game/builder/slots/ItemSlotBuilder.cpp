@@ -68,7 +68,7 @@ ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
             Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
     
-        turrel->SetRenderData(mesh, texOb_turrel, texOb_turrel->GetSize());       
+        // alpitodorender turrel->SetRenderData(mesh, texOb_turrel, texOb_turrel->GetSize());
         item_slot->SetTurrel(turrel);
     }
     

@@ -77,7 +77,7 @@ void ScanerModuleBuilder::CreateNewInternals(ScanerModule* scaner_module, int sc
     scan_add = getRandInt(MODULE::SCANER::SCAN_MIN, MODULE::SCANER::SCAN_MAX);
 
     scaner_module->SetParentSubTypeId(TYPE::ENTITY::SCANER_EQUIPMENT_ID);    
-    scaner_module->SetRenderData(mesh, texOb, texOb->GetSize());
+    //alpitodorender scaner_module->SetRenderData(mesh, texOb, texOb->GetSize());
     scaner_module->SetScanAdd(scan_add);
 }
 

@@ -102,7 +102,7 @@ void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, 
                                                    
     lazer_equipment->SetDamageOrig(damage_orig);  
     lazer_equipment->SetRadiusOrig(radius_orig);  
-    lazer_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());        
+    //alpitodorender lazer_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
     lazer_equipment->SetParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
     lazer_equipment->SetItemCommonData(common_data);
     lazer_equipment->SetCondition(common_data.condition_max);

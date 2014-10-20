@@ -384,14 +384,14 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
 
                 for(Star* star : visible_STAR_vec)
                 {
-                    render.DrawMeshMultiTextured(star->GetMesh(), star->GetTextureOb(), star->GetActualModelMatrix());
+                    //alpitodorender render.DrawMeshMultiTextured(star->GetMesh(), star->GetTextureOb(), star->GetActualModelMatrix());
                 }
             }
             render.DeactivateFbo(0);
 
             // BLOOM background and star (uses many FBO)
             //resizeGl(w, h);
-            render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
+            // alpitodorender render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
         }
 
         // VOLUMETRIC LIGHT to FBO1
@@ -1030,7 +1030,8 @@ void Player::ForceStateMachineReset() const
 void Player::RenderCollisionRadius(const Renderer& render) const
 {
     //render.enable_BLEND(); 
-    {       
+    {   //a;pitodorender
+        /*
         for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)   { visible_SPACESTATION_vec[i]->RenderCollisionRadius(render); }            
         for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)      { visible_SATELLITE_vec[i]->RenderCollisionRadius(render); } 
         for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)           { visible_SHIP_vec[i]->RenderCollisionRadius(render); } 
@@ -1042,6 +1043,7 @@ void Player::RenderCollisionRadius(const Renderer& render) const
         for(unsigned int i=0; i<visible_PLANET_vec.size(); i++)         { visible_PLANET_vec[i]->RenderCollisionRadius(render); }
         for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)       { visible_ASTEROID_vec[i]->RenderCollisionRadius(render); } 
         for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)      { visible_BLACKHOLE_vec[i]->RenderCollisionRadius(render); } 
+        */
     }
     //render.disable_BLEND();
 }
@@ -1049,6 +1051,8 @@ void Player::RenderCollisionRadius(const Renderer& render) const
 void Player::RenderAxis(const Renderer& render) const
 {    
     //render.enable_DEPTH(); 
+    //alpitodorender
+    /*
         for(unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)   { visible_SPACESTATION_vec[i]->RenderAxis(render); }            
         for(unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)      { visible_SATELLITE_vec[i]->RenderAxis(render); } 
         for(unsigned int i=0; i<visible_SHIP_vec.size(); i++)           { visible_SHIP_vec[i]->RenderAxis(render); } 
@@ -1060,7 +1064,8 @@ void Player::RenderAxis(const Renderer& render) const
         for(unsigned int i=0; i<visible_PLANET_vec.size(); i++)         { visible_PLANET_vec[i]->RenderAxis(render); }
         for(unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)       { visible_ASTEROID_vec[i]->RenderAxis(render); } 
         for(unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)      { visible_BLACKHOLE_vec[i]->RenderAxis(render); } 
-    //render.disable_DEPTH(); 
+*/
+//render.disable_DEPTH();
 }         
 
 void Player::Save(boost::property_tree::ptree& save_ptree) const

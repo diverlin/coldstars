@@ -25,9 +25,9 @@ class TextureOb;
 
 #include "../common/points.hpp"
 #include "../common/constants.hpp"
-#include "../common/BaseDrawable.hpp"
+#include "../common/Orientation.hpp"
 
-class Turrel : public BaseDrawable
+class Turrel : public Orientation
 {
     public:
         Turrel(ItemSlot*);

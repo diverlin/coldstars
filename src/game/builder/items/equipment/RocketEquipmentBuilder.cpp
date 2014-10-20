@@ -116,7 +116,7 @@ void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipmen
     rocket_equipment->SetRadiusOrig(radius_orig);   
     rocket_equipment->SetBulletData(data_bullet); 
     rocket_equipment->SetAmmo(ammo_max_orig*0.6);                
-    rocket_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());        
+    //alpitodorender rocket_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
     rocket_equipment->SetParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
     rocket_equipment->SetItemCommonData(common_data);
     rocket_equipment->SetCondition(common_data.condition_max);

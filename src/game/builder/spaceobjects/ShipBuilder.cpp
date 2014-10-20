@@ -149,9 +149,9 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
     
     float delta_angle = 0.0001*getRandInt(20, 60);
     AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
-    ship->SetAnimationRotation(animation_rotation);
+    //alpitodorender ship->SetAnimationRotation(animation_rotation);
 
-    ship->SetRenderData(mesh, texOb, scale);
+    //alpitodorender ship->SetRenderData(mesh, texOb, scale);
 
     LifeData data_life;
     data_life.armor      = data_korpus.armor * 0.1;

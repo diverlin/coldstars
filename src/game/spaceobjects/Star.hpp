@@ -27,15 +27,17 @@ class Star : public BasePlanet
     public:
         Star(int);
         virtual ~Star();
-        
-        int GetColorId() const;
-        float GetBrightThreshold() const;
+
+        //alpitodorender
+//        int GetColorId() const;
+//        float GetBrightThreshold() const;
         float GetDeltaColor() const { return m_DeltaColor; }
         
         void Hit(int, bool) {};
         void InitiateSpark();
         
-        void CalcColor();        
+
+       // alpitodorender void CalcColor();
         void UpdateInSpaceInStatic();    
         void UpdateInSpace(int, bool);
         

@@ -100,11 +100,11 @@ void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const
  
     float delta_angle = 0.0001*getRandInt(20, 60);  
     AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
-    satellite->SetAnimationRotation(animation_rotation);
+    //alpitodorender satellite->SetAnimationRotation(animation_rotation);
     
     satellite->SetKorpusData(data_korpus);
     satellite->SetLifeData(data_life);
-    satellite->SetRenderData(mesh, texOb, texOb->GetSize());    
+    //alpitodorender satellite->SetRenderData(mesh, texOb, texOb->GetSize());
 
     satellite->CreateDriveComplexTextureDependedStuff();
     satellite->CreateProtectionComplexTextureDependedStuff();

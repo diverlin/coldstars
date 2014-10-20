@@ -43,7 +43,7 @@ void DistantNebulaEffect::Update()
 /* virtual override */
 void DistantNebulaEffect::Render(const Renderer& render, const glm::vec3&)
 {   
-    render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    // alpitodorender render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
               
 void DistantNebulaEffect::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
@@ -103,7 +103,7 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
     
     DistantNebulaEffect* dn = new DistantNebulaEffect();
     glm::vec3 size = textureOb->GetSize();
-    dn->SetRenderData(mesh, textureOb, size*=3);
+    // alpitodorender dn->SetRenderData(mesh, textureOb, size*=3);
 
     dn->SetCenter(center);
     //dn->SetAngle(angle);

@@ -72,7 +72,7 @@ void RocketBulletBuilder::CreateNewInternals(RocketBullet* rocket_bullet, const 
     
     rocket_bullet->SetLifeData(data_life);
     TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID);
-    rocket_bullet->SetRenderData(mesh, texOb, texOb->GetSize());
+    //alpitodorender rocket_bullet->SetRenderData(mesh, texOb, texOb->GetSize());
 
     rocket_bullet->CreateDriveComplexTextureDependedStuff();       
 }

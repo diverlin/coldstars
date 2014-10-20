@@ -85,11 +85,11 @@ void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textu
     
     container->SetLifeData(data_life);
     Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
-    container->SetRenderData(mesh, textureOb, textureOb->GetSize());
+    //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->GetSize());
  
     float delta_angle = 0.001*getRandInt(20, 60);
     AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
-    container->SetAnimationRotation(animation_rotation);
+    //alpitodorender container->SetAnimationRotation(animation_rotation);
     
     container->SetGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
     

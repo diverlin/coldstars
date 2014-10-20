@@ -127,7 +127,7 @@ GoodsPack* GetNewGoodsPack(TYPE::ENTITY subtype_id, INTLONGEST id)
     TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::CONTAINER_ID); 
     
     GoodsPack* goodsPack = new GoodsPack(id, subtype_id);
-    goodsPack->SetRenderData(mesh, texOb, texOb->GetSize());
+    //alpitodorender goodsPack->SetRenderData(mesh, texOb, texOb->GetSize());
     
     EntityManager::Instance().RegisterEntity(goodsPack);
             
