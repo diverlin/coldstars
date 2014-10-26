@@ -21,7 +21,7 @@
 #define ORIENTATION_HPP
 
 #include <common/Base.hpp>
-#include <common/points.hpp>
+#include <glm/glm.hpp>
 
 struct UnresolvedDataOrientation
 {    
@@ -50,20 +50,13 @@ class Orientation : public Base
         const glm::vec3& GetSize()  const { return m_Size; } 
         
         glm::vec3* const GetpCenter() { return &m_Center; }
-        const glm::vec3* const GetpParentCenter() { return &m_ParentCenter; }
-                        
-        Points& GetPoints()          { return m_Points; }  // depr !!!
-           
+        const glm::vec3* const GetpParentCenter() { return &m_ParentCenter; }                      
+
         float GetCollisionRadius() const  { return m_CollisionRadius; }
 
         void UpdateOrientation();     //depr
                                 
     protected:            
-        UnresolvedDataOrientation data_unresolved_Orientation;
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
-
         void SetDirection(const glm::vec3& direction)   { m_Direction = glm::normalize(direction); m_IsUpdated = false; }
         void SetCollisionRadius(float collision_radius) { m_CollisionRadius = collision_radius; }    
                         
@@ -78,8 +71,6 @@ class Orientation : public Base
         glm::vec3 m_Direction;
         
         glm::vec3 m_ParentCenter; 
-
-        Points m_Points;
                                 
     friend class BaseVehicleBuilder;
     friend class DriveComplex;

@@ -29,11 +29,9 @@
 #include <render/Shaders.hpp>
 
 #include "Mesh.hpp"
-#include "../common/constants.hpp"
-
-#include "../config/config.hpp"
 
 #include <glm/gtc/type_ptr.hpp>
+#include <iostream>
 
 // for ugly
 #include <glm/glm.hpp> // glm::vec
@@ -129,8 +127,8 @@ void Renderer::InitPostEffects()
         
     m_Bloom.Create(m_Shaders.blur, m_Shaders.extractbright, m_Shaders.combine);
     
-    int width      = Config::Instance().SCREEN_WIDTH; 
-    int height     = Config::Instance().SCREEN_HEIGHT;
+    int width      = SCREEN_WIDTH;
+    int height     = SCREEN_HEIGHT;
     ResizePostEffects(width, height);
 }
  
@@ -188,29 +186,6 @@ void Renderer::UpdateProjectionViewMatrix()
 void Renderer::DrawQuad(const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
     DrawMesh(*m_MeshQuad, textureOb, ModelMatrix);
-}
-
-void Renderer::DrawQuad(const TextureOb& texOb, const Box2D& box) const
-{
-    // ugly start
-    glm::vec2 pos = box.GetCenter();
-    glm::mat4 TranslationMatrix = glm::translate(glm::vec3(pos.x, pos.y, -2.0f));
-     
-    glm::quat Qx, Qy, Qz;
-    
-    //QuatFromAngleAndAxis(Qx, angle.x, AXIS_X);
-    //QuatFromAngleAndAxis(Qy, angle.y, AXIS_Y);   
-    //QuatFromAngleAndAxis(Qz, angle.z, AXIS_Z); 
-       
-    glm::mat4 RotationMatrix = glm::toMat4(Qx*Qy*Qz);
-    
-    glm::vec2 size = box.GetSize()*box.GetScale();
-    glm::mat4 ScaleMatrix = glm::scale(glm::vec3(size.x, size.y, 1.0f));
-      
-    glm::mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScaleMatrix;
-    // ugly end
-
-    DrawMesh(*m_MeshQuad, texOb, ModelMatrix);
 }
 
 void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const

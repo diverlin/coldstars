@@ -17,7 +17,6 @@
 */
 
 #include <iostream>
-#include "resources/init.hpp"
 #include "resources/MeshCollector.hpp"
 
 #include "spaceobjects/Star.hpp"
@@ -26,6 +25,7 @@
 
 #include "resources/TextureManager.hpp"
 #include "resources/textureOb.hpp"
+#include "resources/resources.hpp"
 
 #include "gui/UserInputManagerInSpace.hpp"
 
@@ -73,7 +73,8 @@ int main()
 {   
     // init stuff (load, data, shaders and so on)
     Screen::Instance().InitRenderStuff();
-    initGameStuff(); 
+    srand(time(0));
+    loadGameData();
 
     // prepare renderer
     Renderer& renderer = Screen::Instance().GetRender();

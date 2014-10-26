@@ -20,9 +20,11 @@
 #ifndef STAR_HPP
 #define STAR_HPP
 
-#include <spaceobjects/BasePlanet.hpp>
+#include <spaceobjects/BaseSpaceEntity.hpp>
 
-class Star : public BasePlanet
+glm::vec4 getColor4fById(int);
+
+class Star : public BaseSpaceEntity
 {
     public:
         Star(int);
@@ -34,34 +36,18 @@ class Star : public BasePlanet
         float GetDeltaColor() const { return m_DeltaColor; }
         
         void Hit(int, bool) {};
-        void InitiateSpark();
         
         void CalcColor();        
         void UpdateInSpaceInStatic();    
         void UpdateInSpace(int, bool);
         void Update();
-
-        virtual void Save(boost::property_tree::ptree&) const override final;
-        virtual void Load(const boost::property_tree::ptree&) override final;
-        virtual void Resolve() override final;
                 
     private:
         float m_Offset;
 
         float m_DeltaColor;
         
-        bool m_SparkActive;
-        bool m_SparkGrows;
-        
-        int m_TurnSinceLastSparkCounter;
-        int m_TurnSparkThreshold;
-        
-        virtual void UpdateInfo() override final;
         virtual void PostDeathUniqueEvent(bool) override final;
-        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
 }; 
 
 Star* GetNewStar();

@@ -71,11 +71,6 @@ class BaseDrawable : public Orientation
                 
         bool UpdateFadeInEffect(); // depr, move to animation program
         bool UpdateFadeOutEffect(); // depr, move to animation program
-                
-        UnresolvedDataBaseDrawable data_unresolved_BaseDrawable;
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
 
     private:
         glm::vec4 m_Color;

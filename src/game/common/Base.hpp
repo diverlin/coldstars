@@ -21,7 +21,6 @@
 #define BASE_HPP
 
 #include <common/NonCopyable.hpp>
-#include <boost/property_tree/ptree.hpp>
 #include <struct/IdData.hpp>
 
 class Base : private NonCopyable
@@ -39,20 +38,12 @@ class Base : private NonCopyable
         TYPE::ENTITY GetSubSubTypeId() const { return m_Data_id.subsubtype_id; }
                     
         std::string GetDataTypeString() const;
-
-        virtual void Save(boost::property_tree::ptree&) const {};
-        virtual void Load(const boost::property_tree::ptree&) {};
-        virtual void Resolve() {};
         
     protected:
         void SetId(INTLONGEST id)                  { m_Data_id.id = id; }
         void SetTypeId(TYPE::ENTITY type_id)       { m_Data_id.type_id = type_id; }
         void SetSubTypeId(TYPE::ENTITY subtype_id) { m_Data_id.subtype_id = subtype_id; }
         
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
-
     private:
         IdData m_Data_id;    
 };

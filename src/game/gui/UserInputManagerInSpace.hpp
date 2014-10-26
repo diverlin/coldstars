@@ -22,11 +22,14 @@
 
 #include <SFML/Window.hpp> // !!!
 #include <glm/glm.hpp>
-#include <common/constants.hpp>
 
 class Player;
 class GuiManager;
 
+enum class CAMERADIRECTION
+{
+    NONE=0, LEFT, RIGHT, UP, DOWN
+};
 
 class UserInputManagerInSpace
 {

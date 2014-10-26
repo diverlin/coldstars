@@ -20,12 +20,10 @@
 #include "../common/myStr.hpp"
 
 #include "../render/Render.hpp"
-#include "../config/config.hpp"
-#include "../common/common.hpp"
-#include "../common/constants.hpp"
 #include <math/rand.hpp>
 
 #include "../resources/GuiTextureObCollector.hpp"
+#include <iostream>
 
 Screen& Screen::Instance()
 {
@@ -47,10 +45,10 @@ Screen::~Screen()
 
 void Screen::InitRenderStuff()
 {   
-    int width      = Config::Instance().SCREEN_WIDTH; 
-    int height     = Config::Instance().SCREEN_HEIGHT;
-    int bpp        = Config::Instance().BPP;
-    bool vert_sync = Config::Instance().VSYNC;
+    int width      = SCREEN_WIDTH;
+    int height     = SCREEN_HEIGHT;
+    int bpp        = 32;
+    bool vert_sync = true;
  
     auto_scroll = false;
     
@@ -77,7 +75,7 @@ void Screen::DrawFps()
         frames_counter++;
     }
     
-    std::string fps_str = "FPS:" + int2str(fps) + " / game_speed: x" + int2str(Config::Instance().GAME_SPEED);
+    //std::string fps_str = "FPS:" + int2str(fps) + " / game_speed: x" + int2str(Config::Instance().GAME_SPEED);
     //DrawText(fps_str, 14, glm::vec2(100, GetHeight()-10));
     if (getRandInt(0, 30) == 0) std::cout<<"fps="<<fps<<std::endl; 
 }

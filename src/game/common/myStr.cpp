@@ -16,7 +16,6 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "constants.hpp"
 #include <sstream>
 #include "Base.hpp"
 
@@ -46,33 +45,6 @@ std::string bool2str(bool var)
         return stm.str() ;
 }
 
-std::string getAiModelStr(int id)
-{
-    switch(id)
-    {
-        case AIMODEL::CONQUEROR_ID:     { return "CONQUEROR_ID"; break; }
-        case AIMODEL::RANGER_ID:    { return "RANGER_ID"; break; }
-        case AIMODEL::TRADER_ID:    { return "TRADER_ID"; break; }
-        
-        default:            { return "UKNOWN ID"; break; }        
-    }
-}
-
-std::string getNavigatorActionStr(int type_id)
-{
-    switch(type_id)
-    {
-        case NAVIGATOR_ACTION::NONE_ID:     { return "NONE_ID"; break; }
-        case NAVIGATOR_ACTION::DOCKING_ID:    { return "DOCKING_ID"; break; }
-        case NAVIGATOR_ACTION::COLLECTING_ID:    { return "COLLECTING_ID"; break; }
-        case NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID:    { return "KEEP_FIRE_DISTANCE_ID"; break; }
-        case NAVIGATOR_ACTION::KEEP_CLOSE_ID:    { return "KEEP_CLOSE_ID"; break; }
-        case NAVIGATOR_ACTION::KEEP_MIDDLE_ID:    { return "KEEP_MIDDLE_ID"; break; }
-        case NAVIGATOR_ACTION::KEEP_FAR_ID:     { return "KEEP_FAR_ID"; break; }
-    }
-
-    return "UNKNOWN ID";
-}
 
 
 

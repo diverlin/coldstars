@@ -17,7 +17,6 @@
 */
 
 #include <common/Orientation.hpp>
-#include <common/Logger.hpp>
 
 Orientation::Orientation()
 :
@@ -51,40 +50,3 @@ void Orientation::UpdateOrientation()
             
 }        
 
-void Orientation::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Orientation("+int2str(GetId())+")::SaveDataUniqueOrientation", SAVELOAD_LOG_DIP);
-    #endif
-        
-    save_ptree.put(root+"data_unresolved_Orientation.center.x", m_Center.x);
-    save_ptree.put(root+"data_unresolved_Orientation.center.y", m_Center.y);
-    save_ptree.put(root+"data_unresolved_Orientation.center.z", m_Center.z);
-    
-    save_ptree.put(root+"data_unresolved_Orientation.direction.x", m_Direction.x);
-    save_ptree.put(root+"data_unresolved_Orientation.direction.y", m_Direction.y);
-    save_ptree.put(root+"data_unresolved_Orientation.direction.z", m_Direction.z);
-        
-}
-
-void Orientation::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Orientation("+int2str(GetId())+")::LoadDataUniqueOrientation", SAVELOAD_LOG_DIP);
-    #endif
-        
-    data_unresolved_Orientation.center.x = load_ptree.get<float>("data_unresolved_Orientation.center.x");
-    data_unresolved_Orientation.center.y = load_ptree.get<float>("data_unresolved_Orientation.center.y");
-    data_unresolved_Orientation.center.z = load_ptree.get<float>("data_unresolved_Orientation.center.y");
-    
-    data_unresolved_Orientation.direction.x = load_ptree.get<float>("data_unresolved_Orientation.orient.x");
-    data_unresolved_Orientation.direction.y = load_ptree.get<float>("data_unresolved_Orientation.orient.y");
-    data_unresolved_Orientation.direction.z = load_ptree.get<float>("data_unresolved_Orientation.orient.z");
-}
-
-void Orientation::ResolveData()
-{
-    #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Orientation("+int2str(GetId())+")::ResolveDataUniqueOrientation", SAVELOAD_LOG_DIP);
-    #endif
-}

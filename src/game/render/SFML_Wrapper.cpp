@@ -1,21 +1,8 @@
 #include "SFML_Wrapper.hpp"
-//#include <boost/lexical_cast.hpp>
-
 #include "../render/Render.hpp"
-#include "../config/config.hpp"
-#include "../common/common.hpp"
-#include "../common/constants.hpp"
     
 SFML_Wrapper::SFML_Wrapper()
-{
-    text12.setFont(font);
-    text12.setCharacterSize(12);
-    text12.setColor(sf::Color(255,0,0,255));
-    
-    std::string fontpath = DATA_PATH+"font/font.ttf";
-    ftfont.init(fontpath.c_str(), 20);
-        
-}
+{}
 
 SFML_Wrapper::~SFML_Wrapper()
 {}
@@ -26,7 +13,7 @@ void SFML_Wrapper::wrCreateWindowSpecific(int width, int height, int bpp, bool v
     this->vert_sync = vert_sync;
     
     window.create(sf::VideoMode(width, height, bpp), title);
-    window.setFramerateLimit(Config::Instance().FPS_LIMIT); 
+    window.setFramerateLimit(60);
     window.setVerticalSyncEnabled(vert_sync);
 }
          

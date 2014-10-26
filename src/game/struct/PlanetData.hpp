@@ -20,7 +20,7 @@
 #define PLANETDATA_H
 
 #include <glm/glm.hpp>
-#include "../common/constants.hpp"
+
 
 struct PlanetData
 {
@@ -32,7 +32,7 @@ struct PlanetData
     bool clockwise;
 
     PlanetData():
-    orbit_center(glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS)),
+    orbit_center(glm::vec3(0, 0, 0)),
     radius_A(0),
         radius_B(0), 
         orbit_phi_inD(0.0),

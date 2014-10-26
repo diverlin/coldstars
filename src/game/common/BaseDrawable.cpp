@@ -23,16 +23,9 @@
 #include <resources/TextureManager.hpp>
 #include <resources/GuiTextureObCollector.hpp>
 
-#include <common/constants.hpp>
 #include <math/rand.hpp>
-#include <common/common.hpp>
-#include <common/Logger.hpp>
-
-#include <world/EntityManager.hpp>
 
 #include <render/Render.hpp>
-
-#include <animations/BaseAnimationRotation.hpp>
 
 #include <render/Mesh.hpp>
 
@@ -133,9 +126,9 @@ bool BaseDrawable::UpdateFadeOutEffect()
 const glm::mat4& BaseDrawable::GetActualModelMatrix()
 {    
     RotationBetweenVectors(m_QuatDirection, m_Mesh->GetOriginDirection(), GetDirection());
-    if (m_AnimationRotation != nullptr) {
-        m_AnimationRotation->Update(m_QuatAnimation, m_Mesh->GetOriginDirection());
-    }
+//    if (m_AnimationRotation != nullptr) {
+//        m_AnimationRotation->Update(m_QuatAnimation, m_Mesh->GetOriginDirection());
+//    }
     
     m_MatrixTranslate = glm::translate(GetCenter());
     m_MatrixRotate    = glm::toMat4(m_QuatDirection * m_QuatAnimation);
@@ -145,43 +138,6 @@ const glm::mat4& BaseDrawable::GetActualModelMatrix()
     
     return m_MatrixModel;
 }
-
-void BaseDrawable::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-#if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
-#endif
-
-    if (m_Mesh) save_ptree.put(root+"data_unresolved_BaseDrawable.mesh_type_id", (int)m_Mesh->GetTypeId());
-    else        save_ptree.put(root+"data_unresolved_BaseDrawable.mesh_type_id", (int)TYPE::MESH::NONE_ID);
-    
-    if (m_TextureOb)    save_ptree.put(root+"data_unresolved_BaseDrawable.textureOb_path", m_TextureOb->GetData().texture_path);
-    else                save_ptree.put(root+"data_unresolved_BaseDrawable.textureOb_path", "none");
-}
-
-void BaseDrawable::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-#if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
-#endif
-
-    data_unresolved_BaseDrawable.mesh_type_id = (TYPE::MESH)load_ptree.get<int>("data_unresolved_BaseDrawable.mesh_type_id");
-    data_unresolved_BaseDrawable.textureOb_path = load_ptree.get<std::string>("data_unresolved_BaseDrawable.textureOb_path");
-}
-
-void BaseDrawable::ResolveData()
-{
-#if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseDrawable("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
-#endif
-    
-    if (data_unresolved_BaseDrawable.mesh_type_id != TYPE::MESH::NONE_ID) {
-        m_Mesh = MeshCollector::Instance().GetMeshByTypeId(data_unresolved_BaseDrawable.mesh_type_id);
-    }
-    
-    m_TextureOb = TextureManager::Instance().GetTextureObByPath(data_unresolved_BaseDrawable.textureOb_path);
-}
-
 
 glm::mat4 getModelMatrix(const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle)
 {

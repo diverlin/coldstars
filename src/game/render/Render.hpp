@@ -23,7 +23,6 @@
 #include <common/NonCopyable.hpp>
 #include <render/MyGl.hpp>
 
-#include <common/Box2D.hpp>           // to be removed
 #include <render/Fbo.hpp>
 #include <render/Bloom.hpp>
 #include <render/Shaders.hpp>
@@ -37,6 +36,9 @@ const float ZNEAR = 0.1f;
 const float ZFAR = 1000.0f;
 
 const int FBO_NUM = 6;
+
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
 
 enum class PROJECTION_TYPE { PERSPECTIVE, ORTHOGONAL};
 
@@ -73,7 +75,6 @@ class Renderer : public NonCopyable
         void DrawMeshMultiTextured   (const Mesh&, const TextureOb&, const glm::mat4&, float offset) const;
 
         void DrawQuad(const TextureOb&, const glm::mat4&) const;
-        void DrawQuad(const TextureOb&, const Box2D&) const;
 
         void DrawPostEffectFogWar(GLuint, int, int, const glm::vec3&, const glm::vec2&, float) const;
         void DrawPostEffectShockWaves(GLuint, int, int, int, float[10][2], float[10][3], float[10]) const;
