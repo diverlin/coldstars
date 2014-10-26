@@ -20,17 +20,13 @@
 #include "resources/init.hpp"
 #include "resources/MeshCollector.hpp"
 
-#include "builder/spaceobjects/StarBuilder.hpp"
 #include "spaceobjects/Star.hpp"
 
 #include "render/Screen.hpp"
-#include "render/GlErrorHelper.hpp"
+
 #include "resources/TextureManager.hpp"
 #include "resources/textureOb.hpp"
 
-#include "common/TurnTimer.hpp"
-
-#include "gui/UserInput.hpp"
 #include "gui/UserInputManagerInSpace.hpp"
 
 
@@ -86,7 +82,7 @@ int main()
     renderer.SetMeshQuad(MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID));
 
     // create objects
-    Star* star = StarBuilder::Instance().GetNewStar();
+    Star* star = GetNewStar();
 
     // GAME LOOP
     while (Screen::Instance().GetWindow().isOpen())
@@ -101,8 +97,6 @@ int main()
 
         // send smfl draw command
         Screen::Instance().Draw();
-
-        checkOpenglErrors(__FILE__,__LINE__);
     }
 
     return EXIT_SUCCESS;
