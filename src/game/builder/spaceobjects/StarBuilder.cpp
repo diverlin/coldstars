@@ -63,7 +63,7 @@ Star* StarBuilder::GetNewStar() const
 } 
           
 void StarBuilder::CreateNewInternals(Star* star) const
-{     
+{
     Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPHERE_ID);
     
     LifeData data_life;
@@ -71,10 +71,10 @@ void StarBuilder::CreateNewInternals(Star* star) const
     
     PlanetData star_data;
     star_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS); 
-    star_data.radius_A      = 50;
-    star_data.radius_B      = 50; 
+    star_data.radius_A      = 0;
+    star_data.radius_B      = 0;
     star_data.orbit_phi_inD = 0;
-    star_data.speed         = 1.8;
+    star_data.speed         = 0;
     
     TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::STAR_ID);
     

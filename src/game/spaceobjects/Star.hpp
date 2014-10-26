@@ -64,6 +64,7 @@ class Star : public BasePlanet
         void ResolveData();
 }; 
 
+Star* GetNewStar();
 
 #endif 
     

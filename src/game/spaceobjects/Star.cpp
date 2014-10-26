@@ -30,6 +30,8 @@
 
 #include <glm/gtx/transform.hpp>
 
+#include "resources/MeshCollector.hpp"
+#include "resources/TextureManager.hpp"
    
 Star::Star(int id)
 :
@@ -171,4 +173,34 @@ void Star::Resolve()
     BaseSpaceEntity::ResolveData();
     BasePlanet::ResolveData();
     Star::ResolveData();
+}
+
+
+
+Star* GetNewStar()
+{
+    Star* star = new Star(0);
+    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPHERE_ID);
+
+    LifeData data_life;
+    data_life.armor = 1000000;
+
+    PlanetData star_data;
+    star_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS);
+    star_data.radius_A      = 0;
+    star_data.radius_B      = 0;
+    star_data.orbit_phi_inD = 0;
+    star_data.speed         = 0;
+
+    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::STAR_ID);
+
+    star->SetPlanetData(star_data);
+    star->SetLifeData(data_life);
+    float scale_comp = getRandInt(100, 200);
+    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
+    star->SetRenderData(mesh, texOb, scale);
+
+    star->CalcColor();
+
+    return star;
 }
