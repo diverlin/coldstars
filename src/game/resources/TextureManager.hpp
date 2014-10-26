@@ -24,7 +24,6 @@
 #include <vector>
 
 #include <types/TextureTypes.hpp>
-#include <types/RaceTypes.hpp>
 #include <types/EntityTypes.hpp>
 
 class TextureOb;
@@ -35,17 +34,12 @@ class TextureManager
         static TextureManager& Instance();
         
         void Add(TextureOb*);
-        
-        TextureOb* GetRandomFaceTexObWithFolloingAttributes(TYPE::RACE);
-        TextureOb* GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE, TYPE::ENTITY, int _size_id);
-        
+               
         TextureOb* GetTexObByColorId(TYPE::TEXTURE, int color_id);
         
         TextureOb* GetRandomTextureOb(TYPE::TEXTURE);
         
         TextureOb* GetTextureObByPath(const std::string&);
-        
-        void FillShipSubTypeList();
 
     private:
         TextureManager() {};
@@ -92,13 +86,6 @@ class TextureManager
         std::vector<TextureOb*> bomb_texOb_vec;   
         std::vector<TextureOb*> blackhole_texOb_vec;  
         
-        // SHIPS
-        std::vector<TextureOb*> ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
-        std::vector<TextureOb*> ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
-        std::vector<TextureOb*> ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
-        std::vector<TextureOb*> ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
-        std::vector<TextureOb*> ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
-
         // ITEMS
         std::vector<TextureOb*> lazerEquipment_texOb_vec;
         std::vector<TextureOb*> rocketEquipment_texOb_vec;
@@ -125,9 +112,6 @@ class TextureManager
     
         TextureOb* _GetRandomTextureObFromVec(const std::vector<TextureOb*>&);
         TextureOb* _TryGetRandomTextureObFromVec(const std::vector<TextureOb*>&);
-        TextureOb* _GetShipTexObByClosestSizeFromVec(const std::vector<TextureOb*>&, int);
-        TextureOb* _GetShipTexObBySizeFromVec(const std::vector<TextureOb*>&, int);
-        TextureOb* _TryGetShipTexObBySizeFromVec(const std::vector<TextureOb*>&, int);
 };
 
 #endif 

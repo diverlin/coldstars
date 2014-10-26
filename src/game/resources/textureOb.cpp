@@ -22,8 +22,6 @@
 #include "textureOb.hpp"
 #include <types/TextureTypes.hpp>
 
-#include "../common/IdGenerator.hpp"
-#include "../common/common.hpp"
 #include <math/rand.hpp>
 #include "../render/Screen.hpp"
 
@@ -32,7 +30,7 @@ TextureOb::TextureOb(const MaterialDrawData& data)
       m_IsLoaded(false),
       m_Data(data)
 { 
-    m_Data.id = TextureIdGenerator::Instance().GetNextId();
+    m_Data.id = 0;
     
     if ( ((m_Data.col_num == 1) and (m_Data.row_num == 1)) or (m_Data.fps == 0) ) {
         m_Data.is_animated = false;
@@ -44,7 +42,7 @@ TextureOb::TextureOb(const MaterialDrawData& data)
     
     CreateTextureCoords(m_Data.col_num, m_Data.row_num, m_Data.fps); 
     
-    m_Data.size_id = getObjectSize(m_Data.w, m_Data.h);
+    m_Data.size_id = 1;
 }  
 
 TextureOb::~TextureOb()

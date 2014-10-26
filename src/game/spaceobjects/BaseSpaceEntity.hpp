@@ -22,8 +22,6 @@
 
 #include <common/BaseDrawable.hpp>
 #include <struct/LifeData.hpp>
-#include <text/InfoTable.hpp>
-#include <types/PlaceTypes.hpp>
 
 class StarSystem;
 class Mesh;
@@ -48,7 +46,6 @@ class BaseSpaceEntity : public BaseDrawable
         void SetLifeData(const LifeData& data_life) { m_DataLife = data_life; }
 
         void SetStarSystem(StarSystem* starsystem) { m_Starsystem = starsystem; }
-        void SetPlaceTypeId(TYPE::PLACE place_type_id) { m_PlaceTypeId = place_type_id;  }
         void SetMass(int mass) { m_Mass = mass; }
                 
         void SetGivenExpirience(int given_expirience) { m_GiveExpirience = given_expirience; }                
@@ -56,7 +53,6 @@ class BaseSpaceEntity : public BaseDrawable
         void SetParent(const BaseSpaceEntity* const parent) { m_Parent = parent; }
 
         StarSystem* GetStarSystem() const { return m_Starsystem; }           
-        TYPE::PLACE GetPlaceTypeId() const { return m_PlaceTypeId; }
 
         virtual int GetGivenExpirience() const { return m_GiveExpirience; }  // !!!
  
@@ -83,7 +79,6 @@ class BaseSpaceEntity : public BaseDrawable
         void SetMass(float mass) { m_Mass = mass; }
         void ChangeMass(int d_mass) { m_Mass += d_mass; }
         
-        InfoTable& GetInfo() { return m_Info; }
         LifeData& GetDataLife() { return m_DataLife; }
         const LifeData& GetDataLife() const { return m_DataLife; }
         
@@ -93,20 +88,12 @@ class BaseSpaceEntity : public BaseDrawable
         void CheckDeath(bool);
         virtual void PostDeathUniqueEvent(bool) {}
 
-        UnresolvedDataBaseSpaceEntity data_unresolved_BaseSpaceEntity;
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
-    
     private:
         LifeData m_DataLife;        
 
         glm::vec3 m_AppliedForce;
 
         StarSystem* m_Starsystem;
-        TYPE::PLACE m_PlaceTypeId;
-
-        InfoTable m_Info;
 
         int m_Mass;
         int m_GiveExpirience;

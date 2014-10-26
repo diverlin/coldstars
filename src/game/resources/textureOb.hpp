@@ -26,9 +26,6 @@
 #include <glm/glm.hpp>
  
 #include <types/TextureTypes.hpp>
-#include <types/RaceTypes.hpp>
-#include <types/EntityTypes.hpp>
-#include <types/TechLevelTypes.hpp>
 
 const bool FALSE_RESOURCES = false;
 
@@ -97,16 +94,10 @@ struct MaterialDrawData
 struct MaterialAssociationData
 {
     TYPE::TEXTURE type_id;
-    TYPE::ENTITY subtype_id;   //# warrior/trader and so on
-    TYPE::RACE race_id;
-    TYPE::TECHLEVEL tech_level_id;
 
     MaterialAssociationData()
     :
-    type_id(TYPE::TEXTURE::NONE_ID),
-    subtype_id(TYPE::ENTITY::NONE_ID),
-    race_id(TYPE::RACE::NONE_ID),
-    tech_level_id(TYPE::TECHLEVEL::NONE_ID)
+    type_id(TYPE::TEXTURE::NONE_ID)
     {}
 };
 
