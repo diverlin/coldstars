@@ -18,27 +18,27 @@ CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-
 CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/MeshTypes.hpp
 CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/MyInt.hpp
 CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/TextureTypes.hpp
+CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/BaseDrawable.hpp
+CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Bloom.hpp
+CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Fbo.hpp
+CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Light.hpp
+CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Mesh.hpp
+CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/MyGl.hpp
+CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Render.hpp
+CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Shaders.hpp
+CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/TextureOb.hpp
+CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/animations/BaseAnimationRotation.hpp
 CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/BaseDrawable.cpp
-CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/BaseDrawable.hpp
-CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Bloom.hpp
-CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Fbo.hpp
-CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Light.hpp
-CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Mesh.hpp
-CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/MyGl.hpp
-CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Render.hpp
-CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Shaders.hpp
-CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/TextureOb.hpp
-CMakeFiles/jeti.dir/BaseDrawable.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/animations/BaseAnimationRotation.hpp
 
 CMakeFiles/jeti.dir/Bloom.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/common/Box2D.hpp
 CMakeFiles/jeti.dir/Bloom.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/common/NonCopyable.hpp
+CMakeFiles/jeti.dir/Bloom.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Fbo.hpp
+CMakeFiles/jeti.dir/Bloom.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Light.hpp
+CMakeFiles/jeti.dir/Bloom.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/MyGl.hpp
+CMakeFiles/jeti.dir/Bloom.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Shaders.hpp
 CMakeFiles/jeti.dir/Bloom.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Bloom.cpp
 CMakeFiles/jeti.dir/Bloom.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Bloom.hpp
-CMakeFiles/jeti.dir/Bloom.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Fbo.hpp
-CMakeFiles/jeti.dir/Bloom.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Light.hpp
-CMakeFiles/jeti.dir/Bloom.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/MyGl.hpp
 CMakeFiles/jeti.dir/Bloom.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Render.hpp
-CMakeFiles/jeti.dir/Bloom.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Shaders.hpp
 
 CMakeFiles/jeti.dir/Camera.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/common/NonCopyable.hpp
 CMakeFiles/jeti.dir/Camera.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Camera.cpp
@@ -52,10 +52,10 @@ CMakeFiles/jeti.dir/GlErrorHelper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c
 CMakeFiles/jeti.dir/GlErrorHelper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/MyGl.hpp
 
 CMakeFiles/jeti.dir/Mesh.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/MeshTypes.hpp
+CMakeFiles/jeti.dir/Mesh.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/MyGl.hpp
+CMakeFiles/jeti.dir/Mesh.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/ObjLoader.hpp
 CMakeFiles/jeti.dir/Mesh.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Mesh.cpp
 CMakeFiles/jeti.dir/Mesh.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Mesh.hpp
-CMakeFiles/jeti.dir/Mesh.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/MyGl.hpp
-CMakeFiles/jeti.dir/Mesh.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/ObjLoader.hpp
 
 CMakeFiles/jeti.dir/ObjLoader.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/common/myStr.hpp
 CMakeFiles/jeti.dir/ObjLoader.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/ObjLoader.cpp
@@ -68,11 +68,11 @@ CMakeFiles/jeti.dir/PathVisual.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-16
 CMakeFiles/jeti.dir/PathVisual.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/GuiTypes.hpp
 CMakeFiles/jeti.dir/PathVisual.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/MeshTypes.hpp
 CMakeFiles/jeti.dir/PathVisual.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/TextureTypes.hpp
-CMakeFiles/jeti.dir/PathVisual.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Mesh.hpp
-CMakeFiles/jeti.dir/PathVisual.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/MyGl.hpp
+CMakeFiles/jeti.dir/PathVisual.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Mesh.hpp
+CMakeFiles/jeti.dir/PathVisual.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/MyGl.hpp
+CMakeFiles/jeti.dir/PathVisual.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/TextureOb.hpp
 CMakeFiles/jeti.dir/PathVisual.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/PathVisual.cpp
 CMakeFiles/jeti.dir/PathVisual.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/PathVisual.hpp
-CMakeFiles/jeti.dir/PathVisual.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/TextureOb.hpp
 
 CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/common/Box2D.hpp
 CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/common/Converter.hpp
@@ -86,18 +86,18 @@ CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c3
 CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/GuiTypes.hpp
 CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/MeshTypes.hpp
 CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/TextureTypes.hpp
-CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Bloom.hpp
-CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Camera.hpp
-CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Fbo.hpp
-CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Light.hpp
-CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Mesh.hpp
-CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/MyGl.hpp
+CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Bloom.hpp
+CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Camera.hpp
+CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Fbo.hpp
+CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Light.hpp
+CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Mesh.hpp
+CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/MyGl.hpp
+CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/SFML_Wrapper.hpp
+CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Screen.hpp
+CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Shaders.hpp
+CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/TextureOb.hpp
 CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Render.cpp
 CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Render.hpp
-CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/SFML_Wrapper.hpp
-CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Screen.hpp
-CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Shaders.hpp
-CMakeFiles/jeti.dir/Render.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/TextureOb.hpp
 
 CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/common/Box2D.hpp
 CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/common/Converter.hpp
@@ -108,14 +108,14 @@ CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-
 CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/math/myVector.hpp
 CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/EntityTypes.hpp
 CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/GuiTypes.hpp
-CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Bloom.hpp
-CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Fbo.hpp
-CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Light.hpp
-CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/MyGl.hpp
-CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Render.hpp
+CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Bloom.hpp
+CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Fbo.hpp
+CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Light.hpp
+CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/MyGl.hpp
+CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Render.hpp
+CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Shaders.hpp
 CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/SFML_Wrapper.cpp
 CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/SFML_Wrapper.hpp
-CMakeFiles/jeti.dir/SFML_Wrapper.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Shaders.hpp
 
 CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/common/Box2D.hpp
 CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/common/Converter.hpp
@@ -130,18 +130,18 @@ CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c3
 CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/EntityTypes.hpp
 CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/GuiTypes.hpp
 CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/RaceTypes.hpp
-CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Bloom.hpp
-CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Camera.hpp
-CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Fbo.hpp
-CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Light.hpp
-CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/MyGl.hpp
-CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Render.hpp
+CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Bloom.hpp
+CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Camera.hpp
+CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Fbo.hpp
+CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Light.hpp
+CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/MyGl.hpp
+CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Render.hpp
+CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Shaders.hpp
 CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/SFML_Wrapper.hpp
 CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Screen.cpp
 CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Screen.hpp
-CMakeFiles/jeti.dir/Screen.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Shaders.hpp
 
-CMakeFiles/jeti.dir/ShaderLoader.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/GlErrorHelper.hpp
+CMakeFiles/jeti.dir/ShaderLoader.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/GlErrorHelper.hpp
 CMakeFiles/jeti.dir/ShaderLoader.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/MyGl.hpp
 CMakeFiles/jeti.dir/ShaderLoader.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/ShaderLoader.cpp
 CMakeFiles/jeti.dir/ShaderLoader.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/ShaderLoader.hpp
@@ -149,7 +149,7 @@ CMakeFiles/jeti.dir/ShaderLoader.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-
 CMakeFiles/jeti.dir/TextureOb.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/common/IdGenerator.hpp
 CMakeFiles/jeti.dir/TextureOb.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/MyInt.hpp
 CMakeFiles/jeti.dir/TextureOb.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/TextureTypes.hpp
-CMakeFiles/jeti.dir/TextureOb.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/MyGl.hpp
+CMakeFiles/jeti.dir/TextureOb.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/MyGl.hpp
 CMakeFiles/jeti.dir/TextureOb.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/TextureOb.cpp
 CMakeFiles/jeti.dir/TextureOb.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/TextureOb.hpp
 
@@ -179,13 +179,13 @@ CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e1
 CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/PlaceTypes.hpp
 CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/RaceTypes.hpp
 CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/types/TextureTypes.hpp
-CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/Mesh.hpp
-CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/MyGl.hpp
-CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/TextureOb.hpp
+CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/Mesh.hpp
+CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/MyGl.hpp
+CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/TextureOb.hpp
+CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/particlesystem/Particle.hpp
+CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti/particlesystem/ParticleData.hpp
 CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/particlesystem/BaseParticleSystem.cpp
 CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/particlesystem/BaseParticleSystem.hpp
-CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/particlesystem/Particle.hpp
-CMakeFiles/jeti.dir/particlesystem/BaseParticleSystem.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/particlesystem/ParticleData.hpp
 
 CMakeFiles/jeti.dir/particlesystem/BlackHoleEffect.cpp.o: /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/particlesystem/BlackHoleEffect.cpp
 

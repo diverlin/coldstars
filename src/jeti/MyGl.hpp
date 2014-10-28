@@ -1,7 +1,5 @@
 
-#ifndef MYGL_HPP
-#define MYGL_HPP 
+#pragma once 
 
 #include <GL/glew.h>
 
-#endif

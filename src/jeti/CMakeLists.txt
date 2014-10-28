@@ -24,7 +24,7 @@ find_package(GLM REQUIRED)
 include_directories(${GLM_INCLUDE_DIRS})
 add_definitions(-DGLM_FORCE_RADIANS)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../jeti)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../game)
 
 # deploy

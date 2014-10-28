@@ -40,7 +40,7 @@ SET(CMAKE_TARGET_LINKED_INFO_FILES
 
 # The include file search paths:
 SET(CMAKE_C_TARGET_INCLUDE_PATH
-  "/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti"
+  "/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti"
   "/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game"
   )
 SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

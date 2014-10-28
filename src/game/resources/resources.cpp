@@ -19,9 +19,9 @@
 #include "resources.hpp"
 #include "../common/constants.hpp"
 #include "../config/config.hpp"
-#include <render/ShaderLoader.hpp>
-#include <render/Mesh.hpp>
-#include <render/Screen.hpp>
+#include <jeti/ShaderLoader.hpp>
+#include <jeti/Mesh.hpp>
+#include <jeti/Screen.hpp>
 #include "MeshCollector.hpp"
 
 #include "TextureManager.hpp"
