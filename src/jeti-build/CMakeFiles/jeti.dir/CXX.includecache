@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/GlErrorHelper.hpp
+MyGl.hpp
+/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/MyGl.hpp
+string
+-
+
+/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/MyGl.hpp
+GL/glew.h
+-
+
+/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/ShaderLoader.cpp
+ShaderLoader.hpp
+/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/ShaderLoader.hpp
+GlErrorHelper.hpp
+/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/GlErrorHelper.hpp
+iostream
+-
+fstream
+-
+vector
+-
+
+/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/ShaderLoader.hpp
+MyGl.hpp
+/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/MyGl.hpp
+string
+-
+

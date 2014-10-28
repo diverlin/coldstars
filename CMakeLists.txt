@@ -11,9 +11,10 @@ set(CMAKE_BUILD_TYPE Debug)
 set(DEPLOY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 set(SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}")
 
-find_package(OpenGL REQUIRED)
-include_directories(${OPENGL_INCLUDE_DIR})
-#add_definitions(-DGL_GLEXT_PROTOTYPES -DGL3_PROTOTYPES)
+#SET(GLOBAL_COMPILE_FLAGS "-Wall -Werror -Wno-switch -std=c++11 -std=gnu++11 -pipe")
+#SET(GLOBAL_COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -Ofast -march=native")
+SET(GLOBAL_COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
+   
 
 set(COLDSTARS_DEPENDENCIES_ROOT "/home/diverlin/coldstars/coldstars_thirdparty_build/dist")
 
@@ -45,6 +46,6 @@ SET_TARGET_PROPERTIES(freetyperender PROPERTIES COMPILE_FLAGS "-std=c++11 -std=g
 
 include_directories(src/game/)
 
+add_subdirectory(src/jeti)
 add_subdirectory(src/game)
-
                                 
