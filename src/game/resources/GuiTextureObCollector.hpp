@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <render/textureOb.hpp>
+#include <jeti/textureOb.hpp>
 
 class GuiTextureObCollector
 {
