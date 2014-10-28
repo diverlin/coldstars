@@ -17,17 +17,18 @@
 */
 
 
-#ifndef BASEPARTICLESYSTEM_HPP
-#define BASEPARTICLESYSTEM_HPP
+#pragma once
 
 #include <vector>
+#include <render/particlesystem/ParticleData.hpp>
 
-#include <struct/ParticleData.hpp>
+class BaseSpaceEntity;
+
+namespace jeti {
 
 class Particle;
 class TextureOb;
 class Mesh;
-class BaseSpaceEntity;
 
 class BaseParticleSystem 
 {
@@ -54,7 +55,6 @@ class BaseParticleSystem
         const glm::mat4& GetActualModelMatrix();
        
         virtual void Update() = 0;
-        virtual void Render(float) {}
     
     protected:
         int m_TypeId;
@@ -78,5 +78,4 @@ class BaseParticleSystem
         std::vector<Particle*> m_Particles;  
 };
 
-
-#endif 
+}

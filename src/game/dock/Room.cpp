@@ -21,7 +21,7 @@
 #include "../render/Render.hpp"
 #include "../resources/TextureManager.hpp"
  
-#include "../resources/textureOb.hpp"
+#include <render/textureOb.hpp>
 
 Room::Room()
 {    

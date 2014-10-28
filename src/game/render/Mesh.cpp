@@ -4,8 +4,9 @@
 #include <fstream>
 
 #include <common/myStr.hpp>
-#include <resources/ObjLoader.hpp>
+#include <render/ObjLoader.hpp>
 
+namespace jeti {
 
 Mesh::Mesh(TYPE::MESH type_id, const std::string& path, const glm::vec3& direction, TextureOb* textureOb)
 :
@@ -256,6 +257,8 @@ void Mesh::Draw(GLenum primitive_type) const
     DrawVbo(primitive_type);
 }  
 
+}
+
 //initialization:
     //for each batch
         //generate, store, and bind a VAO
@@ -267,3 +270,5 @@ void Mesh::Draw(GLenum primitive_type) const
         //bind VAO
         //glDrawArrays(...); or glDrawElements(...); etc.
     //unbind VAO
+
+

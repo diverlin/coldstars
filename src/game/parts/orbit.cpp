@@ -102,7 +102,7 @@ void Orbit::UpdatePathVisualisation()
     m_VisualOrbitTurn.FillData(m_Coords_vec, TURN_TIME, 13);
 }
 
-void Orbit::DrawPath(const Renderer& render)
+void Orbit::DrawPath(const jeti::Renderer& render)
 {   
     UpdatePathVisualisation();   // TOO SLOW
     m_VisualOrbitPath.Draw(render);

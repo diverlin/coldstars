@@ -157,7 +157,7 @@ void Cursor::UpdateMouseStuff()
     m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*Screen::Instance().GetScale() + Screen::Instance().GetBottomLeftScreenWC();
 }
 
-void Cursor::RenderFocusedObjectStuff(const Renderer& render) const
+void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
 {
     //render.enable_BLEND();
     {
@@ -187,7 +187,7 @@ void Cursor::RenderFocusedObjectStuff(const Renderer& render) const
     //render.disable_BLEND();  
 }
 
-void Cursor::RenderFocusedObjectInfo(const Renderer& render) const
+void Cursor::RenderFocusedObjectInfo(const jeti::Renderer& render) const
 {
     //render.enable_BLEND();
     {
@@ -204,7 +204,7 @@ void Cursor::RenderFocusedObjectInfo(const Renderer& render) const
     //render.disable_BLEND();  
 }
 
-void Cursor::RenderItem(const Renderer& render) const
+void Cursor::RenderItem(const jeti::Renderer& render) const
 {
     //render.enable_BLEND();
     {

@@ -285,7 +285,7 @@ void Npc::UpdateInfo()
 void Npc::RenderInfo(const glm::vec2& center)
 {
     UpdateInfo();
-         drawInfoIn2Column(info.title_list, info.value_list, center);
+    //drawInfoIn2Column(info.title_list, info.value_list, center);
 }
                    
   

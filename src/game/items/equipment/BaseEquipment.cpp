@@ -93,7 +93,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 } 
 
 /* virtual */
-void BaseEquipment::Render(const Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text)
+void BaseEquipment::Render(const jeti::Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text)
 {        
     RenderKorpus(render, box);
 

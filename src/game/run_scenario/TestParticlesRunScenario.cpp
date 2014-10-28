@@ -33,7 +33,7 @@
 #include "../garbage/EntityGarbage.hpp"
 
 #include "../struct/GalaxyDescription.hpp"
-#include "../effects/particlesystem/ExplosionEffect.hpp"
+#include <render/particlesystem/ExplosionEffect.hpp>
 
 #include <iostream>
 
@@ -118,9 +118,9 @@ void TestParticlesRunScenario::Update_inDynamic(Player* player)
         {
             float radius = 20*i;
             
-            glm::vec3 center(offset, 200, 0);
-            ExplosionEffect* explosion = getNewExplosionEffect(radius);
-            starsystem->Add(explosion, center);
+//            glm::vec3 center(offset, 200, 0);
+//            jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(radius);
+//            starsystem->Add(explosion, center);
             
             offset += 2.5*radius;
         }

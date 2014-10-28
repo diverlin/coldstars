@@ -18,8 +18,8 @@
 
 #include "BaseBackGroundEffect.hpp"
 #include "../resources/TextureManager.hpp"
-#include "../resources/textureOb.hpp"
-#include "../render/Render.hpp"
+#include <render/textureOb.hpp>
+#include <render/Render.hpp>
 
 #include <glm/gtx/transform.hpp>
 
@@ -58,7 +58,7 @@ const glm::mat4& BaseBackGroundEffect::GetActualModelMatrix()
     return m_Mm;
 }
         
-void BaseBackGroundEffect::SetTextureOb(TextureOb* textureOb, const glm::vec3& scale_factor)
+void BaseBackGroundEffect::SetTextureOb(jeti::TextureOb* textureOb, const glm::vec3& scale_factor)
 {
     m_TextureOb = textureOb; 
     m_Size.x = m_TextureOb->GetFrameWidth()  * scale_factor.x;

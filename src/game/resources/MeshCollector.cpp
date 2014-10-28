@@ -26,14 +26,14 @@ MeshCollector& MeshCollector::Instance()
     return instance;
 }
         
-void MeshCollector::RegisterMesh(Mesh* mesh)
+void MeshCollector::RegisterMesh(jeti::Mesh* mesh)
 {
     mesh_vec.push_back(mesh);
 }
 
-Mesh* MeshCollector::GetMeshByTypeId(TYPE::MESH type_id) const
+jeti::Mesh* MeshCollector::GetMeshByTypeId(TYPE::MESH type_id) const
 {
-    std::vector<Mesh*> result;
+    std::vector<jeti::Mesh*> result;
     for (unsigned int i=0; i<mesh_vec.size(); i++)
     {
         if (mesh_vec[i]->GetTypeId() == type_id)

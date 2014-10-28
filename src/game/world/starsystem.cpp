@@ -48,7 +48,7 @@
 #include <effects/DistantNebulaEffect.hpp>
 #include <effects/DistantStarEffect.hpp>
 #include <effects/lazerTrace.hpp>
-#include <effects/particlesystem/ExplosionEffect.hpp>
+#include <render/particlesystem/ExplosionEffect.hpp>
 
 #include <text/VerticalFlowText.hpp> 
 
@@ -278,14 +278,14 @@ void StarSystem::Add(ShockWaveEffect* shockwave, const glm::vec2& center)
     effect_SHOCKWAVE_vec.push_back(shockwave); 
 }
 
-void StarSystem::Add(ExplosionEffect* explosion, const glm::vec3& center)           
+void StarSystem::Add(jeti::ExplosionEffect* explosion, const glm::vec3& center)
 { 
     float radius_damage = explosion->GetRadius();
     float damage = 0;
     Add(explosion, center, damage, radius_damage);
 }
 
-void StarSystem::Add(ExplosionEffect* explosion, const glm::vec3& center, float damage, float radius_damage)           
+void StarSystem::Add(jeti::ExplosionEffect* explosion, const glm::vec3& center, float damage, float radius_damage)
 { 
     explosion->SetCenter(center);
     effect_PARTICLESYSTEM_vec.push_back(explosion); 
@@ -305,7 +305,7 @@ void StarSystem::Add(ExplosionEffect* explosion, const glm::vec3& center, float 
 }
 
 void StarSystem::Add(LazerTraceEffect* lazerTraceEffect)     { effect_LAZERTRACE_vec.push_back(lazerTraceEffect); }
-void StarSystem::Add(BaseParticleSystem* ps)                 { effect_PARTICLESYSTEM_vec.push_back(ps); }
+void StarSystem::Add(jeti::BaseParticleSystem* ps)                 { effect_PARTICLESYSTEM_vec.push_back(ps); }
 void StarSystem::Add(VerticalFlowText* text)                 { text_DAMAGE_vec.push_back(text); }
 void StarSystem::Add(DistantNebulaEffect* dn)                { distantNebulaEffect_vec.push_back(dn); }
 void StarSystem::Add(DistantStarEffect* ds)                  { distantStarEffect_vec.push_back(ds); }
@@ -844,7 +844,7 @@ void StarSystem::FindRadarVisibleEntities_c(Player* player)
 }
 
 
-void StarSystem::DrawBackground(const Renderer& render, const glm::vec2& scroll_coords)
+void StarSystem::DrawBackground(const jeti::Renderer& render, const glm::vec2& scroll_coords)
 {   
     for(unsigned int i=0; i<distantNebulaEffect_vec.size(); i++)
     { 
@@ -858,7 +858,7 @@ void StarSystem::DrawBackground(const Renderer& render, const glm::vec2& scroll_
     }
 }
     
-void StarSystem::DrawOrbits(const Renderer& render)
+void StarSystem::DrawOrbits(const jeti::Renderer& render)
 {
     for(unsigned int i = 0; i < PLANET_vec.size(); i++) 
     { 
@@ -989,7 +989,7 @@ void StarSystem::ManageDeadObjects_s()
              } 
         }
 
-       for(std::vector<BaseParticleSystem*>::iterator it=effect_PARTICLESYSTEM_vec.begin(); it<effect_PARTICLESYSTEM_vec.end(); ++it)
+       for(std::vector<jeti::BaseParticleSystem*>::iterator it=effect_PARTICLESYSTEM_vec.begin(); it<effect_PARTICLESYSTEM_vec.end(); ++it)
         {
             if ((*it)->GetAlive() == false)
             {   
@@ -1023,22 +1023,22 @@ void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
     float damage = ((Bomb*)container->GetItemSlot()->GetItem())->GetDamage(); 
     glm::vec3 center(container->GetCenter());
     
-    ExplosionEffect* explosion = getNewExplosionEffect(radius);
+    jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(radius);
     Add(explosion, center, radius, damage);
 }
 
 void StarSystem::StarSparkEvent(float radius) const
 {
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
+    {
+        if ( distanceBetween(VEHICLE_vec[i]->GetCenter(), GetStar()->GetCenter()) < radius )
         {
-                   if ( distanceBetween(VEHICLE_vec[i]->GetCenter(), GetStar()->GetCenter()) < radius )
-                   {
-                       if (VEHICLE_vec[i]->GetSlotRadar()->GetItem() != nullptr)
-                       {
-                       VEHICLE_vec[i]->GetSlotRadar()->GetItem()->LockEvent(2); 
-                   }
-               }
+            if (VEHICLE_vec[i]->GetSlotRadar()->GetItem() != nullptr)
+            {
+                VEHICLE_vec[i]->GetSlotRadar()->GetItem()->LockEvent(2);
+            }
         }
+    }
 }
 
 void StarSystem::DamageEventInsideCircle(const glm::vec3& center, float radius, int damage, bool show_effect)

@@ -26,13 +26,11 @@
 #include <world/EntityManager.hpp>
 #include <world/starsystem.hpp>
 
-#include <effects/particlesystem/DriveEffect.hpp>
-#include <effects/particlesystem/ExplosionEffect.hpp>
-
-#include <render/Render.hpp>
+#include <render/particlesystem/DriveEffect.hpp>
+#include <render/particlesystem/ExplosionEffect.hpp>
 
 #include <text/VerticalFlowText.hpp> 
-#include <resources/textureOb.hpp>
+#include <render/textureOb.hpp>
 
 
 RocketBullet::RocketBullet(int id)
@@ -159,18 +157,18 @@ void RocketBullet::PostDeathUniqueEvent(bool show_effect)
 {
     if (show_effect == true)
     {
-        ExplosionEffect* explosion = getNewExplosionEffect(GetCollisionRadius());
+        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
         GetStarSystem()->Add(explosion, GetCenter());                
     }
 }
 
-void RocketBullet::RenderInSpace(const Renderer& render, float scale)
-{  
-    //alpitodorender render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
+//void RocketBullet::RenderInSpace(const Renderer& render, float scale)
+//{
+//    //alpitodorender render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
 
-    m_EffectDrive->Update();
-    m_EffectDrive->Render(scale, 0.0f);
-}
+//    m_EffectDrive->Update();
+//    m_EffectDrive->Render(scale, 0.0f);
+//}
 
 
 void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

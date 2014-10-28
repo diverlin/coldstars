@@ -34,8 +34,8 @@ class Satellite : public Vehicle
             
         virtual void UpdateInSpace(int, bool) override final;
         
-        void RenderInSpace(const Renderer&, float);
-        void RenderAtPlanet(const Renderer&); 
+        void RenderInSpace(const jeti::Renderer&, float);
+        void RenderAtPlanet(const jeti::Renderer&);
                 
         virtual void Save(boost::property_tree::ptree&) const override final;
         virtual void Load(const boost::property_tree::ptree&) override final;

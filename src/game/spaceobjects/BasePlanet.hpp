@@ -46,7 +46,7 @@ class BasePlanet : public BaseSpaceEntity
         
         void BindParent(const BaseSpaceEntity* const, int);
         
-        virtual void RenderStuffWhenFocusedInSpace(const Renderer&) override final;
+        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) override final;
         
     protected:
         virtual void PutChildsToGarbage() const {}

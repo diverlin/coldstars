@@ -1,6 +1,4 @@
-
-#ifndef MESH_HPP
-#define MESH_HPP
+#pragma once
 
 #include <string>
 #include <vector>
@@ -10,9 +8,10 @@
 #include <render/MyGl.hpp>
 #include <types/MeshTypes.hpp>
 
+namespace jeti {
+
 class ObjLoader;
 class TextureOb;
-
 
 const int VERTECIES_PER_POLYGON_NUM = 3;
 
@@ -81,4 +80,5 @@ class Mesh
         void DrawVbo(GLenum) const;
 };
 
-#endif
+}
+

@@ -67,7 +67,7 @@ void BasePlanet::UpdatePosition()
 }
 
 /* virtual override final */
-void BasePlanet::RenderStuffWhenFocusedInSpace(const Renderer& render)
+void BasePlanet::RenderStuffWhenFocusedInSpace(const jeti::Renderer& render)
 {
     m_Orbit.DrawPath(render);
 }

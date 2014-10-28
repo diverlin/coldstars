@@ -21,7 +21,9 @@
 
 #include "BaseButtonItemSlot.hpp"
 
+namespace jeti {
 class Renderer;
+}
 
 class ButtonItemSlot2 : public BaseButtonItemSlot
 {
@@ -39,7 +41,7 @@ class ButtonItemSlot2 : public BaseButtonItemSlot
         virtual void ResetState() override final;
         virtual void UpdateUnique(Player*) override final;
         
-        virtual void RenderUnique(const Renderer&, Player*) const override final; 
+        virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
         
     private:
 

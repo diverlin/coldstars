@@ -17,17 +17,19 @@
 */
 
 #include "BaseParticleSystem.hpp"
-#include <effects/particlesystem/Particle.hpp>
+#include <render/particlesystem/Particle.hpp>
 
 #include <math/rand.hpp>
 #include <common/constants.hpp>
 
-#include <resources/textureOb.hpp>
+#include <render/textureOb.hpp>
 #include <spaceobjects/BaseSpaceEntity.hpp>
 
 #include <render/Mesh.hpp>
 
 #include <glm/gtx/transform.hpp>
+
+namespace jeti {
 
 BaseParticleSystem::BaseParticleSystem()
 :
@@ -88,3 +90,4 @@ const glm::mat4& BaseParticleSystem::GetActualModelMatrix()
     return m_MatrixModel;
 }
 
+}

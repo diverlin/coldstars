@@ -21,9 +21,13 @@
 
 #include "../math/myVector.hpp"
 
-class TextureOb;
+
 class BaseSpaceEntity;
+
+namespace jeti {
 class Renderer;
+class TextureOb;
+}
 
 class ShieldEffect
 {  
@@ -31,12 +35,12 @@ class ShieldEffect
         ShieldEffect();
         ~ShieldEffect();
         
-        void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
+        void SetTextureOb(jeti::TextureOb* textureOb) { this->textureOb = textureOb; };
         void SetAlpha(float alpha) { color.a = alpha; };
         void SetParent(BaseSpaceEntity*);
             
         void Update();
-        void Render(const Renderer&, float) const;  
+        void Render(const jeti::Renderer&, float) const;
 
     private:       
         glm::vec4 color;
@@ -45,7 +49,7 @@ class ShieldEffect
         float alpha_start;
         float d_alpha;
         
-        TextureOb* textureOb;
+        jeti::TextureOb* textureOb;
         BaseSpaceEntity* parent;
                 
 };

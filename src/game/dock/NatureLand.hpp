@@ -24,6 +24,10 @@
 class ItemSlot;
 class BaseItem;
 
+namespace jeti {
+class TextureOb;
+}
+
 struct UnresolvedDataNatureLand
 {
     std::string textureOb_background_path;
@@ -37,9 +41,9 @@ class NatureLand : public BaseLand
 
         virtual void PutChildsToGarbage() const;
         
-        void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
+        void SetTextureObBackground(jeti::TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
         
-        TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
+        jeti::TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
 
         void AddItemSlot(ItemSlot*);
 
@@ -60,7 +64,7 @@ class NatureLand : public BaseLand
             void Resolve(); 
         
         private:
-            TextureOb* textureOb_background;
+            jeti::TextureOb* textureOb_background;
             
             std::vector<Vehicle*> VEHICLE_vec;
             std::vector<ItemSlot*> item_slot_vec;

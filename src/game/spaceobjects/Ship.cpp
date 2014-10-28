@@ -35,7 +35,7 @@
 
 #include <render/Render.hpp>
 
-#include <resources/textureOb.hpp>
+#include <render/textureOb.hpp>
 
 
 Ship::Ship(int id)
@@ -116,7 +116,7 @@ GetComplexDrive().UpdatePosition(); // debug
     }
 }
 
-void Ship::RenderInSpace(const Renderer& render, float scale)
+void Ship::RenderInSpace(const jeti::Renderer& render, float scale)
 {   
     //if (GetProperties().grab_radius > 0)
     //{
@@ -142,7 +142,7 @@ void Ship::RenderInSpace(const Renderer& render, float scale)
 //    }
 }
 
-void Ship::RenderAtPlanet(const Renderer& render, const glm::vec3& center)
+void Ship::RenderAtPlanet(const jeti::Renderer& render, const glm::vec3& center)
 {
     SetCenter(center);
     //SetAngleZ(0);

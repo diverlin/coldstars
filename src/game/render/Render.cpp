@@ -24,7 +24,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "../resources/textureOb.hpp" // to be removed
+#include <render/textureOb.hpp> // to be removed
 #include <resources/GuiTextureObCollector.hpp>
 #include <render/Shaders.hpp>
 
@@ -41,6 +41,8 @@
 #include <glm/gtx/transform.hpp>
 #include <math/QuaternionUtils.hpp>
 // for ugly
+
+namespace jeti {
 
 Renderer::Renderer()
 :
@@ -235,7 +237,7 @@ void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
     float ambient_factor = 0.25;       
     const glm::vec3& eye_pos = Screen::Instance().GetCamera().GetEyePos();
 
-    const MaterialDrawData& material = textureOb.GetData();
+    const Material& material = textureOb.GetData();
 
     UseTransparentMode(material.use_alpha);
  	 	
@@ -292,7 +294,7 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
         glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Light.specular"), 1, glm::value_ptr(m_Light.specular));
         glUniform3fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Light.attenuation"), 1, glm::value_ptr(m_Light.attenuation));
 
-        const MaterialDrawData& material = textureOb.GetData();
+        const Material& material = textureOb.GetData();
         glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Material.ambient"),  1, glm::value_ptr(material.ambient));
         glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Material.diffuse"),  1, glm::value_ptr(material.diffuse));
         glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Material.specular"), 1, glm::value_ptr(material.specular));
@@ -871,4 +873,4 @@ void drawInfoIn2Column(
 */
 }
 
-  
+}

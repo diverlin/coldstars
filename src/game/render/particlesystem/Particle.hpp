@@ -17,12 +17,12 @@
 */
 
 
-#ifndef PARTICLE_HPP
-#define PARTICLE_HPP
+#pragma once
  
-#include <struct/ParticleData.hpp>
+#include <render/particlesystem/ParticleData.hpp>
 #include <glm/glm.hpp>
 
+namespace jeti {
 
 class Particle
 {
@@ -66,4 +66,4 @@ class Particle
         ParticleData m_DataParticle;
 };
   
-#endif 
+}

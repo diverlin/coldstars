@@ -17,27 +17,31 @@
 */
 
 
-#ifndef EXPLOSIONEFFECT_HPP
-#define EXPLOSIONEFFECT_HPP
+#pragma once
 
 #include "BaseParticleSystem.hpp"
 
-class ExplosionEffect : public BaseParticleSystem
-{ 
-    public:
-        ExplosionEffect(float);       
-        virtual ~ExplosionEffect() override final;
-        
-        float GetRadius() const { return m_Radius; }
+namespace jeti {
 
+class DriveEffect : public BaseParticleSystem
+{
+       public:
+        DriveEffect(glm::vec3*, glm::vec3*);
+        virtual ~DriveEffect() override final;
+        
         virtual void Update() override final;
         
         void CreateParticles();
-
+        void UpdateVelocity();
+        void PutParticlesToInitPos();
+                                
     private:
-        float m_Radius;
-};  
+        glm::vec3* pTo_start_pos;      //ob.points.midLeft
+        glm::vec3* pTo_target_pos;     //ob.points.midFarLeft
+        
+        glm::vec3 velocity;
+};
 
-ExplosionEffect* getNewExplosionEffect(float);
-    
-#endif 
+DriveEffect* GetNewDriveEffect(int, glm::vec3*, glm::vec3*);
+
+}

@@ -17,10 +17,12 @@
 */
 
 #include "DamageEffect.hpp"
-#include <effects/particlesystem/Particle.hpp>
+#include <render/particlesystem/Particle.hpp>
 #include <resources/TextureManager.hpp>
 #include <common/constants.hpp>
 #include <spaceobjects/BaseSpaceEntity.hpp>
+
+namespace jeti {
 
 DamageEffect::DamageEffect()
 {
@@ -64,25 +66,6 @@ void DamageEffect::Update()
         }
     }
 }
-
-/* virtual override final */
-void DamageEffect::Render(float scale)
-{
-    //glPushMatrix();
-    //{
-        //glTranslatef(parent->GetCenter().x, parent->GetCenter().y, 0.0);
-        //glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-        //for (unsigned int i=0; i<num_particles; i++)
-        //{
-            //particles_vec[i]->Render(scale);
-        //}
-    //}
-    //glPopMatrix(); 
-}
-
-
-
-
 
 DamageEffect* getNewDamageEffect(int color_id, BaseSpaceEntity* parent)
 {
@@ -128,3 +111,4 @@ DamageEffect* getNewDamageEffect(int color_id, BaseSpaceEntity* parent)
     return damage;
 }
 
+}

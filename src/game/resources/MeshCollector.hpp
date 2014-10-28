@@ -17,24 +17,25 @@
 */
 
 
-#ifndef MESHCOLLECTOR_HPP
-#define MESHCOLLECTOR_HPP
+#pragma once
 
 #include <vector>
 #include <types/MeshTypes.hpp>
 
+namespace jeti {
 class Mesh;
+}
 
 class MeshCollector
 {
     public:
         static MeshCollector& Instance();
         
-        void RegisterMesh(Mesh*);
-        Mesh* GetMeshByTypeId(TYPE::MESH) const;
+        void RegisterMesh(jeti::Mesh*);
+        jeti::Mesh* GetMeshByTypeId(TYPE::MESH) const;
         
     private:
-        std::vector<Mesh*> mesh_vec;
+        std::vector<jeti::Mesh*> mesh_vec;
         
         MeshCollector() {};
         ~MeshCollector() {};
@@ -43,6 +44,5 @@ class MeshCollector
         MeshCollector& operator=(const MeshCollector&) = delete;
 };
 
-#endif 
 
 

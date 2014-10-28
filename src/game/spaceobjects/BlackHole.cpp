@@ -80,17 +80,7 @@ void BlackHole::UpdateInfo()
     GetInfo().addNameStr("mass:");       GetInfo().addValueStr(int2str(GetMass()));
     GetInfo().addNameStr("pos:");        GetInfo().addValueStr( str(GetCenter()) );
 }
-      
-void BlackHole::Render_NEW(const Renderer& render)
-{
-    //alpitodorender render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-}
-    
-void BlackHole::Render_OLD(const Renderer& render)
-{
-    //alpitodorender render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-}
-     
+          
 void BlackHole::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1

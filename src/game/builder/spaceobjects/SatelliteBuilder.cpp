@@ -62,8 +62,8 @@ Satellite* SatelliteBuilder::GetNewSatellite() const
 
 void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const 
 {
-    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
-    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SATELLITE_ID);  
+    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SATELLITE_ID);
 
     int protection_rate = 1;
     //if (subtype_id == ENTITY::WARRIOR_ID)
@@ -99,7 +99,7 @@ void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const
     data_korpus.draw_turrels = true;       
  
     float delta_angle = 0.0001*getRandInt(20, 60);  
-    AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
+    jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender satellite->SetAnimationRotation(animation_rotation);
     
     satellite->SetKorpusData(data_korpus);

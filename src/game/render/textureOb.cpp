@@ -16,18 +16,17 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <SFML/Graphics/Image.hpp>
-#include <iostream>
-
 #include "textureOb.hpp"
+
+#include <SFML/Graphics/Image.hpp>
+
 #include <types/TextureTypes.hpp>
 
-#include "../common/IdGenerator.hpp"
-#include "../common/common.hpp"
-#include <math/rand.hpp>
-#include "../render/Screen.hpp"
+#include <common/IdGenerator.hpp>
 
-TextureOb::TextureOb(const MaterialDrawData& data)
+namespace jeti {
+
+TextureOb::TextureOb(const Material& data)
     :
       m_IsLoaded(false),
       m_Data(data)
@@ -44,7 +43,7 @@ TextureOb::TextureOb(const MaterialDrawData& data)
     
     CreateTextureCoords(m_Data.col_num, m_Data.row_num, m_Data.fps); 
     
-    m_Data.size_id = getObjectSize(m_Data.w, m_Data.h);
+    //m_Data.size_id = getObjectSize(m_Data.w, m_Data.h);
 }  
 
 TextureOb::~TextureOb()
@@ -147,8 +146,7 @@ void loadToVRAM(const std::string& path, GLuint& texture, int& w, int& h)
 {
     sf::Image image;
     if (!image.loadFromFile(path)) {
-        std::cout<<"FAULT: Not abe to open file:"<<path;
-        exit(EXIT_FAILURE);
+        throw std::runtime_error("FAULT: Not abe to open file:" + path);
     }
 
     image.flipVertically();
@@ -164,6 +162,7 @@ void loadToVRAM(const std::string& path, GLuint& texture, int& w, int& h)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 }
 
+}
 
 
 

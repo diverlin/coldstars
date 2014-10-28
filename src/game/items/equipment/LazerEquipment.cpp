@@ -33,7 +33,7 @@
 #include "../../world/starsystem.hpp"
 #include "../../parts/Turrel.hpp"
 
-#include <effects/particlesystem/DamageEffect.hpp>
+#include <render/particlesystem/DamageEffect.hpp>
 
 
 LazerEquipment::LazerEquipment(int id)

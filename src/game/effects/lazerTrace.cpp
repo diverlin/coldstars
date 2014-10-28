@@ -21,13 +21,13 @@
 #include <glm/gtx/transform.hpp>
 #include <math/QuaternionUtils.hpp>
 
-#include <effects/particlesystem/BaseParticleSystem.hpp> 
+#include <render/particlesystem/BaseParticleSystem.hpp>
 
 
 #include <resources/MeshCollector.hpp>     // remove
 
 
-LazerTraceEffect::LazerTraceEffect(TextureOb* textureOb, const glm::vec3* const start_pos, const glm::vec3* const end_pos)
+LazerTraceEffect::LazerTraceEffect(jeti::TextureOb* textureOb, const glm::vec3* const start_pos, const glm::vec3* const end_pos)
 :
 m_IsAlive(true),
 m_TextureOb(textureOb),

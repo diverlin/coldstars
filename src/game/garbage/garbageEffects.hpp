@@ -23,7 +23,11 @@
 #include <vector>
 class LazerTraceEffect; 
 class ShockWaveEffect; 
+
+namespace jeti {
 class BaseParticleSystem;
+}
+
 class VerticalFlowText;
 
 class GarbageEffects
@@ -33,7 +37,7 @@ class GarbageEffects
         ~GarbageEffects();
         
         void add(LazerTraceEffect*);
-        void add(BaseParticleSystem*);
+        void add(jeti::BaseParticleSystem*);
         void add(ShockWaveEffect*);        
         void add(VerticalFlowText*);
         
@@ -41,7 +45,7 @@ class GarbageEffects
     
     private:
             std::vector<LazerTraceEffect*>   effect_LAZERTRACE_vec;
-            std::vector<BaseParticleSystem*> effect_PARTICLESYSTEM_vec;
+            std::vector<jeti::BaseParticleSystem*> effect_PARTICLESYSTEM_vec;
             std::vector<ShockWaveEffect*>    effect_SHOCKWAVE_vec;            
             std::vector<VerticalFlowText*> text_DAMAGE_vec;          
 };

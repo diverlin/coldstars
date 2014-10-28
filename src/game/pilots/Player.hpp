@@ -44,7 +44,10 @@ class RocketBullet;
 
 class LazerTraceEffect;
 class ShockWaveEffect;
+namespace jeti {
 class BaseParticleSystem;
+}
+
 class VerticalFlowText;
 
 
@@ -83,7 +86,7 @@ class Player : public Base
         
         void AddIfVisible(ShockWaveEffect*);  
         void AddIfVisible(LazerTraceEffect*);  
-        void AddIfVisible(BaseParticleSystem*); 
+        void AddIfVisible(jeti::BaseParticleSystem*);
         void AddIfVisible(VerticalFlowText*); 
           
         bool IsAbleToGetFullControlOnScanedVehicle(bool force_full_control = false) const;
@@ -121,14 +124,14 @@ class Player : public Base
         //effects
         std::vector<ShockWaveEffect*>    visible_effect_SHOCKWAVE_vec;
         std::vector<LazerTraceEffect*>   visible_effect_LAZERTRACE_vec;
-        std::vector<BaseParticleSystem*> visible_effect_PARTICLESYSTEM_vec;          
+        std::vector<jeti::BaseParticleSystem*> visible_effect_PARTICLESYSTEM_vec;
         std::vector<VerticalFlowText*>   visible_text_DAMAGE_vec;
         //  
     
         void RenderInSpace(StarSystem*, bool, bool, bool); 
-            void RenderInSpace_NEW(Renderer&, StarSystem*);
-            void RenderCollisionRadius(const Renderer&) const;
-            void RenderAxis(const Renderer&) const;
+            void RenderInSpace_NEW(jeti::Renderer&, StarSystem*);
+            void RenderCollisionRadius(const jeti::Renderer&) const;
+            void RenderAxis(const jeti::Renderer&) const;
                                     
         void SessionInSpace(StarSystem*, const TurnTimer&);
         void SessionInKosmoport();
@@ -158,7 +161,7 @@ bool isObjectOnScreen(const glm::vec3&, const glm::vec3&);
 bool isObjectOnScreen(const glm::vec3&, float);
 bool isPointOnScreen(const glm::vec2&);
 
-bool isObjectWithinRadarRange(BaseParticleSystem*, Vehicle*);                                      
+bool isObjectWithinRadarRange(jeti::BaseParticleSystem*, Vehicle*);
 bool isObjectWithinRadarRange(ShockWaveEffect*, Vehicle*);
 bool isObjectWithinRadarRange(LazerTraceEffect*, Vehicle*);
             

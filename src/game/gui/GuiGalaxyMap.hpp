@@ -26,8 +26,10 @@
 
 class Galaxy;
 class StarSystem;
-class Renderer;
 
+namespace jeti {
+class Renderer;
+}
 
 class GuiGalaxyMap : public BaseGuiElement
 {
@@ -45,11 +47,11 @@ class GuiGalaxyMap : public BaseGuiElement
         
         Galaxy* m_Galaxy;
         
-        PathVisual m_VisualHyperJumpRange;
-        PathVisual m_VisualHyperJumpPath;
+        jeti::PathVisual m_VisualHyperJumpRange;
+        jeti::PathVisual m_VisualHyperJumpPath;
         
         virtual void UpdateUnique(Player*) override final;
-        virtual void RenderUnique(const Renderer&, Player*) const override final;
+        virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
         
         glm::vec3 GetAbsoluteStarSystemPosition(const StarSystem&) const;
 };

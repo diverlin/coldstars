@@ -28,7 +28,7 @@
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
 
-#include <animations/AnimationConstantRotation.hpp>
+#include <render/animations/AnimationConstantRotation.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 #include <render/Mesh.hpp>
@@ -88,8 +88,8 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
     //TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID); 
     //glm::vec3 size = texOb->GetSize();
     
-    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPACESTATION_ID);
-    TextureOb* texOb = mesh->GetTextureOb(); 
+    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPACESTATION_ID);
+    jeti::TextureOb* texOb = mesh->GetTextureOb();
     glm::vec3 size = glm::vec3(50);
 
     //texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 

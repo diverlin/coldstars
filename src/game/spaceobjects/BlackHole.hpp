@@ -36,9 +36,6 @@ class BlackHole : public BasePlanet
         ShockWaveEffect* GetShockWaveEffect() const { return shockwave; };
         
         void UpdateInSpace(int, bool);
-            
-        void Render_NEW(const Renderer&);    
-        void Render_OLD(const Renderer&);
         
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);

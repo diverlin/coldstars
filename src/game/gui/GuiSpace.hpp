@@ -49,7 +49,7 @@ class GuiSpace : public BaseGuiElement
         void Resize(int, int);
         void ButtonsAction(Player*) const;
         
-        virtual void RenderUnique(const Renderer&, Player*) const override final;
+        virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
                 
         void RenderText(const glm::vec2&) const;
         

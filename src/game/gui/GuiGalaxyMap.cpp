@@ -132,12 +132,12 @@ void GuiGalaxyMap::UpdateUnique(Player* player)
 
 
 /* vitual override final */
-void GuiGalaxyMap::RenderUnique(const Renderer& render, Player* player) const
+void GuiGalaxyMap::RenderUnique(const jeti::Renderer& render, Player* player) const
 {
     render.DrawQuad(GetTextureOb(), GetBox());    
 
     for (unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
-    {           
+    {
         for (unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
         {       
             const StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut

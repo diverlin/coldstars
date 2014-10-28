@@ -20,7 +20,7 @@
 #include "../effects/lazerTrace.hpp"
 #include "../effects/ShockWaveEffect.hpp"
 #include "../text/VerticalFlowText.hpp"
-#include "../effects/particlesystem/BaseParticleSystem.hpp"
+#include <render/particlesystem/Particle.hpp>
 
 
 GarbageEffects::GarbageEffects()
@@ -36,7 +36,7 @@ void GarbageEffects::add(LazerTraceEffect* _effect)
     effect_LAZERTRACE_vec.push_back(_effect);
 }
 
-void GarbageEffects::add(BaseParticleSystem* _effect)
+void GarbageEffects::add(jeti::BaseParticleSystem* _effect)
 {
     effect_PARTICLESYSTEM_vec.push_back(_effect);
 }

@@ -17,8 +17,7 @@
 */
 
 
-#ifndef RENDER_HPP
-#define RENDER_HPP
+#pragma once
 
 #include <common/NonCopyable.hpp>
 #include <render/MyGl.hpp>
@@ -28,6 +27,8 @@
 #include <render/Bloom.hpp>
 #include <render/Shaders.hpp>
 #include <render/Light.hpp>
+
+namespace  jeti {
 
 class Mesh;
 class TextureOb;
@@ -151,6 +152,6 @@ void drawInfoIn2Column(
                 const std::vector<std::string>& info_value_list, 
                 const glm::vec2& pos);
 
-#endif 
+}
 
 

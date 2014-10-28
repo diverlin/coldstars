@@ -52,11 +52,11 @@ Planet::~Planet()
     Logger::Instance().Log("___::~Planet("+int2str(GetId())+")");
     #endif
    
-    for (BaseDecor* decor : m_Decorations)
-    {
-        delete decor;
-    } 
-    m_Decorations.clear();
+//    for (BaseDecor* decor : m_Decorations)
+//    {
+//        delete decor;
+//    }
+//    m_Decorations.clear();
 }
 
 /* virtual override final */
@@ -112,19 +112,14 @@ void Planet::UpdateInfo()
 void Planet::PostDeathUniqueEvent(bool)
 {}
 
-void Planet::Render_NEW(const Renderer& render)
-{
-    //alpitodorender render.DrawMeshLightNormalMap(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-    for (BaseDecor* decor : m_Decorations)
-    {
-        decor->Render(render, GetCenter());
-    }
-}
-
-void Planet::Render_OLD(const Renderer& render)
-{
-    //alpitodorender render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-}
+//void Planet::Render_NEW(const Renderer& render)
+//{
+//    //alpitodorender render.DrawMeshLightNormalMap(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+//    for (BaseDecor* decor : m_Decorations)
+//    {
+//        decor->Render(render, GetCenter());
+//    }
+//}
 
 void Planet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
@@ -162,7 +157,6 @@ void Planet::Save(boost::property_tree::ptree& save_ptree) const
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);
-//    BaseDrawable::SaveData(save_ptree, root);
     BaseSpaceEntity::SaveData(save_ptree, root);
     BasePlanet::SaveData(save_ptree, root);
     Planet::SaveData(save_ptree, root);
@@ -173,7 +167,6 @@ void Planet::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Orientation::LoadData(load_ptree);
-//    BaseDrawable::LoadData(load_ptree);
     BaseSpaceEntity::LoadData(load_ptree);
     BasePlanet::LoadData(load_ptree);
     Planet::LoadData(load_ptree);
@@ -184,7 +177,6 @@ void Planet::Resolve()
 {
     Base::ResolveData();
     Orientation::ResolveData();
-//    BaseDrawable::ResolveData();
     BaseSpaceEntity::ResolveData();
     BasePlanet::ResolveData();
     Planet::ResolveData();

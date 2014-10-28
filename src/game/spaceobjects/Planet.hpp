@@ -21,17 +21,14 @@
 #define PLANET_HPP
 
 #include "BasePlanet.hpp"
-class BaseLand;
-class BaseDecor;
 
+class BaseLand;
 
 class Planet : public BasePlanet
 {
     public:
         Planet(int);
-        virtual ~Planet();
-        
-        void AddDecoration(BaseDecor* decor) { m_Decorations.push_back(decor); }
+        virtual ~Planet();        
         
         void BindLand(BaseLand*);
         void SetPopulation(unsigned long int population)  { m_Population = population; }
@@ -42,19 +39,15 @@ class Planet : public BasePlanet
         void AddVehicle(Vehicle*) const;
         
         void UpdateInSpace(int, bool);
-        void UpdateInSpaceInStatic();
-        
-        void Render_NEW(const Renderer&);
-        void Render_OLD(const Renderer&);
-        
+        void UpdateInSpaceInStatic();        
+
         virtual void Save(boost::property_tree::ptree&) const override final;
         virtual void Load(const boost::property_tree::ptree&) override final;
         virtual void Resolve() override final;
         
     private:
         BaseLand* m_Land; 
-        std::vector<BaseDecor*> m_Decorations;
-        
+
         unsigned long int m_Population;
         
         virtual void PutChildsToGarbage() const override final;

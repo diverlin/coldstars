@@ -23,10 +23,15 @@
 #include <math/myVector.hpp> 
 
 class Vehicle;
+namespace jeti {
 class DriveEffect;
+}
 class ItemSlot; 
 class BaseSpaceEntity;
+
+namespace {
 class Renderer;
+}
 
 class DriveComplex
 {
@@ -35,7 +40,7 @@ class DriveComplex
         ~DriveComplex();
         
         void SetOwnerVehicle(Vehicle* owner_vehicle)    { m_OwnerVehicle = owner_vehicle; };
-        void SetDriveEffect(DriveEffect* drive_effect)  { m_EffectDrive = drive_effect; };
+        void SetDriveEffect(jeti::DriveEffect* drive_effect)  { m_EffectDrive = drive_effect; };
         
         void SetDriveSlot(ItemSlot* drive_slot) { m_DriveSlot = drive_slot; };
         void SetBakSlot(ItemSlot* bak_slot)     { m_BakSlot = bak_slot; };
@@ -44,7 +49,7 @@ class DriveComplex
         void SetStaticTargetCoords(const glm::vec3&);
 
         int GetActionId() const { return m_ActionId; };
-        DriveEffect* GetDriveEffect() const { return m_EffectDrive; };
+        jeti::DriveEffect* GetDriveEffect() const { return m_EffectDrive; };
                                     
         ItemSlot* GetDriveSlot() const { return m_DriveSlot; };
         ItemSlot* GetBakSlot()   const { return m_BakSlot; };
@@ -62,7 +67,7 @@ class DriveComplex
         void UpdatePosition();
 
         void UpdatePathVisualisation();                
-        void DrawPath(const Renderer&);
+        void DrawPath(const jeti::Renderer&);
             
     private:
         ItemSlot* m_DriveSlot;
@@ -71,7 +76,7 @@ class DriveComplex
         Vehicle* m_OwnerVehicle;
         BaseSpaceEntity* m_Target;
 
-        DriveEffect* m_EffectDrive; 
+        jeti::DriveEffect* m_EffectDrive;
 
         glm::vec3 m_TargetPos;
         
@@ -87,8 +92,8 @@ class DriveComplex
                 
         bool m_HasTarget;
         
-        PathVisual m_PathVisualCenter;
-        PathVisual m_PathVisualTurn;
+        jeti::PathVisual m_PathVisualCenter;
+        jeti::PathVisual m_PathVisualTurn;
         
         void ClearPath();
         void CalcPath();      

@@ -17,14 +17,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef BLOOM_HPP
-#define BLOOM_HPP
+#pragma once
 
 #include <render/MyGl.hpp>
 #include <vector>
 
 #include <math/myVector.hpp>
 #include <render/Fbo.hpp>
+
+namespace jeti {
 
 class Renderer;
 
@@ -62,4 +63,4 @@ class BloomEffect
  
 // HDR http://prideout.net/archive/bloom/  
  
-#endif
+}

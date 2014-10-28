@@ -22,7 +22,9 @@
 
 #include <render/PathVisual.hpp>
 
+namespace jeti {
 class Renderer;
+}
 
 class Orbit
 {
@@ -42,11 +44,11 @@ class Orbit
         void UpdatePosition();
 
         void UpdatePathVisualisation();
-        void DrawPath(const Renderer&);
+        void DrawPath(const jeti::Renderer&);
 
     private:
-        PathVisual m_VisualOrbitPath;
-        PathVisual m_VisualOrbitTurn;
+        jeti::PathVisual m_VisualOrbitPath;
+        jeti::PathVisual m_VisualOrbitTurn;
                 
         std::vector<glm::vec3> m_Coords_vec;
         int m_Len;

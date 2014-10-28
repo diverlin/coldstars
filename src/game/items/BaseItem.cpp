@@ -26,7 +26,7 @@
 #include "../slots/ItemSlot.hpp"
 #include "../render/Render.hpp"
 #include "../resources/TextureManager.hpp"
-#include "../resources/textureOb.hpp"
+#include <render/textureOb.hpp>
 
 BaseItem::BaseItem()
 :
@@ -122,22 +122,22 @@ void BaseItem::UpdateInfo()
     AddCommonInfo();
 }
 
-void BaseItem::RenderInfo(const Renderer& render, const glm::vec2& pos)
+void BaseItem::RenderInfo(const jeti::Renderer& render, const glm::vec2& pos)
 {  
     UpdateInfo();
     
     //render.enable_BLEND();
-    drawInfoIn2Column(info.title_list, info.value_list, pos);
+    jeti::drawInfoIn2Column(info.title_list, info.value_list, pos);
     //render.disable_BLEND();
 }
 
 /* virtual */
-void BaseItem::Render(const Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text)
+void BaseItem::Render(const jeti::Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text)
 {
     RenderKorpus(render, box);
 }
 
-void BaseItem::RenderKorpus(const Renderer& render, const Box2D& box)
+void BaseItem::RenderKorpus(const jeti::Renderer& render, const Box2D& box)
 {
     glm::vec2 v(0.0);
     glm::vec4 c(1.0, 1.0, 1.0, 1.0);

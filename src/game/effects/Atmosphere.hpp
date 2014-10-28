@@ -28,7 +28,7 @@ class Atmosphere : public BaseDecor
         Atmosphere();
         virtual ~Atmosphere();
             
-        virtual void Render(const Renderer&, const glm::vec3&) override final;
+        virtual void Render(const jeti::Renderer&, const glm::vec3&) override final;
 }; 
 
 #endif 

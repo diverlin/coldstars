@@ -48,9 +48,14 @@ class Sector;
 
 class DistantNebulaEffect;
 class DistantStarEffect;
-class BaseParticleSystem;
+
 class ShockWaveEffect;
+
+namespace jeti {
 class ExplosionEffect;
+class BaseParticleSystem;
+}
+
 class LazerTraceEffect;
 
 
@@ -127,10 +132,10 @@ class StarSystem : public BaseSpaceEntity
         void Add(BlackHole*, const glm::vec3&);
 
         // effects
-        void Add(BaseParticleSystem*);
+        void Add(jeti::BaseParticleSystem*);
         void Add(ShockWaveEffect*, const glm::vec2&);
-        void Add(ExplosionEffect*, const glm::vec3&, float, float);
-        void Add(ExplosionEffect*, const glm::vec3&);
+        void Add(jeti::ExplosionEffect*, const glm::vec3&, float, float);
+        void Add(jeti::ExplosionEffect*, const glm::vec3&);
         void Add(LazerTraceEffect*);
 
         void Add(DistantNebulaEffect*);
@@ -150,8 +155,8 @@ class StarSystem : public BaseSpaceEntity
 
         float CalcResultGravityForce(const glm::vec3&, const glm::vec3&, float) const;
 
-        void DrawBackground(const Renderer&, const glm::vec2&);
-        void DrawOrbits(const Renderer&);
+        void DrawBackground(const jeti::Renderer&, const glm::vec2&);
+        void DrawOrbits(const jeti::Renderer&);
         void DrawPath();
 
         void Save(boost::property_tree::ptree&) const;
@@ -202,7 +207,7 @@ class StarSystem : public BaseSpaceEntity
         std::vector<DistantStarEffect*>   distantStarEffect_vec;
 
         std::vector<LazerTraceEffect*>    effect_LAZERTRACE_vec;
-        std::vector<BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
+        std::vector<jeti::BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
         std::vector<ShockWaveEffect*>     effect_SHOCKWAVE_vec;
         std::vector<VerticalFlowText*>    text_DAMAGE_vec;
 

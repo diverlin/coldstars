@@ -27,7 +27,7 @@
 
 #include <render/Render.hpp>
 
-#include <effects/particlesystem/ExplosionEffect.hpp>
+#include <render/particlesystem/ExplosionEffect.hpp>
 
 #include <garbage/EntityGarbage.hpp>
 
@@ -75,12 +75,12 @@ void Container::UpdateInfo()
 }        
  
 /* virtual override final */           
-void Container::RenderInfoInSpace(const Renderer& render, const glm::vec2& scroll_coords, float zoom)
+void Container::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
 {
     UpdateInfo();
     glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
     pos /= zoom;
-    drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
+    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     
     pos.x += 300;
     m_ItemSlot->GetItem()->RenderInfo(render, pos);
@@ -97,7 +97,7 @@ void Container::PostDeathUniqueEvent(bool show_effect)
     {
         if (show_effect == true)
         {
-            ExplosionEffect* explosion = getNewExplosionEffect(GetCollisionRadius());
+            jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
             GetStarSystem()->Add(explosion, GetCenter()); 
         }
     }
@@ -113,7 +113,7 @@ void Container::UpdateInSpace(int time, bool show_effect)
     }
 }
                
-void Container::Render(const Renderer& render)
+void Container::Render(const jeti::Renderer& render)
 { 
     //alpitodorender render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }

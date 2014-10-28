@@ -22,6 +22,7 @@
 
 #include <iostream>
 
+namespace jeti {
 
 BloomEffect::BloomEffect()
 {
@@ -146,7 +147,7 @@ void BloomEffect::Combine(const Renderer& render, int width, int height, GLuint 
     texture_blured = (vec_vec_fbo[2])[3]->GetTexture(); // improove, blured texture is needed for volumetric shader
 }
 
-
+}
 
 
 

@@ -25,8 +25,10 @@
 #include <glm/glm.hpp>
 
 class Vehicle;
-class TextureOb;
 
+namespace jeti {
+class TextureOb;
+}
 
 struct UnresolvedDataBaseSlot
 {
@@ -45,7 +47,7 @@ class BaseSlot : public Base
         BaseSlot();
         virtual ~BaseSlot();
                 
-        void SetTextureOb(TextureOb* textureOb) { this->textureOb = textureOb; };
+        void SetTextureOb(jeti::TextureOb* textureOb) { this->textureOb = textureOb; };
         void SetOwner(Base* owner) { this->owner = owner; };
         void SetPosition(const glm::vec2& position) { this->position = position; };
         void SelectEvent() { selected = true; };
@@ -61,7 +63,7 @@ class BaseSlot : public Base
     protected:        
         bool selected;                     
         
-        TextureOb* textureOb;
+        jeti::TextureOb* textureOb;
                         
         Base* owner; 
         

@@ -64,7 +64,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <effects/particlesystem/BaseParticleSystem.hpp>
+#include <render/particlesystem/BaseParticleSystem.hpp>
 
 Player::Player(int id)
 :
@@ -220,7 +220,7 @@ void Player::AddIfVisible(LazerTraceEffect* effect)
     }
 }
  
-void Player::AddIfVisible(BaseParticleSystem* effect)
+void Player::AddIfVisible(jeti::BaseParticleSystem* effect)
 {
     //if (isObjectOnScreen(effect->GetCenter(), 600))
     //{
@@ -355,7 +355,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
     Screen::Instance().UpdateInSpace();
 }
              
-void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
+void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
 {   
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -426,28 +426,28 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
                 {
                     for(Planet* planet : visible_PLANET_vec)
                     {
-                        planet->Render_NEW(render);
+                        //planet->Render_NEW(render);
                     }
 
                     for(SpaceStation* spacestation : visible_SPACESTATION_vec)
                     {
-                        spacestation->RenderInSpace(render, 1/scale);
+                        //spacestation->RenderInSpace(render, 1/scale);
                     }
 
                     //if (getRandInt(0, 30) == 0) std::cout<<"ship num rendered="<<visible_SHIP_vec.size()<<std::endl;
                     for(Ship* ship : visible_SHIP_vec)
                     {
-                        ship->RenderInSpace(render, 1/scale);
+                        //ship->RenderInSpace(render, 1/scale);
                     }
 
                     for(Asteroid* asteroid : visible_ASTEROID_vec)
                     {
-                        asteroid->Render_NEW(render, world_coord);
+                        //asteroid->Render_NEW(render, world_coord);
                     }
 
                     for(BlackHole* blackhole : visible_BLACKHOLE_vec)
                     {
-                        blackhole->Render_NEW(render);
+                        //blackhole->Render_NEW(render);
                     }
                 }
 
@@ -459,12 +459,12 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
 
                     for(Satellite* satellite : visible_SATELLITE_vec)
                     {
-                        satellite->RenderInSpace(render, 1/scale);
+                        //satellite->RenderInSpace(render, 1/scale);
                     }
 
                     for(RocketBullet* rocket : visible_ROCKET_vec)
                     {
-                        rocket->RenderInSpace(render, 1/scale);
+                        //rocket->RenderInSpace(render, 1/scale);
                     }
                 }
                 if (show.GetCollisionRadius() == true)
@@ -529,13 +529,13 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
                 for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
                 {
                     LazerTraceEffect& lazer_trace = *visible_effect_LAZERTRACE_vec[i];
-                    render.DrawMesh(lazer_trace.GetMesh(), lazer_trace.GetTextureOb(), lazer_trace.GetActualModelMatrix());
+                    //render.DrawMesh(lazer_trace.GetMesh(), lazer_trace.GetTextureOb(), lazer_trace.GetActualModelMatrix());
                 }
 
                 for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
                 {
-                    BaseParticleSystem& ps = *visible_effect_PARTICLESYSTEM_vec[i];
-                    render.DrawParticles(ps.GetMesh(), ps.GetTextureOb(), ps.GetActualModelMatrix());
+                    //BaseParticleSystem& ps = *visible_effect_PARTICLESYSTEM_vec[i];
+                    //render.DrawParticles(ps.GetMesh(), ps.GetTextureOb(), ps.GetActualModelMatrix());
                 }
             }
             render.DeactivateFbo(5);
@@ -567,7 +567,7 @@ void Player::RenderInSpace_NEW(Renderer& render, StarSystem* starsystem)
     
 void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
-    Renderer& renderer = Screen::Instance().GetRender();
+    jeti::Renderer& renderer = Screen::Instance().GetRender();
     Camera& camera = Screen::Instance().GetCamera();
     int w = Screen::Instance().GetWidth();
     int h = Screen::Instance().GetHeight();
@@ -1027,7 +1027,7 @@ void Player::ForceStateMachineReset() const
     npc->GetStateMachine().ForceReset();
 }    
 
-void Player::RenderCollisionRadius(const Renderer& render) const
+void Player::RenderCollisionRadius(const jeti::Renderer& render) const
 {
     //render.enable_BLEND(); 
     {   //a;pitodorender
@@ -1048,7 +1048,7 @@ void Player::RenderCollisionRadius(const Renderer& render) const
     //render.disable_BLEND();
 }
 
-void Player::RenderAxis(const Renderer& render) const
+void Player::RenderAxis(const jeti::Renderer& render) const
 {    
     //render.enable_DEPTH(); 
     //alpitodorender
@@ -1114,7 +1114,7 @@ void Player::ResolveData()
 
 
 
-bool isObjectWithinRadarRange(BaseParticleSystem* effect, Vehicle* vehicle)
+bool isObjectWithinRadarRange(jeti::BaseParticleSystem* effect, Vehicle* vehicle)
 {
     float dist = distanceBetween(vehicle->GetCenter(), effect->GetCenter());
     if (dist < vehicle->GetProperties().radar)

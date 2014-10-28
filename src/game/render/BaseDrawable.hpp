@@ -17,37 +17,31 @@
 */
 
 
-#ifndef BASEDRAWABLE_HPP
-#define BASEDRAWABLE_HPP
+#pragma once
 
-#include <common/Orientation.hpp>
-#include <types/MeshTypes.hpp>
 #include <render/Render.hpp>
 
-#include <glm/glm.hpp> // glm::vec
+#include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-class Mesh;
-class TextureOb;
-class BaseAnimationRotation;
+class Orientation;
 
 const glm::vec3 AXIS_X = glm::vec3(1.0f, 0.0f, 0.0f);
 const glm::vec3 AXIS_Y = glm::vec3(0.0f, 1.0f, 0.0f);
 const glm::vec3 AXIS_Z = glm::vec3(0.0f, 0.0f, 1.0f);
 
-struct UnresolvedDataBaseDrawable
-{
-    TYPE::MESH mesh_type_id;
-    std::string textureOb_path;
-};
+namespace jeti {
 
-class BaseDrawable : public Orientation
+class Mesh;
+class TextureOb;
+class BaseAnimationRotation;
+
+class BaseDrawable
 {
     public:      
-        BaseDrawable();
-        virtual ~BaseDrawable() override;
+        BaseDrawable(Orientation*, TextureOb*, Mesh*);
+        ~BaseDrawable();
 
-        void SetRenderData(Mesh*, TextureOb*, const glm::vec3&);
         void ValidateResources() const;
         void SetAnimationRotation(BaseAnimationRotation* animation_rotation) { m_AnimationRotation = animation_rotation; }
         void SetColor(const glm::vec4& color) { m_Color = color; }
@@ -71,18 +65,14 @@ class BaseDrawable : public Orientation
                 
         bool UpdateFadeInEffect(); // depr, move to animation program
         bool UpdateFadeOutEffect(); // depr, move to animation program
-                
-        UnresolvedDataBaseDrawable data_unresolved_BaseDrawable;
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
 
     private:
         glm::vec4 m_Color;
         
         TextureOb* m_TextureOb;
         Mesh* m_Mesh; 
-        
+        Orientation* m_Orientation = nullptr;
+
         BaseAnimationRotation* m_AnimationRotation;
         
         glm::mat4 m_MatrixModel;     
@@ -94,10 +84,9 @@ class BaseDrawable : public Orientation
         glm::quat m_QuatAnimation;        
 
         void UpdateRenderAnimation();
-                                                        
-    friend class BaseVehicleBuilder;
 };
 
 glm::mat4 getModelMatrix(const glm::vec3&, const glm::vec3&, const glm::vec3&);  // slow, mainly used for debug (draw collision radius, draw axis)
 
-#endif 
+}
+

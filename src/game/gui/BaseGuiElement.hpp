@@ -28,19 +28,21 @@
 
 class Player;
 class AnimationEffect2D;
+
+namespace jeti {
 class TextureOb;
 class Renderer;
-
+}
           
 class BaseGuiElement
 {
     public:
-        BaseGuiElement(TYPE::GUI type_id=TYPE::GUI::NONE_ID, TYPE::GUI subtype_id=TYPE::GUI::NONE_ID, const std::string& info="", TextureOb* textureOb=nullptr);
+        BaseGuiElement(TYPE::GUI type_id=TYPE::GUI::NONE_ID, TYPE::GUI subtype_id=TYPE::GUI::NONE_ID, const std::string& info="", jeti::TextureOb* textureOb=nullptr);
         virtual ~BaseGuiElement();
         
         void SetLabel(const std::string& label) { m_Label = label; }
         
-        void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; }         
+        void SetTextureOb(jeti::TextureOb* textureOb) { m_TextureOb = textureOb; }
         
         void SetSize(glm::vec2 size) { m_Box.SetSize(size); };
             
@@ -50,7 +52,7 @@ class BaseGuiElement
         const Box2D& GetBox() const { return m_Box; }
         Box2D& GetBox() { return m_Box; } // !!!
                 
-        const TextureOb& GetTextureOb() const { return *m_TextureOb; }
+        const jeti::TextureOb& GetTextureOb() const { return *m_TextureOb; }
                 
         bool GetLock() const { return m_Locked; }
         bool GetPressed() const { return m_Pressed; }
@@ -71,8 +73,8 @@ class BaseGuiElement
         virtual void ResetState();
 
         void Update(Player*);
-        void Render(const Renderer&, Player*) const;        
-        virtual void RenderInfo(const Renderer&) const {};
+        void Render(const jeti::Renderer&, Player*) const;
+        virtual void RenderInfo(const jeti::Renderer&) const {};
                 
     protected:
         std::vector<BaseGuiElement*> m_Child_vec;
@@ -106,14 +108,14 @@ class BaseGuiElement
         virtual void UpdateUnique(Player*);        
         void UpdateCommon(Player*);
                         
-        virtual void RenderUnique(const Renderer&, Player*) const;        
-        void RenderCommon(const Renderer&, Player*) const;
+        virtual void RenderUnique(const jeti::Renderer&, Player*) const;
+        void RenderCommon(const jeti::Renderer&, Player*) const;
                           
     private: 
         TYPE::GUI m_Type_id;
         TYPE::GUI m_Subtype_id;
         
-        TextureOb* m_TextureOb;    
+        jeti::TextureOb* m_TextureOb;
         
         std::string m_Info; 
         std::string m_Label; 

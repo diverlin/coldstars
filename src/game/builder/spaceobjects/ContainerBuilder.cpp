@@ -58,7 +58,7 @@ Container* ContainerBuilder::GetNewContainerTemplate(INTLONGEST id) const
     return container;
 } 
 
-Container* ContainerBuilder::GetNewContainer(TextureOb* textureOb, BaseItem* item) const
+Container* ContainerBuilder::GetNewContainer(jeti::TextureOb* textureOb, BaseItem* item) const
 {
     Container* container = GetNewContainerTemplate();
     CreateNewInternals(container, textureOb, item);
@@ -68,7 +68,7 @@ Container* ContainerBuilder::GetNewContainer(TextureOb* textureOb, BaseItem* ite
 
 Container* ContainerBuilder::GetNewMineralContainer(int mineral_ammount) const
 {
-    TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MINERAL_ID);   
+    jeti::TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MINERAL_ID);
     GoodsPack* goods_pack = GetNewGoodsPack(TYPE::ENTITY::MINERALS_ID);
     goods_pack->Increase(mineral_ammount);
 
@@ -77,18 +77,18 @@ Container* ContainerBuilder::GetNewMineralContainer(int mineral_ammount) const
     return container;
 } 
            
-void ContainerBuilder::CreateNewInternals(Container* container, TextureOb* textureOb, BaseItem* item) const
+void ContainerBuilder::CreateNewInternals(Container* container, jeti::TextureOb* textureOb, BaseItem* item) const
 {           
     LifeData data_life;
     data_life.armor = 1;
     data_life.dying_time = 30;
     
     container->SetLifeData(data_life);
-    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
     //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->GetSize());
  
     float delta_angle = 0.001*getRandInt(20, 60);
-    AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
+    jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender container->SetAnimationRotation(animation_rotation);
     
     container->SetGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);

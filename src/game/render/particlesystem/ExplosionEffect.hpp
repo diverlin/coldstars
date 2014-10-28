@@ -17,26 +17,28 @@
 */
 
 
-#ifndef DAMAGE_H
-#define DAMAGE_H
+#pragma once
 
 #include "BaseParticleSystem.hpp"
 
-class DamageEffect : public BaseParticleSystem
-{
-       public: 
-        DamageEffect();   
-        virtual ~DamageEffect() override final;
-            
-        void CreateParticles(); 
-                            
+namespace jeti {
+
+class ExplosionEffect : public BaseParticleSystem
+{ 
+    public:
+        ExplosionEffect(float);       
+        virtual ~ExplosionEffect() override final;
+        
+        float GetRadius() const { return m_Radius; }
+
         virtual void Update() override final;
-        virtual void Render(float) override final;
+        
+        void CreateParticles();
 
-    private:    
+    private:
+        float m_Radius;
+};  
 
-};
-
-DamageEffect* getNewDamageEffect(int, BaseSpaceEntity*);
-
-#endif 
+ExplosionEffect* getNewExplosionEffect(float);
+    
+}
