@@ -35,8 +35,8 @@
          <Option compiler="gcc" />
          <Compiler>
             <Add option="-DGLM_FORCE_RADIANS" />
-            <Add directory="/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti" />
             <Add directory="/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game" />
+            <Add directory="/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti" />
             <Add directory="/usr/include" />
             <Add directory="/usr/include/c++/4.8" />
             <Add directory="/usr/include/c++/4.8/backward" />
@@ -61,8 +61,8 @@
          <Option compiler="gcc" />
          <Compiler>
             <Add option="-DGLM_FORCE_RADIANS" />
-            <Add directory="/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti" />
             <Add directory="/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game" />
+            <Add directory="/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../jeti" />
             <Add directory="/usr/include" />
             <Add directory="/usr/include/c++/4.8" />
             <Add directory="/usr/include/c++/4.8/backward" />

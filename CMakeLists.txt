@@ -54,7 +54,8 @@ SET_TARGET_PROPERTIES(freetyperender PROPERTIES COMPILE_FLAGS "-std=c++11 -std=g
 
 include_directories(src/game/)
 include_directories(src/jeti/)
+include_directories(src/)
 
-add_subdirectory(src)
+add_subdirectory(src/jeti)
 add_subdirectory(src/game)
                                 

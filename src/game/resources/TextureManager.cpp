@@ -27,7 +27,7 @@
 
 #include <struct/RaceInformationCollector.hpp>
 
-#include <render/textureOb.hpp>
+#include <jeti/TextureOb.hpp>
 
 
 TextureManager& TextureManager::Instance()
