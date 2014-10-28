@@ -154,10 +154,12 @@ CMakeFiles/jeti.dir/TextureOb.cpp.o
  /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/TextureOb.cpp
  /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/TextureOb.hpp
 CMakeFiles/jeti.dir/animations/AnimationConstantRotation.cpp.o
+ /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/math/QuaternionUtils.hpp
  /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/animations/AnimationConstantRotation.cpp
  /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/animations/AnimationConstantRotation.hpp
  /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/animations/BaseAnimationRotation.hpp
 CMakeFiles/jeti.dir/animations/AnimationWiggle.cpp.o
+ /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/../game/math/QuaternionUtils.hpp
  /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/animations/AnimationWiggle.cpp
  /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/animations/AnimationWiggle.hpp
  /media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars/src/jeti/animations/BaseAnimationRotation.hpp

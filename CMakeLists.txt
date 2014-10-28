@@ -26,6 +26,14 @@ find_package(SFML COMPONENTS system graphics window REQUIRED)
 include_directories(${SFML_INCLUDE_DIR})
 message("${SFML_LIBRARIES}")
 
+find_package(OpenGL REQUIRED)
+include_directories(${OPENGL_INCLUDE_DIR})
+#add_definitions(-DGL_GLEXT_PROTOTYPES -DGL3_PROTOTYPES)
+
+find_package(GLM REQUIRED)
+include_directories(${GLM_INCLUDE_DIRS})
+add_definitions(-DGLM_FORCE_RADIANS)
+
 find_package(GLEW REQUIRED)   
 include_directories(${GLEW_INCLUDE_DIRS})
 
@@ -45,7 +53,8 @@ include_directories(dependencies/freetype2/src)
 SET_TARGET_PROPERTIES(freetyperender PROPERTIES COMPILE_FLAGS "-std=c++11 -std=gnu++11")
 
 include_directories(src/game/)
+include_directories(src/jeti/)
 
-add_subdirectory(src/jeti)
+add_subdirectory(src)
 add_subdirectory(src/game)
                                 
