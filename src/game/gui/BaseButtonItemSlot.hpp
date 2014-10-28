@@ -23,7 +23,10 @@
 #include "BaseButton.hpp"
 
 class ItemSlot;
+
+namespace jeti {
 class Renderer;
+}
 
 class BaseButtonItemSlot : public BaseButton
 {
@@ -45,7 +48,7 @@ class BaseButtonItemSlot : public BaseButton
 
         void UpdateAnimationProgram();
 
-        void RenderMarkEmptySlot(const Renderer&, const glm::vec2&, TYPE::GUI) const;
+        void RenderMarkEmptySlot(const jeti::Renderer&, const glm::vec2&, TYPE::GUI) const;
         void RenderMarkTarget() const;
                         
     private:

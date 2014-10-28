@@ -22,7 +22,7 @@
 #include "../common/myStr.hpp"
 #include <math/rand.hpp>
 #include "../resources/TextureManager.hpp"
-#include "../resources/textureOb.hpp"
+#include <render/textureOb.hpp>
 
 #include "../slots/ItemSlot.hpp"
 #include "../garbage/EntityGarbage.hpp"

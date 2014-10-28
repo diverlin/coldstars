@@ -21,6 +21,7 @@
 #include "../common/constants.hpp"
 #include "../spaceobjects/Planet.hpp"
 #include "../spaceobjects/SpaceStation.hpp"
+#include "../spaceobjects/BaseSpaceEntity.hpp"
 
 BaseLand::BaseLand():owner(nullptr)
 {}

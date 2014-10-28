@@ -23,7 +23,11 @@
 #include <types/MyInt.hpp>
 
 class Container;
+
+namespace jeti {
 class TextureOb;
+}
+
 class BaseItem;
 
 
@@ -34,7 +38,7 @@ class ContainerBuilder
         ~ContainerBuilder();
 
         Container* GetNewContainerTemplate(INTLONGEST id = NONE_ID) const; 
-        Container* GetNewContainer(TextureOb*, BaseItem*) const;
+        Container* GetNewContainer(jeti::TextureOb*, BaseItem*) const;
         Container* GetNewMineralContainer(int) const;
                                                      
     private:
@@ -42,7 +46,7 @@ class ContainerBuilder
         ContainerBuilder(const ContainerBuilder&) = delete;
         ContainerBuilder& operator=(const ContainerBuilder&) = delete;
 
-        void CreateNewInternals(Container*, TextureOb*, BaseItem*) const;
+        void CreateNewInternals(Container*, jeti::TextureOb*, BaseItem*) const;
 }; 
 
 #endif 

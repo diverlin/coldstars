@@ -18,7 +18,7 @@
 
 #include "Shield.hpp"
 #include "../render/Render.hpp"
-#include "../resources/textureOb.hpp"
+#include <render/textureOb.hpp>
 #include "../spaceobjects/BaseSpaceEntity.hpp"
 #include <render/Render.hpp>
 
@@ -54,7 +54,7 @@ void ShieldEffect::Update()
     else                            { color.a = alpha_start; }
 }
 
-void ShieldEffect::Render(const Renderer& renderer, float parent_d_alpha) const
+void ShieldEffect::Render(const jeti::Renderer& renderer, float parent_d_alpha) const
 {
     // alpitodorender renderer.DrawQuad(*textureOb, parent->GetModelMatrix());
 }

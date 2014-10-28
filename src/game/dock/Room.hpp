@@ -22,7 +22,11 @@
 
 #include "../common/Base.hpp"
 #include "../common/rect.hpp"
-class TextureOb; 
+
+namespace jeti {
+class TextureOb;
+}
+
 class Kosmoport;
 
 struct UnresolvedDataRoom
@@ -40,16 +44,16 @@ class Room : public Base
                 virtual void PutChildsToGarbage() const {};
                 
                 void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; };
-                void SetTextureObBackground(TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
+                void SetTextureObBackground(jeti::TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
                 
                 Kosmoport* const GetOwnerKosmoport() { return owner_kosmoport; };
-                TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
+                jeti::TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
 
                 void RenderBackground(const Rect&) const;
                         
         protected:
             Kosmoport* owner_kosmoport;
-                TextureOb* textureOb_background;
+                jeti::TextureOb* textureOb_background;
                 
                 UnresolvedDataRoom data_unresolved_Room;
                 void SaveData(boost::property_tree::ptree&, const std::string&) const;        

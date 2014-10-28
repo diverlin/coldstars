@@ -28,7 +28,7 @@
 std::map<TYPE::GUI, BaseGuiElement*> BaseGuiElement::static_gui_element_map;
 
    
-BaseGuiElement::BaseGuiElement(TYPE::GUI type_id, TYPE::GUI subtype_id, const std::string& info, TextureOb* textureOb)
+BaseGuiElement::BaseGuiElement(TYPE::GUI type_id, TYPE::GUI subtype_id, const std::string& info, jeti::TextureOb* textureOb)
 :
 m_Type_id(type_id),
 m_Subtype_id(subtype_id),
@@ -186,7 +186,7 @@ void BaseGuiElement::UpdateCommon(Player* player)
        }
 }
 
-void BaseGuiElement::Render(const Renderer& render, Player* player) const
+void BaseGuiElement::Render(const jeti::Renderer& render, Player* player) const
 {
     if (!m_Show)
     {
@@ -207,7 +207,7 @@ void BaseGuiElement::Render(const Renderer& render, Player* player) const
 }
 
 /* virtual */
-void BaseGuiElement::RenderUnique(const Renderer& render, Player* player) const
+void BaseGuiElement::RenderUnique(const jeti::Renderer& render, Player* player) const
 {
     if (m_TextureOb)
     {
@@ -215,7 +215,7 @@ void BaseGuiElement::RenderUnique(const Renderer& render, Player* player) const
     }
 }
 
-void BaseGuiElement::RenderCommon(const Renderer& render, Player* player) const
+void BaseGuiElement::RenderCommon(const jeti::Renderer& render, Player* player) const
 {
     for (const auto &gui_element : m_Child_vec)
     {

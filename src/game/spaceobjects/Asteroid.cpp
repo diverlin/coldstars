@@ -28,7 +28,7 @@
 
 #include <builder/spaceobjects/ContainerBuilder.hpp>
 
-#include <effects/particlesystem/ExplosionEffect.hpp>
+#include <render/particlesystem/ExplosionEffect.hpp>
 
 #include <spaceobjects/Container.hpp>
 
@@ -82,7 +82,7 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
     
     if (show_effect == true)
     {
-        ExplosionEffect* explosion = getNewExplosionEffect(GetCollisionRadius());
+        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
         GetStarSystem()->Add(explosion, GetCenter());                
     }
                     
@@ -100,17 +100,6 @@ void Asteroid::UpdateInfo()
     GetInfo().addNameStr("speed x 100:"); GetInfo().addValueStr(int2str(int(GetDataPlanet().speed*100)));
     GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 }     
-
-void Asteroid::Render_NEW(const Renderer& render, const glm::vec2& scroll_coords)
-{
-    //render.RenderMeshLightNormalMap(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-    //alpitodorender render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-}
-    
-void Asteroid::Render_OLD(const Renderer& render)
-{
-    //alpitodorender render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-}
 
 void Asteroid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {

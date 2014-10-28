@@ -17,11 +17,13 @@
 */
 
 #include "ExplosionEffect.hpp"
-#include "effects/particlesystem/Particle.hpp"
+#include <render/particlesystem/Particle.hpp>
 #include <common/constants.hpp>
 #include <resources/TextureManager.hpp>
 
 #include <math/rand.hpp>
+
+namespace jeti {
 
 ExplosionEffect::ExplosionEffect(float radius)
 :
@@ -152,3 +154,5 @@ ExplosionEffect* getNewExplosionEffect(float radius)
     ExplosionEffect* explosion = new ExplosionEffect(radius);
     return explosion;
 } 
+
+}

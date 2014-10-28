@@ -29,7 +29,7 @@
 #include "../render/Render.hpp"
 #include "../text/VerticalFlowText.hpp" 
 #include "../common/Logger.hpp"
-#include "../animations/BaseAnimationRotation.hpp"
+#include <render/animations/BaseAnimationRotation.hpp>
 
 #include <render/Screen.hpp>
 
@@ -96,17 +96,17 @@ void BaseSpaceEntity::CheckDeath(bool show_effect)
 }
 
 /* virtual */        
-void BaseSpaceEntity::RenderInfoInSpace(const Renderer&, const glm::vec2& scroll_coords, float scale)
+void BaseSpaceEntity::RenderInfoInSpace(const jeti::Renderer&, const glm::vec2& scroll_coords, float scale)
 { 
     UpdateInfo(); // virtual
     glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
-    drawInfoIn2Column(m_Info.title_list, m_Info.value_list, pos/scale);
+    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, pos/scale);
 }
 
 void BaseSpaceEntity::RenderInfo(const glm::vec2& center)
 { 
     UpdateInfo(); // virtual
-    drawInfoIn2Column(m_Info.title_list, m_Info.value_list, center);
+    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, center);
 }
     
 void BaseSpaceEntity::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

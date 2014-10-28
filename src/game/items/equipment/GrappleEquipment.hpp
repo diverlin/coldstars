@@ -20,8 +20,10 @@
 #ifndef GRAPPLEEQUIPMENT_HPP
 #define GRAPPLEEQUIPMENT_HPP
 
+namespace jeti {
 class Renderer;
-      
+}
+
 #include "BaseEquipment.hpp"
 #include "../../spaceobjects/BaseSpaceEntity.hpp"
 
@@ -49,7 +51,7 @@ class GrappleEquipment : public BaseEquipment
         std::string GetTargetStr() const;
 
         void UpdateGrabScenarioProgram_inDynamic();
-        void RenderGrabTrail(const Renderer&);
+        void RenderGrabTrail(const jeti::Renderer&);
         
         virtual void UpdateProperties();  
         

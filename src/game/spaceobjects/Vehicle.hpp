@@ -42,7 +42,9 @@ class BaseEquipment;
 class BaseParticleSystem;
 class ShockWaveEffect;
 
+namespace jeti {
 class Renderer;
+}
 
 struct UnresolvedDataVehicle
 {
@@ -162,8 +164,8 @@ class Vehicle : public BaseSpaceEntity
         void UpdateSpecialEffect();
         void UpdateLockedItems();
             
-        virtual void RenderStuffWhenFocusedInSpace(const Renderer&) override final;
-        virtual void RenderInfoInSpace(const Renderer&, const glm::vec2&, float) override final;
+        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) override final;
+        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
         void RenderInfo(const glm::vec2&, int, int);
                     
         void RenderRadarRange();
@@ -205,11 +207,11 @@ class Vehicle : public BaseSpaceEntity
                     
         virtual void UpdateInfo() = 0;
         
-        void RenderGrabTrail(const Renderer&) const;
-        void RenderKorpus(const Renderer&);
+        void RenderGrabTrail(const jeti::Renderer&) const;
+        void RenderKorpus(const jeti::Renderer&);
         void RenderTurrels() const;
         void RenderDriveEffect(float scale, float parent_d_alpha = 0.0) const;
-        void RenderShieldEffect(const Renderer&, float parent_d_alpha = 0.0) const;          
+        void RenderShieldEffect(const jeti::Renderer&, float parent_d_alpha = 0.0) const;
         
         void UpdateGrappleMicroProgram_inDynamic();
         

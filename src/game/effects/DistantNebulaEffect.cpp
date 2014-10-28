@@ -26,7 +26,7 @@
 
 #include "../render/Render.hpp"
 
-#include "../resources/textureOb.hpp"
+#include <render/textureOb.hpp>
 
 
 DistantNebulaEffect::DistantNebulaEffect()
@@ -41,7 +41,7 @@ void DistantNebulaEffect::Update()
 }        
 
 /* virtual override */
-void DistantNebulaEffect::Render(const Renderer& render, const glm::vec3&)
+void DistantNebulaEffect::Render(const jeti::Renderer& render, const glm::vec3&)
 {   
     // alpitodorender render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
@@ -83,9 +83,9 @@ void DistantNebulaEffect::ResolveData()
 
 DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
 {
-    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
 
-    TextureOb* textureOb = nullptr;
+    jeti::TextureOb* textureOb = nullptr;
     if (color_id == NONE_ID)     textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID);
     else                         textureOb = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, color_id);    
            

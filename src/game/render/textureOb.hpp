@@ -17,8 +17,7 @@
 */
 
 
-#ifndef TEXTUREOB_HPP
-#define TEXTUREOB_HPP
+#pragma once
 
 #include <string>
 #include <vector>
@@ -30,9 +29,9 @@
 #include <types/EntityTypes.hpp>
 #include <types/TechLevelTypes.hpp>
 
-const bool FALSE_RESOURCES = false;
+namespace jeti {
 
-struct MaterialDrawData
+struct Material
 {
     int id;
     int w, h;
@@ -70,7 +69,7 @@ struct MaterialDrawData
     int color_id;
     bool is_rotated;
 
-    MaterialDrawData()
+    Material()
     :
     id(0),
     w(1), h(1),
@@ -114,7 +113,7 @@ struct MaterialAssociationData
 class TextureOb
 {
     public:
-        TextureOb(const MaterialDrawData& data);
+        TextureOb(const Material& data);
         ~TextureOb();
 
         const glm::vec3 GetSize() const { return glm::vec3(0.5*m_Data.w_slice, 0.5*m_Data.h_slice, 1.0f); }     // ugly
@@ -128,7 +127,7 @@ class TextureOb
 
         int UpdateAnimationFrame(float);
 
-        const MaterialDrawData& GetData() const { return m_Data; }
+        const Material& GetData() const { return m_Data; }
         const MaterialAssociationData& GetAssociation() const { return m_Association; }
 
         //void SetData(const MaterialData& data) { m_Data = data; } 
@@ -136,7 +135,7 @@ class TextureOb
 
     private:
         MaterialAssociationData m_Association;
-        MaterialDrawData m_Data;
+        Material m_Data;
 
         bool m_IsLoaded;
 
@@ -152,4 +151,4 @@ class TextureOb
 
 void loadToVRAM(const std::string&, GLuint&, int&, int&);
             
-#endif 
+}

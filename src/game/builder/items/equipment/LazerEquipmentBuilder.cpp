@@ -29,7 +29,7 @@
 
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
-#include <resources/textureOb.hpp>
+#include <render/textureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -86,9 +86,9 @@ void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, 
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
-    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID); 
+    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
-    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID);     
+    jeti::TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID);
 
     damage_orig     = getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX) * (1 + EQUIPMENT::LAZER::DAMAGE_TECHLEVEL_RATE * (int)tech_level);
     radius_orig     = getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX) * (1 + EQUIPMENT::LAZER::RADIUS_TECHLEVEL_RATE * (int)tech_level);

@@ -23,7 +23,9 @@
 #include <spaceobjects/BaseSpaceEntity.hpp>
 #include <common/BulletData.hpp>
 
+namespace jeti {
 class DriveEffect;
+}
 
 class RocketBullet : public BaseSpaceEntity
 {
@@ -48,7 +50,7 @@ class RocketBullet : public BaseSpaceEntity
         virtual void Hit(int, bool) override final;
         virtual void PostDeathUniqueEvent(bool) override final;  
         
-        void RenderInSpace(const Renderer&, float);
+        //void RenderInSpace(const Renderer&, float);
         
         virtual void Save(boost::property_tree::ptree&) const override final;
         virtual void Load(const boost::property_tree::ptree&) override final;
@@ -62,7 +64,7 @@ class RocketBullet : public BaseSpaceEntity
         BaseSpaceEntity* m_Target;
         
         BulletData m_DataBullet;
-        DriveEffect* m_EffectDrive;
+        jeti::DriveEffect* m_EffectDrive;
         
         virtual void UpdateInfo() override final; 
         

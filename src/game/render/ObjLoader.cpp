@@ -6,12 +6,14 @@
 
 #include <cmath>
 
-#include "../common/myStr.hpp"
+#include <common/myStr.hpp>
 
 #if OBJLOADER_LOG_ENABLED == 1
-#include "../common/Logger.hpp"
+#include "<common/Logger.hpp>
 #endif
   
+namespace jeti {
+
 ObjLoader::ObjLoader(const std::string& path)
 {
     std::ifstream filestream;
@@ -111,4 +113,4 @@ glm::vec3 ObjLoader::GetBoundaryBox()
     return boundary_box;
 }
 
-  
+}

@@ -79,8 +79,8 @@ Ship* ShipBuilder::GetNewShip() const
 
 void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const
 {
-    Mesh* mesh = nullptr;
-    TextureOb* texOb = nullptr;
+    jeti::Mesh* mesh = nullptr;
+    jeti::TextureOb* texOb = nullptr;
     glm::vec3 size;
     if (true)
     {
@@ -148,7 +148,7 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
     //ship->SetRenderAnimation(animation_program);
     
     float delta_angle = 0.0001*getRandInt(20, 60);
-    AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
+    jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender ship->SetAnimationRotation(animation_rotation);
 
     //alpitodorender ship->SetRenderData(mesh, texOb, scale);

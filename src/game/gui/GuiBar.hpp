@@ -24,7 +24,7 @@
 class GuiBar : public BaseGuiElement
 {
     public:
-        GuiBar(TextureOb*);
+        GuiBar(jeti::TextureOb*);
         ~GuiBar();
         
     private:

@@ -22,7 +22,9 @@
 
 #include <common/Orientation.hpp>
 
+namespace jeti {
 class Renderer;
+}
 
 class BaseDecor : public Orientation
 {
@@ -30,7 +32,7 @@ class BaseDecor : public Orientation
         BaseDecor() {}
         ~BaseDecor() {}
             
-        virtual void Render(const Renderer&, const glm::vec3&) = 0;
+        virtual void Render(const jeti::Renderer&, const glm::vec3&) = 0;
 }; 
 
 #endif 

@@ -66,7 +66,7 @@ void VerticalFlowText::Render(const glm::vec2& scroll_coords, float scale) const
 {
     if (m_IsAlive == true)
     {
-        drawColoredText(m_Text, m_FontSize, (m_Center-scroll_coords)*scale, m_Color);
+        jeti::drawColoredText(m_Text, m_FontSize, (m_Center-scroll_coords)*scale, m_Color);
     }
 }
  

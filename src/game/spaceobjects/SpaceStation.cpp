@@ -107,7 +107,7 @@ void SpaceStation::UpdateRenderStuff_2D()
     //}
 }
 
-void SpaceStation::RenderInSpace(const Renderer& render, float scale)
+void SpaceStation::RenderInSpace(const jeti::Renderer& render, float scale)
 {     
     //UpdateRenderStuff_2D();
         

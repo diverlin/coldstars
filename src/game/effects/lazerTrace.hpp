@@ -22,26 +22,28 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 
+namespace jeti {
 class Mesh;
 class TextureOb;
 class BaseParticleSystem;
+}
 
 class LazerTraceEffect
 { 
     public:
-        LazerTraceEffect(TextureOb*, const glm::vec3* const, const glm::vec3* const);
+        LazerTraceEffect(jeti::TextureOb*, const glm::vec3* const, const glm::vec3* const);
         ~LazerTraceEffect();
 
         bool GetIsAlive() const { return m_IsAlive; }
 
-        void BindParticleSystem(BaseParticleSystem* particle_system) { m_ParticleSystem = particle_system; }
+        void BindParticleSystem(jeti::BaseParticleSystem* particle_system) { m_ParticleSystem = particle_system; }
         
         const glm::vec3& GetStartPos() const { return *m_pStartPos; }
         const glm::vec3& GetEndPos() const { return *m_pEndPos; }
 
         const glm::mat4& GetActualModelMatrix();
-        const Mesh& GetMesh() const { return *m_Mesh; }                
-        const TextureOb& GetTextureOb() const { return *m_TextureOb; }  
+        const jeti::Mesh& GetMesh() const { return *m_Mesh; }
+        const jeti::TextureOb& GetTextureOb() const { return *m_TextureOb; }
 
         void Update();
                     
@@ -49,9 +51,9 @@ class LazerTraceEffect
         bool m_IsAlive;
         int m_LiveTime;
         
-        Mesh* m_Mesh;
-        TextureOb* m_TextureOb;
-        BaseParticleSystem* m_ParticleSystem;
+        jeti::Mesh* m_Mesh;
+        jeti::TextureOb* m_TextureOb;
+        jeti::BaseParticleSystem* m_ParticleSystem;
 
         const glm::vec3* m_pStartPos;
         const glm::vec3* m_pEndPos;

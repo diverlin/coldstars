@@ -35,13 +35,12 @@ class Screen : public SFML_Wrapper
     public:
         static Screen& Instance();
  
-
         void InitRenderStuff();
 
         //Rect& GetRect() { return rect; };
         //glm::vec2 GetBottomLeftScreenWC()    { return rect.GetBottomLeft()*scale; }
         //glm::vec2 GetTopRightScreenWC()    { return rect.GetTopRight()*scale; }
-        Renderer& GetRender() { return m_Render; }
+        jeti::Renderer& GetRender() { return m_Render; }
         Camera& GetCamera() { return m_Camera; }
         
         void SetBottomLeftScreenWC(const glm::vec2& bl)    { rect.SetBottomLeft(bl); }
@@ -71,7 +70,7 @@ class Screen : public SFML_Wrapper
         Screen(const Screen&) = delete;
         Screen& operator=(const Screen&) = delete;
         
-        Renderer m_Render;
+        jeti::Renderer m_Render;
         Camera m_Camera;
         
         bool auto_scroll;

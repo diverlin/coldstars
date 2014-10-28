@@ -68,8 +68,8 @@ SpaceStation* SpaceStationBuilder::GetNewSpaceStation() const
 
 void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 {
-    Mesh* mesh = nullptr;
-    TextureOb* texOb = nullptr;
+    jeti::Mesh* mesh = nullptr;
+    jeti::TextureOb* texOb = nullptr;
     glm::vec3 size;
 
     if (getRandInt(0, 1))
@@ -134,7 +134,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     //alpitodorender spacestation->SetRenderData(mesh, texOb, size);
         
     float delta_angle = 0.0001*getRandInt(20, 60);
-    AnimationConstantRotation* animation_rotation = new AnimationConstantRotation(delta_angle);
+    jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender spacestation->SetAnimationRotation(animation_rotation);
 
     

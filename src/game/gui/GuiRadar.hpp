@@ -24,7 +24,10 @@
 
 class BaseSpaceEntity;
 class Vehicle;
+
+namespace jeti {
 class Renderer;
+}
 
 class GuiRadar : public BaseGuiElement
 {
@@ -42,15 +45,15 @@ class GuiRadar : public BaseGuiElement
 
         virtual void UpdateUnique(Player*) override final;
                      
-        virtual void RenderUnique(const Renderer&, Player*) const override final;
+        virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
             
     private:
         float scale;
         
-        TextureOb* textureOb_background;
-        TextureOb* textureOb_bar;     
-        TextureOb* textureOb_screenrect; 
-        TextureOb* textureOb_range;
+        jeti::TextureOb* textureOb_background;
+        jeti::TextureOb* textureOb_bar;
+        jeti::TextureOb* textureOb_screenrect;
+        jeti::TextureOb* textureOb_range;
                 
         Rect rect;
         Rect screenrect;

@@ -28,7 +28,7 @@
 
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
-#include <resources/textureOb.hpp>
+#include <render/textureOb.hpp>
 
 
 LazerModuleBuilder& LazerModuleBuilder::Instance()
@@ -73,8 +73,8 @@ LazerModule* LazerModuleBuilder::GetNewLazerModule(int damage_add, int radius_ad
             
 void LazerModuleBuilder::CreateNewInternals(LazerModule* lazer_module, int damage_add, int radius_add) const
 {  
-    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);     
-    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID); 
+    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);
   
     damage_add = getRandInt(MODULE::LAZER::DAMAGE_MIN, MODULE::LAZER::DAMAGE_MAX);
     radius_add = getRandInt(MODULE::LAZER::RADIUS_MIN, MODULE::LAZER::RADIUS_MAX);

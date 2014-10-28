@@ -18,8 +18,9 @@
 
 #include "Particle.hpp"
 #include <math/rand.hpp>
-#include "../../render/Render.hpp"
 #include <common/constants.hpp>
+
+namespace jeti {
 
 Particle::Particle(const ParticleData& data_particle)
 :
@@ -140,4 +141,6 @@ void Particle::Update()
             m_IsAlive = false;
         }
     }
+}
+
 }

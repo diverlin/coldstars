@@ -95,9 +95,9 @@ class BaseItem : public Orientation
         
         void UpdateInfo();
         
-        virtual void Render(const Renderer&, const Box2D&, const glm::vec2&, bool draw_text = true);
-        void RenderKorpus(const Renderer&, const Box2D&);
-        void RenderInfo(const Renderer&, const glm::vec2&); 
+        virtual void Render(const jeti::Renderer&, const Box2D&, const glm::vec2&, bool draw_text = true);
+        void RenderKorpus(const jeti::Renderer&, const Box2D&);
+        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
 
     protected:
         TYPE::RACE race_id;

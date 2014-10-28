@@ -166,7 +166,7 @@ void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
     }
 }
 
-void GrappleEquipment::RenderGrabTrail(const Renderer& render)
+void GrappleEquipment::RenderGrabTrail(const jeti::Renderer& render)
 {
     //for (unsigned int i=0; i<target_vec.size(); i++)
     //{

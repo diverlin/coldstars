@@ -27,23 +27,25 @@
 #include <types/RaceTypes.hpp>
 #include <types/EntityTypes.hpp>
 
+namespace jeti {
 class TextureOb;
+}
 
 class TextureManager
 {   
     public:
         static TextureManager& Instance();
         
-        void Add(TextureOb*);
+        void Add(jeti::TextureOb*);
         
-        TextureOb* GetRandomFaceTexObWithFolloingAttributes(TYPE::RACE);
-        TextureOb* GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE, TYPE::ENTITY, int _size_id);
+        jeti::TextureOb* GetRandomFaceTexObWithFolloingAttributes(TYPE::RACE);
+        jeti::TextureOb* GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE, TYPE::ENTITY, int _size_id);
         
-        TextureOb* GetTexObByColorId(TYPE::TEXTURE, int color_id);
+        jeti::TextureOb* GetTexObByColorId(TYPE::TEXTURE, int color_id);
         
-        TextureOb* GetRandomTextureOb(TYPE::TEXTURE);
+        jeti::TextureOb* GetRandomTextureOb(TYPE::TEXTURE);
         
-        TextureOb* GetTextureObByPath(const std::string&);
+        jeti::TextureOb* GetTextureObByPath(const std::string&);
         
         void FillShipSubTypeList();
 
@@ -54,80 +56,80 @@ class TextureManager
         TextureManager(TextureManager&) = delete;
         TextureManager& operator=(TextureManager&) = delete;
         
-        std::vector<TextureOb*> textureOb_total_vec;
+        std::vector<jeti::TextureOb*> textureOb_total_vec;
         
-        std::vector<TextureOb*> itemslot_texOb_vec;
-        std::vector<TextureOb*> vehicleslot_texOb_vec;
-        std::vector<TextureOb*> turrel_texOb_vec;
+        std::vector<jeti::TextureOb*> itemslot_texOb_vec;
+        std::vector<jeti::TextureOb*> vehicleslot_texOb_vec;
+        std::vector<jeti::TextureOb*> turrel_texOb_vec;
             
-        std::vector<TextureOb*> particles_texOb_vec;
+        std::vector<jeti::TextureOb*> particles_texOb_vec;
 
         // BACKGROUND 
-        std::vector<TextureOb*> nebulaBgEffect_texOb_vec;
-        std::vector<TextureOb*> starBgEffect_texOb_vec;
+        std::vector<jeti::TextureOb*> nebulaBgEffect_texOb_vec;
+        std::vector<jeti::TextureOb*> starBgEffect_texOb_vec;
 
         // BACKGROUND AT PLANET 
-        std::vector<TextureOb*> angarBg_texOb_vec;
-        std::vector<TextureOb*> storeBg_texOb_vec;
-        std::vector<TextureOb*> shopBg_texOb_vec;
-        std::vector<TextureOb*> govermentBg_texOb_vec;
-        std::vector<TextureOb*> landBg_texOb_vec;
+        std::vector<jeti::TextureOb*> angarBg_texOb_vec;
+        std::vector<jeti::TextureOb*> storeBg_texOb_vec;
+        std::vector<jeti::TextureOb*> shopBg_texOb_vec;
+        std::vector<jeti::TextureOb*> govermentBg_texOb_vec;
+        std::vector<jeti::TextureOb*> landBg_texOb_vec;
 
         // EFFECTS
-        std::vector<TextureOb*> rocketBullet_texOb_vec;
-        std::vector<TextureOb*> lazerEffect_texOb_vec;
-        std::vector<TextureOb*> shieldEffect_texOb_vec;
+        std::vector<jeti::TextureOb*> rocketBullet_texOb_vec;
+        std::vector<jeti::TextureOb*> lazerEffect_texOb_vec;
+        std::vector<jeti::TextureOb*> shieldEffect_texOb_vec;
 
 
         // SPACE OBJECTS
-        std::vector<TextureOb*> spacestation_texOb_vec;
-        std::vector<TextureOb*> satellite_texOb_vec;
-        std::vector<TextureOb*> star_texOb_vec;
-        std::vector<TextureOb*> planet_texOb_vec;
-        std::vector<TextureOb*> atmosphere_texOb_vec;
-        std::vector<TextureOb*> ring_texOb_vec;
-        std::vector<TextureOb*> asteroid_texOb_vec;  
-        std::vector<TextureOb*> mineral_texOb_vec;   
-        std::vector<TextureOb*> container_texOb_vec;  
-        std::vector<TextureOb*> bomb_texOb_vec;   
-        std::vector<TextureOb*> blackhole_texOb_vec;  
+        std::vector<jeti::TextureOb*> spacestation_texOb_vec;
+        std::vector<jeti::TextureOb*> satellite_texOb_vec;
+        std::vector<jeti::TextureOb*> star_texOb_vec;
+        std::vector<jeti::TextureOb*> planet_texOb_vec;
+        std::vector<jeti::TextureOb*> atmosphere_texOb_vec;
+        std::vector<jeti::TextureOb*> ring_texOb_vec;
+        std::vector<jeti::TextureOb*> asteroid_texOb_vec;
+        std::vector<jeti::TextureOb*> mineral_texOb_vec;
+        std::vector<jeti::TextureOb*> container_texOb_vec;
+        std::vector<jeti::TextureOb*> bomb_texOb_vec;
+        std::vector<jeti::TextureOb*> blackhole_texOb_vec;
         
         // SHIPS
-        std::vector<TextureOb*> ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
-        std::vector<TextureOb*> ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
-        std::vector<TextureOb*> ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
-        std::vector<TextureOb*> ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
-        std::vector<TextureOb*> ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
+        std::vector<jeti::TextureOb*> ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
+        std::vector<jeti::TextureOb*> ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
+        std::vector<jeti::TextureOb*> ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
+        std::vector<jeti::TextureOb*> ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
+        std::vector<jeti::TextureOb*> ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::LAST_ID)];
 
         // ITEMS
-        std::vector<TextureOb*> lazerEquipment_texOb_vec;
-        std::vector<TextureOb*> rocketEquipment_texOb_vec;
-        std::vector<TextureOb*> driveEquipment_texOb_vec;
-        std::vector<TextureOb*> protectorEquipment_texOb_vec;
-        std::vector<TextureOb*> droidEquipment_texOb_vec;
-        std::vector<TextureOb*> grappleEquipment_texOb_vec;
-        std::vector<TextureOb*> bakEquipment_texOb_vec;
-        std::vector<TextureOb*> energyBlockEquipment_texOb_vec;
-        std::vector<TextureOb*> freezerEquipment_texOb_vec;
-        std::vector<TextureOb*> radarEquipment_texOb_vec;
-        std::vector<TextureOb*> scanerEquipment_texOb_vec;
+        std::vector<jeti::TextureOb*> lazerEquipment_texOb_vec;
+        std::vector<jeti::TextureOb*> rocketEquipment_texOb_vec;
+        std::vector<jeti::TextureOb*> driveEquipment_texOb_vec;
+        std::vector<jeti::TextureOb*> protectorEquipment_texOb_vec;
+        std::vector<jeti::TextureOb*> droidEquipment_texOb_vec;
+        std::vector<jeti::TextureOb*> grappleEquipment_texOb_vec;
+        std::vector<jeti::TextureOb*> bakEquipment_texOb_vec;
+        std::vector<jeti::TextureOb*> energyBlockEquipment_texOb_vec;
+        std::vector<jeti::TextureOb*> freezerEquipment_texOb_vec;
+        std::vector<jeti::TextureOb*> radarEquipment_texOb_vec;
+        std::vector<jeti::TextureOb*> scanerEquipment_texOb_vec;
         
-        std::vector<TextureOb*> module_texOb_vec;            
+        std::vector<jeti::TextureOb*> module_texOb_vec;
 
         // FACE
-        std::vector<TextureOb*> face_race0_texOb_vec;
-        std::vector<TextureOb*> face_race1_texOb_vec;
-        std::vector<TextureOb*> face_race2_texOb_vec;
-        std::vector<TextureOb*> face_race3_texOb_vec;
-        std::vector<TextureOb*> face_race4_texOb_vec;
-        std::vector<TextureOb*> face_race6_texOb_vec;
-        std::vector<TextureOb*> face_race7_texOb_vec;
+        std::vector<jeti::TextureOb*> face_race0_texOb_vec;
+        std::vector<jeti::TextureOb*> face_race1_texOb_vec;
+        std::vector<jeti::TextureOb*> face_race2_texOb_vec;
+        std::vector<jeti::TextureOb*> face_race3_texOb_vec;
+        std::vector<jeti::TextureOb*> face_race4_texOb_vec;
+        std::vector<jeti::TextureOb*> face_race6_texOb_vec;
+        std::vector<jeti::TextureOb*> face_race7_texOb_vec;
     
-        TextureOb* _GetRandomTextureObFromVec(const std::vector<TextureOb*>&);
-        TextureOb* _TryGetRandomTextureObFromVec(const std::vector<TextureOb*>&);
-        TextureOb* _GetShipTexObByClosestSizeFromVec(const std::vector<TextureOb*>&, int);
-        TextureOb* _GetShipTexObBySizeFromVec(const std::vector<TextureOb*>&, int);
-        TextureOb* _TryGetShipTexObBySizeFromVec(const std::vector<TextureOb*>&, int);
+        jeti::TextureOb* _GetRandomTextureObFromVec(const std::vector<jeti::TextureOb*>&);
+        jeti::TextureOb* _TryGetRandomTextureObFromVec(const std::vector<jeti::TextureOb*>&);
+        jeti::TextureOb* _GetShipTexObByClosestSizeFromVec(const std::vector<jeti::TextureOb*>&, int);
+        jeti::TextureOb* _GetShipTexObBySizeFromVec(const std::vector<jeti::TextureOb*>&, int);
+        jeti::TextureOb* _TryGetShipTexObBySizeFromVec(const std::vector<jeti::TextureOb*>&, int);
 };
 
 #endif 

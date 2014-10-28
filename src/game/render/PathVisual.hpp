@@ -16,11 +16,12 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef PATHVISUAL_HPP
-#define PATHVISUAL_HPP
+#pragma once
 
 #include <math/myVector.hpp>
 #include <render/Render.hpp>
+
+namespace jeti {
 
 class TextureOb;
 class Mesh;
@@ -47,6 +48,6 @@ class PathVisual
         float m_PointSize;
 };
 
-#endif 
+}
 
 

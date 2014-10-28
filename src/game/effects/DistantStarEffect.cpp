@@ -34,7 +34,7 @@ DistantStarEffect::DistantStarEffect(const std::vector<glm::vec3>& positions, co
         m_Sizes.push_back(sizes[i]);
     }
 
-    m_Mesh = new Mesh();
+    m_Mesh = new jeti::Mesh();
     m_Mesh->FillPointVertices(m_Positions, m_Colors, m_Sizes);
 }
 
@@ -79,7 +79,7 @@ DistantStarEffect* GetNewDistantStarEffect(int color_id)
 {
     int distStar_num = getRandInt(DISTANT_STAR_MIN, DISTANT_STAR_MAX);
 
-    TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DISTANTSTAR_ID);
+    jeti::TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DISTANTSTAR_ID);
 
     std::vector<glm::vec3> positions;
     std::vector<glm::vec4> colors;

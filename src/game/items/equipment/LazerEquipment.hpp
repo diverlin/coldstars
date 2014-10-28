@@ -54,8 +54,8 @@ class LazerEquipment : public BaseEquipment
               int radius_add;
               int radius;
               
-              TextureOb* texOb_turrel;
-              TextureOb* texOb_lazerEffect;
+              jeti::TextureOb* texOb_turrel;
+              jeti::TextureOb* texOb_lazerEffect;
 
              void virtual AddUniqueInfo();
                std::string GetDamageStr();

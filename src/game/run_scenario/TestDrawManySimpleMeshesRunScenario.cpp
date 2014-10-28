@@ -33,7 +33,7 @@
 #include "../garbage/EntityGarbage.hpp"
 
 #include "../struct/GalaxyDescription.hpp"
-#include "../effects/particlesystem/ExplosionEffect.hpp"
+#include <render/particlesystem/ExplosionEffect.hpp>
 
 #include <iostream>
     

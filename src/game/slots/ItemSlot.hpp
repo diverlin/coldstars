@@ -58,8 +58,10 @@ class Bomb;
 class GoodsPack; 
 
 class Box2D;
-class Renderer;
 
+namespace jeti {
+class Renderer;
+}
 
 struct UnresolvedDataItemSlot
 {
@@ -127,16 +129,16 @@ class ItemSlot : public BaseSlot
         
         void UpdateVehiclePropetries() const;
         
-        virtual void Render(const Renderer&, const Box2D&, const glm::vec2&, bool draw_text = true) const;
-        virtual void RenderItem(const Renderer&, const Box2D&, const glm::vec2&, bool draw_text = true) const;
-        void RenderMark(const Renderer&, const Box2D&, TextureOb*) const;
-        void RenderTargetMark(const Renderer&, const Box2D&, TextureOb*, TextureOb*) const;
+        virtual void Render(const jeti::Renderer&, const Box2D&, const glm::vec2&, bool draw_text = true) const;
+        virtual void RenderItem(const jeti::Renderer&, const Box2D&, const glm::vec2&, bool draw_text = true) const;
+        void RenderMark(const jeti::Renderer&, const Box2D&, jeti::TextureOb*) const;
+        void RenderTargetMark(const jeti::Renderer&, const Box2D&, jeti::TextureOb*, jeti::TextureOb*) const;
         
         void DropItemToSpace();
         
         bool SwapItem(ItemSlot*);
         
-        void UpdateRange(TextureOb*);
+        void UpdateRange(jeti::TextureOb*);
         void DrawRange(const glm::vec2&);
         
         bool CheckSubTarget(ItemSlot*) const;
@@ -162,7 +164,7 @@ class ItemSlot : public BaseSlot
         ItemSlot* m_Subtarget;      
         
         int m_HitProbability;
-        PathVisual m_VisualPath;    // !!!
+        jeti::PathVisual m_VisualPath;    // !!!
         
         bool CheckItemInsertion(BaseItem*) const;  
         

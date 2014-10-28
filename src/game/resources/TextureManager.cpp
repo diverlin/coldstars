@@ -27,7 +27,7 @@
 
 #include <struct/RaceInformationCollector.hpp>
 
-#include "../resources/textureOb.hpp"
+#include <render/textureOb.hpp>
 
 
 TextureManager& TextureManager::Instance()
@@ -36,7 +36,7 @@ TextureManager& TextureManager::Instance()
     return instance;
 }
 
-void TextureManager::Add(TextureOb* texOb)
+void TextureManager::Add(jeti::TextureOb* texOb)
 {
     textureOb_total_vec.push_back(texOb);
 
@@ -124,9 +124,9 @@ void TextureManager::Add(TextureOb* texOb)
 }
 
 
-TextureOb* TextureManager::_GetRandomTextureObFromVec(const std::vector<TextureOb*>& textureOb_vec)
+jeti::TextureOb* TextureManager::_GetRandomTextureObFromVec(const std::vector<jeti::TextureOb*>& textureOb_vec)
 {
-    TextureOb* requested_texOb = nullptr;
+    jeti::TextureOb* requested_texOb = nullptr;
 
     if (textureOb_vec.size() == 1)
     {
@@ -140,9 +140,9 @@ TextureOb* TextureManager::_GetRandomTextureObFromVec(const std::vector<TextureO
     return requested_texOb;
 }
 
-TextureOb* TextureManager::_GetShipTexObByClosestSizeFromVec(const std::vector<TextureOb*>& textureOb_vec, int size_id)
+jeti::TextureOb* TextureManager::_GetShipTexObByClosestSizeFromVec(const std::vector<jeti::TextureOb*>& textureOb_vec, int size_id)
 {  
-    TextureOb* requested_texOb = _TryGetShipTexObBySizeFromVec(textureOb_vec, size_id);
+    jeti::TextureOb* requested_texOb = _TryGetShipTexObBySizeFromVec(textureOb_vec, size_id);
     int sign_base = -1;
     int sign = 1;
     int i = 1;
@@ -164,9 +164,9 @@ TextureOb* TextureManager::_GetShipTexObByClosestSizeFromVec(const std::vector<T
 }
 
 
-TextureOb* TextureManager::_TryGetShipTexObBySizeFromVec(const std::vector<TextureOb*>& textureOb_vec, int size_id)
+jeti::TextureOb* TextureManager::_TryGetShipTexObBySizeFromVec(const std::vector<jeti::TextureOb*>& textureOb_vec, int size_id)
 {  
-    TextureOb* requested_texOb  = nullptr;
+    jeti::TextureOb* requested_texOb  = nullptr;
     for (unsigned int i=0; i<textureOb_vec.size(); i++)
     {
         if (textureOb_vec[i]->GetData().size_id == size_id)
@@ -178,9 +178,9 @@ TextureOb* TextureManager::_TryGetShipTexObBySizeFromVec(const std::vector<Textu
     return requested_texOb;
 }
 
-TextureOb* TextureManager::_GetShipTexObBySizeFromVec(const std::vector<TextureOb*>& textureOb_vec, int size_id)
+jeti::TextureOb* TextureManager::_GetShipTexObBySizeFromVec(const std::vector<jeti::TextureOb*>& textureOb_vec, int size_id)
 {
-    TextureOb* requested_texOb  = _TryGetShipTexObBySizeFromVec(textureOb_vec, size_id);
+    jeti::TextureOb* requested_texOb  = _TryGetShipTexObBySizeFromVec(textureOb_vec, size_id);
 //    if (FALSE_RESOURCES) {
 //        requested_texOb = ship_race0_ranger_texOb_vec[0];
 //    }
@@ -188,9 +188,9 @@ TextureOb* TextureManager::_GetShipTexObBySizeFromVec(const std::vector<TextureO
     return requested_texOb;
 }
 
-TextureOb* TextureManager::GetRandomFaceTexObWithFolloingAttributes(TYPE::RACE race_id)
+jeti::TextureOb* TextureManager::GetRandomFaceTexObWithFolloingAttributes(TYPE::RACE race_id)
 {
-    TextureOb* requested_texOb = nullptr;
+    jeti::TextureOb* requested_texOb = nullptr;
     switch(race_id)
     {
         case TYPE::RACE::R0_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race0_texOb_vec); break; }
@@ -207,9 +207,9 @@ TextureOb* TextureManager::GetRandomFaceTexObWithFolloingAttributes(TYPE::RACE r
     return requested_texOb;
 }
 
-TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE race_id, TYPE::ENTITY subtype_id, int size_id)
+jeti::TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE race_id, TYPE::ENTITY subtype_id, int size_id)
 {
-    TextureOb* requested_texOb  = nullptr;
+    jeti::TextureOb* requested_texOb  = nullptr;
 
     switch(subtype_id)
     {
@@ -225,10 +225,10 @@ TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE 
     return requested_texOb;
 }
 
-TextureOb* TextureManager::GetTexObByColorId(TYPE::TEXTURE _type_id, int _color_id)
+jeti::TextureOb* TextureManager::GetTexObByColorId(TYPE::TEXTURE _type_id, int _color_id)
 {
-    TextureOb* requested_texOb = nullptr;
-    std::vector<TextureOb*>* requested_vec = nullptr;
+    jeti::TextureOb* requested_texOb = nullptr;
+    std::vector<jeti::TextureOb*>* requested_vec = nullptr;
     
     switch(_type_id)
     {
@@ -249,9 +249,9 @@ TextureOb* TextureManager::GetTexObByColorId(TYPE::TEXTURE _type_id, int _color_
     return requested_texOb;
 }
                 
-TextureOb* TextureManager::GetRandomTextureOb(TYPE::TEXTURE texture_type_id)
+jeti::TextureOb* TextureManager::GetRandomTextureOb(TYPE::TEXTURE texture_type_id)
 {
-    TextureOb* requested_texOb = nullptr;
+    jeti::TextureOb* requested_texOb = nullptr;
     switch(texture_type_id)
     {
         case TYPE::TEXTURE::SPACESTATION_ID:     { requested_texOb = _GetRandomTextureObFromVec(spacestation_texOb_vec);             break; }
@@ -349,9 +349,9 @@ void TextureManager::FillShipSubTypeList()
     if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R7_ID)].size() != 0) RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
 }
 
-TextureOb* TextureManager::GetTextureObByPath(const std::string& path)
+jeti::TextureOb* TextureManager::GetTextureObByPath(const std::string& path)
 {
-    TextureOb* requested_texOb = nullptr;
+    jeti::TextureOb* requested_texOb = nullptr;
     for (unsigned int i = 0; i<textureOb_total_vec.size(); i++)
     {
         if (textureOb_total_vec[i]->GetData().texture_path == path)

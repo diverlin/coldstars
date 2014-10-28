@@ -27,8 +27,10 @@ class ItemSlot;
 class BaseSpaceEntity;
 class BaseGuiElement;
 class Player;
-class Renderer;
 
+namespace jeti {
+class Renderer;
+}
 
 class Cursor
 {
@@ -47,10 +49,10 @@ class Cursor
         void Reset();    
         void Update(Player*);
         
-        void RenderFocusedObjectStuff(const Renderer&) const;
-        void RenderFocusedObjectInfo(const Renderer&) const;
+        void RenderFocusedObjectStuff(const jeti::Renderer&) const;
+        void RenderFocusedObjectInfo(const jeti::Renderer&) const;
         
-        void RenderItem(const Renderer&) const;
+        void RenderItem(const jeti::Renderer&) const;
                 
     private:           
         ItemSlot* m_ItemSlot;  

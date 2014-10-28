@@ -30,8 +30,10 @@ class Mesh;
 class TextureOb;
 class Vehicle;
 class AnimationBase;
-class Renderer;
 
+namespace jeti {
+class Renderer;
+}
 
 struct UnresolvedDataBaseSpaceEntity
 {
@@ -74,8 +76,8 @@ class BaseSpaceEntity : public Orientation
         virtual void Hit(int, bool);
         void SilentKill();
         
-        virtual void RenderStuffWhenFocusedInSpace(const Renderer&) {};
-        virtual void RenderInfoInSpace(const Renderer&, const glm::vec2&, float);        
+        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) {};
+        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float);
         void RenderInfo(const glm::vec2&);
         void virtual UpdateInfo() {}    
                 

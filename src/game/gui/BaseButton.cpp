@@ -24,7 +24,7 @@
 #include "../render/Screen.hpp"
 
 
-BaseButton::BaseButton(TYPE::GUI type_id, TYPE::GUI subtype_id, const std::string& info, void (*pAction)(Player*), TextureOb* textureOb)
+BaseButton::BaseButton(TYPE::GUI type_id, TYPE::GUI subtype_id, const std::string& info, void (*pAction)(Player*), jeti::TextureOb* textureOb)
 :
 BaseGuiElement(type_id, subtype_id, info, textureOb),
 m_Alpha(1.0f),
@@ -71,13 +71,13 @@ void BaseButton::ShadeOff()
 }      
    
 /* virtual override */               
-void BaseButton::RenderInfo(const Renderer&) const
+void BaseButton::RenderInfo(const jeti::Renderer&) const
 {
-    drawColoredTextWithBackground(GetInfo(), 12, GetBox().GetCenter(), glm::ivec4(255, 255, 255, 255));
+    jeti::drawColoredTextWithBackground(GetInfo(), 12, GetBox().GetCenter(), glm::ivec4(255, 255, 255, 255));
 }
 
 /* virtual override */
-void BaseButton::RenderUnique(const Renderer& render, Player*) const
+void BaseButton::RenderUnique(const jeti::Renderer& render, Player*) const
 {      
     //setColor4f(1.0f, 1.0f, 1.0f, m_Alpha);
     

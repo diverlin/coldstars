@@ -22,9 +22,10 @@
 #include <boost/property_tree/ptree.hpp>
 #include <glm/glm.hpp>
 
+namespace jeti {
 class TextureOb;
 class Mesh;
-
+}
 
 class BaseBackGroundEffect
 {
@@ -33,7 +34,7 @@ class BaseBackGroundEffect
         ~BaseBackGroundEffect();
 
         void ValidateResources() const;
-        void SetTextureOb(TextureOb* textureOb, const glm::vec3& scale_factor = glm::vec3(1.0, 1.0, 1.0));
+        void SetTextureOb(jeti::TextureOb* textureOb, const glm::vec3& scale_factor = glm::vec3(1.0, 1.0, 1.0));
 
         void SetCenter(const glm::vec3& center)     { m_Center = center; }        
         void SetSize(const glm::vec3& size)         { m_Size = size; }
@@ -42,11 +43,11 @@ class BaseBackGroundEffect
         void SetDeltaAngle(float delta_angle)   { m_DeltaAngle = delta_angle; }
 
         const glm::vec3& GetCenter() const { return m_Center; }
-        const TextureOb& GetTextureOb() const { return *m_TextureOb; }
+        const jeti::TextureOb& GetTextureOb() const { return *m_TextureOb; }
 
         const glm::vec4& GetColor() const { return m_Color; }
 
-        const Mesh& GetMesh() const { return *m_Mesh; } 
+        const jeti::Mesh& GetMesh() const { return *m_Mesh; }
 
         const glm::mat4& GetActualModelMatrix();
                 
@@ -55,7 +56,7 @@ class BaseBackGroundEffect
         
         static unsigned long int counter;
         
-        TextureOb* m_TextureOb;
+        jeti::TextureOb* m_TextureOb;
         std::string m_TextureObPath;
         
         glm::vec3 m_Center;
@@ -70,7 +71,7 @@ class BaseBackGroundEffect
         glm::mat4 m_Rm;
         glm::mat4 m_Sm;
 
-        Mesh* m_Mesh;
+        jeti::Mesh* m_Mesh;
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;        
         void LoadData(const boost::property_tree::ptree&);

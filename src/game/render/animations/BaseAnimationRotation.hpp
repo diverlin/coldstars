@@ -16,23 +16,35 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ANIMATIONCONSTANTROTATION_HPP
-#define ANIMATIONCONSTANTROTATION_HPP
+#pragma once
 
-#include "BaseAnimationRotation.hpp"
+#include <glm/gtx/quaternion.hpp>
 
-class AnimationConstantRotation : public BaseAnimationRotation 
+namespace jeti {
+
+class BaseAnimationRotation
 {  
-     public:
-        AnimationConstantRotation(float);
-        virtual ~AnimationConstantRotation();
+    public:
+        BaseAnimationRotation(float delta_angle)
+        :
+        m_Angle(0.0f),
+        m_DeltaAngle(delta_angle) 
+        {}
+        
+        virtual ~BaseAnimationRotation() {}
 
-        virtual void Update(glm::quat&, const glm::vec3&);   
+        virtual void Update(glm::quat&, const glm::vec3&) = 0;
     
+    protected:
+        float GetDeltaAngle() const { return m_DeltaAngle; }
+        float m_Angle;
+            
+    private:
+        float m_DeltaAngle;   
+        
 };
 
-#endif 
-
+}
 
 
 

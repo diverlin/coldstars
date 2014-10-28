@@ -292,13 +292,13 @@ void ItemSlot::UpdateVehiclePropetries() const
 }
    
 /* virtual */
-void ItemSlot::Render(const Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
+void ItemSlot::Render(const jeti::Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
 { 
     render.DrawQuad(*textureOb, box); 
     RenderItem(render, box, gui_offset, draw_text);    
 }
 
-void ItemSlot::RenderItem(const Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
+void ItemSlot::RenderItem(const jeti::Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
 {   
     if (m_Item != nullptr)
     {
@@ -306,12 +306,12 @@ void ItemSlot::RenderItem(const Renderer& render, const Box2D& box, const glm::v
     }
 }
 
-void ItemSlot::RenderMark(const Renderer& render, const Box2D& box, TextureOb* textureOb_mark) const
+void ItemSlot::RenderMark(const jeti::Renderer& render, const Box2D& box, jeti::TextureOb* textureOb_mark) const
 {
     render.DrawQuad(*textureOb_mark, box); 
 }      
 
-void ItemSlot::RenderTargetMark(const Renderer& render, const Box2D& box, TextureOb* textureOb_mask, TextureOb* textureOb) const
+void ItemSlot::RenderTargetMark(const jeti::Renderer& render, const Box2D& box, jeti::TextureOb* textureOb_mask, jeti::TextureOb* textureOb) const
 {
     render.DrawQuad(*textureOb, box); 
     render.DrawQuad(*textureOb_mask, box); 
@@ -370,7 +370,7 @@ int ItemSlot::GetItemDamage() const
 
 void ItemSlot::DropItemToSpace()
 {
-    TextureOb* textureOb_ = nullptr;  
+    jeti::TextureOb* textureOb_ = nullptr;
            
     switch (m_Item->GetTypeId())
     {
@@ -428,7 +428,7 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
     return false;
 }
 
-void ItemSlot::UpdateRange(TextureOb* _texOb)
+void ItemSlot::UpdateRange(jeti::TextureOb* _texOb)
 {
     float radius = this->GetItemRadius();
     int size = 6;

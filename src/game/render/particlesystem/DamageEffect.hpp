@@ -17,35 +17,26 @@
 */
 
 
-#ifndef DRIVEEFFECT_H
-#define DRIVEEFFECT_H
+#pragma once
 
 #include "BaseParticleSystem.hpp"
 
-class DriveEffect : public BaseParticleSystem
+namespace jeti {
+
+class DamageEffect : public BaseParticleSystem
 {
-       public:
-        DriveEffect(glm::vec3*, glm::vec3*);
-        virtual ~DriveEffect() override final;
-        
+       public: 
+        DamageEffect();   
+        virtual ~DamageEffect() override final;
+            
+        void CreateParticles(); 
+                            
         virtual void Update() override final;
-        void Render(float scale, float parent_d_alpha);
-        
-        void CreateParticles();
-        void UpdateVelocity();
-        void PutParticlesToInitPos();
-                                
-    private:
-        glm::vec3* pTo_start_pos;      //ob.points.midLeft
-        glm::vec3* pTo_target_pos;     //ob.points.midFarLeft
-        
-        glm::vec3 velocity;
 
+    private:    
 
-           
-           
-};  
+};
 
-DriveEffect* GetNewDriveEffect(int, glm::vec3*, glm::vec3*);
+DamageEffect* getNewDamageEffect(int, BaseSpaceEntity*);
 
-#endif
+}

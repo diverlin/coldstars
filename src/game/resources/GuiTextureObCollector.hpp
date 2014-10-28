@@ -17,50 +17,48 @@
 */
 
 
-#ifndef GUITEXTURECOLLECTOR_HPP
-#define GUITEXTURECOLLECTOR_HPP
+#pragma once
 
-#include "textureOb.hpp"
-
+#include <render/textureOb.hpp>
 
 class GuiTextureObCollector
 {
     public:
-        TextureOb* starsystem_mark_war;
-        TextureOb* starsystem_mark_captured;    
-        TextureOb* starsystem_mark_player;
+        jeti::TextureOb* starsystem_mark_war;
+        jeti::TextureOb* starsystem_mark_captured;
+        jeti::TextureOb* starsystem_mark_player;
     
-        TextureOb* icon_minus;
-        TextureOb* icon_plus;
-        TextureOb* skill;    
-        TextureOb* skill_transparent;    
+        jeti::TextureOb* icon_minus;
+        jeti::TextureOb* icon_plus;
+        jeti::TextureOb* skill;
+        jeti::TextureOb* skill_transparent;
     
-        TextureOb* icon_map;
-        TextureOb* grapple_trail;    
+        jeti::TextureOb* icon_map;
+        jeti::TextureOb* grapple_trail;
 
-        TextureOb* dot_blue;
-        TextureOb* dot_red;
-        TextureOb* dot_green;
-        TextureOb* dot_black;
-        TextureOb* dot_yellow;
-        TextureOb* dot_purple;
+        jeti::TextureOb* dot_blue;
+        jeti::TextureOb* dot_red;
+        jeti::TextureOb* dot_green;
+        jeti::TextureOb* dot_black;
+        jeti::TextureOb* dot_yellow;
+        jeti::TextureOb* dot_purple;
 
-        TextureOb* radar_screenrect;
-        TextureOb* radar_background;                
-        TextureOb* radar_bar;
-        TextureOb* radar_range;
-        TextureOb* bar_bottom;
-        TextureOb* bar_left;
-        TextureOb* bar_top;
-        TextureOb* bar_right;        
+        jeti::TextureOb* radar_screenrect;
+        jeti::TextureOb* radar_background;
+        jeti::TextureOb* radar_bar;
+        jeti::TextureOb* radar_range;
+        jeti::TextureOb* bar_bottom;
+        jeti::TextureOb* bar_left;
+        jeti::TextureOb* bar_top;
+        jeti::TextureOb* bar_right;
     
-        TextureOb* text_background;
+        jeti::TextureOb* text_background;
 
-        TextureOb* slot_mark_accept;
-        TextureOb* slot_mark_reject;
-        TextureOb* mask_round;
-        TextureOb* mark_target;
-        TextureOb* mark_target_slot;
+        jeti::TextureOb* slot_mark_accept;
+        jeti::TextureOb* slot_mark_reject;
+        jeti::TextureOb* mask_round;
+        jeti::TextureOb* mark_target;
+        jeti::TextureOb* mark_target_slot;
                         
         static GuiTextureObCollector& Instance();
             
@@ -72,4 +70,3 @@ class GuiTextureObCollector
         GuiTextureObCollector& operator=(const GuiTextureObCollector&) = delete;
 };
 
-#endif

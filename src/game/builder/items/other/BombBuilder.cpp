@@ -24,7 +24,7 @@
 
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
-#include <resources/textureOb.hpp>
+#include <render/textureOb.hpp>
 
 BombBuilder& BombBuilder::Instance()
 {
@@ -67,8 +67,8 @@ Bomb* BombBuilder::GetNewBomb(int damage, int radius) const
             
 void BombBuilder::CreateNewInternals(Bomb* bomb, int damage, int radius) const
 {     
-    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);  
-    TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::BOMB_ID); 
+    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::BOMB_ID);
     damage = 300;
     radius = 300;
         

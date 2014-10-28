@@ -29,7 +29,7 @@
 
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
-#include <resources/textureOb.hpp>
+#include <render/textureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -85,8 +85,8 @@ void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
-    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);  
-    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID);   
+    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, revision_id) 
 
     protection_orig = getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX) * (1 + EQUIPMENT::PROTECTOR::PROTECTION_TECHLEVEL_RATE * (int)tech_level);

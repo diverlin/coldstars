@@ -28,6 +28,8 @@
 
 #include <glm/gtx/transform.hpp>
 
+namespace jeti {
+
 PathVisual::PathVisual()
 :
 m_TextureOb(nullptr)  
@@ -120,4 +122,6 @@ void PathVisual::Draw(const Renderer& renderer, const glm::vec3& offset)
 void PathVisual::Draw(const Renderer& renderer) const
 {
     renderer.DrawParticles(*m_Mesh, *m_TextureOb, m_ModelMatrix);
+}
+
 }

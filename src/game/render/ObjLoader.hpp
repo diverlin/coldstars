@@ -1,11 +1,12 @@
 
-#ifndef OBJLOADER_HPP
-#define OBJLOADER_HPP
+#pragma once
 
 #include <string>
 #include <vector>
 
 #include "../math/myVector.hpp"
+
+namespace jeti {
 
 struct MeshFaceIndexesData
 {
@@ -34,4 +35,4 @@ class ObjLoader
     friend class Mesh;
 };
 
-#endif
+}

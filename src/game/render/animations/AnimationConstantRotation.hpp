@@ -16,26 +16,23 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ANIMATIONWIGGLE_HPP
-#define ANIMATIONWIGGLE_HPP
+#pragma once
 
 #include "BaseAnimationRotation.hpp"
 
-class AnimationWiggle : public BaseAnimationRotation 
-{  
-         public:
-            AnimationWiggle(float, float);
-            virtual ~AnimationWiggle();
+namespace jeti {
 
-            virtual void Update(glm::quat&, const glm::vec3&) override final;
-        
-        private:
-            bool m_Clockwise;
-            float m_Threshold;
-      
+class AnimationConstantRotation : public BaseAnimationRotation 
+{  
+    public:
+        AnimationConstantRotation(float);
+        virtual ~AnimationConstantRotation();
+
+        virtual void Update(glm::quat&, const glm::vec3&);
+
 };
 
-#endif 
+}
 
 
 

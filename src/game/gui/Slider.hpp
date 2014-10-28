@@ -21,7 +21,7 @@
 #define SLIDER_H
 
 #include "BaseGuiElement.hpp"
-#include "../resources/textureOb.hpp"
+#include <render/textureOb.hpp>
 #include "../common/rect.hpp"
 #include "../dock/Shop.hpp"
 #include "MouseData.hpp"
@@ -52,8 +52,8 @@ class Slider : public BaseGuiElement
                
                Rect rect;  
                Rect rect_slide;             
-               TextureOb* textureOb;
-               TextureOb* textureOb_scale;
+               jeti::TextureOb* textureOb;
+               jeti::TextureOb* textureOb_scale;
 };
 
 #endif

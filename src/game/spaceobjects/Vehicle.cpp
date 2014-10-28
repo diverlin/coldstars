@@ -51,8 +51,8 @@
 #include <items/artefacts/ProtectorArtefact.hpp>
 
 #include <effects/Shield.hpp>
-#include <effects/particlesystem/DriveEffect.hpp>
-#include <effects/particlesystem/ExplosionEffect.hpp>
+#include <render/particlesystem/DriveEffect.hpp>
+#include <render/particlesystem/ExplosionEffect.hpp>
 #include <text/VerticalFlowText.hpp> 
 
 #include <parts/Turrel.hpp>
@@ -725,7 +725,7 @@ void Vehicle::PostDeathUniqueEvent(bool show_effect)
     
     if (show_effect == true)
     {
-        ExplosionEffect* explosion = getNewExplosionEffect(GetCollisionRadius());
+        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
         GetStarSystem()->Add(explosion, GetCenter());                
     }
 }
@@ -1169,7 +1169,7 @@ void Vehicle::UpdateArtefactInfluence()
 }
 
 /* virtual override final */
-void Vehicle::RenderStuffWhenFocusedInSpace(const Renderer& render) 
+void Vehicle::RenderStuffWhenFocusedInSpace(const jeti::Renderer& render)
 {
     m_ComplexWeapon.RenderWeaponIcons();
     
@@ -1180,12 +1180,12 @@ void Vehicle::RenderStuffWhenFocusedInSpace(const Renderer& render)
 }
 
 /* virtual override final */               
-void Vehicle::RenderInfoInSpace(const Renderer& render, const glm::vec2& scroll_coords, float zoom)
+void Vehicle::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
 {  
     UpdateInfo(); // virtual
     glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
     pos /= zoom;
-    drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
+    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     if (m_OwnerNpc != nullptr)
     {
         glm::vec2 pos2(pos.x + 300, pos.y);
@@ -1197,7 +1197,7 @@ void Vehicle::RenderInfo(const glm::vec2& center, int offset_x, int offset_y)
 {  
     UpdateInfo(); // virtual
     glm::vec2 pos(center.x - offset_x, center.y - offset_y);
-    drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
+    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
 
     if (m_OwnerNpc != nullptr)
     {
@@ -1205,12 +1205,12 @@ void Vehicle::RenderInfo(const glm::vec2& center, int offset_x, int offset_y)
     }
 }
 
-void Vehicle::RenderGrabTrail(const Renderer& render) const
+void Vehicle::RenderGrabTrail(const jeti::Renderer& render) const
 {
-    m_SlotGrapple->GetGrappleEquipment()->RenderGrabTrail(render);
+    //m_SlotGrapple->GetGrappleEquipment()->RenderGrabTrail(render);
 }
         
-void Vehicle::RenderKorpus(const Renderer& render)
+void Vehicle::RenderKorpus(const jeti::Renderer& render)
 {
     //render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
     //alpitodorender render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
@@ -1219,11 +1219,11 @@ void Vehicle::RenderKorpus(const Renderer& render)
 void Vehicle::RenderDriveEffect(float scale, float parent_d_alpha) const
 {
     m_ComplexDrive.GetDriveEffect()->Update();
-    m_ComplexDrive.GetDriveEffect()->Render(scale, parent_d_alpha);
+    //m_ComplexDrive.GetDriveEffect()->Render(scale, parent_d_alpha);
 }
 
 
-void Vehicle::RenderShieldEffect(const Renderer& renderer, float parent_d_alpha) const
+void Vehicle::RenderShieldEffect(const jeti::Renderer& renderer, float parent_d_alpha) const
 {
     m_ComplexProtector.GetShieldEffect()->Render(renderer, parent_d_alpha);
 }

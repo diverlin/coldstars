@@ -19,11 +19,11 @@
 #include <cmath>
 
 #include "DriveEffect.hpp"
-#include "effects/particlesystem/Particle.hpp"
-#include <render/Render.hpp> // depr
-#include <render/Screen.hpp>  // depr
+#include "render/particlesystem/Particle.hpp"
 #include <common/constants.hpp>  // depr
 #include <resources/TextureManager.hpp>  // depr
+
+namespace jeti {
 
 DriveEffect::DriveEffect(glm::vec3* pTo_start_pos, glm::vec3* pTo_target_pos)
 {
@@ -94,29 +94,6 @@ void DriveEffect::Update()
         }
     }
 }
-    
-
-void DriveEffect::Render(float scale, float parent_d_alpha)
-{
-    //glBindTexture(GL_TEXTURE_2D, textureOb->texture);
-    //enable_POINTSPRITE(); 
-    //{     
-        //glPushMatrix();
-        //{
-            //glTranslatef(pTo_start_pos->x, pTo_start_pos->y, 0.0);     
-            //for (unsigned int i=0; i<particles_vec.size(); i++) 
-            //{
-                //particles_vec[i]->Render(scale, parent_d_alpha);
-            //}
-        //}
-        //glPopMatrix();
-    //}
-    //disable_POINTSPRITE();
-}
-
-
-
-
 
 DriveEffect* GetNewDriveEffect(int size_id, glm::vec3* pTo_pos, glm::vec3* pTo_target_pos)
 {
@@ -162,4 +139,5 @@ DriveEffect* GetNewDriveEffect(int size_id, glm::vec3* pTo_pos, glm::vec3* pTo_t
     return drive_effect;
 }
 
+}
 

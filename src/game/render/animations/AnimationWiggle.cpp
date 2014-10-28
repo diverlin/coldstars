@@ -16,35 +16,45 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BASEANIMATIONROTATION_HPP
-#define BASEANIMATIONROTATION_HPP
+#include "AnimationWiggle.hpp"
+#include <cmath>
 
-#include <glm/gtx/quaternion.hpp>
+#include <math/QuaternionUtils.hpp>
 
-class BaseAnimationRotation
-{  
-    public:
-        BaseAnimationRotation(float delta_angle)
-        :
-        m_Angle(0.0f),
-        m_DeltaAngle(delta_angle) 
-        {}
-        
-        virtual ~BaseAnimationRotation() {}
+namespace jeti {
 
-        virtual void Update(glm::quat&, const glm::vec3&) = 0;
+AnimationWiggle::AnimationWiggle(float delta, float threshold)
+:
+BaseAnimationRotation(delta), 
+m_Clockwise(true),
+m_Threshold(threshold)
+{}
+
+/* virtual */
+AnimationWiggle::~AnimationWiggle()
+{}
+
+/* virtual override final */
+void AnimationWiggle::Update(glm::quat& quat, const glm::vec3& axis)
+{
+    if (m_Clockwise)
+    {
+        m_Angle += GetDeltaAngle();
+        if (m_Angle > m_Threshold)
+        {
+            m_Clockwise = false;
+        }
+    }
+    else
+    {
+        m_Angle -= GetDeltaAngle();
+        if (m_Angle < -m_Threshold)
+        {
+            m_Clockwise = true;
+        }        
+    }
     
-    protected:
-        float GetDeltaAngle() const { return m_DeltaAngle; }
-        float m_Angle;
-            
-    private:
-        float m_DeltaAngle;   
-        
-};
+    QuatFromAngleAndAxis(quat, m_Angle, axis);
+}
 
-#endif 
-
-
-
-
+}

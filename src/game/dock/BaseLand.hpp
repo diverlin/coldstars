@@ -16,12 +16,14 @@
        Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BASELAND_H
-#define BASELAND_H
+#ifndef BASELAND_HPP
+#define BASELAND_HPP
 
 #include <vector>
-#include "../spaceobjects/BaseSpaceEntity.hpp"
+#include <string>
+#include <common/Base.hpp>
 
+class BaseSpaceEntity;
 class Vehicle;
 
 struct UnresolvedDataBaseLand
@@ -31,27 +33,27 @@ struct UnresolvedDataBaseLand
 
 class BaseLand : public Base
 {
-        public:
-                BaseLand();
-                virtual ~BaseLand();
+    public:
+        BaseLand();
+        virtual ~BaseLand();
 
-        void SetOwner(BaseSpaceEntity* owner)  { this->owner = owner; } 
+        void SetOwner(BaseSpaceEntity* owner)  { this->owner = owner; }
         
         BaseSpaceEntity* GetOwner() const { return owner; };
         virtual bool GetPermissionToLand() const = 0;
-                        
-                virtual bool AddVehicle(Vehicle*) = 0;
-                virtual bool RemoveVehicle(Vehicle*) = 0; 
-                
-                virtual void UpdateInStatic() = 0;  
-                
-                virtual std::string GetDockVehicleStr() const = 0;
-          
-        protected:
-                BaseSpaceEntity* owner;
-             
-                 UnresolvedDataBaseLand data_unresolved_BaseLand;
-                void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+
+        virtual bool AddVehicle(Vehicle*) = 0;
+        virtual bool RemoveVehicle(Vehicle*) = 0;
+
+        virtual void UpdateInStatic() = 0;
+
+        virtual std::string GetDockVehicleStr() const = 0;
+
+    protected:
+        BaseSpaceEntity* owner;
+
+        UnresolvedDataBaseLand data_unresolved_BaseLand;
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();
 };

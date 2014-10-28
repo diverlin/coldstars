@@ -29,7 +29,7 @@
 
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
-#include <resources/textureOb.hpp>
+#include <render/textureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -86,8 +86,8 @@ void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipmen
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
-    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
-    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);   
+    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
 
     scan_orig       = getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECHLEVEL_RATE * (int)tech_level);

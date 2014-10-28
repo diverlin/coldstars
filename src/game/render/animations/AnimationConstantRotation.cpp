@@ -16,41 +16,36 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "AnimationWiggle.hpp"
-#include <cmath>
+#include "AnimationConstantRotation.hpp"
 
 #include <math/QuaternionUtils.hpp>
 
-AnimationWiggle::AnimationWiggle(float delta, float threshold)
+namespace jeti {
+
+AnimationConstantRotation::AnimationConstantRotation(float delta_angle)
 :
-BaseAnimationRotation(delta), 
-m_Clockwise(true),
-m_Threshold(threshold)
+BaseAnimationRotation(delta_angle)
 {}
 
 /* virtual */
-AnimationWiggle::~AnimationWiggle()
+AnimationConstantRotation::~AnimationConstantRotation()
 {}
 
-/* virtual override final */
-void AnimationWiggle::Update(glm::quat& quat, const glm::vec3& axis)
+/* virtual */
+void AnimationConstantRotation::Update(glm::quat& quat, const glm::vec3& axis)
 {
-    if (m_Clockwise)
+    m_Angle += GetDeltaAngle();
+    if (m_Angle > 2*M_PI)
     {
-        m_Angle += GetDeltaAngle();
-        if (m_Angle > m_Threshold)
-        {
-            m_Clockwise = false;
-        }
+        m_Angle -= 2*M_PI;
     }
-    else
+
+    if (m_Angle < -2*M_PI)
     {
-        m_Angle -= GetDeltaAngle();
-        if (m_Angle < -m_Threshold)
-        {
-            m_Clockwise = true;
-        }        
-    }
+        m_Angle += 2*M_PI;
+    }    
     
     QuatFromAngleAndAxis(quat, m_Angle, axis);
+}
+
 }

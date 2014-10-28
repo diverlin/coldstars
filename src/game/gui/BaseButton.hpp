@@ -22,16 +22,18 @@
 
 #include "BaseGuiElement.hpp"
 
+namespace jeti {
 class Renderer;
+}
 
 class BaseButton : public BaseGuiElement
 {
     public:
-        BaseButton(TYPE::GUI, TYPE::GUI, const std::string&,void (*pAction)(Player*) = nullptr, TextureOb* textureOb = nullptr);                      
+        BaseButton(TYPE::GUI, TYPE::GUI, const std::string&,void (*pAction)(Player*) = nullptr, jeti::TextureOb* textureOb = nullptr);
         virtual ~BaseButton();  
         
-        void SetTextureObAdditional(TextureOb* textureOb_additional) { m_TextureOb_additional = textureOb_additional; }
-        void SetTextureObMask(TextureOb* textureOb_mask) { m_TextureOb_mask = textureOb_mask; }
+        void SetTextureObAdditional(jeti::TextureOb* textureOb_additional) { m_TextureOb_additional = textureOb_additional; }
+        void SetTextureObMask(jeti::TextureOb* textureOb_mask) { m_TextureOb_mask = textureOb_mask; }
         
         //void SetCallBack(void (*funcp)()) { this->pAction = pAction; }              
         void LockOn();
@@ -39,14 +41,14 @@ class BaseButton : public BaseGuiElement
         
         virtual void ResetState() override;
         
-        virtual void RenderInfo(const Renderer&) const override;                
-        virtual void RenderUnique(const Renderer&, Player*) const override;   
+        virtual void RenderInfo(const jeti::Renderer&) const override;
+        virtual void RenderUnique(const jeti::Renderer&, Player*) const override;
                        
     protected:          
         float m_Alpha;                        
         
-        TextureOb* m_TextureOb_additional;
-        TextureOb* m_TextureOb_mask;
+        jeti::TextureOb* m_TextureOb_additional;
+        jeti::TextureOb* m_TextureOb_mask;
         
         void (*m_pAction)(Player*);
         

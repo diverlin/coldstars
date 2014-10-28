@@ -29,7 +29,7 @@
 
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
-#include <resources/textureOb.hpp>
+#include <render/textureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -85,8 +85,8 @@ void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equip
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
-    Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
-    TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID);   
+    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID, revision_id) 
 
     strength_orig   = getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN, EQUIPMENT::GRAPPLE::STRENGTH_MAX) * (1 + EQUIPMENT::GRAPPLE::STRENGTH_TECHLEVEL_RATE * (int)tech_level);
