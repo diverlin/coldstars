@@ -6,7 +6,6 @@
 #include <glm/glm.hpp>
 
 #include <MyGl.hpp>
-#include <types/MeshTypes.hpp>
 
 namespace jeti {
 
@@ -28,11 +27,10 @@ const int STRIDE_COLOR    = 4;
 class Mesh
 { 
     public:
-        Mesh(TYPE::MESH, const std::string&, const glm::vec3&, TextureOb*);
+        Mesh(const std::string&, const glm::vec3&, TextureOb*);
         Mesh();
         ~Mesh();
 
-        TYPE::MESH GetTypeId() const { return m_TypeId; }
         TextureOb* GetTextureOb() const { return m_TextureOb; }
         const glm::vec3& GetBoundaryBox() const { return m_BoundaryBox; }
         const glm::vec3& GetOriginDirection() const { return m_OriginDirection; }
@@ -54,7 +52,6 @@ class Mesh
             float size;
         };
 
-        TYPE::MESH m_TypeId;
         GLenum m_PrimitiveType;
         
         TextureOb* m_TextureOb;

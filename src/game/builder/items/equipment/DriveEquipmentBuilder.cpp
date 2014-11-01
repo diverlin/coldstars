@@ -84,11 +84,11 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
-    //Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    //Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID); 
     //glm::vec3 size = texOb->GetSize();
     
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPACESTATION_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
     jeti::TextureOb* texOb = mesh->GetTextureOb();
     glm::vec3 size = glm::vec3(50);
 

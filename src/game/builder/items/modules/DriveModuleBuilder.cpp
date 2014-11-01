@@ -72,7 +72,7 @@ DriveModule* DriveModuleBuilder::GetNewDriveModule(int speed_add, int hyper_add)
             
 void DriveModuleBuilder::CreateNewInternals(DriveModule* drive_module, int speed_add, int hyper_add) const
 {     
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);
     speed_add = getRandInt(MODULE::DRIVE::SPEED_MIN, MODULE::DRIVE::SPEED_MAX);
     hyper_add = getRandInt(MODULE::DRIVE::HYPER_MIN, MODULE::DRIVE::HYPER_MAX);

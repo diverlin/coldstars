@@ -71,7 +71,7 @@ RocketModule* RocketModuleBuilder::GetNewRocketModule(int ammo_max_add, int dama
           
 void RocketModuleBuilder::CreateNewInternals(RocketModule* rocket_module, int ammo_max_add, int damage_add, int radius_add) const
 {     
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);
     ammo_max_add = getRandInt(MODULE::ROCKET::AMMO_MIN, MODULE::ROCKET::AMMO_MAX);
     damage_add = getRandInt(MODULE::ROCKET::DAMAGE_MIN, MODULE::ROCKET::DAMAGE_MAX);

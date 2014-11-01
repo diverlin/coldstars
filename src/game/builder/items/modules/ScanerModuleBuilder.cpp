@@ -72,7 +72,7 @@ ScanerModule* ScanerModuleBuilder::GetNewScanerModule(int scan_add) const
            
 void ScanerModuleBuilder::CreateNewInternals(ScanerModule* scaner_module, int scan_add) const
 {  
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);
     scan_add = getRandInt(MODULE::SCANER::SCAN_MIN, MODULE::SCANER::SCAN_MAX);
 

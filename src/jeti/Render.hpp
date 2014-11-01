@@ -41,6 +41,8 @@ const float ZFAR = 1000.0f;
 
 const int FBO_NUM = 6;
 
+const std::string SHADERS_PATH = "shaders/";
+
 enum class PROJECTION_TYPE { PERSPECTIVE, ORTHOGONAL};
 
 class Renderer : public NonCopyable
@@ -52,14 +54,13 @@ class Renderer : public NonCopyable
         void ActivateFbo(int, int, int);
         void DeactivateFbo(int);
         
-        void Init();
+        void Init(int, int);
         void InitPostEffects();
         void MakeShortCuts();
         void SetMeshQuad(Mesh* mesh) { m_MeshQuad = mesh; }
 
         void SetPerspectiveProjection(float, float);
         void SetOrthogonalProjection(float, float);
-        void SetShaders(const Shaders& shaders) { m_Shaders = shaders; }
         
         BloomEffect& GetBloom() { return m_Bloom; };
         const Fbo& GetLastFbo() const { return m_Fbos[m_IndexFboLastDeactivated]; };
@@ -96,6 +97,9 @@ class Renderer : public NonCopyable
         void DrawStarField(int, int, float, float) const;
                                                                  
     private:
+        int m_W;
+        int m_H;
+
         Mesh* m_MeshQuad;
 
         glm::mat4 m_ProjectionMatrix;

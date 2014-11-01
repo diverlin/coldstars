@@ -25,8 +25,6 @@
 #include <common/constants.hpp>
 #include <math/rand.hpp>
 
-//#include <resources/GuiTextureObCollector.hpp>
-
 namespace jeti {
 
 Screen& Screen::Instance()
@@ -48,7 +46,7 @@ Screen::~Screen()
 {}
 
 void Screen::InitRenderStuff()
-{   
+{
     int width      = Config::Instance().SCREEN_WIDTH; 
     int height     = Config::Instance().SCREEN_HEIGHT;
     int bpp        = Config::Instance().BPP;
@@ -59,8 +57,7 @@ void Screen::InitRenderStuff()
     wrCreateWindowSpecific(width, height, bpp, vert_sync, "coldstars");
     
     glewInit();             
-    m_Render.Init();
-    m_Render.SetOrthogonalProjection(width, height);
+    m_Render.Init(width, height);
     
     rect.Set(0.0, 0.0, width, height);
 }

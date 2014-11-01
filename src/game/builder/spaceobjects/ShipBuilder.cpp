@@ -84,13 +84,13 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
     glm::vec3 size;
     if (true)
     {
-        mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
         texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
         size = texOb->GetSize();
     }
     else
     {    
-        mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPACESTATION_ID);
+        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
         texOb = mesh->GetTextureOb(); 
         float scale_comp = getRandInt(40, 100);
         size = glm::vec3(scale_comp, scale_comp, scale_comp);

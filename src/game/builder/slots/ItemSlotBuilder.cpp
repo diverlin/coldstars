@@ -57,7 +57,7 @@ ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
     if (subtype_id == TYPE::ENTITY::WEAPON_SLOT_ID)
     {
         Turrel* turrel = nullptr;
-        jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+        jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
         jeti::TextureOb* texOb_turrel = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::TURREL_ID);
         try 
         { 

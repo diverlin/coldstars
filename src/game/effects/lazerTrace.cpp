@@ -34,7 +34,7 @@ m_TextureOb(textureOb),
 m_pStartPos(start_pos),
 m_pEndPos(end_pos)
 {
-    MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     m_LiveTime = 40;
 }
 

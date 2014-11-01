@@ -64,7 +64,7 @@ Star* StarBuilder::GetNewStar() const
           
 void StarBuilder::CreateNewInternals(Star* star) const
 {     
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPHERE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     
     LifeData data_life;
     data_life.armor = 1000000; 

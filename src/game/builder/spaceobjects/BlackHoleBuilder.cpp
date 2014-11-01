@@ -67,7 +67,7 @@ BlackHole* BlackHoleBuilder::GetNewBlackHole() const
            
 void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
 {           
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPHERE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     
     LifeData data_life;
     data_life.is_alive   = true;
