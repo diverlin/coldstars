@@ -28,7 +28,7 @@
 
 #include <resources/MeshCollector.hpp>
 #include <resources/TextureManager.hpp>
-#include <render/textureOb.hpp>
+#include <jeti/TextureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 

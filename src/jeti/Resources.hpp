@@ -16,33 +16,15 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Turrel.hpp"
+#pragma once
 
-#include "../slots/ItemSlot.hpp"
-#include <jeti/Render.hpp>
-#include "../spaceobjects/BaseSpaceEntity.hpp"
+#include <string>
 
-#include "../common/Logger.hpp"
+namespace jeti {
 
-Turrel::Turrel(ItemSlot* slot)
-{
-        this->slot = slot;
+const std::string SHADERS_PATH = "shaders/";
+
+void loadShaders();
+
 }
 
-Turrel::~Turrel()
-{}
-
-void Turrel::Render(float turrel_angle_inD)
-{        
-    //if (slot->GetTarget() != nullptr)
-    //{
-        //float _tur_xl = slot->GetTarget()->GetCenter().x - GetCenter().x;
-        //float _tur_yl = slot->GetTarget()->GetCenter().y - GetCenter().y;
-
-        //float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
-        //turrel_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
-    //}     
-
-    //drawQuad(GetTextureOb(), GetCenter(), GetSize(), turrel_angle_inD);
-}        
-                

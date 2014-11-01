@@ -22,7 +22,7 @@
 
 #include <gui/BaseGuiElement.hpp>
 #include <gui/MouseData.hpp>
-#include <render/PathVisual.hpp>
+#include <jeti/PathVisual.hpp>
 
 class Galaxy;
 class StarSystem;

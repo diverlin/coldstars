@@ -21,7 +21,7 @@
 #include <glm/gtx/transform.hpp>
 #include <math/QuaternionUtils.hpp>
 
-#include <render/particlesystem/BaseParticleSystem.hpp>
+#include <jeti/particlesystem/BaseParticleSystem.hpp>
 
 
 #include <resources/MeshCollector.hpp>     // remove

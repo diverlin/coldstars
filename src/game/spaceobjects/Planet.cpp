@@ -33,7 +33,7 @@
 
 #include <garbage/EntityGarbage.hpp>
 
-#include <render/Render.hpp>
+#include <jeti/Render.hpp>
 
 
 Planet::Planet(int id)

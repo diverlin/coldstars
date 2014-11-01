@@ -22,7 +22,7 @@
 #include <math/rand.hpp>
 
 #include "../resources/TextureManager.hpp"                                           
-#include <render/Mesh.hpp>
+#include <jeti/Mesh.hpp>
 
 
 DistantStarEffect::DistantStarEffect(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors, const std::vector<float>& sizes)

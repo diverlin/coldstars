@@ -21,7 +21,7 @@
 #include "../CommonBuilderHeaders.hpp"
 #include <spaceobjects/Ship.hpp>
 
-#include <render/Mesh.hpp>
+#include <jeti/Mesh.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 

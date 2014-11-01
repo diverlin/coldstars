@@ -26,12 +26,12 @@
 #include "../common/myStr.hpp"
 #include "../world/EntityManager.hpp"
 #include "../world/starsystem.hpp"
-#include "../render/Render.hpp"
 #include "../text/VerticalFlowText.hpp" 
 #include "../common/Logger.hpp"
-#include <render/animations/BaseAnimationRotation.hpp>
+#include <jeti/Render.hpp>
+#include <jeti/animations/BaseAnimationRotation.hpp>
 
-#include <render/Screen.hpp>
+#include <jeti/Screen.hpp>
 
 
 BaseSpaceEntity::BaseSpaceEntity():

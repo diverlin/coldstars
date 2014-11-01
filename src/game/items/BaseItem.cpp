@@ -24,9 +24,9 @@
 
 #include "../world/EntityManager.hpp"
 #include "../slots/ItemSlot.hpp"
-#include "../render/Render.hpp"
+#include <jeti/Render.hpp>
 #include "../resources/TextureManager.hpp"
-#include <render/textureOb.hpp>
+#include <jeti/TextureOb.hpp>
 
 BaseItem::BaseItem()
 :

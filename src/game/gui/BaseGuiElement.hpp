@@ -27,9 +27,9 @@
 #include <common/Box2D.hpp> 
 
 class Player;
-class AnimationEffect2D;
 
 namespace jeti {
+class AnimationEffect2D;
 class TextureOb;
 class Renderer;
 }
@@ -88,7 +88,7 @@ class BaseGuiElement
         void SetPressed(bool pressed) { m_Pressed = pressed; } 
         void SetLocked(bool locked) { m_Locked = locked; } 
                  
-        void SetAnimationProgram(AnimationEffect2D* animation_program) { m_AnimationProgram = animation_program; }
+        void SetAnimationProgram(jeti::AnimationEffect2D* animation_program) { m_AnimationProgram = animation_program; }
 
         bool HasTextureOb() const { return (m_TextureOb != nullptr); }
 
@@ -128,7 +128,7 @@ class BaseGuiElement
         bool m_Root;
         
         glm::vec2 m_Offset;      
-        AnimationEffect2D* m_AnimationProgram;
+        jeti::AnimationEffect2D* m_AnimationProgram;
         
         static std::map<TYPE::GUI, BaseGuiElement*> static_gui_element_map;
 

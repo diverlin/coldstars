@@ -20,7 +20,7 @@
 #ifndef ORBIT_HPP
 #define ORBIT_HPP
 
-#include <render/PathVisual.hpp>
+#include <jeti/PathVisual.hpp>
 
 namespace jeti {
 class Renderer;

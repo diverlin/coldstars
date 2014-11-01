@@ -20,7 +20,7 @@
 #include "../pilots/Player.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../dock/Kosmoport.hpp"
-#include "../render/Render.hpp"
+#include <jeti/Render.hpp>
 #include "../items/BaseItem.hpp"
 #include "../slots/ItemSlot.hpp"
 #include "../common/myStr.hpp"

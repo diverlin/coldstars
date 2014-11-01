@@ -35,7 +35,7 @@
 
 #include <config/config.hpp>
 
-#include <render/Render.hpp>
+#include <jeti/Render.hpp>
 
 #include <slots/ItemSlot.hpp>
 #include <items/others/Bomb.hpp>
@@ -48,7 +48,7 @@
 #include <effects/DistantNebulaEffect.hpp>
 #include <effects/DistantStarEffect.hpp>
 #include <effects/lazerTrace.hpp>
-#include <render/particlesystem/ExplosionEffect.hpp>
+#include <jeti/particlesystem/ExplosionEffect.hpp>
 
 #include <text/VerticalFlowText.hpp> 
 
@@ -59,7 +59,7 @@
 
 #include <struct/RaceInformationCollector.hpp>
 
-#include <render/Mesh.hpp>
+#include <jeti/Mesh.hpp>
 
 int StarSystem::counter = 0;
 
@@ -1023,8 +1023,8 @@ void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
     float damage = ((Bomb*)container->GetItemSlot()->GetItem())->GetDamage(); 
     glm::vec3 center(container->GetCenter());
     
-    jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(radius);
-    Add(explosion, center, radius, damage);
+    //jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(radius);
+    //Add(explosion, center, radius, damage);
 }
 
 void StarSystem::StarSparkEvent(float radius) const

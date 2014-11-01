@@ -18,8 +18,8 @@
 
 #include "GuiRadar.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
-#include "../render/Screen.hpp"
-#include "../render/Render.hpp"
+#include <jeti/Screen.hpp>
+#include <jeti/Render.hpp>
 
 #include "../spaceobjects/BaseSpaceEntity.hpp"
 #include "../spaceobjects/Vehicle.hpp"
@@ -38,8 +38,8 @@ GuiRadar::GuiRadar()
     textureOb_range            = GuiTextureObCollector::Instance().radar_range;
         
     scale = RADAR_SCALE;
-    int screen_w = Screen::Instance().GetWidth();
-    int screen_h = Screen::Instance().GetHeight();
+    int screen_w = jeti::Screen::Instance().GetWidth();
+    int screen_h = jeti::Screen::Instance().GetHeight();
     Resize(screen_w, screen_h);
 }
 
@@ -59,14 +59,14 @@ void GuiRadar::ResetData()
 /*virtual final*/ 
 void GuiRadar::UpdateUnique(Player* player)
 {        
-    screenrect.Set(rect.GetCenter() + Screen::Instance().GetBottomLeftScreenWC() * scale, (int)(Screen::Instance().GetWidth() * scale), (int)(Screen::Instance().GetHeight() * scale));
+    screenrect.Set(rect.GetCenter() + jeti::Screen::Instance().GetBottomLeftScreenWC() * scale, (int)(jeti::Screen::Instance().GetWidth() * scale), (int)(jeti::Screen::Instance().GetHeight() * scale));
     const MouseData& data_mouse = player->GetCursor().GetMouseData();
     if (rect.CheckRoundInteraction(data_mouse.pos_screencoord, /*radius=*/70.0) == true)
     {
         if (data_mouse.left_press == true)
         {
             glm::vec2 new_global_coord( ( data_mouse.pos_screencoord.x - rect.GetCenter().x - screenrect.GetWidth()/2)/scale, ( data_mouse.pos_screencoord.y - rect.GetCenter().y - screenrect.GetHeight()/2)/scale);
-            Screen::Instance().SetBottomLeftScreenWC(new_global_coord);
+            jeti::Screen::Instance().SetBottomLeftScreenWC(new_global_coord);
         }
     }
 }

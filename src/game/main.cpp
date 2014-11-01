@@ -24,8 +24,9 @@
 #include "builder/pilots/PlayerBuilder.hpp"
 #include "config/config.hpp"
 
-#include "render/Screen.hpp"
-#include "render/GlErrorHelper.hpp"
+#include <jeti/Resources.hpp>
+#include <jeti/Screen.hpp>
+#include <jeti/GlErrorHelper.hpp>
 
 #include "gui/UserInputManagerInSpace.hpp"
 #include "gui/ButtonTrigger.hpp"
@@ -68,11 +69,12 @@ int main()
     //runSinglethread();    
     //runVectorPerfomanceTest();
     
-    Screen::Instance().InitRenderStuff();
-    initGameStuff(); 
-    Screen::Instance().GetRender().InitPostEffects();  
-    Screen::Instance().GetRender().MakeShortCuts();
-    Screen::Instance().GetRender().SetMeshQuad(MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID));
+    jeti::Screen::Instance().InitRenderStuff();
+    initGameStuff();
+    jeti::loadShaders();
+    jeti::Screen::Instance().GetRender().InitPostEffects();
+    jeti::Screen::Instance().GetRender().MakeShortCuts();
+    jeti::Screen::Instance().GetRender().SetMeshQuad(MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID));
         
     //runMatrixPerfomanceTest();
         
@@ -112,7 +114,7 @@ int main()
     /** */
     
     // GAME LOOP
-    while (Screen::Instance().GetWindow().isOpen())
+    while (jeti::Screen::Instance().GetWindow().isOpen())
     {    
         //std::cout<<player->GetNpc()->GetVehicle()->GetCenter().x<<std::endl;
         //std::cout<<player->GetNpc()->GetVehicle()->GetProperties().radar<<std::endl;
@@ -164,7 +166,7 @@ int main()
             run_scenario->Update_inStatic(player);        
         }
 
-        checkOpenglErrors(__FILE__,__LINE__);
+        jeti::checkOpenglErrors(__FILE__,__LINE__);
     }
 
     return EXIT_SUCCESS;

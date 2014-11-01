@@ -18,7 +18,7 @@
 
 #include "InfoTable.hpp"
 #include <math/rand.hpp>
-#include "../render/Render.hpp"
+#include <jeti/Render.hpp>
 
 InfoTable::InfoTable()
 {}

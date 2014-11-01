@@ -19,7 +19,7 @@
 #include "VehicleSlot.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../spaceobjects/Ship.hpp"
-#include "../render/Render.hpp"
+#include <jeti/Render.hpp>
 #include "../common/myStr.hpp"
 #include "../common/Logger.hpp"
 

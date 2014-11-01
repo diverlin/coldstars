@@ -27,12 +27,12 @@
 #include <common/Logger.hpp>
 
 #include <resources/TextureManager.hpp>
-#include <render/textureOb.hpp>
+#include <jeti/TextureOb.hpp>
 #include <resources/MeshCollector.hpp>
 
 #include <world/EntityManager.hpp>
 
-#include <render/animations/AnimationConstantRotation.hpp>
-#include <render/animations/AnimationWiggle.hpp>
+#include <jeti/animations/AnimationConstantRotation.hpp>
+#include <jeti/animations/AnimationWiggle.hpp>
 
 #endif    

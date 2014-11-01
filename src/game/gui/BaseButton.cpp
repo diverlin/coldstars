@@ -20,8 +20,8 @@
 #include "BaseButton.hpp"
 #include "../common/constants.hpp"
 #include "../common/Collision.hpp"
-#include "../render/Render.hpp"
-#include "../render/Screen.hpp"
+#include <jeti/Render.hpp>
+#include <jeti/Screen.hpp>
 
 
 BaseButton::BaseButton(TYPE::GUI type_id, TYPE::GUI subtype_id, const std::string& info, void (*pAction)(Player*), jeti::TextureOb* textureOb)
@@ -100,7 +100,7 @@ void BaseButton::RenderUnique(const jeti::Renderer& render, Player*) const
     if (GetLabel() != "")
     {
         glm::vec2 pos(GetBox().GetCenter().x, GetBox().GetCenter().y + GetBox().GetSize().y);
-        Screen::Instance().DrawText(GetLabel(), 12, pos);
+        jeti::Screen::Instance().DrawText(GetLabel(), 12, pos);
     }
 }
         

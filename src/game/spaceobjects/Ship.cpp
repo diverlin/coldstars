@@ -33,9 +33,8 @@
 
 #include <pilots/Npc.hpp>
 
-#include <render/Render.hpp>
-
-#include <render/textureOb.hpp>
+#include <jeti/Render.hpp>
+#include <jeti/TextureOb.hpp>
 
 
 Ship::Ship(int id)

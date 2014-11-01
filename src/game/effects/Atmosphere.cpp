@@ -17,7 +17,7 @@
 */
 
 #include "Atmosphere.hpp"  
-#include <render/Render.hpp>
+#include <jeti/Render.hpp>
 
 Atmosphere::Atmosphere()
 {}

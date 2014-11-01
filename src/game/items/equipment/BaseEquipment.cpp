@@ -22,18 +22,18 @@
 #include "../../common/constants.hpp"
 #include "../../common/myStr.hpp"
 #include "../../slots/ItemSlot.hpp"
-#include "../../render/Render.hpp"
-#include "../../render/Screen.hpp"
+#include <jeti/Render.hpp>
+#include <jeti/Screen.hpp>
 #include "../../resources/GuiTextureObCollector.hpp"
 #include "../../common/Logger.hpp"
 #include "../../garbage/EntityGarbage.hpp"
 
-#include "../../render/AnimationEffect2D.hpp"
+#include <jeti/AnimationEffect2D.hpp>
 
 BaseEquipment::BaseEquipment()
 {
     race_id = TYPE::RACE::R0_ID;
-    animation_notfunctioning = new AnimationEffect2D(glm::vec3(0.8, 0.8, 1.0), glm::vec3(1.2, 1.2, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0);
+    animation_notfunctioning = new jeti::AnimationEffect2D(glm::vec3(0.8, 0.8, 1.0), glm::vec3(1.2, 1.2, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0);
 }
 
 /*virtual */
@@ -116,7 +116,7 @@ void BaseEquipment::Render(const jeti::Renderer& render, const Box2D& box, const
         render.DrawQuad(*GuiTextureObCollector::Instance().slot_mark_accept, box);
 
         glm::vec2 pos(box.GetCenter().x - font_size/2 + gui_offset.x, box.GetCenter().y - font_size + gui_offset.y);
-        Screen::Instance().DrawText(int2str(locked_turns), font_size, pos);    
+        jeti::Screen::Instance().DrawText(int2str(locked_turns), font_size, pos);
     }
 
     if (draw_text == true)
@@ -124,7 +124,7 @@ void BaseEquipment::Render(const jeti::Renderer& render, const Box2D& box, const
         if (GetSubTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID)
         {
             glm::vec2 pos(box.GetCenter().x - box.GetSize().x/2 + gui_offset.x, box.GetCenter().y + gui_offset.y);
-            Screen::Instance().DrawText(int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
+            jeti::Screen::Instance().DrawText(int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
         }
     }
 }

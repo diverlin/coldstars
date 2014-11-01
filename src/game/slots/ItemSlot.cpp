@@ -24,7 +24,7 @@
 #include "../spaceobjects/Vehicle.hpp"
 #include "../spaceobjects/Container.hpp"
 #include "../pilots/Npc.hpp"
-#include "../render/Render.hpp"
+#include <jeti/Render.hpp>
 #include "../world/starsystem.hpp"
 #include "../resources/TextureManager.hpp"
 #include "../parts/Turrel.hpp"

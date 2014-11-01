@@ -27,7 +27,7 @@
 #include <world/HyperSpace.hpp>
 #include <world/AsteroidManager.hpp>
 #include <types/RaceTypes.hpp>
-#include <render/Render.hpp>
+#include <jeti/Render.hpp>
 
 class RocketBullet;
 class BasePlanet;

@@ -17,7 +17,7 @@
 */
 
 #include "Ring.hpp"  
-#include <render/Render.hpp>
+#include <jeti/Render.hpp>
 
 Ring::Ring()
 {}
