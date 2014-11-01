@@ -74,13 +74,13 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 
     if (getRandInt(0, 1))
     {
-        mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
         texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SPACESTATION_ID);
         size = texOb->GetSize(); 
     }
     else
     {    
-        mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPACESTATION_ID);
+        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
         texOb = mesh->GetTextureOb(); 
         float scale_comp = getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX);
         size = glm::vec3(scale_comp, scale_comp, scale_comp);

@@ -19,11 +19,11 @@
 
 #pragma once
 
-#include <vector>
+#include <map>
 #include <types/MeshTypes.hpp>
 
 namespace jeti {
-class Mesh;
+    class Mesh;
 }
 
 class MeshCollector
@@ -31,14 +31,15 @@ class MeshCollector
     public:
         static MeshCollector& Instance();
         
-        void RegisterMesh(jeti::Mesh*);
-        jeti::Mesh* GetMeshByTypeId(TYPE::MESH) const;
-        
+        void addMesh(TYPE::MESH, jeti::Mesh*);
+        jeti::Mesh* getMesh(TYPE::MESH) const;
+
+        ~MeshCollector();
+
     private:
-        std::vector<jeti::Mesh*> mesh_vec;
+        std::map<TYPE::MESH, jeti::Mesh*> meshes_map;
         
-        MeshCollector() {};
-        ~MeshCollector() {};
+        MeshCollector() = default;
 
         MeshCollector(const MeshCollector&) = delete;
         MeshCollector& operator=(const MeshCollector&) = delete;

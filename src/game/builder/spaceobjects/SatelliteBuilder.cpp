@@ -62,7 +62,7 @@ Satellite* SatelliteBuilder::GetNewSatellite() const
 
 void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const 
 {
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SATELLITE_ID);
 
     int protection_rate = 1;

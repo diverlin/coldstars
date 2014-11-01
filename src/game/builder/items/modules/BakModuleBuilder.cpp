@@ -72,7 +72,7 @@ BakModule* BakModuleBuilder::GetNewBakModule(int fuel_max_add) const
              
 void BakModuleBuilder::CreateNewInternals(BakModule* bak_module, int fuel_max_add) const
 { 
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);
     fuel_max_add = getRandInt(MODULE::BAK::FUEL_MIN, MODULE::BAK::FUEL_MAX);
 

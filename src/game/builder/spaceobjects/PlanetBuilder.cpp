@@ -67,7 +67,7 @@ Planet* PlanetBuilder::GetNewPlanet(float orbit_radius) const
      
 void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 {     
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPHERE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
       
     LifeData data_life;
     data_life.armor = 100000;
@@ -105,7 +105,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 
    /* 
    {
-        Mesh* mesh_plane = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+        Mesh* mesh_plane = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
         
         TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::RING_ID); 
         Ring* ring = new Ring();

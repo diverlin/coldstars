@@ -23,13 +23,10 @@
 #include <SFML/Graphics.hpp>
 
 #include <TextureOb.hpp> // to be removed
-//#include <resources/GuiTextureObCollector.hpp>
 #include <Shaders.hpp>
+#include <ShaderLoader.hpp>
 
 #include <Mesh.hpp>
-#include <common/constants.hpp>
-
-#include <config/config.hpp>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -45,6 +42,7 @@ namespace jeti {
 
 Renderer::Renderer()
 :
+m_W(0), m_H(0),
 m_ProgramLight(0),
 m_ProgramLightLocation_uProjectionViewMatrix(-1),
 m_ProgramLightLocation_uModelMatrix(-1),
@@ -72,12 +70,54 @@ m_IndexFboLastDeactivated(-1)
 Renderer::~Renderer() 
 {}
 
+
+void Renderer::Init(int w, int h)
+{
+    m_W = w;
+    m_H = h;
+
+    glClearColor(0.f, 0.f, 0.f, 0.f);
+
+    // Enable Z-buffer read and write
+    glEnable(GL_DEPTH_TEST);
+    glDepthMask(GL_TRUE);
+    glClearDepth(1.f);
+
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
+
+    glShadeModel(GL_SMOOTH);
+
+    SetOrthogonalProjection(w, h);
+
+    m_Shaders.base            = compileProgram(SHADERS_PATH+"base.vert",              SHADERS_PATH+"base.frag");
+    m_Shaders.black2alpha     = compileProgram(SHADERS_PATH+"black2alpha.vert",       SHADERS_PATH+"black2alpha.frag");
+    m_Shaders.shockwave       = compileProgram(SHADERS_PATH+"shockwave.vert",         SHADERS_PATH+"shockwave.frag");
+    m_Shaders.volumetriclight = compileProgram(SHADERS_PATH+"volumetricLight.vert",   SHADERS_PATH+"volumetricLight.frag");
+    m_Shaders.light           = compileProgram(SHADERS_PATH+"light.vert",             SHADERS_PATH+"light.frag");
+    m_Shaders.light_normalmap = compileProgram(SHADERS_PATH+"light_normalmap.vert",   SHADERS_PATH+"light_normalmap.frag");
+    m_Shaders.blur            = compileProgram(SHADERS_PATH+"blur.vert",              SHADERS_PATH+"blur.frag");
+    m_Shaders.extractbright   = compileProgram(SHADERS_PATH+"extractBright.vert",     SHADERS_PATH+"extractBright.frag");
+    m_Shaders.combine         = compileProgram(SHADERS_PATH+"combine.vert",           SHADERS_PATH+"combine.frag");
+    m_Shaders.multitexturing  = compileProgram(SHADERS_PATH+"multitex.vert",          SHADERS_PATH+"multitex.frag");
+    m_Shaders.blank           = compileProgram(SHADERS_PATH+"blank.vert",             SHADERS_PATH+"blank.frag");
+    m_Shaders.fogwarspark     = compileProgram(SHADERS_PATH+"fogwarspark.vert",       SHADERS_PATH+"fogwarspark.frag");
+    m_Shaders.flash           = compileProgram(SHADERS_PATH+"flash.vert",             SHADERS_PATH+"flash.frag");
+    m_Shaders.mask            = compileProgram(SHADERS_PATH+"mask.vert",              SHADERS_PATH+"mask.frag");
+    m_Shaders.particle        = compileProgram(SHADERS_PATH+"particle.vert",          SHADERS_PATH+"particle.frag");
+    m_Shaders.starfield       = compileProgram(SHADERS_PATH+"starfield.vert",         SHADERS_PATH+"starfield.frag");
+
+    InitPostEffects();
+    MakeShortCuts();
+}
+
 void Renderer::ActivateFbo(int index, int w, int h)
 {
-    if ( (index < 0) or (index >= m_FboNum) )
-    {
-        std::cout<<"wrong fbo index"; 
-        exit(1); 
+    if ( (index < 0) or (index >= m_FboNum) ) {
+        throw std::runtime_error("wrong fbo index");
     }
 
     m_Fbos[index].Activate(w, h);
@@ -86,53 +126,26 @@ void Renderer::ActivateFbo(int index, int w, int h)
 
 void Renderer::DeactivateFbo(int index)
 {
-    if ((index < 0) or (index >= m_FboNum))
-    {
-        std::cout<<"wrong fbo index"; 
-        exit(1); 
+    if ((index < 0) or (index >= m_FboNum)) {
+        throw std::runtime_error("wrong fbo index");
     }
 
-    if (m_IndexFboLastActivated != index)
-    {
-        std::cout<<"you are trying to deactivate not active fbo"; 
-        exit(1); 
+    if (m_IndexFboLastActivated != index) {
+        throw std::runtime_error("you are trying to deactivate not active fbo");
     }
     
     m_Fbos[index].Deactivate();
     m_IndexFboLastDeactivated = index;
 }
 
-void Renderer::Init()
-{
-    glClearColor(0.f, 0.f, 0.f, 0.f);
-    
-    // Enable Z-buffer read and write
-    glEnable(GL_DEPTH_TEST);
-    glDepthMask(GL_TRUE);
-    glClearDepth(1.f);
-    
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    
-    glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
-    
-    glShadeModel(GL_SMOOTH);
-}
-
-
 void Renderer::InitPostEffects()
 {
-    for (int i=0; i<m_FboNum; i++)
-    {
+    for (int i=0; i<m_FboNum; i++) {
         m_Fbos[i].Create();
     }
         
-    m_Bloom.Create(m_Shaders.blur, m_Shaders.extractbright, m_Shaders.combine);
-    
-    int width      = Config::Instance().SCREEN_WIDTH; 
-    int height     = Config::Instance().SCREEN_HEIGHT;
-    ResizePostEffects(width, height);
+    m_Bloom.Create(m_Shaders.blur, m_Shaders.extractbright, m_Shaders.combine);    
+    ResizePostEffects(m_W, m_H);
 }
  
   

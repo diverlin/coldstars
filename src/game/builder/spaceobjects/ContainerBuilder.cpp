@@ -84,7 +84,7 @@ void ContainerBuilder::CreateNewInternals(Container* container, jeti::TextureOb*
     data_life.dying_time = 30;
     
     container->SetLifeData(data_life);
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->GetSize());
  
     float delta_angle = 0.001*getRandInt(20, 60);

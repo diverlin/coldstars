@@ -72,7 +72,7 @@ ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModule(int protection_ad
             
 void ProtectorModuleBuilder::CreateNewInternals(ProtectorModule* protector_module, int protection_add) const
 {     
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);
     protection_add = getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
     

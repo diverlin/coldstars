@@ -16,41 +16,58 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "MeshCollector.hpp"
-#include <jeti/Mesh.hpp>
-#include <math/rand.hpp>
+
 
 MeshCollector& MeshCollector::Instance()
 {
     static MeshCollector instance;
     return instance;
 }
-        
-void MeshCollector::RegisterMesh(jeti::Mesh* mesh)
+
+MeshCollector::~MeshCollector()
 {
-    mesh_vec.push_back(mesh);
+    for (auto& pair: meshes_map) {
+        delete pair.second;
+    }
+    meshes_map.clear();
 }
 
-jeti::Mesh* MeshCollector::GetMeshByTypeId(TYPE::MESH type_id) const
+void MeshCollector::addMesh(TYPE::MESH type, jeti::Mesh* mesh)
 {
-    std::vector<jeti::Mesh*> result;
-    for (unsigned int i=0; i<mesh_vec.size(); i++)
-    {
-        if (mesh_vec[i]->GetTypeId() == type_id)
-        {
-            result.push_back(mesh_vec[i]);
-        }
+    auto it = meshes_map.find(type);
+    if (it != meshes_map.end()) {
+        throw std::runtime_error("mesh type is already exist");
     }
+    meshes_map.insert(std::make_pair(type, mesh));
+}
+
+jeti::Mesh* MeshCollector::getMesh(TYPE::MESH type_id) const
+{
+//    std::vector<jeti::Mesh*> result;
+//    for (unsigned int i=0; i<mesh_vec.size(); i++)
+//    {
+//        if (mesh_vec[i]->GetTypeId() == type_id)
+//        {
+//            result.push_back(mesh_vec[i]);
+//        }
+//    }
     
-    if (result.size() == 0) 
-    {
-        throw "mesh with request type is not found";
-        return nullptr;
+//    if (result.size() == 0)
+//    {
+//        throw "mesh with request type is not found";
+//        return nullptr;
+//    }
+//    else
+//    {
+//        return result[getRandInt(0, result.size()-1)];
+//    }
+    auto it = meshes_map.find(type_id);
+    if (it != meshes_map.end()) {
+        return it->second;
     }
-    else
-    {
-        return result[getRandInt(0, result.size()-1)];
-    }
+    throw std::runtime_error("mesh type not found");
 }
 
         

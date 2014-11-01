@@ -24,7 +24,6 @@
 #include "builder/pilots/PlayerBuilder.hpp"
 #include "config/config.hpp"
 
-#include <jeti/Resources.hpp>
 #include <jeti/Screen.hpp>
 #include <jeti/GlErrorHelper.hpp>
 
@@ -71,10 +70,7 @@ int main()
     
     jeti::Screen::Instance().InitRenderStuff();
     initGameStuff();
-    jeti::loadShaders();
-    jeti::Screen::Instance().GetRender().InitPostEffects();
-    jeti::Screen::Instance().GetRender().MakeShortCuts();
-    jeti::Screen::Instance().GetRender().SetMeshQuad(MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID));
+    jeti::Screen::Instance().GetRender().SetMeshQuad(MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID));
         
     //runMatrixPerfomanceTest();
         

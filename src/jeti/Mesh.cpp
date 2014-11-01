@@ -7,9 +7,8 @@
 
 namespace jeti {
 
-Mesh::Mesh(TYPE::MESH type_id, const std::string& path, const glm::vec3& direction, TextureOb* textureOb)
+Mesh::Mesh(const std::string& path, const glm::vec3& direction, TextureOb* textureOb)
 :
-m_TypeId(type_id),
 m_PrimitiveType(GL_TRIANGLES),
 m_TextureOb(textureOb),
 m_OriginDirection(direction),
@@ -34,7 +33,6 @@ m_HasPointsSize(false)
 
 Mesh::Mesh()
 :
-m_TypeId(TYPE::MESH::PLANE_ID),
 m_PrimitiveType(GL_TRIANGLES),
 m_TextureOb(nullptr),
 m_VertexCount(0),
@@ -258,16 +256,5 @@ void Mesh::Draw(GLenum primitive_type) const
 
 }
 
-//initialization:
-    //for each batch
-        //generate, store, and bind a VAO
-        //bind all the buffers needed for a draw call
-        //unbind the VAO
-
-//main loop/whenever you render:
-    //for each batch
-        //bind VAO
-        //glDrawArrays(...); or glDrawElements(...); etc.
-    //unbind VAO
 
 

@@ -84,7 +84,7 @@ void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, 
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     jeti::TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::DROID_EQUIPMENT_ID, revision_id)
 

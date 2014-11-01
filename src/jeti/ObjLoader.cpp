@@ -6,9 +6,7 @@
 
 #include <cmath>
 
-#include <common/myStr.hpp>
-
-#if OBJLOADER_LOG_ENABLED == 1
+#ifdef LOGGER_ENABLED
 #include "<common/Logger.hpp>
 #endif
   
@@ -30,9 +28,9 @@ ObjLoader::ObjLoader(const std::string& path)
     while(std::getline(filestream, line))
     {
         line_counter++;
-        #if OBJLOADER_LOG_ENABLED == 1
+#ifdef LOGGER_ENABLED
         Logger::Instance().Log(filename+": line num="+int2str(line_counter)+" "+line, OBJLOADER_LOG_DIP);
-        #endif
+#endif
         
         std::stringstream line_stream(line);
         std::string type_str;

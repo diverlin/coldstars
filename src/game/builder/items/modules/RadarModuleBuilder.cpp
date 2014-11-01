@@ -72,7 +72,7 @@ RadarModule* RadarModuleBuilder::GetNewRadarModule(int radius_add) const
             
 void RadarModuleBuilder::CreateNewInternals(RadarModule* radar_module, int radius_add) const
 {  
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);
     radius_add  = getRandInt(MODULE::RADAR::RADIUS_MIN, MODULE::RADAR::RADIUS_MAX);
 

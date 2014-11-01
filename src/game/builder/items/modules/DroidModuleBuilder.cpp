@@ -72,7 +72,7 @@ DroidModule* DroidModuleBuilder::GetNewDroidModule(int repair_add) const
      
 void DroidModuleBuilder::CreateNewInternals(DroidModule* droid_module, int repair_add) const
 {
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);
     repair_add  = getRandInt(MODULE::DROID::REPAIR_MIN, MODULE::DROID::REPAIR_MAX);
 

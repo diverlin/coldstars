@@ -63,7 +63,7 @@ Asteroid* AsteroidBuilder::GetNewAsteroid() const
            
 void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
 {           
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::SPHERE_DEFORMED_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_DEFORMED_ID);
     
     LifeData data_life;   
     data_life.armor      = 10;

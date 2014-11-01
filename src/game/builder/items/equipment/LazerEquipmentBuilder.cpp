@@ -86,7 +86,7 @@ void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, 
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
-    jeti::Mesh* mesh = MeshCollector::Instance().GetMeshByTypeId(TYPE::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
     jeti::TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID);
 
