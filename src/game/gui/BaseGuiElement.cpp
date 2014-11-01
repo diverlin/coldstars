@@ -19,10 +19,10 @@
 
 #include "BaseGuiElement.hpp"
 #include <common/constants.hpp>
-#include <render/Render.hpp>
+#include <jeti/Render.hpp>
 #include <common/Logger.hpp>
 
-#include <render/AnimationEffect2D.hpp>
+#include <jeti/AnimationEffect2D.hpp>
 
 
 std::map<TYPE::GUI, BaseGuiElement*> BaseGuiElement::static_gui_element_map;

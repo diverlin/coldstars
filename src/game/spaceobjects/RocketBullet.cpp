@@ -26,11 +26,11 @@
 #include <world/EntityManager.hpp>
 #include <world/starsystem.hpp>
 
-#include <render/particlesystem/DriveEffect.hpp>
-#include <render/particlesystem/ExplosionEffect.hpp>
+#include <jeti/particlesystem/DriveEffect.hpp>
+#include <jeti/particlesystem/ExplosionEffect.hpp>
 
 #include <text/VerticalFlowText.hpp> 
-#include <render/textureOb.hpp>
+#include <jeti/TextureOb.hpp>
 
 
 RocketBullet::RocketBullet(int id)
@@ -157,8 +157,8 @@ void RocketBullet::PostDeathUniqueEvent(bool show_effect)
 {
     if (show_effect == true)
     {
-        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
-        GetStarSystem()->Add(explosion, GetCenter());                
+//        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
+//        GetStarSystem()->Add(explosion, GetCenter());
     }
 }
 

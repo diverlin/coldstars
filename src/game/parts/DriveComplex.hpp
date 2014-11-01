@@ -19,7 +19,7 @@
 #ifndef DRIVECOMPLEX_HPP
 #define DRIVECOMPLEX_HPP
 
-#include <render/PathVisual.hpp> 
+#include <jeti/PathVisual.hpp>
 #include <math/myVector.hpp> 
 
 class Vehicle;
@@ -29,7 +29,7 @@ class DriveEffect;
 class ItemSlot; 
 class BaseSpaceEntity;
 
-namespace {
+namespace jeti {
 class Renderer;
 }
 

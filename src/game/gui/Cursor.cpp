@@ -23,8 +23,8 @@
 
 #include <types/GuiTypes.hpp>
 
-#include <render/Render.hpp>
-#include <render/Screen.hpp>
+#include <jeti/Render.hpp>
+#include <jeti/Screen.hpp>
 
 #include <builder/slots/ItemSlotBuilder.hpp>
 
@@ -152,9 +152,9 @@ void Cursor::UpdateMouseStuff()
     m_DataMouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
     m_DataMouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
 
-    sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());    
-    m_DataMouse.pos_screencoord = glm::vec2(mouse_pos.x, Screen::Instance().GetHeight() - mouse_pos.y);
-    m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*Screen::Instance().GetScale() + Screen::Instance().GetBottomLeftScreenWC();
+    sf::Vector2i mouse_pos = sf::Mouse::getPosition(jeti::Screen::Instance().GetWindow());
+    m_DataMouse.pos_screencoord = glm::vec2(mouse_pos.x, jeti::Screen::Instance().GetHeight() - mouse_pos.y);
+    m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*jeti::Screen::Instance().GetScale() + jeti::Screen::Instance().GetBottomLeftScreenWC();
 }
 
 void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
@@ -198,7 +198,7 @@ void Cursor::RenderFocusedObjectInfo(const jeti::Renderer& render) const
         
         if (m_FocusedSpaceObject != nullptr)
         {
-            m_FocusedSpaceObject->RenderInfoInSpace(render, Screen::Instance().GetBottomLeftScreenWC(), Screen::Instance().GetScale());
+            m_FocusedSpaceObject->RenderInfoInSpace(render, jeti::Screen::Instance().GetBottomLeftScreenWC(), jeti::Screen::Instance().GetScale());
         }
     }
     //render.disable_BLEND();  

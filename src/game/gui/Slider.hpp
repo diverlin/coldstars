@@ -21,7 +21,7 @@
 #define SLIDER_H
 
 #include "BaseGuiElement.hpp"
-#include <render/textureOb.hpp>
+#include <jeti/TextureOb.hpp>
 #include "../common/rect.hpp"
 #include "../dock/Shop.hpp"
 #include "MouseData.hpp"

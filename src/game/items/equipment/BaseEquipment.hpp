@@ -21,7 +21,10 @@
 
 #include "../BaseItem.hpp"
 #include "../modules/BaseModule.hpp"
+
+namespace jeti {
 class AnimationEffect2D;
+}
 
 class BaseEquipment : public BaseItem
 {
@@ -38,7 +41,7 @@ class BaseEquipment : public BaseItem
     protected:
         std::vector<BaseModule*> modules_vec;    // needs for inserted modules drawing
         
-        AnimationEffect2D* animation_notfunctioning;
+        jeti::AnimationEffect2D* animation_notfunctioning;
         
         virtual void AddCommonInfo();
         

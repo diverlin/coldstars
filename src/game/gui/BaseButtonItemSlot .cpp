@@ -23,8 +23,8 @@
 
 #include <resources/GuiTextureObCollector.hpp>
 
-#include <render/AnimationEffect2D.hpp> 
-#include <render/Render.hpp> 
+#include <jeti/AnimationEffect2D.hpp>
+#include <jeti/Render.hpp>
 
 #include <common/common.hpp>
 #include <common/myStr.hpp>
@@ -55,7 +55,7 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
                 {
                     if (GetAnimationProgramActive() == false)
                     {
-                        SetAnimationProgram(new AnimationEffect2D(glm::vec3(0.7, 0.7, 1.0), glm::vec3(1.3, 1.3, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0));
+                        //SetAnimationProgram(new jeti::AnimationEffect2D(glm::vec3(0.7, 0.7, 1.0), glm::vec3(1.3, 1.3, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0));
                         return;
                     }                    
                 } 

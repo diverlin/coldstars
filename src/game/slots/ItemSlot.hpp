@@ -24,7 +24,7 @@
 #include <types/StatusTypes.hpp>
 
 #include <slots/BaseSlot.hpp>
-#include <render/PathVisual.hpp>  // !!!
+#include <jeti/PathVisual.hpp>  // !!!
 
 class Turrel; 
 class BaseItem;

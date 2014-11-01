@@ -17,10 +17,10 @@
 */
 
 #include "Shield.hpp"
-#include "../render/Render.hpp"
-#include <render/textureOb.hpp>
+#include <jeti/Render.hpp>
+#include <jeti/TextureOb.hpp>
 #include "../spaceobjects/BaseSpaceEntity.hpp"
-#include <render/Render.hpp>
+
 
 ShieldEffect::ShieldEffect()
 {       

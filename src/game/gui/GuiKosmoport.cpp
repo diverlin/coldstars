@@ -21,7 +21,7 @@
 #include "UserInput.hpp"
 
 #include "../resources/GuiTextureObCollector.hpp"
-#include "../render/Screen.hpp"
+#include <jeti/Screen.hpp>
 
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
@@ -38,7 +38,7 @@
 #include "../slots/ItemSlot.hpp"
 #include "../items/BaseItem.hpp"
 
-#include "../render/Render.hpp"
+#include <jeti/Render.hpp>
 
 #include "../dock/Angar.hpp"
 #include "../dock/Goverment.hpp"
@@ -178,8 +178,8 @@ void GuiKosmoport::EnterGuiScanInAngar()
     Logger::Instance().Log("GuiKosmoport::EnterGuiScanInAngar", GUI_LOG_DIP);
     #endif    
 
-    int screen_w = Screen::Instance().GetWidth();
-    int screen_h = Screen::Instance().GetHeight();
+    int screen_w = jeti::Screen::Instance().GetWidth();
+    int screen_h = jeti::Screen::Instance().GetHeight();
     glm::vec2 center_screen(screen_w/2, screen_h/2);
     
     //bool allow_full_control = m_Player->IsAbleToGetFullControlOnScanedVehicle();
@@ -230,8 +230,8 @@ void GuiKosmoport::EnterGuiStoreScreen()
     Logger::Instance().Log("GuiKosmoport::EnterGuiStoreScreen", GUI_LOG_DIP);
     #endif    
     
-    int screen_w = Screen::Instance().GetWidth();
-    int screen_h = Screen::Instance().GetHeight();
+    int screen_w = jeti::Screen::Instance().GetWidth();
+    int screen_h = jeti::Screen::Instance().GetHeight();
     glm::vec2 center_screen(screen_w/2, screen_h/2);
     
     //gui_store.SetOffset(center_screen + GUI_STORE_OFFSET);

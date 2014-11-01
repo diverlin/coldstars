@@ -29,7 +29,7 @@
 #include <common/myStr.hpp>
 #include <common/Logger.hpp>
 
-#include <render/Render.hpp>
+#include <jeti/Render.hpp>
 
 #include <resources/GuiTextureObCollector.hpp>
 
@@ -51,8 +51,8 @@
 #include <items/artefacts/ProtectorArtefact.hpp>
 
 #include <effects/Shield.hpp>
-#include <render/particlesystem/DriveEffect.hpp>
-#include <render/particlesystem/ExplosionEffect.hpp>
+#include <jeti/particlesystem/DriveEffect.hpp>
+#include <jeti/particlesystem/ExplosionEffect.hpp>
 #include <text/VerticalFlowText.hpp> 
 
 #include <parts/Turrel.hpp>
@@ -65,7 +65,7 @@
 #include <dock/Store.hpp>
 #include <dock/NatureLand.hpp>
 
-#include <render/Render.hpp>
+#include <jeti/Render.hpp>
 
 Vehicle::Vehicle()
 :
@@ -725,8 +725,8 @@ void Vehicle::PostDeathUniqueEvent(bool show_effect)
     
     if (show_effect == true)
     {
-        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
-        GetStarSystem()->Add(explosion, GetCenter());                
+//        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
+//        GetStarSystem()->Add(explosion, GetCenter());
     }
 }
 

@@ -32,7 +32,7 @@
 
 #include <builder/slots/ItemSlotBuilder.hpp>
 
-#include "../render/Render.hpp"
+#include <jeti/Render.hpp>
 #include "../gui/GuiManager.hpp"
 
 GuiAngar::GuiAngar():angar(nullptr)

@@ -56,15 +56,15 @@ void TextureManager::Add(jeti::TextureOb* texOb)
     case TYPE::TEXTURE::RING_ID:  { ring_texOb_vec.push_back(texOb);     break; }
     case TYPE::TEXTURE::SHIP_ID:
     {
-        TYPE::RACE race_id = texOb->GetAssociation().race_id;
-        switch(texOb->GetAssociation().subtype_id)
-        {
-        case TYPE::ENTITY::RANGER_ID:   { ship_ranger_texOb_vec[static_cast<int>(race_id)].push_back(texOb);   break; }
-        case TYPE::ENTITY::WARRIOR_ID:  { ship_warrior_texOb_vec[static_cast<int>(race_id)].push_back(texOb);  break; }
-        case TYPE::ENTITY::TRADER_ID:   { ship_trader_texOb_vec[static_cast<int>(race_id)].push_back(texOb);   break; }
-        case TYPE::ENTITY::PIRAT_ID:    { ship_pirat_texOb_vec[static_cast<int>(race_id)].push_back(texOb);    break; }
-        case TYPE::ENTITY::DIPLOMAT_ID: { ship_diplomat_texOb_vec[static_cast<int>(race_id)].push_back(texOb); break; }
-        }
+//        TYPE::RACE race_id = texOb->GetAssociation().race_id;
+//        switch(texOb->GetAssociation().subtype_id)
+//        {
+//        case TYPE::ENTITY::RANGER_ID:   { ship_ranger_texOb_vec[static_cast<int>(race_id)].push_back(texOb);   break; }
+//        case TYPE::ENTITY::WARRIOR_ID:  { ship_warrior_texOb_vec[static_cast<int>(race_id)].push_back(texOb);  break; }
+//        case TYPE::ENTITY::TRADER_ID:   { ship_trader_texOb_vec[static_cast<int>(race_id)].push_back(texOb);   break; }
+//        case TYPE::ENTITY::PIRAT_ID:    { ship_pirat_texOb_vec[static_cast<int>(race_id)].push_back(texOb);    break; }
+//        case TYPE::ENTITY::DIPLOMAT_ID: { ship_diplomat_texOb_vec[static_cast<int>(race_id)].push_back(texOb); break; }
+//        }
     }
     case TYPE::TEXTURE::ROCKET_BULLET_ID: { rocketBullet_texOb_vec.push_back(texOb); break; }
     case TYPE::TEXTURE::LAZER_EFFECT_ID:  { lazerEffect_texOb_vec.push_back(texOb);  break; }
@@ -107,18 +107,18 @@ void TextureManager::Add(jeti::TextureOb* texOb)
 
     case TYPE::TEXTURE::FACE_ID:
     {
-        switch(texOb->GetAssociation().race_id)
-        {
-        case TYPE::RACE::R0_ID: { face_race0_texOb_vec.push_back(texOb); break; }
-        case TYPE::RACE::R1_ID: { face_race1_texOb_vec.push_back(texOb); break; }
-        case TYPE::RACE::R2_ID: { face_race2_texOb_vec.push_back(texOb); break; }
-        case TYPE::RACE::R3_ID: { face_race3_texOb_vec.push_back(texOb); break; }
-        case TYPE::RACE::R4_ID: { face_race4_texOb_vec.push_back(texOb); break; }
+//        switch(texOb->GetAssociation().race_id)
+//        {
+//        case TYPE::RACE::R0_ID: { face_race0_texOb_vec.push_back(texOb); break; }
+//        case TYPE::RACE::R1_ID: { face_race1_texOb_vec.push_back(texOb); break; }
+//        case TYPE::RACE::R2_ID: { face_race2_texOb_vec.push_back(texOb); break; }
+//        case TYPE::RACE::R3_ID: { face_race3_texOb_vec.push_back(texOb); break; }
+//        case TYPE::RACE::R4_ID: { face_race4_texOb_vec.push_back(texOb); break; }
 
-        case TYPE::RACE::R6_ID: { face_race6_texOb_vec.push_back(texOb); break; }
-        case TYPE::RACE::R7_ID: { face_race7_texOb_vec.push_back(texOb); break; }
-        }
-        break;
+//        case TYPE::RACE::R6_ID: { face_race6_texOb_vec.push_back(texOb); break; }
+//        case TYPE::RACE::R7_ID: { face_race7_texOb_vec.push_back(texOb); break; }
+//        }
+//        break;
     }
     }
 }

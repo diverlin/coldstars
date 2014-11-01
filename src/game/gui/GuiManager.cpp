@@ -26,8 +26,8 @@
 #include "../world/starsystem.hpp"
 
 #include "../common/myStr.hpp"
-#include "../render/Screen.hpp"
-#include "../render/Render.hpp"
+#include <jeti/Screen.hpp>
+#include <jeti/Render.hpp>
 #include "../parts/WeaponComplex.hpp"
 #include "../items/BaseItem.hpp"
 
@@ -51,8 +51,8 @@ GuiManager::GuiManager()
 player(nullptr),
 gui_vehicle_scan(nullptr)
 {   
-    int screen_w = Screen::Instance().GetWidth();
-    int screen_h = Screen::Instance().GetHeight();
+    int screen_w = jeti::Screen::Instance().GetWidth();
+    int screen_h = jeti::Screen::Instance().GetHeight();
     
     /* shared gui */
     {

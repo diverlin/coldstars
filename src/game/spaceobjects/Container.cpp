@@ -25,9 +25,9 @@
 #include <world/EntityManager.hpp>
 #include <world/starsystem.hpp>
 
-#include <render/Render.hpp>
+#include <jeti/Render.hpp>
 
-#include <render/particlesystem/ExplosionEffect.hpp>
+#include <jeti/particlesystem/ExplosionEffect.hpp>
 
 #include <garbage/EntityGarbage.hpp>
 
@@ -97,8 +97,8 @@ void Container::PostDeathUniqueEvent(bool show_effect)
     {
         if (show_effect == true)
         {
-            jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
-            GetStarSystem()->Add(explosion, GetCenter()); 
+//            jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
+//            GetStarSystem()->Add(explosion, GetCenter());
         }
     }
 }

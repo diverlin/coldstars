@@ -32,8 +32,8 @@
 #include <world/Sector.hpp>
 #include <world/galaxy.hpp>
 
-#include <render/Render.hpp>
-#include <render/Screen.hpp>
+#include <jeti/Render.hpp>
+#include <jeti/Screen.hpp>
 
 #include <ai/Task.hpp>
 #include <ai/StateMachine.hpp>
@@ -164,7 +164,7 @@ void GuiGalaxyMap::RenderUnique(const jeti::Renderer& render, Player* player) co
 
             int font_size = 8;  
             glm::vec2 offset(0.0, 13.0);
-            Screen::Instance().DrawText(int2str(starsystem.GetId()), font_size, starsystem_pos + offset);
+            jeti::Screen::Instance().DrawText(int2str(starsystem.GetId()), font_size, starsystem_pos + offset);
         }               
     }     
     

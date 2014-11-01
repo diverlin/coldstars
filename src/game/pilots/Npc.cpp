@@ -26,7 +26,7 @@
 #include "../common/Logger.hpp"
 #include "../common/common.hpp"
 #include "../ai/aiModel/AiModelCollector.hpp"
-#include "../render/Render.hpp"
+#include <jeti/Render.hpp>
 #include "../dock/Kosmoport.hpp"
 
 #include "../ai/aiModel/BaseAiModel.hpp"

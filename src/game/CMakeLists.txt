@@ -4,7 +4,12 @@ file(GLOB_RECURSE COLDSTARS_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 file(GLOB_RECURSE COLDSTARS_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
 
 add_executable (${PROJECT} ${COLDSTARS_SOURCE} ${COLDSTARS_HEADER})
-target_link_libraries(${PROJECT} ${SFML_LIBRARIES} ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES} boost_system freetyperender ${FREETYPE_LIBRARIES})
+target_link_libraries(${PROJECT}
+boost_system
+jeti
+)
+
+
 #SET_TARGET_PROPERTIES(${PROJECT} PROPERTIES COMPILE_FLAGS "-Wall -Werror -Wno-switch -std=c++11 -std=gnu++11 -pipe")
 #SET_TARGET_PROPERTIES(${PROJECT} PROPERTIES COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -Ofast -march=native")
 SET_TARGET_PROPERTIES(${PROJECT} PROPERTIES COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")

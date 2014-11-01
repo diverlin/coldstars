@@ -17,16 +17,12 @@
 */
 
 
-#ifndef RESOURCES_HPP
-#define RESOURCES_HPP
+#pragma once
 
 #include <string> 
 
 void loadGameData();
 
 void load3DModels();
-void loadShaders();
 void loadImages();
 
-
-#endif

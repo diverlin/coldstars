@@ -28,10 +28,10 @@
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
 
-#include <render/animations/AnimationConstantRotation.hpp>
+#include <jeti/animations/AnimationConstantRotation.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
-#include <render/Mesh.hpp>
+#include <jeti/Mesh.hpp>
 
 
 DriveEquipmentBuilder& DriveEquipmentBuilder::Instance()

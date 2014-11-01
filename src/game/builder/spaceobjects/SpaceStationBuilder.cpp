@@ -25,7 +25,7 @@
 
 #include <dock/Kosmoport.hpp>
 
-#include <render/Mesh.hpp>
+#include <jeti/Mesh.hpp>
 
 
 SpaceStationBuilder& SpaceStationBuilder::Instance()

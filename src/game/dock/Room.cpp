@@ -18,10 +18,10 @@
 
 #include "Room.hpp"
 #include "Kosmoport.hpp"
-#include "../render/Render.hpp"
+#include <jeti/Render.hpp>
 #include "../resources/TextureManager.hpp"
  
-#include <render/textureOb.hpp>
+#include <jeti/TextureOb.hpp>
 
 Room::Room()
 {    

@@ -27,7 +27,7 @@
 
 #include <resources/TextureManager.hpp>
 #include <resources/MeshCollector.hpp>
-#include <render/textureOb.hpp>
+#include <jeti/TextureOb.hpp>
 
 RocketModuleBuilder& RocketModuleBuilder::Instance()
 {

@@ -21,7 +21,7 @@
 
 #include "../common/rect.hpp"
 #include "../gui/Cursor.hpp"
-#include "../render/Screen.hpp"
+#include <jeti/Screen.hpp>
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../gui/ButtonSingle.hpp"
 #include "../common/myStr.hpp"

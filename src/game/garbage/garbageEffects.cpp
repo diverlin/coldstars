@@ -20,7 +20,7 @@
 #include "../effects/lazerTrace.hpp"
 #include "../effects/ShockWaveEffect.hpp"
 #include "../text/VerticalFlowText.hpp"
-#include <render/particlesystem/Particle.hpp>
+#include <jeti/particlesystem/Particle.hpp>
 
 
 GarbageEffects::GarbageEffects()

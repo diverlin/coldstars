@@ -24,9 +24,8 @@
 #include "../resources/TextureManager.hpp"
 #include <resources/MeshCollector.hpp>
 
-#include "../render/Render.hpp"
-
-#include <render/textureOb.hpp>
+#include <jeti/Render.hpp>
+#include <jeti/TextureOb.hpp>
 
 
 DistantNebulaEffect::DistantNebulaEffect()

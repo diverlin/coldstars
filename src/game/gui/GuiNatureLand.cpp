@@ -31,7 +31,7 @@
 
 #include "../dock/NatureLand.hpp"
 
-#include "../render/Render.hpp"
+#include <jeti/Render.hpp>
 
 GuiNatureLand::GuiNatureLand():natureland(nullptr)
 {

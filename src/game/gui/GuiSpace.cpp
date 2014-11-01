@@ -37,8 +37,8 @@
 
 #include "../resources/GuiTextureObCollector.hpp"
 
-#include "../render/Screen.hpp"
-#include "../render/Render.hpp"
+#include <jeti/Screen.hpp>
+#include <jeti/Render.hpp>
 
 #include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
@@ -59,8 +59,8 @@ gui_galaxymap_shared(nullptr),
 gui_skills_shared(nullptr),
 slider_shared(nullptr)
 {       
-    int screen_w = Screen::Instance().GetWidth();
-    int screen_h = Screen::Instance().GetHeight();
+    int screen_w = jeti::Screen::Instance().GetWidth();
+    int screen_h = jeti::Screen::Instance().GetHeight();
     
     {
         glm::vec2 size(screen_w, screen_h);
@@ -260,16 +260,16 @@ void GuiSpace::Resize(int screen_w, int screen_h)
 void GuiSpace::RenderText(const glm::vec2& scroll_coords) const
 {
     const std::string _coord_str = "date:"+ GameDate::Instance().GetDate().GetStr()+" world coord: " + int2str(scroll_coords.x) + "," + int2str(scroll_coords.y);
-    glm::vec2 pos(Screen::Instance().GetWidth() - 400, Screen::Instance().GetHeight() - 5);
+    glm::vec2 pos(jeti::Screen::Instance().GetWidth() - 400, jeti::Screen::Instance().GetHeight() - 5);
 
-    Screen::Instance().DrawText(_coord_str, 12, pos);    
+    jeti::Screen::Instance().DrawText(_coord_str, 12, pos);
 }
 
 /* virtual override final */
 void GuiSpace::UpdateUnique(Player* player)
 { 
-    int screen_w = Screen::Instance().GetWidth();
-    int screen_h = Screen::Instance().GetHeight();
+    int screen_w = jeti::Screen::Instance().GetWidth();
+    int screen_h = jeti::Screen::Instance().GetHeight();
     Rect screen_rect(0, 0, screen_w, screen_h);   
     glm::vec2 center_screen(screen_w/2, screen_h/2);
 }
@@ -350,6 +350,6 @@ void GuiSpace::RenderUnique(const jeti::Renderer&, Player* player) const
 
     //RenderChildInfo(data_mouse);
     
-    RenderText(Screen::Instance().GetBottomLeftScreenWC());
+    RenderText(jeti::Screen::Instance().GetBottomLeftScreenWC());
 }
 

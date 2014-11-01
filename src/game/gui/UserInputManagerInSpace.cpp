@@ -21,7 +21,7 @@
 #include "BaseButton.hpp"
 #include "../world/EntityManager.hpp"
 #include "../config/config.hpp"
-#include "../render/Screen.hpp"
+#include <jeti/Screen.hpp>
 #include "../parts/WeaponComplex.hpp"
 #include "../pilots/Npc.hpp"
 #include "../pilots/Player.hpp"
@@ -133,7 +133,7 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
             { 
                 glm::vec3 player_pos3 = player->GetNpc()->GetVehicle()->GetCenter();
                 glm::vec2 player_pos2(player_pos3.x, player_pos3.y);
-                Screen::Instance().InitiateScrollTo(player_pos2); 
+                jeti::Screen::Instance().InitiateScrollTo(player_pos2);
                 break; 
             }
             case sf::Keyboard::G: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::GRAPPLE_SLOT_SELECTOR_ID); break; }    
@@ -205,8 +205,8 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
             
             case sf::Keyboard::F9: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::LOAD_ID); break; }        
     
-            case sf::Keyboard::K: { Screen::Instance().IncreaseScale(); break; }    
-            case sf::Keyboard::L: { Screen::Instance().DecreaseScale(); break; }    
+            case sf::Keyboard::K: { jeti::Screen::Instance().IncreaseScale(); break; }
+            case sf::Keyboard::L: { jeti::Screen::Instance().DecreaseScale(); break; }
         }   
     }
 }
@@ -238,8 +238,8 @@ void UserInputManagerInSpace::ManageRealTimeInputsInSpace(Player* player)
     int mx = player->GetCursor().GetMouseData().pos_screencoord.x;
     int my = player->GetCursor().GetMouseData().pos_screencoord.y;
     
-    int screen_w = Screen::Instance().GetWidth();
-    int screen_h = Screen::Instance().GetHeight();
+    int screen_w = jeti::Screen::Instance().GetWidth();
+    int screen_h = jeti::Screen::Instance().GetHeight();
     
     bool mouse_camera_scroll = Config::Instance().GetMouseCameraScroll();
                  
@@ -282,7 +282,7 @@ void UserInputManagerInSpace::ScrollCamera(Player* player)
 {
     int SCROLL_VELOCITY_STEP = Config::Instance().SCROLL_VELOCITY_STEP; 
 
-    Camera& camera = Screen::Instance().GetCamera();
+    jeti::Camera& camera = jeti::Screen::Instance().GetCamera();
     
     
     // SCROLLING X AXIS         
@@ -320,5 +320,5 @@ void UserInputManagerInSpace::ScrollCamera(Player* player)
         }
     }
      
-    Screen::Instance().MovingBy(m_ScrollAccel);
+    jeti::Screen::Instance().MovingBy(m_ScrollAccel);
 }

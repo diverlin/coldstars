@@ -20,9 +20,8 @@
 #include "Player.hpp"
 #include "../config/config.hpp"
 
-#include "../render/Render.hpp"
-#include "../render/Screen.hpp"
-
+#include <jeti/Render.hpp>
+#include <jeti/Screen.hpp>
 #include "../world/starsystem.hpp"
 #include "../world/EntityManager.hpp"
 
@@ -64,7 +63,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <render/particlesystem/BaseParticleSystem.hpp>
+#include <jeti/particlesystem/BaseParticleSystem.hpp>
 
 Player::Player(int id)
 :
@@ -292,8 +291,8 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
     
     if (starsystem->GetId() != npc->GetVehicle()->GetStarSystem()->GetId())
     {
-        //Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetCenter());
-        //Screen::Instance().GetRect().SetCenter(npc->GetVehicle()->GetCenter());
+        //jeti::Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetCenter());
+        //jeti::Screen::Instance().GetRect().SetCenter(npc->GetVehicle()->GetCenter());
         starsystem = npc->GetVehicle()->GetStarSystem();
     }
     
@@ -306,7 +305,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
             //{
                 //if (turn_timer.GetTurnEnded() == true)
                 //{
-                    //Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetCenter());    
+                    //jeti::Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetCenter());
                 //}
             //}
             
@@ -332,7 +331,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
             {
                 if (turn_timer.GetTurnEnded() == true)
                 {
-                    Screen::Instance().InitiateScrollTo(vec3ToVec2(npc->GetVehicle()->GetCenter()));
+                    jeti::Screen::Instance().InitiateScrollTo(vec3ToVec2(npc->GetVehicle()->GetCenter()));
                     turn_timer.NextTurn();                
                 }
             }
@@ -344,7 +343,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
         {
             if (turn_timer.GetTurnEnded() == true)
             {
-                Screen::Instance().InitiateScrollTo(vec3ToVec2(npc->GetVehicle()->GetCenter()));
+                jeti::Screen::Instance().InitiateScrollTo(vec3ToVec2(npc->GetVehicle()->GetCenter()));
                 turn_timer.NextTurn();                
             }
             
@@ -352,7 +351,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
         }        
     }
     
-    Screen::Instance().UpdateInSpace();
+    jeti::Screen::Instance().UpdateInSpace();
 }
              
 void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
@@ -364,10 +363,10 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = Screen::Instance().GetScale();
-    int w = Screen::Instance().GetWidth();
-    int h = Screen::Instance().GetHeight();
-    glm::vec2 world_coord(Screen::Instance().GetBottomLeft());
+    float scale = jeti::Screen::Instance().GetScale();
+    int w = jeti::Screen::Instance().GetWidth();
+    int h = jeti::Screen::Instance().GetHeight();
+    glm::vec2 world_coord(jeti::Screen::Instance().GetBottomLeft());
     
     render.ClearColorAndDepthBuffers();
     
@@ -567,15 +566,15 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
     
 void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
-    jeti::Renderer& renderer = Screen::Instance().GetRender();
-    Camera& camera = Screen::Instance().GetCamera();
-    int w = Screen::Instance().GetWidth();
-    int h = Screen::Instance().GetHeight();
+    jeti::Renderer& renderer = jeti::Screen::Instance().GetRender();
+    jeti::Camera& camera = jeti::Screen::Instance().GetCamera();
+    int w = jeti::Screen::Instance().GetWidth();
+    int h = jeti::Screen::Instance().GetHeight();
     camera.Update(w, h);
     
     renderer.ComposeViewMatrix(camera.GetViewMatrix());
 
-    //float scale = Screen::Instance().GetScale();
+    //float scale = jeti::Screen::Instance().GetScale();
 
     RenderInSpace_NEW(renderer, starsystem);
 
@@ -1019,7 +1018,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
 
     cursor.Update(this);
     //cursor.RenderFocusedObjectInfo();
-    Screen::Instance().Draw();
+    jeti::Screen::Instance().Draw();
 }
 
 void Player::ForceStateMachineReset() const
@@ -1092,8 +1091,8 @@ void Player::SaveData(boost::property_tree::ptree& save_ptree, const std::string
 {
     save_ptree.put(root+"unresolved.npc_id", npc->GetId());
     save_ptree.put(root+"unresolved.starsystem_id", starsystem->GetId());
-    save_ptree.put(root+"unresolved.screen_pos_x", Screen::Instance().GetBottomLeft().x);
-    save_ptree.put(root+"unresolved.screen_pos_y", Screen::Instance().GetBottomLeft().y);
+    save_ptree.put(root+"unresolved.screen_pos_x", jeti::Screen::Instance().GetBottomLeft().x);
+    save_ptree.put(root+"unresolved.screen_pos_y", jeti::Screen::Instance().GetBottomLeft().y);
 }
 
 void Player::LoadData(const boost::property_tree::ptree& load_ptree)
@@ -1108,7 +1107,7 @@ void Player::ResolveData()
 {
     BindNpc((Npc*)EntityManager::Instance().GetEntityById(data_unresolved_player.npc_id));
     starsystem = (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_player.starsystem_id);
-    //Screen::Instance().SetBottomLeft(data_unresolved_player.screen_pos);
+    //jeti::Screen::Instance().SetBottomLeft(data_unresolved_player.screen_pos);
 }        
 
 
@@ -1129,14 +1128,14 @@ bool isObjectWithinRadarRange(jeti::BaseParticleSystem* effect, Vehicle* vehicle
 
 bool isObjectOnScreen(const glm::vec3& center, const glm::vec3& size)
 {      
-    float scale = Screen::Instance().GetScale();
-    if (center.x < (Screen::Instance().GetBottomLeftScreenWC().x - size.x*scale))
+    float scale = jeti::Screen::Instance().GetScale();
+    if (center.x < (jeti::Screen::Instance().GetBottomLeftScreenWC().x - size.x*scale))
         return false;
-    if (center.x > (Screen::Instance().GetTopRightScreenWC().x   + size.x*scale))
+    if (center.x > (jeti::Screen::Instance().GetTopRightScreenWC().x   + size.x*scale))
         return false;
-    if (center.y < (Screen::Instance().GetBottomLeftScreenWC().y - size.y*scale))
+    if (center.y < (jeti::Screen::Instance().GetBottomLeftScreenWC().y - size.y*scale))
         return false;
-    if (center.y > (Screen::Instance().GetTopRightScreenWC().y   + size.y*scale))
+    if (center.y > (jeti::Screen::Instance().GetTopRightScreenWC().y   + size.y*scale))
         return false;
     
     return true;
@@ -1144,14 +1143,14 @@ bool isObjectOnScreen(const glm::vec3& center, const glm::vec3& size)
 
 bool isObjectOnScreen(const glm::vec3& ob_center, const float sizeInPixels)
 {       
-    float scale = Screen::Instance().GetScale();
-    if (ob_center.x < (Screen::Instance().GetBottomLeftScreenWC().x - sizeInPixels*scale))
+    float scale = jeti::Screen::Instance().GetScale();
+    if (ob_center.x < (jeti::Screen::Instance().GetBottomLeftScreenWC().x - sizeInPixels*scale))
         return false;
-    if (ob_center.x > (Screen::Instance().GetTopRightScreenWC().x + sizeInPixels*scale))
+    if (ob_center.x > (jeti::Screen::Instance().GetTopRightScreenWC().x + sizeInPixels*scale))
         return false;
-    if (ob_center.y < (Screen::Instance().GetBottomLeftScreenWC().y - sizeInPixels*scale))
+    if (ob_center.y < (jeti::Screen::Instance().GetBottomLeftScreenWC().y - sizeInPixels*scale))
         return false;
-    if (ob_center.y > (Screen::Instance().GetTopRightScreenWC().y + sizeInPixels*scale))
+    if (ob_center.y > (jeti::Screen::Instance().GetTopRightScreenWC().y + sizeInPixels*scale))
         return false;
     
     return true;
@@ -1159,13 +1158,13 @@ bool isObjectOnScreen(const glm::vec3& ob_center, const float sizeInPixels)
 
 bool isPointOnScreen(const glm::vec2& p)
 {       
-    if (p.x < (Screen::Instance().GetBottomLeftScreenWC().x))
+    if (p.x < (jeti::Screen::Instance().GetBottomLeftScreenWC().x))
         return false;
-    if (p.x > (Screen::Instance().GetTopRightScreenWC().x))
+    if (p.x > (jeti::Screen::Instance().GetTopRightScreenWC().x))
         return false;
-    if (p.y < (Screen::Instance().GetBottomLeftScreenWC().y))
+    if (p.y < (jeti::Screen::Instance().GetBottomLeftScreenWC().y))
         return false;
-    if (p.y > (Screen::Instance().GetTopRightScreenWC().y))
+    if (p.y > (jeti::Screen::Instance().GetTopRightScreenWC().y))
         return false;
     
     return true;

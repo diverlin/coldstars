@@ -19,7 +19,7 @@
 #include "GuiSkills.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../common/constants.hpp"
-#include "../render/Render.hpp"
+#include <jeti/Render.hpp>
 #include "ButtonSingle.hpp"
 
 GuiSkills::GuiSkills():

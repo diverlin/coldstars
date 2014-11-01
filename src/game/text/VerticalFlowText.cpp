@@ -18,8 +18,8 @@
 
 #include "VerticalFlowText.hpp"
 #include <math/rand.hpp>
-#include "../render/Render.hpp"
-#include "../render/Screen.hpp"
+#include <jeti/Render.hpp>
+#include <jeti/Screen.hpp>
 
 VerticalFlowText::VerticalFlowText(const std::string& text, 
                                     int font_size,

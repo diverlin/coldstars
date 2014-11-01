@@ -32,7 +32,7 @@
 #include <math/rand.hpp>
 
 #include "../world/starsystem.hpp"
-#include <render/particlesystem/DriveEffect.hpp>
+#include <jeti/particlesystem/DriveEffect.hpp>
 
 #include <math/myVector.hpp>
 #include <math/QuaternionUtils.hpp>
@@ -503,8 +503,8 @@ void DriveComplex::DrawPath(const jeti::Renderer& render)
     if (m_PathEnd == false)
     {
         UpdatePathVisualisation();
-        m_PathVisualCenter.Draw(render);
-        m_PathVisualTurn.Draw(render);
+//        m_PathVisualCenter.Draw(render);
+//        m_PathVisualTurn.Draw(render);
     }
 }
 

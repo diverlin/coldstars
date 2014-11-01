@@ -29,7 +29,6 @@
 #include "Converter.hpp"
 
 const std::string DATA_PATH = "data/";
-const std::string SHADERS_PATH = DATA_PATH+"shaders/";   
 const std::string CONFIG_PATH  = "";
         
 namespace CONVERTER

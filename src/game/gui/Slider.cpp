@@ -17,7 +17,7 @@
 */
 
 #include "Slider.hpp"
-#include "../render/Render.hpp"
+#include <jeti/Render.hpp>
 #include "../common/constants.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../common/myStr.hpp"
@@ -26,7 +26,7 @@
 #include "../gui/MouseData.hpp"
 #include "../pilots/Player.hpp"
 #include "../resources/TextureManager.hpp"
-#include "../render/Screen.hpp"
+#include <jeti/Screen.hpp>
 
 #include "../items/others/GoodsPack.hpp"
 

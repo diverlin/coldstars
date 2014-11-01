@@ -28,7 +28,7 @@
 
 #include <builder/spaceobjects/ContainerBuilder.hpp>
 
-#include <render/particlesystem/ExplosionEffect.hpp>
+#include <jeti/particlesystem/ExplosionEffect.hpp>
 
 #include <spaceobjects/Container.hpp>
 
@@ -82,8 +82,8 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
     
     if (show_effect == true)
     {
-        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
-        GetStarSystem()->Add(explosion, GetCenter());                
+//        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
+//        GetStarSystem()->Add(explosion, GetCenter());
     }
                     
 }    
