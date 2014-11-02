@@ -31,6 +31,8 @@ class Mesh
         Mesh();
         ~Mesh();
 
+        int id() const { return m_Id; }
+
         TextureOb* GetTextureOb() const { return m_TextureOb; }
         const glm::vec3& GetBoundaryBox() const { return m_BoundaryBox; }
         const glm::vec3& GetOriginDirection() const { return m_OriginDirection; }
@@ -52,6 +54,7 @@ class Mesh
             float size;
         };
 
+        static int m_Id;
         GLenum m_PrimitiveType;
         
         TextureOb* m_TextureOb;

@@ -16,8 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef MESHTYPES_HPP
-#define MESHTYPES_HPP
+#pragma once
 
 namespace TYPE
 {
@@ -26,6 +25,5 @@ namespace TYPE
         NONE_ID=0, PLANE_ID, SPHERE_ID, SPHERE_DEFORMED_ID, SPACESTATION_ID 
     };
 }  
-   
-#endif
+
 

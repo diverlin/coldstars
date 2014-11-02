@@ -55,8 +55,6 @@ class Renderer : public NonCopyable
         void DeactivateFbo(int);
         
         void Init(int, int);
-        void InitPostEffects();
-        void MakeShortCuts();
         void SetMeshQuad(Mesh* mesh) { m_MeshQuad = mesh; }
 
         void SetPerspectiveProjection(float, float);
@@ -132,6 +130,9 @@ class Renderer : public NonCopyable
         int m_IndexFboLastDeactivated;
 
         BloomEffect m_Bloom;
+
+        void InitPostEffects();
+        void MakeShortCuts();
 
         void UpdateProjectionViewMatrix();
 
