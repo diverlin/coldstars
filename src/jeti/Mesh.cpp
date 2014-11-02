@@ -7,6 +7,8 @@
 
 namespace jeti {
 
+int Mesh::m_Id = 0;
+
 Mesh::Mesh(const std::string& path, const glm::vec3& direction, TextureOb* textureOb)
 :
 m_PrimitiveType(GL_TRIANGLES),
@@ -46,7 +48,7 @@ m_HasPointsSize(false)
 {     
     m_ListId = glGenLists(1);   
  	glGenVertexArrays(1, &m_VaoId);
-    glGenBuffers(1, &m_VboId);
+    glGenBuffers(1, &m_VboId);    
 }
 
 Mesh::~Mesh()
@@ -82,6 +84,8 @@ void Mesh::FillVertices(const ObjLoader& objLoader)
     m_VertexCount = m_Vertices.size();
 
     UpdateVbo();
+
+    m_Id++;
 }
 
 void Mesh::FillPointVertices(const std::vector<glm::vec3>& positions, const std::vector<glm::vec4>& colors, const std::vector<float>& sizes)

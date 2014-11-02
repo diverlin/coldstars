@@ -20,7 +20,7 @@
 #pragma once
 
 #include <map>
-#include <types/MeshTypes.hpp>
+#include <resources/MeshDescriptor.hpp>
 
 namespace jeti {
     class Mesh;
@@ -31,14 +31,16 @@ class MeshCollector
     public:
         static MeshCollector& Instance();
         
-        void addMesh(TYPE::MESH, jeti::Mesh*);
+        void addMesh(const MeshDescriptor&, jeti::Mesh*);
+        jeti::Mesh* getMesh(int) const;
         jeti::Mesh* getMesh(TYPE::MESH) const;
 
         ~MeshCollector();
 
     private:
-        std::map<TYPE::MESH, jeti::Mesh*> meshes_map;
-        
+        std::map<int, jeti::Mesh*> meshes_map;
+        std::map<int, MeshDescriptor> descri_map;
+
         MeshCollector() = default;
 
         MeshCollector(const MeshCollector&) = delete;

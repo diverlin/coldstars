@@ -18,7 +18,8 @@
 
 
 #include "MeshCollector.hpp"
-
+#include <jeti/Mesh.hpp>
+#include <math/rand.hpp>
 
 MeshCollector& MeshCollector::Instance()
 {
@@ -32,42 +33,43 @@ MeshCollector::~MeshCollector()
         delete pair.second;
     }
     meshes_map.clear();
+    descri_map.clear();
 }
 
-void MeshCollector::addMesh(TYPE::MESH type, jeti::Mesh* mesh)
+void MeshCollector::addMesh(const MeshDescriptor& descriptor, jeti::Mesh* mesh)
 {
-    auto it = meshes_map.find(type);
+    auto it = meshes_map.find(mesh->id());
     if (it != meshes_map.end()) {
         throw std::runtime_error("mesh type is already exist");
     }
-    meshes_map.insert(std::make_pair(type, mesh));
+    meshes_map.insert(std::make_pair(mesh->id(), mesh));
+    descri_map.insert(std::make_pair(mesh->id(), descriptor));
 }
 
-jeti::Mesh* MeshCollector::getMesh(TYPE::MESH type_id) const
+jeti::Mesh* MeshCollector::getMesh(int id) const
 {
-//    std::vector<jeti::Mesh*> result;
-//    for (unsigned int i=0; i<mesh_vec.size(); i++)
-//    {
-//        if (mesh_vec[i]->GetTypeId() == type_id)
-//        {
-//            result.push_back(mesh_vec[i]);
-//        }
-//    }
-    
-//    if (result.size() == 0)
-//    {
-//        throw "mesh with request type is not found";
-//        return nullptr;
-//    }
-//    else
-//    {
-//        return result[getRandInt(0, result.size()-1)];
-//    }
-    auto it = meshes_map.find(type_id);
+    auto it = meshes_map.find(id);
     if (it != meshes_map.end()) {
         return it->second;
     }
     throw std::runtime_error("mesh type not found");
 }
 
-        
+jeti::Mesh* MeshCollector::getMesh(TYPE::MESH type) const
+{
+    std::vector<jeti::Mesh*> result;
+    for (auto& pair: descri_map) {
+        if (pair.second.type == type) {
+            auto p = meshes_map.find(pair.first);
+            result.push_back(p->second);
+        }
+    }
+
+    if (result.empty()) {
+        throw "mesh with request type is not found";
+        return nullptr;
+    } else {
+        return result[getRandInt(0, result.size()-1)];
+    }
+}
+
