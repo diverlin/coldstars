@@ -90,7 +90,7 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
            
     float angle = getRandInt(0, 360);
     float delta_angle = 0.0;
-    if(textureOb->GetData().is_rotated)
+    if(textureOb->GetMaterial().is_rotated)
     {
         delta_angle = getRandInt(8,12)*0.001 * getRandSign();        
     }

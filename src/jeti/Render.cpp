@@ -229,7 +229,7 @@ void Renderer::DrawQuad(const TextureOb& texOb, const Box2D& box) const
 
 void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
- 	UseTransparentMode(textureOb.GetData().use_alpha);
+    UseTransparentMode(textureOb.GetMaterial().use_alpha);
  	
     UseProgram(m_Shaders.base);
 	{
@@ -237,7 +237,7 @@ void Renderer::DrawMesh(const Mesh& mesh, const TextureOb& textureOb, const glm:
 	    glUniformMatrix4fv(glGetUniformLocation(m_Shaders.base, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
 	
 	    glActiveTexture(GL_TEXTURE0);
-	    glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture); 
+        glBindTexture(GL_TEXTURE_2D, textureOb.GetMaterial().texture);
 	    glUniform1i(glGetUniformLocation(m_Shaders.base, "u_Texture"), 0);
 	                        
 	    mesh.Draw();
@@ -249,7 +249,7 @@ void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
     float ambient_factor = 0.25;       
     const glm::vec3& eye_pos = Screen::Instance().GetCamera().GetEyePos();
 
-    const Material& material = textureOb.GetData();
+    const Material& material = textureOb.GetMaterial();
 
     UseTransparentMode(material.use_alpha);
  	 	
@@ -276,7 +276,7 @@ void Renderer::DrawMeshLight(const Mesh& mesh, const TextureOb& textureOb, const
         glUniform1f(glGetUniformLocation(m_ProgramLight,  "u_Material.shininess"), material.shininess);
 
 	    glActiveTexture(GL_TEXTURE0);
-	    glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture); 
+        glBindTexture(GL_TEXTURE_2D, textureOb.GetMaterial().texture);
 	    glUniform1i(m_ProgramLightLocation_uTexture, 0);
 	                        
 	    mesh.Draw();
@@ -288,7 +288,7 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
     float ambient_factor = 0.25; 
     const glm::vec3& eye_pos = Screen::Instance().GetCamera().GetPos();
    
- 	UseTransparentMode(textureOb.GetData().use_alpha);
+    UseTransparentMode(textureOb.GetMaterial().use_alpha);
     	
     UseProgram(m_Shaders.light_normalmap);
 	{
@@ -306,7 +306,7 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
         glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Light.specular"), 1, glm::value_ptr(m_Light.specular));
         glUniform3fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Light.attenuation"), 1, glm::value_ptr(m_Light.attenuation));
 
-        const Material& material = textureOb.GetData();
+        const Material& material = textureOb.GetMaterial();
         glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Material.ambient"),  1, glm::value_ptr(material.ambient));
         glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Material.diffuse"),  1, glm::value_ptr(material.diffuse));
         glUniform4fv(glGetUniformLocation(m_Shaders.light_normalmap, "u_Material.specular"), 1, glm::value_ptr(material.specular));
@@ -314,11 +314,11 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
         glUniform1f(glGetUniformLocation(m_Shaders.light_normalmap,  "u_Material.shininess"), material.shininess);
 
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.GetMaterial().texture);
 		glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_Texture"), 0);
 		
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, textureOb.GetData().normalmap);
+        glBindTexture(GL_TEXTURE_2D, textureOb.GetMaterial().normalmap);
 		glUniform1i(glGetUniformLocation(m_Shaders.light_normalmap, "u_Normalmap"), 1);
                   
 		mesh.Draw();
@@ -327,7 +327,7 @@ void Renderer::DrawMeshLightNormalMap(const Mesh& mesh, const TextureOb& texture
 
 void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureOb, const glm::mat4& ModelMatrix) const
 {
- 	UseTransparentMode(textureOb.GetData().use_alpha);
+    UseTransparentMode(textureOb.GetMaterial().use_alpha);
  	
     UseProgram(m_Shaders.multitexturing);
 	{
@@ -335,14 +335,14 @@ void Renderer::DrawMeshMultiTextured(const Mesh& mesh, const TextureOb& textureO
 		glUniformMatrix4fv(glGetUniformLocation(m_Shaders.multitexturing, "u_ModelMatrix")         , 1, GL_FALSE, &ModelMatrix[0][0]);
 	
 		glActiveTexture(GL_TEXTURE0);                                
-		glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.GetMaterial().texture);
 		glUniform1i(glGetUniformLocation(m_Shaders.multitexturing, "Texture_0"), 0);
 		
 		glActiveTexture(GL_TEXTURE1);                                
-		glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
+        glBindTexture(GL_TEXTURE_2D, textureOb.GetMaterial().texture);
 		glUniform1i(glGetUniformLocation(m_Shaders.multitexturing, "Texture_1"), 1);
 		
-		glUniform2f(glGetUniformLocation(m_Shaders.multitexturing, "displ"), textureOb.GetData().texture_offset.x, textureOb.GetData().texture_offset.y);        
+        glUniform2f(glGetUniformLocation(m_Shaders.multitexturing, "displ"), textureOb.GetMaterial().texture_offset.x, textureOb.GetMaterial().texture_offset.y);
 				  
 		mesh.Draw();
 	}
@@ -637,7 +637,7 @@ void Renderer::DrawParticles(const Mesh& mesh, const TextureOb& textureOb, const
         UseProgram(m_Shaders.particle);
         {    
             glActiveTexture(GL_TEXTURE0);                                
-            glBindTexture(GL_TEXTURE_2D, textureOb.GetData().texture);
+            glBindTexture(GL_TEXTURE_2D, textureOb.GetMaterial().texture);
             glUniform1i(glGetUniformLocation(m_Shaders.particle, "uTexture_0"), 0);
 
             glUniformMatrix4fv(glGetUniformLocation(m_Shaders.particle, "u_ProjectionViewMatrix"), 1, GL_FALSE, &m_ProjectionViewMatrix[0][0]);  

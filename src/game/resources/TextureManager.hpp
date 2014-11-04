@@ -17,8 +17,7 @@
 */
 
 
-#ifndef TEXTUREMANAGER_HPP
-#define TEXTUREMANAGER_HPP
+#pragma once
 
 #include <string>
 #include <vector>
@@ -132,4 +131,3 @@ class TextureManager
         jeti::TextureOb* _TryGetShipTexObBySizeFromVec(const std::vector<jeti::TextureOb*>&, int);
 };
 
-#endif 
