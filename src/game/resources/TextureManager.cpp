@@ -39,7 +39,7 @@ TextureManager& TextureManager::Instance()
 void TextureManager::Add(jeti::TextureOb* texOb)
 {
     textureOb_total_vec.push_back(texOb);
-
+/*
     switch(texOb->GetAssociation().type_id)
     {
     case TYPE::TEXTURE::SPACESTATION_ID: { spacestation_texOb_vec.push_back(texOb);    break; }
@@ -121,6 +121,7 @@ void TextureManager::Add(jeti::TextureOb* texOb)
 //        break;
     }
     }
+    */
 }
 
 
@@ -169,7 +170,7 @@ jeti::TextureOb* TextureManager::_TryGetShipTexObBySizeFromVec(const std::vector
     jeti::TextureOb* requested_texOb  = nullptr;
     for (unsigned int i=0; i<textureOb_vec.size(); i++)
     {
-        if (textureOb_vec[i]->GetData().size_id == size_id)
+        if (textureOb_vec[i]->GetMaterial().size_id == size_id)
         {
             requested_texOb = textureOb_vec[i];
             break;
@@ -239,7 +240,7 @@ jeti::TextureOb* TextureManager::GetTexObByColorId(TYPE::TEXTURE _type_id, int _
     
     for(unsigned int i=0; i<requested_vec->size(); i++)
     {
-        if ((*requested_vec)[i]->GetData().color_id == _color_id)
+        if ((*requested_vec)[i]->GetMaterial().color_id == _color_id)
         {
             requested_texOb = (*requested_vec)[i];
         }
@@ -354,7 +355,7 @@ jeti::TextureOb* TextureManager::GetTextureObByPath(const std::string& path)
     jeti::TextureOb* requested_texOb = nullptr;
     for (unsigned int i = 0; i<textureOb_total_vec.size(); i++)
     {
-        if (textureOb_total_vec[i]->GetData().texture_path == path)
+        if (textureOb_total_vec[i]->GetMaterial().texture_path == path)
         {
             requested_texOb = textureOb_total_vec[i];
             break;

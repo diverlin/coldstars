@@ -20,30 +20,26 @@
 
 #include <SFML/Graphics/Image.hpp>
 
-#include <types/TextureTypes.hpp>
-
-#include <common/IdGenerator.hpp>
-
 namespace jeti {
 
-TextureOb::TextureOb(const Material& data)
+TextureOb::TextureOb(const Material& material)
     :
       m_IsLoaded(false),
-      m_Data(data)
+      m_Material(material)
 { 
-    m_Data.id = TextureIdGenerator::Instance().GetNextId();
+    m_Material.id = 0; // fixmeTextureIdGenerator::Instance().GetNextId();
     
-    if ( ((m_Data.col_num == 1) and (m_Data.row_num == 1)) or (m_Data.fps == 0) ) {
-        m_Data.is_animated = false;
+    if ( ((m_Material.col_num == 1) and (m_Material.row_num == 1)) or (m_Material.fps == 0) ) {
+        m_Material.is_animated = false;
     } else {
-        m_Data.is_animated = true;
+        m_Material.is_animated = true;
     }   
 
     //Load();
     
-    CreateTextureCoords(m_Data.col_num, m_Data.row_num, m_Data.fps); 
+    CreateTextureCoords(m_Material.col_num, m_Material.row_num, m_Material.fps);
     
-    //m_Data.size_id = getObjectSize(m_Data.w, m_Data.h);
+    //m_Material.size_id = getObjectSize(m_Data.w, m_Data.h);
 }  
 
 TextureOb::~TextureOb()
@@ -53,9 +49,9 @@ TextureOb::~TextureOb()
 
 void TextureOb::Load()
 {
-    loadToVRAM(m_Data.texture_path, m_Data.texture, m_Data.w, m_Data.h);
-    if (m_Data.normalmap_path != "") {
-        loadToVRAM(m_Data.normalmap_path, m_Data.normalmap, m_Data.w, m_Data.h);
+    loadToVRAM(m_Material.texture_path, m_Material.texture, m_Material.w, m_Material.h);
+    if (m_Material.normalmap_path != "") {
+        loadToVRAM(m_Material.normalmap_path, m_Material.normalmap, m_Material.w, m_Material.h);
     }
 
     m_IsLoaded = true;
@@ -72,11 +68,11 @@ void TextureOb::CreateTextureCoords(int col_num, int row_num, int fps)
     m_CurrentFrame = 0;
     m_FramesCount = 0;
     
-    m_Data.w_slice = m_Data.w/col_num;
-    m_Data.h_slice = m_Data.h/row_num;
+    m_Material.w_slice = m_Material.w/col_num;
+    m_Material.h_slice = m_Material.h/row_num;
     
-    float w_slicef = (float)m_Data.w_slice/m_Data.w;  
-    float h_slicef = (float)m_Data.h_slice/m_Data.h;
+    float w_slicef = (float)m_Material.w_slice/m_Material.w;
+    float h_slicef = (float)m_Material.h_slice/m_Material.h;
     
     float w_offsetf = 0;
     float h_offsetf = 0;
@@ -114,15 +110,15 @@ void TextureOb::CreateTextureCoords(int col_num, int row_num, int fps)
 
 void TextureOb::AddTexCoordQuad(float w_start, float h_start, float w_end, float h_end)
 {
-     m_Data.texCoord_bottomLeft_vec.push_back( glm::vec2(w_start, h_start));   // (0, 0)
-     m_Data.texCoord_bottomRight_vec.push_back(glm::vec2(w_end,   h_start));   // (1, 0)
-     m_Data.texCoord_topLeft_vec.push_back(    glm::vec2(w_start, h_end));     // (0, 1)
-     m_Data.texCoord_topRight_vec.push_back(   glm::vec2(w_end,   h_end));     // (1, 1)
+     m_Material.texCoord_bottomLeft_vec.push_back( glm::vec2(w_start, h_start));   // (0, 0)
+     m_Material.texCoord_bottomRight_vec.push_back(glm::vec2(w_end,   h_start));   // (1, 0)
+     m_Material.texCoord_topLeft_vec.push_back(    glm::vec2(w_start, h_end));     // (0, 1)
+     m_Material.texCoord_topRight_vec.push_back(   glm::vec2(w_end,   h_end));     // (1, 1)
 }
 
 int TextureOb::UpdateAnimationFrame(float elapsed_time)
 {
-    if (m_Data.is_animated)
+    if (m_Material.is_animated)
     {
         if (elapsed_time - m_LastUpdateTime > m_Delay)
         {

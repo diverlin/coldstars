@@ -1,5 +1,4 @@
-#ifndef MYVECTOR_HPP
-#define MYVECTOR_HPP
+#pragma once
 
 #include <glm/glm.hpp>
 #include <string>
@@ -32,4 +31,3 @@ glm::vec2 vec3ToVec2(const glm::vec3&);
 
 std::string str(const glm::vec3&);
 
-#endif

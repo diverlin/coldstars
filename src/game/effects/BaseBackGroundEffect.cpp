@@ -68,7 +68,7 @@ void BaseBackGroundEffect::SetTextureOb(jeti::TextureOb* textureOb, const glm::v
             
 void BaseBackGroundEffect::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    save_ptree.put(root+"textureOb_path", m_TextureOb->GetData().texture_path);
+    save_ptree.put(root+"textureOb_path", m_TextureOb->GetMaterial().texture_path);
     
     save_ptree.put(root+"center.x", m_Center.x);
     save_ptree.put(root+"center.y", m_Center.y);    

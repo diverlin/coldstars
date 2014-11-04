@@ -39,7 +39,7 @@ void Room::RenderBackground(const Rect& rect) const
            
 void Room::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    save_ptree.put(root+"unresolved.textureOb_background_path", textureOb_background->GetData().texture_path);
+    save_ptree.put(root+"unresolved.textureOb_background_path", textureOb_background->GetMaterial().texture_path);
     save_ptree.put(root+"unresolved.owner_kosmoport_id", owner_kosmoport->GetId());
 }
 

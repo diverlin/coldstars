@@ -114,7 +114,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     
     LifeData data_life;
     data_life.armor      = data_korpus.armor;
-    data_life.dying_time = 10*texOb->GetData().size_id;
+    data_life.dying_time = 10*texOb->GetMaterial().size_id;
     
     int size_threshold = 2; 
     //if ( (texOb->size_id < size_threshold) or (mesh != nullptr) )
@@ -122,7 +122,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     //else
     //data_korpus.draw_turrels = true; 
     
-    if (texOb->GetData().size_id < size_threshold)
+    if (texOb->GetMaterial().size_id < size_threshold)
         data_korpus.draw_turrels = false; 
     else
         data_korpus.draw_turrels = true; 
