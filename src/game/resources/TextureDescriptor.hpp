@@ -35,7 +35,7 @@ struct TextureDescriptor
     TYPE::RACE race_id;
     TYPE::TECHLEVEL tech_level_id;
 
-    MaterialAssociationData()
+    TextureDescriptor()
     :
     type_id(TYPE::TEXTURE::NONE_ID),
     subtype_id(TYPE::ENTITY::NONE_ID),

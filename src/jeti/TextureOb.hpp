@@ -33,6 +33,7 @@ class TextureOb
         TextureOb(const Material& material);
         ~TextureOb();
 
+        int id() const { return m_Id; }
         const glm::vec3 GetSize() const { return glm::vec3(0.5*m_Material.w_slice, 0.5*m_Material.h_slice, 1.0f); }     // ugly
 
         int GetFrameWidth() const  { return m_Material.w_slice; }
@@ -47,6 +48,7 @@ class TextureOb
         const Material& GetMaterial() const { return m_Material; }
 
     private:
+        int m_Id;
         Material m_Material;
 
         bool m_IsLoaded;

@@ -36,11 +36,11 @@ MeshCollector::~MeshCollector()
     descri_map.clear();
 }
 
-void MeshCollector::addMesh(const MeshDescriptor& descriptor, jeti::Mesh* mesh)
+void MeshCollector::add(const MeshDescriptor& descriptor, jeti::Mesh* mesh)
 {
     auto it = meshes_map.find(mesh->id());
     if (it != meshes_map.end()) {
-        throw std::runtime_error("mesh type is already exist");
+        throw std::runtime_error("mesh id is already exist");
     }
     meshes_map.insert(std::make_pair(mesh->id(), mesh));
     descri_map.insert(std::make_pair(mesh->id(), descriptor));

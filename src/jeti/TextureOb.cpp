@@ -24,6 +24,7 @@ namespace jeti {
 
 TextureOb::TextureOb(const Material& material)
     :
+      m_Id(0),
       m_IsLoaded(false),
       m_Material(material)
 { 
