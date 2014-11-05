@@ -36,111 +36,34 @@ TextureManager& TextureManager::Instance()
     return instance;
 }
 
-void TextureManager::add(TYPE::TEXTURE type, jeti::TextureOb* texOb)
+void TextureManager::add(jeti::TextureOb* textureOb, const TextureDescriptor& descriptor)
 {
-    auto it = m_Textures_map.find(texOb->id());
-    if (it != m_Textures_map.end()) {
+    if (isAbsent(textureOb)) {
+        m_Textures_map.insert(std::make_pair(textureOb->id(), textureOb));
+    } else {
+        std::cout<<"texture id="<<textureOb->id()<<std::endl;
         throw std::runtime_error("texture id is already exist");
     }
 
-//    auto it = m_Textures_map.find(texOb->id());
-//    if (it != m_Textures_map.end()) {
-//        throw std::runtime_error("texture id is already exist");
-//    }
-
-    //textureOb_total_vec.push_back(texOb);
-/*
-    switch(texOb->GetAssociation().type_id)
-    {
-    case TYPE::TEXTURE::SPACESTATION_ID: { spacestation_texOb_vec.push_back(texOb);    break; }
-    case TYPE::TEXTURE::SATELLITE_ID:    { satellite_texOb_vec.push_back(texOb);   break; }
-        
-    case TYPE::TEXTURE::ITEM_SLOT_ID:    { itemslot_texOb_vec.push_back(texOb);        break; }
-    case TYPE::TEXTURE::VEHICLE_SLOT_ID: { vehicleslot_texOb_vec.push_back(texOb); break; }
-    case TYPE::TEXTURE::TURREL_ID:      { turrel_texOb_vec.push_back(texOb);      break; }
-        
-    case TYPE::TEXTURE::NEBULA_BACKGROUND_ID:      { nebulaBgEffect_texOb_vec.push_back(texOb); break; }
-    case TYPE::TEXTURE::STAR_ID:        { star_texOb_vec.push_back(texOb);           break; }
-    case TYPE::TEXTURE::PLANET_ID:      { planet_texOb_vec.push_back(texOb);         break; }
-    case TYPE::TEXTURE::ATMOSPHERE_ID:  { atmosphere_texOb_vec.push_back(texOb);     break; }
-    case TYPE::TEXTURE::RING_ID:  { ring_texOb_vec.push_back(texOb);     break; }
-    case TYPE::TEXTURE::SHIP_ID:
-    {
-//        TYPE::RACE race_id = texOb->GetAssociation().race_id;
-//        switch(texOb->GetAssociation().subtype_id)
-//        {
-//        case TYPE::ENTITY::RANGER_ID:   { ship_ranger_texOb_vec[static_cast<int>(race_id)].push_back(texOb);   break; }
-//        case TYPE::ENTITY::WARRIOR_ID:  { ship_warrior_texOb_vec[static_cast<int>(race_id)].push_back(texOb);  break; }
-//        case TYPE::ENTITY::TRADER_ID:   { ship_trader_texOb_vec[static_cast<int>(race_id)].push_back(texOb);   break; }
-//        case TYPE::ENTITY::PIRAT_ID:    { ship_pirat_texOb_vec[static_cast<int>(race_id)].push_back(texOb);    break; }
-//        case TYPE::ENTITY::DIPLOMAT_ID: { ship_diplomat_texOb_vec[static_cast<int>(race_id)].push_back(texOb); break; }
-//        }
+    auto it = m_TexturesGroup_map.find(descriptor.type_id);
+    if (it != m_TexturesGroup_map.end()) {
+        m_TexturesGroup_map.insert(std::make_pair(descriptor.type_id, std::vector<jeti::TextureOb*> { textureOb }));
+    } else {
+        it->second.push_back(textureOb);
     }
-    case TYPE::TEXTURE::ROCKET_BULLET_ID: { rocketBullet_texOb_vec.push_back(texOb); break; }
-    case TYPE::TEXTURE::LAZER_EFFECT_ID:  { lazerEffect_texOb_vec.push_back(texOb);  break; }
-    case TYPE::TEXTURE::SHIELD_EFFECT_ID: { shieldEffect_texOb_vec.push_back(texOb); break; }
-    case TYPE::TEXTURE::DISTANTSTAR_ID:   { starBgEffect_texOb_vec.push_back(texOb); break; }
-    case TYPE::TEXTURE::PARTICLE_EFFECT_ID:      { particles_texOb_vec.push_back(texOb); break; }
 
-    // ASTEROIDS/MINERALS
-    case TYPE::TEXTURE::ASTEROID_ID:  { asteroid_texOb_vec.push_back(texOb);  break; }
-    case TYPE::TEXTURE::MINERAL_ID:   { mineral_texOb_vec.push_back(texOb);   break; }
-    case TYPE::TEXTURE::CONTAINER_ID: { container_texOb_vec.push_back(texOb); break; }
-    case TYPE::TEXTURE::BOMB_ID:      { bomb_texOb_vec.push_back(texOb);      break; }
-
-    case TYPE::TEXTURE::BLACKHOLE_ID: { blackhole_texOb_vec.push_back(texOb); break; }
-
-    // LAND
-    case TYPE::TEXTURE::NATURELAND_BACKGROUND_ID: { landBg_texOb_vec.push_back(texOb); break; }
-
-    // IN KOSMOPORT
-    case TYPE::TEXTURE::ANGAR_BACKGROUND_ID: { angarBg_texOb_vec.push_back(texOb); break; }
-    case TYPE::TEXTURE::STORE_BACKGROUND_ID: { storeBg_texOb_vec.push_back(texOb); break; }
-    case TYPE::TEXTURE::SHOP_BACKGROUND_ID:  { shopBg_texOb_vec.push_back(texOb); break; }
-    case TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID: { govermentBg_texOb_vec.push_back(texOb); break; }
-        
-        
-    // ITEMS
-    case TYPE::TEXTURE::ROCKET_EQUIPMENT_ID:      { rocketEquipment_texOb_vec.push_back(texOb);      break; }
-    case TYPE::TEXTURE::LAZER_EQUIPMENT_ID:       { lazerEquipment_texOb_vec.push_back(texOb);       break; }
-    case TYPE::TEXTURE::DRIVE_EQUIPMENT_ID:       { driveEquipment_texOb_vec.push_back(texOb);       break; }
-    case TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID:   { protectorEquipment_texOb_vec.push_back(texOb);   break; }
-    case TYPE::TEXTURE::DROID_EQUIPMENT_ID:       { droidEquipment_texOb_vec.push_back(texOb);       break; }
-    case TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID:     { grappleEquipment_texOb_vec.push_back(texOb);     break; }
-    case TYPE::TEXTURE::BAK_EQUIPMENT_ID:         { bakEquipment_texOb_vec.push_back(texOb);         break; }
-    case TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID: { energyBlockEquipment_texOb_vec.push_back(texOb); break; }
-    case TYPE::TEXTURE::FREEZER_EQUIPMENT_ID:     { freezerEquipment_texOb_vec.push_back(texOb);     break; }
-    case TYPE::TEXTURE::RADAR_EQUIPMENT_ID:       { radarEquipment_texOb_vec.push_back(texOb);       break; }
-    case TYPE::TEXTURE::SCANER_EQUIPMENT_ID:      { scanerEquipment_texOb_vec.push_back(texOb);      break; }
-
-    case TYPE::TEXTURE::MODULE_ID: { module_texOb_vec.push_back(texOb);      break; }
-
-    case TYPE::TEXTURE::FACE_ID:
-    {
-//        switch(texOb->GetAssociation().race_id)
-//        {
-//        case TYPE::RACE::R0_ID: { face_rac//    for (unsigned int i = 0; i<textureOb_total_vec.size(); i++)
-//    {
-//        if (textureOb_total_vec[i]->GetMaterial().texture_path == path)
-//        {
-//            requested_texOb = textureOb_total_vec[i];
-//            break;
-//        }
-//    }e0_texOb_vec.push_back(texOb); break; }
-//        case TYPE::RACE::R1_ID: { face_race1_texOb_vec.push_back(texOb); break; }
-//        case TYPE::RACE::R2_ID: { face_race2_texOb_vec.push_back(texOb); break; }
-//        case TYPE::RACE::R3_ID: { face_race3_texOb_vec.push_back(texOb); break; }
-//        case TYPE::RACE::R4_ID: { face_race4_texOb_vec.push_back(texOb); break; }
-
-//        case TYPE::RACE::R6_ID: { face_race6_texOb_vec.push_back(texOb); break; }
-//        case TYPE::RACE::R7_ID: { face_race7_texOb_vec.push_back(texOb); break; }
-//        }
-//        break;
-    }
-    }
-    */
+    m_Descriptors_map.insert(std::make_pair(textureOb->id(), descriptor));
 }
 
+bool TextureManager::isAbsent(jeti::TextureOb* texOb) const
+{
+    auto it = m_Textures_map.find(texOb->id());
+    if (it != m_Textures_map.end()) {
+        return false;
+    } else {
+        return true;
+    }
+}
 
 jeti::TextureOb* TextureManager::_GetRandomTextureObFromVec(const std::vector<jeti::TextureOb*>& textureOb_vec)
 {

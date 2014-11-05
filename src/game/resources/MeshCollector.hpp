@@ -21,6 +21,8 @@
 
 #include <map>
 #include <resources/MeshDescriptor.hpp>
+#include <types/MeshTypes.hpp>
+#include <vector>
 
 namespace jeti {
     class Mesh;
@@ -31,15 +33,16 @@ class MeshCollector
     public:
         static MeshCollector& Instance();
         
-        void add(const MeshDescriptor&, jeti::Mesh*);
+        void add(jeti::Mesh*, const MeshDescriptor&);
         jeti::Mesh* getMesh(int) const;
         jeti::Mesh* getMesh(TYPE::MESH) const;
 
         ~MeshCollector();
 
     private:
-        std::map<int, jeti::Mesh*> meshes_map;
-        std::map<int, MeshDescriptor> descri_map;
+        std::map<int, jeti::Mesh*> m_Meshes_map;
+        std::map<TYPE::MESH, std::vector<jeti::Mesh*>> m_MeshesGroup_map;
+        std::map<int, MeshDescriptor> m_Descriptors_map;
 
         MeshCollector() = default;
 
