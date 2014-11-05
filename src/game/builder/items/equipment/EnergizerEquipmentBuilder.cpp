@@ -27,7 +27,7 @@
 #include "../../../world/EntityManager.hpp"
 
 #include <resources/MeshCollector.hpp>
-#include <resources/TextureManager.hpp>
+#include <resources/TextureCollector.hpp>
 #include <jeti/TextureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
@@ -84,7 +84,7 @@ void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer
     }
 
     jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID);
+    jeti::TextureOb* texOb_item = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
 
     energy_max_orig  = getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN,      EQUIPMENT::ENERGIZER::ENERGY_MAX)      * (1 + EQUIPMENT::ENERGIZER::ENERGY_TECHLEVEL_RATE * (int)tech_level);

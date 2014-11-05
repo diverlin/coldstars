@@ -21,7 +21,7 @@
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
 
-#include "../resources/TextureManager.hpp"
+#include "../resources/TextureCollector.hpp"
 #include <resources/MeshCollector.hpp>
 
 #include <jeti/Render.hpp>
@@ -85,8 +85,8 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
     jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 
     jeti::TextureOb* textureOb = nullptr;
-    if (color_id == NONE_ID)     textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID);
-    else                         textureOb = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, color_id);    
+    if (color_id == NONE_ID)     textureOb = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::NEBULA_BACKGROUND_ID);
+    else                         textureOb = TextureCollector::Instance().GetTexObByColorId(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, color_id);
            
     float angle = getRandInt(0, 360);
     float delta_angle = 0.0;

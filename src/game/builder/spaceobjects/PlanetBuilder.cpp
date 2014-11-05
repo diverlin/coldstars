@@ -81,7 +81,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     planet_data.speed         = (float)getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / (float)orbit_radius;
     planet_data.clockwise     = getRandBool();
 
-    jeti::TextureOb* textureOb      = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::PLANET_ID);
+    jeti::TextureOb* textureOb      = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::PLANET_ID);
     
     planet->SetPlanetData(planet_data);
     
@@ -97,7 +97,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     
     //if (getRandBool()) 
     {
-        jeti::TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::ATMOSPHERE_ID);
+        jeti::TextureOb* textureOb = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::ATMOSPHERE_ID);
         Atmosphere* atmosphere = new Atmosphere();
         //alpitodorender atmosphere->SetRenderData(mesh, textureOb, 1.04f*scale);
         //alpitodorender planet->AddDecoration(atmosphere);
@@ -107,7 +107,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
    {
         Mesh* mesh_plane = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
         
-        TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::RING_ID); 
+        TextureOb* textureOb = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::RING_ID);
         Ring* ring = new Ring();
         ring->BindData3D(mesh_plane, textureOb, 1.5f*scale);
         //ring->SetDirection(glm::normalize(glm::vec3(1.0f)));

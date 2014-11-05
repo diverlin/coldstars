@@ -18,7 +18,7 @@
 
 #include "BaseSpaceEntity.hpp"
 #include "../resources/MeshCollector.hpp"
-#include "../resources/TextureManager.hpp"
+#include "../resources/TextureCollector.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../common/constants.hpp"
 #include <math/rand.hpp>

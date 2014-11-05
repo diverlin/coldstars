@@ -85,7 +85,7 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
     if (true)
     {
         mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-        texOb = TextureManager::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id); 
+        texOb = TextureCollector::Instance().GetRandomShipTexObWithFollowingAtrributes(race_id, subsubtype_id, size_id);
         size = texOb->GetSize();
     }
     else

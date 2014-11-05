@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include <string>
+
 namespace TYPE
 {
     enum class MESH
@@ -26,4 +28,5 @@ namespace TYPE
     };
 }  
 
+std::string getTypeStr(TYPE::MESH type);
 

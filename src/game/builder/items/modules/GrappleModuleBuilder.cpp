@@ -26,7 +26,7 @@
 
 #include "../../../world/EntityManager.hpp"
 
-#include <resources/TextureManager.hpp>
+#include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
 #include <jeti/TextureOb.hpp>
 
@@ -73,7 +73,7 @@ GrappleModule* GrappleModuleBuilder::GetNewGrappleModule(int strength_add, int r
 void GrappleModuleBuilder::CreateNewInternals(GrappleModule* grapple_module, int strength_add, int radius_add, int speed_add) const
 {   
     jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);
+    jeti::TextureOb* texOb = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::MODULE_ID);
     strength_add   = getRandInt(MODULE::GRAPPLE::STRENGTH_MIN, MODULE::GRAPPLE::STRENGTH_MAX);
     radius_add     = getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
     speed_add      = getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);

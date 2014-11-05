@@ -19,7 +19,7 @@
 #include "Room.hpp"
 #include "Kosmoport.hpp"
 #include <jeti/Render.hpp>
-#include "../resources/TextureManager.hpp"
+#include "../resources/TextureCollector.hpp"
  
 #include <jeti/TextureOb.hpp>
 
@@ -51,6 +51,6 @@ void Room::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Room::ResolveData()
 {
-    textureOb_background = TextureManager::Instance().GetTextureObByPath(data_unresolved_Room.textureOb_background_path);
+    textureOb_background = TextureCollector::Instance().GetTextureObByPath(data_unresolved_Room.textureOb_background_path);
 }
 

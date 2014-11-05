@@ -76,7 +76,7 @@ void StarBuilder::CreateNewInternals(Star* star) const
     star_data.orbit_phi_inD = 0;
     star_data.speed         = 1.8;
     
-    jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::STAR_ID);
+    jeti::TextureOb* texOb = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::STAR_ID);
     
     star->SetPlanetData(star_data);
     star->SetLifeData(data_life);

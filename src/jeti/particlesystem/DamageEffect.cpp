@@ -92,7 +92,7 @@ void DamageEffect::Update()
 //    data_particle.color_delta.b    = 0.0;
 //    data_particle.color_delta.a    = 0.0; // is modifed iduvidually for each particle
     
-//    TextureOb* texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, color_id);
+//    TextureOb* texOb_particle = TextureCollector::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, color_id);
     
 //    DamageEffect* damage = new DamageEffect();
     

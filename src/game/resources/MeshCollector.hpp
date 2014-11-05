@@ -48,6 +48,8 @@ class MeshCollector
 
         MeshCollector(const MeshCollector&) = delete;
         MeshCollector& operator=(const MeshCollector&) = delete;
+
+        bool isAbsent(jeti::Mesh* mesh) const;
 };
 
 

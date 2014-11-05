@@ -68,7 +68,7 @@ Container* ContainerBuilder::GetNewContainer(jeti::TextureOb* textureOb, BaseIte
 
 Container* ContainerBuilder::GetNewMineralContainer(int mineral_ammount) const
 {
-    jeti::TextureOb* textureOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::MINERAL_ID);
+    jeti::TextureOb* textureOb = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::MINERAL_ID);
     GoodsPack* goods_pack = GetNewGoodsPack(TYPE::ENTITY::MINERALS_ID);
     goods_pack->Increase(mineral_ammount);
 

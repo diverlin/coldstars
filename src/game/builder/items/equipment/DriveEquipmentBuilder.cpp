@@ -25,7 +25,7 @@
 #include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
-#include <resources/TextureManager.hpp>
+#include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
 
 #include <jeti/animations/AnimationConstantRotation.hpp>
@@ -85,7 +85,7 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
     }
 
     //Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    //TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID); 
+    //TextureOb* texOb = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID);
     //glm::vec3 size = texOb->GetSize();
     
     jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);

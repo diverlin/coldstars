@@ -24,7 +24,7 @@
 #include "../common/Logger.hpp"
 
 #include "../common/IdGenerator.hpp"
-#include "../resources/TextureManager.hpp"
+#include "../resources/TextureCollector.hpp"
 #include "../world/starsystem.hpp"
 
 BlackHole::BlackHole(int id)

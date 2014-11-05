@@ -65,7 +65,7 @@ Shop* ShopBuilder::GetNewShop() const
            
 void ShopBuilder::CreateNewInternals(Shop* shop) const
 {    
-    jeti::TextureOb* textureOb_background  = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SHOP_BACKGROUND_ID);
+    jeti::TextureOb* textureOb_background  = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::SHOP_BACKGROUND_ID);
     shop->SetTextureObBackground(textureOb_background);
 }
 

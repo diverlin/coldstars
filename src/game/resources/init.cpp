@@ -18,7 +18,7 @@
 
 #include "init.hpp"
 #include "resources.hpp"
-#include "TextureManager.hpp"
+#include "TextureCollector.hpp"
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -72,7 +72,7 @@ void initGameStuff()
     RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);  
     RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);  
       
-    TextureManager::Instance().FillShipSubTypeList();        
+    TextureCollector::Instance().FillShipSubTypeList();
         
         
     /* create Macro Scenaries */
