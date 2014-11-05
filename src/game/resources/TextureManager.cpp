@@ -36,9 +36,19 @@ TextureManager& TextureManager::Instance()
     return instance;
 }
 
-void TextureManager::Add(jeti::TextureOb* texOb)
+void TextureManager::add(TYPE::TEXTURE type, jeti::TextureOb* texOb)
 {
-    textureOb_total_vec.push_back(texOb);
+    auto it = m_Textures_map.find(texOb->id());
+    if (it != m_Textures_map.end()) {
+        throw std::runtime_error("texture id is already exist");
+    }
+
+//    auto it = m_Textures_map.find(texOb->id());
+//    if (it != m_Textures_map.end()) {
+//        throw std::runtime_error("texture id is already exist");
+//    }
+
+    //textureOb_total_vec.push_back(texOb);
 /*
     switch(texOb->GetAssociation().type_id)
     {
@@ -109,7 +119,14 @@ void TextureManager::Add(jeti::TextureOb* texOb)
     {
 //        switch(texOb->GetAssociation().race_id)
 //        {
-//        case TYPE::RACE::R0_ID: { face_race0_texOb_vec.push_back(texOb); break; }
+//        case TYPE::RACE::R0_ID: { face_rac//    for (unsigned int i = 0; i<textureOb_total_vec.size(); i++)
+//    {
+//        if (textureOb_total_vec[i]->GetMaterial().texture_path == path)
+//        {
+//            requested_texOb = textureOb_total_vec[i];
+//            break;
+//        }
+//    }e0_texOb_vec.push_back(texOb); break; }
 //        case TYPE::RACE::R1_ID: { face_race1_texOb_vec.push_back(texOb); break; }
 //        case TYPE::RACE::R2_ID: { face_race2_texOb_vec.push_back(texOb); break; }
 //        case TYPE::RACE::R3_ID: { face_race3_texOb_vec.push_back(texOb); break; }
@@ -192,18 +209,26 @@ jeti::TextureOb* TextureManager::_GetShipTexObBySizeFromVec(const std::vector<je
 jeti::TextureOb* TextureManager::GetRandomFaceTexObWithFolloingAttributes(TYPE::RACE race_id)
 {
     jeti::TextureOb* requested_texOb = nullptr;
-    switch(race_id)
-    {
-        case TYPE::RACE::R0_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race0_texOb_vec); break; }
-        case TYPE::RACE::R1_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race1_texOb_vec); break; }
-        case TYPE::RACE::R2_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race2_texOb_vec); break; }
-        case TYPE::RACE::R3_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race3_texOb_vec); break; }
-        case TYPE::RACE::R4_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race4_texOb_vec); break; }
+//    switch(race_id)
+//    {
+//        case TYPE::RACE::R0_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race0_texOb_vec); break; }
+//        case TYPE::RACE::R1_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race1_texOb_vec); break; }
+//        case TYPE::RACE::R2_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race2_texOb_vec); break; }
+//        case TYPE::RACE::R3_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race3_texOb_vec); break; }
+//        case TYPE::RACE::R4_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race4_texOb_vec); break; }
 
-        case TYPE::RACE::R6_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race6_texOb_vec); break; }
-        case TYPE::RACE::R7_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race7_texOb_vec); break; }
-    }
+//        case TYPE::RACE::R6_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race6_texOb_vec); break; }
+//        case TYPE::RACE::R7_ID: { requested_texOb = _GetRandomTextureObFromVec(face_race7_texOb_vec); break; }
+//    }
     
+    //    for (unsigned int i = 0; i<textureOb_total_vec.size(); i++)
+           //    {
+           //        if (textureOb_total_vec[i]->GetMaterial().texture_path == path)
+           //        {
+           //            requested_texOb = textureOb_total_vec[i];
+           //            break;
+           //        }
+           //    }
     assert(requested_texOb);
     return requested_texOb;
 }
@@ -212,16 +237,24 @@ jeti::TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE:
 {
     jeti::TextureOb* requested_texOb  = nullptr;
 
-    switch(subtype_id)
-    {
-    case TYPE::ENTITY::RANGER_ID:   { requested_texOb = _GetShipTexObByClosestSizeFromVec(ship_ranger_texOb_vec[static_cast<int>(race_id)], size_id);   break; }
-    case TYPE::ENTITY::WARRIOR_ID:  { requested_texOb = _GetShipTexObByClosestSizeFromVec(ship_warrior_texOb_vec[static_cast<int>(race_id)], size_id);  break; }
-    case TYPE::ENTITY::TRADER_ID:   { requested_texOb = _GetShipTexObByClosestSizeFromVec(ship_trader_texOb_vec[static_cast<int>(race_id)], size_id);   break; }
-    case TYPE::ENTITY::PIRAT_ID:    { requested_texOb = _GetShipTexObByClosestSizeFromVec(ship_pirat_texOb_vec[static_cast<int>(race_id)], size_id);    break; }
-    case TYPE::ENTITY::DIPLOMAT_ID: { requested_texOb = _GetShipTexObByClosestSizeFromVec(ship_diplomat_texOb_vec[static_cast<int>(race_id)], size_id); break; }
-    default:                        { std::cout<<"request wrong="<<getStr(subtype_id)<<std::endl; }
-    }
+//    switch(subtype_id)
+//    {
+//    case TYPE::ENTITY::RANGER_ID:   { requested_texOb = _GetShipTexObByClosestSizeFromVec(ship_ranger_texOb_vec[static_cast<int>(race_id)], size_id);   break; }
+//    case TYPE::ENTITY::WARRIOR_ID:  { requested_texOb = _GetShipTexObByClosestSizeFromVec(ship_warrior_texOb_vec[static_cast<int>(race_id)], size_id);  break; }
+//    case TYPE::ENTITY::TRADER_ID:   { requested_texOb = _GetShipTexObByClosestSizeFromVec(ship_trader_texOb_vec[static_cast<int>(race_id)], size_id);   break; }
+//    case TYPE::ENTITY::PIRAT_ID:    { requested_texOb = _GetShipTexObByClosestSizeFromVec(ship_pirat_texOb_vec[static_cast<int>(race_id)], size_id);    break; }
+//    case TYPE::ENTITY::DIPLOMAT_ID: { requested_texOb = _GetShipTexObByClosestSizeFromVec(ship_diplomat_texOb_vec[static_cast<int>(race_id)], size_id); break; }
+//    default:                        { std::cout<<"request wrong="<<getStr(subtype_id)<<std::endl; }
+//    }
 
+    //    for (unsigned int i = 0; i<textureOb_total_vec.size(); i++)
+           //    {
+           //        if (textureOb_total_vec[i]->GetMaterial().texture_path == path)
+           //        {
+           //            requested_texOb = textureOb_total_vec[i];
+           //            break;
+           //        }
+           //    }
     assert(requested_texOb);
     return requested_texOb;
 }
@@ -231,12 +264,12 @@ jeti::TextureOb* TextureManager::GetTexObByColorId(TYPE::TEXTURE _type_id, int _
     jeti::TextureOb* requested_texOb = nullptr;
     std::vector<jeti::TextureOb*>* requested_vec = nullptr;
     
-    switch(_type_id)
-    {
-    case TYPE::TEXTURE::PARTICLE_EFFECT_ID:    { requested_vec = &particles_texOb_vec;      break; }
-    case TYPE::TEXTURE::DISTANTSTAR_ID:          { requested_vec = &starBgEffect_texOb_vec;   break; }
-    case TYPE::TEXTURE::NEBULA_BACKGROUND_ID:  { requested_vec = &nebulaBgEffect_texOb_vec; break; }
-    }
+//    switch(_type_id)
+//    {
+//    case TYPE::TEXTURE::PARTICLE_EFFECT_ID:    { requested_vec = &particles_texOb_vec;      break; }
+//    case TYPE::TEXTURE::DISTANTSTAR_ID:          { requested_vec = &starBgEffect_texOb_vec;   break; }
+//    case TYPE::TEXTURE::NEBULA_BACKGROUND_ID:  { requested_vec = &nebulaBgEffect_texOb_vec; break; }
+//    }
     
     for(unsigned int i=0; i<requested_vec->size(); i++)
     {
@@ -255,49 +288,49 @@ jeti::TextureOb* TextureManager::GetRandomTextureOb(TYPE::TEXTURE texture_type_i
     jeti::TextureOb* requested_texOb = nullptr;
     switch(texture_type_id)
     {
-        case TYPE::TEXTURE::SPACESTATION_ID:     { requested_texOb = _GetRandomTextureObFromVec(spacestation_texOb_vec);             break; }
-        case TYPE::TEXTURE::SATELLITE_ID:        { requested_texOb = _GetRandomTextureObFromVec(satellite_texOb_vec);            break; }
+//        case TYPE::TEXTURE::SPACESTATION_ID:     { requested_texOb = _GetRandomTextureObFromVec(spacestation_texOb_vec);             break; }
+//        case TYPE::TEXTURE::SATELLITE_ID:        { requested_texOb = _GetRandomTextureObFromVec(satellite_texOb_vec);            break; }
                     
-        case TYPE::TEXTURE::ITEM_SLOT_ID:         { requested_texOb = _GetRandomTextureObFromVec(itemslot_texOb_vec);             break; }
-        case TYPE::TEXTURE::VEHICLE_SLOT_ID:      { requested_texOb = _GetRandomTextureObFromVec(vehicleslot_texOb_vec);          break; }
-        case TYPE::TEXTURE::CONTAINER_ID:        { requested_texOb = _GetRandomTextureObFromVec(container_texOb_vec);            break; }
-        case TYPE::TEXTURE::STAR_ID:             { requested_texOb = _GetRandomTextureObFromVec(star_texOb_vec);                 break; }
-        case TYPE::TEXTURE::PLANET_ID:           { requested_texOb = _GetRandomTextureObFromVec(planet_texOb_vec);               break; }
-        case TYPE::TEXTURE::ATMOSPHERE_ID:       { requested_texOb = _GetRandomTextureObFromVec(atmosphere_texOb_vec);           break; }
-        case TYPE::TEXTURE::RING_ID:       { requested_texOb = _GetRandomTextureObFromVec(ring_texOb_vec);           break; }
-        case TYPE::TEXTURE::ASTEROID_ID:         { requested_texOb = _GetRandomTextureObFromVec(asteroid_texOb_vec);             break; }
-        case TYPE::TEXTURE::MINERAL_ID:          { requested_texOb = _GetRandomTextureObFromVec(mineral_texOb_vec);              break; }
-        case TYPE::TEXTURE::BOMB_ID:             { requested_texOb = _GetRandomTextureObFromVec(bomb_texOb_vec);                 break; }
-        case TYPE::TEXTURE::BLACKHOLE_ID:        { requested_texOb = _GetRandomTextureObFromVec(blackhole_texOb_vec);            break; }
-        case TYPE::TEXTURE::ROCKET_BULLET_ID:    { requested_texOb = _GetRandomTextureObFromVec(rocketBullet_texOb_vec);         break; }
+//        case TYPE::TEXTURE::ITEM_SLOT_ID:         { requested_texOb = _GetRandomTextureObFromVec(itemslot_texOb_vec);             break; }
+//        case TYPE::TEXTURE::VEHICLE_SLOT_ID:      { requested_texOb = _GetRandomTextureObFromVec(vehicleslot_texOb_vec);          break; }
+//        case TYPE::TEXTURE::CONTAINER_ID:        { requested_texOb = _GetRandomTextureObFromVec(container_texOb_vec);            break; }
+//        case TYPE::TEXTURE::STAR_ID:             { requested_texOb = _GetRandomTextureObFromVec(star_texOb_vec);                 break; }
+//        case TYPE::TEXTURE::PLANET_ID:           { requested_texOb = _GetRandomTextureObFromVec(planet_texOb_vec);               break; }
+//        case TYPE::TEXTURE::ATMOSPHERE_ID:       { requested_texOb = _GetRandomTextureObFromVec(atmosphere_texOb_vec);           break; }
+//        case TYPE::TEXTURE::RING_ID:       { requested_texOb = _GetRandomTextureObFromVec(ring_texOb_vec);           break; }
+//        case TYPE::TEXTURE::ASTEROID_ID:         { requested_texOb = _GetRandomTextureObFromVec(asteroid_texOb_vec);             break; }
+//        case TYPE::TEXTURE::MINERAL_ID:          { requested_texOb = _GetRandomTextureObFromVec(mineral_texOb_vec);              break; }
+//        case TYPE::TEXTURE::BOMB_ID:             { requested_texOb = _GetRandomTextureObFromVec(bomb_texOb_vec);                 break; }
+//        case TYPE::TEXTURE::BLACKHOLE_ID:        { requested_texOb = _GetRandomTextureObFromVec(blackhole_texOb_vec);            break; }
+//        case TYPE::TEXTURE::ROCKET_BULLET_ID:    { requested_texOb = _GetRandomTextureObFromVec(rocketBullet_texOb_vec);         break; }
 
-        case TYPE::TEXTURE::ROCKET_EQUIPMENT_ID:      { requested_texOb = _GetRandomTextureObFromVec(rocketEquipment_texOb_vec);      break; }
-        case TYPE::TEXTURE::LAZER_EQUIPMENT_ID:       { requested_texOb = _GetRandomTextureObFromVec(lazerEquipment_texOb_vec);       break; }
-        case TYPE::TEXTURE::RADAR_EQUIPMENT_ID:       { requested_texOb = _GetRandomTextureObFromVec(radarEquipment_texOb_vec);       break; }
-        case TYPE::TEXTURE::DRIVE_EQUIPMENT_ID:       { requested_texOb = _GetRandomTextureObFromVec(driveEquipment_texOb_vec);       break; }
-        case TYPE::TEXTURE::BAK_EQUIPMENT_ID:         { requested_texOb = _GetRandomTextureObFromVec(bakEquipment_texOb_vec);         break; }
-        case TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID: { requested_texOb = _GetRandomTextureObFromVec(energyBlockEquipment_texOb_vec); break; }
-        case TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID:   { requested_texOb = _GetRandomTextureObFromVec(protectorEquipment_texOb_vec);   break; }
-        case TYPE::TEXTURE::DROID_EQUIPMENT_ID:       { requested_texOb = _GetRandomTextureObFromVec(droidEquipment_texOb_vec);       break; }
-        case TYPE::TEXTURE::FREEZER_EQUIPMENT_ID:     { requested_texOb = _GetRandomTextureObFromVec(freezerEquipment_texOb_vec);     break; }
-        case TYPE::TEXTURE::SCANER_EQUIPMENT_ID:      { requested_texOb = _GetRandomTextureObFromVec(scanerEquipment_texOb_vec);      break; }
-        case TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID:     { requested_texOb = _GetRandomTextureObFromVec(grappleEquipment_texOb_vec);     break; }
+//        case TYPE::TEXTURE::ROCKET_EQUIPMENT_ID:      { requested_texOb = _GetRandomTextureObFromVec(rocketEquipment_texOb_vec);      break; }
+//        case TYPE::TEXTURE::LAZER_EQUIPMENT_ID:       { requested_texOb = _GetRandomTextureObFromVec(lazerEquipment_texOb_vec);       break; }
+//        case TYPE::TEXTURE::RADAR_EQUIPMENT_ID:       { requested_texOb = _GetRandomTextureObFromVec(radarEquipment_texOb_vec);       break; }
+//        case TYPE::TEXTURE::DRIVE_EQUIPMENT_ID:       { requested_texOb = _GetRandomTextureObFromVec(driveEquipment_texOb_vec);       break; }
+//        case TYPE::TEXTURE::BAK_EQUIPMENT_ID:         { requested_texOb = _GetRandomTextureObFromVec(bakEquipment_texOb_vec);         break; }
+//        case TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID: { requested_texOb = _GetRandomTextureObFromVec(energyBlockEquipment_texOb_vec); break; }
+//        case TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID:   { requested_texOb = _GetRandomTextureObFromVec(protectorEquipment_texOb_vec);   break; }
+//        case TYPE::TEXTURE::DROID_EQUIPMENT_ID:       { requested_texOb = _GetRandomTextureObFromVec(droidEquipment_texOb_vec);       break; }
+//        case TYPE::TEXTURE::FREEZER_EQUIPMENT_ID:     { requested_texOb = _GetRandomTextureObFromVec(freezerEquipment_texOb_vec);     break; }
+//        case TYPE::TEXTURE::SCANER_EQUIPMENT_ID:      { requested_texOb = _GetRandomTextureObFromVec(scanerEquipment_texOb_vec);      break; }
+//        case TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID:     { requested_texOb = _GetRandomTextureObFromVec(grappleEquipment_texOb_vec);     break; }
 
-        case TYPE::TEXTURE::MODULE_ID: { requested_texOb = _GetRandomTextureObFromVec(module_texOb_vec);     break; }
+//        case TYPE::TEXTURE::MODULE_ID: { requested_texOb = _GetRandomTextureObFromVec(module_texOb_vec);     break; }
                                                                                 
-        case TYPE::TEXTURE::TURREL_ID:           { requested_texOb = _GetRandomTextureObFromVec(turrel_texOb_vec);               break; }
-        case TYPE::TEXTURE::LAZER_EFFECT_ID:     { requested_texOb = _GetRandomTextureObFromVec(lazerEffect_texOb_vec);          break; }
+//        case TYPE::TEXTURE::TURREL_ID:           { requested_texOb = _GetRandomTextureObFromVec(turrel_texOb_vec);               break; }
+//        case TYPE::TEXTURE::LAZER_EFFECT_ID:     { requested_texOb = _GetRandomTextureObFromVec(lazerEffect_texOb_vec);          break; }
         
-        case TYPE::TEXTURE::NATURELAND_BACKGROUND_ID: { requested_texOb = _GetRandomTextureObFromVec(landBg_texOb_vec); break; }
+//        case TYPE::TEXTURE::NATURELAND_BACKGROUND_ID: { requested_texOb = _GetRandomTextureObFromVec(landBg_texOb_vec); break; }
                             
-        case TYPE::TEXTURE::ANGAR_BACKGROUND_ID:         { requested_texOb = _GetRandomTextureObFromVec(angarBg_texOb_vec);              break; }
-        case TYPE::TEXTURE::STORE_BACKGROUND_ID:         { requested_texOb = _GetRandomTextureObFromVec(storeBg_texOb_vec);              break; }
-        case TYPE::TEXTURE::SHOP_BACKGROUND_ID:          { requested_texOb = _GetRandomTextureObFromVec(shopBg_texOb_vec);               break; }
-        case TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID:     { requested_texOb = _GetRandomTextureObFromVec(govermentBg_texOb_vec);          break; }
+//        case TYPE::TEXTURE::ANGAR_BACKGROUND_ID:         { requested_texOb = _GetRandomTextureObFromVec(angarBg_texOb_vec);              break; }
+//        case TYPE::TEXTURE::STORE_BACKGROUND_ID:         { requested_texOb = _GetRandomTextureObFromVec(storeBg_texOb_vec);              break; }
+//        case TYPE::TEXTURE::SHOP_BACKGROUND_ID:          { requested_texOb = _GetRandomTextureObFromVec(shopBg_texOb_vec);               break; }
+//        case TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID:     { requested_texOb = _GetRandomTextureObFromVec(govermentBg_texOb_vec);          break; }
 
-        case TYPE::TEXTURE::SHIELD_EFFECT_ID:    { requested_texOb = _GetRandomTextureObFromVec(shieldEffect_texOb_vec);         break; }
-        case TYPE::TEXTURE::NEBULA_BACKGROUND_ID:           { requested_texOb = _GetRandomTextureObFromVec(nebulaBgEffect_texOb_vec);       break; }
-        case TYPE::TEXTURE::DISTANTSTAR_ID:      { requested_texOb = _GetRandomTextureObFromVec(starBgEffect_texOb_vec);         break; }
+//        case TYPE::TEXTURE::SHIELD_EFFECT_ID:    { requested_texOb = _GetRandomTextureObFromVec(shieldEffect_texOb_vec);         break; }
+//        case TYPE::TEXTURE::NEBULA_BACKGROUND_ID:           { requested_texOb = _GetRandomTextureObFromVec(nebulaBgEffect_texOb_vec);       break; }
+//        case TYPE::TEXTURE::DISTANTSTAR_ID:      { requested_texOb = _GetRandomTextureObFromVec(starBgEffect_texOb_vec);         break; }
                 
     }
 
@@ -307,60 +340,60 @@ jeti::TextureOb* TextureManager::GetRandomTextureOb(TYPE::TEXTURE texture_type_i
         
 void TextureManager::FillShipSubTypeList()
 {
-    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R0_ID)].size() != 0)   RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
-    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R0_ID)].size() != 0)  RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
-    if (ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::R0_ID)].size() != 0)   RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
-    if (ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::R0_ID)].size() != 0)    RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
-    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R0_ID)].size() != 0) RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
+//    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R0_ID)].size() != 0)   RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
+//    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R0_ID)].size() != 0)  RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
+//    if (ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::R0_ID)].size() != 0)   RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
+//    if (ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::R0_ID)].size() != 0)    RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
+//    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R0_ID)].size() != 0) RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
 
-    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R1_ID)].size() != 0)   RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
-    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R1_ID)].size() != 0)  RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
-    if (ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::R1_ID)].size() != 0)   RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
-    if (ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::R1_ID)].size() != 0)    RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
-    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R1_ID)].size() != 0) RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
+//    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R1_ID)].size() != 0)   RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
+//    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R1_ID)].size() != 0)  RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
+//    if (ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::R1_ID)].size() != 0)   RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
+//    if (ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::R1_ID)].size() != 0)    RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
+//    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R1_ID)].size() != 0) RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
 
-    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R2_ID)].size() != 0)   RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
-    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R2_ID)].size() != 0)  RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
-    if (ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::R2_ID)].size() != 0)   RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
-    if (ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::R2_ID)].size() != 0)    RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
-    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R2_ID)].size() != 0) RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
+//    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R2_ID)].size() != 0)   RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
+//    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R2_ID)].size() != 0)  RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
+//    if (ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::R2_ID)].size() != 0)   RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
+//    if (ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::R2_ID)].size() != 0)    RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
+//    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R2_ID)].size() != 0) RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
  
-    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R3_ID)].size() != 0)   RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
-    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R3_ID)].size() != 0)  RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
-    if (ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::R3_ID)].size() != 0)   RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
-    if (ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::R3_ID)].size() != 0)    RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
-    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R3_ID)].size() != 0) RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
+//    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R3_ID)].size() != 0)   RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
+//    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R3_ID)].size() != 0)  RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
+//    if (ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::R3_ID)].size() != 0)   RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
+//    if (ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::R3_ID)].size() != 0)    RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
+//    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R3_ID)].size() != 0) RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
 
-    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R4_ID)].size() != 0)   RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
-    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R4_ID)].size() != 0)  RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
-    if (ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::R4_ID)].size() != 0)   RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
-    if (ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::R4_ID)].size() != 0)    RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
-    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R4_ID)].size() != 0) RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
+//    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R4_ID)].size() != 0)   RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
+//    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R4_ID)].size() != 0)  RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
+//    if (ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::R4_ID)].size() != 0)   RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
+//    if (ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::R4_ID)].size() != 0)    RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
+//    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R4_ID)].size() != 0) RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
 
-    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R6_ID)].size() != 0)   RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
-    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R6_ID)].size() != 0)  RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
-    if (ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::R6_ID)].size() != 0)   RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
-    if (ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::R6_ID)].size() != 0)    RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
-    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R6_ID)].size() != 0) RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
+//    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R6_ID)].size() != 0)   RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
+//    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R6_ID)].size() != 0)  RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
+//    if (ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::R6_ID)].size() != 0)   RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
+//    if (ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::R6_ID)].size() != 0)    RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
+//    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R6_ID)].size() != 0) RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
 
-    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R7_ID)].size() != 0)   RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
-    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R7_ID)].size() != 0)  RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
-    if (ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::R7_ID)].size() != 0)   RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
-    if (ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::R7_ID)].size() != 0)    RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
-    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R7_ID)].size() != 0) RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
+//    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R7_ID)].size() != 0)   RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
+//    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R7_ID)].size() != 0)  RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
+//    if (ship_trader_texOb_vec[static_cast<int>(TYPE::RACE::R7_ID)].size() != 0)   RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
+//    if (ship_pirat_texOb_vec[static_cast<int>(TYPE::RACE::R7_ID)].size() != 0)    RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
+//    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R7_ID)].size() != 0) RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
 }
 
 jeti::TextureOb* TextureManager::GetTextureObByPath(const std::string& path)
 {
     jeti::TextureOb* requested_texOb = nullptr;
-    for (unsigned int i = 0; i<textureOb_total_vec.size(); i++)
-    {
-        if (textureOb_total_vec[i]->GetMaterial().texture_path == path)
-        {
-            requested_texOb = textureOb_total_vec[i];
-            break;
-        }
-    }
+//    for (unsigned int i = 0; i<textureOb_total_vec.size(); i++)
+//    {
+//        if (textureOb_total_vec[i]->GetMaterial().texture_path == path)
+//        {
+//            requested_texOb = textureOb_total_vec[i];
+//            break;
+//        }
+//    }
     
     assert(requested_texOb);
     return requested_texOb;

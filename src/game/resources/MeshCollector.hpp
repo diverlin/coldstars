@@ -31,7 +31,7 @@ class MeshCollector
     public:
         static MeshCollector& Instance();
         
-        void addMesh(const MeshDescriptor&, jeti::Mesh*);
+        void add(const MeshDescriptor&, jeti::Mesh*);
         jeti::Mesh* getMesh(int) const;
         jeti::Mesh* getMesh(TYPE::MESH) const;
 
