@@ -30,17 +30,17 @@
 
 struct TextureDescriptor
 {
-    TYPE::TEXTURE type_id;
-    TYPE::ENTITY subtype_id;   //# warrior/trader and so on
-    TYPE::RACE race_id;
-    TYPE::TECHLEVEL tech_level_id;
+    TYPE::TEXTURE type;
+    TYPE::ENTITY subtype;   //# warrior/trader and so on
+    TYPE::RACE race;
+    TYPE::TECHLEVEL tech_level;
 
     TextureDescriptor()
     :
-    type_id(TYPE::TEXTURE::NONE_ID),
-    subtype_id(TYPE::ENTITY::NONE_ID),
-    race_id(TYPE::RACE::NONE_ID),
-    tech_level_id(TYPE::TECHLEVEL::NONE_ID)
+    type(TYPE::TEXTURE::NONE_ID),
+    subtype(TYPE::ENTITY::NONE_ID),
+    race(TYPE::RACE::NONE_ID),
+    tech_level(TYPE::TECHLEVEL::NONE_ID)
     {}
 };
 

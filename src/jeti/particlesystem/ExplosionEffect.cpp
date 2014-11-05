@@ -27,7 +27,7 @@ m_Radius(radius)
 {
     //m_TypeId = EFFECT::EXPLOSION_ID;
     
-//    m_TextureOb = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
+//    m_TextureOb = TextureCollector::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
 //    m_ParticlesNum = 1000;
     
 //    int size_id = CONVERTER::SIZE2SIZEID.GetEquivalent(m_Radius);
@@ -67,7 +67,7 @@ m_Radius(radius)
         //particles_num = 40;
         //data_particle.size_start  = 50 * size_id;
         
-        //texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
+        //texOb_particle = TextureCollector::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
         
         //ExplosionEffect* explosion_slice = new ExplosionEffect();
         //explosion_slice->SetTextureOb(texOb_particle);
@@ -83,7 +83,7 @@ m_Radius(radius)
         //particles_num = 50;
         //data_particle.size_start  = 40 * size_id;
         
-        //texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::YELLOW_ID);
+        //texOb_particle = TextureCollector::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::YELLOW_ID);
         
         //ExplosionEffect* explosion_slice = new ExplosionEffect();
         //explosion_slice->SetTextureOb(texOb_particle);
@@ -99,7 +99,7 @@ m_Radius(radius)
         //particles_num = 60;                              
         //data_particle.size_start  = 30 * size_id;
         
-        //texOb_particle = TextureManager::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
+        //texOb_particle = TextureCollector::Instance().GetTexObByColorId(TYPE::TEXTURE::PARTICLE_EFFECT_ID, COLOR::RED_ID);
         
         //ExplosionEffect* explosion_slice = new ExplosionEffect();
         //explosion_slice->SetTextureOb(texOb_particle);

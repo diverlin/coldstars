@@ -16,23 +16,22 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef COMMONBUILDERHEADERS_HPP
-#define COMMONBUILDERHEADERS_HPP
+#pragma once
 
-#include <types/MeshTypes.hpp>
+#include "MeshTypes.hpp"
 
-#include <common/common.hpp>
-#include <math/rand.hpp>
-#include <common/IdGenerator.hpp>
-#include <common/Logger.hpp>
+std::string getTypeStr(TYPE::MESH type)
+{
+    switch(type)
+    {
+        case TYPE::MESH::NONE_ID:             { return "NONE_ID"; break; }
 
-#include <resources/TextureCollector.hpp>
-#include <jeti/TextureOb.hpp>
-#include <resources/MeshCollector.hpp>
+        case TYPE::MESH::PLANE_ID:            { return "PLANE_ID"; break; }
+        case TYPE::MESH::SPHERE_ID:           { return "SPHERE_ID"; break; }
+        case TYPE::MESH::SPHERE_DEFORMED_ID:  { return "SPHERE_DEFORMED_ID"; break; }
+        case TYPE::MESH::SPACESTATION_ID:     { return "SPACESTATION_ID"; break; }
 
-#include <world/EntityManager.hpp>
+        default: { return "UKNOWN MESH TYPE"; break; }
+    }
+}
 
-#include <jeti/animations/AnimationConstantRotation.hpp>
-#include <jeti/animations/AnimationWiggle.hpp>
-
-#endif    

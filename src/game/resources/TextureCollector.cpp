@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "TextureManager.hpp"
+#include "TextureCollector.hpp"
 
 #include <types/TextureTypes.hpp>
 #include <types/RaceTypes.hpp>
@@ -30,13 +30,13 @@
 #include <jeti/TextureOb.hpp>
 
 
-TextureManager& TextureManager::Instance()
+TextureCollector& TextureCollector::Instance()
 {
-    static TextureManager instance;
+    static TextureCollector instance;
     return instance;
 }
 
-void TextureManager::add(jeti::TextureOb* textureOb, const TextureDescriptor& descriptor)
+void TextureCollector::add(jeti::TextureOb* textureOb, const TextureDescriptor& descriptor)
 {
     if (isAbsent(textureOb)) {
         m_Textures_map.insert(std::make_pair(textureOb->id(), textureOb));
@@ -45,9 +45,9 @@ void TextureManager::add(jeti::TextureOb* textureOb, const TextureDescriptor& de
         throw std::runtime_error("texture id is already exist");
     }
 
-    auto it = m_TexturesGroup_map.find(descriptor.type_id);
+    auto it = m_TexturesGroup_map.find(descriptor.type);
     if (it != m_TexturesGroup_map.end()) {
-        m_TexturesGroup_map.insert(std::make_pair(descriptor.type_id, std::vector<jeti::TextureOb*> { textureOb }));
+        m_TexturesGroup_map.insert(std::make_pair(descriptor.type, std::vector<jeti::TextureOb*> { textureOb }));
     } else {
         it->second.push_back(textureOb);
     }
@@ -55,7 +55,7 @@ void TextureManager::add(jeti::TextureOb* textureOb, const TextureDescriptor& de
     m_Descriptors_map.insert(std::make_pair(textureOb->id(), descriptor));
 }
 
-bool TextureManager::isAbsent(jeti::TextureOb* texOb) const
+bool TextureCollector::isAbsent(jeti::TextureOb* texOb) const
 {
     auto it = m_Textures_map.find(texOb->id());
     if (it != m_Textures_map.end()) {
@@ -65,7 +65,7 @@ bool TextureManager::isAbsent(jeti::TextureOb* texOb) const
     }
 }
 
-jeti::TextureOb* TextureManager::_GetRandomTextureObFromVec(const std::vector<jeti::TextureOb*>& textureOb_vec)
+jeti::TextureOb* TextureCollector::_GetRandomTextureObFromVec(const std::vector<jeti::TextureOb*>& textureOb_vec)
 {
     jeti::TextureOb* requested_texOb = nullptr;
 
@@ -81,7 +81,7 @@ jeti::TextureOb* TextureManager::_GetRandomTextureObFromVec(const std::vector<je
     return requested_texOb;
 }
 
-jeti::TextureOb* TextureManager::_GetShipTexObByClosestSizeFromVec(const std::vector<jeti::TextureOb*>& textureOb_vec, int size_id)
+jeti::TextureOb* TextureCollector::_GetShipTexObByClosestSizeFromVec(const std::vector<jeti::TextureOb*>& textureOb_vec, int size_id)
 {  
     jeti::TextureOb* requested_texOb = _TryGetShipTexObBySizeFromVec(textureOb_vec, size_id);
     int sign_base = -1;
@@ -105,7 +105,7 @@ jeti::TextureOb* TextureManager::_GetShipTexObByClosestSizeFromVec(const std::ve
 }
 
 
-jeti::TextureOb* TextureManager::_TryGetShipTexObBySizeFromVec(const std::vector<jeti::TextureOb*>& textureOb_vec, int size_id)
+jeti::TextureOb* TextureCollector::_TryGetShipTexObBySizeFromVec(const std::vector<jeti::TextureOb*>& textureOb_vec, int size_id)
 {  
     jeti::TextureOb* requested_texOb  = nullptr;
     for (unsigned int i=0; i<textureOb_vec.size(); i++)
@@ -119,7 +119,7 @@ jeti::TextureOb* TextureManager::_TryGetShipTexObBySizeFromVec(const std::vector
     return requested_texOb;
 }
 
-jeti::TextureOb* TextureManager::_GetShipTexObBySizeFromVec(const std::vector<jeti::TextureOb*>& textureOb_vec, int size_id)
+jeti::TextureOb* TextureCollector::_GetShipTexObBySizeFromVec(const std::vector<jeti::TextureOb*>& textureOb_vec, int size_id)
 {
     jeti::TextureOb* requested_texOb  = _TryGetShipTexObBySizeFromVec(textureOb_vec, size_id);
 //    if (FALSE_RESOURCES) {
@@ -129,7 +129,7 @@ jeti::TextureOb* TextureManager::_GetShipTexObBySizeFromVec(const std::vector<je
     return requested_texOb;
 }
 
-jeti::TextureOb* TextureManager::GetRandomFaceTexObWithFolloingAttributes(TYPE::RACE race_id)
+jeti::TextureOb* TextureCollector::GetRandomFaceTexObWithFolloingAttributes(TYPE::RACE race_id)
 {
     jeti::TextureOb* requested_texOb = nullptr;
 //    switch(race_id)
@@ -156,7 +156,7 @@ jeti::TextureOb* TextureManager::GetRandomFaceTexObWithFolloingAttributes(TYPE::
     return requested_texOb;
 }
 
-jeti::TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE race_id, TYPE::ENTITY subtype_id, int size_id)
+jeti::TextureOb* TextureCollector::GetRandomShipTexObWithFollowingAtrributes(TYPE::RACE race_id, TYPE::ENTITY subtype_id, int size_id)
 {
     jeti::TextureOb* requested_texOb  = nullptr;
 
@@ -182,7 +182,7 @@ jeti::TextureOb* TextureManager::GetRandomShipTexObWithFollowingAtrributes(TYPE:
     return requested_texOb;
 }
 
-jeti::TextureOb* TextureManager::GetTexObByColorId(TYPE::TEXTURE _type_id, int _color_id)
+jeti::TextureOb* TextureCollector::GetTexObByColorId(TYPE::TEXTURE _type_id, int _color_id)
 {
     jeti::TextureOb* requested_texOb = nullptr;
     std::vector<jeti::TextureOb*>* requested_vec = nullptr;
@@ -206,7 +206,7 @@ jeti::TextureOb* TextureManager::GetTexObByColorId(TYPE::TEXTURE _type_id, int _
     return requested_texOb;
 }
                 
-jeti::TextureOb* TextureManager::GetRandomTextureOb(TYPE::TEXTURE texture_type_id)
+jeti::TextureOb* TextureCollector::GetRandomTextureOb(TYPE::TEXTURE texture_type_id)
 {
     jeti::TextureOb* requested_texOb = nullptr;
     switch(texture_type_id)
@@ -261,7 +261,7 @@ jeti::TextureOb* TextureManager::GetRandomTextureOb(TYPE::TEXTURE texture_type_i
     return requested_texOb;
 }
         
-void TextureManager::FillShipSubTypeList()
+void TextureCollector::FillShipSubTypeList()
 {
 //    if (ship_ranger_texOb_vec[static_cast<int>(TYPE::RACE::R0_ID)].size() != 0)   RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::RANGER_ID);
 //    if (ship_warrior_texOb_vec[static_cast<int>(TYPE::RACE::R0_ID)].size() != 0)  RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
@@ -306,7 +306,7 @@ void TextureManager::FillShipSubTypeList()
 //    if (ship_diplomat_texOb_vec[static_cast<int>(TYPE::RACE::R7_ID)].size() != 0) RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
 }
 
-jeti::TextureOb* TextureManager::GetTextureObByPath(const std::string& path)
+jeti::TextureOb* TextureCollector::GetTextureObByPath(const std::string& path)
 {
     jeti::TextureOb* requested_texOb = nullptr;
 //    for (unsigned int i = 0; i<textureOb_total_vec.size(); i++)

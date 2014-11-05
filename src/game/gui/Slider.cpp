@@ -25,7 +25,7 @@
 #include "../gui/ButtonTrigger.hpp"
 #include "../gui/MouseData.hpp"
 #include "../pilots/Player.hpp"
-#include "../resources/TextureManager.hpp"
+#include "../resources/TextureCollector.hpp"
 #include <jeti/Screen.hpp>
 
 #include "../items/others/GoodsPack.hpp"
@@ -38,7 +38,7 @@ Slider::Slider()
     //subtype_id = GUI::TYPE::NONE_ID;
     
     textureOb = GuiTextureObCollector::Instance().text_background;
-    textureOb_scale = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID);
+    textureOb_scale = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID);
     
     //BaseButton* slide_button = new BaseButton(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::SLIDE_ID, "slide");  
     //button_map.insert(std::make_pair(GUI::BUTTON::SLIDE_ID, slide_button));

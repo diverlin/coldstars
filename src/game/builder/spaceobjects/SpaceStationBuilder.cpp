@@ -75,7 +75,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     if (getRandInt(0, 1))
     {
         mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-        texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SPACESTATION_ID);
+        texOb = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::SPACESTATION_ID);
         size = texOb->GetSize(); 
     }
     else

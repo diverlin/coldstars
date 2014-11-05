@@ -27,7 +27,7 @@
 
 #include <world/EntityManager.hpp>
 
-#include <resources/TextureManager.hpp>
+#include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
 #include <jeti/TextureOb.hpp>
 
@@ -87,7 +87,7 @@ void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipmen
     }
 
     jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb_item = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);
+    jeti::TextureOb* texOb_item = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
 
     scan_orig       = getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECHLEVEL_RATE * (int)tech_level);

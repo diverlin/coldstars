@@ -33,10 +33,10 @@ namespace jeti {
 class TextureOb;
 }
 
-class TextureManager
+class TextureCollector
 {   
     public:
-        static TextureManager& Instance();
+        static TextureCollector& Instance();
         
         void add(jeti::TextureOb*, const TextureDescriptor&);
         
@@ -52,11 +52,11 @@ class TextureManager
         void FillShipSubTypeList();
 
     private:
-        TextureManager() {};
-        ~TextureManager() {};
+        TextureCollector() {};
+        ~TextureCollector() {};
         
-        TextureManager(TextureManager&) = delete;
-        TextureManager& operator=(TextureManager&) = delete;
+        TextureCollector(TextureCollector&) = delete;
+        TextureCollector& operator=(TextureCollector&) = delete;
         
         std::map<TYPE::TEXTURE, std::vector<jeti::TextureOb*>> m_TexturesGroup_map;
         std::map<int, jeti::TextureOb*> m_Textures_map;

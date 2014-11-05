@@ -17,7 +17,7 @@
 */
 
 #include "BaseBackGroundEffect.hpp"
-#include "../resources/TextureManager.hpp"
+#include "../resources/TextureCollector.hpp"
 #include <jeti/TextureOb.hpp>
 #include <jeti/Render.hpp>
 
@@ -94,6 +94,6 @@ void BaseBackGroundEffect::LoadData(const boost::property_tree::ptree& load_ptre
         
 void BaseBackGroundEffect::ResolveData()
 {
-    m_TextureOb = TextureManager::Instance().GetTextureObByPath(m_TextureObPath);
+    m_TextureOb = TextureCollector::Instance().GetTextureObByPath(m_TextureObPath);
 }
               

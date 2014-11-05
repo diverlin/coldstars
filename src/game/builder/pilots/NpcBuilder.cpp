@@ -22,7 +22,7 @@
 #include <common/Logger.hpp>
 #include <math/rand.hpp>
 
-#include <resources/TextureManager.hpp>
+#include <resources/TextureCollector.hpp>
 
 #include <pilots/Npc.hpp>
 
@@ -78,7 +78,7 @@ void NpcBuilder::CreateNewInternals(Npc* npc, TYPE::RACE race_id, TYPE::ENTITY s
 {        
     //LifeData data_life;
     
-    //TextureOb* texOb_face  = TextureManager::Instance().getRandomFaceTexObWithFolloingAttributes(race_id);
+    //TextureOb* texOb_face  = TextureCollector::Instance().getRandomFaceTexObWithFolloingAttributes(race_id);
         
     npc->SetRaceId(race_id);
     //npc->SetTextureOb(texOb_face);

@@ -21,7 +21,7 @@
 #include "../common/constants.hpp"
 #include "../common/myStr.hpp"
 #include <math/rand.hpp>
-#include "../resources/TextureManager.hpp"
+#include "../resources/TextureCollector.hpp"
 #include <jeti/TextureOb.hpp>
 
 #include "../slots/ItemSlot.hpp"
@@ -180,5 +180,5 @@ void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void NatureLand::ResolveData()
 {
-    textureOb_background = TextureManager::Instance().GetTextureObByPath(data_unresolved_NatureLand.textureOb_background_path);
+    textureOb_background = TextureCollector::Instance().GetTextureObByPath(data_unresolved_NatureLand.textureOb_background_path);
 }

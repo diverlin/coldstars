@@ -22,7 +22,7 @@
 #include "../../../common/IdGenerator.hpp"
 #include "../../../world/EntityManager.hpp"
 
-#include <resources/TextureManager.hpp>
+#include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
 #include <jeti/TextureOb.hpp>
 
@@ -68,7 +68,7 @@ Bomb* BombBuilder::GetNewBomb(int damage, int radius) const
 void BombBuilder::CreateNewInternals(Bomb* bomb, int damage, int radius) const
 {     
     jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::BOMB_ID);
+    jeti::TextureOb* texOb = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::BOMB_ID);
     damage = 300;
     radius = 300;
         

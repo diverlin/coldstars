@@ -24,7 +24,7 @@
 #include "../../common/IdGenerator.hpp"
 #include "../../world/EntityManager.hpp"
 
-#include <resources/TextureManager.hpp>
+#include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
 #include <jeti/TextureOb.hpp>
 
@@ -123,7 +123,7 @@ GoodsPack* GetNewGoodsPack(TYPE::ENTITY subtype_id, INTLONGEST id)
     }
 
     jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb = TextureManager::Instance().GetRandomTextureOb(TYPE::TEXTURE::CONTAINER_ID);
+    jeti::TextureOb* texOb = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::CONTAINER_ID);
     
     GoodsPack* goodsPack = new GoodsPack(id, subtype_id);
     //alpitodorender goodsPack->SetRenderData(mesh, texOb, texOb->GetSize());
