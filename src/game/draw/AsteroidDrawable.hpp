@@ -16,33 +16,17 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
-#include <spaceobjects/BasePlanet.hpp>
+#include <draw/BasePlanetDrawable.hpp>
 
-class Asteroid : public BasePlanet
+class AsteroidDrawable : public BasePlanetDrawable
 {
     public:
-        Asteroid(int);
-        virtual ~Asteroid();
+        AsteroidDrawable(jeti::TextureOb*, jeti::Mesh*);
+        virtual ~AsteroidDrawable() override final;
 
-        int GetDamage() const { return GetMass()*10; };
-
-        void UpdateInSpace(int, bool);            
-        void CollisionEvent(bool);
-
-        virtual void Save(boost::property_tree::ptree&) const override final;
-        virtual void Load(const boost::property_tree::ptree&) override final;
-        virtual void Resolve() override final;
-        
-    private:          
-        void PostDeathUniqueEvent(bool);
-
-        virtual void UpdateInfo() override final;
-        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+    private:
+//        virtual void UpdateInfo() override final;
 }; 
 

@@ -60,6 +60,7 @@
 #include <struct/RaceInformationCollector.hpp>
 
 #include <jeti/Mesh.hpp>
+#include <pilots/Player.hpp>
 
 int StarSystem::counter = 0;
 

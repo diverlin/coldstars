@@ -16,31 +16,33 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef COLLISION_HPP
-#define COLLISION_HPP
+#pragma once
 
 #include <glm/glm.hpp>   
 
 bool checkCollisionDotWithCircle_DIRTY(const glm::vec2& dot, const glm::vec2& center, float radius);
+bool checkCollisionDotWithCircle_DIRTY(const glm::vec3& dot, const glm::vec3& center, float radius);
 bool checkCollisionDotWithRectangle(const glm::vec2& dot, const glm::vec2& center, const glm::vec2& size);
 
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision2D(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 {
-    if (checkCollisionDotWithCircle_DIRTY(vec3ToVec2(agressor->GetCenter()), vec3ToVec2(victim->GetCenter()), victim->GetCollisionRadius()) == true)
-    {
+    if (checkCollisionDotWithCircle_DIRTY(agressor->GetCenter(), victim->GetCenter(), victim->GetCollisionRadius()) == true) {
         victim->Hit(agressor->GetDamage(), show_effect);
-        agressor->CollisionEvent(show_effect);
-        
+        agressor->CollisionEvent(show_effect);        
         return true;
     }
-    else
-    {
-        return false;
-    }
+
+    return false;
 }
 
-#endif 
+bool isPointInObserverRadius(const glm::vec2& p, const glm::vec3& observer_pos, float radius);
+bool isPointInObserverRadius(const glm::vec3& p, const glm::vec3& observer_pos, float radius);
+bool isLineInObserverRadius(const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& observer_pos, float radius);
+
+
+
+
 
 
 

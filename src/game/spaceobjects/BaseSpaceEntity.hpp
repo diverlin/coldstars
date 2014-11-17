@@ -17,8 +17,7 @@
 */
 
 
-#ifndef BASESPACEENTITY_HPP
-#define BASESPACEENTITY_HPP
+#pragma once
 
 #include <common/Orientation.hpp>
 #include <struct/LifeData.hpp>
@@ -118,4 +117,3 @@ class BaseSpaceEntity : public Orientation
     friend class BaseVehicleBuilder;
 };
 
-#endif 

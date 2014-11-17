@@ -16,8 +16,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <cmath>
 #include "Collision.hpp"
+#include <math/myVector.hpp>
 
 bool checkCollisionDotWithCircle_DIRTY(const glm::vec2& dot, const glm::vec2& center, float radius)
 {
@@ -26,6 +26,16 @@ bool checkCollisionDotWithCircle_DIRTY(const glm::vec2& dot, const glm::vec2& ce
     if (std::fabs(dot.y - center.y) > radius)
         return false;
     
+    return true;
+}
+
+bool checkCollisionDotWithCircle_DIRTY(const glm::vec3& dot, const glm::vec3& center, float radius)
+{
+    if (std::fabs(dot.x - center.x) > radius)
+        return false;
+    if (std::fabs(dot.y - center.y) > radius)
+        return false;
+
     return true;
 }
 
@@ -38,4 +48,36 @@ bool checkCollisionDotWithRectangle(const glm::vec2& dot, const glm::vec2& cente
     
     return true;        
 }
+
+bool isPointInObserverRadius(const glm::vec2& p, const glm::vec3& observer_pos, float radius)
+{
+    float dist = distanceBetween(observer_pos, p);
+    if (dist < radius) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool isPointInObserverRadius(const glm::vec3& p, const glm::vec3& observer_pos, float radius)
+{
+    float dist = distanceBetween(observer_pos, p);
+    if (dist < radius) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool isLineInObserverRadius(const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& observer_pos, float radius)
+{
+    if (!isPointInObserverRadius(p1, observer_pos, radius)) {
+        return false;
+    }
+    if (!isPointInObserverRadius(p2, observer_pos, radius)) {
+        return false;
+    }
+    return true;
+}
+
 
