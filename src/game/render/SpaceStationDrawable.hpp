@@ -18,7 +18,7 @@
    
 #pragma once
 
-#include <draw/BaseVehicleDrawable.hpp>
+#include <render/BaseVehicleDrawable.hpp>
    
 class SpaceStationDrawable : public BaseVehicleDrawable
 {
