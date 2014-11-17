@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <draw/BasePlanetDrawable.hpp>
+#include <render/BasePlanetDrawable.hpp>
 
 class ShockWaveEffect;
 

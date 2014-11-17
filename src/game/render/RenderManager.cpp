@@ -26,15 +26,15 @@
 #include <jeti/Screen.hpp>
 
 /// entities
-#include <draw/ShipDrawable.hpp>
-#include <draw/BulletDrawable.hpp>
-#include <draw/ContainerDrawable.hpp>
-#include <draw/StarDrawable.hpp>
-#include <draw/PlanetDrawable.hpp>
-#include <draw/BlackHoleDrawable.hpp>
-#include <draw/AsteroidDrawable.hpp>
-#include <draw/SpaceStationDrawable.hpp>
-#include <draw/SatelliteDrawable.hpp>
+#include <render/ShipDrawable.hpp>
+#include <render/BulletDrawable.hpp>
+#include <render/ContainerDrawable.hpp>
+#include <render/StarDrawable.hpp>
+#include <render/PlanetDrawable.hpp>
+#include <render/BlackHoleDrawable.hpp>
+#include <render/AsteroidDrawable.hpp>
+#include <render/SpaceStationDrawable.hpp>
+#include <render/SatelliteDrawable.hpp>
 
 
 /// effects

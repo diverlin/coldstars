@@ -18,20 +18,39 @@
 
 #pragma once
 
-#include <draw/BaseVehicleDrawable.hpp>
+#include <render/BasePlanetDrawable.hpp>
 
-class SatelliteDrawable : public BaseVehicleDrawable
+class StarDrawable : public BasePlanetDrawable
 {
-    public:  
-        SatelliteDrawable(jeti::TextureOb*, jeti::Mesh*);
-        virtual ~SatelliteDrawable() override final;
-            
-        //virtual void UpdateInSpace(int, bool) override final;
+    public:
+        StarDrawable(jeti::TextureOb*, jeti::Mesh*);
+        virtual ~StarDrawable() final override;
+
+        //alpitodorender
+//        int GetColorId() const;
+//        float GetBrightThreshold() const;
+        float GetDeltaColor() const { return m_DeltaColor; }
         
-        void RenderInSpace(const jeti::Renderer&, float);
-        void RenderAtPlanet(const jeti::Renderer&);
-            
+        void InitiateSpark();
+        
+
+       // alpitodorender void CalcColor(); 
+        void UpdateInSpace(int, bool);
+                
     private:
+        float m_DeltaColor;
+        
+        bool m_SparkActive;
+        bool m_SparkGrows;
+        
+        int m_TurnSinceLastSparkCounter;
+        int m_TurnSparkThreshold;
+        
         //virtual void UpdateInfo() override final;
-        void UpdateRenderStuff();     
-};
+}; 
+
+
+
+        
+
+

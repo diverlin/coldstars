@@ -18,17 +18,20 @@
 
 #pragma once
 
-#include <draw/BaseVehicleDrawable.hpp>
+#include <render/BaseVehicleDrawable.hpp>
 
-class ShipDrawable : public BaseVehicleDrawable
-{   
-    public:
-        ShipDrawable(jeti::TextureOb*, jeti::Mesh*);
-        virtual ~ShipDrawable() override final;
-        
-//        virtual void UpdateInSpace(int, bool) override final;
-//        virtual void UpdateInfo() override final;
+class SatelliteDrawable : public BaseVehicleDrawable
+{
+    public:  
+        SatelliteDrawable(jeti::TextureOb*, jeti::Mesh*);
+        virtual ~SatelliteDrawable() override final;
+            
+        //virtual void UpdateInSpace(int, bool) override final;
         
         void RenderInSpace(const jeti::Renderer&, float);
-        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
+        void RenderAtPlanet(const jeti::Renderer&);
+            
+    private:
+        //virtual void UpdateInfo() override final;
+        void UpdateRenderStuff();     
 };

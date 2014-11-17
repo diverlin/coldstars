@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <draw/BaseVehicleDrawable.hpp>
+#include <render/BaseVehicleDrawable.hpp>
 
 #include <effects/Shield.hpp>
 #include <jeti/particlesystem/DriveEffect.hpp>
