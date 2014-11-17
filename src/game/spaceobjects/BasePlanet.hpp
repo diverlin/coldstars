@@ -17,8 +17,7 @@
 */
 
 
-#ifndef BASEPLANET_HPP
-#define BASEPLANET_HPP
+#pragma once
 
 #include <spaceobjects/BaseSpaceEntity.hpp>
 #include <parts/orbit.hpp>
@@ -66,4 +65,3 @@ class BasePlanet : public BaseSpaceEntity
         void CreateOrbit();    
 };
 
-#endif 

@@ -17,8 +17,7 @@
 */
 
 
-#ifndef PLAYER_HPP
-#define PLAYER_HPP
+#pragma once
 
 #include <vector>
 
@@ -165,7 +164,6 @@ bool isObjectWithinRadarRange(jeti::BaseParticleSystem*, Vehicle*);
 bool isObjectWithinRadarRange(ShockWaveEffect*, Vehicle*);
 bool isObjectWithinRadarRange(LazerTraceEffect*, Vehicle*);
             
-#endif 
 
 
 

@@ -22,6 +22,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 
+//#include <text/InfoTable.hpp>
+#include <common/Orientation.hpp>
+
 class Orientation;
 
 const glm::vec3 AXIS_X = glm::vec3(1.0f, 0.0f, 0.0f);
@@ -34,11 +37,13 @@ class Mesh;
 class TextureOb;
 class BaseAnimationRotation;
 
+class Renderer;
+
 class BaseDrawable
 {
     public:      
-        BaseDrawable(Orientation*, TextureOb*, Mesh*);
-        ~BaseDrawable();
+        BaseDrawable(TextureOb*, Mesh*);
+        virtual ~BaseDrawable();
 
         void ValidateResources() const;
         void SetAnimationRotation(BaseAnimationRotation* animation_rotation) { m_AnimationRotation = animation_rotation; }
@@ -54,7 +59,9 @@ class BaseDrawable
         bool HasTextureOb() const { return (m_TextureOb != 0); }
         
         const glm::vec4& GetColor() const { return m_Color; }
-                                            
+        const glm::vec3& GetCenter() const { return m_Orientation->GetCenter(); }
+        const glm::vec3& GetSize() const { return m_Orientation->GetSize(); }
+
 //        void RenderCollisionRadius(const Renderer&) const;
 //        void RenderAxis(const Renderer&) const;
                 
@@ -69,7 +76,7 @@ class BaseDrawable
         
         TextureOb* m_TextureOb;
         Mesh* m_Mesh; 
-        Orientation* m_Orientation = nullptr;
+        Orientation* m_Orientation;
 
         BaseAnimationRotation* m_AnimationRotation;
         
@@ -82,9 +89,14 @@ class BaseDrawable
         glm::quat m_QuatAnimation;        
 
         void UpdateRenderAnimation();
+
+//    protected:
+//        InfoTable m_Info;
+//        virtual void UpdateInfo() {};
+      virtual void RenderStuffWhenFocusedInSpace(const Renderer&) {}
 };
 
 glm::mat4 getModelMatrix(const glm::vec3&, const glm::vec3&, const glm::vec3&);  // slow, mainly used for debug (draw collision radius, draw axis)
 
-}
+} // namespace jeti
 

@@ -35,11 +35,10 @@
 
 namespace jeti {
 
-BaseDrawable::BaseDrawable(Orientation* orientation, TextureOb* textureOb, Mesh* mesh)
+BaseDrawable::BaseDrawable(TextureOb* textureOb, Mesh* mesh)
     :
       m_TextureOb(textureOb),
       m_Mesh(mesh),
-      m_Orientation(orientation),
       m_AnimationRotation(nullptr)
 {}
 
@@ -148,4 +147,4 @@ glm::mat4 getModelMatrix(const glm::vec3& center, const glm::vec3& size, const g
     return Mm;
 }
 
-}
+} // namespace jeti
