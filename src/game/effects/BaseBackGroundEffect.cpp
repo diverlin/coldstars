@@ -94,6 +94,6 @@ void BaseBackGroundEffect::LoadData(const boost::property_tree::ptree& load_ptre
         
 void BaseBackGroundEffect::ResolveData()
 {
-    m_TextureOb = TextureCollector::Instance().GetTextureObByPath(m_TextureObPath);
+    //m_TextureOb = TextureCollector::Instance().GetTextureObByPath(m_TextureObPath);
 }
               

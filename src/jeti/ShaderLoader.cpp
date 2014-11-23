@@ -6,22 +6,22 @@
 
 namespace jeti {
 
-GLuint compileProgram(const std::string& fname_vert, const std::string& fname_frag)
+GLuint compile_program(const std::string& fname_vert, const std::string& fname_frag)
 {
     GLuint program = glCreateProgram();
     if (program)
     {    
         std::cout<<fname_vert<<" "<<fname_frag<<std::endl;
-        std::string vertex_str   = file2String(fname_vert);
-        std::string fragment_str = file2String(fname_frag);
+        std::string vertex_str   = read_file(fname_vert);
+        std::string fragment_str = read_file(fname_frag);
                     
         const GLchar* vertex_source   = vertex_str.c_str();
         const GLchar* fragment_source = fragment_str.c_str();
                         
-        GLuint vertex_shader = compileShader(vertex_source, GL_VERTEX_SHADER);
+        GLuint vertex_shader = compile_shader(vertex_source, GL_VERTEX_SHADER);
         glAttachShader(program, vertex_shader);
 
-        GLuint fragment_shader = compileShader(fragment_source, GL_FRAGMENT_SHADER);
+        GLuint fragment_shader = compile_shader(fragment_source, GL_FRAGMENT_SHADER);
         glAttachShader(program, fragment_shader);
 
         glLinkProgram(program);
@@ -40,7 +40,7 @@ GLuint compileProgram(const std::string& fname_vert, const std::string& fname_fr
 }
 
 
-GLuint compileShader(const GLchar* source, GLenum shader_type)
+GLuint compile_shader(const GLchar* source, GLenum shader_type)
 {
     GLuint shader = glCreateShader(shader_type);
     glShaderSource(shader, 1, &source, nullptr);
@@ -51,7 +51,7 @@ GLuint compileShader(const GLchar* source, GLenum shader_type)
     return shader;
 }
 
-std::string file2String(const std::string& fpath)
+std::string read_file(const std::string& fpath)
 {
     std::ifstream file(fpath.c_str());
     if (!file.is_open())

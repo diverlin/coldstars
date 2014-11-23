@@ -35,7 +35,7 @@ MeshCollector::~MeshCollector()
     }
 }
 
-void MeshCollector::add(jeti::Mesh* mesh, const MeshDescriptor& descriptor)
+void MeshCollector::add(jeti::Mesh* mesh, MeshDescriptor descriptor)
 {
     if (isAbsent(mesh)) {
         m_Meshes_map.insert(std::make_pair(mesh->id(), mesh));
@@ -45,7 +45,7 @@ void MeshCollector::add(jeti::Mesh* mesh, const MeshDescriptor& descriptor)
     }
 
     auto it = m_MeshesGroup_map.find(descriptor.type);
-    if (it != m_MeshesGroup_map.end()) {
+    if (it == m_MeshesGroup_map.end()) {
         m_MeshesGroup_map.insert(std::make_pair(descriptor.type, std::vector<jeti::Mesh*> { mesh }));
     } else {
         it->second.push_back(mesh);

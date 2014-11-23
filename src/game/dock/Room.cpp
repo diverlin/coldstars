@@ -51,6 +51,6 @@ void Room::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Room::ResolveData()
 {
-    textureOb_background = TextureCollector::Instance().GetTextureObByPath(data_unresolved_Room.textureOb_background_path);
+    //textureOb_background = TextureCollector::Instance().GetTextureObByPath(data_unresolved_Room.textureOb_background_path);
 }
 

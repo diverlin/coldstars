@@ -83,7 +83,7 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
 
     float scale_comp = getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
-    jeti::TextureOb* texOb = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::ASTEROID_ID);
+    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ASTEROID_ID);
           
     //alpitodorender asteroid->SetRenderData(mesh, texOb, scale);
 

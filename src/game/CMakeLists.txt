@@ -5,10 +5,9 @@ file(GLOB_RECURSE COLDSTARS_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
 
 add_executable (${PROJECT} ${COLDSTARS_SOURCE} ${COLDSTARS_HEADER})
 target_link_libraries(${PROJECT}
-boost_system
-jeti
+    boost_system
+    jeti
 )
-
 
 #SET_TARGET_PROPERTIES(${PROJECT} PROPERTIES COMPILE_FLAGS "-Wall -Werror -Wno-switch -std=c++11 -std=gnu++11 -pipe")
 #SET_TARGET_PROPERTIES(${PROJECT} PROPERTIES COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -Ofast -march=native")
@@ -18,17 +17,9 @@ SET_TARGET_PROPERTIES(${PROJECT} PROPERTIES COMPILE_FLAGS "-Wall -Wno-switch -st
 ADD_CUSTOM_COMMAND(
     TARGET ${PROJECT}
     POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT} ${DEPLOY_DIR}
-)
-
-ADD_CUSTOM_COMMAND(
-    TARGET ${PROJECT}
-    POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E create_symlink ${SOURCE_ROOT}/data ${DEPLOY_DIR}/data
-)
-
-ADD_CUSTOM_COMMAND(
-    TARGET ${PROJECT}
-    POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E create_symlink ${SOURCE_ROOT}/config/config.info ${DEPLOY_DIR}/config.info
 )
+
+install(FILES ${CMAKE_BINARY_DIR}/${PROJECT} DESTINATION ${DEPLOY_DIR})
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/jeti/shaders DESTINATION ${DEPLOY_DIR})

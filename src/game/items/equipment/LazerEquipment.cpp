@@ -46,8 +46,8 @@ radius_orig(0)
     SetSubTypeId(TYPE::ENTITY::LAZER_EQUIPMENT_ID);
 
        //TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
-       texOb_turrel      = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::TURREL_ID);
-       texOb_lazerEffect = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID);
+       texOb_turrel      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL_ID);
+       texOb_lazerEffect = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::LAZER_EFFECT_ID);
 }
 
 /* virtual */

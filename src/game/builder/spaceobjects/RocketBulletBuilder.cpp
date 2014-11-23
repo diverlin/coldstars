@@ -71,7 +71,7 @@ void RocketBulletBuilder::CreateNewInternals(RocketBullet* rocket_bullet, const 
     rocket_bullet->SetBulletData(data_bullet);
     
     rocket_bullet->SetLifeData(data_life);
-    jeti::TextureOb* texOb = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID);
+    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ROCKET_BULLET_ID);
     //alpitodorender rocket_bullet->SetRenderData(mesh, texOb, texOb->GetSize());
 
     rocket_bullet->CreateDriveComplexTextureDependedStuff();       

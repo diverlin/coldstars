@@ -180,5 +180,5 @@ void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void NatureLand::ResolveData()
 {
-    textureOb_background = TextureCollector::Instance().GetTextureObByPath(data_unresolved_NatureLand.textureOb_background_path);
+    //textureOb_background = TextureCollector::Instance().GetTextureObByPath(data_unresolved_NatureLand.textureOb_background_path);
 }

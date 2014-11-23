@@ -50,7 +50,14 @@ template<typename TYPE>
 TYPE getRand(const std::vector<TYPE>& vec)
 {
     if (vec.size()>0) { return vec[getRandInt(0, vec.size()-1)]; }
-    else               { return TYPE::NONE_ID; }
+    else              { return TYPE::NONE_ID; }
+}
+
+template<typename TYPE>
+TYPE getRandomElement(const std::vector<TYPE>& vec)
+{
+    assert(vec.size()>0);
+    return vec[getRandInt(0, vec.size()-1)];
 }
 
 #endif

@@ -16,7 +16,6 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
 #include <types/MeshTypes.hpp>
@@ -28,6 +27,15 @@ struct MeshDescriptor
     MeshDescriptor(TYPE::MESH type):
     type(type)
     {}
+
+    bool operator==(const MeshDescriptor& rhs) const
+    {
+        if (rhs.type != TYPE::MESH::NONE_ID)
+            if (type != rhs.type)
+                return false;
+
+        return true;
+    }
 };
 
 
