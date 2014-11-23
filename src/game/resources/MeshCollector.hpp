@@ -20,12 +20,14 @@
 #pragma once
 
 #include <map>
-#include <resources/MeshDescriptor.hpp>
-#include <types/MeshTypes.hpp>
 #include <vector>
 
+#include <resources/MeshDescriptor.hpp>
+#include <types/MeshTypes.hpp>
+
+
 namespace jeti {
-    class Mesh;
+class Mesh;
 }
 
 class MeshCollector
@@ -40,16 +42,15 @@ class MeshCollector
         ~MeshCollector();
 
     private:
-        std::map<TYPE::MESH, std::vector<jeti::Mesh*>> m_MeshesGroup_map;
-        std::map<int, jeti::Mesh*> m_Meshes_map;       
-        std::map<int, MeshDescriptor> m_Descriptors_map;
+        std::map<int, std::pair<MeshDescriptor, jeti::Mesh*>> m_idsMeshes;
+        std::map<TYPE::MESH, std::vector<std::pair<MeshDescriptor, jeti::Mesh*>>> m_typesMeshes;
 
         MeshCollector() = default;
 
         MeshCollector(const MeshCollector&) = delete;
         MeshCollector& operator=(const MeshCollector&) = delete;
 
-        bool isAbsent(jeti::Mesh* mesh) const;
+        bool isExist(jeti::Mesh* mesh) const;
 };
 
 

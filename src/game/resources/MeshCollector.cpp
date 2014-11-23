@@ -30,59 +30,55 @@ MeshCollector& MeshCollector::Instance()
 
 MeshCollector::~MeshCollector()
 {
-    for (auto& pair: m_Meshes_map) {
-        delete pair.second;
+    for (auto& pair: m_idsMeshes) {
+        delete pair.second.second;
     }
 }
 
 void MeshCollector::add(jeti::Mesh* mesh, MeshDescriptor descriptor)
 {
-    if (isAbsent(mesh)) {
-        m_Meshes_map.insert(std::make_pair(mesh->id(), mesh));
+    if (!isExist(mesh)) {
+        m_idsMeshes.insert(std::make_pair(mesh->id(), std::make_pair(descriptor, mesh)));
+        m_typesMeshes[descriptor.type_id].push_back(std::make_pair( descriptor, mesh));
     } else {
         std::cout<<"mesh id="<<mesh->id()<<std::endl;
         throw std::runtime_error("mesh id is already exist");
     }
-
-    auto it = m_MeshesGroup_map.find(descriptor.type);
-    if (it == m_MeshesGroup_map.end()) {
-        m_MeshesGroup_map.insert(std::make_pair(descriptor.type, std::vector<jeti::Mesh*> { mesh }));
-    } else {
-        it->second.push_back(mesh);
-    }
-
-    m_Descriptors_map.insert(std::make_pair(mesh->id(), descriptor));
 }
 
-bool MeshCollector::isAbsent(jeti::Mesh* mesh) const
+bool MeshCollector::isExist(jeti::Mesh* mesh) const
 {
-    auto it = m_Meshes_map.find(mesh->id());
-    if (it != m_Meshes_map.end()) {
-        return false;
-    } else {
+    auto it = m_idsMeshes.find(mesh->id());
+    if (it != m_idsMeshes.end()) {
         return true;
+    } else {
+        return false;
     }
 }
 
 jeti::Mesh* MeshCollector::getMesh(int id) const
 {
-    auto it = m_Meshes_map.find(id);
-    if (it != m_Meshes_map.end()) {
-        return it->second;
-    } else {
-        std::cout<<"id="<<id<<std::endl;
-        throw std::runtime_error("mesh id not found");
+    jeti::Mesh* requested = nullptr;
+
+    auto it = m_idsMeshes.find(id);
+    if (it != m_idsMeshes.end()) {
+        requested = it->second.second;
     }
+
+    assert(requested);
+    return requested;
 }
 
-jeti::Mesh* MeshCollector::getMesh(TYPE::MESH type) const
+jeti::Mesh* MeshCollector::getMesh(TYPE::MESH type_id) const
 {
-    auto it = m_MeshesGroup_map.find(type);
-    if (it != m_MeshesGroup_map.end()) {
-        const std::vector<jeti::Mesh*> group = it->second;
-        return group[getRandInt(0, group.size()-1)];
-    } else {
-        std::cout<<"mesh type="<<getTypeStr(type)<<std::endl;
-        throw std::runtime_error("mesh type doesn't exist");
+    jeti::Mesh* requested = nullptr;
+
+    auto it = m_typesMeshes.find(type_id);
+    if (it != m_typesMeshes.end()) {
+        const std::vector<std::pair<MeshDescriptor, jeti::Mesh*>> vec = it->second;
+        requested = getRandomElement(vec).second;
     }
+
+    assert(requested);
+    return requested;
 }
