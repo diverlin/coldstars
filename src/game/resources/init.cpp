@@ -72,7 +72,7 @@ void initGameStuff()
     RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);  
     RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);  
       
-    TextureCollector::Instance().FillShipSubTypeList();
+    //TextureCollector::Instance().FillShipSubTypeList();
         
         
     /* create Macro Scenaries */

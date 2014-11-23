@@ -46,11 +46,9 @@ class TextureCollector
         jeti::TextureOb* getTextureByRaceId(TYPE::TEXTURE, TYPE::RACE);
         jeti::TextureOb* getTextureByDescriptor(const TextureDescriptor& descriptior);
 
-        void FillShipSubTypeList();
-
     private:
         TextureCollector() {};
-        ~TextureCollector() {};
+        ~TextureCollector();
         
         TextureCollector(TextureCollector&) = delete;
         TextureCollector& operator=(TextureCollector&) = delete;
@@ -58,11 +56,10 @@ class TextureCollector
         std::map<int, std::pair<TextureDescriptor, jeti::TextureOb*>> m_idsTextures;
         std::map<TYPE::TEXTURE, std::vector<std::pair<TextureDescriptor, jeti::TextureOb*>>> m_typesTextures;
 
-        bool isAbsent(jeti::TextureOb*) const;
+        bool isExist(jeti::TextureOb*) const;
     
-        jeti::TextureOb* _TryGetRandomTextureObFromVec(const std::vector<jeti::TextureOb*>&);
-        jeti::TextureOb* _GetShipTexObByClosestSizeFromVec(const std::vector<jeti::TextureOb*>&, int);
-        jeti::TextureOb* _GetShipTexObBySizeFromVec(const std::vector<jeti::TextureOb*>&, int);
-        jeti::TextureOb* _TryGetShipTexObBySizeFromVec(const std::vector<jeti::TextureOb*>&, int);
+        jeti::TextureOb* getTextureByClosestSizeId(const std::vector<jeti::TextureOb*>&, int);
+        jeti::TextureOb* getTextureBySizeId(const std::vector<jeti::TextureOb*>&, int);
+        jeti::TextureOb* tryGetTextureBySizeId(const std::vector<jeti::TextureOb*>&, int);
 };
 
