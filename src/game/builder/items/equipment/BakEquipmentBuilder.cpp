@@ -47,8 +47,7 @@ BakEquipment* BakEquipmentBuilder::GetNewBakEquipmentTemplate(INTLONGEST id) con
 {
     BakEquipment* bak_equipment = nullptr;
     
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
@@ -75,24 +74,22 @@ BakEquipment* BakEquipmentBuilder::GetNewBakEquipment(TYPE::TECHLEVEL tech_level
                           
 void BakEquipmentBuilder::CreateNewInternals(BakEquipment* bak_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int fuel_max_orig) const
 {     
-    if (race_id == TYPE::RACE::NONE_ID)
-    {
+    if (race_id == TYPE::RACE::NONE_ID) {
         race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
     }
     
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
-    {
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
     jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb_item = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::BAK_EQUIPMENT_ID);
+    jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BAK_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
     
     fuel_max_orig = getRandInt(EQUIPMENT::BAK::FUEL_MIN, EQUIPMENT::BAK::FUEL_MAX) * (1 + EQUIPMENT::BAK::FUEL_TECHLEVEL_RATE * (int)tech_level);
 
     ItemCommonData common_data;
-    common_data.tech_level         = tech_level;
+    common_data.tech_level              = tech_level;
     common_data.modules_num_max        = getRandInt(EQUIPMENT::BAK::MODULES_NUM_MIN, EQUIPMENT::BAK::MODULES_NUM_MAX);
     common_data.mass                   = getRandInt(EQUIPMENT::BAK::MASS_MIN, EQUIPMENT::BAK::MASS_MAX);
     common_data.condition_max          = getRandInt(EQUIPMENT::BAK::CONDITION_MIN, EQUIPMENT::BAK::CONDITION_MAX);

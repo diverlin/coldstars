@@ -51,14 +51,14 @@ ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
     
     EntityManager::Instance().RegisterEntity(item_slot);
     
-    jeti::TextureOb* texOb_slot = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::ITEM_SLOT_ID);
+    jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);
     item_slot->SetTextureOb(texOb_slot);
     
     if (subtype_id == TYPE::ENTITY::WEAPON_SLOT_ID)
     {
         Turrel* turrel = nullptr;
         jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-        jeti::TextureOb* texOb_turrel = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::TURREL_ID);
+        jeti::TextureOb* texOb_turrel = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL_ID);
         try 
         { 
             turrel = new Turrel(item_slot); 
@@ -87,7 +87,7 @@ ItemSlot* GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY subtype_id)
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation");
     }
     
-    jeti::TextureOb* texOb_slot = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::ITEM_SLOT_ID);
+    jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);
     item_slot->SetTextureOb(texOb_slot);
     
     return item_slot;

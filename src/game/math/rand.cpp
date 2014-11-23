@@ -40,7 +40,7 @@ float getRandFloat(float low, float high)
 
 int getRandInt(int low, int high)
 {
-    return (low != high) ? rand()%(high+1-low) + low : low;
+    return (low != high) ? low + rand()%(high+1-low) : low;
 }
 
 int getRandSign()

@@ -93,22 +93,22 @@ void Renderer::Init(int w, int h)
 
     SetOrthogonalProjection(w, h);
 
-    m_Shaders.base            = compileProgram(SHADERS_PATH+"base.vert",              SHADERS_PATH+"base.frag");
-    m_Shaders.black2alpha     = compileProgram(SHADERS_PATH+"black2alpha.vert",       SHADERS_PATH+"black2alpha.frag");
-    m_Shaders.shockwave       = compileProgram(SHADERS_PATH+"shockwave.vert",         SHADERS_PATH+"shockwave.frag");
-    m_Shaders.volumetriclight = compileProgram(SHADERS_PATH+"volumetricLight.vert",   SHADERS_PATH+"volumetricLight.frag");
-    m_Shaders.light           = compileProgram(SHADERS_PATH+"light.vert",             SHADERS_PATH+"light.frag");
-    m_Shaders.light_normalmap = compileProgram(SHADERS_PATH+"light_normalmap.vert",   SHADERS_PATH+"light_normalmap.frag");
-    m_Shaders.blur            = compileProgram(SHADERS_PATH+"blur.vert",              SHADERS_PATH+"blur.frag");
-    m_Shaders.extractbright   = compileProgram(SHADERS_PATH+"extractBright.vert",     SHADERS_PATH+"extractBright.frag");
-    m_Shaders.combine         = compileProgram(SHADERS_PATH+"combine.vert",           SHADERS_PATH+"combine.frag");
-    m_Shaders.multitexturing  = compileProgram(SHADERS_PATH+"multitex.vert",          SHADERS_PATH+"multitex.frag");
-    m_Shaders.blank           = compileProgram(SHADERS_PATH+"blank.vert",             SHADERS_PATH+"blank.frag");
-    m_Shaders.fogwarspark     = compileProgram(SHADERS_PATH+"fogwarspark.vert",       SHADERS_PATH+"fogwarspark.frag");
-    m_Shaders.flash           = compileProgram(SHADERS_PATH+"flash.vert",             SHADERS_PATH+"flash.frag");
-    m_Shaders.mask            = compileProgram(SHADERS_PATH+"mask.vert",              SHADERS_PATH+"mask.frag");
-    m_Shaders.particle        = compileProgram(SHADERS_PATH+"particle.vert",          SHADERS_PATH+"particle.frag");
-    m_Shaders.starfield       = compileProgram(SHADERS_PATH+"starfield.vert",         SHADERS_PATH+"starfield.frag");
+    m_Shaders.base            = compile_program(SHADERS_PATH+"base.vert",              SHADERS_PATH+"base.frag");
+    m_Shaders.black2alpha     = compile_program(SHADERS_PATH+"black2alpha.vert",       SHADERS_PATH+"black2alpha.frag");
+    m_Shaders.shockwave       = compile_program(SHADERS_PATH+"shockwave.vert",         SHADERS_PATH+"shockwave.frag");
+    m_Shaders.volumetriclight = compile_program(SHADERS_PATH+"volumetricLight.vert",   SHADERS_PATH+"volumetricLight.frag");
+    m_Shaders.light           = compile_program(SHADERS_PATH+"light.vert",             SHADERS_PATH+"light.frag");
+    m_Shaders.light_normalmap = compile_program(SHADERS_PATH+"light_normalmap.vert",   SHADERS_PATH+"light_normalmap.frag");
+    m_Shaders.blur            = compile_program(SHADERS_PATH+"blur.vert",              SHADERS_PATH+"blur.frag");
+    m_Shaders.extractbright   = compile_program(SHADERS_PATH+"extractBright.vert",     SHADERS_PATH+"extractBright.frag");
+    m_Shaders.combine         = compile_program(SHADERS_PATH+"combine.vert",           SHADERS_PATH+"combine.frag");
+    m_Shaders.multitexturing  = compile_program(SHADERS_PATH+"multitex.vert",          SHADERS_PATH+"multitex.frag");
+    m_Shaders.blank           = compile_program(SHADERS_PATH+"blank.vert",             SHADERS_PATH+"blank.frag");
+    m_Shaders.fogwarspark     = compile_program(SHADERS_PATH+"fogwarspark.vert",       SHADERS_PATH+"fogwarspark.frag");
+    m_Shaders.flash           = compile_program(SHADERS_PATH+"flash.vert",             SHADERS_PATH+"flash.frag");
+    m_Shaders.mask            = compile_program(SHADERS_PATH+"mask.vert",              SHADERS_PATH+"mask.frag");
+    m_Shaders.particle        = compile_program(SHADERS_PATH+"particle.vert",          SHADERS_PATH+"particle.frag");
+    m_Shaders.starfield       = compile_program(SHADERS_PATH+"starfield.vert",         SHADERS_PATH+"starfield.frag");
 
     InitPostEffects();
     MakeShortCuts();

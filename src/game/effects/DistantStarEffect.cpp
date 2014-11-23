@@ -79,7 +79,7 @@ DistantStarEffect* GetNewDistantStarEffect(int color_id)
 {
     int distStar_num = getRandInt(DISTANT_STAR_MIN, DISTANT_STAR_MAX);
 
-    jeti::TextureOb* textureOb = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::DISTANTSTAR_ID);
+    //jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DISTANTSTAR_ID);
 
     std::vector<glm::vec3> positions;
     std::vector<glm::vec4> colors;
@@ -100,7 +100,7 @@ DistantStarEffect* GetNewDistantStarEffect(int color_id)
     }
             
     DistantStarEffect* ds = new DistantStarEffect(positions, colors, sizes);
-    ds->SetTextureOb(textureOb);
+    //ds->SetTextureOb(textureOb);
     
     return ds;
 }

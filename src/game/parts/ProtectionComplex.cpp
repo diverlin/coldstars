@@ -27,7 +27,7 @@ ProtectionComplex::ProtectionComplex()
     owner_vehicle = nullptr;
 
     shield_effect = new ShieldEffect();
-    jeti::TextureOb* texOb_shield = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::SHIELD_EFFECT_ID);
+    jeti::TextureOb* texOb_shield = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SHIELD_EFFECT_ID);
     shield_effect->SetTextureOb(texOb_shield);
 
     protector_slot = nullptr;

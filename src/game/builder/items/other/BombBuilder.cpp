@@ -68,7 +68,7 @@ Bomb* BombBuilder::GetNewBomb(int damage, int radius) const
 void BombBuilder::CreateNewInternals(Bomb* bomb, int damage, int radius) const
 {     
     jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::BOMB_ID);
+    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID);
     damage = 300;
     radius = 300;
         

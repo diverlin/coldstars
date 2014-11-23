@@ -87,7 +87,7 @@ void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, 
     }
 
     jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb_item = TextureCollector::Instance().GetRandomTextureOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID);
+    jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
 
     radius_orig     = getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX) * (1 + EQUIPMENT::RADAR::RADIUS_TECHLEVEL_RATE * (int)tech_level);
