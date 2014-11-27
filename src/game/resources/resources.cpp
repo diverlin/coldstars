@@ -66,6 +66,14 @@ void load3DModels()
 
 void loadImages()
 {
+    {
+        jeti::Material material_data;
+        material_data.texture_path = DATA_PATH+"turrel/turrel1.png";
+        material_data.use_alpha = true;
+        jeti::TextureOb* texture = new jeti::TextureOb(material_data);
+
+        TextureCollector::Instance().setTextureBlank(texture);
+    }
 //####################################### TURREL_TEXTURE ###################################
 //{
 //    jeti::Material material_data;

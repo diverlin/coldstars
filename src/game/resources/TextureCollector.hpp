@@ -38,6 +38,7 @@ class TextureCollector
     public:
         static TextureCollector& Instance();
         
+        void setTextureBlank(jeti::TextureOb*);
         void add(jeti::TextureOb*, const TextureDescriptor&);
 
         jeti::TextureOb* getTextureById(int);
@@ -47,9 +48,7 @@ class TextureCollector
         jeti::TextureOb* getTextureByDescriptor(const TextureDescriptor& descriptior);
 
     private:
-        TextureCollector()
-            :m_textureBlank(nullptr)
-        {}
+        TextureCollector();
         ~TextureCollector();
         
         TextureCollector(TextureCollector&) = delete;
