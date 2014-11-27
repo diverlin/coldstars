@@ -17,12 +17,9 @@
 */
 
 #include "Logger.hpp"
-#include "myStr.hpp"
-#include "TurnTimer.hpp"
-#include "GameDate.hpp"
-#include "../config/config.hpp"
-
-#include <common/constants.hpp>
+#include <iostream>
+#include <iomanip>
+#include <stdexcept>
 
 Logger& Logger::Instance()
 {
@@ -31,11 +28,8 @@ Logger& Logger::Instance()
 }
 
 Logger::Logger()
-:
-turn_counter(0),
-line_counter(0) 
 {
-    mode = Config::Instance().GetLogMode();
+    mode = MODE::SCREEN;
 }
         
 Logger::~Logger()
@@ -43,62 +37,44 @@ Logger::~Logger()
     file.close();
 }
 
-void Logger::Log(const std::string& str, int dip)
+void Logger::warn(const std::string& msg, int dip)
 {
-    std::string spaces;
-    for (int i=0; i<3*dip; i++)
-    {
-        spaces += " ";
-    }
-    
-    std::string result = int2str(line_counter) + ": " + GameDate::Instance().GetDate().GetStr() + " " + int2str(TurnTimer::Instance().GetTurnTick()) + " " + spaces + str;
+    std::string text = "WARNING!!!: "+ msg;
+    Log(text, dip);
+}
+
+void Logger::error(const std::string& msg)
+{
+    std::string text = "ERROR!!!: "+ msg;
+    Log(text);
+    throw std::runtime_error(text);
+}
+
+void Logger::Log(const std::string& msg, int dip)
+{
     switch(mode)
     {
-        case LOG::SCREEN:
-        {
-            ToScreen(result);
+        case MODE::SCREEN: { toScreen(msg, dip); break; }
+        case MODE::FILE: { toFile(msg, dip); break;  }
+        case MODE::SCREENFILE: {
+            toScreen(msg, dip);
+            toFile(msg, dip);
             break;
         }
-        
-        case LOG::FILE:
-        {
-            ToFile(result);
-            break;        
-        }
-        
-        case LOG::SCREENFILE:
-        {
-            ToScreen(result);
-            ToFile(result);
-            break;
-        }
-
-        case LOG::NONE:
-        {
-            break;
-        }    
+        case MODE::NONE: { break; }
     }
 }
             
-void Logger::ToScreen(const std::string& str)
+void Logger::toScreen(const std::string& msg, int dip)
 {
-    std::cout<<str<<std::endl;
+    std::cout<<std::setw(dip)<<msg<<std::endl;
 }
 
-void Logger::ToFile(const std::string& str)
+void Logger::toFile(const std::string& msg, int dip)
 {
-    if (turn_counter != TurnTimer::Instance().GetTurnCounter())
-    {
-        if (file)
-        {
-            file.close();
-        }
-        line_counter = 0;
-        turn_counter = TurnTimer::Instance().GetTurnCounter();
-        file.open("log/" + int2str(turn_counter) + ".log");
+    if (!file) {
+        file.open("log.txt");
     }
-    
-    line_counter++;
-    file<<str<<std::endl;
+    file<<std::setw(dip)<<msg<<std::endl;
 }
 

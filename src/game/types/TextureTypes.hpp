@@ -16,14 +16,13 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#pragma once
 
-#ifndef TEXTURETYPES_HPP
-#define TEXTURETYPES_HPP
-
+#include <string>
 
 namespace TYPE
 {
-    enum class TEXTURE
+    enum class TEXTURE: int
     { 
         NONE_ID=0,
         
@@ -53,5 +52,5 @@ namespace TYPE
     };
 } 
 
-#endif
+std::string getStr(TYPE::TEXTURE);
 

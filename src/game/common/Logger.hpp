@@ -16,8 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef LOGGER_HPP
-#define LOGGER_HPP
+#pragma once
 
 #include <fstream>
 
@@ -28,20 +27,20 @@ class Logger
         ~Logger();
         
         void Log(const std::string&, int dip = 0);
-                                                   
+        void warn(const std::string&, int dip = 0);
+        void error(const std::string&);
+
     private:
         Logger();
         Logger(const Logger&) = delete;
         Logger& operator=(const Logger&) = delete;
 
-        int mode;
-        unsigned int turn_counter;
-        int line_counter;
+        enum class MODE: int { NONE=0, SCREEN, FILE, SCREENFILE };
+        MODE mode;
         
         std::ofstream file;
         
-        void ToScreen(const std::string&);
-        void ToFile(const std::string&);
+        void toScreen(const std::string&, int);
+        void toFile(const std::string&, int);
 }; 
 
-#endif
