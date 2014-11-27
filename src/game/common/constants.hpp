@@ -206,10 +206,7 @@ const int EXCLUSIVE_STARTAMOUNT_MAX = EXCLUSIVE_AMOUNT_MAX/10;
    
 
         
-namespace LOG
-{
-    enum { NONE=0, SCREEN, FILE, SCREENFILE };
-}
+
 
 // trigonomerty
 const float PI = 3.141592653589797;

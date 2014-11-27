@@ -16,9 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-#ifndef RAND_HPP
-#define RAND_HPP
+#pragma once
 
 #include <vector>
 
@@ -56,8 +54,8 @@ TYPE getRand(const std::vector<TYPE>& vec)
 template<typename TYPE>
 TYPE getRandomElement(const std::vector<TYPE>& vec)
 {
-    assert(vec.size()>0);
+    assert(vec.size());
     return vec[getRandInt(0, vec.size()-1)];
 }
 
-#endif
+
