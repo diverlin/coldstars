@@ -86,6 +86,7 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
     {
         mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
         texOb = TextureCollector::Instance().getTextureByDescriptor(TextureDescriptor());
+        assert(texOb);
         size = texOb->GetSize();
     }
     else

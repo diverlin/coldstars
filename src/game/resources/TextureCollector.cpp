@@ -29,11 +29,20 @@ TextureCollector& TextureCollector::Instance()
     return instance;
 }
 
+TextureCollector::TextureCollector()
+    :m_textureBlank(nullptr)
+{}
+
 TextureCollector::~TextureCollector()
 {
     for (auto& pair: m_idsTextures) {
         delete pair.second.second;
     }
+}
+
+void TextureCollector::setTextureBlank(jeti::TextureOb* texture)
+{
+    m_textureBlank = texture;
 }
 
 void TextureCollector::add(jeti::TextureOb* texture, const TextureDescriptor& descriptor)
