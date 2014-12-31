@@ -67,7 +67,7 @@ Planet* PlanetBuilder::GetNewPlanet(float orbit_radius) const
      
 void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
 {     
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
       
     LifeData data_life;
     data_life.armor = 100000;
@@ -81,7 +81,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     planet_data.speed         = (float)getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / (float)orbit_radius;
     planet_data.clockwise     = getRandBool();
 
-    jeti::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
+    //jeti::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
     
     planet->SetPlanetData(planet_data);
     
@@ -92,12 +92,12 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     //alpitodorender planet->SetRenderData(mesh, textureOb, scale);
  
     float delta_angle = 0.0001*getRandInt(20, 60);
-    jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
+    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender planet->SetAnimationRotation(animation_rotation);
     
     //if (getRandBool()) 
     {
-        jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ATMOSPHERE_ID);
+        //jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ATMOSPHERE_ID);
         Atmosphere* atmosphere = new Atmosphere();
         //alpitodorender atmosphere->SetRenderData(mesh, textureOb, 1.04f*scale);
         //alpitodorender planet->AddDecoration(atmosphere);

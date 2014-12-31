@@ -68,12 +68,13 @@ Container* ContainerBuilder::GetNewContainer(jeti::TextureOb* textureOb, BaseIte
 
 Container* ContainerBuilder::GetNewMineralContainer(int mineral_ammount) const
 {
-    jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MINERAL_ID);
+    //jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MINERAL_ID);
     GoodsPack* goods_pack = GetNewGoodsPack(TYPE::ENTITY::MINERALS_ID);
     goods_pack->Increase(mineral_ammount);
 
-    Container* container = GetNewContainer(textureOb, goods_pack);
-    
+    //Container* container = GetNewContainer(textureOb, goods_pack);
+    Container* container = nullptr;
+    assert(container);
     return container;
 } 
            
@@ -84,11 +85,11 @@ void ContainerBuilder::CreateNewInternals(Container* container, jeti::TextureOb*
     data_life.dying_time = 30;
     
     container->SetLifeData(data_life);
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->GetSize());
  
     float delta_angle = 0.001*getRandInt(20, 60);
-    jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
+    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender container->SetAnimationRotation(animation_rotation);
     
     container->SetGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);

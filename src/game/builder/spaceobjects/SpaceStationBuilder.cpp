@@ -25,7 +25,7 @@
 
 #include <dock/Kosmoport.hpp>
 
-#include <jeti/Mesh.hpp>
+//#include <jeti/Mesh.hpp>
 
 
 SpaceStationBuilder& SpaceStationBuilder::Instance()
@@ -68,20 +68,20 @@ SpaceStation* SpaceStationBuilder::GetNewSpaceStation() const
 
 void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 {
-    jeti::Mesh* mesh = nullptr;
-    jeti::TextureOb* texOb = nullptr;
+    //jeti::Mesh* mesh = nullptr;
+    //jeti::TextureOb* texOb = nullptr;
     glm::vec3 size;
 
     if (getRandInt(0, 1))
     {
-        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-        texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SPACESTATION_ID);
-        size = texOb->GetSize(); 
+//        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//        texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SPACESTATION_ID);
+//        size = texOb->GetSize();
     }
     else
     {    
-        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
-        texOb = mesh->GetTextureOb(); 
+//        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
+//        texOb = mesh->GetTextureOb();
         float scale_comp = getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX);
         size = glm::vec3(scale_comp, scale_comp, scale_comp);
     }
@@ -114,18 +114,18 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     
     LifeData data_life;
     data_life.armor      = data_korpus.armor;
-    data_life.dying_time = 10*texOb->GetMaterial().size_id;
+    //data_life.dying_time = 10*texOb->GetMaterial().size_id;
     
     int size_threshold = 2; 
     //if ( (texOb->size_id < size_threshold) or (mesh != nullptr) )
     //data_korpus.draw_turrels = false; 
     //else
     //data_korpus.draw_turrels = true; 
-    
-    if (texOb->GetMaterial().size_id < size_threshold)
-        data_korpus.draw_turrels = false; 
-    else
-        data_korpus.draw_turrels = true; 
+    data_korpus.draw_turrels = true;
+//    if (texOb->GetMaterial().size_id < size_threshold)
+//        data_korpus.draw_turrels = false;
+
+
     
     spacestation->SetSubSubTypeId(TYPE::ENTITY::SPACESTATION_MILITARY_ID);
     spacestation->SetKorpusData(data_korpus);
@@ -134,7 +134,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     //alpitodorender spacestation->SetRenderData(mesh, texOb, size);
         
     float delta_angle = 0.0001*getRandInt(20, 60);
-    jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
+    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender spacestation->SetAnimationRotation(animation_rotation);
 
     

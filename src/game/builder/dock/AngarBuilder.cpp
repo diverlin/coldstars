@@ -86,7 +86,7 @@ void AngarBuilder::CreateNewInternals(Angar* angar) const
         angar->AddItemSlot(cargo_slot);
     }
     
-    angar->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ANGAR_BACKGROUND_ID));
+    //angar->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ANGAR_BACKGROUND_ID));
 }
 
       

@@ -63,7 +63,7 @@ Asteroid* AsteroidBuilder::GetNewAsteroid() const
            
 void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
 {           
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_DEFORMED_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_DEFORMED_ID);
     
     LifeData data_life;   
     data_life.armor      = 10;
@@ -83,12 +83,12 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
 
     float scale_comp = getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
-    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ASTEROID_ID);
+    //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ASTEROID_ID);
           
     //alpitodorender asteroid->SetRenderData(mesh, texOb, scale);
 
     float delta_angle = 0.0001*getRandInt(20, 60);
-    jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
+    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender asteroid->SetAnimationRotation(animation_rotation);
                 
     asteroid->SetGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
