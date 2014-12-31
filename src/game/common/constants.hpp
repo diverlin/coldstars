@@ -28,7 +28,7 @@
 #include <types/GuiTypes.hpp>
 #include "Converter.hpp"
 
-const std::string DATA_PATH = "data/";
+
 const std::string CONFIG_PATH  = "";
         
 namespace CONVERTER

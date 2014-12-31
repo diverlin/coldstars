@@ -23,7 +23,6 @@ set(GLM_ROOT_DIR ${COLDSTARS_DEPENDENCIES_ROOT})
 
 
 include_directories(src/game/)
-include_directories(src/jeti/)
 include_directories(src/)
 
 add_subdirectory(src/jeti)

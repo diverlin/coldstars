@@ -18,7 +18,6 @@
 
 #include "Particle.hpp"
 #include <math/rand.hpp>
-#include <common/constants.hpp>
 
 namespace jeti {
 
@@ -51,12 +50,9 @@ void Particle::Randomize_d_alpha(float val1_f, float val2_f)
                 
 void Particle::CalcRandomVelocity()
 {
-    if (getRandBool() == true)
-    {
+    if (getRandBool() == true) {
         CalcRandomDirtyVelocity();
-    }
-    else
-    {
+    } else {
         CalcRandomAccurateVelocity();
     }
 }
@@ -75,7 +71,7 @@ void Particle::CalcRandomDirtyVelocity()
 void Particle::CalcRandomAccurateVelocity()
 {
     float _len   = getRandInt(50, 100);
-    float _angle = getRandInt(0, 360)/RADIAN_TO_DEGREE_RATE;
+    float _angle = glm::radians((float)getRandInt(0, 360));
     
     float target_x = cos(_angle) * _len;
     float target_y = sin(_angle) * _len;

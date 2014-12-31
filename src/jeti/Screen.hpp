@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include "SFML_Wrapper.hpp"
+#include "SFMLWrapper.hpp"
 
 #include <MyGl.hpp>
 
@@ -30,7 +30,7 @@
 
 namespace jeti {
 
-class Screen : public SFML_Wrapper
+class Screen : public SFMLWrapper
 {
     public:
         static Screen& Instance();

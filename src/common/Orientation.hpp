@@ -17,10 +17,9 @@
 */
 
 
-#ifndef ORIENTATION_HPP
-#define ORIENTATION_HPP
+#pragma once
 
-#include <common/Base.hpp>
+#include <boost/property_tree/ptree.hpp>
 #include <common/points.hpp>
 
 struct UnresolvedDataOrientation
@@ -29,11 +28,11 @@ struct UnresolvedDataOrientation
     glm::vec3 direction; 
 };
 
-class Orientation : public Base
+class Orientation
 {
     public:      
         Orientation();
-        virtual ~Orientation() override;
+        virtual ~Orientation();
 
         void SetParentCenter(float x, float y, float z) { m_ParentCenter = glm::vec3(x, y, z); }        
         void SetParentCenter(const glm::vec3& parent_center) { m_ParentCenter = parent_center; }
@@ -81,8 +80,7 @@ class Orientation : public Base
 
         Points m_Points;
                                 
-    friend class BaseVehicleBuilder;
-    friend class DriveComplex;
+//    friend class BaseVehicleBuilder;
+//    friend class DriveComplex;
 };
 
-#endif 

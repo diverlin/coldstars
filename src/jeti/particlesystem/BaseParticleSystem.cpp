@@ -19,7 +19,7 @@
 #include "BaseParticleSystem.hpp"
 #include <particlesystem/Particle.hpp>
 
-#include <spaceobjects/BaseSpaceEntity.hpp> // depr
+//#include <spaceobjects/BaseSpaceEntity.hpp> // depr
 
 #include <TextureOb.hpp>
 #include <Mesh.hpp>
@@ -31,23 +31,22 @@
 namespace jeti {
 
 BaseParticleSystem::BaseParticleSystem()
-:
-m_TypeId(NONE_ID),
-m_Mesh(nullptr),
-m_Parent(nullptr),
-m_IsAlive(true),
-m_IsDying(false)
+    :
+      m_TypeId(-1),
+      m_Mesh(nullptr),
+//      m_Parent(nullptr),
+      m_IsAlive(true),
+      m_IsDying(false)
 {
     m_Mesh = new Mesh();
 }
- 
+
 /* virtual */
 BaseParticleSystem::~BaseParticleSystem()
 {
     //delete m_Mesh; FIXME cause bug
 
-    for (unsigned int i=0; i<m_Particles.size(); i++) 
-    {
+    for (unsigned int i=0; i<m_Particles.size(); i++) {
         delete m_Particles[i];
     }
 }
@@ -66,8 +65,7 @@ void BaseParticleSystem::Update()
     std::vector<glm::vec4> colors;
     std::vector<float> sizes;
 
-    for (unsigned int i=0; i<m_Particles.size(); i++) 
-    {
+    for (unsigned int i=0; i<m_Particles.size(); i++) {
         const Particle& particle = *m_Particles[i];
 
         positions.push_back(particle.GetPosition());
@@ -80,10 +78,10 @@ void BaseParticleSystem::Update()
 
 const glm::mat4& BaseParticleSystem::GetActualModelMatrix()
 { 
-    m_MatrixModel = glm::translate(GetCenter());    
-    //m_MatrixRotate    = glm::toMat4(m_QuatPosition * m_QuatAnimation); 
+    m_MatrixModel = glm::translate(GetCenter());
+    //m_MatrixRotate    = glm::toMat4(m_QuatPosition * m_QuatAnimation);
     //m_MatrixScale     = glm::scale(GetSize());
-      
+
     //m_MatrixModel = m_MatrixTranslate * m_MatrixScale * m_MatrixRotate;
     
     return m_MatrixModel;

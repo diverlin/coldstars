@@ -8,13 +8,13 @@
 
 namespace jeti {
 
-class SFML_Wrapper
+class SFMLWrapper
 {
     public:
-        SFML_Wrapper();
-        ~SFML_Wrapper();
+        SFMLWrapper();
+        ~SFMLWrapper();
 
-        void wrCreateWindowSpecific(int width, int height, int bpp, bool vert_sync, const std::string&);
+        void wrCreateWindowSpecific(int width, int height, int bpp, bool vert_sync, int fps_limit, const std::string& title);
 
         int GetWidth() const { return window.getSize().x; };
         int GetHeight() const { return window.getSize().y; };

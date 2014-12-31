@@ -20,7 +20,7 @@
 
 #include <string>
 #include <vector>
-#include <MyGl.hpp>
+//#include <MyGl.hpp>
 #include <glm/glm.hpp>
  
 #include <types/TextureTypes.hpp>

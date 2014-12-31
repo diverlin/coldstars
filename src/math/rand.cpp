@@ -21,8 +21,9 @@
 #include <stdlib.h>
 #include <cmath>
 
-//#include <common/constants.hpp>
-//#include <types/MyInt.hpp>
+#include <common/constants.hpp>
+#include <types/MyInt.hpp>
+#include <struct/RaceInformationCollector.hpp>
 
 TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE race_id, const std::vector<TYPE::ENTITY>& subtypes)
 {
