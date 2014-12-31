@@ -98,7 +98,7 @@ void StoreBuilder::CreateNewInternals(Store* store) const
         store->AddVehicleSlot(vehicle_slot);
     }
         
-    store->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STORE_BACKGROUND_ID));
+    //store->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STORE_BACKGROUND_ID));
 }
 
 

@@ -16,23 +16,21 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef COMMONBUILDERHEADERS_HPP
-#define COMMONBUILDERHEADERS_HPP
+#pragma once
 
-#include <types/MeshTypes.hpp>
+//#include <types/MeshTypes.hpp>
 
 #include <common/common.hpp>
 #include <math/rand.hpp>
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
 
-#include <resources/TextureCollector.hpp>
-#include <jeti/TextureOb.hpp>
-#include <resources/MeshCollector.hpp>
+//#include <resources/TextureCollector.hpp>
+//#include <jeti/TextureOb.hpp>
+//#include <resources/MeshCollector.hpp>
 
 #include <world/EntityManager.hpp>
 
-#include <jeti/animations/AnimationConstantRotation.hpp>
-#include <jeti/animations/AnimationWiggle.hpp>
+//#include <jeti/animations/AnimationConstantRotation.hpp>
+//#include <jeti/animations/AnimationWiggle.hpp>
 
-#endif    

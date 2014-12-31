@@ -17,8 +17,8 @@
 */
 
 #include "SatelliteBuilder.hpp"
-#include "../CommonBuilderHeaders.hpp"
-#include "../../spaceobjects/Satellite.hpp"
+#include <builder/CommonBuilderHeaders.hpp>
+#include <spaceobjects/Satellite.hpp>
 
 SatelliteBuilder& SatelliteBuilder::Instance()
 {    
@@ -62,8 +62,8 @@ Satellite* SatelliteBuilder::GetNewSatellite() const
 
 void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const 
 {
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE_ID);
 
     int protection_rate = 1;
     //if (subtype_id == ENTITY::WARRIOR_ID)
@@ -93,13 +93,13 @@ void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const
     
     LifeData data_life;
     data_life.armor      = data_korpus.armor;
-    data_life.dying_time = 10*texOb->GetMaterial().size_id;
+    //data_life.dying_time = 10*texOb->GetMaterial().size_id;
     
     //int size_threshold = 2; 
     data_korpus.draw_turrels = true;       
  
     float delta_angle = 0.0001*getRandInt(20, 60);  
-    jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
+    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender satellite->SetAnimationRotation(animation_rotation);
     
     satellite->SetKorpusData(data_korpus);

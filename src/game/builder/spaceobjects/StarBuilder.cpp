@@ -64,7 +64,7 @@ Star* StarBuilder::GetNewStar() const
           
 void StarBuilder::CreateNewInternals(Star* star) const
 {     
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     
     LifeData data_life;
     data_life.armor = 1000000; 
@@ -76,7 +76,7 @@ void StarBuilder::CreateNewInternals(Star* star) const
     star_data.orbit_phi_inD = 0;
     star_data.speed         = 1.8;
     
-    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
+    //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
     
     star->SetPlanetData(star_data);
     star->SetLifeData(data_life);

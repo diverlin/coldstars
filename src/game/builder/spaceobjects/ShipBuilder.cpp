@@ -18,10 +18,10 @@
 
 
 #include "ShipBuilder.hpp"
-#include "../CommonBuilderHeaders.hpp"
+#include <builder/CommonBuilderHeaders.hpp>
 #include <spaceobjects/Ship.hpp>
 
-#include <jeti/Mesh.hpp>
+//#include <jeti/Mesh.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -79,20 +79,25 @@ Ship* ShipBuilder::GetNewShip() const
 
 void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const
 {
-    jeti::Mesh* mesh = nullptr;
-    jeti::TextureOb* texOb = nullptr;
+    //jeti::Mesh* mesh = nullptr;
+    //jeti::TextureOb* texOb = nullptr;
     glm::vec3 size;
     if (true)
     {
-        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-        texOb = TextureCollector::Instance().getTextureByDescriptor(TextureDescriptor());
-        assert(texOb);
-        size = texOb->GetSize();
+//        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//        texOb = TextureCollector::Instance().getTextureByDescriptor(TextureDescriptor());
+//        assert(mesh);
+//        assert(texOb);
+        float scale_comp = getRandInt(40, 100);
+        size = glm::vec3(scale_comp, scale_comp, 1.0);
+        //size = texOb->GetSize();
     }
     else
     {    
-        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
-        texOb = mesh->GetTextureOb(); 
+//        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
+//        texOb = mesh->GetTextureOb();
+//        assert(mesh);
+//        assert(texOb);
         float scale_comp = getRandInt(40, 100);
         size = glm::vec3(scale_comp, scale_comp, scale_comp);
     }
@@ -127,13 +132,13 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
     
     int size_threshold = 2; 
     data_korpus.draw_turrels = false;
-    if (mesh == nullptr)      // BROKEN
-    {
-        if (texOb->GetMaterial().size_id > size_threshold)
-        {
-            data_korpus.draw_turrels = true; 
-        }
-    }
+//    if (mesh == nullptr)      // BROKEN
+//    {
+//        if (texOb->GetMaterial().size_id > size_threshold)
+//        {
+//            data_korpus.draw_turrels = true;
+//        }
+//    }
 
     ship->SetSubSubTypeId(subsubtype_id);
     ship->SetKorpusData(data_korpus);
@@ -149,7 +154,7 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
     //ship->SetRenderAnimation(animation_program);
     
     float delta_angle = 0.0001*getRandInt(20, 60);
-    jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
+    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender ship->SetAnimationRotation(animation_rotation);
 
     //alpitodorender ship->SetRenderData(mesh, texOb, scale);

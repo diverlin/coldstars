@@ -21,6 +21,9 @@
 #include "myStr.hpp"
 
 Base::Base()
+    :
+      m_mesh_id(0),
+      m_texture_id(0)
 {}
 
 /*virtual*/
@@ -47,10 +50,10 @@ void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
     Logger::Instance().Log(" Base("+int2str(GetId())+")::SaveDataUniqueBase", SAVELOAD_LOG_DIP);
     #endif
     
-    save_ptree.put(root+"data_id.id",            m_Data_id.id);
-    save_ptree.put(root+"data_id.type_id",       static_cast<int>(m_Data_id.type_id));
-    save_ptree.put(root+"data_id.subtype_id",    static_cast<int>(m_Data_id.subtype_id));
-    save_ptree.put(root+"data_id.subsubtype_id", static_cast<int>(m_Data_id.subsubtype_id));
+    save_ptree.put(root+"data_id.id",            m_data_id.id);
+    save_ptree.put(root+"data_id.type_id",       static_cast<int>(m_data_id.type_id));
+    save_ptree.put(root+"data_id.subtype_id",    static_cast<int>(m_data_id.subtype_id));
+    save_ptree.put(root+"data_id.subsubtype_id", static_cast<int>(m_data_id.subsubtype_id));
 }
 
 void Base::LoadData(const boost::property_tree::ptree& load_ptree)
@@ -59,10 +62,10 @@ void Base::LoadData(const boost::property_tree::ptree& load_ptree)
     Logger::Instance().Log(" Base("+int2str(GetId())+")::LoadDataUniqueBase", SAVELOAD_LOG_DIP);
     #endif
     
-    m_Data_id.id              = load_ptree.get<unsigned long int>("data_id.id");
-    m_Data_id.type_id         = (TYPE::ENTITY)load_ptree.get<int>("data_id.type_id");
-    m_Data_id.subtype_id      = (TYPE::ENTITY)load_ptree.get<int>("data_id.subtype_id");
-    m_Data_id.subsubtype_id   = (TYPE::ENTITY)load_ptree.get<int>("data_id.subsubtype_id");
+    m_data_id.id              = load_ptree.get<unsigned long int>("data_id.id");
+    m_data_id.type_id         = (TYPE::ENTITY)load_ptree.get<int>("data_id.type_id");
+    m_data_id.subtype_id      = (TYPE::ENTITY)load_ptree.get<int>("data_id.subtype_id");
+    m_data_id.subsubtype_id   = (TYPE::ENTITY)load_ptree.get<int>("data_id.subsubtype_id");
 }
 
 void Base::ResolveData()
