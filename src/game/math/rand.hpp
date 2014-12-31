@@ -23,39 +23,11 @@
 #include <types/RaceTypes.hpp>
 #include <types/EntityTypes.hpp>
 
-#include <glm/glm.hpp>
-
-int getRandIntFromVec(const std::vector<int>&);
-
-float getRandFloat(float, float);
-int getRandInt(int, int);
-int getRandSign();
-bool getRandBool();
-
-glm::vec2 getRandVec2f(int radius_min, int radius_max);
-glm::vec3 getRandXYVec3f(int radius_min, int radius_max, float z);
-glm::vec3 getRandXYVec3Unit();
-
-bool isActionShouldHappen(int);
-
 TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE, const std::vector<TYPE::ENTITY>&);
 const std::vector<TYPE::ENTITY>& getAllowedSubTypesByRaceId(TYPE::RACE);
 
 TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE);
 TYPE::ENTITY getRandNpcSubSubTypeId(TYPE::ENTITY);
 
-template<typename TYPE> 
-TYPE getRand(const std::vector<TYPE>& vec)
-{
-    if (vec.size()>0) { return vec[getRandInt(0, vec.size()-1)]; }
-    else              { return TYPE::NONE_ID; }
-}
-
-template<typename TYPE>
-TYPE getRandomElement(const std::vector<TYPE>& vec)
-{
-    assert(vec.size());
-    return vec[getRandInt(0, vec.size()-1)];
-}
 
 

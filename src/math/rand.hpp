@@ -16,33 +16,36 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "AnimationEffect2D.hpp"
-#include <common/Box2D.hpp>
+#pragma once
 
-namespace jeti {
+#include <vector>
+#include <glm/glm.hpp>
 
-void AnimationEffect2D::Update(Box2D& box)
+int getRandIntFromVec(const std::vector<int>&);
+
+float getRandFloat(float, float);
+int getRandInt(int, int);
+int getRandSign();
+bool getRandBool();
+
+glm::vec2 getRandVec2f(int radius_min, int radius_max);
+glm::vec3 getRandXYVec3f(int radius_min, int radius_max, float z);
+glm::vec3 getRandXYVec3Unit();
+
+bool isActionShouldHappen(int);
+
+template<typename TYPE> 
+TYPE getRand(const std::vector<TYPE>& vec)
 {
-    if ((scale.x < scale_min.x) and (scale.y < scale_min.y)) {
-        scale_up = true;
-    } else if ((scale.x > scale_max.x) and (scale.y > scale_max.y)) {
-        scale_up = false;
-    }
-    
-    if (scale_up) {
-        scale += d_scale;
-    } else {
-        scale -= d_scale;
-    }
-    
-    box.SetScale(vec3ToVec2(scale));
+    if (vec.size()>0) { return vec[getRandInt(0, vec.size()-1)]; }
+    else              { return TYPE::NONE_ID; }
 }
 
-void AnimationEffect2D::Reset()
+template<typename TYPE>
+TYPE getRandomElement(const std::vector<TYPE>& vec)
 {
-    scale = glm::vec3(1.0f);
-    angle = 0.0f;
-    scale_up = true;
+    assert(vec.size());
+    return vec[getRandInt(0, vec.size()-1)];
 }
 
-} // namespace jeti
+

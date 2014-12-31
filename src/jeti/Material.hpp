@@ -19,10 +19,13 @@
 
 #pragma once
 
-#include <string>
-#include <MyGl.hpp>
 #include <glm/glm.hpp>
+
+#include <MyGl.hpp>
  
+#include <string>
+#include <vector>
+
 namespace jeti {
 
 struct Material

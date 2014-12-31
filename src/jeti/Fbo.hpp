@@ -16,7 +16,6 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
 #include <GL/glew.h>
@@ -30,17 +29,17 @@ class Fbo
         ~Fbo();
         
         void Create();
-        const GLuint GetTexture() const { return texture; }; 
+        const GLuint GetTexture() const { return texture; };
         
         void Activate(int, int);
         void Deactivate();
         
         void Resize(int, int);
-    
+
     private:
         GLuint texture;
         GLuint depth_buffer;
-        GLuint fbo;          
+        GLuint fbo;
 };
     
 }

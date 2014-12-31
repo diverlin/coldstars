@@ -19,13 +19,16 @@
 
 #pragma once
 
-#include <string>
-#include <vector>
 #include <MyGl.hpp>
-#include <glm/glm.hpp>
 #include <Material.hpp>
 
+#include <glm/glm.hpp>
+
+#include <string>
+#include <vector>
+
 namespace jeti {
+namespace video {
 
 class TextureOb
 {
@@ -66,4 +69,5 @@ class TextureOb
 
 void loadToVRAM(const std::string&, GLuint&, int&, int&);
             
-}
+} // namespace jeti
+} // namespace video

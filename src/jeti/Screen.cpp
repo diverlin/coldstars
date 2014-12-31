@@ -21,9 +21,11 @@
 
 #include <common/myStr.hpp>
 #include <config/config.hpp>
-#include <common/common.hpp>
-#include <common/constants.hpp>
-#include <math/rand.hpp>
+//#include <common/common.hpp>
+#include <constants.hpp>
+#include <math/rand.hpp> // remove
+
+#include <iostream>
 
 namespace jeti {
 
@@ -47,14 +49,16 @@ Screen::~Screen()
 
 void Screen::InitRenderStuff()
 {
-    int width      = Config::Instance().SCREEN_WIDTH; 
-    int height     = Config::Instance().SCREEN_HEIGHT;
-    int bpp        = Config::Instance().BPP;
-    bool vert_sync = Config::Instance().VSYNC;
- 
+    int width      = Config::instance().video().width;
+    int height     = Config::instance().video().height;
+    int bpp        = Config::instance().video().bpp;
+    bool vert_sync = Config::instance().video().vsync;
+    int fps_limit  = Config::instance().video().fps_limit;
+    std::string title("coldstars");
+
     auto_scroll = false;
     
-    wrCreateWindowSpecific(width, height, bpp, vert_sync, "coldstars");
+    wrCreateWindowSpecific(width, height, bpp, vert_sync, fps_limit, title);
     
     glewInit();             
     m_Render.Init(width, height);
@@ -76,7 +80,7 @@ void Screen::DrawFps()
         frames_counter++;
     }
     
-    std::string fps_str = "FPS:" + int2str(fps) + " / game_speed: x" + int2str(Config::Instance().GAME_SPEED);
+    //std::string fps_str = "FPS:" + int2str(fps) + " / game_speed: x" + int2str(Config::Instance().GAME_SPEED);
     //DrawText(fps_str, 14, glm::vec2(100, GetHeight()-10));
     if (getRandInt(0, 30) == 0) std::cout<<"fps="<<fps<<std::endl; 
 }

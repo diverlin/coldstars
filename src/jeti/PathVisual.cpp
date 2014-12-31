@@ -21,9 +21,6 @@
 #include <Mesh.hpp>
 #include <TextureOb.hpp>
 
-#include <common/constants.hpp> // depr
-//#include <resources/GuiTextureObCollector.hpp> // depr
-
 #include <math/myVector.hpp>
 #include <glm/gtx/transform.hpp>
 
@@ -76,7 +73,7 @@ void PathVisual::FillData(TextureOb* textureOb, int radius, int point_size)
     std::vector<float> sizes;
 
     float da = 4.0f * DEGREE_TO_RADIAN_RATE; 
-    for (float a=0.0f; a<=2*PI; a+=da)
+    for (float a=0.0f; a<=2*M_PI; a+=da)
     {
         points.push_back(glm::vec3(radius * cos(a), radius * sin(a), 0.0f));
         colors.push_back(glm::vec4(1.0f));

@@ -38,10 +38,8 @@ find_package(SFML COMPONENTS system graphics window REQUIRED)
 include_directories(${SFML_INCLUDE_DIR})
 message("${SFML_LIBRARIES}")
 
-
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../jeti)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../game)
-
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 add_library(${PROJECT} ${${PROJECT}_SOURCE} ${${PROJECT}_HEADER})
 target_link_libraries(${PROJECT}
