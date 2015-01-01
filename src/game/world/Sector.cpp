@@ -90,7 +90,7 @@ StarSystem* Sector::GetClosestStarSystemTo(StarSystem* starsystem, int condition
         {
             if ( (STARSYSTEM_vec[i]->GetConditionId() == condition_id) or (condition_id == NONE_ID) )
             {
-                float dist = meti::distanceBetween(starsystem->GetCenter(), STARSYSTEM_vec[i]->GetCenter());
+                float dist = meti::distance(starsystem->GetCenter(), STARSYSTEM_vec[i]->GetCenter());
 
                 if (dist < dist_min)
                 {

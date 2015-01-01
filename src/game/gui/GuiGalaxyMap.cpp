@@ -106,10 +106,10 @@ void GuiGalaxyMap::UpdateUnique(Player* player)
                 glm::vec3 starsystem_pos = GetAbsoluteStarSystemPosition(starsystem);
                 if (starsystem.GetId() != player->GetNpc()->GetVehicle()->GetStarSystem()->GetId())
                 {                            
-                    float ss_cursor_dist = meti::distanceBetween(starsystem_pos, data_mouse.pos_screencoord);
+                    float ss_cursor_dist = meti::distance(starsystem_pos, data_mouse.pos_screencoord);
                     if (ss_cursor_dist < 10)
                     { 
-                        int ss_ss_dist = meti::distanceBetween(starsystem_pos, player_starsystem_pos);
+                        int ss_ss_dist = meti::distance(starsystem_pos, player_starsystem_pos);
                         if (ss_ss_dist < player->GetNpc()->GetVehicle()->GetProperties().hyper * m_ScaleParsecToScreenCoord)
                         {
                             if (data_mouse.left_click == true)

@@ -4,7 +4,7 @@
       
 namespace meti {
 
-float distanceBetween(const glm::vec3& center1, const glm::vec3& center2)
+float distance(const glm::vec3& center1, const glm::vec3& center2)
 {
     float lx = (center2.x - center1.x);
     float ly = (center2.y - center1.y);
@@ -13,7 +13,7 @@ float distanceBetween(const glm::vec3& center1, const glm::vec3& center2)
     return sqrt(lx*lx + ly*ly + lz*lz); 
 }
 
-float distanceBetween(const glm::vec3& center1, const glm::vec2& center2)
+float distance(const glm::vec3& center1, const glm::vec2& center2)
 {
     float lx = (center2.x - center1.x);
     float ly = (center2.y - center1.y);
@@ -21,7 +21,7 @@ float distanceBetween(const glm::vec3& center1, const glm::vec2& center2)
     return sqrt(lx*lx + ly*ly); 
 }
 
-float distanceBetween(const glm::vec3& center1, float x2, float y2, float z2)
+float distance(const glm::vec3& center1, float x2, float y2, float z2)
 {
     float lx = (x2 - center1.x);
     float ly = (y2 - center1.y);
@@ -30,7 +30,7 @@ float distanceBetween(const glm::vec3& center1, float x2, float y2, float z2)
     return sqrt(lx*lx + ly*ly + lz*lz);    
 }
 
-float distanceBetween(const glm::vec2& center1, const glm::vec2& center2)
+float distance(const glm::vec2& center1, const glm::vec2& center2)
 {
     float xl = center2.x - center1.x;
     float yl = center2.y - center1.y;
@@ -38,7 +38,7 @@ float distanceBetween(const glm::vec2& center1, const glm::vec2& center2)
     return sqrt(xl*xl + yl*yl);
 }
 
-float distanceBetween(const glm::vec2& center1, const glm::vec3& center2)
+float distance(const glm::vec2& center1, const glm::vec3& center2)
 {
     float xl = center2.x - center1.x;
     float yl = center2.y - center1.y;
@@ -46,7 +46,7 @@ float distanceBetween(const glm::vec2& center1, const glm::vec3& center2)
     return sqrt(xl*xl + yl*yl);
 }
 
-float distanceBetween(const glm::vec2& center1, float x2, float y2)
+float distance(const glm::vec2& center1, float x2, float y2)
 {
     float xl = (x2 - center1.x);
     float yl = (y2 - center1.y);
@@ -54,7 +54,7 @@ float distanceBetween(const glm::vec2& center1, float x2, float y2)
     return sqrt(xl*xl + yl*yl);    
 }
 
-float distanceBetween(const glm::vec3& center1, float x2, float y2)  
+float distance(const glm::vec3& center1, float x2, float y2)  
 {
     float xl = (x2 - center1.x);
     float yl = (y2 - center1.y);
@@ -62,7 +62,7 @@ float distanceBetween(const glm::vec3& center1, float x2, float y2)
     return sqrt(xl*xl + yl*yl);  
 }
 
-float distanceBetween(float x1, float y1, float x2, float y2)
+float distance(float x1, float y1, float x2, float y2)
 {
     float xl = (x2 - x1);
     float yl = (y2 - y1);
@@ -71,17 +71,15 @@ float distanceBetween(float x1, float y1, float x2, float y2)
 }
 
 
-glm::vec2 getVec2f(float length, float angle)
+glm::vec2 genVec2f(float length, float angle)
 {
     angle = glm::radians(angle);
-    glm::vec2 vec(length*sin(angle), length*cos(angle));    
-    return vec;
+    return length * glm::vec2(sin(angle), cos(angle));
 }
 
-glm::vec3 getVec3f(float length, float angle, float pos_z)
+glm::vec3 genVec3f(float length, float angle, float pos_z)
 {
-    glm::vec3 vec(length*sin(angle), length*cos(angle), pos_z);    
-    return vec;
+    return glm::vec3(length*sin(angle), length*cos(angle), pos_z);
 }
 
 float getAngleInD(const glm::vec2& v_start, const glm::vec2 v_end)  // depr

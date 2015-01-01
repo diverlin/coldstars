@@ -510,7 +510,7 @@ void Vehicle::BindOwnerNpc(Npc* owner_npc)
 
 bool Vehicle::IsObjectWithinRadarRange(BaseSpaceEntity* object) const
 {
-    float dist = meti::distanceBetween(GetCenter(), object->GetCenter());
+    float dist = meti::distance(GetCenter(), object->GetCenter());
     if (dist < m_Properties.radar)
     {
             return true;
@@ -1250,7 +1250,7 @@ void Vehicle::RenderGrappleRange()
 
 bool Vehicle::IsAbleToJumpTo(StarSystem* target_starsystem) const
 {
-     float dist = meti::distanceBetween(GetStarSystem()->GetCenter(), target_starsystem->GetCenter());
+     float dist = meti::distance(GetStarSystem()->GetCenter(), target_starsystem->GetCenter());
     if (dist < m_Properties.hyper)
     {
         return true;
