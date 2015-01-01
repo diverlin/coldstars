@@ -18,7 +18,7 @@
 
 #include "FreezerModule.hpp"
 #include "../../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 
 FreezerModule::FreezerModule(int id)
@@ -38,13 +38,13 @@ FreezerModule::~FreezerModule()
 void FreezerModule::AddUniqueInfo()
 {
     info.addTitleStr("freezer module");
-    info.addNameStr("freeze_add:");     info.addValueStr( ceti::int2str(freeze_add) );
+    info.addNameStr("freeze_add:");     info.addValueStr( std::to_string(freeze_add) );
 }
 
 /*virtual*/
 void FreezerModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "freezer_module." + ceti::int2str(GetId()) + ".";
+    std::string root = "freezer_module." + std::to_string(GetId()) + ".";
 
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -73,7 +73,7 @@ void FreezerModule::Resolve()
 void FreezerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" FreezerModule::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" FreezerModule::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"freeze_add", freeze_add);
@@ -82,7 +82,7 @@ void FreezerModule::SaveData(boost::property_tree::ptree& save_ptree, const std:
 void FreezerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" FreezerModule::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" FreezerModule::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     freeze_add = load_ptree.get<int>("freeze_add");
@@ -91,7 +91,7 @@ void FreezerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void FreezerModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" FreezerModule::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" FreezerModule::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

@@ -18,7 +18,7 @@
 
 #include "DroidModule.hpp"
 #include "../../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 
 DroidModule::DroidModule(int id)
@@ -38,13 +38,13 @@ DroidModule::~DroidModule()
 void DroidModule::AddUniqueInfo()
 {
     info.addTitleStr("droid module");
-    info.addNameStr("repair_add:");   info.addValueStr( ceti::int2str(repair_add) );
+    info.addNameStr("repair_add:");   info.addValueStr( std::to_string(repair_add) );
 }
 
 /*virtual*/
 void DroidModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "droid_module." + ceti::int2str(GetId()) + ".";
+    std::string root = "droid_module." + std::to_string(GetId()) + ".";
     
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -73,7 +73,7 @@ void DroidModule::Resolve()
 void DroidModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" DroidModule::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidModule::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"repair_add", repair_add);
@@ -82,7 +82,7 @@ void DroidModule::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 void DroidModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" DroidModule::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidModule::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     repair_add = load_ptree.get<int>("repair_add");
@@ -91,7 +91,7 @@ void DroidModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void DroidModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" DroidModule::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidModule::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

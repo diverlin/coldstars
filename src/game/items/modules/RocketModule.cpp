@@ -18,7 +18,7 @@
 
 #include "RocketModule.hpp"
 #include "../../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 
 RocketModule::RocketModule(int id)
@@ -42,15 +42,15 @@ void RocketModule::AddUniqueInfo()
     info.addTitleStr("rocket module"); 
     if (ammo_max_add != 0)
     {
-        info.addNameStr("ammo_max_add:");   info.addValueStr(ceti::int2str(ammo_max_add));
+        info.addNameStr("ammo_max_add:");   info.addValueStr(std::to_string(ammo_max_add));
     }
     if (damage_add != 0)
     {
-        info.addNameStr("damage_add:");     info.addValueStr(ceti::int2str(damage_add));
+        info.addNameStr("damage_add:");     info.addValueStr(std::to_string(damage_add));
     }
     if (radius_add != 0)
     {
-        info.addNameStr("radius_add:");     info.addValueStr(ceti::int2str(radius_add));
+        info.addNameStr("radius_add:");     info.addValueStr(std::to_string(radius_add));
     } 
 }
 
@@ -58,7 +58,7 @@ void RocketModule::AddUniqueInfo()
 /*virtual*/
 void RocketModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "rocket_module." + ceti::int2str(GetId()) + ".";
+    std::string root = "rocket_module." + std::to_string(GetId()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
     BaseModule::SaveData(save_ptree, root);
@@ -86,7 +86,7 @@ void RocketModule::Resolve()
 void RocketModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RocketModule::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketModule::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"ammo_max_add", ammo_max_add);
@@ -97,7 +97,7 @@ void RocketModule::SaveData(boost::property_tree::ptree& save_ptree, const std::
 void RocketModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RocketModule::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketModule::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     ammo_max_add = load_ptree.get<int>("ammo_max_add");
@@ -108,7 +108,7 @@ void RocketModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void RocketModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RocketModule::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketModule::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

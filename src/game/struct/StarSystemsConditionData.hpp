@@ -19,7 +19,7 @@
 #pragma once
 
 #include <string>
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 
 struct StarSystemsConditionData
 {
@@ -32,6 +32,6 @@ struct StarSystemsConditionData
              int captured_num;
                           
              void Reset() { safe_num = 0; war_num = 0; captured_num = 0; };
-        std::string GetStr() const { return "safe_num="+ceti::int2str(safe_num)+" war_num="+ceti::int2str(war_num)+" captured_num="+ceti::int2str(captured_num); }
+        std::string GetStr() const { return "safe_num="+std::to_string(safe_num)+" war_num="+std::to_string(war_num)+" captured_num="+std::to_string(captured_num); }
 };
 

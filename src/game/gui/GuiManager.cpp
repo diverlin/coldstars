@@ -25,7 +25,7 @@
 #include <world/Sector.hpp>
 #include "../world/starsystem.hpp"
 
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
 #include "../parts/WeaponComplex.hpp"

@@ -20,7 +20,7 @@
 #include "ItemSlot.hpp"
 
 #include "../builder/spaceobjects/ContainerBuilder.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../spaceobjects/Vehicle.hpp"
 #include "../spaceobjects/Container.hpp"
 #include "../pilots/Npc.hpp"
@@ -65,7 +65,7 @@ m_HitProbability(0)
 ItemSlot::~ItemSlot()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~ItemSlot("+ceti::int2str(GetId())+")");
+    Logger::Instance().Log("___::~ItemSlot("+std::to_string(GetId())+")");
     #endif
 }  
   
@@ -443,7 +443,7 @@ void ItemSlot::DrawRange(const glm::vec2& offset)
 bool ItemSlot::CheckSubTarget(ItemSlot* subtarget) const
 {
     #if WEAPONSTARGET_LOG_ENABLED == 1 
-    Logger::Instance().Log(" ItemSlot("+ceti::int2str(GetId())+")::CheckSubTarget", WEAPONSTARGET_LOG_DIP);
+    Logger::Instance().Log(" ItemSlot("+std::to_string(GetId())+")::CheckSubTarget", WEAPONSTARGET_LOG_DIP);
     #endif     
     
     if (subtarget->GetItem() != nullptr)
@@ -458,7 +458,7 @@ bool ItemSlot::CheckSubTarget(ItemSlot* subtarget) const
 STATUS ItemSlot::CheckTarget(BaseSpaceEntity* target) const
 {
     #if WEAPONSTARGET_LOG_ENABLED == 1 
-    Logger::Instance().Log(" ItemSlot("+ceti::int2str(GetId())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
+    Logger::Instance().Log(" ItemSlot("+std::to_string(GetId())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
     #endif     
     
     if (IsTargetAlive(target) == false)
@@ -487,7 +487,7 @@ STATUS ItemSlot::CheckTarget(BaseSpaceEntity* target) const
 STATUS ItemSlot::CheckTargetPure(BaseSpaceEntity* target) const
 {
     #if WEAPONSTARGET_LOG_ENABLED == 1 
-    Logger::Instance().Log(" ItemSlot("+ceti::int2str(GetId())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
+    Logger::Instance().Log(" ItemSlot("+std::to_string(GetId())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
     #endif     
 
     if (IsTargetAlive(target) == false)
@@ -542,7 +542,7 @@ bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* target) const
 /* virtual override final */
 void ItemSlot::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "item_slot." + ceti::int2str(GetId()) + ".";
+    const std::string root = "item_slot." + std::to_string(GetId()) + ".";
     Base::SaveData(save_ptree, root);
     BaseSlot::SaveData(save_ptree, root);
     ItemSlot::SaveData(save_ptree, root);
@@ -567,7 +567,7 @@ void ItemSlot::Resolve()
 void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ItemSlot("+ceti::int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ItemSlot("+std::to_string(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 
     if (m_Target != nullptr)    { save_ptree.put(root+"unresolved_ItemSlot.target_id", m_Target->GetId()); }
@@ -580,7 +580,7 @@ void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
 void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ItemSlot("+ceti::int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ItemSlot("+std::to_string(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
     
     unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id"); 
@@ -590,7 +590,7 @@ void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 void ItemSlot::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ItemSlot("+ceti::int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ItemSlot("+std::to_string(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     if (unresolved_ItemSlot.target_id != NONE_ID)
@@ -616,7 +616,7 @@ void ItemSlot::ResolveData()
 void ItemSlot::Log(const std::string& func_name) const
 {
     #if WEAPONSTARGET_LOG_ENABLED == 1 
-    std::string str = "ItemSlot(id="+ceti::int2str(GetId())+")::"+func_name+" "+GetDataTypeString();
+    std::string str = "ItemSlot(id="+std::to_string(GetId())+")::"+func_name+" "+GetDataTypeString();
     
     if (owner != nullptr)       { str += " owner:" + owner->GetDataTypeString(); }
     if (m_Item != nullptr)      { str += " item:" + m_Item->GetDataTypeString();  }

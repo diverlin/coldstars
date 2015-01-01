@@ -27,7 +27,7 @@ ShipDrawable::ShipDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
 ShipDrawable::~ShipDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Ship("+ceti::int2str(GetId())+")");
+    Logger::Instance().Log("___::~Ship("+std::to_string(GetId())+")");
     #endif
 } 
 
@@ -38,23 +38,23 @@ ShipDrawable::~ShipDrawable()
 //    GetInfo().clear();
 
 //    GetInfo().addTitleStr("SHIP");
-//    if (GetStarSystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( ceti::int2str(GetId()) + " / " + ceti::int2str(GetStarSystem()->GetId()) ); }
-//    else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( ceti::int2str(GetId()) ); }
+//    if (GetStarSystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()) ); }
+//    else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( std::to_string(GetId()) ); }
 //    // alpitodorender GetInfo().addNameStr("race:");          GetInfo().addValueStr( getRaceStr(GetTextureOb().GetAssociation().race_id) );
 //    GetInfo().addNameStr("class:");         GetInfo().addValueStr( getStr(GetSubSubTypeId()) );
-//    GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( ceti::int2str(GetDataLife().armor) + "/" + ceti::int2str(GetDataKorpus().armor) );
-////    alpitodorender GetInfo().addNameStr("size id:");       GetInfo().addValueStr( ceti::int2str(GetTextureOb().GetData().size_id) );
-//    GetInfo().addNameStr("space/free:");    GetInfo().addValueStr( ceti::int2str(GetDataKorpus().space) + "/" + ceti::int2str(GetProperties().free_space) );
-//    GetInfo().addNameStr("mass:");          GetInfo().addValueStr( ceti::int2str(GetMass()) );
-//    GetInfo().addNameStr("speedx100:");     GetInfo().addValueStr( ceti::int2str(GetProperties().speed*100) );
-//    GetInfo().addNameStr("speed dmx100:");  GetInfo().addValueStr( ceti::int2str(GetMass()*MASS_DECREASE_SPEED_RATE*100));
-//    GetInfo().addNameStr("energy:");        GetInfo().addValueStr( ceti::int2str(GetProperties().energy) );
-//    GetInfo().addNameStr("temp.:");         GetInfo().addValueStr( ceti::int2str(GetDataKorpus().temperature) );
-//    GetInfo().addNameStr("radar:");         GetInfo().addValueStr( ceti::int2str(GetProperties().radar) );
-//    GetInfo().addNameStr("protect:");       GetInfo().addValueStr( ceti::int2str(GetProperties().protection) );
-//    GetInfo().addNameStr("repair:");        GetInfo().addValueStr( ceti::int2str(GetProperties().repair) );
-//    GetInfo().addNameStr("scan:");          GetInfo().addValueStr( ceti::int2str(GetProperties().scan) );
-//    GetInfo().addNameStr("price:");         GetInfo().addValueStr( ceti::int2str(GetDataKorpus().price) );
+//    GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( std::to_string(GetDataLife().armor) + "/" + std::to_string(GetDataKorpus().armor) );
+////    alpitodorender GetInfo().addNameStr("size id:");       GetInfo().addValueStr( std::to_string(GetTextureOb().GetData().size_id) );
+//    GetInfo().addNameStr("space/free:");    GetInfo().addValueStr( std::to_string(GetDataKorpus().space) + "/" + std::to_string(GetProperties().free_space) );
+//    GetInfo().addNameStr("mass:");          GetInfo().addValueStr( std::to_string(GetMass()) );
+//    GetInfo().addNameStr("speedx100:");     GetInfo().addValueStr( std::to_string(GetProperties().speed*100) );
+//    GetInfo().addNameStr("speed dmx100:");  GetInfo().addValueStr( std::to_string(GetMass()*MASS_DECREASE_SPEED_RATE*100));
+//    GetInfo().addNameStr("energy:");        GetInfo().addValueStr( std::to_string(GetProperties().energy) );
+//    GetInfo().addNameStr("temp.:");         GetInfo().addValueStr( std::to_string(GetDataKorpus().temperature) );
+//    GetInfo().addNameStr("radar:");         GetInfo().addValueStr( std::to_string(GetProperties().radar) );
+//    GetInfo().addNameStr("protect:");       GetInfo().addValueStr( std::to_string(GetProperties().protection) );
+//    GetInfo().addNameStr("repair:");        GetInfo().addValueStr( std::to_string(GetProperties().repair) );
+//    GetInfo().addNameStr("scan:");          GetInfo().addValueStr( std::to_string(GetProperties().scan) );
+//    GetInfo().addNameStr("price:");         GetInfo().addValueStr( std::to_string(GetDataKorpus().price) );
 //    GetInfo().addNameStr("pos:");           GetInfo().addValueStr( str(GetCenter()) );
         
 //    if (GetProperties().grab_radius > 0)

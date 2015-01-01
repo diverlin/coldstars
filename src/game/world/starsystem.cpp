@@ -29,7 +29,7 @@
 #include <common/Logger.hpp>
 #include <ceti/Collision.hpp>
 #include <math/rand.hpp>
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 
 #include <world/EntityManager.hpp>
 
@@ -168,7 +168,7 @@ void StarSystem::CreateGroupAndShareTask(Npc* npc_leader, StarSystem* target_sta
 void StarSystem::AddVehicle(Vehicle* vehicle, const glm::vec3& center, const glm::vec3& angle, const BaseSpaceEntity* const parent)
 {
     #if ENTITY_TRANSACTION_LOG_ENABLED == 1
-    Logger::Instance().Log(" StarSystem(" + ceti::int2str(GetId()) + ")::AddVehicle(" + ceti::int2str(vehicle->GetId())+")", ENTITY_TRANSACTION_LOG_DIP);
+    Logger::Instance().Log(" StarSystem(" + std::to_string(GetId()) + ")::AddVehicle(" + std::to_string(vehicle->GetId())+")", ENTITY_TRANSACTION_LOG_DIP);
     
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     {
@@ -246,7 +246,7 @@ void StarSystem::Add(BasePlanet* object, const BaseSpaceEntity* parent, int it)
 void StarSystem::AddContainer(Container* container, const glm::vec3& center)
 {
     #if ENTITY_TRANSACTION_LOG_ENABLED == 1
-    Logger::Instance().Log(" StarSystem(" + ceti::int2str(GetId()) + ")::AddVehicle(" + ceti::int2str(container->GetId()) + ")", ENTITY_TRANSACTION_LOG_DIP);
+    Logger::Instance().Log(" StarSystem(" + std::to_string(GetId()) + ")::AddVehicle(" + std::to_string(container->GetId()) + ")", ENTITY_TRANSACTION_LOG_DIP);
     
     
     for (unsigned int i=0; i<CONTAINER_vec.size(); i++)
@@ -296,7 +296,7 @@ void StarSystem::Add(jeti::ExplosionEffect* explosion, const glm::vec3& center, 
     if ((radius_effect > 75) && (GetShockWaveEffectNum() < SHOCKWAVES_MAX_NUM))
     {
         ShockWaveEffect* shockwave = getNewShockWave(radius_effect);
-        Add(shockwave, meti::vec3ToVec2(center));
+        Add(shockwave, meti::vec2(center));
     }
     
     if (radius_effect > 25)
@@ -916,7 +916,7 @@ void StarSystem::ManageUnavaliableObjects_s()
         if ((*it)->GetPlaceTypeId() != TYPE::PLACE::SPACE_ID)
         {    
             #if ENTITY_TRANSACTION_LOG_ENABLED == 1
-            Logger::Instance().Log("starsysten("+ceti::int2str(GetId())+ ")::RemoveVehicle(" + ceti::int2str((*it)->GetId())+")");
+            Logger::Instance().Log("starsysten("+std::to_string(GetId())+ ")::RemoveVehicle(" + std::to_string((*it)->GetId())+")");
             #endif
             it = VEHICLE_vec.erase(it);
         }
@@ -1146,7 +1146,7 @@ void StarSystem::ResolveData()
 
 void StarSystem::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "starsystem." + ceti::int2str(GetStarSystem()->GetId())+".";
+    const std::string root = "starsystem." + std::to_string(GetStarSystem()->GetId())+".";
 
     Base::SaveData(save_ptree, root);
     BaseSpaceEntity::SaveData(save_ptree, root);

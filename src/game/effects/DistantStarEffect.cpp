@@ -17,7 +17,7 @@
 */
 
 #include "DistantStarEffect.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../common/constants.hpp"
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
@@ -57,7 +57,7 @@ void DistantStarEffect::ResolveData()
  
 void DistantStarEffect::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    std::string droot = root + "distant_star_effect."+ceti::int2str(id)+".";
+    std::string droot = root + "distant_star_effect."+std::to_string(id)+".";
     
     BaseBackGroundEffect::SaveData(save_ptree, droot);
     DistantStarEffect::SaveData(save_ptree, droot);

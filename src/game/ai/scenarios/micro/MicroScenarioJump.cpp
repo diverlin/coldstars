@@ -19,7 +19,7 @@
 #include "MicroScenarioJump.hpp"
 #include "../../../common/constants.hpp"
 #include "../../../common/Logger.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../../spaceobjects/Vehicle.hpp"
 
 #include "../../../world/starsystem.hpp"
@@ -39,7 +39,7 @@ MicroScenarioJump::~MicroScenarioJump()
 void MicroScenarioJump::Enter(Npc* npc) const
 {    
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id/npc_id="+ceti::int2str(npc->GetVehicle()->GetId())+"/"+ceti::int2str(npc->GetId())+"  ENTER MicroScenarioJump", AISCENARIO_LOG_DIP);
+    Logger::Instance().Log("vehicle_id/npc_id="+std::to_string(npc->GetVehicle()->GetId())+"/"+std::to_string(npc->GetId())+"  ENTER MicroScenarioJump", AISCENARIO_LOG_DIP);
     #endif    
     
     npc->GetVehicle()->GetComplexDrive().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetStarSystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
@@ -79,12 +79,12 @@ void MicroScenarioJump::UpdateInDynamicInSpace(Npc* npc) const
 void MicroScenarioJump::Exit(Npc* npc) const
 {
         #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id/npc_id="+ceti::int2str(npc->GetVehicle()->GetId())+"/"+ceti::int2str(npc->GetId())+" EXIT MicroScenarioJump", AISCENARIO_LOG_DIP);
+    Logger::Instance().Log("vehicle_id/npc_id="+std::to_string(npc->GetVehicle()->GetId())+"/"+std::to_string(npc->GetId())+" EXIT MicroScenarioJump", AISCENARIO_LOG_DIP);
     #endif   
 }
 
 /* virtual */
 std::string MicroScenarioJump::GetDescription(Npc* npc) const
 {
-    return "JUMP to ss_id = " + ceti::int2str( npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId());
+    return "JUMP to ss_id = " + std::to_string( npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId());
 }

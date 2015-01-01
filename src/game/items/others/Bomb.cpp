@@ -18,7 +18,7 @@
 
 #include "Bomb.hpp"
 #include "../../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 
 Bomb::Bomb(int id)
@@ -41,7 +41,7 @@ void Bomb::UpdateOwnerAbilities() {}
 /* virtual */         
 void Bomb::AddCommonInfo()
 {
-    info.addNameStr("mass:");        info.addValueStr(ceti::int2str(data_item.mass));
+    info.addNameStr("mass:");        info.addValueStr(std::to_string(data_item.mass));
 }
 
 /* virtual */
@@ -49,16 +49,16 @@ void Bomb::AddUniqueInfo()
 {
     info.addTitleStr("BOMB");
 
-    //info.addNameStr("id/ss_id:");    info.addValueStr(ceti::int2str(data_id.id) + " / " + ceti::int2str(starsystem->GetId()));
-    info.addNameStr("id:");          info.addValueStr(ceti::int2str(GetId()));
-    info.addNameStr("damage:");      info.addValueStr(ceti::int2str(damage));
-    //info.addNameStr("armor:");       info.addValueStr(ceti::int2str(data_life.armor));
+    //info.addNameStr("id/ss_id:");    info.addValueStr(std::to_string(data_id.id) + " / " + std::to_string(starsystem->GetId()));
+    info.addNameStr("id:");          info.addValueStr(std::to_string(GetId()));
+    info.addNameStr("damage:");      info.addValueStr(std::to_string(damage));
+    //info.addNameStr("armor:");       info.addValueStr(std::to_string(data_life.armor));
 }         
 
 /*virtual*/
 void Bomb::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "bomb." + ceti::int2str(GetId()) + ".";
+    std::string root = "bomb." + std::to_string(GetId()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
     Bomb::SaveData(save_ptree, root);
@@ -83,7 +83,7 @@ void Bomb::Resolve()
 void Bomb::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Bomb::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Bomb::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"damage", damage);
@@ -93,7 +93,7 @@ void Bomb::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
 void Bomb::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Bomb::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Bomb::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     damage = load_ptree.get<int>("damage");
@@ -103,7 +103,7 @@ void Bomb::LoadData(const boost::property_tree::ptree& load_ptree)
 void Bomb::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Bomb::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Bomb::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

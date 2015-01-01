@@ -18,7 +18,7 @@
 
 #include "BaseSlot.hpp"
 #include "../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../common/Logger.hpp"
 #include "../world/EntityManager.hpp"
 
@@ -35,14 +35,14 @@ owner(nullptr)
 BaseSlot::~BaseSlot()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BaseSlot("+ceti::int2str(GetId())+")");
+    Logger::Instance().Log("___::~BaseSlot("+std::to_string(GetId())+")");
     #endif
 }
                 
 void BaseSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {   
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseSlot("+ceti::int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseSlot("+std::to_string(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
         
     if (owner) { save_ptree.put(root+"unresolved.owner_id", owner->GetId()); }
@@ -55,7 +55,7 @@ void BaseSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
 void BaseSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseSlot("+ceti::int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseSlot("+std::to_string(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
        
     unresolved_BaseSlot.owner_id = load_ptree.get<int>("unresolved.owner_id"); 
@@ -66,7 +66,7 @@ void BaseSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 void BaseSlot::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseSlot("+ceti::int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseSlot("+std::to_string(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     if (unresolved_BaseSlot.owner_id != NONE_ID)

@@ -29,7 +29,7 @@
 #include <ceti/Collision.hpp>
 #include "../common/constants.hpp"
 #include "../common/Logger.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include <math/rand.hpp>
 
 #include "../world/starsystem.hpp"
@@ -70,9 +70,9 @@ void DriveComplex::ResetTarget()
 {
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
     if (target == nullptr)
-    Logger::Instance().Log("vehicle_id="+ceti::int2str(m_OwnerVehicle->GetId())+" DriveComplex::ResetTarget", DRIVECOMPLEX_LOG_DIP);
+    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->GetId())+" DriveComplex::ResetTarget", DRIVECOMPLEX_LOG_DIP);
     else
-    Logger::Instance().Log("vehicle_id="+ceti::int2str(m_OwnerVehicle->GetId())+" DriveComplex::ResetTarget" + getBaseInfoStr(target), DRIVECOMPLEX_LOG_DIP);
+    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->GetId())+" DriveComplex::ResetTarget" + getBaseInfoStr(target), DRIVECOMPLEX_LOG_DIP);
     #endif    
     
     m_Target = nullptr;
@@ -97,7 +97,7 @@ void DriveComplex::SetStaticTargetCoords(const glm::vec3& target_pos)
     UpdatePath();
 
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+ceti::int2str(m_OwnerVehicle->GetId())+" DriveComplex::SetStaticTargetCoords:"+ceti::int2str((int)target_pos.x)+", "+ceti::int2str((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
+    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->GetId())+" DriveComplex::SetStaticTargetCoords:"+std::to_string((int)target_pos.x)+", "+std::to_string((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
     #endif  
 }      
                  
@@ -111,7 +111,7 @@ void DriveComplex::SetTarget(BaseSpaceEntity* target, int action_id)
     m_HasTarget = true;
         
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+ceti::int2str(m_OwnerVehicle->GetId())+" DriveComplex::SetTarget " + getBaseInfoStr(target) + " navigator_action = " + getNavigatorActionStr(m_ActionId), DRIVECOMPLEX_LOG_DIP);
+    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->GetId())+" DriveComplex::SetTarget " + getBaseInfoStr(target) + " navigator_action = " + getNavigatorActionStr(m_ActionId), DRIVECOMPLEX_LOG_DIP);
     #endif 
 }
   
@@ -217,7 +217,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
     {
         case TYPE::ENTITY::STARSYSTEM_ID:
         {
-            float angle = M_PI/2 - meti::getAngle(meti::vec3ToVec2(m_Target->GetCenter()), meti::vec3ToVec2(m_OwnerVehicle->GetStarSystem()->GetCenter())); //??    use cross()
+            float angle = M_PI/2 - meti::getAngle(meti::vec2(m_Target->GetCenter()), meti::vec2(m_OwnerVehicle->GetStarSystem()->GetCenter())); //??    use cross()
             m_TargetPos = meti::getVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angle, m_OwnerVehicle->GetStarSystem()->GetCenter().z);
             m_TargetDistance = COLLISION_RADIUS_FOR_STATIC_COORD;
             
@@ -251,7 +251,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
     }
 
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+ceti::int2str(m_OwnerVehicle->GetId())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + glm::vec22str(target_pos) + " target_center=" + glm::vec22str(target->GetCenter()) + " target_offset=" + glm::vec22str(target_offset) + "target_distance=" + ceti::int2str(target_distance), DRIVECOMPLEX_LOG_DIP);
+    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->GetId())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + glm::vec22str(target_pos) + " target_center=" + glm::vec22str(target->GetCenter()) + " target_offset=" + glm::vec22str(target_offset) + "target_distance=" + std::to_string(target_distance), DRIVECOMPLEX_LOG_DIP);
     #endif 
 }
 
@@ -260,7 +260,7 @@ bool DriveComplex::CheckTargetEchievement()
 {
     if (m_Target != nullptr)
     {    
-        if (ceti::checkCollisionDotWithCircle_DIRTY(meti::vec3ToVec2(m_OwnerVehicle->GetCenter()), meti::vec3ToVec2(m_TargetPos), m_TargetDistance) == true)
+        if (ceti::checkCollisionDotWithCircle_DIRTY(meti::vec2(m_OwnerVehicle->GetCenter()), meti::vec2(m_TargetPos), m_TargetDistance) == true)
         {
             return true;
         }
@@ -298,7 +298,7 @@ void DriveComplex::ClearPath()
 void DriveComplex::CalcPath()
 {
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+ceti::int2str(m_OwnerVehicle->GetId())+" DriveComplex::CalcPath " + "target_pos(int, int)=" + ceti::int2str((int)target_pos.x) + "," + ceti::int2str((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
+    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->GetId())+" DriveComplex::CalcPath " + "target_pos(int, int)=" + std::to_string((int)target_pos.x) + "," + std::to_string((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
     #endif   
     
     ClearPath();

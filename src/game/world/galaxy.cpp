@@ -21,7 +21,7 @@
 #include "../common/constants.hpp"
 #include "../world/EntityManager.hpp"
 #include <meti/RandUtils.hpp>
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 
 #include "../garbage/EntityGarbage.hpp"
 #include "../struct/StarSystemsConditionData.hpp"
@@ -116,7 +116,7 @@ void Galaxy::ResolveData()
 
 void Galaxy::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "galaxy." + ceti::int2str(GetId())+".";
+    std::string root = "galaxy." + std::to_string(GetId())+".";
 
     Base::SaveData(save_ptree, root);
     Galaxy::SaveData(save_ptree, root);

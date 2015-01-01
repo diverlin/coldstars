@@ -18,7 +18,7 @@
 
 #include "BakEquipment.hpp"
 #include "../../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 #include "../../items//modules/BakModule.hpp"
 
@@ -82,15 +82,15 @@ void BakEquipment::AddUniqueInfo()
 std::string BakEquipment::GetFuelStr()
 {
      if (fuel_max_add == 0)
-        return ceti::int2str(fuel_max_orig) + "/" + ceti::int2str(fuel);
+        return std::to_string(fuel_max_orig) + "/" + std::to_string(fuel);
      else
-        return ceti::int2str(fuel_max_orig) + "+" + ceti::int2str(fuel_max_add) + "/" + ceti::int2str(fuel);
+        return std::to_string(fuel_max_orig) + "+" + std::to_string(fuel_max_add) + "/" + std::to_string(fuel);
 }
 
 /*virtual*/
 void BakEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "bak_equipment." + ceti::int2str(GetId()) + ".";
+    std::string root = "bak_equipment." + std::to_string(GetId()) + ".";
 
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -119,7 +119,7 @@ void BakEquipment::Resolve()
 void BakEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BakEquipment::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BakEquipment::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"fuel_max_orig", fuel_max_orig);
@@ -129,7 +129,7 @@ void BakEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::
 void BakEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BakEquipment::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BakEquipment::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     fuel_max_orig = load_ptree.get<int>("fuel_max_orig");
@@ -139,7 +139,7 @@ void BakEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 void BakEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BakEquipment::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BakEquipment::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

@@ -18,7 +18,7 @@
 
 #include "FreezerEquipment.hpp"
 #include "../../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 #include "../../items/modules/FreezerModule.hpp"
 
@@ -70,16 +70,16 @@ void FreezerEquipment::AddUniqueInfo()
 std::string FreezerEquipment::GetFreezeStr()
 {
      if (freeze_add == 0)
-         return ceti::int2str(freeze_orig);
+         return std::to_string(freeze_orig);
      else
-         return ceti::int2str(freeze_orig) + "+" + ceti::int2str(freeze_add);
+         return std::to_string(freeze_orig) + "+" + std::to_string(freeze_add);
 }
 
 
 /*virtual*/
 void FreezerEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "freezer_equipment." + ceti::int2str(GetId()) + ".";
+    std::string root = "freezer_equipment." + std::to_string(GetId()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
@@ -107,7 +107,7 @@ void FreezerEquipment::Resolve()
 void FreezerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" FreezerEquipment::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" FreezerEquipment::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"freeze_orig", freeze_orig);
@@ -116,7 +116,7 @@ void FreezerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const s
 void FreezerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" FreezerEquipment::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" FreezerEquipment::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     freeze_orig = load_ptree.get<int>("freeze_orig");     
@@ -125,7 +125,7 @@ void FreezerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 void FreezerEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" FreezerEquipment::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" FreezerEquipment::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

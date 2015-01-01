@@ -105,7 +105,7 @@ float dotUnits(const glm::vec3& v1, const glm::vec3& v2)
 }
 
 
-glm::vec2 vec3ToVec2(const glm::vec3& v3)
+glm::vec2 vec2(const glm::vec3& v3)
 {
     return glm::vec2(v3.x, v3.y);
 }

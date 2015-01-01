@@ -22,7 +22,7 @@
 
 #include "EntityManager.hpp"
 #include "../common/Logger.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 
 #include "../spaceobjects/IncludeSpaceObjects.hpp"
 
@@ -90,7 +90,7 @@
 #include "../dock/Kosmoport.hpp"
 
 #include "../slots/VehicleSlot.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../common/TurnTimer.hpp"
 
 #include <slots/ItemSlot.hpp>
@@ -107,7 +107,7 @@ void EntityManager::Clear()
     for (std::map<unsigned long int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
     {    
             #if CREATEDESTROY_LOG_ENABLED == 1
-            Logger::Instance().Log("________EntityManager::Clear, delete " + getTypeStr(iterator->second->GetTypeId()) + "(" +ceti::int2str(iterator->second->GetTypeId()) +") " + getTypeStr(iterator->second->GetSubTypeId()) + "(" + ceti::int2str(iterator->second->GetSubTypeId()) + ") id=" + ceti::int2str(iterator->second->GetId()));
+            Logger::Instance().Log("________EntityManager::Clear, delete " + getTypeStr(iterator->second->GetTypeId()) + "(" +std::to_string(iterator->second->GetTypeId()) +") " + getTypeStr(iterator->second->GetSubTypeId()) + "(" + std::to_string(iterator->second->GetSubTypeId()) + ") id=" + std::to_string(iterator->second->GetId()));
         #endif    
         delete iterator->second;
     }
@@ -118,7 +118,7 @@ void EntityManager::Clear()
 void EntityManager::RegisterEntity(Base* entity)
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("+++++++EntityManager::RegisterEntity " + getTypeStr(entity->GetTypeId()) + "(" +ceti::int2str(entity->GetTypeId()) +") " + getTypeStr(entity->GetSubTypeId()) + "(" + ceti::int2str(entity->GetSubTypeId()) + ") id=" + ceti::int2str(entity->GetId()));
+    Logger::Instance().Log("+++++++EntityManager::RegisterEntity " + getTypeStr(entity->GetTypeId()) + "(" +std::to_string(entity->GetTypeId()) +") " + getTypeStr(entity->GetSubTypeId()) + "(" + std::to_string(entity->GetSubTypeId()) + ") id=" + std::to_string(entity->GetId()));
     #endif
     
     entity_map.insert(std::make_pair(entity->GetId(), entity));
@@ -127,7 +127,7 @@ void EntityManager::RegisterEntity(Base* entity)
 Base* EntityManager::GetEntityById(unsigned long int id) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log("    EntityManager::GetEntityById requested_id=" + ceti::int2str(id));
+    Logger::Instance().Log("    EntityManager::GetEntityById requested_id=" + std::to_string(id));
     #endif
     
     std::map<unsigned long int, Base*>::const_iterator slice = entity_map.find(id);
@@ -157,7 +157,7 @@ Player* EntityManager::GetPlayer() const
 void EntityManager::RemoveEntity(Base* entity)
 {    
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("________EntityManager::RemoveEntity " + getTypeStr(entity->GetTypeId()) + "(" +ceti::int2str(entity->GetTypeId()) +") " + getTypeStr(entity->GetSubTypeId()) + "(" + ceti::int2str(entity->GetSubTypeId()) + ") id=" + ceti::int2str(entity->GetId()));
+    Logger::Instance().Log("________EntityManager::RemoveEntity " + getTypeStr(entity->GetTypeId()) + "(" +std::to_string(entity->GetTypeId()) +") " + getTypeStr(entity->GetSubTypeId()) + "(" + std::to_string(entity->GetSubTypeId()) + ") id=" + std::to_string(entity->GetId()));
     #endif
         
     if (entity_map.count(entity->GetId()) == 1)
@@ -167,7 +167,7 @@ void EntityManager::RemoveEntity(Base* entity)
     else
     {    
         #if CREATEDESTROY_LOG_ENABLED == 1
-        Logger::Instance().Log("fix the BUG ---EntityManager::RemoveEntity fails " + getTypeStr(entity->GetTypeId()) + "(" +ceti::int2str(entity->GetTypeId()) +") " + getTypeStr(entity->GetSubTypeId()) + "(" + ceti::int2str(entity->GetSubTypeId()) + ") id=" + ceti::int2str(entity->GetId()));
+        Logger::Instance().Log("fix the BUG ---EntityManager::RemoveEntity fails " + getTypeStr(entity->GetTypeId()) + "(" +std::to_string(entity->GetTypeId()) +") " + getTypeStr(entity->GetSubTypeId()) + "(" + std::to_string(entity->GetSubTypeId()) + ") id=" + std::to_string(entity->GetId()));
         #endif
     }
 } 
@@ -180,7 +180,7 @@ void EntityManager::SaveEvent(const std::string& filename)
     for (std::map<unsigned long int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
     {
         #if SAVELOAD_LOG_ENABLED == 1
-        Logger::Instance().Log("saving " + getTypeStr(iterator->second->GetTypeId()) + "(" +ceti::int2str(iterator->second->GetTypeId()) +") " + getTypeStr(iterator->second->GetSubTypeId()) + "(" + ceti::int2str(iterator->second->GetSubTypeId()) + ") id=" + ceti::int2str(iterator->second->GetId()));
+        Logger::Instance().Log("saving " + getTypeStr(iterator->second->GetTypeId()) + "(" +std::to_string(iterator->second->GetTypeId()) +") " + getTypeStr(iterator->second->GetSubTypeId()) + "(" + std::to_string(iterator->second->GetSubTypeId()) + ") id=" + std::to_string(iterator->second->GetId()));
         #endif
         iterator->second->Save(save_ptree);
     }
@@ -678,7 +678,7 @@ bool EntityManager::UpdateSaveRequest()
 {        
     if (save_request == true)
     {
-        SaveEvent("save"+ceti::int2str(TurnTimer::Instance().GetTurnCounter())+".info");
+        SaveEvent("save"+std::to_string(TurnTimer::Instance().GetTurnCounter())+".info");
         save_request = false;
         
         return true;

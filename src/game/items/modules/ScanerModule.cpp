@@ -18,7 +18,7 @@
 
 #include "ScanerModule.hpp"
 #include "../../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 
 ScanerModule::ScanerModule(int id)
@@ -38,13 +38,13 @@ ScanerModule::~ScanerModule()
 void ScanerModule::AddUniqueInfo()
 {
     info.addTitleStr("scaner module");
-    info.addNameStr("scan_add:");      info.addValueStr( ceti::int2str(scan_add) );
+    info.addNameStr("scan_add:");      info.addValueStr( std::to_string(scan_add) );
 }
 
 /*virtual*/
 void ScanerModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "scaner_module." + ceti::int2str(GetId()) + ".";
+    std::string root = "scaner_module." + std::to_string(GetId()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
     BaseModule::SaveData(save_ptree, root);
@@ -72,7 +72,7 @@ void ScanerModule::Resolve()
 void ScanerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ScanerModule::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ScanerModule::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"scan_add", scan_add);
@@ -81,7 +81,7 @@ void ScanerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::
 void ScanerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ScanerModule::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ScanerModule::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     scan_add = load_ptree.get<int>("scan_add");
@@ -90,6 +90,6 @@ void ScanerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void ScanerModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ScanerModule::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ScanerModule::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

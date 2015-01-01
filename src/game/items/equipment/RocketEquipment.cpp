@@ -19,7 +19,7 @@
 #include "RocketEquipment.hpp"
 #include "../../common/constants.hpp"
 #include <meti/RandUtils.hpp>
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 #include "../../items/modules/RocketModule.hpp"
 #include "../../builder/spaceobjects/RocketBulletBuilder.hpp"
@@ -126,25 +126,25 @@ void RocketEquipment::AddUniqueInfo()
 std::string RocketEquipment::GetAmmoStr()
 {
     if (ammo_max_add == 0)
-        return ceti::int2str(ammo_max_orig) + "/" + ceti::int2str(ammo);
+        return std::to_string(ammo_max_orig) + "/" + std::to_string(ammo);
     else
-        return ceti::int2str(ammo_max_orig) + "+" + ceti::int2str(ammo_max_add) + "/" + ceti::int2str(ammo);
+        return std::to_string(ammo_max_orig) + "+" + std::to_string(ammo_max_add) + "/" + std::to_string(ammo);
 }
 
 std::string RocketEquipment::GetDamageStr()
 {
     if (damage_add == 0)
-        return ceti::int2str(damage_orig);
+        return std::to_string(damage_orig);
     else
-        return ceti::int2str(damage_orig) + "+" + ceti::int2str(damage_add);
+        return std::to_string(damage_orig) + "+" + std::to_string(damage_add);
 }
 
 std::string RocketEquipment::GetRadiusStr()
 {
     if (radius_add == 0)
-        return ceti::int2str(radius_orig);
+        return std::to_string(radius_orig);
     else
-        return ceti::int2str(radius_orig) + "+" + ceti::int2str(radius_add);
+        return std::to_string(radius_orig) + "+" + std::to_string(radius_add);
 }
 
 void RocketEquipment::FireEvent(float attack_rate_normalized)
@@ -204,7 +204,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 /*virtual*/
 void RocketEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "rocket_equipment." + ceti::int2str(GetId()) + ".";
+    std::string root = "rocket_equipment." + std::to_string(GetId()) + ".";
 
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -233,7 +233,7 @@ void RocketEquipment::Resolve()
 void RocketEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RocketEquipment::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketEquipment::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"ammo_max_orig", ammo_max_orig);
@@ -248,7 +248,7 @@ void RocketEquipment::SaveData(boost::property_tree::ptree& save_ptree, const st
 void RocketEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RocketEquipment::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketEquipment::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     ammo_max_orig = load_ptree.get<int>("ammo_max_orig"); 
@@ -263,7 +263,7 @@ void RocketEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 void RocketEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RocketEquipment::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketEquipment::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     data_bullet.Resolve();

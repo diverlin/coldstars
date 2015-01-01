@@ -18,7 +18,7 @@
 
 #include "GuiVehicle2.hpp"
 #include "ButtonItemSlot2.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../common/common.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../spaceobjects/Vehicle.hpp"

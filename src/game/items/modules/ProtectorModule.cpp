@@ -18,7 +18,7 @@
 
 #include "ProtectorModule.hpp"
 #include "../../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 
 ProtectorModule::ProtectorModule(int id)
@@ -38,13 +38,13 @@ ProtectorModule::~ProtectorModule ()
 void ProtectorModule::AddUniqueInfo()
 {
     info.addTitleStr("protector module");
-    info.addNameStr("protection_add:");  info.addValueStr( ceti::int2str(protection_add) );
+    info.addNameStr("protection_add:");  info.addValueStr( std::to_string(protection_add) );
 }
 
 /*virtual*/
 void ProtectorModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "protector_module." + ceti::int2str(GetId()) + ".";
+    std::string root = "protector_module." + std::to_string(GetId()) + ".";
     
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -73,7 +73,7 @@ void ProtectorModule::Resolve()
 void ProtectorModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorModule::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorModule::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"protection_add", protection_add);
@@ -82,7 +82,7 @@ void ProtectorModule::SaveData(boost::property_tree::ptree& save_ptree, const st
 void ProtectorModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorModule::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorModule::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     protection_add = load_ptree.get<int>("protection_add");
@@ -91,6 +91,6 @@ void ProtectorModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void ProtectorModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorModule::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorModule::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

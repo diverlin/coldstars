@@ -19,7 +19,7 @@
 #include "NatureLand.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include <meti/RandUtils.hpp>
 #include "../resources/TextureCollector.hpp"
 #include <jeti/TextureOb.hpp>
@@ -136,7 +136,7 @@ std::string NatureLand::GetDockVehicleStr() const
     std::string str;
         for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
         {
-                   str += "_" + ceti::int2str(VEHICLE_vec[i]->GetId());
+                   str += "_" + std::to_string(VEHICLE_vec[i]->GetId());
         }
 
         return str;
@@ -145,7 +145,7 @@ std::string NatureLand::GetDockVehicleStr() const
 /* virtual override final */
 void NatureLand::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "natureland."+ceti::int2str(GetId())+".";
+    const std::string root = "natureland."+std::to_string(GetId())+".";
     Base::SaveData(save_ptree, root);
     BaseLand::SaveData(save_ptree, root);
     NatureLand::SaveData(save_ptree, root);

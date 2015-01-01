@@ -19,7 +19,7 @@
 #include "BlackHole.hpp"
 #include "../resources/MeshCollector.hpp"
 #include "../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include <meti/RandUtils.hpp>
 #include "../common/Logger.hpp"
 
@@ -39,13 +39,13 @@ BlackHole::BlackHole(int id)
 BlackHole::~BlackHole() 
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BlackHole("+ceti::int2str(GetId())+")");
+    Logger::Instance().Log("___::~BlackHole("+std::to_string(GetId())+")");
     #endif
     
     delete shockwave; 
 } 
  
-void BlackHole::SetCenter(const glm::vec3& center) { SetCenter(center); shockwave->SetCenter(meti::vec3ToVec2(center)); }
+void BlackHole::SetCenter(const glm::vec3& center) { SetCenter(center); shockwave->SetCenter(meti::vec2(center)); }
          
 void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
@@ -54,7 +54,7 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
     if (time > 0)
     {
         SetCenter(GetCenter()+meti::getRandXYVec3f(1, 2, 0));
-        shockwave->SetCenter(meti::vec3ToVec2(GetCenter()));
+        shockwave->SetCenter(meti::vec2(GetCenter()));
     
         GetDataLife().life_time--;
         if (GetDataLife().life_time < 0)
@@ -76,29 +76,29 @@ void BlackHole::UpdateInfo()
 
     GetInfo().addTitleStr("BLACKHOLE");
 
-    GetInfo().addNameStr("id:");         GetInfo().addValueStr(ceti::int2str(GetId()));
-    GetInfo().addNameStr("mass:");       GetInfo().addValueStr(ceti::int2str(GetMass()));
+    GetInfo().addNameStr("id:");         GetInfo().addValueStr(std::to_string(GetId()));
+    GetInfo().addNameStr("mass:");       GetInfo().addValueStr(std::to_string(GetMass()));
     GetInfo().addNameStr("pos:");        GetInfo().addValueStr( meti::str(GetCenter()) );
 }
           
 void BlackHole::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BlackHole("+ceti::int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BlackHole("+std::to_string(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void BlackHole::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BlackHole("+ceti::int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BlackHole("+std::to_string(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void BlackHole::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BlackHole("+ceti::int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BlackHole("+std::to_string(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     GetStarSystem()->Add(this, data_unresolved_Orientation.center); 
@@ -107,7 +107,7 @@ void BlackHole::ResolveData()
 /*virtual*/
 void BlackHole::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "blackhole." + ceti::int2str(GetId())+".";
+    std::string root = "blackhole." + std::to_string(GetId())+".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);
