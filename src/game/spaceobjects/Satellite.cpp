@@ -17,8 +17,8 @@
 */
 
 #include "Satellite.hpp"
-#include <math/rand.hpp>
-#include "../common/myStr.hpp"
+#include <meti/RandUtils.hpp>
+#include <ceti/myStr.hpp>
 #include "../common/Logger.hpp"
 #include "../world/EntityManager.hpp"
 #include "../world/starsystem.hpp"
@@ -33,21 +33,21 @@ Satellite::Satellite(int id)
     SetTypeId(TYPE::ENTITY::VEHICLE_ID);
     SetSubTypeId(TYPE::ENTITY::SATELLITE_ID);
     
-    SetMass(getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX));
+    SetMass(meti::getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX));
 }
 
 /* virtual */
 Satellite::~Satellite() 
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Satellite("+int2str(GetId())+")");
+    Logger::Instance().Log("___::~Satellite("+ceti::int2str(GetId())+")");
     #endif
 }
 
 void Satellite::BindParent(const BaseSpaceEntity* const parent)
 {
     SetParent(parent);
-    m_Orbit.CalcPath(2*1.1*parent->GetCollisionRadius(), 1.0, getRandBool());
+    m_Orbit.CalcPath(2*1.1*parent->GetCollisionRadius(), 1.0, meti::getRandBool());
 }
         
 void Satellite::UpdateInSpace(int time, bool show_effect)
@@ -83,10 +83,10 @@ void Satellite::UpdateInfo()
 
     GetInfo().addTitleStr("SATELLITE");
 
-    //GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(starsystem->GetId()));
-    GetInfo().addNameStr("id:");          GetInfo().addValueStr(int2str(GetId()));
-    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(int2str(GetMass()));
-    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
+    //GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(ceti::int2str(GetId()) + " / " + ceti::int2str(starsystem->GetId()));
+    GetInfo().addNameStr("id:");          GetInfo().addValueStr(ceti::int2str(GetId()));
+    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(ceti::int2str(GetMass()));
+    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
 }
             
 void Satellite::UpdateRenderStuff()
@@ -125,28 +125,28 @@ void Satellite::RenderAtPlanet(const jeti::Renderer& render)
 void Satellite::SaveData(boost::property_tree::ptree&, const std::string&) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Satellite("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Satellite("+ceti::int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void Satellite::LoadData(const boost::property_tree::ptree&)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Satellite("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Satellite("+ceti::int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void Satellite::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Satellite("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Satellite("+ceti::int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 /*virtual*/
 void Satellite::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "satellite."+int2str(GetId())+".";
+    const std::string root = "satellite."+ceti::int2str(GetId())+".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

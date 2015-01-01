@@ -18,7 +18,7 @@
 
 #include "RadarModule.hpp"
 #include "../../common/constants.hpp"
-#include "../../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../../common/Logger.hpp"
 
 RadarModule::RadarModule(int id)
@@ -38,13 +38,13 @@ RadarModule::~RadarModule()
 void RadarModule::AddUniqueInfo()
 {
     info.addTitleStr("radar module");
-    info.addNameStr("radius_add:");   info.addValueStr(int2str(radius_add));
+    info.addNameStr("radius_add:");   info.addValueStr(ceti::int2str(radius_add));
 }
 
 /*virtual*/
 void RadarModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "radar_module." + int2str(GetId()) + ".";
+    std::string root = "radar_module." + ceti::int2str(GetId()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
     BaseModule::SaveData(save_ptree, root);
@@ -72,7 +72,7 @@ void RadarModule::Resolve()
 void RadarModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RadarModule::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RadarModule::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"radius_add", radius_add);
@@ -81,7 +81,7 @@ void RadarModule::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 void RadarModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RadarModule::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RadarModule::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     radius_add = load_ptree.get<int>("radius_add");
@@ -90,7 +90,7 @@ void RadarModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void RadarModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RadarModule::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RadarModule::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

@@ -17,8 +17,7 @@
 */
 
 
-#ifndef ITEMSLOT_HPP
-#define ITEMSLOT_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 #include <types/StatusTypes.hpp>
@@ -57,7 +56,9 @@ class GrappleModule;
 class Bomb; 
 class GoodsPack; 
 
+namespace ceti {
 class Box2D;
+}
 
 namespace jeti {
 class Renderer;
@@ -129,10 +130,10 @@ class ItemSlot : public BaseSlot
         
         void UpdateVehiclePropetries() const;
         
-        virtual void Render(const jeti::Renderer&, const Box2D&, const glm::vec2&, bool draw_text = true) const;
-        virtual void RenderItem(const jeti::Renderer&, const Box2D&, const glm::vec2&, bool draw_text = true) const;
-        void RenderMark(const jeti::Renderer&, const Box2D&, jeti::TextureOb*) const;
-        void RenderTargetMark(const jeti::Renderer&, const Box2D&, jeti::TextureOb*, jeti::TextureOb*) const;
+        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
+        virtual void RenderItem(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
+        void RenderMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*) const;
+        void RenderTargetMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*, jeti::TextureOb*) const;
         
         void DropItemToSpace();
         
@@ -180,5 +181,3 @@ class ItemSlot : public BaseSlot
         
         void Log(const std::string&) const;
 }; 
-
-#endif

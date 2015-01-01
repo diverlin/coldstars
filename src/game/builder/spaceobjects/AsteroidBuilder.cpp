@@ -22,6 +22,8 @@
 
 #include <types/MeshTypes.hpp>
 
+#include <meti/RandUtils.hpp>
+
 AsteroidBuilder& AsteroidBuilder::Instance()
 {
     static AsteroidBuilder instance;
@@ -72,22 +74,22 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
     PlanetData planet_data;
 
     planet_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS); 
-    planet_data.radius_A      = getRandInt(300, 1200);
-    planet_data.radius_B      = getRandInt(300, 1200); 
-    planet_data.orbit_phi_inD = getRandInt(0, 360);
+    planet_data.radius_A      = meti::getRandInt(300, 1200);
+    planet_data.radius_B      = meti::getRandInt(300, 1200);
+    planet_data.orbit_phi_inD = meti::getRandInt(0, 360);
     planet_data.speed         = 0.1;
-    planet_data.clockwise     = getRandBool();
+    planet_data.clockwise     = meti::getRandBool();
     
     asteroid->SetPlanetData(planet_data);
     asteroid->SetLifeData(data_life);
 
-    float scale_comp = getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);
+    float scale_comp = meti::getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ASTEROID_ID);
           
     //alpitodorender asteroid->SetRenderData(mesh, texOb, scale);
 
-    float delta_angle = 0.0001*getRandInt(20, 60);
+    float delta_angle = 0.0001*meti::getRandInt(20, 60);
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender asteroid->SetAnimationRotation(animation_rotation);
                 

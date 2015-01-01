@@ -17,10 +17,9 @@
 */
 
 
-#ifndef SHOCKWAVEEFFECT_H
-#define SHOCKWAVEEFFECT_H
+#pragma once
  
-#include "../math/myVector.hpp"
+#include <meti/VectorUtils.hpp>
 
 class ShockWaveEffect
 {
@@ -49,4 +48,4 @@ class ShockWaveEffect
 
 ShockWaveEffect* getNewShockWave(float, bool dynamic = true);          
     
-#endif
+

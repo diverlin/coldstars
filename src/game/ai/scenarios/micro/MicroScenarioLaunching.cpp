@@ -19,7 +19,7 @@
 #include "MicroScenarioLaunching.hpp"
 #include "../../../common/constants.hpp"
 #include "../../../common/Logger.hpp"
-#include "../../../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../../../spaceobjects/Vehicle.hpp"
 #include "../../../pilots/Npc.hpp"
 
@@ -36,7 +36,7 @@ MicroScenarioLaunching::~MicroScenarioLaunching()
 void MicroScenarioLaunching::Enter(Npc* npc) const
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + int2str(npc->GetId()) + " ENTER MicroScenarioLaunching");
+    Logger::Instance().Log("npc_id=" + ceti::int2str(npc->GetId()) + " ENTER MicroScenarioLaunching");
     #endif
 }
 
@@ -70,7 +70,7 @@ void MicroScenarioLaunching::UpdateInStaticInDock(Npc* npc) const
 void MicroScenarioLaunching::Exit(Npc* npc) const 
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + int2str(npc->GetId()) + " EXIT MicroScenarioLaunching");
+    Logger::Instance().Log("npc_id=" + ceti::int2str(npc->GetId()) + " EXIT MicroScenarioLaunching");
     #endif
 }
 

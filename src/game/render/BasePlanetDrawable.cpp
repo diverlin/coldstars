@@ -21,7 +21,7 @@
 #include <jeti/Render.hpp>
 
 #include <common/Logger.hpp> 
-#include <common/myStr.hpp>
+#include <ceti/myStr.hpp>
 
 
 BasePlanetDrawable::BasePlanetDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
@@ -33,7 +33,7 @@ BasePlanetDrawable::BasePlanetDrawable(jeti::TextureOb* texture, jeti::Mesh* mes
 BasePlanetDrawable::~BasePlanetDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BasePlanetDrawable("+int2str(GetId())+")");
+    Logger::Instance().Log("___::~BasePlanetDrawable("+ceti::int2str(GetId())+")");
     #endif
 }
 

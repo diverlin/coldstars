@@ -20,7 +20,7 @@
 #include <Render.hpp>
 
 #include <ceti/myStr.hpp>
-#include <config/config.hpp>
+#include <config/ConfigV.hpp>
 //#include <common/common.hpp>
 #include <constants.hpp>
 #include <meti/RandUtils.hpp> // remove
@@ -49,11 +49,11 @@ Screen::~Screen()
 
 void Screen::InitRenderStuff()
 {
-    int width      = Config::instance().video().width;
-    int height     = Config::instance().video().height;
-    int bpp        = Config::instance().video().bpp;
-    bool vert_sync = Config::instance().video().vsync;
-    int fps_limit  = Config::instance().video().fps_limit;
+    int width      = ConfigV::instance().video().width;
+    int height     = ConfigV::instance().video().height;
+    int bpp        = ConfigV::instance().video().bpp;
+    bool vert_sync = ConfigV::instance().video().vsync;
+    int fps_limit  = ConfigV::instance().video().fps_limit;
     std::string title("coldstars");
 
     auto_scroll = false;
@@ -80,7 +80,7 @@ void Screen::DrawFps()
         frames_counter++;
     }
     
-    //std::string fps_str = "FPS:" + int2str(fps) + " / game_speed: x" + int2str(Config::Instance().GAME_SPEED);
+    //std::string fps_str = "FPS:" + ceti::int2str(fps) + " / game_speed: x" + ceti::int2str(Config::Instance().GAME_SPEED);
     //DrawText(fps_str, 14, glm::vec2(100, GetHeight()-10));
     if (meti::getRandInt(0, 30) == 0) std::cout<<"fps="<<fps<<std::endl;
 }

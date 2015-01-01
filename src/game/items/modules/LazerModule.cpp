@@ -18,7 +18,7 @@
 
 #include "LazerModule.hpp"
 #include "../../common/constants.hpp"
-#include "../../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../../common/Logger.hpp"
 
 LazerModule::LazerModule(int id)
@@ -41,18 +41,18 @@ void LazerModule::AddUniqueInfo()
         info.addTitleStr("lazer module");
         if (damage_add != 0) 
         {
-            info.addNameStr("damage_add:");   info.addValueStr(int2str(damage_add));
+            info.addNameStr("damage_add:");   info.addValueStr(ceti::int2str(damage_add));
         }
         if (radius_add != 0)
         { 
-            info.addNameStr("radius_add:");   info.addValueStr(int2str(radius_add));
+            info.addNameStr("radius_add:");   info.addValueStr(ceti::int2str(radius_add));
         }
 }
 
 /*virtual*/
 void LazerModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "lazer_module." + int2str(GetId()) + ".";
+    std::string root = "lazer_module." + ceti::int2str(GetId()) + ".";
     
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -81,7 +81,7 @@ void LazerModule::Resolve()
 void LazerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LazerModule::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerModule::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"damage_add", damage_add);
@@ -91,7 +91,7 @@ void LazerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 void LazerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LazerModule::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerModule::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     damage_add = load_ptree.get<int>("damage_add");
@@ -101,6 +101,6 @@ void LazerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void LazerModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LazerModule::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerModule::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

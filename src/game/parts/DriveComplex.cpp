@@ -24,18 +24,19 @@
 
 #include "../slots/ItemSlot.hpp"
 
-#include "../math/myVector.hpp"
-#include "../common/Collision.hpp"
+#include <meti/VectorUtils.hpp>
+#include <meti/RandUtils.hpp>
+#include <ceti/Collision.hpp>
 #include "../common/constants.hpp"
 #include "../common/Logger.hpp"
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include <math/rand.hpp>
 
 #include "../world/starsystem.hpp"
 #include <jeti/particlesystem/DriveEffect.hpp>
 
-#include <math/myVector.hpp>
-#include <math/QuaternionUtils.hpp>
+#include <meti/VectorUtils.hpp>
+#include <meti/QuaternionUtils.hpp>
 
 DriveComplex::DriveComplex()
 :
@@ -69,9 +70,9 @@ void DriveComplex::ResetTarget()
 {
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
     if (target == nullptr)
-    Logger::Instance().Log("vehicle_id="+int2str(m_OwnerVehicle->GetId())+" DriveComplex::ResetTarget", DRIVECOMPLEX_LOG_DIP); 
+    Logger::Instance().Log("vehicle_id="+ceti::int2str(m_OwnerVehicle->GetId())+" DriveComplex::ResetTarget", DRIVECOMPLEX_LOG_DIP);
     else
-    Logger::Instance().Log("vehicle_id="+int2str(m_OwnerVehicle->GetId())+" DriveComplex::ResetTarget" + getBaseInfoStr(target), DRIVECOMPLEX_LOG_DIP); 
+    Logger::Instance().Log("vehicle_id="+ceti::int2str(m_OwnerVehicle->GetId())+" DriveComplex::ResetTarget" + getBaseInfoStr(target), DRIVECOMPLEX_LOG_DIP);
     #endif    
     
     m_Target = nullptr;
@@ -96,7 +97,7 @@ void DriveComplex::SetStaticTargetCoords(const glm::vec3& target_pos)
     UpdatePath();
 
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+int2str(m_OwnerVehicle->GetId())+" DriveComplex::SetStaticTargetCoords:"+int2str((int)target_pos.x)+", "+int2str((int)target_pos.y), DRIVECOMPLEX_LOG_DIP); 
+    Logger::Instance().Log("vehicle_id="+ceti::int2str(m_OwnerVehicle->GetId())+" DriveComplex::SetStaticTargetCoords:"+ceti::int2str((int)target_pos.x)+", "+ceti::int2str((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
     #endif  
 }      
                  
@@ -110,7 +111,7 @@ void DriveComplex::SetTarget(BaseSpaceEntity* target, int action_id)
     m_HasTarget = true;
         
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+int2str(m_OwnerVehicle->GetId())+" DriveComplex::SetTarget " + getBaseInfoStr(target) + " navigator_action = " + getNavigatorActionStr(m_ActionId), DRIVECOMPLEX_LOG_DIP); 
+    Logger::Instance().Log("vehicle_id="+ceti::int2str(m_OwnerVehicle->GetId())+" DriveComplex::SetTarget " + getBaseInfoStr(target) + " navigator_action = " + getNavigatorActionStr(m_ActionId), DRIVECOMPLEX_LOG_DIP);
     #endif 
 }
   
@@ -121,7 +122,7 @@ void DriveComplex::DefineDistance()
         case NAVIGATOR_ACTION::DOCKING_ID:
         {
             m_TargetDistance = m_Target->GetCollisionRadius()/4;
-            m_TargetOffset = getRandXYVec3f(m_Target->GetCollisionRadius()/5, m_Target->GetCollisionRadius()/2, m_Target->GetCenter().z); 
+            m_TargetOffset = meti::getRandXYVec3f(m_Target->GetCollisionRadius()/5, m_Target->GetCollisionRadius()/2, m_Target->GetCenter().z);
             
             break;   
         }
@@ -129,7 +130,7 @@ void DriveComplex::DefineDistance()
         case NAVIGATOR_ACTION::COLLECTING_ID:
         {
             m_TargetDistance = m_OwnerVehicle->GetProperties().grab_radius/2; 
-            m_TargetOffset = getRandXYVec3f(m_Target->GetCollisionRadius()/2, m_Target->GetCollisionRadius(), m_Target->GetCenter().z); 
+            m_TargetOffset = meti::getRandXYVec3f(m_Target->GetCollisionRadius()/2, m_Target->GetCollisionRadius(), m_Target->GetCenter().z);
             
             break;            
         }
@@ -142,7 +143,7 @@ void DriveComplex::DefineDistance()
                 m_TargetDistance = 150;                
             }
             
-            m_TargetOffset = getRandXYVec3f(weapon_radius_min/4, weapon_radius_min/2, m_Target->GetCenter().z); 
+            m_TargetOffset = meti::getRandXYVec3f(weapon_radius_min/4, weapon_radius_min/2, m_Target->GetCenter().z);
             
             break;            
         }
@@ -150,7 +151,7 @@ void DriveComplex::DefineDistance()
         case NAVIGATOR_ACTION::KEEP_CLOSE_ID:
         {
             m_TargetDistance = m_Target->GetCollisionRadius()*1.5;
-            m_TargetOffset = getRandXYVec3f(m_Target->GetCollisionRadius()/5, m_Target->GetCollisionRadius()/2, m_Target->GetCenter().z); 
+            m_TargetOffset = meti::getRandXYVec3f(m_Target->GetCollisionRadius()/5, m_Target->GetCollisionRadius()/2, m_Target->GetCenter().z);
             
             break;            
         }
@@ -158,7 +159,7 @@ void DriveComplex::DefineDistance()
         case NAVIGATOR_ACTION::KEEP_MIDDLE_ID:
         {
             m_TargetDistance = m_Target->GetCollisionRadius()*4;
-            m_TargetOffset = getRandXYVec3f(m_Target->GetCollisionRadius()/2, m_Target->GetCollisionRadius(), m_Target->GetCenter().z); 
+            m_TargetOffset = meti::getRandXYVec3f(m_Target->GetCollisionRadius()/2, m_Target->GetCollisionRadius(), m_Target->GetCenter().z);
             
             break;            
         }
@@ -166,7 +167,7 @@ void DriveComplex::DefineDistance()
         case NAVIGATOR_ACTION::KEEP_FAR_ID:
         {
             m_TargetDistance = m_Target->GetCollisionRadius()*8;
-            m_TargetOffset = getRandXYVec3f(m_Target->GetCollisionRadius()/2, m_Target->GetCollisionRadius(), m_Target->GetCenter().z); 
+            m_TargetOffset = meti::getRandXYVec3f(m_Target->GetCollisionRadius()/2, m_Target->GetCollisionRadius(), m_Target->GetCenter().z);
             
             break;    
         }
@@ -216,8 +217,8 @@ void DriveComplex::UpdateDynamicTargetCoord()
     {
         case TYPE::ENTITY::STARSYSTEM_ID:
         {
-            float angle = M_PI/2 - getAngle(vec3ToVec2(m_Target->GetCenter()), vec3ToVec2(m_OwnerVehicle->GetStarSystem()->GetCenter())); //??    use cross()
-            m_TargetPos = getVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angle, m_OwnerVehicle->GetStarSystem()->GetCenter().z);
+            float angle = M_PI/2 - meti::getAngle(meti::vec3ToVec2(m_Target->GetCenter()), meti::vec3ToVec2(m_OwnerVehicle->GetStarSystem()->GetCenter())); //??    use cross()
+            m_TargetPos = meti::getVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angle, m_OwnerVehicle->GetStarSystem()->GetCenter().z);
             m_TargetDistance = COLLISION_RADIUS_FOR_STATIC_COORD;
             
             break;
@@ -250,7 +251,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
     }
 
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+int2str(m_OwnerVehicle->GetId())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + glm::vec22str(target_pos) + " target_center=" + glm::vec22str(target->GetCenter()) + " target_offset=" + glm::vec22str(target_offset) + "target_distance=" + int2str(target_distance), DRIVECOMPLEX_LOG_DIP); 
+    Logger::Instance().Log("vehicle_id="+ceti::int2str(m_OwnerVehicle->GetId())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + glm::vec22str(target_pos) + " target_center=" + glm::vec22str(target->GetCenter()) + " target_offset=" + glm::vec22str(target_offset) + "target_distance=" + ceti::int2str(target_distance), DRIVECOMPLEX_LOG_DIP);
     #endif 
 }
 
@@ -259,7 +260,7 @@ bool DriveComplex::CheckTargetEchievement()
 {
     if (m_Target != nullptr)
     {    
-        if (checkCollisionDotWithCircle_DIRTY(vec3ToVec2(m_OwnerVehicle->GetCenter()), vec3ToVec2(m_TargetPos), m_TargetDistance) == true)
+        if (ceti::checkCollisionDotWithCircle_DIRTY(meti::vec3ToVec2(m_OwnerVehicle->GetCenter()), meti::vec3ToVec2(m_TargetPos), m_TargetDistance) == true)
         {
             return true;
         }
@@ -297,7 +298,7 @@ void DriveComplex::ClearPath()
 void DriveComplex::CalcPath()
 {
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+int2str(m_OwnerVehicle->GetId())+" DriveComplex::CalcPath " + "target_pos(int, int)=" + int2str((int)target_pos.x) + "," + int2str((int)target_pos.y), DRIVECOMPLEX_LOG_DIP); 
+    Logger::Instance().Log("vehicle_id="+ceti::int2str(m_OwnerVehicle->GetId())+" DriveComplex::CalcPath " + "target_pos(int, int)=" + ceti::int2str((int)target_pos.x) + "," + ceti::int2str((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
     #endif   
     
     ClearPath();
@@ -315,7 +316,7 @@ void DriveComplex::CalcPath()
 
     glm::vec3 direction = glm::normalize(m_OwnerVehicle->GetDirection());
 
-    RotationBetweenVectors(target_quat, direction, target_dir);
+    meti::RotationBetweenVectors(target_quat, direction, target_dir);
     glm::quat interpolated_quat = glm::lerp(zero_quat, target_quat, 0.02f);
     while (std::fabs(glm::dot(direction, target_dir)) < 0.9999) 
     {

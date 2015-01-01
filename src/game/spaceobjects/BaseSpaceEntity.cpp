@@ -23,7 +23,7 @@
 #include "../common/constants.hpp"
 #include <math/rand.hpp>
 #include "../common/common.hpp"
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../world/EntityManager.hpp"
 #include "../world/starsystem.hpp"
 #include "../text/VerticalFlowText.hpp" 
@@ -46,7 +46,7 @@ m_Parent(nullptr)
 BaseSpaceEntity::~BaseSpaceEntity()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BaseSpaceEntity("+int2str(GetId())+")");
+    Logger::Instance().Log("___::~BaseSpaceEntity("+ceti::int2str(GetId())+")");
     #endif
 }
 
@@ -67,7 +67,7 @@ void BaseSpaceEntity::Hit(int damage, bool show_effect)
 
     if (show_effect == true)
     {    
-        VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, vec3ToVec2(GetCenter()), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
+        VerticalFlowText* text = new VerticalFlowText(ceti::int2str(damage), 12, meti::vec3ToVec2(GetCenter()), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
         m_Starsystem->Add(text); 
     }
 
@@ -112,7 +112,7 @@ void BaseSpaceEntity::RenderInfo(const glm::vec2& center)
 void BaseSpaceEntity::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseSpaceEntity("+int2str(GetId())+")::Save(", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseSpaceEntity("+ceti::int2str(GetId())+")::Save(", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"data_life.is_alive",   m_DataLife.is_alive);
@@ -137,7 +137,7 @@ void BaseSpaceEntity::SaveData(boost::property_tree::ptree& save_ptree, const st
 void BaseSpaceEntity::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseSpaceEntity("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseSpaceEntity("+ceti::int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
     
     m_DataLife.is_alive   = load_ptree.get<bool>("data_life.is_alive");
@@ -156,7 +156,7 @@ void BaseSpaceEntity::LoadData(const boost::property_tree::ptree& load_ptree)
 void BaseSpaceEntity::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseSpaceEntity("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseSpaceEntity("+ceti::int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif    
     
     if (data_unresolved_BaseSpaceEntity.parent_id != NONE_ID)

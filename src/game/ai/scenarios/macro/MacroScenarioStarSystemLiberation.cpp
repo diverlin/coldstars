@@ -21,7 +21,7 @@
 
 #include "../../../common/constants.hpp"
 #include "../../../common/Logger.hpp"
-#include "../../../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 
 #include "../../../world/starsystem.hpp"
 #include "../../../ai/StateMachine.hpp"
@@ -44,7 +44,7 @@ MacroScenarioStarSystemLiberation::~MacroScenarioStarSystemLiberation()
 void MacroScenarioStarSystemLiberation::Enter(Npc* npc) const
 {    
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + int2str(npc->GetId()) + " ENTER MacroScenarioStarSystemLiberation");
+    Logger::Instance().Log("npc_id=" + ceti::int2str(npc->GetId()) + " ENTER MacroScenarioStarSystemLiberation");
     #endif
 }
 
@@ -97,12 +97,12 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
 void MacroScenarioStarSystemLiberation::Exit(Npc* npc) const
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + int2str(npc->GetId()) + " EXIT MacroScenarioStarSystemLiberation");
+    Logger::Instance().Log("npc_id=" + ceti::int2str(npc->GetId()) + " EXIT MacroScenarioStarSystemLiberation");
     #endif
 }
 
 /*virtual*/
 std::string MacroScenarioStarSystemLiberation::GetDescription(Npc* npc) const
 {
-    return "MacroScenarioStarSystemLiberation: ss_id = " + int2str(npc->GetStateMachine().GetMacroTaskManager().GetTarget()->GetId());
+    return "MacroScenarioStarSystemLiberation: ss_id = " + ceti::int2str(npc->GetStateMachine().GetMacroTaskManager().GetTarget()->GetId());
 }

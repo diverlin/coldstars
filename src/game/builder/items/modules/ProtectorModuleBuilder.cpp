@@ -26,9 +26,11 @@
 
 #include "../../../world/EntityManager.hpp"
 
-#include <resources/TextureCollector.hpp>
-#include <resources/MeshCollector.hpp>
-#include <jeti/TextureOb.hpp>
+//#include <resources/TextureCollector.hpp>
+//#include <resources/MeshCollector.hpp>
+//#include <jeti/TextureOb.hpp>
+
+#include <meti/RandUtils.hpp>
 
 ProtectorModuleBuilder& ProtectorModuleBuilder::Instance()
 {
@@ -72,9 +74,9 @@ ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModule(int protection_ad
             
 void ProtectorModuleBuilder::CreateNewInternals(ProtectorModule* protector_module, int protection_add) const
 {     
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
-    protection_add = getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
+//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
+    protection_add = meti::getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
     
     protector_module->SetParentSubTypeId(TYPE::ENTITY::PROTECTOR_EQUIPMENT_ID);    
     //alpitodorender protector_module->SetRenderData(mesh, texOb, texOb->GetSize());

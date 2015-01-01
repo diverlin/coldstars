@@ -18,7 +18,7 @@
 
 #include "SpaceStation.hpp"
 #include <math/rand.hpp>
-#include <common/myStr.hpp>
+#include <ceti/myStr.hpp>
 #include <common/Logger.hpp>
 
 #include <world/EntityManager.hpp>
@@ -50,7 +50,7 @@ m_Land(nullptr)
 SpaceStation::~SpaceStation() 
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~SpaceStation("+int2str(GetId())+")");
+    Logger::Instance().Log("___::~SpaceStation("+ceti::int2str(GetId())+")");
     #endif
 }    
  
@@ -90,10 +90,10 @@ void SpaceStation::UpdateInfo()
 
     GetInfo().addTitleStr("StarBase" + getStr(GetSubTypeId()));
 
-    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()));
-    GetInfo().addNameStr("id:");          GetInfo().addValueStr(int2str(GetId()));
-    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(int2str(GetMass()));
-    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
+    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(ceti::int2str(GetId()) + " / " + ceti::int2str(GetStarSystem()->GetId()));
+    GetInfo().addNameStr("id:");          GetInfo().addValueStr(ceti::int2str(GetId()));
+    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(ceti::int2str(GetMass()));
+    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
 } 
 
 void SpaceStation::UpdateRenderStuff_2D()
@@ -128,21 +128,21 @@ void SpaceStation::RenderInSpace(const jeti::Renderer& render, float scale)
 void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SpaceStation("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" SpaceStation("+ceti::int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SpaceStation("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" SpaceStation("+ceti::int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void SpaceStation::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SpaceStation("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" SpaceStation("+ceti::int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
@@ -150,7 +150,7 @@ void SpaceStation::ResolveData()
 /* virtual override final */
 void SpaceStation::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "spacestation."+int2str(GetId())+".";
+    const std::string root = "spacestation."+ceti::int2str(GetId())+".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

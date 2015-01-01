@@ -20,16 +20,16 @@
 #include <world/starsystem.hpp>
 #include <world/Sector.hpp>
 
-#include <math/myVector.hpp>
+#include <meti/VectorUtils.hpp>
 
 #include <builder/spaceobjects/BlackHoleBuilder.hpp>
 #include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/pilots/NpcBuilder.hpp>
 
 #include <common/Logger.hpp>
-#include <common/Collision.hpp>
+#include <ceti/Collision.hpp>
 #include <math/rand.hpp>
-#include <common/myStr.hpp>
+#include <ceti/myStr.hpp>
 
 #include <world/EntityManager.hpp>
 
@@ -61,6 +61,7 @@
 
 #include <jeti/Mesh.hpp>
 #include <pilots/Player.hpp>
+#include <meti/RandUtils.hpp>
 
 int StarSystem::counter = 0;
 
@@ -167,7 +168,7 @@ void StarSystem::CreateGroupAndShareTask(Npc* npc_leader, StarSystem* target_sta
 void StarSystem::AddVehicle(Vehicle* vehicle, const glm::vec3& center, const glm::vec3& angle, const BaseSpaceEntity* const parent)
 {
     #if ENTITY_TRANSACTION_LOG_ENABLED == 1
-    Logger::Instance().Log(" StarSystem(" + int2str(GetId()) + ")::AddVehicle(" + int2str(vehicle->GetId())+")", ENTITY_TRANSACTION_LOG_DIP);
+    Logger::Instance().Log(" StarSystem(" + ceti::int2str(GetId()) + ")::AddVehicle(" + ceti::int2str(vehicle->GetId())+")", ENTITY_TRANSACTION_LOG_DIP);
     
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     {
@@ -245,7 +246,7 @@ void StarSystem::Add(BasePlanet* object, const BaseSpaceEntity* parent, int it)
 void StarSystem::AddContainer(Container* container, const glm::vec3& center)
 {
     #if ENTITY_TRANSACTION_LOG_ENABLED == 1
-    Logger::Instance().Log(" StarSystem(" + int2str(GetId()) + ")::AddVehicle(" + int2str(container->GetId()) + ")", ENTITY_TRANSACTION_LOG_DIP);
+    Logger::Instance().Log(" StarSystem(" + ceti::int2str(GetId()) + ")::AddVehicle(" + ceti::int2str(container->GetId()) + ")", ENTITY_TRANSACTION_LOG_DIP);
     
     
     for (unsigned int i=0; i<CONTAINER_vec.size(); i++)
@@ -295,7 +296,7 @@ void StarSystem::Add(jeti::ExplosionEffect* explosion, const glm::vec3& center, 
     if ((radius_effect > 75) && (GetShockWaveEffectNum() < SHOCKWAVES_MAX_NUM))
     {
         ShockWaveEffect* shockwave = getNewShockWave(radius_effect);
-        Add(shockwave, vec3ToVec2(center));
+        Add(shockwave, meti::vec3ToVec2(center));
     }
     
     if (radius_effect > 25)
@@ -329,12 +330,12 @@ Planet* StarSystem::GetClosestInhabitedPlanet(const glm::vec2& _pos) const
     if (tmp_planet_vec.size() >= 1)
     {
         requested_planet = tmp_planet_vec[0];
-        float dist_min = distanceBetween(_pos, tmp_planet_vec[0]->GetCenter());
+        float dist_min = meti::distanceBetween(_pos, tmp_planet_vec[0]->GetCenter());
         if (tmp_planet_vec.size() > 1)
         {
             for (unsigned int i=1; i<tmp_planet_vec.size(); i++)
             {
-                float dist = distanceBetween(_pos, tmp_planet_vec[i]->GetCenter());
+                float dist = meti::distanceBetween(_pos, tmp_planet_vec[i]->GetCenter());
                 if (dist < dist_min)
                 {
                     requested_planet = tmp_planet_vec[i];
@@ -363,7 +364,7 @@ Planet* StarSystem::GetRandomInhabitedPlanet() const
     
     if (tmp_planet_vec.size() >= 1) 
     {
-        requested_planet = tmp_planet_vec[getRandInt(0, tmp_planet_vec.size()-1)];
+        requested_planet = tmp_planet_vec[meti::getRandInt(0, tmp_planet_vec.size()-1)];
     }
 
     return requested_planet;
@@ -371,12 +372,12 @@ Planet* StarSystem::GetRandomInhabitedPlanet() const
 
 Planet* StarSystem::GetRandomPlanet() const
 {
-    return PLANET_vec[getRandInt(0, PLANET_vec.size()-1)];
+    return PLANET_vec[meti::getRandInt(0, PLANET_vec.size()-1)];
 }
 
 Vehicle* StarSystem::GetRandomVehicle() const
 {
-    return VEHICLE_vec[getRandInt(0, VEHICLE_vec.size()-1)];
+    return VEHICLE_vec[meti::getRandInt(0, VEHICLE_vec.size()-1)];
 }
 
 Vehicle* StarSystem::GetRandomVehicleExcludingNpcRaceId(TYPE::RACE _race_id) const
@@ -397,7 +398,7 @@ Vehicle* StarSystem::GetRandomVehicleExcludingNpcRaceId(TYPE::RACE _race_id) con
     
     if (_vehicle_vec.size() > 0)
     {
-        requested_vehicle = _vehicle_vec[getRandInt(0, _vehicle_vec.size()-1)];
+        requested_vehicle = _vehicle_vec[meti::getRandInt(0, _vehicle_vec.size()-1)];
     }
     
     return requested_vehicle;
@@ -421,7 +422,7 @@ Vehicle* StarSystem::GetRandomVehicleByNpcRaceId(TYPE::RACE _race_id) const
     
     if (_vehicle_vec.size() > 0)
     {
-        requested_vehicle = _vehicle_vec[getRandInt(0, _vehicle_vec.size()-1)];
+        requested_vehicle = _vehicle_vec[meti::getRandInt(0, _vehicle_vec.size()-1)];
     }
     
     return requested_vehicle;
@@ -445,7 +446,7 @@ Vehicle* StarSystem::GetRandomVehicle(const std::vector<TYPE::RACE>& rVec_race_i
     
     if (tmp_vehicle_vec.size() > 0)
     {
-        requested_vehicle = tmp_vehicle_vec[getRandInt(0, tmp_vehicle_vec.size()-1)];
+        requested_vehicle = tmp_vehicle_vec[meti::getRandInt(0, tmp_vehicle_vec.size()-1)];
     }
     
     return requested_vehicle;
@@ -466,8 +467,7 @@ void StarSystem::UpdateStates()
         
         if (BLACKHOLE_vec.size() < 5)
         {
-            glm::vec2 center = getRandVec2f(200, 1200);
-        
+            glm::vec2 center = meti::getRandVec2f(200, 1200);
             
             glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
             Add(BlackHoleBuilder::Instance().GetNewBlackHole(), center3);
@@ -568,12 +568,12 @@ float StarSystem::CalcResultGravityForce(const glm::vec3& center, const glm::vec
     float rate = 1; 
     for (unsigned int i=0; i<STAR_vec.size(); i++)
     {
-        float dist = distanceBetween(center, STAR_vec[i]->GetCenter());
+        float dist = meti::distanceBetween(center, STAR_vec[i]->GetCenter());
         if (dist < 5*STAR_vec[i]->GetCollisionRadius())
         {
             glm::vec3 force_dir(STAR_vec[i]->GetCenter() - center);
             force_dir = glm::normalize(force_dir);
-            float power1 = dotUnits(force_dir, orient);
+            float power1 = meti::dotUnits(force_dir, orient);
             float power2 = CONVERTER::DIST2GRAVITY.GetEquivalent(dist);
                 
             rate += power1*power2;
@@ -582,12 +582,12 @@ float StarSystem::CalcResultGravityForce(const glm::vec3& center, const glm::vec
 
     for (unsigned int i=0; i<PLANET_vec.size(); i++)
     {
-        float dist = distanceBetween(center, PLANET_vec[i]->GetCenter());
+        float dist = meti::distanceBetween(center, PLANET_vec[i]->GetCenter());
         if (dist < 5*PLANET_vec[i]->GetCollisionRadius())
         {
             glm::vec3 force_dir(PLANET_vec[i]->GetCenter() - center);
             force_dir = glm::normalize(force_dir);
-            float power1 = dotUnits(force_dir, orient);
+            float power1 = meti::dotUnits(force_dir, orient);
             float power2 = CONVERTER::DIST2GRAVITY.GetEquivalent(dist);
             
             rate += power1*power2;
@@ -624,7 +624,7 @@ void StarSystem::Update(int time)
         
         if (CONTAINER_vec.size() > container_num_max)
         {
-            unsigned int index = getRandInt(0, container_num_max-1);
+            unsigned int index = meti::getRandInt(0, container_num_max-1);
             CONTAINER_vec[index]->Hit(100, true);
         }
     }
@@ -654,7 +654,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
                 {
                     if (ROCKET_vec[ri]->GetOwnerId() != VEHICLE_vec[vi]->GetId())
                     {
-                        collide = checkCollision2D(ROCKET_vec[ri], VEHICLE_vec[vi], show_effect);
+                        collide = ceti::checkCollision2D(ROCKET_vec[ri], VEHICLE_vec[vi], show_effect);
                         if (collide == true) { break; }
                     }
                 }
@@ -667,7 +667,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
             {
                 for (unsigned int ai = 0; ai < ASTEROID_vec.size(); ai++)
                 {
-                    collide = checkCollision2D(ROCKET_vec[ri], ASTEROID_vec[ai], show_effect);
+                    collide = ceti::checkCollision2D(ROCKET_vec[ri], ASTEROID_vec[ai], show_effect);
                     if (collide == true) { break; }
                 }
             }
@@ -678,7 +678,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
             {
                 for (unsigned int ci = 0; ci < CONTAINER_vec.size(); ci++)
                 {
-                    collide = checkCollision2D(ROCKET_vec[ri], CONTAINER_vec[ci], show_effect);
+                    collide = ceti::checkCollision2D(ROCKET_vec[ri], CONTAINER_vec[ci], show_effect);
                     if (collide == true) {     break; }
                 }
             }
@@ -704,7 +704,7 @@ void StarSystem::asteroidCollision_s(bool show_effect)
             {
                 for (unsigned int vi = 0; vi < VEHICLE_vec.size(); vi++)
                 {
-                    collide = checkCollision2D(ASTEROID_vec[ai], VEHICLE_vec[vi], show_effect);
+                    collide = ceti::checkCollision2D(ASTEROID_vec[ai], VEHICLE_vec[vi], show_effect);
                     if (collide == true) { break; }
                 }
             }
@@ -714,7 +714,7 @@ void StarSystem::asteroidCollision_s(bool show_effect)
             {
                 for (unsigned int pi = 0; pi < PLANET_vec.size(); pi++)
                 {
-                    collide = checkCollision2D(ASTEROID_vec[ai], PLANET_vec[pi], show_effect);
+                    collide = ceti::checkCollision2D(ASTEROID_vec[ai], PLANET_vec[pi], show_effect);
                     if (collide == true) { break; }
                 }
             }
@@ -726,7 +726,7 @@ void StarSystem::asteroidCollision_s(bool show_effect)
             {
                 for (unsigned int si = 0; si < STAR_vec.size(); si++)
                 {
-                    collide = checkCollision2D(ASTEROID_vec[ai], STAR_vec[si], show_effect);
+                    collide = ceti::checkCollision2D(ASTEROID_vec[ai], STAR_vec[si], show_effect);
                     if (collide == true) { break; }
                 }
             }
@@ -885,8 +885,7 @@ void StarSystem::ShipManager_s(unsigned int num)
     while (VEHICLE_vec.size() < num)
     {
         TYPE::RACE prace_id = TYPE::RACE::R0_ID;
-        if (getRandBool())
-        {
+        if (meti::getRandBool()) {
             prace_id = TYPE::RACE::R6_ID;
         }
         
@@ -901,9 +900,9 @@ void StarSystem::ShipManager_s(unsigned int num)
     
         new_pship->BindOwnerNpc(new_pnpc);
 
-        glm::vec2 center = getRandVec2f(100, 800);
+        glm::vec2 center = meti::getRandVec2f(100, 800);
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
-        glm::vec3 angle(0,0,getRandInt(0, 360));
+        glm::vec3 angle(0,0,meti::getRandInt(0, 360));
         
         AddVehicle(new_pship, center3, angle);
     }
@@ -917,7 +916,7 @@ void StarSystem::ManageUnavaliableObjects_s()
         if ((*it)->GetPlaceTypeId() != TYPE::PLACE::SPACE_ID)
         {    
             #if ENTITY_TRANSACTION_LOG_ENABLED == 1
-            Logger::Instance().Log("starsysten("+int2str(GetId())+ ")::RemoveVehicle(" + int2str((*it)->GetId())+")");
+            Logger::Instance().Log("starsysten("+ceti::int2str(GetId())+ ")::RemoveVehicle(" + ceti::int2str((*it)->GetId())+")");
             #endif
             it = VEHICLE_vec.erase(it);
         }
@@ -1032,7 +1031,7 @@ void StarSystem::StarSparkEvent(float radius) const
 {
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     {
-        if ( distanceBetween(VEHICLE_vec[i]->GetCenter(), GetStar()->GetCenter()) < radius )
+        if ( meti::distanceBetween(VEHICLE_vec[i]->GetCenter(), GetStar()->GetCenter()) < radius )
         {
             if (VEHICLE_vec[i]->GetSlotRadar()->GetItem() != nullptr)
             {
@@ -1046,7 +1045,7 @@ void StarSystem::DamageEventInsideCircle(const glm::vec3& center, float radius, 
 {
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     {
-        if ( distanceBetween(VEHICLE_vec[i]->GetCenter(), center) < radius )
+        if ( meti::distanceBetween(VEHICLE_vec[i]->GetCenter(), center) < radius )
         {
             VEHICLE_vec[i]->Hit(damage, show_effect); 
         }
@@ -1054,13 +1053,13 @@ void StarSystem::DamageEventInsideCircle(const glm::vec3& center, float radius, 
         
     for (unsigned int i=0; i<CONTAINER_vec.size(); i++)           
      {
-         float dist = distanceBetween(CONTAINER_vec[i]->GetCenter(), center);
+         float dist = meti::distanceBetween(CONTAINER_vec[i]->GetCenter(), center);
          if (dist < radius)
          {
             glm::vec3 force_dir(CONTAINER_vec[i]->GetCenter() - center);
             force_dir = glm::normalize(force_dir);
             float force_power = CONVERTER::RADIUS2FORCE.GetEquivalent(dist); 
-            std::cout<<dist<<" "<<force_power<<" "<<str(force_dir)<<std::endl;                       
+            std::cout<<dist<<" "<<force_power<<" "<<meti::str(force_dir)<<std::endl;
     
             CONTAINER_vec[i]->ApplyImpulse(force_dir, force_power); 
          }
@@ -1147,7 +1146,7 @@ void StarSystem::ResolveData()
 
 void StarSystem::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "starsystem." + int2str(GetStarSystem()->GetId())+".";
+    const std::string root = "starsystem." + ceti::int2str(GetStarSystem()->GetId())+".";
 
     Base::SaveData(save_ptree, root);
     BaseSpaceEntity::SaveData(save_ptree, root);

@@ -20,7 +20,7 @@
 #include "Goverment.hpp"
 #include "Kosmoport.hpp"
 #include "../common/constants.hpp"
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../world/EntityManager.hpp"
 
 Goverment::Goverment(int id)
@@ -53,7 +53,7 @@ void Goverment::ResolveData()
 
 void Goverment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "goverment." + int2str(GetId())+".";
+    std::string root = "goverment." + ceti::int2str(GetId())+".";
     
     Base::SaveData(save_ptree, root);
     Room::SaveData(save_ptree, root);

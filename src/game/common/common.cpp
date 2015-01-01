@@ -151,20 +151,14 @@ bool get_dPos_ToPoint(const glm::vec3& p1, const glm::vec3& p2, float velocity, 
 bool get_dPos_ToPoint(const glm::vec3& p1, const glm::vec3& p2, float velocity, glm::vec3& d_pos, float& rTo_angle_inD)
 {
     glm::vec3 dir(p2-p1);
-
-    if (glm::length(dir) > 0)
-    {             
+    if (glm::length(dir) > 0) {
         dir = glm::normalize(dir);
         d_pos = glm::vec3(dir * velocity);   
-        rTo_angle_inD = atan2(dir.y, dir.x) * RADIAN_TO_DEGREE_RATE;
-        
+        rTo_angle_inD = glm::degrees(atan2(dir.y, dir.x));
         return true;
-    }
-    else
-    {
+    } else {
         d_pos = glm::vec3(0.0);
-        rTo_angle_inD = atan2(0.0, 0.0) * RADIAN_TO_DEGREE_RATE;
-        
+        rTo_angle_inD = glm::degrees(atan2(0.0, 0.0));
         return false;
     }        
 }

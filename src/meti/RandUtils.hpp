@@ -39,8 +39,8 @@ bool isActionShouldHappen(int);
 template<typename TYPE> 
 TYPE getRand(const std::vector<TYPE>& vec)
 {
-    if (vec.size()>0) { return vec[getRandInt(0, vec.size()-1)]; }
-    else              { return TYPE::NONE_ID; }
+    assert(vec.empty());
+    return vec[getRandInt(0, vec.size()-1)];
 }
 
 template<typename TYPE>

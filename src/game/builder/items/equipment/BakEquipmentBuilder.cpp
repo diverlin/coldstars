@@ -33,6 +33,7 @@
 
 #include <struct/RaceInformationCollector.hpp>
 
+#include <meti/RandUtils.hpp>
 
 BakEquipmentBuilder& BakEquipmentBuilder::Instance()
 {
@@ -75,7 +76,7 @@ BakEquipment* BakEquipmentBuilder::GetNewBakEquipment(TYPE::TECHLEVEL tech_level
 void BakEquipmentBuilder::CreateNewInternals(BakEquipment* bak_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int fuel_max_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
-        race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+        race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
     }
     
     if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
@@ -86,13 +87,13 @@ void BakEquipmentBuilder::CreateNewInternals(BakEquipment* bak_equipment, TYPE::
     jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BAK_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
     
-    fuel_max_orig = getRandInt(EQUIPMENT::BAK::FUEL_MIN, EQUIPMENT::BAK::FUEL_MAX) * (1 + EQUIPMENT::BAK::FUEL_TECHLEVEL_RATE * (int)tech_level);
+    fuel_max_orig = meti::getRandInt(EQUIPMENT::BAK::FUEL_MIN, EQUIPMENT::BAK::FUEL_MAX) * (1 + EQUIPMENT::BAK::FUEL_TECHLEVEL_RATE * (int)tech_level);
 
     ItemCommonData common_data;
     common_data.tech_level              = tech_level;
-    common_data.modules_num_max        = getRandInt(EQUIPMENT::BAK::MODULES_NUM_MIN, EQUIPMENT::BAK::MODULES_NUM_MAX);
-    common_data.mass                   = getRandInt(EQUIPMENT::BAK::MASS_MIN, EQUIPMENT::BAK::MASS_MAX);
-    common_data.condition_max          = getRandInt(EQUIPMENT::BAK::CONDITION_MIN, EQUIPMENT::BAK::CONDITION_MAX);
+    common_data.modules_num_max        = meti::getRandInt(EQUIPMENT::BAK::MODULES_NUM_MIN, EQUIPMENT::BAK::MODULES_NUM_MAX);
+    common_data.mass                   = meti::getRandInt(EQUIPMENT::BAK::MASS_MIN, EQUIPMENT::BAK::MASS_MAX);
+    common_data.condition_max          = meti::getRandInt(EQUIPMENT::BAK::CONDITION_MIN, EQUIPMENT::BAK::CONDITION_MAX);
     common_data.deterioration_normal = 1;
 
     bak_equipment->SetFuelMaxOrig(fuel_max_orig);

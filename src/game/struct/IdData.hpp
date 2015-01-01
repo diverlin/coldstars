@@ -16,8 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef IDDATA_HPP
-#define IDDATA_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 #include <types/EntityTypes.hpp>
@@ -37,4 +36,3 @@ struct IdData
     {}
 };
 
-#endif

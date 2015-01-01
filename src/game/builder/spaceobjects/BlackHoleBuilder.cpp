@@ -22,6 +22,8 @@
 
 #include <types/MeshTypes.hpp>
 
+#include <meti/RandUtils.hpp>
+
 BlackHoleBuilder& BlackHoleBuilder::Instance()
 {
     static BlackHoleBuilder instance;
@@ -73,7 +75,7 @@ void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
     data_life.is_alive   = true;
     data_life.garbage_ready = false;
     data_life.armor      = 100000;
-    data_life.life_time = getRandInt(250, 500);     
+    data_life.life_time = meti::getRandInt(250, 500);
     data_life.dying_time = 2;        
         
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BLACKHOLE_ID);

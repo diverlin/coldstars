@@ -18,18 +18,18 @@
 
 
 #include "ProtectorArtefactBuilder.hpp"
-#include "../../../items/artefacts/ProtectorArtefact.hpp"
+#include <items/artefacts/ProtectorArtefact.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
-#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
 
-#include "../../../world/EntityManager.hpp"
+#include <world/EntityManager.hpp>
 
-#include <resources/TextureCollector.hpp>
-#include <resources/MeshCollector.hpp>
-#include <jeti/TextureOb.hpp>
+//#include <resources/TextureCollector.hpp>
+//#include <resources/MeshCollector.hpp>
+//#include <jeti/TextureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -74,10 +74,10 @@ ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefact(int protect
          
 void ProtectorArtefactBuilder::CreateNewInternals(ProtectorArtefact* protector_artefact, int protection) const
 { 
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BAK_EQUIPMENT_ID);
+//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//    jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BAK_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
-    protection = getRandInt(ARTEFACT::PROTECTOR::PROTECTION_MIN, ARTEFACT::PROTECTOR::PROTECTION_MAX);
+    protection = meti::getRandInt(ARTEFACT::PROTECTOR::PROTECTION_MIN, ARTEFACT::PROTECTOR::PROTECTION_MAX);
 
     ItemCommonData common_data;
     common_data.deterioration_normal = 1;

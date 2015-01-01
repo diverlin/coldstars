@@ -17,18 +17,18 @@
 */
 
 #include "DroidModuleBuilder.hpp"
-#include "../../../items/modules/DroidModule.hpp"
+#include <items/modules/DroidModule.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
-#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
 
-#include "../../../world/EntityManager.hpp"
+#include <world/EntityManager.hpp>
 
-#include <resources/TextureCollector.hpp>
-#include <resources/MeshCollector.hpp>
-#include <jeti/TextureOb.hpp>
+//#include <resources/TextureCollector.hpp>
+//#include <resources/MeshCollector.hpp>
+//#include <jeti/TextureOb.hpp>
 
 DroidModuleBuilder& DroidModuleBuilder::Instance()
 {
@@ -72,9 +72,9 @@ DroidModule* DroidModuleBuilder::GetNewDroidModule(int repair_add) const
      
 void DroidModuleBuilder::CreateNewInternals(DroidModule* droid_module, int repair_add) const
 {
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
-    repair_add  = getRandInt(MODULE::DROID::REPAIR_MIN, MODULE::DROID::REPAIR_MAX);
+//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
+    repair_add  = meti::getRandInt(MODULE::DROID::REPAIR_MIN, MODULE::DROID::REPAIR_MAX);
 
     droid_module->SetParentSubTypeId(TYPE::ENTITY::DROID_EQUIPMENT_ID);    
     //alpitodorender droid_module->SetRenderData(mesh, texOb, texOb->GetSize());

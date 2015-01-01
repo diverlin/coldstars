@@ -20,7 +20,7 @@
 #include "../spaceobjects/Vehicle.hpp"
 #include "../spaceobjects/Ship.hpp"
 #include <jeti/Render.hpp>
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../common/Logger.hpp"
 
 #include "../dock/Angar.hpp"
@@ -70,7 +70,7 @@ void VehicleSlot::SwapVehicle(VehicleSlot* vehicle_slot)
     InsertVehicle(tmp_vehicle);
 }
 
-void VehicleSlot::Render(const Rect& rect) const
+void VehicleSlot::Render(const ceti::Rect& rect) const
 {
     //drawTexturedRect(textureOb, rect, -1);
     if (vehicle != nullptr)
@@ -83,7 +83,7 @@ void VehicleSlot::Render(const Rect& rect) const
 /*virtual*/
 void VehicleSlot::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "vehicle_slot." + int2str(GetId()) + ".";
+    const std::string root = "vehicle_slot." + ceti::int2str(GetId()) + ".";
     Base::SaveData(save_ptree, root);
     BaseSlot::SaveData(save_ptree, root);
     VehicleSlot::SaveData(save_ptree, root);
@@ -109,21 +109,21 @@ void VehicleSlot::Resolve()
 void VehicleSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" VehicleSlot("+ceti::int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void VehicleSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" VehicleSlot("+ceti::int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void VehicleSlot::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" VehicleSlot("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" VehicleSlot("+ceti::int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
 
         switch(owner->GetTypeId())

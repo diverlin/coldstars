@@ -20,8 +20,8 @@
 #include "Sector.hpp"
 #include "../common/constants.hpp"
 #include "../world/EntityManager.hpp"
-#include <math/rand.hpp>
-#include "../common/myStr.hpp"
+#include <meti/RandUtils.hpp>
+#include <ceti/myStr.hpp>
 
 #include "../garbage/EntityGarbage.hpp"
 #include "../struct/StarSystemsConditionData.hpp"
@@ -29,7 +29,7 @@
 Galaxy::Galaxy(int id)
 {
     SetId(id);
-    SetTypeId(TYPE::ENTITY::GALAXY_ID);  
+    SetTypeId(TYPE::ENTITY::GALAXY_ID);
 }
 
 Galaxy::~Galaxy()
@@ -39,7 +39,7 @@ Galaxy::~Galaxy()
 void Galaxy::PutChildsToGarbage() const
 {
     for (unsigned int i=0; i<SECTOR_vec.size(); i++)
-    {    
+    {
         EntityGarbage::Instance().Add(SECTOR_vec[i]);
     }
 }
@@ -47,47 +47,47 @@ void Galaxy::PutChildsToGarbage() const
 void Galaxy::Add(Sector* sector, const glm::vec3& center) 
 { 
     sector->SetGalaxy(this);
-        sector->SetCenter(center);
-        
-    SECTOR_vec.push_back(sector); 
+    sector->SetCenter(center);
+
+    SECTOR_vec.push_back(sector);
 }
-             
+
 Sector* Galaxy::GetRandomSector()
 {
-    return SECTOR_vec[getRandInt(0, SECTOR_vec.size()-1)];
+    return SECTOR_vec[meti::getRandInt(0, SECTOR_vec.size()-1)];
 }
 
- 
-            
+
+
 Sector* Galaxy::GetClosestSectorTo(Sector* sector)
 {
-        float dist_min = INCREDIBLY_MAX_FLOAT;
-        int index_min = -1;
-        
-        for (unsigned int i=0; i<SECTOR_vec.size(); i++)
-        {
-        float dist = distanceBetween(sector->GetCenter(), SECTOR_vec[i]->GetCenter());                                
-                if (dist < dist_min)
-                {
-                    dist_min = dist;
-                        index_min = i;
-                }
-        }
+    float dist_min = INCREDIBLY_MAX_FLOAT;
+    int index_min = -1;
 
-        if (index_min != -1)
+    for (unsigned int i=0; i<SECTOR_vec.size(); i++)
+    {
+        float dist = meti::distanceBetween(sector->GetCenter(), SECTOR_vec[i]->GetCenter());
+        if (dist < dist_min)
         {
-                return SECTOR_vec[index_min];
+            dist_min = dist;
+            index_min = i;
         }
-        
-        return nullptr;
+    }
+
+    if (index_min != -1)
+    {
+        return SECTOR_vec[index_min];
+    }
+
+    return nullptr;
 }
-             
+
 void Galaxy::Update(int time)
 {
     for (unsigned int i=0; i<SECTOR_vec.size(); i++)
-         {         
-             SECTOR_vec[i]->Update(time);
-         }
+    {
+        SECTOR_vec[i]->Update(time);
+    }
 }
 
 void Galaxy::FillStarSystemsCondition(StarSystemsConditionData& data_starsystems_condition) const
@@ -96,15 +96,15 @@ void Galaxy::FillStarSystemsCondition(StarSystemsConditionData& data_starsystems
     
     //for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
     //{
-        //switch (STARSYSTEM_vec[i]->GetConditionId())
-        //{
-            //case ENTITY::STARSYSTEM::CONDITION::SAFE_ID:         { data_starsystems_condition.safe_num++; break; }
-            //case ENTITY::STARSYSTEM::CONDITION::WAR_ID:         { data_starsystems_condition.war_num++; break; }
-            //case ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID:     { data_starsystems_condition.captured_num++; break; }
-        //}
+    //switch (STARSYSTEM_vec[i]->GetConditionId())
+    //{
+    //case ENTITY::STARSYSTEM::CONDITION::SAFE_ID:         { data_starsystems_condition.safe_num++; break; }
+    //case ENTITY::STARSYSTEM::CONDITION::WAR_ID:         { data_starsystems_condition.war_num++; break; }
+    //case ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID:     { data_starsystems_condition.captured_num++; break; }
+    //}
     //}
 }
-        
+
 void Galaxy::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {}
 
@@ -116,24 +116,24 @@ void Galaxy::ResolveData()
 
 void Galaxy::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "galaxy." + int2str(GetId())+".";
+    std::string root = "galaxy." + ceti::int2str(GetId())+".";
 
-    Base::SaveData(save_ptree, root); 
-    Galaxy::SaveData(save_ptree, root); 
+    Base::SaveData(save_ptree, root);
+    Galaxy::SaveData(save_ptree, root);
 }
 
 void Galaxy::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree); 
-    Galaxy::LoadData(load_ptree); 
+    Base::LoadData(load_ptree);
+    Galaxy::LoadData(load_ptree);
 }
 
 void Galaxy::Resolve()
 {
-    Base::ResolveData();  
-    Galaxy::ResolveData();  
+    Base::ResolveData();
+    Galaxy::ResolveData();
 }
-            
-            
-  
+
+
+
 

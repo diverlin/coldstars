@@ -20,7 +20,7 @@
 #include <world/God.hpp>
 
 #include <common/Logger.hpp>
-#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
 #include <common/Date.hpp>
 
@@ -45,6 +45,9 @@
 
 #include <struct/GalaxyDescription.hpp>
 #include <struct/RaceInformationCollector.hpp>
+
+#include <meti/RandUtils.hpp>
+#include <math/rand.hpp>
 
 God& God::Instance()
 {
@@ -85,8 +88,8 @@ void God::CreateInvasion(const GalaxyDescription& galaxy_description) const
     for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++)
     {
         StarSystem* starsystem = m_Galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
-        TYPE::RACE race_id = (TYPE::RACE)getRandInt((int)TYPE::RACE::R6_ID, (int)TYPE::RACE::R7_ID);
-        int ship_num = getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
+        TYPE::RACE race_id = (TYPE::RACE)meti::getRandInt((int)TYPE::RACE::R6_ID, (int)TYPE::RACE::R7_ID);
+        int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
         CreateShips(starsystem, ship_num, race_id);
     }
 }
@@ -135,7 +138,7 @@ void God::Update(const Date& date)
 void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsystem_description) const
 {            
     unsigned long int population = 0;
-    getRandBool() ? population = getRandInt(POPULATION_MIN, POPULATION_MAX) : population = 0;
+    meti::getRandBool() ? population = meti::getRandInt(POPULATION_MIN, POPULATION_MAX) : population = 0;
     planet->SetPopulation(population);
     
     BaseLand* land = nullptr;
@@ -155,7 +158,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
                 SatelliteBuilder::Instance().EquipEquipment(satellite); // improove
             
                 {
-                    TYPE::RACE npc_race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+                    TYPE::RACE npc_race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
                     TYPE::ENTITY npc_subtype_id    = TYPE::ENTITY::WARRIOR_ID;
                     TYPE::ENTITY npc_subsubtype_id = TYPE::ENTITY::WARRIOR_ID;
             
@@ -178,17 +181,17 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
             if (starsystem_description.allow_ship_pirat == true)     { allowed_subtypes.push_back(TYPE::ENTITY::PIRAT_ID); }    
             if (starsystem_description.allow_ship_diplomat == true) { allowed_subtypes.push_back(TYPE::ENTITY::DIPLOMAT_ID); }    
             
-            int ship_num = getRandInt(SHIPINIT_PER_PLANET_MIN, SHIPINIT_PER_PLANET_MAX);
+            int ship_num = meti::getRandInt(SHIPINIT_PER_PLANET_MIN, SHIPINIT_PER_PLANET_MAX);
             for (int j=0; j<ship_num; j++)
             {
-                TYPE::RACE npc_race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+                TYPE::RACE npc_race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
                 TYPE::ENTITY npc_subtype_id    = getRandNpcSubTypeId(npc_race_id, allowed_subtypes);
                 TYPE::ENTITY npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
                 
                 TYPE::RACE ship_race_id = npc_race_id;         
                 TYPE::ENTITY ship_subtype_id = npc_subtype_id;  
-                int ship_size_id = getRandInt(SIZE_1_ID, SIZE_9_ID);
-                int weapons_num = getRandInt(1, 5);
+                int ship_size_id = meti::getRandInt(SIZE_1_ID, SIZE_9_ID);
+                int weapons_num = meti::getRandInt(1, 5);
         
                 Ship* new_ship = ShipBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
                 ShipBuilder::Instance().EquipEquipment(new_ship); // improove
@@ -209,7 +212,7 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
 {       
     for (int i=0; i<spacestation_per_system; i++)
     {     
-        TYPE::RACE npc_race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+        TYPE::RACE npc_race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
         TYPE::ENTITY npc_subtype_id    = TYPE::ENTITY::WARRIOR_ID;
         TYPE::ENTITY npc_subsubtype_id = TYPE::ENTITY::WARRIOR_ID;
             
@@ -223,9 +226,9 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
         Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         spacestation->BindOwnerNpc(npc);
 
-        glm::vec2 center = getRandVec2f(700, 1500);
+        glm::vec2 center = meti::getRandVec2f(700, 1500);
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
-        glm::vec3 angle(0,0,getRandInt(0, 360));  
+        glm::vec3 angle(0,0,meti::getRandInt(0, 360));
                         
         starsystem->AddVehicle(spacestation, center3, angle, nullptr);
         
@@ -270,8 +273,8 @@ void God::CreateShips(StarSystem* starsystem, int ship_num, TYPE::RACE npc_race_
 
         TYPE::RACE ship_race_id         = npc_race_id;
         TYPE::ENTITY ship_subtype_id    = npc_subsubtype_id;
-        int ship_size_id    = getRandInt(1, 9);
-        int weapons_num     = getRandInt(1, 5);
+        int ship_size_id    = meti::getRandInt(1, 9);
+        int weapons_num     = meti::getRandInt(1, 5);
 
         // VERY UGLY LOGIC START (TODO)
         if (ship_subtype_id == TYPE::ENTITY::NONE_ID)
@@ -284,8 +287,8 @@ void God::CreateShips(StarSystem* starsystem, int ship_num, TYPE::RACE npc_race_
         Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         new_ship->BindOwnerNpc(new_npc);
 
-        glm::vec3 center = getRandXYVec3f(300, 1200, DEFAULT_ENTITY_ZPOS);
-        glm::vec3 angle(0, 0, getRandInt(0, 360));        
+        glm::vec3 center = meti::getRandXYVec3f(300, 1200, DEFAULT_ENTITY_ZPOS);
+        glm::vec3 angle(0, 0, meti::getRandInt(0, 360));
         starsystem->AddVehicle(new_ship, center, angle, nullptr);
     }
 }

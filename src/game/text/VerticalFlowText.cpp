@@ -17,7 +17,7 @@
 */
 
 #include "VerticalFlowText.hpp"
-#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
 
@@ -34,8 +34,8 @@ m_Text(text),
 m_Color(color),
 m_Speed(2.0)
 {
-    float kof1 = 0.1 * getRandInt(3, 18);
-    float kof2 = 0.1 * getRandInt(5, 15);
+    float kof1 = 0.1 * meti::getRandInt(3, 18);
+    float kof2 = 0.1 * meti::getRandInt(5, 15);
     
     m_Center.x = center.x - collision_radius * kof1;
     m_Center.y = center.y + collision_radius * kof2;

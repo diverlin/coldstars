@@ -25,7 +25,7 @@
 
 #include <dock/Kosmoport.hpp>
 
-//#include <jeti/Mesh.hpp>
+#include <meti/RandUtils.hpp>
 
 
 SpaceStationBuilder& SpaceStationBuilder::Instance()
@@ -72,7 +72,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     //jeti::TextureOb* texOb = nullptr;
     glm::vec3 size;
 
-    if (getRandInt(0, 1))
+    if (meti::getRandInt(0, 1))
     {
 //        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //        texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SPACESTATION_ID);
@@ -82,7 +82,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     {    
 //        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
 //        texOb = mesh->GetTextureOb();
-        float scale_comp = getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX);
+        float scale_comp = meti::getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX);
         size = glm::vec3(scale_comp, scale_comp, scale_comp);
     }
     
@@ -93,7 +93,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     //}
     
     VehicleKorpusData data_korpus;
-    data_korpus.space       = 2500 + getRandInt(0, 1000);
+    data_korpus.space       = 2500 + meti::getRandInt(0, 1000);
     data_korpus.armor       = data_korpus.space;
     data_korpus.protection  = protection_rate;
     data_korpus.temperature = 100;
@@ -133,12 +133,12 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 
     //alpitodorender spacestation->SetRenderData(mesh, texOb, size);
         
-    float delta_angle = 0.0001*getRandInt(20, 60);
+    float delta_angle = 0.0001*meti::getRandInt(20, 60);
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender spacestation->SetAnimationRotation(animation_rotation);
 
     
-    spacestation->SetMass(getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));
+    spacestation->SetMass(meti::getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));
     
     spacestation->CreateDriveComplexTextureDependedStuff();
     spacestation->CreateProtectionComplexTextureDependedStuff();

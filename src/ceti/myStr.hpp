@@ -26,7 +26,4 @@ namespace ceti {
 std::string int2str(long long int); 
 std::string bool2str(bool); 
                               
-std::string getAiModelStr(int);
-std::string getNavigatorActionStr(int); 
-
 } // namespace ceti

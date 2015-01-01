@@ -20,6 +20,8 @@
 #include <builder/CommonBuilderHeaders.hpp>
 #include <spaceobjects/Satellite.hpp>
 
+#include <meti/RandUtils.hpp>
+
 SatelliteBuilder& SatelliteBuilder::Instance()
 {    
     static SatelliteBuilder instance;
@@ -72,7 +74,7 @@ void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const
     //}
     
     VehicleKorpusData data_korpus;
-    data_korpus.space       = 60 + getRandInt(0, 20);
+    data_korpus.space       = 60 + meti::getRandInt(0, 20);
     data_korpus.armor       = 10*data_korpus.space;
     data_korpus.protection  = 2*protection_rate;
     data_korpus.temperature = 100;
@@ -98,7 +100,7 @@ void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const
     //int size_threshold = 2; 
     data_korpus.draw_turrels = true;       
  
-    float delta_angle = 0.0001*getRandInt(20, 60);  
+    float delta_angle = 0.0001*meti::getRandInt(20, 60);
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender satellite->SetAnimationRotation(animation_rotation);
     

@@ -19,7 +19,7 @@
 #include "RenderManager.hpp"
 #include <jeti/constants.hpp>
 
-#include <common/Collision.hpp>
+#include <ceti/Collision.hpp>
 #include <common/constants.hpp>
 
 #include <world/starsystem.hpp>
@@ -144,7 +144,7 @@ void RenderManager::addIfVisible(AsteroidDrawable* asteroid, const VisibilityDat
 {
     if (isRectOnVisibleScreenArea(asteroid->GetCenter(), asteroid->GetSize(), data.screen.worldcoord, data.screen.scale))
     {
-        if (isPointInObserverRadius(asteroid->GetCenter(), data.observer.center, data.observer.radius)) {
+        if (ceti::isPointInObserverRadius(asteroid->GetCenter(), data.observer.center, data.observer.radius)) {
             m_asteroids.push_back(asteroid);
         }
     }
@@ -153,7 +153,7 @@ void RenderManager::addIfVisible(AsteroidDrawable* asteroid, const VisibilityDat
 void RenderManager::addIfVisible(ContainerDrawable* container, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(container->GetCenter(), container->GetSize(), data.screen.worldcoord, data.screen.scale)) {
-        if (isPointInObserverRadius(container->GetCenter(), data.observer.center, data.observer.radius)) {
+        if (ceti::isPointInObserverRadius(container->GetCenter(), data.observer.center, data.observer.radius)) {
             m_containers.push_back(container);
         }
     }
@@ -162,7 +162,7 @@ void RenderManager::addIfVisible(ContainerDrawable* container, const VisibilityD
 void RenderManager::addIfVisible(BulletDrawable* bullet, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(bullet->GetCenter(), bullet->GetSize(), data.screen.worldcoord, data.screen.scale)) {
-        if (isPointInObserverRadius(bullet->GetCenter(), data.observer.center, data.observer.radius)) {
+        if (ceti::isPointInObserverRadius(bullet->GetCenter(), data.observer.center, data.observer.radius)) {
             m_bullets.push_back(bullet);
         }
     }
@@ -171,7 +171,7 @@ void RenderManager::addIfVisible(BulletDrawable* bullet, const VisibilityData& d
 void RenderManager::addIfVisible(BlackHoleDrawable* wormhole, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(wormhole->GetCenter(), wormhole->GetSize(), data.screen.worldcoord, data.screen.scale)) {
-        if (isPointInObserverRadius(wormhole->GetCenter(), data.observer.center, data.observer.radius)) {
+        if (ceti::isPointInObserverRadius(wormhole->GetCenter(), data.observer.center, data.observer.radius)) {
             m_wormholes.push_back(wormhole);
         }
     }
@@ -180,7 +180,7 @@ void RenderManager::addIfVisible(BlackHoleDrawable* wormhole, const VisibilityDa
 void RenderManager::addIfVisible(ShipDrawable* ship, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(ship->GetCenter(), ship->GetSize(), data.screen.worldcoord, data.screen.scale)) {
-        if (isPointInObserverRadius(ship->GetCenter(), data.observer.center, data.observer.radius)) {
+        if (ceti::isPointInObserverRadius(ship->GetCenter(), data.observer.center, data.observer.radius)) {
             m_ships.push_back(ship);
         }
     }
@@ -189,7 +189,7 @@ void RenderManager::addIfVisible(ShipDrawable* ship, const VisibilityData& data)
 void RenderManager::addIfVisible(SpaceStationDrawable* spacestation, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(spacestation->GetCenter(), spacestation->GetSize(), data.screen.worldcoord, data.screen.scale)) {
-        if (isPointInObserverRadius(spacestation->GetCenter(), data.observer.center, data.observer.radius)) {
+        if (ceti::isPointInObserverRadius(spacestation->GetCenter(), data.observer.center, data.observer.radius)) {
             m_spacestations.push_back(spacestation);
         }
     }
@@ -198,7 +198,7 @@ void RenderManager::addIfVisible(SpaceStationDrawable* spacestation, const Visib
 void RenderManager::addIfVisible(SatelliteDrawable* satellite, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(satellite->GetCenter(), satellite->GetSize(), data.screen.worldcoord, data.screen.scale)) {
-        if (isPointInObserverRadius(satellite->GetCenter(), data.observer.center, data.observer.radius)) {
+        if (ceti::isPointInObserverRadius(satellite->GetCenter(), data.observer.center, data.observer.radius)) {
             m_satellites.push_back(satellite);
         }
     }
@@ -207,7 +207,7 @@ void RenderManager::addIfVisible(SatelliteDrawable* satellite, const VisibilityD
 void RenderManager::addIfVisible(ShockWaveEffect* effect, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(effect->GetCenter(), glm::vec2(600.0), data.screen.worldcoord, data.screen.scale)) {
-        if (isPointInObserverRadius(effect->GetCenter(), data.observer.center, data.observer.radius)) {
+        if (ceti::isPointInObserverRadius(effect->GetCenter(), data.observer.center, data.observer.radius)) {
             m_shockwaves.push_back(effect);
         }
     }

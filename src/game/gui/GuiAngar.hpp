@@ -16,8 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUIANGAR_H
-#define GUIANGAR_H
+#pragma once
 
 #include "BaseGuiElement.hpp"
 class Angar;
@@ -25,35 +24,33 @@ class ItemSlot;
 class VehicleSlot;
 #include "GuiPair.hpp"
 #include "MouseData.hpp"
-#include "../common/rect.hpp"
+#include <ceti/rect.hpp>
 
 class GuiAngar : public BaseGuiElement
 {
-        public:
-               GuiAngar();
-               ~GuiAngar();
+    public:
+        GuiAngar();
+        ~GuiAngar();
         
         void BindAngar(Angar*);
         void UnbindAngar();
-                
+
         Angar* GetAngar() const { return angar; };
         
-               bool UpdateMouseInteractionWithVehicleSlots(const MouseData&);
+        bool UpdateMouseInteractionWithVehicleSlots(const MouseData&);
 
         void CheckButtonsLock();
-               void ButtonsAction() const;   
+        void ButtonsAction() const;
 
-               void RenderVehicleAndItemSlots() const;      
-           
-           private:
-                   Angar* angar;
-                   
-                   ItemSlot* repair_slot;
-                ItemSlot* charge_slot;
-                
-                     std::vector<GuiPair<Rect, VehicleSlot*>> rect_vehicleslot_vec;
-                     std::vector<GuiPair<Rect, ItemSlot*>> rect_itemslot_vec;
+        void RenderVehicleAndItemSlots() const;
+
+    private:
+        Angar* angar;
+
+        ItemSlot* repair_slot;
+        ItemSlot* charge_slot;
+
+        std::vector<GuiPair<ceti::Rect, VehicleSlot*>> rect_vehicleslot_vec;
+        std::vector<GuiPair<ceti::Rect, ItemSlot*>> rect_itemslot_vec;
 };
 
-
-#endif 

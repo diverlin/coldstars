@@ -16,11 +16,10 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef STARSYSTEMSCONDITIONDATA_H
-#define STARSYSTEMSCONDITIONDATA_H
+#pragma once
 
 #include <string>
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 
 struct StarSystemsConditionData
 {
@@ -33,7 +32,6 @@ struct StarSystemsConditionData
              int captured_num;
                           
              void Reset() { safe_num = 0; war_num = 0; captured_num = 0; };
-        std::string GetStr() const { return "safe_num="+int2str(safe_num)+" war_num="+int2str(war_num)+" captured_num="+int2str(captured_num); }
+        std::string GetStr() const { return "safe_num="+ceti::int2str(safe_num)+" war_num="+ceti::int2str(war_num)+" captured_num="+ceti::int2str(captured_num); }
 };
 
-#endif 

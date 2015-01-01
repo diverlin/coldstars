@@ -18,7 +18,7 @@
 
 #include "BakModule.hpp"
 #include "../../common/constants.hpp"
-#include "../../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../../common/Logger.hpp"
 
 BakModule::BakModule(int id)
@@ -38,13 +38,13 @@ BakModule::~BakModule()
 void BakModule::AddUniqueInfo()
 {
         info.addTitleStr("bak module");
-        info.addNameStr("fuel_max_add:"); info.addValueStr( int2str(fuel_max_add) );
+        info.addNameStr("fuel_max_add:"); info.addValueStr( ceti::int2str(fuel_max_add) );
 }
 
 /*virtual*/
 void BakModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "bak_module." + int2str(GetId()) + ".";
+    const std::string root = "bak_module." + ceti::int2str(GetId()) + ".";
 
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -73,7 +73,7 @@ void BakModule::Resolve()
 void BakModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BakModule::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BakModule::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"fuel_max_add", fuel_max_add);
@@ -82,7 +82,7 @@ void BakModule::SaveData(boost::property_tree::ptree& save_ptree, const std::str
 void BakModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BakModule::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BakModule::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     fuel_max_add = load_ptree.get<int>("fuel_max_add");
@@ -91,6 +91,6 @@ void BakModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void BakModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BakModule::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BakModule::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

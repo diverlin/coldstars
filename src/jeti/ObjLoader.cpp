@@ -29,7 +29,7 @@ ObjLoader::ObjLoader(const std::string& path)
     {
         line_counter++;
 #ifdef LOGGER_ENABLED
-        Logger::Instance().Log(filename+": line num="+int2str(line_counter)+" "+line, OBJLOADER_LOG_DIP);
+        Logger::Instance().Log(filename+": line num="+ceti::int2str(line_counter)+" "+line, OBJLOADER_LOG_DIP);
 #endif
         
         std::stringstream line_stream(line);

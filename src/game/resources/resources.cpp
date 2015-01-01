@@ -17,8 +17,8 @@
 */
 
 #include "resources.hpp"
-#include "../common/constants.hpp"
-#include "../config/config.hpp"
+#include <common/constants.hpp>
+#include <config/config.hpp>
 //#include <jeti/ShaderLoader.hpp>
 #include <jeti/Mesh.hpp>
 //#include <jeti/Screen.hpp>
@@ -31,6 +31,9 @@
 #include <types/RaceTypes.hpp>
 #include <types/MeshTypes.hpp>
 #include <types/TechLevelTypes.hpp>
+
+
+
 
 void loadGameData()
 {        

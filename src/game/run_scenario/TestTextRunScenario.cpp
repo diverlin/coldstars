@@ -34,6 +34,7 @@
 #include "../text/VerticalFlowText.hpp"
 
 #include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 
 #include <iostream>
     
@@ -88,7 +89,7 @@ void TestTextRunScenario::Update_inDynamic(Player* player)
     glm::ivec4 color(255, 0, 0, 255);
     while (starsystem->GetTextDamageNum() < 200)
     {    
-        glm::vec2 center(getRandVec2f(100, 600));
+        glm::vec2 center(meti::getRandVec2f(100, 600));
         VerticalFlowText* flow_text = new VerticalFlowText("1", 12, center, color, 10);
                                         
         starsystem->Add(flow_text);

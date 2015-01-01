@@ -18,7 +18,7 @@
 
 #include "Star.hpp"
 
-#include <common/myStr.hpp>
+#include <ceti/myStr.hpp>
 #include <common/common.hpp>
 #include <math/rand.hpp>
 #include <common/Logger.hpp>
@@ -30,6 +30,7 @@
 
 #include <glm/gtx/transform.hpp>
 
+#include <meti/RandUtils.hpp>
    
 Star::Star(int id)
 :
@@ -41,14 +42,14 @@ m_TurnSinceLastSparkCounter(0)
     SetId(id);
     SetTypeId(TYPE::ENTITY::STAR_ID);
 
-    m_TurnSparkThreshold = getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
+    m_TurnSparkThreshold = meti::getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
 }
   
 /* virtual */  
 Star::~Star()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Star("+int2str(GetId())+")");
+    Logger::Instance().Log("___::~Star("+ceti::int2str(GetId())+")");
     #endif    
 }
 
@@ -75,7 +76,7 @@ void Star::UpdateInSpaceInStatic()
 {
     if (m_TurnSinceLastSparkCounter > m_TurnSparkThreshold)
     {
-        if (getRandInt(1, 2) == 1) 
+        if (meti::getRandInt(1, 2) == 1)
         {
             InitiateSpark(); 
         }
@@ -99,7 +100,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
                 if (m_DeltaColor > 1.0)
                 {
                     m_DeltaColor = 1.0;
-                    GetStarSystem()->StarSparkEvent(getRandInt(600, 1200));
+                    GetStarSystem()->StarSparkEvent(meti::getRandInt(600, 1200));
                     m_SparkGrows = false;
                 }
             } 
@@ -116,7 +117,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
         }
         else
         {
-            GetStarSystem()->StarSparkEvent(getRandInt(600, 1200));
+            GetStarSystem()->StarSparkEvent(meti::getRandInt(600, 1200));
             m_SparkActive = false;
         }
     }
@@ -129,9 +130,9 @@ void Star::UpdateInfo()
 { 
     GetInfo().clear();
     GetInfo().addTitleStr("STAR");
-    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()));
-    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(int2str(GetDataLife().armor));
-    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( str(GetCenter()) );
+    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(ceti::int2str(GetId()) + " / " + ceti::int2str(GetStarSystem()->GetId()));
+    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(ceti::int2str(GetDataLife().armor));
+    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( meti::str(GetCenter()) );
 }
 
 /* virtual override final */
@@ -142,7 +143,7 @@ void Star::PostDeathUniqueEvent(bool)
 void Star::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Star("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Star("+ceti::int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"m_TurnSinceLastSparkCounter", m_TurnSinceLastSparkCounter);
@@ -152,7 +153,7 @@ void Star::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
 void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Star("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Star("+ceti::int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
     
     m_TurnSinceLastSparkCounter = load_ptree.get<int>("m_TurnSinceLastSparkCounter");
@@ -162,7 +163,7 @@ void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 void Star::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Star("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Star("+ceti::int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this);     
@@ -171,7 +172,7 @@ void Star::ResolveData()
 /* virtual override final */
 void Star::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "star." + int2str(GetId())+".";
+    std::string root = "star." + ceti::int2str(GetId())+".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

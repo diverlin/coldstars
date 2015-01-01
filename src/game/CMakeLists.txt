@@ -7,6 +7,8 @@ add_executable (${PROJECT} ${COLDSTARS_SOURCE} ${COLDSTARS_HEADER})
 target_link_libraries(${PROJECT}
     boost_system
     jeti
+    meti
+    ceti
 )
 
 #SET_TARGET_PROPERTIES(${PROJECT} PROPERTIES COMPILE_FLAGS "-Wall -Werror -Wno-switch -std=c++11 -std=gnu++11 -pipe")

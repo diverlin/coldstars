@@ -94,8 +94,7 @@ void ButtonItemSlot2::UpdateUnique(Player* player)
 /*virtual override final*/
 void ButtonItemSlot2::RenderUnique(const jeti::Renderer& render, Player*) const
 {
-    if (GetItemSlot() != nullptr)
-    {
+    if (GetItemSlot()) {
         GetItemSlot()->Render(render, GetBox(), glm::vec2(0), false);
     }
 }        

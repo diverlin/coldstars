@@ -17,12 +17,11 @@
 */
 
 
-#ifndef COMMON_HPP
-#define COMMON_HPP
+#pragma once
 
 #include <string>
 
-#include <math/myVector.hpp>
+#include <meti/VectorUtils.hpp>
 
 #include <types/EntityTypes.hpp>
 #include <types/GuiTypes.hpp>
@@ -75,4 +74,3 @@ int getIndexWithMinVal(const T* array, unsigned int size)
     return index_min;
 }
 
-#endif

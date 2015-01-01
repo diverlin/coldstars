@@ -18,7 +18,7 @@
 
 #include "BaseModule.hpp"
 #include "../../common/constants.hpp"
-#include "../../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../../common/Logger.hpp"
 #include "../../world/EntityManager.hpp"
 #include "../../items/equipment/BaseEquipment.hpp"
@@ -33,13 +33,13 @@ BaseModule::~BaseModule ()
 
 void BaseModule::AddCommonInfo()
 {
-    info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
+    info.addNameStr("mass:");      info.addValueStr( ceti::int2str(data_item.mass) );
 }
 
 void BaseModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseModule::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseModule::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     if (equipment_owner)     { save_ptree.put(root+"unresolved.equipment_owner_id", equipment_owner->GetId()); }
@@ -49,7 +49,7 @@ void BaseModule::SaveData(boost::property_tree::ptree& save_ptree, const std::st
 void BaseModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseModule::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseModule::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     data_unresolved_BaseModule.equipment_owner_id = load_ptree.get<int>("unresolved.equipment_owner_id");
@@ -58,7 +58,7 @@ void BaseModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void BaseModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseModule::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseModule::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     if(data_unresolved_BaseModule.equipment_owner_id != NONE_ID) 

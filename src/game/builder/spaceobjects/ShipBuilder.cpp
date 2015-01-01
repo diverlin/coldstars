@@ -21,12 +21,11 @@
 #include <builder/CommonBuilderHeaders.hpp>
 #include <spaceobjects/Ship.hpp>
 
-//#include <jeti/Mesh.hpp>
-
 #include <struct/RaceInformationCollector.hpp>
 
 #include <common/constants.hpp>
-
+#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 
 ShipBuilder& ShipBuilder::Instance()
 {    
@@ -66,9 +65,9 @@ Ship* ShipBuilder::GetNewShip(TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, in
 
 Ship* ShipBuilder::GetNewShip() const
 {
-    TYPE::RACE race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+    TYPE::RACE race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
     TYPE::ENTITY subsubtype_id = TYPE::ENTITY::WARRIOR_ID;
-    int size_id = getRandInt(1, 9);
+    int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
             
     Ship* ship = GetNewShipTemplate();
@@ -88,7 +87,7 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
 //        texOb = TextureCollector::Instance().getTextureByDescriptor(TextureDescriptor());
 //        assert(mesh);
 //        assert(texOb);
-        float scale_comp = getRandInt(40, 100);
+        float scale_comp = meti::getRandInt(40, 100);
         size = glm::vec3(scale_comp, scale_comp, 1.0);
         //size = texOb->GetSize();
     }
@@ -98,7 +97,7 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
 //        texOb = mesh->GetTextureOb();
 //        assert(mesh);
 //        assert(texOb);
-        float scale_comp = getRandInt(40, 100);
+        float scale_comp = meti::getRandInt(40, 100);
         size = glm::vec3(scale_comp, scale_comp, scale_comp);
     }
 
@@ -111,11 +110,11 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
     }
     
     VehicleKorpusData data_korpus;
-    data_korpus.space       = size_id*100 + getRandInt(0, 100);
+    data_korpus.space       = size_id*100 + meti::getRandInt(0, 100);
     data_korpus.armor       = data_korpus.space;
     data_korpus.protection  = protection_rate*size_id/(SIZE_1_ID);
     data_korpus.temperature = 100;
-    data_korpus.price       = getRandInt(200, 400)*size_id;
+    data_korpus.price       = meti::getRandInt(200, 400)*size_id;
 
     data_korpus.slot_bak_num       = 1;
     data_korpus.slot_drive_num     = 1;
@@ -127,8 +126,8 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
     data_korpus.slot_scaner_num    = 1;
     data_korpus.slot_freezer_num   = 1;
     data_korpus.slot_weapon_num   = weapons_num;  
-    data_korpus.slot_artefact_num = getRandInt(1, SLOT_ARTEFACT_TYPES.size());  
-    data_korpus.slot_otsec_num    = getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
+    data_korpus.slot_artefact_num = meti::getRandInt(1, SLOT_ARTEFACT_TYPES.size());
+    data_korpus.slot_otsec_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
     
     int size_threshold = 2; 
     data_korpus.draw_turrels = false;
@@ -144,7 +143,7 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
     ship->SetKorpusData(data_korpus);
 
 
-    float scale_comp = getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
+    float scale_comp = meti::getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     
     //float step = getRandInt(10, 20)*0.01;
@@ -153,7 +152,7 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
     //AnimationWiggleAxisX* animation_program = new AnimationWiggleAxisX(step3, threshold);
     //ship->SetRenderAnimation(animation_program);
     
-    float delta_angle = 0.0001*getRandInt(20, 60);
+    float delta_angle = 0.0001*meti::getRandInt(20, 60);
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender ship->SetAnimationRotation(animation_rotation);
 

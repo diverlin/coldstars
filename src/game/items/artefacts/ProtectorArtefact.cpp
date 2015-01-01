@@ -18,7 +18,7 @@
 
 #include "ProtectorArtefact.hpp"
 #include "../../common/constants.hpp"
-#include "../../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../../common/Logger.hpp"
 
 ProtectorArtefact::ProtectorArtefact(int id)
@@ -38,19 +38,19 @@ ProtectorArtefact::~ProtectorArtefact ()
 void ProtectorArtefact::AddUniqueInfo()
 {
     info.addTitleStr("protector artefact");
-    info.addNameStr("protection:");      info.addValueStr( int2str(protection) );
+    info.addNameStr("protection:");      info.addValueStr( ceti::int2str(protection) );
 }
 
 /* virtual */
 void ProtectorArtefact::AddCommonInfo()
 {
-    info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
+    info.addNameStr("mass:");      info.addValueStr( ceti::int2str(data_item.mass) );
 }
 
 /* virtual */
 void ProtectorArtefact::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "protector_artefact." + int2str(GetId()) + "."; 
+    std::string root = "protector_artefact." + ceti::int2str(GetId()) + ".";
    
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -76,7 +76,7 @@ void ProtectorArtefact::Resolve()
 void ProtectorArtefact::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorArtefact::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorArtefact::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"protection", protection); 
@@ -85,7 +85,7 @@ void ProtectorArtefact::SaveData(boost::property_tree::ptree& save_ptree, const 
 void ProtectorArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorArtefact::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorArtefact::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     protection = load_ptree.get<int>("protection");
@@ -94,6 +94,6 @@ void ProtectorArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
 void ProtectorArtefact::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorArtefact::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorArtefact::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

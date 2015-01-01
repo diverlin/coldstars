@@ -17,18 +17,19 @@
 */
 
 #include "DriveModuleBuilder.hpp"
-#include "../../../items/modules/DriveModule.hpp"
+#include <items/modules/DriveModule.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
 #include <math/rand.hpp>
 #include <common/constants.hpp>
 
-#include "../../../world/EntityManager.hpp"
+#include <world/EntityManager.hpp>
+//#include <resources/TextureCollector.hpp>
+//#include <resources/MeshCollector.hpp>
+//#include <jeti/TextureOb.hpp>
 
-#include <resources/TextureCollector.hpp>
-#include <resources/MeshCollector.hpp>
-#include <jeti/TextureOb.hpp>
+#include <meti/RandUtils.hpp>
 
 DriveModuleBuilder& DriveModuleBuilder::Instance()
 {
@@ -72,10 +73,10 @@ DriveModule* DriveModuleBuilder::GetNewDriveModule(int speed_add, int hyper_add)
             
 void DriveModuleBuilder::CreateNewInternals(DriveModule* drive_module, int speed_add, int hyper_add) const
 {     
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
-    speed_add = getRandInt(MODULE::DRIVE::SPEED_MIN, MODULE::DRIVE::SPEED_MAX);
-    hyper_add = getRandInt(MODULE::DRIVE::HYPER_MIN, MODULE::DRIVE::HYPER_MAX);
+//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
+    speed_add = meti::getRandInt(MODULE::DRIVE::SPEED_MIN, MODULE::DRIVE::SPEED_MAX);
+    hyper_add = meti::getRandInt(MODULE::DRIVE::HYPER_MIN, MODULE::DRIVE::HYPER_MAX);
     
     drive_module->SetParentSubTypeId(TYPE::ENTITY::DRIVE_EQUIPMENT_ID);    
     //alpitodorender drive_module->SetRenderData(mesh, texOb, texOb->GetSize());

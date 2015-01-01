@@ -17,8 +17,7 @@
 */
 
 
-#ifndef DISTANTNEBULAEFFECT_HPP
-#define DISTANTNEBULAEFFECT_HPP
+#pragma once
 
 #include <effects/BaseDecor.hpp>    
 
@@ -42,6 +41,6 @@ class DistantNebulaEffect : public BaseDecor
         void ResolveData();  
 };
 
-DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id = NONE_ID);
+DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id = -1);
 
-#endif 
+

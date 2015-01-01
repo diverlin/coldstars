@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <common/NonCopyable.hpp>
+#include <ceti/NonCopyable.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <struct/IdData.hpp>
 

@@ -17,20 +17,17 @@
 */
 
 
-#ifndef CONSTANTS_HPP
-#define CONSTANTS_HPP
+#pragma once
 
 #include <string>
 #include <cstdint>
-#include "../math/myVector.hpp"
+#include <meti/VectorUtils.hpp>
 #include <vector>
 #include <types/EntityTypes.hpp>
 #include <types/GuiTypes.hpp>
 #include "Converter.hpp"
 
 
-const std::string CONFIG_PATH  = "";
-        
 namespace CONVERTER
 {
     const Converter<glm::vec2, float> RADIUS2FORCE(glm::vec2(10, 500), glm::vec2(1.0, 0.0), 1000);
@@ -728,6 +725,3 @@ namespace GAME
 {
     const int WEAPONS_NUM_MAX = 9;
 }
-
-#endif
-

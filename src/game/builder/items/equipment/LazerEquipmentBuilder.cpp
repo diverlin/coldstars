@@ -32,7 +32,7 @@
 #include <jeti/TextureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
-
+#include <meti/RandUtils.hpp>
 
 LazerEquipmentBuilder& LazerEquipmentBuilder::Instance()
 {
@@ -45,15 +45,15 @@ LazerEquipmentBuilder::~LazerEquipmentBuilder()
 
 LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipmentTemplate(INTLONGEST id) const
 {
-    LazerEquipment* lazer_equipment = nullptr; 
+    LazerEquipment* lazer_equipment = nullptr;
     
     if (id == NONE_ID)
     {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try
+    {
         lazer_equipment = new LazerEquipment(id);
     }
     catch(std::bad_alloc)
@@ -65,50 +65,48 @@ LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipmentTemplate(INTLONGEST i
     
     return lazer_equipment;
 } 
-      
+
 LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {
-    LazerEquipment* lazer_equipment = GetNewLazerEquipmentTemplate(); 
+    LazerEquipment* lazer_equipment = GetNewLazerEquipmentTemplate();
     CreateNewInternals(lazer_equipment, tech_level, race_id, damage_orig, radius_orig);
-        
+
     return lazer_equipment;
 } 
-      
+
 void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {     
-    if (race_id == TYPE::RACE::NONE_ID)
-    {
-        race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+    if (race_id == TYPE::RACE::NONE_ID) {
+        race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
     }
     
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
-    {
-        tech_level = TYPE::TECHLEVEL::L0_ID; 
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
+        tech_level = TYPE::TECHLEVEL::L0_ID;
     }
 
     jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
     jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::LAZER_EQUIPMENT_ID);
 
-    damage_orig     = getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX) * (1 + EQUIPMENT::LAZER::DAMAGE_TECHLEVEL_RATE * (int)tech_level);
-    radius_orig     = getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX) * (1 + EQUIPMENT::LAZER::RADIUS_TECHLEVEL_RATE * (int)tech_level);
+    damage_orig     = meti::getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX) * (1 + EQUIPMENT::LAZER::DAMAGE_TECHLEVEL_RATE * (int)tech_level);
+    radius_orig     = meti::getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX) * (1 + EQUIPMENT::LAZER::RADIUS_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech_level         = tech_level;
-    common_data.modules_num_max = getRandInt(EQUIPMENT::LAZER::MODULES_NUM_MIN, EQUIPMENT::LAZER::MODULES_NUM_MAX);
-    common_data.mass            = getRandInt(EQUIPMENT::LAZER::MASS_MIN, EQUIPMENT::LAZER::MASS_MAX);
-    common_data.condition_max   = getRandInt(EQUIPMENT::LAZER::CONDITION_MIN, EQUIPMENT::LAZER::CONDITION_MAX);
+    common_data.modules_num_max = meti::getRandInt(EQUIPMENT::LAZER::MODULES_NUM_MIN, EQUIPMENT::LAZER::MODULES_NUM_MAX);
+    common_data.mass            = meti::getRandInt(EQUIPMENT::LAZER::MASS_MIN, EQUIPMENT::LAZER::MASS_MAX);
+    common_data.condition_max   = meti::getRandInt(EQUIPMENT::LAZER::CONDITION_MIN, EQUIPMENT::LAZER::CONDITION_MAX);
     common_data.deterioration_normal = 1;
-                                                   
-    lazer_equipment->SetDamageOrig(damage_orig);  
-    lazer_equipment->SetRadiusOrig(radius_orig);  
+
+    lazer_equipment->SetDamageOrig(damage_orig);
+    lazer_equipment->SetRadiusOrig(radius_orig);
     //alpitodorender lazer_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
     lazer_equipment->SetParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
     lazer_equipment->SetItemCommonData(common_data);
     lazer_equipment->SetCondition(common_data.condition_max);
-                
-   lazer_equipment->UpdateProperties();
-   lazer_equipment->CountPrice();
+
+    lazer_equipment->UpdateProperties();
+    lazer_equipment->CountPrice();
 }
 
 

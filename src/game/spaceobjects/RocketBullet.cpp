@@ -19,7 +19,7 @@
 #include "RocketBullet.hpp"
 
 #include <common/common.hpp>
-#include <common/myStr.hpp>
+#include <ceti/myStr.hpp>
 #include <common/Logger.hpp>
 #include <common/constants.hpp>
 
@@ -50,7 +50,7 @@ m_EffectDrive(nullptr)
 RocketBullet::~RocketBullet()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~RocketBullet("+int2str(GetId())+")");
+    Logger::Instance().Log("___::~RocketBullet("+ceti::int2str(GetId())+")");
     #endif
 
     delete m_EffectDrive;
@@ -126,11 +126,11 @@ void RocketBullet::UpdateInfo()
     GetInfo().clear();
 
     GetInfo().addTitleStr("ROCKET");
-    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()) );
-    GetInfo().addNameStr("armor:");             GetInfo().addValueStr( int2str(GetDataLife().armor) );
+    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( ceti::int2str(GetId()) + " / " + ceti::int2str(GetStarSystem()->GetId()) );
+    GetInfo().addNameStr("armor:");             GetInfo().addValueStr( ceti::int2str(GetDataLife().armor) );
     if (m_Target != nullptr) 
     { 
-        GetInfo().addNameStr("target_id:");       GetInfo().addValueStr(int2str(m_Target->GetId())); 
+        GetInfo().addNameStr("target_id:");       GetInfo().addValueStr(ceti::int2str(m_Target->GetId()));
     }
 }
 
@@ -147,7 +147,7 @@ void RocketBullet::Hit(int damage, bool show_effect)
     if (show_effect == true)
     {
         // improove
-        VerticalFlowText* text = new VerticalFlowText(int2str(damage), 12, vec3ToVec2(GetCenter()), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
+        VerticalFlowText* text = new VerticalFlowText(ceti::int2str(damage), 12, meti::vec3ToVec2(GetCenter()), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
         GetStarSystem()->Add(text); 
     }
 }
@@ -206,7 +206,7 @@ void RocketBullet::ResolveData()
 /* virtual override final */
 void RocketBullet::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "rocketbullet."+int2str(GetId())+".";
+    const std::string root = "rocketbullet."+ceti::int2str(GetId())+".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

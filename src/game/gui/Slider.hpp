@@ -17,12 +17,11 @@
 */
 
 
-#ifndef SLIDER_H
-#define SLIDER_H
+#pragma once
 
 #include "BaseGuiElement.hpp"
 #include <jeti/TextureOb.hpp>
-#include "../common/rect.hpp"
+#include <ceti/rect.hpp>
 #include "../dock/Shop.hpp"
 #include "MouseData.hpp"
 
@@ -50,10 +49,9 @@ class Slider : public BaseGuiElement
                int price_selected;
                int price_for_one;
                
-               Rect rect;  
-               Rect rect_slide;             
+               ceti::Rect rect;
+               ceti::Rect rect_slide;
                jeti::TextureOb* textureOb;
                jeti::TextureOb* textureOb_scale;
 };
 
-#endif

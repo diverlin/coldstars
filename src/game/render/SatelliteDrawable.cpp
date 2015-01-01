@@ -28,7 +28,7 @@ SatelliteDrawable::SatelliteDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
 SatelliteDrawable::~SatelliteDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Satellite("+int2str(GetId())+")");
+    Logger::Instance().Log("___::~Satellite("+ceti::int2str(GetId())+")");
     #endif
 }
 
@@ -39,9 +39,9 @@ SatelliteDrawable::~SatelliteDrawable()
 
 //    GetInfo().addTitleStr("SATELLITE");
 
-//    //GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(starsystem->GetId()));
-//    GetInfo().addNameStr("id:");          GetInfo().addValueStr(int2str(GetId()));
-//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(int2str(GetMass()));
+//    //GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(ceti::int2str(GetId()) + " / " + ceti::int2str(starsystem->GetId()));
+//    GetInfo().addNameStr("id:");          GetInfo().addValueStr(ceti::int2str(GetId()));
+//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(ceti::int2str(GetMass()));
 //    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 //}
             

@@ -47,27 +47,27 @@ GuiAngar::GuiAngar():angar(nullptr)
     
     {
         //ButtonSingle* repair_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYARMOR_ID, "buy_repair");
-        //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 2 * GUI::ICON_SIZE, zpos); 
+        //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 2 * GUI::ICON_SIZE, zpos);
         //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
-        //Box box(center, size);        
+        //Box box(center, size);
         //repair_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::BUYARMOR_ID, repair_button));
     }
     
-    {               
-        //ButtonSingle* fuel_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYFUEL_ID, "buy fuel");  
-        //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 3*GUI::ICON_SIZE, zpos); 
+    {
+        //ButtonSingle* fuel_button = new ButtonSingle(texOb_button, GUI::BUTTON::BUYFUEL_ID, "buy fuel");
+        //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 3*GUI::ICON_SIZE, zpos);
         //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
-        //Box box(center, size);        
+        //Box box(center, size);
         //fuel_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::BUYFUEL_ID, fuel_button));
     }
-        
-    {           
+
+    {
         //ButtonSingle* launch_button = new ButtonSingle(texOb_button, GUI::BUTTON::GETLAUNCH_ID, "launch");
-        //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 4*GUI::ICON_SIZE, zpos); 
+        //glm::vec3 center(screen_w - 1 * (GUI::ICON_SIZE + 5), screen_h - 4*GUI::ICON_SIZE, zpos);
         //glm::vec3 size(GUI::ICON_SIZE, GUI::ICON_SIZE, zsize);
-        //Box box(center, size);        
+        //Box box(center, size);
         //launch_button->SetBox(box);
         //button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH_ID, launch_button));
     }
@@ -80,9 +80,9 @@ GuiAngar::GuiAngar():angar(nullptr)
 GuiAngar::~GuiAngar()
 {
     delete repair_slot;
-        delete charge_slot;
+    delete charge_slot;
 }    
-    
+
 void GuiAngar::BindAngar(Angar* angar)
 {
     this->angar = angar;
@@ -90,48 +90,48 @@ void GuiAngar::BindAngar(Angar* angar)
     int column_counter = 1;
     int row_counter = 0;
     for (unsigned int i=0; i<angar->vehicle_visitors_slot_vec.size(); i++)
-     {
-         Rect _rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR, 
-                    GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
-                   rect_vehicleslot_vec.push_back(GuiPair<Rect, VehicleSlot*>(_rect, angar->vehicle_visitors_slot_vec[i]));
-                
-        column_counter++;                
+    {
+        ceti::Rect _rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR,
+                   GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
+        rect_vehicleslot_vec.push_back(GuiPair<ceti::Rect, VehicleSlot*>(_rect, angar->vehicle_visitors_slot_vec[i]));
+
+        column_counter++;
     }
-        
+
     column_counter = 1;
     row_counter = 2;
     for (unsigned int i=0; i<angar->vehicle_military_slot_vec.size(); i++)
-     {
-         Rect _rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR, 
-                GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
-            rect_vehicleslot_vec.push_back(GuiPair<Rect, VehicleSlot*>(_rect, angar->vehicle_military_slot_vec[i]));
-                
-        column_counter++;                
+    {
+        ceti::Rect _rect(column_counter*GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, row_counter*GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR,
+                   GUI::VEHICLESLOT::WIDTH_FOR_ANGAR, GUI::VEHICLESLOT::HEIGHT_FOR_ANGAR);
+        rect_vehicleslot_vec.push_back(GuiPair<ceti::Rect, VehicleSlot*>(_rect, angar->vehicle_military_slot_vec[i]));
+
+        column_counter++;
     }
     
     column_counter = 0;
     row_counter = 0;
     for (unsigned int i=0; i<angar->item_slot_vec.size(); i++)
-     {
-         Rect _rect(column_counter*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, row_counter*GUI::ITEMSLOT::HEIGHT_FOR_ANGAR, 
-                GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
-            rect_itemslot_vec.push_back(GuiPair<Rect, ItemSlot*>(_rect, angar->item_slot_vec[i]));
-                
-        row_counter++;                
+    {
+        ceti::Rect _rect(column_counter*GUI::ITEMSLOT::WIDTH_FOR_ANGAR, row_counter*GUI::ITEMSLOT::HEIGHT_FOR_ANGAR,
+                   GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
+        rect_itemslot_vec.push_back(GuiPair<ceti::Rect, ItemSlot*>(_rect, angar->item_slot_vec[i]));
+
+        row_counter++;
     }
     
     {
-        Rect rect(GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-               3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-               GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-        rect_itemslot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, repair_slot));   
+        ceti::Rect rect(GUI::ITEMSLOT::WIDTH_FOR_SHIP,
+                  3*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+                  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        rect_itemslot_vec.push_back(GuiPair<ceti::Rect, ItemSlot*>(rect, repair_slot));
     }
 
     {
-        Rect rect(GUI::ITEMSLOT::WIDTH_FOR_SHIP, 
-               4*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
-               GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
-        rect_itemslot_vec.push_back(GuiPair<Rect, ItemSlot*>(rect, charge_slot));  
+        ceti::Rect rect(GUI::ITEMSLOT::WIDTH_FOR_SHIP,
+                  4*GUI::ITEMSLOT::HEIGHT_FOR_SHIP,
+                  GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
+        rect_itemslot_vec.push_back(GuiPair<ceti::Rect, ItemSlot*>(rect, charge_slot));
     }
 }
 
@@ -156,57 +156,57 @@ void GuiAngar::ButtonsAction() const
 {
     //for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
     //{
-        //BaseButton* button = iterator->second;
-        //if (button->GetPressed() == true)
-        //{
-            //switch(button->GetSubTypeId())
-               //{
-                   //case GUI::BUTTON::BUYARMOR_ID: 
-                   //{
-                       //if (button->GetLock() == false)
-                       //{              
-                        //button->OnPressEventMBL(player);
-                        
-                        //angar->RepairVehicle(player->GetNpc()->GetVehicle());
-                        //return; 
-                       //}
-                               
-                       //break;
-                   //}
-               
-                   //case GUI::BUTTON::BUYFUEL_ID:
-                   //{
-                       //if (button->GetLock() == false)
-                       //{
-                        //button->OnPressEventMBL(player);
-                        
-                        //angar->TankUpVehicle(player->GetNpc()->GetVehicle());
-                        //return; 
-                       //}
-                        
-                       //break;
-                   //}
-                   
-                   //case GUI::BUTTON::GETLAUNCH_ID:
-                   //{
-                           //player->GetNpc()->GetVehicle()->LaunchingEvent();
+    //BaseButton* button = iterator->second;
+    //if (button->GetPressed() == true)
+    //{
+    //switch(button->GetSubTypeId())
+    //{
+    //case GUI::BUTTON::BUYARMOR_ID:
+    //{
+    //if (button->GetLock() == false)
+    //{
+    //button->OnPressEventMBL(player);
 
-                              //return; 
- 
-                              //break;
-                          //}
-                   //}
-            //}
-        //}
+    //angar->RepairVehicle(player->GetNpc()->GetVehicle());
+    //return;
+    //}
+
+    //break;
+    //}
+
+    //case GUI::BUTTON::BUYFUEL_ID:
+    //{
+    //if (button->GetLock() == false)
+    //{
+    //button->OnPressEventMBL(player);
+
+    //angar->TankUpVehicle(player->GetNpc()->GetVehicle());
+    //return;
+    //}
+
+    //break;
+    //}
+
+    //case GUI::BUTTON::GETLAUNCH_ID:
+    //{
+    //player->GetNpc()->GetVehicle()->LaunchingEvent();
+
+    //return;
+
+    //break;
+    //}
+    //}
+    //}
+    //}
 }
 
 bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mouse)
 {    
-  /*
+    /*
         for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
-        { 
+        {
                 if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.pos_screencoord) == true)
-                {         
+                {
                            if (data_mouse.right_click == true)
                            {
                          m_Player->GetNpc()->SetScanTarget(rect_vehicleslot_vec[i].second->GetVehicle());
@@ -215,15 +215,15 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                         }
                         
                         if (rect_vehicleslot_vec[i].second->GetVehicle() != nullptr)
-                        {       
+                        {
                             m_Player->GetCursor().SetFocusedObject(rect_vehicleslot_vec[i].second->GetVehicle());
-                        }           
-                                   
+                        }
+
                 }
         }
 
         for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
-        { 
+        {
                 if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.pos_screencoord) == true)
                 {
                     if (data_mouse.left_click == true)
@@ -231,9 +231,9 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                         switch (rect_itemslot_vec[i].second->GetSubTypeId())
                                 {
                                         case TYPE::ENTITY::REPAIR_SLOT_ID:
-                                        {        
+                                        {
                                                 if (m_Player->GetCursor().GetItemSlot()->GetItem() != nullptr)
-                                                {                                        
+                                                {
                                                         angar->RepairItem(m_Player->GetNpc(), m_Player->GetCursor().GetItemSlot()->GetItem());
                                                 }
                                                 
@@ -265,32 +265,32 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                                                 break;
                                         }
                                 }
-                            
+
                         }
-                            
+
                         if (rect_itemslot_vec[i].second->GetItem() != nullptr)
-                        {                         
+                        {
                         m_Player->GetCursor().SetFocusedObject(rect_itemslot_vec[i].second->GetItem());
                     }
                 }
         }
-        */                
-        return false;
+        */
+    return false;
 }
 
 void GuiAngar::RenderVehicleAndItemSlots() const
 {
     //glPushMatrix();
-        //glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
-            //for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
-            //{
-                    //rect_vehicleslot_vec[i].second->Render(rect_vehicleslot_vec[i].first);
-            //}
-            //for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
-            //{
-                    //rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetGuiOffset());
-            //}
-        //glPopMatrix();
+    //glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
+    //for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
+    //{
+    //rect_vehicleslot_vec[i].second->Render(rect_vehicleslot_vec[i].first);
+    //}
+    //for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
+    //{
+    //rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetGuiOffset());
+    //}
+    //glPopMatrix();
 }
 
-           
+

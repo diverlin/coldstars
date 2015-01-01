@@ -23,7 +23,7 @@
 #include "../../../spaceobjects/Container.hpp"
 #include "../../../common/constants.hpp"
 #include "../../../common/Logger.hpp"
-#include "../../../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../../../ai/StateMachine.hpp"
 
 #include "../../../items/others/GoodsPack.hpp"
@@ -53,7 +53,7 @@ bool MacroScenarioGoodsTrading::IsAbleToBuyGoods(Npc* npc) const
 void MacroScenarioGoodsTrading::Enter(Npc* npc) const
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log( "npc_id="+int2str(npc->GetId())+" ENTER MacroScenarioGoodsTrading"); 
+    Logger::Instance().Log( "npc_id="+ceti::int2str(npc->GetId())+" ENTER MacroScenarioGoodsTrading");
     #endif
 }
 
@@ -162,7 +162,7 @@ void MacroScenarioGoodsTrading::UpdateInStaticInDock(Npc* npc) const
 void MacroScenarioGoodsTrading::Exit(Npc* npc) const
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log( "npc_id="+int2str(npc->GetId())+" EXIT MacroScenarioGoodsTrading"); 
+    Logger::Instance().Log( "npc_id="+ceti::int2str(npc->GetId())+" EXIT MacroScenarioGoodsTrading");
     #endif
 }
 

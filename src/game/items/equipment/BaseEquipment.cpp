@@ -20,7 +20,7 @@
 #include "RocketEquipment.hpp"
 
 #include "../../common/constants.hpp"
-#include "../../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../../slots/ItemSlot.hpp"
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
@@ -40,7 +40,7 @@ BaseEquipment::BaseEquipment()
 BaseEquipment::~BaseEquipment()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BaseEquipment("+int2str(GetId())+")");
+    Logger::Instance().Log("___::~BaseEquipment("+ceti::int2str(GetId())+")");
     #endif
         
     delete animation_notfunctioning;
@@ -59,12 +59,12 @@ void BaseEquipment::PutChildsToGarbage() const
 void BaseEquipment::AddCommonInfo()
 {
     info.addNameStr("tech_level:");   info.addValueStr( getTechLevelStr(data_item.tech_level) );
-    info.addNameStr("modules:");   info.addValueStr( int2str(data_item.modules_num_max) );
+    info.addNameStr("modules:");   info.addValueStr( ceti::int2str(data_item.modules_num_max) );
     info.addNameStr("race:");      info.addValueStr( getRaceStr(race_id) );
-    info.addNameStr("deteriori:"); info.addValueStr( int2str(deterioration) );
-    info.addNameStr("condition:"); info.addValueStr( int2str(condition) + "/" + int2str(data_item.condition_max) );
-    info.addNameStr("mass:");      info.addValueStr( int2str(data_item.mass) );
-    info.addNameStr("price:");     info.addValueStr( int2str(price) );
+    info.addNameStr("deteriori:"); info.addValueStr( ceti::int2str(deterioration) );
+    info.addNameStr("condition:"); info.addValueStr( ceti::int2str(condition) + "/" + ceti::int2str(data_item.condition_max) );
+    info.addNameStr("mass:");      info.addValueStr( ceti::int2str(data_item.mass) );
+    info.addNameStr("price:");     info.addValueStr( ceti::int2str(price) );
 
 }
 
@@ -93,7 +93,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 } 
 
 /* virtual */
-void BaseEquipment::Render(const jeti::Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text)
+void BaseEquipment::Render(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text)
 {        
     RenderKorpus(render, box);
 
@@ -116,7 +116,7 @@ void BaseEquipment::Render(const jeti::Renderer& render, const Box2D& box, const
         render.DrawQuad(*GuiTextureObCollector::Instance().slot_mark_accept, box);
 
         glm::vec2 pos(box.GetCenter().x - font_size/2 + gui_offset.x, box.GetCenter().y - font_size + gui_offset.y);
-        jeti::Screen::Instance().DrawText(int2str(locked_turns), font_size, pos);
+        jeti::Screen::Instance().DrawText(ceti::int2str(locked_turns), font_size, pos);
     }
 
     if (draw_text == true)
@@ -124,7 +124,7 @@ void BaseEquipment::Render(const jeti::Renderer& render, const Box2D& box, const
         if (GetSubTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID)
         {
             glm::vec2 pos(box.GetCenter().x - box.GetSize().x/2 + gui_offset.x, box.GetCenter().y + gui_offset.y);
-            jeti::Screen::Instance().DrawText(int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
+            jeti::Screen::Instance().DrawText(ceti::int2str(((RocketEquipment*)this)->GetAmmo()) + "/" + ceti::int2str(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
         }
     }
 }
@@ -133,20 +133,20 @@ void BaseEquipment::Render(const jeti::Renderer& render, const Box2D& box, const
 void BaseEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseEquipment::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseEquipment::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void BaseEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseEquipment::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseEquipment::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void BaseEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseEquipment::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseEquipment::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

@@ -20,6 +20,7 @@
 #include "MeshCollector.hpp"
 #include <jeti/Mesh.hpp>
 #include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 
 #include <iostream>
 
@@ -77,7 +78,7 @@ jeti::Mesh* MeshCollector::getMesh(TYPE::MESH type_id) const
     auto it = m_typesMeshes.find(type_id);
     if (it != m_typesMeshes.end()) {
         const std::vector<std::pair<MeshDescriptor, jeti::Mesh*>>& vec = it->second;
-        requested = getRandomElement(vec).second;
+        requested = meti::getRandomElement(vec).second;
     }
 
     assert(requested);

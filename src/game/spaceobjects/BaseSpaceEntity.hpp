@@ -19,7 +19,8 @@
 
 #pragma once
 
-#include <common/Orientation.hpp>
+#include <common/Base.hpp>
+#include <jeti/Orientation.hpp>
 #include <struct/LifeData.hpp>
 #include <text/InfoTable.hpp>
 #include <types/PlaceTypes.hpp>
@@ -40,7 +41,7 @@ struct UnresolvedDataBaseSpaceEntity
     int starsystem_id;     
 }; 
 
-class BaseSpaceEntity : public Orientation
+class BaseSpaceEntity : public jeti::Orientation, public Base
 {
     public:      
         BaseSpaceEntity();

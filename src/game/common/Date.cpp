@@ -64,5 +64,5 @@ int Date::GetDaysPassSince(const Date& rhs) const
     return days;
 }
                             
-std::string Date::GetStr() const { return int2str(day) + "/" + int2str(month) + "/" + int2str(year); };
+std::string Date::GetStr() const { return ceti::int2str(day) + "/" + ceti::int2str(month) + "/" + ceti::int2str(year); };
 

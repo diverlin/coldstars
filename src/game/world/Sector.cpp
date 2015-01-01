@@ -21,8 +21,8 @@
 #include "galaxy.hpp"
 #include "../common/constants.hpp"
 #include "../world/EntityManager.hpp"
-#include <math/rand.hpp>
-#include "../common/myStr.hpp"
+#include <meti/RandUtils.hpp>
+#include <ceti/myStr.hpp>
 #include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
 
@@ -30,11 +30,11 @@
 #include "../struct/StarSystemsConditionData.hpp"
 
 Sector::Sector(int id)
-:
-galaxy(nullptr)
+    :
+      galaxy(nullptr)
 {
     SetId(id);
-    SetTypeId(TYPE::ENTITY::SECTOR_ID);  
+    SetTypeId(TYPE::ENTITY::SECTOR_ID);
 }
 
 Sector::~Sector()
@@ -44,7 +44,7 @@ Sector::~Sector()
 void Sector::PutChildsToGarbage() const
 {
     for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
-    {    
+    {
         EntityGarbage::Instance().Add(STARSYSTEM_vec[i]);
     }
 }
@@ -52,92 +52,86 @@ void Sector::PutChildsToGarbage() const
 void Sector::Add(StarSystem* starsystem, const glm::vec3& center) 
 { 
     starsystem->SetSector(this);
-        starsystem->SetCenter(center);
-        
-    STARSYSTEM_vec.push_back(starsystem); 
+    starsystem->SetCenter(center);
+
+    STARSYSTEM_vec.push_back(starsystem);
 }
-             
+
 StarSystem* Sector::GetRandomStarSystem(int condition_id)
 {
-    if (condition_id == NONE_ID)
-    {
-        return STARSYSTEM_vec[getRandInt(0, STARSYSTEM_vec.size()-1)];
-    }
-    else
-    {
-        std::vector<StarSystem*> ss_vec;    
-        for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
-        {
-            if (STARSYSTEM_vec[i]->GetConditionId() == condition_id)
-            {
+    if (condition_id == NONE_ID) {
+        return STARSYSTEM_vec[meti::getRandInt(0, STARSYSTEM_vec.size()-1)];
+    } else {
+        std::vector<StarSystem*> ss_vec;
+        for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++) {
+            if (STARSYSTEM_vec[i]->GetConditionId() == condition_id) {
                 ss_vec.push_back(STARSYSTEM_vec[i]);
             }
         }
-    
-        if (ss_vec.size() > 0)
-        {
-            return ss_vec[getRandInt(0, ss_vec.size()-1)];
+
+        if (ss_vec.size() > 0) {
+            return ss_vec[meti::getRandInt(0, ss_vec.size()-1)];
         }
     }
 
     return nullptr;
 }
 
- 
-            
+
+
 StarSystem* Sector::GetClosestStarSystemTo(StarSystem* starsystem, int condition_id)
 {
-        float dist_min = INCREDIBLY_MAX_FLOAT;
-        int index_min = -1;
-        
-        for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
-        {
-                if (STARSYSTEM_vec[i]->GetId() != starsystem->GetId())
-                {                        
-                        if ( (STARSYSTEM_vec[i]->GetConditionId() == condition_id) or (condition_id == NONE_ID) )
-                        {                                
-                                float dist = distanceBetween(starsystem->GetCenter(), STARSYSTEM_vec[i]->GetCenter());
-                                
-                                if (dist < dist_min)
-                                {
-                                        dist_min = dist;
-                                        index_min = i;                                        
-                                }
-                        }
-                }
-        }
+    float dist_min = INCREDIBLY_MAX_FLOAT;
+    int index_min = -1;
 
-        if (index_min != -1)
+    for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
+    {
+        if (STARSYSTEM_vec[i]->GetId() != starsystem->GetId())
         {
-                return STARSYSTEM_vec[index_min];
+            if ( (STARSYSTEM_vec[i]->GetConditionId() == condition_id) or (condition_id == NONE_ID) )
+            {
+                float dist = meti::distanceBetween(starsystem->GetCenter(), STARSYSTEM_vec[i]->GetCenter());
+
+                if (dist < dist_min)
+                {
+                    dist_min = dist;
+                    index_min = i;
+                }
+            }
         }
-        
-        return nullptr;
+    }
+
+    if (index_min != -1)
+    {
+        return STARSYSTEM_vec[index_min];
+    }
+
+    return nullptr;
 }
-             
+
 void Sector::Update(int time)
 {
     for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
-         {         
-             STARSYSTEM_vec[i]->Update(time);
-         }
+    {
+        STARSYSTEM_vec[i]->Update(time);
+    }
 }
 
 //void Sector::FillStarSystemsCondition(StarSystemsConditionData& data_starsystems_condition) const
 //{
-    //data_starsystems_condition.Reset();
-    
-    //for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
-    //{
-        //switch (STARSYSTEM_vec[i]->GetConditionId())
-        //{
-            //case ENTITY::STARSYSTEM::CONDITION::SAFE_ID:         { data_starsystems_condition.safe_num++; break; }
-            //case ENTITY::STARSYSTEM::CONDITION::WAR_ID:         { data_starsystems_condition.war_num++; break; }
-            //case ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID:     { data_starsystems_condition.captured_num++; break; }
-        //}
-    //}
+//data_starsystems_condition.Reset();
+
+//for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
+//{
+//switch (STARSYSTEM_vec[i]->GetConditionId())
+//{
+//case ENTITY::STARSYSTEM::CONDITION::SAFE_ID:         { data_starsystems_condition.safe_num++; break; }
+//case ENTITY::STARSYSTEM::CONDITION::WAR_ID:         { data_starsystems_condition.war_num++; break; }
+//case ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID:     { data_starsystems_condition.captured_num++; break; }
 //}
-        
+//}
+//}
+
 void Sector::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     save_ptree.put(root+"galaxy_id", galaxy->GetId());
@@ -155,24 +149,24 @@ void Sector::ResolveData()
 
 void Sector::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "sector." + int2str(GetId())+".";
+    std::string root = "sector." + ceti::int2str(GetId())+".";
 
-    Base::SaveData(save_ptree, root); 
-    Sector::SaveData(save_ptree, root); 
+    Base::SaveData(save_ptree, root);
+    Sector::SaveData(save_ptree, root);
 }
 
 void Sector::Load(const boost::property_tree::ptree& load_ptree)
 {
-    Base::LoadData(load_ptree); 
-    Sector::LoadData(load_ptree); 
+    Base::LoadData(load_ptree);
+    Sector::LoadData(load_ptree);
 }
 
 void Sector::Resolve()
 {
-    Base::ResolveData();  
-    Sector::ResolveData();  
+    Base::ResolveData();
+    Sector::ResolveData();
 }
-            
-            
-  
+
+
+
 

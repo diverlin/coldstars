@@ -19,7 +19,7 @@
 #include "Angar.hpp"
 #include "Kosmoport.hpp"
 #include "../world/EntityManager.hpp"
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../common/Logger.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../slots/VehicleSlot.hpp" 
@@ -42,7 +42,7 @@ price_fuel(PRICE_FUEL)
 Angar::~Angar()
 {        
         #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Angar(), id="+int2str(GetId()));
+    Logger::Instance().Log("___::~Angar(), id="+ceti::int2str(GetId()));
     #endif
 }
 
@@ -213,7 +213,7 @@ std::string Angar::GetDockVehicleStr() const
         {
                 if (vehicle_military_slot_vec[i]->GetVehicle() != nullptr)
                 {
-                    str += "_m" + int2str(vehicle_military_slot_vec[i]->GetVehicle()->GetId());
+                    str += "_m" + ceti::int2str(vehicle_military_slot_vec[i]->GetVehicle()->GetId());
                 }
         }
         
@@ -221,7 +221,7 @@ std::string Angar::GetDockVehicleStr() const
         {
                 if (vehicle_visitors_slot_vec[i]->GetVehicle() != nullptr)
                 {
-                    str += "_v" + int2str(vehicle_visitors_slot_vec[i]->GetVehicle()->GetId());
+                    str += "_v" + ceti::int2str(vehicle_visitors_slot_vec[i]->GetVehicle()->GetId());
                 }
         }
         
@@ -243,7 +243,7 @@ void Angar::ResolveData()
 
 void Angar::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "angar." + int2str(GetId())+".";
+    std::string root = "angar." + ceti::int2str(GetId())+".";
 
     Base::SaveData(save_ptree, root);
     Room::SaveData(save_ptree, root);

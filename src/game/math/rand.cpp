@@ -18,6 +18,7 @@
 
 
 #include "rand.hpp"
+#include <meti/RandUtils.hpp>
 #include <stdlib.h>
 #include <cmath>
 
@@ -41,13 +42,13 @@ TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE race_id, const std::vector<TYPE::ENT
         }
     }
     
-    return getRand(allowed_subtypes);  
+    return meti::getRand(allowed_subtypes);
 }
 
 TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE race_id)
 {
     const std::vector<TYPE::ENTITY>& allowed_race_subtypes =  getAllowedSubTypesByRaceId(race_id);
-    return getRand(allowed_race_subtypes);
+    return meti::getRand(allowed_race_subtypes);
 }
 
 const std::vector<TYPE::ENTITY>& getAllowedSubTypesByRaceId(TYPE::RACE race_id)
@@ -69,7 +70,7 @@ const std::vector<TYPE::ENTITY>& getAllowedSubTypesByRaceId(TYPE::RACE race_id)
 TYPE::ENTITY getRandNpcSubSubTypeId(TYPE::ENTITY subtype_id)
 {
     if (subtype_id == TYPE::ENTITY::RANGER_ID) {
-        return getRand(RaceInformationCollector::Instance().SUBSUBTYPE_vec);
+        return meti::getRand(RaceInformationCollector::Instance().SUBSUBTYPE_vec);
     }
     else {
         return subtype_id;

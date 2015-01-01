@@ -19,6 +19,7 @@
 #include "TextureCollector.hpp"
 
 #include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 #include <jeti/TextureOb.hpp>
 
 #include <common/Logger.hpp>
@@ -80,7 +81,7 @@ jeti::TextureOb* TextureCollector::getTextureByTypeId(TYPE::TEXTURE type_id)
 {
     jeti::TextureOb* requested = nullptr;
     if (hasTypeId(type_id)) {
-        requested = getRandomElement(m_typesTextures[type_id]).second;
+        requested = meti::getRandomElement(m_typesTextures[type_id]).second;
     }
 
     _validate(requested);
@@ -132,7 +133,7 @@ jeti::TextureOb* TextureCollector::getTextureByDescriptor(const TextureDescripto
     }
 
     if (!ids.empty()) {
-        int id = getRandomElement(ids);
+        int id = meti::getRandomElement(ids);
         requested = getTextureById(id);
     }
 

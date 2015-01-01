@@ -39,7 +39,8 @@
     
 #include "TestDrawManySimpleMeshesRunScenario.hpp"
 
-#include <math/rand.hpp>
+//#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 
 /* virtual */
 void TestDrawManySimpleMeshesRunScenario::Init(Player* player)
@@ -86,7 +87,7 @@ void TestDrawManySimpleMeshesRunScenario::Init(Player* player)
     {
         Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
 
-        glm::vec3 center = getRandXYVec3f(10.0f, 500.0f, DEFAULT_ENTITY_ZPOS);        
+        glm::vec3 center = meti::getRandXYVec3f(10.0f, 500.0f, DEFAULT_ENTITY_ZPOS);
         starsystem->AddContainer(container, center);
     }
 }

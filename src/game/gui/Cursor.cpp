@@ -166,7 +166,7 @@ void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
         {                    
             m_FocusedSpaceObject->RenderStuffWhenFocusedInSpace(render);
             
-            Box2D box(vec3ToVec2(m_FocusedSpaceObject->GetCenter()), vec3ToVec2(m_FocusedSpaceObject->GetSize()));
+            ceti::Box2D box(meti::vec3ToVec2(m_FocusedSpaceObject->GetCenter()), meti::vec3ToVec2(m_FocusedSpaceObject->GetSize()));
             box.SetScale(scale, scale);
             //box.SetAngle(m_FocusedSpaceObject->GetAngle().z);
             
@@ -177,7 +177,7 @@ void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
         {
             if (m_FocusedGuiElement->GetTypeId() == TYPE::GUI::BUTTON_ITEMSLOT_ID)
             {
-                Box2D box(m_FocusedGuiElement->GetBox());
+                ceti::Box2D box(m_FocusedGuiElement->GetBox());
                 box.SetScale(scale, scale);
             
                 render.DrawQuad(*GuiTextureObCollector::Instance().mark_target, box);
@@ -191,13 +191,10 @@ void Cursor::RenderFocusedObjectInfo(const jeti::Renderer& render) const
 {
     //render.enable_BLEND();
     {
-        if (m_FocusedGuiElement != nullptr)
-        {
+        if (m_FocusedGuiElement) {
             m_FocusedGuiElement->RenderInfo(render);
-        }
-        
-        if (m_FocusedSpaceObject != nullptr)
-        {
+        }        
+        if (m_FocusedSpaceObject) {
             m_FocusedSpaceObject->RenderInfoInSpace(render, jeti::Screen::Instance().GetBottomLeftScreenWC(), jeti::Screen::Instance().GetScale());
         }
     }

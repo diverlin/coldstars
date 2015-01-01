@@ -28,6 +28,8 @@
 
 #include <struct/GalaxyDescription.hpp>
 
+#include <meti/RandUtils.hpp>
+
 
 GalaxyBuilder& GalaxyBuilder::Instance()
 {
@@ -71,7 +73,7 @@ void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy, const GalaxyDescription& 
 {     
     for(unsigned int i=0; i<galaxy_description.sector_descriptions.size(); i++)
     {  
-        glm::vec3 center = getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);
+        glm::vec3 center = meti::getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);
         
         Sector* sector = SectorBuilder::Instance().GetNewSector(galaxy_description.sector_descriptions[i]);
         galaxy->Add(sector, center); 

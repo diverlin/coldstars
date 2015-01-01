@@ -31,7 +31,7 @@ AsteroidDrawable::AsteroidDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
 AsteroidDrawable::~AsteroidDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~AsteroidDrawable("+int2str(GetId())+")");
+    Logger::Instance().Log("___::~AsteroidDrawable("+ceti::int2str(GetId())+")");
     #endif
 }
 
@@ -41,9 +41,9 @@ AsteroidDrawable::~AsteroidDrawable()
 //    m_Info.clear();
 
 //    m_Info.addTitleStr("ASTEROID");
-//    m_Info.addNameStr("id/ss_id:");    m_Info.addValueStr(int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()));
-//    m_Info.addNameStr("armor:");       m_Info.addValueStr(int2str(GetDataLife().armor));
-//    m_Info.addNameStr("mass:");        m_Info.addValueStr(int2str(GetMass()));
-//    m_Info.addNameStr("speed x 100:"); m_Info.addValueStr(int2str(int(GetDataPlanet().speed*100)));
+//    m_Info.addNameStr("id/ss_id:");    m_Info.addValueStr(ceti::int2str(GetId()) + " / " + ceti::int2str(GetStarSystem()->GetId()));
+//    m_Info.addNameStr("armor:");       m_Info.addValueStr(ceti::int2str(GetDataLife().armor));
+//    m_Info.addNameStr("mass:");        m_Info.addValueStr(ceti::int2str(GetMass()));
+//    m_Info.addNameStr("speed x 100:"); m_Info.addValueStr(ceti::int2str(int(GetDataPlanet().speed*100)));
 //    m_Info.addNameStr("pos:");         m_Info.addValueStr( str(GetCenter()) );
 //}

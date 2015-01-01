@@ -16,10 +16,10 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BASEITEM_HPP
-#define BASEITEM_HPP
+#pragma once
 
-#include <common/Orientation.hpp>
+#include <common/Base.hpp>
+#include <jeti/Orientation.hpp>
 #include <jeti/Render.hpp>
 
 #include <types/MyInt.hpp>
@@ -29,7 +29,9 @@
 #include <text/InfoTable.hpp>
 
 class ItemSlot; 
+namespace ceti {
 class Box2D;
+}
 
 struct ItemCommonData 
 {
@@ -56,7 +58,7 @@ struct UnresolvedDataBaseItem
     INTLONGEST item_slot_id;
 };
 
-class BaseItem : public Orientation
+class BaseItem : public jeti::Orientation, public Base
 {
     public:
         BaseItem();
@@ -95,8 +97,8 @@ class BaseItem : public Orientation
         
         void UpdateInfo();
         
-        virtual void Render(const jeti::Renderer&, const Box2D&, const glm::vec2&, bool draw_text = true);
-        void RenderKorpus(const jeti::Renderer&, const Box2D&);
+        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
+        void RenderKorpus(const jeti::Renderer&, const ceti::Box2D&);
         void RenderInfo(const jeti::Renderer&, const glm::vec2&);
 
     protected:
@@ -128,4 +130,3 @@ class BaseItem : public Orientation
         void ResolveData();                   
 };
 
-#endif

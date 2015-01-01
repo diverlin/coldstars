@@ -2,8 +2,8 @@
 #include <vector>
 #include <iostream>
 #include "items/equipment/RadarEquipment.hpp"
-#include <math/rand.hpp>
-#include "common/myStr.hpp"
+#include <meti/RandUtils.hpp>
+#include <ceti/myStr.hpp>
 
 void pureTest1()
 {
@@ -39,7 +39,8 @@ void pureTest2()
 	Base* base = new RadarEquipment(2);
 	delete base;	
 	
-	for (unsigned int i=0; i<100; i++) std::cout<<getRandInt(0,2)<<std::endl;
+    for (unsigned int i=0; i<100; i++)
+        std::cout<<meti::getRandInt(0,2)<<std::endl;
 	
 	exit(0);
 		

@@ -17,9 +17,10 @@
 */
 
 #include "DistantNebulaEffect.hpp"
-#include <math/rand.hpp>
+//#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 #include "../common/constants.hpp"
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 
 #include "../resources/TextureCollector.hpp"
 #include <resources/MeshCollector.hpp>
@@ -47,7 +48,7 @@ void DistantNebulaEffect::Render(const jeti::Renderer& render, const glm::vec3&)
               
 void DistantNebulaEffect::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    std::string droot = root + "distant_nebula_effect."+int2str(GetId())+".";
+    std::string droot = root + "distant_nebula_effect."+ceti::int2str(GetId())+".";
     
     //BaseBackGroundEffect::SaveData(save_ptree, droot);
     DistantNebulaEffect::SaveData(save_ptree, droot);
@@ -88,17 +89,17 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
     if (color_id == NONE_ID)     textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::NEBULA_BACKGROUND_ID);
     else                         textureOb = TextureCollector::Instance().getTextureByColorId(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, color_id);
            
-    float angle = getRandInt(0, 360);
+    float angle = meti::getRandInt(0, 360);
     float delta_angle = 0.0;
     if(textureOb->GetMaterial().is_rotated)
     {
-        delta_angle = getRandInt(8,12)*0.001 * getRandSign();        
+        delta_angle = meti::getRandInt(8,12)*0.001 * meti::getRandSign();
     }
     
-    float z = -getRandInt(200, 499);
+    float z = -meti::getRandInt(200, 499);
     float rate = 5;
     
-    glm::vec3 center(getRandSign()*(float)getRandInt(100, 500*rate), getRandSign()*(float)getRandInt(100, 500*rate), z);
+    glm::vec3 center(meti::getRandSign()*(float)meti::getRandInt(100, 500*rate), meti::getRandSign()*(float)meti::getRandInt(100, 500*rate), z);
     
     DistantNebulaEffect* dn = new DistantNebulaEffect();
     glm::vec3 size = textureOb->GetSize();

@@ -20,7 +20,7 @@
 #include "WeaponComplex.hpp"
 #include <math/rand.hpp>
 #include "../common/Logger.hpp"
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../spaceobjects/Vehicle.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
 
@@ -29,6 +29,7 @@
 #include "../items/BaseItem.hpp"
 #include "../slots/ItemSlot.hpp"
 
+#include <meti/RandUtils.hpp>
 
 WeaponComplex::WeaponComplex()
 { 
@@ -111,7 +112,7 @@ void WeaponComplex::ReloadAllWeapons()
         }
     }
     
-    fire_delay = getRandInt(7,15);
+    fire_delay = meti::getRandInt(7,15);
     d_fire_delay = TURN_TIME/(slot_weapon_reloaded_vec.size()+1);   
 }
   
@@ -171,8 +172,8 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 {                 
     #if WEAPONSTARGET_LOG_ENABLED == 1 
-    if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + str(target->GetTypeId()) + " id=" + int2str(target->GetId()), WEAPONSTARGET_LOG_DIP);
-    else                        Logger::Instance().Log("vehicle_id="+int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->GetTypeId()) + " id=" + int2str(target->GetId()) + " item_subtype_id=" + str(item_slot->GetItem()->GetSubTypeId()) + " id=" + int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP);
+    if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+ceti::int2str(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + str(target->GetTypeId()) + " id=" + ceti::int2str(target->GetId()), WEAPONSTARGET_LOG_DIP);
+    else                        Logger::Instance().Log("vehicle_id="+ceti::int2str(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->GetTypeId()) + " id=" + ceti::int2str(target->GetId()) + " item_subtype_id=" + str(item_slot->GetItem()->GetSubTypeId()) + " id=" + ceti::int2str(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP);
     #endif   
 
     target->TakeIntoAccountAgressor(owner_vehicle);
@@ -293,7 +294,7 @@ void WeaponComplex::RenderWeaponsRange()
         if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
         {
            slot_weapon_reloaded_vec[i]->UpdateRange(GuiTextureObCollector::Instance().dot_red);
-           slot_weapon_reloaded_vec[i]->DrawRange(vec3ToVec2(owner_vehicle->GetCenter()));
+           slot_weapon_reloaded_vec[i]->DrawRange(meti::vec3ToVec2(owner_vehicle->GetCenter()));
         }
     }
 }
