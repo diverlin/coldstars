@@ -17,37 +17,36 @@
 */
 
 
-#ifndef GUISKILLS_H
-#define GUISKILLS_H
+#pragma once
 
 #include "BaseGuiElement.hpp"
 #include "../pilots/Skills.hpp"
-#include "../common/rect.hpp"
+#include <ceti/rect.hpp>
 
 class GuiSkills : public BaseGuiElement
 {
-       public:
-              GuiSkills();
-              ~GuiSkills();
+    public:
+        GuiSkills();
+        ~GuiSkills();
 
-                void Acknowledge();
-                                                
-             void ButtonsAction(Skills&);
-              void RenderSkills(const Skills&) const;
+        void Acknowledge();
 
-          private:
-            int attack_undo;
+        void ButtonsAction(Skills&);
+        void RenderSkills(const Skills&) const;
+
+    private:
+        int attack_undo;
         int defence_undo;
         int leader_undo;
         int trader_undo;
         int technic_undo;
         int diplomat_undo;
-                
+
         jeti::TextureOb* textureOb_skill;
         jeti::TextureOb* textureOb_skill_transparent;
         
-        Rect background_rect;
+        ceti::Rect background_rect;
         jeti::TextureOb* textureOb_background;
 };
 
-#endif
+

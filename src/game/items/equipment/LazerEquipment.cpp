@@ -19,11 +19,11 @@
 #include "LazerEquipment.hpp"
 
 #include <common/constants.hpp>
-#include <common/myStr.hpp>
+#include <ceti/myStr.hpp>
 #include <common/Logger.hpp>
 #include <common/Logger.hpp>
 
-#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 
 #include "../../resources/TextureCollector.hpp"
 #include "../../items/modules/LazerModule.hpp"
@@ -97,17 +97,17 @@ void LazerEquipment::AddUniqueInfo()
 std::string LazerEquipment::GetDamageStr()
 {
     if (damage_add == 0)
-        return int2str(damage_orig);
+        return ceti::int2str(damage_orig);
     else
-        return int2str(damage_orig) + "+" + int2str(damage_add);
+        return ceti::int2str(damage_orig) + "+" + ceti::int2str(damage_add);
 }
 
 std::string LazerEquipment::GetRadiusStr()
 {
     if (radius_add == 0)
-        return int2str(radius_orig);
+        return ceti::int2str(radius_orig);
     else
-        return int2str(radius_orig) + "+" + int2str(radius_add);
+        return ceti::int2str(radius_orig) + "+" + ceti::int2str(radius_add);
 }
 
 void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
@@ -116,8 +116,7 @@ void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, flo
     {
         if (subtarget != nullptr) // precise fire
         {
-            if (isActionShouldHappen(item_slot->GetHitProbability()) == true)
-            {
+            if (meti::isActionShouldHappen(item_slot->GetHitProbability()) == true) {
                 subtarget->GetItem()->LockEvent(1);
             }
             damage_rate /= 3; // lower damage is used for precise fire
@@ -156,7 +155,7 @@ void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, flo
 /*virtual*/
 void LazerEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "lazer_equipment." + int2str(GetId()) + ".";
+    std::string root = "lazer_equipment." + ceti::int2str(GetId()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
@@ -184,7 +183,7 @@ void LazerEquipment::Resolve()
 void LazerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LazerEquipment::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerEquipment::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"damage_orig", damage_orig);
@@ -194,7 +193,7 @@ void LazerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std
 void LazerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LazerEquipment::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerEquipment::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     damage_orig = load_ptree.get<int>("damage_orig");     
@@ -204,7 +203,7 @@ void LazerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 void LazerEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LazerEquipment::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerEquipment::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

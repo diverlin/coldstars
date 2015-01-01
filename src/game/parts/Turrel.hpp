@@ -16,18 +16,17 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef TURREL_H
-#define TURREL_H
+#pragma once
 
 class ItemSlot; 
 class BaseSpaceEntity; 
 class TextureOb;
 
-#include "../common/points.hpp"
-#include "../common/constants.hpp"
-#include "../common/Orientation.hpp"
+#include <ceti/points.hpp>
+#include <common/constants.hpp>
+#include <jeti/Orientation.hpp>
 
-class Turrel : public Orientation
+class Turrel : public jeti::Orientation
 {
     public:
         Turrel(ItemSlot*);
@@ -45,4 +44,4 @@ class Turrel : public Orientation
         ItemSlot* slot;
 }; 
 
-#endif 
+

@@ -21,6 +21,9 @@
 
 #include <string> 
 
+const std::string DATA_PATH = "data/";
+const std::string CONFIG_PATH  = "";
+
 void loadGameData();
 
 void load3DModels();

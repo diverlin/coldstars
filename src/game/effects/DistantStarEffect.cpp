@@ -17,9 +17,10 @@
 */
 
 #include "DistantStarEffect.hpp"
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../common/constants.hpp"
-#include <math/rand.hpp>
+//#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 
 #include "../resources/TextureCollector.hpp"
 #include <jeti/Mesh.hpp>
@@ -56,7 +57,7 @@ void DistantStarEffect::ResolveData()
  
 void DistantStarEffect::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    std::string droot = root + "distant_star_effect."+int2str(id)+".";
+    std::string droot = root + "distant_star_effect."+ceti::int2str(id)+".";
     
     BaseBackGroundEffect::SaveData(save_ptree, droot);
     DistantStarEffect::SaveData(save_ptree, droot);
@@ -77,7 +78,7 @@ void DistantStarEffect::Resolve()
  
 DistantStarEffect* GetNewDistantStarEffect(int color_id)
 {
-    int distStar_num = getRandInt(DISTANT_STAR_MIN, DISTANT_STAR_MAX);
+    int distStar_num = meti::getRandInt(DISTANT_STAR_MIN, DISTANT_STAR_MAX);
 
     //jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DISTANTSTAR_ID);
 
@@ -87,16 +88,16 @@ DistantStarEffect* GetNewDistantStarEffect(int color_id)
 
     for (int i=0; i<distStar_num; i++)
     {
-        float z = -getRandInt(200, 499);
-        glm::vec3 position = getRandXYVec3f(0, 3000, z);
+        float z = -meti::getRandInt(200, 499);
+        glm::vec3 position = meti::getRandXYVec3f(0, 3000, z);
 
-        float r = getRandFloat(0.5, 1.0);
-        float g = getRandFloat(0.5, 1.0);
-        float b = getRandFloat(0.5, 1.0);
+        float r = meti::getRandFloat(0.5, 1.0);
+        float g = meti::getRandFloat(0.5, 1.0);
+        float b = meti::getRandFloat(0.5, 1.0);
         
         positions.push_back(position);
         colors.push_back(glm::vec4(r, g, b, 1.0f));
-        sizes.push_back(getRandFloat(5.0, 25.0));
+        sizes.push_back(meti::getRandFloat(5.0, 25.0));
     }
             
     DistantStarEffect* ds = new DistantStarEffect(positions, colors, sizes);

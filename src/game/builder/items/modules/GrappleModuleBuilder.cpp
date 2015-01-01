@@ -30,6 +30,8 @@
 #include <resources/MeshCollector.hpp>
 #include <jeti/TextureOb.hpp>
 
+#include <meti/RandUtils.hpp>
+
 GrappleModuleBuilder& GrappleModuleBuilder::Instance()
 {
     static GrappleModuleBuilder instance;
@@ -74,9 +76,9 @@ void GrappleModuleBuilder::CreateNewInternals(GrappleModule* grapple_module, int
 {   
     jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
-    strength_add   = getRandInt(MODULE::GRAPPLE::STRENGTH_MIN, MODULE::GRAPPLE::STRENGTH_MAX);
-    radius_add     = getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
-    speed_add      = getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);
+    strength_add   = meti::getRandInt(MODULE::GRAPPLE::STRENGTH_MIN, MODULE::GRAPPLE::STRENGTH_MAX);
+    radius_add     = meti::getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
+    speed_add      = meti::getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);
 
     grapple_module->SetParentSubTypeId(TYPE::ENTITY::GRAPPLE_EQUIPMENT_ID);    
     //alpitodorender grapple_module->SetRenderData(mesh, texOb, texOb->GetSize());

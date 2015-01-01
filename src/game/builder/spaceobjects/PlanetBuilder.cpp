@@ -25,6 +25,8 @@
 
 #include <types/MeshTypes.hpp>
 
+#include <meti/RandUtils.hpp>
+
 PlanetBuilder& PlanetBuilder::Instance()
 {
     static PlanetBuilder instance;
@@ -78,8 +80,8 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     planet_data.radius_A      = orbit_radius;
     planet_data.radius_B      = orbit_radius; 
     planet_data.orbit_phi_inD = 0;
-    planet_data.speed         = (float)getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / (float)orbit_radius;
-    planet_data.clockwise     = getRandBool();
+    planet_data.speed         = (float)meti::getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / (float)orbit_radius;
+    planet_data.clockwise     = meti::getRandBool();
 
     //jeti::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
     
@@ -87,11 +89,11 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     
     planet->SetLifeData(data_life);
 
-    float scale_comp = getRandInt(ENTITY::PLANET::SCALE_MIN, ENTITY::PLANET::SCALE_MAX);
+    float scale_comp = meti::getRandInt(ENTITY::PLANET::SCALE_MIN, ENTITY::PLANET::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     //alpitodorender planet->SetRenderData(mesh, textureOb, scale);
  
-    float delta_angle = 0.0001*getRandInt(20, 60);
+    float delta_angle = 0.0001*meti::getRandInt(20, 60);
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender planet->SetAnimationRotation(animation_rotation);
     

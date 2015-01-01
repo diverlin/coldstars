@@ -20,8 +20,8 @@
 #include "Shop.hpp"
 #include "Kosmoport.hpp"
 #include "../common/constants.hpp"
-#include "../common/myStr.hpp"
-#include <math/rand.hpp>
+#include <ceti/myStr.hpp>
+#include <meti/RandUtils.hpp>
 #include "../world/EntityManager.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../items/others/GoodsPack.hpp"
@@ -36,12 +36,12 @@ Shop::Shop(int id)
     SetTypeId(TYPE::ENTITY::SHOP_ID);
     SetSubTypeId(TYPE::ENTITY::SHOP_ID);    
     
-    minerals_amount  = getRandInt(MINERALS_STARTAMOUNT_MIN, MINERALS_STARTAMOUNT_MAX);
-    food_amount      = getRandInt(FOOD_STARTAMOUNT_MIN, FOOD_STARTAMOUNT_MAX);
-    medicine_amount  = getRandInt(MEDICINE_STARTAMOUNT_MIN, MEDICINE_STARTAMOUNT_MAX);
-    military_amount  = getRandInt(MILITARY_STARTAMOUNT_MIN, MILITARY_STARTAMOUNT_MAX);
-    drug_amount      = getRandInt(DRUG_STARTAMOUNT_MIN, DRUG_STARTAMOUNT_MAX);
-    exclusive_amount = getRandInt(EXCLUSIVE_STARTAMOUNT_MIN, EXCLUSIVE_STARTAMOUNT_MAX);
+    minerals_amount  = meti::getRandInt(MINERALS_STARTAMOUNT_MIN, MINERALS_STARTAMOUNT_MAX);
+    food_amount      = meti::getRandInt(FOOD_STARTAMOUNT_MIN, FOOD_STARTAMOUNT_MAX);
+    medicine_amount  = meti::getRandInt(MEDICINE_STARTAMOUNT_MIN, MEDICINE_STARTAMOUNT_MAX);
+    military_amount  = meti::getRandInt(MILITARY_STARTAMOUNT_MIN, MILITARY_STARTAMOUNT_MAX);
+    drug_amount      = meti::getRandInt(DRUG_STARTAMOUNT_MIN, DRUG_STARTAMOUNT_MAX);
+    exclusive_amount = meti::getRandInt(EXCLUSIVE_STARTAMOUNT_MIN, EXCLUSIVE_STARTAMOUNT_MAX);
     
     UpdateAllPrices();
 }
@@ -253,7 +253,7 @@ void Shop::ResolveData()
 
 void Shop::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "shop." + int2str(GetId())+".";
+    std::string root = "shop." + ceti::int2str(GetId())+".";
     Base::SaveData(save_ptree, root);
     Room::SaveData(save_ptree, root);
     Shop::SaveData(save_ptree, root);

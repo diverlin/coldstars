@@ -32,7 +32,7 @@ Room::Room()
 Room::~Room()
 {}            
 
-void Room::RenderBackground(const Rect& rect) const
+void Room::RenderBackground(const ceti::Rect& rect) const
 {
     //drawTexturedRect(textureOb_background, rect, -2);  
 }

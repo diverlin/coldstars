@@ -26,7 +26,7 @@
 #include "../world/EntityManager.hpp"
 
 #include <math/rand.hpp>
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../common/TurnTimer.hpp"
 #include "../common/Logger.hpp"
 
@@ -64,6 +64,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <jeti/particlesystem/BaseParticleSystem.hpp>
+
+#include <meti/RandUtils.hpp>
 
 Player::Player(int id)
 :
@@ -210,7 +212,9 @@ void Player::AddIfVisible(ShockWaveEffect* effect)
 
 void Player::AddIfVisible(LazerTraceEffect* effect)
 {
-    if ( (isPointOnScreen(vec3ToVec2(effect->GetStartPos())) == true) or (isPointOnScreen(vec3ToVec2(effect->GetEndPos())) == true) )
+    if ( (isPointOnScreen(meti::vec3ToVec2(effect->GetStartPos())) == true)
+         or
+       (isPointOnScreen(meti::vec3ToVec2(effect->GetEndPos())) == true) )
     {
         if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
         {
@@ -331,7 +335,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
             {
                 if (turn_timer.GetTurnEnded() == true)
                 {
-                    jeti::Screen::Instance().InitiateScrollTo(vec3ToVec2(npc->GetVehicle()->GetCenter()));
+                    jeti::Screen::Instance().InitiateScrollTo(meti::vec3ToVec2(npc->GetVehicle()->GetCenter()));
                     turn_timer.NextTurn();                
                 }
             }
@@ -343,7 +347,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
         {
             if (turn_timer.GetTurnEnded() == true)
             {
-                jeti::Screen::Instance().InitiateScrollTo(vec3ToVec2(npc->GetVehicle()->GetCenter()));
+                jeti::Screen::Instance().InitiateScrollTo(meti::vec3ToVec2(npc->GetVehicle()->GetCenter()));
                 turn_timer.NextTurn();                
             }
             
@@ -635,7 +639,7 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
     for (unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
     { 
         const glm::vec3& rocket_pos = visible_ROCKET_vec[i]->GetCenter(); // shortcut
-        float object_cursor_dist = distanceBetween(rocket_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, rocket_pos.z);
+        float object_cursor_dist = meti::distanceBetween(rocket_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, rocket_pos.z);
         if (object_cursor_dist < visible_ROCKET_vec[i]->GetCollisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_ROCKET_vec[i]);
@@ -665,7 +669,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
     for (unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
     { 
         const glm::vec3& container_pos = visible_CONTAINER_vec[i]->GetCenter(); // shortcut
-        float object_cursor_dist = distanceBetween(container_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, container_pos.z);
+        float object_cursor_dist = meti::distanceBetween(container_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, container_pos.z);
         if (object_cursor_dist < visible_CONTAINER_vec[i]->GetCollisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_CONTAINER_vec[i]);
@@ -705,7 +709,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
     { 
-        float object_cursor_dist = distanceBetween(vec3ToVec2(visible_SATELLITE_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distanceBetween(meti::vec3ToVec2(visible_SATELLITE_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SATELLITE_vec[i]->GetCollisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
@@ -755,7 +759,7 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
     { 
-        float object_cursor_dist = distanceBetween(vec3ToVec2(visible_ASTEROID_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distanceBetween(meti::vec3ToVec2(visible_ASTEROID_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_ASTEROID_vec[i]->GetCollisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_ASTEROID_vec[i]);        
@@ -784,7 +788,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SHIP_vec.size(); i++)
     { 
-        float object_cursor_dist = distanceBetween(vec3ToVec2(visible_SHIP_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distanceBetween(meti::vec3ToVec2(visible_SHIP_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SHIP_vec[i]->GetCollisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);    
@@ -845,7 +849,7 @@ bool Player::MouseInteractionWithBlackHoles(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
     { 
-        float cursor_dist = distanceBetween(vec3ToVec2(visible_BLACKHOLE_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float cursor_dist = meti::distanceBetween(meti::vec3ToVec2(visible_BLACKHOLE_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (cursor_dist < visible_BLACKHOLE_vec[i]->GetCollisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_BLACKHOLE_vec[i]); 
@@ -861,7 +865,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
     { 
-        float object_cursor_dist = distanceBetween(vec3ToVec2(visible_SPACESTATION_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distanceBetween(meti::vec3ToVec2(visible_SPACESTATION_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SPACESTATION_vec[i]); 
@@ -911,7 +915,7 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_PLANET_vec.size(); i++)
     { 
-        float object_cursor_dist = distanceBetween(vec3ToVec2(visible_PLANET_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distanceBetween(meti::vec3ToVec2(visible_PLANET_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_PLANET_vec[i]->GetCollisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_PLANET_vec[i]); 
@@ -934,7 +938,7 @@ bool Player::MouseInteractionWithStars(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_STAR_vec.size(); i++)
     { 
-        float object_cursor_dist = distanceBetween(visible_STAR_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distanceBetween(visible_STAR_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_STAR_vec[i]->GetCollisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_STAR_vec[i]); 
@@ -958,7 +962,7 @@ void Player::MouseNavigation(const MouseData& data_mouse) const
 void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 {    
     starsystem->FindRenderVisibleEntities_c(this);
-    if (getRandInt(1,5) == 1)
+    if (meti::getRandInt(1,5) == 1)
     {
         starsystem->FindRadarVisibleEntities_c(this);
     }
@@ -1069,7 +1073,7 @@ void Player::RenderAxis(const jeti::Renderer& render) const
 
 void Player::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "player."+int2str(GetId())+".";
+    std::string root = "player."+ceti::int2str(GetId())+".";
     
     Base::SaveData(save_ptree, root);
     Player::SaveData(save_ptree, root);    
@@ -1115,7 +1119,7 @@ void Player::ResolveData()
 
 bool isObjectWithinRadarRange(jeti::BaseParticleSystem* effect, Vehicle* vehicle)
 {
-    float dist = distanceBetween(vehicle->GetCenter(), effect->GetCenter());
+    float dist = meti::distanceBetween(vehicle->GetCenter(), effect->GetCenter());
     if (dist < vehicle->GetProperties().radar)
     {
         return true;
@@ -1172,7 +1176,7 @@ bool isPointOnScreen(const glm::vec2& p)
 
 bool isObjectWithinRadarRange(ShockWaveEffect* effect, Vehicle* vehicle)
 {
-    float dist = distanceBetween(vehicle->GetCenter(), effect->GetCenter());
+    float dist = meti::distanceBetween(vehicle->GetCenter(), effect->GetCenter());
     if (dist < vehicle->GetProperties().radar)
     {
         return true;
@@ -1183,13 +1187,13 @@ bool isObjectWithinRadarRange(ShockWaveEffect* effect, Vehicle* vehicle)
 
 bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
 {
-    float dist = distanceBetween(vehicle->GetCenter(), effect->GetStartPos());
+    float dist = meti::distanceBetween(vehicle->GetCenter(), effect->GetStartPos());
     if (dist < vehicle->GetProperties().radar)
     {
         return true;
     }
     
-    dist = distanceBetween(vehicle->GetCenter(), effect->GetEndPos());
+    dist = meti::distanceBetween(vehicle->GetCenter(), effect->GetEndPos());
     if (dist < vehicle->GetProperties().radar)
     {
         return true;
@@ -1200,7 +1204,7 @@ bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
 
 //bool isObjectWithinRadarRange(VerticalFlowText* effect, Vehicle* vehicle)
 //{
-    //float dist = distanceBetween(vehicle->GetCenter(), effect->GetPos());
+    //float dist = meti::distanceBetween(vehicle->GetCenter(), effect->GetPos());
     //if (dist < vehicle->GetProperties().radar)
     //{
         //return true;

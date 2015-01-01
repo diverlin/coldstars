@@ -1,4 +1,4 @@
-#include "config.hpp"
+#include "ConfigV.hpp"
 #include <boost/property_tree/info_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <constants.hpp>
@@ -6,13 +6,13 @@
 namespace jeti
 {
 
-Config& Config::instance()
+ConfigV& ConfigV::instance()
 {
-    static Config config;
+    static ConfigV config;
     return config;
 }
 
-Config::Config()
+ConfigV::ConfigV()
 {
     boost::property_tree::ptree ptree;
     boost::property_tree::info_parser::read_info(CONFIG_PATH+"config.info", ptree);
@@ -24,7 +24,7 @@ Config::Config()
     m_video.vsync     = ptree.get<bool>("Video.vsync");
 }
 
-Config::~Config()
+ConfigV::~ConfigV()
 {}
 
 }

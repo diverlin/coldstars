@@ -33,6 +33,7 @@
 
 #include <struct/RaceInformationCollector.hpp>
 
+#include <meti/RandUtils.hpp>
 
 RadarEquipmentBuilder& RadarEquipmentBuilder::Instance()
 {
@@ -76,13 +77,11 @@ RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipment(TYPE::TECHLEVEL tech
         
 void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int radius_orig) const
 {     
-    if (race_id == TYPE::RACE::NONE_ID)
-    {
-        race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+    if (race_id == TYPE::RACE::NONE_ID) {
+        race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
     }
     
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
-    {
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
@@ -90,13 +89,13 @@ void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, 
     jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
 
-    radius_orig     = getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX) * (1 + EQUIPMENT::RADAR::RADIUS_TECHLEVEL_RATE * (int)tech_level);
+    radius_orig     = meti::getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX) * (1 + EQUIPMENT::RADAR::RADIUS_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech_level      = tech_level;
-    common_data.modules_num_max = getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
-    common_data.mass            = getRandInt(EQUIPMENT::RADAR::MASS_MIN,        EQUIPMENT::RADAR::MASS_MAX);
-    common_data.condition_max   = getRandInt(EQUIPMENT::RADAR::CONDITION_MIN,   EQUIPMENT::RADAR::CONDITION_MAX);
+    common_data.modules_num_max = meti::getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
+    common_data.mass            = meti::getRandInt(EQUIPMENT::RADAR::MASS_MIN,        EQUIPMENT::RADAR::MASS_MAX);
+    common_data.condition_max   = meti::getRandInt(EQUIPMENT::RADAR::CONDITION_MIN,   EQUIPMENT::RADAR::CONDITION_MAX);
     common_data.deterioration_normal = 1;
 
     radar_equipment->SetRadiusOrig(radius_orig);

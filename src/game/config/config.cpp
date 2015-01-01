@@ -1,6 +1,7 @@
 #include "config.hpp"
 #include "../common/constants.hpp"
 
+const std::string CONFIG_PATH("");
 
 Config& Config::Instance()
 {

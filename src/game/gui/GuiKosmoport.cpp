@@ -24,7 +24,7 @@
 #include <jeti/Screen.hpp>
 
 #include "../common/constants.hpp"
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../common/Logger.hpp"
 
 #include "../pilots/Player.hpp"
@@ -518,7 +518,7 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
                 Render(); 
                 RenderChildInfo(data_mouse); 
             disable_BLEND();
-            Screen::Instance().DrawText("credits:"+int2str(player->GetNpc()->GetCredits()), 12, glm::vec2(600, 200));
+            Screen::Instance().DrawText("credits:"+ceti::int2str(player->GetNpc()->GetCredits()), 12, glm::vec2(600, 200));
 
             break;
         }

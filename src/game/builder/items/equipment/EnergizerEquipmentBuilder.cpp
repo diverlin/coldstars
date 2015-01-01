@@ -32,6 +32,8 @@
 
 #include <struct/RaceInformationCollector.hpp>
 
+#include <meti/RandUtils.hpp>
+
 EnergizerEquipmentBuilder& EnergizerEquipmentBuilder::Instance()
 {
     static EnergizerEquipmentBuilder instance;
@@ -73,13 +75,11 @@ EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipment(TYPE::TE
         
 void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
 {     
-    if (race_id == TYPE::RACE::NONE_ID)
-    {
-        race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+    if (race_id == TYPE::RACE::NONE_ID) {
+        race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
     }
     
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
-    {
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
@@ -87,14 +87,14 @@ void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer
     jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
 
-    energy_max_orig  = getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN,      EQUIPMENT::ENERGIZER::ENERGY_MAX)      * (1 + EQUIPMENT::ENERGIZER::ENERGY_TECHLEVEL_RATE * (int)tech_level);
-    restoration_orig = getRandInt(EQUIPMENT::ENERGIZER::RESTORATION_MIN, EQUIPMENT::ENERGIZER::RESTORATION_MAX) * (1 + EQUIPMENT::ENERGIZER::RESTORATION_TECHLEVEL_RATE * (int)tech_level);
+    energy_max_orig  = meti::getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN,      EQUIPMENT::ENERGIZER::ENERGY_MAX)      * (1 + EQUIPMENT::ENERGIZER::ENERGY_TECHLEVEL_RATE * (int)tech_level);
+    restoration_orig = meti::getRandInt(EQUIPMENT::ENERGIZER::RESTORATION_MIN, EQUIPMENT::ENERGIZER::RESTORATION_MAX) * (1 + EQUIPMENT::ENERGIZER::RESTORATION_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech_level          = tech_level;
-    common_data.modules_num_max  = getRandInt(EQUIPMENT::ENERGIZER::MODULES_NUM_MIN, EQUIPMENT::ENERGIZER::MODULES_NUM_MAX);
-    common_data.mass             = getRandInt(EQUIPMENT::ENERGIZER::MASS_MIN,        EQUIPMENT::ENERGIZER::MASS_MAX);
-    common_data.condition_max    = getRandInt(EQUIPMENT::ENERGIZER::CONDITION_MIN,   EQUIPMENT::ENERGIZER::CONDITION_MAX);
+    common_data.modules_num_max  = meti::getRandInt(EQUIPMENT::ENERGIZER::MODULES_NUM_MIN, EQUIPMENT::ENERGIZER::MODULES_NUM_MAX);
+    common_data.mass             = meti::getRandInt(EQUIPMENT::ENERGIZER::MASS_MIN,        EQUIPMENT::ENERGIZER::MASS_MAX);
+    common_data.condition_max    = meti::getRandInt(EQUIPMENT::ENERGIZER::CONDITION_MIN,   EQUIPMENT::ENERGIZER::CONDITION_MAX);
     common_data.deterioration_normal = 1;
 
     energizer_equipment->SetEnergyMaxOrig(energy_max_orig);

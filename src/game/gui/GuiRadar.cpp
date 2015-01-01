@@ -26,16 +26,16 @@
 
 #include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
-#include <math/myVector.hpp>
+#include <meti/VectorUtils.hpp>
 
 GuiRadar::GuiRadar()
 {
     SetSubTypeId(TYPE::GUI::GUI_RADAR_ID);
     
-    textureOb_background     = GuiTextureObCollector::Instance().radar_background;
-    textureOb_bar             = GuiTextureObCollector::Instance().radar_bar;
-    textureOb_screenrect    = GuiTextureObCollector::Instance().radar_screenrect;
-    textureOb_range            = GuiTextureObCollector::Instance().radar_range;
+    textureOb_background        = GuiTextureObCollector::Instance().radar_background;
+    textureOb_bar               = GuiTextureObCollector::Instance().radar_bar;
+    textureOb_screenrect        = GuiTextureObCollector::Instance().radar_screenrect;
+    textureOb_range             = GuiTextureObCollector::Instance().radar_range;
         
     scale = RADAR_SCALE;
     int screen_w = jeti::Screen::Instance().GetWidth();
@@ -88,9 +88,9 @@ void GuiRadar::AddIfWithinRadarRange(BaseSpaceEntity* object, const Vehicle& veh
 void GuiRadar::RenderUnique(const jeti::Renderer& render, Player* player) const
 {
     float range_diameter = 2*player->GetNpc()->GetVehicle()->GetProperties().radar;
-    Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
+    ceti::Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
     
-    range_rect.SetCenter(rect.GetCenter() + vec3ToVec2(player->GetNpc()->GetVehicle()->GetCenter()) * scale);
+    range_rect.SetCenter(rect.GetCenter() + meti::vec3ToVec2(player->GetNpc()->GetVehicle()->GetCenter()) * scale);
     
     //drawTexturedRect(textureOb_background, rect, -2.0);
     //drawTexturedRect(textureOb_bar, rect, -2.0);

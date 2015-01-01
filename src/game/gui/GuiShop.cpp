@@ -19,12 +19,12 @@
 #include "GuiShop.hpp"
 #include "../dock/Shop.hpp"
 
-#include "../common/rect.hpp"
+#include <ceti/rect.hpp>
 #include "../gui/Cursor.hpp"
 #include <jeti/Screen.hpp>
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../gui/ButtonSingle.hpp"
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../common/constants.hpp"
 
 GuiShop::GuiShop():shop(nullptr)
@@ -111,37 +111,37 @@ void GuiShop::UpdateLables() const
         {
             case GUI::BUTTON::MINERALS_ID:
             {
-                        gui_element->SetLabel("mineral:" + int2str(shop->GetMineralsAmount()) + " price:" + int2str(shop->GetMineralsPrice()));                    
+                        gui_element->SetLabel("mineral:" + ceti::int2str(shop->GetMineralsAmount()) + " price:" + ceti::int2str(shop->GetMineralsPrice()));
                         break;
                 }
             
             case GUI::BUTTON::FOOD_ID:
             {
-                        gui_element->SetLabel("food:" + int2str(shop->GetFoodAmount()) + " price:" + int2str(shop->GetFoodPrice()));                    
+                        gui_element->SetLabel("food:" + ceti::int2str(shop->GetFoodAmount()) + " price:" + ceti::int2str(shop->GetFoodPrice()));
                         break;
                 }
 
             case GUI::BUTTON::MEDICINE_ID:
             {
-                        gui_element->SetLabel("medicine:" + int2str(shop->GetMedicineAmount()) + " price:" + int2str(shop->GetMedicinePrice()));                    
+                        gui_element->SetLabel("medicine:" + ceti::int2str(shop->GetMedicineAmount()) + " price:" + ceti::int2str(shop->GetMedicinePrice()));
                         break;
                 }
 
             case GUI::BUTTON::MILITARY_ID:
             {
-                        gui_element->SetLabel("military:" + int2str(shop->GetMilitaryAmount()) + " price:" + int2str(shop->GetMilitaryPrice()));                    
+                        gui_element->SetLabel("military:" + ceti::int2str(shop->GetMilitaryAmount()) + " price:" + ceti::int2str(shop->GetMilitaryPrice()));
                         break;
                 }
 
             case GUI::BUTTON::DRUG_ID:
             {
-                        gui_element->SetLabel("drug:" + int2str(shop->GetDrugAmount()) + " price:" + int2str(shop->GetDrugPrice()));                    
+                        gui_element->SetLabel("drug:" + ceti::int2str(shop->GetDrugAmount()) + " price:" + ceti::int2str(shop->GetDrugPrice()));
                         break;
                 }
                 
                 case GUI::BUTTON::EXCLUSIVE_ID:
             {
-                        gui_element->SetLabel("exclusive:" + int2str(shop->GetExclusiveAmount()) + " price:" + int2str(shop->GetExclusivePrice()));                    
+                        gui_element->SetLabel("exclusive:" + ceti::int2str(shop->GetExclusiveAmount()) + " price:" + ceti::int2str(shop->GetExclusivePrice()));
                         break;
                 }
             }

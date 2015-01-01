@@ -17,11 +17,10 @@
 */
 
 
-#ifndef ROOM_H
-#define ROOM_H
+#pragma once
 
 #include "../common/Base.hpp"
-#include "../common/rect.hpp"
+#include <ceti/rect.hpp>
 
 namespace jeti {
 class TextureOb;
@@ -49,7 +48,7 @@ class Room : public Base
                 Kosmoport* const GetOwnerKosmoport() { return owner_kosmoport; };
                 jeti::TextureOb* GetBackgroundTextureOb() const { return textureOb_background; };
 
-                void RenderBackground(const Rect&) const;
+                void RenderBackground(const ceti::Rect&) const;
                         
         protected:
             Kosmoport* owner_kosmoport;
@@ -61,4 +60,4 @@ class Room : public Base
         void ResolveData();
 };
 
-#endif 
+

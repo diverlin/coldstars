@@ -17,15 +17,16 @@
 */
 
 
-#ifndef VEHICLESLOT_HPP
-#define VEHICLESLOT_HPP
+#pragma once
 
 #include <boost/property_tree/ptree.hpp>
 #include "../slots/BaseSlot.hpp"
 
 class Vehicle;
-class Rect; // to be removed
 
+namespace ceti {
+class Rect; // to be removed
+}
 
 class VehicleSlot : public BaseSlot
 {
@@ -40,7 +41,7 @@ class VehicleSlot : public BaseSlot
         void Release(); 
         void SwapVehicle(VehicleSlot*);
         
-        void Render(const Rect&) const;
+        void Render(const ceti::Rect&) const;
         
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
@@ -54,4 +55,4 @@ class VehicleSlot : public BaseSlot
         void ResolveData();     
 }; 
 
-#endif
+

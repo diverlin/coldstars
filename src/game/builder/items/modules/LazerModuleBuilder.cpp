@@ -17,18 +17,18 @@
 */
 
 #include "LazerModuleBuilder.hpp"
-#include "../../../items/modules/LazerModule.hpp"
+#include <items/modules/LazerModule.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
-#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
 
 #include "../../../world/EntityManager.hpp"
 
-#include <resources/TextureCollector.hpp>
-#include <resources/MeshCollector.hpp>
-#include <jeti/TextureOb.hpp>
+//#include <resources/TextureCollector.hpp>
+//#include <resources/MeshCollector.hpp>
+//#include <jeti/TextureOb.hpp>
 
 
 LazerModuleBuilder& LazerModuleBuilder::Instance()
@@ -73,11 +73,11 @@ LazerModule* LazerModuleBuilder::GetNewLazerModule(int damage_add, int radius_ad
             
 void LazerModuleBuilder::CreateNewInternals(LazerModule* lazer_module, int damage_add, int radius_add) const
 {  
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
+//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
   
-    damage_add = getRandInt(MODULE::LAZER::DAMAGE_MIN, MODULE::LAZER::DAMAGE_MAX);
-    radius_add = getRandInt(MODULE::LAZER::RADIUS_MIN, MODULE::LAZER::RADIUS_MAX);
+    damage_add = meti::getRandInt(MODULE::LAZER::DAMAGE_MIN, MODULE::LAZER::DAMAGE_MAX);
+    radius_add = meti::getRandInt(MODULE::LAZER::RADIUS_MIN, MODULE::LAZER::RADIUS_MAX);
 
     lazer_module->SetParentSubTypeId(TYPE::ENTITY::LAZER_EQUIPMENT_ID);    
     //alpitodorender lazer_module->SetRenderData(mesh, texOb, texOb->GetSize());

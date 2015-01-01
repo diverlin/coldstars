@@ -32,6 +32,7 @@
 
 #include <struct/RaceInformationCollector.hpp>
 
+#include <meti/RandUtils.hpp>
 
 RocketEquipmentBuilder& RocketEquipmentBuilder::Instance()
 {
@@ -75,13 +76,11 @@ RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipment(TYPE::TECHLEVEL t
             
 void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {     
-    if (race_id == TYPE::RACE::NONE_ID)
-    {
-        race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+    if (race_id == TYPE::RACE::NONE_ID) {
+        race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
     }
     
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
-    {
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
    
@@ -89,16 +88,16 @@ void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipmen
     jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)   
     
-    ammo_max_orig = getRandInt(EQUIPMENT::ROCKET::AMMO_MIN, EQUIPMENT::ROCKET::AMMO_MAX)     * (1 + EQUIPMENT::ROCKET::AMMO_TECHLEVEL_RATE * (int)tech_level);
-    damage_orig   = getRandInt(EQUIPMENT::ROCKET::DAMAGE_MIN, EQUIPMENT::ROCKET::DAMAGE_MAX) * (1 + EQUIPMENT::ROCKET::DAMAGE_TECHLEVEL_RATE * (int)tech_level);
-    radius_orig   = getRandInt(EQUIPMENT::ROCKET::RADIUS_MIN, EQUIPMENT::ROCKET::RADIUS_MAX) * (1 + EQUIPMENT::ROCKET::RADIUS_TECHLEVEL_RATE * (int)tech_level);
+    ammo_max_orig = meti::getRandInt(EQUIPMENT::ROCKET::AMMO_MIN, EQUIPMENT::ROCKET::AMMO_MAX)     * (1 + EQUIPMENT::ROCKET::AMMO_TECHLEVEL_RATE * (int)tech_level);
+    damage_orig   = meti::getRandInt(EQUIPMENT::ROCKET::DAMAGE_MIN, EQUIPMENT::ROCKET::DAMAGE_MAX) * (1 + EQUIPMENT::ROCKET::DAMAGE_TECHLEVEL_RATE * (int)tech_level);
+    radius_orig   = meti::getRandInt(EQUIPMENT::ROCKET::RADIUS_MIN, EQUIPMENT::ROCKET::RADIUS_MAX) * (1 + EQUIPMENT::ROCKET::RADIUS_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech_level         = tech_level;
-    common_data.modules_num_max = getRandInt(EQUIPMENT::ROCKET::MODULES_NUM_MIN, EQUIPMENT::ROCKET::MODULES_NUM_MAX);
+    common_data.modules_num_max = meti::getRandInt(EQUIPMENT::ROCKET::MODULES_NUM_MIN, EQUIPMENT::ROCKET::MODULES_NUM_MAX);
     
-    common_data.mass = getRandInt(EQUIPMENT::ROCKET::MASS_MIN, EQUIPMENT::ROCKET::MASS_MAX);
-    common_data.condition_max = getRandInt(EQUIPMENT::ROCKET::CONDITION_MIN, EQUIPMENT::ROCKET::CONDITION_MAX);
+    common_data.mass            = meti::getRandInt(EQUIPMENT::ROCKET::MASS_MIN, EQUIPMENT::ROCKET::MASS_MAX);
+    common_data.condition_max   = meti::getRandInt(EQUIPMENT::ROCKET::CONDITION_MIN, EQUIPMENT::ROCKET::CONDITION_MAX);
     
     common_data.deterioration_normal = 1;
     

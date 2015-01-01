@@ -17,14 +17,13 @@
 */
 
 
-#ifndef BASEGUIELEMENT_HPP
-#define BASEGUIELEMENT_HPP
+#pragma once
 
 #include <map>
 #include <vector>
 
 #include <types/GuiTypes.hpp>
-#include <common/Box2D.hpp> 
+#include <ceti/Box2D.hpp>
 
 class Player;
 
@@ -49,8 +48,8 @@ class BaseGuiElement
         TYPE::GUI GetTypeId() const { return m_Type_id; }
         TYPE::GUI GetSubTypeId() const { return m_Subtype_id; }
                     
-        const Box2D& GetBox() const { return m_Box; }
-        Box2D& GetBox() { return m_Box; } // !!!
+        const ceti::Box2D& GetBox() const { return m_Box; }
+        ceti::Box2D& GetBox() { return m_Box; } // !!!
                 
         const jeti::TextureOb& GetTextureOb() const { return *m_TextureOb; }
                 
@@ -81,7 +80,7 @@ class BaseGuiElement
 
         void SetSubTypeId(TYPE::GUI subtype_id) { m_Subtype_id = subtype_id; }
         
-        void SetBox(const Box2D& box) { m_Box = box; }
+        void SetBox(const ceti::Box2D& box) { m_Box = box; }
         
         void SetScale(const glm::vec2& scale) { m_Box.SetScale(scale); }        
         void SetRoot(bool root) { m_Root = root; }
@@ -120,7 +119,7 @@ class BaseGuiElement
         std::string m_Info; 
         std::string m_Label; 
         
-        Box2D m_Box;
+        ceti::Box2D m_Box;
             
         bool m_Locked;
         bool m_Pressed;
@@ -138,4 +137,4 @@ class BaseGuiElement
     friend class GuiManager;
 };
 
-#endif 
+

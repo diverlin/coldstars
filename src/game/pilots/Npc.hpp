@@ -22,17 +22,19 @@
 #include <set>
 
 #include "../common/Base.hpp"
-class BaseAiModel;
+
 #include "../pilots/Skills.hpp"
 #include "../ai/StateMachine.hpp"
+#include "Observation.hpp" 
+#include "../text/InfoTable.hpp"
+#include "../pilots/AgressorData.hpp"
+
+class BaseAiModel;
 class Vehicle;
 class Player;
-#include "Observation.hpp" 
 class Planet;
 class GoodsPack;
 class StarSystem;
-#include "../text/InfoTable.hpp"
-#include "../pilots/AgressorData.hpp"
 
 struct UnresolvedDataNpc
 {

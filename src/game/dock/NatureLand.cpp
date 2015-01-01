@@ -19,8 +19,8 @@
 #include "NatureLand.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../common/constants.hpp"
-#include "../common/myStr.hpp"
-#include <math/rand.hpp>
+#include <ceti/myStr.hpp>
+#include <meti/RandUtils.hpp>
 #include "../resources/TextureCollector.hpp"
 #include <jeti/TextureOb.hpp>
 
@@ -79,7 +79,7 @@ bool NatureLand::AddItem(BaseItem* item)
         if (item_slot_vec[i]->GetItem() == nullptr)
         {
             item_slot_vec[i]->InsertItem(item);
-            item_slot_vec[i]->SetPosition(glm::vec2(getRandInt(0, 100), getRandInt(0, 100)));
+            item_slot_vec[i]->SetPosition(glm::vec2(meti::getRandInt(0, 100), meti::getRandInt(0, 100)));
             
             return true;
         }
@@ -136,7 +136,7 @@ std::string NatureLand::GetDockVehicleStr() const
     std::string str;
         for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
         {
-                   str += "_" + int2str(VEHICLE_vec[i]->GetId());
+                   str += "_" + ceti::int2str(VEHICLE_vec[i]->GetId());
         }
 
         return str;
@@ -145,7 +145,7 @@ std::string NatureLand::GetDockVehicleStr() const
 /* virtual override final */
 void NatureLand::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "natureland."+int2str(GetId())+".";
+    const std::string root = "natureland."+ceti::int2str(GetId())+".";
     Base::SaveData(save_ptree, root);
     BaseLand::SaveData(save_ptree, root);
     NatureLand::SaveData(save_ptree, root);

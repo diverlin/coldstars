@@ -33,6 +33,7 @@
 
 #include <struct/RaceInformationCollector.hpp>
 
+#include <meti/RandUtils.hpp>
 
 ScanerEquipmentBuilder& ScanerEquipmentBuilder::Instance()
 {
@@ -76,13 +77,11 @@ ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipment(TYPE::TECHLEVEL t
             
 void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int scan_orig) const
 {     
-    if (race_id == TYPE::RACE::NONE_ID)
-    {
-        race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+    if (race_id == TYPE::RACE::NONE_ID) {
+        race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
     }
     
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
-    {
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
@@ -90,13 +89,13 @@ void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipmen
     jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
 
-    scan_orig       = getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECHLEVEL_RATE * (int)tech_level);
+    scan_orig       = meti::getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech_level         = tech_level;
-    common_data.modules_num_max = getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
-    common_data.mass            = getRandInt(EQUIPMENT::SCANER::MASS_MIN,        EQUIPMENT::SCANER::MASS_MAX);
-    common_data.condition_max   = getRandInt(EQUIPMENT::SCANER::CONDITION_MIN,   EQUIPMENT::SCANER::CONDITION_MAX);
+    common_data.modules_num_max = meti::getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
+    common_data.mass            = meti::getRandInt(EQUIPMENT::SCANER::MASS_MIN,        EQUIPMENT::SCANER::MASS_MAX);
+    common_data.condition_max   = meti::getRandInt(EQUIPMENT::SCANER::CONDITION_MIN,   EQUIPMENT::SCANER::CONDITION_MAX);
     common_data.deterioration_normal = 1;
     
     scaner_equipment->SetScanOrig(scan_orig);  

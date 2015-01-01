@@ -17,11 +17,10 @@
 */
 
 
-#ifndef CURSOR_HPP
-#define CURSOR_HPP
+#pragma once
 
 #include <gui/MouseData.hpp>
-#include <common/Box2D.hpp>
+#include <ceti/Box2D.hpp>
 
 class ItemSlot;
 class BaseSpaceEntity;
@@ -62,9 +61,8 @@ class Cursor
         BaseSpaceEntity* m_FocusedSpaceObject;
         BaseGuiElement* m_FocusedGuiElement;
         
-        Box2D m_Box;
+        ceti::Box2D m_Box;
 
         void UpdateMouseStuff(); 
 }; 
 
-#endif 

@@ -49,13 +49,13 @@ void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_ph
 {   
     m_Coords_vec.clear();
     
-    float d_angleInRad = speed / RADIAN_TO_DEGREE_RATE;;
+    float d_angleInRad = glm::radians(speed);
     if (clockwise == true) 
     {
         d_angleInRad *= -1;
     }         
      
-    float orbitPhiInRad = orbit_phi_inD / RADIAN_TO_DEGREE_RATE;
+    float orbitPhiInRad = glm::radians(orbit_phi_inD);
     
     glm::vec3 new_coord;
     
@@ -73,15 +73,13 @@ void Orbit::CalcPath(float radius, float speed, bool clockwise)
 {       
     m_Coords_vec.clear();
     
-    float d_angleInRad  = speed / RADIAN_TO_DEGREE_RATE;
-    if (clockwise == true) 
-    {
+    float d_angleInRad  = glm::radians(speed);
+    if (clockwise == true) {
         d_angleInRad *= -1;
     }    
     
     glm::vec3 new_coord;
-    for(float angleInRad=0; fabs(angleInRad)<2*PI; angleInRad+=d_angleInRad) 
-    { 
+    for(float angleInRad=0; fabs(angleInRad)<2*PI; angleInRad+=d_angleInRad) {
         new_coord.x = radius*(cos(angleInRad) - sin(angleInRad));
         new_coord.y = radius*(cos(angleInRad) + sin(angleInRad));
         new_coord.z = DEFAULT_ENTITY_ZPOS;

@@ -31,6 +31,7 @@
 #include <effects/DistantNebulaEffect.hpp>
 #include <effects/DistantStarEffect.hpp>
 
+#include <meti/RandUtils.hpp>
 
 StarSystemBuilder& StarSystemBuilder::Instance()
 {
@@ -77,7 +78,7 @@ void StarSystemBuilder::CreateNewInternals(StarSystem* starsystem, const StarSys
     starsystem->GetAsteroidManager().Parameterize(starsystem_description.asteroid_num);
     CreateStar(starsystem);
     
-    int distNebula_num = getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
+    int distNebula_num = meti::getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
     // alpitodorender CreateBackground(starsystem, distNebula_num, /*distStar_num*/1, starsystem->GetStar()->GetColorId());
       
     CreatePlanets(starsystem, starsystem_description.planet_num);
@@ -107,7 +108,7 @@ void StarSystemBuilder::CreateStar(StarSystem* starsystem) const
 
 void StarSystemBuilder::CreatePlanets(StarSystem* starsystem, int planet_per_system) const
 {
-    int orbit_radius = getRandInt(2 * ENTITY::PLANET::DISTANCE_MIN, 2 * ENTITY::PLANET::DISTANCE_MAX);
+    int orbit_radius = meti::getRandInt(2 * ENTITY::PLANET::DISTANCE_MIN, 2 * ENTITY::PLANET::DISTANCE_MAX);
     
     for(int i=0; i<planet_per_system; i++)
     {             
@@ -115,7 +116,7 @@ void StarSystemBuilder::CreatePlanets(StarSystem* starsystem, int planet_per_sys
         
         starsystem->Add(planet, starsystem->GetStar());
         
-        orbit_radius += getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
+        orbit_radius += meti::getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
     }
         
 }

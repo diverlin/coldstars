@@ -20,7 +20,7 @@
 #define DRIVECOMPLEX_HPP
 
 #include <jeti/PathVisual.hpp>
-#include <math/myVector.hpp> 
+#include <meti/VectorUtils.hpp>
 
 class Vehicle;
 namespace jeti {

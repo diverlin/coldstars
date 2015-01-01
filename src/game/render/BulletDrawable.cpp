@@ -29,7 +29,7 @@ BulletDrawable::BulletDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
 BulletDrawable::~BulletDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BulletDrawable("+int2str(GetId())+")");
+    Logger::Instance().Log("___::~BulletDrawable("+ceti::int2str(GetId())+")");
     #endif
 
     delete m_EffectDrive;
@@ -49,11 +49,11 @@ void BulletDrawable::CreateDriveComplexTextureDependedStuff()
 //    GetInfo().clear();
 
 //    GetInfo().addTitleStr("ROCKET");
-//    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()) );
-//    GetInfo().addNameStr("armor:");             GetInfo().addValueStr( int2str(GetDataLife().armor) );
+//    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( ceti::int2str(GetId()) + " / " + ceti::int2str(GetStarSystem()->GetId()) );
+//    GetInfo().addNameStr("armor:");             GetInfo().addValueStr( ceti::int2str(GetDataLife().armor) );
 //    if (m_Target != nullptr)
 //    {
-//        GetInfo().addNameStr("target_id:");       GetInfo().addValueStr(int2str(m_Target->GetId()));
+//        GetInfo().addNameStr("target_id:");       GetInfo().addValueStr(ceti::int2str(m_Target->GetId()));
 //    }
 //}
 

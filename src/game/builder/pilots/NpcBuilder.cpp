@@ -20,7 +20,8 @@
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
-#include <math/rand.hpp>
+//#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 
 #include <resources/TextureCollector.hpp>
 
@@ -129,7 +130,7 @@ void NpcBuilder::CreateNewInternals(Npc* npc, TYPE::RACE race_id, TYPE::ENTITY s
         npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR_ID));
        }
         
-    npc->GetSkills().AddExpirience(getRandInt(10000, 100000));
+    npc->GetSkills().AddExpirience(meti::getRandInt(10000, 100000));
     while(npc->GetSkills().GetAvailablePoints() != 0)
     {
         npc->GetSkills().ManageAccordingToStrategy();

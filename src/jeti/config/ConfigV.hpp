@@ -20,17 +20,17 @@ struct Video {
         {}
 };
 
-struct Config
+struct ConfigV
 {
     public:
-        static Config& instance();
+        static ConfigV& instance();
         Video& video() { return m_video; }
 
     private:
-        Config();
-        Config(const Config&) = delete;
-        ~Config();
-        Config& operator=(const Config&) = delete;
+        ConfigV();
+        ConfigV(const ConfigV&) = delete;
+        ~ConfigV();
+        ConfigV& operator=(const ConfigV&) = delete;
 
         Video m_video;
 };

@@ -16,11 +16,10 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUIRADAR_HPP
-#define GUIRADAR_HPP
+#pragma once
 
 #include "BaseGuiElement.hpp"
-#include <common/rect.hpp> // to be removed
+#include <ceti/rect.hpp> // to be removed
 
 class BaseSpaceEntity;
 class Vehicle;
@@ -35,7 +34,7 @@ class GuiRadar : public BaseGuiElement
         GuiRadar();
         virtual ~GuiRadar() override final;
     
-        const Rect& GetRect() const { return rect; };
+        const ceti::Rect& GetRect() const { return rect; };
         void Resize(int, int);
         
         void ResetData();
@@ -55,10 +54,9 @@ class GuiRadar : public BaseGuiElement
         jeti::TextureOb* textureOb_screenrect;
         jeti::TextureOb* textureOb_range;
                 
-        Rect rect;
-        Rect screenrect;
+        ceti::Rect rect;
+        ceti::Rect screenrect;
                                     
         std::vector<BaseSpaceEntity*> entity_vec;
 };
 
-#endif

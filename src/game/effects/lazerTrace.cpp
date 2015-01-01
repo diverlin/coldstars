@@ -19,7 +19,7 @@
 #include "lazerTrace.hpp"
 
 #include <glm/gtx/transform.hpp>
-#include <math/QuaternionUtils.hpp>
+#include <meti/QuaternionUtils.hpp>
 
 #include <jeti/particlesystem/BaseParticleSystem.hpp>
 
@@ -63,7 +63,7 @@ const glm::mat4& LazerTraceEffect::GetActualModelMatrix()
     m_MatrixTranslate = glm::translate(*m_pStartPos);
 
     const glm::vec3& origin_dir = glm::vec3(1.0f, 0.0f, 0.0f);
-    RotationBetweenVectors(m_QuatPosition, origin_dir, glm::normalize(*m_pEndPos));
+    meti::RotationBetweenVectors(m_QuatPosition, origin_dir, glm::normalize(*m_pEndPos));
 
     m_MatrixRotate = glm::toMat4(m_QuatPosition);
 

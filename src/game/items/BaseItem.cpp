@@ -20,7 +20,7 @@
 #include "BaseItem.hpp"
 #include "../common/constants.hpp"
 #include "../common/Logger.hpp"
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 
 #include "../world/EntityManager.hpp"
 #include "../slots/ItemSlot.hpp"
@@ -42,7 +42,7 @@ item_slot(nullptr)
 BaseItem::~BaseItem()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BaseItem("+int2str(GetId())+")");
+    Logger::Instance().Log("___::~BaseItem("+ceti::int2str(GetId())+")");
     #endif
 }
 
@@ -132,12 +132,12 @@ void BaseItem::RenderInfo(const jeti::Renderer& render, const glm::vec2& pos)
 }
 
 /* virtual */
-void BaseItem::Render(const jeti::Renderer& render, const Box2D& box, const glm::vec2& gui_offset, bool draw_text)
+void BaseItem::Render(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text)
 {
     RenderKorpus(render, box);
 }
 
-void BaseItem::RenderKorpus(const jeti::Renderer& render, const Box2D& box)
+void BaseItem::RenderKorpus(const jeti::Renderer& render, const ceti::Box2D& box)
 {
     glm::vec2 v(0.0);
     glm::vec4 c(1.0, 1.0, 1.0, 1.0);
@@ -151,7 +151,7 @@ void BaseItem::RenderKorpus(const jeti::Renderer& render, const Box2D& box)
 void BaseItem::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseItem::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseItem::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"price", price);
@@ -178,7 +178,7 @@ void BaseItem::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
 void BaseItem::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseItem::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseItem::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     price             = load_ptree.get<int>("price");
@@ -201,7 +201,7 @@ void BaseItem::LoadData(const boost::property_tree::ptree& load_ptree)
 void BaseItem::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseItem::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseItem::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     //BindData2D(TextureCollector::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path));

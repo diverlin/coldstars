@@ -20,7 +20,7 @@
 
 #include <common/constants.hpp>
 #include <math/rand.hpp>
-#include <common/myStr.hpp>
+#include <ceti/myStr.hpp>
 #include <common/Logger.hpp>
  
 #include <world/starsystem.hpp>
@@ -32,20 +32,21 @@
 
 #include <spaceobjects/Container.hpp>
 
+#include <meti/RandUtils.hpp>
 
 Asteroid::Asteroid(int id)
 {   
     SetId(id);
     SetTypeId(TYPE::ENTITY::ASTEROID_ID);
     
-    SetMass(getRandInt(10, 30));
+    SetMass(meti::getRandInt(10, 30));
 }
     
 /* virtual */
 Asteroid::~Asteroid()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Asteroid("+int2str(GetId())+")");
+    Logger::Instance().Log("___::~Asteroid("+ceti::int2str(GetId())+")");
     #endif
 }
 
@@ -66,13 +67,13 @@ void Asteroid::CollisionEvent(bool show_effect)
     
 void Asteroid::PostDeathUniqueEvent(bool show_effect)
 {
-    int angleZ = getRandInt(0, 360);
+    int angleZ = meti::getRandInt(0, 360);
     float impulse_strength = 0.5;
     for (int i=0; i<3; i++)
     {      
         Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
         
-        glm::vec3 impulse_dir(getXYVec3Unit(angleZ));
+        glm::vec3 impulse_dir(meti::getXYVec3Unit(angleZ));
         container->ApplyImpulse(impulse_dir, impulse_strength);
         
         GetStarSystem()->AddContainer(container, GetCenter());
@@ -94,31 +95,31 @@ void Asteroid::UpdateInfo()
     GetInfo().clear();
 
     GetInfo().addTitleStr("ASTEROID");
-    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(int2str(GetId()) + " / " + int2str(GetStarSystem()->GetId()));
-    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(int2str(GetDataLife().armor));
-    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(int2str(GetMass()));
-    GetInfo().addNameStr("speed x 100:"); GetInfo().addValueStr(int2str(int(GetDataPlanet().speed*100)));
-    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
+    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(ceti::int2str(GetId()) + " / " + ceti::int2str(GetStarSystem()->GetId()));
+    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(ceti::int2str(GetDataLife().armor));
+    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(ceti::int2str(GetMass()));
+    GetInfo().addNameStr("speed x 100:"); GetInfo().addValueStr(ceti::int2str(int(GetDataPlanet().speed*100)));
+    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
 }     
 
 void Asteroid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Asteroid("+ceti::int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void Asteroid::LoadData(const boost::property_tree::ptree& ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Asteroid("+ceti::int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void Asteroid::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Asteroid("+int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Asteroid("+ceti::int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, GetParent(), data_unresolved_BasePlanet.orbit_it); 
@@ -127,7 +128,7 @@ void Asteroid::ResolveData()
 /* virtual override final */    
 void Asteroid::Save(boost::property_tree::ptree& save_ptree) const        
 {
-    std::string root = "asteroid." + int2str(GetId())+".";
+    std::string root = "asteroid." + ceti::int2str(GetId())+".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

@@ -18,7 +18,7 @@
 
 #include "Kosmoport.hpp" 
 #include "../spaceobjects/Vehicle.hpp"
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../common/constants.hpp"
 
 #include "../dock/Angar.hpp"
@@ -137,7 +137,7 @@ void Kosmoport::ResolveData()
 
 void Kosmoport::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "kosmoport." + int2str(GetId())+".";
+    std::string root = "kosmoport." + ceti::int2str(GetId())+".";
 
     Base::SaveData(save_ptree, root);
     BaseLand::SaveData(save_ptree, root);

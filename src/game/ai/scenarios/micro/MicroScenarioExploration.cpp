@@ -19,8 +19,8 @@
 #include "MicroScenarioExploration.hpp"
 #include "../../../common/constants.hpp"
 #include "../../../common/Logger.hpp"
-#include "../../../common/myStr.hpp"
-#include <math/rand.hpp>
+#include <ceti/myStr.hpp>
+#include <meti/RandUtils.hpp>
 #include "../../../spaceobjects/Vehicle.hpp"
 
 MicroScenarioExploration::MicroScenarioExploration()
@@ -36,7 +36,7 @@ MicroScenarioExploration::~MicroScenarioExploration()
 void MicroScenarioExploration::Enter(Npc* npc) const
 {    
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + int2str(npc->GetId()) + " ENTER MicroScenarioExploration");
+    Logger::Instance().Log("npc_id=" + ceti::int2str(npc->GetId()) + " ENTER MicroScenarioExploration");
     #endif
 }
 
@@ -45,8 +45,8 @@ void MicroScenarioExploration::UpdateInStaticInSpace(Npc* npc) const
 {
     if (npc->GetVehicle()->GetComplexDrive().PathExists() == false)
     {
-        glm::vec3 target_pos = getRandXYVec3f(100, 1500, npc->GetVehicle()->GetCenter().z);
-            npc->GetVehicle()->GetComplexDrive().SetStaticTargetCoords(target_pos); 
+        glm::vec3 target_pos = meti::getRandXYVec3f(100, 1500, npc->GetVehicle()->GetCenter().z);
+        npc->GetVehicle()->GetComplexDrive().SetStaticTargetCoords(target_pos);
     }
 }
 
@@ -58,7 +58,7 @@ void MicroScenarioExploration::UpdateInDynamicInSpace(Npc* npc) const
 void MicroScenarioExploration::Exit(Npc* npc) const
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + int2str(npc->GetId()) + " EXIT MicroScenarioExploration");
+    Logger::Instance().Log("npc_id=" + ceti::int2str(npc->GetId()) + " EXIT MicroScenarioExploration");
     #endif
 }
 

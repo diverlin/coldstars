@@ -21,18 +21,19 @@
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
-#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
 
 #include <world/EntityManager.hpp>
-#include <resources/TextureCollector.hpp>
-#include <resources/MeshCollector.hpp>
+//#include <resources/TextureCollector.hpp>
+//#include <resources/MeshCollector.hpp>
 
-#include <jeti/animations/AnimationConstantRotation.hpp>
+//#include <jeti/animations/AnimationConstantRotation.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
-#include <jeti/Mesh.hpp>
+//#include <jeti/Mesh.hpp>
 
+#include <meti/RandUtils.hpp>
 
 DriveEquipmentBuilder& DriveEquipmentBuilder::Instance()
 {
@@ -74,13 +75,11 @@ DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipment(TYPE::TECHLEVEL tech
             
 void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
 {     
-    if (race_id == TYPE::RACE::NONE_ID)
-    {
-        race_id = getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+    if (race_id == TYPE::RACE::NONE_ID) {
+        race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
     }
     
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID)
-    {
+    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
@@ -88,20 +87,20 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
     //TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID);
     //glm::vec3 size = texOb->GetSize();
     
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
-    jeti::TextureOb* texOb = mesh->GetTextureOb();
+//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
+//    jeti::TextureOb* texOb = mesh->GetTextureOb();
     glm::vec3 size = glm::vec3(50);
 
     //texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 
 
-    speed_orig      = getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * (1 + EQUIPMENT::DRIVE::SPEED_TECHLEVEL_RATE * (int)tech_level);
-    hyper_orig      = getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX) * (1 + EQUIPMENT::DRIVE::HYPER_TECHLEVEL_RATE * (int)tech_level);
+    speed_orig      = meti::getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * (1 + EQUIPMENT::DRIVE::SPEED_TECHLEVEL_RATE * (int)tech_level);
+    hyper_orig      = meti::getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX) * (1 + EQUIPMENT::DRIVE::HYPER_TECHLEVEL_RATE * (int)tech_level);
 
     ItemCommonData common_data;
     common_data.tech_level         = tech_level;
-    common_data.modules_num_max     = getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
-    common_data.mass                = getRandInt(EQUIPMENT::DRIVE::MASS_MIN,        EQUIPMENT::DRIVE::MASS_MAX);
-    common_data.condition_max       = getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN,   EQUIPMENT::DRIVE::CONDITION_MAX);
+    common_data.modules_num_max     = meti::getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
+    common_data.mass                = meti::getRandInt(EQUIPMENT::DRIVE::MASS_MIN,        EQUIPMENT::DRIVE::MASS_MAX);
+    common_data.condition_max       = meti::getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN,   EQUIPMENT::DRIVE::CONDITION_MAX);
     common_data.deterioration_normal = 1;
     common_data.deterioration_overload_rate = EQUIPMENT::DRIVE::OVERLOAD_DETERIORATION_RATE;
 

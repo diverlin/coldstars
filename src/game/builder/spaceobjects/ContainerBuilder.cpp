@@ -26,6 +26,7 @@
 
 #include <items/others/GoodsPack.hpp>
 
+#include <meti/RandUtils.hpp>
 
 ContainerBuilder& ContainerBuilder::Instance()
 {
@@ -88,7 +89,7 @@ void ContainerBuilder::CreateNewInternals(Container* container, jeti::TextureOb*
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->GetSize());
  
-    float delta_angle = 0.001*getRandInt(20, 60);
+    float delta_angle = 0.001*meti::getRandInt(20, 60);
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender container->SetAnimationRotation(animation_rotation);
     

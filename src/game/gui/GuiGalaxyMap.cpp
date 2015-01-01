@@ -22,7 +22,7 @@
 #include <config/config.hpp>
 
 #include <common/constants.hpp>
-#include <common/myStr.hpp>
+#include <ceti/myStr.hpp>
 #include <types/AiScenarioTypes.hpp>
 
 #include <resources/GuiTextureObCollector.hpp>
@@ -34,6 +34,7 @@
 
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
+#include <meti/RandUtils.hpp>
 
 #include <ai/Task.hpp>
 #include <ai/StateMachine.hpp>
@@ -105,10 +106,10 @@ void GuiGalaxyMap::UpdateUnique(Player* player)
                 glm::vec3 starsystem_pos = GetAbsoluteStarSystemPosition(starsystem);
                 if (starsystem.GetId() != player->GetNpc()->GetVehicle()->GetStarSystem()->GetId())
                 {                            
-                    float ss_cursor_dist = distanceBetween(starsystem_pos, data_mouse.pos_screencoord);
+                    float ss_cursor_dist = meti::distanceBetween(starsystem_pos, data_mouse.pos_screencoord);
                     if (ss_cursor_dist < 10)
                     { 
-                        int ss_ss_dist = distanceBetween(starsystem_pos, player_starsystem_pos);
+                        int ss_ss_dist = meti::distanceBetween(starsystem_pos, player_starsystem_pos);
                         if (ss_ss_dist < player->GetNpc()->GetVehicle()->GetProperties().hyper * m_ScaleParsecToScreenCoord)
                         {
                             if (data_mouse.left_click == true)
@@ -141,7 +142,7 @@ void GuiGalaxyMap::RenderUnique(const jeti::Renderer& render, Player* player) co
         for (unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
         {       
             const StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
-            glm::vec2 starsystem_pos = vec3ToVec2(GetAbsoluteStarSystemPosition(starsystem));            
+            glm::vec2 starsystem_pos = meti::vec3ToVec2(GetAbsoluteStarSystemPosition(starsystem));
                                    
             //TextureOb* texOb_particle = TextureCollector::Instance().GetTexObByColorId(TYPE::TEXTURE::DISTANTSTAR_ID, starsystem.STAR_vec[0]->GetColorId());
             
@@ -164,13 +165,13 @@ void GuiGalaxyMap::RenderUnique(const jeti::Renderer& render, Player* player) co
 
             int font_size = 8;  
             glm::vec2 offset(0.0, 13.0);
-            jeti::Screen::Instance().DrawText(int2str(starsystem.GetId()), font_size, starsystem_pos + offset);
+            jeti::Screen::Instance().DrawText(ceti::int2str(starsystem.GetId()), font_size, starsystem_pos + offset);
         }               
     }     
     
     //render.enable_POINTSPRITE();
     {
-        glm::vec2 player_starsystem_pos = vec3ToVec2(GetAbsoluteStarSystemPosition(*player->GetNpc()->GetVehicle()->GetStarSystem())); 
+        glm::vec2 player_starsystem_pos = meti::vec3ToVec2(GetAbsoluteStarSystemPosition(*player->GetNpc()->GetVehicle()->GetStarSystem()));
         
         //drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player_starsystem_pos, 40.0, -2.0);
         

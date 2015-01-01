@@ -17,16 +17,16 @@
 */
 
 
-#ifndef BASEDECOR_HPP
-#define BASEDECOR_HPP
+#pragma once
 
-#include <common/Orientation.hpp>
+#include <jeti/Orientation.hpp>
+#include <common/Base.hpp>
 
 namespace jeti {
 class Renderer;
 }
 
-class BaseDecor : public Orientation
+class BaseDecor : public jeti::Orientation, public Base
 {
     public:
         BaseDecor() {}
@@ -34,10 +34,3 @@ class BaseDecor : public Orientation
             
         virtual void Render(const jeti::Renderer&, const glm::vec3&) = 0;
 }; 
-
-#endif 
-
-
-
-
-

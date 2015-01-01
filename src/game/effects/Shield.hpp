@@ -16,10 +16,9 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SHIELD_HPP
-#define SHIELD_HPP
+#pragma once
 
-#include "../math/myVector.hpp"
+#include <meti/VectorUtils.hpp>
 
 
 class BaseSpaceEntity;
@@ -53,9 +52,4 @@ class ShieldEffect
         BaseSpaceEntity* parent;
                 
 };
-
-#endif 
-
-
-
 

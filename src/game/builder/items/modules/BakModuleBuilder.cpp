@@ -30,6 +30,8 @@
 #include <resources/MeshCollector.hpp>
 #include <jeti/TextureOb.hpp>
 
+#include <meti/RandUtils.hpp>
+
 BakModuleBuilder& BakModuleBuilder::Instance()
 {
     static BakModuleBuilder instance;
@@ -74,7 +76,7 @@ void BakModuleBuilder::CreateNewInternals(BakModule* bak_module, int fuel_max_ad
 { 
     jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
-    fuel_max_add = getRandInt(MODULE::BAK::FUEL_MIN, MODULE::BAK::FUEL_MAX);
+    fuel_max_add = meti::getRandInt(MODULE::BAK::FUEL_MIN, MODULE::BAK::FUEL_MAX);
 
     bak_module->SetParentSubTypeId(TYPE::ENTITY::BAK_EQUIPMENT_ID);    
     // alpitodorender bak_module->SetRenderData(mesh, texOb, texOb->GetSize());

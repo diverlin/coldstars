@@ -19,7 +19,7 @@
 #include "MicroScenarioDestroy.hpp"
 #include "../../../common/constants.hpp"
 #include "../../../common/Logger.hpp"
-#include "../../../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../../../spaceobjects/Vehicle.hpp"
 #include "../../../ai/StateMachine.hpp"
 #include "../../../parts/WeaponComplex.hpp"
@@ -53,7 +53,7 @@ bool MicroScenarioDestroy::Validate(Npc* npc) const
 void MicroScenarioDestroy::Enter(Npc* npc) const
 {    
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + int2str(npc->GetId()) + " ENTER MicroScenarioDestroy");
+    Logger::Instance().Log("npc_id=" + ceti::int2str(npc->GetId()) + " ENTER MicroScenarioDestroy");
     #endif
 }
 
@@ -74,12 +74,12 @@ void MicroScenarioDestroy::UpdateInDynamicInSpace(Npc* npc) const
 void MicroScenarioDestroy::Exit(Npc* npc) const
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + int2str(npc->GetId()) + " EXIT MicroScenarioDestroy");
+    Logger::Instance().Log("npc_id=" + ceti::int2str(npc->GetId()) + " EXIT MicroScenarioDestroy");
     #endif
 }
 
 /* virtual */
 std::string MicroScenarioDestroy::GetDescription(Npc* npc) const
 {
-    return "DESTROY ob_id=" + int2str( npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId()) ;
+    return "DESTROY ob_id=" + ceti::int2str( npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId()) ;
 }

@@ -21,10 +21,15 @@ set(SFML_ROOT ${COLDSTARS_DEPENDENCIES_ROOT})
 set(GLEW_ROOT ${COLDSTARS_DEPENDENCIES_ROOT})
 set(GLM_ROOT_DIR ${COLDSTARS_DEPENDENCIES_ROOT})
 
-
-include_directories(src/game/)
 include_directories(src/)
+include_directories(src/jeti)
+include_directories(src/meti)
+include_directories(src/ceti)
+include_directories(src/game)
+
 
 add_subdirectory(src/jeti)
+add_subdirectory(src/meti)
+add_subdirectory(src/ceti)
 add_subdirectory(src/game)
                                 

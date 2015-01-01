@@ -54,6 +54,8 @@
 #include <builder/slots/ItemSlotBuilder.hpp>
 
 #include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
+
 #include <jeti/particlesystem/DriveEffect.hpp>
 
 #include <slots/ItemSlot.hpp>
@@ -159,7 +161,7 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
 
 void BaseVehicleBuilder::EquipEquipment(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) const
 {
-    unsigned int weapons_num = getRandInt(vehicle->GetDataKorpus().slot_weapon_num/2, vehicle->GetDataKorpus().slot_weapon_num);
+    unsigned int weapons_num = meti::getRandInt(vehicle->GetDataKorpus().slot_weapon_num/2, vehicle->GetDataKorpus().slot_weapon_num);
     for (unsigned int i=0; i<weapons_num; i++)
     {
         bool rand = 0; //getRandBool();
@@ -272,7 +274,7 @@ void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, TYPE::TECHLEVEL tech_lev
             return;
         }
             
-        TYPE::ENTITY module_subtype_id = getRand(MODULE_TYPES); 
+        TYPE::ENTITY module_subtype_id = meti::getRand(MODULE_TYPES);
         switch(module_subtype_id)  
         {
             case TYPE::ENTITY::LAZER_MODULE_ID:         { vehicle->AddItemToCargoSlot(LazerModuleBuilder::Instance().GetNewLazerModule()); break; }

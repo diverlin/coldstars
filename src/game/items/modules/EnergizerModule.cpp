@@ -18,7 +18,7 @@
 
 #include "EnergizerModule.hpp"
 #include "../../common/constants.hpp"
-#include "../../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../../common/Logger.hpp"
 #include "../../items/equipment/BaseEquipment.hpp"
 
@@ -42,18 +42,18 @@ void EnergizerModule::AddUniqueInfo()
     info.addTitleStr("energizer module");
     if (energy_max_add != 0)
     { 
-        info.addNameStr("energy_max_add:");  info.addValueStr( int2str(energy_max_add) );
+        info.addNameStr("energy_max_add:");  info.addValueStr( ceti::int2str(energy_max_add) );
     }
     if (restoration_add != 0)
     {
-        info.addNameStr("restoration_add:"); info.addValueStr( int2str(restoration_add) );
+        info.addNameStr("restoration_add:"); info.addValueStr( ceti::int2str(restoration_add) );
     } 
 }
 
 /*virtual*/
 void EnergizerModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "energizer_module." + int2str(GetId()) + ".";
+    std::string root = "energizer_module." + ceti::int2str(GetId()) + ".";
     
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -82,7 +82,7 @@ void EnergizerModule::Resolve()
 void EnergizerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" EnergizerModule::SaveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" EnergizerModule::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"energy_max_add", energy_max_add);
@@ -92,7 +92,7 @@ void EnergizerModule::SaveData(boost::property_tree::ptree& save_ptree, const st
 void EnergizerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" EnergizerModule::LoadData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" EnergizerModule::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     energy_max_add = load_ptree.get<int>("energy_max_add");
@@ -102,7 +102,7 @@ void EnergizerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void EnergizerModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" EnergizerModule::ResolveData()  id=" + int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" EnergizerModule::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

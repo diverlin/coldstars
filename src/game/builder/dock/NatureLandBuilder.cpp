@@ -30,6 +30,8 @@
 
 #include <common/constants.hpp>
 
+#include <meti/RandUtils.hpp>
+
 
 NatureLandBuilder& NatureLandBuilder::Instance()
 {
@@ -75,7 +77,7 @@ void NatureLandBuilder::CreateNewInternals(NatureLand* natureland) const
 {
     //natureland->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::NATURELAND_BACKGROUND_ID));
     
-    unsigned int item_slot_num = getRandInt(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
+    unsigned int item_slot_num = meti::getRandInt(NATURELAND_ITEM_SLOT_MIN, NATURELAND_ITEM_SLOT_MAX);
     for (unsigned int i=0; i<item_slot_num; i++)
     {
         ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);   

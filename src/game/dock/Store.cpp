@@ -19,7 +19,7 @@
 #include "Store.hpp"
 #include "Kosmoport.hpp"
 #include "../common/constants.hpp"
-#include "../common/myStr.hpp"
+#include <ceti/myStr.hpp>
 #include "../world/EntityManager.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../items/BaseItem.hpp"
@@ -160,7 +160,7 @@ void Store::ResolveData()
 
 void Store::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "store." + int2str(GetId())+".";
+    std::string root = "store." + ceti::int2str(GetId())+".";
     Base::SaveData(save_ptree, root);
     Room::SaveData(save_ptree, root);
     Store::SaveData(save_ptree, root);
