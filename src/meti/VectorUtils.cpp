@@ -108,6 +108,11 @@ glm::vec2 vec2(const glm::vec3& v3)
     return glm::vec2(v3.x, v3.y);
 }
 
+std::string str(const glm::vec2& v)
+{
+    return std::to_string(v.x)+","+std::to_string(v.y);
+}
+
 std::string str(const glm::vec3& v)
 {
     return std::to_string(v.x)+","+std::to_string(v.y)+","+std::to_string(v.z);
