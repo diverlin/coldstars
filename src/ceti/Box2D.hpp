@@ -16,11 +16,13 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BOX2D_HPP
-#define BOX2D_HPP
+#pragma once
 
 #include <glm/glm.hpp>
-class Rect; //tmp  hack
+
+namespace ceti {
+
+class Rect; // tmp  hack
 
 class Box2D
 {  
@@ -59,4 +61,4 @@ class Box2D
         float m_Angle;
 };
 
-#endif 
+} // namespace ceti

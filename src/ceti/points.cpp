@@ -17,36 +17,40 @@
 */
 
 #include "points.hpp"
-#include "constants.hpp"
+//#include <ceti/constants.hpp>
+
+namespace ceti {
+
+static float DEFAULT_ENTITY_ZPOS = 0.0f;
 
 Points::Points()
 {}
 
 Points::~Points()
 {}              
-                
+
 void Points::Add(glm::vec3* const point, const glm::vec3* const point_orig)
 { 
-        vector_orig.push_back(point_orig);
-        vector.push_back(point);
+    vector_orig.push_back(point_orig);
+    vector.push_back(point);
 }
-          
+
 void Points::addMidLeftPoint()
 {
-         midLeft_origin = glm::vec3(-0.5, 0.0, DEFAULT_ENTITY_ZPOS);
-         midLeft = glm::vec3(-0.5, 0.0, DEFAULT_ENTITY_ZPOS);
-         
-         vector_orig.push_back(&midLeft_origin);
-         vector.push_back(&midLeft);
+    midLeft_origin = glm::vec3(-0.5, 0.0, DEFAULT_ENTITY_ZPOS);
+    midLeft = glm::vec3(-0.5, 0.0, DEFAULT_ENTITY_ZPOS);
+
+    vector_orig.push_back(&midLeft_origin);
+    vector.push_back(&midLeft);
 }
 
 void Points::addMidFarLeftPoint()
 {
-         midFarLeft_origin = glm::vec3(-1.0, 0.0, DEFAULT_ENTITY_ZPOS);
-         midFarLeft = glm::vec3(-1.0, 0.0, DEFAULT_ENTITY_ZPOS);
-         
-         vector_orig.push_back(&midFarLeft_origin);
-         vector.push_back(&midFarLeft);
+    midFarLeft_origin = glm::vec3(-1.0, 0.0, DEFAULT_ENTITY_ZPOS);
+    midFarLeft = glm::vec3(-1.0, 0.0, DEFAULT_ENTITY_ZPOS);
+
+    vector_orig.push_back(&midFarLeft_origin);
+    vector.push_back(&midFarLeft);
 }
 
 
@@ -55,10 +59,10 @@ void Points::Update(const glm::vec3& center, const glm::vec3& angle, const glm::
     glm::vec3 pos = center;
 
     for (unsigned int i=0; i<vector.size(); i++)
-    {   
+    {
         ////// rotation around center
         vector[i]->x = uOrient.x*scale.x*vector_orig[i]->x - uOrient.y*scale.y*vector_orig[i]->y;
-        vector[i]->y = uOrient.y*scale.x*vector_orig[i]->x + uOrient.x*scale.y*vector_orig[i]->y;  
+        vector[i]->y = uOrient.y*scale.x*vector_orig[i]->x + uOrient.x*scale.y*vector_orig[i]->y;
         ////// moving to position
         vector[i]->x += pos.x;
         vector[i]->y += pos.y;
@@ -66,12 +70,12 @@ void Points::Update(const glm::vec3& center, const glm::vec3& angle, const glm::
         vector[i]->z = vector_orig[i]->z;
     }
 }        
-         
+
+} // namespace ceti
 
 
 
 
-       
 
 
 

@@ -18,6 +18,8 @@
 
 #include "rect.hpp"
 
+namespace ceti {
+
 Rect::Rect()
 {
     Set(0.0f, 0.0f, 0.0f, 0.0f);
@@ -180,3 +182,5 @@ void Rect::UpdateTopRight()
     topRight.x = bottomLeft.x + w;
     topRight.y = bottomLeft.y + h;    
 }
+
+} // namespace ceti

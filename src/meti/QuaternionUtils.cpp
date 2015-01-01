@@ -17,16 +17,35 @@
 */
 
 
-#ifndef QUATERNIONUTILS_HPP
-#define QUATERNIONUTILS_HPP
+#include "QuaternionUtils.hpp"
 
-#include <glm/glm.hpp>
-#include <glm/gtx/quaternion.hpp>
+namespace meti {
+      
+void QuatFromAngleAndAxis(glm::quat& quat, float angle, const glm::vec3& axis)
+{
+    // Here we calculate the sin( theta / 2) once for optimization
+    float result = sin(angle/2.0);
 
-void QuatFromAngleAndAxis(glm::quat&, float, const glm::vec3&);
+    // Calculate the x, y and z of the quaternion
+    quat.x = axis.x * result;
+    quat.y = axis.y * result;
+    quat.z = axis.z * result;
 
-void RotationBetweenVectors(glm::quat&, const glm::vec3&, const glm::vec3&);
+    // Calcualte the w value by cos( theta / 2 )
+    quat.w = cos(angle/2.0);
+    
+    quat = glm::normalize(quat); 
+}
 
 
 
-#endif
+// q*start = dest
+void RotationBetweenVectors(glm::quat& quat, const glm::vec3& start, const glm::vec3& dest)
+{    
+    float cosTheta = glm::dot(start, dest);
+    glm::vec3 rotationAxis = glm::cross(start, dest);
+
+    QuatFromAngleAndAxis(quat, acos(cosTheta), rotationAxis);
+}
+
+} // namespace meti

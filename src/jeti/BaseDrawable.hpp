@@ -23,20 +23,18 @@
 #include <glm/gtx/quaternion.hpp>
 
 //#include <text/InfoTable.hpp>
-#include <common/Orientation.hpp>
+#include <jeti/Orientation.hpp>
 
-class Orientation;
+namespace jeti {
 
 const glm::vec3 AXIS_X = glm::vec3(1.0f, 0.0f, 0.0f);
 const glm::vec3 AXIS_Y = glm::vec3(0.0f, 1.0f, 0.0f);
 const glm::vec3 AXIS_Z = glm::vec3(0.0f, 0.0f, 1.0f);
 
-namespace jeti {
-
+class Orientation;
 class Mesh;
 class TextureOb;
 class BaseAnimationRotation;
-
 class Renderer;
 
 class BaseDrawable
@@ -59,8 +57,8 @@ class BaseDrawable
         bool HasTextureOb() const { return (m_TextureOb != 0); }
         
         const glm::vec4& GetColor() const { return m_Color; }
-        const glm::vec3& GetCenter() const { return m_Orientation->GetCenter(); }
-        const glm::vec3& GetSize() const { return m_Orientation->GetSize(); }
+        const glm::vec3& GetCenter() const;
+        const glm::vec3& GetSize() const;
 
 //        void RenderCollisionRadius(const Renderer&) const;
 //        void RenderAxis(const Renderer&) const;

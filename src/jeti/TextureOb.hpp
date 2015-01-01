@@ -28,7 +28,6 @@
 #include <vector>
 
 namespace jeti {
-namespace video {
 
 class TextureOb
 {
@@ -70,4 +69,3 @@ class TextureOb
 void loadToVRAM(const std::string&, GLuint&, int&, int&);
             
 } // namespace jeti
-} // namespace video

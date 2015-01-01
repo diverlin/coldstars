@@ -17,12 +17,13 @@
 */
 
 
-#ifndef POINTS_H
-#define POINTS_H
+#pragma once
 
 #include <vector>
 #include <cmath>
-#include "../math/myVector.hpp"
+#include <meti/VectorUtils.hpp>
+
+namespace ceti {
 
 class Points
 {
@@ -83,6 +84,5 @@ class Points
         glm::vec3 midFarLeft;
 };
 
-#endif 
-
+} // namespace ceti
  

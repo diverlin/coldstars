@@ -24,10 +24,10 @@
 #include <Mesh.hpp>
 #include <animations/BaseAnimationRotation.hpp>
 
-#include <common/Orientation.hpp>
+#include <jeti/Orientation.hpp>
 
 #include <glm/gtx/transform.hpp>
-#include <math/QuaternionUtils.hpp>
+#include <meti/QuaternionUtils.hpp>
 
 #ifdef LOG_DRAW_ENABLED
 #include "<common/Logger.hpp>
@@ -50,6 +50,9 @@ BaseDrawable::~BaseDrawable() {
     
     delete m_AnimationRotation;
 }
+
+const glm::vec3& BaseDrawable::GetCenter() const { return m_Orientation->GetCenter(); }
+const glm::vec3& BaseDrawable::GetSize() const { return m_Orientation->GetSize(); }
 
 void BaseDrawable::ValidateResources() const
 {
@@ -115,7 +118,7 @@ bool BaseDrawable::UpdateFadeOutEffect()
 
 const glm::mat4& BaseDrawable::GetActualModelMatrix()
 {    
-    RotationBetweenVectors(m_QuatDirection, m_Mesh->GetOriginDirection(), m_Orientation->GetDirection());
+    meti::RotationBetweenVectors(m_QuatDirection, m_Mesh->GetOriginDirection(), m_Orientation->GetDirection());
     if (m_AnimationRotation != nullptr) {
         m_AnimationRotation->Update(m_QuatAnimation, m_Mesh->GetOriginDirection());
     }

@@ -19,10 +19,10 @@
 
 #pragma once
 
-#include <common/NonCopyable.hpp>
+#include <ceti/NonCopyable.hpp>
 #include <MyGl.hpp>
 
-#include <common/Box2D.hpp>           // depr
+#include <ceti/Box2D.hpp>           // depr
 #include <Fbo.hpp>
 #include <Bloom.hpp>
 #include <Shaders.hpp>
@@ -75,7 +75,7 @@ class Renderer : public NonCopyable
         void DrawMeshMultiTextured   (const Mesh&, const TextureOb&, const glm::mat4&) const;
 
         void DrawQuad(const TextureOb&, const glm::mat4&) const;
-        void DrawQuad(const TextureOb&, const Box2D&) const;
+        void DrawQuad(const TextureOb&, const ceti::Box2D&) const;
 
         void DrawPostEffectFogWar(GLuint, int, int, const glm::vec3&, const glm::vec2&, float) const;
         void DrawPostEffectShockWaves(GLuint, int, int, int, float[10][2], float[10][3], float[10]) const;

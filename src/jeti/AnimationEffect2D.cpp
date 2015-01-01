@@ -17,11 +17,11 @@
 */
 
 #include "AnimationEffect2D.hpp"
-#include <common/Box2D.hpp>
+#include <ceti/Box2D.hpp>
 
 namespace jeti {
 
-void AnimationEffect2D::Update(Box2D& box)
+void AnimationEffect2D::Update(ceti::Box2D& box)
 {
     if ((scale.x < scale_min.x) and (scale.y < scale_min.y)) {
         scale_up = true;
@@ -35,7 +35,7 @@ void AnimationEffect2D::Update(Box2D& box)
         scale -= d_scale;
     }
     
-    box.SetScale(vec3ToVec2(scale));
+    box.SetScale(meti::vec3ToVec2(scale));
 }
 
 void AnimationEffect2D::Reset()

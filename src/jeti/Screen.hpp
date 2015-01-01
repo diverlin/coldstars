@@ -22,8 +22,8 @@
 
 #include <MyGl.hpp>
 
-#include <math/myVector.hpp>
-#include <common/rect.hpp>
+#include <meti/VectorUtils.hpp>
+#include <ceti/rect.hpp>
 
 #include <Render.hpp>
 #include <Camera.hpp>
@@ -81,7 +81,7 @@ class Screen : public SFMLWrapper
         
         float scale;
         float d_scale;
-        Rect rect;
+        ceti::Rect rect;
         glm::vec2 target_center;
         
         void DrawFps();

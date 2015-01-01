@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <math/myVector.hpp>
+#include <meti/VectorUtils.hpp>
 
 #include <MyGl.hpp>
 //#include <FreeType.h>

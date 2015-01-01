@@ -18,7 +18,9 @@
 
 #pragma once
 
-#include <math/myVector.hpp>
+#include <meti/VectorUtils.hpp>
+
+namespace ceti {
 
 class Rect
 {  
@@ -66,4 +68,5 @@ class Rect
         void UpdateTopRight();
 };
 
+} // namespace ceti
 

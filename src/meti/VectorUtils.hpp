@@ -3,8 +3,7 @@
 #include <glm/glm.hpp>
 #include <string>
 
-float const RADIAN_TO_DEGREE_RATE = 180.0/M_PI;
-float const DEGREE_TO_RADIAN_RATE = M_PI/180.0;
+namespace meti {
 
 float distanceBetween(const glm::vec3& center1, const glm::vec3& center2);
 float distanceBetween(const glm::vec3& center1, const glm::vec2& center2);
@@ -31,3 +30,4 @@ glm::vec2 vec3ToVec2(const glm::vec3&);
 
 std::string str(const glm::vec3&);
 
+} // namespace meti

@@ -18,7 +18,7 @@
 
 #include "AnimationConstantRotation.hpp"
 
-#include <math/QuaternionUtils.hpp>
+#include <meti/QuaternionUtils.hpp>
 
 namespace jeti {
 
@@ -45,7 +45,7 @@ void AnimationConstantRotation::Update(glm::quat& quat, const glm::vec3& axis)
         m_Angle += 2*M_PI;
     }    
     
-    QuatFromAngleAndAxis(quat, m_Angle, axis);
+    meti::QuatFromAngleAndAxis(quat, m_Angle, axis);
 }
 
 }

@@ -20,7 +20,9 @@
 #pragma once
 
 #include <boost/property_tree/ptree.hpp>
-#include <common/points.hpp>
+#include <ceti/points.hpp>
+
+namespace jeti {
 
 struct UnresolvedDataOrientation
 {    
@@ -51,7 +53,7 @@ class Orientation
         glm::vec3* const GetpCenter() { return &m_Center; }
         const glm::vec3* const GetpParentCenter() { return &m_ParentCenter; }
                         
-        Points& GetPoints()          { return m_Points; }  // depr !!!
+        ceti::Points& GetPoints()          { return m_Points; }  // depr !!!
            
         float GetCollisionRadius() const  { return m_CollisionRadius; }
 
@@ -78,9 +80,10 @@ class Orientation
         
         glm::vec3 m_ParentCenter; 
 
-        Points m_Points;
+        ceti::Points m_Points;
                                 
 //    friend class BaseVehicleBuilder;
 //    friend class DriveComplex;
 };
 
+} // namespace jeti

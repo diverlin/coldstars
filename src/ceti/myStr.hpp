@@ -17,10 +17,11 @@
 */
 
 
-#ifndef MYSTR_HPP
-#define MYSTR_HPP
+#pragma once
 
 #include <string>
+
+namespace ceti {
 
 std::string int2str(long long int); 
 std::string bool2str(bool); 
@@ -28,4 +29,4 @@ std::string bool2str(bool);
 std::string getAiModelStr(int);
 std::string getNavigatorActionStr(int); 
 
-#endif
+} // namespace ceti

@@ -17,7 +17,7 @@
 */
 
 #include "Particle.hpp"
-#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 
 namespace jeti {
 
@@ -34,7 +34,7 @@ Particle::~Particle()
 
 void Particle::RandomizeLifeTime(float low, float high)
 {
-    float speed_rate              = getRandFloat(low, high);   // 0.5, 0.8
+    float speed_rate              = meti::getRandFloat(low, high);   // 0.5, 0.8
     m_DataParticle.d_size         *= speed_rate;
     m_DataParticle.velocity_start *= speed_rate;
 }
@@ -44,13 +44,13 @@ void Particle::Randomize_d_alpha(float val1_f, float val2_f)
     float val1_i = val1_f*10000;
     float val2_i = val2_f*10000;
         
-    m_DataParticle.color_delta.a = getRandInt(val1_i, val2_i)/1000.0;
+    m_DataParticle.color_delta.a = meti::getRandInt(val1_i, val2_i)/1000.0;
 }                
               
                 
 void Particle::CalcRandomVelocity()
 {
-    if (getRandBool() == true) {
+    if (meti::getRandBool() == true) {
         CalcRandomDirtyVelocity();
     } else {
         CalcRandomAccurateVelocity();
@@ -59,8 +59,8 @@ void Particle::CalcRandomVelocity()
 
 void Particle::CalcRandomDirtyVelocity()
 {
-    float dx_n = getRandFloat(0.1, 1.0)*getRandSign();
-    float dy_n = getRandFloat(0.1, 1.0)*getRandSign();
+    float dx_n = meti::getRandFloat(0.1, 1.0) * meti::getRandSign();
+    float dy_n = meti::getRandFloat(0.1, 1.0) * meti::getRandSign();
     
     m_Velocity.x = dx_n * m_DataParticle.velocity_start;
     m_Velocity.y = dy_n * m_DataParticle.velocity_start;
@@ -70,8 +70,8 @@ void Particle::CalcRandomDirtyVelocity()
 
 void Particle::CalcRandomAccurateVelocity()
 {
-    float _len   = getRandInt(50, 100);
-    float _angle = glm::radians((float)getRandInt(0, 360));
+    float _len   = meti::getRandInt(50, 100);
+    float _angle = glm::radians((float)meti::getRandInt(0, 360));
     
     float target_x = cos(_angle) * _len;
     float target_y = sin(_angle) * _len;
