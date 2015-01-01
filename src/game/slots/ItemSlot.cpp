@@ -530,7 +530,7 @@ bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* target) const
         return true;
     }
     
-    float dist = meti::distanceBetween(GetOwnerVehicle()->GetCenter(), target->GetCenter());
+    float dist = meti::distance(GetOwnerVehicle()->GetCenter(), target->GetCenter());
     if (dist < GetItemRadius())
     {
             return true;

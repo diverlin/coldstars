@@ -74,7 +74,7 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
             glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
             button->SetSize(size*scale);
 
-            glm::vec2 offset = meti::getVec2f(160, angle);
+            glm::vec2 offset = meti::genVec2f(160, angle);
             AddChild(button, offset*scale);
 
             angle += 20; 

@@ -66,7 +66,7 @@ Sector* Galaxy::GetClosestSectorTo(Sector* sector)
 
     for (unsigned int i=0; i<SECTOR_vec.size(); i++)
     {
-        float dist = meti::distanceBetween(sector->GetCenter(), SECTOR_vec[i]->GetCenter());
+        float dist = meti::distance(sector->GetCenter(), SECTOR_vec[i]->GetCenter());
         if (dist < dist_min)
         {
             dist_min = dist;

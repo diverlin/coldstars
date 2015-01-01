@@ -218,7 +218,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
         case TYPE::ENTITY::STARSYSTEM_ID:
         {
             float angle = M_PI/2 - meti::getAngle(meti::vec2(m_Target->GetCenter()), meti::vec2(m_OwnerVehicle->GetStarSystem()->GetCenter())); //??    use cross()
-            m_TargetPos = meti::getVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angle, m_OwnerVehicle->GetStarSystem()->GetCenter().z);
+            m_TargetPos = meti::genVec3f(ENTITY::STARSYSTEM::JUMPRADIUS, angle, m_OwnerVehicle->GetStarSystem()->GetCenter().z);
             m_TargetDistance = COLLISION_RADIUS_FOR_STATIC_COORD;
             
             break;

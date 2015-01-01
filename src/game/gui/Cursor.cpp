@@ -71,7 +71,7 @@ m_FocusedGuiElement(nullptr)
     //for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
     //{
     //float scale = 0.4;
-        //glm::vec2 pos = getVec2f(100*scale, angle);    
+        //glm::vec2 pos = genVec2f(100*scale, angle);    
     //rect.SetCenter(pos);
     //rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);                           
         //rect.Scale(scale);    

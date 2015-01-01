@@ -122,7 +122,7 @@ void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
         
             target.ApplyImpulse(impulse_dir, 0.001* GetStrength());
                 
-            float dist = meti::distanceBetween(vehicle.GetCenter(), target.GetCenter());
+            float dist = meti::distance(vehicle.GetCenter(), target.GetCenter());
             if (dist < 0.5*vehicle.GetCollisionRadius())
             {
                 switch(target.GetTypeId())

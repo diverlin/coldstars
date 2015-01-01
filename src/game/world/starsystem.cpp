@@ -330,12 +330,12 @@ Planet* StarSystem::GetClosestInhabitedPlanet(const glm::vec2& _pos) const
     if (tmp_planet_vec.size() >= 1)
     {
         requested_planet = tmp_planet_vec[0];
-        float dist_min = meti::distanceBetween(_pos, tmp_planet_vec[0]->GetCenter());
+        float dist_min = meti::distance(_pos, tmp_planet_vec[0]->GetCenter());
         if (tmp_planet_vec.size() > 1)
         {
             for (unsigned int i=1; i<tmp_planet_vec.size(); i++)
             {
-                float dist = meti::distanceBetween(_pos, tmp_planet_vec[i]->GetCenter());
+                float dist = meti::distance(_pos, tmp_planet_vec[i]->GetCenter());
                 if (dist < dist_min)
                 {
                     requested_planet = tmp_planet_vec[i];
@@ -568,7 +568,7 @@ float StarSystem::CalcResultGravityForce(const glm::vec3& center, const glm::vec
     float rate = 1; 
     for (unsigned int i=0; i<STAR_vec.size(); i++)
     {
-        float dist = meti::distanceBetween(center, STAR_vec[i]->GetCenter());
+        float dist = meti::distance(center, STAR_vec[i]->GetCenter());
         if (dist < 5*STAR_vec[i]->GetCollisionRadius())
         {
             glm::vec3 force_dir(STAR_vec[i]->GetCenter() - center);
@@ -582,7 +582,7 @@ float StarSystem::CalcResultGravityForce(const glm::vec3& center, const glm::vec
 
     for (unsigned int i=0; i<PLANET_vec.size(); i++)
     {
-        float dist = meti::distanceBetween(center, PLANET_vec[i]->GetCenter());
+        float dist = meti::distance(center, PLANET_vec[i]->GetCenter());
         if (dist < 5*PLANET_vec[i]->GetCollisionRadius())
         {
             glm::vec3 force_dir(PLANET_vec[i]->GetCenter() - center);
@@ -1031,7 +1031,7 @@ void StarSystem::StarSparkEvent(float radius) const
 {
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     {
-        if ( meti::distanceBetween(VEHICLE_vec[i]->GetCenter(), GetStar()->GetCenter()) < radius )
+        if ( meti::distance(VEHICLE_vec[i]->GetCenter(), GetStar()->GetCenter()) < radius )
         {
             if (VEHICLE_vec[i]->GetSlotRadar()->GetItem() != nullptr)
             {
@@ -1045,7 +1045,7 @@ void StarSystem::DamageEventInsideCircle(const glm::vec3& center, float radius, 
 {
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     {
-        if ( meti::distanceBetween(VEHICLE_vec[i]->GetCenter(), center) < radius )
+        if ( meti::distance(VEHICLE_vec[i]->GetCenter(), center) < radius )
         {
             VEHICLE_vec[i]->Hit(damage, show_effect); 
         }
@@ -1053,7 +1053,7 @@ void StarSystem::DamageEventInsideCircle(const glm::vec3& center, float radius, 
         
     for (unsigned int i=0; i<CONTAINER_vec.size(); i++)           
      {
-         float dist = meti::distanceBetween(CONTAINER_vec[i]->GetCenter(), center);
+         float dist = meti::distance(CONTAINER_vec[i]->GetCenter(), center);
          if (dist < radius)
          {
             glm::vec3 force_dir(CONTAINER_vec[i]->GetCenter() - center);
