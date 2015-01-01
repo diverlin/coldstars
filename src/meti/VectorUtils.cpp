@@ -110,9 +110,7 @@ glm::vec2 vec2(const glm::vec3& v3)
 
 std::string str(const glm::vec3& v)
 {
-    std::stringstream ss;
-    ss<<v.x<<","<<v.y<<","<<v.z<<".";
-    return ss.str();
+    return std::to_string(v.x)+","+std::to_string(v.y)+","+std::to_string(v.z);
 }
 
 } // namespace meti
