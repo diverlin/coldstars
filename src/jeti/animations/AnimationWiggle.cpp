@@ -19,7 +19,7 @@
 #include "AnimationWiggle.hpp"
 #include <cmath>
 
-#include <math/QuaternionUtils.hpp>
+#include <meti/QuaternionUtils.hpp>
 
 namespace jeti {
 
@@ -37,24 +37,19 @@ AnimationWiggle::~AnimationWiggle()
 /* virtual override final */
 void AnimationWiggle::Update(glm::quat& quat, const glm::vec3& axis)
 {
-    if (m_Clockwise)
-    {
+    if (m_Clockwise) {
         m_Angle += GetDeltaAngle();
-        if (m_Angle > m_Threshold)
-        {
+        if (m_Angle > m_Threshold) {
             m_Clockwise = false;
         }
-    }
-    else
-    {
+    } else {
         m_Angle -= GetDeltaAngle();
-        if (m_Angle < -m_Threshold)
-        {
+        if (m_Angle < -m_Threshold) {
             m_Clockwise = true;
         }        
     }
     
-    QuatFromAngleAndAxis(quat, m_Angle, axis);
+    meti::QuatFromAngleAndAxis(quat, m_Angle, axis);
 }
 
 }

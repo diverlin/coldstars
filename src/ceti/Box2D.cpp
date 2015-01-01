@@ -17,8 +17,10 @@
 */
 
 #include "Box2D.hpp"
-#include "Collision.hpp"
-#include "rect.hpp"
+#include <ceti/Collision.hpp>
+#include <ceti/rect.hpp>
+
+namespace ceti {
 
 Box2D::Box2D()
 :
@@ -76,3 +78,4 @@ void Box2D::Set(const Box2D& box)
     m_Angle = box.GetAngle();
 }
 
+} // namespace ceti

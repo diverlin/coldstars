@@ -18,9 +18,11 @@
 
 #pragma once
 
-#include <math/myVector.hpp>
+#include <meti/VectorUtils.hpp>
 
+namespace ceti {
 class Box2D;
+}
 
 namespace jeti {
 
@@ -42,7 +44,7 @@ class AnimationEffect2D
         const glm::vec3& GetScale() const { return scale; };
         float GetAngle() const { return angle; };
         
-        void Update(Box2D&);
+        void Update(ceti::Box2D&);
         void Reset();
         
     private:

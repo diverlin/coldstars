@@ -35,7 +35,7 @@
 #include <glm/glm.hpp> // glm::vec
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtx/transform.hpp>
-#include <math/QuaternionUtils.hpp>
+#include <meti/QuaternionUtils.hpp>
 // for ugly
 
 namespace jeti {
@@ -204,7 +204,7 @@ void Renderer::DrawQuad(const TextureOb& textureOb, const glm::mat4& ModelMatrix
     DrawMesh(*m_MeshQuad, textureOb, ModelMatrix);
 }
 
-void Renderer::DrawQuad(const TextureOb& texOb, const Box2D& box) const
+void Renderer::DrawQuad(const TextureOb& texOb, const ceti::Box2D& box) const
 {
     // ugly start
     glm::vec2 pos = box.GetCenter();

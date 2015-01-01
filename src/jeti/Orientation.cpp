@@ -16,8 +16,10 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <common/Orientation.hpp>
-#include <common/Logger.hpp>
+#include "Orientation.hpp"
+//#include <ceti/Logger.hpp>
+
+namespace jeti {
 
 Orientation::Orientation()
 :
@@ -29,9 +31,9 @@ m_IsUpdated(false)
 /* virtual */
 Orientation::~Orientation()
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Orientation("+int2str(GetId())+")");
-    #endif
+//    #if CREATEDESTROY_LOG_ENABLED == 1
+//    Logger::Instance().Log("___::~Orientation("+int2str(GetId())+")");
+//    #endif
 }
 
 void Orientation::UpdateOrientation()
@@ -53,9 +55,9 @@ void Orientation::UpdateOrientation()
 
 void Orientation::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Orientation("+int2str(GetId())+")::SaveDataUniqueOrientation", SAVELOAD_LOG_DIP);
-    #endif
+//    #if SAVELOAD_LOG_ENABLED == 1
+//    Logger::Instance().Log(" Orientation("+int2str(GetId())+")::SaveDataUniqueOrientation", SAVELOAD_LOG_DIP);
+//    #endif
         
     save_ptree.put(root+"data_unresolved_Orientation.center.x", m_Center.x);
     save_ptree.put(root+"data_unresolved_Orientation.center.y", m_Center.y);
@@ -69,9 +71,9 @@ void Orientation::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 
 void Orientation::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Orientation("+int2str(GetId())+")::LoadDataUniqueOrientation", SAVELOAD_LOG_DIP);
-    #endif
+//    #if SAVELOAD_LOG_ENABLED == 1
+//    Logger::Instance().Log(" Orientation("+int2str(GetId())+")::LoadDataUniqueOrientation", SAVELOAD_LOG_DIP);
+//    #endif
         
     data_unresolved_Orientation.center.x = load_ptree.get<float>("data_unresolved_Orientation.center.x");
     data_unresolved_Orientation.center.y = load_ptree.get<float>("data_unresolved_Orientation.center.y");
@@ -84,7 +86,9 @@ void Orientation::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Orientation::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Orientation("+int2str(GetId())+")::ResolveDataUniqueOrientation", SAVELOAD_LOG_DIP);
-    #endif
+//    #if SAVELOAD_LOG_ENABLED == 1
+//    Logger::Instance().Log(" Orientation("+int2str(GetId())+")::ResolveDataUniqueOrientation", SAVELOAD_LOG_DIP);
+//    #endif
 }
+
+} // namespace jeti

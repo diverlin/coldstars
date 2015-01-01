@@ -1,7 +1,9 @@
-#include "myVector.hpp"
-#include <math/rand.hpp>
+#include "VectorUtils.hpp"
+#include <RandUtils.hpp>
 #include <sstream>
       
+namespace meti {
+
 float distanceBetween(const glm::vec3& center1, const glm::vec3& center2)
 {
     float lx = (center2.x - center1.x);
@@ -71,22 +73,20 @@ float distanceBetween(float x1, float y1, float x2, float y2)
 
 glm::vec2 getVec2f(float length, float angle)
 {
-    angle *= DEGREE_TO_RADIAN_RATE;    
-    glm::vec2 vec(length*sin(angle), length*cos(angle));
-    
+    angle = glm::radians(angle);
+    glm::vec2 vec(length*sin(angle), length*cos(angle));    
     return vec;
 }
 
 glm::vec3 getVec3f(float length, float angle, float pos_z)
 {
-    glm::vec3 vec(length*sin(angle), length*cos(angle), pos_z);
-    
+    glm::vec3 vec(length*sin(angle), length*cos(angle), pos_z);    
     return vec;
 }
 
 float getAngleInD(const glm::vec2& v_start, const glm::vec2 v_end)  // depr
 {
-    return atan2(v_start.y - v_end.y, v_start.x - v_end.x) * RADIAN_TO_DEGREE_RATE;
+    return glm::degrees(atan2(v_start.y - v_end.y, v_start.x - v_end.x));
 }
 
 float getAngle(const glm::vec2& v_start, const glm::vec2 v_end)
@@ -96,7 +96,7 @@ float getAngle(const glm::vec2& v_start, const glm::vec2 v_end)
 
 float getAngleBetweenUnits(const glm::vec3& v1, const glm::vec3& v2)
 {
-    return acos(dotUnits(v1, v2)) * RADIAN_TO_DEGREE_RATE;
+    return glm::degrees(acos(dotUnits(v1, v2)));
 }
 
 float dotUnits(const glm::vec3& v1, const glm::vec3& v2)
@@ -117,3 +117,4 @@ std::string str(const glm::vec3& v)
     return ss.str();
 }
 
+} // namespace meti

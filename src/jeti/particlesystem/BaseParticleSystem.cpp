@@ -26,7 +26,7 @@
 
 // math
 #include <glm/gtx/transform.hpp>
-#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
 
 namespace jeti {
 

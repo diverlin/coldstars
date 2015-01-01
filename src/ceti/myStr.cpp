@@ -16,44 +16,32 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
+#include <sstream>
 
-#include <ceti/NonCopyable.hpp>
-#include <glm/glm.hpp>
+namespace ceti {
 
-namespace jeti {
-
-const float CAMERA_SPEED_MAX = 10.0f;
-const float CAMERA_INERTIA = 0.95f;
-
-class Camera : public NonCopyable
+std::string int2str(long long int val) 
 {
-    public:
-        Camera();
-        ~Camera();
-
-        const glm::vec3& GetPos() const { return m_Pos; }
-        const glm::vec3& GetEyePos() const { return m_EyePos; }
-        const glm::mat4& GetViewMatrix() const { return m_Vm; }
-         
-        void AddMoveSpeed(const glm::vec3&);
-        
-        void Update(int, int);  
-                    
-    private:
-        glm::vec3 m_EyePos;
-
-        glm::vec3 m_Pos;
-        glm::vec3 m_Dir;
-        glm::vec3 m_Up;
-        
-        float m_InertiaFactor;
-        glm::vec3 m_MoveSpeed;
-        float m_SpeedMax;
-        
-        glm::mat4 m_Vm; 
-};
-
+    if (val >= 0) {
+        std::ostringstream stm;
+        stm<<val;
+        return stm.str();
+    } else {
+        std::ostringstream stm;
+        stm<<abs(val);
+        return "-"+stm.str();
+    }
 }
 
+std::string bool2str(bool var) 
+{
+    std::ostringstream stm;
+    if (var == true) {
+        stm << "true";
+    } else {
+        stm << "false";
+    }
+    return stm.str() ;
+}
 
+} // namespace ceti

@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <math/myVector.hpp>
+#include <meti/VectorUtils.hpp>
 #include <vector>
 
 namespace jeti {

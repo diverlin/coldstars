@@ -19,11 +19,11 @@
 #include "Screen.hpp"
 #include <Render.hpp>
 
-#include <common/myStr.hpp>
+#include <ceti/myStr.hpp>
 #include <config/config.hpp>
 //#include <common/common.hpp>
 #include <constants.hpp>
-#include <math/rand.hpp> // remove
+#include <meti/RandUtils.hpp> // remove
 
 #include <iostream>
 
@@ -82,7 +82,7 @@ void Screen::DrawFps()
     
     //std::string fps_str = "FPS:" + int2str(fps) + " / game_speed: x" + int2str(Config::Instance().GAME_SPEED);
     //DrawText(fps_str, 14, glm::vec2(100, GetHeight()-10));
-    if (getRandInt(0, 30) == 0) std::cout<<"fps="<<fps<<std::endl; 
+    if (meti::getRandInt(0, 30) == 0) std::cout<<"fps="<<fps<<std::endl;
 }
     
     

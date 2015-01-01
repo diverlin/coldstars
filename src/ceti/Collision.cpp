@@ -17,7 +17,9 @@
 */
 
 #include "Collision.hpp"
-#include <math/myVector.hpp>
+#include <meti/VectorUtils.hpp>
+
+namespace ceti {
 
 bool checkCollisionDotWithCircle_DIRTY(const glm::vec2& dot, const glm::vec2& center, float radius)
 {
@@ -51,7 +53,7 @@ bool checkCollisionDotWithRectangle(const glm::vec2& dot, const glm::vec2& cente
 
 bool isPointInObserverRadius(const glm::vec2& p, const glm::vec3& observer_pos, float radius)
 {
-    float dist = distanceBetween(observer_pos, p);
+    float dist = meti::distanceBetween(observer_pos, p);
     if (dist < radius) {
         return true;
     } else {
@@ -61,7 +63,7 @@ bool isPointInObserverRadius(const glm::vec2& p, const glm::vec3& observer_pos, 
 
 bool isPointInObserverRadius(const glm::vec3& p, const glm::vec3& observer_pos, float radius)
 {
-    float dist = distanceBetween(observer_pos, p);
+    float dist = meti::distanceBetween(observer_pos, p);
     if (dist < radius) {
         return true;
     } else {
@@ -80,4 +82,5 @@ bool isLineInObserverRadius(const glm::vec3& p1, const glm::vec3& p2, const glm:
     return true;
 }
 
+} // namespace ceti
 

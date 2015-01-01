@@ -21,6 +21,8 @@
 #include <vector>
 #include <glm/glm.hpp>
 
+namespace meti {
+
 int getRandIntFromVec(const std::vector<int>&);
 
 float getRandFloat(float, float);
@@ -48,4 +50,4 @@ TYPE getRandomElement(const std::vector<TYPE>& vec)
     return vec[getRandInt(0, vec.size()-1)];
 }
 
-
+} // namespace meti

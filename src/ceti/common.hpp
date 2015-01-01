@@ -17,46 +17,36 @@
 */
 
 
-#ifndef COMMON_HPP
-#define COMMON_HPP
+#pragma once
 
 #include <string>
 
-#include <math/myVector.hpp>
+#include <meti/VectorUtils.hpp>
 
-#include <types/EntityTypes.hpp>
-#include <types/GuiTypes.hpp>
-     
-TYPE::GUI getGuiItemSlotType(TYPE::ENTITY);
-TYPE::GUI getGuiItemSlotSelectorType(TYPE::ENTITY);
+namespace ceti {
        
-int getObjectSize(int w, int h); 
-
 bool get_dPos_ToPoint(const glm::vec3&, const glm::vec3&, float, glm::vec3&);
 bool get_dPos_ToPoint(const glm::vec3&, const glm::vec3&, float, glm::vec3&, float&);
 
-template <typename T>
-inline T getMin(T val1, T val2)
-{
-    if (val1<val2)     return val1;
-    else            return val2;
-}
+//template <typename T>
+//inline T getMin(T val1, T val2)
+//{
+//    if (val1<val2)     return val1;
+//    else            return val2;
+//}
 
-template <typename T>
-inline T getMax(T val1, T val2)
-{
-    if (val1>val2)     return val1;
-    else        return val2;
-}
+//template <typename T>
+//inline T getMax(T val1, T val2)
+//{
+//    if (val1>val2)     return val1;
+//    else        return val2;
+//}
 
 template <typename T>
 inline T getMin(T val1, T val2, T val3)
 {
-    int min2 = getMin(val1, val2);
-    return getMin(min2, val3);
+    return std::min(std::min(val1, val2), val3);
 }
-
-glm::vec4 getColor4fById(int);
 
 template <typename T>
 int getIndexWithMinVal(const T* array, unsigned int size)
@@ -75,4 +65,4 @@ int getIndexWithMinVal(const T* array, unsigned int size)
     return index_min;
 }
 
-#endif
+} // namespace ceti

@@ -21,7 +21,7 @@
 #include <Mesh.hpp>
 #include <TextureOb.hpp>
 
-#include <math/myVector.hpp>
+#include <meti/VectorUtils.hpp>
 #include <glm/gtx/transform.hpp>
 
 namespace jeti {
@@ -72,7 +72,7 @@ void PathVisual::FillData(TextureOb* textureOb, int radius, int point_size)
     std::vector<glm::vec4> colors;
     std::vector<float> sizes;
 
-    float da = 4.0f * DEGREE_TO_RADIAN_RATE; 
+    float da = glm::radians(4.0f);
     for (float a=0.0f; a<=2*M_PI; a+=da)
     {
         points.push_back(glm::vec3(radius * cos(a), radius * sin(a), 0.0f));
