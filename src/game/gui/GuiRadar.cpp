@@ -90,7 +90,7 @@ void GuiRadar::RenderUnique(const jeti::Renderer& render, Player* player) const
     float range_diameter = 2*player->GetNpc()->GetVehicle()->GetProperties().radar;
     ceti::Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
     
-    range_rect.SetCenter(rect.GetCenter() + meti::vec3ToVec2(player->GetNpc()->GetVehicle()->GetCenter()) * scale);
+    range_rect.SetCenter(rect.GetCenter() + meti::vec2(player->GetNpc()->GetVehicle()->GetCenter()) * scale);
     
     //drawTexturedRect(textureOb_background, rect, -2.0);
     //drawTexturedRect(textureOb_bar, rect, -2.0);
@@ -137,7 +137,7 @@ void GuiRadar::RenderUnique(const jeti::Renderer& render, Player* player) const
             }
             
             //float scale_render = Screen::Instance().GetScale();
-            //drawParticle(rect.GetCenter() + vec3ToVec2(entity_vec[i]->GetCenter()*scale)/scale_render, size);            
+            //drawParticle(rect.GetCenter() + vec2(entity_vec[i]->GetCenter()*scale)/scale_render, size);            
         }
     }
     //render.disable_POINTSPRITE(); 

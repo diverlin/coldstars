@@ -19,7 +19,7 @@
 #include "MicroScenarioExploration.hpp"
 #include "../../../common/constants.hpp"
 #include "../../../common/Logger.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include <meti/RandUtils.hpp>
 #include "../../../spaceobjects/Vehicle.hpp"
 
@@ -36,7 +36,7 @@ MicroScenarioExploration::~MicroScenarioExploration()
 void MicroScenarioExploration::Enter(Npc* npc) const
 {    
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + ceti::int2str(npc->GetId()) + " ENTER MicroScenarioExploration");
+    Logger::Instance().Log("npc_id=" + std::to_string(npc->GetId()) + " ENTER MicroScenarioExploration");
     #endif
 }
 
@@ -58,7 +58,7 @@ void MicroScenarioExploration::UpdateInDynamicInSpace(Npc* npc) const
 void MicroScenarioExploration::Exit(Npc* npc) const
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + ceti::int2str(npc->GetId()) + " EXIT MicroScenarioExploration");
+    Logger::Instance().Log("npc_id=" + std::to_string(npc->GetId()) + " EXIT MicroScenarioExploration");
     #endif
 }
 

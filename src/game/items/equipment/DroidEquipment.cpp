@@ -18,7 +18,7 @@
 
 #include "DroidEquipment.hpp"
 #include "../../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 #include "../../items/modules/DroidModule.hpp"
 #include "../../spaceobjects/Vehicle.hpp"
@@ -89,15 +89,15 @@ void DroidEquipment::AddUniqueInfo()
 std::string DroidEquipment::GetRepairStr()
 {
         if (repair_add == 0)
-            return ceti::int2str(repair_orig);
+            return std::to_string(repair_orig);
         else
-            return ceti::int2str(repair_orig) + "+" + ceti::int2str(repair_add);
+            return std::to_string(repair_orig) + "+" + std::to_string(repair_add);
 }
 
 /*virtual*/
 void DroidEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "droid_equipment." + ceti::int2str(GetId()) + ".";
+    std::string root = "droid_equipment." + std::to_string(GetId()) + ".";
 
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -126,7 +126,7 @@ void DroidEquipment::Resolve()
 void DroidEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" DroidEquipment::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidEquipment::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
         save_ptree.put(root+"repair_orig", repair_orig);
@@ -135,7 +135,7 @@ void DroidEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std
 void DroidEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" DroidEquipment::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidEquipment::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     repair_orig = load_ptree.get<int>("repair_orig");
@@ -144,7 +144,7 @@ void DroidEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 void DroidEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" DroidEquipment::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidEquipment::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

@@ -26,7 +26,7 @@ float dotUnits(const glm::vec3& v1, const glm::vec3& v2);
 glm::vec3 getXYVec3Unit(float);
 
 
-glm::vec2 vec3ToVec2(const glm::vec3&);
+glm::vec2 vec2(const glm::vec3&);
 
 std::string str(const glm::vec3&);
 

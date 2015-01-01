@@ -19,7 +19,7 @@
 
 #include "PlanetDrawable.hpp"
 
-//#include <ceti/myStr.hpp>
+////#include <ceti/StringUtils.hpp>
 //#include <common/Logger.hpp>
   
 #include <effects/BaseDecor.hpp>
@@ -37,7 +37,7 @@ PlanetDrawable::PlanetDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
 PlanetDrawable::~PlanetDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~PlanetDrawable("+ceti::int2str(GetId())+")");
+    Logger::Instance().Log("___::~PlanetDrawable("+std::to_string(GetId())+")");
     #endif
    
 //    for (BaseDecor* decor : m_Decorations)
@@ -54,9 +54,9 @@ PlanetDrawable::~PlanetDrawable()
 //    GetInfo().clear();
     
 //    GetInfo().addTitleStr("PLANET");
-//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(ceti::int2str(GetId()) + " / " + ceti::int2str(GetStarSystem()->GetId()));
-//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(ceti::int2str(GetDataLife().armor));
-//    GetInfo().addNameStr("population:");  GetInfo().addValueStr(ceti::int2str(m_Population));
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(GetDataLife().armor));
+//    GetInfo().addNameStr("population:");  GetInfo().addValueStr(std::to_string(m_Population));
 //    GetInfo().addNameStr("dock_veh:");    GetInfo().addValueStr(m_Land->GetDockVehicleStr());
 //    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 //}

@@ -20,7 +20,7 @@
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
 #include "../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 
 #include "../resources/TextureCollector.hpp"
 #include <resources/MeshCollector.hpp>
@@ -48,7 +48,7 @@ void DistantNebulaEffect::Render(const jeti::Renderer& render, const glm::vec3&)
               
 void DistantNebulaEffect::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    std::string droot = root + "distant_nebula_effect."+ceti::int2str(GetId())+".";
+    std::string droot = root + "distant_nebula_effect."+std::to_string(GetId())+".";
     
     //BaseBackGroundEffect::SaveData(save_ptree, droot);
     DistantNebulaEffect::SaveData(save_ptree, droot);

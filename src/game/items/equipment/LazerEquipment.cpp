@@ -19,7 +19,7 @@
 #include "LazerEquipment.hpp"
 
 #include <common/constants.hpp>
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include <common/Logger.hpp>
 #include <common/Logger.hpp>
 
@@ -97,17 +97,17 @@ void LazerEquipment::AddUniqueInfo()
 std::string LazerEquipment::GetDamageStr()
 {
     if (damage_add == 0)
-        return ceti::int2str(damage_orig);
+        return std::to_string(damage_orig);
     else
-        return ceti::int2str(damage_orig) + "+" + ceti::int2str(damage_add);
+        return std::to_string(damage_orig) + "+" + std::to_string(damage_add);
 }
 
 std::string LazerEquipment::GetRadiusStr()
 {
     if (radius_add == 0)
-        return ceti::int2str(radius_orig);
+        return std::to_string(radius_orig);
     else
-        return ceti::int2str(radius_orig) + "+" + ceti::int2str(radius_add);
+        return std::to_string(radius_orig) + "+" + std::to_string(radius_add);
 }
 
 void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
@@ -155,7 +155,7 @@ void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, flo
 /*virtual*/
 void LazerEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "lazer_equipment." + ceti::int2str(GetId()) + ".";
+    std::string root = "lazer_equipment." + std::to_string(GetId()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
@@ -183,7 +183,7 @@ void LazerEquipment::Resolve()
 void LazerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LazerEquipment::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerEquipment::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"damage_orig", damage_orig);
@@ -193,7 +193,7 @@ void LazerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std
 void LazerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LazerEquipment::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerEquipment::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     damage_orig = load_ptree.get<int>("damage_orig");     
@@ -203,7 +203,7 @@ void LazerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 void LazerEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LazerEquipment::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerEquipment::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

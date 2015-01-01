@@ -18,7 +18,7 @@
 
 #include "GravityArtefact.hpp"
 #include "../../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 
 GravityArtefact::GravityArtefact(int id)
@@ -38,19 +38,19 @@ GravityArtefact::~GravityArtefact ()
 void GravityArtefact::AddUniqueInfo()
 {
     info.addTitleStr("gravity artefact");
-    info.addNameStr("gravity:");      info.addValueStr( ceti::int2str(gravity) );
+    info.addNameStr("gravity:");      info.addValueStr( std::to_string(gravity) );
 }
 
 /* virtual */
 void GravityArtefact::AddCommonInfo()
 {
-    info.addNameStr("mass:");      info.addValueStr( ceti::int2str(data_item.mass) );
+    info.addNameStr("mass:");      info.addValueStr( std::to_string(data_item.mass) );
 }
 
 /* virtual */
 void GravityArtefact::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "gravity_artefact." + ceti::int2str(GetId()) + ".";
+    std::string root = "gravity_artefact." + std::to_string(GetId()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
     GravityArtefact::SaveData(save_ptree, root);
@@ -75,7 +75,7 @@ void GravityArtefact::Resolve()
 void GravityArtefact::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GravityArtefact::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GravityArtefact::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"gravity", gravity); 
@@ -84,7 +84,7 @@ void GravityArtefact::SaveData(boost::property_tree::ptree& save_ptree, const st
 void GravityArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GravityArtefact::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GravityArtefact::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     gravity = load_ptree.get<int>("gravity");
@@ -93,6 +93,6 @@ void GravityArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
 void GravityArtefact::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GravityArtefact::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GravityArtefact::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

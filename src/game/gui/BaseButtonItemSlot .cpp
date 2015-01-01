@@ -27,7 +27,7 @@
 #include <jeti/Render.hpp>
 
 #include <common/common.hpp>
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 
     
 bool BaseButtonItemSlot::GetEquiped() const
@@ -139,7 +139,7 @@ void BaseButtonItemSlot::RenderMarkTarget() const
             //box.SetScale(1.5, 1.5);
             //drawQuadMasked(GuiTextureObCollector::Instance().slot_mark_accept, box, GuiTextureObCollector::Instance().mask_round, 1.0-0.5);
             //drawQuad(GuiTextureObCollector::Instance().mark_target_slot, box);
-            jeti::drawColoredTextWithBackground(ceti::int2str(m_ItemSlot->GetHitProbability()), /*font_size=*/12, GetBox().GetMiddleTop(), glm::ivec4(255));
+            jeti::drawColoredTextWithBackground(std::to_string(m_ItemSlot->GetHitProbability()), /*font_size=*/12, GetBox().GetMiddleTop(), glm::ivec4(255));
         }
     }
 }

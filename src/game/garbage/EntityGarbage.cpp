@@ -17,7 +17,7 @@
 */
 
 #include "EntityGarbage.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../common/Logger.hpp"
 #include "../common/Base.hpp"
 #include "../world/EntityManager.hpp"
@@ -35,12 +35,12 @@ EntityGarbage::~EntityGarbage()
 void EntityGarbage::Add(Base* entity) 
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("________EntityGarbage::Add entity " + getTypeStr(entity->GetTypeId()) + "(" +ceti::int2str(entity->GetTypeId()) +") " + getTypeStr(entity->GetSubTypeId()) + "(" + ceti::int2str(entity->GetSubTypeId()) + ") id=" + ceti::int2str(entity->GetId()));
+    Logger::Instance().Log("________EntityGarbage::Add entity " + getTypeStr(entity->GetTypeId()) + "(" +std::to_string(entity->GetTypeId()) +") " + getTypeStr(entity->GetSubTypeId()) + "(" + std::to_string(entity->GetSubTypeId()) + ") id=" + std::to_string(entity->GetId()));
     for (unsigned int i=0; i<entities_vec.size(); i++)
     {
         if (entities_vec[i]->GetId() == entity->GetId())
         {
-            Logger::Instance().Log("________EntityGarbage::Add dublicated entity found(fix that) " + getTypeStr(entities_vec[i]->GetTypeId()) + "(" +ceti::int2str(entities_vec[i]->GetTypeId()) +") " + getTypeStr(entities_vec[i]->GetSubTypeId()) + "(" + ceti::int2str(entities_vec[i]->GetSubTypeId()) + ") id=" + ceti::int2str(entities_vec[i]->GetId()));
+            Logger::Instance().Log("________EntityGarbage::Add dublicated entity found(fix that) " + getTypeStr(entities_vec[i]->GetTypeId()) + "(" +std::to_string(entities_vec[i]->GetTypeId()) +") " + getTypeStr(entities_vec[i]->GetSubTypeId()) + "(" + std::to_string(entities_vec[i]->GetSubTypeId()) + ") id=" + std::to_string(entities_vec[i]->GetId()));
             exit(0);
         }
     }
@@ -56,7 +56,7 @@ void EntityGarbage::Clear()
     { 
         EntityManager::Instance().RemoveEntity(entities_vec[i]);
         #if CREATEDESTROY_LOG_ENABLED == 1
-        Logger::Instance().Log("________EntityGarbage::Clear delete entity " + getTypeStr(entities_vec[i]->GetTypeId()) + "(" +ceti::int2str(entities_vec[i]->GetTypeId()) +") " + getTypeStr(entities_vec[i]->GetSubTypeId()) + "(" + ceti::int2str(entities_vec[i]->GetSubTypeId()) + ") id=" + ceti::int2str(entities_vec[i]->GetId()));
+        Logger::Instance().Log("________EntityGarbage::Clear delete entity " + getTypeStr(entities_vec[i]->GetTypeId()) + "(" +std::to_string(entities_vec[i]->GetTypeId()) +") " + getTypeStr(entities_vec[i]->GetSubTypeId()) + "(" + std::to_string(entities_vec[i]->GetSubTypeId()) + ") id=" + std::to_string(entities_vec[i]->GetId()));
         #endif
         EntityIdGenerator::Instance().AddFreeId(entities_vec[i]->GetId());
         delete entities_vec[i];

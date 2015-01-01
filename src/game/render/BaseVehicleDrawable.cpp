@@ -32,7 +32,7 @@ BaseVehicleDrawable::BaseVehicleDrawable(jeti::TextureOb* texture, jeti::Mesh* m
 BaseVehicleDrawable::~BaseVehicleDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BaseVehicleDrawable("+ceti::int2str(GetId())+")");
+    Logger::Instance().Log("___::~BaseVehicleDrawable("+std::to_string(GetId())+")");
     #endif
 } 
 
@@ -115,7 +115,7 @@ void BaseVehicleDrawable::RenderRadarRange()
 //    if (m_Properties.radar > VISIBLE_DISTANCE_WITHOUT_RADAR)
 //    {
 //        m_SlotRadar->UpdateRange(GuiTextureObCollector::Instance().dot_yellow);
-//        m_SlotRadar->DrawRange(vec3ToVec2(GetCenter()));
+//        m_SlotRadar->DrawRange(vec2(GetCenter()));
 //    }
 }
 
@@ -124,6 +124,6 @@ void BaseVehicleDrawable::RenderGrappleRange()
 //    if (m_Properties.grab_radius > 0)
 //    {
 //        m_SlotGrapple->UpdateRange(GuiTextureObCollector::Instance().dot_blue);
-//        m_SlotGrapple->DrawRange(vec3ToVec2(GetCenter()));
+//        m_SlotGrapple->DrawRange(vec2(GetCenter()));
 //    }
 }

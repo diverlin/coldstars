@@ -23,7 +23,7 @@
 #include <jeti/Render.hpp>
 #include "../items/BaseItem.hpp"
 #include "../slots/ItemSlot.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../common/common.hpp"
 #include <builder/slots/ItemSlotBuilder.hpp>
 

@@ -19,7 +19,7 @@
 #include "Screen.hpp"
 #include <Render.hpp>
 
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include <config/ConfigV.hpp>
 //#include <common/common.hpp>
 #include <constants.hpp>
@@ -80,7 +80,7 @@ void Screen::DrawFps()
         frames_counter++;
     }
     
-    //std::string fps_str = "FPS:" + ceti::int2str(fps) + " / game_speed: x" + ceti::int2str(Config::Instance().GAME_SPEED);
+    //std::string fps_str = "FPS:" + std::to_string(fps) + " / game_speed: x" + std::to_string(Config::Instance().GAME_SPEED);
     //DrawText(fps_str, 14, glm::vec2(100, GetHeight()-10));
     if (meti::getRandInt(0, 30) == 0) std::cout<<"fps="<<fps<<std::endl;
 }

@@ -21,7 +21,7 @@
 #include <items/modules/GrappleModule.hpp>
 
 #include <common/constants.hpp>
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include <common/Logger.hpp>
 
 #include <slots/ItemSlot.hpp>
@@ -71,7 +71,7 @@ void GrappleEquipment::AddTarget(BaseSpaceEntity* target)
         free_strength -= target->GetMass();
             
         #if GRAPPLE_QUEUE_LOG_ENABLED == 1 
-        Logger::Instance().Log("vehicle_id=" + ceti::int2str(item_slot->GetOwnerVehicle()->GetId()) + " " + getTypeStr(target->GetTypeId()) + " id = " + ceti::int2str(target->GetId()) + " grapple->AddTarget()", 2);
+        Logger::Instance().Log("vehicle_id=" + std::to_string(item_slot->GetOwnerVehicle()->GetId()) + " " + getTypeStr(target->GetTypeId()) + " id = " + std::to_string(target->GetId()) + " grapple->AddTarget()", 2);
         #endif
     }        
 }
@@ -102,7 +102,7 @@ std::string GrappleEquipment::GetTargetStr() const
     
     for (unsigned int i=0; i<target_vec.size(); i++)
     {
-        str += ceti::int2str(target_vec[i]->GetId()) + ", ";
+        str += std::to_string(target_vec[i]->GetId()) + ", ";
     }
             
     return str;
@@ -157,7 +157,7 @@ void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
         else
         {
             #if GRAPPLE_QUEUE_LOG_ENABLED == 1 
-            Logger::Instance().Log("vehicle_id=" + ceti::int2str(item_slot->GetOwnerVehicle()->GetId()) + " " + getTypeStr((*it)->GetTypeId()) + " id = " + ceti::int2str((*it)->GetId()) + " grapple->RemoveTarget()", 2);
+            Logger::Instance().Log("vehicle_id=" + std::to_string(item_slot->GetOwnerVehicle()->GetId()) + " " + getTypeStr((*it)->GetTypeId()) + " id = " + std::to_string((*it)->GetId()) + " grapple->RemoveTarget()", 2);
             #endif
                     
             it = target_vec.erase(it);
@@ -232,7 +232,7 @@ void GrappleEquipment::AddUniqueInfo()
 {        
     info.addTitleStr("GRAPPLE");
 
-    info.addNameStr("strength:");        info.addValueStr(GetStrengthStr() + "/" + ceti::int2str(free_strength));
+    info.addNameStr("strength:");        info.addValueStr(GetStrengthStr() + "/" + std::to_string(free_strength));
     info.addNameStr("radius:");          info.addValueStr(GetRadiusStr());
     info.addNameStr("speed:");           info.addValueStr(GetSpeedStr());
 }
@@ -240,31 +240,31 @@ void GrappleEquipment::AddUniqueInfo()
 std::string GrappleEquipment::GetStrengthStr()
 {
      if (strength_add == 0)
-        return ceti::int2str(strength_orig);
+        return std::to_string(strength_orig);
      else
-        return ceti::int2str(strength_orig) + "+" + ceti::int2str(strength_add);
+        return std::to_string(strength_orig) + "+" + std::to_string(strength_add);
 }
 
 std::string GrappleEquipment::GetRadiusStr()
 {
      if (radius_add == 0)
-        return ceti::int2str(radius_orig);
+        return std::to_string(radius_orig);
      else
-        return ceti::int2str(radius_orig) + "+" + ceti::int2str(radius_add);
+        return std::to_string(radius_orig) + "+" + std::to_string(radius_add);
 }
 
 std::string GrappleEquipment::GetSpeedStr()
 {
      if (speed_add == 0)
-        return ceti::int2str(speed_orig);
+        return std::to_string(speed_orig);
      else
-        return ceti::int2str(speed_orig) + "+" + ceti::int2str(speed_add);
+        return std::to_string(speed_orig) + "+" + std::to_string(speed_add);
 }
 
 /*virtual*/
 void GrappleEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "grapple_equipment." + ceti::int2str(GetId()) + ".";
+    std::string root = "grapple_equipment." + std::to_string(GetId()) + ".";
 
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -293,7 +293,7 @@ void GrappleEquipment::Resolve()
 void GrappleEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GrappleEquipment::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleEquipment::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"strength_orig", strength_orig);
@@ -304,7 +304,7 @@ void GrappleEquipment::SaveData(boost::property_tree::ptree& save_ptree, const s
 void GrappleEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GrappleEquipment::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleEquipment::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     strength_orig = load_ptree.get<int>("strength_orig");     
@@ -315,7 +315,7 @@ void GrappleEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 void GrappleEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GrappleEquipment::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleEquipment::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

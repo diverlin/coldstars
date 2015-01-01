@@ -28,7 +28,7 @@ ContainerDrawable::ContainerDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
 ContainerDrawable::~ContainerDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~ContainerDrawable("+ceti::int2str(GetId())+")");
+    Logger::Instance().Log("___::~ContainerDrawable("+std::to_string(GetId())+")");
     #endif
 }
 
@@ -37,8 +37,8 @@ ContainerDrawable::~ContainerDrawable()
 //{
 //    GetInfo().clear();
 //    GetInfo().addTitleStr("CONTAINER");
-//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(ceti::int2str(GetId()) + " / " + ceti::int2str(GetStarSystem()->GetId()));
-//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(ceti::int2str(GetDataLife().armor));
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(GetDataLife().armor));
 //    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 //}
  

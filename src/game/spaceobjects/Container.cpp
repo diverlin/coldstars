@@ -19,7 +19,7 @@
 #include "Container.hpp"
 
 #include <common/common.hpp>
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include <common/Logger.hpp>
 
 #include <world/EntityManager.hpp>
@@ -48,7 +48,7 @@ m_Velocity(0)
 Container::~Container()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Container("+ceti::int2str(GetId())+")");
+    Logger::Instance().Log("___::~Container("+std::to_string(GetId())+")");
     #endif
 }
 
@@ -69,8 +69,8 @@ void Container::UpdateInfo()
 {
     GetInfo().clear();
     GetInfo().addTitleStr("CONTAINER");
-    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(ceti::int2str(GetId()) + " / " + ceti::int2str(GetStarSystem()->GetId()));
-    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(ceti::int2str(GetDataLife().armor));
+    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(GetDataLife().armor));
     GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
 }        
  
@@ -121,7 +121,7 @@ void Container::Render(const jeti::Renderer& render)
 void Container::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Container("+ceti::int2str(GetId())+")::SaveData()", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Container("+std::to_string(GetId())+")::SaveData()", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"target_pos.x", m_TargetPos.x);
@@ -133,7 +133,7 @@ void Container::SaveData(boost::property_tree::ptree& save_ptree, const std::str
 void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Container("+ceti::int2str(GetId())+")::LoadData()", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Container("+std::to_string(GetId())+")::LoadData()", SAVELOAD_LOG_DIP);
     #endif
     
     m_TargetPos.x   = load_ptree.get<float>("target_pos.x");
@@ -145,7 +145,7 @@ void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 void Container::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Container("+ceti::int2str(GetId())+")::ResolveData()", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Container("+std::to_string(GetId())+")::ResolveData()", SAVELOAD_LOG_DIP);
     #endif
     
     ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddContainer(this, data_unresolved_Orientation.center); 
@@ -154,7 +154,7 @@ void Container::ResolveData()
 /* virtual override final */
 void Container::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "container." + ceti::int2str(GetId()) + ".";
+    const std::string root = "container." + std::to_string(GetId()) + ".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

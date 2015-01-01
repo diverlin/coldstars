@@ -20,7 +20,7 @@
 #include "../spaceobjects/Vehicle.hpp"
 #include "../world/starsystem.hpp"
 #include "../world/Sector.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
 #include "../world/EntityManager.hpp"
@@ -113,7 +113,7 @@ void Npc::UpdateInKosmoportInStatic()
 void Npc::UpdateInSpaceInStatic()
 {
 #if AI_LOG_ENABLED == 1
-    Logger::Instance().Log("Npc("+ceti::int2str(GetId())+")::UpdateInSpaceInStatic START", AI_LOG_DIP);
+    Logger::Instance().Log("Npc("+std::to_string(GetId())+")::UpdateInSpaceInStatic START", AI_LOG_DIP);
 #endif
 
     vehicle->UpdateAllFunctionalItemsInStatic();
@@ -148,7 +148,7 @@ void Npc::UpdateInSpaceInStatic()
     vehicle->GetComplexDrive().UpdatePath();
 
 #if AI_LOG_ENABLED == 1
-    Logger::Instance().Log("Npc("+ceti::int2str(GetId())+")::UpdateInSpaceInStatic END", AI_LOG_DIP);
+    Logger::Instance().Log("Npc("+std::to_string(GetId())+")::UpdateInSpaceInStatic END", AI_LOG_DIP);
 #endif
 }
 
@@ -158,7 +158,7 @@ void Npc::AddExpirience(int expirience, bool show_effect)
     
     if (show_effect == true)
     {
-        VerticalFlowText* text = new VerticalFlowText(ceti::int2str(expirience), 12, meti::vec3ToVec2(vehicle->GetCenter()), COLOR::COLOR4I_BLUE_LIGHT, 10);
+        VerticalFlowText* text = new VerticalFlowText(std::to_string(expirience), 12, meti::vec2(vehicle->GetCenter()), COLOR::COLOR4I_BLUE_LIGHT, 10);
         vehicle->GetStarSystem()->Add(text);
     }
 }
@@ -223,7 +223,7 @@ void Npc::ScenarioFireAsteroid()
 
 Planet* Npc::GetPlanetForDocking()
 {
-    return GetStarSystem()->GetClosestInhabitedPlanet(meti::vec3ToVec2(vehicle->GetCenter()));  // improove
+    return GetStarSystem()->GetClosestInhabitedPlanet(meti::vec2(vehicle->GetCenter()));  // improove
 }
 
 StarSystem* Npc::GetClosestStarSystem(int requested_condition_id)
@@ -261,14 +261,14 @@ void Npc::UpdateInfo()
     info.clear();
 
     info.addTitleStr("NPC");
-    info.addNameStr("id:");           info.addValueStr( ceti::int2str(GetId())  );
+    info.addNameStr("id:");           info.addValueStr( std::to_string(GetId())  );
     info.addNameStr("race:");         info.addValueStr( getRaceStr(race_id) );
     info.addNameStr("subype_id:");    info.addValueStr( getStr(GetSubTypeId()) );
     info.addNameStr("subsubype_id:"); info.addValueStr( getStr(GetSubSubTypeId()) );
     //info.addNameStr("model_ai:");     info.addValueStr( ceti::getAiModelStr(ai_model->GetTypeId()) );
-    info.addNameStr("credits:");      info.addValueStr( ceti::int2str(credits) );
-    info.addNameStr("expirience:");   info.addValueStr( ceti::int2str(skills.GetExpirience()) + " / " + ceti::int2str(skills.GetExpirienceNextLevel()) );
-    info.addNameStr("free skills:");  info.addValueStr( ceti::int2str(skills.GetAvailablePoints()) );
+    info.addNameStr("credits:");      info.addValueStr( std::to_string(credits) );
+    info.addNameStr("expirience:");   info.addValueStr( std::to_string(skills.GetExpirience()) + " / " + std::to_string(skills.GetExpirienceNextLevel()) );
+    info.addNameStr("free skills:");  info.addValueStr( std::to_string(skills.GetAvailablePoints()) );
 
     info.addNameStr("npc_agress:"); info.addValueStr( GetAgressorSetString() );
     
@@ -311,7 +311,7 @@ bool Npc::BuyGoods()
 
 void Npc::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "npc."+ceti::int2str(GetId())+".";
+    std::string root = "npc."+std::to_string(GetId())+".";
     Base::SaveData(save_ptree, root);
     Npc::SaveData(save_ptree, root);
 }        
@@ -413,7 +413,7 @@ std::string Npc::GetAgressorSetString() const
     std::string str;
     for (std::set<AgressorData>::iterator it = data_agressor_set.begin(); it != data_agressor_set.end(); ++it)
     {
-        str += ceti::int2str(it->npc_id) + ":" + ceti::int2str(it->counter) + " ";
+        str += std::to_string(it->npc_id) + ":" + std::to_string(it->counter) + " ";
     }
     
     return str;

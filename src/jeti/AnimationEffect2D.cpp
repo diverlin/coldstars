@@ -35,7 +35,7 @@ void AnimationEffect2D::Update(ceti::Box2D& box)
         scale -= d_scale;
     }
     
-    box.SetScale(meti::vec3ToVec2(scale));
+    box.SetScale(meti::vec2(scale));
 }
 
 void AnimationEffect2D::Reset()

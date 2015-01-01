@@ -23,7 +23,7 @@
 
 namespace ceti {
 
-std::string int2str(long long int); 
-std::string bool2str(bool); 
+std::string str(long long int); 
+std::string str(bool); 
                               
 } // namespace ceti

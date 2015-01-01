@@ -18,7 +18,7 @@
 
 #include "GoodsPack.hpp"
 #include "../../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 
 #include "../../common/IdGenerator.hpp"
@@ -50,12 +50,12 @@ void GoodsPack::AddUniqueInfo()
     info.addTitleStr("GOODS");
     switch(GetSubTypeId())
     {
-        case TYPE::ENTITY::MINERALS_ID:     { info.addNameStr("mineral:"); info.addValueStr(ceti::int2str(data_item.mass)); break; }
-        case TYPE::ENTITY::FOOD_ID:         { info.addNameStr("food:"); info.addValueStr(ceti::int2str(data_item.mass)); break; }
-        case TYPE::ENTITY::MEDICINE_ID:     { info.addNameStr("medicine:"); info.addValueStr(ceti::int2str(data_item.mass)); break; }
-        case TYPE::ENTITY::MILITARY_ID:     { info.addNameStr("military:"); info.addValueStr(ceti::int2str(data_item.mass)); break; }
-        case TYPE::ENTITY::DRUG_ID:         { info.addNameStr("drug:"); info.addValueStr(ceti::int2str(data_item.mass)); break; }
-        case TYPE::ENTITY::EXCLUSIVE_ID:     { info.addNameStr("exclusive:"); info.addValueStr(ceti::int2str(data_item.mass)); break; }
+        case TYPE::ENTITY::MINERALS_ID:     { info.addNameStr("mineral:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+        case TYPE::ENTITY::FOOD_ID:         { info.addNameStr("food:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+        case TYPE::ENTITY::MEDICINE_ID:     { info.addNameStr("medicine:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+        case TYPE::ENTITY::MILITARY_ID:     { info.addNameStr("military:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+        case TYPE::ENTITY::DRUG_ID:         { info.addNameStr("drug:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+        case TYPE::ENTITY::EXCLUSIVE_ID:     { info.addNameStr("exclusive:"); info.addValueStr(std::to_string(data_item.mass)); break; }
         
         default: { info.addNameStr("UNKNOWN:"); info.addValueStr("fix the bug"); break; }
     }
@@ -64,14 +64,14 @@ void GoodsPack::AddUniqueInfo()
 /* virtual */    
 void GoodsPack::AddCommonInfo()
 {
-    //info.addNameStr("mass:");      info.addValueStr( ceti::int2str(data_item.mass) );
+    //info.addNameStr("mass:");      info.addValueStr( std::to_string(data_item.mass) );
 }
 
  
 /*virtual*/
 void GoodsPack::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "goods_pack." + ceti::int2str(GetId()) + ".";
+    std::string root = "goods_pack." + std::to_string(GetId()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
     GoodsPack::SaveData(save_ptree, root);
@@ -96,21 +96,21 @@ void GoodsPack::Resolve()
 void GoodsPack::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GoodsPack::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GoodsPack::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
          
 void GoodsPack::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GoodsPack::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GoodsPack::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void GoodsPack::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GoodsPack::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GoodsPack::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

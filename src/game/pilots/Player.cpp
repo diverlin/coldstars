@@ -26,7 +26,7 @@
 #include "../world/EntityManager.hpp"
 
 #include <math/rand.hpp>
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../common/TurnTimer.hpp"
 #include "../common/Logger.hpp"
 
@@ -212,9 +212,9 @@ void Player::AddIfVisible(ShockWaveEffect* effect)
 
 void Player::AddIfVisible(LazerTraceEffect* effect)
 {
-    if ( (isPointOnScreen(meti::vec3ToVec2(effect->GetStartPos())) == true)
+    if ( (isPointOnScreen(meti::vec2(effect->GetStartPos())) == true)
          or
-       (isPointOnScreen(meti::vec3ToVec2(effect->GetEndPos())) == true) )
+       (isPointOnScreen(meti::vec2(effect->GetEndPos())) == true) )
     {
         if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
         {
@@ -335,7 +335,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
             {
                 if (turn_timer.GetTurnEnded() == true)
                 {
-                    jeti::Screen::Instance().InitiateScrollTo(meti::vec3ToVec2(npc->GetVehicle()->GetCenter()));
+                    jeti::Screen::Instance().InitiateScrollTo(meti::vec2(npc->GetVehicle()->GetCenter()));
                     turn_timer.NextTurn();                
                 }
             }
@@ -347,7 +347,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
         {
             if (turn_timer.GetTurnEnded() == true)
             {
-                jeti::Screen::Instance().InitiateScrollTo(meti::vec3ToVec2(npc->GetVehicle()->GetCenter()));
+                jeti::Screen::Instance().InitiateScrollTo(meti::vec2(npc->GetVehicle()->GetCenter()));
                 turn_timer.NextTurn();                
             }
             
@@ -709,7 +709,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distanceBetween(meti::vec3ToVec2(visible_SATELLITE_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distanceBetween(meti::vec2(visible_SATELLITE_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SATELLITE_vec[i]->GetCollisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
@@ -759,7 +759,7 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distanceBetween(meti::vec3ToVec2(visible_ASTEROID_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distanceBetween(meti::vec2(visible_ASTEROID_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_ASTEROID_vec[i]->GetCollisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_ASTEROID_vec[i]);        
@@ -788,7 +788,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SHIP_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distanceBetween(meti::vec3ToVec2(visible_SHIP_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distanceBetween(meti::vec2(visible_SHIP_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SHIP_vec[i]->GetCollisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);    
@@ -849,7 +849,7 @@ bool Player::MouseInteractionWithBlackHoles(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
     { 
-        float cursor_dist = meti::distanceBetween(meti::vec3ToVec2(visible_BLACKHOLE_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float cursor_dist = meti::distanceBetween(meti::vec2(visible_BLACKHOLE_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (cursor_dist < visible_BLACKHOLE_vec[i]->GetCollisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_BLACKHOLE_vec[i]); 
@@ -865,7 +865,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distanceBetween(meti::vec3ToVec2(visible_SPACESTATION_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distanceBetween(meti::vec2(visible_SPACESTATION_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SPACESTATION_vec[i]); 
@@ -915,7 +915,7 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_PLANET_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distanceBetween(meti::vec3ToVec2(visible_PLANET_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distanceBetween(meti::vec2(visible_PLANET_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_PLANET_vec[i]->GetCollisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_PLANET_vec[i]); 
@@ -1073,7 +1073,7 @@ void Player::RenderAxis(const jeti::Renderer& render) const
 
 void Player::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "player."+ceti::int2str(GetId())+".";
+    std::string root = "player."+std::to_string(GetId())+".";
     
     Base::SaveData(save_ptree, root);
     Player::SaveData(save_ptree, root);    

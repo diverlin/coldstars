@@ -22,7 +22,7 @@
 #include "../common/constants.hpp"
 #include "../world/EntityManager.hpp"
 #include <meti/RandUtils.hpp>
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
 
@@ -149,7 +149,7 @@ void Sector::ResolveData()
 
 void Sector::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "sector." + ceti::int2str(GetId())+".";
+    std::string root = "sector." + std::to_string(GetId())+".";
 
     Base::SaveData(save_ptree, root);
     Sector::SaveData(save_ptree, root);

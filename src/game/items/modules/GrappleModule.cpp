@@ -18,7 +18,7 @@
 
 #include "GrappleModule.hpp"
 #include "../../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 
 GrappleModule::GrappleModule(int id)
@@ -43,26 +43,26 @@ void GrappleModule::AddUniqueInfo()
         info.addTitleStr("grapple module");
         if (strength_add != 0)
         {
-            info.addNameStr("strength_add:");    info.addValueStr( ceti::int2str(strength_add) );
+            info.addNameStr("strength_add:");    info.addValueStr( std::to_string(strength_add) );
         }
         if (radius_add != 0)
         { 
-            info.addNameStr("radius_add:");      info.addValueStr( ceti::int2str(radius_add) );
+            info.addNameStr("radius_add:");      info.addValueStr( std::to_string(radius_add) );
         } 
         if (speed_add != 0)
         {
-            info.addNameStr("speed_add:");       info.addValueStr( ceti::int2str(speed_add) );
+            info.addNameStr("speed_add:");       info.addValueStr( std::to_string(speed_add) );
         }
         if (maxNumItem_add != 0)
         {
-            info.addNameStr("maxNumItem_add:");  info.addValueStr( ceti::int2str(maxNumItem_add) );
+            info.addNameStr("maxNumItem_add:");  info.addValueStr( std::to_string(maxNumItem_add) );
         }
 }
 
 /*virtual*/
 void GrappleModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "grapple_module." + ceti::int2str(GetId()) + ".";
+    std::string root = "grapple_module." + std::to_string(GetId()) + ".";
 
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -91,7 +91,7 @@ void GrappleModule::Resolve()
 void GrappleModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GrappleModule::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleModule::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"strength_add", strength_add);
@@ -103,7 +103,7 @@ void GrappleModule::SaveData(boost::property_tree::ptree& save_ptree, const std:
 void GrappleModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GrappleModule::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleModule::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     strength_add = load_ptree.get<int>("strength_add");
@@ -115,7 +115,7 @@ void GrappleModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void GrappleModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GrappleModule::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleModule::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

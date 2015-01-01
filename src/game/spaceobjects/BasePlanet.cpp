@@ -22,7 +22,7 @@
 #include <jeti/Render.hpp>
 
 #include <common/Logger.hpp> 
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 
 
 BasePlanet::BasePlanet()
@@ -32,7 +32,7 @@ BasePlanet::BasePlanet()
 BasePlanet::~BasePlanet()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BasePlanet("+ceti::int2str(GetId())+")");
+    Logger::Instance().Log("___::~BasePlanet("+std::to_string(GetId())+")");
     #endif
 }
 
@@ -75,7 +75,7 @@ void BasePlanet::RenderStuffWhenFocusedInSpace(const jeti::Renderer& render)
 void BasePlanet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BasePlanet("+ceti::int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BasePlanet("+std::to_string(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"data.m_Orbit_center.x", m_DataPlanet.orbit_center.x);
@@ -92,7 +92,7 @@ void BasePlanet::SaveData(boost::property_tree::ptree& save_ptree, const std::st
 void BasePlanet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BasePlanet("+ceti::int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BasePlanet("+std::to_string(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
     
     m_DataPlanet.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");    
@@ -109,7 +109,7 @@ void BasePlanet::LoadData(const boost::property_tree::ptree& load_ptree)
 void BasePlanet::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BasePlanet("+ceti::int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BasePlanet("+std::to_string(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
 }
 

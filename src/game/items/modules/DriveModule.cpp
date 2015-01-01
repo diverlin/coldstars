@@ -18,7 +18,7 @@
 
 #include "DriveModule.hpp"
 #include "../../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 
 DriveModule::DriveModule(int id)
@@ -41,12 +41,12 @@ void DriveModule::AddUniqueInfo()
     info.addTitleStr("drive module"); 
     if (speed_add != 0)
     { 
-        info.addNameStr("speed_add:");       info.addValueStr( ceti::int2str(speed_add) );
+        info.addNameStr("speed_add:");       info.addValueStr( std::to_string(speed_add) );
     } 
     
     if (hyper_add != 0)
     { 
-        info.addNameStr("hyper_add:");       info.addValueStr( ceti::int2str(hyper_add) );
+        info.addNameStr("hyper_add:");       info.addValueStr( std::to_string(hyper_add) );
     }
 }
 
@@ -54,7 +54,7 @@ void DriveModule::AddUniqueInfo()
 /*virtual*/
 void DriveModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "drive_module." + ceti::int2str(GetId()) + ".";
+    std::string root = "drive_module." + std::to_string(GetId()) + ".";
     
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -83,7 +83,7 @@ void DriveModule::Resolve()
 void DriveModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" DriveModule::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DriveModule::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"speed_add", speed_add);
@@ -93,7 +93,7 @@ void DriveModule::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 void DriveModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" DriveModule::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DriveModule::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     speed_add = load_ptree.get<int>("speed_add");
@@ -103,7 +103,7 @@ void DriveModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void DriveModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" DriveModule::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DriveModule::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

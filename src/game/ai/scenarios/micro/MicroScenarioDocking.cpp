@@ -19,7 +19,7 @@
 #include "MicroScenarioDocking.hpp"
 #include "../../../common/constants.hpp"
 #include "../../../common/Logger.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../../spaceobjects/Vehicle.hpp"
 #include "../../../ai/StateMachine.hpp"
 #include "../../../pilots/Npc.hpp"
@@ -39,7 +39,7 @@ void MicroScenarioDocking::Enter(Npc* npc) const
     npc->GetVehicle()->GetComplexDrive().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::DOCKING_ID);
 
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log( "npc_id="+ceti::int2str(npc->GetId())+" ENTER MicroScenarioDocking", 1);
+    Logger::Instance().Log( "npc_id="+std::to_string(npc->GetId())+" ENTER MicroScenarioDocking", 1);
     #endif
 }
 
@@ -81,12 +81,12 @@ void MicroScenarioDocking::UpdateInDynamicInSpace(Npc* npc) const
 void MicroScenarioDocking::Exit(Npc* npc) const 
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id="+ceti::int2str( npc->GetId())+" EXIT MicroScenarioDocking", 1);
+    Logger::Instance().Log("npc_id="+std::to_string( npc->GetId())+" EXIT MicroScenarioDocking", 1);
     #endif
 }
 
 /* virtual */
 std::string MicroScenarioDocking::GetDescription(Npc* npc) const
 {
-    return "MicroScenarioDocking to ob_id = " + ceti::int2str( npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId());
+    return "MicroScenarioDocking to ob_id = " + std::to_string( npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId());
 }

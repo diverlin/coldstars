@@ -18,7 +18,7 @@
 
 #include "RadarEquipment.hpp"
 #include "../../common/constants.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
 #include "../../items//modules/RadarModule.hpp"
 
@@ -35,7 +35,7 @@ radius_orig(0)
 RadarEquipment::~RadarEquipment() 
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~RadarEquipment("+ceti::int2str(GetId())+")");
+    Logger::Instance().Log("___::~RadarEquipment("+std::to_string(GetId())+")");
     #endif    
 }
 
@@ -75,15 +75,15 @@ void RadarEquipment::AddUniqueInfo()
 std::string RadarEquipment::GetRadiusStr()
 {
     if (radius_add == 0)
-        return ceti::int2str(radius_orig);
+        return std::to_string(radius_orig);
     else
-        return ceti::int2str(radius_orig) + "+" + ceti::int2str(radius_add);
+        return std::to_string(radius_orig) + "+" + std::to_string(radius_add);
 }
 
 /*virtual*/
 void RadarEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "radar_equipment." + ceti::int2str(GetId()) + ".";
+    std::string root = "radar_equipment." + std::to_string(GetId()) + ".";
 
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -112,7 +112,7 @@ void RadarEquipment::Resolve()
 void RadarEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RadarEquipment::SaveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RadarEquipment::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"radius_orig", radius_orig);
@@ -121,7 +121,7 @@ void RadarEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std
 void RadarEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RadarEquipment::LoadData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RadarEquipment::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     radius_orig = load_ptree.get<int>("radius_orig");   
@@ -130,7 +130,7 @@ void RadarEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 void RadarEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RadarEquipment::ResolveData()  id=" + ceti::int2str(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RadarEquipment::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
    

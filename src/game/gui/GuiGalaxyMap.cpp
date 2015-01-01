@@ -22,7 +22,7 @@
 #include <config/config.hpp>
 
 #include <common/constants.hpp>
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include <types/AiScenarioTypes.hpp>
 
 #include <resources/GuiTextureObCollector.hpp>
@@ -142,7 +142,7 @@ void GuiGalaxyMap::RenderUnique(const jeti::Renderer& render, Player* player) co
         for (unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
         {       
             const StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
-            glm::vec2 starsystem_pos = meti::vec3ToVec2(GetAbsoluteStarSystemPosition(starsystem));
+            glm::vec2 starsystem_pos = meti::vec2(GetAbsoluteStarSystemPosition(starsystem));
                                    
             //TextureOb* texOb_particle = TextureCollector::Instance().GetTexObByColorId(TYPE::TEXTURE::DISTANTSTAR_ID, starsystem.STAR_vec[0]->GetColorId());
             
@@ -165,13 +165,13 @@ void GuiGalaxyMap::RenderUnique(const jeti::Renderer& render, Player* player) co
 
             int font_size = 8;  
             glm::vec2 offset(0.0, 13.0);
-            jeti::Screen::Instance().DrawText(ceti::int2str(starsystem.GetId()), font_size, starsystem_pos + offset);
+            jeti::Screen::Instance().DrawText(std::to_string(starsystem.GetId()), font_size, starsystem_pos + offset);
         }               
     }     
     
     //render.enable_POINTSPRITE();
     {
-        glm::vec2 player_starsystem_pos = meti::vec3ToVec2(GetAbsoluteStarSystemPosition(*player->GetNpc()->GetVehicle()->GetStarSystem()));
+        glm::vec2 player_starsystem_pos = meti::vec2(GetAbsoluteStarSystemPosition(*player->GetNpc()->GetVehicle()->GetStarSystem()));
         
         //drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_player->texture, player_starsystem_pos, 40.0, -2.0);
         

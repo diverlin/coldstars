@@ -3,7 +3,7 @@
 #include <iostream>
 #include "items/equipment/RadarEquipment.hpp"
 #include <meti/RandUtils.hpp>
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 
 void pureTest1()
 {
@@ -50,7 +50,7 @@ void pureTest3()
 {	
 	//unsigned long int uli = 5286255174080033224;
 	//std::cout<<uli<<std::endl;
-	//std::cout<<int2str(uli)<<std::endl;
+	//std::cout<<str(uli)<<std::endl;
 	
 	exit(0);		
 }

@@ -20,7 +20,7 @@
 #include <jeti/Render.hpp>
 #include "../common/constants.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../gui/ButtonSingle.hpp"
 #include "../gui/ButtonTrigger.hpp"
 #include "../gui/MouseData.hpp"
@@ -153,12 +153,12 @@ void Slider::Render() const
 
     {
         //glm::vec2 pos(rect.GetBottomLeft().x + rect.GetWidth()/2 - 20 + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
-        //Screen::Instance().DrawText(ceti::int2str(ammount_selected)+" :"+ceti::int2str(price_selected) + "$", 12, pos);
+        //Screen::Instance().DrawText(std::to_string(ammount_selected)+" :"+std::to_string(price_selected) + "$", 12, pos);
     }
 
     {
         //glm::vec2 pos(rect.GetBottomLeft().x + rect.GetWidth() - 20 + GetOffset().x, rect.GetBottomLeft().y + rect.GetHeight() + GetOffset().y);
-        //Screen::Instance().DrawText(ceti::int2str(ammount_total), 12, pos);
+        //Screen::Instance().DrawText(std::to_string(ammount_total), 12, pos);
     }    
     
     //RenderButtons();

@@ -20,7 +20,7 @@
 
 #include <common/constants.hpp>
 #include <math/rand.hpp>
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include <common/Logger.hpp>
  
 #include <world/starsystem.hpp>
@@ -46,7 +46,7 @@ Asteroid::Asteroid(int id)
 Asteroid::~Asteroid()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Asteroid("+ceti::int2str(GetId())+")");
+    Logger::Instance().Log("___::~Asteroid("+std::to_string(GetId())+")");
     #endif
 }
 
@@ -95,31 +95,31 @@ void Asteroid::UpdateInfo()
     GetInfo().clear();
 
     GetInfo().addTitleStr("ASTEROID");
-    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(ceti::int2str(GetId()) + " / " + ceti::int2str(GetStarSystem()->GetId()));
-    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(ceti::int2str(GetDataLife().armor));
-    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(ceti::int2str(GetMass()));
-    GetInfo().addNameStr("speed x 100:"); GetInfo().addValueStr(ceti::int2str(int(GetDataPlanet().speed*100)));
+    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(GetDataLife().armor));
+    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
+    GetInfo().addNameStr("speed x 100:"); GetInfo().addValueStr(std::to_string(int(GetDataPlanet().speed*100)));
     GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
 }     
 
 void Asteroid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Asteroid("+ceti::int2str(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Asteroid("+std::to_string(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void Asteroid::LoadData(const boost::property_tree::ptree& ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Asteroid("+ceti::int2str(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Asteroid("+std::to_string(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void Asteroid::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Asteroid("+ceti::int2str(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Asteroid("+std::to_string(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, GetParent(), data_unresolved_BasePlanet.orbit_it); 
@@ -128,7 +128,7 @@ void Asteroid::ResolveData()
 /* virtual override final */    
 void Asteroid::Save(boost::property_tree::ptree& save_ptree) const        
 {
-    std::string root = "asteroid." + ceti::int2str(GetId())+".";
+    std::string root = "asteroid." + std::to_string(GetId())+".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

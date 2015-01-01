@@ -166,7 +166,7 @@ void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
         {                    
             m_FocusedSpaceObject->RenderStuffWhenFocusedInSpace(render);
             
-            ceti::Box2D box(meti::vec3ToVec2(m_FocusedSpaceObject->GetCenter()), meti::vec3ToVec2(m_FocusedSpaceObject->GetSize()));
+            ceti::Box2D box(meti::vec2(m_FocusedSpaceObject->GetCenter()), meti::vec2(m_FocusedSpaceObject->GetSize()));
             box.SetScale(scale, scale);
             //box.SetAngle(m_FocusedSpaceObject->GetAngle().z);
             

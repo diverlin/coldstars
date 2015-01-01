@@ -30,7 +30,7 @@
 
 #include "GuiBar.hpp"
 
-#include <ceti/myStr.hpp>
+//#include <ceti/StringUtils.hpp>
 #include "../common/constants.hpp"
 #include "../common/GameDate.hpp"
 #include "../common/Logger.hpp"
@@ -259,7 +259,7 @@ void GuiSpace::Resize(int screen_w, int screen_h)
 
 void GuiSpace::RenderText(const glm::vec2& scroll_coords) const
 {
-    const std::string _coord_str = "date:"+ GameDate::Instance().GetDate().GetStr()+" world coord: " + ceti::int2str(scroll_coords.x) + "," + ceti::int2str(scroll_coords.y);
+    const std::string _coord_str = "date:"+ GameDate::Instance().GetDate().GetStr()+" world coord: " + std::to_string(scroll_coords.x) + "," + std::to_string(scroll_coords.y);
     glm::vec2 pos(jeti::Screen::Instance().GetWidth() - 400, jeti::Screen::Instance().GetHeight() - 5);
 
     jeti::Screen::Instance().DrawText(_coord_str, 12, pos);

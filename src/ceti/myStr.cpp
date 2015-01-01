@@ -20,7 +20,7 @@
 
 namespace ceti {
 
-std::string int2str(long long int val) 
+std::string str(long long int val) 
 {
     if (val >= 0) {
         std::ostringstream stm;
@@ -33,7 +33,7 @@ std::string int2str(long long int val)
     }
 }
 
-std::string bool2str(bool var) 
+std::string str(bool var) 
 {
     std::ostringstream stm;
     if (var == true) {
