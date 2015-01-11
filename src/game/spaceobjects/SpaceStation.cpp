@@ -34,7 +34,6 @@
 
 #include <pilots/Npc.hpp>
 
-#include <jeti/Render.hpp>
 
 
 SpaceStation::SpaceStation(int id)
@@ -83,47 +82,47 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
     }
 }
 
-/* virtual override final */
-void SpaceStation::UpdateInfo()
-{
-    GetInfo().clear();
+///* virtual override final */
+//void SpaceStation::UpdateInfo()
+//{
+//    GetInfo().clear();
 
-    GetInfo().addTitleStr("StarBase" + getStr(GetSubTypeId()));
+//    GetInfo().addTitleStr("StarBase" + getStr(GetSubTypeId()));
 
-    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
-    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(GetId()));
-    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
-    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
-} 
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+//    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(GetId()));
+//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
+//}
 
-void SpaceStation::UpdateRenderStuff_2D()
-{
-    //points.update(); 
-    GetComplexProtector().GetShieldEffect()->Update();
+//void SpaceStation::UpdateRenderStuff_2D()
+//{
+//    //points.update();
+//    GetComplexProtector().GetShieldEffect()->Update();
     
-    //if (ableTo.DRIVE == true)
-    //{
-        //drive_trail->update();
-    //}
-}
+//    //if (ableTo.DRIVE == true)
+//    //{
+//        //drive_trail->update();
+//    //}
+//}
 
-void SpaceStation::RenderInSpace(const jeti::Renderer& render, float scale)
-{     
-    //UpdateRenderStuff_2D();
+//void SpaceStation::RenderInSpace(const jeti::Renderer& render, float scale)
+//{
+//    //UpdateRenderStuff_2D();
         
-    RenderKorpus(render);
+//    RenderKorpus(render);
         
-    //if (GetDataKorpus().draw_turrels == true)
-    //{
-        //GetComplexWeapon().RenderTurrels();
-    //}
+//    //if (GetDataKorpus().draw_turrels == true)
+//    //{
+//        //GetComplexWeapon().RenderTurrels();
+//    //}
     
-    //if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
-    //{
-        //RenderShieldEffect(1.0 - GetColor().a); 
-        //GetStarSystem()->RestoreSceneColor();
-    //}
-}
+//    //if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
+//    //{
+//        //RenderShieldEffect(1.0 - GetColor().a);
+//        //GetStarSystem()->RestoreSceneColor();
+//    //}
+//}
 
 void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {

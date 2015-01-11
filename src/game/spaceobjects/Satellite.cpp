@@ -53,7 +53,7 @@ void Satellite::BindParent(const BaseSpaceEntity* const parent)
 void Satellite::UpdateInSpace(int time, bool show_effect)
 {
     CheckDeath(show_effect);
-    UpdateRenderStuff(); 
+//    UpdateRenderStuff();
     if (time > 0)
     {
         m_Orbit.UpdatePosition();
@@ -77,49 +77,49 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
     }
 }
 
-void Satellite::UpdateInfo()
-{
-    GetInfo().clear();
+//void Satellite::UpdateInfo()
+//{
+//    GetInfo().clear();
 
-    GetInfo().addTitleStr("SATELLITE");
+//    GetInfo().addTitleStr("SATELLITE");
 
-    //GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(starsystem->GetId()));
-    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(GetId()));
-    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
-    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
-}
+//    //GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(starsystem->GetId()));
+//    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(GetId()));
+//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
+//}
             
-void Satellite::UpdateRenderStuff()
-{
-    GetComplexProtector().GetShieldEffect()->Update();    
-    UpdateOrientation();
-}
+//void Satellite::UpdateRenderStuff()
+//{
+//    GetComplexProtector().GetShieldEffect()->Update();
+//    UpdateOrientation();
+//}
 
-void Satellite::RenderInSpace(const jeti::Renderer& render, float scale)
-{      
-    RenderKorpus(render);
+//void Satellite::RenderInSpace(const jeti::Renderer& render, float scale)
+//{
+//    RenderKorpus(render);
     
-    //if (GetDataKorpus().draw_turrels == true)
-    //{
-        //GetComplexWeapon().RenderTurrels();
-    //}
+//    //if (GetDataKorpus().draw_turrels == true)
+//    //{
+//        //GetComplexWeapon().RenderTurrels();
+//    //}
 
-    //if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
-    //{
-        //RenderShieldEffect(1.0 - GetColor().a); 
-        //GetStarSystem()->RestoreSceneColor();
-    //}
-}
+//    //if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
+//    //{
+//        //RenderShieldEffect(1.0 - GetColor().a);
+//        //GetStarSystem()->RestoreSceneColor();
+//    //}
+//}
 
-void Satellite::RenderAtPlanet(const jeti::Renderer& render)
-{
-    RenderKorpus(render);
+//void Satellite::RenderAtPlanet(const jeti::Renderer& render)
+//{
+//    RenderKorpus(render);
     
-    //if (GetDataKorpus().draw_turrels == true)
-    //{
-        //GetComplexWeapon().RenderTurrels();
-    //}
-}        
+//    //if (GetDataKorpus().draw_turrels == true)
+//    //{
+//        //GetComplexWeapon().RenderTurrels();
+//    //}
+//}
 
 
 void Satellite::SaveData(boost::property_tree::ptree&, const std::string&) const

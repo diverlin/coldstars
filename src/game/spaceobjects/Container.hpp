@@ -17,16 +17,15 @@
 */
 
 
-#ifndef CONTAINER_HPP
-#define CONTAINER_HPP
+#pragma once
 
 #include <spaceobjects/BaseSpaceEntity.hpp>
 
 class ItemSlot;
 
-namespace jeti {
-class Renderer;
-}
+//namespace jeti {
+//class Renderer;
+//}
 
 class Container : public BaseSpaceEntity
 {
@@ -39,13 +38,13 @@ class Container : public BaseSpaceEntity
         
         ItemSlot* const GetItemSlot() const { return m_ItemSlot; }
 
-        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
+//        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
         
         virtual void PostDeathUniqueEvent(bool) override final;
             
         void UpdateInSpace(int, bool);
 
-        void Render(const jeti::Renderer&);
+//        void Render(const jeti::Renderer&);
                             
         virtual void Save(boost::property_tree::ptree&) const override final;
         virtual void Load(const boost::property_tree::ptree&) override final;
@@ -57,7 +56,7 @@ class Container : public BaseSpaceEntity
         glm::vec3 m_TargetPos;        
         float m_Velocity;
 
-        virtual void UpdateInfo() override final; 
+//        virtual void UpdateInfo() override final;
          
         virtual void PutChildsToGarbage() const override final;
                         
@@ -66,4 +65,4 @@ class Container : public BaseSpaceEntity
         void ResolveData();
 };
 
-#endif 
+

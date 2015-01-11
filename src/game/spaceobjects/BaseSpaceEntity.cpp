@@ -17,9 +17,9 @@
 */
 
 #include "BaseSpaceEntity.hpp"
-#include "../resources/MeshCollector.hpp"
-#include "../resources/TextureCollector.hpp"
-#include "../resources/GuiTextureObCollector.hpp"
+//#include "../resources/MeshCollector.hpp"
+//#include "../resources/TextureCollector.hpp"
+//#include "../resources/GuiTextureObCollector.hpp"
 #include "../common/constants.hpp"
 #include <math/rand.hpp>
 #include "../common/common.hpp"
@@ -28,8 +28,8 @@
 #include "../world/starsystem.hpp"
 #include "../text/VerticalFlowText.hpp" 
 #include "../common/Logger.hpp"
-#include <jeti/Render.hpp>
-#include <jeti/animations/BaseAnimationRotation.hpp>
+//#include <jeti/Render.hpp>
+//#include <jeti/animations/BaseAnimationRotation.hpp>
 
 #include <jeti/Screen.hpp>
 
@@ -95,19 +95,19 @@ void BaseSpaceEntity::CheckDeath(bool show_effect)
     }  
 }
 
-/* virtual */        
-void BaseSpaceEntity::RenderInfoInSpace(const jeti::Renderer&, const glm::vec2& scroll_coords, float scale)
-{ 
-    UpdateInfo(); // virtual
-    glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
-    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, pos/scale);
-}
+///* virtual */
+//void BaseSpaceEntity::RenderInfoInSpace(const jeti::Renderer&, const glm::vec2& scroll_coords, float scale)
+//{
+//    UpdateInfo(); // virtual
+//    glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
+//    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, pos/scale);
+//}
 
-void BaseSpaceEntity::RenderInfo(const glm::vec2& center)
-{ 
-    UpdateInfo(); // virtual
-    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, center);
-}
+//void BaseSpaceEntity::RenderInfo(const glm::vec2& center)
+//{
+//    UpdateInfo(); // virtual
+//    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, center);
+//}
     
 void BaseSpaceEntity::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {

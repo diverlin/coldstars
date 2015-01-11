@@ -17,10 +17,10 @@
 */
 
 
-#ifndef GARBAGEEFFECTS_H
-#define GARBAGEEFFECTS_H
+#pragma once
 
 #include <vector>
+
 class LazerTraceEffect; 
 class ShockWaveEffect; 
 
@@ -38,16 +38,15 @@ class GarbageEffects
         
         void add(LazerTraceEffect*);
         void add(jeti::BaseParticleSystem*);
-        void add(ShockWaveEffect*);        
+        void add(ShockWaveEffect*);
         void add(VerticalFlowText*);
         
         void clear();
-    
+
     private:
-            std::vector<LazerTraceEffect*>   effect_LAZERTRACE_vec;
-            std::vector<jeti::BaseParticleSystem*> effect_PARTICLESYSTEM_vec;
-            std::vector<ShockWaveEffect*>    effect_SHOCKWAVE_vec;            
-            std::vector<VerticalFlowText*> text_DAMAGE_vec;          
+        std::vector<LazerTraceEffect*> effect_LAZERTRACE_vec;
+        std::vector<jeti::BaseParticleSystem*> effect_PARTICLESYSTEM_vec;
+        std::vector<ShockWaveEffect*> effect_SHOCKWAVE_vec;
+        std::vector<VerticalFlowText*> text_DAMAGE_vec;
 };
-             
-#endif 
+

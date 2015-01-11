@@ -66,7 +66,7 @@ class RocketBullet : public BaseSpaceEntity
         BulletData m_DataBullet;
         jeti::DriveEffect* m_EffectDrive;
         
-        virtual void UpdateInfo() override final; 
+//        virtual void UpdateInfo() override final;
         
         virtual void PutChildsToGarbage() const override final {}
                 

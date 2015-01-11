@@ -28,7 +28,7 @@
 //#include <ceti/StringUtils.hpp>
 #include <common/Logger.hpp>
 
-#include <jeti/Render.hpp>
+//#include <jeti/Render.hpp>
 
 #include <resources/GuiTextureObCollector.hpp>
 
@@ -64,7 +64,7 @@
 #include <dock/Store.hpp>
 #include <dock/NatureLand.hpp>
 
-#include <jeti/Render.hpp>
+//#include <jeti/Render.hpp>
 
 #include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
@@ -1170,83 +1170,83 @@ void Vehicle::UpdateArtefactInfluence()
     }
 }
 
-/* virtual override final */
-void Vehicle::RenderStuffWhenFocusedInSpace(const jeti::Renderer& render)
-{
-    m_ComplexWeapon.RenderWeaponIcons();
+///* virtual override final */
+//void Vehicle::RenderStuffWhenFocusedInSpace(const jeti::Renderer& render)
+//{
+//    m_ComplexWeapon.RenderWeaponIcons();
     
-    RenderRadarRange(); 
-    m_ComplexWeapon.RenderWeaponsRange(); 
+//    RenderRadarRange();
+//    m_ComplexWeapon.RenderWeaponsRange();
     
-    m_ComplexDrive.DrawPath(render); 
-}
+//    m_ComplexDrive.DrawPath(render);
+//}
 
-/* virtual override final */               
-void Vehicle::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
-{  
-    UpdateInfo(); // virtual
-    glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
-    pos /= zoom;
-    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
-    if (m_OwnerNpc != nullptr)
-    {
-        glm::vec2 pos2(pos.x + 300, pos.y);
-        m_OwnerNpc->RenderInfo(pos2);
-    }
-}
+///* virtual override final */
+//void Vehicle::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
+//{
+//    UpdateInfo(); // virtual
+//    glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
+//    pos /= zoom;
+//    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
+//    if (m_OwnerNpc != nullptr)
+//    {
+//        glm::vec2 pos2(pos.x + 300, pos.y);
+//        m_OwnerNpc->RenderInfo(pos2);
+//    }
+//}
 
-void Vehicle::RenderInfo(const glm::vec2& center, int offset_x, int offset_y)
-{  
-    UpdateInfo(); // virtual
-    glm::vec2 pos(center.x - offset_x, center.y - offset_y);
-    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
+//void Vehicle::RenderInfo(const glm::vec2& center, int offset_x, int offset_y)
+//{
+//    UpdateInfo(); // virtual
+//    glm::vec2 pos(center.x - offset_x, center.y - offset_y);
+//    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
 
-    if (m_OwnerNpc != nullptr)
-    {
-        m_OwnerNpc->RenderInfo(glm::vec2(center.x + 190 - offset_x, center.y - offset_y));
-    }
-}
+//    if (m_OwnerNpc != nullptr)
+//    {
+//        m_OwnerNpc->RenderInfo(glm::vec2(center.x + 190 - offset_x, center.y - offset_y));
+//    }
+//}
 
-void Vehicle::RenderGrabTrail(const jeti::Renderer& render) const
-{
-    //m_SlotGrapple->GetGrappleEquipment()->RenderGrabTrail(render);
-}
+//void Vehicle::RenderGrabTrail(const jeti::Renderer& render) const
+//{
+//    //m_SlotGrapple->GetGrappleEquipment()->RenderGrabTrail(render);
+//}
         
-void Vehicle::RenderKorpus(const jeti::Renderer& render)
-{
-    //render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
-    //alpitodorender render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-}
+//void Vehicle::RenderKorpus(const jeti::Renderer& render)
+//{
+//    //render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
+//    //alpitodorender render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+//}
 
-void Vehicle::RenderDriveEffect(float scale, float parent_d_alpha) const
-{
-    m_ComplexDrive.GetDriveEffect()->Update();
-    //m_ComplexDrive.GetDriveEffect()->Render(scale, parent_d_alpha);
-}
+//void Vehicle::RenderDriveEffect(float scale, float parent_d_alpha) const
+//{
+//    m_ComplexDrive.GetDriveEffect()->Update();
+//    //m_ComplexDrive.GetDriveEffect()->Render(scale, parent_d_alpha);
+//}
 
 
-void Vehicle::RenderShieldEffect(const jeti::Renderer& renderer, float parent_d_alpha) const
-{
-    m_ComplexProtector.GetShieldEffect()->Render(renderer, parent_d_alpha);
-}
+//void Vehicle::RenderShieldEffect(const jeti::Renderer& renderer, float parent_d_alpha) const
+//{
+//    m_ComplexProtector.GetShieldEffect()->Render(renderer, parent_d_alpha);
+//}
 
-void Vehicle::RenderRadarRange()
-{
-    if (m_Properties.radar > VISIBLE_DISTANCE_WITHOUT_RADAR)
-    {
-        m_SlotRadar->UpdateRange(GuiTextureObCollector::Instance().dot_yellow);
-        m_SlotRadar->DrawRange(meti::vec2(GetCenter()));
-    }
-}
+//void Vehicle::RenderRadarRange()
+//{
+//    if (m_Properties.radar > VISIBLE_DISTANCE_WITHOUT_RADAR)
+//    {
+//        m_SlotRadar->UpdateRange(GuiTextureObCollector::Instance().dot_yellow);
+//        m_SlotRadar->DrawRange(meti::vec2(GetCenter()));
+//    }
+//}
 
-void Vehicle::RenderGrappleRange()
-{
-    if (m_Properties.grab_radius > 0)
-    {
-        m_SlotGrapple->UpdateRange(GuiTextureObCollector::Instance().dot_blue);
-        m_SlotGrapple->DrawRange(meti::vec2(GetCenter()));
-    }
-}
+//void Vehicle::RenderGrappleRange()
+//{
+//    if (m_Properties.grab_radius > 0)
+//    {
+//        m_SlotGrapple->UpdateRange(GuiTextureObCollector::Instance().dot_blue);
+//        m_SlotGrapple->DrawRange(meti::vec2(GetCenter()));
+//    }
+//}
 
 bool Vehicle::IsAbleToJumpTo(StarSystem* target_starsystem) const
 {

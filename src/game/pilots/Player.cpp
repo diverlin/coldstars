@@ -457,7 +457,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
                 {
                     for(Container* container : visible_CONTAINER_vec)
                     {
-                        container->Render(render);
+                        //container->Render(render);
                     }
 
                     for(Satellite* satellite : visible_SATELLITE_vec)
@@ -603,12 +603,12 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
         
             if (show.GetRangeRadar() == true)
             {
-                npc->GetVehicle()->RenderRadarRange();
+                //npc->GetVehicle()->RenderRadarRange();
             }
         
             if ( (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
             {
-                npc->GetVehicle()->RenderGrappleRange();
+                //npc->GetVehicle()->RenderGrappleRange();
             }
         }
     

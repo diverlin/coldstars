@@ -33,7 +33,6 @@
 
 #include <pilots/Npc.hpp>
 
-#include <jeti/Render.hpp>
 #include <jeti/TextureOb.hpp>
 
 
@@ -53,43 +52,43 @@ Ship::~Ship()
 } 
 
 
-/* virtual override final */
-void Ship::UpdateInfo()
-{
-    GetInfo().clear();
+///* virtual override final */
+//void Ship::UpdateInfo()
+//{
+//    GetInfo().clear();
 
-    GetInfo().addTitleStr("SHIP");
-    if (GetStarSystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()) ); }
-    else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( std::to_string(GetId()) ); }
-    // alpitodorender GetInfo().addNameStr("race:");          GetInfo().addValueStr( getRaceStr(GetTextureOb().GetAssociation().race_id) );
-    GetInfo().addNameStr("class:");         GetInfo().addValueStr( getStr(GetSubSubTypeId()) );
-    GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( std::to_string(GetDataLife().armor) + "/" + std::to_string(GetDataKorpus().armor) );
-//    alpitodorender GetInfo().addNameStr("size id:");       GetInfo().addValueStr( std::to_string(GetTextureOb().GetData().size_id) );
-    GetInfo().addNameStr("space/free:");    GetInfo().addValueStr( std::to_string(GetDataKorpus().space) + "/" + std::to_string(GetProperties().free_space) );
-    GetInfo().addNameStr("mass:");          GetInfo().addValueStr( std::to_string(GetMass()) );
-    GetInfo().addNameStr("speedx100:");     GetInfo().addValueStr( std::to_string(GetProperties().speed*100) );
-    GetInfo().addNameStr("speed dmx100:");  GetInfo().addValueStr( std::to_string(GetMass()*MASS_DECREASE_SPEED_RATE*100));
-    GetInfo().addNameStr("energy:");        GetInfo().addValueStr( std::to_string(GetProperties().energy) );
-    GetInfo().addNameStr("temp.:");         GetInfo().addValueStr( std::to_string(GetDataKorpus().temperature) );
-    GetInfo().addNameStr("radar:");         GetInfo().addValueStr( std::to_string(GetProperties().radar) );
-    GetInfo().addNameStr("protect:");       GetInfo().addValueStr( std::to_string(GetProperties().protection) );
-    GetInfo().addNameStr("repair:");        GetInfo().addValueStr( std::to_string(GetProperties().repair) );
-    GetInfo().addNameStr("scan:");          GetInfo().addValueStr( std::to_string(GetProperties().scan) );
-    GetInfo().addNameStr("price:");         GetInfo().addValueStr( std::to_string(GetDataKorpus().price) );
-    GetInfo().addNameStr("pos:");           GetInfo().addValueStr( meti::str(GetCenter()) );
+//    GetInfo().addTitleStr("SHIP");
+//    if (GetStarSystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()) ); }
+//    else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( std::to_string(GetId()) ); }
+//    // alpitodorender GetInfo().addNameStr("race:");          GetInfo().addValueStr( getRaceStr(GetTextureOb().GetAssociation().race_id) );
+//    GetInfo().addNameStr("class:");         GetInfo().addValueStr( getStr(GetSubSubTypeId()) );
+//    GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( std::to_string(GetDataLife().armor) + "/" + std::to_string(GetDataKorpus().armor) );
+////    alpitodorender GetInfo().addNameStr("size id:");       GetInfo().addValueStr( std::to_string(GetTextureOb().GetData().size_id) );
+//    GetInfo().addNameStr("space/free:");    GetInfo().addValueStr( std::to_string(GetDataKorpus().space) + "/" + std::to_string(GetProperties().free_space) );
+//    GetInfo().addNameStr("mass:");          GetInfo().addValueStr( std::to_string(GetMass()) );
+//    GetInfo().addNameStr("speedx100:");     GetInfo().addValueStr( std::to_string(GetProperties().speed*100) );
+//    GetInfo().addNameStr("speed dmx100:");  GetInfo().addValueStr( std::to_string(GetMass()*MASS_DECREASE_SPEED_RATE*100));
+//    GetInfo().addNameStr("energy:");        GetInfo().addValueStr( std::to_string(GetProperties().energy) );
+//    GetInfo().addNameStr("temp.:");         GetInfo().addValueStr( std::to_string(GetDataKorpus().temperature) );
+//    GetInfo().addNameStr("radar:");         GetInfo().addValueStr( std::to_string(GetProperties().radar) );
+//    GetInfo().addNameStr("protect:");       GetInfo().addValueStr( std::to_string(GetProperties().protection) );
+//    GetInfo().addNameStr("repair:");        GetInfo().addValueStr( std::to_string(GetProperties().repair) );
+//    GetInfo().addNameStr("scan:");          GetInfo().addValueStr( std::to_string(GetProperties().scan) );
+//    GetInfo().addNameStr("price:");         GetInfo().addValueStr( std::to_string(GetDataKorpus().price) );
+//    GetInfo().addNameStr("pos:");           GetInfo().addValueStr( meti::str(GetCenter()) );
         
-    if (GetProperties().grab_radius > 0)
-    {
-        std::string grab_str = GetSlotGrapple()->GetGrappleEquipment()->GetTargetStr();
-        if (grab_str.size() > 0)
-        {
-            GetInfo().addNameStr("grab_id:");           GetInfo().addValueStr( grab_str ); 
-        }
-    }
+//    if (GetProperties().grab_radius > 0)
+//    {
+//        std::string grab_str = GetSlotGrapple()->GetGrappleEquipment()->GetTargetStr();
+//        if (grab_str.size() > 0)
+//        {
+//            GetInfo().addNameStr("grab_id:");           GetInfo().addValueStr( grab_str );
+//        }
+//    }
 
-    //info.addNameStr("attackR:");           info.addValueStr( boost::lexical_cast<std::string>(propetries.attack_rate_normalized) );    
-    //info.addNameStr("defenceR:");           info.addValueStr( boost::lexical_cast<std::string>(propetries.defence_rate_normalized) );    
-}
+//    //info.addNameStr("attackR:");           info.addValueStr( boost::lexical_cast<std::string>(propetries.attack_rate_normalized) );
+//    //info.addNameStr("defenceR:");           info.addValueStr( boost::lexical_cast<std::string>(propetries.defence_rate_normalized) );
+//}
 
 /* virtual override final */
 void Ship::UpdateInSpace(int time, bool show_effect)
@@ -115,45 +114,45 @@ GetComplexDrive().UpdatePosition(); // debug
     }
 }
 
-void Ship::RenderInSpace(const jeti::Renderer& render, float scale)
-{   
-    //if (GetProperties().grab_radius > 0)
-    //{
-        //RenderGrabTrail(render);
-    //}
+//void Ship::RenderInSpace(const jeti::Renderer& render, float scale)
+//{
+//    //if (GetProperties().grab_radius > 0)
+//    //{
+//        //RenderGrabTrail(render);
+//    //}
         
-    RenderKorpus(render);
+//    RenderKorpus(render);
     
-    //if (GetDataKorpus().draw_turrels == true)
-    //{
-        //GetComplexWeapon().RenderTurrels();
-    //}
+//    //if (GetDataKorpus().draw_turrels == true)
+//    //{
+//        //GetComplexWeapon().RenderTurrels();
+//    //}
     
-    //if (GetProperties().speed > 0)
-    //{
-        //RenderDriveEffect(scale , 1.0 - GetColor().a);
-        //GetStarSystem()->RestoreSceneColor();
-    //}
+//    //if (GetProperties().speed > 0)
+//    //{
+//        //RenderDriveEffect(scale , 1.0 - GetColor().a);
+//        //GetStarSystem()->RestoreSceneColor();
+//    //}
     
-//    if (GetProperties().shield_effect_enabled == true)
-//    {
-//        RenderShieldEffect(render, 1.0f - GetColor().a);
-//    }
-}
+////    if (GetProperties().shield_effect_enabled == true)
+////    {
+////        RenderShieldEffect(render, 1.0f - GetColor().a);
+////    }
+//}
 
-void Ship::RenderAtPlanet(const jeti::Renderer& render, const glm::vec3& center)
-{
-    SetCenter(center);
-    //SetAngleZ(0);
-    UpdateOrientation();
+//void Ship::RenderAtPlanet(const jeti::Renderer& render, const glm::vec3& center)
+//{
+//    SetCenter(center);
+//    //SetAngleZ(0);
+//    UpdateOrientation();
     
-    RenderKorpus(render);
+//    RenderKorpus(render);
     
-    if (GetDataKorpus().draw_turrels == true)
-    {
-        GetComplexWeapon().RenderTurrels();
-    }
-}        
+//    if (GetDataKorpus().draw_turrels == true)
+//    {
+//        GetComplexWeapon().RenderTurrels();
+//    }
+//}
 
 void Ship::SaveData(boost::property_tree::ptree&, const std::string&) const
 {
