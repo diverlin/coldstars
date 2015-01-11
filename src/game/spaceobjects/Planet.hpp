@@ -17,8 +17,7 @@
 */
 
 
-#ifndef PLANET_HPP
-#define PLANET_HPP
+#pragma once
 
 #include "BasePlanet.hpp"
 
@@ -52,7 +51,7 @@ class Planet : public BasePlanet
         
         virtual void PutChildsToGarbage() const override final;
         
-        virtual void UpdateInfo() override final;
+//        virtual void UpdateInfo() override final;
         
         void PostDeathUniqueEvent(bool);
         
@@ -61,7 +60,7 @@ class Planet : public BasePlanet
         void ResolveData();
 }; 
  
-#endif 
+
 
 
 

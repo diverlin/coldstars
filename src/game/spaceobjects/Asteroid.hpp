@@ -39,7 +39,7 @@ class Asteroid : public BasePlanet
     private:          
         void PostDeathUniqueEvent(bool);
 
-        virtual void UpdateInfo() override final;
+//        virtual void UpdateInfo() override final;
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;        
         void LoadData(const boost::property_tree::ptree&);

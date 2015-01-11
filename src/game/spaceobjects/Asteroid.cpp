@@ -89,18 +89,18 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
                     
 }    
   
-/* virtual override final */
-void Asteroid::UpdateInfo()
-{   
-    GetInfo().clear();
+///* virtual override final */
+//void Asteroid::UpdateInfo()
+//{
+//    GetInfo().clear();
 
-    GetInfo().addTitleStr("ASTEROID");
-    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
-    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(GetDataLife().armor));
-    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
-    GetInfo().addNameStr("speed x 100:"); GetInfo().addValueStr(std::to_string(int(GetDataPlanet().speed*100)));
-    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
-}     
+//    GetInfo().addTitleStr("ASTEROID");
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(GetDataLife().armor));
+//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
+//    GetInfo().addNameStr("speed x 100:"); GetInfo().addValueStr(std::to_string(int(GetDataPlanet().speed*100)));
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
+//}
 
 void Asteroid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {

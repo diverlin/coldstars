@@ -54,7 +54,7 @@ class Star : public BasePlanet
         int m_TurnSinceLastSparkCounter;
         int m_TurnSparkThreshold;
         
-        virtual void UpdateInfo() override final;
+//        virtual void UpdateInfo() override final;
         virtual void PostDeathUniqueEvent(bool) override final;
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;        

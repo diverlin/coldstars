@@ -22,18 +22,18 @@
 #include <common/Base.hpp>
 #include <jeti/Orientation.hpp>
 #include <struct/LifeData.hpp>
-#include <text/InfoTable.hpp>
+//#include <text/InfoTable.hpp>
 #include <types/PlaceTypes.hpp>
 
 class StarSystem;
-class Mesh;
-class TextureOb;
+//class Mesh;
+//class TextureOb;
 class Vehicle;
-class AnimationBase;
+//class AnimationBase;
 
-namespace jeti {
-class Renderer;
-}
+//namespace jeti {
+//class Renderer;
+//}
 
 struct UnresolvedDataBaseSpaceEntity
 {
@@ -76,16 +76,16 @@ class BaseSpaceEntity : public jeti::Orientation, public Base
         virtual void Hit(int, bool);
         void SilentKill();
         
-        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) {};
-        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float);
-        void RenderInfo(const glm::vec2&);
-        void virtual UpdateInfo() {}    
+//        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) {};
+//        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float);
+//        void RenderInfo(const glm::vec2&);
+//        void virtual UpdateInfo() {}
                 
     protected:
         void SetMass(float mass) { m_Mass = mass; }
         void ChangeMass(int d_mass) { m_Mass += d_mass; }
         
-        InfoTable& GetInfo() { return m_Info; }
+//        InfoTable& GetInfo() { return m_Info; }
         LifeData& GetDataLife() { return m_DataLife; }
         const LifeData& GetDataLife() const { return m_DataLife; }
         
@@ -108,7 +108,7 @@ class BaseSpaceEntity : public jeti::Orientation, public Base
         StarSystem* m_Starsystem;
         TYPE::PLACE m_PlaceTypeId;
 
-        InfoTable m_Info;
+        //InfoTable m_Info;
 
         int m_Mass;
         int m_GiveExpirience;

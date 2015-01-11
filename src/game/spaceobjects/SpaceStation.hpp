@@ -17,8 +17,7 @@
 */
    
    
-#ifndef SPACESTATION_HPP
-#define SPACESTATION_HPP
+#pragma once
 
 #include <spaceobjects/Vehicle.hpp>
 #include <dock/BaseLand.hpp>
@@ -36,7 +35,7 @@ class SpaceStation : public Vehicle
         
         virtual void UpdateInSpace(int, bool) override final;
         
-        void RenderInSpace(const jeti::Renderer&, float);
+//        void RenderInSpace(const jeti::Renderer&, float);
               
         virtual void Save(boost::property_tree::ptree&) const override final;
         virtual void Load(const boost::property_tree::ptree&) override final;
@@ -45,8 +44,8 @@ class SpaceStation : public Vehicle
     private:
         BaseLand* m_Land;
 
-        void UpdateRenderStuff_2D();            
-        virtual void UpdateInfo() override final;  
+//        void UpdateRenderStuff_2D();
+//        virtual void UpdateInfo() override final;
             
         virtual void PutChildsToGarbage() const override final;
             
@@ -56,5 +55,5 @@ class SpaceStation : public Vehicle
 };
 
 
-#endif 
+
 

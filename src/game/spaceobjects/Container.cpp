@@ -25,7 +25,7 @@
 #include <world/EntityManager.hpp>
 #include <world/starsystem.hpp>
 
-#include <jeti/Render.hpp>
+//#include <jeti/Render.hpp>
 
 #include <jeti/particlesystem/ExplosionEffect.hpp>
 
@@ -64,27 +64,27 @@ void Container::BindItemSlot(ItemSlot* item_slot)
     m_ItemSlot->SetOwner(this); 
 }
 
-/* virtual override final */
-void Container::UpdateInfo()  
-{
-    GetInfo().clear();
-    GetInfo().addTitleStr("CONTAINER");
-    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
-    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(GetDataLife().armor));
-    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
-}        
+///* virtual override final */
+//void Container::UpdateInfo()
+//{
+//    GetInfo().clear();
+//    GetInfo().addTitleStr("CONTAINER");
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(GetDataLife().armor));
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
+//}
  
-/* virtual override final */           
-void Container::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
-{
-    UpdateInfo();
-    glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
-    pos /= zoom;
-    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
+///* virtual override final */
+//void Container::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
+//{
+//    UpdateInfo();
+//    glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
+//    pos /= zoom;
+//    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     
-    pos.x += 300;
-    m_ItemSlot->GetItem()->RenderInfo(render, pos);
-}
+//    pos.x += 300;
+//    m_ItemSlot->GetItem()->RenderInfo(render, pos);
+//}
  
 /* virtual override final */   
 void Container::PostDeathUniqueEvent(bool show_effect)
@@ -113,10 +113,10 @@ void Container::UpdateInSpace(int time, bool show_effect)
     }
 }
                
-void Container::Render(const jeti::Renderer& render)
-{ 
-    //alpitodorender render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
-}
+//void Container::Render(const jeti::Renderer& render)
+//{
+//    //alpitodorender render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+//}
 
 void Container::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    
 {

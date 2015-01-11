@@ -17,8 +17,7 @@
 */
 
 
-#ifndef BLACKHOLE_HPP
-#define BLACKHOLE_HPP
+#pragma once
 
 #include <effects/ShockWaveEffect.hpp> //depr
 #include <spaceobjects/BasePlanet.hpp>
@@ -44,12 +43,12 @@ class BlackHole : public BasePlanet
     private:
         ShockWaveEffect* shockwave;
         
-        void UpdateInfo();    
+//        void UpdateInfo();
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;        
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();
 };
 
-#endif 
+
 

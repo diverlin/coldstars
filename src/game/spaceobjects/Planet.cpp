@@ -96,18 +96,18 @@ void Planet::UpdateInSpaceInStatic()
     m_Land->UpdateInStatic();
 }
 
-/* virtual override final */
-void Planet::UpdateInfo()
-{
-    GetInfo().clear();
+///* virtual override final */
+//void Planet::UpdateInfo()
+//{
+//    GetInfo().clear();
     
-    GetInfo().addTitleStr("PLANET");
-    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
-    GetInfo().addNameStr("armor:");        GetInfo().addValueStr(std::to_string(GetDataLife().armor));
-    GetInfo().addNameStr("population:");  GetInfo().addValueStr(std::to_string(m_Population));
-    GetInfo().addNameStr("dock_veh:");    GetInfo().addValueStr(m_Land->GetDockVehicleStr());
-    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
-}
+//    GetInfo().addTitleStr("PLANET");
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+//    GetInfo().addNameStr("armor:");        GetInfo().addValueStr(std::to_string(GetDataLife().armor));
+//    GetInfo().addNameStr("population:");  GetInfo().addValueStr(std::to_string(m_Population));
+//    GetInfo().addNameStr("dock_veh:");    GetInfo().addValueStr(m_Land->GetDockVehicleStr());
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
+//}
 
 void Planet::PostDeathUniqueEvent(bool)
 {}

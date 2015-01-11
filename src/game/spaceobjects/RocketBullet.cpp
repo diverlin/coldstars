@@ -26,11 +26,11 @@
 #include <world/EntityManager.hpp>
 #include <world/starsystem.hpp>
 
-#include <jeti/particlesystem/DriveEffect.hpp>
-#include <jeti/particlesystem/ExplosionEffect.hpp>
+//#include <jeti/particlesystem/DriveEffect.hpp>
+//#include <jeti/particlesystem/ExplosionEffect.hpp>
 
-#include <text/VerticalFlowText.hpp> 
-#include <jeti/TextureOb.hpp>
+//#include <text/VerticalFlowText.hpp>
+
 
 
 RocketBullet::RocketBullet(int id)
@@ -120,19 +120,19 @@ void RocketBullet::CollisionEvent(bool show_effect)
     GetDataLife().dying_time = -1;
 }
 
-/* virtual override final */
-void RocketBullet::UpdateInfo()
-{
-    GetInfo().clear();
+///* virtual override final */
+//void RocketBullet::UpdateInfo()
+//{
+//    GetInfo().clear();
 
-    GetInfo().addTitleStr("ROCKET");
-    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()) );
-    GetInfo().addNameStr("armor:");             GetInfo().addValueStr( std::to_string(GetDataLife().armor) );
-    if (m_Target != nullptr) 
-    { 
-        GetInfo().addNameStr("target_id:");       GetInfo().addValueStr(std::to_string(m_Target->GetId()));
-    }
-}
+//    GetInfo().addTitleStr("ROCKET");
+//    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()) );
+//    GetInfo().addNameStr("armor:");             GetInfo().addValueStr( std::to_string(GetDataLife().armor) );
+//    if (m_Target != nullptr)
+//    {
+//        GetInfo().addNameStr("target_id:");       GetInfo().addValueStr(std::to_string(m_Target->GetId()));
+//    }
+//}
 
 /* virtual override final */
 void RocketBullet::Hit(int damage, bool show_effect)
@@ -147,8 +147,8 @@ void RocketBullet::Hit(int damage, bool show_effect)
     if (show_effect == true)
     {
         // improove
-        VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(GetCenter()), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
-        GetStarSystem()->Add(text); 
+//        VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(GetCenter()), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
+//        GetStarSystem()->Add(text);
     }
 }
 

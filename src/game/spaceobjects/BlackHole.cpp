@@ -70,16 +70,16 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
     shockwave->Update();
 }
 
-void BlackHole::UpdateInfo()
-{
-    GetInfo().clear();
+//void BlackHole::UpdateInfo()
+//{
+//    GetInfo().clear();
 
-    GetInfo().addTitleStr("BLACKHOLE");
+//    GetInfo().addTitleStr("BLACKHOLE");
 
-    GetInfo().addNameStr("id:");         GetInfo().addValueStr(std::to_string(GetId()));
-    GetInfo().addNameStr("mass:");       GetInfo().addValueStr(std::to_string(GetMass()));
-    GetInfo().addNameStr("pos:");        GetInfo().addValueStr( meti::str(GetCenter()) );
-}
+//    GetInfo().addNameStr("id:");         GetInfo().addValueStr(std::to_string(GetId()));
+//    GetInfo().addNameStr("mass:");       GetInfo().addValueStr(std::to_string(GetMass()));
+//    GetInfo().addNameStr("pos:");        GetInfo().addValueStr( meti::str(GetCenter()) );
+//}
           
 void BlackHole::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {

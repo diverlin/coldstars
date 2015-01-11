@@ -125,15 +125,15 @@ void Star::UpdateInSpace(int time, bool show_effect)
     //UpdateRotation(); // not relevant for render NEW
 }    
     
-/* virtual override final */
-void Star::UpdateInfo()
-{ 
-    GetInfo().clear();
-    GetInfo().addTitleStr("STAR");
-    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
-    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(std::to_string(GetDataLife().armor));
-    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( meti::str(GetCenter()) );
-}
+///* virtual override final */
+//void Star::UpdateInfo()
+//{
+//    GetInfo().clear();
+//    GetInfo().addTitleStr("STAR");
+//    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+//    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(std::to_string(GetDataLife().armor));
+//    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( meti::str(GetCenter()) );
+//}
 
 /* virtual override final */
 void Star::PostDeathUniqueEvent(bool)

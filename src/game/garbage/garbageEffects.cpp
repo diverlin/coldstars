@@ -28,8 +28,7 @@ GarbageEffects::GarbageEffects()
 
 GarbageEffects::~GarbageEffects()
 {}
-         
-         
+
 
 void GarbageEffects::add(LazerTraceEffect* _effect)
 {
@@ -40,8 +39,8 @@ void GarbageEffects::add(jeti::BaseParticleSystem* _effect)
 {
     effect_PARTICLESYSTEM_vec.push_back(_effect);
 }
-        
-        
+
+
 void GarbageEffects::add(ShockWaveEffect* _effect)
 {
     effect_SHOCKWAVE_vec.push_back(_effect);
@@ -52,31 +51,31 @@ void GarbageEffects::add(VerticalFlowText* _text)
     text_DAMAGE_vec.push_back(_text);
 }
 
-    
-        
+
+
 void GarbageEffects::clear()
 {  
-        for(unsigned int ei = 0; ei < effect_LAZERTRACE_vec.size(); ei++)
-        {
-               delete effect_LAZERTRACE_vec[ei];
-        }
-           effect_LAZERTRACE_vec.clear();
-                       
-        for(unsigned int i = 0; i < effect_PARTICLESYSTEM_vec.size(); i++)
-        {
-               delete effect_PARTICLESYSTEM_vec[i];
-        }
-           effect_PARTICLESYSTEM_vec.clear();
-                       
-        for(unsigned int ei = 0; ei < effect_SHOCKWAVE_vec.size(); ei++)
-        {
-               delete effect_SHOCKWAVE_vec[ei];
-        }
-           effect_SHOCKWAVE_vec.clear();
-           
-           for(unsigned int ti = 0; ti < text_DAMAGE_vec.size(); ti++)
-        {
-               delete text_DAMAGE_vec[ti];
-        }
-           text_DAMAGE_vec.clear();
+    for(unsigned int ei = 0; ei < effect_LAZERTRACE_vec.size(); ei++)
+    {
+        delete effect_LAZERTRACE_vec[ei];
+    }
+    effect_LAZERTRACE_vec.clear();
+
+    for(unsigned int i = 0; i < effect_PARTICLESYSTEM_vec.size(); i++)
+    {
+        delete effect_PARTICLESYSTEM_vec[i];
+    }
+    effect_PARTICLESYSTEM_vec.clear();
+
+    for(unsigned int ei = 0; ei < effect_SHOCKWAVE_vec.size(); ei++)
+    {
+        delete effect_SHOCKWAVE_vec[ei];
+    }
+    effect_SHOCKWAVE_vec.clear();
+
+    for(unsigned int ti = 0; ti < text_DAMAGE_vec.size(); ti++)
+    {
+        delete text_DAMAGE_vec[ti];
+    }
+    text_DAMAGE_vec.clear();
 }

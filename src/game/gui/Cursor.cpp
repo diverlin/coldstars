@@ -164,7 +164,7 @@ void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
         float scale = 1.1;
         if (m_FocusedSpaceObject != nullptr)
         {                    
-            m_FocusedSpaceObject->RenderStuffWhenFocusedInSpace(render);
+            //m_FocusedSpaceObject->RenderStuffWhenFocusedInSpace(render);
             
             ceti::Box2D box(meti::vec2(m_FocusedSpaceObject->GetCenter()), meti::vec2(m_FocusedSpaceObject->GetSize()));
             box.SetScale(scale, scale);
@@ -195,7 +195,7 @@ void Cursor::RenderFocusedObjectInfo(const jeti::Renderer& render) const
             m_FocusedGuiElement->RenderInfo(render);
         }        
         if (m_FocusedSpaceObject) {
-            m_FocusedSpaceObject->RenderInfoInSpace(render, jeti::Screen::Instance().GetBottomLeftScreenWC(), jeti::Screen::Instance().GetScale());
+            //m_FocusedSpaceObject->RenderInfoInSpace(render, jeti::Screen::Instance().GetBottomLeftScreenWC(), jeti::Screen::Instance().GetScale());
         }
     }
     //render.disable_BLEND();  
