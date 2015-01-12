@@ -39,7 +39,7 @@ Asteroid::Asteroid(int id)
     setId(id);
     setTypeId(TYPE::ENTITY::ASTEROID_ID);
     
-    SetMass(meti::getRandInt(10, 30));
+    setMass(meti::getRandInt(10, 30));
 }
     
 /* virtual */
@@ -52,7 +52,7 @@ Asteroid::~Asteroid()
 
 void Asteroid::UpdateInSpace(int time, bool show_effect)
 {    
-    CheckDeath(show_effect);
+    checkDeath(show_effect);
     if (time > 0)
     {    
         UpdatePosition();
@@ -61,11 +61,11 @@ void Asteroid::UpdateInSpace(int time, bool show_effect)
 
 void Asteroid::CollisionEvent(bool show_effect)
 {
-    GetDataLife().is_alive = false;
-    GetDataLife().dying_time = -1;
+    dataLife().is_alive = false;
+    dataLife().dying_time = -1;
 }
     
-void Asteroid::PostDeathUniqueEvent(bool show_effect)
+void Asteroid::postDeathUniqueEvent(bool show_effect)
 {
     int angleZ = meti::getRandInt(0, 360);
     float impulse_strength = 0.5;
@@ -74,17 +74,17 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
         Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
         
         glm::vec3 impulse_dir(meti::getXYVec3Unit(angleZ));
-        container->ApplyImpulse(impulse_dir, impulse_strength);
+        container->addImpulse(impulse_dir, impulse_strength);
         
-        GetStarSystem()->AddContainer(container, GetCenter());
+        starsystem()->AddContainer(container, center());
         
         angleZ += 120;
     }
     
     if (show_effect == true)
     {
-//        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
-//        GetStarSystem()->Add(explosion, GetCenter());
+//        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(collisionRadius());
+//        starsystem()->Add(explosion, center());
     }
                     
 }    
@@ -95,11 +95,11 @@ void Asteroid::PostDeathUniqueEvent(bool show_effect)
 //    GetInfo().clear();
 
 //    GetInfo().addTitleStr("ASTEROID");
-//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
-//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(GetDataLife().armor));
-//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
+//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(dataLife().armor));
+//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(mass()));
 //    GetInfo().addNameStr("speed x 100:"); GetInfo().addValueStr(std::to_string(int(GetDataPlanet().speed*100)));
-//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(center()) );
 //}
 
 void Asteroid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
@@ -122,7 +122,7 @@ void Asteroid::ResolveData()
     Logger::Instance().Log(" Asteroid("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
-    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, GetParent(), data_unresolved_BasePlanet.orbit_it); 
+    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, parent(), data_unresolved_BasePlanet.orbit_it); 
 }
 
 /* virtual override final */    

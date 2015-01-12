@@ -59,13 +59,13 @@ void GuiRadar::ResetData()
 /*virtual final*/ 
 void GuiRadar::UpdateUnique(Player* player)
 {        
-    screenrect.Set(rect.GetCenter() + jeti::Screen::Instance().GetBottomLeftScreenWC() * scale, (int)(jeti::Screen::Instance().GetWidth() * scale), (int)(jeti::Screen::Instance().GetHeight() * scale));
+    screenrect.Set(rect.center() + jeti::Screen::Instance().GetBottomLeftScreenWC() * scale, (int)(jeti::Screen::Instance().GetWidth() * scale), (int)(jeti::Screen::Instance().GetHeight() * scale));
     const MouseData& data_mouse = player->GetCursor().GetMouseData();
     if (rect.CheckRoundInteraction(data_mouse.pos_screencoord, /*radius=*/70.0) == true)
     {
         if (data_mouse.left_press == true)
         {
-            glm::vec2 new_global_coord( ( data_mouse.pos_screencoord.x - rect.GetCenter().x - screenrect.GetWidth()/2)/scale, ( data_mouse.pos_screencoord.y - rect.GetCenter().y - screenrect.GetHeight()/2)/scale);
+            glm::vec2 new_global_coord( ( data_mouse.pos_screencoord.x - rect.center().x - screenrect.GetWidth()/2)/scale, ( data_mouse.pos_screencoord.y - rect.center().y - screenrect.GetHeight()/2)/scale);
             jeti::Screen::Instance().SetBottomLeftScreenWC(new_global_coord);
         }
     }
@@ -90,7 +90,7 @@ void GuiRadar::RenderUnique(const jeti::Renderer& render, Player* player) const
     float range_diameter = 2*player->GetNpc()->GetVehicle()->GetProperties().radar;
     ceti::Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
     
-    range_rect.SetCenter(rect.GetCenter() + meti::vec2(player->GetNpc()->GetVehicle()->GetCenter()) * scale);
+    range_rect.setCenter(rect.center() + meti::vec2(player->GetNpc()->GetVehicle()->center()) * scale);
     
     //drawTexturedRect(textureOb_background, rect, -2.0);
     //drawTexturedRect(textureOb_bar, rect, -2.0);
@@ -137,7 +137,7 @@ void GuiRadar::RenderUnique(const jeti::Renderer& render, Player* player) const
             }
             
             //float scale_render = Screen::Instance().GetScale();
-            //drawParticle(rect.GetCenter() + vec2(entity_vec[i]->GetCenter()*scale)/scale_render, size);            
+            //drawParticle(rect.center() + vec2(entity_vec[i]->center()*scale)/scale_render, size);            
         }
     }
     //render.disable_POINTSPRITE(); 

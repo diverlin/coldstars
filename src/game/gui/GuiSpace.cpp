@@ -64,7 +64,7 @@ slider_shared(nullptr)
     
     {
         glm::vec2 size(screen_w, screen_h);
-        SetSize(size);
+        setSize(size);
     }
     
     /** Top bar */
@@ -73,7 +73,7 @@ slider_shared(nullptr)
         GuiBar* bar_top = new GuiBar(textureOb_bar_top);
     
         glm::vec2 size(screen_w, GUI::BAR_HEIGHT);
-        bar_top->SetSize(size);
+        bar_top->setSize(size);
 
         glm::vec2 offset(screen_w/2, screen_h-GUI::BAR_HEIGHT/2);
         AddChild(bar_top, offset);    
@@ -83,7 +83,7 @@ slider_shared(nullptr)
             ButtonTrigger* galaxymap_button = new ButtonTrigger(TYPE::GUI::BUTTON_GALAXYMAP_ID, "galaxy map", GuiActions::GalaxyMapGuiTransition, texOb);
             
             glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);     
-            galaxymap_button->SetSize(size);        
+            galaxymap_button->setSize(size);        
             
             glm::vec2 offset(screen_w/2-1*1.1*GUI::ICON_SIZE, 0);
             bar_top->AddChild(galaxymap_button, offset);
@@ -94,7 +94,7 @@ slider_shared(nullptr)
             ButtonSingle* load_button = new ButtonSingle(TYPE::GUI::LOAD_ID, "load", GuiActions::LoadEvent, texOb);    
             
             glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);    
-            load_button->SetSize(size);
+            load_button->setSize(size);
             
             glm::vec2 offset(screen_w/2-2*1.1*GUI::ICON_SIZE, 0);
             bar_top->AddChild(load_button, offset);                     
@@ -105,7 +105,7 @@ slider_shared(nullptr)
             ButtonSingle* save_button = new ButtonSingle(TYPE::GUI::SAVE_ID, "save", GuiActions::SaveEvent, texOb);    
 
             glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);    
-            save_button->SetSize(size);    
+            save_button->setSize(size);    
             
             glm::vec2 offset(screen_w/2-3*1.1*GUI::ICON_SIZE, 0);                     
             bar_top->AddChild(save_button, offset);    
@@ -119,7 +119,7 @@ slider_shared(nullptr)
         GuiBar* bar_bottom = new GuiBar(textureOb_bar_bottom);
 
         glm::vec2 size(screen_w, GUI::BAR_HEIGHT);
-        bar_bottom->SetSize(size);
+        bar_bottom->setSize(size);
 
         glm::vec2 offset(screen_w/2, GUI::BAR_HEIGHT/2);
         AddChild(bar_bottom, offset);    
@@ -129,7 +129,7 @@ slider_shared(nullptr)
         GuiRadar* gui_radar = new GuiRadar();
         
         glm::vec2 size(250, 250);    
-        gui_radar->SetSize(size);
+        gui_radar->setSize(size);
     
         glm::vec2 offset(0, -screen_h/2+GUI::BAR_HEIGHT/2);
         AddChild(gui_radar, offset);    
@@ -139,7 +139,7 @@ slider_shared(nullptr)
         GuiVehicle2* gui_vehicle_player = new GuiVehicle2();
         
         glm::vec2 size(250, 250);    
-        gui_vehicle_player->SetSize(size);
+        gui_vehicle_player->setSize(size);
     
         glm::vec2 offset(125, 125);
         AddChild(gui_vehicle_player, offset);    
@@ -199,7 +199,7 @@ void GuiSpace::EnterGalaxyMap()
     
     //GetGuiElement(TYPE::GUI::GUI_RADAR_ID)->Hide();
           
-    //gui_galaxymap_shared->BindGalaxy(GetPlayer()->GetNpc()->GetStarSystem()->GetSector()->GetGalaxy());
+    //gui_galaxymap_shared->BindGalaxy(GetPlayer()->GetNpc()->starsystem()->GetSector()->GetGalaxy());
 }
 
 void GuiSpace::ExitGalaxyMap()

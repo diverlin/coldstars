@@ -79,7 +79,7 @@ void BakModuleBuilder::CreateNewInternals(BakModule* bak_module, int fuel_max_ad
     fuel_max_add = meti::getRandInt(MODULE::BAK::FUEL_MIN, MODULE::BAK::FUEL_MAX);
 
     bak_module->SetParentSubTypeId(TYPE::ENTITY::BAK_EQUIPMENT_ID);    
-    // alpitodorender bak_module->SetRenderData(mesh, texOb, texOb->GetSize());
+    // alpitodorender bak_module->SetRenderData(mesh, texOb, texOb->size());
     bak_module->SetFuelMaxAdd(fuel_max_add);
 }
 

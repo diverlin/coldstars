@@ -79,7 +79,7 @@ void ProtectorModuleBuilder::CreateNewInternals(ProtectorModule* protector_modul
     protection_add = meti::getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
     
     protector_module->SetParentSubTypeId(TYPE::ENTITY::PROTECTOR_EQUIPMENT_ID);    
-    //alpitodorender protector_module->SetRenderData(mesh, texOb, texOb->GetSize());
+    //alpitodorender protector_module->SetRenderData(mesh, texOb, texOb->size());
     protector_module->SetProtectionAdd(protection_add);
 }
 

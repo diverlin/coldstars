@@ -88,7 +88,7 @@ int main()
     }
     run_scenario->Init(player);
     
-    Galaxy* galaxy = player->GetNpc()->GetVehicle()->GetStarSystem()->GetSector()->GetGalaxy();       
+    Galaxy* galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();       
         
     player->GetNpc()->GetVehicle()->SetGodMode(true);
     //player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
@@ -112,7 +112,7 @@ int main()
     // GAME LOOP
     while (jeti::Screen::Instance().GetWindow().isOpen())
     {    
-        //std::cout<<player->GetNpc()->GetVehicle()->GetCenter().x<<std::endl;
+        //std::cout<<player->GetNpc()->GetVehicle()->center().x<<std::endl;
         //std::cout<<player->GetNpc()->GetVehicle()->GetProperties().radar<<std::endl;
                 
         /* server code start */
@@ -145,7 +145,7 @@ int main()
             if (load_event == true)
             {
                 player = EntityManager::Instance().GetPlayer();
-                galaxy = player->GetNpc()->GetVehicle()->GetStarSystem()->GetSector()->GetGalaxy();
+                galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();
             }
             if (save_event == true)
             {

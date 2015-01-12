@@ -29,8 +29,8 @@ bool checkCollisionDotWithRectangle(const glm::vec2& dot, const glm::vec2& cente
 template <typename AGRESSOR, typename VICTIM>
 bool checkCollision2D(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 {
-    if (checkCollisionDotWithCircle_DIRTY(agressor->GetCenter(), victim->GetCenter(), victim->GetCollisionRadius()) == true) {
-        victim->Hit(agressor->GetDamage(), show_effect);
+    if (checkCollisionDotWithCircle_DIRTY(agressor->center(), victim->center(), victim->collisionRadius()) == true) {
+        victim->hit(agressor->GetDamage(), show_effect);
         agressor->CollisionEvent(show_effect);        
         return true;
     }

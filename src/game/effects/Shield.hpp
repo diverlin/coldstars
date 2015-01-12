@@ -36,7 +36,7 @@ class ShieldEffect
         
         void SetTextureOb(jeti::TextureOb* textureOb) { this->textureOb = textureOb; };
         void SetAlpha(float alpha) { color.a = alpha; };
-        void SetParent(BaseSpaceEntity*);
+        void setParent(BaseSpaceEntity*);
             
         void Update();
         void Render(const jeti::Renderer&, float) const;

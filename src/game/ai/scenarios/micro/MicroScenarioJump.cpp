@@ -42,13 +42,13 @@ void MicroScenarioJump::Enter(Npc* npc) const
     Logger::Instance().Log("vehicle_id/npc_id="+std::to_string(npc->GetVehicle()->id())+"/"+std::to_string(npc->id())+"  ENTER MicroScenarioJump", AISCENARIO_LOG_DIP);
     #endif    
     
-    npc->GetVehicle()->GetComplexDrive().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetStarSystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
+    npc->GetVehicle()->GetComplexDrive().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget()->starsystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
 }
 
 /* virtual */
 bool MicroScenarioJump::Validation(Npc* npc) const
 {
-    if (npc->GetVehicle()->GetStarSystem()->id() != npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetStarSystem()->id())
+    if (npc->GetVehicle()->starsystem()->id() != npc->GetStateMachine().GetMicroTaskManager().GetTarget()->starsystem()->id())
     {
         return true;
     }

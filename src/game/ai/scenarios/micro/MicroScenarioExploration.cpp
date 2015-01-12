@@ -45,7 +45,7 @@ void MicroScenarioExploration::UpdateInStaticInSpace(Npc* npc) const
 {
     if (npc->GetVehicle()->GetComplexDrive().PathExists() == false)
     {
-        glm::vec3 target_pos = meti::getRandXYVec3f(100, 1500, npc->GetVehicle()->GetCenter().z);
+        glm::vec3 target_pos = meti::getRandXYVec3f(100, 1500, npc->GetVehicle()->center().z);
         npc->GetVehicle()->GetComplexDrive().SetStaticTargetCoords(target_pos);
     }
 }

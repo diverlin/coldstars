@@ -85,15 +85,15 @@ void ContainerBuilder::CreateNewInternals(Container* container, jeti::TextureOb*
     data_life.armor = 1;
     data_life.dying_time = 30;
     
-    container->SetLifeData(data_life);
+    container->setLifeData(data_life);
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->GetSize());
+    //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->size());
  
     float delta_angle = 0.001*meti::getRandInt(20, 60);
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender container->SetAnimationRotation(animation_rotation);
     
-    container->SetGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
+    container->setGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
     
     ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
     

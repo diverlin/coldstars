@@ -84,7 +84,7 @@ void TestTextRunScenario::Init(Player* player)
 /* virtual */
 void TestTextRunScenario::Update_inDynamic(Player* player)
 {
-    StarSystem* starsystem = player->GetNpc()->GetVehicle()->GetStarSystem(); // shortcut
+    StarSystem* starsystem = player->GetNpc()->GetVehicle()->starsystem(); // shortcut
             
     glm::ivec4 color(255, 0, 0, 255);
     while (starsystem->GetTextDamageNum() < 200)

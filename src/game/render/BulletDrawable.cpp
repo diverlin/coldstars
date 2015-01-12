@@ -37,10 +37,10 @@ BulletDrawable::~BulletDrawable()
 
 void BulletDrawable::CreateDriveComplexTextureDependedStuff()
 {
-//    GetPoints().addMidLeftPoint();
-//    GetPoints().addMidFarLeftPoint();
+//    points().addMidLeftPoint();
+//    points().addMidFarLeftPoint();
         
-    //alpitodorender m_EffectDrive = GetNewDriveEffect(GetTextureOb().GetData().size_id/2, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
+    //alpitodorender m_EffectDrive = GetNewDriveEffect(GetTextureOb().GetData().size_id/2, points().GetpMidLeft(), points().GetpMidFarLeft());
 }    
 
 /* virtual override final */
@@ -49,8 +49,8 @@ void BulletDrawable::CreateDriveComplexTextureDependedStuff()
 //    GetInfo().clear();
 
 //    GetInfo().addTitleStr("ROCKET");
-//    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()) );
-//    GetInfo().addNameStr("armor:");             GetInfo().addValueStr( std::to_string(GetDataLife().armor) );
+//    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( std::to_string(id()) + " / " + std::to_string(starsystem()->id()) );
+//    GetInfo().addNameStr("armor:");             GetInfo().addValueStr( std::to_string(dataLife().armor) );
 //    if (m_Target != nullptr)
 //    {
 //        GetInfo().addNameStr("target_id:");       GetInfo().addValueStr(std::to_string(m_Target->id()));

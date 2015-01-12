@@ -176,7 +176,7 @@ void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
     else                        Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->GetItem()->subTypeId()) + " id=" + std::to_string(item_slot->GetItem()->id()), WEAPONSTARGET_LOG_DIP);
     #endif   
 
-    target->TakeIntoAccountAgressor(owner_vehicle);
+    target->remeberAgressor(owner_vehicle);
 
     for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
@@ -294,7 +294,7 @@ void WeaponComplex::RenderWeaponsRange()
         if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
         {
            slot_weapon_reloaded_vec[i]->UpdateRange(GuiTextureObCollector::Instance().dot_red);
-           slot_weapon_reloaded_vec[i]->DrawRange(meti::vec2(owner_vehicle->GetCenter()));
+           slot_weapon_reloaded_vec[i]->DrawRange(meti::vec2(owner_vehicle->center()));
         }
     }
 }
@@ -307,7 +307,7 @@ void WeaponComplex::RenderWeaponIcons() const
         {  
             if (slot_weapon_vec[i]->GetTarget() != nullptr )
             {       
-                //Rect _rect(slot_weapon_vec[i]->GetTarget()->GetCenter().x - 40/2 + 23*i, slot_weapon_vec[i]->GetTarget()->GetCenter().y + 40/2, 20, 20);
+                //Rect _rect(slot_weapon_vec[i]->GetTarget()->center().x - 40/2 + 23*i, slot_weapon_vec[i]->GetTarget()->center().y + 40/2, 20, 20);
                 //drawTexturedRect(slot_weapon_vec[i]->GetItem()->GetTextureOb(), _rect, -2.0);
             }        
         }

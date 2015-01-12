@@ -50,7 +50,7 @@ class BasePlanet : public BaseSpaceEntity
     protected:
         virtual void putChildrenToGarbage() const {}
         
-        virtual void PostDeathUniqueEvent(bool);
+        virtual void postDeathUniqueEvent(bool);
         void UpdatePosition();
         
         UnresolvedDataBasePlanet data_unresolved_BasePlanet;

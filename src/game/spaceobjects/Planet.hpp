@@ -53,7 +53,7 @@ class Planet : public BasePlanet
         
 //        virtual void UpdateInfo() override final;
         
-        void PostDeathUniqueEvent(bool);
+        void postDeathUniqueEvent(bool);
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);

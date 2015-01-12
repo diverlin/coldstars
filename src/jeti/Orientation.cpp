@@ -23,7 +23,7 @@ namespace jeti {
 
 Orientation::Orientation()
 :
-m_IsUpdated(false)
+m_isUpdated(false)
 {
     //m_Direction       = glm::vec3(0.0f, 0.0f, 1.0f); 
 }
@@ -36,9 +36,9 @@ Orientation::~Orientation()
 //    #endif
 }
 
-void Orientation::UpdateOrientation()
+void Orientation::updateOrientation()
 {
-    if (m_IsUpdated == false)
+    if (m_isUpdated == false)
     {   
         //float angle_radian = m_Angle.z/RADIAN_TO_DEGREE_RATE;
         
@@ -48,7 +48,7 @@ void Orientation::UpdateOrientation()
         
         //m_Points.Update(m_Center, m_Angle, m_Size, m_Axis);
         
-        m_IsUpdated = true;
+        m_isUpdated = true;
     }
             
 }        
@@ -59,13 +59,13 @@ void Orientation::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 //    Logger::Instance().Log(" Orientation("+std::to_string(id())+")::SaveDataUniqueOrientation", SAVELOAD_LOG_DIP);
 //    #endif
         
-    save_ptree.put(root+"data_unresolved_Orientation.center.x", m_Center.x);
-    save_ptree.put(root+"data_unresolved_Orientation.center.y", m_Center.y);
-    save_ptree.put(root+"data_unresolved_Orientation.center.z", m_Center.z);
+    save_ptree.put(root+"data_unresolved_Orientation.center.x", m_center.x);
+    save_ptree.put(root+"data_unresolved_Orientation.center.y", m_center.y);
+    save_ptree.put(root+"data_unresolved_Orientation.center.z", m_center.z);
     
-    save_ptree.put(root+"data_unresolved_Orientation.direction.x", m_Direction.x);
-    save_ptree.put(root+"data_unresolved_Orientation.direction.y", m_Direction.y);
-    save_ptree.put(root+"data_unresolved_Orientation.direction.z", m_Direction.z);
+    save_ptree.put(root+"data_unresolved_Orientation.direction.x", m_direction.x);
+    save_ptree.put(root+"data_unresolved_Orientation.direction.y", m_direction.y);
+    save_ptree.put(root+"data_unresolved_Orientation.direction.z", m_direction.z);
         
 }
 

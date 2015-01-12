@@ -54,7 +54,7 @@ void VehicleSlot::InsertVehicle(Vehicle* vehicle)
 {
         this->vehicle = vehicle;
 
-        //vehicle->SetPlaceTypeId(data_id.type_id);
+        //vehicle->setPlaceTypeId(data_id.type_id);
         vehicle->SetParentVehicleSlot(this);
 }
 
@@ -75,7 +75,7 @@ void VehicleSlot::Render(const ceti::Rect& rect) const
     //drawTexturedRect(textureOb, rect, -1);
     if (vehicle != nullptr)
     {
-        glm::vec3 center(rect.GetCenter().x, rect.GetCenter().y, -2.0);
+        glm::vec3 center(rect.center().x, rect.center().y, -2.0);
         //((Ship*)vehicle)->RenderAtPlanet(center);
     }
 }

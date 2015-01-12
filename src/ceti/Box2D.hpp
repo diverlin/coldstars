@@ -36,16 +36,16 @@ class Box2D
         
         void Set(const Box2D&);
         
-        void SetCenter(const glm::vec2& center)    { m_Center = center; } 
-        void SetCenter(float x, float y)           { m_Center = glm::vec2(x, y); } 
-        void SetSize(const glm::vec2& size)        { m_Size = size; } 
-        void SetSize(float x, float y)             { m_Size = glm::vec2(x, y); } 
+        void setCenter(const glm::vec2& center)    { m_Center = center; } 
+        void setCenter(float x, float y)           { m_Center = glm::vec2(x, y); } 
+        void setSize(const glm::vec2& size)        { m_Size = size; } 
+        void setSize(float x, float y)             { m_Size = glm::vec2(x, y); } 
         void SetScale(const glm::vec2& scale)      { m_Scale = scale; }
         void SetScale(float x, float y)            { m_Scale = glm::vec2(x, y); }
         void SetAngle(float angle)                 { m_Angle = angle; }
                 
-        const glm::vec2& GetCenter() const    { return m_Center; }                    
-        const glm::vec2& GetSize() const        { return m_Size; }
+        const glm::vec2& center() const    { return m_Center; }                    
+        const glm::vec2& size() const        { return m_Size; }
         const glm::vec2& GetScale() const        { return m_Scale; }
         float GetAngle() const        { return m_Angle; }
                 

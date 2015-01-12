@@ -316,8 +316,8 @@ void GuiSkills::RenderSkills(const Skills& skills) const
                 //{              
                          //for (int i=0; i<SKILLS::ATTACK_MAX; i++) 
                          //{ 
-                             //Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
-                                             //button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
+                             //Rect tmp_rect(button->GetBox().center().x - button_w/2, 
+                                             //button->GetBox().center().y + button_h/2 + i*button_h, 
                                              //button_w, button_h);
 
                              //if (i<skills.GetAttack())     { drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }    
@@ -331,8 +331,8 @@ void GuiSkills::RenderSkills(const Skills& skills) const
                 //{
                          //for (int i=0; i<SKILLS::DEFENCE_MAX; i++) 
                          //{         
-                             //Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
-                                             //button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
+                             //Rect tmp_rect(button->GetBox().center().x - button_w/2, 
+                                             //button->GetBox().center().y + button_h/2 + i*button_h, 
                                              //button_w, button_h);
                              //if (i<skills.GetDefence())     { drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }    
                              //else                 { drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
@@ -345,8 +345,8 @@ void GuiSkills::RenderSkills(const Skills& skills) const
                 //{
                             //for (int i=0; i<SKILLS::LEADER_MAX; i++) 
                          //{ 
-                             //Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
-                                             //button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
+                             //Rect tmp_rect(button->GetBox().center().x - button_w/2, 
+                                             //button->GetBox().center().y + button_h/2 + i*button_h, 
                                              //button_w, button_h);
                              //if (i<skills.GetLeader())     { drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }    
                              //else                 { drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
@@ -359,8 +359,8 @@ void GuiSkills::RenderSkills(const Skills& skills) const
                    //{
                             //for (int i=0; i<SKILLS::TRADER_MAX; i++) 
                          //{ 
-                             //Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
-                                            //button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
+                             //Rect tmp_rect(button->GetBox().center().x - button_w/2, 
+                                            //button->GetBox().center().y + button_h/2 + i*button_h, 
                                             //button_w, button_h);
                              //if (i<skills.GetTrader())     { drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }    
                              //else                 { drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
@@ -373,8 +373,8 @@ void GuiSkills::RenderSkills(const Skills& skills) const
                    //{
                             //for (int i=0; i<SKILLS::TECHNIC_MAX; i++) 
                          //{ 
-                             //Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
-                                             //button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
+                             //Rect tmp_rect(button->GetBox().center().x - button_w/2, 
+                                             //button->GetBox().center().y + button_h/2 + i*button_h, 
                                              //button_w, button_h);
                              //if (i<skills.GetTechnic())     { drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }    
                              //else                 { drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }
@@ -386,8 +386,8 @@ void GuiSkills::RenderSkills(const Skills& skills) const
                    //{
                        //for (int i=0; i<SKILLS::DIPLOMAT_MAX; i++) 
                          //{ 
-                             //Rect tmp_rect(button->GetBox().GetCenter().x - button_w/2, 
-                                             //button->GetBox().GetCenter().y + button_h/2 + i*button_h, 
+                             //Rect tmp_rect(button->GetBox().center().x - button_w/2, 
+                                             //button->GetBox().center().y + button_h/2 + i*button_h, 
                                             //button_w, button_h);
                              //if (i<skills.GetDiplomat())     { drawTexturedRect(textureOb_skill, tmp_rect, -1.0); }    
                              //else                 { drawTexturedRect(textureOb_skill_transparent, tmp_rect, -1.0); }

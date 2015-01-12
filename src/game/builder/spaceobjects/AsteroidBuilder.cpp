@@ -81,7 +81,7 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
     planet_data.clockwise     = meti::getRandBool();
     
     asteroid->SetPlanetData(planet_data);
-    asteroid->SetLifeData(data_life);
+    asteroid->setLifeData(data_life);
 
     float scale_comp = meti::getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
@@ -93,7 +93,7 @@ void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender asteroid->SetAnimationRotation(animation_rotation);
                 
-    asteroid->SetGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
+    asteroid->setGivenExpirience(ENTITY::ASTEROID::GIVEN_EXPIRIENCE);
 }
 
 

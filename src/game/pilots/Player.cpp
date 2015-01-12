@@ -124,7 +124,7 @@ void Player::ClearVisibleEntities()
             
 void Player::AddIfVisible(Star* star)
 {
-    if (isObjectOnScreen(star->GetCenter(), star->GetSize()))
+    if (isObjectOnScreen(star->center(), star->size()))
     {         
         visible_STAR_vec.push_back(star);
     }
@@ -132,7 +132,7 @@ void Player::AddIfVisible(Star* star)
 
 void Player::AddIfVisible(Planet* planet)
 {
-    if (isObjectOnScreen(planet->GetCenter(), planet->GetSize()))
+    if (isObjectOnScreen(planet->center(), planet->size()))
     {  
         visible_PLANET_vec.push_back(planet);
     }
@@ -140,7 +140,7 @@ void Player::AddIfVisible(Planet* planet)
 
 void Player::AddIfVisible(Asteroid* asteroid)             
 {
-    if (isObjectOnScreen(asteroid->GetCenter(), asteroid->GetSize()))
+    if (isObjectOnScreen(asteroid->center(), asteroid->size()))
     {       
         if (npc->GetVehicle()->IsObjectWithinRadarRange(asteroid))
         {
@@ -151,7 +151,7 @@ void Player::AddIfVisible(Asteroid* asteroid)
 
 void Player::AddIfVisible(Container* container)         
 {
-    if (isObjectOnScreen(container->GetCenter(), container->GetSize()))
+    if (isObjectOnScreen(container->center(), container->size()))
     {    
         if (npc->GetVehicle()->IsObjectWithinRadarRange(container))
         {
@@ -162,7 +162,7 @@ void Player::AddIfVisible(Container* container)
 
 void Player::AddIfVisible(RocketBullet* rocket)  
 {
-    if (isObjectOnScreen(rocket->GetCenter(), rocket->GetSize()))  
+    if (isObjectOnScreen(rocket->center(), rocket->size()))  
     {  
         if (npc->GetVehicle()->IsObjectWithinRadarRange(rocket))
         {
@@ -173,7 +173,7 @@ void Player::AddIfVisible(RocketBullet* rocket)
 
 void Player::AddIfVisible(BlackHole* blackhole)  
 {
-    if (isObjectOnScreen(blackhole->GetCenter(), blackhole->GetSize()))  
+    if (isObjectOnScreen(blackhole->center(), blackhole->size()))  
     {  
         if (npc->GetVehicle()->IsObjectWithinRadarRange(blackhole))
         {
@@ -185,7 +185,7 @@ void Player::AddIfVisible(BlackHole* blackhole)
 
 void Player::AddIfVisible(Vehicle* vehicle) 
 {
-    //if (isObjectOnScreen(vehicle->GetCenter(), vehicle->GetSize()))
+    //if (isObjectOnScreen(vehicle->center(), vehicle->size()))
     {      
         //if ( npc->GetVehicle()->IsObjectWithinRadarRange(vehicle) )
         {
@@ -201,7 +201,7 @@ void Player::AddIfVisible(Vehicle* vehicle)
         
 void Player::AddIfVisible(ShockWaveEffect* effect)
 {
-    //if (isObjectOnScreen(effect->GetCenter(), 600))
+    //if (isObjectOnScreen(effect->center(), 600))
     //{
         //if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
         //{
@@ -225,7 +225,7 @@ void Player::AddIfVisible(LazerTraceEffect* effect)
  
 void Player::AddIfVisible(jeti::BaseParticleSystem* effect)
 {
-    //if (isObjectOnScreen(effect->GetCenter(), 600))
+    //if (isObjectOnScreen(effect->center(), 600))
     //{
         //if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
         //{
@@ -236,9 +236,9 @@ void Player::AddIfVisible(jeti::BaseParticleSystem* effect)
 
 void Player::AddIfVisible(VerticalFlowText* effect)
 {
-    if (isPointOnScreen(effect->GetCenter()))
+    if (isPointOnScreen(effect->center()))
     {
-        if (isPointOnScreen(effect->GetCenter()))
+        if (isPointOnScreen(effect->center()))
         {
             visible_text_DAMAGE_vec.push_back(effect);
         }
@@ -247,7 +247,7 @@ void Player::AddIfVisible(VerticalFlowText* effect)
 
 void Player::UpdatePostTransaction()
 {
-    switch (npc->GetVehicle()->GetPlaceTypeId())
+    switch (npc->GetVehicle()->placeTypeId())
     {
         case TYPE::PLACE::KOSMOPORT_ID:
         {
@@ -290,14 +290,14 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 {       
     if (starsystem == nullptr) //hack
     {
-        starsystem = npc->GetVehicle()->GetStarSystem();
+        starsystem = npc->GetVehicle()->starsystem();
     }
     
-    if (starsystem->id() != npc->GetVehicle()->GetStarSystem()->id())
+    if (starsystem->id() != npc->GetVehicle()->starsystem()->id())
     {
-        //jeti::Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetCenter());
-        //jeti::Screen::Instance().GetRect().SetCenter(npc->GetVehicle()->GetCenter());
-        starsystem = npc->GetVehicle()->GetStarSystem();
+        //jeti::Screen::Instance().InitiateScrollTo(npc->GetVehicle()->center());
+        //jeti::Screen::Instance().GetRect().setCenter(npc->GetVehicle()->center());
+        starsystem = npc->GetVehicle()->starsystem();
     }
     
     VEHICLE_SPECIAL_ACTION_TYPE action_id = npc->GetVehicle()->GetSpecialActionId();
@@ -305,11 +305,11 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
     {
         //case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID:
         //{
-            //if (npc->GetVehicle()->GetPlaceTypeId() == ENTITY::SPACE_ID)
+            //if (npc->GetVehicle()->placeTypeId() == ENTITY::SPACE_ID)
             //{
                 //if (turn_timer.GetTurnEnded() == true)
                 //{
-                    //jeti::Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetCenter());
+                    //jeti::Screen::Instance().InitiateScrollTo(npc->GetVehicle()->center());
                 //}
             //}
             
@@ -318,7 +318,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
         
         case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:
         {
-            if (npc->GetVehicle()->GetPlaceTypeId() == TYPE::PLACE::HYPER_SPACE_ID)
+            if (npc->GetVehicle()->placeTypeId() == TYPE::PLACE::HYPER_SPACE_ID)
             {
                 if (turn_timer.GetTurnEnded() == true)
                 {
@@ -331,11 +331,11 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 
         case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:
         {
-            if (npc->GetVehicle()->GetPlaceTypeId() == TYPE::PLACE::SPACE_ID)
+            if (npc->GetVehicle()->placeTypeId() == TYPE::PLACE::SPACE_ID)
             {
                 if (turn_timer.GetTurnEnded() == true)
                 {
-                    jeti::Screen::Instance().InitiateScrollTo(meti::vec2(npc->GetVehicle()->GetCenter()));
+                    jeti::Screen::Instance().InitiateScrollTo(meti::vec2(npc->GetVehicle()->center()));
                     turn_timer.NextTurn();                
                 }
             }
@@ -347,7 +347,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
         {
             if (turn_timer.GetTurnEnded() == true)
             {
-                jeti::Screen::Instance().InitiateScrollTo(meti::vec2(npc->GetVehicle()->GetCenter()));
+                jeti::Screen::Instance().InitiateScrollTo(meti::vec2(npc->GetVehicle()->center()));
                 turn_timer.NextTurn();                
             }
             
@@ -394,7 +394,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
 
             // BLOOM background and star (uses many FBO)
             //resizeGl(w, h);
-            // alpitodorender render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
+            // alpitodorender render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->GetVehicle()->starsystem()->GetStar()->GetBrightThreshold());
         }
 
         // VOLUMETRIC LIGHT to FBO1
@@ -470,7 +470,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
                         //rocket->RenderInSpace(render, 1/scale);
                     }
                 }
-                if (show.GetCollisionRadius() == true)
+                if (show.collisionRadius() == true)
                 {
                     RenderAxis(render);
                     RenderCollisionRadius(render);
@@ -494,23 +494,23 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
                 {
                     ShockWaveEffect* shockwave = visible_BLACKHOLE_vec[i]->GetShockWaveEffect();
 
-                    center_array[i][0] = (shockwave->center.x - world_coord.x)/w;
-                    center_array[i][1] = (shockwave->center.y - world_coord.y)/h;
-                    xyz_array[i][0] = shockwave->parameter.x;
-                    xyz_array[i][1] = shockwave->parameter.y;
-                    xyz_array[i][2] = shockwave->parameter.z;
+                    center_array[i][0] = (shockwave->center().x - world_coord.x)/w;
+                    center_array[i][1] = (shockwave->center().y - world_coord.y)/h;
+                    xyz_array[i][0] = shockwave->parameters().x;
+                    xyz_array[i][1] = shockwave->parameters().y;
+                    xyz_array[i][2] = shockwave->parameters().z;
                     
-                    time_array[i] = shockwave->time;
+                    time_array[i] = shockwave->time();
                 }
                 for (unsigned int j=0; ((j<visible_effect_SHOCKWAVE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
                 {
-                    center_array[i][0] = (visible_effect_SHOCKWAVE_vec[j]->center.x - world_coord.x)/(w*scale);
-                    center_array[i][1] = (visible_effect_SHOCKWAVE_vec[j]->center.y - world_coord.y)/(h*scale);
-                    xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[j]->parameter.x;
-                    xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[j]->parameter.y;
-                    xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[j]->parameter.z/scale;
+                    center_array[i][0] = (visible_effect_SHOCKWAVE_vec[j]->center().x - world_coord.x)/(w*scale);
+                    center_array[i][1] = (visible_effect_SHOCKWAVE_vec[j]->center().y - world_coord.y)/(h*scale);
+                    xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[j]->parameters().x;
+                    xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[j]->parameters().y;
+                    xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[j]->parameters().z/scale;
                     
-                    time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time;
+                    time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time();
                 }
 
                 render.DrawPostEffectShockWaves(render.GetLastFbo().GetTexture(), w, h, i, center_array, xyz_array, time_array);
@@ -551,7 +551,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
         //resizeGl(w, h); 
             
       
-        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->GetVehicle()->GetCenter(), world_coord, 200 /*npc->GetVehicle()->GetProperties().radius*/);         
+        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->GetVehicle()->center(), world_coord, 200 /*npc->GetVehicle()->GetProperties().radius*/);         
        
         // render text
         //resizeGl(w*scale, h*scale); 
@@ -638,9 +638,9 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
     { 
-        const glm::vec3& rocket_pos = visible_ROCKET_vec[i]->GetCenter(); // shortcut
+        const glm::vec3& rocket_pos = visible_ROCKET_vec[i]->center(); // shortcut
         float object_cursor_dist = meti::distance(rocket_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, rocket_pos.z);
-        if (object_cursor_dist < visible_ROCKET_vec[i]->GetCollisionRadius())
+        if (object_cursor_dist < visible_ROCKET_vec[i]->collisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_ROCKET_vec[i]);
        
@@ -668,9 +668,9 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
     { 
-        const glm::vec3& container_pos = visible_CONTAINER_vec[i]->GetCenter(); // shortcut
+        const glm::vec3& container_pos = visible_CONTAINER_vec[i]->center(); // shortcut
         float object_cursor_dist = meti::distance(container_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, container_pos.z);
-        if (object_cursor_dist < visible_CONTAINER_vec[i]->GetCollisionRadius())
+        if (object_cursor_dist < visible_CONTAINER_vec[i]->collisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_CONTAINER_vec[i]);
                             
@@ -709,8 +709,8 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_SATELLITE_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-        if (object_cursor_dist < visible_SATELLITE_vec[i]->GetCollisionRadius())
+        float object_cursor_dist = meti::distance(meti::vec2(visible_SATELLITE_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        if (object_cursor_dist < visible_SATELLITE_vec[i]->collisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
         
@@ -759,8 +759,8 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_ASTEROID_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-        if (object_cursor_dist < visible_ASTEROID_vec[i]->GetCollisionRadius())
+        float object_cursor_dist = meti::distance(meti::vec2(visible_ASTEROID_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        if (object_cursor_dist < visible_ASTEROID_vec[i]->collisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_ASTEROID_vec[i]);        
         
@@ -788,8 +788,8 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SHIP_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_SHIP_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-        if (object_cursor_dist < visible_SHIP_vec[i]->GetCollisionRadius())
+        float object_cursor_dist = meti::distance(meti::vec2(visible_SHIP_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        if (object_cursor_dist < visible_SHIP_vec[i]->collisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);    
         
@@ -849,8 +849,8 @@ bool Player::MouseInteractionWithBlackHoles(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
     { 
-        float cursor_dist = meti::distance(meti::vec2(visible_BLACKHOLE_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-        if (cursor_dist < visible_BLACKHOLE_vec[i]->GetCollisionRadius())
+        float cursor_dist = meti::distance(meti::vec2(visible_BLACKHOLE_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        if (cursor_dist < visible_BLACKHOLE_vec[i]->collisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_BLACKHOLE_vec[i]); 
             
@@ -865,8 +865,8 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_SPACESTATION_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-        if (object_cursor_dist < visible_SPACESTATION_vec[i]->GetCollisionRadius())
+        float object_cursor_dist = meti::distance(meti::vec2(visible_SPACESTATION_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        if (object_cursor_dist < visible_SPACESTATION_vec[i]->collisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SPACESTATION_vec[i]); 
         
@@ -915,8 +915,8 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_PLANET_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_PLANET_vec[i]->GetCenter()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-        if (object_cursor_dist < visible_PLANET_vec[i]->GetCollisionRadius())
+        float object_cursor_dist = meti::distance(meti::vec2(visible_PLANET_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        if (object_cursor_dist < visible_PLANET_vec[i]->collisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_PLANET_vec[i]); 
   
@@ -938,8 +938,8 @@ bool Player::MouseInteractionWithStars(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_STAR_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(visible_STAR_vec[i]->GetCenter(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
-        if (object_cursor_dist < visible_STAR_vec[i]->GetCollisionRadius())
+        float object_cursor_dist = meti::distance(visible_STAR_vec[i]->center(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        if (object_cursor_dist < visible_STAR_vec[i]->collisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_STAR_vec[i]); 
                 
@@ -955,7 +955,7 @@ void Player::MouseNavigation(const MouseData& data_mouse) const
     if (data_mouse.left_click == true)
     {
         ForceStateMachineReset();
-        npc->GetVehicle()->GetComplexDrive().SetStaticTargetCoords(glm::vec3(data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, npc->GetVehicle()->GetCenter().z));  
+        npc->GetVehicle()->GetComplexDrive().SetStaticTargetCoords(glm::vec3(data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, npc->GetVehicle()->center().z));  
     }
 }
 
@@ -1012,9 +1012,9 @@ void Player::SessionInNatureLand()
 void Player::RunSession(const TurnTimer& turn_timer)
 {
     cursor.Reset();
-    switch(npc->GetVehicle()->GetPlaceTypeId())
+    switch(npc->GetVehicle()->placeTypeId())
     {
-        case TYPE::PLACE::SPACE_ID:         { SessionInSpace(npc->GetVehicle()->GetStarSystem(), turn_timer); break; }
+        case TYPE::PLACE::SPACE_ID:         { SessionInSpace(npc->GetVehicle()->starsystem(), turn_timer); break; }
         case TYPE::PLACE::HYPER_SPACE_ID:     { SessionInSpace((StarSystem*)npc->GetVehicle()->GetComplexDrive().GetTarget(), turn_timer); break; }
         case TYPE::PLACE::KOSMOPORT_ID:      { SessionInKosmoport(); break; }
         case TYPE::PLACE::NATURELAND_ID:      { SessionInNatureLand(); break; }
@@ -1119,7 +1119,7 @@ void Player::ResolveData()
 
 bool isObjectWithinRadarRange(jeti::BaseParticleSystem* effect, Vehicle* vehicle)
 {
-    float dist = meti::distance(vehicle->GetCenter(), effect->GetCenter());
+    float dist = meti::distance(vehicle->center(), effect->center());
     if (dist < vehicle->GetProperties().radar)
     {
         return true;
@@ -1176,7 +1176,7 @@ bool isPointOnScreen(const glm::vec2& p)
 
 bool isObjectWithinRadarRange(ShockWaveEffect* effect, Vehicle* vehicle)
 {
-    float dist = meti::distance(vehicle->GetCenter(), effect->GetCenter());
+    float dist = meti::distance(vehicle->center(), effect->center());
     if (dist < vehicle->GetProperties().radar)
     {
         return true;
@@ -1187,13 +1187,13 @@ bool isObjectWithinRadarRange(ShockWaveEffect* effect, Vehicle* vehicle)
 
 bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
 {
-    float dist = meti::distance(vehicle->GetCenter(), effect->GetStartPos());
+    float dist = meti::distance(vehicle->center(), effect->GetStartPos());
     if (dist < vehicle->GetProperties().radar)
     {
         return true;
     }
     
-    dist = meti::distance(vehicle->GetCenter(), effect->GetEndPos());
+    dist = meti::distance(vehicle->center(), effect->GetEndPos());
     if (dist < vehicle->GetProperties().radar)
     {
         return true;
@@ -1204,7 +1204,7 @@ bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
 
 //bool isObjectWithinRadarRange(VerticalFlowText* effect, Vehicle* vehicle)
 //{
-    //float dist = meti::distance(vehicle->GetCenter(), effect->GetPos());
+    //float dist = meti::distance(vehicle->center(), effect->GetPos());
     //if (dist < vehicle->GetProperties().radar)
     //{
         //return true;

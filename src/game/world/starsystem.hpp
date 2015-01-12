@@ -224,7 +224,7 @@ class StarSystem : public BaseSpaceEntity
 
         void DamageEventInsideCircle(const glm::vec3&, float, int, bool);
 
-        void PostDeathUniqueEvent(bool);
+        void postDeathUniqueEvent(bool);
 
         void ShipManager_s(unsigned int);
         

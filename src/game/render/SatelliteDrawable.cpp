@@ -41,14 +41,14 @@ SatelliteDrawable::~SatelliteDrawable()
 
 //    //GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem->id()));
 //    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(id()));
-//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
-//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
+//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(mass()));
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(center()) );
 //}
             
 void SatelliteDrawable::UpdateRenderStuff()
 {
 //    GetComplexProtector().GetShieldEffect()->Update();
-//    UpdateOrientation();
+//    updateOrientation();
 }
 
 void SatelliteDrawable::RenderInSpace(const jeti::Renderer& render, float scale)
@@ -63,7 +63,7 @@ void SatelliteDrawable::RenderInSpace(const jeti::Renderer& render, float scale)
     //if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
     //{
         //RenderShieldEffect(1.0 - GetColor().a); 
-        //GetStarSystem()->RestoreSceneColor();
+        //starsystem()->RestoreSceneColor();
     //}
 }
 

@@ -118,14 +118,13 @@ bool Angar::RepairVehicle(Vehicle* vehicle) const
 {        
     int price_for_one = vehicle->GetDataKorpus().price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
     int repair_max =  vehicle->GetOwnerNpc()->GetCredits() / price_for_one;
-    int repair_need = vehicle->GetDataKorpus().armor - vehicle->GetArmor();
+    int repair_need = vehicle->GetDataKorpus().armor - vehicle->armor();
     
     int repair_amount = 0;
-    if (repair_max > repair_need) {    repair_amount = repair_need; }
+    if (repair_max > repair_need) { repair_amount = repair_need; }
     else                          { repair_amount = repair_max; }
     
-    if (vehicle->GetOwnerNpc()->WithdrawCredits(repair_amount*price_for_one) == true)
-    {
+    if (vehicle->GetOwnerNpc()->WithdrawCredits(repair_amount*price_for_one) == true) {
         vehicle->RepairKorpusOnAmount(repair_amount);
         return true;  
     }
@@ -142,8 +141,7 @@ bool Angar::TankUpVehicle(Vehicle* vehicle) const
     if (fuel_to_buy_max > fuel_to_buy_need) { fuel = fuel_to_buy_need; }
     else                                    { fuel = fuel_to_buy_max; }
 
-    if (vehicle->GetOwnerNpc()->WithdrawCredits(fuel*price_fuel) == true)
-    {
+    if (vehicle->GetOwnerNpc()->WithdrawCredits(fuel*price_fuel) == true) {
         vehicle->GetComplexDrive().GetBakSlot()->GetBakEquipment()->IncreaseFuel(fuel);
         return true;
     }
@@ -153,12 +151,9 @@ bool Angar::TankUpVehicle(Vehicle* vehicle) const
 
 void Angar::UpdateInStatic() const
 {
-    for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++)
-    {
-        if (vehicle_visitors_slot_vec[i]->GetVehicle() != nullptr)
-        {
-            if (vehicle_visitors_slot_vec[i]->GetVehicle()->GetOwnerNpc() != nullptr)
-            {
+    for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++) {
+        if (vehicle_visitors_slot_vec[i]->GetVehicle() != nullptr)  {
+            if (vehicle_visitors_slot_vec[i]->GetVehicle()->GetOwnerNpc() != nullptr) {
                 vehicle_visitors_slot_vec[i]->GetVehicle()->GetOwnerNpc()->UpdateInKosmoportInStatic();
             }
         }

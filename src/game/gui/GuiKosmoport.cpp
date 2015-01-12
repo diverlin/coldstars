@@ -275,7 +275,7 @@ void GuiKosmoport::EnterGuiGalaxyMapScreen()
     #endif    
     
         //active_screen_id = GUI::SCREEN::GALAXYMAP_ID;        
-        //gui_galaxymap_shared->BindGalaxy(m_Player->GetNpc()->GetVehicle()->GetStarSystem()->GetSector()->GetGalaxy());
+        //gui_galaxymap_shared->BindGalaxy(m_Player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy());
 }
 
 void GuiKosmoport::ExitGuiGalaxyMapScreen()

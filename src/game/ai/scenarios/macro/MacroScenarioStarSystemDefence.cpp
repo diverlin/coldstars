@@ -51,8 +51,8 @@ void MacroScenarioStarSystemDefence::Enter(Npc* npc) const
 /*virtual*/
 void MacroScenarioStarSystemDefence::UpdateInStaticInSpace(Npc* npc) const
 {
-    StarSystem* target_starsystem = npc->GetStateMachine().GetMacroTaskManager().GetTarget()->GetStarSystem();
-    if (npc->GetStarSystem()->id() != target_starsystem->id())
+    StarSystem* target_starsystem = npc->GetStateMachine().GetMacroTaskManager().GetTarget()->starsystem();
+    if (npc->starsystem()->id() != target_starsystem->id())
     {
         if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != TYPE::AISCENARIO::MICRO_JUMP_ID)
         {

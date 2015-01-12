@@ -89,7 +89,7 @@ class Vehicle : public BaseSpaceEntity
         const VehicleNeeds& GetNeeds() const { return m_Needs; }        
         const VehicleKorpusData& GetDataKorpus() const { return m_DataKorpus; }
         
-        virtual int GetGivenExpirience() const override final;
+        virtual int givenExpirience() const override final;
         bool CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY) const;
         
         void AddItemSlot(ItemSlot*); 
@@ -134,10 +134,10 @@ class Vehicle : public BaseSpaceEntity
         void UpdateSpecialAction();         
         virtual void UpdateInSpace(int, bool) = 0;
         
-        virtual void TakeIntoAccountAgressor(Vehicle*);
-        virtual void Hit(int, bool);
+        virtual void remeberAgressor(Vehicle*);
+        virtual void hit(int, bool);
         
-        virtual void PostDeathUniqueEvent(bool); 
+        virtual void postDeathUniqueEvent(bool); 
         
         void CheckNeedsInStatic();
         void ResolveNeedsInKosmoportInStatic();

@@ -42,27 +42,27 @@ class Rect
         void Set(const glm::vec2&, float, float);
         void Set(const Rect&);
             
-        void SetCenter(const glm::vec2&);
-        void SetCenter(float, float);
+        void setCenter(const glm::vec2&);
+        void setCenter(float, float);
         void SetBottomLeftX(float);
         void SetBottomLeft(const glm::vec2&);
         void SetBottomLeft(float, float);
                     
-        const glm::vec2& GetCenter() const     { return center; }
-        const glm::vec2& GetBottomLeft() const { return bottomLeft; }
-        const glm::vec2& GetTopRight() const { return topRight; }
-        float GetWidth() const         { return w; }
-        float GetHeight() const     { return h; }  
+        const glm::vec2& center() const     { return m_center; }
+        const glm::vec2& GetBottomLeft() const { return m_bottomLeft; }
+        const glm::vec2& GetTopRight() const { return m_topRight; }
+        float GetWidth() const         { return m_width; }
+        float GetHeight() const     { return m_height; }
         
-        void SetSize(float, float);
+        void setSize(float, float);
         void MovingBy(const glm::vec2&);
                             
     private:
-        glm::vec2 bottomLeft;    
-        glm::vec2 center;  
-        glm::vec2 topRight;
+        glm::vec2 m_bottomLeft;
+        glm::vec2 m_center;
+        glm::vec2 m_topRight;
         
-        float w, h;
+        float m_width, m_height;
         
         void UpdateCenter();
         void UpdateTopRight();

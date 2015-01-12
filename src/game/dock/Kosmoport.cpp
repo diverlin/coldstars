@@ -92,13 +92,13 @@ bool Kosmoport::GetPermissionToLand() const
 /* virtual */
 bool Kosmoport::AddVehicle(Vehicle* vehicle)
 {        
-    vehicle->SetPlaceTypeId(TYPE::PLACE::KOSMOPORT_ID); 
+    vehicle->setPlaceTypeId(TYPE::PLACE::KOSMOPORT_ID); 
     angar->AddVehicle(vehicle);  
     
     vehicle->SetLand(this);        
-    if (vehicle->GetStarSystem() == nullptr) // used if vehicle added directly after creation
+    if (vehicle->starsystem() == nullptr) // used if vehicle added directly after creation
     {
-            vehicle->SetStarSystem(owner->GetStarSystem());
+            vehicle->setStarSystem(owner->starsystem());
     }
           
     return true;

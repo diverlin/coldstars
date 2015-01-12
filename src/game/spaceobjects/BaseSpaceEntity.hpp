@@ -26,10 +26,7 @@
 #include <types/PlaceTypes.hpp>
 
 class StarSystem;
-//class Mesh;
-//class TextureOb;
 class Vehicle;
-//class AnimationBase;
 
 //namespace jeti {
 //class Renderer;
@@ -47,34 +44,34 @@ class BaseSpaceEntity : public jeti::Orientation, public Base
         BaseSpaceEntity();
         virtual ~BaseSpaceEntity() override;
 
-        void SetLifeData(const LifeData& data_life) { m_DataLife = data_life; }
+        void setLifeData(const LifeData& data_life) { m_dataLife = data_life; }
 
-        void SetStarSystem(StarSystem* starsystem) { m_Starsystem = starsystem; }
-        void SetPlaceTypeId(TYPE::PLACE place_type_id) { m_PlaceTypeId = place_type_id;  }
-        void SetMass(int mass) { m_Mass = mass; }
+        void setStarSystem(StarSystem* starsystem) { m_starsystem = starsystem; }
+        void setPlaceTypeId(TYPE::PLACE place_type_id) { m_placeTypeId = place_type_id;  }
+        void setMass(int mass) { m_mass = mass; }
                 
-        void SetGivenExpirience(int given_expirience) { m_GiveExpirience = given_expirience; }                
+        void setGivenExpirience(int expirience_to_give) { m_expirienceToGive = expirience_to_give; }
     
-        void SetParent(const BaseSpaceEntity* const parent) { m_Parent = parent; }
+        void setParent(const BaseSpaceEntity* const parent) { m_parent = parent; }
 
-        StarSystem* GetStarSystem() const { return m_Starsystem; }           
-        TYPE::PLACE GetPlaceTypeId() const { return m_PlaceTypeId; }
+        StarSystem* starsystem()    const { return m_starsystem; }
+        TYPE::PLACE placeTypeId()   const { return m_placeTypeId; }
 
-        virtual int GetGivenExpirience() const { return m_GiveExpirience; }  // !!!
+        virtual int givenExpirience() const { return m_expirienceToGive; }  // !!!
  
-        bool GetAlive()          const { return m_DataLife.is_alive; }
-        bool GetGarbageReady()   const { return m_DataLife.garbage_ready; }             
+        bool isAlive()              const { return m_dataLife.is_alive; }
+        bool isReadyForGarbage()    const { return m_dataLife.garbage_ready; }
 
-        int GetMass()         const { return m_Mass; }
-        int GetArmor()        const { return m_DataLife.armor; }
+        int mass()         const { return m_mass; }
+        int armor()        const { return m_dataLife.armor; }
 
-        const BaseSpaceEntity* const GetParent() const { return m_Parent; }
+        const BaseSpaceEntity* const parent() const { return m_parent; }
 
-        void ApplyImpulse(const glm::vec3&, float);
+        void addImpulse(const glm::vec3&, float);
 
-        virtual void TakeIntoAccountAgressor(Vehicle*) {}
-        virtual void Hit(int, bool);
-        void SilentKill();
+        virtual void remeberAgressor(Vehicle*) {}
+        virtual void hit(int, bool);
+        void killSilently();
         
 //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) {};
 //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float);
@@ -82,18 +79,18 @@ class BaseSpaceEntity : public jeti::Orientation, public Base
 //        void virtual UpdateInfo() {}
                 
     protected:
-        void SetMass(float mass) { m_Mass = mass; }
-        void ChangeMass(int d_mass) { m_Mass += d_mass; }
+        void setMass(float mass) { m_mass = mass; }
+        void addMass(int d_mass) { m_mass += d_mass; }
         
 //        InfoTable& GetInfo() { return m_Info; }
-        LifeData& GetDataLife() { return m_DataLife; }
-        const LifeData& GetDataLife() const { return m_DataLife; }
+        LifeData& dataLife() { return m_dataLife; }
+        const LifeData& dataLife() const { return m_dataLife; } // !!! remove
         
-        const glm::vec3& GetAppliedForce() const { return m_AppliedForce; } 
-        glm::vec3& GetAppliedForce() { return m_AppliedForce; }     // !!!
+        const glm::vec3& externalForce() const { return m_externalForce; }
+        glm::vec3& externalForce() { return m_externalForce; }     // !!! remove
                                     
-        void CheckDeath(bool);
-        virtual void PostDeathUniqueEvent(bool) {}
+        void checkDeath(bool);
+        virtual void postDeathUniqueEvent(bool) {}
 
         UnresolvedDataBaseSpaceEntity data_unresolved_BaseSpaceEntity;
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
@@ -101,19 +98,19 @@ class BaseSpaceEntity : public jeti::Orientation, public Base
         void ResolveData();
     
     private:
-        LifeData m_DataLife;        
+        LifeData m_dataLife;
 
-        glm::vec3 m_AppliedForce;
+        glm::vec3 m_externalForce;
 
-        StarSystem* m_Starsystem;
-        TYPE::PLACE m_PlaceTypeId;
+        StarSystem* m_starsystem;
+        TYPE::PLACE m_placeTypeId;
 
         //InfoTable m_Info;
 
-        int m_Mass;
-        int m_GiveExpirience;
+        int m_mass;
+        int m_expirienceToGive;
 
-        const BaseSpaceEntity* m_Parent;
+        const BaseSpaceEntity* m_parent;
                         
     friend class BaseVehicleBuilder;
 };

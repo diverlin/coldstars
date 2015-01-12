@@ -43,7 +43,7 @@ class BaseGuiElement
         
         void SetTextureOb(jeti::TextureOb* textureOb) { m_TextureOb = textureOb; }
         
-        void SetSize(glm::vec2 size) { m_Box.SetSize(size); };
+        void setSize(glm::vec2 size) { m_Box.setSize(size); };
             
         TYPE::GUI typeId() const { return m_Type_id; }
         TYPE::GUI subTypeId() const { return m_Subtype_id; }

@@ -36,31 +36,31 @@ class Orientation
         Orientation();
         virtual ~Orientation();
 
-        void SetParentCenter(float x, float y, float z) { m_ParentCenter = glm::vec3(x, y, z); }        
-        void SetParentCenter(const glm::vec3& parent_center) { m_ParentCenter = parent_center; }
+        void setParentCenter(float x, float y, float z) { m_parentCenter = glm::vec3(x, y, z); }
+        void setParentCenter(const glm::vec3& parent_center) { m_parentCenter = parent_center; }
         
-        void SetCenter(float x, float y, float z)    { m_Center = glm::vec3(x, y, z); m_IsUpdated = false; }
-        void SetCenter(const glm::vec3& center)   { m_Center = center; m_IsUpdated = false; }
+        void setCenter(float x, float y, float z)    { m_center = glm::vec3(x, y, z); m_isUpdated = false; }
+        void setCenter(const glm::vec3& center)   { m_center = center; m_isUpdated = false; }
         
-        void SetSize(float x, float y, float z) { m_Size = glm::vec3(x, y, z); m_IsUpdated = false; }
-        void SetSize(const glm::vec3& size) { m_Size = size; m_IsUpdated = false; }
+        void setSize(float x, float y, float z) { m_size = glm::vec3(x, y, z); m_isUpdated = false; }
+        void setSize(const glm::vec3& size) { m_size = size; m_isUpdated = false; }
     
-        const glm::vec3& GetDirection() const { return m_Direction; }
+        const glm::vec3& direction() const { return m_direction; }
        
-        const glm::vec3& GetCenter() const { return m_Center; }
-        const glm::vec3& GetSize()  const { return m_Size; } 
+        const glm::vec3& center() const { return m_center; }
+        const glm::vec3& size()  const { return m_size; }
         
-        glm::vec3* const GetpCenter() { return &m_Center; }
-        const glm::vec3* const GetpParentCenter() { return &m_ParentCenter; }
+        glm::vec3* const pCenter() { return &m_center; }
+        const glm::vec3* const pParentCenter() { return &m_parentCenter; }
                         
-        ceti::Points& GetPoints()          { return m_Points; }  // depr !!!
+        ceti::Points& points()          { return m_points; }  // depr !!!
            
-        float GetCollisionRadius() const  { return m_CollisionRadius; }
+        float collisionRadius() const  { return m_collisionRadius; }
 
-        void UpdateOrientation();     //depr
+        void updateOrientation();     //depr
 
-        void SetDirection(const glm::vec3& direction)   { m_Direction = glm::normalize(direction); m_IsUpdated = false; }
-        void SetCollisionRadius(float collision_radius) { m_CollisionRadius = collision_radius; }
+        void setDirection(const glm::vec3& direction)   { m_direction = glm::normalize(direction); m_isUpdated = false; }
+        void setCollisionRadius(float collision_radius) { m_collisionRadius = collision_radius; }
 
     protected:            
         UnresolvedDataOrientation data_unresolved_Orientation;
@@ -69,21 +69,18 @@ class Orientation
         void ResolveData();
 
     private:
-        bool m_IsUpdated;
+        bool m_isUpdated;
 
-        float m_CollisionRadius;
+        float m_collisionRadius;
                 
-        glm::vec3 m_Center;                  
-        glm::vec3 m_Size;
+        glm::vec3 m_center;
+        glm::vec3 m_size;
      
-        glm::vec3 m_Direction;
+        glm::vec3 m_direction;
         
-        glm::vec3 m_ParentCenter; 
+        glm::vec3 m_parentCenter;
 
-        ceti::Points m_Points;
-                                
-//    friend class BaseVehicleBuilder;
-//    friend class DriveComplex;
+        ceti::Points m_points;
 };
 
 } // namespace jeti

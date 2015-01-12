@@ -77,9 +77,9 @@ bool Store::AddVehicle(Vehicle* vehicle)
     if (vehicle_slot) 
     {
         //vehicle->SetLand(GetOwnerKosmoport());        
-            //if (vehicle->GetStarSystem() == nullptr) // used if vehicle added directly after creation
+            //if (vehicle->starsystem() == nullptr) // used if vehicle added directly after creation
             //{
-                    //vehicle->SetStarSystem(GetOwnerKosmoport()->GetOwner()->GetStarSystem());
+                    //vehicle->setStarSystem(GetOwnerKosmoport()->GetOwner()->starsystem());
             //}        
         vehicle_slot->InsertVehicle(vehicle);
         return true;
@@ -131,9 +131,9 @@ int Store::BuyItem(BaseItem* item)
 void Store::SellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
 {
     vehicle_slot->GetVehicle()->GetAllItemsFromVehicle(npc->GetVehicle());
-    vehicle_slot->GetVehicle()->SetStarSystem(npc->GetVehicle()->GetStarSystem());
+    vehicle_slot->GetVehicle()->setStarSystem(npc->GetVehicle()->starsystem());
     vehicle_slot->GetVehicle()->SetLand(npc->GetVehicle()->GetLand());
-    vehicle_slot->GetVehicle()->SetPlaceTypeId(TYPE::PLACE::KOSMOPORT_ID);
+    vehicle_slot->GetVehicle()->setPlaceTypeId(TYPE::PLACE::KOSMOPORT_ID);
     
     VehicleSlot* npc_vehicle_slot = npc->GetVehicle()->GetParentVehicleSlot();
     npc->GetVehicle()->GetParentVehicleSlot()->SwapVehicle(vehicle_slot);

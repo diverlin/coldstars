@@ -89,7 +89,7 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
 //        assert(texOb);
         float scale_comp = meti::getRandInt(40, 100);
         size = glm::vec3(scale_comp, scale_comp, 1.0);
-        //size = texOb->GetSize();
+        //size = texOb->size();
     }
     else
     {    
@@ -160,8 +160,8 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
 
     LifeData data_life;
     data_life.armor      = data_korpus.armor * 0.1;
-    data_life.dying_time = ship->GetCollisionRadius() * 0.1;
-    ship->SetLifeData(data_life);
+    data_life.dying_time = ship->collisionRadius() * 0.1;
+    ship->setLifeData(data_life);
     
     ship->CreateDriveComplexTextureDependedStuff();
     ship->CreateProtectionComplexTextureDependedStuff();

@@ -30,7 +30,7 @@ class BlackHole : public BasePlanet
 
         void BindShockWaveEffect(ShockWaveEffect* shockwave) { this->shockwave = shockwave; };
         
-        void SetCenter(const glm::vec3&);
+        void setCenter(const glm::vec3&);
         
         ShockWaveEffect* GetShockWaveEffect() const { return shockwave; };
         

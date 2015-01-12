@@ -49,7 +49,7 @@ void DamageEffect::Update()
     m_IsAlive = false;
     for (unsigned int i=0; i<GetParticlesNum(); i++)
     {
-        if (m_Particles[i]->GetIsAlive() == true)
+        if (m_Particles[i]->isAlive() == true)
         {
             m_Particles[i]->Update();
             m_IsAlive = true;
@@ -100,8 +100,8 @@ void DamageEffect::Update()
 //    damage->SetParticleData(data_particle);
 //    damage->SetParticlesNum(particles_num);
     
-//    damage->SetParent(parent);
-//    damage->SetCenter(parent->GetCenter());
+//    damage->setParent(parent);
+//    damage->setCenter(parent->center());
     
 //    damage->CreateParticles();
     

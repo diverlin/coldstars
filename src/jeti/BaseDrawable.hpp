@@ -57,8 +57,8 @@ class BaseDrawable
         bool HasTextureOb() const { return (m_TextureOb != 0); }
         
         const glm::vec4& GetColor() const { return m_Color; }
-        const glm::vec3& GetCenter() const;
-        const glm::vec3& GetSize() const;
+        const glm::vec3& center() const;
+        const glm::vec3& size() const;
 
 //        void RenderCollisionRadius(const Renderer&) const;
 //        void RenderAxis(const Renderer&) const;

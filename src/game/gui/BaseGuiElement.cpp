@@ -144,7 +144,7 @@ void BaseGuiElement::UpdateGeometry(const glm::vec2& parent_offset, const glm::v
     glm::vec2 next_offset = parent_offset + m_Offset;
     glm::vec2 next_scale = parent_scale * m_Box.GetScale();
 
-    m_Box.SetCenter(next_offset);
+    m_Box.setCenter(next_offset);
     m_Box.SetScale(next_scale);
             
     for (auto &child : m_Child_vec)

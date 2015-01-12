@@ -31,7 +31,7 @@
 
 Sector::Sector(int id)
     :
-      galaxy(nullptr)
+      m_galaxy(nullptr)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::SECTOR_ID);
@@ -43,8 +43,7 @@ Sector::~Sector()
 /* virtual */
 void Sector::putChildrenToGarbage() const
 {
-    for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
-    {
+    for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++) {
         EntityGarbage::Instance().Add(STARSYSTEM_vec[i]);
     }
 }
@@ -52,7 +51,7 @@ void Sector::putChildrenToGarbage() const
 void Sector::Add(StarSystem* starsystem, const glm::vec3& center) 
 { 
     starsystem->SetSector(this);
-    starsystem->SetCenter(center);
+    starsystem->setCenter(center);
 
     STARSYSTEM_vec.push_back(starsystem);
 }
@@ -90,7 +89,7 @@ StarSystem* Sector::GetClosestStarSystemTo(StarSystem* starsystem, int condition
         {
             if ( (STARSYSTEM_vec[i]->GetConditionId() == condition_id) or (condition_id == NONE_ID) )
             {
-                float dist = meti::distance(starsystem->GetCenter(), STARSYSTEM_vec[i]->GetCenter());
+                float dist = meti::distance(starsystem->center(), STARSYSTEM_vec[i]->center());
 
                 if (dist < dist_min)
                 {
@@ -134,7 +133,7 @@ void Sector::Update(int time)
 
 void Sector::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    save_ptree.put(root+"galaxy_id", galaxy->id());
+    save_ptree.put(root+"galaxy_id", m_galaxy->id());
 }
 
 void Sector::LoadData(const boost::property_tree::ptree& load_ptree)

@@ -49,7 +49,7 @@ void BlackHoleDrawable::UpdateInSpace(int time, bool show_effect)
 //    GetInfo().addTitleStr("BLACKHOLE");
 
 //    GetInfo().addNameStr("id:");         GetInfo().addValueStr(std::to_string(id()));
-//    GetInfo().addNameStr("mass:");       GetInfo().addValueStr(std::to_string(GetMass()));
-//    GetInfo().addNameStr("pos:");        GetInfo().addValueStr( str(GetCenter()) );
+//    GetInfo().addNameStr("mass:");       GetInfo().addValueStr(std::to_string(mass()));
+//    GetInfo().addNameStr("pos:");        GetInfo().addValueStr( str(center()) );
 //}
           

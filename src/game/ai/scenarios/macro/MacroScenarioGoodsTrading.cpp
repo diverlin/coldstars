@@ -91,7 +91,7 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
         if (microScenarioTypeId != TYPE::AISCENARIO::MICRO_GRAB_ID) 
         {
             Container* container = npc->GetObservation().GetClosestPickableContainer(); // find proper!
-            if (npc->GetVehicle()->GetFreeSpace() > container->GetMass())
+            if (npc->GetVehicle()->GetFreeSpace() > container->mass())
             {
                 Task microtask(TYPE::AISCENARIO::MICRO_GRAB_ID, container->id());
                 npc->GetStateMachine().SetCurrentMicroTask(microtask); 

@@ -27,7 +27,7 @@ class Asteroid : public BasePlanet
         Asteroid(int);
         virtual ~Asteroid();
 
-        int GetDamage() const { return GetMass()*10; };
+        int GetDamage() const { return mass()*10; };
 
         void UpdateInSpace(int, bool);            
         void CollisionEvent(bool);
@@ -37,7 +37,7 @@ class Asteroid : public BasePlanet
         virtual void Resolve() override final;
         
     private:          
-        void PostDeathUniqueEvent(bool);
+        void postDeathUniqueEvent(bool);
 
 //        virtual void UpdateInfo() override final;
         

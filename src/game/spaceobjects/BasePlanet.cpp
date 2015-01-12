@@ -38,7 +38,7 @@ BasePlanet::~BasePlanet()
 
 void BasePlanet::BindParent(const BaseSpaceEntity* const parent, int it)
 {
-    SetParent(parent);
+    setParent(parent);
     CreateOrbit();
     m_Orbit.SetIt(it);
     UpdatePosition();
@@ -50,19 +50,19 @@ void BasePlanet::CreateOrbit()
 }
 
 /* virtual */
-void BasePlanet::PostDeathUniqueEvent(bool)  
+void BasePlanet::postDeathUniqueEvent(bool)  
 {}
 
 void BasePlanet::UpdatePosition()
 {
     m_Orbit.UpdatePosition();  
-    if (GetParent() == nullptr)
+    if (parent() == nullptr)
     {
-        SetCenter(m_Orbit.GetPosition());
+        setCenter(m_Orbit.GetPosition());
     }
     else
     {
-        SetCenter(GetParent()->GetCenter() + m_Orbit.GetPosition());
+        setCenter(parent()->center() + m_Orbit.GetPosition());
     }
 }
 

@@ -100,7 +100,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
                 if (m_DeltaColor > 1.0)
                 {
                     m_DeltaColor = 1.0;
-                    GetStarSystem()->StarSparkEvent(meti::getRandInt(600, 1200));
+                    starsystem()->StarSparkEvent(meti::getRandInt(600, 1200));
                     m_SparkGrows = false;
                 }
             } 
@@ -117,7 +117,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
         }
         else
         {
-            GetStarSystem()->StarSparkEvent(meti::getRandInt(600, 1200));
+            starsystem()->StarSparkEvent(meti::getRandInt(600, 1200));
             m_SparkActive = false;
         }
     }
@@ -130,13 +130,13 @@ void Star::UpdateInSpace(int time, bool show_effect)
 //{
 //    GetInfo().clear();
 //    GetInfo().addTitleStr("STAR");
-//    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
-//    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(std::to_string(GetDataLife().armor));
-//    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( meti::str(GetCenter()) );
+//    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
+//    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(std::to_string(dataLife().armor));
+//    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( meti::str(center()) );
 //}
 
 /* virtual override final */
-void Star::PostDeathUniqueEvent(bool)
+void Star::postDeathUniqueEvent(bool)
 {}
 
    

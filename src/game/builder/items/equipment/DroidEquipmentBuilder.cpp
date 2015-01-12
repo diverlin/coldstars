@@ -97,7 +97,7 @@ void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, 
     common_data.deterioration_normal = 1;
    
     droid_equipment->SetRepairOrig(repair_orig);  
-    //alpitodorender droid_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
+    //alpitodorender droid_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     droid_equipment->SetParentSubTypeId(TYPE::ENTITY::DROID_SLOT_ID);
     droid_equipment->SetItemCommonData(common_data);
     droid_equipment->SetCondition(common_data.condition_max);

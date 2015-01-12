@@ -17,8 +17,7 @@
 */
 
 
-#ifndef SECTOR_HPP
-#define SECTOR_HPP
+#pragma once
 
 #include "../spaceobjects/BaseSpaceEntity.hpp"
 #include "../common/constants.hpp"
@@ -29,52 +28,51 @@ class StarSystemsConditionData;
 
 struct UnresolvedDataSector
 {
-    int galaxy_id;
+        int galaxy_id;
 };
 
 class Sector : public BaseSpaceEntity
 {
-      public:
-             Sector(int);
-             ~Sector();
-                
-                void SetGalaxy(Galaxy* galaxy)  { this->galaxy = galaxy; };
-                void SetCenter(const glm::vec3& center) { this->center = center; };
-                
-                Galaxy* GetGalaxy() const  { return galaxy; };
-                const glm::vec3& GetCenter() const  { return center; };
-                                                        
-                virtual void putChildrenToGarbage() const;
-                
-             void Add(StarSystem*, const glm::vec3&);
-             
-             StarSystem* GetRandomStarSystem(int condition_id = NONE_ID);
-                StarSystem* GetClosestStarSystemTo(StarSystem*, int condition_id = NONE_ID);
-                     
-            void Update(int);
+    public:
+        Sector(int);
+        ~Sector();
+
+        void SetGalaxy(Galaxy* galaxy)  { m_galaxy = galaxy; };
+        void setCenter(const glm::vec3& center) { m_center = center; };
+
+        Galaxy* GetGalaxy() const  { return m_galaxy; };
+        const glm::vec3& center() const  { return m_center; };
+
+        virtual void putChildrenToGarbage() const;
+
+        void Add(StarSystem*, const glm::vec3&);
+
+        StarSystem* GetRandomStarSystem(int condition_id = NONE_ID);
+        StarSystem* GetClosestStarSystemTo(StarSystem*, int condition_id = NONE_ID);
+
+        void Update(int);
 
         //void FillStarSystemsCondition(StarSystemsConditionData&) const;
 
-            void Save(boost::property_tree::ptree&) const;
-            void Load(const boost::property_tree::ptree&);
-            void Resolve();
+        void Save(boost::property_tree::ptree&) const;
+        void Load(const boost::property_tree::ptree&);
+        void Resolve();
 
-         private:
-             Galaxy* galaxy;
-             glm::vec3 center;
-             
-             UnresolvedDataSector data_unresolved_Sector;
-             
-               std::vector<StarSystem*> STARSYSTEM_vec;
+    private:
+        Galaxy* m_galaxy;
+        glm::vec3 m_center;
+
+        UnresolvedDataSector data_unresolved_Sector;
+
+        std::vector<StarSystem*> STARSYSTEM_vec;
         
-            void SaveData(boost::property_tree::ptree&, const std::string&) const;
-            void LoadData(const boost::property_tree::ptree&);
-            void ResolveData();
-                           
-               friend class GuiGalaxyMap;
-               friend class Observation;
-                friend class God;
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
+
+        friend class GuiGalaxyMap;
+        friend class Observation;
+        friend class God;
 };
 
 
-#endif 

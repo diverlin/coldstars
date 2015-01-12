@@ -128,23 +128,23 @@ void RenderManager::clearVisibleEntities()
 
 void RenderManager::addIfVisible(StarDrawable* star, const VisibilityData& data)
 {
-    if (isRectOnVisibleScreenArea(star->GetCenter(), star->GetSize(), data.screen.worldcoord, data.screen.scale)) {
+    if (isRectOnVisibleScreenArea(star->center(), star->size(), data.screen.worldcoord, data.screen.scale)) {
         m_stars.push_back(star);
     }
 }
 
 void RenderManager::addIfVisible(PlanetDrawable* planet, const VisibilityData& data)
 {
-    if (isRectOnVisibleScreenArea(planet->GetCenter(), planet->GetSize(), data.screen.worldcoord, data.screen.scale)) {
+    if (isRectOnVisibleScreenArea(planet->center(), planet->size(), data.screen.worldcoord, data.screen.scale)) {
         m_planets.push_back(planet);
     }
 }
 
 void RenderManager::addIfVisible(AsteroidDrawable* asteroid, const VisibilityData& data)
 {
-    if (isRectOnVisibleScreenArea(asteroid->GetCenter(), asteroid->GetSize(), data.screen.worldcoord, data.screen.scale))
+    if (isRectOnVisibleScreenArea(asteroid->center(), asteroid->size(), data.screen.worldcoord, data.screen.scale))
     {
-        if (ceti::isPointInObserverRadius(asteroid->GetCenter(), data.observer.center, data.observer.radius)) {
+        if (ceti::isPointInObserverRadius(asteroid->center(), data.observer.center, data.observer.radius)) {
             m_asteroids.push_back(asteroid);
         }
     }
@@ -152,8 +152,8 @@ void RenderManager::addIfVisible(AsteroidDrawable* asteroid, const VisibilityDat
 
 void RenderManager::addIfVisible(ContainerDrawable* container, const VisibilityData& data)
 {
-    if (isRectOnVisibleScreenArea(container->GetCenter(), container->GetSize(), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(container->GetCenter(), data.observer.center, data.observer.radius)) {
+    if (isRectOnVisibleScreenArea(container->center(), container->size(), data.screen.worldcoord, data.screen.scale)) {
+        if (ceti::isPointInObserverRadius(container->center(), data.observer.center, data.observer.radius)) {
             m_containers.push_back(container);
         }
     }
@@ -161,8 +161,8 @@ void RenderManager::addIfVisible(ContainerDrawable* container, const VisibilityD
 
 void RenderManager::addIfVisible(BulletDrawable* bullet, const VisibilityData& data)
 {
-    if (isRectOnVisibleScreenArea(bullet->GetCenter(), bullet->GetSize(), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(bullet->GetCenter(), data.observer.center, data.observer.radius)) {
+    if (isRectOnVisibleScreenArea(bullet->center(), bullet->size(), data.screen.worldcoord, data.screen.scale)) {
+        if (ceti::isPointInObserverRadius(bullet->center(), data.observer.center, data.observer.radius)) {
             m_bullets.push_back(bullet);
         }
     }
@@ -170,8 +170,8 @@ void RenderManager::addIfVisible(BulletDrawable* bullet, const VisibilityData& d
 
 void RenderManager::addIfVisible(BlackHoleDrawable* wormhole, const VisibilityData& data)
 {
-    if (isRectOnVisibleScreenArea(wormhole->GetCenter(), wormhole->GetSize(), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(wormhole->GetCenter(), data.observer.center, data.observer.radius)) {
+    if (isRectOnVisibleScreenArea(wormhole->center(), wormhole->size(), data.screen.worldcoord, data.screen.scale)) {
+        if (ceti::isPointInObserverRadius(wormhole->center(), data.observer.center, data.observer.radius)) {
             m_wormholes.push_back(wormhole);
         }
     }
@@ -179,8 +179,8 @@ void RenderManager::addIfVisible(BlackHoleDrawable* wormhole, const VisibilityDa
 
 void RenderManager::addIfVisible(ShipDrawable* ship, const VisibilityData& data)
 {
-    if (isRectOnVisibleScreenArea(ship->GetCenter(), ship->GetSize(), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(ship->GetCenter(), data.observer.center, data.observer.radius)) {
+    if (isRectOnVisibleScreenArea(ship->center(), ship->size(), data.screen.worldcoord, data.screen.scale)) {
+        if (ceti::isPointInObserverRadius(ship->center(), data.observer.center, data.observer.radius)) {
             m_ships.push_back(ship);
         }
     }
@@ -188,8 +188,8 @@ void RenderManager::addIfVisible(ShipDrawable* ship, const VisibilityData& data)
 
 void RenderManager::addIfVisible(SpaceStationDrawable* spacestation, const VisibilityData& data)
 {
-    if (isRectOnVisibleScreenArea(spacestation->GetCenter(), spacestation->GetSize(), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(spacestation->GetCenter(), data.observer.center, data.observer.radius)) {
+    if (isRectOnVisibleScreenArea(spacestation->center(), spacestation->size(), data.screen.worldcoord, data.screen.scale)) {
+        if (ceti::isPointInObserverRadius(spacestation->center(), data.observer.center, data.observer.radius)) {
             m_spacestations.push_back(spacestation);
         }
     }
@@ -197,8 +197,8 @@ void RenderManager::addIfVisible(SpaceStationDrawable* spacestation, const Visib
 
 void RenderManager::addIfVisible(SatelliteDrawable* satellite, const VisibilityData& data)
 {
-    if (isRectOnVisibleScreenArea(satellite->GetCenter(), satellite->GetSize(), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(satellite->GetCenter(), data.observer.center, data.observer.radius)) {
+    if (isRectOnVisibleScreenArea(satellite->center(), satellite->size(), data.screen.worldcoord, data.screen.scale)) {
+        if (ceti::isPointInObserverRadius(satellite->center(), data.observer.center, data.observer.radius)) {
             m_satellites.push_back(satellite);
         }
     }
@@ -206,8 +206,8 @@ void RenderManager::addIfVisible(SatelliteDrawable* satellite, const VisibilityD
 
 void RenderManager::addIfVisible(ShockWaveEffect* effect, const VisibilityData& data)
 {
-    if (isRectOnVisibleScreenArea(effect->GetCenter(), glm::vec2(600.0), data.screen.worldcoord, data.screen.scale)) {
-        if (ceti::isPointInObserverRadius(effect->GetCenter(), data.observer.center, data.observer.radius)) {
+    if (isRectOnVisibleScreenArea(effect->center(), glm::vec2(600.0), data.screen.worldcoord, data.screen.scale)) {
+        if (ceti::isPointInObserverRadius(effect->center(), data.observer.center, data.observer.radius)) {
             m_shockwaves.push_back(effect);
         }
     }
@@ -225,7 +225,7 @@ void RenderManager::addIfVisible(LazerTraceEffect* effect, const VisibilityData&
 
 void RenderManager::addIfVisible(jeti::BaseParticleSystem* effect, const VisibilityData& data)
 {
-//    if (isRectOnVisibleScreenArea(effect->GetCenter(), 600, data.screen.worldcoord, data.screen.scale)) {
+//    if (isRectOnVisibleScreenArea(effect->center(), 600, data.screen.worldcoord, data.screen.scale)) {
 //        if (isObjectWithinRadarRange(effect, npc->GetVehicle())) {
             m_particlesystems.push_back(effect);
 //        }
@@ -234,7 +234,7 @@ void RenderManager::addIfVisible(jeti::BaseParticleSystem* effect, const Visibil
 
 void RenderManager::addIfVisible(VerticalFlowText* effect, const VisibilityData& data)
 {
-    if (isPointOnVisibleScreenArea(effect->GetCenter(), data.screen.worldcoord)) {
+    if (isPointOnVisibleScreenArea(effect->center(), data.screen.worldcoord)) {
         m_texts.push_back(effect);
     }
 }
@@ -276,7 +276,7 @@ void RenderManager::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsy
 
             // BLOOM background and star (uses many FBO)
             //resizeGl(w, h);
-            // alpitodorender render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->GetVehicle()->GetStarSystem()->GetStar()->GetBrightThreshold());
+            // alpitodorender render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->GetVehicle()->starsystem()->GetStar()->GetBrightThreshold());
         }
 
         // VOLUMETRIC LIGHT to FBO1
@@ -344,7 +344,7 @@ void RenderManager::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsy
                         //rocket->RenderInSpace(render, 1/scale);
                     }
                 }
-//                if (show.GetCollisionRadius() == true)
+//                if (show.collisionRadius() == true)
 //                {
 //                    RenderAxis(render);
 //                    RenderCollisionRadius(render);
@@ -368,23 +368,23 @@ void RenderManager::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsy
                 {
                     const ShockWaveEffect& shockwave = *m_wormholes[i]->GetShockWaveEffect();
 
-                    center_array[i][0] = (shockwave.center.x - world_coord.x)/w;
-                    center_array[i][1] = (shockwave.center.y - world_coord.y)/h;
-                    xyz_array[i][0] = shockwave.parameter.x;
-                    xyz_array[i][1] = shockwave.parameter.y;
-                    xyz_array[i][2] = shockwave.parameter.z;
+                    center_array[i][0] = (shockwave.center().x - world_coord.x)/w;
+                    center_array[i][1] = (shockwave.center().y - world_coord.y)/h;
+                    xyz_array[i][0] = shockwave.parameters().x;
+                    xyz_array[i][1] = shockwave.parameters().y;
+                    xyz_array[i][2] = shockwave.parameters().z;
                     
-                    time_array[i] = shockwave.time;
+                    time_array[i] = shockwave.time();
                 }
                 for (unsigned int j=0; ((j<m_shockwaves.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
                 {
-                    center_array[i][0] = (m_shockwaves[j]->center.x - world_coord.x)/(w*scale);
-                    center_array[i][1] = (m_shockwaves[j]->center.y - world_coord.y)/(h*scale);
-                    xyz_array[i][0] = m_shockwaves[j]->parameter.x;
-                    xyz_array[i][1] = m_shockwaves[j]->parameter.y;
-                    xyz_array[i][2] = m_shockwaves[j]->parameter.z/scale;
+                    center_array[i][0] = (m_shockwaves[j]->center().x - world_coord.x)/(w*scale);
+                    center_array[i][1] = (m_shockwaves[j]->center().y - world_coord.y)/(h*scale);
+                    xyz_array[i][0] = m_shockwaves[j]->parameters().x;
+                    xyz_array[i][1] = m_shockwaves[j]->parameters().y;
+                    xyz_array[i][2] = m_shockwaves[j]->parameters().z/scale;
                     
-                    time_array[i] = m_shockwaves[j]->time;
+                    time_array[i] = m_shockwaves[j]->time();
                 }
 
                 render.DrawPostEffectShockWaves(render.GetLastFbo().GetTexture(), w, h, i, center_array, xyz_array, time_array);
@@ -425,7 +425,7 @@ void RenderManager::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsy
         //resizeGl(w, h); 
             
       
-        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->GetVehicle()->GetCenter(), world_coord, 200 /*npc->GetVehicle()->GetProperties().radius*/);         
+        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->GetVehicle()->center(), world_coord, 200 /*npc->GetVehicle()->GetProperties().radius*/);         
        
         // render text
         //resizeGl(w*scale, h*scale); 

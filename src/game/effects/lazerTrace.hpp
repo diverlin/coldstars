@@ -34,7 +34,7 @@ class LazerTraceEffect
         LazerTraceEffect(jeti::TextureOb*, const glm::vec3* const, const glm::vec3* const);
         ~LazerTraceEffect();
 
-        bool GetIsAlive() const { return m_IsAlive; }
+        bool isAlive() const { return m_IsAlive; }
 
         void BindParticleSystem(jeti::BaseParticleSystem* particle_system) { m_ParticleSystem = particle_system; }
         

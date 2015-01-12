@@ -131,7 +131,7 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
     
             case sf::Keyboard::C: 
             { 
-                glm::vec3 player_pos3 = player->GetNpc()->GetVehicle()->GetCenter();
+                glm::vec3 player_pos3 = player->GetNpc()->GetVehicle()->center();
                 glm::vec2 player_pos2(player_pos3.x, player_pos3.y);
                 jeti::Screen::Instance().InitiateScrollTo(player_pos2);
                 break; 

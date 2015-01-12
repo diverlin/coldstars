@@ -98,7 +98,7 @@ void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equip
     common_data.deterioration_normal = 1;
     
     freezer_equipment->SetFreezeOrig(freeze_orig);  
-    //alpitodorender freezer_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
+    //alpitodorender freezer_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     freezer_equipment->SetParentSubTypeId(TYPE::ENTITY::FREEZER_SLOT_ID);
     freezer_equipment->SetItemCommonData(common_data);
     freezer_equipment->SetCondition(common_data.condition_max);

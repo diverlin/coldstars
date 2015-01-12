@@ -33,7 +33,7 @@ Box2D::Box2D(const glm::vec2& size)
 :
 m_Angle(0.0)
 {
-    SetSize(size);
+    setSize(size);
     SetScale(1.0, 1.0);
 }
 
@@ -41,8 +41,8 @@ Box2D::Box2D(const glm::vec2& center, const glm::vec2& size)
 :
 m_Angle(0.0)
 {
-    SetCenter(center);
-    SetSize(size);    
+    setCenter(center);
+    setSize(size);    
     SetScale(1.0, 1.0);
 }
 
@@ -57,8 +57,8 @@ Box2D::Box2D(const Rect& rect)
 :
 m_Angle(0.0)
 {
-    SetCenter(glm::vec2(rect.GetCenter().x, rect.GetCenter().y));
-    SetSize(glm::vec2(rect.GetWidth(), rect.GetHeight()));
+    setCenter(glm::vec2(rect.center().x, rect.center().y));
+    setSize(glm::vec2(rect.GetWidth(), rect.GetHeight()));
     SetScale(1.0, 1.0);
 }
 
@@ -72,9 +72,9 @@ bool Box2D::CheckInteraction(const glm::vec2& point) const
                
 void Box2D::Set(const Box2D& box)
 {
-    SetSize(box.GetSize());
+    setSize(box.size());
     SetScale(box.GetScale());
-    SetCenter(box.GetCenter());
+    setCenter(box.center());
     m_Angle = box.GetAngle();
 }
 

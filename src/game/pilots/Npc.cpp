@@ -69,7 +69,7 @@ Npc::Npc(int id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id)
 Npc::~Npc() 
 {}  
 
-StarSystem* Npc::GetStarSystem() const { return vehicle->GetStarSystem(); }
+StarSystem* Npc::starsystem() const { return vehicle->starsystem(); }
 
 void Npc::CloneMacroTaskFrom(Npc* npc)
 {
@@ -158,12 +158,12 @@ void Npc::AddExpirience(int expirience, bool show_effect)
     
     if (show_effect == true)
     {
-        VerticalFlowText* text = new VerticalFlowText(std::to_string(expirience), 12, meti::vec2(vehicle->GetCenter()), COLOR::COLOR4I_BLUE_LIGHT, 10);
-        vehicle->GetStarSystem()->Add(text);
+        VerticalFlowText* text = new VerticalFlowText(std::to_string(expirience), 12, meti::vec2(vehicle->center()), COLOR::COLOR4I_BLUE_LIGHT, 10);
+        vehicle->starsystem()->Add(text);
     }
 }
 
-void Npc::TakeIntoAccountAgressor(Vehicle* agressor)
+void Npc::remeberAgressor(Vehicle* agressor)
 {
     for (std::set<AgressorData>::iterator it=data_agressor_set.begin(); it!=data_agressor_set.end(); ++it)
     {
@@ -223,12 +223,12 @@ void Npc::ScenarioFireAsteroid()
 
 Planet* Npc::GetPlanetForDocking()
 {
-    return GetStarSystem()->GetClosestInhabitedPlanet(meti::vec2(vehicle->GetCenter()));  // improove
+    return starsystem()->GetClosestInhabitedPlanet(meti::vec2(vehicle->center()));  // improove
 }
 
 StarSystem* Npc::GetClosestStarSystem(int requested_condition_id)
 {
-    observation.FindEchievableStarSystems(GetStarSystem()->GetSector()->GetGalaxy());
+    observation.FindEchievableStarSystems(starsystem()->GetSector()->GetGalaxy());
     
     StarSystem* _target_starsystem = observation.GetClosestStarSystem(requested_condition_id);
     return _target_starsystem;

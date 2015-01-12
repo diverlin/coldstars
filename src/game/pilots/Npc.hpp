@@ -70,7 +70,7 @@ class Npc : public Base
         INTLONGEST GetCredits()  const { return credits; };   
         StateMachine& GetStateMachine() { return state_machine; };
 
-        StarSystem* GetStarSystem() const;
+        StarSystem* starsystem() const;
 
         void IncreaseCredits(INTLONGEST credits) { this->credits += credits; };
         bool WithdrawCredits(INTLONGEST);
@@ -80,7 +80,7 @@ class Npc : public Base
         void CloneMacroTaskFrom(Npc*);
         
         // AI
-        void TakeIntoAccountAgressor(Vehicle*);
+        void remeberAgressor(Vehicle*);
         void UpdateInSpace(int, bool);
         
         void UpdateInSpaceInStatic();

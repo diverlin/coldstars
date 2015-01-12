@@ -58,19 +58,19 @@ RocketBullet::~RocketBullet()
 
 void RocketBullet::CreateDriveComplexTextureDependedStuff()
 {
-    GetPoints().addMidLeftPoint();
-    GetPoints().addMidFarLeftPoint();
+    points().addMidLeftPoint();
+    points().addMidFarLeftPoint();
         
-    //alpitodorender m_EffectDrive = GetNewDriveEffect(GetTextureOb().GetData().size_id/2, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
+    //alpitodorender m_EffectDrive = GetNewDriveEffect(GetTextureOb().GetData().size_id/2, points().GetpMidLeft(), points().GetpMidFarLeft());
 }    
 
 void RocketBullet::UpdateInSpace(int time, bool show_effect)
 {
-    CheckDeath(show_effect);
+    checkDeath(show_effect);
         
     if (time > 0)
     {
-        UpdateOrientation();
+        updateOrientation();
             
         if (m_Speed < m_DataBullet.speed_max)
         {
@@ -80,7 +80,7 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
         if (m_Target != nullptr)
         { 
             float angle; 
-            get_dPos_ToPoint(GetCenter(), m_Target->GetCenter(), m_Speed/100.0, GetAppliedForce(), angle);
+            get_dPos_ToPoint(center(), m_Target->center(), m_Speed/100.0, externalForce(), angle);
         
             if (CheckTarget() == true)
             {
@@ -92,7 +92,7 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
             }
         }      
 
-        SetCenter(GetCenter() + GetAppliedForce());    
+        setCenter(center() + externalForce());    
 
         m_DataBullet.live_time -= 1;
     }
@@ -100,11 +100,11 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
 
 bool RocketBullet::CheckTarget() const
 {
-    if (m_Target->GetAlive() == true)
+    if (m_Target->isAlive() == true)
     {
-        if (m_Target->GetPlaceTypeId() == TYPE::PLACE::SPACE_ID)
+        if (m_Target->placeTypeId() == TYPE::PLACE::SPACE_ID)
         {
-            if (m_Target->GetStarSystem()->id() == GetStarSystem()->id())
+            if (m_Target->starsystem()->id() == starsystem()->id())
             {
                 return true;
             }
@@ -116,8 +116,8 @@ bool RocketBullet::CheckTarget() const
 
 void RocketBullet::CollisionEvent(bool show_effect)
 {
-    GetDataLife().is_alive = false; 
-    GetDataLife().dying_time = -1;
+    dataLife().is_alive = false; 
+    dataLife().dying_time = -1;
 }
 
 ///* virtual override final */
@@ -126,8 +126,8 @@ void RocketBullet::CollisionEvent(bool show_effect)
 //    GetInfo().clear();
 
 //    GetInfo().addTitleStr("ROCKET");
-//    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()) );
-//    GetInfo().addNameStr("armor:");             GetInfo().addValueStr( std::to_string(GetDataLife().armor) );
+//    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( std::to_string(id()) + " / " + std::to_string(starsystem()->id()) );
+//    GetInfo().addNameStr("armor:");             GetInfo().addValueStr( std::to_string(dataLife().armor) );
 //    if (m_Target != nullptr)
 //    {
 //        GetInfo().addNameStr("target_id:");       GetInfo().addValueStr(std::to_string(m_Target->id()));
@@ -135,30 +135,30 @@ void RocketBullet::CollisionEvent(bool show_effect)
 //}
 
 /* virtual override final */
-void RocketBullet::Hit(int damage, bool show_effect)
+void RocketBullet::hit(int damage, bool show_effect)
 {
-    GetDataLife().armor -= damage;
+    dataLife().armor -= damage;
 
-    if (GetDataLife().armor < 0)
+    if (dataLife().armor < 0)
     {
-        GetDataLife().is_alive = false;
+        dataLife().is_alive = false;
     }
 
     if (show_effect == true)
     {
         // improove
-//        VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(GetCenter()), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
-//        GetStarSystem()->Add(text);
+//        VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(center()), COLOR::COLOR4I_RED_LIGHT, collisionRadius());
+//        starsystem()->Add(text);
     }
 }
 
 /* virtual override final */
-void RocketBullet::PostDeathUniqueEvent(bool show_effect)  
+void RocketBullet::postDeathUniqueEvent(bool show_effect)  
 {
     if (show_effect == true)
     {
-//        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
-//        GetStarSystem()->Add(explosion, GetCenter());
+//        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(collisionRadius());
+//        starsystem()->Add(explosion, center());
     }
 }
 

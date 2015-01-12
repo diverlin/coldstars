@@ -72,7 +72,7 @@ void ButtonItemSlot::RenderInfo(const jeti::Renderer& render) const
     {
         if (GetItemSlot()->GetItem() != nullptr)
         {
-            GetItemSlot()->GetItem()->RenderInfo(render, GetBox().GetCenter()); 
+            GetItemSlot()->GetItem()->RenderInfo(render, GetBox().center()); 
         }
         else
         {

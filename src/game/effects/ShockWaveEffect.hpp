@@ -18,34 +18,36 @@
 
 
 #pragma once
- 
+
 #include <meti/VectorUtils.hpp>
 
 class ShockWaveEffect
 {
     public:
-        bool is_alive;
-              bool is_alreadyInRemoveQueue;
+        ShockWaveEffect(float x, float y, float z, float time, float d_x, float d_y, float d_z, float d_time);
+        ~ShockWaveEffect();
 
-              glm::vec2 center;
-                            
-              glm::vec3 parameter;
-              glm::vec3 d_parameter;
-              float time, d_time;
-              
-              void SetCenter(const glm::vec2& center) { this->center = center; };
-              const glm::vec2& GetCenter() const { return center; };
+        void setCenter(const glm::vec2& center) { m_center = center; }
 
-              ShockWaveEffect(float _x, float _y, float _z, float _time, float _d_x, float _d_y, float _d_z, float d_time);
-              ~ShockWaveEffect();
-              
-              void Update();
-              
-          private:
+        bool isAlive() const { return m_isAlive; }
+        bool isAlreadyInRemoveQueue() const { return m_isAlreadyInRemoveQueue; }
+        const glm::vec2& center() const { return m_center; }
+        float time() const { return m_time; }
+        const glm::vec3& parameters() const { return m_parameters; }
 
-          
+        void Update();
+
+    private:
+        bool m_isAlive;
+        bool m_isAlreadyInRemoveQueue;
+
+        glm::vec2 m_center;
+
+        glm::vec3 m_parameters;
+        glm::vec3 m_dParameters;
+        float m_time, m_dTime;
 };
 
 ShockWaveEffect* getNewShockWave(float, bool dynamic = true);          
-    
+
 

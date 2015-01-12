@@ -78,7 +78,7 @@ void RadarModuleBuilder::CreateNewInternals(RadarModule* radar_module, int radiu
     radius_add  = meti::getRandInt(MODULE::RADAR::RADIUS_MIN, MODULE::RADAR::RADIUS_MAX);
 
     radar_module->SetParentSubTypeId(TYPE::ENTITY::RADAR_EQUIPMENT_ID);    
-    //alpitodorender radar_module->SetRenderData(mesh, texOb, texOb->GetSize());
+    //alpitodorender radar_module->SetRenderData(mesh, texOb, texOb->size());
     radar_module->SetRadiusAdd(radius_add);
 }
 

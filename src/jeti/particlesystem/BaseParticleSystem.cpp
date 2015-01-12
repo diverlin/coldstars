@@ -70,7 +70,7 @@ void BaseParticleSystem::Update()
 
         positions.push_back(particle.GetPosition());
         colors.push_back(particle.GetColor());
-        sizes.push_back(particle.GetSize());
+        sizes.push_back(particle.size());
     }
 
     m_Mesh->FillPointVerticesFast(positions, colors, sizes);
@@ -78,9 +78,9 @@ void BaseParticleSystem::Update()
 
 const glm::mat4& BaseParticleSystem::GetActualModelMatrix()
 { 
-    m_MatrixModel = glm::translate(GetCenter());
+    m_MatrixModel = glm::translate(center());
     //m_MatrixRotate    = glm::toMat4(m_QuatPosition * m_QuatAnimation);
-    //m_MatrixScale     = glm::scale(GetSize());
+    //m_MatrixScale     = glm::scale(size());
 
     //m_MatrixModel = m_MatrixTranslate * m_MatrixScale * m_MatrixRotate;
     

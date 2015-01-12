@@ -36,13 +36,13 @@ class BaseBackGroundEffect
         void ValidateResources() const;
         void SetTextureOb(jeti::TextureOb* textureOb, const glm::vec3& scale_factor = glm::vec3(1.0, 1.0, 1.0));
 
-        void SetCenter(const glm::vec3& center)     { m_Center = center; }        
-        void SetSize(const glm::vec3& size)         { m_Size = size; }
+        void setCenter(const glm::vec3& center)     { m_Center = center; }        
+        void setSize(const glm::vec3& size)         { m_Size = size; }
 
         void SetAngle(float angle)              { m_Angle = angle; }                       
         void SetDeltaAngle(float delta_angle)   { m_DeltaAngle = delta_angle; }
 
-        const glm::vec3& GetCenter() const { return m_Center; }
+        const glm::vec3& center() const { return m_Center; }
         const jeti::TextureOb& GetTextureOb() const { return *m_TextureOb; }
 
         const glm::vec4& GetColor() const { return m_Color; }

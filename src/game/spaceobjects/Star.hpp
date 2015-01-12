@@ -33,7 +33,7 @@ class Star : public BasePlanet
 //        float GetBrightThreshold() const;
         float GetDeltaColor() const { return m_DeltaColor; }
         
-        void Hit(int, bool) {};
+        void hit(int, bool) {};
         void InitiateSpark();
         
 
@@ -55,7 +55,7 @@ class Star : public BasePlanet
         int m_TurnSparkThreshold;
         
 //        virtual void UpdateInfo() override final;
-        virtual void PostDeathUniqueEvent(bool) override final;
+        virtual void postDeathUniqueEvent(bool) override final;
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;        
         void LoadData(const boost::property_tree::ptree&);

@@ -36,8 +36,8 @@ class TextureOb
         ~TextureOb();
 
         int id() const { return m_Id; }
-        //const glm::vec3 GetSize() const { return glm::vec3(0.5*m_Material.w_slice, 0.5*m_Material.h_slice, 1.0f); }     // ugly
-        const glm::vec3 GetSize() const { return glm::vec3(50.0f, 50.0f, 1.0f); }     // ugly
+        //const glm::vec3 size() const { return glm::vec3(0.5*m_Material.w_slice, 0.5*m_Material.h_slice, 1.0f); }     // ugly
+        const glm::vec3 size() const { return glm::vec3(50.0f, 50.0f, 1.0f); }     // ugly
 
         int GetFrameWidth() const  { return m_Material.w_slice; }
         int GetFrameHeight() const { return m_Material.h_slice; }

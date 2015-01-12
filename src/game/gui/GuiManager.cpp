@@ -59,7 +59,7 @@ gui_vehicle_scan(nullptr)
         gui_vehicle_scan = new GuiVehicle();
 
         glm::vec2 size(250, 250);    
-        gui_vehicle_scan->SetSize(size);
+        gui_vehicle_scan->setSize(size);
     
         glm::vec2 offset(screen_w/2, screen_h/2);
         gui_space.AddChild(gui_vehicle_scan, offset);    
@@ -190,7 +190,7 @@ void GuiManager::UpdateSessionInSpace()
         gui_player_vehicle->Hide(); 
         
         gui_galaxymap->Show();
-        gui_galaxymap->BindGalaxy(player->GetNpc()->GetStarSystem()->GetSector()->GetGalaxy());
+        gui_galaxymap->BindGalaxy(player->GetNpc()->starsystem()->GetSector()->GetGalaxy());
     }
     else
     {

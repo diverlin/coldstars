@@ -110,16 +110,16 @@ void Vehicle::putChildrenToGarbage() const
 
 void Vehicle::CreateDriveComplexTextureDependedStuff()
 {
-    GetPoints().addMidLeftPoint();
-    GetPoints().addMidFarLeftPoint();
+    points().addMidLeftPoint();
+    points().addMidFarLeftPoint();
         
-    //DriveEffect* drive_effect = GetNewDriveEffect(GetTextureOb().GetData().size_id, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
+    //DriveEffect* drive_effect = GetNewDriveEffect(GetTextureOb().GetData().size_id, points().GetpMidLeft(), points().GetpMidFarLeft());
     //m_ComplexDrive.SetDriveEffect(drive_effect);
 }    
 
 void Vehicle::CreateProtectionComplexTextureDependedStuff()
 {
-    m_ComplexProtector.GetShieldEffect()->SetParent(this);
+    m_ComplexProtector.GetShieldEffect()->setParent(this);
 }
 
 void Vehicle::SetKorpusData(const VehicleKorpusData& data_korpus) 
@@ -145,7 +145,7 @@ GoodsPack* Vehicle::GetGoodsPack() const
 }
         
 /* virtual override final */
-int Vehicle::GetGivenExpirience() const
+int Vehicle::givenExpirience() const
 {
     return m_OwnerNpc->GetSkills().GetExpirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
 }
@@ -177,8 +177,8 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
             float pos_x = meti::getRandFloat(border_start, border_end) - 0.5;
             float pos_y = meti::getRandFloat(border_start, border_end) - 0.5;
                             
-            slot->GetTurrel()->SetParentCenter(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
-            GetPoints().Add(slot->GetTurrel()->GetpCenter(), slot->GetTurrel()->GetpParentCenter()); 
+            slot->GetTurrel()->setParentCenter(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
+            points().Add(slot->GetTurrel()->pCenter(), slot->GetTurrel()->pParentCenter()); 
             m_ComplexWeapon.AddSlot(slot); 
             
             break; 
@@ -381,7 +381,7 @@ bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
 {    
      if (AddItemToCargoSlot(container->GetItemSlot()->GetItem()) == true)
     {      
-        container->SilentKill();
+        container->killSilently();
                                 
         return true;
     }
@@ -391,7 +391,7 @@ bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
 
 bool Vehicle::AddItemToCargoSlot(BaseItem* item)
 {
-    IncreaseMass(item->GetMass());
+    IncreaseMass(item->mass());
     if (item->typeId() == TYPE::ENTITY::GOODS_ID)
     {
         if (ManageFunctionGoodsPack(item) == true)
@@ -448,7 +448,7 @@ bool Vehicle::SellItem(BaseItem* item)
     //float skill_rate = 1.0f + sign*0.1*npc->GetSkill().GetTrader();
     //npc->IncreaseCredits(sign*amount*skill_rate*minerals_price);
     int earn_money = 0;
-    int item_mass = item->GetMass();
+    int item_mass = item->mass();
     switch(item->typeId())
     {
         case TYPE::ENTITY::GOODS_ID:        
@@ -494,7 +494,7 @@ bool Vehicle::MergeIdenticalGoods(BaseItem* item)
     ItemSlot* item_slot = GetCargoSlotWithGoods(item->subTypeId());
     if (item_slot != nullptr)
     {
-        item_slot->GetGoodsPack()->Increase(item->GetMass());
+        item_slot->GetGoodsPack()->Increase(item->mass());
         // delete item; dangerrr
         return true;
     }
@@ -510,7 +510,7 @@ void Vehicle::BindOwnerNpc(Npc* owner_npc)
 
 bool Vehicle::IsObjectWithinRadarRange(BaseSpaceEntity* object) const
 {
-    float dist = meti::distance(GetCenter(), object->GetCenter());
+    float dist = meti::distance(center(), object->center());
     if (dist < m_Properties.radar)
     {
             return true;
@@ -550,7 +550,7 @@ void Vehicle::UpdateSpecialAction()
         {
             // alpitodorender if (UpdateFadeInEffect() == true)
             {
-                HyperJumpEvent(m_ComplexDrive.GetTarget()->GetStarSystem());
+                HyperJumpEvent(m_ComplexDrive.GetTarget()->starsystem());
             }
         
             break;
@@ -642,7 +642,7 @@ void Vehicle::LaunchingEvent()
                 glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
                 glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
                 glm::vec3 angle(0,0,angleInD);
-                GetStarSystem()->AddVehicle(this, ((BaseSpaceEntity*)m_Land->GetOwner())->GetCenter() + offset_pos3, angle, nullptr);
+                starsystem()->AddVehicle(this, ((BaseSpaceEntity*)m_Land->GetOwner())->center() + offset_pos3, angle, nullptr);
                 m_Land->RemoveVehicle(this);
     
                 break;
@@ -661,7 +661,7 @@ void Vehicle::LaunchingEvent()
         glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
         glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
         glm::vec3 angle(0,0,angleInD);
-        GetStarSystem()->AddVehicle(this, ((BaseSpaceEntity*)m_Land->GetOwner())->GetCenter() + offset_pos3, angle, nullptr);
+        starsystem()->AddVehicle(this, ((BaseSpaceEntity*)m_Land->GetOwner())->center() + offset_pos3, angle, nullptr);
         m_Land->RemoveVehicle(this); 
     }
 
@@ -671,13 +671,13 @@ void Vehicle::LaunchingEvent()
 //// 
 
 /* virtual */
-void Vehicle::TakeIntoAccountAgressor(Vehicle* agressor)
+void Vehicle::remeberAgressor(Vehicle* agressor)
 {
-    m_OwnerNpc->TakeIntoAccountAgressor(agressor);
+    m_OwnerNpc->remeberAgressor(agressor);
 }
 
 /* virtual */
-void Vehicle::Hit(int damage, bool show_effect)
+void Vehicle::hit(int damage, bool show_effect)
 {
     #if WEAPONSTARGET_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::Hit", WEAPONSTARGET_LOG_DIP);
@@ -695,11 +695,11 @@ void Vehicle::Hit(int damage, bool show_effect)
     damage *= (1.0 - m_Properties.protection*0.01f);
     damage *= m_OwnerNpc->GetSkills().GetDefenceNormalized();
     
-    GetDataLife().armor -= damage;
+    dataLife().armor -= damage;
     
-    if (GetDataLife().armor < 0)
+    if (dataLife().armor < 0)
     {
-        GetDataLife().is_alive = false;
+        dataLife().is_alive = false;
     }
 
     if (show_effect == true)
@@ -709,15 +709,15 @@ void Vehicle::Hit(int damage, bool show_effect)
             m_ComplexProtector.GetShieldEffect()->SetAlpha(1.0);
         }           
                
-               VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(GetCenter()), COLOR::COLOR4I_RED_LIGHT, GetCollisionRadius());
-               GetStarSystem()->Add(text); 
+               VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(center()), COLOR::COLOR4I_RED_LIGHT, collisionRadius());
+               starsystem()->Add(text); 
            }
            
     }
 }
 
 /* virtual */
-void Vehicle::PostDeathUniqueEvent(bool show_effect)  
+void Vehicle::postDeathUniqueEvent(bool show_effect)  
 {
     int num_items = meti::getRandInt(0, 3);
     for (int i = 0; i<num_items; i++)
@@ -727,8 +727,8 @@ void Vehicle::PostDeathUniqueEvent(bool show_effect)
     
     if (show_effect == true)
     {
-//        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
-//        GetStarSystem()->Add(explosion, GetCenter());
+//        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(collisionRadius());
+//        starsystem()->Add(explosion, center());
     }
 }
 
@@ -736,7 +736,7 @@ void Vehicle::PostDeathUniqueEvent(bool show_effect)
 void Vehicle::CheckNeedsInStatic()
 {
         // check armor
-        if (GetDataLife().armor < 0.5*m_DataKorpus.armor)    { m_Needs.repair_korpus = true; }
+        if (dataLife().armor < 0.5*m_DataKorpus.armor)    { m_Needs.repair_korpus = true; }
         else                                                { m_Needs.repair_korpus = false; }
 
         //check item damages
@@ -863,8 +863,8 @@ void Vehicle::IncreaseMass(int d_mass)
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::IncreaseMass", ITEMINFLUENCE_LOG_DIP);
     #endif
     
-    ChangeMass(d_mass);
-    m_Properties.free_space = m_DataKorpus.space - GetMass();
+    addMass(d_mass);
+    m_Properties.free_space = m_DataKorpus.space - mass();
     UpdatePropertiesSpeed(); // as the mass influence speed this action is necessary here
 }
 
@@ -874,8 +874,8 @@ void Vehicle::DecreaseMass(int d_mass)
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::DecreaseMass", ITEMINFLUENCE_LOG_DIP);
     #endif
     
-    ChangeMass(-d_mass);
-    m_Properties.free_space = m_DataKorpus.space - GetMass();
+    addMass(-d_mass);
+    m_Properties.free_space = m_DataKorpus.space - mass();
     UpdatePropertiesSpeed(); // as the mass influence speed this action is necessary here
 }
 
@@ -894,7 +894,7 @@ void Vehicle::UpdatePropertiesSpeed()
         {
             if (m_ComplexDrive.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)  
             {
-                float actual_speed = (m_ComplexDrive.GetDriveSlot()->GetDriveEquipment()->GetSpeed() - GetMass()*MASS_DECREASE_SPEED_RATE); 
+                float actual_speed = (m_ComplexDrive.GetDriveSlot()->GetDriveEquipment()->GetSpeed() - mass()*MASS_DECREASE_SPEED_RATE); 
                 if (actual_speed > 0)
                 { 
                     if (m_Properties.artefact_gravity > 0)
@@ -1062,11 +1062,11 @@ void Vehicle::IncreaseArmor(int repair)
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::IncreaseArmor", ITEMINFLUENCE_LOG_DIP);
     #endif
     
-    GetDataLife().armor += repair;
+    dataLife().armor += repair;
     
-    if (GetDataLife().armor > m_DataKorpus.armor)
+    if (dataLife().armor > m_DataKorpus.armor)
     {
-        GetDataLife().armor = m_DataKorpus.armor;
+        dataLife().armor = m_DataKorpus.armor;
     }
 }
 
@@ -1185,7 +1185,7 @@ void Vehicle::UpdateArtefactInfluence()
 //void Vehicle::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
 //{
 //    UpdateInfo(); // virtual
-//    glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
+//    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
 //    pos /= zoom;
 //    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
 //    if (m_OwnerNpc != nullptr)
@@ -1235,7 +1235,7 @@ void Vehicle::UpdateArtefactInfluence()
 //    if (m_Properties.radar > VISIBLE_DISTANCE_WITHOUT_RADAR)
 //    {
 //        m_SlotRadar->UpdateRange(GuiTextureObCollector::Instance().dot_yellow);
-//        m_SlotRadar->DrawRange(meti::vec2(GetCenter()));
+//        m_SlotRadar->DrawRange(meti::vec2(center()));
 //    }
 //}
 
@@ -1244,13 +1244,13 @@ void Vehicle::UpdateArtefactInfluence()
 //    if (m_Properties.grab_radius > 0)
 //    {
 //        m_SlotGrapple->UpdateRange(GuiTextureObCollector::Instance().dot_blue);
-//        m_SlotGrapple->DrawRange(meti::vec2(GetCenter()));
+//        m_SlotGrapple->DrawRange(meti::vec2(center()));
 //    }
 //}
 
 bool Vehicle::IsAbleToJumpTo(StarSystem* target_starsystem) const
 {
-     float dist = meti::distance(GetStarSystem()->GetCenter(), target_starsystem->GetCenter());
+     float dist = meti::distance(starsystem()->center(), target_starsystem->center());
     if (dist < m_Properties.hyper)
     {
         return true;
@@ -1261,16 +1261,16 @@ bool Vehicle::IsAbleToJumpTo(StarSystem* target_starsystem) const
         
 void Vehicle::RepairKorpusOnAmount(int amount)
 {
-    GetDataLife().armor += amount;
-    if (GetDataLife().armor > m_DataKorpus.armor)
+    dataLife().armor += amount;
+    if (dataLife().armor > m_DataKorpus.armor)
     {
-        GetDataLife().armor = m_DataKorpus.armor;
+        dataLife().armor = m_DataKorpus.armor;
     }
 }
 
 bool Vehicle::IsArmorFull() const
 {
-    if (GetDataLife().armor == m_DataKorpus.armor)
+    if (dataLife().armor == m_DataKorpus.armor)
     {
         return true;
     }
@@ -1280,7 +1280,7 @@ bool Vehicle::IsArmorFull() const
 
 int Vehicle::GetArmorMiss() const
 {
-    return (m_DataKorpus.armor - GetDataLife().armor);
+    return (m_DataKorpus.armor - dataLife().armor);
 }
 
 bool Vehicle::IsFuelFull() const
@@ -1462,7 +1462,7 @@ void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::strin
     if (m_ParentVehicleSlot != nullptr) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", m_ParentVehicleSlot->id()); }
     else                                     { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }
   
-    if (GetPlaceTypeId() == TYPE::PLACE::HYPER_SPACE_ID) 
+    if (placeTypeId() == TYPE::PLACE::HYPER_SPACE_ID) 
     { 
         save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", m_ComplexDrive.GetTarget()->id()); 
     }
@@ -1522,11 +1522,11 @@ void Vehicle::ResolveData()
         SetLand( (BaseLand*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.land_id) ); 
     }              
 
-    switch(GetPlaceTypeId())
+    switch(placeTypeId())
     {
         case TYPE::PLACE::SPACE_ID: 
         {
-            GetStarSystem()->AddVehicle(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction, GetParent()); 
+            starsystem()->AddVehicle(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction, parent()); 
             break;
         }
         

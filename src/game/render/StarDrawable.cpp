@@ -68,7 +68,7 @@ void StarDrawable::UpdateInSpace(int time, bool show_effect)
                 if (m_DeltaColor > 1.0)
                 {
                     m_DeltaColor = 1.0;
-                    //GetStarSystem()->StarSparkEvent(getRandInt(600, 1200));
+                    //starsystem()->StarSparkEvent(getRandInt(600, 1200));
                     m_SparkGrows = false;
                 }
             } 
@@ -85,7 +85,7 @@ void StarDrawable::UpdateInSpace(int time, bool show_effect)
         }
         else
         {
-            //GetStarSystem()->StarSparkEvent(getRandInt(600, 1200));
+            //starsystem()->StarSparkEvent(getRandInt(600, 1200));
             m_SparkActive = false;
         }
     }
@@ -98,7 +98,7 @@ void StarDrawable::UpdateInSpace(int time, bool show_effect)
 //{
 //    GetInfo().clear();
 //    GetInfo().addTitleStr("STAR");
-//    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
-//    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(std::to_string(GetDataLife().armor));
-//    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( str(GetCenter()) );
+//    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
+//    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(std::to_string(dataLife().armor));
+//    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( str(center()) );
 //}
