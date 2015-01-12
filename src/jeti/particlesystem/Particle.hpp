@@ -33,13 +33,13 @@ class Particle
         void SetPosition(const glm::vec3& position) { m_Position = position; };              
         void SetVelocity(const glm::vec3& velocity) { m_Velocity = velocity; };
         
-        bool GetIsAlive()     const { return m_IsAlive; };
+        bool isAlive()     const { return m_IsAlive; };
         float GetAlpha()      const { return m_Color.a; };
         
         const glm::vec3& GetPosition() const { return m_Position; }
         const glm::vec4& GetColor() const { return m_Color; }
         
-        float GetSize() const { return m_Size; }
+        float size() const { return m_Size; }
 
         void Reborn();      
         

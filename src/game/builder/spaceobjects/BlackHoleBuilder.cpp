@@ -80,7 +80,7 @@ void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
         
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BLACKHOLE_ID);
                 
-    blackhole->SetLifeData(data_life);
+    blackhole->setLifeData(data_life);
     
     float scale_comp = 30;
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);    

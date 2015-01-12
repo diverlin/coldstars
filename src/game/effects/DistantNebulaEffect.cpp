@@ -102,10 +102,10 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
     glm::vec3 center(meti::getRandSign()*(float)meti::getRandInt(100, 500*rate), meti::getRandSign()*(float)meti::getRandInt(100, 500*rate), z);
     
     DistantNebulaEffect* dn = new DistantNebulaEffect();
-    glm::vec3 size = textureOb->GetSize();
+    glm::vec3 size = textureOb->size();
     // alpitodorender dn->SetRenderData(mesh, textureOb, size*=3);
 
-    dn->SetCenter(center);
+    dn->setCenter(center);
     //dn->SetAngle(angle);
     //dn->SetDeltaAngle(delta_angle);
     

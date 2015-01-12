@@ -168,7 +168,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
             
                 glm::vec3 orbit_center(0, 0, DEFAULT_ENTITY_ZPOS);
                 glm::vec3 angle(0,0,0);
-                planet->GetStarSystem()->AddVehicle(satellite, orbit_center, angle, planet);
+                planet->starsystem()->AddVehicle(satellite, orbit_center, angle, planet);
             }
         }
         

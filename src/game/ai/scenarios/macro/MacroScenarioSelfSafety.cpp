@@ -33,7 +33,7 @@ MacroScenarioSelfSafety::~MacroScenarioSelfSafety()
 
 void MacroScenarioSelfSafety::UpdateInStaticInSpace(Npc* npc) const
 {
-    if (npc->GetStarSystem()->GetConditionId() == ENTITY::STARSYSTEM::CONDITION::SAFE_ID)
+    if (npc->starsystem()->GetConditionId() == ENTITY::STARSYSTEM::CONDITION::SAFE_ID)
     {
         if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->typeId() != TYPE::ENTITY::PLANET_ID)
         { 

@@ -45,7 +45,7 @@
 
         //for (unsigned int i = 0; i < num_particles; i++)
         //{
-                //if (particles_vec[i]->GetAlive() == true)
+                //if (particles_vec[i]->isAlive() == true)
             //{
                     //particles_vec[i]->Update();
                     //is_alive = true;

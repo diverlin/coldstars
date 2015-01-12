@@ -135,7 +135,7 @@ void ExplosionEffect::Update()
     m_IsAlive = false;
     for (unsigned int i=0; i<m_ParticlesNum; i++)
     {
-        if (m_Particles[i]->GetIsAlive() == true)
+        if (m_Particles[i]->isAlive() == true)
         {
             m_Particles[i]->Update();
             m_IsAlive = true;

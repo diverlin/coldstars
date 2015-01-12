@@ -84,7 +84,7 @@ void GravityArtefactBuilder::CreateNewInternals(GravityArtefact* gravity_artefac
     common_data.deterioration_normal = 1;
 
     gravity_artefact->SetGravity(gravity);
-    // alpitodorender gravity_artefact->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
+    // alpitodorender gravity_artefact->SetRenderData(mesh, texOb_item, texOb_item->size());
     gravity_artefact->SetParentSubTypeId(TYPE::ENTITY::ARTEFACT_SLOT_ID);
     gravity_artefact->SetItemCommonData(common_data);
     gravity_artefact->SetCondition(common_data.condition_max);

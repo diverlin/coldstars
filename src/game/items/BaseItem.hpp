@@ -73,7 +73,7 @@ class BaseItem : public jeti::Orientation, public Base
         
         ItemSlot* GetItemSlot() const { return item_slot; };
                                     
-        unsigned int GetMass()          const { return data_item.mass; };
+        unsigned int mass()          const { return data_item.mass; };
         unsigned int GetCondition()     const { return condition; };
         int GetPrice()                  const { return price; };
         TYPE::ENTITY GetParentSubTypeId() const { return parent_subtype_id; };

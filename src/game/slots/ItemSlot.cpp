@@ -156,9 +156,9 @@ void ItemSlot::FireEvent(float attack_rate, bool show_effect)
         }
     }
 
-    if (GetTarget()->GetAlive() == false)
+    if (GetTarget()->isAlive() == false)
     {
-        GetOwnerVehicle()->GetOwnerNpc()->AddExpirience(GetTarget()->GetGivenExpirience(), show_effect);
+        GetOwnerVehicle()->GetOwnerNpc()->AddExpirience(GetTarget()->givenExpirience(), show_effect);
     }
 }
 
@@ -380,8 +380,8 @@ void ItemSlot::DropItemToSpace()
     Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, m_Item);
     float impulse_strength = 0.5;
     glm::vec3 impulse_dir(meti::getRandXYVec3Unit());
-    container->ApplyImpulse(impulse_dir, impulse_strength);        
-    GetOwnerVehicle()->GetStarSystem()->AddContainer(container, GetOwnerVehicle()->GetCenter());
+    container->addImpulse(impulse_dir, impulse_strength);        
+    GetOwnerVehicle()->starsystem()->AddContainer(container, GetOwnerVehicle()->center());
     RemoveItem();
 }
        
@@ -510,17 +510,17 @@ STATUS ItemSlot::CheckTargetPure(BaseSpaceEntity* target) const
        
 bool ItemSlot::IsTargetAlive(BaseSpaceEntity* target) const
 {
-    return target->GetAlive();
+    return target->isAlive();
 }
 
 bool ItemSlot::IsTargetInSpace(BaseSpaceEntity* target) const  
 {
-    return (target->GetPlaceTypeId() == TYPE::PLACE::SPACE_ID);
+    return (target->placeTypeId() == TYPE::PLACE::SPACE_ID);
 }               
 
 bool ItemSlot::IsTargetInSameStarSystem(BaseSpaceEntity* target) const
 {
-    return (target->GetStarSystem()->id() == GetOwnerVehicle()->GetStarSystem()->id());
+    return (target->starsystem()->id() == GetOwnerVehicle()->starsystem()->id());
 }                
 
 bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* target) const
@@ -530,7 +530,7 @@ bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* target) const
         return true;
     }
     
-    float dist = meti::distance(GetOwnerVehicle()->GetCenter(), target->GetCenter());
+    float dist = meti::distance(GetOwnerVehicle()->center(), target->center());
     if (dist < GetItemRadius())
     {
             return true;

@@ -73,7 +73,7 @@ void BaseButton::ShadeOff()
 /* virtual override */               
 void BaseButton::RenderInfo(const jeti::Renderer&) const
 {
-    jeti::drawColoredTextWithBackground(GetInfo(), 12, GetBox().GetCenter(), glm::ivec4(255, 255, 255, 255));
+    jeti::drawColoredTextWithBackground(GetInfo(), 12, GetBox().center(), glm::ivec4(255, 255, 255, 255));
 }
 
 /* virtual override */
@@ -99,7 +99,7 @@ void BaseButton::RenderUnique(const jeti::Renderer& render, Player*) const
     
     if (GetLabel() != "")
     {
-        glm::vec2 pos(GetBox().GetCenter().x, GetBox().GetCenter().y + GetBox().GetSize().y);
+        glm::vec2 pos(GetBox().center().x, GetBox().center().y + GetBox().size().y);
         jeti::Screen::Instance().DrawText(GetLabel(), 12, pos);
     }
 }

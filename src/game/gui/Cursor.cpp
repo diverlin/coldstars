@@ -49,7 +49,7 @@ m_FocusedGuiElement(nullptr)
 {
     m_ItemSlot = GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY::CARGO_SLOT_ID);
     
-    m_Box.SetSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
+    m_Box.setSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
     
     //ButtonTrigger* button; // EXPERIMENTAL GUI
     //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::ACTION_ATTACK_ID, "attack");  
@@ -72,8 +72,8 @@ m_FocusedGuiElement(nullptr)
     //{
     //float scale = 0.4;
         //glm::vec2 pos = genVec2f(100*scale, angle);    
-    //rect.SetCenter(pos);
-    //rect.SetSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);                           
+    //rect.setCenter(pos);
+    //rect.setSize(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);                           
         //rect.Scale(scale);    
         //iterator->second->SetRect(rect);   
     
@@ -100,7 +100,7 @@ void Cursor::Update(Player* player)
 {
     if (m_FocusedSpaceObject != nullptr)
     {
-        if (m_FocusedSpaceObject->GetAlive() == false)
+        if (m_FocusedSpaceObject->isAlive() == false)
         {
             m_FocusedSpaceObject = nullptr;
         }
@@ -108,7 +108,7 @@ void Cursor::Update(Player* player)
         
     UpdateMouseStuff();
     
-    m_Box.SetCenter(m_DataMouse.pos_screencoord.x, m_DataMouse.pos_screencoord.y);  
+    m_Box.setCenter(m_DataMouse.pos_screencoord.x, m_DataMouse.pos_screencoord.y);  
         
     if (m_DataMouse.left_click == true)
     {
@@ -166,7 +166,7 @@ void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
         {                    
             //m_FocusedSpaceObject->RenderStuffWhenFocusedInSpace(render);
             
-            ceti::Box2D box(meti::vec2(m_FocusedSpaceObject->GetCenter()), meti::vec2(m_FocusedSpaceObject->GetSize()));
+            ceti::Box2D box(meti::vec2(m_FocusedSpaceObject->center()), meti::vec2(m_FocusedSpaceObject->size()));
             box.SetScale(scale, scale);
             //box.SetAngle(m_FocusedSpaceObject->GetAngle().z);
             

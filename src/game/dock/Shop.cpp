@@ -106,7 +106,7 @@ bool Shop::SellGoods(Npc* npc, TYPE::ENTITY subtype_id, int amount)
 int Shop::BuyGoods(GoodsPack* goods_pack)
 {     
     int sign = 1;    
-    int price = Deal(sign, goods_pack->subTypeId(), goods_pack->GetMass());    
+    int price = Deal(sign, goods_pack->subTypeId(), goods_pack->mass());    
     if (price > 0)
     {
         goods_pack->GetItemSlot()->RemoveItem(); 

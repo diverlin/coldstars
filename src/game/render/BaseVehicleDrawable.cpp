@@ -38,16 +38,16 @@ BaseVehicleDrawable::~BaseVehicleDrawable()
 
 void BaseVehicleDrawable::CreateDriveComplexTextureDependedStuff()
 {
-//    GetPoints().addMidLeftPoint();
-//    GetPoints().addMidFarLeftPoint();
+//    points().addMidLeftPoint();
+//    points().addMidFarLeftPoint();
         
-    //DriveEffect* drive_effect = GetNewDriveEffect(GetTextureOb().GetData().size_id, GetPoints().GetpMidLeft(), GetPoints().GetpMidFarLeft());
+    //DriveEffect* drive_effect = GetNewDriveEffect(GetTextureOb().GetData().size_id, points().GetpMidLeft(), points().GetpMidFarLeft());
     //m_ComplexDrive.SetDriveEffect(drive_effect);
 }    
 
 void BaseVehicleDrawable::CreateProtectionComplexTextureDependedStuff()
 {
-    //m_ComplexProtector.GetShieldEffect()->SetParent(this);
+    //m_ComplexProtector.GetShieldEffect()->setParent(this);
 }
 
 /* virtual override final */
@@ -65,7 +65,7 @@ void BaseVehicleDrawable::CreateProtectionComplexTextureDependedStuff()
 //void BaseVehicleDrawable::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
 //{
 ////    UpdateInfo(); // virtual
-////    glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
+////    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
 ////    pos /= zoom;
 ////    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
 ////    if (m_OwnerNpc != nullptr)
@@ -115,7 +115,7 @@ void BaseVehicleDrawable::RenderRadarRange()
 //    if (m_Properties.radar > VISIBLE_DISTANCE_WITHOUT_RADAR)
 //    {
 //        m_SlotRadar->UpdateRange(GuiTextureObCollector::Instance().dot_yellow);
-//        m_SlotRadar->DrawRange(vec2(GetCenter()));
+//        m_SlotRadar->DrawRange(vec2(center()));
 //    }
 }
 
@@ -124,6 +124,6 @@ void BaseVehicleDrawable::RenderGrappleRange()
 //    if (m_Properties.grab_radius > 0)
 //    {
 //        m_SlotGrapple->UpdateRange(GuiTextureObCollector::Instance().dot_blue);
-//        m_SlotGrapple->DrawRange(vec2(GetCenter()));
+//        m_SlotGrapple->DrawRange(vec2(center()));
 //    }
 }

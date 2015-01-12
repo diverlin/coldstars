@@ -80,7 +80,7 @@ void LazerModuleBuilder::CreateNewInternals(LazerModule* lazer_module, int damag
     radius_add = meti::getRandInt(MODULE::LAZER::RADIUS_MIN, MODULE::LAZER::RADIUS_MAX);
 
     lazer_module->SetParentSubTypeId(TYPE::ENTITY::LAZER_EQUIPMENT_ID);    
-    //alpitodorender lazer_module->SetRenderData(mesh, texOb, texOb->GetSize());
+    //alpitodorender lazer_module->SetRenderData(mesh, texOb, texOb->size());
     lazer_module->SetDamageAdd(damage_add);
     lazer_module->SetRadiusAdd(radius_add);
 }

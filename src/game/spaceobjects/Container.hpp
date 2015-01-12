@@ -40,7 +40,7 @@ class Container : public BaseSpaceEntity
 
 //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
         
-        virtual void PostDeathUniqueEvent(bool) override final;
+        virtual void postDeathUniqueEvent(bool) override final;
             
         void UpdateInSpace(int, bool);
 

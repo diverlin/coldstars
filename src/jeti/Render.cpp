@@ -207,7 +207,7 @@ void Renderer::DrawQuad(const TextureOb& textureOb, const glm::mat4& ModelMatrix
 void Renderer::DrawQuad(const TextureOb& texOb, const ceti::Box2D& box) const
 {
     // ugly start
-    glm::vec2 pos = box.GetCenter();
+    glm::vec2 pos = box.center();
     glm::mat4 TranslationMatrix = glm::translate(glm::vec3(pos.x, pos.y, -2.0f));
      
     glm::quat Qx, Qy, Qz;
@@ -218,7 +218,7 @@ void Renderer::DrawQuad(const TextureOb& texOb, const ceti::Box2D& box) const
        
     glm::mat4 RotationMatrix = glm::toMat4(Qx*Qy*Qz);
     
-    glm::vec2 size = box.GetSize()*box.GetScale();
+    glm::vec2 size = box.size()*box.GetScale();
     glm::mat4 ScaleMatrix = glm::scale(glm::vec3(size.x, size.y, 1.0f));
       
     glm::mat4 ModelMatrix = TranslationMatrix * RotationMatrix * ScaleMatrix;
@@ -447,7 +447,7 @@ void Renderer::DrawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec
 		glUniform1f(glGetUniformLocation(m_Shaders.fogwarspark, "radius"), radius/(h*scale));
 		glUniform2f(glGetUniformLocation(m_Shaders.fogwarspark, "world_coord"), world_coord.x/(w*scale), world_coord.y/(h*scale));
 	
-		glUniform1f(glGetUniformLocation(m_Shaders.fogwarspark, "dcolor"), 0.5f/*npc->GetVehicle()->GetStarSystem()->GetStar()->GetDeltaColor()*/);
+		glUniform1f(glGetUniformLocation(m_Shaders.fogwarspark, "dcolor"), 0.5f/*npc->GetVehicle()->starsystem()->GetStar()->GetDeltaColor()*/);
 	
 		m_MeshQuad->Draw();
 	}

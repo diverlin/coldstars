@@ -112,9 +112,9 @@ void Screen::UpdateInSpace()
     //{
         //glm::vec2 d_pos;
         //float speed = 15.0;
-        //get_dPos_ToPoint(rect.GetCenter(), target_center, speed, d_pos);
+        //get_dPos_ToPoint(rect.center(), target_center, speed, d_pos);
         //MovingBy(d_pos);
-        //if ( ( fabs(rect.GetCenter().x - target_center.x) < speed ) and ( fabs(rect.GetCenter().y - target_center.y) < speed ) )
+        //if ( ( fabs(rect.center().x - target_center.x) < speed ) and ( fabs(rect.center().y - target_center.y) < speed ) )
         //{
             //auto_scroll = false;
         //}
@@ -143,12 +143,12 @@ void  Screen::IncreaseScale()
     {
         scale += d_scale;
         
-        glm::vec2 center = rect.GetCenter();
+        glm::vec2 center = rect.center();
         float rate = 0.5*d_scale;
         float offset_x = rect.GetWidth()*rate;
         float offset_y = rect.GetHeight()*rate;
         glm::vec2 offset(offset_x, offset_y);
-        rect.SetCenter(center-offset);
+        rect.setCenter(center-offset);
     } 
 }
 
@@ -159,13 +159,13 @@ void Screen::DecreaseScale()
     {
         scale += d_scale;
         
-        glm::vec2 center = rect.GetCenter();
+        glm::vec2 center = rect.center();
         float rate = 0.5*d_scale;
         float offset_x = rect.GetWidth()*rate;
         float offset_y = rect.GetHeight()*rate;
         glm::vec2 offset(offset_x, offset_y);
         
-        rect.SetCenter(center-offset);
+        rect.setCenter(center-offset);
     } 
 }
 

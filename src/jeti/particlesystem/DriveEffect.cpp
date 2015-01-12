@@ -80,7 +80,7 @@ void DriveEffect::Update()
 
     for (unsigned int i=0; i<m_Particles.size(); i++) 
     {
-        if (m_Particles[i]->GetIsAlive() == true)
+        if (m_Particles[i]->isAlive() == true)
         {
             m_Particles[i]->Update();
         }

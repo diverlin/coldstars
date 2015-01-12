@@ -141,10 +141,10 @@ void BaseItem::RenderKorpus(const jeti::Renderer& render, const ceti::Box2D& box
 {
     glm::vec2 v(0.0);
     glm::vec4 c(1.0, 1.0, 1.0, 1.0);
-    glm::vec3 center(box.GetCenter().x, box.GetCenter().y, GUI::POS_Z);
-    SetCenter(center);
+    glm::vec3 center(box.center().x, box.center().y, GUI::POS_Z);
+    setCenter(center);
     //SetAngle(box.GetAngle());
-    //SetScale(box.GetSize());
+    //SetScale(box.size());
     //RenderMeshLight(v, c);
 }
 

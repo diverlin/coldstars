@@ -76,7 +76,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     {
 //        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //        texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SPACESTATION_ID);
-//        size = texOb->GetSize();
+//        size = texOb->size();
     }
     else
     {    
@@ -129,7 +129,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     
     spacestation->setSubSubTypeId(TYPE::ENTITY::SPACESTATION_MILITARY_ID);
     spacestation->SetKorpusData(data_korpus);
-    spacestation->SetLifeData(data_life);
+    spacestation->setLifeData(data_life);
 
     //alpitodorender spacestation->SetRenderData(mesh, texOb, size);
         
@@ -138,7 +138,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     //alpitodorender spacestation->SetAnimationRotation(animation_rotation);
 
     
-    spacestation->SetMass(meti::getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));
+    spacestation->setMass(meti::getRandInt(ENTITY::SPACESTATION::MASS_MIN, ENTITY::SPACESTATION::MASS_MAX));
     
     spacestation->CreateDriveComplexTextureDependedStuff();
     spacestation->CreateProtectionComplexTextureDependedStuff();

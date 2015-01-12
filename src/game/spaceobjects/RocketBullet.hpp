@@ -47,8 +47,8 @@ class RocketBullet : public BaseSpaceEntity
         
         void CollisionEvent(bool);
         
-        virtual void Hit(int, bool) override final;
-        virtual void PostDeathUniqueEvent(bool) override final;  
+        virtual void hit(int, bool) override final;
+        virtual void postDeathUniqueEvent(bool) override final;  
         
         //void RenderInSpace(const Renderer&, float);
         

@@ -100,7 +100,7 @@ void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer
     energizer_equipment->SetEnergyMaxOrig(energy_max_orig);
     energizer_equipment->SetRestorationOrig(restoration_orig);
     energizer_equipment->SetEnergy(0.5*energy_max_orig);
-    //alpitodorender energizer_equipment->SetRenderData(mesh, texOb_item, texOb_item->GetSize());
+    //alpitodorender energizer_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     energizer_equipment->SetParentSubTypeId(TYPE::ENTITY::ENERGIZER_SLOT_ID);
     energizer_equipment->SetItemCommonData(common_data);
     energizer_equipment->SetCondition(common_data.condition_max);

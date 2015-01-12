@@ -48,7 +48,7 @@ class Show
                 
         //bool GetInfoShips()     const { return m_InfoShips; }
         bool GetRangeRadar()     const { return m_RangeRadar; }
-        bool GetCollisionRadius()     const { return m_CollisionRadius; }
+        bool collisionRadius()     const { return m_CollisionRadius; }
                         
         void InverseAllPath()         { m_AllPath = !m_AllPath; }
         void InverseAllOrbits()     { m_AllOrbits = !m_AllOrbits; }

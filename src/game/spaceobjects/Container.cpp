@@ -69,16 +69,16 @@ void Container::BindItemSlot(ItemSlot* item_slot)
 //{
 //    GetInfo().clear();
 //    GetInfo().addTitleStr("CONTAINER");
-//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
-//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(GetDataLife().armor));
-//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
+//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(dataLife().armor));
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(center()) );
 //}
  
 ///* virtual override final */
 //void Container::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
 //{
 //    UpdateInfo();
-//    glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
+//    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
 //    pos /= zoom;
 //    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     
@@ -87,29 +87,29 @@ void Container::BindItemSlot(ItemSlot* item_slot)
 //}
  
 /* virtual override final */   
-void Container::PostDeathUniqueEvent(bool show_effect)
+void Container::postDeathUniqueEvent(bool show_effect)
 {
     if (m_ItemSlot->GetItem()->typeId() == TYPE::ENTITY::BOMB_ID)
     {
-        GetStarSystem()->BombExplosionEvent(this, show_effect);  
+        starsystem()->BombExplosionEvent(this, show_effect);  
     }
     else
     {
         if (show_effect == true)
         {
-//            jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(GetCollisionRadius());
-//            GetStarSystem()->Add(explosion, GetCenter());
+//            jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(collisionRadius());
+//            starsystem()->Add(explosion, center());
         }
     }
 }
 
 void Container::UpdateInSpace(int time, bool show_effect)
 {
-    CheckDeath(show_effect);         
+    checkDeath(show_effect);         
     if (time > 0)
     {
-        SetCenter(GetCenter() + GetAppliedForce());
-        GetAppliedForce() *= 0.99;
+        setCenter(center() + externalForce());
+        externalForce() *= 0.99;
     }
 }
                

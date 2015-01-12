@@ -39,14 +39,14 @@ class BaseParticleSystem
         void ValidateResources() const;
         void SetDying() { m_IsDying = true; }
         void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; }
-        //void SetParent(BaseSpaceEntity* parent) { m_Parent = parent; }
-        void SetCenter(const glm::vec3& center) { m_Center = center; }
+        //void setParent(BaseSpaceEntity* parent) { m_Parent = parent; }
+        void setCenter(const glm::vec3& center) { m_Center = center; }
         void SetParticlesNum(unsigned int particles_num)  { m_ParticlesNum = particles_num; }
         void SetParticleData(const ParticleData& data_particle) { m_DataParticle = data_particle; }
         
         int typeId() const { return m_TypeId; }
-        bool GetAlive() const { return m_IsAlive; }
-        const glm::vec3& GetCenter() const { return m_Center; }
+        bool isAlive() const { return m_IsAlive; }
+        const glm::vec3& center() const { return m_Center; }
         const Mesh& GetMesh() const { return *m_Mesh; }
         const TextureOb& GetTextureOb() const { return *m_TextureOb; }
 

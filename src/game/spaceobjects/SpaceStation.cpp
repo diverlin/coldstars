@@ -75,7 +75,7 @@ void SpaceStation::BindLand(BaseLand* land)
 /* virtual override final */          
 void SpaceStation::UpdateInSpace(int time, bool show_effect)
 {
-    CheckDeath(show_effect);
+    checkDeath(show_effect);
     if (time > 0)
     {
         GetComplexWeapon().Fire(time, GetOwnerNpc()->GetSkills().GetAttackNormalized(), show_effect);
@@ -89,10 +89,10 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 
 //    GetInfo().addTitleStr("StarBase" + getStr(subTypeId()));
 
-//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
 //    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(id()));
-//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
-//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
+//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(mass()));
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(center()) );
 //}
 
 //void SpaceStation::UpdateRenderStuff_2D()
@@ -120,7 +120,7 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 //    //if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
 //    //{
 //        //RenderShieldEffect(1.0 - GetColor().a);
-//        //GetStarSystem()->RestoreSceneColor();
+//        //starsystem()->RestoreSceneColor();
 //    //}
 //}
 

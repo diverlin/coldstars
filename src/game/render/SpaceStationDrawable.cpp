@@ -34,7 +34,7 @@ SpaceStationDrawable::~SpaceStationDrawable()
 /* virtual override final */          
 //void SpaceStationDrawable::UpdateInSpace(int time, bool show_effect)
 //{
-//    CheckDeath(show_effect);
+//    checkDeath(show_effect);
 //    if (time > 0)
 //    {
 //        GetComplexWeapon().Fire(time, GetOwnerNpc()->GetSkills().GetAttackNormalized(), show_effect);
@@ -48,10 +48,10 @@ SpaceStationDrawable::~SpaceStationDrawable()
 
 //    GetInfo().addTitleStr("StarBase" + getStr(subTypeId()));
 
-//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
 //    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(id()));
-//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
-//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
+//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(mass()));
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(center()) );
 //}
 
 //void SpaceStationDrawable::UpdateRenderStuff_2D()
@@ -79,6 +79,6 @@ void SpaceStationDrawable::RenderInSpace(const jeti::Renderer& render, float sca
     //if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
     //{
         //RenderShieldEffect(1.0 - GetColor().a); 
-        //GetStarSystem()->RestoreSceneColor();
+        //starsystem()->RestoreSceneColor();
     //}
 }

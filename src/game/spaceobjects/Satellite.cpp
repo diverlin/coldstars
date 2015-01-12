@@ -33,7 +33,7 @@ Satellite::Satellite(int id)
     setTypeId(TYPE::ENTITY::VEHICLE_ID);
     setSubTypeId(TYPE::ENTITY::SATELLITE_ID);
     
-    SetMass(meti::getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX));
+    setMass(meti::getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX));
 }
 
 /* virtual */
@@ -46,13 +46,13 @@ Satellite::~Satellite()
 
 void Satellite::BindParent(const BaseSpaceEntity* const parent)
 {
-    SetParent(parent);
-    m_Orbit.CalcPath(2*1.1*parent->GetCollisionRadius(), 1.0, meti::getRandBool());
+    setParent(parent);
+    m_Orbit.CalcPath(2*1.1*parent->collisionRadius(), 1.0, meti::getRandBool());
 }
         
 void Satellite::UpdateInSpace(int time, bool show_effect)
 {
-    CheckDeath(show_effect);
+    checkDeath(show_effect);
 //    UpdateRenderStuff();
     if (time > 0)
     {
@@ -62,15 +62,15 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
         //if (parent != nullptr)
         //{        
             glm::vec3 new_pos;
-            new_pos.x = GetParent()->GetCenter().x + m_Orbit.GetPosition().x;
-            new_pos.y = GetParent()->GetCenter().y + m_Orbit.GetPosition().y;
-            new_pos.z = GetParent()->GetCenter().z;
-            SetCenter(new_pos);
-            UpdateOrientation();
+            new_pos.x = parent()->center().x + m_Orbit.GetPosition().x;
+            new_pos.y = parent()->center().y + m_Orbit.GetPosition().y;
+            new_pos.z = parent()->center().z;
+            setCenter(new_pos);
+            updateOrientation();
         //}
         //else
         //{
-            //points.SetCenter(orbit->getPosition());
+            //points.setCenter(orbit->getPosition());
         //}
         
         GetComplexWeapon().Fire(time, GetOwnerNpc()->GetSkills().GetAttackNormalized(), show_effect);
@@ -85,14 +85,14 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
 
 //    //GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem->id()));
 //    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(id()));
-//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
-//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
+//    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(mass()));
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(center()) );
 //}
             
 //void Satellite::UpdateRenderStuff()
 //{
 //    GetComplexProtector().GetShieldEffect()->Update();
-//    UpdateOrientation();
+//    updateOrientation();
 //}
 
 //void Satellite::RenderInSpace(const jeti::Renderer& render, float scale)
@@ -107,7 +107,7 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
 //    //if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
 //    //{
 //        //RenderShieldEffect(1.0 - GetColor().a);
-//        //GetStarSystem()->RestoreSceneColor();
+//        //starsystem()->RestoreSceneColor();
 //    //}
 //}
 

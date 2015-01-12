@@ -32,7 +32,7 @@ BlackHole::BlackHole(int id)
     setId(id);
     setTypeId(TYPE::ENTITY::BLACKHOLE_ID);
     
-    SetMass(meti::getRandInt(1000, 4000));
+    setMass(meti::getRandInt(1000, 4000));
 }
 
 /* virtual */
@@ -45,24 +45,24 @@ BlackHole::~BlackHole()
     delete shockwave; 
 } 
  
-void BlackHole::SetCenter(const glm::vec3& center) { SetCenter(center); shockwave->SetCenter(meti::vec2(center)); }
+void BlackHole::setCenter(const glm::vec3& center) { setCenter(center); shockwave->setCenter(meti::vec2(center)); }
          
 void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
-    CheckDeath(show_effect);
+    checkDeath(show_effect);
 
     if (time > 0)
     {
-        SetCenter(GetCenter()+meti::getRandXYVec3f(1, 2, 0));
-        shockwave->SetCenter(meti::vec2(GetCenter()));
+        setCenter(center()+meti::getRandXYVec3f(1, 2, 0));
+        shockwave->setCenter(meti::vec2(center()));
     
-        GetDataLife().life_time--;
-        if (GetDataLife().life_time < 0)
+        dataLife().life_time--;
+        if (dataLife().life_time < 0)
         {
             //scale -= 0.1;
             //if (scale < 1.0)
             {
-                GetDataLife().is_alive = false;
+                dataLife().is_alive = false;
             }
         }
     }
@@ -77,8 +77,8 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
 //    GetInfo().addTitleStr("BLACKHOLE");
 
 //    GetInfo().addNameStr("id:");         GetInfo().addValueStr(std::to_string(id()));
-//    GetInfo().addNameStr("mass:");       GetInfo().addValueStr(std::to_string(GetMass()));
-//    GetInfo().addNameStr("pos:");        GetInfo().addValueStr( meti::str(GetCenter()) );
+//    GetInfo().addNameStr("mass:");       GetInfo().addValueStr(std::to_string(mass()));
+//    GetInfo().addNameStr("pos:");        GetInfo().addValueStr( meti::str(center()) );
 //}
           
 void BlackHole::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
@@ -101,7 +101,7 @@ void BlackHole::ResolveData()
     Logger::Instance().Log(" BlackHole("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
-    GetStarSystem()->Add(this, data_unresolved_Orientation.center); 
+    starsystem()->Add(this, data_unresolved_Orientation.center); 
 }
  
 /*virtual*/

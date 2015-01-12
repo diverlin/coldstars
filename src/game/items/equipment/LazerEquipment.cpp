@@ -123,7 +123,7 @@ void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, flo
             
         }
 
-        target->Hit(damage*damage_rate, show_effect);
+        target->hit(damage*damage_rate, show_effect);
         DeteriorationEvent();
     
         if (show_effect)
@@ -133,21 +133,21 @@ void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, flo
             //if (item_slot->GetOwnerVehicle()->GetDataKorpus().draw_turrels == true)
             //{
                 //_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-                                                              //item_slot->GetTurrel()->GetpCenter(), 
-                                                              //item_slot->GetTarget()->GetpCenter());
+                                                              //item_slot->GetTurrel()->pCenter(), 
+                                                              //item_slot->GetTarget()->pCenter());
             //}
             //else
             {
                 _lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-                                                              item_slot->GetOwnerVehicle()->GetpCenter(), 
-                                                              item_slot->GetTarget()->GetpCenter());
+                                                              item_slot->GetOwnerVehicle()->pCenter(), 
+                                                              item_slot->GetTarget()->pCenter());
             }
-            item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_lazer_trace_effect);
+            item_slot->GetOwnerVehicle()->starsystem()->Add(_lazer_trace_effect);
             
             // DamageEffect
             //DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, item_slot->GetTarget());
             //_lazer_trace_effect->SetDamageEffect(_damage_effect);
-            //item_slot->GetOwnerVehicle()->GetStarSystem()->Add(_damage_effect);
+            //item_slot->GetOwnerVehicle()->starsystem()->Add(_damage_effect);
         }
     }
 } 

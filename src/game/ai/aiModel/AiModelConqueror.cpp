@@ -44,7 +44,7 @@ void AiModelConqueror::UpdateInStatic(Npc* npc) const
     }
     else 
     {
-        Task macrotask(TYPE::AISCENARIO::MACRO_STARSYSTEMDEFENCE_ID, npc->GetStarSystem()->id());
+        Task macrotask(TYPE::AISCENARIO::MACRO_STARSYSTEMDEFENCE_ID, npc->starsystem()->id());
             npc->GetStateMachine().SetCurrentMacroTask(macrotask); 
             
             return;

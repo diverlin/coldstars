@@ -37,16 +37,16 @@ ContainerDrawable::~ContainerDrawable()
 //{
 //    GetInfo().clear();
 //    GetInfo().addTitleStr("CONTAINER");
-//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
-//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(GetDataLife().armor));
-//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
+//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(dataLife().armor));
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(center()) );
 //}
  
 /* virtual override final */           
 //void ContainerDrawable::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
 //{
 //    UpdateInfo();
-//    glm::vec2 pos(GetCenter().x - scroll_coords.x, GetCenter().y - scroll_coords.y);
+//    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
 //    pos /= zoom;
 //    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     

@@ -81,7 +81,7 @@ void StarBuilder::CreateNewInternals(Star* star) const
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
     
     star->SetPlanetData(star_data);
-    star->SetLifeData(data_life);
+    star->setLifeData(data_life);
     float scale_comp = meti::getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     //alpitodorender star->SetRenderData(mesh, texOb, scale);

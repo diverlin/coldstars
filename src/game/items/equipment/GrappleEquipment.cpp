@@ -65,10 +65,10 @@ void GrappleEquipment::AddTarget(BaseSpaceEntity* target)
         return;
     }         
                 
-    if (free_strength > target->GetMass())
+    if (free_strength > target->mass())
     {
         target_vec.push_back(target);
-        free_strength -= target->GetMass();
+        free_strength -= target->mass();
             
         #if GRAPPLE_QUEUE_LOG_ENABLED == 1 
         Logger::Instance().Log("vehicle_id=" + std::to_string(item_slot->GetOwnerVehicle()->id()) + " " + getTypeStr(target->typeId()) + " id = " + std::to_string(target->id()) + " grapple->AddTarget()", 2);
@@ -83,7 +83,7 @@ void GrappleEquipment::RemoveTarget(BaseSpaceEntity* target)
         if (target_vec[i]->id() == target->id())
         {
             target_vec.erase(target_vec.begin()+i);
-            free_strength += target->GetMass();
+            free_strength += target->mass();
             
             return;  
         }    
@@ -117,13 +117,13 @@ void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
         
         if (item_slot->CheckTarget(&target) == STATUS::TARGET_OK)
         {
-            glm::vec3 impulse_dir = glm::normalize(vehicle.GetCenter() - target.GetCenter());
+            glm::vec3 impulse_dir = glm::normalize(vehicle.center() - target.center());
 
         
-            target.ApplyImpulse(impulse_dir, 0.001* GetStrength());
+            target.addImpulse(impulse_dir, 0.001* GetStrength());
                 
-            float dist = meti::distance(vehicle.GetCenter(), target.GetCenter());
-            if (dist < 0.5*vehicle.GetCollisionRadius())
+            float dist = meti::distance(vehicle.center(), target.center());
+            if (dist < 0.5*vehicle.collisionRadius())
             {
                 switch(target.typeId())
                 {
@@ -170,8 +170,8 @@ void GrappleEquipment::RenderGrabTrail(const jeti::Renderer& render)
 {
     //for (unsigned int i=0; i<target_vec.size(); i++)
     //{
-        //float xl = target_vec[i]->GetCenter().x - item_slot->GetOwnerVehicle()->GetCenter().x;
-        //float yl = target_vec[i]->GetCenter().y - item_slot->GetOwnerVehicle()->GetCenter().y;
+        //float xl = target_vec[i]->center().x - item_slot->GetOwnerVehicle()->center().x;
+        //float yl = target_vec[i]->center().y - item_slot->GetOwnerVehicle()->center().y;
         
         //float len = sqrt((xl*xl) + (yl*yl));
         
@@ -180,7 +180,7 @@ void GrappleEquipment::RenderGrabTrail(const jeti::Renderer& render)
         //float angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
         
         //drawLine(GuiTextureObCollector::Instance().grapple_trail, 
-                 //item_slot->GetOwnerVehicle()->GetCenter(), 
+                 //item_slot->GetOwnerVehicle()->center(), 
                  //len, 
                  //angle_inD, 
                  //8);

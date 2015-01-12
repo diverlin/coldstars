@@ -105,8 +105,8 @@ void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const
     //alpitodorender satellite->SetAnimationRotation(animation_rotation);
     
     satellite->SetKorpusData(data_korpus);
-    satellite->SetLifeData(data_life);
-    //alpitodorender satellite->SetRenderData(mesh, texOb, texOb->GetSize());
+    satellite->setLifeData(data_life);
+    //alpitodorender satellite->SetRenderData(mesh, texOb, texOb->size());
 
     satellite->CreateDriveComplexTextureDependedStuff();
     satellite->CreateProtectionComplexTextureDependedStuff();

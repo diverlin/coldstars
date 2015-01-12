@@ -47,7 +47,7 @@ void Galaxy::putChildrenToGarbage() const
 void Galaxy::Add(Sector* sector, const glm::vec3& center) 
 { 
     sector->SetGalaxy(this);
-    sector->SetCenter(center);
+    sector->setCenter(center);
 
     SECTOR_vec.push_back(sector);
 }
@@ -66,7 +66,7 @@ Sector* Galaxy::GetClosestSectorTo(Sector* sector)
 
     for (unsigned int i=0; i<SECTOR_vec.size(); i++)
     {
-        float dist = meti::distance(sector->GetCenter(), SECTOR_vec[i]->GetCenter());
+        float dist = meti::distance(sector->center(), SECTOR_vec[i]->center());
         if (dist < dist_min)
         {
             dist_min = dist;

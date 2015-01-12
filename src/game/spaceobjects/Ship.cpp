@@ -58,16 +58,16 @@ Ship::~Ship()
 //    GetInfo().clear();
 
 //    GetInfo().addTitleStr("SHIP");
-//    if (GetStarSystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()) ); }
+//    if (starsystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( std::to_string(id()) + " / " + std::to_string(starsystem()->id()) ); }
 //    else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( std::to_string(id()) ); }
 //    // alpitodorender GetInfo().addNameStr("race:");          GetInfo().addValueStr( getRaceStr(GetTextureOb().GetAssociation().race_id) );
 //    GetInfo().addNameStr("class:");         GetInfo().addValueStr( getStr(subSubTypeId()) );
-//    GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( std::to_string(GetDataLife().armor) + "/" + std::to_string(GetDataKorpus().armor) );
+//    GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( std::to_string(dataLife().armor) + "/" + std::to_string(GetDataKorpus().armor) );
 ////    alpitodorender GetInfo().addNameStr("size id:");       GetInfo().addValueStr( std::to_string(GetTextureOb().GetData().size_id) );
 //    GetInfo().addNameStr("space/free:");    GetInfo().addValueStr( std::to_string(GetDataKorpus().space) + "/" + std::to_string(GetProperties().free_space) );
-//    GetInfo().addNameStr("mass:");          GetInfo().addValueStr( std::to_string(GetMass()) );
+//    GetInfo().addNameStr("mass:");          GetInfo().addValueStr( std::to_string(mass()) );
 //    GetInfo().addNameStr("speedx100:");     GetInfo().addValueStr( std::to_string(GetProperties().speed*100) );
-//    GetInfo().addNameStr("speed dmx100:");  GetInfo().addValueStr( std::to_string(GetMass()*MASS_DECREASE_SPEED_RATE*100));
+//    GetInfo().addNameStr("speed dmx100:");  GetInfo().addValueStr( std::to_string(mass()*MASS_DECREASE_SPEED_RATE*100));
 //    GetInfo().addNameStr("energy:");        GetInfo().addValueStr( std::to_string(GetProperties().energy) );
 //    GetInfo().addNameStr("temp.:");         GetInfo().addValueStr( std::to_string(GetDataKorpus().temperature) );
 //    GetInfo().addNameStr("radar:");         GetInfo().addValueStr( std::to_string(GetProperties().radar) );
@@ -75,7 +75,7 @@ Ship::~Ship()
 //    GetInfo().addNameStr("repair:");        GetInfo().addValueStr( std::to_string(GetProperties().repair) );
 //    GetInfo().addNameStr("scan:");          GetInfo().addValueStr( std::to_string(GetProperties().scan) );
 //    GetInfo().addNameStr("price:");         GetInfo().addValueStr( std::to_string(GetDataKorpus().price) );
-//    GetInfo().addNameStr("pos:");           GetInfo().addValueStr( meti::str(GetCenter()) );
+//    GetInfo().addNameStr("pos:");           GetInfo().addValueStr( meti::str(center()) );
         
 //    if (GetProperties().grab_radius > 0)
 //    {
@@ -93,7 +93,7 @@ Ship::~Ship()
 /* virtual override final */
 void Ship::UpdateInSpace(int time, bool show_effect)
 {   
-    CheckDeath(show_effect);
+    checkDeath(show_effect);
     GetComplexProtector().GetShieldEffect()->Update();
 GetComplexDrive().UpdatePosition(); // debug
             
@@ -102,7 +102,7 @@ GetComplexDrive().UpdatePosition(); // debug
         UpdateSpecialAction();
         
         GetOwnerNpc()->UpdateInSpace(time, show_effect);
-        UpdateOrientation();   
+        updateOrientation();   
         GetComplexWeapon().Fire(time, GetOwnerNpc()->GetSkills().GetAttackNormalized(), show_effect);
         
         if (GetProperties().speed > 0) 
@@ -131,7 +131,7 @@ GetComplexDrive().UpdatePosition(); // debug
 //    //if (GetProperties().speed > 0)
 //    //{
 //        //RenderDriveEffect(scale , 1.0 - GetColor().a);
-//        //GetStarSystem()->RestoreSceneColor();
+//        //starsystem()->RestoreSceneColor();
 //    //}
     
 ////    if (GetProperties().shield_effect_enabled == true)
@@ -142,9 +142,9 @@ GetComplexDrive().UpdatePosition(); // debug
 
 //void Ship::RenderAtPlanet(const jeti::Renderer& render, const glm::vec3& center)
 //{
-//    SetCenter(center);
+//    setCenter(center);
 //    //SetAngleZ(0);
-//    UpdateOrientation();
+//    updateOrientation();
     
 //    RenderKorpus(render);
     

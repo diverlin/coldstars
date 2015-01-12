@@ -40,8 +40,8 @@ void Observation::FindEchievableStarSystems(Galaxy* galaxy)
 
     //for (unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
     //{
-    //const glm::vec3& starsystem_pos = npc_owner->GetVehicle()->GetStarSystem()->GetCenter();
-    //float dist = meti::distance(starsystem_pos, galaxy->STARSYSTEM_vec[i]->GetCenter());
+    //const glm::vec3& starsystem_pos = npc_owner->GetVehicle()->starsystem()->center();
+    //float dist = meti::distance(starsystem_pos, galaxy->STARSYSTEM_vec[i]->center());
     ////if (dist < npc_owner->getShip()->propetries.hyper)
     //{
     //visible_STARSYSTEM_pair_vec.push_back( Pair<StarSystem*>(galaxy->STARSYSTEM_vec[i], dist) );
@@ -145,14 +145,14 @@ void Observation::Sort(std::vector<OBSERVED_DATA_TYPE>& rDataVec)
 
 void Observation::FindVisibleAsteroidsInSpaceInStatic()
 {
-    const std::vector<Asteroid*>& asteroid_vec = npc_owner->GetStarSystem()->ASTEROID_vec;
+    const std::vector<Asteroid*>& asteroid_vec = npc_owner->starsystem()->ASTEROID_vec;
     
     see.ASTEROID  = false;
     
     visible_ASTEROID_pair_vec.clear();
 
     for (unsigned int i=0; i<asteroid_vec.size(); i++) {
-        float dist = meti::distance(npc_owner->GetVehicle()->GetCenter(), asteroid_vec[i]->GetCenter());
+        float dist = meti::distance(npc_owner->GetVehicle()->center(), asteroid_vec[i]->center());
         if (dist < npc_owner->GetVehicle()->GetProperties().radar) {
             visible_ASTEROID_pair_vec.push_back( Pair<Asteroid*>(asteroid_vec[i], dist) );
             see.ASTEROID = true;
@@ -164,7 +164,7 @@ void Observation::FindVisibleAsteroidsInSpaceInStatic()
 
 void Observation::FindVisibleContainersInSpaceInStatic()
 {
-    const std::vector<Container*>& container_vec = npc_owner->GetStarSystem()->CONTAINER_vec;
+    const std::vector<Container*>& container_vec = npc_owner->starsystem()->CONTAINER_vec;
     
     see.CONTAINER       = false;
     see.pickable_CONTAINER  = false;
@@ -174,11 +174,11 @@ void Observation::FindVisibleContainersInSpaceInStatic()
 
     for (unsigned int i=0; i<container_vec.size(); i++)
     {
-        float dist = meti::distance(npc_owner->GetVehicle()->GetCenter(), container_vec[i]->GetCenter());
+        float dist = meti::distance(npc_owner->GetVehicle()->center(), container_vec[i]->center());
         if (dist < npc_owner->GetVehicle()->GetProperties().radar)
         {
             visible_CONTAINER_pair_vec.push_back( Pair<Container*>(container_vec[i], dist) );
-            int container_mass = container_vec[i]->GetMass();
+            int container_mass = container_vec[i]->mass();
             if(container_mass < npc_owner->GetVehicle()->GetProperties().grab_strength)
             {
                 visible_pickable_CONTAINER_pair_vec.push_back( Pair<Container*>(container_vec[i], dist) );
@@ -191,7 +191,7 @@ void Observation::FindVisibleContainersInSpaceInStatic()
 
 void Observation::FindVisibleVehiclesInSpaceInStatic()
 {
-    const std::vector<Vehicle*>& vehicle_vec = npc_owner->GetStarSystem()->VEHICLE_vec;
+    const std::vector<Vehicle*>& vehicle_vec = npc_owner->starsystem()->VEHICLE_vec;
 
     see.RANGER  = false;
     see.WARRIOR = false;
@@ -203,7 +203,7 @@ void Observation::FindVisibleVehiclesInSpaceInStatic()
 
     for (unsigned int i=0; i<vehicle_vec.size(); i++)
     {
-        float dist = meti::distance(npc_owner->GetVehicle()->GetCenter(), vehicle_vec[i]->GetCenter());
+        float dist = meti::distance(npc_owner->GetVehicle()->center(), vehicle_vec[i]->center());
         //std::cout<<"dist, radius = "<<dist<<", "<<npc_owner->GetVehicle()->propetries.radius<<std::endl;
         if (dist < npc_owner->GetVehicle()->GetProperties().radar)
         {

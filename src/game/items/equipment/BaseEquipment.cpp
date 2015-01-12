@@ -99,8 +99,8 @@ void BaseEquipment::Render(const jeti::Renderer& render, const ceti::Box2D& box,
 
     for (unsigned int i=0; i<modules_vec.size(); i++)
     {
-        //Rect module_rect(box.GetCenter().x + (1.1 * GUI::INSERTED_MODULE_SIZE) * (i), 
-                     //box.GetCenter().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
+        //Rect module_rect(box.center().x + (1.1 * GUI::INSERTED_MODULE_SIZE) * (i), 
+                     //box.center().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
                  //GUI::INSERTED_MODULE_SIZE, 
                  //GUI::INSERTED_MODULE_SIZE);
         //drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1.0f);
@@ -115,7 +115,7 @@ void BaseEquipment::Render(const jeti::Renderer& render, const ceti::Box2D& box,
         int font_size = 12;    
         render.DrawQuad(*GuiTextureObCollector::Instance().slot_mark_accept, box);
 
-        glm::vec2 pos(box.GetCenter().x - font_size/2 + gui_offset.x, box.GetCenter().y - font_size + gui_offset.y);
+        glm::vec2 pos(box.center().x - font_size/2 + gui_offset.x, box.center().y - font_size + gui_offset.y);
         jeti::Screen::Instance().DrawText(std::to_string(locked_turns), font_size, pos);
     }
 
@@ -123,7 +123,7 @@ void BaseEquipment::Render(const jeti::Renderer& render, const ceti::Box2D& box,
     {
         if (subTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID)
         {
-            glm::vec2 pos(box.GetCenter().x - box.GetSize().x/2 + gui_offset.x, box.GetCenter().y + gui_offset.y);
+            glm::vec2 pos(box.center().x - box.size().x/2 + gui_offset.x, box.center().y + gui_offset.y);
             jeti::Screen::Instance().DrawText(std::to_string(((RocketEquipment*)this)->GetAmmo()) + "/" + std::to_string(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
         }
     }

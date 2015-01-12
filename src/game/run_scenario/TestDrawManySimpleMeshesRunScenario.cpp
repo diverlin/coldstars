@@ -82,7 +82,7 @@ void TestDrawManySimpleMeshesRunScenario::Init(Player* player)
      
     galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
         
-    StarSystem* starsystem = player->GetNpc()->GetVehicle()->GetStarSystem(); // shortcut        
+    StarSystem* starsystem = player->GetNpc()->GetVehicle()->starsystem(); // shortcut        
     for (int i=0; i<2000; i++)
     {
         Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);

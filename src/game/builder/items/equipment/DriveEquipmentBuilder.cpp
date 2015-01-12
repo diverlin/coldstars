@@ -85,7 +85,7 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
 
     //Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID);
-    //glm::vec3 size = texOb->GetSize();
+    //glm::vec3 size = texOb->size();
     
 //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
 //    jeti::TextureOb* texOb = mesh->GetTextureOb();

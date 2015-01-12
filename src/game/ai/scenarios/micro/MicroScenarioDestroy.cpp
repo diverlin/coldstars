@@ -36,12 +36,12 @@ MicroScenarioDestroy::~MicroScenarioDestroy()
 /* virtual */    
 bool MicroScenarioDestroy::Validate(Npc* npc) const
 {    
-    if (npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetAlive() == false)
+    if (npc->GetStateMachine().GetMicroTaskManager().GetTarget()->isAlive() == false)
     {
         return false;
     } 
     
-    if (npc->GetStarSystem() != npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetStarSystem())
+    if (npc->starsystem() != npc->GetStateMachine().GetMicroTaskManager().GetTarget()->starsystem())
     {
          return false;
     }

@@ -31,9 +31,9 @@ class VerticalFlowText
         VerticalFlowText(const std::string&, int, const glm::vec2&, const glm::ivec4&, float);                                   
         ~VerticalFlowText();
         
-        bool GetAlive() const { return m_IsAlive; }
+        bool isAlive() const { return m_IsAlive; }
         
-        const glm::vec2& GetCenter() const { return m_Center; }
+        const glm::vec2& center() const { return m_Center; }
         
         void Update();
         void Render(const glm::vec2&, float) const;

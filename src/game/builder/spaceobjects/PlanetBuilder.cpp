@@ -87,7 +87,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     
     planet->SetPlanetData(planet_data);
     
-    planet->SetLifeData(data_life);
+    planet->setLifeData(data_life);
 
     float scale_comp = meti::getRandInt(ENTITY::PLANET::SCALE_MIN, ENTITY::PLANET::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
@@ -112,8 +112,8 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
         TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RING_ID);
         Ring* ring = new Ring();
         ring->BindData3D(mesh_plane, textureOb, 1.5f*scale);
-        //ring->SetDirection(glm::normalize(glm::vec3(1.0f)));
-        ring->SetDirection(glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
+        //ring->setDirection(glm::normalize(glm::vec3(1.0f)));
+        ring->setDirection(glm::normalize(glm::vec3(0.0f, 1.0f, 0.0f)));
         planet->AddDecoration(ring);
     }
     */

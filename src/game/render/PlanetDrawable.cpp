@@ -54,11 +54,11 @@ PlanetDrawable::~PlanetDrawable()
 //    GetInfo().clear();
     
 //    GetInfo().addTitleStr("PLANET");
-//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
-//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(GetDataLife().armor));
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
+//    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(dataLife().armor));
 //    GetInfo().addNameStr("population:");  GetInfo().addValueStr(std::to_string(m_Population));
 //    GetInfo().addNameStr("dock_veh:");    GetInfo().addValueStr(m_Land->GetDockVehicleStr());
-//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
+//    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(center()) );
 //}
 
 //void Planet::Render_NEW(const Renderer& render)
@@ -66,7 +66,7 @@ PlanetDrawable::~PlanetDrawable()
 //    //alpitodorender render.DrawMeshLightNormalMap(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 //    for (BaseDecor* decor : m_Decorations)
 //    {
-//        decor->Render(render, GetCenter());
+//        decor->Render(render, center());
 //    }
 //}
 

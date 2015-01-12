@@ -64,7 +64,7 @@ void Slider::Configure(int ammount_total, int price_for_one)
     price_selected = 0;
     
     rect.Set(0, 0, GUI::SLIDER_WIDTH, 3*GUI::ICON_SIZE);
-    rect_slide.Set(0, rect.GetCenter().y - GUI::ICON_SIZE/2, GUI::SLIDER_WIDTH, GUI::ICON_SIZE);
+    rect_slide.Set(0, rect.center().y - GUI::ICON_SIZE/2, GUI::SLIDER_WIDTH, GUI::ICON_SIZE);
     
     //GetButton(GUI::BUTTON::SLIDE_ID)->GetRect().Set(0, rect_slide.GetBottomLeft().y, GUI::ICON_SIZE, GUI::ICON_SIZE);
     //GetButton(GUI::BUTTON::ACCEPT_ID)->GetRect().Set(0, 0, 20, 20);
@@ -82,7 +82,7 @@ void Slider::UpdateSlidePosition(const MouseData& data_mouse)
         }
     }
     
-    //ammount_selected = ammount_total * slide_button->GetRect().GetCenter().x / (float)rect.GetWidth();
+    //ammount_selected = ammount_total * slide_button->GetRect().center().x / (float)rect.GetWidth();
     price_selected = price_for_one * ammount_selected; */
 }
         

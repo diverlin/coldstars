@@ -51,8 +51,8 @@ BaseDrawable::~BaseDrawable() {
     delete m_AnimationRotation;
 }
 
-const glm::vec3& BaseDrawable::GetCenter() const { return m_Orientation->GetCenter(); }
-const glm::vec3& BaseDrawable::GetSize() const { return m_Orientation->GetSize(); }
+const glm::vec3& BaseDrawable::center() const { return m_Orientation->center(); }
+const glm::vec3& BaseDrawable::size() const { return m_Orientation->size(); }
 
 void BaseDrawable::ValidateResources() const
 {
@@ -66,8 +66,8 @@ void BaseDrawable::ValidateResources() const
 //void BaseDrawable::BindData2D(TextureOb* textureOb)
 //{
 //m_TextureOb = textureOb;
-//SetSize(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0);
-//SetCollisionRadius((textureOb->GetFrameWidth() + textureOb->GetFrameHeight()) / 4.0);
+//setSize(textureOb->GetFrameWidth(), textureOb->GetFrameHeight(), 1.0);
+//setCollisionRadius((textureOb->GetFrameWidth() + textureOb->GetFrameHeight()) / 4.0);
 //} 
 
 
@@ -75,16 +75,16 @@ void BaseDrawable::ValidateResources() const
 //{
 ////    TextureOb* texOb_collision_radius =  GuiTextureObCollector::Instance().radar_range;
 ////    glm::vec3 zero;
-////    glm::mat4 Mm = getModelMatrix(m_Orientation->GetCenter(), glm::vec3(2*m_Orientation->GetCollisionRadius()), zero);
+////    glm::mat4 Mm = getModelMatrix(m_Orientation->center(), glm::vec3(2*m_Orientation->collisionRadius()), zero);
 ////    render.DrawQuad(*texOb_collision_radius, Mm);
 //}
 
 //void BaseDrawable::RenderAxis(const Renderer& render) const
 //{
-//    glm::mat4 Mm = getModelMatrix(m_Orientation->GetCenter(), glm::vec3(2*m_Orientation->GetCollisionRadius()), glm::vec3(0.0f));    // angle
+//    glm::mat4 Mm = getModelMatrix(m_Orientation->center(), glm::vec3(2*m_Orientation->collisionRadius()), glm::vec3(0.0f));    // angle
 //    render.DrawAxis(Mm, /*width*/4);
-//    //render.DrawVector(GetDir(), GetCenter(), GetSize().x, /*width*/6);
-//    render.DrawVector(m_Orientation->GetDirection(), Mm, /*width*/6);
+//    //render.DrawVector(GetDir(), center(), size().x, /*width*/6);
+//    render.DrawVector(m_Orientation->direction(), Mm, /*width*/6);
 //}
 
 void BaseDrawable::UpdateRenderAnimation()
@@ -118,14 +118,14 @@ bool BaseDrawable::UpdateFadeOutEffect()
 
 const glm::mat4& BaseDrawable::GetActualModelMatrix()
 {    
-    meti::RotationBetweenVectors(m_QuatDirection, m_Mesh->GetOriginDirection(), m_Orientation->GetDirection());
+    meti::RotationBetweenVectors(m_QuatDirection, m_Mesh->GetOriginDirection(), m_Orientation->direction());
     if (m_AnimationRotation != nullptr) {
         m_AnimationRotation->Update(m_QuatAnimation, m_Mesh->GetOriginDirection());
     }
     
-    m_MatrixTranslate = glm::translate(m_Orientation->GetCenter());
+    m_MatrixTranslate = glm::translate(m_Orientation->center());
     m_MatrixRotate    = glm::toMat4(m_QuatDirection * m_QuatAnimation);
-    m_MatrixScale     = glm::scale(m_Orientation->GetSize());
+    m_MatrixScale     = glm::scale(m_Orientation->size());
 
     m_MatrixModel = m_MatrixTranslate * m_MatrixScale * m_MatrixRotate;
     
