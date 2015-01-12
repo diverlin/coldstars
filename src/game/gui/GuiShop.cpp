@@ -107,7 +107,7 @@ void GuiShop::UpdateLables() const
 {   /*
     for (auto &gui_element : m_Child_vec)
     {    
-        switch(gui_element->GetSubTypeId())
+        switch(gui_element->subTypeId())
         {
             case GUI::BUTTON::MINERALS_ID:
             {
@@ -155,8 +155,8 @@ void GuiShop::ButtonsAction(Slider& slider)
         //BaseButton* button = iterator->second;
         //if (button->GetPressed() == true)
         //{
-                   //slider.SetSubTypeId(button->GetSubTypeId());
-                //switch(button->GetSubTypeId())
+                   //slider.setSubTypeId(button->subTypeId());
+                //switch(button->subTypeId())
                 //{
                     //case GUI::BUTTON::MINERALS_ID:         { slider.Configure(shop->GetMineralsAmount(), shop->GetMineralsPrice()); break; }
                     //case GUI::BUTTON::FOOD_ID:         { slider.Configure(shop->GetFoodAmount(), shop->GetFoodPrice()); break; }

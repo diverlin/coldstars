@@ -30,7 +30,7 @@ AiModelCollector::~AiModelCollector()
 
 void AiModelCollector::RegisterAiModel(BaseAiModel* ai_model)
 {
-    aimodel_map.insert(std::make_pair(ai_model->GetTypeId(), ai_model));
+    aimodel_map.insert(std::make_pair(ai_model->typeId(), ai_model));
 }
           
 BaseAiModel* AiModelCollector::GetAiModel(int type_id) const

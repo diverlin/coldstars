@@ -76,7 +76,7 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
     for (unsigned int i=0; i<slot_weapon_num; i++)
     {
         ItemSlot* weapon_slot = GetNewItemSlot(TYPE::ENTITY::WEAPON_SLOT_ID);  
-        weapon_slot->SetSubSubTypeId(SLOT_WEAPON_TYPES[i]);   
+        weapon_slot->setSubSubTypeId(SLOT_WEAPON_TYPES[i]);   
         vehicle->AddItemSlot(weapon_slot);
     }
         
@@ -139,7 +139,7 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
     for (int i=0; i<artefact_num; i++)
     {
         ItemSlot* artefact_slot = GetNewItemSlot(TYPE::ENTITY::ARTEFACT_SLOT_ID);
-        artefact_slot->SetSubSubTypeId(SLOT_ARTEFACT_TYPES[i]);  
+        artefact_slot->setSubSubTypeId(SLOT_ARTEFACT_TYPES[i]);  
         vehicle->AddItemSlot(artefact_slot);         
     } 
 
@@ -148,7 +148,7 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
     for (int i=0; i<otsec_num; i++)
     {
         ItemSlot* otsec_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID); 
-        otsec_slot->SetSubSubTypeId(SLOT_CARGO_TYPES[i]);   
+        otsec_slot->setSubSubTypeId(SLOT_CARGO_TYPES[i]);   
         vehicle->AddItemSlot(otsec_slot);         
     }
 

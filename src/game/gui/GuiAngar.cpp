@@ -159,7 +159,7 @@ void GuiAngar::ButtonsAction() const
     //BaseButton* button = iterator->second;
     //if (button->GetPressed() == true)
     //{
-    //switch(button->GetSubTypeId())
+    //switch(button->subTypeId())
     //{
     //case GUI::BUTTON::BUYARMOR_ID:
     //{
@@ -228,7 +228,7 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                 {
                     if (data_mouse.left_click == true)
                         {
-                        switch (rect_itemslot_vec[i].second->GetSubTypeId())
+                        switch (rect_itemslot_vec[i].second->subTypeId())
                                 {
                                         case TYPE::ENTITY::REPAIR_SLOT_ID:
                                         {
@@ -244,7 +244,7 @@ bool GuiAngar::UpdateMouseInteractionWithVehicleSlots(const MouseData& data_mous
                                         {
                                                 if (m_Player->GetCursor().GetItemSlot()->GetItem() != nullptr)
                                                 {
-                                                        switch (m_Player->GetCursor().GetItemSlot()->GetItem()->GetSubTypeId())
+                                                        switch (m_Player->GetCursor().GetItemSlot()->GetItem()->subTypeId())
                                                         {
                                                                 case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:
                                                                 {

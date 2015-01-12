@@ -33,7 +33,7 @@ class Angar : public Room
                 Angar(int id);
                 ~Angar();
                 
-                virtual void PutChildsToGarbage() const;
+                virtual void putChildrenToGarbage() const;
                 
                 void AddVehicleSlot(VehicleSlot*);
                 void AddItemSlot(ItemSlot*);

@@ -32,7 +32,7 @@ BaseVehicleDrawable::BaseVehicleDrawable(jeti::TextureOb* texture, jeti::Mesh* m
 BaseVehicleDrawable::~BaseVehicleDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BaseVehicleDrawable("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~BaseVehicleDrawable("+std::to_string(id())+")");
     #endif
 } 
 

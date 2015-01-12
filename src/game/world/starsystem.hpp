@@ -98,7 +98,7 @@ class StarSystem : public BaseSpaceEntity
         StarSystem(int);
         ~StarSystem();
         
-        virtual void PutChildsToGarbage() const;
+        virtual void putChildrenToGarbage() const;
 
         void SetContainerNumMax(int container_num_max) { this->container_num_max = container_num_max; }
         void SetSector(Sector* sector)  { this->sector = sector; }

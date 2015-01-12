@@ -27,7 +27,7 @@ ShipDrawable::ShipDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
 ShipDrawable::~ShipDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Ship("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~Ship("+std::to_string(id())+")");
     #endif
 } 
 
@@ -38,10 +38,10 @@ ShipDrawable::~ShipDrawable()
 //    GetInfo().clear();
 
 //    GetInfo().addTitleStr("SHIP");
-//    if (GetStarSystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()) ); }
-//    else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( std::to_string(GetId()) ); }
+//    if (GetStarSystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()) ); }
+//    else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( std::to_string(id()) ); }
 //    // alpitodorender GetInfo().addNameStr("race:");          GetInfo().addValueStr( getRaceStr(GetTextureOb().GetAssociation().race_id) );
-//    GetInfo().addNameStr("class:");         GetInfo().addValueStr( getStr(GetSubSubTypeId()) );
+//    GetInfo().addNameStr("class:");         GetInfo().addValueStr( getStr(subSubTypeId()) );
 //    GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( std::to_string(GetDataLife().armor) + "/" + std::to_string(GetDataKorpus().armor) );
 ////    alpitodorender GetInfo().addNameStr("size id:");       GetInfo().addValueStr( std::to_string(GetTextureOb().GetData().size_id) );
 //    GetInfo().addNameStr("space/free:");    GetInfo().addValueStr( std::to_string(GetDataKorpus().space) + "/" + std::to_string(GetProperties().free_space) );

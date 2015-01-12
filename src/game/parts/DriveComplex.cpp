@@ -70,9 +70,9 @@ void DriveComplex::ResetTarget()
 {
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
     if (target == nullptr)
-    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->GetId())+" DriveComplex::ResetTarget", DRIVECOMPLEX_LOG_DIP);
+    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::ResetTarget", DRIVECOMPLEX_LOG_DIP);
     else
-    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->GetId())+" DriveComplex::ResetTarget" + getBaseInfoStr(target), DRIVECOMPLEX_LOG_DIP);
+    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::ResetTarget" + getBaseInfoStr(target), DRIVECOMPLEX_LOG_DIP);
     #endif    
     
     m_Target = nullptr;
@@ -97,7 +97,7 @@ void DriveComplex::SetStaticTargetCoords(const glm::vec3& target_pos)
     UpdatePath();
 
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->GetId())+" DriveComplex::SetStaticTargetCoords:"+std::to_string((int)target_pos.x)+", "+std::to_string((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
+    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::SetStaticTargetCoords:"+std::to_string((int)target_pos.x)+", "+std::to_string((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
     #endif  
 }      
                  
@@ -111,7 +111,7 @@ void DriveComplex::SetTarget(BaseSpaceEntity* target, int action_id)
     m_HasTarget = true;
         
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->GetId())+" DriveComplex::SetTarget " + getBaseInfoStr(target) + " navigator_action = " + getNavigatorActionStr(m_ActionId), DRIVECOMPLEX_LOG_DIP);
+    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::SetTarget " + getBaseInfoStr(target) + " navigator_action = " + getNavigatorActionStr(m_ActionId), DRIVECOMPLEX_LOG_DIP);
     #endif 
 }
   
@@ -213,7 +213,7 @@ bool DriveComplex::ValidateTarget() const
 
 void DriveComplex::UpdateDynamicTargetCoord()
 {        
-    switch(m_Target->GetTypeId())
+    switch(m_Target->typeId())
     {
         case TYPE::ENTITY::STARSYSTEM_ID:
         {
@@ -251,7 +251,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
     }
 
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->GetId())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + glm::vec22str(target_pos) + " target_center=" + glm::vec22str(target->GetCenter()) + " target_offset=" + glm::vec22str(target_offset) + "target_distance=" + std::to_string(target_distance), DRIVECOMPLEX_LOG_DIP);
+    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + glm::vec22str(target_pos) + " target_center=" + glm::vec22str(target->GetCenter()) + " target_offset=" + glm::vec22str(target_offset) + "target_distance=" + std::to_string(target_distance), DRIVECOMPLEX_LOG_DIP);
     #endif 
 }
 
@@ -272,12 +272,12 @@ bool DriveComplex::CheckTargetEchievement()
 
 bool DriveComplex::GetDockingPermission()
 {
-    switch(m_Target->GetTypeId())
+    switch(m_Target->typeId())
     {
         case TYPE::ENTITY::PLANET_ID:       { return ((Planet*)m_Target)->GetLand()->GetPermissionToLand(); break; }
         case TYPE::ENTITY::VEHICLE_ID: 
         { 
-            switch(m_Target->GetSubTypeId())
+            switch(m_Target->subTypeId())
             {
                 case TYPE::ENTITY::SPACESTATION_ID: { return ((SpaceStation*)m_Target)->GetLand()->GetPermissionToLand(); break; }
                 //case SHIP_ID:   { return targetOb->GetVehicle()->getPermissionToLand(); break; }
@@ -298,7 +298,7 @@ void DriveComplex::ClearPath()
 void DriveComplex::CalcPath()
 {
     #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->GetId())+" DriveComplex::CalcPath " + "target_pos(int, int)=" + std::to_string((int)target_pos.x) + "," + std::to_string((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
+    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::CalcPath " + "target_pos(int, int)=" + std::to_string((int)target_pos.x) + "," + std::to_string((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
     #endif   
     
     ClearPath();
@@ -404,7 +404,7 @@ void DriveComplex::CalcPath()
     {
 
 // UGLY
-if (m_PathCenterVec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<<m_OwnerVehicle->GetId()<<std::endl; break; }
+if (m_PathCenterVec.size() > 10000) { std::cout<<"BREAK PASS CALC, vehicle id="<<m_OwnerVehicle->id()<<std::endl; break; }
 
 
         new_center += direction * speed_base * gravity_rate;

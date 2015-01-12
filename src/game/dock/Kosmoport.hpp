@@ -64,7 +64,7 @@ class Kosmoport : public BaseLand
         Shop*      shop;
         Goverment* goverment; 
 
-        virtual void PutChildsToGarbage() const;
+        virtual void putChildrenToGarbage() const;
                 
         void SaveData(boost::property_tree::ptree&, const std::string&) const;        
         void LoadData(const boost::property_tree::ptree&);

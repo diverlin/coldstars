@@ -59,13 +59,13 @@ void GuiVehicle2::CreateFunctionalItemSlotsWithCircleGeometry(Vehicle* vehicle, 
     int angle = 0;
     for (unsigned int i=0; i<vehicle->m_SlotTotal_vec.size(); i++)
     {    
-        TYPE::ENTITY slot_subtype_id = vehicle->m_SlotTotal_vec[i]->GetSubTypeId();
+        TYPE::ENTITY slot_subtype_id = vehicle->m_SlotTotal_vec[i]->subTypeId();
         if ( (slot_subtype_id != TYPE::ENTITY::CARGO_SLOT_ID) and (slot_subtype_id != TYPE::ENTITY::ARTEFACT_SLOT_ID) )
         {  
             TYPE::ENTITY entity_type_id = slot_subtype_id;
             if (slot_subtype_id == TYPE::ENTITY::WEAPON_SLOT_ID)
             {
-                entity_type_id = vehicle->m_SlotTotal_vec[i]->GetSubSubTypeId();
+                entity_type_id = vehicle->m_SlotTotal_vec[i]->subSubTypeId();
             }
                           
             //TextureOb* textureOb = GuiTextureObCollector::Instance().dot_purple;

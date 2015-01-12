@@ -72,8 +72,8 @@ Player::Player(int id)
 npc(nullptr),
 starsystem(nullptr)     
 { 
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::PLAYER_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::PLAYER_ID);
     
     GuiManager::Instance().SetPlayer(this);
 }
@@ -92,7 +92,7 @@ bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) cons
 {
     if (force_full_control == false)
     {
-        if (npc->GetVehicle()->GetId() == npc->GetScanTarget()->GetId())
+        if (npc->GetVehicle()->id() == npc->GetScanTarget()->id())
         {
             force_full_control = true;  
             // modify full control for friend ships         
@@ -189,7 +189,7 @@ void Player::AddIfVisible(Vehicle* vehicle)
     {      
         //if ( npc->GetVehicle()->IsObjectWithinRadarRange(vehicle) )
         {
-            switch(vehicle->GetSubTypeId())
+            switch(vehicle->subTypeId())
             {            
                 case TYPE::ENTITY::SHIP_ID:             {     visible_SHIP_vec.push_back((Ship*)vehicle); break; }
                 case TYPE::ENTITY::SATELLITE_ID:        {     visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
@@ -293,7 +293,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
         starsystem = npc->GetVehicle()->GetStarSystem();
     }
     
-    if (starsystem->GetId() != npc->GetVehicle()->GetStarSystem()->GetId())
+    if (starsystem->id() != npc->GetVehicle()->GetStarSystem()->id())
     {
         //jeti::Screen::Instance().InitiateScrollTo(npc->GetVehicle()->GetCenter());
         //jeti::Screen::Instance().GetRect().SetCenter(npc->GetVehicle()->GetCenter());
@@ -793,7 +793,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
         { 
             cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);    
         
-            if (npc->GetVehicle()->GetId() != visible_SHIP_vec[i]->GetId())
+            if (npc->GetVehicle()->id() != visible_SHIP_vec[i]->id())
             {
                 if (data_mouse.left_click == true)
                 {
@@ -878,7 +878,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
                 }
                 else
                 {
-                    Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_SPACESTATION_vec[i]->GetId());
+                    Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_SPACESTATION_vec[i]->id());
                     npc->GetStateMachine().SetCurrentMicroTask(microtask);
                     npc->GetVehicle()->GetComplexDrive().UpdatePath();
                 }
@@ -922,7 +922,7 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
   
             if (data_mouse.left_click == true)
             {
-                Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_PLANET_vec[i]->GetId());
+                Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_PLANET_vec[i]->id());
                 npc->GetStateMachine().SetCurrentMicroTask(microtask);
                 npc->GetVehicle()->GetComplexDrive().UpdatePath();
             }   
@@ -1073,7 +1073,7 @@ void Player::RenderAxis(const jeti::Renderer& render) const
 
 void Player::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "player."+std::to_string(GetId())+".";
+    std::string root = "player."+std::to_string(id())+".";
     
     Base::SaveData(save_ptree, root);
     Player::SaveData(save_ptree, root);    
@@ -1093,8 +1093,8 @@ void Player::Resolve()
         
 void Player::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    
 {
-    save_ptree.put(root+"unresolved.npc_id", npc->GetId());
-    save_ptree.put(root+"unresolved.starsystem_id", starsystem->GetId());
+    save_ptree.put(root+"unresolved.npc_id", npc->id());
+    save_ptree.put(root+"unresolved.starsystem_id", starsystem->id());
     save_ptree.put(root+"unresolved.screen_pos_x", jeti::Screen::Instance().GetBottomLeft().x);
     save_ptree.put(root+"unresolved.screen_pos_y", jeti::Screen::Instance().GetBottomLeft().y);
 }

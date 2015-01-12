@@ -38,7 +38,7 @@ bool HyperSpace::IsVehicleHere(int id) const
 {
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     {               
-        if (VEHICLE_vec[i]->GetId() == id)
+        if (VEHICLE_vec[i]->id() == id)
         {
             return true;
         }

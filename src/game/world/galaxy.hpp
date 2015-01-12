@@ -31,7 +31,7 @@ class Galaxy : public Base
              Galaxy(int);
              ~Galaxy();
                 
-                virtual void PutChildsToGarbage() const;
+                virtual void putChildrenToGarbage() const;
                 
              void Add(Sector*, const glm::vec3&);
              

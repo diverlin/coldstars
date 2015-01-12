@@ -31,9 +31,9 @@ energy_max_orig(0),
 energy(0),
 restoration_orig(0) 
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::EQUIPMENT_ID);           
-    SetSubTypeId(TYPE::ENTITY::ENERGIZER_EQUIPMENT_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::EQUIPMENT_ID);           
+    setSubTypeId(TYPE::ENTITY::ENERGIZER_EQUIPMENT_ID);
 }
 
 /* virtual */
@@ -111,7 +111,7 @@ std::string EnergizerEquipment::GetRestorationStr()
 /*virtual*/
 void EnergizerEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "energizer_equipment." + std::to_string(GetId()) + ".";
+    std::string root = "energizer_equipment." + std::to_string(id()) + ".";
 
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -140,7 +140,7 @@ void EnergizerEquipment::Resolve()
 void EnergizerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" EnergizerEquipment::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" EnergizerEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"energy_max_orig", energy_max_orig);
@@ -150,7 +150,7 @@ void EnergizerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const
 void EnergizerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" EnergizerEquipment::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" EnergizerEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     energy_max_orig = load_ptree.get<int>("energy_max_orig");
@@ -160,7 +160,7 @@ void EnergizerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 void EnergizerEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" EnergizerEquipment::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" EnergizerEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

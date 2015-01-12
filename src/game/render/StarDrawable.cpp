@@ -32,7 +32,7 @@ StarDrawable::StarDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
 StarDrawable::~StarDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Star("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~Star("+std::to_string(id())+")");
     #endif    
 }
 
@@ -98,7 +98,7 @@ void StarDrawable::UpdateInSpace(int time, bool show_effect)
 //{
 //    GetInfo().clear();
 //    GetInfo().addTitleStr("STAR");
-//    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+//    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
 //    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(std::to_string(GetDataLife().armor));
 //    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( str(GetCenter()) );
 //}

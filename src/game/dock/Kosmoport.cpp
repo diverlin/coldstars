@@ -37,8 +37,8 @@ store(nullptr),
 shop(nullptr),
 goverment(nullptr)    
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::KOSMOPORT_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::KOSMOPORT_ID);
 }
 
 /* virtual */
@@ -46,7 +46,7 @@ Kosmoport::~Kosmoport()
 {}
 
 /* virtual */
-void Kosmoport::PutChildsToGarbage() const
+void Kosmoport::putChildrenToGarbage() const
 {
     EntityGarbage::Instance().Add(angar);
     EntityGarbage::Instance().Add(store);
@@ -137,7 +137,7 @@ void Kosmoport::ResolveData()
 
 void Kosmoport::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "kosmoport." + std::to_string(GetId())+".";
+    std::string root = "kosmoport." + std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
     BaseLand::SaveData(save_ptree, root);

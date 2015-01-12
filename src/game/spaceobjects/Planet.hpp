@@ -49,7 +49,7 @@ class Planet : public BasePlanet
 
         unsigned long int m_Population;
         
-        virtual void PutChildsToGarbage() const override final;
+        virtual void putChildrenToGarbage() const override final;
         
 //        virtual void UpdateInfo() override final;
         

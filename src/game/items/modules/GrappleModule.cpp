@@ -28,9 +28,9 @@ radius_add(0),
 speed_add(0),     
 maxNumItem_add(0)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::MODULE_ID);
-    SetSubTypeId(TYPE::ENTITY::GRAPPLE_MODULE_ID);  
+    setId(id);
+    setTypeId(TYPE::ENTITY::MODULE_ID);
+    setSubTypeId(TYPE::ENTITY::GRAPPLE_MODULE_ID);  
 }
 
 /* virtual */
@@ -62,7 +62,7 @@ void GrappleModule::AddUniqueInfo()
 /*virtual*/
 void GrappleModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "grapple_module." + std::to_string(GetId()) + ".";
+    std::string root = "grapple_module." + std::to_string(id()) + ".";
 
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -91,7 +91,7 @@ void GrappleModule::Resolve()
 void GrappleModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GrappleModule::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"strength_add", strength_add);
@@ -103,7 +103,7 @@ void GrappleModule::SaveData(boost::property_tree::ptree& save_ptree, const std:
 void GrappleModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GrappleModule::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     strength_add = load_ptree.get<int>("strength_add");
@@ -115,7 +115,7 @@ void GrappleModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void GrappleModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GrappleModule::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GrappleModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

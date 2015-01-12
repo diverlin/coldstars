@@ -29,7 +29,7 @@ class BaseAiModel
         BaseAiModel();
         virtual ~BaseAiModel();
         
-        int GetTypeId() const { return type_id; };
+        int typeId() const { return type_id; };
         
         virtual void UpdateInStatic(Npc*) const;
         virtual std::string GetDescription(Npc*) const;

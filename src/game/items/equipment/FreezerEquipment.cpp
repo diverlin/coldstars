@@ -26,9 +26,9 @@ FreezerEquipment::FreezerEquipment(int id)
 :
 freeze_orig(0)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::EQUIPMENT_ID);  
-    SetSubTypeId(TYPE::ENTITY::FREEZER_EQUIPMENT_ID); 
+    setId(id);
+    setTypeId(TYPE::ENTITY::EQUIPMENT_ID);  
+    setSubTypeId(TYPE::ENTITY::FREEZER_EQUIPMENT_ID); 
 }
 
 /* virtual */
@@ -79,7 +79,7 @@ std::string FreezerEquipment::GetFreezeStr()
 /*virtual*/
 void FreezerEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "freezer_equipment." + std::to_string(GetId()) + ".";
+    std::string root = "freezer_equipment." + std::to_string(id()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
@@ -107,7 +107,7 @@ void FreezerEquipment::Resolve()
 void FreezerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" FreezerEquipment::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" FreezerEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"freeze_orig", freeze_orig);
@@ -116,7 +116,7 @@ void FreezerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const s
 void FreezerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" FreezerEquipment::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" FreezerEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     freeze_orig = load_ptree.get<int>("freeze_orig");     
@@ -125,7 +125,7 @@ void FreezerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 void FreezerEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" FreezerEquipment::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" FreezerEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

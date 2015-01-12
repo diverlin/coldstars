@@ -103,7 +103,7 @@ void BaseGuiElement::AddChild(BaseGuiElement* child, const glm::vec2& offset)
     child->SetRoot(false);
     
     m_Child_vec.push_back(child); 
-    static_gui_element_map.insert(std::make_pair(child->GetSubTypeId(), child));
+    static_gui_element_map.insert(std::make_pair(child->subTypeId(), child));
 }
         
 BaseGuiElement* BaseGuiElement::UpdateMouseInteraction(const glm::vec2& mouse_pos)

@@ -30,7 +30,7 @@ BlackHoleDrawable::BlackHoleDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
 BlackHoleDrawable::~BlackHoleDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BlackHoleDrawable("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~BlackHoleDrawable("+std::to_string(id())+")");
     #endif
     
     delete m_shockwave;
@@ -48,7 +48,7 @@ void BlackHoleDrawable::UpdateInSpace(int time, bool show_effect)
 
 //    GetInfo().addTitleStr("BLACKHOLE");
 
-//    GetInfo().addNameStr("id:");         GetInfo().addValueStr(std::to_string(GetId()));
+//    GetInfo().addNameStr("id:");         GetInfo().addValueStr(std::to_string(id()));
 //    GetInfo().addNameStr("mass:");       GetInfo().addValueStr(std::to_string(GetMass()));
 //    GetInfo().addNameStr("pos:");        GetInfo().addValueStr( str(GetCenter()) );
 //}

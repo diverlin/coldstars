@@ -39,7 +39,7 @@ class NatureLand : public BaseLand
                 NatureLand(int);
                 virtual ~NatureLand();
 
-        virtual void PutChildsToGarbage() const;
+        virtual void putChildrenToGarbage() const;
         
         void SetTextureObBackground(jeti::TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };
         

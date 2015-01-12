@@ -27,7 +27,7 @@ SpaceStationDrawable::SpaceStationDrawable(jeti::TextureOb* texture, jeti::Mesh*
 SpaceStationDrawable::~SpaceStationDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~SpaceStationDrawable("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~SpaceStationDrawable("+std::to_string(id())+")");
     #endif
 }    
  
@@ -46,10 +46,10 @@ SpaceStationDrawable::~SpaceStationDrawable()
 //{
 //    GetInfo().clear();
 
-//    GetInfo().addTitleStr("StarBase" + getStr(GetSubTypeId()));
+//    GetInfo().addTitleStr("StarBase" + getStr(subTypeId()));
 
-//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
-//    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(GetId()));
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
+//    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(id()));
 //    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
 //    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 //}

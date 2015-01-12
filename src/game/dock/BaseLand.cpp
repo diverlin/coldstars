@@ -33,7 +33,7 @@ BaseLand::~BaseLand()
 
 void BaseLand::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    save_ptree.put(root+"data_unresolved_BaseLand.owner_id", owner->GetId());
+    save_ptree.put(root+"data_unresolved_BaseLand.owner_id", owner->id());
 }
 
 void BaseLand::LoadData(const boost::property_tree::ptree& load_ptree)
@@ -44,7 +44,7 @@ void BaseLand::LoadData(const boost::property_tree::ptree& load_ptree)
 void BaseLand::ResolveData()
 {
     Base* owner = EntityManager::Instance().GetEntityById(data_unresolved_BaseLand.owner_id);
-    switch(owner->GetTypeId())
+    switch(owner->typeId())
     {
         case TYPE::ENTITY::PLANET_ID:
         {
@@ -54,7 +54,7 @@ void BaseLand::ResolveData()
 
         case TYPE::ENTITY::VEHICLE_ID:
         {
-            if (owner->GetSubTypeId() == TYPE::ENTITY::SPACESTATION_ID)
+            if (owner->subTypeId() == TYPE::ENTITY::SPACESTATION_ID)
             {
                 ((SpaceStation*)owner)->BindLand(this);
             }

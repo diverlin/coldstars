@@ -68,7 +68,7 @@ class RocketBullet : public BaseSpaceEntity
         
 //        virtual void UpdateInfo() override final;
         
-        virtual void PutChildsToGarbage() const override final {}
+        virtual void putChildrenToGarbage() const override final {}
                 
         bool CheckTarget() const;
         

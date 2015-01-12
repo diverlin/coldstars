@@ -28,15 +28,15 @@
 
 Galaxy::Galaxy(int id)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::GALAXY_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::GALAXY_ID);
 }
 
 Galaxy::~Galaxy()
 {}
 
 /* virtual */
-void Galaxy::PutChildsToGarbage() const
+void Galaxy::putChildrenToGarbage() const
 {
     for (unsigned int i=0; i<SECTOR_vec.size(); i++)
     {
@@ -116,7 +116,7 @@ void Galaxy::ResolveData()
 
 void Galaxy::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "galaxy." + std::to_string(GetId())+".";
+    std::string root = "galaxy." + std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
     Galaxy::SaveData(save_ptree, root);

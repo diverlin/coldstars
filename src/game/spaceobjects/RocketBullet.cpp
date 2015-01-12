@@ -41,16 +41,16 @@ m_OwnerId(0),
 m_Target(nullptr),
 m_EffectDrive(nullptr) 
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::BULLET_ID);
-    SetSubTypeId(TYPE::ENTITY::ROCKETBULLET_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::BULLET_ID);
+    setSubTypeId(TYPE::ENTITY::ROCKETBULLET_ID);
 }
 
 /* virtual */
 RocketBullet::~RocketBullet()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~RocketBullet("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~RocketBullet("+std::to_string(id())+")");
     #endif
 
     delete m_EffectDrive;
@@ -104,7 +104,7 @@ bool RocketBullet::CheckTarget() const
     {
         if (m_Target->GetPlaceTypeId() == TYPE::PLACE::SPACE_ID)
         {
-            if (m_Target->GetStarSystem()->GetId() == GetStarSystem()->GetId())
+            if (m_Target->GetStarSystem()->id() == GetStarSystem()->id())
             {
                 return true;
             }
@@ -126,11 +126,11 @@ void RocketBullet::CollisionEvent(bool show_effect)
 //    GetInfo().clear();
 
 //    GetInfo().addTitleStr("ROCKET");
-//    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()) );
+//    GetInfo().addNameStr("id/ss_id:");          GetInfo().addValueStr( std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()) );
 //    GetInfo().addNameStr("armor:");             GetInfo().addValueStr( std::to_string(GetDataLife().armor) );
 //    if (m_Target != nullptr)
 //    {
-//        GetInfo().addNameStr("target_id:");       GetInfo().addValueStr(std::to_string(m_Target->GetId()));
+//        GetInfo().addNameStr("target_id:");       GetInfo().addValueStr(std::to_string(m_Target->id()));
 //    }
 //}
 
@@ -175,7 +175,7 @@ void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree, const std::
 {
     save_ptree.put(root+"speed", m_Speed);
     save_ptree.put(root+"owner_id", m_OwnerId);
-    if (m_Target != nullptr)     { save_ptree.put(root+"target_id", m_Target->GetId()); }
+    if (m_Target != nullptr)     { save_ptree.put(root+"target_id", m_Target->id()); }
     else                        { save_ptree.put(root+"target_id", NONE_ID); }
     
     m_DataBullet.Save(save_ptree, root);
@@ -206,7 +206,7 @@ void RocketBullet::ResolveData()
 /* virtual override final */
 void RocketBullet::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "rocketbullet."+std::to_string(GetId())+".";
+    const std::string root = "rocketbullet."+std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

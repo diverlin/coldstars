@@ -29,8 +29,8 @@
 
 NatureLand::NatureLand(int id)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::NATURELAND_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::NATURELAND_ID);
 }
 
 /* virtual */
@@ -38,7 +38,7 @@ NatureLand::~NatureLand()
 {}
 
 /* virtual */ 
-void NatureLand::PutChildsToGarbage() const
+void NatureLand::putChildrenToGarbage() const
 {
         for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
         {
@@ -109,7 +109,7 @@ bool NatureLand::RemoveVehicle(Vehicle* vehicle)
 {       
         for (unsigned int i=0; i<VEHICLE_vec.size(); i++) 
         {
-                if (VEHICLE_vec[i]->GetId() == vehicle->GetId())
+                if (VEHICLE_vec[i]->id() == vehicle->id())
                 {
                         VEHICLE_vec.erase(VEHICLE_vec.begin() + i);
                         return true;
@@ -136,7 +136,7 @@ std::string NatureLand::GetDockVehicleStr() const
     std::string str;
         for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
         {
-                   str += "_" + std::to_string(VEHICLE_vec[i]->GetId());
+                   str += "_" + std::to_string(VEHICLE_vec[i]->id());
         }
 
         return str;
@@ -145,7 +145,7 @@ std::string NatureLand::GetDockVehicleStr() const
 /* virtual override final */
 void NatureLand::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "natureland."+std::to_string(GetId())+".";
+    const std::string root = "natureland."+std::to_string(id())+".";
     Base::SaveData(save_ptree, root);
     BaseLand::SaveData(save_ptree, root);
     NatureLand::SaveData(save_ptree, root);

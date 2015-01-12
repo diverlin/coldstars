@@ -33,15 +33,15 @@ Sector::Sector(int id)
     :
       galaxy(nullptr)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::SECTOR_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::SECTOR_ID);
 }
 
 Sector::~Sector()
 {}
 
 /* virtual */
-void Sector::PutChildsToGarbage() const
+void Sector::putChildrenToGarbage() const
 {
     for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
     {
@@ -86,7 +86,7 @@ StarSystem* Sector::GetClosestStarSystemTo(StarSystem* starsystem, int condition
 
     for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
     {
-        if (STARSYSTEM_vec[i]->GetId() != starsystem->GetId())
+        if (STARSYSTEM_vec[i]->id() != starsystem->id())
         {
             if ( (STARSYSTEM_vec[i]->GetConditionId() == condition_id) or (condition_id == NONE_ID) )
             {
@@ -134,7 +134,7 @@ void Sector::Update(int time)
 
 void Sector::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    save_ptree.put(root+"galaxy_id", galaxy->GetId());
+    save_ptree.put(root+"galaxy_id", galaxy->id());
 }
 
 void Sector::LoadData(const boost::property_tree::ptree& load_ptree)
@@ -149,7 +149,7 @@ void Sector::ResolveData()
 
 void Sector::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "sector." + std::to_string(GetId())+".";
+    std::string root = "sector." + std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
     Sector::SaveData(save_ptree, root);

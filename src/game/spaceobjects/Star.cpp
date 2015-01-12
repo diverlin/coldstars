@@ -39,8 +39,8 @@ m_SparkActive(false),
 m_SparkGrows(false),
 m_TurnSinceLastSparkCounter(0)
 { 
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::STAR_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::STAR_ID);
 
     m_TurnSparkThreshold = meti::getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
 }
@@ -49,7 +49,7 @@ m_TurnSinceLastSparkCounter(0)
 Star::~Star()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Star("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~Star("+std::to_string(id())+")");
     #endif    
 }
 
@@ -130,7 +130,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
 //{
 //    GetInfo().clear();
 //    GetInfo().addTitleStr("STAR");
-//    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+//    GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
 //    GetInfo().addNameStr("armor:");     GetInfo().addValueStr(std::to_string(GetDataLife().armor));
 //    GetInfo().addNameStr("pos:");       GetInfo().addValueStr( meti::str(GetCenter()) );
 //}
@@ -143,7 +143,7 @@ void Star::PostDeathUniqueEvent(bool)
 void Star::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Star("+std::to_string(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Star("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"m_TurnSinceLastSparkCounter", m_TurnSinceLastSparkCounter);
@@ -153,7 +153,7 @@ void Star::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
 void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Star("+std::to_string(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Star("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
     
     m_TurnSinceLastSparkCounter = load_ptree.get<int>("m_TurnSinceLastSparkCounter");
@@ -163,7 +163,7 @@ void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 void Star::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Star("+std::to_string(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Star("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this);     
@@ -172,7 +172,7 @@ void Star::ResolveData()
 /* virtual override final */
 void Star::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "star." + std::to_string(GetId())+".";
+    std::string root = "star." + std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

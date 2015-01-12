@@ -37,7 +37,7 @@ PlanetDrawable::PlanetDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
 PlanetDrawable::~PlanetDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~PlanetDrawable("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~PlanetDrawable("+std::to_string(id())+")");
     #endif
    
 //    for (BaseDecor* decor : m_Decorations)
@@ -54,7 +54,7 @@ PlanetDrawable::~PlanetDrawable()
 //    GetInfo().clear();
     
 //    GetInfo().addTitleStr("PLANET");
-//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
 //    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(GetDataLife().armor));
 //    GetInfo().addNameStr("population:");  GetInfo().addValueStr(std::to_string(m_Population));
 //    GetInfo().addNameStr("dock_veh:");    GetInfo().addValueStr(m_Land->GetDockVehicleStr());

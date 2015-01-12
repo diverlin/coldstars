@@ -127,7 +127,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
 
 
     
-    spacestation->SetSubSubTypeId(TYPE::ENTITY::SPACESTATION_MILITARY_ID);
+    spacestation->setSubSubTypeId(TYPE::ENTITY::SPACESTATION_MILITARY_ID);
     spacestation->SetKorpusData(data_korpus);
     spacestation->SetLifeData(data_life);
 

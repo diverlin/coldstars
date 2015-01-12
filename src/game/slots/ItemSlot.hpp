@@ -79,7 +79,7 @@ class ItemSlot : public BaseSlot
         ItemSlot(INTLONGEST, TYPE::ENTITY);
         virtual ~ItemSlot();                
         
-        virtual void PutChildsToGarbage() const;
+        virtual void putChildrenToGarbage() const;
         
         void SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget = nullptr);
         void SetTurrel(Turrel* turrel) { m_Turrel = turrel; }

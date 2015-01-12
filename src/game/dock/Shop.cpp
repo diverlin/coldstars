@@ -32,9 +32,9 @@
 
 Shop::Shop(int id)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::SHOP_ID);
-    SetSubTypeId(TYPE::ENTITY::SHOP_ID);    
+    setId(id);
+    setTypeId(TYPE::ENTITY::SHOP_ID);
+    setSubTypeId(TYPE::ENTITY::SHOP_ID);    
     
     minerals_amount  = meti::getRandInt(MINERALS_STARTAMOUNT_MIN, MINERALS_STARTAMOUNT_MAX);
     food_amount      = meti::getRandInt(FOOD_STARTAMOUNT_MIN, FOOD_STARTAMOUNT_MAX);
@@ -106,7 +106,7 @@ bool Shop::SellGoods(Npc* npc, TYPE::ENTITY subtype_id, int amount)
 int Shop::BuyGoods(GoodsPack* goods_pack)
 {     
     int sign = 1;    
-    int price = Deal(sign, goods_pack->GetSubTypeId(), goods_pack->GetMass());    
+    int price = Deal(sign, goods_pack->subTypeId(), goods_pack->GetMass());    
     if (price > 0)
     {
         goods_pack->GetItemSlot()->RemoveItem(); 
@@ -253,7 +253,7 @@ void Shop::ResolveData()
 
 void Shop::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "shop." + std::to_string(GetId())+".";
+    std::string root = "shop." + std::to_string(id())+".";
     Base::SaveData(save_ptree, root);
     Room::SaveData(save_ptree, root);
     Shop::SaveData(save_ptree, root);

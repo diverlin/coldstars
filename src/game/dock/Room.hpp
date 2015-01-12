@@ -40,7 +40,7 @@ class Room : public Base
                 Room();
                 ~Room();
                 
-                virtual void PutChildsToGarbage() const {};
+                virtual void putChildrenToGarbage() const {};
                 
                 void SetOwnerKosmoport(Kosmoport* owner_kosmoport) { this->owner_kosmoport = owner_kosmoport; };
                 void SetTextureObBackground(jeti::TextureOb* textureOb_background) { this->textureOb_background = textureOb_background; };

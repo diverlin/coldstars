@@ -174,7 +174,7 @@ void GuiSkills::ButtonsAction(Skills& skills)
         //BaseButton* button = iterator->second;
         //if (button->GetPressed() == true)
         //{
-                //switch(button->GetSubTypeId())
+                //switch(button->subTypeId())
                 //{
                     //case GUI::BUTTON::INCREMENT_ATTACK_ID:   
                                 //{
@@ -310,7 +310,7 @@ void GuiSkills::RenderSkills(const Skills& skills) const
         //for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
         //{
             //BaseButton* button = iterator->second;
-            //switch(button->GetSubTypeId())
+            //switch(button->subTypeId())
             //{
                 //case GUI::BUTTON::INCREMENT_ATTACK_ID:
                 //{              

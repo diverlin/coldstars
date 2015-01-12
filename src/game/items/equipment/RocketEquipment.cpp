@@ -66,9 +66,9 @@ ammo(0),
 damage_orig(0),
 radius_orig(0)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::EQUIPMENT_ID); 
-    SetSubTypeId(TYPE::ENTITY::ROCKET_EQUIPMENT_ID);     
+    setId(id);
+    setTypeId(TYPE::ENTITY::EQUIPMENT_ID); 
+    setSubTypeId(TYPE::ENTITY::ROCKET_EQUIPMENT_ID);     
 
     fire_atOnce = meti::getRandInt(1, 3);
 }
@@ -170,7 +170,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
             //angle_inD = item_slot->GetOwnerVehicle()->GetAngle().z;
         }  
         
-        rocket_bullet->SetOwnerId(item_slot->GetOwnerVehicle()->GetId());
+        rocket_bullet->SetOwnerId(item_slot->GetOwnerVehicle()->id());
         rocket_bullet->SetTarget(item_slot->GetTarget());
     
         item_slot->GetOwnerVehicle()->GetStarSystem()->AddBullet(rocket_bullet, start_pos, glm::vec3(0, 0, angle_inD));
@@ -204,7 +204,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 /*virtual*/
 void RocketEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "rocket_equipment." + std::to_string(GetId()) + ".";
+    std::string root = "rocket_equipment." + std::to_string(id()) + ".";
 
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -233,7 +233,7 @@ void RocketEquipment::Resolve()
 void RocketEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RocketEquipment::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"ammo_max_orig", ammo_max_orig);
@@ -248,7 +248,7 @@ void RocketEquipment::SaveData(boost::property_tree::ptree& save_ptree, const st
 void RocketEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RocketEquipment::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     ammo_max_orig = load_ptree.get<int>("ammo_max_orig"); 
@@ -263,7 +263,7 @@ void RocketEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 void RocketEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RocketEquipment::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RocketEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     data_bullet.Resolve();

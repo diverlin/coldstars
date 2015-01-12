@@ -38,16 +38,16 @@
 
 Ship::Ship(int id)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::VEHICLE_ID);
-    SetSubTypeId(TYPE::ENTITY::SHIP_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::VEHICLE_ID);
+    setSubTypeId(TYPE::ENTITY::SHIP_ID);
 }
 
 /* virtual override final */
 Ship::~Ship()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Ship("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~Ship("+std::to_string(id())+")");
     #endif
 } 
 
@@ -58,10 +58,10 @@ Ship::~Ship()
 //    GetInfo().clear();
 
 //    GetInfo().addTitleStr("SHIP");
-//    if (GetStarSystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()) ); }
-//    else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( std::to_string(GetId()) ); }
+//    if (GetStarSystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()) ); }
+//    else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( std::to_string(id()) ); }
 //    // alpitodorender GetInfo().addNameStr("race:");          GetInfo().addValueStr( getRaceStr(GetTextureOb().GetAssociation().race_id) );
-//    GetInfo().addNameStr("class:");         GetInfo().addValueStr( getStr(GetSubSubTypeId()) );
+//    GetInfo().addNameStr("class:");         GetInfo().addValueStr( getStr(subSubTypeId()) );
 //    GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( std::to_string(GetDataLife().armor) + "/" + std::to_string(GetDataKorpus().armor) );
 ////    alpitodorender GetInfo().addNameStr("size id:");       GetInfo().addValueStr( std::to_string(GetTextureOb().GetData().size_id) );
 //    GetInfo().addNameStr("space/free:");    GetInfo().addValueStr( std::to_string(GetDataKorpus().space) + "/" + std::to_string(GetProperties().free_space) );
@@ -157,28 +157,28 @@ GetComplexDrive().UpdatePosition(); // debug
 void Ship::SaveData(boost::property_tree::ptree&, const std::string&) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Ship("+std::to_string(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Ship("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void Ship::LoadData(const boost::property_tree::ptree&)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Ship("+std::to_string(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Ship("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void Ship::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Ship("+std::to_string(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Ship("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 /* virtual override final */
 void Ship::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "ship."+std::to_string(GetId())+".";
+    const std::string root = "ship."+std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

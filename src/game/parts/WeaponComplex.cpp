@@ -136,7 +136,7 @@ void WeaponComplex::ActivateWeaponsBySubTypeId(TYPE::ENTITY weapon_subtype_id)
 {
     for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
     {
-        if (slot_weapon_reloaded_vec[i]->GetItem()->GetSubTypeId() == weapon_subtype_id)
+        if (slot_weapon_reloaded_vec[i]->GetItem()->subTypeId() == weapon_subtype_id)
         {
             slot_weapon_reloaded_vec[i]->SelectEvent();        
         }
@@ -148,7 +148,7 @@ void WeaponComplex::DeactivateWeaponsBySubTypeId(TYPE::ENTITY weapon_subtype_id)
 {
     for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
     {
-        if (slot_weapon_reloaded_vec[i]->GetItem()->GetSubTypeId() == weapon_subtype_id)
+        if (slot_weapon_reloaded_vec[i]->GetItem()->subTypeId() == weapon_subtype_id)
         {
             slot_weapon_reloaded_vec[i]->DeselectEvent();
         }
@@ -172,8 +172,8 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
 {                 
     #if WEAPONSTARGET_LOG_ENABLED == 1 
-    if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->GetId())+" WeaponComplex::SetTarget type_id= " + str(target->GetTypeId()) + " id=" + std::to_string(target->GetId()), WEAPONSTARGET_LOG_DIP);
-    else                        Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->GetId())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->GetTypeId()) + " id=" + std::to_string(target->GetId()) + " item_subtype_id=" + str(item_slot->GetItem()->GetSubTypeId()) + " id=" + std::to_string(item_slot->GetItem()->GetId()), WEAPONSTARGET_LOG_DIP);
+    if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()), WEAPONSTARGET_LOG_DIP);
+    else                        Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->GetItem()->subTypeId()) + " id=" + std::to_string(item_slot->GetItem()->id()), WEAPONSTARGET_LOG_DIP);
     #endif   
 
     target->TakeIntoAccountAgressor(owner_vehicle);
