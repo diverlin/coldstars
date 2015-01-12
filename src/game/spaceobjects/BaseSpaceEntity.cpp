@@ -17,21 +17,11 @@
 */
 
 #include "BaseSpaceEntity.hpp"
-//#include "../resources/MeshCollector.hpp"
-//#include "../resources/TextureCollector.hpp"
-//#include "../resources/GuiTextureObCollector.hpp"
 #include "../common/constants.hpp"
 #include <math/rand.hpp>
-#include "../common/common.hpp"
-//#include <ceti/StringUtils.hpp>
 #include "../world/EntityManager.hpp"
 #include "../world/starsystem.hpp"
-#include "../text/VerticalFlowText.hpp" 
 #include "../common/Logger.hpp"
-//#include <jeti/Render.hpp>
-//#include <jeti/animations/BaseAnimationRotation.hpp>
-
-#include <jeti/Screen.hpp>
 
 
 BaseSpaceEntity::BaseSpaceEntity():
@@ -59,16 +49,14 @@ void BaseSpaceEntity::addImpulse(const glm::vec3& force_dir, float strength)
 void BaseSpaceEntity::hit(int damage, bool show_effect)
 {
     m_dataLife.armor -= damage;
-    if (m_dataLife.armor <= 0)
-    {
+    if (m_dataLife.armor <= 0) {
         m_dataLife.is_alive = false;
         m_dataLife.dying_time -= 3;
     }
 
-    if (show_effect == true)
-    {
-        VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(center()), COLOR::COLOR4I_RED_LIGHT, collisionRadius());
-        m_starsystem->Add(text);
+    if (show_effect == true) {
+//        VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(center()), COLOR::COLOR4I_RED_LIGHT, collisionRadius());
+//        m_starsystem->Add(text);
     }
 
 }
