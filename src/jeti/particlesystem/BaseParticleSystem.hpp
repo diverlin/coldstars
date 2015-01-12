@@ -22,7 +22,7 @@
 #include <vector>
 #include <particlesystem/ParticleData.hpp>
 
-//class BaseSpaceEntity;
+//class SpaceObject;
 
 namespace jeti {
 
@@ -39,7 +39,7 @@ class BaseParticleSystem
         void ValidateResources() const;
         void SetDying() { m_IsDying = true; }
         void SetTextureOb(TextureOb* textureOb) { m_TextureOb = textureOb; }
-        //void setParent(BaseSpaceEntity* parent) { m_Parent = parent; }
+        //void setParent(SpaceObject* parent) { m_Parent = parent; }
         void setCenter(const glm::vec3& center) { m_Center = center; }
         void SetParticlesNum(unsigned int particles_num)  { m_ParticlesNum = particles_num; }
         void SetParticleData(const ParticleData& data_particle) { m_DataParticle = data_particle; }
@@ -70,7 +70,7 @@ class BaseParticleSystem
 
         glm::mat4 m_MatrixModel;
 
-        //BaseSpaceEntity* m_Parent;
+        //SpaceObject* m_Parent;
         
         bool m_IsAlive;
         bool m_IsDying;

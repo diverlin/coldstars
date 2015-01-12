@@ -19,7 +19,7 @@
 #include "Shield.hpp"
 #include <jeti/Render.hpp>
 #include <jeti/TextureOb.hpp>
-#include "../spaceobjects/BaseSpaceEntity.hpp"
+#include "../spaceobjects/SpaceObject.hpp"
 
 
 ShieldEffect::ShieldEffect()
@@ -39,7 +39,7 @@ ShieldEffect::ShieldEffect()
 ShieldEffect::~ShieldEffect()
 {}
 
-void ShieldEffect::setParent(BaseSpaceEntity* parent) 
+void ShieldEffect::setParent(SpaceObject* parent) 
 { 
     this->parent = parent; 
     

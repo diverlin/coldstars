@@ -9,7 +9,7 @@ MessageManager& MessageManager::Instance()
     return instance;
 }
 
-void MessageManager::SendEvent(BaseSpaceEntity* receiver, const Message& message)
+void MessageManager::SendEvent(SpaceObject* receiver, const Message& message)
 {
       //receiver->HandleMessage(message);
 }
@@ -20,8 +20,8 @@ void MessageManager::NewMessage(double delay,
                                int    type_id,
                                void*  extra)
 {
-      //BaseSpaceEntity* sender   = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(sender_id);
-      BaseSpaceEntity* receiver = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(receiver_id);
+      //SpaceObject* sender   = (SpaceObject*)EntityManager::Instance().GetEntityById(sender_id);
+      SpaceObject* receiver = (SpaceObject*)EntityManager::Instance().GetEntityById(receiver_id);
 
       if (receiver == nullptr)
       {
@@ -53,7 +53,7 @@ void MessageManager::UpdateQueue()
       {
           const Message& message = *messages_queue.begin();
       
-        BaseSpaceEntity* receiver = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(message.receiver_id);
+        SpaceObject* receiver = (SpaceObject*)EntityManager::Instance().GetEntityById(message.receiver_id);
         SendEvent(receiver, message);
 
         messages_queue.erase(messages_queue.begin());

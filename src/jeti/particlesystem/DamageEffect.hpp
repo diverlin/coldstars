@@ -37,6 +37,6 @@ class DamageEffect : public BaseParticleSystem
 
 };
 
-//DamageEffect* getNewDamageEffect(int, BaseSpaceEntity*);
+//DamageEffect* getNewDamageEffect(int, SpaceObject*);
 
 }

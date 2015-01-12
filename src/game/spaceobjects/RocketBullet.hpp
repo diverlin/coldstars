@@ -20,14 +20,14 @@
 #ifndef ROCKETBULLET_HPP
 #define ROCKETBULLET_HPP
 
-#include <spaceobjects/BaseSpaceEntity.hpp>
+#include <spaceobjects/SpaceObject.hpp>
 #include <common/BulletData.hpp>
 
 namespace jeti {
 class DriveEffect;
 }
 
-class RocketBullet : public BaseSpaceEntity
+class RocketBullet : public SpaceObject
 {
     public:
         RocketBullet(int);
@@ -36,7 +36,7 @@ class RocketBullet : public BaseSpaceEntity
       
         void SetBulletData(BulletData data_bullet) { m_DataBullet = data_bullet; m_Speed = data_bullet.speed_init; };
         void SetOwnerId(int owner_id) { m_OwnerId = owner_id; };
-        void SetTarget(BaseSpaceEntity* target) { m_Target = target; };
+        void SetTarget(SpaceObject* target) { m_Target = target; };
         void SetDamageRate(float damage_rate) { m_DamageRate = damage_rate; };
         
         int GetDamage() const { return m_DataBullet.damage; };
@@ -61,7 +61,7 @@ class RocketBullet : public BaseSpaceEntity
         float m_DamageRate;
         
         int m_OwnerId;
-        BaseSpaceEntity* m_Target;
+        SpaceObject* m_Target;
         
         BulletData m_DataBullet;
         jeti::DriveEffect* m_EffectDrive;

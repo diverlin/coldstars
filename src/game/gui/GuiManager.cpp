@@ -156,7 +156,7 @@ void GuiManager::UpdateSessionInSpace()
     assert(gui_radar);
     assert(gui_galaxymap);
                 
-    const BaseSpaceEntity* scan_target = player->GetNpc()->GetScanTarget();    
+    const SpaceObject* scan_target = player->GetNpc()->GetScanTarget();    
       
     if (scan_target != nullptr)
     {       

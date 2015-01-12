@@ -60,7 +60,7 @@ bool MicroScenarioGrab::Validate(Npc* npc) const
     }
     
     // check target
-    BaseSpaceEntity* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();     // shortcut
+    SpaceObject* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();     // shortcut
     STATUS target_status = npc->GetVehicle()->GetSlotGrapple()->CheckTargetPure(target);
         
     if ( (equipment_status == STATUS::ITEM_OK) and (target_status == STATUS::TARGET_OK) )
@@ -74,7 +74,7 @@ bool MicroScenarioGrab::Validate(Npc* npc) const
 /* virtual */
 void MicroScenarioGrab::UpdateInStaticInSpace(Npc* npc) const
 {
-    BaseSpaceEntity* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();
+    SpaceObject* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();
     if (npc->GetVehicle()->GetSlotGrapple()->CheckTarget(target) == STATUS::TARGET_OK)
     {
         npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->AddTarget(target);

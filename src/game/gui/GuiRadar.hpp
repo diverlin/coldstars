@@ -21,7 +21,7 @@
 #include "BaseGuiElement.hpp"
 #include <ceti/rect.hpp> // to be removed
 
-class BaseSpaceEntity;
+class SpaceObject;
 class Vehicle;
 
 namespace jeti {
@@ -39,8 +39,8 @@ class GuiRadar : public BaseGuiElement
         
         void ResetData();
         
-        void Add(BaseSpaceEntity*);
-        void AddIfWithinRadarRange(BaseSpaceEntity*, const Vehicle&);
+        void Add(SpaceObject*);
+        void AddIfWithinRadarRange(SpaceObject*, const Vehicle&);
 
         virtual void UpdateUnique(Player*) override final;
                      
@@ -57,6 +57,6 @@ class GuiRadar : public BaseGuiElement
         ceti::Rect rect;
         ceti::Rect screenrect;
                                     
-        std::vector<BaseSpaceEntity*> entity_vec;
+        std::vector<SpaceObject*> entity_vec;
 };
 

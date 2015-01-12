@@ -25,7 +25,7 @@ class Renderer;
 }
 
 #include "BaseEquipment.hpp"
-#include "../../spaceobjects/BaseSpaceEntity.hpp"
+#include "../../spaceobjects/SpaceObject.hpp"
 
 
 class GrappleEquipment : public BaseEquipment
@@ -42,9 +42,9 @@ class GrappleEquipment : public BaseEquipment
         int GetRadius()     const { return radius; };
         int GetSpeed()      const { return speed; };
               
-        bool CheckIfTargetAlreadyExistInQueue(BaseSpaceEntity* target) const;
-        void AddTarget(BaseSpaceEntity*);
-        void RemoveTarget(BaseSpaceEntity*);
+        bool CheckIfTargetAlreadyExistInQueue(SpaceObject* target) const;
+        void AddTarget(SpaceObject*);
+        void RemoveTarget(SpaceObject*);
 
         void RemoveAllTargets();
                                 
@@ -76,7 +76,7 @@ class GrappleEquipment : public BaseEquipment
         
         int free_strength;
         
-        std::vector<BaseSpaceEntity*> target_vec;
+        std::vector<SpaceObject*> target_vec;
         
         void virtual AddUniqueInfo();
         std::string GetStrengthStr();

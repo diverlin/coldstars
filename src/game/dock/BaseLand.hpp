@@ -23,7 +23,7 @@
 #include <string>
 #include <common/Base.hpp>
 
-class BaseSpaceEntity;
+class SpaceObject;
 class Vehicle;
 
 struct UnresolvedDataBaseLand
@@ -37,9 +37,9 @@ class BaseLand : public Base
         BaseLand();
         virtual ~BaseLand();
 
-        void SetOwner(BaseSpaceEntity* owner)  { this->owner = owner; }
+        void SetOwner(SpaceObject* owner)  { this->owner = owner; }
         
-        BaseSpaceEntity* GetOwner() const { return owner; };
+        SpaceObject* GetOwner() const { return owner; };
         virtual bool GetPermissionToLand() const = 0;
 
         virtual bool AddVehicle(Vehicle*) = 0;
@@ -50,7 +50,7 @@ class BaseLand : public Base
         virtual std::string GetDockVehicleStr() const = 0;
 
     protected:
-        BaseSpaceEntity* owner;
+        SpaceObject* owner;
 
         UnresolvedDataBaseLand data_unresolved_BaseLand;
         void SaveData(boost::property_tree::ptree&, const std::string&) const;

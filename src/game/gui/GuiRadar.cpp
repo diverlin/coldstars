@@ -21,7 +21,7 @@
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
 
-#include "../spaceobjects/BaseSpaceEntity.hpp"
+#include "../spaceobjects/SpaceObject.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 
 #include "../pilots/Player.hpp"
@@ -71,12 +71,12 @@ void GuiRadar::UpdateUnique(Player* player)
     }
 }
              
-void GuiRadar::Add(BaseSpaceEntity* object)
+void GuiRadar::Add(SpaceObject* object)
 {
     entity_vec.push_back(object);
 }
 
-void GuiRadar::AddIfWithinRadarRange(BaseSpaceEntity* object, const Vehicle& vehicle)
+void GuiRadar::AddIfWithinRadarRange(SpaceObject* object, const Vehicle& vehicle)
 {
     if (vehicle.IsObjectWithinRadarRange(object) == true) 
     {        

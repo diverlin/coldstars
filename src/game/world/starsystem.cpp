@@ -165,7 +165,7 @@ void StarSystem::CreateGroupAndShareTask(Npc* npc_leader, StarSystem* target_sta
     }
 }
 
-void StarSystem::AddVehicle(Vehicle* vehicle, const glm::vec3& center, const glm::vec3& angle, const BaseSpaceEntity* const parent)
+void StarSystem::AddVehicle(Vehicle* vehicle, const glm::vec3& center, const glm::vec3& angle, const SpaceObject* const parent)
 {
 #if ENTITY_TRANSACTION_LOG_ENABLED == 1
     Logger::Instance().Log(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(vehicle->id())+")", ENTITY_TRANSACTION_LOG_DIP);
@@ -214,7 +214,7 @@ void StarSystem::AddBullet(RocketBullet* rocket, const glm::vec3& center, const 
     ROCKET_vec.push_back(rocket);
 }
 
-void StarSystem::Add(BasePlanet* object, const BaseSpaceEntity* parent, int it)
+void StarSystem::Add(BasePlanet* object, const SpaceObject* parent, int it)
 {
     object->BindParent(parent, it);
     
@@ -1149,21 +1149,21 @@ void StarSystem::Save(boost::property_tree::ptree& save_ptree) const
     const std::string root = "starsystem." + std::to_string(starsystem()->id())+".";
 
     Base::SaveData(save_ptree, root);
-    BaseSpaceEntity::SaveData(save_ptree, root);
+    SpaceObject::SaveData(save_ptree, root);
     StarSystem::SaveData(save_ptree, root);
 }
 
 void StarSystem::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    BaseSpaceEntity::LoadData(load_ptree);
+    SpaceObject::LoadData(load_ptree);
     StarSystem::LoadData(load_ptree);
 }
 
 void StarSystem::Resolve()
 {
     Base::ResolveData();
-    BaseSpaceEntity::ResolveData();
+    SpaceObject::ResolveData();
     StarSystem::ResolveData();
 }        
 

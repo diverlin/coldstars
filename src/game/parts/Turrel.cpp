@@ -20,7 +20,7 @@
 
 #include "../slots/ItemSlot.hpp"
 #include <jeti/Render.hpp>
-#include "../spaceobjects/BaseSpaceEntity.hpp"
+#include "../spaceobjects/SpaceObject.hpp"
 
 #include "../common/Logger.hpp"
 

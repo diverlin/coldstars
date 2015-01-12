@@ -148,7 +148,7 @@ void Container::ResolveData()
     Logger::Instance().Log(" Container("+std::to_string(id())+")::ResolveData()", SAVELOAD_LOG_DIP);
     #endif
     
-    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddContainer(this, data_unresolved_Orientation.center); 
+    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->AddContainer(this, data_unresolved_Orientation.center); 
 }        
 
 /* virtual override final */
@@ -159,7 +159,7 @@ void Container::Save(boost::property_tree::ptree& save_ptree) const
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);
 //    BaseDrawable::SaveData(save_ptree, root);
-    BaseSpaceEntity::SaveData(save_ptree, root);
+    SpaceObject::SaveData(save_ptree, root);
     Container::SaveData(save_ptree, root);
 }
 
@@ -169,7 +169,7 @@ void Container::Load(const boost::property_tree::ptree& load_ptree)
     Base::LoadData(load_ptree);
     Orientation::LoadData(load_ptree);
 //    BaseDrawable::LoadData(load_ptree);
-    BaseSpaceEntity::LoadData(load_ptree);
+    SpaceObject::LoadData(load_ptree);
     Container::LoadData(load_ptree);
 }
     
@@ -179,6 +179,6 @@ void Container::Resolve()
     Base::ResolveData();
     Orientation::ResolveData();
 //    BaseDrawable::ResolveData();
-    BaseSpaceEntity::ResolveData();
+    SpaceObject::ResolveData();
     Container::ResolveData();
 }

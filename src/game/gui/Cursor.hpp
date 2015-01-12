@@ -23,7 +23,7 @@
 #include <ceti/Box2D.hpp>
 
 class ItemSlot;
-class BaseSpaceEntity;
+class SpaceObject;
 class BaseGuiElement;
 class Player;
 
@@ -39,7 +39,7 @@ class Cursor
         
         void SetLeftMouseButtonClick(bool left_click)         { m_DataMouse.left_click = left_click; }
         void SetRightMouseButtonClick(bool right_click)     { m_DataMouse.right_click = right_click; }
-        void SetFocusedSpaceObject(BaseSpaceEntity* space_object)   { m_FocusedSpaceObject = space_object; }
+        void SetFocusedSpaceObject(SpaceObject* space_object)   { m_FocusedSpaceObject = space_object; }
         void SetFocusedGuiElement(BaseGuiElement* gui_element)      { m_FocusedGuiElement = gui_element; }
                 
         const MouseData& GetMouseData() const { return m_DataMouse; }
@@ -58,7 +58,7 @@ class Cursor
         
         MouseData m_DataMouse;
         
-        BaseSpaceEntity* m_FocusedSpaceObject;
+        SpaceObject* m_FocusedSpaceObject;
         BaseGuiElement* m_FocusedGuiElement;
         
         ceti::Box2D m_Box;

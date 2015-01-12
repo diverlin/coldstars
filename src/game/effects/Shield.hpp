@@ -21,7 +21,7 @@
 #include <meti/VectorUtils.hpp>
 
 
-class BaseSpaceEntity;
+class SpaceObject;
 
 namespace jeti {
 class Renderer;
@@ -36,7 +36,7 @@ class ShieldEffect
         
         void SetTextureOb(jeti::TextureOb* textureOb) { this->textureOb = textureOb; };
         void SetAlpha(float alpha) { color.a = alpha; };
-        void setParent(BaseSpaceEntity*);
+        void setParent(SpaceObject*);
             
         void Update();
         void Render(const jeti::Renderer&, float) const;
@@ -49,7 +49,7 @@ class ShieldEffect
         float d_alpha;
         
         jeti::TextureOb* textureOb;
-        BaseSpaceEntity* parent;
+        SpaceObject* parent;
                 
 };
 

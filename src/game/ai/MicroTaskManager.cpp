@@ -35,7 +35,7 @@ void MicroTaskManager::SetTask(const Task& microtask)
     scenario = ScenarioCollector::Instance().GetScenario(microtask.GetScenarioTypeId());
     if (microtask.GetTargetId() != NONE_ID)
     {
-        target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(microtask.GetTargetId()); // hack
+        target = (SpaceObject*)EntityManager::Instance().GetEntityById(microtask.GetTargetId()); // hack
     }
 }
 

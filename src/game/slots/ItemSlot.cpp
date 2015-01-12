@@ -78,7 +78,7 @@ void ItemSlot::putChildrenToGarbage() const
     }
 }
 
-void ItemSlot::SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget)     
+void ItemSlot::SetTarget(SpaceObject* target, ItemSlot* subtarget)     
 {
     m_Target    = target; 
     m_Subtarget = subtarget;
@@ -455,7 +455,7 @@ bool ItemSlot::CheckSubTarget(ItemSlot* subtarget) const
 }
 
 
-STATUS ItemSlot::CheckTarget(BaseSpaceEntity* target) const
+STATUS ItemSlot::CheckTarget(SpaceObject* target) const
 {
     #if WEAPONSTARGET_LOG_ENABLED == 1 
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
@@ -484,7 +484,7 @@ STATUS ItemSlot::CheckTarget(BaseSpaceEntity* target) const
     return STATUS::TARGET_OK;
 }     
    
-STATUS ItemSlot::CheckTargetPure(BaseSpaceEntity* target) const
+STATUS ItemSlot::CheckTargetPure(SpaceObject* target) const
 {
     #if WEAPONSTARGET_LOG_ENABLED == 1 
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
@@ -508,22 +508,22 @@ STATUS ItemSlot::CheckTargetPure(BaseSpaceEntity* target) const
     return STATUS::TARGET_OK;
 } 
        
-bool ItemSlot::IsTargetAlive(BaseSpaceEntity* target) const
+bool ItemSlot::IsTargetAlive(SpaceObject* target) const
 {
     return target->isAlive();
 }
 
-bool ItemSlot::IsTargetInSpace(BaseSpaceEntity* target) const  
+bool ItemSlot::IsTargetInSpace(SpaceObject* target) const  
 {
     return (target->placeTypeId() == TYPE::PLACE::SPACE_ID);
 }               
 
-bool ItemSlot::IsTargetInSameStarSystem(BaseSpaceEntity* target) const
+bool ItemSlot::IsTargetInSameStarSystem(SpaceObject* target) const
 {
     return (target->starsystem()->id() == GetOwnerVehicle()->starsystem()->id());
 }                
 
-bool ItemSlot::CheckDistanceToTarget(BaseSpaceEntity* target) const
+bool ItemSlot::CheckDistanceToTarget(SpaceObject* target) const
 {
     if (target->typeId() == TYPE::ENTITY::STARSYSTEM_ID)
     {
@@ -595,7 +595,7 @@ void ItemSlot::ResolveData()
     
     if (unresolved_ItemSlot.target_id != NONE_ID)
     {
-        m_Target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.target_id);
+        m_Target = (SpaceObject*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.target_id);
     }
 
     if (unresolved_ItemSlot.subtarget_id != NONE_ID)

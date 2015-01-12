@@ -101,7 +101,7 @@ void DriveComplex::SetStaticTargetCoords(const glm::vec3& target_pos)
     #endif  
 }      
                  
-void DriveComplex::SetTarget(BaseSpaceEntity* target, int action_id)
+void DriveComplex::SetTarget(SpaceObject* target, int action_id)
 {
     ResetTarget();
     
