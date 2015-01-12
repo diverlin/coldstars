@@ -35,19 +35,19 @@ EntityGarbage::~EntityGarbage()
 void EntityGarbage::Add(Base* entity) 
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("________EntityGarbage::Add entity " + getTypeStr(entity->GetTypeId()) + "(" +std::to_string(entity->GetTypeId()) +") " + getTypeStr(entity->GetSubTypeId()) + "(" + std::to_string(entity->GetSubTypeId()) + ") id=" + std::to_string(entity->GetId()));
+    Logger::Instance().Log("________EntityGarbage::Add entity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     for (unsigned int i=0; i<entities_vec.size(); i++)
     {
-        if (entities_vec[i]->GetId() == entity->GetId())
+        if (entities_vec[i]->id() == entity->id())
         {
-            Logger::Instance().Log("________EntityGarbage::Add dublicated entity found(fix that) " + getTypeStr(entities_vec[i]->GetTypeId()) + "(" +std::to_string(entities_vec[i]->GetTypeId()) +") " + getTypeStr(entities_vec[i]->GetSubTypeId()) + "(" + std::to_string(entities_vec[i]->GetSubTypeId()) + ") id=" + std::to_string(entities_vec[i]->GetId()));
+            Logger::Instance().Log("________EntityGarbage::Add dublicated entity found(fix that) " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
             exit(0);
         }
     }
     #endif
         
     entities_vec.push_back(entity);
-    entity->PutChildsToGarbage();
+    entity->putChildrenToGarbage();
 }
 
 void EntityGarbage::Clear()
@@ -56,9 +56,9 @@ void EntityGarbage::Clear()
     { 
         EntityManager::Instance().RemoveEntity(entities_vec[i]);
         #if CREATEDESTROY_LOG_ENABLED == 1
-        Logger::Instance().Log("________EntityGarbage::Clear delete entity " + getTypeStr(entities_vec[i]->GetTypeId()) + "(" +std::to_string(entities_vec[i]->GetTypeId()) +") " + getTypeStr(entities_vec[i]->GetSubTypeId()) + "(" + std::to_string(entities_vec[i]->GetSubTypeId()) + ") id=" + std::to_string(entities_vec[i]->GetId()));
+        Logger::Instance().Log("________EntityGarbage::Clear delete entity " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
         #endif
-        EntityIdGenerator::Instance().AddFreeId(entities_vec[i]->GetId());
+        EntityIdGenerator::Instance().AddFreeId(entities_vec[i]->id());
         delete entities_vec[i];
     }
     entities_vec.clear();

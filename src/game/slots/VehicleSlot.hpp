@@ -34,7 +34,7 @@ class VehicleSlot : public BaseSlot
         VehicleSlot(int, TYPE::ENTITY);
         ~VehicleSlot();    
         
-        virtual void PutChildsToGarbage() const;
+        virtual void putChildrenToGarbage() const;
         
         Vehicle* GetVehicle() const { return vehicle; };
         void InsertVehicle(Vehicle*);

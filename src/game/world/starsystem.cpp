@@ -75,8 +75,8 @@ unique_update_inStatic_done(false),
 container_num_max(CONTAINER_NUM_MAX_DEFAULT),
 sector(nullptr)
 { 
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::STARSYSTEM_ID); 
+    setId(id);
+    setTypeId(TYPE::ENTITY::STARSYSTEM_ID); 
     
     SetPlaceTypeId(TYPE::PLACE::SPACE_ID);
     
@@ -101,7 +101,7 @@ StarSystem::~StarSystem()
 }      
 
 /* virtual */
-void StarSystem::PutChildsToGarbage() const
+void StarSystem::putChildrenToGarbage() const
 {    
     for(unsigned int i=0; i<STAR_vec.size(); i++)        { EntityGarbage::Instance().Add(STAR_vec[i]); } 
     for(unsigned int i=0; i<PLANET_vec.size(); i++)    { EntityGarbage::Instance().Add(PLANET_vec[i]); } 
@@ -168,11 +168,11 @@ void StarSystem::CreateGroupAndShareTask(Npc* npc_leader, StarSystem* target_sta
 void StarSystem::AddVehicle(Vehicle* vehicle, const glm::vec3& center, const glm::vec3& angle, const BaseSpaceEntity* const parent)
 {
     #if ENTITY_TRANSACTION_LOG_ENABLED == 1
-    Logger::Instance().Log(" StarSystem(" + std::to_string(GetId()) + ")::AddVehicle(" + std::to_string(vehicle->GetId())+")", ENTITY_TRANSACTION_LOG_DIP);
+    Logger::Instance().Log(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(vehicle->id())+")", ENTITY_TRANSACTION_LOG_DIP);
     
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     {
-        if (VEHICLE_vec[i]->GetId() == vehicle->GetId())
+        if (VEHICLE_vec[i]->id() == vehicle->id())
         {
             Logger::Instance().Log("StarSystem::AddVehicle dublicated vehicle found(fix that)" + getBaseInfoStr(vehicle));
             exit(0);
@@ -191,7 +191,7 @@ void StarSystem::AddVehicle(Vehicle* vehicle, const glm::vec3& center, const glm
     
     VEHICLE_vec.push_back(vehicle);  
 
-    if (vehicle->GetSubTypeId() == TYPE::ENTITY::SATELLITE_ID)
+    if (vehicle->subTypeId() == TYPE::ENTITY::SATELLITE_ID)
     {
         ((Satellite*)vehicle)->BindParent(parent);
     }
@@ -221,7 +221,7 @@ void StarSystem::Add(BasePlanet* object, const BaseSpaceEntity* parent, int it)
     object->SetStarSystem(this);
     object->SetPlaceTypeId(TYPE::PLACE::SPACE_ID);   
         
-    switch(object->GetTypeId())
+    switch(object->typeId())
     {
         case TYPE::ENTITY::STAR_ID:
         {
@@ -246,12 +246,12 @@ void StarSystem::Add(BasePlanet* object, const BaseSpaceEntity* parent, int it)
 void StarSystem::AddContainer(Container* container, const glm::vec3& center)
 {
     #if ENTITY_TRANSACTION_LOG_ENABLED == 1
-    Logger::Instance().Log(" StarSystem(" + std::to_string(GetId()) + ")::AddVehicle(" + std::to_string(container->GetId()) + ")", ENTITY_TRANSACTION_LOG_DIP);
+    Logger::Instance().Log(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")", ENTITY_TRANSACTION_LOG_DIP);
     
     
     for (unsigned int i=0; i<CONTAINER_vec.size(); i++)
     {
-        if (CONTAINER_vec[i]->GetId() == container->GetId())
+        if (CONTAINER_vec[i]->id() == container->id())
         {
             Logger::Instance().Log("StarSystem::AddContainer dublicated container found(fix that)" + getBaseInfoStr(container));
             exit(0);
@@ -652,7 +652,7 @@ void StarSystem::rocketCollision_s(bool show_effect)
             {
                 for (unsigned int vi = 0; vi < VEHICLE_vec.size(); vi++)
                 {
-                    if (ROCKET_vec[ri]->GetOwnerId() != VEHICLE_vec[vi]->GetId())
+                    if (ROCKET_vec[ri]->GetOwnerId() != VEHICLE_vec[vi]->id())
                     {
                         collide = ceti::checkCollision2D(ROCKET_vec[ri], VEHICLE_vec[vi], show_effect);
                         if (collide == true) { break; }
@@ -799,7 +799,7 @@ void StarSystem::UpdateInSpaceInStatic_s()
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)         
     { 
         VEHICLE_vec[i]->GetOwnerNpc()->UpdateInSpaceInStatic(); 
-        if (VEHICLE_vec[i]->GetSubTypeId() == TYPE::ENTITY::SPACESTATION_ID)
+        if (VEHICLE_vec[i]->subTypeId() == TYPE::ENTITY::SPACESTATION_ID)
         {
             ((SpaceStation*)VEHICLE_vec[i])->GetLand()->UpdateInStatic();
         }
@@ -916,7 +916,7 @@ void StarSystem::ManageUnavaliableObjects_s()
         if ((*it)->GetPlaceTypeId() != TYPE::PLACE::SPACE_ID)
         {    
             #if ENTITY_TRANSACTION_LOG_ENABLED == 1
-            Logger::Instance().Log("starsysten("+std::to_string(GetId())+ ")::RemoveVehicle(" + std::to_string((*it)->GetId())+")");
+            Logger::Instance().Log("starsysten("+std::to_string(id())+ ")::RemoveVehicle(" + std::to_string((*it)->id())+")");
             #endif
             it = VEHICLE_vec.erase(it);
         }
@@ -1071,7 +1071,7 @@ bool StarSystem::IsAnyActiveParticlesEffectPresent(int request_type_id) const
 {
     for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++)
     {
-        if (effect_PARTICLESYSTEM_vec[i]->GetTypeId() == request_type_id)
+        if (effect_PARTICLESYSTEM_vec[i]->typeId() == request_type_id)
         {
             return true;
         }
@@ -1087,7 +1087,7 @@ void StarSystem::PostDeathUniqueEvent(bool)
 
 void StarSystem::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    save_ptree.put(root+"sector_id", sector->GetId());
+    save_ptree.put(root+"sector_id", sector->id());
     
     save_ptree.put(root+"color.r", color.r);
     save_ptree.put(root+"color.g", color.g);
@@ -1146,7 +1146,7 @@ void StarSystem::ResolveData()
 
 void StarSystem::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "starsystem." + std::to_string(GetStarSystem()->GetId())+".";
+    const std::string root = "starsystem." + std::to_string(GetStarSystem()->id())+".";
 
     Base::SaveData(save_ptree, root);
     BaseSpaceEntity::SaveData(save_ptree, root);

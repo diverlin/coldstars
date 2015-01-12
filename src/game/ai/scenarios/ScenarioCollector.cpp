@@ -29,7 +29,7 @@ ScenarioCollector::~ScenarioCollector()
 
 void ScenarioCollector::RegisterScenario(BaseScenario* scenario)
 {
-    scenario_map.insert(std::make_pair(scenario->GetTypeId(), scenario));
+    scenario_map.insert(std::make_pair(scenario->typeId(), scenario));
 }
           
 BaseScenario* ScenarioCollector::GetScenario(TYPE::AISCENARIO type_id) const

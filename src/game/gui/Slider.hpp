@@ -33,8 +33,8 @@ class Slider : public BaseGuiElement
         
         void Configure(int, int);
         
-        //void SetSubTypeId(int subtype_id) { this->subtype_id = subtype_id; };
-        //int GetSubTypeId() const { return subtype_id; };
+        //void setSubTypeId(int subtype_id) { this->subtype_id = subtype_id; };
+        //int subTypeId() const { return subtype_id; };
 
         void UpdateSlidePosition(const MouseData&);
         void ButtonsAction(Shop*);

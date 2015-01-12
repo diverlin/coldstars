@@ -139,7 +139,7 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
 //        }
 //    }
 
-    ship->SetSubSubTypeId(subsubtype_id);
+    ship->setSubSubTypeId(subsubtype_id);
     ship->SetKorpusData(data_korpus);
 
 

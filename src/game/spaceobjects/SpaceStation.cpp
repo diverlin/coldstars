@@ -40,21 +40,21 @@ SpaceStation::SpaceStation(int id)
 : 
 m_Land(nullptr)
 {      
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::VEHICLE_ID);
-    SetSubTypeId(TYPE::ENTITY::SPACESTATION_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::VEHICLE_ID);
+    setSubTypeId(TYPE::ENTITY::SPACESTATION_ID);
 }
 
 /* virtual */
 SpaceStation::~SpaceStation() 
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~SpaceStation("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~SpaceStation("+std::to_string(id())+")");
     #endif
 }    
  
 /* virtual override final */
-void SpaceStation::PutChildsToGarbage() const 
+void SpaceStation::putChildrenToGarbage() const 
 {
     EntityGarbage::Instance().Add(m_Land);
     GetOwnerNpc()->SetAlive(false);
@@ -87,10 +87,10 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 //{
 //    GetInfo().clear();
 
-//    GetInfo().addTitleStr("StarBase" + getStr(GetSubTypeId()));
+//    GetInfo().addTitleStr("StarBase" + getStr(subTypeId()));
 
-//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
-//    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(GetId()));
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
+//    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(id()));
 //    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
 //    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
 //}
@@ -127,21 +127,21 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SpaceStation("+std::to_string(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" SpaceStation("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SpaceStation("+std::to_string(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" SpaceStation("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void SpaceStation::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" SpaceStation("+std::to_string(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" SpaceStation("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
@@ -149,7 +149,7 @@ void SpaceStation::ResolveData()
 /* virtual override final */
 void SpaceStation::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "spacestation."+std::to_string(GetId())+".";
+    const std::string root = "spacestation."+std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

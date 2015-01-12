@@ -64,7 +64,7 @@ class Player : public Base
         Player(int);
         ~Player();
 
-        virtual void PutChildsToGarbage() const {};
+        virtual void putChildrenToGarbage() const {};
         
         Show& GetShow() { return show; };
                               

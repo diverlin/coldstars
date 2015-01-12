@@ -40,14 +40,14 @@ BaseEquipment::BaseEquipment()
 BaseEquipment::~BaseEquipment()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BaseEquipment("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~BaseEquipment("+std::to_string(id())+")");
     #endif
         
     delete animation_notfunctioning;
 }
 
 /* virtual */
-void BaseEquipment::PutChildsToGarbage() const
+void BaseEquipment::putChildrenToGarbage() const
 {
     for (unsigned int i=0; i<modules_vec.size(); i++)
     {
@@ -70,7 +70,7 @@ void BaseEquipment::AddCommonInfo()
 
 bool BaseEquipment::InsertModule(BaseModule* module)
 {
-    if (module->GetParentSubTypeId() == GetSubTypeId())
+    if (module->GetParentSubTypeId() == subTypeId())
     {
         if (modules_vec.size() < data_item.modules_num_max)
             {
@@ -121,7 +121,7 @@ void BaseEquipment::Render(const jeti::Renderer& render, const ceti::Box2D& box,
 
     if (draw_text == true)
     {
-        if (GetSubTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID)
+        if (subTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID)
         {
             glm::vec2 pos(box.GetCenter().x - box.GetSize().x/2 + gui_offset.x, box.GetCenter().y + gui_offset.y);
             jeti::Screen::Instance().DrawText(std::to_string(((RocketEquipment*)this)->GetAmmo()) + "/" + std::to_string(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
@@ -133,20 +133,20 @@ void BaseEquipment::Render(const jeti::Renderer& render, const ceti::Box2D& box,
 void BaseEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseEquipment::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void BaseEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseEquipment::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void BaseEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseEquipment::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

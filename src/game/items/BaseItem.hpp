@@ -64,7 +64,7 @@ class BaseItem : public jeti::Orientation, public Base
         BaseItem();
         virtual ~BaseItem();
         
-        virtual void PutChildsToGarbage() const {};
+        virtual void putChildrenToGarbage() const {};
         
         void SetParentSubTypeId(TYPE::ENTITY parent_subtype_id) { this->parent_subtype_id = parent_subtype_id; };
         void SetItemCommonData(const ItemCommonData& data_item) { this->data_item = data_item; deterioration = data_item.deterioration_normal; };

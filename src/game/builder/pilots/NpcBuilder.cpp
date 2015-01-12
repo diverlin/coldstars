@@ -83,8 +83,8 @@ void NpcBuilder::CreateNewInternals(Npc* npc, TYPE::RACE race_id, TYPE::ENTITY s
         
     npc->SetRaceId(race_id);
     //npc->SetTextureOb(texOb_face);
-    //npc->SetSubTypeId(subtype_id);
-    //npc->SetSubSubTypeId(subsubtype_id);
+    //npc->setSubTypeId(subtype_id);
+    //npc->setSubSubTypeId(subsubtype_id);
     //npc->SetLifeData(data_life);
     
     npc->ApplySkillsStrategy();

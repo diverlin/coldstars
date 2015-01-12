@@ -29,8 +29,8 @@
 
 BlackHole::BlackHole(int id)
 {        
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::BLACKHOLE_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::BLACKHOLE_ID);
     
     SetMass(meti::getRandInt(1000, 4000));
 }
@@ -39,7 +39,7 @@ BlackHole::BlackHole(int id)
 BlackHole::~BlackHole() 
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BlackHole("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~BlackHole("+std::to_string(id())+")");
     #endif
     
     delete shockwave; 
@@ -76,7 +76,7 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
 
 //    GetInfo().addTitleStr("BLACKHOLE");
 
-//    GetInfo().addNameStr("id:");         GetInfo().addValueStr(std::to_string(GetId()));
+//    GetInfo().addNameStr("id:");         GetInfo().addValueStr(std::to_string(id()));
 //    GetInfo().addNameStr("mass:");       GetInfo().addValueStr(std::to_string(GetMass()));
 //    GetInfo().addNameStr("pos:");        GetInfo().addValueStr( meti::str(GetCenter()) );
 //}
@@ -84,21 +84,21 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
 void BlackHole::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BlackHole("+std::to_string(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BlackHole("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void BlackHole::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BlackHole("+std::to_string(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BlackHole("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void BlackHole::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BlackHole("+std::to_string(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BlackHole("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     GetStarSystem()->Add(this, data_unresolved_Orientation.center); 
@@ -107,7 +107,7 @@ void BlackHole::ResolveData()
 /*virtual*/
 void BlackHole::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "blackhole." + std::to_string(GetId())+".";
+    std::string root = "blackhole." + std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

@@ -323,7 +323,7 @@ void GuiKosmoport::ButtonsAction()
         //BaseButton* button = iterator->second;
         //if (button->GetPressed() == true)
         //{
-            //switch(button->GetSubTypeId())
+            //switch(button->subTypeId())
                //{
                    //case GUI::BUTTON::ANGAR_ID: 
                    //{
@@ -428,7 +428,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
         {
             gui_shop.UpdateLables();
             gui_shop.ButtonsAction(*slider_shared);
-            if (slider_shared->GetSubTypeId() != GUI::TYPE::NONE_ID)
+            if (slider_shared->subTypeId() != GUI::TYPE::NONE_ID)
             {
                 slider_shared->CheckButtonsLock();
                 slider_shared->ButtonsAction(gui_shop.GetShop());
@@ -439,7 +439,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
                 interaction = gui_shop.UpdateMouseInteraction(data_mouse.pos_screencoord);
                 if (interaction == false)
                 {
-                    if (slider_shared->GetSubTypeId() != GUI::TYPE::NONE_ID)
+                    if (slider_shared->subTypeId() != GUI::TYPE::NONE_ID)
                     {
                         slider_shared->UpdateSlidePosition(data_mouse);
                         interaction = slider_shared->UpdateMouseInteraction(data_mouse.pos_screencoord);
@@ -530,7 +530,7 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
             enable_BLEND();   
                 //gui_shop.RenderButtons();
                 
-                if (slider_shared->GetSubTypeId() != NONE_ID)
+                if (slider_shared->subTypeId() != NONE_ID)
                 {
                     slider_shared->Render();
                 }

@@ -44,7 +44,7 @@ class Sector : public BaseSpaceEntity
                 Galaxy* GetGalaxy() const  { return galaxy; };
                 const glm::vec3& GetCenter() const  { return center; };
                                                         
-                virtual void PutChildsToGarbage() const;
+                virtual void putChildrenToGarbage() const;
                 
              void Add(StarSystem*, const glm::vec3&);
              

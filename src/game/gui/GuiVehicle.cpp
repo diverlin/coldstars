@@ -227,10 +227,10 @@ void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
 {
     for (const auto itemslot : vehicle->m_SlotTotal_vec)
     { 
-        TYPE::ENTITY request_type = itemslot->GetSubTypeId();
+        TYPE::ENTITY request_type = itemslot->subTypeId();
         if ((request_type == TYPE::ENTITY::WEAPON_SLOT_ID) or (request_type == TYPE::ENTITY::CARGO_SLOT_ID) or (request_type == TYPE::ENTITY::ARTEFACT_SLOT_ID))
         {
-            request_type = itemslot->GetSubSubTypeId(); 
+            request_type = itemslot->subSubTypeId(); 
         }         
     
         BaseGuiElement* child = GetGuiElement(getGuiItemSlotType(request_type));
@@ -256,7 +256,7 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
                         
             if ( (data_mouse.left_click == true) and (allow_full_control == true) )
             {
-                if (gui_itemslot_vec[i].GetItemSlot()->GetSubTypeId() != ENTITY::GATE_SLOT_ID)
+                if (gui_itemslot_vec[i].GetItemSlot()->subTypeId() != ENTITY::GATE_SLOT_ID)
                 {
                     m_Player->GetCursor().GetItemSlot()->SwapItem(gui_itemslot_vec[i].GetItemSlot()); 
                 }

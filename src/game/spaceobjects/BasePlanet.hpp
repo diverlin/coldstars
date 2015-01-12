@@ -48,7 +48,7 @@ class BasePlanet : public BaseSpaceEntity
 //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) override final;
         
     protected:
-        virtual void PutChildsToGarbage() const {}
+        virtual void putChildrenToGarbage() const {}
         
         virtual void PostDeathUniqueEvent(bool);
         void UpdatePosition();

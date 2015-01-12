@@ -28,7 +28,7 @@ SatelliteDrawable::SatelliteDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
 SatelliteDrawable::~SatelliteDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Satellite("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~Satellite("+std::to_string(id())+")");
     #endif
 }
 
@@ -39,8 +39,8 @@ SatelliteDrawable::~SatelliteDrawable()
 
 //    GetInfo().addTitleStr("SATELLITE");
 
-//    //GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(starsystem->GetId()));
-//    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(GetId()));
+//    //GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem->id()));
+//    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(id()));
 //    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
 //    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(GetCenter()) );
 //}

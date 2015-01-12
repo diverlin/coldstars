@@ -29,27 +29,27 @@ class Base : private NonCopyable
         Base();
         virtual ~Base();
 
-        virtual void PutChildsToGarbage() const {};
-        void SetSubSubTypeId(TYPE::ENTITY subsubtype_id) { m_data_id.subsubtype_id = subsubtype_id; }
+        virtual void putChildrenToGarbage() const {};
+        void setSubSubTypeId(TYPE::ENTITY subsubtype_id) { m_data_id.subsubtype_id = subsubtype_id; }
         
         void setMeshId(int mesh_id) { m_mesh_id = mesh_id; }
         void setTextureId(int texture_id) { m_texture_id = texture_id; }
 
-        INTLONGEST GetId() const { return m_data_id.id; }
-        TYPE::ENTITY GetTypeId() const { return m_data_id.type_id; }
-        TYPE::ENTITY GetSubTypeId() const { return m_data_id.subtype_id; }
-        TYPE::ENTITY GetSubSubTypeId() const { return m_data_id.subsubtype_id; }
+        INTLONGEST id() const { return m_data_id.id; }
+        TYPE::ENTITY typeId() const { return m_data_id.type_id; }
+        TYPE::ENTITY subTypeId() const { return m_data_id.subtype_id; }
+        TYPE::ENTITY subSubTypeId() const { return m_data_id.subsubtype_id; }
                     
-        std::string GetDataTypeString() const;
+        std::string dataTypeString() const;
 
         virtual void Save(boost::property_tree::ptree&) const {}
         virtual void Load(const boost::property_tree::ptree&) {}
         virtual void Resolve() {}
         
     protected:
-        void SetId(INTLONGEST id)                  { m_data_id.id = id; }
-        void SetTypeId(TYPE::ENTITY type_id)       { m_data_id.type_id = type_id; }
-        void SetSubTypeId(TYPE::ENTITY subtype_id) { m_data_id.subtype_id = subtype_id; }
+        void setId(INTLONGEST id)                  { m_data_id.id = id; }
+        void setTypeId(TYPE::ENTITY type_id)       { m_data_id.type_id = type_id; }
+        void setSubTypeId(TYPE::ENTITY subtype_id) { m_data_id.subtype_id = subtype_id; }
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);

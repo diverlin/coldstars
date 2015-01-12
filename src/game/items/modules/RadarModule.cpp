@@ -25,9 +25,9 @@ RadarModule::RadarModule(int id)
 :
 radius_add(0)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::MODULE_ID);
-    SetSubTypeId(TYPE::ENTITY::RADAR_MODULE_ID); 
+    setId(id);
+    setTypeId(TYPE::ENTITY::MODULE_ID);
+    setSubTypeId(TYPE::ENTITY::RADAR_MODULE_ID); 
 }
 
 /* virtual */
@@ -44,7 +44,7 @@ void RadarModule::AddUniqueInfo()
 /*virtual*/
 void RadarModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "radar_module." + std::to_string(GetId()) + ".";
+    std::string root = "radar_module." + std::to_string(id()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
     BaseModule::SaveData(save_ptree, root);
@@ -72,7 +72,7 @@ void RadarModule::Resolve()
 void RadarModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RadarModule::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RadarModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"radius_add", radius_add);
@@ -81,7 +81,7 @@ void RadarModule::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 void RadarModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RadarModule::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RadarModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     radius_add = load_ptree.get<int>("radius_add");
@@ -90,7 +90,7 @@ void RadarModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void RadarModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" RadarModule::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" RadarModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

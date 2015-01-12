@@ -214,7 +214,7 @@ class Vehicle : public BaseSpaceEntity
         
         void UpdateGrappleMicroProgram_inDynamic();
         
-        virtual void PutChildsToGarbage() const override;
+        virtual void putChildrenToGarbage() const override;
                                                                 
         UnresolvedDataVehicle data_unresolved_Vehicle;
         

@@ -35,19 +35,19 @@ Angar::Angar(int id)
 :
 price_fuel(PRICE_FUEL)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::ANGAR_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::ANGAR_ID);
 }
 
 Angar::~Angar()
 {        
         #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Angar(), id="+std::to_string(GetId()));
+    Logger::Instance().Log("___::~Angar(), id="+std::to_string(id()));
     #endif
 }
 
 /* virtual */
-void Angar::PutChildsToGarbage() const
+void Angar::putChildrenToGarbage() const
 {
     for(unsigned int i=0; i<vehicle_total_slot_vec.size(); i++)
     {
@@ -64,12 +64,12 @@ void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot)
 { 
     vehicle_slot->SetOwner(this);
         
-        if (vehicle_slot->GetSubTypeId() == TYPE::ENTITY::VEHICLE_MILITARY_SLOT_ID)
+        if (vehicle_slot->subTypeId() == TYPE::ENTITY::VEHICLE_MILITARY_SLOT_ID)
         {
                 vehicle_military_slot_vec.push_back(vehicle_slot);
         }
         
-        if (vehicle_slot->GetSubTypeId() == TYPE::ENTITY::VEHICLE_VISITORS_SLOT_ID)
+        if (vehicle_slot->subTypeId() == TYPE::ENTITY::VEHICLE_VISITORS_SLOT_ID)
     {
                 vehicle_visitors_slot_vec.push_back(vehicle_slot);     
         }
@@ -180,7 +180,7 @@ int Angar::GetFreeVehicleSlotTotalNum() const
 
 bool Angar::AddVehicle(Vehicle* vehicle)
 {
-        if (vehicle->GetSubSubTypeId() == TYPE::ENTITY::WARRIOR_ID)
+        if (vehicle->subSubTypeId() == TYPE::ENTITY::WARRIOR_ID)
         {        
                 for (unsigned int i=0; i<vehicle_military_slot_vec.size(); i++)
                 {
@@ -213,7 +213,7 @@ std::string Angar::GetDockVehicleStr() const
         {
                 if (vehicle_military_slot_vec[i]->GetVehicle() != nullptr)
                 {
-                    str += "_m" + std::to_string(vehicle_military_slot_vec[i]->GetVehicle()->GetId());
+                    str += "_m" + std::to_string(vehicle_military_slot_vec[i]->GetVehicle()->id());
                 }
         }
         
@@ -221,7 +221,7 @@ std::string Angar::GetDockVehicleStr() const
         {
                 if (vehicle_visitors_slot_vec[i]->GetVehicle() != nullptr)
                 {
-                    str += "_v" + std::to_string(vehicle_visitors_slot_vec[i]->GetVehicle()->GetId());
+                    str += "_v" + std::to_string(vehicle_visitors_slot_vec[i]->GetVehicle()->id());
                 }
         }
         
@@ -243,7 +243,7 @@ void Angar::ResolveData()
 
 void Angar::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "angar." + std::to_string(GetId())+".";
+    std::string root = "angar." + std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
     Room::SaveData(save_ptree, root);

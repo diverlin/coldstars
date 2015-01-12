@@ -45,7 +45,7 @@ BaseDrawable::BaseDrawable(TextureOb* textureOb, Mesh* mesh)
 /* virtual */
 BaseDrawable::~BaseDrawable() {
 #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Drawable("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~Drawable("+std::to_string(id())+")");
 #endif
     
     delete m_AnimationRotation;

@@ -33,7 +33,7 @@ BasePlanetDrawable::BasePlanetDrawable(jeti::TextureOb* texture, jeti::Mesh* mes
 BasePlanetDrawable::~BasePlanetDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BasePlanetDrawable("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~BasePlanetDrawable("+std::to_string(id())+")");
     #endif
 }
 

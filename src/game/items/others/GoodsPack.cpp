@@ -30,9 +30,9 @@
 
 GoodsPack::GoodsPack(int id, TYPE::ENTITY subtype_id)
 {
-    SetId(id); 
-    SetTypeId(TYPE::ENTITY::GOODS_ID);
-    SetSubTypeId(subtype_id);
+    setId(id); 
+    setTypeId(TYPE::ENTITY::GOODS_ID);
+    setSubTypeId(subtype_id);
 }
 
 /* virtual */
@@ -48,7 +48,7 @@ void GoodsPack::UpdateOwnerAbilities() { /* do nothing*/ }
 void GoodsPack::AddUniqueInfo() 
 {
     info.addTitleStr("GOODS");
-    switch(GetSubTypeId())
+    switch(subTypeId())
     {
         case TYPE::ENTITY::MINERALS_ID:     { info.addNameStr("mineral:"); info.addValueStr(std::to_string(data_item.mass)); break; }
         case TYPE::ENTITY::FOOD_ID:         { info.addNameStr("food:"); info.addValueStr(std::to_string(data_item.mass)); break; }
@@ -71,7 +71,7 @@ void GoodsPack::AddCommonInfo()
 /*virtual*/
 void GoodsPack::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "goods_pack." + std::to_string(GetId()) + ".";
+    std::string root = "goods_pack." + std::to_string(id()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
     GoodsPack::SaveData(save_ptree, root);
@@ -96,21 +96,21 @@ void GoodsPack::Resolve()
 void GoodsPack::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GoodsPack::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GoodsPack::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
          
 void GoodsPack::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GoodsPack::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GoodsPack::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void GoodsPack::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GoodsPack::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GoodsPack::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

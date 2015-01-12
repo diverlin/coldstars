@@ -31,15 +31,15 @@
 
 Store::Store(int id)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::STORE_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::STORE_ID);
 }
 
 Store::~Store()
 {}
 
 /* virtual */
-void Store::PutChildsToGarbage() const
+void Store::putChildrenToGarbage() const
 {            
     for(unsigned int i=0; i<item_slot_vec.size(); i++)
     {
@@ -145,7 +145,7 @@ void Store::SellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
 
 void Store::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    //save_ptree.put(root+"unresolved.angar_id",     angar->GetId());
+    //save_ptree.put(root+"unresolved.angar_id",     angar->id());
 }
 
 void Store::LoadData(const boost::property_tree::ptree& load_ptree)
@@ -160,7 +160,7 @@ void Store::ResolveData()
 
 void Store::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "store." + std::to_string(GetId())+".";
+    std::string root = "store." + std::to_string(id())+".";
     Base::SaveData(save_ptree, root);
     Room::SaveData(save_ptree, root);
     Store::SaveData(save_ptree, root);

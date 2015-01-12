@@ -35,19 +35,19 @@ void MacroScenarioSelfSafety::UpdateInStaticInSpace(Npc* npc) const
 {
     if (npc->GetStarSystem()->GetConditionId() == ENTITY::STARSYSTEM::CONDITION::SAFE_ID)
     {
-        if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->GetTypeId() != TYPE::ENTITY::PLANET_ID)
+        if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->typeId() != TYPE::ENTITY::PLANET_ID)
         { 
-            Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, npc->GetPlanetForDocking()->GetId());
+            Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, npc->GetPlanetForDocking()->id());
             npc->GetStateMachine().SetCurrentMicroTask(microtask);
         }
     }
     else
     {
-        //if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->GetTypeId() != TYPE::ENTITY::STARSYSTEM_ID)
+        //if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->typeId() != TYPE::ENTITY::STARSYSTEM_ID)
         //{
             //if (npc->GetVehicle()->GetFailBackStarSystem() != nullptr)
             //{
-                //Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, npc->GetVehicle()->GetFailBackStarSystem()->GetId());
+                //Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, npc->GetVehicle()->GetFailBackStarSystem()->id());
                 //npc->GetStateMachine().SetCurrentMicroTask(microtask);
             //}
         //}

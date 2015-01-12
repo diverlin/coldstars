@@ -53,7 +53,7 @@ bool MacroScenarioGoodsTrading::IsAbleToBuyGoods(Npc* npc) const
 void MacroScenarioGoodsTrading::Enter(Npc* npc) const
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log( "npc_id="+std::to_string(npc->GetId())+" ENTER MacroScenarioGoodsTrading");
+    Logger::Instance().Log( "npc_id="+std::to_string(npc->id())+" ENTER MacroScenarioGoodsTrading");
     #endif
 }
 
@@ -93,7 +93,7 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
             Container* container = npc->GetObservation().GetClosestPickableContainer(); // find proper!
             if (npc->GetVehicle()->GetFreeSpace() > container->GetMass())
             {
-                Task microtask(TYPE::AISCENARIO::MICRO_GRAB_ID, container->GetId());
+                Task microtask(TYPE::AISCENARIO::MICRO_GRAB_ID, container->id());
                 npc->GetStateMachine().SetCurrentMicroTask(microtask); 
             
                 return;
@@ -107,7 +107,7 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
         if (microScenarioTypeId != TYPE::AISCENARIO::MICRO_DOCKING_ID)
         {
             Planet* planet = npc->GetPlanetForDocking(); // find proper planet!
-            Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, planet->GetId());
+            Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, planet->id());
             npc->GetStateMachine().SetCurrentMicroTask(microtask); 
                 
             return;
@@ -120,7 +120,7 @@ void MacroScenarioGoodsTrading::UpdateInStaticInSpace(Npc* npc) const
         if (microScenarioTypeId != TYPE::AISCENARIO::MICRO_DOCKING_ID)
         {
             Planet* planet = npc->GetPlanetForDocking(); // find proper planet
-            Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, planet->GetId());
+            Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, planet->id());
             npc->GetStateMachine().SetCurrentMicroTask(microtask);
             
             return;
@@ -162,7 +162,7 @@ void MacroScenarioGoodsTrading::UpdateInStaticInDock(Npc* npc) const
 void MacroScenarioGoodsTrading::Exit(Npc* npc) const
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log( "npc_id="+std::to_string(npc->GetId())+" EXIT MacroScenarioGoodsTrading");
+    Logger::Instance().Log( "npc_id="+std::to_string(npc->id())+" EXIT MacroScenarioGoodsTrading");
     #endif
 }
 

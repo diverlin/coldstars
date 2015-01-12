@@ -34,7 +34,7 @@ class Turrel : public jeti::Orientation
         
         void Render(float);                 
         
-        virtual void PutChildsToGarbage() const {};
+        virtual void putChildrenToGarbage() const {};
         
         virtual void Save(boost::property_tree::ptree&) const {};
         virtual void Load(const boost::property_tree::ptree&) {};

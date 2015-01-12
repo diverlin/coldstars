@@ -28,9 +28,9 @@ DroidEquipment::DroidEquipment(int id)
 :
 repair_orig(0)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::EQUIPMENT_ID); 
-    SetSubTypeId(TYPE::ENTITY::DROID_EQUIPMENT_ID); 
+    setId(id);
+    setTypeId(TYPE::ENTITY::EQUIPMENT_ID); 
+    setSubTypeId(TYPE::ENTITY::DROID_EQUIPMENT_ID); 
 }
 
 /* virtual */
@@ -97,7 +97,7 @@ std::string DroidEquipment::GetRepairStr()
 /*virtual*/
 void DroidEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "droid_equipment." + std::to_string(GetId()) + ".";
+    std::string root = "droid_equipment." + std::to_string(id()) + ".";
 
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -126,7 +126,7 @@ void DroidEquipment::Resolve()
 void DroidEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" DroidEquipment::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
         save_ptree.put(root+"repair_orig", repair_orig);
@@ -135,7 +135,7 @@ void DroidEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std
 void DroidEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" DroidEquipment::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     repair_orig = load_ptree.get<int>("repair_orig");
@@ -144,7 +144,7 @@ void DroidEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 void DroidEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" DroidEquipment::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" DroidEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

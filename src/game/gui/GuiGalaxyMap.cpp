@@ -104,7 +104,7 @@ void GuiGalaxyMap::UpdateUnique(Player* player)
             {
                 StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
                 glm::vec3 starsystem_pos = GetAbsoluteStarSystemPosition(starsystem);
-                if (starsystem.GetId() != player->GetNpc()->GetVehicle()->GetStarSystem()->GetId())
+                if (starsystem.id() != player->GetNpc()->GetVehicle()->GetStarSystem()->id())
                 {                            
                     float ss_cursor_dist = meti::distance(starsystem_pos, data_mouse.pos_screencoord);
                     if (ss_cursor_dist < 10)
@@ -114,7 +114,7 @@ void GuiGalaxyMap::UpdateUnique(Player* player)
                         {
                             if (data_mouse.left_click == true)
                             { 
-                                Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, starsystem.GetId());
+                                Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, starsystem.id());
                                 player->GetNpc()->GetStateMachine().SetCurrentMicroTask(microtask);
                                 player->GetNpc()->GetVehicle()->GetComplexDrive().UpdatePath();
                             } 
@@ -165,7 +165,7 @@ void GuiGalaxyMap::RenderUnique(const jeti::Renderer& render, Player* player) co
 
             int font_size = 8;  
             glm::vec2 offset(0.0, 13.0);
-            jeti::Screen::Instance().DrawText(std::to_string(starsystem.GetId()), font_size, starsystem_pos + offset);
+            jeti::Screen::Instance().DrawText(std::to_string(starsystem.id()), font_size, starsystem_pos + offset);
         }               
     }     
     

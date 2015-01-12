@@ -30,24 +30,24 @@ Base::Base()
 Base::~Base()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Base("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~Base("+std::to_string(id())+")");
     #endif
 }
 
-std::string Base::GetDataTypeString() const
+std::string Base::dataTypeString() const
 {
     std::string str;
-    str += "id=" + std::to_string(GetId());
-    str += "/t=" + getStr(GetTypeId());
-    str += "/st=" + getStr(GetSubTypeId());
-    str += "/sst=" + getStr(GetSubSubTypeId());
+    str += "id=" + std::to_string(id());
+    str += "/t=" + getStr(typeId());
+    str += "/st=" + getStr(subTypeId());
+    str += "/sst=" + getStr(subSubTypeId());
     return str;
 }
 
 void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Base("+std::to_string(GetId())+")::SaveDataUniqueBase", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Base("+std::to_string(id())+")::SaveDataUniqueBase", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"data_id.id",            m_data_id.id);
@@ -59,7 +59,7 @@ void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
 void Base::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Base("+std::to_string(GetId())+")::LoadDataUniqueBase", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Base("+std::to_string(id())+")::LoadDataUniqueBase", SAVELOAD_LOG_DIP);
     #endif
     
     m_data_id.id              = load_ptree.get<unsigned long int>("data_id.id");
@@ -71,6 +71,6 @@ void Base::LoadData(const boost::property_tree::ptree& load_ptree)
 void Base::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Base("+std::to_string(GetId())+")::ResolveDataUniqueBase", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Base("+std::to_string(id())+")::ResolveDataUniqueBase", SAVELOAD_LOG_DIP);
     #endif
 }

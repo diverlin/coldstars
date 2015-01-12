@@ -92,12 +92,12 @@ m_SlotFreezer(nullptr)
 Vehicle::~Vehicle()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Vehicle("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~Vehicle("+std::to_string(id())+")");
     #endif
 } 
 
 /* virtual override */
-void Vehicle::PutChildsToGarbage() const
+void Vehicle::putChildrenToGarbage() const
 {
     m_OwnerNpc->SetAlive(false);
     EntityGarbage::Instance().Add(m_OwnerNpc);
@@ -134,7 +134,7 @@ GoodsPack* Vehicle::GetGoodsPack() const
     {
         if (m_SlotCargo_vec[i]->GetItem() != nullptr)
         {
-            if (m_SlotCargo_vec[i]->GetItem()->GetTypeId() == TYPE::ENTITY::GOODS_ID)
+            if (m_SlotCargo_vec[i]->GetItem()->typeId() == TYPE::ENTITY::GOODS_ID)
             {
                 return m_SlotCargo_vec[i]->GetGoodsPack();
             }
@@ -154,7 +154,7 @@ bool Vehicle::CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY slot_subtype_id) con
 {
     for (unsigned int i=0; i<m_SlotTotal_vec.size(); i++)
     {
-        if (m_SlotTotal_vec[i]->GetSubTypeId() == slot_subtype_id)
+        if (m_SlotTotal_vec[i]->subTypeId() == slot_subtype_id)
         {
             return true;
         }
@@ -167,7 +167,7 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
 { 
     slot->SetOwner(this); 
                 
-    switch(slot->GetSubTypeId())
+    switch(slot->subTypeId())
     {
         case TYPE::ENTITY::WEAPON_SLOT_ID:    
         {
@@ -196,17 +196,17 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
         
     m_SlotTotal_vec.push_back(slot); 
 
-    if ( (slot->GetSubTypeId() != TYPE::ENTITY::ARTEFACT_SLOT_ID) and (slot->GetSubTypeId() != TYPE::ENTITY::CARGO_SLOT_ID) )
+    if ( (slot->subTypeId() != TYPE::ENTITY::ARTEFACT_SLOT_ID) and (slot->subTypeId() != TYPE::ENTITY::CARGO_SLOT_ID) )
     {
         m_SlotFunct_vec.push_back(slot);
     }
     
-    if (slot->GetSubTypeId() == TYPE::ENTITY::ARTEFACT_SLOT_ID)
+    if (slot->subTypeId() == TYPE::ENTITY::ARTEFACT_SLOT_ID)
     {
         m_SlotArtef_vec.push_back(slot);
     }
     
-    if (slot->GetSubTypeId() == TYPE::ENTITY::CARGO_SLOT_ID)
+    if (slot->subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID)
     {
         m_SlotCargo_vec.push_back(slot); 
     }
@@ -220,7 +220,7 @@ bool Vehicle::GetAllItemsFromVehicle(Vehicle* vehicle)
     { 
         if (vehicle->m_SlotTotal_vec[i]->GetItem() != nullptr)
         {
-            if (vehicle->m_SlotTotal_vec[i]->GetSubTypeId() == TYPE::ENTITY::CARGO_SLOT_ID)
+            if (vehicle->m_SlotTotal_vec[i]->subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID)
             {
                 result = AddItemToCargoSlot(vehicle->m_SlotTotal_vec[i]->GetItem());
             }
@@ -236,7 +236,7 @@ bool Vehicle::GetAllItemsFromVehicle(Vehicle* vehicle)
                 
 bool Vehicle::ManageItem(BaseItem* item)
 {
-    switch(item->GetTypeId())
+    switch(item->typeId())
     {
         case TYPE::ENTITY::EQUIPMENT_ID:     { return ManageFunctionEquipment(item); break; }
         case TYPE::ENTITY::MODULE_ID:         { return ManageFunctionModule(item); break; }
@@ -298,7 +298,7 @@ bool Vehicle::ManageFunctionModule(BaseItem* item)
     {
         if (m_SlotFunct_vec[i]->GetItem() != nullptr)
         {
-            if (m_SlotFunct_vec[i]->GetItem()->GetSubTypeId() == item->GetParentSubTypeId())
+            if (m_SlotFunct_vec[i]->GetItem()->subTypeId() == item->GetParentSubTypeId())
             {
                 return ((BaseEquipment*)m_SlotFunct_vec[i]->GetItem())->InsertModule((BaseModule*)item);                
             }
@@ -323,7 +323,7 @@ ItemSlot* const Vehicle::GetFuctionalSlot(TYPE::ENTITY functional_slot_subtype_i
 {
     for(unsigned int i=0; i<m_SlotFunct_vec.size(); i++)
     {
-        if (m_SlotFunct_vec[i]->GetSubTypeId() == functional_slot_subtype_id)
+        if (m_SlotFunct_vec[i]->subTypeId() == functional_slot_subtype_id)
         {
             return m_SlotFunct_vec[i];
         }
@@ -364,9 +364,9 @@ ItemSlot* const Vehicle::GetCargoSlotWithGoods(TYPE::ENTITY requested_goods_subt
     {
         if (m_SlotCargo_vec[i]->GetItem() != nullptr)
         {
-            if (m_SlotCargo_vec[i]->GetItem()->GetTypeId() == TYPE::ENTITY::GOODS_ID)
+            if (m_SlotCargo_vec[i]->GetItem()->typeId() == TYPE::ENTITY::GOODS_ID)
             {
-                if (m_SlotCargo_vec[i]->GetItem()->GetSubTypeId() == requested_goods_subtype_id)
+                if (m_SlotCargo_vec[i]->GetItem()->subTypeId() == requested_goods_subtype_id)
                 {
                     return m_SlotCargo_vec[i];
                 }
@@ -392,7 +392,7 @@ bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
 bool Vehicle::AddItemToCargoSlot(BaseItem* item)
 {
     IncreaseMass(item->GetMass());
-    if (item->GetTypeId() == TYPE::ENTITY::GOODS_ID)
+    if (item->typeId() == TYPE::ENTITY::GOODS_ID)
     {
         if (ManageFunctionGoodsPack(item) == true)
         {
@@ -449,7 +449,7 @@ bool Vehicle::SellItem(BaseItem* item)
     //npc->IncreaseCredits(sign*amount*skill_rate*minerals_price);
     int earn_money = 0;
     int item_mass = item->GetMass();
-    switch(item->GetTypeId())
+    switch(item->typeId())
     {
         case TYPE::ENTITY::GOODS_ID:        
         { 
@@ -491,7 +491,7 @@ bool Vehicle::BuyItem(BaseItem* item)
                 
 bool Vehicle::MergeIdenticalGoods(BaseItem* item)
 {
-    ItemSlot* item_slot = GetCargoSlotWithGoods(item->GetSubTypeId());
+    ItemSlot* item_slot = GetCargoSlotWithGoods(item->subTypeId());
     if (item_slot != nullptr)
     {
         item_slot->GetGoodsPack()->Increase(item->GetMass());
@@ -572,7 +572,7 @@ void Vehicle::UpdateSpecialAction()
 void Vehicle::HyperJumpEvent(StarSystem* starsystem)
 {
     #if ENTITY_TRANSACTION_LOG_ENABLED == 1 
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::HyperJumpEvent", ENTITY_TRANSACTION_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::HyperJumpEvent", ENTITY_TRANSACTION_LOG_DIP);
     #endif   
     
     m_ComplexWeapon.DeactivateAllWeapons();
@@ -585,12 +585,12 @@ void Vehicle::HyperJumpEvent(StarSystem* starsystem)
 void Vehicle::DockingEvent()
 {
     #if ENTITY_TRANSACTION_LOG_ENABLED == 1 
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::DockingEvent", ENTITY_TRANSACTION_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::DockingEvent", ENTITY_TRANSACTION_LOG_DIP);
     #endif
               
     m_ComplexWeapon.DeactivateAllWeapons();
                    
-    switch(m_ComplexDrive.GetTarget()->GetTypeId())                               
+    switch(m_ComplexDrive.GetTarget()->typeId())                               
     {
         case TYPE::ENTITY::PLANET_ID:
         {
@@ -602,7 +602,7 @@ void Vehicle::DockingEvent()
 
         case TYPE::ENTITY::VEHICLE_ID:
         {     
-            switch(m_ComplexDrive.GetTarget()->GetSubTypeId())
+            switch(m_ComplexDrive.GetTarget()->subTypeId())
             {
                 case TYPE::ENTITY::SPACESTATION_ID:
                 {
@@ -629,12 +629,12 @@ void Vehicle::DockingEvent()
 void Vehicle::LaunchingEvent()
 {
     #if ENTITY_TRANSACTION_LOG_ENABLED == 1 
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::LaunchingEvent", ENTITY_TRANSACTION_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::LaunchingEvent", ENTITY_TRANSACTION_LOG_DIP);
     #endif
     
     if (m_ParentVehicleSlot != nullptr)
     {
-        switch(m_ParentVehicleSlot->GetOwner()->GetTypeId())
+        switch(m_ParentVehicleSlot->GetOwner()->typeId())
         {
             case TYPE::ENTITY::ANGAR_ID:
             {
@@ -680,7 +680,7 @@ void Vehicle::TakeIntoAccountAgressor(Vehicle* agressor)
 void Vehicle::Hit(int damage, bool show_effect)
 {
     #if WEAPONSTARGET_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::Hit", WEAPONSTARGET_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::Hit", WEAPONSTARGET_LOG_DIP);
     #endif
     
     if (m_GodMode == false)
@@ -758,7 +758,7 @@ void Vehicle::CheckNeedsInStatic()
         {
                 if (m_SlotFunct_vec[i]->GetItem() != nullptr)
                 {
-                        if (m_SlotFunct_vec[i]->GetItem()->GetSubTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID) 
+                        if (m_SlotFunct_vec[i]->GetItem()->subTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID) 
                         {
                                 if (m_SlotFunct_vec[i]->GetRocketEquipment()->GetAmmo() == 0)
                                 {
@@ -819,7 +819,7 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
         {
             if (m_SlotFunct_vec[i]->GetItem() != nullptr)
             {
-                if (m_SlotFunct_vec[i]->GetItem()->GetSubTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID)
+                if (m_SlotFunct_vec[i]->GetItem()->subTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID)
                 {
                     result = ((Angar*)m_ParentVehicleSlot->GetOwner())->ChargeRocketEquipment(m_OwnerNpc, m_SlotFunct_vec[i]->GetRocketEquipment());
                 }
@@ -860,7 +860,7 @@ void Vehicle::UpdateAllFunctionalItemsInStatic()
 void Vehicle::IncreaseMass(int d_mass)
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::IncreaseMass", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::IncreaseMass", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     ChangeMass(d_mass);
@@ -871,7 +871,7 @@ void Vehicle::IncreaseMass(int d_mass)
 void Vehicle::DecreaseMass(int d_mass)
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::DecreaseMass", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::DecreaseMass", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     ChangeMass(-d_mass);
@@ -882,7 +882,7 @@ void Vehicle::DecreaseMass(int d_mass)
 void Vehicle::UpdatePropertiesSpeed()
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::UpdatePropertiesSpeed", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesSpeed", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     // speed calculation ////
@@ -926,7 +926,7 @@ void Vehicle::UpdatePropertiesSpeed()
 void Vehicle::UpdatePropertiesFire()
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::UpdatePropertiesFire", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesFire", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     m_ComplexWeapon.UpdateFireAbility();
@@ -938,7 +938,7 @@ void Vehicle::UpdatePropertiesFire()
 void Vehicle::UpdatePropertiesRadar()
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::UpdatePropertiesRadar", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesRadar", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     m_Properties.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
@@ -957,7 +957,7 @@ void Vehicle::UpdatePropertiesRadar()
 void Vehicle::UpdatePropertiesJump()
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::UpdatePropertiesJump", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesJump", ITEMINFLUENCE_LOG_DIP);
     #endif
         
     m_Properties.hyper = 0;
@@ -993,7 +993,7 @@ void Vehicle::UpdatePropertiesJump()
 void Vehicle::UpdatePropertiesEnergy()
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::UpdatePropertiesEnergy", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesEnergy", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     m_Properties.energy = 0;
@@ -1014,7 +1014,7 @@ void Vehicle::UpdatePropertiesEnergy()
 void Vehicle::UpdatePropertiesProtection()
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::UpdatePropertiesProtection", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesProtection", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     m_Properties.protection = m_DataKorpus.protection;
@@ -1041,7 +1041,7 @@ void Vehicle::UpdatePropertiesProtection()
 void Vehicle::UpdatePropertiesRepair()
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::UpdatePropertiesRepair", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesRepair", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     m_Properties.repair = 0;
@@ -1059,7 +1059,7 @@ void Vehicle::UpdatePropertiesRepair()
 void Vehicle::IncreaseArmor(int repair)
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::IncreaseArmor", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::IncreaseArmor", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     GetDataLife().armor += repair;
@@ -1073,7 +1073,7 @@ void Vehicle::IncreaseArmor(int repair)
 void Vehicle::UpdatePropertiesFreeze()
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::UpdatePropertiesFreeze", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesFreeze", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     m_Properties.freeze = 0;
@@ -1090,7 +1090,7 @@ void Vehicle::UpdatePropertiesFreeze()
 void Vehicle::UpdatePropertiesScan()
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::UpdatePropertiesScan", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesScan", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     m_Properties.scan = 0;
@@ -1107,7 +1107,7 @@ void Vehicle::UpdatePropertiesScan()
 void Vehicle::UpdatePropertiesGrab()
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::UpdatePropertiesGrab", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesGrab", ITEMINFLUENCE_LOG_DIP);
     #endif
 
     m_Properties.grab_strength = 0;
@@ -1129,7 +1129,7 @@ void Vehicle::UpdatePropertiesGrab()
 void Vehicle::UpdateArtefactInfluence()
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::UpdateArtefactInfluence", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdateArtefactInfluence", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     m_Properties.artefact_gravity = 0;
@@ -1141,7 +1141,7 @@ void Vehicle::UpdateArtefactInfluence()
         {
             if (m_SlotArtef_vec[i]->GetItem()->GetFunctioning() == true)
             {
-                switch(m_SlotArtef_vec[i]->GetItem()->GetSubTypeId())
+                switch(m_SlotArtef_vec[i]->GetItem()->subTypeId())
                 {
                     case TYPE::ENTITY::GRAVITY_ARTEFACT_ID:
                     {
@@ -1326,7 +1326,7 @@ void Vehicle::LockRandomItem(int locked_turns)
 bool Vehicle::TryToConsumeEnergy(int energy)
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::TryToConsumeEnergy(energy="+std::to_string(energy)+")", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::TryToConsumeEnergy(energy="+std::to_string(energy)+")", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     if (m_Properties.energy > energy)
@@ -1343,7 +1343,7 @@ bool Vehicle::TryToConsumeEnergy(int energy)
 bool Vehicle::TryToGenerateEnergy(int energy)
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(GetId())+")::TryToGenerateEnergy(energy="+std::to_string(energy)+")", ITEMINFLUENCE_LOG_DIP);
+    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::TryToGenerateEnergy(energy="+std::to_string(energy)+")", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     int energy_max = m_SlotEnergizer->GetEnergizerEquipment()->GetEnergyMax();
@@ -1425,7 +1425,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Vehicle("+std::to_string(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Vehicle("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 
     save_ptree.put(root+"m_DataKorpus.space", m_DataKorpus.space);           
@@ -1447,7 +1447,7 @@ void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::strin
 
     if (m_ComplexDrive.GetTarget() != nullptr) 
     {
-        save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", m_ComplexDrive.GetTarget()->GetId());
+        save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", m_ComplexDrive.GetTarget()->id());
         save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_action_id", m_ComplexDrive.GetActionId());
     }
     else 
@@ -1456,15 +1456,15 @@ void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::strin
         save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_action_id", NONE_ID);
     }
                
-    if (m_Land != nullptr)  { save_ptree.put(root+"data_unresolved_Vehicle.land_id", m_Land->GetId()); }
+    if (m_Land != nullptr)  { save_ptree.put(root+"data_unresolved_Vehicle.land_id", m_Land->id()); }
     else                     { save_ptree.put(root+"data_unresolved_Vehicle.land_id", NONE_ID); }
     
-    if (m_ParentVehicleSlot != nullptr) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", m_ParentVehicleSlot->GetId()); }
+    if (m_ParentVehicleSlot != nullptr) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", m_ParentVehicleSlot->id()); }
     else                                     { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }
   
     if (GetPlaceTypeId() == TYPE::PLACE::HYPER_SPACE_ID) 
     { 
-        save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", m_ComplexDrive.GetTarget()->GetId()); 
+        save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", m_ComplexDrive.GetTarget()->id()); 
     }
     else 
     { 
@@ -1475,7 +1475,7 @@ void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::strin
 void Vehicle::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Vehicle("+std::to_string(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Vehicle("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
     
        m_DataKorpus.space       = load_ptree.get<int>("m_DataKorpus.space");     
@@ -1506,7 +1506,7 @@ void Vehicle::LoadData(const boost::property_tree::ptree& load_ptree)
 void Vehicle::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Vehicle("+std::to_string(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Vehicle("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     CreateDriveComplexTextureDependedStuff();

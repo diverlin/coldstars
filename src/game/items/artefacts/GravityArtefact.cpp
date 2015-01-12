@@ -25,9 +25,9 @@ GravityArtefact::GravityArtefact(int id)
 :
 gravity(0)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::ARTEFACT_ID);
-    SetSubTypeId(TYPE::ENTITY::GRAVITY_ARTEFACT_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::ARTEFACT_ID);
+    setSubTypeId(TYPE::ENTITY::GRAVITY_ARTEFACT_ID);
 }
 
 /* virtual */
@@ -50,7 +50,7 @@ void GravityArtefact::AddCommonInfo()
 /* virtual */
 void GravityArtefact::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "gravity_artefact." + std::to_string(GetId()) + ".";
+    std::string root = "gravity_artefact." + std::to_string(id()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
     GravityArtefact::SaveData(save_ptree, root);
@@ -75,7 +75,7 @@ void GravityArtefact::Resolve()
 void GravityArtefact::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GravityArtefact::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GravityArtefact::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"gravity", gravity); 
@@ -84,7 +84,7 @@ void GravityArtefact::SaveData(boost::property_tree::ptree& save_ptree, const st
 void GravityArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GravityArtefact::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GravityArtefact::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     gravity = load_ptree.get<int>("gravity");
@@ -93,6 +93,6 @@ void GravityArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
 void GravityArtefact::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" GravityArtefact::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" GravityArtefact::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

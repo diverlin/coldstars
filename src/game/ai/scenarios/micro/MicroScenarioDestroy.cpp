@@ -53,7 +53,7 @@ bool MicroScenarioDestroy::Validate(Npc* npc) const
 void MicroScenarioDestroy::Enter(Npc* npc) const
 {    
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + std::to_string(npc->GetId()) + " ENTER MicroScenarioDestroy");
+    Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " ENTER MicroScenarioDestroy");
     #endif
 }
 
@@ -61,7 +61,7 @@ void MicroScenarioDestroy::Enter(Npc* npc) const
 void MicroScenarioDestroy::UpdateInStaticInSpace(Npc* npc) const
 {
     npc->GetVehicle()->GetComplexWeapon().ActivateAllWeapons();
-    npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId();
+    npc->GetStateMachine().GetMicroTaskManager().GetTarget()->id();
     npc->GetVehicle()->GetComplexWeapon().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget());
     npc->GetVehicle()->GetComplexDrive().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID); 
 }
@@ -74,12 +74,12 @@ void MicroScenarioDestroy::UpdateInDynamicInSpace(Npc* npc) const
 void MicroScenarioDestroy::Exit(Npc* npc) const
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + std::to_string(npc->GetId()) + " EXIT MicroScenarioDestroy");
+    Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " EXIT MicroScenarioDestroy");
     #endif
 }
 
 /* virtual */
 std::string MicroScenarioDestroy::GetDescription(Npc* npc) const
 {
-    return "DESTROY ob_id=" + std::to_string( npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId()) ;
+    return "DESTROY ob_id=" + std::to_string( npc->GetStateMachine().GetMicroTaskManager().GetTarget()->id()) ;
 }

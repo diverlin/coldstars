@@ -56,10 +56,10 @@ Npc::Npc(int id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id)
 { 
     is_alive = true;
     
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::NPC_ID);
-    SetSubTypeId(subtype_id);
-    SetSubSubTypeId(subsubtype_id);
+    setId(id);
+    setTypeId(TYPE::ENTITY::NPC_ID);
+    setSubTypeId(subtype_id);
+    setSubSubTypeId(subsubtype_id);
 
     observation.SetNpcOwner(this);
     state_machine.SetNpcOwner(this);
@@ -113,7 +113,7 @@ void Npc::UpdateInKosmoportInStatic()
 void Npc::UpdateInSpaceInStatic()
 {
 #if AI_LOG_ENABLED == 1
-    Logger::Instance().Log("Npc("+std::to_string(GetId())+")::UpdateInSpaceInStatic START", AI_LOG_DIP);
+    Logger::Instance().Log("Npc("+std::to_string(id())+")::UpdateInSpaceInStatic START", AI_LOG_DIP);
 #endif
 
     vehicle->UpdateAllFunctionalItemsInStatic();
@@ -148,7 +148,7 @@ void Npc::UpdateInSpaceInStatic()
     vehicle->GetComplexDrive().UpdatePath();
 
 #if AI_LOG_ENABLED == 1
-    Logger::Instance().Log("Npc("+std::to_string(GetId())+")::UpdateInSpaceInStatic END", AI_LOG_DIP);
+    Logger::Instance().Log("Npc("+std::to_string(id())+")::UpdateInSpaceInStatic END", AI_LOG_DIP);
 #endif
 }
 
@@ -167,14 +167,14 @@ void Npc::TakeIntoAccountAgressor(Vehicle* agressor)
 {
     for (std::set<AgressorData>::iterator it=data_agressor_set.begin(); it!=data_agressor_set.end(); ++it)
     {
-        if (it->npc_id == agressor->GetOwnerNpc()->GetId())
+        if (it->npc_id == agressor->GetOwnerNpc()->id())
         {
             if (it->last_date != GameDate::Instance().GetDate())
             {
                 int counter = it->counter;
                 data_agressor_set.erase(it);
                 
-                AgressorData agressor_data(agressor->GetOwnerNpc()->GetId(), GameDate::Instance().GetDate(), ++counter);
+                AgressorData agressor_data(agressor->GetOwnerNpc()->id(), GameDate::Instance().GetDate(), ++counter);
                 data_agressor_set.insert(agressor_data);
             }
 
@@ -182,7 +182,7 @@ void Npc::TakeIntoAccountAgressor(Vehicle* agressor)
         }
     }
 
-    AgressorData agressor_data(agressor->GetOwnerNpc()->GetId(), GameDate::Instance().GetDate(), 1);
+    AgressorData agressor_data(agressor->GetOwnerNpc()->id(), GameDate::Instance().GetDate(), 1);
     data_agressor_set.insert(agressor_data);
 }
 
@@ -200,7 +200,7 @@ void Npc::ScenarioFireVehicleAgressor()
     {
         for (std::set<AgressorData>::iterator it = data_agressor_set.begin(); it != data_agressor_set.end(); ++it)
         {
-            if (observation.visible_VEHICLE_pair_vec[i].object->GetOwnerNpc()->GetId() == it->npc_id)
+            if (observation.visible_VEHICLE_pair_vec[i].object->GetOwnerNpc()->id() == it->npc_id)
             {
                 vehicle->GetComplexWeapon().DeactivateAllWeapons();
 
@@ -238,7 +238,7 @@ StarSystem* Npc::GetClosestStarSystem(int requested_condition_id)
 //// *********** SCANNING ***********
 bool Npc::CheckPossibilityToScan(Vehicle* vehicle)
 {
-    if (this->vehicle->GetId() == vehicle->GetId())    // selfscan is possible all time
+    if (this->vehicle->id() == vehicle->id())    // selfscan is possible all time
     {
         return true;
     }
@@ -261,11 +261,11 @@ void Npc::UpdateInfo()
     info.clear();
 
     info.addTitleStr("NPC");
-    info.addNameStr("id:");           info.addValueStr( std::to_string(GetId())  );
+    info.addNameStr("id:");           info.addValueStr( std::to_string(id())  );
     info.addNameStr("race:");         info.addValueStr( getRaceStr(race_id) );
-    info.addNameStr("subype_id:");    info.addValueStr( getStr(GetSubTypeId()) );
-    info.addNameStr("subsubype_id:"); info.addValueStr( getStr(GetSubSubTypeId()) );
-    //info.addNameStr("model_ai:");     info.addValueStr( ceti::getAiModelStr(ai_model->GetTypeId()) );
+    info.addNameStr("subype_id:");    info.addValueStr( getStr(subTypeId()) );
+    info.addNameStr("subsubype_id:"); info.addValueStr( getStr(subSubTypeId()) );
+    //info.addNameStr("model_ai:");     info.addValueStr( ceti::getAiModelStr(ai_model->typeId()) );
     info.addNameStr("credits:");      info.addValueStr( std::to_string(credits) );
     info.addNameStr("expirience:");   info.addValueStr( std::to_string(skills.GetExpirience()) + " / " + std::to_string(skills.GetExpirienceNextLevel()) );
     info.addNameStr("free skills:");  info.addValueStr( std::to_string(skills.GetAvailablePoints()) );
@@ -311,7 +311,7 @@ bool Npc::BuyGoods()
 
 void Npc::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "npc."+std::to_string(GetId())+".";
+    std::string root = "npc."+std::to_string(id())+".";
     Base::SaveData(save_ptree, root);
     Npc::SaveData(save_ptree, root);
 }        
@@ -332,8 +332,8 @@ void Npc::SaveData(boost::property_tree::ptree& save_ptree, const std::string& r
 {
     save_ptree.put(root+"is_alive", is_alive);
     save_ptree.put(root+"race_id", (int)race_id);
-    save_ptree.put(root+"unresolved.vehicle_id", vehicle->GetId());
-    save_ptree.put(root+"unresolved.aiModel_id", ai_model->GetTypeId());
+    save_ptree.put(root+"unresolved.vehicle_id", vehicle->id());
+    save_ptree.put(root+"unresolved.aiModel_id", ai_model->typeId());
     skills.Save(save_ptree, root);
     if (state_machine.GetMacroTaskManager().GetScenario() != nullptr)
     {

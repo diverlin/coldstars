@@ -31,7 +31,7 @@ class BaseScenario
         BaseScenario():type_id(TYPE::AISCENARIO::NONE_ID) {};
         virtual ~BaseScenario() {};
         
-        TYPE::AISCENARIO GetTypeId() const { return type_id; };
+        TYPE::AISCENARIO typeId() const { return type_id; };
         
         virtual void Enter(Npc*) const {};
         virtual bool Validate(Npc*) const { return true; };

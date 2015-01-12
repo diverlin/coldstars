@@ -40,20 +40,20 @@ Container::Container(int id)
 m_ItemSlot(nullptr),
 m_Velocity(0)    
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::CONTAINER_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::CONTAINER_ID);
 }
 
 /* virtual */   
 Container::~Container()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Container("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~Container("+std::to_string(id())+")");
     #endif
 }
 
 /* virtual override final */
-void Container::PutChildsToGarbage() const
+void Container::putChildrenToGarbage() const
 {
     EntityGarbage::Instance().Add(m_ItemSlot);
 }
@@ -69,7 +69,7 @@ void Container::BindItemSlot(ItemSlot* item_slot)
 //{
 //    GetInfo().clear();
 //    GetInfo().addTitleStr("CONTAINER");
-//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
 //    GetInfo().addNameStr("armor:");       GetInfo().addValueStr(std::to_string(GetDataLife().armor));
 //    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
 //}
@@ -89,7 +89,7 @@ void Container::BindItemSlot(ItemSlot* item_slot)
 /* virtual override final */   
 void Container::PostDeathUniqueEvent(bool show_effect)
 {
-    if (m_ItemSlot->GetItem()->GetTypeId() == TYPE::ENTITY::BOMB_ID)
+    if (m_ItemSlot->GetItem()->typeId() == TYPE::ENTITY::BOMB_ID)
     {
         GetStarSystem()->BombExplosionEvent(this, show_effect);  
     }
@@ -121,7 +121,7 @@ void Container::UpdateInSpace(int time, bool show_effect)
 void Container::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Container("+std::to_string(GetId())+")::SaveData()", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Container("+std::to_string(id())+")::SaveData()", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"target_pos.x", m_TargetPos.x);
@@ -133,7 +133,7 @@ void Container::SaveData(boost::property_tree::ptree& save_ptree, const std::str
 void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Container("+std::to_string(GetId())+")::LoadData()", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Container("+std::to_string(id())+")::LoadData()", SAVELOAD_LOG_DIP);
     #endif
     
     m_TargetPos.x   = load_ptree.get<float>("target_pos.x");
@@ -145,7 +145,7 @@ void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 void Container::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Container("+std::to_string(GetId())+")::ResolveData()", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Container("+std::to_string(id())+")::ResolveData()", SAVELOAD_LOG_DIP);
     #endif
     
     ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddContainer(this, data_unresolved_Orientation.center); 
@@ -154,7 +154,7 @@ void Container::ResolveData()
 /* virtual override final */
 void Container::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "container." + std::to_string(GetId()) + ".";
+    const std::string root = "container." + std::to_string(id()) + ".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

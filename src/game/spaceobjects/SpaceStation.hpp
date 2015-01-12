@@ -47,7 +47,7 @@ class SpaceStation : public Vehicle
 //        void UpdateRenderStuff_2D();
 //        virtual void UpdateInfo() override final;
             
-        virtual void PutChildsToGarbage() const override final;
+        virtual void putChildrenToGarbage() const override final;
             
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);

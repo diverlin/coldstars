@@ -25,9 +25,9 @@ ProtectorModule::ProtectorModule(int id)
 :
 protection_add(0)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::MODULE_ID);
-    SetSubTypeId(TYPE::ENTITY::PROTECTOR_MODULE_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::MODULE_ID);
+    setSubTypeId(TYPE::ENTITY::PROTECTOR_MODULE_ID);
 }
 
 /* virtual */
@@ -44,7 +44,7 @@ void ProtectorModule::AddUniqueInfo()
 /*virtual*/
 void ProtectorModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "protector_module." + std::to_string(GetId()) + ".";
+    std::string root = "protector_module." + std::to_string(id()) + ".";
     
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -73,7 +73,7 @@ void ProtectorModule::Resolve()
 void ProtectorModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorModule::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"protection_add", protection_add);
@@ -82,7 +82,7 @@ void ProtectorModule::SaveData(boost::property_tree::ptree& save_ptree, const st
 void ProtectorModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorModule::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     protection_add = load_ptree.get<int>("protection_add");
@@ -91,6 +91,6 @@ void ProtectorModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void ProtectorModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorModule::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

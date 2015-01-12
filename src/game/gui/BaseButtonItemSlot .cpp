@@ -47,7 +47,7 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
 {
     if (m_ItemSlot != nullptr)
     {
-        if (m_ItemSlot->GetSubTypeId() != TYPE::ENTITY::CARGO_SLOT_ID)
+        if (m_ItemSlot->subTypeId() != TYPE::ENTITY::CARGO_SLOT_ID)
         {
             if (m_ItemSlot->GetItem() != nullptr)
             {
@@ -86,7 +86,7 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const
     {
         if (GetEquiped() == false) 
         {
-            TYPE::GUI buton_subtype_id = GetSubTypeId();
+            TYPE::GUI buton_subtype_id = subTypeId();
             for (TYPE::ENTITY type : SLOT_WEAPON_TYPES)
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))

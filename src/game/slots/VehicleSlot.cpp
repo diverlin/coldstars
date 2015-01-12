@@ -33,16 +33,16 @@ VehicleSlot::VehicleSlot(int id, TYPE::ENTITY subtype_id)
 :
 vehicle(nullptr)
 { 
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::VEHICLE_SLOT_ID);  
-    SetSubTypeId(subtype_id);  
+    setId(id);
+    setTypeId(TYPE::ENTITY::VEHICLE_SLOT_ID);  
+    setSubTypeId(subtype_id);  
 }
    
 VehicleSlot::~VehicleSlot()
 {}
       
 /* virtual */
-void VehicleSlot::PutChildsToGarbage() const
+void VehicleSlot::putChildrenToGarbage() const
 {
     if (vehicle)
     {
@@ -83,7 +83,7 @@ void VehicleSlot::Render(const ceti::Rect& rect) const
 /*virtual*/
 void VehicleSlot::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "vehicle_slot." + std::to_string(GetId()) + ".";
+    const std::string root = "vehicle_slot." + std::to_string(id()) + ".";
     Base::SaveData(save_ptree, root);
     BaseSlot::SaveData(save_ptree, root);
     VehicleSlot::SaveData(save_ptree, root);
@@ -109,24 +109,24 @@ void VehicleSlot::Resolve()
 void VehicleSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" VehicleSlot("+std::to_string(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" VehicleSlot("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void VehicleSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" VehicleSlot("+std::to_string(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" VehicleSlot("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void VehicleSlot::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" VehicleSlot("+std::to_string(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" VehicleSlot("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
 
-        switch(owner->GetTypeId())
+        switch(owner->typeId())
         {
            //case ENTITY::VEHICLE_ID:     { ((Vehicle*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
            //case ENTITY::CONTAINER_ID:     { ((Container*)EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }

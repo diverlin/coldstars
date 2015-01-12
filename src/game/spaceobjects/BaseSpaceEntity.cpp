@@ -46,7 +46,7 @@ m_Parent(nullptr)
 BaseSpaceEntity::~BaseSpaceEntity()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BaseSpaceEntity("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~BaseSpaceEntity("+std::to_string(id())+")");
     #endif
 }
 
@@ -112,7 +112,7 @@ void BaseSpaceEntity::CheckDeath(bool show_effect)
 void BaseSpaceEntity::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseSpaceEntity("+std::to_string(GetId())+")::Save(", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseSpaceEntity("+std::to_string(id())+")::Save(", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"data_life.is_alive",   m_DataLife.is_alive);
@@ -123,10 +123,10 @@ void BaseSpaceEntity::SaveData(boost::property_tree::ptree& save_ptree, const st
     save_ptree.put(root+"mass", m_Mass);
 
 
-    if (m_Parent) save_ptree.put(root+"data_unresolved_BaseSpaceEntity.parent_id", m_Parent->GetId());
+    if (m_Parent) save_ptree.put(root+"data_unresolved_BaseSpaceEntity.parent_id", m_Parent->id());
     else        save_ptree.put(root+"data_unresolved_BaseSpaceEntity.parent_id", NONE_ID);
 
-    if (m_Starsystem)    save_ptree.put(root+"data_unresolved_BaseSpaceEntity.starsystem_id", m_Starsystem->GetId());
+    if (m_Starsystem)    save_ptree.put(root+"data_unresolved_BaseSpaceEntity.starsystem_id", m_Starsystem->id());
     else            save_ptree.put(root+"data_unresolved_BaseSpaceEntity.starsystem_id", NONE_ID);
         
     save_ptree.put(root+"place_type_id", (int)m_PlaceTypeId);
@@ -137,7 +137,7 @@ void BaseSpaceEntity::SaveData(boost::property_tree::ptree& save_ptree, const st
 void BaseSpaceEntity::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseSpaceEntity("+std::to_string(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseSpaceEntity("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
     
     m_DataLife.is_alive   = load_ptree.get<bool>("data_life.is_alive");
@@ -156,7 +156,7 @@ void BaseSpaceEntity::LoadData(const boost::property_tree::ptree& load_ptree)
 void BaseSpaceEntity::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseSpaceEntity("+std::to_string(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseSpaceEntity("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif    
     
     if (data_unresolved_BaseSpaceEntity.parent_id != NONE_ID)

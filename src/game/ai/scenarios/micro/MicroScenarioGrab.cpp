@@ -44,7 +44,7 @@ void MicroScenarioGrab::Enter(Npc* npc) const
     npc->GetVehicle()->GetComplexDrive().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::COLLECTING_ID);
     
         #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id="+std::to_string(npc->GetId())+" ENTER MicroScenarioGrab");
+    Logger::Instance().Log("npc_id="+std::to_string(npc->id())+" ENTER MicroScenarioGrab");
     #endif        
 }
 
@@ -89,12 +89,12 @@ void MicroScenarioGrab::UpdateInDynamicInSpace(Npc* npc) const
 void MicroScenarioGrab::Exit(Npc* npc) const
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id="+std::to_string(npc->GetId())+" EXIT MicroScenarioGrab");
+    Logger::Instance().Log("npc_id="+std::to_string(npc->id())+" EXIT MicroScenarioGrab");
     #endif    
 }
 
 /* virtual */
 std::string MicroScenarioGrab::GetDescription(Npc* npc) const 
 {
-    return "MicroScenarioGrab ob_id = " + std::to_string(npc->GetStateMachine().GetMicroTaskManager().GetTarget()->GetId());
+    return "MicroScenarioGrab ob_id = " + std::to_string(npc->GetStateMachine().GetMicroTaskManager().GetTarget()->id());
 }

@@ -162,7 +162,7 @@ void GuiManager::UpdateSessionInSpace()
     {       
         if (gui_scan_vehicle->GetVehicle() == nullptr)
         {               
-            if (scan_target->GetTypeId() == TYPE::ENTITY::VEHICLE_ID)
+            if (scan_target->typeId() == TYPE::ENTITY::VEHICLE_ID)
             {
                 gui_scan_vehicle->BindVehicle((Vehicle*)scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
                 gui_scan_vehicle->Show();  

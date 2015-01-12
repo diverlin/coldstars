@@ -29,9 +29,9 @@
 
 Satellite::Satellite(int id)
 {        
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::VEHICLE_ID);
-    SetSubTypeId(TYPE::ENTITY::SATELLITE_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::VEHICLE_ID);
+    setSubTypeId(TYPE::ENTITY::SATELLITE_ID);
     
     SetMass(meti::getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX));
 }
@@ -40,7 +40,7 @@ Satellite::Satellite(int id)
 Satellite::~Satellite() 
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Satellite("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~Satellite("+std::to_string(id())+")");
     #endif
 }
 
@@ -83,8 +83,8 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
 
 //    GetInfo().addTitleStr("SATELLITE");
 
-//    //GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(starsystem->GetId()));
-//    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(GetId()));
+//    //GetInfo().addNameStr("id/ss_id:");  GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem->id()));
+//    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(id()));
 //    GetInfo().addNameStr("mass:");        GetInfo().addValueStr(std::to_string(GetMass()));
 //    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(GetCenter()) );
 //}
@@ -125,28 +125,28 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
 void Satellite::SaveData(boost::property_tree::ptree&, const std::string&) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Satellite("+std::to_string(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Satellite("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void Satellite::LoadData(const boost::property_tree::ptree&)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Satellite("+std::to_string(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Satellite("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 void Satellite::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Satellite("+std::to_string(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Satellite("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
 }
 
 /*virtual*/
 void Satellite::Save(boost::property_tree::ptree& save_ptree) const
 {
-    const std::string root = "satellite."+std::to_string(GetId())+".";
+    const std::string root = "satellite."+std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

@@ -39,17 +39,17 @@ void BaseModule::AddCommonInfo()
 void BaseModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseModule::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-    if (equipment_owner)     { save_ptree.put(root+"unresolved.equipment_owner_id", equipment_owner->GetId()); }
+    if (equipment_owner)     { save_ptree.put(root+"unresolved.equipment_owner_id", equipment_owner->id()); }
     else                   { save_ptree.put(root+"unresolved.equipment_owner_id", NONE_ID); }
 }
 
 void BaseModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseModule::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     data_unresolved_BaseModule.equipment_owner_id = load_ptree.get<int>("unresolved.equipment_owner_id");
@@ -58,7 +58,7 @@ void BaseModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void BaseModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseModule::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" BaseModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     if(data_unresolved_BaseModule.equipment_owner_id != NONE_ID) 

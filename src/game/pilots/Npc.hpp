@@ -51,7 +51,7 @@ class Npc : public Base
         Npc(int, TYPE::ENTITY, TYPE::ENTITY);                      
         virtual ~Npc();
         
-        virtual void PutChildsToGarbage() const {};
+        virtual void putChildrenToGarbage() const {};
         
         void SetRaceId(TYPE::RACE race_id)            { this->race_id = race_id; };
         void SetAiModel(BaseAiModel* ai_model)        { this->ai_model = ai_model; };

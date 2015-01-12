@@ -31,7 +31,7 @@ AsteroidDrawable::AsteroidDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
 AsteroidDrawable::~AsteroidDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~AsteroidDrawable("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~AsteroidDrawable("+std::to_string(id())+")");
     #endif
 }
 
@@ -41,7 +41,7 @@ AsteroidDrawable::~AsteroidDrawable()
 //    m_Info.clear();
 
 //    m_Info.addTitleStr("ASTEROID");
-//    m_Info.addNameStr("id/ss_id:");    m_Info.addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+//    m_Info.addNameStr("id/ss_id:");    m_Info.addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
 //    m_Info.addNameStr("armor:");       m_Info.addValueStr(std::to_string(GetDataLife().armor));
 //    m_Info.addNameStr("mass:");        m_Info.addValueStr(std::to_string(GetMass()));
 //    m_Info.addNameStr("speed x 100:"); m_Info.addValueStr(std::to_string(int(GetDataPlanet().speed*100)));

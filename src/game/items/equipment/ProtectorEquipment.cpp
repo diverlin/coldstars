@@ -26,9 +26,9 @@ ProtectorEquipment::ProtectorEquipment(int id)
 :
 protection_orig(0)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::EQUIPMENT_ID);
-    SetSubTypeId(TYPE::ENTITY::PROTECTOR_EQUIPMENT_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
+    setSubTypeId(TYPE::ENTITY::PROTECTOR_EQUIPMENT_ID);
 }
 
 /* virtual */
@@ -79,7 +79,7 @@ std::string ProtectorEquipment::GetProtectionStr()
 /*virtual*/
 void ProtectorEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "protector_equipment." + std::to_string(GetId()) + ".";
+    std::string root = "protector_equipment." + std::to_string(id()) + ".";
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
@@ -107,7 +107,7 @@ void ProtectorEquipment::Resolve()
 void ProtectorEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorEquipment::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
         save_ptree.put(root+"protection_orig", protection_orig);
@@ -116,7 +116,7 @@ void ProtectorEquipment::SaveData(boost::property_tree::ptree& save_ptree, const
 void ProtectorEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorEquipment::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
         protection_orig = load_ptree.get<int>("protection_orig");     
@@ -125,7 +125,7 @@ void ProtectorEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 void ProtectorEquipment::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorEquipment::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

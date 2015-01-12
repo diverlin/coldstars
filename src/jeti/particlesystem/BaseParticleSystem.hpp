@@ -44,7 +44,7 @@ class BaseParticleSystem
         void SetParticlesNum(unsigned int particles_num)  { m_ParticlesNum = particles_num; }
         void SetParticleData(const ParticleData& data_particle) { m_DataParticle = data_particle; }
         
-        int GetTypeId() const { return m_TypeId; }
+        int typeId() const { return m_TypeId; }
         bool GetAlive() const { return m_IsAlive; }
         const glm::vec3& GetCenter() const { return m_Center; }
         const Mesh& GetMesh() const { return *m_Mesh; }

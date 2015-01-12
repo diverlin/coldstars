@@ -25,9 +25,9 @@ ProtectorArtefact::ProtectorArtefact(int id)
 :
 protection(0)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::ARTEFACT_ID);
-    SetSubTypeId(TYPE::ENTITY::PROTECTOR_ARTEFACT_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::ARTEFACT_ID);
+    setSubTypeId(TYPE::ENTITY::PROTECTOR_ARTEFACT_ID);
 }
 
 /* virtual */
@@ -50,7 +50,7 @@ void ProtectorArtefact::AddCommonInfo()
 /* virtual */
 void ProtectorArtefact::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "protector_artefact." + std::to_string(GetId()) + ".";
+    std::string root = "protector_artefact." + std::to_string(id()) + ".";
    
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -76,7 +76,7 @@ void ProtectorArtefact::Resolve()
 void ProtectorArtefact::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorArtefact::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorArtefact::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"protection", protection); 
@@ -85,7 +85,7 @@ void ProtectorArtefact::SaveData(boost::property_tree::ptree& save_ptree, const 
 void ProtectorArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorArtefact::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorArtefact::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     protection = load_ptree.get<int>("protection");
@@ -94,6 +94,6 @@ void ProtectorArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
 void ProtectorArtefact::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" ProtectorArtefact::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" ProtectorArtefact::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }

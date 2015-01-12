@@ -81,7 +81,7 @@ void GuiNatureLand::ButtonsAction() const
     //{
         //if (button->GetPressed() == true)
         //{
-            //switch(button->GetSubTypeId())               
+            //switch(button->subTypeId())               
             //{                   
                    //case GUI::BUTTON::GETLAUNCH_ID:
                    //{                          

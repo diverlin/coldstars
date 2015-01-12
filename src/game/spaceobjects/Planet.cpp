@@ -41,15 +41,15 @@ Planet::Planet(int id)
 m_Land(nullptr),
 m_Population(0)
 {    
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::PLANET_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::PLANET_ID);
 }
 
 /* virtual */
 Planet::~Planet()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Planet("+std::to_string(GetId())+")");
+    Logger::Instance().Log("___::~Planet("+std::to_string(id())+")");
     #endif
    
 //    for (BaseDecor* decor : m_Decorations)
@@ -60,7 +60,7 @@ Planet::~Planet()
 }
 
 /* virtual override final */
-void Planet::PutChildsToGarbage() const
+void Planet::putChildrenToGarbage() const
 {
     EntityGarbage::Instance().Add(m_Land);
 }
@@ -69,7 +69,7 @@ void Planet::BindLand(BaseLand* land)
 {
     m_Land = land;
     m_Land->SetOwner(this);
-    SetSubTypeId(land->GetTypeId());
+    setSubTypeId(land->typeId());
 }
 
 void Planet::AddVehicle(Vehicle* vehicle) const
@@ -102,7 +102,7 @@ void Planet::UpdateInSpaceInStatic()
 //    GetInfo().clear();
     
 //    GetInfo().addTitleStr("PLANET");
-//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(GetId()) + " / " + std::to_string(GetStarSystem()->GetId()));
+//    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(GetStarSystem()->id()));
 //    GetInfo().addNameStr("armor:");        GetInfo().addValueStr(std::to_string(GetDataLife().armor));
 //    GetInfo().addNameStr("population:");  GetInfo().addValueStr(std::to_string(m_Population));
 //    GetInfo().addNameStr("dock_veh:");    GetInfo().addValueStr(m_Land->GetDockVehicleStr());
@@ -124,7 +124,7 @@ void Planet::PostDeathUniqueEvent(bool)
 void Planet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Planet("+std::to_string(GetId())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Planet("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
     
     //SaveManager::Instance().Put(root+"race_id", race_id);
@@ -134,7 +134,7 @@ void Planet::SaveData(boost::property_tree::ptree& save_ptree, const std::string
 void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Planet("+std::to_string(GetId())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Planet("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
     
     //race_id = SaveManager::Instance().Get<int>(root+"race_id");
@@ -144,7 +144,7 @@ void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
 void Planet::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Planet("+std::to_string(GetId())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Planet("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
     ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, GetParent(), data_unresolved_BasePlanet.orbit_it); 
@@ -153,7 +153,7 @@ void Planet::ResolveData()
 /* virtual override final */
 void Planet::Save(boost::property_tree::ptree& save_ptree) const        
 {
-    std::string root = "planet." + std::to_string(GetId())+".";
+    std::string root = "planet." + std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);

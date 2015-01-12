@@ -30,7 +30,7 @@
 
 GuiRadar::GuiRadar()
 {
-    SetSubTypeId(TYPE::GUI::GUI_RADAR_ID);
+    setSubTypeId(TYPE::GUI::GUI_RADAR_ID);
     
     textureOb_background        = GuiTextureObCollector::Instance().radar_background;
     textureOb_bar               = GuiTextureObCollector::Instance().radar_bar;
@@ -102,7 +102,7 @@ void GuiRadar::RenderUnique(const jeti::Renderer& render, Player* player) const
     {         
         for (unsigned int i=0; i<entity_vec.size(); i++)
         {
-            switch(entity_vec[i]->GetTypeId())
+            switch(entity_vec[i]->typeId())
             {
                 case TYPE::ENTITY::STAR_ID:
                 {

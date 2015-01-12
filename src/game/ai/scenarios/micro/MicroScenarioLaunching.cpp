@@ -36,7 +36,7 @@ MicroScenarioLaunching::~MicroScenarioLaunching()
 void MicroScenarioLaunching::Enter(Npc* npc) const
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + std::to_string(npc->GetId()) + " ENTER MicroScenarioLaunching");
+    Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " ENTER MicroScenarioLaunching");
     #endif
 }
 
@@ -70,7 +70,7 @@ void MicroScenarioLaunching::UpdateInStaticInDock(Npc* npc) const
 void MicroScenarioLaunching::Exit(Npc* npc) const 
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + std::to_string(npc->GetId()) + " EXIT MicroScenarioLaunching");
+    Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " EXIT MicroScenarioLaunching");
     #endif
 }
 

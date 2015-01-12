@@ -53,19 +53,19 @@ m_FocusedGuiElement(nullptr)
     
     //ButtonTrigger* button; // EXPERIMENTAL GUI
     //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_red, GUI::BUTTON::ACTION_ATTACK_ID, "attack");  
-    //button_map.insert(std::make_pair(button->GetSubTypeId(), button));
+    //button_map.insert(std::make_pair(button->subTypeId(), button));
     
     //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::ACTION_PRECISEATTACK_ID, "presize_attack");  
-    //button_map.insert(std::make_pair(button->GetSubTypeId(), button));
+    //button_map.insert(std::make_pair(button->subTypeId(), button));
     
     //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_green, GUI::BUTTON::ACTION_SCAN_ID, "scan");  
-    //button_map.insert(std::make_pair(button->GetSubTypeId(), button));
+    //button_map.insert(std::make_pair(button->subTypeId(), button));
     
     //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_blue, GUI::BUTTON::ACTION_GRAB_ID, "grab");  
-    //button_map.insert(std::make_pair(button->GetSubTypeId(), button));                
+    //button_map.insert(std::make_pair(button->subTypeId(), button));                
     
     //button = new ButtonTrigger(GuiTextureObCollector::Instance().dot_yellow, GUI::BUTTON::ACTION_FOLLOW_ID, "follow");  
-    //button_map.insert(std::make_pair(button->GetSubTypeId(), button));
+    //button_map.insert(std::make_pair(button->subTypeId(), button));
         
     //int angle = 0;
     //for (std::map<int, BaseButton*>::const_iterator iterator = button_map.begin(); iterator!=button_map.end(); iterator++)
@@ -115,7 +115,7 @@ void Cursor::Update(Player* player)
         if (m_FocusedGuiElement != nullptr)
         {
             #if GUI_LOG_ENABLED == 1
-            Logger::Instance().Log("OnPressEventMBL="+getGuiTypeStr(m_FocusedGuiElement->GetSubTypeId()), GUI_LOG_DIP);
+            Logger::Instance().Log("OnPressEventMBL="+getGuiTypeStr(m_FocusedGuiElement->subTypeId()), GUI_LOG_DIP);
             #endif
         
             m_FocusedGuiElement->OnPressEventMBL(player);
@@ -132,7 +132,7 @@ void Cursor::Update(Player* player)
         if (m_FocusedGuiElement != nullptr)
         {
             #if GUI_LOG_ENABLED == 1
-            Logger::Instance().Log("OnPressEventMBR="+getGuiTypeStr(m_FocusedGuiElement->GetSubTypeId()), GUI_LOG_DIP);
+            Logger::Instance().Log("OnPressEventMBR="+getGuiTypeStr(m_FocusedGuiElement->subTypeId()), GUI_LOG_DIP);
             #endif
         
             m_FocusedGuiElement->OnPressEventMBR(player);
@@ -175,7 +175,7 @@ void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
         
         if (m_FocusedGuiElement != nullptr)
         {
-            if (m_FocusedGuiElement->GetTypeId() == TYPE::GUI::BUTTON_ITEMSLOT_ID)
+            if (m_FocusedGuiElement->typeId() == TYPE::GUI::BUTTON_ITEMSLOT_ID)
             {
                 ceti::Box2D box(m_FocusedGuiElement->GetBox());
                 box.SetScale(scale, scale);

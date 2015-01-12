@@ -27,9 +27,9 @@ EnergizerModule::EnergizerModule(int id)
 energy_max_add(0),
 restoration_add(0)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::MODULE_ID);
-    SetSubTypeId(TYPE::ENTITY::ENERGIZER_MODULE_ID);
+    setId(id);
+    setTypeId(TYPE::ENTITY::MODULE_ID);
+    setSubTypeId(TYPE::ENTITY::ENERGIZER_MODULE_ID);
 }
 
 /* virtual */
@@ -53,7 +53,7 @@ void EnergizerModule::AddUniqueInfo()
 /*virtual*/
 void EnergizerModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "energizer_module." + std::to_string(GetId()) + ".";
+    std::string root = "energizer_module." + std::to_string(id()) + ".";
     
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -82,7 +82,7 @@ void EnergizerModule::Resolve()
 void EnergizerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" EnergizerModule::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" EnergizerModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"energy_max_add", energy_max_add);
@@ -92,7 +92,7 @@ void EnergizerModule::SaveData(boost::property_tree::ptree& save_ptree, const st
 void EnergizerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" EnergizerModule::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" EnergizerModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     energy_max_add = load_ptree.get<int>("energy_max_add");
@@ -102,7 +102,7 @@ void EnergizerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void EnergizerModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" EnergizerModule::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" EnergizerModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
 

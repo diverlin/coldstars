@@ -95,7 +95,7 @@ void Slider::ButtonsAction(Shop* shop)
         //{
             //if (button->GetPressed() == true)
             //{
-                    //switch(button->GetSubTypeId())
+                    //switch(button->subTypeId())
                     //{
                         //case GUI::BUTTON::ACCEPT_ID: 
                         //{ 
@@ -113,14 +113,14 @@ void Slider::ButtonsAction(Shop* shop)
                             
                         //shop->SellGoods(player->GetNpc(), goods_subtype_id, ammount_selected);
                         
-                            //SetSubTypeId(NONE_ID);
+                            //setSubTypeId(NONE_ID);
                             //button->Reset(); //untrigger                        
                             //break; 
                         //}
 
                         //case GUI::BUTTON::DECLINE_ID: 
                         //{     
-                            //SetSubTypeId(NONE_ID);  
+                            //setSubTypeId(NONE_ID);  
                             //button->Reset(); //untrigger                        
                             //break; 
                         //}

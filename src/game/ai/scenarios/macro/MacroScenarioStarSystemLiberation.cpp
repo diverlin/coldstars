@@ -44,7 +44,7 @@ MacroScenarioStarSystemLiberation::~MacroScenarioStarSystemLiberation()
 void MacroScenarioStarSystemLiberation::Enter(Npc* npc) const
 {    
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + std::to_string(npc->GetId()) + " ENTER MacroScenarioStarSystemLiberation");
+    Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " ENTER MacroScenarioStarSystemLiberation");
     #endif
 }
 
@@ -52,11 +52,11 @@ void MacroScenarioStarSystemLiberation::Enter(Npc* npc) const
 void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
 {
     StarSystem* target_starsystem = npc->GetStateMachine().GetMacroTaskManager().GetTarget()->GetStarSystem();
-    if (npc->GetStarSystem()->GetId() != target_starsystem->GetId())
+    if (npc->GetStarSystem()->id() != target_starsystem->id())
     {
         if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != TYPE::AISCENARIO::MICRO_JUMP_ID)
         {
-            Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, target_starsystem->GetId());
+            Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, target_starsystem->id());
             npc->GetStateMachine().SetCurrentMicroTask(microtask);
             
             return;
@@ -71,7 +71,7 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
                 Vehicle* target_vehicle = npc->GetObservation().GetRandVisibleVehicle(RaceInformationCollector::Instance().RACES_EVIL_vec);
                 if (target_vehicle != nullptr)
                 {
-                    Task microtask(TYPE::AISCENARIO::MICRO_DESTROY_ID, target_vehicle->GetId());
+                    Task microtask(TYPE::AISCENARIO::MICRO_DESTROY_ID, target_vehicle->id());
                     npc->GetStateMachine().SetCurrentMicroTask(microtask);
                     
                     return;
@@ -97,12 +97,12 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
 void MacroScenarioStarSystemLiberation::Exit(Npc* npc) const
 {
     #if AISCENARIO_LOG_ENABLED == 1 
-    Logger::Instance().Log("npc_id=" + std::to_string(npc->GetId()) + " EXIT MacroScenarioStarSystemLiberation");
+    Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " EXIT MacroScenarioStarSystemLiberation");
     #endif
 }
 
 /*virtual*/
 std::string MacroScenarioStarSystemLiberation::GetDescription(Npc* npc) const
 {
-    return "MacroScenarioStarSystemLiberation: ss_id = " + std::to_string(npc->GetStateMachine().GetMacroTaskManager().GetTarget()->GetId());
+    return "MacroScenarioStarSystemLiberation: ss_id = " + std::to_string(npc->GetStateMachine().GetMacroTaskManager().GetTarget()->id());
 }

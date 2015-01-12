@@ -26,9 +26,9 @@ LazerModule::LazerModule(int id)
 damage_add(0),
 radius_add(0)
 {
-    SetId(id);
-    SetTypeId(TYPE::ENTITY::MODULE_ID);
-    SetSubTypeId(TYPE::ENTITY::LAZER_MODULE_ID);  
+    setId(id);
+    setTypeId(TYPE::ENTITY::MODULE_ID);
+    setSubTypeId(TYPE::ENTITY::LAZER_MODULE_ID);  
 }
 
 /* virtual */
@@ -52,7 +52,7 @@ void LazerModule::AddUniqueInfo()
 /*virtual*/
 void LazerModule::Save(boost::property_tree::ptree& save_ptree) const
 {
-    std::string root = "lazer_module." + std::to_string(GetId()) + ".";
+    std::string root = "lazer_module." + std::to_string(id()) + ".";
     
     Base::SaveData(save_ptree, root);
     BaseItem::SaveData(save_ptree, root);
@@ -81,7 +81,7 @@ void LazerModule::Resolve()
 void LazerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LazerModule::SaveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"damage_add", damage_add);
@@ -91,7 +91,7 @@ void LazerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 void LazerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LazerModule::LoadData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
     damage_add = load_ptree.get<int>("damage_add");
@@ -101,6 +101,6 @@ void LazerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 void LazerModule::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" LazerModule::ResolveData()  id=" + std::to_string(GetId()) + " START", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" LazerModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
 }
