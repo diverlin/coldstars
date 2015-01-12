@@ -22,15 +22,9 @@
 #include <common/Base.hpp>
 #include <jeti/Orientation.hpp>
 #include <struct/LifeData.hpp>
-//#include <text/InfoTable.hpp>
 #include <types/PlaceTypes.hpp>
 
 class StarSystem;
-class Vehicle;
-
-//namespace jeti {
-//class Renderer;
-//}
 
 struct UnresolvedDataBaseSpaceEntity
 {
@@ -69,7 +63,7 @@ class BaseSpaceEntity : public jeti::Orientation, public Base
 
         void addImpulse(const glm::vec3&, float);
 
-        virtual void remeberAgressor(Vehicle*) {}
+        virtual void remeberAgressor(BaseSpaceEntity*) {}
         virtual void hit(int, bool);
         void killSilently();
         
@@ -104,8 +98,6 @@ class BaseSpaceEntity : public jeti::Orientation, public Base
 
         StarSystem* m_starsystem;
         TYPE::PLACE m_placeTypeId;
-
-        //InfoTable m_Info;
 
         int m_mass;
         int m_expirienceToGive;

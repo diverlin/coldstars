@@ -22,6 +22,7 @@
 #include "BasePlanet.hpp"
 
 class BaseLand;
+class Vehicle;
 
 class Planet : public BasePlanet
 {

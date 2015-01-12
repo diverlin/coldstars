@@ -17,7 +17,7 @@
 */
 
 #include "BaseSpaceEntity.hpp"
-#include "../common/constants.hpp"
+//#include "../common/constants.hpp"
 #include <math/rand.hpp>
 #include "../world/EntityManager.hpp"
 #include "../world/starsystem.hpp"
