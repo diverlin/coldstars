@@ -147,7 +147,7 @@ void Planet::ResolveData()
     Logger::Instance().Log(" Planet("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
-    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->Add(this, parent(), data_unresolved_BasePlanet.orbit_it); 
+    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->Add(this, parent(), data_unresolved_BasePlanet.orbit_it); 
 }
 
 /* virtual override final */
@@ -157,7 +157,7 @@ void Planet::Save(boost::property_tree::ptree& save_ptree) const
 
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);
-    BaseSpaceEntity::SaveData(save_ptree, root);
+    SpaceObject::SaveData(save_ptree, root);
     BasePlanet::SaveData(save_ptree, root);
     Planet::SaveData(save_ptree, root);
 }
@@ -167,7 +167,7 @@ void Planet::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Orientation::LoadData(load_ptree);
-    BaseSpaceEntity::LoadData(load_ptree);
+    SpaceObject::LoadData(load_ptree);
     BasePlanet::LoadData(load_ptree);
     Planet::LoadData(load_ptree);
 }
@@ -177,7 +177,7 @@ void Planet::Resolve()
 {
     Base::ResolveData();
     Orientation::ResolveData();
-    BaseSpaceEntity::ResolveData();
+    SpaceObject::ResolveData();
     BasePlanet::ResolveData();
     Planet::ResolveData();
 }

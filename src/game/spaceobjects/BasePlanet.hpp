@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <spaceobjects/BaseSpaceEntity.hpp>
+#include <spaceobjects/SpaceObject.hpp>
 #include <parts/orbit.hpp>
 #include <struct/PlanetData.hpp>
 //#include <jeti/Render.hpp>
@@ -31,7 +31,7 @@ struct UnresolvedDataBasePlanet
 };
 
 
-class BasePlanet : public BaseSpaceEntity 
+class BasePlanet : public SpaceObject 
 {
     public:      
         BasePlanet();
@@ -43,7 +43,7 @@ class BasePlanet : public BaseSpaceEntity
         const Orbit& GetOrbit() const { return m_Orbit; }   
         const PlanetData& GetDataPlanet() const { return m_DataPlanet; }
         
-        void BindParent(const BaseSpaceEntity* const, int);
+        void BindParent(const SpaceObject* const, int);
         
 //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) override final;
         

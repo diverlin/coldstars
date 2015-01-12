@@ -29,7 +29,7 @@ class Satellite : public Vehicle
         Satellite(int);
         virtual ~Satellite();
 
-        void BindParent(const BaseSpaceEntity* const);
+        void BindParent(const SpaceObject* const);
             
         virtual void UpdateInSpace(int, bool) override final;
         

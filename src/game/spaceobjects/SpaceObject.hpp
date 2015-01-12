@@ -26,17 +26,17 @@
 
 class StarSystem;
 
-struct UnresolvedDataBaseSpaceEntity
+struct UnresolvedDataSpaceObject
 {
     int parent_id;
     int starsystem_id;     
 }; 
 
-class BaseSpaceEntity : public jeti::Orientation, public Base
+class SpaceObject : public jeti::Orientation, public Base
 {
     public:      
-        BaseSpaceEntity();
-        virtual ~BaseSpaceEntity() override;
+        SpaceObject();
+        virtual ~SpaceObject() override;
 
         void setLifeData(const LifeData& data_life) { m_dataLife = data_life; }
 
@@ -46,7 +46,7 @@ class BaseSpaceEntity : public jeti::Orientation, public Base
                 
         void setGivenExpirience(int expirience_to_give) { m_expirienceToGive = expirience_to_give; }
     
-        void setParent(const BaseSpaceEntity* const parent) { m_parent = parent; }
+        void setParent(const SpaceObject* const parent) { m_parent = parent; }
 
         StarSystem* starsystem()    const { return m_starsystem; }
         TYPE::PLACE placeTypeId()   const { return m_placeTypeId; }
@@ -59,11 +59,11 @@ class BaseSpaceEntity : public jeti::Orientation, public Base
         int mass()         const { return m_mass; }
         int armor()        const { return m_dataLife.armor; }
 
-        const BaseSpaceEntity* const parent() const { return m_parent; }
+        const SpaceObject* const parent() const { return m_parent; }
 
         void addImpulse(const glm::vec3&, float);
 
-        virtual void remeberAgressor(BaseSpaceEntity*) {}
+        virtual void remeberAgressor(SpaceObject*) {}
         virtual void hit(int, bool);
         void killSilently();
         
@@ -86,7 +86,7 @@ class BaseSpaceEntity : public jeti::Orientation, public Base
         void checkDeath(bool);
         virtual void postDeathUniqueEvent(bool) {}
 
-        UnresolvedDataBaseSpaceEntity data_unresolved_BaseSpaceEntity;
+        UnresolvedDataSpaceObject data_unresolved_SpaceObject;
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();
@@ -102,7 +102,7 @@ class BaseSpaceEntity : public jeti::Orientation, public Base
         int m_mass;
         int m_expirienceToGive;
 
-        const BaseSpaceEntity* m_parent;
+        const SpaceObject* m_parent;
                         
     friend class BaseVehicleBuilder;
 };

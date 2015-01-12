@@ -27,7 +27,7 @@ namespace jeti {
 class DriveEffect;
 }
 class ItemSlot; 
-class BaseSpaceEntity;
+class SpaceObject;
 
 namespace jeti {
 class Renderer;
@@ -45,7 +45,7 @@ class DriveComplex
         void SetDriveSlot(ItemSlot* drive_slot) { m_DriveSlot = drive_slot; };
         void SetBakSlot(ItemSlot* bak_slot)     { m_BakSlot = bak_slot; };
         
-        void SetTarget(BaseSpaceEntity*, int);       
+        void SetTarget(SpaceObject*, int);       
         void SetStaticTargetCoords(const glm::vec3&);
 
         int GetActionId() const { return m_ActionId; };
@@ -54,7 +54,7 @@ class DriveComplex
         ItemSlot* GetDriveSlot() const { return m_DriveSlot; };
         ItemSlot* GetBakSlot()   const { return m_BakSlot; };
               
-        BaseSpaceEntity* GetTarget() const { return m_Target; };                
+        SpaceObject* GetTarget() const { return m_Target; };                
                     
         bool PathExists() const;
         
@@ -74,7 +74,7 @@ class DriveComplex
         ItemSlot* m_BakSlot;
         
         Vehicle* m_OwnerVehicle;
-        BaseSpaceEntity* m_Target;
+        SpaceObject* m_Target;
 
         jeti::DriveEffect* m_EffectDrive;
 

@@ -27,7 +27,7 @@
 
 class Turrel; 
 class BaseItem;
-class BaseSpaceEntity;
+class SpaceObject;
 
 class RocketEquipment; 
 class LazerEquipment; 
@@ -81,10 +81,10 @@ class ItemSlot : public BaseSlot
         
         virtual void putChildrenToGarbage() const;
         
-        void SetTarget(BaseSpaceEntity* target, ItemSlot* subtarget = nullptr);
+        void SetTarget(SpaceObject* target, ItemSlot* subtarget = nullptr);
         void SetTurrel(Turrel* turrel) { m_Turrel = turrel; }
         
-        BaseSpaceEntity* GetTarget() const { return m_Target; }
+        SpaceObject* GetTarget() const { return m_Target; }
         ItemSlot* GetSubTarget() const { return m_Subtarget; }        
         
         int GetHitProbability() const { return m_HitProbability; }
@@ -143,8 +143,8 @@ class ItemSlot : public BaseSlot
         void DrawRange(const glm::vec2&);
         
         bool CheckSubTarget(ItemSlot*) const;
-        STATUS CheckTarget(BaseSpaceEntity*) const;
-        STATUS CheckTargetPure(BaseSpaceEntity*) const;
+        STATUS CheckTarget(SpaceObject*) const;
+        STATUS CheckTargetPure(SpaceObject*) const;
                 
         void SelectEvent();
         void DeselectEvent();
@@ -161,7 +161,7 @@ class ItemSlot : public BaseSlot
         
         BaseItem* m_Item;
         
-        BaseSpaceEntity* m_Target;
+        SpaceObject* m_Target;
         ItemSlot* m_Subtarget;      
         
         int m_HitProbability;
@@ -169,10 +169,10 @@ class ItemSlot : public BaseSlot
         
         bool CheckItemInsertion(BaseItem*) const;  
         
-        bool IsTargetAlive(BaseSpaceEntity*) const;
-        bool IsTargetInSpace(BaseSpaceEntity*) const;  
-        bool IsTargetInSameStarSystem(BaseSpaceEntity*) const;
-        bool CheckDistanceToTarget(BaseSpaceEntity*) const;
+        bool IsTargetAlive(SpaceObject*) const;
+        bool IsTargetInSpace(SpaceObject*) const;  
+        bool IsTargetInSameStarSystem(SpaceObject*) const;
+        bool CheckDistanceToTarget(SpaceObject*) const;
         
         UnresolvedDataItemSlot unresolved_ItemSlot;
         void SaveData(boost::property_tree::ptree&, const std::string&) const;

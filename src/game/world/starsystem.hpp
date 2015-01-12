@@ -21,7 +21,7 @@
 #define STARSYSTEM_HPP
 
 #include <vector>
-#include <spaceobjects/BaseSpaceEntity.hpp>
+#include <spaceobjects/SpaceObject.hpp>
 #include <garbage/garbageEffects.hpp>
 
 #include <world/HyperSpace.hpp>
@@ -92,7 +92,7 @@ struct UnresolvedData
 };
 
 
-class StarSystem : public BaseSpaceEntity
+class StarSystem : public SpaceObject
 {
     public:
         StarSystem(int);
@@ -124,10 +124,10 @@ class StarSystem : public BaseSpaceEntity
         void CreateGroupAndShareTask(Npc*, StarSystem*, int) const;
         
         //// TRANSITION
-        void AddVehicle(Vehicle*, const glm::vec3&, const glm::vec3&, const BaseSpaceEntity* const parent = nullptr);
+        void AddVehicle(Vehicle*, const glm::vec3&, const glm::vec3&, const SpaceObject* const parent = nullptr);
         void AddBullet(RocketBullet*, const glm::vec3&, const glm::vec3&);
 
-        void Add(BasePlanet*, const BaseSpaceEntity* parent = nullptr, int it = 0);
+        void Add(BasePlanet*, const SpaceObject* parent = nullptr, int it = 0);
         void AddContainer(Container*, const glm::vec3&);
         void Add(BlackHole*, const glm::vec3&);
 

@@ -44,7 +44,7 @@ speed_orig(0)
 GrappleEquipment::~GrappleEquipment()
 {}
 
-bool GrappleEquipment::CheckIfTargetAlreadyExistInQueue(BaseSpaceEntity* target) const
+bool GrappleEquipment::CheckIfTargetAlreadyExistInQueue(SpaceObject* target) const
 {
     for (unsigned int i=0; i<target_vec.size(); i++)
     {
@@ -57,7 +57,7 @@ bool GrappleEquipment::CheckIfTargetAlreadyExistInQueue(BaseSpaceEntity* target)
     return false;    
 }
 
-void GrappleEquipment::AddTarget(BaseSpaceEntity* target)
+void GrappleEquipment::AddTarget(SpaceObject* target)
 {
     // avoiding dublicated items in the vector
     if (CheckIfTargetAlreadyExistInQueue(target) == true)    
@@ -76,7 +76,7 @@ void GrappleEquipment::AddTarget(BaseSpaceEntity* target)
     }        
 }
 
-void GrappleEquipment::RemoveTarget(BaseSpaceEntity* target)
+void GrappleEquipment::RemoveTarget(SpaceObject* target)
 {
     for (unsigned int i=0; i<target_vec.size(); i++)
     {
@@ -110,10 +110,10 @@ std::string GrappleEquipment::GetTargetStr() const
  
 void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
 {                      
-    for (std::vector<BaseSpaceEntity*>::iterator it = target_vec.begin(); it != target_vec.end(); ++it)
+    for (std::vector<SpaceObject*>::iterator it = target_vec.begin(); it != target_vec.end(); ++it)
     {
         Vehicle& vehicle = *item_slot->GetOwnerVehicle(); // shortcut
-        BaseSpaceEntity& target = **it;
+        SpaceObject& target = **it;
         
         if (item_slot->CheckTarget(&target) == STATUS::TARGET_OK)
         {

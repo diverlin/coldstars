@@ -19,7 +19,7 @@
 #include "BaseParticleSystem.hpp"
 #include <particlesystem/Particle.hpp>
 
-//#include <spaceobjects/BaseSpaceEntity.hpp> // depr
+//#include <spaceobjects/SpaceObject.hpp> // depr
 
 #include <TextureOb.hpp>
 #include <Mesh.hpp>

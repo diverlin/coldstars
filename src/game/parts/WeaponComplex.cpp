@@ -169,7 +169,7 @@ bool WeaponComplex::IsAnyWeaponSelected() const
     return false;
 }
 
-void WeaponComplex::SetTarget(BaseSpaceEntity* target, ItemSlot* item_slot)
+void WeaponComplex::SetTarget(SpaceObject* target, ItemSlot* item_slot)
 {                 
     #if WEAPONSTARGET_LOG_ENABLED == 1 
     if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()), WEAPONSTARGET_LOG_DIP);

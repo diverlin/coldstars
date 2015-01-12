@@ -36,7 +36,7 @@ BasePlanet::~BasePlanet()
     #endif
 }
 
-void BasePlanet::BindParent(const BaseSpaceEntity* const parent, int it)
+void BasePlanet::BindParent(const SpaceObject* const parent, int it)
 {
     setParent(parent);
     CreateOrbit();

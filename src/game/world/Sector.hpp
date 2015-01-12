@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include "../spaceobjects/BaseSpaceEntity.hpp"
+#include "../spaceobjects/SpaceObject.hpp"
 #include "../common/constants.hpp"
 
 class Galaxy;
@@ -31,7 +31,7 @@ struct UnresolvedDataSector
         int galaxy_id;
 };
 
-class Sector : public BaseSpaceEntity
+class Sector : public SpaceObject
 {
     public:
         Sector(int);

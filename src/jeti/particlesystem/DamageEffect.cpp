@@ -64,7 +64,7 @@ void DamageEffect::Update()
     }
 }
 
-//DamageEffect* getNewDamageEffect(int color_id, BaseSpaceEntity* parent)
+//DamageEffect* getNewDamageEffect(int color_id, SpaceObject* parent)
 //{
 //    int particles_num = 10;
     

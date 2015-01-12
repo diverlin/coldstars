@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <spaceobjects/BaseSpaceEntity.hpp>
+#include <spaceobjects/SpaceObject.hpp>
 
 class ItemSlot;
 
@@ -27,7 +27,7 @@ class ItemSlot;
 //class Renderer;
 //}
 
-class Container : public BaseSpaceEntity
+class Container : public SpaceObject
 {
     public:                  
         Container(int);

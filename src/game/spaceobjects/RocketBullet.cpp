@@ -196,10 +196,10 @@ void RocketBullet::ResolveData()
                 
     if (unresolved_RocketBullet_target_id != NONE_ID)
     {
-        m_Target = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(unresolved_RocketBullet_target_id);
+        m_Target = (SpaceObject*)EntityManager::Instance().GetEntityById(unresolved_RocketBullet_target_id);
     }
     
-    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id))->AddBullet(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction); 
+    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->AddBullet(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction); 
 }
    
    
@@ -211,7 +211,7 @@ void RocketBullet::Save(boost::property_tree::ptree& save_ptree) const
     Base::SaveData(save_ptree, root);
     Orientation::SaveData(save_ptree, root);
 //    BaseDrawable::SaveData(save_ptree, root);
-    BaseSpaceEntity::SaveData(save_ptree, root);
+    SpaceObject::SaveData(save_ptree, root);
     RocketBullet::SaveData(save_ptree, root);
 }
 
@@ -221,7 +221,7 @@ void RocketBullet::Load(const boost::property_tree::ptree& load_ptree)
     Base::LoadData(load_ptree);
     Orientation::LoadData(load_ptree);
 //    BaseDrawable::LoadData(load_ptree);
-    BaseSpaceEntity::LoadData(load_ptree);
+    SpaceObject::LoadData(load_ptree);
     RocketBullet::LoadData(load_ptree);
 }
 
@@ -231,6 +231,6 @@ void RocketBullet::Resolve()
     Base::ResolveData();
     Orientation::ResolveData();
 //    BaseDrawable::ResolveData();
-    BaseSpaceEntity::ResolveData();
+    SpaceObject::ResolveData();
     RocketBullet::ResolveData();
 }

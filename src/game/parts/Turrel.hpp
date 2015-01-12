@@ -19,7 +19,7 @@
 #pragma once
 
 class ItemSlot; 
-class BaseSpaceEntity; 
+class SpaceObject; 
 class TextureOb;
 
 #include <ceti/points.hpp>

@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <spaceobjects/BaseSpaceEntity.hpp>
+#include <spaceobjects/SpaceObject.hpp>
 
 #include <parts/WeaponComplex.hpp>
 #include <parts/DriveComplex.hpp>
@@ -62,7 +62,7 @@ enum class VEHICLE_SPECIAL_ACTION_TYPE
 };
 
 
-class Vehicle : public BaseSpaceEntity
+class Vehicle : public SpaceObject
 {   
     public:
         Vehicle();
@@ -111,7 +111,7 @@ class Vehicle : public BaseSpaceEntity
         
         void BindOwnerNpc(Npc*);
                 
-        bool IsObjectWithinRadarRange(BaseSpaceEntity*) const;
+        bool IsObjectWithinRadarRange(SpaceObject*) const;
         
         WeaponComplex& GetComplexWeapon() { return m_ComplexWeapon; }   // !!!
         DriveComplex& GetComplexDrive()   { return m_ComplexDrive; }                

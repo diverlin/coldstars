@@ -26,7 +26,7 @@
 class Vehicle;
 class ItemSlot;
 class BaseItem;
-class BaseSpaceEntity;
+class SpaceObject;
 class TextureOb;
 
 
@@ -48,7 +48,7 @@ class WeaponComplex
     
         void PrepareWeapons();
              
-        void SetTarget(BaseSpaceEntity*, ItemSlot* item_slot = nullptr);     
+        void SetTarget(SpaceObject*, ItemSlot* item_slot = nullptr);     
                    
         void Fire(int, float, bool);
         

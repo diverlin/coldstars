@@ -508,7 +508,7 @@ void Vehicle::BindOwnerNpc(Npc* owner_npc)
     m_OwnerNpc->SetVehicle(this); 
 } 
 
-bool Vehicle::IsObjectWithinRadarRange(BaseSpaceEntity* object) const
+bool Vehicle::IsObjectWithinRadarRange(SpaceObject* object) const
 {
     float dist = meti::distance(center(), object->center());
     if (dist < m_Properties.radar)
@@ -642,7 +642,7 @@ void Vehicle::LaunchingEvent()
                 glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
                 glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
                 glm::vec3 angle(0,0,angleInD);
-                starsystem()->AddVehicle(this, ((BaseSpaceEntity*)m_Land->GetOwner())->center() + offset_pos3, angle, nullptr);
+                starsystem()->AddVehicle(this, ((SpaceObject*)m_Land->GetOwner())->center() + offset_pos3, angle, nullptr);
                 m_Land->RemoveVehicle(this);
     
                 break;
@@ -661,7 +661,7 @@ void Vehicle::LaunchingEvent()
         glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
         glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
         glm::vec3 angle(0,0,angleInD);
-        starsystem()->AddVehicle(this, ((BaseSpaceEntity*)m_Land->GetOwner())->center() + offset_pos3, angle, nullptr);
+        starsystem()->AddVehicle(this, ((SpaceObject*)m_Land->GetOwner())->center() + offset_pos3, angle, nullptr);
         m_Land->RemoveVehicle(this); 
     }
 
@@ -1514,7 +1514,7 @@ void Vehicle::ResolveData()
 
     if (data_unresolved_Vehicle.drive_complex_target_id != NONE_ID) 
     { 
-        m_ComplexDrive.SetTarget((BaseSpaceEntity*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.drive_complex_target_id),  data_unresolved_Vehicle.drive_complex_action_id); 
+        m_ComplexDrive.SetTarget((SpaceObject*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.drive_complex_target_id),  data_unresolved_Vehicle.drive_complex_action_id); 
     }        
              
     if (data_unresolved_Vehicle.land_id != NONE_ID) 

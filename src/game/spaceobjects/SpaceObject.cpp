@@ -16,15 +16,13 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "BaseSpaceEntity.hpp"
-//#include "../common/constants.hpp"
+#include "SpaceObject.hpp"
 #include <math/rand.hpp>
-#include "../world/EntityManager.hpp"
-#include "../world/starsystem.hpp"
-#include "../common/Logger.hpp"
+#include <world/EntityManager.hpp>
+#include <world/starsystem.hpp>
+#include <common/Logger.hpp>
 
-
-BaseSpaceEntity::BaseSpaceEntity():
+SpaceObject::SpaceObject():
     m_starsystem(nullptr),
     m_placeTypeId(TYPE::PLACE::NONE_ID),
     m_mass(0),
@@ -33,20 +31,20 @@ BaseSpaceEntity::BaseSpaceEntity():
 {}
 
 /* virtual override */
-BaseSpaceEntity::~BaseSpaceEntity()
+SpaceObject::~SpaceObject()
 {
 #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BaseSpaceEntity("+std::to_string(id())+")");
+    Logger::Instance().Log("___::~SpaceObject("+std::to_string(id())+")");
 #endif
 }
 
-void BaseSpaceEntity::addImpulse(const glm::vec3& force_dir, float strength)
+void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)
 {
     m_externalForce += force_dir * strength;
 }
 
 /* virtual */
-void BaseSpaceEntity::hit(int damage, bool show_effect)
+void SpaceObject::hit(int damage, bool show_effect)
 {
     m_dataLife.armor -= damage;
     if (m_dataLife.armor <= 0) {
@@ -61,13 +59,13 @@ void BaseSpaceEntity::hit(int damage, bool show_effect)
 
 }
 
-void BaseSpaceEntity::killSilently()
+void SpaceObject::killSilently()
 {
     m_dataLife.is_alive      = false;
     m_dataLife.garbage_ready = true;
 }
 
-void BaseSpaceEntity::checkDeath(bool show_effect)
+void SpaceObject::checkDeath(bool show_effect)
 {
     if (m_dataLife.is_alive == false)
     {
@@ -84,23 +82,23 @@ void BaseSpaceEntity::checkDeath(bool show_effect)
 }
 
 ///* virtual */
-//void BaseSpaceEntity::RenderInfoInSpace(const jeti::Renderer&, const glm::vec2& scroll_coords, float scale)
+//void SpaceObject::RenderInfoInSpace(const jeti::Renderer&, const glm::vec2& scroll_coords, float scale)
 //{
 //    UpdateInfo(); // virtual
 //    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
 //    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, pos/scale);
 //}
 
-//void BaseSpaceEntity::RenderInfo(const glm::vec2& center)
+//void SpaceObject::RenderInfo(const glm::vec2& center)
 //{
 //    UpdateInfo(); // virtual
 //    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, center);
 //}
 
-void BaseSpaceEntity::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void SpaceObject::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
 #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseSpaceEntity("+std::to_string(id())+")::Save(", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" SpaceObject("+std::to_string(id())+")::Save(", SAVELOAD_LOG_DIP);
 #endif
     
     save_ptree.put(root+"data_life.is_alive",   m_dataLife.is_alive);
@@ -111,21 +109,21 @@ void BaseSpaceEntity::SaveData(boost::property_tree::ptree& save_ptree, const st
     save_ptree.put(root+"mass", m_mass);
 
 
-    if (m_parent) save_ptree.put(root+"data_unresolved_BaseSpaceEntity.parent_id", m_parent->id());
-    else        save_ptree.put(root+"data_unresolved_BaseSpaceEntity.parent_id", NONE_ID);
+    if (m_parent) save_ptree.put(root+"data_unresolved_SpaceObject.parent_id", m_parent->id());
+    else        save_ptree.put(root+"data_unresolved_SpaceObject.parent_id", NONE_ID);
 
-    if (m_starsystem)    save_ptree.put(root+"data_unresolved_BaseSpaceEntity.starsystem_id", m_starsystem->id());
-    else            save_ptree.put(root+"data_unresolved_BaseSpaceEntity.starsystem_id", NONE_ID);
+    if (m_starsystem)    save_ptree.put(root+"data_unresolved_SpaceObject.starsystem_id", m_starsystem->id());
+    else            save_ptree.put(root+"data_unresolved_SpaceObject.starsystem_id", NONE_ID);
 
     save_ptree.put(root+"place_type_id", (int)m_placeTypeId);
 }
 
 
 
-void BaseSpaceEntity::LoadData(const boost::property_tree::ptree& load_ptree)
+void SpaceObject::LoadData(const boost::property_tree::ptree& load_ptree)
 {
 #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseSpaceEntity("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" SpaceObject("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
 #endif
     
     m_dataLife.is_alive   = load_ptree.get<bool>("data_life.is_alive");
@@ -137,20 +135,20 @@ void BaseSpaceEntity::LoadData(const boost::property_tree::ptree& load_ptree)
 
     m_placeTypeId = (TYPE::PLACE)load_ptree.get<int>("place_type_id");
     
-    data_unresolved_BaseSpaceEntity.parent_id     = load_ptree.get<int>("data_unresolved_BaseSpaceEntity.parent_id");
-    data_unresolved_BaseSpaceEntity.starsystem_id = load_ptree.get<int>("data_unresolved_BaseSpaceEntity.starsystem_id");
+    data_unresolved_SpaceObject.parent_id     = load_ptree.get<int>("data_unresolved_SpaceObject.parent_id");
+    data_unresolved_SpaceObject.starsystem_id = load_ptree.get<int>("data_unresolved_SpaceObject.starsystem_id");
 }
 
-void BaseSpaceEntity::ResolveData()
+void SpaceObject::ResolveData()
 {
 #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BaseSpaceEntity("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" SpaceObject("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
 #endif
     
-    if (data_unresolved_BaseSpaceEntity.parent_id != NONE_ID) {
-        m_parent = (BaseSpaceEntity*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.parent_id);
+    if (data_unresolved_SpaceObject.parent_id != NONE_ID) {
+        m_parent = (SpaceObject*)EntityManager::Instance().GetEntityById(data_unresolved_SpaceObject.parent_id);
     }
-    if (data_unresolved_BaseSpaceEntity.starsystem_id != NONE_ID) {
-        m_starsystem = (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_BaseSpaceEntity.starsystem_id);
+    if (data_unresolved_SpaceObject.starsystem_id != NONE_ID) {
+        m_starsystem = (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_SpaceObject.starsystem_id);
     }
 }

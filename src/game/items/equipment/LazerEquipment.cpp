@@ -110,7 +110,7 @@ std::string LazerEquipment::GetRadiusStr()
         return std::to_string(radius_orig) + "+" + std::to_string(radius_add);
 }
 
-void LazerEquipment::FireEvent(BaseSpaceEntity* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
+void LazerEquipment::FireEvent(SpaceObject* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
 { 
     if (item_slot->GetOwnerVehicle()->TryToConsumeEnergy(damage) == true)
     {
