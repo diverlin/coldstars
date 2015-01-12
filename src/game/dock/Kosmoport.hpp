@@ -19,7 +19,7 @@
 #ifndef KOSMOPORT_HPP
 #define KOSMOPORT_HPP
 
-#include <dock/BaseLand.hpp>
+#include <dock/Land.hpp>
 #include <types/RaceTypes.hpp>
 
 class Angar; 
@@ -27,7 +27,7 @@ class Store;
 class Shop; 
 class Goverment; 
 
-class Kosmoport : public BaseLand
+class Kosmoport : public Land
 {
     public:
         Kosmoport(int);

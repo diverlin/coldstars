@@ -1519,7 +1519,7 @@ void Vehicle::ResolveData()
              
     if (data_unresolved_Vehicle.land_id != NONE_ID) 
     { 
-        SetLand( (BaseLand*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.land_id) ); 
+        SetLand( (Land*)EntityManager::Instance().GetEntityById(data_unresolved_Vehicle.land_id) ); 
     }              
 
     switch(placeTypeId())

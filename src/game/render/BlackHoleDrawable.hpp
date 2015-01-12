@@ -18,11 +18,11 @@
 
 #pragma once
 
-#include <render/BasePlanetDrawable.hpp>
+#include <render/PlanetoidDrawable.hpp>
 
 class ShockWaveEffect;
 
-class BlackHoleDrawable : public BasePlanetDrawable
+class BlackHoleDrawable : public PlanetoidDrawable
 {
     public:  
         BlackHoleDrawable(jeti::TextureOb*, jeti::Mesh*);

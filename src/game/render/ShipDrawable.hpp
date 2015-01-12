@@ -18,9 +18,9 @@
 
 #pragma once
 
-#include <render/BaseVehicleDrawable.hpp>
+#include <render/VehicleDrawable.hpp>
 
-class ShipDrawable : public BaseVehicleDrawable
+class ShipDrawable : public VehicleDrawable
 {   
     public:
         ShipDrawable(jeti::TextureOb*, jeti::Mesh*);

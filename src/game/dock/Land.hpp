@@ -26,16 +26,16 @@
 class SpaceObject;
 class Vehicle;
 
-struct UnresolvedDataBaseLand
+struct UnresolvedDataLand
 {
     int owner_id;
 };
 
-class BaseLand : public Base
+class Land : public Base
 {
     public:
-        BaseLand();
-        virtual ~BaseLand();
+        Land();
+        virtual ~Land();
 
         void SetOwner(SpaceObject* owner)  { this->owner = owner; }
         
@@ -52,7 +52,7 @@ class BaseLand : public Base
     protected:
         SpaceObject* owner;
 
-        UnresolvedDataBaseLand data_unresolved_BaseLand;
+        UnresolvedDataLand data_unresolved_Land;
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();

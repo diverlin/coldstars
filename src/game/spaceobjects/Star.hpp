@@ -20,9 +20,9 @@
 #ifndef STAR_HPP
 #define STAR_HPP
 
-#include <spaceobjects/BasePlanet.hpp>
+#include <spaceobjects/Planetoid.hpp>
 
-class Star : public BasePlanet
+class Star : public Planetoid
 {
     public:
         Star(int);

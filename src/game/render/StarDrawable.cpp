@@ -20,7 +20,7 @@
 
 StarDrawable::StarDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
     :
-      BasePlanetDrawable(texture, mesh),
+      PlanetoidDrawable(texture, mesh),
       m_DeltaColor(0.0),
       m_SparkActive(false),
       m_SparkGrows(false),

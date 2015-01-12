@@ -20,11 +20,11 @@
 
 #include <jeti/BaseDrawable.hpp>
 
-class BasePlanetDrawable : public jeti::BaseDrawable
+class PlanetoidDrawable : public jeti::BaseDrawable
 {
     public:      
-        BasePlanetDrawable(jeti::TextureOb*, jeti::Mesh*);
-        virtual ~BasePlanetDrawable() override;
+        PlanetoidDrawable(jeti::TextureOb*, jeti::Mesh*);
+        virtual ~PlanetoidDrawable() override;
         
         virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) override final; 
 };

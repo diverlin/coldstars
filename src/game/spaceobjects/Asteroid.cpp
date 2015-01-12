@@ -122,7 +122,7 @@ void Asteroid::ResolveData()
     Logger::Instance().Log(" Asteroid("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
-    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->Add(this, parent(), data_unresolved_BasePlanet.orbit_it); 
+    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->Add(this, parent(), data_unresolved_Planetoid.orbit_it); 
 }
 
 /* virtual override final */    
@@ -134,7 +134,7 @@ void Asteroid::Save(boost::property_tree::ptree& save_ptree) const
     Orientation::SaveData(save_ptree, root);
 //    BaseDrawable::SaveData(save_ptree, root);
     SpaceObject::SaveData(save_ptree, root);
-    BasePlanet::SaveData(save_ptree, root);
+    Planetoid::SaveData(save_ptree, root);
     Asteroid::SaveData(save_ptree, root);
 }
 
@@ -145,7 +145,7 @@ void Asteroid::Load(const boost::property_tree::ptree& load_ptree)
     Orientation::LoadData(load_ptree);
 //    BaseDrawable::LoadData(load_ptree);
     SpaceObject::LoadData(load_ptree);
-    BasePlanet::LoadData(load_ptree);
+    Planetoid::LoadData(load_ptree);
     Asteroid::LoadData(load_ptree);
 }
 
@@ -156,7 +156,7 @@ void Asteroid::Resolve()
     Orientation::ResolveData();
 //    BaseDrawable::ResolveData();
     SpaceObject::ResolveData();
-    BasePlanet::ResolveData();
+    Planetoid::ResolveData();
     Asteroid::ResolveData();
 }    
         

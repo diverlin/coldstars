@@ -20,7 +20,7 @@
 #ifndef NATURELAND_H
 #define NATURELAND_H
 
-#include "BaseLand.hpp"
+#include "Land.hpp"
 class ItemSlot;
 class BaseItem;
 
@@ -33,7 +33,7 @@ struct UnresolvedDataNatureLand
     std::string textureOb_background_path;
 };
 
-class NatureLand : public BaseLand
+class NatureLand : public Land
 {
         public:
                 NatureLand(int);

@@ -17,7 +17,7 @@
 */
 
 
-#include "BasePlanet.hpp"
+#include "Planetoid.hpp"
 
 #include <jeti/Render.hpp>
 
@@ -25,18 +25,18 @@
 //#include <ceti/StringUtils.hpp>
 
 
-BasePlanet::BasePlanet()
+Planetoid::Planetoid()
 {}
 
 /* virtual */
-BasePlanet::~BasePlanet()
+Planetoid::~Planetoid()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BasePlanet("+std::to_string(id())+")");
+    Logger::Instance().Log("___::~Planetoid("+std::to_string(id())+")");
     #endif
 }
 
-void BasePlanet::BindParent(const SpaceObject* const parent, int it)
+void Planetoid::BindParent(const SpaceObject* const parent, int it)
 {
     setParent(parent);
     CreateOrbit();
@@ -44,16 +44,16 @@ void BasePlanet::BindParent(const SpaceObject* const parent, int it)
     UpdatePosition();
 }
         
-void BasePlanet::CreateOrbit()
+void Planetoid::CreateOrbit()
 {
     m_Orbit.CalcPath(m_DataPlanet.radius_A, m_DataPlanet.radius_B, m_DataPlanet.speed, m_DataPlanet.orbit_phi_inD, m_DataPlanet.clockwise);
 }
 
 /* virtual */
-void BasePlanet::postDeathUniqueEvent(bool)  
+void Planetoid::postDeathUniqueEvent(bool)  
 {}
 
-void BasePlanet::UpdatePosition()
+void Planetoid::UpdatePosition()
 {
     m_Orbit.UpdatePosition();  
     if (parent() == nullptr)
@@ -67,15 +67,15 @@ void BasePlanet::UpdatePosition()
 }
 
 ///* virtual override final */
-//void BasePlanet::RenderStuffWhenFocusedInSpace(const jeti::Renderer& render)
+//void Planetoid::RenderStuffWhenFocusedInSpace(const jeti::Renderer& render)
 //{
 //    m_Orbit.DrawPath(render);
 //}
 
-void BasePlanet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Planetoid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BasePlanet("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Planetoid("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
     
     save_ptree.put(root+"data.m_Orbit_center.x", m_DataPlanet.orbit_center.x);
@@ -89,10 +89,10 @@ void BasePlanet::SaveData(boost::property_tree::ptree& save_ptree, const std::st
     save_ptree.put(root+"unresolved.orbit_it", m_Orbit.GetIt());
 }
 
-void BasePlanet::LoadData(const boost::property_tree::ptree& load_ptree)
+void Planetoid::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BasePlanet("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Planetoid("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
     
     m_DataPlanet.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");    
@@ -103,13 +103,13 @@ void BasePlanet::LoadData(const boost::property_tree::ptree& load_ptree)
     m_DataPlanet.speed = load_ptree.get<float>("data.speed");
     m_DataPlanet.clockwise = load_ptree.get<bool>("data.clockwise");
     
-    data_unresolved_BasePlanet.orbit_it = load_ptree.get<int>("unresolved.orbit_it");
+    data_unresolved_Planetoid.orbit_it = load_ptree.get<int>("unresolved.orbit_it");
 }
 
-void BasePlanet::ResolveData()
+void Planetoid::ResolveData()
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BasePlanet("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
+    Logger::Instance().Log(" Planetoid("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
 }
 

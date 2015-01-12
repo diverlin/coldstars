@@ -18,9 +18,9 @@
    
 #pragma once
 
-#include <render/BaseVehicleDrawable.hpp>
+#include <render/VehicleDrawable.hpp>
    
-class SpaceStationDrawable : public BaseVehicleDrawable
+class SpaceStationDrawable : public VehicleDrawable
 {
     public:  
         SpaceStationDrawable(jeti::TextureOb*, jeti::Mesh*);

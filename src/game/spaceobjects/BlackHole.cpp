@@ -113,7 +113,7 @@ void BlackHole::Save(boost::property_tree::ptree& save_ptree) const
     Orientation::SaveData(save_ptree, root);
 //    BaseDrawable::SaveData(save_ptree, root);
     SpaceObject::SaveData(save_ptree, root);
-    BasePlanet::SaveData(save_ptree, root);
+    Planetoid::SaveData(save_ptree, root);
     BlackHole::SaveData(save_ptree, root);
 }
 
@@ -124,7 +124,7 @@ void BlackHole::Load(const boost::property_tree::ptree& load_ptree)
     Orientation::LoadData(load_ptree);
 //    BaseDrawable::LoadData(load_ptree);
     SpaceObject::LoadData(load_ptree);
-    BasePlanet::LoadData(load_ptree);
+    Planetoid::LoadData(load_ptree);
     BlackHole::LoadData(load_ptree);
 }
     
@@ -135,6 +135,6 @@ void BlackHole::Resolve()
     Orientation::ResolveData();
 //    BaseDrawable::ResolveData();
     SpaceObject::ResolveData();
-    BasePlanet::ResolveData();
+    Planetoid::ResolveData();
     BlackHole::ResolveData();
 }

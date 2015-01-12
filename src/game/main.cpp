@@ -48,7 +48,7 @@
 #include "garbage/EntityGarbage.hpp"
 
 #include "struct/GalaxyDescription.hpp"
-#include "dock/BaseLand.hpp"
+#include "dock/Land.hpp"
 
 #include "run_scenario/NormalRunScenario.hpp"
 #include "run_scenario/TestParticlesRunScenario.hpp"

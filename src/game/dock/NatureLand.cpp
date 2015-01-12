@@ -147,7 +147,7 @@ void NatureLand::Save(boost::property_tree::ptree& save_ptree) const
 {
     const std::string root = "natureland."+std::to_string(id())+".";
     Base::SaveData(save_ptree, root);
-    BaseLand::SaveData(save_ptree, root);
+    Land::SaveData(save_ptree, root);
     NatureLand::SaveData(save_ptree, root);
 }
 
@@ -155,7 +155,7 @@ void NatureLand::Save(boost::property_tree::ptree& save_ptree) const
 void NatureLand::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    BaseLand::LoadData(load_ptree);
+    Land::LoadData(load_ptree);
     NatureLand::LoadData(load_ptree);
 }
 
@@ -163,7 +163,7 @@ void NatureLand::Load(const boost::property_tree::ptree& load_ptree)
 void NatureLand::Resolve()
 {
     Base::ResolveData();
-    BaseLand::ResolveData();
+    Land::ResolveData();
     NatureLand::ResolveData();
 }
 

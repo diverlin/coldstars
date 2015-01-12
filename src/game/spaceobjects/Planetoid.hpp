@@ -25,17 +25,17 @@
 //#include <jeti/Render.hpp>
 
 
-struct UnresolvedDataBasePlanet
+struct UnresolvedDataPlanetoid
 {
     int orbit_it;
 };
 
 
-class BasePlanet : public SpaceObject 
+class Planetoid : public SpaceObject 
 {
     public:      
-        BasePlanet();
-        virtual ~BasePlanet();
+        Planetoid();
+        virtual ~Planetoid();
         
         void SetPlanetData(const PlanetData& data_planet) { m_DataPlanet = data_planet; }
         
@@ -53,7 +53,7 @@ class BasePlanet : public SpaceObject
         virtual void postDeathUniqueEvent(bool);
         void UpdatePosition();
         
-        UnresolvedDataBasePlanet data_unresolved_BasePlanet;
+        UnresolvedDataPlanetoid data_unresolved_Planetoid;
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();

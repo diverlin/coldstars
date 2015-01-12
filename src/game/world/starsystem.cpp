@@ -214,7 +214,7 @@ void StarSystem::AddBullet(RocketBullet* rocket, const glm::vec3& center, const 
     ROCKET_vec.push_back(rocket);
 }
 
-void StarSystem::Add(BasePlanet* object, const SpaceObject* parent, int it)
+void StarSystem::Add(Planetoid* object, const SpaceObject* parent, int it)
 {
     object->BindParent(parent, it);
     

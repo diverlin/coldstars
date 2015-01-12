@@ -19,9 +19,9 @@
 
 #pragma once
 
-#include <spaceobjects/BasePlanet.hpp>
+#include <spaceobjects/Planetoid.hpp>
 
-class Asteroid : public BasePlanet
+class Asteroid : public Planetoid
 {
     public:
         Asteroid(int);

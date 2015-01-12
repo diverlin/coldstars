@@ -20,9 +20,9 @@
 #pragma once
 
 #include <effects/ShockWaveEffect.hpp> //depr
-#include <spaceobjects/BasePlanet.hpp>
+#include <spaceobjects/Planetoid.hpp>
 
-class BlackHole : public BasePlanet
+class BlackHole : public Planetoid
 {
     public:  
         BlackHole(int);

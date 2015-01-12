@@ -141,7 +141,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
     meti::getRandBool() ? population = meti::getRandInt(POPULATION_MIN, POPULATION_MAX) : population = 0;
     planet->SetPopulation(population);
     
-    BaseLand* land = nullptr;
+    Land* land = nullptr;
     if (population > 0) { land = KosmoportBuilder::Instance().GetNewKosmoport(); }
     else                { land = NatureLandBuilder::Instance().GetNewNatureLand(); }
         

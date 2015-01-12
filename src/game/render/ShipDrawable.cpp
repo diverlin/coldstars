@@ -20,7 +20,7 @@
 
 ShipDrawable::ShipDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
     :
-      BaseVehicleDrawable(texture, mesh)
+      VehicleDrawable(texture, mesh)
 {}
 
 /* virtual override final */

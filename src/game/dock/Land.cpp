@@ -16,34 +16,34 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "BaseLand.hpp"
+#include "Land.hpp"
 #include "../world/EntityManager.hpp"
 #include "../common/constants.hpp"
 #include "../spaceobjects/Planet.hpp"
 #include "../spaceobjects/SpaceStation.hpp"
 #include "../spaceobjects/SpaceObject.hpp"
 
-BaseLand::BaseLand():owner(nullptr)
+Land::Land():owner(nullptr)
 {}
 
 /* virtual */
-BaseLand::~BaseLand()
+Land::~Land()
 {}
 
 
-void BaseLand::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Land::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    save_ptree.put(root+"data_unresolved_BaseLand.owner_id", owner->id());
+    save_ptree.put(root+"data_unresolved_Land.owner_id", owner->id());
 }
 
-void BaseLand::LoadData(const boost::property_tree::ptree& load_ptree)
+void Land::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    data_unresolved_BaseLand.owner_id = load_ptree.get<int>("data_unresolved_BaseLand.owner_id");
+    data_unresolved_Land.owner_id = load_ptree.get<int>("data_unresolved_Land.owner_id");
 }
 
-void BaseLand::ResolveData()
+void Land::ResolveData()
 {
-    Base* owner = EntityManager::Instance().GetEntityById(data_unresolved_BaseLand.owner_id);
+    Base* owner = EntityManager::Instance().GetEntityById(data_unresolved_Land.owner_id);
     switch(owner->typeId())
     {
         case TYPE::ENTITY::PLANET_ID:

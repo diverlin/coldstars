@@ -18,9 +18,9 @@
 
 #pragma once
 
-#include <render/BasePlanetDrawable.hpp>
+#include <render/PlanetoidDrawable.hpp>
 
-class StarDrawable : public BasePlanetDrawable
+class StarDrawable : public PlanetoidDrawable
 {
     public:
         StarDrawable(jeti::TextureOb*, jeti::Mesh*);
