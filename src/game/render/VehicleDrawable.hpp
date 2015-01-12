@@ -20,27 +20,27 @@
 
 #include <jeti/BaseDrawable.hpp>
 
-class BaseVehicleDrawable : public jeti::BaseDrawable
+class VehicleDrawable : public jeti::BaseDrawable
 {   
     public:
-        BaseVehicleDrawable(jeti::TextureOb*, jeti::Mesh*);
-        virtual ~BaseVehicleDrawable() override;
+        VehicleDrawable(jeti::TextureOb*, jeti::Mesh*);
+        virtual ~VehicleDrawable() override;
 
         void CreateDriveComplexTextureDependedStuff();
-        void CreateProtectionComplexTextureDependedStuff(); 
+        void CreateProtectionComplexTextureDependedStuff();
 
-        virtual void UpdateInSpace(int, bool) = 0;        
+        virtual void UpdateInSpace(int, bool) = 0;
 
         void UpdateSpecialEffect();
-            
-//        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) override final;
-//        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
+
+        //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) override final;
+        //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
         void RenderInfo(const glm::vec2&, int, int);
-                    
+
         void RenderRadarRange();
         void RenderGrappleRange();
         
-    protected:    
+    protected:
         virtual void UpdateInfo() = 0;
         
         void RenderGrabTrail(const jeti::Renderer&) const;

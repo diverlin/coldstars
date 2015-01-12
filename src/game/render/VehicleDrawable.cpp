@@ -16,27 +16,27 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <render/BaseVehicleDrawable.hpp>
+#include <render/VehicleDrawable.hpp>
 
 #include <effects/Shield.hpp>
 #include <jeti/particlesystem/DriveEffect.hpp>
 #include <jeti/particlesystem/ExplosionEffect.hpp>
 #include <text/VerticalFlowText.hpp> 
 
-BaseVehicleDrawable::BaseVehicleDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
+VehicleDrawable::VehicleDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
     :
       BaseDrawable(texture, mesh)
 {}
 
 /* virtual override */
-BaseVehicleDrawable::~BaseVehicleDrawable()
+VehicleDrawable::~VehicleDrawable()
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~BaseVehicleDrawable("+std::to_string(id())+")");
+    Logger::Instance().Log("___::~VehicleDrawable("+std::to_string(id())+")");
     #endif
 } 
 
-void BaseVehicleDrawable::CreateDriveComplexTextureDependedStuff()
+void VehicleDrawable::CreateDriveComplexTextureDependedStuff()
 {
 //    points().addMidLeftPoint();
 //    points().addMidFarLeftPoint();
@@ -45,13 +45,13 @@ void BaseVehicleDrawable::CreateDriveComplexTextureDependedStuff()
     //m_ComplexDrive.SetDriveEffect(drive_effect);
 }    
 
-void BaseVehicleDrawable::CreateProtectionComplexTextureDependedStuff()
+void VehicleDrawable::CreateProtectionComplexTextureDependedStuff()
 {
     //m_ComplexProtector.GetShieldEffect()->setParent(this);
 }
 
 /* virtual override final */
-//void BaseVehicleDrawable::RenderStuffWhenFocusedInSpace(const jeti::Renderer& render)
+//void VehicleDrawable::RenderStuffWhenFocusedInSpace(const jeti::Renderer& render)
 //{
 ////    m_ComplexWeapon.RenderWeaponIcons();
     
@@ -62,7 +62,7 @@ void BaseVehicleDrawable::CreateProtectionComplexTextureDependedStuff()
 //}
 
 /* virtual override final */               
-//void BaseVehicleDrawable::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
+//void VehicleDrawable::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
 //{
 ////    UpdateInfo(); // virtual
 ////    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
@@ -75,7 +75,7 @@ void BaseVehicleDrawable::CreateProtectionComplexTextureDependedStuff()
 ////    }
 //}
 
-void BaseVehicleDrawable::RenderInfo(const glm::vec2& center, int offset_x, int offset_y)
+void VehicleDrawable::RenderInfo(const glm::vec2& center, int offset_x, int offset_y)
 {  
 //    UpdateInfo(); // virtual
 //    glm::vec2 pos(center.x - offset_x, center.y - offset_y);
@@ -87,30 +87,30 @@ void BaseVehicleDrawable::RenderInfo(const glm::vec2& center, int offset_x, int 
 //    }
 }
 
-void BaseVehicleDrawable::RenderGrabTrail(const jeti::Renderer& render) const
+void VehicleDrawable::RenderGrabTrail(const jeti::Renderer& render) const
 {
     //m_SlotGrapple->GetGrappleEquipment()->RenderGrabTrail(render);
 }
         
-void BaseVehicleDrawable::RenderKorpus(const jeti::Renderer& render)
+void VehicleDrawable::RenderKorpus(const jeti::Renderer& render)
 {
     //render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
     //alpitodorender render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
 }
 
-void BaseVehicleDrawable::RenderDriveEffect(float scale, float parent_d_alpha) const
+void VehicleDrawable::RenderDriveEffect(float scale, float parent_d_alpha) const
 {
     //m_ComplexDrive.GetDriveEffect()->Update();
     //m_ComplexDrive.GetDriveEffect()->Render(scale, parent_d_alpha);
 }
 
 
-void BaseVehicleDrawable::RenderShieldEffect(const jeti::Renderer& renderer, float parent_d_alpha) const
+void VehicleDrawable::RenderShieldEffect(const jeti::Renderer& renderer, float parent_d_alpha) const
 {
     //m_ComplexProtector.GetShieldEffect()->Render(renderer, parent_d_alpha);
 }
 
-void BaseVehicleDrawable::RenderRadarRange()
+void VehicleDrawable::RenderRadarRange()
 {
 //    if (m_Properties.radar > VISIBLE_DISTANCE_WITHOUT_RADAR)
 //    {
@@ -119,7 +119,7 @@ void BaseVehicleDrawable::RenderRadarRange()
 //    }
 }
 
-void BaseVehicleDrawable::RenderGrappleRange()
+void VehicleDrawable::RenderGrappleRange()
 {
 //    if (m_Properties.grab_radius > 0)
 //    {

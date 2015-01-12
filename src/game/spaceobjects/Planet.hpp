@@ -19,22 +19,22 @@
 
 #pragma once
 
-#include "BasePlanet.hpp"
+#include "Planetoid.hpp"
 
-class BaseLand;
+class Land;
 class Vehicle;
 
-class Planet : public BasePlanet
+class Planet : public Planetoid
 {
     public:
         Planet(int);
         virtual ~Planet();        
         
-        void BindLand(BaseLand*);
+        void BindLand(Land*);
         void SetPopulation(unsigned long int population)  { m_Population = population; }
         
         unsigned long int GetPopulation() const { return m_Population; }
-        BaseLand* const GetLand() const { return m_Land; }
+        Land* const GetLand() const { return m_Land; }
         
         void AddVehicle(Vehicle*) const;
         
@@ -46,7 +46,7 @@ class Planet : public BasePlanet
         virtual void Resolve() override final;
         
     private:
-        BaseLand* m_Land; 
+        Land* m_Land; 
 
         unsigned long int m_Population;
         

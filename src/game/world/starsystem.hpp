@@ -30,7 +30,7 @@
 #include <jeti/Render.hpp>
 
 class RocketBullet;
-class BasePlanet;
+class Planetoid;
 class Star;
 class Planet;
 class Asteroid;
@@ -127,7 +127,7 @@ class StarSystem : public SpaceObject
         void AddVehicle(Vehicle*, const glm::vec3&, const glm::vec3&, const SpaceObject* const parent = nullptr);
         void AddBullet(RocketBullet*, const glm::vec3&, const glm::vec3&);
 
-        void Add(BasePlanet*, const SpaceObject* parent = nullptr, int it = 0);
+        void Add(Planetoid*, const SpaceObject* parent = nullptr, int it = 0);
         void AddContainer(Container*, const glm::vec3&);
         void Add(BlackHole*, const glm::vec3&);
 

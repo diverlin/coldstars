@@ -20,7 +20,7 @@
 #pragma once
 
 #include <spaceobjects/Vehicle.hpp>
-#include <dock/BaseLand.hpp>
+#include <dock/Land.hpp>
    
    
 class SpaceStation : public Vehicle
@@ -29,9 +29,9 @@ class SpaceStation : public Vehicle
         SpaceStation(int);
         virtual ~SpaceStation();
             
-        BaseLand* const GetLand() const { return m_Land; };
+        Land* const GetLand() const { return m_Land; };
         
-        void BindLand(BaseLand* land);
+        void BindLand(Land* land);
         
         virtual void UpdateInSpace(int, bool) override final;
         
@@ -42,7 +42,7 @@ class SpaceStation : public Vehicle
         virtual void Resolve() override final;
             
     private:
-        BaseLand* m_Land;
+        Land* m_Land;
 
 //        void UpdateRenderStuff_2D();
 //        virtual void UpdateInfo() override final;

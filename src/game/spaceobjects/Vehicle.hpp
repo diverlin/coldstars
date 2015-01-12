@@ -32,7 +32,7 @@
 #include <types/StatusTypes.hpp>
 
 class VehicleSlot; 
-class BaseLand; 
+class Land; 
 class Npc;
 class GoodsPack;
 class Container;
@@ -75,12 +75,12 @@ class Vehicle : public SpaceObject
         void SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE special_action_id) { m_SpecialActionId = special_action_id; }
         void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { m_ParentVehicleSlot = parent_vehicleslot; }
 
-        void SetLand(BaseLand* land) { m_Land = land; }
+        void SetLand(Land* land) { m_Land = land; }
             
         void SetKorpusData(const VehicleKorpusData&);
 
         bool GetGodMode() const { return m_GodMode; }
-        BaseLand* const GetLand() const { return m_Land; }
+        Land* const GetLand() const { return m_Land; }
         VEHICLE_SPECIAL_ACTION_TYPE GetSpecialActionId() const { return m_SpecialActionId; }
         
         VehicleSlot* const GetParentVehicleSlot() const { return m_ParentVehicleSlot; }
@@ -230,7 +230,7 @@ class Vehicle : public SpaceObject
         
         VehicleSlot* m_ParentVehicleSlot;
        
-        BaseLand* m_Land;
+        Land* m_Land;
         
         ItemSlot* m_SlotRadar;
         ItemSlot* m_SlotScaner;

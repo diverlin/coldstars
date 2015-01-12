@@ -178,7 +178,7 @@ void Star::Save(boost::property_tree::ptree& save_ptree) const
     Orientation::SaveData(save_ptree, root);
 //    BaseDrawable::SaveData(save_ptree, root);
     SpaceObject::SaveData(save_ptree, root);
-    BasePlanet::SaveData(save_ptree, root);
+    Planetoid::SaveData(save_ptree, root);
     Star::SaveData(save_ptree, root);
 }
 
@@ -189,7 +189,7 @@ void Star::Load(const boost::property_tree::ptree& load_ptree)
     Orientation::LoadData(load_ptree);
 //    BaseDrawable::LoadData(load_ptree);
     SpaceObject::LoadData(load_ptree);
-    BasePlanet::LoadData(load_ptree);
+    Planetoid::LoadData(load_ptree);
     Star::LoadData(load_ptree);
 }
 
@@ -200,6 +200,6 @@ void Star::Resolve()
     Orientation::ResolveData();
 //    BaseDrawable::ResolveData();
     SpaceObject::ResolveData();
-    BasePlanet::ResolveData();
+    Planetoid::ResolveData();
     Star::ResolveData();
 }
