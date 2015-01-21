@@ -22,7 +22,7 @@
 #include "../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
 #include <meti/RandUtils.hpp>
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../items/others/GoodsPack.hpp"
 #include "../slots/ItemSlot.hpp"
@@ -248,7 +248,7 @@ void Shop::LoadData(const boost::property_tree::ptree& load_ptree)
 void Shop::ResolveData()
 {
     UpdateAllPrices();
-    ((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindShop(this); 
+    ((Kosmoport*)global::instance().entitiesManager().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindShop(this); 
 }
 
 void Shop::Save(boost::property_tree::ptree& save_ptree) const

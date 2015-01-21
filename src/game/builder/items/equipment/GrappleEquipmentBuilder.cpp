@@ -25,7 +25,7 @@
 #include <math/rand.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 #include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
@@ -60,7 +60,7 @@ GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipmentTemplate(INTLON
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    EntityManager::Instance().RegisterEntity(grapple_equipment);
+    global::instance().entitiesManager().RegisterEntity(grapple_equipment);
     
     return grapple_equipment;
 } 

@@ -60,7 +60,7 @@ NatureLand* NatureLandBuilder::GetNewNatureLandTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(natureland);
+    global::instance().entitiesManager().RegisterEntity(natureland);
     
     return natureland;
 } 

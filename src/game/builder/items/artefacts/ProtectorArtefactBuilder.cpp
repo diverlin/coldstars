@@ -25,7 +25,7 @@
 #include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>
@@ -59,7 +59,7 @@ ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefactTemplate(INT
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    EntityManager::Instance().RegisterEntity(protector_artefact);
+    global::instance().entitiesManager().RegisterEntity(protector_artefact);
     
     return protector_artefact;
 } 

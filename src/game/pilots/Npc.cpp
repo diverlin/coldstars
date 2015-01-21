@@ -23,7 +23,7 @@
 //#include <ceti/StringUtils.hpp>
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
 #include "../common/Logger.hpp"
 #include <common/common.hpp>
 #include "../ai/aiModel/AiModelCollector.hpp"
@@ -372,7 +372,7 @@ void Npc::ResolveData()
 {
     ApplySkillsStrategy();
     
-    ((Vehicle*)EntityManager::Instance().GetEntityById(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
+    ((Vehicle*)global::instance().entitiesManager().GetEntityById(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
     SetAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
     skills.Resolve();

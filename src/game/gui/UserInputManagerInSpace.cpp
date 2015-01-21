@@ -19,7 +19,7 @@
 #include "UserInputManagerInSpace.hpp"
 #include "UserInput.hpp"
 #include "BaseButton.hpp"
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
 #include "../config/config.hpp"
 #include <jeti/Screen.hpp>
 #include "../parts/WeaponComplex.hpp"

@@ -25,7 +25,7 @@
 #include <math/rand.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 #include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
@@ -62,7 +62,7 @@ ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipmentTemplate(INTLONGES
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(scaner_equipment);
+    global::instance().entitiesManager().RegisterEntity(scaner_equipment);
     
     return scaner_equipment;
 } 

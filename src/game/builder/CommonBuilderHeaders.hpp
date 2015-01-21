@@ -29,7 +29,7 @@
 //#include <jeti/TextureOb.hpp>
 //#include <resources/MeshCollector.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 //#include <jeti/animations/AnimationConstantRotation.hpp>
 //#include <jeti/animations/AnimationWiggle.hpp>

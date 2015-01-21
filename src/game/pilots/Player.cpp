@@ -23,7 +23,8 @@
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
 #include "../world/starsystem.hpp"
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
+#include "../world/EntitiesManager.hpp"
 
 #include <math/rand.hpp>
 //#include <ceti/StringUtils.hpp>
@@ -1109,8 +1110,8 @@ void Player::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Player::ResolveData()
 {
-    BindNpc((Npc*)EntityManager::Instance().GetEntityById(data_unresolved_player.npc_id));
-    starsystem = (StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_player.starsystem_id);
+    BindNpc((Npc*)global::instance().entitiesManager().GetEntityById(data_unresolved_player.npc_id));
+    starsystem = (StarSystem*)global::instance().entitiesManager().GetEntityById(data_unresolved_player.starsystem_id);
     //jeti::Screen::Instance().SetBottomLeft(data_unresolved_player.screen_pos);
 }        
 

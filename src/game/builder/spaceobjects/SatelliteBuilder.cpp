@@ -49,7 +49,7 @@ Satellite* SatelliteBuilder::GetNewSatelliteTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(satellite);
+    global::instance().entitiesManager().RegisterEntity(satellite);
     
     return satellite;
 }

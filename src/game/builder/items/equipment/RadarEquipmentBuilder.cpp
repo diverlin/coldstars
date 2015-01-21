@@ -25,7 +25,7 @@
 #include <math/rand.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
          
 #include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
@@ -62,7 +62,7 @@ RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipmentTemplate(INTLONGEST i
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(radar_equipment);
+    global::instance().entitiesManager().RegisterEntity(radar_equipment);
     
     return radar_equipment;
 } 

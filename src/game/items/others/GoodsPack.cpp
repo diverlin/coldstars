@@ -22,7 +22,7 @@
 #include "../../common/Logger.hpp"
 
 #include "../../common/IdGenerator.hpp"
-#include "../../world/EntityManager.hpp"
+#include "../../common/Global.hpp"
 
 #include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
@@ -128,7 +128,7 @@ GoodsPack* GetNewGoodsPack(TYPE::ENTITY subtype_id, INTLONGEST id)
     GoodsPack* goodsPack = new GoodsPack(id, subtype_id);
     //alpitodorender goodsPack->SetRenderData(mesh, texOb, texOb->size());
     
-    EntityManager::Instance().RegisterEntity(goodsPack);
+    global::instance().entitiesManager().RegisterEntity(goodsPack);
             
     return goodsPack;
 }

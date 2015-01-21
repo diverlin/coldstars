@@ -53,7 +53,7 @@ Angar* AngarBuilder::GetNewAngarTemplate(INTLONGEST id) const
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    EntityManager::Instance().RegisterEntity(angar);
+    global::instance().entitiesManager().RegisterEntity(angar);
     
     return angar;
 } 

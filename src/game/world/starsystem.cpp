@@ -31,7 +31,7 @@
 #include <math/rand.hpp>
 //#include <ceti/StringUtils.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 #include <config/config.hpp>
 
@@ -1141,7 +1141,7 @@ void StarSystem::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void StarSystem::ResolveData()
 {
-    ((Sector*)EntityManager::Instance().GetEntityById(data_unresolved_StarSystem.sector_id))->Add(this, data_unresolved_Orientation.center);
+    ((Sector*)global::instance().entitiesManager().GetEntityById(data_unresolved_StarSystem.sector_id))->Add(this, data_unresolved_Orientation.center);
 }
 
 void StarSystem::Save(boost::property_tree::ptree& save_ptree) const

@@ -20,7 +20,7 @@
 #include "../../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
 #include "../../common/Logger.hpp"
-#include "../../world/EntityManager.hpp"
+#include "../../common/Global.hpp"
 #include "../../items/equipment/BaseEquipment.hpp"
 
 BaseModule::BaseModule():
@@ -63,6 +63,6 @@ void BaseModule::ResolveData()
     
     if(data_unresolved_BaseModule.equipment_owner_id != NONE_ID) 
     {
-        ((BaseEquipment*)EntityManager::Instance().GetEntityById(data_unresolved_BaseModule.equipment_owner_id))->InsertModule(this);
+        ((BaseEquipment*)global::instance().entitiesManager().GetEntityById(data_unresolved_BaseModule.equipment_owner_id))->InsertModule(this);
     }
 }

@@ -25,7 +25,7 @@
 #include <math/rand.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 #include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
@@ -60,7 +60,7 @@ BakEquipment* BakEquipmentBuilder::GetNewBakEquipmentTemplate(INTLONGEST id) con
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    EntityManager::Instance().RegisterEntity(bak_equipment);
+    global::instance().entitiesManager().RegisterEntity(bak_equipment);
     
     return bak_equipment;
 } 

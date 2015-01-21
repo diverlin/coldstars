@@ -25,7 +25,7 @@
 #include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
 
-#include "../../../world/EntityManager.hpp"
+#include "../../../common/Global.hpp"
 
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>
@@ -58,7 +58,7 @@ RadarModule* RadarModuleBuilder::GetNewRadarModuleTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(radar_module);
+    global::instance().entitiesManager().RegisterEntity(radar_module);
     
     return radar_module;
 } 

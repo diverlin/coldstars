@@ -21,7 +21,7 @@
 #include "Kosmoport.hpp"
 #include "../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
 
 Goverment::Goverment(int id)
 :
@@ -48,7 +48,7 @@ void Goverment::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Goverment::ResolveData()
 {
-    ((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindGoverment(this); 
+    ((Kosmoport*)global::instance().entitiesManager().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindGoverment(this); 
 }
 
 void Goverment::Save(boost::property_tree::ptree& save_ptree) const

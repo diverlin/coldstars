@@ -54,7 +54,7 @@ BlackHole* BlackHoleBuilder::GetNewBlackHoleTemplate(INTLONGEST id) const
     int size = 4;
     bool dynamic = false;
     blackhole->BindShockWaveEffect(getNewShockWave(size, dynamic)); 
-    EntityManager::Instance().RegisterEntity(blackhole);
+    global::instance().entitiesManager().RegisterEntity(blackhole);
     
     return blackhole;
 } 

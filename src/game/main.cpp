@@ -39,7 +39,7 @@
 #include "spaceobjects/Planet.hpp"
 #include "spaceobjects/Vehicle.hpp"
 
-#include "world/EntityManager.hpp"
+#include "common/Global.hpp"
 #include "world/galaxy.hpp"
 #include "world/Sector.hpp"
 #include "world/starsystem.hpp"
@@ -140,11 +140,11 @@ int main()
         {
             EntityGarbage::Instance().Clear();
 
-            bool save_event = EntityManager::Instance().UpdateSaveRequest();
-            bool load_event = EntityManager::Instance().UpdateLoadRequest();
+            bool save_event = global::instance().entitiesManager().UpdateSaveRequest();
+            bool load_event = global::instance().entitiesManager().UpdateLoadRequest();
             if (load_event == true)
             {
-                player = EntityManager::Instance().GetPlayer();
+                player = global::instance().entitiesManager().GetPlayer();
                 galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();
             }
             if (save_event == true)

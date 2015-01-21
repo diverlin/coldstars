@@ -25,7 +25,7 @@
 #include <math/rand.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 #include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
@@ -61,7 +61,7 @@ FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipmentTemplate(INTLON
         {
             Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
-        EntityManager::Instance().RegisterEntity(freezer_equipment);
+        global::instance().entitiesManager().RegisterEntity(freezer_equipment);
         
         return freezer_equipment;
 } 

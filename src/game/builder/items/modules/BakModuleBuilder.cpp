@@ -24,7 +24,7 @@
 #include <math/rand.hpp>
 #include <common/constants.hpp>
 
-#include "../../../world/EntityManager.hpp"
+#include "../../../common/Global.hpp"
 
 #include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
@@ -59,7 +59,7 @@ BakModule* BakModuleBuilder::GetNewBakModuleTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(bak_module);
+    global::instance().entitiesManager().RegisterEntity(bak_module);
     
     return bak_module;
 } 

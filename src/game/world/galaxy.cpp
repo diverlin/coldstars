@@ -19,7 +19,7 @@
 #include "galaxy.hpp"
 #include "Sector.hpp"
 #include "../common/constants.hpp"
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
 #include <meti/RandUtils.hpp>
 //#include <ceti/StringUtils.hpp>
 

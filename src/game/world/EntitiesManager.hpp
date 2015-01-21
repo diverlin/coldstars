@@ -17,8 +17,7 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ENTITYMANAGER_H
-#define ENTITYMANAGER_H
+# pragma once
 
 #include <map>
 #include <cassert>
@@ -29,10 +28,12 @@ class EntityGarbage;
 class Player;
 
 
-class EntityManager
+class EntitiesManager
 {
     public:
-        static EntityManager& Instance();
+        EntitiesManager():save_request(false), load_request(false){}
+//        EntitiesManager(const EntitiesManager&);
+//        EntitiesManager& operator=(const EntitiesManager&);
 
         void SaveRequest() { save_request = true; };
         void LoadRequest() { load_request = true; };
@@ -46,10 +47,6 @@ class EntityManager
         bool UpdateLoadRequest();
         
     private:
-        EntityManager():save_request(false), load_request(false){}
-        EntityManager(const EntityManager&);
-        EntityManager& operator=(const EntityManager&);
-
         bool save_request, load_request;
         
         std::map<unsigned long int, Base*> entity_map;
@@ -66,4 +63,3 @@ class EntityManager
 };
 
 
-#endif

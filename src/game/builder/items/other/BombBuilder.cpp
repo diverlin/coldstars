@@ -20,7 +20,7 @@
 #include "../../../items/others/Bomb.hpp"
 #include "../../../common/Logger.hpp"
 #include "../../../common/IdGenerator.hpp"
-#include "../../../world/EntityManager.hpp"
+#include "../../../common/Global.hpp"
 
 #include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
@@ -52,7 +52,7 @@ Bomb* BombBuilder::GetNewBombTemplate(INTLONGEST id) const
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    EntityManager::Instance().RegisterEntity(bomb);
+    global::instance().entitiesManager().RegisterEntity(bomb);
     
     return bomb;
 } 

@@ -56,7 +56,7 @@ Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(INTLONGEST id) const
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    EntityManager::Instance().RegisterEntity(galaxy);
+    global::instance().entitiesManager().RegisterEntity(galaxy);
     
     return galaxy;
 } 

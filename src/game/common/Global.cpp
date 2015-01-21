@@ -16,32 +16,17 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "MicroTaskManager.hpp"
-#include "scenarios/ScenarioCollector.hpp"
-#include "../common/Global.hpp"
+#include "Global.hpp"
+#include <world/EntitiesManager.hpp>
 
-MicroTaskManager::MicroTaskManager()
+global& global::instance()
 {
-    scenario = nullptr;
-    target = nullptr;
+    static global instance;
+    return instance;
 }
 
-MicroTaskManager::~MicroTaskManager()
-{}
-
-void MicroTaskManager::SetTask(const Task& microtask)
+global::global()
+    :
+      m_entitiesManager(new EntitiesManager)
 {
-    this->microtask = microtask;
-    scenario = ScenarioCollector::Instance().GetScenario(microtask.GetScenarioTypeId());
-    if (microtask.GetTargetId() != NONE_ID)
-    {
-        target = (SpaceObject*)global::instance().entitiesManager().GetEntityById(microtask.GetTargetId()); // hack
-    }
 }
-
-void MicroTaskManager::Reset()
-{
-    scenario  = nullptr;
-    target = nullptr;
-    microtask.Reset();
-}    

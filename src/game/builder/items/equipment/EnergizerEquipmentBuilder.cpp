@@ -24,7 +24,7 @@
 #include <math/rand.hpp>
 #include <common/constants.hpp>
 
-#include "../../../world/EntityManager.hpp"
+#include "../../../common/Global.hpp"
 
 #include <resources/MeshCollector.hpp>
 #include <resources/TextureCollector.hpp>
@@ -60,7 +60,7 @@ EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipmentTemplate(
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    EntityManager::Instance().RegisterEntity(energizer_equipment);
+    global::instance().entitiesManager().RegisterEntity(energizer_equipment);
     
     return energizer_equipment;
 } 

@@ -24,7 +24,7 @@
 #include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>
@@ -57,7 +57,7 @@ DroidModule* DroidModuleBuilder::GetNewDroidModuleTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(droid_module);
+    global::instance().entitiesManager().RegisterEntity(droid_module);
     
     return droid_module;
 } 

@@ -28,7 +28,7 @@
 
 #include <slots/VehicleSlot.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 
 VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
@@ -48,7 +48,7 @@ VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(vehicle_slot);
+    global::instance().entitiesManager().RegisterEntity(vehicle_slot);
       
     jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::VEHICLE_SLOT_ID);
     vehicle_slot->SetTextureOb(texOb_slot);
