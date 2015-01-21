@@ -21,7 +21,7 @@
 #include "GameDate.hpp"
 #include "Logger.hpp"
 #include "../config/config.hpp"
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
 
 TurnTimer& TurnTimer::Instance()
 {
@@ -42,13 +42,13 @@ void TurnTimer::NextTurn()
     if (Config::Instance().GetAutoSaveMode() == true)
     {
             Logger::Instance().Log("*** AUTO (SaveRequest)");
-        EntityManager::Instance().SaveRequest();
+        global::instance().entitiesManager().SaveRequest();
     }
 
     if (Config::Instance().GetAutoLoadMode() == true)
     {
             Logger::Instance().Log("*** AUTO (LoadRequest)");
-        EntityManager::Instance().LoadRequest();
+        global::instance().entitiesManager().LoadRequest();
     }
                 
     turn_tick = TURN_TIME;

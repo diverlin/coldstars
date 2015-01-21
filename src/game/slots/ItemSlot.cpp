@@ -43,7 +43,7 @@
 #include <meti/RandUtils.hpp>
 
 #include "../garbage/EntityGarbage.hpp"
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
 
 
 ItemSlot::ItemSlot(INTLONGEST id, TYPE::ENTITY subtype_id)
@@ -595,12 +595,12 @@ void ItemSlot::ResolveData()
     
     if (unresolved_ItemSlot.target_id != NONE_ID)
     {
-        m_Target = (SpaceObject*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.target_id);
+        m_Target = (SpaceObject*)global::instance().entitiesManager().GetEntityById(unresolved_ItemSlot.target_id);
     }
 
     if (unresolved_ItemSlot.subtarget_id != NONE_ID)
     {
-        m_Subtarget = (ItemSlot*)EntityManager::Instance().GetEntityById(unresolved_ItemSlot.subtarget_id);
+        m_Subtarget = (ItemSlot*)global::instance().entitiesManager().GetEntityById(unresolved_ItemSlot.subtarget_id);
     }
 
     switch(owner->typeId())

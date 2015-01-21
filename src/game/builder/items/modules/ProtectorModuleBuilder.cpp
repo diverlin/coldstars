@@ -24,7 +24,7 @@
 #include <math/rand.hpp>
 #include <common/constants.hpp>
 
-#include "../../../world/EntityManager.hpp"
+#include "../../../common/Global.hpp"
 
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>
@@ -59,7 +59,7 @@ ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModuleTemplate(INTLONGES
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(protector_module);
+    global::instance().entitiesManager().RegisterEntity(protector_module);
     
     return protector_module;
 } 

@@ -24,7 +24,7 @@
 #include <math/rand.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>
 //#include <jeti/TextureOb.hpp>
@@ -58,7 +58,7 @@ DriveModule* DriveModuleBuilder::GetNewDriveModuleTemplate(INTLONGEST id) const
             Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         
-        EntityManager::Instance().RegisterEntity(drive_module);
+        global::instance().entitiesManager().RegisterEntity(drive_module);
         
         return drive_module;
 } 

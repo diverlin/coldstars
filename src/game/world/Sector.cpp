@@ -20,7 +20,7 @@
 #include "starsystem.hpp"
 #include "galaxy.hpp"
 #include "../common/constants.hpp"
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
 #include <meti/RandUtils.hpp>
 //#include <ceti/StringUtils.hpp>
 #include "../pilots/Player.hpp"
@@ -143,7 +143,7 @@ void Sector::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Sector::ResolveData()
 {
-    ((Galaxy*)EntityManager::Instance().GetEntityById(data_unresolved_Sector.galaxy_id))->Add(this, data_unresolved_Orientation.center);
+    ((Galaxy*)global::instance().entitiesManager().GetEntityById(data_unresolved_Sector.galaxy_id))->Add(this, data_unresolved_Orientation.center);
 }
 
 void Sector::Save(boost::property_tree::ptree& save_ptree) const

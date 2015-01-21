@@ -48,7 +48,7 @@ RocketBullet* RocketBulletBuilder::GetNewRocketBulletTemplate(INTLONGEST id) con
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }        
   
-    EntityManager::Instance().RegisterEntity(rocket_bullet);
+    global::instance().entitiesManager().RegisterEntity(rocket_bullet);
     
     return rocket_bullet;
 }

@@ -24,7 +24,7 @@
 #include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
 
-#include "../../../world/EntityManager.hpp"
+#include "../../../common/Global.hpp"
 
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>
@@ -58,7 +58,7 @@ LazerModule* LazerModuleBuilder::GetNewLazerModuleTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(lazer_module);
+    global::instance().entitiesManager().RegisterEntity(lazer_module);
     
     return lazer_module;
 } 

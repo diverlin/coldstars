@@ -17,7 +17,7 @@
 */
 
 #include "Land.hpp"
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
 #include "../common/constants.hpp"
 #include "../spaceobjects/Planet.hpp"
 #include "../spaceobjects/SpaceStation.hpp"
@@ -43,7 +43,7 @@ void Land::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Land::ResolveData()
 {
-    Base* owner = EntityManager::Instance().GetEntityById(data_unresolved_Land.owner_id);
+    Base* owner = global::instance().entitiesManager().GetEntityById(data_unresolved_Land.owner_id);
     switch(owner->typeId())
     {
         case TYPE::ENTITY::PLANET_ID:

@@ -18,7 +18,7 @@
 
 #include "Angar.hpp"
 #include "Kosmoport.hpp"
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
 //#include <ceti/StringUtils.hpp>
 #include "../common/Logger.hpp"
 #include "../spaceobjects/Vehicle.hpp"
@@ -217,7 +217,7 @@ void Angar::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Angar::ResolveData()
 {
-    ((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindAngar(this);
+    ((Kosmoport*)global::instance().entitiesManager().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindAngar(this);
 }
 
 

@@ -25,7 +25,7 @@
 #include <math/rand.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 #include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
@@ -61,7 +61,7 @@ LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipmentTemplate(INTLONGEST i
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
 
-    EntityManager::Instance().RegisterEntity(lazer_equipment);
+    global::instance().entitiesManager().RegisterEntity(lazer_equipment);
     
     return lazer_equipment;
 } 

@@ -23,7 +23,7 @@
 #include <math/rand.hpp>
 #include <common/Logger.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 #include <world/starsystem.hpp>
 
 #include <jeti/TextureOb.hpp>
@@ -166,7 +166,7 @@ void Star::ResolveData()
     Logger::Instance().Log(" Star("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
-    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->Add(this);     
+    ((StarSystem*)global::instance().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->Add(this);     
 }
 
 /* virtual override final */

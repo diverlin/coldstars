@@ -18,7 +18,7 @@
 
 #include "RocketModuleBuilder.hpp"
 #include <items/modules/RocketModule.hpp>
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -56,7 +56,7 @@ RocketModule* RocketModuleBuilder::GetNewRocketModuleTemplate(INTLONGEST id) con
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(rocket_module);
+    global::instance().entitiesManager().RegisterEntity(rocket_module);
     
     return rocket_module;
 } 

@@ -53,7 +53,7 @@ Sector* SectorBuilder::GetNewSectorTemplate(INTLONGEST id) const
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    EntityManager::Instance().RegisterEntity(sector);
+    global::instance().entitiesManager().RegisterEntity(sector);
     
     return sector;
 } 

@@ -24,7 +24,7 @@
 #include <math/rand.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 #include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
@@ -61,7 +61,7 @@ RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipmentTemplate(INTLONGES
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(rocket_equipment);
+    global::instance().entitiesManager().RegisterEntity(rocket_equipment);
     
     return rocket_equipment;
 } 

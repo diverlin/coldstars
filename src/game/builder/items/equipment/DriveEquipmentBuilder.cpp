@@ -24,7 +24,7 @@
 #include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>
 
@@ -60,7 +60,7 @@ DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipmentTemplate(INTLONGEST i
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    EntityManager::Instance().RegisterEntity(drive_equipment);
+    global::instance().entitiesManager().RegisterEntity(drive_equipment);
     
     return drive_equipment;
 } 

@@ -21,7 +21,7 @@
 //#include <ceti/StringUtils.hpp>
 #include <common/Logger.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 #include <world/starsystem.hpp>
 
 #include <garbage/EntityGarbage.hpp>

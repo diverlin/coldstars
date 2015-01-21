@@ -70,7 +70,7 @@ Store* StoreBuilder::GetNewStoreTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(store);
+    global::instance().entitiesManager().RegisterEntity(store);
     
     return store;
 } 

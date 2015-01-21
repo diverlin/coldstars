@@ -25,7 +25,7 @@
 #include <math/rand.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 #include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
@@ -60,7 +60,7 @@ DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipmentTemplate(INTLONGEST i
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    EntityManager::Instance().RegisterEntity(droid_equipment);
+    global::instance().entitiesManager().RegisterEntity(droid_equipment);
     
     return droid_equipment;
 } 

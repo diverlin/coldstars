@@ -20,7 +20,7 @@
 #include "Kosmoport.hpp"
 #include "../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../items/BaseItem.hpp"
 #include "../slots/ItemSlot.hpp"
@@ -155,7 +155,7 @@ void Store::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Store::ResolveData()
 {
-    ((Kosmoport*)EntityManager::Instance().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindStore(this); 
+    ((Kosmoport*)global::instance().entitiesManager().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindStore(this); 
 }
 
 void Store::Save(boost::property_tree::ptree& save_ptree) const

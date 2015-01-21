@@ -24,7 +24,7 @@
 #include <common/Logger.hpp>
  
 #include <world/starsystem.hpp>
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 #include <builder/spaceobjects/ContainerBuilder.hpp>
 
@@ -122,7 +122,7 @@ void Asteroid::ResolveData()
     Logger::Instance().Log(" Asteroid("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
-    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->Add(this, parent(), data_unresolved_Planetoid.orbit_it); 
+    ((StarSystem*)global::instance().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->Add(this, parent(), data_unresolved_Planetoid.orbit_it); 
 }
 
 /* virtual override final */    

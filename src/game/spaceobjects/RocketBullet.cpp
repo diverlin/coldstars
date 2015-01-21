@@ -23,7 +23,7 @@
 #include <common/Logger.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 #include <world/starsystem.hpp>
 
 //#include <jeti/particlesystem/DriveEffect.hpp>
@@ -196,10 +196,10 @@ void RocketBullet::ResolveData()
                 
     if (unresolved_RocketBullet_target_id != NONE_ID)
     {
-        m_Target = (SpaceObject*)EntityManager::Instance().GetEntityById(unresolved_RocketBullet_target_id);
+        m_Target = (SpaceObject*)global::instance().entitiesManager().GetEntityById(unresolved_RocketBullet_target_id);
     }
     
-    ((StarSystem*)EntityManager::Instance().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->AddBullet(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction); 
+    ((StarSystem*)global::instance().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->AddBullet(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction); 
 }
    
    

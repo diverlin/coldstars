@@ -24,7 +24,7 @@
 #include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>
@@ -57,7 +57,7 @@ ScanerModule* ScanerModuleBuilder::GetNewScanerModuleTemplate(INTLONGEST id) con
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(scaner_module);
+    global::instance().entitiesManager().RegisterEntity(scaner_module);
     
     return scaner_module;
 } 

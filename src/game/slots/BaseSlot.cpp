@@ -20,7 +20,7 @@
 #include "../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
 #include "../common/Logger.hpp"
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
 
 #include "../spaceobjects/Vehicle.hpp"
 
@@ -71,7 +71,7 @@ void BaseSlot::ResolveData()
     
     if (unresolved_BaseSlot.owner_id != NONE_ID)
     {
-        owner = EntityManager::Instance().GetEntityById(unresolved_BaseSlot.owner_id);
+        owner = global::instance().entitiesManager().GetEntityById(unresolved_BaseSlot.owner_id);
     }
 }
 

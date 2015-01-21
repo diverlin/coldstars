@@ -53,7 +53,7 @@ SpaceStation* SpaceStationBuilder::GetNewSpaceStationTemplate(INTLONGEST id) con
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(spacestation);
+    global::instance().entitiesManager().RegisterEntity(spacestation);
     
     return spacestation;
 }

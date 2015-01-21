@@ -54,7 +54,7 @@ Kosmoport* KosmoportBuilder::GetNewKosmoportTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    EntityManager::Instance().RegisterEntity(kosmoport);
+    global::instance().entitiesManager().RegisterEntity(kosmoport);
     
     return kosmoport;
 } 

@@ -25,7 +25,7 @@
 #include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>
@@ -60,7 +60,7 @@ GravityArtefact* GravityArtefactBuilder::GetNewGravityArtefactTemplate(INTLONGES
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    EntityManager::Instance().RegisterEntity(gravity_artefact);
+    global::instance().entitiesManager().RegisterEntity(gravity_artefact);
     
     return gravity_artefact;
 } 

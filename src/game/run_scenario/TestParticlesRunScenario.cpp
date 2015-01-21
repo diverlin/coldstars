@@ -28,7 +28,7 @@
 #include "../world/galaxy.hpp"
 #include "../world/Sector.hpp"
 #include "../world/starsystem.hpp"
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
 

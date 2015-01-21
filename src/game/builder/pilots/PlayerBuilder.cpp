@@ -27,7 +27,7 @@
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
 
-#include <world/EntityManager.hpp>
+#include <common/Global.hpp>
 
 #include <common/constants.hpp>
 
@@ -58,7 +58,7 @@ Player* PlayerBuilder::GetNewPlayerTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
         
-    EntityManager::Instance().RegisterEntity(player); 
+    global::instance().entitiesManager().RegisterEntity(player); 
     
     return player;       
 } 

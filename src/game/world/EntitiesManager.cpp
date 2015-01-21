@@ -20,7 +20,7 @@
 #include <boost/foreach.hpp>
 #include <boost/property_tree/info_parser.hpp>
 
-#include "EntityManager.hpp"
+#include "EntitiesManager.hpp"
 #include "../common/Logger.hpp"
 //#include <ceti/StringUtils.hpp>
 
@@ -95,39 +95,32 @@
 
 #include <slots/ItemSlot.hpp>
 
-
-EntityManager& EntityManager::Instance()
-{
-    static EntityManager instance;
-    return instance;
-}
-
-void EntityManager::Clear()
+void EntitiesManager::Clear()
 {
     for (std::map<unsigned long int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
     {    
-            #if CREATEDESTROY_LOG_ENABLED == 1
-            Logger::Instance().Log("________EntityManager::Clear, delete " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
-        #endif    
+#if CREATEDESTROY_LOG_ENABLED == 1
+        Logger::Instance().Log("________EntitiesManager::Clear, delete " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
+#endif
         delete iterator->second;
     }
 
     entity_map.clear();
 }
         
-void EntityManager::RegisterEntity(Base* entity)
+void EntitiesManager::RegisterEntity(Base* entity)
 {
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("+++++++EntityManager::RegisterEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
+    Logger::Instance().Log("+++++++EntitiesManager::RegisterEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     #endif
     
     entity_map.insert(std::make_pair(entity->id(), entity));
 }
     
-Base* EntityManager::GetEntityById(unsigned long int id) const
+Base* EntitiesManager::GetEntityById(unsigned long int id) const
 {
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log("    EntityManager::GetEntityById requested_id=" + std::to_string(id));
+    Logger::Instance().Log("    EntitiesManager::GetEntityById requested_id=" + std::to_string(id));
     #endif
     
     std::map<unsigned long int, Base*>::const_iterator slice = entity_map.find(id);
@@ -135,13 +128,13 @@ Base* EntityManager::GetEntityById(unsigned long int id) const
     assert(slice->second);
 
     #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log("    EntityManager::GetEntityById type_id=" + getTypeStr(slice->second->typeId()));
+    Logger::Instance().Log("    EntitiesManager::GetEntityById type_id=" + getTypeStr(slice->second->typeId()));
     #endif
     
     return slice->second;
 }
 
-Player* EntityManager::GetPlayer() const
+Player* EntitiesManager::GetPlayer() const
 {
     for (std::map<unsigned long int, Base*>::const_iterator it=entity_map.begin(); it!=entity_map.end(); ++it)
     {
@@ -154,10 +147,10 @@ Player* EntityManager::GetPlayer() const
     return nullptr;
 }
 
-void EntityManager::RemoveEntity(Base* entity)
+void EntitiesManager::RemoveEntity(Base* entity)
 {    
     #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("________EntityManager::RemoveEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
+    Logger::Instance().Log("________EntitiesManager::RemoveEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     #endif
         
     if (entity_map.count(entity->id()) == 1)
@@ -167,13 +160,13 @@ void EntityManager::RemoveEntity(Base* entity)
     else
     {    
         #if CREATEDESTROY_LOG_ENABLED == 1
-        Logger::Instance().Log("fix the BUG ---EntityManager::RemoveEntity fails " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
+        Logger::Instance().Log("fix the BUG ---EntitiesManager::RemoveEntity fails " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
         #endif
     }
 } 
 
         
-void EntityManager::SaveEvent(const std::string& filename)
+void EntitiesManager::SaveEvent(const std::string& filename)
 {
     boost::property_tree::ptree save_ptree;
     
@@ -189,7 +182,7 @@ void EntityManager::SaveEvent(const std::string& filename)
     write_info("save/save_last.info", save_ptree);
 }
         
-void EntityManager::LoadPass0(const std::string& filename)
+void EntitiesManager::LoadPass0(const std::string& filename)
 {
     Logger::Instance().Log("LOADING STARTED");
     
@@ -661,7 +654,7 @@ void EntityManager::LoadPass0(const std::string& filename)
     
 }
 
-void EntityManager::LoadPass1() const
+void EntitiesManager::LoadPass1() const
 {
     Logger::Instance().Log("RESOLVING DEPENDENCY START");
     for (std::map<unsigned long int, Base*>::const_iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
@@ -674,7 +667,7 @@ void EntityManager::LoadPass1() const
 }
 
 
-bool EntityManager::UpdateSaveRequest()
+bool EntitiesManager::UpdateSaveRequest()
 {        
     if (save_request == true)
     {
@@ -687,7 +680,7 @@ bool EntityManager::UpdateSaveRequest()
     return false;
 }
 
-bool EntityManager::UpdateLoadRequest()
+bool EntitiesManager::UpdateLoadRequest()
 {
     if (load_request == true)
     {

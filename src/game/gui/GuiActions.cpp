@@ -22,7 +22,7 @@
 #include "../pilots/Npc.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 
-#include "../world/EntityManager.hpp"
+#include "../common/Global.hpp"
 #include "../gui/GuiManager.hpp"
 #include "../common/Logger.hpp"
 
@@ -51,7 +51,7 @@ void GuiActions::SaveEvent(Player* player)
     Logger::Instance().Log("GuiActions::SaveEvent", GUI_LOG_DIP);
     #endif
     
-    //EntityManager::Instance().SaveRequest();
+    //global::instance().entitiesManager().SaveRequest();
 }
 
 /* static */
@@ -61,7 +61,7 @@ void GuiActions::LoadEvent(Player* player)
     Logger::Instance().Log("GuiActions::LoadEvent", GUI_LOG_DIP);
     #endif
     
-    //EntityManager::Instance().LoadRequest();
+    //global::instance().entitiesManager().LoadRequest();
 }
 
 
