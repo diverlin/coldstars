@@ -17,7 +17,8 @@
 */
 
 #include "ProtectorModuleBuilder.hpp"
-#include "../../../items/modules/ProtectorModule.hpp"
+#include <items/modules/ProtectorModule.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -59,7 +60,7 @@ ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModuleTemplate(INTLONGES
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(protector_module);
+    global::get().entitiesManager().RegisterEntity(protector_module);
     
     return protector_module;
 } 

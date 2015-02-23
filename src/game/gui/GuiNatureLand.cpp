@@ -18,7 +18,8 @@
 
 #include "GuiNatureLand.hpp"
 #include "ButtonSingle.hpp"
-#include "../config/config.hpp"
+#include <common/Global.hpp>
+#include <jeti/Config.hpp>
 #include "../slots/ItemSlot.hpp"
 #include "../items/BaseItem.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
@@ -35,8 +36,8 @@
 
 GuiNatureLand::GuiNatureLand():natureland(nullptr)
 {
-    //int screen_w = Config::Instance().SCREEN_WIDTH;
-    //int screen_h = Config::Instance().SCREEN_HEIGHT;
+    //int screen_w = global::get().config().SCREEN_WIDTH;
+    //int screen_h = global::get().config().SCREEN_HEIGHT;
     
     //TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
     
@@ -59,8 +60,8 @@ GuiNatureLand::~GuiNatureLand()
     
 void GuiNatureLand::BindNatureLand(NatureLand* natureland)
 {
-    int screen_w = Config::Instance().SCREEN_WIDTH;
-    int screen_h = Config::Instance().SCREEN_HEIGHT;
+    int screen_w = global::get().configVideo().width;
+    int screen_h = global::get().configVideo().height;
     
     this->natureland = natureland;
     

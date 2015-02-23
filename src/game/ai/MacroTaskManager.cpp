@@ -18,7 +18,9 @@
 
 #include "MacroTaskManager.hpp"
 #include "scenarios/ScenarioCollector.hpp"
-#include "../common/Global.hpp"
+
+#include <common/Global.hpp>
+#include <world/EntitiesManager.hpp>
 
 MacroTaskManager::MacroTaskManager()
 {
@@ -35,7 +37,7 @@ void MacroTaskManager::SetTask(const Task& macrotask)
     scenario = ScenarioCollector::Instance().GetScenario(macrotask.GetScenarioTypeId());
     if (macrotask.GetTargetId() != NONE_ID)
     {
-        target = (SpaceObject*)global::instance().entitiesManager().GetEntityById(macrotask.GetTargetId()); // hack
+        target = (SpaceObject*)global::get().entitiesManager().GetEntityById(macrotask.GetTargetId()); // hack
     }
 }
 

@@ -19,6 +19,7 @@
 
 #include <builder/items/equipment/LazerEquipmentBuilder.hpp>
 #include <items/equipment/LazerEquipment.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -61,7 +62,7 @@ LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipmentTemplate(INTLONGEST i
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
 
-    global::instance().entitiesManager().RegisterEntity(lazer_equipment);
+    global::get().entitiesManager().RegisterEntity(lazer_equipment);
     
     return lazer_equipment;
 } 

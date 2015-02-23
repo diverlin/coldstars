@@ -17,7 +17,8 @@
 */
 
 #include "BakModuleBuilder.hpp"
-#include "../../../items/modules/BakModule.hpp"
+#include <items/modules/BakModule.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -59,7 +60,7 @@ BakModule* BakModuleBuilder::GetNewBakModuleTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(bak_module);
+    global::get().entitiesManager().RegisterEntity(bak_module);
     
     return bak_module;
 } 

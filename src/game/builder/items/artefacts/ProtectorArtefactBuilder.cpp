@@ -19,6 +19,7 @@
 
 #include "ProtectorArtefactBuilder.hpp"
 #include <items/artefacts/ProtectorArtefact.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -59,7 +60,7 @@ ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefactTemplate(INT
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    global::instance().entitiesManager().RegisterEntity(protector_artefact);
+    global::get().entitiesManager().RegisterEntity(protector_artefact);
     
     return protector_artefact;
 } 

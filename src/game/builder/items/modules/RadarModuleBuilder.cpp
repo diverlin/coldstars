@@ -17,7 +17,8 @@
 */
 
 #include "RadarModuleBuilder.hpp"
-#include "../../../items/modules/RadarModule.hpp"
+#include <items/modules/RadarModule.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -58,7 +59,7 @@ RadarModule* RadarModuleBuilder::GetNewRadarModuleTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(radar_module);
+    global::get().entitiesManager().RegisterEntity(radar_module);
     
     return radar_module;
 } 

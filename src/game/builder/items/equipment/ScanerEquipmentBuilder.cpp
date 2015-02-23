@@ -19,6 +19,7 @@
 
 #include <builder/items/equipment/ScanerEquipmentBuilder.hpp>
 #include <items/equipment/ScanerEquipment.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -62,7 +63,7 @@ ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipmentTemplate(INTLONGES
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(scaner_equipment);
+    global::get().entitiesManager().RegisterEntity(scaner_equipment);
     
     return scaner_equipment;
 } 

@@ -22,7 +22,7 @@
 
 #include "builder/world/GalaxyBuilder.hpp"
 #include "builder/pilots/PlayerBuilder.hpp"
-#include "config/config.hpp"
+#include <config/Config.hpp>
 
 #include <jeti/Screen.hpp>
 #include <jeti/GlErrorHelper.hpp>
@@ -39,7 +39,9 @@
 #include "spaceobjects/Planet.hpp"
 #include "spaceobjects/Vehicle.hpp"
 
-#include "common/Global.hpp"
+#include <common/Global.hpp>
+#include <world/EntitiesManager.hpp>
+
 #include "world/galaxy.hpp"
 #include "world/Sector.hpp"
 #include "world/starsystem.hpp"
@@ -94,7 +96,7 @@ int main()
     //player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
     player->GetNpc()->GetVehicle()->TEST_DropRandomItemToSpace();
 
-    //Screen::Instance().Resize(Config::Instance().SCREEN_WIDTH/1.5, Config::Instance().SCREEN_HEIGHT);
+    //Screen::Instance().Resize(global::get().config().SCREEN_WIDTH/1.5, global::get().config().SCREEN_HEIGHT);
     
     /** */
     //ButtonTrigger* button = new ButtonTrigger(/*subtype_id=*/1, /*info*/"info", /*pAction=*/GuiActions::Test, /*textureOb*/NULL);
@@ -119,7 +121,7 @@ int main()
         TurnTimer::Instance().Update();
 
         God::Instance().Update(GameDate::Instance().GetDate());
-        for (int i=0; i<Config::Instance().GAME_SPEED; i++)  // fake implementation (static ai should not be run several times at once)
+        for (int i=0; i<global::get().config().GAME_SPEED; i++)  // fake implementation (static ai should not be run several times at once)
         {
             galaxy->Update(TurnTimer::Instance().GetTurnTick());
         }
@@ -140,11 +142,11 @@ int main()
         {
             EntityGarbage::Instance().Clear();
 
-            bool save_event = global::instance().entitiesManager().UpdateSaveRequest();
-            bool load_event = global::instance().entitiesManager().UpdateLoadRequest();
+            bool save_event = global::get().entitiesManager().UpdateSaveRequest();
+            bool load_event = global::get().entitiesManager().UpdateLoadRequest();
             if (load_event == true)
             {
-                player = global::instance().entitiesManager().GetPlayer();
+                player = global::get().entitiesManager().GetPlayer();
                 galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();
             }
             if (save_event == true)

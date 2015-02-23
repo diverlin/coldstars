@@ -17,7 +17,9 @@
 */
 
 #include "BombBuilder.hpp"
-#include "../../../items/others/Bomb.hpp"
+#include <items/others/Bomb.hpp>
+#include <world/EntitiesManager.hpp>
+
 #include "../../../common/Logger.hpp"
 #include "../../../common/IdGenerator.hpp"
 #include "../../../common/Global.hpp"
@@ -52,7 +54,7 @@ Bomb* BombBuilder::GetNewBombTemplate(INTLONGEST id) const
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    global::instance().entitiesManager().RegisterEntity(bomb);
+    global::get().entitiesManager().RegisterEntity(bomb);
     
     return bomb;
 } 

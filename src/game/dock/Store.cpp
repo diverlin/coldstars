@@ -28,6 +28,7 @@
 #include "../pilots/Npc.hpp"
 
 #include "../garbage/EntityGarbage.hpp"
+#include <world/EntitiesManager.hpp>
 
 Store::Store(int id)
 {
@@ -155,7 +156,7 @@ void Store::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Store::ResolveData()
 {
-    ((Kosmoport*)global::instance().entitiesManager().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindStore(this); 
+    ((Kosmoport*)global::get().entitiesManager().GetEntityById(data_unresolved_Room.owner_kosmoport_id))->BindStore(this); 
 }
 
 void Store::Save(boost::property_tree::ptree& save_ptree) const

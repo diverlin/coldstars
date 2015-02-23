@@ -17,7 +17,8 @@
 */
 
 #include "EnergizerEquipmentBuilder.hpp"
-#include "../../../items/equipment/EnergizerEquipment.hpp"
+#include <items/equipment/EnergizerEquipment.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -60,7 +61,7 @@ EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipmentTemplate(
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    global::instance().entitiesManager().RegisterEntity(energizer_equipment);
+    global::get().entitiesManager().RegisterEntity(energizer_equipment);
     
     return energizer_equipment;
 } 

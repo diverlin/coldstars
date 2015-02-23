@@ -18,6 +18,7 @@
 
 #include "DroidModuleBuilder.hpp"
 #include <items/modules/DroidModule.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -57,7 +58,7 @@ DroidModule* DroidModuleBuilder::GetNewDroidModuleTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(droid_module);
+    global::get().entitiesManager().RegisterEntity(droid_module);
     
     return droid_module;
 } 

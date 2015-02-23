@@ -17,7 +17,8 @@
 */
 
 #include "GrappleModuleBuilder.hpp"
-#include "../../../items/modules/GrappleModule.hpp"
+#include <items/modules/GrappleModule.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -59,7 +60,7 @@ GrappleModule* GrappleModuleBuilder::GetNewGrappleModuleTemplate(INTLONGEST id) 
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(grapple_module);
+    global::get().entitiesManager().RegisterEntity(grapple_module);
     
     return grapple_module;
 } 

@@ -51,7 +51,7 @@ void GuiActions::SaveEvent(Player* player)
     Logger::Instance().Log("GuiActions::SaveEvent", GUI_LOG_DIP);
     #endif
     
-    //global::instance().entitiesManager().SaveRequest();
+    //global::get().entitiesManager().SaveRequest();
 }
 
 /* static */
@@ -61,7 +61,7 @@ void GuiActions::LoadEvent(Player* player)
     Logger::Instance().Log("GuiActions::LoadEvent", GUI_LOG_DIP);
     #endif
     
-    //global::instance().entitiesManager().LoadRequest();
+    //global::get().entitiesManager().LoadRequest();
 }
 
 

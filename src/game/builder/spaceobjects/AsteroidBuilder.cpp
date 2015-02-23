@@ -50,7 +50,7 @@ Asteroid* AsteroidBuilder::GetNewAsteroidTemplate(INTLONGEST id) const
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    global::instance().entitiesManager().RegisterEntity(asteroid);
+    global::get().entitiesManager().RegisterEntity(asteroid);
     
     return asteroid;
 } 

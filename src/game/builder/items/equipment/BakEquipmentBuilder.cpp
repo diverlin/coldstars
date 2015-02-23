@@ -19,6 +19,7 @@
 
 #include <builder/items/equipment/BakEquipmentBuilder.hpp>
 #include <items/equipment/BakEquipment.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -60,7 +61,7 @@ BakEquipment* BakEquipmentBuilder::GetNewBakEquipmentTemplate(INTLONGEST id) con
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    global::instance().entitiesManager().RegisterEntity(bak_equipment);
+    global::get().entitiesManager().RegisterEntity(bak_equipment);
     
     return bak_equipment;
 } 

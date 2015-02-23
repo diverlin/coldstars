@@ -19,7 +19,7 @@
 #include "GuiAngar.hpp"
 #include "../dock/Angar.hpp"
 #include "ButtonSingle.hpp"
-#include "../config/config.hpp"
+#include <common/Global.hpp>
 #include "../slots/VehicleSlot.hpp"
 #include "../slots/ItemSlot.hpp"
 #include "../items/BaseItem.hpp"
@@ -37,8 +37,8 @@
 
 GuiAngar::GuiAngar():angar(nullptr)
 {
-    //int screen_w = Config::Instance().SCREEN_WIDTH;
-    //int screen_h = Config::Instance().SCREEN_HEIGHT;
+    //int screen_w = global::get().config().SCREEN_WIDTH;
+    //int screen_h = global::get().config().SCREEN_HEIGHT;
     
     //TextureOb* texOb_button = GuiTextureObCollector::Instance().dot_green; // fake
     

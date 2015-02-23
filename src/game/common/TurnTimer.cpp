@@ -20,8 +20,10 @@
 #include "constants.hpp"
 #include "GameDate.hpp"
 #include "Logger.hpp"
-#include "../config/config.hpp"
-#include "../common/Global.hpp"
+#include <config/Config.hpp>
+
+#include <common/Global.hpp>
+#include <world/EntitiesManager.hpp>
 
 TurnTimer& TurnTimer::Instance()
 {
@@ -39,16 +41,14 @@ TurnTimer::~TurnTimer()
 
 void TurnTimer::NextTurn() 
 {
-    if (Config::Instance().GetAutoSaveMode() == true)
-    {
-            Logger::Instance().Log("*** AUTO (SaveRequest)");
-        global::instance().entitiesManager().SaveRequest();
+    if (global::get().config().GetAutoSaveMode() == true) {
+        Logger::Instance().Log("*** AUTO (SaveRequest)");
+        global::get().entitiesManager().SaveRequest();
     }
 
-    if (Config::Instance().GetAutoLoadMode() == true)
-    {
-            Logger::Instance().Log("*** AUTO (LoadRequest)");
-        global::instance().entitiesManager().LoadRequest();
+    if (global::get().config().GetAutoLoadMode() == true) {
+        Logger::Instance().Log("*** AUTO (LoadRequest)");
+        global::get().entitiesManager().LoadRequest();
     }
                 
     turn_tick = TURN_TIME;
@@ -62,23 +62,19 @@ void TurnTimer::NextTurn()
                         
 void TurnTimer::Update()
 {        
-        turn_tick -= Config::Instance().GAME_SPEED;        
+    turn_tick -= global::get().config().GAME_SPEED;
+
+    /////////// AUTO-TURN /////////////
+    if ( (turn_tick < -50) and (global::get().config().AUTO_TURN_MODE == true) ) {
+        Logger::Instance().Log("*** AUTO_TURN_MODE proceed END TURN");
+        NextTurn();
+    }
         
-           /////////// AUTO-TURN /////////////
-           if ( (turn_tick < -50) and (Config::Instance().AUTO_TURN_MODE == true) )
-           {  
-            Logger::Instance().Log("*** AUTO_TURN_MODE proceed END TURN");
-               NextTurn();
-        }     
-        
-        if (turn_tick < 0)
-        {
-            turn_ended = true;
-        }   
-        else
-        {
-            turn_ended = false;
-        }
+    if (turn_tick < 0) {
+        turn_ended = true;
+    } else {
+        turn_ended = false;
+    }
 }
 
 

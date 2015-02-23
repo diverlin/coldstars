@@ -19,7 +19,9 @@
 
 #include <gui/GuiGalaxyMap.hpp>
 #include <gui/MouseData.hpp>
-#include <config/config.hpp>
+
+#include <common/Global.hpp>
+#include <jeti/Config.hpp>
 
 #include <common/constants.hpp>
 //#include <ceti/StringUtils.hpp>
@@ -51,10 +53,13 @@ GuiGalaxyMap::GuiGalaxyMap()
 BaseGuiElement(TYPE::GUI::GALAXYMAP_ID, TYPE::GUI::GALAXYMAP_ID),
 m_Galaxy(nullptr)
 { 
-    GetBox().setSize(Config::Instance().SCREEN_WIDTH  - 2 * GUI::MAP::BORDER_X, Config::Instance().SCREEN_HEIGHT - 2 * GUI::MAP::BORDER_X);
+    int w = global::get().configVideo().width;
+    int h = global::get().configVideo().height;
+
+    GetBox().setSize(w  - 2 * GUI::MAP::BORDER_X, h - 2 * GUI::MAP::BORDER_X);
     
     SetTextureOb(GuiTextureObCollector::Instance().text_background);
-    m_ScaleParsecToScreenCoord = Config::Instance().SCREEN_WIDTH/(float)ENTITY::GALAXY::PARSEC;
+    m_ScaleParsecToScreenCoord = w/(float)ENTITY::GALAXY::PARSEC;
 }
 
 GuiGalaxyMap::~GuiGalaxyMap()

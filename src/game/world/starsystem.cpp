@@ -32,8 +32,8 @@
 //#include <ceti/StringUtils.hpp>
 
 #include <common/Global.hpp>
-
-#include <config/config.hpp>
+#include <world/EntitiesManager.hpp>
+#include <config/Config.hpp>
 
 #include <jeti/Render.hpp>
 
@@ -460,7 +460,7 @@ void StarSystem::UpdateStates()
         asteroid_manager.Update(this);
     }
 
-    if (Config::Instance().GetGameMode() == GAME_MODE::CRASH_TEST)
+    if (global::get().config().GetGameMode() == GAME_MODE::CRASH_TEST)
     {
         asteroid_manager.Update(this);
         ShipManager_s(50);
@@ -1141,7 +1141,7 @@ void StarSystem::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void StarSystem::ResolveData()
 {
-    ((Sector*)global::instance().entitiesManager().GetEntityById(data_unresolved_StarSystem.sector_id))->Add(this, data_unresolved_Orientation.center);
+    ((Sector*)global::get().entitiesManager().GetEntityById(data_unresolved_StarSystem.sector_id))->Add(this, data_unresolved_Orientation.center);
 }
 
 void StarSystem::Save(boost::property_tree::ptree& save_ptree) const

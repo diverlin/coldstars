@@ -19,6 +19,7 @@
 
 #include <builder/items/equipment/RadarEquipmentBuilder.hpp>
 #include <items/equipment/RadarEquipment.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -62,7 +63,7 @@ RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipmentTemplate(INTLONGEST i
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(radar_equipment);
+    global::get().entitiesManager().RegisterEntity(radar_equipment);
     
     return radar_equipment;
 } 

@@ -18,6 +18,7 @@
 
 #include <builder/items/equipment/RocketEquipmentBuilder.hpp>
 #include <items/equipment/RocketEquipment.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -61,7 +62,7 @@ RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipmentTemplate(INTLONGES
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(rocket_equipment);
+    global::get().entitiesManager().RegisterEntity(rocket_equipment);
     
     return rocket_equipment;
 } 

@@ -22,7 +22,9 @@
 #include "../common/Logger.hpp"
 //#include <ceti/StringUtils.hpp>
 
-#include "../common/Global.hpp"
+#include <common/Global.hpp>
+#include <world/EntitiesManager.hpp>
+
 #include "../slots/ItemSlot.hpp"
 #include <jeti/Render.hpp>
 #include "../resources/TextureCollector.hpp"
@@ -211,6 +213,6 @@ void BaseItem::ResolveData()
         
     if(data_unresolved_BaseItem.item_slot_id != NONE_ID) // item_slot can be nullptr in case of inserted module
     {
-        ((ItemSlot*)global::instance().entitiesManager().GetEntityById(data_unresolved_BaseItem.item_slot_id))->InsertItem(this);
+        ((ItemSlot*)global::get().entitiesManager().GetEntityById(data_unresolved_BaseItem.item_slot_id))->InsertItem(this);
     }
 }

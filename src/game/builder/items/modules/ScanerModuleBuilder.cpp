@@ -18,6 +18,7 @@
 
 #include "ScanerModuleBuilder.hpp"
 #include <items/modules/ScanerModule.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -57,7 +58,7 @@ ScanerModule* ScanerModuleBuilder::GetNewScanerModuleTemplate(INTLONGEST id) con
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(scaner_module);
+    global::get().entitiesManager().RegisterEntity(scaner_module);
     
     return scaner_module;
 } 

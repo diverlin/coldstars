@@ -19,6 +19,7 @@
 
 #include "GravityArtefactBuilder.hpp"
 #include <items/artefacts/GravityArtefact.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -60,7 +61,7 @@ GravityArtefact* GravityArtefactBuilder::GetNewGravityArtefactTemplate(INTLONGES
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    global::instance().entitiesManager().RegisterEntity(gravity_artefact);
+    global::get().entitiesManager().RegisterEntity(gravity_artefact);
     
     return gravity_artefact;
 } 

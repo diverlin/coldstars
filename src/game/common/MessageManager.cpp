@@ -1,5 +1,8 @@
 #include "MessageManager.hpp"
-#include "../common/Global.hpp"
+
+#include <common/Global.hpp>
+#include <world/EntitiesManager.hpp>
+
 #include <common/constants.hpp>
 
 
@@ -20,8 +23,8 @@ void MessageManager::NewMessage(double delay,
                                int    type_id,
                                void*  extra)
 {
-      //SpaceObject* sender   = (SpaceObject*)global::instance().entitiesManager().GetEntityById(sender_id);
-      SpaceObject* receiver = (SpaceObject*)global::instance().entitiesManager().GetEntityById(receiver_id);
+      //SpaceObject* sender   = (SpaceObject*)global::get().entitiesManager().GetEntityById(sender_id);
+      SpaceObject* receiver = (SpaceObject*)global::get().entitiesManager().GetEntityById(receiver_id);
 
       if (receiver == nullptr)
       {
@@ -53,7 +56,7 @@ void MessageManager::UpdateQueue()
       {
           const Message& message = *messages_queue.begin();
       
-        SpaceObject* receiver = (SpaceObject*)global::instance().entitiesManager().GetEntityById(message.receiver_id);
+        SpaceObject* receiver = (SpaceObject*)global::get().entitiesManager().GetEntityById(message.receiver_id);
         SendEvent(receiver, message);
 
         messages_queue.erase(messages_queue.begin());

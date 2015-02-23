@@ -20,7 +20,7 @@
 #include "UserInput.hpp"
 #include "BaseButton.hpp"
 #include "../common/Global.hpp"
-#include "../config/config.hpp"
+#include <config/Config.hpp>
 #include <jeti/Screen.hpp>
 #include "../parts/WeaponComplex.hpp"
 #include "../pilots/Npc.hpp"
@@ -167,13 +167,13 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
     
             case sf::Keyboard::F3: // auto save mode
             {        
-                Config::Instance().SetAutoSaveMode(!Config::Instance().GetAutoSaveMode());            
+                global::get().config().SetAutoSaveMode(!global::get().config().GetAutoSaveMode());
                 break;
             }
             
             case sf::Keyboard::F4: // auto load mode
             {        
-                Config::Instance().SetAutoLoadMode(!Config::Instance().GetAutoLoadMode());        
+                global::get().config().SetAutoLoadMode(!global::get().config().GetAutoLoadMode());
                 break;
             }
                     
@@ -181,25 +181,25 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
             
             case sf::Keyboard::F6: // slow down GAME SPEED 
             {
-                if (Config::Instance().GAME_SPEED > 1)
+                if (global::get().config().GAME_SPEED > 1)
                 {
-                    Config::Instance().GAME_SPEED--;
+                    global::get().config().GAME_SPEED--;
                 }
                 break;
             }
     
             case sf::Keyboard::F7: // speed up GAME SPEED 
             {
-                if (Config::Instance().GAME_SPEED < 10)
+                if (global::get().config().GAME_SPEED < 10)
                 {
-                    Config::Instance().GAME_SPEED++;
+                    global::get().config().GAME_SPEED++;
                 }                             
                 break;
             }
             
             case sf::Keyboard::F8: // AutoTurn
             {
-                Config::Instance().AUTO_TURN_MODE = !Config::Instance().AUTO_TURN_MODE;
+                global::get().config().AUTO_TURN_MODE = !global::get().config().AUTO_TURN_MODE;
                 break;
             }
             
@@ -241,7 +241,7 @@ void UserInputManagerInSpace::ManageRealTimeInputsInSpace(Player* player)
     int screen_w = jeti::Screen::Instance().GetWidth();
     int screen_h = jeti::Screen::Instance().GetHeight();
     
-    bool mouse_camera_scroll = Config::Instance().GetMouseCameraScroll();
+    bool mouse_camera_scroll = global::get().config().GetMouseCameraScroll();
                  
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) == true)
     {                
@@ -280,7 +280,7 @@ void UserInputManagerInSpace::ManageRealTimeInputsInSpace(Player* player)
 
 void UserInputManagerInSpace::ScrollCamera(Player* player)
 {
-    int SCROLL_VELOCITY_STEP = Config::Instance().SCROLL_VELOCITY_STEP; 
+    int SCROLL_VELOCITY_STEP = global::get().config().SCROLL_VELOCITY_STEP;
 
     jeti::Camera& camera = jeti::Screen::Instance().GetCamera();
     

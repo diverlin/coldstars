@@ -18,6 +18,7 @@
 
 #include "DriveModuleBuilder.hpp"
 #include <items/modules/DriveModule.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -58,7 +59,7 @@ DriveModule* DriveModuleBuilder::GetNewDriveModuleTemplate(INTLONGEST id) const
             Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
         
-        global::instance().entitiesManager().RegisterEntity(drive_module);
+        global::get().entitiesManager().RegisterEntity(drive_module);
         
         return drive_module;
 } 
