@@ -18,6 +18,7 @@
 
 #include "LazerModuleBuilder.hpp"
 #include <items/modules/LazerModule.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -58,7 +59,7 @@ LazerModule* LazerModuleBuilder::GetNewLazerModuleTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(lazer_module);
+    global::get().entitiesManager().RegisterEntity(lazer_module);
     
     return lazer_module;
 } 

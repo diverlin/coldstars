@@ -20,19 +20,28 @@
 #pragma once
 
 class EntitiesManager;
-#include <world/EntitiesManager.hpp> // remove
+class Config;
+
+namespace jeti {
+class Config;
+}
 
 class global
 {
     public:
-        static global& instance();
+        static global& get();
 
         EntitiesManager& entitiesManager() { return *m_entitiesManager; }
-        
+        Config& config() { return *m_config; }
+        jeti::Config& configVideo() { return *m_configVideo; }
+
     private:
         global();
-        global(const global&);
-        global& operator=(const global&);
+        global(const global&) = delete;
+        ~global();
+        global& operator=(const global&) = delete;
 
         EntitiesManager* m_entitiesManager;
+        Config* m_config;
+        jeti::Config* m_configVideo;
 };

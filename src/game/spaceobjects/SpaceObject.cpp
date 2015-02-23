@@ -20,6 +20,7 @@
 #include <math/rand.hpp>
 #include <common/Global.hpp>
 #include <world/starsystem.hpp>
+#include <world/EntitiesManager.hpp>
 #include <common/Logger.hpp>
 
 SpaceObject::SpaceObject():
@@ -146,9 +147,9 @@ void SpaceObject::ResolveData()
 #endif
     
     if (data_unresolved_SpaceObject.parent_id != NONE_ID) {
-        m_parent = (SpaceObject*)global::instance().entitiesManager().GetEntityById(data_unresolved_SpaceObject.parent_id);
+        m_parent = (SpaceObject*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.parent_id);
     }
     if (data_unresolved_SpaceObject.starsystem_id != NONE_ID) {
-        m_starsystem = (StarSystem*)global::instance().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id);
+        m_starsystem = (StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id);
     }
 }

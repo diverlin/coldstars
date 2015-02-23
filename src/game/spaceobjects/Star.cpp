@@ -25,6 +25,7 @@
 
 #include <common/Global.hpp>
 #include <world/starsystem.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <jeti/TextureOb.hpp>
 
@@ -166,7 +167,7 @@ void Star::ResolveData()
     Logger::Instance().Log(" Star("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     #endif
     
-    ((StarSystem*)global::instance().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->Add(this);     
+    ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->Add(this);     
 }
 
 /* virtual override final */

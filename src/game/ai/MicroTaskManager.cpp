@@ -18,7 +18,9 @@
 
 #include "MicroTaskManager.hpp"
 #include "scenarios/ScenarioCollector.hpp"
-#include "../common/Global.hpp"
+
+#include <common/Global.hpp>
+#include <world/EntitiesManager.hpp>
 
 MicroTaskManager::MicroTaskManager()
 {
@@ -35,7 +37,7 @@ void MicroTaskManager::SetTask(const Task& microtask)
     scenario = ScenarioCollector::Instance().GetScenario(microtask.GetScenarioTypeId());
     if (microtask.GetTargetId() != NONE_ID)
     {
-        target = (SpaceObject*)global::instance().entitiesManager().GetEntityById(microtask.GetTargetId()); // hack
+        target = (SpaceObject*)global::get().entitiesManager().GetEntityById(microtask.GetTargetId()); // hack
     }
 }
 

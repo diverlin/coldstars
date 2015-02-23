@@ -19,6 +19,7 @@
 
 #include <builder/items/equipment/ProtectorEquipmentBuilder.hpp>
 #include <items/equipment/ProtectorEquipment.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -62,7 +63,7 @@ ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipmentTemplate(
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(protector_equipment);
+    global::get().entitiesManager().RegisterEntity(protector_equipment);
     
     return protector_equipment;
 } 

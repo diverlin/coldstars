@@ -23,6 +23,7 @@
 #include <common/Logger.hpp>
 
 #include <common/Global.hpp>
+#include <world/EntitiesManager.hpp>
 #include <world/starsystem.hpp>
 
 //#include <jeti/Render.hpp>
@@ -148,7 +149,7 @@ void Container::ResolveData()
     Logger::Instance().Log(" Container("+std::to_string(id())+")::ResolveData()", SAVELOAD_LOG_DIP);
     #endif
     
-    ((StarSystem*)global::instance().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->AddContainer(this, data_unresolved_Orientation.center); 
+    ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->AddContainer(this, data_unresolved_Orientation.center); 
 }        
 
 /* virtual override final */

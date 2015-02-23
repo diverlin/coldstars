@@ -55,7 +55,7 @@ void EntityGarbage::Clear()
 {  
        for(unsigned int i=0; i<entities_vec.size(); i++)
     { 
-        global::instance().entitiesManager().RemoveEntity(entities_vec[i]);
+        global::get().entitiesManager().RemoveEntity(entities_vec[i]);
         #if CREATEDESTROY_LOG_ENABLED == 1
         Logger::Instance().Log("________EntityGarbage::Clear delete entity " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
         #endif

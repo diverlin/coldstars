@@ -51,7 +51,7 @@ Star* StarBuilder::GetNewStarTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(star);
+    global::get().entitiesManager().RegisterEntity(star);
     
     return star;
 } 

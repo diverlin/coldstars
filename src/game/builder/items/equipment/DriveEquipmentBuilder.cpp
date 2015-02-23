@@ -18,6 +18,7 @@
 
 #include <builder/items/equipment/DriveEquipmentBuilder.hpp>
 #include <items/equipment/DriveEquipment.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -60,7 +61,7 @@ DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipmentTemplate(INTLONGEST i
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    global::instance().entitiesManager().RegisterEntity(drive_equipment);
+    global::get().entitiesManager().RegisterEntity(drive_equipment);
     
     return drive_equipment;
 } 

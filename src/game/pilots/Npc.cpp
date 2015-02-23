@@ -18,8 +18,9 @@
 
 #include "Npc.hpp"
 #include "../spaceobjects/Vehicle.hpp"
-#include "../world/starsystem.hpp"
-#include "../world/Sector.hpp"
+#include <world/starsystem.hpp>
+#include <world/Sector.hpp>
+#include <world/EntitiesManager.hpp>
 //#include <ceti/StringUtils.hpp>
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
@@ -372,7 +373,7 @@ void Npc::ResolveData()
 {
     ApplySkillsStrategy();
     
-    ((Vehicle*)global::instance().entitiesManager().GetEntityById(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
+    ((Vehicle*)global::get().entitiesManager().GetEntityById(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
     SetAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
     skills.Resolve();

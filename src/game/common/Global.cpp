@@ -18,8 +18,10 @@
 
 #include "Global.hpp"
 #include <world/EntitiesManager.hpp>
+#include <config/Config.hpp>
+#include <jeti/Config.hpp>
 
-global& global::instance()
+global& global::get()
 {
     static global instance;
     return instance;
@@ -27,6 +29,12 @@ global& global::instance()
 
 global::global()
     :
-      m_entitiesManager(new EntitiesManager)
+      m_entitiesManager(new EntitiesManager),
+      m_config(new Config),
+      m_configVideo(new jeti::Config)
+{
+}
+
+global::~global()
 {
 }

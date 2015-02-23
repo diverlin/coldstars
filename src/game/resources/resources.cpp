@@ -18,7 +18,7 @@
 
 #include "resources.hpp"
 #include <common/constants.hpp>
-#include <config/config.hpp>
+#include <config/Config.hpp>
 //#include <jeti/ShaderLoader.hpp>
 #include <jeti/Mesh.hpp>
 //#include <jeti/Screen.hpp>

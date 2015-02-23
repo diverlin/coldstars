@@ -17,6 +17,7 @@
 */
 
 #include <builder/pilots/NpcBuilder.hpp>
+#include <builder/CommonBuilderHeaders.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -26,8 +27,6 @@
 #include <resources/TextureCollector.hpp>
 
 #include <pilots/Npc.hpp>
-
-#include <common/Global.hpp>
 
 #include <ai/aiModel/AiModelCollector.hpp>
 #include <ai/aiModel/AiModelConqueror.hpp>
@@ -61,7 +60,7 @@ Npc* NpcBuilder::GetNewNpcTemplate(TYPE::ENTITY subtype_id, TYPE::ENTITY subsubt
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    global::instance().entitiesManager().RegisterEntity(npc);
+    global::get().entitiesManager().RegisterEntity(npc);
     
     return npc;
 } 

@@ -19,6 +19,7 @@
 
 #include <builder/items/equipment/GrappleEquipmentBuilder.hpp>
 #include <items/equipment/GrappleEquipment.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -60,7 +61,7 @@ GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipmentTemplate(INTLON
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    global::instance().entitiesManager().RegisterEntity(grapple_equipment);
+    global::get().entitiesManager().RegisterEntity(grapple_equipment);
     
     return grapple_equipment;
 } 

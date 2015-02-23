@@ -54,7 +54,7 @@ Container* ContainerBuilder::GetNewContainerTemplate(INTLONGEST id) const
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    global::instance().entitiesManager().RegisterEntity(container);
+    global::get().entitiesManager().RegisterEntity(container);
     
     return container;
 } 

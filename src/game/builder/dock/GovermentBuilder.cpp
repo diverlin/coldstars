@@ -49,7 +49,7 @@ Goverment* GovermentBuilder::GetNewGovermentTemplate(INTLONGEST id) const
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    global::instance().entitiesManager().RegisterEntity(goverment);
+    global::get().entitiesManager().RegisterEntity(goverment);
     
     return goverment;
 } 

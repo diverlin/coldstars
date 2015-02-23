@@ -24,8 +24,6 @@
 #include <world/galaxy.hpp>
 #include <world/Sector.hpp>
 
-#include <config/config.hpp>
-
 #include <struct/GalaxyDescription.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -56,7 +54,7 @@ Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(INTLONGEST id) const
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    global::instance().entitiesManager().RegisterEntity(galaxy);
+    global::get().entitiesManager().RegisterEntity(galaxy);
     
     return galaxy;
 } 

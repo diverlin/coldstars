@@ -128,8 +128,8 @@ void VehicleSlot::ResolveData()
 
         switch(owner->typeId())
         {
-           //case ENTITY::VEHICLE_ID:     { ((Vehicle*)global::instance().entitiesManager().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
-           //case ENTITY::CONTAINER_ID:     { ((Container*)global::instance().entitiesManager().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
+           //case ENTITY::VEHICLE_ID:     { ((Vehicle*)global::get().entitiesManager().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
+           //case ENTITY::CONTAINER_ID:     { ((Container*)global::get().entitiesManager().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
            case TYPE::ENTITY::STORE_ID:           { ((Store*)owner)->AddVehicleSlot(this); break; }
            case TYPE::ENTITY::ANGAR_ID:             { ((Angar*)owner)->AddVehicleSlot(this); break; }
     }

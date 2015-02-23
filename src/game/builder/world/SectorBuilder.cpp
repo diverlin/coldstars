@@ -22,7 +22,7 @@
 #include "../../world/Sector.hpp"
 #include "../../world/starsystem.hpp"
 
-#include "../../config/config.hpp"
+#include <config/Config.hpp>
 
 #include "../../struct/GalaxyDescription.hpp"
 
@@ -53,7 +53,7 @@ Sector* SectorBuilder::GetNewSectorTemplate(INTLONGEST id) const
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    global::instance().entitiesManager().RegisterEntity(sector);
+    global::get().entitiesManager().RegisterEntity(sector);
     
     return sector;
 } 

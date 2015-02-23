@@ -18,6 +18,7 @@
 
 
 #include <builder/slots/ItemSlotBuilder.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -49,7 +50,7 @@ ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(item_slot);
+    global::get().entitiesManager().RegisterEntity(item_slot);
     
     jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);
     item_slot->SetTextureOb(texOb_slot);

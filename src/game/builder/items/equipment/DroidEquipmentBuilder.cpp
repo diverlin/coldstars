@@ -19,6 +19,7 @@
 
 #include <builder/items/equipment/DroidEquipmentBuilder.hpp>
 #include <items/equipment/DroidEquipment.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -60,7 +61,7 @@ DroidEquipment* DroidEquipmentBuilder::GetNewDroidEquipmentTemplate(INTLONGEST i
     {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    global::instance().entitiesManager().RegisterEntity(droid_equipment);
+    global::get().entitiesManager().RegisterEntity(droid_equipment);
     
     return droid_equipment;
 } 

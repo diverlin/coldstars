@@ -33,6 +33,8 @@
 
 #include <meti/RandUtils.hpp>
 
+#include <world/EntitiesManager.hpp>
+
 StarSystemBuilder& StarSystemBuilder::Instance()
 {
     static StarSystemBuilder instance;
@@ -60,7 +62,7 @@ StarSystem* StarSystemBuilder::GetNewStarSystemTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(starsystem);
+    global::get().entitiesManager().RegisterEntity(starsystem);
     
     return starsystem;
 } 

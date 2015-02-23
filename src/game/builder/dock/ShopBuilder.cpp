@@ -50,7 +50,7 @@ Shop* ShopBuilder::GetNewShopTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
-    global::instance().entitiesManager().RegisterEntity(shop);
+    global::get().entitiesManager().RegisterEntity(shop);
     
     return shop;
 } 

@@ -19,6 +19,7 @@
 
 #include <builder/items/equipment/FreezerEquipmentBuilder.hpp>
 #include <items/equipment/FreezerEquipment.hpp>
+#include <world/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
@@ -61,7 +62,7 @@ FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipmentTemplate(INTLON
         {
             Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
         }
-        global::instance().entitiesManager().RegisterEntity(freezer_equipment);
+        global::get().entitiesManager().RegisterEntity(freezer_equipment);
         
         return freezer_equipment;
 } 
