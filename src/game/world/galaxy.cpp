@@ -19,11 +19,12 @@
 #include "galaxy.hpp"
 #include "Sector.hpp"
 #include "../common/constants.hpp"
-#include "../common/Global.hpp"
-#include <meti/RandUtils.hpp>
-//#include <ceti/StringUtils.hpp>
+#include <common/Global.hpp>
+#include <managers/EntitiesManager.hpp>
 
-#include <managers/EntityGarbage.hpp>
+#include <meti/RandUtils.hpp>
+
+
 #include "../struct/StarSystemsConditionData.hpp"
 
 Galaxy::Galaxy(int id)
@@ -38,9 +39,8 @@ Galaxy::~Galaxy()
 /* virtual */
 void Galaxy::putChildrenToGarbage() const
 {
-    for (unsigned int i=0; i<SECTOR_vec.size(); i++)
-    {
-        EntityGarbage::Instance().Add(SECTOR_vec[i]);
+    for (unsigned int i=0; i<SECTOR_vec.size(); i++) {
+        global::get().entitiesManager().AddToGarbage(SECTOR_vec[i]);
     }
 }
 

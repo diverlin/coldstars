@@ -28,8 +28,6 @@
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
 
-#include <managers/EntityGarbage.hpp>
-
 #include "../struct/GalaxyDescription.hpp"
 #include "../text/VerticalFlowText.hpp"
 

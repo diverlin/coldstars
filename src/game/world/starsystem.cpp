@@ -52,8 +52,6 @@
 
 #include <text/VerticalFlowText.hpp> 
 
-#include <managers/EntityGarbage.hpp>
-
 #include <gui/GuiManager.hpp>
 #include <gui/GuiRadar.hpp>
 
@@ -103,13 +101,13 @@ StarSystem::~StarSystem()
 /* virtual */
 void StarSystem::putChildrenToGarbage() const
 {    
-    for(unsigned int i=0; i<STAR_vec.size(); i++)        { EntityGarbage::Instance().Add(STAR_vec[i]); }
-    for(unsigned int i=0; i<PLANET_vec.size(); i++)    { EntityGarbage::Instance().Add(PLANET_vec[i]); }
-    for(unsigned int i=0; i<ASTEROID_vec.size(); i++)  { EntityGarbage::Instance().Add(ASTEROID_vec[i]); }
-    for(unsigned int i=0; i<CONTAINER_vec.size(); i++) { EntityGarbage::Instance().Add(CONTAINER_vec[i]); }
-    for(unsigned int i=0; i<ROCKET_vec.size(); i++)    { EntityGarbage::Instance().Add(ROCKET_vec[i]); }
-    for(unsigned int i=0; i<BLACKHOLE_vec.size(); i++) { EntityGarbage::Instance().Add(BLACKHOLE_vec[i]); }
-    for(unsigned int i=0; i<VEHICLE_vec.size(); i++)   { EntityGarbage::Instance().Add(VEHICLE_vec[i]); }
+    for(unsigned int i=0; i<STAR_vec.size(); i++)        { global::get().entitiesManager().AddToGarbage(STAR_vec[i]); }
+    for(unsigned int i=0; i<PLANET_vec.size(); i++)    { global::get().entitiesManager().AddToGarbage(PLANET_vec[i]); }
+    for(unsigned int i=0; i<ASTEROID_vec.size(); i++)  { global::get().entitiesManager().AddToGarbage(ASTEROID_vec[i]); }
+    for(unsigned int i=0; i<CONTAINER_vec.size(); i++) { global::get().entitiesManager().AddToGarbage(CONTAINER_vec[i]); }
+    for(unsigned int i=0; i<ROCKET_vec.size(); i++)    { global::get().entitiesManager().AddToGarbage(ROCKET_vec[i]); }
+    for(unsigned int i=0; i<BLACKHOLE_vec.size(); i++) { global::get().entitiesManager().AddToGarbage(BLACKHOLE_vec[i]); }
+    for(unsigned int i=0; i<VEHICLE_vec.size(); i++)   { global::get().entitiesManager().AddToGarbage(VEHICLE_vec[i]); }
 }      
 
 Npc* StarSystem::GetFreeLeaderByRaceId(TYPE::RACE race_id) const
@@ -929,7 +927,7 @@ void StarSystem::ManageDeadObjects_s()
     {
         if ((*it)->isReadyForGarbage() == true)
         {
-            EntityGarbage::Instance().Add(*it);
+            global::get().entitiesManager().AddToGarbage(*it);
             it = VEHICLE_vec.erase(it);
         }
     }
@@ -938,7 +936,7 @@ void StarSystem::ManageDeadObjects_s()
     {
         if ((*it)->isReadyForGarbage() == true)
         {
-            EntityGarbage::Instance().Add(*it);
+            global::get().entitiesManager().AddToGarbage(*it);
             it = BLACKHOLE_vec.erase(it);
         }
     }
@@ -947,7 +945,7 @@ void StarSystem::ManageDeadObjects_s()
     {
         if ((*it)->isReadyForGarbage() == true)
         {
-            EntityGarbage::Instance().Add(*it);
+            global::get().entitiesManager().AddToGarbage(*it);
             it = ASTEROID_vec.erase(it);
         }
     }
@@ -956,7 +954,7 @@ void StarSystem::ManageDeadObjects_s()
     {
         if ((*it)->isReadyForGarbage() == true)
         {
-            EntityGarbage::Instance().Add(*it);
+            global::get().entitiesManager().AddToGarbage(*it);
             it = CONTAINER_vec.erase(it);
         }
     }
@@ -965,7 +963,7 @@ void StarSystem::ManageDeadObjects_s()
     {
         if ((*it)->isReadyForGarbage() == true)
         {
-            EntityGarbage::Instance().Add(*it);
+            global::get().entitiesManager().AddToGarbage(*it);
             it = ROCKET_vec.erase(it);
         }
     }

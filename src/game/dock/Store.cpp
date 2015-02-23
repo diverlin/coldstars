@@ -27,7 +27,6 @@
 #include "../slots/VehicleSlot.hpp"
 #include "../pilots/Npc.hpp"
 
-#include <managers/EntityGarbage.hpp>
 #include <managers/EntitiesManager.hpp>
 
 Store::Store(int id)
@@ -44,7 +43,7 @@ void Store::putChildrenToGarbage() const
 {            
     for(unsigned int i=0; i<item_slot_vec.size(); i++)
     {
-        EntityGarbage::Instance().Add(item_slot_vec[i]);
+        global::get().entitiesManager().AddToGarbage(item_slot_vec[i]);
     }
 }
 

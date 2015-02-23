@@ -32,7 +32,6 @@
 #include <spaceobjects/Vehicle.hpp>
 
 #include <managers/EntitiesManager.hpp>
-#include <managers/EntityGarbage.hpp>
 
 #include <jeti/Render.hpp>
 
@@ -63,7 +62,7 @@ Planet::~Planet()
 /* virtual override final */
 void Planet::putChildrenToGarbage() const
 {
-    EntityGarbage::Instance().Add(m_Land);
+    global::get().entitiesManager().AddToGarbage(m_Land);
 }
 
 void Planet::BindLand(Land* land)

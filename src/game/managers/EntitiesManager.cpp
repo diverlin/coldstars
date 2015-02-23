@@ -23,6 +23,7 @@
 #include "EntitiesManager.hpp"
 #include "../common/Logger.hpp"
 //#include <ceti/StringUtils.hpp>
+#include <common/IdGenerator.hpp>
 
 #include "../spaceobjects/IncludeSpaceObjects.hpp"
 
@@ -697,5 +698,36 @@ bool EntitiesManager::UpdateLoadRequest()
 }
 
 
+void EntitiesManager::AddToGarbage(Base* entity)
+{
+    #if CREATEDESTROY_LOG_ENABLED == 1
+    Logger::Instance().Log("EntetiesManager::AddToGarbage entity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
+    for (unsigned int i=0; i<m_garbage.size(); i++)
+    {
+        if (m_garbage[i]->id() == entity->id())
+        {
+            Logger::Instance().Log("EntetiesManager::AddToGarbage dublicated entity found(fix that) " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
+            exit(0);
+        }
+    }
+    #endif
+
+    m_garbage.push_back(entity);
+    entity->putChildrenToGarbage();
+}
+
+void EntitiesManager::ClearGarbage()
+{
+    for(unsigned int i=0; i<m_garbage.size(); i++)
+    {
+        RemoveEntity(m_garbage[i]);
+#if CREATEDESTROY_LOG_ENABLED == 1
+        Logger::Instance().Log("________EntitiesManager::ClearGarbage delete entity " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
+#endif
+        EntityIdGenerator::Instance().AddFreeId(m_garbage[i]->id());
+        delete m_garbage[i];
+    }
+    m_garbage.clear();
+}
 
 

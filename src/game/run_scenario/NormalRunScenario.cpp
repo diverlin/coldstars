@@ -35,8 +35,6 @@
 #include <spaceobjects/Planet.hpp>
 #include <dock/Land.hpp>
 
-#include <managers/EntityGarbage.hpp>
-
 #include <struct/GalaxyDescription.hpp>
 
 

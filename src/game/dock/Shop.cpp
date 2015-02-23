@@ -31,8 +31,6 @@
 #include "../slots/ItemSlot.hpp"
 #include "../pilots/Npc.hpp"
 
-#include <managers/EntityGarbage.hpp>
-
 Shop::Shop(int id)
 {
     setId(id);
@@ -113,7 +111,7 @@ int Shop::BuyGoods(GoodsPack* goods_pack)
     if (price > 0)
     {
         goods_pack->GetItemSlot()->RemoveItem(); 
-        EntityGarbage::Instance().Add(goods_pack);
+        global::get().entitiesManager().AddToGarbage(goods_pack);
     }
     
     return price;
