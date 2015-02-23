@@ -29,7 +29,6 @@
 #include "../slots/ItemSlot.hpp" 
 #include "../pilots/Npc.hpp"
 
-#include <managers/EntityGarbage.hpp>
 #include "../items/BaseItem.hpp"
 #include "../items/equipment/BakEquipment.hpp"
 #include "../items/equipment/RocketEquipment.hpp"
@@ -54,12 +53,12 @@ void Angar::putChildrenToGarbage() const
 {
     for(unsigned int i=0; i<vehicle_total_slot_vec.size(); i++)
     {
-        EntityGarbage::Instance().Add(vehicle_total_slot_vec[i]);
+        global::get().entitiesManager().AddToGarbage(vehicle_total_slot_vec[i]);
     }
 
     for(unsigned int i=0; i<item_slot_vec.size(); i++)
     {
-        EntityGarbage::Instance().Add(item_slot_vec[i]);
+        global::get().entitiesManager().AddToGarbage(item_slot_vec[i]);
     }
 }
 

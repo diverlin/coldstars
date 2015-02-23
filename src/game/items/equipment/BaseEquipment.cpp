@@ -26,9 +26,10 @@
 #include <jeti/Screen.hpp>
 #include "../../resources/GuiTextureObCollector.hpp"
 #include "../../common/Logger.hpp"
-#include <managers/EntityGarbage.hpp>
 
 #include <jeti/AnimationEffect2D.hpp>
+#include <common/Global.hpp>
+#include <managers/EntitiesManager.hpp>
 
 BaseEquipment::BaseEquipment()
 {
@@ -51,7 +52,7 @@ void BaseEquipment::putChildrenToGarbage() const
 {
     for (unsigned int i=0; i<modules_vec.size(); i++)
     {
-        EntityGarbage::Instance().Add(modules_vec[i]);
+        global::get().entitiesManager().AddToGarbage(modules_vec[i]);
     }
 }
         

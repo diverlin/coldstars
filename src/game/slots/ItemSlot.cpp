@@ -44,7 +44,6 @@
 
 #include <common/Global.hpp>
 #include <managers/EntitiesManager.hpp>
-#include <managers/EntityGarbage.hpp>
 
 ItemSlot::ItemSlot(INTLONGEST id, TYPE::ENTITY subtype_id)
 :
@@ -74,7 +73,7 @@ void ItemSlot::putChildrenToGarbage() const
 {
     if (m_Item != nullptr)
     {
-        EntityGarbage::Instance().Add(m_Item);
+        global::get().entitiesManager().AddToGarbage(m_Item);
     }
 }
 

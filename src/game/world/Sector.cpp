@@ -27,7 +27,6 @@
 #include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
 
-#include <managers/EntityGarbage.hpp>
 #include "../struct/StarSystemsConditionData.hpp"
 
 Sector::Sector(int id)
@@ -45,7 +44,7 @@ Sector::~Sector()
 void Sector::putChildrenToGarbage() const
 {
     for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++) {
-        EntityGarbage::Instance().Add(STARSYSTEM_vec[i]);
+        global::get().entitiesManager().AddToGarbage(STARSYSTEM_vec[i]);
     }
 }
 

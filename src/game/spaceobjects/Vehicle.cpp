@@ -24,9 +24,7 @@
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
 #include <managers/EntitiesManager.hpp>
-#include <managers/EntityGarbage.hpp>
 
-//#include <ceti/StringUtils.hpp>
 #include <common/Logger.hpp>
 
 //#include <jeti/Render.hpp>
@@ -101,11 +99,11 @@ Vehicle::~Vehicle()
 void Vehicle::putChildrenToGarbage() const
 {
     m_OwnerNpc->SetAlive(false);
-    EntityGarbage::Instance().Add(m_OwnerNpc);
+    global::get().entitiesManager().AddToGarbage(m_OwnerNpc);
     
     for(unsigned int i=0; i<m_SlotTotal_vec.size(); i++)
     {
-        EntityGarbage::Instance().Add(m_SlotTotal_vec[i]);    
+        global::get().entitiesManager().AddToGarbage(m_SlotTotal_vec[i]);
     }
 }
 

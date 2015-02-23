@@ -23,8 +23,7 @@
 #include <cassert>
 #include <string>
 
-#include "../common/Base.hpp"
-class EntityGarbage;
+#include <common/Base.hpp>
 class Player;
 
 
@@ -32,8 +31,6 @@ class EntitiesManager
 {
     public:
         EntitiesManager():save_request(false), load_request(false){}
-//        EntitiesManager(const EntitiesManager&);
-//        EntitiesManager& operator=(const EntitiesManager&);
 
         void SaveRequest() { save_request = true; };
         void LoadRequest() { load_request = true; };
@@ -46,10 +43,15 @@ class EntitiesManager
         bool UpdateSaveRequest();        
         bool UpdateLoadRequest();
         
+        void AddToGarbage(Base*);
+        void ClearGarbage();
+
     private:
         bool save_request, load_request;
         
         std::map<unsigned long int, Base*> entity_map;
+
+        std::vector<Base*> m_garbage;
 
         void RemoveEntity(Base*);
 
@@ -57,9 +59,8 @@ class EntitiesManager
                 
         void SaveEvent(const std::string&);
         void LoadPass0(const std::string&);
-        void LoadPass1() const;
-                        
-        friend class EntityGarbage;
+        void LoadPass1() const;                        
+
 };
 
 

@@ -27,7 +27,7 @@
 #include "../dock/Store.hpp"
 #include "../common/Global.hpp"
 
-#include <managers/EntityGarbage.hpp>
+#include <managers/EntitiesManager.hpp>
 
 VehicleSlot::VehicleSlot(int id, TYPE::ENTITY subtype_id)
 :
@@ -46,7 +46,7 @@ void VehicleSlot::putChildrenToGarbage() const
 {
     if (vehicle)
     {
-        EntityGarbage::Instance().Add(vehicle);
+        global::get().entitiesManager().AddToGarbage(vehicle);
     } 
 }
                       

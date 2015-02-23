@@ -30,8 +30,6 @@
 
 #include <jeti/particlesystem/ExplosionEffect.hpp>
 
-#include <managers/EntityGarbage.hpp>
-
 #include <slots/ItemSlot.hpp>
 #include <items/BaseItem.hpp>
 
@@ -56,7 +54,7 @@ Container::~Container()
 /* virtual override final */
 void Container::putChildrenToGarbage() const
 {
-    EntityGarbage::Instance().Add(m_ItemSlot);
+    global::get().entitiesManager().AddToGarbage(m_ItemSlot);
 }
             
 void Container::BindItemSlot(ItemSlot* item_slot) 

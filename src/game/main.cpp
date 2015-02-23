@@ -47,8 +47,6 @@
 #include <world/starsystem.hpp>
 #include <ai/God.hpp>
 
-#include <managers/EntityGarbage.hpp>
-
 #include "struct/GalaxyDescription.hpp"
 #include "dock/Land.hpp"
 
@@ -140,7 +138,7 @@ int main()
         
         if (TurnTimer::Instance().GetTurnEnded() == true)
         {
-            EntityGarbage::Instance().Clear();
+            global::get().entitiesManager().ClearGarbage();
 
             bool save_event = global::get().entitiesManager().UpdateSaveRequest();
             bool load_event = global::get().entitiesManager().UpdateLoadRequest();

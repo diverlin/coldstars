@@ -22,9 +22,8 @@
 #include <common/Logger.hpp>
 
 #include <common/Global.hpp>
+#include <managers/EntitiesManager.hpp>
 #include <world/starsystem.hpp>
-
-#include <managers/EntityGarbage.hpp>
 
 #include <dock/Kosmoport.hpp>
 
@@ -56,13 +55,13 @@ SpaceStation::~SpaceStation()
 /* virtual override final */
 void SpaceStation::putChildrenToGarbage() const 
 {
-    EntityGarbage::Instance().Add(m_Land);
+    global::get().entitiesManager().AddToGarbage(m_Land);
     GetOwnerNpc()->SetAlive(false);
-    EntityGarbage::Instance().Add(GetOwnerNpc());
+    global::get().entitiesManager().AddToGarbage(GetOwnerNpc());
     
     for(unsigned int i=0; i<m_SlotTotal_vec.size(); i++)
     {
-        EntityGarbage::Instance().Add(m_SlotTotal_vec[i]);    
+        global::get().entitiesManager().AddToGarbage(m_SlotTotal_vec[i]);
     }
 }
 

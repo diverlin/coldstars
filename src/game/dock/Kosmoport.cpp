@@ -20,13 +20,14 @@
 #include "../spaceobjects/Vehicle.hpp"
 //#include <ceti/StringUtils.hpp>
 #include "../common/constants.hpp"
+#include <common/Global.hpp>
+#include <managers/EntitiesManager.hpp>
 
 #include "../dock/Angar.hpp"
 #include "../dock/Store.hpp"
 #include "../dock/Shop.hpp"
 #include "../dock/Goverment.hpp"
 
-#include <managers/EntityGarbage.hpp>
 #include "../slots/VehicleSlot.hpp"
 
 Kosmoport::Kosmoport(int id)
@@ -48,10 +49,10 @@ Kosmoport::~Kosmoport()
 /* virtual */
 void Kosmoport::putChildrenToGarbage() const
 {
-    EntityGarbage::Instance().Add(angar);
-    EntityGarbage::Instance().Add(store);
-    EntityGarbage::Instance().Add(shop);
-    EntityGarbage::Instance().Add(goverment);
+    global::get().entitiesManager().AddToGarbage(angar);
+    global::get().entitiesManager().AddToGarbage(store);
+    global::get().entitiesManager().AddToGarbage(shop);
+    global::get().entitiesManager().AddToGarbage(goverment);
 }
        
 void Kosmoport::BindAngar(Angar* angar)

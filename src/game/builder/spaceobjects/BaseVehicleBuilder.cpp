@@ -19,8 +19,6 @@
 #include "BaseVehicleBuilder.hpp"
 #include "../../spaceobjects/Vehicle.hpp"
 
-#include <managers/EntityGarbage.hpp>
-
 #include "../../parts/WeaponComplex.hpp"
 
 #include "../../items/equipment/BakEquipment.hpp"
@@ -50,6 +48,9 @@
 #include "../../items/artefacts/ProtectorArtefact.hpp"
 
 #include "../../builder/items/IncludeItemBuilders.hpp"
+
+#include <common/Global.hpp>
+#include <managers/EntitiesManager.hpp>
 
 #include <builder/slots/ItemSlotBuilder.hpp>
 
@@ -168,17 +169,15 @@ void BaseVehicleBuilder::EquipEquipment(Vehicle* vehicle, TYPE::TECHLEVEL tech_l
         if (rand)
         {
             RocketEquipment* rocket_equipment = RocketEquipmentBuilder::Instance().GetNewRocketEquipment(tech_level);
-            if (vehicle->AddAndManageItem(rocket_equipment) == false)
-            {
-                EntityGarbage::Instance().Add(rocket_equipment);
+            if (vehicle->AddAndManageItem(rocket_equipment) == false) {
+                global::get().entitiesManager().AddToGarbage(rocket_equipment);
             }
         }
         else
         {
             LazerEquipment* lazer_equipment = LazerEquipmentBuilder::Instance().GetNewLazerEquipment(tech_level);
-            if (vehicle->AddAndManageItem(lazer_equipment) == false)
-            {
-                EntityGarbage::Instance().Add(lazer_equipment); 
+            if (vehicle->AddAndManageItem(lazer_equipment) == false) {
+                global::get().entitiesManager().AddToGarbage(lazer_equipment);
             }
         }
     }   
@@ -186,83 +185,74 @@ void BaseVehicleBuilder::EquipEquipment(Vehicle* vehicle, TYPE::TECHLEVEL tech_l
     if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::RADAR_SLOT_ID) == true)
     {
         RadarEquipment* radar_equipment = RadarEquipmentBuilder::Instance().GetNewRadarEquipment(tech_level);
-        if (vehicle->AddAndManageItem(radar_equipment) == false)
-        {    
-            EntityGarbage::Instance().Add(radar_equipment); 
+        if (vehicle->AddAndManageItem(radar_equipment) == false) {
+            global::get().entitiesManager().AddToGarbage(radar_equipment);
         }
     }
     
     if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::DRIVE_SLOT_ID) == true)
     {
         DriveEquipment* drive_equipment = DriveEquipmentBuilder::Instance().GetNewDriveEquipment(tech_level);
-        if (vehicle->AddAndManageItem(drive_equipment) == false)
-        {
-            EntityGarbage::Instance().Add(drive_equipment); 
+        if (vehicle->AddAndManageItem(drive_equipment) == false) {
+            global::get().entitiesManager().AddToGarbage(drive_equipment);
         }
     }
     
     if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::BAK_SLOT_ID) == true)
     {
         BakEquipment* bak_equipment = BakEquipmentBuilder::Instance().GetNewBakEquipment(tech_level);
-        if (vehicle->AddAndManageItem(bak_equipment) == false)
-        {
-            EntityGarbage::Instance().Add(bak_equipment); 
+        if (vehicle->AddAndManageItem(bak_equipment) == false) {
+            global::get().entitiesManager().AddToGarbage(bak_equipment);
         } 
     }
     
     if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::ENERGIZER_SLOT_ID) == true)
     {
         EnergizerEquipment* energizer_equipment = EnergizerEquipmentBuilder::Instance().GetNewEnergizerEquipment(tech_level);
-        if (vehicle->AddAndManageItem(energizer_equipment) == false)
-        {
-            EntityGarbage::Instance().Add(energizer_equipment); 
+        if (vehicle->AddAndManageItem(energizer_equipment) == false) {
+            global::get().entitiesManager().AddToGarbage(energizer_equipment);
         }     
     }
     
     if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::FREEZER_SLOT_ID) == true)
     {
         //FreezerEquipment* freezer_equipment = FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment(tech_level);
-        //if (vehicle->AddAndManageItem(freezer_equipment) == false)
-        //{
-            //EntityGarbage::Instance().Add(freezer_equipment); 
+        //if (vehicle->AddAndManageItem(freezer_equipment) == false) {
+            //global::get().entitiesManager().AddToGarbage(freezer_equipment);
         //}  
     }
     
     if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::PROTECTOR_SLOT_ID) == true)
     {
         ProtectorEquipment* protector_equipment = ProtectorEquipmentBuilder::Instance().GetNewProtectorEquipment(tech_level);
-        if (vehicle->AddAndManageItem(protector_equipment) == false)
-        {
-            EntityGarbage::Instance().Add(protector_equipment); 
+        if (vehicle->AddAndManageItem(protector_equipment) == false) {
+            global::get().entitiesManager().AddToGarbage(protector_equipment);
         }  
     }
         
     if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::DROID_SLOT_ID) == true)
     {
         DroidEquipment* droid_equipment = DroidEquipmentBuilder::Instance().GetNewDroidEquipment(tech_level);
-        if (vehicle->AddAndManageItem(droid_equipment) == false)
-        {
-            EntityGarbage::Instance().Add(droid_equipment); 
+        if (vehicle->AddAndManageItem(droid_equipment) == false) {
+            global::get().entitiesManager().AddToGarbage(droid_equipment);
         }  
     }
     
     if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::SCANER_SLOT_ID) == true)
     {
         ScanerEquipment* scaner_equipment = ScanerEquipmentBuilder::Instance().GetNewScanerEquipment(tech_level);
-        if (vehicle->AddAndManageItem(scaner_equipment) == false)
-        {
-            EntityGarbage::Instance().Add(scaner_equipment); 
+        if (vehicle->AddAndManageItem(scaner_equipment) == false) {
+            global::get().entitiesManager().AddToGarbage(scaner_equipment);
         }  
     }
     
     if (vehicle->CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY::GRAPPLE_SLOT_ID) == true)
     {
         GrappleEquipment* grapple_equipment = GrappleEquipmentBuilder::Instance().GetNewGrappleEquipment(tech_level);
-        if (vehicle->AddAndManageItem(grapple_equipment) == false)
-        {
-            EntityGarbage::Instance().Add(grapple_equipment); 
-        } 
-       }
+        if (vehicle->AddAndManageItem(grapple_equipment) == false) {
+            global::get().entitiesManager().AddToGarbage(grapple_equipment);
+        }
+    }
 }
 
 void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) const
