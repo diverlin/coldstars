@@ -17,8 +17,7 @@
 */
 
 
-#ifndef GALAXYBUILDER_HPP
-#define GALAXYBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -43,8 +42,7 @@ class GalaxyBuilder
         void CreateNewInternals(Galaxy*, const GalaxyDescription&) const;
 }; 
     
-#endif 
-    
+
 
         
 

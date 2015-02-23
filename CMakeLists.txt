@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 2.8)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/macros/cmake")
 
-set(PROJECT run)
+set(PROJECT coldstars)
 
 project (${PROJECT})
 
@@ -22,13 +22,13 @@ set(GLEW_ROOT ${COLDSTARS_DEPENDENCIES_ROOT})
 set(GLM_ROOT_DIR ${COLDSTARS_DEPENDENCIES_ROOT})
 
 include_directories(src/)
-include_directories(src/jeti)
+#include_directories(src/jeti)
 include_directories(src/meti)
 include_directories(src/ceti)
 include_directories(src/game)
+include_directories(src/game/core)
 
-
-add_subdirectory(src/jeti)
+#add_subdirectory(src/jeti)
 add_subdirectory(src/meti)
 add_subdirectory(src/ceti)
 add_subdirectory(src/game)
