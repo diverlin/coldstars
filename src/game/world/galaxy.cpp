@@ -23,7 +23,7 @@
 #include <meti/RandUtils.hpp>
 //#include <ceti/StringUtils.hpp>
 
-#include "../garbage/EntityGarbage.hpp"
+#include <managers/EntityGarbage.hpp>
 #include "../struct/StarSystemsConditionData.hpp"
 
 Galaxy::Galaxy(int id)

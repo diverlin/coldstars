@@ -22,10 +22,10 @@
 
 #include <vector>
 #include <spaceobjects/SpaceObject.hpp>
-#include <garbage/garbageEffects.hpp>
+#include <managers/garbageEffects.hpp>
 
 #include <world/HyperSpace.hpp>
-#include <world/AsteroidManager.hpp>
+#include <managers/AsteroidManager.hpp>
 #include <types/RaceTypes.hpp>
 #include <jeti/Render.hpp>
 

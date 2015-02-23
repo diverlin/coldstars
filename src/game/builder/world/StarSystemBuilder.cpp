@@ -33,7 +33,7 @@
 
 #include <meti/RandUtils.hpp>
 
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 StarSystemBuilder& StarSystemBuilder::Instance()
 {

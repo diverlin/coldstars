@@ -18,7 +18,7 @@
 
 #include "ProtectorModuleBuilder.hpp"
 #include <items/modules/ProtectorModule.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>

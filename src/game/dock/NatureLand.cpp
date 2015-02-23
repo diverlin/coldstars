@@ -25,7 +25,7 @@
 #include <jeti/TextureOb.hpp>
 
 #include "../slots/ItemSlot.hpp"
-#include "../garbage/EntityGarbage.hpp"
+#include <managers/EntityGarbage.hpp>
 
 NatureLand::NatureLand(int id)
 {

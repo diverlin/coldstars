@@ -22,7 +22,7 @@
 
 #include "builder/world/GalaxyBuilder.hpp"
 #include "builder/pilots/PlayerBuilder.hpp"
-#include <config/Config.hpp>
+#include <common/Config.hpp>
 
 #include <jeti/Screen.hpp>
 #include <jeti/GlErrorHelper.hpp>
@@ -40,14 +40,14 @@
 #include "spaceobjects/Vehicle.hpp"
 
 #include <common/Global.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
-#include "world/galaxy.hpp"
-#include "world/Sector.hpp"
-#include "world/starsystem.hpp"
-#include "world/God.hpp"
+#include <world/galaxy.hpp>
+#include <world/Sector.hpp>
+#include <world/starsystem.hpp>
+#include <ai/God.hpp>
 
-#include "garbage/EntityGarbage.hpp"
+#include <managers/EntityGarbage.hpp>
 
 #include "struct/GalaxyDescription.hpp"
 #include "dock/Land.hpp"

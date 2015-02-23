@@ -2,7 +2,7 @@
 //#include <boost/lexical_cast.hpp>
 
 #include <Render.hpp>
-//#include <config/config.hpp>
+//#include <common/Config.hpp>
 //#include <common/common.hpp>
 #include <constants.hpp>
     

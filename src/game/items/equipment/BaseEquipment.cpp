@@ -26,7 +26,7 @@
 #include <jeti/Screen.hpp>
 #include "../../resources/GuiTextureObCollector.hpp"
 #include "../../common/Logger.hpp"
-#include "../../garbage/EntityGarbage.hpp"
+#include <managers/EntityGarbage.hpp>
 
 #include <jeti/AnimationEffect2D.hpp>
 

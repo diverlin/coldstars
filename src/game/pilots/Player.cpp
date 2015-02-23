@@ -18,13 +18,13 @@
 
 
 #include "Player.hpp"
-#include <config/Config.hpp>
+#include <common/Config.hpp>
 
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
 #include "../world/starsystem.hpp"
 #include "../common/Global.hpp"
-#include "../world/EntitiesManager.hpp"
+#include <managers/EntitiesManager.hpp>
 
 #include <math/rand.hpp>
 //#include <ceti/StringUtils.hpp>

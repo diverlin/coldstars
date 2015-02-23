@@ -32,8 +32,8 @@
 //#include <ceti/StringUtils.hpp>
 
 #include <common/Global.hpp>
-#include <world/EntitiesManager.hpp>
-#include <config/Config.hpp>
+#include <managers/EntitiesManager.hpp>
+#include <common/Config.hpp>
 
 #include <jeti/Render.hpp>
 
@@ -52,7 +52,7 @@
 
 #include <text/VerticalFlowText.hpp> 
 
-#include <garbage/EntityGarbage.hpp>
+#include <managers/EntityGarbage.hpp>
 
 #include <gui/GuiManager.hpp>
 #include <gui/GuiRadar.hpp>

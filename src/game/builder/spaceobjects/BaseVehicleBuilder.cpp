@@ -19,7 +19,7 @@
 #include "BaseVehicleBuilder.hpp"
 #include "../../spaceobjects/Vehicle.hpp"
 
-#include "../../garbage/EntityGarbage.hpp"
+#include <managers/EntityGarbage.hpp>
 
 #include "../../parts/WeaponComplex.hpp"
 

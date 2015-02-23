@@ -18,7 +18,7 @@
 
 #include "DroidModuleBuilder.hpp"
 #include <items/modules/DroidModule.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>

@@ -18,7 +18,7 @@
 
 #include "BombBuilder.hpp"
 #include <items/others/Bomb.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 #include "../../../common/Logger.hpp"
 #include "../../../common/IdGenerator.hpp"

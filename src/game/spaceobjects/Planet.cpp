@@ -27,12 +27,12 @@
 #include <effects/BaseDecor.hpp>
 
 #include <common/Global.hpp>
-#include <world/EntitiesManager.hpp>
 #include <world/starsystem.hpp>
 
 #include <spaceobjects/Vehicle.hpp>
 
-#include <garbage/EntityGarbage.hpp>
+#include <managers/EntitiesManager.hpp>
+#include <managers/EntityGarbage.hpp>
 
 #include <jeti/Render.hpp>
 

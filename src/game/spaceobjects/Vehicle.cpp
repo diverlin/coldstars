@@ -23,8 +23,8 @@
 
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
-#include <world/EntitiesManager.hpp>
-#include <garbage/EntityGarbage.hpp>
+#include <managers/EntitiesManager.hpp>
+#include <managers/EntityGarbage.hpp>
 
 //#include <ceti/StringUtils.hpp>
 #include <common/Logger.hpp>

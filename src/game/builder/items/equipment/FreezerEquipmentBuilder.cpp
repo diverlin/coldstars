@@ -19,7 +19,7 @@
 
 #include <builder/items/equipment/FreezerEquipmentBuilder.hpp>
 #include <items/equipment/FreezerEquipment.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>

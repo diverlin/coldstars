@@ -20,7 +20,7 @@
 #include "Kosmoport.hpp"
 
 #include <common/Global.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 //#include <ceti/StringUtils.hpp>
 #include "../common/Logger.hpp"
@@ -29,7 +29,7 @@
 #include "../slots/ItemSlot.hpp" 
 #include "../pilots/Npc.hpp"
 
-#include "../garbage/EntityGarbage.hpp"
+#include <managers/EntityGarbage.hpp>
 #include "../items/BaseItem.hpp"
 #include "../items/equipment/BakEquipment.hpp"
 #include "../items/equipment/RocketEquipment.hpp"
