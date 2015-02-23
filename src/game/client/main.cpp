@@ -78,8 +78,7 @@ int main()
     
     BaseRunScenario* run_scenario = nullptr;
     RUN_SCENARIO scenario_type = RUN_SCENARIO::NORMAL_RUN;
-    switch(scenario_type)
-    {
+    switch(scenario_type) {
         case RUN_SCENARIO::NORMAL_RUN:         { run_scenario = new NormalRunScenario(); break; }
         case RUN_SCENARIO::TEST_PARTICLES:     { run_scenario = new TestParticlesRunScenario(); break; }    
         case RUN_SCENARIO::TEST_TEXT:          { run_scenario = new TestTextRunScenario(); break; }
@@ -119,13 +118,9 @@ int main()
         TurnTimer::Instance().Update();
 
         God::Instance().Update(GameDate::Instance().GetDate());
-        for (int i=0; i<global::get().config().GAME_SPEED; i++)  // fake implementation (static ai should not be run several times at once)
-        {
-            galaxy->Update(TurnTimer::Instance().GetTurnTick());
-        }
+        galaxy->Update(TurnTimer::Instance().GetTurnTick());
 
-        if ((TurnTimer::Instance().GetTurnEnded() == true) and (UserInputManagerInSpace::Instance().GetNextTurnReady()))
-        {
+        if ((TurnTimer::Instance().GetTurnEnded() == true) and (UserInputManagerInSpace::Instance().GetNextTurnReady())) {
             TurnTimer::Instance().NextTurn();
         } 
         /* server code end */
@@ -136,29 +131,24 @@ int main()
         player->UpdatePostTransactionEvent(TurnTimer::Instance()); 
         /* client code end */
         
-        if (TurnTimer::Instance().GetTurnEnded() == true)
-        {
+        if (TurnTimer::Instance().GetTurnEnded() == true) {
             global::get().entitiesManager().ClearGarbage();
 
             bool save_event = global::get().entitiesManager().UpdateSaveRequest();
             bool load_event = global::get().entitiesManager().UpdateLoadRequest();
-            if (load_event == true)
-            {
+            if (load_event == true) {
                 player = global::get().entitiesManager().GetPlayer();
                 galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();
             }
-            if (save_event == true)
-            {
-            
+            if (save_event == true) {
+                //..
             }
         }
 
-        if (TurnTimer::Instance().GetTurnTick() > 1) // hack
-        {
+        // hack
+        if (TurnTimer::Instance().GetTurnTick() > 1) {
             run_scenario->Update_inDynamic(player);
-        }
-        else
-        {
+        } else  {
             run_scenario->Update_inStatic(player);        
         }
 
