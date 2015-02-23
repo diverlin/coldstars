@@ -22,13 +22,13 @@
 #include "../pilots/Player.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 
-#include "../world/God.hpp"
-#include "../world/galaxy.hpp"
-#include "../world/Sector.hpp"
-#include "../world/starsystem.hpp"
-#include "../common/Global.hpp"
+#include <ai/God.hpp>
+#include <world/galaxy.hpp>
+#include <world/Sector.hpp>
+#include <world/starsystem.hpp>
+#include <common/Global.hpp>
 
-#include "../garbage/EntityGarbage.hpp"
+#include <managers/EntityGarbage.hpp>
 
 #include "../struct/GalaxyDescription.hpp"
 #include "../text/VerticalFlowText.hpp"

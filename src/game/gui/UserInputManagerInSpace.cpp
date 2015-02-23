@@ -20,7 +20,7 @@
 #include "UserInput.hpp"
 #include "BaseButton.hpp"
 #include "../common/Global.hpp"
-#include <config/Config.hpp>
+#include <common/Config.hpp>
 #include <jeti/Screen.hpp>
 #include "../parts/WeaponComplex.hpp"
 #include "../pilots/Npc.hpp"

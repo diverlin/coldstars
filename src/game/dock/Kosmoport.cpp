@@ -26,7 +26,7 @@
 #include "../dock/Shop.hpp"
 #include "../dock/Goverment.hpp"
 
-#include "../garbage/EntityGarbage.hpp"
+#include <managers/EntityGarbage.hpp>
 #include "../slots/VehicleSlot.hpp"
 
 Kosmoport::Kosmoport(int id)

@@ -20,10 +20,10 @@
 #include "constants.hpp"
 #include "GameDate.hpp"
 #include "Logger.hpp"
-#include <config/Config.hpp>
+#include <common/Config.hpp>
 
 #include <common/Global.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 TurnTimer& TurnTimer::Instance()
 {

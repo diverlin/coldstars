@@ -18,7 +18,7 @@
 
 #include "AsteroidManager.hpp"
 #include "../common/TurnTimer.hpp"
-#include "starsystem.hpp"
+#include <world/starsystem.hpp>
 #include "../builder/spaceobjects/AsteroidBuilder.hpp"
 #include "../spaceobjects/Asteroid.hpp"
 

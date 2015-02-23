@@ -28,7 +28,7 @@
 #include <common/Logger.hpp>
 
 #include <common/Global.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 #include <common/constants.hpp>
 

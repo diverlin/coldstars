@@ -19,7 +19,7 @@
 
 #include <builder/items/equipment/ProtectorEquipmentBuilder.hpp>
 #include <items/equipment/ProtectorEquipment.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>

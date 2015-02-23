@@ -19,7 +19,7 @@
 
 #include "GravityArtefactBuilder.hpp"
 #include <items/artefacts/GravityArtefact.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>

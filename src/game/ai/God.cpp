@@ -17,7 +17,7 @@
 */
 
 
-#include <world/God.hpp>
+#include <ai/God.hpp>
 
 #include <common/Logger.hpp>
 #include <meti/RandUtils.hpp>

@@ -21,7 +21,7 @@
 #include "../common/Logger.hpp"
 #include "../common/Base.hpp"
 #include "../common/Global.hpp"
-#include "../world/EntitiesManager.hpp"
+#include <managers/EntitiesManager.hpp>
 #include "../common/IdGenerator.hpp"
 
 EntityGarbage& EntityGarbage::Instance()

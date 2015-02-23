@@ -17,8 +17,8 @@
 */
 
 #include "Global.hpp"
-#include <world/EntitiesManager.hpp>
-#include <config/Config.hpp>
+#include <managers/EntitiesManager.hpp>
+#include <common/Config.hpp>
 #include <jeti/Config.hpp>
 
 global& global::get()

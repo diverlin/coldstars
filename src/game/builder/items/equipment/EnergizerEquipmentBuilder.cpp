@@ -18,7 +18,7 @@
 
 #include "EnergizerEquipmentBuilder.hpp"
 #include <items/equipment/EnergizerEquipment.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>

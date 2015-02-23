@@ -22,7 +22,7 @@
 #include "../../world/Sector.hpp"
 #include "../../world/starsystem.hpp"
 
-#include <config/Config.hpp>
+#include <common/Config.hpp>
 
 #include "../../struct/GalaxyDescription.hpp"
 

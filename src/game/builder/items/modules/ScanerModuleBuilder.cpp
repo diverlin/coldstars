@@ -18,7 +18,7 @@
 
 #include "ScanerModuleBuilder.hpp"
 #include <items/modules/ScanerModule.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>

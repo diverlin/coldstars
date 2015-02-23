@@ -27,7 +27,7 @@
 #include "../dock/Store.hpp"
 #include "../common/Global.hpp"
 
-#include "../garbage/EntityGarbage.hpp"
+#include <managers/EntityGarbage.hpp>
 
 VehicleSlot::VehicleSlot(int id, TYPE::ENTITY subtype_id)
 :

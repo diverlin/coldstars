@@ -42,10 +42,9 @@
 #include "../common/Logger.hpp"
 #include <meti/RandUtils.hpp>
 
-#include <garbage/EntityGarbage.hpp>
 #include <common/Global.hpp>
-#include <world/EntitiesManager.hpp>
-
+#include <managers/EntitiesManager.hpp>
+#include <managers/EntityGarbage.hpp>
 
 ItemSlot::ItemSlot(INTLONGEST id, TYPE::ENTITY subtype_id)
 :

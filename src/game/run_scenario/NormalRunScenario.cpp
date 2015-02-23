@@ -26,7 +26,7 @@
 #include <pilots/Npc.hpp>
 #include <pilots/Player.hpp>
 
-#include <world/God.hpp>
+#include <ai/God.hpp>
 #include <world/galaxy.hpp>
 #include <world/Sector.hpp>
 #include <world/starsystem.hpp>
@@ -35,7 +35,7 @@
 #include <spaceobjects/Planet.hpp>
 #include <dock/Land.hpp>
 
-#include <garbage/EntityGarbage.hpp>
+#include <managers/EntityGarbage.hpp>
 
 #include <struct/GalaxyDescription.hpp>
 

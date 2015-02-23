@@ -24,7 +24,7 @@
 #include <common/Global.hpp>
 #include <world/starsystem.hpp>
 
-#include <garbage/EntityGarbage.hpp>
+#include <managers/EntityGarbage.hpp>
 
 #include <dock/Kosmoport.hpp>
 

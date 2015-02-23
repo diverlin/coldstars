@@ -30,7 +30,7 @@
 //#include <resources/MeshCollector.hpp>
 
 #include <common/Global.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 //#include <jeti/animations/AnimationConstantRotation.hpp>
 //#include <jeti/animations/AnimationWiggle.hpp>

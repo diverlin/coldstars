@@ -19,7 +19,7 @@
 #include "Sector.hpp"
 #include "starsystem.hpp"
 #include "galaxy.hpp"
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 #include "../common/constants.hpp"
 #include "../common/Global.hpp"
 #include <meti/RandUtils.hpp>
@@ -27,7 +27,7 @@
 #include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
 
-#include "../garbage/EntityGarbage.hpp"
+#include <managers/EntityGarbage.hpp>
 #include "../struct/StarSystemsConditionData.hpp"
 
 Sector::Sector(int id)

@@ -23,14 +23,14 @@
 #include <common/Logger.hpp>
 
 #include <common/Global.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 #include <world/starsystem.hpp>
 
 //#include <jeti/Render.hpp>
 
 #include <jeti/particlesystem/ExplosionEffect.hpp>
 
-#include <garbage/EntityGarbage.hpp>
+#include <managers/EntityGarbage.hpp>
 
 #include <slots/ItemSlot.hpp>
 #include <items/BaseItem.hpp>

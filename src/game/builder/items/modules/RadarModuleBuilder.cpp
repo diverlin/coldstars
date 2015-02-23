@@ -18,7 +18,7 @@
 
 #include "RadarModuleBuilder.hpp"
 #include <items/modules/RadarModule.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>

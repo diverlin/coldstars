@@ -19,7 +19,7 @@
 
 #include "ProtectorArtefactBuilder.hpp"
 #include <items/artefacts/ProtectorArtefact.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>

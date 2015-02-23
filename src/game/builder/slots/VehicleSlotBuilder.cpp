@@ -18,7 +18,7 @@
 
 
 #include <builder/slots/VehicleSlotBuilder.hpp>
-#include <world/EntitiesManager.hpp>
+#include <managers/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
 
