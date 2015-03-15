@@ -37,8 +37,8 @@ BakModule::~BakModule()
 /* virtual */
 void BakModule::AddUniqueInfo()
 {
-        info.addTitleStr("bak module");
-        info.addNameStr("fuel_max_add:"); info.addValueStr( std::to_string(fuel_max_add) );
+//        info.addTitleStr("bak module");
+//        info.addNameStr("fuel_max_add:"); info.addValueStr( std::to_string(fuel_max_add) );
 }
 
 /*virtual*/

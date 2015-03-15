@@ -27,7 +27,7 @@
 #include <world/starsystem.hpp>
 #include <managers/EntitiesManager.hpp>
 
-#include <jeti/TextureOb.hpp>
+//#include <jeti/TextureOb.hpp>
 
 #include <glm/gtx/transform.hpp>
 
@@ -176,7 +176,7 @@ void Star::Save(boost::property_tree::ptree& save_ptree) const
     std::string root = "star." + std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
-    Orientation::SaveData(save_ptree, root);
+   // Orientation::SaveData(save_ptree, root);
 //    BaseDrawable::SaveData(save_ptree, root);
     SpaceObject::SaveData(save_ptree, root);
     Planetoid::SaveData(save_ptree, root);
@@ -187,7 +187,7 @@ void Star::Save(boost::property_tree::ptree& save_ptree) const
 void Star::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    Orientation::LoadData(load_ptree);
+//    Orientation::LoadData(load_ptree);
 //    BaseDrawable::LoadData(load_ptree);
     SpaceObject::LoadData(load_ptree);
     Planetoid::LoadData(load_ptree);
@@ -198,7 +198,7 @@ void Star::Load(const boost::property_tree::ptree& load_ptree)
 void Star::Resolve()
 {
     Base::ResolveData();
-    Orientation::ResolveData();
+ //   Orientation::ResolveData();
 //    BaseDrawable::ResolveData();
     SpaceObject::ResolveData();
     Planetoid::ResolveData();

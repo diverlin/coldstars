@@ -16,11 +16,12 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef DRIVECOMPLEX_HPP
-#define DRIVECOMPLEX_HPP
+#pragma once
 
-#include <jeti/PathVisual.hpp>
+//#include <jeti/PathVisual.hpp>
 #include <meti/VectorUtils.hpp>
+
+#include <vector>
 
 class Vehicle;
 namespace jeti {
@@ -92,8 +93,8 @@ class DriveComplex
                 
         bool m_HasTarget;
         
-        jeti::PathVisual m_PathVisualCenter;
-        jeti::PathVisual m_PathVisualTurn;
+//        jeti::PathVisual m_PathVisualCenter;
+//        jeti::PathVisual m_PathVisualTurn;
         
         void ClearPath();
         void CalcPath();      
@@ -106,4 +107,3 @@ class DriveComplex
         void DefineDistance();
 };
 
-#endif

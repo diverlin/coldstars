@@ -57,7 +57,7 @@
 #include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
 
-#include <jeti/particlesystem/DriveEffect.hpp>
+//#include <jeti/particlesystem/DriveEffect.hpp>
 
 #include <slots/ItemSlot.hpp>
 

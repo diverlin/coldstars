@@ -18,10 +18,10 @@
 
 #include "Room.hpp"
 #include "Kosmoport.hpp"
-#include <jeti/Render.hpp>
-#include "../resources/TextureCollector.hpp"
+//#include <jeti/Render.hpp>
+//#include "../resources/TextureCollector.hpp"
  
-#include <jeti/TextureOb.hpp>
+//#include <jeti/TextureOb.hpp>
 
 Room::Room()
 {    
@@ -39,8 +39,8 @@ void Room::RenderBackground(const ceti::Rect& rect) const
            
 void Room::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    save_ptree.put(root+"unresolved.textureOb_background_path", textureOb_background->GetMaterial().texture_path);
-    save_ptree.put(root+"unresolved.owner_kosmoport_id", owner_kosmoport->id());
+//    save_ptree.put(root+"unresolved.textureOb_background_path", textureOb_background->GetMaterial().texture_path);
+//    save_ptree.put(root+"unresolved.owner_kosmoport_id", owner_kosmoport->id());
 }
 
 void Room::LoadData(const boost::property_tree::ptree& load_ptree)

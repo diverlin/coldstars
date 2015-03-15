@@ -23,7 +23,7 @@
 #include <types/StatusTypes.hpp>
 
 #include <slots/BaseSlot.hpp>
-#include <jeti/PathVisual.hpp>  // !!!
+//#include <jeti/PathVisual.hpp>  // !!!
 
 class Turrel; 
 class BaseItem;
@@ -130,10 +130,10 @@ class ItemSlot : public BaseSlot
         
         void UpdateVehiclePropetries() const;
         
-        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
-        virtual void RenderItem(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
-        void RenderMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*) const;
-        void RenderTargetMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*, jeti::TextureOb*) const;
+//        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
+//        virtual void RenderItem(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
+//        void RenderMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*) const;
+//        void RenderTargetMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*, jeti::TextureOb*) const;
         
         void DropItemToSpace();
         
@@ -165,7 +165,7 @@ class ItemSlot : public BaseSlot
         ItemSlot* m_Subtarget;      
         
         int m_HitProbability;
-        jeti::PathVisual m_VisualPath;    // !!!
+//        jeti::PathVisual m_VisualPath;    // !!!
         
         bool CheckItemInsertion(BaseItem*) const;  
         

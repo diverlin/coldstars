@@ -19,12 +19,10 @@
 
 #include "Ship.hpp"
 
-//#include <ceti/StringUtils.hpp>
+
 #include <common/Logger.hpp>
 
 #include <world/starsystem.hpp>
-
-#include <effects/Shield.hpp>
 
 #include <items/equipment/GrappleEquipment.hpp>
 
@@ -33,7 +31,6 @@
 
 #include <pilots/Npc.hpp>
 
-#include <jeti/TextureOb.hpp>
 
 
 Ship::Ship(int id)
@@ -46,9 +43,9 @@ Ship::Ship(int id)
 /* virtual override final */
 Ship::~Ship()
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
+#if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~Ship("+std::to_string(id())+")");
-    #endif
+#endif
 } 
 
 
@@ -76,7 +73,7 @@ Ship::~Ship()
 //    GetInfo().addNameStr("scan:");          GetInfo().addValueStr( std::to_string(GetProperties().scan) );
 //    GetInfo().addNameStr("price:");         GetInfo().addValueStr( std::to_string(GetDataKorpus().price) );
 //    GetInfo().addNameStr("pos:");           GetInfo().addValueStr( meti::str(center()) );
-        
+
 //    if (GetProperties().grab_radius > 0)
 //    {
 //        std::string grab_str = GetSlotGrapple()->GetGrappleEquipment()->GetTargetStr();
@@ -94,19 +91,18 @@ Ship::~Ship()
 void Ship::UpdateInSpace(int time, bool show_effect)
 {   
     checkDeath(show_effect);
-    GetComplexProtector().GetShieldEffect()->Update();
-GetComplexDrive().UpdatePosition(); // debug
-            
+//    GetComplexProtector().GetShieldEffect()->Update();
+    GetComplexDrive().UpdatePosition(); // debug
+
     if (time > 0)
     {
         UpdateSpecialAction();
         
         GetOwnerNpc()->UpdateInSpace(time, show_effect);
-        updateOrientation();   
+        updateOrientation();
         GetComplexWeapon().Fire(time, GetOwnerNpc()->GetSkills().GetAttackNormalized(), show_effect);
         
-        if (GetProperties().speed > 0) 
-        { 
+        if (GetProperties().speed > 0) {
             GetComplexDrive().UpdatePosition();
         }
         
@@ -120,20 +116,20 @@ GetComplexDrive().UpdatePosition(); // debug
 //    //{
 //        //RenderGrabTrail(render);
 //    //}
-        
+
 //    RenderKorpus(render);
-    
+
 //    //if (GetDataKorpus().draw_turrels == true)
 //    //{
 //        //GetComplexWeapon().RenderTurrels();
 //    //}
-    
+
 //    //if (GetProperties().speed > 0)
 //    //{
 //        //RenderDriveEffect(scale , 1.0 - GetColor().a);
 //        //starsystem()->RestoreSceneColor();
 //    //}
-    
+
 ////    if (GetProperties().shield_effect_enabled == true)
 ////    {
 ////        RenderShieldEffect(render, 1.0f - GetColor().a);
@@ -145,9 +141,9 @@ GetComplexDrive().UpdatePosition(); // debug
 //    setCenter(center);
 //    //SetAngleZ(0);
 //    updateOrientation();
-    
+
 //    RenderKorpus(render);
-    
+
 //    if (GetDataKorpus().draw_turrels == true)
 //    {
 //        GetComplexWeapon().RenderTurrels();
@@ -156,23 +152,23 @@ GetComplexDrive().UpdatePosition(); // debug
 
 void Ship::SaveData(boost::property_tree::ptree&, const std::string&) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Ship("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
-    #endif
+#endif
 }
 
 void Ship::LoadData(const boost::property_tree::ptree&)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Ship("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
-    #endif
+#endif
 }
 
 void Ship::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Ship("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
-    #endif
+#endif
 }
 
 /* virtual override final */
@@ -181,7 +177,7 @@ void Ship::Save(boost::property_tree::ptree& save_ptree) const
     const std::string root = "ship."+std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
-    Orientation::SaveData(save_ptree, root);
+    //Orientation::SaveData(save_ptree, root);
     //BaseDrawable::SaveData(save_ptree, root);
     SpaceObject::SaveData(save_ptree, root);
     Vehicle::SaveData(save_ptree, root);
@@ -192,8 +188,8 @@ void Ship::Save(boost::property_tree::ptree& save_ptree) const
 void Ship::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    Orientation::LoadData(load_ptree);
-//    BaseDrawable::LoadData(load_ptree);
+    //Orientation::LoadData(load_ptree);
+    //    BaseDrawable::LoadData(load_ptree);
     SpaceObject::LoadData(load_ptree);
     Vehicle::LoadData(load_ptree);
     Ship::LoadData(load_ptree);
@@ -203,8 +199,8 @@ void Ship::Load(const boost::property_tree::ptree& load_ptree)
 void Ship::Resolve()
 {
     Base::ResolveData();
-    Orientation::ResolveData();
-//    BaseDrawable::ResolveData();
+    //Orientation::ResolveData();
+    //    BaseDrawable::ResolveData();
     SpaceObject::ResolveData();
     Vehicle::ResolveData();
     Ship::ResolveData();

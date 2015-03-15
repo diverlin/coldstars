@@ -20,11 +20,9 @@
 #include "WeaponComplex.hpp"
 #include <math/rand.hpp>
 #include "../common/Logger.hpp"
-//#include <ceti/StringUtils.hpp>
-#include "../spaceobjects/Vehicle.hpp"
-#include "../resources/GuiTextureObCollector.hpp"
 
-#include <jeti/Render.hpp>
+#include "../spaceobjects/Vehicle.hpp"
+
 #include "../parts/Turrel.hpp"
 #include "../items/BaseItem.hpp"
 #include "../slots/ItemSlot.hpp"
@@ -33,7 +31,7 @@
 
 WeaponComplex::WeaponComplex()
 { 
-        owner_vehicle = nullptr;
+    owner_vehicle = nullptr;
 }
 
 WeaponComplex::~WeaponComplex()
@@ -41,12 +39,12 @@ WeaponComplex::~WeaponComplex()
 
 bool WeaponComplex::AddSlot(ItemSlot* slot)
 {
-    slot_weapon_vec.push_back(slot); 
+    slot_weapon_vec.push_back(slot);
     
     return true;
 }
 
-                           
+
 ItemSlot* WeaponComplex::GetEmptyWeaponSlot() const
 {
     for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
@@ -64,7 +62,7 @@ ItemSlot* WeaponComplex::GetEquipedWeakestWeaponSlot() const
 {
     int min_price = 0;
     unsigned int i_min = NONE_ID;
-        
+
     for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
         if (slot_weapon_vec[i]->GetItem() != nullptr)
@@ -87,14 +85,14 @@ ItemSlot* WeaponComplex::GetEquipedWeakestWeaponSlot() const
         return nullptr;
     }
 }
-                
+
 void WeaponComplex::PrepareWeapons()
 {       
     // used once at the begining of turn
     ReloadAllWeapons();
-    ValidateAllWeaponsTarget(); 
+    ValidateAllWeaponsTarget();
 }
-    
+
 void WeaponComplex::ReloadAllWeapons()
 {
     slot_weapon_reloaded_vec.clear();
@@ -113,9 +111,9 @@ void WeaponComplex::ReloadAllWeapons()
     }
     
     fire_delay = meti::getRandInt(7,15);
-    d_fire_delay = TURN_TIME/(slot_weapon_reloaded_vec.size()+1);   
+    d_fire_delay = TURN_TIME/(slot_weapon_reloaded_vec.size()+1);
 }
-  
+
 void WeaponComplex::ActivateAllWeapons()
 {
     for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
@@ -138,7 +136,7 @@ void WeaponComplex::ActivateWeaponsBySubTypeId(TYPE::ENTITY weapon_subtype_id)
     {
         if (slot_weapon_reloaded_vec[i]->GetItem()->subTypeId() == weapon_subtype_id)
         {
-            slot_weapon_reloaded_vec[i]->SelectEvent();        
+            slot_weapon_reloaded_vec[i]->SelectEvent();
         }
     }
 }
@@ -161,8 +159,8 @@ bool WeaponComplex::IsAnyWeaponSelected() const
     for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
     {
         if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
-        { 
-            return true;        
+        {
+            return true;
         }
     }
     
@@ -171,10 +169,10 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 
 void WeaponComplex::SetTarget(SpaceObject* target, ItemSlot* item_slot)
 {                 
-    #if WEAPONSTARGET_LOG_ENABLED == 1 
+#if WEAPONSTARGET_LOG_ENABLED == 1
     if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()), WEAPONSTARGET_LOG_DIP);
     else                        Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->GetItem()->subTypeId()) + " id=" + std::to_string(item_slot->GetItem()->id()), WEAPONSTARGET_LOG_DIP);
-    #endif   
+#endif
 
     target->remeberAgressor(owner_vehicle);
 
@@ -194,14 +192,14 @@ void WeaponComplex::SetTarget(SpaceObject* target, ItemSlot* item_slot)
                         {
                             weapon_slot.SetTarget(target, item_slot);
                         }
-                        #if WEAPONSTARGET_LOG_ENABLED == 1 
+#if WEAPONSTARGET_LOG_ENABLED == 1
                         else
                         {
-                            Logger::Instance().Log(getTargetStatusStr(status), WEAPONSTARGET_LOG_DIP); 
+                            Logger::Instance().Log(getTargetStatusStr(status), WEAPONSTARGET_LOG_DIP);
                         }
-                        #endif 
+#endif
                     }
-                } 
+                }
             }
         }
     }
@@ -212,7 +210,7 @@ void WeaponComplex::Fire(int timer, float attack_rate, bool show_effect)
     if (timer < TURN_TIME - fire_delay)
     {
         for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); ++it)
-        {    
+        {
             ItemSlot& weapon_slot = **it; // shortcut
             if (weapon_slot.GetTarget() != nullptr)
             {
@@ -225,21 +223,21 @@ void WeaponComplex::Fire(int timer, float attack_rate, bool show_effect)
                     }
                 }
                 else
-                {                  
+                {
                     weapon_slot.ResetTarget();
-                }    
-                    
+                }
+
                 it = slot_weapon_reloaded_vec.erase(it);
             }
         }
-    }     
+    }
 }
 
 void WeaponComplex::ValidateAllWeaponsTarget()
 {
     for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
-        if (slot_weapon_vec[i]->GetTarget() != nullptr) 
+        if (slot_weapon_vec[i]->GetTarget() != nullptr)
         {
             if (slot_weapon_vec[i]->ValidateTarget() != STATUS::TARGET_OK)
             {
@@ -258,16 +256,16 @@ void WeaponComplex::UpdateFireAbility()
     for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
         if (slot_weapon_vec[i]->GetItem() != nullptr)
-        { 
+        {
             if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
-            {        
+            {
                 int radius = slot_weapon_vec[i]->GetItemRadius();
                 if ( (radius < radius_min) or (radius_min == 0) )
                 {
                     radius_min = radius;
                 }
-                total_damage += slot_weapon_vec[i]->GetItemDamage(); 
-                total_radius += slot_weapon_vec[i]->GetItemRadius(); 
+                total_damage += slot_weapon_vec[i]->GetItemDamage();
+                total_radius += slot_weapon_vec[i]->GetItemRadius();
             }
         }
     }
@@ -278,13 +276,13 @@ void WeaponComplex::RenderTurrels() const
     for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
         if (slot_weapon_vec[i]->GetItem() != nullptr)
-        { 
+        {
             if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
-            {    
-                //slot_weapon_vec[i]->GetTurrel()->Render(owner_vehicle->GetAngle().z);    // angle    
+            {
+                //slot_weapon_vec[i]->GetTurrel()->Render(owner_vehicle->GetAngle().z);    // angle
             }
         }
-    } 
+    }
 }
 
 void WeaponComplex::RenderWeaponsRange()
@@ -293,8 +291,8 @@ void WeaponComplex::RenderWeaponsRange()
     {
         if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
         {
-           slot_weapon_reloaded_vec[i]->UpdateRange(GuiTextureObCollector::Instance().dot_red);
-           slot_weapon_reloaded_vec[i]->DrawRange(meti::vec2(owner_vehicle->center()));
+            //slot_weapon_reloaded_vec[i]->UpdateRange(GuiTextureObCollector::Instance().dot_red);
+            slot_weapon_reloaded_vec[i]->DrawRange(meti::vec2(owner_vehicle->center()));
         }
     }
 }
@@ -304,12 +302,12 @@ void WeaponComplex::RenderWeaponIcons() const
     for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
         if (slot_weapon_vec[i]->GetItem() != nullptr ) //?? ideally this is not needed, if item == nullptr< the target set to nullptr
-        {  
+        {
             if (slot_weapon_vec[i]->GetTarget() != nullptr )
-            {       
+            {
                 //Rect _rect(slot_weapon_vec[i]->GetTarget()->center().x - 40/2 + 23*i, slot_weapon_vec[i]->GetTarget()->center().y + 40/2, 20, 20);
                 //drawTexturedRect(slot_weapon_vec[i]->GetItem()->GetTextureOb(), _rect, -2.0);
-            }        
+            }
         }
     }
 }

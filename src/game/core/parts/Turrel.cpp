@@ -19,7 +19,7 @@
 #include "Turrel.hpp"
 
 #include "../slots/ItemSlot.hpp"
-#include <jeti/Render.hpp>
+//#include <jeti/Render.hpp>
 #include "../spaceobjects/SpaceObject.hpp"
 
 #include "../common/Logger.hpp"

@@ -17,14 +17,11 @@
 */
 
 
-#ifndef ORBIT_HPP
-#define ORBIT_HPP
+#pragma once
 
-#include <jeti/PathVisual.hpp>
-
-namespace jeti {
-class Renderer;
-}
+//#include <jeti/PathVisual.hpp>
+#include <glm/glm.hpp>
+#include <vector>
 
 class Orbit
 {
@@ -43,16 +40,15 @@ class Orbit
         
         void UpdatePosition();
 
-        void UpdatePathVisualisation();
-        void DrawPath(const jeti::Renderer&);
+//        void UpdatePathVisualisation();
+//        void DrawPath(const jeti::Renderer&);
 
     private:
-        jeti::PathVisual m_VisualOrbitPath;
-        jeti::PathVisual m_VisualOrbitTurn;
+//        jeti::PathVisual m_VisualOrbitPath;
+//        jeti::PathVisual m_VisualOrbitTurn;
                 
         std::vector<glm::vec3> m_Coords_vec;
         int m_Len;
         int m_It; 
 };
 
-#endif 

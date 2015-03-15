@@ -19,8 +19,7 @@
 #include "VehicleSlot.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../spaceobjects/Ship.hpp"
-#include <jeti/Render.hpp>
-//#include <ceti/StringUtils.hpp>
+
 #include "../common/Logger.hpp"
 
 #include "../dock/Angar.hpp"

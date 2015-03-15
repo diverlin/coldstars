@@ -24,8 +24,6 @@
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
 
-#include <resources/TextureCollector.hpp>
-
 #include <pilots/Npc.hpp>
 
 #include <ai/aiModel/AiModelCollector.hpp>

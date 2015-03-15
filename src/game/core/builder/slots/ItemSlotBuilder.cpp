@@ -23,9 +23,9 @@
 #include <common/IdGenerator.hpp>
 #include <common/Logger.hpp>
 
-#include <resources/MeshCollector.hpp>
-#include <resources/TextureCollector.hpp>
-#include <jeti/TextureOb.hpp>
+//#include <resources/MeshCollector.hpp>
+//#include <resources/TextureCollector.hpp>
+//#include <jeti/TextureOb.hpp>
 
 #include <common/Global.hpp>
 
@@ -52,14 +52,14 @@ ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
     
     global::get().entitiesManager().RegisterEntity(item_slot);
     
-    jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);
-    item_slot->SetTextureOb(texOb_slot);
+    //jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);
+//    item_slot->SetTextureOb(texOb_slot);
     
     if (subtype_id == TYPE::ENTITY::WEAPON_SLOT_ID)
     {
         Turrel* turrel = nullptr;
-        jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-        jeti::TextureOb* texOb_turrel = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL_ID);
+//        jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//        jeti::TextureOb* texOb_turrel = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL_ID);
         try 
         { 
             turrel = new Turrel(item_slot); 
@@ -88,8 +88,8 @@ ItemSlot* GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY subtype_id)
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation");
     }
     
-    jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);
-    item_slot->SetTextureOb(texOb_slot);
+//    jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);
+//    item_slot->SetTextureOb(texOb_slot);
     
     return item_slot;
 }

@@ -81,8 +81,8 @@ void DroidEquipment::CountPrice()
 
 void DroidEquipment::AddUniqueInfo()
 {
-        info.addTitleStr("DROID");
-       info.addNameStr("repair:");     info.addValueStr(GetRepairStr());
+//    info.addTitleStr("DROID");
+//    info.addNameStr("repair:");     info.addValueStr(GetRepairStr());
 }
              
              

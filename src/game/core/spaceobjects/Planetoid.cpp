@@ -19,7 +19,7 @@
 
 #include "Planetoid.hpp"
 
-#include <jeti/Render.hpp>
+//#include <jeti/Render.hpp>
 
 #include <common/Logger.hpp> 
 //#include <ceti/StringUtils.hpp>

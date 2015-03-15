@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <effects/ShockWaveEffect.hpp> //depr
+//#include <effects/ShockWaveEffect.hpp> //depr
 #include <spaceobjects/Planetoid.hpp>
 
 class BlackHole : public Planetoid
@@ -28,11 +28,11 @@ class BlackHole : public Planetoid
         BlackHole(int);
         virtual ~BlackHole();
 
-        void BindShockWaveEffect(ShockWaveEffect* shockwave) { this->shockwave = shockwave; };
+        //void BindShockWaveEffect(ShockWaveEffect* shockwave) { this->shockwave = shockwave; };
         
         void setCenter(const glm::vec3&);
         
-        ShockWaveEffect* GetShockWaveEffect() const { return shockwave; };
+//        ShockWaveEffect* GetShockWaveEffect() const { return shockwave; };
         
         void UpdateInSpace(int, bool);
         
@@ -41,7 +41,7 @@ class BlackHole : public Planetoid
         virtual void Resolve();
         
     private:
-        ShockWaveEffect* shockwave;
+//        ShockWaveEffect* shockwave;
         
 //        void UpdateInfo();
         

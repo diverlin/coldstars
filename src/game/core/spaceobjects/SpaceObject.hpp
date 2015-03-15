@@ -20,7 +20,7 @@
 #pragma once
 
 #include <common/Base.hpp>
-#include <jeti/Orientation.hpp>
+#include <ceti/Orientation.hpp>
 #include <struct/LifeData.hpp>
 #include <types/PlaceTypes.hpp>
 
@@ -32,7 +32,7 @@ struct UnresolvedDataSpaceObject
     int starsystem_id;     
 }; 
 
-class SpaceObject : public jeti::Orientation, public Base
+class SpaceObject : public ceti::Orientation, public Base
 {
     public:      
         SpaceObject();

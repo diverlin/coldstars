@@ -22,9 +22,9 @@
 class EntitiesManager;
 class Config;
 
-namespace jeti {
-class Config;
-}
+//namespace jeti {
+//class Config;
+//}
 
 class global
 {
@@ -33,7 +33,7 @@ class global
 
         EntitiesManager& entitiesManager() { return *m_entitiesManager; }
         Config& config() { return *m_config; }
-        jeti::Config& configVideo() { return *m_configVideo; }
+//        jeti::Config& configVideo() { return *m_configVideo; }
 
     private:
         global();
@@ -43,5 +43,5 @@ class global
 
         EntitiesManager* m_entitiesManager;
         Config* m_config;
-        jeti::Config* m_configVideo;
+//        jeti::Config* m_configVideo;
 };

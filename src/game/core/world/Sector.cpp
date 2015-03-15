@@ -24,7 +24,7 @@
 #include "../common/Global.hpp"
 #include <meti/RandUtils.hpp>
 //#include <ceti/StringUtils.hpp>
-#include "../pilots/Player.hpp"
+//#include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
 
 #include "../struct/StarSystemsConditionData.hpp"

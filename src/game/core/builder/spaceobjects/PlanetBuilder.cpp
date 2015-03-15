@@ -20,8 +20,8 @@
 #include "../CommonBuilderHeaders.hpp"
 #include "../../spaceobjects/Planet.hpp"
 
-#include <effects/Atmosphere.hpp>
-#include <effects/Ring.hpp>
+//#include <effects/Atmosphere.hpp>
+//#include <effects/Ring.hpp>
 
 #include <types/MeshTypes.hpp>
 
@@ -100,7 +100,7 @@ void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
     //if (getRandBool()) 
     {
         //jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ATMOSPHERE_ID);
-        Atmosphere* atmosphere = new Atmosphere();
+        //Atmosphere* atmosphere = new Atmosphere();
         //alpitodorender atmosphere->SetRenderData(mesh, textureOb, 1.04f*scale);
         //alpitodorender planet->AddDecoration(atmosphere);
     }

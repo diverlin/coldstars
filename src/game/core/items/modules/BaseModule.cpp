@@ -36,7 +36,7 @@ BaseModule::~BaseModule ()
 
 void BaseModule::AddCommonInfo()
 {
-    info.addNameStr("mass:");      info.addValueStr( std::to_string(data_item.mass) );
+    //info.addNameStr("mass:");      info.addValueStr( std::to_string(data_item.mass) );
 }
 
 void BaseModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

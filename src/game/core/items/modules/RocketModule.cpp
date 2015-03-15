@@ -38,7 +38,7 @@ RocketModule::~RocketModule()
 
 /* virtual */
 void RocketModule::AddUniqueInfo()
-{
+{/*
     info.addTitleStr("rocket module"); 
     if (ammo_max_add != 0)
     {
@@ -51,7 +51,7 @@ void RocketModule::AddUniqueInfo()
     if (radius_add != 0)
     {
         info.addNameStr("radius_add:");     info.addValueStr(std::to_string(radius_add));
-    } 
+    } */
 }
 
 

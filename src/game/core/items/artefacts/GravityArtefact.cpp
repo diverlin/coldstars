@@ -37,14 +37,14 @@ GravityArtefact::~GravityArtefact ()
 /* virtual */
 void GravityArtefact::AddUniqueInfo()
 {
-    info.addTitleStr("gravity artefact");
-    info.addNameStr("gravity:");      info.addValueStr( std::to_string(gravity) );
+//    info.addTitleStr("gravity artefact");
+//    info.addNameStr("gravity:");      info.addValueStr( std::to_string(gravity) );
 }
 
 /* virtual */
 void GravityArtefact::AddCommonInfo()
 {
-    info.addNameStr("mass:");      info.addValueStr( std::to_string(data_item.mass) );
+//    info.addNameStr("mass:");      info.addValueStr( std::to_string(data_item.mass) );
 }
 
 /* virtual */

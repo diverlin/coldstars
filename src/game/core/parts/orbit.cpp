@@ -19,7 +19,7 @@
 #include <cmath>
 #include "orbit.hpp"
 #include "../common/constants.hpp"
-#include <jeti/Render.hpp>
+//#include <jeti/Render.hpp>
 
 
 Orbit::Orbit()
@@ -94,17 +94,17 @@ void Orbit::UpdatePosition()
     else                 { m_It=0; }
 }    
 
-void Orbit::UpdatePathVisualisation()
-{
-    m_VisualOrbitPath.FillData(m_Coords_vec, 30, 10);
-    m_VisualOrbitTurn.FillData(m_Coords_vec, TURN_TIME, 13);
-}
+//void Orbit::UpdatePathVisualisation()
+//{
+//    m_VisualOrbitPath.FillData(m_Coords_vec, 30, 10);
+//    m_VisualOrbitTurn.FillData(m_Coords_vec, TURN_TIME, 13);
+//}
 
-void Orbit::DrawPath(const jeti::Renderer& render)
-{   
-    UpdatePathVisualisation();   // TOO SLOW
-//    m_VisualOrbitPath.Draw(render);
-//    m_VisualOrbitTurn.Draw(render);
-}
+//void Orbit::DrawPath(const jeti::Renderer& render)
+//{
+//    UpdatePathVisualisation();   // TOO SLOW
+////    m_VisualOrbitPath.Draw(render);
+////    m_VisualOrbitTurn.Draw(render);
+//}
 
 

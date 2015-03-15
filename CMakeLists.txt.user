@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.2.1, 2015-02-09T00:45:10. -->
+<!-- Written by QtCreator 3.2.1, 2015-03-15T16:16:43. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{55f10f4b-b4b4-41f6-a3ca-6f20c0b3e41b}</value>
+  <value type="QByteArray">{6c042b0f-f06d-4bb3-a4ee-1d04823e091b}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -60,16 +60,16 @@
   <valuemap type="QVariantMap">
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Desktop</value>
    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Desktop</value>
-   <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{8760a21c-8123-4a24-a84d-16c17e64d01f}</value>
+   <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">{1511b41b-3541-4b7b-ab7c-9865e508c599}</value>
    <value type="int" key="ProjectExplorer.Target.ActiveBuildConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveDeployConfiguration">0</value>
    <value type="int" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
     <value type="bool" key="CMakeProjectManager.CMakeBuildConfiguration.UseNinja">false</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/home/diverlin/workspace/mine/coldstars-build</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/media/xjeti/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars-build</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
-      <value type="QString" key="CMakeProjectManager.MakeStep.AdditionalArguments">-j4</value>
+      <value type="QString" key="CMakeProjectManager.MakeStep.AdditionalArguments"></value>
       <valuelist type="QVariantList" key="CMakeProjectManager.MakeStep.BuildTargets"/>
       <value type="bool" key="CMakeProjectManager.MakeStep.Clean">false</value>
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -77,18 +77,7 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.MakeStep</value>
      </valuemap>
-     <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.1">
-      <value type="QString" key="CMakeProjectManager.MakeStep.AdditionalArguments"></value>
-      <valuelist type="QVariantList" key="CMakeProjectManager.MakeStep.BuildTargets">
-       <value type="QString">install</value>
-      </valuelist>
-      <value type="bool" key="CMakeProjectManager.MakeStep.Clean">false</value>
-      <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
-      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Make</value>
-      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.MakeStep</value>
-     </valuemap>
-     <value type="int" key="ProjectExplorer.BuildStepList.StepsCount">2</value>
+     <value type="int" key="ProjectExplorer.BuildStepList.StepsCount">1</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Build</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">ProjectExplorer.BuildSteps.Build</value>
@@ -165,15 +154,15 @@
      <value type="int">13</value>
      <value type="int">14</value>
     </valuelist>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">run</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguation.Title">coldstars</value>
     <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.Arguments"></value>
     <value type="bool" key="CMakeProjectManager.CMakeRunConfiguration.UseTerminal">false</value>
-    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory">/media/diverlin/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars-build/</value>
+    <value type="QString" key="CMakeProjectManager.CMakeRunConfiguration.UserWorkingDirectory">/media/xjeti/3e183862-5083-48fc-903c-1674c369d41a/workspace/mine/coldstars-build/</value>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">run</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">coldstars</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.run</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">CMakeProjectManager.CMakeRunConfiguration.coldstars</value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>

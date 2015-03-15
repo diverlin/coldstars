@@ -20,13 +20,13 @@
 
 class ItemSlot; 
 class SpaceObject; 
-class TextureOb;
+//class TextureOb;
 
 #include <ceti/points.hpp>
 #include <common/constants.hpp>
-#include <jeti/Orientation.hpp>
+#include <ceti/Orientation.hpp>
 
-class Turrel : public jeti::Orientation
+class Turrel : public ceti::Orientation
 {
     public:
         Turrel(ItemSlot*);

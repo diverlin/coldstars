@@ -33,7 +33,7 @@
 #include <math/rand.hpp>
 
 #include "../world/starsystem.hpp"
-#include <jeti/particlesystem/DriveEffect.hpp>
+//#include <jeti/particlesystem/DriveEffect.hpp>
 
 #include <meti/VectorUtils.hpp>
 #include <meti/QuaternionUtils.hpp>
@@ -495,8 +495,8 @@ void DriveComplex::UpdatePosition()
 
 void DriveComplex::UpdatePathVisualisation()
 {        
-    m_PathVisualCenter.FillData(m_PathCenterVec, 10, 10);
-    m_PathVisualTurn.FillData(m_PathCenterVec, TURN_TIME, 14);
+//    m_PathVisualCenter.FillData(m_PathCenterVec, 10, 10);
+//    m_PathVisualTurn.FillData(m_PathCenterVec, TURN_TIME, 14);
 }
 
 void DriveComplex::DrawPath(const jeti::Renderer& render)

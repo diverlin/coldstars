@@ -28,10 +28,6 @@
 
 #include <common/Global.hpp>
 
-#include <resources/TextureCollector.hpp>
-#include <resources/MeshCollector.hpp>
-#include <jeti/TextureOb.hpp>
-
 #include <struct/RaceInformationCollector.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -86,8 +82,8 @@ void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, revision_id) 
 
     protection_orig = meti::getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX) * (1 + EQUIPMENT::PROTECTOR::PROTECTION_TECHLEVEL_RATE * (int)tech_level);

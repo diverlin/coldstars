@@ -24,7 +24,7 @@
   
 #include <dock/Kosmoport.hpp>
 
-#include <effects/BaseDecor.hpp>
+//#include <effects/BaseDecor.hpp>
 
 #include <common/Global.hpp>
 #include <world/starsystem.hpp>
@@ -33,7 +33,7 @@
 
 #include <managers/EntitiesManager.hpp>
 
-#include <jeti/Render.hpp>
+//#include <jeti/Render.hpp>
 
 
 Planet::Planet(int id)
@@ -156,7 +156,7 @@ void Planet::Save(boost::property_tree::ptree& save_ptree) const
     std::string root = "planet." + std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
-    Orientation::SaveData(save_ptree, root);
+    //Orientation::SaveData(save_ptree, root);
     SpaceObject::SaveData(save_ptree, root);
     Planetoid::SaveData(save_ptree, root);
     Planet::SaveData(save_ptree, root);
@@ -166,7 +166,7 @@ void Planet::Save(boost::property_tree::ptree& save_ptree) const
 void Planet::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    Orientation::LoadData(load_ptree);
+   // Orientation::LoadData(load_ptree);
     SpaceObject::LoadData(load_ptree);
     Planetoid::LoadData(load_ptree);
     Planet::LoadData(load_ptree);
@@ -176,7 +176,7 @@ void Planet::Load(const boost::property_tree::ptree& load_ptree)
 void Planet::Resolve()
 {
     Base::ResolveData();
-    Orientation::ResolveData();
+    //Orientation::ResolveData();
     SpaceObject::ResolveData();
     Planetoid::ResolveData();
     Planet::ResolveData();

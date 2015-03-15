@@ -26,9 +26,6 @@
 #include <managers/EntitiesManager.hpp>
 
 #include "../slots/ItemSlot.hpp"
-#include <jeti/Render.hpp>
-#include "../resources/TextureCollector.hpp"
-#include <jeti/TextureOb.hpp>
 
 BaseItem::BaseItem()
 :
@@ -116,39 +113,39 @@ void BaseItem::UpdateLock()
     }
 }     
 
-void BaseItem::UpdateInfo()
-{
-    info.clear();
+//void BaseItem::UpdateInfo()
+//{
+////    info.clear();
 
-    AddUniqueInfo();
-    AddCommonInfo();
-}
+//    AddUniqueInfo();
+//    AddCommonInfo();
+//}
 
-void BaseItem::RenderInfo(const jeti::Renderer& render, const glm::vec2& pos)
-{  
-    UpdateInfo();
+//void BaseItem::RenderInfo(const jeti::Renderer& render, const glm::vec2& pos)
+//{
+//    UpdateInfo();
     
-    //render.enable_BLEND();
-    jeti::drawInfoIn2Column(info.title_list, info.value_list, pos);
-    //render.disable_BLEND();
-}
+//    //render.enable_BLEND();
+//    jeti::drawInfoIn2Column(info.title_list, info.value_list, pos);
+//    //render.disable_BLEND();
+//}
 
-/* virtual */
-void BaseItem::Render(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text)
-{
-    RenderKorpus(render, box);
-}
+///* virtual */
+//void BaseItem::Render(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text)
+//{
+//    RenderKorpus(render, box);
+//}
 
-void BaseItem::RenderKorpus(const jeti::Renderer& render, const ceti::Box2D& box)
-{
-    glm::vec2 v(0.0);
-    glm::vec4 c(1.0, 1.0, 1.0, 1.0);
-    glm::vec3 center(box.center().x, box.center().y, GUI::POS_Z);
-    setCenter(center);
-    //SetAngle(box.GetAngle());
-    //SetScale(box.size());
-    //RenderMeshLight(v, c);
-}
+//void BaseItem::RenderKorpus(const jeti::Renderer& render, const ceti::Box2D& box)
+//{
+//    glm::vec2 v(0.0);
+//    glm::vec4 c(1.0, 1.0, 1.0, 1.0);
+//    glm::vec3 center(box.center().x, box.center().y, GUI::POS_Z);
+//    setCenter(center);
+//    //SetAngle(box.GetAngle());
+//    //SetScale(box.size());
+//    //RenderMeshLight(v, c);
+//}
 
 void BaseItem::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {

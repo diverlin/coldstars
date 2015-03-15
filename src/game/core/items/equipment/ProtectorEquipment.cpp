@@ -64,8 +64,8 @@ void ProtectorEquipment::CountPrice()
 
 void ProtectorEquipment::AddUniqueInfo()
 {
-        info.addTitleStr("PROTECTOR");
-        info.addNameStr("protection:");     info.addValueStr(GetProtectionStr());
+//        info.addTitleStr("PROTECTOR");
+//        info.addNameStr("protection:");     info.addValueStr(GetProtectionStr());
 }
 
 std::string ProtectorEquipment::GetProtectionStr()

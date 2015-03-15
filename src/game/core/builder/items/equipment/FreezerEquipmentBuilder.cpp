@@ -28,9 +28,9 @@
 
 #include <common/Global.hpp>
 
-#include <resources/TextureCollector.hpp>
-#include <resources/MeshCollector.hpp>
-#include <jeti/TextureOb.hpp>
+//#include <resources/TextureCollector.hpp>
+//#include <resources/MeshCollector.hpp>
+//#include <jeti/TextureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -85,8 +85,8 @@ void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equip
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::FREEZER_EQUIPMENT_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::FREEZER_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
 
     freeze_orig     = meti::getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX) * (1 + EQUIPMENT::FREEZER::FREEZE_TECHLEVEL_RATE*(int)tech_level);

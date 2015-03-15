@@ -68,8 +68,8 @@ void RadarEquipment::CountPrice()
  
 void RadarEquipment::AddUniqueInfo()
 {
-    info.addTitleStr("RADAR");
-    info.addNameStr("radius:");     info.addValueStr(GetRadiusStr());
+//    info.addTitleStr("RADAR");
+//    info.addNameStr("radius:");     info.addValueStr(GetRadiusStr());
 }
 
 std::string RadarEquipment::GetRadiusStr()
