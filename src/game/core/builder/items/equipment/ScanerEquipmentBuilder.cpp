@@ -28,9 +28,9 @@
 
 #include <common/Global.hpp>
 
-#include <resources/TextureCollector.hpp>
-#include <resources/MeshCollector.hpp>
-#include <jeti/TextureOb.hpp>
+//#include <resources/TextureCollector.hpp>
+//#include <resources/MeshCollector.hpp>
+//#include <jeti/TextureOb.hpp>
 
 #include <struct/RaceInformationCollector.hpp>
 
@@ -86,8 +86,8 @@ void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipmen
         tech_level = TYPE::TECHLEVEL::L0_ID; 
     }
 
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
 
     scan_orig       = meti::getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECHLEVEL_RATE * (int)tech_level);

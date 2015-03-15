@@ -19,14 +19,12 @@
 #pragma once
 
 #include <common/Base.hpp>
-#include <jeti/Orientation.hpp>
-#include <jeti/Render.hpp>
+#include <ceti/Orientation.hpp>
 
 #include <types/MyInt.hpp>
 #include <types/TechLevelTypes.hpp>
 #include <types/RaceTypes.hpp>
 
-#include <text/InfoTable.hpp>
 
 class ItemSlot; 
 namespace ceti {
@@ -58,7 +56,7 @@ struct UnresolvedDataBaseItem
     INTLONGEST item_slot_id;
 };
 
-class BaseItem : public jeti::Orientation, public Base
+class BaseItem : public ceti::Orientation, public Base
 {
     public:
         BaseItem();
@@ -95,11 +93,11 @@ class BaseItem : public jeti::Orientation, public Base
         virtual void UpdateProperties() {};
         virtual void UpdateInStatic() { UpdateLock(); };
         
-        void UpdateInfo();
+//        void UpdateInfo();
         
-        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
-        void RenderKorpus(const jeti::Renderer&, const ceti::Box2D&);
-        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
+//        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
+//        void RenderKorpus(const jeti::Renderer&, const ceti::Box2D&);
+//        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
 
     protected:
         TYPE::RACE race_id;
@@ -116,7 +114,7 @@ class BaseItem : public jeti::Orientation, public Base
         
         ItemSlot* item_slot;
         
-        InfoTable info;  
+//        InfoTable info;
         
         UnresolvedDataBaseItem data_unresolved_BaseItem;
         

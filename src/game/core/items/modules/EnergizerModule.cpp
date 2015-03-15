@@ -39,15 +39,15 @@ EnergizerModule::~EnergizerModule()
 /* virtual */
 void EnergizerModule::AddUniqueInfo()
 {
-    info.addTitleStr("energizer module");
-    if (energy_max_add != 0)
-    { 
-        info.addNameStr("energy_max_add:");  info.addValueStr( std::to_string(energy_max_add) );
-    }
-    if (restoration_add != 0)
-    {
-        info.addNameStr("restoration_add:"); info.addValueStr( std::to_string(restoration_add) );
-    } 
+//    info.addTitleStr("energizer module");
+//    if (energy_max_add != 0)
+//    {
+//        info.addNameStr("energy_max_add:");  info.addValueStr( std::to_string(energy_max_add) );
+//    }
+//    if (restoration_add != 0)
+//    {
+//        info.addNameStr("restoration_add:"); info.addValueStr( std::to_string(restoration_add) );
+//    }
 }
 
 /*virtual*/

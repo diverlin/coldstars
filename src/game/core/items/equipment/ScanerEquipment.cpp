@@ -65,8 +65,8 @@ void ScanerEquipment::CountPrice()
 
 void ScanerEquipment::AddUniqueInfo()
 {
-        info.addTitleStr("SCANER");
-        info.addNameStr("scan:");     info.addValueStr(GetScanStr());
+//    info.addTitleStr("SCANER");
+//    info.addNameStr("scan:");     info.addValueStr(GetScanStr());
 }
 
 std::string ScanerEquipment::GetScanStr()

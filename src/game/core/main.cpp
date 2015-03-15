@@ -17,24 +17,24 @@
 */
 
 #include <iostream>
-#include "resources/init.hpp"
-#include "resources/MeshCollector.hpp"
+//#include "resources/init.hpp"
+//#include "resources/MeshCollector.hpp"
 
 #include "builder/world/GalaxyBuilder.hpp"
-#include "builder/pilots/PlayerBuilder.hpp"
+//#include "builder/pilots/PlayerBuilder.hpp"
 #include <common/Config.hpp>
 
-#include <jeti/Screen.hpp>
-#include <jeti/GlErrorHelper.hpp>
+//#include <jeti/Screen.hpp>
+//#include <jeti/GlErrorHelper.hpp>
 
-#include "gui/UserInputManagerInSpace.hpp"
-#include "gui/ButtonTrigger.hpp"
-#include "gui/GuiActions.hpp"
+//#include "gui/UserInputManagerInSpace.hpp"
+//#include "gui/ButtonTrigger.hpp"
+//#include "gui/GuiActions.hpp"
 
 #include "common/TurnTimer.hpp"
 
 #include "pilots/Npc.hpp"
-#include "pilots/Player.hpp"
+//#include "pilots/Player.hpp"
 
 #include "spaceobjects/Planet.hpp"
 #include "spaceobjects/Vehicle.hpp"
@@ -51,14 +51,14 @@
 #include "dock/Land.hpp"
 
 #include "run_scenario/NormalRunScenario.hpp"
-#include "run_scenario/TestParticlesRunScenario.hpp"
-#include "run_scenario/TestTextRunScenario.hpp"
-#include "run_scenario/TestDrawManySimpleMeshesRunScenario.hpp"
+//#include "run_scenario/TestParticlesRunScenario.hpp"
+//#include "run_scenario/TestTextRunScenario.hpp"
+//#include "run_scenario/TestDrawManySimpleMeshesRunScenario.hpp"
 
-#include "../pureTest/pureTest.cpp"
-#include "../pureTest/threadTest.cpp"
-#include "../pureTest/vectorPerfomanceTest.cpp"
-#include "../pureTest/matrixPerfomanceTest.cpp"
+//#include "../pureTest/pureTest.cpp"
+//#include "../pureTest/threadTest.cpp"
+//#include "../pureTest/vectorPerfomanceTest.cpp"
+//#include "../pureTest/matrixPerfomanceTest.cpp"
 
 enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
 
@@ -68,30 +68,30 @@ int main()
     //runSinglethread();    
     //runVectorPerfomanceTest();
     
-    jeti::Screen::Instance().InitRenderStuff();
-    initGameStuff();
-    jeti::Screen::Instance().GetRender().SetMeshQuad(MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID));
+    //jeti::Screen::Instance().InitRenderStuff();
+    //initGameStuff();
+    //jeti::Screen::Instance().GetRender().SetMeshQuad(MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID));
         
     //runMatrixPerfomanceTest();
         
-    Player* player = PlayerBuilder::Instance().GetNewPlayer();
+    //Player* player = PlayerBuilder::Instance().GetNewPlayer();
     
     BaseRunScenario* run_scenario = nullptr;
     RUN_SCENARIO scenario_type = RUN_SCENARIO::NORMAL_RUN;
     switch(scenario_type) {
         case RUN_SCENARIO::NORMAL_RUN:         { run_scenario = new NormalRunScenario(); break; }
-        case RUN_SCENARIO::TEST_PARTICLES:     { run_scenario = new TestParticlesRunScenario(); break; }    
-        case RUN_SCENARIO::TEST_TEXT:          { run_scenario = new TestTextRunScenario(); break; }
-        case RUN_SCENARIO::TEST_MANY_VAO:      { run_scenario = new TestDrawManySimpleMeshesRunScenario(); break; }
+//        case RUN_SCENARIO::TEST_PARTICLES:     { run_scenario = new TestParticlesRunScenario(); break; }
+//        case RUN_SCENARIO::TEST_TEXT:          { run_scenario = new TestTextRunScenario(); break; }
+//        case RUN_SCENARIO::TEST_MANY_VAO:      { run_scenario = new TestDrawManySimpleMeshesRunScenario(); break; }
         default:                               { std::cout<<"INVALID_RUNSCENARIO"<<std::endl; return EXIT_FAILURE; break; }    
     }
-    run_scenario->Init(player);
+    //run_scenario->Init(player);
     
-    Galaxy* galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();       
+    //Galaxy* galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();
         
-    player->GetNpc()->GetVehicle()->SetGodMode(true);
+    //player->GetNpc()->GetVehicle()->SetGodMode(true);
     //player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
-    player->GetNpc()->GetVehicle()->TEST_DropRandomItemToSpace();
+    //player->GetNpc()->GetVehicle()->TEST_DropRandomItemToSpace();
 
     //Screen::Instance().Resize(global::get().config().SCREEN_WIDTH/1.5, global::get().config().SCREEN_HEIGHT);
     
@@ -109,7 +109,7 @@ int main()
     /** */
     
     // GAME LOOP
-    while (jeti::Screen::Instance().GetWindow().isOpen())
+    //while (jeti::Screen::Instance().GetWindow().isOpen())
     {    
         //std::cout<<player->GetNpc()->GetVehicle()->center().x<<std::endl;
         //std::cout<<player->GetNpc()->GetVehicle()->GetProperties().radar<<std::endl;
@@ -118,17 +118,17 @@ int main()
         TurnTimer::Instance().Update();
 
         God::Instance().Update(GameDate::Instance().GetDate());
-        galaxy->Update(TurnTimer::Instance().GetTurnTick());
+        //galaxy->Update(TurnTimer::Instance().GetTurnTick());
 
-        if ((TurnTimer::Instance().GetTurnEnded() == true) and (UserInputManagerInSpace::Instance().GetNextTurnReady())) {
-            TurnTimer::Instance().NextTurn();
-        } 
+//        if ((TurnTimer::Instance().GetTurnEnded() == true) and (UserInputManagerInSpace::Instance().GetNextTurnReady())) {
+//            TurnTimer::Instance().NextTurn();
+//        }
         /* server code end */
 
         /* client code start */
-        player->UpdatePostTransaction();   
-        player->RunSession(TurnTimer::Instance());  
-        player->UpdatePostTransactionEvent(TurnTimer::Instance()); 
+//        player->UpdatePostTransaction();
+//        player->RunSession(TurnTimer::Instance());
+//        player->UpdatePostTransactionEvent(TurnTimer::Instance());
         /* client code end */
         
         if (TurnTimer::Instance().GetTurnEnded() == true) {
@@ -136,23 +136,23 @@ int main()
 
             bool save_event = global::get().entitiesManager().UpdateSaveRequest();
             bool load_event = global::get().entitiesManager().UpdateLoadRequest();
-            if (load_event == true) {
-                player = global::get().entitiesManager().GetPlayer();
-                galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();
-            }
-            if (save_event == true) {
-                //..
-            }
+//            if (load_event == true) {
+//                player = global::get().entitiesManager().GetPlayer();
+//                galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();
+//            }
+//            if (save_event == true) {
+//                //..
+//            }
         }
 
         // hack
-        if (TurnTimer::Instance().GetTurnTick() > 1) {
-            run_scenario->Update_inDynamic(player);
-        } else  {
-            run_scenario->Update_inStatic(player);        
-        }
+//        if (TurnTimer::Instance().GetTurnTick() > 1) {
+//            run_scenario->Update_inDynamic(player);
+//        } else  {
+//            run_scenario->Update_inStatic(player);
+//        }
 
-        jeti::checkOpenglErrors(__FILE__,__LINE__);
+//        jeti::checkOpenglErrors(__FILE__,__LINE__);
     }
 
     return EXIT_SUCCESS;

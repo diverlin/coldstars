@@ -116,11 +116,11 @@ void RocketEquipment::CountPrice()
 
 void RocketEquipment::AddUniqueInfo()
 {
-    info.addTitleStr("ROCKET");
+//    info.addTitleStr("ROCKET");
     
-    info.addNameStr("ammo:");      info.addValueStr(GetAmmoStr());
-    info.addNameStr("damage:");    info.addValueStr(GetDamageStr());
-    info.addNameStr("radius:");    info.addValueStr(GetRadiusStr());
+//    info.addNameStr("ammo:");      info.addValueStr(GetAmmoStr());
+//    info.addNameStr("damage:");    info.addValueStr(GetDamageStr());
+//    info.addNameStr("radius:");    info.addValueStr(GetRadiusStr());
 }
 
 std::string RocketEquipment::GetAmmoStr()

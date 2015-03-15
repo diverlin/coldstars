@@ -40,23 +40,23 @@ GrappleModule::~GrappleModule()
 /* virtual */
 void GrappleModule::AddUniqueInfo()
 {
-        info.addTitleStr("grapple module");
-        if (strength_add != 0)
-        {
-            info.addNameStr("strength_add:");    info.addValueStr( std::to_string(strength_add) );
-        }
-        if (radius_add != 0)
-        { 
-            info.addNameStr("radius_add:");      info.addValueStr( std::to_string(radius_add) );
-        } 
-        if (speed_add != 0)
-        {
-            info.addNameStr("speed_add:");       info.addValueStr( std::to_string(speed_add) );
-        }
-        if (maxNumItem_add != 0)
-        {
-            info.addNameStr("maxNumItem_add:");  info.addValueStr( std::to_string(maxNumItem_add) );
-        }
+//        info.addTitleStr("grapple module");
+//        if (strength_add != 0)
+//        {
+//            info.addNameStr("strength_add:");    info.addValueStr( std::to_string(strength_add) );
+//        }
+//        if (radius_add != 0)
+//        {
+//            info.addNameStr("radius_add:");      info.addValueStr( std::to_string(radius_add) );
+//        }
+//        if (speed_add != 0)
+//        {
+//            info.addNameStr("speed_add:");       info.addValueStr( std::to_string(speed_add) );
+//        }
+//        if (maxNumItem_add != 0)
+//        {
+//            info.addNameStr("maxNumItem_add:");  info.addValueStr( std::to_string(maxNumItem_add) );
+//        }
 }
 
 /*virtual*/

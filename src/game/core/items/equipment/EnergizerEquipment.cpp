@@ -87,9 +87,9 @@ void EnergizerEquipment::CountPrice()
 
 void EnergizerEquipment::AddUniqueInfo()
 {
-    info.addTitleStr("ENERGYBLOCK");
-    info.addNameStr("energy:");      info.addValueStr(GetEnergyStr());
-    info.addNameStr("restoration:"); info.addValueStr(GetRestorationStr());
+//    info.addTitleStr("ENERGYBLOCK");
+//    info.addNameStr("energy:");      info.addValueStr(GetEnergyStr());
+//    info.addNameStr("restoration:"); info.addValueStr(GetRestorationStr());
 }
 
 std::string EnergizerEquipment::GetEnergyStr()

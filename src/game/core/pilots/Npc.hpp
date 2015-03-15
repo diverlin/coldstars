@@ -16,18 +16,16 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef NPC_HPP
-#define NPC_HPP
+#pragma once
 
 #include <set>
 
-#include "../common/Base.hpp"
+#include <common/Base.hpp>
 
-#include "../pilots/Skills.hpp"
-#include "../ai/StateMachine.hpp"
-#include "Observation.hpp" 
-#include "../text/InfoTable.hpp"
-#include "../pilots/AgressorData.hpp"
+#include <pilots/Skills.hpp>
+#include <ai/StateMachine.hpp>
+#include <pilots/Observation.hpp>
+#include <pilots/AgressorData.hpp>
 
 class BaseAiModel;
 class Vehicle;
@@ -38,17 +36,17 @@ class StarSystem;
 
 struct UnresolvedDataNpc
 {
-    int vehicle_id;    
-    int aiModel_id;
-    
-    Task macrotask;
-    Task microtask;
+        int vehicle_id;
+        int aiModel_id;
+
+        Task macrotask;
+        Task microtask;
 };
 
 class Npc : public Base
 {
-       public:
-        Npc(int, TYPE::ENTITY, TYPE::ENTITY);                      
+    public:
+        Npc(int, TYPE::ENTITY, TYPE::ENTITY);
         virtual ~Npc();
         
         virtual void putChildrenToGarbage() const {};
@@ -67,14 +65,14 @@ class Npc : public Base
         Skills& GetSkills()         { return skills; };
         Vehicle* GetScanTarget()        const { return vehicle_to_scan; };
         Observation& GetObservation()   { return observation; };
-        INTLONGEST GetCredits()  const { return credits; };   
+        INTLONGEST GetCredits()  const { return credits; };
         StateMachine& GetStateMachine() { return state_machine; };
 
         StarSystem* starsystem() const;
 
         void IncreaseCredits(INTLONGEST credits) { this->credits += credits; };
         bool WithdrawCredits(INTLONGEST);
-     
+
         void AddExpirience(int, bool);
         
         void CloneMacroTaskFrom(Npc*);
@@ -89,7 +87,7 @@ class Npc : public Base
         
         //// scanning
         bool CheckPossibilityToScan(Vehicle*);
-        bool ScanProceeding(); 
+        bool ScanProceeding();
         void ResetScanTarget();
         //// scanning
         
@@ -107,12 +105,12 @@ class Npc : public Base
         
         void ApplySkillsStrategy();
         
-        std::string GetAgressorSetString() const;              
+        std::string GetAgressorSetString() const;
 
-       private:
+    private:
         bool is_alive;
         TYPE::RACE race_id;
-        INTLONGEST credits; 
+        INTLONGEST credits;
         
         Player* player;
         Vehicle* vehicle;
@@ -122,7 +120,7 @@ class Npc : public Base
         BaseAiModel* ai_model;
         StateMachine state_machine;
         
-        InfoTable info;
+        //        InfoTable info;
         
         std::set<AgressorData, AgressorDataComparator> data_agressor_set;
         
@@ -137,11 +135,11 @@ class Npc : public Base
         
         void UpdateInfo();
         
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();
 };
 
 
-#endif 
+
 

@@ -17,14 +17,9 @@
 */
 
 #include "BlackHole.hpp"
-#include "../resources/MeshCollector.hpp"
 #include "../common/constants.hpp"
-//#include <ceti/StringUtils.hpp>
 #include <meti/RandUtils.hpp>
 #include "../common/Logger.hpp"
-
-#include "../common/IdGenerator.hpp"
-#include "../resources/TextureCollector.hpp"
 #include "../world/starsystem.hpp"
 
 BlackHole::BlackHole(int id)
@@ -42,10 +37,10 @@ BlackHole::~BlackHole()
     Logger::Instance().Log("___::~BlackHole("+std::to_string(id())+")");
     #endif
     
-    delete shockwave; 
+    //delete shockwave;
 } 
  
-void BlackHole::setCenter(const glm::vec3& center) { setCenter(center); shockwave->setCenter(meti::vec2(center)); }
+void BlackHole::setCenter(const glm::vec3& center) { setCenter(center); /*shockwave->setCenter(meti::vec2(center));*/ }
          
 void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
@@ -54,7 +49,7 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
     if (time > 0)
     {
         setCenter(center()+meti::getRandXYVec3f(1, 2, 0));
-        shockwave->setCenter(meti::vec2(center()));
+//        shockwave->setCenter(meti::vec2(center()));
     
         dataLife().life_time--;
         if (dataLife().life_time < 0)
@@ -67,7 +62,7 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
         }
     }
 
-    shockwave->Update();
+//    shockwave->Update();
 }
 
 //void BlackHole::UpdateInfo()
@@ -110,7 +105,7 @@ void BlackHole::Save(boost::property_tree::ptree& save_ptree) const
     std::string root = "blackhole." + std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
-    Orientation::SaveData(save_ptree, root);
+    //Orientation::SaveData(save_ptree, root);
 //    BaseDrawable::SaveData(save_ptree, root);
     SpaceObject::SaveData(save_ptree, root);
     Planetoid::SaveData(save_ptree, root);
@@ -121,7 +116,7 @@ void BlackHole::Save(boost::property_tree::ptree& save_ptree) const
 void BlackHole::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    Orientation::LoadData(load_ptree);
+ //   Orientation::LoadData(load_ptree);
 //    BaseDrawable::LoadData(load_ptree);
     SpaceObject::LoadData(load_ptree);
     Planetoid::LoadData(load_ptree);
@@ -132,7 +127,7 @@ void BlackHole::Load(const boost::property_tree::ptree& load_ptree)
 void BlackHole::Resolve()
 {
     Base::ResolveData();
-    Orientation::ResolveData();
+   // Orientation::ResolveData();
 //    BaseDrawable::ResolveData();
     SpaceObject::ResolveData();
     Planetoid::ResolveData();

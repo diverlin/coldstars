@@ -28,7 +28,7 @@
 
 //#include <jeti/Render.hpp>
 
-#include <jeti/particlesystem/ExplosionEffect.hpp>
+//#include <jeti/particlesystem/ExplosionEffect.hpp>
 
 #include <slots/ItemSlot.hpp>
 #include <items/BaseItem.hpp>
@@ -156,7 +156,7 @@ void Container::Save(boost::property_tree::ptree& save_ptree) const
     const std::string root = "container." + std::to_string(id()) + ".";
 
     Base::SaveData(save_ptree, root);
-    Orientation::SaveData(save_ptree, root);
+    //Orientation::SaveData(save_ptree, root);
 //    BaseDrawable::SaveData(save_ptree, root);
     SpaceObject::SaveData(save_ptree, root);
     Container::SaveData(save_ptree, root);
@@ -166,7 +166,7 @@ void Container::Save(boost::property_tree::ptree& save_ptree) const
 void Container::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    Orientation::LoadData(load_ptree);
+  //  Orientation::LoadData(load_ptree);
 //    BaseDrawable::LoadData(load_ptree);
     SpaceObject::LoadData(load_ptree);
     Container::LoadData(load_ptree);
@@ -176,7 +176,7 @@ void Container::Load(const boost::property_tree::ptree& load_ptree)
 void Container::Resolve()
 {
     Base::ResolveData();
-    Orientation::ResolveData();
+  //  Orientation::ResolveData();
 //    BaseDrawable::ResolveData();
     SpaceObject::ResolveData();
     Container::ResolveData();

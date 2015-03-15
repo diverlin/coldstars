@@ -17,10 +17,10 @@
 */
 
 #include "garbageEffects.hpp"
-#include "../effects/lazerTrace.hpp"
-#include "../effects/ShockWaveEffect.hpp"
-#include "../text/VerticalFlowText.hpp"
-#include <jeti/particlesystem/Particle.hpp>
+//#include "../effects/lazerTrace.hpp"
+//#include "../effects/ShockWaveEffect.hpp"
+//#include "../text/VerticalFlowText.hpp"
+//#include <jeti/particlesystem/Particle.hpp>
 
 
 GarbageEffects::GarbageEffects()

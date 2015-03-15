@@ -63,8 +63,8 @@ void FreezerEquipment::CountPrice()
 
 void FreezerEquipment::AddUniqueInfo()
 {
-    info.addTitleStr("FREEZER");
-    info.addNameStr("freeze:");     info.addValueStr(GetFreezeStr());
+//    info.addTitleStr("FREEZER");
+//    info.addNameStr("freeze:");     info.addValueStr(GetFreezeStr());
 }
 
 std::string FreezerEquipment::GetFreezeStr()

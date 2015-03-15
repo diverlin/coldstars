@@ -27,9 +27,9 @@
 
 #include "../../../common/Global.hpp"
 
-#include <resources/TextureCollector.hpp>
-#include <resources/MeshCollector.hpp>
-#include <jeti/TextureOb.hpp>
+//#include <resources/TextureCollector.hpp>
+//#include <resources/MeshCollector.hpp>
+//#include <jeti/TextureOb.hpp>
 
 #include <meti/RandUtils.hpp>
 
@@ -75,8 +75,8 @@ GrappleModule* GrappleModuleBuilder::GetNewGrappleModule(int strength_add, int r
             
 void GrappleModuleBuilder::CreateNewInternals(GrappleModule* grapple_module, int strength_add, int radius_add, int speed_add) const
 {   
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
     strength_add   = meti::getRandInt(MODULE::GRAPPLE::STRENGTH_MIN, MODULE::GRAPPLE::STRENGTH_MAX);
     radius_add     = meti::getRandInt(MODULE::GRAPPLE::RADIUS_MIN, MODULE::GRAPPLE::RADIUS_MAX);
     speed_add      = meti::getRandInt(MODULE::GRAPPLE::SPEED_MIN, MODULE::GRAPPLE::SPEED_MAX);

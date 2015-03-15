@@ -17,17 +17,14 @@
 */
 
 
-#ifndef STARSYSTEM_HPP
-#define STARSYSTEM_HPP
+#pragma once
 
 #include <vector>
 #include <spaceobjects/SpaceObject.hpp>
-#include <managers/garbageEffects.hpp>
 
 #include <world/HyperSpace.hpp>
 #include <managers/AsteroidManager.hpp>
 #include <types/RaceTypes.hpp>
-#include <jeti/Render.hpp>
 
 class RocketBullet;
 class Planetoid;
@@ -112,10 +109,10 @@ class StarSystem : public SpaceObject
         TYPE::RACE GetConquerorRaceId() const { return conqueror_race_id; }
         Star* GetStar()          const { return STAR_vec[0]; }
         Sector* GetSector()      const { return sector; }
-        unsigned int GetShockWaveEffectNum()    const { return effect_SHOCKWAVE_vec.size(); }
+//        unsigned int GetShockWaveEffectNum()    const { return effect_SHOCKWAVE_vec.size(); }
         unsigned int GetAsteroidNum()     const { return ASTEROID_vec.size(); }
-        unsigned int GetExplosionEffectNum()     const { return effect_PARTICLESYSTEM_vec.size(); }
-        unsigned int GetTextDamageNum()     const { return text_DAMAGE_vec.size(); }
+//        unsigned int GetExplosionEffectNum()     const { return effect_PARTICLESYSTEM_vec.size(); }
+//        unsigned int GetTextDamageNum()     const { return text_DAMAGE_vec.size(); }
         bool IsAnyActiveParticlesEffectPresent(int) const;
 
         HyperSpace& GetHyperSpace() { return hyperspace; };
@@ -141,7 +138,7 @@ class StarSystem : public SpaceObject
         void Add(DistantNebulaEffect*);
         void Add(DistantStarEffect*);
         
-        void Add(VerticalFlowText*);
+        //void Add(VerticalFlowText*);
         //
         
         void BombExplosionEvent(Container*, bool);
@@ -155,9 +152,9 @@ class StarSystem : public SpaceObject
 
         float CalcResultGravityForce(const glm::vec3&, const glm::vec3&, float) const;
 
-        void DrawBackground(const jeti::Renderer&, const glm::vec2&);
-        void DrawOrbits(const jeti::Renderer&);
-        void DrawPath();
+//        void DrawBackground(const jeti::Renderer&, const glm::vec2&);
+//        void DrawOrbits(const jeti::Renderer&);
+//        void DrawPath();
 
         void Save(boost::property_tree::ptree&) const;
         void Load(const boost::property_tree::ptree&);
@@ -203,15 +200,15 @@ class StarSystem : public SpaceObject
         HyperSpace hyperspace;
 
         // effects
-        std::vector<DistantNebulaEffect*> distantNebulaEffect_vec;
-        std::vector<DistantStarEffect*>   distantStarEffect_vec;
+//        std::vector<DistantNebulaEffect*> distantNebulaEffect_vec;
+//        std::vector<DistantStarEffect*>   distantStarEffect_vec;
 
-        std::vector<LazerTraceEffect*>    effect_LAZERTRACE_vec;
-        std::vector<jeti::BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
-        std::vector<ShockWaveEffect*>     effect_SHOCKWAVE_vec;
-        std::vector<VerticalFlowText*>    text_DAMAGE_vec;
+//        std::vector<LazerTraceEffect*>    effect_LAZERTRACE_vec;
+//        std::vector<jeti::BaseParticleSystem*>  effect_PARTICLESYSTEM_vec;
+//        std::vector<ShockWaveEffect*>     effect_SHOCKWAVE_vec;
+//        std::vector<VerticalFlowText*>    text_DAMAGE_vec;
 
-        GarbageEffects  garbage_effects;
+//        GarbageEffects  garbage_effects;
 
         UnresolvedData data_unresolved_StarSystem;
 
@@ -245,7 +242,6 @@ class StarSystem : public SpaceObject
         friend class God;
 };
 
-#endif 
 
 
 

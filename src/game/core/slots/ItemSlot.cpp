@@ -20,13 +20,12 @@
 #include "ItemSlot.hpp"
 
 #include "../builder/spaceobjects/ContainerBuilder.hpp"
-//#include <ceti/StringUtils.hpp>
+
 #include "../spaceobjects/Vehicle.hpp"
 #include "../spaceobjects/Container.hpp"
 #include "../pilots/Npc.hpp"
-#include <jeti/Render.hpp>
+
 #include "../world/starsystem.hpp"
-#include "../resources/TextureCollector.hpp"
 #include "../parts/Turrel.hpp"
 
 #include "../items/equipment/RocketEquipment.hpp"
@@ -290,30 +289,30 @@ void ItemSlot::UpdateVehiclePropetries() const
     }
 }
    
-/* virtual */
-void ItemSlot::Render(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
-{ 
-    render.DrawQuad(*textureOb, box); 
-    RenderItem(render, box, gui_offset, draw_text);    
-}
+///* virtual */
+//void ItemSlot::Render(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
+//{
+//    render.DrawQuad(*textureOb, box);
+//    RenderItem(render, box, gui_offset, draw_text);
+//}
 
-void ItemSlot::RenderItem(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
-{   
-    if (m_Item) {
-        m_Item->Render(render, box, gui_offset, draw_text);    
-    }
-}
+//void ItemSlot::RenderItem(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
+//{
+//    if (m_Item) {
+//        m_Item->Render(render, box, gui_offset, draw_text);
+//    }
+//}
 
-void ItemSlot::RenderMark(const jeti::Renderer& render, const ceti::Box2D& box, jeti::TextureOb* textureOb_mark) const
-{
-    render.DrawQuad(*textureOb_mark, box); 
-}      
+//void ItemSlot::RenderMark(const jeti::Renderer& render, const ceti::Box2D& box, jeti::TextureOb* textureOb_mark) const
+//{
+//    render.DrawQuad(*textureOb_mark, box);
+//}
 
-void ItemSlot::RenderTargetMark(const jeti::Renderer& render, const ceti::Box2D& box, jeti::TextureOb* textureOb_mask, jeti::TextureOb* textureOb) const
-{
-    render.DrawQuad(*textureOb, box); 
-    render.DrawQuad(*textureOb_mask, box); 
-}     
+//void ItemSlot::RenderTargetMark(const jeti::Renderer& render, const ceti::Box2D& box, jeti::TextureOb* textureOb_mask, jeti::TextureOb* textureOb) const
+//{
+//    render.DrawQuad(*textureOb, box);
+//    render.DrawQuad(*textureOb_mask, box);
+//}
         
 int ItemSlot::GetItemRadius() const
 {       
@@ -368,20 +367,20 @@ int ItemSlot::GetItemDamage() const
 
 void ItemSlot::DropItemToSpace()
 {
-    jeti::TextureOb* textureOb_ = nullptr;
+//    jeti::TextureOb* textureOb_ = nullptr;
            
-    switch (m_Item->typeId())
-    {
-        case TYPE::ENTITY::BOMB_ID: { textureOb_ = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID); break; }
-        default:                      { textureOb_ = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER_ID); break; }
-    }
+//    switch (m_Item->typeId())
+//    {
+//        case TYPE::ENTITY::BOMB_ID: { textureOb_ = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID); break; }
+//        default:                      { textureOb_ = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER_ID); break; }
+//    }
 
-    Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, m_Item);
-    float impulse_strength = 0.5;
-    glm::vec3 impulse_dir(meti::getRandXYVec3Unit());
-    container->addImpulse(impulse_dir, impulse_strength);        
-    GetOwnerVehicle()->starsystem()->AddContainer(container, GetOwnerVehicle()->center());
-    RemoveItem();
+//    Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, m_Item);
+//    float impulse_strength = 0.5;
+//    glm::vec3 impulse_dir(meti::getRandXYVec3Unit());
+//    container->addImpulse(impulse_dir, impulse_strength);
+//    GetOwnerVehicle()->starsystem()->AddContainer(container, GetOwnerVehicle()->center());
+//    RemoveItem();
 }
        
 bool ItemSlot::SwapItem(ItemSlot* slot)
@@ -431,7 +430,7 @@ void ItemSlot::UpdateRange(jeti::TextureOb* _texOb)
     float radius = this->GetItemRadius();
     int size = 6;
     
-    m_VisualPath.FillData(_texOb, radius, size);
+//    m_VisualPath.FillData(_texOb, radius, size);
 }
 
 void ItemSlot::DrawRange(const glm::vec2& offset)

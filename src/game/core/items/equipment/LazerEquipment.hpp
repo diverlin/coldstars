@@ -25,45 +25,45 @@ class ItemSlot;
 
 class LazerEquipment : public BaseEquipment
 {
-        public:
-              LazerEquipment(int);      
-              virtual ~LazerEquipment();
+    public:
+        LazerEquipment(int);
+        virtual ~LazerEquipment();
 
         void SetDamageOrig(int damage_orig) { this->damage_orig = damage_orig; };
         void SetRadiusOrig(int radius_orig) { this->radius_orig = radius_orig; };
-                
+
         int GetDamage() const { return damage; };
         int GetRadius() const { return radius; };
         
-              void FireEvent(SpaceObject*, ItemSlot*, float, bool);
-              
-                     virtual void UpdateProperties();
-                
-              void CountPrice();
-            
-            virtual void Save(boost::property_tree::ptree&) const;
+        void FireEvent(SpaceObject*, ItemSlot*, float, bool);
+
+        virtual void UpdateProperties();
+
+        void CountPrice();
+
+        virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
         virtual void Resolve();
         
-          private:
-                    int damage_orig;
-              int damage_add;
-              int damage;
+    private:
+        int damage_orig;
+        int damage_add;
+        int damage;
 
-              int radius_orig;
-              int radius_add;
-              int radius;
-              
-              jeti::TextureOb* texOb_turrel;
-              jeti::TextureOb* texOb_lazerEffect;
+        int radius_orig;
+        int radius_add;
+        int radius;
 
-             void virtual AddUniqueInfo();
-               std::string GetDamageStr();
-               std::string GetRadiusStr();   
-                
-                void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        //              jeti::TextureOb* texOb_turrel;
+        //              jeti::TextureOb* texOb_lazerEffect;
+
+        void virtual AddUniqueInfo();
+        std::string GetDamageStr();
+        std::string GetRadiusStr();
+
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();      
+        void ResolveData();
 };
 
 #endif 

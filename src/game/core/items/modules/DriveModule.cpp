@@ -38,16 +38,16 @@ DriveModule::~DriveModule()
 /* virtual */
 void DriveModule::AddUniqueInfo()
 { 
-    info.addTitleStr("drive module"); 
-    if (speed_add != 0)
-    { 
-        info.addNameStr("speed_add:");       info.addValueStr( std::to_string(speed_add) );
-    } 
+//    info.addTitleStr("drive module");
+//    if (speed_add != 0)
+//    {
+//        info.addNameStr("speed_add:");       info.addValueStr( std::to_string(speed_add) );
+//    }
     
-    if (hyper_add != 0)
-    { 
-        info.addNameStr("hyper_add:");       info.addValueStr( std::to_string(hyper_add) );
-    }
+//    if (hyper_add != 0)
+//    {
+//        info.addNameStr("hyper_add:");       info.addValueStr( std::to_string(hyper_add) );
+//    }
 }
 
 

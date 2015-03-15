@@ -37,14 +37,14 @@ ProtectorArtefact::~ProtectorArtefact ()
 /* virtual */
 void ProtectorArtefact::AddUniqueInfo()
 {
-    info.addTitleStr("protector artefact");
-    info.addNameStr("protection:");      info.addValueStr( std::to_string(protection) );
+//    info.addTitleStr("protector artefact");
+//    info.addNameStr("protection:");      info.addValueStr( std::to_string(protection) );
 }
 
 /* virtual */
 void ProtectorArtefact::AddCommonInfo()
 {
-    info.addNameStr("mass:");      info.addValueStr( std::to_string(data_item.mass) );
+//    info.addNameStr("mass:");      info.addValueStr( std::to_string(data_item.mass) );
 }
 
 /* virtual */

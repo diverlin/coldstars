@@ -41,18 +41,18 @@ void Bomb::UpdateOwnerAbilities() {}
 /* virtual */         
 void Bomb::AddCommonInfo()
 {
-    info.addNameStr("mass:");        info.addValueStr(std::to_string(data_item.mass));
+//    info.addNameStr("mass:");        info.addValueStr(std::to_string(data_item.mass));
 }
 
 /* virtual */
 void Bomb::AddUniqueInfo()
 {
-    info.addTitleStr("BOMB");
+//    info.addTitleStr("BOMB");
 
-    //info.addNameStr("id/ss_id:");    info.addValueStr(std::to_string(data_id.id) + " / " + std::to_string(starsystem->id()));
-    info.addNameStr("id:");          info.addValueStr(std::to_string(id()));
-    info.addNameStr("damage:");      info.addValueStr(std::to_string(damage));
-    //info.addNameStr("armor:");       info.addValueStr(std::to_string(data_life.armor));
+//    //info.addNameStr("id/ss_id:");    info.addValueStr(std::to_string(data_id.id) + " / " + std::to_string(starsystem->id()));
+//    info.addNameStr("id:");          info.addValueStr(std::to_string(id()));
+//    info.addNameStr("damage:");      info.addValueStr(std::to_string(damage));
+//    //info.addNameStr("armor:");       info.addValueStr(std::to_string(data_life.armor));
 }         
 
 /*virtual*/

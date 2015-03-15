@@ -29,7 +29,7 @@
 
 //#include <jeti/Render.hpp>
 
-#include <resources/GuiTextureObCollector.hpp>
+//#include <resources/GuiTextureObCollector.hpp>
 
 #include <slots/VehicleSlot.hpp> 
 #include <slots/ItemSlot.hpp>
@@ -48,10 +48,10 @@
 #include <items/artefacts/GravityArtefact.hpp>
 #include <items/artefacts/ProtectorArtefact.hpp>
 
-#include <effects/Shield.hpp>
-#include <jeti/particlesystem/DriveEffect.hpp>
-#include <jeti/particlesystem/ExplosionEffect.hpp>
-#include <text/VerticalFlowText.hpp> 
+//#include <effects/Shield.hpp>
+//#include <jeti/particlesystem/DriveEffect.hpp>
+//#include <jeti/particlesystem/ExplosionEffect.hpp>
+//#include <text/VerticalFlowText.hpp>
 
 #include <parts/Turrel.hpp>
 
@@ -69,18 +69,18 @@
 #include <meti/RandUtils.hpp>
 
 Vehicle::Vehicle()
-:
-m_GodMode(false),
-m_SpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID),
-m_OwnerNpc(nullptr),
-m_ParentVehicleSlot(nullptr),
-m_Land(nullptr),
-m_SlotRadar(nullptr),
-m_SlotScaner(nullptr),
-m_SlotEnergizer(nullptr),
-m_SlotGrapple(nullptr),
-m_SlotDroid(nullptr),
-m_SlotFreezer(nullptr)
+    :
+      m_GodMode(false),
+      m_SpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID),
+      m_OwnerNpc(nullptr),
+      m_ParentVehicleSlot(nullptr),
+      m_Land(nullptr),
+      m_SlotRadar(nullptr),
+      m_SlotScaner(nullptr),
+      m_SlotEnergizer(nullptr),
+      m_SlotGrapple(nullptr),
+      m_SlotDroid(nullptr),
+      m_SlotFreezer(nullptr)
 {
     m_ComplexWeapon.SetOwnerVehicle(this);
     m_ComplexDrive.SetOwnerVehicle(this);
@@ -90,9 +90,9 @@ m_SlotFreezer(nullptr)
 /* virtual */
 Vehicle::~Vehicle()
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
+#if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~Vehicle("+std::to_string(id())+")");
-    #endif
+#endif
 } 
 
 /* virtual override */
@@ -111,22 +111,22 @@ void Vehicle::CreateDriveComplexTextureDependedStuff()
 {
     points().addMidLeftPoint();
     points().addMidFarLeftPoint();
-        
+
     //DriveEffect* drive_effect = GetNewDriveEffect(GetTextureOb().GetData().size_id, points().GetpMidLeft(), points().GetpMidFarLeft());
     //m_ComplexDrive.SetDriveEffect(drive_effect);
 }    
 
 void Vehicle::CreateProtectionComplexTextureDependedStuff()
 {
-    m_ComplexProtector.GetShieldEffect()->setParent(this);
+    //    m_ComplexProtector.GetShieldEffect()->setParent(this);
 }
 
 void Vehicle::SetKorpusData(const VehicleKorpusData& data_korpus) 
 { 
-    m_DataKorpus = data_korpus; 
+    m_DataKorpus = data_korpus;
     m_Properties.protection = m_DataKorpus.protection;
 }
-                
+
 GoodsPack* Vehicle::GetGoodsPack() const
 {
     for(unsigned int i=0; i<m_SlotCargo_vec.size(); i++)
@@ -138,17 +138,17 @@ GoodsPack* Vehicle::GetGoodsPack() const
                 return m_SlotCargo_vec[i]->GetGoodsPack();
             }
         }
-    }    
+    }
     
     return nullptr;
 }
-        
+
 /* virtual override final */
 int Vehicle::givenExpirience() const
 {
     return m_OwnerNpc->GetSkills().GetExpirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
 }
-    
+
 bool Vehicle::CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY slot_subtype_id) const
 {
     for (unsigned int i=0; i<m_SlotTotal_vec.size(); i++)
@@ -161,39 +161,39 @@ bool Vehicle::CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY slot_subtype_id) con
     
     return false;
 }
-                    
+
 void Vehicle::AddItemSlot(ItemSlot* slot) 
 { 
-    slot->SetOwner(this); 
-                
+    slot->SetOwner(this);
+
     switch(slot->subTypeId())
     {
-        case TYPE::ENTITY::WEAPON_SLOT_ID:    
+        case TYPE::ENTITY::WEAPON_SLOT_ID:
         {
             float border_start = 0.2;
             float border_end   = 0.8;
             
             float pos_x = meti::getRandFloat(border_start, border_end) - 0.5;
             float pos_y = meti::getRandFloat(border_start, border_end) - 0.5;
-                            
+
             slot->GetTurrel()->setParentCenter(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
-            points().Add(slot->GetTurrel()->pCenter(), slot->GetTurrel()->pParentCenter()); 
-            m_ComplexWeapon.AddSlot(slot); 
+            points().Add(slot->GetTurrel()->pCenter(), slot->GetTurrel()->pParentCenter());
+            m_ComplexWeapon.AddSlot(slot);
             
-            break; 
+            break;
         }
         case TYPE::ENTITY::DRIVE_SLOT_ID:     { m_ComplexDrive.SetDriveSlot(slot); break; }
         case TYPE::ENTITY::BAK_SLOT_ID:       { m_ComplexDrive.SetBakSlot(slot); break; }
         case TYPE::ENTITY::PROTECTOR_SLOT_ID: { m_ComplexProtector.SetProtectorSlot(slot); break; }
         case TYPE::ENTITY::RADAR_SLOT_ID:     { m_SlotRadar  = slot; break; }
-        case TYPE::ENTITY::SCANER_SLOT_ID:    { m_SlotScaner = slot; break; }        
+        case TYPE::ENTITY::SCANER_SLOT_ID:    { m_SlotScaner = slot; break; }
         case TYPE::ENTITY::ENERGIZER_SLOT_ID: { m_SlotEnergizer = slot; break; }
         case TYPE::ENTITY::GRAPPLE_SLOT_ID:   { m_SlotGrapple   = slot; break; }
         case TYPE::ENTITY::DROID_SLOT_ID:     { m_SlotDroid     = slot; break; }
         case TYPE::ENTITY::FREEZER_SLOT_ID:   { m_SlotFreezer   = slot; break; }
     }
-        
-    m_SlotTotal_vec.push_back(slot); 
+
+    m_SlotTotal_vec.push_back(slot);
 
     if ( (slot->subTypeId() != TYPE::ENTITY::ARTEFACT_SLOT_ID) and (slot->subTypeId() != TYPE::ENTITY::CARGO_SLOT_ID) )
     {
@@ -207,16 +207,16 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
     
     if (slot->subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID)
     {
-        m_SlotCargo_vec.push_back(slot); 
+        m_SlotCargo_vec.push_back(slot);
     }
-        
+
 }
 
 bool Vehicle::GetAllItemsFromVehicle(Vehicle* vehicle)
 {
     bool result = true;
     for(unsigned int i=0; i<vehicle->m_SlotTotal_vec.size(); i++)
-    { 
+    {
         if (vehicle->m_SlotTotal_vec[i]->GetItem() != nullptr)
         {
             if (vehicle->m_SlotTotal_vec[i]->subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID)
@@ -232,20 +232,20 @@ bool Vehicle::GetAllItemsFromVehicle(Vehicle* vehicle)
     
     return result;
 }
-                
+
 bool Vehicle::ManageItem(BaseItem* item)
 {
     switch(item->typeId())
     {
         case TYPE::ENTITY::EQUIPMENT_ID:     { return ManageFunctionEquipment(item); break; }
         case TYPE::ENTITY::MODULE_ID:         { return ManageFunctionModule(item); break; }
-        case TYPE::ENTITY::ARTEFACT_ID:     { return ManageFunctionArtefact(item); break; }    
+        case TYPE::ENTITY::ARTEFACT_ID:     { return ManageFunctionArtefact(item); break; }
         case TYPE::ENTITY::GOODS_ID:         { return ManageFunctionGoodsPack(item); break; }
     }
     
     return false;
 } 
-                
+
 bool Vehicle::ManageFunctionGoodsPack(BaseItem* item)
 {
     return MergeIdenticalGoods(item);
@@ -285,10 +285,10 @@ bool Vehicle::ManageFunctionEquipment(BaseItem* item)
             {
                 return item_slot->SwapItem(item->GetItemSlot());
             }
-        }        
+        }
     }
     
-    return false;        
+    return false;
 }     
 
 bool Vehicle::ManageFunctionModule(BaseItem* item)
@@ -299,7 +299,7 @@ bool Vehicle::ManageFunctionModule(BaseItem* item)
         {
             if (m_SlotFunct_vec[i]->GetItem()->subTypeId() == item->GetParentSubTypeId())
             {
-                return ((BaseEquipment*)m_SlotFunct_vec[i]->GetItem())->InsertModule((BaseModule*)item);                
+                return ((BaseEquipment*)m_SlotFunct_vec[i]->GetItem())->InsertModule((BaseModule*)item);
             }
         }
     }
@@ -343,11 +343,11 @@ ItemSlot* const Vehicle::GetEmptyArtefactSlot() const
     
     return nullptr;
 }
-                    
+
 ItemSlot* const Vehicle::GetEmptyCargoSlot()
 {
     for (unsigned int i=0; i<m_SlotCargo_vec.size(); i++)
-    {                  
+    {
         if (m_SlotCargo_vec[i]->GetItem() == nullptr)
         {
             return m_SlotCargo_vec[i];
@@ -370,7 +370,7 @@ ItemSlot* const Vehicle::GetCargoSlotWithGoods(TYPE::ENTITY requested_goods_subt
                     return m_SlotCargo_vec[i];
                 }
             }
-        }                     
+        }
     }
     
     return nullptr;
@@ -378,10 +378,10 @@ ItemSlot* const Vehicle::GetCargoSlotWithGoods(TYPE::ENTITY requested_goods_subt
 
 bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
 {    
-     if (AddItemToCargoSlot(container->GetItemSlot()->GetItem()) == true)
-    {      
+    if (AddItemToCargoSlot(container->GetItemSlot()->GetItem()) == true)
+    {
         container->killSilently();
-                                
+
         return true;
     }
     
@@ -411,7 +411,7 @@ bool Vehicle::AddItemToCargoSlot(BaseItem* item)
 bool Vehicle::AddAndManageItem(BaseItem* item)
 {
     bool result = AddItemToCargoSlot(item);
-                            
+
     if (result == true)
     {
         ManageItem(item);
@@ -419,7 +419,7 @@ bool Vehicle::AddAndManageItem(BaseItem* item)
 
     return result;
 }
-     
+
 void Vehicle::ManageItemsInCargo()
 {
     for (unsigned int i=0; i<m_SlotCargo_vec.size(); i++)
@@ -430,7 +430,7 @@ void Vehicle::ManageItemsInCargo()
         }
     }
 }
-    
+
 void Vehicle::SellItemsInCargo()
 {
     for (unsigned int i=0; i<m_SlotCargo_vec.size(); i++)
@@ -450,17 +450,17 @@ bool Vehicle::SellItem(BaseItem* item)
     int item_mass = item->mass();
     switch(item->typeId())
     {
-        case TYPE::ENTITY::GOODS_ID:        
-        { 
-            earn_money = ((Kosmoport*)m_Land)->GetShop()->BuyGoods((GoodsPack*)item);    
-            break; 
+        case TYPE::ENTITY::GOODS_ID:
+        {
+            earn_money = ((Kosmoport*)m_Land)->GetShop()->BuyGoods((GoodsPack*)item);
+            break;
         }
-        
-        case TYPE::ENTITY::EQUIPMENT_ID: 
-        { 
+
+        case TYPE::ENTITY::EQUIPMENT_ID:
+        {
             earn_money = ((Kosmoport*)m_Land)->GetStore()->BuyItem(item);
-            break; 
-        }        
+            break;
+        }
     }
     
     if (earn_money > 0)
@@ -475,19 +475,19 @@ bool Vehicle::SellItem(BaseItem* item)
         return false;
     }
 }
- 
+
 bool Vehicle::BuyItem(BaseItem* item)
 {
-        if (AddItemToCargoSlot(item) == true)
-        {
-            m_OwnerNpc->IncreaseCredits(-item->GetPrice());
-            
-            return true; 
-        }
-        
-        return false;
+    if (AddItemToCargoSlot(item) == true)
+    {
+        m_OwnerNpc->IncreaseCredits(-item->GetPrice());
+
+        return true;
+    }
+
+    return false;
 }
-                
+
 bool Vehicle::MergeIdenticalGoods(BaseItem* item)
 {
     ItemSlot* item_slot = GetCargoSlotWithGoods(item->subTypeId());
@@ -498,13 +498,13 @@ bool Vehicle::MergeIdenticalGoods(BaseItem* item)
         return true;
     }
     
-    return false;                
+    return false;
 } 
 
 void Vehicle::BindOwnerNpc(Npc* owner_npc)                
 { 
-    m_OwnerNpc = owner_npc; 
-    m_OwnerNpc->SetVehicle(this); 
+    m_OwnerNpc = owner_npc;
+    m_OwnerNpc->SetVehicle(this);
 } 
 
 bool Vehicle::IsObjectWithinRadarRange(SpaceObject* object) const
@@ -512,7 +512,7 @@ bool Vehicle::IsObjectWithinRadarRange(SpaceObject* object) const
     float dist = meti::distance(center(), object->center());
     if (dist < m_Properties.radar)
     {
-            return true;
+        return true;
     }
     
     return false;
@@ -523,7 +523,7 @@ void Vehicle::UpdateSpecialAction()
     switch(m_SpecialActionId)
     {
         case VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID: { break; }
-        
+
         case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID:
         {
             // alpitodorender if (UpdateFadeInEffect() == true)
@@ -532,9 +532,9 @@ void Vehicle::UpdateSpecialAction()
                 m_SpecialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
             }
             
-            break;            
+            break;
         }
-                    
+
         case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:
         {
             // alpitodorender if (UpdateFadeOutEffect() == true)
@@ -551,85 +551,85 @@ void Vehicle::UpdateSpecialAction()
             {
                 HyperJumpEvent(m_ComplexDrive.GetTarget()->starsystem());
             }
-        
+
             break;
         }
-        
+
         case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:
         {
             // alpitodorender if (UpdateFadeOutEffect() == true)
             {
                 m_SpecialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
             }
-        
+
             break;
         }
     }
 }
- 
+
 //// ******** dock/LAUNCHING ******** 
 void Vehicle::HyperJumpEvent(StarSystem* starsystem)
 {
-    #if ENTITY_TRANSACTION_LOG_ENABLED == 1 
+#if ENTITY_TRANSACTION_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::HyperJumpEvent", ENTITY_TRANSACTION_LOG_DIP);
-    #endif   
+#endif
     
     m_ComplexWeapon.DeactivateAllWeapons();
     
     m_SpecialActionId = VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID;
     starsystem->GetHyperSpace().AddVehicle(this);
 }
-                
-                
+
+
 void Vehicle::DockingEvent()
 {
-    #if ENTITY_TRANSACTION_LOG_ENABLED == 1 
+#if ENTITY_TRANSACTION_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::DockingEvent", ENTITY_TRANSACTION_LOG_DIP);
-    #endif
-              
+#endif
+
     m_ComplexWeapon.DeactivateAllWeapons();
-                   
-    switch(m_ComplexDrive.GetTarget()->typeId())                               
+
+    switch(m_ComplexDrive.GetTarget()->typeId())
     {
         case TYPE::ENTITY::PLANET_ID:
         {
-            Planet* planet = ((Planet*)m_ComplexDrive.GetTarget());                
+            Planet* planet = ((Planet*)m_ComplexDrive.GetTarget());
             planet->GetLand()->AddVehicle(this);
-                    
+
             break;
         }
 
         case TYPE::ENTITY::VEHICLE_ID:
-        {     
+        {
             switch(m_ComplexDrive.GetTarget()->subTypeId())
             {
                 case TYPE::ENTITY::SPACESTATION_ID:
                 {
-                            SpaceStation* spacestation = ((SpaceStation*)m_ComplexDrive.GetTarget());
-                                spacestation->GetLand()->AddVehicle(this);
-                        
+                    SpaceStation* spacestation = ((SpaceStation*)m_ComplexDrive.GetTarget());
+                    spacestation->GetLand()->AddVehicle(this);
+
                     break;
                 }
-                
+
                 case TYPE::ENTITY::SHIP_ID:
                 {
                     //..
                     break;
                 }
             }
-        
+
             break;
         }
     }
-        
+
     m_ComplexDrive.ResetTarget();
 }
 
 void Vehicle::LaunchingEvent()
 {
-    #if ENTITY_TRANSACTION_LOG_ENABLED == 1 
+#if ENTITY_TRANSACTION_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::LaunchingEvent", ENTITY_TRANSACTION_LOG_DIP);
-    #endif
+#endif
     
     if (m_ParentVehicleSlot != nullptr)
     {
@@ -643,7 +643,7 @@ void Vehicle::LaunchingEvent()
                 glm::vec3 angle(0,0,angleInD);
                 starsystem()->AddVehicle(this, ((SpaceObject*)m_Land->GetOwner())->center() + offset_pos3, angle, nullptr);
                 m_Land->RemoveVehicle(this);
-    
+
                 break;
             }
                 
@@ -661,7 +661,7 @@ void Vehicle::LaunchingEvent()
         glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
         glm::vec3 angle(0,0,angleInD);
         starsystem()->AddVehicle(this, ((SpaceObject*)m_Land->GetOwner())->center() + offset_pos3, angle, nullptr);
-        m_Land->RemoveVehicle(this); 
+        m_Land->RemoveVehicle(this);
     }
 
     SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID);
@@ -678,40 +678,40 @@ void Vehicle::remeberAgressor(Vehicle* agressor)
 /* virtual */
 void Vehicle::hit(int damage, bool show_effect)
 {
-    #if WEAPONSTARGET_LOG_ENABLED == 1
+#if WEAPONSTARGET_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::Hit", WEAPONSTARGET_LOG_DIP);
-    #endif
+#endif
     
     if (m_GodMode == false)
     {
-    
-    if (m_Properties.energy < damage)
-    {
-        m_Properties.hibernate_mode_enabled = true;
-        UpdatePropertiesProtection();
-    }
-    
-    damage *= (1.0 - m_Properties.protection*0.01f);
-    damage *= m_OwnerNpc->GetSkills().GetDefenceNormalized();
-    
-    dataLife().armor -= damage;
-    
-    if (dataLife().armor < 0)
-    {
-        dataLife().is_alive = false;
-    }
 
-    if (show_effect == true)
-    {
-        if (m_ComplexProtector.GetProtectorSlot()->GetItem() != nullptr)
+        if (m_Properties.energy < damage)
         {
-            m_ComplexProtector.GetShieldEffect()->SetAlpha(1.0);
-        }           
-               
-               VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(center()), COLOR::COLOR4I_RED_LIGHT, collisionRadius());
-               starsystem()->Add(text); 
-           }
-           
+            m_Properties.hibernate_mode_enabled = true;
+            UpdatePropertiesProtection();
+        }
+
+        damage *= (1.0 - m_Properties.protection*0.01f);
+        damage *= m_OwnerNpc->GetSkills().GetDefenceNormalized();
+
+        dataLife().armor -= damage;
+
+        if (dataLife().armor < 0)
+        {
+            dataLife().is_alive = false;
+        }
+
+        if (show_effect == true)
+        {
+            if (m_ComplexProtector.GetProtectorSlot()->GetItem() != nullptr)
+            {
+                //m_ComplexProtector.GetShieldEffect()->SetAlpha(1.0);
+            }
+
+            //VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(center()), COLOR::COLOR4I_RED_LIGHT, collisionRadius());
+            //starsystem()->Add(text);
+        }
+
     }
 }
 
@@ -726,63 +726,63 @@ void Vehicle::postDeathUniqueEvent(bool show_effect)
     
     if (show_effect == true)
     {
-//        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(collisionRadius());
-//        starsystem()->Add(explosion, center());
+        //        jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(collisionRadius());
+        //        starsystem()->Add(explosion, center());
     }
 }
 
 
 void Vehicle::CheckNeedsInStatic()
 {
-        // check armor
-        if (dataLife().armor < 0.5*m_DataKorpus.armor)    { m_Needs.repair_korpus = true; }
-        else                                                { m_Needs.repair_korpus = false; }
+    // check armor
+    if (dataLife().armor < 0.5*m_DataKorpus.armor)    { m_Needs.repair_korpus = true; }
+    else                                                { m_Needs.repair_korpus = false; }
 
-        //check item damages
-        m_Needs.repair_equipment = false;
-        for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++)
+    //check item damages
+    m_Needs.repair_equipment = false;
+    for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++)
+    {
+        if (m_SlotFunct_vec[i]->GetItem() != nullptr)
         {
-                if (m_SlotFunct_vec[i]->GetItem() != nullptr)
+            if (m_SlotFunct_vec[i]->GetItem()->GetDamaged() == true)
+            {
+                m_Needs.repair_equipment = true;
+            }
+        }
+    }
+
+    //check ammo
+    m_Needs.get_ammo = false;
+    for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++)
+    {
+        if (m_SlotFunct_vec[i]->GetItem() != nullptr)
+        {
+            if (m_SlotFunct_vec[i]->GetItem()->subTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID)
+            {
+                if (m_SlotFunct_vec[i]->GetRocketEquipment()->GetAmmo() == 0)
                 {
-                        if (m_SlotFunct_vec[i]->GetItem()->GetDamaged() == true)
-                        {
-                                m_Needs.repair_equipment = true;                                
-                        }
+                    m_Needs.get_ammo = true;
                 }
+            }
         }
-        
-        //check ammo
-        m_Needs.get_ammo = false;
-        for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++)
+    }
+
+    // check fuel
+    m_Needs.get_fuel = false;
+    if (m_ComplexDrive.GetBakSlot() != nullptr)
+    {
+        if (m_ComplexDrive.GetBakSlot()->GetItem() != nullptr)
         {
-                if (m_SlotFunct_vec[i]->GetItem() != nullptr)
-                {
-                        if (m_SlotFunct_vec[i]->GetItem()->subTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID) 
-                        {
-                                if (m_SlotFunct_vec[i]->GetRocketEquipment()->GetAmmo() == 0)
-                                {
-                                        m_Needs.get_ammo = true; 
-                                }
-                        }
-                }
+            if (m_ComplexDrive.GetBakSlot()->GetBakEquipment()->GetFuel() < 0.8*m_ComplexDrive.GetBakSlot()->GetBakEquipment()->GetFuelMax())
+            {
+                m_Needs.get_fuel = true;
+            }
         }
-        
-        // check fuel
-        m_Needs.get_fuel = false;
-        if (m_ComplexDrive.GetBakSlot() != nullptr)
-        {
-                if (m_ComplexDrive.GetBakSlot()->GetItem() != nullptr)
-                {
-                        if (m_ComplexDrive.GetBakSlot()->GetBakEquipment()->GetFuel() < 0.8*m_ComplexDrive.GetBakSlot()->GetBakEquipment()->GetFuelMax())
-                        {
-                                m_Needs.get_fuel = true;
-                        } 
-                }   
-        }
-        
-        // check credits
-        if (m_OwnerNpc->GetCredits() < 1000)    { m_Needs.get_credits = true; }
-        else                                    { m_Needs.get_credits = false; }
+    }
+
+    // check credits
+    if (m_OwnerNpc->GetCredits() < 1000)    { m_Needs.get_credits = true; }
+    else                                    { m_Needs.get_credits = false; }
 }
 
 
@@ -794,8 +794,8 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
     if ( (m_Needs.repair_korpus == true) and (result == true) )
     {
         result = ((Angar*)m_ParentVehicleSlot->GetOwner())->RepairVehicle(this);
-    }        
-  
+    }
+
     // repair equipment
     if ( (m_Needs.repair_equipment == true) and (result == true) )
     {
@@ -809,7 +809,7 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
                 }
             }
         }
-    }        
+    }
     
     // buy ammo
     if ( (m_Needs.get_ammo == true) and (result == true) )
@@ -831,7 +831,7 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
     {
         result = ((Angar*)m_ParentVehicleSlot->GetOwner())->TankUpVehicle(this);
     }
-   
+
     //// check credits
     //if (m_OwnerNpc->GetCredits() < 1000) { m_Needs.get_credits = true; }
     //else                                { m_Needs.get_credits = false; }
@@ -858,9 +858,9 @@ void Vehicle::UpdateAllFunctionalItemsInStatic()
 
 void Vehicle::IncreaseMass(int d_mass)
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::IncreaseMass", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
     
     addMass(d_mass);
     m_Properties.free_space = m_DataKorpus.space - mass();
@@ -869,9 +869,9 @@ void Vehicle::IncreaseMass(int d_mass)
 
 void Vehicle::DecreaseMass(int d_mass)
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::DecreaseMass", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
     
     addMass(-d_mass);
     m_Properties.free_space = m_DataKorpus.space - mass();
@@ -880,29 +880,29 @@ void Vehicle::DecreaseMass(int d_mass)
 
 void Vehicle::UpdatePropertiesSpeed()
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesSpeed", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
     
     // speed calculation ////
     m_Properties.speed = 0;
 
-    if (m_ComplexDrive.GetDriveSlot() != nullptr) 
+    if (m_ComplexDrive.GetDriveSlot() != nullptr)
     {
-        if (m_ComplexDrive.GetDriveSlot()->GetItem() != nullptr) 
+        if (m_ComplexDrive.GetDriveSlot()->GetItem() != nullptr)
         {
-            if (m_ComplexDrive.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)  
+            if (m_ComplexDrive.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)
             {
-                float actual_speed = (m_ComplexDrive.GetDriveSlot()->GetDriveEquipment()->GetSpeed() - mass()*MASS_DECREASE_SPEED_RATE); 
+                float actual_speed = (m_ComplexDrive.GetDriveSlot()->GetDriveEquipment()->GetSpeed() - mass()*MASS_DECREASE_SPEED_RATE);
                 if (actual_speed > 0)
-                { 
+                {
                     if (m_Properties.artefact_gravity > 0)
                     {
-                        m_Properties.speed = (1.0 + m_Properties.artefact_gravity/100.0)*actual_speed;         
+                        m_Properties.speed = (1.0 + m_Properties.artefact_gravity/100.0)*actual_speed;
                     }
                     else
                     {
-                        m_Properties.speed = actual_speed; 
+                        m_Properties.speed = actual_speed;
                     }
                     
                     if (m_ComplexDrive.GetDriveSlot()->GetSelected() == true)
@@ -914,7 +914,7 @@ void Vehicle::UpdatePropertiesSpeed()
                     {
                         m_ComplexDrive.GetDriveSlot()->GetItem()->UseNormalDeterioration();
                     }
-                                           
+
                     m_ComplexDrive.UpdatePath();
                 }
             }
@@ -924,28 +924,28 @@ void Vehicle::UpdatePropertiesSpeed()
 
 void Vehicle::UpdatePropertiesFire()
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesFire", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
     
     m_ComplexWeapon.UpdateFireAbility();
-         
+
     m_Properties.total_damage = m_ComplexWeapon.GetTotalDamage();
     m_Properties.total_radius = m_ComplexWeapon.GetTotalRadius();
 }
 
 void Vehicle::UpdatePropertiesRadar()
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesRadar", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
     
     m_Properties.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
     m_Properties.equipment_radar = false;
     
-       if (m_SlotRadar->GetItem() != nullptr) 
-       {
-        if (m_SlotRadar->GetRadarEquipment()->GetFunctioning() == true)  
+    if (m_SlotRadar->GetItem() != nullptr)
+    {
+        if (m_SlotRadar->GetRadarEquipment()->GetFunctioning() == true)
         {
             m_Properties.radar = m_SlotRadar->GetRadarEquipment()->GetRadius();
             m_Properties.equipment_radar = true;
@@ -955,10 +955,10 @@ void Vehicle::UpdatePropertiesRadar()
 
 void Vehicle::UpdatePropertiesJump()
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesJump", ITEMINFLUENCE_LOG_DIP);
-    #endif
-        
+#endif
+
     m_Properties.hyper = 0;
 
     if (m_ComplexDrive.GetDriveSlot() != nullptr)
@@ -982,7 +982,7 @@ void Vehicle::UpdatePropertiesJump()
                                 m_Properties.hyper = m_ComplexDrive.GetBakSlot()->GetBakEquipment()->GetFuel();
                             }
                         }
-                    } 
+                    }
                 }
             }
         }
@@ -991,9 +991,9 @@ void Vehicle::UpdatePropertiesJump()
 
 void Vehicle::UpdatePropertiesEnergy()
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesEnergy", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
     
     m_Properties.energy = 0;
     m_Properties.hibernate_mode_enabled = true;
@@ -1012,9 +1012,9 @@ void Vehicle::UpdatePropertiesEnergy()
 
 void Vehicle::UpdatePropertiesProtection()
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesProtection", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
     
     m_Properties.protection = m_DataKorpus.protection;
     m_Properties.shield_effect_enabled = false;
@@ -1039,9 +1039,9 @@ void Vehicle::UpdatePropertiesProtection()
 
 void Vehicle::UpdatePropertiesRepair()
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesRepair", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
     
     m_Properties.repair = 0;
 
@@ -1057,9 +1057,9 @@ void Vehicle::UpdatePropertiesRepair()
 
 void Vehicle::IncreaseArmor(int repair)
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::IncreaseArmor", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
     
     dataLife().armor += repair;
     
@@ -1071,9 +1071,9 @@ void Vehicle::IncreaseArmor(int repair)
 
 void Vehicle::UpdatePropertiesFreeze()
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesFreeze", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
     
     m_Properties.freeze = 0;
 
@@ -1088,9 +1088,9 @@ void Vehicle::UpdatePropertiesFreeze()
 
 void Vehicle::UpdatePropertiesScan()
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesScan", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
     
     m_Properties.scan = 0;
 
@@ -1105,13 +1105,13 @@ void Vehicle::UpdatePropertiesScan()
 
 void Vehicle::UpdatePropertiesGrab()
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesGrab", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
 
     m_Properties.grab_strength = 0;
     m_Properties.grab_radius = 0;
-                                            
+
     if (m_DataKorpus.slot_grapple_num != 0)
     {
         if (m_SlotGrapple->GetItem() != nullptr)
@@ -1124,12 +1124,12 @@ void Vehicle::UpdatePropertiesGrab()
         }
     }
 }                  
-        
+
 void Vehicle::UpdateArtefactInfluence()
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdateArtefactInfluence", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
     
     m_Properties.artefact_gravity = 0;
     m_Properties.artefact_protection = 0;
@@ -1147,13 +1147,13 @@ void Vehicle::UpdateArtefactInfluence()
                         m_Properties.artefact_gravity += ((GravityArtefact*)m_SlotArtef_vec[i]->GetItem())->GetGravity();
                         break;
                     }
-    
+
                     case TYPE::ENTITY::PROTECTOR_ARTEFACT_ID:
                     {
                         m_Properties.artefact_protection += ((ProtectorArtefact*)m_SlotArtef_vec[i]->GetItem())->GetProtection();
                         break;
                     }
-                }                      
+                }
             }
         }
     }
@@ -1173,10 +1173,10 @@ void Vehicle::UpdateArtefactInfluence()
 //void Vehicle::RenderStuffWhenFocusedInSpace(const jeti::Renderer& render)
 //{
 //    m_ComplexWeapon.RenderWeaponIcons();
-    
+
 //    RenderRadarRange();
 //    m_ComplexWeapon.RenderWeaponsRange();
-    
+
 //    m_ComplexDrive.DrawPath(render);
 //}
 
@@ -1210,7 +1210,7 @@ void Vehicle::UpdateArtefactInfluence()
 //{
 //    //m_SlotGrapple->GetGrappleEquipment()->RenderGrabTrail(render);
 //}
-        
+
 //void Vehicle::RenderKorpus(const jeti::Renderer& render)
 //{
 //    //render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
@@ -1249,7 +1249,7 @@ void Vehicle::UpdateArtefactInfluence()
 
 bool Vehicle::IsAbleToJumpTo(StarSystem* target_starsystem) const
 {
-     float dist = meti::distance(starsystem()->center(), target_starsystem->center());
+    float dist = meti::distance(starsystem()->center(), target_starsystem->center());
     if (dist < m_Properties.hyper)
     {
         return true;
@@ -1257,7 +1257,7 @@ bool Vehicle::IsAbleToJumpTo(StarSystem* target_starsystem) const
     
     return false;
 }
-        
+
 void Vehicle::RepairKorpusOnAmount(int amount)
 {
     dataLife().armor += amount;
@@ -1319,21 +1319,21 @@ void Vehicle::LockRandomItem(int locked_turns)
     {
         unsigned int _rand = meti::getRandInt(0, _equiped_slot_vec.size());
         _equiped_slot_vec[_rand]->GetItem()->LockEvent(locked_turns);
-    }    
+    }
 }
 
 bool Vehicle::TryToConsumeEnergy(int energy)
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::TryToConsumeEnergy(energy="+std::to_string(energy)+")", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
     
     if (m_Properties.energy > energy)
     {
         m_Properties.energy -= energy;
-        m_SlotEnergizer->GetEnergizerEquipment()->DecreaseEnergy(energy); 
+        m_SlotEnergizer->GetEnergizerEquipment()->DecreaseEnergy(energy);
         
-        return true;        
+        return true;
     }
     
     return false;
@@ -1341,9 +1341,9 @@ bool Vehicle::TryToConsumeEnergy(int energy)
 
 bool Vehicle::TryToGenerateEnergy(int energy)
 {
-    #if ITEMINFLUENCE_LOG_ENABLED == 1
+#if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::TryToGenerateEnergy(energy="+std::to_string(energy)+")", ITEMINFLUENCE_LOG_DIP);
-    #endif
+#endif
     
     int energy_max = m_SlotEnergizer->GetEnergizerEquipment()->GetEnergyMax();
     if (m_Properties.energy < energy_max)
@@ -1355,7 +1355,7 @@ bool Vehicle::TryToGenerateEnergy(int energy)
         }
         
         m_Properties.energy += energy;
-        m_SlotEnergizer->GetEnergizerEquipment()->IncreaseEnergy(energy); 
+        m_SlotEnergizer->GetEnergizerEquipment()->IncreaseEnergy(energy);
         
         if (m_Properties.hibernate_mode_enabled == true)
         {
@@ -1378,23 +1378,23 @@ STATUS Vehicle::CheckGrabStatus() const
     if (m_SlotGrapple->GetItem() != nullptr)
     {
         if (m_SlotGrapple->GetGrappleEquipment()->GetDamaged() == true)
-        {  
+        {
             status = STATUS::ITEM_DAMAGED;
         }
         
         if (m_SlotGrapple->GetGrappleEquipment()->GetLocked() != 0)
-        {  
+        {
             status = STATUS::ITEM_LOCKED;
-        }        
+        }
     }
     else
     {
         status = STATUS::ITEMSLOT_EMPTY;
-    }    
+    }
 
-    return status;    
+    return status;
 }
-        
+
 void Vehicle::DropRandomItemToSpace()
 {
     std::vector<ItemSlot*> _equiped_slot_vec;
@@ -1410,7 +1410,7 @@ void Vehicle::DropRandomItemToSpace()
     if (_equiped_slot_vec.size() > 0)
     {
         _equiped_slot_vec[meti::getRandInt(0, _equiped_slot_vec.size()-1)]->DropItemToSpace();
-    }        
+    }
 }
 
 void Vehicle::UpdateGrappleMicroProgram_inDynamic()
@@ -1418,123 +1418,123 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
     if (m_Properties.grab_radius > 0)
     {
         m_SlotGrapple->GetGrappleEquipment()->UpdateGrabScenarioProgram_inDynamic();
-    }     
+    }
 }
-                
+
 void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Vehicle("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
-    #endif
+#endif
 
-    save_ptree.put(root+"m_DataKorpus.space", m_DataKorpus.space);           
-    save_ptree.put(root+"m_DataKorpus.armor", m_DataKorpus.armor);  
-    save_ptree.put(root+"m_DataKorpus.protection", m_DataKorpus.protection); 
-    save_ptree.put(root+"m_DataKorpus.temperature", m_DataKorpus.temperature); 
+    save_ptree.put(root+"m_DataKorpus.space", m_DataKorpus.space);
+    save_ptree.put(root+"m_DataKorpus.armor", m_DataKorpus.armor);
+    save_ptree.put(root+"m_DataKorpus.protection", m_DataKorpus.protection);
+    save_ptree.put(root+"m_DataKorpus.temperature", m_DataKorpus.temperature);
 
-    save_ptree.put(root+"m_DataKorpus.price", m_DataKorpus.price); 
-    save_ptree.put(root+"m_DataKorpus.draw_turrels", m_DataKorpus.draw_turrels);            
+    save_ptree.put(root+"m_DataKorpus.price", m_DataKorpus.price);
+    save_ptree.put(root+"m_DataKorpus.draw_turrels", m_DataKorpus.draw_turrels);
 
-    save_ptree.put(root+"m_DataKorpus.slot_grapple_num", m_DataKorpus.slot_grapple_num);  
+    save_ptree.put(root+"m_DataKorpus.slot_grapple_num", m_DataKorpus.slot_grapple_num);
     save_ptree.put(root+"m_DataKorpus.slot_drive_num", m_DataKorpus.slot_drive_num);
-    save_ptree.put(root+"m_DataKorpus.slot_protector_num", m_DataKorpus.slot_protector_num);           
+    save_ptree.put(root+"m_DataKorpus.slot_protector_num", m_DataKorpus.slot_protector_num);
     save_ptree.put(root+"m_DataKorpus.slot_radar_num", m_DataKorpus.slot_radar_num);
     save_ptree.put(root+"m_DataKorpus.slot_scaner_num", m_DataKorpus.slot_scaner_num);
     save_ptree.put(root+"m_DataKorpus.slot_freezer_num", m_DataKorpus.slot_freezer_num);
-    save_ptree.put(root+"m_DataKorpus.slot_weapon_num", m_DataKorpus.slot_weapon_num);           
-           
+    save_ptree.put(root+"m_DataKorpus.slot_weapon_num", m_DataKorpus.slot_weapon_num);
 
-    if (m_ComplexDrive.GetTarget() != nullptr) 
+
+    if (m_ComplexDrive.GetTarget() != nullptr)
     {
         save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", m_ComplexDrive.GetTarget()->id());
         save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_action_id", m_ComplexDrive.GetActionId());
     }
-    else 
+    else
     {
         save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", NONE_ID);
         save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_action_id", NONE_ID);
     }
-               
+
     if (m_Land != nullptr)  { save_ptree.put(root+"data_unresolved_Vehicle.land_id", m_Land->id()); }
     else                     { save_ptree.put(root+"data_unresolved_Vehicle.land_id", NONE_ID); }
     
     if (m_ParentVehicleSlot != nullptr) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", m_ParentVehicleSlot->id()); }
     else                                     { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }
-  
-    if (placeTypeId() == TYPE::PLACE::HYPER_SPACE_ID) 
-    { 
-        save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", m_ComplexDrive.GetTarget()->id()); 
+
+    if (placeTypeId() == TYPE::PLACE::HYPER_SPACE_ID)
+    {
+        save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", m_ComplexDrive.GetTarget()->id());
     }
-    else 
-    { 
-        save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", NONE_ID); 
-    }  
+    else
+    {
+        save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", NONE_ID);
+    }
 }
 
 void Vehicle::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Vehicle("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
-    #endif
+#endif
     
-       m_DataKorpus.space       = load_ptree.get<int>("m_DataKorpus.space");     
-       m_DataKorpus.armor       = load_ptree.get<int>("m_DataKorpus.armor");   
-       m_DataKorpus.protection  = load_ptree.get<int>("m_DataKorpus.protection"); 
-       m_DataKorpus.temperature = load_ptree.get<int>("m_DataKorpus.temperature"); 
+    m_DataKorpus.space       = load_ptree.get<int>("m_DataKorpus.space");
+    m_DataKorpus.armor       = load_ptree.get<int>("m_DataKorpus.armor");
+    m_DataKorpus.protection  = load_ptree.get<int>("m_DataKorpus.protection");
+    m_DataKorpus.temperature = load_ptree.get<int>("m_DataKorpus.temperature");
 
-       m_DataKorpus.price        = load_ptree.get<int>("m_DataKorpus.price"); 
-       m_DataKorpus.draw_turrels = load_ptree.get<bool>("m_DataKorpus.draw_turrels"); 
+    m_DataKorpus.price        = load_ptree.get<int>("m_DataKorpus.price");
+    m_DataKorpus.draw_turrels = load_ptree.get<bool>("m_DataKorpus.draw_turrels");
 
-       m_DataKorpus.slot_grapple_num   = load_ptree.get<int>("m_DataKorpus.slot_grapple_num"); 
-       m_DataKorpus.slot_drive_num     = load_ptree.get<int>("m_DataKorpus.slot_drive_num"); 
-       m_DataKorpus.slot_protector_num = load_ptree.get<int>("m_DataKorpus.slot_protector_num"); 
-       m_DataKorpus.slot_radar_num     = load_ptree.get<int>("m_DataKorpus.slot_radar_num"); 
-       m_DataKorpus.slot_scaner_num    = load_ptree.get<int>("m_DataKorpus.slot_scaner_num"); 
-       m_DataKorpus.slot_freezer_num   = load_ptree.get<int>("m_DataKorpus.slot_freezer_num"); 
-       m_DataKorpus.slot_weapon_num    = load_ptree.get<int>("m_DataKorpus.slot_weapon_num"); 
+    m_DataKorpus.slot_grapple_num   = load_ptree.get<int>("m_DataKorpus.slot_grapple_num");
+    m_DataKorpus.slot_drive_num     = load_ptree.get<int>("m_DataKorpus.slot_drive_num");
+    m_DataKorpus.slot_protector_num = load_ptree.get<int>("m_DataKorpus.slot_protector_num");
+    m_DataKorpus.slot_radar_num     = load_ptree.get<int>("m_DataKorpus.slot_radar_num");
+    m_DataKorpus.slot_scaner_num    = load_ptree.get<int>("m_DataKorpus.slot_scaner_num");
+    m_DataKorpus.slot_freezer_num   = load_ptree.get<int>("m_DataKorpus.slot_freezer_num");
+    m_DataKorpus.slot_weapon_num    = load_ptree.get<int>("m_DataKorpus.slot_weapon_num");
 
-       data_unresolved_Vehicle.drive_complex_target_id   = load_ptree.get<int>("data_unresolved_Vehicle.drive_complex_target_id"); 
-       data_unresolved_Vehicle.drive_complex_action_id   = load_ptree.get<int>("data_unresolved_Vehicle.drive_complex_action_id");        
-       //data_unresolved_Vehicle.textureOb_gui_path = load_ptree.get<std::string>("data_unresolved_Vehicle.textureOb_gui_path"); 
-       data_unresolved_Vehicle.parent_vehicleslot_id = load_ptree.get<int>("data_unresolved_Vehicle.parent_vehicleslot_id"); 
-       data_unresolved_Vehicle.land_id = load_ptree.get<int>("data_unresolved_Vehicle.land_id");
-       data_unresolved_Vehicle.starsystem_hyper_id = load_ptree.get<int>("data_unresolved_Vehicle.starsystem_hyper_id"); 
-       
+    data_unresolved_Vehicle.drive_complex_target_id   = load_ptree.get<int>("data_unresolved_Vehicle.drive_complex_target_id");
+    data_unresolved_Vehicle.drive_complex_action_id   = load_ptree.get<int>("data_unresolved_Vehicle.drive_complex_action_id");
+    //data_unresolved_Vehicle.textureOb_gui_path = load_ptree.get<std::string>("data_unresolved_Vehicle.textureOb_gui_path");
+    data_unresolved_Vehicle.parent_vehicleslot_id = load_ptree.get<int>("data_unresolved_Vehicle.parent_vehicleslot_id");
+    data_unresolved_Vehicle.land_id = load_ptree.get<int>("data_unresolved_Vehicle.land_id");
+    data_unresolved_Vehicle.starsystem_hyper_id = load_ptree.get<int>("data_unresolved_Vehicle.starsystem_hyper_id");
+
 }
 
 void Vehicle::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Vehicle("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
-    #endif
+#endif
     
     CreateDriveComplexTextureDependedStuff();
     CreateProtectionComplexTextureDependedStuff();
 
-    if (data_unresolved_Vehicle.drive_complex_target_id != NONE_ID) 
-    { 
-        m_ComplexDrive.SetTarget((SpaceObject*)global::get().entitiesManager().GetEntityById(data_unresolved_Vehicle.drive_complex_target_id),  data_unresolved_Vehicle.drive_complex_action_id); 
-    }        
-             
-    if (data_unresolved_Vehicle.land_id != NONE_ID) 
-    { 
-        SetLand( (Land*)global::get().entitiesManager().GetEntityById(data_unresolved_Vehicle.land_id) ); 
-    }              
+    if (data_unresolved_Vehicle.drive_complex_target_id != NONE_ID)
+    {
+        m_ComplexDrive.SetTarget((SpaceObject*)global::get().entitiesManager().GetEntityById(data_unresolved_Vehicle.drive_complex_target_id),  data_unresolved_Vehicle.drive_complex_action_id);
+    }
+
+    if (data_unresolved_Vehicle.land_id != NONE_ID)
+    {
+        SetLand( (Land*)global::get().entitiesManager().GetEntityById(data_unresolved_Vehicle.land_id) );
+    }
 
     switch(placeTypeId())
     {
-        case TYPE::PLACE::SPACE_ID: 
+        case TYPE::PLACE::SPACE_ID:
         {
-            starsystem()->AddVehicle(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction, parent()); 
+            starsystem()->AddVehicle(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction, parent());
             break;
         }
-        
+
         case TYPE::PLACE::KOSMOPORT_ID:
-        {    
-            ((VehicleSlot*)global::get().entitiesManager().GetEntityById(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this); 
+        {
+            ((VehicleSlot*)global::get().entitiesManager().GetEntityById(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this);
             break;
         }
-        
+
         case TYPE::PLACE::HYPER_SPACE_ID:
         {
             //std::cout<<"xxx="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
@@ -1543,17 +1543,17 @@ void Vehicle::ResolveData()
             
             break;
         }
-        
+
         case TYPE::PLACE::NATURELAND_ID:
         {
-            ((NatureLand*)global::get().entitiesManager().GetEntityById(data_unresolved_Vehicle.land_id))->AddVehicle(this); 
+            ((NatureLand*)global::get().entitiesManager().GetEntityById(data_unresolved_Vehicle.land_id))->AddVehicle(this);
             break;
         }
     }
     
     m_ComplexWeapon.PrepareWeapons();
 }
-                
+
 void Vehicle::TEST_DamageAndLockRandItems()
 {
     int rand_index1 = meti::getRandInt(0, m_SlotFunct_vec.size()-1);
@@ -1577,7 +1577,7 @@ void Vehicle::TEST_DamageAndLockRandItems()
 
 void Vehicle::TEST_DropRandomItemToSpace()
 {
-    DropRandomItemToSpace();    
+    DropRandomItemToSpace();
 }
 
 
@@ -1594,7 +1594,7 @@ std::string getVehicleSpecialActionStr(VEHICLE_SPECIAL_ACTION_TYPE type_id)
         case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID:        { return "INITIATE_JUMPIN_ID"; break; }
         case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:        { return "INITIATE_JUMPOUT_ID"; break; }
         case VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID:                    { return "NONE_ID"; break; }
-                        
-        default: { return "UKNOWN ID"; break; }        
+
+        default: { return "UKNOWN ID"; break; }
     }
 }

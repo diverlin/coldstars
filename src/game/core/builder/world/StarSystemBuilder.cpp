@@ -28,8 +28,8 @@
 
 #include <world/starsystem.hpp>
 
-#include <effects/DistantNebulaEffect.hpp>
-#include <effects/DistantStarEffect.hpp>
+//#include <effects/DistantNebulaEffect.hpp>
+//#include <effects/DistantStarEffect.hpp>
 
 #include <meti/RandUtils.hpp>
 
@@ -90,14 +90,14 @@ void StarSystemBuilder::CreateBackground(StarSystem* starsystem, int distNebula_
 {
     for(int i=0; i<distNebula_num; i++)
     { 
-        DistantNebulaEffect* dn = GetNewDistantNebulaEffect();
-        starsystem->Add(dn);
+//        DistantNebulaEffect* dn = GetNewDistantNebulaEffect();
+//        starsystem->Add(dn);
     } 
 
     for(int i=0; i<distStar_num; i++)
     { 
-        DistantStarEffect* ds = GetNewDistantStarEffect();
-        starsystem->Add(ds);
+//        DistantStarEffect* ds = GetNewDistantStarEffect();
+//        starsystem->Add(ds);
     } 
 }
                                             

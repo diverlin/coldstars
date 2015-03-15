@@ -19,10 +19,8 @@
 #include "NatureLand.hpp"
 #include "../spaceobjects/Vehicle.hpp"
 #include "../common/constants.hpp"
-//#include <ceti/StringUtils.hpp>
+
 #include <meti/RandUtils.hpp>
-#include "../resources/TextureCollector.hpp"
-#include <jeti/TextureOb.hpp>
 
 #include "../slots/ItemSlot.hpp"
 
@@ -169,7 +167,7 @@ void NatureLand::Resolve()
 
 void NatureLand::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    save_ptree.put(root+"data_unresolved_NatureLand.textureOb_background_path", textureOb_background->GetMaterial().texture_path);
+    //save_ptree.put(root+"data_unresolved_NatureLand.textureOb_background_path", textureOb_background->GetMaterial().texture_path);
 }
 
 void NatureLand::LoadData(const boost::property_tree::ptree& load_ptree)

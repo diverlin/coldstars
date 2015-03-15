@@ -38,15 +38,15 @@ LazerModule::~LazerModule()
 /* virtual */
 void LazerModule::AddUniqueInfo()
 {
-        info.addTitleStr("lazer module");
-        if (damage_add != 0) 
-        {
-            info.addNameStr("damage_add:");   info.addValueStr(std::to_string(damage_add));
-        }
-        if (radius_add != 0)
-        { 
-            info.addNameStr("radius_add:");   info.addValueStr(std::to_string(radius_add));
-        }
+//        info.addTitleStr("lazer module");
+//        if (damage_add != 0)
+//        {
+//            info.addNameStr("damage_add:");   info.addValueStr(std::to_string(damage_add));
+//        }
+//        if (radius_add != 0)
+//        {
+//            info.addNameStr("radius_add:");   info.addValueStr(std::to_string(radius_add));
+//        }
 }
 
 /*virtual*/

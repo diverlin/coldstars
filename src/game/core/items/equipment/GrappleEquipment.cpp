@@ -16,7 +16,7 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <jeti/Render.hpp>
+//#include <jeti/Render.hpp>
 #include <items/equipment/GrappleEquipment.hpp>
 #include <items/modules/GrappleModule.hpp>
 
@@ -26,7 +26,7 @@
 
 #include <slots/ItemSlot.hpp>
 #include <spaceobjects/Vehicle.hpp>
-#include <resources/GuiTextureObCollector.hpp>
+//#include <resources/GuiTextureObCollector.hpp>
 
 
 GrappleEquipment::GrappleEquipment(int id)
@@ -230,11 +230,11 @@ void GrappleEquipment::CountPrice()
 
 void GrappleEquipment::AddUniqueInfo()
 {        
-    info.addTitleStr("GRAPPLE");
+//    info.addTitleStr("GRAPPLE");
 
-    info.addNameStr("strength:");        info.addValueStr(GetStrengthStr() + "/" + std::to_string(free_strength));
-    info.addNameStr("radius:");          info.addValueStr(GetRadiusStr());
-    info.addNameStr("speed:");           info.addValueStr(GetSpeedStr());
+//    info.addNameStr("strength:");        info.addValueStr(GetStrengthStr() + "/" + std::to_string(free_strength));
+//    info.addNameStr("radius:");          info.addValueStr(GetRadiusStr());
+//    info.addNameStr("speed:");           info.addValueStr(GetSpeedStr());
 }
 
 std::string GrappleEquipment::GetStrengthStr()

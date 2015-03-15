@@ -74,8 +74,8 @@ void BakEquipment::CountPrice()
 
 void BakEquipment::AddUniqueInfo()
 {
-    info.addTitleStr("BAK");
-    info.addNameStr("fuel:");      info.addValueStr( GetFuelStr() );
+//    info.addTitleStr("BAK");
+//    info.addNameStr("fuel:");      info.addValueStr( GetFuelStr() );
 }
 
 

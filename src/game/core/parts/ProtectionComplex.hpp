@@ -16,32 +16,28 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-#ifndef PROTECTIONCOMPLEX_H
-#define PROTECTIONCOMPLEX_H
+#pragma once
 
 class Vehicle;
-class ShieldEffect; 
 class ItemSlot; 
 
 class ProtectionComplex
 {
     public:
-              ProtectionComplex();
-              ~ProtectionComplex();
+        ProtectionComplex();
+        ~ProtectionComplex();
 
-                   void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
-              void SetProtectorSlot(ItemSlot* protector_slot) { this->protector_slot = protector_slot; };
-    
-              ItemSlot* GetProtectorSlot()    const { return protector_slot; };
-            ShieldEffect* GetShieldEffect() const { return shield_effect; }; 
-            
-          private:
-              Vehicle* owner_vehicle;
-            
-            ItemSlot* protector_slot;
-            ShieldEffect* shield_effect;
+        void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
+        void SetProtectorSlot(ItemSlot* protector_slot) { this->protector_slot = protector_slot; };
+
+        ItemSlot* GetProtectorSlot()    const { return protector_slot; };
+//        ShieldEffect* GetShieldEffect() const { return shield_effect; };
+
+    private:
+        Vehicle* owner_vehicle;
+
+        ItemSlot* protector_slot;
+        //            ShieldEffect* shield_effect;
 };
 
 
-#endif

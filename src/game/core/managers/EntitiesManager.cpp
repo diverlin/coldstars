@@ -27,7 +27,7 @@
 
 #include "../spaceobjects/IncludeSpaceObjects.hpp"
 
-#include "../pilots/Player.hpp"
+//#include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
 
 #include "../world/galaxy.hpp"
@@ -44,7 +44,7 @@
 #include "../builder/world/GalaxyBuilder.hpp"
 #include "../builder/world/StarSystemBuilder.hpp"
 
-#include "../builder/pilots/PlayerBuilder.hpp"
+//#include "../builder/pilots/PlayerBuilder.hpp"
 #include "../builder/pilots/NpcBuilder.hpp"
 
 #include "../builder/dock/NatureLandBuilder.hpp"
@@ -202,12 +202,12 @@ void EntitiesManager::LoadPass0(const std::string& filename)
     
     if (load_ptree.get_child_optional("player"))
     {
-        Logger::Instance().Log("loading players...");
-        BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("player"))
-        {
-            Player* player = PlayerBuilder::Instance().GetNewPlayerTemplate(v.second.get<unsigned long int>("data_id.id"));
-            player->Load(v.second);
-        }
+//        Logger::Instance().Log("loading players...");
+//        BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("player"))
+//        {
+//            Player* player = PlayerBuilder::Instance().GetNewPlayerTemplate(v.second.get<unsigned long int>("data_id.id"));
+//            player->Load(v.second);
+//        }
     }
     
     if (load_ptree.get_child_optional("starsystem"))

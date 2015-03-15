@@ -22,7 +22,7 @@
 #include "../common/Logger.hpp"
 #include "../common/Global.hpp"
 #include "../world/starsystem.hpp"
-#include "../effects/Shield.hpp"
+//#include "../effects/Shield.hpp"
 #include "../slots/ItemSlot.hpp"
 #include "../parts/WeaponComplex.hpp"
 #include "../pilots/Npc.hpp"
@@ -149,7 +149,7 @@ void Satellite::Save(boost::property_tree::ptree& save_ptree) const
     const std::string root = "satellite."+std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
-    Orientation::SaveData(save_ptree, root);
+    //Orientation::SaveData(save_ptree, root);
 //    BaseDrawable::SaveData(save_ptree, root);
     SpaceObject::SaveData(save_ptree, root);
     Vehicle::SaveData(save_ptree, root);
@@ -160,7 +160,7 @@ void Satellite::Save(boost::property_tree::ptree& save_ptree) const
 void Satellite::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    Orientation::LoadData(load_ptree);
+//    Orientation::LoadData(load_ptree);
 //    BaseDrawable::LoadData(load_ptree);
     SpaceObject::LoadData(load_ptree);
     Vehicle::LoadData(load_ptree);
@@ -171,7 +171,7 @@ void Satellite::Load(const boost::property_tree::ptree& load_ptree)
 void Satellite::Resolve()
 {
     Base::ResolveData();
-    Orientation::ResolveData();
+//    Orientation::ResolveData();
 //    BaseDrawable::ResolveData();
     SpaceObject::ResolveData();
     Vehicle::ResolveData();

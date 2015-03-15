@@ -25,9 +25,9 @@
 #include <common/Global.hpp>
 #include <managers/EntitiesManager.hpp>
 
-#include <resources/TextureCollector.hpp>
-#include <resources/MeshCollector.hpp>
-#include <jeti/TextureOb.hpp>
+//#include <resources/TextureCollector.hpp>
+//#include <resources/MeshCollector.hpp>
+//#include <jeti/TextureOb.hpp>
 
 GoodsPack::GoodsPack(int id, TYPE::ENTITY subtype_id)
 {
@@ -48,18 +48,18 @@ void GoodsPack::UpdateOwnerAbilities() { /* do nothing*/ }
 /* virtual */
 void GoodsPack::AddUniqueInfo() 
 {
-    info.addTitleStr("GOODS");
-    switch(subTypeId())
-    {
-        case TYPE::ENTITY::MINERALS_ID:     { info.addNameStr("mineral:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-        case TYPE::ENTITY::FOOD_ID:         { info.addNameStr("food:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-        case TYPE::ENTITY::MEDICINE_ID:     { info.addNameStr("medicine:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-        case TYPE::ENTITY::MILITARY_ID:     { info.addNameStr("military:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-        case TYPE::ENTITY::DRUG_ID:         { info.addNameStr("drug:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-        case TYPE::ENTITY::EXCLUSIVE_ID:     { info.addNameStr("exclusive:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//    info.addTitleStr("GOODS");
+//    switch(subTypeId())
+//    {
+//        case TYPE::ENTITY::MINERALS_ID:     { info.addNameStr("mineral:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case TYPE::ENTITY::FOOD_ID:         { info.addNameStr("food:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case TYPE::ENTITY::MEDICINE_ID:     { info.addNameStr("medicine:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case TYPE::ENTITY::MILITARY_ID:     { info.addNameStr("military:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case TYPE::ENTITY::DRUG_ID:         { info.addNameStr("drug:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case TYPE::ENTITY::EXCLUSIVE_ID:     { info.addNameStr("exclusive:"); info.addValueStr(std::to_string(data_item.mass)); break; }
         
-        default: { info.addNameStr("UNKNOWN:"); info.addValueStr("fix the bug"); break; }
-    }
+//        default: { info.addNameStr("UNKNOWN:"); info.addValueStr("fix the bug"); break; }
+//    }
 }
      
 /* virtual */    
@@ -123,8 +123,8 @@ GoodsPack* GetNewGoodsPack(TYPE::ENTITY subtype_id, INTLONGEST id)
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER_ID);
+//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER_ID);
     
     GoodsPack* goodsPack = new GoodsPack(id, subtype_id);
     //alpitodorender goodsPack->SetRenderData(mesh, texOb, texOb->size());

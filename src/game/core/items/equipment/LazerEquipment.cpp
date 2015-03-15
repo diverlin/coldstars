@@ -19,35 +19,28 @@
 #include "LazerEquipment.hpp"
 
 #include <common/constants.hpp>
-//#include <ceti/StringUtils.hpp>
-#include <common/Logger.hpp>
 #include <common/Logger.hpp>
 
 #include <meti/RandUtils.hpp>
 
-#include "../../resources/TextureCollector.hpp"
 #include "../../items/modules/LazerModule.hpp"
-#include "../../effects/lazerTrace.hpp"
 #include "../../slots/ItemSlot.hpp"
 #include "../../spaceobjects/Vehicle.hpp"
 #include "../../world/starsystem.hpp"
 #include "../../parts/Turrel.hpp"
 
-#include <jeti/particlesystem/DamageEffect.hpp>
-
-
 LazerEquipment::LazerEquipment(int id)
-:
-damage_orig(0),
-radius_orig(0)
+    :
+      damage_orig(0),
+      radius_orig(0)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
     setSubTypeId(TYPE::ENTITY::LAZER_EQUIPMENT_ID);
 
-       //TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
-       texOb_turrel      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL_ID);
-       texOb_lazerEffect = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::LAZER_EFFECT_ID);
+    //TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
+//    texOb_turrel      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL_ID);
+//    texOb_lazerEffect = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::LAZER_EFFECT_ID);
 }
 
 /* virtual */
@@ -57,41 +50,41 @@ LazerEquipment::~LazerEquipment()
 /* virtual */
 void LazerEquipment::UpdateProperties()
 {
-       damage_add  = 0;
-       radius_add  = 0;
-       
-       for (unsigned int i = 0; i < modules_vec.size(); i++)
+    damage_add  = 0;
+    radius_add  = 0;
+
+    for (unsigned int i = 0; i < modules_vec.size(); i++)
     {
         damage_add   += ((LazerModule*)modules_vec[i])->GetDamageAdd();
-        radius_add   += ((LazerModule*)modules_vec[i])->GetRadiusAdd();            
+        radius_add   += ((LazerModule*)modules_vec[i])->GetRadiusAdd();
     }
     
     damage = damage_orig + damage_add;
     radius = radius_orig + radius_add;
 } 
-              
+
 void LazerEquipment::CountPrice()
 {
-       float damage_rate        = (float)damage_orig / EQUIPMENT::LAZER::DAMAGE_MIN;
-       float radius_rate        = (float)radius_orig / EQUIPMENT::LAZER::RADIUS_MIN;
-       float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::LAZER::MODULES_NUM_MAX;
+    float damage_rate        = (float)damage_orig / EQUIPMENT::LAZER::DAMAGE_MIN;
+    float radius_rate        = (float)radius_orig / EQUIPMENT::LAZER::RADIUS_MIN;
+    float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::LAZER::MODULES_NUM_MAX;
 
-       float effectiveness_rate = EQUIPMENT::LAZER::DAMAGE_WEIGHT * damage_rate + 
-                               EQUIPMENT::LAZER::RADIUS_WEIGHT * radius_rate + 
-                               EQUIPMENT::LAZER::MODULES_NUM_WEIGHT * modules_num_rate;
+    float effectiveness_rate = EQUIPMENT::LAZER::DAMAGE_WEIGHT * damage_rate +
+            EQUIPMENT::LAZER::RADIUS_WEIGHT * radius_rate +
+            EQUIPMENT::LAZER::MODULES_NUM_WEIGHT * modules_num_rate;
 
-       float mass_rate          = (float)data_item.mass / EQUIPMENT::LAZER::MASS_MIN;
-       float condition_rate     = (float)condition / data_item.condition_max;
+    float mass_rate          = (float)data_item.mass / EQUIPMENT::LAZER::MASS_MIN;
+    float condition_rate     = (float)condition / data_item.condition_max;
 
-       price                    = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    price                    = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 void LazerEquipment::AddUniqueInfo()
 {
-    info.addTitleStr("LAZER");
+//    info.addTitleStr("LAZER");
 
-    info.addNameStr("damage:");     info.addValueStr(GetDamageStr());
-    info.addNameStr("radius:");     info.addValueStr(GetRadiusStr());
+//    info.addNameStr("damage:");     info.addValueStr(GetDamageStr());
+//    info.addNameStr("radius:");     info.addValueStr(GetRadiusStr());
 }
 
 std::string LazerEquipment::GetDamageStr()
@@ -125,24 +118,24 @@ void LazerEquipment::FireEvent(SpaceObject* target, ItemSlot* subtarget, float d
 
         target->hit(damage*damage_rate, show_effect);
         DeteriorationEvent();
-    
+
         if (show_effect)
         {
             // LazerTraceEffect
-            LazerTraceEffect* _lazer_trace_effect = nullptr;
+            //LazerTraceEffect* _lazer_trace_effect = nullptr;
             //if (item_slot->GetOwnerVehicle()->GetDataKorpus().draw_turrels == true)
             //{
-                //_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-                                                              //item_slot->GetTurrel()->pCenter(), 
-                                                              //item_slot->GetTarget()->pCenter());
+            //_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect,
+            //item_slot->GetTurrel()->pCenter(),
+            //item_slot->GetTarget()->pCenter());
             //}
             //else
-            {
-                _lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect, 
-                                                              item_slot->GetOwnerVehicle()->pCenter(), 
-                                                              item_slot->GetTarget()->pCenter());
-            }
-            item_slot->GetOwnerVehicle()->starsystem()->Add(_lazer_trace_effect);
+//            {
+//                _lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect,
+//                                                              item_slot->GetOwnerVehicle()->pCenter(),
+//                                                              item_slot->GetTarget()->pCenter());
+//            }
+//            item_slot->GetOwnerVehicle()->starsystem()->Add(_lazer_trace_effect);
             
             // DamageEffect
             //DamageEffect* _damage_effect = getNewDamageEffect(texOb_lazerEffect->color_id, item_slot->GetTarget());
@@ -182,28 +175,28 @@ void LazerEquipment::Resolve()
 
 void LazerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" LazerEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
+#endif
     
     save_ptree.put(root+"damage_orig", damage_orig);
     save_ptree.put(root+"radius_orig", radius_orig);
 }
-                
+
 void LazerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" LazerEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
+#endif
     
-    damage_orig = load_ptree.get<int>("damage_orig");     
-    radius_orig = load_ptree.get<int>("radius_orig");   
+    damage_orig = load_ptree.get<int>("damage_orig");
+    radius_orig = load_ptree.get<int>("radius_orig");
 }                
 
 void LazerEquipment::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" LazerEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
+#endif
 }
 

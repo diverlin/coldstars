@@ -29,7 +29,7 @@
 
 #include <builder/spaceobjects/ContainerBuilder.hpp>
 
-#include <jeti/particlesystem/ExplosionEffect.hpp>
+//#include <jeti/particlesystem/ExplosionEffect.hpp>
 
 #include <spaceobjects/Container.hpp>
 
@@ -132,7 +132,7 @@ void Asteroid::Save(boost::property_tree::ptree& save_ptree) const
     std::string root = "asteroid." + std::to_string(id())+".";
 
     Base::SaveData(save_ptree, root);
-    Orientation::SaveData(save_ptree, root);
+    //Orientation::SaveData(save_ptree, root);
 //    BaseDrawable::SaveData(save_ptree, root);
     SpaceObject::SaveData(save_ptree, root);
     Planetoid::SaveData(save_ptree, root);
@@ -143,7 +143,7 @@ void Asteroid::Save(boost::property_tree::ptree& save_ptree) const
 void Asteroid::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    Orientation::LoadData(load_ptree);
+  //  Orientation::LoadData(load_ptree);
 //    BaseDrawable::LoadData(load_ptree);
     SpaceObject::LoadData(load_ptree);
     Planetoid::LoadData(load_ptree);
@@ -154,7 +154,7 @@ void Asteroid::Load(const boost::property_tree::ptree& load_ptree)
 void Asteroid::Resolve()
 {
     Base::ResolveData();
-    Orientation::ResolveData();
+   // Orientation::ResolveData();
 //    BaseDrawable::ResolveData();
     SpaceObject::ResolveData();
     Planetoid::ResolveData();

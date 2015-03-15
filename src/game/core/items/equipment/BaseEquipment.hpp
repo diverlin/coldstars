@@ -36,7 +36,7 @@ class BaseEquipment : public BaseItem
         
         bool InsertModule(BaseModule*);
         
-        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
+//        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
                             
     protected:
         std::vector<BaseModule*> modules_vec;    // needs for inserted modules drawing

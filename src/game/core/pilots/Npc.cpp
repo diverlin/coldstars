@@ -28,7 +28,6 @@
 #include "../common/Logger.hpp"
 #include <common/common.hpp>
 #include "../ai/aiModel/AiModelCollector.hpp"
-#include <jeti/Render.hpp>
 #include "../dock/Kosmoport.hpp"
 
 #include "../ai/aiModel/BaseAiModel.hpp"
@@ -41,7 +40,6 @@
 #include "../items/others/GoodsPack.hpp"
 
 #include "../dock/Shop.hpp"
-#include "../text/VerticalFlowText.hpp" 
 
 #include "../common/GameDate.hpp" 
 #include <types/RaceTypes.hpp> 
@@ -157,10 +155,9 @@ void Npc::AddExpirience(int expirience, bool show_effect)
 {
     skills.AddExpirience(expirience);
     
-    if (show_effect == true)
-    {
-        VerticalFlowText* text = new VerticalFlowText(std::to_string(expirience), 12, meti::vec2(vehicle->center()), COLOR::COLOR4I_BLUE_LIGHT, 10);
-        vehicle->starsystem()->Add(text);
+    if (show_effect == true) {
+//        VerticalFlowText* text = new VerticalFlowText(std::to_string(expirience), 12, meti::vec2(vehicle->center()), COLOR::COLOR4I_BLUE_LIGHT, 10);
+//        vehicle->starsystem()->Add(text);
     }
 }
 
@@ -259,29 +256,26 @@ void Npc::ResetScanTarget() { vehicle_to_scan = nullptr; }
 
 void Npc::UpdateInfo()
 {
-    info.clear();
+//    info.clear();
 
-    info.addTitleStr("NPC");
-    info.addNameStr("id:");           info.addValueStr( std::to_string(id())  );
-    info.addNameStr("race:");         info.addValueStr( getRaceStr(race_id) );
-    info.addNameStr("subype_id:");    info.addValueStr( getStr(subTypeId()) );
-    info.addNameStr("subsubype_id:"); info.addValueStr( getStr(subSubTypeId()) );
-    //info.addNameStr("model_ai:");     info.addValueStr( ceti::getAiModelStr(ai_model->typeId()) );
-    info.addNameStr("credits:");      info.addValueStr( std::to_string(credits) );
-    info.addNameStr("expirience:");   info.addValueStr( std::to_string(skills.GetExpirience()) + " / " + std::to_string(skills.GetExpirienceNextLevel()) );
-    info.addNameStr("free skills:");  info.addValueStr( std::to_string(skills.GetAvailablePoints()) );
+//    info.addTitleStr("NPC");
+//    info.addNameStr("id:");           info.addValueStr( std::to_string(id())  );
+//    info.addNameStr("race:");         info.addValueStr( getRaceStr(race_id) );
+//    info.addNameStr("subype_id:");    info.addValueStr( getStr(subTypeId()) );
+//    info.addNameStr("subsubype_id:"); info.addValueStr( getStr(subSubTypeId()) );
+//    //info.addNameStr("model_ai:");     info.addValueStr( ceti::getAiModelStr(ai_model->typeId()) );
+//    info.addNameStr("credits:");      info.addValueStr( std::to_string(credits) );
+//    info.addNameStr("expirience:");   info.addValueStr( std::to_string(skills.GetExpirience()) + " / " + std::to_string(skills.GetExpirienceNextLevel()) );
+//    info.addNameStr("free skills:");  info.addValueStr( std::to_string(skills.GetAvailablePoints()) );
 
-    info.addNameStr("npc_agress:"); info.addValueStr( GetAgressorSetString() );
+//    info.addNameStr("npc_agress:"); info.addValueStr( GetAgressorSetString() );
     
-    if (state_machine.GetMacroTaskManager().GetScenario() != nullptr)
-    {
-        info.addNameStr("macro_task:");   info.addValueStr( state_machine.GetMacroTaskManager().GetScenario()->GetDescription(this) );
-    }
-    
-    if (state_machine.GetMicroTaskManager().GetScenario() != nullptr)
-    {
-        info.addNameStr("micro_task:");   info.addValueStr( state_machine.GetMicroTaskManager().GetScenario()->GetDescription(this) );
-    }
+//    if (state_machine.GetMacroTaskManager().GetScenario() != nullptr) {
+//        info.addNameStr("macro_task:");   info.addValueStr( state_machine.GetMacroTaskManager().GetScenario()->GetDescription(this) );
+//    }
+//    if (state_machine.GetMicroTaskManager().GetScenario() != nullptr) {
+//        info.addNameStr("micro_task:");   info.addValueStr( state_machine.GetMicroTaskManager().GetScenario()->GetDescription(this) );
+//    }
 }
 
 void Npc::RenderInfo(const glm::vec2& center)

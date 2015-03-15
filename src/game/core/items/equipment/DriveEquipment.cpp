@@ -70,9 +70,9 @@ void DriveEquipment::CountPrice()
 
 void DriveEquipment::AddUniqueInfo()
 {
-        info.addTitleStr("DRIVE");
-        info.addNameStr("speed:");     info.addValueStr(GetSpeedStr());
-        info.addNameStr("hyper:");     info.addValueStr(GetHyperStr());
+//        info.addTitleStr("DRIVE");
+//        info.addNameStr("speed:");     info.addValueStr(GetSpeedStr());
+//        info.addNameStr("hyper:");     info.addValueStr(GetHyperStr());
 }             
 
 std::string DriveEquipment::GetSpeedStr()
