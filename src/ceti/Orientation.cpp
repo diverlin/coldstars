@@ -19,7 +19,7 @@
 #include "Orientation.hpp"
 //#include <ceti/Logger.hpp>
 
-namespace jeti {
+namespace ceti {
 
 Orientation::Orientation()
 :
@@ -91,4 +91,4 @@ void Orientation::ResolveData()
 //    #endif
 }
 
-} // namespace jeti
+} // namespace ceti

@@ -22,7 +22,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <ceti/points.hpp>
 
-namespace jeti {
+namespace ceti {
 
 struct UnresolvedDataOrientation
 {    
@@ -83,4 +83,4 @@ class Orientation
         ceti::Points m_points;
 };
 
-} // namespace jeti
+} // namespace ceti
