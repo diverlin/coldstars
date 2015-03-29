@@ -17,15 +17,9 @@
 */
 
 #include "Game.hpp"
-#include <meti/RandUtils.hpp>
 
 int main()
 {
-    std::vector<int> v;
-    //meti::getRandIntFromVec(v);
-    meti::getRandInt(0, -1);
-    return false;
-
     Game game;
     return game.run();
 }
