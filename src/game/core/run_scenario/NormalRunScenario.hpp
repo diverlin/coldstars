@@ -16,8 +16,7 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef NORMALRUNSCENARIO_HPP
-#define NORMALRUNSCENARIO_HPP
+#pragma once
 
 #include "BaseRunScenario.hpp"
 
@@ -27,9 +26,8 @@ class NormalRunScenario : public BaseRunScenario
         NormalRunScenario() {}
         ~NormalRunScenario() {}
             
-        virtual void Init(Player*);
+        virtual void Init();
         virtual void Update_inDynamic(Player*) {}
         virtual void Update_inStatic(Player*) {}
 };
 
-#endif

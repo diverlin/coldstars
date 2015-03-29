@@ -17,23 +17,12 @@
 */
 
 #include "TurnTimer.hpp"
-#include "constants.hpp"
-#include "GameDate.hpp"
 #include "Logger.hpp"
-#include <common/Config.hpp>
 
-#include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
-
-TurnTimer& TurnTimer::Instance()
-{
-    static TurnTimer instance;
-    return instance;
-}
-
-TurnTimer::TurnTimer():
-turn_tick(2),
-turn_counter(0)
+TurnTimer::TurnTimer()
+    :
+      turn_tick(2)
+    , turn_counter(0)
 {}
 
 TurnTimer::~TurnTimer()
@@ -41,31 +30,28 @@ TurnTimer::~TurnTimer()
 
 void TurnTimer::NextTurn() 
 {
-    if (global::get().config().GetAutoSaveMode() == true) {
-        Logger::Instance().Log("*** AUTO (SaveRequest)");
-        global::get().entitiesManager().SaveRequest();
-    }
+//    if (global::get().config().GetAutoSaveMode() == true) {
+//        Logger::Instance().Log("*** AUTO (SaveRequest)");
+//        global::get().entitiesManager().SaveRequest();
+//    }
 
-    if (global::get().config().GetAutoLoadMode() == true) {
-        Logger::Instance().Log("*** AUTO (LoadRequest)");
-        global::get().entitiesManager().LoadRequest();
-    }
+//    if (global::get().config().GetAutoLoadMode() == true) {
+//        Logger::Instance().Log("*** AUTO (LoadRequest)");
+//        global::get().entitiesManager().LoadRequest();
+//    }
                 
     turn_tick = TURN_TIME;
     turn_ended = false;
     
     turn_counter++;
-    
-    GameDate::Instance().NextDay();
-    Logger::Instance().Log("*** NEXT TURN, date:"+GameDate::Instance().GetDate().GetStr());
 }
                         
-void TurnTimer::Update()
+void TurnTimer::Update(bool auto_turn)
 {        
-    turn_tick -= global::get().config().GAME_SPEED;
+    turn_tick--;
 
     /////////// AUTO-TURN /////////////
-    if ( (turn_tick < -50) and (global::get().config().AUTO_TURN_MODE == true) ) {
+    if ( (turn_tick < -50) && (auto_turn == true) ) {
         Logger::Instance().Log("*** AUTO_TURN_MODE proceed END TURN");
         NextTurn();
     }

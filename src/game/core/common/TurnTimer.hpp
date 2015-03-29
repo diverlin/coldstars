@@ -16,33 +16,28 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef TURNTIMER_H
-#define TURNTIMER_H
-
-#include "../common/GameDate.hpp"
+#pragma once
 
 class TurnTimer
 {
-    public:
-        static TurnTimer& Instance();
-        ~TurnTimer();
-        
-        bool GetTurnEnded()  const { return turn_ended; };
-        int GetTurnTick() const { return turn_tick; };
-        unsigned long int GetTurnCounter() const { return turn_counter; };
-        void NextTurn();
-        
-        void Update();
+    const int TURN_TIME = 150;
+
+public:
+    TurnTimer();
+    ~TurnTimer();
+
+    bool GetTurnEnded()  const { return turn_ended; };
+    int GetTurnTick() const { return turn_tick; };
+    unsigned long int GetTurnCounter() const { return turn_counter; };
+    void NextTurn();
+
+    void Update(bool auto_turn = false);
     
-    private:
-        TurnTimer();
-        TurnTimer(const TurnTimer&) = delete;
-        TurnTimer& operator=(const TurnTimer&) = delete;
-        
-        int turn_tick;    
-        unsigned long int turn_counter;
-            
-        bool turn_ended;    
+private:
+    int turn_tick;
+    unsigned long int turn_counter;
+
+    bool turn_ended;
 };
 
-#endif
+

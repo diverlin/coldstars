@@ -167,12 +167,12 @@ void Npc::remeberAgressor(Vehicle* agressor)
     {
         if (it->npc_id == agressor->GetOwnerNpc()->id())
         {
-            if (it->last_date != GameDate::Instance().GetDate())
+            if (it->last_date != global::get().gameDate())
             {
                 int counter = it->counter;
                 data_agressor_set.erase(it);
                 
-                AgressorData agressor_data(agressor->GetOwnerNpc()->id(), GameDate::Instance().GetDate(), ++counter);
+                AgressorData agressor_data(agressor->GetOwnerNpc()->id(), global::get().gameDate(), ++counter);
                 data_agressor_set.insert(agressor_data);
             }
 
@@ -180,7 +180,7 @@ void Npc::remeberAgressor(Vehicle* agressor)
         }
     }
 
-    AgressorData agressor_data(agressor->GetOwnerNpc()->id(), GameDate::Instance().GetDate(), 1);
+    AgressorData agressor_data(agressor->GetOwnerNpc()->id(), global::get().gameDate(), 1);
     data_agressor_set.insert(agressor_data);
 }
 

@@ -92,7 +92,7 @@
 
 #include "../slots/VehicleSlot.hpp"
 //#include <ceti/StringUtils.hpp>
-#include "../common/TurnTimer.hpp"
+#include <common/Global.hpp>
 
 #include <slots/ItemSlot.hpp>
 
@@ -672,7 +672,7 @@ bool EntitiesManager::UpdateSaveRequest()
 {        
     if (save_request == true)
     {
-        SaveEvent("save"+std::to_string(TurnTimer::Instance().GetTurnCounter())+".info");
+        SaveEvent("save"+std::to_string(global::get().turnTimer().GetTurnCounter())+".info");
         save_request = false;
         
         return true;

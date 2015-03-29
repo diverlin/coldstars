@@ -81,8 +81,7 @@ const float CAMERA_POS_Z = 500.0;
 
 const int POPULATION_MIN = 1000;
 const int POPULATION_MAX = 4000;
-const int DAYSINYEAR  = 360;
-const int DAYSINMONTH = 31;
+
 
 const int GOD_REST_IN_DAYS = 5;
 
