@@ -59,7 +59,7 @@ m_DateLastUpdate(0,0,0)
 God::~God()
 {}
 
-void God::createWorld()
+Galaxy* God::createWorld()
 {
     GalaxyDescription galaxy_description;
     galaxy_description.allow_invasion = false;
@@ -88,14 +88,14 @@ void God::createWorld()
         galaxy_description.sector_descriptions.push_back(sector_description);
     }
 
-    m_galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
-    CreateLife(galaxy_description);
+    Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
+    CreateLife(galaxy, galaxy_description);
     if (galaxy_description.allow_invasion == true) {
-        CreateInvasion(galaxy_description);
+        CreateInvasion(galaxy, galaxy_description);
     }
 
     bool player2space = true;
-    StarSystem* const starsystem = m_galaxy->GetRandomSector()->GetRandomStarSystem();
+    StarSystem* const starsystem = galaxy->GetRandomSector()->GetRandomStarSystem();
     if (player2space == true) {
         glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
         glm::vec3 angle(0,0,0);
@@ -105,14 +105,16 @@ void God::createWorld()
     }
 
     CreateShips(starsystem, /*ships_num=*/20, TYPE::RACE::R0_ID);   // fake
+
+    return galaxy;
 }
 
-void God::CreateLife(const GalaxyDescription& galaxy_description) const
+void God::CreateLife(Galaxy* galaxy, const GalaxyDescription& galaxy_description) const
 {
-    for(unsigned int i=0; i<m_galaxy->SECTOR_vec.size(); i++) {
-        for(unsigned int j=0; j<m_galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++) {
+    for(unsigned int i=0; i<galaxy->SECTOR_vec.size(); i++) {
+        for(unsigned int j=0; j<galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++) {
             const StarSystemDescription& starsystem_description = galaxy_description.sector_descriptions[i].starsystem_descriptions[j];
-            StarSystem* starsystem = m_galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j];
+            StarSystem* starsystem = galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j];
             for(unsigned int j=0; j<starsystem->PLANET_vec.size(); j++) {
                 CreateLifeAtPlanet(starsystem->PLANET_vec[j], starsystem_description);
             }
@@ -121,24 +123,24 @@ void God::CreateLife(const GalaxyDescription& galaxy_description) const
     }
 }
 
-void God::CreateInvasion(const GalaxyDescription& galaxy_description) const
+void God::CreateInvasion(Galaxy* galaxy, const GalaxyDescription& galaxy_description) const
 {
     for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
-        StarSystem* starsystem = m_galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+        StarSystem* starsystem = galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
         TYPE::RACE race_id = (TYPE::RACE)meti::getRandInt((int)TYPE::RACE::R6_ID, (int)TYPE::RACE::R7_ID);
         int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
         CreateShips(starsystem, ship_num, race_id);
     }
 }
 
-void God::ProceedInvasion() const
+void God::ProceedInvasion(Galaxy* galaxy) const
 {
-    StarSystem* starsystem_invade_from = m_galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
+    StarSystem* starsystem_invade_from = galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
     if (starsystem_invade_from == nullptr) {
         return;
     }
     
-    StarSystem* starsystem_invade_to   = m_galaxy->GetClosestSectorTo(starsystem_invade_from->GetSector())->GetClosestStarSystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+    StarSystem* starsystem_invade_to   = galaxy->GetClosestSectorTo(starsystem_invade_from->GetSector())->GetClosestStarSystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
     if (starsystem_invade_to == nullptr) {
         return;
     }
@@ -151,7 +153,7 @@ void God::ProceedInvasion() const
     starsystem_invade_from->CreateGroupAndShareTask(npc_leader, starsystem_invade_to, num_max);
 }
 
-void God::Update(const GameDate& date)
+void God::Update(Galaxy* galaxy, const GameDate& date)
 {
     if (m_DateLastUpdate - date >= GOD_REST_IN_DAYS)
     {
@@ -159,10 +161,10 @@ void God::Update(const GameDate& date)
         Logger::Instance().Log("God::Update", GOD_LOG_DIP);
         #endif
             
-        m_galaxy->FillStarSystemsCondition(data_starsystems_condition);
+        galaxy->FillStarSystemsCondition(data_starsystems_condition);
         m_DateLastUpdate = date;
         
-        ProceedInvasion();
+        ProceedInvasion(galaxy);
 
         #if GOD_LOG_ENABLED == 1
         Logger::Instance().Log(data_starsystems_condition.GetStr(), GOD_LOG_DIP);

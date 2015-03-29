@@ -36,14 +36,11 @@ class God
         God();
         ~God();
 
-        void createWorld();
-        void Update(const GameDate&);
+        Galaxy* createWorld();
+        void Update(Galaxy*, const GameDate&);
 
-        Galaxy* galaxy() { return m_galaxy; }
-                
     private:      
         GameDate m_DateLastUpdate;
-        Galaxy* m_galaxy = nullptr;
 
         StarSystemsConditionData data_starsystems_condition;
         
@@ -52,10 +49,10 @@ class God
         void CreateSpaceStations(StarSystem*, int) const;
         void CreateShips(StarSystem*, int, TYPE::RACE race_id = TYPE::RACE::NONE_ID, TYPE::ENTITY subtype_id = TYPE::ENTITY::NONE_ID, TYPE::ENTITY subsubtype_id = TYPE::ENTITY::NONE_ID) const;   
         
-        void ProceedInvasion() const;
+        void ProceedInvasion(Galaxy*) const;
 
-        void CreateLife(const GalaxyDescription&) const;
-        void CreateInvasion(const GalaxyDescription&) const;
+        void CreateLife(Galaxy*, const GalaxyDescription&) const;
+        void CreateInvasion(Galaxy*, const GalaxyDescription&) const;
 }; 
 
 
