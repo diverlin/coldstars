@@ -19,7 +19,6 @@
 #include "Global.hpp"
 #include <managers/EntitiesManager.hpp>
 #include <common/Config.hpp>
-#include <jeti/Config.hpp>
 
 global& global::get()
 {
@@ -31,7 +30,6 @@ global::global()
     :
       m_entitiesManager(new EntitiesManager)
     , m_config(new Config)
-    //, m_configVideo(new jeti::Config)
 {
 }
 

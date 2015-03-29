@@ -16,11 +16,17 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Game.hpp"
+#pragma once
 
-int main()
-{
-    Game game;
-    return game.run();
-}
+class Game {
+public:
+    Game() {}
+    ~Game() {}
 
+    bool run() const;
+
+private:
+    enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
+
+    bool m_isRunning = true;
+};

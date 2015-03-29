@@ -22,7 +22,7 @@
 #include <common/Logger.hpp>
 #include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
-#include <common/Date.hpp>
+#include <common/GameDate.hpp>
 
 #include <world/galaxy.hpp>
 #include <world/Sector.hpp>
@@ -34,6 +34,7 @@
 #include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/spaceobjects/SpaceStationBuilder.hpp>
 #include <builder/spaceobjects/SatelliteBuilder.hpp>
+#include <builder/world/GalaxyBuilder.hpp>
 
 #include <spaceobjects/IncludeSpaceObjects.hpp>
 
@@ -57,27 +58,69 @@ God& God::Instance()
 
 God::God()
 :
-m_DateLastUpdate(0,0,0),
-m_Galaxy(nullptr)
+m_DateLastUpdate(0,0,0)
 {}
         
 God::~God()
 {}
 
+void God::createWorld()
+{
+    GalaxyDescription galaxy_description;
+    galaxy_description.allow_invasion = false;
+    galaxy_description.sector_num = 1;
+
+    for (int i=0; i<galaxy_description.sector_num; i++) {
+        SectorDescription sector_description;
+        sector_description.starsystem_num = 1;
+
+        for (int j=0; j<sector_description.starsystem_num; j++) {
+            StarSystemDescription starsystem_description;
+            starsystem_description.planet_num = 5;
+            starsystem_description.spacestation_num = 3;
+            starsystem_description.asteroid_num = 3;
+
+            starsystem_description.allow_ships         = false;
+
+            starsystem_description.allow_ship_ranger   = false;
+            starsystem_description.allow_ship_warrior  = false;
+            starsystem_description.allow_ship_trader   = true;
+            starsystem_description.allow_ship_pirat    = false;
+            starsystem_description.allow_ship_diplomat = false;
+            sector_description.starsystem_descriptions.push_back(starsystem_description);
+        }
+
+        galaxy_description.sector_descriptions.push_back(sector_description);
+    }
+
+    m_galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
+    CreateLife(galaxy_description);
+    if (galaxy_description.allow_invasion == true) {
+        CreateInvasion(galaxy_description);
+    }
+
+    bool player2space = true;
+    StarSystem* const starsystem = m_galaxy->GetRandomSector()->GetRandomStarSystem();
+    if (player2space == true) {
+        glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
+        glm::vec3 angle(0,0,0);
+        //starsystem->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
+    } else {
+        //starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
+    }
+
+    CreateShips(starsystem, /*ships_num=*/20, TYPE::RACE::R0_ID);   // fake
+}
+
 void God::CreateLife(const GalaxyDescription& galaxy_description) const
 {
-    for(unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
-    {
-        for(unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
-        {            
+    for(unsigned int i=0; i<m_galaxy->SECTOR_vec.size(); i++) {
+        for(unsigned int j=0; j<m_galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++) {
             const StarSystemDescription& starsystem_description = galaxy_description.sector_descriptions[i].starsystem_descriptions[j];
-            StarSystem* starsystem = m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j];
-        
-            for(unsigned int j=0; j<starsystem->PLANET_vec.size(); j++)
-            {        
+            StarSystem* starsystem = m_galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j];
+            for(unsigned int j=0; j<starsystem->PLANET_vec.size(); j++) {
                 CreateLifeAtPlanet(starsystem->PLANET_vec[j], starsystem_description);
             }
-
             CreateSpaceStations(starsystem, starsystem_description.spacestation_num);
         }
     }
@@ -85,9 +128,8 @@ void God::CreateLife(const GalaxyDescription& galaxy_description) const
 
 void God::CreateInvasion(const GalaxyDescription& galaxy_description) const
 {
-    for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++)
-    {
-        StarSystem* starsystem = m_Galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+    for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
+        StarSystem* starsystem = m_galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
         TYPE::RACE race_id = (TYPE::RACE)meti::getRandInt((int)TYPE::RACE::R6_ID, (int)TYPE::RACE::R7_ID);
         int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
         CreateShips(starsystem, ship_num, race_id);
@@ -96,15 +138,13 @@ void God::CreateInvasion(const GalaxyDescription& galaxy_description) const
 
 void God::ProceedInvasion() const
 {
-    StarSystem* starsystem_invade_from = m_Galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
-    if (starsystem_invade_from == nullptr)
-    {
+    StarSystem* starsystem_invade_from = m_galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
+    if (starsystem_invade_from == nullptr) {
         return;
     }
     
-    StarSystem* starsystem_invade_to   = m_Galaxy->GetClosestSectorTo(starsystem_invade_from->GetSector())->GetClosestStarSystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
-    if (starsystem_invade_to == nullptr)
-    {
+    StarSystem* starsystem_invade_to   = m_galaxy->GetClosestSectorTo(starsystem_invade_from->GetSector())->GetClosestStarSystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+    if (starsystem_invade_to == nullptr) {
         return;
     }
     
@@ -116,15 +156,15 @@ void God::ProceedInvasion() const
     starsystem_invade_from->CreateGroupAndShareTask(npc_leader, starsystem_invade_to, num_max);
 }
 
-void God::Update(const Date& date)
+void God::Update(const GameDate& date)
 {
-    if (m_DateLastUpdate.GetDaysPassSince(date) >= GOD_REST_IN_DAYS)
+    if (m_DateLastUpdate - date >= GOD_REST_IN_DAYS)
     {
         #if GOD_LOG_ENABLED == 1
         Logger::Instance().Log("God::Update", GOD_LOG_DIP);
         #endif
             
-        m_Galaxy->FillStarSystemsCondition(data_starsystems_condition);
+        m_galaxy->FillStarSystemsCondition(data_starsystems_condition);
         m_DateLastUpdate = date;
         
         ProceedInvasion();

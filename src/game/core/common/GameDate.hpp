@@ -16,31 +16,33 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GAMEDATE_H
-#define GAMEDATE_H
+#pragma once
 
-#include "Date.hpp"
+#include <string>
 
 class GameDate
 {
-    public:
-        static GameDate& Instance();
-        ~GameDate();
-        
-        void SetDate(unsigned int, unsigned int, unsigned int);
-        void NextDay();
-        const Date& GetDate() const { return date; };
-    
-        int operator-(const GameDate&) const;
-        
-    private:
-        GameDate();
-        GameDate(const GameDate&) = delete;
-        GameDate& operator=(const GameDate&) = delete;
-        
-        std::string GetStr() const;
+    const int DAYS_IN_YEAR  = 360;
+    const int DAYS_IN_MONTH = 31;
+public:
+    GameDate();
+    GameDate(unsigned int, unsigned int, unsigned int);
+    ~GameDate();
 
-        Date date;
+    void set(int, int, int);
+
+    void operator=(const GameDate&);
+    bool operator==(const GameDate&) const;
+    bool operator!=(const GameDate&) const;
+    int operator-(const GameDate&) const;
+    void operator++(int);
+
+    std::string str() const;
+
+private:
+    int m_day = 0;
+    int m_month = 0;
+    int m_year = 0;
 };
 
-#endif
+

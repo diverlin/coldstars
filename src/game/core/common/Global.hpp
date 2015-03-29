@@ -22,9 +22,8 @@
 class EntitiesManager;
 class Config;
 
-//namespace jeti {
-//class Config;
-//}
+#include <common/TurnTimer.hpp>
+#include <common/GameDate.hpp>
 
 class global
 {
@@ -33,7 +32,8 @@ class global
 
         EntitiesManager& entitiesManager() { return *m_entitiesManager; }
         Config& config() { return *m_config; }
-//        jeti::Config& configVideo() { return *m_configVideo; }
+        TurnTimer& turnTimer() { return m_turnTimer; }
+        GameDate& gameDate() { return m_gameDate; }
 
     private:
         global();
@@ -41,7 +41,8 @@ class global
         ~global();
         global& operator=(const global&) = delete;
 
-        EntitiesManager* m_entitiesManager;
-        Config* m_config;
-//        jeti::Config* m_configVideo;
+        EntitiesManager* m_entitiesManager = nullptr;
+        Config* m_config = nullptr;
+        TurnTimer m_turnTimer;
+        GameDate m_gameDate;
 };

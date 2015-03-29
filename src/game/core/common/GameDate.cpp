@@ -19,41 +19,65 @@
 #include "GameDate.hpp"
 #include "myStr.hpp"
 
-GameDate& GameDate::Instance()
-{
-    static GameDate instance;
-    return instance;
-}
-
 GameDate::GameDate()
 {}
+
+GameDate::GameDate(unsigned int day, unsigned int month, unsigned int year)
+    :
+      m_day(day)
+    , m_month(month)
+    , m_year(year)
+{
+}
 
 GameDate::~GameDate()
 {}
 
-void GameDate::SetDate(unsigned int day, unsigned int month, unsigned int year)
+void GameDate::set(int day, int month, int year)
 {
-    date.day = day;
-    date.month = month;
-    date.year = year;    
+    m_day = day;
+    m_month = month;
+    m_year = year;
 }
 
-void GameDate::NextDay() 
+void GameDate::operator=(const GameDate& rhs)
 {
-        date.day++;
-    if (date.day>=31)
-    {
-        date.month++;
-        date.day = 1;
-        if (date.month>=12)
-        {
-            date.month = 1;
-            date.year++;
+    m_day   = rhs.m_day;
+    m_month = rhs.m_month;
+    m_year  = rhs.m_year;
+}
+
+bool GameDate::operator==(const GameDate& rhs) const
+{
+    return ((m_day == rhs.m_month) && (m_month == rhs.m_month) && (m_year == rhs.m_year));
+}
+
+bool GameDate::operator!=(const GameDate& rhs) const
+{
+    return ((m_day != rhs.m_day) || (m_month != rhs.m_month) || (m_year != rhs.m_year));
+}
+
+int GameDate::operator-(const GameDate& rhs) const
+{
+    int diff_day    = rhs.m_day   - m_day;
+    int diff_month  = rhs.m_month - m_month;
+    int diff_year   = rhs.m_year  - m_year;
+
+    return abs(diff_day + (diff_month * DAYS_IN_MONTH) + (diff_year * DAYS_IN_YEAR));
+}
+
+void GameDate::operator++(int val)
+{
+    m_day+=val;
+    if (m_day>=31) {
+        m_month++;
+        m_day = 1;
+        if (m_month>=12) {
+            m_month = 1;
+            m_year++;
         }
     }
 }
-    
-                    
 
-    
+std::string GameDate::str() const { return std::to_string(m_day) + "/" + std::to_string(m_month) + "/" + std::to_string(m_year); };
 

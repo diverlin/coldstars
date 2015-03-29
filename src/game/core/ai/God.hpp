@@ -16,14 +16,12 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-#ifndef GOD_HPP
-#define GOD_HPP
+#pragma once
 
 #include <types/RaceTypes.hpp>
 #include <types/EntityTypes.hpp>
 
-#include <common/Date.hpp>
+#include <common/GameDate.hpp>
 #include <struct/StarSystemsConditionData.hpp>
 
 class Galaxy;
@@ -32,30 +30,25 @@ class StarSystem;
 class StarSystemDescription;
 class Planet;
 
-class NormalRunScenario;
-
-
 class God
 {
     public:
         static God& Instance();
         ~God();
 
-        void SetGalaxy(Galaxy* galaxy) { m_Galaxy = galaxy; }
+        void createWorld();
+        void Update(const GameDate&);
 
-        void CreateLife(const GalaxyDescription&) const;
-        void CreateInvasion(const GalaxyDescription&) const;
-        
-        void Update(const Date&);
+        Galaxy* galaxy() { return m_galaxy; }
                 
     private:
         God();
         God(const God&) = delete;
         God& operator=(const God&) = delete;
        
-        Date m_DateLastUpdate;
-        Galaxy* m_Galaxy;
-        
+        GameDate m_DateLastUpdate;
+        Galaxy* m_galaxy = nullptr;
+
         StarSystemsConditionData data_starsystems_condition;
         
         void CreateLifeAtPlanet(Planet*, const StarSystemDescription&) const;
@@ -64,11 +57,12 @@ class God
         void CreateShips(StarSystem*, int, TYPE::RACE race_id = TYPE::RACE::NONE_ID, TYPE::ENTITY subtype_id = TYPE::ENTITY::NONE_ID, TYPE::ENTITY subsubtype_id = TYPE::ENTITY::NONE_ID) const;   
         
         void ProceedInvasion() const;
-        
-    friend class NormalRunScenario;
+
+        void CreateLife(const GalaxyDescription&) const;
+        void CreateInvasion(const GalaxyDescription&) const;
 }; 
 
-#endif 
+
     
 
         
