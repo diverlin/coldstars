@@ -17,7 +17,6 @@
 */
 
 #include "GameDate.hpp"
-#include "myStr.hpp"
 
 GameDate::GameDate()
 {}
