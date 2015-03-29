@@ -26,7 +26,7 @@ class GameDate
     const int DAYS_IN_MONTH = 31;
 public:
     GameDate();
-    GameDate(unsigned int, unsigned int, unsigned int);
+    GameDate(int, int, int);
     ~GameDate();
 
     void set(int, int, int);
