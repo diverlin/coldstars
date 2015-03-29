@@ -19,21 +19,22 @@
 
 #pragma once
 
+class God;
 class EntitiesManager;
 class Config;
-
-#include <common/TurnTimer.hpp>
-#include <common/GameDate.hpp>
+class TurnTimer;
+class GameDate;
 
 class global
 {
     public:
         static global& get();
 
+        God& god() { return *m_god; }
         EntitiesManager& entitiesManager() { return *m_entitiesManager; }
         Config& config() { return *m_config; }
-        TurnTimer& turnTimer() { return m_turnTimer; }
-        GameDate& gameDate() { return m_gameDate; }
+        TurnTimer& turnTimer() { return *m_turnTimer; }
+        GameDate& gameDate() { return *m_gameDate; }
 
     private:
         global();
@@ -41,8 +42,9 @@ class global
         ~global();
         global& operator=(const global&) = delete;
 
+        God* m_god = nullptr;
         EntitiesManager* m_entitiesManager = nullptr;
         Config* m_config = nullptr;
-        TurnTimer m_turnTimer;
-        GameDate m_gameDate;
+        TurnTimer* m_turnTimer = nullptr;
+        GameDate* m_gameDate = nullptr;
 };

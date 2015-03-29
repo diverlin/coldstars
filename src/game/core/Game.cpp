@@ -32,17 +32,18 @@
 
 bool Game::run() const
 {
-    God::Instance().createWorld();
+    God& god             = global::get().god();
+    TurnTimer& turnTimer = global::get().turnTimer();
+    GameDate& gameDate   = global::get().gameDate();
+
+    god.createWorld();
     
     // GAME LOOP
     while (m_isRunning)
     {                   
-        TurnTimer& turnTimer = global::get().turnTimer();
-        GameDate& gameDate   = global::get().gameDate();
-
         turnTimer.Update();
-        God::Instance().Update(gameDate);
-        God::Instance().galaxy()->Update(turnTimer.GetTurnTick());
+        god.Update(gameDate);
+        god.galaxy()->Update(turnTimer.GetTurnTick());
 
         if ((turnTimer.GetTurnEnded() == true) /*&& (UserInputManagerInSpace::Instance().GetNextTurnReady())*/) {
             turnTimer.NextTurn();

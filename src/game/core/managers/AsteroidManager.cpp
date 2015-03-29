@@ -18,19 +18,18 @@
 
 #include "AsteroidManager.hpp"
 #include <common/Global.hpp>
+#include <common/TurnTimer.hpp>
 #include <world/starsystem.hpp>
 #include "../builder/spaceobjects/AsteroidBuilder.hpp"
 #include "../spaceobjects/Asteroid.hpp"
 
 void AsteroidManager::Update(StarSystem* starsystem)
 {
-    while (starsystem->GetAsteroidNum() < asteroid_num)
-    {
+    while (starsystem->GetAsteroidNum() < asteroid_num) {
         starsystem->Add(AsteroidBuilder::Instance().GetNewAsteroid());
         int current_turn_counter = global::get().turnTimer().GetTurnCounter();
         asteroid_last_turn_created = current_turn_counter;
-        if ((asteroid_last_turn_created + asteroid_delay) > current_turn_counter)
-        {
+        if ((asteroid_last_turn_created + asteroid_delay) > current_turn_counter) {
             break;
         }
     }

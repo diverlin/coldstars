@@ -33,7 +33,7 @@ class Planet;
 class God
 {
     public:
-        static God& Instance();
+        God();
         ~God();
 
         void createWorld();
@@ -41,11 +41,7 @@ class God
 
         Galaxy* galaxy() { return m_galaxy; }
                 
-    private:
-        God();
-        God(const God&) = delete;
-        God& operator=(const God&) = delete;
-       
+    private:      
         GameDate m_DateLastUpdate;
         Galaxy* m_galaxy = nullptr;
 
