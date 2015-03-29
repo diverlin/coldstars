@@ -21,10 +21,10 @@
 #include <iostream>
 
 #include "common/TurnTimer.hpp"
-
 #include <common/Global.hpp>
 #include <common/GameDate.hpp>
 #include <common/Logger.hpp>
+
 #include <managers/EntitiesManager.hpp>
 #include <ai/God.hpp>
 #include <world/galaxy.hpp>
@@ -37,7 +37,7 @@ bool Game::run() const
     GameDate& gameDate   = global::get().gameDate();
 
     Galaxy* galaxy = god.createWorld();
-    
+
     // GAME LOOP
     while (m_isRunning)
     {                   

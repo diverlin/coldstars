@@ -5,6 +5,7 @@ set(PROJECT coldstars)
 
 project (${PROJECT})
 
+set(CMAKE_BUILD_TYPE "Debug")
 #set( CMAKE_VERBOSE_MAKEFILE true )
 set(CMAKE_BUILD_TYPE Debug)
 

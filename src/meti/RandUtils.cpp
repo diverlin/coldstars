@@ -25,18 +25,20 @@ namespace meti {
 
 int getRandIntFromVec(const std::vector<int>& vec)
 {
-    assert(vec.empty());
+    assert(!vec.empty());
     return vec[getRandInt(0, vec.size()-1)];
 }
 
 float getRandFloat(float low, float high)
 {
+    assert(low<high);
     float precision = 100000.0;
     return (float)getRandInt((int)precision*low, (int)precision*high)/precision;
 }
 
 int getRandInt(int low, int high)
 {
+    assert(low<high);
     return (low != high) ? low + rand()%(high+1-low) : low;
 }
 

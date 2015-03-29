@@ -39,14 +39,14 @@ bool isActionShouldHappen(int);
 template<typename TYPE> 
 TYPE getRand(const std::vector<TYPE>& vec)
 {
-    assert(vec.empty());
+    assert(vec.size() == 0);
     return vec[getRandInt(0, vec.size()-1)];
 }
 
 template<typename TYPE>
 TYPE getRandomElement(const std::vector<TYPE>& vec)
 {
-    assert(vec.size());
+    assert(vec.size() == 0);
     return vec[getRandInt(0, vec.size()-1)];
 }
 
