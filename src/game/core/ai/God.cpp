@@ -50,11 +50,6 @@
 #include <meti/RandUtils.hpp>
 #include <math/rand.hpp>
 
-God& God::Instance()
-{
-    static God instance;
-    return instance;
-}
 
 God::God()
 :

@@ -17,8 +17,11 @@
 */
 
 #include "Global.hpp"
+#include <ai/God.hpp>
 #include <managers/EntitiesManager.hpp>
 #include <common/Config.hpp>
+#include <common/TurnTimer.hpp>
+#include <common/GameDate.hpp>
 
 global& global::get()
 {
@@ -28,8 +31,11 @@ global& global::get()
 
 global::global()
     :
-      m_entitiesManager(new EntitiesManager)
+      m_god(new God)
+    , m_entitiesManager(new EntitiesManager)
     , m_config(new Config)
+    , m_turnTimer(new TurnTimer)
+    , m_gameDate(new GameDate)
 {
 }
 

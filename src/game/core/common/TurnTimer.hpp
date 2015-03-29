@@ -20,7 +20,7 @@
 
 class TurnTimer
 {
-    const int TURN_TIME = 150;
+    static const int TURN_TIME = 150;
 
 public:
     TurnTimer();

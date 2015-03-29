@@ -22,8 +22,8 @@
 
 class GameDate
 {
-    const int DAYS_IN_YEAR  = 360;
-    const int DAYS_IN_MONTH = 31;
+    static const int DAYS_IN_YEAR  = 360;
+    static const int DAYS_IN_MONTH = 31;
 public:
     GameDate();
     GameDate(int, int, int);

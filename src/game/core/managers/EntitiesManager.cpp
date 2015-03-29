@@ -93,6 +93,7 @@
 #include "../slots/VehicleSlot.hpp"
 //#include <ceti/StringUtils.hpp>
 #include <common/Global.hpp>
+#include <common/TurnTimer.hpp>
 
 #include <slots/ItemSlot.hpp>
 
