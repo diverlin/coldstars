@@ -22,7 +22,7 @@
 GameDate::GameDate()
 {}
 
-GameDate::GameDate(unsigned int day, unsigned int month, unsigned int year)
+GameDate::GameDate(int day, int month, int year)
     :
       m_day(day)
     , m_month(month)
