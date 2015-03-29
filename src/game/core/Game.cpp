@@ -36,14 +36,14 @@ bool Game::run() const
     TurnTimer& turnTimer = global::get().turnTimer();
     GameDate& gameDate   = global::get().gameDate();
 
-    god.createWorld();
+    Galaxy* galaxy = god.createWorld();
     
     // GAME LOOP
     while (m_isRunning)
     {                   
         turnTimer.Update();
-        god.Update(gameDate);
-        god.galaxy()->Update(turnTimer.GetTurnTick());
+        god.Update(galaxy, gameDate);
+        galaxy->Update(turnTimer.GetTurnTick());
 
         if ((turnTimer.GetTurnEnded() == true) /*&& (UserInputManagerInSpace::Instance().GetNextTurnReady())*/) {
             turnTimer.NextTurn();
