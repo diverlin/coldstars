@@ -24,8 +24,6 @@
 #include <types/EntityTypes.hpp>
 
 TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE, const std::vector<TYPE::ENTITY>&);
-const std::vector<TYPE::ENTITY>& getAllowedSubTypesByRaceId(TYPE::RACE);
-
 TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE);
 TYPE::ENTITY getRandNpcSubSubTypeId(TYPE::ENTITY);
 

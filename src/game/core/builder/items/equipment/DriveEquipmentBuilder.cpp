@@ -31,7 +31,7 @@
 
 //#include <jeti/animations/AnimationConstantRotation.hpp>
 
-#include <struct/RaceInformationCollector.hpp>
+#include <common/RaceDescriptors.hpp>
 //#include <jeti/Mesh.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -77,7 +77,7 @@ DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipment(TYPE::TECHLEVEL tech
 void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
-        race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+        race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     }
     
     if (tech_level == TYPE::TECHLEVEL::NONE_ID) {

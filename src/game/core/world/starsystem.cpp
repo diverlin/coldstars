@@ -55,7 +55,7 @@
 //#include <gui/GuiManager.hpp>
 //#include <gui/GuiRadar.hpp>
 
-#include <struct/RaceInformationCollector.hpp>
+#include <common/RaceDescriptors.hpp>
 
 //#include <jeti/Mesh.hpp>
 #include <meti/RandUtils.hpp>
@@ -483,13 +483,12 @@ void StarSystem::UpdateStates()
     bool enemy_is_here    = false;
     bool friendly_is_here = false;
     
-    Vehicle* _vehicle_evil = GetRandomVehicle(RaceInformationCollector::Instance().RACES_EVIL_vec);
-    if (_vehicle_evil != nullptr)
-    {
+    Vehicle* _vehicle_evil = GetRandomVehicle(global::get().raceDescriptors().getRaces(TYPE::KIND::EVIL));
+    if (_vehicle_evil != nullptr) {
         enemy_is_here = true;
     }
-    
-    Vehicle* _vehicle_good = GetRandomVehicle(RaceInformationCollector::Instance().RACES_GOOD_vec);
+
+    Vehicle* _vehicle_good = GetRandomVehicle(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     if (_vehicle_good != nullptr)
     {
         friendly_is_here = true;

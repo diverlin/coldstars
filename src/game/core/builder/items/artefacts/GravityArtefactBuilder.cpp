@@ -32,7 +32,7 @@
 //#include <resources/MeshCollector.hpp>
 //#include <jeti/TextureOb.hpp>
 
-#include <struct/RaceInformationCollector.hpp>
+#include <common/RaceDescriptors.hpp>
 
 
 GravityArtefactBuilder& GravityArtefactBuilder::Instance()

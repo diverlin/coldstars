@@ -24,12 +24,13 @@
 
 #include <common/constants.hpp>
 #include <types/MyInt.hpp>
-#include <struct/RaceInformationCollector.hpp>
+#include <common/RaceDescriptors.hpp>
+#include <common/Global.hpp>
 
 TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE race_id, const std::vector<TYPE::ENTITY>& subtypes)
 {
     std::vector<TYPE::ENTITY> allowed_subtypes;
-    const std::vector<TYPE::ENTITY>& allowed_race_subtypes =  getAllowedSubTypesByRaceId(race_id);
+    const std::vector<TYPE::ENTITY>& allowed_race_subtypes =  global::get().raceDescriptors().getSubTypes(race_id);
     
     for (unsigned int i=0; i<subtypes.size(); i++)
     {
@@ -47,33 +48,15 @@ TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE race_id, const std::vector<TYPE::ENT
 
 TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE race_id)
 {
-    const std::vector<TYPE::ENTITY>& allowed_race_subtypes =  getAllowedSubTypesByRaceId(race_id);
-    return meti::getRand(allowed_race_subtypes);
-}
-
-const std::vector<TYPE::ENTITY>& getAllowedSubTypesByRaceId(TYPE::RACE race_id)
-{
-    switch(race_id)
-    {
-        case TYPE::RACE::R0_ID: { return RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec;  break; }
-        case TYPE::RACE::R1_ID: { return RaceInformationCollector::Instance().RACE1_ALLOWED_SUBTYPE_vec;  break; }
-        case TYPE::RACE::R2_ID: { return RaceInformationCollector::Instance().RACE2_ALLOWED_SUBTYPE_vec;  break; }
-        case TYPE::RACE::R3_ID: { return RaceInformationCollector::Instance().RACE3_ALLOWED_SUBTYPE_vec;  break; }
-        case TYPE::RACE::R4_ID: { return RaceInformationCollector::Instance().RACE4_ALLOWED_SUBTYPE_vec;  break; }
-        case TYPE::RACE::R6_ID: { return RaceInformationCollector::Instance().RACE6_ALLOWED_SUBTYPE_vec;  break; }
-        case TYPE::RACE::R7_ID: { return RaceInformationCollector::Instance().RACE7_ALLOWED_SUBTYPE_vec;  break; }
-    }
-    
-    return RaceInformationCollector::Instance().RACE0_ALLOWED_SUBTYPE_vec; // normally this should never happend
+    return meti::getRand(global::get().raceDescriptors().getSubTypes(race_id));
 }
 
 TYPE::ENTITY getRandNpcSubSubTypeId(TYPE::ENTITY subtype_id)
 {
-    if (subtype_id == TYPE::ENTITY::RANGER_ID) {
-        return meti::getRand(RaceInformationCollector::Instance().SUBSUBTYPE_vec);
-    }
-    else {
+//    if (subtype_id == TYPE::ENTITY::RANGER_ID) {
+//        return meti::getRand(global::get().raceDescriptors().getSubSubTypes());
+//    } else {
         return subtype_id;
-    }
+//    }
 }
 

@@ -16,26 +16,86 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <common/RaceDescriptors.hpp>
+#include <assert.h>
 
-#include <struct/RaceInformationCollector.hpp>
-
-
-RaceInformationCollector& RaceInformationCollector::Instance()
+RaceDescriptors::RaceDescriptors()
 {
-    static RaceInformationCollector instance;
-    return instance;
+    std::vector<TYPE::RACE> races_good = {
+        TYPE::RACE::R0_ID,
+        TYPE::RACE::R1_ID,
+        TYPE::RACE::R2_ID,
+        TYPE::RACE::R3_ID,
+        TYPE::RACE::R4_ID
+    };
+
+    std::vector<TYPE::RACE> races_evil = {
+        TYPE::RACE::R6_ID,
+        TYPE::RACE::R7_ID
+    };
+
+    std::vector<TYPE::RACE> races_all;
+    for (auto race_id: races_good) {
+        races_all.push_back(race_id);
+    }
+    for (auto race_id: races_evil) {
+        races_all.push_back(race_id);
+    }
+
+    m_races[TYPE::KIND::GOOD] = races_good;
+    m_races[TYPE::KIND::EVIL] = races_evil;
+    m_races[TYPE::KIND::ALL] = races_all;
+
+    for (auto race_id: races_good) {
+        m_subtypes[race_id] = {
+            TYPE::ENTITY::RANGER_ID,
+            TYPE::ENTITY::WARRIOR_ID,
+            TYPE::ENTITY::TRADER_ID,
+            TYPE::ENTITY::RANGER_ID,
+            TYPE::ENTITY::DIPLOMAT_ID
+        };
+    }
+
+    for (auto race_id: races_evil) {
+        m_subtypes[race_id] = {
+            TYPE::ENTITY::WARRIOR_ID
+        };
+    }
+//    std::map<TYPE::RACE, std::vector<TYPE::ENTITY>> m_subtypes;
 }
 
-bool RaceInformationCollector::IsGood(TYPE::RACE race_id) const
+RaceDescriptors::~RaceDescriptors()
 {
-    for (unsigned int i=0; i<RACES_GOOD_vec.size(); i++)
-    {
-        if (race_id == RACES_GOOD_vec[i])
-        {
+
+}
+
+const std::vector<TYPE::RACE>&
+RaceDescriptors::getRaces(TYPE::KIND kind_id) const
+{
+    const auto& el = m_races.find(kind_id);
+    assert(el != m_races.end());
+    return el->second;
+}
+
+const std::vector<TYPE::ENTITY>&
+RaceDescriptors::getSubTypes(TYPE::RACE race_id) const
+{
+    const auto& el = m_subtypes.find(race_id);
+    assert( el != m_subtypes.end());
+    return el->second;
+}
+
+bool
+RaceDescriptors::isGood(TYPE::RACE race_id) const
+{
+    const auto& el = m_races.find(TYPE::KIND::GOOD);
+    assert(el != m_races.end());
+
+    for (const auto& id: el->second) {
+        if (race_id == id) {
             return true;
         }
-    }
-    
+    }    
     return false;
 }        
     

@@ -23,6 +23,7 @@
 #include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
 #include <common/GameDate.hpp>
+#include <common/Global.hpp>
 
 #include <world/galaxy.hpp>
 #include <world/Sector.hpp>
@@ -45,7 +46,7 @@
 #include <pilots/Npc.hpp>
 
 #include <struct/GalaxyDescription.hpp>
-#include <struct/RaceInformationCollector.hpp>
+#include <common/RaceDescriptors.hpp>
 
 #include <meti/RandUtils.hpp>
 #include <math/rand.hpp>
@@ -195,7 +196,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
                 SatelliteBuilder::Instance().EquipEquipment(satellite); // improove
             
                 {
-                    TYPE::RACE npc_race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+                    TYPE::RACE npc_race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
                     TYPE::ENTITY npc_subtype_id    = TYPE::ENTITY::WARRIOR_ID;
                     TYPE::ENTITY npc_subsubtype_id = TYPE::ENTITY::WARRIOR_ID;
             
@@ -221,7 +222,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
             int ship_num = meti::getRandInt(SHIPINIT_PER_PLANET_MIN, SHIPINIT_PER_PLANET_MAX);
             for (int j=0; j<ship_num; j++)
             {
-                TYPE::RACE npc_race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+                TYPE::RACE npc_race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
                 TYPE::ENTITY npc_subtype_id    = getRandNpcSubTypeId(npc_race_id, allowed_subtypes);
                 TYPE::ENTITY npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
                 
@@ -249,7 +250,7 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
 {       
     for (int i=0; i<spacestation_per_system; i++)
     {     
-        TYPE::RACE npc_race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+        TYPE::RACE npc_race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
         TYPE::ENTITY npc_subtype_id    = TYPE::ENTITY::WARRIOR_ID;
         TYPE::ENTITY npc_subsubtype_id = TYPE::ENTITY::WARRIOR_ID;
             

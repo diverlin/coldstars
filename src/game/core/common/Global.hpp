@@ -24,6 +24,7 @@ class EntitiesManager;
 class Config;
 class TurnTimer;
 class GameDate;
+class RaceDescriptors;
 
 class global
 {
@@ -35,6 +36,7 @@ class global
         Config& config() { return *m_config; }
         TurnTimer& turnTimer() { return *m_turnTimer; }
         GameDate& gameDate() { return *m_gameDate; }
+        RaceDescriptors& raceDescriptors() { return *m_raceDescriptors; }
 
     private:
         global();
@@ -47,4 +49,5 @@ class global
         Config* m_config = nullptr;
         TurnTimer* m_turnTimer = nullptr;
         GameDate* m_gameDate = nullptr;
+        RaceDescriptors* m_raceDescriptors = nullptr;
 };

@@ -21,7 +21,7 @@
 #include <builder/CommonBuilderHeaders.hpp>
 #include <spaceobjects/Ship.hpp>
 
-#include <struct/RaceInformationCollector.hpp>
+#include <common/RaceDescriptors.hpp>
 
 #include <common/constants.hpp>
 #include <math/rand.hpp>
@@ -65,7 +65,7 @@ Ship* ShipBuilder::GetNewShip(TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, in
 
 Ship* ShipBuilder::GetNewShip() const
 {
-    TYPE::RACE race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+    TYPE::RACE race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     TYPE::ENTITY subsubtype_id = TYPE::ENTITY::WARRIOR_ID;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
