@@ -54,10 +54,8 @@ void Galaxy::Add(Sector* sector, const glm::vec3& center)
 
 Sector* Galaxy::GetRandomSector()
 {
-    return SECTOR_vec[meti::getRandInt(0, SECTOR_vec.size()-1)];
+    return meti::getRandomElement(SECTOR_vec);
 }
-
-
 
 Sector* Galaxy::GetClosestSectorTo(Sector* sector)
 {

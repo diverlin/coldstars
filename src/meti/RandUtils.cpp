@@ -31,14 +31,14 @@ int getRandIntFromVec(const std::vector<int>& vec)
 
 float getRandFloat(float low, float high)
 {
-    assert(low<high);
+    assert(low<=high);
     float precision = 100000.0;
     return (float)getRandInt((int)precision*low, (int)precision*high)/precision;
 }
 
 int getRandInt(int low, int high)
 {
-    assert(low<high);
+    assert(low<=high);
     return (low != high) ? low + rand()%(high+1-low) : low;
 }
 
@@ -54,8 +54,7 @@ bool getRandBool()
 
 bool isActionShouldHappen(int percent)
 {
-    int rand_percent = getRandInt(1, 100);
-    return percent > rand_percent? true : false;
+    return percent > getRandInt(1, 100)? true : false;
 }
 
 glm::vec2 getRandVec2f(int radius_min, int radius_max)
