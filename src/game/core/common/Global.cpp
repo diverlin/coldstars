@@ -22,6 +22,7 @@
 #include <common/Config.hpp>
 #include <common/TurnTimer.hpp>
 #include <common/GameDate.hpp>
+#include <common/RaceDescriptors.hpp>
 
 global& global::get()
 {
@@ -36,6 +37,7 @@ global::global()
     , m_config(new Config)
     , m_turnTimer(new TurnTimer)
     , m_gameDate(new GameDate)
+    , m_raceDescriptors(new RaceDescriptors)
 {
 }
 

@@ -44,60 +44,44 @@ int getRandInt(int low, int high)
 
 int getRandSign()
 {
-    if (getRandInt(0,10) > 5)
-        return 1;
-    else
-        return -1;
+    return getRandInt(0,10) > 5 ? 1: -1;
 }
 
 bool getRandBool()
 {
-    if (getRandInt(0,10) > 5)
-        return true;
-    else
-        return false;
+    return getRandInt(0,10) > 5 ? true : false;
 }
 
 bool isActionShouldHappen(int percent)
 {
     int rand_percent = getRandInt(1, 100);
-    if (percent > rand_percent) { return true; }
-    else                        { return false; }
+    return percent > rand_percent? true : false;
 }
 
 glm::vec2 getRandVec2f(int radius_min, int radius_max)
 {
     float alpha = glm::radians((float)getRandInt(0, 360));
     int len = getRandInt(radius_min, radius_max);
-
-    glm::vec2 v(sin(alpha) * len, cos(alpha) * len);
-
-    return v;
+    return glm::vec2(sin(alpha) * len, cos(alpha) * len);
 }
 
 glm::vec3 getRandXYVec3f(int radius_min, int radius_max, float z)
 {
     float alpha = glm::radians((float)getRandInt(0, 360));
     int len = getRandInt(radius_min, radius_max);
-
-    glm::vec3 v(sin(alpha)*len, cos(alpha)*len, z);
-
-    return v;
+    return glm::vec3(sin(alpha)*len, cos(alpha)*len, z);
 }
 
 glm::vec3 getRandXYVec3Unit()
 {
     float alpha = glm::radians((float)getRandInt(0, 360));
-    glm::vec3 v(sin(alpha), cos(alpha), 0.0);
-
-    return v;
+    return glm::vec3(sin(alpha), cos(alpha), 0.0);
 }
 
 glm::vec3 getXYVec3Unit(float alpha)
 {
     alpha = glm::radians(alpha); //ugly
-    glm::vec3 v(sin(alpha), cos(alpha), 0.0);
-    return v;
+    return glm::vec3(sin(alpha), cos(alpha), 0.0);
 }
 
 } // namespace meti

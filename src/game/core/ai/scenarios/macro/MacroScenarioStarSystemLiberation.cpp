@@ -28,7 +28,8 @@
 #include "../../../ai/Task.hpp"
 #include "../../../spaceobjects/Vehicle.hpp"
 
-#include <struct/RaceInformationCollector.hpp>
+#include <common/RaceDescriptors.hpp>
+#include <common/Global.hpp>
 
 
 MacroScenarioStarSystemLiberation::MacroScenarioStarSystemLiberation() 
@@ -68,9 +69,8 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
         {
             if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != TYPE::AISCENARIO::MICRO_DESTROY_ID)
             {
-                Vehicle* target_vehicle = npc->GetObservation().GetRandVisibleVehicle(RaceInformationCollector::Instance().RACES_EVIL_vec);
-                if (target_vehicle != nullptr)
-                {
+                Vehicle* target_vehicle = npc->GetObservation().GetRandVisibleVehicle(global::get().raceDescriptors().getRaces(TYPE::KIND::EVIL));
+                if (target_vehicle != nullptr) {
                     Task microtask(TYPE::AISCENARIO::MICRO_DESTROY_ID, target_vehicle->id());
                     npc->GetStateMachine().SetCurrentMicroTask(microtask);
                     

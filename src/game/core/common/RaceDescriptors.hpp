@@ -19,23 +19,25 @@
 
 #pragma once
 
-#include <string>
+#include <vector>
+#include <map>
+#include <types/RaceTypes.hpp>
+#include <types/EntityTypes.hpp>
 
-
-namespace TYPE
+class RaceDescriptors
 {
-    enum class RACE : int
-    {
-        NONE_ID=0, R0_ID, R1_ID, R2_ID, R3_ID, R4_ID, R6_ID, R7_ID, LAST_ID
-    };
+    public:
+        RaceDescriptors();
+        ~RaceDescriptors();
 
-    enum class KIND : int
-    {
-        EVIL, GOOD, ALL
-    };
-}
+        const std::vector<TYPE::RACE>& getRaces(TYPE::KIND) const;
+        const std::vector<TYPE::ENTITY>& getSubTypes(TYPE::RACE) const;
 
-std::string getRaceStr(TYPE::RACE); 
+        bool isGood(TYPE::RACE) const;
 
+    private:
+        std::map<TYPE::KIND, std::vector<TYPE::RACE>> m_races;
+        std::map<TYPE::RACE, std::vector<TYPE::ENTITY>> m_subtypes;
+}; 
 
 

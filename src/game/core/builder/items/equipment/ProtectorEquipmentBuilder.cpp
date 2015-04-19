@@ -28,7 +28,7 @@
 
 #include <common/Global.hpp>
 
-#include <struct/RaceInformationCollector.hpp>
+#include <common/RaceDescriptors.hpp>
 
 #include <meti/RandUtils.hpp>
 
@@ -75,7 +75,7 @@ ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipment(TYPE::TE
 void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int protection_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
-        race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+        race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     }
     
     if (tech_level == TYPE::TECHLEVEL::NONE_ID) {

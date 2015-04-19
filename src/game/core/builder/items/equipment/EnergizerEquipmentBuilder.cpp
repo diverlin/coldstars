@@ -31,7 +31,7 @@
 //#include <resources/TextureCollector.hpp>
 //#include <jeti/TextureOb.hpp>
 
-#include <struct/RaceInformationCollector.hpp>
+#include <common/RaceDescriptors.hpp>
 
 #include <meti/RandUtils.hpp>
 
@@ -77,7 +77,7 @@ EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipment(TYPE::TE
 void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
-        race_id = meti::getRand(RaceInformationCollector::Instance().RACES_GOOD_vec);
+        race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     }
     
     if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
