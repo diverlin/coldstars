@@ -22,7 +22,7 @@
 #include <builder/pilots/NpcBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <struct/StarSystemDescription.hpp>
+#include <struct/StarSystemDescriptor.hpp>
 
 #include <spaceobjects/IncludeSpaceObjects.hpp>
 
@@ -67,23 +67,23 @@ StarSystem* StarSystemBuilder::GetNewStarSystemTemplate(INTLONGEST id) const
     return starsystem;
 } 
 
-StarSystem* StarSystemBuilder::GetNewStarSystem(const StarSystemDescription& starsystem_description) const
+StarSystem* StarSystemBuilder::GetNewStarSystem(const StarSystemDescriptor& starsystem_descriptor) const
 {
     StarSystem* starsystem = GetNewStarSystemTemplate();
-    CreateNewInternals(starsystem, starsystem_description);
+    CreateNewInternals(starsystem, starsystem_descriptor);
     
     return starsystem;
 } 
             
-void StarSystemBuilder::CreateNewInternals(StarSystem* starsystem, const StarSystemDescription& starsystem_description) const
+void StarSystemBuilder::CreateNewInternals(StarSystem* starsystem, const StarSystemDescriptor& starsystem_descriptor) const
 {
-    starsystem->GetAsteroidManager().Parameterize(starsystem_description.asteroid_num);
+    starsystem->GetAsteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
     CreateStar(starsystem);
     
     int distNebula_num = meti::getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
     // alpitodorender CreateBackground(starsystem, distNebula_num, /*distStar_num*/1, starsystem->GetStar()->GetColorId());
       
-    CreatePlanets(starsystem, starsystem_description.planet_num);
+    CreatePlanets(starsystem, starsystem_descriptor.planet_num);
 }
  
 void StarSystemBuilder::CreateBackground(StarSystem* starsystem, int distNebula_num, int distStar_num, int color_id) const

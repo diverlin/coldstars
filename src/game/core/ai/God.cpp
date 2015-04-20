@@ -45,7 +45,7 @@
 #include <ai/Task.hpp>
 #include <pilots/Npc.hpp>
 
-#include <struct/GalaxyDescription.hpp>
+#include <struct/GalaxyDescriptor.hpp>
 #include <common/RaceDescriptors.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -60,39 +60,12 @@ m_DateLastUpdate(0,0,0)
 God::~God()
 {}
 
-Galaxy* God::createWorld()
+Galaxy* God::createWorld(const GalaxyDescriptor& galaxy_descriptor)
 {
-    GalaxyDescription galaxy_description;
-    galaxy_description.allow_invasion = false;
-    galaxy_description.sector_num = 1;
-
-    for (int i=0; i<galaxy_description.sector_num; i++) {
-        SectorDescription sector_description;
-        sector_description.starsystem_num = 1;
-
-        for (int j=0; j<sector_description.starsystem_num; j++) {
-            StarSystemDescription starsystem_description;
-            starsystem_description.planet_num = 5;
-            starsystem_description.spacestation_num = 3;
-            starsystem_description.asteroid_num = 3;
-
-            starsystem_description.allow_ships         = false;
-
-            starsystem_description.allow_ship_ranger   = false;
-            starsystem_description.allow_ship_warrior  = false;
-            starsystem_description.allow_ship_trader   = true;
-            starsystem_description.allow_ship_pirat    = false;
-            starsystem_description.allow_ship_diplomat = false;
-            sector_description.starsystem_descriptions.push_back(starsystem_description);
-        }
-
-        galaxy_description.sector_descriptions.push_back(sector_description);
-    }
-
-    Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
-    CreateLife(galaxy, galaxy_description);
-    if (galaxy_description.allow_invasion == true) {
-        CreateInvasion(galaxy, galaxy_description);
+    Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_descriptor);
+    CreateLife(galaxy, galaxy_descriptor);
+    if (galaxy_descriptor.allow_invasion == true) {
+        CreateInvasion(galaxy, galaxy_descriptor);
     }
 
     bool player2space = true;
@@ -110,21 +83,21 @@ Galaxy* God::createWorld()
     return galaxy;
 }
 
-void God::CreateLife(Galaxy* galaxy, const GalaxyDescription& galaxy_description) const
+void God::CreateLife(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descriptor) const
 {
     for(unsigned int i=0; i<galaxy->SECTOR_vec.size(); i++) {
         for(unsigned int j=0; j<galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++) {
-            const StarSystemDescription& starsystem_description = galaxy_description.sector_descriptions[i].starsystem_descriptions[j];
+            const StarSystemDescriptor& starsystem_descriptor = galaxy_descriptor.sector_descriptors[i].starsystem_descriptors[j];
             StarSystem* starsystem = galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j];
             for(unsigned int j=0; j<starsystem->PLANET_vec.size(); j++) {
-                CreateLifeAtPlanet(starsystem->PLANET_vec[j], starsystem_description);
+                CreateLifeAtPlanet(starsystem->PLANET_vec[j], starsystem_descriptor);
             }
-            CreateSpaceStations(starsystem, starsystem_description.spacestation_num);
+            CreateSpaceStations(starsystem, starsystem_descriptor.spacestation_num);
         }
     }
 }
 
-void God::CreateInvasion(Galaxy* galaxy, const GalaxyDescription& galaxy_description) const
+void God::CreateInvasion(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descriptor) const
 {
     for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
         StarSystem* starsystem = galaxy->GetRandomSector()->GetRandomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
@@ -154,7 +127,7 @@ void God::ProceedInvasion(Galaxy* galaxy) const
     starsystem_invade_from->CreateGroupAndShareTask(npc_leader, starsystem_invade_to, num_max);
 }
 
-void God::Update(Galaxy* galaxy, const GameDate& date)
+void God::update(Galaxy* galaxy, const GameDate& date)
 {
     if (m_DateLastUpdate - date >= GOD_REST_IN_DAYS)
     {
@@ -173,7 +146,7 @@ void God::Update(Galaxy* galaxy, const GameDate& date)
     }
 }                
      
-void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsystem_description) const
+void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescriptor& starsystem_descriptor) const
 {            
     unsigned long int population = 0;
     meti::getRandBool() ? population = meti::getRandInt(POPULATION_MIN, POPULATION_MAX) : population = 0;
@@ -187,7 +160,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
 
     if (population > 0) 
     {
-        if (starsystem_description.allow_satellites == true)
+        if (starsystem_descriptor.allow_satellites == true)
         {
             int sattelitewarriors_num = 1; //getRandInt(SATELLITEWARRIORS_PER_PLANET_MIN, SATELLITEWARRIORS_PER_PLANET_MAX);
             for (int j=0; j<sattelitewarriors_num; j++)
@@ -210,14 +183,14 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescription& starsy
             }
         }
         
-        if (starsystem_description.allow_ships == true)
+        if (starsystem_descriptor.allow_ships == true)
         {
             std::vector<TYPE::ENTITY> allowed_subtypes;
-            if (starsystem_description.allow_ship_ranger == true)      { allowed_subtypes.push_back(TYPE::ENTITY::RANGER_ID); }        
-            if (starsystem_description.allow_ship_warrior == true)     { allowed_subtypes.push_back(TYPE::ENTITY::WARRIOR_ID); }    
-            if (starsystem_description.allow_ship_trader == true)     { allowed_subtypes.push_back(TYPE::ENTITY::TRADER_ID); }    
-            if (starsystem_description.allow_ship_pirat == true)     { allowed_subtypes.push_back(TYPE::ENTITY::PIRAT_ID); }    
-            if (starsystem_description.allow_ship_diplomat == true) { allowed_subtypes.push_back(TYPE::ENTITY::DIPLOMAT_ID); }    
+            if (starsystem_descriptor.allow_ship_ranger == true)      { allowed_subtypes.push_back(TYPE::ENTITY::RANGER_ID); }
+            if (starsystem_descriptor.allow_ship_warrior == true)     { allowed_subtypes.push_back(TYPE::ENTITY::WARRIOR_ID); }
+            if (starsystem_descriptor.allow_ship_trader == true)      { allowed_subtypes.push_back(TYPE::ENTITY::TRADER_ID); }
+            if (starsystem_descriptor.allow_ship_pirat == true)       { allowed_subtypes.push_back(TYPE::ENTITY::PIRAT_ID); }
+            if (starsystem_descriptor.allow_ship_diplomat == true)    { allowed_subtypes.push_back(TYPE::ENTITY::DIPLOMAT_ID); }
             
             int ship_num = meti::getRandInt(SHIPINIT_PER_PLANET_MIN, SHIPINIT_PER_PLANET_MAX);
             for (int j=0; j<ship_num; j++)

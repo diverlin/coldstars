@@ -16,10 +16,9 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef STARSYSTEMDESCRIPTION_H
-#define STARSYSTEMDESCRIPTION_H
+#pragma once
 
-struct StarSystemDescription
+struct StarSystemDescriptor
 {
     public:
         int race_id;
@@ -38,7 +37,7 @@ struct StarSystemDescription
         bool allow_ship_pirat;
         bool allow_ship_diplomat;
                                                         
-        StarSystemDescription():
+        StarSystemDescriptor():
         race_id(0),
         planet_num(0),
         spacestation_num(0),
@@ -52,12 +51,12 @@ struct StarSystemDescription
         allow_ship_trader(true),
         allow_ship_pirat(true),
         allow_ship_diplomat(true)
-        {};
+        {}
         
-        ~StarSystemDescription() {};
+        ~StarSystemDescriptor() {}
 }; 
 
-#endif 
+
     
 
         

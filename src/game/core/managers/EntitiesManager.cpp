@@ -673,7 +673,7 @@ bool EntitiesManager::UpdateSaveRequest()
 {        
     if (save_request == true)
     {
-        SaveEvent("save"+std::to_string(global::get().turnTimer().GetTurnCounter())+".info");
+        SaveEvent("save"+std::to_string(global::get().turnTimer().getStopTurnTimer())+".info");
         save_request = false;
         
         return true;

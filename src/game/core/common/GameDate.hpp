@@ -22,8 +22,10 @@
 
 class GameDate
 {
-    static const int DAYS_IN_YEAR  = 360;
+    static const int CURRENT_YEAR = 4000;
     static const int DAYS_IN_MONTH = 31;
+    static const int MONTH_IN_YEAR = 12;
+    static const int DAYS_IN_YEAR = DAYS_IN_MONTH * MONTH_IN_YEAR;
 public:
     GameDate();
     GameDate(int, int, int);
@@ -35,14 +37,15 @@ public:
     bool operator==(const GameDate&) const;
     bool operator!=(const GameDate&) const;
     int operator-(const GameDate&) const;
-    void operator++(int);
+
+    void dayPass();
 
     std::string str() const;
 
 private:
     int m_day = 0;
     int m_month = 0;
-    int m_year = 0;
+    int m_year = CURRENT_YEAR;
 };
 
 

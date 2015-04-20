@@ -293,10 +293,10 @@ namespace ENTITY
         const int PARSEC = 200;
                 
         const int SECTOR_NUM = 3;
-        
+
         const int STARSYSTEM_NUM_MIN = 2;
         const int STARSYSTEM_NUM_MAX = 4;
-        
+
         const int DISTANTSTAR_SIZE_MIN = 3; 
         const int DISTANTSTAR_SIZE_MAX = 15;
     }

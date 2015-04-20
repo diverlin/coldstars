@@ -28,30 +28,57 @@
 #include <managers/EntitiesManager.hpp>
 #include <ai/God.hpp>
 #include <world/galaxy.hpp>
+#include <struct/GalaxyDescriptor.hpp>
 
 
 bool Game::run() const
 {
+    /// shortcuts
     God& god             = global::get().god();
     TurnTimer& turnTimer = global::get().turnTimer();
     GameDate& gameDate   = global::get().gameDate();
 
-    Galaxy* galaxy = god.createWorld();
+    /// create the world
+    GalaxyDescriptor galaxy_descriptor;
+    galaxy_descriptor.allow_invasion = false;
+    galaxy_descriptor.sector_num = 1;
+    for (int i=0; i<galaxy_descriptor.sector_num; i++) {
+        SectorDescriptor sector_descriptor;
+        sector_descriptor.starsystem_num = 1;
+        for (int j=0; j<sector_descriptor.starsystem_num; j++) {
+            StarSystemDescriptor starsystem_descriptor;
+            starsystem_descriptor.planet_num = 5;
+            starsystem_descriptor.spacestation_num = 3;
+            starsystem_descriptor.asteroid_num = 3;
 
-    // GAME LOOP
+            starsystem_descriptor.allow_ships         = false;
+
+            starsystem_descriptor.allow_ship_ranger   = false;
+            starsystem_descriptor.allow_ship_warrior  = false;
+            starsystem_descriptor.allow_ship_trader   = true;
+            starsystem_descriptor.allow_ship_pirat    = false;
+            starsystem_descriptor.allow_ship_diplomat = false;
+            sector_descriptor.starsystem_descriptors.push_back(starsystem_descriptor);
+        }
+        galaxy_descriptor.sector_descriptors.push_back(sector_descriptor);
+    }
+
+    Galaxy* galaxy = god.createWorld(galaxy_descriptor);
+
+    /// game loop
     while (m_isRunning)
     {                   
-        turnTimer.Update();
-        god.Update(galaxy, gameDate);
-        galaxy->Update(turnTimer.GetTurnTick());
+        turnTimer.update();
+        god.update(galaxy, gameDate);
+        galaxy->Update(turnTimer.getStopTurnTimer());
 
-        if ((turnTimer.GetTurnEnded() == true) /*&& (UserInputManagerInSpace::Instance().GetNextTurnReady())*/) {
-            turnTimer.NextTurn();
-            gameDate++;
+        if (turnTimer.getTurnEnded() == true) {
+            turnTimer.nextTurn();
+            gameDate.dayPass();
             Logger::Instance().Log("*** NEXT TURN, date:"+gameDate.str());
         }
         
-        if (turnTimer.GetTurnEnded() == true) {
+        if (turnTimer.getTurnEnded() == true) {
             global::get().entitiesManager().ClearGarbage();
 
 //            bool save_event = global::get().entitiesManager().UpdateSaveRequest();
