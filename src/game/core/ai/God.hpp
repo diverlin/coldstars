@@ -25,10 +25,11 @@
 #include <struct/StarSystemsConditionData.hpp>
 
 class Galaxy;
-class GalaxyDescription;
 class StarSystem;
-class StarSystemDescription;
 class Planet;
+
+class GalaxyDescriptor;
+class StarSystemDescriptor;
 
 class God
 {
@@ -36,28 +37,28 @@ class God
         God();
         ~God();
 
-        Galaxy* createWorld();
-        void Update(Galaxy*, const GameDate&);
+        Galaxy* createWorld(const GalaxyDescriptor&);
+        void update(Galaxy*, const GameDate&);
 
-    private:      
+    private:
         GameDate m_DateLastUpdate;
 
         StarSystemsConditionData data_starsystems_condition;
         
-        void CreateLifeAtPlanet(Planet*, const StarSystemDescription&) const;
+        void CreateLifeAtPlanet(Planet*, const StarSystemDescriptor&) const;
         
         void CreateSpaceStations(StarSystem*, int) const;
-        void CreateShips(StarSystem*, int, TYPE::RACE race_id = TYPE::RACE::NONE_ID, TYPE::ENTITY subtype_id = TYPE::ENTITY::NONE_ID, TYPE::ENTITY subsubtype_id = TYPE::ENTITY::NONE_ID) const;   
+        void CreateShips(StarSystem*, int, TYPE::RACE race_id = TYPE::RACE::NONE_ID, TYPE::ENTITY subtype_id = TYPE::ENTITY::NONE_ID, TYPE::ENTITY subsubtype_id = TYPE::ENTITY::NONE_ID) const;
         
         void ProceedInvasion(Galaxy*) const;
 
-        void CreateLife(Galaxy*, const GalaxyDescription&) const;
-        void CreateInvasion(Galaxy*, const GalaxyDescription&) const;
+        void CreateLife(Galaxy*, const GalaxyDescriptor&) const;
+        void CreateInvasion(Galaxy*, const GalaxyDescriptor&) const;
 }; 
 
 
-    
 
-        
+
+
 
 

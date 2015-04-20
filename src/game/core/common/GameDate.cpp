@@ -65,13 +65,13 @@ int GameDate::operator-(const GameDate& rhs) const
     return abs(diff_day + (diff_month * DAYS_IN_MONTH) + (diff_year * DAYS_IN_YEAR));
 }
 
-void GameDate::operator++(int val)
+void GameDate::dayPass()
 {
-    m_day+=val;
-    if (m_day>=31) {
+    m_day++;
+    if (m_day >= DAYS_IN_MONTH) {
         m_month++;
         m_day = 1;
-        if (m_month>=12) {
+        if (m_month >= MONTH_IN_YEAR) {
             m_month = 1;
             m_year++;
         }

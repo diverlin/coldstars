@@ -20,15 +20,12 @@
 #include "Logger.hpp"
 
 TurnTimer::TurnTimer()
-    :
-      turn_tick(2)
-    , turn_counter(0)
 {}
 
 TurnTimer::~TurnTimer()
 {}
 
-void TurnTimer::NextTurn() 
+void TurnTimer::nextTurn()
 {
 //    if (global::get().config().GetAutoSaveMode() == true) {
 //        Logger::Instance().Log("*** AUTO (SaveRequest)");
@@ -40,26 +37,25 @@ void TurnTimer::NextTurn()
 //        global::get().entitiesManager().LoadRequest();
 //    }
                 
-    turn_tick = TURN_TIME;
-    turn_ended = false;
-    
-    turn_counter++;
+    m_stopTurnTimer = TURN_TIME;
+    m_turnEnded = false;
+    m_turnCounter++;
 }
                         
-void TurnTimer::Update(bool auto_turn)
+void TurnTimer::update(bool auto_turn)
 {        
-    turn_tick--;
+    m_stopTurnTimer--;
 
     /////////// AUTO-TURN /////////////
-    if ( (turn_tick < -50) && (auto_turn == true) ) {
+    if ( (m_stopTurnTimer < -50) && (auto_turn == true) ) {
         Logger::Instance().Log("*** AUTO_TURN_MODE proceed END TURN");
-        NextTurn();
+        nextTurn();
     }
         
-    if (turn_tick < 0) {
-        turn_ended = true;
+    if (m_stopTurnTimer < 0) {
+        m_turnEnded = true;
     } else {
-        turn_ended = false;
+        m_turnEnded = false;
     }
 }
 

@@ -22,7 +22,7 @@
 #include <types/MyInt.hpp>
 
 class Galaxy;
-class GalaxyDescription;
+class GalaxyDescriptor;
 
 
 class GalaxyBuilder
@@ -32,14 +32,14 @@ class GalaxyBuilder
         ~GalaxyBuilder();
         
         Galaxy* GetNewGalaxyTemplate(INTLONGEST id = NONE_ID) const; 
-        Galaxy* GetNewGalaxy(const GalaxyDescription&) const; 
+        Galaxy* GetNewGalaxy(const GalaxyDescriptor&) const;
                                                 
     private:
-        GalaxyBuilder() {};
+        GalaxyBuilder() {}
         GalaxyBuilder(const GalaxyBuilder&) = delete;
         GalaxyBuilder& operator=(const GalaxyBuilder&) = delete;
         
-        void CreateNewInternals(Galaxy*, const GalaxyDescription&) const;
+        void CreateNewInternals(Galaxy*, const GalaxyDescriptor&) const;
 }; 
     
 

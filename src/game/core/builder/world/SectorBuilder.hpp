@@ -17,13 +17,12 @@
 */
 
 
-#ifndef SECTORBUILDER_HPP
-#define SECTORBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
 class Sector;
-class SectorDescription;
+class SectorDescriptor;
 
 
 class SectorBuilder
@@ -33,19 +32,18 @@ class SectorBuilder
         ~SectorBuilder();
         
         Sector* GetNewSectorTemplate(INTLONGEST id = NONE_ID) const; 
-        Sector* GetNewSector(const SectorDescription&) const; 
+        Sector* GetNewSector(const SectorDescriptor&) const;
     
     private:
-        SectorBuilder() {};
+        SectorBuilder() {}
         SectorBuilder(const SectorBuilder&) = delete;
         SectorBuilder& operator=(const SectorBuilder&) = delete;
         
-        void CreateNewInternals(Sector*, const SectorDescription&) const;
+        void CreateNewInternals(Sector*, const SectorDescriptor&) const;
 }; 
 
 
 
-#endif 
     
 
         

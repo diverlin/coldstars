@@ -26,18 +26,17 @@ public:
     TurnTimer();
     ~TurnTimer();
 
-    bool GetTurnEnded()  const { return turn_ended; };
-    int GetTurnTick() const { return turn_tick; };
-    unsigned long int GetTurnCounter() const { return turn_counter; };
-    void NextTurn();
+    bool getTurnEnded()  const { return m_turnEnded; };
+    int getStopTurnTimer() const { return m_stopTurnTimer; };
+    unsigned long int getTurnCounter() const { return m_turnCounter; };
+    void nextTurn();
 
-    void Update(bool auto_turn = false);
+    void update(bool auto_turn = false);
     
 private:
-    int turn_tick;
-    unsigned long int turn_counter;
-
-    bool turn_ended;
+    int m_stopTurnTimer = TURN_TIME;
+    unsigned long int m_turnCounter = 0;
+    bool m_turnEnded = false;
 };
 
 

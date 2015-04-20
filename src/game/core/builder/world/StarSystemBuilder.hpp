@@ -16,13 +16,12 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef STARSYSTEMBUILDER_HPP
-#define STARSYSTEMBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
 class StarSystem;
-class StarSystemDescription;
+class StarSystemDescriptor;
 
 class StarSystemBuilder
 {
@@ -31,21 +30,21 @@ class StarSystemBuilder
         ~StarSystemBuilder();
         
         StarSystem* GetNewStarSystemTemplate(INTLONGEST id = NONE_ID) const; 
-        StarSystem* GetNewStarSystem(const StarSystemDescription&) const;
+        StarSystem* GetNewStarSystem(const StarSystemDescriptor&) const;
     
     private:
-        StarSystemBuilder() {};
+        StarSystemBuilder() {}
         StarSystemBuilder(const StarSystemBuilder&) = delete;
         StarSystemBuilder& operator=(const StarSystemBuilder&) = delete;
         
-        void CreateNewInternals(StarSystem*, const StarSystemDescription&) const;
+        void CreateNewInternals(StarSystem*, const StarSystemDescriptor&) const;
         
         void CreateBackground(StarSystem*, int, int, int) const;
         void CreateStar(StarSystem*) const;
         void CreatePlanets(StarSystem*, int) const;
 }; 
 
-#endif 
+
     
 
         

@@ -19,12 +19,11 @@
 #include "SectorBuilder.hpp"
 #include "StarSystemBuilder.hpp"
 #include "../CommonBuilderHeaders.hpp"
-#include "../../world/Sector.hpp"
-#include "../../world/starsystem.hpp"
+#include <world/Sector.hpp>
+#include <struct/SectorDescriptor.hpp>
+#include <world/starsystem.hpp>
 
 #include <common/Config.hpp>
-
-#include "../../struct/GalaxyDescription.hpp"
 
 #include <meti/RandUtils.hpp>
 
@@ -58,21 +57,21 @@ Sector* SectorBuilder::GetNewSectorTemplate(INTLONGEST id) const
     return sector;
 } 
 
-Sector* SectorBuilder::GetNewSector(const SectorDescription& sector_description) const
+Sector* SectorBuilder::GetNewSector(const SectorDescriptor& sector_descriptor) const
 {
     Sector* sector = GetNewSectorTemplate();
-    CreateNewInternals(sector, sector_description);
+    CreateNewInternals(sector, sector_descriptor);
     
     return sector;
 } 
         
-void SectorBuilder::CreateNewInternals(Sector* sector, const SectorDescription& sector_description) const
+void SectorBuilder::CreateNewInternals(Sector* sector, const SectorDescriptor& sector_descriptor) const
 {
-    for(unsigned int i=0; i<sector_description.starsystem_descriptions.size(); i++)
+    for(const auto& starsystem_descriptor: sector_descriptor.starsystem_descriptors)
     {  
         glm::vec3 center(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));
         
-        StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem(sector_description.starsystem_descriptions[i]);
+        StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem(starsystem_descriptor);
         sector->Add(starsystem, center); 
     }
 }
