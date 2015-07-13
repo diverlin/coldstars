@@ -85,10 +85,10 @@ Galaxy* God::createWorld(const GalaxyDescriptor& galaxy_descriptor)
 
 void God::CreateLife(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descriptor) const
 {
-    for(unsigned int i=0; i<galaxy->SECTOR_vec.size(); i++) {
-        for(unsigned int j=0; j<galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++) {
+    for(unsigned int i=0; i<galaxy->m_sectors.size(); i++) {
+        for(unsigned int j=0; j<galaxy->m_sectors[i]->STARSYSTEM_vec.size(); j++) {
             const StarSystemDescriptor& starsystem_descriptor = galaxy_descriptor.sector_descriptors[i].starsystem_descriptors[j];
-            StarSystem* starsystem = galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j];
+            StarSystem* starsystem = galaxy->m_sectors[i]->STARSYSTEM_vec[j];
             for(unsigned int j=0; j<starsystem->PLANET_vec.size(); j++) {
                 CreateLifeAtPlanet(starsystem->PLANET_vec[j], starsystem_descriptor);
             }

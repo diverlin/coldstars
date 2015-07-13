@@ -19,7 +19,6 @@
 #include "Screen.hpp"
 #include <Render.hpp>
 
-#include <common/Global.hpp>
 #include <jeti/Config.hpp>
 
 #include <constants.hpp>
@@ -49,11 +48,12 @@ Screen::~Screen()
 
 void Screen::InitRenderStuff()
 {
-    int width      = global::get().configVideo().width;
-    int height     = global::get().configVideo().height;
-    int bpp        = global::get().configVideo().bpp;
-    bool vsync     = global::get().configVideo().vsync;
-    int fps_limit  = global::get().configVideo().fps_limit;
+    Config config;
+    int width      = config.width;
+    int height     = config.height;
+    int bpp        = config.bpp;
+    bool vsync     = config.vsync;
+    int fps_limit  = config.fps_limit;
 
     std::string title("coldstars");
 

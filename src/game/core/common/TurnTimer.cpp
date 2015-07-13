@@ -43,7 +43,7 @@ void TurnTimer::nextTurn()
 }
                         
 void TurnTimer::update(bool auto_turn)
-{        
+{
     m_stopTurnTimer--;
 
     /////////// AUTO-TURN /////////////

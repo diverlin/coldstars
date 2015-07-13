@@ -24,7 +24,7 @@
 #include <Mesh.hpp>
 #include <animations/BaseAnimationRotation.hpp>
 
-#include <jeti/Orientation.hpp>
+#include <ceti/Orientation.hpp>
 
 #include <glm/gtx/transform.hpp>
 #include <meti/QuaternionUtils.hpp>

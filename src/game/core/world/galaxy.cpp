@@ -18,12 +18,11 @@
 
 #include "galaxy.hpp"
 #include "Sector.hpp"
-#include "../common/constants.hpp"
+#include <common/constants.hpp>
 #include <common/Global.hpp>
 #include <managers/EntitiesManager.hpp>
 
 #include <meti/RandUtils.hpp>
-
 
 #include "../struct/StarSystemsConditionData.hpp"
 
@@ -39,8 +38,8 @@ Galaxy::~Galaxy()
 /* virtual */
 void Galaxy::putChildrenToGarbage() const
 {
-    for (unsigned int i=0; i<SECTOR_vec.size(); i++) {
-        global::get().entitiesManager().AddToGarbage(SECTOR_vec[i]);
+    for (unsigned int i=0; i<m_sectors.size(); i++) {
+        global::get().entitiesManager().AddToGarbage(m_sectors[i]);
     }
 }
 
@@ -49,12 +48,12 @@ void Galaxy::Add(Sector* sector, const glm::vec3& center)
     sector->SetGalaxy(this);
     sector->setCenter(center);
 
-    SECTOR_vec.push_back(sector);
+    m_sectors.push_back(sector);
 }
 
 Sector* Galaxy::GetRandomSector()
 {
-    return meti::getRandomElement(SECTOR_vec);
+    return meti::getRandomElement(m_sectors);
 }
 
 Sector* Galaxy::GetClosestSectorTo(Sector* sector)
@@ -62,19 +61,16 @@ Sector* Galaxy::GetClosestSectorTo(Sector* sector)
     float dist_min = INCREDIBLY_MAX_FLOAT;
     int index_min = -1;
 
-    for (unsigned int i=0; i<SECTOR_vec.size(); i++)
-    {
-        float dist = meti::distance(sector->center(), SECTOR_vec[i]->center());
-        if (dist < dist_min)
-        {
+    for (unsigned int i=0; i<m_sectors.size(); i++) {
+        float dist = meti::distance(sector->center(), m_sectors[i]->center());
+        if (dist < dist_min) {
             dist_min = dist;
             index_min = i;
         }
     }
 
-    if (index_min != -1)
-    {
-        return SECTOR_vec[index_min];
+    if (index_min != -1) {
+        return m_sectors[index_min];
     }
 
     return nullptr;
@@ -82,9 +78,8 @@ Sector* Galaxy::GetClosestSectorTo(Sector* sector)
 
 void Galaxy::Update(int time)
 {
-    for (unsigned int i=0; i<SECTOR_vec.size(); i++)
-    {
-        SECTOR_vec[i]->Update(time);
+    for (unsigned int i=0; i<m_sectors.size(); i++) {
+        m_sectors[i]->Update(time);
     }
 }
 
