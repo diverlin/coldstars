@@ -17,45 +17,46 @@
 */
 
 
-#ifndef GALAXY_H
-#define GALAXY_H
+#pragma once
 
-#include "../common/Base.hpp"
-#include "../common/constants.hpp"
+#include <common/Base.hpp>
+#include <glm/glm.hpp>
+
 class Sector;
 class StarSystemsConditionData;
 
 class Galaxy : public Base
 {
-      public:
-             Galaxy(int);
-             ~Galaxy();
-                
-                virtual void putChildrenToGarbage() const;
-                
-             void Add(Sector*, const glm::vec3&);
-             
-             Sector* GetRandomSector();
-                Sector* GetClosestSectorTo(Sector*);
-                     
-            void Update(int);
+    public:
+        Galaxy(int);
+        ~Galaxy();
+
+        virtual void putChildrenToGarbage() const;
+
+        void Add(Sector*, const glm::vec3&);
+
+        Sector* GetRandomSector();
+        Sector* GetClosestSectorTo(Sector*);
+
+        void Update(int);
 
         void FillStarSystemsCondition(StarSystemsConditionData&) const;
 
-            void Save(boost::property_tree::ptree&) const;
-            void Load(const boost::property_tree::ptree&);
-            void Resolve();
+        void Save(boost::property_tree::ptree&) const;
+        void Load(const boost::property_tree::ptree&);
+        void Resolve();
 
-         private:
-               std::vector<Sector*> SECTOR_vec;
+    private:
+        std::vector<Sector*> m_sectors;
         
-            void SaveData(boost::property_tree::ptree&, const std::string&) const;
-            void LoadData(const boost::property_tree::ptree&);
-            void ResolveData();
-                           
-               friend class GuiGalaxyMap;
-               friend class Observation;
-                friend class God;
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void LoadData(const boost::property_tree::ptree&);
+        void ResolveData();
+
+        // ugly
+//        friend class GuiGalaxyMap;
+//        friend class Observation;
+        friend class God;
 };
 
-#endif 
+

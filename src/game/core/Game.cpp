@@ -75,7 +75,6 @@ bool Game::run() const
         if (turnTimer.getTurnEnded() == true) {
             turnTimer.nextTurn();
             gameDate.dayPass();
-            Logger::Instance().Log("*** NEXT TURN, date:"+gameDate.str());
         }
         
         if (turnTimer.getTurnEnded() == true) {

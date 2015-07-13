@@ -23,7 +23,11 @@
 #include <glm/gtx/quaternion.hpp>
 
 //#include <text/InfoTable.hpp>
-#include <jeti/Orientation.hpp>
+#include <ceti/Orientation.hpp>
+
+namespace ceti {
+class Orientation;
+}
 
 namespace jeti {
 
@@ -31,7 +35,6 @@ const glm::vec3 AXIS_X = glm::vec3(1.0f, 0.0f, 0.0f);
 const glm::vec3 AXIS_Y = glm::vec3(0.0f, 1.0f, 0.0f);
 const glm::vec3 AXIS_Z = glm::vec3(0.0f, 0.0f, 1.0f);
 
-class Orientation;
 class Mesh;
 class TextureOb;
 class BaseAnimationRotation;
@@ -74,7 +77,7 @@ class BaseDrawable
         
         TextureOb* m_TextureOb;
         Mesh* m_Mesh; 
-        Orientation* m_Orientation;
+        ceti::Orientation* m_Orientation;
 
         BaseAnimationRotation* m_AnimationRotation;
         

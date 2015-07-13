@@ -14,14 +14,18 @@ Config::Config()
       fps_limit(60),
       vsync(true)
 {
-    boost::property_tree::ptree ptree;
-    boost::property_tree::info_parser::read_info(CONFIG_PATH+"config.info", ptree);
+    try {
+        boost::property_tree::ptree ptree;
+        boost::property_tree::info_parser::read_info(CONFIG_PATH+"config.info", ptree);
 
-    width     = ptree.get<int>("Video.width");
-    height    = ptree.get<int>("Video.height");
-    bpp       = ptree.get<int>("Video.bpp");
-    fps_limit = ptree.get<int>("Video.fps_limit");
-    vsync     = ptree.get<bool>("Video.vsync");
+        width     = ptree.get<int>("Video.width");
+        height    = ptree.get<int>("Video.height");
+        bpp       = ptree.get<int>("Video.bpp");
+        fps_limit = ptree.get<int>("Video.fps_limit");
+        vsync     = ptree.get<bool>("Video.vsync");
+    } catch (...) {
+
+    }
 }
 
 Config::~Config()
