@@ -19,7 +19,7 @@
 #include "Bomb.hpp"
 #include "../../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
-#include "../../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 
 Bomb::Bomb(int id)
 :

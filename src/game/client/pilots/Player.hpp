@@ -50,15 +50,15 @@ class BaseParticleSystem;
 class VerticalFlowText;
 
 
-struct UnresolvedDataPlayer
-{
-    int npc_id;
-    int starsystem_id;
-    glm::vec2 screen_pos;
-};
+//struct UnresolvedDataPlayer
+//{
+//    int npc_id;
+//    int starsystem_id;
+//    glm::vec2 screen_pos;
+//};
 
 
-class Player : public Base
+class Player /*: public Base*/
 {
     public:
         Player(int);
@@ -71,23 +71,8 @@ class Player : public Base
         Npc* GetNpc() const { return npc; }
         Cursor& GetCursor() { return cursor; }
         
-        void BindNpc(Npc*);
-        
-        void ClearVisibleEntities();
-        
-        void AddIfVisible(Star*);
-        void AddIfVisible(Planet*);
-        void AddIfVisible(Asteroid*);             
-        void AddIfVisible(Container*);         
-        void AddIfVisible(RocketBullet*);  
-        void AddIfVisible(BlackHole*);  
-        void AddIfVisible(Vehicle*); 
-        
-        void AddIfVisible(ShockWaveEffect*);  
-        void AddIfVisible(LazerTraceEffect*);  
-        void AddIfVisible(jeti::BaseParticleSystem*);
-        void AddIfVisible(VerticalFlowText*); 
-          
+        void BindNpc(Npc*);        
+
         bool IsAbleToGetFullControlOnScanedVehicle(bool force_full_control = false) const;
           
         void RunSession(const TurnTimer&); 
@@ -97,9 +82,9 @@ class Player : public Base
         void UpdatePostTransaction();        
         void UpdatePostTransactionEvent(TurnTimer&);
                                                 
-        void Save(boost::property_tree::ptree&) const;        
-        void Load(const boost::property_tree::ptree&);
-        void Resolve();
+//        void Save(boost::property_tree::ptree&) const;
+//        void Load(const boost::property_tree::ptree&);
+//        void Resolve();
                  
     private:
         Npc* npc;
@@ -148,21 +133,14 @@ class Player : public Base
         bool MouseInteractionWithStars(const MouseData&);
         void MouseNavigation(const MouseData&) const;
 
-        UnresolvedDataPlayer data_unresolved_player;            
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+//        UnresolvedDataPlayer data_unresolved_player;
+//        void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//        void LoadData(const boost::property_tree::ptree&);
+//        void ResolveData();
 
     friend class UserInput;
 };
 
-bool isObjectOnScreen(const glm::vec3&, const glm::vec3&);
-bool isObjectOnScreen(const glm::vec3&, float);
-bool isPointOnScreen(const glm::vec2&);
-
-bool isObjectWithinRadarRange(jeti::BaseParticleSystem*, Vehicle*);
-bool isObjectWithinRadarRange(ShockWaveEffect*, Vehicle*);
-bool isObjectWithinRadarRange(LazerTraceEffect*, Vehicle*);
             
 
 

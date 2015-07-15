@@ -19,7 +19,7 @@
 
 #include "BaseItem.hpp"
 #include "../common/constants.hpp"
-#include "../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 //#include <ceti/StringUtils.hpp>
 
 #include <common/Global.hpp>

@@ -17,15 +17,15 @@
 */
 
 #include "GuiShop.hpp"
-#include "../dock/Shop.hpp"
+#include <dock/Shop.hpp>
 
 #include <ceti/rect.hpp>
-#include "../gui/Cursor.hpp"
+#include <gui/Cursor.hpp>
 #include <jeti/Screen.hpp>
-#include "../resources/GuiTextureObCollector.hpp"
-#include "../gui/ButtonSingle.hpp"
+#include <resources/GuiTextureObCollector.hpp>
+#include <gui/ButtonSingle.hpp>
 //#include <ceti/StringUtils.hpp>
-#include "../common/constants.hpp"
+#include <common/constants.hpp>
 
 GuiShop::GuiShop():shop(nullptr)
 {

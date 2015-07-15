@@ -19,7 +19,7 @@
 #include "DriveEquipment.hpp"
 #include "../../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
-#include "../../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 #include "../../items//modules/DriveModule.hpp"
 
 DriveEquipment::DriveEquipment(int id)

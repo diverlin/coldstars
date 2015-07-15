@@ -17,23 +17,23 @@
 */
 
 #include "GuiAngar.hpp"
-#include "../dock/Angar.hpp"
+#include <dock/Angar.hpp>
 #include "ButtonSingle.hpp"
 #include <common/Global.hpp>
-#include "../slots/VehicleSlot.hpp"
-#include "../slots/ItemSlot.hpp"
-#include "../items/BaseItem.hpp"
-#include "../resources/GuiTextureObCollector.hpp"
+#include <slots/VehicleSlot.hpp>
+#include <slots/ItemSlot.hpp>
+#include <items/BaseItem.hpp>
+#include <resources/GuiTextureObCollector.hpp>
 
-#include "../spaceobjects/Vehicle.hpp"
+#include <spaceobjects/Vehicle.hpp>
 
-#include "../pilots/Player.hpp"
-#include "../pilots/Npc.hpp"
+#include <pilots/Player.hpp>
+#include <pilots/Npc.hpp>
 
 #include <builder/slots/ItemSlotBuilder.hpp>
 
 #include <jeti/Render.hpp>
-#include "../gui/GuiManager.hpp"
+#include <gui/GuiManager.hpp>
 
 GuiAngar::GuiAngar():angar(nullptr)
 {

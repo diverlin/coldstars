@@ -21,7 +21,7 @@
 //#include <ceti/StringUtils.hpp>
 #include <common/common.hpp>
 #include <math/rand.hpp>
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
 #include <world/starsystem.hpp>

@@ -19,7 +19,7 @@
 #include "Shield.hpp"
 #include <jeti/Render.hpp>
 #include <jeti/TextureOb.hpp>
-#include "../spaceobjects/SpaceObject.hpp"
+#include <spaceobjects/SpaceObject.hpp>
 
 
 ShieldEffect::ShieldEffect()

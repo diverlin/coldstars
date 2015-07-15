@@ -21,7 +21,7 @@
 #include <managers/EntitiesManager.hpp>
 
 #include <common/IdGenerator.hpp>
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 
 //#include <resources/MeshCollector.hpp>
 //#include <resources/TextureCollector.hpp>

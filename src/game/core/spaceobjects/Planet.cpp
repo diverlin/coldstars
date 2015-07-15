@@ -20,7 +20,7 @@
 #include "Planet.hpp"
 
 //#include <ceti/StringUtils.hpp>
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
   
 #include <dock/Kosmoport.hpp>
 

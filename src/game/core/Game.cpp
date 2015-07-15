@@ -23,7 +23,7 @@
 #include "common/TurnTimer.hpp"
 #include <common/Global.hpp>
 #include <common/GameDate.hpp>
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 
 #include <managers/EntitiesManager.hpp>
 #include <ai/God.hpp>

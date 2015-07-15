@@ -20,17 +20,17 @@
 #include "ButtonSingle.hpp"
 #include <common/Global.hpp>
 #include <jeti/Config.hpp>
-#include "../slots/ItemSlot.hpp"
-#include "../items/BaseItem.hpp"
+#include <slots/ItemSlot.hpp>
+#include <items/BaseItem.hpp>
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../pilots/Player.hpp"
 #include <math/rand.hpp>
 
-#include "../pilots/Npc.hpp"
-#include "../spaceobjects/Vehicle.hpp"
+#include <pilots/Npc.hpp>
+#include <spaceobjects/Vehicle.hpp>
 //#include "../builder/ItemSlotBuilder.hpp"
 
-#include "../dock/NatureLand.hpp"
+#include <dock/NatureLand.hpp>
 
 #include <jeti/Render.hpp>
 
@@ -60,9 +60,12 @@ GuiNatureLand::~GuiNatureLand()
     
 void GuiNatureLand::BindNatureLand(NatureLand* natureland)
 {
-    int screen_w = global::get().configVideo().width;
-    int screen_h = global::get().configVideo().height;
-    
+//    int screen_w = global::get().configVideo().width;
+//    int screen_h = global::get().configVideo().height;
+
+    int screen_w = 400;
+    int screen_h = 300;
+
     this->natureland = natureland;
     
     rect_itemslot_vec.clear();

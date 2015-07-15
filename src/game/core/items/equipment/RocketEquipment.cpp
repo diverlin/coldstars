@@ -20,7 +20,7 @@
 #include "../../common/constants.hpp"
 #include <meti/RandUtils.hpp>
 //#include <ceti/StringUtils.hpp>
-#include "../../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 #include "../../items/modules/RocketModule.hpp"
 #include "../../builder/spaceobjects/RocketBulletBuilder.hpp"
 #include "../../world/starsystem.hpp"

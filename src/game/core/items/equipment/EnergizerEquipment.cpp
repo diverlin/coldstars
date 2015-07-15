@@ -19,7 +19,7 @@
 #include "EnergizerEquipment.hpp"
 #include "../../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
-#include "../../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 #include "../../items/modules/EnergizerModule.hpp"
 
 #include "../../slots/ItemSlot.hpp"

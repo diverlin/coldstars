@@ -17,7 +17,7 @@
 */
 
 #include "ShockWaveEffect.hpp"
-#include "../common/constants.hpp"
+#include <common/constants.hpp>
 
 ShockWaveEffect::ShockWaveEffect(float x, float y, float z, float time, 
                                  float d_x, float d_y, float d_z, float d_time)

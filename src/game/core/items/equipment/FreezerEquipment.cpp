@@ -19,7 +19,7 @@
 #include "FreezerEquipment.hpp"
 #include "../../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
-#include "../../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 #include "../../items/modules/FreezerModule.hpp"
 
 FreezerEquipment::FreezerEquipment(int id)

@@ -19,7 +19,7 @@
 
 #include "WeaponComplex.hpp"
 #include <math/rand.hpp>
-#include "../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 
 #include "../spaceobjects/Vehicle.hpp"
 

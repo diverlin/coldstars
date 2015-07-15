@@ -17,15 +17,15 @@
 */
 
 #include "GuiRadar.hpp"
-#include "../resources/GuiTextureObCollector.hpp"
+#include <resources/GuiTextureObCollector.hpp>
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
 
-#include "../spaceobjects/SpaceObject.hpp"
-#include "../spaceobjects/Vehicle.hpp"
+#include <spaceobjects/SpaceObject.hpp>
+#include <spaceobjects/Vehicle.hpp>
 
-#include "../pilots/Player.hpp"
-#include "../pilots/Npc.hpp"
+#include <pilots/Player.hpp>
+#include <pilots/Npc.hpp>
 #include <meti/VectorUtils.hpp>
 
 GuiRadar::GuiRadar()

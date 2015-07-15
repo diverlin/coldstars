@@ -21,7 +21,7 @@
 #include <common/Global.hpp>
 #include <world/starsystem.hpp>
 #include <managers/EntitiesManager.hpp>
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 
 SpaceObject::SpaceObject():
     m_starsystem(nullptr),

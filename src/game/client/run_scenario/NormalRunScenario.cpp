@@ -35,62 +35,62 @@
 #include <spaceobjects/Planet.hpp>
 #include <dock/Land.hpp>
 
-#include <struct/GalaxyDescription.hpp>
+#include <struct/GalaxyDescriptor.hpp>
 
 
 /* virtual */
 void NormalRunScenario::Init(Player* player)
 {
-    GalaxyDescription galaxy_description;
-    galaxy_description.allow_invasion = false;
-    galaxy_description.sector_num = 1;
+//    GalaxyDescription galaxy_description;
+//    galaxy_description.allow_invasion = false;
+//    galaxy_description.sector_num = 1;
     
-    for (int i=0; i<galaxy_description.sector_num; i++)
-    {
-        SectorDescription sector_description;
-        sector_description.starsystem_num = 1;
+//    for (int i=0; i<galaxy_description.sector_num; i++)
+//    {
+//        SectorDescription sector_description;
+//        sector_description.starsystem_num = 1;
         
-        for (int j=0; j<sector_description.starsystem_num; j++)        
-        {
-            StarSystemDescription starsystem_description;
-            starsystem_description.planet_num = 5;
-            starsystem_description.spacestation_num = 3;
-            starsystem_description.asteroid_num = 3;
+//        for (int j=0; j<sector_description.starsystem_num; j++)
+//        {
+//            StarSystemDescription starsystem_description;
+//            starsystem_description.planet_num = 5;
+//            starsystem_description.spacestation_num = 3;
+//            starsystem_description.asteroid_num = 3;
                        
-            starsystem_description.allow_ships         = false;
+//            starsystem_description.allow_ships         = false;
                         
-            starsystem_description.allow_ship_ranger   = false;
-            starsystem_description.allow_ship_warrior  = false;
-            starsystem_description.allow_ship_trader   = true;
-            starsystem_description.allow_ship_pirat    = false;
-            starsystem_description.allow_ship_diplomat = false;
-            sector_description.starsystem_descriptions.push_back(starsystem_description);
-        }    
+//            starsystem_description.allow_ship_ranger   = false;
+//            starsystem_description.allow_ship_warrior  = false;
+//            starsystem_description.allow_ship_trader   = true;
+//            starsystem_description.allow_ship_pirat    = false;
+//            starsystem_description.allow_ship_diplomat = false;
+//            sector_description.starsystem_descriptions.push_back(starsystem_description);
+//        }
         
-        galaxy_description.sector_descriptions.push_back(sector_description);            
-    }
+//        galaxy_description.sector_descriptions.push_back(sector_description);
+//    }
     
-    Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
-    God::Instance().SetGalaxy(galaxy);        
-    God::Instance().CreateLife(galaxy_description);
-    if (galaxy_description.allow_invasion == true)
-    {
-        God::Instance().CreateInvasion(galaxy_description);
-    }
+//    Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
+//    God::Instance().SetGalaxy(galaxy);
+//    God::Instance().CreateLife(galaxy_description);
+//    if (galaxy_description.allow_invasion == true)
+//    {
+//        God::Instance().CreateInvasion(galaxy_description);
+//    }
     
-    bool player2space = true;
-    StarSystem* const starsystem = galaxy->GetRandomSector()->GetRandomStarSystem();
-    if (player2space == true)
-    {
-        glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
-        glm::vec3 angle(0,0,0);  
-        starsystem->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
-    }
-    else
-    {
-        starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
-    }
+//    bool player2space = true;
+//    StarSystem* const starsystem = galaxy->GetRandomSector()->GetRandomStarSystem();
+//    if (player2space == true)
+//    {
+//        glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
+//        glm::vec3 angle(0,0,0);
+//        starsystem->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
+//    }
+//    else
+//    {
+//        starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
+//    }
 
-    God::Instance().CreateShips(starsystem, /*ships_num=*/20, TYPE::RACE::R0_ID);   // fake
+//    God::Instance().CreateShips(starsystem, /*ships_num=*/20, TYPE::RACE::R0_ID);   // fake
 }
 

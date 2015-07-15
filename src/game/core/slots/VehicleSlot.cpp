@@ -20,7 +20,7 @@
 #include "../spaceobjects/Vehicle.hpp"
 #include "../spaceobjects/Ship.hpp"
 
-#include "../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 
 #include "../dock/Angar.hpp"
 #include "../dock/Store.hpp"

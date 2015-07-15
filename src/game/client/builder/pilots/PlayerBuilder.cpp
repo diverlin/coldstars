@@ -25,7 +25,7 @@
 #include <spaceobjects/Ship.hpp>
 
 #include <common/IdGenerator.hpp>
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
 #include <managers/EntitiesManager.hpp>
@@ -59,7 +59,7 @@ Player* PlayerBuilder::GetNewPlayerTemplate(INTLONGEST id) const
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
         
-    global::get().entitiesManager().RegisterEntity(player); 
+    //global::get().entitiesManager().RegisterEntity(player);
     
     return player;       
 } 

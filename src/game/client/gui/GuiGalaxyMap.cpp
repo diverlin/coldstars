@@ -53,9 +53,10 @@ GuiGalaxyMap::GuiGalaxyMap()
 BaseGuiElement(TYPE::GUI::GALAXYMAP_ID, TYPE::GUI::GALAXYMAP_ID),
 m_Galaxy(nullptr)
 { 
-    int w = global::get().configVideo().width;
-    int h = global::get().configVideo().height;
-
+//    int w = global::get().config().width;
+//    int h = global::get().config().height;
+int w = 400;
+int h = 300;
     GetBox().setSize(w  - 2 * GUI::MAP::BORDER_X, h - 2 * GUI::MAP::BORDER_X);
     
     SetTextureOb(GuiTextureObCollector::Instance().text_background);
@@ -101,39 +102,39 @@ void GuiGalaxyMap::UpdateUnique(Player* player)
         m_VisualHyperJumpPath.FillData(GuiTextureObCollector::Instance().dot_green, player_starsystem_pos, player_target_starsystem_pos, /*dot_offset=*/5, /*dot_size=*/6);        
     }
         
-    if (player->GetNpc()->GetVehicle()->GetProperties().hyper > 0)
-    {      
-        for (unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
-        {
-            for (unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
-            {
-                StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
-                glm::vec3 starsystem_pos = GetAbsoluteStarSystemPosition(starsystem);
-                if (starsystem.id() != player->GetNpc()->GetVehicle()->starsystem()->id())
-                {                            
-                    float ss_cursor_dist = meti::distance(starsystem_pos, data_mouse.pos_screencoord);
-                    if (ss_cursor_dist < 10)
-                    { 
-                        int ss_ss_dist = meti::distance(starsystem_pos, player_starsystem_pos);
-                        if (ss_ss_dist < player->GetNpc()->GetVehicle()->GetProperties().hyper * m_ScaleParsecToScreenCoord)
-                        {
-                            if (data_mouse.left_click == true)
-                            { 
-                                Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, starsystem.id());
-                                player->GetNpc()->GetStateMachine().SetCurrentMicroTask(microtask);
-                                player->GetNpc()->GetVehicle()->GetComplexDrive().UpdatePath();
-                            } 
-                            if (data_mouse.right_click == true)
-                            {
-                                // DEBUG WAY
-                                player->GetNpc()->GetVehicle()->HyperJumpEvent(&starsystem);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    if (player->GetNpc()->GetVehicle()->GetProperties().hyper > 0)
+//    {
+//        for (unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
+//        {
+//            for (unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
+//            {
+//                StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
+//                glm::vec3 starsystem_pos = GetAbsoluteStarSystemPosition(starsystem);
+//                if (starsystem.id() != player->GetNpc()->GetVehicle()->starsystem()->id())
+//                {
+//                    float ss_cursor_dist = meti::distance(starsystem_pos, data_mouse.pos_screencoord);
+//                    if (ss_cursor_dist < 10)
+//                    {
+//                        int ss_ss_dist = meti::distance(starsystem_pos, player_starsystem_pos);
+//                        if (ss_ss_dist < player->GetNpc()->GetVehicle()->GetProperties().hyper * m_ScaleParsecToScreenCoord)
+//                        {
+//                            if (data_mouse.left_click == true)
+//                            {
+//                                Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, starsystem.id());
+//                                player->GetNpc()->GetStateMachine().SetCurrentMicroTask(microtask);
+//                                player->GetNpc()->GetVehicle()->GetComplexDrive().UpdatePath();
+//                            }
+//                            if (data_mouse.right_click == true)
+//                            {
+//                                // DEBUG WAY
+//                                player->GetNpc()->GetVehicle()->HyperJumpEvent(&starsystem);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 }
 
 
@@ -142,37 +143,37 @@ void GuiGalaxyMap::RenderUnique(const jeti::Renderer& render, Player* player) co
 {
     render.DrawQuad(GetTextureOb(), GetBox());    
 
-    for (unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
-    {
-        for (unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
-        {       
-            const StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
-            glm::vec2 starsystem_pos = meti::vec2(GetAbsoluteStarSystemPosition(starsystem));
+//    for (unsigned int i=0; i<m_Galaxy->SECTOR_vec.size(); i++)
+//    {
+//        for (unsigned int j=0; j<m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec.size(); j++)
+//        {
+//            const StarSystem& starsystem = *m_Galaxy->SECTOR_vec[i]->STARSYSTEM_vec[j]; // shortcut
+//            glm::vec2 starsystem_pos = meti::vec2(GetAbsoluteStarSystemPosition(starsystem));
                                    
-            //TextureOb* texOb_particle = TextureCollector::Instance().GetTexObByColorId(TYPE::TEXTURE::DISTANTSTAR_ID, starsystem.STAR_vec[0]->GetColorId());
+//            //TextureOb* texOb_particle = TextureCollector::Instance().GetTexObByColorId(TYPE::TEXTURE::DISTANTSTAR_ID, starsystem.STAR_vec[0]->GetColorId());
             
-            //render.enable_POINTSPRITE();
-            {     
-                //drawParticleTextured(texOb_particle->texture, starsystem_pos, 30.0, -2.0);
+//            //render.enable_POINTSPRITE();
+//            {
+//                //drawParticleTextured(texOb_particle->texture, starsystem_pos, 30.0, -2.0);
                 
-                if (starsystem.GetConquerorRaceId() != TYPE::RACE::NONE_ID)
-                {
-                    //drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_captured->texture, starsystem_pos, 20.0, -2.0);
-                }
+//                if (starsystem.GetConquerorRaceId() != TYPE::RACE::NONE_ID)
+//                {
+//                    //drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_captured->texture, starsystem_pos, 20.0, -2.0);
+//                }
                 
-                if (starsystem.GetConditionId() == ENTITY::STARSYSTEM::CONDITION::WAR_ID)
-                {
-                    glm::vec2 offset(0.0, -13.0);
-                    //drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_war->texture, starsystem_pos + offset, 20.0, -2.0);
-                } 
-            }               
-            //render.disable_POINTSPRITE();   
+//                if (starsystem.GetConditionId() == ENTITY::STARSYSTEM::CONDITION::WAR_ID)
+//                {
+//                    glm::vec2 offset(0.0, -13.0);
+//                    //drawParticleTextured(GuiTextureObCollector::Instance().starsystem_mark_war->texture, starsystem_pos + offset, 20.0, -2.0);
+//                }
+//            }
+//            //render.disable_POINTSPRITE();
 
-            int font_size = 8;  
-            glm::vec2 offset(0.0, 13.0);
-            jeti::Screen::Instance().DrawText(std::to_string(starsystem.id()), font_size, starsystem_pos + offset);
-        }               
-    }     
+//            int font_size = 8;
+//            glm::vec2 offset(0.0, 13.0);
+//            jeti::Screen::Instance().DrawText(std::to_string(starsystem.id()), font_size, starsystem_pos + offset);
+//        }
+//    }
     
     //render.enable_POINTSPRITE();
     {

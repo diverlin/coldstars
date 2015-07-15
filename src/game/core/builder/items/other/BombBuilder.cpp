@@ -20,9 +20,9 @@
 #include <items/others/Bomb.hpp>
 #include <managers/EntitiesManager.hpp>
 
-#include "../../../common/Logger.hpp"
-#include "../../../common/IdGenerator.hpp"
-#include "../../../common/Global.hpp"
+#include <ceti/Logger.hpp>
+#include <common/IdGenerator.hpp>
+#include <common/Global.hpp>
 
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>

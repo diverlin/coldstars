@@ -264,7 +264,7 @@ void RenderManager::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsy
             render.ActivateFbo(0, w, h);
             {
                 render.SetPerspectiveProjection(w, h);
-                starsystem->DrawBackground(render, world_coord);
+                //starsystem->DrawBackground(render, world_coord);
                 render.SetOrthogonalProjection(w*scale, h*scale);
 
                 for(StarDrawable* star: m_stars)

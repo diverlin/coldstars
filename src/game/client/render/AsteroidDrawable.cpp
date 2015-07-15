@@ -18,7 +18,7 @@
 
 #include "AsteroidDrawable.hpp"
 
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
  
 AsteroidDrawable::AsteroidDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
     :

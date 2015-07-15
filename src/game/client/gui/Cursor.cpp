@@ -19,7 +19,7 @@
 
 #include <gui/Cursor.hpp>
 
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 
 #include <types/GuiTypes.hpp>
 
@@ -205,7 +205,7 @@ void Cursor::RenderItem(const jeti::Renderer& render) const
 {
     //render.enable_BLEND();
     {
-        m_ItemSlot->RenderItem(render, m_Box, glm::vec2(0));   
+        //m_ItemSlot->RenderItem(render, m_Box, glm::vec2(0));
     }
     //render.disable_BLEND();
 }

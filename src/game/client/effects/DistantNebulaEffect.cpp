@@ -19,10 +19,10 @@
 #include "DistantNebulaEffect.hpp"
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
-#include "../common/constants.hpp"
+#include <common/constants.hpp>
 //#include <ceti/StringUtils.hpp>
 
-#include "../resources/TextureCollector.hpp"
+#include <resources/TextureCollector.hpp>
 #include <resources/MeshCollector.hpp>
 
 #include <jeti/Render.hpp>

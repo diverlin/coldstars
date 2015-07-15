@@ -18,13 +18,13 @@
 
 #include "GuiActions.hpp"
 #include "GuiGalaxyMap.hpp"
-#include "../pilots/Player.hpp"
-#include "../pilots/Npc.hpp"
-#include "../spaceobjects/Vehicle.hpp"
+#include <pilots/Player.hpp>
+#include <pilots/Npc.hpp>
+#include <spaceobjects/Vehicle.hpp>
 
-#include "../common/Global.hpp"
-#include "../gui/GuiManager.hpp"
-#include "../common/Logger.hpp"
+#include <common/Global.hpp>
+#include <gui/GuiManager.hpp>
+#include <ceti/Logger.hpp>
 
 /* static */
 void GuiActions::GalaxyMapGuiTransition(Player* player) 

@@ -38,7 +38,7 @@
 #include "../dock/Store.hpp"
 #include "../dock/Angar.hpp"
 
-#include "../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 #include <meti/RandUtils.hpp>
 
 #include <common/Global.hpp>

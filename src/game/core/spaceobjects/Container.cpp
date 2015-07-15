@@ -20,7 +20,7 @@
 
 #include <common/common.hpp>
 //#include <ceti/StringUtils.hpp>
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
 #include <managers/EntitiesManager.hpp>

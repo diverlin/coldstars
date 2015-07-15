@@ -20,7 +20,7 @@
 #include "PlanetDrawable.hpp"
 
 ////#include <ceti/StringUtils.hpp>
-//#include <common/Logger.hpp>
+//#include <ceti/Logger.hpp>
   
 #include <effects/BaseDecor.hpp>
 

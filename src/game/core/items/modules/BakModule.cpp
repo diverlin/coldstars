@@ -19,7 +19,7 @@
 #include "BakModule.hpp"
 #include "../../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
-#include "../../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 
 BakModule::BakModule(int id)
 :

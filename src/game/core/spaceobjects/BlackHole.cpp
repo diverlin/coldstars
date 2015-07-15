@@ -19,7 +19,7 @@
 #include "BlackHole.hpp"
 #include "../common/constants.hpp"
 #include <meti/RandUtils.hpp>
-#include "../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 #include "../world/starsystem.hpp"
 
 BlackHole::BlackHole(int id)

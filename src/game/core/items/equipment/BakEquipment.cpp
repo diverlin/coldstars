@@ -19,7 +19,7 @@
 #include "BakEquipment.hpp"
 #include "../../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
-#include "../../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 #include "../../items//modules/BakModule.hpp"
 
 BakEquipment::BakEquipment(int id)

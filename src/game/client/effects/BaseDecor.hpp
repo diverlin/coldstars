@@ -19,14 +19,14 @@
 
 #pragma once
 
-#include <jeti/Orientation.hpp>
+#include <ceti/Orientation.hpp>
 #include <common/Base.hpp>
 
 namespace jeti {
 class Renderer;
 }
 
-class BaseDecor : public jeti::Orientation, public Base
+class BaseDecor : public ceti::Orientation, public Base
 {
     public:
         BaseDecor() {}

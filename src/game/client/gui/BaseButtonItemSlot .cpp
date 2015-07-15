@@ -116,13 +116,13 @@ void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const
             {            
                 if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == TYPE::GUI::CARGO_SLOT_ID))  
                 {
-                   m_ItemSlot->RenderMark(render, GetBox(), GuiTextureObCollector::Instance().slot_mark_accept);
+                   //m_ItemSlot->RenderMark(render, GetBox(), GuiTextureObCollector::Instance().slot_mark_accept);
                 }
                 else
                 {
                     if (GetBox().CheckInteraction(mouse_screen_coord_pos) == true)
                     {
-                        m_ItemSlot->RenderMark(render, GetBox(), GuiTextureObCollector::Instance().slot_mark_reject);
+                        //m_ItemSlot->RenderMark(render, GetBox(), GuiTextureObCollector::Instance().slot_mark_reject);
                     }
                 }
             }

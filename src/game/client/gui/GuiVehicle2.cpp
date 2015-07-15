@@ -19,12 +19,12 @@
 #include "GuiVehicle2.hpp"
 #include "ButtonItemSlot2.hpp"
 //#include <ceti/StringUtils.hpp>
-#include "../common/common.hpp"
-#include "../resources/GuiTextureObCollector.hpp"
-#include "../spaceobjects/Vehicle.hpp"
-#include "../slots/ItemSlot.hpp"
-#include "../pilots/Player.hpp"
-#include "../pilots/Npc.hpp"
+#include <common/common.hpp>
+#include <resources/GuiTextureObCollector.hpp>
+#include <spaceobjects/Vehicle.hpp>
+#include <slots/ItemSlot.hpp>
+#include <pilots/Player.hpp>
+#include <pilots/Npc.hpp>
 
 
 GuiVehicle2::GuiVehicle2()
