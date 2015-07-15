@@ -33,20 +33,20 @@ void ButtonItemSlot2::OnPressEventMBL(Player* player)
         
     if (GetItemSlot() != nullptr) // !!!
     {        
-        if (GetPressed() == true)
-        {
-            if (GetItemSlot()->GetSelected() == false)
-            {
-                GetItemSlot()->SelectEvent();
-            }
-        }
-        else
-        {
-            if (GetItemSlot()->GetSelected() == true)
-            {
-                GetItemSlot()->DeselectEvent();
-            }
-        }    
+//        if (GetPressed() == true)
+//        {
+//            if (GetItemSlot()->GetSelected() == false)
+//            {
+//                GetItemSlot()->SelectEvent();
+//            }
+//        }
+//        else
+//        {
+//            if (GetItemSlot()->GetSelected() == true)
+//            {
+//                GetItemSlot()->DeselectEvent();
+//            }
+//        }
     }
 }
 
@@ -56,10 +56,10 @@ void ButtonItemSlot2::ResetState()
     SetPressed(false);
     if (GetItemSlot() != nullptr)
     {  
-        if (GetItemSlot()->GetSelected() == true)
-        {
-            GetItemSlot()->DeselectEvent();
-        }
+//        if (GetItemSlot()->GetSelected() == true)
+//        {
+//            GetItemSlot()->DeselectEvent();
+//        }
     }
 }
         

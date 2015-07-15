@@ -33,16 +33,16 @@ void pureTest1()
 
 void pureTest2()
 {
-	RadarEquipment* radar = new RadarEquipment(1);
-	delete radar;
+//	RadarEquipment* radar = new RadarEquipment(1);
+//	delete radar;
 
-	Base* base = new RadarEquipment(2);
-	delete base;	
+//	Base* base = new RadarEquipment(2);
+//	delete base;
 	
-    for (unsigned int i=0; i<100; i++)
-        std::cout<<meti::getRandInt(0,2)<<std::endl;
+//    for (unsigned int i=0; i<100; i++)
+//        std::cout<<meti::getRandInt(0,2)<<std::endl;
 	
-	exit(0);
+//	exit(0);
 		
 }
 

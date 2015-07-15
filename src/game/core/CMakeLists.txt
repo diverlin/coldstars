@@ -2,10 +2,11 @@ cmake_minimum_required (VERSION 2.8)
 
 set(SUBPROJECT ${SUBPROJECT_CORE})
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../common)
-
 file(GLOB_RECURSE ${SUBPROJECT}_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 file(GLOB_RECURSE ${SUBPROJECT}_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../common)
 
 add_executable (${SUBPROJECT} ${${SUBPROJECT}_SOURCE} ${${SUBPROJECT}_HEADER})
 target_link_libraries(${SUBPROJECT}

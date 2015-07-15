@@ -21,6 +21,7 @@
 #define GUITYPES_HPP
 
 #include <string>
+#include <types/EntityTypes.hpp>
 
 
 namespace TYPE
@@ -77,6 +78,9 @@ namespace TYPE
 }
 
 std::string getGuiTypeStr(TYPE::GUI);
+
+TYPE::GUI getGuiItemSlotType(TYPE::ENTITY);
+TYPE::GUI getGuiItemSlotSelectorType(TYPE::ENTITY);
 
 #endif
 

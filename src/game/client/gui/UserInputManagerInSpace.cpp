@@ -67,7 +67,7 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
             {        
                 if (player->GetNpc()->GetScanTarget() != nullptr)
                 {
-                    player->GetNpc()->ResetScanTarget();
+                    //player->GetNpc()->ResetScanTarget();
                 }
                 
                 break;
@@ -101,30 +101,30 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
             
             case sf::Keyboard::A:
             { 
-                if (player->GetNpc()->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-                {
-                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT1_SELECTOR_ID);
-                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT2_SELECTOR_ID);
-                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT3_SELECTOR_ID);
-                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT4_SELECTOR_ID);
-                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT5_SELECTOR_ID);
-                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT6_SELECTOR_ID);
-                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT7_SELECTOR_ID);
-                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT8_SELECTOR_ID);
-                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT9_SELECTOR_ID);    
-                }
-                else
-                {        
-                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT1_SELECTOR_ID);
-                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT2_SELECTOR_ID);
-                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT3_SELECTOR_ID);
-                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT4_SELECTOR_ID);
-                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT5_SELECTOR_ID);
-                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT6_SELECTOR_ID);
-                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT7_SELECTOR_ID);
-                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT8_SELECTOR_ID);
-                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT9_SELECTOR_ID);                
-                }
+//                if (player->GetNpc()->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//                {
+//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT1_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT2_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT3_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT4_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT5_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT6_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT7_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT8_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT9_SELECTOR_ID);
+//                }
+//                else
+//                {
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT1_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT2_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT3_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT4_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT5_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT6_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT7_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT8_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT9_SELECTOR_ID);
+//                }
                 
                 break;
             }
@@ -167,13 +167,13 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
     
             case sf::Keyboard::F3: // auto save mode
             {        
-                global::get().config().SetAutoSaveMode(!global::get().config().GetAutoSaveMode());
+                //global::get().config().SetAutoSaveMode(!global::get().config().GetAutoSaveMode());
                 break;
             }
             
             case sf::Keyboard::F4: // auto load mode
             {        
-                global::get().config().SetAutoLoadMode(!global::get().config().GetAutoLoadMode());
+                //global::get().config().SetAutoLoadMode(!global::get().config().GetAutoLoadMode());
                 break;
             }
                     
@@ -181,25 +181,25 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
             
             case sf::Keyboard::F6: // slow down GAME SPEED 
             {
-                if (global::get().config().GAME_SPEED > 1)
-                {
-                    global::get().config().GAME_SPEED--;
-                }
+//                if (global::get().config().GAME_SPEED > 1)
+//                {
+//                    global::get().config().GAME_SPEED--;
+//                }
                 break;
             }
     
             case sf::Keyboard::F7: // speed up GAME SPEED 
             {
-                if (global::get().config().GAME_SPEED < 10)
-                {
-                    global::get().config().GAME_SPEED++;
-                }                             
+//                if (global::get().config().GAME_SPEED < 10)
+//                {
+//                    global::get().config().GAME_SPEED++;
+//                }
                 break;
             }
             
             case sf::Keyboard::F8: // AutoTurn
             {
-                global::get().config().AUTO_TURN_MODE = !global::get().config().AUTO_TURN_MODE;
+                //global::get().config().AUTO_TURN_MODE = !global::get().config().AUTO_TURN_MODE;
                 break;
             }
             
@@ -241,7 +241,7 @@ void UserInputManagerInSpace::ManageRealTimeInputsInSpace(Player* player)
     int screen_w = jeti::Screen::Instance().GetWidth();
     int screen_h = jeti::Screen::Instance().GetHeight();
     
-    bool mouse_camera_scroll = global::get().config().GetMouseCameraScroll();
+    //bool mouse_camera_scroll = global::get().config().GetMouseCameraScroll();
                  
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) == true)
     {                
@@ -260,65 +260,65 @@ void UserInputManagerInSpace::ManageRealTimeInputsInSpace(Player* player)
         m_CameraMoveAxisY = CAMERADIRECTION::DOWN;
     }   
                          
-    if ((mouse_camera_scroll)and(mx < SCROLL_BORDER_OFFSET)) 
-    {
-        m_CameraMoveAxisX = CAMERADIRECTION::LEFT;
-    }   
-    if ((mouse_camera_scroll)and(mx > (screen_w - SCROLL_BORDER_OFFSET)))
-    {
-        m_CameraMoveAxisX = CAMERADIRECTION::RIGHT;
-    }   
-    if ((mouse_camera_scroll)and(my > (screen_h - SCROLL_BORDER_OFFSET)))
-    {
-        m_CameraMoveAxisY = CAMERADIRECTION::UP;
-    }   
-    if ((mouse_camera_scroll)and(my < SCROLL_BORDER_OFFSET)) 
-    {
-        m_CameraMoveAxisY = CAMERADIRECTION::DOWN;
-    }   
+//    if ((mouse_camera_scroll)and(mx < SCROLL_BORDER_OFFSET))
+//    {
+//        m_CameraMoveAxisX = CAMERADIRECTION::LEFT;
+//    }
+//    if ((mouse_camera_scroll)and(mx > (screen_w - SCROLL_BORDER_OFFSET)))
+//    {
+//        m_CameraMoveAxisX = CAMERADIRECTION::RIGHT;
+//    }
+//    if ((mouse_camera_scroll)and(my > (screen_h - SCROLL_BORDER_OFFSET)))
+//    {
+//        m_CameraMoveAxisY = CAMERADIRECTION::UP;
+//    }
+//    if ((mouse_camera_scroll)and(my < SCROLL_BORDER_OFFSET))
+//    {
+//        m_CameraMoveAxisY = CAMERADIRECTION::DOWN;
+//    }
 }
 
 void UserInputManagerInSpace::ScrollCamera(Player* player)
 {
-    int SCROLL_VELOCITY_STEP = global::get().config().SCROLL_VELOCITY_STEP;
+//    int SCROLL_VELOCITY_STEP = global::get().config().SCROLL_VELOCITY_STEP;
 
-    jeti::Camera& camera = jeti::Screen::Instance().GetCamera();
+//    jeti::Camera& camera = jeti::Screen::Instance().GetCamera();
     
     
-    // SCROLLING X AXIS         
-    switch (m_CameraMoveAxisX)
-    {
-        case CAMERADIRECTION::LEFT:
-        {
-            camera.AddMoveSpeed(glm::vec3(-SCROLL_VELOCITY_STEP, 0.0f, 0.0f));
+//    // SCROLLING X AXIS
+//    switch (m_CameraMoveAxisX)
+//    {
+//        case CAMERADIRECTION::LEFT:
+//        {
+//            camera.AddMoveSpeed(glm::vec3(-SCROLL_VELOCITY_STEP, 0.0f, 0.0f));
             
-            break;
-        }
+//            break;
+//        }
         
-        case CAMERADIRECTION::RIGHT:
-        {
-            camera.AddMoveSpeed(glm::vec3(SCROLL_VELOCITY_STEP, 0.0f, 0.0f));
+//        case CAMERADIRECTION::RIGHT:
+//        {
+//            camera.AddMoveSpeed(glm::vec3(SCROLL_VELOCITY_STEP, 0.0f, 0.0f));
             
-            break;
-        }       
-    }
+//            break;
+//        }
+//    }
 
-    switch(m_CameraMoveAxisY)
-    {
-        case CAMERADIRECTION::UP:
-        {
-            camera.AddMoveSpeed(glm::vec3(0.0f, SCROLL_VELOCITY_STEP, 0.0f));
+//    switch(m_CameraMoveAxisY)
+//    {
+//        case CAMERADIRECTION::UP:
+//        {
+//            camera.AddMoveSpeed(glm::vec3(0.0f, SCROLL_VELOCITY_STEP, 0.0f));
                 
-            break;
-        }
+//            break;
+//        }
             
-        case CAMERADIRECTION::DOWN:
-        {
-            camera.AddMoveSpeed(glm::vec3(0.0f, -SCROLL_VELOCITY_STEP, 0.0f));
+//        case CAMERADIRECTION::DOWN:
+//        {
+//            camera.AddMoveSpeed(glm::vec3(0.0f, -SCROLL_VELOCITY_STEP, 0.0f));
                 
-            break;
-        }
-    }
+//            break;
+//        }
+//    }
      
-    jeti::Screen::Instance().MovingBy(m_ScrollAccel);
+//    jeti::Screen::Instance().MovingBy(m_ScrollAccel);
 }

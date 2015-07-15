@@ -72,8 +72,8 @@ GuiAngar::GuiAngar():angar(nullptr)
         //button_map.insert(std::make_pair(GUI::BUTTON::GETLAUNCH_ID, launch_button));
     }
     
-    repair_slot = GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY::REPAIR_SLOT_ID);
-    charge_slot = GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY::CHARGE_SLOT_ID);
+//    repair_slot = GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY::REPAIR_SLOT_ID);
+//    charge_slot = GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY::CHARGE_SLOT_ID);
 }
 
 

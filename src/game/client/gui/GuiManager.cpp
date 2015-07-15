@@ -184,13 +184,13 @@ void GuiManager::UpdateSessionInSpace()
     BaseGuiElement* button = GetGuiElement(TYPE::GUI::BUTTON_GALAXYMAP_ID);
     if (button->GetPressed())
     {
-        player->GetNpc()->ResetScanTarget();
+        //player->GetNpc()->ResetScanTarget();
 
         gui_radar->Hide(); 
         gui_player_vehicle->Hide(); 
         
         gui_galaxymap->Show();
-        gui_galaxymap->BindGalaxy(player->GetNpc()->starsystem()->GetSector()->GetGalaxy());
+        //gui_galaxymap->BindGalaxy(player->GetNpc()->starsystem()->GetSector()->GetGalaxy());
     }
     else
     {

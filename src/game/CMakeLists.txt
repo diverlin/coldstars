@@ -6,4 +6,4 @@ set(SUBPROJECT_CLIENT   ${PROJECT}_client)
 
 add_subdirectory(common)
 add_subdirectory(core)
-#add_subdirectory(client)
+add_subdirectory(client)
