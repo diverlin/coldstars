@@ -24,11 +24,8 @@
 #include <meti/VectorUtils.hpp>
 
 #include <types/EntityTypes.hpp>
-#include <types/GuiTypes.hpp>
-     
-TYPE::GUI getGuiItemSlotType(TYPE::ENTITY);
-TYPE::GUI getGuiItemSlotSelectorType(TYPE::ENTITY);
-       
+#include <types/GuiTypes.hpp>     
+
 int getObjectSize(int w, int h); 
 
 bool get_dPos_ToPoint(const glm::vec3&, const glm::vec3&, float, glm::vec3&);

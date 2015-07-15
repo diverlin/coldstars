@@ -78,10 +78,10 @@ void GuiRadar::Add(SpaceObject* object)
 
 void GuiRadar::AddIfWithinRadarRange(SpaceObject* object, const Vehicle& vehicle)
 {
-    if (vehicle.IsObjectWithinRadarRange(object) == true) 
-    {        
-        Add(object); 
-    }
+//    if (vehicle.IsObjectWithinRadarRange(object) == true)
+//    {
+//        Add(object);
+//    }
 }             
             
 /* virtual override final */

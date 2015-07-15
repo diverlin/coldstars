@@ -47,7 +47,7 @@ Player* PlayerBuilder::GetNewPlayerTemplate(INTLONGEST id) const
     Player* player = nullptr;
     if (id == NONE_ID)
     {
-        id = EntityIdGenerator::Instance().GetNextId();
+        //id = EntityIdGenerator::Instance().GetNextId();
     }
 
     try 
@@ -81,15 +81,15 @@ void PlayerBuilder::CreateNewInternals(Player* player) const
     int weapons_num    = 6;
     TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::L3_ID;
     
-    Npc* npc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id, psubsubtype_id);
-    Ship* ship = ShipBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
+//    Npc* npc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id, psubsubtype_id);
+//    Ship* ship = ShipBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
     
-    ShipBuilder::Instance().EquipEquipment(ship, tech_level);   
-    ShipBuilder::Instance().EquipModules(ship, tech_level); 
-    //ShipBuilder::Instance().EquipArtefacts(ship, tech_level); 
-    ShipBuilder::Instance().EquipBomb(ship, tech_level); 
+//    ShipBuilder::Instance().EquipEquipment(ship, tech_level);
+//    ShipBuilder::Instance().EquipModules(ship, tech_level);
+//    //ShipBuilder::Instance().EquipArtefacts(ship, tech_level);
+//    ShipBuilder::Instance().EquipBomb(ship, tech_level);
     
-    ship->BindOwnerNpc(npc);
-    player->BindNpc(npc);
+//    ship->BindOwnerNpc(npc);
+    //player->BindNpc(npc);
 }
 

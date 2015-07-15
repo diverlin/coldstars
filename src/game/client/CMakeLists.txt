@@ -1,17 +1,16 @@
 cmake_minimum_required (VERSION 2.8)
 
-set(SUBPROJECT ${PROJECT}_CLIENT)
-
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+set(SUBPROJECT ${SUBPROJECT_CLIENT})
 
 file(GLOB_RECURSE ${SUBPROJECT}_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 file(GLOB_RECURSE ${SUBPROJECT}_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
 
-#message("${${subproject}_SOURCE}")
-#message("${${subproject}_HEADER}")
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../common)
 
 add_executable (${SUBPROJECT} ${${SUBPROJECT}_SOURCE} ${${SUBPROJECT}_HEADER})
 target_link_libraries(${SUBPROJECT}
+    ${SUBPROJECT_COMMON}
     boost_system
     jeti
     meti

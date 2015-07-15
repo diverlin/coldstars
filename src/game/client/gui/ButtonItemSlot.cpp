@@ -33,14 +33,14 @@
 /* virtual override final */
 void ButtonItemSlot::OnPressEventMBL(Player* player)
 {
-    player->GetCursor().GetItemSlot()->SwapItem(GetItemSlot());
+    //player->GetCursor().GetItemSlot()->SwapItem(GetItemSlot());
 }
 
          
 /* virtual override final */
 void ButtonItemSlot::OnPressEventMBR(Player* player)
 {    
-    player->GetNpc()->GetVehicle()->GetComplexWeapon().SetTarget(GetItemSlot()->GetOwnerVehicle(), GetItemSlot());
+    //player->GetNpc()->GetVehicle()->GetComplexWeapon().SetTarget(GetItemSlot()->GetOwnerVehicle(), GetItemSlot());
 }
 
 /* virtual override final */
@@ -59,10 +59,10 @@ void ButtonItemSlot::RenderUnique(const jeti::Renderer& render, Player* player) 
         RenderMarkEmptySlot(render, player->GetCursor().GetMouseData().pos_screencoord, getGuiItemSlotType(player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId()));
     }
     
-    if (player->GetNpc()->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-    {
-        RenderMarkTarget();        
-    }
+//    if (player->GetNpc()->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//    {
+//        RenderMarkTarget();
+//    }
 }
   
 /* virtual override final */

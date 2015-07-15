@@ -455,9 +455,9 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
                 //starsystem->DrawPath();
             }
             
-            npc->GetVehicle()->GetComplexDrive().DrawPath(renderer);
-            npc->GetVehicle()->GetComplexWeapon().RenderWeaponsRange();
-            npc->GetVehicle()->GetComplexWeapon().RenderWeaponIcons(); 
+//            npc->GetVehicle()->GetComplexDrive().DrawPath(renderer);
+//            npc->GetVehicle()->GetComplexWeapon().RenderWeaponsRange();
+//            npc->GetVehicle()->GetComplexWeapon().RenderWeaponIcons();
         
             if (show.GetRangeRadar() == true)
             {
@@ -502,18 +502,18 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
         { 
             cursor.SetFocusedSpaceObject(visible_ROCKET_vec[i]);
        
-            if (data_mouse.left_click == true)
-            {
-                if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-                {
-                    npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_ROCKET_vec[i]);
-                }
-                else
-                {
-                    npc->GetVehicle()->GetComplexDrive().SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
-                    npc->GetVehicle()->GetComplexDrive().UpdatePath();
-                }
-            }
+//            if (data_mouse.left_click == true)
+//            {
+//                if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//                {
+//                    npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_ROCKET_vec[i]);
+//                }
+//                else
+//                {
+//                    npc->GetVehicle()->GetComplexDrive().SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
+//                    npc->GetVehicle()->GetComplexDrive().UpdatePath();
+//                }
+//            }
                 
             return true; 
         }
@@ -534,25 +534,25 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
                             
             if (data_mouse.left_click == true)
             {                                  
-                npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_CONTAINER_vec[i]);
+                //npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_CONTAINER_vec[i]);
             }
             
             if (data_mouse.right_click == true)
             {
-                if (npc->GetVehicle()->GetProperties().grab_radius > 0)
-                {
-                    if (npc->GetVehicle()->GetSlotGrapple()->CheckTarget(visible_CONTAINER_vec[i]) == STATUS::TARGET_OK)
-                    {
-                        if (npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->CheckIfTargetAlreadyExistInQueue(visible_CONTAINER_vec[i]) == false)
-                        {
-                            npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
-                        }
-                        else
-                        {
-                            npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->RemoveTarget(visible_CONTAINER_vec[i]);
-                        }
-                    }
-                }
+//                if (npc->GetVehicle()->GetProperties().grab_radius > 0)
+//                {
+//                    if (npc->GetVehicle()->GetSlotGrapple()->CheckTarget(visible_CONTAINER_vec[i]) == STATUS::TARGET_OK)
+//                    {
+//                        if (npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->CheckIfTargetAlreadyExistInQueue(visible_CONTAINER_vec[i]) == false)
+//                        {
+//                            npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
+//                        }
+//                        else
+//                        {
+//                            npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->RemoveTarget(visible_CONTAINER_vec[i]);
+//                        }
+//                    }
+//                }
             }
                 
             return true; 
@@ -574,15 +574,15 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
         
             if (data_mouse.left_click == true)
             {
-                if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-                {
-                    npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_SATELLITE_vec[i]);
-                }
-                else
-                {
-                    npc->GetVehicle()->GetComplexDrive().SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
-                    npc->GetVehicle()->GetComplexDrive().UpdatePath();
-                }
+//                if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//                {
+//                    npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_SATELLITE_vec[i]);
+//                }
+//                else
+//                {
+//                    npc->GetVehicle()->GetComplexDrive().SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
+//                    npc->GetVehicle()->GetComplexDrive().UpdatePath();
+//                }
             }
             
             if (data_mouse.right_click == true)
@@ -597,11 +597,11 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
                 }
                 else
                 {
-                    if ( npc->CheckPossibilityToScan(visible_SATELLITE_vec[i]) == true )
-                    {
-                        npc->SetScanTarget(visible_SATELLITE_vec[i]);
-                        GuiManager::Instance().GetGuiSpace().EnterGuiScan();
-                    }
+//                    if ( npc->CheckPossibilityToScan(visible_SATELLITE_vec[i]) == true )
+//                    {
+//                        npc->SetScanTarget(visible_SATELLITE_vec[i]);
+//                        GuiManager::Instance().GetGuiSpace().EnterGuiScan();
+//                    }
 
                 }
             }
@@ -622,18 +622,18 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
         {   
             cursor.SetFocusedSpaceObject(visible_ASTEROID_vec[i]);        
         
-            if (data_mouse.left_click == true)
-            {
-                if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-                {
-                    npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_ASTEROID_vec[i]);
-                }
-                else
-                {
-                    npc->GetVehicle()->GetComplexDrive().SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
-                    npc->GetVehicle()->GetComplexDrive().UpdatePath();
-                }
-            }            
+//            if (data_mouse.left_click == true)
+//            {
+//                if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//                {
+//                    npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_ASTEROID_vec[i]);
+//                }
+//                else
+//                {
+//                    npc->GetVehicle()->GetComplexDrive().SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
+//                    npc->GetVehicle()->GetComplexDrive().UpdatePath();
+//                }
+//            }
                         
             return true; 
         }            
@@ -653,18 +653,18 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
         
             if (npc->GetVehicle()->id() != visible_SHIP_vec[i]->id())
             {
-                if (data_mouse.left_click == true)
-                {
-                    if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-                    {
-                        npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_SHIP_vec[i]);
-                    }
-                    else
-                    {
-                        npc->GetVehicle()->GetComplexDrive().SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);  
-                        npc->GetVehicle()->GetComplexDrive().UpdatePath();
-                    }
-                }
+//                if (data_mouse.left_click == true)
+//                {
+//                    if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//                    {
+//                        npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_SHIP_vec[i]);
+//                    }
+//                    else
+//                    {
+//                        npc->GetVehicle()->GetComplexDrive().SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
+//                        npc->GetVehicle()->GetComplexDrive().UpdatePath();
+//                    }
+//                }
 
                 if (data_mouse.right_click == true)
                 {
@@ -678,13 +678,13 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
                                //}                    
                            //}
                     }
-                    else
-                    {
-                        if (npc->CheckPossibilityToScan(visible_SHIP_vec[i]) == true)
-                        {
-                            npc->SetScanTarget(visible_SHIP_vec[i]);
-                        }
-                       }
+//                    else
+//                    {
+//                        if (npc->CheckPossibilityToScan(visible_SHIP_vec[i]) == true)
+//                        {
+//                            npc->SetScanTarget(visible_SHIP_vec[i]);
+//                        }
+//                    }
                 }
             }
             else
@@ -728,19 +728,19 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
         { 
             cursor.SetFocusedSpaceObject(visible_SPACESTATION_vec[i]); 
         
-            if (data_mouse.left_click == true)
-            {
-                if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
-                {
-                    npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_SPACESTATION_vec[i]);
-                }
-                else
-                {
-                    Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_SPACESTATION_vec[i]->id());
-                    npc->GetStateMachine().SetCurrentMicroTask(microtask);
-                    npc->GetVehicle()->GetComplexDrive().UpdatePath();
-                }
-            }
+//            if (data_mouse.left_click == true)
+//            {
+//                if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//                {
+//                    npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_SPACESTATION_vec[i]);
+//                }
+//                else
+//                {
+//                    Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_SPACESTATION_vec[i]->id());
+//                    npc->GetStateMachine().SetCurrentMicroTask(microtask);
+//                    npc->GetVehicle()->GetComplexDrive().UpdatePath();
+//                }
+//            }
 
             if (data_mouse.right_click == true)
             {
@@ -752,14 +752,14 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
                         //pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();                                   
                     //}
                 }
-                else
-                {
-                    if ( npc->CheckPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
-                    {
-                        npc->SetScanTarget(visible_SPACESTATION_vec[i]);
-                        GuiManager::Instance().GetGuiSpace().EnterGuiScan();
-                    }
-                }
+//                else
+//                {
+//                    if ( npc->CheckPossibilityToScan(visible_SPACESTATION_vec[i]) == true )
+//                    {
+//                        npc->SetScanTarget(visible_SPACESTATION_vec[i]);
+//                        GuiManager::Instance().GetGuiSpace().EnterGuiScan();
+//                    }
+//                }
             }
     
             return true; 
@@ -781,8 +781,8 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
             if (data_mouse.left_click == true)
             {
                 Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_PLANET_vec[i]->id());
-                npc->GetStateMachine().SetCurrentMicroTask(microtask);
-                npc->GetVehicle()->GetComplexDrive().UpdatePath();
+//                npc->GetStateMachine().SetCurrentMicroTask(microtask);
+//                npc->GetVehicle()->GetComplexDrive().UpdatePath();
             }   
         
             return true; 
@@ -813,17 +813,17 @@ void Player::MouseNavigation(const MouseData& data_mouse) const
     if (data_mouse.left_click == true)
     {
         ForceStateMachineReset();
-        npc->GetVehicle()->GetComplexDrive().SetStaticTargetCoords(glm::vec3(data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, npc->GetVehicle()->center().z));  
+        //npc->GetVehicle()->GetComplexDrive().SetStaticTargetCoords(glm::vec3(data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, npc->GetVehicle()->center().z));
     }
 }
 
 void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 {    
-    starsystem->FindRenderVisibleEntities_c(this);
-    if (meti::getRandInt(1,5) == 1)
-    {
-        starsystem->FindRadarVisibleEntities_c(this);
-    }
+//    starsystem->FindRenderVisibleEntities_c(this);
+//    if (meti::getRandInt(1,5) == 1)
+//    {
+//        starsystem->FindRadarVisibleEntities_c(this);
+//    }
 
     UserInput::Instance().Update();
     UserInputManagerInSpace::Instance().UpdateInSpace(this);
@@ -885,7 +885,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
 
 void Player::ForceStateMachineReset() const
 {
-    npc->GetStateMachine().ForceReset();
+    //npc->GetStateMachine().ForceReset();
 }    
 
 void Player::RenderCollisionRadius(const jeti::Renderer& render) const

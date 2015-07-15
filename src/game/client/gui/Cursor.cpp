@@ -47,7 +47,7 @@ Cursor::Cursor()
 m_FocusedSpaceObject(nullptr),
 m_FocusedGuiElement(nullptr)
 {
-    m_ItemSlot = GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY::CARGO_SLOT_ID);
+    //m_ItemSlot = GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY::CARGO_SLOT_ID);
     
     m_Box.setSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
     
