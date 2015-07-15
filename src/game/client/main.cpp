@@ -47,7 +47,7 @@
 #include <world/starsystem.hpp>
 #include <ai/God.hpp>
 
-#include "struct/GalaxyDescription.hpp"
+#include <struct/GalaxyDescriptor.hpp>
 #include "dock/Land.hpp"
 
 #include "run_scenario/NormalRunScenario.hpp"
@@ -55,10 +55,10 @@
 #include "run_scenario/TestTextRunScenario.hpp"
 #include "run_scenario/TestDrawManySimpleMeshesRunScenario.hpp"
 
-#include "../pureTest/pureTest.cpp"
-#include "../pureTest/threadTest.cpp"
-#include "../pureTest/vectorPerfomanceTest.cpp"
-#include "../pureTest/matrixPerfomanceTest.cpp"
+#include <pureTest/pureTest.cpp>
+#include <pureTest/threadTest.cpp>
+#include <pureTest/vectorPerfomanceTest.cpp>
+#include <pureTest/matrixPerfomanceTest.cpp>
 
 enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
 
@@ -108,52 +108,52 @@ int main()
     ////player->GetGuiManager().GetGuiSpace().EnterGalaxyMap();
     /** */
     
-    // GAME LOOP
-    while (jeti::Screen::Instance().GetWindow().isOpen())
-    {    
-        //std::cout<<player->GetNpc()->GetVehicle()->center().x<<std::endl;
-        //std::cout<<player->GetNpc()->GetVehicle()->GetProperties().radar<<std::endl;
+//    // GAME LOOP
+//    while (jeti::Screen::Instance().GetWindow().isOpen())
+//    {
+//        //std::cout<<player->GetNpc()->GetVehicle()->center().x<<std::endl;
+//        //std::cout<<player->GetNpc()->GetVehicle()->GetProperties().radar<<std::endl;
                 
-        /* server code start */
-        TurnTimer::Instance().Update();
+//        /* server code start */
+//        TurnTimer::Instance().Update();
 
-        God::Instance().Update(GameDate::Instance().GetDate());
-        galaxy->Update(TurnTimer::Instance().GetTurnTick());
+//        God::Instance().Update(GameDate::Instance().GetDate());
+//        galaxy->Update(TurnTimer::Instance().GetTurnTick());
 
-        if ((TurnTimer::Instance().GetTurnEnded() == true) and (UserInputManagerInSpace::Instance().GetNextTurnReady())) {
-            TurnTimer::Instance().NextTurn();
-        } 
-        /* server code end */
+//        if ((TurnTimer::Instance().GetTurnEnded() == true) and (UserInputManagerInSpace::Instance().GetNextTurnReady())) {
+//            TurnTimer::Instance().NextTurn();
+//        }
+//        /* server code end */
 
-        /* client code start */
-        player->UpdatePostTransaction();   
-        player->RunSession(TurnTimer::Instance());  
-        player->UpdatePostTransactionEvent(TurnTimer::Instance()); 
-        /* client code end */
+//        /* client code start */
+//        player->UpdatePostTransaction();
+//        player->RunSession(TurnTimer::Instance());
+//        player->UpdatePostTransactionEvent(TurnTimer::Instance());
+//        /* client code end */
         
-        if (TurnTimer::Instance().GetTurnEnded() == true) {
-            global::get().entitiesManager().ClearGarbage();
+//        if (TurnTimer::Instance().GetTurnEnded() == true) {
+//            global::get().entitiesManager().ClearGarbage();
 
-            bool save_event = global::get().entitiesManager().UpdateSaveRequest();
-            bool load_event = global::get().entitiesManager().UpdateLoadRequest();
-            if (load_event == true) {
-                player = global::get().entitiesManager().GetPlayer();
-                galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();
-            }
-            if (save_event == true) {
-                //..
-            }
-        }
+//            bool save_event = global::get().entitiesManager().UpdateSaveRequest();
+//            bool load_event = global::get().entitiesManager().UpdateLoadRequest();
+//            if (load_event == true) {
+//                player = global::get().entitiesManager().GetPlayer();
+//                galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();
+//            }
+//            if (save_event == true) {
+//                //..
+//            }
+//        }
 
-        // hack
-        if (TurnTimer::Instance().GetTurnTick() > 1) {
-            run_scenario->Update_inDynamic(player);
-        } else  {
-            run_scenario->Update_inStatic(player);        
-        }
+//        // hack
+//        if (TurnTimer::Instance().GetTurnTick() > 1) {
+//            run_scenario->Update_inDynamic(player);
+//        } else  {
+//            run_scenario->Update_inStatic(player);
+//        }
 
-        jeti::checkOpenglErrors(__FILE__,__LINE__);
-    }
+//        jeti::checkOpenglErrors(__FILE__,__LINE__);
+//    }
 
     return EXIT_SUCCESS;
 }

@@ -16,13 +16,13 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "../builder/world/GalaxyBuilder.hpp"
-#include "../builder/spaceobjects/ContainerBuilder.hpp"
+#include <builder/world/GalaxyBuilder.hpp>
+#include <builder/spaceobjects/ContainerBuilder.hpp>
 
-#include "../pilots/Npc.hpp"
-#include "../pilots/Player.hpp"
+#include <pilots/Npc.hpp>
+#include <pilots/Player.hpp>
 
-#include "../spaceobjects/Vehicle.hpp"
+#include <spaceobjects/Vehicle.hpp>
 
 #include <ai/God.hpp>
 #include <world/galaxy.hpp>
@@ -30,7 +30,7 @@
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
 
-#include "../struct/GalaxyDescription.hpp"
+#include <struct/GalaxyDescriptor.hpp>
 #include <jeti/particlesystem/ExplosionEffect.hpp>
 
 #include <iostream>
@@ -49,80 +49,80 @@
 /* virtual */
 void TestParticlesRunScenario::Init(Player* player)
 {
-    GalaxyDescription galaxy_description;
-    galaxy_description.allow_invasion = false;
-    galaxy_description.sector_num = 1;
+//    GalaxyDescription galaxy_description;
+//    galaxy_description.allow_invasion = false;
+//    galaxy_description.sector_num = 1;
     
-    for (int i=0; i<galaxy_description.sector_num; i++)
-    {
-        SectorDescription sector_description;
-        sector_description.starsystem_num = 1;
+//    for (int i=0; i<galaxy_description.sector_num; i++)
+//    {
+//        SectorDescription sector_description;
+//        sector_description.starsystem_num = 1;
         
-        for (int j=0; j<sector_description.starsystem_num; j++)        
-        {
-            StarSystemDescription starsystem_description;
-            starsystem_description.planet_num = 0;                    
-            starsystem_description.spacestation_num = 0;
-            starsystem_description.allow_satellites = false;
-            starsystem_description.allow_spacestations = false;
-            starsystem_description.allow_ships   = false;
+//        for (int j=0; j<sector_description.starsystem_num; j++)
+//        {
+//            StarSystemDescription starsystem_description;
+//            starsystem_description.planet_num = 0;
+//            starsystem_description.spacestation_num = 0;
+//            starsystem_description.allow_satellites = false;
+//            starsystem_description.allow_spacestations = false;
+//            starsystem_description.allow_ships   = false;
                         
-            starsystem_description.allow_ship_ranger   = false;
-            starsystem_description.allow_ship_warrior  = false;
-            starsystem_description.allow_ship_trader   = false;
-            starsystem_description.allow_ship_pirat    = false;
-            starsystem_description.allow_ship_diplomat = false;
-            sector_description.starsystem_descriptions.push_back(starsystem_description);
-        }    
+//            starsystem_description.allow_ship_ranger   = false;
+//            starsystem_description.allow_ship_warrior  = false;
+//            starsystem_description.allow_ship_trader   = false;
+//            starsystem_description.allow_ship_pirat    = false;
+//            starsystem_description.allow_ship_diplomat = false;
+//            sector_description.starsystem_descriptions.push_back(starsystem_description);
+//        }
         
-        galaxy_description.sector_descriptions.push_back(sector_description);            
-    }
+//        galaxy_description.sector_descriptions.push_back(sector_description);
+//    }
     
-    Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
-    God::Instance().SetGalaxy(galaxy);
+//    Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_description);
+//    God::Instance().SetGalaxy(galaxy);
         
-    glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
-    glm::vec3 angle(0,0,0); 
+//    glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
+//    glm::vec3 angle(0,0,0);
      
-    galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
+//    galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
         
-    StarSystem* starsystem = player->GetNpc()->GetVehicle()->starsystem(); // shortcut        
-    for (int i=0; i<200; i++)
-    {
-        Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
+//    StarSystem* starsystem = player->GetNpc()->GetVehicle()->starsystem(); // shortcut
+//    for (int i=0; i<200; i++)
+//    {
+//        Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
 
-        glm::vec3 center(10*i, 200+20, 0);        
-        starsystem->AddContainer(container, center);
-    }
+//        glm::vec3 center(10*i, 200+20, 0);
+//        starsystem->AddContainer(container, center);
+//    }
 
-    for (int i=0; i<200; i++)
-    {
-        Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
+//    for (int i=0; i<200; i++)
+//    {
+//        Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
 
-        glm::vec3 center(10*i, 200-20, 0);        
-        starsystem->AddContainer(container, center);
-    }
+//        glm::vec3 center(10*i, 200-20, 0);
+//        starsystem->AddContainer(container, center);
+//    }
 }
 
 /* virtual */
 void TestParticlesRunScenario::Update_inDynamic(Player* player)
 {
-    StarSystem* starsystem = player->GetNpc()->GetVehicle()->starsystem(); // shortcut
+//    StarSystem* starsystem = player->GetNpc()->GetVehicle()->starsystem(); // shortcut
             
-    if (starsystem->IsAnyActiveParticlesEffectPresent(EFFECT::EXPLOSION_ID) == false)
-    {    
-        float offset = 0;
-        for (int i=0; i<10; i++)
-        {
-            float radius = 20*i;
+//    if (starsystem->IsAnyActiveParticlesEffectPresent(EFFECT::EXPLOSION_ID) == false)
+//    {
+//        float offset = 0;
+//        for (int i=0; i<10; i++)
+//        {
+//            float radius = 20*i;
             
-//            glm::vec3 center(offset, 200, 0);
-//            jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(radius);
-//            starsystem->Add(explosion, center);
+////            glm::vec3 center(offset, 200, 0);
+////            jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(radius);
+////            starsystem->Add(explosion, center);
             
-            offset += 2.5*radius;
-        }
+//            offset += 2.5*radius;
+//        }
 
-    }
+//    }
 }
 

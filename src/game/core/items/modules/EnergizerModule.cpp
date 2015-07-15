@@ -19,7 +19,7 @@
 #include "EnergizerModule.hpp"
 #include "../../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
-#include "../../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 #include "../../items/equipment/BaseEquipment.hpp"
 
 EnergizerModule::EnergizerModule(int id)

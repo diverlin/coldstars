@@ -20,34 +20,34 @@
 #include "ButtonSingle.hpp"
 #include "UserInput.hpp"
 
-#include "../resources/GuiTextureObCollector.hpp"
+#include <resources/GuiTextureObCollector.hpp>
 #include <jeti/Screen.hpp>
 
-#include "../common/constants.hpp"
+#include <common/constants.hpp>
 //#include <ceti/StringUtils.hpp>
-#include "../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 
-#include "../pilots/Player.hpp"
-#include "../pilots/Npc.hpp"
+#include <pilots/Player.hpp>
+#include <pilots/Npc.hpp>
 
-#include "../spaceobjects/Vehicle.hpp"
-#include "../world/starsystem.hpp"
-#include "../world/Sector.hpp"
+#include <spaceobjects/Vehicle.hpp>
+#include <world/starsystem.hpp>
+#include <world/Sector.hpp>
 
-#include "../dock/Kosmoport.hpp"
-#include "../slots/ItemSlot.hpp"
-#include "../items/BaseItem.hpp"
+#include <dock/Kosmoport.hpp>
+#include <slots/ItemSlot.hpp>
+#include <items/BaseItem.hpp>
 
 #include <jeti/Render.hpp>
 
-#include "../dock/Angar.hpp"
-#include "../dock/Goverment.hpp"
+#include <dock/Angar.hpp>
+#include <dock/Goverment.hpp>
 
-#include "../gui/GuiManager.hpp"
-#include "../gui/GuiVehicle.hpp"
-#include "../gui/GuiSkills.hpp"
-#include "../gui/GuiGalaxyMap.hpp"
-#include "../gui/Slider.hpp"
+#include <gui/GuiManager.hpp>
+#include <gui/GuiVehicle.hpp>
+#include <gui/GuiSkills.hpp>
+#include <gui/GuiGalaxyMap.hpp>
+#include <gui/Slider.hpp>
 
 GuiKosmoport::GuiKosmoport():
 init_done(false), 

@@ -23,7 +23,7 @@
 #include <managers/EntitiesManager.hpp>
 
 //#include <ceti/StringUtils.hpp>
-#include "../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 #include "../spaceobjects/Vehicle.hpp"
 #include "../slots/VehicleSlot.hpp" 
 #include "../slots/ItemSlot.hpp" 

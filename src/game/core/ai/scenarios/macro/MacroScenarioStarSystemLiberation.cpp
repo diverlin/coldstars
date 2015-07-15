@@ -20,7 +20,7 @@
 #include "MacroScenarioStarSystemLiberation.hpp"
 
 #include "../../../common/constants.hpp"
-#include "../../../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 //#include <ceti/StringUtils.hpp>
 
 #include "../../../world/starsystem.hpp"

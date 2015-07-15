@@ -18,19 +18,19 @@
 
 #include "Slider.hpp"
 #include <jeti/Render.hpp>
-#include "../common/constants.hpp"
-#include "../resources/GuiTextureObCollector.hpp"
+#include <common/constants.hpp>
+#include <resources/GuiTextureObCollector.hpp>
 //#include <ceti/StringUtils.hpp>
-#include "../gui/ButtonSingle.hpp"
-#include "../gui/ButtonTrigger.hpp"
-#include "../gui/MouseData.hpp"
-#include "../pilots/Player.hpp"
-#include "../resources/TextureCollector.hpp"
+#include <gui/ButtonSingle.hpp>
+#include <gui/ButtonTrigger.hpp>
+#include <gui/MouseData.hpp>
+#include <pilots/Player.hpp>
+#include <resources/TextureCollector.hpp>
 #include <jeti/Screen.hpp>
 
-#include "../items/others/GoodsPack.hpp"
+#include <items/others/GoodsPack.hpp>
 
-#include "../pilots/Npc.hpp"
+#include <pilots/Npc.hpp>
 
 Slider::Slider()
 {

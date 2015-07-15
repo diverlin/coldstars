@@ -22,42 +22,42 @@
 
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
-#include "../world/starsystem.hpp"
-#include "../common/Global.hpp"
+#include <world/starsystem.hpp>
+#include <common/Global.hpp>
 #include <managers/EntitiesManager.hpp>
 
 #include <math/rand.hpp>
 //#include <ceti/StringUtils.hpp>
-#include "../common/TurnTimer.hpp"
-#include "../common/Logger.hpp"
+#include <common/TurnTimer.hpp>
+#include <ceti/Logger.hpp>
 
-#include "../ai/Task.hpp"
-#include "../ai/StateMachine.hpp"
+#include <ai/Task.hpp>
+#include <ai/StateMachine.hpp>
 
-#include "../items/equipment/ScanerEquipment.hpp"
-#include "../items/equipment/GrappleEquipment.hpp"
+#include <items/equipment/ScanerEquipment.hpp>
+#include <items/equipment/GrappleEquipment.hpp>
 
-#include "../parts/WeaponComplex.hpp"
+#include <parts/WeaponComplex.hpp>
 
-#include "../effects/lazerTrace.hpp"
-#include "../text/VerticalFlowText.hpp" 
+#include <effects/lazerTrace.hpp>
+#include <text/VerticalFlowText.hpp>
 
-#include "../spaceobjects/RocketBullet.hpp"
-#include "../spaceobjects/Container.hpp"
-#include "../spaceobjects/Star.hpp"
-#include "../spaceobjects/Planet.hpp"
-#include "../spaceobjects/BlackHole.hpp"
-#include "../spaceobjects/Asteroid.hpp"
-#include "../spaceobjects/SpaceStation.hpp"
-#include "../spaceobjects/Satellite.hpp"
-#include "../spaceobjects/Ship.hpp"
+#include <spaceobjects/RocketBullet.hpp>
+#include <spaceobjects/Container.hpp>
+#include <spaceobjects/Star.hpp>
+#include <spaceobjects/Planet.hpp>
+#include <spaceobjects/BlackHole.hpp>
+#include <spaceobjects/Asteroid.hpp>
+#include <spaceobjects/SpaceStation.hpp>
+#include <spaceobjects/Satellite.hpp>
+#include <spaceobjects/Ship.hpp>
 
-#include "../pilots/Npc.hpp"
+#include <pilots/Npc.hpp>
 
-#include "../gui/GuiGalaxyMap.hpp"
-#include "../gui/GuiManager.hpp"
+#include <gui/GuiGalaxyMap.hpp>
+#include <gui/GuiManager.hpp>
 
-#include "../slots/ItemSlot.hpp"
+#include <slots/ItemSlot.hpp>
 
 #include <gui/UserInput.hpp>
 #include <gui/UserInputManagerInSpace.hpp>
@@ -73,8 +73,8 @@ Player::Player(int id)
 npc(nullptr),
 starsystem(nullptr)     
 { 
-    setId(id);
-    setTypeId(TYPE::ENTITY::PLAYER_ID);
+//    setId(id);
+//    setTypeId(TYPE::ENTITY::PLAYER_ID);
     
     GuiManager::Instance().SetPlayer(this);
 }
@@ -103,149 +103,6 @@ bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) cons
     return force_full_control;
 }
           
-void Player::ClearVisibleEntities()
-{
-    visible_STAR_vec.clear();
-    visible_PLANET_vec.clear();
-    
-    visible_ASTEROID_vec.clear();
-    visible_CONTAINER_vec.clear();
-
-    visible_SHIP_vec.clear();
-    visible_SATELLITE_vec.clear();
-    visible_SPACESTATION_vec.clear();
-    visible_ROCKET_vec.clear();
-    visible_BLACKHOLE_vec.clear();
-
-    visible_effect_SHOCKWAVE_vec.clear();
-    visible_effect_LAZERTRACE_vec.clear();
-    visible_effect_PARTICLESYSTEM_vec.clear();          
-    visible_text_DAMAGE_vec.clear();
-}
-            
-void Player::AddIfVisible(Star* star)
-{
-    if (isObjectOnScreen(star->center(), star->size()))
-    {         
-        visible_STAR_vec.push_back(star);
-    }
-}
-
-void Player::AddIfVisible(Planet* planet)
-{
-    if (isObjectOnScreen(planet->center(), planet->size()))
-    {  
-        visible_PLANET_vec.push_back(planet);
-    }
-}
-
-void Player::AddIfVisible(Asteroid* asteroid)             
-{
-    if (isObjectOnScreen(asteroid->center(), asteroid->size()))
-    {       
-        if (npc->GetVehicle()->IsObjectWithinRadarRange(asteroid))
-        {
-            visible_ASTEROID_vec.push_back(asteroid);
-        }
-    }
-}
-
-void Player::AddIfVisible(Container* container)         
-{
-    if (isObjectOnScreen(container->center(), container->size()))
-    {    
-        if (npc->GetVehicle()->IsObjectWithinRadarRange(container))
-        {
-            visible_CONTAINER_vec.push_back(container);
-        }
-    }
-}
-
-void Player::AddIfVisible(RocketBullet* rocket)  
-{
-    if (isObjectOnScreen(rocket->center(), rocket->size()))  
-    {  
-        if (npc->GetVehicle()->IsObjectWithinRadarRange(rocket))
-        {
-            visible_ROCKET_vec.push_back(rocket);
-        }
-    }
-}
-
-void Player::AddIfVisible(BlackHole* blackhole)  
-{
-    if (isObjectOnScreen(blackhole->center(), blackhole->size()))  
-    {  
-        if (npc->GetVehicle()->IsObjectWithinRadarRange(blackhole))
-        {
-            visible_BLACKHOLE_vec.push_back(blackhole);
-        }
-    }
-}
-
-
-void Player::AddIfVisible(Vehicle* vehicle) 
-{
-    //if (isObjectOnScreen(vehicle->center(), vehicle->size()))
-    {      
-        //if ( npc->GetVehicle()->IsObjectWithinRadarRange(vehicle) )
-        {
-            switch(vehicle->subTypeId())
-            {            
-                case TYPE::ENTITY::SHIP_ID:             {     visible_SHIP_vec.push_back((Ship*)vehicle); break; }
-                case TYPE::ENTITY::SATELLITE_ID:        {     visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
-                case TYPE::ENTITY::SPACESTATION_ID:     {     visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
-            }
-        }
-    }
-}             
-        
-void Player::AddIfVisible(ShockWaveEffect* effect)
-{
-    //if (isObjectOnScreen(effect->center(), 600))
-    //{
-        //if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
-        //{
-            //visible_effect_SHOCKWAVE_vec.push_back(effect);
-        //}
-    //}
-}
-
-void Player::AddIfVisible(LazerTraceEffect* effect)
-{
-    if ( (isPointOnScreen(meti::vec2(effect->GetStartPos())) == true)
-         or
-       (isPointOnScreen(meti::vec2(effect->GetEndPos())) == true) )
-    {
-        if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
-        {
-            visible_effect_LAZERTRACE_vec.push_back(effect);
-        }
-    }
-}
- 
-void Player::AddIfVisible(jeti::BaseParticleSystem* effect)
-{
-    //if (isObjectOnScreen(effect->center(), 600))
-    //{
-        //if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
-        //{
-            visible_effect_PARTICLESYSTEM_vec.push_back(effect);
-        //}
-    //}
-}
-
-void Player::AddIfVisible(VerticalFlowText* effect)
-{
-    if (isPointOnScreen(effect->center()))
-    {
-        if (isPointOnScreen(effect->center()))
-        {
-            visible_text_DAMAGE_vec.push_back(effect);
-        }
-    }
-}             
-
 void Player::UpdatePostTransaction()
 {
     switch (npc->GetVehicle()->placeTypeId())
@@ -301,9 +158,9 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
         starsystem = npc->GetVehicle()->starsystem();
     }
     
-    VEHICLE_SPECIAL_ACTION_TYPE action_id = npc->GetVehicle()->GetSpecialActionId();
-    switch(action_id)
-    {
+//    VEHICLE_SPECIAL_ACTION_TYPE action_id = npc->GetVehicle()->GetSpecialActionId();
+//    switch(action_id)
+//    {
         //case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID:
         //{
             //if (npc->GetVehicle()->placeTypeId() == ENTITY::SPACE_ID)
@@ -317,44 +174,44 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
             //break;
         //}
         
-        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:
-        {
-            if (npc->GetVehicle()->placeTypeId() == TYPE::PLACE::HYPER_SPACE_ID)
-            {
-                if (turn_timer.GetTurnEnded() == true)
-                {
-                    turn_timer.NextTurn();
-                }
-            }
+//        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:
+//        {
+//            if (npc->GetVehicle()->placeTypeId() == TYPE::PLACE::HYPER_SPACE_ID)
+//            {
+//                if (turn_timer.GetTurnEnded() == true)
+//                {
+//                    turn_timer.NextTurn();
+//                }
+//            }
             
-            break;
-        }
+//            break;
+//        }
 
-        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:
-        {
-            if (npc->GetVehicle()->placeTypeId() == TYPE::PLACE::SPACE_ID)
-            {
-                if (turn_timer.GetTurnEnded() == true)
-                {
-                    jeti::Screen::Instance().InitiateScrollTo(meti::vec2(npc->GetVehicle()->center()));
-                    turn_timer.NextTurn();                
-                }
-            }
+//        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:
+//        {
+//            if (npc->GetVehicle()->placeTypeId() == TYPE::PLACE::SPACE_ID)
+//            {
+//                if (turn_timer.GetTurnEnded() == true)
+//                {
+//                    jeti::Screen::Instance().InitiateScrollTo(meti::vec2(npc->GetVehicle()->center()));
+//                    turn_timer.NextTurn();
+//                }
+//            }
             
-            break;
-        }
+//            break;
+//        }
     
-        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID:
-        {
-            if (turn_timer.GetTurnEnded() == true)
-            {
-                jeti::Screen::Instance().InitiateScrollTo(meti::vec2(npc->GetVehicle()->center()));
-                turn_timer.NextTurn();                
-            }
+//        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID:
+//        {
+//            if (turn_timer.GetTurnEnded() == true)
+//            {
+//                jeti::Screen::Instance().InitiateScrollTo(meti::vec2(npc->GetVehicle()->center()));
+//                turn_timer.NextTurn();
+//            }
             
-            break;
-        }        
-    }
+//            break;
+//        }
+//    }
     
     jeti::Screen::Instance().UpdateInSpace();
 }
@@ -383,7 +240,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
             render.ActivateFbo(0, w, h);
             {
                 render.SetPerspectiveProjection(w, h);
-                starsystem->DrawBackground(render, world_coord);
+                //starsystem->DrawBackground(render, world_coord);
                 render.SetOrthogonalProjection(w*scale, h*scale);
 
                 for(Star* star : visible_STAR_vec)
@@ -491,28 +348,28 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
                 float time_array[SHOCKWAVES_MAX_NUM];
 
                 unsigned int i=0;
-                for (i=0; ((i<visible_BLACKHOLE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); i++)
-                {
-                    ShockWaveEffect* shockwave = visible_BLACKHOLE_vec[i]->GetShockWaveEffect();
+//                for (i=0; ((i<visible_BLACKHOLE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); i++)
+//                {
+//                    ShockWaveEffect* shockwave = visible_BLACKHOLE_vec[i]->GetShockWaveEffect();
 
-                    center_array[i][0] = (shockwave->center().x - world_coord.x)/w;
-                    center_array[i][1] = (shockwave->center().y - world_coord.y)/h;
-                    xyz_array[i][0] = shockwave->parameters().x;
-                    xyz_array[i][1] = shockwave->parameters().y;
-                    xyz_array[i][2] = shockwave->parameters().z;
+//                    center_array[i][0] = (shockwave->center().x - world_coord.x)/w;
+//                    center_array[i][1] = (shockwave->center().y - world_coord.y)/h;
+//                    xyz_array[i][0] = shockwave->parameters().x;
+//                    xyz_array[i][1] = shockwave->parameters().y;
+//                    xyz_array[i][2] = shockwave->parameters().z;
                     
-                    time_array[i] = shockwave->time();
-                }
-                for (unsigned int j=0; ((j<visible_effect_SHOCKWAVE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
-                {
-                    center_array[i][0] = (visible_effect_SHOCKWAVE_vec[j]->center().x - world_coord.x)/(w*scale);
-                    center_array[i][1] = (visible_effect_SHOCKWAVE_vec[j]->center().y - world_coord.y)/(h*scale);
-                    xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[j]->parameters().x;
-                    xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[j]->parameters().y;
-                    xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[j]->parameters().z/scale;
+//                    time_array[i] = shockwave->time();
+//                }
+//                for (unsigned int j=0; ((j<visible_effect_SHOCKWAVE_vec.size()) && (i<SHOCKWAVES_MAX_NUM)); j++, i++)
+//                {
+//                    center_array[i][0] = (visible_effect_SHOCKWAVE_vec[j]->center().x - world_coord.x)/(w*scale);
+//                    center_array[i][1] = (visible_effect_SHOCKWAVE_vec[j]->center().y - world_coord.y)/(h*scale);
+//                    xyz_array[i][0] = visible_effect_SHOCKWAVE_vec[j]->parameters().x;
+//                    xyz_array[i][1] = visible_effect_SHOCKWAVE_vec[j]->parameters().y;
+//                    xyz_array[i][2] = visible_effect_SHOCKWAVE_vec[j]->parameters().z/scale;
                     
-                    time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time();
-                }
+//                    time_array[i] = visible_effect_SHOCKWAVE_vec[j]->time();
+//                }
 
                 render.DrawPostEffectShockWaves(render.GetLastFbo().GetTexture(), w, h, i, center_array, xyz_array, time_array);
             }
@@ -590,12 +447,12 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
         {
             if (forceDraw_orbits == true)
             {
-                starsystem->DrawOrbits(renderer);
+                //starsystem->DrawOrbits(renderer);
             }
             
             if (forceDraw_path == true)
             {
-                starsystem->DrawPath();
+                //starsystem->DrawPath();
             }
             
             npc->GetVehicle()->GetComplexDrive().DrawPath(renderer);
@@ -970,28 +827,28 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 
     UserInput::Instance().Update();
     UserInputManagerInSpace::Instance().UpdateInSpace(this);
-    if (turn_timer.GetTurnEnded() == true)  
-    {    
-        GuiManager::Instance().GetGuiSpace().Update(this);
-        BaseGuiElement* gui_element = GuiManager::Instance().GetGuiSpace().UpdateMouseInteraction(cursor.GetMouseData().pos_screencoord);
-        if (gui_element == nullptr)
-        {  
-            if ( (GuiManager::Instance().GetGuiVehicleScan()->GetVehicle() == nullptr) and (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr) )
-            {
-                bool mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(cursor.GetMouseData());  
-                if (mouse_interaction == false)
-                {    
-                    MouseNavigation(cursor.GetMouseData());  
-                }
-            }
-        }
-        else
-        {
-            cursor.SetFocusedGuiElement(gui_element);
-        }
-    }
+//    if (turn_timer.GetTurnEnded() == true)
+//    {
+//        GuiManager::Instance().GetGuiSpace().Update(this);
+//        BaseGuiElement* gui_element = GuiManager::Instance().GetGuiSpace().UpdateMouseInteraction(cursor.GetMouseData().pos_screencoord);
+//        if (gui_element == nullptr)
+//        {
+//            if ( (GuiManager::Instance().GetGuiVehicleScan()->GetVehicle() == nullptr) and (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr) )
+//            {
+//                bool mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(cursor.GetMouseData());
+//                if (mouse_interaction == false)
+//                {
+//                    MouseNavigation(cursor.GetMouseData());
+//                }
+//            }
+//        }
+//        else
+//        {
+//            cursor.SetFocusedGuiElement(gui_element);
+//        }
+//    }
 
-    RenderInSpace(starsystem, turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath());
+//    RenderInSpace(starsystem, turn_timer.GetTurnEnded(), show.GetAllOrbits(), show.GetAllPath());
     
     GuiManager::Instance().UpdateSessionInSpace();
     //GuiManager::Instance().GetGuiSpace().Render(this); 
@@ -1072,144 +929,47 @@ void Player::RenderAxis(const jeti::Renderer& render) const
 //render.disable_DEPTH();
 }         
 
-void Player::Save(boost::property_tree::ptree& save_ptree) const
-{
-    std::string root = "player."+std::to_string(id())+".";
-    
-    Base::SaveData(save_ptree, root);
-    Player::SaveData(save_ptree, root);    
-}        
-
-void Player::Load(const boost::property_tree::ptree& load_ptree)
-{
-    Base::LoadData(load_ptree);
-    Player::LoadData(load_ptree);       
-}        
-
-void Player::Resolve()
-{
-    Base::ResolveData();
-    Player::ResolveData();    
-}
-        
-void Player::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    
-{
-    save_ptree.put(root+"unresolved.npc_id", npc->id());
-    save_ptree.put(root+"unresolved.starsystem_id", starsystem->id());
-    save_ptree.put(root+"unresolved.screen_pos_x", jeti::Screen::Instance().GetBottomLeft().x);
-    save_ptree.put(root+"unresolved.screen_pos_y", jeti::Screen::Instance().GetBottomLeft().y);
-}
-
-void Player::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    data_unresolved_player.npc_id = load_ptree.get<int>("unresolved.npc_id");
-    data_unresolved_player.starsystem_id = load_ptree.get<int>("unresolved.starsystem_id");
-    data_unresolved_player.screen_pos.x = load_ptree.get<float>("unresolved.screen_pos_x");
-    data_unresolved_player.screen_pos.y = load_ptree.get<float>("unresolved.screen_pos_y");
-}
-
-void Player::ResolveData()
-{
-    BindNpc((Npc*)global::get().entitiesManager().GetEntityById(data_unresolved_player.npc_id));
-    starsystem = (StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_player.starsystem_id);
-    //jeti::Screen::Instance().SetBottomLeft(data_unresolved_player.screen_pos);
-}        
-
-
-
-
-bool isObjectWithinRadarRange(jeti::BaseParticleSystem* effect, Vehicle* vehicle)
-{
-    float dist = meti::distance(vehicle->center(), effect->center());
-    if (dist < vehicle->GetProperties().radar)
-    {
-        return true;
-    }
-    
-    return false;
-}
-
-
-
-bool isObjectOnScreen(const glm::vec3& center, const glm::vec3& size)
-{      
-    float scale = jeti::Screen::Instance().GetScale();
-    if (center.x < (jeti::Screen::Instance().GetBottomLeftScreenWC().x - size.x*scale))
-        return false;
-    if (center.x > (jeti::Screen::Instance().GetTopRightScreenWC().x   + size.x*scale))
-        return false;
-    if (center.y < (jeti::Screen::Instance().GetBottomLeftScreenWC().y - size.y*scale))
-        return false;
-    if (center.y > (jeti::Screen::Instance().GetTopRightScreenWC().y   + size.y*scale))
-        return false;
-    
-    return true;
-}
-
-bool isObjectOnScreen(const glm::vec3& ob_center, const float sizeInPixels)
-{       
-    float scale = jeti::Screen::Instance().GetScale();
-    if (ob_center.x < (jeti::Screen::Instance().GetBottomLeftScreenWC().x - sizeInPixels*scale))
-        return false;
-    if (ob_center.x > (jeti::Screen::Instance().GetTopRightScreenWC().x + sizeInPixels*scale))
-        return false;
-    if (ob_center.y < (jeti::Screen::Instance().GetBottomLeftScreenWC().y - sizeInPixels*scale))
-        return false;
-    if (ob_center.y > (jeti::Screen::Instance().GetTopRightScreenWC().y + sizeInPixels*scale))
-        return false;
-    
-    return true;
-}
-
-bool isPointOnScreen(const glm::vec2& p)
-{       
-    if (p.x < (jeti::Screen::Instance().GetBottomLeftScreenWC().x))
-        return false;
-    if (p.x > (jeti::Screen::Instance().GetTopRightScreenWC().x))
-        return false;
-    if (p.y < (jeti::Screen::Instance().GetBottomLeftScreenWC().y))
-        return false;
-    if (p.y > (jeti::Screen::Instance().GetTopRightScreenWC().y))
-        return false;
-    
-    return true;
-}
-
-bool isObjectWithinRadarRange(ShockWaveEffect* effect, Vehicle* vehicle)
-{
-    float dist = meti::distance(vehicle->center(), effect->center());
-    if (dist < vehicle->GetProperties().radar)
-    {
-        return true;
-    }
-    
-    return false;
-}
-
-bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
-{
-    float dist = meti::distance(vehicle->center(), effect->GetStartPos());
-    if (dist < vehicle->GetProperties().radar)
-    {
-        return true;
-    }
-    
-    dist = meti::distance(vehicle->center(), effect->GetEndPos());
-    if (dist < vehicle->GetProperties().radar)
-    {
-        return true;
-    }
-    
-    return false;
-}
-
-//bool isObjectWithinRadarRange(VerticalFlowText* effect, Vehicle* vehicle)
+//void Player::Save(boost::property_tree::ptree& save_ptree) const
 //{
-    //float dist = meti::distance(vehicle->center(), effect->GetPos());
-    //if (dist < vehicle->GetProperties().radar)
-    //{
-        //return true;
-    //}
+//    std::string root = "player."+std::to_string(id())+".";
     
-    //return false;
+//    Base::SaveData(save_ptree, root);
+//    Player::SaveData(save_ptree, root);
 //}
+
+//void Player::Load(const boost::property_tree::ptree& load_ptree)
+//{
+//    Base::LoadData(load_ptree);
+//    Player::LoadData(load_ptree);
+//}
+
+//void Player::Resolve()
+//{
+//    Base::ResolveData();
+//    Player::ResolveData();
+//}
+        
+//void Player::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    save_ptree.put(root+"unresolved.npc_id", npc->id());
+//    save_ptree.put(root+"unresolved.starsystem_id", starsystem->id());
+//    save_ptree.put(root+"unresolved.screen_pos_x", jeti::Screen::Instance().GetBottomLeft().x);
+//    save_ptree.put(root+"unresolved.screen_pos_y", jeti::Screen::Instance().GetBottomLeft().y);
+//}
+
+//void Player::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    data_unresolved_player.npc_id = load_ptree.get<int>("unresolved.npc_id");
+//    data_unresolved_player.starsystem_id = load_ptree.get<int>("unresolved.starsystem_id");
+//    data_unresolved_player.screen_pos.x = load_ptree.get<float>("unresolved.screen_pos_x");
+//    data_unresolved_player.screen_pos.y = load_ptree.get<float>("unresolved.screen_pos_y");
+//}
+
+//void Player::ResolveData()
+//{
+//    BindNpc((Npc*)global::get().entitiesManager().GetEntityById(data_unresolved_player.npc_id));
+//    starsystem = (StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_player.starsystem_id);
+//    //jeti::Screen::Instance().SetBottomLeft(data_unresolved_player.screen_pos);
+//}
+
+

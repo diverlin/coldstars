@@ -18,11 +18,11 @@
 
 #include "DistantStarEffect.hpp"
 //#include <ceti/StringUtils.hpp>
-#include "../common/constants.hpp"
+#include <common/constants.hpp>
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
 
-#include "../resources/TextureCollector.hpp"
+#include <resources/TextureCollector.hpp>
 #include <jeti/Mesh.hpp>
 
 

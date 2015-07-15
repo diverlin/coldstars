@@ -26,7 +26,7 @@
 #include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/pilots/NpcBuilder.hpp>
 
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 #include <ceti/Collision.hpp>
 #include <math/rand.hpp>
 //#include <ceti/StringUtils.hpp>

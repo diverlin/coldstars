@@ -95,6 +95,6 @@ void ButtonItemSlot2::UpdateUnique(Player* player)
 void ButtonItemSlot2::RenderUnique(const jeti::Renderer& render, Player*) const
 {
     if (GetItemSlot()) {
-        GetItemSlot()->Render(render, GetBox(), glm::vec2(0), false);
+        //GetItemSlot()->Render(render, GetBox(), glm::vec2(0), false);
     }
 }        

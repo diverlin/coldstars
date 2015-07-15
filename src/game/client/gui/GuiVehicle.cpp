@@ -19,16 +19,16 @@
 #include "GuiVehicle.hpp"
 #include "../pilots/Player.hpp"
 #include "../resources/GuiTextureObCollector.hpp"
-#include "../dock/Kosmoport.hpp"
+#include <dock/Kosmoport.hpp>
 #include <jeti/Render.hpp>
-#include "../items/BaseItem.hpp"
-#include "../slots/ItemSlot.hpp"
+#include <items/BaseItem.hpp>
+#include <slots/ItemSlot.hpp>
 //#include <ceti/StringUtils.hpp>
-#include "../common/common.hpp"
+#include <common/common.hpp>
 #include <builder/slots/ItemSlotBuilder.hpp>
 
-#include "../pilots/Npc.hpp"
-#include "../spaceobjects/Vehicle.hpp"
+#include <pilots/Npc.hpp>
+#include <spaceobjects/Vehicle.hpp>
 #include "ButtonItemSlot.hpp"
 
          

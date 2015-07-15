@@ -19,7 +19,7 @@
 
 #include <ai/God.hpp>
 
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 #include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
 #include <common/GameDate.hpp>

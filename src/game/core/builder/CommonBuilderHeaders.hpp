@@ -23,7 +23,7 @@
 #include <common/common.hpp>
 #include <math/rand.hpp>
 #include <common/IdGenerator.hpp>
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 
 //#include <resources/TextureCollector.hpp>
 //#include <jeti/TextureOb.hpp>

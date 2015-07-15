@@ -22,7 +22,7 @@
 #include <meti/RandUtils.hpp>
 #include <jeti/TextureOb.hpp>
 
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 
 TextureCollector& TextureCollector::Instance()
 {

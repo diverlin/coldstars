@@ -19,7 +19,7 @@
 #include "ProtectorArtefact.hpp"
 #include "../../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
-#include "../../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 
 ProtectorArtefact::ProtectorArtefact(int id)
 :

@@ -25,7 +25,7 @@
 #include <common/Global.hpp>
 #include <managers/EntitiesManager.hpp>
 
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 
 //#include <jeti/Render.hpp>
 

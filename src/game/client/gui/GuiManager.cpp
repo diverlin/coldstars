@@ -19,25 +19,25 @@
 
 #include "GuiManager.hpp"
 #include "UserInputManagerInSpace.hpp"
-#include "../slots/ItemSlot.hpp"
-#include "../dock/Kosmoport.hpp"
+#include <slots/ItemSlot.hpp>
+#include <dock/Kosmoport.hpp>
 
 #include <world/Sector.hpp>
-#include "../world/starsystem.hpp"
+#include <world/starsystem.hpp>
 
 //#include <ceti/StringUtils.hpp>
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
-#include "../parts/WeaponComplex.hpp"
-#include "../items/BaseItem.hpp"
+#include <parts/WeaponComplex.hpp>
+#include <items/BaseItem.hpp>
 
-#include "../pilots/Npc.hpp"
-#include "../pilots/Player.hpp"
+#include <pilots/Npc.hpp>
+#include <pilots/Player.hpp>
 
-#include "../spaceobjects/Vehicle.hpp"
+#include <spaceobjects/Vehicle.hpp>
 
-#include "../gui/GuiSkills.hpp"
-#include "../gui/GuiGalaxyMap.hpp"
+#include <gui/GuiSkills.hpp>
+#include <gui/GuiGalaxyMap.hpp>
 
 
 GuiManager& GuiManager::Instance()

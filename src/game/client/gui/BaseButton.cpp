@@ -18,7 +18,7 @@
 
 
 #include "BaseButton.hpp"
-#include "../common/constants.hpp"
+#include <common/constants.hpp>
 #include <ceti/Collision.hpp>
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>

@@ -19,16 +19,16 @@
 #include "UserInputManagerInSpace.hpp"
 #include "UserInput.hpp"
 #include "BaseButton.hpp"
-#include "../common/Global.hpp"
+#include <common/Global.hpp>
 #include <common/Config.hpp>
 #include <jeti/Screen.hpp>
-#include "../parts/WeaponComplex.hpp"
-#include "../pilots/Npc.hpp"
-#include "../pilots/Player.hpp"
+#include <parts/WeaponComplex.hpp>
+#include <pilots/Npc.hpp>
+#include <pilots/Player.hpp>
 
-#include "../spaceobjects/Vehicle.hpp"
+#include <spaceobjects/Vehicle.hpp>
 
-#include "../gui/GuiManager.hpp"
+#include <gui/GuiManager.hpp>
 
 UserInputManagerInSpace& UserInputManagerInSpace::Instance()
 {

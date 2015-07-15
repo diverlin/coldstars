@@ -20,7 +20,7 @@
 #include "BaseGuiElement.hpp"
 #include <common/constants.hpp>
 #include <jeti/Render.hpp>
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 
 #include <jeti/AnimationEffect2D.hpp>
 

@@ -19,7 +19,7 @@
 #include "RadarModule.hpp"
 #include "../../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
-#include "../../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 
 RadarModule::RadarModule(int id)
 :

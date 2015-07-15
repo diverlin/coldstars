@@ -22,7 +22,7 @@
 //#include <jeti/Render.hpp>
 #include "../spaceobjects/SpaceObject.hpp"
 
-#include "../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 
 Turrel::Turrel(ItemSlot* slot)
 {

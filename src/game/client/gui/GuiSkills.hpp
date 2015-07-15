@@ -20,7 +20,7 @@
 #pragma once
 
 #include "BaseGuiElement.hpp"
-#include "../pilots/Skills.hpp"
+#include <pilots/Skills.hpp>
 #include <ceti/rect.hpp>
 
 class GuiSkills : public BaseGuiElement

@@ -25,7 +25,7 @@
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
 #include "../common/Global.hpp"
-#include "../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 #include <common/common.hpp>
 #include "../ai/aiModel/AiModelCollector.hpp"
 #include "../dock/Kosmoport.hpp"

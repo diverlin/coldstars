@@ -22,7 +22,7 @@
 #include "../../../spaceobjects/Planet.hpp"
 #include "../../../spaceobjects/Container.hpp"
 #include "../../../common/constants.hpp"
-#include "../../../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 //#include <ceti/StringUtils.hpp>
 #include "../../../ai/StateMachine.hpp"
 

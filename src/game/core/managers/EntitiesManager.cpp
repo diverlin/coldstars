@@ -21,7 +21,7 @@
 #include <boost/property_tree/info_parser.hpp>
 
 #include "EntitiesManager.hpp"
-#include "../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 //#include <ceti/StringUtils.hpp>
 #include <common/IdGenerator.hpp>
 

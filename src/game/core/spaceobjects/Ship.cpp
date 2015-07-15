@@ -20,7 +20,7 @@
 #include "Ship.hpp"
 
 
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 
 #include <world/starsystem.hpp>
 

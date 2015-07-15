@@ -22,7 +22,7 @@
 
 #include <common/constants.hpp>
 //#include <ceti/StringUtils.hpp>
-#include <common/Logger.hpp>
+#include <ceti/Logger.hpp>
 
 #include <slots/ItemSlot.hpp>
 #include <spaceobjects/Vehicle.hpp>

@@ -22,7 +22,7 @@
 #include "BaseGuiElement.hpp"
 #include <jeti/TextureOb.hpp>
 #include <ceti/rect.hpp>
-#include "../dock/Shop.hpp"
+#include <dock/Shop.hpp>
 #include "MouseData.hpp"
 
 class Slider : public BaseGuiElement

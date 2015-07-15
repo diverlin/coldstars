@@ -19,7 +19,7 @@
 #include "Satellite.hpp"
 #include <meti/RandUtils.hpp>
 //#include <ceti/StringUtils.hpp>
-#include "../common/Logger.hpp"
+#include <ceti/Logger.hpp>
 #include "../common/Global.hpp"
 #include "../world/starsystem.hpp"
 //#include "../effects/Shield.hpp"
