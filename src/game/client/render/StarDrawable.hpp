@@ -20,10 +20,12 @@
 
 #include <render/PlanetoidDrawable.hpp>
 
+class Star;
+
 class StarDrawable : public PlanetoidDrawable
 {
     public:
-        StarDrawable(jeti::TextureOb*, jeti::Mesh*);
+        StarDrawable(jeti::TextureOb*, jeti::Mesh*, Star*);
         virtual ~StarDrawable() final override;
 
         //alpitodorender
@@ -38,6 +40,7 @@ class StarDrawable : public PlanetoidDrawable
         void UpdateInSpace(int, bool);
                 
     private:
+        Star* m_star = nullptr;
         float m_DeltaColor;
         
         bool m_SparkActive;

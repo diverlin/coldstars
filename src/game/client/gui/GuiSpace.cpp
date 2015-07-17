@@ -59,8 +59,8 @@ gui_galaxymap_shared(nullptr),
 gui_skills_shared(nullptr),
 slider_shared(nullptr)
 {       
-    int screen_w = jeti::Screen::Instance().GetWidth();
-    int screen_h = jeti::Screen::Instance().GetHeight();
+    int screen_w = jeti::Screen::get().GetWidth();
+    int screen_h = jeti::Screen::get().GetHeight();
     
     {
         glm::vec2 size(screen_w, screen_h);
@@ -260,16 +260,16 @@ void GuiSpace::Resize(int screen_w, int screen_h)
 void GuiSpace::RenderText(const glm::vec2& scroll_coords) const
 {
 //    const std::string _coord_str = "date:"+ GameDate::Instance().GetDate().GetStr()+" world coord: " + std::to_string(scroll_coords.x) + "," + std::to_string(scroll_coords.y);
-//    glm::vec2 pos(jeti::Screen::Instance().GetWidth() - 400, jeti::Screen::Instance().GetHeight() - 5);
+//    glm::vec2 pos(jeti::Screen::get().GetWidth() - 400, jeti::Screen::get().GetHeight() - 5);
 
-//    jeti::Screen::Instance().DrawText(_coord_str, 12, pos);
+//    jeti::Screen::get().DrawText(_coord_str, 12, pos);
 }
 
 /* virtual override final */
 void GuiSpace::UpdateUnique(Player* player)
 { 
-    int screen_w = jeti::Screen::Instance().GetWidth();
-    int screen_h = jeti::Screen::Instance().GetHeight();
+    int screen_w = jeti::Screen::get().GetWidth();
+    int screen_h = jeti::Screen::get().GetHeight();
     ceti::Rect screen_rect(0, 0, screen_w, screen_h);
     glm::vec2 center_screen(screen_w/2, screen_h/2);
 }
@@ -350,6 +350,6 @@ void GuiSpace::RenderUnique(const jeti::Renderer&, Player* player) const
 
     //RenderChildInfo(data_mouse);
     
-    RenderText(jeti::Screen::Instance().GetBottomLeftScreenWC());
+    RenderText(jeti::Screen::get().GetBottomLeftScreenWC());
 }
 

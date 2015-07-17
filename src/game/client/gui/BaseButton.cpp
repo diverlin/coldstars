@@ -100,7 +100,7 @@ void BaseButton::RenderUnique(const jeti::Renderer& render, Player*) const
     if (GetLabel() != "")
     {
         glm::vec2 pos(GetBox().center().x, GetBox().center().y + GetBox().size().y);
-        jeti::Screen::Instance().DrawText(GetLabel(), 12, pos);
+        jeti::Screen::get().DrawText(GetLabel(), 12, pos);
     }
 }
         

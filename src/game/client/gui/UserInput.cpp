@@ -33,11 +33,11 @@ void UserInput::Update()
     m_KeyboardCodesPressed_vec.clear();
     m_MouseCodesPressed_vec.clear();
         
-    while (jeti::Screen::Instance().GetWindow().pollEvent(m_Event))
+    while (jeti::Screen::get().GetWindow().pollEvent(m_Event))
     {
         switch(m_Event.type)
         {
-            case sf::Event::Closed:             { jeti::Screen::Instance().GetWindow().close(); break; }
+            case sf::Event::Closed:             { jeti::Screen::get().GetWindow().close(); break; }
             case sf::Event::KeyPressed:         { m_KeyboardCodesPressed_vec.push_back(m_Event.key.code); break; }
             //case sf::Event::Resized:            { Screen::Instance().Resize(event.size.x, event.size.y); break; }
             //case sf::Event::MouseButtonPressed: { MouseButtonPressed(player); break; }

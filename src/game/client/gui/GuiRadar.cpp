@@ -38,8 +38,8 @@ GuiRadar::GuiRadar()
     textureOb_range             = GuiTextureObCollector::Instance().radar_range;
         
     scale = RADAR_SCALE;
-    int screen_w = jeti::Screen::Instance().GetWidth();
-    int screen_h = jeti::Screen::Instance().GetHeight();
+    int screen_w = jeti::Screen::get().GetWidth();
+    int screen_h = jeti::Screen::get().GetHeight();
     Resize(screen_w, screen_h);
 }
 
@@ -59,14 +59,14 @@ void GuiRadar::ResetData()
 /*virtual final*/ 
 void GuiRadar::UpdateUnique(Player* player)
 {        
-    screenrect.Set(rect.center() + jeti::Screen::Instance().GetBottomLeftScreenWC() * scale, (int)(jeti::Screen::Instance().GetWidth() * scale), (int)(jeti::Screen::Instance().GetHeight() * scale));
+    screenrect.Set(rect.center() + jeti::Screen::get().GetBottomLeftScreenWC() * scale, (int)(jeti::Screen::get().GetWidth() * scale), (int)(jeti::Screen::get().GetHeight() * scale));
     const MouseData& data_mouse = player->GetCursor().GetMouseData();
     if (rect.CheckRoundInteraction(data_mouse.pos_screencoord, /*radius=*/70.0) == true)
     {
         if (data_mouse.left_press == true)
         {
             glm::vec2 new_global_coord( ( data_mouse.pos_screencoord.x - rect.center().x - screenrect.GetWidth()/2)/scale, ( data_mouse.pos_screencoord.y - rect.center().y - screenrect.GetHeight()/2)/scale);
-            jeti::Screen::Instance().SetBottomLeftScreenWC(new_global_coord);
+            jeti::Screen::get().SetBottomLeftScreenWC(new_global_coord);
         }
     }
 }

@@ -152,9 +152,9 @@ void Cursor::UpdateMouseStuff()
     m_DataMouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
     m_DataMouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
 
-    sf::Vector2i mouse_pos = sf::Mouse::getPosition(jeti::Screen::Instance().GetWindow());
-    m_DataMouse.pos_screencoord = glm::vec2(mouse_pos.x, jeti::Screen::Instance().GetHeight() - mouse_pos.y);
-    m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*jeti::Screen::Instance().GetScale() + jeti::Screen::Instance().GetBottomLeftScreenWC();
+    sf::Vector2i mouse_pos = sf::Mouse::getPosition(jeti::Screen::get().GetWindow());
+    m_DataMouse.pos_screencoord = glm::vec2(mouse_pos.x, jeti::Screen::get().GetHeight() - mouse_pos.y);
+    m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*jeti::Screen::get().GetScale() + jeti::Screen::get().GetBottomLeftScreenWC();
 }
 
 void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
@@ -195,7 +195,7 @@ void Cursor::RenderFocusedObjectInfo(const jeti::Renderer& render) const
             m_FocusedGuiElement->RenderInfo(render);
         }        
         if (m_FocusedSpaceObject) {
-            //m_FocusedSpaceObject->RenderInfoInSpace(render, jeti::Screen::Instance().GetBottomLeftScreenWC(), jeti::Screen::Instance().GetScale());
+            //m_FocusedSpaceObject->RenderInfoInSpace(render, jeti::Screen::get().GetBottomLeftScreenWC(), jeti::Screen::get().GetScale());
         }
     }
     //render.disable_BLEND();  

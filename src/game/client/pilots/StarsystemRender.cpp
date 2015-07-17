@@ -18,26 +18,26 @@
 
 
 #include "StarsystemRender.hpp"
-#include <common/Config.hpp>
+//#include <common/Config.hpp>
 
 #include <jeti/Render.hpp>
 #include <jeti/Screen.hpp>
 #include <world/starsystem.hpp>
-#include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+//#include <common/Global.hpp>
+//#include <managers/EntitiesManager.hpp>
 
-#include <math/rand.hpp>
+//#include <math/rand.hpp>
 //#include <ceti/StringUtils.hpp>
-#include <common/TurnTimer.hpp>
+//#include <common/TurnTimer.hpp>
 #include <ceti/Logger.hpp>
 
-#include <ai/Task.hpp>
-#include <ai/StateMachine.hpp>
+//#include <ai/Task.hpp>
+//#include <ai/StateMachine.hpp>
 
-#include <items/equipment/ScanerEquipment.hpp>
-#include <items/equipment/GrappleEquipment.hpp>
+//#include <items/equipment/ScanerEquipment.hpp>
+//#include <items/equipment/GrappleEquipment.hpp>
 
-#include <parts/WeaponComplex.hpp>
+//#include <parts/WeaponComplex.hpp>
 
 #include <effects/lazerTrace.hpp>
 #include <text/VerticalFlowText.hpp>
@@ -54,19 +54,19 @@
 
 #include <pilots/Npc.hpp>
 
-#include <gui/GuiGalaxyMap.hpp>
-#include <gui/GuiManager.hpp>
+//#include <gui/GuiGalaxyMap.hpp>
+//#include <gui/GuiManager.hpp>
 
-#include <slots/ItemSlot.hpp>
+//#include <slots/ItemSlot.hpp>
 
-#include <gui/UserInput.hpp>
-#include <gui/UserInputManagerInSpace.hpp>
+//#include <gui/UserInput.hpp>
+//#include <gui/UserInputManagerInSpace.hpp>
 
-#include <glm/gtc/matrix_transform.hpp>
+//#include <glm/gtc/matrix_transform.hpp>
 
 #include <jeti/particlesystem/BaseParticleSystem.hpp>
 
-#include <meti/RandUtils.hpp>
+//#include <meti/RandUtils.hpp>
 
 
 StarsystemRender::StarsystemRender()
@@ -75,128 +75,137 @@ StarsystemRender::StarsystemRender()
 StarsystemRender::~StarsystemRender()
 {}  
           
-void StarsystemRender::ClearVisibleEntities()
+void StarsystemRender::clearVisibleEntities()
 {
-    visible_STAR_vec.clear();
-    visible_PLANET_vec.clear();
+    m_objects.clear();
+
+//    visible_STAR_vec.clear();
+//    visible_PLANET_vec.clear();
     
-    visible_ASTEROID_vec.clear();
-    visible_CONTAINER_vec.clear();
+//    visible_ASTEROID_vec.clear();
+//    visible_CONTAINER_vec.clear();
 
-    visible_SHIP_vec.clear();
-    visible_SATELLITE_vec.clear();
-    visible_SPACESTATION_vec.clear();
-    visible_ROCKET_vec.clear();
-    visible_BLACKHOLE_vec.clear();
+//    visible_SHIP_vec.clear();
+//    visible_SATELLITE_vec.clear();
+//    visible_SPACESTATION_vec.clear();
+//    visible_ROCKET_vec.clear();
+//    visible_BLACKHOLE_vec.clear();
 
-    visible_effect_SHOCKWAVE_vec.clear();
-    visible_effect_LAZERTRACE_vec.clear();
-    visible_effect_PARTICLESYSTEM_vec.clear();          
-    visible_text_DAMAGE_vec.clear();
+//    visible_effect_SHOCKWAVE_vec.clear();
+//    visible_effect_LAZERTRACE_vec.clear();
+//    visible_effect_PARTICLESYSTEM_vec.clear();
+//    visible_text_DAMAGE_vec.clear();
 }
-            
-void StarsystemRender::AddIfVisible(Star* star)
+
+void StarsystemRender::addIfVisible(jeti::BaseDrawable* ob)
 {
-    if (isObjectOnScreen(star->center(), star->size())) {
-        visible_STAR_vec.push_back(star);
+    if (ob->inRect(jeti::Screen::get().rect())) {
+        m_objects.push_back(ob);
     }
 }
 
-void StarsystemRender::AddIfVisible(Planet* planet)
-{
-    if (isObjectOnScreen(planet->center(), planet->size())) {
-        visible_PLANET_vec.push_back(planet);
-    }
-}
-
-void StarsystemRender::AddIfVisible(Asteroid* asteroid)
-{
-    if (isObjectOnScreen(asteroid->center(), asteroid->size())) {
-//        if (isObjectWithinRange(npc->GetVehicle()->center(), asteroid->center(), radius)) {
-            visible_ASTEROID_vec.push_back(asteroid);
-        }
+//void StarsystemRender::addIfVisible(Star* star)
+//{
+//    if (isObjectOnScreen(star->center(), star->size())) {
+//        visible_STAR_vec.push_back(star);
 //    }
-}
+//}
 
-void StarsystemRender::AddIfVisible(Container* container)
-{
-    if (isObjectOnScreen(container->center(), container->size())) {
-//        if (isObjectWithinRange(npc->GetVehicle()->center(), container->center(), radius)) {
-            visible_CONTAINER_vec.push_back(container);
-        }
+//void StarsystemRender::addIfVisible(Planet* planet)
+//{
+//    if (isObjectOnScreen(planet->center(), planet->size())) {
+//        visible_PLANET_vec.push_back(planet);
 //    }
-}
+//}
 
-void StarsystemRender::AddIfVisible(RocketBullet* rocket)
-{
-    if (isObjectOnScreen(rocket->center(), rocket->size())) {
-//        if (isObjectWithinRange(npc->GetVehicle()->center(), rocket->center(), radius)) {
-            visible_ROCKET_vec.push_back(rocket);
-        }
-//    }
-}
+//void StarsystemRender::addIfVisible(Asteroid* asteroid)
+//{
+//    if (isObjectOnScreen(asteroid->center(), asteroid->size())) {
+////        if (isObjectWithinRange(npc->GetVehicle()->center(), asteroid->center(), radius)) {
+//            visible_ASTEROID_vec.push_back(asteroid);
+//        }
+////    }
+//}
 
-void StarsystemRender::AddIfVisible(BlackHole* blackhole)
-{
-    if (isObjectOnScreen(blackhole->center(), blackhole->size())) {
-//        if (isObjectWithinRange(npc->GetVehicle()->center(), blackhole->center(), radius)) {
-            visible_BLACKHOLE_vec.push_back(blackhole);
-        }
-//    }
-}
+//void StarsystemRender::addIfVisible(Container* container)
+//{
+//    if (isObjectOnScreen(container->center(), container->size())) {
+////        if (isObjectWithinRange(npc->GetVehicle()->center(), container->center(), radius)) {
+//            visible_CONTAINER_vec.push_back(container);
+//        }
+////    }
+//}
 
-void StarsystemRender::AddIfVisible(Vehicle* vehicle)
-{
-    //if (isObjectOnScreen(vehicle->center(), vehicle->size())) {
-        //if (isObjectWithinRange(npc->GetVehicle()->center(), vehicle->center(), radius)) {
-            switch(vehicle->subTypeId())
-            {            
-                case TYPE::ENTITY::SHIP_ID:             {     visible_SHIP_vec.push_back((Ship*)vehicle); break; }
-                case TYPE::ENTITY::SATELLITE_ID:        {     visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
-                case TYPE::ENTITY::SPACESTATION_ID:     {     visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
-            }
+//void StarsystemRender::addIfVisible(RocketBullet* rocket)
+//{
+//    if (isObjectOnScreen(rocket->center(), rocket->size())) {
+////        if (isObjectWithinRange(npc->GetVehicle()->center(), rocket->center(), radius)) {
+//            visible_ROCKET_vec.push_back(rocket);
+//        }
+////    }
+//}
+
+//void StarsystemRender::addIfVisible(BlackHole* blackhole)
+//{
+//    if (isObjectOnScreen(blackhole->center(), blackhole->size())) {
+////        if (isObjectWithinRange(npc->GetVehicle()->center(), blackhole->center(), radius)) {
+//            visible_BLACKHOLE_vec.push_back(blackhole);
+//        }
+////    }
+//}
+
+//void StarsystemRender::addIfVisible(Vehicle* vehicle)
+//{
+//    //if (isObjectOnScreen(vehicle->center(), vehicle->size())) {
+//        //if (isObjectWithinRange(npc->GetVehicle()->center(), vehicle->center(), radius)) {
+//            switch(vehicle->subTypeId())
+//            {
+//                case TYPE::ENTITY::SHIP_ID:             {     visible_SHIP_vec.push_back((Ship*)vehicle); break; }
+//                case TYPE::ENTITY::SATELLITE_ID:        {     visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
+//                case TYPE::ENTITY::SPACESTATION_ID:     {     visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
+//            }
+////        }
+////    }
+//}
+        
+//void StarsystemRender::addIfVisible(ShockWaveEffect* effect)
+//{
+//    //if (isObjectOnScreen(effect->center(), 600)) {
+//        //if (isObjectWithinRadarRange(effect, npc->GetVehicle())) {
+//            //visible_effect_SHOCKWAVE_vec.push_back(effect);
+//        //}
+//    //}
+//}
+
+//void StarsystemRender::addIfVisible(LazerTraceEffect* effect)
+//{
+//    bool r1 = isPointOnScreen(meti::vec2(effect->GetStartPos()));
+//    bool r2 = isPointOnScreen(meti::vec2(effect->GetEndPos()));
+
+//    if (r1 || r2) {
+////        if (isObjectWithinRadarRange(effect, npc->GetVehicle())) {
+//            visible_effect_LAZERTRACE_vec.push_back(effect);
+//        }
+////    }
+//}
+ 
+//void StarsystemRender::addIfVisible(jeti::BaseParticleSystem* effect)
+//{
+//    //if (isObjectOnScreen(effect->center(), 600)) {
+//        //if (isObjectWithinRadarRange(effect, npc->GetVehicle())) {
+//            visible_effect_PARTICLESYSTEM_vec.push_back(effect);
+//        //}
+//    //}
+//}
+
+//void StarsystemRender::addIfVisible(VerticalFlowText* effect)
+//{
+//    if (isPointOnScreen(effect->center())) {
+//        if (isPointOnScreen(effect->center())) {
+//            visible_text_DAMAGE_vec.push_back(effect);
 //        }
 //    }
-}             
-        
-void StarsystemRender::AddIfVisible(ShockWaveEffect* effect)
-{
-    //if (isObjectOnScreen(effect->center(), 600)) {
-        //if (isObjectWithinRadarRange(effect, npc->GetVehicle())) {
-            //visible_effect_SHOCKWAVE_vec.push_back(effect);
-        //}
-    //}
-}
-
-void StarsystemRender::AddIfVisible(LazerTraceEffect* effect)
-{
-    bool r1 = isPointOnScreen(meti::vec2(effect->GetStartPos()));
-    bool r2 = isPointOnScreen(meti::vec2(effect->GetEndPos()));
-
-    if (r1 || r2) {
-//        if (isObjectWithinRadarRange(effect, npc->GetVehicle())) {
-            visible_effect_LAZERTRACE_vec.push_back(effect);
-        }
-//    }
-}
- 
-void StarsystemRender::AddIfVisible(jeti::BaseParticleSystem* effect)
-{
-    //if (isObjectOnScreen(effect->center(), 600)) {
-        //if (isObjectWithinRadarRange(effect, npc->GetVehicle())) {
-            visible_effect_PARTICLESYSTEM_vec.push_back(effect);
-        //}
-    //}
-}
-
-void StarsystemRender::AddIfVisible(VerticalFlowText* effect)
-{
-    if (isPointOnScreen(effect->center())) {
-        if (isPointOnScreen(effect->center())) {
-            visible_text_DAMAGE_vec.push_back(effect);
-        }
-    }
-}             
+//}
 
 void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
 {   
@@ -207,10 +216,10 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* sta
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = jeti::Screen::Instance().GetScale();
-    int w = jeti::Screen::Instance().GetWidth();
-    int h = jeti::Screen::Instance().GetHeight();
-    glm::vec2 world_coord(jeti::Screen::Instance().GetBottomLeft());
+    float scale = jeti::Screen::get().GetScale();
+    int w = jeti::Screen::get().GetWidth();
+    int h = jeti::Screen::get().GetHeight();
+    glm::vec2 world_coord(jeti::Screen::get().GetBottomLeft());
     
     render.ClearColorAndDepthBuffers();
     
@@ -410,15 +419,15 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* sta
     
 void StarsystemRender::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
-    jeti::Renderer& renderer = jeti::Screen::Instance().GetRender();
-    jeti::Camera& camera = jeti::Screen::Instance().GetCamera();
-    int w = jeti::Screen::Instance().GetWidth();
-    int h = jeti::Screen::Instance().GetHeight();
+    jeti::Renderer& renderer = jeti::Screen::get().GetRender();
+    jeti::Camera& camera = jeti::Screen::get().GetCamera();
+    int w = jeti::Screen::get().GetWidth();
+    int h = jeti::Screen::get().GetHeight();
     camera.Update(w, h);
     
     renderer.ComposeViewMatrix(camera.GetViewMatrix());
 
-    //float scale = jeti::Screen::Instance().GetScale();
+    //float scale = jeti::Screen::get().GetScale();
 
     RenderInSpace_NEW(renderer, starsystem);
 
@@ -515,14 +524,14 @@ bool isObjectWithinRadarRange(jeti::BaseParticleSystem* effect, Vehicle* vehicle
 
 bool isObjectOnScreen(const glm::vec3& center, const glm::vec3& size)
 {      
-    float scale = jeti::Screen::Instance().GetScale();
-    if (center.x < (jeti::Screen::Instance().GetBottomLeftScreenWC().x - size.x*scale))
+    float scale = jeti::Screen::get().GetScale();
+    if (center.x < (jeti::Screen::get().GetBottomLeftScreenWC().x - size.x*scale))
         return false;
-    if (center.x > (jeti::Screen::Instance().GetTopRightScreenWC().x   + size.x*scale))
+    if (center.x > (jeti::Screen::get().GetTopRightScreenWC().x   + size.x*scale))
         return false;
-    if (center.y < (jeti::Screen::Instance().GetBottomLeftScreenWC().y - size.y*scale))
+    if (center.y < (jeti::Screen::get().GetBottomLeftScreenWC().y - size.y*scale))
         return false;
-    if (center.y > (jeti::Screen::Instance().GetTopRightScreenWC().y   + size.y*scale))
+    if (center.y > (jeti::Screen::get().GetTopRightScreenWC().y   + size.y*scale))
         return false;
     
     return true;
@@ -530,14 +539,14 @@ bool isObjectOnScreen(const glm::vec3& center, const glm::vec3& size)
 
 bool isObjectOnScreen(const glm::vec3& ob_center, const float sizeInPixels)
 {       
-    float scale = jeti::Screen::Instance().GetScale();
-    if (ob_center.x < (jeti::Screen::Instance().GetBottomLeftScreenWC().x - sizeInPixels*scale))
+    float scale = jeti::Screen::get().GetScale();
+    if (ob_center.x < (jeti::Screen::get().GetBottomLeftScreenWC().x - sizeInPixels*scale))
         return false;
-    if (ob_center.x > (jeti::Screen::Instance().GetTopRightScreenWC().x + sizeInPixels*scale))
+    if (ob_center.x > (jeti::Screen::get().GetTopRightScreenWC().x + sizeInPixels*scale))
         return false;
-    if (ob_center.y < (jeti::Screen::Instance().GetBottomLeftScreenWC().y - sizeInPixels*scale))
+    if (ob_center.y < (jeti::Screen::get().GetBottomLeftScreenWC().y - sizeInPixels*scale))
         return false;
-    if (ob_center.y > (jeti::Screen::Instance().GetTopRightScreenWC().y + sizeInPixels*scale))
+    if (ob_center.y > (jeti::Screen::get().GetTopRightScreenWC().y + sizeInPixels*scale))
         return false;
     
     return true;
@@ -545,13 +554,13 @@ bool isObjectOnScreen(const glm::vec3& ob_center, const float sizeInPixels)
 
 bool isPointOnScreen(const glm::vec2& p)
 {       
-    if (p.x < (jeti::Screen::Instance().GetBottomLeftScreenWC().x))
+    if (p.x < (jeti::Screen::get().GetBottomLeftScreenWC().x))
         return false;
-    if (p.x > (jeti::Screen::Instance().GetTopRightScreenWC().x))
+    if (p.x > (jeti::Screen::get().GetTopRightScreenWC().x))
         return false;
-    if (p.y < (jeti::Screen::Instance().GetBottomLeftScreenWC().y))
+    if (p.y < (jeti::Screen::get().GetBottomLeftScreenWC().y))
         return false;
-    if (p.y > (jeti::Screen::Instance().GetTopRightScreenWC().y))
+    if (p.y > (jeti::Screen::get().GetTopRightScreenWC().y))
         return false;
     
     return true;
