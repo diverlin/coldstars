@@ -101,7 +101,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 //                     //box.center().y + (1.1 * GUI::INSERTED_MODULE_SIZE),
 //                 //GUI::INSERTED_MODULE_SIZE,
 //                 //GUI::INSERTED_MODULE_SIZE);
-//        //drawTexturedRect(modules_vec[i]->GetTextureOb(), module_rect, -1.0f);
+//        //drawTexturedRect(modules_vec[i]->textureOb(), module_rect, -1.0f);
 //    }
         
 //    if (condition == 0)

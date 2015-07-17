@@ -83,7 +83,7 @@ void BaseButton::RenderUnique(const jeti::Renderer& render, Player*) const
     
     if (HasTextureOb() == true)
     {
-        render.DrawQuad(GetTextureOb(), GetBox());
+        render.DrawQuad(textureOb(), GetBox());
     }
     
     if (m_TextureOb_additional != nullptr)

@@ -43,13 +43,13 @@ class BaseBackGroundEffect
         void SetDeltaAngle(float delta_angle)   { m_DeltaAngle = delta_angle; }
 
         const glm::vec3& center() const { return m_Center; }
-        const jeti::TextureOb& GetTextureOb() const { return *m_TextureOb; }
+        const jeti::TextureOb& textureOb() const { return *m_TextureOb; }
 
-        const glm::vec4& GetColor() const { return m_Color; }
+        const glm::vec4& color() const { return m_Color; }
 
-        const jeti::Mesh& GetMesh() const { return *m_Mesh; }
+        const jeti::Mesh& mesh() const { return *m_Mesh; }
 
-        const glm::mat4& GetActualModelMatrix();
+        const glm::mat4& actualModelMatrix();
                 
     protected:
         unsigned long int id;

@@ -851,7 +851,7 @@ void StarSystem::FindRadarVisibleEntities_c(Player* player)
 //    for(unsigned int i=0; i<distantStarEffect_vec.size(); i++)
 //    {
 //        DistantStarEffect& ds = *distantStarEffect_vec[i];
-//        render.DrawParticles(ds.GetMesh(), ds.GetTextureOb(), ds.GetActualModelMatrix());
+//        render.DrawParticles(ds.mesh(), ds.textureOb(), ds.actualModelMatrix());
 //    }
 //}
 
@@ -1085,10 +1085,10 @@ void StarSystem::SaveData(boost::property_tree::ptree& save_ptree, const std::st
 {
     save_ptree.put(root+"sector_id", sector->id());
     
-    save_ptree.put(root+"color.r", color.r);
-    save_ptree.put(root+"color.g", color.g);
-    save_ptree.put(root+"color.b", color.b);
-    save_ptree.put(root+"color.a", color.a);
+    save_ptree.put(root+"color.r", m_color.r);
+    save_ptree.put(root+"color.g", m_color.g);
+    save_ptree.put(root+"color.b", m_color.b);
+    save_ptree.put(root+"color.a", m_color.a);
 
 //    for (unsigned int i=0; i<distantStarEffect_vec.size(); i++)
 //    {
@@ -1105,10 +1105,10 @@ void StarSystem::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     data_unresolved_StarSystem.sector_id = load_ptree.get<int>("sector_id");
     
-    color.r = load_ptree.get<float>("color.r");
-    color.g = load_ptree.get<float>("color.g");
-    color.b = load_ptree.get<float>("color.b");
-    color.a = load_ptree.get<float>("color.a");
+    m_color.r = load_ptree.get<float>("color.r");
+    m_color.g = load_ptree.get<float>("color.g");
+    m_color.b = load_ptree.get<float>("color.b");
+    m_color.a = load_ptree.get<float>("color.a");
 
     boost::property_tree::ptree tmp_ptree = load_ptree;
     if (tmp_ptree.get_child_optional("distant_nebula_effect"))

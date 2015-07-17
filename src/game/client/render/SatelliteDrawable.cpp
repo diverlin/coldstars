@@ -62,7 +62,7 @@ void SatelliteDrawable::RenderInSpace(const jeti::Renderer& render, float scale)
 
     //if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
     //{
-        //RenderShieldEffect(1.0 - GetColor().a); 
+        //RenderShieldEffect(1.0 - color().a); 
         //starsystem()->RestoreSceneColor();
     //}
 }

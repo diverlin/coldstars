@@ -94,7 +94,7 @@ void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTI
     else
     {    
 //        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
-//        texOb = mesh->GetTextureOb();
+//        texOb = mesh->textureOb();
 //        assert(mesh);
 //        assert(texOb);
         float scale_comp = meti::getRandInt(40, 100);

@@ -51,7 +51,7 @@ class BaseGuiElement
         const ceti::Box2D& GetBox() const { return m_Box; }
         ceti::Box2D& GetBox() { return m_Box; } // !!!
                 
-        const jeti::TextureOb& GetTextureOb() const { return *m_TextureOb; }
+        const jeti::TextureOb& textureOb() const { return *m_TextureOb; }
                 
         bool GetLock() const { return m_Locked; }
         bool GetPressed() const { return m_Pressed; }

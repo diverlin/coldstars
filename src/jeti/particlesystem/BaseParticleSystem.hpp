@@ -47,12 +47,12 @@ class BaseParticleSystem
         int typeId() const { return m_TypeId; }
         bool isAlive() const { return m_IsAlive; }
         const glm::vec3& center() const { return m_Center; }
-        const Mesh& GetMesh() const { return *m_Mesh; }
-        const TextureOb& GetTextureOb() const { return *m_TextureOb; }
+        const Mesh& mesh() const { return *m_Mesh; }
+        const TextureOb& textureOb() const { return *m_TextureOb; }
 
         unsigned int GetParticlesNum() const { return m_ParticlesNum; }
 
-        const glm::mat4& GetActualModelMatrix();
+        const glm::mat4& actualModelMatrix();
 
         virtual void Update() = 0;
 

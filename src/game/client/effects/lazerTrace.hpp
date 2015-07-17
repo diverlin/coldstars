@@ -41,9 +41,9 @@ class LazerTraceEffect
         const glm::vec3& GetStartPos() const { return *m_pStartPos; }
         const glm::vec3& GetEndPos() const { return *m_pEndPos; }
 
-        const glm::mat4& GetActualModelMatrix();
-        const jeti::Mesh& GetMesh() const { return *m_Mesh; }
-        const jeti::TextureOb& GetTextureOb() const { return *m_TextureOb; }
+        const glm::mat4& actualModelMatrix();
+        const jeti::Mesh& mesh() const { return *m_Mesh; }
+        const jeti::TextureOb& textureOb() const { return *m_TextureOb; }
 
         void Update();
                     

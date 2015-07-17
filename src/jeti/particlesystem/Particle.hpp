@@ -37,7 +37,7 @@ class Particle
         float GetAlpha()      const { return m_Color.a; };
         
         const glm::vec3& GetPosition() const { return m_Position; }
-        const glm::vec4& GetColor() const { return m_Color; }
+        const glm::vec4& color() const { return m_Color; }
         
         float size() const { return m_Size; }
 

@@ -34,6 +34,6 @@ Atmosphere::~Atmosphere()
 void Atmosphere::Render(const jeti::Renderer& render, const glm::vec3& center)
 {      
     setCenter(center);
-    //alpitodorender render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    //alpitodorender render.DrawMeshLight(mesh(), textureOb(), actualModelMatrix());
 }
 

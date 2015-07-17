@@ -112,7 +112,7 @@ void Vehicle::CreateDriveComplexTextureDependedStuff()
     points().addMidLeftPoint();
     points().addMidFarLeftPoint();
 
-    //DriveEffect* drive_effect = GetNewDriveEffect(GetTextureOb().GetData().size_id, points().GetpMidLeft(), points().GetpMidFarLeft());
+    //DriveEffect* drive_effect = GetNewDriveEffect(textureOb().GetData().size_id, points().GetpMidLeft(), points().GetpMidFarLeft());
     //m_ComplexDrive.SetDriveEffect(drive_effect);
 }    
 
@@ -1213,8 +1213,8 @@ void Vehicle::UpdateArtefactInfluence()
 
 //void Vehicle::RenderKorpus(const jeti::Renderer& render)
 //{
-//    //render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
-//    //alpitodorender render.DrawMeshLight(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+//    //render.DrawQuad(textureOb(), actualModelMatrix());
+//    //alpitodorender render.DrawMeshLight(mesh(), textureOb(), actualModelMatrix());
 //}
 
 //void Vehicle::RenderDriveEffect(float scale, float parent_d_alpha) const

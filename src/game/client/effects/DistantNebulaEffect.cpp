@@ -43,7 +43,7 @@ void DistantNebulaEffect::Update()
 /* virtual override */
 void DistantNebulaEffect::Render(const jeti::Renderer& render, const glm::vec3&)
 {   
-    // alpitodorender render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    // alpitodorender render.DrawMesh(mesh(), textureOb(), actualModelMatrix());
 }
               
 void DistantNebulaEffect::Save(boost::property_tree::ptree& save_ptree, const std::string& root) const

@@ -56,7 +56,7 @@ void ShieldEffect::Update()
 
 void ShieldEffect::Render(const jeti::Renderer& renderer, float parent_d_alpha) const
 {
-    // alpitodorender renderer.DrawQuad(*textureOb, parent->GetModelMatrix());
+    // alpitodorender renderer.DrawQuad(*textureOb, parent->modelMatrix());
 }
 
 
