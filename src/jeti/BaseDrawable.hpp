@@ -24,6 +24,7 @@
 
 //#include <text/InfoTable.hpp>
 #include <ceti/Orientation.hpp>
+#include <ceti/rect.hpp>
 
 namespace ceti {
 class Orientation;
@@ -63,6 +64,7 @@ class BaseDrawable
         const glm::vec3& center() const;
         const glm::vec3& size() const;
 
+        virtual bool inRect(const ceti::Rect&) { return true; }
 //        void RenderCollisionRadius(const Renderer&) const;
 //        void RenderAxis(const Renderer&) const;
                 

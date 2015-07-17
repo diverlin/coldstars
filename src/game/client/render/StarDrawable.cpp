@@ -18,13 +18,14 @@
 
 #include "StarDrawable.hpp"
 
-StarDrawable::StarDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
+StarDrawable::StarDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh, Star* star)
     :
-      PlanetoidDrawable(texture, mesh),
-      m_DeltaColor(0.0),
-      m_SparkActive(false),
-      m_SparkGrows(false),
-      m_TurnSinceLastSparkCounter(0)
+      PlanetoidDrawable(texture, mesh)
+    , m_star(star)
+    , m_DeltaColor(0.0)
+    , m_SparkActive(false)
+    , m_SparkGrows(false)
+    , m_TurnSinceLastSparkCounter(0)
 { 
 }
   

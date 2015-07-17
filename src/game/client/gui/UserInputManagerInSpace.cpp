@@ -133,7 +133,7 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
             { 
                 glm::vec3 player_pos3 = player->GetNpc()->GetVehicle()->center();
                 glm::vec2 player_pos2(player_pos3.x, player_pos3.y);
-                jeti::Screen::Instance().InitiateScrollTo(player_pos2);
+                jeti::Screen::get().InitiateScrollTo(player_pos2);
                 break; 
             }
             case sf::Keyboard::G: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::GRAPPLE_SLOT_SELECTOR_ID); break; }    
@@ -205,8 +205,8 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
             
             case sf::Keyboard::F9: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::LOAD_ID); break; }        
     
-            case sf::Keyboard::K: { jeti::Screen::Instance().IncreaseScale(); break; }
-            case sf::Keyboard::L: { jeti::Screen::Instance().DecreaseScale(); break; }
+            case sf::Keyboard::K: { jeti::Screen::get().IncreaseScale(); break; }
+            case sf::Keyboard::L: { jeti::Screen::get().DecreaseScale(); break; }
         }   
     }
 }
@@ -238,8 +238,8 @@ void UserInputManagerInSpace::ManageRealTimeInputsInSpace(Player* player)
     int mx = player->GetCursor().GetMouseData().pos_screencoord.x;
     int my = player->GetCursor().GetMouseData().pos_screencoord.y;
     
-    int screen_w = jeti::Screen::Instance().GetWidth();
-    int screen_h = jeti::Screen::Instance().GetHeight();
+    int screen_w = jeti::Screen::get().GetWidth();
+    int screen_h = jeti::Screen::get().GetHeight();
     
     //bool mouse_camera_scroll = global::get().config().GetMouseCameraScroll();
                  
@@ -282,7 +282,7 @@ void UserInputManagerInSpace::ScrollCamera(Player* player)
 {
 //    int SCROLL_VELOCITY_STEP = global::get().config().SCROLL_VELOCITY_STEP;
 
-//    jeti::Camera& camera = jeti::Screen::Instance().GetCamera();
+//    jeti::Camera& camera = jeti::Screen::get().GetCamera();
     
     
 //    // SCROLLING X AXIS
@@ -320,5 +320,5 @@ void UserInputManagerInSpace::ScrollCamera(Player* player)
 //        }
 //    }
      
-//    jeti::Screen::Instance().MovingBy(m_ScrollAccel);
+//    jeti::Screen::get().MovingBy(m_ScrollAccel);
 }

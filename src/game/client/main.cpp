@@ -68,9 +68,9 @@ int main()
     //runSinglethread();    
     //runVectorPerfomanceTest();
     
-    jeti::Screen::Instance().InitRenderStuff();
+    jeti::Screen::get().InitRenderStuff();
     initGameStuff();
-    jeti::Screen::Instance().GetRender().SetMeshQuad(MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID));
+    jeti::Screen::get().GetRender().SetMeshQuad(MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID));
         
     //runMatrixPerfomanceTest();
         
@@ -109,7 +109,7 @@ int main()
     /** */
     
 //    // GAME LOOP
-//    while (jeti::Screen::Instance().GetWindow().isOpen())
+//    while (jeti::Screen::get().GetWindow().isOpen())
 //    {
 //        //std::cout<<player->GetNpc()->GetVehicle()->center().x<<std::endl;
 //        //std::cout<<player->GetNpc()->GetVehicle()->GetProperties().radar<<std::endl;

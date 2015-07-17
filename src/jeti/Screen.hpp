@@ -33,23 +33,24 @@ namespace jeti {
 class Screen : public SFMLWrapper
 {
     public:
-        static Screen& Instance();
+        static Screen& get();
  
+        const ceti::Rect& rect() const { return m_rect; }
+
         void InitRenderStuff();
 
-        //Rect& GetRect() { return rect; };
-        //glm::vec2 GetBottomLeftScreenWC()    { return rect.GetBottomLeft()*scale; }
-        //glm::vec2 GetTopRightScreenWC()    { return rect.GetTopRight()*scale; }
+        //glm::vec2 GetBottomLeftScreenWC()    { return m_rect.GetBottomLeft()*scale; }
+        //glm::vec2 GetTopRightScreenWC()    { return m_rect.GetTopRight()*scale; }
         jeti::Renderer& GetRender() { return m_Render; }
         Camera& GetCamera() { return m_Camera; }
         
-        void SetBottomLeftScreenWC(const glm::vec2& bl)    { rect.SetBottomLeft(bl); }
+        void SetBottomLeftScreenWC(const glm::vec2& bl)    { m_rect.SetBottomLeft(bl); }
         
-        glm::vec2 GetBottomLeftScreenWC()    { return rect.GetBottomLeft(); }
-        glm::vec2 GetTopRightScreenWC()    { return (rect.GetBottomLeft()+glm::vec2(rect.GetWidth()*scale, rect.GetHeight()*scale)); }
+        glm::vec2 GetBottomLeftScreenWC()    { return m_rect.GetBottomLeft(); }
+        glm::vec2 GetTopRightScreenWC()    { return (m_rect.GetBottomLeft()+glm::vec2(m_rect.GetWidth()*scale, m_rect.GetHeight()*scale)); }
         
-        const glm::vec2& GetBottomLeft() const    { return rect.GetBottomLeft(); }
-        const glm::vec2& GetTopRight()    const    { return rect.GetTopRight(); }
+        const glm::vec2& GetBottomLeft() const    { return m_rect.GetBottomLeft(); }
+        const glm::vec2& GetTopRight()    const    { return m_rect.GetTopRight(); }
         
         void MovingBy(const glm::vec2&);
         void InitiateScrollTo(const glm::vec2& scroll_coord) { target_center = scroll_coord; auto_scroll = true; };
@@ -63,7 +64,7 @@ class Screen : public SFMLWrapper
         float GetScale() const { return scale; }
         void IncreaseScale();
         void DecreaseScale();
-                    
+
     private:
         Screen();
         ~Screen();
@@ -81,7 +82,7 @@ class Screen : public SFMLWrapper
         
         float scale;
         float d_scale;
-        ceti::Rect rect;
+        ceti::Rect m_rect;
         glm::vec2 target_center;
         
         void DrawFps();

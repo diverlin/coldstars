@@ -153,8 +153,8 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
     
     if (starsystem->id() != npc->GetVehicle()->starsystem()->id())
     {
-        //jeti::Screen::Instance().InitiateScrollTo(npc->GetVehicle()->center());
-        //jeti::Screen::Instance().GetRect().setCenter(npc->GetVehicle()->center());
+        //jeti::Screen::get().InitiateScrollTo(npc->GetVehicle()->center());
+        //jeti::Screen::get().GetRect().setCenter(npc->GetVehicle()->center());
         starsystem = npc->GetVehicle()->starsystem();
     }
     
@@ -167,7 +167,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
             //{
                 //if (turn_timer.GetTurnEnded() == true)
                 //{
-                    //jeti::Screen::Instance().InitiateScrollTo(npc->GetVehicle()->center());
+                    //jeti::Screen::get().InitiateScrollTo(npc->GetVehicle()->center());
                 //}
             //}
             
@@ -193,7 +193,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //            {
 //                if (turn_timer.GetTurnEnded() == true)
 //                {
-//                    jeti::Screen::Instance().InitiateScrollTo(meti::vec2(npc->GetVehicle()->center()));
+//                    jeti::Screen::get().InitiateScrollTo(meti::vec2(npc->GetVehicle()->center()));
 //                    turn_timer.NextTurn();
 //                }
 //            }
@@ -205,7 +205,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //        {
 //            if (turn_timer.GetTurnEnded() == true)
 //            {
-//                jeti::Screen::Instance().InitiateScrollTo(meti::vec2(npc->GetVehicle()->center()));
+//                jeti::Screen::get().InitiateScrollTo(meti::vec2(npc->GetVehicle()->center()));
 //                turn_timer.NextTurn();
 //            }
             
@@ -213,7 +213,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //        }
 //    }
     
-    jeti::Screen::Instance().UpdateInSpace();
+    jeti::Screen::get().UpdateInSpace();
 }
              
 void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
@@ -225,10 +225,10 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = jeti::Screen::Instance().GetScale();
-    int w = jeti::Screen::Instance().GetWidth();
-    int h = jeti::Screen::Instance().GetHeight();
-    glm::vec2 world_coord(jeti::Screen::Instance().GetBottomLeft());
+    float scale = jeti::Screen::get().GetScale();
+    int w = jeti::Screen::get().GetWidth();
+    int h = jeti::Screen::get().GetHeight();
+    glm::vec2 world_coord(jeti::Screen::get().GetBottomLeft());
     
     render.ClearColorAndDepthBuffers();
     
@@ -428,15 +428,15 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
     
 void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
-    jeti::Renderer& renderer = jeti::Screen::Instance().GetRender();
-    jeti::Camera& camera = jeti::Screen::Instance().GetCamera();
-    int w = jeti::Screen::Instance().GetWidth();
-    int h = jeti::Screen::Instance().GetHeight();
+    jeti::Renderer& renderer = jeti::Screen::get().GetRender();
+    jeti::Camera& camera = jeti::Screen::get().GetCamera();
+    int w = jeti::Screen::get().GetWidth();
+    int h = jeti::Screen::get().GetHeight();
     camera.Update(w, h);
     
     renderer.ComposeViewMatrix(camera.GetViewMatrix());
 
-    //float scale = jeti::Screen::Instance().GetScale();
+    //float scale = jeti::Screen::get().GetScale();
 
     RenderInSpace_NEW(renderer, starsystem);
 
@@ -880,7 +880,7 @@ void Player::RunSession(const TurnTimer& turn_timer)
 
     cursor.Update(this);
     //cursor.RenderFocusedObjectInfo();
-    jeti::Screen::Instance().Draw();
+    jeti::Screen::get().Draw();
 }
 
 void Player::ForceStateMachineReset() const
@@ -953,8 +953,8 @@ void Player::RenderAxis(const jeti::Renderer& render) const
 //{
 //    save_ptree.put(root+"unresolved.npc_id", npc->id());
 //    save_ptree.put(root+"unresolved.starsystem_id", starsystem->id());
-//    save_ptree.put(root+"unresolved.screen_pos_x", jeti::Screen::Instance().GetBottomLeft().x);
-//    save_ptree.put(root+"unresolved.screen_pos_y", jeti::Screen::Instance().GetBottomLeft().y);
+//    save_ptree.put(root+"unresolved.screen_pos_x", jeti::Screen::get().GetBottomLeft().x);
+//    save_ptree.put(root+"unresolved.screen_pos_y", jeti::Screen::get().GetBottomLeft().y);
 //}
 
 //void Player::LoadData(const boost::property_tree::ptree& load_ptree)
@@ -969,7 +969,7 @@ void Player::RenderAxis(const jeti::Renderer& render) const
 //{
 //    BindNpc((Npc*)global::get().entitiesManager().GetEntityById(data_unresolved_player.npc_id));
 //    starsystem = (StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_player.starsystem_id);
-//    //jeti::Screen::Instance().SetBottomLeft(data_unresolved_player.screen_pos);
+//    //jeti::Screen::get().SetBottomLeft(data_unresolved_player.screen_pos);
 //}
 
 

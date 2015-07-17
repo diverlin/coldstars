@@ -249,10 +249,10 @@ void RenderManager::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsy
     bool draw_shockwave     = true;
     bool draw_robustSpaceObjects = true;
 
-    float scale = jeti::Screen::Instance().GetScale();
-    int w = jeti::Screen::Instance().GetWidth();
-    int h = jeti::Screen::Instance().GetHeight();
-    glm::vec2 world_coord(jeti::Screen::Instance().GetBottomLeft());
+    float scale = jeti::Screen::get().GetScale();
+    int w = jeti::Screen::get().GetWidth();
+    int h = jeti::Screen::get().GetHeight();
+    glm::vec2 world_coord(jeti::Screen::get().GetBottomLeft());
     
     render.ClearColorAndDepthBuffers();
     
@@ -443,10 +443,10 @@ void RenderManager::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsy
     
 void RenderManager::renderSceneInSpace(StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
-    jeti::Renderer& renderer = jeti::Screen::Instance().GetRender();
-    jeti::Camera& camera = jeti::Screen::Instance().GetCamera();
-    int w = jeti::Screen::Instance().GetWidth();
-    int h = jeti::Screen::Instance().GetHeight();
+    jeti::Renderer& renderer = jeti::Screen::get().GetRender();
+    jeti::Camera& camera = jeti::Screen::get().GetCamera();
+    int w = jeti::Screen::get().GetWidth();
+    int h = jeti::Screen::get().GetHeight();
     camera.Update(w, h);
     
     renderer.ComposeViewMatrix(camera.GetViewMatrix());

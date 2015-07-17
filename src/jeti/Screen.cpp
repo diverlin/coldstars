@@ -28,10 +28,10 @@
 
 namespace jeti {
 
-Screen& Screen::Instance()
+Screen& Screen::get()
 {
-    static Screen instance;
-    return instance;
+    static Screen screen;
+    return screen;
 }
     
 Screen::Screen()
@@ -64,7 +64,7 @@ void Screen::InitRenderStuff()
     glewInit();             
     m_Render.Init(width, height);
     
-    rect.Set(0.0, 0.0, width, height);
+    m_rect.Set(0.0, 0.0, width, height);
 }
              
 void Screen::DrawFps()
@@ -103,12 +103,12 @@ void Screen::Resize(int width, int height)
   
 void Screen::MovingBy(const glm::vec2& delta)
 {
-    rect.MovingBy(delta);
+    m_rect.MovingBy(delta);
 }
 
 void Screen::UpdateInSpace()
 {   
-    rect.SetBottomLeft(m_Camera.GetPos().x, m_Camera.GetPos().y);
+    m_rect.SetBottomLeft(m_Camera.GetPos().x, m_Camera.GetPos().y);
     //if (auto_scroll == true)
     //{
         //glm::vec2 d_pos;
@@ -144,12 +144,12 @@ void  Screen::IncreaseScale()
     {
         scale += d_scale;
         
-        glm::vec2 center = rect.center();
+        glm::vec2 center = m_rect.center();
         float rate = 0.5*d_scale;
-        float offset_x = rect.GetWidth()*rate;
-        float offset_y = rect.GetHeight()*rate;
+        float offset_x = m_rect.GetWidth()*rate;
+        float offset_y = m_rect.GetHeight()*rate;
         glm::vec2 offset(offset_x, offset_y);
-        rect.setCenter(center-offset);
+        m_rect.setCenter(center-offset);
     } 
 }
 
@@ -160,13 +160,13 @@ void Screen::DecreaseScale()
     {
         scale += d_scale;
         
-        glm::vec2 center = rect.center();
+        glm::vec2 center = m_rect.center();
         float rate = 0.5*d_scale;
-        float offset_x = rect.GetWidth()*rate;
-        float offset_y = rect.GetHeight()*rate;
+        float offset_x = m_rect.GetWidth()*rate;
+        float offset_y = m_rect.GetHeight()*rate;
         glm::vec2 offset(offset_x, offset_y);
         
-        rect.setCenter(center-offset);
+        m_rect.setCenter(center-offset);
     } 
 }
 

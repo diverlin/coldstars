@@ -811,19 +811,19 @@ void StarSystem::FindRenderVisibleEntities_c(Player* player)
 {
     //player->ClearVisibleEntities();
 
-//    for (unsigned int i=0; i<STAR_vec.size(); i++)             { player->AddIfVisible(STAR_vec[i]); }
-//    for (unsigned int i=0; i<PLANET_vec.size(); i++)           { player->AddIfVisible(PLANET_vec[i]); }
-//    for (unsigned int i=0; i<ASTEROID_vec.size(); i++)         { player->AddIfVisible(ASTEROID_vec[i]); }
-//    for (unsigned int i=0; i<CONTAINER_vec.size(); i++)        { player->AddIfVisible(CONTAINER_vec[i]); }
-//    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)     { player->AddIfVisible(VEHICLE_vec[i]); }
-//    for (unsigned int i=0; i<ROCKET_vec.size(); i++)           { player->AddIfVisible(ROCKET_vec[i]); }
-//    for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++)        { player->AddIfVisible(BLACKHOLE_vec[i]); }
+//    for (unsigned int i=0; i<STAR_vec.size(); i++)             { player->addIfVisible(STAR_vec[i]); }
+//    for (unsigned int i=0; i<PLANET_vec.size(); i++)           { player->addIfVisible(PLANET_vec[i]); }
+//    for (unsigned int i=0; i<ASTEROID_vec.size(); i++)         { player->addIfVisible(ASTEROID_vec[i]); }
+//    for (unsigned int i=0; i<CONTAINER_vec.size(); i++)        { player->addIfVisible(CONTAINER_vec[i]); }
+//    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)     { player->addIfVisible(VEHICLE_vec[i]); }
+//    for (unsigned int i=0; i<ROCKET_vec.size(); i++)           { player->addIfVisible(ROCKET_vec[i]); }
+//    for (unsigned int i=0; i<BLACKHOLE_vec.size(); i++)        { player->addIfVisible(BLACKHOLE_vec[i]); }
 
     //effects
-//    for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)    { player->AddIfVisible(effect_SHOCKWAVE_vec[i]); }
-//    for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)   { player->AddIfVisible(effect_LAZERTRACE_vec[i]); }
-//    for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { player->AddIfVisible(effect_PARTICLESYSTEM_vec[i]); }
-//    for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)        { player->AddIfVisible(text_DAMAGE_vec[i]); }
+//    for (unsigned int i=0; i<effect_SHOCKWAVE_vec.size(); i++)    { player->addIfVisible(effect_SHOCKWAVE_vec[i]); }
+//    for (unsigned int i=0; i<effect_LAZERTRACE_vec.size(); i++)   { player->addIfVisible(effect_LAZERTRACE_vec[i]); }
+//    for (unsigned int i=0; i<effect_PARTICLESYSTEM_vec.size(); i++) { player->addIfVisible(effect_PARTICLESYSTEM_vec[i]); }
+//    for (unsigned int i=0; i<text_DAMAGE_vec.size(); i++)        { player->addIfVisible(text_DAMAGE_vec[i]); }
 }
 
 void StarSystem::FindRadarVisibleEntities_c(Player* player)

@@ -22,11 +22,12 @@
 #include <vector>
 
 #include <common/Base.hpp>
-#include <gui/Cursor.hpp>
-#include <pilots/Show.hpp>
-#include <jeti/Render.hpp>
+//#include <gui/Cursor.hpp>
+//#include <pilots/Show.hpp>
+//#include <jeti/Render.hpp>
+#include <jeti/BaseDrawable.hpp>
 
-class TurnTimer;
+//class TurnTimer;
 
 class StarSystem;
 class Star;
@@ -41,14 +42,34 @@ class Ship;
 class Container; 
 class RocketBullet; 
 
+
+// effects
 class LazerTraceEffect;
 class ShockWaveEffect;
-
 namespace jeti {
 class BaseParticleSystem;
 }
-
 class VerticalFlowText;
+
+class SpaceObject;
+
+//class RenderSpaceObject {
+//    public:
+//        RenderSpaceObject(SpaceObject* ob)
+//            : m_ob(ob)
+//        {
+
+//        }
+
+//        ~RenderSpaceObject() {}
+//        bool inRect(const ceti::Rect& rect) {
+//            return true;
+//        }
+
+//    private:
+//        SpaceObject* m_ob;
+//};
+
 
 class StarsystemRender
 {
@@ -57,6 +78,8 @@ class StarsystemRender
         ~StarsystemRender();
 
     private:
+        std::vector<jeti::BaseDrawable*> m_objects;
+
         // VISIBLE ENTITY LIST
         std::vector<Star*>         visible_STAR_vec;
         std::vector<Planet*>       visible_PLANET_vec;
@@ -80,20 +103,21 @@ class StarsystemRender
         void RenderCollisionRadius(const jeti::Renderer&) const;
         void RenderAxis(const jeti::Renderer&) const;
 
-        void ClearVisibleEntities();
+        void clearVisibleEntities();
+        void addIfVisible(jeti::BaseDrawable*);
 
-        void AddIfVisible(Star*);
-        void AddIfVisible(Planet*);
-        void AddIfVisible(Asteroid*);
-        void AddIfVisible(Container*);
-        void AddIfVisible(RocketBullet*);
-        void AddIfVisible(BlackHole*);
-        void AddIfVisible(Vehicle*);
+//        void addIfVisible(Star*);
+//        void addIfVisible(Planet*);
+//        void addIfVisible(Asteroid*);
+//        void addIfVisible(Container*);
+//        void addIfVisible(RocketBullet*);
+//        void addIfVisible(BlackHole*);
+//        void addIfVisible(Vehicle*);
 
-        void AddIfVisible(ShockWaveEffect*);
-        void AddIfVisible(LazerTraceEffect*);
-        void AddIfVisible(jeti::BaseParticleSystem*);
-        void AddIfVisible(VerticalFlowText*);
+//        void addIfVisible(ShockWaveEffect*);
+//        void addIfVisible(LazerTraceEffect*);
+//        void addIfVisible(jeti::BaseParticleSystem*);
+//        void addIfVisible(VerticalFlowText*);
 };
 
 bool isObjectOnScreen(const glm::vec3&, const glm::vec3&);

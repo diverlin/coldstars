@@ -171,7 +171,7 @@ void GuiGalaxyMap::RenderUnique(const jeti::Renderer& render, Player* player) co
 
 //            int font_size = 8;
 //            glm::vec2 offset(0.0, 13.0);
-//            jeti::Screen::Instance().DrawText(std::to_string(starsystem.id()), font_size, starsystem_pos + offset);
+//            jeti::Screen::get().DrawText(std::to_string(starsystem.id()), font_size, starsystem_pos + offset);
 //        }
 //    }
     
