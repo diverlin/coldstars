@@ -89,7 +89,7 @@ void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, 
     //glm::vec3 size = texOb->size();
     
 //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
-//    jeti::TextureOb* texOb = mesh->GetTextureOb();
+//    jeti::TextureOb* texOb = mesh->textureOb();
     glm::vec3 size = glm::vec3(50);
 
     //texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 

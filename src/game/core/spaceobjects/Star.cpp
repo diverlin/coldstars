@@ -57,13 +57,13 @@ Star::~Star()
 
 //alpitodorender
 /*
-int Star::GetColorId() const { return GetTextureOb().GetData().color_id; }
+int Star::GetColorId() const { return textureOb().GetData().color_id; }
 
-float Star::GetBrightThreshold() const { return GetTextureOb().GetData().brightThreshold; }
+float Star::GetBrightThreshold() const { return textureOb().GetData().brightThreshold; }
             
 void Star::CalcColor()
 {
-    SetColor(getColor4fById(GetTextureOb().GetData().color_id));
+    SetColor(getColor4fById(textureOb().GetData().color_id));
 }
 */
 void Star::InitiateSpark()

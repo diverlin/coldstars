@@ -245,7 +245,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
 
                 for(Star* star : visible_STAR_vec)
                 {
-                    //alpitodorender render.DrawMeshMultiTextured(star->GetMesh(), star->GetTextureOb(), star->GetActualModelMatrix());
+                    //alpitodorender render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
                 }
             }
             render.DeactivateFbo(0);
@@ -390,13 +390,13 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
                 for(unsigned int i = 0; i<visible_effect_LAZERTRACE_vec.size(); i++)
                 {
                     LazerTraceEffect& lazer_trace = *visible_effect_LAZERTRACE_vec[i];
-                    //render.DrawMesh(lazer_trace.GetMesh(), lazer_trace.GetTextureOb(), lazer_trace.GetActualModelMatrix());
+                    //render.DrawMesh(lazer_trace.mesh(), lazer_trace.textureOb(), lazer_trace.actualModelMatrix());
                 }
 
                 for(unsigned int i=0; i<visible_effect_PARTICLESYSTEM_vec.size(); i++)
                 {
                     //BaseParticleSystem& ps = *visible_effect_PARTICLESYSTEM_vec[i];
-                    //render.DrawParticles(ps.GetMesh(), ps.GetTextureOb(), ps.GetActualModelMatrix());
+                    //render.DrawParticles(ps.mesh(), ps.textureOb(), ps.actualModelMatrix());
                 }
             }
             render.DeactivateFbo(5);

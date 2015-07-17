@@ -58,7 +58,7 @@ void LazerTraceEffect::Update()
     }
 }
 
-const glm::mat4& LazerTraceEffect::GetActualModelMatrix()
+const glm::mat4& LazerTraceEffect::actualModelMatrix()
 {
     m_MatrixTranslate = glm::translate(*m_pStartPos);
 

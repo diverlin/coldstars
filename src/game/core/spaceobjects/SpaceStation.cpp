@@ -118,7 +118,7 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
     
 //    //if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
 //    //{
-//        //RenderShieldEffect(1.0 - GetColor().a);
+//        //RenderShieldEffect(1.0 - color().a);
 //        //starsystem()->RestoreSceneColor();
 //    //}
 //}

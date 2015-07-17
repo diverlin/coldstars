@@ -51,16 +51,16 @@ class BaseDrawable
         void SetAnimationRotation(BaseAnimationRotation* animation_rotation) { m_AnimationRotation = animation_rotation; }
         void SetColor(const glm::vec4& color) { m_Color = color; }
 
-        const glm::mat4& GetActualModelMatrix();
-        const glm::mat4& GetModelMatrix() const { return m_MatrixModel; }
+        const glm::mat4& actualModelMatrix();
+        const glm::mat4& modelMatrix() const { return m_MatrixModel; }
                         
         //const glm::vec3& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
-        const Mesh& GetMesh() const     { return *m_Mesh; }
+        const Mesh& mesh() const     { return *m_Mesh; }
 
-        const TextureOb& GetTextureOb() const { return *m_TextureOb; }
+        const TextureOb& textureOb() const { return *m_TextureOb; }
         bool HasTextureOb() const { return (m_TextureOb != 0); }
         
-        const glm::vec4& GetColor() const { return m_Color; }
+        const glm::vec4& color() const { return m_Color; }
         const glm::vec3& center() const;
         const glm::vec3& size() const;
 

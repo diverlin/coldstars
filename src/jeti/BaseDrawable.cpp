@@ -116,7 +116,7 @@ bool BaseDrawable::UpdateFadeOutEffect()
     }
 }
 
-const glm::mat4& BaseDrawable::GetActualModelMatrix()
+const glm::mat4& BaseDrawable::actualModelMatrix()
 {    
     meti::RotationBetweenVectors(m_QuatDirection, m_Mesh->GetOriginDirection(), m_Orientation->direction());
     if (m_AnimationRotation != nullptr) {

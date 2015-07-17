@@ -56,5 +56,5 @@ ContainerDrawable::~ContainerDrawable()
                
 void ContainerDrawable::Render(const jeti::Renderer& render)
 { 
-    //alpitodorender render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+    //alpitodorender render.DrawMesh(mesh(), textureOb(), actualModelMatrix());
 }

@@ -306,7 +306,7 @@ void WeaponComplex::RenderWeaponIcons() const
             if (slot_weapon_vec[i]->GetTarget() != nullptr )
             {
                 //Rect _rect(slot_weapon_vec[i]->GetTarget()->center().x - 40/2 + 23*i, slot_weapon_vec[i]->GetTarget()->center().y + 40/2, 20, 20);
-                //drawTexturedRect(slot_weapon_vec[i]->GetItem()->GetTextureOb(), _rect, -2.0);
+                //drawTexturedRect(slot_weapon_vec[i]->GetItem()->textureOb(), _rect, -2.0);
             }
         }
     }

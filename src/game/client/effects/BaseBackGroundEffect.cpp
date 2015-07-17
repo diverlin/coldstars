@@ -47,7 +47,7 @@ void BaseBackGroundEffect::ValidateResources() const
     }
 }
 
-const glm::mat4& BaseBackGroundEffect::GetActualModelMatrix()
+const glm::mat4& BaseBackGroundEffect::actualModelMatrix()
 {
     m_Tm = glm::translate(m_Center);
     m_Rm = glm::rotate(m_Angle, glm::vec3(0.0, 0.0, 1.0));

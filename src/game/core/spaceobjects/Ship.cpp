@@ -57,10 +57,10 @@ Ship::~Ship()
 //    GetInfo().addTitleStr("SHIP");
 //    if (starsystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( std::to_string(id()) + " / " + std::to_string(starsystem()->id()) ); }
 //    else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( std::to_string(id()) ); }
-//    // alpitodorender GetInfo().addNameStr("race:");          GetInfo().addValueStr( getRaceStr(GetTextureOb().GetAssociation().race_id) );
+//    // alpitodorender GetInfo().addNameStr("race:");          GetInfo().addValueStr( getRaceStr(textureOb().GetAssociation().race_id) );
 //    GetInfo().addNameStr("class:");         GetInfo().addValueStr( getStr(subSubTypeId()) );
 //    GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( std::to_string(dataLife().armor) + "/" + std::to_string(GetDataKorpus().armor) );
-////    alpitodorender GetInfo().addNameStr("size id:");       GetInfo().addValueStr( std::to_string(GetTextureOb().GetData().size_id) );
+////    alpitodorender GetInfo().addNameStr("size id:");       GetInfo().addValueStr( std::to_string(textureOb().GetData().size_id) );
 //    GetInfo().addNameStr("space/free:");    GetInfo().addValueStr( std::to_string(GetDataKorpus().space) + "/" + std::to_string(GetProperties().free_space) );
 //    GetInfo().addNameStr("mass:");          GetInfo().addValueStr( std::to_string(mass()) );
 //    GetInfo().addNameStr("speedx100:");     GetInfo().addValueStr( std::to_string(GetProperties().speed*100) );
@@ -126,13 +126,13 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 
 //    //if (GetProperties().speed > 0)
 //    //{
-//        //RenderDriveEffect(scale , 1.0 - GetColor().a);
+//        //RenderDriveEffect(scale , 1.0 - color().a);
 //        //starsystem()->RestoreSceneColor();
 //    //}
 
 ////    if (GetProperties().shield_effect_enabled == true)
 ////    {
-////        RenderShieldEffect(render, 1.0f - GetColor().a);
+////        RenderShieldEffect(render, 1.0f - color().a);
 ////    }
 //}
 

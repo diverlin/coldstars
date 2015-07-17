@@ -81,7 +81,7 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     else
     {    
 //        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
-//        texOb = mesh->GetTextureOb();
+//        texOb = mesh->textureOb();
         float scale_comp = meti::getRandInt(ENTITY::SPACESTATION::SCALE_MIN, ENTITY::SPACESTATION::SCALE_MAX);
         size = glm::vec3(scale_comp, scale_comp, scale_comp);
     }

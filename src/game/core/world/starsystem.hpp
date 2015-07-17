@@ -99,10 +99,10 @@ class StarSystem : public SpaceObject
 
         void SetContainerNumMax(int container_num_max) { this->container_num_max = container_num_max; }
         void SetSector(Sector* sector)  { this->sector = sector; }
-        void SetColor(const glm::vec4& color)  { this->color = color; }
+        void SetColor(const glm::vec4& color)  { m_color = color; }
         AsteroidManager& GetAsteroidManager()  { return asteroid_manager; }
 
-        const glm::vec4& GetColor() const { return color; }
+        const glm::vec4& color() const { return m_color; }
         //bool GetDetailedSimulationFlag() const { return detalied_simulation; }
         int GetConditionId()     const { return condition_id; }
         TYPE::RACE GetRaceId()          const { return race_id; }
@@ -182,7 +182,7 @@ class StarSystem : public SpaceObject
         unsigned int container_num_max;
         
         Sector* sector;
-        glm::vec4 color;
+        glm::vec4 m_color;
         
         AsteroidManager asteroid_manager;
         

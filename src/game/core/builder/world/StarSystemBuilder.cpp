@@ -105,7 +105,7 @@ void StarSystemBuilder::CreateStar(StarSystem* starsystem) const
 {
     Star* star = StarBuilder::Instance().GetNewStar(); 
     starsystem->Add(star);
-    //alpitodorender starsystem->SetColor(star->GetColor());
+    //alpitodorender starsystem->SetColor(star->color());
 }
 
 void StarSystemBuilder::CreatePlanets(StarSystem* starsystem, int planet_per_system) const

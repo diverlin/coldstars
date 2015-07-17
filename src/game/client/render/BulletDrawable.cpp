@@ -40,7 +40,7 @@ void BulletDrawable::CreateDriveComplexTextureDependedStuff()
 //    points().addMidLeftPoint();
 //    points().addMidFarLeftPoint();
         
-    //alpitodorender m_EffectDrive = GetNewDriveEffect(GetTextureOb().GetData().size_id/2, points().GetpMidLeft(), points().GetpMidFarLeft());
+    //alpitodorender m_EffectDrive = GetNewDriveEffect(textureOb().GetData().size_id/2, points().GetpMidLeft(), points().GetpMidFarLeft());
 }    
 
 /* virtual override final */
@@ -59,7 +59,7 @@ void BulletDrawable::CreateDriveComplexTextureDependedStuff()
 
 //void RocketBullet::RenderInSpace(const Renderer& render, float scale)
 //{
-//    //alpitodorender render.DrawQuad(GetTextureOb(), GetActualModelMatrix());
+//    //alpitodorender render.DrawQuad(textureOb(), actualModelMatrix());
 
 //    m_EffectDrive->Update();
 //    m_EffectDrive->Render(scale, 0.0f);

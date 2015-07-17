@@ -167,7 +167,7 @@ void BaseItem::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
     save_ptree.put(root+"data_item.mass",                           data_item.mass);
 
     //alpitodorender
-//    if (HasTextureOb())     { save_ptree.put(root+"unresolved.textureOb_path", GetTextureOb().GetData().texture_path); }
+//    if (HasTextureOb())     { save_ptree.put(root+"unresolved.textureOb_path", textureOb().GetData().texture_path); }
 //    else                    { save_ptree.put(root+"unresolved.textureOb_path", "none"); }
         
     if (item_slot)     { save_ptree.put(root+"unresolved.item_slot_id", item_slot->id()); }

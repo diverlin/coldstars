@@ -63,7 +63,7 @@ PlanetDrawable::~PlanetDrawable()
 
 //void Planet::Render_NEW(const Renderer& render)
 //{
-//    //alpitodorender render.DrawMeshLightNormalMap(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+//    //alpitodorender render.DrawMeshLightNormalMap(mesh(), textureOb(), actualModelMatrix());
 //    for (BaseDecor* decor : m_Decorations)
 //    {
 //        decor->Render(render, center());

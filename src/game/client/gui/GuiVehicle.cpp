@@ -338,7 +338,7 @@ void GuiVehicle::RenderUnique(const jeti::Renderer& render, Player* player) cons
 {
     //enable_BLEND(); 
     //{
-        //drawQuad(GetTextureOb(), GetBox());
+        //drawQuad(textureOb(), GetBox());
     //}
     //disable_BLEND();
 }        

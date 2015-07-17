@@ -69,14 +69,14 @@ void BaseParticleSystem::Update()
         const Particle& particle = *m_Particles[i];
 
         positions.push_back(particle.GetPosition());
-        colors.push_back(particle.GetColor());
+        colors.push_back(particle.color());
         sizes.push_back(particle.size());
     }
 
     m_Mesh->FillPointVerticesFast(positions, colors, sizes);
 }
 
-const glm::mat4& BaseParticleSystem::GetActualModelMatrix()
+const glm::mat4& BaseParticleSystem::actualModelMatrix()
 { 
     m_MatrixModel = glm::translate(center());
     //m_MatrixRotate    = glm::toMat4(m_QuatPosition * m_QuatAnimation);

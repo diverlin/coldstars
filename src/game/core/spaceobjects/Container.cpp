@@ -114,7 +114,7 @@ void Container::UpdateInSpace(int time, bool show_effect)
                
 //void Container::Render(const jeti::Renderer& render)
 //{
-//    //alpitodorender render.DrawMesh(GetMesh(), GetTextureOb(), GetActualModelMatrix());
+//    //alpitodorender render.DrawMesh(mesh(), textureOb(), actualModelMatrix());
 //}
 
 void Container::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    
