@@ -24,49 +24,42 @@
 
 #include <meti/RandUtils.hpp>
 
-BlackHoleBuilder& BlackHoleBuilder::Instance()
-{
-    static BlackHoleBuilder instance;
-    return instance;
-}
+
+BlackHoleBuilder::BlackHoleBuilder()
+{}
 
 BlackHoleBuilder::~BlackHoleBuilder()
 {}
 
-BlackHole* BlackHoleBuilder::GetNewBlackHoleTemplate(INTLONGEST id) const
+BlackHole* BlackHoleBuilder::createTemplate(INTLONGEST id) const
 {
     BlackHole* blackhole = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
-        blackhole = new BlackHole(id); 
-    }
-    catch(std::bad_alloc)
-    {
+    try {
+        blackhole = new BlackHole(id);
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     
     int size = 4;
     bool dynamic = false;
-//    blackhole->BindShockWaveEffect(getNewShockWave(size, dynamic));
+    //    blackhole->BindShockWaveEffect(getNewShockWave(size, dynamic));
     global::get().entitiesManager().RegisterEntity(blackhole);
     
     return blackhole;
 } 
 
-BlackHole* BlackHoleBuilder::GetNewBlackHole() const
+BlackHole* BlackHoleBuilder::create() const
 {
-    BlackHole* blackhole = GetNewBlackHoleTemplate();
+    BlackHole* blackhole = createTemplate();
     CreateNewInternals(blackhole);
-        
-        return blackhole;
+
+    return blackhole;
 } 
-           
+
 void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
 {           
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
@@ -76,14 +69,14 @@ void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
     data_life.garbage_ready = false;
     data_life.armor      = 100000;
     data_life.life_time = meti::getRandInt(250, 500);
-    data_life.dying_time = 2;        
-        
+    data_life.dying_time = 2;
+
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BLACKHOLE_ID);
-                
+
     blackhole->setLifeData(data_life);
     
     float scale_comp = 30;
-    glm::vec3 scale(scale_comp, scale_comp, scale_comp);    
+    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     //alpitodorender blackhole->SetRenderData(mesh, texOb, scale);
     
     //float step = 10;

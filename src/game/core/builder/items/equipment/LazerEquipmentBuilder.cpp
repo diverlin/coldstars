@@ -35,41 +35,32 @@
 #include <common/RaceDescriptors.hpp>
 #include <meti/RandUtils.hpp>
 
-LazerEquipmentBuilder& LazerEquipmentBuilder::Instance()
-{
-    static LazerEquipmentBuilder instance;
-    return instance;
-}
+LazerEquipmentBuilder::LazerEquipmentBuilder()
+{}
 
 LazerEquipmentBuilder::~LazerEquipmentBuilder()
 {}
 
-LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipmentTemplate(INTLONGEST id) const
+LazerEquipment* LazerEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    LazerEquipment* lazer_equipment = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    LazerEquipment* lazer_equipment = nullptr;    
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try
-    {
+    try {
         lazer_equipment = new LazerEquipment(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-
     global::get().entitiesManager().RegisterEntity(lazer_equipment);
     
     return lazer_equipment;
 } 
 
-LazerEquipment* LazerEquipmentBuilder::GetNewLazerEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
+LazerEquipment* LazerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {
-    LazerEquipment* lazer_equipment = GetNewLazerEquipmentTemplate();
+    LazerEquipment* lazer_equipment = createTemplate();
     CreateNewInternals(lazer_equipment, tech_level, race_id, damage_orig, radius_orig);
 
     return lazer_equipment;

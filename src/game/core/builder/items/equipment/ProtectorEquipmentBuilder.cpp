@@ -32,41 +32,32 @@
 
 #include <meti/RandUtils.hpp>
 
-ProtectorEquipmentBuilder& ProtectorEquipmentBuilder::Instance()
-{
-    static ProtectorEquipmentBuilder instance;
-    return instance;
-}
+ProtectorEquipmentBuilder::ProtectorEquipmentBuilder()
+{}
 
 ProtectorEquipmentBuilder::~ProtectorEquipmentBuilder()
 {}
 
-ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipmentTemplate(INTLONGEST id) const
+ProtectorEquipment* ProtectorEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
     ProtectorEquipment* protector_equipment = nullptr;
-
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         protector_equipment = new ProtectorEquipment(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(protector_equipment);
     
     return protector_equipment;
 } 
    
-ProtectorEquipment* ProtectorEquipmentBuilder::GetNewProtectorEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int protection_orig) const
+ProtectorEquipment* ProtectorEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int protection_orig) const
 {
-    ProtectorEquipment* protector_equipment = GetNewProtectorEquipmentTemplate();
+    ProtectorEquipment* protector_equipment = createTemplate();
     CreateNewInternals(protector_equipment, tech_level, race_id, protection_orig);
         
     return protector_equipment;
@@ -104,5 +95,3 @@ void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector
     protector_equipment->UpdateProperties();
     protector_equipment->CountPrice();
 }
-
-

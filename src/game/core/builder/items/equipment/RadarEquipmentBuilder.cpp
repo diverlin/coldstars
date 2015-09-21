@@ -32,41 +32,32 @@
 
 #include <meti/RandUtils.hpp>
 
-RadarEquipmentBuilder& RadarEquipmentBuilder::Instance()
-{
-    static RadarEquipmentBuilder instance;
-    return instance;
-}
+RadarEquipmentBuilder::RadarEquipmentBuilder()
+{}
 
 RadarEquipmentBuilder::~RadarEquipmentBuilder()
 {}
 
-RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipmentTemplate(INTLONGEST id) const
+RadarEquipment* RadarEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    RadarEquipment* radar_equipment = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    RadarEquipment* radar_equipment = nullptr;    
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         radar_equipment = new RadarEquipment(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(radar_equipment);
     
     return radar_equipment;
 } 
   
-RadarEquipment* RadarEquipmentBuilder::GetNewRadarEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int radius_orig) const
+RadarEquipment* RadarEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int radius_orig) const
 {
-    RadarEquipment* radar_equipment = GetNewRadarEquipmentTemplate();
+    RadarEquipment* radar_equipment = createTemplate();
     CreateNewInternals(radar_equipment, tech_level, race_id, radius_orig);
         
     return radar_equipment;

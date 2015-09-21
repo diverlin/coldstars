@@ -17,8 +17,7 @@
 */
 
 
-#ifndef FREEZEREQUIPMENTBUILDER_HPP
-#define FREEZEREQUIPMENTBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
@@ -30,23 +29,12 @@ class FreezerEquipment;
 class FreezerEquipmentBuilder
 {
     public:
-        static FreezerEquipmentBuilder& Instance();
+        FreezerEquipmentBuilder();
         ~FreezerEquipmentBuilder();
         
-        FreezerEquipment* GetNewFreezerEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
-        FreezerEquipment* GetNewFreezerEquipment(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int freeze_orig = NONE_ID) const;
+        FreezerEquipment* createTemplate(INTLONGEST id = NONE_ID) const;
+        FreezerEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int freeze_orig = NONE_ID) const;
                                      
     private:
-        FreezerEquipmentBuilder() {};
-        FreezerEquipmentBuilder(const FreezerEquipmentBuilder&) = delete;
-        FreezerEquipmentBuilder& operator=(const FreezerEquipmentBuilder&) = delete;
-
         void CreateNewInternals(FreezerEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
 }; 
-
-#endif 
-    
-
-        
-
-

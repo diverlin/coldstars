@@ -24,30 +24,23 @@
 
 #include <meti/RandUtils.hpp>
 
-AsteroidBuilder& AsteroidBuilder::Instance()
-{
-    static AsteroidBuilder instance;
-    return instance;
-}
+
+AsteroidBuilder::AsteroidBuilder()
+{}
 
 AsteroidBuilder::~AsteroidBuilder()
 {}
 
-Asteroid* AsteroidBuilder::GetNewAsteroidTemplate(INTLONGEST id) const
+Asteroid* AsteroidBuilder::createTemplate(INTLONGEST id) const
 {
-    Asteroid* asteroid = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    Asteroid* asteroid = nullptr;    
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         asteroid = new Asteroid(id); 
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     global::get().entitiesManager().RegisterEntity(asteroid);
@@ -55,9 +48,9 @@ Asteroid* AsteroidBuilder::GetNewAsteroidTemplate(INTLONGEST id) const
     return asteroid;
 } 
 
-Asteroid* AsteroidBuilder::GetNewAsteroid() const
+Asteroid* AsteroidBuilder::create() const
 {
-    Asteroid* asteroid = GetNewAsteroidTemplate();
+    Asteroid* asteroid = createTemplate();
     CreateNewInternals(asteroid);
         
     return asteroid;

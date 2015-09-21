@@ -17,8 +17,7 @@
 */
 
 
-#ifndef BAKMODULEBUILDER_HPP
-#define BAKMODULEBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -28,23 +27,12 @@ class BakModule;
 class BakModuleBuilder
 {
     public:
-        static BakModuleBuilder& Instance();
+        BakModuleBuilder();
         ~BakModuleBuilder();
 
-        BakModule* GetNewBakModuleTemplate(INTLONGEST id = NONE_ID) const; 
-        BakModule* GetNewBakModule(int fuel_max_add = NONE_ID) const;
+        BakModule* createTemplate(INTLONGEST id = NONE_ID) const;
+        BakModule* create(int fuel_max_add = NONE_ID) const;
                                      
     private:
-        BakModuleBuilder() {};
-        BakModuleBuilder(const BakModuleBuilder&) = delete;
-        BakModuleBuilder& operator=(const BakModuleBuilder&) = delete;
-
         void CreateNewInternals(BakModule*, int) const;
 }; 
-
-#endif 
-    
-
-        
-
-

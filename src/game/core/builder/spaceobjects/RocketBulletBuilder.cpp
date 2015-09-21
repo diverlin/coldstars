@@ -20,42 +20,33 @@
 #include "../CommonBuilderHeaders.hpp"
 #include "../../spaceobjects/RocketBullet.hpp"
 
-RocketBulletBuilder& RocketBulletBuilder::Instance()
-{    
-    static RocketBulletBuilder instance;
-    return instance;
-}    
 
+RocketBulletBuilder::RocketBulletBuilder()
+{}
 
-RocketBulletBuilder::~RocketBulletBuilder() {}
+RocketBulletBuilder::~RocketBulletBuilder()
+{}
 
-
-RocketBullet* RocketBulletBuilder::GetNewRocketBulletTemplate(INTLONGEST id) const
+RocketBullet* RocketBulletBuilder::createTemplate(INTLONGEST id) const
 {
     RocketBullet* rocket_bullet = nullptr;
-
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         rocket_bullet = new RocketBullet(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }        
-  
+    }
     global::get().entitiesManager().RegisterEntity(rocket_bullet);
     
     return rocket_bullet;
 }
 
-RocketBullet* RocketBulletBuilder::GetNewRocketBullet(const BulletData& data_bullet) const
+RocketBullet* RocketBulletBuilder::create(const BulletData& data_bullet) const
 {
-    RocketBullet* rocket_bullet = GetNewRocketBulletTemplate();
+    RocketBullet* rocket_bullet = createTemplate();
     CreateNewInternals(rocket_bullet, data_bullet);    
         
     return rocket_bullet;

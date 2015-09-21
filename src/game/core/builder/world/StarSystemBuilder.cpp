@@ -103,7 +103,7 @@ void StarSystemBuilder::CreateBackground(StarSystem* starsystem, int distNebula_
                                             
 void StarSystemBuilder::CreateStar(StarSystem* starsystem) const
 {
-    Star* star = StarBuilder::Instance().GetNewStar(); 
+    Star* star = global::get().starBuilder().create();
     starsystem->Add(star);
     //alpitodorender starsystem->SetColor(star->color());
 }
@@ -112,12 +112,9 @@ void StarSystemBuilder::CreatePlanets(StarSystem* starsystem, int planet_per_sys
 {
     int orbit_radius = meti::getRandInt(2 * ENTITY::PLANET::DISTANCE_MIN, 2 * ENTITY::PLANET::DISTANCE_MAX);
     
-    for(int i=0; i<planet_per_system; i++)
-    {             
-        Planet* planet = PlanetBuilder::Instance().GetNewPlanet(orbit_radius);
-        
+    for(int i=0; i<planet_per_system; i++) {
+        Planet* planet = global::get().planetBuilder().create(orbit_radius);
         starsystem->Add(planet, starsystem->GetStar());
-        
         orbit_radius += meti::getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
     }
         

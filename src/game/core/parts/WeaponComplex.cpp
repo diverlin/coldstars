@@ -252,7 +252,7 @@ void WeaponComplex::UpdateFireAbility()
     total_damage = 0;
     total_radius = 0;
     radius_min = 0;
-
+    int z = slot_weapon_vec.size();
     for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
         if (slot_weapon_vec[i]->GetItem() != nullptr)

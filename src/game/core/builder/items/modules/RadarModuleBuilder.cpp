@@ -32,41 +32,32 @@
 //#include <resources/MeshCollector.hpp>
 //#include <jeti/TextureOb.hpp>
 
-RadarModuleBuilder& RadarModuleBuilder::Instance()
-{
-    static RadarModuleBuilder instance;
-    return instance;
-}
+RadarModuleBuilder::RadarModuleBuilder()
+{}
 
 RadarModuleBuilder::~RadarModuleBuilder()
 {}
 
-RadarModule* RadarModuleBuilder::GetNewRadarModuleTemplate(INTLONGEST id) const
+RadarModule* RadarModuleBuilder::createTemplate(INTLONGEST id) const
 {
-    RadarModule* radar_module = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    RadarModule* radar_module = nullptr;    
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         radar_module = new RadarModule(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(radar_module);
     
     return radar_module;
 } 
 
-RadarModule* RadarModuleBuilder::GetNewRadarModule(int radius_add) const
+RadarModule* RadarModuleBuilder::create(int radius_add) const
 {
-    RadarModule* radar_module = GetNewRadarModuleTemplate();
+    RadarModule* radar_module = createTemplate();
     CreateNewInternals(radar_module, radius_add);    
         
     return radar_module;
@@ -82,5 +73,3 @@ void RadarModuleBuilder::CreateNewInternals(RadarModule* radar_module, int radiu
     //alpitodorender radar_module->SetRenderData(mesh, texOb, texOb->size());
     radar_module->SetRadiusAdd(radius_add);
 }
-
-

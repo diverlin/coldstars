@@ -17,8 +17,7 @@
 */
 
 
-#ifndef PROTECTORARTEFACTBUILDER_HPP
-#define PROTECTORARTEFACTBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -28,25 +27,13 @@ class ProtectorArtefact;
 class ProtectorArtefactBuilder
 {
     public:
-        static ProtectorArtefactBuilder& Instance();
+        ProtectorArtefactBuilder();
         ~ProtectorArtefactBuilder();
         
-        ProtectorArtefact* GetNewProtectorArtefactTemplate(INTLONGEST id = NONE_ID) const;
-        ProtectorArtefact* GetNewProtectorArtefact(int protection = NONE_ID) const;
+        ProtectorArtefact* createTemplate(INTLONGEST id = NONE_ID) const;
+        ProtectorArtefact* create(int protection = NONE_ID) const;
                                      
     private:
-        ProtectorArtefactBuilder() {};
-        ProtectorArtefactBuilder(const ProtectorArtefactBuilder&) = delete;
-        ProtectorArtefactBuilder& operator=(const ProtectorArtefactBuilder&) = delete;
-        
         void CreateNewInternals(ProtectorArtefact*, int) const;
 }; 
-
-
-
-#endif 
-    
-
-        
-
 

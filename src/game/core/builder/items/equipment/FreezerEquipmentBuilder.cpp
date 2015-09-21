@@ -36,45 +36,37 @@
 
 #include <meti/RandUtils.hpp>
 
-FreezerEquipmentBuilder& FreezerEquipmentBuilder::Instance()
-{
-    static FreezerEquipmentBuilder instance;
-    return instance;
-}
+FreezerEquipmentBuilder::FreezerEquipmentBuilder()
+{}
 
 FreezerEquipmentBuilder::~FreezerEquipmentBuilder()
 {}
 
-FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipmentTemplate(INTLONGEST id) const
+FreezerEquipment* FreezerEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
     FreezerEquipment* freezer_equipment = nullptr;
-
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-     try 
-        { 
-            freezer_equipment = new FreezerEquipment(id);
-        }
-        catch(std::bad_alloc)
-        {
-            Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }
-        global::get().entitiesManager().RegisterEntity(freezer_equipment);
-        
-        return freezer_equipment;
+    try {
+        freezer_equipment = new FreezerEquipment(id);
+    } catch(std::bad_alloc) {
+        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+    }
+    global::get().entitiesManager().RegisterEntity(freezer_equipment);
+
+    return freezer_equipment;
 } 
-    
-FreezerEquipment* FreezerEquipmentBuilder::GetNewFreezerEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int freeze_orig) const
+
+FreezerEquipment* FreezerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int freeze_orig) const
 {
-    FreezerEquipment* freezer_equipment = GetNewFreezerEquipmentTemplate();
+    FreezerEquipment* freezer_equipment = createTemplate();
     CreateNewInternals(freezer_equipment, tech_level, race_id, freeze_orig);
     
     return freezer_equipment;
 } 
-        
+
 void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int freeze_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
@@ -82,12 +74,12 @@ void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equip
     }
     
     if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
-        tech_level = TYPE::TECHLEVEL::L0_ID; 
+        tech_level = TYPE::TECHLEVEL::L0_ID;
     }
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::FREEZER_EQUIPMENT_ID);
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
+    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id)
 
     freeze_orig     = meti::getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX) * (1 + EQUIPMENT::FREEZER::FREEZE_TECHLEVEL_RATE*(int)tech_level);
     
@@ -98,12 +90,12 @@ void FreezerEquipmentBuilder::CreateNewInternals(FreezerEquipment* freezer_equip
     common_data.condition_max   = meti::getRandInt(EQUIPMENT::FREEZER::CONDITION_MIN,   EQUIPMENT::FREEZER::CONDITION_MAX);
     common_data.deterioration_normal = 1;
     
-    freezer_equipment->SetFreezeOrig(freeze_orig);  
+    freezer_equipment->SetFreezeOrig(freeze_orig);
     //alpitodorender freezer_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     freezer_equipment->SetParentSubTypeId(TYPE::ENTITY::FREEZER_SLOT_ID);
     freezer_equipment->SetItemCommonData(common_data);
     freezer_equipment->SetCondition(common_data.condition_max);
-      
+
     freezer_equipment->UpdateProperties();
     freezer_equipment->CountPrice();
 }

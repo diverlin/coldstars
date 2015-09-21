@@ -12,9 +12,9 @@ set(CMAKE_BUILD_TYPE Debug)
 set(DEPLOY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 set(SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}")
 
-#SET(GLOBAL_COMPILE_FLAGS "-Wall -Werror -Wno-switch -std=c++11 -std=gnu++11 -pipe")
-#SET(GLOBAL_COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -Ofast -march=native")
-SET(GLOBAL_COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
+#SET(COMPILE_FLAGS "-Wall -Werror -Wno-switch -std=c++11 -std=gnu++11 -pipe")
+#SET(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -Ofast -march=native")
+SET(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
    
 
 set(COLDSTARS_DEPENDENCIES_ROOT "/home/diverlin/coldstars/coldstars_thirdparty_build/dist")
@@ -28,6 +28,11 @@ include_directories(src/meti)
 include_directories(src/ceti)
 include_directories(src/game)
 include_directories(src/game/core)
+
+
+set(PROJECT_JETI jeti)
+set(PROJECT_METI meti)
+set(PROJECT_CETI ceti)
 
 add_subdirectory(src/jeti)
 add_subdirectory(src/meti)

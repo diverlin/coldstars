@@ -17,8 +17,7 @@
 */
 
 
-#ifndef ROCKETMODULEBUILDER_HPP
-#define ROCKETMODULEBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -28,23 +27,12 @@ class RocketModule;
 class RocketModuleBuilder
 {
     public:
-        static RocketModuleBuilder& Instance();
+        RocketModuleBuilder();
         ~RocketModuleBuilder();
 
-        RocketModule* GetNewRocketModuleTemplate(INTLONGEST id = NONE_ID) const;
-        RocketModule* GetNewRocketModule(int ammo_max_add = NONE_ID, int damage_add = NONE_ID, int radius_add = NONE_ID) const;
+        RocketModule* createTemplate(INTLONGEST id = NONE_ID) const;
+        RocketModule* create(int ammo_max_add = NONE_ID, int damage_add = NONE_ID, int radius_add = NONE_ID) const;
                                      
     private:
-        RocketModuleBuilder() {};
-        RocketModuleBuilder(const RocketModuleBuilder&) = delete;
-        RocketModuleBuilder& operator=(const RocketModuleBuilder&) = delete;
-
         void CreateNewInternals(RocketModule*, int, int, int) const;
 }; 
-
-#endif 
-    
-
-        
-
-

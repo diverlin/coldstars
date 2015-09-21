@@ -33,41 +33,32 @@
 
 #include <meti/RandUtils.hpp>
 
-GrappleModuleBuilder& GrappleModuleBuilder::Instance()
-{
-    static GrappleModuleBuilder instance;
-    return instance;
-}
+GrappleModuleBuilder::GrappleModuleBuilder()
+{}
 
 GrappleModuleBuilder::~GrappleModuleBuilder()
 {}
 
-GrappleModule* GrappleModuleBuilder::GetNewGrappleModuleTemplate(INTLONGEST id) const
+GrappleModule* GrappleModuleBuilder::createTemplate(INTLONGEST id) const
 {
     GrappleModule* grapple_module = nullptr;
-
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         grapple_module = new GrappleModule(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(grapple_module);
     
     return grapple_module;
 } 
 
-GrappleModule* GrappleModuleBuilder::GetNewGrappleModule(int strength_add, int radius_add, int speed_add) const
+GrappleModule* GrappleModuleBuilder::create(int strength_add, int radius_add, int speed_add) const
 {
-    GrappleModule* grapple_module = GetNewGrappleModuleTemplate();
+    GrappleModule* grapple_module = createTemplate();
     CreateNewInternals(grapple_module, strength_add, radius_add, speed_add);
         
     return grapple_module;

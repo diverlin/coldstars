@@ -23,30 +23,22 @@
 #include <dock/Goverment.hpp>
 
 
-GovermentBuilder& GovermentBuilder::Instance()
-{
-    static GovermentBuilder instance;
-    return instance;
-}
+GovermentBuilder::GovermentBuilder()
+{}
 
 GovermentBuilder::~GovermentBuilder()
 {}
 
-Goverment* GovermentBuilder::GetNewGovermentTemplate(INTLONGEST id) const
+Goverment* GovermentBuilder::createTemplate(INTLONGEST id) const
 {
     Goverment* goverment = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         goverment = new Goverment(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     global::get().entitiesManager().RegisterEntity(goverment);
@@ -54,19 +46,19 @@ Goverment* GovermentBuilder::GetNewGovermentTemplate(INTLONGEST id) const
     return goverment;
 } 
 
-Goverment* GovermentBuilder::GetNewGoverment() const
+Goverment* GovermentBuilder::create() const
 {
-    Goverment* goverment = GetNewGovermentTemplate();
+    Goverment* goverment = createTemplate();
     CreateNewInternals(goverment);
-        
-        return goverment;
+
+    return goverment;
 } 
-        
+
 void GovermentBuilder::CreateNewInternals(Goverment* goverment) const
 {
     //jeti::TextureOb* textureOb_face  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID);
     //goverment->SetTextureObFace(textureOb_face);
-                
+
     //jeti::TextureOb* textureOb_background  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID);
     //goverment->SetTextureObBackground(textureOb_background);
 

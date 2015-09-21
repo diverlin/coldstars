@@ -17,8 +17,7 @@
 */
 
 
-#ifndef SATELLITEBUILDER_HPP
-#define SATELLITEBUILDER_HPP
+#pragma once
 
 #include <builder/spaceobjects/BaseVehicleBuilder.hpp>
 #include <types/MyInt.hpp>
@@ -29,24 +28,12 @@ class Satellite;
 class SatelliteBuilder : public BaseVehicleBuilder
 {
     public:
-        static SatelliteBuilder& Instance();
+        SatelliteBuilder();
         ~SatelliteBuilder();
         
-        Satellite* GetNewSatelliteTemplate(INTLONGEST id = NONE_ID) const;                            
-        Satellite* GetNewSatellite() const;
+        Satellite* createTemplate(INTLONGEST id = NONE_ID) const;
+        Satellite* create() const;
        
     private:
-        SatelliteBuilder() {};       
-        SatelliteBuilder(const SatelliteBuilder&) = delete; 
-        SatelliteBuilder& operator=(const SatelliteBuilder&) = delete;
-            
         void CreateNewInternals(Satellite*) const; 
 }; 
-
-
-#endif 
-    
-
-        
-
-

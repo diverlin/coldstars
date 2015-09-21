@@ -17,8 +17,7 @@
 */
 
 
-#ifndef ANGARBUILDER_HPP
-#define ANGARBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -33,21 +32,17 @@ const unsigned int ANGAR_VEHICLE_SLOTS_NUM = ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NU
 class AngarBuilder
 {
     public:
-        static AngarBuilder& Instance();
+        AngarBuilder();
         ~AngarBuilder();
 
-        Angar* GetNewAngarTemplate(INTLONGEST id = NONE_ID) const; 
-        Angar* GetNewAngar() const;
+        Angar* createTemplate(INTLONGEST id = NONE_ID) const;
+        Angar* create() const;
 
     private:
-        AngarBuilder() {};
-        AngarBuilder(const AngarBuilder&) = delete;
-        AngarBuilder& operator=(const AngarBuilder&) = delete;
-
         void CreateNewInternals(Angar*) const;
 }; 
 
-#endif 
+
     
 
         

@@ -32,41 +32,32 @@
 #include <ai/aiModel/AiModelTrader.hpp>
 
 
-NpcBuilder& NpcBuilder::Instance()
-{
-    static NpcBuilder instance;
-    return instance;
-}
+NpcBuilder::NpcBuilder()
+{}
 
 NpcBuilder::~NpcBuilder()
 {}
 
-Npc* NpcBuilder::GetNewNpcTemplate(TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id, INTLONGEST id) const
+Npc* NpcBuilder::createTemplate(TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id, INTLONGEST id) const
 {
-    Npc* npc = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    Npc* npc = nullptr;
+    try {
         npc = new Npc(id, subtype_id, subsubtype_id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     global::get().entitiesManager().RegisterEntity(npc);
     
     return npc;
-} 
+}
 
-
-Npc* NpcBuilder::GetNewNpc(TYPE::RACE race_id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id) const
+Npc* NpcBuilder::create(TYPE::RACE race_id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id) const
 {
-    Npc* npc = GetNewNpcTemplate(subtype_id, subsubtype_id);
+    Npc* npc = createTemplate(subtype_id, subsubtype_id);
     CreateNewInternals(npc, race_id, subtype_id, subsubtype_id);  
     
     return npc;

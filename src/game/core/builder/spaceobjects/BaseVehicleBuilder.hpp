@@ -17,8 +17,7 @@
 */
 
 
-#ifndef BASEVEHICLEBUILDER_HPP
-#define BASEVEHICLEBUILDER_HPP
+#pragma once
 
 #include <types/TechLevelTypes.hpp>
 
@@ -28,8 +27,8 @@ class Vehicle;
 class BaseVehicleBuilder
 {
     public:
-        static BaseVehicleBuilder& Instance();
-        virtual ~BaseVehicleBuilder() {};
+        BaseVehicleBuilder();
+        virtual ~BaseVehicleBuilder() {}
 
         void EquipEquipment(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const; 
         void EquipModules(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const; 
@@ -37,18 +36,5 @@ class BaseVehicleBuilder
         void EquipBomb(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const; 
               
     protected:
-        BaseVehicleBuilder() {};
-        BaseVehicleBuilder(const BaseVehicleBuilder&) = delete;
-        BaseVehicleBuilder& operator=(const BaseVehicleBuilder&) = delete;  
-        
         void CreateItemSlots(Vehicle*) const;
 }; 
-
-
-
-#endif 
-    
-
-        
-
-

@@ -17,8 +17,7 @@
 */
 
 
-#ifndef ITEMSLOTBUILDER_HPP
-#define ITEMSLOTBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 #include <types/EntityTypes.hpp>
@@ -28,7 +27,7 @@ class ItemSlot;
 ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id = NONE_ID);
 ItemSlot* GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY subtype_id);
 
-#endif 
+
     
 
         

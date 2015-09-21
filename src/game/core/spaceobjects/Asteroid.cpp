@@ -72,7 +72,7 @@ void Asteroid::postDeathUniqueEvent(bool show_effect)
     float impulse_strength = 0.5;
     for (int i=0; i<3; i++)
     {      
-        Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
+        Container* container = global::get().containerBuilder().create(4);
         
         glm::vec3 impulse_dir(meti::getXYVec3Unit(angleZ));
         container->addImpulse(impulse_dir, impulse_strength);

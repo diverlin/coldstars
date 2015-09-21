@@ -66,8 +66,7 @@ Galaxy* GalaxyBuilder::GetNewGalaxy(const GalaxyDescriptor& galaxy_descriptor) c
             
 void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descriptor) const
 {     
-    for(const auto& sector_descriptor: galaxy_descriptor.sector_descriptors)
-    {  
+    for(const auto& sector_descriptor: galaxy_descriptor.sector_descriptors) {
         glm::vec3 center = meti::getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);
         Sector* sector = SectorBuilder::Instance().GetNewSector(sector_descriptor);
         galaxy->Add(sector, center); 

@@ -17,33 +17,25 @@
 */
 
 
-#ifndef NATURELANDBUILDER_HPP
-#define NATURELANDBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
 class NatureLand;
 
-
 class NatureLandBuilder
 {
     public:
-        static NatureLandBuilder& Instance();
+        NatureLandBuilder();
         ~NatureLandBuilder();
 
-        NatureLand* GetNewNatureLandTemplate(INTLONGEST id = NONE_ID) const; 
-        NatureLand* GetNewNatureLand() const;
+        NatureLand* createTemplate(INTLONGEST id = NONE_ID) const;
+        NatureLand* create() const;
                                                     
     private:
-        NatureLandBuilder() {};
-        NatureLandBuilder(const NatureLandBuilder&) = delete;
-        NatureLandBuilder& operator=(const NatureLandBuilder&) = delete;
-        
         void CreateNewInternals(NatureLand*) const;
 }; 
 
-
-#endif 
     
 
         

@@ -27,41 +27,33 @@
 #include <dock/Kosmoport.hpp>
 
 
-KosmoportBuilder& KosmoportBuilder::Instance()
+KosmoportBuilder::KosmoportBuilder()
 {
-    static KosmoportBuilder instance;
-    return instance;
 }
 
 KosmoportBuilder::~KosmoportBuilder()
 {}
 
-Kosmoport* KosmoportBuilder::GetNewKosmoportTemplate(INTLONGEST id) const
+Kosmoport* KosmoportBuilder::createTemplate(INTLONGEST id) const
 {
     Kosmoport* kosmoport = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         kosmoport = new Kosmoport(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(kosmoport);
     
     return kosmoport;
 } 
 
-Kosmoport* KosmoportBuilder::GetNewKosmoport() const
+Kosmoport* KosmoportBuilder::create() const
 {
-    Kosmoport* kosmoport = GetNewKosmoportTemplate();
+    Kosmoport* kosmoport = createTemplate();
     CreateNewInternals(kosmoport);
         
         return kosmoport;
@@ -69,10 +61,10 @@ Kosmoport* KosmoportBuilder::GetNewKosmoport() const
            
 void KosmoportBuilder::CreateNewInternals(Kosmoport* kosmoport) const
 {
-    kosmoport->BindAngar(AngarBuilder::Instance().GetNewAngar());
-    kosmoport->BindStore(StoreBuilder::Instance().GetNewStore());
-    kosmoport->BindShop(ShopBuilder::Instance().GetNewShop());
-    kosmoport->BindGoverment(GovermentBuilder::Instance().GetNewGoverment());
+    kosmoport->BindAngar(global::get().angarBuilder().create());
+    kosmoport->BindStore(global::get().storeBuilder().create());
+    kosmoport->BindShop(global::get().shopBuilder().create());
+    kosmoport->BindGoverment(global::get().govermentBuilder().create());
 }
 
       

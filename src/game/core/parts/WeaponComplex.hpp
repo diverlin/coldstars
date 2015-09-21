@@ -36,11 +36,11 @@ class WeaponComplex
         WeaponComplex();
         ~WeaponComplex();
            
-        void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
+        void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; }
 
-        int GetRadiusMin() const { return radius_min; };
-        int GetTotalRadius() const { return total_radius; };
-        int GetTotalDamage() const { return total_damage; };
+        int GetRadiusMin() const { return radius_min; }
+        int GetTotalRadius() const { return total_radius; }
+        int GetTotalDamage() const { return total_damage; }
        
         bool AddSlot(ItemSlot*);
         ItemSlot* GetEmptyWeaponSlot() const;

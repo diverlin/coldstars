@@ -17,8 +17,7 @@
 */
 
 
-#ifndef BLACKHOLEBUILDER_HPP
-#define BLACKHOLEBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -28,25 +27,12 @@ class BlackHole;
 class BlackHoleBuilder
 {
     public:
-        static BlackHoleBuilder& Instance();
+        BlackHoleBuilder();
         ~BlackHoleBuilder();
 
-        BlackHole* GetNewBlackHoleTemplate(INTLONGEST id = NONE_ID) const; 
-        BlackHole* GetNewBlackHole() const;
+        BlackHole* createTemplate(INTLONGEST id = NONE_ID) const;
+        BlackHole* create() const;
                                      
     private:
-        BlackHoleBuilder() {};
-        BlackHoleBuilder(const BlackHoleBuilder&) = delete;
-        BlackHoleBuilder& operator=(const BlackHoleBuilder&) = delete;
-
         void CreateNewInternals(BlackHole*) const;
 }; 
-
-
-
-#endif 
-    
-
-        
-
-

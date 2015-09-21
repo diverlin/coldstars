@@ -17,8 +17,7 @@
 */
 
 
-#ifndef LAZERMODULEBUILDER_HPP
-#define LAZERMODULEBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -28,23 +27,12 @@ class LazerModule;
 class LazerModuleBuilder
 {
     public:
-        static LazerModuleBuilder& Instance();
+        LazerModuleBuilder();
         ~LazerModuleBuilder();
 
-        LazerModule* GetNewLazerModuleTemplate(INTLONGEST id = NONE_ID) const; 
-        LazerModule* GetNewLazerModule(int damage_add = NONE_ID, int radius_add = NONE_ID) const;
+        LazerModule* createTemplate(INTLONGEST id = NONE_ID) const;
+        LazerModule* create(int damage_add = NONE_ID, int radius_add = NONE_ID) const;
                                      
     private:
-        LazerModuleBuilder() {};
-        LazerModuleBuilder(const LazerModuleBuilder&) = delete;
-        LazerModuleBuilder& operator=(const LazerModuleBuilder&) = delete;
-
         void CreateNewInternals(LazerModule*, int, int) const;
 }; 
-
-#endif 
-    
-
-        
-
-

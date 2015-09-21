@@ -17,8 +17,7 @@
 */
 
 
-#ifndef SCANERMODULEBUILDER_HPP
-#define SCANERMODULEBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -28,23 +27,12 @@ class ScanerModule;
 class ScanerModuleBuilder
 {
     public:
-        static ScanerModuleBuilder& Instance();
+        ScanerModuleBuilder();
         ~ScanerModuleBuilder();
 
-        ScanerModule* GetNewScanerModuleTemplate(INTLONGEST id = NONE_ID) const; 
-        ScanerModule* GetNewScanerModule(int scan_add = NONE_ID) const;
+        ScanerModule* createTemplate(INTLONGEST id = NONE_ID) const;
+        ScanerModule* create(int scan_add = NONE_ID) const;
                                      
     private:
-        ScanerModuleBuilder() {};
-        ScanerModuleBuilder(const ScanerModuleBuilder&) = delete;
-        ScanerModuleBuilder& operator=(const ScanerModuleBuilder&) = delete;
-
         void CreateNewInternals(ScanerModule*, int) const;
 }; 
-
-#endif 
-    
-
-        
-
-

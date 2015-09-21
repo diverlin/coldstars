@@ -31,41 +31,32 @@
 //#include <resources/MeshCollector.hpp>
 //#include <jeti/TextureOb.hpp>
 
-ScanerModuleBuilder& ScanerModuleBuilder::Instance()
-{
-    static ScanerModuleBuilder instance;
-    return instance;
-}
+ScanerModuleBuilder::ScanerModuleBuilder()
+{}
 
 ScanerModuleBuilder::~ScanerModuleBuilder()
 {}
 
-ScanerModule* ScanerModuleBuilder::GetNewScanerModuleTemplate(INTLONGEST id) const
+ScanerModule* ScanerModuleBuilder::createTemplate(INTLONGEST id) const
 {
-    ScanerModule* scaner_module = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    ScanerModule* scaner_module = nullptr;    
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         scaner_module = new ScanerModule(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(scaner_module);
     
     return scaner_module;
 } 
 
-ScanerModule* ScanerModuleBuilder::GetNewScanerModule(int scan_add) const
+ScanerModule* ScanerModuleBuilder::create(int scan_add) const
 {
-    ScanerModule* scaner_module = GetNewScanerModuleTemplate();    
+    ScanerModule* scaner_module = createTemplate();
     CreateNewInternals(scaner_module, scan_add);
         
     return scaner_module;
@@ -81,5 +72,3 @@ void ScanerModuleBuilder::CreateNewInternals(ScanerModule* scaner_module, int sc
     //alpitodorender scaner_module->SetRenderData(mesh, texOb, texOb->size());
     scaner_module->SetScanAdd(scan_add);
 }
-
-

@@ -36,41 +36,32 @@
 
 #include <meti/RandUtils.hpp>
 
-ScanerEquipmentBuilder& ScanerEquipmentBuilder::Instance()
-{
-    static ScanerEquipmentBuilder instance;
-    return instance;
-}
+ScanerEquipmentBuilder::ScanerEquipmentBuilder()
+{}
 
 ScanerEquipmentBuilder::~ScanerEquipmentBuilder()
 {}
 
-ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipmentTemplate(INTLONGEST id) const
+ScanerEquipment* ScanerEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
     ScanerEquipment* scaner_equipment = nullptr;
-
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         scaner_equipment = new ScanerEquipment(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(scaner_equipment);
     
     return scaner_equipment;
 } 
 
-ScanerEquipment* ScanerEquipmentBuilder::GetNewScanerEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int scan_orig) const
+ScanerEquipment* ScanerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int scan_orig) const
 {
-    ScanerEquipment* scaner_equipment = GetNewScanerEquipmentTemplate();
+    ScanerEquipment* scaner_equipment = createTemplate();
     CreateNewInternals(scaner_equipment, tech_level, race_id, scan_orig);
         
     return scaner_equipment;
@@ -108,5 +99,3 @@ void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipmen
     scaner_equipment->UpdateProperties();
     scaner_equipment->CountPrice();
 }
-
-

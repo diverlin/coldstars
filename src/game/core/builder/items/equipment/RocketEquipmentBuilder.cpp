@@ -31,46 +31,37 @@
 
 #include <meti/RandUtils.hpp>
 
-RocketEquipmentBuilder& RocketEquipmentBuilder::Instance()
-{
-    static RocketEquipmentBuilder instance;
-    return instance;
-}
+RocketEquipmentBuilder::RocketEquipmentBuilder()
+{}
 
 RocketEquipmentBuilder::~RocketEquipmentBuilder()
 {}
 
-RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipmentTemplate(INTLONGEST id) const
+RocketEquipment* RocketEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
     RocketEquipment* rocket_equipment = nullptr;
-
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-     try 
-    { 
+    try {
         rocket_equipment = new RocketEquipment(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    
     global::get().entitiesManager().RegisterEntity(rocket_equipment);
     
     return rocket_equipment;
 } 
 
-RocketEquipment* RocketEquipmentBuilder::GetNewRocketEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+RocketEquipment* RocketEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {
-    RocketEquipment* rocket_equipment = GetNewRocketEquipmentTemplate();
+    RocketEquipment* rocket_equipment = createTemplate();
     CreateNewInternals(rocket_equipment, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
-            
+
     return rocket_equipment;
 } 
-            
+
 void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
@@ -78,12 +69,12 @@ void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipmen
     }
     
     if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
-        tech_level = TYPE::TECHLEVEL::L0_ID; 
+        tech_level = TYPE::TECHLEVEL::L0_ID;
     }
-   
+
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID);
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)   
+    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::ROCKET_EQUIPMENT_ID, revision_id)
     
     ammo_max_orig = meti::getRandInt(EQUIPMENT::ROCKET::AMMO_MIN, EQUIPMENT::ROCKET::AMMO_MAX)     * (1 + EQUIPMENT::ROCKET::AMMO_TECHLEVEL_RATE * (int)tech_level);
     damage_orig   = meti::getRandInt(EQUIPMENT::ROCKET::DAMAGE_MIN, EQUIPMENT::ROCKET::DAMAGE_MAX) * (1 + EQUIPMENT::ROCKET::DAMAGE_TECHLEVEL_RATE * (int)tech_level);
@@ -109,9 +100,9 @@ void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipmen
     
     rocket_equipment->SetAmmoMaxOrig(ammo_max_orig);
     rocket_equipment->SetDamageOrig(damage_orig);
-    rocket_equipment->SetRadiusOrig(radius_orig);   
-    rocket_equipment->SetBulletData(data_bullet); 
-    rocket_equipment->SetAmmo(ammo_max_orig*0.6);                
+    rocket_equipment->SetRadiusOrig(radius_orig);
+    rocket_equipment->SetBulletData(data_bullet);
+    rocket_equipment->SetAmmo(ammo_max_orig*0.6);
     //alpitodorender rocket_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     rocket_equipment->SetParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
     rocket_equipment->SetItemCommonData(common_data);

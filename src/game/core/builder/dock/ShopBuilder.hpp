@@ -17,8 +17,7 @@
 */
 
 
-#ifndef SHOPBUILDER_HPP
-#define SHOPBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -28,24 +27,12 @@ class Shop;
 class ShopBuilder
 {
     public:
-        static ShopBuilder& Instance();
+        ShopBuilder();
         ~ShopBuilder();
 
-        Shop* GetNewShopTemplate(INTLONGEST id = NONE_ID) const; 
-        Shop* GetNewShop() const;
+        Shop* createTemplate(INTLONGEST id = NONE_ID) const;
+        Shop* create() const;
                                                     
-    private:
-        ShopBuilder() {};
-        ShopBuilder(const ShopBuilder&) = delete;
-        ShopBuilder& operator=(const ShopBuilder&) = delete;
-        
+    private: 
         void CreateNewInternals(Shop*) const;
 }; 
-
-
-#endif 
-    
-
-        
-
-

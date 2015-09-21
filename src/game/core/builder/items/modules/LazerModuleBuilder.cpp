@@ -32,41 +32,32 @@
 //#include <jeti/TextureOb.hpp>
 
 
-LazerModuleBuilder& LazerModuleBuilder::Instance()
-{
-    static LazerModuleBuilder instance;
-    return instance;
-}
+LazerModuleBuilder::LazerModuleBuilder()
+{}
 
 LazerModuleBuilder::~LazerModuleBuilder()
 {}
 
-LazerModule* LazerModuleBuilder::GetNewLazerModuleTemplate(INTLONGEST id) const
+LazerModule* LazerModuleBuilder::createTemplate(INTLONGEST id) const
 {
     LazerModule* lazer_module = nullptr;
-
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         lazer_module = new LazerModule(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(lazer_module);
     
     return lazer_module;
 } 
 
-LazerModule* LazerModuleBuilder::GetNewLazerModule(int damage_add, int radius_add) const
+LazerModule* LazerModuleBuilder::create(int damage_add, int radius_add) const
 {
-    LazerModule* lazer_module = GetNewLazerModuleTemplate();
+    LazerModule* lazer_module = createTemplate();
     CreateNewInternals(lazer_module, damage_add, radius_add);
         
     return lazer_module;

@@ -17,8 +17,7 @@
 */
 
 
-#ifndef KOSMOPORTBUILDER_HPP
-#define KOSMOPORTBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -28,21 +27,16 @@ class Kosmoport;
 class KosmoportBuilder
 {
     public:
-        static KosmoportBuilder& Instance();
+        KosmoportBuilder();
         ~KosmoportBuilder();
 
-        Kosmoport* GetNewKosmoportTemplate(INTLONGEST id = NONE_ID) const; 
-        Kosmoport* GetNewKosmoport() const;
+        Kosmoport* createTemplate(INTLONGEST id = NONE_ID) const;
+        Kosmoport* create() const;
                                                     
     private:
-        KosmoportBuilder() {};
-        KosmoportBuilder(const KosmoportBuilder&) = delete;
-        KosmoportBuilder& operator=(const KosmoportBuilder&) = delete;
-        
         void CreateNewInternals(Kosmoport*) const;
 }; 
-   
-#endif 
+
     
 
         

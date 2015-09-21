@@ -28,30 +28,22 @@
 //#include <resources/MeshCollector.hpp>
 //#include <jeti/TextureOb.hpp>
 
-BombBuilder& BombBuilder::Instance()
-{
-    static BombBuilder instance;
-    return instance;
-}
+BombBuilder::BombBuilder()
+{}
 
 BombBuilder::~BombBuilder()
 {}
 
-Bomb* BombBuilder::GetNewBombTemplate(INTLONGEST id) const
+Bomb* BombBuilder::createTemplate(INTLONGEST id) const
 {
     Bomb* bomb = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-       try 
-    { 
+    try {
         bomb = new Bomb(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     global::get().entitiesManager().RegisterEntity(bomb);
@@ -59,25 +51,23 @@ Bomb* BombBuilder::GetNewBombTemplate(INTLONGEST id) const
     return bomb;
 } 
 
-Bomb* BombBuilder::GetNewBomb(int damage, int radius) const
+Bomb* BombBuilder::create(int damage, int radius) const
 {
-    Bomb* bomb = GetNewBombTemplate();
+    Bomb* bomb = createTemplate();
     CreateNewInternals(bomb, damage, radius);
-        
+
     return bomb;
 } 
-            
+
 void BombBuilder::CreateNewInternals(Bomb* bomb, int damage, int radius) const
 {     
-//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-//    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID);
+    //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID);
     damage = 300;
     radius = 300;
-        
+
     //alpitodorender bomb->SetRenderData(mesh, texOb, texOb->size());
     bomb->SetDamage(damage);
     bomb->SetRadius(radius);
     bomb->SetParentSubTypeId(TYPE::ENTITY::CARGO_SLOT_ID);
 }
-
-

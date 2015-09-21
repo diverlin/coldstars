@@ -23,46 +23,38 @@
 #include <dock/Shop.hpp>
 
 
-ShopBuilder& ShopBuilder::Instance()
+ShopBuilder::ShopBuilder()
 {
-    static ShopBuilder instance;
-    return instance;
 }
 
 ShopBuilder::~ShopBuilder()
 {}
 
-Shop* ShopBuilder::GetNewShopTemplate(INTLONGEST id) const
+Shop* ShopBuilder::createTemplate(INTLONGEST id) const
 {
-    Shop* shop = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    Shop* shop = nullptr;    
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         shop = new Shop(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(shop);
-    
+
     return shop;
 } 
  
-Shop* ShopBuilder::GetNewShop() const
+Shop* ShopBuilder::create() const
 {
-    Shop* shop = GetNewShopTemplate();
+    Shop* shop = createTemplate();
     CreateNewInternals(shop);
-        
-        return shop;
+
+    return shop;
 } 
-           
+
 void ShopBuilder::CreateNewInternals(Shop* shop) const
 {    
     //jeti::TextureOb* textureOb_background  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SHOP_BACKGROUND_ID);

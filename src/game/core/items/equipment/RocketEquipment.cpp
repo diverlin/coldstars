@@ -22,6 +22,7 @@
 //#include <ceti/StringUtils.hpp>
 #include <ceti/Logger.hpp>
 #include "../../items/modules/RocketModule.hpp"
+#include <common/Global.hpp>
 #include "../../builder/spaceobjects/RocketBulletBuilder.hpp"
 #include "../../world/starsystem.hpp"
 #include "../../parts/Turrel.hpp"
@@ -156,7 +157,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
             
     if (fire_atOnce>=1)
     {
-        RocketBullet* rocket_bullet = RocketBulletBuilder::Instance().GetNewRocketBullet(data_bullet);
+        RocketBullet* rocket_bullet = global::get().rocketBulletBuilder().create(data_bullet);
         rocket_bullet->SetDamageRate(attack_rate_normalized);
 
         if (item_slot->GetOwnerVehicle()->GetDataKorpus().draw_turrels == true)

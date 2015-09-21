@@ -17,8 +17,7 @@
 */
 
 
-#ifndef GRAVITYARTEFACTBUILDER_HPP
-#define GRAVITYARTEFACTBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -28,23 +27,13 @@ class GravityArtefact;
 class GravityArtefactBuilder
 {
     public:
-        static GravityArtefactBuilder& Instance();
+        GravityArtefactBuilder();
         ~GravityArtefactBuilder();
 
-        GravityArtefact* GetNewGravityArtefactTemplate(INTLONGEST id = NONE_ID) const; 
-        GravityArtefact* GetNewGravityArtefact(int gravity = NONE_ID) const;
+        GravityArtefact* createTemplate(INTLONGEST id = NONE_ID) const;
+        GravityArtefact* create(int gravity = NONE_ID) const;
                                      
     private:
-        GravityArtefactBuilder() {};
-        GravityArtefactBuilder(const GravityArtefactBuilder&) = delete;
-        GravityArtefactBuilder& operator=(const GravityArtefactBuilder&) = delete;
-
         void CreateNewInternals(GravityArtefact*, int) const;
 }; 
      
-#endif 
-    
-
-        
-
-
