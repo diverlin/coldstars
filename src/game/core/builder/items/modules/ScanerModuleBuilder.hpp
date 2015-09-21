@@ -34,5 +34,5 @@ class ScanerModuleBuilder
         ScanerModule* create(int scan_add = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(ScanerModule*, int) const;
+        void createInternals(ScanerModule*, int) const;
 }; 

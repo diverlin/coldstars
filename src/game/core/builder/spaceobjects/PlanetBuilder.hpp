@@ -50,5 +50,5 @@ class PlanetBuilder
         Planet* create(float) const;
                                      
     private:
-        void CreateNewInternals(Planet*, float) const;
+        void createInternals(Planet*, float) const;
 }; 

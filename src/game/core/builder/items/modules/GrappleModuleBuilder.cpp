@@ -59,12 +59,12 @@ GrappleModule* GrappleModuleBuilder::createTemplate(INTLONGEST id) const
 GrappleModule* GrappleModuleBuilder::create(int strength_add, int radius_add, int speed_add) const
 {
     GrappleModule* grapple_module = createTemplate();
-    CreateNewInternals(grapple_module, strength_add, radius_add, speed_add);
+    createInternals(grapple_module, strength_add, radius_add, speed_add);
         
     return grapple_module;
 } 
             
-void GrappleModuleBuilder::CreateNewInternals(GrappleModule* grapple_module, int strength_add, int radius_add, int speed_add) const
+void GrappleModuleBuilder::createInternals(GrappleModule* grapple_module, int strength_add, int radius_add, int speed_add) const
 {   
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);

@@ -44,7 +44,7 @@ class StarBuilder
         Star* create() const;
                                      
     private:
-        void CreateNewInternals(Star*) const;
+        void createInternals(Star*) const;
 };
 
     

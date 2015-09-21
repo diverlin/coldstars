@@ -33,5 +33,5 @@ class ProtectorModuleBuilder
         ProtectorModule* create(int protection_add = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(ProtectorModule*, int) const;
+        void createInternals(ProtectorModule*, int) const;
 }; 

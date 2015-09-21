@@ -39,7 +39,7 @@ class BakEquipmentBuilder
         BakEquipmentBuilder(const BakEquipmentBuilder&) = delete;
         BakEquipmentBuilder& operator=(const BakEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(BakEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
+        void createInternals(BakEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
 }; 
 
     

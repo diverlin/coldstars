@@ -30,7 +30,7 @@ class BaseVehicleBuilder
         BaseVehicleBuilder();
         virtual ~BaseVehicleBuilder() {}
 
-        void EquipEquipment(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const; 
+        void equip(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const;
         void EquipModules(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const; 
         void EquipArtefacts(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const; 
         void EquipBomb(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const; 

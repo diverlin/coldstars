@@ -34,6 +34,6 @@ class ProtectorArtefactBuilder
         ProtectorArtefact* create(int protection = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(ProtectorArtefact*, int) const;
+        void createInternals(ProtectorArtefact*, int) const;
 }; 
 

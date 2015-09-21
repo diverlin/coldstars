@@ -60,12 +60,12 @@ ProtectorArtefact* ProtectorArtefactBuilder::createTemplate(INTLONGEST id) const
 ProtectorArtefact* ProtectorArtefactBuilder::create(int protection) const
 {
     ProtectorArtefact* protector_artefact = createTemplate();
-    CreateNewInternals(protector_artefact, protection);    
+    createInternals(protector_artefact, protection);
         
     return protector_artefact;
 } 
          
-void ProtectorArtefactBuilder::CreateNewInternals(ProtectorArtefact* protector_artefact, int protection) const
+void ProtectorArtefactBuilder::createInternals(ProtectorArtefact* protector_artefact, int protection) const
 { 
 //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //    jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BAK_EQUIPMENT_ID);

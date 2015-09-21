@@ -54,12 +54,12 @@ Planet* PlanetBuilder::createTemplate(INTLONGEST id) const
 Planet* PlanetBuilder::create(float orbit_radius) const
 {
     Planet* planet = createTemplate();
-    CreateNewInternals(planet, orbit_radius);
+    createInternals(planet, orbit_radius);
     
     return planet;
 } 
      
-void PlanetBuilder::CreateNewInternals(Planet* planet, float orbit_radius) const
+void PlanetBuilder::createInternals(Planet* planet, float orbit_radius) const
 {     
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
       

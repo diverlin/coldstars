@@ -59,12 +59,12 @@ DroidEquipment* DroidEquipmentBuilder::createTemplate(INTLONGEST id) const
 DroidEquipment* DroidEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int repair_orig) const
 {
     DroidEquipment* droid_equipment = createTemplate();
-    CreateNewInternals(droid_equipment, tech_level, race_id, repair_orig);
+    createInternals(droid_equipment, tech_level, race_id, repair_orig);
         
     return droid_equipment;
 }  
             
-void DroidEquipmentBuilder::CreateNewInternals(DroidEquipment* droid_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int repair_orig) const
+void DroidEquipmentBuilder::createInternals(DroidEquipment* droid_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int repair_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));

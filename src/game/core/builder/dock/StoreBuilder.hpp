@@ -34,6 +34,6 @@ class StoreBuilder
         Store* create() const;
                                                                     
     private: 
-        void CreateNewInternals(Store*) const;
+        void createInternals(Store*) const;
         void PutRandomEquipment(Store*) const;
 }; 

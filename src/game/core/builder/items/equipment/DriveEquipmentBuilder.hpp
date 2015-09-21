@@ -36,7 +36,7 @@ class DriveEquipmentBuilder
         DriveEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int speed_orig = NONE_ID, int hyper_orig = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(DriveEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int, int) const;
+        void createInternals(DriveEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int, int) const;
 }; 
 
 

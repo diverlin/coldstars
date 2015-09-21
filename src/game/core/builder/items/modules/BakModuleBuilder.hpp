@@ -34,5 +34,5 @@ class BakModuleBuilder
         BakModule* create(int fuel_max_add = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(BakModule*, int) const;
+        void createInternals(BakModule*, int) const;
 }; 

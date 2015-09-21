@@ -36,5 +36,5 @@ class RadarEquipmentBuilder
         RadarEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int radius_orig = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(RadarEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
+        void createInternals(RadarEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
 }; 

@@ -58,12 +58,12 @@ RadarEquipment* RadarEquipmentBuilder::createTemplate(INTLONGEST id) const
 RadarEquipment* RadarEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int radius_orig) const
 {
     RadarEquipment* radar_equipment = createTemplate();
-    CreateNewInternals(radar_equipment, tech_level, race_id, radius_orig);
+    createInternals(radar_equipment, tech_level, race_id, radius_orig);
         
     return radar_equipment;
 } 
         
-void RadarEquipmentBuilder::CreateNewInternals(RadarEquipment* radar_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int radius_orig) const
+void RadarEquipmentBuilder::createInternals(RadarEquipment* radar_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));

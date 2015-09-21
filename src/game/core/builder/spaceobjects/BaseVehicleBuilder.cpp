@@ -157,7 +157,7 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
     }
 }
 
-void BaseVehicleBuilder::EquipEquipment(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) const
+void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) const
 {
     unsigned int weapons_num = meti::getRandInt(vehicle->GetDataKorpus().slot_weapon_num/2, vehicle->GetDataKorpus().slot_weapon_num);
     for (unsigned int i=0; i<weapons_num; i++)

@@ -57,12 +57,12 @@ GrappleEquipment* GrappleEquipmentBuilder::createTemplate(INTLONGEST id) const
 GrappleEquipment* GrappleEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
 {
     GrappleEquipment* grapple_equipment = createTemplate();
-    CreateNewInternals(grapple_equipment, tech_level, race_id, strength_orig, radius_orig, speed_orig);
+    createInternals(grapple_equipment, tech_level, race_id, strength_orig, radius_orig, speed_orig);
 
     return grapple_equipment;
 } 
 
-void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
+void GrappleEquipmentBuilder::createInternals(GrappleEquipment* grapple_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));

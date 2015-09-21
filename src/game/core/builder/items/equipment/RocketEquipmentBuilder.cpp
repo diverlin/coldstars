@@ -57,12 +57,12 @@ RocketEquipment* RocketEquipmentBuilder::createTemplate(INTLONGEST id) const
 RocketEquipment* RocketEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {
     RocketEquipment* rocket_equipment = createTemplate();
-    CreateNewInternals(rocket_equipment, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
+    createInternals(rocket_equipment, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
 
     return rocket_equipment;
 } 
 
-void RocketEquipmentBuilder::CreateNewInternals(RocketEquipment* rocket_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+void RocketEquipmentBuilder::createInternals(RocketEquipment* rocket_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));

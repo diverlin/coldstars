@@ -45,5 +45,5 @@ class AsteroidBuilder
         Asteroid* create() const;
                                      
     private:
-        void CreateNewInternals(Asteroid*) const;
+        void createInternals(Asteroid*) const;
 }; 

@@ -62,12 +62,12 @@ EnergizerEquipment* EnergizerEquipmentBuilder::createTemplate(INTLONGEST id) con
 EnergizerEquipment* EnergizerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
 {
     EnergizerEquipment* energizer_equipment = createTemplate();
-    CreateNewInternals(energizer_equipment, tech_level, race_id, energy_max_orig, restoration_orig);
+    createInternals(energizer_equipment, tech_level, race_id, energy_max_orig, restoration_orig);
             
     return energizer_equipment;
 } 
         
-void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
+void EnergizerEquipmentBuilder::createInternals(EnergizerEquipment* energizer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));

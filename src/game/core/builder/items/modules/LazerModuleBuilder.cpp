@@ -58,12 +58,12 @@ LazerModule* LazerModuleBuilder::createTemplate(INTLONGEST id) const
 LazerModule* LazerModuleBuilder::create(int damage_add, int radius_add) const
 {
     LazerModule* lazer_module = createTemplate();
-    CreateNewInternals(lazer_module, damage_add, radius_add);
+    createInternals(lazer_module, damage_add, radius_add);
         
     return lazer_module;
 } 
             
-void LazerModuleBuilder::CreateNewInternals(LazerModule* lazer_module, int damage_add, int radius_add) const
+void LazerModuleBuilder::createInternals(LazerModule* lazer_module, int damage_add, int radius_add) const
 {  
 //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);

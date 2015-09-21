@@ -60,12 +60,12 @@ Sector* SectorBuilder::GetNewSectorTemplate(INTLONGEST id) const
 Sector* SectorBuilder::GetNewSector(const SectorDescriptor& sector_descriptor) const
 {
     Sector* sector = GetNewSectorTemplate();
-    CreateNewInternals(sector, sector_descriptor);
+    createInternals(sector, sector_descriptor);
     
     return sector;
 } 
         
-void SectorBuilder::CreateNewInternals(Sector* sector, const SectorDescriptor& sector_descriptor) const
+void SectorBuilder::createInternals(Sector* sector, const SectorDescriptor& sector_descriptor) const
 {
     for(const auto& starsystem_descriptor: sector_descriptor.starsystem_descriptors)
     {  

@@ -41,5 +41,5 @@ class ContainerBuilder
         Container* create(int) const;
                                                      
     private:
-        void CreateNewInternals(Container*, jeti::TextureOb*, BaseItem*) const;
+        void createInternals(Container*, jeti::TextureOb*, BaseItem*) const;
 }; 

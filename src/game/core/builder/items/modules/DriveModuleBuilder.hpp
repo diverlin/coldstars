@@ -34,5 +34,5 @@ class DriveModuleBuilder
         DriveModule* create(int speed_add = NONE_ID, int hyper_add = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(DriveModule*, int, int) const;
+        void createInternals(DriveModule*, int, int) const;
 }; 

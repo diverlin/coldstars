@@ -53,12 +53,12 @@ SpaceStation* SpaceStationBuilder::createTemplate(INTLONGEST id) const
 SpaceStation* SpaceStationBuilder::create() const
 {
     SpaceStation* spacestation = createTemplate();
-    CreateNewInternals(spacestation);
+    createInternals(spacestation);
     
     return spacestation;
 }
 
-void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
+void SpaceStationBuilder::createInternals(SpaceStation* spacestation) const
 {
     //jeti::Mesh* mesh = nullptr;
     //jeti::TextureOb* texOb = nullptr;

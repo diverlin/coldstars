@@ -57,12 +57,12 @@ DroidModule* DroidModuleBuilder::createTemplate(INTLONGEST id) const
 DroidModule* DroidModuleBuilder::create(int repair_add) const
 {
     DroidModule* droid_module = createTemplate();
-    CreateNewInternals(droid_module, repair_add);
+    createInternals(droid_module, repair_add);
             
     return droid_module;
 } 
      
-void DroidModuleBuilder::CreateNewInternals(DroidModule* droid_module, int repair_add) const
+void DroidModuleBuilder::createInternals(DroidModule* droid_module, int repair_add) const
 {
 //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);

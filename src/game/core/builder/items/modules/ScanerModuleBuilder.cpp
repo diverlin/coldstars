@@ -57,12 +57,12 @@ ScanerModule* ScanerModuleBuilder::createTemplate(INTLONGEST id) const
 ScanerModule* ScanerModuleBuilder::create(int scan_add) const
 {
     ScanerModule* scaner_module = createTemplate();
-    CreateNewInternals(scaner_module, scan_add);
+    createInternals(scaner_module, scan_add);
         
     return scaner_module;
 } 
            
-void ScanerModuleBuilder::CreateNewInternals(ScanerModule* scaner_module, int scan_add) const
+void ScanerModuleBuilder::createInternals(ScanerModule* scaner_module, int scan_add) const
 {  
 //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);

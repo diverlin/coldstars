@@ -37,7 +37,7 @@ class StarSystemBuilder
         StarSystemBuilder(const StarSystemBuilder&) = delete;
         StarSystemBuilder& operator=(const StarSystemBuilder&) = delete;
         
-        void CreateNewInternals(StarSystem*, const StarSystemDescriptor&) const;
+        void createInternals(StarSystem*, const StarSystemDescriptor&) const;
         
         void CreateBackground(StarSystem*, int, int, int) const;
         void CreateStar(StarSystem*) const;

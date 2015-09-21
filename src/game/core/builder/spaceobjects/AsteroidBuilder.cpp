@@ -51,12 +51,12 @@ Asteroid* AsteroidBuilder::createTemplate(INTLONGEST id) const
 Asteroid* AsteroidBuilder::create() const
 {
     Asteroid* asteroid = createTemplate();
-    CreateNewInternals(asteroid);
+    createInternals(asteroid);
         
     return asteroid;
 } 
            
-void AsteroidBuilder::CreateNewInternals(Asteroid* asteroid) const
+void AsteroidBuilder::createInternals(Asteroid* asteroid) const
 {           
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_DEFORMED_ID);
     

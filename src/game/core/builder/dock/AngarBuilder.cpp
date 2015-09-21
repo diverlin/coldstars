@@ -53,12 +53,12 @@ Angar* AngarBuilder::createTemplate(INTLONGEST id) const
 Angar* AngarBuilder::create() const
 {
     Angar* angar = createTemplate();
-    CreateNewInternals(angar);
+    createInternals(angar);
 
     return angar;
 } 
 
-void AngarBuilder::CreateNewInternals(Angar* angar) const
+void AngarBuilder::createInternals(Angar* angar) const
 { 
     for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM; i++)
     {

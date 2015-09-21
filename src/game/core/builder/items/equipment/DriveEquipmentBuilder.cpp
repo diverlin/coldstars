@@ -62,12 +62,12 @@ DriveEquipment* DriveEquipmentBuilder::createTemplate(INTLONGEST id) const
 DriveEquipment* DriveEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
 {
     DriveEquipment* drive_equipment = createTemplate();
-    CreateNewInternals(drive_equipment, tech_level, race_id, speed_orig, hyper_orig);
+    createInternals(drive_equipment, tech_level, race_id, speed_orig, hyper_orig);
         
     return drive_equipment;
 }        
             
-void DriveEquipmentBuilder::CreateNewInternals(DriveEquipment* drive_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
+void DriveEquipmentBuilder::createInternals(DriveEquipment* drive_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));

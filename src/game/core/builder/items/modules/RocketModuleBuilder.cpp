@@ -56,12 +56,12 @@ RocketModule* RocketModuleBuilder::createTemplate(INTLONGEST id) const
 RocketModule* RocketModuleBuilder::create(int ammo_max_add, int damage_add, int radius_add) const
 {
     RocketModule* rocket_module = createTemplate();
-    CreateNewInternals(rocket_module, ammo_max_add, damage_add, radius_add);
+    createInternals(rocket_module, ammo_max_add, damage_add, radius_add);
 
     return rocket_module;
 } 
 
-void RocketModuleBuilder::CreateNewInternals(RocketModule* rocket_module, int ammo_max_add, int damage_add, int radius_add) const
+void RocketModuleBuilder::createInternals(RocketModule* rocket_module, int ammo_max_add, int damage_add, int radius_add) const
 {     
     //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);

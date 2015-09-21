@@ -36,5 +36,5 @@ class NpcBuilder
         Npc* create(TYPE::RACE, TYPE::ENTITY, TYPE::ENTITY) const;
                                        
     private:
-        void CreateNewInternals(Npc*, TYPE::RACE, TYPE::ENTITY, TYPE::ENTITY) const;
+        void createInternals(Npc*, TYPE::RACE, TYPE::ENTITY, TYPE::ENTITY) const;
 }; 

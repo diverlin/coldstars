@@ -166,7 +166,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescriptor& starsys
             for (int j=0; j<sattelitewarriors_num; j++)
             {      
                 Satellite* satellite = global::get().satelliteBuilder().create();
-                global::get().satelliteBuilder().EquipEquipment(satellite); // improove
+                global::get().satelliteBuilder().equip(satellite); // improove
             
                 {
                     TYPE::RACE npc_race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -205,7 +205,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescriptor& starsys
                 int weapons_num = meti::getRandInt(1, 5);
         
                 Ship* new_ship = global::get().shipBuilder().create(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
-                global::get().shipBuilder().EquipEquipment(new_ship); // improove
+                global::get().shipBuilder().equip(new_ship); // improove
                 //ShipBuilder::Instance().EquipModules(ship, tech_level); 
                 //ShipBuilder::Instance().EquipArtefacts(ship, tech_level); 
                 //ShipBuilder::Instance().EquipBomb(ship, tech_level); 
@@ -232,7 +232,7 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
         //int weapons_num = 5;
         
         SpaceStation* spacestation = global::get().spaceStationBuilder().create();
-        global::get().spaceStationBuilder().EquipEquipment(spacestation);  // improove
+        global::get().spaceStationBuilder().equip(spacestation);  // improove
 
         Npc* npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         spacestation->BindOwnerNpc(npc);
@@ -245,7 +245,7 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
         
         {  
             Satellite* satellite = global::get().satelliteBuilder().create();
-            global::get().satelliteBuilder().EquipEquipment(satellite);                   // improove
+            global::get().satelliteBuilder().equip(satellite);                   // improove
 
             Npc* new_npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
             satellite->BindOwnerNpc(new_npc);
@@ -292,7 +292,7 @@ void God::CreateShips(StarSystem* starsystem, int ship_num, TYPE::RACE npc_race_
         // VERY UGLY LOGIC END
 
         Ship* new_ship = global::get().shipBuilder().create(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
-        global::get().shipBuilder().EquipEquipment(new_ship); // improove
+        global::get().shipBuilder().equip(new_ship); // improove
 
         Npc* new_npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         new_ship->BindOwnerNpc(new_npc);

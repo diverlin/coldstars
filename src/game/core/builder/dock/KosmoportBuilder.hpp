@@ -34,7 +34,7 @@ class KosmoportBuilder
         Kosmoport* create() const;
                                                     
     private:
-        void CreateNewInternals(Kosmoport*) const;
+        void createInternals(Kosmoport*) const;
 }; 
 
     
