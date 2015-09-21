@@ -34,7 +34,7 @@ class BombBuilder
         Bomb* create(int damage = NONE_ID, int radius = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(Bomb*, int, int) const;
+        void createInternals(Bomb*, int, int) const;
 }; 
     
 

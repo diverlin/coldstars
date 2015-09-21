@@ -48,7 +48,7 @@ class ShipBuilder : public BaseVehicleBuilder
         Ship* create() const;
                        
     private:
-        void _CreateNewInternals(Ship*, TYPE::RACE, TYPE::ENTITY, int, int) const;
+        void createInternals(Ship*, TYPE::RACE, TYPE::ENTITY, int, int) const;
 }; 
 
         

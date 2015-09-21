@@ -59,12 +59,12 @@ ProtectorModule* ProtectorModuleBuilder::createTemplate(INTLONGEST id) const
 ProtectorModule* ProtectorModuleBuilder::create(int protection_add) const
 {
     ProtectorModule* protector_module = createTemplate();
-    CreateNewInternals(protector_module, protection_add);
+    createInternals(protector_module, protection_add);
 
     return protector_module;
 } 
 
-void ProtectorModuleBuilder::CreateNewInternals(ProtectorModule* protector_module, int protection_add) const
+void ProtectorModuleBuilder::createInternals(ProtectorModule* protector_module, int protection_add) const
 {     
     //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);

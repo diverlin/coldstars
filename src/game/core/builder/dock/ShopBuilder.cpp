@@ -50,12 +50,12 @@ Shop* ShopBuilder::createTemplate(INTLONGEST id) const
 Shop* ShopBuilder::create() const
 {
     Shop* shop = createTemplate();
-    CreateNewInternals(shop);
+    createInternals(shop);
 
     return shop;
 } 
 
-void ShopBuilder::CreateNewInternals(Shop* shop) const
+void ShopBuilder::createInternals(Shop* shop) const
 {    
     //jeti::TextureOb* textureOb_background  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SHOP_BACKGROUND_ID);
     //shop->SetTextureObBackground(textureOb_background);

@@ -69,13 +69,13 @@ Store* StoreBuilder::createTemplate(INTLONGEST id) const
 Store* StoreBuilder::create() const
 {
     Store* store = createTemplate();
-    CreateNewInternals(store);
+    createInternals(store);
     PutRandomEquipment(store);
 
     return store;
 } 
 
-void StoreBuilder::CreateNewInternals(Store* store) const
+void StoreBuilder::createInternals(Store* store) const
 {
     for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++)
     {

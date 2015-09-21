@@ -55,7 +55,7 @@ Container* ContainerBuilder::createTemplate(INTLONGEST id) const
 Container* ContainerBuilder::create(jeti::TextureOb* textureOb, BaseItem* item) const
 {
     Container* container = createTemplate();
-    CreateNewInternals(container, textureOb, item);
+    createInternals(container, textureOb, item);
         
     return container;
 } 
@@ -72,7 +72,7 @@ Container* ContainerBuilder::create(int mineral_ammount) const
     return container;
 } 
            
-void ContainerBuilder::CreateNewInternals(Container* container, jeti::TextureOb* textureOb, BaseItem* item) const
+void ContainerBuilder::createInternals(Container* container, jeti::TextureOb* textureOb, BaseItem* item) const
 {           
     LifeData data_life;
     data_life.armor = 1;

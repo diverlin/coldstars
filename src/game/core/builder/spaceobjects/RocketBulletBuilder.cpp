@@ -47,12 +47,12 @@ RocketBullet* RocketBulletBuilder::createTemplate(INTLONGEST id) const
 RocketBullet* RocketBulletBuilder::create(const BulletData& data_bullet) const
 {
     RocketBullet* rocket_bullet = createTemplate();
-    CreateNewInternals(rocket_bullet, data_bullet);    
+    createInternals(rocket_bullet, data_bullet);
         
     return rocket_bullet;
 }
 
-void RocketBulletBuilder::CreateNewInternals(RocketBullet* rocket_bullet, const BulletData& data_bullet) const
+void RocketBulletBuilder::createInternals(RocketBullet* rocket_bullet, const BulletData& data_bullet) const
 {
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 

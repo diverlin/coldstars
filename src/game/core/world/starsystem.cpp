@@ -892,7 +892,7 @@ void StarSystem::ShipManager_s(unsigned int num)
 
         Npc* new_pnpc = global::get().npcBuilder().create(prace_id, psubtype_id, psubsubtype_id);
         Ship* new_pship = global::get().shipBuilder().create(prace_id, psubtype_id, size_id, weapons_num);
-        global::get().shipBuilder().EquipEquipment(new_pship);   // improove
+        global::get().shipBuilder().equip(new_pship);   // improove
 
         new_pship->BindOwnerNpc(new_pnpc);
 

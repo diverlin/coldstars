@@ -36,5 +36,5 @@ class ProtectorEquipmentBuilder
         ProtectorEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int protection_orig = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(ProtectorEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
+        void createInternals(ProtectorEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
 }; 

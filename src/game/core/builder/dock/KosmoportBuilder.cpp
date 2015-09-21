@@ -54,12 +54,12 @@ Kosmoport* KosmoportBuilder::createTemplate(INTLONGEST id) const
 Kosmoport* KosmoportBuilder::create() const
 {
     Kosmoport* kosmoport = createTemplate();
-    CreateNewInternals(kosmoport);
+    createInternals(kosmoport);
         
         return kosmoport;
 } 
            
-void KosmoportBuilder::CreateNewInternals(Kosmoport* kosmoport) const
+void KosmoportBuilder::createInternals(Kosmoport* kosmoport) const
 {
     kosmoport->BindAngar(global::get().angarBuilder().create());
     kosmoport->BindStore(global::get().storeBuilder().create());

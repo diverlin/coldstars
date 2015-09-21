@@ -34,5 +34,5 @@ class BlackHoleBuilder
         BlackHole* create() const;
                                      
     private:
-        void CreateNewInternals(BlackHole*) const;
+        void createInternals(BlackHole*) const;
 }; 

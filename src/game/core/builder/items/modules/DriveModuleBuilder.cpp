@@ -58,12 +58,12 @@ DriveModule* DriveModuleBuilder::createTemplate(INTLONGEST id) const
 DriveModule* DriveModuleBuilder::create(int speed_add, int hyper_add) const
 {
     DriveModule* drive_module = createTemplate();
-    CreateNewInternals(drive_module, speed_add, hyper_add);
+    createInternals(drive_module, speed_add, hyper_add);
 
     return drive_module;
 } 
 
-void DriveModuleBuilder::CreateNewInternals(DriveModule* drive_module, int speed_add, int hyper_add) const
+void DriveModuleBuilder::createInternals(DriveModule* drive_module, int speed_add, int hyper_add) const
 {     
     //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);

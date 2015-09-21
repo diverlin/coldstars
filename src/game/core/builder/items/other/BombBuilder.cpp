@@ -54,12 +54,12 @@ Bomb* BombBuilder::createTemplate(INTLONGEST id) const
 Bomb* BombBuilder::create(int damage, int radius) const
 {
     Bomb* bomb = createTemplate();
-    CreateNewInternals(bomb, damage, radius);
+    createInternals(bomb, damage, radius);
 
     return bomb;
 } 
 
-void BombBuilder::CreateNewInternals(Bomb* bomb, int damage, int radius) const
+void BombBuilder::createInternals(Bomb* bomb, int damage, int radius) const
 {     
     //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID);

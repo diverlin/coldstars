@@ -53,7 +53,7 @@ Ship* ShipBuilder::createTemplate(INTLONGEST id) const
 Ship* ShipBuilder::create(TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const
 {
     Ship* ship = createTemplate();
-    _CreateNewInternals(ship, race_id, subsubtype_id, size_id, weapons_num);
+    createInternals(ship, race_id, subsubtype_id, size_id, weapons_num);
     
     return ship;
 }
@@ -66,12 +66,12 @@ Ship* ShipBuilder::create() const
     int weapons_num = size_id;
             
     Ship* ship = createTemplate();
-    _CreateNewInternals(ship, race_id, subsubtype_id, size_id, weapons_num);
+    createInternals(ship, race_id, subsubtype_id, size_id, weapons_num);
     
     return ship;
 }
 
-void ShipBuilder::_CreateNewInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const
+void ShipBuilder::createInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const
 {
     //jeti::Mesh* mesh = nullptr;
     //jeti::TextureOb* texOb = nullptr;

@@ -58,12 +58,12 @@ RadarModule* RadarModuleBuilder::createTemplate(INTLONGEST id) const
 RadarModule* RadarModuleBuilder::create(int radius_add) const
 {
     RadarModule* radar_module = createTemplate();
-    CreateNewInternals(radar_module, radius_add);    
+    createInternals(radar_module, radius_add);
         
     return radar_module;
 } 
             
-void RadarModuleBuilder::CreateNewInternals(RadarModule* radar_module, int radius_add) const
+void RadarModuleBuilder::createInternals(RadarModule* radar_module, int radius_add) const
 {  
 //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);

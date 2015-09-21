@@ -39,7 +39,7 @@ class AngarBuilder
         Angar* create() const;
 
     private:
-        void CreateNewInternals(Angar*) const;
+        void createInternals(Angar*) const;
 }; 
 
 

@@ -61,12 +61,12 @@ LazerEquipment* LazerEquipmentBuilder::createTemplate(INTLONGEST id) const
 LazerEquipment* LazerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {
     LazerEquipment* lazer_equipment = createTemplate();
-    CreateNewInternals(lazer_equipment, tech_level, race_id, damage_orig, radius_orig);
+    createInternals(lazer_equipment, tech_level, race_id, damage_orig, radius_orig);
 
     return lazer_equipment;
 } 
 
-void LazerEquipmentBuilder::CreateNewInternals(LazerEquipment* lazer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
+void LazerEquipmentBuilder::createInternals(LazerEquipment* lazer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));

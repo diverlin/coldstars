@@ -59,12 +59,12 @@ BakEquipment* BakEquipmentBuilder::createTemplate(INTLONGEST id) const
 BakEquipment* BakEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int fuel_max) const
 {
     BakEquipment* bak_equipment = createTemplate();
-    CreateNewInternals(bak_equipment, tech_level, race_id, fuel_max);
+    createInternals(bak_equipment, tech_level, race_id, fuel_max);
     
     return bak_equipment;
 }
                           
-void BakEquipmentBuilder::CreateNewInternals(BakEquipment* bak_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int fuel_max_orig) const
+void BakEquipmentBuilder::createInternals(BakEquipment* bak_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int fuel_max_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));

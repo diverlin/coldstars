@@ -39,7 +39,7 @@ class GalaxyBuilder
         GalaxyBuilder(const GalaxyBuilder&) = delete;
         GalaxyBuilder& operator=(const GalaxyBuilder&) = delete;
         
-        void CreateNewInternals(Galaxy*, const GalaxyDescriptor&) const;
+        void createInternals(Galaxy*, const GalaxyDescriptor&) const;
 }; 
     
 

@@ -59,12 +59,12 @@ NatureLand* NatureLandBuilder::createTemplate(INTLONGEST id) const
 NatureLand* NatureLandBuilder::create() const
 {
     NatureLand* natureland = createTemplate();
-    CreateNewInternals(natureland);
+    createInternals(natureland);
         
     return natureland;
 } 
            
-void NatureLandBuilder::CreateNewInternals(NatureLand* natureland) const
+void NatureLandBuilder::createInternals(NatureLand* natureland) const
 {
     //natureland->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::NATURELAND_BACKGROUND_ID));
     

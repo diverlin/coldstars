@@ -55,12 +55,12 @@ BlackHole* BlackHoleBuilder::createTemplate(INTLONGEST id) const
 BlackHole* BlackHoleBuilder::create() const
 {
     BlackHole* blackhole = createTemplate();
-    CreateNewInternals(blackhole);
+    createInternals(blackhole);
 
     return blackhole;
 } 
 
-void BlackHoleBuilder::CreateNewInternals(BlackHole* blackhole) const
+void BlackHoleBuilder::createInternals(BlackHole* blackhole) const
 {           
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     

@@ -34,5 +34,5 @@ class RadarModuleBuilder
         RadarModule* create(int radius_add = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(RadarModule*, int) const;
+        void createInternals(RadarModule*, int) const;
 }; 

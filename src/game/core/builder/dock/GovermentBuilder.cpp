@@ -49,12 +49,12 @@ Goverment* GovermentBuilder::createTemplate(INTLONGEST id) const
 Goverment* GovermentBuilder::create() const
 {
     Goverment* goverment = createTemplate();
-    CreateNewInternals(goverment);
+    createInternals(goverment);
 
     return goverment;
 } 
 
-void GovermentBuilder::CreateNewInternals(Goverment* goverment) const
+void GovermentBuilder::createInternals(Goverment* goverment) const
 {
     //jeti::TextureOb* textureOb_face  = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID);
     //goverment->SetTextureObFace(textureOb_face);

@@ -36,5 +36,5 @@ class FreezerEquipmentBuilder
         FreezerEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int freeze_orig = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(FreezerEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
+        void createInternals(FreezerEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
 }; 

@@ -182,7 +182,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
     //{
         //offset = +2.0;
     //RocketBuilder::Instance().CreateNewRocket();
-    //RocketBuilder::Instance().CreateNewInternals(data_bullet);    
+    //RocketBuilder::Instance().createInternals(data_bullet);
         //slot->GetOwnerVehicle()->starsystem()->Add(RocketBuilder::Instance().GetRocket(), slot, offset);
         //num++;
     //}
@@ -191,7 +191,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
     //{
         //offset = -2.0;
     //RocketBuilder::Instance().CreateNewRocket();
-    //RocketBuilder::Instance().CreateNewInternals(data_bullet);    
+    //RocketBuilder::Instance().createInternals(data_bullet);
         //slot->GetOwnerVehicle()->starsystem()->Add(RocketBuilder::Instance().GetRocket(), slot, offset);
         //num++;
     //}        

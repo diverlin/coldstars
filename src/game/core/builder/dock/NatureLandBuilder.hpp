@@ -33,7 +33,7 @@ class NatureLandBuilder
         NatureLand* create() const;
                                                     
     private:
-        void CreateNewInternals(NatureLand*) const;
+        void createInternals(NatureLand*) const;
 }; 
 
     

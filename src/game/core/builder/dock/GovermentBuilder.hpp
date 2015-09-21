@@ -33,7 +33,7 @@ class GovermentBuilder
         Goverment* create() const;
                                                     
     private:
-        void CreateNewInternals(Goverment*) const;
+        void createInternals(Goverment*) const;
 }; 
    
     

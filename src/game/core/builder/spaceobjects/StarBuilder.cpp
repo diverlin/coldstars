@@ -50,12 +50,12 @@ Star* StarBuilder::createTemplate(INTLONGEST id) const
 Star* StarBuilder::create() const
 {
     Star* star = createTemplate();
-    CreateNewInternals(star);
+    createInternals(star);
         
     return star;
 } 
           
-void StarBuilder::CreateNewInternals(Star* star) const
+void StarBuilder::createInternals(Star* star) const
 {     
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     

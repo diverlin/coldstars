@@ -47,6 +47,6 @@ class SpaceStationBuilder : public BaseVehicleBuilder
         SpaceStation* create() const;
        
     private:
-        void CreateNewInternals(SpaceStation*) const;
+        void createInternals(SpaceStation*) const;
 }; 
 

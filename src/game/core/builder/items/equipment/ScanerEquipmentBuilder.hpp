@@ -36,5 +36,5 @@ class ScanerEquipmentBuilder
         ScanerEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int scan_orig = NONE_ID) const;
 
     private:
-        void CreateNewInternals(ScanerEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
+        void createInternals(ScanerEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
 }; 

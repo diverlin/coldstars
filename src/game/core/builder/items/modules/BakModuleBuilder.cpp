@@ -59,12 +59,12 @@ BakModule* BakModuleBuilder::createTemplate(INTLONGEST id) const
 BakModule* BakModuleBuilder::create(int fuel_max_add) const
 {
     BakModule* bak_module = createTemplate();
-    CreateNewInternals(bak_module, fuel_max_add);
+    createInternals(bak_module, fuel_max_add);
       
     return bak_module;
 } 
              
-void BakModuleBuilder::CreateNewInternals(BakModule* bak_module, int fuel_max_add) const
+void BakModuleBuilder::createInternals(BakModule* bak_module, int fuel_max_add) const
 { 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);

@@ -58,12 +58,12 @@ ProtectorEquipment* ProtectorEquipmentBuilder::createTemplate(INTLONGEST id) con
 ProtectorEquipment* ProtectorEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int protection_orig) const
 {
     ProtectorEquipment* protector_equipment = createTemplate();
-    CreateNewInternals(protector_equipment, tech_level, race_id, protection_orig);
+    createInternals(protector_equipment, tech_level, race_id, protection_orig);
         
     return protector_equipment;
 } 
          
-void ProtectorEquipmentBuilder::CreateNewInternals(ProtectorEquipment* protector_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int protection_orig) const
+void ProtectorEquipmentBuilder::createInternals(ProtectorEquipment* protector_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int protection_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));

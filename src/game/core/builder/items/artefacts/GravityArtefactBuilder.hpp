@@ -34,6 +34,6 @@ class GravityArtefactBuilder
         GravityArtefact* create(int gravity = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(GravityArtefact*, int) const;
+        void createInternals(GravityArtefact*, int) const;
 }; 
      

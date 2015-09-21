@@ -59,12 +59,12 @@ Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(INTLONGEST id) const
 Galaxy* GalaxyBuilder::GetNewGalaxy(const GalaxyDescriptor& galaxy_descriptor) const
 {
     Galaxy* galaxy = GetNewGalaxyTemplate();
-    CreateNewInternals(galaxy, galaxy_descriptor);
+    createInternals(galaxy, galaxy_descriptor);
     
     return galaxy;
 } 
             
-void GalaxyBuilder::CreateNewInternals(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descriptor) const
+void GalaxyBuilder::createInternals(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descriptor) const
 {     
     for(const auto& sector_descriptor: galaxy_descriptor.sector_descriptors) {
         glm::vec3 center = meti::getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);

@@ -34,5 +34,5 @@ class ShopBuilder
         Shop* create() const;
                                                     
     private: 
-        void CreateNewInternals(Shop*) const;
+        void createInternals(Shop*) const;
 }; 

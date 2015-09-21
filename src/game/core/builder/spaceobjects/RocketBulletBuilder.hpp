@@ -36,5 +36,5 @@ class RocketBulletBuilder
         RocketBullet* create(const BulletData&) const;
                    
     private:
-        void CreateNewInternals(RocketBullet*, const BulletData&) const; 
+        void createInternals(RocketBullet*, const BulletData&) const;
 }; 

@@ -35,5 +35,5 @@ class SatelliteBuilder : public BaseVehicleBuilder
         Satellite* create() const;
        
     private:
-        void CreateNewInternals(Satellite*) const; 
+        void createInternals(Satellite*) const;
 }; 

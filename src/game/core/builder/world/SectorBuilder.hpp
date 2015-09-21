@@ -39,7 +39,7 @@ class SectorBuilder
         SectorBuilder(const SectorBuilder&) = delete;
         SectorBuilder& operator=(const SectorBuilder&) = delete;
         
-        void CreateNewInternals(Sector*, const SectorDescriptor&) const;
+        void createInternals(Sector*, const SectorDescriptor&) const;
 }; 
 
 

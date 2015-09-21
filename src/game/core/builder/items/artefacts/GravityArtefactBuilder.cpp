@@ -61,12 +61,12 @@ GravityArtefact* GravityArtefactBuilder::createTemplate(INTLONGEST id) const
 GravityArtefact* GravityArtefactBuilder::create(int gravity) const
 {
     GravityArtefact* gravity_artefact = createTemplate();
-    CreateNewInternals(gravity_artefact, gravity);    
+    createInternals(gravity_artefact, gravity);
         
     return gravity_artefact;
 } 
         
-void GravityArtefactBuilder::CreateNewInternals(GravityArtefact* gravity_artefact, int gravity) const
+void GravityArtefactBuilder::createInternals(GravityArtefact* gravity_artefact, int gravity) const
 {
 //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //    jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BAK_EQUIPMENT_ID);

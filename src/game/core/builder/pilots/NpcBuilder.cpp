@@ -58,12 +58,12 @@ Npc* NpcBuilder::createTemplate(TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype
 Npc* NpcBuilder::create(TYPE::RACE race_id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id) const
 {
     Npc* npc = createTemplate(subtype_id, subsubtype_id);
-    CreateNewInternals(npc, race_id, subtype_id, subsubtype_id);  
+    createInternals(npc, race_id, subtype_id, subsubtype_id);
     
     return npc;
 }
             
-void NpcBuilder::CreateNewInternals(Npc* npc, TYPE::RACE race_id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id) const
+void NpcBuilder::createInternals(Npc* npc, TYPE::RACE race_id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id) const
 {        
     //LifeData data_life;
     

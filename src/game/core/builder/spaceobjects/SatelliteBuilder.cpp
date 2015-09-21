@@ -49,12 +49,12 @@ Satellite* SatelliteBuilder::createTemplate(INTLONGEST id) const
 Satellite* SatelliteBuilder::create() const
 {
     Satellite* satellite = createTemplate();
-    CreateNewInternals(satellite);
+    createInternals(satellite);
     
     return satellite;
 }
 
-void SatelliteBuilder::CreateNewInternals(Satellite* satellite) const 
+void SatelliteBuilder::createInternals(Satellite* satellite) const
 {
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SATELLITE_ID);

@@ -70,12 +70,12 @@ StarSystem* StarSystemBuilder::GetNewStarSystemTemplate(INTLONGEST id) const
 StarSystem* StarSystemBuilder::GetNewStarSystem(const StarSystemDescriptor& starsystem_descriptor) const
 {
     StarSystem* starsystem = GetNewStarSystemTemplate();
-    CreateNewInternals(starsystem, starsystem_descriptor);
+    createInternals(starsystem, starsystem_descriptor);
     
     return starsystem;
 } 
             
-void StarSystemBuilder::CreateNewInternals(StarSystem* starsystem, const StarSystemDescriptor& starsystem_descriptor) const
+void StarSystemBuilder::createInternals(StarSystem* starsystem, const StarSystemDescriptor& starsystem_descriptor) const
 {
     starsystem->GetAsteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
     CreateStar(starsystem);

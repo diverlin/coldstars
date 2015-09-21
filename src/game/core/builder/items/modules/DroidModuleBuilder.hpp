@@ -34,5 +34,5 @@ class DroidModuleBuilder
         DroidModule* create(int repair_add = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(DroidModule*, int) const;
+        void createInternals(DroidModule*, int) const;
 }; 

@@ -36,5 +36,5 @@ class DroidEquipmentBuilder
         DroidEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int repair_orig = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(DroidEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
+        void createInternals(DroidEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
 }; 

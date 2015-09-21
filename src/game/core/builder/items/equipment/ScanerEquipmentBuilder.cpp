@@ -62,12 +62,12 @@ ScanerEquipment* ScanerEquipmentBuilder::createTemplate(INTLONGEST id) const
 ScanerEquipment* ScanerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int scan_orig) const
 {
     ScanerEquipment* scaner_equipment = createTemplate();
-    CreateNewInternals(scaner_equipment, tech_level, race_id, scan_orig);
+    createInternals(scaner_equipment, tech_level, race_id, scan_orig);
         
     return scaner_equipment;
 } 
             
-void ScanerEquipmentBuilder::CreateNewInternals(ScanerEquipment* scaner_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int scan_orig) const
+void ScanerEquipmentBuilder::createInternals(ScanerEquipment* scaner_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int scan_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));

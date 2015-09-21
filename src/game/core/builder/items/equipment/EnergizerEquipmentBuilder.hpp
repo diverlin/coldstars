@@ -39,7 +39,7 @@ class EnergizerEquipmentBuilder
         EnergizerEquipmentBuilder(const EnergizerEquipmentBuilder&) = delete;
         EnergizerEquipmentBuilder& operator=(const EnergizerEquipmentBuilder&) = delete;
 
-        void CreateNewInternals(EnergizerEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int, int) const;
+        void createInternals(EnergizerEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int, int) const;
 }; 
 
     

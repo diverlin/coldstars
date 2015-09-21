@@ -34,5 +34,5 @@ class RocketModuleBuilder
         RocketModule* create(int ammo_max_add = NONE_ID, int damage_add = NONE_ID, int radius_add = NONE_ID) const;
                                      
     private:
-        void CreateNewInternals(RocketModule*, int, int, int) const;
+        void createInternals(RocketModule*, int, int, int) const;
 }; 
