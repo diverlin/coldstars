@@ -17,8 +17,7 @@
 */
 
 
-#ifndef BOMBBUILDER_HPP
-#define BOMBBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -28,21 +27,15 @@ class Bomb;
 class BombBuilder
 {
     public:
-        static BombBuilder& Instance();
+        BombBuilder();
         ~BombBuilder();
 
-        Bomb* GetNewBombTemplate(INTLONGEST id = NONE_ID) const; 
-        Bomb* GetNewBomb(int damage = NONE_ID, int radius = NONE_ID) const;
+        Bomb* createTemplate(INTLONGEST id = NONE_ID) const;
+        Bomb* create(int damage = NONE_ID, int radius = NONE_ID) const;
                                      
     private:
-        BombBuilder() {};
-        BombBuilder(const BombBuilder&) = delete;
-        BombBuilder& operator=(const BombBuilder&) = delete;
-
         void CreateNewInternals(Bomb*, int, int) const;
 }; 
-
-#endif 
     
 
         

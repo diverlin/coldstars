@@ -17,8 +17,7 @@
 */
 
 
-#ifndef RADARMODULEBUILDER_HPP
-#define RADARMODULEBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -28,23 +27,12 @@ class RadarModule;
 class RadarModuleBuilder
 {
     public:
-        static RadarModuleBuilder& Instance();
+        RadarModuleBuilder();
         ~RadarModuleBuilder();
 
-        RadarModule* GetNewRadarModuleTemplate(INTLONGEST id = NONE_ID) const; 
-        RadarModule* GetNewRadarModule(int radius_add = NONE_ID) const;
+        RadarModule* createTemplate(INTLONGEST id = NONE_ID) const;
+        RadarModule* create(int radius_add = NONE_ID) const;
                                      
     private:
-        RadarModuleBuilder() {};
-        RadarModuleBuilder(const RadarModuleBuilder&) = delete;
-        RadarModuleBuilder& operator=(const RadarModuleBuilder&) = delete;
-
         void CreateNewInternals(RadarModule*, int) const;
 }; 
-
-#endif 
-    
-
-        
-
-

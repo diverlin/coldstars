@@ -16,8 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef SHIPBUILDER_HPP
-#define SHIPBUILDER_HPP
+#pragma once
 
 
 #include <builder/spaceobjects/BaseVehicleBuilder.hpp>
@@ -41,23 +40,16 @@ namespace ENTITY
 class ShipBuilder : public BaseVehicleBuilder
 {
     public:
-        static ShipBuilder& Instance();
+        ShipBuilder();
         ~ShipBuilder();
         
-        Ship* GetNewShipTemplate(INTLONGEST id = NONE_ID) const;
-        Ship* GetNewShip(TYPE::RACE, TYPE::ENTITY, int, int) const;        
-        Ship* GetNewShip() const;   
+        Ship* createTemplate(INTLONGEST id = NONE_ID) const;
+        Ship* create(TYPE::RACE, TYPE::ENTITY, int, int) const;
+        Ship* create() const;
                        
     private:
-        ShipBuilder() {};
-        ShipBuilder(const ShipBuilder&) = delete; 
-        ShipBuilder& operator=(const ShipBuilder&) = delete;
-            
         void _CreateNewInternals(Ship*, TYPE::RACE, TYPE::ENTITY, int, int) const;
 }; 
-
-#endif 
-    
 
         
 

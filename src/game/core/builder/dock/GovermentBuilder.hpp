@@ -16,9 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-                            
-#ifndef GOVERMENTBUILDER_HPP
-#define GOVERMENTBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -28,21 +26,16 @@ class Goverment;
 class GovermentBuilder
 {
     public:
-        static GovermentBuilder& Instance();
+        GovermentBuilder();
         ~GovermentBuilder();
         
-        Goverment* GetNewGovermentTemplate(INTLONGEST id = NONE_ID) const; 
-        Goverment* GetNewGoverment() const;
+        Goverment* createTemplate(INTLONGEST id = NONE_ID) const;
+        Goverment* create() const;
                                                     
     private:
-        GovermentBuilder() {};
-        GovermentBuilder(const GovermentBuilder&) = delete;
-        GovermentBuilder& operator=(const GovermentBuilder&) = delete;
-        
         void CreateNewInternals(Goverment*) const;
 }; 
    
-#endif 
     
 
         

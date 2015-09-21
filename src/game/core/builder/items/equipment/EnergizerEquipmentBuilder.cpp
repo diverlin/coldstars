@@ -16,6 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+
 #include "EnergizerEquipmentBuilder.hpp"
 #include <items/equipment/EnergizerEquipment.hpp>
 #include <managers/EntitiesManager.hpp>
@@ -35,30 +36,22 @@
 
 #include <meti/RandUtils.hpp>
 
-EnergizerEquipmentBuilder& EnergizerEquipmentBuilder::Instance()
-{
-    static EnergizerEquipmentBuilder instance;
-    return instance;
-}
+EnergizerEquipmentBuilder::EnergizerEquipmentBuilder()
+{}
 
 EnergizerEquipmentBuilder::~EnergizerEquipmentBuilder()
 {}
 
-EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipmentTemplate(INTLONGEST id) const
+EnergizerEquipment* EnergizerEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
     EnergizerEquipment* energizer_equipment = nullptr;
-
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-     try 
-    { 
+    try {
         energizer_equipment = new EnergizerEquipment(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     global::get().entitiesManager().RegisterEntity(energizer_equipment);
@@ -66,9 +59,9 @@ EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipmentTemplate(
     return energizer_equipment;
 } 
     
-EnergizerEquipment* EnergizerEquipmentBuilder::GetNewEnergizerEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
+EnergizerEquipment* EnergizerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
 {
-    EnergizerEquipment* energizer_equipment = GetNewEnergizerEquipmentTemplate();
+    EnergizerEquipment* energizer_equipment = createTemplate();
     CreateNewInternals(energizer_equipment, tech_level, race_id, energy_max_orig, restoration_orig);
             
     return energizer_equipment;
@@ -109,5 +102,3 @@ void EnergizerEquipmentBuilder::CreateNewInternals(EnergizerEquipment* energizer
     energizer_equipment->UpdateProperties();
     energizer_equipment->CountPrice();
 }
-
-

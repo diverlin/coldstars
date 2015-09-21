@@ -16,9 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-#ifndef ASTEROIDBUILDER_HPP
-#define ASTEROIDBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -40,23 +38,12 @@ namespace ENTITY
 class AsteroidBuilder
 {
     public:
-        static AsteroidBuilder& Instance();
+        AsteroidBuilder();
         ~AsteroidBuilder();
 
-        Asteroid* GetNewAsteroidTemplate(INTLONGEST id = NONE_ID) const; 
-        Asteroid* GetNewAsteroid() const;
+        Asteroid* createTemplate(INTLONGEST id = NONE_ID) const;
+        Asteroid* create() const;
                                      
     private:
-        AsteroidBuilder() {};
-        AsteroidBuilder(const AsteroidBuilder&) = delete;
-        AsteroidBuilder& operator=(const AsteroidBuilder&) = delete;
-
         void CreateNewInternals(Asteroid*) const;
 }; 
-
-#endif 
-    
-
-        
-
-

@@ -19,20 +19,9 @@
 
 #pragma once
 
-#include <types/MyInt.hpp>
-
-class DroidModule;
-
-
-class DroidModuleBuilder
-{
-    public:
-        DroidModuleBuilder();
-        ~DroidModuleBuilder();
-
-        DroidModule* createTemplate(INTLONGEST id = NONE_ID) const;
-        DroidModule* create(int repair_add = NONE_ID) const;
-                                     
-    private:
-        void CreateNewInternals(DroidModule*, int) const;
-}; 
+//#include <types/EntityTypes.hpp>
+//#include <types/GuiTypes.hpp>
+     
+//TYPE::GUI getGuiItemSlotType(TYPE::ENTITY);
+//TYPE::GUI getGuiItemSlotSelectorType(TYPE::ENTITY);
+       

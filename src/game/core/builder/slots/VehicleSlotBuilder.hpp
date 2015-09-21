@@ -17,18 +17,15 @@
 */
 
 
-#ifndef VEHICLESLOTBUILDER_HPP
-#define VEHICLESLOTBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 #include <types/EntityTypes.hpp>
 
 class VehicleSlot;
 
-
 VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY, INTLONGEST id = NONE_ID);
 
-#endif 
     
 
         

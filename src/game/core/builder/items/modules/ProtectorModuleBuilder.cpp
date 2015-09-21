@@ -33,55 +33,44 @@
 
 #include <meti/RandUtils.hpp>
 
-ProtectorModuleBuilder& ProtectorModuleBuilder::Instance()
-{
-    static ProtectorModuleBuilder instance;
-    return instance;
-}
+ProtectorModuleBuilder::ProtectorModuleBuilder()
+{}
 
 ProtectorModuleBuilder::~ProtectorModuleBuilder()
 {}
 
-ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModuleTemplate(INTLONGEST id) const
+ProtectorModule* ProtectorModuleBuilder::createTemplate(INTLONGEST id) const
 {
     ProtectorModule* protector_module = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         protector_module = new ProtectorModule(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    
     global::get().entitiesManager().RegisterEntity(protector_module);
     
     return protector_module;
 } 
 
-ProtectorModule* ProtectorModuleBuilder::GetNewProtectorModule(int protection_add) const
+ProtectorModule* ProtectorModuleBuilder::create(int protection_add) const
 {
-    ProtectorModule* protector_module = GetNewProtectorModuleTemplate();
+    ProtectorModule* protector_module = createTemplate();
     CreateNewInternals(protector_module, protection_add);
-        
-        return protector_module;
+
+    return protector_module;
 } 
-            
+
 void ProtectorModuleBuilder::CreateNewInternals(ProtectorModule* protector_module, int protection_add) const
 {     
-//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-//    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
+    //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
     protection_add = meti::getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
     
-    protector_module->SetParentSubTypeId(TYPE::ENTITY::PROTECTOR_EQUIPMENT_ID);    
+    protector_module->SetParentSubTypeId(TYPE::ENTITY::PROTECTOR_EQUIPMENT_ID);
     //alpitodorender protector_module->SetRenderData(mesh, texOb, texOb->size());
     protector_module->SetProtectionAdd(protection_add);
 }
-
-

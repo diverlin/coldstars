@@ -36,29 +36,22 @@
 
 #include <meti/RandUtils.hpp>
 
-DriveEquipmentBuilder& DriveEquipmentBuilder::Instance()
-{
-    static DriveEquipmentBuilder instance;
-    return instance;
-}
+DriveEquipmentBuilder::DriveEquipmentBuilder()
+{}
 
 DriveEquipmentBuilder::~DriveEquipmentBuilder()
 {}
 
-DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipmentTemplate(INTLONGEST id) const
+DriveEquipment* DriveEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
     DriveEquipment* drive_equipment = nullptr;
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         drive_equipment = new DriveEquipment(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     global::get().entitiesManager().RegisterEntity(drive_equipment);
@@ -66,9 +59,9 @@ DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipmentTemplate(INTLONGEST i
     return drive_equipment;
 } 
         
-DriveEquipment* DriveEquipmentBuilder::GetNewDriveEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
+DriveEquipment* DriveEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
 {
-    DriveEquipment* drive_equipment = GetNewDriveEquipmentTemplate();
+    DriveEquipment* drive_equipment = createTemplate();
     CreateNewInternals(drive_equipment, tech_level, race_id, speed_orig, hyper_orig);
         
     return drive_equipment;

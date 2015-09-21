@@ -27,30 +27,22 @@
 #include <dock/Angar.hpp>
 
 
-AngarBuilder& AngarBuilder::Instance()
-{
-    static AngarBuilder instance;
-    return instance;
-}
+AngarBuilder::AngarBuilder()
+{}
 
 AngarBuilder::~AngarBuilder()
 {}
 
-Angar* AngarBuilder::GetNewAngarTemplate(INTLONGEST id) const
+Angar* AngarBuilder::createTemplate(INTLONGEST id) const
 {
     Angar* angar = nullptr;
-    
-    if (id == NONE_ID) 
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
-        
-    try 
-    { 
-        angar = new Angar(id); 
-    }
-    catch(std::bad_alloc)
-    {
+
+    try {
+        angar = new Angar(id);
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     global::get().entitiesManager().RegisterEntity(angar);
@@ -58,35 +50,35 @@ Angar* AngarBuilder::GetNewAngarTemplate(INTLONGEST id) const
     return angar;
 } 
 
-Angar* AngarBuilder::GetNewAngar() const
+Angar* AngarBuilder::create() const
 {
-    Angar* angar = GetNewAngarTemplate();
+    Angar* angar = createTemplate();
     CreateNewInternals(angar);
-        
+
     return angar;
 } 
-            
+
 void AngarBuilder::CreateNewInternals(Angar* angar) const
 { 
-     for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM; i++)
-     {
-         VehicleSlot* vehicle_slot = GetNewVehicleSlot(TYPE::ENTITY::VEHICLE_MILITARY_SLOT_ID); 
-         angar->AddVehicleSlot(vehicle_slot);
+    for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM; i++)
+    {
+        VehicleSlot* vehicle_slot = GetNewVehicleSlot(TYPE::ENTITY::VEHICLE_MILITARY_SLOT_ID);
+        angar->AddVehicleSlot(vehicle_slot);
     }
 
-     for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++)
-     {
-         VehicleSlot* vehicle_slot = GetNewVehicleSlot(TYPE::ENTITY::VEHICLE_VISITORS_SLOT_ID); 
-         angar->AddVehicleSlot(vehicle_slot);
+    for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++)
+    {
+        VehicleSlot* vehicle_slot = GetNewVehicleSlot(TYPE::ENTITY::VEHICLE_VISITORS_SLOT_ID);
+        angar->AddVehicleSlot(vehicle_slot);
     }
-        
+
     for (unsigned int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++)
-     {
-         ItemSlot* cargo_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID); 
+    {
+        ItemSlot* cargo_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
         angar->AddItemSlot(cargo_slot);
     }
     
     //angar->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ANGAR_BACKGROUND_ID));
 }
 
-      
+

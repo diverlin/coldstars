@@ -30,6 +30,10 @@
 #include <world/galaxy.hpp>
 #include <struct/GalaxyDescriptor.hpp>
 
+GalaxyDescriptor getGalaxyDescriptor() {
+
+
+}
 
 bool Game::run() const
 {
@@ -48,9 +52,10 @@ bool Game::run() const
         for (int j=0; j<sector_descriptor.starsystem_num; j++) {
             StarSystemDescriptor starsystem_descriptor;
             starsystem_descriptor.planet_num = 5;
-            starsystem_descriptor.spacestation_num = 3;
+            starsystem_descriptor.spacestation_num = 0;
             starsystem_descriptor.asteroid_num = 3;
 
+            starsystem_descriptor.allow_satellites    = false;
             starsystem_descriptor.allow_ships         = false;
 
             starsystem_descriptor.allow_ship_ranger   = false;
@@ -62,12 +67,10 @@ bool Game::run() const
         }
         galaxy_descriptor.sector_descriptors.push_back(sector_descriptor);
     }
-
     Galaxy* galaxy = god.createWorld(galaxy_descriptor);
 
     /// game loop
-    while (m_isRunning)
-    {                   
+    while (m_isRunning) {
         turnTimer.update();
         god.update(galaxy, gameDate);
         galaxy->Update(turnTimer.getStopTurnTimer());

@@ -17,10 +17,10 @@
 */
 
 
-#ifndef ROCKETBULLETBUILDER_HPP
-#define ROCKETBULLETBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
+
 
 class RocketBullet;
 class BulletData;
@@ -29,24 +29,12 @@ class BulletData;
 class RocketBulletBuilder
 {
     public:
-        static RocketBulletBuilder& Instance();
+        RocketBulletBuilder();
         ~RocketBulletBuilder();
         
-        RocketBullet* GetNewRocketBulletTemplate(INTLONGEST id = NONE_ID) const;                            
-        RocketBullet* GetNewRocketBullet(const BulletData&) const;   
+        RocketBullet* createTemplate(INTLONGEST id = NONE_ID) const;
+        RocketBullet* create(const BulletData&) const;
                    
     private:
-        RocketBulletBuilder() {};       
-        RocketBulletBuilder(const RocketBulletBuilder&) = delete; 
-        RocketBulletBuilder& operator=(const RocketBulletBuilder&) = delete;
-        
         void CreateNewInternals(RocketBullet*, const BulletData&) const; 
 }; 
-
-
-#endif 
-    
-
-        
-
-

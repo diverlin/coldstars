@@ -28,39 +28,31 @@
 #include <meti/RandUtils.hpp>
 
 
-SpaceStationBuilder& SpaceStationBuilder::Instance()
-{    
-    static SpaceStationBuilder instance;
-    return instance;
-}    
+SpaceStationBuilder::SpaceStationBuilder()
+{}
 
 SpaceStationBuilder::~SpaceStationBuilder() {}
 
-SpaceStation* SpaceStationBuilder::GetNewSpaceStationTemplate(INTLONGEST id) const
+SpaceStation* SpaceStationBuilder::createTemplate(INTLONGEST id) const
 {
     SpaceStation* spacestation = nullptr;
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
             
-    try 
-    { 
+    try {
         spacestation = new SpaceStation(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(spacestation);
     
     return spacestation;
 }
 
-SpaceStation* SpaceStationBuilder::GetNewSpaceStation() const
+SpaceStation* SpaceStationBuilder::create() const
 {
-    SpaceStation* spacestation = GetNewSpaceStationTemplate();
+    SpaceStation* spacestation = createTemplate();
     CreateNewInternals(spacestation);
     
     return spacestation;
@@ -145,5 +137,5 @@ void SpaceStationBuilder::CreateNewInternals(SpaceStation* spacestation) const
     
     CreateItemSlots(spacestation);
                 
-    spacestation->BindLand(KosmoportBuilder::Instance().GetNewKosmoport());
+    spacestation->BindLand(global::get().kosmoportBuilder().create());
 }

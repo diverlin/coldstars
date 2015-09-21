@@ -28,30 +28,23 @@
 
 #include <meti/RandUtils.hpp>
 
-ContainerBuilder& ContainerBuilder::Instance()
-{
-    static ContainerBuilder instance;
-    return instance;
-}
+
+ContainerBuilder::ContainerBuilder()
+{}
 
 ContainerBuilder::~ContainerBuilder()
 {}
 
-Container* ContainerBuilder::GetNewContainerTemplate(INTLONGEST id) const
+Container* ContainerBuilder::createTemplate(INTLONGEST id) const
 {
-    Container* container = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    Container* container = nullptr;    
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
         
-    try 
-    { 
+    try {
         container = new Container(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     global::get().entitiesManager().RegisterEntity(container);
@@ -59,15 +52,15 @@ Container* ContainerBuilder::GetNewContainerTemplate(INTLONGEST id) const
     return container;
 } 
 
-Container* ContainerBuilder::GetNewContainer(jeti::TextureOb* textureOb, BaseItem* item) const
+Container* ContainerBuilder::create(jeti::TextureOb* textureOb, BaseItem* item) const
 {
-    Container* container = GetNewContainerTemplate();
+    Container* container = createTemplate();
     CreateNewInternals(container, textureOb, item);
         
     return container;
 } 
 
-Container* ContainerBuilder::GetNewMineralContainer(int mineral_ammount) const
+Container* ContainerBuilder::create(int mineral_ammount) const
 {
     //jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MINERAL_ID);
     GoodsPack* goods_pack = GetNewGoodsPack(TYPE::ENTITY::MINERALS_ID);

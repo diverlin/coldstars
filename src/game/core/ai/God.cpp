@@ -153,8 +153,8 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescriptor& starsys
     planet->SetPopulation(population);
     
     Land* land = nullptr;
-    if (population > 0) { land = KosmoportBuilder::Instance().GetNewKosmoport(); }
-    else                { land = NatureLandBuilder::Instance().GetNewNatureLand(); }
+    if (population > 0) { land = global::get().kosmoportBuilder().create(); }
+    else                { land = global::get().natureLandBuilder().create(); }
         
     planet->BindLand(land);
 
@@ -165,15 +165,15 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescriptor& starsys
             int sattelitewarriors_num = 1; //getRandInt(SATELLITEWARRIORS_PER_PLANET_MIN, SATELLITEWARRIORS_PER_PLANET_MAX);
             for (int j=0; j<sattelitewarriors_num; j++)
             {      
-                Satellite* satellite = SatelliteBuilder::Instance().GetNewSatellite();
-                SatelliteBuilder::Instance().EquipEquipment(satellite); // improove
+                Satellite* satellite = global::get().satelliteBuilder().create();
+                global::get().satelliteBuilder().EquipEquipment(satellite); // improove
             
                 {
                     TYPE::RACE npc_race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
                     TYPE::ENTITY npc_subtype_id    = TYPE::ENTITY::WARRIOR_ID;
                     TYPE::ENTITY npc_subsubtype_id = TYPE::ENTITY::WARRIOR_ID;
             
-                    Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+                    Npc* npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
                     satellite->BindOwnerNpc(npc);
                 }
             
@@ -204,13 +204,13 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescriptor& starsys
                 int ship_size_id = meti::getRandInt(SIZE_1_ID, SIZE_9_ID);
                 int weapons_num = meti::getRandInt(1, 5);
         
-                Ship* new_ship = ShipBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
-                ShipBuilder::Instance().EquipEquipment(new_ship); // improove
+                Ship* new_ship = global::get().shipBuilder().create(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
+                global::get().shipBuilder().EquipEquipment(new_ship); // improove
                 //ShipBuilder::Instance().EquipModules(ship, tech_level); 
                 //ShipBuilder::Instance().EquipArtefacts(ship, tech_level); 
                 //ShipBuilder::Instance().EquipBomb(ship, tech_level); 
             
-                Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+                Npc* new_npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
                 new_ship->BindOwnerNpc(new_npc);
                 
                 planet->AddVehicle(new_ship);
@@ -231,10 +231,10 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
         //TYPE::ENTITY ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
         //int weapons_num = 5;
         
-        SpaceStation* spacestation = SpaceStationBuilder::Instance().GetNewSpaceStation();
-        SpaceStationBuilder::Instance().EquipEquipment(spacestation);  // improove
+        SpaceStation* spacestation = global::get().spaceStationBuilder().create();
+        global::get().spaceStationBuilder().EquipEquipment(spacestation);  // improove
 
-        Npc* npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+        Npc* npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         spacestation->BindOwnerNpc(npc);
 
         glm::vec2 center = meti::getRandVec2f(700, 1500);
@@ -244,10 +244,10 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
         starsystem->AddVehicle(spacestation, center3, angle, nullptr);
         
         {  
-            Satellite* satellite = SatelliteBuilder::Instance().GetNewSatellite();
-            SatelliteBuilder::Instance().EquipEquipment(satellite);                   // improove
+            Satellite* satellite = global::get().satelliteBuilder().create();
+            global::get().satelliteBuilder().EquipEquipment(satellite);                   // improove
 
-            Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+            Npc* new_npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
             satellite->BindOwnerNpc(new_npc);
             
             glm::vec3 center(0, 0, DEFAULT_ENTITY_ZPOS);
@@ -264,8 +264,7 @@ void God::CreateShips(StarSystem* starsystem, int ship_num, TYPE::RACE npc_race_
     TYPE::ENTITY npc_subsubtype_id = TYPE::ENTITY::NONE_ID;
 
     for (int i=0; i<ship_num; i++)
-    {     
-
+    {
         // VERY UGLY LOGIC START (TODO)
         if (subtype_id == TYPE::ENTITY::NONE_ID) {
             npc_subtype_id    = getRandNpcSubTypeId(npc_race_id);
@@ -292,10 +291,10 @@ void God::CreateShips(StarSystem* starsystem, int ship_num, TYPE::RACE npc_race_
             ship_subtype_id = TYPE::ENTITY::RANGER_ID;
         // VERY UGLY LOGIC END
 
-        Ship* new_ship = ShipBuilder::Instance().GetNewShip(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
-        ShipBuilder::Instance().EquipEquipment(new_ship); // improove
+        Ship* new_ship = global::get().shipBuilder().create(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
+        global::get().shipBuilder().EquipEquipment(new_ship); // improove
 
-        Npc* new_npc = NpcBuilder::Instance().GetNewNpc(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+        Npc* new_npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         new_ship->BindOwnerNpc(new_npc);
 
         glm::vec3 center = meti::getRandXYVec3f(300, 1200, DEFAULT_ENTITY_ZPOS);
@@ -303,5 +302,3 @@ void God::CreateShips(StarSystem* starsystem, int ship_num, TYPE::RACE npc_race_
         starsystem->AddVehicle(new_ship, center, angle, nullptr);
     }
 }
-
-

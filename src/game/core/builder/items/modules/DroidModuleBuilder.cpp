@@ -31,41 +31,32 @@
 //#include <resources/MeshCollector.hpp>
 //#include <jeti/TextureOb.hpp>
 
-DroidModuleBuilder& DroidModuleBuilder::Instance()
-{
-    static DroidModuleBuilder instance;
-    return instance;
-}
+DroidModuleBuilder::DroidModuleBuilder()
+{}
 
 DroidModuleBuilder::~DroidModuleBuilder()
 {}
 
-DroidModule* DroidModuleBuilder::GetNewDroidModuleTemplate(INTLONGEST id) const
+DroidModule* DroidModuleBuilder::createTemplate(INTLONGEST id) const
 {
     DroidModule* droid_module = nullptr;
-
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         droid_module = new DroidModule(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(droid_module);
     
     return droid_module;
 } 
        
-DroidModule* DroidModuleBuilder::GetNewDroidModule(int repair_add) const
+DroidModule* DroidModuleBuilder::create(int repair_add) const
 {
-    DroidModule* droid_module = GetNewDroidModuleTemplate();
+    DroidModule* droid_module = createTemplate();
     CreateNewInternals(droid_module, repair_add);
             
     return droid_module;
@@ -81,5 +72,3 @@ void DroidModuleBuilder::CreateNewInternals(DroidModule* droid_module, int repai
     //alpitodorender droid_module->SetRenderData(mesh, texOb, texOb->size());
     droid_module->SetRepairAdd(repair_add);
 }
-
-

@@ -34,30 +34,22 @@
 
 #include <common/RaceDescriptors.hpp>
 
-ProtectorArtefactBuilder& ProtectorArtefactBuilder::Instance()
-{
-    static ProtectorArtefactBuilder instance;
-    return instance;
-}
+ProtectorArtefactBuilder::ProtectorArtefactBuilder()
+{}
 
 ProtectorArtefactBuilder::~ProtectorArtefactBuilder()
 {}
 
-ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefactTemplate(INTLONGEST id) const
+ProtectorArtefact* ProtectorArtefactBuilder::createTemplate(INTLONGEST id) const
 {
-    ProtectorArtefact* protector_artefact = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    ProtectorArtefact* protector_artefact = nullptr;    
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         protector_artefact = new ProtectorArtefact(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     global::get().entitiesManager().RegisterEntity(protector_artefact);
@@ -65,9 +57,9 @@ ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefactTemplate(INT
     return protector_artefact;
 } 
    
-ProtectorArtefact* ProtectorArtefactBuilder::GetNewProtectorArtefact(int protection) const
+ProtectorArtefact* ProtectorArtefactBuilder::create(int protection) const
 {
-    ProtectorArtefact* protector_artefact = GetNewProtectorArtefactTemplate();
+    ProtectorArtefact* protector_artefact = createTemplate();
     CreateNewInternals(protector_artefact, protection);    
         
     return protector_artefact;

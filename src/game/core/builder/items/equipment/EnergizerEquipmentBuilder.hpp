@@ -17,8 +17,7 @@
 */
 
 
-#ifndef ENERGIZEREQUIPMENTBUILDER_HPP
-#define ENERGIZEREQUIPMENTBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
@@ -30,21 +29,19 @@ class EnergizerEquipment;
 class EnergizerEquipmentBuilder
 {
     public:
-        static EnergizerEquipmentBuilder& Instance();
+        EnergizerEquipmentBuilder();
         ~EnergizerEquipmentBuilder();
 
-        EnergizerEquipment* GetNewEnergizerEquipmentTemplate(INTLONGEST id = NONE_ID)const; 
-        EnergizerEquipment* GetNewEnergizerEquipment(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int energy_max_orig = NONE_ID, int restoration_orig = NONE_ID) const;
+        EnergizerEquipment* createTemplate(INTLONGEST id = NONE_ID)const;
+        EnergizerEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int energy_max_orig = NONE_ID, int restoration_orig = NONE_ID) const;
                                      
     private:
-        EnergizerEquipmentBuilder() {};
         EnergizerEquipmentBuilder(const EnergizerEquipmentBuilder&) = delete;
         EnergizerEquipmentBuilder& operator=(const EnergizerEquipmentBuilder&) = delete;
 
         void CreateNewInternals(EnergizerEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int, int) const;
 }; 
 
-#endif 
     
 
         

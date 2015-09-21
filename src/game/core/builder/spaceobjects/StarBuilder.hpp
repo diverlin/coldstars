@@ -17,8 +17,7 @@
 */
 
 
-#ifndef STARBUILDER_HPP
-#define STARBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -38,21 +37,16 @@ namespace ENTITY
 class StarBuilder
 {
     public:
-        static StarBuilder& Instance();
+        StarBuilder();
         ~StarBuilder();
         
-        Star* GetNewStarTemplate(INTLONGEST id = NONE_ID) const; 
-        Star* GetNewStar() const;
+        Star* createTemplate(INTLONGEST id = NONE_ID) const;
+        Star* create() const;
                                      
     private:
-        StarBuilder() {};
-        StarBuilder(const StarBuilder&) = delete;
-        StarBuilder& operator=(const StarBuilder&) = delete;
-
         void CreateNewInternals(Star*) const;
 };
 
-#endif 
     
 
         

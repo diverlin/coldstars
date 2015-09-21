@@ -33,41 +33,32 @@
 
 #include <meti/RandUtils.hpp>
 
-BakModuleBuilder& BakModuleBuilder::Instance()
-{
-    static BakModuleBuilder instance;
-    return instance;
-}
+BakModuleBuilder::BakModuleBuilder()
+{}
 
 BakModuleBuilder::~BakModuleBuilder()
 {}
 
-BakModule* BakModuleBuilder::GetNewBakModuleTemplate(INTLONGEST id) const
+BakModule* BakModuleBuilder::createTemplate(INTLONGEST id) const
 {
     BakModule* bak_module = nullptr;
-
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         bak_module = new BakModule(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(bak_module);
     
     return bak_module;
 } 
   
-BakModule* BakModuleBuilder::GetNewBakModule(int fuel_max_add) const
+BakModule* BakModuleBuilder::create(int fuel_max_add) const
 {
-    BakModule* bak_module = GetNewBakModuleTemplate();
+    BakModule* bak_module = createTemplate();
     CreateNewInternals(bak_module, fuel_max_add);
       
     return bak_module;
@@ -83,5 +74,3 @@ void BakModuleBuilder::CreateNewInternals(BakModule* bak_module, int fuel_max_ad
     // alpitodorender bak_module->SetRenderData(mesh, texOb, texOb->size());
     bak_module->SetFuelMaxAdd(fuel_max_add);
 }
-
-

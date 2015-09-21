@@ -27,50 +27,45 @@
 #include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
 
-ShipBuilder& ShipBuilder::Instance()
-{    
-    static ShipBuilder instance;
-    return instance;
-}
+
+ShipBuilder::ShipBuilder()
+{}
 
 ShipBuilder::~ShipBuilder() {}
 
-Ship* ShipBuilder::GetNewShipTemplate(INTLONGEST id) const
+Ship* ShipBuilder::createTemplate(INTLONGEST id) const
 {
     Ship* ship = nullptr;
-
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
     try {
         ship = new Ship(id);
-    }
-    catch(std::bad_alloc) {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(ship);
     
     return ship;
 }
 
-Ship* ShipBuilder::GetNewShip(TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const
+Ship* ShipBuilder::create(TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const
 {
-    Ship* ship = GetNewShipTemplate();
+    Ship* ship = createTemplate();
     _CreateNewInternals(ship, race_id, subsubtype_id, size_id, weapons_num);
     
     return ship;
 }
 
-Ship* ShipBuilder::GetNewShip() const
+Ship* ShipBuilder::create() const
 {
     TYPE::RACE race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     TYPE::ENTITY subsubtype_id = TYPE::ENTITY::WARRIOR_ID;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
             
-    Ship* ship = GetNewShipTemplate();
+    Ship* ship = createTemplate();
     _CreateNewInternals(ship, race_id, subsubtype_id, size_id, weapons_num);
     
     return ship;

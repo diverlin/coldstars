@@ -17,8 +17,7 @@
 */
 
 
-#ifndef SPACESTATIONBUILDER_HPP
-#define SPACESTATIONBUILDER_HPP
+#pragma once
 
 #include <builder/spaceobjects/BaseVehicleBuilder.hpp>
 #include <types/MyInt.hpp>
@@ -41,24 +40,13 @@ namespace ENTITY
 class SpaceStationBuilder : public BaseVehicleBuilder
 {
     public:
-        static SpaceStationBuilder& Instance();
+        SpaceStationBuilder();
         ~SpaceStationBuilder();
         
-        SpaceStation* GetNewSpaceStationTemplate(INTLONGEST id = NONE_ID) const;                            
-        SpaceStation* GetNewSpaceStation() const;         
+        SpaceStation* createTemplate(INTLONGEST id = NONE_ID) const;
+        SpaceStation* create() const;
        
     private:
-        SpaceStationBuilder() {};       
-        SpaceStationBuilder(const SpaceStationBuilder&) = delete; 
-        SpaceStationBuilder& operator=(const SpaceStationBuilder&) = delete;
-
-        void CreateNewInternals(SpaceStation*) const;   
+        void CreateNewInternals(SpaceStation*) const;
 }; 
-
-
-#endif 
-    
-
-        
-
 

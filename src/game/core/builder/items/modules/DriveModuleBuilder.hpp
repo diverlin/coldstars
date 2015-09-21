@@ -17,8 +17,7 @@
 */
 
 
-#ifndef DRIVEMODULEBUILDER_HPP
-#define DRIVEMODULEBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -28,23 +27,12 @@ class DriveModule;
 class DriveModuleBuilder
 {
     public:
-        static DriveModuleBuilder& Instance();
+        DriveModuleBuilder();
         ~DriveModuleBuilder();
 
-        DriveModule* GetNewDriveModuleTemplate(INTLONGEST id = NONE_ID) const; 
-        DriveModule* GetNewDriveModule(int speed_add = NONE_ID, int hyper_add = NONE_ID) const;
+        DriveModule* createTemplate(INTLONGEST id = NONE_ID) const;
+        DriveModule* create(int speed_add = NONE_ID, int hyper_add = NONE_ID) const;
                                      
     private:
-        DriveModuleBuilder() {};
-        DriveModuleBuilder(const DriveModuleBuilder&) = delete;
-        DriveModuleBuilder& operator=(const DriveModuleBuilder&) = delete;
-
         void CreateNewInternals(DriveModule*, int, int) const;
 }; 
-
-#endif 
-    
-
-        
-
-

@@ -17,8 +17,7 @@
 */
 
 
-#ifndef SCANEREQUIPMENTBUILDER_HPP
-#define SCANEREQUIPMENTBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
@@ -30,23 +29,12 @@ class ScanerEquipment;
 class ScanerEquipmentBuilder
 {
     public:
-        static ScanerEquipmentBuilder& Instance();
+        ScanerEquipmentBuilder();
         ~ScanerEquipmentBuilder();
 
-        ScanerEquipment* GetNewScanerEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
-        ScanerEquipment* GetNewScanerEquipment(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int scan_orig = NONE_ID) const;
-                                     
-    private:
-        ScanerEquipmentBuilder() {};
-        ScanerEquipmentBuilder(const ScanerEquipmentBuilder&) = delete;
-        ScanerEquipmentBuilder& operator=(const ScanerEquipmentBuilder&) = delete;
+        ScanerEquipment* createTemplate(INTLONGEST id = NONE_ID) const;
+        ScanerEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int scan_orig = NONE_ID) const;
 
+    private:
         void CreateNewInternals(ScanerEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
 }; 
-
-#endif 
-    
-
-        
-
-

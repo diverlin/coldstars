@@ -1,26 +1,29 @@
 cmake_minimum_required (VERSION 2.8)
 
-set(SUBPROJECT ${SUBPROJECT_CLIENT})
+set(PROJECT ${PROJECT_CLIENT})
 
-file(GLOB_RECURSE ${SUBPROJECT}_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
-file(GLOB_RECURSE ${SUBPROJECT}_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
+file(GLOB_RECURSE ${PROJECT}_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
+file(GLOB_RECURSE ${PROJECT}_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../common)
 
-add_executable (${SUBPROJECT} ${${SUBPROJECT}_SOURCE} ${${SUBPROJECT}_HEADER})
-target_link_libraries(${SUBPROJECT}
-    ${SUBPROJECT_COMMON}
-    boost_system
-    jeti
-    meti
-    ceti
-)
+if (COMPILE_FLAGS)
+    set(COMPILE_FLAGS ${COMPILE_FLAGS})
+else ()
+    set(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
+endif ()
 
-#SET_TARGET_PROPERTIES(${SUBPROJECT}_CLIENT PROPERTIES COMPILE_FLAGS "-Wall -Werror -Wno-switch -std=c++11 -std=gnu++11 -pipe")
-#SET_TARGET_PROPERTIES(${SUBPROJECT}_CLIENT PROPERTIES COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -Ofast -march=native")
-SET_TARGET_PROPERTIES(${SUBPROJECT} PROPERTIES COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
-   
+add_executable (${PROJECT} ${${ROJECT}_SOURCE} ${${PROJECT}_HEADER})
+target_link_libraries(${PROJECT}
+    ${PROJECT_CORE}
+    boost_system
+    ${PROJECT_JETI}
+    ${PROJECT_METI}
+    ${PROJECT_CETI}
+)
+set_target_properties(${PROJECT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
+
 # deploy
 #ADD_CUSTOM_COMMAND(
     #TARGET ${SUBPROJECT}

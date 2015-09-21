@@ -17,8 +17,7 @@
 */
 
 
-#ifndef LAZEREQUIPMENTBUILDER_HPP
-#define LAZEREQUIPMENTBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
@@ -30,23 +29,12 @@ class LazerEquipment;
 class LazerEquipmentBuilder
 {
     public:
-        static LazerEquipmentBuilder& Instance();
+        LazerEquipmentBuilder();
         ~LazerEquipmentBuilder();
 
-        LazerEquipment* GetNewLazerEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
-        LazerEquipment* GetNewLazerEquipment(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
+        LazerEquipment* createTemplate(INTLONGEST id = NONE_ID) const;
+        LazerEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
                                      
     private:
-        LazerEquipmentBuilder() {};
-        LazerEquipmentBuilder(const LazerEquipmentBuilder&) = delete;
-        LazerEquipmentBuilder& operator=(const LazerEquipmentBuilder&) = delete;
-
         void CreateNewInternals(LazerEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int, int) const;
 }; 
-
-#endif 
-    
-
-        
-
-

@@ -16,23 +16,31 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
-#include <types/MyInt.hpp>
+#include <fstream>
 
-class DroidModule;
-
-
-class DroidModuleBuilder
+class Logger
 {
     public:
-        DroidModuleBuilder();
-        ~DroidModuleBuilder();
+        static Logger& Instance();
+        ~Logger();
+        
+        void Log(const std::string&, int dip = 0);
+        void warn(const std::string&, int dip = 0);
+        void error(const std::string&);
 
-        DroidModule* createTemplate(INTLONGEST id = NONE_ID) const;
-        DroidModule* create(int repair_add = NONE_ID) const;
-                                     
     private:
-        void CreateNewInternals(DroidModule*, int) const;
+        Logger();
+        Logger(const Logger&) = delete;
+        Logger& operator=(const Logger&) = delete;
+
+        enum class MODE: int { NONE=0, SCREEN, FILE, SCREENFILE };
+        MODE mode;
+        
+        std::ofstream file;
+        
+        void toScreen(const std::string&, int);
+        void toFile(const std::string&, int);
 }; 
+

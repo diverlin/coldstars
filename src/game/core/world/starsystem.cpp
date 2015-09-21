@@ -467,7 +467,7 @@ void StarSystem::UpdateStates()
             glm::vec2 center = meti::getRandVec2f(200, 1200);
             
             glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
-            Add(BlackHoleBuilder::Instance().GetNewBlackHole(), center3);
+            Add(global::get().blackHoleBuilder().create(), center3);
         }
     }
     
@@ -890,9 +890,9 @@ void StarSystem::ShipManager_s(unsigned int num)
         int size_id     = SIZE_4_ID;
         int weapons_num = 7;
 
-        Npc* new_pnpc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id, psubsubtype_id);
-        Ship* new_pship = ShipBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);
-        ShipBuilder::Instance().EquipEquipment(new_pship);   // improove
+        Npc* new_pnpc = global::get().npcBuilder().create(prace_id, psubtype_id, psubsubtype_id);
+        Ship* new_pship = global::get().shipBuilder().create(prace_id, psubtype_id, size_id, weapons_num);
+        global::get().shipBuilder().EquipEquipment(new_pship);   // improove
 
         new_pship->BindOwnerNpc(new_pnpc);
 

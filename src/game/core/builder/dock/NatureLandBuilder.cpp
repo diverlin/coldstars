@@ -33,41 +33,32 @@
 #include <meti/RandUtils.hpp>
 
 
-NatureLandBuilder& NatureLandBuilder::Instance()
-{
-    static NatureLandBuilder instance;
-    return instance;
-}
+NatureLandBuilder::NatureLandBuilder()
+{}
 
 NatureLandBuilder::~NatureLandBuilder()
 {}
 
-NatureLand* NatureLandBuilder::GetNewNatureLandTemplate(INTLONGEST id) const
+NatureLand* NatureLandBuilder::createTemplate(INTLONGEST id) const
 {
-    NatureLand* natureland = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    NatureLand* natureland = nullptr;    
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         natureland = new NatureLand(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(natureland);
     
     return natureland;
 } 
 
-NatureLand* NatureLandBuilder::GetNewNatureLand() const
+NatureLand* NatureLandBuilder::create() const
 {
-    NatureLand* natureland = GetNewNatureLandTemplate();
+    NatureLand* natureland = createTemplate();
     CreateNewInternals(natureland);
         
     return natureland;

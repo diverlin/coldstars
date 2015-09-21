@@ -1,16 +1,9 @@
 cmake_minimum_required (VERSION 2.8)
 
-set(PROJECT ${PROJECT_METI})
-project (${PROJECT})
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/../../macros/cmake")
+set(PROJECT ${PROJECT_SERVER})
 
 file(GLOB_RECURSE ${PROJECT}_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 file(GLOB_RECURSE ${PROJECT}_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
-
-find_package(GLM REQUIRED)   
-include_directories(${GLM_INCLUDE_DIRS})
-add_definitions(-DGLM_FORCE_RADIANS)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
@@ -20,6 +13,16 @@ else ()
     set(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
 endif ()
 
-add_library(${PROJECT} ${${PROJECT}_SOURCE} ${${PROJECT}_HEADER})
+add_executable (${PROJECT} ${${PROJECT}_SOURCE} ${${PROJECT}_HEADER})
+target_link_libraries(${PROJECT}
+    ${PROJECT_CORE}
+)
 set_target_properties(${PROJECT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
 
+# deploy
+install(TARGETS ${PROJECT} DESTINATION ${DEPLOY_DIR})
+ADD_CUSTOM_COMMAND(
+    TARGET ${PROJECT}
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E create_symlink ${SOURCE_ROOT}/config/config.info ${DEPLOY_DIR}/config.info
+)

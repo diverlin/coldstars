@@ -24,41 +24,32 @@
     
 #include <meti/RandUtils.hpp>
 
-StarBuilder& StarBuilder::Instance()
-{
-    static StarBuilder instance;
-    return instance;
-}
+StarBuilder::StarBuilder()
+{}
 
 StarBuilder::~StarBuilder()
 {}
 
-Star* StarBuilder::GetNewStarTemplate(INTLONGEST id) const
+Star* StarBuilder::createTemplate(INTLONGEST id) const
 {
-    Star* star = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    Star* star = nullptr;    
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         star = new Star(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(star);
     
     return star;
 } 
  
-Star* StarBuilder::GetNewStar() const
+Star* StarBuilder::create() const
 {
-    Star* star = GetNewStarTemplate();
+    Star* star = createTemplate();
     CreateNewInternals(star);
         
     return star;

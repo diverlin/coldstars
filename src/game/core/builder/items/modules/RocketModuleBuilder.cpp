@@ -30,59 +30,48 @@
 //#include <resources/MeshCollector.hpp>
 //#include <jeti/TextureOb.hpp>
 
-RocketModuleBuilder& RocketModuleBuilder::Instance()
-{
-    static RocketModuleBuilder instance;
-    return instance;
-}
+RocketModuleBuilder::RocketModuleBuilder()
+{}
 
 RocketModuleBuilder::~RocketModuleBuilder()
 {}
 
-RocketModule* RocketModuleBuilder::GetNewRocketModuleTemplate(INTLONGEST id) const
+RocketModule* RocketModuleBuilder::createTemplate(INTLONGEST id) const
 {
     RocketModule* rocket_module = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         rocket_module = new RocketModule(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
-    
     global::get().entitiesManager().RegisterEntity(rocket_module);
     
     return rocket_module;
 } 
-  
-RocketModule* RocketModuleBuilder::GetNewRocketModule(int ammo_max_add, int damage_add, int radius_add) const
+
+RocketModule* RocketModuleBuilder::create(int ammo_max_add, int damage_add, int radius_add) const
 {
-    RocketModule* rocket_module = GetNewRocketModuleTemplate();
-    CreateNewInternals(rocket_module, ammo_max_add, damage_add, radius_add);    
-        
-        return rocket_module;
+    RocketModule* rocket_module = createTemplate();
+    CreateNewInternals(rocket_module, ammo_max_add, damage_add, radius_add);
+
+    return rocket_module;
 } 
-          
+
 void RocketModuleBuilder::CreateNewInternals(RocketModule* rocket_module, int ammo_max_add, int damage_add, int radius_add) const
 {     
-//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-//    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
+    //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
     ammo_max_add    = meti::getRandInt(MODULE::ROCKET::AMMO_MIN, MODULE::ROCKET::AMMO_MAX);
     damage_add      = meti::getRandInt(MODULE::ROCKET::DAMAGE_MIN, MODULE::ROCKET::DAMAGE_MAX);
     radius_add      = meti::getRandInt(MODULE::ROCKET::RADIUS_MIN, MODULE::ROCKET::RADIUS_MAX);
 
-    rocket_module->SetParentSubTypeId(TYPE::ENTITY::ROCKET_EQUIPMENT_ID);    
+    rocket_module->SetParentSubTypeId(TYPE::ENTITY::ROCKET_EQUIPMENT_ID);
     // alpitodorender rocket_module->SetRenderData(mesh, texOb, texOb->size());
     rocket_module->SetAmmoMaxAdd(ammo_max_add);
     rocket_module->SetDamageAdd(damage_add);
     rocket_module->SetRadiusAdd(radius_add);
 }
-
-

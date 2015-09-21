@@ -17,8 +17,7 @@
 */
 
 
-#ifndef DRIVEEQUIPMENTBUILDER_HPP
-#define DRIVEEQUIPMENTBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 #include <types/RaceTypes.hpp>
@@ -30,21 +29,17 @@ class DriveEquipment;
 class DriveEquipmentBuilder
 {
     public:
-        static DriveEquipmentBuilder& Instance();
+        DriveEquipmentBuilder();
         ~DriveEquipmentBuilder();
 
-        DriveEquipment* GetNewDriveEquipmentTemplate(INTLONGEST id = NONE_ID) const; 
-        DriveEquipment* GetNewDriveEquipment(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int speed_orig = NONE_ID, int hyper_orig = NONE_ID) const;
+        DriveEquipment* createTemplate(INTLONGEST id = NONE_ID) const;
+        DriveEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int speed_orig = NONE_ID, int hyper_orig = NONE_ID) const;
                                      
     private:
-        DriveEquipmentBuilder() {};
-        DriveEquipmentBuilder(const DriveEquipmentBuilder&) = delete;
-        DriveEquipmentBuilder& operator=(const DriveEquipmentBuilder&) = delete;
-
         void CreateNewInternals(DriveEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int, int) const;
 }; 
 
-#endif 
+
     
 
         

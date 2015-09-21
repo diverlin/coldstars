@@ -22,41 +22,33 @@
 
 #include <meti/RandUtils.hpp>
 
-SatelliteBuilder& SatelliteBuilder::Instance()
-{    
-    static SatelliteBuilder instance;
-    return instance;
-}    
 
+SatelliteBuilder::SatelliteBuilder()
+{}
 
-SatelliteBuilder::~SatelliteBuilder() {}
+SatelliteBuilder::~SatelliteBuilder()
+{}
 
-
-Satellite* SatelliteBuilder::GetNewSatelliteTemplate(INTLONGEST id) const
+Satellite* SatelliteBuilder::createTemplate(INTLONGEST id) const
 {
     Satellite* satellite = nullptr;
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         satellite = new Satellite(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(satellite);
     
     return satellite;
 }
 
-Satellite* SatelliteBuilder::GetNewSatellite() const
+Satellite* SatelliteBuilder::create() const
 {
-    Satellite* satellite = GetNewSatelliteTemplate();
+    Satellite* satellite = createTemplate();
     CreateNewInternals(satellite);
     
     return satellite;

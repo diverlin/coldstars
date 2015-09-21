@@ -17,8 +17,7 @@
 */
 
 
-#ifndef GRAPPLEMODULEBUILDER_HPP
-#define GRAPPLEMODULEBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -28,23 +27,12 @@ class GrappleModule;
 class GrappleModuleBuilder
 {
     public:
-        static GrappleModuleBuilder& Instance();
+        GrappleModuleBuilder();
         ~GrappleModuleBuilder();
 
-        GrappleModule* GetNewGrappleModuleTemplate(INTLONGEST id = NONE_ID) const; 
-        GrappleModule* GetNewGrappleModule(int strength_add = NONE_ID, int radius_add = NONE_ID, int speed_add = NONE_ID) const;
+        GrappleModule* createTemplate(INTLONGEST id = NONE_ID) const;
+        GrappleModule* create(int strength_add = NONE_ID, int radius_add = NONE_ID, int speed_add = NONE_ID) const;
                                      
     private:
-        GrappleModuleBuilder() {};
-        GrappleModuleBuilder(const GrappleModuleBuilder&) = delete;
-        GrappleModuleBuilder& operator=(const GrappleModuleBuilder&) = delete;
-
         void CreateNewInternals(GrappleModule*, int, int, int) const;
 }; 
-
-#endif 
-    
-
-        
-
-

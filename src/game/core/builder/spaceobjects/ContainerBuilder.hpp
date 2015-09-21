@@ -17,8 +17,7 @@
 */
 
 
-#ifndef CONTAINERBUILDER_HPP
-#define CONTAINERBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -34,24 +33,13 @@ class BaseItem;
 class ContainerBuilder
 {
     public:
-        static ContainerBuilder& Instance();
+        ContainerBuilder();
         ~ContainerBuilder();
 
-        Container* GetNewContainerTemplate(INTLONGEST id = NONE_ID) const; 
-        Container* GetNewContainer(jeti::TextureOb*, BaseItem*) const;
-        Container* GetNewMineralContainer(int) const;
+        Container* createTemplate(INTLONGEST id = NONE_ID) const;
+        Container* create(jeti::TextureOb*, BaseItem*) const;
+        Container* create(int) const;
                                                      
     private:
-        ContainerBuilder() {};
-        ContainerBuilder(const ContainerBuilder&) = delete;
-        ContainerBuilder& operator=(const ContainerBuilder&) = delete;
-
         void CreateNewInternals(Container*, jeti::TextureOb*, BaseItem*) const;
 }; 
-
-#endif 
-    
-
-        
-
-

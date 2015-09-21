@@ -31,45 +31,37 @@
 #include <common/RaceDescriptors.hpp>
 #include <meti/RandUtils.hpp>
 
-GrappleEquipmentBuilder& GrappleEquipmentBuilder::Instance()
-{
-    static GrappleEquipmentBuilder instance;
-    return instance;
-}
+GrappleEquipmentBuilder::GrappleEquipmentBuilder()
+{}
 
 GrappleEquipmentBuilder::~GrappleEquipmentBuilder()
 {}
 
-GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipmentTemplate(INTLONGEST id) const
+GrappleEquipment* GrappleEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
     GrappleEquipment* grapple_equipment = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-      try 
-    { 
+    try {
         grapple_equipment = new GrappleEquipment(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     global::get().entitiesManager().RegisterEntity(grapple_equipment);
     
     return grapple_equipment;
 } 
-        
-GrappleEquipment* GrappleEquipmentBuilder::GetNewGrappleEquipment(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
+
+GrappleEquipment* GrappleEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
 {
-    GrappleEquipment* grapple_equipment = GetNewGrappleEquipmentTemplate();
+    GrappleEquipment* grapple_equipment = createTemplate();
     CreateNewInternals(grapple_equipment, tech_level, race_id, strength_orig, radius_orig, speed_orig);
-        
+
     return grapple_equipment;
 } 
-            
+
 void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
@@ -77,12 +69,12 @@ void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equip
     }
     
     if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
-        tech_level = TYPE::TECHLEVEL::L0_ID; 
+        tech_level = TYPE::TECHLEVEL::L0_ID;
     }
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID);
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID, revision_id) 
+    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID, revision_id)
 
     strength_orig   = meti::getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN, EQUIPMENT::GRAPPLE::STRENGTH_MAX) * (1 + EQUIPMENT::GRAPPLE::STRENGTH_TECHLEVEL_RATE * (int)tech_level);
     radius_orig     = meti::getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN,   EQUIPMENT::GRAPPLE::RADIUS_MAX)   * (1 + EQUIPMENT::GRAPPLE::RADIUS_TECHLEVEL_RATE * (int)tech_level);
@@ -94,18 +86,16 @@ void GrappleEquipmentBuilder::CreateNewInternals(GrappleEquipment* grapple_equip
     common_data.mass            = meti::getRandInt(EQUIPMENT::GRAPPLE::MASS_MIN,        EQUIPMENT::GRAPPLE::MASS_MAX);
     common_data.condition_max   = meti::getRandInt(EQUIPMENT::GRAPPLE::CONDITION_MIN,   EQUIPMENT::GRAPPLE::CONDITION_MAX);
     common_data.deterioration_normal = 1;
-                                                             
+
     grapple_equipment->SetStrengthOrig(strength_orig);
     grapple_equipment->SetRadiusOrig(radius_orig);
     grapple_equipment->SetSpeedOrig(speed_orig);
 
     //alpitodorender grapple_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     grapple_equipment->SetParentSubTypeId(TYPE::ENTITY::GRAPPLE_SLOT_ID);
-    grapple_equipment->SetItemCommonData(common_data);        
+    grapple_equipment->SetItemCommonData(common_data);
     grapple_equipment->SetCondition(common_data.condition_max);
     
     grapple_equipment->UpdateProperties();
     grapple_equipment->CountPrice();
 }
-
-

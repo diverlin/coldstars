@@ -17,13 +17,12 @@
 */
 
 
-#ifndef PLANETBUILDER_HPP
-#define PLANETBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
-class Planet;
 
+class Planet;
 
 namespace ENTITY
 {
@@ -40,28 +39,16 @@ namespace ENTITY
     }
 }    
     
+
 class PlanetBuilder
 {
     public:
-        static PlanetBuilder& Instance();
+        PlanetBuilder();
         ~PlanetBuilder();
 
-        Planet* GetNewPlanetTemplate(INTLONGEST id = NONE_ID) const; 
-        Planet* GetNewPlanet(float) const;
+        Planet* createTemplate(INTLONGEST id = NONE_ID) const;
+        Planet* create(float) const;
                                      
     private:
-        PlanetBuilder() {};
-        PlanetBuilder(const PlanetBuilder&) = delete;
-        PlanetBuilder& operator=(const PlanetBuilder&) = delete;
-
         void CreateNewInternals(Planet*, float) const;
 }; 
-
-
-
-#endif 
-    
-
-        
-
-

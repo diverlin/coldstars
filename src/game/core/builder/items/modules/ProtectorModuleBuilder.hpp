@@ -17,8 +17,7 @@
 */
 
 
-#ifndef PROTECTORMODULEBUILDER_HPP
-#define PROTECTORMODULEBUILDER_HPP
+#pragma once
 
 #include <types/MyInt.hpp>
 
@@ -27,23 +26,12 @@ class ProtectorModule;
 class ProtectorModuleBuilder
 {
     public:
-        static ProtectorModuleBuilder& Instance();
+        ProtectorModuleBuilder();
         ~ProtectorModuleBuilder();
 
-        ProtectorModule* GetNewProtectorModuleTemplate(INTLONGEST id = NONE_ID) const; 
-        ProtectorModule* GetNewProtectorModule(int protection_add = NONE_ID) const;
+        ProtectorModule* createTemplate(INTLONGEST id = NONE_ID) const;
+        ProtectorModule* create(int protection_add = NONE_ID) const;
                                      
     private:
-        ProtectorModuleBuilder() {};
-        ProtectorModuleBuilder(const ProtectorModuleBuilder&) = delete;
-        ProtectorModuleBuilder& operator=(const ProtectorModuleBuilder&) = delete;
-
         void CreateNewInternals(ProtectorModule*, int) const;
 }; 
-
-#endif 
-    
-
-        
-
-
