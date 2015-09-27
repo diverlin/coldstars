@@ -17,58 +17,33 @@
 */
 
 
-#ifndef VEHICLEKORPUSDATA_HPP
-#define VEHICLEKORPUSDATA_HPP
+#pragma once
 
-struct VehicleKorpusData
+struct VehicleDescriptor
 {
-    /* this data depends only on korpus and cannot be changed by artefacts/items */        
-    int space;
-    int armor;
-    int protection; 
-    int temperature;   
+    int space = 0;
+    int armor = 0;
+    int protection = 0;
+    int temperature = 0;
 
-    int price;
+    int price = 0;
 
-    bool draw_turrels;
+    bool draw_turrels = false;
 
-    int slot_bak_num;
-    int slot_drive_num;
-    int slot_droid_num;
-    int slot_energizer_num;
-    int slot_grapple_num;
-    int slot_protector_num;
-    int slot_radar_num;
-    int slot_scaner_num;
-    int slot_freezer_num;
-    int slot_weapon_num;
-    int slot_artefact_num;
-    int slot_otsec_num;
+    int slot_bak_num = 0;
+    int slot_drive_num = 0;
+    int slot_droid_num = 0;
+    int slot_energizer_num = 0;
+    int slot_grapple_num = 0;
+    int slot_protector_num = 0;
+    int slot_radar_num = 0;
+    int slot_scaner_num = 0;
+    int slot_freezer_num = 0;
+    int slot_weapon_num = 0;
+    int slot_artefact_num = 0;
+    int slot_otsec_num = 0;
                 
-    VehicleKorpusData()
-    :
-    space(0),
-    armor(0),
-    protection(0), 
-    temperature(0),   
-    
-    price(0),
-    
-    draw_turrels(false),
-    
-    slot_bak_num(0),
-    slot_drive_num(0),
-    slot_droid_num(0),
-    slot_energizer_num(0),
-    slot_grapple_num(0),
-    slot_protector_num(0),
-    slot_radar_num(0),
-    slot_scaner_num(0),
-    slot_freezer_num(0),
-    slot_weapon_num(0),
-    slot_artefact_num(0),
-    slot_otsec_num(0)
-    {}
+    VehicleDescriptor() {}
+    ~VehicleDescriptor() {}
 };
 
-#endif 

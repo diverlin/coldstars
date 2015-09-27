@@ -19,22 +19,16 @@
 #pragma once
 
 #include <vector>
-
-#include <common/constants.hpp> // depr
-#include <struct/StarSystemDescriptor.hpp>
+#include <descriptors/StarSystemDescriptor.hpp>
 
 struct SectorDescriptor
 {
     public:
-        int starsystem_num;
-        bool allow_invasion;
+        int starsystem_num = 1;
+        bool allow_invasion = false;
         std::vector<StarSystemDescriptor> starsystem_descriptors;
         
-        SectorDescriptor():
-        starsystem_num(ENTITY::GALAXY::STARSYSTEM_NUM_MIN),
-        allow_invasion(true)
-        {}
-        
+        SectorDescriptor() {}
         ~SectorDescriptor() {}
 }; 
 
