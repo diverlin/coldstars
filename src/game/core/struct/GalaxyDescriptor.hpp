@@ -18,21 +18,17 @@
 
 #pragma once
 
-#include <common/constants.hpp> //depr
 #include <vector>
 #include <struct/SectorDescriptor.hpp>
 
 struct GalaxyDescriptor
 {
     public:
-        int sector_num;
-        bool allow_invasion;
+        int sector_num = 1;
+        bool allow_invasion = true;
         std::vector<SectorDescriptor> sector_descriptors;
         
-        GalaxyDescriptor():
-        sector_num(ENTITY::GALAXY::SECTOR_NUM),
-        allow_invasion(true)
-        {}
+        GalaxyDescriptor() {}
         
         ~GalaxyDescriptor() {}
 }; 

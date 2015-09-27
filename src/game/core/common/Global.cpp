@@ -73,6 +73,9 @@
 #include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/spaceobjects/SpaceStationBuilder.hpp>
 
+#include <builder/world/GalaxyBuilder.hpp>
+#include <builder/world/SectorBuilder.hpp>
+#include <builder/world/StarSystemBuilder.hpp>
 
 global& global::get()
 {
@@ -135,6 +138,9 @@ global::global()
     , m_satelliteBuilder(new SatelliteBuilder)
     , m_shipBuilder(new ShipBuilder)
     , m_spaceStationBuilder(new SpaceStationBuilder)
+    , m_galaxyBuilder(new GalaxyBuilder)
+    , m_sectorBuilder(new SectorBuilder)
+    , m_starsystemBuilder(new StarSystemBuilder)
 {}
 
 global::~global()
@@ -164,8 +170,8 @@ global::~global()
     delete m_grappleEquipmentBuilder;
     delete m_protectorEquipmentBuilder;
     delete m_radarEquipmentBuilder;
-    delete m_radarEquipmentBuilder;
-    delete m_radarEquipmentBuilder;
+    delete m_scanerEquipmentBuilder;
+    delete m_rocketEquipmentBuilder;
     delete m_lazerEquipmentBuilder;
 
     delete m_bakModuleBuilder;
@@ -194,4 +200,8 @@ global::~global()
     delete m_satelliteBuilder;
     delete m_shipBuilder;
     delete m_spaceStationBuilder;
+
+    delete m_galaxyBuilder;
+    delete m_sectorBuilder;
+    delete m_starsystemBuilder;
 }

@@ -35,41 +35,32 @@
 
 #include <managers/EntitiesManager.hpp>
 
-StarSystemBuilder& StarSystemBuilder::Instance()
-{
-    static StarSystemBuilder instance;
-    return instance;
-}
+StarSystemBuilder::StarSystemBuilder()
+{}
 
 StarSystemBuilder::~StarSystemBuilder()
 {}
 
-StarSystem* StarSystemBuilder::GetNewStarSystemTemplate(INTLONGEST id) const
+StarSystem* StarSystemBuilder::createTemplate(INTLONGEST id) const
 {
-    StarSystem* starsystem = nullptr;
-    
-    if (id == NONE_ID)
-    {
+    StarSystem* starsystem = nullptr;    
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try 
-    { 
+    try {
         starsystem = new StarSystem(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    }    
     global::get().entitiesManager().RegisterEntity(starsystem);
     
     return starsystem;
 } 
 
-StarSystem* StarSystemBuilder::GetNewStarSystem(const StarSystemDescriptor& starsystem_descriptor) const
+StarSystem* StarSystemBuilder::create(const StarSystemDescriptor& starsystem_descriptor) const
 {
-    StarSystem* starsystem = GetNewStarSystemTemplate();
+    StarSystem* starsystem = createTemplate();
     createInternals(starsystem, starsystem_descriptor);
     
     return starsystem;

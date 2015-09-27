@@ -80,9 +80,9 @@ Vehicle::Vehicle()
       m_SlotEnergizer(nullptr),
       m_SlotGrapple(nullptr),
       m_SlotDroid(nullptr),
-      m_SlotFreezer(nullptr)
+      m_SlotFreezer(nullptr),
+      m_ComplexWeapon(this)
 {
-    m_ComplexWeapon.SetOwnerVehicle(this);
     m_ComplexDrive.SetOwnerVehicle(this);
     m_ComplexProtector.SetOwnerVehicle(this);
 }
@@ -237,10 +237,10 @@ bool Vehicle::ManageItem(BaseItem* item)
 {
     switch(item->typeId())
     {
-        case TYPE::ENTITY::EQUIPMENT_ID:     { return ManageFunctionEquipment(item); break; }
-        case TYPE::ENTITY::MODULE_ID:         { return ManageFunctionModule(item); break; }
+        case TYPE::ENTITY::EQUIPMENT_ID:    { return ManageFunctionEquipment(item); break; }
+        case TYPE::ENTITY::MODULE_ID:       { return ManageFunctionModule(item); break; }
         case TYPE::ENTITY::ARTEFACT_ID:     { return ManageFunctionArtefact(item); break; }
-        case TYPE::ENTITY::GOODS_ID:         { return ManageFunctionGoodsPack(item); break; }
+        case TYPE::ENTITY::GOODS_ID:        { return ManageFunctionGoodsPack(item); break; }
     }
     
     return false;

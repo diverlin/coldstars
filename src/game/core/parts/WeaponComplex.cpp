@@ -29,18 +29,18 @@
 
 #include <meti/RandUtils.hpp>
 
-WeaponComplex::WeaponComplex()
-{ 
-    owner_vehicle = nullptr;
-}
+WeaponComplex::WeaponComplex(Vehicle* owner_vehicle)
+    :
+      owner_vehicle(owner_vehicle)
+{}
 
 WeaponComplex::~WeaponComplex()
 {}
 
 bool WeaponComplex::AddSlot(ItemSlot* slot)
 {
+    assert(slot);
     slot_weapon_vec.push_back(slot);
-    
     return true;
 }
 

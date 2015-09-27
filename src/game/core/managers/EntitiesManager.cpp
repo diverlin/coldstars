@@ -196,7 +196,7 @@ void EntitiesManager::LoadPass0(const std::string& filename)
         Logger::Instance().Log("loading galaxys...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("galaxy"))
         {
-            Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxyTemplate(v.second.get<unsigned long int>("data_id.id"));
+            Galaxy* galaxy = global::get().galaxyBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
             galaxy->Load(v.second);
         }
     }
@@ -216,7 +216,7 @@ void EntitiesManager::LoadPass0(const std::string& filename)
         Logger::Instance().Log("loading starsystems...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("starsystem"))
         {
-            StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystemTemplate(v.second.get<unsigned long int>("data_id.id"));
+            StarSystem* starsystem = global::get().starSystemBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
             starsystem->Load(v.second);
         }
     }
