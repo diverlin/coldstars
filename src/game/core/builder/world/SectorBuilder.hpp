@@ -28,17 +28,13 @@ class SectorDescriptor;
 class SectorBuilder
 {
     public:
-        static SectorBuilder& Instance();
+        SectorBuilder();
         ~SectorBuilder();
         
-        Sector* GetNewSectorTemplate(INTLONGEST id = NONE_ID) const; 
-        Sector* GetNewSector(const SectorDescriptor&) const;
+        Sector* createTemplate(INTLONGEST id = NONE_ID) const;
+        Sector* create(const SectorDescriptor&) const;
     
     private:
-        SectorBuilder() {}
-        SectorBuilder(const SectorBuilder&) = delete;
-        SectorBuilder& operator=(const SectorBuilder&) = delete;
-        
         void createInternals(Sector*, const SectorDescriptor&) const;
 }; 
 

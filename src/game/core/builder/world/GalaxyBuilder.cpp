@@ -29,16 +29,13 @@
 #include <meti/RandUtils.hpp>
 
 
-GalaxyBuilder& GalaxyBuilder::Instance()
-{
-    static GalaxyBuilder instance;
-    return instance;
-}
+GalaxyBuilder::GalaxyBuilder()
+{}
 
 GalaxyBuilder::~GalaxyBuilder()
 {}
 
-Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(INTLONGEST id) const
+Galaxy* GalaxyBuilder::createTemplate(INTLONGEST id) const
 {
     Galaxy* galaxy = nullptr;
     if (id == NONE_ID) {
@@ -56,9 +53,9 @@ Galaxy* GalaxyBuilder::GetNewGalaxyTemplate(INTLONGEST id) const
     return galaxy;
 } 
 
-Galaxy* GalaxyBuilder::GetNewGalaxy(const GalaxyDescriptor& galaxy_descriptor) const
+Galaxy* GalaxyBuilder::create(const GalaxyDescriptor& galaxy_descriptor) const
 {
-    Galaxy* galaxy = GetNewGalaxyTemplate();
+    Galaxy* galaxy = createTemplate();
     createInternals(galaxy, galaxy_descriptor);
     
     return galaxy;
@@ -68,7 +65,7 @@ void GalaxyBuilder::createInternals(Galaxy* galaxy, const GalaxyDescriptor& gala
 {     
     for(const auto& sector_descriptor: galaxy_descriptor.sector_descriptors) {
         glm::vec3 center = meti::getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);
-        Sector* sector = SectorBuilder::Instance().GetNewSector(sector_descriptor);
+        Sector* sector = global::get().sectorBuilder().create(sector_descriptor);
         galaxy->Add(sector, center); 
     }
 }

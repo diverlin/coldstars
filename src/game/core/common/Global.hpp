@@ -77,6 +77,9 @@ class SatelliteBuilder;
 class ShipBuilder;
 class SpaceStationBuilder;
 
+class GalaxyBuilder;
+class SectorBuilder;
+class StarSystemBuilder;
 
 class global
 {
@@ -140,6 +143,10 @@ class global
         ShipBuilder& shipBuilder() { return *m_shipBuilder; }
         SpaceStationBuilder& spaceStationBuilder() { return *m_spaceStationBuilder; }
 
+        GalaxyBuilder& galaxyBuilder() { return *m_galaxyBuilder; }
+        SectorBuilder& sectorBuilder() { return *m_sectorBuilder; }
+        StarSystemBuilder& starSystemBuilder() { return *m_starsystemBuilder; }
+
     private:
         global();
         global(const global&) = delete;
@@ -202,4 +209,8 @@ class global
         SatelliteBuilder* m_satelliteBuilder = nullptr;
         ShipBuilder* m_shipBuilder = nullptr;
         SpaceStationBuilder* m_spaceStationBuilder = nullptr;
+
+        GalaxyBuilder* m_galaxyBuilder = nullptr;
+        SectorBuilder* m_sectorBuilder = nullptr;
+        StarSystemBuilder* m_starsystemBuilder = nullptr;
 };

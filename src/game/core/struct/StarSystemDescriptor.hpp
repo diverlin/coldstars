@@ -21,36 +21,23 @@
 struct StarSystemDescriptor
 {
     public:
-        int race_id;
+        int race_id = 0;
         
-        int planet_num;
-        int spacestation_num;
-        int asteroid_num;
-        int asteroid_delay;
+        int planet_num = 0;
+        int spacestation_num = 0;
+        int asteroid_num = 0;
+        int asteroid_delay = 0;
         
-        bool allow_satellites;        
-        bool allow_spacestations;
-        bool allow_ships;    
-        bool allow_ship_ranger;
-        bool allow_ship_warrior;
-        bool allow_ship_trader;
-        bool allow_ship_pirat;
-        bool allow_ship_diplomat;
+        bool allow_satellites = true;
+        bool allow_spacestations = true;
+        bool allow_ships = true;
+        bool allow_ship_ranger = true;
+        bool allow_ship_warrior = true;
+        bool allow_ship_trader = true;
+        bool allow_ship_pirat = true;
+        bool allow_ship_diplomat = true;
                                                         
-        StarSystemDescriptor():
-        race_id(0),
-        planet_num(0),
-        spacestation_num(0),
-        asteroid_num(0),
-        asteroid_delay(0),
-        allow_satellites(true),
-        allow_spacestations(true),
-        allow_ships(true),
-        allow_ship_ranger(true),
-        allow_ship_warrior(true),
-        allow_ship_trader(true),
-        allow_ship_pirat(true),
-        allow_ship_diplomat(true)
+        StarSystemDescriptor()
         {}
         
         ~StarSystemDescriptor() {}

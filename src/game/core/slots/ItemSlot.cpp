@@ -45,12 +45,12 @@
 #include <managers/EntitiesManager.hpp>
 
 ItemSlot::ItemSlot(INTLONGEST id, TYPE::ENTITY subtype_id)
-:
-m_Turrel(nullptr),          
-m_Item(nullptr),
-m_Target(nullptr),
-m_Subtarget(nullptr),
-m_HitProbability(0)
+    :
+      m_Turrel(nullptr),
+      m_Item(nullptr),
+      m_Target(nullptr),
+      m_Subtarget(nullptr),
+      m_HitProbability(0)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::ITEM_SLOT_ID);
@@ -62,11 +62,11 @@ m_HitProbability(0)
 /* virtual */
 ItemSlot::~ItemSlot()
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
+#if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~ItemSlot("+std::to_string(id())+")");
-    #endif
+#endif
 }  
-  
+
 /* virtual */  
 void ItemSlot::putChildrenToGarbage() const
 {
@@ -78,19 +78,19 @@ void ItemSlot::putChildrenToGarbage() const
 
 void ItemSlot::SetTarget(SpaceObject* target, ItemSlot* subtarget)     
 {
-    m_Target    = target; 
+    m_Target    = target;
     m_Subtarget = subtarget;
 
-    #if WEAPONSTARGET_LOG_ENABLED == 1 
+#if WEAPONSTARGET_LOG_ENABLED == 1
     Log("SetTarget");
-    #endif     
+#endif
 }
-        
+
 STATUS ItemSlot::ValidateTarget()
 {    
-    #if WEAPONSTARGET_LOG_ENABLED == 1 
+#if WEAPONSTARGET_LOG_ENABLED == 1
     Log("ValidateTarget");
-    #endif   
+#endif
     
     if (m_Subtarget != nullptr)
     {
@@ -102,24 +102,24 @@ STATUS ItemSlot::ValidateTarget()
     
     STATUS status = CheckTarget(m_Target);
     
-    #if WEAPONSTARGET_LOG_ENABLED == 1 
+#if WEAPONSTARGET_LOG_ENABLED == 1
     if (status != STATUS::OK)
     {
         Logger::Instance().Log(getTargetStatusStr(status), WEAPONSTARGET_LOG_DIP);
     }
-    #endif  
-     
+#endif
+
     return status;
 }
 
 void ItemSlot::ResetTarget()
 { 
-    #if WEAPONSTARGET_LOG_ENABLED == 1 
+#if WEAPONSTARGET_LOG_ENABLED == 1
     Log("ResetTarget");
-    #endif   
-        
-    m_Target    = nullptr; 
-    m_Subtarget = nullptr;        
+#endif
+
+    m_Target    = nullptr;
+    m_Subtarget = nullptr;
 }
 
 bool ItemSlot::CheckAmmo() const
@@ -130,27 +130,27 @@ bool ItemSlot::CheckAmmo() const
         case TYPE::ENTITY::ROCKET_EQUIPMENT_ID: { if (GetRocketEquipment()->GetAmmo() > 0) return true; break; }
     }
     
-    return false;           
+    return false;
 }
 
 void ItemSlot::FireEvent(float attack_rate, bool show_effect)
 {    
-    #if WEAPONSTARGET_LOG_ENABLED == 1 
+#if WEAPONSTARGET_LOG_ENABLED == 1
     Log("FireEvent");
-    #endif   
+#endif
 
     switch(GetItem()->subTypeId())
     {
         case TYPE::ENTITY::LAZER_EQUIPMENT_ID:
-        {   
-            GetLazerEquipment()->FireEvent(GetTarget(), GetSubTarget(), attack_rate, show_effect); 
-            break;  
+        {
+            GetLazerEquipment()->FireEvent(GetTarget(), GetSubTarget(), attack_rate, show_effect);
+            break;
         }
 
         case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:
-        {       
+        {
             GetRocketEquipment()->FireEvent(attack_rate);
-            break;              
+            break;
         }
     }
 
@@ -162,49 +162,49 @@ void ItemSlot::FireEvent(float attack_rate, bool show_effect)
 
 bool ItemSlot::CheckItemInsertion(BaseItem* item) const
 {
-    if (subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID) 
+    if (subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID)
     {
         return true;
     }
 
     if (subTypeId() == item->GetParentSubTypeId())
-    {                                     
+    {
         return true;
     }
     
     return false;
 }
-                    
+
 bool ItemSlot::InsertItem(BaseItem* item)
 {    
-    if (subTypeId() == TYPE::ENTITY::GATE_SLOT_ID) 
-    { 
+    if (subTypeId() == TYPE::ENTITY::GATE_SLOT_ID)
+    {
         m_Item = item;
         DropItemToSpace();
         return true;
     }
 
-    if (subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID) 
-    {           
+    if (subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID)
+    {
         m_Item = item;
         if (item->GetItemSlot() != nullptr)
         {
             item->GetItemSlot()->RemoveItem();
         }
         item->SetItemSlot(this);
-         
+
         return true;
     }
 
     if (subTypeId() == item->GetParentSubTypeId())
-    {                                     
+    {
         m_Item = item;
         if (item->GetItemSlot() != nullptr)
         {
             item->GetItemSlot()->RemoveItem();
         }
         item->SetItemSlot(this);
-        UpdateVehiclePropetries(); 
+        UpdateVehiclePropetries();
 
         return true;
     }
@@ -216,66 +216,66 @@ void ItemSlot::RemoveItem()
 {    
     m_Item = nullptr;
     ResetTarget();
-        
-    if (subTypeId() != TYPE::ENTITY::CARGO_SLOT_ID) 
-    {    
-        UpdateVehiclePropetries(); 
-    }         
+
+    if (subTypeId() != TYPE::ENTITY::CARGO_SLOT_ID)
+    {
+        UpdateVehiclePropetries();
+    }
 }
 
 void ItemSlot::SelectEvent()
 {
     selected = true;
-        
+
     if (owner->typeId() == TYPE::ENTITY::VEHICLE_ID)
-    {     
+    {
         switch(subTypeId())
         {
             case TYPE::ENTITY::DRIVE_SLOT_ID: { GetOwnerVehicle()->UpdatePropertiesSpeed(); break; }
         }
     }
 }
-                                
+
 void ItemSlot::DeselectEvent()
 {
     selected = false;
     
     if (owner->typeId() == TYPE::ENTITY::VEHICLE_ID)
-    {     
+    {
         switch(subTypeId())
         {
             case TYPE::ENTITY::WEAPON_SLOT_ID:     {     ResetTarget(); break; }
-            case TYPE::ENTITY::DRIVE_SLOT_ID:     
+            case TYPE::ENTITY::DRIVE_SLOT_ID:
             {
-                  GetOwnerVehicle()->UpdatePropertiesSpeed();
+                GetOwnerVehicle()->UpdatePropertiesSpeed();
                 //GetOwnerVehicle()->UpdatePropertiesJump();
                 break;
             }
         }
     }
-            
+
 }
-            
+
 void ItemSlot::UpdateVehiclePropetries() const
 {
     if (subTypeId() != TYPE::ENTITY::CARGO_SLOT_ID)
-    {     
+    {
         switch(subTypeId())
         {
             case TYPE::ENTITY::WEAPON_SLOT_ID:     { GetOwnerVehicle()->UpdatePropertiesFire(); break; }
             case TYPE::ENTITY::SCANER_SLOT_ID:     { GetOwnerVehicle()->UpdatePropertiesScan(); break; }
             case TYPE::ENTITY::BAK_SLOT_ID:         {
-                                  GetOwnerVehicle()->UpdatePropertiesSpeed();
-                                   GetOwnerVehicle()->UpdatePropertiesJump(); 
-       
-                                     break;
-                              }
-              
-              case TYPE::ENTITY::DRIVE_SLOT_ID:       {
-                                    GetOwnerVehicle()->UpdatePropertiesSpeed();
-                                GetOwnerVehicle()->UpdatePropertiesJump(); 
-                                  break;
-                            }
+                GetOwnerVehicle()->UpdatePropertiesSpeed();
+                GetOwnerVehicle()->UpdatePropertiesJump();
+
+                break;
+            }
+
+            case TYPE::ENTITY::DRIVE_SLOT_ID:       {
+                GetOwnerVehicle()->UpdatePropertiesSpeed();
+                GetOwnerVehicle()->UpdatePropertiesJump();
+                break;
+            }
                 
             case TYPE::ENTITY::DROID_SLOT_ID:     { GetOwnerVehicle()->UpdatePropertiesRepair(); break; }
             case TYPE::ENTITY::ENERGIZER_SLOT_ID: { GetOwnerVehicle()->UpdatePropertiesEnergy(); break; }
@@ -283,12 +283,12 @@ void ItemSlot::UpdateVehiclePropetries() const
             case TYPE::ENTITY::GRAPPLE_SLOT_ID:     { GetOwnerVehicle()->UpdatePropertiesGrab(); break; }
             case TYPE::ENTITY::PROTECTOR_SLOT_ID: { GetOwnerVehicle()->UpdatePropertiesProtection(); break; }
             case TYPE::ENTITY::RADAR_SLOT_ID:     { GetOwnerVehicle()->UpdatePropertiesRadar(); break; }
-            
+
             case TYPE::ENTITY::ARTEFACT_SLOT_ID: { GetOwnerVehicle()->UpdateArtefactInfluence(); break; }
         }
     }
 }
-   
+
 ///* virtual */
 //void ItemSlot::Render(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text) const
 //{
@@ -313,7 +313,7 @@ void ItemSlot::UpdateVehiclePropetries() const
 //    render.DrawQuad(*textureOb, box);
 //    render.DrawQuad(*textureOb_mask, box);
 //}
-        
+
 int ItemSlot::GetItemRadius() const
 {       
     switch(m_Item->typeId())
@@ -331,10 +331,10 @@ int ItemSlot::GetItemRadius() const
             
             break;
         }
-        
+
         case TYPE::ENTITY::BOMB_ID:
         {
-            return GetBomb()->GetRadius();   break; 
+            return GetBomb()->GetRadius();   break;
         }
     }
     
@@ -358,7 +358,7 @@ int ItemSlot::GetItemDamage() const
             
         case TYPE::ENTITY::BOMB_ID:
         {
-            return GetBomb()->GetDamage();   break; 
+            return GetBomb()->GetDamage();   break;
         }
     }
     
@@ -367,60 +367,60 @@ int ItemSlot::GetItemDamage() const
 
 void ItemSlot::DropItemToSpace()
 {
-//    jeti::TextureOb* textureOb_ = nullptr;
-           
-//    switch (m_Item->typeId())
-//    {
-//        case TYPE::ENTITY::BOMB_ID: { textureOb_ = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID); break; }
-//        default:                      { textureOb_ = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER_ID); break; }
-//    }
+    //    jeti::TextureOb* textureOb_ = nullptr;
 
-//    Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, m_Item);
-//    float impulse_strength = 0.5;
-//    glm::vec3 impulse_dir(meti::getRandXYVec3Unit());
-//    container->addImpulse(impulse_dir, impulse_strength);
-//    GetOwnerVehicle()->starsystem()->AddContainer(container, GetOwnerVehicle()->center());
-//    RemoveItem();
+    //    switch (m_Item->typeId())
+    //    {
+    //        case TYPE::ENTITY::BOMB_ID: { textureOb_ = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID); break; }
+    //        default:                      { textureOb_ = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER_ID); break; }
+    //    }
+
+    //    Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, m_Item);
+    //    float impulse_strength = 0.5;
+    //    glm::vec3 impulse_dir(meti::getRandXYVec3Unit());
+    //    container->addImpulse(impulse_dir, impulse_strength);
+    //    GetOwnerVehicle()->starsystem()->AddContainer(container, GetOwnerVehicle()->center());
+    //    RemoveItem();
 }
-       
+
 bool ItemSlot::SwapItem(ItemSlot* slot)
 {
     if ( (m_Item == nullptr) and (slot->GetItem() != nullptr) )
-    {      
-        if (InsertItem(slot->GetItem()) == true) 
-        {              
-            return true; 
-        }             
+    {
+        if (InsertItem(slot->GetItem()) == true)
+        {
+            return true;
+        }
     }
     
     if ( (m_Item != nullptr) and (slot->GetItem() == nullptr) )
-    { 
+    {
         if (slot->InsertItem(GetItem()) == true)
-        {            
-            return true; 
+        {
+            return true;
         }
     }
 
     if ( (m_Item != nullptr) and (slot->GetItem() != nullptr) )
-    {        
+    {
         BaseItem* tmp_item = slot->GetItem();
         if ( (slot->CheckItemInsertion(m_Item) == true) and (CheckItemInsertion(tmp_item) == true) )
-        {                  
+        {
             slot->InsertItem(m_Item);
             tmp_item->SetItemSlot(nullptr);
             InsertItem(tmp_item);
-        
+
             return true;
-        }        
+        }
 
         if ( (m_Item->typeId() == TYPE::ENTITY::MODULE_ID) and (slot->GetItem()->typeId() == TYPE::ENTITY::EQUIPMENT_ID) )
         {
-            if (((BaseEquipment*)slot->GetItem())->InsertModule((BaseModule*)m_Item) == true)  
-            {    
+            if (((BaseEquipment*)slot->GetItem())->InsertModule((BaseModule*)m_Item) == true)
+            {
                 return true;
             }
         }
-    }               
+    }
     
     return false;
 }
@@ -430,7 +430,7 @@ void ItemSlot::UpdateRange(jeti::TextureOb* _texOb)
     float radius = this->GetItemRadius();
     int size = 6;
     
-//    m_VisualPath.FillData(_texOb, radius, size);
+    //    m_VisualPath.FillData(_texOb, radius, size);
 }
 
 void ItemSlot::DrawRange(const glm::vec2& offset)
@@ -440,72 +440,72 @@ void ItemSlot::DrawRange(const glm::vec2& offset)
 
 bool ItemSlot::CheckSubTarget(ItemSlot* subtarget) const
 {
-    #if WEAPONSTARGET_LOG_ENABLED == 1 
+#if WEAPONSTARGET_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::CheckSubTarget", WEAPONSTARGET_LOG_DIP);
-    #endif     
+#endif
     
     if (subtarget->GetItem() != nullptr)
     {
         return true;
     }
     
-    return false;        
+    return false;
 }
 
 
 STATUS ItemSlot::CheckTarget(SpaceObject* target) const
 {
-    #if WEAPONSTARGET_LOG_ENABLED == 1 
+#if WEAPONSTARGET_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
-    #endif     
+#endif
     
     if (IsTargetAlive(target) == false)
     {
         return STATUS::TARGET_DEAD;
     }
-        
+
     if (IsTargetInSpace(target) == false)
     {
         return STATUS::TARGET_NOTIN_SPACE;
     }
-            
+
     if (IsTargetInSameStarSystem(target) == false)
     {
-        return STATUS::TARGET_NOTIN_STARSYSTEM;        
+        return STATUS::TARGET_NOTIN_STARSYSTEM;
     }
 
     if (CheckDistanceToTarget(target) == false)
     {
         return STATUS::TARGET_OUTOF_RANGE;
     }
-        
+
     return STATUS::TARGET_OK;
 }     
-   
+
 STATUS ItemSlot::CheckTargetPure(SpaceObject* target) const
 {
-    #if WEAPONSTARGET_LOG_ENABLED == 1 
+#if WEAPONSTARGET_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
-    #endif     
+#endif
 
     if (IsTargetAlive(target) == false)
     {
         return STATUS::TARGET_DEAD;
     }
-        
+
     if (IsTargetInSpace(target) == false)
     {
         return STATUS::TARGET_NOTIN_SPACE;
     }
-            
+
     if (IsTargetInSameStarSystem(target) == false)
     {
-        return STATUS::TARGET_NOTIN_STARSYSTEM;        
+        return STATUS::TARGET_NOTIN_STARSYSTEM;
     }
-        
+
     return STATUS::TARGET_OK;
 } 
-       
+
 bool ItemSlot::IsTargetAlive(SpaceObject* target) const
 {
     return target->isAlive();
@@ -531,7 +531,7 @@ bool ItemSlot::CheckDistanceToTarget(SpaceObject* target) const
     float dist = meti::distance(GetOwnerVehicle()->center(), target->center());
     if (dist < GetItemRadius())
     {
-            return true;
+        return true;
     }
 
     return false;
@@ -553,7 +553,7 @@ void ItemSlot::Load(const boost::property_tree::ptree& load_ptree)
     BaseSlot::LoadData(load_ptree);
     ItemSlot::LoadData(load_ptree);
 }
-    
+
 /* virtual override final */ 
 void ItemSlot::Resolve()
 {
@@ -564,9 +564,9 @@ void ItemSlot::Resolve()
 
 void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
-    #endif
+#endif
 
     if (m_Target != nullptr)    { save_ptree.put(root+"unresolved_ItemSlot.target_id", m_Target->id()); }
     else                        { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE_ID); }
@@ -577,19 +577,19 @@ void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
 
 void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
-    #endif
+#endif
     
-    unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id"); 
-    unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id"); 
+    unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id");
+    unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id");
 }
 
 void ItemSlot::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
-    #endif
+#endif
     
     if (unresolved_ItemSlot.target_id != NONE_ID)
     {
@@ -603,17 +603,17 @@ void ItemSlot::ResolveData()
 
     switch(owner->typeId())
     {
-       case TYPE::ENTITY::VEHICLE_ID:     {    ((Vehicle*)owner)->AddItemSlot(this); break; }
-       case TYPE::ENTITY::CONTAINER_ID:         {    ((Container*)owner)->BindItemSlot(this); break; }
-       case TYPE::ENTITY::STORE_ID:             {     ((Store*)owner)->AddItemSlot(this); break; }
-       case TYPE::ENTITY::ANGAR_ID:             {     ((Angar*)owner)->AddItemSlot(this); break; }
-       //case TYPE::ENTITY::NATURELAND_ID:      {     ((NatureLand*)owner)->AddItemSlot(this); break; }
+        case TYPE::ENTITY::VEHICLE_ID:     {    ((Vehicle*)owner)->AddItemSlot(this); break; }
+        case TYPE::ENTITY::CONTAINER_ID:         {    ((Container*)owner)->BindItemSlot(this); break; }
+        case TYPE::ENTITY::STORE_ID:             {     ((Store*)owner)->AddItemSlot(this); break; }
+        case TYPE::ENTITY::ANGAR_ID:             {     ((Angar*)owner)->AddItemSlot(this); break; }
+            //case TYPE::ENTITY::NATURELAND_ID:      {     ((NatureLand*)owner)->AddItemSlot(this); break; }
     }
 }
 
 void ItemSlot::Log(const std::string& func_name) const
 {
-    #if WEAPONSTARGET_LOG_ENABLED == 1 
+#if WEAPONSTARGET_LOG_ENABLED == 1
     std::string str = "ItemSlot(id="+std::to_string(id())+")::"+func_name+" "+dataTypeString();
     
     if (owner != nullptr)       { str += " owner:" + owner->dataTypeString(); }
@@ -621,7 +621,7 @@ void ItemSlot::Log(const std::string& func_name) const
     if (m_Target != nullptr)    { str += " target:" + m_Target->dataTypeString();  }
     if (m_Subtarget != nullptr) { str += " subtarget:" + m_Subtarget->dataTypeString(); }
     
-    Logger::Instance().Log(str, WEAPONSTARGET_LOG_DIP); 
-    #endif
+    Logger::Instance().Log(str, WEAPONSTARGET_LOG_DIP);
+#endif
 }
 

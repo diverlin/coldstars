@@ -27,29 +27,22 @@
 
 #include <meti/RandUtils.hpp>
 
-SectorBuilder& SectorBuilder::Instance()
-{
-    static SectorBuilder instance;
-    return instance;
-}
+SectorBuilder::SectorBuilder()
+{}
 
 SectorBuilder::~SectorBuilder()
 {}
 
-Sector* SectorBuilder::GetNewSectorTemplate(INTLONGEST id) const
+Sector* SectorBuilder::createTemplate(INTLONGEST id) const
 {
     Sector* sector = nullptr;
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
     
-    try 
-    { 
+    try {
         sector = new Sector(id);
-    }
-    catch(std::bad_alloc)
-    {
+    } catch(std::bad_alloc) {
         Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
     global::get().entitiesManager().RegisterEntity(sector);
@@ -57,9 +50,9 @@ Sector* SectorBuilder::GetNewSectorTemplate(INTLONGEST id) const
     return sector;
 } 
 
-Sector* SectorBuilder::GetNewSector(const SectorDescriptor& sector_descriptor) const
+Sector* SectorBuilder::create(const SectorDescriptor& sector_descriptor) const
 {
-    Sector* sector = GetNewSectorTemplate();
+    Sector* sector = createTemplate();
     createInternals(sector, sector_descriptor);
     
     return sector;
@@ -71,7 +64,7 @@ void SectorBuilder::createInternals(Sector* sector, const SectorDescriptor& sect
     {  
         glm::vec3 center(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));
         
-        StarSystem* starsystem = StarSystemBuilder::Instance().GetNewStarSystem(starsystem_descriptor);
+        StarSystem* starsystem = global::get().starSystemBuilder().create(starsystem_descriptor);
         sector->Add(starsystem, center); 
     }
 }

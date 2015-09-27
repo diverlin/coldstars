@@ -26,27 +26,16 @@ class StarSystemDescriptor;
 class StarSystemBuilder
 {
     public:
-        static StarSystemBuilder& Instance();
+        StarSystemBuilder();
         ~StarSystemBuilder();
         
-        StarSystem* GetNewStarSystemTemplate(INTLONGEST id = NONE_ID) const; 
-        StarSystem* GetNewStarSystem(const StarSystemDescriptor&) const;
+        StarSystem* createTemplate(INTLONGEST id = NONE_ID) const;
+        StarSystem* create(const StarSystemDescriptor&) const;
     
     private:
-        StarSystemBuilder() {}
-        StarSystemBuilder(const StarSystemBuilder&) = delete;
-        StarSystemBuilder& operator=(const StarSystemBuilder&) = delete;
-        
         void createInternals(StarSystem*, const StarSystemDescriptor&) const;
         
         void CreateBackground(StarSystem*, int, int, int) const;
         void CreateStar(StarSystem*) const;
         void CreatePlanets(StarSystem*, int) const;
 }; 
-
-
-    
-
-        
-
-

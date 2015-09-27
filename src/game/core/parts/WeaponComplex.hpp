@@ -33,10 +33,8 @@ class TextureOb;
 class WeaponComplex
 {
     public:
-        WeaponComplex();
+        WeaponComplex(Vehicle* owner_vehicle);
         ~WeaponComplex();
-           
-        void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; }
 
         int GetRadiusMin() const { return radius_min; }
         int GetTotalRadius() const { return total_radius; }
@@ -67,13 +65,13 @@ class WeaponComplex
         void RenderTurrels() const;
             
     private:
-        int total_damage;
-        int total_radius;
-        int radius_min;
+        int total_damage = 0;
+        int total_radius = 0;
+        int radius_min = 0;
         
-        Vehicle* owner_vehicle;
+        Vehicle* owner_vehicle = nullptr;
         
-        int fire_delay, d_fire_delay;
+        int fire_delay = 0, d_fire_delay = 0;
         std::vector<ItemSlot*> slot_weapon_vec;
         std::vector<ItemSlot*> slot_weapon_reloaded_vec;
 

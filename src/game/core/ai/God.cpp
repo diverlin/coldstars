@@ -62,7 +62,7 @@ God::~God()
 
 Galaxy* God::createWorld(const GalaxyDescriptor& galaxy_descriptor)
 {
-    Galaxy* galaxy = GalaxyBuilder::Instance().GetNewGalaxy(galaxy_descriptor);
+    Galaxy* galaxy = global::get().galaxyBuilder().create(galaxy_descriptor);
     CreateLife(galaxy, galaxy_descriptor);
     if (galaxy_descriptor.allow_invasion == true) {
         CreateInvasion(galaxy, galaxy_descriptor);

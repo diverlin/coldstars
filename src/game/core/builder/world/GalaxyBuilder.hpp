@@ -28,17 +28,13 @@ class GalaxyDescriptor;
 class GalaxyBuilder
 {
     public:
-        static GalaxyBuilder& Instance();
+        GalaxyBuilder();
         ~GalaxyBuilder();
         
-        Galaxy* GetNewGalaxyTemplate(INTLONGEST id = NONE_ID) const; 
-        Galaxy* GetNewGalaxy(const GalaxyDescriptor&) const;
+        Galaxy* createTemplate(INTLONGEST id = NONE_ID) const;
+        Galaxy* create(const GalaxyDescriptor&) const;
                                                 
-    private:
-        GalaxyBuilder() {}
-        GalaxyBuilder(const GalaxyBuilder&) = delete;
-        GalaxyBuilder& operator=(const GalaxyBuilder&) = delete;
-        
+    private:       
         void createInternals(Galaxy*, const GalaxyDescriptor&) const;
 }; 
     
