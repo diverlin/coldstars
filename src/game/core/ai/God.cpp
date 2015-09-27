@@ -45,7 +45,7 @@
 #include <ai/Task.hpp>
 #include <pilots/Npc.hpp>
 
-#include <struct/GalaxyDescriptor.hpp>
+#include <descriptors/GalaxyDescriptor.hpp>
 #include <common/RaceDescriptors.hpp>
 
 #include <meti/RandUtils.hpp>

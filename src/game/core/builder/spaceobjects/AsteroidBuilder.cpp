@@ -20,6 +20,8 @@
 #include "../CommonBuilderHeaders.hpp"
 #include "../../spaceobjects/Asteroid.hpp"
 
+#include <common/constants.hpp>
+
 #include <types/MeshTypes.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -64,7 +66,7 @@ void AsteroidBuilder::createInternals(Asteroid* asteroid) const
     data_life.armor      = 10;
     data_life.dying_time = 50;
     
-    PlanetData planet_data;
+    PlanetDescriptor planet_data;
 
     planet_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS); 
     planet_data.radius_A      = meti::getRandInt(300, 1200);
@@ -73,7 +75,7 @@ void AsteroidBuilder::createInternals(Asteroid* asteroid) const
     planet_data.speed         = 0.1;
     planet_data.clockwise     = meti::getRandBool();
     
-    asteroid->SetPlanetData(planet_data);
+    asteroid->SetPlanetDescriptor(planet_data);
     asteroid->setLifeData(data_life);
 
     float scale_comp = meti::getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);

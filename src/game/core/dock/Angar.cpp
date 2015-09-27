@@ -118,9 +118,9 @@ bool Angar::ChargeRocketEquipment(Npc* npc, RocketEquipment* rocket_equipment) c
 
 bool Angar::RepairVehicle(Vehicle* vehicle) const
 {        
-    int price_for_one = vehicle->GetDataKorpus().price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
+    int price_for_one = vehicle->GetVehicleDescriptor().price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
     int repair_max =  vehicle->GetOwnerNpc()->GetCredits() / price_for_one;
-    int repair_need = vehicle->GetDataKorpus().armor - vehicle->armor();
+    int repair_need = vehicle->GetVehicleDescriptor().armor - vehicle->armor();
     
     int repair_amount = 0;
     if (repair_max > repair_need) { repair_amount = repair_need; }

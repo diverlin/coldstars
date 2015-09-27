@@ -21,9 +21,9 @@
 #include <builder/world/GalaxyBuilder.hpp>
 #include <builder/world/SectorBuilder.hpp>
 #include <builder/world/StarSystemBuilder.hpp>
-#include <struct/GalaxyDescriptor.hpp>
-#include <struct/SectorDescriptor.hpp>
-#include <struct/StarSystemDescriptor.hpp>
+#include <descriptors/GalaxyDescriptor.hpp>
+#include <descriptors/SectorDescriptor.hpp>
+#include <descriptors/StarSystemDescriptor.hpp>
 
 int main()
 {

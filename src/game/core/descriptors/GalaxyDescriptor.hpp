@@ -19,7 +19,7 @@
 #pragma once
 
 #include <vector>
-#include <struct/SectorDescriptor.hpp>
+#include <descriptors/SectorDescriptor.hpp>
 
 struct GalaxyDescriptor
 {

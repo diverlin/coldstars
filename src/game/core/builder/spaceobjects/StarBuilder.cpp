@@ -20,6 +20,8 @@
 #include "../CommonBuilderHeaders.hpp"
 #include "../../spaceobjects/Star.hpp"
 
+#include <common/constants.hpp>
+
 #include <types/MeshTypes.hpp>
     
 #include <meti/RandUtils.hpp>
@@ -62,7 +64,7 @@ void StarBuilder::createInternals(Star* star) const
     LifeData data_life;
     data_life.armor = 1000000; 
     
-    PlanetData star_data;
+    PlanetDescriptor star_data;
     star_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS); 
     star_data.radius_A      = 50;
     star_data.radius_B      = 50; 
@@ -71,7 +73,7 @@ void StarBuilder::createInternals(Star* star) const
     
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
     
-    star->SetPlanetData(star_data);
+    star->SetPlanetDescriptor(star_data);
     star->setLifeData(data_life);
     float scale_comp = meti::getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);

@@ -104,7 +104,7 @@ void ShipBuilder::createInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTITY s
         case TYPE::ENTITY::TRADER_ID:  { otsec_rate = 1.5; break; }
     }
     
-    VehicleKorpusData data_korpus;
+    VehicleDescriptor data_korpus;
     data_korpus.space       = size_id*100 + meti::getRandInt(0, 100);
     data_korpus.armor       = data_korpus.space;
     data_korpus.protection  = protection_rate*size_id/(SIZE_1_ID);

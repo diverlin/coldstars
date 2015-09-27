@@ -20,6 +20,8 @@
 #include "../CommonBuilderHeaders.hpp"
 #include "../../spaceobjects/Planet.hpp"
 
+#include <common/constants.hpp>
+
 //#include <effects/Atmosphere.hpp>
 //#include <effects/Ring.hpp>
 
@@ -66,7 +68,7 @@ void PlanetBuilder::createInternals(Planet* planet, float orbit_radius) const
     LifeData data_life;
     data_life.armor = 100000;
 
-    PlanetData planet_data;
+    PlanetDescriptor planet_data;
 
     planet_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS); 
     planet_data.radius_A      = orbit_radius;
@@ -77,7 +79,7 @@ void PlanetBuilder::createInternals(Planet* planet, float orbit_radius) const
 
     //jeti::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
     
-    planet->SetPlanetData(planet_data);
+    planet->SetPlanetDescriptor(planet_data);
     
     planet->setLifeData(data_life);
 

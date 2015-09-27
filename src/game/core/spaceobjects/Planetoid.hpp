@@ -37,11 +37,11 @@ class Planetoid : public SpaceObject
         Planetoid();
         virtual ~Planetoid();
         
-        void SetPlanetData(const PlanetData& data_planet) { m_DataPlanet = data_planet; }
+        void SetPlanetDescriptor(const PlanetDescriptor& planet_descriptor) { m_PlanetDescriptor = planet_descriptor; }
         
         Orbit& GetOrbit() { return m_Orbit; }   // !!!
         const Orbit& GetOrbit() const { return m_Orbit; }   
-        const PlanetData& GetDataPlanet() const { return m_DataPlanet; }
+        const PlanetDescriptor& GetPlanetDescriptor() const { return m_PlanetDescriptor; }
         
         void BindParent(const SpaceObject* const, int);
         
@@ -59,7 +59,7 @@ class Planetoid : public SpaceObject
         void ResolveData();
         
     private:
-        PlanetData m_DataPlanet;   
+        PlanetDescriptor m_PlanetDescriptor;
         Orbit m_Orbit;     
         
         void CreateOrbit();    

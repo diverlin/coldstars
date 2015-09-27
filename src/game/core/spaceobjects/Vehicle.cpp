@@ -121,10 +121,10 @@ void Vehicle::CreateProtectionComplexTextureDependedStuff()
     //    m_ComplexProtector.GetShieldEffect()->setParent(this);
 }
 
-void Vehicle::SetKorpusData(const VehicleKorpusData& data_korpus) 
+void Vehicle::SetKorpusData(const VehicleDescriptor& data_korpus)
 { 
-    m_DataKorpus = data_korpus;
-    m_Properties.protection = m_DataKorpus.protection;
+    m_VehicleDescriptor = data_korpus;
+    m_Properties.protection = m_VehicleDescriptor.protection;
 }
 
 GoodsPack* Vehicle::GetGoodsPack() const
@@ -735,7 +735,7 @@ void Vehicle::postDeathUniqueEvent(bool show_effect)
 void Vehicle::CheckNeedsInStatic()
 {
     // check armor
-    if (dataLife().armor < 0.5*m_DataKorpus.armor)    { m_Needs.repair_korpus = true; }
+    if (dataLife().armor < 0.5*m_VehicleDescriptor.armor)    { m_Needs.repair_korpus = true; }
     else                                                { m_Needs.repair_korpus = false; }
 
     //check item damages
@@ -863,7 +863,7 @@ void Vehicle::IncreaseMass(int d_mass)
 #endif
     
     addMass(d_mass);
-    m_Properties.free_space = m_DataKorpus.space - mass();
+    m_Properties.free_space = m_VehicleDescriptor.space - mass();
     UpdatePropertiesSpeed(); // as the mass influence speed this action is necessary here
 }
 
@@ -874,7 +874,7 @@ void Vehicle::DecreaseMass(int d_mass)
 #endif
     
     addMass(-d_mass);
-    m_Properties.free_space = m_DataKorpus.space - mass();
+    m_Properties.free_space = m_VehicleDescriptor.space - mass();
     UpdatePropertiesSpeed(); // as the mass influence speed this action is necessary here
 }
 
@@ -1016,7 +1016,7 @@ void Vehicle::UpdatePropertiesProtection()
     Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesProtection", ITEMINFLUENCE_LOG_DIP);
 #endif
     
-    m_Properties.protection = m_DataKorpus.protection;
+    m_Properties.protection = m_VehicleDescriptor.protection;
     m_Properties.shield_effect_enabled = false;
 
     if (m_Properties.hibernate_mode_enabled == false)
@@ -1063,9 +1063,9 @@ void Vehicle::IncreaseArmor(int repair)
     
     dataLife().armor += repair;
     
-    if (dataLife().armor > m_DataKorpus.armor)
+    if (dataLife().armor > m_VehicleDescriptor.armor)
     {
-        dataLife().armor = m_DataKorpus.armor;
+        dataLife().armor = m_VehicleDescriptor.armor;
     }
 }
 
@@ -1112,7 +1112,7 @@ void Vehicle::UpdatePropertiesGrab()
     m_Properties.grab_strength = 0;
     m_Properties.grab_radius = 0;
 
-    if (m_DataKorpus.slot_grapple_num != 0)
+    if (m_VehicleDescriptor.slot_grapple_num != 0)
     {
         if (m_SlotGrapple->GetItem() != nullptr)
         {
@@ -1261,15 +1261,15 @@ bool Vehicle::IsAbleToJumpTo(StarSystem* target_starsystem) const
 void Vehicle::RepairKorpusOnAmount(int amount)
 {
     dataLife().armor += amount;
-    if (dataLife().armor > m_DataKorpus.armor)
+    if (dataLife().armor > m_VehicleDescriptor.armor)
     {
-        dataLife().armor = m_DataKorpus.armor;
+        dataLife().armor = m_VehicleDescriptor.armor;
     }
 }
 
 bool Vehicle::IsArmorFull() const
 {
-    if (dataLife().armor == m_DataKorpus.armor)
+    if (dataLife().armor == m_VehicleDescriptor.armor)
     {
         return true;
     }
@@ -1279,7 +1279,7 @@ bool Vehicle::IsArmorFull() const
 
 int Vehicle::GetArmorMiss() const
 {
-    return (m_DataKorpus.armor - dataLife().armor);
+    return (m_VehicleDescriptor.armor - dataLife().armor);
 }
 
 bool Vehicle::IsFuelFull() const
@@ -1427,21 +1427,21 @@ void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::strin
     Logger::Instance().Log(" Vehicle("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
 #endif
 
-    save_ptree.put(root+"m_DataKorpus.space", m_DataKorpus.space);
-    save_ptree.put(root+"m_DataKorpus.armor", m_DataKorpus.armor);
-    save_ptree.put(root+"m_DataKorpus.protection", m_DataKorpus.protection);
-    save_ptree.put(root+"m_DataKorpus.temperature", m_DataKorpus.temperature);
+    save_ptree.put(root+"m_DataKorpus.space", m_VehicleDescriptor.space);
+    save_ptree.put(root+"m_DataKorpus.armor", m_VehicleDescriptor.armor);
+    save_ptree.put(root+"m_DataKorpus.protection", m_VehicleDescriptor.protection);
+    save_ptree.put(root+"m_DataKorpus.temperature", m_VehicleDescriptor.temperature);
 
-    save_ptree.put(root+"m_DataKorpus.price", m_DataKorpus.price);
-    save_ptree.put(root+"m_DataKorpus.draw_turrels", m_DataKorpus.draw_turrels);
+    save_ptree.put(root+"m_DataKorpus.price", m_VehicleDescriptor.price);
+    save_ptree.put(root+"m_DataKorpus.draw_turrels", m_VehicleDescriptor.draw_turrels);
 
-    save_ptree.put(root+"m_DataKorpus.slot_grapple_num", m_DataKorpus.slot_grapple_num);
-    save_ptree.put(root+"m_DataKorpus.slot_drive_num", m_DataKorpus.slot_drive_num);
-    save_ptree.put(root+"m_DataKorpus.slot_protector_num", m_DataKorpus.slot_protector_num);
-    save_ptree.put(root+"m_DataKorpus.slot_radar_num", m_DataKorpus.slot_radar_num);
-    save_ptree.put(root+"m_DataKorpus.slot_scaner_num", m_DataKorpus.slot_scaner_num);
-    save_ptree.put(root+"m_DataKorpus.slot_freezer_num", m_DataKorpus.slot_freezer_num);
-    save_ptree.put(root+"m_DataKorpus.slot_weapon_num", m_DataKorpus.slot_weapon_num);
+    save_ptree.put(root+"m_DataKorpus.slot_grapple_num", m_VehicleDescriptor.slot_grapple_num);
+    save_ptree.put(root+"m_DataKorpus.slot_drive_num", m_VehicleDescriptor.slot_drive_num);
+    save_ptree.put(root+"m_DataKorpus.slot_protector_num", m_VehicleDescriptor.slot_protector_num);
+    save_ptree.put(root+"m_DataKorpus.slot_radar_num", m_VehicleDescriptor.slot_radar_num);
+    save_ptree.put(root+"m_DataKorpus.slot_scaner_num", m_VehicleDescriptor.slot_scaner_num);
+    save_ptree.put(root+"m_DataKorpus.slot_freezer_num", m_VehicleDescriptor.slot_freezer_num);
+    save_ptree.put(root+"m_DataKorpus.slot_weapon_num", m_VehicleDescriptor.slot_weapon_num);
 
 
     if (m_ComplexDrive.GetTarget() != nullptr)
@@ -1477,21 +1477,21 @@ void Vehicle::LoadData(const boost::property_tree::ptree& load_ptree)
     Logger::Instance().Log(" Vehicle("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
 #endif
     
-    m_DataKorpus.space       = load_ptree.get<int>("m_DataKorpus.space");
-    m_DataKorpus.armor       = load_ptree.get<int>("m_DataKorpus.armor");
-    m_DataKorpus.protection  = load_ptree.get<int>("m_DataKorpus.protection");
-    m_DataKorpus.temperature = load_ptree.get<int>("m_DataKorpus.temperature");
+    m_VehicleDescriptor.space       = load_ptree.get<int>("m_DataKorpus.space");
+    m_VehicleDescriptor.armor       = load_ptree.get<int>("m_DataKorpus.armor");
+    m_VehicleDescriptor.protection  = load_ptree.get<int>("m_DataKorpus.protection");
+    m_VehicleDescriptor.temperature = load_ptree.get<int>("m_DataKorpus.temperature");
 
-    m_DataKorpus.price        = load_ptree.get<int>("m_DataKorpus.price");
-    m_DataKorpus.draw_turrels = load_ptree.get<bool>("m_DataKorpus.draw_turrels");
+    m_VehicleDescriptor.price        = load_ptree.get<int>("m_DataKorpus.price");
+    m_VehicleDescriptor.draw_turrels = load_ptree.get<bool>("m_DataKorpus.draw_turrels");
 
-    m_DataKorpus.slot_grapple_num   = load_ptree.get<int>("m_DataKorpus.slot_grapple_num");
-    m_DataKorpus.slot_drive_num     = load_ptree.get<int>("m_DataKorpus.slot_drive_num");
-    m_DataKorpus.slot_protector_num = load_ptree.get<int>("m_DataKorpus.slot_protector_num");
-    m_DataKorpus.slot_radar_num     = load_ptree.get<int>("m_DataKorpus.slot_radar_num");
-    m_DataKorpus.slot_scaner_num    = load_ptree.get<int>("m_DataKorpus.slot_scaner_num");
-    m_DataKorpus.slot_freezer_num   = load_ptree.get<int>("m_DataKorpus.slot_freezer_num");
-    m_DataKorpus.slot_weapon_num    = load_ptree.get<int>("m_DataKorpus.slot_weapon_num");
+    m_VehicleDescriptor.slot_grapple_num   = load_ptree.get<int>("m_DataKorpus.slot_grapple_num");
+    m_VehicleDescriptor.slot_drive_num     = load_ptree.get<int>("m_DataKorpus.slot_drive_num");
+    m_VehicleDescriptor.slot_protector_num = load_ptree.get<int>("m_DataKorpus.slot_protector_num");
+    m_VehicleDescriptor.slot_radar_num     = load_ptree.get<int>("m_DataKorpus.slot_radar_num");
+    m_VehicleDescriptor.slot_scaner_num    = load_ptree.get<int>("m_DataKorpus.slot_scaner_num");
+    m_VehicleDescriptor.slot_freezer_num   = load_ptree.get<int>("m_DataKorpus.slot_freezer_num");
+    m_VehicleDescriptor.slot_weapon_num    = load_ptree.get<int>("m_DataKorpus.slot_weapon_num");
 
     data_unresolved_Vehicle.drive_complex_target_id   = load_ptree.get<int>("data_unresolved_Vehicle.drive_complex_target_id");
     data_unresolved_Vehicle.drive_complex_action_id   = load_ptree.get<int>("data_unresolved_Vehicle.drive_complex_action_id");
