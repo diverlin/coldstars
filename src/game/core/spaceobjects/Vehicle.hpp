@@ -77,7 +77,7 @@ class Vehicle : public SpaceObject
 
         void SetLand(Land* land) { m_Land = land; }
             
-        void SetKorpusData(const VehicleKorpusData&);
+        void SetKorpusData(const VehicleDescriptor&);
 
         bool GetGodMode() const { return m_GodMode; }
         Land* const GetLand() const { return m_Land; }
@@ -87,7 +87,7 @@ class Vehicle : public SpaceObject
         
         const VehiclePropetries& GetProperties() const { return m_Properties; }
         const VehicleNeeds& GetNeeds() const { return m_Needs; }        
-        const VehicleKorpusData& GetDataKorpus() const { return m_DataKorpus; }
+        const VehicleDescriptor& GetVehicleDescriptor() const { return m_VehicleDescriptor; }
         
         virtual int givenExpirience() const override final;
         bool CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY) const;
@@ -249,7 +249,7 @@ class Vehicle : public SpaceObject
         
         VehiclePropetries m_Properties;
         VehicleNeeds m_Needs;
-        VehicleKorpusData m_DataKorpus;
+        VehicleDescriptor m_VehicleDescriptor;
                                                                                
         void DropRandomItemToSpace();   
         bool MergeIdenticalGoods(BaseItem*);

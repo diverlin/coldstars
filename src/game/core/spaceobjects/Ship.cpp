@@ -59,19 +59,19 @@ Ship::~Ship()
 //    else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( std::to_string(id()) ); }
 //    // alpitodorender GetInfo().addNameStr("race:");          GetInfo().addValueStr( getRaceStr(textureOb().GetAssociation().race_id) );
 //    GetInfo().addNameStr("class:");         GetInfo().addValueStr( getStr(subSubTypeId()) );
-//    GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( std::to_string(dataLife().armor) + "/" + std::to_string(GetDataKorpus().armor) );
+//    GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( std::to_string(dataLife().armor) + "/" + std::to_string(GetVehicleDescriptor().armor) );
 ////    alpitodorender GetInfo().addNameStr("size id:");       GetInfo().addValueStr( std::to_string(textureOb().GetData().size_id) );
-//    GetInfo().addNameStr("space/free:");    GetInfo().addValueStr( std::to_string(GetDataKorpus().space) + "/" + std::to_string(GetProperties().free_space) );
+//    GetInfo().addNameStr("space/free:");    GetInfo().addValueStr( std::to_string(GetVehicleDescriptor().space) + "/" + std::to_string(GetProperties().free_space) );
 //    GetInfo().addNameStr("mass:");          GetInfo().addValueStr( std::to_string(mass()) );
 //    GetInfo().addNameStr("speedx100:");     GetInfo().addValueStr( std::to_string(GetProperties().speed*100) );
 //    GetInfo().addNameStr("speed dmx100:");  GetInfo().addValueStr( std::to_string(mass()*MASS_DECREASE_SPEED_RATE*100));
 //    GetInfo().addNameStr("energy:");        GetInfo().addValueStr( std::to_string(GetProperties().energy) );
-//    GetInfo().addNameStr("temp.:");         GetInfo().addValueStr( std::to_string(GetDataKorpus().temperature) );
+//    GetInfo().addNameStr("temp.:");         GetInfo().addValueStr( std::to_string(GetVehicleDescriptor().temperature) );
 //    GetInfo().addNameStr("radar:");         GetInfo().addValueStr( std::to_string(GetProperties().radar) );
 //    GetInfo().addNameStr("protect:");       GetInfo().addValueStr( std::to_string(GetProperties().protection) );
 //    GetInfo().addNameStr("repair:");        GetInfo().addValueStr( std::to_string(GetProperties().repair) );
 //    GetInfo().addNameStr("scan:");          GetInfo().addValueStr( std::to_string(GetProperties().scan) );
-//    GetInfo().addNameStr("price:");         GetInfo().addValueStr( std::to_string(GetDataKorpus().price) );
+//    GetInfo().addNameStr("price:");         GetInfo().addValueStr( std::to_string(GetVehicleDescriptor().price) );
 //    GetInfo().addNameStr("pos:");           GetInfo().addValueStr( meti::str(center()) );
 
 //    if (GetProperties().grab_radius > 0)
@@ -119,7 +119,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 
 //    RenderKorpus(render);
 
-//    //if (GetDataKorpus().draw_turrels == true)
+//    //if (GetVehicleDescriptor().draw_turrels == true)
 //    //{
 //        //GetComplexWeapon().RenderTurrels();
 //    //}
@@ -144,7 +144,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 
 //    RenderKorpus(render);
 
-//    if (GetDataKorpus().draw_turrels == true)
+//    if (GetVehicleDescriptor().draw_turrels == true)
 //    {
 //        GetComplexWeapon().RenderTurrels();
 //    }

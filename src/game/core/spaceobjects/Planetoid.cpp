@@ -46,7 +46,7 @@ void Planetoid::BindParent(const SpaceObject* const parent, int it)
         
 void Planetoid::CreateOrbit()
 {
-    m_Orbit.CalcPath(m_DataPlanet.radius_A, m_DataPlanet.radius_B, m_DataPlanet.speed, m_DataPlanet.orbit_phi_inD, m_DataPlanet.clockwise);
+    m_Orbit.CalcPath(m_PlanetDescriptor.radius_A, m_PlanetDescriptor.radius_B, m_PlanetDescriptor.speed, m_PlanetDescriptor.orbit_phi_inD, m_PlanetDescriptor.clockwise);
 }
 
 /* virtual */
@@ -56,12 +56,9 @@ void Planetoid::postDeathUniqueEvent(bool)
 void Planetoid::UpdatePosition()
 {
     m_Orbit.UpdatePosition();  
-    if (parent() == nullptr)
-    {
+    if (parent() == nullptr) {
         setCenter(m_Orbit.GetPosition());
-    }
-    else
-    {
+    } else {
         setCenter(parent()->center() + m_Orbit.GetPosition());
     }
 }
@@ -78,13 +75,13 @@ void Planetoid::SaveData(boost::property_tree::ptree& save_ptree, const std::str
     Logger::Instance().Log(" Planetoid("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
     #endif
     
-    save_ptree.put(root+"data.m_Orbit_center.x", m_DataPlanet.orbit_center.x);
-    save_ptree.put(root+"data.m_Orbit_center.y", m_DataPlanet.orbit_center.y);
-    save_ptree.put(root+"data.radius_A", m_DataPlanet.radius_A);
-    save_ptree.put(root+"data.radius_B", m_DataPlanet.radius_B);
-    save_ptree.put(root+"data.m_Orbit_phi_inD", m_DataPlanet.orbit_phi_inD);
-    save_ptree.put(root+"data.speed", m_DataPlanet.speed);
-    save_ptree.put(root+"data.clockwise", m_DataPlanet.clockwise);
+    save_ptree.put(root+"data.m_Orbit_center.x", m_PlanetDescriptor.orbit_center.x);
+    save_ptree.put(root+"data.m_Orbit_center.y", m_PlanetDescriptor.orbit_center.y);
+    save_ptree.put(root+"data.radius_A", m_PlanetDescriptor.radius_A);
+    save_ptree.put(root+"data.radius_B", m_PlanetDescriptor.radius_B);
+    save_ptree.put(root+"data.m_Orbit_phi_inD", m_PlanetDescriptor.orbit_phi_inD);
+    save_ptree.put(root+"data.speed", m_PlanetDescriptor.speed);
+    save_ptree.put(root+"data.clockwise", m_PlanetDescriptor.clockwise);
     
     save_ptree.put(root+"unresolved.orbit_it", m_Orbit.GetIt());
 }
@@ -95,13 +92,13 @@ void Planetoid::LoadData(const boost::property_tree::ptree& load_ptree)
     Logger::Instance().Log(" Planetoid("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
     #endif
     
-    m_DataPlanet.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");    
-    m_DataPlanet.orbit_center.y = load_ptree.get<float>("data.orbit_center.y");    
-    m_DataPlanet.radius_A = load_ptree.get<float>("data.radius_A");    
-    m_DataPlanet.radius_B = load_ptree.get<float>("data.radius_B");
-    m_DataPlanet.orbit_phi_inD = load_ptree.get<float>("data.orbit_phi_inD");
-    m_DataPlanet.speed = load_ptree.get<float>("data.speed");
-    m_DataPlanet.clockwise = load_ptree.get<bool>("data.clockwise");
+    m_PlanetDescriptor.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");
+    m_PlanetDescriptor.orbit_center.y = load_ptree.get<float>("data.orbit_center.y");
+    m_PlanetDescriptor.radius_A = load_ptree.get<float>("data.radius_A");
+    m_PlanetDescriptor.radius_B = load_ptree.get<float>("data.radius_B");
+    m_PlanetDescriptor.orbit_phi_inD = load_ptree.get<float>("data.orbit_phi_inD");
+    m_PlanetDescriptor.speed = load_ptree.get<float>("data.speed");
+    m_PlanetDescriptor.clockwise = load_ptree.get<bool>("data.clockwise");
     
     data_unresolved_Planetoid.orbit_it = load_ptree.get<int>("unresolved.orbit_it");
 }

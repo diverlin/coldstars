@@ -111,7 +111,7 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
         
 //    RenderKorpus(render);
         
-//    //if (GetDataKorpus().draw_turrels == true)
+//    //if (GetVehicleDescriptor().draw_turrels == true)
 //    //{
 //        //GetComplexWeapon().RenderTurrels();
 //    //}

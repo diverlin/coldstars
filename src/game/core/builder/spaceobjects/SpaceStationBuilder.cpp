@@ -84,7 +84,7 @@ void SpaceStationBuilder::createInternals(SpaceStation* spacestation) const
     //protection_rate = 5;
     //}
     
-    VehicleKorpusData data_korpus;
+    VehicleDescriptor data_korpus;
     data_korpus.space       = 2500 + meti::getRandInt(0, 1000);
     data_korpus.armor       = data_korpus.space;
     data_korpus.protection  = protection_rate;

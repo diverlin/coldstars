@@ -160,7 +160,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
         RocketBullet* rocket_bullet = global::get().rocketBulletBuilder().create(data_bullet);
         rocket_bullet->SetDamageRate(attack_rate_normalized);
 
-        if (item_slot->GetOwnerVehicle()->GetDataKorpus().draw_turrels == true)
+        if (item_slot->GetOwnerVehicle()->GetVehicleDescriptor().draw_turrels == true)
         {
             start_pos = item_slot->GetTurrel()->center(); 
             //angle_inD = item_slot->GetTurrel()->GetAngle().z;

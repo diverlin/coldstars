@@ -123,7 +123,7 @@ void LazerEquipment::FireEvent(SpaceObject* target, ItemSlot* subtarget, float d
         {
             // LazerTraceEffect
             //LazerTraceEffect* _lazer_trace_effect = nullptr;
-            //if (item_slot->GetOwnerVehicle()->GetDataKorpus().draw_turrels == true)
+            //if (item_slot->GetOwnerVehicle()->GetVehicleDescriptor().draw_turrels == true)
             //{
             //_lazer_trace_effect = new LazerTraceEffect(   texOb_lazerEffect,
             //item_slot->GetTurrel()->pCenter(),

@@ -20,7 +20,7 @@
 
 #include <glm/glm.hpp>
 
-struct PlanetDescripor
+struct PlanetDescriptor
 {
     glm::vec3 orbit_center = glm::vec3(0, 0, 0);
     int radius_A = 0;
@@ -29,8 +29,8 @@ struct PlanetDescripor
     float speed = 0.0;
     bool clockwise = false;
 
-    PlanetDescripor() {}
-    ~PlanetDescripor() {}
+    PlanetDescriptor() {}
+    ~PlanetDescriptor() {}
 };
 
 

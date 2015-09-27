@@ -20,6 +20,7 @@
 
 //#include <ceti/StringUtils.hpp>
 #include <common/common.hpp>
+#include <common/constants.hpp>
 #include <math/rand.hpp>
 #include <ceti/Logger.hpp>
 

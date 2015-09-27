@@ -28,7 +28,7 @@
 #include <managers/EntitiesManager.hpp>
 #include <ai/God.hpp>
 #include <world/galaxy.hpp>
-#include <struct/GalaxyDescriptor.hpp>
+#include <descriptors/GalaxyDescriptor.hpp>
 
 GalaxyDescriptor getGalaxyDescriptor() {
 
