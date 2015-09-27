@@ -16,29 +16,21 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef PLANETDATA_H
-#define PLANETDATA_H
+#pragma once
 
 #include <glm/glm.hpp>
-#include "../common/constants.hpp"
 
-struct PlanetData
+struct PlanetDescripor
 {
-    glm::vec3 orbit_center; 
-    int radius_A;
-    int radius_B; 
-    float orbit_phi_inD;
-    float speed;
-    bool clockwise;
+    glm::vec3 orbit_center = glm::vec3(0, 0, 0);
+    int radius_A = 0;
+    int radius_B = 0;
+    float orbit_phi_inD = 0.0;
+    float speed = 0.0;
+    bool clockwise = false;
 
-    PlanetData():
-    orbit_center(glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS)),
-    radius_A(0),
-        radius_B(0), 
-        orbit_phi_inD(0.0),
-        speed(0.0),
-        clockwise(false)
-        {};
+    PlanetDescripor() {}
+    ~PlanetDescripor() {}
 };
 
-#endif
+

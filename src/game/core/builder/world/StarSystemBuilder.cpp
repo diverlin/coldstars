@@ -22,7 +22,7 @@
 #include <builder/pilots/NpcBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <struct/StarSystemDescriptor.hpp>
+#include <descriptors/StarSystemDescriptor.hpp>
 
 #include <spaceobjects/IncludeSpaceObjects.hpp>
 

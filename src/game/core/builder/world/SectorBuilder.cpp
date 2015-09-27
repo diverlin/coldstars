@@ -20,7 +20,7 @@
 #include "StarSystemBuilder.hpp"
 #include "../CommonBuilderHeaders.hpp"
 #include <world/Sector.hpp>
-#include <struct/SectorDescriptor.hpp>
+#include <descriptors/SectorDescriptor.hpp>
 #include <world/starsystem.hpp>
 
 #include <common/Config.hpp>
