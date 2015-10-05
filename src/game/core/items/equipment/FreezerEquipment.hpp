@@ -32,7 +32,7 @@ class FreezerEquipment : public BaseEquipment
                 int GetFreeze() const { return freeze; };
             
               void CountPrice();
-              virtual void UpdateProperties();  
+              virtual void updateProperties();  
               
             virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);

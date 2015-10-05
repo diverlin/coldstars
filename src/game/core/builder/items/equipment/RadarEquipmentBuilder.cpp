@@ -40,16 +40,13 @@ RadarEquipmentBuilder::~RadarEquipmentBuilder()
 
 RadarEquipment* RadarEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    RadarEquipment* radar_equipment = nullptr;    
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        radar_equipment = new RadarEquipment(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }    
+    RadarEquipment* radar_equipment = new RadarEquipment(id);
+    assert(radar_equipment);
+
     global::get().entitiesManager().RegisterEntity(radar_equipment);
     
     return radar_equipment;
@@ -92,7 +89,7 @@ void RadarEquipmentBuilder::createInternals(RadarEquipment* radar_equipment, TYP
     radar_equipment->setItemCommonData(common_data);
     radar_equipment->setCondition(common_data.condition_max);
 
-    radar_equipment->UpdateProperties();
+    radar_equipment->updateProperties();
     radar_equipment->CountPrice();
 }
 

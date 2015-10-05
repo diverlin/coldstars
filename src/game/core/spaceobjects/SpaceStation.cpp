@@ -47,9 +47,7 @@ m_Land(nullptr)
 /* virtual */
 SpaceStation::~SpaceStation() 
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~SpaceStation("+std::to_string(id())+")");
-    #endif
 }    
  
 /* virtual override final */
@@ -125,23 +123,17 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 
 void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" SpaceStation("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" SpaceStation("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 void SpaceStation::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" SpaceStation("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 

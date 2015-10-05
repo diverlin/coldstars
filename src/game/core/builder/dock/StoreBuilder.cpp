@@ -51,16 +51,13 @@ StoreBuilder::~StoreBuilder()
 
 Store* StoreBuilder::createTemplate(INTLONGEST id) const
 {
-    Store* store = nullptr;
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        store = new Store(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
+    Store* store = new Store(id);
+    assert(store);
+
     global::get().entitiesManager().RegisterEntity(store);
     
     return store;

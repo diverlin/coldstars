@@ -41,7 +41,7 @@ EnergizerEquipment::~EnergizerEquipment()
 {}
 
 /* virtual */
-void EnergizerEquipment::UpdateProperties()
+void EnergizerEquipment::updateProperties()
 {
     energy_max_add   = 0;
     restoration_add  = 0;
@@ -58,7 +58,7 @@ void EnergizerEquipment::UpdateProperties()
 
 
 /* virtual */
-void EnergizerEquipment::UpdateInStatic()
+void EnergizerEquipment::updateInStatic()
 {
     if (isFunctioning()) {
         if (itemSlot()->GetOwnerVehicle()->TryToGenerateEnergy(restoration)) {
@@ -136,9 +136,7 @@ void EnergizerEquipment::Resolve()
 
 void EnergizerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" EnergizerEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
     save_ptree.put(root+"energy_max_orig", energy_max_orig);
     save_ptree.put(root+"restoration_orig", restoration_orig);
@@ -146,9 +144,7 @@ void EnergizerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const
                 
 void EnergizerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" EnergizerEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
     energy_max_orig = load_ptree.get<int>("energy_max_orig");
     restoration_orig = load_ptree.get<int>("restoration_orig");        
@@ -156,9 +152,7 @@ void EnergizerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void EnergizerEquipment::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" EnergizerEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 

@@ -90,9 +90,7 @@ Vehicle::Vehicle()
 /* virtual */
 Vehicle::~Vehicle()
 {
-#if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~Vehicle("+std::to_string(id())+")");
-#endif
 } 
 
 /* virtual override */
@@ -570,9 +568,7 @@ void Vehicle::UpdateSpecialAction()
 //// ******** dock/LAUNCHING ******** 
 void Vehicle::HyperJumpEvent(StarSystem* starsystem)
 {
-#if ENTITY_TRANSACTION_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::HyperJumpEvent", ENTITY_TRANSACTION_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::HyperJumpEvent", ENTITY_TRANSACTION_LOG_DIP);
     
     m_ComplexWeapon.DeactivateAllWeapons();
     
@@ -583,9 +579,7 @@ void Vehicle::HyperJumpEvent(StarSystem* starsystem)
 
 void Vehicle::DockingEvent()
 {
-#if ENTITY_TRANSACTION_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::DockingEvent", ENTITY_TRANSACTION_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::DockingEvent", ENTITY_TRANSACTION_LOG_DIP);
 
     m_ComplexWeapon.DeactivateAllWeapons();
 
@@ -627,9 +621,7 @@ void Vehicle::DockingEvent()
 
 void Vehicle::LaunchingEvent()
 {
-#if ENTITY_TRANSACTION_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::LaunchingEvent", ENTITY_TRANSACTION_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::LaunchingEvent", ENTITY_TRANSACTION_LOG_DIP);
     
     if (m_ParentVehicleSlot != nullptr)
     {
@@ -678,9 +670,7 @@ void Vehicle::remeberAgressor(Vehicle* agressor)
 /* virtual */
 void Vehicle::hit(int damage, bool show_effect)
 {
-#if WEAPONSTARGET_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::Hit", WEAPONSTARGET_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::Hit", WEAPONSTARGET_LOG_DIP);
     
     if (m_GodMode == false)
     {
@@ -839,28 +829,22 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
 
 void Vehicle::UpdateAllFunctionalItemsInStatic()
 {
-    for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++)
-    {
-        if (m_SlotFunct_vec[i]->GetItem() != nullptr)
-        {
-            m_SlotFunct_vec[i]->GetItem()->UpdateInStatic();
+    for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
+        if (m_SlotFunct_vec[i]->GetItem()) {
+            m_SlotFunct_vec[i]->GetItem()->updateInStatic();
         }
     }
 
-    for (unsigned int i=0; i<m_SlotArtef_vec.size(); i++)
-    {
-        if (m_SlotArtef_vec[i]->GetItem() != nullptr)
-        {
-            m_SlotArtef_vec[i]->GetItem()->UpdateInStatic();
+    for (unsigned int i=0; i<m_SlotArtef_vec.size(); i++) {
+        if (m_SlotArtef_vec[i]->GetItem()) {
+            m_SlotArtef_vec[i]->GetItem()->updateInStatic();
         }
     }
 }
 
 void Vehicle::IncreaseMass(int d_mass)
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::IncreaseMass", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::IncreaseMass", ITEMINFLUENCE_LOG_DIP);
     
     addMass(d_mass);
     m_Properties.free_space = m_VehicleDescriptor.space - mass();
@@ -869,9 +853,7 @@ void Vehicle::IncreaseMass(int d_mass)
 
 void Vehicle::DecreaseMass(int d_mass)
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::DecreaseMass", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::DecreaseMass", ITEMINFLUENCE_LOG_DIP);
     
     addMass(-d_mass);
     m_Properties.free_space = m_VehicleDescriptor.space - mass();
@@ -880,9 +862,7 @@ void Vehicle::DecreaseMass(int d_mass)
 
 void Vehicle::UpdatePropertiesSpeed()
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesSpeed", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesSpeed", ITEMINFLUENCE_LOG_DIP);
     
     // speed calculation ////
     m_Properties.speed = 0;
@@ -924,9 +904,7 @@ void Vehicle::UpdatePropertiesSpeed()
 
 void Vehicle::UpdatePropertiesFire()
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesFire", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesFire", ITEMINFLUENCE_LOG_DIP);
     
     m_ComplexWeapon.UpdateFireAbility();
 
@@ -936,9 +914,7 @@ void Vehicle::UpdatePropertiesFire()
 
 void Vehicle::UpdatePropertiesRadar()
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesRadar", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesRadar", ITEMINFLUENCE_LOG_DIP);
     
     m_Properties.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
     m_Properties.equipment_radar = false;
@@ -955,9 +931,7 @@ void Vehicle::UpdatePropertiesRadar()
 
 void Vehicle::UpdatePropertiesJump()
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesJump", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesJump", ITEMINFLUENCE_LOG_DIP);
 
     m_Properties.hyper = 0;
 
@@ -991,9 +965,7 @@ void Vehicle::UpdatePropertiesJump()
 
 void Vehicle::UpdatePropertiesEnergy()
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesEnergy", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesEnergy", ITEMINFLUENCE_LOG_DIP);
     
     m_Properties.energy = 0;
     m_Properties.hibernate_mode_enabled = true;
@@ -1012,9 +984,7 @@ void Vehicle::UpdatePropertiesEnergy()
 
 void Vehicle::UpdatePropertiesProtection()
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesProtection", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesProtection", ITEMINFLUENCE_LOG_DIP);
     
     m_Properties.protection = m_VehicleDescriptor.protection;
     m_Properties.shield_effect_enabled = false;
@@ -1039,9 +1009,7 @@ void Vehicle::UpdatePropertiesProtection()
 
 void Vehicle::UpdatePropertiesRepair()
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesRepair", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesRepair", ITEMINFLUENCE_LOG_DIP);
     
     m_Properties.repair = 0;
 
@@ -1057,9 +1025,7 @@ void Vehicle::UpdatePropertiesRepair()
 
 void Vehicle::IncreaseArmor(int repair)
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::IncreaseArmor", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::IncreaseArmor", ITEMINFLUENCE_LOG_DIP);
     
     dataLife().armor += repair;
     
@@ -1071,9 +1037,7 @@ void Vehicle::IncreaseArmor(int repair)
 
 void Vehicle::UpdatePropertiesFreeze()
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesFreeze", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesFreeze", ITEMINFLUENCE_LOG_DIP);
     
     m_Properties.freeze = 0;
 
@@ -1088,9 +1052,7 @@ void Vehicle::UpdatePropertiesFreeze()
 
 void Vehicle::UpdatePropertiesScan()
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesScan", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesScan", ITEMINFLUENCE_LOG_DIP);
     
     m_Properties.scan = 0;
 
@@ -1105,9 +1067,7 @@ void Vehicle::UpdatePropertiesScan()
 
 void Vehicle::UpdatePropertiesGrab()
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesGrab", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesGrab", ITEMINFLUENCE_LOG_DIP);
 
     m_Properties.grab_strength = 0;
     m_Properties.grab_radius = 0;
@@ -1127,9 +1087,7 @@ void Vehicle::UpdatePropertiesGrab()
 
 void Vehicle::UpdateArtefactInfluence()
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdateArtefactInfluence", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdateArtefactInfluence", ITEMINFLUENCE_LOG_DIP);
     
     m_Properties.artefact_gravity = 0;
     m_Properties.artefact_protection = 0;
@@ -1324,9 +1282,7 @@ void Vehicle::LockRandomItem(int locked_turns)
 
 bool Vehicle::TryToConsumeEnergy(int energy)
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::TryToConsumeEnergy(energy="+std::to_string(energy)+")", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::TryToConsumeEnergy(energy="+std::to_string(energy)+")", ITEMINFLUENCE_LOG_DIP);
     
     if (m_Properties.energy > energy)
     {
@@ -1341,9 +1297,7 @@ bool Vehicle::TryToConsumeEnergy(int energy)
 
 bool Vehicle::TryToGenerateEnergy(int energy)
 {
-#if ITEMINFLUENCE_LOG_ENABLED == 1
-    Logger::Instance().Log("Vehicle("+std::to_string(id())+")::TryToGenerateEnergy(energy="+std::to_string(energy)+")", ITEMINFLUENCE_LOG_DIP);
-#endif
+    //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::TryToGenerateEnergy(energy="+std::to_string(energy)+")", ITEMINFLUENCE_LOG_DIP);
     
     int energy_max = m_SlotEnergizer->GetEnergizerEquipment()->GetEnergyMax();
     if (m_Properties.energy < energy_max)
@@ -1423,9 +1377,7 @@ void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 
 void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-#if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Vehicle("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
-#endif
+    //Logger::Instance().Log(" Vehicle("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
 
     save_ptree.put(root+"m_DataKorpus.space", m_VehicleDescriptor.space);
     save_ptree.put(root+"m_DataKorpus.armor", m_VehicleDescriptor.armor);
@@ -1473,9 +1425,7 @@ void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::strin
 
 void Vehicle::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-#if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Vehicle("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
-#endif
+    //Logger::Instance().Log(" Vehicle("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
     
     m_VehicleDescriptor.space       = load_ptree.get<int>("m_DataKorpus.space");
     m_VehicleDescriptor.armor       = load_ptree.get<int>("m_DataKorpus.armor");
@@ -1504,9 +1454,7 @@ void Vehicle::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Vehicle::ResolveData()
 {
-#if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Vehicle("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
-#endif
+    //Logger::Instance().Log(" Vehicle("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     
     CreateDriveComplexTextureDependedStuff();
     CreateProtectionComplexTextureDependedStuff();

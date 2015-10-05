@@ -131,18 +131,14 @@ void God::update(Galaxy* galaxy, const GameDate& date)
 {
     if (m_DateLastUpdate - date >= GOD_REST_IN_DAYS)
     {
-        #if GOD_LOG_ENABLED == 1
         Logger::Instance().Log("God::Update", GOD_LOG_DIP);
-        #endif
             
         galaxy->FillStarSystemsCondition(data_starsystems_condition);
         m_DateLastUpdate = date;
         
         ProceedInvasion(galaxy);
 
-        #if GOD_LOG_ENABLED == 1
         Logger::Instance().Log(data_starsystems_condition.GetStr(), GOD_LOG_DIP);
-        #endif
     }
 }                
      

@@ -44,16 +44,13 @@ FreezerEquipmentBuilder::~FreezerEquipmentBuilder()
 
 FreezerEquipment* FreezerEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    FreezerEquipment* freezer_equipment = nullptr;
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        freezer_equipment = new FreezerEquipment(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
+    FreezerEquipment* freezer_equipment  = new FreezerEquipment(id);
+    assert(freezer_equipment);
+
     global::get().entitiesManager().RegisterEntity(freezer_equipment);
 
     return freezer_equipment;
@@ -96,7 +93,7 @@ void FreezerEquipmentBuilder::createInternals(FreezerEquipment* freezer_equipmen
     freezer_equipment->setItemCommonData(common_data);
     freezer_equipment->setCondition(common_data.condition_max);
 
-    freezer_equipment->UpdateProperties();
+    freezer_equipment->updateProperties();
     freezer_equipment->CountPrice();
 }
 

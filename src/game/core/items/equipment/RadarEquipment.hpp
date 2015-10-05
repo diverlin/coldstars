@@ -31,7 +31,7 @@ class RadarEquipment : public BaseEquipment
               void SetRadiusOrig(int radius_orig)   { this->radius_orig = radius_orig; }; 
               int GetRadius() const { return radius; };
 
-              virtual void UpdateProperties();
+              virtual void updateProperties();
               
                 void CountPrice();
                  

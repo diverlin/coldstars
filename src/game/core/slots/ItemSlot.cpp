@@ -62,16 +62,13 @@ ItemSlot::ItemSlot(INTLONGEST id, TYPE::ENTITY subtype_id)
 /* virtual */
 ItemSlot::~ItemSlot()
 {
-#if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~ItemSlot("+std::to_string(id())+")");
-#endif
 }  
 
 /* virtual */  
 void ItemSlot::putChildrenToGarbage() const
 {
-    if (m_Item != nullptr)
-    {
+    if (m_Item) {
         global::get().entitiesManager().AddToGarbage(m_Item);
     }
 }
@@ -80,44 +77,26 @@ void ItemSlot::SetTarget(SpaceObject* target, ItemSlot* subtarget)
 {
     m_Target    = target;
     m_Subtarget = subtarget;
-
-#if WEAPONSTARGET_LOG_ENABLED == 1
-    Log("SetTarget");
-#endif
 }
 
 STATUS ItemSlot::ValidateTarget()
-{    
-#if WEAPONSTARGET_LOG_ENABLED == 1
-    Log("ValidateTarget");
-#endif
-    
-    if (m_Subtarget != nullptr)
-    {
-        if (CheckSubTarget(m_Subtarget) == false)
-        {
+{       
+    if (m_Subtarget) {
+        if (!CheckSubTarget(m_Subtarget)) {
             m_Subtarget = nullptr; // reseting only subtarget, firemode for target will be used
         }
     }
     
-    STATUS status = CheckTarget(m_Target);
-    
-#if WEAPONSTARGET_LOG_ENABLED == 1
-    if (status != STATUS::OK)
-    {
+    STATUS status = CheckTarget(m_Target);    
+    if (status != STATUS::OK) {
         Logger::Instance().Log(getTargetStatusStr(status), WEAPONSTARGET_LOG_DIP);
     }
-#endif
 
     return status;
 }
 
 void ItemSlot::ResetTarget()
 { 
-#if WEAPONSTARGET_LOG_ENABLED == 1
-    Log("ResetTarget");
-#endif
-
     m_Target    = nullptr;
     m_Subtarget = nullptr;
 }
@@ -134,11 +113,7 @@ bool ItemSlot::CheckAmmo() const
 }
 
 void ItemSlot::FireEvent(float attack_rate, bool show_effect)
-{    
-#if WEAPONSTARGET_LOG_ENABLED == 1
-    Log("FireEvent");
-#endif
-
+{
     switch(GetItem()->subTypeId())
     {
         case TYPE::ENTITY::LAZER_EQUIPMENT_ID:
@@ -484,25 +459,16 @@ STATUS ItemSlot::CheckTarget(SpaceObject* target) const
 
 STATUS ItemSlot::CheckTargetPure(SpaceObject* target) const
 {
-#if WEAPONSTARGET_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
-#endif
-
-    if (IsTargetAlive(target) == false)
-    {
+    if (!IsTargetAlive(target)) {
         return STATUS::TARGET_DEAD;
     }
-
-    if (IsTargetInSpace(target) == false)
-    {
+    if (!IsTargetInSpace(target)) {
         return STATUS::TARGET_NOTIN_SPACE;
     }
-
-    if (IsTargetInSameStarSystem(target) == false)
-    {
+    if (!IsTargetInSameStarSystem(target)) {
         return STATUS::TARGET_NOTIN_STARSYSTEM;
     }
-
     return STATUS::TARGET_OK;
 } 
 
@@ -564,9 +530,7 @@ void ItemSlot::Resolve()
 
 void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
-#endif
 
     if (m_Target != nullptr)    { save_ptree.put(root+"unresolved_ItemSlot.target_id", m_Target->id()); }
     else                        { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE_ID); }
@@ -577,9 +541,7 @@ void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
 
 void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
-#endif
     
     unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id");
     unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id");
@@ -587,17 +549,13 @@ void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void ItemSlot::ResolveData()
 {
-#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
-#endif
     
-    if (unresolved_ItemSlot.target_id != NONE_ID)
-    {
+    if (unresolved_ItemSlot.target_id != NONE_ID) {
         m_Target = (SpaceObject*)global::get().entitiesManager().GetEntityById(unresolved_ItemSlot.target_id);
     }
 
-    if (unresolved_ItemSlot.subtarget_id != NONE_ID)
-    {
+    if (unresolved_ItemSlot.subtarget_id != NONE_ID) {
         m_Subtarget = (ItemSlot*)global::get().entitiesManager().GetEntityById(unresolved_ItemSlot.subtarget_id);
     }
 
@@ -613,7 +571,6 @@ void ItemSlot::ResolveData()
 
 void ItemSlot::Log(const std::string& func_name) const
 {
-#if WEAPONSTARGET_LOG_ENABLED == 1
     std::string str = "ItemSlot(id="+std::to_string(id())+")::"+func_name+" "+dataTypeString();
     
     if (owner != nullptr)       { str += " owner:" + owner->dataTypeString(); }
@@ -622,6 +579,5 @@ void ItemSlot::Log(const std::string& func_name) const
     if (m_Subtarget != nullptr) { str += " subtarget:" + m_Subtarget->dataTypeString(); }
     
     Logger::Instance().Log(str, WEAPONSTARGET_LOG_DIP);
-#endif
 }
 

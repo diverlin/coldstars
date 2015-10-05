@@ -107,29 +107,23 @@ void VehicleSlot::Resolve()
 
 void VehicleSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" VehicleSlot("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 void VehicleSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" VehicleSlot("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 void VehicleSlot::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" VehicleSlot("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
-    #endif
 
-        switch(owner->typeId())
-        {
-           //case ENTITY::VEHICLE_ID:     { ((Vehicle*)global::get().entitiesManager().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
-           //case ENTITY::CONTAINER_ID:     { ((Container*)global::get().entitiesManager().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
-           case TYPE::ENTITY::STORE_ID:           { ((Store*)owner)->AddVehicleSlot(this); break; }
-           case TYPE::ENTITY::ANGAR_ID:             { ((Angar*)owner)->AddVehicleSlot(this); break; }
+    switch(owner->typeId())
+    {
+        //case ENTITY::VEHICLE_ID:     { ((Vehicle*)global::get().entitiesManager().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
+        //case ENTITY::CONTAINER_ID:     { ((Container*)global::get().entitiesManager().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
+        case TYPE::ENTITY::STORE_ID:           { ((Store*)owner)->AddVehicleSlot(this); break; }
+        case TYPE::ENTITY::ANGAR_ID:             { ((Angar*)owner)->AddVehicleSlot(this); break; }
     }
 }

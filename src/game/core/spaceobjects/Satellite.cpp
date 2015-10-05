@@ -39,9 +39,7 @@ Satellite::Satellite(int id)
 /* virtual */
 Satellite::~Satellite() 
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~Satellite("+std::to_string(id())+")");
-    #endif
 }
 
 void Satellite::BindParent(const SpaceObject* const parent)
@@ -124,23 +122,17 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
 
 void Satellite::SaveData(boost::property_tree::ptree&, const std::string&) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Satellite("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 void Satellite::LoadData(const boost::property_tree::ptree&)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Satellite("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 void Satellite::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Satellite("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 /*virtual*/

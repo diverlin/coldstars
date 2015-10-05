@@ -68,12 +68,11 @@ bool DriveComplex::PathExists() const
 
 void DriveComplex::ResetTarget()
 {
-    #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    if (target == nullptr)
-    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::ResetTarget", DRIVECOMPLEX_LOG_DIP);
-    else
-    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::ResetTarget" + getBaseInfoStr(target), DRIVECOMPLEX_LOG_DIP);
-    #endif    
+//    if (!m_Target)
+//        Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::ResetTarget", DRIVECOMPLEX_LOG_DIP);
+//    else
+//        Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::ResetTarget" + getBaseInfoStr(target), DRIVECOMPLEX_LOG_DIP);
+
     
     m_Target = nullptr;
             
@@ -96,9 +95,7 @@ void DriveComplex::SetStaticTargetCoords(const glm::vec3& target_pos)
     
     UpdatePath();
 
-    #if DRIVECOMPLEX_LOG_ENABLED == 1 
     Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::SetStaticTargetCoords:"+std::to_string((int)target_pos.x)+", "+std::to_string((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
-    #endif  
 }      
                  
 void DriveComplex::SetTarget(SpaceObject* target, int action_id)
@@ -110,9 +107,7 @@ void DriveComplex::SetTarget(SpaceObject* target, int action_id)
     
     m_HasTarget = true;
         
-    #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::SetTarget " + getBaseInfoStr(target) + " navigator_action = " + getNavigatorActionStr(m_ActionId), DRIVECOMPLEX_LOG_DIP);
-    #endif 
+    //Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::SetTarget " + getBaseInfoStr(target) + " navigator_action = " + getNavigatorActionStr(m_ActionId), DRIVECOMPLEX_LOG_DIP);
 }
   
 void DriveComplex::DefineDistance()
@@ -250,9 +245,7 @@ void DriveComplex::UpdateDynamicTargetCoord()
         }
     }
 
-    #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + glm::vec22str(target_pos) + " target_center=" + glm::vec22str(target->center()) + " target_offset=" + glm::vec22str(target_offset) + "target_distance=" + std::to_string(target_distance), DRIVECOMPLEX_LOG_DIP);
-    #endif 
+    //Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::UpdateDynamicTargetCoord " + " target_pos=" + glm::vec22str(target_pos) + " target_center=" + glm::vec22str(target->center()) + " target_offset=" + glm::vec22str(target_offset) + "target_distance=" + std::to_string(target_distance), DRIVECOMPLEX_LOG_DIP);
 }
 
 
@@ -297,9 +290,7 @@ void DriveComplex::ClearPath()
 
 void DriveComplex::CalcPath()
 {
-    #if DRIVECOMPLEX_LOG_ENABLED == 1 
-    Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::CalcPath " + "target_pos(int, int)=" + std::to_string((int)target_pos.x) + "," + std::to_string((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
-    #endif   
+    //Logger::Instance().Log("vehicle_id="+std::to_string(m_OwnerVehicle->id())+" DriveComplex::CalcPath " + "target_pos(int, int)=" + std::to_string((int)target_pos.x) + "," + std::to_string((int)target_pos.y), DRIVECOMPLEX_LOG_DIP);
     
     ClearPath();
 

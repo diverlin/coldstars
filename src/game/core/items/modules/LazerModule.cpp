@@ -80,9 +80,7 @@ void LazerModule::Resolve()
 
 void LazerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" LazerModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
     save_ptree.put(root+"damage_add", damage_add);
     save_ptree.put(root+"radius_add", radius_add);
@@ -90,9 +88,7 @@ void LazerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 
 void LazerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" LazerModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
     damage_add = load_ptree.get<int>("damage_add");
     radius_add = load_ptree.get<int>("radius_add");
@@ -100,7 +96,5 @@ void LazerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void LazerModule::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" LazerModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
 }

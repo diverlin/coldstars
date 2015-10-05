@@ -52,9 +52,7 @@ bool MicroScenarioDestroy::Validate(Npc* npc) const
 /* virtual */                
 void MicroScenarioDestroy::Enter(Npc* npc) const
 {    
-    #if AISCENARIO_LOG_ENABLED == 1 
     Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " ENTER MicroScenarioDestroy");
-    #endif
 }
 
 /* virtual */
@@ -73,9 +71,7 @@ void MicroScenarioDestroy::UpdateInDynamicInSpace(Npc* npc) const
 /* virtual */
 void MicroScenarioDestroy::Exit(Npc* npc) const
 {
-    #if AISCENARIO_LOG_ENABLED == 1 
     Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " EXIT MicroScenarioDestroy");
-    #endif
 }
 
 /* virtual */

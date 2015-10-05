@@ -29,16 +29,13 @@ RocketBulletBuilder::~RocketBulletBuilder()
 
 RocketBullet* RocketBulletBuilder::createTemplate(INTLONGEST id) const
 {
-    RocketBullet* rocket_bullet = nullptr;
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        rocket_bullet = new RocketBullet(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
+    RocketBullet* rocket_bullet = new RocketBullet(id);
+    assert(rocket_bullet);
+
     global::get().entitiesManager().RegisterEntity(rocket_bullet);
     
     return rocket_bullet;

@@ -44,16 +44,13 @@ ScanerEquipmentBuilder::~ScanerEquipmentBuilder()
 
 ScanerEquipment* ScanerEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    ScanerEquipment* scaner_equipment = nullptr;
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        scaner_equipment = new ScanerEquipment(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }    
+    ScanerEquipment* scaner_equipment = new ScanerEquipment(id);
+    assert(scaner_equipment);
+
     global::get().entitiesManager().RegisterEntity(scaner_equipment);
     
     return scaner_equipment;
@@ -96,6 +93,6 @@ void ScanerEquipmentBuilder::createInternals(ScanerEquipment* scaner_equipment, 
     scaner_equipment->setItemCommonData(common_data);
     scaner_equipment->setCondition(common_data.condition_max);
                
-    scaner_equipment->UpdateProperties();
+    scaner_equipment->updateProperties();
     scaner_equipment->CountPrice();
 }

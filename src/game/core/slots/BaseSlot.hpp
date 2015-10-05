@@ -33,11 +33,9 @@ class TextureOb;
 struct UnresolvedDataBaseSlot
 {
     UnresolvedDataBaseSlot()
-    :
-    owner_id(NONE_ID) 
     {}
     
-    INTLONGEST owner_id;    
+    INTLONGEST owner_id = NONE_ID;
 };
 
 

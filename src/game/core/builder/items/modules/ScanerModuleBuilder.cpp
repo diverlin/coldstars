@@ -39,16 +39,13 @@ ScanerModuleBuilder::~ScanerModuleBuilder()
 
 ScanerModule* ScanerModuleBuilder::createTemplate(INTLONGEST id) const
 {
-    ScanerModule* scaner_module = nullptr;    
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        scaner_module = new ScanerModule(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }    
+    ScanerModule* scaner_module = new ScanerModule(id);
+    assert(scaner_module);
+
     global::get().entitiesManager().RegisterEntity(scaner_module);
     
     return scaner_module;

@@ -35,16 +35,13 @@ ShipBuilder::~ShipBuilder() {}
 
 Ship* ShipBuilder::createTemplate(INTLONGEST id) const
 {
-    Ship* ship = nullptr;
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        ship = new Ship(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }    
+    Ship* ship = new Ship(id);
+    assert(ship);
+
     global::get().entitiesManager().RegisterEntity(ship);
     
     return ship;

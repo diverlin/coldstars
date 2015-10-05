@@ -45,11 +45,9 @@ Npc* NpcBuilder::createTemplate(TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype
     }
 
     Npc* npc = nullptr;
-    try {
-        npc = new Npc(id, subtype_id, subsubtype_id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
+    npc = new Npc(id, subtype_id, subsubtype_id);
+    assert(npc);
+
     global::get().entitiesManager().RegisterEntity(npc);
     
     return npc;

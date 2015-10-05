@@ -29,9 +29,7 @@ Base::Base()
 /*virtual*/
 Base::~Base()
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~Base("+std::to_string(id())+")");
-    #endif
 }
 
 std::string Base::dataTypeString() const
@@ -46,9 +44,7 @@ std::string Base::dataTypeString() const
 
 void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Base("+std::to_string(id())+")::SaveDataUniqueBase", SAVELOAD_LOG_DIP);
-    #endif
     
     save_ptree.put(root+"data_id.id",            m_data_id.id);
     save_ptree.put(root+"data_id.type_id",       static_cast<int>(m_data_id.type_id));
@@ -58,9 +54,7 @@ void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
 
 void Base::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Base("+std::to_string(id())+")::LoadDataUniqueBase", SAVELOAD_LOG_DIP);
-    #endif
     
     m_data_id.id              = load_ptree.get<unsigned long int>("data_id.id");
     m_data_id.type_id         = (TYPE::ENTITY)load_ptree.get<int>("data_id.type_id");
@@ -70,7 +64,5 @@ void Base::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Base::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Base("+std::to_string(id())+")::ResolveDataUniqueBase", SAVELOAD_LOG_DIP);
-    #endif
 }

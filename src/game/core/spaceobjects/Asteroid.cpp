@@ -46,16 +46,13 @@ Asteroid::Asteroid(int id)
 /* virtual */
 Asteroid::~Asteroid()
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~Asteroid("+std::to_string(id())+")");
-    #endif
 }
 
 void Asteroid::UpdateInSpace(int time, bool show_effect)
 {    
     checkDeath(show_effect);
-    if (time > 0)
-    {    
+    if (time > 0) {
         UpdatePosition();
     }         
 }
@@ -70,8 +67,7 @@ void Asteroid::postDeathUniqueEvent(bool show_effect)
 {
     int angleZ = meti::getRandInt(0, 360);
     float impulse_strength = 0.5;
-    for (int i=0; i<3; i++)
-    {      
+    for (int i=0; i<3; i++) {
         Container* container = global::get().containerBuilder().create(4);
         
         glm::vec3 impulse_dir(meti::getXYVec3Unit(angleZ));
@@ -105,23 +101,17 @@ void Asteroid::postDeathUniqueEvent(bool show_effect)
 
 void Asteroid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Asteroid("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 void Asteroid::LoadData(const boost::property_tree::ptree& ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Asteroid("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 void Asteroid::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Asteroid("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
-    #endif
     
     ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->Add(this, parent(), data_unresolved_Planetoid.orbit_it); 
 }

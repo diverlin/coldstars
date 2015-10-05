@@ -79,9 +79,7 @@ void Bomb::Resolve()
 
 void Bomb::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Bomb::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
     save_ptree.put(root+"damage", m_damage);
     save_ptree.put(root+"radius", m_radius);
@@ -89,9 +87,7 @@ void Bomb::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
          
 void Bomb::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Bomb::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
     m_damage = load_ptree.get<int>("damage");
     m_radius = load_ptree.get<int>("radius");
@@ -99,9 +95,7 @@ void Bomb::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Bomb::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Bomb::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 

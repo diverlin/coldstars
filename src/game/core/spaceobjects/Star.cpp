@@ -50,9 +50,7 @@ m_TurnSinceLastSparkCounter(0)
 /* virtual */  
 Star::~Star()
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~Star("+std::to_string(id())+")");
-    #endif    
 }
 
 
@@ -144,9 +142,7 @@ void Star::postDeathUniqueEvent(bool)
    
 void Star::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Star("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
-    #endif
     
     save_ptree.put(root+"m_TurnSinceLastSparkCounter", m_TurnSinceLastSparkCounter);
     save_ptree.put(root+"m_TurnSparkThreshold", m_TurnSparkThreshold);
@@ -154,9 +150,7 @@ void Star::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
 
 void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Star("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
-    #endif
     
     m_TurnSinceLastSparkCounter = load_ptree.get<int>("m_TurnSinceLastSparkCounter");
     m_TurnSparkThreshold = load_ptree.get<int>("m_TurnSparkThreshold");    
@@ -164,9 +158,7 @@ void Star::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Star::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Star("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
-    #endif
     
     ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->Add(this);     
 }

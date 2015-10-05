@@ -70,9 +70,7 @@ void GrappleEquipment::AddTarget(SpaceObject* target)
         target_vec.push_back(target);
         free_strength -= target->mass();
             
-        #if GRAPPLE_QUEUE_LOG_ENABLED == 1 
-        Logger::Instance().Log("vehicle_id=" + std::to_string(item_slot->GetOwnerVehicle()->id()) + " " + getTypeStr(target->typeId()) + " id = " + std::to_string(target->id()) + " grapple->AddTarget()", 2);
-        #endif
+        //Logger::Instance().Log("vehicle_id=" + std::to_string(item_slot->GetOwnerVehicle()->id()) + " " + getTypeStr(target->typeId()) + " id = " + std::to_string(target->id()) + " grapple->AddTarget()", 2);
     }        
 }
 
@@ -156,9 +154,7 @@ void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
         }
         else
         {
-            #if GRAPPLE_QUEUE_LOG_ENABLED == 1 
-            Logger::Instance().Log("vehicle_id=" + std::to_string(item_slot->GetOwnerVehicle()->id()) + " " + getTypeStr((*it)->typeId()) + " id = " + std::to_string((*it)->id()) + " grapple->RemoveTarget()", 2);
-            #endif
+            //Logger::Instance().Log("vehicle_id=" + std::to_string(item_slot->GetOwnerVehicle()->id()) + " " + getTypeStr((*it)->typeId()) + " id = " + std::to_string((*it)->id()) + " grapple->RemoveTarget()", 2);
                     
             it = target_vec.erase(it);
             return; // hack
@@ -189,7 +185,7 @@ void GrappleEquipment::RenderGrabTrail(const jeti::Renderer& render)
 
 
 /* virtual */
-void GrappleEquipment::UpdateProperties()
+void GrappleEquipment::updateProperties()
 {
     strength_add   = 0;
     radius_add     = 0;
@@ -292,9 +288,7 @@ void GrappleEquipment::Resolve()
 
 void GrappleEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" GrappleEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
     save_ptree.put(root+"strength_orig", strength_orig);
     save_ptree.put(root+"radius_orig", radius_orig);
@@ -303,9 +297,7 @@ void GrappleEquipment::SaveData(boost::property_tree::ptree& save_ptree, const s
                 
 void GrappleEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" GrappleEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
     strength_orig = load_ptree.get<int>("strength_orig");     
     radius_orig = load_ptree.get<int>("radius_orig");   
@@ -314,8 +306,6 @@ void GrappleEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void GrappleEquipment::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" GrappleEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
 }
 

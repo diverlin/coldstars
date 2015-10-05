@@ -40,16 +40,13 @@ ProtectorEquipmentBuilder::~ProtectorEquipmentBuilder()
 
 ProtectorEquipment* ProtectorEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    ProtectorEquipment* protector_equipment = nullptr;
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        protector_equipment = new ProtectorEquipment(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }    
+    ProtectorEquipment* protector_equipment = new ProtectorEquipment(id);
+    assert(protector_equipment);
+
     global::get().entitiesManager().RegisterEntity(protector_equipment);
     
     return protector_equipment;
@@ -92,6 +89,6 @@ void ProtectorEquipmentBuilder::createInternals(ProtectorEquipment* protector_eq
     protector_equipment->setItemCommonData(common_data);
     protector_equipment->setCondition(common_data.condition_max);
             
-    protector_equipment->UpdateProperties();
+    protector_equipment->updateProperties();
     protector_equipment->CountPrice();
 }

@@ -43,9 +43,7 @@ Angar::Angar(int id)
 
 Angar::~Angar()
 {        
-#if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~Angar(), id="+std::to_string(id()));
-#endif
 }
 
 /* virtual */
