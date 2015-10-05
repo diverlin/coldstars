@@ -95,9 +95,9 @@ void EnergizerEquipmentBuilder::createInternals(EnergizerEquipment* energizer_eq
     energizer_equipment->SetRestorationOrig(restoration_orig);
     energizer_equipment->SetEnergy(0.5*energy_max_orig);
     //alpitodorender energizer_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
-    energizer_equipment->SetParentSubTypeId(TYPE::ENTITY::ENERGIZER_SLOT_ID);
-    energizer_equipment->SetItemCommonData(common_data);
-    energizer_equipment->SetCondition(common_data.condition_max);
+    energizer_equipment->setParentSubTypeId(TYPE::ENTITY::ENERGIZER_SLOT_ID);
+    energizer_equipment->setItemCommonData(common_data);
+    energizer_equipment->setCondition(common_data.condition_max);
                     
     energizer_equipment->UpdateProperties();
     energizer_equipment->CountPrice();

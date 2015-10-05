@@ -253,37 +253,37 @@ bool Vehicle::ManageFunctionGoodsPack(BaseItem* item)
 
 bool Vehicle::ManageFunctionEquipment(BaseItem* item)
 {
-    if (item->GetParentSubTypeId() == TYPE::ENTITY::WEAPON_SLOT_ID)
+    if (item->parentSubTypeId() == TYPE::ENTITY::WEAPON_SLOT_ID)
     {
         ItemSlot* item_slot = m_ComplexWeapon.GetEmptyWeaponSlot();
         if (item_slot != nullptr)
         {
-            return item_slot->SwapItem(item->GetItemSlot());
+            return item_slot->SwapItem(item->itemSlot());
         }
         else
         {
             ItemSlot* item_slot = m_ComplexWeapon.GetEquipedWeakestWeaponSlot();
             if (item_slot != nullptr)
             {
-                if (item->GetPrice() > item_slot->GetItem()->GetPrice())
+                if (item->price() > item_slot->GetItem()->price())
                 {
-                    return item_slot->SwapItem(item->GetItemSlot());
+                    return item_slot->SwapItem(item->itemSlot());
                 }
             }
         }
     }
     else
     {
-        ItemSlot* item_slot = GetFuctionalSlot(item->GetParentSubTypeId());
+        ItemSlot* item_slot = GetFuctionalSlot(item->parentSubTypeId());
         if (item_slot->GetItem() == nullptr)
         {
-            return item_slot->SwapItem(item->GetItemSlot());
+            return item_slot->SwapItem(item->itemSlot());
         }
         else
         {
-            if (item->GetPrice() > item_slot->GetItem()->GetPrice())
+            if (item->price() > item_slot->GetItem()->price())
             {
-                return item_slot->SwapItem(item->GetItemSlot());
+                return item_slot->SwapItem(item->itemSlot());
             }
         }
     }
@@ -297,7 +297,7 @@ bool Vehicle::ManageFunctionModule(BaseItem* item)
     {
         if (m_SlotFunct_vec[i]->GetItem() != nullptr)
         {
-            if (m_SlotFunct_vec[i]->GetItem()->subTypeId() == item->GetParentSubTypeId())
+            if (m_SlotFunct_vec[i]->GetItem()->subTypeId() == item->parentSubTypeId())
             {
                 return ((BaseEquipment*)m_SlotFunct_vec[i]->GetItem())->InsertModule((BaseModule*)item);
             }
@@ -312,7 +312,7 @@ bool Vehicle::ManageFunctionArtefact(BaseItem* item)
     ItemSlot* artef_slot = GetEmptyArtefactSlot();
     if (artef_slot != nullptr)
     {
-        return artef_slot->SwapItem(item->GetItemSlot());
+        return artef_slot->SwapItem(item->itemSlot());
     }
 
     return false;
@@ -480,7 +480,7 @@ bool Vehicle::BuyItem(BaseItem* item)
 {
     if (AddItemToCargoSlot(item) == true)
     {
-        m_OwnerNpc->IncreaseCredits(-item->GetPrice());
+        m_OwnerNpc->IncreaseCredits(-item->price());
 
         return true;
     }
@@ -744,7 +744,7 @@ void Vehicle::CheckNeedsInStatic()
     {
         if (m_SlotFunct_vec[i]->GetItem() != nullptr)
         {
-            if (m_SlotFunct_vec[i]->GetItem()->GetDamaged() == true)
+            if (m_SlotFunct_vec[i]->GetItem()->isDamaged() == true)
             {
                 m_Needs.repair_equipment = true;
             }
@@ -803,7 +803,7 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
         {
             if (m_SlotFunct_vec[i]->GetItem() != nullptr)
             {
-                if (m_SlotFunct_vec[i]->GetItem()->GetDamaged() == true)
+                if (m_SlotFunct_vec[i]->GetItem()->isDamaged() == true)
                 {
                     result = ((Angar*)m_ParentVehicleSlot->GetOwner())->RepairItem(m_OwnerNpc, m_SlotFunct_vec[i]->GetItem());
                 }
@@ -891,7 +891,7 @@ void Vehicle::UpdatePropertiesSpeed()
     {
         if (m_ComplexDrive.GetDriveSlot()->GetItem() != nullptr)
         {
-            if (m_ComplexDrive.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)
+            if (m_ComplexDrive.GetDriveSlot()->GetDriveEquipment()->isFunctioning() == true)
             {
                 float actual_speed = (m_ComplexDrive.GetDriveSlot()->GetDriveEquipment()->GetSpeed() - mass()*MASS_DECREASE_SPEED_RATE);
                 if (actual_speed > 0)
@@ -908,11 +908,11 @@ void Vehicle::UpdatePropertiesSpeed()
                     if (m_ComplexDrive.GetDriveSlot()->GetSelected() == true)
                     {
                         m_Properties.speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
-                        m_ComplexDrive.GetDriveSlot()->GetItem()->UseOverloadDeterioration();
+                        m_ComplexDrive.GetDriveSlot()->GetItem()->useOverloadDeterioration();
                     }
                     else
                     {
-                        m_ComplexDrive.GetDriveSlot()->GetItem()->UseNormalDeterioration();
+                        m_ComplexDrive.GetDriveSlot()->GetItem()->useNormalDeterioration();
                     }
 
                     m_ComplexDrive.UpdatePath();
@@ -945,7 +945,7 @@ void Vehicle::UpdatePropertiesRadar()
     
     if (m_SlotRadar->GetItem() != nullptr)
     {
-        if (m_SlotRadar->GetRadarEquipment()->GetFunctioning() == true)
+        if (m_SlotRadar->GetRadarEquipment()->isFunctioning() == true)
         {
             m_Properties.radar = m_SlotRadar->GetRadarEquipment()->GetRadius();
             m_Properties.equipment_radar = true;
@@ -965,13 +965,13 @@ void Vehicle::UpdatePropertiesJump()
     {
         if (m_ComplexDrive.GetDriveSlot()->GetItem() != nullptr)
         {
-            if (m_ComplexDrive.GetDriveSlot()->GetDriveEquipment()->GetFunctioning() == true)
+            if (m_ComplexDrive.GetDriveSlot()->GetDriveEquipment()->isFunctioning() == true)
             {
                 if (m_ComplexDrive.GetBakSlot() != nullptr)
                 {
                     if (m_ComplexDrive.GetBakSlot()->GetItem() != nullptr)
                     {
-                        if (m_ComplexDrive.GetBakSlot()->GetBakEquipment()->GetFunctioning() == true)
+                        if (m_ComplexDrive.GetBakSlot()->GetBakEquipment()->isFunctioning() == true)
                         {
                             if (m_ComplexDrive.GetDriveSlot()->GetDriveEquipment()->GetHyper() > m_ComplexDrive.GetBakSlot()->GetBakEquipment()->GetFuel())
                             {
@@ -1000,7 +1000,7 @@ void Vehicle::UpdatePropertiesEnergy()
 
     if (m_SlotEnergizer->GetItem() != nullptr)
     {
-        if (m_SlotEnergizer->GetEnergizerEquipment()->GetFunctioning() == true)
+        if (m_SlotEnergizer->GetEnergizerEquipment()->isFunctioning() == true)
         {
             m_Properties.energy = m_SlotEnergizer->GetEnergizerEquipment()->GetEnergy();
             m_Properties.hibernate_mode_enabled = false;
@@ -1023,7 +1023,7 @@ void Vehicle::UpdatePropertiesProtection()
     {
         if (m_ComplexProtector.GetProtectorSlot()->GetItem() != nullptr)
         {
-            if (m_ComplexProtector.GetProtectorSlot()->GetProtectorEquipment()->GetFunctioning() == true)
+            if (m_ComplexProtector.GetProtectorSlot()->GetProtectorEquipment()->isFunctioning() == true)
             {
                 m_Properties.protection += m_ComplexProtector.GetProtectorSlot()->GetProtectorEquipment()->GetProtection();
                 m_Properties.shield_effect_enabled = true;
@@ -1047,7 +1047,7 @@ void Vehicle::UpdatePropertiesRepair()
 
     if (m_SlotDroid->GetItem() != nullptr)
     {
-        if (m_SlotDroid->GetDroidEquipment()->GetFunctioning() == true)
+        if (m_SlotDroid->GetDroidEquipment()->isFunctioning() == true)
         {
             m_Properties.repair = m_SlotDroid->GetDroidEquipment()->GetRepair();
         }
@@ -1079,7 +1079,7 @@ void Vehicle::UpdatePropertiesFreeze()
 
     if (m_SlotFreezer->GetItem() != nullptr)
     {
-        if (m_SlotFreezer->GetFreezerEquipment()->GetFunctioning() == true)
+        if (m_SlotFreezer->GetFreezerEquipment()->isFunctioning() == true)
         {
             m_Properties.freeze = m_SlotFreezer->GetFreezerEquipment()->GetFreeze();
         }
@@ -1096,7 +1096,7 @@ void Vehicle::UpdatePropertiesScan()
 
     if (m_SlotScaner->GetItem() != nullptr)
     {
-        if (m_SlotScaner->GetScanerEquipment()->GetFunctioning() == true)
+        if (m_SlotScaner->GetScanerEquipment()->isFunctioning() == true)
         {
             m_Properties.scan = m_SlotScaner->GetScanerEquipment()->GetScan();
         }
@@ -1116,7 +1116,7 @@ void Vehicle::UpdatePropertiesGrab()
     {
         if (m_SlotGrapple->GetItem() != nullptr)
         {
-            if (m_SlotGrapple->GetGrappleEquipment()->GetFunctioning() == true)
+            if (m_SlotGrapple->GetGrappleEquipment()->isFunctioning() == true)
             {
                 m_Properties.grab_strength = m_SlotGrapple->GetGrappleEquipment()->GetStrength();
                 m_Properties.grab_radius = m_SlotGrapple->GetGrappleEquipment()->GetRadius();
@@ -1138,7 +1138,7 @@ void Vehicle::UpdateArtefactInfluence()
     {
         if (m_SlotArtef_vec[i]->GetItem() != nullptr)
         {
-            if (m_SlotArtef_vec[i]->GetItem()->GetFunctioning() == true)
+            if (m_SlotArtef_vec[i]->GetItem()->isFunctioning() == true)
             {
                 switch(m_SlotArtef_vec[i]->GetItem()->subTypeId())
                 {
@@ -1318,7 +1318,7 @@ void Vehicle::LockRandomItem(int locked_turns)
     if (_equiped_slot_vec.size() > 0)
     {
         unsigned int _rand = meti::getRandInt(0, _equiped_slot_vec.size());
-        _equiped_slot_vec[_rand]->GetItem()->LockEvent(locked_turns);
+        _equiped_slot_vec[_rand]->GetItem()->lockEvent(locked_turns);
     }
 }
 
@@ -1377,12 +1377,12 @@ STATUS Vehicle::CheckGrabStatus() const
     
     if (m_SlotGrapple->GetItem() != nullptr)
     {
-        if (m_SlotGrapple->GetGrappleEquipment()->GetDamaged() == true)
+        if (m_SlotGrapple->GetGrappleEquipment()->isDamaged() == true)
         {
             status = STATUS::ITEM_DAMAGED;
         }
         
-        if (m_SlotGrapple->GetGrappleEquipment()->GetLocked() != 0)
+        if (m_SlotGrapple->GetGrappleEquipment()->isLocked() != 0)
         {
             status = STATUS::ITEM_LOCKED;
         }
@@ -1561,7 +1561,7 @@ void Vehicle::TEST_DamageAndLockRandItems()
     {
         rand_index1 = meti::getRandInt(0, m_SlotFunct_vec.size()-1);
     }
-    m_SlotFunct_vec[rand_index1]->GetItem()->LockEvent(3);
+    m_SlotFunct_vec[rand_index1]->GetItem()->lockEvent(3);
 
     int rand_index2 = meti::getRandInt(0, m_SlotFunct_vec.size()-1);
     while (m_SlotFunct_vec[rand_index2]->GetItem() == nullptr)
@@ -1569,9 +1569,9 @@ void Vehicle::TEST_DamageAndLockRandItems()
         rand_index2 = meti::getRandInt(0, m_SlotFunct_vec.size()-1);
     }
     
-    while (m_SlotFunct_vec[rand_index2]->GetItem()->GetCondition() > 0)
+    while (m_SlotFunct_vec[rand_index2]->GetItem()->condition() > 0)
     {
-        m_SlotFunct_vec[rand_index2]->GetItem()->DeteriorationEvent();
+        m_SlotFunct_vec[rand_index2]->GetItem()->deteriorationEvent();
     }
 }
 

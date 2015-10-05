@@ -106,9 +106,9 @@ void DriveEquipmentBuilder::createInternals(DriveEquipment* drive_equipment, TYP
             
     drive_equipment->SetSpeedOrig(speed_orig);  
     drive_equipment->SetHyperOrig(hyper_orig);
-    drive_equipment->SetParentSubTypeId(TYPE::ENTITY::DRIVE_SLOT_ID);
-    drive_equipment->SetItemCommonData(common_data);
-    drive_equipment->SetCondition(common_data.condition_max);
+    drive_equipment->setParentSubTypeId(TYPE::ENTITY::DRIVE_SLOT_ID);
+    drive_equipment->setItemCommonData(common_data);
+    drive_equipment->setCondition(common_data.condition_max);
     
     drive_equipment->UpdateProperties();
     drive_equipment->CountPrice();

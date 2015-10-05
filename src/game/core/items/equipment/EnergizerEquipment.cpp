@@ -60,29 +60,26 @@ void EnergizerEquipment::UpdateProperties()
 /* virtual */
 void EnergizerEquipment::UpdateInStatic()
 {
-    if (GetFunctioning() == true)    
-    {
-        if (item_slot->GetOwnerVehicle()->TryToGenerateEnergy(restoration) == true)
-        {
-            DeteriorationEvent();
+    if (isFunctioning()) {
+        if (itemSlot()->GetOwnerVehicle()->TryToGenerateEnergy(restoration)) {
+            deteriorationEvent();
         }
-    }
-    
-    UpdateLock();
+    }    
+    updateLock();
 }
 
 void EnergizerEquipment::CountPrice()
 {
     float energy_rate          = (float)energy_max_orig / EQUIPMENT::ENERGIZER::ENERGY_MIN;
     float restoration_rate     = (float)restoration_orig / EQUIPMENT::ENERGIZER::RESTORATION_MIN;
-    float modules_num_rate     = (float)data_item.modules_num_max / EQUIPMENT::ENERGIZER::MODULES_NUM_MAX;
+    float modules_num_rate     = (float)m_data_item.modules_num_max / EQUIPMENT::ENERGIZER::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::ENERGIZER::ENERGY_WEIGHT * energy_rate + EQUIPMENT::ENERGIZER::RESTORATION_WEIGHT * restoration_rate + EQUIPMENT::ENERGIZER::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)data_item.mass / EQUIPMENT::ENERGIZER::MASS_MIN;
-    float condition_rate     = (float)condition / data_item.condition_max;
+    float mass_rate          = (float)m_data_item.mass / EQUIPMENT::ENERGIZER::MASS_MIN;
+    float condition_rate     = (float)m_condition / m_data_item.condition_max;
 
-    price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 void EnergizerEquipment::AddUniqueInfo()

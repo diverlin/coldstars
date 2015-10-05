@@ -112,10 +112,10 @@ void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
 {                      
     for (std::vector<SpaceObject*>::iterator it = target_vec.begin(); it != target_vec.end(); ++it)
     {
-        Vehicle& vehicle = *item_slot->GetOwnerVehicle(); // shortcut
+        Vehicle& vehicle = *itemSlot()->GetOwnerVehicle(); // shortcut
         SpaceObject& target = **it;
         
-        if (item_slot->CheckTarget(&target) == STATUS::TARGET_OK)
+        if (itemSlot()->CheckTarget(&target) == STATUS::TARGET_OK)
         {
             glm::vec3 impulse_dir = glm::normalize(vehicle.center() - target.center());
 
@@ -215,17 +215,17 @@ void GrappleEquipment::CountPrice()
     float radius_rate        = (float)radius_orig / EQUIPMENT::GRAPPLE::RADIUS_MIN;
     float speed_rate         = (float)speed_orig / EQUIPMENT::GRAPPLE::SPEED_MIN;
 
-    float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::GRAPPLE::MODULES_NUM_MAX;
+    float modules_num_rate   = (float)m_data_item.modules_num_max / EQUIPMENT::GRAPPLE::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::GRAPPLE::STRENGTH_WEIGHT * strength_rate + 
                    EQUIPMENT::GRAPPLE::RADIUS_WEIGHT * radius_rate + 
                    EQUIPMENT::GRAPPLE::SPEED_WEIGHT * speed_rate + 
                    EQUIPMENT::GRAPPLE::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)data_item.mass / EQUIPMENT::GRAPPLE::MASS_MIN;
-    float condition_rate     = (float)condition / data_item.condition_max;
+    float mass_rate          = (float)m_data_item.mass / EQUIPMENT::GRAPPLE::MASS_MIN;
+    float condition_rate     = (float)m_condition / m_data_item.condition_max;
 
-    price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 void GrappleEquipment::AddUniqueInfo()

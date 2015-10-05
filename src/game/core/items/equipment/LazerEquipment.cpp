@@ -67,16 +67,16 @@ void LazerEquipment::CountPrice()
 {
     float damage_rate        = (float)damage_orig / EQUIPMENT::LAZER::DAMAGE_MIN;
     float radius_rate        = (float)radius_orig / EQUIPMENT::LAZER::RADIUS_MIN;
-    float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::LAZER::MODULES_NUM_MAX;
+    float modules_num_rate   = (float)m_data_item.modules_num_max / EQUIPMENT::LAZER::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::LAZER::DAMAGE_WEIGHT * damage_rate +
             EQUIPMENT::LAZER::RADIUS_WEIGHT * radius_rate +
             EQUIPMENT::LAZER::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)data_item.mass / EQUIPMENT::LAZER::MASS_MIN;
-    float condition_rate     = (float)condition / data_item.condition_max;
+    float mass_rate          = (float)m_data_item.mass / EQUIPMENT::LAZER::MASS_MIN;
+    float condition_rate     = (float)m_condition / m_data_item.condition_max;
 
-    price                    = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    m_price                    = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 void LazerEquipment::AddUniqueInfo()
@@ -105,19 +105,19 @@ std::string LazerEquipment::GetRadiusStr()
 
 void LazerEquipment::FireEvent(SpaceObject* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
 { 
-    if (item_slot->GetOwnerVehicle()->TryToConsumeEnergy(damage) == true)
+    if (itemSlot()->GetOwnerVehicle()->TryToConsumeEnergy(damage) == true)
     {
         if (subtarget != nullptr) // precise fire
         {
-            if (meti::isActionShouldHappen(item_slot->GetHitProbability()) == true) {
-                subtarget->GetItem()->LockEvent(1);
+            if (meti::isActionShouldHappen(itemSlot()->GetHitProbability()) == true) {
+                subtarget->GetItem()->lockEvent(1);
             }
             damage_rate /= 3; // lower damage is used for precise fire
             
         }
 
         target->hit(damage*damage_rate, show_effect);
-        DeteriorationEvent();
+        deteriorationEvent();
 
         if (show_effect)
         {

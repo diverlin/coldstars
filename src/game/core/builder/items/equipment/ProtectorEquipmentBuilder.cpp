@@ -88,9 +88,9 @@ void ProtectorEquipmentBuilder::createInternals(ProtectorEquipment* protector_eq
 
     protector_equipment->SetProtectionOrig(protection_orig);  
     //alpitodorender protector_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
-    protector_equipment->SetParentSubTypeId(TYPE::ENTITY::PROTECTOR_SLOT_ID);
-    protector_equipment->SetItemCommonData(common_data);
-    protector_equipment->SetCondition(common_data.condition_max);
+    protector_equipment->setParentSubTypeId(TYPE::ENTITY::PROTECTOR_SLOT_ID);
+    protector_equipment->setItemCommonData(common_data);
+    protector_equipment->setCondition(common_data.condition_max);
             
     protector_equipment->UpdateProperties();
     protector_equipment->CountPrice();

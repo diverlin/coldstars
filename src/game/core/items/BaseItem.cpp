@@ -18,23 +18,16 @@
 
 
 #include "BaseItem.hpp"
-#include "../common/constants.hpp"
+#include <common/constants.hpp>
 #include <ceti/Logger.hpp>
 //#include <ceti/StringUtils.hpp>
 
 #include <common/Global.hpp>
 #include <managers/EntitiesManager.hpp>
 
-#include "../slots/ItemSlot.hpp"
+#include <slots/ItemSlot.hpp>
 
 BaseItem::BaseItem()
-:
-race_id(TYPE::RACE::NONE_ID),
-locked_turns(0),
-condition(0),
-price(0),
-parent_subtype_id(TYPE::ENTITY::NONE_ID),
-item_slot(nullptr)
 {}
 
 /* virtual */
@@ -45,70 +38,66 @@ BaseItem::~BaseItem()
     #endif
 }
 
-void BaseItem::LockEvent(int locked_turns)
+void BaseItem::lockEvent(int locked_turns)
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("BaseItem::LockEvent", ITEMINFLUENCE_LOG_DIP);
     #endif
     
     bool was_working = false;
-    if (this->locked_turns == 0)
-    {
+    if (m_locked_turns == 0) {
         was_working = true;
     }
     
-    this->locked_turns += locked_turns;
-    if (was_working == true)
-    {
-        item_slot->UpdateVehiclePropetries();        
+    m_locked_turns += locked_turns;
+    if (was_working == true) {
+        m_item_slot->UpdateVehiclePropetries();
     }
 }
                 
-void BaseItem::UseNormalDeterioration()
+void BaseItem::useNormalDeterioration()
 {
-    deterioration =  data_item.deterioration_normal;
+    m_deterioration = m_data_item.deterioration_normal;
 }
                                 
-void BaseItem::UseOverloadDeterioration()
+void BaseItem::useOverloadDeterioration()
 {
-    deterioration = data_item.deterioration_normal * data_item.deterioration_overload_rate;
+    m_deterioration = m_data_item.deterioration_normal * m_data_item.deterioration_overload_rate;
 }
  
-void BaseItem::DamageEvent()
+void BaseItem::damageEvent()
 {
     #if ITEMINFLUENCE_LOG_ENABLED == 1
     Logger::Instance().Log("BaseItem::DamageEvent", ITEMINFLUENCE_LOG_DIP);
     #endif
 
-    item_slot->UpdateVehiclePropetries();
+    m_item_slot->UpdateVehiclePropetries();
 }
                 
-void BaseItem::DeteriorationEvent()
+void BaseItem::deteriorationEvent()
 {
-    condition -= deterioration;
-    if (condition <= 0)
+    m_condition -= m_deterioration;
+    if (m_condition <= 0)
     {
-        condition = 0;
-        DamageEvent();
+        m_condition = 0;
+        damageEvent();
     }
 }         
                 
-bool BaseItem::RepairEvent()
+bool BaseItem::repairEvent()
 {
-    condition = data_item.condition_max;
-    item_slot->UpdateVehiclePropetries();  
+    m_condition = m_data_item.condition_max;
+    m_item_slot->UpdateVehiclePropetries();
     
     return true;
 }
 
-void BaseItem::UpdateLock()
+void BaseItem::updateLock()
 {
-    if (locked_turns > 0)
-    {
-        locked_turns--; 
-        if (locked_turns == 0)
-        {
-            item_slot->UpdateVehiclePropetries();
+    if (m_locked_turns > 0) {
+        m_locked_turns--;
+        if (m_locked_turns == 0) {
+            m_item_slot->UpdateVehiclePropetries();
         }
     }
 }     
@@ -153,24 +142,24 @@ void BaseItem::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
     Logger::Instance().Log(" BaseItem::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-    save_ptree.put(root+"price", price);
-    save_ptree.put(root+"condition", condition);
-    save_ptree.put(root+"locked_turns", locked_turns);
-    save_ptree.put(root+"race_id", (int)race_id);
-    save_ptree.put(root+"parent_subtype_id", (int)parent_subtype_id);
+    save_ptree.put(root+"price", m_price);
+    save_ptree.put(root+"condition", m_condition);
+    save_ptree.put(root+"locked_turns", m_locked_turns);
+    save_ptree.put(root+"race_id", (int)m_race_id);
+    save_ptree.put(root+"parent_subtype_id", (int)m_parent_subtype_id);
 
-    save_ptree.put(root+"data_item.tech_level",                     (int)data_item.tech_level);        
-    save_ptree.put(root+"data_item.modules_num_max",                data_item.modules_num_max);
-    save_ptree.put(root+"data_item.condition_max",                  data_item.condition_max);                         
-    save_ptree.put(root+"data_item.deterioration_normal",           data_item.deterioration_normal);   
-    save_ptree.put(root+"data_item.deterioration_overload_rate",    data_item.deterioration_overload_rate);   
-    save_ptree.put(root+"data_item.mass",                           data_item.mass);
+    save_ptree.put(root+"data_item.tech_level",                     (int)m_data_item.tech_level);
+    save_ptree.put(root+"data_item.modules_num_max",                m_data_item.modules_num_max);
+    save_ptree.put(root+"data_item.condition_max",                  m_data_item.condition_max);
+    save_ptree.put(root+"data_item.deterioration_normal",           m_data_item.deterioration_normal);
+    save_ptree.put(root+"data_item.deterioration_overload_rate",    m_data_item.deterioration_overload_rate);
+    save_ptree.put(root+"data_item.mass",                           m_data_item.mass);
 
     //alpitodorender
 //    if (HasTextureOb())     { save_ptree.put(root+"unresolved.textureOb_path", textureOb().GetData().texture_path); }
 //    else                    { save_ptree.put(root+"unresolved.textureOb_path", "none"); }
         
-    if (item_slot)     { save_ptree.put(root+"unresolved.item_slot_id", item_slot->id()); }
+    if (m_item_slot)   { save_ptree.put(root+"unresolved.item_slot_id", m_item_slot->id()); }
     else               { save_ptree.put(root+"unresolved.item_slot_id", NONE_ID); }
 }
 
@@ -180,21 +169,21 @@ void BaseItem::LoadData(const boost::property_tree::ptree& load_ptree)
     Logger::Instance().Log(" BaseItem::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-    price             = load_ptree.get<int>("price");
-    condition         = load_ptree.get<int>("condition");
-    locked_turns      = load_ptree.get<int>("locked_turns");
-    race_id           = (TYPE::RACE)load_ptree.get<int>("race_id");
-    parent_subtype_id = (TYPE::ENTITY)load_ptree.get<int>("parent_subtype_id");
+    m_price             = load_ptree.get<int>("price");
+    m_condition         = load_ptree.get<int>("condition");
+    m_locked_turns      = load_ptree.get<int>("locked_turns");
+    m_race_id           = (TYPE::RACE)load_ptree.get<int>("race_id");
+    m_parent_subtype_id = (TYPE::ENTITY)load_ptree.get<int>("parent_subtype_id");
 
-    data_item.tech_level           = (TYPE::TECHLEVEL)load_ptree.get<int>("data_item.tech_level");    
-    data_item.modules_num_max      = load_ptree.get<int>("data_item.modules_num_max");
-    data_item.condition_max        = load_ptree.get<int>("data_item.condition_max");                         
-    data_item.deterioration_normal = load_ptree.get<int>("data_item.deterioration_normal");   
-    data_item.deterioration_overload_rate = load_ptree.get<float>("data_item.deterioration_overload_rate");   
-    data_item.mass                 = load_ptree.get<int>("data_item.mass");
+    m_data_item.tech_level           = (TYPE::TECHLEVEL)load_ptree.get<int>("data_item.tech_level");
+    m_data_item.modules_num_max      = load_ptree.get<int>("data_item.modules_num_max");
+    m_data_item.condition_max        = load_ptree.get<int>("data_item.condition_max");
+    m_data_item.deterioration_normal = load_ptree.get<int>("data_item.deterioration_normal");
+    m_data_item.deterioration_overload_rate = load_ptree.get<float>("data_item.deterioration_overload_rate");
+    m_data_item.mass                 = load_ptree.get<int>("data_item.mass");
                     
-    data_unresolved_BaseItem.textureOb_path = load_ptree.get<std::string>("unresolved.textureOb_path");
-    data_unresolved_BaseItem.item_slot_id   = load_ptree.get<int>("unresolved.item_slot_id");
+    m_data_unresolved_BaseItem.textureOb_path = load_ptree.get<std::string>("unresolved.textureOb_path");
+    m_data_unresolved_BaseItem.item_slot_id   = load_ptree.get<int>("unresolved.item_slot_id");
 }
                 
 void BaseItem::ResolveData()
@@ -205,11 +194,11 @@ void BaseItem::ResolveData()
     
     //BindData2D(TextureCollector::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path));
     
-    UseNormalDeterioration();    
+    useNormalDeterioration();
     UpdateProperties(); // this function must be performed before inserting to slot!!!
         
-    if(data_unresolved_BaseItem.item_slot_id != NONE_ID) // item_slot can be nullptr in case of inserted module
+    if(m_data_unresolved_BaseItem.item_slot_id != NONE_ID) // item_slot can be nullptr in case of inserted module
     {
-        ((ItemSlot*)global::get().entitiesManager().GetEntityById(data_unresolved_BaseItem.item_slot_id))->InsertItem(this);
+        ((ItemSlot*)global::get().entitiesManager().GetEntityById(m_data_unresolved_BaseItem.item_slot_id))->InsertItem(this);
     }
 }

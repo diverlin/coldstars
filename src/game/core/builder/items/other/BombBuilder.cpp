@@ -28,6 +28,8 @@
 //#include <resources/MeshCollector.hpp>
 //#include <jeti/TextureOb.hpp>
 
+#include <boost/property_tree/info_parser.hpp>
+
 BombBuilder::BombBuilder()
 {}
 
@@ -67,7 +69,22 @@ void BombBuilder::createInternals(Bomb* bomb, int damage, int radius) const
     radius = 300;
 
     //alpitodorender bomb->SetRenderData(mesh, texOb, texOb->size());
-    bomb->SetDamage(damage);
-    bomb->SetRadius(radius);
-    bomb->SetParentSubTypeId(TYPE::ENTITY::CARGO_SLOT_ID);
+    bomb->setDamage(damage);
+    bomb->setRadius(radius);
+    bomb->setParentSubTypeId(TYPE::ENTITY::CARGO_SLOT_ID);
 }
+
+void BombBuilder::write(const std::string& fpath, Bomb* bomb)
+{
+    boost::property_tree::ptree ptree;
+
+//    ptree.put("title",  bomb->title());
+//    ptree.put("race",   bomb->race());
+    ptree.put("damage", bomb->damage());
+    ptree.put("radius", bomb->radius());
+//    ptree.put("mass",   bomb->mass());
+
+    write_info("fpath", ptree);
+}
+
+

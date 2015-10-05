@@ -17,40 +17,38 @@
 */
 
 
-#ifndef BOMB_H
-#define BOMB_H
+#pragma once
 
-#include "../BaseItem.hpp"
+#include <items/BaseItem.hpp>
 
 class Bomb : public BaseItem
 {
-        public:  
-            Bomb(int);
-            virtual ~Bomb();
+    public:
+        Bomb(int);
+        virtual ~Bomb();
 
-            void SetDamage(int damage) { this->damage = damage; };
-            void SetRadius(int radius) { this->radius = radius; };
-                            
-            int GetDamage() const { return damage; };
-            int GetRadius() const { return radius; };
-            
+        void setDamage(int damage) { this->m_damage = damage; }
+        void setRadius(int radius) { this->m_radius = radius; }
+
+        int damage() const { return m_damage; }
+        int radius() const { return m_radius; }
+
         virtual void UpdateOwnerAbilities();
-            
-                  virtual void Save(boost::property_tree::ptree&) const;
+
+        virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
         virtual void Resolve();
         
-        private:
-            int damage;
-            int radius;
-            
-            virtual void AddCommonInfo();
-         virtual void AddUniqueInfo(); 
-         
-         void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    private:
+        int m_damage = 0;
+        int m_radius = 0;
+
+        virtual void AddCommonInfo();
+        virtual void AddUniqueInfo();
+
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();
 };
 
-#endif 
 

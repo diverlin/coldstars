@@ -69,7 +69,7 @@ void RadarModuleBuilder::createInternals(RadarModule* radar_module, int radius_a
 //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
     radius_add  = meti::getRandInt(MODULE::RADAR::RADIUS_MIN, MODULE::RADAR::RADIUS_MAX);
 
-    radar_module->SetParentSubTypeId(TYPE::ENTITY::RADAR_EQUIPMENT_ID);    
+    radar_module->setParentSubTypeId(TYPE::ENTITY::RADAR_EQUIPMENT_ID);    
     //alpitodorender radar_module->SetRenderData(mesh, texOb, texOb->size());
     radar_module->SetRadiusAdd(radius_add);
 }

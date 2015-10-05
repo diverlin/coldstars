@@ -16,11 +16,10 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef BASEEQUIPMENT_HPP
-#define BASEEQUIPMENT_HPP
+#pragma once
 
-#include "../BaseItem.hpp"
-#include "../modules/BaseModule.hpp"
+#include <items/BaseItem.hpp>
+#include <items/modules/BaseModule.hpp>
 
 namespace jeti {
 class AnimationEffect2D;
@@ -36,8 +35,8 @@ class BaseEquipment : public BaseItem
         
         bool InsertModule(BaseModule*);
         
-//        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
-                            
+        //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
+
     protected:
         std::vector<BaseModule*> modules_vec;    // needs for inserted modules drawing
         
@@ -47,7 +46,7 @@ class BaseEquipment : public BaseItem
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();   
+        void ResolveData();
 };
 
-#endif 
+

@@ -69,7 +69,7 @@ void RocketModuleBuilder::createInternals(RocketModule* rocket_module, int ammo_
     damage_add      = meti::getRandInt(MODULE::ROCKET::DAMAGE_MIN, MODULE::ROCKET::DAMAGE_MAX);
     radius_add      = meti::getRandInt(MODULE::ROCKET::RADIUS_MIN, MODULE::ROCKET::RADIUS_MAX);
 
-    rocket_module->SetParentSubTypeId(TYPE::ENTITY::ROCKET_EQUIPMENT_ID);
+    rocket_module->setParentSubTypeId(TYPE::ENTITY::ROCKET_EQUIPMENT_ID);
     // alpitodorender rocket_module->SetRenderData(mesh, texOb, texOb->size());
     rocket_module->SetAmmoMaxAdd(ammo_max_add);
     rocket_module->SetDamageAdd(damage_add);

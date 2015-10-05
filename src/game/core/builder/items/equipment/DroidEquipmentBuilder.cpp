@@ -89,9 +89,9 @@ void DroidEquipmentBuilder::createInternals(DroidEquipment* droid_equipment, TYP
    
     droid_equipment->SetRepairOrig(repair_orig);  
     //alpitodorender droid_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
-    droid_equipment->SetParentSubTypeId(TYPE::ENTITY::DROID_SLOT_ID);
-    droid_equipment->SetItemCommonData(common_data);
-    droid_equipment->SetCondition(common_data.condition_max);
+    droid_equipment->setParentSubTypeId(TYPE::ENTITY::DROID_SLOT_ID);
+    droid_equipment->setItemCommonData(common_data);
+    droid_equipment->setCondition(common_data.condition_max);
             
     droid_equipment->UpdateProperties();
     droid_equipment->CountPrice();

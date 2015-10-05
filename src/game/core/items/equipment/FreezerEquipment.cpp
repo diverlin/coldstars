@@ -51,14 +51,14 @@ void FreezerEquipment::UpdateProperties()
 void FreezerEquipment::CountPrice()
 {
      float freeze_rate          = (float)freeze_orig / EQUIPMENT::FREEZER::FREEZE_MIN;
-     float modules_num_rate     = (float)data_item.modules_num_max / EQUIPMENT::FREEZER::MODULES_NUM_MAX;
+     float modules_num_rate     = (float)m_data_item.modules_num_max / EQUIPMENT::FREEZER::MODULES_NUM_MAX;
 
      float effectiveness_rate = EQUIPMENT::FREEZER::FREEZE_WEIGHT * freeze_rate + EQUIPMENT::FREEZER::MODULES_NUM_WEIGHT * modules_num_rate;
 
-     float mass_rate          = (float)data_item.mass / EQUIPMENT::FREEZER::MASS_MIN;
-     float condition_rate     = (float)condition / data_item.condition_max;
+     float mass_rate          = (float)m_data_item.mass / EQUIPMENT::FREEZER::MASS_MIN;
+     float condition_rate     = (float)m_condition / m_data_item.condition_max;
 
-     price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 void FreezerEquipment::AddUniqueInfo()

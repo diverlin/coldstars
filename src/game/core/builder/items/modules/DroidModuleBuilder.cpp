@@ -68,7 +68,7 @@ void DroidModuleBuilder::createInternals(DroidModule* droid_module, int repair_a
 //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
     repair_add  = meti::getRandInt(MODULE::DROID::REPAIR_MIN, MODULE::DROID::REPAIR_MAX);
 
-    droid_module->SetParentSubTypeId(TYPE::ENTITY::DROID_EQUIPMENT_ID);    
+    droid_module->setParentSubTypeId(TYPE::ENTITY::DROID_EQUIPMENT_ID);    
     //alpitodorender droid_module->SetRenderData(mesh, texOb, texOb->size());
     droid_module->SetRepairAdd(repair_add);
 }

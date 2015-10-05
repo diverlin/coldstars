@@ -16,11 +16,10 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
     
-#ifndef GOODSPACK_HPP
-#define GOODSPACK_HPP
+#pragma once
 
-#include "../BaseItem.hpp"
-#include "../../common/constants.hpp"
+#include <items/BaseItem.hpp>
+#include <common/constants.hpp>
 
 class GoodsPack : public BaseItem
 {
@@ -28,8 +27,8 @@ class GoodsPack : public BaseItem
         GoodsPack(int, TYPE::ENTITY);
         virtual ~GoodsPack();
         
-        void Increase(unsigned int ammount) { data_item.mass += ammount; };       
-        void Decrease(unsigned int ammount) { data_item.mass -= ammount; }; 
+        void Increase(unsigned int amount) { m_data_item.mass += amount; }
+        void Decrease(unsigned int amount) { m_data_item.mass -= amount; }
 
         virtual void UpdateOwnerAbilities();
         
@@ -49,4 +48,3 @@ class GoodsPack : public BaseItem
 
 GoodsPack* GetNewGoodsPack(TYPE::ENTITY, INTLONGEST id=NONE_ID);
 
-#endif 
