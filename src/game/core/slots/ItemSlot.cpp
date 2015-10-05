@@ -46,17 +46,17 @@
 
 ItemSlot::ItemSlot(INTLONGEST id, TYPE::ENTITY subtype_id)
     :
-      m_Turrel(nullptr),
-      m_Item(nullptr),
-      m_Target(nullptr),
-      m_Subtarget(nullptr),
-      m_HitProbability(0)
+      m_turrel(nullptr),
+      m_item(nullptr),
+      m_target(nullptr),
+      m_subtarget(nullptr),
+      m_hitProbability(0)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::ITEM_SLOT_ID);
     setSubTypeId(subtype_id);
     
-    m_HitProbability = meti::getRandInt(0, 100); // (tmp) move to builder
+    m_hitProbability = meti::getRandInt(0, 100); // (tmp) move to builder
 }
 
 /* virtual */
@@ -68,26 +68,26 @@ ItemSlot::~ItemSlot()
 /* virtual */  
 void ItemSlot::putChildrenToGarbage() const
 {
-    if (m_Item) {
-        global::get().entitiesManager().AddToGarbage(m_Item);
+    if (m_item) {
+        global::get().entitiesManager().AddToGarbage(m_item);
     }
 }
 
-void ItemSlot::SetTarget(SpaceObject* target, ItemSlot* subtarget)     
+void ItemSlot::setTarget(SpaceObject* target, ItemSlot* subtarget)
 {
-    m_Target    = target;
-    m_Subtarget = subtarget;
+    m_target    = target;
+    m_subtarget = subtarget;
 }
 
-STATUS ItemSlot::ValidateTarget()
+STATUS ItemSlot::validateTarget()
 {       
-    if (m_Subtarget) {
-        if (!CheckSubTarget(m_Subtarget)) {
-            m_Subtarget = nullptr; // reseting only subtarget, firemode for target will be used
+    if (m_subtarget) {
+        if (!checkSubTarget(m_subtarget)) {
+            m_subtarget = nullptr; // reseting only subtarget, firemode for target will be used
         }
     }
     
-    STATUS status = CheckTarget(m_Target);    
+    STATUS status = checkTarget(m_target);
     if (status != STATUS::OK) {
         Logger::Instance().Log(getTargetStatusStr(status), WEAPONSTARGET_LOG_DIP);
     }
@@ -95,47 +95,47 @@ STATUS ItemSlot::ValidateTarget()
     return status;
 }
 
-void ItemSlot::ResetTarget()
+void ItemSlot::resetTarget()
 { 
-    m_Target    = nullptr;
-    m_Subtarget = nullptr;
+    m_target    = nullptr;
+    m_subtarget = nullptr;
 }
 
-bool ItemSlot::CheckAmmo() const
+bool ItemSlot::checkAmmo() const
 {
-    switch(GetItem()->subTypeId())
+    switch(item()->subTypeId())
     {
         case TYPE::ENTITY::LAZER_EQUIPMENT_ID:  { /*if check energy */  return true; break; }
-        case TYPE::ENTITY::ROCKET_EQUIPMENT_ID: { if (GetRocketEquipment()->GetAmmo() > 0) return true; break; }
+        case TYPE::ENTITY::ROCKET_EQUIPMENT_ID: { if (rocketEquipment()->GetAmmo() > 0) return true; break; }
     }
     
     return false;
 }
 
-void ItemSlot::FireEvent(float attack_rate, bool show_effect)
+void ItemSlot::fireEvent(float attack_rate, bool show_effect)
 {
-    switch(GetItem()->subTypeId())
+    switch(item()->subTypeId())
     {
         case TYPE::ENTITY::LAZER_EQUIPMENT_ID:
         {
-            GetLazerEquipment()->FireEvent(GetTarget(), GetSubTarget(), attack_rate, show_effect);
+            lazerEquipment()->FireEvent(target(), subtarget(), attack_rate, show_effect);
             break;
         }
 
         case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:
         {
-            GetRocketEquipment()->FireEvent(attack_rate);
+            rocketEquipment()->FireEvent(attack_rate);
             break;
         }
     }
 
-    if (GetTarget()->isAlive() == false)
+    if (target()->isAlive() == false)
     {
-        GetOwnerVehicle()->GetOwnerNpc()->AddExpirience(GetTarget()->givenExpirience(), show_effect);
+        GetOwnerVehicle()->GetOwnerNpc()->AddExpirience(target()->givenExpirience(), show_effect);
     }
 }
 
-bool ItemSlot::CheckItemInsertion(BaseItem* item) const
+bool ItemSlot::checkItemInsertion(BaseItem* item) const
 {
     if (subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID)
     {
@@ -150,21 +150,21 @@ bool ItemSlot::CheckItemInsertion(BaseItem* item) const
     return false;
 }
 
-bool ItemSlot::InsertItem(BaseItem* item)
+bool ItemSlot::insertItem(BaseItem* item)
 {    
     if (subTypeId() == TYPE::ENTITY::GATE_SLOT_ID)
     {
-        m_Item = item;
-        DropItemToSpace();
+        m_item = item;
+        dropItemToSpace();
         return true;
     }
 
     if (subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID)
     {
-        m_Item = item;
+        m_item = item;
         if (item->itemSlot() != nullptr)
         {
-            item->itemSlot()->RemoveItem();
+            item->itemSlot()->removeItem();
         }
         item->setItemSlot(this);
 
@@ -173,13 +173,13 @@ bool ItemSlot::InsertItem(BaseItem* item)
 
     if (subTypeId() == item->parentSubTypeId())
     {
-        m_Item = item;
+        m_item = item;
         if (item->itemSlot() != nullptr)
         {
-            item->itemSlot()->RemoveItem();
+            item->itemSlot()->removeItem();
         }
         item->setItemSlot(this);
-        UpdateVehiclePropetries();
+        updateVehiclePropetries();
 
         return true;
     }
@@ -187,18 +187,18 @@ bool ItemSlot::InsertItem(BaseItem* item)
     return false;
 }
 
-void ItemSlot::RemoveItem()
+void ItemSlot::removeItem()
 {    
-    m_Item = nullptr;
-    ResetTarget();
+    m_item = nullptr;
+    resetTarget();
 
     if (subTypeId() != TYPE::ENTITY::CARGO_SLOT_ID)
     {
-        UpdateVehiclePropetries();
+        updateVehiclePropetries();
     }
 }
 
-void ItemSlot::SelectEvent()
+void ItemSlot::selectEvent()
 {
     selected = true;
 
@@ -211,7 +211,7 @@ void ItemSlot::SelectEvent()
     }
 }
 
-void ItemSlot::DeselectEvent()
+void ItemSlot::deselectEvent()
 {
     selected = false;
     
@@ -219,7 +219,7 @@ void ItemSlot::DeselectEvent()
     {
         switch(subTypeId())
         {
-            case TYPE::ENTITY::WEAPON_SLOT_ID:     {     ResetTarget(); break; }
+            case TYPE::ENTITY::WEAPON_SLOT_ID:     {     resetTarget(); break; }
             case TYPE::ENTITY::DRIVE_SLOT_ID:
             {
                 GetOwnerVehicle()->UpdatePropertiesSpeed();
@@ -231,7 +231,7 @@ void ItemSlot::DeselectEvent()
 
 }
 
-void ItemSlot::UpdateVehiclePropetries() const
+void ItemSlot::updateVehiclePropetries() const
 {
     if (subTypeId() != TYPE::ENTITY::CARGO_SLOT_ID)
     {
@@ -289,19 +289,19 @@ void ItemSlot::UpdateVehiclePropetries() const
 //    render.DrawQuad(*textureOb_mask, box);
 //}
 
-int ItemSlot::GetItemRadius() const
+int ItemSlot::itemRadius() const
 {       
-    switch(m_Item->typeId())
+    switch(m_item->typeId())
     {
         case TYPE::ENTITY::EQUIPMENT_ID:
         {
-            switch (m_Item->subTypeId())
+            switch (m_item->subTypeId())
             {
-                case TYPE::ENTITY::LAZER_EQUIPMENT_ID:   { return GetLazerEquipment()->GetRadius();  break; };
-                case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:  { return GetRocketEquipment()->GetRadius(); break; };
+                case TYPE::ENTITY::LAZER_EQUIPMENT_ID:   { return lazerEquipment()->GetRadius();  break; };
+                case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:  { return rocketEquipment()->GetRadius(); break; };
 
-                case TYPE::ENTITY::GRAPPLE_EQUIPMENT_ID: { return GetGrappleEquipment()->GetRadius(); break; };
-                case TYPE::ENTITY::RADAR_EQUIPMENT_ID:   { return GetRadarEquipment()->GetRadius();   break; };
+                case TYPE::ENTITY::GRAPPLE_EQUIPMENT_ID: { return grappleEquipment()->GetRadius(); break; };
+                case TYPE::ENTITY::RADAR_EQUIPMENT_ID:   { return radarEquipment()->GetRadius();   break; };
             }
             
             break;
@@ -309,23 +309,23 @@ int ItemSlot::GetItemRadius() const
 
         case TYPE::ENTITY::BOMB_ID:
         {
-            return GetBomb()->radius();   break;
+            return bomb()->radius();   break;
         }
     }
     
     return 0;
 }
 
-int ItemSlot::GetItemDamage() const
+int ItemSlot::itemDamage() const
 {       
-    switch(m_Item->typeId())
+    switch(m_item->typeId())
     {
         case TYPE::ENTITY::EQUIPMENT_ID:
         {
-            switch (m_Item->subTypeId())
+            switch (m_item->subTypeId())
             {
-                case TYPE::ENTITY::LAZER_EQUIPMENT_ID:   { return GetLazerEquipment()->GetDamage();  break; };
-                case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:  { return GetRocketEquipment()->GetDamage(); break; };
+                case TYPE::ENTITY::LAZER_EQUIPMENT_ID:   { return lazerEquipment()->GetDamage();  break; };
+                case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:  { return rocketEquipment()->GetDamage(); break; };
             }
             
             break;
@@ -333,14 +333,14 @@ int ItemSlot::GetItemDamage() const
             
         case TYPE::ENTITY::BOMB_ID:
         {
-            return GetBomb()->damage();   break;
+            return bomb()->damage();   break;
         }
     }
     
     return 0;
 }
 
-void ItemSlot::DropItemToSpace()
+void ItemSlot::dropItemToSpace()
 {
     //    jeti::TextureOb* textureOb_ = nullptr;
 
@@ -358,39 +358,39 @@ void ItemSlot::DropItemToSpace()
     //    RemoveItem();
 }
 
-bool ItemSlot::SwapItem(ItemSlot* slot)
+bool ItemSlot::swapItem(ItemSlot* slot)
 {
-    if ( (m_Item == nullptr) and (slot->GetItem() != nullptr) )
+    if ( (m_item == nullptr) and (slot->item() != nullptr) )
     {
-        if (InsertItem(slot->GetItem()) == true)
+        if (insertItem(slot->item()) == true)
         {
             return true;
         }
     }
     
-    if ( (m_Item != nullptr) and (slot->GetItem() == nullptr) )
+    if ( (m_item != nullptr) and (slot->item() == nullptr) )
     {
-        if (slot->InsertItem(GetItem()) == true)
+        if (slot->insertItem(item()) == true)
         {
             return true;
         }
     }
 
-    if ( (m_Item != nullptr) and (slot->GetItem() != nullptr) )
+    if ( (m_item != nullptr) and (slot->item() != nullptr) )
     {
-        BaseItem* tmp_item = slot->GetItem();
-        if ( (slot->CheckItemInsertion(m_Item) == true) and (CheckItemInsertion(tmp_item) == true) )
+        BaseItem* tmp_item = slot->item();
+        if ( (slot->checkItemInsertion(m_item) == true) and (checkItemInsertion(tmp_item) == true) )
         {
-            slot->InsertItem(m_Item);
+            slot->insertItem(m_item);
             tmp_item->setItemSlot(nullptr);
-            InsertItem(tmp_item);
+            insertItem(tmp_item);
 
             return true;
         }
 
-        if ( (m_Item->typeId() == TYPE::ENTITY::MODULE_ID) and (slot->GetItem()->typeId() == TYPE::ENTITY::EQUIPMENT_ID) )
+        if ( (m_item->typeId() == TYPE::ENTITY::MODULE_ID) and (slot->item()->typeId() == TYPE::ENTITY::EQUIPMENT_ID) )
         {
-            if (((BaseEquipment*)slot->GetItem())->InsertModule((BaseModule*)m_Item) == true)
+            if (((BaseEquipment*)slot->item())->InsertModule((BaseModule*)m_item) == true)
             {
                 return true;
             }
@@ -400,26 +400,26 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
     return false;
 }
 
-void ItemSlot::UpdateRange(jeti::TextureOb* _texOb)
+void ItemSlot::updateRange(jeti::TextureOb* _texOb)
 {
-    float radius = this->GetItemRadius();
+    float radius = this->itemRadius();
     int size = 6;
     
     //    m_VisualPath.FillData(_texOb, radius, size);
 }
 
-void ItemSlot::DrawRange(const glm::vec2& offset)
+void ItemSlot::drawRange(const glm::vec2& offset)
 { 
     //m_VisualPath.Draw(offset);
 }
 
-bool ItemSlot::CheckSubTarget(ItemSlot* subtarget) const
+bool ItemSlot::checkSubTarget(ItemSlot* subtarget) const
 {
 #if WEAPONSTARGET_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::CheckSubTarget", WEAPONSTARGET_LOG_DIP);
 #endif
     
-    if (subtarget->GetItem() != nullptr)
+    if (subtarget->item() != nullptr)
     {
         return true;
     }
@@ -428,28 +428,28 @@ bool ItemSlot::CheckSubTarget(ItemSlot* subtarget) const
 }
 
 
-STATUS ItemSlot::CheckTarget(SpaceObject* target) const
+STATUS ItemSlot::checkTarget(SpaceObject* target) const
 {
 #if WEAPONSTARGET_LOG_ENABLED == 1
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
 #endif
     
-    if (IsTargetAlive(target) == false)
+    if (isTargetAlive(target) == false)
     {
         return STATUS::TARGET_DEAD;
     }
 
-    if (IsTargetInSpace(target) == false)
+    if (isTargetInSpace(target) == false)
     {
         return STATUS::TARGET_NOTIN_SPACE;
     }
 
-    if (IsTargetInSameStarSystem(target) == false)
+    if (isTargetInSameStarSystem(target) == false)
     {
         return STATUS::TARGET_NOTIN_STARSYSTEM;
     }
 
-    if (CheckDistanceToTarget(target) == false)
+    if (checkDistanceToTarget(target) == false)
     {
         return STATUS::TARGET_OUTOF_RANGE;
     }
@@ -457,37 +457,37 @@ STATUS ItemSlot::CheckTarget(SpaceObject* target) const
     return STATUS::TARGET_OK;
 }     
 
-STATUS ItemSlot::CheckTargetPure(SpaceObject* target) const
+STATUS ItemSlot::checkTargetPure(SpaceObject* target) const
 {
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
-    if (!IsTargetAlive(target)) {
+    if (!isTargetAlive(target)) {
         return STATUS::TARGET_DEAD;
     }
-    if (!IsTargetInSpace(target)) {
+    if (!isTargetInSpace(target)) {
         return STATUS::TARGET_NOTIN_SPACE;
     }
-    if (!IsTargetInSameStarSystem(target)) {
+    if (!isTargetInSameStarSystem(target)) {
         return STATUS::TARGET_NOTIN_STARSYSTEM;
     }
     return STATUS::TARGET_OK;
 } 
 
-bool ItemSlot::IsTargetAlive(SpaceObject* target) const
+bool ItemSlot::isTargetAlive(SpaceObject* target) const
 {
     return target->isAlive();
 }
 
-bool ItemSlot::IsTargetInSpace(SpaceObject* target) const  
+bool ItemSlot::isTargetInSpace(SpaceObject* target) const
 {
     return (target->placeTypeId() == TYPE::PLACE::SPACE_ID);
 }               
 
-bool ItemSlot::IsTargetInSameStarSystem(SpaceObject* target) const
+bool ItemSlot::isTargetInSameStarSystem(SpaceObject* target) const
 {
     return (target->starsystem()->id() == GetOwnerVehicle()->starsystem()->id());
 }                
 
-bool ItemSlot::CheckDistanceToTarget(SpaceObject* target) const
+bool ItemSlot::checkDistanceToTarget(SpaceObject* target) const
 {
     if (target->typeId() == TYPE::ENTITY::STARSYSTEM_ID)
     {
@@ -495,7 +495,7 @@ bool ItemSlot::CheckDistanceToTarget(SpaceObject* target) const
     }
     
     float dist = meti::distance(GetOwnerVehicle()->center(), target->center());
-    if (dist < GetItemRadius())
+    if (dist < itemRadius())
     {
         return true;
     }
@@ -532,10 +532,10 @@ void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
 {
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
 
-    if (m_Target != nullptr)    { save_ptree.put(root+"unresolved_ItemSlot.target_id", m_Target->id()); }
+    if (m_target != nullptr)    { save_ptree.put(root+"unresolved_ItemSlot.target_id", m_target->id()); }
     else                        { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE_ID); }
 
-    if (m_Subtarget != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", m_Subtarget->id()); }
+    if (m_subtarget != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", m_subtarget->id()); }
     else                        { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE_ID); }
 }
 
@@ -543,40 +543,40 @@ void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
     
-    unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id");
-    unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id");
+    m_unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id");
+    m_unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id");
 }
 
 void ItemSlot::ResolveData()
 {
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     
-    if (unresolved_ItemSlot.target_id != NONE_ID) {
-        m_Target = (SpaceObject*)global::get().entitiesManager().GetEntityById(unresolved_ItemSlot.target_id);
+    if (m_unresolved_ItemSlot.target_id != NONE_ID) {
+        m_target = (SpaceObject*)global::get().entitiesManager().GetEntityById(m_unresolved_ItemSlot.target_id);
     }
 
-    if (unresolved_ItemSlot.subtarget_id != NONE_ID) {
-        m_Subtarget = (ItemSlot*)global::get().entitiesManager().GetEntityById(unresolved_ItemSlot.subtarget_id);
+    if (m_unresolved_ItemSlot.subtarget_id != NONE_ID) {
+        m_subtarget = (ItemSlot*)global::get().entitiesManager().GetEntityById(m_unresolved_ItemSlot.subtarget_id);
     }
 
     switch(owner->typeId())
     {
         case TYPE::ENTITY::VEHICLE_ID:     {    ((Vehicle*)owner)->AddItemSlot(this); break; }
-        case TYPE::ENTITY::CONTAINER_ID:         {    ((Container*)owner)->BindItemSlot(this); break; }
+        case TYPE::ENTITY::CONTAINER_ID:         {    ((Container*)owner)->bindItemSlot(this); break; }
         case TYPE::ENTITY::STORE_ID:             {     ((Store*)owner)->AddItemSlot(this); break; }
         case TYPE::ENTITY::ANGAR_ID:             {     ((Angar*)owner)->AddItemSlot(this); break; }
             //case TYPE::ENTITY::NATURELAND_ID:      {     ((NatureLand*)owner)->AddItemSlot(this); break; }
     }
 }
 
-void ItemSlot::Log(const std::string& func_name) const
+void ItemSlot::log(const std::string& func_name) const
 {
     std::string str = "ItemSlot(id="+std::to_string(id())+")::"+func_name+" "+dataTypeString();
     
     if (owner != nullptr)       { str += " owner:" + owner->dataTypeString(); }
-    if (m_Item != nullptr)      { str += " item:" + m_Item->dataTypeString();  }
-    if (m_Target != nullptr)    { str += " target:" + m_Target->dataTypeString();  }
-    if (m_Subtarget != nullptr) { str += " subtarget:" + m_Subtarget->dataTypeString(); }
+    if (m_item != nullptr)      { str += " item:" + m_item->dataTypeString();  }
+    if (m_target != nullptr)    { str += " target:" + m_target->dataTypeString();  }
+    if (m_subtarget != nullptr) { str += " subtarget:" + m_subtarget->dataTypeString(); }
     
     Logger::Instance().Log(str, WEAPONSTARGET_LOG_DIP);
 }

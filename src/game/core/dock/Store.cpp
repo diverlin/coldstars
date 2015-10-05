@@ -64,7 +64,7 @@ bool Store::AddItem(BaseItem* item)
     ItemSlot* item_slot = GetEmptyItemSlot();
     if (item_slot) 
     {
-        item_slot->InsertItem(item);
+        item_slot->insertItem(item);
         return true;
     }
          
@@ -119,7 +119,7 @@ int Store::BuyItem(BaseItem* item)
     ItemSlot* item_slot = GetEmptyItemSlot();    
     if (item_slot != nullptr)
     {
-        if (item_slot->InsertItem(item) == true)
+        if (item_slot->insertItem(item) == true)
         {
             return item->price();
         }

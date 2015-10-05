@@ -66,10 +66,8 @@ Container* Observation::GetRandomPickableContainer() const
 StarSystem* Observation::GetClosestStarSystem(int requested_consdition_id) const
 {
     StarSystem* _target_starsystem = nullptr;
-    for (unsigned int i=0; i<visible_STARSYSTEM_pair_vec.size(); i++)
-    {
-        if (visible_STARSYSTEM_pair_vec[i].object->GetConditionId() == requested_consdition_id)
-        {
+    for (unsigned int i=0; i<visible_STARSYSTEM_pair_vec.size(); i++) {
+        if (visible_STARSYSTEM_pair_vec[i].object->conditionId() == requested_consdition_id) {
             _target_starsystem = visible_STARSYSTEM_pair_vec[i].object;
             break;
         }
@@ -145,7 +143,7 @@ void Observation::Sort(std::vector<OBSERVED_DATA_TYPE>& rDataVec)
 
 void Observation::FindVisibleAsteroidsInSpaceInStatic()
 {
-    const std::vector<Asteroid*>& asteroid_vec = npc_owner->starsystem()->ASTEROID_vec;
+    const std::vector<Asteroid*>& asteroid_vec = npc_owner->starsystem()->m_asteroids;
     
     see.ASTEROID  = false;
     
@@ -164,7 +162,7 @@ void Observation::FindVisibleAsteroidsInSpaceInStatic()
 
 void Observation::FindVisibleContainersInSpaceInStatic()
 {
-    const std::vector<Container*>& container_vec = npc_owner->starsystem()->CONTAINER_vec;
+    const std::vector<Container*>& container_vec = npc_owner->starsystem()->m_containers;
     
     see.CONTAINER       = false;
     see.pickable_CONTAINER  = false;
@@ -191,7 +189,7 @@ void Observation::FindVisibleContainersInSpaceInStatic()
 
 void Observation::FindVisibleVehiclesInSpaceInStatic()
 {
-    const std::vector<Vehicle*>& vehicle_vec = npc_owner->starsystem()->VEHICLE_vec;
+    const std::vector<Vehicle*>& vehicle_vec = npc_owner->starsystem()->m_vehicles;
 
     see.RANGER  = false;
     see.WARRIOR = false;

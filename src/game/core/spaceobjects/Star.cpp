@@ -100,7 +100,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
                 if (m_DeltaColor > 1.0)
                 {
                     m_DeltaColor = 1.0;
-                    starsystem()->StarSparkEvent(meti::getRandInt(600, 1200));
+                    starsystem()->starSparkEvent(meti::getRandInt(600, 1200));
                     m_SparkGrows = false;
                 }
             } 
@@ -117,7 +117,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
         }
         else
         {
-            starsystem()->StarSparkEvent(meti::getRandInt(600, 1200));
+            starsystem()->starSparkEvent(meti::getRandInt(600, 1200));
             m_SparkActive = false;
         }
     }
@@ -160,7 +160,7 @@ void Star::ResolveData()
 {
     Logger::Instance().Log(" Star("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     
-    ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->Add(this);     
+    ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->add(this);     
 }
 
 /* virtual override final */

@@ -179,15 +179,15 @@ void WeaponComplex::SetTarget(SpaceObject* target, ItemSlot* item_slot)
         ItemSlot& weapon_slot = *slot_weapon_vec[i]; // shortcut
         if (weapon_slot.GetSelected() == true )
         {
-            if (weapon_slot.GetItem() != nullptr)
+            if (weapon_slot.item() != nullptr)
             {
-                if (weapon_slot.GetItem()->isFunctioning() == true)
+                if (weapon_slot.item()->isFunctioning() == true)
                 {
-                    if (weapon_slot.GetTarget() == nullptr)
+                    if (weapon_slot.target() == nullptr)
                     {
-                        STATUS status = weapon_slot.CheckTarget(target);
+                        STATUS status = weapon_slot.checkTarget(target);
                         if (status == STATUS::TARGET_OK) {
-                            weapon_slot.SetTarget(target, item_slot);
+                            weapon_slot.setTarget(target, item_slot);
                         } else {
                             Logger::Instance().Log(getTargetStatusStr(status), WEAPONSTARGET_LOG_DIP);
                         }
@@ -205,19 +205,19 @@ void WeaponComplex::Fire(int timer, float attack_rate, bool show_effect)
         for (std::vector<ItemSlot*>::iterator it=slot_weapon_reloaded_vec.begin(); it<slot_weapon_reloaded_vec.end(); ++it)
         {
             ItemSlot& weapon_slot = **it; // shortcut
-            if (weapon_slot.GetTarget() != nullptr)
+            if (weapon_slot.target() != nullptr)
             {
-                if (weapon_slot.ValidateTarget() == STATUS::TARGET_OK)
+                if (weapon_slot.validateTarget() == STATUS::TARGET_OK)
                 {
-                    weapon_slot.FireEvent(attack_rate, show_effect);
-                    if (weapon_slot.GetSubTarget() == nullptr)
+                    weapon_slot.fireEvent(attack_rate, show_effect);
+                    if (weapon_slot.subtarget() == nullptr)
                     {
                         fire_delay += d_fire_delay;
                     }
                 }
                 else
                 {
-                    weapon_slot.ResetTarget();
+                    weapon_slot.resetTarget();
                 }
 
                 it = slot_weapon_reloaded_vec.erase(it);

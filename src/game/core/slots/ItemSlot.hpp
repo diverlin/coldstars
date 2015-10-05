@@ -67,7 +67,7 @@ class Renderer;
 struct UnresolvedDataItemSlot
 {
     UnresolvedDataItemSlot():target_id(NONE_ID), subtarget_id(NONE_ID) 
-    {};
+    {}
     
     INTLONGEST target_id;    
     INTLONGEST subtarget_id; 
@@ -81,103 +81,103 @@ class ItemSlot : public BaseSlot
         
         virtual void putChildrenToGarbage() const;
         
-        void SetTarget(SpaceObject* target, ItemSlot* subtarget = nullptr);
-        void SetTurrel(Turrel* turrel) { m_Turrel = turrel; }
+        void setTarget(SpaceObject* target, ItemSlot* subtarget = nullptr);
+        void setTurrel(Turrel* turrel) { m_turrel = turrel; }
         
-        SpaceObject* GetTarget() const { return m_Target; }
-        ItemSlot* GetSubTarget() const { return m_Subtarget; }        
+        SpaceObject* target() const { return m_target; }
+        ItemSlot* subtarget() const { return m_subtarget; }
         
-        int GetHitProbability() const { return m_HitProbability; }
+        int hitProbability() const { return m_hitProbability; }
         
-        Turrel* GetTurrel() const { return m_Turrel; }
+        Turrel* turrel() const { return m_turrel; }
         
-        BaseItem* GetItem()                         const { return m_Item; }                
-        RocketEquipment*    GetRocketEquipment()    const { return (RocketEquipment*)m_Item; }
-         LazerEquipment*     GetLazerEquipment()     const { return (LazerEquipment*)m_Item; }
-        RadarEquipment*     GetRadarEquipment()     const { return (RadarEquipment*)m_Item; }
-        DriveEquipment*     GetDriveEquipment()     const { return (DriveEquipment*)m_Item; }
-        BakEquipment*       GetBakEquipment()       const { return (BakEquipment*)m_Item; }
-        EnergizerEquipment* GetEnergizerEquipment() const { return (EnergizerEquipment*)m_Item; }
-        ProtectorEquipment* GetProtectorEquipment() const { return (ProtectorEquipment*)m_Item; }
-        DroidEquipment*     GetDroidEquipment()     const { return (DroidEquipment*)m_Item; }
-        FreezerEquipment*   GetFreezerEquipment()   const { return (FreezerEquipment*)m_Item; }
-        ScanerEquipment*    GetScanerEquipment()    const { return (ScanerEquipment*)m_Item; }
-        GrappleEquipment*   GetGrappleEquipment()   const { return (GrappleEquipment*)m_Item; }
+        BaseItem* item()                         const { return m_item; }
+        RocketEquipment*    rocketEquipment()    const { return (RocketEquipment*)m_item; }
+        LazerEquipment*     lazerEquipment()     const { return (LazerEquipment*)m_item; }
+        RadarEquipment*     radarEquipment()     const { return (RadarEquipment*)m_item; }
+        DriveEquipment*     driveEquipment()     const { return (DriveEquipment*)m_item; }
+        BakEquipment*       bakEquipment()       const { return (BakEquipment*)m_item; }
+        EnergizerEquipment* energizerEquipment() const { return (EnergizerEquipment*)m_item; }
+        ProtectorEquipment* protectorEquipment() const { return (ProtectorEquipment*)m_item; }
+        DroidEquipment*     droidEquipment()     const { return (DroidEquipment*)m_item; }
+        FreezerEquipment*   freezerEquipment()   const { return (FreezerEquipment*)m_item; }
+        ScanerEquipment*    scanerEquipment()    const { return (ScanerEquipment*)m_item; }
+        GrappleEquipment*   grappleEquipment()   const { return (GrappleEquipment*)m_item; }
 
-        RocketModule*       GetRocketModule()       const { return (RocketModule*)m_Item; }
-        LazerModule*        GetLazerModule()        const { return (LazerModule*)m_Item; }
-        RadarModule*        GetRadarModule()        const { return (RadarModule*)m_Item; }
-        DriveModule*        GetDriveModule()        const { return (DriveModule*)m_Item; }
-        BakModule*          GetBakModule()          const { return (BakModule*)m_Item; }
-        EnergizerModule*    GetEnergizerModule()    const { return (EnergizerModule*)m_Item; }
-        ProtectorModule*    GetProtectorModule()    const { return (ProtectorModule*)m_Item; }
-        DroidModule*        GetDroidModule()        const { return (DroidModule*)m_Item; }
-        FreezerModule*      GetFreezerModule()      const { return (FreezerModule*)m_Item; }
-        ScanerModule*       GetScanerModule()       const { return (ScanerModule*)m_Item; }
-        GrappleModule*      GetGrappleModule()      const { return (GrappleModule*)m_Item; }
+        RocketModule*       rocketModule()       const { return (RocketModule*)m_item; }
+        LazerModule*        lazerModule()        const { return (LazerModule*)m_item; }
+        RadarModule*        radarModule()        const { return (RadarModule*)m_item; }
+        DriveModule*        driveModule()        const { return (DriveModule*)m_item; }
+        BakModule*          bakModule()          const { return (BakModule*)m_item; }
+        EnergizerModule*    energizerModule()    const { return (EnergizerModule*)m_item; }
+        ProtectorModule*    protectorModule()    const { return (ProtectorModule*)m_item; }
+        DroidModule*        droidModule()        const { return (DroidModule*)m_item; }
+        FreezerModule*      freezerModule()      const { return (FreezerModule*)m_item; }
+        ScanerModule*       scanerModule()       const { return (ScanerModule*)m_item; }
+        GrappleModule*      grappleModule()      const { return (GrappleModule*)m_item; }
 
-        Bomb* GetBomb()           const { return (Bomb*)m_Item; }
+        Bomb* bomb()           const { return (Bomb*)m_item; }
         //Artefact* GetArtefact() const { return artefact; }
-        GoodsPack* GetGoodsPack() const { return (GoodsPack*)m_Item; }
+        GoodsPack* goodsPack() const { return (GoodsPack*)m_item; }
                               
-        bool InsertItem(BaseItem*);            
-        void RemoveItem();
+        bool insertItem(BaseItem*);
+        void removeItem();
         
-        STATUS ValidateTarget();                    
-        void ResetTarget();
-        bool CheckAmmo() const;
-        void FireEvent(float, bool);
+        STATUS validateTarget();
+        void resetTarget();
+        bool checkAmmo() const;
+        void fireEvent(float, bool);
         
-        void UpdateVehiclePropetries() const;
+        void updateVehiclePropetries() const;
         
 //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
 //        virtual void RenderItem(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
 //        void RenderMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*) const;
 //        void RenderTargetMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*, jeti::TextureOb*) const;
         
-        void DropItemToSpace();
+        void dropItemToSpace();
         
-        bool SwapItem(ItemSlot*);
+        bool swapItem(ItemSlot*);
         
-        void UpdateRange(jeti::TextureOb*);
-        void DrawRange(const glm::vec2&);
+        void updateRange(jeti::TextureOb*);
+        void drawRange(const glm::vec2&);
         
-        bool CheckSubTarget(ItemSlot*) const;
-        STATUS CheckTarget(SpaceObject*) const;
-        STATUS CheckTargetPure(SpaceObject*) const;
+        bool checkSubTarget(ItemSlot*) const;
+        STATUS checkTarget(SpaceObject*) const;
+        STATUS checkTargetPure(SpaceObject*) const;
                 
-        void SelectEvent();
-        void DeselectEvent();
+        void selectEvent();
+        void deselectEvent();
         
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
         virtual void Resolve();
         
-        int GetItemRadius() const;
-        int GetItemDamage() const;
+        int itemRadius() const;
+        int itemDamage() const;
                                       
     private:                               
-        Turrel* m_Turrel;          // only for weapons slot
+        Turrel* m_turrel;          // only for weapons slot
         
-        BaseItem* m_Item;
+        BaseItem* m_item;
         
-        SpaceObject* m_Target;
-        ItemSlot* m_Subtarget;      
+        SpaceObject* m_target;
+        ItemSlot* m_subtarget;
         
-        int m_HitProbability;
+        int m_hitProbability;
 //        jeti::PathVisual m_VisualPath;    // !!!
         
-        bool CheckItemInsertion(BaseItem*) const;  
+        bool checkItemInsertion(BaseItem*) const;
         
-        bool IsTargetAlive(SpaceObject*) const;
-        bool IsTargetInSpace(SpaceObject*) const;  
-        bool IsTargetInSameStarSystem(SpaceObject*) const;
-        bool CheckDistanceToTarget(SpaceObject*) const;
+        bool isTargetAlive(SpaceObject*) const;
+        bool isTargetInSpace(SpaceObject*) const;
+        bool isTargetInSameStarSystem(SpaceObject*) const;
+        bool checkDistanceToTarget(SpaceObject*) const;
         
-        UnresolvedDataItemSlot unresolved_ItemSlot;
+        UnresolvedDataItemSlot m_unresolved_ItemSlot;
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();
         
-        void Log(const std::string&) const;
+        void log(const std::string&) const;
 }; 

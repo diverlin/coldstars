@@ -49,7 +49,7 @@ ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
 //        jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //        jeti::TextureOb* texOb_turrel = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL_ID);
         // alpitodorender turrel->SetRenderData(mesh, texOb_turrel, texOb_turrel->size());
-        item_slot->SetTurrel(turrel);
+        item_slot->setTurrel(turrel);
     }
     
     return item_slot;

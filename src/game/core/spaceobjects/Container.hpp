@@ -33,16 +33,16 @@ class Container : public SpaceObject
         Container(int);
         virtual ~Container();
         
-        void SetTargetPos(const glm::vec3& target_pos, float velocity) { m_TargetPos = target_pos; m_Velocity = velocity; }
-        void BindItemSlot(ItemSlot*);
+        void setTargetPos(const glm::vec3& target_pos, float velocity) { m_targetPos = target_pos; m_velocity = velocity; }
+        void bindItemSlot(ItemSlot*);
         
-        ItemSlot* const GetItemSlot() const { return m_ItemSlot; }
+        ItemSlot* const itemSlot() const { return m_itemSlot; }
 
 //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
         
         virtual void postDeathUniqueEvent(bool) override final;
             
-        void UpdateInSpace(int, bool);
+        void updateInSpace(int, bool);
 
 //        void Render(const jeti::Renderer&);
                             
@@ -51,10 +51,10 @@ class Container : public SpaceObject
         virtual void Resolve() override final;
         
     private:
-        ItemSlot* m_ItemSlot;        
+        ItemSlot* m_itemSlot;
         
-        glm::vec3 m_TargetPos;        
-        float m_Velocity;
+        glm::vec3 m_targetPos;
+        float m_velocity;
 
 //        virtual void UpdateInfo() override final;
          

@@ -61,7 +61,7 @@ StarSystem* StarSystemBuilder::create(const StarSystemDescriptor& starsystem_des
             
 void StarSystemBuilder::createInternals(StarSystem* starsystem, const StarSystemDescriptor& starsystem_descriptor) const
 {
-    starsystem->GetAsteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
+    starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
     CreateStar(starsystem);
     
     int distNebula_num = meti::getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
@@ -88,7 +88,7 @@ void StarSystemBuilder::CreateBackground(StarSystem* starsystem, int distNebula_
 void StarSystemBuilder::CreateStar(StarSystem* starsystem) const
 {
     Star* star = global::get().starBuilder().create();
-    starsystem->Add(star);
+    starsystem->add(star);
     //alpitodorender starsystem->SetColor(star->color());
 }
 
@@ -98,7 +98,7 @@ void StarSystemBuilder::CreatePlanets(StarSystem* starsystem, int planet_per_sys
     
     for(int i=0; i<planet_per_system; i++) {
         Planet* planet = global::get().planetBuilder().create(orbit_radius);
-        starsystem->Add(planet, starsystem->GetStar());
+        starsystem->add(planet, starsystem->star());
         orbit_radius += meti::getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
     }
         

@@ -222,7 +222,7 @@ Planet* Npc::GetPlanetForDocking()
 
 StarSystem* Npc::GetClosestStarSystem(int requested_condition_id)
 {
-    observation.FindEchievableStarSystems(starsystem()->GetSector()->GetGalaxy());
+    observation.FindEchievableStarSystems(starsystem()->sector()->galaxy());
     
     StarSystem* _target_starsystem = observation.GetClosestStarSystem(requested_condition_id);
     return _target_starsystem;

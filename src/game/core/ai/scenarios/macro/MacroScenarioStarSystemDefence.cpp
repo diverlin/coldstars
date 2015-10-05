@@ -63,7 +63,7 @@ void MacroScenarioStarSystemDefence::UpdateInStaticInSpace(Npc* npc) const
     }
     else
     {
-        if (target_starsystem->GetConditionId() != ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID)
+        if (target_starsystem->conditionId() != ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID)
         {
             if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != TYPE::AISCENARIO::MICRO_DESTROY_ID)
             {           

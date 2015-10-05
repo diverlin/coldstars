@@ -37,9 +37,7 @@ struct StarSystemDescriptor
         bool allow_ship_pirat = true;
         bool allow_ship_diplomat = true;
                                                         
-        StarSystemDescriptor()
-        {}
-        
+        StarSystemDescriptor() {}
         ~StarSystemDescriptor() {}
 }; 
 

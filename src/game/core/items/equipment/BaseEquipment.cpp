@@ -71,14 +71,14 @@ bool BaseEquipment::InsertModule(BaseModule* module)
             {
                 if (module->itemSlot() != nullptr)
                 {
-                    module->itemSlot()->RemoveItem();
+                    module->itemSlot()->removeItem();
                 }
                 module->setItemSlot(nullptr);
                 module->SetEquipmentOwner(this);
                    modules_vec.push_back(module);                
                         
                 updateProperties();
-                itemSlot()->UpdateVehiclePropetries();
+                itemSlot()->updateVehiclePropetries();
 
                 return true;
             }
