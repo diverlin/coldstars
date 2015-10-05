@@ -88,7 +88,7 @@ void BlackHole::ResolveData()
 {
     //Logger::Instance().Log(" BlackHole("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     
-    starsystem()->Add(this, data_unresolved_Orientation.center); 
+    starsystem()->add(this, data_unresolved_Orientation.center); 
 }
  
 /*virtual*/

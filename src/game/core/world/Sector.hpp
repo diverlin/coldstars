@@ -37,20 +37,20 @@ class Sector : public SpaceObject
         Sector(int);
         ~Sector();
 
-        void SetGalaxy(Galaxy* galaxy)  { m_galaxy = galaxy; };
+        void setGalaxy(Galaxy* galaxy)  { m_galaxy = galaxy; };
         void setCenter(const glm::vec3& center) { m_center = center; };
 
-        Galaxy* GetGalaxy() const  { return m_galaxy; };
+        Galaxy* galaxy() const  { return m_galaxy; };
         const glm::vec3& center() const  { return m_center; };
 
         virtual void putChildrenToGarbage() const;
 
-        void Add(StarSystem*, const glm::vec3&);
+        void add(StarSystem*, const glm::vec3&);
 
-        StarSystem* GetRandomStarSystem(int condition_id = NONE_ID);
-        StarSystem* GetClosestStarSystemTo(StarSystem*, int condition_id = NONE_ID);
+        StarSystem* randomStarSystem(int condition_id = NONE_ID);
+        StarSystem* closestStarSystemTo(StarSystem*, int condition_id = NONE_ID);
 
-        void Update(int);
+        void update(int);
 
         //void FillStarSystemsCondition(StarSystemsConditionData&) const;
 
@@ -62,9 +62,9 @@ class Sector : public SpaceObject
         Galaxy* m_galaxy;
         glm::vec3 m_center;
 
-        UnresolvedDataSector data_unresolved_Sector;
+        UnresolvedDataSector m_data_unresolved_Sector;
 
-        std::vector<StarSystem*> STARSYSTEM_vec;
+        std::vector<StarSystem*> m_starsystems;
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);

@@ -58,7 +58,7 @@ void SectorBuilder::createInternals(Sector* sector, const SectorDescriptor& sect
         glm::vec3 center(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));
         
         StarSystem* starsystem = global::get().starSystemBuilder().create(starsystem_descriptor);
-        sector->Add(starsystem, center); 
+        sector->add(starsystem, center); 
     }
 }
 

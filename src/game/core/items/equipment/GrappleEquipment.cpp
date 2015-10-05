@@ -113,7 +113,7 @@ void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
         Vehicle& vehicle = *itemSlot()->GetOwnerVehicle(); // shortcut
         SpaceObject& target = **it;
         
-        if (itemSlot()->CheckTarget(&target) == STATUS::TARGET_OK)
+        if (itemSlot()->checkTarget(&target) == STATUS::TARGET_OK)
         {
             glm::vec3 impulse_dir = glm::normalize(vehicle.center() - target.center());
 

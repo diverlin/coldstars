@@ -47,7 +47,7 @@ void BaseItem::lockEvent(int locked_turns)
     
     m_locked_turns += locked_turns;
     if (was_working == true) {
-        m_item_slot->UpdateVehiclePropetries();
+        m_item_slot->updateVehiclePropetries();
     }
 }
                 
@@ -65,7 +65,7 @@ void BaseItem::damageEvent()
 {
     Logger::Instance().Log("BaseItem::DamageEvent", ITEMINFLUENCE_LOG_DIP);
 
-    m_item_slot->UpdateVehiclePropetries();
+    m_item_slot->updateVehiclePropetries();
 }
                 
 void BaseItem::deteriorationEvent()
@@ -81,7 +81,7 @@ void BaseItem::deteriorationEvent()
 bool BaseItem::repairEvent()
 {
     m_condition = m_data_item.condition_max;
-    m_item_slot->UpdateVehiclePropetries();
+    m_item_slot->updateVehiclePropetries();
     
     return true;
 }
@@ -91,7 +91,7 @@ void BaseItem::updateLock()
     if (m_locked_turns > 0) {
         m_locked_turns--;
         if (m_locked_turns == 0) {
-            m_item_slot->UpdateVehiclePropetries();
+            m_item_slot->updateVehiclePropetries();
         }
     }
 }     
@@ -187,6 +187,6 @@ void BaseItem::ResolveData()
         
     if(m_data_unresolved_BaseItem.item_slot_id != NONE_ID) // item_slot can be nullptr in case of inserted module
     {
-        ((ItemSlot*)global::get().entitiesManager().GetEntityById(m_data_unresolved_BaseItem.item_slot_id))->InsertItem(this);
+        ((ItemSlot*)global::get().entitiesManager().GetEntityById(m_data_unresolved_BaseItem.item_slot_id))->insertItem(this);
     }
 }

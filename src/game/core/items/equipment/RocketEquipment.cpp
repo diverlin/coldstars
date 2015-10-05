@@ -162,7 +162,7 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 
         if (itemSlot()->GetOwnerVehicle()->GetVehicleDescriptor().draw_turrels == true)
         {
-            start_pos = itemSlot()->GetTurrel()->center();
+            start_pos = itemSlot()->turrel()->center();
             //angle_inD = item_slot->GetTurrel()->GetAngle().z;
         }
         else
@@ -172,9 +172,9 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
         }  
         
         rocket_bullet->SetOwnerId(itemSlot()->GetOwnerVehicle()->id());
-        rocket_bullet->SetTarget(itemSlot()->GetTarget());
+        rocket_bullet->SetTarget(itemSlot()->target());
     
-        itemSlot()->GetOwnerVehicle()->starsystem()->AddBullet(rocket_bullet, start_pos, glm::vec3(0, 0, angle_inD));
+        itemSlot()->GetOwnerVehicle()->starsystem()->add(rocket_bullet, start_pos, glm::vec3(0, 0, angle_inD));
         num++;
     }
         

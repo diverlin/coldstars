@@ -37,8 +37,8 @@
 
 Container::Container(int id)
 :
-m_ItemSlot(nullptr),
-m_Velocity(0)    
+m_itemSlot(nullptr),
+m_velocity(0)    
 {
     setId(id);
     setTypeId(TYPE::ENTITY::CONTAINER_ID);
@@ -53,13 +53,13 @@ Container::~Container()
 /* virtual override final */
 void Container::putChildrenToGarbage() const
 {
-    global::get().entitiesManager().AddToGarbage(m_ItemSlot);
+    global::get().entitiesManager().AddToGarbage(m_itemSlot);
 }
             
-void Container::BindItemSlot(ItemSlot* item_slot) 
+void Container::bindItemSlot(ItemSlot* item_slot) 
 { 
-    m_ItemSlot = item_slot; 
-    m_ItemSlot->SetOwner(this); 
+    m_itemSlot = item_slot; 
+    m_itemSlot->SetOwner(this); 
 }
 
 ///* virtual override final */
@@ -87,9 +87,9 @@ void Container::BindItemSlot(ItemSlot* item_slot)
 /* virtual override final */   
 void Container::postDeathUniqueEvent(bool show_effect)
 {
-    if (m_ItemSlot->GetItem()->typeId() == TYPE::ENTITY::BOMB_ID)
+    if (m_itemSlot->item()->typeId() == TYPE::ENTITY::BOMB_ID)
     {
-        starsystem()->BombExplosionEvent(this, show_effect);  
+        starsystem()->bombExplosionEvent(this, show_effect);  
     }
     else
     {
@@ -101,7 +101,7 @@ void Container::postDeathUniqueEvent(bool show_effect)
     }
 }
 
-void Container::UpdateInSpace(int time, bool show_effect)
+void Container::updateInSpace(int time, bool show_effect)
 {
     checkDeath(show_effect);         
     if (time > 0)
@@ -120,27 +120,27 @@ void Container::SaveData(boost::property_tree::ptree& save_ptree, const std::str
 {
     Logger::Instance().Log(" Container("+std::to_string(id())+")::SaveData()", SAVELOAD_LOG_DIP);
     
-    save_ptree.put(root+"target_pos.x", m_TargetPos.x);
-    save_ptree.put(root+"target_pos.y", m_TargetPos.y);
+    save_ptree.put(root+"target_pos.x", m_targetPos.x);
+    save_ptree.put(root+"target_pos.y", m_targetPos.y);
 
-    save_ptree.put(root+"velocity", m_Velocity);
+    save_ptree.put(root+"velocity", m_velocity);
 }
 
 void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     Logger::Instance().Log(" Container("+std::to_string(id())+")::LoadData()", SAVELOAD_LOG_DIP);
     
-    m_TargetPos.x   = load_ptree.get<float>("target_pos.x");
-    m_TargetPos.y   = load_ptree.get<float>("target_pos.y");
+    m_targetPos.x   = load_ptree.get<float>("target_pos.x");
+    m_targetPos.y   = load_ptree.get<float>("target_pos.y");
     
-    m_Velocity = load_ptree.get<float>("velocity");
+    m_velocity = load_ptree.get<float>("velocity");
 }
 
 void Container::ResolveData()
 {
     Logger::Instance().Log(" Container("+std::to_string(id())+")::ResolveData()", SAVELOAD_LOG_DIP);
     
-    ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->AddContainer(this, data_unresolved_Orientation.center); 
+    ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center); 
 }        
 
 /* virtual override final */

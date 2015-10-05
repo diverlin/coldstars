@@ -43,28 +43,28 @@ Sector::~Sector()
 /* virtual */
 void Sector::putChildrenToGarbage() const
 {
-    for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++) {
-        global::get().entitiesManager().AddToGarbage(STARSYSTEM_vec[i]);
+    for (unsigned int i=0; i<m_starsystems.size(); i++) {
+        global::get().entitiesManager().AddToGarbage(m_starsystems[i]);
     }
 }
 
-void Sector::Add(StarSystem* starsystem, const glm::vec3& center) 
+void Sector::add(StarSystem* starsystem, const glm::vec3& center)
 { 
-    starsystem->SetSector(this);
+    starsystem->setSector(this);
     starsystem->setCenter(center);
 
-    STARSYSTEM_vec.push_back(starsystem);
+    m_starsystems.push_back(starsystem);
 }
 
-StarSystem* Sector::GetRandomStarSystem(int condition_id)
+StarSystem* Sector::randomStarSystem(int condition_id)
 {
     if (condition_id == NONE_ID) {
-        return STARSYSTEM_vec[meti::getRandInt(0, STARSYSTEM_vec.size()-1)];
+        return m_starsystems[meti::getRandInt(0, m_starsystems.size()-1)];
     } else {
         std::vector<StarSystem*> ss_vec;
-        for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++) {
-            if (STARSYSTEM_vec[i]->GetConditionId() == condition_id) {
-                ss_vec.push_back(STARSYSTEM_vec[i]);
+        for (unsigned int i=0; i<m_starsystems.size(); i++) {
+            if (m_starsystems[i]->conditionId() == condition_id) {
+                ss_vec.push_back(m_starsystems[i]);
             }
         }
 
@@ -78,18 +78,18 @@ StarSystem* Sector::GetRandomStarSystem(int condition_id)
 
 
 
-StarSystem* Sector::GetClosestStarSystemTo(StarSystem* starsystem, int condition_id)
+StarSystem* Sector::closestStarSystemTo(StarSystem* starsystem, int condition_id)
 {
     float dist_min = INCREDIBLY_MAX_FLOAT;
     int index_min = -1;
 
-    for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
+    for (unsigned int i=0; i<m_starsystems.size(); i++)
     {
-        if (STARSYSTEM_vec[i]->id() != starsystem->id())
+        if (m_starsystems[i]->id() != starsystem->id())
         {
-            if ( (STARSYSTEM_vec[i]->GetConditionId() == condition_id) or (condition_id == NONE_ID) )
+            if ( (m_starsystems[i]->conditionId() == condition_id) or (condition_id == NONE_ID) )
             {
-                float dist = meti::distance(starsystem->center(), STARSYSTEM_vec[i]->center());
+                float dist = meti::distance(starsystem->center(), m_starsystems[i]->center());
 
                 if (dist < dist_min)
                 {
@@ -102,17 +102,17 @@ StarSystem* Sector::GetClosestStarSystemTo(StarSystem* starsystem, int condition
 
     if (index_min != -1)
     {
-        return STARSYSTEM_vec[index_min];
+        return m_starsystems[index_min];
     }
 
     return nullptr;
 }
 
-void Sector::Update(int time)
+void Sector::update(int time)
 {
-    for (unsigned int i=0; i<STARSYSTEM_vec.size(); i++)
+    for (unsigned int i=0; i<m_starsystems.size(); i++)
     {
-        STARSYSTEM_vec[i]->Update(time);
+        m_starsystems[i]->update(time);
     }
 }
 
@@ -138,12 +138,12 @@ void Sector::SaveData(boost::property_tree::ptree& save_ptree, const std::string
 
 void Sector::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    data_unresolved_Sector.galaxy_id = load_ptree.get<int>("galaxy_id");
+    m_data_unresolved_Sector.galaxy_id = load_ptree.get<int>("galaxy_id");
 }
 
 void Sector::ResolveData()
 {
-    ((Galaxy*)global::get().entitiesManager().GetEntityById(data_unresolved_Sector.galaxy_id))->Add(this, data_unresolved_Orientation.center);
+    ((Galaxy*)global::get().entitiesManager().GetEntityById(m_data_unresolved_Sector.galaxy_id))->Add(this, data_unresolved_Orientation.center);
 }
 
 void Sector::Save(boost::property_tree::ptree& save_ptree) const

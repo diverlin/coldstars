@@ -83,8 +83,8 @@ void ContainerBuilder::createInternals(Container* container, jeti::TextureOb* te
     
     ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
     
-    container->BindItemSlot(item_slot);
-    container->GetItemSlot()->InsertItem(item);
+    container->bindItemSlot(item_slot);
+    container->itemSlot()->insertItem(item);
 }
 
 

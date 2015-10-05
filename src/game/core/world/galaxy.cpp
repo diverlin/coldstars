@@ -45,7 +45,7 @@ void Galaxy::putChildrenToGarbage() const
 
 void Galaxy::Add(Sector* sector, const glm::vec3& center) 
 { 
-    sector->SetGalaxy(this);
+    sector->setGalaxy(this);
     sector->setCenter(center);
 
     m_sectors.push_back(sector);
@@ -79,7 +79,7 @@ Sector* Galaxy::GetClosestSectorTo(Sector* sector)
 void Galaxy::Update(int time)
 {
     for (unsigned int i=0; i<m_sectors.size(); i++) {
-        m_sectors[i]->Update(time);
+        m_sectors[i]->update(time);
     }
 }
 

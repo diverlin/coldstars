@@ -88,6 +88,7 @@ struct UnresolvedData
         int sector_id;
 };
 
+const int CONTAINER_NUM_MAX_DEFAULT = 400;
 
 class StarSystem : public SpaceObject
 {
@@ -97,60 +98,61 @@ class StarSystem : public SpaceObject
         
         virtual void putChildrenToGarbage() const;
 
-        void SetContainerNumMax(int container_num_max) { this->container_num_max = container_num_max; }
-        void SetSector(Sector* sector)  { this->sector = sector; }
-        void SetColor(const glm::vec4& color)  { m_color = color; }
-        AsteroidManager& GetAsteroidManager()  { return asteroid_manager; }
+        void setContainerNumMax(int container_num_max) { m_container_num_max = container_num_max; }
+        void setSector(Sector* sector)  { m_sector = sector; }
+        void setColor(const glm::vec4& color)  { m_color = color; }
+        AsteroidManager& asteroidManager()  { return m_asteroid_manager; }
 
         const glm::vec4& color() const { return m_color; }
         //bool GetDetailedSimulationFlag() const { return detalied_simulation; }
-        int GetConditionId()     const { return condition_id; }
-        TYPE::RACE GetRaceId()          const { return race_id; }
-        TYPE::RACE GetConquerorRaceId() const { return conqueror_race_id; }
-        Star* GetStar()          const { return STAR_vec[0]; }
-        Sector* GetSector()      const { return sector; }
+        int conditionId()     const { return m_condition_id; }
+        TYPE::RACE raceId()          const { return m_race_id; }
+        TYPE::RACE conquerorRaceId() const { return m_conqueror_race_id; }
+        Star* star()          const { return m_stars[0]; }
+        Sector* sector()      const { return m_sector; }
 //        unsigned int GetShockWaveEffectNum()    const { return effect_SHOCKWAVE_vec.size(); }
-        unsigned int GetAsteroidNum()     const { return ASTEROID_vec.size(); }
+        unsigned int asteroidNum()     const { return m_asteroids.size(); }
 //        unsigned int GetExplosionEffectNum()     const { return effect_PARTICLESYSTEM_vec.size(); }
 //        unsigned int GetTextDamageNum()     const { return text_DAMAGE_vec.size(); }
-        bool IsAnyActiveParticlesEffectPresent(int) const;
+        bool isAnyActiveParticlesEffectPresent(int) const;
 
-        HyperSpace& GetHyperSpace() { return hyperspace; };
+        HyperSpace& hyperSpace() { return m_hyperspace; };
         
-        Npc* GetFreeLeaderByRaceId(TYPE::RACE) const;
-        void CreateGroupAndShareTask(Npc*, StarSystem*, int) const;
+        Npc* freeLeaderByRaceId(TYPE::RACE) const;
+        void createGroupAndShareTask(Npc*, StarSystem*, int) const;
         
         //// TRANSITION
-        void AddVehicle(Vehicle*, const glm::vec3&, const glm::vec3&, const SpaceObject* const parent = nullptr);
-        void AddBullet(RocketBullet*, const glm::vec3&, const glm::vec3&);
+        void add(Vehicle*, const glm::vec3& center, const glm::vec3& angle, const SpaceObject* const parent = nullptr);
+        void add(Ship* ship, const glm::vec3& center, const glm::vec3& angle);
+        void add(RocketBullet*, const glm::vec3&, const glm::vec3&);
 
-        void Add(Planetoid*, const SpaceObject* parent = nullptr, int it = 0);
-        void AddContainer(Container*, const glm::vec3&);
-        void Add(BlackHole*, const glm::vec3&);
+        void add(Planetoid*, const SpaceObject* parent = nullptr, int it = 0);
+        void add(Container*, const glm::vec3&);
+        void add(BlackHole*, const glm::vec3&);
 
         // effects
-        void Add(jeti::BaseParticleSystem*);
-        void Add(ShockWaveEffect*, const glm::vec2&);
-        void Add(jeti::ExplosionEffect*, const glm::vec3&, float, float);
-        void Add(jeti::ExplosionEffect*, const glm::vec3&);
-        void Add(LazerTraceEffect*);
+        void add(jeti::BaseParticleSystem*);
+        void add(ShockWaveEffect*, const glm::vec2&);
+        void add(jeti::ExplosionEffect*, const glm::vec3&, float, float);
+        void add(jeti::ExplosionEffect*, const glm::vec3&);
+        void add(LazerTraceEffect*);
 
-        void Add(DistantNebulaEffect*);
-        void Add(DistantStarEffect*);
+        void add(DistantNebulaEffect*);
+        void add(DistantStarEffect*);
         
         //void Add(VerticalFlowText*);
         //
         
-        void BombExplosionEvent(Container*, bool);
-        void StarSparkEvent(float) const;
+        void bombExplosionEvent(Container*, bool);
+        void starSparkEvent(float) const;
         
-        void FindRenderVisibleEntities_c(Player*);
-        void FindRadarVisibleEntities_c(Player*);
+        void findRenderVisibleEntities_c(Player*);
+        void findRadarVisibleEntities_c(Player*);
         
-        void Update(int);
-        void LoadEntitiesResource();
+        void update(int);
+        void loadEntitiesResource();
 
-        float CalcResultGravityForce(const glm::vec3&, const glm::vec3&, float) const;
+        float calcResultGravityForce(const glm::vec3&, const glm::vec3&, float) const;
 
 //        void DrawBackground(const jeti::Renderer&, const glm::vec2&);
 //        void DrawOrbits(const jeti::Renderer&);
@@ -170,34 +172,34 @@ class StarSystem : public SpaceObject
         Vehicle* GetRandomVehicle(const std::vector<TYPE::RACE>&) const;
         //
     private:
-        static int counter;
+        static int m_counter;
         
-        TYPE::RACE race_id;
-        TYPE::RACE conqueror_race_id;
+        TYPE::RACE m_race_id = TYPE::RACE::R0_ID;
+        TYPE::RACE m_conqueror_race_id = TYPE::RACE::NONE_ID;
         
-        bool unique_update_inDymanic_done;
-        bool unique_update_inStatic_done;
+        bool m_unique_update_inDymanic_done = false;
+        bool m_unique_update_inStatic_done = false;
         
-        int condition_id;
-        unsigned int container_num_max;
+        int m_condition_id;
+        unsigned int m_container_num_max = CONTAINER_NUM_MAX_DEFAULT;
         
-        Sector* sector;
+        Sector* m_sector = nullptr;
         glm::vec4 m_color;
         
-        AsteroidManager asteroid_manager;
+        AsteroidManager m_asteroid_manager;
         
         // ENTITY VECTORS
         //std::vector<Player*>        PLAYER_vec;
 
-        std::vector<Star*>         STAR_vec;
-        std::vector<Planet*>       PLANET_vec;
-        std::vector<Asteroid*>     ASTEROID_vec;
-        std::vector<Container*>    CONTAINER_vec;
-        std::vector<RocketBullet*> ROCKET_vec;
-        std::vector<BlackHole*>    BLACKHOLE_vec;
+        std::vector<Star*>         m_stars;
+        std::vector<Planet*>       m_planets;
+        std::vector<Asteroid*>     m_asteroids;
+        std::vector<Container*>    m_containers;
+        std::vector<RocketBullet*> m_bullets;
+        std::vector<BlackHole*>    m_blackholes;
         
-        std::vector<Vehicle*> VEHICLE_vec;
-        HyperSpace hyperspace;
+        std::vector<Vehicle*> m_vehicles;
+        HyperSpace m_hyperspace;
 
         // effects
 //        std::vector<DistantNebulaEffect*> distantNebulaEffect_vec;
@@ -210,7 +212,7 @@ class StarSystem : public SpaceObject
 
 //        GarbageEffects  garbage_effects;
 
-        UnresolvedData data_unresolved_StarSystem;
+        UnresolvedData m_data_unresolved_StarSystem;
 
         void LaunchingEvent() const;
 

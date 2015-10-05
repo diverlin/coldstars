@@ -73,7 +73,7 @@ void Asteroid::postDeathUniqueEvent(bool show_effect)
         glm::vec3 impulse_dir(meti::getXYVec3Unit(angleZ));
         container->addImpulse(impulse_dir, impulse_strength);
         
-        starsystem()->AddContainer(container, center());
+        starsystem()->add(container, center());
         
         angleZ += 120;
     }
@@ -113,7 +113,7 @@ void Asteroid::ResolveData()
 {
     Logger::Instance().Log(" Asteroid("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     
-    ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->Add(this, parent(), data_unresolved_Planetoid.orbit_it); 
+    ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it); 
 }
 
 /* virtual override final */    

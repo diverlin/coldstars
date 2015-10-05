@@ -109,8 +109,8 @@ void LazerEquipment::FireEvent(SpaceObject* target, ItemSlot* subtarget, float d
     {
         if (subtarget != nullptr) // precise fire
         {
-            if (meti::isActionShouldHappen(itemSlot()->GetHitProbability()) == true) {
-                subtarget->GetItem()->lockEvent(1);
+            if (meti::isActionShouldHappen(itemSlot()->hitProbability()) == true) {
+                subtarget->item()->lockEvent(1);
             }
             damage_rate /= 3; // lower damage is used for precise fire
             

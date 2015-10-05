@@ -17,29 +17,62 @@
 */
 
 #include <common/Global.hpp>
+#include <world/starsystem.hpp>
+#include <items/others/Bomb.hpp>
+#include <slots/ItemSlot.hpp>
+
 #include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/world/GalaxyBuilder.hpp>
 #include <builder/world/SectorBuilder.hpp>
 #include <builder/world/StarSystemBuilder.hpp>
+#include <builder/items/other/BombBuilder.hpp>
+#include <builder/spaceobjects/ContainerBuilder.hpp>
 #include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/StarSystemDescriptor.hpp>
 
-int main()
+int test_bomb()
 {
-    auto galaxyBuilder = new GalaxyBuilder;
-    auto sectorBuilder = new SectorBuilder;
+    // create builders
     auto starsystemBuilder = new StarSystemBuilder;
     auto shipBuilder = new ShipBuilder;
+    auto bombBuilder = new BombBuilder;
+    auto containerBuilder = new BombBuilder;
 
-    GalaxyDescriptor galaxyDescriptor;
-    SectorDescriptor sectorDescriptor;
-    StarSystemDescriptor starsystemDescriptor;
+    // create entities
+    auto starsystem = starsystemBuilder->create(StarSystemDescriptor());
+    auto ship = shipBuilder->create(/*ShipDescriptor()*/);
+    auto bomb = bombBuilder->create(/*BombDescriptor()*/);
+    auto container = containerBuilder->create(/*ContainerDescriptor()*/);
+    container->itemSlot()->insertItem(bomb);
 
-    auto galaxy = galaxyBuilder->create(galaxyDescriptor);
-    auto sector = sectorBuilder->create(sectorDescriptor);
-    auto starsystem = starsystemBuilder->create(starsystemDescriptor);
+    // inject entities
+    starsystem->add(ship, glm::vec3(0.0f), glm::vec3(0.0f));
+    starsystem->add(container, glm::vec3(0.0f));
 
-    auto ship = shipBuilder->create();
+    // simulate bomb explosion
+    container->hit(container->armor());
+    //starystem->update();
+
+    // check consequences
+
+}
+
+int main()
+{
+    test_bomb();
+//    auto galaxyBuilder = new GalaxyBuilder;
+//    auto sectorBuilder = new SectorBuilder;
+//    auto starsystemBuilder = new StarSystemBuilder;
+//    auto shipBuilder = new ShipBuilder;
+
+//    GalaxyDescriptor galaxyDescriptor;
+//    SectorDescriptor sectorDescriptor;
+//    StarSystemDescriptor starsystemDescriptor;
+
+//    auto galaxy = galaxyBuilder->create(galaxyDescriptor);
+//    auto sector = sectorBuilder->create(sectorDescriptor);
+//    auto starsystem = starsystemBuilder->create(starsystemDescriptor);
+//    auto ship = shipBuilder->create();
 }
 
