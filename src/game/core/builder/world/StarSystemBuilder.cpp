@@ -43,11 +43,8 @@ StarSystemBuilder::~StarSystemBuilder()
 
 StarSystem* StarSystemBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     StarSystem* starsystem = new StarSystem(id);
+    assert(starsystem);
 
     global::get().entitiesManager().RegisterEntity(starsystem);
     

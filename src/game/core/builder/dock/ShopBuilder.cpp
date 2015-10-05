@@ -32,10 +32,6 @@ ShopBuilder::~ShopBuilder()
 
 Shop* ShopBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     Shop* shop = new Shop(id);
     assert(shop);
 

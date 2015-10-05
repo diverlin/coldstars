@@ -38,10 +38,6 @@ PlanetBuilder::~PlanetBuilder()
 
 Planet* PlanetBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     Planet* planet = new Planet(id);
     assert(planet);
 

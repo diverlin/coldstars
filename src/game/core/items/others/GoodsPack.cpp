@@ -112,10 +112,6 @@ void GoodsPack::ResolveData()
 
 GoodsPack* GetNewGoodsPack(TYPE::ENTITY subtype_id, INTLONGEST id)
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
 //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER_ID);
     

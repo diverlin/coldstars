@@ -43,10 +43,6 @@ LazerEquipmentBuilder::~LazerEquipmentBuilder()
 
 LazerEquipment* LazerEquipmentBuilder::createTemplate(INTLONGEST id) const
 { 
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     LazerEquipment* lazer_equipment = new LazerEquipment(id);
     assert(lazer_equipment);
 

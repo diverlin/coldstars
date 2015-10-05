@@ -34,11 +34,7 @@
 
 
 ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
-{
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    } 
-    
+{  
     ItemSlot* item_slot = new ItemSlot(id, subtype_id);
     assert(item_slot);
 

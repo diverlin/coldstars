@@ -40,10 +40,6 @@ LazerModuleBuilder::~LazerModuleBuilder()
 
 LazerModule* LazerModuleBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     LazerModule* lazer_module = new LazerModule(id);
     assert(lazer_module);
 

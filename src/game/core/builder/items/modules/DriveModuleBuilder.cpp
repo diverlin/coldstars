@@ -40,10 +40,6 @@ DriveModuleBuilder::~DriveModuleBuilder()
 
 DriveModule* DriveModuleBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     DriveModule* drive_module = new DriveModule(id);
     assert(drive_module);
 

@@ -39,10 +39,6 @@ DroidModuleBuilder::~DroidModuleBuilder()
 
 DroidModule* DroidModuleBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     DroidModule* droid_module = new DroidModule(id);
     assert(droid_module);
 

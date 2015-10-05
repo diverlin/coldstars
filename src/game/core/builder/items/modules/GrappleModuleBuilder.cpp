@@ -41,10 +41,6 @@ GrappleModuleBuilder::~GrappleModuleBuilder()
 
 GrappleModule* GrappleModuleBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     GrappleModule* grapple_module = new GrappleModule(id);
     assert(grapple_module);
 

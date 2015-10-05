@@ -36,11 +36,7 @@ ContainerBuilder::~ContainerBuilder()
 {}
 
 Container* ContainerBuilder::createTemplate(INTLONGEST id) const
-{
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-        
+{       
     Container* container = new Container(id);
     assert(container);
 

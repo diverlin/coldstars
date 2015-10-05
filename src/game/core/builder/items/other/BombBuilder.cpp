@@ -38,10 +38,6 @@ BombBuilder::~BombBuilder()
 
 Bomb* BombBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     Bomb* bomb = new Bomb(id);
     assert(bomb);
 
@@ -62,8 +58,6 @@ void BombBuilder::createInternals(Bomb* bomb, int damage, int radius) const
 {     
     //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID);
-    damage = 300;
-    radius = 300;
 
     //alpitodorender bomb->SetRenderData(mesh, texOb, texOb->size());
     bomb->setDamage(damage);

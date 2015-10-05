@@ -51,10 +51,6 @@ StoreBuilder::~StoreBuilder()
 
 Store* StoreBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     Store* store = new Store(id);
     assert(store);
 

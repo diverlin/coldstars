@@ -44,10 +44,6 @@ FreezerEquipmentBuilder::~FreezerEquipmentBuilder()
 
 FreezerEquipment* FreezerEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     FreezerEquipment* freezer_equipment  = new FreezerEquipment(id);
     assert(freezer_equipment);
 

@@ -39,10 +39,6 @@ GrappleEquipmentBuilder::~GrappleEquipmentBuilder()
 
 GrappleEquipment* GrappleEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     GrappleEquipment* grapple_equipment = new GrappleEquipment(id);
     assert(grapple_equipment);
 

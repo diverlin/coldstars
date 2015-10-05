@@ -41,10 +41,6 @@ NatureLandBuilder::~NatureLandBuilder()
 
 NatureLand* NatureLandBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     NatureLand* natureland = new NatureLand(id);
     assert(natureland);
 

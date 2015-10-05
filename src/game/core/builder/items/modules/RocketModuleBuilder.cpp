@@ -38,10 +38,6 @@ RocketModuleBuilder::~RocketModuleBuilder()
 
 RocketModule* RocketModuleBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     RocketModule* rocket_module = new RocketModule(id);
     assert(rocket_module);
 

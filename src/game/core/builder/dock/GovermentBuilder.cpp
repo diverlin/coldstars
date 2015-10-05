@@ -31,10 +31,6 @@ GovermentBuilder::~GovermentBuilder()
 
 Goverment* GovermentBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     Goverment* goverment = new Goverment(id);
     assert(goverment);
 

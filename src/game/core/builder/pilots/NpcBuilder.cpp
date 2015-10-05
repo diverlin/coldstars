@@ -40,12 +40,7 @@ NpcBuilder::~NpcBuilder()
 
 Npc* NpcBuilder::createTemplate(TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id, INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
-    Npc* npc = nullptr;
-    npc = new Npc(id, subtype_id, subsubtype_id);
+    Npc* npc = new Npc(id, subtype_id, subsubtype_id);
     assert(npc);
 
     global::get().entitiesManager().RegisterEntity(npc);

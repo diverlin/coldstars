@@ -39,10 +39,6 @@ RocketEquipmentBuilder::~RocketEquipmentBuilder()
 
 RocketEquipment* RocketEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     RocketEquipment* rocket_equipment = new RocketEquipment(id);
     assert(rocket_equipment);
 

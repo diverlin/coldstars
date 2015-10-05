@@ -36,10 +36,6 @@ KosmoportBuilder::~KosmoportBuilder()
 
 Kosmoport* KosmoportBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     Kosmoport* kosmoport = new Kosmoport(id);
     assert(kosmoport);
 

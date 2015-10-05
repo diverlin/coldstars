@@ -41,10 +41,6 @@ ProtectorModuleBuilder::~ProtectorModuleBuilder()
 
 ProtectorModule* ProtectorModuleBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     ProtectorModule* protector_module = new ProtectorModule(id);
     assert(protector_module);
 

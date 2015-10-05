@@ -41,10 +41,6 @@ BakEquipmentBuilder::~BakEquipmentBuilder()
 
 BakEquipment* BakEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     BakEquipment* bak_equipment = new BakEquipment(id);
     assert(bak_equipment);
 

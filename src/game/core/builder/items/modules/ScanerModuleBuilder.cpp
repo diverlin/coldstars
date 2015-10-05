@@ -39,10 +39,6 @@ ScanerModuleBuilder::~ScanerModuleBuilder()
 
 ScanerModule* ScanerModuleBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     ScanerModule* scaner_module = new ScanerModule(id);
     assert(scaner_module);
 

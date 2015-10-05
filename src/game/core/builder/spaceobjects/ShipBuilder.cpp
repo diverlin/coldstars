@@ -35,10 +35,6 @@ ShipBuilder::~ShipBuilder() {}
 
 Ship* ShipBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     Ship* ship = new Ship(id);
     assert(ship);
 

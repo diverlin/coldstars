@@ -33,10 +33,6 @@ BlackHoleBuilder::~BlackHoleBuilder()
 
 BlackHole* BlackHoleBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     BlackHole* blackhole = new BlackHole(id);
     assert(blackhole);
     

@@ -35,10 +35,6 @@ AngarBuilder::~AngarBuilder()
 
 Angar* AngarBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     Angar* angar = new Angar(id);
     assert(angar);
 

@@ -112,6 +112,9 @@ void EntitiesManager::RegisterEntity(Base* entity)
 {
     //Logger::Instance().Log("+++++++EntitiesManager::RegisterEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     
+    if (entity->id() == NONE_ID) {
+        entity->setId(EntityIdGenerator::Instance().GetNextId());
+    }
     entity_map.insert(std::make_pair(entity->id(), entity));
 }
 

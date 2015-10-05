@@ -44,10 +44,6 @@ DriveEquipmentBuilder::~DriveEquipmentBuilder()
 
 DriveEquipment* DriveEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     DriveEquipment* drive_equipment = new DriveEquipment(id);
     assert(drive_equipment);
 
