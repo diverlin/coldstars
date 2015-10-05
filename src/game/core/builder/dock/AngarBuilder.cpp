@@ -35,18 +35,15 @@ AngarBuilder::~AngarBuilder()
 
 Angar* AngarBuilder::createTemplate(INTLONGEST id) const
 {
-    Angar* angar = nullptr;
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        angar = new Angar(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
+    Angar* angar = new Angar(id);
+    assert(angar);
+
     global::get().entitiesManager().RegisterEntity(angar);
-    
+
     return angar;
 } 
 

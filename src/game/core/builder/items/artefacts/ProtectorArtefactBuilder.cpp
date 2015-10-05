@@ -42,16 +42,13 @@ ProtectorArtefactBuilder::~ProtectorArtefactBuilder()
 
 ProtectorArtefact* ProtectorArtefactBuilder::createTemplate(INTLONGEST id) const
 {
-    ProtectorArtefact* protector_artefact = nullptr;    
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        protector_artefact = new ProtectorArtefact(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
+    ProtectorArtefact* protector_artefact = new ProtectorArtefact(id);
+    assert(protector_artefact);
+
     global::get().entitiesManager().RegisterEntity(protector_artefact);
     
     return protector_artefact;

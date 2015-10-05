@@ -41,9 +41,9 @@ class EnergizerEquipment : public BaseEquipment
         void DecreaseEnergy(int energy) { this->energy -= energy; };
                     
         void CountPrice();
-        virtual void UpdateProperties();
+        virtual void updateProperties();
                     
-        virtual void UpdateInStatic();
+        virtual void updateInStatic();
                     
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);

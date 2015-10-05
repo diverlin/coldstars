@@ -50,9 +50,7 @@ m_EffectDrive(nullptr)
 /* virtual */
 RocketBullet::~RocketBullet()
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~RocketBullet("+std::to_string(id())+")");
-    #endif
 
     delete m_EffectDrive;
 }

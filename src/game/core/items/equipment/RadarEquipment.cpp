@@ -34,18 +34,15 @@ radius_orig(0)
 /* virtual */
 RadarEquipment::~RadarEquipment() 
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~RadarEquipment("+std::to_string(id())+")");
-    #endif    
 }
 
 /* virtual */
-void RadarEquipment::UpdateProperties()
+void RadarEquipment::updateProperties()
 {
     radius_add  = 0;
     
-    for (unsigned int i=0; i<modules_vec.size(); i++)
-    {
+    for (unsigned int i=0; i<modules_vec.size(); i++) {
         radius_add += ((RadarModule*)modules_vec[i])->GetRadiusAdd();            
     }
     
@@ -111,27 +108,21 @@ void RadarEquipment::Resolve()
 
 void RadarEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" RadarEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
     save_ptree.put(root+"radius_orig", radius_orig);
 }
                 
 void RadarEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" RadarEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
     radius_orig = load_ptree.get<int>("radius_orig");   
 }                
 
 void RadarEquipment::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" RadarEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
 }
    
 

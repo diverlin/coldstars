@@ -37,9 +37,7 @@ BaseEquipment::BaseEquipment()
 /*virtual */
 BaseEquipment::~BaseEquipment()
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~BaseEquipment("+std::to_string(id())+")");
-    #endif
         
     //delete animation_notfunctioning;
 }
@@ -47,8 +45,7 @@ BaseEquipment::~BaseEquipment()
 /* virtual */
 void BaseEquipment::putChildrenToGarbage() const
 {
-    for (unsigned int i=0; i<modules_vec.size(); i++)
-    {
+    for (unsigned int i=0; i<modules_vec.size(); i++) {
         global::get().entitiesManager().AddToGarbage(modules_vec[i]);
     }
 }
@@ -80,7 +77,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
                 module->SetEquipmentOwner(this);
                    modules_vec.push_back(module);                
                         
-                UpdateProperties();
+                updateProperties();
                 itemSlot()->UpdateVehiclePropetries();
 
                 return true;
@@ -130,21 +127,15 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 
 void BaseEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BaseEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 void BaseEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BaseEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 void BaseEquipment::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BaseEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
 }

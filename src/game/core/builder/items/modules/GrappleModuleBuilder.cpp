@@ -41,16 +41,13 @@ GrappleModuleBuilder::~GrappleModuleBuilder()
 
 GrappleModule* GrappleModuleBuilder::createTemplate(INTLONGEST id) const
 {
-    GrappleModule* grapple_module = nullptr;
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        grapple_module = new GrappleModule(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }    
+    GrappleModule* grapple_module = new GrappleModule(id);
+    assert(grapple_module);
+
     global::get().entitiesManager().RegisterEntity(grapple_module);
     
     return grapple_module;

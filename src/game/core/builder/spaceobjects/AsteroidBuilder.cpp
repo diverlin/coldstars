@@ -34,17 +34,14 @@ AsteroidBuilder::~AsteroidBuilder()
 {}
 
 Asteroid* AsteroidBuilder::createTemplate(INTLONGEST id) const
-{
-    Asteroid* asteroid = nullptr;    
+{ 
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        asteroid = new Asteroid(id); 
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
+    Asteroid* asteroid = new Asteroid(id);
+    assert(asteroid);
+
     global::get().entitiesManager().RegisterEntity(asteroid);
     
     return asteroid;

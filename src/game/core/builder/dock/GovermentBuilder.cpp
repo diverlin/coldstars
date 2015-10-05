@@ -31,16 +31,13 @@ GovermentBuilder::~GovermentBuilder()
 
 Goverment* GovermentBuilder::createTemplate(INTLONGEST id) const
 {
-    Goverment* goverment = nullptr;
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        goverment = new Goverment(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
+    Goverment* goverment = new Goverment(id);
+    assert(goverment);
+
     global::get().entitiesManager().RegisterEntity(goverment);
     
     return goverment;

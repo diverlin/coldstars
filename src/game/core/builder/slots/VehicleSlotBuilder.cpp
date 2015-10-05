@@ -34,20 +34,12 @@
 
 VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
 {
-    if (id == NONE_ID)
-    {
+    if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
-    } 
+    }
 
-    VehicleSlot* vehicle_slot = nullptr;
-    try 
-    { 
-        vehicle_slot = new VehicleSlot(id, subtype_id);
-    }
-    catch(std::bad_alloc)
-    {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
+    VehicleSlot* vehicle_slot = new VehicleSlot(id, subtype_id);
+    assert(vehicle_slot);
     
     global::get().entitiesManager().RegisterEntity(vehicle_slot);
       

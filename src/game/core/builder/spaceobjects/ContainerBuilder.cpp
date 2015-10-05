@@ -37,16 +37,13 @@ ContainerBuilder::~ContainerBuilder()
 
 Container* ContainerBuilder::createTemplate(INTLONGEST id) const
 {
-    Container* container = nullptr;    
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
         
-    try {
-        container = new Container(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
+    Container* container = new Container(id);
+    assert(container);
+
     global::get().entitiesManager().RegisterEntity(container);
     
     return container;

@@ -33,38 +33,7 @@ namespace CONVERTER
     const Converter<glm::vec2, float> RADIUS2FORCE(glm::vec2(10, 500), glm::vec2(1.0, 0.0), 1000);
     const Converter<glm::vec2, float> SIZE2SIZEID(glm::vec2(0, 200), glm::vec2(1.0, 10.0), 1000);
     const Converter<glm::vec2, float> DIST2GRAVITY(glm::vec2(0, 600), glm::vec2(1.0, 0.0), 1000);
-};
-
-#define LOG_ENABLED 0
-#if LOG_ENABLED == 1
-    #define GRAPPLE_QUEUE_LOG_ENABLED 0
-    #define DRIVECOMPLEX_LOG_ENABLED 0
-    #define WEAPONSTARGET_LOG_ENABLED 1
-    #define AISCENARIO_LOG_ENABLED 0
-    #define AI_LOG_ENABLED 0
-    #define SAVELOAD_LOG_ENABLED 0
-    #define ENTITY_TRANSACTION_LOG_ENABLED 0
-    #define CREATEDESTROY_LOG_ENABLED 0
-    #define ITEMINFLUENCE_LOG_ENABLED 0
-    #define TEXTURE_MANAGER_LOG_ENABLED 0
-    #define GUI_LOG_ENABLED 1
-    #define GOD_LOG_ENABLED 0
-    #define OBJLOADER_LOG_ENABLED 0
-                
-    const int GRAPPLE_QUEUE_LOG_DIP = 1;
-    const int DRIVECOMPLEX_LOG_DIP = 1;
-    const int WEAPONSTARGET_LOG_DIP = 1;
-    const int ENTITY_TRANSACTION_LOG_DIP = 1;
-    const int AISCENARIO_LOG_DIP = 2;
-    const int AI_LOG_DIP = 2;
-    const int SAVELOAD_LOG_DIP = 1;
-    const int CREATEDESTROY_LOG_DIP = 0;
-    const int ITEMINFLUENCE_LOG_DIP = 2;
-    const int TEXTURE_MANAGER_LOG_DIP = 0;
-    const int GUI_LOG_DIP = 0;
-    const int GOD_LOG_DIP = 0;
-    const int OBJLOADER_LOG_DIP = 0;
-#endif
+}
 
 #define DEBUG_ITEMDAMAGELOCKVIAGUI 1  // 1 - is locking/unlocking item by right mouse click; 2 - is damaging/undamaging item by right mouse click
 

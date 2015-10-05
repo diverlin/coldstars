@@ -29,9 +29,7 @@
 #include <glm/gtx/transform.hpp>
 #include <meti/QuaternionUtils.hpp>
 
-#ifdef LOG_DRAW_ENABLED
-#include "<common/Logger.hpp>
-#endif
+#include <ceti/Logger.hpp>
 
 namespace jeti {
 
@@ -44,9 +42,7 @@ BaseDrawable::BaseDrawable(TextureOb* textureOb, Mesh* mesh)
 
 /* virtual */
 BaseDrawable::~BaseDrawable() {
-#if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Drawable("+std::to_string(id())+")");
-#endif
+    //Logger::Instance().Log("___::~Drawable("+std::to_string(id())+")");
     
     delete m_AnimationRotation;
 }

@@ -38,7 +38,7 @@ DroidEquipment::~DroidEquipment()
 {}
 
 /* virtual */
-void DroidEquipment::UpdateProperties()
+void DroidEquipment::updateProperties()
 {
         repair_add = 0;
         
@@ -51,7 +51,7 @@ void DroidEquipment::UpdateProperties()
 }
 
 /* virtual */
-void DroidEquipment::UpdateInStatic()
+void DroidEquipment::updateInStatic()
 {
     if (isFunctioning()) {
         if (!itemSlot()->GetOwnerVehicle()->IsArmorFull()) {
@@ -122,27 +122,21 @@ void DroidEquipment::Resolve()
 
 void DroidEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" DroidEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
-        save_ptree.put(root+"repair_orig", repair_orig);
+    save_ptree.put(root+"repair_orig", repair_orig);
 }
                 
 void DroidEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" DroidEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
     repair_orig = load_ptree.get<int>("repair_orig");
 }                
 
 void DroidEquipment::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" DroidEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
 }
 
 

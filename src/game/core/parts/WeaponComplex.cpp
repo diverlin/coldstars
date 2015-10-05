@@ -169,10 +169,8 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 
 void WeaponComplex::SetTarget(SpaceObject* target, ItemSlot* item_slot)
 {                 
-#if WEAPONSTARGET_LOG_ENABLED == 1
-    if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()), WEAPONSTARGET_LOG_DIP);
-    else                        Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->GetItem()->subTypeId()) + " id=" + std::to_string(item_slot->GetItem()->id()), WEAPONSTARGET_LOG_DIP);
-#endif
+    //if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()), WEAPONSTARGET_LOG_DIP);
+    //else                        Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->GetItem()->subTypeId()) + " id=" + std::to_string(item_slot->GetItem()->id()), WEAPONSTARGET_LOG_DIP);
 
     target->remeberAgressor(owner_vehicle);
 
@@ -188,16 +186,11 @@ void WeaponComplex::SetTarget(SpaceObject* target, ItemSlot* item_slot)
                     if (weapon_slot.GetTarget() == nullptr)
                     {
                         STATUS status = weapon_slot.CheckTarget(target);
-                        if (status == STATUS::TARGET_OK)
-                        {
+                        if (status == STATUS::TARGET_OK) {
                             weapon_slot.SetTarget(target, item_slot);
-                        }
-#if WEAPONSTARGET_LOG_ENABLED == 1
-                        else
-                        {
+                        } else {
                             Logger::Instance().Log(getTargetStatusStr(status), WEAPONSTARGET_LOG_DIP);
                         }
-#endif
                     }
                 }
             }

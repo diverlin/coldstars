@@ -43,9 +43,7 @@ Ship::Ship(int id)
 /* virtual override final */
 Ship::~Ship()
 {
-#if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~Ship("+std::to_string(id())+")");
-#endif
 } 
 
 
@@ -152,23 +150,17 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 
 void Ship::SaveData(boost::property_tree::ptree&, const std::string&) const
 {
-#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Ship("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
-#endif
 }
 
 void Ship::LoadData(const boost::property_tree::ptree&)
 {
-#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Ship("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
-#endif
 }
 
 void Ship::ResolveData()
 {
-#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Ship("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
-#endif
 }
 
 /* virtual override final */

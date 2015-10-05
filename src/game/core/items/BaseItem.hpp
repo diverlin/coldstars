@@ -33,21 +33,15 @@ class Box2D;
 
 struct ItemCommonData 
 {
-    ItemCommonData(): 
-    tech_level(TYPE::TECHLEVEL::NONE_ID),
-    modules_num_max(0),
-    condition_max(0), 
-    deterioration_normal(0),
-    deterioration_overload_rate(0.0f),
-    mass(0)
-    {};
+    ItemCommonData()
+    {}
 
-    TYPE::TECHLEVEL tech_level; 
-    unsigned int modules_num_max; 
-    unsigned int condition_max; 
-    unsigned int deterioration_normal;
-    float deterioration_overload_rate;
-    unsigned int mass; 
+    TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID;
+    unsigned int modules_num_max = 0;
+    unsigned int condition_max = 0;
+    unsigned int deterioration_normal = 0;
+    float deterioration_overload_rate = 0.0f;
+    unsigned int mass = 0;
 };
 
 struct UnresolvedDataBaseItem
@@ -88,8 +82,8 @@ class BaseItem : public ceti::Orientation, public Base
         void lockEvent(int);
         bool repairEvent();
         
-        virtual void UpdateProperties() {}
-        virtual void UpdateInStatic() { updateLock(); }
+        virtual void updateProperties() {}
+        virtual void updateInStatic() { updateLock(); }
         
 //        void UpdateInfo();
         

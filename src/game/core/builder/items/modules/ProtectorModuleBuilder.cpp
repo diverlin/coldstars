@@ -41,16 +41,13 @@ ProtectorModuleBuilder::~ProtectorModuleBuilder()
 
 ProtectorModule* ProtectorModuleBuilder::createTemplate(INTLONGEST id) const
 {
-    ProtectorModule* protector_module = nullptr;
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        protector_module = new ProtectorModule(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
+    ProtectorModule* protector_module = new ProtectorModule(id);
+    assert(protector_module);
+
     global::get().entitiesManager().RegisterEntity(protector_module);
     
     return protector_module;

@@ -164,18 +164,14 @@ void StarSystem::CreateGroupAndShareTask(Npc* npc_leader, StarSystem* target_sta
 
 void StarSystem::AddVehicle(Vehicle* vehicle, const glm::vec3& center, const glm::vec3& angle, const SpaceObject* const parent)
 {
-#if ENTITY_TRANSACTION_LOG_ENABLED == 1
-    Logger::Instance().Log(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(vehicle->id())+")", ENTITY_TRANSACTION_LOG_DIP);
+    //Logger::Instance().Log(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(vehicle->id())+")", ENTITY_TRANSACTION_LOG_DIP);
     
-    for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
-    {
-        if (VEHICLE_vec[i]->id() == vehicle->id())
-        {
-            Logger::Instance().Log("StarSystem::AddVehicle dublicated vehicle found(fix that)" + getBaseInfoStr(vehicle));
-            exit(0);
+    for (unsigned int i=0; i<VEHICLE_vec.size(); i++) {
+        if (VEHICLE_vec[i]->id() == vehicle->id()) {
+            //Logger::Instance().Log("StarSystem::AddVehicle dublicated vehicle found(fix that)" + getBaseInfoStr(vehicle));
+            exit(1);
         }
     }
-#endif
     
     vehicle->setPlaceTypeId(TYPE::PLACE::SPACE_ID);
     vehicle->setStarSystem(this);
@@ -242,19 +238,14 @@ void StarSystem::Add(Planetoid* object, const SpaceObject* parent, int it)
 
 void StarSystem::AddContainer(Container* container, const glm::vec3& center)
 {
-#if ENTITY_TRANSACTION_LOG_ENABLED == 1
-    Logger::Instance().Log(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")", ENTITY_TRANSACTION_LOG_DIP);
-    
-    
-    for (unsigned int i=0; i<CONTAINER_vec.size(); i++)
-    {
-        if (CONTAINER_vec[i]->id() == container->id())
-        {
-            Logger::Instance().Log("StarSystem::AddContainer dublicated container found(fix that)" + getBaseInfoStr(container));
-            exit(0);
+    //Logger::Instance().Log(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")", ENTITY_TRANSACTION_LOG_DIP);
+        
+    for (unsigned int i=0; i<CONTAINER_vec.size(); i++) {
+        if (CONTAINER_vec[i]->id() == container->id()) {
+            //Logger::Instance().Log("StarSystem::AddContainer dublicated container found(fix that)" + getBaseInfoStr(container));
+            exit(1);
         }
     }
-#endif
     
     container->setStarSystem(this);
     container->setPlaceTypeId(TYPE::PLACE::SPACE_ID);
@@ -911,9 +902,7 @@ void StarSystem::ManageUnavaliableObjects_s()
     {
         if ((*it)->placeTypeId() != TYPE::PLACE::SPACE_ID)
         {
-#if ENTITY_TRANSACTION_LOG_ENABLED == 1
             Logger::Instance().Log("starsysten("+std::to_string(id())+ ")::RemoveVehicle(" + std::to_string((*it)->id())+")");
-#endif
             it = VEHICLE_vec.erase(it);
         }
     }

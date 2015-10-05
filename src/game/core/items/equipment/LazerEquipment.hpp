@@ -37,7 +37,7 @@ class LazerEquipment : public BaseEquipment
         
         void FireEvent(SpaceObject*, ItemSlot*, float, bool);
 
-        virtual void UpdateProperties();
+        virtual void updateProperties();
 
         void CountPrice();
 

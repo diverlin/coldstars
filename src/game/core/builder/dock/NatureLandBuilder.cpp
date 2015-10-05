@@ -41,16 +41,13 @@ NatureLandBuilder::~NatureLandBuilder()
 
 NatureLand* NatureLandBuilder::createTemplate(INTLONGEST id) const
 {
-    NatureLand* natureland = nullptr;    
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        natureland = new NatureLand(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }    
+    NatureLand* natureland = new NatureLand(id);
+    assert(natureland);
+
     global::get().entitiesManager().RegisterEntity(natureland);
     
     return natureland;

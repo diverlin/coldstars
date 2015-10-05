@@ -44,16 +44,13 @@ EnergizerEquipmentBuilder::~EnergizerEquipmentBuilder()
 
 EnergizerEquipment* EnergizerEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    EnergizerEquipment* energizer_equipment = nullptr;
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        energizer_equipment = new EnergizerEquipment(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
+    EnergizerEquipment* energizer_equipment = new EnergizerEquipment(id);
+    assert(energizer_equipment);
+
     global::get().entitiesManager().RegisterEntity(energizer_equipment);
     
     return energizer_equipment;
@@ -99,6 +96,6 @@ void EnergizerEquipmentBuilder::createInternals(EnergizerEquipment* energizer_eq
     energizer_equipment->setItemCommonData(common_data);
     energizer_equipment->setCondition(common_data.condition_max);
                     
-    energizer_equipment->UpdateProperties();
+    energizer_equipment->updateProperties();
     energizer_equipment->CountPrice();
 }

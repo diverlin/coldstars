@@ -31,9 +31,7 @@ Planetoid::Planetoid()
 /* virtual */
 Planetoid::~Planetoid()
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~Planetoid("+std::to_string(id())+")");
-    #endif
 }
 
 void Planetoid::BindParent(const SpaceObject* const parent, int it)
@@ -71,9 +69,7 @@ void Planetoid::UpdatePosition()
 
 void Planetoid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Planetoid("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
-    #endif
+    //Logger::Instance().Log(" Planetoid("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
     
     save_ptree.put(root+"data.m_Orbit_center.x", m_PlanetDescriptor.orbit_center.x);
     save_ptree.put(root+"data.m_Orbit_center.y", m_PlanetDescriptor.orbit_center.y);
@@ -88,9 +84,7 @@ void Planetoid::SaveData(boost::property_tree::ptree& save_ptree, const std::str
 
 void Planetoid::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Planetoid("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
-    #endif
+    //Logger::Instance().Log(" Planetoid("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
     
     m_PlanetDescriptor.orbit_center.x = load_ptree.get<float>("data.orbit_center.x");
     m_PlanetDescriptor.orbit_center.y = load_ptree.get<float>("data.orbit_center.y");
@@ -105,9 +99,7 @@ void Planetoid::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Planetoid::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" Planetoid("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
-    #endif
+    //Logger::Instance().Log(" Planetoid("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
 }
 
 

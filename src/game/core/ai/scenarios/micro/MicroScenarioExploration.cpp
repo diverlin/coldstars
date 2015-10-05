@@ -35,9 +35,7 @@ MicroScenarioExploration::~MicroScenarioExploration()
 /* virtual */
 void MicroScenarioExploration::Enter(Npc* npc) const
 {    
-    #if AISCENARIO_LOG_ENABLED == 1 
     Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " ENTER MicroScenarioExploration");
-    #endif
 }
 
 /* virtual */
@@ -57,9 +55,7 @@ void MicroScenarioExploration::UpdateInDynamicInSpace(Npc* npc) const
 /* virtual */
 void MicroScenarioExploration::Exit(Npc* npc) const
 {
-    #if AISCENARIO_LOG_ENABLED == 1 
     Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " EXIT MicroScenarioExploration");
-    #endif
 }
 
 /* virtual */

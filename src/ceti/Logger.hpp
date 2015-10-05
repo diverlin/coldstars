@@ -20,6 +20,20 @@
 
 #include <fstream>
 
+const int GRAPPLE_QUEUE_LOG_DIP = 1;
+const int DRIVECOMPLEX_LOG_DIP = 1;
+const int WEAPONSTARGET_LOG_DIP = 1;
+const int ENTITY_TRANSACTION_LOG_DIP = 1;
+const int AISCENARIO_LOG_DIP = 2;
+const int AI_LOG_DIP = 2;
+const int SAVELOAD_LOG_DIP = 1;
+const int CREATEDESTROY_LOG_DIP = 0;
+const int ITEMINFLUENCE_LOG_DIP = 2;
+const int TEXTURE_MANAGER_LOG_DIP = 0;
+const int GUI_LOG_DIP = 0;
+const int GOD_LOG_DIP = 0;
+const int OBJLOADER_LOG_DIP = 0;
+
 class Logger
 {
     public:

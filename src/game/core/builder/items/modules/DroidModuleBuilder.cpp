@@ -39,16 +39,13 @@ DroidModuleBuilder::~DroidModuleBuilder()
 
 DroidModule* DroidModuleBuilder::createTemplate(INTLONGEST id) const
 {
-    DroidModule* droid_module = nullptr;
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        droid_module = new DroidModule(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }    
+    DroidModule* droid_module = new DroidModule(id);
+    assert(droid_module);
+
     global::get().entitiesManager().RegisterEntity(droid_module);
     
     return droid_module;

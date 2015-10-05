@@ -44,16 +44,13 @@ DriveEquipmentBuilder::~DriveEquipmentBuilder()
 
 DriveEquipment* DriveEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    DriveEquipment* drive_equipment = nullptr;
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        drive_equipment = new DriveEquipment(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
+    DriveEquipment* drive_equipment = new DriveEquipment(id);
+    assert(drive_equipment);
+
     global::get().entitiesManager().RegisterEntity(drive_equipment);
     
     return drive_equipment;
@@ -110,7 +107,7 @@ void DriveEquipmentBuilder::createInternals(DriveEquipment* drive_equipment, TYP
     drive_equipment->setItemCommonData(common_data);
     drive_equipment->setCondition(common_data.condition_max);
     
-    drive_equipment->UpdateProperties();
+    drive_equipment->updateProperties();
     drive_equipment->CountPrice();
 }
 

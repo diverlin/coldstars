@@ -6,9 +6,7 @@
 
 #include <cmath>
 
-#ifdef LOGGER_ENABLED
-#include "<common/Logger.hpp>
-#endif
+#include <ceti/Logger.hpp>
   
 namespace jeti {
 
@@ -28,9 +26,7 @@ ObjLoader::ObjLoader(const std::string& path)
     while(std::getline(filestream, line))
     {
         line_counter++;
-#ifdef LOGGER_ENABLED
-        Logger::Instance().Log(filename+": line num="+std::to_string(line_counter)+" "+line, OBJLOADER_LOG_DIP);
-#endif
+        //Logger::Instance().Log(filename+": line num="+std::to_string(line_counter)+" "+line, OBJLOADER_LOG_DIP);
         
         std::stringstream line_stream(line);
         std::string type_str;

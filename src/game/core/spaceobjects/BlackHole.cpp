@@ -33,9 +33,7 @@ BlackHole::BlackHole(int id)
 /* virtual */
 BlackHole::~BlackHole() 
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~BlackHole("+std::to_string(id())+")");
-    #endif
     
     //delete shockwave;
 } 
@@ -78,23 +76,17 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
           
 void BlackHole::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BlackHole("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
-    #endif
+    //Logger::Instance().Log(" BlackHole("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
 }
 
 void BlackHole::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BlackHole("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
-    #endif
+    //Logger::Instance().Log(" BlackHole("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
 }
 
 void BlackHole::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
-    Logger::Instance().Log(" BlackHole("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
-    #endif
+    //Logger::Instance().Log(" BlackHole("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     
     starsystem()->Add(this, data_unresolved_Orientation.center); 
 }

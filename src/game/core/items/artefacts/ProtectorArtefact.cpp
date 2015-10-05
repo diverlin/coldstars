@@ -75,25 +75,19 @@ void ProtectorArtefact::Resolve()
         
 void ProtectorArtefact::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ProtectorArtefact::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
     save_ptree.put(root+"protection", protection); 
 }
 
 void ProtectorArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ProtectorArtefact::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
     protection = load_ptree.get<int>("protection");
 }
 
 void ProtectorArtefact::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ProtectorArtefact::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
 }

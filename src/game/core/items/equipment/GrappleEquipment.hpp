@@ -53,7 +53,7 @@ class GrappleEquipment : public BaseEquipment
         void UpdateGrabScenarioProgram_inDynamic();
         void RenderGrabTrail(const jeti::Renderer&);
         
-        virtual void UpdateProperties();  
+        virtual void updateProperties();  
         
         void CountPrice();
         

@@ -39,28 +39,19 @@ ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
         id = EntityIdGenerator::Instance().GetNextId();
     } 
     
-    ItemSlot* item_slot = nullptr;
-    try {
-        item_slot = new ItemSlot(id, subtype_id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
-    
+    ItemSlot* item_slot = new ItemSlot(id, subtype_id);
+    assert(item_slot);
+
     global::get().entitiesManager().RegisterEntity(item_slot);
     
     //jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);
 //    item_slot->SetTextureOb(texOb_slot);
     
     if (subtype_id == TYPE::ENTITY::WEAPON_SLOT_ID) {
-        Turrel* turrel = nullptr;
+        Turrel* turrel = new Turrel(item_slot);
+        assert(turrel);
 //        jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //        jeti::TextureOb* texOb_turrel = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL_ID);
-        try {
-            turrel = new Turrel(item_slot); 
-        }
-        catch(std::bad_alloc) {
-            Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-        }    
         // alpitodorender turrel->SetRenderData(mesh, texOb_turrel, texOb_turrel->size());
         item_slot->SetTurrel(turrel);
     }
@@ -70,12 +61,8 @@ ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
 
 ItemSlot* GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY subtype_id)
 {
-    ItemSlot* item_slot = nullptr;
-    try {
-        item_slot = new ItemSlot(NONE_ID, subtype_id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation");
-    }
+    ItemSlot* item_slot = new ItemSlot(NONE_ID, subtype_id);
+    assert(item_slot);
     
 //    jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);
 //    item_slot->SetTextureOb(texOb_slot);

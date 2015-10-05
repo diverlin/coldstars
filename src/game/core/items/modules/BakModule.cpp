@@ -72,25 +72,19 @@ void BakModule::Resolve()
 
 void BakModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BakModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
-    
+
     save_ptree.put(root+"fuel_max_add", fuel_max_add);
 }
 
 void BakModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BakModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
     
     fuel_max_add = load_ptree.get<int>("fuel_max_add");
 }
 
 void BakModule::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" BakModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
 }

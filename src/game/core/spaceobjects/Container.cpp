@@ -19,6 +19,7 @@
 #include "Container.hpp"
 
 #include <common/common.hpp>
+#include <common/constants.hpp>
 //#include <ceti/StringUtils.hpp>
 #include <ceti/Logger.hpp>
 
@@ -46,9 +47,7 @@ m_Velocity(0)
 /* virtual */   
 Container::~Container()
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~Container("+std::to_string(id())+")");
-    #endif
 }
 
 /* virtual override final */
@@ -119,9 +118,7 @@ void Container::UpdateInSpace(int time, bool show_effect)
 
 void Container::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Container("+std::to_string(id())+")::SaveData()", SAVELOAD_LOG_DIP);
-    #endif
     
     save_ptree.put(root+"target_pos.x", m_TargetPos.x);
     save_ptree.put(root+"target_pos.y", m_TargetPos.y);
@@ -131,9 +128,7 @@ void Container::SaveData(boost::property_tree::ptree& save_ptree, const std::str
 
 void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Container("+std::to_string(id())+")::LoadData()", SAVELOAD_LOG_DIP);
-    #endif
     
     m_TargetPos.x   = load_ptree.get<float>("target_pos.x");
     m_TargetPos.y   = load_ptree.get<float>("target_pos.y");
@@ -143,9 +138,7 @@ void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Container::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Container("+std::to_string(id())+")::ResolveData()", SAVELOAD_LOG_DIP);
-    #endif
     
     ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->AddContainer(this, data_unresolved_Orientation.center); 
 }        

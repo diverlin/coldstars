@@ -48,9 +48,7 @@ m_Population(0)
 /* virtual */
 Planet::~Planet()
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
     Logger::Instance().Log("___::~Planet("+std::to_string(id())+")");
-    #endif
    
 //    for (BaseDecor* decor : m_Decorations)
 //    {
@@ -123,9 +121,7 @@ void Planet::postDeathUniqueEvent(bool)
 
 void Planet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Planet("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
-    #endif
     
     //SaveManager::Instance().Put(root+"race_id", race_id);
     save_ptree.put(root+"population", m_Population);
@@ -133,9 +129,7 @@ void Planet::SaveData(boost::property_tree::ptree& save_ptree, const std::string
 
 void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Planet("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
-    #endif
     
     //race_id = SaveManager::Instance().Get<int>(root+"race_id");
     m_Population = load_ptree.get<unsigned int>("population");    
@@ -143,9 +137,7 @@ void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Planet::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" Planet("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
-    #endif
     
     ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->Add(this, parent(), data_unresolved_Planetoid.orbit_it); 
 }

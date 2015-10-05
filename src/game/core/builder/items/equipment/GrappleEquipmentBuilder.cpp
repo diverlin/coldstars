@@ -39,16 +39,13 @@ GrappleEquipmentBuilder::~GrappleEquipmentBuilder()
 
 GrappleEquipment* GrappleEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    GrappleEquipment* grapple_equipment = nullptr;
     if (id == NONE_ID) {
         id = EntityIdGenerator::Instance().GetNextId();
     }
 
-    try {
-        grapple_equipment = new GrappleEquipment(id);
-    } catch(std::bad_alloc) {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
-    }
+    GrappleEquipment* grapple_equipment = new GrappleEquipment(id);
+    assert(grapple_equipment);
+
     global::get().entitiesManager().RegisterEntity(grapple_equipment);
     
     return grapple_equipment;
@@ -96,6 +93,6 @@ void GrappleEquipmentBuilder::createInternals(GrappleEquipment* grapple_equipmen
     grapple_equipment->setItemCommonData(common_data);
     grapple_equipment->setCondition(common_data.condition_max);
     
-    grapple_equipment->UpdateProperties();
+    grapple_equipment->updateProperties();
     grapple_equipment->CountPrice();
 }
