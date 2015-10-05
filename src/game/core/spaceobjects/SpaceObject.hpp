@@ -48,16 +48,16 @@ class SpaceObject : public ceti::Orientation, public Base
     
         void setParent(const SpaceObject* const parent) { m_parent = parent; }
 
-        StarSystem* starsystem()    const { return m_starsystem; }
-        TYPE::PLACE placeTypeId()   const { return m_placeTypeId; }
+        StarSystem* starsystem()  const { return m_starsystem; }
+        TYPE::PLACE placeTypeId() const { return m_placeTypeId; }
 
         virtual int givenExpirience() const { return m_expirienceToGive; }  // !!!
  
-        bool isAlive()              const { return m_dataLife.is_alive; }
-        bool isReadyForGarbage()    const { return m_dataLife.garbage_ready; }
+        bool isAlive()           const { return m_dataLife.is_alive; }
+        bool isReadyForGarbage() const { return m_dataLife.garbage_ready; }
 
-        int mass()         const { return m_mass; }
-        int armor()        const { return m_dataLife.armor; }
+        int mass()  const { return m_mass; }
+        int armor() const { return m_dataLife.armor; }
 
         const SpaceObject* const parent() const { return m_parent; }
 
