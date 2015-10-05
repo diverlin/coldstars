@@ -797,8 +797,8 @@ void Vehicle::UpdateAllFunctionalItemsInStatic()
     }
 
     for (unsigned int i=0; i<m_SlotArtef_vec.size(); i++) {
-        if (m_SlotArtef_vec[i]->GetItem()) {
-            m_SlotArtef_vec[i]->GetItem()->updateInStatic();
+        if (m_SlotArtef_vec[i]->item()) {
+            m_SlotArtef_vec[i]->item()->updateInStatic();
         }
     }
 }
@@ -1055,21 +1055,21 @@ void Vehicle::UpdateArtefactInfluence()
     
     for (unsigned int i=0; i<m_SlotArtef_vec.size(); i++)
     {
-        if (m_SlotArtef_vec[i]->GetItem() != nullptr)
+        if (m_SlotArtef_vec[i]->item() != nullptr)
         {
-            if (m_SlotArtef_vec[i]->GetItem()->isFunctioning() == true)
+            if (m_SlotArtef_vec[i]->item()->isFunctioning() == true)
             {
-                switch(m_SlotArtef_vec[i]->GetItem()->subTypeId())
+                switch(m_SlotArtef_vec[i]->item()->subTypeId())
                 {
                     case TYPE::ENTITY::GRAVITY_ARTEFACT_ID:
                     {
-                        m_Properties.artefact_gravity += ((GravityArtefact*)m_SlotArtef_vec[i]->GetItem())->GetGravity();
+                        m_Properties.artefact_gravity += ((GravityArtefact*)m_SlotArtef_vec[i]->item())->GetGravity();
                         break;
                     }
 
                     case TYPE::ENTITY::PROTECTOR_ARTEFACT_ID:
                     {
-                        m_Properties.artefact_protection += ((ProtectorArtefact*)m_SlotArtef_vec[i]->GetItem())->GetProtection();
+                        m_Properties.artefact_protection += ((ProtectorArtefact*)m_SlotArtef_vec[i]->item())->GetProtection();
                         break;
                     }
                 }
@@ -1228,7 +1228,7 @@ void Vehicle::LockRandomItem(int locked_turns)
     
     for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++)
     {
-        if (m_SlotFunct_vec[i]->GetItem() != nullptr)
+        if (m_SlotFunct_vec[i]->item() != nullptr)
         {
             _equiped_slot_vec.push_back(m_SlotFunct_vec[i]);
         }
@@ -1237,7 +1237,7 @@ void Vehicle::LockRandomItem(int locked_turns)
     if (_equiped_slot_vec.size() > 0)
     {
         unsigned int _rand = meti::getRandInt(0, _equiped_slot_vec.size());
-        _equiped_slot_vec[_rand]->GetItem()->lockEvent(locked_turns);
+        _equiped_slot_vec[_rand]->item()->lockEvent(locked_turns);
     }
 }
 
@@ -1316,7 +1316,7 @@ void Vehicle::DropRandomItemToSpace()
     
     for (unsigned int i=0; i<m_SlotTotal_vec.size(); i++)
     {
-        if (m_SlotTotal_vec[i]->GetItem() != nullptr)
+        if (m_SlotTotal_vec[i]->item() != nullptr)
         {
             _equiped_slot_vec.push_back(m_SlotTotal_vec[i]);
         }
@@ -1324,7 +1324,7 @@ void Vehicle::DropRandomItemToSpace()
     
     if (_equiped_slot_vec.size() > 0)
     {
-        _equiped_slot_vec[meti::getRandInt(0, _equiped_slot_vec.size()-1)]->DropItemToSpace();
+        _equiped_slot_vec[meti::getRandInt(0, _equiped_slot_vec.size()-1)]->dropItemToSpace();
     }
 }
 
@@ -1466,21 +1466,21 @@ void Vehicle::ResolveData()
 void Vehicle::TEST_DamageAndLockRandItems()
 {
     int rand_index1 = meti::getRandInt(0, m_SlotFunct_vec.size()-1);
-    while (m_SlotFunct_vec[rand_index1]->GetItem() == nullptr)
+    while (m_SlotFunct_vec[rand_index1]->item() == nullptr)
     {
         rand_index1 = meti::getRandInt(0, m_SlotFunct_vec.size()-1);
     }
-    m_SlotFunct_vec[rand_index1]->GetItem()->lockEvent(3);
+    m_SlotFunct_vec[rand_index1]->item()->lockEvent(3);
 
     int rand_index2 = meti::getRandInt(0, m_SlotFunct_vec.size()-1);
-    while (m_SlotFunct_vec[rand_index2]->GetItem() == nullptr)
+    while (m_SlotFunct_vec[rand_index2]->item() == nullptr)
     {
         rand_index2 = meti::getRandInt(0, m_SlotFunct_vec.size()-1);
     }
     
-    while (m_SlotFunct_vec[rand_index2]->GetItem()->condition() > 0)
+    while (m_SlotFunct_vec[rand_index2]->item()->condition() > 0)
     {
-        m_SlotFunct_vec[rand_index2]->GetItem()->deteriorationEvent();
+        m_SlotFunct_vec[rand_index2]->item()->deteriorationEvent();
     }
 }
 

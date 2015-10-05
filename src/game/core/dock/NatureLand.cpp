@@ -54,7 +54,7 @@ bool NatureLand::CanAcceptNewItem() const
 {
     for (unsigned int i=0; i<item_slot_vec.size(); i++)
     {
-        if (item_slot_vec[i]->GetItem() == nullptr)
+        if (item_slot_vec[i]->item() == nullptr)
         {
             return true;
         }
@@ -73,9 +73,9 @@ bool NatureLand::AddItem(BaseItem* item)
 {
     for (unsigned int i=0; i<item_slot_vec.size(); i++)
     {
-        if (item_slot_vec[i]->GetItem() == nullptr)
+        if (item_slot_vec[i]->item() == nullptr)
         {
-            item_slot_vec[i]->InsertItem(item);
+            item_slot_vec[i]->insertItem(item);
             item_slot_vec[i]->SetPosition(glm::vec2(meti::getRandInt(0, 100), meti::getRandInt(0, 100)));
             
             return true;

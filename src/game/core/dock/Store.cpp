@@ -92,7 +92,7 @@ ItemSlot* Store::GetEmptyItemSlot() const
 {
         for (unsigned int i=0; i<item_slot_vec.size(); i++)
         {
-                if (item_slot_vec[i]->GetItem() == nullptr)
+                if (item_slot_vec[i]->item() == nullptr)
                 {
                         return item_slot_vec[i];
             }

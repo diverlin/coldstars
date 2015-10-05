@@ -102,7 +102,7 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
 //        //GetComplexWeapon().RenderTurrels();
 //    //}
 
-//    //if (GetComplexProtector().GetProtectorSlot()->GetItem() != nullptr)
+//    //if (GetComplexProtector().GetProtectorSlot()->item() != nullptr)
 //    //{
 //        //RenderShieldEffect(1.0 - color().a);
 //        //starsystem()->RestoreSceneColor();

@@ -53,6 +53,14 @@ Container* ContainerBuilder::create(jeti::TextureOb* textureOb, BaseItem* item) 
     return container;
 } 
 
+Container* ContainerBuilder::create(BaseItem* item) const
+{
+    Container* container = createTemplate();
+    createInternals(container, item);
+
+    return container;
+}
+
 Container* ContainerBuilder::create(int mineral_ammount) const
 {
     //jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MINERAL_ID);
@@ -86,6 +94,29 @@ void ContainerBuilder::createInternals(Container* container, jeti::TextureOb* te
     container->bindItemSlot(item_slot);
     container->itemSlot()->insertItem(item);
 }
+
+void ContainerBuilder::createInternals(Container* container, BaseItem* item) const
+{
+    LifeData data_life;
+    data_life.armor = 1;
+    data_life.dying_time = 30;
+
+    container->setLifeData(data_life);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->size());
+
+    float delta_angle = 0.001*meti::getRandInt(20, 60);
+    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
+    //alpitodorender container->SetAnimationRotation(animation_rotation);
+
+    container->setGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
+
+    ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
+
+    container->bindItemSlot(item_slot);
+    container->itemSlot()->insertItem(item);
+}
+
 
 
 

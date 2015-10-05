@@ -49,7 +49,7 @@ ItemSlot* WeaponComplex::GetEmptyWeaponSlot() const
 {
     for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
-        if (slot_weapon_vec[i]->GetItem() == nullptr)
+        if (slot_weapon_vec[i]->item() == nullptr)
         {
             return slot_weapon_vec[i];
         }
@@ -65,9 +65,9 @@ ItemSlot* WeaponComplex::GetEquipedWeakestWeaponSlot() const
 
     for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
-        if (slot_weapon_vec[i]->GetItem() != nullptr)
+        if (slot_weapon_vec[i]->item() != nullptr)
         {
-            int price = slot_weapon_vec[i]->GetItem()->price();
+            int price = slot_weapon_vec[i]->item()->price();
             if ((min_price > price) or (min_price == 0))
             {
                 min_price = price;
@@ -98,11 +98,11 @@ void WeaponComplex::ReloadAllWeapons()
     slot_weapon_reloaded_vec.clear();
     for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
-        if (slot_weapon_vec[i]->GetItem() != nullptr)
+        if (slot_weapon_vec[i]->item() != nullptr)
         {
-            if (slot_weapon_vec[i]->GetItem()->isFunctioning() == true)
+            if (slot_weapon_vec[i]->item()->isFunctioning() == true)
             {
-                if (slot_weapon_vec[i]->CheckAmmo() == true)
+                if (slot_weapon_vec[i]->checkAmmo() == true)
                 {
                     slot_weapon_reloaded_vec.push_back(slot_weapon_vec[i]);
                 }
@@ -134,7 +134,7 @@ void WeaponComplex::ActivateWeaponsBySubTypeId(TYPE::ENTITY weapon_subtype_id)
 {
     for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
     {
-        if (slot_weapon_reloaded_vec[i]->GetItem()->subTypeId() == weapon_subtype_id)
+        if (slot_weapon_reloaded_vec[i]->item()->subTypeId() == weapon_subtype_id)
         {
             slot_weapon_reloaded_vec[i]->SelectEvent();
         }
@@ -146,7 +146,7 @@ void WeaponComplex::DeactivateWeaponsBySubTypeId(TYPE::ENTITY weapon_subtype_id)
 {
     for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
     {
-        if (slot_weapon_reloaded_vec[i]->GetItem()->subTypeId() == weapon_subtype_id)
+        if (slot_weapon_reloaded_vec[i]->item()->subTypeId() == weapon_subtype_id)
         {
             slot_weapon_reloaded_vec[i]->DeselectEvent();
         }
@@ -170,7 +170,7 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 void WeaponComplex::SetTarget(SpaceObject* target, ItemSlot* item_slot)
 {                 
     //if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()), WEAPONSTARGET_LOG_DIP);
-    //else                        Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->GetItem()->subTypeId()) + " id=" + std::to_string(item_slot->GetItem()->id()), WEAPONSTARGET_LOG_DIP);
+    //else                        Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->item()->subTypeId()) + " id=" + std::to_string(item_slot->item()->id()), WEAPONSTARGET_LOG_DIP);
 
     target->remeberAgressor(owner_vehicle);
 
@@ -230,11 +230,11 @@ void WeaponComplex::ValidateAllWeaponsTarget()
 {
     for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
-        if (slot_weapon_vec[i]->GetTarget() != nullptr)
+        if (slot_weapon_vec[i]->target())
         {
-            if (slot_weapon_vec[i]->ValidateTarget() != STATUS::TARGET_OK)
+            if (slot_weapon_vec[i]->validateTarget() != STATUS::TARGET_OK)
             {
-                slot_weapon_vec[i]->ResetTarget();
+                slot_weapon_vec[i]->resetTarget();
             }
         }
     }
@@ -248,17 +248,17 @@ void WeaponComplex::UpdateFireAbility()
     int z = slot_weapon_vec.size();
     for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
-        if (slot_weapon_vec[i]->GetItem() != nullptr)
+        if (slot_weapon_vec[i]->item() != nullptr)
         {
-            if (slot_weapon_vec[i]->GetItem()->isFunctioning() == true)
+            if (slot_weapon_vec[i]->item()->isFunctioning() == true)
             {
-                int radius = slot_weapon_vec[i]->GetItemRadius();
+                int radius = slot_weapon_vec[i]->itemRadius();
                 if ( (radius < radius_min) or (radius_min == 0) )
                 {
                     radius_min = radius;
                 }
-                total_damage += slot_weapon_vec[i]->GetItemDamage();
-                total_radius += slot_weapon_vec[i]->GetItemRadius();
+                total_damage += slot_weapon_vec[i]->itemDamage();
+                total_radius += slot_weapon_vec[i]->itemRadius();
             }
         }
     }
@@ -268,9 +268,9 @@ void WeaponComplex::RenderTurrels() const
 {
     for(unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
-        if (slot_weapon_vec[i]->GetItem() != nullptr)
+        if (slot_weapon_vec[i]->item() != nullptr)
         {
-            if (slot_weapon_vec[i]->GetItem()->isFunctioning() == true)
+            if (slot_weapon_vec[i]->item()->isFunctioning() == true)
             {
                 //slot_weapon_vec[i]->GetTurrel()->Render(owner_vehicle->GetAngle().z);    // angle
             }
@@ -285,21 +285,19 @@ void WeaponComplex::RenderWeaponsRange()
         if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
         {
             //slot_weapon_reloaded_vec[i]->UpdateRange(GuiTextureObCollector::Instance().dot_red);
-            slot_weapon_reloaded_vec[i]->DrawRange(meti::vec2(owner_vehicle->center()));
+            //slot_weapon_reloaded_vec[i]->drawRange(meti::vec2(owner_vehicle->center()));
         }
     }
 }
 
 void WeaponComplex::RenderWeaponIcons() const
 {       
-    for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
-    {
-        if (slot_weapon_vec[i]->GetItem() != nullptr ) //?? ideally this is not needed, if item == nullptr< the target set to nullptr
+    for (unsigned int i=0; i<slot_weapon_vec.size(); i++) {
+        if (slot_weapon_vec[i]->item() != nullptr ) //?? ideally this is not needed, if item == nullptr< the target set to nullptr
         {
-            if (slot_weapon_vec[i]->GetTarget() != nullptr )
-            {
+            if (slot_weapon_vec[i]->target() != nullptr ) {
                 //Rect _rect(slot_weapon_vec[i]->GetTarget()->center().x - 40/2 + 23*i, slot_weapon_vec[i]->GetTarget()->center().y + 40/2, 20, 20);
-                //drawTexturedRect(slot_weapon_vec[i]->GetItem()->textureOb(), _rect, -2.0);
+                //drawTexturedRect(slot_weapon_vec[i]->item()->textureOb(), _rect, -2.0);
             }
         }
     }
