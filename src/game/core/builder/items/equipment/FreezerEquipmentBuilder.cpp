@@ -92,9 +92,9 @@ void FreezerEquipmentBuilder::createInternals(FreezerEquipment* freezer_equipmen
     
     freezer_equipment->SetFreezeOrig(freeze_orig);
     //alpitodorender freezer_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
-    freezer_equipment->SetParentSubTypeId(TYPE::ENTITY::FREEZER_SLOT_ID);
-    freezer_equipment->SetItemCommonData(common_data);
-    freezer_equipment->SetCondition(common_data.condition_max);
+    freezer_equipment->setParentSubTypeId(TYPE::ENTITY::FREEZER_SLOT_ID);
+    freezer_equipment->setItemCommonData(common_data);
+    freezer_equipment->setCondition(common_data.condition_max);
 
     freezer_equipment->UpdateProperties();
     freezer_equipment->CountPrice();

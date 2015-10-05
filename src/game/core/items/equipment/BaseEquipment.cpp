@@ -30,7 +30,7 @@
 
 BaseEquipment::BaseEquipment()
 {
-    race_id = TYPE::RACE::R0_ID;
+    m_race_id = TYPE::RACE::R0_ID;
     //animation_notfunctioning = new jeti::AnimationEffect2D(glm::vec3(0.8, 0.8, 1.0), glm::vec3(1.2, 1.2, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0);
 }
 
@@ -68,20 +68,20 @@ void BaseEquipment::AddCommonInfo()
 
 bool BaseEquipment::InsertModule(BaseModule* module)
 {
-    if (module->GetParentSubTypeId() == subTypeId())
+    if (module->parentSubTypeId() == subTypeId())
     {
-        if (modules_vec.size() < data_item.modules_num_max)
+        if (modules_vec.size() < m_data_item.modules_num_max)
             {
-                if (module->GetItemSlot() != nullptr)
+                if (module->itemSlot() != nullptr)
                 {
-                    module->GetItemSlot()->RemoveItem();
+                    module->itemSlot()->RemoveItem();
                 }
-                module->SetItemSlot(nullptr);
+                module->setItemSlot(nullptr);
                 module->SetEquipmentOwner(this);
                    modules_vec.push_back(module);                
                         
                 UpdateProperties();
-                item_slot->UpdateVehiclePropetries();
+                itemSlot()->UpdateVehiclePropetries();
 
                 return true;
             }

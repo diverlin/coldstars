@@ -70,7 +70,7 @@ void BakModuleBuilder::createInternals(BakModule* bak_module, int fuel_max_add) 
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
     fuel_max_add = meti::getRandInt(MODULE::BAK::FUEL_MIN, MODULE::BAK::FUEL_MAX);
 
-    bak_module->SetParentSubTypeId(TYPE::ENTITY::BAK_EQUIPMENT_ID);    
+    bak_module->setParentSubTypeId(TYPE::ENTITY::BAK_EQUIPMENT_ID);    
     // alpitodorender bak_module->SetRenderData(mesh, texOb, texOb->size());
     bak_module->SetFuelMaxAdd(fuel_max_add);
 }

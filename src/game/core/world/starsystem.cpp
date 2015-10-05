@@ -1015,8 +1015,8 @@ void StarSystem::ManageDeadObjects_s()
 
 void StarSystem::BombExplosionEvent(Container* container, bool show_effect)
 {
-    float radius = ((Bomb*)container->GetItemSlot()->GetItem())->GetRadius();
-    float damage = ((Bomb*)container->GetItemSlot()->GetItem())->GetDamage();
+    float radius = ((Bomb*)container->GetItemSlot()->GetItem())->radius();
+    float damage = ((Bomb*)container->GetItemSlot()->GetItem())->damage();
     glm::vec3 center(container->center());
     
     //jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(radius);
@@ -1031,7 +1031,7 @@ void StarSystem::StarSparkEvent(float radius) const
         {
             if (VEHICLE_vec[i]->GetSlotRadar()->GetItem() != nullptr)
             {
-                VEHICLE_vec[i]->GetSlotRadar()->GetItem()->LockEvent(2);
+                VEHICLE_vec[i]->GetSlotRadar()->GetItem()->lockEvent(2);
             }
         }
     }

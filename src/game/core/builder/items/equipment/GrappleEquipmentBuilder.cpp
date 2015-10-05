@@ -92,9 +92,9 @@ void GrappleEquipmentBuilder::createInternals(GrappleEquipment* grapple_equipmen
     grapple_equipment->SetSpeedOrig(speed_orig);
 
     //alpitodorender grapple_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
-    grapple_equipment->SetParentSubTypeId(TYPE::ENTITY::GRAPPLE_SLOT_ID);
-    grapple_equipment->SetItemCommonData(common_data);
-    grapple_equipment->SetCondition(common_data.condition_max);
+    grapple_equipment->setParentSubTypeId(TYPE::ENTITY::GRAPPLE_SLOT_ID);
+    grapple_equipment->setItemCommonData(common_data);
+    grapple_equipment->setCondition(common_data.condition_max);
     
     grapple_equipment->UpdateProperties();
     grapple_equipment->CountPrice();

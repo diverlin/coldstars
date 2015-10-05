@@ -21,8 +21,9 @@
 
 #include <types/MyInt.hpp>
 
-class Bomb;
+#include <string>
 
+class Bomb;
 
 class BombBuilder
 {
@@ -32,6 +33,8 @@ class BombBuilder
 
         Bomb* createTemplate(INTLONGEST id = NONE_ID) const;
         Bomb* create(int damage = NONE_ID, int radius = NONE_ID) const;
+
+        static void write(const std::string& fpath, Bomb* bomb);
                                      
     private:
         void createInternals(Bomb*, int, int) const;

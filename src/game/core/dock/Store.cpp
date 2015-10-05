@@ -121,7 +121,7 @@ int Store::BuyItem(BaseItem* item)
     {
         if (item_slot->InsertItem(item) == true)
         {
-            return item->GetPrice();
+            return item->price();
         }
     }
 

@@ -167,7 +167,7 @@ bool ItemSlot::CheckItemInsertion(BaseItem* item) const
         return true;
     }
 
-    if (subTypeId() == item->GetParentSubTypeId())
+    if (subTypeId() == item->parentSubTypeId())
     {
         return true;
     }
@@ -187,23 +187,23 @@ bool ItemSlot::InsertItem(BaseItem* item)
     if (subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID)
     {
         m_Item = item;
-        if (item->GetItemSlot() != nullptr)
+        if (item->itemSlot() != nullptr)
         {
-            item->GetItemSlot()->RemoveItem();
+            item->itemSlot()->RemoveItem();
         }
-        item->SetItemSlot(this);
+        item->setItemSlot(this);
 
         return true;
     }
 
-    if (subTypeId() == item->GetParentSubTypeId())
+    if (subTypeId() == item->parentSubTypeId())
     {
         m_Item = item;
-        if (item->GetItemSlot() != nullptr)
+        if (item->itemSlot() != nullptr)
         {
-            item->GetItemSlot()->RemoveItem();
+            item->itemSlot()->RemoveItem();
         }
-        item->SetItemSlot(this);
+        item->setItemSlot(this);
         UpdateVehiclePropetries();
 
         return true;
@@ -334,7 +334,7 @@ int ItemSlot::GetItemRadius() const
 
         case TYPE::ENTITY::BOMB_ID:
         {
-            return GetBomb()->GetRadius();   break;
+            return GetBomb()->radius();   break;
         }
     }
     
@@ -358,7 +358,7 @@ int ItemSlot::GetItemDamage() const
             
         case TYPE::ENTITY::BOMB_ID:
         {
-            return GetBomb()->GetDamage();   break;
+            return GetBomb()->damage();   break;
         }
     }
     
@@ -407,7 +407,7 @@ bool ItemSlot::SwapItem(ItemSlot* slot)
         if ( (slot->CheckItemInsertion(m_Item) == true) and (CheckItemInsertion(tmp_item) == true) )
         {
             slot->InsertItem(m_Item);
-            tmp_item->SetItemSlot(nullptr);
+            tmp_item->setItemSlot(nullptr);
             InsertItem(tmp_item);
 
             return true;

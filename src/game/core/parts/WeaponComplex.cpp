@@ -67,7 +67,7 @@ ItemSlot* WeaponComplex::GetEquipedWeakestWeaponSlot() const
     {
         if (slot_weapon_vec[i]->GetItem() != nullptr)
         {
-            int price = slot_weapon_vec[i]->GetItem()->GetPrice();
+            int price = slot_weapon_vec[i]->GetItem()->price();
             if ((min_price > price) or (min_price == 0))
             {
                 min_price = price;
@@ -100,7 +100,7 @@ void WeaponComplex::ReloadAllWeapons()
     {
         if (slot_weapon_vec[i]->GetItem() != nullptr)
         {
-            if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
+            if (slot_weapon_vec[i]->GetItem()->isFunctioning() == true)
             {
                 if (slot_weapon_vec[i]->CheckAmmo() == true)
                 {
@@ -183,7 +183,7 @@ void WeaponComplex::SetTarget(SpaceObject* target, ItemSlot* item_slot)
         {
             if (weapon_slot.GetItem() != nullptr)
             {
-                if (weapon_slot.GetItem()->GetFunctioning() == true)
+                if (weapon_slot.GetItem()->isFunctioning() == true)
                 {
                     if (weapon_slot.GetTarget() == nullptr)
                     {
@@ -257,7 +257,7 @@ void WeaponComplex::UpdateFireAbility()
     {
         if (slot_weapon_vec[i]->GetItem() != nullptr)
         {
-            if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
+            if (slot_weapon_vec[i]->GetItem()->isFunctioning() == true)
             {
                 int radius = slot_weapon_vec[i]->GetItemRadius();
                 if ( (radius < radius_min) or (radius_min == 0) )
@@ -277,7 +277,7 @@ void WeaponComplex::RenderTurrels() const
     {
         if (slot_weapon_vec[i]->GetItem() != nullptr)
         {
-            if (slot_weapon_vec[i]->GetItem()->GetFunctioning() == true)
+            if (slot_weapon_vec[i]->GetItem()->isFunctioning() == true)
             {
                 //slot_weapon_vec[i]->GetTurrel()->Render(owner_vehicle->GetAngle().z);    // angle
             }

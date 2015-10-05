@@ -62,36 +62,34 @@ class BaseItem : public ceti::Orientation, public Base
         BaseItem();
         virtual ~BaseItem();
         
-        virtual void putChildrenToGarbage() const {};
+        virtual void putChildrenToGarbage() const {}
         
-        void SetParentSubTypeId(TYPE::ENTITY parent_subtype_id) { this->parent_subtype_id = parent_subtype_id; };
-        void SetItemCommonData(const ItemCommonData& data_item) { this->data_item = data_item; deterioration = data_item.deterioration_normal; };
-        void SetItemSlot(ItemSlot* item_slot)  { this->item_slot = item_slot; };
-        void SetCondition(int condition) { this->condition = condition; };
+        void setParentSubTypeId(TYPE::ENTITY parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
+        void setItemCommonData(const ItemCommonData& data_item) { m_data_item = data_item; m_deterioration = data_item.deterioration_normal; }
+        void setItemSlot(ItemSlot* item_slot)  { m_item_slot = item_slot; }
+        void setCondition(int condition) { m_condition = condition; }
         
-        ItemSlot* GetItemSlot() const { return item_slot; };
+        ItemSlot* itemSlot() const { return m_item_slot; }
                                     
-        unsigned int mass()          const { return data_item.mass; };
-        unsigned int GetCondition()     const { return condition; };
-        int GetPrice()                  const { return price; };
-        TYPE::ENTITY GetParentSubTypeId() const { return parent_subtype_id; };
+        unsigned int mass()          const { return m_data_item.mass; }
+        unsigned int condition()     const { return m_condition; }
+        int price()                  const { return m_price; }
+        TYPE::ENTITY parentSubTypeId() const { return m_parent_subtype_id; }
         
-        bool GetDamaged()       const { return (condition < 0); };
-        bool GetLocked()    const { return (locked_turns > 0); };
-        int GetFunctioning()    const { return ( (condition > 0) and (locked_turns == 0) ); };
+        bool isDamaged()    const { return (m_condition < 0); }
+        bool isLocked()     const { return (m_locked_turns > 0); }
+        int isFunctioning() const { return ( !isDamaged() && !isLocked() ); }
         
-        void UseNormalDeterioration();
-        void UseOverloadDeterioration();
+        void useNormalDeterioration();
+        void useOverloadDeterioration();
         
-        void DamageEvent();
+        void damageEvent();
+        void deteriorationEvent();
+        void lockEvent(int);
+        bool repairEvent();
         
-        void DeteriorationEvent(); 
-        void LockEvent(int); 
-        
-        bool RepairEvent();
-        
-        virtual void UpdateProperties() {};
-        virtual void UpdateInStatic() { UpdateLock(); };
+        virtual void UpdateProperties() {}
+        virtual void UpdateInStatic() { updateLock(); }
         
 //        void UpdateInfo();
         
@@ -100,31 +98,30 @@ class BaseItem : public ceti::Orientation, public Base
 //        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
 
     protected:
-        TYPE::RACE race_id;
+        TYPE::RACE m_race_id = TYPE::RACE::NONE_ID;
         
-        int locked_turns;
-        int condition;
-        int price;
+        int m_locked_turns = 0;
+        int m_condition = 0;
+        int m_price = 0;
         
-        int deterioration;
+        int m_deterioration = 0;
         
-        TYPE::ENTITY parent_subtype_id;
+        TYPE::ENTITY m_parent_subtype_id = TYPE::ENTITY::NONE_ID;
         
-        ItemCommonData data_item;
-        
-        ItemSlot* item_slot;
-        
+        ItemCommonData m_data_item;
+        UnresolvedDataBaseItem m_data_unresolved_BaseItem;
 //        InfoTable info;
-        
-        UnresolvedDataBaseItem data_unresolved_BaseItem;
-        
-        void UpdateLock();
+
+        void updateLock();
         
         virtual void AddCommonInfo()=0;
         virtual void AddUniqueInfo()=0;   
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const; 
         void LoadData(const boost::property_tree::ptree&); 
-        void ResolveData();                   
+        void ResolveData();
+
+    private:
+        ItemSlot* m_item_slot = nullptr;
 };
 

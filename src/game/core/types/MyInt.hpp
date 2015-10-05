@@ -16,11 +16,10 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef MYINT_HPP
-#define MYINT_HPP
+#pragma once
 
 typedef long long int INTLONGEST;
 
 const INTLONGEST NONE_ID = 0;
 
-#endif
+

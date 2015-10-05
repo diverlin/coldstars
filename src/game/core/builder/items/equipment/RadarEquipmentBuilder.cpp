@@ -88,9 +88,9 @@ void RadarEquipmentBuilder::createInternals(RadarEquipment* radar_equipment, TYP
 
     radar_equipment->SetRadiusOrig(radius_orig);
     //alpitodorender radar_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
-    radar_equipment->SetParentSubTypeId(TYPE::ENTITY::RADAR_SLOT_ID);
-    radar_equipment->SetItemCommonData(common_data);
-    radar_equipment->SetCondition(common_data.condition_max);
+    radar_equipment->setParentSubTypeId(TYPE::ENTITY::RADAR_SLOT_ID);
+    radar_equipment->setItemCommonData(common_data);
+    radar_equipment->setCondition(common_data.condition_max);
 
     radar_equipment->UpdateProperties();
     radar_equipment->CountPrice();

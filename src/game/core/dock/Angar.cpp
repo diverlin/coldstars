@@ -88,10 +88,10 @@ void Angar::AddItemSlot(ItemSlot* item_slot)
 
 bool Angar::RepairItem(Npc* npc, BaseItem* item) const
 {
-    int price = item->GetPrice() * REPAIR_ITEM_PRICE_RATE;
+    int price = item->price() * REPAIR_ITEM_PRICE_RATE;
     if (npc->WithdrawCredits(price) == true)
     {
-        return item->RepairEvent();
+        return item->repairEvent();
     }
 
     return false;
@@ -99,7 +99,7 @@ bool Angar::RepairItem(Npc* npc, BaseItem* item) const
 
 bool Angar::ChargeRocketEquipment(Npc* npc, RocketEquipment* rocket_equipment) const
 {
-    int price_for_one = rocket_equipment->GetPrice() * AMMO_PRICE_RATE;
+    int price_for_one = rocket_equipment->price() * AMMO_PRICE_RATE;
     int ammo_max = npc->GetCredits() / price_for_one;
     int ammo_need = rocket_equipment->GetAmmoMax() - rocket_equipment->GetAmmo();
 

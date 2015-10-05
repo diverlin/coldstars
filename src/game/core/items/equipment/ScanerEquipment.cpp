@@ -23,12 +23,12 @@
 #include "../../items/modules/ScanerModule.hpp"
 
 ScanerEquipment::ScanerEquipment(int id)
-:
-scan_orig(0)
+    :
+      scan_orig(0)
 {
     setId(id);
-    setTypeId(TYPE::ENTITY::EQUIPMENT_ID); 
-    setSubTypeId(TYPE::ENTITY::SCANER_EQUIPMENT_ID); 
+    setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
+    setSubTypeId(TYPE::ENTITY::SCANER_EQUIPMENT_ID);
 }
 
 /* virtual */
@@ -38,43 +38,43 @@ ScanerEquipment::~ScanerEquipment()
 /* virtual */
 void ScanerEquipment::UpdateProperties()
 {
-        scan_add = 0;
-        
-        for (unsigned int i = 0; i < modules_vec.size(); i++)
-        {
-            scan_add += ((ScanerModule*)modules_vec[i])->GetScanAdd();          
-        }
-        
-         scan = scan_orig + scan_add;
+    scan_add = 0;
+
+    for (unsigned int i = 0; i < modules_vec.size(); i++)
+    {
+        scan_add += ((ScanerModule*)modules_vec[i])->GetScanAdd();
+    }
+
+    scan = scan_orig + scan_add;
 }
 
 void ScanerEquipment::CountPrice()
 {
-         float scan_rate          = (float)scan_orig / EQUIPMENT::SCANER::SCAN_MIN;
-         float modules_num_rate   = (float)data_item.modules_num_max / EQUIPMENT::SCANER::MODULES_NUM_MAX;
+    float scan_rate          = (float)scan_orig / EQUIPMENT::SCANER::SCAN_MIN;
+    float modules_num_rate   = (float)m_data_item.modules_num_max / EQUIPMENT::SCANER::MODULES_NUM_MAX;
 
-         float effectiveness_rate = EQUIPMENT::SCANER::SCAN_WEIGHT * scan_rate + 
-                        EQUIPMENT::SCANER::MODULES_NUM_WEIGHT * modules_num_rate;
+    float effectiveness_rate = EQUIPMENT::SCANER::SCAN_WEIGHT * scan_rate +
+            EQUIPMENT::SCANER::MODULES_NUM_WEIGHT * modules_num_rate;
 
-         float mass_rate          = (float)data_item.mass / EQUIPMENT::SCANER::MASS_MIN;
-         float condition_rate     = (float)condition / data_item.condition_max;
+    float mass_rate          = (float)m_data_item.mass / EQUIPMENT::SCANER::MASS_MIN;
+    float condition_rate     = (float)m_condition / m_data_item.condition_max;
 
-         price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 
 void ScanerEquipment::AddUniqueInfo()
 {
-//    info.addTitleStr("SCANER");
-//    info.addNameStr("scan:");     info.addValueStr(GetScanStr());
+    //    info.addTitleStr("SCANER");
+    //    info.addNameStr("scan:");     info.addValueStr(GetScanStr());
 }
 
 std::string ScanerEquipment::GetScanStr()
 {
-         if (scan_add == 0)
-             return std::to_string(scan_orig);
-         else
-             return std::to_string(scan_orig) + "+" + std::to_string(scan_add);
+    if (scan_add == 0)
+        return std::to_string(scan_orig);
+    else
+        return std::to_string(scan_orig) + "+" + std::to_string(scan_add);
 }
 
 
@@ -108,27 +108,27 @@ void ScanerEquipment::Resolve()
 
 void ScanerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ScanerEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
+#endif
     
     save_ptree.put(root+"scan_orig", scan_orig);
 }
-                
+
 void ScanerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ScanerEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
+#endif
     
-    scan_orig = load_ptree.get<int>("scan_orig"); 
+    scan_orig = load_ptree.get<int>("scan_orig");
 }                
 
 void ScanerEquipment::ResolveData()
 {
-    #if SAVELOAD_LOG_ENABLED == 1
+#if SAVELOAD_LOG_ENABLED == 1
     Logger::Instance().Log(" ScanerEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
-    #endif
+#endif
 }
 
 

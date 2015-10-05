@@ -92,9 +92,9 @@ void ScanerEquipmentBuilder::createInternals(ScanerEquipment* scaner_equipment, 
     
     scaner_equipment->SetScanOrig(scan_orig);  
     //alpitodorender scaner_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
-    scaner_equipment->SetParentSubTypeId(TYPE::ENTITY::SCANER_SLOT_ID);
-    scaner_equipment->SetItemCommonData(common_data);
-    scaner_equipment->SetCondition(common_data.condition_max);
+    scaner_equipment->setParentSubTypeId(TYPE::ENTITY::SCANER_SLOT_ID);
+    scaner_equipment->setItemCommonData(common_data);
+    scaner_equipment->setCondition(common_data.condition_max);
                
     scaner_equipment->UpdateProperties();
     scaner_equipment->CountPrice();

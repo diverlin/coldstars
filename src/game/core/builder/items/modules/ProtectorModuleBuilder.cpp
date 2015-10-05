@@ -70,7 +70,7 @@ void ProtectorModuleBuilder::createInternals(ProtectorModule* protector_module, 
     //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MODULE_ID);
     protection_add = meti::getRandInt(MODULE::PROTECTOR::PROTECTION_MIN, MODULE::PROTECTOR::PROTECTION_MAX);
     
-    protector_module->SetParentSubTypeId(TYPE::ENTITY::PROTECTOR_EQUIPMENT_ID);
+    protector_module->setParentSubTypeId(TYPE::ENTITY::PROTECTOR_EQUIPMENT_ID);
     //alpitodorender protector_module->SetRenderData(mesh, texOb, texOb->size());
     protector_module->SetProtectionAdd(protection_add);
 }

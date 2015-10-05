@@ -22,15 +22,12 @@
 #include <ceti/Logger.hpp>
 
 Bomb::Bomb(int id)
-:
-damage(0),
-radius(0)
 { 
     setId(id);
     setTypeId(TYPE::ENTITY::BOMB_ID);
 }
 
- /* virtual */
+/* virtual */
 Bomb::~Bomb() 
 {}
 
@@ -86,8 +83,8 @@ void Bomb::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
     Logger::Instance().Log(" Bomb::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-    save_ptree.put(root+"damage", damage);
-    save_ptree.put(root+"radius", radius);
+    save_ptree.put(root+"damage", m_damage);
+    save_ptree.put(root+"radius", m_radius);
 }
          
 void Bomb::LoadData(const boost::property_tree::ptree& load_ptree)
@@ -96,8 +93,8 @@ void Bomb::LoadData(const boost::property_tree::ptree& load_ptree)
     Logger::Instance().Log(" Bomb::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     #endif
     
-    damage = load_ptree.get<int>("damage");
-    radius = load_ptree.get<int>("radius");
+    m_damage = load_ptree.get<int>("damage");
+    m_radius = load_ptree.get<int>("radius");
 }
 
 void Bomb::ResolveData()
