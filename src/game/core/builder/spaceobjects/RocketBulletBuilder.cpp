@@ -29,10 +29,6 @@ RocketBulletBuilder::~RocketBulletBuilder()
 
 RocketBullet* RocketBulletBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     RocketBullet* rocket_bullet = new RocketBullet(id);
     assert(rocket_bullet);
 

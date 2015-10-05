@@ -40,10 +40,6 @@ ProtectorEquipmentBuilder::~ProtectorEquipmentBuilder()
 
 ProtectorEquipment* ProtectorEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     ProtectorEquipment* protector_equipment = new ProtectorEquipment(id);
     assert(protector_equipment);
 

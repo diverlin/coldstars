@@ -41,10 +41,6 @@ DroidEquipmentBuilder::~DroidEquipmentBuilder()
 
 DroidEquipment* DroidEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     DroidEquipment* droid_equipment = new DroidEquipment(id);
     assert(droid_equipment);
 

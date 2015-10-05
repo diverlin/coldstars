@@ -34,11 +34,7 @@ SpaceStationBuilder::SpaceStationBuilder()
 SpaceStationBuilder::~SpaceStationBuilder() {}
 
 SpaceStation* SpaceStationBuilder::createTemplate(INTLONGEST id) const
-{
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-            
+{           
     SpaceStation* spacestation = new SpaceStation(id);
     assert(spacestation);
 

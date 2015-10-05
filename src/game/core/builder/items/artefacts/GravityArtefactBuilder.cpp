@@ -43,10 +43,6 @@ GravityArtefactBuilder::~GravityArtefactBuilder()
 
 GravityArtefact* GravityArtefactBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     GravityArtefact* gravity_artefact = new GravityArtefact(id);
     assert(gravity_artefact);
 

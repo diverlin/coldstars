@@ -34,10 +34,6 @@ StarBuilder::~StarBuilder()
 
 Star* StarBuilder::createTemplate(INTLONGEST id) const
 { 
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     Star* star = new Star(id);
     assert(star);
 

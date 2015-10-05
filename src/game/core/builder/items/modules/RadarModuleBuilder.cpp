@@ -40,10 +40,6 @@ RadarModuleBuilder::~RadarModuleBuilder()
 
 RadarModule* RadarModuleBuilder::createTemplate(INTLONGEST id) const
 {  
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     RadarModule* radar_module = new RadarModule(id);
     assert(radar_module);
 

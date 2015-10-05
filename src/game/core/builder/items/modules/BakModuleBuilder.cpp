@@ -41,10 +41,6 @@ BakModuleBuilder::~BakModuleBuilder()
 
 BakModule* BakModuleBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     BakModule* bak_module = new BakModule(id);
     assert(bak_module);
 

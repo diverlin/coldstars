@@ -40,10 +40,6 @@ RadarEquipmentBuilder::~RadarEquipmentBuilder()
 
 RadarEquipment* RadarEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     RadarEquipment* radar_equipment = new RadarEquipment(id);
     assert(radar_equipment);
 

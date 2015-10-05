@@ -31,10 +31,6 @@ SatelliteBuilder::~SatelliteBuilder()
 
 Satellite* SatelliteBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     Satellite* satellite = new Satellite(id);
     assert(satellite);
 

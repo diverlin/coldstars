@@ -42,10 +42,6 @@ ProtectorArtefactBuilder::~ProtectorArtefactBuilder()
 
 ProtectorArtefact* ProtectorArtefactBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     ProtectorArtefact* protector_artefact = new ProtectorArtefact(id);
     assert(protector_artefact);
 

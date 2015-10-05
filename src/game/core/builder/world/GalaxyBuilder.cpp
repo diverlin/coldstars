@@ -37,10 +37,6 @@ GalaxyBuilder::~GalaxyBuilder()
 
 Galaxy* GalaxyBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     Galaxy* galaxy = new Galaxy(id);
     assert(galaxy);
 

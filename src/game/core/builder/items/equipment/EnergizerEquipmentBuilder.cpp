@@ -44,10 +44,6 @@ EnergizerEquipmentBuilder::~EnergizerEquipmentBuilder()
 
 EnergizerEquipment* EnergizerEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     EnergizerEquipment* energizer_equipment = new EnergizerEquipment(id);
     assert(energizer_equipment);
 

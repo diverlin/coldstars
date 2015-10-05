@@ -35,10 +35,6 @@ AsteroidBuilder::~AsteroidBuilder()
 
 Asteroid* AsteroidBuilder::createTemplate(INTLONGEST id) const
 { 
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     Asteroid* asteroid = new Asteroid(id);
     assert(asteroid);
 

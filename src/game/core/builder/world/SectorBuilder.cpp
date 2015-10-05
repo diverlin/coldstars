@@ -34,11 +34,7 @@ SectorBuilder::~SectorBuilder()
 {}
 
 Sector* SectorBuilder::createTemplate(INTLONGEST id) const
-{
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-    
+{   
     Sector* sector = new Sector(id);
     assert(sector);
 

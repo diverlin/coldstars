@@ -44,10 +44,6 @@ ScanerEquipmentBuilder::~ScanerEquipmentBuilder()
 
 ScanerEquipment* ScanerEquipmentBuilder::createTemplate(INTLONGEST id) const
 {
-    if (id == NONE_ID) {
-        id = EntityIdGenerator::Instance().GetNextId();
-    }
-
     ScanerEquipment* scaner_equipment = new ScanerEquipment(id);
     assert(scaner_equipment);
 

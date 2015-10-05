@@ -29,7 +29,7 @@ class Base : private NonCopyable
         Base();
         virtual ~Base();
 
-        virtual void putChildrenToGarbage() const {};
+        virtual void putChildrenToGarbage() const {}
         void setSubSubTypeId(TYPE::ENTITY subsubtype_id) { m_data_id.subsubtype_id = subsubtype_id; }
         
         void setMeshId(int mesh_id) { m_mesh_id = mesh_id; }
@@ -60,4 +60,6 @@ class Base : private NonCopyable
         int m_texture_id;
 
         IdData m_data_id;
+
+        friend class EntitiesManager;
 };
