@@ -81,7 +81,7 @@ void Container::bindItemSlot(ItemSlot* item_slot)
 //    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     
 //    pos.x += 300;
-//    m_ItemSlot->GetItem()->RenderInfo(render, pos);
+//    m_ItemSlot->item()->RenderInfo(render, pos);
 //}
  
 /* virtual override final */   

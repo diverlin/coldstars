@@ -607,7 +607,7 @@
 //                //npc->GetVehicle()->RenderRadarRange();
 //            }
         
-//            if ( (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
+//            if ( (npc->GetVehicle()->GetSlotGrapple()->item() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
 //            {
 //                //npc->GetVehicle()->RenderGrappleRange();
 //            }
@@ -730,7 +730,7 @@
             
 //            if (data_mouse.right_click == true)
 //            {
-//                if ( (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
+//                if ( (npc->GetVehicle()->GetSlotGrapple()->item() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
 //                {
 //                //if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
 //                //{
@@ -811,7 +811,7 @@
 
 //                if (data_mouse.right_click == true)
 //                {
-//                    if ( (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
+//                    if ( (npc->GetVehicle()->GetSlotGrapple()->item() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
 //                    {
 //                        //if (npc->GetVehicle()->ableTo.GRAB == true)
 //                           //{
@@ -887,7 +887,7 @@
 
 //            if (data_mouse.right_click == true)
 //            {
-//                if ( (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
+//                if ( (npc->GetVehicle()->GetSlotGrapple()->item() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
 //                {
 //                    //if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
 //                    //{

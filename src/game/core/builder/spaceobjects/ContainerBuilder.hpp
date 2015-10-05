@@ -38,8 +38,10 @@ class ContainerBuilder
 
         Container* createTemplate(INTLONGEST id = NONE_ID) const;
         Container* create(jeti::TextureOb*, BaseItem*) const;
+        Container* create(BaseItem*) const;
         Container* create(int) const;
                                                      
     private:
         void createInternals(Container*, jeti::TextureOb*, BaseItem*) const;
+        void createInternals(Container*, BaseItem*) const;
 }; 

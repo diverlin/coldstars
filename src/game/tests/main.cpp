@@ -20,6 +20,8 @@
 #include <world/starsystem.hpp>
 #include <items/others/Bomb.hpp>
 #include <slots/ItemSlot.hpp>
+#include <spaceobjects/Container.hpp>
+
 
 #include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/world/GalaxyBuilder.hpp>
@@ -37,14 +39,13 @@ int test_bomb()
     auto starsystemBuilder = new StarSystemBuilder;
     auto shipBuilder = new ShipBuilder;
     auto bombBuilder = new BombBuilder;
-    auto containerBuilder = new BombBuilder;
+    auto containerBuilder = new ContainerBuilder;
 
     // create entities
     auto starsystem = starsystemBuilder->create(StarSystemDescriptor());
     auto ship = shipBuilder->create(/*ShipDescriptor()*/);
     auto bomb = bombBuilder->create(/*BombDescriptor()*/);
-    auto container = containerBuilder->create(/*ContainerDescriptor()*/);
-    container->itemSlot()->insertItem(bomb);
+    auto container = containerBuilder->create(bomb);
 
     // inject entities
     starsystem->add(ship, glm::vec3(0.0f), glm::vec3(0.0f));
