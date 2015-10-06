@@ -60,7 +60,7 @@ Planet::~Planet()
 /* virtual override final */
 void Planet::putChildrenToGarbage() const
 {
-    global::get().entitiesManager().addToGarbage(m_Land);
+    global::get().entityManager().addToGarbage(m_Land);
 }
 
 void Planet::BindLand(Land* land)
@@ -139,7 +139,7 @@ void Planet::ResolveData()
 {
     Logger::Instance().Log(" Planet("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     
-    ((StarSystem*)global::get().entitiesManager().entity(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it); 
+    ((StarSystem*)global::get().entityManager().entity(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it); 
 }
 
 /* virtual override final */

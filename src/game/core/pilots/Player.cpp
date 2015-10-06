@@ -1110,8 +1110,8 @@
 
 //void Player::ResolveData()
 //{
-//    BindNpc((Npc*)global::get().entitiesManager().GetEntityById(data_unresolved_player.npc_id));
-//    starsystem = (StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_player.starsystem_id);
+//    BindNpc((Npc*)global::get().entityManager().GetEntityById(data_unresolved_player.npc_id));
+//    starsystem = (StarSystem*)global::get().entityManager().GetEntityById(data_unresolved_player.starsystem_id);
 //    //jeti::Screen::Instance().SetBottomLeft(data_unresolved_player.screen_pos);
 //}
 

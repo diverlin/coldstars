@@ -97,11 +97,11 @@ Vehicle::~Vehicle()
 void Vehicle::putChildrenToGarbage() const
 {
     m_OwnerNpc->SetAlive(false);
-    global::get().entitiesManager().addToGarbage(m_OwnerNpc);
+    global::get().entityManager().addToGarbage(m_OwnerNpc);
     
     for(unsigned int i=0; i<m_SlotTotal_vec.size(); i++)
     {
-        global::get().entitiesManager().addToGarbage(m_SlotTotal_vec[i]);
+        global::get().entityManager().addToGarbage(m_SlotTotal_vec[i]);
     }
 }
 
@@ -1422,12 +1422,12 @@ void Vehicle::ResolveData()
 
     if (data_unresolved_Vehicle.drive_complex_target_id != NONE_ID)
     {
-        m_ComplexDrive.SetTarget((SpaceObject*)global::get().entitiesManager().entity(data_unresolved_Vehicle.drive_complex_target_id),  data_unresolved_Vehicle.drive_complex_action_id);
+        m_ComplexDrive.SetTarget((SpaceObject*)global::get().entityManager().entity(data_unresolved_Vehicle.drive_complex_target_id),  data_unresolved_Vehicle.drive_complex_action_id);
     }
 
     if (data_unresolved_Vehicle.land_id != NONE_ID)
     {
-        SetLand( (Land*)global::get().entitiesManager().entity(data_unresolved_Vehicle.land_id) );
+        SetLand( (Land*)global::get().entityManager().entity(data_unresolved_Vehicle.land_id) );
     }
 
     switch(placeTypeId())
@@ -1440,14 +1440,14 @@ void Vehicle::ResolveData()
 
         case TYPE::PLACE::KOSMOPORT_ID:
         {
-            ((VehicleSlot*)global::get().entitiesManager().entity(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this);
+            ((VehicleSlot*)global::get().entityManager().entity(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this);
             break;
         }
 
         case TYPE::PLACE::HYPER_SPACE_ID:
         {
             //std::cout<<"xxx="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
-            ((StarSystem*)global::get().entitiesManager().entity(data_unresolved_Vehicle.starsystem_hyper_id))->hyperSpace().AddVehicle(this);
+            ((StarSystem*)global::get().entityManager().entity(data_unresolved_Vehicle.starsystem_hyper_id))->hyperSpace().AddVehicle(this);
             //std::cout<<"yyy="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
             
             break;
@@ -1455,7 +1455,7 @@ void Vehicle::ResolveData()
 
         case TYPE::PLACE::NATURELAND_ID:
         {
-            ((NatureLand*)global::get().entitiesManager().entity(data_unresolved_Vehicle.land_id))->AddVehicle(this);
+            ((NatureLand*)global::get().entityManager().entity(data_unresolved_Vehicle.land_id))->AddVehicle(this);
             break;
         }
     }

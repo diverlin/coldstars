@@ -35,7 +35,7 @@ Shop* ShopBuilder::createTemplate(ID id) const
     Shop* shop = new Shop(id);
     assert(shop);
 
-    global::get().entitiesManager().reg(shop);
+    global::get().entityManager().reg(shop);
 
     return shop;
 } 

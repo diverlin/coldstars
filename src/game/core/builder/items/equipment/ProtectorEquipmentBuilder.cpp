@@ -43,7 +43,7 @@ ProtectorEquipment* ProtectorEquipmentBuilder::createTemplate(ID id) const
     ProtectorEquipment* protector_equipment = new ProtectorEquipment(id);
     assert(protector_equipment);
 
-    global::get().entitiesManager().reg(protector_equipment);
+    global::get().entityManager().reg(protector_equipment);
     
     return protector_equipment;
 } 

@@ -42,7 +42,7 @@ GrappleEquipment* GrappleEquipmentBuilder::createTemplate(ID id) const
     GrappleEquipment* grapple_equipment = new GrappleEquipment(id);
     assert(grapple_equipment);
 
-    global::get().entitiesManager().reg(grapple_equipment);
+    global::get().entityManager().reg(grapple_equipment);
     
     return grapple_equipment;
 } 

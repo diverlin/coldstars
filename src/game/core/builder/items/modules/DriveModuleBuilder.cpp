@@ -43,7 +43,7 @@ DriveModule* DriveModuleBuilder::createTemplate(ID id) const
     DriveModule* drive_module = new DriveModule(id);
     assert(drive_module);
 
-    global::get().entitiesManager().reg(drive_module);
+    global::get().entityManager().reg(drive_module);
 
     return drive_module;
 } 

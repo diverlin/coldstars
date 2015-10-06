@@ -38,7 +38,7 @@ Ship* ShipBuilder::createTemplate(ID id) const
     Ship* ship = new Ship(id);
     assert(ship);
 
-    global::get().entitiesManager().reg(ship);
+    global::get().entityManager().reg(ship);
     
     return ship;
 }

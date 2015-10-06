@@ -44,7 +44,7 @@ NatureLand* NatureLandBuilder::createTemplate(ID id) const
     NatureLand* natureland = new NatureLand(id);
     assert(natureland);
 
-    global::get().entitiesManager().reg(natureland);
+    global::get().entityManager().reg(natureland);
     
     return natureland;
 } 

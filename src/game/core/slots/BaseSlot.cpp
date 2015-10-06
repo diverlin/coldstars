@@ -64,7 +64,7 @@ void BaseSlot::ResolveData()
     Logger::Instance().Log(" BaseSlot("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     
     if (unresolved_BaseSlot.owner_id != NONE_ID) {
-        owner = global::get().entitiesManager().entity(unresolved_BaseSlot.owner_id);
+        owner = global::get().entityManager().entity(unresolved_BaseSlot.owner_id);
     }
 }
 

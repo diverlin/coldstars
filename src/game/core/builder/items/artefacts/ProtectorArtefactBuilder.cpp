@@ -45,7 +45,7 @@ ProtectorArtefact* ProtectorArtefactBuilder::createTemplate(ID id) const
     ProtectorArtefact* protector_artefact = new ProtectorArtefact(id);
     assert(protector_artefact);
 
-    global::get().entitiesManager().reg(protector_artefact);
+    global::get().entityManager().reg(protector_artefact);
     
     return protector_artefact;
 } 

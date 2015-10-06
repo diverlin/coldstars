@@ -49,10 +49,10 @@ Kosmoport::~Kosmoport()
 /* virtual */
 void Kosmoport::putChildrenToGarbage() const
 {
-    global::get().entitiesManager().addToGarbage(angar);
-    global::get().entitiesManager().addToGarbage(store);
-    global::get().entitiesManager().addToGarbage(shop);
-    global::get().entitiesManager().addToGarbage(goverment);
+    global::get().entityManager().addToGarbage(angar);
+    global::get().entityManager().addToGarbage(store);
+    global::get().entityManager().addToGarbage(shop);
+    global::get().entityManager().addToGarbage(goverment);
 }
        
 void Kosmoport::BindAngar(Angar* angar)

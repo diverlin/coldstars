@@ -86,7 +86,7 @@ global& global::get()
 global::global()
     :
       m_god(new God)
-    , m_entitiesManager(new EntityManager)
+    , m_entityManager(new EntityManager)
     , m_config(new Config)
     , m_turnTimer(new TurnTimer)
     , m_gameDate(new GameDate)
@@ -146,7 +146,7 @@ global::global()
 global::~global()
 {
     delete m_god;
-    delete m_entitiesManager;
+    delete m_entityManager;
     delete m_config;
     delete m_turnTimer;
     delete m_gameDate;

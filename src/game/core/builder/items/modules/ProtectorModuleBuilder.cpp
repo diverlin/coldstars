@@ -44,7 +44,7 @@ ProtectorModule* ProtectorModuleBuilder::createTemplate(ID id) const
     ProtectorModule* protector_module = new ProtectorModule(id);
     assert(protector_module);
 
-    global::get().entitiesManager().reg(protector_module);
+    global::get().entityManager().reg(protector_module);
     
     return protector_module;
 } 

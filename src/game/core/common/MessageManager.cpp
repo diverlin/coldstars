@@ -23,8 +23,8 @@ MessageManager& MessageManager::get()
 //                                int    type_id,
 //                                void*  extra)
 //{
-//    Base* sender   = global::get().entitiesManager().entity(sender_id);
-//    Base* receiver = global::get().entitiesManager().entity(receiver_id);
+//    Base* sender   = global::get().entityManager().entity(sender_id);
+//    Base* receiver = global::get().entityManager().entity(receiver_id);
 //    if (!receiver) {
 //        return;
 //    }
@@ -55,7 +55,7 @@ void MessageManager::updateQueue()
     {
         const Message& message = *m_messages_queue.begin();
 
-        Base* receiver = global::get().entitiesManager().entity(message.receiver_id);
+        Base* receiver = global::get().entityManager().entity(message.receiver_id);
         //SendEvent(receiver, message);
 
         m_messages_queue.erase(m_messages_queue.begin());

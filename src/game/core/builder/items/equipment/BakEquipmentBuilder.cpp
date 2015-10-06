@@ -44,7 +44,7 @@ BakEquipment* BakEquipmentBuilder::createTemplate(ID id) const
     BakEquipment* bak_equipment = new BakEquipment(id);
     assert(bak_equipment);
 
-    global::get().entitiesManager().reg(bak_equipment);
+    global::get().entityManager().reg(bak_equipment);
     
     return bak_equipment;
 } 

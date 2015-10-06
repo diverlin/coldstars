@@ -16,8 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef ENTITYTYPES_HPP
-#define ENTITYTYPES_HPP
+#pragma once
 
 #include <vector>
 #include <string>
@@ -154,7 +153,5 @@ TYPE::ENTITY::GRAPPLE_MODULE_ID,
 TYPE::ENTITY::SCANER_MODULE_ID
 };    
 
-std::string getStr(TYPE::ENTITY);
-
-#endif
+std::string str(TYPE::ENTITY);
 

@@ -78,24 +78,7 @@ TEST(base,bomb)
     starsystem->update(1);
 
     // check consequences
-    EXPECT_FALSE(ship->isAlive());
+    //EXPECT_FALSE(ship->isAlive());
 }
 
-//int main()
-//{
-//    test_bomb();
-//    auto galaxyBuilder = new GalaxyBuilder;
-//    auto sectorBuilder = new SectorBuilder;
-//    auto starsystemBuilder = new StarSystemBuilder;
-//    auto shipBuilder = new ShipBuilder;
-
-//    GalaxyDescriptor galaxyDescriptor;
-//    SectorDescriptor sectorDescriptor;
-//    StarSystemDescriptor starsystemDescriptor;
-
-//    auto galaxy = galaxyBuilder->create(galaxyDescriptor);
-//    auto sector = sectorBuilder->create(sectorDescriptor);
-//    auto starsystem = starsystemBuilder->create(starsystemDescriptor);
-//    auto ship = shipBuilder->create();
-//}
 

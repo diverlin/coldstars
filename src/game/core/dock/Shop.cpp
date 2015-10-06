@@ -111,7 +111,7 @@ int Shop::BuyGoods(GoodsPack* goods_pack)
     if (price > 0)
     {
         goods_pack->itemSlot()->removeItem(); 
-        global::get().entitiesManager().addToGarbage(goods_pack);
+        global::get().entityManager().addToGarbage(goods_pack);
     }
     
     return price;
@@ -249,7 +249,7 @@ void Shop::LoadData(const boost::property_tree::ptree& load_ptree)
 void Shop::ResolveData()
 {
     UpdateAllPrices();
-    ((Kosmoport*)global::get().entitiesManager().entity(data_unresolved_Room.owner_kosmoport_id))->BindShop(this); 
+    ((Kosmoport*)global::get().entityManager().entity(data_unresolved_Room.owner_kosmoport_id))->BindShop(this); 
 }
 
 void Shop::Save(boost::property_tree::ptree& save_ptree) const

@@ -43,7 +43,7 @@ RadarModule* RadarModuleBuilder::createTemplate(ID id) const
     RadarModule* radar_module = new RadarModule(id);
     assert(radar_module);
 
-    global::get().entitiesManager().reg(radar_module);
+    global::get().entityManager().reg(radar_module);
     
     return radar_module;
 } 

@@ -54,7 +54,7 @@ Store* StoreBuilder::createTemplate(ID id) const
     Store* store = new Store(id);
     assert(store);
 
-    global::get().entitiesManager().reg(store);
+    global::get().entityManager().reg(store);
     
     return store;
 } 

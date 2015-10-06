@@ -47,7 +47,7 @@ EnergizerEquipment* EnergizerEquipmentBuilder::createTemplate(ID id) const
     EnergizerEquipment* energizer_equipment = new EnergizerEquipment(id);
     assert(energizer_equipment);
 
-    global::get().entitiesManager().reg(energizer_equipment);
+    global::get().entityManager().reg(energizer_equipment);
     
     return energizer_equipment;
 } 
