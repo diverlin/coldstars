@@ -26,7 +26,7 @@
 
 #include <common/Global.hpp>
 #include <world/starsystem.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 //#include <jeti/TextureOb.hpp>
 

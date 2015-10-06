@@ -27,7 +27,7 @@
 #include "../slots/VehicleSlot.hpp"
 #include "../pilots/Npc.hpp"
 
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 Store::Store(int id)
 {

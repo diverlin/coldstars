@@ -42,7 +42,7 @@
 #include <meti/RandUtils.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 ItemSlot::ItemSlot(const ID& id, TYPE::ENTITY subtype_id)
     :

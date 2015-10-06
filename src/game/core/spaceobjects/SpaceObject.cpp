@@ -20,7 +20,7 @@
 #include <math/rand.hpp>
 #include <common/Global.hpp>
 #include <world/starsystem.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 #include <ceti/Logger.hpp>
 
 SpaceObject::SpaceObject():

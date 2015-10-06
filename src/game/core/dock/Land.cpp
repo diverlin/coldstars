@@ -19,7 +19,7 @@
 #include "Land.hpp"
 
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 #include "../common/constants.hpp"
 #include "../spaceobjects/Planet.hpp"

@@ -20,7 +20,7 @@
 #pragma once
 
 class God;
-class EntitiesManager;
+class EntityManager;
 class Config;
 class TurnTimer;
 class GameDate;
@@ -87,7 +87,7 @@ class global
         static global& get();
 
         God& god() { return *m_god; }
-        EntitiesManager& entitiesManager() { return *m_entitiesManager; }
+        EntityManager& entitiesManager() { return *m_entitiesManager; }
         Config& config() { return *m_config; }
         TurnTimer& turnTimer() { return *m_turnTimer; }
         GameDate& gameDate() { return *m_gameDate; }
@@ -154,7 +154,7 @@ class global
         global& operator=(const global&) = delete;
 
         God* m_god = nullptr;
-        EntitiesManager* m_entitiesManager = nullptr;
+        EntityManager* m_entitiesManager = nullptr;
         Config* m_config = nullptr;
         TurnTimer* m_turnTimer = nullptr;
         GameDate* m_gameDate = nullptr;

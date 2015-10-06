@@ -23,7 +23,7 @@
 //#include <ceti/StringUtils.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 #include <slots/ItemSlot.hpp>
 

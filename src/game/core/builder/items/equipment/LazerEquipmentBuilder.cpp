@@ -19,7 +19,7 @@
 
 #include <builder/items/equipment/LazerEquipmentBuilder.hpp>
 #include <items/equipment/LazerEquipment.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <ceti/Logger.hpp>

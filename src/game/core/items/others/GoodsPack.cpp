@@ -23,7 +23,7 @@
 
 #include "../../common/IdGenerator.hpp"
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>

@@ -19,7 +19,7 @@
 #include "Sector.hpp"
 #include "starsystem.hpp"
 #include "galaxy.hpp"
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 #include "../common/constants.hpp"
 #include "../common/Global.hpp"
 #include <meti/RandUtils.hpp>

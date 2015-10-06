@@ -25,7 +25,7 @@
 #include <common/GameDate.hpp>
 #include <ceti/Logger.hpp>
 
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 #include <ai/God.hpp>
 #include <world/galaxy.hpp>
 #include <descriptors/GalaxyDescriptor.hpp>
