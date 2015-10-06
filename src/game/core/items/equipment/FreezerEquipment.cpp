@@ -106,20 +106,20 @@ void FreezerEquipment::Resolve()
 
 void FreezerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" FreezerEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" FreezerEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"freeze_orig", freeze_orig);
 }
                 
 void FreezerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" FreezerEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" FreezerEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
     freeze_orig = load_ptree.get<int>("freeze_orig");     
 }                
 
 void FreezerEquipment::ResolveData()
 {
-    Logger::Instance().Log(" FreezerEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" FreezerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 

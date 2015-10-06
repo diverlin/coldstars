@@ -78,7 +78,7 @@ void GameDate::dayPass()
             m_year++;
         }
     }
-    Logger::Instance().Log("*** dayPass:"+str());
+    LOG("*** dayPass:"+str());
 }
 
 std::string GameDate::str() const { return std::to_string(m_day) + "/" + std::to_string(m_month) + "/" + std::to_string(m_year); };

@@ -47,7 +47,7 @@ m_Land(nullptr)
 /* virtual */
 SpaceStation::~SpaceStation() 
 {
-    Logger::Instance().Log("___::~SpaceStation("+std::to_string(id())+")");
+    LOG("___::~SpaceStation("+std::to_string(id())+")");
 }    
  
 /* virtual override final */
@@ -123,17 +123,17 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 
 void SpaceStation::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" SpaceStation("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
+    LOG(" SpaceStation("+std::to_string(id())+")::SaveData");
 }
 
 void SpaceStation::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" SpaceStation("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
+    LOG(" SpaceStation("+std::to_string(id())+")::LoadData");
 }
 
 void SpaceStation::ResolveData()
 {
-    Logger::Instance().Log(" SpaceStation("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
+    LOG(" SpaceStation("+std::to_string(id())+")::ResolveData");
 }
 
 

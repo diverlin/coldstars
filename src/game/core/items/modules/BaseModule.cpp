@@ -41,7 +41,7 @@ void BaseModule::AddCommonInfo()
 
 void BaseModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" BaseModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" BaseModule::SaveData()  id=" + std::to_string(id()) + " START");
     
     if (equipment_owner)     { save_ptree.put(root+"unresolved.equipment_owner_id", equipment_owner->id()); }
     else                   { save_ptree.put(root+"unresolved.equipment_owner_id", NONE_ID); }
@@ -49,14 +49,14 @@ void BaseModule::SaveData(boost::property_tree::ptree& save_ptree, const std::st
 
 void BaseModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" BaseModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" BaseModule::LoadData()  id=" + std::to_string(id()) + " START");
 
     data_unresolved_BaseModule.equipment_owner_id = load_ptree.get<int>("unresolved.equipment_owner_id");
 }
 
 void BaseModule::ResolveData()
 {
-    Logger::Instance().Log(" BaseModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" BaseModule::ResolveData()  id=" + std::to_string(id()) + " START");
     
     if(data_unresolved_BaseModule.equipment_owner_id != NONE_ID) {
         ((BaseEquipment*)global::get().entityManager().entity(data_unresolved_BaseModule.equipment_owner_id))->InsertModule(this);

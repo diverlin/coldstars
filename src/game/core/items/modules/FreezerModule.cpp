@@ -72,21 +72,21 @@ void FreezerModule::Resolve()
 
 void FreezerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" FreezerModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" FreezerModule::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"freeze_add", freeze_add);
 }
 
 void FreezerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" FreezerModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" FreezerModule::LoadData()  id=" + std::to_string(id()) + " START");
     
     freeze_add = load_ptree.get<int>("freeze_add");
 }
 
 void FreezerModule::ResolveData()
 {
-    Logger::Instance().Log(" FreezerModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" FreezerModule::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 

@@ -37,7 +37,7 @@ BaseEquipment::BaseEquipment()
 /*virtual */
 BaseEquipment::~BaseEquipment()
 {
-    Logger::Instance().Log("___::~BaseEquipment("+std::to_string(id())+")");
+    LOG("___::~BaseEquipment("+std::to_string(id())+")");
         
     //delete animation_notfunctioning;
 }
@@ -127,15 +127,15 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 
 void BaseEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" BaseEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" BaseEquipment::SaveData()  id=" + std::to_string(id()) + " START");
 }
 
 void BaseEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" BaseEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" BaseEquipment::LoadData()  id=" + std::to_string(id()) + " START");
 }
 
 void BaseEquipment::ResolveData()
 {
-    Logger::Instance().Log(" BaseEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" BaseEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }

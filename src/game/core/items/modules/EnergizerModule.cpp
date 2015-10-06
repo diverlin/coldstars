@@ -81,7 +81,7 @@ void EnergizerModule::Resolve()
 
 void EnergizerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" EnergizerModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" EnergizerModule::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"energy_max_add", energy_max_add);
     save_ptree.put(root+"restoration_add", restoration_add);
@@ -89,7 +89,7 @@ void EnergizerModule::SaveData(boost::property_tree::ptree& save_ptree, const st
 
 void EnergizerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" EnergizerModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" EnergizerModule::LoadData()  id=" + std::to_string(id()) + " START");
     
     energy_max_add = load_ptree.get<int>("energy_max_add");
     restoration_add = load_ptree.get<int>("restoration_add");
@@ -97,7 +97,7 @@ void EnergizerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void EnergizerModule::ResolveData()
 {
-    Logger::Instance().Log(" EnergizerModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" EnergizerModule::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 

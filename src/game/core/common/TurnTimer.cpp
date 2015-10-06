@@ -28,12 +28,12 @@ TurnTimer::~TurnTimer()
 void TurnTimer::nextTurn()
 {
 //    if (global::get().config().GetAutoSaveMode() == true) {
-//        Logger::Instance().Log("*** AUTO (SaveRequest)");
+//        LOG("*** AUTO (SaveRequest)");
 //        global::get().entityManager().SaveRequest();
 //    }
 
 //    if (global::get().config().GetAutoLoadMode() == true) {
-//        Logger::Instance().Log("*** AUTO (LoadRequest)");
+//        LOG("*** AUTO (LoadRequest)");
 //        global::get().entityManager().LoadRequest();
 //    }
                 
@@ -48,7 +48,7 @@ void TurnTimer::update(bool auto_turn)
 
     /////////// AUTO-TURN /////////////
     if ( (m_stopTurnTimer < -50) && (auto_turn == true) ) {
-        Logger::Instance().Log("*** AUTO_TURN_MODE proceed END TURN");
+        LOG("*** AUTO_TURN_MODE proceed END TURN");
         nextTurn();
     }
         

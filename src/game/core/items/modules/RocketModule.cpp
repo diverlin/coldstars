@@ -85,7 +85,7 @@ void RocketModule::Resolve()
 
 void RocketModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" RocketModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" RocketModule::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"ammo_max_add", ammo_max_add);
     save_ptree.put(root+"damage_add", damage_add);
@@ -94,7 +94,7 @@ void RocketModule::SaveData(boost::property_tree::ptree& save_ptree, const std::
 
 void RocketModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" RocketModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" RocketModule::LoadData()  id=" + std::to_string(id()) + " START");
     
     ammo_max_add = load_ptree.get<int>("ammo_max_add");
     damage_add = load_ptree.get<int>("damage_add");
@@ -103,6 +103,6 @@ void RocketModule::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void RocketModule::ResolveData()
 {
-    Logger::Instance().Log(" RocketModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" RocketModule::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 

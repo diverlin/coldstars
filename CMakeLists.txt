@@ -6,6 +6,11 @@ set(PROJECT coldstars)
 project (${PROJECT})
 
 set(CMAKE_BUILD_TYPE "Debug")
+
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_definitions(-DDEBUG)
+endif ()
+
 #set( CMAKE_VERBOSE_MAKEFILE true )
 set(CMAKE_BUILD_TYPE Debug)
 

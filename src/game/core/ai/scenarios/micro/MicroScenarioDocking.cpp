@@ -38,7 +38,7 @@ void MicroScenarioDocking::Enter(Npc* npc) const
 {    
     npc->GetVehicle()->GetComplexDrive().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::DOCKING_ID);
 
-    Logger::Instance().Log( "npc_id="+std::to_string(npc->id())+" ENTER MicroScenarioDocking", 1);
+    LOG( "npc_id="+std::to_string(npc->id())+" ENTER MicroScenarioDocking");
 }
 
 /* virtual */
@@ -78,7 +78,7 @@ void MicroScenarioDocking::UpdateInDynamicInSpace(Npc* npc) const
 /* virtual */
 void MicroScenarioDocking::Exit(Npc* npc) const 
 {
-    Logger::Instance().Log("npc_id="+std::to_string( npc->id())+" EXIT MicroScenarioDocking", 1);
+    LOG("npc_id="+std::to_string( npc->id())+" EXIT MicroScenarioDocking");
 }
 
 /* virtual */

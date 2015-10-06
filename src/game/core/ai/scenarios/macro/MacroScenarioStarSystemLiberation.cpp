@@ -44,7 +44,7 @@ MacroScenarioStarSystemLiberation::~MacroScenarioStarSystemLiberation()
 /*virtual*/
 void MacroScenarioStarSystemLiberation::Enter(Npc* npc) const
 {    
-    Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " ENTER MacroScenarioStarSystemLiberation");
+    LOG("npc_id=" + std::to_string(npc->id()) + " ENTER MacroScenarioStarSystemLiberation");
 }
 
 /*virtual*/
@@ -94,7 +94,7 @@ void MacroScenarioStarSystemLiberation::UpdateInStaticInSpace(Npc* npc) const
 /*virtual*/
 void MacroScenarioStarSystemLiberation::Exit(Npc* npc) const
 {
-    Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " EXIT MacroScenarioStarSystemLiberation");
+    LOG("npc_id=" + std::to_string(npc->id()) + " EXIT MacroScenarioStarSystemLiberation");
 }
 
 /*virtual*/

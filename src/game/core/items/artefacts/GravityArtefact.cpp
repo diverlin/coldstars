@@ -74,19 +74,19 @@ void GravityArtefact::Resolve()
         
 void GravityArtefact::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" GravityArtefact::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" GravityArtefact::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"gravity", gravity); 
 }
 
 void GravityArtefact::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" GravityArtefact::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" GravityArtefact::LoadData()  id=" + std::to_string(id()) + " START");
     
     gravity = load_ptree.get<int>("gravity");
 }
 
 void GravityArtefact::ResolveData()
 {
-    Logger::Instance().Log(" GravityArtefact::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" GravityArtefact::ResolveData()  id=" + std::to_string(id()) + " START");
 }

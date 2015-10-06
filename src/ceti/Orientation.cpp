@@ -31,7 +31,7 @@ m_isUpdated(false)
 /* virtual */
 Orientation::~Orientation()
 {
-//    Logger::Instance().Log("___::~Orientation("+std::to_string(id())+")");
+//    LOG("___::~Orientation("+std::to_string(id())+")");
 }
 
 void Orientation::updateOrientation()
@@ -53,7 +53,7 @@ void Orientation::updateOrientation()
 
 void Orientation::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-//    Logger::Instance().Log(" Orientation("+std::to_string(id())+")::SaveDataUniqueOrientation", SAVELOAD_LOG_DIP);
+    //LOG(" Orientation("+std::to_string(id())+")::SaveDataUniqueOrientation");
         
     save_ptree.put(root+"data_unresolved_Orientation.center.x", m_center.x);
     save_ptree.put(root+"data_unresolved_Orientation.center.y", m_center.y);
@@ -67,7 +67,7 @@ void Orientation::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 
 void Orientation::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-//    Logger::Instance().Log(" Orientation("+std::to_string(id())+")::LoadDataUniqueOrientation", SAVELOAD_LOG_DIP);
+    //LOG(" Orientation("+std::to_string(id())+")::LoadDataUniqueOrientation");
         
     data_unresolved_Orientation.center.x = load_ptree.get<float>("data_unresolved_Orientation.center.x");
     data_unresolved_Orientation.center.y = load_ptree.get<float>("data_unresolved_Orientation.center.y");
@@ -80,9 +80,7 @@ void Orientation::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Orientation::ResolveData()
 {
-//    #if SAVELOAD_LOG_ENABLED == 1
-//    Logger::Instance().Log(" Orientation("+std::to_string(id())+")::ResolveDataUniqueOrientation", SAVELOAD_LOG_DIP);
-//    #endif
+    //LOG(" Orientation("+std::to_string(id())+")::ResolveDataUniqueOrientation");
 }
 
 } // namespace ceti

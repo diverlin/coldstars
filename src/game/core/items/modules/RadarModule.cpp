@@ -71,20 +71,20 @@ void RadarModule::Resolve()
 
 void RadarModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" RadarModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" RadarModule::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"radius_add", radius_add);
 }
 
 void RadarModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" RadarModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" RadarModule::LoadData()  id=" + std::to_string(id()) + " START");
     
     radius_add = load_ptree.get<int>("radius_add");
 }
 
 void RadarModule::ResolveData()
 {
-    Logger::Instance().Log(" RadarModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" RadarModule::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 

@@ -72,19 +72,19 @@ void ProtectorModule::Resolve()
 
 void ProtectorModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" ProtectorModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" ProtectorModule::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"protection_add", protection_add);
 }
 
 void ProtectorModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" ProtectorModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" ProtectorModule::LoadData()  id=" + std::to_string(id()) + " START");
     
     protection_add = load_ptree.get<int>("protection_add");
 }
 
 void ProtectorModule::ResolveData()
 {
-    Logger::Instance().Log(" ProtectorModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" ProtectorModule::ResolveData()  id=" + std::to_string(id()) + " START");
 }

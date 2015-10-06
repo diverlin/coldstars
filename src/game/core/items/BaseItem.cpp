@@ -33,12 +33,12 @@ BaseItem::BaseItem()
 /* virtual */
 BaseItem::~BaseItem()
 {
-    Logger::Instance().Log("___::~BaseItem("+std::to_string(id())+")");
+    LOG("___::~BaseItem("+std::to_string(id())+")");
 }
 
 void BaseItem::lockEvent(int locked_turns)
 {
-    Logger::Instance().Log("BaseItem::LockEvent", ITEMINFLUENCE_LOG_DIP);
+    LOG("BaseItem::LockEvent");
     
     bool was_working = false;
     if (m_locked_turns == 0) {
@@ -63,7 +63,7 @@ void BaseItem::useOverloadDeterioration()
  
 void BaseItem::damageEvent()
 {
-    Logger::Instance().Log("BaseItem::DamageEvent", ITEMINFLUENCE_LOG_DIP);
+    LOG("BaseItem::DamageEvent");
 
     m_item_slot->updateVehiclePropetries();
 }
@@ -132,7 +132,7 @@ void BaseItem::updateLock()
 
 void BaseItem::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" BaseItem::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" BaseItem::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"price", m_price);
     save_ptree.put(root+"condition", m_condition);
@@ -157,7 +157,7 @@ void BaseItem::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
 
 void BaseItem::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" BaseItem::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" BaseItem::LoadData()  id=" + std::to_string(id()) + " START");
     
     m_price             = load_ptree.get<int>("price");
     m_condition         = load_ptree.get<int>("condition");
@@ -178,7 +178,7 @@ void BaseItem::LoadData(const boost::property_tree::ptree& load_ptree)
                 
 void BaseItem::ResolveData()
 {
-    Logger::Instance().Log(" BaseItem::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" BaseItem::ResolveData()  id=" + std::to_string(id()) + " START");
     
     //BindData2D(TextureCollector::Instance().GetTextureObByPath(data_unresolved_BaseItem.textureOb_path));
     

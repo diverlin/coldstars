@@ -175,7 +175,7 @@ void LazerEquipment::Resolve()
 
 void LazerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" LazerEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" LazerEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"damage_orig", damage_orig);
     save_ptree.put(root+"radius_orig", radius_orig);
@@ -183,7 +183,7 @@ void LazerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std
 
 void LazerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" LazerEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" LazerEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
     damage_orig = load_ptree.get<int>("damage_orig");
     radius_orig = load_ptree.get<int>("radius_orig");
@@ -191,6 +191,6 @@ void LazerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void LazerEquipment::ResolveData()
 {
-    Logger::Instance().Log(" LazerEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" LazerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 

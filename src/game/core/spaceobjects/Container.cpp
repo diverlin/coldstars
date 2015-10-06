@@ -44,7 +44,7 @@ Container::Container(int id)
 /* virtual */   
 Container::~Container()
 {
-    Logger::Instance().Log("___::~Container("+std::to_string(id())+")");
+    LOG("___::~Container("+std::to_string(id())+")");
 }
 
 /* virtual override final */
@@ -126,7 +126,7 @@ void Container::updateInSpace(int time, bool show_effect)
 
 void Container::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    
 {
-    Logger::Instance().Log(" Container("+std::to_string(id())+")::SaveData()", SAVELOAD_LOG_DIP);
+    LOG(" Container("+std::to_string(id())+")::SaveData()");
     
     save_ptree.put(root+"target_pos.x", m_targetPos.x);
     save_ptree.put(root+"target_pos.y", m_targetPos.y);
@@ -136,7 +136,7 @@ void Container::SaveData(boost::property_tree::ptree& save_ptree, const std::str
 
 void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" Container("+std::to_string(id())+")::LoadData()", SAVELOAD_LOG_DIP);
+    LOG(" Container("+std::to_string(id())+")::LoadData()");
     
     m_targetPos.x   = load_ptree.get<float>("target_pos.x");
     m_targetPos.y   = load_ptree.get<float>("target_pos.y");
@@ -146,7 +146,7 @@ void Container::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Container::ResolveData()
 {
-    Logger::Instance().Log(" Container("+std::to_string(id())+")::ResolveData()", SAVELOAD_LOG_DIP);
+    LOG(" Container("+std::to_string(id())+")::ResolveData()");
     
     ((StarSystem*)global::get().entityManager().entity(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center);
 }        
