@@ -34,12 +34,12 @@ Base::~Base()
 
 std::string Base::dataTypeString() const
 {
-    std::string str;
-    str += "id=" + std::to_string(id());
-    str += "/t=" + str(typeId());
-    str += "/st=" + str(subTypeId());
-    str += "/sst=" + str(subSubTypeId());
-    return str;
+    std::string text;
+    text += "id=" + std::to_string(id());
+    text += "/t=" + str(typeId());
+    text += "/st=" + str(subTypeId());
+    text += "/sst=" + str(subSubTypeId());
+    return text;
 }
 
 void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const

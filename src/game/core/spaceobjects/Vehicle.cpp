@@ -72,7 +72,7 @@ Vehicle::Vehicle()
     :
       m_GodMode(false),
       m_SpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID),
-      m_OwnerNpc(nullptr),
+      m_npc(nullptr),
       m_ParentVehicleSlot(nullptr),
       m_Land(nullptr),
       m_SlotRadar(nullptr),
@@ -96,8 +96,8 @@ Vehicle::~Vehicle()
 /* virtual override */
 void Vehicle::putChildrenToGarbage() const
 {
-    m_OwnerNpc->SetAlive(false);
-    global::get().entityManager().addToGarbage(m_OwnerNpc);
+    m_npc->SetAlive(false);
+    global::get().entityManager().addToGarbage(m_npc);
     
     for(unsigned int i=0; i<m_SlotTotal_vec.size(); i++)
     {
@@ -122,7 +122,7 @@ void Vehicle::CreateProtectionComplexTextureDependedStuff()
 void Vehicle::SetKorpusData(const VehicleDescriptor& data_korpus)
 { 
     m_VehicleDescriptor = data_korpus;
-    m_Properties.protection = m_VehicleDescriptor.protection;
+    m_properties.protection = m_VehicleDescriptor.protection;
 }
 
 GoodsPack* Vehicle::GetGoodsPack() const
@@ -144,7 +144,7 @@ GoodsPack* Vehicle::GetGoodsPack() const
 /* virtual override final */
 int Vehicle::givenExpirience() const
 {
-    return m_OwnerNpc->GetSkills().GetExpirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
+    return m_npc->GetSkills().GetExpirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
 }
 
 bool Vehicle::CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY slot_subtype_id) const
@@ -441,7 +441,7 @@ bool Vehicle::SellItem(BaseItem* item)
     if (earn_money > 0)
     {
         DecreaseMass(item_mass);
-        m_OwnerNpc->IncreaseCredits(earn_money);
+        m_npc->IncreaseCredits(earn_money);
         
         return true;
     }
@@ -455,7 +455,7 @@ bool Vehicle::BuyItem(BaseItem* item)
 {
     if (AddItemToCargoSlot(item) == true)
     {
-        m_OwnerNpc->IncreaseCredits(-item->price());
+        m_npc->IncreaseCredits(-item->price());
 
         return true;
     }
@@ -478,14 +478,14 @@ bool Vehicle::MergeIdenticalGoods(BaseItem* item)
 
 void Vehicle::BindOwnerNpc(Npc* owner_npc)                
 { 
-    m_OwnerNpc = owner_npc;
-    m_OwnerNpc->SetVehicle(this);
+    m_npc = owner_npc;
+    m_npc->SetVehicle(this);
 } 
 
 bool Vehicle::IsObjectWithinRadarRange(SpaceObject* object) const
 {
     float dist = meti::distance(center(), object->center());
-    if (dist < m_Properties.radar)
+    if (dist < m_properties.radar)
     {
         return true;
     }
@@ -641,32 +641,26 @@ void Vehicle::LaunchingEvent()
 /* virtual */
 void Vehicle::remeberAgressor(Vehicle* agressor)
 {
-    m_OwnerNpc->remeberAgressor(agressor);
+    m_npc->remeberAgressor(agressor);
 }
 
 /* virtual */
 void Vehicle::hit(int damage)
 {
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::Hit", WEAPONSTARGET_LOG_DIP);
-    
-    if (m_GodMode == false)
-    {
-
-        if (m_Properties.energy < damage)
-        {
-            m_Properties.hibernate_mode_enabled = true;
+    if (!m_GodMode) {
+        if (m_properties.energy < damage) {
+            m_properties.hibernate_mode_enabled = true;
             UpdatePropertiesProtection();
         }
 
-        damage *= (1.0 - m_Properties.protection*0.01f);
-        damage *= m_OwnerNpc->GetSkills().GetDefenceNormalized();
-
-        dataLife().armor -= damage;
-
-        if (dataLife().armor < 0)
-        {
-            dataLife().is_alive = false;
+        // adjust real damage value
+        damage *= (1.0 - m_properties.protection*0.01f);
+        if (m_npc) {
+            damage *= m_npc->GetSkills().GetDefenceNormalized();
         }
+
+        SpaceObject::hit(damage);
 
         //if (show_effect == true)
         {
@@ -741,7 +735,7 @@ void Vehicle::CheckNeedsInStatic()
     }
 
     // check credits
-    if (m_OwnerNpc->GetCredits() < 1000)    { m_Needs.get_credits = true; }
+    if (m_npc->GetCredits() < 1000)    { m_Needs.get_credits = true; }
     else                                    { m_Needs.get_credits = false; }
 }
 
@@ -761,7 +755,7 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
         for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
             if (m_SlotFunct_vec[i]->item()) {
                 if (m_SlotFunct_vec[i]->item()->isDamaged() == true) {
-                    result = ((Angar*)m_ParentVehicleSlot->GetOwner())->RepairItem(m_OwnerNpc, m_SlotFunct_vec[i]->item());
+                    result = ((Angar*)m_ParentVehicleSlot->GetOwner())->RepairItem(m_npc, m_SlotFunct_vec[i]->item());
                 }
             }
         }
@@ -772,7 +766,7 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
         for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
             if (m_SlotFunct_vec[i]->item()) {
                 if (m_SlotFunct_vec[i]->item()->subTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID) {
-                    result = ((Angar*)m_ParentVehicleSlot->GetOwner())->ChargeRocketEquipment(m_OwnerNpc, m_SlotFunct_vec[i]->rocketEquipment());
+                    result = ((Angar*)m_ParentVehicleSlot->GetOwner())->ChargeRocketEquipment(m_npc, m_SlotFunct_vec[i]->rocketEquipment());
                 }
             }
         }
@@ -808,7 +802,7 @@ void Vehicle::IncreaseMass(int d_mass)
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::IncreaseMass", ITEMINFLUENCE_LOG_DIP);
     
     addMass(d_mass);
-    m_Properties.free_space = m_VehicleDescriptor.space - mass();
+    m_properties.free_space = m_VehicleDescriptor.space - mass();
     UpdatePropertiesSpeed(); // as the mass influence speed this action is necessary here
 }
 
@@ -817,7 +811,7 @@ void Vehicle::DecreaseMass(int d_mass)
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::DecreaseMass", ITEMINFLUENCE_LOG_DIP);
     
     addMass(-d_mass);
-    m_Properties.free_space = m_VehicleDescriptor.space - mass();
+    m_properties.free_space = m_VehicleDescriptor.space - mass();
     UpdatePropertiesSpeed(); // as the mass influence speed this action is necessary here
 }
 
@@ -826,7 +820,7 @@ void Vehicle::UpdatePropertiesSpeed()
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesSpeed", ITEMINFLUENCE_LOG_DIP);
     
     // speed calculation ////
-    m_Properties.speed = 0;
+    m_properties.speed = 0;
 
     if (m_ComplexDrive.GetDriveSlot() != nullptr)
     {
@@ -837,18 +831,18 @@ void Vehicle::UpdatePropertiesSpeed()
                 float actual_speed = (m_ComplexDrive.GetDriveSlot()->driveEquipment()->GetSpeed() - mass()*MASS_DECREASE_SPEED_RATE);
                 if (actual_speed > 0)
                 {
-                    if (m_Properties.artefact_gravity > 0)
+                    if (m_properties.artefact_gravity > 0)
                     {
-                        m_Properties.speed = (1.0 + m_Properties.artefact_gravity/100.0)*actual_speed;
+                        m_properties.speed = (1.0 + m_properties.artefact_gravity/100.0)*actual_speed;
                     }
                     else
                     {
-                        m_Properties.speed = actual_speed;
+                        m_properties.speed = actual_speed;
                     }
                     
                     if (m_ComplexDrive.GetDriveSlot()->GetSelected() == true)
                     {
-                        m_Properties.speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
+                        m_properties.speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
                         m_ComplexDrive.GetDriveSlot()->item()->useOverloadDeterioration();
                     }
                     else
@@ -869,23 +863,23 @@ void Vehicle::UpdatePropertiesFire()
     
     m_ComplexWeapon.UpdateFireAbility();
 
-    m_Properties.total_damage = m_ComplexWeapon.GetTotalDamage();
-    m_Properties.total_radius = m_ComplexWeapon.GetTotalRadius();
+    m_properties.total_damage = m_ComplexWeapon.GetTotalDamage();
+    m_properties.total_radius = m_ComplexWeapon.GetTotalRadius();
 }
 
 void Vehicle::UpdatePropertiesRadar()
 {
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesRadar", ITEMINFLUENCE_LOG_DIP);
     
-    m_Properties.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
-    m_Properties.equipment_radar = false;
+    m_properties.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
+    m_properties.equipment_radar = false;
     
     if (m_SlotRadar->item() != nullptr)
     {
         if (m_SlotRadar->radarEquipment()->isFunctioning() == true)
         {
-            m_Properties.radar = m_SlotRadar->radarEquipment()->GetRadius();
-            m_Properties.equipment_radar = true;
+            m_properties.radar = m_SlotRadar->radarEquipment()->GetRadius();
+            m_properties.equipment_radar = true;
         }
     }
 }
@@ -894,7 +888,7 @@ void Vehicle::UpdatePropertiesJump()
 {
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesJump", ITEMINFLUENCE_LOG_DIP);
 
-    m_Properties.hyper = 0;
+    m_properties.hyper = 0;
 
     if (m_ComplexDrive.GetDriveSlot() != nullptr)
     {
@@ -910,11 +904,11 @@ void Vehicle::UpdatePropertiesJump()
                         {
                             if (m_ComplexDrive.GetDriveSlot()->driveEquipment()->GetHyper() > m_ComplexDrive.GetBakSlot()->bakEquipment()->GetFuel())
                             {
-                                m_Properties.hyper = m_ComplexDrive.GetDriveSlot()->driveEquipment()->GetHyper();
+                                m_properties.hyper = m_ComplexDrive.GetDriveSlot()->driveEquipment()->GetHyper();
                             }
                             else
                             {
-                                m_Properties.hyper = m_ComplexDrive.GetBakSlot()->bakEquipment()->GetFuel();
+                                m_properties.hyper = m_ComplexDrive.GetBakSlot()->bakEquipment()->GetFuel();
                             }
                         }
                     }
@@ -928,15 +922,15 @@ void Vehicle::UpdatePropertiesEnergy()
 {
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesEnergy", ITEMINFLUENCE_LOG_DIP);
     
-    m_Properties.energy = 0;
-    m_Properties.hibernate_mode_enabled = true;
+    m_properties.energy = 0;
+    m_properties.hibernate_mode_enabled = true;
 
     if (m_SlotEnergizer->item() != nullptr)
     {
         if (m_SlotEnergizer->energizerEquipment()->isFunctioning() == true)
         {
-            m_Properties.energy = m_SlotEnergizer->energizerEquipment()->GetEnergy();
-            m_Properties.hibernate_mode_enabled = false;
+            m_properties.energy = m_SlotEnergizer->energizerEquipment()->GetEnergy();
+            m_properties.hibernate_mode_enabled = false;
         }
     }
     
@@ -947,24 +941,24 @@ void Vehicle::UpdatePropertiesProtection()
 {
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesProtection", ITEMINFLUENCE_LOG_DIP);
     
-    m_Properties.protection = m_VehicleDescriptor.protection;
-    m_Properties.shield_effect_enabled = false;
+    m_properties.protection = m_VehicleDescriptor.protection;
+    m_properties.shield_effect_enabled = false;
 
-    if (m_Properties.hibernate_mode_enabled == false)
+    if (m_properties.hibernate_mode_enabled == false)
     {
         if (m_ComplexProtector.GetProtectorSlot()->item() != nullptr)
         {
             if (m_ComplexProtector.GetProtectorSlot()->protectorEquipment()->isFunctioning() == true)
             {
-                m_Properties.protection += m_ComplexProtector.GetProtectorSlot()->protectorEquipment()->GetProtection();
-                m_Properties.shield_effect_enabled = true;
+                m_properties.protection += m_ComplexProtector.GetProtectorSlot()->protectorEquipment()->GetProtection();
+                m_properties.shield_effect_enabled = true;
             }
         }
     }
 
-    if (m_Properties.artefact_protection > 0)
+    if (m_properties.artefact_protection > 0)
     {
-        m_Properties.protection += m_Properties.artefact_protection;
+        m_properties.protection += m_properties.artefact_protection;
     }
 }
 
@@ -972,13 +966,13 @@ void Vehicle::UpdatePropertiesRepair()
 {
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesRepair", ITEMINFLUENCE_LOG_DIP);
     
-    m_Properties.repair = 0;
+    m_properties.repair = 0;
 
     if (m_SlotDroid->item() != nullptr)
     {
         if (m_SlotDroid->droidEquipment()->isFunctioning() == true)
         {
-            m_Properties.repair = m_SlotDroid->droidEquipment()->GetRepair();
+            m_properties.repair = m_SlotDroid->droidEquipment()->GetRepair();
         }
     }
 }
@@ -1000,13 +994,13 @@ void Vehicle::UpdatePropertiesFreeze()
 {
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesFreeze", ITEMINFLUENCE_LOG_DIP);
     
-    m_Properties.freeze = 0;
+    m_properties.freeze = 0;
 
     if (m_SlotFreezer->item() != nullptr)
     {
         if (m_SlotFreezer->freezerEquipment()->isFunctioning() == true)
         {
-            m_Properties.freeze = m_SlotFreezer->freezerEquipment()->GetFreeze();
+            m_properties.freeze = m_SlotFreezer->freezerEquipment()->GetFreeze();
         }
     }
 }
@@ -1015,13 +1009,13 @@ void Vehicle::UpdatePropertiesScan()
 {
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesScan", ITEMINFLUENCE_LOG_DIP);
     
-    m_Properties.scan = 0;
+    m_properties.scan = 0;
 
     if (m_SlotScaner->item() != nullptr)
     {
         if (m_SlotScaner->scanerEquipment()->isFunctioning() == true)
         {
-            m_Properties.scan = m_SlotScaner->scanerEquipment()->GetScan();
+            m_properties.scan = m_SlotScaner->scanerEquipment()->GetScan();
         }
     }
 }
@@ -1030,8 +1024,8 @@ void Vehicle::UpdatePropertiesGrab()
 {
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdatePropertiesGrab", ITEMINFLUENCE_LOG_DIP);
 
-    m_Properties.grab_strength = 0;
-    m_Properties.grab_radius = 0;
+    m_properties.grab_strength = 0;
+    m_properties.grab_radius = 0;
 
     if (m_VehicleDescriptor.slot_grapple_num != 0)
     {
@@ -1039,8 +1033,8 @@ void Vehicle::UpdatePropertiesGrab()
         {
             if (m_SlotGrapple->grappleEquipment()->isFunctioning() == true)
             {
-                m_Properties.grab_strength = m_SlotGrapple->grappleEquipment()->GetStrength();
-                m_Properties.grab_radius = m_SlotGrapple->grappleEquipment()->GetRadius();
+                m_properties.grab_strength = m_SlotGrapple->grappleEquipment()->GetStrength();
+                m_properties.grab_radius = m_SlotGrapple->grappleEquipment()->GetRadius();
             }
         }
     }
@@ -1050,8 +1044,8 @@ void Vehicle::UpdateArtefactInfluence()
 {
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::UpdateArtefactInfluence", ITEMINFLUENCE_LOG_DIP);
     
-    m_Properties.artefact_gravity = 0;
-    m_Properties.artefact_protection = 0;
+    m_properties.artefact_gravity = 0;
+    m_properties.artefact_protection = 0;
     
     for (unsigned int i=0; i<m_SlotArtef_vec.size(); i++)
     {
@@ -1063,13 +1057,13 @@ void Vehicle::UpdateArtefactInfluence()
                 {
                     case TYPE::ENTITY::GRAVITY_ARTEFACT_ID:
                     {
-                        m_Properties.artefact_gravity += ((GravityArtefact*)m_SlotArtef_vec[i]->item())->GetGravity();
+                        m_properties.artefact_gravity += ((GravityArtefact*)m_SlotArtef_vec[i]->item())->GetGravity();
                         break;
                     }
 
                     case TYPE::ENTITY::PROTECTOR_ARTEFACT_ID:
                     {
-                        m_Properties.artefact_protection += ((ProtectorArtefact*)m_SlotArtef_vec[i]->item())->GetProtection();
+                        m_properties.artefact_protection += ((ProtectorArtefact*)m_SlotArtef_vec[i]->item())->GetProtection();
                         break;
                     }
                 }
@@ -1077,12 +1071,12 @@ void Vehicle::UpdateArtefactInfluence()
         }
     }
     
-    if (m_Properties.artefact_gravity > 0)
+    if (m_properties.artefact_gravity > 0)
     {
         UpdatePropertiesSpeed();
     }
     
-    if (m_Properties.artefact_protection > 0)
+    if (m_properties.artefact_protection > 0)
     {
         UpdatePropertiesProtection();
     }
@@ -1169,7 +1163,7 @@ void Vehicle::UpdateArtefactInfluence()
 bool Vehicle::IsAbleToJumpTo(StarSystem* target_starsystem) const
 {
     float dist = meti::distance(starsystem()->center(), target_starsystem->center());
-    if (dist < m_Properties.hyper)
+    if (dist < m_properties.hyper)
     {
         return true;
     }
@@ -1245,9 +1239,9 @@ bool Vehicle::TryToConsumeEnergy(int energy)
 {
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::TryToConsumeEnergy(energy="+std::to_string(energy)+")", ITEMINFLUENCE_LOG_DIP);
     
-    if (m_Properties.energy > energy)
+    if (m_properties.energy > energy)
     {
-        m_Properties.energy -= energy;
+        m_properties.energy -= energy;
         m_SlotEnergizer->energizerEquipment()->DecreaseEnergy(energy);
         
         return true;
@@ -1261,20 +1255,20 @@ bool Vehicle::TryToGenerateEnergy(int energy)
     //Logger::Instance().Log("Vehicle("+std::to_string(id())+")::TryToGenerateEnergy(energy="+std::to_string(energy)+")", ITEMINFLUENCE_LOG_DIP);
     
     int energy_max = m_SlotEnergizer->energizerEquipment()->GetEnergyMax();
-    if (m_Properties.energy < energy_max)
+    if (m_properties.energy < energy_max)
     {
-        int diff_energy = energy_max - m_Properties.energy;
+        int diff_energy = energy_max - m_properties.energy;
         if ( diff_energy < energy)
         {
             energy = diff_energy;
         }
         
-        m_Properties.energy += energy;
+        m_properties.energy += energy;
         m_SlotEnergizer->energizerEquipment()->IncreaseEnergy(energy);
         
-        if (m_Properties.hibernate_mode_enabled == true)
+        if (m_properties.hibernate_mode_enabled == true)
         {
-            if (m_Properties.energy > HIBERNATION_ENERGY_THRESHOLD)
+            if (m_properties.energy > HIBERNATION_ENERGY_THRESHOLD)
             {
                 UpdatePropertiesProtection();
             }
@@ -1330,7 +1324,7 @@ void Vehicle::DropRandomItemToSpace()
 
 void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 {
-    if (m_Properties.grab_radius > 0)
+    if (m_properties.grab_radius > 0)
     {
         m_SlotGrapple->grappleEquipment()->UpdateGrabScenarioProgram_inDynamic();
     }
