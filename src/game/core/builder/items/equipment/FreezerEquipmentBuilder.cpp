@@ -47,7 +47,7 @@ FreezerEquipment* FreezerEquipmentBuilder::createTemplate(ID id) const
     FreezerEquipment* freezer_equipment  = new FreezerEquipment(id);
     assert(freezer_equipment);
 
-    global::get().entitiesManager().registerEntity(freezer_equipment);
+    global::get().entitiesManager().reg(freezer_equipment);
 
     return freezer_equipment;
 } 

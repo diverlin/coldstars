@@ -41,7 +41,7 @@ Bomb* BombBuilder::createTemplate(ID id) const
     Bomb* bomb = new Bomb(id);
     assert(bomb);
 
-    global::get().entitiesManager().registerEntity(bomb);
+    global::get().entitiesManager().reg(bomb);
     
     return bomb;
 } 

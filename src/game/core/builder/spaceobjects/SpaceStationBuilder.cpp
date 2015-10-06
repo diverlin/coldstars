@@ -38,7 +38,7 @@ SpaceStation* SpaceStationBuilder::createTemplate(ID id) const
     SpaceStation* spacestation = new SpaceStation(id);
     assert(spacestation);
 
-    global::get().entitiesManager().registerEntity(spacestation);
+    global::get().entitiesManager().reg(spacestation);
     
     return spacestation;
 }

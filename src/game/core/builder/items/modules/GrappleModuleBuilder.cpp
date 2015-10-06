@@ -44,7 +44,7 @@ GrappleModule* GrappleModuleBuilder::createTemplate(ID id) const
     GrappleModule* grapple_module = new GrappleModule(id);
     assert(grapple_module);
 
-    global::get().entitiesManager().registerEntity(grapple_module);
+    global::get().entitiesManager().reg(grapple_module);
     
     return grapple_module;
 } 

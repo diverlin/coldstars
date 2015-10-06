@@ -39,7 +39,7 @@ BlackHole* BlackHoleBuilder::createTemplate(ID id) const
     int size = 4;
     bool dynamic = false;
     //    blackhole->BindShockWaveEffect(getNewShockWave(size, dynamic));
-    global::get().entitiesManager().registerEntity(blackhole);
+    global::get().entitiesManager().reg(blackhole);
     
     return blackhole;
 } 

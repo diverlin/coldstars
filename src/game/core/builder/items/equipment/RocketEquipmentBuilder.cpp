@@ -42,7 +42,7 @@ RocketEquipment* RocketEquipmentBuilder::createTemplate(ID id) const
     RocketEquipment* rocket_equipment = new RocketEquipment(id);
     assert(rocket_equipment);
 
-    global::get().entitiesManager().registerEntity(rocket_equipment);
+    global::get().entitiesManager().reg(rocket_equipment);
     
     return rocket_equipment;
 } 

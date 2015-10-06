@@ -34,7 +34,7 @@ Goverment* GovermentBuilder::createTemplate(ID id) const
     Goverment* goverment = new Goverment(id);
     assert(goverment);
 
-    global::get().entitiesManager().registerEntity(goverment);
+    global::get().entitiesManager().reg(goverment);
     
     return goverment;
 } 

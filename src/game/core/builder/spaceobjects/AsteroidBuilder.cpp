@@ -38,7 +38,7 @@ Asteroid* AsteroidBuilder::createTemplate(ID id) const
     Asteroid* asteroid = new Asteroid(id);
     assert(asteroid);
 
-    global::get().entitiesManager().registerEntity(asteroid);
+    global::get().entitiesManager().reg(asteroid);
     
     return asteroid;
 } 

@@ -39,7 +39,7 @@ Kosmoport* KosmoportBuilder::createTemplate(ID id) const
     Kosmoport* kosmoport = new Kosmoport(id);
     assert(kosmoport);
 
-    global::get().entitiesManager().registerEntity(kosmoport);
+    global::get().entitiesManager().reg(kosmoport);
     
     return kosmoport;
 } 

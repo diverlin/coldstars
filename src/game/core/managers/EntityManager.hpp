@@ -34,7 +34,7 @@ class EntityManager
         void saveRequest() { m_save_request = true; }
         void loadRequest() { m_load_request = true; }
         
-        void registerEntity(Base*);
+        void reg(Base*);
     
         Base* entity(const ID&) const;
         Player* player() const;
