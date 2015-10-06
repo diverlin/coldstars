@@ -35,6 +35,14 @@
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/StarSystemDescriptor.hpp>
 
+#include <common/MessageManager.hpp>
+
+TEST(common,message)
+{
+    Message message(TELEGRAM::CREATE, NONE_ID, NONE_ID, nullptr);
+    MessageManager::get().addMessage(message);
+}
+
 TEST(common,bomb)
 {
     // create builders

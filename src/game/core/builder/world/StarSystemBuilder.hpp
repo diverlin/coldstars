@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <types/MyInt.hpp>
+#include <types/IdType.hpp>
 
 class StarSystem;
 class StarSystemDescriptor;

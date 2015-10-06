@@ -20,7 +20,7 @@
 #pragma once
 
 #include <builder/spaceobjects/BaseVehicleBuilder.hpp>
-#include <types/MyInt.hpp>
+#include <types/IdType.hpp>
 
 class SpaceStation;
 

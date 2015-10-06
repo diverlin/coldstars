@@ -19,7 +19,7 @@
 #pragma once
 
 #include <common/GameDate.hpp>
-#include <types/MyInt.hpp>
+#include <types/IdType.hpp>
 
 struct AgressorData
 {

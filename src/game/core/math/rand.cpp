@@ -23,7 +23,7 @@
 #include <cmath>
 
 #include <common/constants.hpp>
-#include <types/MyInt.hpp>
+#include <types/IdType.hpp>
 #include <common/RaceDescriptors.hpp>
 #include <common/Global.hpp>
 

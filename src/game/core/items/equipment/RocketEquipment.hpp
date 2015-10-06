@@ -20,7 +20,7 @@
 #ifndef ROCKETEQUIPMENT_HPP
 #define ROCKETEQUIPMENT_HPP
 
-#include <types/MyInt.hpp>
+#include <types/IdType.hpp>
 #include <items/equipment/BaseEquipment.hpp>
 #include <common/BulletData.hpp>
 

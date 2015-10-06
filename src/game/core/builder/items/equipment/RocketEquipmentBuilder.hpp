@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <types/MyInt.hpp>
+#include <types/IdType.hpp>
 #include <types/RaceTypes.hpp>
 #include <types/TechLevelTypes.hpp>
 

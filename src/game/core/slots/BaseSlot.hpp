@@ -21,7 +21,7 @@
 #define BASESLOT_HPP
 
 #include <common/Base.hpp>
-#include <types/MyInt.hpp>
+#include <types/IdType.hpp>
 #include <glm/glm.hpp>
 
 class Vehicle;

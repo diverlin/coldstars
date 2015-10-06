@@ -1,25 +1,24 @@
 #include "Message.hpp"
 
-Message::Message(double delay, int sender_id, int receiver_id, int type_id, void* extra)
-{
-    this->delay       = delay;
-    this->sender_id   = sender_id;
-    this->receiver_id = receiver_id;
-    this->type_id     = type_id;
-    this->extra       = extra;
-}
+Message::Message(TELEGRAM type_id, const IDTYPE& sender_id, const IDTYPE& receiver_id, void* extra)
+    :
+      type_id(type_id)
+    , sender_id(sender_id)
+    , receiver_id(receiver_id)
+    , extra(extra)
+{}
 
-Message::Message(const Message& message)
-{
-    this->delay       = message.delay;
-    this->sender_id   = message.sender_id;
-    this->receiver_id = message.receiver_id;
-    this->type_id     = message.type_id;
-    this->extra       = message.extra;
-}
+//Message::Message(const Message& message)
+//{
+//    delay       = message.delay;
+//    sender_id   = message.sender_id;
+//    receiver_id = message.receiver_id;
+//    type_id     = message.type_id;
+//    extra       = message.extra;
+//}
 
 
 bool Message::operator<(const Message& rhs) const
 {
-    return (this->dispatch_time < rhs.dispatch_time);
+    return (dispatch_time < rhs.dispatch_time);
 }
