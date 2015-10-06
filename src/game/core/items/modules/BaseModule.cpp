@@ -59,6 +59,6 @@ void BaseModule::ResolveData()
     Logger::Instance().Log(" BaseModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     
     if(data_unresolved_BaseModule.equipment_owner_id != NONE_ID) {
-        ((BaseEquipment*)global::get().entitiesManager().GetEntityById(data_unresolved_BaseModule.equipment_owner_id))->InsertModule(this);
+        ((BaseEquipment*)global::get().entitiesManager().entity(data_unresolved_BaseModule.equipment_owner_id))->InsertModule(this);
     }
 }

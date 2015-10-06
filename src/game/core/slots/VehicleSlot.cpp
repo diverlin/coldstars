@@ -45,7 +45,7 @@ void VehicleSlot::putChildrenToGarbage() const
 {
     if (vehicle)
     {
-        global::get().entitiesManager().AddToGarbage(vehicle);
+        global::get().entitiesManager().addToGarbage(vehicle);
     } 
 }
                       

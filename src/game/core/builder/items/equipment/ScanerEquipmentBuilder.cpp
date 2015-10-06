@@ -42,12 +42,12 @@ ScanerEquipmentBuilder::ScanerEquipmentBuilder()
 ScanerEquipmentBuilder::~ScanerEquipmentBuilder()
 {}
 
-ScanerEquipment* ScanerEquipmentBuilder::createTemplate(INTLONGEST id) const
+ScanerEquipment* ScanerEquipmentBuilder::createTemplate(IDTYPE id) const
 {
     ScanerEquipment* scaner_equipment = new ScanerEquipment(id);
     assert(scaner_equipment);
 
-    global::get().entitiesManager().RegisterEntity(scaner_equipment);
+    global::get().entitiesManager().registerEntity(scaner_equipment);
     
     return scaner_equipment;
 } 

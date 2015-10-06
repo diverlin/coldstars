@@ -187,6 +187,6 @@ void BaseItem::ResolveData()
         
     if(m_data_unresolved_BaseItem.item_slot_id != NONE_ID) // item_slot can be nullptr in case of inserted module
     {
-        ((ItemSlot*)global::get().entitiesManager().GetEntityById(m_data_unresolved_BaseItem.item_slot_id))->insertItem(this);
+        ((ItemSlot*)global::get().entitiesManager().entity(m_data_unresolved_BaseItem.item_slot_id))->insertItem(this);
     }
 }

@@ -46,5 +46,5 @@ class GoodsPack : public BaseItem
          
 };
 
-GoodsPack* GetNewGoodsPack(TYPE::ENTITY, INTLONGEST id=NONE_ID);
+GoodsPack* GetNewGoodsPack(TYPE::ENTITY, unsigned long intNONE_ID);
 

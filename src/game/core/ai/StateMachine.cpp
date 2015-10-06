@@ -19,27 +19,20 @@
 #include "StateMachine.hpp"
 
 StateMachine::StateMachine() 
-{
-    npc_owner = nullptr;
-}
+{}
         
 StateMachine::~StateMachine() 
 {}
         
 void StateMachine::UpdateInStaticInSpace()
 {
-    if (macrotask_manager.GetScenario() != nullptr) 
-    { 
+    if (macrotask_manager.GetScenario()) {
         macrotask_manager.GetScenario()->UpdateInStaticInSpace(npc_owner); 
     }
-    if (microtask_manager.GetScenario() != nullptr) 
-    {
-        if (microtask_manager.GetScenario()->Validate(npc_owner) == true)
-        {
+    if (microtask_manager.GetScenario() != nullptr) {
+        if (microtask_manager.GetScenario()->Validate(npc_owner)) {
             microtask_manager.GetScenario()->UpdateInStaticInSpace(npc_owner); 
-        }
-        else
-        {
+        } else {
             microtask_manager.GetScenario()->Exit(npc_owner);
             microtask_manager.Reset();
         }
@@ -48,18 +41,13 @@ void StateMachine::UpdateInStaticInSpace()
 
 void StateMachine::UpdateInStaticInDock()
 {
-    if (macrotask_manager.GetScenario() != nullptr) 
-    { 
+    if (macrotask_manager.GetScenario()) {
         macrotask_manager.GetScenario()->UpdateInStaticInDock(npc_owner); 
     }
-    if (microtask_manager.GetScenario() != nullptr) 
-    {
-        if (microtask_manager.GetScenario()->Validate(npc_owner) == true)
-        {
+    if (microtask_manager.GetScenario()) {
+        if (microtask_manager.GetScenario()->Validate(npc_owner)) {
             microtask_manager.GetScenario()->UpdateInStaticInDock(npc_owner); 
-        }
-        else
-        {
+        } else {
             microtask_manager.GetScenario()->Exit(npc_owner);
             microtask_manager.Reset();
         }
@@ -68,25 +56,21 @@ void StateMachine::UpdateInStaticInDock()
 
 void StateMachine::UpdateInDynamicInSpace()
 {
-    if (microtask_manager.GetScenario() != nullptr)
-    {
-         microtask_manager.GetScenario()->UpdateInDynamicInSpace(npc_owner);
+    if (microtask_manager.GetScenario()) {
+        microtask_manager.GetScenario()->UpdateInDynamicInSpace(npc_owner);
     }
 }
 
 void StateMachine::UpdateInDynamicInDock()
 {
-    if (microtask_manager.GetScenario() != nullptr)
-    {
-         microtask_manager.GetScenario()->UpdateInDynamicInDock(npc_owner);
+    if (microtask_manager.GetScenario()) {
+        microtask_manager.GetScenario()->UpdateInDynamicInDock(npc_owner);
     }
-}
-    
+}    
         
 void StateMachine::SetCurrentMacroTask(const Task& macrotask)
 {
-    if (macrotask_manager.GetScenario() != nullptr)
-    {
+    if (macrotask_manager.GetScenario()) {
         macrotask_manager.GetScenario()->Exit(npc_owner);
         macrotask_manager.Reset();
     }
@@ -98,8 +82,7 @@ void StateMachine::SetCurrentMacroTask(const Task& macrotask)
                 
 void StateMachine::SetCurrentMicroTask(const Task& microtask)
 {
-    if (microtask_manager.GetScenario() != nullptr)
-    {
+    if (microtask_manager.GetScenario()) {
         microtask_manager.GetScenario()->Exit(npc_owner);
         microtask_manager.Reset();
     }
@@ -110,14 +93,12 @@ void StateMachine::SetCurrentMicroTask(const Task& microtask)
 
 void StateMachine::ForceReset()
 {
-    if (microtask_manager.GetScenario() != nullptr)
-    {
+    if (microtask_manager.GetScenario()) {
         microtask_manager.GetScenario()->Exit(npc_owner);
         microtask_manager.Reset();
     }
 
-    if (macrotask_manager.GetScenario() != nullptr)
-    {    
+    if (macrotask_manager.GetScenario()) {
         macrotask_manager.GetScenario()->Exit(npc_owner);
         macrotask_manager.Reset();
     }

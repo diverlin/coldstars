@@ -33,12 +33,12 @@ AngarBuilder::AngarBuilder()
 AngarBuilder::~AngarBuilder()
 {}
 
-Angar* AngarBuilder::createTemplate(INTLONGEST id) const
+Angar* AngarBuilder::createTemplate(IDTYPE id) const
 {
     Angar* angar = new Angar(id);
     assert(angar);
 
-    global::get().entitiesManager().RegisterEntity(angar);
+    global::get().entitiesManager().registerEntity(angar);
 
     return angar;
 } 

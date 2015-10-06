@@ -75,14 +75,12 @@ void Npc::CloneMacroTaskFrom(Npc* npc)
     state_machine.SetCurrentMacroTask(npc->GetStateMachine().GetMacroTaskManager().GetTask());
 }
 
-bool Npc::WithdrawCredits(INTLONGEST amount)
+bool Npc::WithdrawCredits(unsigned long int amount)
 {
-    if (credits > amount)
-    {
+    if (credits > amount) {
         credits -= amount;
         return true;
-    }
-    
+    }    
     return false;
 }
 
@@ -182,8 +180,7 @@ void Npc::remeberAgressor(Vehicle* agressor)
 
 void Npc::UpdateInSpace(int time, bool show_effect)
 {
-    if (time > 0)
-    {
+    if (time > 0) {
         state_machine.UpdateInDynamicInSpace();
     }
 }         
@@ -329,13 +326,13 @@ void Npc::SaveData(boost::property_tree::ptree& save_ptree, const std::string& r
     if (state_machine.GetMacroTaskManager().GetScenario() != nullptr)
     {
         const std::string child_root = root + "macrotask.";
-        state_machine.GetMacroTaskManager().GetTask().Save(save_ptree, child_root);
+        state_machine.GetMacroTaskManager().GetTask().save(save_ptree, child_root);
     }
     
     if (state_machine.GetMicroTaskManager().GetScenario() != nullptr)
     {
         const std::string child_root = root + "microtask.";
-        state_machine.GetMicroTaskManager().GetTask().Save(save_ptree, child_root);
+        state_machine.GetMicroTaskManager().GetTask().save(save_ptree, child_root);
     }
 }
 
@@ -350,12 +347,12 @@ void Npc::LoadData(const boost::property_tree::ptree& load_ptree)
 
     if (load_ptree.get_child_optional("macrotask"))
     {
-        data_unresolved_npc.macrotask.Load(load_ptree.get_child("macrotask"));
+        data_unresolved_npc.macrotask.load(load_ptree.get_child("macrotask"));
     }
     
     if (load_ptree.get_child_optional("microtask"))
     {
-        data_unresolved_npc.microtask.Load(load_ptree.get_child("microtask"));
+        data_unresolved_npc.microtask.load(load_ptree.get_child("microtask"));
     }
 }
 
@@ -363,7 +360,7 @@ void Npc::ResolveData()
 {
     ApplySkillsStrategy();
     
-    ((Vehicle*)global::get().entitiesManager().GetEntityById(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
+    ((Vehicle*)global::get().entitiesManager().entity(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
     SetAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
     skills.Resolve();

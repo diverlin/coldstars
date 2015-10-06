@@ -36,12 +36,12 @@ PlanetBuilder::PlanetBuilder()
 PlanetBuilder::~PlanetBuilder()
 {}
 
-Planet* PlanetBuilder::createTemplate(INTLONGEST id) const
+Planet* PlanetBuilder::createTemplate(IDTYPE id) const
 {
     Planet* planet = new Planet(id);
     assert(planet);
 
-    global::get().entitiesManager().RegisterEntity(planet);
+    global::get().entitiesManager().registerEntity(planet);
     
     return planet;
 } 

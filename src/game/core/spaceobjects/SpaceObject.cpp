@@ -43,19 +43,12 @@ void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)
 }
 
 /* virtual */
-void SpaceObject::hit(int damage, bool show_effect)
+void SpaceObject::hit(int damage)
 {
     m_dataLife.armor -= damage;
     if (m_dataLife.armor <= 0) {
-        m_dataLife.is_alive = false;
-        m_dataLife.dying_time -= 3;
+        m_dataLife.is_dying = true;
     }
-
-    if (show_effect == true) {
-//        VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(center()), COLOR::COLOR4I_RED_LIGHT, collisionRadius());
-//        m_starsystem->Add(text);
-    }
-
 }
 
 void SpaceObject::killSilently()
@@ -66,13 +59,11 @@ void SpaceObject::killSilently()
 
 void SpaceObject::checkDeath(bool show_effect)
 {
-    if (m_dataLife.is_alive == false)
-    {
+    if (m_dataLife.is_dying) {
         m_dataLife.dying_time--;
-        if (m_dataLife.dying_time < 0)
-        {
-            if (m_dataLife.garbage_ready == false)
-            {
+        if (m_dataLife.dying_time < 0) {
+            m_dataLife.is_alive = false;
+            if (!m_dataLife.garbage_ready) {
                 postDeathUniqueEvent(show_effect);
                 m_dataLife.garbage_ready = true;
             }
@@ -139,9 +130,9 @@ void SpaceObject::ResolveData()
     Logger::Instance().Log(" SpaceObject("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     
     if (data_unresolved_SpaceObject.parent_id != NONE_ID) {
-        m_parent = (SpaceObject*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.parent_id);
+        m_parent = (SpaceObject*)global::get().entitiesManager().entity(data_unresolved_SpaceObject.parent_id);
     }
     if (data_unresolved_SpaceObject.starsystem_id != NONE_ID) {
-        m_starsystem = (StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id);
+        m_starsystem = (StarSystem*)global::get().entitiesManager().entity(data_unresolved_SpaceObject.starsystem_id);
     }
 }

@@ -41,12 +41,12 @@ GravityArtefactBuilder::GravityArtefactBuilder()
 GravityArtefactBuilder::~GravityArtefactBuilder()
 {}
 
-GravityArtefact* GravityArtefactBuilder::createTemplate(INTLONGEST id) const
+GravityArtefact* GravityArtefactBuilder::createTemplate(IDTYPE id) const
 {
     GravityArtefact* gravity_artefact = new GravityArtefact(id);
     assert(gravity_artefact);
 
-    global::get().entitiesManager().RegisterEntity(gravity_artefact);
+    global::get().entitiesManager().registerEntity(gravity_artefact);
     
     return gravity_artefact;
 } 

@@ -31,7 +31,7 @@ BlackHoleBuilder::BlackHoleBuilder()
 BlackHoleBuilder::~BlackHoleBuilder()
 {}
 
-BlackHole* BlackHoleBuilder::createTemplate(INTLONGEST id) const
+BlackHole* BlackHoleBuilder::createTemplate(IDTYPE id) const
 {
     BlackHole* blackhole = new BlackHole(id);
     assert(blackhole);
@@ -39,7 +39,7 @@ BlackHole* BlackHoleBuilder::createTemplate(INTLONGEST id) const
     int size = 4;
     bool dynamic = false;
     //    blackhole->BindShockWaveEffect(getNewShockWave(size, dynamic));
-    global::get().entitiesManager().RegisterEntity(blackhole);
+    global::get().entitiesManager().registerEntity(blackhole);
     
     return blackhole;
 } 

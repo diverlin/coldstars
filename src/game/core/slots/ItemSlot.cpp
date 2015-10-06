@@ -44,7 +44,7 @@
 #include <common/Global.hpp>
 #include <managers/EntitiesManager.hpp>
 
-ItemSlot::ItemSlot(INTLONGEST id, TYPE::ENTITY subtype_id)
+ItemSlot::ItemSlot(unsigned long int TYPE::ENTITY subtype_id)
     :
       m_turrel(nullptr),
       m_item(nullptr),
@@ -69,7 +69,7 @@ ItemSlot::~ItemSlot()
 void ItemSlot::putChildrenToGarbage() const
 {
     if (m_item) {
-        global::get().entitiesManager().AddToGarbage(m_item);
+        global::get().entitiesManager().addToGarbage(m_item);
     }
 }
 
@@ -552,11 +552,11 @@ void ItemSlot::ResolveData()
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     
     if (m_unresolved_ItemSlot.target_id != NONE_ID) {
-        m_target = (SpaceObject*)global::get().entitiesManager().GetEntityById(m_unresolved_ItemSlot.target_id);
+        m_target = (SpaceObject*)global::get().entitiesManager().entity(m_unresolved_ItemSlot.target_id);
     }
 
     if (m_unresolved_ItemSlot.subtarget_id != NONE_ID) {
-        m_subtarget = (ItemSlot*)global::get().entitiesManager().GetEntityById(m_unresolved_ItemSlot.subtarget_id);
+        m_subtarget = (ItemSlot*)global::get().entitiesManager().entity(m_unresolved_ItemSlot.subtarget_id);
     }
 
     switch(owner->typeId())

@@ -28,20 +28,20 @@
 class RocketEquipment : public BaseEquipment
 { 
        public:
-        RocketEquipment(INTLONGEST);
+        RocketEquipment(IDTYPE id);
         virtual ~RocketEquipment();
         
-        void SetAmmoMaxOrig(int ammo_max_orig) { this->ammo_max_orig = ammo_max_orig; };
-        void SetDamageOrig(int damage_orig)    { this->damage_orig   = damage_orig; };
-        void SetRadiusOrig(int radius_orig)    { this->radius_orig   = radius_orig; };
-        void SetBulletData(BulletData data_bullet) { this->data_bullet = data_bullet; };
+        void SetAmmoMaxOrig(int ammo_max_orig) { this->ammo_max_orig = ammo_max_orig; }
+        void SetDamageOrig(int damage_orig)    { this->damage_orig   = damage_orig; }
+        void SetRadiusOrig(int radius_orig)    { this->radius_orig   = radius_orig; }
+        void SetBulletData(BulletData data_bullet) { this->data_bullet = data_bullet; }
         
-        void SetAmmo(int ammo) { this->ammo = ammo; };
+        void SetAmmo(int ammo) { this->ammo = ammo; }
         
-        int GetAmmoMax() const { return ammo_max; };                            
-        int GetAmmo()   const { return ammo; };
-        int GetDamage() const { return damage; };
-        int GetRadius() const { return radius; };
+        int GetAmmoMax() const { return ammo_max; }
+        int GetAmmo()   const { return ammo; }
+        int GetDamage() const { return damage; }
+        int GetRadius() const { return radius; }
         
         void FireEvent(float);
         

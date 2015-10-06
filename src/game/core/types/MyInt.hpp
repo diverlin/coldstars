@@ -18,8 +18,8 @@
 
 #pragma once
 
-typedef long long int INTLONGEST;
+typedef long long int IDTYPE;
 
-const INTLONGEST NONE_ID = 0;
+const IDTYPE NONE_ID = 0;
 
 

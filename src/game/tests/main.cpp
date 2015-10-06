@@ -16,12 +16,14 @@
      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include <gtest/gtest.h>
+
 #include <common/Global.hpp>
 #include <world/starsystem.hpp>
 #include <items/others/Bomb.hpp>
 #include <slots/ItemSlot.hpp>
 #include <spaceobjects/Container.hpp>
-
+#include <spaceobjects/Ship.hpp>
 
 #include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/world/GalaxyBuilder.hpp>
@@ -33,7 +35,7 @@
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/StarSystemDescriptor.hpp>
 
-int test_bomb()
+TEST(common,bomb)
 {
     // create builders
     auto starsystemBuilder = new StarSystemBuilder;
@@ -53,15 +55,15 @@ int test_bomb()
 
     // simulate bomb explosion
     container->hit(container->armor());
-    //starystem->update();
+    starsystem->update(1);
 
     // check consequences
-
+    EXPECT_FALSE(ship->isAlive());
 }
 
-int main()
-{
-    test_bomb();
+//int main()
+//{
+//    test_bomb();
 //    auto galaxyBuilder = new GalaxyBuilder;
 //    auto sectorBuilder = new SectorBuilder;
 //    auto starsystemBuilder = new StarSystemBuilder;
@@ -75,5 +77,5 @@ int main()
 //    auto sector = sectorBuilder->create(sectorDescriptor);
 //    auto starsystem = starsystemBuilder->create(starsystemDescriptor);
 //    auto ship = shipBuilder->create();
-}
+//}
 

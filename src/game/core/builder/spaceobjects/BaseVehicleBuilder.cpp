@@ -167,14 +167,14 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) con
         {
             RocketEquipment* rocket_equipment = global::get().rocketEquipmentBuilder().create(tech_level);
             if (vehicle->AddAndManageItem(rocket_equipment) == false) {
-                global::get().entitiesManager().AddToGarbage(rocket_equipment);
+                global::get().entitiesManager().addToGarbage(rocket_equipment);
             }
         }
         else
         {
             LazerEquipment* lazer_equipment = global::get().lazerEquipmentBuilder().create(tech_level);
             if (vehicle->AddAndManageItem(lazer_equipment) == false) {
-                global::get().entitiesManager().AddToGarbage(lazer_equipment);
+                global::get().entitiesManager().addToGarbage(lazer_equipment);
             }
         }
     }   
@@ -183,7 +183,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) con
     {
         RadarEquipment* radar_equipment = global::get().radarEquipmentBuilder().create(tech_level);
         if (vehicle->AddAndManageItem(radar_equipment) == false) {
-            global::get().entitiesManager().AddToGarbage(radar_equipment);
+            global::get().entitiesManager().addToGarbage(radar_equipment);
         }
     }
     
@@ -191,7 +191,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) con
     {
         DriveEquipment* drive_equipment = global::get().driveEquipmentBuilder().create(tech_level);
         if (vehicle->AddAndManageItem(drive_equipment) == false) {
-            global::get().entitiesManager().AddToGarbage(drive_equipment);
+            global::get().entitiesManager().addToGarbage(drive_equipment);
         }
     }
     
@@ -199,7 +199,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) con
     {
         BakEquipment* bak_equipment = global::get().bakEquipmentBuilder().create(tech_level);
         if (vehicle->AddAndManageItem(bak_equipment) == false) {
-            global::get().entitiesManager().AddToGarbage(bak_equipment);
+            global::get().entitiesManager().addToGarbage(bak_equipment);
         } 
     }
     
@@ -207,7 +207,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) con
     {
         EnergizerEquipment* energizer_equipment = global::get().energizerEquipmentBuilder().create(tech_level);
         if (vehicle->AddAndManageItem(energizer_equipment) == false) {
-            global::get().entitiesManager().AddToGarbage(energizer_equipment);
+            global::get().entitiesManager().addToGarbage(energizer_equipment);
         }     
     }
     
@@ -223,7 +223,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) con
     {
         ProtectorEquipment* protector_equipment = global::get().protectorEquipmentBuilder().create(tech_level);
         if (vehicle->AddAndManageItem(protector_equipment) == false) {
-            global::get().entitiesManager().AddToGarbage(protector_equipment);
+            global::get().entitiesManager().addToGarbage(protector_equipment);
         }  
     }
         
@@ -231,7 +231,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) con
     {
         DroidEquipment* droid_equipment = global::get().droidEquipmentBuilder().create(tech_level);
         if (vehicle->AddAndManageItem(droid_equipment) == false) {
-            global::get().entitiesManager().AddToGarbage(droid_equipment);
+            global::get().entitiesManager().addToGarbage(droid_equipment);
         }  
     }
     
@@ -239,7 +239,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) con
     {
         ScanerEquipment* scaner_equipment = global::get().scanerEquipmentBuilder().create(tech_level);
         if (vehicle->AddAndManageItem(scaner_equipment) == false) {
-            global::get().entitiesManager().AddToGarbage(scaner_equipment);
+            global::get().entitiesManager().addToGarbage(scaner_equipment);
         }  
     }
     
@@ -247,7 +247,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) con
     {
         GrappleEquipment* grapple_equipment = global::get().grappleEquipmentBuilder().create(tech_level);
         if (vehicle->AddAndManageItem(grapple_equipment) == false) {
-            global::get().entitiesManager().AddToGarbage(grapple_equipment);
+            global::get().entitiesManager().addToGarbage(grapple_equipment);
         }
     }
 }

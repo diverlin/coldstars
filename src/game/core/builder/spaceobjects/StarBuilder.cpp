@@ -32,12 +32,12 @@ StarBuilder::StarBuilder()
 StarBuilder::~StarBuilder()
 {}
 
-Star* StarBuilder::createTemplate(INTLONGEST id) const
+Star* StarBuilder::createTemplate(IDTYPE id) const
 { 
     Star* star = new Star(id);
     assert(star);
 
-    global::get().entitiesManager().RegisterEntity(star);
+    global::get().entitiesManager().registerEntity(star);
     
     return star;
 } 

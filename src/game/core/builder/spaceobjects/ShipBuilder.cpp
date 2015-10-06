@@ -33,12 +33,12 @@ ShipBuilder::ShipBuilder()
 
 ShipBuilder::~ShipBuilder() {}
 
-Ship* ShipBuilder::createTemplate(INTLONGEST id) const
+Ship* ShipBuilder::createTemplate(IDTYPE id) const
 {
     Ship* ship = new Ship(id);
     assert(ship);
 
-    global::get().entitiesManager().RegisterEntity(ship);
+    global::get().entitiesManager().registerEntity(ship);
     
     return ship;
 }

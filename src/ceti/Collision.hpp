@@ -30,7 +30,7 @@ template <typename AGRESSOR, typename VICTIM>
 bool checkCollision2D(AGRESSOR* agressor,  VICTIM* victim, bool show_effect)
 {
     if (checkCollisionDotWithCircle_DIRTY(agressor->center(), victim->center(), victim->collisionRadius()) == true) {
-        victim->hit(agressor->GetDamage(), show_effect);
+        victim->hit(agressor->GetDamage());
         agressor->CollisionEvent(show_effect);        
         return true;
     }

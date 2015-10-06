@@ -32,12 +32,12 @@
 #include <common/Global.hpp>
 
 
-VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
+VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY subtype_id, unsigned long int
 {
     VehicleSlot* vehicle_slot = new VehicleSlot(id, subtype_id);
     assert(vehicle_slot);
     
-    global::get().entitiesManager().RegisterEntity(vehicle_slot);
+    global::get().entitiesManager().registerEntity(vehicle_slot);
       
 //    jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::VEHICLE_SLOT_ID);
 //    vehicle_slot->SetTextureOb(texOb_slot);

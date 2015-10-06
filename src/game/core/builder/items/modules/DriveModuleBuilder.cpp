@@ -38,12 +38,12 @@ DriveModuleBuilder::DriveModuleBuilder()
 DriveModuleBuilder::~DriveModuleBuilder()
 {}
 
-DriveModule* DriveModuleBuilder::createTemplate(INTLONGEST id) const
+DriveModule* DriveModuleBuilder::createTemplate(IDTYPE id) const
 {
     DriveModule* drive_module = new DriveModule(id);
     assert(drive_module);
 
-    global::get().entitiesManager().RegisterEntity(drive_module);
+    global::get().entitiesManager().registerEntity(drive_module);
 
     return drive_module;
 } 

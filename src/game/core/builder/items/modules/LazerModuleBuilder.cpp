@@ -38,12 +38,12 @@ LazerModuleBuilder::LazerModuleBuilder()
 LazerModuleBuilder::~LazerModuleBuilder()
 {}
 
-LazerModule* LazerModuleBuilder::createTemplate(INTLONGEST id) const
+LazerModule* LazerModuleBuilder::createTemplate(IDTYPE id) const
 {
     LazerModule* lazer_module = new LazerModule(id);
     assert(lazer_module);
 
-    global::get().entitiesManager().RegisterEntity(lazer_module);
+    global::get().entitiesManager().registerEntity(lazer_module);
     
     return lazer_module;
 } 

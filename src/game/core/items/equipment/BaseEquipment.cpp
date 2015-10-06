@@ -46,7 +46,7 @@ BaseEquipment::~BaseEquipment()
 void BaseEquipment::putChildrenToGarbage() const
 {
     for (unsigned int i=0; i<modules_vec.size(); i++) {
-        global::get().entitiesManager().AddToGarbage(modules_vec[i]);
+        global::get().entitiesManager().addToGarbage(modules_vec[i]);
     }
 }
         

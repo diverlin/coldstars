@@ -39,12 +39,12 @@ ProtectorModuleBuilder::ProtectorModuleBuilder()
 ProtectorModuleBuilder::~ProtectorModuleBuilder()
 {}
 
-ProtectorModule* ProtectorModuleBuilder::createTemplate(INTLONGEST id) const
+ProtectorModule* ProtectorModuleBuilder::createTemplate(IDTYPE id) const
 {
     ProtectorModule* protector_module = new ProtectorModule(id);
     assert(protector_module);
 
-    global::get().entitiesManager().RegisterEntity(protector_module);
+    global::get().entitiesManager().registerEntity(protector_module);
     
     return protector_module;
 } 

@@ -35,12 +35,12 @@ GalaxyBuilder::GalaxyBuilder()
 GalaxyBuilder::~GalaxyBuilder()
 {}
 
-Galaxy* GalaxyBuilder::createTemplate(INTLONGEST id) const
+Galaxy* GalaxyBuilder::createTemplate(IDTYPE id) const
 {
     Galaxy* galaxy = new Galaxy(id);
     assert(galaxy);
 
-    global::get().entitiesManager().RegisterEntity(galaxy);
+    global::get().entitiesManager().registerEntity(galaxy);
     
     return galaxy;
 } 

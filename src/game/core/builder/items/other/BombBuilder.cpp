@@ -36,12 +36,12 @@ BombBuilder::BombBuilder()
 BombBuilder::~BombBuilder()
 {}
 
-Bomb* BombBuilder::createTemplate(INTLONGEST id) const
+Bomb* BombBuilder::createTemplate(IDTYPE id) const
 {
     Bomb* bomb = new Bomb(id);
     assert(bomb);
 
-    global::get().entitiesManager().RegisterEntity(bomb);
+    global::get().entitiesManager().registerEntity(bomb);
     
     return bomb;
 } 

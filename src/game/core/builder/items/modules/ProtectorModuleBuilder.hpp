@@ -29,7 +29,7 @@ class ProtectorModuleBuilder
         ProtectorModuleBuilder();
         ~ProtectorModuleBuilder();
 
-        ProtectorModule* createTemplate(INTLONGEST id = NONE_ID) const;
+        ProtectorModule* createTemplate(IDTYPE id = NONE_ID) const;
         ProtectorModule* create(int protection_add = NONE_ID) const;
                                      
     private:

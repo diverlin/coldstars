@@ -36,12 +36,12 @@ RocketModuleBuilder::RocketModuleBuilder()
 RocketModuleBuilder::~RocketModuleBuilder()
 {}
 
-RocketModule* RocketModuleBuilder::createTemplate(INTLONGEST id) const
+RocketModule* RocketModuleBuilder::createTemplate(IDTYPE id) const
 {
     RocketModule* rocket_module = new RocketModule(id);
     assert(rocket_module);
 
-    global::get().entitiesManager().RegisterEntity(rocket_module);
+    global::get().entitiesManager().registerEntity(rocket_module);
     
     return rocket_module;
 } 

@@ -17,8 +17,7 @@
 */
 
 
-#ifndef IDGENERATOR_HPP
-#define IDGENERATOR_HPP
+#pragma once
 
 #include <string>
 #include <vector>
@@ -30,18 +29,18 @@ class EntityIdGenerator
     public:
         static EntityIdGenerator& Instance();
         
-        INTLONGEST GetNextId();
-        void AddFreeId(INTLONGEST free_id) { free_ids.push_back(free_id); };
+        IDTYPE nextId();
+        void addFreeId(IDTYPE free_id) { free_ids.push_back(free_id); }
             
     private:
-        EntityIdGenerator():last_incremented_id(0) {}
+        EntityIdGenerator() {}
         ~EntityIdGenerator() {}
         
         EntityIdGenerator(EntityIdGenerator&) = delete;
         EntityIdGenerator& operator=(EntityIdGenerator&) = delete;
         
-        INTLONGEST last_incremented_id;
-        std::vector<INTLONGEST> free_ids; 
+        IDTYPE last_incremented_id = 0;
+        std::vector<IDTYPE> free_ids;
 };
 
 
@@ -50,7 +49,7 @@ class TextureIdGenerator
     public:
         static TextureIdGenerator& Instance();
         
-        INTLONGEST GetNextId();
+        IDTYPE GetNextId();
             
     private:
         TextureIdGenerator():last_incremented_id(0) {}       
@@ -59,7 +58,5 @@ class TextureIdGenerator
         TextureIdGenerator(TextureIdGenerator&) = delete;
         TextureIdGenerator& operator=(TextureIdGenerator&) = delete;
         
-        INTLONGEST last_incremented_id;
+        IDTYPE last_incremented_id;
 };
-
-#endif

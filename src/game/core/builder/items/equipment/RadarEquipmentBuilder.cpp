@@ -38,12 +38,12 @@ RadarEquipmentBuilder::RadarEquipmentBuilder()
 RadarEquipmentBuilder::~RadarEquipmentBuilder()
 {}
 
-RadarEquipment* RadarEquipmentBuilder::createTemplate(INTLONGEST id) const
+RadarEquipment* RadarEquipmentBuilder::createTemplate(IDTYPE id) const
 {
     RadarEquipment* radar_equipment = new RadarEquipment(id);
     assert(radar_equipment);
 
-    global::get().entitiesManager().RegisterEntity(radar_equipment);
+    global::get().entitiesManager().registerEntity(radar_equipment);
     
     return radar_equipment;
 } 

@@ -64,7 +64,7 @@ class SpaceObject : public ceti::Orientation, public Base
         void addImpulse(const glm::vec3&, float);
 
         virtual void remeberAgressor(SpaceObject*) {}
-        virtual void hit(int, bool show_effect = false);
+        virtual void hit(int);
         void killSilently();
         
 //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) {};

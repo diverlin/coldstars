@@ -23,16 +23,9 @@
 
 struct IdData  
 {
-    INTLONGEST id;
-    TYPE::ENTITY type_id;
-    TYPE::ENTITY subtype_id;
-    TYPE::ENTITY subsubtype_id;
-
-    IdData():
-    id(0),
-    type_id(TYPE::ENTITY::NONE_ID),
-    subtype_id(TYPE::ENTITY::NONE_ID),
-    subsubtype_id(TYPE::ENTITY::NONE_ID)
-    {}
+    IDTYPE id = 0;
+    TYPE::ENTITY type_id = TYPE::ENTITY::NONE_ID;
+    TYPE::ENTITY subtype_id = TYPE::ENTITY::NONE_ID;
+    TYPE::ENTITY subsubtype_id = TYPE::ENTITY::NONE_ID;
 };
 

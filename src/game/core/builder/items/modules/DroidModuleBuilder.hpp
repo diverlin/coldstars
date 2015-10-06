@@ -30,7 +30,7 @@ class DroidModuleBuilder
         DroidModuleBuilder();
         ~DroidModuleBuilder();
 
-        DroidModule* createTemplate(INTLONGEST id = NONE_ID) const;
+        DroidModule* createTemplate(IDTYPE id = NONE_ID) const;
         DroidModule* create(int repair_add = NONE_ID) const;
                                      
     private:

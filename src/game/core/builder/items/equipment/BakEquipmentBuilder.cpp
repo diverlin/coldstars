@@ -39,12 +39,12 @@ BakEquipmentBuilder::BakEquipmentBuilder()
 BakEquipmentBuilder::~BakEquipmentBuilder()
 {}
 
-BakEquipment* BakEquipmentBuilder::createTemplate(INTLONGEST id) const
+BakEquipment* BakEquipmentBuilder::createTemplate(IDTYPE id) const
 {
     BakEquipment* bak_equipment = new BakEquipment(id);
     assert(bak_equipment);
 
-    global::get().entitiesManager().RegisterEntity(bak_equipment);
+    global::get().entitiesManager().registerEntity(bak_equipment);
     
     return bak_equipment;
 } 

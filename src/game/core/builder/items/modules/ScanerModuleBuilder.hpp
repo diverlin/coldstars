@@ -30,7 +30,7 @@ class ScanerModuleBuilder
         ScanerModuleBuilder();
         ~ScanerModuleBuilder();
 
-        ScanerModule* createTemplate(INTLONGEST id = NONE_ID) const;
+        ScanerModule* createTemplate(IDTYPE id = NONE_ID) const;
         ScanerModule* create(int scan_add = NONE_ID) const;
                                      
     private:

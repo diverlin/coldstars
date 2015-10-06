@@ -16,8 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef TASK_HPP
-#define TASK_HPP
+#pragma once
 
 #include <boost/property_tree/ptree.hpp>
 
@@ -27,37 +26,36 @@
 class Task
 {
     public:
-        Task(TYPE::AISCENARIO scenario_type_id = TYPE::AISCENARIO::NONE_ID, INTLONGEST target_id = NONE_ID, int reward = 0, int expiriance = 0):
-        result(NONE_ID),
-        reward(reward),
-        expiriance(expiriance),
-        scenario_type_id(scenario_type_id),
-        target_id(target_id)
+        Task(TYPE::AISCENARIO scenario_type_id = TYPE::AISCENARIO::NONE_ID, IDTYPE target_id = NONE_ID, int reward = 0, int expiriance = 0):
+        m_reward(reward),
+        m_expiriance(expiriance),
+        m_scenario_type_id(scenario_type_id),
+        m_target_id(target_id)
         {}
         
-        ~Task() {};
+        ~Task() {}
 
-        void SetResult(int result)  { this->result = result; }
+        void SetResult(int result)  { m_result = result; }
                 
-        TYPE::AISCENARIO GetScenarioTypeId() const { return scenario_type_id; };
-        INTLONGEST GetTargetId() const { return target_id; };
+        TYPE::AISCENARIO GetScenarioTypeId() const { return m_scenario_type_id; }
+        IDTYPE targetId() const { return m_target_id; }
                 
-        int GetResult() const { return result; };
+        int result() const { return m_result; }
         
-        void Reset();
+        void reset();
                 
-        void Save(boost::property_tree::ptree&, const std::string&) const;
-        void Load(const boost::property_tree::ptree&);
+        void save(boost::property_tree::ptree&, const std::string&) const;
+        void load(const boost::property_tree::ptree&);
                 
     protected:
-        int result;
+        int m_result = NONE_ID;
     
-        int reward;
-        int expiriance;
+        int m_reward = 0;
+        int m_expiriance = 0;
         
-        TYPE::AISCENARIO scenario_type_id;
-        INTLONGEST target_id;    
+        TYPE::AISCENARIO m_scenario_type_id;
+        IDTYPE m_target_id = 0;
 };
 
-#endif 
+
      

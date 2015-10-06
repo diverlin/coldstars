@@ -31,7 +31,7 @@ class SatelliteBuilder : public BaseVehicleBuilder
         SatelliteBuilder();
         ~SatelliteBuilder();
         
-        Satellite* createTemplate(INTLONGEST id = NONE_ID) const;
+        Satellite* createTemplate(IDTYPE id = NONE_ID) const;
         Satellite* create() const;
        
     private:

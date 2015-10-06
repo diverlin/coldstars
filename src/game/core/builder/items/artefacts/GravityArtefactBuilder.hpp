@@ -30,7 +30,7 @@ class GravityArtefactBuilder
         GravityArtefactBuilder();
         ~GravityArtefactBuilder();
 
-        GravityArtefact* createTemplate(INTLONGEST id = NONE_ID) const;
+        GravityArtefact* createTemplate(IDTYPE id = NONE_ID) const;
         GravityArtefact* create(int gravity = NONE_ID) const;
                                      
     private:

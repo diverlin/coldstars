@@ -49,12 +49,12 @@ StoreBuilder::StoreBuilder()
 StoreBuilder::~StoreBuilder()
 {}
 
-Store* StoreBuilder::createTemplate(INTLONGEST id) const
+Store* StoreBuilder::createTemplate(IDTYPE id) const
 {
     Store* store = new Store(id);
     assert(store);
 
-    global::get().entitiesManager().RegisterEntity(store);
+    global::get().entitiesManager().registerEntity(store);
     
     return store;
 } 

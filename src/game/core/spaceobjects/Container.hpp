@@ -44,6 +44,8 @@ class Container : public SpaceObject
             
         void updateInSpace(int, bool);
 
+        void hit(int damage) override final;
+
 //        void Render(const jeti::Renderer&);
                             
         virtual void Save(boost::property_tree::ptree&) const override final;
@@ -51,10 +53,10 @@ class Container : public SpaceObject
         virtual void Resolve() override final;
         
     private:
-        ItemSlot* m_itemSlot;
+        ItemSlot* m_itemSlot = nullptr;
         
         glm::vec3 m_targetPos;
-        float m_velocity;
+        float m_velocity = 0.0f;
 
 //        virtual void UpdateInfo() override final;
          

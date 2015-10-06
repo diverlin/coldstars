@@ -81,7 +81,7 @@ bool Game::run() const
         }
         
         if (turnTimer.getTurnEnded() == true) {
-            global::get().entitiesManager().ClearGarbage();
+            global::get().entitiesManager().clearGarbage();
 
 //            bool save_event = global::get().entitiesManager().UpdateSaveRequest();
 //            bool load_event = global::get().entitiesManager().UpdateLoadRequest();

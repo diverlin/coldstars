@@ -160,7 +160,7 @@ void Star::ResolveData()
 {
     Logger::Instance().Log(" Star("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     
-    ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->add(this);     
+    ((StarSystem*)global::get().entitiesManager().entity(data_unresolved_SpaceObject.starsystem_id))->add(this);     
 }
 
 /* virtual override final */

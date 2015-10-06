@@ -42,12 +42,12 @@ EnergizerEquipmentBuilder::EnergizerEquipmentBuilder()
 EnergizerEquipmentBuilder::~EnergizerEquipmentBuilder()
 {}
 
-EnergizerEquipment* EnergizerEquipmentBuilder::createTemplate(INTLONGEST id) const
+EnergizerEquipment* EnergizerEquipmentBuilder::createTemplate(IDTYPE id) const
 {
     EnergizerEquipment* energizer_equipment = new EnergizerEquipment(id);
     assert(energizer_equipment);
 
-    global::get().entitiesManager().RegisterEntity(energizer_equipment);
+    global::get().entitiesManager().registerEntity(energizer_equipment);
     
     return energizer_equipment;
 } 

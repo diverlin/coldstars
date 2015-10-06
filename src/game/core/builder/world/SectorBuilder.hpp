@@ -31,7 +31,7 @@ class SectorBuilder
         SectorBuilder();
         ~SectorBuilder();
         
-        Sector* createTemplate(INTLONGEST id = NONE_ID) const;
+        Sector* createTemplate(IDTYPE id = NONE_ID) const;
         Sector* create(const SectorDescriptor&) const;
     
     private:

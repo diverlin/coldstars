@@ -27,12 +27,12 @@ RocketBulletBuilder::RocketBulletBuilder()
 RocketBulletBuilder::~RocketBulletBuilder()
 {}
 
-RocketBullet* RocketBulletBuilder::createTemplate(INTLONGEST id) const
+RocketBullet* RocketBulletBuilder::createTemplate(IDTYPE id) const
 {
     RocketBullet* rocket_bullet = new RocketBullet(id);
     assert(rocket_bullet);
 
-    global::get().entitiesManager().RegisterEntity(rocket_bullet);
+    global::get().entitiesManager().registerEntity(rocket_bullet);
     
     return rocket_bullet;
 }

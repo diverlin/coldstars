@@ -39,12 +39,12 @@ GrappleModuleBuilder::GrappleModuleBuilder()
 GrappleModuleBuilder::~GrappleModuleBuilder()
 {}
 
-GrappleModule* GrappleModuleBuilder::createTemplate(INTLONGEST id) const
+GrappleModule* GrappleModuleBuilder::createTemplate(IDTYPE id) const
 {
     GrappleModule* grapple_module = new GrappleModule(id);
     assert(grapple_module);
 
-    global::get().entitiesManager().RegisterEntity(grapple_module);
+    global::get().entitiesManager().registerEntity(grapple_module);
     
     return grapple_module;
 } 

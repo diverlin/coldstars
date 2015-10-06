@@ -37,12 +37,12 @@ GrappleEquipmentBuilder::GrappleEquipmentBuilder()
 GrappleEquipmentBuilder::~GrappleEquipmentBuilder()
 {}
 
-GrappleEquipment* GrappleEquipmentBuilder::createTemplate(INTLONGEST id) const
+GrappleEquipment* GrappleEquipmentBuilder::createTemplate(IDTYPE id) const
 {
     GrappleEquipment* grapple_equipment = new GrappleEquipment(id);
     assert(grapple_equipment);
 
-    global::get().entitiesManager().RegisterEntity(grapple_equipment);
+    global::get().entitiesManager().registerEntity(grapple_equipment);
     
     return grapple_equipment;
 } 

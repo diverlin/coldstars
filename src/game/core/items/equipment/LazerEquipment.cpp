@@ -116,7 +116,7 @@ void LazerEquipment::FireEvent(SpaceObject* target, ItemSlot* subtarget, float d
             
         }
 
-        target->hit(damage*damage_rate, show_effect);
+        target->hit(damage*damage_rate);
         deteriorationEvent();
 
         if (show_effect)

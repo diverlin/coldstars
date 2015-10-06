@@ -39,12 +39,12 @@ DroidEquipmentBuilder::DroidEquipmentBuilder()
 DroidEquipmentBuilder::~DroidEquipmentBuilder()
 {}
 
-DroidEquipment* DroidEquipmentBuilder::createTemplate(INTLONGEST id) const
+DroidEquipment* DroidEquipmentBuilder::createTemplate(IDTYPE id) const
 {
     DroidEquipment* droid_equipment = new DroidEquipment(id);
     assert(droid_equipment);
 
-    global::get().entitiesManager().RegisterEntity(droid_equipment);
+    global::get().entitiesManager().registerEntity(droid_equipment);
     
     return droid_equipment;
 } 

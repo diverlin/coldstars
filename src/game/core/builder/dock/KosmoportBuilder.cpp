@@ -34,12 +34,12 @@ KosmoportBuilder::KosmoportBuilder()
 KosmoportBuilder::~KosmoportBuilder()
 {}
 
-Kosmoport* KosmoportBuilder::createTemplate(INTLONGEST id) const
+Kosmoport* KosmoportBuilder::createTemplate(IDTYPE id) const
 {
     Kosmoport* kosmoport = new Kosmoport(id);
     assert(kosmoport);
 
-    global::get().entitiesManager().RegisterEntity(kosmoport);
+    global::get().entitiesManager().registerEntity(kosmoport);
     
     return kosmoport;
 } 

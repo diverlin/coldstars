@@ -24,7 +24,7 @@
 
 class ItemSlot;
 
-ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id = NONE_ID);
+ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, IDTYPE id = NONE_ID);
 ItemSlot* GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY subtype_id);
 
 
