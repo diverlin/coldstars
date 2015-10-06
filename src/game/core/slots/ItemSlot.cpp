@@ -571,12 +571,12 @@ void ItemSlot::ResolveData()
 
 void ItemSlot::log(const std::string& func_name) const
 {
-    std::string str = "ItemSlot(id="+std::to_string(id())+")::"+func_name+" "+dataTypeString();
+    std::string str = "ItemSlot(id="+std::to_string(id())+")::"+func_name+" "+dataTypeStr();
     
-    if (owner != nullptr)       { str += " owner:" + owner->dataTypeString(); }
-    if (m_item != nullptr)      { str += " item:" + m_item->dataTypeString();  }
-    if (m_target != nullptr)    { str += " target:" + m_target->dataTypeString();  }
-    if (m_subtarget != nullptr) { str += " subtarget:" + m_subtarget->dataTypeString(); }
+    if (owner != nullptr)       { str += " owner:" + owner->dataTypeStr(); }
+    if (m_item != nullptr)      { str += " item:" + m_item->dataTypeStr();  }
+    if (m_target != nullptr)    { str += " target:" + m_target->dataTypeStr();  }
+    if (m_subtarget != nullptr) { str += " subtarget:" + m_subtarget->dataTypeStr(); }
     
     Logger::Instance().Log(str, WEAPONSTARGET_LOG_DIP);
 }

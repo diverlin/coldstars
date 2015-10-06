@@ -63,8 +63,8 @@ void MessageManager::processMessage(const Message& message)
     Base* receiver = global::get().entityManager().entity(message.receiver_id);
     Base* sender   = global::get().entityManager().entity(message.sender_id);
 
-    std::cout<<sender->dataTypeString()<<std::endl;
-    std::cout<<receiver->dataTypeString()<<std::endl;
+    std::cout<<sender->dataTypeStr()<<std::endl;
+    std::cout<<receiver->dataTypeStr()<<std::endl;
 
     assert(receiver);
     assert(sender);

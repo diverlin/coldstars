@@ -40,7 +40,7 @@ class Base : private NonCopyable
         TYPE::ENTITY subTypeId() const { return m_data_id.subtype_id; }
         TYPE::ENTITY subSubTypeId() const { return m_data_id.subsubtype_id; }
                     
-        std::string dataTypeString() const;
+        std::string dataTypeStr() const;
 
         virtual void Save(boost::property_tree::ptree&) const {}
         virtual void Load(const boost::property_tree::ptree&) {}
