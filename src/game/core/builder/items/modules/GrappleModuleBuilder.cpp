@@ -18,7 +18,7 @@
 
 #include "GrappleModuleBuilder.hpp"
 #include <items/modules/GrappleModule.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <ceti/Logger.hpp>

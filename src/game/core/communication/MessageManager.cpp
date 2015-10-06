@@ -6,12 +6,6 @@
 #include <common/constants.hpp>
 
 
-MessageManager& MessageManager::get()
-{
-    static MessageManager instance;
-    return instance;
-}
-
 //void MessageManager::SendEvent(SpaceObject* receiver, const Message& message)
 //{
 //    //receiver->HandleMessage(message);

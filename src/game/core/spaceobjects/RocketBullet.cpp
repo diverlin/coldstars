@@ -24,7 +24,7 @@
 #include <common/constants.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 #include <world/starsystem.hpp>
 
 //#include <jeti/particlesystem/DriveEffect.hpp>

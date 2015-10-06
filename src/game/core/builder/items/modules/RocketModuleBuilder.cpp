@@ -19,7 +19,7 @@
 #include "RocketModuleBuilder.hpp"
 #include <items/modules/RocketModule.hpp>
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <ceti/Logger.hpp>

@@ -31,7 +31,7 @@
 
 #include <spaceobjects/Vehicle.hpp>
 
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 //#include <jeti/Render.hpp>
 

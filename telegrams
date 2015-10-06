@@ -1,0 +1,15 @@
+   int      int         enum       enum        time         time       void
+[MSG_ID]-[ENTITY_ID]-[TYPE_ID]-[ACTION_ID]-[TIME_SEND]-[TIME_EXECUTE]-[DATA]
+
+ long int    enum     long int   long int    void
+[MSG_ID]-[TYPE_ID]-[SENDER_ID]-[RECEVER_ID]-[DATA]
+
+
+TYPE_ID:
+CREATE
+INSERT
+REMOVE
+DELETE
+
+
+

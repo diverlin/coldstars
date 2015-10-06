@@ -26,7 +26,7 @@
 #include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 BaseEquipment::BaseEquipment()
 {

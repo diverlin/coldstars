@@ -61,5 +61,5 @@ class Base : private NonCopyable
 
         IdData m_data_id;
 
-        friend class EntitiesManager;
+        friend class EntityManager;
 };

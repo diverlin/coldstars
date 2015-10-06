@@ -21,7 +21,7 @@
 //#include <ceti/StringUtils.hpp>
 #include "../common/constants.hpp"
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 #include "../dock/Angar.hpp"
 #include "../dock/Store.hpp"

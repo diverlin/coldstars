@@ -20,7 +20,7 @@
 #include "../spaceobjects/Vehicle.hpp"
 #include <world/starsystem.hpp>
 #include <world/Sector.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 //#include <ceti/StringUtils.hpp>
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>

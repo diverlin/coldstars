@@ -24,7 +24,7 @@
 #include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 #include <world/starsystem.hpp>
 
 //#include <jeti/Render.hpp>
@@ -113,8 +113,7 @@ void Container::postDeathUniqueEvent(bool show_effect)
 void Container::updateInSpace(int time, bool show_effect)
 {
     checkDeath(show_effect);         
-    if (time > 0)
-    {
+    if (time > 0) {
         setCenter(center() + externalForce());
         externalForce() *= 0.99;
     }

@@ -50,7 +50,7 @@
 #include "../../builder/items/IncludeItemBuilders.hpp"
 
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 #include <builder/slots/ItemSlotBuilder.hpp>
 

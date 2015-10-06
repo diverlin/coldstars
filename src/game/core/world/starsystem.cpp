@@ -32,7 +32,7 @@
 //#include <ceti/StringUtils.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 #include <common/Config.hpp>
 
 //#include <jeti/Render.hpp>

@@ -18,7 +18,7 @@
 
 #include "Global.hpp"
 #include <ai/God.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 #include <common/Config.hpp>
 #include <common/TurnTimer.hpp>
 #include <common/GameDate.hpp>
@@ -86,7 +86,7 @@ global& global::get()
 global::global()
     :
       m_god(new God)
-    , m_entitiesManager(new EntitiesManager)
+    , m_entitiesManager(new EntityManager)
     , m_config(new Config)
     , m_turnTimer(new TurnTimer)
     , m_gameDate(new GameDate)

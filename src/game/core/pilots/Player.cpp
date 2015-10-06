@@ -24,7 +24,7 @@
 //#include <jeti/Screen.hpp>
 //#include <world/starsystem.hpp>
 //#include <common/Global.hpp>
-//#include <managers/EntitiesManager.hpp>
+//#include <managers/EntityManager.hpp>
 
 //#include <math/rand.hpp>
 ////#include <ceti/StringUtils.hpp>

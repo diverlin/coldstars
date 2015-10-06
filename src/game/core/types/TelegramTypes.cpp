@@ -17,31 +17,17 @@
 */
 
 
-#include <builder/slots/VehicleSlotBuilder.hpp>
-#include <managers/EntityManager.hpp>
+#include "TelegramTypes.hpp"
 
-#include <common/IdGenerator.hpp>
-
-#include <ceti/Logger.hpp>
-#include <math/rand.hpp>
-
-//#include <resources/TextureCollector.hpp>
-
-#include <slots/VehicleSlot.hpp>
-
-#include <common/Global.hpp>
-
-
-VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY subtype_id, const ID& id)
+std::string str(TELEGRAM type_id)
 {
-    VehicleSlot* vehicle_slot = new VehicleSlot(id, subtype_id);
-    assert(vehicle_slot);
-    
-    global::get().entitiesManager().registerEntity(vehicle_slot);
-      
-//    jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::VEHICLE_SLOT_ID);
-//    vehicle_slot->SetTextureOb(texOb_slot);
-          
-    return vehicle_slot;
+    switch (type_id) {
+        case TELEGRAM::CREATE:  { return "TELEGRAM::CREATE"; break; }
+        case TELEGRAM::INSERT:  { return "TELEGRAM::INSERT"; break; }
+        case TELEGRAM::REMOVE:  { return "TELEGRAM::REMOVE"; break; }
+        case TELEGRAM::DELETE:  { return "TELEGRAM::DELETE"; break; }
+        case TELEGRAM::HIT:     { return "TELEGRAM::HIT"; break; }
+        default: return "TELEGRAM::UKNOWN"; break;
+    }
 }
 

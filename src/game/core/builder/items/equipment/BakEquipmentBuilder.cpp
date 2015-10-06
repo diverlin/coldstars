@@ -19,7 +19,7 @@
 
 #include <builder/items/equipment/BakEquipmentBuilder.hpp>
 #include <items/equipment/BakEquipment.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>
 #include <ceti/Logger.hpp>

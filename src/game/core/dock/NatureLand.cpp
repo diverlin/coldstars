@@ -25,7 +25,7 @@
 #include "../slots/ItemSlot.hpp"
 
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 NatureLand::NatureLand(int id)
 {
