@@ -81,12 +81,12 @@ bool Game::run() const
         }
         
         if (turnTimer.getTurnEnded() == true) {
-            global::get().entitiesManager().clearGarbage();
+            global::get().entityManager().clearGarbage();
 
-//            bool save_event = global::get().entitiesManager().UpdateSaveRequest();
-//            bool load_event = global::get().entitiesManager().UpdateLoadRequest();
+//            bool save_event = global::get().entityManager().UpdateSaveRequest();
+//            bool load_event = global::get().entityManager().UpdateLoadRequest();
 //            if (load_event == true) {
-//                player = global::get().entitiesManager().GetPlayer();
+//                player = global::get().entityManager().GetPlayer();
 //                galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();
 //            }
 //            if (save_event == true) {

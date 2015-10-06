@@ -46,7 +46,7 @@ GravityArtefact* GravityArtefactBuilder::createTemplate(ID id) const
     GravityArtefact* gravity_artefact = new GravityArtefact(id);
     assert(gravity_artefact);
 
-    global::get().entitiesManager().reg(gravity_artefact);
+    global::get().entityManager().reg(gravity_artefact);
     
     return gravity_artefact;
 } 

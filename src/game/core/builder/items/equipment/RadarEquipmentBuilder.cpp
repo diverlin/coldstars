@@ -43,7 +43,7 @@ RadarEquipment* RadarEquipmentBuilder::createTemplate(ID id) const
     RadarEquipment* radar_equipment = new RadarEquipment(id);
     assert(radar_equipment);
 
-    global::get().entitiesManager().reg(radar_equipment);
+    global::get().entityManager().reg(radar_equipment);
     
     return radar_equipment;
 } 

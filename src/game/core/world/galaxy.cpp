@@ -39,7 +39,7 @@ Galaxy::~Galaxy()
 void Galaxy::putChildrenToGarbage() const
 {
     for (unsigned int i=0; i<m_sectors.size(); i++) {
-        global::get().entitiesManager().addToGarbage(m_sectors[i]);
+        global::get().entityManager().addToGarbage(m_sectors[i]);
     }
 }
 

@@ -87,7 +87,7 @@ class global
         static global& get();
 
         God& god() { return *m_god; }
-        EntityManager& entitiesManager() { return *m_entitiesManager; }
+        EntityManager& entityManager() { return *m_entityManager; }
         Config& config() { return *m_config; }
         TurnTimer& turnTimer() { return *m_turnTimer; }
         GameDate& gameDate() { return *m_gameDate; }
@@ -154,7 +154,7 @@ class global
         global& operator=(const global&) = delete;
 
         God* m_god = nullptr;
-        EntityManager* m_entitiesManager = nullptr;
+        EntityManager* m_entityManager = nullptr;
         Config* m_config = nullptr;
         TurnTimer* m_turnTimer = nullptr;
         GameDate* m_gameDate = nullptr;

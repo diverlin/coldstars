@@ -190,10 +190,10 @@ void RocketBullet::ResolveData()
                 
     if (unresolved_RocketBullet_target_id != NONE_ID)
     {
-        m_Target = (SpaceObject*)global::get().entitiesManager().entity(unresolved_RocketBullet_target_id);
+        m_Target = (SpaceObject*)global::get().entityManager().entity(unresolved_RocketBullet_target_id);
     }
     
-    ((StarSystem*)global::get().entitiesManager().entity(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction);
+    ((StarSystem*)global::get().entityManager().entity(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction);
 }
    
    

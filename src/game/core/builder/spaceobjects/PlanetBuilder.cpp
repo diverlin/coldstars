@@ -41,7 +41,7 @@ Planet* PlanetBuilder::createTemplate(ID id) const
     Planet* planet = new Planet(id);
     assert(planet);
 
-    global::get().entitiesManager().reg(planet);
+    global::get().entityManager().reg(planet);
     
     return planet;
 } 

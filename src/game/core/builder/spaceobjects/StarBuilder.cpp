@@ -37,7 +37,7 @@ Star* StarBuilder::createTemplate(ID id) const
     Star* star = new Star(id);
     assert(star);
 
-    global::get().entitiesManager().reg(star);
+    global::get().entityManager().reg(star);
     
     return star;
 } 

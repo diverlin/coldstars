@@ -69,7 +69,7 @@ ItemSlot::~ItemSlot()
 void ItemSlot::putChildrenToGarbage() const
 {
     if (m_item) {
-        global::get().entitiesManager().addToGarbage(m_item);
+        global::get().entityManager().addToGarbage(m_item);
     }
 }
 
@@ -552,11 +552,11 @@ void ItemSlot::ResolveData()
     Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     
     if (m_unresolved_ItemSlot.target_id != NONE_ID) {
-        m_target = (SpaceObject*)global::get().entitiesManager().entity(m_unresolved_ItemSlot.target_id);
+        m_target = (SpaceObject*)global::get().entityManager().entity(m_unresolved_ItemSlot.target_id);
     }
 
     if (m_unresolved_ItemSlot.subtarget_id != NONE_ID) {
-        m_subtarget = (ItemSlot*)global::get().entitiesManager().entity(m_unresolved_ItemSlot.subtarget_id);
+        m_subtarget = (ItemSlot*)global::get().entityManager().entity(m_unresolved_ItemSlot.subtarget_id);
     }
 
     switch(owner->typeId())

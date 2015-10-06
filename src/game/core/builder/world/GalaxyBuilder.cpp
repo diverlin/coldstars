@@ -40,7 +40,7 @@ Galaxy* GalaxyBuilder::createTemplate(ID id) const
     Galaxy* galaxy = new Galaxy(id);
     assert(galaxy);
 
-    global::get().entitiesManager().reg(galaxy);
+    global::get().entityManager().reg(galaxy);
     
     return galaxy;
 } 

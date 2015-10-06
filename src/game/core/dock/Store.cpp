@@ -43,7 +43,7 @@ void Store::putChildrenToGarbage() const
 {            
     for(unsigned int i=0; i<item_slot_vec.size(); i++)
     {
-        global::get().entitiesManager().addToGarbage(item_slot_vec[i]);
+        global::get().entityManager().addToGarbage(item_slot_vec[i]);
     }
 }
 
@@ -155,7 +155,7 @@ void Store::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Store::ResolveData()
 {
-    ((Kosmoport*)global::get().entitiesManager().entity(data_unresolved_Room.owner_kosmoport_id))->BindStore(this); 
+    ((Kosmoport*)global::get().entityManager().entity(data_unresolved_Room.owner_kosmoport_id))->BindStore(this); 
 }
 
 void Store::Save(boost::property_tree::ptree& save_ptree) const

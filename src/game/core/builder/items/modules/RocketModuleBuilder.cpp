@@ -41,7 +41,7 @@ RocketModule* RocketModuleBuilder::createTemplate(ID id) const
     RocketModule* rocket_module = new RocketModule(id);
     assert(rocket_module);
 
-    global::get().entitiesManager().reg(rocket_module);
+    global::get().entityManager().reg(rocket_module);
     
     return rocket_module;
 } 

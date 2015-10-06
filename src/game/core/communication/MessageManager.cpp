@@ -5,6 +5,8 @@
 
 #include <common/constants.hpp>
 
+#include <types/EntityTypes.hpp> // test
+
 
 //void MessageManager::SendEvent(SpaceObject* receiver, const Message& message)
 //{
@@ -17,8 +19,8 @@
 //                                int    type_id,
 //                                void*  extra)
 //{
-//    Base* sender   = global::get().entitiesManager().entity(sender_id);
-//    Base* receiver = global::get().entitiesManager().entity(receiver_id);
+//    Base* sender   = global::get().entityManager().entity(sender_id);
+//    Base* receiver = global::get().entityManager().entity(receiver_id);
 //    if (!receiver) {
 //        return;
 //    }
@@ -48,13 +50,33 @@ void MessageManager::updateQueue()
     //while( !messages_queue.empty() && (messages_queue.begin()->DispatchTime < CurrentTime) && (messages_queue.begin()->DispatchTime > 0) )
     {
         const Message& message = *m_messages_queue.begin();
+        processMessage(message);
 
-        Base* receiver = global::get().entitiesManager().entity(message.receiver_id);
         //SendEvent(receiver, message);
 
         m_messages_queue.erase(m_messages_queue.begin());
     }
 }
 
+void MessageManager::processMessage(const Message& message)
+{
+    Base* receiver = global::get().entityManager().entity(message.receiver_id);
+    Base* sender   = global::get().entityManager().entity(message.sender_id);
+
+    std::cout<<str(sender->typeId())<<std::endl;
+    std::cout<<str(receiver->typeId())<<std::endl;
+    assert(receiver);
+    assert(sender);
+
+    switch(message.type_id) {
+        case TELEGRAM::HIT: {
+            SpaceObject* receiver = static_cast<SpaceObject*>(receiver);
+            assert(receiver);
+            receiver->hit(100);
+            break;
+        }
+        default: { break; }
+    }
+}
 
 

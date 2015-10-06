@@ -22,5 +22,7 @@ class MessageManager
     private:
         std::set<Message> m_messages_queue;
 
+        void processMessage(const Message& message);
+
 //        void SendEvent(SpaceObject*, const Message&);
 };

@@ -47,7 +47,7 @@ DriveEquipment* DriveEquipmentBuilder::createTemplate(ID id) const
     DriveEquipment* drive_equipment = new DriveEquipment(id);
     assert(drive_equipment);
 
-    global::get().entitiesManager().reg(drive_equipment);
+    global::get().entityManager().reg(drive_equipment);
     
     return drive_equipment;
 } 
