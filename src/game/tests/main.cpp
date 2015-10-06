@@ -35,15 +35,27 @@
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/StarSystemDescriptor.hpp>
 
-#include <common/MessageManager.hpp>
+#include <communication/MessageManager.hpp>
+#include <managers/EntityManager.hpp>
 
-TEST(common,message)
+TEST(base,message)
 {
-    Message message(TELEGRAM::CREATE, NONE_ID, NONE_ID, nullptr);
-    MessageManager::get().addMessage(message);
+    auto entityManager = new EntityManager;
+    auto messageManager = new MessageManager;
+
+    auto shipBuilder = new ShipBuilder;
+    auto ship1 = shipBuilder->create();
+    auto ship2 = shipBuilder->create();
+
+    entityManager->reg(ship1);
+    entityManager->reg(ship2);
+
+    Message message(TELEGRAM::HIT, ship1->id(), ship2->id(), "100");
+    messageManager->addMessage(message);
+    messageManager->updateQueue();
 }
 
-TEST(common,bomb)
+TEST(base,bomb)
 {
     // create builders
     auto starsystemBuilder = new StarSystemBuilder;

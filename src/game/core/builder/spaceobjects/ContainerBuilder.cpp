@@ -40,7 +40,7 @@ Container* ContainerBuilder::createTemplate(ID id) const
     Container* container = new Container(id);
     assert(container);
 
-    global::get().entitiesManager().registerEntity(container);
+    global::get().entitiesManager().reg(container);
     
     return container;
 } 

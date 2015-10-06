@@ -44,7 +44,7 @@ DroidEquipment* DroidEquipmentBuilder::createTemplate(ID id) const
     DroidEquipment* droid_equipment = new DroidEquipment(id);
     assert(droid_equipment);
 
-    global::get().entitiesManager().registerEntity(droid_equipment);
+    global::get().entitiesManager().reg(droid_equipment);
     
     return droid_equipment;
 } 

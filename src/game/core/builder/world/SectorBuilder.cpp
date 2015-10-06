@@ -38,7 +38,7 @@ Sector* SectorBuilder::createTemplate(ID id) const
     Sector* sector = new Sector(id);
     assert(sector);
 
-    global::get().entitiesManager().registerEntity(sector);
+    global::get().entitiesManager().reg(sector);
     
     return sector;
 } 

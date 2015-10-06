@@ -108,7 +108,7 @@ void EntityManager::clear()
     m_entities_map.clear();
 }
 
-void EntityManager::registerEntity(Base* entity)
+void EntityManager::reg(Base* entity)
 {
     //Logger::Instance().Log("+++++++EntityManager::RegisterEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     

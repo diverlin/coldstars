@@ -42,7 +42,7 @@ DroidModule* DroidModuleBuilder::createTemplate(ID id) const
     DroidModule* droid_module = new DroidModule(id);
     assert(droid_module);
 
-    global::get().entitiesManager().registerEntity(droid_module);
+    global::get().entitiesManager().reg(droid_module);
     
     return droid_module;
 } 

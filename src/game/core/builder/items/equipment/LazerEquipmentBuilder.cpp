@@ -46,7 +46,7 @@ LazerEquipment* LazerEquipmentBuilder::createTemplate(ID id) const
     LazerEquipment* lazer_equipment = new LazerEquipment(id);
     assert(lazer_equipment);
 
-    global::get().entitiesManager().registerEntity(lazer_equipment);
+    global::get().entitiesManager().reg(lazer_equipment);
     
     return lazer_equipment;
 } 

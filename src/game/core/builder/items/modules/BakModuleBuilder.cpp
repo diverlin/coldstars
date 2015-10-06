@@ -44,7 +44,7 @@ BakModule* BakModuleBuilder::createTemplate(ID id) const
     BakModule* bak_module = new BakModule(id);
     assert(bak_module);
 
-    global::get().entitiesManager().registerEntity(bak_module);
+    global::get().entitiesManager().reg(bak_module);
     
     return bak_module;
 } 

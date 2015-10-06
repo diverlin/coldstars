@@ -34,7 +34,7 @@ Satellite* SatelliteBuilder::createTemplate(ID id) const
     Satellite* satellite = new Satellite(id);
     assert(satellite);
 
-    global::get().entitiesManager().registerEntity(satellite);
+    global::get().entitiesManager().reg(satellite);
     
     return satellite;
 }

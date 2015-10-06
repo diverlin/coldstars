@@ -42,7 +42,7 @@ ScanerModule* ScanerModuleBuilder::createTemplate(ID id) const
     ScanerModule* scaner_module = new ScanerModule(id);
     assert(scaner_module);
 
-    global::get().entitiesManager().registerEntity(scaner_module);
+    global::get().entitiesManager().reg(scaner_module);
     
     return scaner_module;
 } 

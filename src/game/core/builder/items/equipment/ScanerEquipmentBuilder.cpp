@@ -47,7 +47,7 @@ ScanerEquipment* ScanerEquipmentBuilder::createTemplate(ID id) const
     ScanerEquipment* scaner_equipment = new ScanerEquipment(id);
     assert(scaner_equipment);
 
-    global::get().entitiesManager().registerEntity(scaner_equipment);
+    global::get().entitiesManager().reg(scaner_equipment);
     
     return scaner_equipment;
 } 

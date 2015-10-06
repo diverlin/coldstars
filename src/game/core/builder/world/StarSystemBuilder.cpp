@@ -46,7 +46,7 @@ StarSystem* StarSystemBuilder::createTemplate(ID id) const
     StarSystem* starsystem = new StarSystem(id);
     assert(starsystem);
 
-    global::get().entitiesManager().registerEntity(starsystem);
+    global::get().entitiesManager().reg(starsystem);
     
     return starsystem;
 } 
