@@ -34,6 +34,9 @@ const int GUI_LOG_DIP = 0;
 const int GOD_LOG_DIP = 0;
 const int OBJLOADER_LOG_DIP = 0;
 
+#define LOG( ... )          std::cerr  << __VA_ARGS__ << std::endl
+#define LOG_ERROR( ... )    std::cerr  << __FILE__ << " " << __LINE__ << " " << __VA_ARGS__ << std::endl
+
 class Logger
 {
     public:

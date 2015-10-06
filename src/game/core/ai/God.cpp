@@ -131,7 +131,8 @@ void God::update(Galaxy* galaxy, const GameDate& date)
 {
     if (m_DateLastUpdate - date >= GOD_REST_IN_DAYS)
     {
-        Logger::Instance().Log("God::Update", GOD_LOG_DIP);
+//        Logger::Instance().Log("God::Update", GOD_LOG_DIP);
+        LOG("God::Update");
             
         galaxy->FillStarSystemsCondition(data_starsystems_condition);
         m_DateLastUpdate = date;
