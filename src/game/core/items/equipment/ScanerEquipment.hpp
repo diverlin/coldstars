@@ -25,7 +25,7 @@
 class ScanerEquipment : public BaseEquipment
 {
       public:
-            ScanerEquipment(int);
+            ScanerEquipment(const IDTYPE& id);
             virtual ~ScanerEquipment();
 
                 void SetScanOrig(int scan_orig)  { this->scan_orig = scan_orig; };

@@ -60,7 +60,7 @@ void BulletData::Resolve()
 
 
 
-RocketEquipment::RocketEquipment(unsigned long int
+RocketEquipment::RocketEquipment(const IDTYPE& id)
 :
 ammo_max_orig(0),
 ammo(0),

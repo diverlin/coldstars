@@ -44,7 +44,7 @@
 #include <common/Global.hpp>
 #include <managers/EntitiesManager.hpp>
 
-ItemSlot::ItemSlot(unsigned long int TYPE::ENTITY subtype_id)
+ItemSlot::ItemSlot(const IDTYPE& id, TYPE::ENTITY subtype_id)
     :
       m_turrel(nullptr),
       m_item(nullptr),

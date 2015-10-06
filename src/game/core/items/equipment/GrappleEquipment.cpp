@@ -29,7 +29,7 @@
 //#include <resources/GuiTextureObCollector.hpp>
 
 
-GrappleEquipment::GrappleEquipment(int id)
+GrappleEquipment::GrappleEquipment(const IDTYPE& id)
 :
 strength_orig(0),
 radius_orig(0),

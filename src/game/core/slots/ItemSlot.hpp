@@ -76,7 +76,7 @@ struct UnresolvedDataItemSlot
 class ItemSlot : public BaseSlot
 {   
     public:        
-        ItemSlot(unsigned long intPE::ENTITY);
+        ItemSlot(const IDTYPE& id, TYPE::ENTITY subtype_id);
         virtual ~ItemSlot();                
         
         virtual void putChildrenToGarbage() const;

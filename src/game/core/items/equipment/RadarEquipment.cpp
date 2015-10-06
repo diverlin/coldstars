@@ -22,9 +22,9 @@
 #include <ceti/Logger.hpp>
 #include "../../items//modules/RadarModule.hpp"
 
-RadarEquipment::RadarEquipment(int id)
-:
-radius_orig(0)
+RadarEquipment::RadarEquipment(const IDTYPE& id)
+    :
+      radius_orig(0)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
@@ -43,12 +43,12 @@ void RadarEquipment::updateProperties()
     radius_add  = 0;
     
     for (unsigned int i=0; i<modules_vec.size(); i++) {
-        radius_add += ((RadarModule*)modules_vec[i])->GetRadiusAdd();            
+        radius_add += ((RadarModule*)modules_vec[i])->GetRadiusAdd();
     }
     
     radius = radius_orig + radius_add;
 }
-   
+
 void RadarEquipment::CountPrice()
 {
     float radius_rate         = (float)radius_orig / EQUIPMENT::RADAR::RADIUS_MIN;
@@ -62,11 +62,11 @@ void RadarEquipment::CountPrice()
 
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
- 
+
 void RadarEquipment::AddUniqueInfo()
 {
-//    info.addTitleStr("RADAR");
-//    info.addNameStr("radius:");     info.addValueStr(GetRadiusStr());
+    //    info.addTitleStr("RADAR");
+    //    info.addNameStr("radius:");     info.addValueStr(GetRadiusStr());
 }
 
 std::string RadarEquipment::GetRadiusStr()
@@ -112,17 +112,17 @@ void RadarEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std
     
     save_ptree.put(root+"radius_orig", radius_orig);
 }
-                
+
 void RadarEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     Logger::Instance().Log(" RadarEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
     
-    radius_orig = load_ptree.get<int>("radius_orig");   
+    radius_orig = load_ptree.get<int>("radius_orig");
 }                
 
 void RadarEquipment::ResolveData()
 {
     Logger::Instance().Log(" RadarEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
 }
-   
+
 

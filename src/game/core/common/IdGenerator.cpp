@@ -24,19 +24,16 @@ EntityIdGenerator& EntityIdGenerator::Instance()
     return instance;
 }
 
-unsigned long intityIdGenerator::nextId()
+IDTYPE EntityIdGenerator::nextId()
 {  
-    if (!free_ids.empty())
-    {
-         unsigned long int= free_ids[free_ids.size()-1];
-         free_ids.pop_back();
-         return id;         
-    }
-    else
-    {
+//    if (!free_ids.empty()) {
+//         unsigned long int= free_ids[free_ids.size()-1];
+//         free_ids.pop_back();
+//         return id;
+//    } else {
         last_incremented_id++;
         return last_incremented_id;
-    }
+//    }
 }  
 
 
@@ -46,10 +43,9 @@ TextureIdGenerator& TextureIdGenerator::Instance()
     return instance;
 }
 
-unsigned long inttureIdGenerator::nextId()
+IDTYPE TextureIdGenerator::nextId()
 {  
-    last_incremented_id++;
-        
+    last_incremented_id++;        
     return last_incremented_id;
 }  
 

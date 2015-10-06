@@ -25,31 +25,31 @@
 class ProtectorEquipment  : public BaseEquipment
 {
     public:
-              ProtectorEquipment(int);
-              virtual ~ProtectorEquipment();
+        ProtectorEquipment(const IDTYPE& id);
+        virtual ~ProtectorEquipment();
 
-                void SetProtectionOrig(int protection_orig) { this->protection_orig = protection_orig; };
+        void SetProtectionOrig(int protection_orig) { this->protection_orig = protection_orig; };
         int GetProtection() const { return protection; };
-              
-              virtual void updateProperties();
-              
-                void CountPrice();
-                                
-              virtual void Save(boost::property_tree::ptree&) const;
+
+        virtual void updateProperties();
+
+        void CountPrice();
+
+        virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
         virtual void Resolve();
         
-          private:
-                    int protection_orig;
-              int protection_add;
-              int protection;
+    private:
+        int protection_orig;
+        int protection_add;
+        int protection;
 
-             void virtual AddUniqueInfo();
-               std::string GetProtectionStr();
-                
-                void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        void virtual AddUniqueInfo();
+        std::string GetProtectionStr();
+
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();                  
+        void ResolveData();
 };
 
 #endif 
