@@ -134,16 +134,11 @@ void RocketBullet::CollisionEvent(bool show_effect)
 //}
 
 /* virtual override final */
-void RocketBullet::hit(int damage, bool show_effect)
+void RocketBullet::hit(int damage)
 {
-    dataLife().armor -= damage;
+    SpaceObject::hit(damage);
 
-    if (dataLife().armor < 0)
-    {
-        dataLife().is_alive = false;
-    }
-
-    if (show_effect == true)
+    //if (show_effect == true)
     {
         // improove
 //        VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(center()), COLOR::COLOR4I_RED_LIGHT, collisionRadius());
@@ -195,10 +190,10 @@ void RocketBullet::ResolveData()
                 
     if (unresolved_RocketBullet_target_id != NONE_ID)
     {
-        m_Target = (SpaceObject*)global::get().entitiesManager().GetEntityById(unresolved_RocketBullet_target_id);
+        m_Target = (SpaceObject*)global::get().entitiesManager().entity(unresolved_RocketBullet_target_id);
     }
     
-    ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction); 
+    ((StarSystem*)global::get().entitiesManager().entity(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction);
 }
    
    

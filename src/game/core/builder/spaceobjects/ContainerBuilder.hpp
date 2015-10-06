@@ -36,7 +36,7 @@ class ContainerBuilder
         ContainerBuilder();
         ~ContainerBuilder();
 
-        Container* createTemplate(INTLONGEST id = NONE_ID) const;
+        Container* createTemplate(IDTYPE id = NONE_ID) const;
         Container* create(jeti::TextureOb*, BaseItem*) const;
         Container* create(BaseItem*) const;
         Container* create(int) const;

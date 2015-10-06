@@ -35,12 +35,12 @@ ContainerBuilder::ContainerBuilder()
 ContainerBuilder::~ContainerBuilder()
 {}
 
-Container* ContainerBuilder::createTemplate(INTLONGEST id) const
+Container* ContainerBuilder::createTemplate(IDTYPE id) const
 {       
     Container* container = new Container(id);
     assert(container);
 
-    global::get().entitiesManager().RegisterEntity(container);
+    global::get().entitiesManager().registerEntity(container);
     
     return container;
 } 

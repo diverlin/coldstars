@@ -35,7 +35,7 @@ struct UnresolvedDataBaseSlot
     UnresolvedDataBaseSlot()
     {}
     
-    INTLONGEST owner_id = NONE_ID;
+    unsigned long inter_id = NONE_ID;
 };
 
 

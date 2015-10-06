@@ -33,12 +33,12 @@ SectorBuilder::SectorBuilder()
 SectorBuilder::~SectorBuilder()
 {}
 
-Sector* SectorBuilder::createTemplate(INTLONGEST id) const
+Sector* SectorBuilder::createTemplate(IDTYPE id) const
 {   
     Sector* sector = new Sector(id);
     assert(sector);
 
-    global::get().entitiesManager().RegisterEntity(sector);
+    global::get().entitiesManager().registerEntity(sector);
     
     return sector;
 } 

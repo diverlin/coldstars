@@ -42,12 +42,12 @@ DriveEquipmentBuilder::DriveEquipmentBuilder()
 DriveEquipmentBuilder::~DriveEquipmentBuilder()
 {}
 
-DriveEquipment* DriveEquipmentBuilder::createTemplate(INTLONGEST id) const
+DriveEquipment* DriveEquipmentBuilder::createTemplate(IDTYPE id) const
 {
     DriveEquipment* drive_equipment = new DriveEquipment(id);
     assert(drive_equipment);
 
-    global::get().entitiesManager().RegisterEntity(drive_equipment);
+    global::get().entitiesManager().registerEntity(drive_equipment);
     
     return drive_equipment;
 } 

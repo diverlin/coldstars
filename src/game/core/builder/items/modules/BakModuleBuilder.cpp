@@ -39,12 +39,12 @@ BakModuleBuilder::BakModuleBuilder()
 BakModuleBuilder::~BakModuleBuilder()
 {}
 
-BakModule* BakModuleBuilder::createTemplate(INTLONGEST id) const
+BakModule* BakModuleBuilder::createTemplate(IDTYPE id) const
 {
     BakModule* bak_module = new BakModule(id);
     assert(bak_module);
 
-    global::get().entitiesManager().RegisterEntity(bak_module);
+    global::get().entitiesManager().registerEntity(bak_module);
     
     return bak_module;
 } 

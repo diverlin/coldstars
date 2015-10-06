@@ -110,7 +110,7 @@ void GoodsPack::ResolveData()
 }
 
 
-GoodsPack* GetNewGoodsPack(TYPE::ENTITY subtype_id, INTLONGEST id)
+GoodsPack* GetNewGoodsPack(TYPE::ENTITY subtype_id, unsigned long int
 {
 //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER_ID);
@@ -118,7 +118,7 @@ GoodsPack* GetNewGoodsPack(TYPE::ENTITY subtype_id, INTLONGEST id)
     GoodsPack* goodsPack = new GoodsPack(id, subtype_id);
     //alpitodorender goodsPack->SetRenderData(mesh, texOb, texOb->size());
     
-    global::get().entitiesManager().RegisterEntity(goodsPack);
+    global::get().entitiesManager().registerEntity(goodsPack);
             
     return goodsPack;
 }

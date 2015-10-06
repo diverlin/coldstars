@@ -30,7 +30,7 @@ class ShopBuilder
         ShopBuilder();
         ~ShopBuilder();
 
-        Shop* createTemplate(INTLONGEST id = NONE_ID) const;
+        Shop* createTemplate(IDTYPE id = NONE_ID) const;
         Shop* create() const;
                                                     
     private: 

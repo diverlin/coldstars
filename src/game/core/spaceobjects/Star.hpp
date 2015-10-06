@@ -33,7 +33,7 @@ class Star : public Planetoid
 //        float GetBrightThreshold() const;
         float GetDeltaColor() const { return m_DeltaColor; }
         
-        void hit(int, bool) {};
+        void hit(int) {};
         void InitiateSpark();
         
 

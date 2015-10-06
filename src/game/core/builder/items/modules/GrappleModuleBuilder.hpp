@@ -30,7 +30,7 @@ class GrappleModuleBuilder
         GrappleModuleBuilder();
         ~GrappleModuleBuilder();
 
-        GrappleModule* createTemplate(INTLONGEST id = NONE_ID) const;
+        GrappleModule* createTemplate(IDTYPE id = NONE_ID) const;
         GrappleModule* create(int strength_add = NONE_ID, int radius_add = NONE_ID, int speed_add = NONE_ID) const;
                                      
     private:

@@ -30,12 +30,12 @@ ShopBuilder::ShopBuilder()
 ShopBuilder::~ShopBuilder()
 {}
 
-Shop* ShopBuilder::createTemplate(INTLONGEST id) const
+Shop* ShopBuilder::createTemplate(IDTYPE id) const
 {
     Shop* shop = new Shop(id);
     assert(shop);
 
-    global::get().entitiesManager().RegisterEntity(shop);
+    global::get().entitiesManager().registerEntity(shop);
 
     return shop;
 } 

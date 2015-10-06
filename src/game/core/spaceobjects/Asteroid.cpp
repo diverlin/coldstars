@@ -113,7 +113,7 @@ void Asteroid::ResolveData()
 {
     Logger::Instance().Log(" Asteroid("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
     
-    ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it); 
+    ((StarSystem*)global::get().entitiesManager().entity(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it); 
 }
 
 /* virtual override final */    

@@ -51,28 +51,27 @@ class Npc : public Base
         
         virtual void putChildrenToGarbage() const {};
         
-        void SetRaceId(TYPE::RACE race_id)            { this->race_id = race_id; };
-        void SetAiModel(BaseAiModel* ai_model)        { this->ai_model = ai_model; };
+        void SetRaceId(TYPE::RACE race_id)            { this->race_id = race_id; }
+        void SetAiModel(BaseAiModel* ai_model)        { this->ai_model = ai_model; }
         void SetAlive(bool is_alive)            { this->is_alive = is_alive; }
-        void SetScanTarget(Vehicle* vehicle_to_scan)    { this->vehicle_to_scan = vehicle_to_scan; };
-        void SetPlayer(Player* player) { this->player = player; };
-        void SetVehicle(Vehicle* vehicle)         { this->vehicle = vehicle; };
+        void SetScanTarget(Vehicle* vehicle_to_scan)    { this->vehicle_to_scan = vehicle_to_scan; }
+        void SetPlayer(Player* player) { this->player = player; }
+        void SetVehicle(Vehicle* vehicle)         { this->vehicle = vehicle; }
 
-        TYPE::RACE GetRaceId()            const { return race_id; };
+        TYPE::RACE GetRaceId()            const { return race_id; }
 
-        Player* GetPlayer() const { return player; };
-        Vehicle* GetVehicle()           const { return vehicle; };
-        Skills& GetSkills()         { return skills; };
-        Vehicle* GetScanTarget()        const { return vehicle_to_scan; };
-        Observation& GetObservation()   { return observation; };
-        INTLONGEST GetCredits()  const { return credits; };
-        StateMachine& GetStateMachine() { return state_machine; };
+        Player* GetPlayer() const { return player; }
+        Vehicle* GetVehicle()           const { return vehicle; }
+        Skills& GetSkills()         { return skills; }
+        Vehicle* GetScanTarget()        const { return vehicle_to_scan; }
+        Observation& GetObservation()   { return observation; }
+        unsigned long int GetCredits()  const { return credits; }
+        StateMachine& GetStateMachine() { return state_machine; }
 
         StarSystem* starsystem() const;
 
-        void IncreaseCredits(INTLONGEST credits) { this->credits += credits; };
-        bool WithdrawCredits(INTLONGEST);
-
+        void IncreaseCredits(unsigned long int credits) { this->credits += credits; }
+        bool WithdrawCredits(unsigned long int);
         void AddExpirience(int, bool);
         
         void CloneMacroTaskFrom(Npc*);
@@ -110,7 +109,7 @@ class Npc : public Base
     private:
         bool is_alive;
         TYPE::RACE race_id;
-        INTLONGEST credits;
+        unsigned long int credits;
         
         Player* player;
         Vehicle* vehicle;

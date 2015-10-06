@@ -17,28 +17,17 @@
 */
 
 
-#ifndef LIFEDATA_HPP
-#define LIFEDATA_HPP
-
+#pragma once
 
 struct LifeData
 {
-    bool is_alive;
-    int armor;
-
-    int life_time;
-    int dying_time;
-
-    bool garbage_ready;
+    bool is_alive = true;
+    bool is_dying = false;
+    int armor = 1;
+    int life_time = 0;
+    int dying_time = 0;
+    bool garbage_ready = false;
 
     LifeData()
-    :
-    is_alive(true),
-    armor(1),
-    life_time(0),
-    dying_time(0),
-    garbage_ready(false) 
     {}        
 };
-
-#endif

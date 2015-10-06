@@ -37,12 +37,12 @@ DroidModuleBuilder::DroidModuleBuilder()
 DroidModuleBuilder::~DroidModuleBuilder()
 {}
 
-DroidModule* DroidModuleBuilder::createTemplate(INTLONGEST id) const
+DroidModule* DroidModuleBuilder::createTemplate(IDTYPE id) const
 {
     DroidModule* droid_module = new DroidModule(id);
     assert(droid_module);
 
-    global::get().entitiesManager().RegisterEntity(droid_module);
+    global::get().entitiesManager().registerEntity(droid_module);
     
     return droid_module;
 } 

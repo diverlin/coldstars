@@ -38,12 +38,12 @@ ProtectorEquipmentBuilder::ProtectorEquipmentBuilder()
 ProtectorEquipmentBuilder::~ProtectorEquipmentBuilder()
 {}
 
-ProtectorEquipment* ProtectorEquipmentBuilder::createTemplate(INTLONGEST id) const
+ProtectorEquipment* ProtectorEquipmentBuilder::createTemplate(IDTYPE id) const
 {
     ProtectorEquipment* protector_equipment = new ProtectorEquipment(id);
     assert(protector_equipment);
 
-    global::get().entitiesManager().RegisterEntity(protector_equipment);
+    global::get().entitiesManager().registerEntity(protector_equipment);
     
     return protector_equipment;
 } 

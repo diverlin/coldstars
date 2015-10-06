@@ -38,12 +38,12 @@ NpcBuilder::NpcBuilder()
 NpcBuilder::~NpcBuilder()
 {}
 
-Npc* NpcBuilder::createTemplate(TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id, INTLONGEST id) const
+Npc* NpcBuilder::createTemplate(TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id, IDTYPE id) const
 {
     Npc* npc = new Npc(id, subtype_id, subsubtype_id);
     assert(npc);
 
-    global::get().entitiesManager().RegisterEntity(npc);
+    global::get().entitiesManager().registerEntity(npc);
     
     return npc;
 }

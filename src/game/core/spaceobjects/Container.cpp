@@ -36,9 +36,6 @@
 
 
 Container::Container(int id)
-:
-m_itemSlot(nullptr),
-m_velocity(0)    
 {
     setId(id);
     setTypeId(TYPE::ENTITY::CONTAINER_ID);
@@ -53,7 +50,19 @@ Container::~Container()
 /* virtual override final */
 void Container::putChildrenToGarbage() const
 {
-    global::get().entitiesManager().AddToGarbage(m_itemSlot);
+    global::get().entitiesManager().addToGarbage(m_itemSlot);
+}
+
+/* override final */
+void Container::hit(int damage) {
+    SpaceObject::hit(damage);
+    if (dataLife().is_dying) {
+        if (m_itemSlot->item()) {
+            if (m_itemSlot->item()->subTypeId() == TYPE::ENTITY::BOMB_ID) {
+                // send explosion event
+            }
+        }
+    }
 }
             
 void Container::bindItemSlot(ItemSlot* item_slot) 
@@ -140,7 +149,7 @@ void Container::ResolveData()
 {
     Logger::Instance().Log(" Container("+std::to_string(id())+")::ResolveData()", SAVELOAD_LOG_DIP);
     
-    ((StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center); 
+    ((StarSystem*)global::get().entitiesManager().entity(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center);
 }        
 
 /* virtual override final */

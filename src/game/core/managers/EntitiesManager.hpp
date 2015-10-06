@@ -26,40 +26,40 @@
 #include <common/Base.hpp>
 class Player;
 
-
 class EntitiesManager
 {
     public:
-        EntitiesManager():save_request(false), load_request(false){}
+        EntitiesManager() {}
 
-        void SaveRequest() { save_request = true; };
-        void LoadRequest() { load_request = true; };
+        void saveRequest() { m_save_request = true; }
+        void loadRequest() { m_load_request = true; }
         
-        void RegisterEntity(Base*);
+        void registerEntity(Base*);
     
-        Base* GetEntityById(unsigned long int) const;
-        Player* GetPlayer() const;
+        Base* entity(const IDTYPE&) const;
+        Player* player() const;
 
-        bool UpdateSaveRequest();        
-        bool UpdateLoadRequest();
+        bool updateSaveRequest();
+        bool updateLoadRequest();
         
-        void AddToGarbage(Base*);
-        void ClearGarbage();
+        void addToGarbage(Base*);
+        void clearGarbage();
 
     private:
-        bool save_request, load_request;
+        bool m_save_request = false;
+        bool m_load_request = false;
         
-        std::map<unsigned long int, Base*> entity_map;
+        std::map<IDTYPE, Base*> m_entities_map;
 
         std::vector<Base*> m_garbage;
 
-        void RemoveEntity(Base*);
+        void removeEntity(Base*);
 
-        void Clear();
+        void clear();
                 
-        void SaveEvent(const std::string&);
-        void LoadPass0(const std::string&);
-        void LoadPass1() const;                        
+        void saveEvent(const std::string&);
+        void loadPass0(const std::string&);
+        void loadPass1() const;
 
 };
 

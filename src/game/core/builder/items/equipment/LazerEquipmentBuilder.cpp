@@ -41,12 +41,12 @@ LazerEquipmentBuilder::LazerEquipmentBuilder()
 LazerEquipmentBuilder::~LazerEquipmentBuilder()
 {}
 
-LazerEquipment* LazerEquipmentBuilder::createTemplate(INTLONGEST id) const
+LazerEquipment* LazerEquipmentBuilder::createTemplate(IDTYPE id) const
 { 
     LazerEquipment* lazer_equipment = new LazerEquipment(id);
     assert(lazer_equipment);
 
-    global::get().entitiesManager().RegisterEntity(lazer_equipment);
+    global::get().entitiesManager().registerEntity(lazer_equipment);
     
     return lazer_equipment;
 } 

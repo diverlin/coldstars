@@ -92,19 +92,21 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 //    GetComplexProtector().GetShieldEffect()->Update();
     GetComplexDrive().UpdatePosition(); // debug
 
-    if (time > 0)
-    {
+    if (time > 0) {
         UpdateSpecialAction();
         
-        GetOwnerNpc()->UpdateInSpace(time, show_effect);
-        updateOrientation();
-        GetComplexWeapon().Fire(time, GetOwnerNpc()->GetSkills().GetAttackNormalized(), show_effect);
-        
-        if (GetProperties().speed > 0) {
-            GetComplexDrive().UpdatePosition();
+        if (GetOwnerNpc()) {
+            GetOwnerNpc()->UpdateInSpace(time, show_effect);
+            GetComplexWeapon().Fire(time, GetOwnerNpc()->GetSkills().GetAttackNormalized(), show_effect);
+
+            updateOrientation();
+
+            if (GetProperties().speed > 0) {
+                GetComplexDrive().UpdatePosition();
+            }
+
+            UpdateGrappleMicroProgram_inDynamic();
         }
-        
-        UpdateGrappleMicroProgram_inDynamic();
     }
 }
 

@@ -33,12 +33,12 @@
 #include <slots/ItemSlot.hpp>
 
 
-ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, INTLONGEST id)
+ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, unsigned long int
 {  
     ItemSlot* item_slot = new ItemSlot(id, subtype_id);
     assert(item_slot);
 
-    global::get().entitiesManager().RegisterEntity(item_slot);
+    global::get().entitiesManager().registerEntity(item_slot);
     
     //jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);
 //    item_slot->SetTextureOb(texOb_slot);

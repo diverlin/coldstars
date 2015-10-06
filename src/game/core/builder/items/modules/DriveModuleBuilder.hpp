@@ -30,7 +30,7 @@ class DriveModuleBuilder
         DriveModuleBuilder();
         ~DriveModuleBuilder();
 
-        DriveModule* createTemplate(INTLONGEST id = NONE_ID) const;
+        DriveModule* createTemplate(IDTYPE id = NONE_ID) const;
         DriveModule* create(int speed_add = NONE_ID, int hyper_add = NONE_ID) const;
                                      
     private:

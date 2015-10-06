@@ -8,59 +8,53 @@
 
 MessageManager& MessageManager::Instance()
 {
-      static MessageManager instance;
+    static MessageManager instance;
     return instance;
 }
 
-void MessageManager::SendEvent(SpaceObject* receiver, const Message& message)
-{
-      //receiver->HandleMessage(message);
-}
+//void MessageManager::SendEvent(SpaceObject* receiver, const Message& message)
+//{
+//    //receiver->HandleMessage(message);
+//}
 
-void MessageManager::NewMessage(double delay,
-                               int    sender_id,
-                               int    receiver_id,
-                               int    type_id,
-                               void*  extra)
+void MessageManager::newMessage(double delay,
+                                int    sender_id,
+                                int    receiver_id,
+                                int    type_id,
+                                void*  extra)
 {
-      //SpaceObject* sender   = (SpaceObject*)global::get().entitiesManager().GetEntityById(sender_id);
-      SpaceObject* receiver = (SpaceObject*)global::get().entitiesManager().GetEntityById(receiver_id);
-
-      if (receiver == nullptr)
-      {
+    Base* sender   = global::get().entitiesManager().entity(sender_id);
+    Base* receiver = global::get().entitiesManager().entity(receiver_id);
+    if (!receiver) {
         return;
-      }
-  
+    }
+
     Message message(NO_DELAY, sender_id, receiver_id, type_id, extra);
-  
-                  
-      if (delay <= 0.0f)                                                        
-      {
-        SendEvent(receiver, message);
+
+    if (delay <= 0.0f) {
+        //SendEvent(receiver, message);
         return;
-      }
-      else
-      {
-        //double CurrentTime = Clock->GetCurrentTime(); 
+    } else {
+        //double CurrentTime = Clock->GetCurrentTime();
         //telegram.DispatchTime = CurrentTime + delay;
     }
     
-    messages_queue.insert(message);   
+    m_messages_queue.insert(message);
 }
 
-void MessageManager::UpdateQueue()
+void MessageManager::updateQueue()
 { 
-      //double CurrentTime = Clock->GetCurrentTime();
+    //double CurrentTime = Clock->GetCurrentTime();
 
-      //while( !messages_queue.empty() && (messages_queue.begin()->DispatchTime < CurrentTime) && (messages_queue.begin()->DispatchTime > 0) )
-      {
-          const Message& message = *messages_queue.begin();
-      
-        SpaceObject* receiver = (SpaceObject*)global::get().entitiesManager().GetEntityById(message.receiver_id);
-        SendEvent(receiver, message);
+    //while( !messages_queue.empty() && (messages_queue.begin()->DispatchTime < CurrentTime) && (messages_queue.begin()->DispatchTime > 0) )
+    {
+        const Message& message = *m_messages_queue.begin();
 
-        messages_queue.erase(messages_queue.begin());
-      }
+        Base* receiver = global::get().entitiesManager().entity(message.receiver_id);
+        //SendEvent(receiver, message);
+
+        m_messages_queue.erase(m_messages_queue.begin());
+    }
 }
 
 

@@ -39,12 +39,12 @@ NatureLandBuilder::NatureLandBuilder()
 NatureLandBuilder::~NatureLandBuilder()
 {}
 
-NatureLand* NatureLandBuilder::createTemplate(INTLONGEST id) const
+NatureLand* NatureLandBuilder::createTemplate(IDTYPE id) const
 {
     NatureLand* natureland = new NatureLand(id);
     assert(natureland);
 
-    global::get().entitiesManager().RegisterEntity(natureland);
+    global::get().entitiesManager().registerEntity(natureland);
     
     return natureland;
 } 

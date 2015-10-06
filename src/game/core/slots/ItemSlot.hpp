@@ -66,17 +66,17 @@ class Renderer;
 
 struct UnresolvedDataItemSlot
 {
-    UnresolvedDataItemSlot():target_id(NONE_ID), subtarget_id(NONE_ID) 
+    UnresolvedDataItemSlot()
     {}
     
-    INTLONGEST target_id;    
-    INTLONGEST subtarget_id; 
+    IDTYPE target_id = NONE_ID;
+    IDTYPE subtarget_id = NONE_ID;
 };
 
 class ItemSlot : public BaseSlot
 {   
     public:        
-        ItemSlot(INTLONGEST, TYPE::ENTITY);
+        ItemSlot(unsigned long intPE::ENTITY);
         virtual ~ItemSlot();                
         
         virtual void putChildrenToGarbage() const;

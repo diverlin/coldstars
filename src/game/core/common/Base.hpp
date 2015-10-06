@@ -35,7 +35,7 @@ class Base : private NonCopyable
         void setMeshId(int mesh_id) { m_mesh_id = mesh_id; }
         void setTextureId(int texture_id) { m_texture_id = texture_id; }
 
-        INTLONGEST id() const { return m_data_id.id; }
+        IDTYPE id() const { return m_data_id.id; }
         TYPE::ENTITY typeId() const { return m_data_id.type_id; }
         TYPE::ENTITY subTypeId() const { return m_data_id.subtype_id; }
         TYPE::ENTITY subSubTypeId() const { return m_data_id.subsubtype_id; }
@@ -47,7 +47,7 @@ class Base : private NonCopyable
         virtual void Resolve() {}
         
     protected:
-        void setId(INTLONGEST id)                  { m_data_id.id = id; }
+        void setId(IDTYPE id)               { m_data_id.id = id; }
         void setTypeId(TYPE::ENTITY type_id)       { m_data_id.type_id = type_id; }
         void setSubTypeId(TYPE::ENTITY subtype_id) { m_data_id.subtype_id = subtype_id; }
         

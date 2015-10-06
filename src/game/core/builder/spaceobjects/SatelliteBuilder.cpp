@@ -29,12 +29,12 @@ SatelliteBuilder::SatelliteBuilder()
 SatelliteBuilder::~SatelliteBuilder()
 {}
 
-Satellite* SatelliteBuilder::createTemplate(INTLONGEST id) const
+Satellite* SatelliteBuilder::createTemplate(IDTYPE id) const
 {
     Satellite* satellite = new Satellite(id);
     assert(satellite);
 
-    global::get().entitiesManager().RegisterEntity(satellite);
+    global::get().entitiesManager().registerEntity(satellite);
     
     return satellite;
 }

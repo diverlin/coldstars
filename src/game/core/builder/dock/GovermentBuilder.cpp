@@ -29,12 +29,12 @@ GovermentBuilder::GovermentBuilder()
 GovermentBuilder::~GovermentBuilder()
 {}
 
-Goverment* GovermentBuilder::createTemplate(INTLONGEST id) const
+Goverment* GovermentBuilder::createTemplate(IDTYPE id) const
 {
     Goverment* goverment = new Goverment(id);
     assert(goverment);
 
-    global::get().entitiesManager().RegisterEntity(goverment);
+    global::get().entitiesManager().registerEntity(goverment);
     
     return goverment;
 } 

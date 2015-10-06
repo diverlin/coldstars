@@ -27,24 +27,24 @@
 class EnergizerEquipment : public BaseEquipment
 {
     public:
-        EnergizerEquipment(INTLONGEST);         
+        EnergizerEquipment(const IDTYPE& id);
         virtual ~EnergizerEquipment();
 
         void SetEnergyMaxOrig(int energy_max_orig)    { this->energy_max_orig  = energy_max_orig; };
-            void SetRestorationOrig(int restoration_orig) { this->restoration_orig = restoration_orig; };
+        void SetRestorationOrig(int restoration_orig) { this->restoration_orig = restoration_orig; };
         void SetEnergy(int energy) { this->energy  = energy; };
-                                                  
+
         int GetEnergyMax() const { return energy_max; };
         int GetEnergy() const { return energy; };
 
-        void IncreaseEnergy(int energy) { this->energy += energy; };              
+        void IncreaseEnergy(int energy) { this->energy += energy; };
         void DecreaseEnergy(int energy) { this->energy -= energy; };
-                    
+
         void CountPrice();
         virtual void updateProperties();
-                    
+
         virtual void updateInStatic();
-                    
+
         virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
         virtual void Resolve();
@@ -65,7 +65,7 @@ class EnergizerEquipment : public BaseEquipment
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
-        void ResolveData(); 
+        void ResolveData();
 };
 
 

@@ -33,12 +33,12 @@ AsteroidBuilder::AsteroidBuilder()
 AsteroidBuilder::~AsteroidBuilder()
 {}
 
-Asteroid* AsteroidBuilder::createTemplate(INTLONGEST id) const
+Asteroid* AsteroidBuilder::createTemplate(IDTYPE id) const
 { 
     Asteroid* asteroid = new Asteroid(id);
     assert(asteroid);
 
-    global::get().entitiesManager().RegisterEntity(asteroid);
+    global::get().entitiesManager().registerEntity(asteroid);
     
     return asteroid;
 } 

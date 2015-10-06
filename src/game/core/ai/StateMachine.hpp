@@ -16,12 +16,11 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef STATEMACHINE_H
-#define STATEMACHINE_H
+#pragma once
 
-#include "../ai/Task.hpp"
-#include "../ai/MacroTaskManager.hpp"
-#include "../ai/MicroTaskManager.hpp"
+#include <ai/Task.hpp>
+#include <ai/MacroTaskManager.hpp>
+#include <ai/MicroTaskManager.hpp>
 
 class StateMachine
 {
@@ -29,13 +28,13 @@ class StateMachine
         StateMachine();
         ~StateMachine();
 
-        void SetNpcOwner(Npc* npc_owner) { this->npc_owner = npc_owner; };
+        void SetNpcOwner(Npc* npc_owner) { this->npc_owner = npc_owner; }
         
         void SetCurrentMacroTask(const Task&);
         void SetCurrentMicroTask(const Task&);
         
-        const MacroTaskManager& GetMacroTaskManager() const { return macrotask_manager; };
-        const MicroTaskManager& GetMicroTaskManager() const { return microtask_manager; };        
+        const MacroTaskManager& GetMacroTaskManager() const { return macrotask_manager; }
+        const MicroTaskManager& GetMicroTaskManager() const { return microtask_manager; }
                 
         void UpdateInStaticInSpace();    
         void UpdateInStaticInDock();    
@@ -45,14 +44,11 @@ class StateMachine
         void ForceReset(); // was private
         
     private:
-        Npc* npc_owner;
+        Npc* npc_owner = nullptr;
         
-        MacroTaskManager macrotask_manager;        
-        MicroTaskManager microtask_manager;    
+        MacroTaskManager macrotask_manager;
+        MicroTaskManager microtask_manager;
                     
     //friend void Player::ForceStateMachineReset() const;
 }; 
 
-
-#endif 
-     

@@ -37,12 +37,12 @@ ScanerModuleBuilder::ScanerModuleBuilder()
 ScanerModuleBuilder::~ScanerModuleBuilder()
 {}
 
-ScanerModule* ScanerModuleBuilder::createTemplate(INTLONGEST id) const
+ScanerModule* ScanerModuleBuilder::createTemplate(IDTYPE id) const
 {
     ScanerModule* scaner_module = new ScanerModule(id);
     assert(scaner_module);
 
-    global::get().entitiesManager().RegisterEntity(scaner_module);
+    global::get().entitiesManager().registerEntity(scaner_module);
     
     return scaner_module;
 } 

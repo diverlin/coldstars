@@ -42,12 +42,12 @@ FreezerEquipmentBuilder::FreezerEquipmentBuilder()
 FreezerEquipmentBuilder::~FreezerEquipmentBuilder()
 {}
 
-FreezerEquipment* FreezerEquipmentBuilder::createTemplate(INTLONGEST id) const
+FreezerEquipment* FreezerEquipmentBuilder::createTemplate(IDTYPE id) const
 {
     FreezerEquipment* freezer_equipment  = new FreezerEquipment(id);
     assert(freezer_equipment);
 
-    global::get().entitiesManager().RegisterEntity(freezer_equipment);
+    global::get().entitiesManager().registerEntity(freezer_equipment);
 
     return freezer_equipment;
 } 

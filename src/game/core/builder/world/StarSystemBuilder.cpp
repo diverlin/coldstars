@@ -41,12 +41,12 @@ StarSystemBuilder::StarSystemBuilder()
 StarSystemBuilder::~StarSystemBuilder()
 {}
 
-StarSystem* StarSystemBuilder::createTemplate(INTLONGEST id) const
+StarSystem* StarSystemBuilder::createTemplate(IDTYPE id) const
 {
     StarSystem* starsystem = new StarSystem(id);
     assert(starsystem);
 
-    global::get().entitiesManager().RegisterEntity(starsystem);
+    global::get().entitiesManager().registerEntity(starsystem);
     
     return starsystem;
 } 

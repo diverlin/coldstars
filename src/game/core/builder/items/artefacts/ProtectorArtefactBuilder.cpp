@@ -40,12 +40,12 @@ ProtectorArtefactBuilder::ProtectorArtefactBuilder()
 ProtectorArtefactBuilder::~ProtectorArtefactBuilder()
 {}
 
-ProtectorArtefact* ProtectorArtefactBuilder::createTemplate(INTLONGEST id) const
+ProtectorArtefact* ProtectorArtefactBuilder::createTemplate(IDTYPE id) const
 {
     ProtectorArtefact* protector_artefact = new ProtectorArtefact(id);
     assert(protector_artefact);
 
-    global::get().entitiesManager().RegisterEntity(protector_artefact);
+    global::get().entitiesManager().registerEntity(protector_artefact);
     
     return protector_artefact;
 } 

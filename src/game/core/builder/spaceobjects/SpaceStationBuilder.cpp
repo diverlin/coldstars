@@ -33,12 +33,12 @@ SpaceStationBuilder::SpaceStationBuilder()
 
 SpaceStationBuilder::~SpaceStationBuilder() {}
 
-SpaceStation* SpaceStationBuilder::createTemplate(INTLONGEST id) const
+SpaceStation* SpaceStationBuilder::createTemplate(IDTYPE id) const
 {           
     SpaceStation* spacestation = new SpaceStation(id);
     assert(spacestation);
 
-    global::get().entitiesManager().RegisterEntity(spacestation);
+    global::get().entitiesManager().registerEntity(spacestation);
     
     return spacestation;
 }

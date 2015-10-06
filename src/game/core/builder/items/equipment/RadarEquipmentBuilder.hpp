@@ -32,7 +32,7 @@ class RadarEquipmentBuilder
         RadarEquipmentBuilder();
         ~RadarEquipmentBuilder();
 
-        RadarEquipment* createTemplate(INTLONGEST id = NONE_ID) const;
+        RadarEquipment* createTemplate(IDTYPE id = NONE_ID) const;
         RadarEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int radius_orig = NONE_ID) const;
                                      
     private:

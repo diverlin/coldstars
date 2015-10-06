@@ -24,7 +24,7 @@
 
 class VehicleSlot;
 
-VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY, INTLONGEST id = NONE_ID);
+VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY, IDTYPE id = NONE_ID);
 
     
 

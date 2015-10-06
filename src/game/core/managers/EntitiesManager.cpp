@@ -97,32 +97,32 @@
 
 #include <slots/ItemSlot.hpp>
 
-void EntitiesManager::Clear()
+void EntitiesManager::clear()
 {
-    for (std::map<unsigned long int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
+    for (std::map<unsigned long int, Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++)
     {
         //Logger::Instance().Log("________EntitiesManager::Clear, delete " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
         delete iterator->second;
     }
 
-    entity_map.clear();
+    m_entities_map.clear();
 }
 
-void EntitiesManager::RegisterEntity(Base* entity)
+void EntitiesManager::registerEntity(Base* entity)
 {
     //Logger::Instance().Log("+++++++EntitiesManager::RegisterEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     
     if (entity->id() == NONE_ID) {
-        entity->setId(EntityIdGenerator::Instance().GetNextId());
+        entity->setId(EntityIdGenerator::Instance().nextId());
     }
-    entity_map.insert(std::make_pair(entity->id(), entity));
+    m_entities_map.insert(std::make_pair(entity->id(), entity));
 }
 
-Base* EntitiesManager::GetEntityById(unsigned long int id) const
+Base* EntitiesManager::entity(IDTYPE id) const
 {
-    Logger::Instance().Log("    EntitiesManager::GetEntityById requested_id=" + std::to_string(id));
+    Logger::Instance().Log("    EntitiesManager::entity requested_id=" + std::to_string(id));
     
-    std::map<unsigned long int, Base*>::const_iterator slice = entity_map.find(id);
+    std::map<IDTYPE, Base*>::const_iterator slice = m_entities_map.find(id);
 
     assert(slice->second);
 
@@ -131,9 +131,9 @@ Base* EntitiesManager::GetEntityById(unsigned long int id) const
     return slice->second;
 }
 
-Player* EntitiesManager::GetPlayer() const
+Player* EntitiesManager::player() const
 {
-    for (std::map<unsigned long int, Base*>::const_iterator it=entity_map.begin(); it!=entity_map.end(); ++it) {
+    for (std::map<unsigned long int, Base*>::const_iterator it=m_entities_map.begin(); it!=m_entities_map.end(); ++it) {
         if (it->second->typeId() == TYPE::ENTITY::PLAYER_ID) {
             return (Player*)it->second;
         }
@@ -141,23 +141,23 @@ Player* EntitiesManager::GetPlayer() const
     return nullptr;
 }
 
-void EntitiesManager::RemoveEntity(Base* entity)
+void EntitiesManager::removeEntity(Base* entity)
 {    
     //Logger::Instance().Log("________EntitiesManager::RemoveEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
 
-    if (entity_map.count(entity->id()) == 1) {
-        entity_map.erase(entity_map.find(entity->id()));
+    if (m_entities_map.count(entity->id()) == 1) {
+        m_entities_map.erase(m_entities_map.find(entity->id()));
     } else {
         //Logger::Instance().Log("fix the BUG ---EntitiesManager::RemoveEntity fails " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     }
 } 
 
 
-void EntitiesManager::SaveEvent(const std::string& filename)
+void EntitiesManager::saveEvent(const std::string& filename)
 {
     boost::property_tree::ptree save_ptree;
     
-    for (std::map<unsigned long int, Base*>::iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
+    for (std::map<unsigned long int, Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++)
     {
         //Logger::Instance().Log("saving " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
         iterator->second->Save(save_ptree);
@@ -167,7 +167,7 @@ void EntitiesManager::SaveEvent(const std::string& filename)
     write_info("save/save_last.info", save_ptree);
 }
 
-void EntitiesManager::LoadPass0(const std::string& filename)
+void EntitiesManager::loadPass0(const std::string& filename)
 {
     Logger::Instance().Log("LOADING STARTED");
     
@@ -639,10 +639,10 @@ void EntitiesManager::LoadPass0(const std::string& filename)
     
 }
 
-void EntitiesManager::LoadPass1() const
+void EntitiesManager::loadPass1() const
 {
     Logger::Instance().Log("RESOLVING DEPENDENCY START");
-    for (std::map<unsigned long int, Base*>::const_iterator iterator = entity_map.begin(); iterator != entity_map.end(); iterator++)
+    for (std::map<unsigned long int, Base*>::const_iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++)
     {
         Logger::Instance().Log("Load() in " + iterator->second->dataTypeString());
         iterator->second->Resolve();
@@ -652,11 +652,11 @@ void EntitiesManager::LoadPass1() const
 }
 
 
-bool EntitiesManager::UpdateSaveRequest()
+bool EntitiesManager::updateSaveRequest()
 {        
-    if (save_request == true) {
-        SaveEvent("save"+std::to_string(global::get().turnTimer().getStopTurnTimer())+".info");
-        save_request = false;
+    if (m_save_request == true) {
+        saveEvent("save"+std::to_string(global::get().turnTimer().getStopTurnTimer())+".info");
+        m_save_request = false;
         
         return true;
     }
@@ -664,15 +664,15 @@ bool EntitiesManager::UpdateSaveRequest()
     return false;
 }
 
-bool EntitiesManager::UpdateLoadRequest()
+bool EntitiesManager::updateLoadRequest()
 {
-    if (load_request == true)
+    if (m_load_request == true)
     {
-        Clear();
-        LoadPass0("save_last.info");
-        LoadPass1();
+        clear();
+        loadPass0("save_last.info");
+        loadPass1();
 
-        load_request = false;
+        m_load_request = false;
         
         return true;
     }
@@ -681,7 +681,7 @@ bool EntitiesManager::UpdateLoadRequest()
 }
 
 
-void EntitiesManager::AddToGarbage(Base* entity)
+void EntitiesManager::addToGarbage(Base* entity)
 {
     //Logger::Instance().Log("EntetiesManager::AddToGarbage entity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     for (unsigned int i=0; i<m_garbage.size(); i++) {
@@ -695,15 +695,15 @@ void EntitiesManager::AddToGarbage(Base* entity)
     entity->putChildrenToGarbage();
 }
 
-void EntitiesManager::ClearGarbage()
+void EntitiesManager::clearGarbage()
 {
     for(unsigned int i=0; i<m_garbage.size(); i++)
     {
-        RemoveEntity(m_garbage[i]);
+        removeEntity(m_garbage[i]);
 #if CREATEDESTROY_LOG_ENABLED == 1
         Logger::Instance().Log("________EntitiesManager::ClearGarbage delete entity " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
 #endif
-        EntityIdGenerator::Instance().AddFreeId(m_garbage[i]->id());
+        EntityIdGenerator::Instance().addFreeId(m_garbage[i]->id());
         delete m_garbage[i];
     }
     m_garbage.clear();

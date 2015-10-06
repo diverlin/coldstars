@@ -32,7 +32,7 @@ class ScanerEquipmentBuilder
         ScanerEquipmentBuilder();
         ~ScanerEquipmentBuilder();
 
-        ScanerEquipment* createTemplate(INTLONGEST id = NONE_ID) const;
+        ScanerEquipment* createTemplate(IDTYPE id = NONE_ID) const;
         ScanerEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int scan_orig = NONE_ID) const;
 
     private:
