@@ -6,7 +6,7 @@
 #include <common/constants.hpp>
 
 
-MessageManager& MessageManager::Instance()
+MessageManager& MessageManager::get()
 {
     static MessageManager instance;
     return instance;
@@ -17,28 +17,33 @@ MessageManager& MessageManager::Instance()
 //    //receiver->HandleMessage(message);
 //}
 
-void MessageManager::newMessage(double delay,
-                                int    sender_id,
-                                int    receiver_id,
-                                int    type_id,
-                                void*  extra)
-{
-    Base* sender   = global::get().entitiesManager().entity(sender_id);
-    Base* receiver = global::get().entitiesManager().entity(receiver_id);
-    if (!receiver) {
-        return;
-    }
+//void MessageManager::newMessage(double delay,
+//                                int    sender_id,
+//                                int    receiver_id,
+//                                int    type_id,
+//                                void*  extra)
+//{
+//    Base* sender   = global::get().entitiesManager().entity(sender_id);
+//    Base* receiver = global::get().entitiesManager().entity(receiver_id);
+//    if (!receiver) {
+//        return;
+//    }
 
-    Message message(NO_DELAY, sender_id, receiver_id, type_id, extra);
+//    Message message(NO_DELAY, sender_id, receiver_id, type_id, extra);
 
-    if (delay <= 0.0f) {
-        //SendEvent(receiver, message);
-        return;
-    } else {
-        //double CurrentTime = Clock->GetCurrentTime();
-        //telegram.DispatchTime = CurrentTime + delay;
-    }
+//    if (delay <= 0.0f) {
+//        //SendEvent(receiver, message);
+//        return;
+//    } else {
+//        //double CurrentTime = Clock->GetCurrentTime();
+//        //telegram.DispatchTime = CurrentTime + delay;
+//    }
     
+//    m_messages_queue.insert(message);
+//}
+
+void MessageManager::addMessage(const Message& message)
+{
     m_messages_queue.insert(message);
 }
 

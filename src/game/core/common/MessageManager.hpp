@@ -8,13 +8,15 @@
 class MessageManager
 {
     public:
-        static MessageManager& Instance();
+        static MessageManager& get();
 
-        void newMessage(double delay,
-                        int    sender_id,
-                        int    receiver_id,
-                        int    type_id,
-                        void*  extra);
+//        void newMessage(double delay,
+//                        int    sender_id,
+//                        int    receiver_id,
+//                        int    type_id,
+//                        void*  extra);
+
+        void addMessage(const Message& message);
 
         void updateQueue();
         

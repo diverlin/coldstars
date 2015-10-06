@@ -21,7 +21,7 @@
 
 #include <builder/spaceobjects/BaseVehicleBuilder.hpp>
 
-#include <types/MyInt.hpp>
+#include <types/IdType.hpp>
 #include <types/RaceTypes.hpp>
 #include <types/EntityTypes.hpp>
 
