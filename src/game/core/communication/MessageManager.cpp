@@ -63,19 +63,20 @@ void MessageManager::processMessage(const Message& message)
     Base* receiver = global::get().entityManager().entity(message.receiver_id);
     Base* sender   = global::get().entityManager().entity(message.sender_id);
 
-    std::cout<<str(sender->typeId())<<std::endl;
-    std::cout<<str(receiver->typeId())<<std::endl;
+    std::cout<<sender->dataTypeString()<<std::endl;
+    std::cout<<receiver->dataTypeString()<<std::endl;
+
     assert(receiver);
     assert(sender);
 
     switch(message.type_id) {
         case TELEGRAM::HIT: {
-            SpaceObject* receiver = static_cast<SpaceObject*>(receiver);
-            assert(receiver);
-            receiver->hit(100);
+            SpaceObject* ob = static_cast<SpaceObject*>(receiver);
+            assert(ob);
+            ob->hit(100);
             break;
         }
-        default: { break; }
+        default: { }
     }
 }
 

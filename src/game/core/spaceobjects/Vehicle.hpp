@@ -85,7 +85,7 @@ class Vehicle : public SpaceObject
         
         VehicleSlot* const GetParentVehicleSlot() const { return m_ParentVehicleSlot; }
         
-        const VehiclePropetries& GetProperties() const { return m_Properties; }
+        const VehiclePropetries& GetProperties() const { return m_properties; }
         const VehicleNeeds& GetNeeds() const { return m_Needs; }        
         const VehicleDescriptor& GetVehicleDescriptor() const { return m_VehicleDescriptor; }
         
@@ -107,7 +107,7 @@ class Vehicle : public SpaceObject
         
         bool UnpackContainerItemToCargoSlot(Container*);
         
-        int GetFreeSpace() const { return m_Properties.free_space; }
+        int GetFreeSpace() const { return m_properties.free_space; }
         
         void BindOwnerNpc(Npc*);
                 
@@ -126,7 +126,7 @@ class Vehicle : public SpaceObject
         ItemSlot* const GetSlotDroid()     const { return m_SlotDroid; }
         ItemSlot* const GetSlotFreezer()   const { return m_SlotFreezer; }
         
-        Npc* const GetOwnerNpc() const { return m_OwnerNpc; }
+        Npc* const GetOwnerNpc() const { return m_npc; }
         
         ItemSlot* const GetEmptyCargoSlot();
         GoodsPack* GetGoodsPack() const;
@@ -226,7 +226,7 @@ class Vehicle : public SpaceObject
         bool m_GodMode;
         VEHICLE_SPECIAL_ACTION_TYPE m_SpecialActionId;
         
-        Npc* m_OwnerNpc;
+        Npc* m_npc;
         
         VehicleSlot* m_ParentVehicleSlot;
        
@@ -247,7 +247,7 @@ class Vehicle : public SpaceObject
         DriveComplex      m_ComplexDrive;
         ProtectionComplex m_ComplexProtector;
         
-        VehiclePropetries m_Properties;
+        VehiclePropetries m_properties;
         VehicleNeeds m_Needs;
         VehicleDescriptor m_VehicleDescriptor;
                                                                                
