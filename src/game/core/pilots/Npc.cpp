@@ -254,8 +254,8 @@ void Npc::UpdateInfo()
 //    info.addTitleStr("NPC");
 //    info.addNameStr("id:");           info.addValueStr( std::to_string(id())  );
 //    info.addNameStr("race:");         info.addValueStr( getRaceStr(race_id) );
-//    info.addNameStr("subype_id:");    info.addValueStr( getStr(subTypeId()) );
-//    info.addNameStr("subsubype_id:"); info.addValueStr( getStr(subSubTypeId()) );
+//    info.addNameStr("subype_id:");    info.addValueStr( str(subTypeId()) );
+//    info.addNameStr("subsubype_id:"); info.addValueStr( str(subSubTypeId()) );
 //    //info.addNameStr("model_ai:");     info.addValueStr( ceti::getAiModelStr(ai_model->typeId()) );
 //    info.addNameStr("credits:");      info.addValueStr( std::to_string(credits) );
 //    info.addNameStr("expirience:");   info.addValueStr( std::to_string(skills.GetExpirience()) + " / " + std::to_string(skills.GetExpirienceNextLevel()) );

@@ -56,7 +56,7 @@ Ship::~Ship()
 //    if (starsystem())    { GetInfo().addNameStr("id/ss_id:"); GetInfo().addValueStr( std::to_string(id()) + " / " + std::to_string(starsystem()->id()) ); }
 //    else                     { GetInfo().addNameStr("id:");       GetInfo().addValueStr( std::to_string(id()) ); }
 //    // alpitodorender GetInfo().addNameStr("race:");          GetInfo().addValueStr( getRaceStr(textureOb().GetAssociation().race_id) );
-//    GetInfo().addNameStr("class:");         GetInfo().addValueStr( getStr(subSubTypeId()) );
+//    GetInfo().addNameStr("class:");         GetInfo().addValueStr( str(subSubTypeId()) );
 //    GetInfo().addNameStr("armor/max:");     GetInfo().addValueStr( std::to_string(dataLife().armor) + "/" + std::to_string(GetVehicleDescriptor().armor) );
 ////    alpitodorender GetInfo().addNameStr("size id:");       GetInfo().addValueStr( std::to_string(textureOb().GetData().size_id) );
 //    GetInfo().addNameStr("space/free:");    GetInfo().addValueStr( std::to_string(GetVehicleDescriptor().space) + "/" + std::to_string(GetProperties().free_space) );
@@ -74,7 +74,7 @@ Ship::~Ship()
 
 //    if (GetProperties().grab_radius > 0)
 //    {
-//        std::string grab_str = GetSlotGrapple()->GetGrappleEquipment()->GetTargetStr();
+//        std::string grab_str = GetSlotGrapple()->GetGrappleEquipment()->GetTarstr();
 //        if (grab_str.size() > 0)
 //        {
 //            GetInfo().addNameStr("grab_id:");           GetInfo().addValueStr( grab_str );

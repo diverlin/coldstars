@@ -94,7 +94,7 @@ void GrappleEquipment::RemoveAllTargets()
     free_strength = strength;
 }
                               
-std::string GrappleEquipment::GetTargetStr() const
+std::string GrappleEquipment::GetTarstr() const
 {
     std::string str = "";
     

@@ -19,7 +19,7 @@
 #include "TextureTypes.hpp"
 
 
-std::string getStr(TYPE::TEXTURE type_id)
+std::string str(TYPE::TEXTURE type_id)
 {
     switch(type_id)
     {
