@@ -32,7 +32,7 @@ Base::~Base()
     Logger::Instance().Log("___::~Base("+std::to_string(id())+")");
 }
 
-std::string Base::dataTypeString() const
+std::string Base::dataTypeStr() const
 {
     std::string text;
     text += "id=" + std::to_string(id());

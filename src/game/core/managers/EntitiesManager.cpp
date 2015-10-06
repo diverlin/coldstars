@@ -642,7 +642,7 @@ void EntityManager::loadPass1() const
 {
     Logger::Instance().Log("RESOLVING DEPENDENCY START");
     for (std::map<ID, Base*>::const_iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
-        Logger::Instance().Log("Load() in " + iterator->second->dataTypeString());
+        Logger::Instance().Log("Load() in " + iterator->second->dataTypeStr());
         iterator->second->Resolve();
     }
 
