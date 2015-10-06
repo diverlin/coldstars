@@ -84,7 +84,7 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
 //{
 //    GetInfo().clear();
 
-//    GetInfo().addTitleStr("StarBase" + getStr(subTypeId()));
+//    GetInfo().addTitleStr("StarBase" + str(subTypeId()));
 
 //    GetInfo().addNameStr("id/ss_id:");    GetInfo().addValueStr(std::to_string(id()) + " / " + std::to_string(starsystem()->id()));
 //    GetInfo().addNameStr("id:");          GetInfo().addValueStr(std::to_string(id()));

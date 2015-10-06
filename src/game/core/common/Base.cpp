@@ -36,9 +36,9 @@ std::string Base::dataTypeString() const
 {
     std::string str;
     str += "id=" + std::to_string(id());
-    str += "/t=" + getStr(typeId());
-    str += "/st=" + getStr(subTypeId());
-    str += "/sst=" + getStr(subSubTypeId());
+    str += "/t=" + str(typeId());
+    str += "/st=" + str(subTypeId());
+    str += "/sst=" + str(subSubTypeId());
     return str;
 }
 

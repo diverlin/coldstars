@@ -52,5 +52,5 @@ namespace TYPE
     };
 } 
 
-std::string getStr(TYPE::TEXTURE);
+std::string str(TYPE::TEXTURE);
 

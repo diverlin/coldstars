@@ -48,7 +48,7 @@ class GrappleEquipment : public BaseEquipment
 
         void RemoveAllTargets();
                                 
-        std::string GetTargetStr() const;
+        std::string GetTarstr() const;
 
         void UpdateGrabScenarioProgram_inDynamic();
         void RenderGrabTrail(const jeti::Renderer&);
