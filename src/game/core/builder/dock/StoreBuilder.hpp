@@ -30,7 +30,7 @@ class StoreBuilder
         StoreBuilder();
         ~StoreBuilder();
 
-        Store* createTemplate(IDTYPE id = NONE_ID) const;
+        Store* createTemplate(ID id = NONE_ID) const;
         Store* create() const;
                                                                     
     private: 

@@ -25,7 +25,7 @@
 class ProtectorEquipment  : public BaseEquipment
 {
     public:
-        ProtectorEquipment(const IDTYPE& id);
+        ProtectorEquipment(const ID& id);
         virtual ~ProtectorEquipment();
 
         void SetProtectionOrig(int protection_orig) { this->protection_orig = protection_orig; };

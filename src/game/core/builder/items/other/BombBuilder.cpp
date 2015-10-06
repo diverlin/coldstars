@@ -36,7 +36,7 @@ BombBuilder::BombBuilder()
 BombBuilder::~BombBuilder()
 {}
 
-Bomb* BombBuilder::createTemplate(IDTYPE id) const
+Bomb* BombBuilder::createTemplate(ID id) const
 {
     Bomb* bomb = new Bomb(id);
     assert(bomb);

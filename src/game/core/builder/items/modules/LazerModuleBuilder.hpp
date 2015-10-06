@@ -30,7 +30,7 @@ class LazerModuleBuilder
         LazerModuleBuilder();
         ~LazerModuleBuilder();
 
-        LazerModule* createTemplate(IDTYPE id = NONE_ID) const;
+        LazerModule* createTemplate(ID id = NONE_ID) const;
         LazerModule* create(int damage_add = NONE_ID, int radius_add = NONE_ID) const;
                                      
     private:

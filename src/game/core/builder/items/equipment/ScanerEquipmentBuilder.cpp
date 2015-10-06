@@ -42,7 +42,7 @@ ScanerEquipmentBuilder::ScanerEquipmentBuilder()
 ScanerEquipmentBuilder::~ScanerEquipmentBuilder()
 {}
 
-ScanerEquipment* ScanerEquipmentBuilder::createTemplate(IDTYPE id) const
+ScanerEquipment* ScanerEquipmentBuilder::createTemplate(ID id) const
 {
     ScanerEquipment* scaner_equipment = new ScanerEquipment(id);
     assert(scaner_equipment);

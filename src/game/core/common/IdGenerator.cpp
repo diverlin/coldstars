@@ -24,7 +24,7 @@ EntityIdGenerator& EntityIdGenerator::Instance()
     return instance;
 }
 
-IDTYPE EntityIdGenerator::nextId()
+ID EntityIdGenerator::nextId()
 {  
 //    if (!free_ids.empty()) {
 //         unsigned long int= free_ids[free_ids.size()-1];
@@ -43,7 +43,7 @@ TextureIdGenerator& TextureIdGenerator::Instance()
     return instance;
 }
 
-IDTYPE TextureIdGenerator::nextId()
+ID TextureIdGenerator::nextId()
 {  
     last_incremented_id++;        
     return last_incremented_id;

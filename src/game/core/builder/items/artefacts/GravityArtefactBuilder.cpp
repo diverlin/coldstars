@@ -41,7 +41,7 @@ GravityArtefactBuilder::GravityArtefactBuilder()
 GravityArtefactBuilder::~GravityArtefactBuilder()
 {}
 
-GravityArtefact* GravityArtefactBuilder::createTemplate(IDTYPE id) const
+GravityArtefact* GravityArtefactBuilder::createTemplate(ID id) const
 {
     GravityArtefact* gravity_artefact = new GravityArtefact(id);
     assert(gravity_artefact);

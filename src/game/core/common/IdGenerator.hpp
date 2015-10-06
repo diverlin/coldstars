@@ -29,8 +29,8 @@ class EntityIdGenerator
     public:
         static EntityIdGenerator& Instance();
         
-        IDTYPE nextId();
-        void addFreeId(IDTYPE free_id) { free_ids.push_back(free_id); }
+        ID nextId();
+        void addFreeId(ID free_id) { free_ids.push_back(free_id); }
             
     private:
         EntityIdGenerator() {}
@@ -39,8 +39,8 @@ class EntityIdGenerator
         EntityIdGenerator(EntityIdGenerator&) = delete;
         EntityIdGenerator& operator=(EntityIdGenerator&) = delete;
         
-        IDTYPE last_incremented_id = 0;
-        std::vector<IDTYPE> free_ids;
+        ID last_incremented_id = 0;
+        std::vector<ID> free_ids;
 };
 
 
@@ -49,7 +49,7 @@ class TextureIdGenerator
     public:
         static TextureIdGenerator& Instance();
         
-        IDTYPE nextId();
+        ID nextId();
             
     private:
         TextureIdGenerator():last_incremented_id(0) {}       
@@ -58,5 +58,5 @@ class TextureIdGenerator
         TextureIdGenerator(TextureIdGenerator&) = delete;
         TextureIdGenerator& operator=(TextureIdGenerator&) = delete;
         
-        IDTYPE last_incremented_id;
+        ID last_incremented_id;
 };

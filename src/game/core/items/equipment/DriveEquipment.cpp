@@ -22,7 +22,7 @@
 #include <ceti/Logger.hpp>
 #include "../../items//modules/DriveModule.hpp"
 
-DriveEquipment::DriveEquipment(const IDTYPE& id)
+DriveEquipment::DriveEquipment(const ID& id)
 :
 speed_orig(0),
 hyper_orig(0)

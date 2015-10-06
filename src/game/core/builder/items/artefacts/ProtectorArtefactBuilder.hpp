@@ -30,7 +30,7 @@ class ProtectorArtefactBuilder
         ProtectorArtefactBuilder();
         ~ProtectorArtefactBuilder();
         
-        ProtectorArtefact* createTemplate(IDTYPE id = NONE_ID) const;
+        ProtectorArtefact* createTemplate(ID id = NONE_ID) const;
         ProtectorArtefact* create(int protection = NONE_ID) const;
                                      
     private:

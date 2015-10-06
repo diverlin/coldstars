@@ -11,17 +11,17 @@ long int    enum     long int   long int    void
 class Message
 {
     public:
-        Message(TELEGRAM, const IDTYPE&, const IDTYPE&, void*);
+        Message(TELEGRAM, const ID&, const ID&, void*);
 //        Message(const Message&);
 
         //bool operator()(const Message&) {};
         bool operator<(const Message&) const;
         
         //double delay;
-        IDTYPE id;
+        ID id;
         TELEGRAM type_id;
-        IDTYPE sender_id;
-        IDTYPE receiver_id;
+        ID sender_id;
+        ID receiver_id;
         void*  extra;
         
         double dispatch_time;

@@ -30,7 +30,7 @@ class RocketModuleBuilder
         RocketModuleBuilder();
         ~RocketModuleBuilder();
 
-        RocketModule* createTemplate(IDTYPE id = NONE_ID) const;
+        RocketModule* createTemplate(ID id = NONE_ID) const;
         RocketModule* create(int ammo_max_add = NONE_ID, int damage_add = NONE_ID, int radius_add = NONE_ID) const;
                                      
     private:

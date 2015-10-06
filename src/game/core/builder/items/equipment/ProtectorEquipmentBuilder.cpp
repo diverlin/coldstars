@@ -38,7 +38,7 @@ ProtectorEquipmentBuilder::ProtectorEquipmentBuilder()
 ProtectorEquipmentBuilder::~ProtectorEquipmentBuilder()
 {}
 
-ProtectorEquipment* ProtectorEquipmentBuilder::createTemplate(IDTYPE id) const
+ProtectorEquipment* ProtectorEquipmentBuilder::createTemplate(ID id) const
 {
     ProtectorEquipment* protector_equipment = new ProtectorEquipment(id);
     assert(protector_equipment);

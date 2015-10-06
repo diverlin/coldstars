@@ -22,7 +22,7 @@
 #include <ceti/Logger.hpp>
 #include "../../items/modules/ScanerModule.hpp"
 
-ScanerEquipment::ScanerEquipment(const IDTYPE& id)
+ScanerEquipment::ScanerEquipment(const ID& id)
     :
       scan_orig(0)
 {

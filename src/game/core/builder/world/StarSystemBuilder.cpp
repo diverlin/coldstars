@@ -41,7 +41,7 @@ StarSystemBuilder::StarSystemBuilder()
 StarSystemBuilder::~StarSystemBuilder()
 {}
 
-StarSystem* StarSystemBuilder::createTemplate(IDTYPE id) const
+StarSystem* StarSystemBuilder::createTemplate(ID id) const
 {
     StarSystem* starsystem = new StarSystem(id);
     assert(starsystem);

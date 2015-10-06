@@ -38,7 +38,7 @@ DriveModuleBuilder::DriveModuleBuilder()
 DriveModuleBuilder::~DriveModuleBuilder()
 {}
 
-DriveModule* DriveModuleBuilder::createTemplate(IDTYPE id) const
+DriveModule* DriveModuleBuilder::createTemplate(ID id) const
 {
     DriveModule* drive_module = new DriveModule(id);
     assert(drive_module);

@@ -32,7 +32,7 @@ class DroidEquipmentBuilder
         DroidEquipmentBuilder();
         ~DroidEquipmentBuilder();
 
-        DroidEquipment* createTemplate(IDTYPE id = NONE_ID) const;
+        DroidEquipment* createTemplate(ID id = NONE_ID) const;
         DroidEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int repair_orig = NONE_ID) const;
                                      
     private:

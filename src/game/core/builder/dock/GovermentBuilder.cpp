@@ -29,7 +29,7 @@ GovermentBuilder::GovermentBuilder()
 GovermentBuilder::~GovermentBuilder()
 {}
 
-Goverment* GovermentBuilder::createTemplate(IDTYPE id) const
+Goverment* GovermentBuilder::createTemplate(ID id) const
 {
     Goverment* goverment = new Goverment(id);
     assert(goverment);

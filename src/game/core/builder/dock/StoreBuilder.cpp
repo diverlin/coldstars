@@ -49,7 +49,7 @@ StoreBuilder::StoreBuilder()
 StoreBuilder::~StoreBuilder()
 {}
 
-Store* StoreBuilder::createTemplate(IDTYPE id) const
+Store* StoreBuilder::createTemplate(ID id) const
 {
     Store* store = new Store(id);
     assert(store);

@@ -31,7 +31,7 @@ class Renderer;
 class GrappleEquipment : public BaseEquipment
 {
     public:
-        GrappleEquipment(const IDTYPE& id);
+        GrappleEquipment(const ID& id);
         virtual ~GrappleEquipment();
 
         void SetStrengthOrig(int strength_orig)     { this->strength_orig   = strength_orig; }

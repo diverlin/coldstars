@@ -22,7 +22,7 @@
 #include <ceti/Logger.hpp>
 #include "../../items/modules/ProtectorModule.hpp"
 
-ProtectorEquipment::ProtectorEquipment(const IDTYPE& id)
+ProtectorEquipment::ProtectorEquipment(const ID& id)
     :
       protection_orig(0)
 {

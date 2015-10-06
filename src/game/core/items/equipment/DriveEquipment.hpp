@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class DriveEquipment : public BaseEquipment
 {
     public:
-        DriveEquipment(const IDTYPE& id);
+        DriveEquipment(const ID& id);
         virtual ~DriveEquipment();
 
         void SetSpeedOrig(int speed_orig) { this->speed_orig = speed_orig; };

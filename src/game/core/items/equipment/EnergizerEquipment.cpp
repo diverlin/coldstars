@@ -25,7 +25,7 @@
 #include "../../slots/ItemSlot.hpp"
 #include "../../spaceobjects/Vehicle.hpp"
 
-EnergizerEquipment::EnergizerEquipment(const IDTYPE& id)
+EnergizerEquipment::EnergizerEquipment(const ID& id)
 :
 energy_max_orig(0),
 energy(0),

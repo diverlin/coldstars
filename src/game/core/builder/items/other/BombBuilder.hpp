@@ -31,7 +31,7 @@ class BombBuilder
         BombBuilder();
         ~BombBuilder();
 
-        Bomb* createTemplate(IDTYPE id = NONE_ID) const;
+        Bomb* createTemplate(ID id = NONE_ID) const;
         Bomb* create(int damage = NONE_ID, int radius = NONE_ID) const;
 
         static void write(const std::string& fpath, Bomb* bomb);

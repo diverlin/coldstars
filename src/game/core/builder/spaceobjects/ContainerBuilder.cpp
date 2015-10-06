@@ -35,7 +35,7 @@ ContainerBuilder::ContainerBuilder()
 ContainerBuilder::~ContainerBuilder()
 {}
 
-Container* ContainerBuilder::createTemplate(IDTYPE id) const
+Container* ContainerBuilder::createTemplate(ID id) const
 {       
     Container* container = new Container(id);
     assert(container);
