@@ -36,7 +36,7 @@ PlanetBuilder::PlanetBuilder()
 PlanetBuilder::~PlanetBuilder()
 {}
 
-Planet* PlanetBuilder::createTemplate(IDTYPE id) const
+Planet* PlanetBuilder::createTemplate(ID id) const
 {
     Planet* planet = new Planet(id);
     assert(planet);

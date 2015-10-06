@@ -46,7 +46,7 @@ class PlanetBuilder
         PlanetBuilder();
         ~PlanetBuilder();
 
-        Planet* createTemplate(IDTYPE id = NONE_ID) const;
+        Planet* createTemplate(ID id = NONE_ID) const;
         Planet* create(float) const;
                                      
     private:

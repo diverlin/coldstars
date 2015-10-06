@@ -32,7 +32,7 @@ class RocketEquipmentBuilder
         RocketEquipmentBuilder();
         ~RocketEquipmentBuilder();
 
-        RocketEquipment* createTemplate(IDTYPE id = NONE_ID) const;
+        RocketEquipment* createTemplate(ID id = NONE_ID) const;
         RocketEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
                                      
     private:

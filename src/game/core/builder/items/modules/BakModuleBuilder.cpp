@@ -39,7 +39,7 @@ BakModuleBuilder::BakModuleBuilder()
 BakModuleBuilder::~BakModuleBuilder()
 {}
 
-BakModule* BakModuleBuilder::createTemplate(IDTYPE id) const
+BakModule* BakModuleBuilder::createTemplate(ID id) const
 {
     BakModule* bak_module = new BakModule(id);
     assert(bak_module);

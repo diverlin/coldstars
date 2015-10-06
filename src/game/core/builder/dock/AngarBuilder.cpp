@@ -33,7 +33,7 @@ AngarBuilder::AngarBuilder()
 AngarBuilder::~AngarBuilder()
 {}
 
-Angar* AngarBuilder::createTemplate(IDTYPE id) const
+Angar* AngarBuilder::createTemplate(ID id) const
 {
     Angar* angar = new Angar(id);
     assert(angar);

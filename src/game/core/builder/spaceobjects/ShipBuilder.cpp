@@ -33,7 +33,7 @@ ShipBuilder::ShipBuilder()
 
 ShipBuilder::~ShipBuilder() {}
 
-Ship* ShipBuilder::createTemplate(IDTYPE id) const
+Ship* ShipBuilder::createTemplate(ID id) const
 {
     Ship* ship = new Ship(id);
     assert(ship);

@@ -25,7 +25,7 @@
 class DroidEquipment : public BaseEquipment
 {
        public: 
-             DroidEquipment(const IDTYPE& id);
+             DroidEquipment(const ID& id);
              virtual ~DroidEquipment();
 
         void SetRepairOrig(int repair_orig) { this->repair_orig = repair_orig; };

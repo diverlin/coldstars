@@ -30,7 +30,7 @@ class BakModuleBuilder
         BakModuleBuilder();
         ~BakModuleBuilder();
 
-        BakModule* createTemplate(IDTYPE id = NONE_ID) const;
+        BakModule* createTemplate(ID id = NONE_ID) const;
         BakModule* create(int fuel_max_add = NONE_ID) const;
                                      
     private:

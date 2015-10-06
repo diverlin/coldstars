@@ -41,7 +41,7 @@ LazerEquipmentBuilder::LazerEquipmentBuilder()
 LazerEquipmentBuilder::~LazerEquipmentBuilder()
 {}
 
-LazerEquipment* LazerEquipmentBuilder::createTemplate(IDTYPE id) const
+LazerEquipment* LazerEquipmentBuilder::createTemplate(ID id) const
 { 
     LazerEquipment* lazer_equipment = new LazerEquipment(id);
     assert(lazer_equipment);

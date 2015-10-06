@@ -39,7 +39,7 @@ DroidEquipmentBuilder::DroidEquipmentBuilder()
 DroidEquipmentBuilder::~DroidEquipmentBuilder()
 {}
 
-DroidEquipment* DroidEquipmentBuilder::createTemplate(IDTYPE id) const
+DroidEquipment* DroidEquipmentBuilder::createTemplate(ID id) const
 {
     DroidEquipment* droid_equipment = new DroidEquipment(id);
     assert(droid_equipment);

@@ -40,7 +40,7 @@ ProtectorArtefactBuilder::ProtectorArtefactBuilder()
 ProtectorArtefactBuilder::~ProtectorArtefactBuilder()
 {}
 
-ProtectorArtefact* ProtectorArtefactBuilder::createTemplate(IDTYPE id) const
+ProtectorArtefact* ProtectorArtefactBuilder::createTemplate(ID id) const
 {
     ProtectorArtefact* protector_artefact = new ProtectorArtefact(id);
     assert(protector_artefact);

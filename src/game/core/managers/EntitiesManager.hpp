@@ -36,7 +36,7 @@ class EntitiesManager
         
         void registerEntity(Base*);
     
-        Base* entity(const IDTYPE&) const;
+        Base* entity(const ID&) const;
         Player* player() const;
 
         bool updateSaveRequest();
@@ -49,7 +49,7 @@ class EntitiesManager
         bool m_save_request = false;
         bool m_load_request = false;
         
-        std::map<IDTYPE, Base*> m_entities_map;
+        std::map<ID, Base*> m_entities_map;
 
         std::vector<Base*> m_garbage;
 

@@ -38,7 +38,7 @@ RadarEquipmentBuilder::RadarEquipmentBuilder()
 RadarEquipmentBuilder::~RadarEquipmentBuilder()
 {}
 
-RadarEquipment* RadarEquipmentBuilder::createTemplate(IDTYPE id) const
+RadarEquipment* RadarEquipmentBuilder::createTemplate(ID id) const
 {
     RadarEquipment* radar_equipment = new RadarEquipment(id);
     assert(radar_equipment);

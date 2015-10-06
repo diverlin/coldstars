@@ -29,7 +29,7 @@ class StarSystemBuilder
         StarSystemBuilder();
         ~StarSystemBuilder();
         
-        StarSystem* createTemplate(IDTYPE id = NONE_ID) const;
+        StarSystem* createTemplate(ID id = NONE_ID) const;
         StarSystem* create(const StarSystemDescriptor&) const;
     
     private:

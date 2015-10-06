@@ -37,7 +37,7 @@ GrappleEquipmentBuilder::GrappleEquipmentBuilder()
 GrappleEquipmentBuilder::~GrappleEquipmentBuilder()
 {}
 
-GrappleEquipment* GrappleEquipmentBuilder::createTemplate(IDTYPE id) const
+GrappleEquipment* GrappleEquipmentBuilder::createTemplate(ID id) const
 {
     GrappleEquipment* grapple_equipment = new GrappleEquipment(id);
     assert(grapple_equipment);

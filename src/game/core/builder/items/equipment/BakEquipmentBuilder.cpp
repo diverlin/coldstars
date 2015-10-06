@@ -39,7 +39,7 @@ BakEquipmentBuilder::BakEquipmentBuilder()
 BakEquipmentBuilder::~BakEquipmentBuilder()
 {}
 
-BakEquipment* BakEquipmentBuilder::createTemplate(IDTYPE id) const
+BakEquipment* BakEquipmentBuilder::createTemplate(ID id) const
 {
     BakEquipment* bak_equipment = new BakEquipment(id);
     assert(bak_equipment);

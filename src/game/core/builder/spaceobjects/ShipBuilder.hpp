@@ -43,7 +43,7 @@ class ShipBuilder : public BaseVehicleBuilder
         ShipBuilder();
         ~ShipBuilder();
         
-        Ship* createTemplate(IDTYPE id = NONE_ID) const;
+        Ship* createTemplate(ID id = NONE_ID) const;
         Ship* create(TYPE::RACE, TYPE::ENTITY, int, int) const;
         Ship* create() const;
                        

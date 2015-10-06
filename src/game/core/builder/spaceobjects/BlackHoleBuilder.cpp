@@ -31,7 +31,7 @@ BlackHoleBuilder::BlackHoleBuilder()
 BlackHoleBuilder::~BlackHoleBuilder()
 {}
 
-BlackHole* BlackHoleBuilder::createTemplate(IDTYPE id) const
+BlackHole* BlackHoleBuilder::createTemplate(ID id) const
 {
     BlackHole* blackhole = new BlackHole(id);
     assert(blackhole);

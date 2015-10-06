@@ -32,7 +32,7 @@ class FreezerEquipmentBuilder
         FreezerEquipmentBuilder();
         ~FreezerEquipmentBuilder();
         
-        FreezerEquipment* createTemplate(IDTYPE id = NONE_ID) const;
+        FreezerEquipment* createTemplate(ID id = NONE_ID) const;
         FreezerEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int freeze_orig = NONE_ID) const;
                                      
     private:

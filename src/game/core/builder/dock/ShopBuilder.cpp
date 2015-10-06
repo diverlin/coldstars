@@ -30,7 +30,7 @@ ShopBuilder::ShopBuilder()
 ShopBuilder::~ShopBuilder()
 {}
 
-Shop* ShopBuilder::createTemplate(IDTYPE id) const
+Shop* ShopBuilder::createTemplate(ID id) const
 {
     Shop* shop = new Shop(id);
     assert(shop);

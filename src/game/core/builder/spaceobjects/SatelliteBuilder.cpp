@@ -29,7 +29,7 @@ SatelliteBuilder::SatelliteBuilder()
 SatelliteBuilder::~SatelliteBuilder()
 {}
 
-Satellite* SatelliteBuilder::createTemplate(IDTYPE id) const
+Satellite* SatelliteBuilder::createTemplate(ID id) const
 {
     Satellite* satellite = new Satellite(id);
     assert(satellite);

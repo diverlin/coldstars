@@ -37,7 +37,7 @@ RocketEquipmentBuilder::RocketEquipmentBuilder()
 RocketEquipmentBuilder::~RocketEquipmentBuilder()
 {}
 
-RocketEquipment* RocketEquipmentBuilder::createTemplate(IDTYPE id) const
+RocketEquipment* RocketEquipmentBuilder::createTemplate(ID id) const
 {
     RocketEquipment* rocket_equipment = new RocketEquipment(id);
     assert(rocket_equipment);

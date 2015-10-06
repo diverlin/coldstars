@@ -39,7 +39,7 @@ GrappleModuleBuilder::GrappleModuleBuilder()
 GrappleModuleBuilder::~GrappleModuleBuilder()
 {}
 
-GrappleModule* GrappleModuleBuilder::createTemplate(IDTYPE id) const
+GrappleModule* GrappleModuleBuilder::createTemplate(ID id) const
 {
     GrappleModule* grapple_module = new GrappleModule(id);
     assert(grapple_module);
