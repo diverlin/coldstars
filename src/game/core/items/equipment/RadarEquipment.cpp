@@ -34,7 +34,7 @@ RadarEquipment::RadarEquipment(const ID& id)
 /* virtual */
 RadarEquipment::~RadarEquipment() 
 {
-    Logger::Instance().Log("___::~RadarEquipment("+std::to_string(id())+")");
+    LOG("___::~RadarEquipment("+std::to_string(id())+")");
 }
 
 /* virtual */
@@ -108,21 +108,21 @@ void RadarEquipment::Resolve()
 
 void RadarEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" RadarEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" RadarEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"radius_orig", radius_orig);
 }
 
 void RadarEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" RadarEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" RadarEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
     radius_orig = load_ptree.get<int>("radius_orig");
 }                
 
 void RadarEquipment::ResolveData()
 {
-    Logger::Instance().Log(" RadarEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" RadarEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 

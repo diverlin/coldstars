@@ -82,7 +82,7 @@ void DriveModule::Resolve()
 
 void DriveModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" DriveModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" DriveModule::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"speed_add", speed_add);
     save_ptree.put(root+"hyper_add", hyper_add);
@@ -90,7 +90,7 @@ void DriveModule::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 
 void DriveModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" DriveModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" DriveModule::LoadData()  id=" + std::to_string(id()) + " START");
     
     speed_add = load_ptree.get<int>("speed_add");
     hyper_add = load_ptree.get<int>("hyper_add");
@@ -98,7 +98,7 @@ void DriveModule::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void DriveModule::ResolveData()
 {
-    Logger::Instance().Log(" DriveModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" DriveModule::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 

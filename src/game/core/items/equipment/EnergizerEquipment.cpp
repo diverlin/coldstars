@@ -136,7 +136,7 @@ void EnergizerEquipment::Resolve()
 
 void EnergizerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" EnergizerEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" EnergizerEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"energy_max_orig", energy_max_orig);
     save_ptree.put(root+"restoration_orig", restoration_orig);
@@ -144,7 +144,7 @@ void EnergizerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const
                 
 void EnergizerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" EnergizerEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" EnergizerEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
     energy_max_orig = load_ptree.get<int>("energy_max_orig");
     restoration_orig = load_ptree.get<int>("restoration_orig");        
@@ -152,7 +152,7 @@ void EnergizerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void EnergizerEquipment::ResolveData()
 {
-    Logger::Instance().Log(" EnergizerEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" EnergizerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 

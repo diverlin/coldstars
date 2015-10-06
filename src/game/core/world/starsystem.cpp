@@ -157,11 +157,11 @@ void StarSystem::createGroupAndShareTask(Npc* npc_leader, StarSystem* target_sta
 
 void StarSystem::add(Vehicle* vehicle, const glm::vec3& center, const glm::vec3& angle, const SpaceObject* const parent)
 {
-    //Logger::Instance().Log(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(vehicle->id())+")", ENTITY_TRANSACTION_LOG_DIP);
+    //LOG(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(vehicle->id())+")");
     
     for (unsigned int i=0; i<m_vehicles.size(); i++) {
         if (m_vehicles[i]->id() == vehicle->id()) {
-            //Logger::Instance().Log("StarSystem::AddVehicle dublicated vehicle found(fix that)" + getBaseInfoStr(vehicle));
+            //LOG("StarSystem::AddVehicle dublicated vehicle found(fix that)" + getBaseInfoStr(vehicle));
             exit(1);
         }
     }
@@ -241,11 +241,11 @@ void StarSystem::add(Planetoid* object, const SpaceObject* parent, int it)
 
 void StarSystem::add(Container* container, const glm::vec3& center)
 {
-    //Logger::Instance().Log(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")", ENTITY_TRANSACTION_LOG_DIP);
+    //LOG(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(container->id()) + ")");
         
     for (unsigned int i=0; i<m_containers.size(); i++) {
         if (m_containers[i]->id() == container->id()) {
-            //Logger::Instance().Log("StarSystem::AddContainer dublicated container found(fix that)" + getBaseInfoStr(container));
+            //LOG("StarSystem::AddContainer dublicated container found(fix that)" + getBaseInfoStr(container));
             exit(1);
         }
     }
@@ -898,7 +898,7 @@ void StarSystem::ManageUnavaliableObjects_s()
     {
         if ((*it)->placeTypeId() != TYPE::PLACE::SPACE_ID)
         {
-            Logger::Instance().Log("starsysten("+std::to_string(id())+ ")::RemoveVehicle(" + std::to_string((*it)->id())+")");
+            LOG("starsysten("+std::to_string(id())+ ")::RemoveVehicle(" + std::to_string((*it)->id())+")");
             it = m_vehicles.erase(it);
         }
     }

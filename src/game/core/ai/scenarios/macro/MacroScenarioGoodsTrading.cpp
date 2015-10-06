@@ -52,7 +52,7 @@ bool MacroScenarioGoodsTrading::IsAbleToBuyGoods(Npc* npc) const
 /* virtual */
 void MacroScenarioGoodsTrading::Enter(Npc* npc) const
 {
-    Logger::Instance().Log( "npc_id="+std::to_string(npc->id())+" ENTER MacroScenarioGoodsTrading");
+    LOG( "npc_id="+std::to_string(npc->id())+" ENTER MacroScenarioGoodsTrading");
 }
 
 /* virtual */
@@ -159,7 +159,7 @@ void MacroScenarioGoodsTrading::UpdateInStaticInDock(Npc* npc) const
 
 void MacroScenarioGoodsTrading::Exit(Npc* npc) const
 {
-    Logger::Instance().Log( "npc_id="+std::to_string(npc->id())+" EXIT MacroScenarioGoodsTrading");
+    LOG( "npc_id="+std::to_string(npc->id())+" EXIT MacroScenarioGoodsTrading");
 }
 
 /* virtual */

@@ -80,7 +80,7 @@ void LazerModule::Resolve()
 
 void LazerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" LazerModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" LazerModule::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"damage_add", damage_add);
     save_ptree.put(root+"radius_add", radius_add);
@@ -88,7 +88,7 @@ void LazerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 
 void LazerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" LazerModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" LazerModule::LoadData()  id=" + std::to_string(id()) + " START");
     
     damage_add = load_ptree.get<int>("damage_add");
     radius_add = load_ptree.get<int>("radius_add");
@@ -96,5 +96,5 @@ void LazerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void LazerModule::ResolveData()
 {
-    Logger::Instance().Log(" LazerModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" LazerModule::ResolveData()  id=" + std::to_string(id()) + " START");
 }

@@ -38,7 +38,7 @@ MicroScenarioJump::~MicroScenarioJump()
 /* virtual */
 void MicroScenarioJump::Enter(Npc* npc) const
 {    
-    Logger::Instance().Log("vehicle_id/npc_id="+std::to_string(npc->GetVehicle()->id())+"/"+std::to_string(npc->id())+"  ENTER MicroScenarioJump", AISCENARIO_LOG_DIP);
+    LOG("vehicle_id/npc_id="+std::to_string(npc->GetVehicle()->id())+"/"+std::to_string(npc->id())+"  ENTER MicroScenarioJump");
     
     npc->GetVehicle()->GetComplexDrive().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget()->starsystem(), NAVIGATOR_ACTION::KEEP_CLOSE_ID);
 }
@@ -76,7 +76,7 @@ void MicroScenarioJump::UpdateInDynamicInSpace(Npc* npc) const
 /* virtual */
 void MicroScenarioJump::Exit(Npc* npc) const
 {
-    Logger::Instance().Log("vehicle_id/npc_id="+std::to_string(npc->GetVehicle()->id())+"/"+std::to_string(npc->id())+" EXIT MicroScenarioJump", AISCENARIO_LOG_DIP);
+    LOG("vehicle_id/npc_id="+std::to_string(npc->GetVehicle()->id())+"/"+std::to_string(npc->id())+" EXIT MicroScenarioJump");
 }
 
 /* virtual */

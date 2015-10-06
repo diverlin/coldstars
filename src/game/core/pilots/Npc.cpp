@@ -109,7 +109,7 @@ void Npc::UpdateInKosmoportInStatic()
 
 void Npc::UpdateInSpaceInStatic()
 {
-    //Logger::Instance().Log("Npc("+std::to_string(id())+")::UpdateInSpaceInStatic START", AI_LOG_DIP);
+    //LOG("Npc("+std::to_string(id())+")::UpdateInSpaceInStatic START");
 
     vehicle->UpdateAllFunctionalItemsInStatic();
     vehicle->GetComplexWeapon().PrepareWeapons();
@@ -142,7 +142,7 @@ void Npc::UpdateInSpaceInStatic()
 
     vehicle->GetComplexDrive().UpdatePath();
 
-    //Logger::Instance().Log("Npc("+std::to_string(id())+")::UpdateInSpaceInStatic END", AI_LOG_DIP);
+    //LOG("Npc("+std::to_string(id())+")::UpdateInSpaceInStatic END");
 }
 
 void Npc::AddExpirience(int expirience, bool show_effect)

@@ -36,12 +36,12 @@ owner(nullptr)
 /* virtual */
 BaseSlot::~BaseSlot()
 {
-    Logger::Instance().Log("___::~BaseSlot("+std::to_string(id())+")");
+    LOG("___::~BaseSlot("+std::to_string(id())+")");
 }
                 
 void BaseSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {   
-    Logger::Instance().Log(" BaseSlot("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
+    LOG(" BaseSlot("+std::to_string(id())+")::SaveData");
         
     if (owner) { save_ptree.put(root+"unresolved.owner_id", owner->id()); }
     else       { save_ptree.put(root+"unresolved.owner_id", NONE_ID); }
@@ -52,7 +52,7 @@ void BaseSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
 
 void BaseSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" BaseSlot("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
+    LOG(" BaseSlot("+std::to_string(id())+")::LoadData");
        
     unresolved_BaseSlot.owner_id = load_ptree.get<int>("unresolved.owner_id"); 
     position = glm::vec2(load_ptree.get<int>("position.x"), load_ptree.get<int>("position.y"));
@@ -61,7 +61,7 @@ void BaseSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void BaseSlot::ResolveData()
 {
-    Logger::Instance().Log(" BaseSlot("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
+    LOG(" BaseSlot("+std::to_string(id())+")::ResolveData");
     
     if (unresolved_BaseSlot.owner_id != NONE_ID) {
         owner = global::get().entityManager().entity(unresolved_BaseSlot.owner_id);

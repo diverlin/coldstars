@@ -79,7 +79,7 @@ void Bomb::Resolve()
 
 void Bomb::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" Bomb::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" Bomb::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"damage", m_damage);
     save_ptree.put(root+"radius", m_radius);
@@ -87,7 +87,7 @@ void Bomb::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
          
 void Bomb::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" Bomb::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" Bomb::LoadData()  id=" + std::to_string(id()) + " START");
     
     m_damage = load_ptree.get<int>("damage");
     m_radius = load_ptree.get<int>("radius");
@@ -95,7 +95,7 @@ void Bomb::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Bomb::ResolveData()
 {
-    Logger::Instance().Log(" Bomb::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" Bomb::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 

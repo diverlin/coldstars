@@ -101,7 +101,7 @@ void EntityManager::clear()
 {
     for (std::map<ID, Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++)
     {
-        //Logger::Instance().Log("________EntityManager::Clear, delete " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
+        //LOG("________EntityManager::Clear, delete " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
         delete iterator->second;
     }
 
@@ -110,7 +110,7 @@ void EntityManager::clear()
 
 void EntityManager::reg(Base* entity)
 {
-    //Logger::Instance().Log("+++++++EntityManager::RegisterEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
+    //LOG("+++++++EntityManager::RegisterEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     
     if (entity->id() == NONE_ID) {
         entity->setId(EntityIdGenerator::Instance().nextId());
@@ -120,13 +120,13 @@ void EntityManager::reg(Base* entity)
 
 Base* EntityManager::entity(const ID& id) const
 {
-    Logger::Instance().Log("    EntityManager::entity requested_id=" + std::to_string(id));
+    LOG("    EntityManager::entity requested_id=" + std::to_string(id));
     
     std::map<ID, Base*>::const_iterator slice = m_entities_map.find(id);
 
     assert(slice->second);
 
-    //Logger::Instance().Log("    EntityManager::GetEntityById type_id=" + getTypeStr(slice->second->typeId()));
+    //LOG("    EntityManager::GetEntityById type_id=" + getTypeStr(slice->second->typeId()));
     
     return slice->second;
 }
@@ -143,12 +143,12 @@ Player* EntityManager::player() const
 
 void EntityManager::removeEntity(Base* entity)
 {    
-    //Logger::Instance().Log("________EntityManager::RemoveEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
+    //LOG("________EntityManager::RemoveEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
 
     if (m_entities_map.count(entity->id()) == 1) {
         m_entities_map.erase(m_entities_map.find(entity->id()));
     } else {
-        //Logger::Instance().Log("fix the BUG ---EntityManager::RemoveEntity fails " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
+        //LOG("fix the BUG ---EntityManager::RemoveEntity fails " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     }
 } 
 
@@ -158,7 +158,7 @@ void EntityManager::saveEvent(const std::string& filename)
     boost::property_tree::ptree save_ptree;
     
     for (std::map<ID, Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
-        //Logger::Instance().Log("saving " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
+        //LOG("saving " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
         iterator->second->Save(save_ptree);
     }
     
@@ -168,14 +168,14 @@ void EntityManager::saveEvent(const std::string& filename)
 
 void EntityManager::loadPass0(const std::string& filename)
 {
-    Logger::Instance().Log("LOADING STARTED");
+    LOG("LOADING STARTED");
     
     boost::property_tree::ptree load_ptree;
     read_info("save/" + filename, load_ptree);
     
     if (load_ptree.get_child_optional("galaxy"))
     {
-        Logger::Instance().Log("loading galaxys...");
+        LOG("loading galaxys...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("galaxy"))
         {
             Galaxy* galaxy = global::get().galaxyBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -185,7 +185,7 @@ void EntityManager::loadPass0(const std::string& filename)
     
     if (load_ptree.get_child_optional("player"))
     {
-        //        Logger::Instance().Log("loading players...");
+        //        LOG("loading players...");
         //        BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("player"))
         //        {
         //            Player* player = PlayerBuilder::Instance().GetNewPlayerTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -195,7 +195,7 @@ void EntityManager::loadPass0(const std::string& filename)
     
     if (load_ptree.get_child_optional("starsystem"))
     {
-        Logger::Instance().Log("loading starsystems...");
+        LOG("loading starsystems...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("starsystem"))
         {
             StarSystem* starsystem = global::get().starSystemBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -205,7 +205,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("star"))
     {
-        Logger::Instance().Log("loading stars...");
+        LOG("loading stars...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("star"))
         {
             Star* star = global::get().starBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -215,7 +215,7 @@ void EntityManager::loadPass0(const std::string& filename)
     
     if (load_ptree.get_child_optional("planet"))
     {
-        Logger::Instance().Log("loading planets...");
+        LOG("loading planets...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("planet"))
         {
             Planet* planet = global::get().planetBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -225,7 +225,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("asteroid"))
     {
-        Logger::Instance().Log("loading asteroids...");
+        LOG("loading asteroids...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("asteroid"))
         {
             Asteroid* asteroid = global::get().asteroidBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -235,7 +235,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("blackhole"))
     {
-        Logger::Instance().Log("loading blackhole...");
+        LOG("loading blackhole...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("blackhole"))
         {
             BlackHole* blackhole = global::get().blackHoleBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -246,7 +246,7 @@ void EntityManager::loadPass0(const std::string& filename)
     //artefact
     if (load_ptree.get_child_optional("gravity_artefact"))
     {
-        Logger::Instance().Log("loading gravity_artefact...");
+        LOG("loading gravity_artefact...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("gravity_artefact"))
         {
             GravityArtefact* gravity_artefact = global::get().gravityArtefactBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -256,7 +256,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("protector_artefact"))
     {
-        Logger::Instance().Log("loading protector_artefact...");
+        LOG("loading protector_artefact...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("protector_artefact"))
         {
             ProtectorArtefact* protector_artefact = global::get().protectorArtefactBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -267,7 +267,7 @@ void EntityManager::loadPass0(const std::string& filename)
     //module
     if (load_ptree.get_child_optional("bak_module"))
     {
-        Logger::Instance().Log("loading bak_modules...");
+        LOG("loading bak_modules...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bak_module"))
         {
             BakModule* bak_module = global::get().bakModuleBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -277,7 +277,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("drive_module"))
     {
-        Logger::Instance().Log("loading drive_modules...");
+        LOG("loading drive_modules...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("drive_module"))
         {
             DriveModule* drive_module = global::get().driveModuleBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -287,7 +287,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("droid_module"))
     {
-        Logger::Instance().Log("loading droid_modules...");
+        LOG("loading droid_modules...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("droid_module"))
         {
             DroidModule* droid_module = global::get().droidModuleBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -297,7 +297,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("grapple_module"))
     {
-        Logger::Instance().Log("loading grapple_modules...");
+        LOG("loading grapple_modules...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("grapple_module"))
         {
             GrappleModule* grapple_module = global::get().grappleModuleBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -307,7 +307,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("lazer_module"))
     {
-        Logger::Instance().Log("loading lazer_modules...");
+        LOG("loading lazer_modules...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("lazer_module"))
         {
             LazerModule* lazer_module = global::get().lazerModuleBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -317,7 +317,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("protector_module"))
     {
-        Logger::Instance().Log("loading protector_modules...");
+        LOG("loading protector_modules...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("protector_module"))
         {
             ProtectorModule* protector_module = global::get().protectorModuleBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -327,7 +327,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("radar_module"))
     {
-        Logger::Instance().Log("loading radar_modules...");
+        LOG("loading radar_modules...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("radar_module"))
         {
             RadarModule* radar_module = global::get().radarModuleBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -337,7 +337,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("rocket_module"))
     {
-        Logger::Instance().Log("loading rocket_modules...");
+        LOG("loading rocket_modules...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("rocket_module"))
         {
             RocketModule* rocket_module = global::get().rocketModuleBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -347,7 +347,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("scaner_module"))
     {
-        Logger::Instance().Log("loading scaner_modules...");
+        LOG("loading scaner_modules...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("scaner_module"))
         {
             ScanerModule* scaner_module = global::get().scanerModuleBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -358,7 +358,7 @@ void EntityManager::loadPass0(const std::string& filename)
     // equipment
     if (load_ptree.get_child_optional("bak_equipment"))
     {
-        Logger::Instance().Log("loading bak_equipments...");
+        LOG("loading bak_equipments...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bak_equipment"))
         {
             BakEquipment* bak_equipment = global::get().bakEquipmentBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -368,7 +368,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("drive_equipment"))
     {
-        Logger::Instance().Log("loading drive_equipments...");
+        LOG("loading drive_equipments...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("drive_equipment"))
         {
             DriveEquipment* drive_equipment = global::get().driveEquipmentBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -378,7 +378,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("droid_equipment"))
     {
-        Logger::Instance().Log("loading droid_equipments...");
+        LOG("loading droid_equipments...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("droid_equipment"))
         {
             DroidEquipment* droid_equipment = global::get().droidEquipmentBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -388,7 +388,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("energizer_equipment"))
     {
-        Logger::Instance().Log("loading energizer_equipments...");
+        LOG("loading energizer_equipments...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("energizer_equipment"))
         {
             EnergizerEquipment* energizer_equipment = global::get().energizerEquipmentBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -398,7 +398,7 @@ void EntityManager::loadPass0(const std::string& filename)
     
     if (load_ptree.get_child_optional("freezer_equipment"))
     {
-        Logger::Instance().Log("loading freezer_equipments...");
+        LOG("loading freezer_equipments...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("freezer_equipment"))
         {
             FreezerEquipment* freezer_equipment = global::get().freezerEquipmentBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -408,7 +408,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("grapple_equipment"))
     {
-        Logger::Instance().Log("loading grapple_equipments...");
+        LOG("loading grapple_equipments...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("grapple_equipment"))
         {
             GrappleEquipment* grapple_equipment = global::get().grappleEquipmentBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -418,7 +418,7 @@ void EntityManager::loadPass0(const std::string& filename)
     
     if (load_ptree.get_child_optional("lazer_equipment"))
     {
-        Logger::Instance().Log("loading lazer_equipments...");
+        LOG("loading lazer_equipments...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("lazer_equipment"))
         {
             LazerEquipment* lazer_equipment = global::get().lazerEquipmentBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -428,7 +428,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("protector_equipment"))
     {
-        Logger::Instance().Log("loading protector_equipments...");
+        LOG("loading protector_equipments...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("protector_equipment"))
         {
             ProtectorEquipment* protector_equipment = global::get().protectorEquipmentBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -438,7 +438,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("radar_equipment"))
     {
-        Logger::Instance().Log("loading radar_equipments...");
+        LOG("loading radar_equipments...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("radar_equipment"))
         {
             RadarEquipment* radar_equipment = global::get().radarEquipmentBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -448,7 +448,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("rocket_equipment"))
     {
-        Logger::Instance().Log("loading rocket_equipments...");
+        LOG("loading rocket_equipments...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("rocket_equipment"))
         {
             RocketEquipment* rocket_equipment = global::get().rocketEquipmentBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -458,7 +458,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("scaner_equipment"))
     {
-        Logger::Instance().Log("loading scaner_equipments...");
+        LOG("loading scaner_equipments...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("scaner_equipment"))
         {
             ScanerEquipment* scaner_equipment = global::get().scanerEquipmentBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -469,7 +469,7 @@ void EntityManager::loadPass0(const std::string& filename)
     // other item
     if (load_ptree.get_child_optional("bomb"))
     {
-        Logger::Instance().Log("loading bombs...");
+        LOG("loading bombs...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bomb"))
         {
             Bomb* bomb = global::get().bombBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -479,7 +479,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("goods_pack"))
     {
-        Logger::Instance().Log("loading goods_packs...");
+        LOG("loading goods_packs...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("goods_pack"))
         {
             GoodsPack* goods_pack = GetNewGoodsPack((TYPE::ENTITY)v.second.get<int>("data_id.subtype_id"), v.second.get<unsigned long int>("data_id.id"));
@@ -490,7 +490,7 @@ void EntityManager::loadPass0(const std::string& filename)
     
     if (load_ptree.get_child_optional("item_slot"))
     {
-        Logger::Instance().Log("loading itemslots...");
+        LOG("loading itemslots...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("item_slot"))
         {
             ItemSlot* itemslot = GetNewItemSlot((TYPE::ENTITY)v.second.get<int>("data_id.subtype_id"), v.second.get<unsigned long int>("data_id.id"));
@@ -500,7 +500,7 @@ void EntityManager::loadPass0(const std::string& filename)
     
     if (load_ptree.get_child_optional("vehicle_slot"))
     {
-        Logger::Instance().Log("loading vehicle_slots...");
+        LOG("loading vehicle_slots...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("vehicle_slot"))
         {
             unsigned long int id = v.second.get<unsigned long int>("data_id.id");
@@ -512,7 +512,7 @@ void EntityManager::loadPass0(const std::string& filename)
     
     if (load_ptree.get_child_optional("container"))
     {
-        Logger::Instance().Log("loading containers...");
+        LOG("loading containers...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("container"))
         {
             Container* container = global::get().containerBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -523,7 +523,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("npc"))
     {
-        Logger::Instance().Log("loading npc...");
+        LOG("loading npc...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("npc"))
         {
             unsigned long int id = v.second.get<unsigned long int>("data_id.id");
@@ -536,7 +536,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("ship"))
     {
-        Logger::Instance().Log("loading ships...");
+        LOG("loading ships...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("ship"))
         {
             Ship* ship = global::get().shipBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -546,7 +546,7 @@ void EntityManager::loadPass0(const std::string& filename)
     
     if (load_ptree.get_child_optional("spacestation"))
     {
-        Logger::Instance().Log("loading spacestations...");
+        LOG("loading spacestations...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("spacestation"))
         {
             SpaceStation* spacestation = global::get().spaceStationBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -556,7 +556,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("satellite"))
     {
-        Logger::Instance().Log("loading satellites...");
+        LOG("loading satellites...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("satellite"))
         {
             Satellite* satellite = global::get().satelliteBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -566,7 +566,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("rocketbullet"))
     {
-        Logger::Instance().Log("loading rocketbullets...");
+        LOG("loading rocketbullets...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("rocketbullet"))
         {
             RocketBullet* rocket_bullet = global::get().rocketBulletBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -576,7 +576,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("natureland"))
     {
-        Logger::Instance().Log("loading naturelands...");
+        LOG("loading naturelands...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("natureland"))
         {
             NatureLand* natureland = global::get().natureLandBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -586,7 +586,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("kosmoport"))
     {
-        Logger::Instance().Log("loading kosmoports...");
+        LOG("loading kosmoports...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("kosmoport"))
         {
             Kosmoport* kosmoport = global::get().kosmoportBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -596,7 +596,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("angar"))
     {
-        Logger::Instance().Log("loading angars...");
+        LOG("loading angars...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("angar"))
         {
             Angar* angar = global::get().angarBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -606,7 +606,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("store"))
     {
-        Logger::Instance().Log("loading stores...");
+        LOG("loading stores...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("store"))
         {
             Store* store = global::get().storeBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -616,7 +616,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("shop"))
     {
-        Logger::Instance().Log("loading shops...");
+        LOG("loading shops...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("shop"))
         {
             Shop* shop = global::get().shopBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -626,7 +626,7 @@ void EntityManager::loadPass0(const std::string& filename)
 
     if (load_ptree.get_child_optional("goverment"))
     {
-        Logger::Instance().Log("loading goverments...");
+        LOG("loading goverments...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("goverment"))
         {
             Goverment* goverment = global::get().govermentBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
@@ -634,19 +634,19 @@ void EntityManager::loadPass0(const std::string& filename)
         }
     }
 
-    Logger::Instance().Log("LOADING FINISHED");
+    LOG("LOADING FINISHED");
     
 }
 
 void EntityManager::loadPass1() const
 {
-    Logger::Instance().Log("RESOLVING DEPENDENCY START");
+    LOG("RESOLVING DEPENDENCY START");
     for (std::map<ID, Base*>::const_iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
-        Logger::Instance().Log("Load() in " + iterator->second->dataTypeStr());
+        LOG("Load() in " + iterator->second->dataTypeStr());
         iterator->second->Resolve();
     }
 
-    Logger::Instance().Log("RESOLVING DEPENDENCY FINISHED");
+    LOG("RESOLVING DEPENDENCY FINISHED");
 }
 
 
@@ -681,10 +681,10 @@ bool EntityManager::updateLoadRequest()
 
 void EntityManager::addToGarbage(Base* entity)
 {
-    //Logger::Instance().Log("EntetiesManager::AddToGarbage entity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
+    //LOG("EntetiesManager::AddToGarbage entity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     for (unsigned int i=0; i<m_garbage.size(); i++) {
         if (m_garbage[i]->id() == entity->id()) {
-            //Logger::Instance().Log("EntetiesManager::AddToGarbage dublicated entity found(fix that) " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
+            //LOG("EntetiesManager::AddToGarbage dublicated entity found(fix that) " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
             exit(1);
         }
     }
@@ -699,7 +699,7 @@ void EntityManager::clearGarbage()
     {
         removeEntity(m_garbage[i]);
 #if CREATEDESTROY_LOG_ENABLED == 1
-        Logger::Instance().Log("________EntityManager::ClearGarbage delete entity " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
+        LOG("________EntityManager::ClearGarbage delete entity " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
 #endif
         EntityIdGenerator::Instance().addFreeId(m_garbage[i]->id());
         delete m_garbage[i];

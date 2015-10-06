@@ -169,8 +169,8 @@ bool WeaponComplex::IsAnyWeaponSelected() const
 
 void WeaponComplex::SetTarget(SpaceObject* target, ItemSlot* item_slot)
 {                 
-    //if (item_slot == nullptr)   Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()), WEAPONSTARGET_LOG_DIP);
-    //else                        Logger::Instance().Log("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->item()->subTypeId()) + " id=" + std::to_string(item_slot->item()->id()), WEAPONSTARGET_LOG_DIP);
+    //if (item_slot == nullptr)   LOG("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()));
+    //else                        LOG("vehicle_id="+std::to_string(owner_vehicle->id())+ " WeaponComplex::SetPreciseFireTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()) + " item_subtype_id=" + str(item_slot->item()->subTypeId()) + " id=" + std::to_string(item_slot->item()->id()));
 
     target->remeberAgressor(owner_vehicle);
 
@@ -189,7 +189,7 @@ void WeaponComplex::SetTarget(SpaceObject* target, ItemSlot* item_slot)
                         if (status == STATUS::TARGET_OK) {
                             weapon_slot.setTarget(target, item_slot);
                         } else {
-                            Logger::Instance().Log(getTargetStatusStr(status), WEAPONSTARGET_LOG_DIP);
+                            LOG(getTargetStatusStr(status));
                         }
                     }
                 }

@@ -44,7 +44,7 @@ MacroScenarioStarSystemDefence::~MacroScenarioStarSystemDefence()
 /*virtual*/
 void MacroScenarioStarSystemDefence::Enter(Npc* npc) const
 {    
-    Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " ENTER MacroScenarioStarSystemDefence");
+    LOG("npc_id=" + std::to_string(npc->id()) + " ENTER MacroScenarioStarSystemDefence");
 }
 
 /*virtual*/
@@ -89,7 +89,7 @@ void MacroScenarioStarSystemDefence::UpdateInStaticInSpace(Npc* npc) const
 /*virtual*/
 void MacroScenarioStarSystemDefence::Exit(Npc* npc) const
 {
-    Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " EXIT MacroScenarioStarSystemDefence");
+    LOG("npc_id=" + std::to_string(npc->id()) + " EXIT MacroScenarioStarSystemDefence");
 }
 
 

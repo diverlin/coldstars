@@ -35,7 +35,7 @@ MicroScenarioLaunching::~MicroScenarioLaunching()
 /* virtual */
 void MicroScenarioLaunching::Enter(Npc* npc) const
 {
-    Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " ENTER MicroScenarioLaunching");
+    LOG("npc_id=" + std::to_string(npc->id()) + " ENTER MicroScenarioLaunching");
 }
 
 /* virtual */
@@ -67,7 +67,7 @@ void MicroScenarioLaunching::UpdateInStaticInDock(Npc* npc) const
 /* virtual */
 void MicroScenarioLaunching::Exit(Npc* npc) const 
 {
-    Logger::Instance().Log("npc_id=" + std::to_string(npc->id()) + " EXIT MicroScenarioLaunching");
+    LOG("npc_id=" + std::to_string(npc->id()) + " EXIT MicroScenarioLaunching");
 }
 
 /* virtual */

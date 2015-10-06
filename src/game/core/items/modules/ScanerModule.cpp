@@ -71,19 +71,19 @@ void ScanerModule::Resolve()
 
 void ScanerModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" ScanerModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" ScanerModule::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"scan_add", scan_add);
 }
 
 void ScanerModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" ScanerModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" ScanerModule::LoadData()  id=" + std::to_string(id()) + " START");
     
     scan_add = load_ptree.get<int>("scan_add");
 }
 
 void ScanerModule::ResolveData()
 {
-    Logger::Instance().Log(" ScanerModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" ScanerModule::ResolveData()  id=" + std::to_string(id()) + " START");
 }

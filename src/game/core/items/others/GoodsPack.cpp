@@ -96,17 +96,17 @@ void GoodsPack::Resolve()
 
 void GoodsPack::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" GoodsPack::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" GoodsPack::SaveData()  id=" + std::to_string(id()) + " START");
 }
          
 void GoodsPack::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" GoodsPack::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" GoodsPack::LoadData()  id=" + std::to_string(id()) + " START");
 }
 
 void GoodsPack::ResolveData()
 {
-    Logger::Instance().Log(" GoodsPack::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" GoodsPack::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 

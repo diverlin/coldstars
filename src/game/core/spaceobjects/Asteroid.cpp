@@ -46,7 +46,7 @@ Asteroid::Asteroid(int id)
 /* virtual */
 Asteroid::~Asteroid()
 {
-    Logger::Instance().Log("___::~Asteroid("+std::to_string(id())+")");
+    LOG("___::~Asteroid("+std::to_string(id())+")");
 }
 
 void Asteroid::UpdateInSpace(int time, bool show_effect)
@@ -101,17 +101,17 @@ void Asteroid::postDeathUniqueEvent(bool show_effect)
 
 void Asteroid::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" Asteroid("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
+    LOG(" Asteroid("+std::to_string(id())+")::SaveData");
 }
 
 void Asteroid::LoadData(const boost::property_tree::ptree& ptree)
 {
-    Logger::Instance().Log(" Asteroid("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
+    LOG(" Asteroid("+std::to_string(id())+")::LoadData");
 }
 
 void Asteroid::ResolveData()
 {
-    Logger::Instance().Log(" Asteroid("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
+    LOG(" Asteroid("+std::to_string(id())+")::ResolveData");
     
     ((StarSystem*)global::get().entityManager().entity(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it); 
 }

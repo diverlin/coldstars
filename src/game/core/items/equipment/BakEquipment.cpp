@@ -118,7 +118,7 @@ void BakEquipment::Resolve()
 
 void BakEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" BakEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" BakEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"fuel_max_orig", fuel_max_orig);
     save_ptree.put(root+"fuel", fuel);
@@ -126,7 +126,7 @@ void BakEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::
                 
 void BakEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" BakEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" BakEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
     fuel_max_orig = load_ptree.get<int>("fuel_max_orig");
     fuel = load_ptree.get<int>("fuel");
@@ -134,6 +134,6 @@ void BakEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void BakEquipment::ResolveData()
 {
-    Logger::Instance().Log(" BakEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" BakEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 

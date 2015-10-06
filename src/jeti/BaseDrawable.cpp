@@ -42,7 +42,7 @@ BaseDrawable::BaseDrawable(TextureOb* textureOb, Mesh* mesh)
 
 /* virtual */
 BaseDrawable::~BaseDrawable() {
-    //Logger::Instance().Log("___::~Drawable("+std::to_string(id())+")");
+    //LOG("___::~Drawable("+std::to_string(id())+")");
     
     delete m_AnimationRotation;
 }

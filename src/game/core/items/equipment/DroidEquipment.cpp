@@ -122,21 +122,21 @@ void DroidEquipment::Resolve()
 
 void DroidEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" DroidEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" DroidEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"repair_orig", repair_orig);
 }
                 
 void DroidEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" DroidEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" DroidEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
     repair_orig = load_ptree.get<int>("repair_orig");
 }                
 
 void DroidEquipment::ResolveData()
 {
-    Logger::Instance().Log(" DroidEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" DroidEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 

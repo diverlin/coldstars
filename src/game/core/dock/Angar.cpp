@@ -43,7 +43,7 @@ Angar::Angar(int id)
 
 Angar::~Angar()
 {        
-    Logger::Instance().Log("___::~Angar(), id="+std::to_string(id()));
+    LOG("___::~Angar(), id="+std::to_string(id()));
 }
 
 /* virtual */

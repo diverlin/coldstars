@@ -90,7 +90,7 @@ void GrappleModule::Resolve()
 
 void GrappleModule::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" GrappleModule::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" GrappleModule::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"strength_add", strength_add);
     save_ptree.put(root+"radius_add", radius_add);
@@ -100,7 +100,7 @@ void GrappleModule::SaveData(boost::property_tree::ptree& save_ptree, const std:
 
 void GrappleModule::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" GrappleModule::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" GrappleModule::LoadData()  id=" + std::to_string(id()) + " START");
     
     strength_add = load_ptree.get<int>("strength_add");
     radius_add = load_ptree.get<int>("radius_add");
@@ -110,7 +110,7 @@ void GrappleModule::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void GrappleModule::ResolveData()
 {
-    Logger::Instance().Log(" GrappleModule::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" GrappleModule::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 

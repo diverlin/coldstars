@@ -62,7 +62,7 @@ ItemSlot::ItemSlot(const ID& id, TYPE::ENTITY subtype_id)
 /* virtual */
 ItemSlot::~ItemSlot()
 {
-    Logger::Instance().Log("___::~ItemSlot("+std::to_string(id())+")");
+    LOG("___::~ItemSlot("+std::to_string(id())+")");
 }  
 
 /* virtual */  
@@ -89,7 +89,7 @@ STATUS ItemSlot::validateTarget()
     
     STATUS status = checkTarget(m_target);
     if (status != STATUS::OK) {
-        Logger::Instance().Log(getTargetStatusStr(status), WEAPONSTARGET_LOG_DIP);
+        LOG(getTargetStatusStr(status));
     }
 
     return status;
@@ -416,7 +416,7 @@ void ItemSlot::drawRange(const glm::vec2& offset)
 bool ItemSlot::checkSubTarget(ItemSlot* subtarget) const
 {
 #if WEAPONSTARGET_LOG_ENABLED == 1
-    Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::CheckSubTarget", WEAPONSTARGET_LOG_DIP);
+    LOG(" ItemSlot("+std::to_string(id())+")::CheckSubTarget");
 #endif
     
     if (subtarget->item() != nullptr)
@@ -431,7 +431,7 @@ bool ItemSlot::checkSubTarget(ItemSlot* subtarget) const
 STATUS ItemSlot::checkTarget(SpaceObject* target) const
 {
 #if WEAPONSTARGET_LOG_ENABLED == 1
-    Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
+    LOG(" ItemSlot("+std::to_string(id())+")::CheckTarget");
 #endif
     
     if (isTargetAlive(target) == false)
@@ -459,7 +459,7 @@ STATUS ItemSlot::checkTarget(SpaceObject* target) const
 
 STATUS ItemSlot::checkTargetPure(SpaceObject* target) const
 {
-    Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::CheckTarget", WEAPONSTARGET_LOG_DIP);
+    LOG(" ItemSlot("+std::to_string(id())+")::CheckTarget");
     if (!isTargetAlive(target)) {
         return STATUS::TARGET_DEAD;
     }
@@ -530,7 +530,7 @@ void ItemSlot::Resolve()
 
 void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::SaveData", SAVELOAD_LOG_DIP);
+    LOG(" ItemSlot("+std::to_string(id())+")::SaveData");
 
     if (m_target != nullptr)    { save_ptree.put(root+"unresolved_ItemSlot.target_id", m_target->id()); }
     else                        { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE_ID); }
@@ -541,7 +541,7 @@ void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
 
 void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
+    LOG(" ItemSlot("+std::to_string(id())+")::LoadData");
     
     m_unresolved_ItemSlot.target_id    = load_ptree.get<int>("unresolved_ItemSlot.target_id");
     m_unresolved_ItemSlot.subtarget_id = load_ptree.get<int>("unresolved_ItemSlot.subtarget_id");
@@ -549,7 +549,7 @@ void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void ItemSlot::ResolveData()
 {
-    Logger::Instance().Log(" ItemSlot("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
+    LOG(" ItemSlot("+std::to_string(id())+")::ResolveData");
     
     if (m_unresolved_ItemSlot.target_id != NONE_ID) {
         m_target = (SpaceObject*)global::get().entityManager().entity(m_unresolved_ItemSlot.target_id);
@@ -578,6 +578,6 @@ void ItemSlot::log(const std::string& func_name) const
     if (m_target != nullptr)    { str += " target:" + m_target->dataTypeStr();  }
     if (m_subtarget != nullptr) { str += " subtarget:" + m_subtarget->dataTypeStr(); }
     
-    Logger::Instance().Log(str, WEAPONSTARGET_LOG_DIP);
+    LOG(str);
 }
 

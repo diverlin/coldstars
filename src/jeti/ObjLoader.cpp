@@ -26,7 +26,7 @@ ObjLoader::ObjLoader(const std::string& path)
     while(std::getline(filestream, line))
     {
         line_counter++;
-        //Logger::Instance().Log(filename+": line num="+std::to_string(line_counter)+" "+line, OBJLOADER_LOG_DIP);
+        //LOG(filename+": line num="+std::to_string(line_counter)+" "+line);
         
         std::stringstream line_stream(line);
         std::string type_str;

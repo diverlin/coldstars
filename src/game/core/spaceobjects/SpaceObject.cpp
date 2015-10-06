@@ -34,7 +34,7 @@ SpaceObject::SpaceObject():
 /* virtual override */
 SpaceObject::~SpaceObject()
 {
-    Logger::Instance().Log("___::~SpaceObject("+std::to_string(id())+")");
+    LOG("___::~SpaceObject("+std::to_string(id())+")");
 }
 
 void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)
@@ -87,7 +87,7 @@ void SpaceObject::checkDeath(bool show_effect)
 
 void SpaceObject::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" SpaceObject("+std::to_string(id())+")::Save(", SAVELOAD_LOG_DIP);
+    LOG(" SpaceObject("+std::to_string(id())+")::Save(");
     
     save_ptree.put(root+"data_life.is_alive",   m_dataLife.is_alive);
     save_ptree.put(root+"data_life.armor",      m_dataLife.armor);
@@ -110,7 +110,7 @@ void SpaceObject::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 
 void SpaceObject::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" SpaceObject("+std::to_string(id())+")::LoadData", SAVELOAD_LOG_DIP);
+    LOG(" SpaceObject("+std::to_string(id())+")::LoadData");
     
     m_dataLife.is_alive   = load_ptree.get<bool>("data_life.is_alive");
     m_dataLife.armor      = load_ptree.get<int>("data_life.armor");
@@ -127,7 +127,7 @@ void SpaceObject::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void SpaceObject::ResolveData()
 {
-    Logger::Instance().Log(" SpaceObject("+std::to_string(id())+")::ResolveData", SAVELOAD_LOG_DIP);
+    LOG(" SpaceObject("+std::to_string(id())+")::ResolveData");
     
     if (data_unresolved_SpaceObject.parent_id != NONE_ID) {
         m_parent = (SpaceObject*)global::get().entityManager().entity(data_unresolved_SpaceObject.parent_id);

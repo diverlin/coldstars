@@ -106,21 +106,21 @@ void ProtectorEquipment::Resolve()
 
 void ProtectorEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" ProtectorEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" ProtectorEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"protection_orig", protection_orig);
 }
 
 void ProtectorEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" ProtectorEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" ProtectorEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
     protection_orig = load_ptree.get<int>("protection_orig");
 }                
 
 void ProtectorEquipment::ResolveData()
 {
-    Logger::Instance().Log(" ProtectorEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" ProtectorEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 

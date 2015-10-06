@@ -123,7 +123,7 @@ void DriveEquipment::Resolve()
 
 void DriveEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
-    Logger::Instance().Log(" DriveEquipment::SaveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" DriveEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"speed_orig", speed_orig);
     save_ptree.put(root+"hyper_orig", hyper_orig);
@@ -131,7 +131,7 @@ void DriveEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std
                 
 void DriveEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    Logger::Instance().Log(" DriveEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" DriveEquipment::LoadData()  id=" + std::to_string(id()) + " START");
 
     speed_orig = load_ptree.get<int>("speed_orig");
     hyper_orig = load_ptree.get<int>("hyper_orig");
@@ -139,7 +139,7 @@ void DriveEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void DriveEquipment::ResolveData()
 {
-    Logger::Instance().Log(" DriveEquipment::ResolveData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);
+    LOG(" DriveEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
 
