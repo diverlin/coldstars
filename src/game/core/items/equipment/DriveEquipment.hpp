@@ -25,39 +25,39 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class DriveEquipment : public BaseEquipment
 {
     public:
-              DriveEquipment(int);                         
-              virtual ~DriveEquipment();
+        DriveEquipment(const IDTYPE& id);
+        virtual ~DriveEquipment();
 
         void SetSpeedOrig(int speed_orig) { this->speed_orig = speed_orig; };
         void SetHyperOrig(int hyper_orig) { this->hyper_orig = hyper_orig; };
 
         int GetSpeed() const { return speed; };
         int GetHyper() const { return hyper; };
-              
-              virtual void updateProperties();
 
-              void CountPrice();
-                                            
-              virtual void Save(boost::property_tree::ptree&) const;
+        virtual void updateProperties();
+
+        void CountPrice();
+
+        virtual void Save(boost::property_tree::ptree&) const;
         virtual void Load(const boost::property_tree::ptree&);
         virtual void Resolve();
         
-          private:
-                    int speed_orig;
-              int speed_add;
-              int speed;
+    private:
+        int speed_orig;
+        int speed_add;
+        int speed;
 
-              int hyper_orig;
-              int hyper_add;
-              int hyper;
-              
-             void virtual AddUniqueInfo();
-               std::string GetSpeedStr();
-               std::string GetHyperStr();   
-                
-                void SaveData(boost::property_tree::ptree&, const std::string&) const;
+        int hyper_orig;
+        int hyper_add;
+        int hyper;
+
+        void virtual AddUniqueInfo();
+        std::string GetSpeedStr();
+        std::string GetHyperStr();
+
+        void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();  
+        void ResolveData();
 };
 
 

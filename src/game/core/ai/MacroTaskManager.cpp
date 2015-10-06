@@ -35,9 +35,8 @@ void MacroTaskManager::SetTask(const Task& macrotask)
 {
     this->macrotask = macrotask;
     scenario = ScenarioCollector::Instance().GetScenario(macrotask.GetScenarioTypeId());
-    if (macrotask.GetTargetId() != NONE_ID)
-    {
-        target = (SpaceObject*)global::get().entitiesManager().entity(macrotask.GetTargetId()); // hack
+    if (macrotask.targetId() != NONE_ID) {
+        target = (SpaceObject*)global::get().entitiesManager().entity(macrotask.targetId()); // hack
     }
 }
 

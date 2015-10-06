@@ -46,5 +46,5 @@ class GoodsPack : public BaseItem
          
 };
 
-GoodsPack* GetNewGoodsPack(TYPE::ENTITY, unsigned long intNONE_ID);
+GoodsPack* GetNewGoodsPack(TYPE::ENTITY, const IDTYPE& id = NONE_ID);
 

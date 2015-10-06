@@ -22,9 +22,9 @@
 #include <ceti/Logger.hpp>
 #include "../../items/modules/ProtectorModule.hpp"
 
-ProtectorEquipment::ProtectorEquipment(int id)
-:
-protection_orig(0)
+ProtectorEquipment::ProtectorEquipment(const IDTYPE& id)
+    :
+      protection_orig(0)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
@@ -38,42 +38,42 @@ ProtectorEquipment::~ProtectorEquipment()
 /* virtual */
 void ProtectorEquipment::updateProperties()
 {   
-        protection_add  = 0;
-        
-           for (unsigned int i = 0; i < modules_vec.size(); i++)
-        {
-            protection_add += ((ProtectorModule*)modules_vec[i])->GetProtectionAdd();         
-        }
-        
-          protection = protection_orig + protection_add;
+    protection_add  = 0;
+
+    for (unsigned int i = 0; i < modules_vec.size(); i++)
+    {
+        protection_add += ((ProtectorModule*)modules_vec[i])->GetProtectionAdd();
+    }
+
+    protection = protection_orig + protection_add;
 }
 
 void ProtectorEquipment::CountPrice()
 {
-          float protection_rate    = (float)protection_orig / EQUIPMENT::PROTECTOR::PROTECTION_MIN;
-          float modules_num_rate   = (float)m_data_item.modules_num_max / EQUIPMENT::PROTECTOR::MODULES_NUM_MAX;
+    float protection_rate    = (float)protection_orig / EQUIPMENT::PROTECTOR::PROTECTION_MIN;
+    float modules_num_rate   = (float)m_data_item.modules_num_max / EQUIPMENT::PROTECTOR::MODULES_NUM_MAX;
 
-          float effectiveness_rate = EQUIPMENT::PROTECTOR::PROTECTION_WEIGHT * protection_rate + 
-                         EQUIPMENT::PROTECTOR::MODULES_NUM_WEIGHT * modules_num_rate;
+    float effectiveness_rate = EQUIPMENT::PROTECTOR::PROTECTION_WEIGHT * protection_rate +
+            EQUIPMENT::PROTECTOR::MODULES_NUM_WEIGHT * modules_num_rate;
 
-          float mass_rate          = (float)m_data_item.mass / EQUIPMENT::PROTECTOR::MASS_MIN;
-          float condition_rate     = (float)m_condition / m_data_item.condition_max;
+    float mass_rate          = (float)m_data_item.mass / EQUIPMENT::PROTECTOR::MASS_MIN;
+    float condition_rate     = (float)m_condition / m_data_item.condition_max;
 
-          m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 void ProtectorEquipment::AddUniqueInfo()
 {
-//        info.addTitleStr("PROTECTOR");
-//        info.addNameStr("protection:");     info.addValueStr(GetProtectionStr());
+    //        info.addTitleStr("PROTECTOR");
+    //        info.addNameStr("protection:");     info.addValueStr(GetProtectionStr());
 }
 
 std::string ProtectorEquipment::GetProtectionStr()
 {
-         if (protection_add == 0)
-             return std::to_string(protection_orig);
-         else
-             return std::to_string(protection_orig) + "+" + std::to_string(protection_add);
+    if (protection_add == 0)
+        return std::to_string(protection_orig);
+    else
+        return std::to_string(protection_orig) + "+" + std::to_string(protection_add);
 }
 
 /*virtual*/
@@ -110,7 +110,7 @@ void ProtectorEquipment::SaveData(boost::property_tree::ptree& save_ptree, const
     
     save_ptree.put(root+"protection_orig", protection_orig);
 }
-                
+
 void ProtectorEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     Logger::Instance().Log(" ProtectorEquipment::LoadData()  id=" + std::to_string(id()) + " START", SAVELOAD_LOG_DIP);

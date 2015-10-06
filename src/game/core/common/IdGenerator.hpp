@@ -49,7 +49,7 @@ class TextureIdGenerator
     public:
         static TextureIdGenerator& Instance();
         
-        IDTYPE GetNextId();
+        IDTYPE nextId();
             
     private:
         TextureIdGenerator():last_incremented_id(0) {}       

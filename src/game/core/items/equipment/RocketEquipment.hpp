@@ -28,7 +28,7 @@
 class RocketEquipment : public BaseEquipment
 { 
        public:
-        RocketEquipment(IDTYPE id);
+        RocketEquipment(const IDTYPE& id);
         virtual ~RocketEquipment();
         
         void SetAmmoMaxOrig(int ammo_max_orig) { this->ammo_max_orig = ammo_max_orig; }
