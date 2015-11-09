@@ -1,11 +1,12 @@
 #include "Message.hpp"
 
-Message::Message(TELEGRAM type_id, const ID& sender_id, const ID& receiver_id, const std::string& extra)
+Message::Message(TELEGRAM type_id, const ID& sender_id, const ID& receiver_id, const std::string& extra, double delay)
     :
       type_id(type_id)
     , sender_id(sender_id)
     , receiver_id(receiver_id)
     , extra(extra)
+    , delay(delay)
 {}
 
 //Message::Message(const Message& message)

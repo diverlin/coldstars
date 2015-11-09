@@ -38,23 +38,33 @@
 //    m_messages_queue.insert(message);
 //}
 
-void MessageManager::addMessage(const Message& message)
+void MessageManager::add(Message message)
 {
+    message.dispatch_time = currentTime() + message.delay;
     m_messages_queue.insert(message);
 }
 
-void MessageManager::updateQueue()
+double MessageManager::currentTime() const
+{
+    return m_clock.getElapsedTime().asSeconds();
+}
+
+void MessageManager::runLoop()
+{
+    while(!m_messages_queue.empty()) {
+        update();
+    }
+}
+
+bool MessageManager::update()
 { 
-    //double CurrentTime = Clock->GetCurrentTime();
-
-    //while( !messages_queue.empty() && (messages_queue.begin()->DispatchTime < CurrentTime) && (messages_queue.begin()->DispatchTime > 0) )
-    {
-        const Message& message = *m_messages_queue.begin();
-        processMessage(message);
-
-        //SendEvent(receiver, message);
-
-        m_messages_queue.erase(m_messages_queue.begin());
+    for ( auto it = m_messages_queue.begin(); it != m_messages_queue.end(); ++it ) {
+        const Message& message = *it;
+        if (message.dispatch_time < currentTime()) {
+            processMessage(message);
+            //SendEvent(receiver, message);
+            m_messages_queue.erase(it);
+        }
     }
 }
 
@@ -63,8 +73,9 @@ void MessageManager::processMessage(const Message& message)
     Base* receiver = global::get().entityManager().entity(message.receiver_id);
     Base* sender   = global::get().entityManager().entity(message.sender_id);
 
-    std::cout<<sender->dataTypeStr()<<std::endl;
-    std::cout<<receiver->dataTypeStr()<<std::endl;
+    std::cout<<"sender = "<<sender->dataTypeStr()<<std::endl;
+    std::cout<<"recever = "<<receiver->dataTypeStr()<<std::endl;
+    std::cout<<"disp_time = "<<message.dispatch_time;
 
     assert(receiver);
     assert(sender);
@@ -73,10 +84,15 @@ void MessageManager::processMessage(const Message& message)
         case TELEGRAM::HIT: {
             SpaceObject* ob = static_cast<SpaceObject*>(receiver);
             assert(ob);
-            ob->hit(100);
+            int damage = std::stoi(message.extra);
+            //std::cout<<damage<<std::endl;
+            ob->hit(damage);
             break;
         }
-        default: { }
+        default:
+        {
+            break;
+        }
     }
 }
 

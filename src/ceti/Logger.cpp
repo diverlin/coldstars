@@ -21,60 +21,60 @@
 #include <iomanip>
 #include <stdexcept>
 
-Logger& Logger::Instance()
-{
-    static Logger instance;
-    return instance;
-}
+//Logger& Logger::Instance()
+//{
+//    static Logger instance;
+//    return instance;
+//}
 
-Logger::Logger()
-{
-    mode = MODE::SCREEN;
-}
+//Logger::Logger()
+//{
+//    mode = MODE::SCREEN;
+//}
         
-Logger::~Logger()
-{
-    file.close();
-}
+//Logger::~Logger()
+//{
+//    file.close();
+//}
 
-void Logger::warn(const std::string& msg, int dip)
-{
-    std::string text = "WARNING!!!: "+ msg;
-    Log(text, dip);
-}
+//void Logger::warn(const std::string& msg, int dip)
+//{
+//    std::string text = "WARNING!!!: "+ msg;
+//    Log(text, dip);
+//}
 
-void Logger::error(const std::string& msg)
-{
-    std::string text = "ERROR!!!: "+ msg;
-    Log(text);
-    throw std::runtime_error(text);
-}
+//void Logger::error(const std::string& msg)
+//{
+//    std::string text = "ERROR!!!: "+ msg;
+//    Log(text);
+//    throw std::runtime_error(text);
+//}
 
-void Logger::Log(const std::string& msg, int dip)
-{
-    switch(mode)
-    {
-        case MODE::SCREEN: { toScreen(msg, dip); break; }
-        case MODE::FILE: { toFile(msg, dip); break;  }
-        case MODE::SCREENFILE: {
-            toScreen(msg, dip);
-            toFile(msg, dip);
-            break;
-        }
-        case MODE::NONE: { break; }
-    }
-}
+//void Logger::Log(const std::string& msg, int dip)
+//{
+//    switch(mode)
+//    {
+//        case MODE::SCREEN: { toScreen(msg, dip); break; }
+//        case MODE::FILE: { toFile(msg, dip); break;  }
+//        case MODE::SCREENFILE: {
+//            toScreen(msg, dip);
+//            toFile(msg, dip);
+//            break;
+//        }
+//        case MODE::NONE: { break; }
+//    }
+//}
             
-void Logger::toScreen(const std::string& msg, int dip)
-{
-    std::cout<<std::setw(dip)<<msg<<std::endl;
-}
+//void Logger::toScreen(const std::string& msg, int dip)
+//{
+//    std::cout<<std::setw(dip)<<msg<<std::endl;
+//}
 
-void Logger::toFile(const std::string& msg, int dip)
-{
-    if (!file) {
-        file.open("log.txt");
-    }
-    file<<std::setw(dip)<<msg<<std::endl;
-}
+//void Logger::toFile(const std::string& msg, int dip)
+//{
+//    if (!file) {
+//        file.open("log.txt");
+//    }
+//    file<<std::setw(dip)<<msg<<std::endl;
+//}
 

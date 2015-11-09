@@ -50,9 +50,11 @@ TEST(base,message)
     entityManager->reg(ship1);
     entityManager->reg(ship2);
 
-    Message message(TELEGRAM::HIT, ship1->id(), ship2->id(), "100");
-    messageManager->addMessage(message);
-    messageManager->updateQueue();
+    messageManager->add(Message(TELEGRAM::HIT, ship1->id(), ship2->id(), "33", 3));
+    messageManager->add(Message(TELEGRAM::HIT, ship1->id(), ship2->id(), "22", 2));
+    messageManager->add(Message(TELEGRAM::HIT, ship1->id(), ship2->id(), "11", 1));
+
+    //messageManager->runLoop();
 }
 
 TEST(base,bomb)
@@ -77,8 +79,10 @@ TEST(base,bomb)
     container->hit(container->armor());
     starsystem->update(1);
 
+    //assert(ship);
+    assert(!ship->isAlive());
     // check consequences
-    //EXPECT_FALSE(ship->isAlive());
+    //EXPECT_FALSE(true);
 }
 
 

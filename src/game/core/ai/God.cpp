@@ -264,15 +264,13 @@ void God::CreateShips(StarSystem* starsystem, int ship_num, TYPE::RACE npc_race_
         // VERY UGLY LOGIC START (TODO)
         if (subtype_id == TYPE::ENTITY::NONE_ID) {
             npc_subtype_id    = getRandNpcSubTypeId(npc_race_id);
-        }
-        else {
+        } else {
             npc_subtype_id    = subtype_id;
         }   
 
         if (subsubtype_id == TYPE::ENTITY::NONE_ID) {
             npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
-        }
-        else {
+        } else {
             npc_subsubtype_id = subsubtype_id;
         }
         // VERY UGLY LOGIC END

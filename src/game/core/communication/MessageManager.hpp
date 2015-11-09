@@ -1,9 +1,12 @@
 #pragma once
 
-#include <set>
 
 #include <spaceobjects/SpaceObject.hpp>
-#include "Message.hpp"
+#include <communication/Message.hpp>
+
+#include <SFML/System/Clock.hpp>
+
+#include <set>
 
 class MessageManager
 {
@@ -15,14 +18,16 @@ class MessageManager
 //                        int    type_id,
 //                        void*  extra);
 
-        void addMessage(const Message& message);
+        void add(Message message);
 
-        void updateQueue();
+        void runLoop();
+        bool update();
         
     private:
+        sf::Clock m_clock;
         std::set<Message> m_messages_queue;
 
         void processMessage(const Message& message);
-
+        double currentTime() const;
 //        void SendEvent(SpaceObject*, const Message&);
 };
