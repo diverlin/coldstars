@@ -22,12 +22,11 @@ namespace ceti {
 
 std::string str(long long int val) 
 {
+    std::ostringstream stm;
     if (val >= 0) {
-        std::ostringstream stm;
         stm<<val;
         return stm.str();
     } else {
-        std::ostringstream stm;
         stm<<abs(val);
         return "-"+stm.str();
     }

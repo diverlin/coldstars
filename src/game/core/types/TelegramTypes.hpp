@@ -23,6 +23,7 @@
 
 enum class TELEGRAM : int 
 {
+    NONE,
     CREATE,
     INSERT,
     REMOVE,
