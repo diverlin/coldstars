@@ -123,11 +123,11 @@ class StarSystem : public SpaceObject
         
         //// TRANSITION
         void add(Vehicle*, const glm::vec3& center, const glm::vec3& angle, const SpaceObject* const parent = nullptr);
-        void add(Ship* ship, const glm::vec3& center, const glm::vec3& angle);
+        void add(Ship* ship, const glm::vec3& center = glm::vec3(0.0f), const glm::vec3& angle = glm::vec3(0.0f));
         void add(RocketBullet*, const glm::vec3&, const glm::vec3&);
 
         void add(Planetoid*, const SpaceObject* parent = nullptr, int it = 0);
-        void add(Container*, const glm::vec3&);
+        void add(Container*, const glm::vec3& = glm::vec3(0.0f));
         void add(BlackHole*, const glm::vec3&);
 
         // effects

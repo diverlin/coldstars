@@ -21,6 +21,7 @@ message("SFML_INCLUDE_DIR = ${SFML_INCLUDE_DIR}")
 add_library (${PROJECT} ${${PROJECT}_SOURCE} ${${PROJECT}_HEADER})
 target_link_libraries(${PROJECT}
     boost_system
+    boost_serialization
     ${PROJECT_METI}
     ${PROJECT_CETI}
     ${SFML_LIBRARIES}

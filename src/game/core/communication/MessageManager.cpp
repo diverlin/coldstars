@@ -8,35 +8,13 @@
 #include <types/EntityTypes.hpp> // test
 
 
-//void MessageManager::SendEvent(SpaceObject* receiver, const Message& message)
-//{
-//    //receiver->HandleMessage(message);
-//}
+#include <spaceobjects/IncludeSpaceObjects.hpp>
+#include <world/starsystem.hpp>
+#include <descriptors/StarSystemDescriptor.hpp>
+#include <builder/spaceobjects/IncludeSpaceObjectBuilders.hpp>
+#include <builder/world/StarSystemBuilder.hpp>
 
-//void MessageManager::newMessage(double delay,
-//                                int    sender_id,
-//                                int    receiver_id,
-//                                int    type_id,
-//                                void*  extra)
-//{
-//    Base* sender   = global::get().entityManager().entity(sender_id);
-//    Base* receiver = global::get().entityManager().entity(receiver_id);
-//    if (!receiver) {
-//        return;
-//    }
-
-//    Message message(NO_DELAY, sender_id, receiver_id, type_id, extra);
-
-//    if (delay <= 0.0f) {
-//        //SendEvent(receiver, message);
-//        return;
-//    } else {
-//        //double CurrentTime = Clock->GetCurrentTime();
-//        //telegram.DispatchTime = CurrentTime + delay;
-//    }
-    
-//    m_messages_queue.insert(message);
-//}
+#include <world/starsystem.hpp>
 
 void MessageManager::add(Message message)
 {
@@ -62,7 +40,6 @@ bool MessageManager::update()
         const Message& message = *it;
         if (message.dispatch_time < currentTime()) {
             processMessage(message);
-            //SendEvent(receiver, message);
             m_messages_queue.erase(it);
         }
     }
@@ -70,23 +47,58 @@ bool MessageManager::update()
 
 void MessageManager::processMessage(const Message& message)
 {
-    Base* receiver = global::get().entityManager().entity(message.receiver_id);
-    Base* sender   = global::get().entityManager().entity(message.sender_id);
+//    Base* receiver = global::get().entityManager().entity(message.receiver_id);
+//    Base* sender   = global::get().entityManager().entity(message.sender_id);
 
-    std::cout<<"sender = "<<sender->dataTypeStr()<<std::endl;
-    std::cout<<"recever = "<<receiver->dataTypeStr()<<std::endl;
-    std::cout<<"disp_time = "<<message.dispatch_time;
+//    std::cout<<"sender = "<<sender->dataTypeStr()<<std::endl;
+//    std::cout<<"recever = "<<receiver->dataTypeStr()<<std::endl;
+//    std::cout<<"disp_time = "<<message.dispatch_time;
 
-    assert(receiver);
-    assert(sender);
+//    assert(receiver);
+//    assert(sender);
 
     switch(message.type_id) {
+//        /** CREATE */
+        case TELEGRAM::CREATE_STARSYSTEM: {
+            auto starsystem = global::get().starSystemBuilder().create(StarSystemDescriptor());
+            global::get().entityManager().reg(starsystem);
+            break;
+        }
+//        case TELEGRAM::CREATE_SHIP: {
+//            auto ship = global::get().shipBuilder().create(/*ShipDescriptor()*/);
+//            global::get().entityManager().reg(ship);
+//            break;
+//        }
+//        case TELEGRAM::CREATE_CONTAINER: {
+//            auto container = global::get().containerBuilder().create(/*ContainerDescriptor()*/);
+//            global::get().entityManager().reg(container);
+//            break;
+//        }
+//        /** STARSYSTEM ADD */
+//        case TELEGRAM::STARSYSTEM_ADD_SHIP: {
+//            Ship* ob = static_cast<Ship*>(sender);
+//            StarSystem* ss = static_cast<StarSystem*>(receiver);
+//            assert(ob);
+//            assert(ss);
+//            ss->add(ob);
+//            break;
+//        }
+//        case TELEGRAM::STARSYSTEM_ADD_CONTAINER: {
+//            Container* ob = static_cast<Container*>(sender);
+//            StarSystem* ss = static_cast<StarSystem*>(receiver);
+//            assert(ob);
+//            assert(ss);
+//            ss->add(ob);
+//            break;
+//        }
+        /** OTHER */
         case TELEGRAM::HIT: {
-            SpaceObject* ob = static_cast<SpaceObject*>(receiver);
+            HitEvent hitEvent(message.data);
+            Base* victim = global::get().entityManager().entity(hitEvent.victim);
+            assert(victim);
+            SpaceObject* ob = static_cast<SpaceObject*>(victim);
             assert(ob);
-            int damage = std::stoi(message.extra);
-            //std::cout<<damage<<std::endl;
-            ob->hit(damage);
+            ob->hit(hitEvent.damage);
             break;
         }
         default:
@@ -96,4 +108,13 @@ void MessageManager::processMessage(const Message& message)
     }
 }
 
+
+
+Message getMessage(const HitEvent& hitEvent, double delay) {
+    return Message(TELEGRAM::HIT, hitEvent.data(), delay);
+}
+
+//Message getMessage(const StarSystemDescriptor& descriptor, double delay) {
+//    return Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data(), delay);
+//}
 

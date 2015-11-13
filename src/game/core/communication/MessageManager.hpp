@@ -1,8 +1,8 @@
 #pragma once
 
 
-#include <spaceobjects/SpaceObject.hpp>
 #include <communication/Message.hpp>
+#include <descriptors/HitEvent.hpp>
 
 #include <SFML/System/Clock.hpp>
 
@@ -12,12 +12,6 @@ class MessageManager
 {
     public:
         MessageManager() {}
-//        void newMessage(double delay,
-//                        int    sender_id,
-//                        int    receiver_id,
-//                        int    type_id,
-//                        void*  extra);
-
         void add(Message message);
 
         void runLoop();
@@ -29,5 +23,7 @@ class MessageManager
 
         void processMessage(const Message& message);
         double currentTime() const;
-//        void SendEvent(SpaceObject*, const Message&);
 };
+
+
+Message getMessage(const HitEvent& hitEvent, double delay = 0.0);

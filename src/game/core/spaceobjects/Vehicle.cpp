@@ -193,21 +193,17 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
 
     m_SlotTotal_vec.push_back(slot);
 
-    if ( (slot->subTypeId() != TYPE::ENTITY::ARTEFACT_SLOT_ID) and (slot->subTypeId() != TYPE::ENTITY::CARGO_SLOT_ID) )
-    {
+    if ( (slot->subTypeId() != TYPE::ENTITY::ARTEFACT_SLOT_ID) and (slot->subTypeId() != TYPE::ENTITY::CARGO_SLOT_ID) ) {
         m_SlotFunct_vec.push_back(slot);
     }
     
-    if (slot->subTypeId() == TYPE::ENTITY::ARTEFACT_SLOT_ID)
-    {
+    if (slot->subTypeId() == TYPE::ENTITY::ARTEFACT_SLOT_ID) {
         m_SlotArtef_vec.push_back(slot);
     }
     
-    if (slot->subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID)
-    {
+    if (slot->subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID) {
         m_SlotCargo_vec.push_back(slot);
     }
-
 }
 
 bool Vehicle::GetAllItemsFromVehicle(Vehicle* vehicle)
@@ -249,33 +245,22 @@ bool Vehicle::ManageFunctionEquipment(BaseItem* item)
     if (item->parentSubTypeId() == TYPE::ENTITY::WEAPON_SLOT_ID)
     {
         ItemSlot* item_slot = m_ComplexWeapon.GetEmptyWeaponSlot();
-        if (item_slot != nullptr)
-        {
+        if (item_slot != nullptr) {
             return item_slot->swapItem(item->itemSlot());
-        }
-        else
-        {
+        } else {
             ItemSlot* item_slot = m_ComplexWeapon.GetEquipedWeakestWeaponSlot();
-            if (item_slot != nullptr)
-            {
-                if (item->price() > item_slot->item()->price())
-                {
+            if (item_slot != nullptr) {
+                if (item->price() > item_slot->item()->price()) {
                     return item_slot->swapItem(item->itemSlot());
                 }
             }
         }
-    }
-    else
-    {
+    } else {
         ItemSlot* item_slot = GetFuctionalSlot(item->parentSubTypeId());
-        if (item_slot->item() == nullptr)
-        {
+        if (item_slot->item() == nullptr) {
             return item_slot->swapItem(item->itemSlot());
-        }
-        else
-        {
-            if (item->price() > item_slot->item()->price())
-            {
+        } else {
+            if (item->price() > item_slot->item()->price()) {
                 return item_slot->swapItem(item->itemSlot());
             }
         }
@@ -644,6 +629,20 @@ void Vehicle::remeberAgressor(Vehicle* agressor)
     m_npc->remeberAgressor(agressor);
 }
 
+
+float Vehicle::dissipateRate() const
+{
+    float rate = 1.0 - m_properties.protection*0.01f;
+    if (m_npc) {
+        rate *= m_npc->GetSkills().GetDefenceNormalized();
+    }
+    return rate;
+}
+
+int Vehicle::criticalDamage() const {
+    return armor() * 1.0/dissipateRate() + 1;
+}
+
 /* virtual */
 void Vehicle::hit(int damage)
 {
@@ -654,13 +653,7 @@ void Vehicle::hit(int damage)
             UpdatePropertiesProtection();
         }
 
-        // adjust real damage value
-        damage *= (1.0 - m_properties.protection*0.01f);
-        if (m_npc) {
-            damage *= m_npc->GetSkills().GetDefenceNormalized();
-        }
-
-        SpaceObject::hit(damage);
+        SpaceObject::hit(damage * dissipateRate());
 
         //if (show_effect == true)
         {

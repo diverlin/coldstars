@@ -190,6 +190,9 @@ class Vehicle : public SpaceObject
                 
         void TEST_DamageAndLockRandItems();
         void TEST_DropRandomItemToSpace(); 
+
+        float dissipateRate() const;
+        int criticalDamage() const;
         
     protected:
         std::vector<ItemSlot*> m_SlotTotal_vec;

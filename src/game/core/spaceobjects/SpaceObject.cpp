@@ -23,12 +23,7 @@
 #include <managers/EntityManager.hpp>
 #include <ceti/Logger.hpp>
 
-SpaceObject::SpaceObject():
-    m_starsystem(nullptr),
-    m_placeTypeId(TYPE::PLACE::NONE_ID),
-    m_mass(0),
-    m_expirienceToGive(0),
-    m_parent(nullptr)
+SpaceObject::SpaceObject()
 {}
 
 /* virtual override */
