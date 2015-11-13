@@ -60,7 +60,7 @@ void MessageManager::processMessage(const Message& message)
     switch(message.type_id) {
 //        /** CREATE */
         case TELEGRAM::CREATE_STARSYSTEM: {
-            auto starsystem = global::get().starSystemBuilder().create(StarSystemDescriptor());
+            auto starsystem = global::get().starSystemBuilder().create(StarSystemDescriptor(message.data));
             global::get().entityManager().reg(starsystem);
             break;
         }
@@ -114,7 +114,7 @@ Message getMessage(const HitEvent& hitEvent, double delay) {
     return Message(TELEGRAM::HIT, hitEvent.data(), delay);
 }
 
-//Message getMessage(const StarSystemDescriptor& descriptor, double delay) {
-//    return Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data(), delay);
-//}
+Message getMessage(const StarSystemDescriptor& descriptor, double delay) {
+    return Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data(), delay);
+}
 

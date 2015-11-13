@@ -18,60 +18,25 @@
 
 #include "StarSystemDescriptor.hpp"
 
-
+#include <sstream>
 
 StarSystemDescriptor::StarSystemDescriptor(const std::string& data)
 {
-//    const std::vector<std::string>& v = ceti::split(data, ";");
-//    assert(v.size() == 14);
-
-//    id                  = std::stoi(v[0]);
-//    race_id             = std::stoi(v[1]);
-
-//    planet_num          = std::stoi(v[2]);
-//    spacestation_num    = std::stoi(v[3]);
-//    asteroid_num        = std::stoi(v[4]);
-//    asteroid_delay      = std::stoi(v[5]);
-
-//    allow_satellites    = std::stoi(v[6]);
-//    allow_spacestations = std::stoi(v[7]);
-//    allow_ships         = std::stoi(v[8]);
-//    allow_ship_ranger   = std::stoi(v[9]);
-//    allow_ship_warrior  = std::stoi(v[10]);
-//    allow_ship_trader   = std::stoi(v[11]);
-//    allow_ship_pirat    = std::stoi(v[12]);
-//    allow_ship_diplomat = std::stoi(v[13]);
-
+    std::stringstream ss;
+    ss << data;
+    boost::archive::text_iarchive ia(ss);
+    ia >> *this;
 }
 
 std::string StarSystemDescriptor::data() const
 {
-    std::string data;
-
-//    data += ceti::str(id) + ";";
-//    data += ceti::str(race_id) + ";";
-
-//    data += ceti::str(planet_num) + ";";
-//    data += ceti::str(spacestation_num) + ";";
-//    data += ceti::str(asteroid_num) + ";";
-//    data += ceti::str(asteroid_delay) + ";";
-
-//    data += ceti::str(allow_satellites) + ";";
-//    data += ceti::str(allow_spacestations) + ";";
-//    data += ceti::str(allow_ships) + ";";
-//    data += ceti::str(allow_ship_ranger) + ";";
-//    data += ceti::str(allow_ship_warrior) + ";";
-//    data += ceti::str(allow_ship_trader) + ";";
-//    data += ceti::str(allow_ship_pirat) + ";";
-//    data += ceti::str(allow_ship_diplomat);
-
-    return data;
+    std::stringstream ss;
+    boost::archive::text_oarchive oa(ss);
+    oa << *this;
+    std::cout<<"data="<<ss.str()<<std::endl;
+    return ss.str();
 }
 
-//Message getMessage(const StarSystemDescriptor& descriptor, double delay = 0.0)
-//{
-
-//}
 
     
 

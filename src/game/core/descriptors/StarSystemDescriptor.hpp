@@ -23,9 +23,6 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
-#include <string>
-#include <vector>
-
 class StarSystemDescriptor
 {
     public:
@@ -53,14 +50,25 @@ class StarSystemDescriptor
         std::string data() const;
 
     private:
-        //friend class boost::serialization::access;
+        friend class boost::serialization::access;
         template<class Archive>
         void serialize(Archive & ar, const unsigned int version)
         {
             ar & id;
+
             ar & race_id;
             ar & planet_num;
+            ar & spacestation_num;
+            ar & asteroid_num;
+            ar & asteroid_delay;
+
+            ar & allow_satellites;
+            ar & allow_spacestations;
+            ar & allow_ships;
+            ar & allow_ship_ranger;
+            ar & allow_ship_warrior;
+            ar & allow_ship_trader;
+            ar & allow_ship_pirat;
+            ar & allow_ship_diplomat;
         }
 }; 
-
-//Message getMessage(const StarSystemDescriptor& descriptor, double delay = 0.0);
