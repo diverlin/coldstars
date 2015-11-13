@@ -34,55 +34,97 @@
 #include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/StarSystemDescriptor.hpp>
+#include <descriptors/HitEvent.hpp>
 
 #include <communication/MessageManager.hpp>
 #include <managers/EntityManager.hpp>
 
+#include <ceti/myStr.hpp>
+
+TEST(base, serialization)
+{
+    HitEvent hit1(101, 102, 33);
+    HitEvent hit2(hit1.data());
+    assert(hit2.agressor == hit1.agressor);
+    assert(hit2.victim == hit1.victim);
+    assert(hit2.damage == hit1.damage);
+}
+
 TEST(base,message)
 {
+    // create managers
     auto entityManager = new EntityManager;
     auto messageManager = new MessageManager;
 
+    // create builders
     auto shipBuilder = new ShipBuilder;
+
+    // create entities
     auto ship1 = shipBuilder->create();
     auto ship2 = shipBuilder->create();
 
+    // register entities
     entityManager->reg(ship1);
     entityManager->reg(ship2);
 
-    messageManager->add(Message(TELEGRAM::HIT, ship1->id(), ship2->id(), "33", 3));
-    messageManager->add(Message(TELEGRAM::HIT, ship1->id(), ship2->id(), "22", 2));
-    messageManager->add(Message(TELEGRAM::HIT, ship1->id(), ship2->id(), "11", 1));
+    // messages
+    messageManager->add(getMessage(HitEvent(ship1->id(), ship2->id(), 33), 0.3));
+    messageManager->add(getMessage(HitEvent(ship1->id(), ship2->id(), 22), 0.2));
+    messageManager->add(getMessage(HitEvent(ship1->id(), ship2->id(), 11), 0.1));
+    messageManager->add(getMessage(HitEvent(ship1->id(), ship2->id(), ship2->criticalDamage()), 0.4));
 
-    //messageManager->runLoop();
+    // process messaging
+    messageManager->runLoop();
+
+    assert(ship2->isDying());
 }
 
 TEST(base,bomb)
 {
-    // create builders
-    auto starsystemBuilder = new StarSystemBuilder;
-    auto shipBuilder = new ShipBuilder;
-    auto bombBuilder = new BombBuilder;
-    auto containerBuilder = new ContainerBuilder;
+//    // create managers
+//    auto entityManager = new EntityManager;
+//    auto messageManager = new MessageManager;
 
-    // create entities
-    auto starsystem = starsystemBuilder->create(StarSystemDescriptor());
-    auto ship = shipBuilder->create(/*ShipDescriptor()*/);
-    auto bomb = bombBuilder->create(/*BombDescriptor()*/);
-    auto container = containerBuilder->create(bomb);
+//    // create builders
+//    auto starsystemBuilder = new StarSystemBuilder;
+//    auto shipBuilder = new ShipBuilder;
+//    //auto bombBuilder = new BombBuilder;
+//    auto containerBuilder = new ContainerBuilder;
 
-    // inject entities
-    starsystem->add(ship, glm::vec3(0.0f), glm::vec3(0.0f));
-    starsystem->add(container, glm::vec3(0.0f));
+//    // create entities
+//    auto starsystem = starsystemBuilder->create(StarSystemDescriptor());
+//    auto ship = shipBuilder->create(/*ShipDescriptor()*/);
+//    //auto bomb = bombBuilder->create(/*BombDescriptor()*/);
+//    //auto container = containerBuilder->create(bomb);
 
-    // simulate bomb explosion
-    container->hit(container->armor());
-    starsystem->update(1);
+//    // register entities
+//    entityManager->reg(starsystem);
+//    entityManager->reg(ship);
+//    //entityManager->reg(bomb);
+//    //entityManager->reg(container);
 
-    //assert(ship);
-    assert(!ship->isAlive());
-    // check consequences
-    //EXPECT_FALSE(true);
+    //messageManager->add(Message(TELEGRAM::CREATE_STARSYSTEM, 0, 0, ""));
+//    messageManager->add(Message(TELEGRAM::CREATE_SHIP, 0, 0, ""));
+//    messageManager->add(Message(TELEGRAM::CREATE_CONTAINER, 0, 0, ""));
+
+////    messageManager->add(Message(TELEGRAM::STARSYSTEM_ADD_SHIP, ship->id(), starsystem->id(), ""));
+////    messageManager->add(Message(TELEGRAM::STARSYSTEM_ADD_SHIP, ship->id(), starsystem->id(), ""));
+////    messageManager->add(Message(TELEGRAM::STARSYSTEM_ADD_CONTAINER, container->id(), starsystem->id(), ""));
+
+//    // process messaging
+//    messageManager->runLoop();
+
+//    // simulate bomb explosion
+////    container->hit(container->armor());
+////    ship->hit(ship->criticalDamage());
+//    //starsystem->update(1);
+
+//    assert(ship);
+////    assert(container->isDying());
+////    assert(ship->isDying());
+//    // check consequences
+//    //EXPECT_FALSE(true);
+
 }
 
 

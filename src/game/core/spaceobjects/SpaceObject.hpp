@@ -54,6 +54,7 @@ class SpaceObject : public ceti::Orientation, public Base
         virtual int givenExpirience() const { return m_expirienceToGive; }  // !!!
  
         bool isAlive()           const { return m_dataLife.is_alive; }
+        bool isDying()           const { return m_dataLife.is_dying; }
         bool isReadyForGarbage() const { return m_dataLife.garbage_ready; }
 
         int mass()  const { return m_mass; }
@@ -96,14 +97,13 @@ class SpaceObject : public ceti::Orientation, public Base
 
         glm::vec3 m_externalForce;
 
-        StarSystem* m_starsystem;
-        TYPE::PLACE m_placeTypeId;
+        StarSystem* m_starsystem = nullptr;
+        TYPE::PLACE m_placeTypeId = TYPE::PLACE::NONE_ID;
 
-        int m_mass;
-        int m_expirienceToGive;
+        int m_mass = 0;
+        int m_expirienceToGive = 0;
 
-        const SpaceObject* m_parent;
+        const SpaceObject* m_parent = nullptr;
                         
     friend class BaseVehicleBuilder;
 };
-

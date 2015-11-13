@@ -22,7 +22,11 @@
 std::string str(TELEGRAM type_id)
 {
     switch (type_id) {
-        case TELEGRAM::CREATE:  { return "TELEGRAM::CREATE"; break; }
+        case TELEGRAM::CREATE_STARSYSTEM:  { return "TELEGRAM::CREATE_STARSYSTEM"; break; }
+        case TELEGRAM::CREATE_SHIP:  { return "TELEGRAM::CREATE_SHIP"; break; }
+        case TELEGRAM::CREATE_CONTAINER:  { return "TELEGRAM::CREATE_CONTAINER"; break; }
+        case TELEGRAM::STARSYSTEM_ADD_SHIP: { return "TELEGRAM::STARSYSTEM_ADD_SHIP"; break; }
+        case TELEGRAM::STARSYSTEM_ADD_CONTAINER: { return "TELEGRAM::STARSYSTEM_ADD_CONTAINER"; break; }
         case TELEGRAM::INSERT:  { return "TELEGRAM::INSERT"; break; }
         case TELEGRAM::REMOVE:  { return "TELEGRAM::REMOVE"; break; }
         case TELEGRAM::DELETE:  { return "TELEGRAM::DELETE"; break; }

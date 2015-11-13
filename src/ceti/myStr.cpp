@@ -16,6 +16,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "myStr.hpp"
+
 #include <sstream>
 
 namespace ceti {
@@ -32,6 +34,18 @@ std::string str(long long int val)
     }
 }
 
+std::string str(long int val)
+{
+    return str((long long int)val);
+}
+
+
+std::string str(int val)
+{
+    return str((long long int)val);
+}
+
+
 std::string str(bool var) 
 {
     std::ostringstream stm;
@@ -41,6 +55,32 @@ std::string str(bool var)
         stm << "false";
     }
     return stm.str() ;
+}
+
+std::vector<std::string> split(const std::string& str, const std::string& delim) {
+    std::vector<std::string> v;
+    std::string::size_type start = 0;
+    auto pos = str.find_first_of(delim, start);
+    while(pos != std::string::npos) {
+        if(pos != start) // ignore empty tokens
+            v.emplace_back(str, start, pos - start);
+        start = pos + 1;
+        pos = str.find_first_of(delim, start);
+    }
+    if(start < str.length()) // ignore trailing delimiter
+        v.emplace_back(str, start, str.length() - start); // add what's left of the string
+    return v;
+}
+
+std::string join(const std::vector<std::string>& v, const std::string& delim) {
+    std::string str = "";
+    for(auto& seg: v) {
+        str += seg;
+        if (seg != v.back()) {
+            str += delim;
+        }
+    }
+    return str;
 }
 
 } // namespace ceti

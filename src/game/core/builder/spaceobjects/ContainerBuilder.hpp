@@ -39,7 +39,7 @@ class ContainerBuilder
         Container* createTemplate(ID id = NONE_ID) const;
         Container* create(jeti::TextureOb*, BaseItem*) const;
         Container* create(BaseItem*) const;
-        Container* create(int) const;
+        Container* create(int mineral_ammount = 0) const;
                                                      
     private:
         void createInternals(Container*, jeti::TextureOb*, BaseItem*) const;
