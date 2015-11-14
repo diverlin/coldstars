@@ -19,9 +19,12 @@
 
 #pragma once
 
+#include <string>
+
 #include <types/IdType.hpp>
 
 class Container;
+class ContainerDescriptor;
 
 namespace jeti {
 class TextureOb;
@@ -36,12 +39,14 @@ class ContainerBuilder
         ContainerBuilder();
         ~ContainerBuilder();
 
-        Container* createTemplate(ID id = NONE_ID) const;
-        Container* create(jeti::TextureOb*, BaseItem*) const;
-        Container* create(BaseItem*) const;
-        Container* create(int mineral_ammount = 0) const;
+        Container* create(const std::string& data) const;
+        Container* create(const ContainerDescriptor&) const;
+//        Container* create(jeti::TextureOb*, BaseItem*) const;
+//        Container* create(BaseItem*) const;
+//        Container* create(int mineral_ammount = 0) const;
                                                      
     private:
-        void createInternals(Container*, jeti::TextureOb*, BaseItem*) const;
-        void createInternals(Container*, BaseItem*) const;
+        void createInternals(Container*, const ContainerDescriptor&) const;
+//        void createInternals(Container*, jeti::TextureOb*, BaseItem*) const;
+//        void createInternals(Container*, BaseItem*) const;
 }; 

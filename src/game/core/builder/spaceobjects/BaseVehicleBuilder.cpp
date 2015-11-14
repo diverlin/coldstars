@@ -301,7 +301,7 @@ void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, TYPE::TECHLEVEL tech_l
 void BaseVehicleBuilder::EquipBomb(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) const
 {
     for (unsigned int i=0; i<2; i++) {
-        vehicle->AddItemToCargoSlot(global::get().bombBuilder().create());
+        //vehicle->AddItemToCargoSlot(global::get().bombBuilder().create());
     }    
 }
 

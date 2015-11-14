@@ -16,27 +16,33 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
 #pragma once
 
-#include <string>
+#include <types/IdType.hpp>
 
-class Bomb;
-class BombDescriptor;
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
-class BombBuilder
+class BombDescriptor
 {
     public:
-        BombBuilder();
-        ~BombBuilder();
+        ID id = 0;
+        int damage = 0;
+        int radius = 0;
+                                                        
+        BombDescriptor() {}
+        BombDescriptor(const std::string& data);
+        ~BombDescriptor() {}
 
-        Bomb* create(const BombDescriptor&) const;
-                                     
+        std::string data() const;
+
     private:
-        void createInternals(Bomb*, const BombDescriptor&) const;
+        friend class boost::serialization::access;
+        template<class Archive>
+        void serialize(Archive & ar, const unsigned int version)
+        {
+            ar & id;
+            ar & damage;
+            ar & radius;
+        }
 }; 
-    
-
-        
-
-

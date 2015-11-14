@@ -22,6 +22,8 @@
 
 #include <spaceobjects/Container.hpp>
 
+#include <descriptors/ContainerDescriptor.hpp>
+
 #include <slots/ItemSlot.hpp>
 
 #include <items/others/GoodsPack.hpp>
@@ -35,89 +37,108 @@ ContainerBuilder::ContainerBuilder()
 ContainerBuilder::~ContainerBuilder()
 {}
 
-Container* ContainerBuilder::createTemplate(ID id) const
-{       
-    Container* container = new Container(id);
+Container* ContainerBuilder::create(const ContainerDescriptor& descriptor) const
+{
+    Container* container = new Container(descriptor.id);
     assert(container);
-
     global::get().entityManager().reg(container);
-    
+    createInternals(container, descriptor);
     return container;
-} 
+}
 
-Container* ContainerBuilder::create(jeti::TextureOb* textureOb, BaseItem* item) const
+Container* ContainerBuilder::create(const std::string& data) const
 {
-    Container* container = createTemplate();
-    createInternals(container, textureOb, item);
+    return create(ContainerDescriptor(data));
+}
+
+//Container* ContainerBuilder::create(jeti::TextureOb* textureOb, BaseItem* item) const
+//{
+//    Container* container = createTemplate();
+//    createInternals(container, textureOb, item);
         
-    return container;
-} 
+//    return container;
+//}
 
-Container* ContainerBuilder::create(BaseItem* item) const
-{
-    Container* container = createTemplate();
-    createInternals(container, item);
+//Container* ContainerBuilder::create(BaseItem* item) const
+//{
+//    Container* container = createTemplate();
+//    createInternals(container, item);
 
-    return container;
-}
+//    return container;
+//}
 
-Container* ContainerBuilder::create(int mineral_ammount) const
-{
-    //jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MINERAL_ID);
-    GoodsPack* goods_pack = GetNewGoodsPack(TYPE::ENTITY::MINERALS_ID);
-    goods_pack->Increase(mineral_ammount);
+//Container* ContainerBuilder::create(int mineral_ammount) const
+//{
+//    //jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MINERAL_ID);
+//    GoodsPack* goods_pack = GetNewGoodsPack(TYPE::ENTITY::MINERALS_ID);
+//    goods_pack->Increase(mineral_ammount);
 
-    //Container* container = GetNewContainer(textureOb, goods_pack);
-    Container* container = nullptr;
-    assert(container);
-    return container;
-} 
+//    //Container* container = GetNewContainer(textureOb, goods_pack);
+//    Container* container = nullptr;
+//    assert(container);
+//    return container;
+//}
            
-void ContainerBuilder::createInternals(Container* container, jeti::TextureOb* textureOb, BaseItem* item) const
-{           
-    LifeData data_life;
-    data_life.armor = 1;
-    data_life.dying_time = 30;
+//void ContainerBuilder::createInternals(Container* container, jeti::TextureOb* textureOb, BaseItem* item) const
+//{
+//    LifeData data_life;
+//    data_life.armor = 1;
+//    data_life.dying_time = 30;
     
-    container->setLifeData(data_life);
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->size());
+//    container->setLifeData(data_life);
+//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//    //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->size());
  
-    float delta_angle = 0.001*meti::getRandInt(20, 60);
-    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
-    //alpitodorender container->SetAnimationRotation(animation_rotation);
+//    float delta_angle = 0.001*meti::getRandInt(20, 60);
+//    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
+//    //alpitodorender container->SetAnimationRotation(animation_rotation);
     
-    container->setGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
+//    container->setGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
     
-    ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
+//    ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
     
-    container->bindItemSlot(item_slot);
-    container->itemSlot()->insertItem(item);
-}
+//    container->bindItemSlot(item_slot);
+//    container->itemSlot()->insertItem(item);
+//}
 
-void ContainerBuilder::createInternals(Container* container, BaseItem* item) const
+//void ContainerBuilder::createInternals(Container* container, BaseItem* item) const
+//{
+//    LifeData data_life;
+//    data_life.armor = 1;
+//    data_life.dying_time = 30;
+
+//    container->setLifeData(data_life);
+//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+//    //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->size());
+
+//    float delta_angle = 0.001*meti::getRandInt(20, 60);
+//    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
+//    //alpitodorender container->SetAnimationRotation(animation_rotation);
+
+//    container->setGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
+
+//    ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
+
+//    container->bindItemSlot(item_slot);
+//    container->itemSlot()->insertItem(item);
+//}
+
+void ContainerBuilder::createInternals(Container* container, const ContainerDescriptor& descriptor) const
 {
     LifeData data_life;
     data_life.armor = 1;
     data_life.dying_time = 30;
 
     container->setLifeData(data_life);
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    //alpitodorender container->SetRenderData(mesh, textureOb, textureOb->size());
-
-    float delta_angle = 0.001*meti::getRandInt(20, 60);
-    //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
-    //alpitodorender container->SetAnimationRotation(animation_rotation);
-
-    container->setGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
 
     ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
-
     container->bindItemSlot(item_slot);
-    container->itemSlot()->insertItem(item);
+
+    if (descriptor.child_id >= 0) {
+        BaseItem* item = static_cast<BaseItem*>(global::get().entityManager().get(descriptor.child_id));
+        item_slot->insertItem(item);
+    }
 }
-
-
 
 
 

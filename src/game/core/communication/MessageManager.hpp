@@ -7,16 +7,17 @@
 
 #include <set>
 
-class HitEvent;
 class StarSystemDescriptor;
 class VehicleDescriptor;
-
+class BombDescriptor;
+class ContainerDescriptor;
+class HitEvent;
 
 class MessageManager
 {
     public:
         MessageManager() {}
-        void add(Message message);
+        void add(Message&& message);
 
         void runLoop();
         bool update();
@@ -29,7 +30,8 @@ class MessageManager
         double currentTime() const;
 };
 
-
-Message getMessage(const StarSystemDescriptor& descriptor, double delay = 0.0);
-Message getMessage(const VehicleDescriptor& descriptor, double delay = 0.0);
+Message getMessage(const StarSystemDescriptor& descriptor, double delay = -1.0);
+Message getMessage(const VehicleDescriptor& descriptor, double delay = -1.0);
+Message getMessage(const BombDescriptor& descriptor, double delay = -1.0);
+Message getMessage(const ContainerDescriptor& descriptor, double delay = -1.0);
 Message getMessage(const HitEvent& hitEvent, double delay = 0.0);

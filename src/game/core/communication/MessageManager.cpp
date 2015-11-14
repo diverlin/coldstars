@@ -7,22 +7,29 @@
 
 #include <types/EntityTypes.hpp> // test
 
+#include <descriptors/StarSystemDescriptor.hpp>
+#include <descriptors/VehicleDescriptor.hpp>
+#include <descriptors/items/BombDescriptor.hpp>
+#include <descriptors/ContainerDescriptor.hpp>
 #include <descriptors/HitEvent.hpp>
-#include <descriptors/StarSystemDescriptor.hpp>
-#include <descriptors/StarSystemDescriptor.hpp>
 
 #include <spaceobjects/IncludeSpaceObjects.hpp>
 #include <world/starsystem.hpp>
 
 #include <builder/spaceobjects/IncludeSpaceObjectBuilders.hpp>
+#include <builder/items/IncludeItemBuilders.hpp>
 #include <builder/world/StarSystemBuilder.hpp>
 
 #include <world/starsystem.hpp>
 
-void MessageManager::add(Message message)
+void MessageManager::add(Message&& message)
 {
-    message.dispatch_time = currentTime() + message.delay;
-    m_messages_queue.insert(message);
+    if (message.delay < 0) {
+        processMessage(message);
+    } else {
+        message.dispatch_time = currentTime() + message.delay;
+        m_messages_queue.insert(message);
+    }
 }
 
 double MessageManager::currentTime() const
@@ -50,27 +57,25 @@ bool MessageManager::update()
 
 void MessageManager::processMessage(const Message& message)
 {
-//    Base* receiver = global::get().entityManager().entity(message.receiver_id);
-//    Base* sender   = global::get().entityManager().entity(message.sender_id);
-
-//    std::cout<<"sender = "<<sender->dataTypeStr()<<std::endl;
-//    std::cout<<"recever = "<<receiver->dataTypeStr()<<std::endl;
-//    std::cout<<"disp_time = "<<message.dispatch_time;
-
-//    assert(receiver);
-//    assert(sender);
-
     switch(message.type_id) {
-//        /** CREATE */
+        /** CREATE */
         case TELEGRAM::CREATE_STARSYSTEM: {
-            auto starsystem = global::get().starSystemBuilder().create(message.data);
-            global::get().entityManager().reg(starsystem);
+            global::get().starSystemBuilder().create(message.data);
             break;
         }
         case TELEGRAM::CREATE_SHIP: {
-            auto ship = global::get().shipBuilder().create(message.data);
+            global::get().shipBuilder().create(message.data);
             break;
         }
+        case TELEGRAM::CREATE_BOMB: {
+            global::get().bombBuilder().create(message.data);
+            break;
+        }
+        case TELEGRAM::CREATE_CONTAINER: {
+            global::get().containerBuilder().create(message.data);
+            break;
+        }
+        /** */
 //        case TELEGRAM::CREATE_CONTAINER: {
 //            auto container = global::get().containerBuilder().create(/*ContainerDescriptor()*/);
 //            global::get().entityManager().reg(container);
@@ -115,6 +120,14 @@ Message getMessage(const StarSystemDescriptor& descriptor, double delay) {
 
 Message getMessage(const VehicleDescriptor& descriptor, double delay) {
     return Message(TELEGRAM::CREATE_SHIP, descriptor.data(), delay);
+}
+
+Message getMessage(const BombDescriptor& descriptor, double delay) {
+    return Message(TELEGRAM::CREATE_BOMB, descriptor.data(), delay);
+}
+
+Message getMessage(const ContainerDescriptor& descriptor, double delay) {
+    return Message(TELEGRAM::CREATE_CONTAINER, descriptor.data(), delay);
 }
 
 Message getMessage(const HitEvent& hitEvent, double delay) {

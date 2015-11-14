@@ -16,27 +16,27 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
+#include "BombDescriptor.hpp"
 
-#pragma once
+#include <sstream>
 
-#include <string>
-
-class Bomb;
-class BombDescriptor;
-
-class BombBuilder
+BombDescriptor::BombDescriptor(const std::string& data)
 {
-    public:
-        BombBuilder();
-        ~BombBuilder();
+    std::stringstream ss;
+    ss << data;
+    boost::archive::text_iarchive ia(ss);
+    ia >> *this;
+}
 
-        Bomb* create(const BombDescriptor&) const;
-                                     
-    private:
-        void createInternals(Bomb*, const BombDescriptor&) const;
-}; 
+std::string BombDescriptor::data() const
+{
+    std::stringstream ss;
+    boost::archive::text_oarchive oa(ss);
+    oa << *this;
+    return ss.str();
+}
+
+
     
-
-        
 
 
