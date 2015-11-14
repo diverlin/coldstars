@@ -194,8 +194,8 @@ void EntityManager::loadPass0(const std::string& filename)
         LOG("loading starsystems...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("starsystem"))
         {
-            StarSystem* starsystem = global::get().starSystemBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
-            starsystem->Load(v.second);
+            //StarSystem* starsystem = global::get().starSystemBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
+            //starsystem->Load(v.second);
         }
     }
 
@@ -468,8 +468,8 @@ void EntityManager::loadPass0(const std::string& filename)
         LOG("loading bombs...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bomb"))
         {
-            Bomb* bomb = global::get().bombBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
-            bomb->Load(v.second);
+            //Bomb* bomb = global::get().bombBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
+            //bomb->Load(v.second);
         }
     }
 
@@ -511,8 +511,8 @@ void EntityManager::loadPass0(const std::string& filename)
         LOG("loading containers...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("container"))
         {
-            Container* container = global::get().containerBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
-            container->Load(v.second);
+            //Container* container = global::get().containerBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
+            //container->Load(v.second);
         }
     }
     //

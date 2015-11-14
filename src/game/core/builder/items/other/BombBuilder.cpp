@@ -21,14 +21,14 @@
 #include <managers/EntityManager.hpp>
 
 #include <ceti/Logger.hpp>
-#include <common/IdGenerator.hpp>
 #include <common/Global.hpp>
 
 //#include <resources/TextureCollector.hpp>
 //#include <resources/MeshCollector.hpp>
 //#include <jeti/TextureOb.hpp>
 
-#include <boost/property_tree/info_parser.hpp>
+//#include <boost/property_tree/info_parser.hpp>
+#include <descriptors/items/BombDescriptor.hpp>
 
 BombBuilder::BombBuilder()
 {}
@@ -36,46 +36,37 @@ BombBuilder::BombBuilder()
 BombBuilder::~BombBuilder()
 {}
 
-Bomb* BombBuilder::createTemplate(ID id) const
+Bomb* BombBuilder::create(const BombDescriptor& descriptor) const
 {
-    Bomb* bomb = new Bomb(id);
+    Bomb* bomb = new Bomb(descriptor.id);
     assert(bomb);
-
     global::get().entityManager().reg(bomb);
-    
+    createInternals(bomb, descriptor);
     return bomb;
 } 
 
-Bomb* BombBuilder::create(int damage, int radius) const
-{
-    Bomb* bomb = createTemplate();
-    createInternals(bomb, damage, radius);
-
-    return bomb;
-} 
-
-void BombBuilder::createInternals(Bomb* bomb, int damage, int radius) const
+void BombBuilder::createInternals(Bomb* bomb, const BombDescriptor& descriptor) const
 {     
     //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID);
 
     //alpitodorender bomb->SetRenderData(mesh, texOb, texOb->size());
-    bomb->setDamage(damage);
-    bomb->setRadius(radius);
+    bomb->setDamage(descriptor.damage);
+    bomb->setRadius(descriptor.radius);
     bomb->setParentSubTypeId(TYPE::ENTITY::CARGO_SLOT_ID);
 }
 
-void BombBuilder::write(const std::string& fpath, Bomb* bomb)
-{
-    boost::property_tree::ptree ptree;
+//void BombBuilder::write(const std::string& fpath, Bomb* bomb)
+//{
+//    boost::property_tree::ptree ptree;
 
-//    ptree.put("title",  bomb->title());
-//    ptree.put("race",   bomb->race());
-    ptree.put("damage", bomb->damage());
-    ptree.put("radius", bomb->radius());
-//    ptree.put("mass",   bomb->mass());
+////    ptree.put("title",  bomb->title());
+////    ptree.put("race",   bomb->race());
+//    ptree.put("damage", bomb->damage());
+//    ptree.put("radius", bomb->radius());
+////    ptree.put("mass",   bomb->mass());
 
-    write_info("fpath", ptree);
-}
+//    write_info("fpath", ptree);
+//}
 
 

@@ -41,20 +41,12 @@ StarSystemBuilder::StarSystemBuilder()
 StarSystemBuilder::~StarSystemBuilder()
 {}
 
-StarSystem* StarSystemBuilder::createTemplate(const ID& id) const
+StarSystem* StarSystemBuilder::create(const StarSystemDescriptor& descriptor) const
 {
-    StarSystem* starsystem = new StarSystem(id);
+    StarSystem* starsystem = new StarSystem(descriptor.id);
     assert(starsystem);
-
     global::get().entityManager().reg(starsystem);
-    
-    return starsystem;
-} 
-
-StarSystem* StarSystemBuilder::create(const StarSystemDescriptor& starsystem_descriptor) const
-{
-    StarSystem* starsystem = createTemplate();
-    createInternals(starsystem, starsystem_descriptor);    
+    createInternals(starsystem, descriptor);
     return starsystem;
 } 
 

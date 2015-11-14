@@ -24,9 +24,12 @@
 enum class TELEGRAM : int 
 {
     NONE,
+    /** CREATE */
     CREATE_STARSYSTEM,
     CREATE_SHIP,
+    CREATE_BOMB,
     CREATE_CONTAINER,
+    /** */
     STARSYSTEM_ADD_SHIP,
     STARSYSTEM_ADD_CONTAINER,
     INSERT,

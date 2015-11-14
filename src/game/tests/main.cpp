@@ -35,7 +35,11 @@
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/StarSystemDescriptor.hpp>
 #include <descriptors/HitEvent.hpp>
+
+#include <descriptors/StarSystemDescriptorGenerator.hpp>
 #include <descriptors/VehicleDescriptorGenerator.hpp>
+#include <descriptors/items/BombDescriptorGenerator.hpp>
+#include <descriptors/ContainerDescriptorGenerator.hpp>
 
 #include <communication/MessageManager.hpp>
 #include <managers/EntityManager.hpp>
@@ -48,18 +52,52 @@ namespace {
 Ship* createNewShip()
 {
     // queue create messages
-    auto shipDescriptor = generateVehicleDescriptor();
-    shipDescriptor.id = IdGenerator::get().nextId();
-    global::get().messageManager().add(getMessage(shipDescriptor));
+    auto descriptor = generateVehicleDescriptor();
+    global::get().messageManager().add(getMessage(descriptor));
+
+    // get entities
+    Ship* ship = static_cast<Ship*>(global::get().entityManager().get(descriptor.id));
+    assert(ship);
+    return ship;
+}
+
+Bomb* createNewBomb()
+{
+    // queue create messages
+    auto descriptor = generateBombDescriptor();
+    global::get().messageManager().add(getMessage(descriptor));
+
+    // get entities
+    Bomb* bomb = static_cast<Bomb*>(global::get().entityManager().get(descriptor.id));
+    assert(bomb);
+    return bomb;
+}
+
+Container* createNewContainer(const ID& child_id)
+{
+    // queue create messages
+    auto descriptor = generateContainerDescriptor(child_id);
+    global::get().messageManager().add(getMessage(descriptor));
+
+    // get entities
+    Container* container = static_cast<Container*>(global::get().entityManager().get(descriptor.id));
+    assert(container);
+    return container;
+}
+
+StarSystem* createNewStarSystem()
+{
+    // queue create messages
+    auto descriptor = generateStarSystemDescriptor();
+    global::get().messageManager().add(getMessage(descriptor));
 
     // process messages
     global::get().messageManager().runLoop();
 
     // get entities
-    Base* ob = global::get().entityManager().get(shipDescriptor.id);
-    Ship* ship = static_cast<Ship*>(ob);
-    assert(ship);
-    return ship;
+    StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.id));
+    assert(starsystem);
+    return starsystem;
 }
 
 }
@@ -78,12 +116,12 @@ TEST(base,serialization)
     EXPECT_TRUE(vehicle2.race_id == vehicle1.race_id);
 }
 
-TEST(communication,hit)
+TEST(base,hit)
 {
     // shortcuts
     MessageManager& messageManager = global::get().messageManager();
-    EntityManager& entityManager = global::get().entityManager();
 
+    // create entities
     Ship* ship1 = createNewShip();
     Ship* ship2 = createNewShip();
 
@@ -101,52 +139,28 @@ TEST(communication,hit)
     EXPECT_TRUE(ship2->isDying());
 }
 
-TEST(communication,bomb)
+TEST(base,bomb)
 {
-//    // create managers
-//    auto entityManager = new EntityManager;
-//    auto messageManager = new MessageManager;
+    // shortcuts
+    MessageManager& messageManager = global::get().messageManager();
 
-//    // create builders
-//    auto starsystemBuilder = new StarSystemBuilder;
-//    auto shipBuilder = new ShipBuilder;
-//    //auto bombBuilder = new BombBuilder;
-//    auto containerBuilder = new ContainerBuilder;
+    // create entities
+    StarSystem* starsystem = createNewStarSystem();
+    Ship* ship = createNewShip();
+    Bomb* bomb = createNewBomb();
+    Container* container = createNewContainer(bomb->id());
+    assert(container->itemSlot());
+    assert(container->itemSlot()->item());
+    EXPECT_TRUE(container->itemSlot()->item()->id() == bomb->id());
 
-//    // create entities
-//    auto starsystem = starsystemBuilder->create(StarSystemDescriptor());
-//    auto ship = shipBuilder->create(/*ShipDescriptor()*/);
-//    //auto bomb = bombBuilder->create(/*BombDescriptor()*/);
-//    //auto container = containerBuilder->create(bomb);
+    // simulate bomb explosion
+    messageManager.add(getMessage(HitEvent(ship->id(), container->id(), container->armor())));
 
-//    // register entities
-//    entityManager->reg(starsystem);
-//    entityManager->reg(ship);
-//    //entityManager->reg(bomb);
-//    //entityManager->reg(container);
+    // process messaging
+    messageManager.runLoop();
 
-    //messageManager->add(Message(TELEGRAM::CREATE_STARSYSTEM, 0, 0, ""));
-//    messageManager->add(Message(TELEGRAM::CREATE_SHIP, 0, 0, ""));
-//    messageManager->add(Message(TELEGRAM::CREATE_CONTAINER, 0, 0, ""));
-
-////    messageManager->add(Message(TELEGRAM::STARSYSTEM_ADD_SHIP, ship->id(), starsystem->id(), ""));
-////    messageManager->add(Message(TELEGRAM::STARSYSTEM_ADD_SHIP, ship->id(), starsystem->id(), ""));
-////    messageManager->add(Message(TELEGRAM::STARSYSTEM_ADD_CONTAINER, container->id(), starsystem->id(), ""));
-
-//    // process messaging
-//    messageManager->runLoop();
-
-//    // simulate bomb explosion
-////    container->hit(container->armor());
-////    ship->hit(ship->criticalDamage());
-//    //starsystem->update(1);
-
-//    assert(ship);
-////    assert(container->isDying());
-////    assert(ship->isDying());
-//    // check consequences
-//    //EXPECT_FALSE(true);
-
+    EXPECT_TRUE(container->isDying());
+    EXPECT_TRUE(ship->isDying());
 }
 
 

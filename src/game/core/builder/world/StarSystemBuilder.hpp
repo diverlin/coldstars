@@ -31,7 +31,6 @@ class StarSystemBuilder
         StarSystemBuilder();
         ~StarSystemBuilder();
         
-        StarSystem* createTemplate(const ID& id = NONE_ID) const;
         StarSystem* create(const StarSystemDescriptor&) const;
         StarSystem* create(const std::string&) const;
 

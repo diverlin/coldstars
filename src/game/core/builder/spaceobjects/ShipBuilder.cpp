@@ -40,7 +40,6 @@ Ship* ShipBuilder::create(const VehicleDescriptor& descriptor) const
     Ship* ship = new Ship(descriptor.id);
     assert(ship);
     global::get().entityManager().reg(ship);
-
     createInternals(ship, descriptor);
     return ship;
 }

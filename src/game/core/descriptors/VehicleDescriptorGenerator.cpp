@@ -26,6 +26,7 @@
 #include <meti/RandUtils.hpp>
 
 #include <common/Global.hpp>
+#include <common/IdGenerator.hpp>
 
 
 VehicleDescriptor generateVehicleDescriptor()
@@ -43,6 +44,7 @@ VehicleDescriptor generateVehicleDescriptor()
     }
 
     VehicleDescriptor descriptor;
+    descriptor.id = IdGenerator::get().nextId();
     descriptor.race_id = race_id;
     descriptor.type_id = type_id;
     descriptor.size_id = size_id;
