@@ -18,15 +18,12 @@
 
 #pragma once
 
-#include <types/IdType.hpp>
-
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
 class StarSystemDescriptor
 {
     public:
-        ID id = 0;
         int race_id = 0;
         
         int planet_num = 0;
@@ -54,8 +51,6 @@ class StarSystemDescriptor
         template<class Archive>
         void serialize(Archive & ar, const unsigned int version)
         {
-            ar & id;
-
             ar & race_id;
             ar & planet_num;
             ar & spacestation_num;

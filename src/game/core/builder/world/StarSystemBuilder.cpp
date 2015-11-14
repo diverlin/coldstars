@@ -41,7 +41,7 @@ StarSystemBuilder::StarSystemBuilder()
 StarSystemBuilder::~StarSystemBuilder()
 {}
 
-StarSystem* StarSystemBuilder::createTemplate(ID id) const
+StarSystem* StarSystemBuilder::createTemplate(const ID& id) const
 {
     StarSystem* starsystem = new StarSystem(id);
     assert(starsystem);
@@ -54,11 +54,15 @@ StarSystem* StarSystemBuilder::createTemplate(ID id) const
 StarSystem* StarSystemBuilder::create(const StarSystemDescriptor& starsystem_descriptor) const
 {
     StarSystem* starsystem = createTemplate();
-    createInternals(starsystem, starsystem_descriptor);
-    
+    createInternals(starsystem, starsystem_descriptor);    
     return starsystem;
 } 
-            
+
+StarSystem* StarSystemBuilder::create(const std::string& data) const
+{
+    return create(StarSystemDescriptor(data));
+}
+
 void StarSystemBuilder::createInternals(StarSystem* starsystem, const StarSystemDescriptor& starsystem_descriptor) const
 {
     starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);

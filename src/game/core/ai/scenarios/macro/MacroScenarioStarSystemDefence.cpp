@@ -28,7 +28,7 @@
 #include "../../../world/starsystem.hpp"
 #include "../../../ai/StateMachine.hpp"
 
-#include <common/RaceDescriptors.hpp>
+#include <descriptors/RaceDescriptors.hpp>
 #include <common/Global.hpp>
 
 

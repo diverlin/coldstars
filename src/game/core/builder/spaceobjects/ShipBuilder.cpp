@@ -21,118 +21,68 @@
 #include <builder/CommonBuilderHeaders.hpp>
 #include <spaceobjects/Ship.hpp>
 
-#include <common/RaceDescriptors.hpp>
+//#include <descriptors/RaceDescriptors.hpp>
+#include <descriptors/VehicleDescriptor.hpp>
 
 #include <common/constants.hpp>
-#include <math/rand.hpp>
-#include <meti/RandUtils.hpp>
+//#include <math/rand.hpp>
+//#include <meti/RandUtils.hpp>
 
 
 ShipBuilder::ShipBuilder()
 {}
 
-ShipBuilder::~ShipBuilder() {}
+ShipBuilder::~ShipBuilder()
+{}
 
-Ship* ShipBuilder::createTemplate(ID id) const
-{
-    Ship* ship = new Ship(id);
+Ship* ShipBuilder::create(const VehicleDescriptor& descriptor) const
+{            
+    Ship* ship = new Ship(descriptor.id);
     assert(ship);
-
     global::get().entityManager().reg(ship);
-    
+
+    createInternals(ship, descriptor);
     return ship;
 }
 
-Ship* ShipBuilder::create(TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const
+Ship* ShipBuilder::create(const std::string& data) const
 {
-    Ship* ship = createTemplate();
-    createInternals(ship, race_id, subsubtype_id, size_id, weapons_num);
-    
-    return ship;
+    return create(VehicleDescriptor(data));
 }
 
-Ship* ShipBuilder::create() const
-{
-    TYPE::RACE race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-    TYPE::ENTITY subsubtype_id = TYPE::ENTITY::WARRIOR_ID;
-    int size_id = meti::getRandInt(1, 9);
-    int weapons_num = size_id;
-            
-    Ship* ship = createTemplate();
-    createInternals(ship, race_id, subsubtype_id, size_id, weapons_num);
-    
-    return ship;
-}
-
-void ShipBuilder::createInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTITY subsubtype_id, int size_id, int weapons_num) const
+void ShipBuilder::createInternals(Ship* ship, const VehicleDescriptor& descriptor) const
 {
     //jeti::Mesh* mesh = nullptr;
     //jeti::TextureOb* texOb = nullptr;
     glm::vec3 size;
-    if (true)
-    {
+    if (true) {
 //        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //        texOb = TextureCollector::Instance().getTextureByDescriptor(TextureDescriptor());
 //        assert(mesh);
 //        assert(texOb);
-        float scale_comp = meti::getRandInt(40, 100);
-        size = glm::vec3(scale_comp, scale_comp, 1.0);
+//        float scale_comp = meti::getRandInt(40, 100);
+//        size = glm::vec3(scale_comp, scale_comp, 1.0);
         //size = texOb->size();
-    }
-    else
-    {    
+    } else {
 //        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
 //        texOb = mesh->textureOb();
 //        assert(mesh);
 //        assert(texOb);
-        float scale_comp = meti::getRandInt(40, 100);
-        size = glm::vec3(scale_comp, scale_comp, scale_comp);
+//        float scale_comp = meti::getRandInt(40, 100);
+//        size = glm::vec3(scale_comp, scale_comp, scale_comp);
     }
-
-    float protection_rate = 1;
-    float otsec_rate      = 1;
-    switch (subsubtype_id)
-    {
-        case TYPE::ENTITY::WARRIOR_ID: { protection_rate = 2; break; }
-        case TYPE::ENTITY::TRADER_ID:  { otsec_rate = 1.5; break; }
-    }
-    
-    VehicleDescriptor data_korpus;
-    data_korpus.space       = size_id*100 + meti::getRandInt(0, 100);
-    data_korpus.armor       = data_korpus.space;
-    data_korpus.protection  = protection_rate*size_id/(SIZE_1_ID);
-    data_korpus.temperature = 100;
-    data_korpus.price       = meti::getRandInt(200, 400)*size_id;
-
-    data_korpus.slot_bak_num       = 1;
-    data_korpus.slot_drive_num     = 1;
-    data_korpus.slot_droid_num     = 1;
-    data_korpus.slot_energizer_num = 1;
-    data_korpus.slot_grapple_num   = 1;
-    data_korpus.slot_protector_num = 1;
-    data_korpus.slot_radar_num     = 1;
-    data_korpus.slot_scaner_num    = 1;
-    data_korpus.slot_freezer_num   = 1;
-    data_korpus.slot_weapon_num   = weapons_num;  
-    data_korpus.slot_artefact_num = meti::getRandInt(1, SLOT_ARTEFACT_TYPES.size());
-    data_korpus.slot_otsec_num    = meti::getRandInt(SLOT_CARGO_TYPES.size()/2, SLOT_CARGO_TYPES.size()) * otsec_rate;
-    
-    int size_threshold = 2; 
-    data_korpus.draw_turrels = false;
-//    if (mesh == nullptr)      // BROKEN
-//    {
-//        if (texOb->GetMaterial().size_id > size_threshold)
-//        {
+// BROKEN
+//    if (mesh == nullptr) {
+//        if (texOb->GetMaterial().size_id > size_threshold) {
 //            data_korpus.draw_turrels = true;
 //        }
 //    }
 
-    ship->setSubSubTypeId(subsubtype_id);
-    ship->SetKorpusData(data_korpus);
+    ship->setSubSubTypeId(descriptor.type_id);
+    ship->SetKorpusData(descriptor);
 
-
-    float scale_comp = meti::getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
-    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
+//    float scale_comp = meti::getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
+//    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     
     //float step = getRandInt(10, 20)*0.01;
     //glm::vec3 step3(step, 0.0f, 0.0f);
@@ -140,14 +90,14 @@ void ShipBuilder::createInternals(Ship* ship, TYPE::RACE race_id, TYPE::ENTITY s
     //AnimationWiggleAxisX* animation_program = new AnimationWiggleAxisX(step3, threshold);
     //ship->SetRenderAnimation(animation_program);
     
-    float delta_angle = 0.0001*meti::getRandInt(20, 60);
+    //float delta_angle = 0.0001*meti::getRandInt(20, 60);
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender ship->SetAnimationRotation(animation_rotation);
 
     //alpitodorender ship->SetRenderData(mesh, texOb, scale);
 
     LifeData data_life;
-    data_life.armor      = data_korpus.armor * 0.1;
+    data_life.armor      = descriptor.armor * 0.1;
     data_life.dying_time = ship->collisionRadius() * 0.1;
     ship->setLifeData(data_life);
     

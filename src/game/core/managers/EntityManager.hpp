@@ -36,7 +36,7 @@ class EntityManager
         
         void reg(Base*);
     
-        Base* entity(const ID&) const;
+        Base* get(const ID&) const;
         Player* player() const;
 
         bool updateSaveRequest();

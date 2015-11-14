@@ -38,7 +38,7 @@
 #include <ai/scenarios/micro/MicroScenarioExploration.hpp>
 
 #include <common/TurnTimer.hpp>
-#include <common/RaceDescriptors.hpp>
+#include <descriptors/RaceDescriptors.hpp>
 
 void initGameStuff()
 {

@@ -3,12 +3,14 @@
 
 #include <communication/Message.hpp>
 
-#include <descriptors/HitEvent.hpp>
-#include <descriptors/StarSystemDescriptor.hpp>
-
 #include <SFML/System/Clock.hpp>
 
 #include <set>
+
+class HitEvent;
+class StarSystemDescriptor;
+class VehicleDescriptor;
+
 
 class MessageManager
 {
@@ -28,5 +30,6 @@ class MessageManager
 };
 
 
-Message getMessage(const HitEvent& hitEvent, double delay = 0.0);
 Message getMessage(const StarSystemDescriptor& descriptor, double delay = 0.0);
+Message getMessage(const VehicleDescriptor& descriptor, double delay = 0.0);
+Message getMessage(const HitEvent& hitEvent, double delay = 0.0);

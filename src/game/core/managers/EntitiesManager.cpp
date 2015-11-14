@@ -113,21 +113,17 @@ void EntityManager::reg(Base* entity)
     //LOG("+++++++EntityManager::RegisterEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     
     if (entity->id() == NONE_ID) {
-        entity->setId(EntityIdGenerator::Instance().nextId());
+        entity->setId(IdGenerator::get().nextId());
     }
     m_entities_map.insert(std::make_pair(entity->id(), entity));
 }
 
-Base* EntityManager::entity(const ID& id) const
+Base* EntityManager::get(const ID& id) const
 {
     LOG("    EntityManager::entity requested_id=" + std::to_string(id));
-    
     std::map<ID, Base*>::const_iterator slice = m_entities_map.find(id);
-
     assert(slice->second);
-
-    //LOG("    EntityManager::GetEntityById type_id=" + getTypeStr(slice->second->typeId()));
-    
+    //LOG("    EntityManager::GetEntityById type_id=" + getTypeStr(slice->second->typeId()));    
     return slice->second;
 }
 
@@ -539,8 +535,8 @@ void EntityManager::loadPass0(const std::string& filename)
         LOG("loading ships...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("ship"))
         {
-            Ship* ship = global::get().shipBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
-            ship->Load(v.second);
+            //Ship* ship = global::get().shipBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
+            //ship->Load(v.second);
         }
     }
     
@@ -701,7 +697,7 @@ void EntityManager::clearGarbage()
 #if CREATEDESTROY_LOG_ENABLED == 1
         LOG("________EntityManager::ClearGarbage delete entity " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
 #endif
-        EntityIdGenerator::Instance().addFreeId(m_garbage[i]->id());
+        IdGenerator::get().addFreeId(m_garbage[i]->id());
         delete m_garbage[i];
     }
     m_garbage.clear();

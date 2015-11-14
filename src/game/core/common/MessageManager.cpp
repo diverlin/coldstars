@@ -55,7 +55,7 @@ void MessageManager::updateQueue()
     {
         const Message& message = *m_messages_queue.begin();
 
-        Base* receiver = global::get().entityManager().entity(message.receiver_id);
+        Base* receiver = global::get().entityManager().get(message.receiver_id);
         //SendEvent(receiver, message);
 
         m_messages_queue.erase(m_messages_queue.begin());

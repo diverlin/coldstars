@@ -21,6 +21,7 @@
 
 class God;
 class EntityManager;
+class MessageManager;
 class Config;
 class TurnTimer;
 class GameDate;
@@ -88,6 +89,7 @@ class global
 
         God& god() { return *m_god; }
         EntityManager& entityManager() { return *m_entityManager; }
+        MessageManager& messageManager() { return *m_messageManager; }
         Config& config() { return *m_config; }
         TurnTimer& turnTimer() { return *m_turnTimer; }
         GameDate& gameDate() { return *m_gameDate; }
@@ -155,6 +157,7 @@ class global
 
         God* m_god = nullptr;
         EntityManager* m_entityManager = nullptr;
+        MessageManager* m_messageManager = nullptr;
         Config* m_config = nullptr;
         TurnTimer* m_turnTimer = nullptr;
         GameDate* m_gameDate = nullptr;

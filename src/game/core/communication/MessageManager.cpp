@@ -7,10 +7,13 @@
 
 #include <types/EntityTypes.hpp> // test
 
+#include <descriptors/HitEvent.hpp>
+#include <descriptors/StarSystemDescriptor.hpp>
+#include <descriptors/StarSystemDescriptor.hpp>
 
 #include <spaceobjects/IncludeSpaceObjects.hpp>
 #include <world/starsystem.hpp>
-#include <descriptors/StarSystemDescriptor.hpp>
+
 #include <builder/spaceobjects/IncludeSpaceObjectBuilders.hpp>
 #include <builder/world/StarSystemBuilder.hpp>
 
@@ -60,15 +63,14 @@ void MessageManager::processMessage(const Message& message)
     switch(message.type_id) {
 //        /** CREATE */
         case TELEGRAM::CREATE_STARSYSTEM: {
-            auto starsystem = global::get().starSystemBuilder().create(StarSystemDescriptor(message.data));
+            auto starsystem = global::get().starSystemBuilder().create(message.data);
             global::get().entityManager().reg(starsystem);
             break;
         }
-//        case TELEGRAM::CREATE_SHIP: {
-//            auto ship = global::get().shipBuilder().create(/*ShipDescriptor()*/);
-//            global::get().entityManager().reg(ship);
-//            break;
-//        }
+        case TELEGRAM::CREATE_SHIP: {
+            auto ship = global::get().shipBuilder().create(message.data);
+            break;
+        }
 //        case TELEGRAM::CREATE_CONTAINER: {
 //            auto container = global::get().containerBuilder().create(/*ContainerDescriptor()*/);
 //            global::get().entityManager().reg(container);
@@ -94,8 +96,7 @@ void MessageManager::processMessage(const Message& message)
         /** OTHER */
         case TELEGRAM::HIT: {
             HitEvent hitEvent(message.data);
-            Base* victim = global::get().entityManager().entity(hitEvent.victim);
-            assert(victim);
+            Base* victim = global::get().entityManager().get(hitEvent.victim);
             SpaceObject* ob = static_cast<SpaceObject*>(victim);
             assert(ob);
             ob->hit(hitEvent.damage);
@@ -108,13 +109,15 @@ void MessageManager::processMessage(const Message& message)
     }
 }
 
+Message getMessage(const StarSystemDescriptor& descriptor, double delay) {
+    return Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data(), delay);
+}
 
+Message getMessage(const VehicleDescriptor& descriptor, double delay) {
+    return Message(TELEGRAM::CREATE_SHIP, descriptor.data(), delay);
+}
 
 Message getMessage(const HitEvent& hitEvent, double delay) {
     return Message(TELEGRAM::HIT, hitEvent.data(), delay);
-}
-
-Message getMessage(const StarSystemDescriptor& descriptor, double delay) {
-    return Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data(), delay);
 }
 

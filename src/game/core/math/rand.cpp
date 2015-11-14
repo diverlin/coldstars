@@ -24,7 +24,7 @@
 
 #include <common/constants.hpp>
 #include <types/IdType.hpp>
-#include <common/RaceDescriptors.hpp>
+#include <descriptors/RaceDescriptors.hpp>
 #include <common/Global.hpp>
 
 TYPE::ENTITY getRandNpcSubTypeId(TYPE::RACE race_id, const std::vector<TYPE::ENTITY>& subtypes)

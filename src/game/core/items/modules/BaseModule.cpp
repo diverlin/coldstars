@@ -59,6 +59,6 @@ void BaseModule::ResolveData()
     LOG(" BaseModule::ResolveData()  id=" + std::to_string(id()) + " START");
     
     if(data_unresolved_BaseModule.equipment_owner_id != NONE_ID) {
-        ((BaseEquipment*)global::get().entityManager().entity(data_unresolved_BaseModule.equipment_owner_id))->InsertModule(this);
+        ((BaseEquipment*)global::get().entityManager().get(data_unresolved_BaseModule.equipment_owner_id))->InsertModule(this);
     }
 }
