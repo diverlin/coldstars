@@ -125,9 +125,9 @@ void SpaceObject::ResolveData()
     LOG(" SpaceObject("+std::to_string(id())+")::ResolveData");
     
     if (data_unresolved_SpaceObject.parent_id != NONE_ID) {
-        m_parent = (SpaceObject*)global::get().entityManager().entity(data_unresolved_SpaceObject.parent_id);
+        m_parent = (SpaceObject*)global::get().entityManager().get(data_unresolved_SpaceObject.parent_id);
     }
     if (data_unresolved_SpaceObject.starsystem_id != NONE_ID) {
-        m_starsystem = (StarSystem*)global::get().entityManager().entity(data_unresolved_SpaceObject.starsystem_id);
+        m_starsystem = (StarSystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id);
     }
 }

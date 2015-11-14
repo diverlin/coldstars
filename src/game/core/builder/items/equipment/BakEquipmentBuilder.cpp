@@ -28,7 +28,7 @@
 
 #include <common/Global.hpp>
 
-#include <common/RaceDescriptors.hpp>
+#include <descriptors/RaceDescriptors.hpp>
 
 #include <meti/RandUtils.hpp>
 

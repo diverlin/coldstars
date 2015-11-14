@@ -148,7 +148,7 @@ void Container::ResolveData()
 {
     LOG(" Container("+std::to_string(id())+")::ResolveData()");
     
-    ((StarSystem*)global::get().entityManager().entity(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center);
+    ((StarSystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center);
 }        
 
 /* virtual override final */

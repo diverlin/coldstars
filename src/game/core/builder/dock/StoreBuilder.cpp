@@ -42,6 +42,8 @@
 
 #include <common/constants.hpp>
 
+#include <descriptors/VehicleDescriptorGenerator.hpp>
+
 
 StoreBuilder::StoreBuilder()
 {}
@@ -107,7 +109,7 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
     unsigned int energyBlock_num = 1;
 
     for (unsigned int i=0; i<vehicle_num; i++) {
-        store->AddVehicle(global::get().shipBuilder().create());
+        store->AddVehicle(global::get().shipBuilder().create(generateVehicleDescriptor()));
     }
     for (unsigned int i=0; i<lazer_num; i++) {
         store->AddItem(global::get().lazerEquipmentBuilder().create());

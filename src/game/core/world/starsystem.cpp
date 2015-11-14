@@ -55,7 +55,8 @@
 //#include <gui/GuiManager.hpp>
 //#include <gui/GuiRadar.hpp>
 
-#include <common/RaceDescriptors.hpp>
+#include <descriptors/RaceDescriptors.hpp>
+#include <descriptors/VehicleDescriptorGenerator.hpp>
 
 //#include <jeti/Mesh.hpp>
 #include <meti/RandUtils.hpp>
@@ -878,7 +879,7 @@ void StarSystem::ShipManager_s(unsigned int num)
         int weapons_num = 7;
 
         Npc* new_pnpc = global::get().npcBuilder().create(prace_id, psubtype_id, psubsubtype_id);
-        Ship* new_pship = global::get().shipBuilder().create(prace_id, psubtype_id, size_id, weapons_num);
+        Ship* new_pship = global::get().shipBuilder().create(generateVehicleDescriptor());
         global::get().shipBuilder().equip(new_pship);   // improove
 
         new_pship->BindOwnerNpc(new_pnpc);
@@ -1114,7 +1115,7 @@ void StarSystem::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void StarSystem::ResolveData()
 {
-    ((Sector*)global::get().entityManager().entity(m_data_unresolved_StarSystem.sector_id))->add(this, data_unresolved_Orientation.center);
+    ((Sector*)global::get().entityManager().get(m_data_unresolved_StarSystem.sector_id))->add(this, data_unresolved_Orientation.center);
 }
 
 void StarSystem::Save(boost::property_tree::ptree& save_ptree) const

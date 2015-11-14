@@ -33,7 +33,6 @@ std::string StarSystemDescriptor::data() const
     std::stringstream ss;
     boost::archive::text_oarchive oa(ss);
     oa << *this;
-    std::cout<<"data="<<ss.str()<<std::endl;
     return ss.str();
 }
 

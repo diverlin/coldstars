@@ -22,20 +22,11 @@
 #include <builder/spaceobjects/BaseVehicleBuilder.hpp>
 
 #include <types/IdType.hpp>
-#include <types/RaceTypes.hpp>
-#include <types/EntityTypes.hpp>
+
+#include <string>
 
 class Ship;
-
-
-namespace ENTITY
-{
-    namespace SHIP
-    {
-        const int SCALE_MIN = 100;
-        const int SCALE_MAX = 200;
-    }
-}
+class VehicleDescriptor;
 
 class ShipBuilder : public BaseVehicleBuilder
 {
@@ -43,12 +34,11 @@ class ShipBuilder : public BaseVehicleBuilder
         ShipBuilder();
         ~ShipBuilder();
         
-        Ship* createTemplate(ID id = NONE_ID) const;
-        Ship* create(TYPE::RACE, TYPE::ENTITY, int, int) const;
-        Ship* create() const;
-                       
+        Ship* create(const VehicleDescriptor& descriptor) const;
+        Ship* create(const std::string& data) const;
+
     private:
-        void createInternals(Ship*, TYPE::RACE, TYPE::ENTITY, int, int) const;
+        void createInternals(Ship* ship, const VehicleDescriptor& descriptor) const;
 }; 
 
         

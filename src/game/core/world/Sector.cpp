@@ -143,7 +143,7 @@ void Sector::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Sector::ResolveData()
 {
-    ((Galaxy*)global::get().entityManager().entity(m_data_unresolved_Sector.galaxy_id))->Add(this, data_unresolved_Orientation.center);
+    ((Galaxy*)global::get().entityManager().get(m_data_unresolved_Sector.galaxy_id))->Add(this, data_unresolved_Orientation.center);
 }
 
 void Sector::Save(boost::property_tree::ptree& save_ptree) const

@@ -46,7 +46,8 @@
 #include <pilots/Npc.hpp>
 
 #include <descriptors/GalaxyDescriptor.hpp>
-#include <common/RaceDescriptors.hpp>
+#include <descriptors/RaceDescriptors.hpp>
+#include <descriptors/VehicleDescriptorGenerator.hpp>
 
 #include <meti/RandUtils.hpp>
 #include <math/rand.hpp>
@@ -194,13 +195,8 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescriptor& starsys
                 TYPE::RACE npc_race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
                 TYPE::ENTITY npc_subtype_id    = getRandNpcSubTypeId(npc_race_id, allowed_subtypes);
                 TYPE::ENTITY npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
-                
-                TYPE::RACE ship_race_id = npc_race_id;         
-                TYPE::ENTITY ship_subtype_id = npc_subtype_id;  
-                int ship_size_id = meti::getRandInt(SIZE_1_ID, SIZE_9_ID);
-                int weapons_num = meti::getRandInt(1, 5);
-        
-                Ship* new_ship = global::get().shipBuilder().create(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
+                       
+                Ship* new_ship = global::get().shipBuilder().create(generateVehicleDescriptor());
                 global::get().shipBuilder().equip(new_ship); // improove
                 //ShipBuilder::Instance().EquipModules(ship, tech_level); 
                 //ShipBuilder::Instance().EquipArtefacts(ship, tech_level); 
@@ -275,17 +271,7 @@ void God::CreateShips(StarSystem* starsystem, int ship_num, TYPE::RACE npc_race_
         }
         // VERY UGLY LOGIC END
 
-        TYPE::RACE ship_race_id         = npc_race_id;
-        TYPE::ENTITY ship_subtype_id    = npc_subsubtype_id;
-        int ship_size_id    = meti::getRandInt(1, 9);
-        int weapons_num     = meti::getRandInt(1, 5);
-
-        // VERY UGLY LOGIC START (TODO)
-        if (ship_subtype_id == TYPE::ENTITY::NONE_ID)
-            ship_subtype_id = TYPE::ENTITY::RANGER_ID;
-        // VERY UGLY LOGIC END
-
-        Ship* new_ship = global::get().shipBuilder().create(ship_race_id, ship_subtype_id, ship_size_id, weapons_num);
+        Ship* new_ship = global::get().shipBuilder().create(generateVehicleDescriptor());
         global::get().shipBuilder().equip(new_ship); // improove
 
         Npc* new_npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);

@@ -35,51 +35,73 @@
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/StarSystemDescriptor.hpp>
 #include <descriptors/HitEvent.hpp>
+#include <descriptors/VehicleDescriptorGenerator.hpp>
 
 #include <communication/MessageManager.hpp>
 #include <managers/EntityManager.hpp>
+#include <common/IdGenerator.hpp>
 
 #include <ceti/myStr.hpp>
 
-TEST(base, serialization)
+namespace {
+
+Ship* createNewShip()
 {
-    HitEvent hit1(101, 102, 33);
-    HitEvent hit2(hit1.data());
-    assert(hit2.agressor == hit1.agressor);
-    assert(hit2.victim == hit1.victim);
-    assert(hit2.damage == hit1.damage);
+    // queue create messages
+    auto shipDescriptor = generateVehicleDescriptor();
+    shipDescriptor.id = IdGenerator::get().nextId();
+    global::get().messageManager().add(getMessage(shipDescriptor));
+
+    // process messages
+    global::get().messageManager().runLoop();
+
+    // get entities
+    Base* ob = global::get().entityManager().get(shipDescriptor.id);
+    Ship* ship = static_cast<Ship*>(ob);
+    assert(ship);
+    return ship;
 }
 
-TEST(base,message)
+}
+
+TEST(base,serialization)
 {
-    // create managers
-    auto entityManager = new EntityManager;
-    auto messageManager = new MessageManager;
+    HitEvent hit1(1, 2, 33);
+    HitEvent hit2(hit1.data());
+    EXPECT_TRUE(hit2.agressor == hit1.agressor);
+    EXPECT_TRUE(hit2.victim == hit1.victim);
+    EXPECT_TRUE(hit2.damage == hit1.damage);
 
-    // create builders
-    auto shipBuilder = new ShipBuilder;
+    VehicleDescriptor vehicle1;
+    vehicle1.race_id = TYPE::RACE::R7_ID;
+    VehicleDescriptor vehicle2(vehicle1.data());
+    EXPECT_TRUE(vehicle2.race_id == vehicle1.race_id);
+}
 
-    // create entities
-    auto ship1 = shipBuilder->create();
-    auto ship2 = shipBuilder->create();
+TEST(communication,hit)
+{
+    // shortcuts
+    MessageManager& messageManager = global::get().messageManager();
+    EntityManager& entityManager = global::get().entityManager();
 
-    // register entities
-    entityManager->reg(ship1);
-    entityManager->reg(ship2);
+    Ship* ship1 = createNewShip();
+    Ship* ship2 = createNewShip();
 
-    // messages
-    messageManager->add(getMessage(HitEvent(ship1->id(), ship2->id(), 33), 0.3));
-    messageManager->add(getMessage(HitEvent(ship1->id(), ship2->id(), 22), 0.2));
-    messageManager->add(getMessage(HitEvent(ship1->id(), ship2->id(), 11), 0.1));
-    messageManager->add(getMessage(HitEvent(ship1->id(), ship2->id(), ship2->criticalDamage()), 0.4));
+    // hit entity
+    messageManager.add(getMessage(HitEvent(ship1->id(), ship2->id(), 33), 0.3));
+    messageManager.add(getMessage(HitEvent(ship1->id(), ship2->id(), 22), 0.2));
+    messageManager.add(getMessage(HitEvent(ship1->id(), ship2->id(), 11), 0.1));
+    messageManager.add(getMessage(HitEvent(ship1->id(), ship2->id(), ship2->criticalDamage()), 0.4));
+
+    EXPECT_FALSE(ship2->isDying());
 
     // process messaging
-    messageManager->runLoop();
+    messageManager.runLoop();
 
-    assert(ship2->isDying());
+    EXPECT_TRUE(ship2->isDying());
 }
 
-TEST(base,bomb)
+TEST(communication,bomb)
 {
 //    // create managers
 //    auto entityManager = new EntityManager;

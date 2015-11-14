@@ -24,20 +24,20 @@
 
 #include <types/IdType.hpp>
 
-class EntityIdGenerator
+class IdGenerator
 {
     public:
-        static EntityIdGenerator& Instance();
+        static IdGenerator& get();
         
         ID nextId();
         void addFreeId(ID free_id) { free_ids.push_back(free_id); }
             
     private:
-        EntityIdGenerator() {}
-        ~EntityIdGenerator() {}
+        IdGenerator() {}
+        ~IdGenerator() {}
         
-        EntityIdGenerator(EntityIdGenerator&) = delete;
-        EntityIdGenerator& operator=(EntityIdGenerator&) = delete;
+        IdGenerator(IdGenerator&) = delete;
+        IdGenerator& operator=(IdGenerator&) = delete;
         
         ID last_incremented_id = 0;
         std::vector<ID> free_ids;
@@ -47,7 +47,7 @@ class EntityIdGenerator
 class TextureIdGenerator
 {
     public:
-        static TextureIdGenerator& Instance();
+        static TextureIdGenerator& get();
         
         ID nextId();
             

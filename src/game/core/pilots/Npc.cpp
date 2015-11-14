@@ -360,7 +360,7 @@ void Npc::ResolveData()
 {
     ApplySkillsStrategy();
     
-    ((Vehicle*)global::get().entityManager().entity(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
+    ((Vehicle*)global::get().entityManager().get(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
     SetAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
     skills.Resolve();

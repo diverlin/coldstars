@@ -19,10 +19,11 @@
 #include "Global.hpp"
 #include <ai/God.hpp>
 #include <managers/EntityManager.hpp>
+#include <communication/MessageManager.hpp>
 #include <common/Config.hpp>
 #include <common/TurnTimer.hpp>
 #include <common/GameDate.hpp>
-#include <common/RaceDescriptors.hpp>
+#include <descriptors/RaceDescriptors.hpp>
 
 #include <builder/dock/KosmoportBuilder.hpp>
 #include <builder/dock/NatureLandBuilder.hpp>
@@ -87,6 +88,7 @@ global::global()
     :
       m_god(new God)
     , m_entityManager(new EntityManager)
+    , m_messageManager(new MessageManager)
     , m_config(new Config)
     , m_turnTimer(new TurnTimer)
     , m_gameDate(new GameDate)

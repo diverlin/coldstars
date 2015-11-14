@@ -18,13 +18,13 @@
 
 #include <common/IdGenerator.hpp>
 
-EntityIdGenerator& EntityIdGenerator::Instance()
+IdGenerator& IdGenerator::get()
 {
-    static EntityIdGenerator instance;
+    static IdGenerator instance;
     return instance;
 }
 
-ID EntityIdGenerator::nextId()
+ID IdGenerator::nextId()
 {  
 //    if (!free_ids.empty()) {
 //         unsigned long int= free_ids[free_ids.size()-1];
@@ -37,7 +37,7 @@ ID EntityIdGenerator::nextId()
 }  
 
 
-TextureIdGenerator& TextureIdGenerator::Instance()
+TextureIdGenerator& TextureIdGenerator::get()
 {
     static TextureIdGenerator instance;
     return instance;

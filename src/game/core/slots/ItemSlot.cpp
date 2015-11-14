@@ -552,11 +552,11 @@ void ItemSlot::ResolveData()
     LOG(" ItemSlot("+std::to_string(id())+")::ResolveData");
     
     if (m_unresolved_ItemSlot.target_id != NONE_ID) {
-        m_target = (SpaceObject*)global::get().entityManager().entity(m_unresolved_ItemSlot.target_id);
+        m_target = (SpaceObject*)global::get().entityManager().get(m_unresolved_ItemSlot.target_id);
     }
 
     if (m_unresolved_ItemSlot.subtarget_id != NONE_ID) {
-        m_subtarget = (ItemSlot*)global::get().entityManager().entity(m_unresolved_ItemSlot.subtarget_id);
+        m_subtarget = (ItemSlot*)global::get().entityManager().get(m_unresolved_ItemSlot.subtarget_id);
     }
 
     switch(owner->typeId())

@@ -20,6 +20,8 @@
 
 #include <types/IdType.hpp>
 
+#include <string>
+
 class StarSystem;
 class StarSystemDescriptor;
 
@@ -29,9 +31,10 @@ class StarSystemBuilder
         StarSystemBuilder();
         ~StarSystemBuilder();
         
-        StarSystem* createTemplate(ID id = NONE_ID) const;
+        StarSystem* createTemplate(const ID& id = NONE_ID) const;
         StarSystem* create(const StarSystemDescriptor&) const;
-    
+        StarSystem* create(const std::string&) const;
+
     private:
         void createInternals(StarSystem*, const StarSystemDescriptor&) const;
         

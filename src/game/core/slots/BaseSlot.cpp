@@ -64,7 +64,7 @@ void BaseSlot::ResolveData()
     LOG(" BaseSlot("+std::to_string(id())+")::ResolveData");
     
     if (unresolved_BaseSlot.owner_id != NONE_ID) {
-        owner = global::get().entityManager().entity(unresolved_BaseSlot.owner_id);
+        owner = global::get().entityManager().get(unresolved_BaseSlot.owner_id);
     }
 }
 
