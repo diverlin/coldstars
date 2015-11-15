@@ -27,36 +27,15 @@
 class IdGenerator
 {
     public:
-        static IdGenerator& get();
+        IdGenerator() {}
+        ~IdGenerator() {}
         
         ID nextId();
         void addFreeId(ID free_id) { free_ids.push_back(free_id); }
             
     private:
-        IdGenerator() {}
-        ~IdGenerator() {}
-        
-        IdGenerator(IdGenerator&) = delete;
-        IdGenerator& operator=(IdGenerator&) = delete;
-        
         ID last_incremented_id = 0;
         std::vector<ID> free_ids;
 };
 
 
-class TextureIdGenerator
-{
-    public:
-        static TextureIdGenerator& get();
-        
-        ID nextId();
-            
-    private:
-        TextureIdGenerator():last_incremented_id(0) {}       
-        ~TextureIdGenerator() {}
-        
-        TextureIdGenerator(TextureIdGenerator&) = delete;
-        TextureIdGenerator& operator=(TextureIdGenerator&) = delete;
-        
-        ID last_incremented_id;
-};

@@ -25,14 +25,14 @@
 //#include <descriptors/RaceDescriptors.hpp>
 //#include <meti/RandUtils.hpp>
 
-//#include <common/Global.hpp>
+#include <common/Global.hpp>
 #include <common/IdGenerator.hpp>
 
 
 ContainerDescriptor generateContainerDescriptor(const ID& child_id)
 {
     ContainerDescriptor descriptor;
-    descriptor.id = IdGenerator::get().nextId();
+    descriptor.id = global::get().idGenerator().nextId();
     descriptor.child_id = child_id;
 
     return descriptor;

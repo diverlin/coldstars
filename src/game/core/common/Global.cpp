@@ -23,6 +23,7 @@
 #include <common/Config.hpp>
 #include <common/TurnTimer.hpp>
 #include <common/GameDate.hpp>
+#include <common/IdGenerator.hpp>
 #include <descriptors/RaceDescriptors.hpp>
 
 #include <builder/dock/KosmoportBuilder.hpp>
@@ -86,7 +87,9 @@ global& global::get()
 
 global::global()
     :
-      m_god(new God)
+      m_idGenerator(new IdGenerator)
+    , m_textureIdGenerator(new IdGenerator)
+    , m_god(new God)
     , m_entityManager(new EntityManager)
     , m_messageManager(new MessageManager)
     , m_config(new Config)

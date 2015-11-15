@@ -20,12 +20,13 @@
 #include "BombDescriptorGenerator.hpp"
 
 #include <meti/RandUtils.hpp>
+#include <common/Global.hpp>
 #include <common/IdGenerator.hpp>
 
 BombDescriptor generateBombDescriptor()
 {
     BombDescriptor descriptor;
-    descriptor.id = IdGenerator::get().nextId();
+    descriptor.id = global::get().idGenerator().nextId();
     descriptor.damage = meti::getRandInt(10, 100);
     descriptor.radius = meti::getRandInt(100, 300);
 

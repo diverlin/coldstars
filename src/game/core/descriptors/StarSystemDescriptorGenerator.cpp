@@ -32,7 +32,7 @@
 StarSystemDescriptor generateStarSystemDescriptor()
 {
     StarSystemDescriptor descriptor;
-    descriptor.id = IdGenerator::get().nextId();
+    descriptor.id = global::get().idGenerator().nextId();
     descriptor.race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
 
     return descriptor;
