@@ -35,7 +35,9 @@ enum class TELEGRAM : int
     INSERT,
     REMOVE,
     DELETE,
-    HIT
+
+    HIT,
+    EXPLOSION
 };
 
 std::string str(TELEGRAM); 

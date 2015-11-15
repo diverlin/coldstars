@@ -90,6 +90,25 @@ struct UnresolvedData
 
 const int CONTAINER_NUM_MAX_DEFAULT = 400;
 
+
+class Explosion
+{
+    public:
+        Explosion(int damage, int radius)
+            :
+              m_damage(damage),
+              m_radius(radius)
+        {}
+        ~Explosion() {}
+
+        int damage() const { return m_damage; }
+        int radius() const { return m_radius; }
+
+    private:
+        int m_damage = 0;
+        int m_radius = 0;
+};
+
 class StarSystem : public SpaceObject
 {
     public:
@@ -129,6 +148,8 @@ class StarSystem : public SpaceObject
         void add(Planetoid*, const SpaceObject* parent = nullptr, int it = 0);
         void add(Container*, const glm::vec3& = glm::vec3(0.0f));
         void add(BlackHole*, const glm::vec3&);
+
+        void add(Explosion*, const glm::vec3&);
 
         // effects
         void add(jeti::BaseParticleSystem*);

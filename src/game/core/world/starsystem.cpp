@@ -266,6 +266,15 @@ void StarSystem::add(BlackHole* blackhole, const glm::vec3& center)
     m_blackholes.push_back(blackhole);
 }    
 
+void StarSystem::add(Explosion* explosion, const glm::vec3& center)
+{
+    for (Vehicle* vehicle: m_vehicles) {
+        if (glm::length(vehicle->center() - center) < explosion->radius()) {
+            vehicle->hit(explosion->damage());
+        }
+    }
+}
+
 void StarSystem::add(ShockWaveEffect* shockwave, const glm::vec2& center)
 { 
 //    shockwave->setCenter(center);

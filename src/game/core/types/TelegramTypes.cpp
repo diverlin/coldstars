@@ -31,6 +31,7 @@ std::string str(TELEGRAM type_id)
         case TELEGRAM::REMOVE:  { return "TELEGRAM::REMOVE"; break; }
         case TELEGRAM::DELETE:  { return "TELEGRAM::DELETE"; break; }
         case TELEGRAM::HIT:     { return "TELEGRAM::HIT"; break; }
+        case TELEGRAM::EXPLOSION: { return "TELEGRAM::EXPLOSION"; break; }
         default: return "TELEGRAM::UKNOWN"; break;
     }
 }
