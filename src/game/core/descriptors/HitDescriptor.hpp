@@ -5,10 +5,10 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
-class HitEvent {
+class HitDescriptor {
     public:
-        HitEvent(const ID& agressor, const ID& victim, int damage);
-        HitEvent(const std::string& data);
+        HitDescriptor(const ID& agressor, const ID& victim, int damage);
+        HitDescriptor(const std::string& data);
 
         ID agressor = 0;
         ID victim = 0;

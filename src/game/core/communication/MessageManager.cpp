@@ -11,7 +11,8 @@
 #include <descriptors/VehicleDescriptor.hpp>
 #include <descriptors/items/BombDescriptor.hpp>
 #include <descriptors/ContainerDescriptor.hpp>
-#include <descriptors/HitEvent.hpp>
+#include <descriptors/HitDescriptor.hpp>
+#include <descriptors/ExplosionDescriptor.hpp>
 
 #include <spaceobjects/IncludeSpaceObjects.hpp>
 #include <world/starsystem.hpp>
@@ -100,11 +101,18 @@ void MessageManager::processMessage(const Message& message)
 //        }
         /** OTHER */
         case TELEGRAM::HIT: {
-            HitEvent hitEvent(message.data);
-            Base* victim = global::get().entityManager().get(hitEvent.victim);
-            SpaceObject* ob = static_cast<SpaceObject*>(victim);
+            HitDescriptor hitDescriptor(message.data);
+            SpaceObject* ob = static_cast<SpaceObject*>(global::get().entityManager().get(hitDescriptor.victim));
             assert(ob);
-            ob->hit(hitEvent.damage);
+            ob->hit(hitDescriptor.damage);
+            break;
+        }
+        case TELEGRAM::EXPLOSION: {
+            ExplosionDescriptor explosionDescriptor(message.data);
+            StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(explosionDescriptor.starsystem_id));
+            assert(starsystem);
+            Explosion* explosion = new Explosion(explosionDescriptor.damage, explosionDescriptor.radius);
+            starsystem->add(explosion, explosionDescriptor.center);
             break;
         }
         default:
@@ -130,7 +138,11 @@ Message getMessage(const ContainerDescriptor& descriptor, double delay) {
     return Message(TELEGRAM::CREATE_CONTAINER, descriptor.data(), delay);
 }
 
-Message getMessage(const HitEvent& hitEvent, double delay) {
-    return Message(TELEGRAM::HIT, hitEvent.data(), delay);
+Message getMessage(const HitDescriptor& descriptor, double delay) {
+    return Message(TELEGRAM::HIT, descriptor.data(), delay);
+}
+
+Message getMessage(const ExplosionDescriptor& descriptor, double delay) {
+    return Message(TELEGRAM::EXPLOSION, descriptor.data(), delay);
 }
 

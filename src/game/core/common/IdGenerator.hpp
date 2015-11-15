@@ -37,5 +37,3 @@ class IdGenerator
         ID last_incremented_id = 0;
         std::vector<ID> free_ids;
 };
-
-
