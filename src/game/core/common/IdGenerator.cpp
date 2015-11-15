@@ -18,12 +18,6 @@
 
 #include <common/IdGenerator.hpp>
 
-IdGenerator& IdGenerator::get()
-{
-    static IdGenerator instance;
-    return instance;
-}
-
 ID IdGenerator::nextId()
 {  
 //    if (!free_ids.empty()) {
@@ -35,18 +29,3 @@ ID IdGenerator::nextId()
         return last_incremented_id;
 //    }
 }  
-
-
-TextureIdGenerator& TextureIdGenerator::get()
-{
-    static TextureIdGenerator instance;
-    return instance;
-}
-
-ID TextureIdGenerator::nextId()
-{  
-    last_incremented_id++;        
-    return last_incremented_id;
-}  
-
-

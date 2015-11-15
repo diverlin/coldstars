@@ -44,7 +44,7 @@ VehicleDescriptor generateVehicleDescriptor()
     }
 
     VehicleDescriptor descriptor;
-    descriptor.id = IdGenerator::get().nextId();
+    descriptor.id = global::get().idGenerator().nextId();
     descriptor.race_id = race_id;
     descriptor.type_id = type_id;
     descriptor.size_id = size_id;

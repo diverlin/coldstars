@@ -113,7 +113,7 @@ void EntityManager::reg(Base* entity)
     //LOG("+++++++EntityManager::RegisterEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     
     if (entity->id() == NONE_ID) {
-        entity->setId(IdGenerator::get().nextId());
+        entity->setId(global::get().idGenerator().nextId());
     }
     m_entities_map.insert(std::make_pair(entity->id(), entity));
 }
@@ -697,7 +697,7 @@ void EntityManager::clearGarbage()
 #if CREATEDESTROY_LOG_ENABLED == 1
         LOG("________EntityManager::ClearGarbage delete entity " + getTypeStr(entities_vec[i]->typeId()) + "(" +std::to_string(entities_vec[i]->typeId()) +") " + getTypeStr(entities_vec[i]->subTypeId()) + "(" + std::to_string(entities_vec[i]->subTypeId()) + ") id=" + std::to_string(entities_vec[i]->id()));
 #endif
-        IdGenerator::get().addFreeId(m_garbage[i]->id());
+        global::get().idGenerator().addFreeId(m_garbage[i]->id());
         delete m_garbage[i];
     }
     m_garbage.clear();
