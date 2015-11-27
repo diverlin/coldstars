@@ -37,7 +37,7 @@ DroidModuleBuilder::DroidModuleBuilder()
 DroidModuleBuilder::~DroidModuleBuilder()
 {}
 
-DroidModule* DroidModuleBuilder::createTemplate(ID id) const
+DroidModule* DroidModuleBuilder::createTemplate(id_type id) const
 {
     DroidModule* droid_module = new DroidModule(id);
     assert(droid_module);

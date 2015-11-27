@@ -33,7 +33,7 @@ AsteroidBuilder::AsteroidBuilder()
 AsteroidBuilder::~AsteroidBuilder()
 {}
 
-Asteroid* AsteroidBuilder::createTemplate(ID id) const
+Asteroid* AsteroidBuilder::createTemplate(id_type id) const
 { 
     Asteroid* asteroid = new Asteroid(id);
     assert(asteroid);

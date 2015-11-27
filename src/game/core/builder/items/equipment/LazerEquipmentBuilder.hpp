@@ -32,7 +32,7 @@ class LazerEquipmentBuilder
         LazerEquipmentBuilder();
         ~LazerEquipmentBuilder();
 
-        LazerEquipment* createTemplate(ID id = NONE_ID) const;
+        LazerEquipment* createTemplate(id_type id = NONE_ID) const;
         LazerEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
                                      
     private:

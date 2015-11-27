@@ -232,7 +232,7 @@ namespace SKILLS
 }
 namespace COLOR
 {
-    enum ID
+    enum id_type
     {
         RED_ID=1, GREEN_ID, BLUE_ID, YELLOW_ID, GREY_ID
     };

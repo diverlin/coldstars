@@ -1491,6 +1491,6 @@ std::string getVehicleSpecialActionStr(VEHICLE_SPECIAL_ACTION_TYPE type_id)
         case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:        { return "INITIATE_JUMPOUT_ID"; break; }
         case VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID:                    { return "NONE_ID"; break; }
 
-        default: { return "UKNOWN ID"; break; }
+        default: { return "UKNOWN id_type"; break; }
     }
 }

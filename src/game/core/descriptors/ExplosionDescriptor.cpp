@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-ExplosionDescriptor::ExplosionDescriptor(const ID& starsystem_id, const glm::vec3& center, int damage, int radius)
+ExplosionDescriptor::ExplosionDescriptor(const id_type& starsystem_id, const glm::vec3& center, int damage, int radius)
     :
       starsystem_id(starsystem_id),
       center(center),

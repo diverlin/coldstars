@@ -42,7 +42,7 @@ FreezerEquipmentBuilder::FreezerEquipmentBuilder()
 FreezerEquipmentBuilder::~FreezerEquipmentBuilder()
 {}
 
-FreezerEquipment* FreezerEquipmentBuilder::createTemplate(ID id) const
+FreezerEquipment* FreezerEquipmentBuilder::createTemplate(id_type id) const
 {
     FreezerEquipment* freezer_equipment  = new FreezerEquipment(id);
     assert(freezer_equipment);

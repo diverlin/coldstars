@@ -42,7 +42,7 @@ DriveEquipmentBuilder::DriveEquipmentBuilder()
 DriveEquipmentBuilder::~DriveEquipmentBuilder()
 {}
 
-DriveEquipment* DriveEquipmentBuilder::createTemplate(ID id) const
+DriveEquipment* DriveEquipmentBuilder::createTemplate(id_type id) const
 {
     DriveEquipment* drive_equipment = new DriveEquipment(id);
     assert(drive_equipment);

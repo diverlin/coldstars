@@ -18,7 +18,7 @@
 
 #include <common/IdGenerator.hpp>
 
-ID IdGenerator::nextId()
+id_type IdGenerator::nextId()
 {  
 //    if (!free_ids.empty()) {
 //         unsigned long int= free_ids[free_ids.size()-1];

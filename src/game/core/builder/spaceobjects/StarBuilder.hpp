@@ -40,7 +40,7 @@ class StarBuilder
         StarBuilder();
         ~StarBuilder();
         
-        Star* createTemplate(ID id = NONE_ID) const;
+        Star* createTemplate(id_type id = NONE_ID) const;
         Star* create() const;
                                      
     private:

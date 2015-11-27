@@ -30,7 +30,7 @@ class RadarModuleBuilder
         RadarModuleBuilder();
         ~RadarModuleBuilder();
 
-        RadarModule* createTemplate(ID id = NONE_ID) const;
+        RadarModule* createTemplate(id_type id = NONE_ID) const;
         RadarModule* create(int radius_add = NONE_ID) const;
                                      
     private:

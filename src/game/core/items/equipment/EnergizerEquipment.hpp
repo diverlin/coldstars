@@ -27,7 +27,7 @@
 class EnergizerEquipment : public BaseEquipment
 {
     public:
-        EnergizerEquipment(const ID& id);
+        EnergizerEquipment(const id_type& id);
         virtual ~EnergizerEquipment();
 
         void SetEnergyMaxOrig(int energy_max_orig)    { this->energy_max_orig  = energy_max_orig; };

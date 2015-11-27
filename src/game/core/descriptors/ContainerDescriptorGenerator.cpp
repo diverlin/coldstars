@@ -29,7 +29,7 @@
 #include <common/IdGenerator.hpp>
 
 
-ContainerDescriptor generateContainerDescriptor(const ID& child_id)
+ContainerDescriptor generateContainerDescriptor(const id_type& child_id)
 {
     ContainerDescriptor descriptor;
     descriptor.id = global::get().idGenerator().nextId();

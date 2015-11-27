@@ -29,7 +29,7 @@
 #include "../../world/starsystem.hpp"
 #include "../../parts/Turrel.hpp"
 
-LazerEquipment::LazerEquipment(const ID& id)
+LazerEquipment::LazerEquipment(const id_type& id)
     :
       damage_orig(0),
       radius_orig(0)

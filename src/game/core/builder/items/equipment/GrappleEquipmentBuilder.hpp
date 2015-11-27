@@ -32,7 +32,7 @@ class GrappleEquipmentBuilder
         GrappleEquipmentBuilder();
         ~GrappleEquipmentBuilder();
 
-        GrappleEquipment* createTemplate(ID id = NONE_ID) const;
+        GrappleEquipment* createTemplate(id_type id = NONE_ID) const;
         GrappleEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int strength_orig = NONE_ID, int radius_orig = NONE_ID, int speed_orig = NONE_ID) const;
                                      
     private:

@@ -32,7 +32,7 @@ class DriveEquipmentBuilder
         DriveEquipmentBuilder();
         ~DriveEquipmentBuilder();
 
-        DriveEquipment* createTemplate(ID id = NONE_ID) const;
+        DriveEquipment* createTemplate(id_type id = NONE_ID) const;
         DriveEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int speed_orig = NONE_ID, int hyper_orig = NONE_ID) const;
                                      
     private:

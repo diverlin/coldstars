@@ -24,7 +24,7 @@
 
 class VehicleSlot;
 
-VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY, const ID& id = NONE_ID);
+VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY, const id_type& id = NONE_ID);
 
     
 

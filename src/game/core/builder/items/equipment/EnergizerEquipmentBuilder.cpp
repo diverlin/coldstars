@@ -42,7 +42,7 @@ EnergizerEquipmentBuilder::EnergizerEquipmentBuilder()
 EnergizerEquipmentBuilder::~EnergizerEquipmentBuilder()
 {}
 
-EnergizerEquipment* EnergizerEquipmentBuilder::createTemplate(ID id) const
+EnergizerEquipment* EnergizerEquipmentBuilder::createTemplate(id_type id) const
 {
     EnergizerEquipment* energizer_equipment = new EnergizerEquipment(id);
     assert(energizer_equipment);

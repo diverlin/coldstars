@@ -41,7 +41,7 @@ class AsteroidBuilder
         AsteroidBuilder();
         ~AsteroidBuilder();
 
-        Asteroid* createTemplate(ID id = NONE_ID) const;
+        Asteroid* createTemplate(id_type id = NONE_ID) const;
         Asteroid* create() const;
                                      
     private:

@@ -18,9 +18,9 @@
 
 #pragma once
 
-typedef long long int ID;
+typedef long long int id_type;
 
-const ID NONE_ID = 0;
+const id_type NONE_ID = 0;
 
 
 

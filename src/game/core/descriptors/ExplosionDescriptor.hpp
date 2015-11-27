@@ -9,10 +9,10 @@
 
 class ExplosionDescriptor {
     public:
-        ExplosionDescriptor(const ID& starsystem_id, const glm::vec3& center, int damage, int radius);
+        ExplosionDescriptor(const id_type& starsystem_id, const glm::vec3& center, int damage, int radius);
         ExplosionDescriptor(const std::string& data);
 
-        ID starsystem_id = 0;
+        id_type starsystem_id = 0;
         glm::vec3 center;
         int damage = 0;
         int radius = 0;

@@ -47,7 +47,7 @@ struct ItemCommonData
 struct UnresolvedDataBaseItem
 {
     std::string textureOb_path;
-    ID item_slot_id;
+    id_type item_slot_id;
 };
 
 class BaseItem : public ceti::Orientation, public Base

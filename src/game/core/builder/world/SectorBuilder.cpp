@@ -33,7 +33,7 @@ SectorBuilder::SectorBuilder()
 SectorBuilder::~SectorBuilder()
 {}
 
-Sector* SectorBuilder::createTemplate(ID id) const
+Sector* SectorBuilder::createTemplate(id_type id) const
 {   
     Sector* sector = new Sector(id);
     assert(sector);

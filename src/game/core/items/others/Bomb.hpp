@@ -24,7 +24,7 @@
 class Bomb : public BaseItem
 {
     public:
-        Bomb(const ID& id);
+        Bomb(const id_type& id);
         virtual ~Bomb();
 
         void setDamage(int damage) { this->m_damage = damage; }

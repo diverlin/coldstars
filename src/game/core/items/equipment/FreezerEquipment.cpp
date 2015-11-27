@@ -22,7 +22,7 @@
 #include <ceti/Logger.hpp>
 #include "../../items/modules/FreezerModule.hpp"
 
-FreezerEquipment::FreezerEquipment(const ID& id)
+FreezerEquipment::FreezerEquipment(const id_type& id)
 :
 freeze_orig(0)
 {

@@ -24,7 +24,7 @@
 #include "../../spaceobjects/Vehicle.hpp"
 #include "../../slots/ItemSlot.hpp"
 
-DroidEquipment::DroidEquipment(const ID& id)
+DroidEquipment::DroidEquipment(const id_type& id)
 :
 repair_orig(0)
 {

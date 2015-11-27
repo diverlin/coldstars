@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-HitDescriptor::HitDescriptor(const ID& agressor, const ID& victim, int damage)
+HitDescriptor::HitDescriptor(const id_type& agressor, const id_type& victim, int damage)
     :
       agressor(agressor),
       victim(victim),

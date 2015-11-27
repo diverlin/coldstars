@@ -32,7 +32,7 @@ class ProtectorEquipmentBuilder
         ProtectorEquipmentBuilder();
         ~ProtectorEquipmentBuilder();
 
-        ProtectorEquipment* createTemplate(ID id = NONE_ID) const;
+        ProtectorEquipment* createTemplate(id_type id = NONE_ID) const;
         ProtectorEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int protection_orig = NONE_ID) const;
                                      
     private:
