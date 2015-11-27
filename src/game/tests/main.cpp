@@ -74,7 +74,7 @@ Bomb* createNewBomb()
     return bomb;
 }
 
-Container* createNewContainer(const ID& child_id)
+Container* createNewContainer(const id_type& child_id)
 {
     // queue create messages
     auto descriptor = generateContainerDescriptor(child_id);

@@ -34,7 +34,7 @@ KosmoportBuilder::KosmoportBuilder()
 KosmoportBuilder::~KosmoportBuilder()
 {}
 
-Kosmoport* KosmoportBuilder::createTemplate(ID id) const
+Kosmoport* KosmoportBuilder::createTemplate(id_type id) const
 {
     Kosmoport* kosmoport = new Kosmoport(id);
     assert(kosmoport);

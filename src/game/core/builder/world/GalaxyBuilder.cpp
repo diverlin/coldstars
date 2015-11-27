@@ -35,7 +35,7 @@ GalaxyBuilder::GalaxyBuilder()
 GalaxyBuilder::~GalaxyBuilder()
 {}
 
-Galaxy* GalaxyBuilder::createTemplate(ID id) const
+Galaxy* GalaxyBuilder::createTemplate(id_type id) const
 {
     Galaxy* galaxy = new Galaxy(id);
     assert(galaxy);

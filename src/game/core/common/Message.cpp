@@ -1,6 +1,6 @@
 #include "Message.hpp"
 
-Message::Message(TELEGRAM type_id, const ID& sender_id, const ID& receiver_id, void* extra)
+Message::Message(TELEGRAM type_id, const id_type& sender_id, const id_type& receiver_id, void* extra)
     :
       type_id(type_id)
     , sender_id(sender_id)

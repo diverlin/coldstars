@@ -30,10 +30,10 @@ class IdGenerator
         IdGenerator() {}
         ~IdGenerator() {}
         
-        ID nextId();
-        void addFreeId(ID free_id) { free_ids.push_back(free_id); }
+        id_type nextId();
+        void addFreeId(id_type free_id) { free_ids.push_back(free_id); }
             
     private:
-        ID last_incremented_id = 0;
-        std::vector<ID> free_ids;
+        id_type last_incremented_id = 0;
+        std::vector<id_type> free_ids;
 };

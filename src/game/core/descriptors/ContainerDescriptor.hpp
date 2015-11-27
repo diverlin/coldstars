@@ -29,8 +29,8 @@
 class ContainerDescriptor
 {
     public:
-        ID id = 0;
-        ID child_id = 0;
+        id_type id = 0;
+        id_type child_id = 0;
                 
     ContainerDescriptor() {}
     ContainerDescriptor(const std::string& data);

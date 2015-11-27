@@ -26,7 +26,7 @@
 class BombDescriptor
 {
     public:
-        ID id = 0;
+        id_type id = 0;
         int damage = 0;
         int radius = 0;
                                                         

@@ -22,7 +22,7 @@
 #include <ceti/Logger.hpp>
 #include "../../items//modules/RadarModule.hpp"
 
-RadarEquipment::RadarEquipment(const ID& id)
+RadarEquipment::RadarEquipment(const id_type& id)
     :
       radius_orig(0)
 {

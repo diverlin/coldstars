@@ -26,7 +26,7 @@ class ItemSlot;
 class LazerEquipment : public BaseEquipment
 {
     public:
-        LazerEquipment(const ID& id);
+        LazerEquipment(const id_type& id);
         virtual ~LazerEquipment();
 
         void SetDamageOrig(int damage_orig) { this->damage_orig = damage_orig; };

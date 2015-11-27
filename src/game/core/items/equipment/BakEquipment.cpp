@@ -22,7 +22,7 @@
 #include <ceti/Logger.hpp>
 #include "../../items//modules/BakModule.hpp"
 
-BakEquipment::BakEquipment(const ID& id)
+BakEquipment::BakEquipment(const id_type& id)
 :
 fuel_max_orig(0),  
 fuel(0)

@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class FreezerEquipment : public BaseEquipment
 {  
     public:
-        FreezerEquipment(const ID& id);
+        FreezerEquipment(const id_type& id);
         virtual ~FreezerEquipment();
 
         void SetFreezeOrig(int freeze_orig) { this->freeze_orig = freeze_orig; };

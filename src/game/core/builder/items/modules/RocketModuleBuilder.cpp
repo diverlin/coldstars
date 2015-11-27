@@ -36,7 +36,7 @@ RocketModuleBuilder::RocketModuleBuilder()
 RocketModuleBuilder::~RocketModuleBuilder()
 {}
 
-RocketModule* RocketModuleBuilder::createTemplate(ID id) const
+RocketModule* RocketModuleBuilder::createTemplate(id_type id) const
 {
     RocketModule* rocket_module = new RocketModule(id);
     assert(rocket_module);

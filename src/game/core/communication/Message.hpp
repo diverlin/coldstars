@@ -12,7 +12,7 @@ class Message
 
         bool operator<(const Message&) const;        
 
-        //ID id = 0;
+        //id_type id = 0;
         TELEGRAM type_id = TELEGRAM::NONE;
         std::string data = "";
 

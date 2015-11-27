@@ -32,7 +32,7 @@ StarBuilder::StarBuilder()
 StarBuilder::~StarBuilder()
 {}
 
-Star* StarBuilder::createTemplate(ID id) const
+Star* StarBuilder::createTemplate(id_type id) const
 { 
     Star* star = new Star(id);
     assert(star);

@@ -25,7 +25,7 @@
 class BakEquipment : public BaseEquipment
 {
     public:
-             BakEquipment(const ID& id);
+             BakEquipment(const id_type& id);
              virtual ~BakEquipment();
         
                 void SetFuelMaxOrig(int fuel_max_orig) { this->fuel_max_orig = fuel_max_orig; };

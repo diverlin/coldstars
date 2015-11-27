@@ -99,7 +99,7 @@
 
 void EntityManager::clear()
 {
-    for (std::map<ID, Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++)
+    for (std::map<id_type, Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++)
     {
         //LOG("________EntityManager::Clear, delete " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
         delete iterator->second;
@@ -118,10 +118,10 @@ void EntityManager::reg(Base* entity)
     m_entities_map.insert(std::make_pair(entity->id(), entity));
 }
 
-Base* EntityManager::get(const ID& id) const
+Base* EntityManager::get(const id_type& id) const
 {
     LOG("    EntityManager::entity requested_id=" + std::to_string(id));    
-    std::map<ID, Base*>::const_iterator slice = m_entities_map.find(id);
+    std::map<id_type, Base*>::const_iterator slice = m_entities_map.find(id);
     assert(slice->second);
     //LOG("    EntityManager::GetEntityById type_id=" + getTypeStr(slice->second->typeId()));    
     return slice->second;
@@ -129,7 +129,7 @@ Base* EntityManager::get(const ID& id) const
 
 Player* EntityManager::player() const
 {
-    for (std::map<ID, Base*>::const_iterator it=m_entities_map.begin(); it!=m_entities_map.end(); ++it) {
+    for (std::map<id_type, Base*>::const_iterator it=m_entities_map.begin(); it!=m_entities_map.end(); ++it) {
         if (it->second->typeId() == TYPE::ENTITY::PLAYER_ID) {
             return (Player*)it->second;
         }
@@ -153,7 +153,7 @@ void EntityManager::saveEvent(const std::string& filename)
 {
     boost::property_tree::ptree save_ptree;
     
-    for (std::map<ID, Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
+    for (std::map<id_type, Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
         //LOG("saving " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
         iterator->second->Save(save_ptree);
     }
@@ -637,7 +637,7 @@ void EntityManager::loadPass0(const std::string& filename)
 void EntityManager::loadPass1() const
 {
     LOG("RESOLVING DEPENDENCY START");
-    for (std::map<ID, Base*>::const_iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
+    for (std::map<id_type, Base*>::const_iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
         LOG("Load() in " + iterator->second->dataTypeStr());
         iterator->second->Resolve();
     }

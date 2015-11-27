@@ -33,7 +33,7 @@ SpaceStationBuilder::SpaceStationBuilder()
 
 SpaceStationBuilder::~SpaceStationBuilder() {}
 
-SpaceStation* SpaceStationBuilder::createTemplate(ID id) const
+SpaceStation* SpaceStationBuilder::createTemplate(id_type id) const
 {           
     SpaceStation* spacestation = new SpaceStation(id);
     assert(spacestation);

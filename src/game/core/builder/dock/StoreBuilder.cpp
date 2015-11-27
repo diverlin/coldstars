@@ -51,7 +51,7 @@ StoreBuilder::StoreBuilder()
 StoreBuilder::~StoreBuilder()
 {}
 
-Store* StoreBuilder::createTemplate(ID id) const
+Store* StoreBuilder::createTemplate(id_type id) const
 {
     Store* store = new Store(id);
     assert(store);

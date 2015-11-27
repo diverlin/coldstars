@@ -23,4 +23,4 @@
 
 #include <descriptors/ContainerDescriptor.hpp>
 
-ContainerDescriptor generateContainerDescriptor(const ID& child_id = 0);
+ContainerDescriptor generateContainerDescriptor(const id_type& child_id = 0);

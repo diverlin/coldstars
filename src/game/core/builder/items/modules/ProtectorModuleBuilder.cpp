@@ -39,7 +39,7 @@ ProtectorModuleBuilder::ProtectorModuleBuilder()
 ProtectorModuleBuilder::~ProtectorModuleBuilder()
 {}
 
-ProtectorModule* ProtectorModuleBuilder::createTemplate(ID id) const
+ProtectorModule* ProtectorModuleBuilder::createTemplate(id_type id) const
 {
     ProtectorModule* protector_module = new ProtectorModule(id);
     assert(protector_module);

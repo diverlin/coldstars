@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 class RadarEquipment : public BaseEquipment
 {
     public:
-        RadarEquipment(const ID& id);
+        RadarEquipment(const id_type& id);
         virtual ~RadarEquipment();
 
         void SetRadiusOrig(int radius_orig)   { this->radius_orig = radius_orig; };

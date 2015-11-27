@@ -31,7 +31,7 @@ class GalaxyBuilder
         GalaxyBuilder();
         ~GalaxyBuilder();
         
-        Galaxy* createTemplate(ID id = NONE_ID) const;
+        Galaxy* createTemplate(id_type id = NONE_ID) const;
         Galaxy* create(const GalaxyDescriptor&) const;
                                                 
     private:       

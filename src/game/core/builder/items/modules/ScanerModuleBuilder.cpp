@@ -37,7 +37,7 @@ ScanerModuleBuilder::ScanerModuleBuilder()
 ScanerModuleBuilder::~ScanerModuleBuilder()
 {}
 
-ScanerModule* ScanerModuleBuilder::createTemplate(ID id) const
+ScanerModule* ScanerModuleBuilder::createTemplate(id_type id) const
 {
     ScanerModule* scaner_module = new ScanerModule(id);
     assert(scaner_module);

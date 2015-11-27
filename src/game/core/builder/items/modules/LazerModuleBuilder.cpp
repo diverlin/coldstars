@@ -38,7 +38,7 @@ LazerModuleBuilder::LazerModuleBuilder()
 LazerModuleBuilder::~LazerModuleBuilder()
 {}
 
-LazerModule* LazerModuleBuilder::createTemplate(ID id) const
+LazerModule* LazerModuleBuilder::createTemplate(id_type id) const
 {
     LazerModule* lazer_module = new LazerModule(id);
     assert(lazer_module);

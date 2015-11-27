@@ -69,14 +69,14 @@ struct UnresolvedDataItemSlot
     UnresolvedDataItemSlot()
     {}
     
-    ID target_id = NONE_ID;
-    ID subtarget_id = NONE_ID;
+    id_type target_id = NONE_ID;
+    id_type subtarget_id = NONE_ID;
 };
 
 class ItemSlot : public BaseSlot
 {   
     public:        
-        ItemSlot(const ID& id, TYPE::ENTITY subtype_id);
+        ItemSlot(const id_type& id, TYPE::ENTITY subtype_id);
         virtual ~ItemSlot();                
         
         virtual void putChildrenToGarbage() const;

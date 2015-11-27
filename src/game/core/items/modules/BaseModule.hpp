@@ -28,7 +28,7 @@ class BaseEquipment;
 
 struct UnresolvedDataBaseModule
 {
-    ID equipment_owner_id;
+    id_type equipment_owner_id;
 };
 
 class BaseModule : public BaseItem

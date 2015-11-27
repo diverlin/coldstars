@@ -7,11 +7,11 @@
 
 class HitDescriptor {
     public:
-        HitDescriptor(const ID& agressor, const ID& victim, int damage);
+        HitDescriptor(const id_type& agressor, const id_type& victim, int damage);
         HitDescriptor(const std::string& data);
 
-        ID agressor = 0;
-        ID victim = 0;
+        id_type agressor = 0;
+        id_type victim = 0;
         int damage = 0;
 
         std::string data() const;
