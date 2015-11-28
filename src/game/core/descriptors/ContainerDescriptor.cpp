@@ -18,21 +18,16 @@
 
 
 #include "ContainerDescriptor.hpp"
+#include <serialization/Serialization.hpp>
 
 #include <sstream>
 
 ContainerDescriptor::ContainerDescriptor(const std::string& data)
 {
-    std::stringstream ss;
-    ss << data;
-    boost::archive::text_iarchive ia(ss);
-    ia >> *this;
+    MACRO_READ_SERIALIZED_DATA
 }
 
 std::string ContainerDescriptor::data() const
 {
-    std::stringstream ss;
-    boost::archive::text_oarchive oa(ss);
-    oa << *this;
-    return ss.str();
+    MACRO_SAVE_SERIALIZED_DATA
 }

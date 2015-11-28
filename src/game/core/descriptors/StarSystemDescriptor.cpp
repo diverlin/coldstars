@@ -17,23 +17,18 @@
 */
 
 #include "StarSystemDescriptor.hpp"
+#include <serialization/Serialization.hpp>
 
 #include <sstream>
 
 StarSystemDescriptor::StarSystemDescriptor(const std::string& data)
 {
-    std::stringstream ss;
-    ss << data;
-    boost::archive::text_iarchive ia(ss);
-    ia >> *this;
+    MACRO_READ_SERIALIZED_DATA
 }
 
 std::string StarSystemDescriptor::data() const
 {
-    std::stringstream ss;
-    boost::archive::text_oarchive oa(ss);
-    oa << *this;
-    return ss.str();
+    MACRO_SAVE_SERIALIZED_DATA
 }
 
 
