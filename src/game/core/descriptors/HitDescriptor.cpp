@@ -1,4 +1,5 @@
 #include "HitDescriptor.hpp"
+#include <serialization/Serialization.hpp>
 
 #include <sstream>
 
@@ -10,10 +11,7 @@ HitDescriptor::HitDescriptor(const id_type& agressor, const id_type& victim, int
 {}
 
 HitDescriptor::HitDescriptor(const std::string& data) {
-    std::stringstream ss;
-    ss << data;
-    boost::archive::text_iarchive ia(ss);
-    ia >> *this;
+    MACRO_READ_SERIALIZED_DATA
 }
 
 std::string HitDescriptor::data() const {
