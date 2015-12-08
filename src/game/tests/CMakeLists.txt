@@ -13,8 +13,8 @@ else ()
     set(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
 endif ()
 
-set(CMAKE_PREFIX_PATH "/media/xjeti/3e183862-5083-48fc-903c-1674c369d41a/workspace/AlexSanto/thirdparty/thirdparty_1.0.19/")
 find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
 
 add_executable (${PROJECT} ${${PROJECT}_SOURCE} ${${PROJECT}_HEADER})
 target_link_libraries(${PROJECT}
