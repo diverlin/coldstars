@@ -7,9 +7,7 @@ file(GLOB_RECURSE ${PROJECT}_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-if (COMPILE_FLAGS)
-    set(COMPILE_FLAGS ${COMPILE_FLAGS})
-else ()
+if (NOT COMPILE_FLAGS)
     set(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
 endif ()
 
@@ -18,7 +16,7 @@ include_directories(${SFML_INCLUDE_DIR})
 message("SFML_LIBRARIES = ${SFML_LIBRARIES}")
 message("SFML_INCLUDE_DIR = ${SFML_INCLUDE_DIR}")
 
-add_library (${PROJECT} ${${PROJECT}_SOURCE} ${${PROJECT}_HEADER})
+add_library (${PROJECT} SHARED ${${PROJECT}_SOURCE} ${${PROJECT}_HEADER})
 target_link_libraries(${PROJECT}
     boost_system
     boost_serialization
