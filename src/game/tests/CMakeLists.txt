@@ -7,9 +7,7 @@ file(GLOB_RECURSE ${PROJECT}_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-if (COMPILE_FLAGS)
-    set(COMPILE_FLAGS ${COMPILE_FLAGS})
-else ()
+if (NOT COMPILE_FLAGS)
     set(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
 endif ()
 

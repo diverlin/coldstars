@@ -22,7 +22,8 @@ set(SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}")
 SET(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -fPIC -rdynamic")
    
 
-set(COLDSTARS_DEPENDENCIES_ROOT "/home/diverlin/coldstars/coldstars_thirdparty_build/dist")
+set(COLDSTARS_DEPENDENCIES_ROOT "/home/yeti/mnt/workspace/coldstars/thirdparty/") #gtest1.7 manually compiled here
+set(CMAKE_PREFIX_PATH ${COLDSTARS_DEPENDENCIES_ROOT})
 set(SFML_ROOT ${COLDSTARS_DEPENDENCIES_ROOT})
 set(GLEW_ROOT ${COLDSTARS_DEPENDENCIES_ROOT})
 set(GLM_ROOT_DIR ${COLDSTARS_DEPENDENCIES_ROOT})
