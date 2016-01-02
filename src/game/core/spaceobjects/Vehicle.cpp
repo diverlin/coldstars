@@ -632,28 +632,28 @@ void Vehicle::remeberAgressor(Vehicle* agressor)
 
 float Vehicle::dissipateRate() const
 {
-    float rate = 1.0 - m_properties.protection*0.01f;
-    if (m_npc) {
-        rate *= m_npc->GetSkills().GetDefenceNormalized();
-    }
+    float rate = m_properties.protection*0.01f;
+//    if (m_npc) {
+//        rate *= m_npc->GetSkills().GetDefenceNormalized();
+//    }
     return rate;
 }
 
 int Vehicle::criticalDamage() const {
-    return armor() * 1.0/dissipateRate() + 1;
+    return armor() * (1.0 + dissipateRate()) + 2;
 }
 
 /* virtual */
 void Vehicle::hit(int damage)
 {
-    //LOG("Vehicle("+std::to_string(id())+")::Hit");
+    LOG("Vehicle::hit id="+std::to_string(id())+ " damage="+std::to_string(damage));
     if (!m_GodMode) {
         if (m_properties.energy < damage) {
             m_properties.hibernate_mode_enabled = true;
             UpdatePropertiesProtection();
         }
 
-        SpaceObject::hit(damage * dissipateRate());
+        SpaceObject::hit(damage * (1.0 - dissipateRate()));
 
         //if (show_effect == true)
         {

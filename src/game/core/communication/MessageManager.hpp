@@ -27,13 +27,13 @@ class MessageManager
         sf::Clock m_clock;
         std::set<Message> m_messages_queue;
 
-        void processMessage(const Message& message);
         double currentTime() const;
+        void process(const Message& message);
 };
 
 Message getMessage(const StarSystemDescriptor& descriptor, double delay = -1.0);
 Message getMessage(const VehicleDescriptor& descriptor, double delay = -1.0);
 Message getMessage(const BombDescriptor& descriptor, double delay = -1.0);
 Message getMessage(const ContainerDescriptor& descriptor, double delay = -1.0);
-Message getMessage(const HitDescriptor& descriptor, double delay = 0.0);
-Message getMessage(const ExplosionDescriptor& descriptor, double delay = 0.0);
+Message getMessage(const HitDescriptor& descriptor, double delay = -1.0);
+Message getMessage(const ExplosionDescriptor& descriptor, double delay = -1.0);
