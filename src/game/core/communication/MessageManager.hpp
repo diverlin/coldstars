@@ -22,7 +22,7 @@ class MessageManager
         void add(Message&& message);
 
         void runLoop();
-        bool update();
+        void update();
         
     private:
         sf::Clock m_clock;
