@@ -46,7 +46,7 @@ void MessageManager::runLoop()
     }
 }
 
-bool MessageManager::update()
+void MessageManager::update()
 { 
     for ( auto it = m_messages_queue.begin(); it != m_messages_queue.end(); ++it ) {
         const Message& message = *it;

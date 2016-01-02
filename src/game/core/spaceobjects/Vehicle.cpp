@@ -646,7 +646,7 @@ int Vehicle::criticalDamage() const {
 /* virtual */
 void Vehicle::hit(int damage)
 {
-    LOG("Vehicle::hit id="+std::to_string(id())+ " damage="+std::to_string(damage));
+    LOG(std::string("Vehicle::hit id=") << std::to_string(id()) << " damage=" << std::to_string(damage));
     if (!m_GodMode) {
         if (m_properties.energy < damage) {
             m_properties.hibernate_mode_enabled = true;

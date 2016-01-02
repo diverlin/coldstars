@@ -40,11 +40,12 @@ void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)
 /* virtual */
 void SpaceObject::hit(int damage)
 {
-    LOG("SpaceObject::hit id="+std::to_string(id())+ " damage="+std::to_string(damage) + " armor=" + std::to_string(m_dataLife.armor - damage));
+    LOG(std::string("SpaceObject::hit id=") << std::to_string(id()) << " damage=" << std::to_string(damage));
     m_dataLife.armor -= damage;
     if (m_dataLife.armor <= 0) {
         m_dataLife.is_dying = true;
     }
+    LOG(std::string("armor=") << std::to_string(m_dataLife.armor) << " is_dying=" << std::to_string(m_dataLife.is_dying) << std::endl);
 }
 
 void SpaceObject::killSilently()
