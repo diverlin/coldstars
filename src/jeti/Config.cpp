@@ -24,7 +24,7 @@ Config::Config()
         fps_limit = ptree.get<int>("Video.fps_limit");
         vsync     = ptree.get<bool>("Video.vsync");
     } catch (...) {
-
+        // todo save values to file
     }
 }
 

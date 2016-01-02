@@ -13,8 +13,8 @@ endif ()
 
 find_package(SFML COMPONENTS system REQUIRED)
 include_directories(${SFML_INCLUDE_DIR})
-message("SFML_LIBRARIES = ${SFML_LIBRARIES}")
-message("SFML_INCLUDE_DIR = ${SFML_INCLUDE_DIR}")
+#message("SFML_LIBRARIES = ${SFML_LIBRARIES}")
+#message("SFML_INCLUDE_DIR = ${SFML_INCLUDE_DIR}")
 
 add_library (${PROJECT} SHARED ${${PROJECT}_SOURCE} ${${PROJECT}_HEADER})
 target_link_libraries(${PROJECT}

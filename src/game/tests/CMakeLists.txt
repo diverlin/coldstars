@@ -25,8 +25,3 @@ set_target_properties(${PROJECT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
 
 # deploy
 install(TARGETS ${PROJECT} DESTINATION ${DEPLOY_DIR})
-ADD_CUSTOM_COMMAND(
-    TARGET ${PROJECT}
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E create_symlink ${SOURCE_ROOT}/config/config.info ${DEPLOY_DIR}/config.info
-)

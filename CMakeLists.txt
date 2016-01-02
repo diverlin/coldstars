@@ -15,7 +15,6 @@ endif ()
 set(CMAKE_BUILD_TYPE Debug)
 
 set(DEPLOY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
-set(SOURCE_ROOT "${CMAKE_CURRENT_SOURCE_DIR}")
 
 #SET(COMPILE_FLAGS "-Wall -Werror -Wno-switch -std=c++11 -std=gnu++11 -pipe")
 #SET(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -Ofast -march=native")
