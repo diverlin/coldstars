@@ -12,30 +12,30 @@ struct Config
         void SetAutoSaveMode(bool auto_save_mode) { this->auto_save_mode = auto_save_mode; }
         void SetAutoLoadMode(bool auto_load_mode) { this->auto_load_mode = auto_load_mode; }
         
-        int GetGameMode() const { return game_mode; };
-        int GetLogMode() const { return log_mode; };
+        int GetGameMode() const { return game_mode; }
+        int GetLogMode() const { return log_mode; }
 
         bool GetAutoSaveMode() const { return auto_save_mode; }
         bool GetAutoLoadMode() const { return auto_load_mode; }
 
         bool GetMouseCameraScroll() const { return mouse_camera_scroll; }
 
-        bool DEBUG_MODE;
+        bool DEBUG_MODE = false;
         
-        bool AUTO_TURN_MODE;
-        int GAME_SPEED;
+        bool AUTO_TURN_MODE = false;
+        int GAME_SPEED = 1; // 1-10
         
-        int SCROLL_VELOCITY_MAX;
-        int SCROLL_VELOCITY_STEP;
+        int SCROLL_VELOCITY_MAX = 20;
+        int SCROLL_VELOCITY_STEP = 1;
 
     private:
-        int game_mode;
-        int log_mode;
+        int game_mode = 0;
+        int log_mode = 1;
         
-        bool auto_save_mode;
-        bool auto_load_mode;
+        bool auto_save_mode = false;
+        bool auto_load_mode = false;
         
-        bool mouse_camera_scroll;
+        bool mouse_camera_scroll = false;
 
         boost::property_tree::ptree ptree;
 };
