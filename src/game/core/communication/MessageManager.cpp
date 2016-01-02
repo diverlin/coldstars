@@ -26,7 +26,7 @@
 void MessageManager::add(Message&& message)
 {
     if (message.delay < 0) {
-        processMessage(message);
+        process(message);
     } else {
         message.dispatch_time = currentTime() + message.delay;
         m_messages_queue.insert(message);
@@ -50,13 +50,13 @@ bool MessageManager::update()
     for ( auto it = m_messages_queue.begin(); it != m_messages_queue.end(); ++it ) {
         const Message& message = *it;
         if (message.dispatch_time < currentTime()) {
-            processMessage(message);
+            process(message);
             m_messages_queue.erase(it);
         }
     }
 }
 
-void MessageManager::processMessage(const Message& message)
+void MessageManager::process(const Message& message)
 {
     switch(message.type_id) {
         /** CREATE */

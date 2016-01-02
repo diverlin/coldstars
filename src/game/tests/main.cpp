@@ -52,11 +52,9 @@ namespace {
 
 Ship* createNewShip()
 {
-    // queue create messages
     auto descriptor = generateVehicleDescriptor();
     global::get().messageManager().add(getMessage(descriptor));
 
-    // get entities
     Ship* ship = static_cast<Ship*>(global::get().entityManager().get(descriptor.id));
     assert(ship);
     return ship;
@@ -64,11 +62,9 @@ Ship* createNewShip()
 
 Bomb* createNewBomb()
 {
-    // queue create messages
     auto descriptor = generateBombDescriptor();
     global::get().messageManager().add(getMessage(descriptor));
 
-    // get entities
     Bomb* bomb = static_cast<Bomb*>(global::get().entityManager().get(descriptor.id));
     assert(bomb);
     return bomb;
@@ -76,26 +72,21 @@ Bomb* createNewBomb()
 
 Container* createNewContainer(const id_type& child_id)
 {
-    // queue create messages
     auto descriptor = generateContainerDescriptor(child_id);
     global::get().messageManager().add(getMessage(descriptor));
 
-    // get entities
     Container* container = static_cast<Container*>(global::get().entityManager().get(descriptor.id));
     assert(container);
+    assert(container->itemSlot());
+    assert(container->itemSlot()->item());
     return container;
 }
 
 StarSystem* createNewStarSystem()
 {
-    // queue create messages
     auto descriptor = generateStarSystemDescriptor();
     global::get().messageManager().add(getMessage(descriptor));
 
-    // process messages
-    global::get().messageManager().runLoop();
-
-    // get entities
     StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.id));
     assert(starsystem);
     return starsystem;
@@ -125,22 +116,29 @@ TEST(base,serialization)
 
 TEST(base,hit)
 {
-    // shortcuts
     MessageManager& messageManager = global::get().messageManager();
 
-    // create entities
     Ship* ship1 = createNewShip();
     Ship* ship2 = createNewShip();
 
-    // hit entity
-    messageManager.add(getMessage(HitDescriptor(ship1->id(), ship2->id(), 33), 0.3));
-    messageManager.add(getMessage(HitDescriptor(ship1->id(), ship2->id(), 22), 0.2));
-    messageManager.add(getMessage(HitDescriptor(ship1->id(), ship2->id(), 11), 0.1));
-    messageManager.add(getMessage(HitDescriptor(ship1->id(), ship2->id(), ship2->criticalDamage()), 0.4));
+    messageManager.add(getMessage(HitDescriptor(ship1->id(), ship2->id(), 3), 0.3));
+    messageManager.add(getMessage(HitDescriptor(ship1->id(), ship2->id(), 2), 0.2));
+    messageManager.add(getMessage(HitDescriptor(ship1->id(), ship2->id(), 1), 0.1));
+
+    messageManager.runLoop();
 
     EXPECT_FALSE(ship2->isDying());
+}
 
-    // process messaging
+TEST(base,critical_hit)
+{
+    MessageManager& messageManager = global::get().messageManager();
+
+    Ship* ship1 = createNewShip();
+    Ship* ship2 = createNewShip();
+
+    messageManager.add(getMessage(HitDescriptor(ship1->id(), ship2->id(), ship2->criticalDamage()), 0.4));
+
     messageManager.runLoop();
 
     EXPECT_TRUE(ship2->isDying());
@@ -148,27 +146,21 @@ TEST(base,hit)
 
 TEST(base,bomb)
 {
-    // shortcuts
     MessageManager& messageManager = global::get().messageManager();
 
-    // create entities
     StarSystem* starsystem = createNewStarSystem();
     Ship* ship = createNewShip();
     Bomb* bomb = createNewBomb();
     Container* container = createNewContainer(bomb->id());
-    assert(container->itemSlot());
-    assert(container->itemSlot()->item());
     EXPECT_TRUE(container->itemSlot()->item()->id() == bomb->id());
 
-    // simulate bomb explosion
     messageManager.add(getMessage(HitDescriptor(ship->id(), container->id(), container->armor())));
     messageManager.add(getMessage(ExplosionDescriptor(starsystem->id(), glm::vec3(0), 100, 200)));
 
-    // process messaging
     messageManager.runLoop();
 
-    EXPECT_TRUE(container->isDying());
-    //EXPECT_TRUE(ship->isDying());
+//    EXPECT_TRUE(container->isDying());
+//    EXPECT_TRUE(ship->isDying());
 }
 
 

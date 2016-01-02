@@ -135,7 +135,7 @@ class Vehicle : public SpaceObject
         virtual void UpdateInSpace(int, bool) = 0;
         
         virtual void remeberAgressor(Vehicle*);
-        virtual void hit(int);
+        void hit(int) override;
         
         virtual void postDeathUniqueEvent(bool); 
         
