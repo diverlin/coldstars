@@ -123,7 +123,7 @@ Base* EntityManager::get(const id_type& id) const
     LOG("    EntityManager::entity requested_id=" + std::to_string(id));    
     std::map<id_type, Base*>::const_iterator slice = m_entities_map.find(id);
     assert(slice->second);
-    //LOG("    EntityManager::GetEntityById type_id=" + getTypeStr(slice->second->typeId()));    
+    //LOG("    EntityManager::GetEntityById type_id=" + getTypeStr(slice->second->typeId()));
     return slice->second;
 }
 

@@ -13,6 +13,7 @@
 #include <descriptors/ContainerDescriptor.hpp>
 #include <descriptors/HitDescriptor.hpp>
 #include <descriptors/ExplosionDescriptor.hpp>
+#include <descriptors/AddToStarsystemDescriptor.hpp>
 
 #include <spaceobjects/IncludeSpaceObjects.hpp>
 #include <world/starsystem.hpp>
@@ -76,43 +77,39 @@ void MessageManager::process(const Message& message)
             global::get().containerBuilder().create(message.data);
             break;
         }
-        /** */
-//        case TELEGRAM::CREATE_CONTAINER: {
-//            auto container = global::get().containerBuilder().create(/*ContainerDescriptor()*/);
-//            global::get().entityManager().reg(container);
-//            break;
-//        }
-//        /** STARSYSTEM ADD */
-//        case TELEGRAM::STARSYSTEM_ADD_SHIP: {
-//            Ship* ob = static_cast<Ship*>(sender);
-//            StarSystem* ss = static_cast<StarSystem*>(receiver);
-//            assert(ob);
-//            assert(ss);
-//            ss->add(ob);
-//            break;
-//        }
-//        case TELEGRAM::STARSYSTEM_ADD_CONTAINER: {
-//            Container* ob = static_cast<Container*>(sender);
-//            StarSystem* ss = static_cast<StarSystem*>(receiver);
-//            assert(ob);
-//            assert(ss);
-//            ss->add(ob);
-//            break;
-//        }
+        /** STARSYSTEM ADD */
+        case TELEGRAM::STARSYSTEM_ADD_SHIP: {
+            AddToStarsystemDescriptor descriptor(message.data);
+            StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.owner));
+            Ship* ship = static_cast<Ship*>(global::get().entityManager().get(descriptor.object));
+            assert(starsystem);
+            assert(ship);
+            starsystem->add(ship, descriptor.position/*, descriptor.angle*/);
+            break;
+        }
+        case TELEGRAM::STARSYSTEM_ADD_CONTAINER: {
+            AddToStarsystemDescriptor descriptor(message.data);
+            StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.owner));
+            Container* container = static_cast<Container*>(global::get().entityManager().get(descriptor.object));
+            assert(starsystem);
+            assert(container);
+            starsystem->add(container, descriptor.position);
+            break;
+        }
         /** OTHER */
         case TELEGRAM::HIT: {
-            HitDescriptor hitDescriptor(message.data);
-            SpaceObject* ob = static_cast<SpaceObject*>(global::get().entityManager().get(hitDescriptor.victim));
+            HitDescriptor descriptor(message.data);
+            SpaceObject* ob = static_cast<SpaceObject*>(global::get().entityManager().get(descriptor.victim));
             assert(ob);
-            ob->hit(hitDescriptor.damage);
+            ob->hit(descriptor.damage);
             break;
         }
         case TELEGRAM::EXPLOSION: {
-            ExplosionDescriptor explosionDescriptor(message.data);
-            StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(explosionDescriptor.starsystem_id));
+            ExplosionDescriptor descriptor(message.data);
+            StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.starsystem_id));
             assert(starsystem);
-            Explosion* explosion = new Explosion(explosionDescriptor.damage, explosionDescriptor.radius);
-            starsystem->add(explosion, explosionDescriptor.center);
+            Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
+            starsystem->add(explosion, descriptor.center);
             break;
         }
         default:
@@ -122,27 +119,5 @@ void MessageManager::process(const Message& message)
     }
 }
 
-Message getMessage(const StarSystemDescriptor& descriptor, double delay) {
-    return Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data(), delay);
-}
 
-Message getMessage(const VehicleDescriptor& descriptor, double delay) {
-    return Message(TELEGRAM::CREATE_SHIP, descriptor.data(), delay);
-}
-
-Message getMessage(const BombDescriptor& descriptor, double delay) {
-    return Message(TELEGRAM::CREATE_BOMB, descriptor.data(), delay);
-}
-
-Message getMessage(const ContainerDescriptor& descriptor, double delay) {
-    return Message(TELEGRAM::CREATE_CONTAINER, descriptor.data(), delay);
-}
-
-Message getMessage(const HitDescriptor& descriptor, double delay) {
-    return Message(TELEGRAM::HIT, descriptor.data(), delay);
-}
-
-Message getMessage(const ExplosionDescriptor& descriptor, double delay) {
-    return Message(TELEGRAM::EXPLOSION, descriptor.data(), delay);
-}
 

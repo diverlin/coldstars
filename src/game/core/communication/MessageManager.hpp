@@ -13,6 +13,7 @@ class BombDescriptor;
 class ContainerDescriptor;
 class HitDescriptor;
 class ExplosionDescriptor;
+class AddToStarsystemDescriptor;
 
 class MessageManager
 {
@@ -31,9 +32,3 @@ class MessageManager
         void process(const Message& message);
 };
 
-Message getMessage(const StarSystemDescriptor& descriptor, double delay = -1.0);
-Message getMessage(const VehicleDescriptor& descriptor, double delay = -1.0);
-Message getMessage(const BombDescriptor& descriptor, double delay = -1.0);
-Message getMessage(const ContainerDescriptor& descriptor, double delay = -1.0);
-Message getMessage(const HitDescriptor& descriptor, double delay = -1.0);
-Message getMessage(const ExplosionDescriptor& descriptor, double delay = -1.0);
