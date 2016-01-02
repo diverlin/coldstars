@@ -8,7 +8,7 @@
 class Message
 {
     public:
-        Message(TELEGRAM, const std::string& data = "", double delay = 0.0);
+        Message(TELEGRAM, const std::string& data = "", double delay = -1.0);
 
         bool operator<(const Message&) const;        
 
@@ -16,7 +16,7 @@ class Message
         TELEGRAM type_id = TELEGRAM::NONE;
         std::string data = "";
 
-        double delay = 0.0;
+        double delay = -1.0;
         double dispatch_time = 0.0;
 };
 
