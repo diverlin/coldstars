@@ -19,6 +19,6 @@
 
 #pragma once
 
-#include <descriptors/items/BombDescriptor.hpp>
+#include <descriptors/Descriptor.hpp>
 
-BombDescriptor generateBombDescriptor();
+Descriptor generateBombDescriptor();

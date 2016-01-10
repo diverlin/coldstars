@@ -9,7 +9,7 @@
 
 #include <descriptors/StarSystemDescriptor.hpp>
 #include <descriptors/VehicleDescriptor.hpp>
-#include <descriptors/items/BombDescriptor.hpp>
+#include <descriptors/Descriptor.hpp>
 #include <descriptors/ContainerDescriptor.hpp>
 #include <descriptors/HitDescriptor.hpp>
 #include <descriptors/ExplosionDescriptor.hpp>

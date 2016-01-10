@@ -68,7 +68,7 @@ Bomb* createNewBomb()
     auto descriptor = generateBombDescriptor();
     global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
 
-    Bomb* bomb = static_cast<Bomb*>(global::get().entityManager().get(descriptor.id));
+    Bomb* bomb = static_cast<Bomb*>(global::get().entityManager().get(descriptor.get<id_type>(KEY_ID)));
     assert(bomb);
     return bomb;
 }
@@ -120,20 +120,17 @@ TEST(base,serialization)
 
 TEST(descriptor,serialization)
 {
-    const std::string key1= "key1";
-    const std::string key2= "key2";
-    const std::string val1= "val1";
-    const std::string val2= "val2";
-
-    std::map<std::string, std::string> map = {{key1, val1}, {key2, val2}};
-    Descriptor descriptor(map);
-    std::string data = descriptor.data();
-    Descriptor descriptor2(data);
+    Descriptor descriptor({{KEY_ID, "11"}, {KEY_DAMAGE, "22"}, {KEY_RADIUS, "33"}});
+    Descriptor descriptor2(descriptor.data());
     EXPECT_TRUE(descriptor == descriptor2);
-    EXPECT_TRUE(descriptor2.get(key1) == val1);
-    EXPECT_TRUE(descriptor2.get(key2) == val2);
-    EXPECT_FALSE(descriptor2.get(key2) == val1);
-    ASSERT_THROW(descriptor2.get("unknown"), std::runtime_error);
+}
+
+TEST(descriptor,accessors)
+{
+    Descriptor descriptor({{KEY_ID, "22"}, {KEY_DAMAGE, "33"}});
+    EXPECT_TRUE(descriptor.get<id_type>(KEY_ID) == 22);
+    EXPECT_TRUE(descriptor.get<int>(KEY_DAMAGE) == 33);
+    ASSERT_THROW(descriptor.get<std::string>("unknown"), std::runtime_error);
 }
 
 TEST(base,hit)

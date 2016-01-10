@@ -28,7 +28,7 @@
 //#include <jeti/TextureOb.hpp>
 
 //#include <boost/property_tree/info_parser.hpp>
-#include <descriptors/items/BombDescriptor.hpp>
+#include <descriptors/Descriptor.hpp>
 
 BombBuilder::BombBuilder()
 {}
@@ -36,23 +36,23 @@ BombBuilder::BombBuilder()
 BombBuilder::~BombBuilder()
 {}
 
-Bomb* BombBuilder::create(const BombDescriptor& descriptor) const
+Bomb* BombBuilder::create(const Descriptor& descriptor) const
 {
-    Bomb* bomb = new Bomb(descriptor.id);
+    Bomb* bomb = new Bomb(descriptor.get<id_type>(KEY_ID));
     assert(bomb);
     global::get().entityManager().reg(bomb);
     createInternals(bomb, descriptor);
     return bomb;
 } 
 
-void BombBuilder::createInternals(Bomb* bomb, const BombDescriptor& descriptor) const
+void BombBuilder::createInternals(Bomb* bomb, const Descriptor& descriptor) const
 {     
     //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID);
 
     //alpitodorender bomb->SetRenderData(mesh, texOb, texOb->size());
-    bomb->setDamage(descriptor.damage);
-    bomb->setRadius(descriptor.radius);
+    bomb->setDamage(descriptor.get<int>(KEY_DAMAGE));
+    bomb->setRadius(descriptor.get<int>(KEY_RADIUS));
     bomb->setParentSubTypeId(TYPE::ENTITY::CARGO_SLOT_ID);
 }
 
