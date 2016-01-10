@@ -23,12 +23,17 @@
 #include <common/Global.hpp>
 #include <common/IdGenerator.hpp>
 
-BombDescriptor generateBombDescriptor()
+Descriptor generateBombDescriptor()
 {
-    BombDescriptor descriptor;
-    descriptor.id = global::get().idGenerator().nextId();
-    descriptor.damage = meti::getRandInt(10, 100);
-    descriptor.radius = meti::getRandInt(100, 300);
+    id_type id = global::get().idGenerator().nextId();
+    int damage = meti::getRandInt(10, 100);
+    int radius = meti::getRandInt(100, 300);
+    std::map<std::string, std::string> map = {
+        {KEY_ID, std::to_string(id)},
+        {KEY_DAMAGE, std::to_string(damage)},
+        {KEY_RADIUS, std::to_string(radius)}
+    };
 
+    Descriptor descriptor(map);
     return descriptor;
 }
