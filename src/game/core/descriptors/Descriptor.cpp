@@ -16,33 +16,49 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#pragma once
+#include "Descriptor.hpp"
 
-#include <types/IdType.hpp>
+#include <sstream>
 
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-
-class BombDescriptor
+Descriptor::Descriptor(const std::map<std::string, std::string>& map)
+    : map(map)
 {
-    public:
-        id_type id = 0;
-        int damage = 0;
-        int radius = 0;
-                                                        
-        BombDescriptor() {}
-        BombDescriptor(const std::string& data);
-        ~BombDescriptor() {}
 
-        std::string data() const;
+}
 
-    private:
-        friend class boost::serialization::access;
-        template<class Archive>
-        void serialize(Archive & ar, const unsigned int version)
-        {
-            ar & id;
-            ar & damage;
-            ar & radius;
-        }
-}; 
+Descriptor::Descriptor(const std::string& data)
+{
+    std::stringstream ss;
+    ss << data;
+    boost::archive::text_iarchive ia(ss);
+    ia >> *this;
+}
+
+std::string
+Descriptor::data() const
+{
+    std::stringstream ss;
+    boost::archive::text_oarchive oa(ss);
+    oa << *this;
+    return ss.str();
+}
+
+bool
+Descriptor::operator==(const Descriptor& rhs) const
+{
+    return data() == rhs.data();
+}
+
+const std::string&
+Descriptor::get_raw(const std::string& key) const
+{
+    auto f = map.find(key);
+    if (f != map.end()) {
+        return f->second;
+    }
+    throw std::runtime_error("CODE ERROR: " + key + " is not found in descriptor");
+}
+    
+
+
+
