@@ -32,6 +32,7 @@
 #include <builder/items/other/BombBuilder.hpp>
 #include <builder/spaceobjects/ContainerBuilder.hpp>
 
+#include <descriptors/Descriptor.hpp>
 #include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/StarSystemDescriptor.hpp>
@@ -115,6 +116,24 @@ TEST(base,serialization)
     EXPECT_TRUE(explosion1.center.x == explosion2.center.x);
     EXPECT_TRUE(explosion1.center.y == explosion2.center.y);
     EXPECT_TRUE(explosion1.center.z == explosion2.center.z);
+}
+
+TEST(descriptor,serialization)
+{
+    const std::string key1= "key1";
+    const std::string key2= "key2";
+    const std::string val1= "val1";
+    const std::string val2= "val2";
+
+    std::map<std::string, std::string> map = {{key1, val1}, {key2, val2}};
+    Descriptor descriptor(map);
+    std::string data = descriptor.data();
+    Descriptor descriptor2(data);
+    EXPECT_TRUE(descriptor == descriptor2);
+    EXPECT_TRUE(descriptor2.get(key1) == val1);
+    EXPECT_TRUE(descriptor2.get(key2) == val2);
+    EXPECT_FALSE(descriptor2.get(key2) == val1);
+    ASSERT_THROW(descriptor2.get("unknown"), std::runtime_error);
 }
 
 TEST(base,hit)
