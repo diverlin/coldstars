@@ -38,7 +38,7 @@ BombBuilder::~BombBuilder()
 
 Bomb* BombBuilder::create(const Descriptor& descriptor) const
 {
-    Bomb* bomb = new Bomb(descriptor.get<id_type>(KEY_ID));
+    Bomb* bomb = new Bomb(descriptor.id());
     assert(bomb);
     global::get().entityManager().reg(bomb);
     createInternals(bomb, descriptor);
@@ -51,8 +51,8 @@ void BombBuilder::createInternals(Bomb* bomb, const Descriptor& descriptor) cons
     //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID);
 
     //alpitodorender bomb->SetRenderData(mesh, texOb, texOb->size());
-    bomb->setDamage(descriptor.get<int>(KEY_DAMAGE));
-    bomb->setRadius(descriptor.get<int>(KEY_RADIUS));
+    bomb->setDamage(descriptor.damage());
+    bomb->setRadius(descriptor.radius());
     bomb->setParentSubTypeId(TYPE::ENTITY::CARGO_SLOT_ID);
 }
 

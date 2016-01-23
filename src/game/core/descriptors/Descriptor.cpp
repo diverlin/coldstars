@@ -20,6 +20,10 @@
 
 #include <sstream>
 
+std::string Descriptor::KEY_ID = "id";
+std::string Descriptor::KEY_DAMAGE = "damage";
+std::string Descriptor::KEY_RADIUS = "radius";
+
 Descriptor::Descriptor(const std::map<std::string, std::string>& map)
     : map(map)
 {
@@ -41,6 +45,24 @@ Descriptor::data() const
     boost::archive::text_oarchive oa(ss);
     oa << *this;
     return ss.str();
+}
+
+id_type
+Descriptor::id() const
+{
+    return get<id_type>(KEY_ID);
+}
+
+int
+Descriptor::damage() const
+{
+    return get<int>(KEY_DAMAGE);
+}
+
+int
+Descriptor::radius() const
+{
+    return get<int>(KEY_RADIUS);
 }
 
 bool
