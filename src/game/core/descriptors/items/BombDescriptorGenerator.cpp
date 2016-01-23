@@ -29,9 +29,9 @@ Descriptor generateBombDescriptor()
     int damage = meti::getRandInt(10, 100);
     int radius = meti::getRandInt(100, 300);
     std::map<std::string, std::string> map = {
-        {KEY_ID, std::to_string(id)},
-        {KEY_DAMAGE, std::to_string(damage)},
-        {KEY_RADIUS, std::to_string(radius)}
+        {Descriptor::KEY_ID, std::to_string(id)},
+        {Descriptor::KEY_DAMAGE, std::to_string(damage)},
+        {Descriptor::KEY_RADIUS, std::to_string(radius)}
     };
 
     Descriptor descriptor(map);

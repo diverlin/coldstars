@@ -26,13 +26,13 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
-const std::string KEY_ID = "id";
-const std::string KEY_DAMAGE = "damage";
-const std::string KEY_RADIUS = "radius";
-
 class Descriptor
 {
 public:
+    static std::string KEY_ID;
+    static std::string KEY_DAMAGE;
+    static std::string KEY_RADIUS;
+
     std::map<std::string, std::string> map;
 
     Descriptor(const std::map<std::string, std::string>&);
@@ -42,6 +42,12 @@ public:
     std::string data() const;
 
     bool operator==(const Descriptor& rhs) const;
+
+    id_type id() const;
+    int damage() const;
+    int radius() const;
+
+private:
     const std::string& get_raw(const std::string& key) const;
     template<class var_type>
     var_type get(const std::string& key) const
