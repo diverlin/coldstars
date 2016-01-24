@@ -21,4 +21,5 @@
 
 #include <descriptors/Descriptor.hpp>
 
+Descriptor generateHitDescriptor(const id_type&, const id_type&, int);
 Descriptor generateBombDescriptor();
