@@ -36,13 +36,12 @@
 #include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/StarSystemDescriptor.hpp>
-#include <descriptors/HitDescriptor.hpp>
 #include <descriptors/ExplosionDescriptor.hpp>
 #include <descriptors/AddToStarsystemDescriptor.hpp>
 
 #include <descriptors/StarSystemDescriptorGenerator.hpp>
 #include <descriptors/VehicleDescriptorGenerator.hpp>
-#include <descriptors/items/BombDescriptorGenerator.hpp>
+#include <descriptors/DescriptorGenerator.hpp>
 #include <descriptors/ContainerDescriptorGenerator.hpp>
 
 #include <communication/MessageManager.hpp>
@@ -100,11 +99,11 @@ StarSystem* createNewStarSystem()
 
 TEST(base,serialization)
 {
-    HitDescriptor hit1(1, 2, 33);
-    HitDescriptor hit2(hit1.data());
-    EXPECT_TRUE(hit2.agressor == hit1.agressor);
-    EXPECT_TRUE(hit2.victim == hit1.victim);
-    EXPECT_TRUE(hit2.damage == hit1.damage);
+    Descriptor hit1 = generateHitDescriptor(1, 2, 33);
+    Descriptor hit2(hit1.data());
+    EXPECT_TRUE(hit2.owner() == hit1.owner());
+    EXPECT_TRUE(hit2.target() == hit1.target());
+    EXPECT_TRUE(hit2.damage() == hit1.damage());
 
     VehicleDescriptor vehicle1;
     vehicle1.race_id = TYPE::RACE::R7_ID;
@@ -140,9 +139,9 @@ TEST(base,hit)
     Ship* ship1 = createNewShip();
     Ship* ship2 = createNewShip();
 
-    messageManager.add(Message(TELEGRAM::HIT, HitDescriptor(ship1->id(), ship2->id(), 3).data(), 0.3));
-    messageManager.add(Message(TELEGRAM::HIT, HitDescriptor(ship1->id(), ship2->id(), 2).data(), 0.2));
-    messageManager.add(Message(TELEGRAM::HIT, HitDescriptor(ship1->id(), ship2->id(), 1).data(), 0.1));
+    messageManager.add(Message(TELEGRAM::HIT, generateHitDescriptor(ship1->id(), ship2->id(), 3).data(), 0.3));
+    messageManager.add(Message(TELEGRAM::HIT, generateHitDescriptor(ship1->id(), ship2->id(), 2).data(), 0.2));
+    messageManager.add(Message(TELEGRAM::HIT, generateHitDescriptor(ship1->id(), ship2->id(), 1).data(), 0.1));
 
     messageManager.runLoop();
 
@@ -156,7 +155,7 @@ TEST(base,critical_hit)
     Ship* ship1 = createNewShip();
     Ship* ship2 = createNewShip();
 
-    messageManager.add(Message(TELEGRAM::HIT, HitDescriptor(ship1->id(), ship2->id(), ship2->criticalDamage()).data(), 0.4));
+    messageManager.add(Message(TELEGRAM::HIT, generateHitDescriptor(ship1->id(), ship2->id(), ship2->criticalDamage()).data(), 0.4));
 
     messageManager.runLoop();
 
@@ -177,7 +176,7 @@ TEST(base,bomb)
 
     messageManager.add(Message(TELEGRAM::STARSYSTEM_ADD_SHIP, AddToStarsystemDescriptor(starsystem->id(), ship->id(), ship_pos, ship_angle).data()));
     messageManager.add(Message(TELEGRAM::STARSYSTEM_ADD_CONTAINER, AddToStarsystemDescriptor(starsystem->id(), container->id(), ship_pos, ship_angle).data()));
-    messageManager.add(Message(TELEGRAM::HIT, HitDescriptor(ship->id(), container->id(), container->armor()).data()));
+    messageManager.add(Message(TELEGRAM::HIT, generateHitDescriptor(ship->id(), container->id(), container->armor()).data()));
 
     messageManager.runLoop();
 

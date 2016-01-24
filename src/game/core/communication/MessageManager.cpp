@@ -10,8 +10,8 @@
 #include <descriptors/StarSystemDescriptor.hpp>
 #include <descriptors/VehicleDescriptor.hpp>
 #include <descriptors/Descriptor.hpp>
+#include <descriptors/DescriptorGenerator.hpp>
 #include <descriptors/ContainerDescriptor.hpp>
-#include <descriptors/HitDescriptor.hpp>
 #include <descriptors/ExplosionDescriptor.hpp>
 #include <descriptors/AddToStarsystemDescriptor.hpp>
 
@@ -98,10 +98,10 @@ void MessageManager::process(const Message& message)
         }
         /** OTHER */
         case TELEGRAM::HIT: {
-            HitDescriptor descriptor(message.data);
-            SpaceObject* ob = static_cast<SpaceObject*>(global::get().entityManager().get(descriptor.victim));
+            Descriptor descriptor(message.data);
+            SpaceObject* ob = static_cast<SpaceObject*>(global::get().entityManager().get(descriptor.target()));
             assert(ob);
-            ob->hit(descriptor.damage);
+            ob->hit(descriptor.damage());
             break;
         }
         case TELEGRAM::EXPLOSION: {
