@@ -59,7 +59,7 @@ class EnergizerEquipment : public BaseEquipment
         int restoration_add;
         int restoration;
         
-        void virtual AddUniqueInfo();
+        void virtual addUniqueInfo();
         std::string GetEnergyStr();
         std::string GetRestorationStr();
         

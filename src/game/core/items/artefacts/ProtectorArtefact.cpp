@@ -35,7 +35,7 @@ ProtectorArtefact::~ProtectorArtefact ()
 {}
 
 /* virtual */
-void ProtectorArtefact::AddUniqueInfo()
+void ProtectorArtefact::addUniqueInfo()
 {
 //    info.addTitleStr("protector artefact");
 //    info.addNameStr("protection:");      info.addValueStr( std::to_string(protection) );

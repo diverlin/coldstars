@@ -7,7 +7,6 @@
 
 #include <types/EntityTypes.hpp> // test
 
-#include <descriptors/StarSystemDescriptor.hpp>
 #include <descriptors/VehicleDescriptor.hpp>
 #include <descriptors/Descriptor.hpp>
 #include <descriptors/DescriptorGenerator.hpp>

@@ -45,7 +45,7 @@ class DroidEquipment : public BaseEquipment
               int repair_add;
               int repair;
               
-             void virtual AddUniqueInfo();
+             void virtual addUniqueInfo();
                std::string GetRepairStr();
                 
                 void SaveData(boost::property_tree::ptree&, const std::string&) const;

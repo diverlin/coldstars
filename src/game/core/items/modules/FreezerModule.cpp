@@ -35,7 +35,7 @@ FreezerModule::~FreezerModule()
 {}
 
 /* virtual */
-void FreezerModule::AddUniqueInfo()
+void FreezerModule::addUniqueInfo()
 {
 //    info.addTitleStr("freezer module");
 //    info.addNameStr("freeze_add:");     info.addValueStr( std::to_string(freeze_add) );

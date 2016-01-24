@@ -35,7 +35,7 @@ RadarModule::~RadarModule()
 {}
 
 /* virtual */
-void RadarModule::AddUniqueInfo()
+void RadarModule::addUniqueInfo()
 {
 //    info.addTitleStr("radar module");
 //    info.addNameStr("radius_add:");   info.addValueStr(std::to_string(radius_add));

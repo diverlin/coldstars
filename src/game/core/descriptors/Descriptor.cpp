@@ -21,10 +21,17 @@
 #include <sstream>
 
 std::string Descriptor::KEY_ID = "id";
+std::string Descriptor::KEY_RACE = "race";
 std::string Descriptor::KEY_OWNER = "owner";
 std::string Descriptor::KEY_TARGET = "target";
 std::string Descriptor::KEY_DAMAGE = "damage";
 std::string Descriptor::KEY_RADIUS = "radius";
+std::string Descriptor::KEY_TECH = "tech";
+std::string Descriptor::KEY_MODULES_NUM = "modules";
+std::string Descriptor::KEY_MASS = "mass";
+std::string Descriptor::KEY_CONDITION = "condition";
+std::string Descriptor::KEY_DETEORATION = "deteoration";
+std::string Descriptor::KEY_FUEL = "fuel";
 
 Descriptor::Descriptor(const std::map<std::string, std::string>& map)
     : map(map)
@@ -55,6 +62,12 @@ Descriptor::id() const
     return get<id_type>(KEY_ID);
 }
 
+int
+Descriptor::race() const
+{
+    return get<int>(KEY_RACE);
+}
+
 id_type
 Descriptor::owner() const
 {
@@ -77,6 +90,42 @@ int
 Descriptor::radius() const
 {
     return get<int>(KEY_RADIUS);
+}
+
+int
+Descriptor::tech() const
+{
+    return get<int>(KEY_TECH);
+}
+
+int
+Descriptor::modules() const
+{
+    return get<int>(KEY_MODULES_NUM);
+}
+
+int
+Descriptor::mass() const
+{
+    return get<int>(KEY_MASS);
+}
+
+int
+Descriptor::condition() const
+{
+    return get<int>(KEY_CONDITION);
+}
+
+int
+Descriptor::deteoration() const
+{
+    return get<int>(KEY_DETEORATION);
+}
+
+int
+Descriptor::fuel() const
+{
+    return get<int>(KEY_FUEL);
 }
 
 bool

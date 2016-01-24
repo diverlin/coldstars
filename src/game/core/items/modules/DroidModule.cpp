@@ -35,7 +35,7 @@ DroidModule::~DroidModule()
 {}
     
 /* virtual */    
-void DroidModule::AddUniqueInfo()
+void DroidModule::addUniqueInfo()
 {
 //    info.addTitleStr("droid module");
 //    info.addNameStr("repair_add:");   info.addValueStr( std::to_string(repair_add) );

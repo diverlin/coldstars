@@ -61,7 +61,7 @@ void FreezerEquipment::CountPrice()
      m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void FreezerEquipment::AddUniqueInfo()
+void FreezerEquipment::addUniqueInfo()
 {
 //    info.addTitleStr("FREEZER");
 //    info.addNameStr("freeze:");     info.addValueStr(GetFreezeStr());

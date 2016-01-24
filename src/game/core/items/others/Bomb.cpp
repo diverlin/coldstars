@@ -42,7 +42,7 @@ void Bomb::AddCommonInfo()
 }
 
 /* virtual */
-void Bomb::AddUniqueInfo()
+void Bomb::addUniqueInfo()
 {
 //    info.addTitleStr("BOMB");
 

@@ -35,7 +35,7 @@ ScanerModule::~ScanerModule()
 {}
 
 /* virtual */        
-void ScanerModule::AddUniqueInfo()
+void ScanerModule::addUniqueInfo()
 {
 //    info.addTitleStr("scaner module");
 //    info.addNameStr("scan_add:");      info.addValueStr( std::to_string(scan_add) );

@@ -35,7 +35,7 @@ ProtectorModule::~ProtectorModule ()
 {}
         
 /* virtual */        
-void ProtectorModule::AddUniqueInfo()
+void ProtectorModule::addUniqueInfo()
 {
 //    info.addTitleStr("protector module");
 //    info.addNameStr("protection_add:");  info.addValueStr( std::to_string(protection_add) );

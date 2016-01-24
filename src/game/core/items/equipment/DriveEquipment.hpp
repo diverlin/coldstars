@@ -51,7 +51,7 @@ class DriveEquipment : public BaseEquipment
         int hyper_add;
         int hyper;
 
-        void virtual AddUniqueInfo();
+        void virtual addUniqueInfo();
         std::string GetSpeedStr();
         std::string GetHyperStr();
 

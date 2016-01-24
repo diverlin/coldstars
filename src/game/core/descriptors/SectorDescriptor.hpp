@@ -19,14 +19,13 @@
 #pragma once
 
 #include <vector>
-#include <descriptors/StarSystemDescriptor.hpp>
 
 struct SectorDescriptor
 {
     public:
         int starsystem_num = 1;
         bool allow_invasion = false;
-        std::vector<StarSystemDescriptor> starsystem_descriptors;
+        //std::vector<StarSystemDescriptor> starsystem_descriptors;
         
         SectorDescriptor() {}
         ~SectorDescriptor() {}

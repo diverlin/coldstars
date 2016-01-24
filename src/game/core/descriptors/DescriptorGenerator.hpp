@@ -22,4 +22,8 @@
 #include <descriptors/Descriptor.hpp>
 
 Descriptor generateHitDescriptor(const id_type&, const id_type&, int);
-Descriptor generateBombDescriptor();
+Descriptor generateBombDescriptor(int damage = -1, int radius = -1);
+Descriptor generateStarSystemDescriptor(int race = -1);
+
+// items
+Descriptor generateBakDescriptor(int race = -1, int tech_level = -1);

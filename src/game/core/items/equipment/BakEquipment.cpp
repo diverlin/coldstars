@@ -18,14 +18,10 @@
 
 #include "BakEquipment.hpp"
 #include "../../common/constants.hpp"
-//#include <ceti/StringUtils.hpp>
 #include <ceti/Logger.hpp>
 #include "../../items//modules/BakModule.hpp"
 
 BakEquipment::BakEquipment(const id_type& id)
-:
-fuel_max_orig(0),  
-fuel(0)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
@@ -36,31 +32,27 @@ fuel(0)
 BakEquipment::~BakEquipment() 
 {}
         
-void BakEquipment::IncreaseFuel(int fuel)        
+void BakEquipment::increaseFuel(int fuel)
 {
-    this->fuel += fuel; 
-    if (this->fuel > fuel_max)
-    { 
-        this->fuel = fuel_max; // not sure if it's needed
+    m_fuel += fuel;
+    if (m_fuel > m_fuelMax) {
+        m_fuel = m_fuelMax;
     }                           
 }    
                                     
 /* virtual */            
 void BakEquipment::updateProperties()
 {
-    fuel_max_add = 0;
-    
-    for (unsigned int i = 0; i<modules_vec.size(); i++)
-    {
-        fuel_max_add += ((BakModule*)modules_vec[i])->GetFuelMaxAdd();
-    }
-    
-    fuel_max = fuel_max_orig + fuel_max_add;        
+    m_fuelMaxAdd = 0;
+    for (unsigned int i=0; i<modules_vec.size(); i++) {
+        m_fuelMaxAdd += ((BakModule*)modules_vec[i])->GetFuelMaxAdd();
+    }    
+    m_fuelMax = m_fuelMaxOrig + m_fuelMaxAdd;
 }
 
-void BakEquipment::CountPrice()
+void BakEquipment::countPrice()
 {
-    float fuel_rate          = (float)fuel_max_orig / EQUIPMENT::BAK::FUEL_MIN;
+    float fuel_rate          = (float)m_fuelMaxOrig / EQUIPMENT::BAK::FUEL_MIN;
     float modules_num_rate   = (float)m_data_item.modules_num_max / EQUIPMENT::BAK::MODULES_NUM_MAX;
     
     float effectiveness_rate = EQUIPMENT::BAK::FUEL_WEIGHT * fuel_rate + 
@@ -72,19 +64,19 @@ void BakEquipment::CountPrice()
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void BakEquipment::AddUniqueInfo()
+void BakEquipment::addUniqueInfo()
 {
 //    info.addTitleStr("BAK");
 //    info.addNameStr("fuel:");      info.addValueStr( GetFuelStr() );
 }
 
 
-std::string BakEquipment::GetFuelStr()
+std::string BakEquipment::getFuelStr()
 {
-     if (fuel_max_add == 0)
-        return std::to_string(fuel_max_orig) + "/" + std::to_string(fuel);
+     if (m_fuelMaxAdd == 0)
+        return std::to_string(m_fuelMaxOrig) + "/" + std::to_string(m_fuel);
      else
-        return std::to_string(fuel_max_orig) + "+" + std::to_string(fuel_max_add) + "/" + std::to_string(fuel);
+        return std::to_string(m_fuelMaxOrig) + "+" + std::to_string(m_fuelMaxAdd) + "/" + std::to_string(m_fuel);
 }
 
 /*virtual*/
@@ -120,16 +112,16 @@ void BakEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::
 {
     LOG(" BakEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"fuel_max_orig", fuel_max_orig);
-    save_ptree.put(root+"fuel", fuel);
+    save_ptree.put(root+"fuel_max_orig", m_fuelMaxOrig);
+    save_ptree.put(root+"fuel", m_fuel);
 }
                 
 void BakEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" BakEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
-    fuel_max_orig = load_ptree.get<int>("fuel_max_orig");
-    fuel = load_ptree.get<int>("fuel");
+    m_fuelMaxOrig = load_ptree.get<int>("fuel_max_orig");
+    m_fuel = load_ptree.get<int>("fuel");
 }                
 
 void BakEquipment::ResolveData()

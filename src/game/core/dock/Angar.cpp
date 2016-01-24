@@ -142,7 +142,7 @@ bool Angar::TankUpVehicle(Vehicle* vehicle) const
     else                                    { fuel = fuel_to_buy_max; }
 
     if (vehicle->GetOwnerNpc()->WithdrawCredits(fuel*price_fuel) == true) {
-        vehicle->GetComplexDrive().GetBakSlot()->bakEquipment()->IncreaseFuel(fuel);
+        vehicle->GetComplexDrive().GetBakSlot()->bakEquipment()->increaseFuel(fuel);
         return true;
     }
 

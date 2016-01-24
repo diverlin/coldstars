@@ -35,7 +35,7 @@ GravityArtefact::~GravityArtefact ()
 {}
 
 /* virtual */
-void GravityArtefact::AddUniqueInfo()
+void GravityArtefact::addUniqueInfo()
 {
 //    info.addTitleStr("gravity artefact");
 //    info.addNameStr("gravity:");      info.addValueStr( std::to_string(gravity) );

@@ -38,7 +38,7 @@ GrappleModule::~GrappleModule()
 {}
 
 /* virtual */
-void GrappleModule::AddUniqueInfo()
+void GrappleModule::addUniqueInfo()
 {
 //        info.addTitleStr("grapple module");
 //        if (strength_add != 0)

@@ -46,7 +46,7 @@ void GoodsPack::UpdateOwnerAbilities() { /* do nothing*/ }
                     
 
 /* virtual */
-void GoodsPack::AddUniqueInfo() 
+void GoodsPack::addUniqueInfo() 
 {
 //    info.addTitleStr("GOODS");
 //    switch(subTypeId())

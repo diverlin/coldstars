@@ -44,7 +44,7 @@ class Bomb : public BaseItem
         int m_radius = 0;
 
         virtual void AddCommonInfo();
-        virtual void AddUniqueInfo();
+        virtual void addUniqueInfo();
 
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);

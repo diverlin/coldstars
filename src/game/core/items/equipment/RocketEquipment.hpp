@@ -71,7 +71,7 @@ class RocketEquipment : public BaseEquipment
         
         BulletData data_bullet;
         
-        void virtual AddUniqueInfo();
+        void virtual addUniqueInfo();
         std::string GetAmmoStr();
         std::string GetDamageStr();
         std::string GetRadiusStr();

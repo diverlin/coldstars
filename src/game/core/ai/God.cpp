@@ -86,16 +86,16 @@ Galaxy* God::createWorld(const GalaxyDescriptor& galaxy_descriptor)
 
 void God::CreateLife(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descriptor) const
 {
-    for(unsigned int i=0; i<galaxy->m_sectors.size(); i++) {
-        for(unsigned int j=0; j<galaxy->m_sectors[i]->m_starsystems.size(); j++) {
-            const StarSystemDescriptor& starsystem_descriptor = galaxy_descriptor.sector_descriptors[i].starsystem_descriptors[j];
-            StarSystem* starsystem = galaxy->m_sectors[i]->m_starsystems[j];
-            for(unsigned int j=0; j<starsystem->m_planets.size(); j++) {
-                CreateLifeAtPlanet(starsystem->m_planets[j], starsystem_descriptor);
-            }
-            CreateSpaceStations(starsystem, starsystem_descriptor.spacestation_num);
-        }
-    }
+//    for(unsigned int i=0; i<galaxy->m_sectors.size(); i++) {
+//        for(unsigned int j=0; j<galaxy->m_sectors[i]->m_starsystems.size(); j++) {
+//            const StarSystemDescriptor& starsystem_descriptor = galaxy_descriptor.sector_descriptors[i].starsystem_descriptors[j];
+//            StarSystem* starsystem = galaxy->m_sectors[i]->m_starsystems[j];
+//            for(unsigned int j=0; j<starsystem->m_planets.size(); j++) {
+//                CreateLifeAtPlanet(starsystem->m_planets[j], starsystem_descriptor);
+//            }
+//            CreateSpaceStations(starsystem, starsystem_descriptor.spacestation_num);
+//        }
+//    }
 }
 
 void God::CreateInvasion(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descriptor) const
@@ -145,70 +145,70 @@ void God::update(Galaxy* galaxy, const GameDate& date)
      
 void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescriptor& starsystem_descriptor) const
 {            
-    unsigned long int population = 0;
-    meti::getRandBool() ? population = meti::getRandInt(POPULATION_MIN, POPULATION_MAX) : population = 0;
-    planet->SetPopulation(population);
+//    unsigned long int population = 0;
+//    meti::getRandBool() ? population = meti::getRandInt(POPULATION_MIN, POPULATION_MAX) : population = 0;
+//    planet->SetPopulation(population);
     
-    Land* land = nullptr;
-    if (population > 0) { land = global::get().kosmoportBuilder().create(); }
-    else                { land = global::get().natureLandBuilder().create(); }
+//    Land* land = nullptr;
+//    if (population > 0) { land = global::get().kosmoportBuilder().create(); }
+//    else                { land = global::get().natureLandBuilder().create(); }
         
-    planet->BindLand(land);
+//    planet->BindLand(land);
 
-    if (population > 0) 
-    {
-        if (starsystem_descriptor.allow_satellites == true)
-        {
-            int sattelitewarriors_num = 1; //getRandInt(SATELLITEWARRIORS_PER_PLANET_MIN, SATELLITEWARRIORS_PER_PLANET_MAX);
-            for (int j=0; j<sattelitewarriors_num; j++)
-            {      
-                Satellite* satellite = global::get().satelliteBuilder().create();
-                global::get().satelliteBuilder().equip(satellite); // improove
+//    if (population > 0)
+//    {
+//        if (starsystem_descriptor.allow_satellites == true)
+//        {
+//            int sattelitewarriors_num = 1; //getRandInt(SATELLITEWARRIORS_PER_PLANET_MIN, SATELLITEWARRIORS_PER_PLANET_MAX);
+//            for (int j=0; j<sattelitewarriors_num; j++)
+//            {
+//                Satellite* satellite = global::get().satelliteBuilder().create();
+//                global::get().satelliteBuilder().equip(satellite); // improove
             
-                {
-                    TYPE::RACE npc_race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-                    TYPE::ENTITY npc_subtype_id    = TYPE::ENTITY::WARRIOR_ID;
-                    TYPE::ENTITY npc_subsubtype_id = TYPE::ENTITY::WARRIOR_ID;
+//                {
+//                    TYPE::RACE npc_race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+//                    TYPE::ENTITY npc_subtype_id    = TYPE::ENTITY::WARRIOR_ID;
+//                    TYPE::ENTITY npc_subsubtype_id = TYPE::ENTITY::WARRIOR_ID;
             
-                    Npc* npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
-                    satellite->BindOwnerNpc(npc);
-                }
+//                    Npc* npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+//                    satellite->BindOwnerNpc(npc);
+//                }
             
-                glm::vec3 orbit_center(0, 0, DEFAULT_ENTITY_ZPOS);
-                glm::vec3 angle(0,0,0);
-                planet->starsystem()->add(satellite, orbit_center, angle, planet);
-            }
-        }
+//                glm::vec3 orbit_center(0, 0, DEFAULT_ENTITY_ZPOS);
+//                glm::vec3 angle(0,0,0);
+//                planet->starsystem()->add(satellite, orbit_center, angle, planet);
+//            }
+//        }
         
-        if (starsystem_descriptor.allow_ships == true)
-        {
-            std::vector<TYPE::ENTITY> allowed_subtypes;
-            if (starsystem_descriptor.allow_ship_ranger == true)      { allowed_subtypes.push_back(TYPE::ENTITY::RANGER_ID); }
-            if (starsystem_descriptor.allow_ship_warrior == true)     { allowed_subtypes.push_back(TYPE::ENTITY::WARRIOR_ID); }
-            if (starsystem_descriptor.allow_ship_trader == true)      { allowed_subtypes.push_back(TYPE::ENTITY::TRADER_ID); }
-            if (starsystem_descriptor.allow_ship_pirat == true)       { allowed_subtypes.push_back(TYPE::ENTITY::PIRAT_ID); }
-            if (starsystem_descriptor.allow_ship_diplomat == true)    { allowed_subtypes.push_back(TYPE::ENTITY::DIPLOMAT_ID); }
+//        if (starsystem_descriptor.allow_ships == true)
+//        {
+//            std::vector<TYPE::ENTITY> allowed_subtypes;
+//            if (starsystem_descriptor.allow_ship_ranger == true)      { allowed_subtypes.push_back(TYPE::ENTITY::RANGER_ID); }
+//            if (starsystem_descriptor.allow_ship_warrior == true)     { allowed_subtypes.push_back(TYPE::ENTITY::WARRIOR_ID); }
+//            if (starsystem_descriptor.allow_ship_trader == true)      { allowed_subtypes.push_back(TYPE::ENTITY::TRADER_ID); }
+//            if (starsystem_descriptor.allow_ship_pirat == true)       { allowed_subtypes.push_back(TYPE::ENTITY::PIRAT_ID); }
+//            if (starsystem_descriptor.allow_ship_diplomat == true)    { allowed_subtypes.push_back(TYPE::ENTITY::DIPLOMAT_ID); }
             
-            int ship_num = meti::getRandInt(SHIPINIT_PER_PLANET_MIN, SHIPINIT_PER_PLANET_MAX);
-            for (int j=0; j<ship_num; j++)
-            {
-                TYPE::RACE npc_race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-                TYPE::ENTITY npc_subtype_id    = getRandNpcSubTypeId(npc_race_id, allowed_subtypes);
-                TYPE::ENTITY npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
+//            int ship_num = meti::getRandInt(SHIPINIT_PER_PLANET_MIN, SHIPINIT_PER_PLANET_MAX);
+//            for (int j=0; j<ship_num; j++)
+//            {
+//                TYPE::RACE npc_race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+//                TYPE::ENTITY npc_subtype_id    = getRandNpcSubTypeId(npc_race_id, allowed_subtypes);
+//                TYPE::ENTITY npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
                        
-                Ship* new_ship = global::get().shipBuilder().create(generateVehicleDescriptor());
-                global::get().shipBuilder().equip(new_ship); // improove
-                //ShipBuilder::Instance().EquipModules(ship, tech_level); 
-                //ShipBuilder::Instance().EquipArtefacts(ship, tech_level); 
-                //ShipBuilder::Instance().EquipBomb(ship, tech_level); 
+//                Ship* new_ship = global::get().shipBuilder().create(generateVehicleDescriptor());
+//                global::get().shipBuilder().equip(new_ship); // improove
+//                //ShipBuilder::Instance().EquipModules(ship, tech_level);
+//                //ShipBuilder::Instance().EquipArtefacts(ship, tech_level);
+//                //ShipBuilder::Instance().EquipBomb(ship, tech_level);
             
-                Npc* new_npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
-                new_ship->BindOwnerNpc(new_npc);
+//                Npc* new_npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
+//                new_ship->BindOwnerNpc(new_npc);
                 
-                planet->AddVehicle(new_ship);
-            }
-        }
-    }
+//                planet->AddVehicle(new_ship);
+//            }
+//        }
+//    }
 }
 
 void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_system) const

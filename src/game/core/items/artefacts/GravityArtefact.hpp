@@ -38,7 +38,7 @@ class GravityArtefact : public BaseItem
     private:  
         int gravity;
            
-             virtual void AddUniqueInfo();  
+             virtual void addUniqueInfo();  
              virtual void AddCommonInfo();   
              
              void SaveData(boost::property_tree::ptree&, const std::string&) const;

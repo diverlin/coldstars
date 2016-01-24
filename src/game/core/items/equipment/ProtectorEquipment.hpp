@@ -44,7 +44,7 @@ class ProtectorEquipment  : public BaseEquipment
         int protection_add;
         int protection;
 
-        void virtual AddUniqueInfo();
+        void virtual addUniqueInfo();
         std::string GetProtectionStr();
 
         void SaveData(boost::property_tree::ptree&, const std::string&) const;

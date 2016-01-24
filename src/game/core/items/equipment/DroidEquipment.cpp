@@ -76,7 +76,7 @@ void DroidEquipment::CountPrice()
          m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void DroidEquipment::AddUniqueInfo()
+void DroidEquipment::addUniqueInfo()
 {
 //    info.addTitleStr("DROID");
 //    info.addNameStr("repair:");     info.addValueStr(GetRepairStr());

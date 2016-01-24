@@ -44,7 +44,7 @@ class ScanerEquipment : public BaseEquipment
             int scan_add;
             int scan;
 
-             void virtual AddUniqueInfo();
+             void virtual addUniqueInfo();
              std::string GetScanStr();
                 
                 void SaveData(boost::property_tree::ptree&, const std::string&) const;

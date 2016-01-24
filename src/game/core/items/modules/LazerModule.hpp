@@ -42,7 +42,7 @@ class LazerModule : public BaseModule
                 int damage_add;
             int radius_add; 
             
-            void virtual AddUniqueInfo();   
+            void virtual addUniqueInfo();   
             
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);
