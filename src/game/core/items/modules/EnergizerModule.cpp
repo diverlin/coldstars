@@ -37,7 +37,7 @@ EnergizerModule::~EnergizerModule()
 {}
 
 /* virtual */
-void EnergizerModule::AddUniqueInfo()
+void EnergizerModule::addUniqueInfo()
 {
 //    info.addTitleStr("energizer module");
 //    if (energy_max_add != 0)

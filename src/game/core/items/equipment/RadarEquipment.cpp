@@ -63,7 +63,7 @@ void RadarEquipment::CountPrice()
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void RadarEquipment::AddUniqueInfo()
+void RadarEquipment::addUniqueInfo()
 {
     //    info.addTitleStr("RADAR");
     //    info.addNameStr("radius:");     info.addValueStr(GetRadiusStr());

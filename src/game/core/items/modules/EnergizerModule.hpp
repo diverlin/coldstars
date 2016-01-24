@@ -42,7 +42,7 @@ class EnergizerModule : public BaseModule
                     int energy_max_add;
               int restoration_add;
               
-              void virtual AddUniqueInfo();
+              void virtual addUniqueInfo();
               
               void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);

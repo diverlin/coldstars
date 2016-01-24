@@ -36,7 +36,7 @@ DriveModule::~DriveModule()
 {}
         
 /* virtual */
-void DriveModule::AddUniqueInfo()
+void DriveModule::addUniqueInfo()
 { 
 //    info.addTitleStr("drive module");
 //    if (speed_add != 0)

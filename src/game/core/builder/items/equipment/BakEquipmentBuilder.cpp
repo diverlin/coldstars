@@ -80,15 +80,15 @@ void BakEquipmentBuilder::createInternals(BakEquipment* bak_equipment, TYPE::TEC
     common_data.condition_max          = meti::getRandInt(EQUIPMENT::BAK::CONDITION_MIN, EQUIPMENT::BAK::CONDITION_MAX);
     common_data.deterioration_normal = 1;
 
-    bak_equipment->SetFuelMaxOrig(fuel_max_orig);
-    bak_equipment->SetFuel(fuel_max_orig);
+    bak_equipment->setFuelMaxOrig(fuel_max_orig);
+    bak_equipment->setFuel(fuel_max_orig);
     // alpitodorender bak_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     bak_equipment->setParentSubTypeId(TYPE::ENTITY::BAK_SLOT_ID);
     bak_equipment->setItemCommonData(common_data);
     bak_equipment->setCondition(common_data.condition_max);
                                     
     bak_equipment->updateProperties();
-    bak_equipment->CountPrice();
+    bak_equipment->countPrice();
 }
 
 

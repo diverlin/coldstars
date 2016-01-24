@@ -82,7 +82,7 @@ void EnergizerEquipment::CountPrice()
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void EnergizerEquipment::AddUniqueInfo()
+void EnergizerEquipment::addUniqueInfo()
 {
 //    info.addTitleStr("ENERGYBLOCK");
 //    info.addNameStr("energy:");      info.addValueStr(GetEnergyStr());

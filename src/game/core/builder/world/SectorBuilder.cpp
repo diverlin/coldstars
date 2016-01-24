@@ -53,13 +53,13 @@ Sector* SectorBuilder::create(const SectorDescriptor& sector_descriptor) const
         
 void SectorBuilder::createInternals(Sector* sector, const SectorDescriptor& sector_descriptor) const
 {
-    for(const auto& starsystem_descriptor: sector_descriptor.starsystem_descriptors)
-    {  
-        glm::vec3 center(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));
+//    for(const auto& starsystem_descriptor: sector_descriptor.starsystem_descriptors)
+//    {
+//        glm::vec3 center(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));
         
-        StarSystem* starsystem = global::get().starSystemBuilder().create(starsystem_descriptor);
-        sector->add(starsystem, center); 
-    }
+//        StarSystem* starsystem = global::get().starSystemBuilder().create(starsystem_descriptor);
+//        sector->add(starsystem, center);
+//    }
 }
 
                 

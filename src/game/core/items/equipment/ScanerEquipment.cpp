@@ -63,7 +63,7 @@ void ScanerEquipment::CountPrice()
 }
 
 
-void ScanerEquipment::AddUniqueInfo()
+void ScanerEquipment::addUniqueInfo()
 {
     //    info.addTitleStr("SCANER");
     //    info.addNameStr("scan:");     info.addValueStr(GetScanStr());

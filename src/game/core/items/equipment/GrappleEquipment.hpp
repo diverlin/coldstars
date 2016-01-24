@@ -78,7 +78,7 @@ class GrappleEquipment : public BaseEquipment
         
         std::vector<SpaceObject*> target_vec;
         
-        void virtual AddUniqueInfo();
+        void virtual addUniqueInfo();
         std::string GetStrengthStr();
         std::string GetRadiusStr();
         std::string GetSpeedStr();

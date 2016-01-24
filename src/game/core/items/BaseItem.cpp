@@ -100,7 +100,7 @@ void BaseItem::updateLock()
 //{
 ////    info.clear();
 
-//    AddUniqueInfo();
+//    addUniqueInfo();
 //    AddCommonInfo();
 //}
 

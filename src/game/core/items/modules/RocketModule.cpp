@@ -37,7 +37,7 @@ RocketModule::~RocketModule()
 {}
 
 /* virtual */
-void RocketModule::AddUniqueInfo()
+void RocketModule::addUniqueInfo()
 {/*
     info.addTitleStr("rocket module"); 
     if (ammo_max_add != 0)

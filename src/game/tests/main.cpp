@@ -33,13 +33,12 @@
 #include <builder/spaceobjects/ContainerBuilder.hpp>
 
 #include <descriptors/Descriptor.hpp>
+#include <descriptors/HitDescriptor.hpp>
 #include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/SectorDescriptor.hpp>
-#include <descriptors/StarSystemDescriptor.hpp>
 #include <descriptors/ExplosionDescriptor.hpp>
 #include <descriptors/AddToStarsystemDescriptor.hpp>
 
-#include <descriptors/StarSystemDescriptorGenerator.hpp>
 #include <descriptors/VehicleDescriptorGenerator.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
 #include <descriptors/ContainerDescriptorGenerator.hpp>
@@ -49,6 +48,8 @@
 #include <common/IdGenerator.hpp>
 
 #include <ceti/myStr.hpp>
+
+#include <ctime>
 
 namespace {
 
@@ -62,9 +63,9 @@ Ship* createNewShip()
     return ship;
 }
 
-Bomb* createNewBomb()
+Bomb* createNewBomb(int damage, int radius)
 {
-    auto descriptor = generateBombDescriptor();
+    Descriptor descriptor = generateBombDescriptor(damage, radius);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
 
     Bomb* bomb = static_cast<Bomb*>(global::get().entityManager().get(descriptor.id()));
@@ -87,14 +88,48 @@ Container* createNewContainer(const id_type& child_id)
 
 StarSystem* createNewStarSystem()
 {
-    auto descriptor = generateStarSystemDescriptor();
+    Descriptor descriptor = generateStarSystemDescriptor();
     global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
 
-    StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.id));
+    StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.id()));
     assert(starsystem);
     return starsystem;
 }
 
+}
+
+TEST(base,speed1)
+{
+    clock_t begin = std::clock();
+    HitDescriptor hit1 = HitDescriptor(1, 2, 33);
+    for (int i=0; i<10000; ++i) {
+        HitDescriptor hit2(hit1.data());
+        hit2.owner == hit1.owner;
+        hit2.target == hit1.target;
+        hit2.damage == hit1.damage;
+    }
+
+    clock_t end = std::clock();
+    double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    std::cout<<"elapsed_secs="<<elapsed_secs<<std::endl;
+    EXPECT_TRUE(elapsed_secs < 1);
+}
+
+TEST(base,speed2)
+{
+    clock_t begin = std::clock();
+    Descriptor hit1 = generateHitDescriptor(1, 2, 33);
+    for (int i=0; i<10000; ++i) {
+        Descriptor hit2(hit1.data());
+        hit2.owner() == hit1.owner();
+        hit2.target() == hit1.target();
+        hit2.damage() == hit1.damage();
+    }
+
+    clock_t end = std::clock();
+    double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    std::cout<<"elapsed_secs="<<elapsed_secs<<std::endl;
+    EXPECT_TRUE(elapsed_secs < 1);
 }
 
 TEST(base,serialization)
@@ -168,7 +203,7 @@ TEST(base,bomb)
 
     StarSystem* starsystem = createNewStarSystem();
     Ship* ship = createNewShip();
-    Bomb* bomb = createNewBomb();
+    Bomb* bomb = createNewBomb(1000, 1000);
     Container* container = createNewContainer(bomb->id());
 
     glm::vec3 ship_pos = glm::vec3(200, 200, 0);

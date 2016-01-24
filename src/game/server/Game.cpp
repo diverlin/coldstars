@@ -50,20 +50,20 @@ bool Game::run() const
         SectorDescriptor sector_descriptor;
         sector_descriptor.starsystem_num = 1;
         for (int j=0; j<sector_descriptor.starsystem_num; j++) {
-            StarSystemDescriptor starsystem_descriptor;
-            starsystem_descriptor.planet_num = 5;
-            starsystem_descriptor.spacestation_num = 0;
-            starsystem_descriptor.asteroid_num = 3;
+            //StarSystemDescriptor starsystem_descriptor;
+//            starsystem_descriptor.planet_num = 5;
+//            starsystem_descriptor.spacestation_num = 0;
+//            starsystem_descriptor.asteroid_num = 3;
 
-            starsystem_descriptor.allow_satellites    = false;
-            starsystem_descriptor.allow_ships         = false;
+//            starsystem_descriptor.allow_satellites    = false;
+//            starsystem_descriptor.allow_ships         = false;
 
-            starsystem_descriptor.allow_ship_ranger   = false;
-            starsystem_descriptor.allow_ship_warrior  = false;
-            starsystem_descriptor.allow_ship_trader   = true;
-            starsystem_descriptor.allow_ship_pirat    = false;
-            starsystem_descriptor.allow_ship_diplomat = false;
-            sector_descriptor.starsystem_descriptors.push_back(starsystem_descriptor);
+//            starsystem_descriptor.allow_ship_ranger   = false;
+//            starsystem_descriptor.allow_ship_warrior  = false;
+//            starsystem_descriptor.allow_ship_trader   = true;
+//            starsystem_descriptor.allow_ship_pirat    = false;
+//            starsystem_descriptor.allow_ship_diplomat = false;
+            //sector_descriptor.starsystem_descriptors.push_back(starsystem_descriptor);
         }
         galaxy_descriptor.sector_descriptors.push_back(sector_descriptor);
     }

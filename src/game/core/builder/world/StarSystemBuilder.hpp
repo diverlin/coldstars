@@ -23,7 +23,7 @@
 #include <string>
 
 class StarSystem;
-class StarSystemDescriptor;
+class Descriptor;
 
 class StarSystemBuilder
 {
@@ -31,11 +31,11 @@ class StarSystemBuilder
         StarSystemBuilder();
         ~StarSystemBuilder();
         
-        StarSystem* create(const StarSystemDescriptor&) const;
+        StarSystem* create(const Descriptor&) const;
         StarSystem* create(const std::string&) const;
 
     private:
-        void createInternals(StarSystem*, const StarSystemDescriptor&) const;
+        void createInternals(StarSystem*, const Descriptor&) const;
         
         void CreateBackground(StarSystem*, int, int, int) const;
         void CreateStar(StarSystem*) const;

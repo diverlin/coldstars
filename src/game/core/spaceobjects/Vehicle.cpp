@@ -716,12 +716,9 @@ void Vehicle::CheckNeedsInStatic()
 
     // check fuel
     m_Needs.get_fuel = false;
-    if (m_ComplexDrive.GetBakSlot() != nullptr)
-    {
-        if (m_ComplexDrive.GetBakSlot()->item() != nullptr)
-        {
-            if (m_ComplexDrive.GetBakSlot()->bakEquipment()->GetFuel() < 0.8*m_ComplexDrive.GetBakSlot()->bakEquipment()->GetFuelMax())
-            {
+    if (m_ComplexDrive.GetBakSlot()) {
+        if (m_ComplexDrive.GetBakSlot()->item()) {
+            if (m_ComplexDrive.GetBakSlot()->bakEquipment()->fuel() < 0.8*m_ComplexDrive.GetBakSlot()->bakEquipment()->fuelMax()) {
                 m_Needs.get_fuel = true;
             }
         }
@@ -883,25 +880,25 @@ void Vehicle::UpdatePropertiesJump()
 
     m_properties.hyper = 0;
 
-    if (m_ComplexDrive.GetDriveSlot() != nullptr)
+    if (m_ComplexDrive.GetDriveSlot())
     {
-        if (m_ComplexDrive.GetDriveSlot()->item() != nullptr)
+        if (m_ComplexDrive.GetDriveSlot()->item())
         {
             if (m_ComplexDrive.GetDriveSlot()->driveEquipment()->isFunctioning() == true)
             {
-                if (m_ComplexDrive.GetBakSlot() != nullptr)
+                if (m_ComplexDrive.GetBakSlot())
                 {
-                    if (m_ComplexDrive.GetBakSlot()->item() != nullptr)
+                    if (m_ComplexDrive.GetBakSlot()->item())
                     {
                         if (m_ComplexDrive.GetBakSlot()->bakEquipment()->isFunctioning() == true)
                         {
-                            if (m_ComplexDrive.GetDriveSlot()->driveEquipment()->GetHyper() > m_ComplexDrive.GetBakSlot()->bakEquipment()->GetFuel())
+                            if (m_ComplexDrive.GetDriveSlot()->driveEquipment()->GetHyper() > m_ComplexDrive.GetBakSlot()->bakEquipment()->fuel())
                             {
                                 m_properties.hyper = m_ComplexDrive.GetDriveSlot()->driveEquipment()->GetHyper();
                             }
                             else
                             {
-                                m_properties.hyper = m_ComplexDrive.GetBakSlot()->bakEquipment()->GetFuel();
+                                m_properties.hyper = m_ComplexDrive.GetBakSlot()->bakEquipment()->fuel();
                             }
                         }
                     }
@@ -1206,7 +1203,7 @@ bool Vehicle::IsFuelFull() const
 
 int Vehicle::GetFuelMiss() const
 {
-    return m_ComplexDrive.GetBakSlot()->bakEquipment()->GetFuelMiss();
+    return m_ComplexDrive.GetBakSlot()->bakEquipment()->fuelMiss();
 }
 
 void Vehicle::LockRandomItem(int locked_turns)

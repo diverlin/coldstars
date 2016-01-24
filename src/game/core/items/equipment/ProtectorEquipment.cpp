@@ -62,7 +62,7 @@ void ProtectorEquipment::CountPrice()
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void ProtectorEquipment::AddUniqueInfo()
+void ProtectorEquipment::addUniqueInfo()
 {
     //        info.addTitleStr("PROTECTOR");
     //        info.addNameStr("protection:");     info.addValueStr(GetProtectionStr());

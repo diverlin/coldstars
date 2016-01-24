@@ -44,7 +44,7 @@ class RadarEquipment : public BaseEquipment
         int radius_add;
         int radius;
 
-        void virtual AddUniqueInfo();
+        void virtual addUniqueInfo();
         std::string GetRadiusStr();
 
         void SaveData(boost::property_tree::ptree&, const std::string&) const;

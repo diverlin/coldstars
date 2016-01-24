@@ -43,7 +43,7 @@ class FreezerEquipment : public BaseEquipment
         int freeze_add;
         int freeze;
 
-        void virtual AddUniqueInfo();
+        void virtual addUniqueInfo();
         std::string GetFreezeStr();
 
         void SaveData(boost::property_tree::ptree&, const std::string&) const;

@@ -115,7 +115,7 @@ void RocketEquipment::CountPrice()
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void RocketEquipment::AddUniqueInfo()
+void RocketEquipment::addUniqueInfo()
 {
 //    info.addTitleStr("ROCKET");
     

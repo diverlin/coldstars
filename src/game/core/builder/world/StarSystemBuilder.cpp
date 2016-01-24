@@ -22,11 +22,10 @@
 #include <builder/pilots/NpcBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <descriptors/StarSystemDescriptor.hpp>
-
 #include <spaceobjects/IncludeSpaceObjects.hpp>
 
 #include <world/starsystem.hpp>
+#include <descriptors/Descriptor.hpp>
 
 //#include <effects/DistantNebulaEffect.hpp>
 //#include <effects/DistantStarEffect.hpp>
@@ -41,9 +40,9 @@ StarSystemBuilder::StarSystemBuilder()
 StarSystemBuilder::~StarSystemBuilder()
 {}
 
-StarSystem* StarSystemBuilder::create(const StarSystemDescriptor& descriptor) const
+StarSystem* StarSystemBuilder::create(const Descriptor& descriptor) const
 {
-    StarSystem* starsystem = new StarSystem(descriptor.id);
+    StarSystem* starsystem = new StarSystem(descriptor.id());
     assert(starsystem);
     global::get().entityManager().reg(starsystem);
     createInternals(starsystem, descriptor);
@@ -52,18 +51,18 @@ StarSystem* StarSystemBuilder::create(const StarSystemDescriptor& descriptor) co
 
 StarSystem* StarSystemBuilder::create(const std::string& data) const
 {
-    return create(StarSystemDescriptor(data));
+    return create(Descriptor(data));
 }
 
-void StarSystemBuilder::createInternals(StarSystem* starsystem, const StarSystemDescriptor& starsystem_descriptor) const
+void StarSystemBuilder::createInternals(StarSystem* starsystem, const Descriptor& starsystem_descriptor) const
 {
-    starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
-    CreateStar(starsystem);
+//    starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
+//    CreateStar(starsystem);
     
-    int distNebula_num = meti::getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
-    // alpitodorender CreateBackground(starsystem, distNebula_num, /*distStar_num*/1, starsystem->GetStar()->GetColorId());
+//    int distNebula_num = meti::getRandInt(ENTITY::STARSYSTEM::DISTANT_NEBULA_MIN, ENTITY::STARSYSTEM::DISTANT_NEBULA_MAX);
+//    // alpitodorender CreateBackground(starsystem, distNebula_num, /*distStar_num*/1, starsystem->GetStar()->GetColorId());
       
-    CreatePlanets(starsystem, starsystem_descriptor.planet_num);
+//    CreatePlanets(starsystem, starsystem_descriptor.planet_num);
 }
  
 void StarSystemBuilder::CreateBackground(StarSystem* starsystem, int distNebula_num, int distStar_num, int color_id) const

@@ -48,7 +48,7 @@ class GrappleModule : public BaseModule
                int speed_add;
                int maxNumItem_add;
                
-               void virtual AddUniqueInfo();
+               void virtual addUniqueInfo();
                
                void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);

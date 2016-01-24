@@ -109,7 +109,7 @@ class BaseItem : public ceti::Orientation, public Base
         void updateLock();
         
         virtual void AddCommonInfo()=0;
-        virtual void AddUniqueInfo()=0;   
+        virtual void addUniqueInfo()=0;   
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const; 
         void LoadData(const boost::property_tree::ptree&); 

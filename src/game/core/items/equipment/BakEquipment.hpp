@@ -17,45 +17,43 @@
 */
 
 
-#ifndef BAKEQUIPMENT_H
-#define BAKEQUIPMENT_H
+#pragma once
 
 #include "BaseEquipment.hpp"
 
 class BakEquipment : public BaseEquipment
 {
-    public:
-             BakEquipment(const id_type& id);
-             virtual ~BakEquipment();
-        
-                void SetFuelMaxOrig(int fuel_max_orig) { this->fuel_max_orig = fuel_max_orig; };
-                void SetFuel(int fuel)                 { this->fuel = fuel; };
-                void IncreaseFuel(int fuel);    
-                int GetFuelMiss() const { return (fuel_max - fuel); };    
-                                
-        int GetFuel() const    { return fuel; };
-        int GetFuelMax() const { return fuel_max; };
-         
-                  virtual void updateProperties();
+public:
+    BakEquipment(const id_type& id);
+    virtual ~BakEquipment();
 
-                  void CountPrice();
-                                      
-                  virtual void Save(boost::property_tree::ptree&) const;
-        virtual void Load(const boost::property_tree::ptree&);
-        virtual void Resolve();
-        
-         private:
-                  int fuel_max_orig;
-             int fuel_max_add;
-             int fuel_max;
-             int fuel;
+    void setFuelMaxOrig(int fuelMaxOrig) { m_fuelMaxOrig = fuelMaxOrig; }
+    void setFuel(int fuel)                 { m_fuel = fuel; }
+    void increaseFuel(int fuel);
+    int fuelMiss() const { return (m_fuelMax - m_fuel); }
 
-             void virtual AddUniqueInfo();
-              std::string GetFuelStr();
-                
-                void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+    int fuel() const    { return m_fuel; }
+    int fuelMax() const { return m_fuelMax; }
+
+    void updateProperties() override final;
+
+    void countPrice();
+
+    virtual void Save(boost::property_tree::ptree&) const;
+    virtual void Load(const boost::property_tree::ptree&);
+    virtual void Resolve();
+
+private:
+    int m_fuelMaxOrig = 0;
+    int m_fuelMaxAdd = 0;
+    int m_fuelMax = 0;
+    int m_fuel = 0;
+
+    void virtual addUniqueInfo();
+    std::string getFuelStr();
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 };
 
-#endif 

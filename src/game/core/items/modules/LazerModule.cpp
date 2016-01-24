@@ -36,7 +36,7 @@ LazerModule::~LazerModule()
 {}
 
 /* virtual */
-void LazerModule::AddUniqueInfo()
+void LazerModule::addUniqueInfo()
 {
 //        info.addTitleStr("lazer module");
 //        if (damage_add != 0)

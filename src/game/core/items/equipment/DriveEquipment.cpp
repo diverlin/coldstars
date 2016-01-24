@@ -68,7 +68,7 @@ void DriveEquipment::CountPrice()
          m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void DriveEquipment::AddUniqueInfo()
+void DriveEquipment::addUniqueInfo()
 {
 //        info.addTitleStr("DRIVE");
 //        info.addNameStr("speed:");     info.addValueStr(GetSpeedStr());
