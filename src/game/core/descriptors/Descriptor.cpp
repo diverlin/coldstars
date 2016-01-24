@@ -21,6 +21,8 @@
 #include <sstream>
 
 std::string Descriptor::KEY_ID = "id";
+std::string Descriptor::KEY_OWNER = "owner";
+std::string Descriptor::KEY_TARGET = "target";
 std::string Descriptor::KEY_DAMAGE = "damage";
 std::string Descriptor::KEY_RADIUS = "radius";
 
@@ -51,6 +53,18 @@ id_type
 Descriptor::id() const
 {
     return get<id_type>(KEY_ID);
+}
+
+id_type
+Descriptor::owner() const
+{
+    return get<id_type>(KEY_OWNER);
+}
+
+id_type
+Descriptor::target() const
+{
+    return get<id_type>(KEY_TARGET);
 }
 
 int

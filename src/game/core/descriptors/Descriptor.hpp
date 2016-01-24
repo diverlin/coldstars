@@ -30,6 +30,8 @@ class Descriptor
 {
 public:
     static std::string KEY_ID;
+    static std::string KEY_OWNER;
+    static std::string KEY_TARGET;
     static std::string KEY_DAMAGE;
     static std::string KEY_RADIUS;
 
@@ -44,6 +46,8 @@ public:
     bool operator==(const Descriptor& rhs) const;
 
     id_type id() const;
+    id_type owner() const;
+    id_type target() const;
     int damage() const;
     int radius() const;
 
