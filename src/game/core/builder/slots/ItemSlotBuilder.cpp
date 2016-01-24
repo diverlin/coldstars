@@ -37,8 +37,6 @@ ItemSlot* GetNewItemSlot(TYPE::ENTITY subtype_id, const id_type& id)
 {  
     ItemSlot* item_slot = new ItemSlot(id, subtype_id);
     assert(item_slot);
-
-    global::get().entityManager().reg(item_slot);
     
     //jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);
 //    item_slot->SetTextureOb(texOb_slot);

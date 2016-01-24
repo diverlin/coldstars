@@ -20,8 +20,7 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <types/RaceTypes.hpp>
-#include <types/TechLevelTypes.hpp>
+#include <descriptors/Descriptor.hpp>
 
 class DriveEquipment;
 
@@ -33,10 +32,10 @@ class DriveEquipmentBuilder
         ~DriveEquipmentBuilder();
 
         DriveEquipment* createTemplate(id_type id = NONE_ID) const;
-        DriveEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int speed_orig = NONE_ID, int hyper_orig = NONE_ID) const;
+        DriveEquipment* create(const Descriptor&) const;
                                      
     private:
-        void createInternals(DriveEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int, int) const;
+        void createInternals(DriveEquipment*, const Descriptor&) const;
 }; 
 
 

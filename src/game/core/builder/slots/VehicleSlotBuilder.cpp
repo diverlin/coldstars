@@ -35,10 +35,8 @@
 VehicleSlot* GetNewVehicleSlot(TYPE::ENTITY subtype_id, const id_type& id)
 {
     VehicleSlot* vehicle_slot = new VehicleSlot(id, subtype_id);
-    assert(vehicle_slot);
-    
-    global::get().entityManager().reg(vehicle_slot);
-      
+    assert(vehicle_slot);    
+
 //    jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::VEHICLE_SLOT_ID);
 //    vehicle_slot->SetTextureOb(texOb_slot);
           

@@ -24,6 +24,8 @@
 #include <types/IdType.hpp>
 #include <glm/glm.hpp>
 
+#include <spaceobjects/Vehicle.hpp>
+
 class Vehicle;
 
 namespace jeti {
@@ -52,7 +54,13 @@ class BaseSlot : public Base
         
         const glm::vec2& GetPosition() const { return position; };
         
-        Vehicle* GetOwnerVehicle() const { return (Vehicle*)owner; };
+        Vehicle* GetOwnerVehicle() const {
+            assert(owner);
+            Vehicle* vehicle = static_cast<Vehicle*>(owner);
+            assert(vehicle);
+            return vehicle;
+        }
+
         Base* GetOwner() const { return owner; };
         
     protected:        

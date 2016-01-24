@@ -33,6 +33,8 @@ std::string Descriptor::KEY_MASS = "mass";
 std::string Descriptor::KEY_CONDITION = "condition";
 std::string Descriptor::KEY_DETEORATION = "deteoration";
 std::string Descriptor::KEY_FUEL = "fuel";
+std::string Descriptor::KEY_SPEED = "speed";
+std::string Descriptor::KEY_HYPER = "hyper";
 
 Descriptor::Descriptor()
 {
@@ -146,6 +148,18 @@ int
 Descriptor::fuel() const
 {
     return get<int>(KEY_FUEL);
+}
+
+int
+Descriptor::speed() const
+{
+    return get<int>(KEY_SPEED);
+}
+
+int
+Descriptor::hyper() const
+{
+    return get<int>(KEY_HYPER);
 }
 
 bool

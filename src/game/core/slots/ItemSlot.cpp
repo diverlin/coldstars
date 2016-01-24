@@ -360,7 +360,8 @@ void ItemSlot::dropItemToSpace()
 
 bool ItemSlot::swapItem(ItemSlot* slot)
 {
-    if ( (m_item == nullptr) and (slot->item() != nullptr) )
+    assert(slot);
+    if ( (m_item == nullptr) && (slot->item() != nullptr) )
     {
         if (insertItem(slot->item()) == true)
         {
@@ -368,7 +369,7 @@ bool ItemSlot::swapItem(ItemSlot* slot)
         }
     }
     
-    if ( (m_item != nullptr) and (slot->item() == nullptr) )
+    if ( (m_item != nullptr) && (slot->item() == nullptr) )
     {
         if (slot->insertItem(item()) == true)
         {
@@ -376,7 +377,7 @@ bool ItemSlot::swapItem(ItemSlot* slot)
         }
     }
 
-    if ( (m_item != nullptr) and (slot->item() != nullptr) )
+    if ( (m_item != nullptr) && (slot->item() != nullptr) )
     {
         BaseItem* tmp_item = slot->item();
         if ( (slot->checkItemInsertion(m_item) == true) and (checkItemInsertion(tmp_item) == true) )
@@ -388,7 +389,7 @@ bool ItemSlot::swapItem(ItemSlot* slot)
             return true;
         }
 
-        if ( (m_item->typeId() == TYPE::ENTITY::MODULE_ID) and (slot->item()->typeId() == TYPE::ENTITY::EQUIPMENT_ID) )
+        if ( (m_item->typeId() == TYPE::ENTITY::MODULE_ID) && (slot->item()->typeId() == TYPE::ENTITY::EQUIPMENT_ID) )
         {
             if (((BaseEquipment*)slot->item())->InsertModule((BaseModule*)m_item) == true)
             {
@@ -551,22 +552,22 @@ void ItemSlot::ResolveData()
 {
     LOG(" ItemSlot("+std::to_string(id())+")::ResolveData");
     
-    if (m_unresolved_ItemSlot.target_id != NONE_ID) {
-        m_target = (SpaceObject*)global::get().entityManager().get(m_unresolved_ItemSlot.target_id);
-    }
+//    if (m_unresolved_ItemSlot.target_id != NONE_ID) {
+//        m_target = (SpaceObject*)global::get().entityManager().get(m_unresolved_ItemSlot.target_id);
+//    }
 
-    if (m_unresolved_ItemSlot.subtarget_id != NONE_ID) {
-        m_subtarget = (ItemSlot*)global::get().entityManager().get(m_unresolved_ItemSlot.subtarget_id);
-    }
+//    if (m_unresolved_ItemSlot.subtarget_id != NONE_ID) {
+//        m_subtarget = (ItemSlot*)global::get().entityManager().get(m_unresolved_ItemSlot.subtarget_id);
+//    }
 
-    switch(owner->typeId())
-    {
-        case TYPE::ENTITY::VEHICLE_ID:     {    ((Vehicle*)owner)->AddItemSlot(this); break; }
-        case TYPE::ENTITY::CONTAINER_ID:         {    ((Container*)owner)->bindItemSlot(this); break; }
-        case TYPE::ENTITY::STORE_ID:             {     ((Store*)owner)->AddItemSlot(this); break; }
-        case TYPE::ENTITY::ANGAR_ID:             {     ((Angar*)owner)->AddItemSlot(this); break; }
-            //case TYPE::ENTITY::NATURELAND_ID:      {     ((NatureLand*)owner)->AddItemSlot(this); break; }
-    }
+//    switch(owner->typeId())
+//    {
+//        case TYPE::ENTITY::VEHICLE_ID:     {    ((Vehicle*)owner)->AddItemSlot(this); break; }
+//        case TYPE::ENTITY::CONTAINER_ID:         {    ((Container*)owner)->bindItemSlot(this); break; }
+//        case TYPE::ENTITY::STORE_ID:             {     ((Store*)owner)->AddItemSlot(this); break; }
+//        case TYPE::ENTITY::ANGAR_ID:             {     ((Angar*)owner)->AddItemSlot(this); break; }
+//            //case TYPE::ENTITY::NATURELAND_ID:      {     ((NatureLand*)owner)->AddItemSlot(this); break; }
+//    }
 }
 
 void ItemSlot::log(const std::string& func_name) const
