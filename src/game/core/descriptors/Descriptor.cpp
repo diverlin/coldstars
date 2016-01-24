@@ -21,6 +21,7 @@
 #include <sstream>
 
 std::string Descriptor::KEY_ID = "id";
+std::string Descriptor::KEY_TYPE = "type";
 std::string Descriptor::KEY_RACE = "race";
 std::string Descriptor::KEY_OWNER = "owner";
 std::string Descriptor::KEY_TARGET = "target";
@@ -33,10 +34,13 @@ std::string Descriptor::KEY_CONDITION = "condition";
 std::string Descriptor::KEY_DETEORATION = "deteoration";
 std::string Descriptor::KEY_FUEL = "fuel";
 
-Descriptor::Descriptor(const std::map<std::string, std::string>& map)
-    : map(map)
+Descriptor::Descriptor()
 {
+}
 
+Descriptor::Descriptor(const std::map<std::string, std::string>& map)
+    : m_map(map)
+{
 }
 
 Descriptor::Descriptor(const std::string& data)
@@ -56,10 +60,26 @@ Descriptor::data() const
     return ss.str();
 }
 
+void Descriptor::add(const std::string& key, const std::string& val)
+{
+    auto f = m_map.find(key);
+    if (f == m_map.end()) {
+        m_map.insert(std::make_pair(key, val));
+    } else {
+        throw std::runtime_error("CODE ERROR: " + key + " is already existed in descriptor");
+    }
+}
+
 id_type
 Descriptor::id() const
 {
     return get<id_type>(KEY_ID);
+}
+
+int
+Descriptor::type() const
+{
+    return get<int>(KEY_TYPE);
 }
 
 int
@@ -137,8 +157,8 @@ Descriptor::operator==(const Descriptor& rhs) const
 const std::string&
 Descriptor::get_raw(const std::string& key) const
 {
-    auto f = map.find(key);
-    if (f != map.end()) {
+    auto f = m_map.find(key);
+    if (f != m_map.end()) {
         return f->second;
     }
     throw std::runtime_error("CODE ERROR: " + key + " is not found in descriptor");

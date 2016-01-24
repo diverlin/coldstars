@@ -20,8 +20,7 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <types/RaceTypes.hpp>
-#include <types/TechLevelTypes.hpp>
+#include <descriptors/Descriptor.hpp>
 
 class BakEquipment;
 
@@ -33,13 +32,13 @@ class BakEquipmentBuilder
         ~BakEquipmentBuilder();
 
         BakEquipment* createTemplate(id_type id = NONE_ID) const;
-        BakEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int fuel_max_orig = NONE_ID) const;
+        BakEquipment* create(const Descriptor&) const;
                                      
     private:                
         BakEquipmentBuilder(const BakEquipmentBuilder&) = delete;
         BakEquipmentBuilder& operator=(const BakEquipmentBuilder&) = delete;
 
-        void createInternals(BakEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
+        void createInternals(BakEquipment*, const Descriptor&) const;
 }; 
 
     

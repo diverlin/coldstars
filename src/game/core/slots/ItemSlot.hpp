@@ -157,12 +157,12 @@ class ItemSlot : public BaseSlot
         int itemDamage() const;
                                       
     private:                               
-        Turrel* m_turrel;          // only for weapons slot
+        Turrel* m_turrel = nullptr;          // only for weapons slot
         
-        BaseItem* m_item;
+        BaseItem* m_item = nullptr;
         
-        SpaceObject* m_target;
-        ItemSlot* m_subtarget;
+        SpaceObject* m_target = nullptr;
+        ItemSlot* m_subtarget = nullptr;
         
         int m_hitProbability;
 //        jeti::PathVisual m_VisualPath;    // !!!

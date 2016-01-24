@@ -27,15 +27,12 @@
 
 Descriptor generateHitDescriptor(const id_type& owner, const id_type& target, int damage)
 {
-    id_type id = global::get().idGenerator().nextId();
-    std::map<std::string, std::string> map = {
-        {Descriptor::KEY_ID, std::to_string(id)},
-        {Descriptor::KEY_OWNER, std::to_string(owner)},
-        {Descriptor::KEY_TARGET, std::to_string(target)},
-        {Descriptor::KEY_DAMAGE, std::to_string(damage)}
-    };
+    Descriptor descriptor;
+    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(Descriptor::KEY_OWNER, std::to_string(owner));
+    descriptor.add(Descriptor::KEY_TARGET, std::to_string(target));
+    descriptor.add(Descriptor::KEY_DAMAGE, std::to_string(damage));
 
-    Descriptor descriptor(map);
     return descriptor;
 }
 
@@ -49,13 +46,11 @@ Descriptor generateBombDescriptor(int damage, int radius)
         radius = meti::getRandInt(100, 300);
     }
 
-    std::map<std::string, std::string> map = {
-        {Descriptor::KEY_ID, std::to_string(id)},
-        {Descriptor::KEY_DAMAGE, std::to_string(damage)},
-        {Descriptor::KEY_RADIUS, std::to_string(radius)}
-    };
+    Descriptor descriptor;
+    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(Descriptor::KEY_DAMAGE, std::to_string(damage));
+    descriptor.add(Descriptor::KEY_RADIUS, std::to_string(radius));
 
-    Descriptor descriptor(map);
     return descriptor;
 }
 
@@ -65,13 +60,10 @@ Descriptor generateStarSystemDescriptor(int race)
         race = int(TYPE::RACE::R0_ID);
     }
 
-    id_type id = global::get().idGenerator().nextId();
-    std::map<std::string, std::string> map = {
-        {Descriptor::KEY_ID, std::to_string(id)},
-        {Descriptor::KEY_RACE, std::to_string(race)}
-    };
+    Descriptor descriptor;
+    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
 
-    Descriptor descriptor(map);
     return descriptor;
 }
 
@@ -96,18 +88,15 @@ Descriptor generateBakDescriptor(int race, int tech_level)
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BAK_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id)
 
-    id_type id = global::get().idGenerator().nextId();
-    std::map<std::string, std::string> map = {
-        {Descriptor::KEY_ID, std::to_string(id)},
-        {Descriptor::KEY_RACE, std::to_string(race)},
-        {Descriptor::KEY_TECH, std::to_string(tech_level)},
-        {Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max)},
-        {Descriptor::KEY_MASS, std::to_string(mass)},
-        {Descriptor::KEY_CONDITION, std::to_string(condition_max)},
-        {Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal)},
-        {Descriptor::KEY_FUEL, std::to_string(fuel_max_orig)}
-    };
-
-    Descriptor descriptor(map);
+    Descriptor descriptor;
+    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::BAK_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
+    descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
+    descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
+    descriptor.add(Descriptor::KEY_MASS, std::to_string(mass));
+    descriptor.add(Descriptor::KEY_CONDITION, std::to_string(condition_max));
+    descriptor.add(Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal));
+    descriptor.add(Descriptor::KEY_FUEL, std::to_string(fuel_max_orig));
     return descriptor;
 }
