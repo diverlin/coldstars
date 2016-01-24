@@ -52,42 +52,21 @@ DriveEquipment* DriveEquipmentBuilder::createTemplate(id_type id) const
     return drive_equipment;
 } 
         
-DriveEquipment* DriveEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
+DriveEquipment* DriveEquipmentBuilder::create(const Descriptor& descriptor) const
 {
     DriveEquipment* drive_equipment = createTemplate();
-    createInternals(drive_equipment, tech_level, race_id, speed_orig, hyper_orig);
+    createInternals(drive_equipment, descriptor);
         
     return drive_equipment;
 }        
             
-void DriveEquipmentBuilder::createInternals(DriveEquipment* drive_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int speed_orig, int hyper_orig) const
+void DriveEquipmentBuilder::createInternals(DriveEquipment* drive_equipment, const Descriptor& descriptor) const
 {     
-    if (race_id == TYPE::RACE::NONE_ID) {
-        race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-    }
-    
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
-        tech_level = TYPE::TECHLEVEL::L0_ID; 
-    }
-
-    //Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    //TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID);
-    //glm::vec3 size = texOb->size();
-    
-//    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPACESTATION_ID);
-//    jeti::TextureOb* texOb = mesh->textureOb();
-    glm::vec3 size = glm::vec3(50);
-
-    //texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID, revision_id) 
-
-    speed_orig      = meti::getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * (1 + EQUIPMENT::DRIVE::SPEED_TECHLEVEL_RATE * (int)tech_level);
-    hyper_orig      = meti::getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX) * (1 + EQUIPMENT::DRIVE::HYPER_TECHLEVEL_RATE * (int)tech_level);
-
     ItemCommonData common_data;
-    common_data.tech_level         = tech_level;
-    common_data.modules_num_max     = meti::getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
-    common_data.mass                = meti::getRandInt(EQUIPMENT::DRIVE::MASS_MIN,        EQUIPMENT::DRIVE::MASS_MAX);
-    common_data.condition_max       = meti::getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN,   EQUIPMENT::DRIVE::CONDITION_MAX);
+    common_data.tech_level         = (TYPE::TECHLEVEL)descriptor.tech();
+    common_data.modules_num_max    = descriptor.modules();
+    common_data.mass               = descriptor.mass();
+    common_data.condition_max      = descriptor.condition();
     common_data.deterioration_normal = 1;
     common_data.deterioration_overload_rate = EQUIPMENT::DRIVE::OVERLOAD_DETERIORATION_RATE;
 
@@ -97,8 +76,8 @@ void DriveEquipmentBuilder::createInternals(DriveEquipment* drive_equipment, TYP
     //AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);
     //drive_equipment->SetRenderAnimation(animation_program);
             
-    drive_equipment->SetSpeedOrig(speed_orig);  
-    drive_equipment->SetHyperOrig(hyper_orig);
+    drive_equipment->SetSpeedOrig(descriptor.speed());
+    drive_equipment->SetHyperOrig(descriptor.hyper());
     drive_equipment->setParentSubTypeId(TYPE::ENTITY::DRIVE_SLOT_ID);
     drive_equipment->setItemCommonData(common_data);
     drive_equipment->setCondition(common_data.condition_max);

@@ -35,10 +35,10 @@ Base::~Base()
 std::string Base::dataTypeStr() const
 {
     std::string text;
-    text += "id=" + std::to_string(id());
-    text += " | t=" + str(typeId());
-    text += " | st=" + str(subTypeId());
-    text += " | sst=" + str(subSubTypeId());
+    text += "id = (" + std::to_string(id());
+    text += " | " + str(typeId());
+    text += " | " + str(subTypeId());
+    text += " | " + str(subSubTypeId()) + " )";
     return text;
 }
 

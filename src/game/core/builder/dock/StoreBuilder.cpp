@@ -43,7 +43,7 @@
 #include <common/constants.hpp>
 
 #include <descriptors/VehicleDescriptorGenerator.hpp>
-
+#include <descriptors/DescriptorGenerator.hpp>
 
 StoreBuilder::StoreBuilder()
 {}
@@ -124,13 +124,13 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
         store->AddItem(global::get().grappleEquipmentBuilder().create());
     }
     for (unsigned int i=0; i<drive_num; i++) {
-        store->AddItem(global::get().driveEquipmentBuilder().create());
+        store->AddItem(global::get().driveEquipmentBuilder().create(generateDriveDescriptor()));
     }
     for (unsigned int i=0; i<protector_num; i++) {
         store->AddItem(global::get().protectorEquipmentBuilder().create());
     }
     for (unsigned int i=0; i<bak_num; i++) {
-        //store->AddItem(global::get().bakEquipmentBuilder().create());
+        store->AddItem(global::get().bakEquipmentBuilder().create(generateBakDescriptor()));
     }
     for (unsigned int i=0; i<droid_num; i++) {
         store->AddItem(global::get().droidEquipmentBuilder().create());

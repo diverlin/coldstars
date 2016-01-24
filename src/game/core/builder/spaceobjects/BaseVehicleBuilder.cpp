@@ -63,6 +63,7 @@
 
 #include <types/TechLevelTypes.hpp>
 
+#include <descriptors/DescriptorGenerator.hpp>
 
 BaseVehicleBuilder::BaseVehicleBuilder()
 {}
@@ -205,7 +206,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) con
     
     if (vehicle->isSlotExists(TYPE::ENTITY::DRIVE_SLOT_ID) == true)
     {
-        DriveEquipment* drive_equipment = global::get().driveEquipmentBuilder().create(tech_level);
+        DriveEquipment* drive_equipment = global::get().driveEquipmentBuilder().create(generateDriveDescriptor());
         if (vehicle->AddAndManageItem(drive_equipment) == false) {
             global::get().entityManager().addToGarbage(drive_equipment);
         }
@@ -213,10 +214,10 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) con
     
     if (vehicle->isSlotExists(TYPE::ENTITY::BAK_SLOT_ID) == true)
     {
-//        BakEquipment* bak_equipment = global::get().bakEquipmentBuilder().create(tech_level);
-//        if (vehicle->AddAndManageItem(bak_equipment) == false) {
-//            global::get().entityManager().addToGarbage(bak_equipment);
-//        }
+        BakEquipment* bak_equipment = global::get().bakEquipmentBuilder().create(generateBakDescriptor());
+        if (vehicle->AddAndManageItem(bak_equipment) == false) {
+            global::get().entityManager().addToGarbage(bak_equipment);
+        }
     }
     
     if (vehicle->isSlotExists(TYPE::ENTITY::ENERGIZER_SLOT_ID) == true)

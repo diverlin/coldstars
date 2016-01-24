@@ -848,7 +848,6 @@ void Vehicle::UpdatePropertiesRadar()
     m_properties.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
     m_properties.equipment_radar = false;
     
-    assert(m_SlotRadar);
     if (!m_SlotRadar->item())
         return;
 

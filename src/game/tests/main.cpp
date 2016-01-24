@@ -60,9 +60,9 @@ Ship* createNewShip()
 
     Ship* ship = static_cast<Ship*>(global::get().entityManager().get(descriptor.id));
     assert(ship);
-    EXPECT_FALSE(ship->GetComplexDrive().GetBakSlot()->item() != nullptr);
+    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() == nullptr);
     global::get().shipBuilder().equip(ship);
-    global::get().shipBuilder().equip(ship, generateBakDescriptor());
+    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() != nullptr);
     return ship;
 }
 
@@ -193,7 +193,7 @@ TEST(base,critical_hit)
     Ship* ship1 = createNewShip();
     Ship* ship2 = createNewShip();
 
-    messageManager.add(Message(TELEGRAM::HIT, generateHitDescriptor(ship1->id(), ship2->id(), ship2->criticalDamage()).data(), 0.4));
+    messageManager.add(Message(TELEGRAM::HIT, generateHitDescriptor(ship1->id(), ship2->id(), 1.1*ship2->criticalDamage()).data(), 0.4));
 
     messageManager.runLoop();
 

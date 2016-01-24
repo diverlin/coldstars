@@ -46,6 +46,8 @@ public:
     static std::string KEY_CONDITION;
     static std::string KEY_DETEORATION;
     static std::string KEY_FUEL;
+    static std::string KEY_SPEED;
+    static std::string KEY_HYPER;
 
     Descriptor();
     Descriptor(const std::map<std::string, std::string>&);
@@ -70,6 +72,8 @@ public:
     int condition() const;
     int deteoration() const;
     int fuel() const;
+    int speed() const;
+    int hyper() const;
 
 private:
     const std::string& get_raw(const std::string& key) const;

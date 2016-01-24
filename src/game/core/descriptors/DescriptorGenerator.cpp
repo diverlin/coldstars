@@ -73,7 +73,6 @@ Descriptor generateBakDescriptor(int race, int tech_level)
     if (race == -1) {
         race = race = int(TYPE::RACE::R0_ID);
     }
-
     if (tech_level == -1) {
         tech_level = int(TYPE::TECHLEVEL::L0_ID);
     }
@@ -98,5 +97,38 @@ Descriptor generateBakDescriptor(int race, int tech_level)
     descriptor.add(Descriptor::KEY_CONDITION, std::to_string(condition_max));
     descriptor.add(Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal));
     descriptor.add(Descriptor::KEY_FUEL, std::to_string(fuel_max_orig));
+    return descriptor;
+}
+
+Descriptor generateDriveDescriptor(int race, int tech_level)
+{
+    if (race == -1) {
+        race = race = int(TYPE::RACE::R0_ID);
+    }
+    if (tech_level == -1) {
+        tech_level = int(TYPE::TECHLEVEL::L0_ID);
+    }
+
+    int modules_num_max        = meti::getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
+    int mass                   = meti::getRandInt(EQUIPMENT::DRIVE::MASS_MIN, EQUIPMENT::DRIVE::MASS_MAX);
+    int condition_max          = meti::getRandInt(EQUIPMENT::DRIVE::CONDITION_MIN, EQUIPMENT::DRIVE::CONDITION_MAX);
+    int deterioration_normal = 1;
+
+    int speed = meti::getRandInt(EQUIPMENT::DRIVE::SPEED_MIN, EQUIPMENT::DRIVE::SPEED_MAX) * (1 + EQUIPMENT::DRIVE::SPEED_TECHLEVEL_RATE * (int)tech_level);
+    int hyper = meti::getRandInt(EQUIPMENT::DRIVE::HYPER_MIN, EQUIPMENT::DRIVE::HYPER_MAX) * (1 + EQUIPMENT::DRIVE::HYPER_TECHLEVEL_RATE * (int)tech_level);
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID);
+
+    Descriptor descriptor;
+    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::BAK_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
+    descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
+    descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
+    descriptor.add(Descriptor::KEY_MASS, std::to_string(mass));
+    descriptor.add(Descriptor::KEY_CONDITION, std::to_string(condition_max));
+    descriptor.add(Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal));
+    descriptor.add(Descriptor::KEY_SPEED, std::to_string(speed));
+    descriptor.add(Descriptor::KEY_HYPER, std::to_string(hyper));
     return descriptor;
 }
