@@ -60,6 +60,9 @@ Ship* createNewShip()
 
     Ship* ship = static_cast<Ship*>(global::get().entityManager().get(descriptor.id));
     assert(ship);
+    EXPECT_FALSE(ship->GetComplexDrive().GetBakSlot()->item() != nullptr);
+    global::get().shipBuilder().equip(ship);
+    global::get().shipBuilder().equip(ship, generateBakDescriptor());
     return ship;
 }
 

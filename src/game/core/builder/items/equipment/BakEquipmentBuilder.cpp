@@ -21,16 +21,9 @@
 #include <items/equipment/BakEquipment.hpp>
 #include <managers/EntityManager.hpp>
 
-#include <common/IdGenerator.hpp>
 #include <ceti/Logger.hpp>
-#include <math/rand.hpp>
-#include <common/constants.hpp>
 
 #include <common/Global.hpp>
-
-#include <descriptors/RaceDescriptors.hpp>
-
-#include <meti/RandUtils.hpp>
 
 BakEquipmentBuilder::BakEquipmentBuilder()
 {
@@ -49,40 +42,25 @@ BakEquipment* BakEquipmentBuilder::createTemplate(id_type id) const
     return bak_equipment;
 } 
        
-BakEquipment* BakEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int fuel_max) const
+BakEquipment* BakEquipmentBuilder::create(const Descriptor& descriptor) const
 {
     BakEquipment* bak_equipment = createTemplate();
-    createInternals(bak_equipment, tech_level, race_id, fuel_max);
+    createInternals(bak_equipment, descriptor);
     
     return bak_equipment;
 }
                           
-void BakEquipmentBuilder::createInternals(BakEquipment* bak_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int fuel_max_orig) const
-{     
-    if (race_id == TYPE::RACE::NONE_ID) {
-        race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-    }
-    
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
-        tech_level = TYPE::TECHLEVEL::L0_ID; 
-    }
-
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BAK_EQUIPMENT_ID);
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
-    
-    fuel_max_orig = meti::getRandInt(EQUIPMENT::BAK::FUEL_MIN, EQUIPMENT::BAK::FUEL_MAX) * (1 + EQUIPMENT::BAK::FUEL_TECHLEVEL_RATE * (int)tech_level);
-
+void BakEquipmentBuilder::createInternals(BakEquipment* bak_equipment, const Descriptor& descriptor) const
+{
     ItemCommonData common_data;
-    common_data.tech_level              = tech_level;
-    common_data.modules_num_max        = meti::getRandInt(EQUIPMENT::BAK::MODULES_NUM_MIN, EQUIPMENT::BAK::MODULES_NUM_MAX);
-    common_data.mass                   = meti::getRandInt(EQUIPMENT::BAK::MASS_MIN, EQUIPMENT::BAK::MASS_MAX);
-    common_data.condition_max          = meti::getRandInt(EQUIPMENT::BAK::CONDITION_MIN, EQUIPMENT::BAK::CONDITION_MAX);
-    common_data.deterioration_normal = 1;
+    common_data.tech_level             = (TYPE::TECHLEVEL)descriptor.tech();
+    common_data.modules_num_max        = descriptor.modules();
+    common_data.mass                   = descriptor.mass();
+    common_data.condition_max          = descriptor.condition();
+    common_data.deterioration_normal   = descriptor.deteoration();
 
-    bak_equipment->setFuelMaxOrig(fuel_max_orig);
-    bak_equipment->setFuel(fuel_max_orig);
-    // alpitodorender bak_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
+    bak_equipment->setFuelMaxOrig(descriptor.fuel());
+    bak_equipment->setFuel(descriptor.fuel());
     bak_equipment->setParentSubTypeId(TYPE::ENTITY::BAK_SLOT_ID);
     bak_equipment->setItemCommonData(common_data);
     bak_equipment->setCondition(common_data.condition_max);

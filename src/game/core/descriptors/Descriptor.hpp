@@ -33,6 +33,7 @@ class Descriptor
 {
 public:
     static std::string KEY_ID;
+    static std::string KEY_TYPE;
     static std::string KEY_RACE;
     static std::string KEY_OWNER;
     static std::string KEY_TARGET;
@@ -46,23 +47,23 @@ public:
     static std::string KEY_DETEORATION;
     static std::string KEY_FUEL;
 
-    std::map<std::string, std::string> map;
-
+    Descriptor();
     Descriptor(const std::map<std::string, std::string>&);
     Descriptor(const std::string& data);
     ~Descriptor() {}
 
+    void add(const std::string& key, const std::string& val);
     std::string data() const;
 
     bool operator==(const Descriptor& rhs) const;
 
     id_type id() const;
+    int type() const;
     int race() const;
     id_type owner() const;
     id_type target() const;
     int damage() const;
     int radius() const;
-
     int tech() const;
     int modules() const;
     int mass() const;
@@ -87,6 +88,8 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
     {
-        ar & map;
+        ar & m_map;
     }
+
+    std::map<std::string, std::string> m_map;
 }; 

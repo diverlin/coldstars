@@ -147,16 +147,13 @@ int Vehicle::givenExpirience() const
     return m_npc->GetSkills().GetExpirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
 }
 
-bool Vehicle::CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY slot_subtype_id) const
+bool Vehicle::isSlotExists(TYPE::ENTITY slot_subtype_id) const
 {
-    for (unsigned int i=0; i<m_SlotTotal_vec.size(); i++)
-    {
-        if (m_SlotTotal_vec[i]->subTypeId() == slot_subtype_id)
-        {
+    for (unsigned int i=0; i<m_SlotTotal_vec.size(); i++) {
+        if (m_SlotTotal_vec[i]->subTypeId() == slot_subtype_id) {
             return true;
         }
-    }
-    
+    }    
     return false;
 }
 
@@ -807,43 +804,30 @@ void Vehicle::DecreaseMass(int d_mass)
 
 void Vehicle::UpdatePropertiesSpeed()
 {
-    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesSpeed");
-    
-    // speed calculation ////
+    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesSpeed");    
     m_properties.speed = 0;
+    if (!m_ComplexDrive.GetDriveSlot())
+        return;
+    if (!m_ComplexDrive.GetDriveSlot()->item())
+        return;
+    if (!m_ComplexDrive.GetDriveSlot()->driveEquipment()->isFunctioning())
+        return;
 
-    if (m_ComplexDrive.GetDriveSlot() != nullptr)
-    {
-        if (m_ComplexDrive.GetDriveSlot()->item() != nullptr)
-        {
-            if (m_ComplexDrive.GetDriveSlot()->driveEquipment()->isFunctioning() == true)
-            {
-                float actual_speed = (m_ComplexDrive.GetDriveSlot()->driveEquipment()->GetSpeed() - mass()*MASS_DECREASE_SPEED_RATE);
-                if (actual_speed > 0)
-                {
-                    if (m_properties.artefact_gravity > 0)
-                    {
-                        m_properties.speed = (1.0 + m_properties.artefact_gravity/100.0)*actual_speed;
-                    }
-                    else
-                    {
-                        m_properties.speed = actual_speed;
-                    }
-                    
-                    if (m_ComplexDrive.GetDriveSlot()->GetSelected() == true)
-                    {
-                        m_properties.speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
-                        m_ComplexDrive.GetDriveSlot()->item()->useOverloadDeterioration();
-                    }
-                    else
-                    {
-                        m_ComplexDrive.GetDriveSlot()->item()->useNormalDeterioration();
-                    }
-
-                    m_ComplexDrive.UpdatePath();
-                }
-            }
+    float actual_speed = (m_ComplexDrive.GetDriveSlot()->driveEquipment()->GetSpeed() - mass()*MASS_DECREASE_SPEED_RATE);
+    if (actual_speed > 0) {
+        if (m_properties.artefact_gravity > 0) {
+            m_properties.speed = (1.0 + m_properties.artefact_gravity/100.0)*actual_speed;
+        } else {
+            m_properties.speed = actual_speed;
         }
+
+        if (m_ComplexDrive.GetDriveSlot()->GetSelected() == true) {
+            m_properties.speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
+            m_ComplexDrive.GetDriveSlot()->item()->useOverloadDeterioration();
+        } else {
+            m_ComplexDrive.GetDriveSlot()->item()->useNormalDeterioration();
+        }
+        m_ComplexDrive.UpdatePath();
     }
 }
 
@@ -864,14 +848,15 @@ void Vehicle::UpdatePropertiesRadar()
     m_properties.radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
     m_properties.equipment_radar = false;
     
-    if (m_SlotRadar->item() != nullptr)
-    {
-        if (m_SlotRadar->radarEquipment()->isFunctioning() == true)
-        {
-            m_properties.radar = m_SlotRadar->radarEquipment()->GetRadius();
-            m_properties.equipment_radar = true;
-        }
-    }
+    assert(m_SlotRadar);
+    if (!m_SlotRadar->item())
+        return;
+
+    if (!m_SlotRadar->radarEquipment()->isFunctioning())
+        return;
+
+    m_properties.radar = m_SlotRadar->radarEquipment()->GetRadius();
+    m_properties.equipment_radar = true;
 }
 
 void Vehicle::UpdatePropertiesJump()

@@ -109,12 +109,17 @@ void EntityManager::clear()
 }
 
 void EntityManager::reg(Base* entity)
-{
-    //LOG("+++++++EntityManager::RegisterEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
-    
+{   
     if (entity->id() == NONE_ID) {
         entity->setId(global::get().idGenerator().nextId());
     }
+    LOG("EntityManager::reg " + entity->dataTypeStr() << std::endl);
+
+    auto f = m_entities_map.find(entity->id());
+    if (f != m_entities_map.end()) {
+        throw std::runtime_error("CODE ERROR: try to create two entity with simmilar id=" + std::to_string(entity->id()) + " exists " + entity->dataTypeStr());
+    }
+
     m_entities_map.insert(std::make_pair(entity->id(), entity));
 }
 
@@ -123,7 +128,7 @@ Base* EntityManager::get(const id_type& id) const
     LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
     std::map<id_type, Base*>::const_iterator slice = m_entities_map.find(id);
     assert(slice->second);
-    LOG(std::string("type_id=") << str(slice->second->typeId()) << std::endl);
+    LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
     return slice->second;
 }
 

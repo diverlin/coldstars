@@ -90,7 +90,7 @@ class Vehicle : public SpaceObject
         const VehicleDescriptor& GetVehicleDescriptor() const { return m_VehicleDescriptor; }
         
         virtual int givenExpirience() const override final;
-        bool CheckItemSlotPresenceBySubTypeId(TYPE::ENTITY) const;
+        bool isSlotExists(TYPE::ENTITY) const;
         
         void AddItemSlot(ItemSlot*); 
         
@@ -229,18 +229,18 @@ class Vehicle : public SpaceObject
         bool m_GodMode;
         VEHICLE_SPECIAL_ACTION_TYPE m_SpecialActionId;
         
-        Npc* m_npc;
+        Npc* m_npc = nullptr;
         
-        VehicleSlot* m_ParentVehicleSlot;
+        VehicleSlot* m_ParentVehicleSlot = nullptr;
        
-        Land* m_Land;
+        Land* m_Land = nullptr;
         
-        ItemSlot* m_SlotRadar;
-        ItemSlot* m_SlotScaner;
-        ItemSlot* m_SlotEnergizer;
-        ItemSlot* m_SlotGrapple;
-        ItemSlot* m_SlotDroid;
-        ItemSlot* m_SlotFreezer;
+        ItemSlot* m_SlotRadar = nullptr;
+        ItemSlot* m_SlotScaner = nullptr;
+        ItemSlot* m_SlotEnergizer = nullptr;
+        ItemSlot* m_SlotGrapple = nullptr;
+        ItemSlot* m_SlotDroid = nullptr;
+        ItemSlot* m_SlotFreezer = nullptr;
          
         std::vector<ItemSlot*> m_SlotFunct_vec;
         std::vector<ItemSlot*> m_SlotArtef_vec;

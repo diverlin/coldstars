@@ -130,7 +130,7 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
         store->AddItem(global::get().protectorEquipmentBuilder().create());
     }
     for (unsigned int i=0; i<bak_num; i++) {
-        store->AddItem(global::get().bakEquipmentBuilder().create());
+        //store->AddItem(global::get().bakEquipmentBuilder().create());
     }
     for (unsigned int i=0; i<droid_num; i++) {
         store->AddItem(global::get().droidEquipmentBuilder().create());
