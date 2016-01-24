@@ -17,11 +17,25 @@
 */
 
 
-#include "BombDescriptorGenerator.hpp"
+#include "DescriptorGenerator.hpp"
 
 #include <meti/RandUtils.hpp>
 #include <common/Global.hpp>
 #include <common/IdGenerator.hpp>
+
+Descriptor generateHitDescriptor(const id_type& owner, const id_type& target, int damage)
+{
+    id_type id = global::get().idGenerator().nextId();
+    std::map<std::string, std::string> map = {
+        {Descriptor::KEY_ID, std::to_string(id)},
+        {Descriptor::KEY_OWNER, std::to_string(owner)},
+        {Descriptor::KEY_TARGET, std::to_string(target)},
+        {Descriptor::KEY_DAMAGE, std::to_string(damage)}
+    };
+
+    Descriptor descriptor(map);
+    return descriptor;
+}
 
 Descriptor generateBombDescriptor()
 {
