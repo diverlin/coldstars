@@ -80,14 +80,14 @@ void FreezerEquipmentBuilder::createInternals(FreezerEquipment* freezer_equipmen
     common_data.tech_level         = tech_level;
     common_data.modules_num_max = meti::getRandInt(EQUIPMENT::FREEZER::MODULES_NUM_MIN, EQUIPMENT::FREEZER::MODULES_NUM_MAX);
     common_data.mass            = meti::getRandInt(EQUIPMENT::FREEZER::MASS_MIN,        EQUIPMENT::FREEZER::MASS_MAX);
-    common_data.condition_max   = meti::getRandInt(EQUIPMENT::FREEZER::CONDITION_MIN,   EQUIPMENT::FREEZER::CONDITION_MAX);
+    common_data.condition   = meti::getRandInt(EQUIPMENT::FREEZER::CONDITION_MIN,   EQUIPMENT::FREEZER::CONDITION_MAX);
     common_data.deterioration_normal = 1;
     
     freezer_equipment->SetFreezeOrig(freeze_orig);
     //alpitodorender freezer_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     freezer_equipment->setParentSubTypeId(TYPE::ENTITY::FREEZER_SLOT_ID);
     freezer_equipment->setItemCommonData(common_data);
-    freezer_equipment->setCondition(common_data.condition_max);
+    freezer_equipment->setCondition(common_data.condition);
 
     freezer_equipment->updateProperties();
     freezer_equipment->CountPrice();

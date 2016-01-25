@@ -80,14 +80,14 @@ void ScanerEquipmentBuilder::createInternals(ScanerEquipment* scaner_equipment, 
     common_data.tech_level         = tech_level;
     common_data.modules_num_max = meti::getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
     common_data.mass            = meti::getRandInt(EQUIPMENT::SCANER::MASS_MIN,        EQUIPMENT::SCANER::MASS_MAX);
-    common_data.condition_max   = meti::getRandInt(EQUIPMENT::SCANER::CONDITION_MIN,   EQUIPMENT::SCANER::CONDITION_MAX);
+    common_data.condition   = meti::getRandInt(EQUIPMENT::SCANER::CONDITION_MIN,   EQUIPMENT::SCANER::CONDITION_MAX);
     common_data.deterioration_normal = 1;
     
     scaner_equipment->SetScanOrig(scan_orig);  
     //alpitodorender scaner_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     scaner_equipment->setParentSubTypeId(TYPE::ENTITY::SCANER_SLOT_ID);
     scaner_equipment->setItemCommonData(common_data);
-    scaner_equipment->setCondition(common_data.condition_max);
+    scaner_equipment->setCondition(common_data.condition);
                
     scaner_equipment->updateProperties();
     scaner_equipment->CountPrice();

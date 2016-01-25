@@ -133,7 +133,7 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
         store->AddItem(global::get().bakEquipmentBuilder().create(generateBakDescriptor()));
     }
     for (unsigned int i=0; i<droid_num; i++) {
-        store->AddItem(global::get().droidEquipmentBuilder().create());
+        store->AddItem(global::get().droidEquipmentBuilder().create(generateDroidDescriptor()));
     }
     for (unsigned int i=0; i<scaner_num; i++) {
         store->AddItem(global::get().scanerEquipmentBuilder().create());

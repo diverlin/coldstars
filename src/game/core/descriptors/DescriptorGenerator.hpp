@@ -28,3 +28,4 @@ Descriptor generateStarSystemDescriptor(int race = -1);
 // items
 Descriptor generateBakDescriptor(int race = -1, int tech_level = -1);
 Descriptor generateDriveDescriptor(int race = -1, int tech_level = -1);
+Descriptor generateDroidDescriptor(int race = -1, int tech_level = -1);

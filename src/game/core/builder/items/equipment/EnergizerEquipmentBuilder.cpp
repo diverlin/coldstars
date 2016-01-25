@@ -81,7 +81,7 @@ void EnergizerEquipmentBuilder::createInternals(EnergizerEquipment* energizer_eq
     common_data.tech_level          = tech_level;
     common_data.modules_num_max  = meti::getRandInt(EQUIPMENT::ENERGIZER::MODULES_NUM_MIN, EQUIPMENT::ENERGIZER::MODULES_NUM_MAX);
     common_data.mass             = meti::getRandInt(EQUIPMENT::ENERGIZER::MASS_MIN,        EQUIPMENT::ENERGIZER::MASS_MAX);
-    common_data.condition_max    = meti::getRandInt(EQUIPMENT::ENERGIZER::CONDITION_MIN,   EQUIPMENT::ENERGIZER::CONDITION_MAX);
+    common_data.condition    = meti::getRandInt(EQUIPMENT::ENERGIZER::CONDITION_MIN,   EQUIPMENT::ENERGIZER::CONDITION_MAX);
     common_data.deterioration_normal = 1;
 
     energizer_equipment->SetEnergyMaxOrig(energy_max_orig);
@@ -90,7 +90,7 @@ void EnergizerEquipmentBuilder::createInternals(EnergizerEquipment* energizer_eq
     //alpitodorender energizer_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     energizer_equipment->setParentSubTypeId(TYPE::ENTITY::ENERGIZER_SLOT_ID);
     energizer_equipment->setItemCommonData(common_data);
-    energizer_equipment->setCondition(common_data.condition_max);
+    energizer_equipment->setCondition(common_data.condition);
                     
     energizer_equipment->updateProperties();
     energizer_equipment->CountPrice();

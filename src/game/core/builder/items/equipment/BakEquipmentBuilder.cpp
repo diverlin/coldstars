@@ -53,17 +53,18 @@ BakEquipment* BakEquipmentBuilder::create(const Descriptor& descriptor) const
 void BakEquipmentBuilder::createInternals(BakEquipment* bak_equipment, const Descriptor& descriptor) const
 {
     ItemCommonData common_data;
+    common_data.race            = (TYPE::RACE)descriptor.race();
     common_data.tech_level             = (TYPE::TECHLEVEL)descriptor.tech();
     common_data.modules_num_max        = descriptor.modules();
     common_data.mass                   = descriptor.mass();
-    common_data.condition_max          = descriptor.condition();
+    common_data.condition          = descriptor.condition();
     common_data.deterioration_normal   = descriptor.deteoration();
 
     bak_equipment->setFuelMaxOrig(descriptor.fuel());
     bak_equipment->setFuel(descriptor.fuel());
     bak_equipment->setParentSubTypeId(TYPE::ENTITY::BAK_SLOT_ID);
     bak_equipment->setItemCommonData(common_data);
-    bak_equipment->setCondition(common_data.condition_max);
+    bak_equipment->setCondition(common_data.condition);
                                     
     bak_equipment->updateProperties();
     bak_equipment->countPrice();

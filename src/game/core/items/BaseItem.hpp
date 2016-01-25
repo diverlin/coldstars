@@ -36,9 +36,10 @@ struct ItemCommonData
     ItemCommonData()
     {}
 
+    TYPE::RACE race = TYPE::RACE::R0_ID;
     TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID;
     unsigned int modules_num_max = 0;
-    unsigned int condition_max = 0;
+    unsigned int condition = 0;
     unsigned int deterioration_normal = 0;
     float deterioration_overload_rate = 0.0f;
     unsigned int mass = 0;

@@ -63,10 +63,11 @@ DriveEquipment* DriveEquipmentBuilder::create(const Descriptor& descriptor) cons
 void DriveEquipmentBuilder::createInternals(DriveEquipment* drive_equipment, const Descriptor& descriptor) const
 {     
     ItemCommonData common_data;
+    common_data.race            = (TYPE::RACE)descriptor.race();
     common_data.tech_level         = (TYPE::TECHLEVEL)descriptor.tech();
     common_data.modules_num_max    = descriptor.modules();
     common_data.mass               = descriptor.mass();
-    common_data.condition_max      = descriptor.condition();
+    common_data.condition      = descriptor.condition();
     common_data.deterioration_normal = 1;
     common_data.deterioration_overload_rate = EQUIPMENT::DRIVE::OVERLOAD_DETERIORATION_RATE;
 
@@ -80,7 +81,7 @@ void DriveEquipmentBuilder::createInternals(DriveEquipment* drive_equipment, con
     drive_equipment->SetHyperOrig(descriptor.hyper());
     drive_equipment->setParentSubTypeId(TYPE::ENTITY::DRIVE_SLOT_ID);
     drive_equipment->setItemCommonData(common_data);
-    drive_equipment->setCondition(common_data.condition_max);
+    drive_equipment->setCondition(common_data.condition);
     
     drive_equipment->updateProperties();
     drive_equipment->CountPrice();
