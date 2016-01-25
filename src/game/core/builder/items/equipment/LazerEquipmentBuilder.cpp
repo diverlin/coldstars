@@ -51,7 +51,7 @@ LazerEquipment* LazerEquipmentBuilder::createTemplate(id_type id) const
     return lazer_equipment;
 } 
 
-LazerEquipment* LazerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
+LazerEquipment* LazerEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {
     LazerEquipment* lazer_equipment = createTemplate();
     createInternals(lazer_equipment, tech_level, race_id, damage_orig, radius_orig);
@@ -59,22 +59,22 @@ LazerEquipment* LazerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::
     return lazer_equipment;
 } 
 
-void LazerEquipmentBuilder::createInternals(LazerEquipment* lazer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
+void LazerEquipmentBuilder::createInternals(LazerEquipment* lazer_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     }
     
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
-        tech_level = TYPE::TECHLEVEL::L0_ID;
+    if (tech_level == TYPE::TECH::NONE_ID) {
+        tech_level = TYPE::TECH::L0_ID;
     }
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::LAZER_EQUIPMENT_ID, revision_id)
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::LAZER_EQUIPMENT_ID);
 
-    damage_orig     = meti::getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX) * (1 + EQUIPMENT::LAZER::DAMAGE_TECHLEVEL_RATE * (int)tech_level);
-    radius_orig     = meti::getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX) * (1 + EQUIPMENT::LAZER::RADIUS_TECHLEVEL_RATE * (int)tech_level);
+    damage_orig     = meti::getRandInt(EQUIPMENT::LAZER::DAMAGE_MIN, EQUIPMENT::LAZER::DAMAGE_MAX) * (1 + EQUIPMENT::LAZER::DAMAGE_TECH_RATE * (int)tech_level);
+    radius_orig     = meti::getRandInt(EQUIPMENT::LAZER::RADIUS_MIN, EQUIPMENT::LAZER::RADIUS_MAX) * (1 + EQUIPMENT::LAZER::RADIUS_TECH_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech         = tech_level;

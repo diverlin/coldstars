@@ -52,7 +52,7 @@ ScanerEquipment* ScanerEquipmentBuilder::createTemplate(id_type id) const
     return scaner_equipment;
 } 
 
-ScanerEquipment* ScanerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int scan_orig) const
+ScanerEquipment* ScanerEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int scan_orig) const
 {
     ScanerEquipment* scaner_equipment = createTemplate();
     createInternals(scaner_equipment, tech_level, race_id, scan_orig);
@@ -60,21 +60,21 @@ ScanerEquipment* ScanerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE
     return scaner_equipment;
 } 
             
-void ScanerEquipmentBuilder::createInternals(ScanerEquipment* scaner_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int scan_orig) const
+void ScanerEquipmentBuilder::createInternals(ScanerEquipment* scaner_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int scan_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     }
     
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
-        tech_level = TYPE::TECHLEVEL::L0_ID; 
+    if (tech_level == TYPE::TECH::NONE_ID) {
+        tech_level = TYPE::TECH::L0_ID; 
     }
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
 
-    scan_orig       = meti::getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECHLEVEL_RATE * (int)tech_level);
+    scan_orig       = meti::getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECH_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech         = tech_level;

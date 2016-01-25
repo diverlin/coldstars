@@ -37,7 +37,7 @@ struct ItemCommonData
     {}
 
     TYPE::RACE race = TYPE::RACE::R0_ID;
-    TYPE::TECHLEVEL tech = TYPE::TECHLEVEL::NONE_ID;
+    TYPE::TECH tech = TYPE::TECH::NONE_ID;
     unsigned int modules_num = 0;
     unsigned int condition = 0;
     unsigned int deterioration = 0;

@@ -165,7 +165,7 @@ void BaseItem::LoadData(const boost::property_tree::ptree& load_ptree)
     m_race_id           = (TYPE::RACE)load_ptree.get<int>("race_id");
     m_parent_subtype_id = (TYPE::ENTITY)load_ptree.get<int>("parent_subtype_id");
 
-    m_data_item.tech           = (TYPE::TECHLEVEL)load_ptree.get<int>("data_item.tech_level");
+    m_data_item.tech           = (TYPE::TECH)load_ptree.get<int>("data_item.tech_level");
     m_data_item.modules_num      = load_ptree.get<int>("data_item.modules_num_max");
     m_data_item.condition        = load_ptree.get<int>("data_item.condition_max");
     m_data_item.deterioration = load_ptree.get<int>("data_item.deterioration_normal");

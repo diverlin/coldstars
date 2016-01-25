@@ -52,7 +52,7 @@ EnergizerEquipment* EnergizerEquipmentBuilder::createTemplate(id_type id) const
     return energizer_equipment;
 } 
     
-EnergizerEquipment* EnergizerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
+EnergizerEquipment* EnergizerEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
 {
     EnergizerEquipment* energizer_equipment = createTemplate();
     createInternals(energizer_equipment, tech_level, race_id, energy_max_orig, restoration_orig);
@@ -60,22 +60,22 @@ EnergizerEquipment* EnergizerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level
     return energizer_equipment;
 } 
         
-void EnergizerEquipmentBuilder::createInternals(EnergizerEquipment* energizer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
+void EnergizerEquipmentBuilder::createInternals(EnergizerEquipment* energizer_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     }
     
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
-        tech_level = TYPE::TECHLEVEL::L0_ID; 
+    if (tech_level == TYPE::TECH::NONE_ID) {
+        tech_level = TYPE::TECH::L0_ID; 
     }
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(ENERGIZER_ITEM_TEXTURE_ID, revision_id)
 
-    energy_max_orig  = meti::getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN,      EQUIPMENT::ENERGIZER::ENERGY_MAX)      * (1 + EQUIPMENT::ENERGIZER::ENERGY_TECHLEVEL_RATE * (int)tech_level);
-    restoration_orig = meti::getRandInt(EQUIPMENT::ENERGIZER::RESTORATION_MIN, EQUIPMENT::ENERGIZER::RESTORATION_MAX) * (1 + EQUIPMENT::ENERGIZER::RESTORATION_TECHLEVEL_RATE * (int)tech_level);
+    energy_max_orig  = meti::getRandInt(EQUIPMENT::ENERGIZER::ENERGY_MIN,      EQUIPMENT::ENERGIZER::ENERGY_MAX)      * (1 + EQUIPMENT::ENERGIZER::ENERGY_TECH_RATE * (int)tech_level);
+    restoration_orig = meti::getRandInt(EQUIPMENT::ENERGIZER::RESTORATION_MIN, EQUIPMENT::ENERGIZER::RESTORATION_MAX) * (1 + EQUIPMENT::ENERGIZER::RESTORATION_TECH_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech          = tech_level;

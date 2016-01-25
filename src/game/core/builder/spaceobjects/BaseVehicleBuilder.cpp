@@ -174,7 +174,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, const Descriptor& descriptor) c
     }
 }
 
-void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) const
+void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
 {
     unsigned int weapons_num = meti::getRandInt(vehicle->GetVehicleDescriptor().slot_weapon_num/2, vehicle->GetVehicleDescriptor().slot_weapon_num);
     for (unsigned int i=0; i<weapons_num; i++)
@@ -269,7 +269,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) con
     }
 }
 
-void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) const
+void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, TYPE::TECH tech_level) const
 {
     for (unsigned int i=0; i<4; i++) 
     {     
@@ -296,7 +296,7 @@ void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, TYPE::TECHLEVEL tech_lev
     }
 }
 
-void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) const
+void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, TYPE::TECH tech_level) const
 {
     for (unsigned int i=0; i<2; i++) 
     {
@@ -315,7 +315,7 @@ void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, TYPE::TECHLEVEL tech_l
     }  
 }
 
-void BaseVehicleBuilder::EquipBomb(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) const
+void BaseVehicleBuilder::EquipBomb(Vehicle* vehicle, TYPE::TECH tech_level) const
 {
     for (unsigned int i=0; i<2; i++) {
         //vehicle->AddItemToCargoSlot(global::get().bombBuilder().create());
