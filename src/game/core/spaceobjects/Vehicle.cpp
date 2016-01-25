@@ -211,7 +211,7 @@ bool Vehicle::GetAllItemsFromVehicle(Vehicle* vehicle)
             if (vehicle->m_SlotTotal_vec[i]->subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID) {
                 result = AddItemToCargoSlot(vehicle->m_SlotTotal_vec[i]->item());
             } else {
-                result = AddAndManageItem(vehicle->m_SlotTotal_vec[i]->item());
+                result = manage(vehicle->m_SlotTotal_vec[i]->item());
             }
         }
     }
@@ -369,16 +369,13 @@ bool Vehicle::AddItemToCargoSlot(BaseItem* item)
     return false;
 } 
 
-bool Vehicle::AddAndManageItem(BaseItem* item)
+bool Vehicle::manage(BaseItem* item)
 {
-    bool result = AddItemToCargoSlot(item);
-
-    if (result == true)
-    {
+    if (AddItemToCargoSlot(item)) {
         ManageItem(item);
+        return true;
     }
-
-    return result;
+    return false;
 }
 
 void Vehicle::ManageItemsInCargo()

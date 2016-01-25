@@ -16,8 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef INCLUDEITEMBUILDERS_HPP
-#define INCLUDEITEMBUILDERS_HPP
+#pragma once
 
 #include "equipment/BakEquipmentBuilder.hpp"
 #include "equipment/DriveEquipmentBuilder.hpp"
@@ -46,7 +45,6 @@
 
 #include "other/BombBuilder.hpp"
 
-#endif 
     
 
         
