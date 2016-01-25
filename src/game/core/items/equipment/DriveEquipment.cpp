@@ -23,12 +23,9 @@
 #include "../../items//modules/DriveModule.hpp"
 
 DriveEquipment::DriveEquipment(const id_type& id)
-:
-speed_orig(0),
-hyper_orig(0)
 {
     setId(id);
-    setTypeId(TYPE::ENTITY::EQUIPMENT_ID);  
+    setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
     setSubTypeId(TYPE::ENTITY::DRIVE_EQUIPMENT_ID);
 }
 
@@ -39,56 +36,53 @@ DriveEquipment::~DriveEquipment()
 /* virtual */
 void DriveEquipment::updateProperties()
 {     
-         speed_add        = 0;
-         hyper_add        = 0;
-     
-        for (unsigned int i = 0; i < modules_vec.size(); i++)
-        {
-            speed_add += ((DriveModule*)modules_vec[i])->GetSpeedAdd();
-            hyper_add += ((DriveModule*)modules_vec[i])->GetHyperAdd();      
-        }
-        
-         speed = speed_orig + speed_add;
-         hyper = hyper_orig + hyper_add;
+    m_speed_add = 0;
+    m_hyper_add = 0;
+    for (unsigned int i=0; i<modules_vec.size(); i++) {
+        m_speed_add += ((DriveModule*)modules_vec[i])->GetSpeedAdd();
+        m_hyper_add += ((DriveModule*)modules_vec[i])->GetHyperAdd();
+    }
+    m_speed = m_speed_orig + m_speed_add;
+    m_hyper = m_hyper_orig + m_hyper_add;
 }
-             
+
 void DriveEquipment::CountPrice()
 {
-         float speed_rate         = (float)speed_orig / EQUIPMENT::DRIVE::SPEED_MIN;
-         float hyper_rate         = (float)hyper_orig / EQUIPMENT::DRIVE::HYPER_MIN;
-         float modules_num_rate   = (float)m_data_item.modules_num / EQUIPMENT::DRIVE::MODULES_NUM_MAX;
+    float speed_rate         = (float)m_speed_orig / EQUIPMENT::DRIVE::SPEED_MIN;
+    float hyper_rate         = (float)m_hyper_orig / EQUIPMENT::DRIVE::HYPER_MIN;
+    float modules_num_rate   = (float)m_data_item.modules_num / EQUIPMENT::DRIVE::MODULES_NUM_MAX;
 
-         float effectiveness_rate = EQUIPMENT::DRIVE::SPEED_WEIGHT * speed_rate + 
-                        EQUIPMENT::DRIVE::HYPER_WEIGHT * hyper_rate + 
-                        EQUIPMENT::DRIVE::MODULES_NUM_WEIGHT * modules_num_rate;
+    float effectiveness_rate = EQUIPMENT::DRIVE::SPEED_WEIGHT * speed_rate +
+            EQUIPMENT::DRIVE::HYPER_WEIGHT * hyper_rate +
+            EQUIPMENT::DRIVE::MODULES_NUM_WEIGHT * modules_num_rate;
 
-         float mass_rate          = (float)m_data_item.mass / EQUIPMENT::DRIVE::MASS_MIN;
-         float condition_rate     = (float)m_condition / m_data_item.condition;
+    float mass_rate          = (float)m_data_item.mass / EQUIPMENT::DRIVE::MASS_MIN;
+    float condition_rate     = (float)m_condition / m_data_item.condition;
 
-         m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
+    m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
 void DriveEquipment::addUniqueInfo()
 {
-//        info.addTitleStr("DRIVE");
-//        info.addNameStr("speed:");     info.addValueStr(GetSpeedStr());
-//        info.addNameStr("hyper:");     info.addValueStr(GetHyperStr());
+    //        info.addTitleStr("DRIVE");
+    //        info.addNameStr("speed:");     info.addValueStr(GetSpeedStr());
+    //        info.addNameStr("hyper:");     info.addValueStr(GetHyperStr());
 }             
 
 std::string DriveEquipment::GetSpeedStr()
 {
-         if (speed_add == 0)
-            return std::to_string(speed_orig);
-         else
-            return std::to_string(speed_orig) + "+" + std::to_string(speed_add);
+    if (m_speed_add == 0)
+        return std::to_string(m_speed_orig);
+    else
+        return std::to_string(m_speed_orig) + "+" + std::to_string(m_speed_add);
 }
 
 std::string DriveEquipment::GetHyperStr()
 {
-         if (hyper_add == 0)
-            return std::to_string(hyper_orig);
-         else
-            return std::to_string(hyper_orig) + "+" + std::to_string(hyper_add);
+    if (m_hyper_add == 0)
+        return std::to_string(m_hyper_orig);
+    else
+        return std::to_string(m_hyper_orig) + "+" + std::to_string(m_hyper_add);
 }
 
 
@@ -125,16 +119,16 @@ void DriveEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std
 {
     LOG(" DriveEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"speed_orig", speed_orig);
-    save_ptree.put(root+"hyper_orig", hyper_orig);
+    save_ptree.put(root+"speed_orig", m_speed_orig);
+    save_ptree.put(root+"hyper_orig", m_hyper_orig);
 }
-                
+
 void DriveEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" DriveEquipment::LoadData()  id=" + std::to_string(id()) + " START");
 
-    speed_orig = load_ptree.get<int>("speed_orig");
-    hyper_orig = load_ptree.get<int>("hyper_orig");
+    m_speed_orig = load_ptree.get<int>("speed_orig");
+    m_hyper_orig = load_ptree.get<int>("hyper_orig");
 }                
 
 void DriveEquipment::ResolveData()

@@ -810,7 +810,7 @@ void Vehicle::UpdatePropertiesSpeed()
     if (!m_ComplexDrive.GetDriveSlot()->driveEquipment()->isFunctioning())
         return;
 
-    float actual_speed = (m_ComplexDrive.GetDriveSlot()->driveEquipment()->GetSpeed() - mass()*MASS_DECREASE_SPEED_RATE);
+    float actual_speed = (m_ComplexDrive.GetDriveSlot()->driveEquipment()->speed() - mass()*MASS_DECREASE_SPEED_RATE);
     if (actual_speed > 0) {
         if (m_properties.artefact_gravity > 0) {
             m_properties.speed = (1.0 + m_properties.artefact_gravity/100.0)*actual_speed;
@@ -861,32 +861,20 @@ void Vehicle::UpdatePropertiesJump()
 
     m_properties.hyper = 0;
 
-    if (m_ComplexDrive.GetDriveSlot())
-    {
-        if (m_ComplexDrive.GetDriveSlot()->item())
-        {
-            if (m_ComplexDrive.GetDriveSlot()->driveEquipment()->isFunctioning() == true)
-            {
-                if (m_ComplexDrive.GetBakSlot())
-                {
-                    if (m_ComplexDrive.GetBakSlot()->item())
-                    {
-                        if (m_ComplexDrive.GetBakSlot()->bakEquipment()->isFunctioning() == true)
-                        {
-                            if (m_ComplexDrive.GetDriveSlot()->driveEquipment()->GetHyper() > m_ComplexDrive.GetBakSlot()->bakEquipment()->fuel())
-                            {
-                                m_properties.hyper = m_ComplexDrive.GetDriveSlot()->driveEquipment()->GetHyper();
-                            }
-                            else
-                            {
-                                m_properties.hyper = m_ComplexDrive.GetBakSlot()->bakEquipment()->fuel();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    if (!m_ComplexDrive.GetDriveSlot())
+        return;
+    if (!m_ComplexDrive.GetDriveSlot()->item())
+        return;
+    if (!m_ComplexDrive.GetDriveSlot()->driveEquipment()->isFunctioning())
+        return;
+    if (!m_ComplexDrive.GetBakSlot())
+        return;
+    if (!m_ComplexDrive.GetBakSlot()->item())
+        return;
+    if (!m_ComplexDrive.GetBakSlot()->bakEquipment()->isFunctioning())
+        return;
+
+    m_properties.hyper = std::min(m_ComplexDrive.GetDriveSlot()->driveEquipment()->hyper(), m_ComplexDrive.GetBakSlot()->bakEquipment()->fuel());
 }
 
 void Vehicle::UpdatePropertiesEnergy()
