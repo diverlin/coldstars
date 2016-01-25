@@ -33,10 +33,10 @@ class BaseVehicleBuilder
         virtual ~BaseVehicleBuilder() {}
 
         void equip(Vehicle* vehicle, const Descriptor& descriptor) const;
-        void equip(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const;
-        void EquipModules(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const; 
-        void EquipArtefacts(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const; 
-        void EquipBomb(Vehicle*, TYPE::TECHLEVEL tech_leve = TYPE::TECHLEVEL::L0_ID) const; 
+        void equip(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const;
+        void EquipModules(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const; 
+        void EquipArtefacts(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const; 
+        void EquipBomb(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const; 
               
     protected:
         void CreateItemSlots(Vehicle*) const;

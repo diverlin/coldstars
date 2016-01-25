@@ -52,7 +52,7 @@ FreezerEquipment* FreezerEquipmentBuilder::createTemplate(id_type id) const
     return freezer_equipment;
 } 
 
-FreezerEquipment* FreezerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int freeze_orig) const
+FreezerEquipment* FreezerEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int freeze_orig) const
 {
     FreezerEquipment* freezer_equipment = createTemplate();
     createInternals(freezer_equipment, tech_level, race_id, freeze_orig);
@@ -60,21 +60,21 @@ FreezerEquipment* FreezerEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TY
     return freezer_equipment;
 } 
 
-void FreezerEquipmentBuilder::createInternals(FreezerEquipment* freezer_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int freeze_orig) const
+void FreezerEquipmentBuilder::createInternals(FreezerEquipment* freezer_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int freeze_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     }
     
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
-        tech_level = TYPE::TECHLEVEL::L0_ID;
+    if (tech_level == TYPE::TECH::NONE_ID) {
+        tech_level = TYPE::TECH::L0_ID;
     }
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::FREEZER_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id)
 
-    freeze_orig     = meti::getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX) * (1 + EQUIPMENT::FREEZER::FREEZE_TECHLEVEL_RATE*(int)tech_level);
+    freeze_orig     = meti::getRandInt(EQUIPMENT::FREEZER::FREEZE_MIN, EQUIPMENT::FREEZER::FREEZE_MAX) * (1 + EQUIPMENT::FREEZER::FREEZE_TECH_RATE*(int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech         = tech_level;

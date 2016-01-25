@@ -48,7 +48,7 @@ ProtectorEquipment* ProtectorEquipmentBuilder::createTemplate(id_type id) const
     return protector_equipment;
 } 
    
-ProtectorEquipment* ProtectorEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int protection_orig) const
+ProtectorEquipment* ProtectorEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int protection_orig) const
 {
     ProtectorEquipment* protector_equipment = createTemplate();
     createInternals(protector_equipment, tech_level, race_id, protection_orig);
@@ -56,21 +56,21 @@ ProtectorEquipment* ProtectorEquipmentBuilder::create(TYPE::TECHLEVEL tech_level
     return protector_equipment;
 } 
          
-void ProtectorEquipmentBuilder::createInternals(ProtectorEquipment* protector_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int protection_orig) const
+void ProtectorEquipmentBuilder::createInternals(ProtectorEquipment* protector_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int protection_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     }
     
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
-        tech_level = TYPE::TECHLEVEL::L0_ID; 
+    if (tech_level == TYPE::TECH::NONE_ID) {
+        tech_level = TYPE::TECH::L0_ID; 
     }
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, revision_id) 
 
-    protection_orig = meti::getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX) * (1 + EQUIPMENT::PROTECTOR::PROTECTION_TECHLEVEL_RATE * (int)tech_level);
+    protection_orig = meti::getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX) * (1 + EQUIPMENT::PROTECTOR::PROTECTION_TECH_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech         = tech_level;

@@ -64,7 +64,7 @@ void DriveEquipmentBuilder::createInternals(DriveEquipment* drive_equipment, con
 {     
     ItemCommonData common_data;
     common_data.race            = (TYPE::RACE)descriptor.race();
-    common_data.tech         = (TYPE::TECHLEVEL)descriptor.tech();
+    common_data.tech         = (TYPE::TECH)descriptor.tech();
     common_data.modules_num    = descriptor.modules();
     common_data.mass               = descriptor.mass();
     common_data.condition      = descriptor.condition();

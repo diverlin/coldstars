@@ -47,7 +47,7 @@ GrappleEquipment* GrappleEquipmentBuilder::createTemplate(id_type id) const
     return grapple_equipment;
 } 
 
-GrappleEquipment* GrappleEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
+GrappleEquipment* GrappleEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
 {
     GrappleEquipment* grapple_equipment = createTemplate();
     createInternals(grapple_equipment, tech_level, race_id, strength_orig, radius_orig, speed_orig);
@@ -55,23 +55,23 @@ GrappleEquipment* GrappleEquipmentBuilder::create(TYPE::TECHLEVEL tech_level, TY
     return grapple_equipment;
 } 
 
-void GrappleEquipmentBuilder::createInternals(GrappleEquipment* grapple_equipment, TYPE::TECHLEVEL tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
+void GrappleEquipmentBuilder::createInternals(GrappleEquipment* grapple_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     }
     
-    if (tech_level == TYPE::TECHLEVEL::NONE_ID) {
-        tech_level = TYPE::TECHLEVEL::L0_ID;
+    if (tech_level == TYPE::TECH::NONE_ID) {
+        tech_level = TYPE::TECH::L0_ID;
     }
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID, revision_id)
 
-    strength_orig   = meti::getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN, EQUIPMENT::GRAPPLE::STRENGTH_MAX) * (1 + EQUIPMENT::GRAPPLE::STRENGTH_TECHLEVEL_RATE * (int)tech_level);
-    radius_orig     = meti::getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN,   EQUIPMENT::GRAPPLE::RADIUS_MAX)   * (1 + EQUIPMENT::GRAPPLE::RADIUS_TECHLEVEL_RATE * (int)tech_level);
-    speed_orig      = meti::getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,    EQUIPMENT::GRAPPLE::SPEED_MAX)    * (1 + EQUIPMENT::GRAPPLE::SPEED_TECHLEVEL_RATE * (int)tech_level);
+    strength_orig   = meti::getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN, EQUIPMENT::GRAPPLE::STRENGTH_MAX) * (1 + EQUIPMENT::GRAPPLE::STRENGTH_TECH_RATE * (int)tech_level);
+    radius_orig     = meti::getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN,   EQUIPMENT::GRAPPLE::RADIUS_MAX)   * (1 + EQUIPMENT::GRAPPLE::RADIUS_TECH_RATE * (int)tech_level);
+    speed_orig      = meti::getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,    EQUIPMENT::GRAPPLE::SPEED_MAX)    * (1 + EQUIPMENT::GRAPPLE::SPEED_TECH_RATE * (int)tech_level);
     
     ItemCommonData common_data;
     common_data.tech         = tech_level;

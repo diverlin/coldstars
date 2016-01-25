@@ -33,8 +33,8 @@ class ProtectorEquipmentBuilder
         ~ProtectorEquipmentBuilder();
 
         ProtectorEquipment* createTemplate(id_type id = NONE_ID) const;
-        ProtectorEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int protection_orig = NONE_ID) const;
+        ProtectorEquipment* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int protection_orig = NONE_ID) const;
                                      
     private:
-        void createInternals(ProtectorEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
+        void createInternals(ProtectorEquipment*, TYPE::TECH, TYPE::RACE, int) const;
 }; 
