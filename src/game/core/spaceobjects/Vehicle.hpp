@@ -119,13 +119,13 @@ class Vehicle : public SpaceObject
 
         const WeaponComplex& GetComplexWeapon() const { return m_ComplexWeapon; }
                 
-        ItemSlot* const GetSlotRadar()     const { return m_SlotRadar; }
-        ItemSlot* const GetSlotScaner()    const { return m_SlotScaner; }
-        ItemSlot* const GetSlotEnergizer() const { return m_SlotEnergizer; }
-        ItemSlot* const GetSlotGrapple()   const { return m_SlotGrapple; }
-        ItemSlot* const GetSlotDroid()     const { return m_SlotDroid; }
-        ItemSlot* const GetSlotFreezer()   const { return m_SlotFreezer; }
-        
+        ItemSlot* const radarSlot()     const { return m_SlotRadar; }
+        ItemSlot* const scanerSlot()    const { return m_SlotScaner; }
+        ItemSlot* const energizerSlot() const { return m_SlotEnergizer; }
+        ItemSlot* const grappleSlot()   const { return m_SlotGrapple; }
+        ItemSlot* const droidSlot()     const { return m_SlotDroid; }
+        ItemSlot* const freezerSlot()   const { return m_SlotFreezer; }
+
         Npc* const GetOwnerNpc() const { return m_npc; }
         
         ItemSlot* const GetEmptyCargoSlot();

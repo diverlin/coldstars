@@ -16,72 +16,44 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef VEHICLEPROPETRIES_H
-#define VEHICLEPROPETRIES_H
+#pragma once
 
 /* this data is changed during game play, the propetries depends on many factors */
 struct VehiclePropetries
 {    
-    int free_space;
+    int free_space = 0;
 
-    int protection;
-    int radar;
-    float speed;  // depends on mass and drive
+    int protection = 0;
+    int radar = 0;
+    float speed = 0;  // depends on mass and drive
 
-    int energy;
-    int hyper;  // depends on drive and bak
-    //int fuel;   // depends on bak
-    int repair; // depends on droid
-    int freeze; // depends on freezer
-    int scan;   // depends on scaner
+    int energy = 0;
+    int hyper = 0;  // depends on drive and bak
+    //int fuel = 0;   // depends on bak
+    int repair = 0; // depends on droid
+    int freeze = 0; // depends on freezer
+    int scan = 0;   // depends on scaner
 
-    int grab_strength;
-    int grab_radius;
+    int grab_strength = 0;
+    int grab_radius = 0;
         
-    int temperature;
+    int temperature = 0;
     
-    int artefact_gravity;
-    int artefact_protection;
+    int artefact_gravity = 0;
+    int artefact_protection = 0;
 
     // simplification
-    int average_damage;
-    int average_fire_radius;
+    int average_damage = 0;
+    int average_fire_radius = 0;
 
-    bool equipment_radar;
-    bool shield_effect_enabled;
-    bool hibernate_mode_enabled;
+    bool equipment_radar = 0;
+    bool shield_effect_enabled = 0;
+    bool hibernate_mode_enabled = 0;
 
-    int total_damage;
-    int total_radius;
+    int total_damage = 0;
+    int total_radius = 0;
         
     VehiclePropetries()
-    :
-    free_space(0),
-    protection(0),
-    radar(0),
-    speed(0),
-    energy(0),
-    hyper(0),
-    //fuel(0),
-    repair(0),
-    freeze(0),
-    scan(0),    
-    grab_strength(0),
-    grab_radius(0),
-            
-    temperature(0),
-    artefact_gravity(0),
-    artefact_protection(0),
-    
-    average_damage(0),
-    average_fire_radius(0),
-    equipment_radar(false),
-    shield_effect_enabled(false),
-    hibernate_mode_enabled(false),
-    
-    total_damage(0),
-    total_radius(0)
     {}
 };
 
-#endif 

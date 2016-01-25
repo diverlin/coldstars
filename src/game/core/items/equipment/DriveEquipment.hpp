@@ -17,8 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef DRIVEEQUIPMENT_H
-#define DRIVEEQUIPMENT_H
+#pragma once
 
 #include "BaseEquipment.hpp"
 
@@ -28,11 +27,11 @@ class DriveEquipment : public BaseEquipment
         DriveEquipment(const id_type& id);
         virtual ~DriveEquipment();
 
-        void SetSpeedOrig(int speed_orig) { this->speed_orig = speed_orig; };
-        void SetHyperOrig(int hyper_orig) { this->hyper_orig = hyper_orig; };
+        void SetSpeedOrig(int speed_orig) { m_speed_orig = speed_orig; };
+        void SetHyperOrig(int hyper_orig) { m_hyper_orig = hyper_orig; };
 
-        int GetSpeed() const { return speed; };
-        int GetHyper() const { return hyper; };
+        int speed() const { return m_speed; };
+        int hyper() const { return m_hyper; };
 
         virtual void updateProperties();
 
@@ -43,13 +42,13 @@ class DriveEquipment : public BaseEquipment
         virtual void Resolve();
         
     private:
-        int speed_orig;
-        int speed_add;
-        int speed;
+        int m_speed_orig = 0;
+        int m_speed_add = 0;
+        int m_speed = 0;
 
-        int hyper_orig;
-        int hyper_add;
-        int hyper;
+        int m_hyper_orig = 0;
+        int m_hyper_add = 0;
+        int m_hyper = 0;
 
         void virtual addUniqueInfo();
         std::string GetSpeedStr();
@@ -59,10 +58,4 @@ class DriveEquipment : public BaseEquipment
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();
 };
-
-
-#endif 
-
-
-
 

@@ -116,47 +116,57 @@ TEST(ship,equipment)
 {
     Ship* ship = createNewShip();
 
-    BakEquipment* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
+    BakEquipment* bak_equipment     = global::get().bakBuilder().create(generateBakDescriptor());
     DriveEquipment* drive_equipment = global::get().driveBuilder().create(generateDriveDescriptor());
     DroidEquipment* droid_equipment = global::get().droidBuilder().create(generateDroidDescriptor());
     GrappleEquipment* grapple_equipment = global::get().grappleBuilder().create(generateGrappleDescriptor());
-    ScanerEquipment* scaner_equipment = global::get().scanerBuilder().create(generateScanerDescriptor());
-    RadarEquipment* radar_equipment = global::get().radarBuilder().create(generateRadarDescriptor());
+    ScanerEquipment* scaner_equipment   = global::get().scanerBuilder().create(generateScanerDescriptor());
+    RadarEquipment* radar_equipment     = global::get().radarBuilder().create(generateRadarDescriptor());
+    ProtectorEquipment* protector_equipment = global::get().protectorBuilder().create(generateProtectorDescriptor());
 
     // back test
-    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() == nullptr);
+    EXPECT_FALSE(ship->GetComplexDrive().GetBakSlot()->item() != nullptr);
+    EXPECT_EQ(ship->GetProperties().hyper, 0);
+    int old_free_space = ship->GetProperties().free_space;
     ship->manage(bak_equipment);
     EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() != nullptr);
+    EXPECT_EQ(ship->GetProperties().hyper, 0);
+    EXPECT_EQ(ship->GetProperties().free_space, old_free_space - bak_equipment->mass()); // to fix
+    //std::cout<<"old_free_space="<<old_free_space<<" "<<bak_equipment->mass();
 
     // drive test
-    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() == nullptr);
+    EXPECT_FALSE(ship->GetComplexDrive().GetDriveSlot()->item() != nullptr);
+    EXPECT_EQ(ship->GetProperties().hyper, 0);
     ship->manage(drive_equipment);
+    old_free_space = ship->GetProperties().free_space;
     EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() != nullptr);
+    EXPECT_EQ(ship->GetProperties().hyper, std::min(bak_equipment->fuel(), drive_equipment->hyper()));
+    EXPECT_EQ(ship->GetProperties().free_space, old_free_space - drive_equipment->mass());
 
     // droid test
-    EXPECT_TRUE(ship->GetDroidSlot()->item() == nullptr);
+    EXPECT_FALSE(ship->droidSlot()->item() != nullptr);
     ship->manage(droid_equipment);
-    EXPECT_TRUE(ship->GetDroidSlot()->item() != nullptr);
+    EXPECT_TRUE(ship->droidSlot()->item() != nullptr);
 
     // grapple
-    EXPECT_TRUE(ship->GetGrappleSlot()->item() == nullptr);
+    EXPECT_FALSE(ship->grappleSlot()->item() != nullptr);
     ship->manage(grapple_equipment);
-    EXPECT_TRUE(ship->GetGrappleSlot()->item() != nullptr);
+    EXPECT_TRUE(ship->grappleSlot()->item() != nullptr);
 
     // scaner
-    EXPECT_TRUE(ship->GetScanerSlot()->item() == nullptr);
+    EXPECT_FALSE(ship->scanerSlot()->item() != nullptr);
     ship->manage(scaner_equipment);
-    EXPECT_TRUE(ship->GetScanerSlot()->item() != nullptr);
+    EXPECT_TRUE(ship->scanerSlot()->item() != nullptr);
 
     // radar
-    EXPECT_TRUE(ship->GetRadarSlot()->item() == nullptr);
+    EXPECT_FALSE(ship->radarSlot()->item() != nullptr);
     ship->manage(radar_equipment);
-    EXPECT_TRUE(ship->GetRadarSlot()->item() != nullptr);
+    EXPECT_TRUE(ship->radarSlot()->item() != nullptr);
 
     // protector
-    EXPECT_TRUE(ship->GetProtectorSlot()->item() == nullptr);
+    EXPECT_FALSE(ship->GetComplexProtector().GetProtectorSlot()->item() != nullptr);
     ship->manage(protector_equipment);
-    EXPECT_TRUE(ship->GetProtectorSlot()->item() != nullptr);
+    EXPECT_TRUE(ship->GetComplexProtector().GetProtectorSlot()->item() != nullptr);
 }
 
 
