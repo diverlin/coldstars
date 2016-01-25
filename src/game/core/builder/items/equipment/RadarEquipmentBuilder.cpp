@@ -32,13 +32,13 @@
 
 #include <meti/RandUtils.hpp>
 
-RadarEquipmentBuilder::RadarEquipmentBuilder()
+RadarBuilder::RadarBuilder()
 {}
 
-RadarEquipmentBuilder::~RadarEquipmentBuilder()
+RadarBuilder::~RadarBuilder()
 {}
 
-RadarEquipment* RadarEquipmentBuilder::createTemplate(id_type id) const
+RadarEquipment* RadarBuilder::createTemplate(id_type id) const
 {
     RadarEquipment* radar_equipment = new RadarEquipment(id);
     assert(radar_equipment);
@@ -48,42 +48,21 @@ RadarEquipment* RadarEquipmentBuilder::createTemplate(id_type id) const
     return radar_equipment;
 } 
   
-RadarEquipment* RadarEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int radius_orig) const
+RadarEquipment* RadarBuilder::create(const Descriptor& descriptor) const
 {
     RadarEquipment* radar_equipment = createTemplate();
-    createInternals(radar_equipment, tech_level, race_id, radius_orig);
+    createInternals(radar_equipment, descriptor);
         
     return radar_equipment;
 } 
         
-void RadarEquipmentBuilder::createInternals(RadarEquipment* radar_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int radius_orig) const
+void RadarBuilder::createInternals(RadarEquipment* radar_equipment, const Descriptor& descriptor) const
 {     
-    if (race_id == TYPE::RACE::NONE_ID) {
-        race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-    }
-    
-    if (tech_level == TYPE::TECH::NONE_ID) {
-        tech_level = TYPE::TECH::L0_ID; 
-    }
+    ItemCommonData common_data = extractCommonData(descriptor);
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT_ID);
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id) 
-
-    radius_orig     = meti::getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX) * (1 + EQUIPMENT::RADAR::RADIUS_TECH_RATE * (int)tech_level);
-    
-    ItemCommonData common_data;
-    common_data.tech      = tech_level;
-    common_data.modules_num = meti::getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
-    common_data.mass            = meti::getRandInt(EQUIPMENT::RADAR::MASS_MIN,        EQUIPMENT::RADAR::MASS_MAX);
-    common_data.condition   = meti::getRandInt(EQUIPMENT::RADAR::CONDITION_MIN,   EQUIPMENT::RADAR::CONDITION_MAX);
-    common_data.deterioration = 1;
-
-    radar_equipment->SetRadiusOrig(radius_orig);
-    //alpitodorender radar_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
+    radar_equipment->SetRadiusOrig(descriptor.radius());
     radar_equipment->setParentSubTypeId(TYPE::ENTITY::RADAR_SLOT_ID);
     radar_equipment->setItemCommonData(common_data);
-    radar_equipment->setCondition(common_data.condition);
 
     radar_equipment->updateProperties();
     radar_equipment->CountPrice();

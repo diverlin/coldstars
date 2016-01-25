@@ -107,17 +107,17 @@ global::global()
     , m_gravityArtefactBuilder(new GravityArtefactBuilder)
     , m_protectorArtefactBuilder(new ProtectorArtefactBuilder)
 
-    , m_bakEquipmentBuilder(new BakEquipmentBuilder)
-    , m_driveEquipmentBuilder(new DriveEquipmentBuilder)
-    , m_droidEquipmentBuilder(new DroidEquipmentBuilder)
-    , m_energizerEquipmentBuilder(new EnergizerEquipmentBuilder)
-    , m_freezerEquipmentBuilder(new FreezerEquipmentBuilder)
-    , m_grappleEquipmentBuilder(new GrappleEquipmentBuilder)
-    , m_protectorEquipmentBuilder(new ProtectorEquipmentBuilder)
-    , m_radarEquipmentBuilder(new RadarEquipmentBuilder)
-    , m_scanerEquipmentBuilder(new ScanerEquipmentBuilder)
-    , m_rocketEquipmentBuilder(new RocketEquipmentBuilder)
-    , m_lazerEquipmentBuilder(new LazerEquipmentBuilder)
+    , m_bakBuilder(new BakBuilder)
+    , m_driveBuilder(new DriveBuilder)
+    , m_droidBuilder(new DroidBuilder)
+    , m_energizerBuilder(new EnergizerBuilder)
+    , m_freezerBuilder(new FreezerBuilder)
+    , m_grappleBuilder(new GrappleBuilder)
+    , m_protectorBuilder(new ProtectorBuilder)
+    , m_radarBuilder(new RadarBuilder)
+    , m_scanerBuilder(new ScanerBuilder)
+    , m_rocketBuilder(new RocketBuilder)
+    , m_lazerBuilder(new LazerBuilder)
 
     , m_bakModuleBuilder(new BakModuleBuilder)
     , m_driveModuleBuilder(new DriveModuleBuilder)
@@ -167,17 +167,17 @@ global::~global()
     delete m_gravityArtefactBuilder;
     delete m_protectorArtefactBuilder;
 
-    delete m_bakEquipmentBuilder;
-    delete m_driveEquipmentBuilder;
-    delete m_droidEquipmentBuilder;
-    delete m_energizerEquipmentBuilder;
-    delete m_freezerEquipmentBuilder;
-    delete m_grappleEquipmentBuilder;
-    delete m_protectorEquipmentBuilder;
-    delete m_radarEquipmentBuilder;
-    delete m_scanerEquipmentBuilder;
-    delete m_rocketEquipmentBuilder;
-    delete m_lazerEquipmentBuilder;
+    delete m_bakBuilder;
+    delete m_driveBuilder;
+    delete m_droidBuilder;
+    delete m_energizerBuilder;
+    delete m_freezerBuilder;
+    delete m_grappleBuilder;
+    delete m_protectorBuilder;
+    delete m_radarBuilder;
+    delete m_scanerBuilder;
+    delete m_rocketBuilder;
+    delete m_lazerBuilder;
 
     delete m_bakModuleBuilder;
     delete m_driveModuleBuilder;

@@ -60,9 +60,9 @@ Ship* createNewShip()
 
     Ship* ship = static_cast<Ship*>(global::get().entityManager().get(descriptor.id));
     assert(ship);
-    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() == nullptr);
-    global::get().shipBuilder().equip(ship);
-    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() != nullptr);
+//    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() == nullptr);
+//    global::get().shipBuilder().equip(ship);
+//    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() != nullptr);
     return ship;
 }
 
@@ -101,7 +101,14 @@ StarSystem* createNewStarSystem()
 
 }
 
-TEST(base,speed1)
+TEST(ship,equipment)
+{
+    Ship* ship = createNewShip();
+    global::get().shipBuilder().equip(ship);
+}
+
+
+TEST(base,perfomance1)
 {
     clock_t begin = std::clock();
     HitDescriptor hit1 = HitDescriptor(1, 2, 33);
@@ -118,7 +125,7 @@ TEST(base,speed1)
     EXPECT_TRUE(elapsed_secs < 1);
 }
 
-TEST(base,speed2)
+TEST(base,perfomance2)
 {
     clock_t begin = std::clock();
     Descriptor hit1 = generateHitDescriptor(1, 2, 33);

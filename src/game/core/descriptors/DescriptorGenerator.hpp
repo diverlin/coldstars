@@ -21,6 +21,8 @@
 
 #include <descriptors/Descriptor.hpp>
 
+class ItemCommonData;
+
 Descriptor generateHitDescriptor(const id_type&, const id_type&, int);
 Descriptor generateBombDescriptor(int damage = -1, int radius = -1);
 Descriptor generateStarSystemDescriptor(int race = -1);
@@ -29,3 +31,7 @@ Descriptor generateStarSystemDescriptor(int race = -1);
 Descriptor generateBakDescriptor(int race = -1, int tech_level = -1);
 Descriptor generateDriveDescriptor(int race = -1, int tech_level = -1);
 Descriptor generateDroidDescriptor(int race = -1, int tech_level = -1);
+Descriptor generateGrappleDescriptor(int race = -1, int tech_level = -1);
+Descriptor generateScanerDescriptor(int race = -1, int tech_level = -1);
+Descriptor generateRadarDescriptor(int race = -1, int tech_level = -1);
+Descriptor generateProtectorDescriptor(int race = -1, int tech_level = -1);

@@ -25,18 +25,18 @@
 class BakEquipment;
 
 
-class BakEquipmentBuilder
+class BakBuilder
 {
     public:
-        BakEquipmentBuilder();
-        ~BakEquipmentBuilder();
+        BakBuilder();
+        ~BakBuilder();
 
         BakEquipment* createTemplate(id_type id = NONE_ID) const;
         BakEquipment* create(const Descriptor&) const;
                                      
     private:                
-        BakEquipmentBuilder(const BakEquipmentBuilder&) = delete;
-        BakEquipmentBuilder& operator=(const BakEquipmentBuilder&) = delete;
+        BakBuilder(const BakBuilder&) = delete;
+        BakBuilder& operator=(const BakBuilder&) = delete;
 
         void createInternals(BakEquipment*, const Descriptor&) const;
 }; 

@@ -20,21 +20,21 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <types/RaceTypes.hpp>
-#include <types/TechLevelTypes.hpp>
+
+#include <descriptors/Descriptor.hpp>
 
 class RadarEquipment;
 
 
-class RadarEquipmentBuilder
+class RadarBuilder
 {
     public:
-        RadarEquipmentBuilder();
-        ~RadarEquipmentBuilder();
+        RadarBuilder();
+        ~RadarBuilder();
 
         RadarEquipment* createTemplate(id_type id = NONE_ID) const;
-        RadarEquipment* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int radius_orig = NONE_ID) const;
+        RadarEquipment* create(const Descriptor&) const;
                                      
     private:
-        void createInternals(RadarEquipment*, TYPE::TECH, TYPE::RACE, int) const;
+        void createInternals(RadarEquipment*, const Descriptor&) const;
 }; 

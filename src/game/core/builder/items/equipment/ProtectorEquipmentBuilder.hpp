@@ -20,21 +20,20 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <types/RaceTypes.hpp>
-#include <types/TechLevelTypes.hpp>
+#include <descriptors/Descriptor.hpp>
 
 class ProtectorEquipment;
 
 
-class ProtectorEquipmentBuilder
+class ProtectorBuilder
 {
     public:
-        ProtectorEquipmentBuilder();
-        ~ProtectorEquipmentBuilder();
+        ProtectorBuilder();
+        ~ProtectorBuilder();
 
         ProtectorEquipment* createTemplate(id_type id = NONE_ID) const;
-        ProtectorEquipment* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int protection_orig = NONE_ID) const;
+        ProtectorEquipment* create(const Descriptor&) const;
                                      
     private:
-        void createInternals(ProtectorEquipment*, TYPE::TECH, TYPE::RACE, int) const;
+        void createInternals(ProtectorEquipment*, const Descriptor&) const;
 }; 

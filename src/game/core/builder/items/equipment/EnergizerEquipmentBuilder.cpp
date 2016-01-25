@@ -36,13 +36,13 @@
 
 #include <meti/RandUtils.hpp>
 
-EnergizerEquipmentBuilder::EnergizerEquipmentBuilder()
+EnergizerBuilder::EnergizerBuilder()
 {}
 
-EnergizerEquipmentBuilder::~EnergizerEquipmentBuilder()
+EnergizerBuilder::~EnergizerBuilder()
 {}
 
-EnergizerEquipment* EnergizerEquipmentBuilder::createTemplate(id_type id) const
+EnergizerEquipment* EnergizerBuilder::createTemplate(id_type id) const
 {
     EnergizerEquipment* energizer_equipment = new EnergizerEquipment(id);
     assert(energizer_equipment);
@@ -52,7 +52,7 @@ EnergizerEquipment* EnergizerEquipmentBuilder::createTemplate(id_type id) const
     return energizer_equipment;
 } 
     
-EnergizerEquipment* EnergizerEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
+EnergizerEquipment* EnergizerBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
 {
     EnergizerEquipment* energizer_equipment = createTemplate();
     createInternals(energizer_equipment, tech_level, race_id, energy_max_orig, restoration_orig);
@@ -60,7 +60,7 @@ EnergizerEquipment* EnergizerEquipmentBuilder::create(TYPE::TECH tech_level, TYP
     return energizer_equipment;
 } 
         
-void EnergizerEquipmentBuilder::createInternals(EnergizerEquipment* energizer_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
+void EnergizerBuilder::createInternals(EnergizerEquipment* energizer_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int energy_max_orig, int restoration_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -90,7 +90,6 @@ void EnergizerEquipmentBuilder::createInternals(EnergizerEquipment* energizer_eq
     //alpitodorender energizer_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     energizer_equipment->setParentSubTypeId(TYPE::ENTITY::ENERGIZER_SLOT_ID);
     energizer_equipment->setItemCommonData(common_data);
-    energizer_equipment->setCondition(common_data.condition);
                     
     energizer_equipment->updateProperties();
     energizer_equipment->CountPrice();

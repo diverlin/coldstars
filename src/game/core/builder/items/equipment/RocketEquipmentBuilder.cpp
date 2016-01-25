@@ -31,13 +31,13 @@
 
 #include <meti/RandUtils.hpp>
 
-RocketEquipmentBuilder::RocketEquipmentBuilder()
+RocketBuilder::RocketBuilder()
 {}
 
-RocketEquipmentBuilder::~RocketEquipmentBuilder()
+RocketBuilder::~RocketBuilder()
 {}
 
-RocketEquipment* RocketEquipmentBuilder::createTemplate(id_type id) const
+RocketEquipment* RocketBuilder::createTemplate(id_type id) const
 {
     RocketEquipment* rocket_equipment = new RocketEquipment(id);
     assert(rocket_equipment);
@@ -47,7 +47,7 @@ RocketEquipment* RocketEquipmentBuilder::createTemplate(id_type id) const
     return rocket_equipment;
 } 
 
-RocketEquipment* RocketEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+RocketEquipment* RocketBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {
     RocketEquipment* rocket_equipment = createTemplate();
     createInternals(rocket_equipment, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
@@ -55,7 +55,7 @@ RocketEquipment* RocketEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RAC
     return rocket_equipment;
 } 
 
-void RocketEquipmentBuilder::createInternals(RocketEquipment* rocket_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+void RocketBuilder::createInternals(RocketEquipment* rocket_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -99,7 +99,6 @@ void RocketEquipmentBuilder::createInternals(RocketEquipment* rocket_equipment, 
     //alpitodorender rocket_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     rocket_equipment->setParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
     rocket_equipment->setItemCommonData(common_data);
-    rocket_equipment->setCondition(common_data.condition);
     
     rocket_equipment->updateProperties();
     rocket_equipment->CountPrice();

@@ -112,36 +112,36 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
         store->AddVehicle(global::get().shipBuilder().create(generateVehicleDescriptor()));
     }
     for (unsigned int i=0; i<lazer_num; i++) {
-        store->AddItem(global::get().lazerEquipmentBuilder().create());
+        store->AddItem(global::get().lazerBuilder().create());
     }
     for (unsigned int i=0; i<rocket_num; i++) {
-        store->AddItem(global::get().rocketEquipmentBuilder().create());
+        store->AddItem(global::get().rocketBuilder().create());
     }
     for (unsigned int i=0; i<radar_num; i++) {
-        store->AddItem(global::get().radarEquipmentBuilder().create());
+        store->AddItem(global::get().radarBuilder().create(generateRadarDescriptor()));
     }
     for (unsigned int i=0; i<grapple_num; i++) {
-        store->AddItem(global::get().grappleEquipmentBuilder().create());
+        store->AddItem(global::get().grappleBuilder().create(generateGrappleDescriptor()));
     }
     for (unsigned int i=0; i<drive_num; i++) {
-        store->AddItem(global::get().driveEquipmentBuilder().create(generateDriveDescriptor()));
+        store->AddItem(global::get().driveBuilder().create(generateDriveDescriptor()));
     }
     for (unsigned int i=0; i<protector_num; i++) {
-        store->AddItem(global::get().protectorEquipmentBuilder().create());
+        store->AddItem(global::get().protectorBuilder().create(generateProtectorDescriptor()));
     }
     for (unsigned int i=0; i<bak_num; i++) {
-        store->AddItem(global::get().bakEquipmentBuilder().create(generateBakDescriptor()));
+        store->AddItem(global::get().bakBuilder().create(generateBakDescriptor()));
     }
     for (unsigned int i=0; i<droid_num; i++) {
-        store->AddItem(global::get().droidEquipmentBuilder().create(generateDroidDescriptor()));
+        store->AddItem(global::get().droidBuilder().create(generateDroidDescriptor()));
     }
     for (unsigned int i=0; i<scaner_num; i++) {
-        store->AddItem(global::get().scanerEquipmentBuilder().create());
+        store->AddItem(global::get().scanerBuilder().create(generateScanerDescriptor()));
     }
     for (unsigned int i=0; i<freezer_num; i++) {
-        store->AddItem(global::get().freezerEquipmentBuilder().create());
+        store->AddItem(global::get().freezerBuilder().create());
     }
     for (unsigned int i=0; i<energyBlock_num; i++) {
-        store->AddItem(global::get().energizerEquipmentBuilder().create());
+        store->AddItem(global::get().energizerBuilder().create());
     }
 }

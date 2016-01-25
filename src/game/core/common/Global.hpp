@@ -40,17 +40,17 @@ class GovermentBuilder;
 class GravityArtefactBuilder;
 class ProtectorArtefactBuilder;
 
-class BakEquipmentBuilder;
-class DriveEquipmentBuilder;
-class DroidEquipmentBuilder;
-class EnergizerEquipmentBuilder;
-class FreezerEquipmentBuilder;
-class GrappleEquipmentBuilder;
-class ProtectorEquipmentBuilder;
-class RadarEquipmentBuilder;
-class ScanerEquipmentBuilder;
-class RocketEquipmentBuilder;
-class LazerEquipmentBuilder;
+class BakBuilder;
+class DriveBuilder;
+class DroidBuilder;
+class EnergizerBuilder;
+class FreezerBuilder;
+class GrappleBuilder;
+class ProtectorBuilder;
+class RadarBuilder;
+class ScanerBuilder;
+class RocketBuilder;
+class LazerBuilder;
 
 class BakModuleBuilder;
 class DriveModuleBuilder;
@@ -109,17 +109,17 @@ class global
         GravityArtefactBuilder& gravityArtefactBuilder() { return *m_gravityArtefactBuilder; }
         ProtectorArtefactBuilder& protectorArtefactBuilder() { return *m_protectorArtefactBuilder; }
 
-        BakEquipmentBuilder& bakEquipmentBuilder() { return *m_bakEquipmentBuilder; }
-        DriveEquipmentBuilder& driveEquipmentBuilder() { return *m_driveEquipmentBuilder; }
-        DroidEquipmentBuilder& droidEquipmentBuilder() { return *m_droidEquipmentBuilder; }
-        EnergizerEquipmentBuilder& energizerEquipmentBuilder() { return *m_energizerEquipmentBuilder; }
-        FreezerEquipmentBuilder& freezerEquipmentBuilder() { return *m_freezerEquipmentBuilder; }
-        GrappleEquipmentBuilder& grappleEquipmentBuilder() { return *m_grappleEquipmentBuilder; }
-        ProtectorEquipmentBuilder& protectorEquipmentBuilder() { return *m_protectorEquipmentBuilder; }
-        RadarEquipmentBuilder& radarEquipmentBuilder() { return *m_radarEquipmentBuilder; }
-        ScanerEquipmentBuilder& scanerEquipmentBuilder() { return *m_scanerEquipmentBuilder; }
-        RocketEquipmentBuilder& rocketEquipmentBuilder() { return *m_rocketEquipmentBuilder; }
-        LazerEquipmentBuilder& lazerEquipmentBuilder() { return *m_lazerEquipmentBuilder; }
+        BakBuilder& bakBuilder() { return *m_bakBuilder; }
+        DriveBuilder& driveBuilder() { return *m_driveBuilder; }
+        DroidBuilder& droidBuilder() { return *m_droidBuilder; }
+        EnergizerBuilder& energizerBuilder() { return *m_energizerBuilder; }
+        FreezerBuilder& freezerBuilder() { return *m_freezerBuilder; }
+        GrappleBuilder& grappleBuilder() { return *m_grappleBuilder; }
+        ProtectorBuilder& protectorBuilder() { return *m_protectorBuilder; }
+        RadarBuilder& radarBuilder() { return *m_radarBuilder; }
+        ScanerBuilder& scanerBuilder() { return *m_scanerBuilder; }
+        RocketBuilder& rocketBuilder() { return *m_rocketBuilder; }
+        LazerBuilder& lazerBuilder() { return *m_lazerBuilder; }
 
         BakModuleBuilder& bakModuleBuilder() { return *m_bakModuleBuilder; }
         DriveModuleBuilder& driveModuleBuilder() { return *m_driveModuleBuilder; }
@@ -179,17 +179,17 @@ class global
         GravityArtefactBuilder* m_gravityArtefactBuilder = nullptr;
         ProtectorArtefactBuilder* m_protectorArtefactBuilder = nullptr;
 
-        BakEquipmentBuilder* m_bakEquipmentBuilder = nullptr;
-        DriveEquipmentBuilder* m_driveEquipmentBuilder = nullptr;
-        DroidEquipmentBuilder* m_droidEquipmentBuilder = nullptr;
-        EnergizerEquipmentBuilder* m_energizerEquipmentBuilder = nullptr;
-        FreezerEquipmentBuilder* m_freezerEquipmentBuilder = nullptr;
-        GrappleEquipmentBuilder* m_grappleEquipmentBuilder = nullptr;
-        ProtectorEquipmentBuilder* m_protectorEquipmentBuilder = nullptr;
-        RadarEquipmentBuilder* m_radarEquipmentBuilder = nullptr;
-        ScanerEquipmentBuilder* m_scanerEquipmentBuilder = nullptr;
-        RocketEquipmentBuilder* m_rocketEquipmentBuilder = nullptr;
-        LazerEquipmentBuilder* m_lazerEquipmentBuilder = nullptr;
+        BakBuilder* m_bakBuilder = nullptr;
+        DriveBuilder* m_driveBuilder = nullptr;
+        DroidBuilder* m_droidBuilder = nullptr;
+        EnergizerBuilder* m_energizerBuilder = nullptr;
+        FreezerBuilder* m_freezerBuilder = nullptr;
+        GrappleBuilder* m_grappleBuilder = nullptr;
+        ProtectorBuilder* m_protectorBuilder = nullptr;
+        RadarBuilder* m_radarBuilder = nullptr;
+        ScanerBuilder* m_scanerBuilder = nullptr;
+        RocketBuilder* m_rocketBuilder = nullptr;
+        LazerBuilder* m_lazerBuilder = nullptr;
 
         BakModuleBuilder* m_bakModuleBuilder = nullptr;
         DriveModuleBuilder* m_driveModuleBuilder = nullptr;

@@ -36,13 +36,13 @@
 
 #include <meti/RandUtils.hpp>
 
-ScanerEquipmentBuilder::ScanerEquipmentBuilder()
+ScanerBuilder::ScanerBuilder()
 {}
 
-ScanerEquipmentBuilder::~ScanerEquipmentBuilder()
+ScanerBuilder::~ScanerBuilder()
 {}
 
-ScanerEquipment* ScanerEquipmentBuilder::createTemplate(id_type id) const
+ScanerEquipment* ScanerBuilder::createTemplate(id_type id) const
 {
     ScanerEquipment* scaner_equipment = new ScanerEquipment(id);
     assert(scaner_equipment);
@@ -52,43 +52,22 @@ ScanerEquipment* ScanerEquipmentBuilder::createTemplate(id_type id) const
     return scaner_equipment;
 } 
 
-ScanerEquipment* ScanerEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int scan_orig) const
+ScanerEquipment* ScanerBuilder::create(const Descriptor& descriptor) const
 {
     ScanerEquipment* scaner_equipment = createTemplate();
-    createInternals(scaner_equipment, tech_level, race_id, scan_orig);
+    createInternals(scaner_equipment, descriptor);
         
     return scaner_equipment;
 } 
             
-void ScanerEquipmentBuilder::createInternals(ScanerEquipment* scaner_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int scan_orig) const
-{     
-    if (race_id == TYPE::RACE::NONE_ID) {
-        race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-    }
+void ScanerBuilder::createInternals(ScanerEquipment* scaner_equipment, const Descriptor& descriptor) const
+{
+    ItemCommonData common_data = extractCommonData(descriptor);
     
-    if (tech_level == TYPE::TECH::NONE_ID) {
-        tech_level = TYPE::TECH::L0_ID; 
-    }
-
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::SCANER_EQUIPMENT_ID, revision_id)
-
-    scan_orig       = meti::getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECH_RATE * (int)tech_level);
-    
-    ItemCommonData common_data;
-    common_data.tech         = tech_level;
-    common_data.modules_num = meti::getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
-    common_data.mass            = meti::getRandInt(EQUIPMENT::SCANER::MASS_MIN,        EQUIPMENT::SCANER::MASS_MAX);
-    common_data.condition   = meti::getRandInt(EQUIPMENT::SCANER::CONDITION_MIN,   EQUIPMENT::SCANER::CONDITION_MAX);
-    common_data.deterioration = 1;
-    
-    scaner_equipment->SetScanOrig(scan_orig);  
-    //alpitodorender scaner_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
+    scaner_equipment->SetScanOrig(descriptor.scan());
     scaner_equipment->setParentSubTypeId(TYPE::ENTITY::SCANER_SLOT_ID);
     scaner_equipment->setItemCommonData(common_data);
-    scaner_equipment->setCondition(common_data.condition);
-               
+
     scaner_equipment->updateProperties();
     scaner_equipment->CountPrice();
 }
