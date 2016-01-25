@@ -31,13 +31,13 @@
 #include <descriptors/RaceDescriptors.hpp>
 #include <meti/RandUtils.hpp>
 
-GrappleEquipmentBuilder::GrappleEquipmentBuilder()
+GrappleBuilder::GrappleBuilder()
 {}
 
-GrappleEquipmentBuilder::~GrappleEquipmentBuilder()
+GrappleBuilder::~GrappleBuilder()
 {}
 
-GrappleEquipment* GrappleEquipmentBuilder::createTemplate(id_type id) const
+GrappleEquipment* GrappleBuilder::createTemplate(id_type id) const
 {
     GrappleEquipment* grapple_equipment = new GrappleEquipment(id);
     assert(grapple_equipment);
@@ -47,47 +47,24 @@ GrappleEquipment* GrappleEquipmentBuilder::createTemplate(id_type id) const
     return grapple_equipment;
 } 
 
-GrappleEquipment* GrappleEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
+GrappleEquipment* GrappleBuilder::create(const Descriptor& descriptor) const
 {
     GrappleEquipment* grapple_equipment = createTemplate();
-    createInternals(grapple_equipment, tech_level, race_id, strength_orig, radius_orig, speed_orig);
+    createInternals(grapple_equipment, descriptor);
 
     return grapple_equipment;
 } 
 
-void GrappleEquipmentBuilder::createInternals(GrappleEquipment* grapple_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int strength_orig, int radius_orig, int speed_orig) const
-{     
-    if (race_id == TYPE::RACE::NONE_ID) {
-        race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-    }
-    
-    if (tech_level == TYPE::TECH::NONE_ID) {
-        tech_level = TYPE::TECH::L0_ID;
-    }
+void GrappleBuilder::createInternals(GrappleEquipment* grapple_equipment, const Descriptor& descriptor) const
+{
+    ItemCommonData data = extractCommonData(descriptor);
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID);
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID, revision_id)
+    grapple_equipment->SetStrengthOrig(descriptor.strength());
+    grapple_equipment->SetRadiusOrig(descriptor.radius());
+    grapple_equipment->SetSpeedOrig(descriptor.speed());
 
-    strength_orig   = meti::getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN, EQUIPMENT::GRAPPLE::STRENGTH_MAX) * (1 + EQUIPMENT::GRAPPLE::STRENGTH_TECH_RATE * (int)tech_level);
-    radius_orig     = meti::getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN,   EQUIPMENT::GRAPPLE::RADIUS_MAX)   * (1 + EQUIPMENT::GRAPPLE::RADIUS_TECH_RATE * (int)tech_level);
-    speed_orig      = meti::getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,    EQUIPMENT::GRAPPLE::SPEED_MAX)    * (1 + EQUIPMENT::GRAPPLE::SPEED_TECH_RATE * (int)tech_level);
-    
-    ItemCommonData common_data;
-    common_data.tech         = tech_level;
-    common_data.modules_num = meti::getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);
-    common_data.mass            = meti::getRandInt(EQUIPMENT::GRAPPLE::MASS_MIN,        EQUIPMENT::GRAPPLE::MASS_MAX);
-    common_data.condition   = meti::getRandInt(EQUIPMENT::GRAPPLE::CONDITION_MIN,   EQUIPMENT::GRAPPLE::CONDITION_MAX);
-    common_data.deterioration = 1;
-
-    grapple_equipment->SetStrengthOrig(strength_orig);
-    grapple_equipment->SetRadiusOrig(radius_orig);
-    grapple_equipment->SetSpeedOrig(speed_orig);
-
-    //alpitodorender grapple_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     grapple_equipment->setParentSubTypeId(TYPE::ENTITY::GRAPPLE_SLOT_ID);
-    grapple_equipment->setItemCommonData(common_data);
-    grapple_equipment->setCondition(common_data.condition);
+    grapple_equipment->setItemCommonData(data);
     
     grapple_equipment->updateProperties();
     grapple_equipment->CountPrice();

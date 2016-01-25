@@ -32,13 +32,13 @@
 
 #include <meti/RandUtils.hpp>
 
-ProtectorEquipmentBuilder::ProtectorEquipmentBuilder()
+ProtectorBuilder::ProtectorBuilder()
 {}
 
-ProtectorEquipmentBuilder::~ProtectorEquipmentBuilder()
+ProtectorBuilder::~ProtectorBuilder()
 {}
 
-ProtectorEquipment* ProtectorEquipmentBuilder::createTemplate(id_type id) const
+ProtectorEquipment* ProtectorBuilder::createTemplate(id_type id) const
 {
     ProtectorEquipment* protector_equipment = new ProtectorEquipment(id);
     assert(protector_equipment);
@@ -48,42 +48,21 @@ ProtectorEquipment* ProtectorEquipmentBuilder::createTemplate(id_type id) const
     return protector_equipment;
 } 
    
-ProtectorEquipment* ProtectorEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int protection_orig) const
+ProtectorEquipment* ProtectorBuilder::create(const Descriptor& descriptor) const
 {
     ProtectorEquipment* protector_equipment = createTemplate();
-    createInternals(protector_equipment, tech_level, race_id, protection_orig);
+    createInternals(protector_equipment, descriptor);
         
     return protector_equipment;
 } 
          
-void ProtectorEquipmentBuilder::createInternals(ProtectorEquipment* protector_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int protection_orig) const
+void ProtectorBuilder::createInternals(ProtectorEquipment* protector_equipment, const Descriptor& descriptor) const
 {     
-    if (race_id == TYPE::RACE::NONE_ID) {
-        race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-    }
-    
-    if (tech_level == TYPE::TECH::NONE_ID) {
-        tech_level = TYPE::TECH::L0_ID; 
-    }
+    ItemCommonData common_data = extractCommonData(descriptor);
 
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-    //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID);
-    //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID, revision_id) 
-
-    protection_orig = meti::getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX) * (1 + EQUIPMENT::PROTECTOR::PROTECTION_TECH_RATE * (int)tech_level);
-    
-    ItemCommonData common_data;
-    common_data.tech         = tech_level;
-    common_data.modules_num = meti::getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);
-    common_data.mass            = meti::getRandInt(EQUIPMENT::PROTECTOR::MASS_MIN,        EQUIPMENT::PROTECTOR::MASS_MAX);
-    common_data.condition   = meti::getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN,   EQUIPMENT::PROTECTOR::CONDITION_MAX);
-    common_data.deterioration = 1;
-
-    protector_equipment->SetProtectionOrig(protection_orig);  
-    //alpitodorender protector_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
+    protector_equipment->SetProtectionOrig(descriptor.protection());
     protector_equipment->setParentSubTypeId(TYPE::ENTITY::PROTECTOR_SLOT_ID);
     protector_equipment->setItemCommonData(common_data);
-    protector_equipment->setCondition(common_data.condition);
             
     protector_equipment->updateProperties();
     protector_equipment->CountPrice();

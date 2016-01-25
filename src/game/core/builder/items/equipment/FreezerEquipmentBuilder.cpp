@@ -36,13 +36,13 @@
 
 #include <meti/RandUtils.hpp>
 
-FreezerEquipmentBuilder::FreezerEquipmentBuilder()
+FreezerBuilder::FreezerBuilder()
 {}
 
-FreezerEquipmentBuilder::~FreezerEquipmentBuilder()
+FreezerBuilder::~FreezerBuilder()
 {}
 
-FreezerEquipment* FreezerEquipmentBuilder::createTemplate(id_type id) const
+FreezerEquipment* FreezerBuilder::createTemplate(id_type id) const
 {
     FreezerEquipment* freezer_equipment  = new FreezerEquipment(id);
     assert(freezer_equipment);
@@ -52,7 +52,7 @@ FreezerEquipment* FreezerEquipmentBuilder::createTemplate(id_type id) const
     return freezer_equipment;
 } 
 
-FreezerEquipment* FreezerEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int freeze_orig) const
+FreezerEquipment* FreezerBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int freeze_orig) const
 {
     FreezerEquipment* freezer_equipment = createTemplate();
     createInternals(freezer_equipment, tech_level, race_id, freeze_orig);
@@ -60,7 +60,7 @@ FreezerEquipment* FreezerEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::R
     return freezer_equipment;
 } 
 
-void FreezerEquipmentBuilder::createInternals(FreezerEquipment* freezer_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int freeze_orig) const
+void FreezerBuilder::createInternals(FreezerEquipment* freezer_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int freeze_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -87,7 +87,6 @@ void FreezerEquipmentBuilder::createInternals(FreezerEquipment* freezer_equipmen
     //alpitodorender freezer_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     freezer_equipment->setParentSubTypeId(TYPE::ENTITY::FREEZER_SLOT_ID);
     freezer_equipment->setItemCommonData(common_data);
-    freezer_equipment->setCondition(common_data.condition);
 
     freezer_equipment->updateProperties();
     freezer_equipment->CountPrice();

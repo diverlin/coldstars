@@ -49,6 +49,9 @@ public:
     static std::string KEY_SPEED;
     static std::string KEY_HYPER;
     static std::string KEY_REPAIR;
+    static std::string KEY_STRENGTH;
+    static std::string KEY_SCAN;
+    static std::string KEY_PROTECTION;
 
     Descriptor();
     Descriptor(const std::map<std::string, std::string>&);
@@ -76,6 +79,9 @@ public:
     int speed() const;
     int hyper() const;
     int repair() const;
+    int strength() const;
+    int scan() const;
+    int protection() const;
 
 private:
     const std::string& get_raw(const std::string& key) const;

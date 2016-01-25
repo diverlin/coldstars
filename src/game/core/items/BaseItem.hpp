@@ -25,25 +25,13 @@
 #include <types/TechLevelTypes.hpp>
 #include <types/RaceTypes.hpp>
 
+#include <items/ItemCommonData.hpp>
+
 
 class ItemSlot; 
 namespace ceti {
 class Box2D;
 }
-
-struct ItemCommonData 
-{
-    ItemCommonData()
-    {}
-
-    TYPE::RACE race = TYPE::RACE::R0_ID;
-    TYPE::TECH tech = TYPE::TECH::NONE_ID;
-    unsigned int modules_num = 0;
-    unsigned int condition = 0;
-    unsigned int deterioration = 0;
-    float deterioration_overload_rate = 0.0f;
-    unsigned int mass = 0;
-};
 
 struct UnresolvedDataBaseItem
 {
@@ -60,7 +48,12 @@ class BaseItem : public ceti::Orientation, public Base
         virtual void putChildrenToGarbage() const {}
         
         void setParentSubTypeId(TYPE::ENTITY parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
-        void setItemCommonData(const ItemCommonData& data_item) { m_data_item = data_item; m_deterioration = data_item.deterioration; }
+        void setItemCommonData(const ItemCommonData& data_item)
+        {
+            m_data_item = data_item;
+            m_deterioration = data_item.deterioration;
+            setCondition(data_item.condition);
+        }
         void setItemSlot(ItemSlot* item_slot)  { m_item_slot = item_slot; }
         void setCondition(int condition) { m_condition = condition; }
         

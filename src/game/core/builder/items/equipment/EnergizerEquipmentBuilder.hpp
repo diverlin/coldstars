@@ -26,18 +26,18 @@
 class EnergizerEquipment;
 
 
-class EnergizerEquipmentBuilder
+class EnergizerBuilder
 {
     public:
-        EnergizerEquipmentBuilder();
-        ~EnergizerEquipmentBuilder();
+        EnergizerBuilder();
+        ~EnergizerBuilder();
 
         EnergizerEquipment* createTemplate(id_type id = NONE_ID)const;
         EnergizerEquipment* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int energy_max_orig = NONE_ID, int restoration_orig = NONE_ID) const;
                                      
     private:
-        EnergizerEquipmentBuilder(const EnergizerEquipmentBuilder&) = delete;
-        EnergizerEquipmentBuilder& operator=(const EnergizerEquipmentBuilder&) = delete;
+        EnergizerBuilder(const EnergizerBuilder&) = delete;
+        EnergizerBuilder& operator=(const EnergizerBuilder&) = delete;
 
         void createInternals(EnergizerEquipment*, TYPE::TECH, TYPE::RACE, int, int) const;
 }; 

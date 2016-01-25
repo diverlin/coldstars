@@ -25,11 +25,11 @@
 class DroidEquipment;
 
 
-class DroidEquipmentBuilder
+class DroidBuilder
 {
     public:
-        DroidEquipmentBuilder();
-        ~DroidEquipmentBuilder();
+        DroidBuilder();
+        ~DroidBuilder();
 
         DroidEquipment* createTemplate(id_type id = NONE_ID) const;
         DroidEquipment* create(const Descriptor&) const;

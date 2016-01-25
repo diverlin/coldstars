@@ -24,6 +24,7 @@
 #include <common/IdGenerator.hpp>
 
 #include <common/constants.hpp>
+#include <items/BaseItem.hpp>
 
 Descriptor generateHitDescriptor(const id_type& owner, const id_type& target, int damage)
 {
@@ -71,7 +72,7 @@ Descriptor generateStarSystemDescriptor(int race)
 Descriptor generateBakDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = race = int(TYPE::RACE::R0_ID);
+        race = int(TYPE::RACE::R0_ID);
     }
     if (tech_level == -1) {
         tech_level = int(TYPE::TECH::L0_ID);
@@ -103,7 +104,7 @@ Descriptor generateBakDescriptor(int race, int tech_level)
 Descriptor generateDriveDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = race = int(TYPE::RACE::R0_ID);
+        race = int(TYPE::RACE::R0_ID);
     }
     if (tech_level == -1) {
         tech_level = int(TYPE::TECH::L0_ID);
@@ -121,7 +122,7 @@ Descriptor generateDriveDescriptor(int race, int tech_level)
 
     Descriptor descriptor;
     descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::BAK_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::DRIVE_EQUIPMENT_ID)));
     descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
     descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
     descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
@@ -136,7 +137,7 @@ Descriptor generateDriveDescriptor(int race, int tech_level)
 Descriptor generateDroidDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = race = int(TYPE::RACE::R0_ID);
+        race = int(TYPE::RACE::R0_ID);
     }
     if (tech_level == -1) {
         tech_level = int(TYPE::TECH::L0_ID);
@@ -153,7 +154,7 @@ Descriptor generateDroidDescriptor(int race, int tech_level)
 
     Descriptor descriptor;
     descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::BAK_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::DROID_EQUIPMENT_ID)));
     descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
     descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
     descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
@@ -163,3 +164,141 @@ Descriptor generateDroidDescriptor(int race, int tech_level)
     descriptor.add(Descriptor::KEY_REPAIR, std::to_string(repair));
     return descriptor;
 }
+
+Descriptor generateGrappleDescriptor(int race, int tech_level)
+{
+    if (race == -1) {
+        race = int(TYPE::RACE::R0_ID);
+    }
+    if (tech_level == -1) {
+        tech_level = int(TYPE::TECH::L0_ID);
+    }
+
+    int modules_num_max = meti::getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);
+    int mass            = meti::getRandInt(EQUIPMENT::GRAPPLE::MASS_MIN,        EQUIPMENT::GRAPPLE::MASS_MAX);
+    int condition_max   = meti::getRandInt(EQUIPMENT::GRAPPLE::CONDITION_MIN,   EQUIPMENT::GRAPPLE::CONDITION_MAX);
+    int deterioration_normal = 1;
+
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID);
+
+    int strength   = meti::getRandInt(EQUIPMENT::GRAPPLE::STRENGTH_MIN, EQUIPMENT::GRAPPLE::STRENGTH_MAX) * (1 + EQUIPMENT::GRAPPLE::STRENGTH_TECH_RATE * (int)tech_level);
+    int radius     = meti::getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN,   EQUIPMENT::GRAPPLE::RADIUS_MAX)   * (1 + EQUIPMENT::GRAPPLE::RADIUS_TECH_RATE * (int)tech_level);
+    int speed      = meti::getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,    EQUIPMENT::GRAPPLE::SPEED_MAX)    * (1 + EQUIPMENT::GRAPPLE::SPEED_TECH_RATE * (int)tech_level);
+
+    Descriptor descriptor;
+    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::GRAPPLE_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
+    descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
+    descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
+    descriptor.add(Descriptor::KEY_MASS, std::to_string(mass));
+    descriptor.add(Descriptor::KEY_CONDITION, std::to_string(condition_max));
+    descriptor.add(Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal));
+    descriptor.add(Descriptor::KEY_STRENGTH, std::to_string(strength));
+    descriptor.add(Descriptor::KEY_RADIUS, std::to_string(radius));
+    descriptor.add(Descriptor::KEY_SPEED, std::to_string(speed));
+
+    return descriptor;
+}
+
+Descriptor generateScanerDescriptor(int race, int tech_level)
+{
+    if (race == -1) {
+        race = int(TYPE::RACE::R0_ID);
+    }
+    if (tech_level == -1) {
+        tech_level = int(TYPE::TECH::L0_ID);
+    }
+
+    int modules_num_max = meti::getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
+    int mass            = meti::getRandInt(EQUIPMENT::SCANER::MASS_MIN,        EQUIPMENT::SCANER::MASS_MAX);
+    int condition_max   = meti::getRandInt(EQUIPMENT::SCANER::CONDITION_MIN,   EQUIPMENT::SCANER::CONDITION_MAX);
+    int deterioration_normal = 1;
+
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SCANER_EQUIPMENT_ID);
+
+    int scan = meti::getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECH_RATE * (int)tech_level);
+
+    Descriptor descriptor;
+    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::SCANER_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
+    descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
+    descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
+    descriptor.add(Descriptor::KEY_MASS, std::to_string(mass));
+    descriptor.add(Descriptor::KEY_CONDITION, std::to_string(condition_max));
+    descriptor.add(Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal));
+    descriptor.add(Descriptor::KEY_SCAN, std::to_string(scan));
+
+    return descriptor;
+}
+
+Descriptor generateRadarDescriptor(int race, int tech_level)
+{
+    if (race == -1) {
+        race = int(TYPE::RACE::R0_ID);
+    }
+    if (tech_level == -1) {
+        tech_level = int(TYPE::TECH::L0_ID);
+    }
+
+    int modules_num_max = meti::getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
+    int mass            = meti::getRandInt(EQUIPMENT::RADAR::MASS_MIN,        EQUIPMENT::RADAR::MASS_MAX);
+    int condition_max   = meti::getRandInt(EQUIPMENT::RADAR::CONDITION_MIN,   EQUIPMENT::RADAR::CONDITION_MAX);
+    int deterioration_normal = 1;
+
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RADAR_EQUIPMENT_ID);
+
+    int radius = meti::getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX);
+
+    Descriptor descriptor;
+    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::RADAR_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
+    descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
+    descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
+    descriptor.add(Descriptor::KEY_MASS, std::to_string(mass));
+    descriptor.add(Descriptor::KEY_CONDITION, std::to_string(condition_max));
+    descriptor.add(Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal));
+    descriptor.add(Descriptor::KEY_RADIUS, std::to_string(radius));
+
+    return descriptor;
+}
+
+Descriptor generateProtectorDescriptor(int race, int tech_level)
+{
+    if (race == -1) {
+        race = int(TYPE::RACE::R0_ID);
+    }
+    if (tech_level == -1) {
+        tech_level = int(TYPE::TECH::L0_ID);
+    }
+
+    int modules_num_max = meti::getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);
+    int mass            = meti::getRandInt(EQUIPMENT::PROTECTOR::MASS_MIN,        EQUIPMENT::PROTECTOR::MASS_MAX);
+    int condition_max   = meti::getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN,   EQUIPMENT::PROTECTOR::CONDITION_MAX);
+    int deterioration_normal = 1;
+
+    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID);
+
+    int protection = meti::getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX);
+
+    Descriptor descriptor;
+    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::RADAR_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
+    descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
+    descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
+    descriptor.add(Descriptor::KEY_MASS, std::to_string(mass));
+    descriptor.add(Descriptor::KEY_CONDITION, std::to_string(condition_max));
+    descriptor.add(Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal));
+    descriptor.add(Descriptor::KEY_PROTECTION, std::to_string(protection));
+
+    return descriptor;
+}
+
+

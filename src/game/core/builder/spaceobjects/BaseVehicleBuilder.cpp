@@ -160,18 +160,33 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
 
 void BaseVehicleBuilder::equip(Vehicle* vehicle, const Descriptor& descriptor) const
 {
-    TYPE::ENTITY type = (TYPE::ENTITY)descriptor.type();
-    switch(type) {
-    case TYPE::ENTITY::BAK_EQUIPMENT_ID:
-    {
-        BakEquipment* bak_equipment = global::get().bakEquipmentBuilder().create(descriptor);
-        if (vehicle->AddAndManageItem(bak_equipment) == false) {
-            global::get().entityManager().addToGarbage(bak_equipment);
-        }
-        break;
-    }
-
-    }
+//    TYPE::ENTITY type = (TYPE::ENTITY)descriptor.type();
+//    switch(type) {
+//    case TYPE::ENTITY::BAK_EQUIPMENT_ID:
+//    {
+//        BakEquipment* bak_equipment = global::get().bakBuilder().create(descriptor);
+//        if (vehicle->AddAndManageItem(bak_equipment) == false) {
+//            global::get().entityManager().addToGarbage(bak_equipment);
+//        }
+//        break;
+//    }
+//    case TYPE::ENTITY::DRIVE_EQUIPMENT_ID:
+//    {
+//        DriveEquipment* bak_equipment = global::get().driveBuilder().create(descriptor);
+//        if (vehicle->AddAndManageItem(drive_equipment) == false) {
+//            global::get().entityManager().addToGarbage(drive_equipment);
+//        }
+//        break;
+//    }
+//    case TYPE::ENTITY::DROID_EQUIPMENT_ID:
+//    {
+//        DriveEquipment* bak_equipment = global::get().driveBuilder().create(descriptor);
+//        if (vehicle->AddAndManageItem(drive_equipment) == false) {
+//            global::get().entityManager().addToGarbage(drive_equipment);
+//        }
+//        break;
+//    }
+//    }
 }
 
 void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
@@ -182,14 +197,14 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
         bool rand = 0; //getRandBool();
         if (rand)
         {
-            RocketEquipment* rocket_equipment = global::get().rocketEquipmentBuilder().create(tech_level);
+            RocketEquipment* rocket_equipment = global::get().rocketBuilder().create(tech_level);
             if (vehicle->AddAndManageItem(rocket_equipment) == false) {
                 global::get().entityManager().addToGarbage(rocket_equipment);
             }
         }
         else
         {
-            LazerEquipment* lazer_equipment = global::get().lazerEquipmentBuilder().create(tech_level);
+            LazerEquipment* lazer_equipment = global::get().lazerBuilder().create(tech_level);
             if (vehicle->AddAndManageItem(lazer_equipment) == false) {
                 global::get().entityManager().addToGarbage(lazer_equipment);
             }
@@ -198,7 +213,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::RADAR_SLOT_ID) == true)
     {
-        RadarEquipment* radar_equipment = global::get().radarEquipmentBuilder().create(tech_level);
+        RadarEquipment* radar_equipment = global::get().radarBuilder().create(generateRadarDescriptor());
         if (vehicle->AddAndManageItem(radar_equipment) == false) {
             global::get().entityManager().addToGarbage(radar_equipment);
         }
@@ -206,7 +221,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::DRIVE_SLOT_ID) == true)
     {
-        DriveEquipment* drive_equipment = global::get().driveEquipmentBuilder().create(generateDriveDescriptor());
+        DriveEquipment* drive_equipment = global::get().driveBuilder().create(generateDriveDescriptor());
         if (vehicle->AddAndManageItem(drive_equipment) == false) {
             global::get().entityManager().addToGarbage(drive_equipment);
         }
@@ -214,7 +229,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::BAK_SLOT_ID) == true)
     {
-        BakEquipment* bak_equipment = global::get().bakEquipmentBuilder().create(generateBakDescriptor());
+        BakEquipment* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
         if (vehicle->AddAndManageItem(bak_equipment) == false) {
             global::get().entityManager().addToGarbage(bak_equipment);
         }
@@ -222,7 +237,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::ENERGIZER_SLOT_ID) == true)
     {
-        EnergizerEquipment* energizer_equipment = global::get().energizerEquipmentBuilder().create(tech_level);
+        EnergizerEquipment* energizer_equipment = global::get().energizerBuilder().create(tech_level);
         if (vehicle->AddAndManageItem(energizer_equipment) == false) {
             global::get().entityManager().addToGarbage(energizer_equipment);
         }     
@@ -230,7 +245,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::FREEZER_SLOT_ID) == true)
     {
-        //FreezerEquipment* freezer_equipment = FreezerEquipmentBuilder::Instance().GetNewFreezerEquipment(tech_level);
+        //FreezerEquipment* freezer_equipment = FreezerBuilder::Instance().GetNewFreezerEquipment(tech_level);
         //if (vehicle->AddAndManageItem(freezer_equipment) == false) {
             //global::get().entityManager().AddToGarbage(freezer_equipment);
         //}  
@@ -238,7 +253,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::PROTECTOR_SLOT_ID) == true)
     {
-        ProtectorEquipment* protector_equipment = global::get().protectorEquipmentBuilder().create(tech_level);
+        ProtectorEquipment* protector_equipment = global::get().protectorBuilder().create(generateProtectorDescriptor());
         if (vehicle->AddAndManageItem(protector_equipment) == false) {
             global::get().entityManager().addToGarbage(protector_equipment);
         }  
@@ -246,7 +261,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
         
     if (vehicle->isSlotExists(TYPE::ENTITY::DROID_SLOT_ID) == true)
     {
-        DroidEquipment* droid_equipment = global::get().droidEquipmentBuilder().create(generateDroidDescriptor());
+        DroidEquipment* droid_equipment = global::get().droidBuilder().create(generateDroidDescriptor());
         if (vehicle->AddAndManageItem(droid_equipment) == false) {
             global::get().entityManager().addToGarbage(droid_equipment);
         }  
@@ -254,7 +269,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::SCANER_SLOT_ID) == true)
     {
-        ScanerEquipment* scaner_equipment = global::get().scanerEquipmentBuilder().create(tech_level);
+        ScanerEquipment* scaner_equipment = global::get().scanerBuilder().create(generateScanerDescriptor());
         if (vehicle->AddAndManageItem(scaner_equipment) == false) {
             global::get().entityManager().addToGarbage(scaner_equipment);
         }  
@@ -262,7 +277,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::GRAPPLE_SLOT_ID) == true)
     {
-        GrappleEquipment* grapple_equipment = global::get().grappleEquipmentBuilder().create(tech_level);
+        GrappleEquipment* grapple_equipment = global::get().grappleBuilder().create(generateGrappleDescriptor());
         if (vehicle->AddAndManageItem(grapple_equipment) == false) {
             global::get().entityManager().addToGarbage(grapple_equipment);
         }
@@ -298,16 +313,14 @@ void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, TYPE::TECH tech_level) c
 
 void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, TYPE::TECH tech_level) const
 {
-    for (unsigned int i=0; i<2; i++) 
-    {
+    for (unsigned int i=0; i<2; i++) {
         if (vehicle->GetEmptyCargoSlot() == nullptr) {
             return;
         }                    
         vehicle->AddAndManageItem(global::get().gravityArtefactBuilder().create());
     }   
 
-    for (unsigned int i=0; i<2; i++) 
-    {        
+    for (unsigned int i=0; i<2; i++) {
         if (vehicle->GetEmptyCargoSlot() == nullptr) {
             return;
         }            

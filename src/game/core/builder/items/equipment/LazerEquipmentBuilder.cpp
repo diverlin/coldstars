@@ -35,13 +35,13 @@
 #include <descriptors/RaceDescriptors.hpp>
 #include <meti/RandUtils.hpp>
 
-LazerEquipmentBuilder::LazerEquipmentBuilder()
+LazerBuilder::LazerBuilder()
 {}
 
-LazerEquipmentBuilder::~LazerEquipmentBuilder()
+LazerBuilder::~LazerBuilder()
 {}
 
-LazerEquipment* LazerEquipmentBuilder::createTemplate(id_type id) const
+LazerEquipment* LazerBuilder::createTemplate(id_type id) const
 { 
     LazerEquipment* lazer_equipment = new LazerEquipment(id);
     assert(lazer_equipment);
@@ -51,7 +51,7 @@ LazerEquipment* LazerEquipmentBuilder::createTemplate(id_type id) const
     return lazer_equipment;
 } 
 
-LazerEquipment* LazerEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
+LazerEquipment* LazerBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {
     LazerEquipment* lazer_equipment = createTemplate();
     createInternals(lazer_equipment, tech_level, race_id, damage_orig, radius_orig);
@@ -59,7 +59,7 @@ LazerEquipment* LazerEquipmentBuilder::create(TYPE::TECH tech_level, TYPE::RACE 
     return lazer_equipment;
 } 
 
-void LazerEquipmentBuilder::createInternals(LazerEquipment* lazer_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
+void LazerBuilder::createInternals(LazerEquipment* lazer_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -88,7 +88,6 @@ void LazerEquipmentBuilder::createInternals(LazerEquipment* lazer_equipment, TYP
     //alpitodorender lazer_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     lazer_equipment->setParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
     lazer_equipment->setItemCommonData(common_data);
-    lazer_equipment->setCondition(common_data.condition);
 
     lazer_equipment->updateProperties();
     lazer_equipment->CountPrice();

@@ -26,11 +26,11 @@
 class FreezerEquipment;
 
 
-class FreezerEquipmentBuilder
+class FreezerBuilder
 {
     public:
-        FreezerEquipmentBuilder();
-        ~FreezerEquipmentBuilder();
+        FreezerBuilder();
+        ~FreezerBuilder();
         
         FreezerEquipment* createTemplate(id_type id = NONE_ID) const;
         FreezerEquipment* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int freeze_orig = NONE_ID) const;

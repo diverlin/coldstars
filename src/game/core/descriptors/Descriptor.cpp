@@ -36,6 +36,9 @@ std::string Descriptor::KEY_FUEL = "fuel";
 std::string Descriptor::KEY_SPEED = "speed";
 std::string Descriptor::KEY_HYPER = "hyper";
 std::string Descriptor::KEY_REPAIR = "repair";
+std::string Descriptor::KEY_STRENGTH = "strength";
+std::string Descriptor::KEY_SCAN = "scan";
+std::string Descriptor::KEY_PROTECTION = "protection";
 
 Descriptor::Descriptor()
 {
@@ -167,6 +170,24 @@ int
 Descriptor::repair() const
 {
     return get<int>(KEY_REPAIR);
+}
+
+int
+Descriptor::strength() const
+{
+    return get<int>(KEY_STRENGTH);
+}
+
+int
+Descriptor::scan() const
+{
+    return get<int>(KEY_SCAN);
+}
+
+int
+Descriptor::protection() const
+{
+    return get<int>(KEY_PROTECTION);
 }
 
 bool

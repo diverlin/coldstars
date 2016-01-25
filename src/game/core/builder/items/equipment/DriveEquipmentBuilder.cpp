@@ -36,13 +36,13 @@
 
 #include <meti/RandUtils.hpp>
 
-DriveEquipmentBuilder::DriveEquipmentBuilder()
+DriveBuilder::DriveBuilder()
 {}
 
-DriveEquipmentBuilder::~DriveEquipmentBuilder()
+DriveBuilder::~DriveBuilder()
 {}
 
-DriveEquipment* DriveEquipmentBuilder::createTemplate(id_type id) const
+DriveEquipment* DriveBuilder::createTemplate(id_type id) const
 {
     DriveEquipment* drive_equipment = new DriveEquipment(id);
     assert(drive_equipment);
@@ -52,7 +52,7 @@ DriveEquipment* DriveEquipmentBuilder::createTemplate(id_type id) const
     return drive_equipment;
 } 
         
-DriveEquipment* DriveEquipmentBuilder::create(const Descriptor& descriptor) const
+DriveEquipment* DriveBuilder::create(const Descriptor& descriptor) const
 {
     DriveEquipment* drive_equipment = createTemplate();
     createInternals(drive_equipment, descriptor);
@@ -60,28 +60,14 @@ DriveEquipment* DriveEquipmentBuilder::create(const Descriptor& descriptor) cons
     return drive_equipment;
 }        
             
-void DriveEquipmentBuilder::createInternals(DriveEquipment* drive_equipment, const Descriptor& descriptor) const
+void DriveBuilder::createInternals(DriveEquipment* drive_equipment, const Descriptor& descriptor) const
 {     
-    ItemCommonData common_data;
-    common_data.race            = (TYPE::RACE)descriptor.race();
-    common_data.tech         = (TYPE::TECH)descriptor.tech();
-    common_data.modules_num    = descriptor.modules();
-    common_data.mass               = descriptor.mass();
-    common_data.condition      = descriptor.condition();
-    common_data.deterioration = 1;
-    common_data.deterioration_overload_rate = EQUIPMENT::DRIVE::OVERLOAD_DETERIORATION_RATE;
-
-    // alpitodorender drive_equipment->SetRenderData(mesh, texOb, size);
-    
-    //float step = getRandInt(10, 40)*0.01;
-    //AnimationConstantRotationAxisX* animation_program = new AnimationConstantRotationAxisX(step);
-    //drive_equipment->SetRenderAnimation(animation_program);
+    ItemCommonData data = extractCommonData(descriptor);
             
     drive_equipment->SetSpeedOrig(descriptor.speed());
     drive_equipment->SetHyperOrig(descriptor.hyper());
     drive_equipment->setParentSubTypeId(TYPE::ENTITY::DRIVE_SLOT_ID);
-    drive_equipment->setItemCommonData(common_data);
-    drive_equipment->setCondition(common_data.condition);
+    drive_equipment->setItemCommonData(data);
     
     drive_equipment->updateProperties();
     drive_equipment->CountPrice();

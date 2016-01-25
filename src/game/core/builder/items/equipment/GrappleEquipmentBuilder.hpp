@@ -20,21 +20,20 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <types/RaceTypes.hpp>
-#include <types/TechLevelTypes.hpp>
+#include <descriptors/Descriptor.hpp>
 
 class GrappleEquipment;
 
 
-class GrappleEquipmentBuilder
+class GrappleBuilder
 {
     public:
-        GrappleEquipmentBuilder();
-        ~GrappleEquipmentBuilder();
+        GrappleBuilder();
+        ~GrappleBuilder();
 
         GrappleEquipment* createTemplate(id_type id = NONE_ID) const;
-        GrappleEquipment* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int strength_orig = NONE_ID, int radius_orig = NONE_ID, int speed_orig = NONE_ID) const;
+        GrappleEquipment* create(const Descriptor&) const;
                                      
     private:
-        void createInternals(GrappleEquipment*, TYPE::TECH, TYPE::RACE, int, int, int) const;
+        void createInternals(GrappleEquipment*, const Descriptor&) const;
 }; 

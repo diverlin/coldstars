@@ -25,14 +25,14 @@
 
 #include <common/Global.hpp>
 
-BakEquipmentBuilder::BakEquipmentBuilder()
+BakBuilder::BakBuilder()
 {
 }
 
-BakEquipmentBuilder::~BakEquipmentBuilder()
+BakBuilder::~BakBuilder()
 {}
 
-BakEquipment* BakEquipmentBuilder::createTemplate(id_type id) const
+BakEquipment* BakBuilder::createTemplate(id_type id) const
 {
     BakEquipment* bak_equipment = new BakEquipment(id);
     assert(bak_equipment);
@@ -42,7 +42,7 @@ BakEquipment* BakEquipmentBuilder::createTemplate(id_type id) const
     return bak_equipment;
 } 
        
-BakEquipment* BakEquipmentBuilder::create(const Descriptor& descriptor) const
+BakEquipment* BakBuilder::create(const Descriptor& descriptor) const
 {
     BakEquipment* bak_equipment = createTemplate();
     createInternals(bak_equipment, descriptor);
@@ -50,21 +50,14 @@ BakEquipment* BakEquipmentBuilder::create(const Descriptor& descriptor) const
     return bak_equipment;
 }
                           
-void BakEquipmentBuilder::createInternals(BakEquipment* bak_equipment, const Descriptor& descriptor) const
+void BakBuilder::createInternals(BakEquipment* bak_equipment, const Descriptor& descriptor) const
 {
-    ItemCommonData common_data;
-    common_data.race            = (TYPE::RACE)descriptor.race();
-    common_data.tech             = (TYPE::TECH)descriptor.tech();
-    common_data.modules_num        = descriptor.modules();
-    common_data.mass                   = descriptor.mass();
-    common_data.condition          = descriptor.condition();
-    common_data.deterioration   = descriptor.deteoration();
+    ItemCommonData data = extractCommonData(descriptor);
 
     bak_equipment->setFuelMaxOrig(descriptor.fuel());
     bak_equipment->setFuel(descriptor.fuel());
     bak_equipment->setParentSubTypeId(TYPE::ENTITY::BAK_SLOT_ID);
-    bak_equipment->setItemCommonData(common_data);
-    bak_equipment->setCondition(common_data.condition);
+    bak_equipment->setItemCommonData(data);
                                     
     bak_equipment->updateProperties();
     bak_equipment->countPrice();

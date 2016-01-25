@@ -33,13 +33,13 @@
 #include <meti/RandUtils.hpp>
 
 
-DroidEquipmentBuilder::DroidEquipmentBuilder()
+DroidBuilder::DroidBuilder()
 {}
 
-DroidEquipmentBuilder::~DroidEquipmentBuilder()
+DroidBuilder::~DroidBuilder()
 {}
 
-DroidEquipment* DroidEquipmentBuilder::createTemplate(id_type id) const
+DroidEquipment* DroidBuilder::createTemplate(id_type id) const
 {
     DroidEquipment* droid_equipment = new DroidEquipment(id);
     assert(droid_equipment);
@@ -49,7 +49,7 @@ DroidEquipment* DroidEquipmentBuilder::createTemplate(id_type id) const
     return droid_equipment;
 } 
 
-DroidEquipment* DroidEquipmentBuilder::create(const Descriptor& descriptor) const
+DroidEquipment* DroidBuilder::create(const Descriptor& descriptor) const
 {
     DroidEquipment* droid_equipment = createTemplate();
     createInternals(droid_equipment, descriptor);
@@ -57,21 +57,13 @@ DroidEquipment* DroidEquipmentBuilder::create(const Descriptor& descriptor) cons
     return droid_equipment;
 }  
             
-void DroidEquipmentBuilder::createInternals(DroidEquipment* droid_equipment, const Descriptor& descriptor) const
+void DroidBuilder::createInternals(DroidEquipment* droid_equipment, const Descriptor& descriptor) const
 {     
-    ItemCommonData common_data;
-    common_data.race            = (TYPE::RACE)descriptor.race();
-    common_data.tech      = (TYPE::TECH)descriptor.tech();
-    common_data.modules_num = descriptor.modules();
-    common_data.mass            = descriptor.mass();
-    common_data.condition   = descriptor.condition();
-    common_data.deterioration = descriptor.deteoration();
+    ItemCommonData common_data = extractCommonData(descriptor);
    
     droid_equipment->SetRepairOrig(descriptor.repair());
-    //alpitodorender droid_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     droid_equipment->setParentSubTypeId(TYPE::ENTITY::DROID_SLOT_ID);
     droid_equipment->setItemCommonData(common_data);
-    droid_equipment->setCondition(common_data.condition);
             
     droid_equipment->updateProperties();
     droid_equipment->CountPrice();

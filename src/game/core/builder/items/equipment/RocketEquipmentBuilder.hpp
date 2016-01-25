@@ -26,11 +26,11 @@
 class RocketEquipment;
 
 
-class RocketEquipmentBuilder
+class RocketBuilder
 {
     public:
-        RocketEquipmentBuilder();
-        ~RocketEquipmentBuilder();
+        RocketBuilder();
+        ~RocketBuilder();
 
         RocketEquipment* createTemplate(id_type id = NONE_ID) const;
         RocketEquipment* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
