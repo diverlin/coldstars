@@ -78,7 +78,7 @@ void RocketEquipmentBuilder::createInternals(RocketEquipment* rocket_equipment, 
     common_data.modules_num_max = meti::getRandInt(EQUIPMENT::ROCKET::MODULES_NUM_MIN, EQUIPMENT::ROCKET::MODULES_NUM_MAX);
     
     common_data.mass            = meti::getRandInt(EQUIPMENT::ROCKET::MASS_MIN, EQUIPMENT::ROCKET::MASS_MAX);
-    common_data.condition_max   = meti::getRandInt(EQUIPMENT::ROCKET::CONDITION_MIN, EQUIPMENT::ROCKET::CONDITION_MAX);
+    common_data.condition   = meti::getRandInt(EQUIPMENT::ROCKET::CONDITION_MIN, EQUIPMENT::ROCKET::CONDITION_MAX);
     
     common_data.deterioration_normal = 1;
     
@@ -99,7 +99,7 @@ void RocketEquipmentBuilder::createInternals(RocketEquipment* rocket_equipment, 
     //alpitodorender rocket_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     rocket_equipment->setParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
     rocket_equipment->setItemCommonData(common_data);
-    rocket_equipment->setCondition(common_data.condition_max);
+    rocket_equipment->setCondition(common_data.condition);
     
     rocket_equipment->updateProperties();
     rocket_equipment->CountPrice();

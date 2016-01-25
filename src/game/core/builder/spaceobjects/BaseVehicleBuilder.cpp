@@ -246,7 +246,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECHLEVEL tech_level) con
         
     if (vehicle->isSlotExists(TYPE::ENTITY::DROID_SLOT_ID) == true)
     {
-        DroidEquipment* droid_equipment = global::get().droidEquipmentBuilder().create(tech_level);
+        DroidEquipment* droid_equipment = global::get().droidEquipmentBuilder().create(generateDroidDescriptor());
         if (vehicle->AddAndManageItem(droid_equipment) == false) {
             global::get().entityManager().addToGarbage(droid_equipment);
         }  

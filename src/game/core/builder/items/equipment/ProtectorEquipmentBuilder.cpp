@@ -76,14 +76,14 @@ void ProtectorEquipmentBuilder::createInternals(ProtectorEquipment* protector_eq
     common_data.tech_level         = tech_level;
     common_data.modules_num_max = meti::getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);
     common_data.mass            = meti::getRandInt(EQUIPMENT::PROTECTOR::MASS_MIN,        EQUIPMENT::PROTECTOR::MASS_MAX);
-    common_data.condition_max   = meti::getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN,   EQUIPMENT::PROTECTOR::CONDITION_MAX);
+    common_data.condition   = meti::getRandInt(EQUIPMENT::PROTECTOR::CONDITION_MIN,   EQUIPMENT::PROTECTOR::CONDITION_MAX);
     common_data.deterioration_normal = 1;
 
     protector_equipment->SetProtectionOrig(protection_orig);  
     //alpitodorender protector_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     protector_equipment->setParentSubTypeId(TYPE::ENTITY::PROTECTOR_SLOT_ID);
     protector_equipment->setItemCommonData(common_data);
-    protector_equipment->setCondition(common_data.condition_max);
+    protector_equipment->setCondition(common_data.condition);
             
     protector_equipment->updateProperties();
     protector_equipment->CountPrice();

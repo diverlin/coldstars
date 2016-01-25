@@ -20,8 +20,7 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <types/RaceTypes.hpp>
-#include <types/TechLevelTypes.hpp>
+#include <descriptors/Descriptor.hpp>
 
 class DroidEquipment;
 
@@ -33,8 +32,8 @@ class DroidEquipmentBuilder
         ~DroidEquipmentBuilder();
 
         DroidEquipment* createTemplate(id_type id = NONE_ID) const;
-        DroidEquipment* create(TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int repair_orig = NONE_ID) const;
+        DroidEquipment* create(const Descriptor&) const;
                                      
     private:
-        void createInternals(DroidEquipment*, TYPE::TECHLEVEL, TYPE::RACE, int) const;
+        void createInternals(DroidEquipment*, const Descriptor&) const;
 }; 

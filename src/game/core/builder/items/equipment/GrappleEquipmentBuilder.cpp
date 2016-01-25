@@ -77,7 +77,7 @@ void GrappleEquipmentBuilder::createInternals(GrappleEquipment* grapple_equipmen
     common_data.tech_level         = tech_level;
     common_data.modules_num_max = meti::getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);
     common_data.mass            = meti::getRandInt(EQUIPMENT::GRAPPLE::MASS_MIN,        EQUIPMENT::GRAPPLE::MASS_MAX);
-    common_data.condition_max   = meti::getRandInt(EQUIPMENT::GRAPPLE::CONDITION_MIN,   EQUIPMENT::GRAPPLE::CONDITION_MAX);
+    common_data.condition   = meti::getRandInt(EQUIPMENT::GRAPPLE::CONDITION_MIN,   EQUIPMENT::GRAPPLE::CONDITION_MAX);
     common_data.deterioration_normal = 1;
 
     grapple_equipment->SetStrengthOrig(strength_orig);
@@ -87,7 +87,7 @@ void GrappleEquipmentBuilder::createInternals(GrappleEquipment* grapple_equipmen
     //alpitodorender grapple_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     grapple_equipment->setParentSubTypeId(TYPE::ENTITY::GRAPPLE_SLOT_ID);
     grapple_equipment->setItemCommonData(common_data);
-    grapple_equipment->setCondition(common_data.condition_max);
+    grapple_equipment->setCondition(common_data.condition);
     
     grapple_equipment->updateProperties();
     grapple_equipment->CountPrice();

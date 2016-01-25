@@ -76,14 +76,14 @@ void RadarEquipmentBuilder::createInternals(RadarEquipment* radar_equipment, TYP
     common_data.tech_level      = tech_level;
     common_data.modules_num_max = meti::getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
     common_data.mass            = meti::getRandInt(EQUIPMENT::RADAR::MASS_MIN,        EQUIPMENT::RADAR::MASS_MAX);
-    common_data.condition_max   = meti::getRandInt(EQUIPMENT::RADAR::CONDITION_MIN,   EQUIPMENT::RADAR::CONDITION_MAX);
+    common_data.condition   = meti::getRandInt(EQUIPMENT::RADAR::CONDITION_MIN,   EQUIPMENT::RADAR::CONDITION_MAX);
     common_data.deterioration_normal = 1;
 
     radar_equipment->SetRadiusOrig(radius_orig);
     //alpitodorender radar_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     radar_equipment->setParentSubTypeId(TYPE::ENTITY::RADAR_SLOT_ID);
     radar_equipment->setItemCommonData(common_data);
-    radar_equipment->setCondition(common_data.condition_max);
+    radar_equipment->setCondition(common_data.condition);
 
     radar_equipment->updateProperties();
     radar_equipment->CountPrice();

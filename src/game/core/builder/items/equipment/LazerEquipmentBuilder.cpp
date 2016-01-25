@@ -80,7 +80,7 @@ void LazerEquipmentBuilder::createInternals(LazerEquipment* lazer_equipment, TYP
     common_data.tech_level         = tech_level;
     common_data.modules_num_max = meti::getRandInt(EQUIPMENT::LAZER::MODULES_NUM_MIN, EQUIPMENT::LAZER::MODULES_NUM_MAX);
     common_data.mass            = meti::getRandInt(EQUIPMENT::LAZER::MASS_MIN, EQUIPMENT::LAZER::MASS_MAX);
-    common_data.condition_max   = meti::getRandInt(EQUIPMENT::LAZER::CONDITION_MIN, EQUIPMENT::LAZER::CONDITION_MAX);
+    common_data.condition   = meti::getRandInt(EQUIPMENT::LAZER::CONDITION_MIN, EQUIPMENT::LAZER::CONDITION_MAX);
     common_data.deterioration_normal = 1;
 
     lazer_equipment->SetDamageOrig(damage_orig);
@@ -88,7 +88,7 @@ void LazerEquipmentBuilder::createInternals(LazerEquipment* lazer_equipment, TYP
     //alpitodorender lazer_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
     lazer_equipment->setParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
     lazer_equipment->setItemCommonData(common_data);
-    lazer_equipment->setCondition(common_data.condition_max);
+    lazer_equipment->setCondition(common_data.condition);
 
     lazer_equipment->updateProperties();
     lazer_equipment->CountPrice();

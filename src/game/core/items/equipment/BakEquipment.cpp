@@ -59,7 +59,7 @@ void BakEquipment::countPrice()
                                EQUIPMENT::BAK::MODULES_NUM_WEIGHT * modules_num_rate;
     
     float mass_rate          = (float)m_data_item.mass / EQUIPMENT::BAK::MASS_MIN;
-    float condition_rate     = (float)m_condition / m_data_item.condition_max;
+    float condition_rate     = (float)m_condition / m_data_item.condition;
     
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

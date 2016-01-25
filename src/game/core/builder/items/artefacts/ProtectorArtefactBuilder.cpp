@@ -72,7 +72,7 @@ void ProtectorArtefactBuilder::createInternals(ProtectorArtefact* protector_arte
     // alpitodorender protector_artefact->SetRenderData(mesh, texOb_item, texOb_item->size());
     protector_artefact->setParentSubTypeId(TYPE::ENTITY::ARTEFACT_SLOT_ID);
     protector_artefact->setItemCommonData(common_data);
-    protector_artefact->setCondition(common_data.condition_max);
+    protector_artefact->setCondition(common_data.condition);
 }
 
 

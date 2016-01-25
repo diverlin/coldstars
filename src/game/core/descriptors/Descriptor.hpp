@@ -48,6 +48,7 @@ public:
     static std::string KEY_FUEL;
     static std::string KEY_SPEED;
     static std::string KEY_HYPER;
+    static std::string KEY_REPAIR;
 
     Descriptor();
     Descriptor(const std::map<std::string, std::string>&);
@@ -74,6 +75,7 @@ public:
     int fuel() const;
     int speed() const;
     int hyper() const;
+    int repair() const;
 
 private:
     const std::string& get_raw(const std::string& key) const;
