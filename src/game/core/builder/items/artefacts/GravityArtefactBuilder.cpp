@@ -67,7 +67,7 @@ void GravityArtefactBuilder::createInternals(GravityArtefact* gravity_artefact, 
     gravity = meti::getRandInt(ARTEFACT::GRAVITY::GRAVITYRATE_MIN, ARTEFACT::GRAVITY::GRAVITYRATE_MAX);
 
     ItemCommonData common_data;
-    common_data.deterioration_normal = 1;
+    common_data.deterioration = 1;
 
     gravity_artefact->SetGravity(gravity);
     // alpitodorender gravity_artefact->SetRenderData(mesh, texOb_item, texOb_item->size());

@@ -72,7 +72,7 @@ void EnergizerEquipment::CountPrice()
 {
     float energy_rate          = (float)energy_max_orig / EQUIPMENT::ENERGIZER::ENERGY_MIN;
     float restoration_rate     = (float)restoration_orig / EQUIPMENT::ENERGIZER::RESTORATION_MIN;
-    float modules_num_rate     = (float)m_data_item.modules_num_max / EQUIPMENT::ENERGIZER::MODULES_NUM_MAX;
+    float modules_num_rate     = (float)m_data_item.modules_num / EQUIPMENT::ENERGIZER::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::ENERGIZER::ENERGY_WEIGHT * energy_rate + EQUIPMENT::ENERGIZER::RESTORATION_WEIGHT * restoration_rate + EQUIPMENT::ENERGIZER::MODULES_NUM_WEIGHT * modules_num_rate;
 

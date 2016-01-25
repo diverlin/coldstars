@@ -53,12 +53,12 @@ void BaseItem::lockEvent(int locked_turns)
                 
 void BaseItem::useNormalDeterioration()
 {
-    m_deterioration = m_data_item.deterioration_normal;
+    m_deterioration = m_data_item.deterioration;
 }
                                 
 void BaseItem::useOverloadDeterioration()
 {
-    m_deterioration = m_data_item.deterioration_normal * m_data_item.deterioration_overload_rate;
+    m_deterioration = m_data_item.deterioration * m_data_item.deterioration_overload_rate;
 }
  
 void BaseItem::damageEvent()
@@ -140,10 +140,10 @@ void BaseItem::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
     save_ptree.put(root+"race_id", (int)m_race_id);
     save_ptree.put(root+"parent_subtype_id", (int)m_parent_subtype_id);
 
-    save_ptree.put(root+"data_item.tech_level",                     (int)m_data_item.tech_level);
-    save_ptree.put(root+"data_item.modules_num_max",                m_data_item.modules_num_max);
+    save_ptree.put(root+"data_item.tech_level",                     (int)m_data_item.tech);
+    save_ptree.put(root+"data_item.modules_num_max",                m_data_item.modules_num);
     save_ptree.put(root+"data_item.condition_max",                  m_data_item.condition);
-    save_ptree.put(root+"data_item.deterioration_normal",           m_data_item.deterioration_normal);
+    save_ptree.put(root+"data_item.deterioration_normal",           m_data_item.deterioration);
     save_ptree.put(root+"data_item.deterioration_overload_rate",    m_data_item.deterioration_overload_rate);
     save_ptree.put(root+"data_item.mass",                           m_data_item.mass);
 
@@ -165,10 +165,10 @@ void BaseItem::LoadData(const boost::property_tree::ptree& load_ptree)
     m_race_id           = (TYPE::RACE)load_ptree.get<int>("race_id");
     m_parent_subtype_id = (TYPE::ENTITY)load_ptree.get<int>("parent_subtype_id");
 
-    m_data_item.tech_level           = (TYPE::TECHLEVEL)load_ptree.get<int>("data_item.tech_level");
-    m_data_item.modules_num_max      = load_ptree.get<int>("data_item.modules_num_max");
+    m_data_item.tech           = (TYPE::TECHLEVEL)load_ptree.get<int>("data_item.tech_level");
+    m_data_item.modules_num      = load_ptree.get<int>("data_item.modules_num_max");
     m_data_item.condition        = load_ptree.get<int>("data_item.condition_max");
-    m_data_item.deterioration_normal = load_ptree.get<int>("data_item.deterioration_normal");
+    m_data_item.deterioration = load_ptree.get<int>("data_item.deterioration_normal");
     m_data_item.deterioration_overload_rate = load_ptree.get<float>("data_item.deterioration_overload_rate");
     m_data_item.mass                 = load_ptree.get<int>("data_item.mass");
                     

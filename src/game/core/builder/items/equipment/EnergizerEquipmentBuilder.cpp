@@ -78,11 +78,11 @@ void EnergizerEquipmentBuilder::createInternals(EnergizerEquipment* energizer_eq
     restoration_orig = meti::getRandInt(EQUIPMENT::ENERGIZER::RESTORATION_MIN, EQUIPMENT::ENERGIZER::RESTORATION_MAX) * (1 + EQUIPMENT::ENERGIZER::RESTORATION_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
-    common_data.tech_level          = tech_level;
-    common_data.modules_num_max  = meti::getRandInt(EQUIPMENT::ENERGIZER::MODULES_NUM_MIN, EQUIPMENT::ENERGIZER::MODULES_NUM_MAX);
+    common_data.tech          = tech_level;
+    common_data.modules_num  = meti::getRandInt(EQUIPMENT::ENERGIZER::MODULES_NUM_MIN, EQUIPMENT::ENERGIZER::MODULES_NUM_MAX);
     common_data.mass             = meti::getRandInt(EQUIPMENT::ENERGIZER::MASS_MIN,        EQUIPMENT::ENERGIZER::MASS_MAX);
     common_data.condition    = meti::getRandInt(EQUIPMENT::ENERGIZER::CONDITION_MIN,   EQUIPMENT::ENERGIZER::CONDITION_MAX);
-    common_data.deterioration_normal = 1;
+    common_data.deterioration = 1;
 
     energizer_equipment->SetEnergyMaxOrig(energy_max_orig);
     energizer_equipment->SetRestorationOrig(restoration_orig);

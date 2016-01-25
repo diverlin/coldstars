@@ -74,11 +74,11 @@ void GrappleEquipmentBuilder::createInternals(GrappleEquipment* grapple_equipmen
     speed_orig      = meti::getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,    EQUIPMENT::GRAPPLE::SPEED_MAX)    * (1 + EQUIPMENT::GRAPPLE::SPEED_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
-    common_data.tech_level         = tech_level;
-    common_data.modules_num_max = meti::getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);
+    common_data.tech         = tech_level;
+    common_data.modules_num = meti::getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);
     common_data.mass            = meti::getRandInt(EQUIPMENT::GRAPPLE::MASS_MIN,        EQUIPMENT::GRAPPLE::MASS_MAX);
     common_data.condition   = meti::getRandInt(EQUIPMENT::GRAPPLE::CONDITION_MIN,   EQUIPMENT::GRAPPLE::CONDITION_MAX);
-    common_data.deterioration_normal = 1;
+    common_data.deterioration = 1;
 
     grapple_equipment->SetStrengthOrig(strength_orig);
     grapple_equipment->SetRadiusOrig(radius_orig);
