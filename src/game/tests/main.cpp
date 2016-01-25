@@ -51,6 +51,17 @@
 
 #include <ctime>
 
+#include <builder/items/IncludeItemBuilders.hpp>
+
+#include <items/equipment/BakEquipment.hpp>
+#include <items/equipment/DriveEquipment.hpp>
+#include <items/equipment/DroidEquipment.hpp>
+#include <items/equipment/GrappleEquipment.hpp>
+#include <items/equipment/ScanerEquipment.hpp>
+#include <items/equipment/RadarEquipment.hpp>
+#include <items/equipment/ProtectorEquipment.hpp>
+
+
 namespace {
 
 Ship* createNewShip()
@@ -104,7 +115,48 @@ StarSystem* createNewStarSystem()
 TEST(ship,equipment)
 {
     Ship* ship = createNewShip();
-    global::get().shipBuilder().equip(ship);
+
+    BakEquipment* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
+    DriveEquipment* drive_equipment = global::get().driveBuilder().create(generateDriveDescriptor());
+    DroidEquipment* droid_equipment = global::get().droidBuilder().create(generateDroidDescriptor());
+    GrappleEquipment* grapple_equipment = global::get().grappleBuilder().create(generateGrappleDescriptor());
+    ScanerEquipment* scaner_equipment = global::get().scanerBuilder().create(generateScanerDescriptor());
+    RadarEquipment* radar_equipment = global::get().radarBuilder().create(generateRadarDescriptor());
+
+    // back test
+    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() == nullptr);
+    ship->manage(bak_equipment);
+    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() != nullptr);
+
+    // drive test
+    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() == nullptr);
+    ship->manage(drive_equipment);
+    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() != nullptr);
+
+    // droid test
+    EXPECT_TRUE(ship->GetDroidSlot()->item() == nullptr);
+    ship->manage(droid_equipment);
+    EXPECT_TRUE(ship->GetDroidSlot()->item() != nullptr);
+
+    // grapple
+    EXPECT_TRUE(ship->GetGrappleSlot()->item() == nullptr);
+    ship->manage(grapple_equipment);
+    EXPECT_TRUE(ship->GetGrappleSlot()->item() != nullptr);
+
+    // scaner
+    EXPECT_TRUE(ship->GetScanerSlot()->item() == nullptr);
+    ship->manage(scaner_equipment);
+    EXPECT_TRUE(ship->GetScanerSlot()->item() != nullptr);
+
+    // radar
+    EXPECT_TRUE(ship->GetRadarSlot()->item() == nullptr);
+    ship->manage(radar_equipment);
+    EXPECT_TRUE(ship->GetRadarSlot()->item() != nullptr);
+
+    // protector
+    EXPECT_TRUE(ship->GetProtectorSlot()->item() == nullptr);
+    ship->manage(protector_equipment);
+    EXPECT_TRUE(ship->GetProtectorSlot()->item() != nullptr);
 }
 
 

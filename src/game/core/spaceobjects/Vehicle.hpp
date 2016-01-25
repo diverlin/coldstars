@@ -97,7 +97,7 @@ class Vehicle : public SpaceObject
         bool GetAllItemsFromVehicle(Vehicle*);
         
         bool AddItemToCargoSlot(BaseItem*);
-        bool AddAndManageItem(BaseItem*);
+        bool manage(BaseItem*);
         
         void ManageItemsInCargo();
         void SellItemsInCargo();
