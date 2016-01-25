@@ -67,7 +67,7 @@ void LazerEquipment::CountPrice()
 {
     float damage_rate        = (float)damage_orig / EQUIPMENT::LAZER::DAMAGE_MIN;
     float radius_rate        = (float)radius_orig / EQUIPMENT::LAZER::RADIUS_MIN;
-    float modules_num_rate   = (float)m_data_item.modules_num_max / EQUIPMENT::LAZER::MODULES_NUM_MAX;
+    float modules_num_rate   = (float)m_data_item.modules_num / EQUIPMENT::LAZER::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::LAZER::DAMAGE_WEIGHT * damage_rate +
             EQUIPMENT::LAZER::RADIUS_WEIGHT * radius_rate +

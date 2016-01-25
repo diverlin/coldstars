@@ -74,13 +74,13 @@ void RocketEquipmentBuilder::createInternals(RocketEquipment* rocket_equipment, 
     radius_orig   = meti::getRandInt(EQUIPMENT::ROCKET::RADIUS_MIN, EQUIPMENT::ROCKET::RADIUS_MAX) * (1 + EQUIPMENT::ROCKET::RADIUS_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
-    common_data.tech_level         = tech_level;
-    common_data.modules_num_max = meti::getRandInt(EQUIPMENT::ROCKET::MODULES_NUM_MIN, EQUIPMENT::ROCKET::MODULES_NUM_MAX);
+    common_data.tech         = tech_level;
+    common_data.modules_num = meti::getRandInt(EQUIPMENT::ROCKET::MODULES_NUM_MIN, EQUIPMENT::ROCKET::MODULES_NUM_MAX);
     
     common_data.mass            = meti::getRandInt(EQUIPMENT::ROCKET::MASS_MIN, EQUIPMENT::ROCKET::MASS_MAX);
     common_data.condition   = meti::getRandInt(EQUIPMENT::ROCKET::CONDITION_MIN, EQUIPMENT::ROCKET::CONDITION_MAX);
     
-    common_data.deterioration_normal = 1;
+    common_data.deterioration = 1;
     
     BulletData data_bullet;
     data_bullet.damage        = damage_orig;

@@ -53,7 +53,7 @@ void BakEquipment::updateProperties()
 void BakEquipment::countPrice()
 {
     float fuel_rate          = (float)m_fuelMaxOrig / EQUIPMENT::BAK::FUEL_MIN;
-    float modules_num_rate   = (float)m_data_item.modules_num_max / EQUIPMENT::BAK::MODULES_NUM_MAX;
+    float modules_num_rate   = (float)m_data_item.modules_num / EQUIPMENT::BAK::MODULES_NUM_MAX;
     
     float effectiveness_rate = EQUIPMENT::BAK::FUEL_WEIGHT * fuel_rate + 
                                EQUIPMENT::BAK::MODULES_NUM_WEIGHT * modules_num_rate;

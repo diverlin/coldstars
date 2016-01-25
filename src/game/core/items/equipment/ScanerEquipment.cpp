@@ -51,7 +51,7 @@ void ScanerEquipment::updateProperties()
 void ScanerEquipment::CountPrice()
 {
     float scan_rate          = (float)scan_orig / EQUIPMENT::SCANER::SCAN_MIN;
-    float modules_num_rate   = (float)m_data_item.modules_num_max / EQUIPMENT::SCANER::MODULES_NUM_MAX;
+    float modules_num_rate   = (float)m_data_item.modules_num / EQUIPMENT::SCANER::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::SCANER::SCAN_WEIGHT * scan_rate +
             EQUIPMENT::SCANER::MODULES_NUM_WEIGHT * modules_num_rate;

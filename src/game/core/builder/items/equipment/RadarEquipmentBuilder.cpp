@@ -73,11 +73,11 @@ void RadarEquipmentBuilder::createInternals(RadarEquipment* radar_equipment, TYP
     radius_orig     = meti::getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX) * (1 + EQUIPMENT::RADAR::RADIUS_TECHLEVEL_RATE * (int)tech_level);
     
     ItemCommonData common_data;
-    common_data.tech_level      = tech_level;
-    common_data.modules_num_max = meti::getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
+    common_data.tech      = tech_level;
+    common_data.modules_num = meti::getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
     common_data.mass            = meti::getRandInt(EQUIPMENT::RADAR::MASS_MIN,        EQUIPMENT::RADAR::MASS_MAX);
     common_data.condition   = meti::getRandInt(EQUIPMENT::RADAR::CONDITION_MIN,   EQUIPMENT::RADAR::CONDITION_MAX);
-    common_data.deterioration_normal = 1;
+    common_data.deterioration = 1;
 
     radar_equipment->SetRadiusOrig(radius_orig);
     //alpitodorender radar_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());

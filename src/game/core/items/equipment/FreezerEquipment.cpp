@@ -51,7 +51,7 @@ void FreezerEquipment::updateProperties()
 void FreezerEquipment::CountPrice()
 {
      float freeze_rate          = (float)freeze_orig / EQUIPMENT::FREEZER::FREEZE_MIN;
-     float modules_num_rate     = (float)m_data_item.modules_num_max / EQUIPMENT::FREEZER::MODULES_NUM_MAX;
+     float modules_num_rate     = (float)m_data_item.modules_num / EQUIPMENT::FREEZER::MODULES_NUM_MAX;
 
      float effectiveness_rate = EQUIPMENT::FREEZER::FREEZE_WEIGHT * freeze_rate + EQUIPMENT::FREEZER::MODULES_NUM_WEIGHT * modules_num_rate;
 

@@ -67,7 +67,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 {
     if (module->parentSubTypeId() == subTypeId())
     {
-        if (modules_vec.size() < m_data_item.modules_num_max)
+        if (modules_vec.size() < m_data_item.modules_num)
             {
                 if (module->itemSlot() != nullptr)
                 {

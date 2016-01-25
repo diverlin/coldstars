@@ -66,7 +66,7 @@ void ProtectorArtefactBuilder::createInternals(ProtectorArtefact* protector_arte
     protection = meti::getRandInt(ARTEFACT::PROTECTOR::PROTECTION_MIN, ARTEFACT::PROTECTOR::PROTECTION_MAX);
 
     ItemCommonData common_data;
-    common_data.deterioration_normal = 1;
+    common_data.deterioration = 1;
 
     protector_artefact->SetProtection(protection);
     // alpitodorender protector_artefact->SetRenderData(mesh, texOb_item, texOb_item->size());

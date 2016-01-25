@@ -37,10 +37,10 @@ struct ItemCommonData
     {}
 
     TYPE::RACE race = TYPE::RACE::R0_ID;
-    TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::NONE_ID;
-    unsigned int modules_num_max = 0;
+    TYPE::TECHLEVEL tech = TYPE::TECHLEVEL::NONE_ID;
+    unsigned int modules_num = 0;
     unsigned int condition = 0;
-    unsigned int deterioration_normal = 0;
+    unsigned int deterioration = 0;
     float deterioration_overload_rate = 0.0f;
     unsigned int mass = 0;
 };
@@ -60,7 +60,7 @@ class BaseItem : public ceti::Orientation, public Base
         virtual void putChildrenToGarbage() const {}
         
         void setParentSubTypeId(TYPE::ENTITY parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
-        void setItemCommonData(const ItemCommonData& data_item) { m_data_item = data_item; m_deterioration = data_item.deterioration_normal; }
+        void setItemCommonData(const ItemCommonData& data_item) { m_data_item = data_item; m_deterioration = data_item.deterioration; }
         void setItemSlot(ItemSlot* item_slot)  { m_item_slot = item_slot; }
         void setCondition(int condition) { m_condition = condition; }
         

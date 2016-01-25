@@ -51,7 +51,7 @@ void ProtectorEquipment::updateProperties()
 void ProtectorEquipment::CountPrice()
 {
     float protection_rate    = (float)protection_orig / EQUIPMENT::PROTECTOR::PROTECTION_MIN;
-    float modules_num_rate   = (float)m_data_item.modules_num_max / EQUIPMENT::PROTECTOR::MODULES_NUM_MAX;
+    float modules_num_rate   = (float)m_data_item.modules_num / EQUIPMENT::PROTECTOR::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::PROTECTOR::PROTECTION_WEIGHT * protection_rate +
             EQUIPMENT::PROTECTOR::MODULES_NUM_WEIGHT * modules_num_rate;

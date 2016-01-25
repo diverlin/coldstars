@@ -64,11 +64,11 @@ void DriveEquipmentBuilder::createInternals(DriveEquipment* drive_equipment, con
 {     
     ItemCommonData common_data;
     common_data.race            = (TYPE::RACE)descriptor.race();
-    common_data.tech_level         = (TYPE::TECHLEVEL)descriptor.tech();
-    common_data.modules_num_max    = descriptor.modules();
+    common_data.tech         = (TYPE::TECHLEVEL)descriptor.tech();
+    common_data.modules_num    = descriptor.modules();
     common_data.mass               = descriptor.mass();
     common_data.condition      = descriptor.condition();
-    common_data.deterioration_normal = 1;
+    common_data.deterioration = 1;
     common_data.deterioration_overload_rate = EQUIPMENT::DRIVE::OVERLOAD_DETERIORATION_RATE;
 
     // alpitodorender drive_equipment->SetRenderData(mesh, texOb, size);

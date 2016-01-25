@@ -54,11 +54,11 @@ void BakEquipmentBuilder::createInternals(BakEquipment* bak_equipment, const Des
 {
     ItemCommonData common_data;
     common_data.race            = (TYPE::RACE)descriptor.race();
-    common_data.tech_level             = (TYPE::TECHLEVEL)descriptor.tech();
-    common_data.modules_num_max        = descriptor.modules();
+    common_data.tech             = (TYPE::TECHLEVEL)descriptor.tech();
+    common_data.modules_num        = descriptor.modules();
     common_data.mass                   = descriptor.mass();
     common_data.condition          = descriptor.condition();
-    common_data.deterioration_normal   = descriptor.deteoration();
+    common_data.deterioration   = descriptor.deteoration();
 
     bak_equipment->setFuelMaxOrig(descriptor.fuel());
     bak_equipment->setFuel(descriptor.fuel());
