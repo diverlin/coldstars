@@ -224,8 +224,12 @@ bool Vehicle::ManageItem(BaseItem* item)
     switch(item->typeId())
     {
         case TYPE::ENTITY::EQUIPMENT_ID:    { return ManageFunctionEquipment(item); break; }
+#ifdef ENABLE_MODULES
         case TYPE::ENTITY::MODULE_ID:       { return ManageFunctionModule(item); break; }
+#endif
+#ifdef ENABLE_ARTEFACTS
         case TYPE::ENTITY::ARTEFACT_ID:     { return ManageFunctionArtefact(item); break; }
+#endif
         case TYPE::ENTITY::GOODS_ID:        { return ManageFunctionGoodsPack(item); break; }
     }
     
@@ -266,6 +270,7 @@ bool Vehicle::ManageFunctionEquipment(BaseItem* item)
     return false;
 }     
 
+#ifdef ENABLE_MODULES
 bool Vehicle::ManageFunctionModule(BaseItem* item)
 {
     for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
@@ -277,7 +282,9 @@ bool Vehicle::ManageFunctionModule(BaseItem* item)
     }    
     return false;
 }
+#endif
 
+#ifdef EANBLE_ARTEFACTS
 bool Vehicle::ManageFunctionArtefact(BaseItem* item)
 {
     ItemSlot* artef_slot = GetEmptyArtefactSlot();
@@ -288,6 +295,7 @@ bool Vehicle::ManageFunctionArtefact(BaseItem* item)
 
     return false;
 }
+#endif
 
 ItemSlot* const Vehicle::GetFuctionalSlot(TYPE::ENTITY functional_slot_subtype_id) const
 {

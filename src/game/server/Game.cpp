@@ -31,8 +31,8 @@
 #include <descriptors/GalaxyDescriptor.hpp>
 
 GalaxyDescriptor getGalaxyDescriptor() {
-
-
+    GalaxyDescriptor descriptor;
+    return descriptor;
 }
 
 bool Game::run() const

@@ -104,8 +104,10 @@ global::global()
     , m_shopBuilder(new ShopBuilder)
     , m_govermentBuilder(new GovermentBuilder)
 
+    #ifdef ENABLE_ARTEFACTS
     , m_gravityArtefactBuilder(new GravityArtefactBuilder)
     , m_protectorArtefactBuilder(new ProtectorArtefactBuilder)
+    #endif // ENABLE_ARTEFACTS
 
     , m_bakBuilder(new BakBuilder)
     , m_driveBuilder(new DriveBuilder)
@@ -119,6 +121,7 @@ global::global()
     , m_rocketBuilder(new RocketBuilder)
     , m_lazerBuilder(new LazerBuilder)
 
+    #ifdef ENABLE_MODULES
     , m_bakModuleBuilder(new BakModuleBuilder)
     , m_driveModuleBuilder(new DriveModuleBuilder)
     , m_droidModuleBuilder(new DroidModuleBuilder)
@@ -130,6 +133,8 @@ global::global()
     , m_scanerModuleBuilder(new ScanerModuleBuilder)
     , m_rocketModuleBuilder(new RocketModuleBuilder)
     , m_lazerModuleBuilder(new LazerModuleBuilder)
+    #endif // ENABLE_MODULES
+
     , m_bombBuilder(new BombBuilder)
     , m_npcBuilder(new NpcBuilder)
 //    , m_itemSlotBuilder(new ItemSlotBuilder)
@@ -164,8 +169,10 @@ global::~global()
     delete m_shopBuilder;
     delete m_govermentBuilder;
 
+#ifdef ENABLE_ARTEFACTS
     delete m_gravityArtefactBuilder;
     delete m_protectorArtefactBuilder;
+#endif // ENABLE_ARTEFACTS
 
     delete m_bakBuilder;
     delete m_driveBuilder;
@@ -179,6 +186,7 @@ global::~global()
     delete m_rocketBuilder;
     delete m_lazerBuilder;
 
+#ifdef ENABLE_MODULES
     delete m_bakModuleBuilder;
     delete m_driveModuleBuilder;
     delete m_droidModuleBuilder;
@@ -190,6 +198,8 @@ global::~global()
     delete m_scanerModuleBuilder;
     delete m_rocketModuleBuilder;
     delete m_lazerModuleBuilder;
+#endif // ENABLE_MODULES
+
     delete m_bombBuilder;
 
     delete m_npcBuilder;

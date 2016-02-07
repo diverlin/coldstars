@@ -30,6 +30,7 @@
 #include "equipment/FreezerEquipmentBuilder.hpp"
 #include "equipment/EnergizerEquipmentBuilder.hpp"
 
+#ifdef ENABLE_MODULES
 #include "modules/BakModuleBuilder.hpp"
 #include "modules/DriveModuleBuilder.hpp"
 #include "modules/GrappleModuleBuilder.hpp"
@@ -39,9 +40,12 @@
 #include "modules/ScanerModuleBuilder.hpp"
 #include "modules/DroidModuleBuilder.hpp"
 #include "modules/RadarModuleBuilder.hpp"
+#endif // ENABLE_MODULES
 
+#ifdef ENABLE_ARTEFACTS
 #include "artefacts/GravityArtefactBuilder.hpp"
 #include "artefacts/ProtectorArtefactBuilder.hpp"
+#endif // ENABLE_ARTEFACTS
 
 #include "other/BombBuilder.hpp"
 

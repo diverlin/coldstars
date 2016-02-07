@@ -203,8 +203,12 @@ class Vehicle : public SpaceObject
         
         bool ManageItem(BaseItem*);
         bool ManageFunctionEquipment(BaseItem*);
+#ifdef ENABLE_MODULES
         bool ManageFunctionModule(BaseItem*);
+#endif
+#ifdef ENABLE_ARTEFACTS
         bool ManageFunctionArtefact(BaseItem*);
+#endif
         bool ManageFunctionGoodsPack(BaseItem*);
                     
 //        virtual void UpdateInfo() = 0;

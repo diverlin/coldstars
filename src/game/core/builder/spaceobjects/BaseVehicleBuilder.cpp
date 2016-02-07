@@ -284,6 +284,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     }
 }
 
+#ifdef ENABLE_MODULES
 void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, TYPE::TECH tech_level) const
 {
     for (unsigned int i=0; i<4; i++) 
@@ -310,7 +311,9 @@ void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, TYPE::TECH tech_level) c
         }
     }
 }
+#endif // ENABLE_MODULES
 
+#ifdef ENABLE_ARTEFACTS
 void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, TYPE::TECH tech_level) const
 {
     for (unsigned int i=0; i<2; i++) {
@@ -327,6 +330,7 @@ void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, TYPE::TECH tech_level)
         vehicle->manage(global::get().protectorArtefactBuilder().create());
     }  
 }
+#endif // ENABLE_ARTEFACTS
 
 void BaseVehicleBuilder::EquipBomb(Vehicle* vehicle, TYPE::TECH tech_level) const
 {
