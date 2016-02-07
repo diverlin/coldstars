@@ -30,6 +30,7 @@ Descriptor generateHitDescriptor(const id_type& owner, const id_type& target, in
 {
     Descriptor descriptor;
     descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::HIT)));
     descriptor.add(Descriptor::KEY_OWNER, std::to_string(owner));
     descriptor.add(Descriptor::KEY_TARGET, std::to_string(target));
     descriptor.add(Descriptor::KEY_DAMAGE, std::to_string(damage));
@@ -39,7 +40,6 @@ Descriptor generateHitDescriptor(const id_type& owner, const id_type& target, in
 
 Descriptor generateBombDescriptor(int damage, int radius)
 {
-    id_type id = global::get().idGenerator().nextId();
     if (damage == -1) {
          damage = meti::getRandInt(10, 100);
     }
@@ -49,6 +49,7 @@ Descriptor generateBombDescriptor(int damage, int radius)
 
     Descriptor descriptor;
     descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::BOMB)));
     descriptor.add(Descriptor::KEY_DAMAGE, std::to_string(damage));
     descriptor.add(Descriptor::KEY_RADIUS, std::to_string(radius));
 
@@ -63,6 +64,7 @@ Descriptor generateStarSystemDescriptor(int race)
 
     Descriptor descriptor;
     descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::STARSYSTEM)));
     descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
 
     return descriptor;
@@ -90,7 +92,7 @@ Descriptor generateBakDescriptor(int race, int tech_level)
 
     Descriptor descriptor;
     descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::BAK_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::BAK)));
     descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
     descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
     descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
@@ -122,7 +124,7 @@ Descriptor generateDriveDescriptor(int race, int tech_level)
 
     Descriptor descriptor;
     descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::DRIVE_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::DRIVE)));
     descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
     descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
     descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
@@ -154,7 +156,7 @@ Descriptor generateDroidDescriptor(int race, int tech_level)
 
     Descriptor descriptor;
     descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::DROID_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::DROID)));
     descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
     descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
     descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
@@ -188,7 +190,7 @@ Descriptor generateGrappleDescriptor(int race, int tech_level)
 
     Descriptor descriptor;
     descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::GRAPPLE_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::GRAPPLE)));
     descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
     descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
     descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
@@ -223,7 +225,7 @@ Descriptor generateScanerDescriptor(int race, int tech_level)
 
     Descriptor descriptor;
     descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::SCANER_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::SCANER)));
     descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
     descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
     descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
@@ -256,7 +258,7 @@ Descriptor generateRadarDescriptor(int race, int tech_level)
 
     Descriptor descriptor;
     descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::RADAR_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::RADAR)));
     descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
     descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
     descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
@@ -289,7 +291,7 @@ Descriptor generateProtectorDescriptor(int race, int tech_level)
 
     Descriptor descriptor;
     descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(TYPE::ENTITY::RADAR_EQUIPMENT_ID)));
+    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::PROTECTOR)));
     descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
     descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
     descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));

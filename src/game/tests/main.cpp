@@ -32,6 +32,7 @@
 #include <builder/items/other/BombBuilder.hpp>
 #include <builder/spaceobjects/ContainerBuilder.hpp>
 
+#include <descriptors/DescriptorManager.hpp>
 #include <descriptors/Descriptor.hpp>
 #include <descriptors/HitDescriptor.hpp>
 #include <descriptors/GalaxyDescriptor.hpp>
@@ -125,4 +126,12 @@ TEST(base,bomb)
 //    EXPECT_TRUE(ship->isDying());
 }
 
+TEST(descriptor,manager)
+{
+    DescriptorManager& descriptor_manager = global::get().descriptorManager();
+    Descriptor descriptor = generateHitDescriptor(1, 2, 3);
+    descriptor_manager.add(descriptor);
+
+    //EXPECT_EQ(descriptor_manager.get(descriptor.id()), descriptor);
+}
 

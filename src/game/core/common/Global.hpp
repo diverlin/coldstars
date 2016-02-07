@@ -88,6 +88,8 @@ class GalaxyBuilder;
 class SectorBuilder;
 class StarSystemBuilder;
 
+class DescriptorManager;
+
 class global
 {
     public:
@@ -160,6 +162,8 @@ class global
         GalaxyBuilder& galaxyBuilder() { return *m_galaxyBuilder; }
         SectorBuilder& sectorBuilder() { return *m_sectorBuilder; }
         StarSystemBuilder& starSystemBuilder() { return *m_starsystemBuilder; }
+
+        DescriptorManager& descriptorManager() { return *m_descriptorManager; }
 
     private:
         global();
@@ -234,4 +238,6 @@ class global
         GalaxyBuilder* m_galaxyBuilder = nullptr;
         SectorBuilder* m_sectorBuilder = nullptr;
         StarSystemBuilder* m_starsystemBuilder = nullptr;
+
+        DescriptorManager* m_descriptorManager = nullptr;
 };
