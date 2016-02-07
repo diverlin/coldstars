@@ -25,6 +25,7 @@
 #include <common/GameDate.hpp>
 #include <common/IdGenerator.hpp>
 #include <descriptors/RaceDescriptors.hpp>
+#include <descriptors/DescriptorManager.hpp>
 
 #include <builder/dock/KosmoportBuilder.hpp>
 #include <builder/dock/NatureLandBuilder.hpp>
@@ -151,6 +152,7 @@ global::global()
     , m_galaxyBuilder(new GalaxyBuilder)
     , m_sectorBuilder(new SectorBuilder)
     , m_starsystemBuilder(new StarSystemBuilder)
+    , m_descriptorManager(new DescriptorManager)
 {}
 
 global::~global()

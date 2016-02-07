@@ -19,11 +19,11 @@
 #pragma once
 
 #include <vector>
+#include <stdexcept>
+
 #include <glm/glm.hpp>
 
 namespace meti {
-
-int getRandIntFromVec(const std::vector<int>&);
 
 float getRandFloat(float, float);
 int getRandInt(int, int);
@@ -39,15 +39,10 @@ bool isActionShouldHappen(int);
 template<typename TYPE> 
 TYPE getRand(const std::vector<TYPE>& vec)
 {
-    assert(!vec.empty());
-    return vec[getRandInt(0, vec.size()-1)];
-}
-
-template<typename TYPE>
-TYPE getRandomElement(const std::vector<TYPE>& vec)
-{
-    assert(!vec.empty());
-    return vec[getRandInt(0, vec.size()-1)];
+    if (!vec.empty()) {
+        return vec[getRandInt(0, vec.size()-1)];
+    }
+    throw std::runtime_error("ERROR: std::vector is empty, not ably to get random element from it");
 }
 
 } // namespace meti

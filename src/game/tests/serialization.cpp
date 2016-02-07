@@ -33,6 +33,8 @@ TEST(base,serialization)
 {
     Descriptor hit1 = generateHitDescriptor(1, 2, 33);
     Descriptor hit2(hit1.data());
+    EXPECT_TRUE(hit2.type() == hit1.type());
+    EXPECT_TRUE(hit2.type() == int(Descriptor::Type::HIT));
     EXPECT_TRUE(hit2.owner() == hit1.owner());
     EXPECT_TRUE(hit2.target() == hit1.target());
     EXPECT_TRUE(hit2.damage() == hit1.damage());

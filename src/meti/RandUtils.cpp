@@ -23,12 +23,6 @@
 
 namespace meti {
 
-int getRandIntFromVec(const std::vector<int>& vec)
-{
-    assert(!vec.empty());
-    return vec[getRandInt(0, vec.size()-1)];
-}
-
 float getRandFloat(float low, float high)
 {
     assert(low<=high);

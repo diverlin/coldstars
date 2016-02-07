@@ -32,6 +32,19 @@
 class Descriptor
 {
 public:
+    enum class Type: int {
+        HIT,
+        BOMB,
+        STARSYSTEM,
+        BAK,
+        DRIVE,
+        DROID,
+        GRAPPLE,
+        SCANER,
+        RADAR,
+        PROTECTOR
+    };
+
     static std::string KEY_ID;
     static std::string KEY_TYPE;
     static std::string KEY_RACE;
@@ -95,7 +108,6 @@ private:
         return value;
     }
 
-private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
