@@ -30,10 +30,10 @@ public:
     ~DescriptorManager() {}
 
     void add(const Descriptor&);
-    Descriptor getRandom(int);
+    Descriptor getRandom(const Descriptor::Type&);
     Descriptor get(const id_type&);
 
 private:
-    std::map<id_type, Descriptor*> m_descriptors;
-    std::map<int, std::vector<Descriptor*>> m_descriptorsTypes;
+    std::map<id_type, Descriptor> m_descriptors;
+    std::map<int, std::vector<Descriptor>> m_descriptorsTypes;
 }; 

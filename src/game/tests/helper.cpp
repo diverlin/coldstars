@@ -30,6 +30,7 @@
 #include <builder/items/other/BombBuilder.hpp>
 #include <builder/spaceobjects/ContainerBuilder.hpp>
 
+#include <descriptors/DescriptorManager.hpp>
 #include <descriptors/Descriptor.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
 #include <descriptors/VehicleDescriptorGenerator.hpp>
@@ -80,5 +81,23 @@ StarSystem* createNewStarSystem()
     StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.id()));
     assert(starsystem);
     return starsystem;
+}
+
+void init_equipment_descriptors()
+{
+    DescriptorManager& descriptor_manager = global::get().descriptorManager();
+
+    bool generate_new = true;
+    if (generate_new) {
+        descriptor_manager.add(generateBakDescriptor());
+        descriptor_manager.add(generateDriveDescriptor());
+        descriptor_manager.add(generateDroidDescriptor());
+        descriptor_manager.add(generateGrappleDescriptor());
+        descriptor_manager.add(generateScanerDescriptor());
+        descriptor_manager.add(generateRadarDescriptor());
+        descriptor_manager.add(generateProtectorDescriptor());
+    } else {
+        // todo: read from file
+    }
 }
 

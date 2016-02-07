@@ -29,3 +29,5 @@ Ship* createNewShip();
 Bomb* createNewBomb(int damage, int radius);
 Container* createNewContainer(const id_type& child_id);
 StarSystem* createNewStarSystem();
+
+void init_equipment_descriptors();

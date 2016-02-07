@@ -28,32 +28,30 @@ DescriptorManager::DescriptorManager()
 
 void DescriptorManager::add(const Descriptor& descriptor)
 {
-    Descriptor* descr = new Descriptor(descriptor.data());
-
     const id_type id = descriptor.id();
     int type = descriptor.type();
-//    const auto it = m_descriptors.find(id);
-//    if (it != m_descriptors.end()) {
-//        throw std::runtime_error("descriptor with that id already exist");
-//    }
-    m_descriptors.insert(std::make_pair(id, descr));
+    const auto it = m_descriptors.find(id);
+    if (it != m_descriptors.end()) {
+        throw std::runtime_error("descriptor with that id already exist");
+    }
+    m_descriptors.insert(std::make_pair(id, descriptor));
 
     const auto it2 = m_descriptorsTypes.find(type);
     if (it2 != m_descriptorsTypes.end()) {
-        it2->second.push_back(descr);
+        it2->second.push_back(descriptor);
     } else {
-        std::vector<Descriptor*> vector;
-        vector.push_back(descr);
+        std::vector<Descriptor> vector;
+        vector.push_back(descriptor);
         m_descriptorsTypes[type] = vector;
     }
 }
 
-Descriptor DescriptorManager::getRandom(int type)
+Descriptor DescriptorManager::getRandom(const Descriptor::Type& type)
 {
-    const auto it = m_descriptorsTypes.find(type);
+    const auto it = m_descriptorsTypes.find(int(type));
     if (it != m_descriptorsTypes.end()) {
-        const std::vector<Descriptor*> descriptors = it->second;
-        return *meti::getRand(descriptors);
+        const std::vector<Descriptor> descriptors = it->second;
+        return meti::getRand(descriptors);
     }
     throw std::runtime_error("descriptor type doesn't contain any descriptors");
 }
@@ -62,7 +60,7 @@ Descriptor DescriptorManager::get(const id_type& id)
 {
     const auto it = m_descriptors.find(id);
     if (it != m_descriptors.end()) {
-        return *it->second;
+        return it->second;
     }
     throw std::runtime_error("descriptor id doesn't exist");
 }

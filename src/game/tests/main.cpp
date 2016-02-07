@@ -129,9 +129,18 @@ TEST(base,bomb)
 TEST(descriptor,manager)
 {
     DescriptorManager& descriptor_manager = global::get().descriptorManager();
-    Descriptor descriptor = generateHitDescriptor(1, 2, 3);
-    descriptor_manager.add(descriptor);
+    Descriptor descriptor_hit = generateHitDescriptor(1, 2, 3);
+    Descriptor descriptor_starsystem = generateStarSystemDescriptor();
+    Descriptor descriptor_bak = generateBakDescriptor();
+    descriptor_manager.add(descriptor_hit);
+    descriptor_manager.add(descriptor_starsystem);
+    descriptor_manager.add(descriptor_bak);
 
-    //EXPECT_EQ(descriptor_manager.get(descriptor.id()), descriptor);
+    EXPECT_EQ(descriptor_manager.get(descriptor_hit.id()), descriptor_hit);
+
+    EXPECT_EQ(descriptor_manager.getRandom(Descriptor::Type::HIT).type(), int(Descriptor::Type::HIT));
+    EXPECT_EQ(descriptor_manager.getRandom(Descriptor::Type::STARSYSTEM).type(), int(Descriptor::Type::STARSYSTEM));
+    EXPECT_EQ(descriptor_manager.getRandom(Descriptor::Type::BAK).type(), int(Descriptor::Type::BAK));
 }
+
 
