@@ -44,10 +44,6 @@
 #include <descriptors/ContainerDescriptorGenerator.hpp>
 
 #include <communication/MessageManager.hpp>
-#include <managers/EntityManager.hpp>
-#include <common/IdGenerator.hpp>
-
-#include <ceti/myStr.hpp>
 
 #include <ctime>
 
@@ -62,68 +58,6 @@
 #include <items/equipment/ProtectorEquipment.hpp>
 
 #include "helper.hpp"
-
-
-TEST(base,perfomance1)
-{
-    clock_t begin = std::clock();
-    HitDescriptor hit1 = HitDescriptor(1, 2, 33);
-    for (int i=0; i<10000; ++i) {
-        HitDescriptor hit2(hit1.data());
-        hit2.owner == hit1.owner;
-        hit2.target == hit1.target;
-        hit2.damage == hit1.damage;
-    }
-
-    clock_t end = std::clock();
-    double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    std::cout<<"elapsed_secs="<<elapsed_secs<<std::endl;
-    EXPECT_TRUE(elapsed_secs < 1);
-}
-
-TEST(base,perfomance2)
-{
-    clock_t begin = std::clock();
-    Descriptor hit1 = generateHitDescriptor(1, 2, 33);
-    for (int i=0; i<10000; ++i) {
-        Descriptor hit2(hit1.data());
-        hit2.owner() == hit1.owner();
-        hit2.target() == hit1.target();
-        hit2.damage() == hit1.damage();
-    }
-
-    clock_t end = std::clock();
-    double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    std::cout<<"elapsed_secs="<<elapsed_secs<<std::endl;
-    EXPECT_TRUE(elapsed_secs < 1);
-}
-
-TEST(base,serialization)
-{
-    Descriptor hit1 = generateHitDescriptor(1, 2, 33);
-    Descriptor hit2(hit1.data());
-    EXPECT_TRUE(hit2.owner() == hit1.owner());
-    EXPECT_TRUE(hit2.target() == hit1.target());
-    EXPECT_TRUE(hit2.damage() == hit1.damage());
-
-    VehicleDescriptor vehicle1;
-    vehicle1.race_id = TYPE::RACE::R7_ID;
-    VehicleDescriptor vehicle2(vehicle1.data());
-    EXPECT_TRUE(vehicle2.race_id == vehicle1.race_id);
-
-    ExplosionDescriptor explosion1(0, glm::vec3(100,200,300),0,0);
-    ExplosionDescriptor explosion2(explosion1.data());
-    EXPECT_TRUE(explosion1.center.x == explosion2.center.x);
-    EXPECT_TRUE(explosion1.center.y == explosion2.center.y);
-    EXPECT_TRUE(explosion1.center.z == explosion2.center.z);
-}
-
-TEST(descriptor,serialization)
-{
-    Descriptor descriptor({{Descriptor::KEY_ID, "11"}, {Descriptor::KEY_DAMAGE, "22"}, {Descriptor::KEY_RADIUS, "33"}});
-    Descriptor descriptor2(descriptor.data());
-    EXPECT_TRUE(descriptor == descriptor2);
-}
 
 TEST(descriptor,accessors)
 {

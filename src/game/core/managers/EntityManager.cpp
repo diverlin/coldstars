@@ -245,6 +245,7 @@ void EntityManager::loadPass0(const std::string& filename)
     }
 
     //artefact
+#ifdef ENABLE_ARTEFACTS
     if (load_ptree.get_child_optional("gravity_artefact"))
     {
         LOG("loading gravity_artefact...");
@@ -264,7 +265,8 @@ void EntityManager::loadPass0(const std::string& filename)
             protector_artefact->Load(v.second);
         }
     }
-
+#endif // ENABLE_ARTEFACTS
+#ifdef ENABLE_MODULES
     //module
     if (load_ptree.get_child_optional("bak_module"))
     {
@@ -355,6 +357,7 @@ void EntityManager::loadPass0(const std::string& filename)
             scaner_module->Load(v.second);
         }
     }
+#endif // ENABLE_MODULES
 
     // equipment
     if (load_ptree.get_child_optional("bak_equipment"))

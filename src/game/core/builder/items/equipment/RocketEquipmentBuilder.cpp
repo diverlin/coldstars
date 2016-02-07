@@ -75,8 +75,9 @@ void RocketBuilder::createInternals(RocketEquipment* rocket_equipment, TYPE::TEC
     
     ItemCommonData common_data;
     common_data.tech         = tech_level;
+#ifdef ENABLE_MODULES
     common_data.modules_num = meti::getRandInt(EQUIPMENT::ROCKET::MODULES_NUM_MIN, EQUIPMENT::ROCKET::MODULES_NUM_MAX);
-    
+#endif
     common_data.mass            = meti::getRandInt(EQUIPMENT::ROCKET::MASS_MIN, EQUIPMENT::ROCKET::MASS_MAX);
     common_data.condition   = meti::getRandInt(EQUIPMENT::ROCKET::CONDITION_MIN, EQUIPMENT::ROCKET::CONDITION_MAX);
     

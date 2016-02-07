@@ -28,8 +28,6 @@
 #include <descriptors/Descriptor.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
 
-//#include <ceti/myStr.hpp>
-
 #include <builder/items/IncludeItemBuilders.hpp>
 
 #include <items/equipment/BakEquipment.hpp>
