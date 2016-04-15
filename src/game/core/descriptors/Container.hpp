@@ -17,23 +17,20 @@
 */
 
 
-#include "ContainerDescriptorGenerator.hpp"
+#pragma once
 
-//#include <types/RaceTypes.hpp>
-//#include <types/EntityTypes.hpp>
+#include "Base.hpp"
 
-//#include <descriptors/RaceDescriptors.hpp>
-//#include <meti/RandUtils.hpp>
+#include <string>
 
-#include <common/Global.hpp>
-#include <common/IdGenerator.hpp>
+namespace descriptor {
 
-
-ContainerDescriptor generateContainerDescriptor(const id_type& child_id)
+class Container : public Base
 {
-    ContainerDescriptor descriptor;
-    descriptor.id = global::get().idGenerator().nextId();
-    descriptor.child_id = child_id;
+public:
+    Container(const id_type& id, const id_type& child_id);
+    Container(const std::string& data);
+    ~Container() {}
+};
 
-    return descriptor;
-}
+} // namespace descriptor

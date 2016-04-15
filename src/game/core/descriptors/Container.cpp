@@ -17,17 +17,24 @@
 */
 
 
-#include "ContainerDescriptor.hpp"
-#include <serialization/Serialization.hpp>
+#include "Container.hpp"
 
-#include <sstream>
+namespace descriptor {
 
-ContainerDescriptor::ContainerDescriptor(const std::string& data)
+Container::Container(const id_type& id, const id_type& child_id)
 {
-    MACRO_READ_SERIALIZED_DATA
+    add(KEY_ID, std::to_string(id));
+    add(KEY_TYPE, std::to_string(int(Type::CONTAINER)));
+    add(KEY_CHILD, std::to_string(child_id));
 }
 
-std::string ContainerDescriptor::data() const
+Container::Container(const std::string& data)
+    :
+      Base(data)
 {
-    MACRO_SAVE_SERIALIZED_DATA
+
 }
+
+} // namespace descriptor
+
+

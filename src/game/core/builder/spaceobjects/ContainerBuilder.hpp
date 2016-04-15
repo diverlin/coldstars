@@ -24,7 +24,10 @@
 #include <types/IdType.hpp>
 
 class Container;
-class ContainerDescriptor;
+
+namespace descriptor {
+class Container;
+} // namespace descriptor
 
 namespace jeti {
 class TextureOb;
@@ -40,13 +43,13 @@ class ContainerBuilder
         ~ContainerBuilder();
 
         Container* create(const std::string& data) const;
-        Container* create(const ContainerDescriptor&) const;
+        Container* create(const descriptor::Container&) const;
 //        Container* create(jeti::TextureOb*, BaseItem*) const;
 //        Container* create(BaseItem*) const;
 //        Container* create(int mineral_ammount = 0) const;
                                                      
     private:
-        void createInternals(Container*, const ContainerDescriptor&) const;
+        void createInternals(Container*, const descriptor::Container&) const;
 //        void createInternals(Container*, jeti::TextureOb*, BaseItem*) const;
 //        void createInternals(Container*, BaseItem*) const;
 }; 

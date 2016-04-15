@@ -19,7 +19,7 @@
 #include <gtest/gtest.h>
 
 #include <descriptors/Base.hpp>
-#include <descriptors/HitDescriptor.hpp>
+#include <descriptors/Hit.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
 
 #include <ctime>
@@ -29,12 +29,12 @@ const int interation_num = 1000;
 TEST(base,perfomance1)
 {
     clock_t begin = std::clock();
-    HitDescriptor hit1 = HitDescriptor(1, 2, 33);
+    descriptor::Hit hit1(1, 2, 33);
     for (int i=0; i<interation_num; ++i) {
-        HitDescriptor hit2(hit1.data());
-        hit2.owner == hit1.owner;
-        hit2.target == hit1.target;
-        hit2.damage == hit1.damage;
+        descriptor::Hit hit2(hit1.data());
+        hit2.owner() == hit1.owner();
+        hit2.target() == hit1.target();
+        hit2.damage() == hit1.damage();
     }
 
     clock_t end = std::clock();
@@ -46,9 +46,9 @@ TEST(base,perfomance1)
 TEST(base,perfomance2)
 {
     clock_t begin = std::clock();
-    descriptor::Base hit1 = generateHitDescriptor(1, 2, 33);
+    descriptor::Hit hit1(1, 2, 33);
     for (int i=0; i<interation_num; ++i) {
-        descriptor::Base hit2(hit1.data());
+        descriptor::Hit hit2(hit1.data());
         hit2.owner() == hit1.owner();
         hit2.target() == hit1.target();
         hit2.damage() == hit1.damage();

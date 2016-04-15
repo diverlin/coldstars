@@ -19,15 +19,13 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <types/RaceTypes.hpp>
-#include <types/TechLevelTypes.hpp>
-
-#include <map>
-#include <string>
 
 #include <boost/serialization/map.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
+
+#include <map>
+#include <string>
 
 namespace descriptor {
 
@@ -36,6 +34,7 @@ class Base
 public:
     enum class Type: int {
         HIT,
+        CONTAINER,
         BOMB,
         STARSYSTEM,
         BAK,
@@ -51,6 +50,7 @@ public:
     static std::string KEY_TYPE;
     static std::string KEY_RACE;
     static std::string KEY_OWNER;
+    static std::string KEY_CHILD;
     static std::string KEY_TARGET;
     static std::string KEY_DAMAGE;
     static std::string KEY_RADIUS;
@@ -73,7 +73,6 @@ public:
     Base(const std::string& data);
     ~Base();
 
-    void add(const std::string& key, const std::string& val);
     std::string data() const;
 
     bool operator==(const Base& rhs) const;
@@ -82,6 +81,7 @@ public:
     int type() const;
     int race() const;
     id_type owner() const;
+    id_type child() const;
     id_type target() const;
     int damage() const;
     int radius() const;
@@ -97,6 +97,9 @@ public:
     int strength() const;
     int scan() const;
     int protection() const;
+
+public: // todo make it protected
+    void add(const std::string& key, const std::string& value);
 
 private:
     const std::string& get_raw(const std::string& key) const;
