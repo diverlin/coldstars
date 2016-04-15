@@ -47,7 +47,7 @@ Base::Base()
 {
 }
 
-Base::Base(const std::map<std::string, std::string>& map)
+Base::Base(const std::map<std::string, int_type>& map)
     : m_map(map)
 {
 }
@@ -74,7 +74,7 @@ Base::data() const
 }
 
 void
-Base::add(const std::string& key, const std::string& value)
+Base::add(const std::string& key, const int_type& value)
 {
     auto f = m_map.find(key);
     if (f == m_map.end()) {
@@ -84,124 +84,124 @@ Base::add(const std::string& key, const std::string& value)
     }
 }
 
-id_type
+const int_type&
 Base::id() const
 {
-    return get<id_type>(KEY_ID);
+    return get(KEY_ID);
 }
 
-int
+const int_type&
 Base::type() const
 {
-    return get<int>(KEY_TYPE);
+    return get(KEY_TYPE);
 }
 
-int
+const int_type&
 Base::race() const
 {
-    return get<int>(KEY_RACE);
+    return get(KEY_RACE);
 }
 
-id_type
+const int_type&
 Base::owner() const
 {
-    return get<id_type>(KEY_OWNER);
+    return get(KEY_OWNER);
 }
 
-id_type
+const int_type&
 Base::child() const
 {
-    return get<id_type>(KEY_CHILD);
+    return get(KEY_CHILD);
 }
 
-id_type
+const int_type&
 Base::target() const
 {
-    return get<id_type>(KEY_TARGET);
+    return get(KEY_TARGET);
 }
 
-int
+const int_type&
 Base::damage() const
 {
-    return get<int>(KEY_DAMAGE);
+    return get(KEY_DAMAGE);
 }
 
-int
+const int_type&
 Base::radius() const
 {
-    return get<int>(KEY_RADIUS);
+    return get(KEY_RADIUS);
 }
 
-int
+const int_type&
 Base::tech() const
 {
-    return get<int>(KEY_TECH);
+    return get(KEY_TECH);
 }
 
-int
+const int_type&
 Base::modules() const
 {
-    return get<int>(KEY_MODULES_NUM);
+    return get(KEY_MODULES_NUM);
 }
 
-int
+const int_type&
 Base::mass() const
 {
-    return get<int>(KEY_MASS);
+    return get(KEY_MASS);
 }
 
-int
+const int_type&
 Base::condition() const
 {
-    return get<int>(KEY_CONDITION);
+    return get(KEY_CONDITION);
 }
 
-int
+const int_type&
 Base::deteoration() const
 {
-    return get<int>(KEY_DETEORATION);
+    return get(KEY_DETEORATION);
 }
 
-int
+const int_type&
 Base::fuel() const
 {
-    return get<int>(KEY_FUEL);
+    return get(KEY_FUEL);
 }
 
-int
+const int_type&
 Base::speed() const
 {
-    return get<int>(KEY_SPEED);
+    return get(KEY_SPEED);
 }
 
-int
+const int_type&
 Base::hyper() const
 {
-    return get<int>(KEY_HYPER);
+    return get(KEY_HYPER);
 }
 
-int
+const int_type&
 Base::repair() const
 {
-    return get<int>(KEY_REPAIR);
+    return get(KEY_REPAIR);
 }
 
-int
+const int_type&
 Base::strength() const
 {
-    return get<int>(KEY_STRENGTH);
+    return get(KEY_STRENGTH);
 }
 
-int
+const int_type&
 Base::scan() const
 {
-    return get<int>(KEY_SCAN);
+    return get(KEY_SCAN);
 }
 
-int
+const int_type&
 Base::protection() const
 {
-    return get<int>(KEY_PROTECTION);
+    return get(KEY_PROTECTION);
 }
 
 bool
@@ -210,8 +210,8 @@ Base::operator==(const Base& rhs) const
     return data() == rhs.data();
 }
 
-const std::string&
-Base::get_raw(const std::string& key) const
+const int_type&
+Base::get(const std::string& key) const
 {
     auto f = m_map.find(key);
     if (f != m_map.end()) {

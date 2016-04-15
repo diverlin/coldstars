@@ -69,7 +69,7 @@ public:
     static std::string KEY_PROTECTION;
 
     Base();
-    Base(const std::map<std::string, std::string>&);
+    Base(const std::map<std::string, int_type>&);
     Base(const std::string& data);
     ~Base();
 
@@ -77,41 +77,32 @@ public:
 
     bool operator==(const Base& rhs) const;
 
-    id_type id() const;
-    int type() const;
-    int race() const;
-    id_type owner() const;
-    id_type child() const;
-    id_type target() const;
-    int damage() const;
-    int radius() const;
-    int tech() const;
-    int modules() const;
-    int mass() const;
-    int condition() const;
-    int deteoration() const;
-    int fuel() const;
-    int speed() const;
-    int hyper() const;
-    int repair() const;
-    int strength() const;
-    int scan() const;
-    int protection() const;
+    const int_type& id() const;
+    const int_type& type() const;
+    const int_type& race() const;
+    const int_type& owner() const;
+    const int_type& child() const;
+    const int_type& target() const;
+    const int_type& damage() const;
+    const int_type& radius() const;
+    const int_type& tech() const;
+    const int_type& modules() const;
+    const int_type& mass() const;
+    const int_type& condition() const;
+    const int_type& deteoration() const;
+    const int_type& fuel() const;
+    const int_type& speed() const;
+    const int_type& hyper() const;
+    const int_type& repair() const;
+    const int_type& strength() const;
+    const int_type& scan() const;
+    const int_type& protection() const;
 
 public: // todo make it protected
-    void add(const std::string& key, const std::string& value);
+    void add(const std::string& key, const int_type& value);
 
 private:
-    const std::string& get_raw(const std::string& key) const;
-    template<class var_type>
-    var_type get(const std::string& key) const
-    {
-        std::istringstream ss(get_raw(key));
-        var_type value;
-        ss >> value;
-        //std::cout << "get key=" << key <<" value=" << value << std::endl;
-        return value;
-    }
+    const int_type& get(const std::string& key) const;
 
     friend class boost::serialization::access;
     template<class Archive>
@@ -120,7 +111,7 @@ private:
         ar & m_map;
     }
 
-    std::map<std::string, std::string> m_map;
+    std::map<std::string, int_type> m_map;
 }; 
 
 } // namespace descriptor
