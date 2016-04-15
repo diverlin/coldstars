@@ -43,11 +43,37 @@ std::string Base::KEY_STRENGTH = "strength";
 std::string Base::KEY_SCAN = "scan";
 std::string Base::KEY_PROTECTION = "protection";
 
+std::string keyStr(const Key& key) {
+    switch(key) {
+    case Key::ID: return Base::KEY_ID; break;
+    case Key::TYPE: return Base::KEY_TYPE; break;
+    case Key::RACE: return Base::KEY_RACE; break;
+    case Key::OWNER: return Base::KEY_OWNER; break;
+    case Key::CHILD: return Base::KEY_CHILD; break;
+    case Key::TARGET: return Base::KEY_TARGET; break;
+    case Key::DAMAGE: return Base::KEY_DAMAGE; break;
+    case Key::RADIUS: return Base::KEY_RADIUS; break;
+    case Key::TECH: return Base::KEY_TECH; break;
+    case Key::MODULES_NUM: return Base::KEY_MODULES_NUM; break;
+    case Key::MASS: return Base::KEY_MASS; break;
+    case Key::CONDITION: return Base::KEY_CONDITION; break;
+    case Key::DETEORATION: return Base::KEY_DETEORATION; break;
+    case Key::FUEL: return Base::KEY_FUEL; break;
+    case Key::SPEED: return Base::KEY_SPEED; break;
+    case Key::HYPER: return Base::KEY_HYPER; break;
+    case Key::REPAIR: return Base::KEY_REPAIR; break;
+    case Key::STRENGTH: return Base::KEY_STRENGTH; break;
+    case Key::SCAN: return Base::KEY_SCAN; break;
+    case Key::PROTECTION: return Base::KEY_PROTECTION; break;
+    default: throw std::runtime_error("ERROR: fixme: unknown descriptor key"); break;
+    }
+}
+
 Base::Base()
 {
 }
 
-Base::Base(const std::map<std::string, int_type>& map)
+Base::Base(const std::map<Key, int_type>& map)
     : m_map(map)
 {
 }
@@ -74,134 +100,134 @@ Base::data() const
 }
 
 void
-Base::add(const std::string& key, const int_type& value)
+Base::add(const Key& key, const int_type& value)
 {
     auto f = m_map.find(key);
     if (f == m_map.end()) {
         m_map.insert(std::make_pair(key, value));
     } else {
-        throw std::runtime_error("CODE ERROR: " + key + " is already existed in descriptor");
+        throw std::runtime_error("CODE ERROR: " + keyStr(key) + " is already existed in descriptor");
     }
 }
 
 const int_type&
 Base::id() const
 {
-    return get(KEY_ID);
+    return get(Key::ID);
 }
 
 const int_type&
 Base::type() const
 {
-    return get(KEY_TYPE);
+    return get(Key::TYPE);
 }
 
 const int_type&
 Base::race() const
 {
-    return get(KEY_RACE);
+    return get(Key::RACE);
 }
 
 const int_type&
 Base::owner() const
 {
-    return get(KEY_OWNER);
+    return get(Key::OWNER);
 }
 
 const int_type&
 Base::child() const
 {
-    return get(KEY_CHILD);
+    return get(Key::CHILD);
 }
 
 const int_type&
 Base::target() const
 {
-    return get(KEY_TARGET);
+    return get(Key::TARGET);
 }
 
 const int_type&
 Base::damage() const
 {
-    return get(KEY_DAMAGE);
+    return get(Key::DAMAGE);
 }
 
 const int_type&
 Base::radius() const
 {
-    return get(KEY_RADIUS);
+    return get(Key::RADIUS);
 }
 
 const int_type&
 Base::tech() const
 {
-    return get(KEY_TECH);
+    return get(Key::TECH);
 }
 
 const int_type&
 Base::modules() const
 {
-    return get(KEY_MODULES_NUM);
+    return get(Key::MODULES_NUM);
 }
 
 const int_type&
 Base::mass() const
 {
-    return get(KEY_MASS);
+    return get(Key::MASS);
 }
 
 const int_type&
 Base::condition() const
 {
-    return get(KEY_CONDITION);
+    return get(Key::CONDITION);
 }
 
 const int_type&
 Base::deteoration() const
 {
-    return get(KEY_DETEORATION);
+    return get(Key::DETEORATION);
 }
 
 const int_type&
 Base::fuel() const
 {
-    return get(KEY_FUEL);
+    return get(Key::FUEL);
 }
 
 const int_type&
 Base::speed() const
 {
-    return get(KEY_SPEED);
+    return get(Key::SPEED);
 }
 
 const int_type&
 Base::hyper() const
 {
-    return get(KEY_HYPER);
+    return get(Key::HYPER);
 }
 
 const int_type&
 Base::repair() const
 {
-    return get(KEY_REPAIR);
+    return get(Key::REPAIR);
 }
 
 const int_type&
 Base::strength() const
 {
-    return get(KEY_STRENGTH);
+    return get(Key::STRENGTH);
 }
 
 const int_type&
 Base::scan() const
 {
-    return get(KEY_SCAN);
+    return get(Key::SCAN);
 }
 
 const int_type&
 Base::protection() const
 {
-    return get(KEY_PROTECTION);
+    return get(Key::PROTECTION);
 }
 
 bool
@@ -211,13 +237,13 @@ Base::operator==(const Base& rhs) const
 }
 
 const int_type&
-Base::get(const std::string& key) const
+Base::get(const Key& key) const
 {
     auto f = m_map.find(key);
     if (f != m_map.end()) {
         return f->second;
     }
-    throw std::runtime_error("CODE ERROR: " + key + " is not found in descriptor");
+    throw std::runtime_error("CODE ERROR: " + keyStr(key) + " is not found in descriptor");
 }
 
 } // namespace descriptor
