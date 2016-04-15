@@ -26,18 +26,6 @@
 #include <common/constants.hpp>
 #include <items/BaseItem.hpp>
 
-descriptor::Base generateHitDescriptor(const id_type& owner, const id_type& target, int damage)
-{
-    descriptor::Base descriptor;
-    descriptor.add(descriptor::Base::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(descriptor::Base::KEY_TYPE, std::to_string(int(descriptor::Base::Type::HIT)));
-    descriptor.add(descriptor::Base::KEY_OWNER, std::to_string(owner));
-    descriptor.add(descriptor::Base::KEY_TARGET, std::to_string(target));
-    descriptor.add(descriptor::Base::KEY_DAMAGE, std::to_string(damage));
-
-    return descriptor;
-}
-
 descriptor::Base generateBombDescriptor(int damage, int radius)
 {
     if (damage == -1) {

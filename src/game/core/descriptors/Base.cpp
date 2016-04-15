@@ -26,6 +26,7 @@ std::string Base::KEY_ID = "id";
 std::string Base::KEY_TYPE = "type";
 std::string Base::KEY_RACE = "race";
 std::string Base::KEY_OWNER = "owner";
+std::string Base::KEY_CHILD = "child";
 std::string Base::KEY_TARGET = "target";
 std::string Base::KEY_DAMAGE = "damage";
 std::string Base::KEY_RADIUS = "radius";
@@ -73,11 +74,11 @@ Base::data() const
 }
 
 void
-Base::add(const std::string& key, const std::string& val)
+Base::add(const std::string& key, const std::string& value)
 {
     auto f = m_map.find(key);
     if (f == m_map.end()) {
-        m_map.insert(std::make_pair(key, val));
+        m_map.insert(std::make_pair(key, value));
     } else {
         throw std::runtime_error("CODE ERROR: " + key + " is already existed in descriptor");
     }
@@ -105,6 +106,12 @@ id_type
 Base::owner() const
 {
     return get<id_type>(KEY_OWNER);
+}
+
+id_type
+Base::child() const
+{
+    return get<id_type>(KEY_CHILD);
 }
 
 id_type

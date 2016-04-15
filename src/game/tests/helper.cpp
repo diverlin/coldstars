@@ -19,6 +19,7 @@
 #include <gtest/gtest.h>
 
 #include <common/Global.hpp>
+#include <common/IdGenerator.hpp>
 #include <world/starsystem.hpp>
 #include <items/others/Bomb.hpp>
 #include <slots/ItemSlot.hpp>
@@ -32,9 +33,9 @@
 
 #include <descriptors/DescriptorManager.hpp>
 #include <descriptors/Base.hpp>
+#include <descriptors/Container.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
 #include <descriptors/VehicleDescriptorGenerator.hpp>
-#include <descriptors/ContainerDescriptorGenerator.hpp>
 
 #include <communication/MessageManager.hpp>
 #include <managers/EntityManager.hpp>
@@ -62,10 +63,10 @@ Bomb* createNewBomb(int damage, int radius)
 
 Container* createNewContainer(const id_type& child_id)
 {
-    auto descriptor = generateContainerDescriptor(child_id);
+    auto descriptor = descriptor::Container(global::get().idGenerator().nextId(), child_id);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_CONTAINER, descriptor.data()));
 
-    Container* container = static_cast<Container*>(global::get().entityManager().get(descriptor.id));
+    Container* container = static_cast<Container*>(global::get().entityManager().get(descriptor.id()));
     assert(container);
     assert(container->itemSlot());
     assert(container->itemSlot()->item());

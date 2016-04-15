@@ -23,7 +23,6 @@
 
 class ItemCommonData;
 
-descriptor::Base generateHitDescriptor(const id_type&, const id_type&, int);
 descriptor::Base generateBombDescriptor(int damage = -1, int radius = -1);
 descriptor::Base generateStarSystemDescriptor(int race = -1);
 

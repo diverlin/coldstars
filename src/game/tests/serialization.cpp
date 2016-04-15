@@ -19,20 +19,21 @@
 #include <gtest/gtest.h>
 
 #include <descriptors/Base.hpp>
-#include <descriptors/HitDescriptor.hpp>
+#include <descriptors/Hit.hpp>
 #include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/ExplosionDescriptor.hpp>
 #include <descriptors/AddToStarsystemDescriptor.hpp>
+#include <descriptors/Container.hpp>
 
 #include <descriptors/VehicleDescriptorGenerator.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
-#include <descriptors/ContainerDescriptorGenerator.hpp>
+
 
 TEST(base,serialization)
 {
-    descriptor::Base hit1 = generateHitDescriptor(1, 2, 33);
-    descriptor::Base hit2(hit1.data());
+    descriptor::Hit hit1(1, 2, 33);
+    descriptor::Hit hit2(hit1.data());
     EXPECT_TRUE(hit2.type() == hit1.type());
     EXPECT_TRUE(hit2.type() == int(descriptor::Base::Type::HIT));
     EXPECT_TRUE(hit2.owner() == hit1.owner());

@@ -34,7 +34,8 @@
 
 #include <descriptors/DescriptorManager.hpp>
 #include <descriptors/Base.hpp>
-#include <descriptors/HitDescriptor.hpp>
+#include <descriptors/Container.hpp>
+#include <descriptors/Hit.hpp>
 #include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/ExplosionDescriptor.hpp>
@@ -42,7 +43,6 @@
 
 #include <descriptors/VehicleDescriptorGenerator.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
-#include <descriptors/ContainerDescriptorGenerator.hpp>
 
 #include <communication/MessageManager.hpp>
 
@@ -76,9 +76,9 @@ TEST(base,hit)
     Ship* ship1 = createNewShip();
     Ship* ship2 = createNewShip();
 
-    messageManager.add(Message(TELEGRAM::HIT, generateHitDescriptor(ship1->id(), ship2->id(), 3).data(), 0.3));
-    messageManager.add(Message(TELEGRAM::HIT, generateHitDescriptor(ship1->id(), ship2->id(), 2).data(), 0.2));
-    messageManager.add(Message(TELEGRAM::HIT, generateHitDescriptor(ship1->id(), ship2->id(), 1).data(), 0.1));
+    messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
+    messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
+    messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 1).data(), 0.1));
 
     messageManager.runLoop();
 
@@ -92,7 +92,7 @@ TEST(base,critical_hit)
     Ship* ship1 = createNewShip();
     Ship* ship2 = createNewShip();
 
-    messageManager.add(Message(TELEGRAM::HIT, generateHitDescriptor(ship1->id(), ship2->id(), 1.1*ship2->criticalDamage()).data(), 0.4));
+    messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 1.1*ship2->criticalDamage()).data(), 0.4));
 
     messageManager.runLoop();
 
@@ -113,7 +113,7 @@ TEST(base,bomb)
 
     // todo strange undef error //messageManager.add(Message(TELEGRAM::STARSYSTEM_ADD_SHIP, AddToStarsystemDescriptor(starsystem->id(), ship->id(), ship_pos, ship_angle).data()));
      // todo strange undef error //messageManager.add(Message(TELEGRAM::STARSYSTEM_ADD_CONTAINER, AddToStarsystemDescriptor(starsystem->id(), container->id(), ship_pos, ship_angle).data()));
-    messageManager.add(Message(TELEGRAM::HIT, generateHitDescriptor(ship->id(), container->id(), container->armor()).data()));
+    messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship->id(), container->id(), container->armor()).data()));
 
     messageManager.runLoop();
 
@@ -130,7 +130,7 @@ TEST(base,bomb)
 TEST(descriptor,manager)
 {
     DescriptorManager& descriptor_manager = global::get().descriptorManager();
-    descriptor::Base descriptor_hit = generateHitDescriptor(1, 2, 3);
+    descriptor::Hit descriptor_hit(1, 2, 3);
     descriptor::Base descriptor_starsystem = generateStarSystemDescriptor();
     descriptor::Base descriptor_bak = generateBakDescriptor();
     descriptor_manager.add(descriptor_hit);
