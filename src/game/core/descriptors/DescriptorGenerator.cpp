@@ -37,9 +37,9 @@ descriptor::Base generateBombDescriptor(int damage, int radius)
 
     descriptor::Base descriptor;
     descriptor.add(descriptor::Key::ID, global::get().idGenerator().nextId());
-    descriptor.add(descriptor::KEY_TYPE, int(descriptor::Base::Type::BOMB));
-    descriptor.add(descriptor::KEY_DAMAGE, damage);
-    descriptor.add(descriptor::KEY_RADIUS, radius);
+    descriptor.add(descriptor::Key::TYPE, int(descriptor::Base::Type::BOMB));
+    descriptor.add(descriptor::Key::DAMAGE, damage);
+    descriptor.add(descriptor::Key::RADIUS, radius);
 
     return descriptor;
 }
@@ -51,9 +51,9 @@ descriptor::Base generateStarSystemDescriptor(int race)
     }
 
     descriptor::Base descriptor;
-    descriptor.add(descriptor::Base::KEY_ID, global::get().idGenerator().nextId());
-    descriptor.add(descriptor::Base::KEY_TYPE, int(descriptor::Base::Type::STARSYSTEM));
-    descriptor.add(descriptor::Base::KEY_RACE, race);
+    descriptor.add(descriptor::Key::ID, global::get().idGenerator().nextId());
+    descriptor.add(descriptor::Key::TYPE, int(descriptor::Base::Type::STARSYSTEM));
+    descriptor.add(descriptor::Key::RACE, race);
 
     return descriptor;
 }
@@ -79,15 +79,15 @@ descriptor::Base generateBakDescriptor(int race, int tech_level)
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id)
 
     descriptor::Base descriptor;
-    descriptor.add(descriptor::Base::KEY_ID, global::get().idGenerator().nextId());
-    descriptor.add(descriptor::Base::KEY_TYPE, int(descriptor::Base::Type::BAK));
-    descriptor.add(descriptor::Base::KEY_RACE, race);
-    descriptor.add(descriptor::Base::KEY_TECH, tech_level);
-    descriptor.add(descriptor::Base::KEY_MODULES_NUM, modules_num_max);
-    descriptor.add(descriptor::Base::KEY_MASS, mass);
-    descriptor.add(descriptor::Base::KEY_CONDITION, condition_max);
-    descriptor.add(descriptor::Base::KEY_DETEORATION, deterioration_normal);
-    descriptor.add(descriptor::Base::KEY_FUEL, fuel_max_orig);
+    descriptor.add(descriptor::Key::ID, global::get().idGenerator().nextId());
+    descriptor.add(descriptor::Key::TYPE, int(descriptor::Base::Type::BAK));
+    descriptor.add(descriptor::Key::RACE, race);
+    descriptor.add(descriptor::Key::TECH, tech_level);
+    descriptor.add(descriptor::Key::MODULES_NUM, modules_num_max);
+    descriptor.add(descriptor::Key::MASS, mass);
+    descriptor.add(descriptor::Key::CONDITION, condition_max);
+    descriptor.add(descriptor::Key::DETEORATION, deterioration_normal);
+    descriptor.add(descriptor::Key::FUEL, fuel_max_orig);
     return descriptor;
 }
 
@@ -111,16 +111,16 @@ descriptor::Base generateDriveDescriptor(int race, int tech_level)
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID);
 
     descriptor::Base descriptor;
-    descriptor.add(descriptor::Base::KEY_ID, global::get().idGenerator().nextId());
-    descriptor.add(descriptor::Base::KEY_TYPE, int(descriptor::Base::Type::DRIVE));
-    descriptor.add(descriptor::Base::KEY_RACE, race);
-    descriptor.add(descriptor::Base::KEY_TECH, tech_level);
-    descriptor.add(descriptor::Base::KEY_MODULES_NUM, modules_num_max);
-    descriptor.add(descriptor::Base::KEY_MASS, mass);
-    descriptor.add(descriptor::Base::KEY_CONDITION, condition_max);
-    descriptor.add(descriptor::Base::KEY_DETEORATION, deterioration_normal);
-    descriptor.add(descriptor::Base::KEY_SPEED, speed);
-    descriptor.add(descriptor::Base::KEY_HYPER, hyper);
+    descriptor.add(descriptor::Key::ID, global::get().idGenerator().nextId());
+    descriptor.add(descriptor::Key::TYPE, int(descriptor::Base::Type::DRIVE));
+    descriptor.add(descriptor::Key::RACE, race);
+    descriptor.add(descriptor::Key::TECH, tech_level);
+    descriptor.add(descriptor::Key::MODULES_NUM, modules_num_max);
+    descriptor.add(descriptor::Key::MASS, mass);
+    descriptor.add(descriptor::Key::CONDITION, condition_max);
+    descriptor.add(descriptor::Key::DETEORATION, deterioration_normal);
+    descriptor.add(descriptor::Key::SPEED, speed);
+    descriptor.add(descriptor::Key::HYPER, hyper);
     return descriptor;
 }
 
@@ -143,15 +143,15 @@ descriptor::Base generateDroidDescriptor(int race, int tech_level)
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT_ID);
 
     descriptor::Base descriptor;
-    descriptor.add(descriptor::Base::KEY_ID, global::get().idGenerator().nextId());
-    descriptor.add(descriptor::Base::KEY_TYPE, int(descriptor::Base::Type::DROID));
-    descriptor.add(descriptor::Base::KEY_RACE, race);
-    descriptor.add(descriptor::Base::KEY_TECH, tech_level);
-    descriptor.add(descriptor::Base::KEY_MODULES_NUM, modules_num_max);
-    descriptor.add(descriptor::Base::KEY_MASS, mass);
-    descriptor.add(descriptor::Base::KEY_CONDITION, condition_max);
-    descriptor.add(descriptor::Base::KEY_DETEORATION, deterioration_normal);
-    descriptor.add(descriptor::Base::KEY_REPAIR, repair);
+    descriptor.add(descriptor::Key::ID, global::get().idGenerator().nextId());
+    descriptor.add(descriptor::Key::TYPE, int(descriptor::Base::Type::DROID));
+    descriptor.add(descriptor::Key::RACE, race);
+    descriptor.add(descriptor::Key::TECH, tech_level);
+    descriptor.add(descriptor::Key::MODULES_NUM, modules_num_max);
+    descriptor.add(descriptor::Key::MASS, mass);
+    descriptor.add(descriptor::Key::CONDITION, condition_max);
+    descriptor.add(descriptor::Key::DETEORATION, deterioration_normal);
+    descriptor.add(descriptor::Key::REPAIR, repair);
     return descriptor;
 }
 
@@ -177,17 +177,17 @@ descriptor::Base generateGrappleDescriptor(int race, int tech_level)
     int speed      = meti::getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,    EQUIPMENT::GRAPPLE::SPEED_MAX)    * (1 + EQUIPMENT::GRAPPLE::SPEED_TECH_RATE * (int)tech_level);
 
     descriptor::Base descriptor;
-    descriptor.add(descriptor::Base::KEY_ID, global::get().idGenerator().nextId());
-    descriptor.add(descriptor::Base::KEY_TYPE, int(descriptor::Base::Type::GRAPPLE));
-    descriptor.add(descriptor::Base::KEY_RACE, race);
-    descriptor.add(descriptor::Base::KEY_TECH, tech_level);
-    descriptor.add(descriptor::Base::KEY_MODULES_NUM, modules_num_max);
-    descriptor.add(descriptor::Base::KEY_MASS, mass);
-    descriptor.add(descriptor::Base::KEY_CONDITION, condition_max);
-    descriptor.add(descriptor::Base::KEY_DETEORATION, deterioration_normal);
-    descriptor.add(descriptor::Base::KEY_STRENGTH, strength);
-    descriptor.add(descriptor::Base::KEY_RADIUS, radius);
-    descriptor.add(descriptor::Base::KEY_SPEED, speed);
+    descriptor.add(descriptor::Key::ID, global::get().idGenerator().nextId());
+    descriptor.add(descriptor::Key::TYPE, int(descriptor::Base::Type::GRAPPLE));
+    descriptor.add(descriptor::Key::RACE, race);
+    descriptor.add(descriptor::Key::TECH, tech_level);
+    descriptor.add(descriptor::Key::MODULES_NUM, modules_num_max);
+    descriptor.add(descriptor::Key::MASS, mass);
+    descriptor.add(descriptor::Key::CONDITION, condition_max);
+    descriptor.add(descriptor::Key::DETEORATION, deterioration_normal);
+    descriptor.add(descriptor::Key::STRENGTH, strength);
+    descriptor.add(descriptor::Key::RADIUS, radius);
+    descriptor.add(descriptor::Key::SPEED, speed);
 
     return descriptor;
 }
@@ -212,15 +212,15 @@ descriptor::Base generateScanerDescriptor(int race, int tech_level)
     int scan = meti::getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECH_RATE * (int)tech_level);
 
     descriptor::Base descriptor;
-    descriptor.add(descriptor::Base::KEY_ID, global::get().idGenerator().nextId());
-    descriptor.add(descriptor::Base::KEY_TYPE, int(descriptor::Base::Type::SCANER));
-    descriptor.add(descriptor::Base::KEY_RACE, race);
-    descriptor.add(descriptor::Base::KEY_TECH, tech_level);
-    descriptor.add(descriptor::Base::KEY_MODULES_NUM, modules_num_max);
-    descriptor.add(descriptor::Base::KEY_MASS, mass);
-    descriptor.add(descriptor::Base::KEY_CONDITION, condition_max);
-    descriptor.add(descriptor::Base::KEY_DETEORATION, deterioration_normal);
-    descriptor.add(descriptor::Base::KEY_SCAN, scan);
+    descriptor.add(descriptor::Key::ID, global::get().idGenerator().nextId());
+    descriptor.add(descriptor::Key::TYPE, int(descriptor::Base::Type::SCANER));
+    descriptor.add(descriptor::Key::RACE, race);
+    descriptor.add(descriptor::Key::TECH, tech_level);
+    descriptor.add(descriptor::Key::MODULES_NUM, modules_num_max);
+    descriptor.add(descriptor::Key::MASS, mass);
+    descriptor.add(descriptor::Key::CONDITION, condition_max);
+    descriptor.add(descriptor::Key::DETEORATION, deterioration_normal);
+    descriptor.add(descriptor::Key::SCAN, scan);
 
     return descriptor;
 }
@@ -245,15 +245,15 @@ descriptor::Base generateRadarDescriptor(int race, int tech_level)
     int radius = meti::getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX);
 
     descriptor::Base descriptor;
-    descriptor.add(descriptor::Base::KEY_ID, global::get().idGenerator().nextId());
-    descriptor.add(descriptor::Base::KEY_TYPE, int(descriptor::Base::Type::RADAR));
-    descriptor.add(descriptor::Base::KEY_RACE, race);
-    descriptor.add(descriptor::Base::KEY_TECH, tech_level);
-    descriptor.add(descriptor::Base::KEY_MODULES_NUM, modules_num_max);
-    descriptor.add(descriptor::Base::KEY_MASS, mass);
-    descriptor.add(descriptor::Base::KEY_CONDITION, condition_max);
-    descriptor.add(descriptor::Base::KEY_DETEORATION, deterioration_normal);
-    descriptor.add(descriptor::Base::KEY_RADIUS, radius);
+    descriptor.add(descriptor::Key::ID, global::get().idGenerator().nextId());
+    descriptor.add(descriptor::Key::TYPE, int(descriptor::Base::Type::RADAR));
+    descriptor.add(descriptor::Key::RACE, race);
+    descriptor.add(descriptor::Key::TECH, tech_level);
+    descriptor.add(descriptor::Key::MODULES_NUM, modules_num_max);
+    descriptor.add(descriptor::Key::MASS, mass);
+    descriptor.add(descriptor::Key::CONDITION, condition_max);
+    descriptor.add(descriptor::Key::DETEORATION, deterioration_normal);
+    descriptor.add(descriptor::Key::RADIUS, radius);
 
     return descriptor;
 }
@@ -278,15 +278,15 @@ descriptor::Base generateProtectorDescriptor(int race, int tech_level)
     int protection = meti::getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX);
 
     descriptor::Base descriptor;
-    descriptor.add(descriptor::Base::KEY_ID, global::get().idGenerator().nextId());
-    descriptor.add(descriptor::Base::KEY_TYPE, int(descriptor::Base::Type::PROTECTOR));
-    descriptor.add(descriptor::Base::KEY_RACE, race);
-    descriptor.add(descriptor::Base::KEY_TECH, tech_level);
-    descriptor.add(descriptor::Base::KEY_MODULES_NUM, modules_num_max);
-    descriptor.add(descriptor::Base::KEY_MASS, mass);
-    descriptor.add(descriptor::Base::KEY_CONDITION, condition_max);
-    descriptor.add(descriptor::Base::KEY_DETEORATION, deterioration_normal);
-    descriptor.add(descriptor::Base::KEY_PROTECTION, protection);
+    descriptor.add(descriptor::Key::ID, global::get().idGenerator().nextId());
+    descriptor.add(descriptor::Key::TYPE, int(descriptor::Base::Type::PROTECTOR));
+    descriptor.add(descriptor::Key::RACE, race);
+    descriptor.add(descriptor::Key::TECH, tech_level);
+    descriptor.add(descriptor::Key::MODULES_NUM, modules_num_max);
+    descriptor.add(descriptor::Key::MASS, mass);
+    descriptor.add(descriptor::Key::CONDITION, condition_max);
+    descriptor.add(descriptor::Key::DETEORATION, deterioration_normal);
+    descriptor.add(descriptor::Key::PROTECTION, protection);
 
     return descriptor;
 }

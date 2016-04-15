@@ -54,9 +54,9 @@ TEST(base,serialization)
 
 TEST(descriptor,serialization)
 {
-    descriptor::Base descriptor({{descriptor::Base::KEY_ID, 11},
-                                 {descriptor::Base::KEY_DAMAGE, 22},
-                                 {descriptor::Base::KEY_RADIUS, 33}});
+    descriptor::Base descriptor({{descriptor::Key::ID, 11},
+                                 {descriptor::Key::DAMAGE, 22},
+                                 {descriptor::Key::RADIUS, 33}});
     descriptor::Base descriptor2(descriptor.data());
     EXPECT_TRUE(descriptor == descriptor2);
 }
