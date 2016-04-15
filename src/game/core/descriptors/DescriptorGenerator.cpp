@@ -36,10 +36,10 @@ descriptor::Base generateBombDescriptor(int damage, int radius)
     }
 
     descriptor::Base descriptor;
-    descriptor.add(descriptor::Base::KEY_ID, global::get().idGenerator().nextId());
-    descriptor.add(descriptor::Base::KEY_TYPE, int(descriptor::Base::Type::BOMB));
-    descriptor.add(descriptor::Base::KEY_DAMAGE, damage);
-    descriptor.add(descriptor::Base::KEY_RADIUS, radius);
+    descriptor.add(descriptor::Key::ID, global::get().idGenerator().nextId());
+    descriptor.add(descriptor::KEY_TYPE, int(descriptor::Base::Type::BOMB));
+    descriptor.add(descriptor::KEY_DAMAGE, damage);
+    descriptor.add(descriptor::KEY_RADIUS, radius);
 
     return descriptor;
 }

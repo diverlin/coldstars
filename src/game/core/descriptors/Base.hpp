@@ -29,6 +29,32 @@
 
 namespace descriptor {
 
+enum class Key: int {
+    ID,
+    TYPE,
+    RACE,
+    OWNER,
+    CHILD,
+    TARGET,
+    DAMAGE,
+    RADIUS,
+
+    TECH,
+    MODULES_NUM,
+    MASS,
+    CONDITION,
+    DETEORATION,
+    FUEL,
+    SPEED,
+    HYPER,
+    REPAIR,
+    STRENGTH,
+    SCAN,
+    PROTECTION,
+};
+
+std::string keyStr(const Key&);
+
 class Base
 {
 public:
@@ -69,7 +95,7 @@ public:
     static std::string KEY_PROTECTION;
 
     Base();
-    Base(const std::map<std::string, int_type>&);
+    Base(const std::map<Key, int_type>&);
     Base(const std::string& data);
     ~Base();
 
@@ -99,10 +125,10 @@ public:
     const int_type& protection() const;
 
 public: // todo make it protected
-    void add(const std::string& key, const int_type& value);
+    void add(const Key& key, const int_type& value);
 
 private:
-    const int_type& get(const std::string& key) const;
+    const int_type& get(const Key& key) const;
 
     friend class boost::serialization::access;
     template<class Archive>
@@ -111,7 +137,7 @@ private:
         ar & m_map;
     }
 
-    std::map<std::string, int_type> m_map;
+    std::map<Key, int_type> m_map;
 }; 
 
 } // namespace descriptor

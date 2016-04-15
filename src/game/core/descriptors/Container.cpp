@@ -23,9 +23,9 @@ namespace descriptor {
 
 Container::Container(const id_type& id, const id_type& child_id)
 {
-    add(KEY_ID, id);
-    add(KEY_TYPE, int(Type::CONTAINER));
-    add(KEY_CHILD, child_id);
+    add(Key::ID, id);
+    add(Key::TYPE, int(Type::CONTAINER));
+    add(Key::CHILD, child_id);
 }
 
 Container::Container(const std::string& data)
