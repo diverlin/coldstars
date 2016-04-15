@@ -48,7 +48,7 @@ RadarEquipment* RadarBuilder::createTemplate(id_type id) const
     return radar_equipment;
 } 
   
-RadarEquipment* RadarBuilder::create(const Descriptor& descriptor) const
+RadarEquipment* RadarBuilder::create(const descriptor::Base& descriptor) const
 {
     RadarEquipment* radar_equipment = createTemplate();
     createInternals(radar_equipment, descriptor);
@@ -56,7 +56,7 @@ RadarEquipment* RadarBuilder::create(const Descriptor& descriptor) const
     return radar_equipment;
 } 
         
-void RadarBuilder::createInternals(RadarEquipment* radar_equipment, const Descriptor& descriptor) const
+void RadarBuilder::createInternals(RadarEquipment* radar_equipment, const descriptor::Base& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
 

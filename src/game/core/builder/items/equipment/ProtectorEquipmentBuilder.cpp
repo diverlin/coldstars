@@ -48,7 +48,7 @@ ProtectorEquipment* ProtectorBuilder::createTemplate(id_type id) const
     return protector_equipment;
 } 
    
-ProtectorEquipment* ProtectorBuilder::create(const Descriptor& descriptor) const
+ProtectorEquipment* ProtectorBuilder::create(const descriptor::Base& descriptor) const
 {
     ProtectorEquipment* protector_equipment = createTemplate();
     createInternals(protector_equipment, descriptor);
@@ -56,7 +56,7 @@ ProtectorEquipment* ProtectorBuilder::create(const Descriptor& descriptor) const
     return protector_equipment;
 } 
          
-void ProtectorBuilder::createInternals(ProtectorEquipment* protector_equipment, const Descriptor& descriptor) const
+void ProtectorBuilder::createInternals(ProtectorEquipment* protector_equipment, const descriptor::Base& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
 

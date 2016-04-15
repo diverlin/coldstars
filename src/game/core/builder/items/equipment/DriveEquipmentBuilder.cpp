@@ -52,7 +52,7 @@ DriveEquipment* DriveBuilder::createTemplate(id_type id) const
     return drive_equipment;
 } 
         
-DriveEquipment* DriveBuilder::create(const Descriptor& descriptor) const
+DriveEquipment* DriveBuilder::create(const descriptor::Base& descriptor) const
 {
     DriveEquipment* drive_equipment = createTemplate();
     createInternals(drive_equipment, descriptor);
@@ -60,7 +60,7 @@ DriveEquipment* DriveBuilder::create(const Descriptor& descriptor) const
     return drive_equipment;
 }        
             
-void DriveBuilder::createInternals(DriveEquipment* drive_equipment, const Descriptor& descriptor) const
+void DriveBuilder::createInternals(DriveEquipment* drive_equipment, const descriptor::Base& descriptor) const
 {     
     ItemCommonData data = extractCommonData(descriptor);
             

@@ -29,7 +29,9 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 
-class Descriptor
+namespace descriptor {
+
+class Base
 {
 public:
     enum class Type: int {
@@ -66,15 +68,15 @@ public:
     static std::string KEY_SCAN;
     static std::string KEY_PROTECTION;
 
-    Descriptor();
-    Descriptor(const std::map<std::string, std::string>&);
-    Descriptor(const std::string& data);
-    ~Descriptor() {}
+    Base();
+    Base(const std::map<std::string, std::string>&);
+    Base(const std::string& data);
+    ~Base();
 
     void add(const std::string& key, const std::string& val);
     std::string data() const;
 
-    bool operator==(const Descriptor& rhs) const;
+    bool operator==(const Base& rhs) const;
 
     id_type id() const;
     int type() const;
@@ -117,3 +119,5 @@ private:
 
     std::map<std::string, std::string> m_map;
 }; 
+
+} // namespace descriptor

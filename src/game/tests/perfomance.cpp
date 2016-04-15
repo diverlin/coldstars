@@ -18,8 +18,7 @@
 
 #include <gtest/gtest.h>
 
-
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 #include <descriptors/HitDescriptor.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
 
@@ -47,9 +46,9 @@ TEST(base,perfomance1)
 TEST(base,perfomance2)
 {
     clock_t begin = std::clock();
-    Descriptor hit1 = generateHitDescriptor(1, 2, 33);
+    descriptor::Base hit1 = generateHitDescriptor(1, 2, 33);
     for (int i=0; i<interation_num; ++i) {
-        Descriptor hit2(hit1.data());
+        descriptor::Base hit2(hit1.data());
         hit2.owner() == hit1.owner();
         hit2.target() == hit1.target();
         hit2.damage() == hit1.damage();

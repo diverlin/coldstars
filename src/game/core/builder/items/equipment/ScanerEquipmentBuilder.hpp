@@ -21,7 +21,7 @@
 
 #include <types/IdType.hpp>
 
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 
 class ScanerEquipment;
 
@@ -33,8 +33,8 @@ class ScanerBuilder
         ~ScanerBuilder();
 
         ScanerEquipment* createTemplate(id_type id = NONE_ID) const;
-        ScanerEquipment* create(const Descriptor&) const;
+        ScanerEquipment* create(const descriptor::Base&) const;
 
     private:
-        void createInternals(ScanerEquipment*, const Descriptor&) const;
+        void createInternals(ScanerEquipment*, const descriptor::Base&) const;
 }; 

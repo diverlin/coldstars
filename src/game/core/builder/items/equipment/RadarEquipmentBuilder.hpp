@@ -21,7 +21,7 @@
 
 #include <types/IdType.hpp>
 
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 
 class RadarEquipment;
 
@@ -33,8 +33,8 @@ class RadarBuilder
         ~RadarBuilder();
 
         RadarEquipment* createTemplate(id_type id = NONE_ID) const;
-        RadarEquipment* create(const Descriptor&) const;
+        RadarEquipment* create(const descriptor::Base&) const;
                                      
     private:
-        void createInternals(RadarEquipment*, const Descriptor&) const;
+        void createInternals(RadarEquipment*, const descriptor::Base&) const;
 }; 

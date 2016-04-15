@@ -25,7 +25,7 @@
 
 #include <builder/spaceobjects/ShipBuilder.hpp>
 
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
 
 #include <builder/items/IncludeItemBuilders.hpp>

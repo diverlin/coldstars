@@ -20,27 +20,27 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 
 class DriveEquipment;
 
 
 class DriveBuilder
 {
-    public:
-        DriveBuilder();
-        ~DriveBuilder();
+public:
+    DriveBuilder();
+    ~DriveBuilder();
 
-        DriveEquipment* createTemplate(id_type id = NONE_ID) const;
-        DriveEquipment* create(const Descriptor&) const;
-                                     
-    private:
-        void createInternals(DriveEquipment*, const Descriptor&) const;
+    DriveEquipment* createTemplate(id_type id = NONE_ID) const;
+    DriveEquipment* create(const descriptor::Base&) const;
+
+private:
+    void createInternals(DriveEquipment*, const descriptor::Base&) const;
 }; 
 
 
-    
 
-        
+
+
 
 

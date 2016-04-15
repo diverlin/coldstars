@@ -20,7 +20,7 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 
 class DroidEquipment;
 
@@ -32,8 +32,8 @@ class DroidBuilder
         ~DroidBuilder();
 
         DroidEquipment* createTemplate(id_type id = NONE_ID) const;
-        DroidEquipment* create(const Descriptor&) const;
+        DroidEquipment* create(const descriptor::Base&) const;
                                      
     private:
-        void createInternals(DroidEquipment*, const Descriptor&) const;
+        void createInternals(DroidEquipment*, const descriptor::Base&) const;
 }; 

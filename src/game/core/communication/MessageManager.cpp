@@ -8,7 +8,7 @@
 #include <types/EntityTypes.hpp> // test
 
 #include <descriptors/VehicleDescriptor.hpp>
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
 #include <descriptors/ContainerDescriptor.hpp>
 #include <descriptors/ExplosionDescriptor.hpp>
@@ -97,14 +97,14 @@ void MessageManager::process(const Message& message)
         }
         /** OTHER */
         case TELEGRAM::HIT: {
-            Descriptor descriptor(message.data);
+            descriptor::Base descriptor(message.data);
             SpaceObject* ob = static_cast<SpaceObject*>(global::get().entityManager().get(descriptor.target()));
             assert(ob);
             ob->hit(descriptor.damage());
             break;
         }
         case TELEGRAM::EXPLOSION: {
-            ExplosionDescriptor descriptor(message.data);
+            descriptor::Explosion descriptor(message.data);
             StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.starsystem_id));
             assert(starsystem);
             Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);

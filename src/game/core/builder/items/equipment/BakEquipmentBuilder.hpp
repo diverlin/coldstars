@@ -20,7 +20,7 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 
 class BakEquipment;
 
@@ -32,13 +32,13 @@ class BakBuilder
         ~BakBuilder();
 
         BakEquipment* createTemplate(id_type id = NONE_ID) const;
-        BakEquipment* create(const Descriptor&) const;
+        BakEquipment* create(const descriptor::Base&) const;
                                      
     private:                
         BakBuilder(const BakBuilder&) = delete;
         BakBuilder& operator=(const BakBuilder&) = delete;
 
-        void createInternals(BakEquipment*, const Descriptor&) const;
+        void createInternals(BakEquipment*, const descriptor::Base&) const;
 }; 
 
     

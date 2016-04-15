@@ -28,7 +28,7 @@
 //#include <jeti/TextureOb.hpp>
 
 //#include <boost/property_tree/info_parser.hpp>
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 
 BombBuilder::BombBuilder()
 {}
@@ -36,7 +36,7 @@ BombBuilder::BombBuilder()
 BombBuilder::~BombBuilder()
 {}
 
-Bomb* BombBuilder::create(const Descriptor& descriptor) const
+Bomb* BombBuilder::create(const descriptor::Base& descriptor) const
 {
     Bomb* bomb = new Bomb(descriptor.id());
     assert(bomb);
@@ -45,7 +45,7 @@ Bomb* BombBuilder::create(const Descriptor& descriptor) const
     return bomb;
 } 
 
-void BombBuilder::createInternals(Bomb* bomb, const Descriptor& descriptor) const
+void BombBuilder::createInternals(Bomb* bomb, const descriptor::Base& descriptor) const
 {     
     //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID);
