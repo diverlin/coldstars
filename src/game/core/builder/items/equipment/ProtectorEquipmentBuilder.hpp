@@ -20,7 +20,7 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 
 class ProtectorEquipment;
 
@@ -32,8 +32,8 @@ class ProtectorBuilder
         ~ProtectorBuilder();
 
         ProtectorEquipment* createTemplate(id_type id = NONE_ID) const;
-        ProtectorEquipment* create(const Descriptor&) const;
+        ProtectorEquipment* create(const descriptor::Base&) const;
                                      
     private:
-        void createInternals(ProtectorEquipment*, const Descriptor&) const;
+        void createInternals(ProtectorEquipment*, const descriptor::Base&) const;
 }; 

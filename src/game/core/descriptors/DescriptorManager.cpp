@@ -26,7 +26,7 @@ DescriptorManager::DescriptorManager()
 
 }
 
-void DescriptorManager::add(const Descriptor& descriptor)
+void DescriptorManager::add(const descriptor::Base& descriptor)
 {
     const id_type id = descriptor.id();
     int type = descriptor.type();
@@ -40,23 +40,23 @@ void DescriptorManager::add(const Descriptor& descriptor)
     if (it2 != m_descriptorsTypes.end()) {
         it2->second.push_back(descriptor);
     } else {
-        std::vector<Descriptor> vector;
+        std::vector<descriptor::Base> vector;
         vector.push_back(descriptor);
         m_descriptorsTypes[type] = vector;
     }
 }
 
-Descriptor DescriptorManager::getRandom(const Descriptor::Type& type)
+descriptor::Base DescriptorManager::getRandom(const descriptor::Base::Type& type)
 {
     const auto it = m_descriptorsTypes.find(int(type));
     if (it != m_descriptorsTypes.end()) {
-        const std::vector<Descriptor> descriptors = it->second;
+        const std::vector<descriptor::Base> descriptors = it->second;
         return meti::getRand(descriptors);
     }
     throw std::runtime_error("descriptor type doesn't contain any descriptors");
 }
 
-Descriptor DescriptorManager::get(const id_type& id)
+descriptor::Base DescriptorManager::get(const id_type& id)
 {
     const auto it = m_descriptors.find(id);
     if (it != m_descriptors.end()) {

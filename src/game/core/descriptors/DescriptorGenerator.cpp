@@ -26,19 +26,19 @@
 #include <common/constants.hpp>
 #include <items/BaseItem.hpp>
 
-Descriptor generateHitDescriptor(const id_type& owner, const id_type& target, int damage)
+descriptor::Base generateHitDescriptor(const id_type& owner, const id_type& target, int damage)
 {
-    Descriptor descriptor;
-    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::HIT)));
-    descriptor.add(Descriptor::KEY_OWNER, std::to_string(owner));
-    descriptor.add(Descriptor::KEY_TARGET, std::to_string(target));
-    descriptor.add(Descriptor::KEY_DAMAGE, std::to_string(damage));
+    descriptor::Base descriptor;
+    descriptor.add(descriptor::Base::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(descriptor::Base::KEY_TYPE, std::to_string(int(descriptor::Base::Type::HIT)));
+    descriptor.add(descriptor::Base::KEY_OWNER, std::to_string(owner));
+    descriptor.add(descriptor::Base::KEY_TARGET, std::to_string(target));
+    descriptor.add(descriptor::Base::KEY_DAMAGE, std::to_string(damage));
 
     return descriptor;
 }
 
-Descriptor generateBombDescriptor(int damage, int radius)
+descriptor::Base generateBombDescriptor(int damage, int radius)
 {
     if (damage == -1) {
          damage = meti::getRandInt(10, 100);
@@ -47,31 +47,31 @@ Descriptor generateBombDescriptor(int damage, int radius)
         radius = meti::getRandInt(100, 300);
     }
 
-    Descriptor descriptor;
-    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::BOMB)));
-    descriptor.add(Descriptor::KEY_DAMAGE, std::to_string(damage));
-    descriptor.add(Descriptor::KEY_RADIUS, std::to_string(radius));
+    descriptor::Base descriptor;
+    descriptor.add(descriptor::Base::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(descriptor::Base::KEY_TYPE, std::to_string(int(descriptor::Base::Type::BOMB)));
+    descriptor.add(descriptor::Base::KEY_DAMAGE, std::to_string(damage));
+    descriptor.add(descriptor::Base::KEY_RADIUS, std::to_string(radius));
 
     return descriptor;
 }
 
-Descriptor generateStarSystemDescriptor(int race)
+descriptor::Base generateStarSystemDescriptor(int race)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
     }
 
-    Descriptor descriptor;
-    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::STARSYSTEM)));
-    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
+    descriptor::Base descriptor;
+    descriptor.add(descriptor::Base::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(descriptor::Base::KEY_TYPE, std::to_string(int(descriptor::Base::Type::STARSYSTEM)));
+    descriptor.add(descriptor::Base::KEY_RACE, std::to_string(race));
 
     return descriptor;
 }
 
 // items
-Descriptor generateBakDescriptor(int race, int tech_level)
+descriptor::Base generateBakDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
@@ -90,20 +90,20 @@ Descriptor generateBakDescriptor(int race, int tech_level)
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BAK_EQUIPMENT_ID);
     //item_texOb = TEXTURE_MANAGER.returnItemTexOb(TYPE::TEXTURE::RADAR_EQUIPMENT_ID, revision_id)
 
-    Descriptor descriptor;
-    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::BAK)));
-    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
-    descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
-    descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
-    descriptor.add(Descriptor::KEY_MASS, std::to_string(mass));
-    descriptor.add(Descriptor::KEY_CONDITION, std::to_string(condition_max));
-    descriptor.add(Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal));
-    descriptor.add(Descriptor::KEY_FUEL, std::to_string(fuel_max_orig));
+    descriptor::Base descriptor;
+    descriptor.add(descriptor::Base::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(descriptor::Base::KEY_TYPE, std::to_string(int(descriptor::Base::Type::BAK)));
+    descriptor.add(descriptor::Base::KEY_RACE, std::to_string(race));
+    descriptor.add(descriptor::Base::KEY_TECH, std::to_string(tech_level));
+    descriptor.add(descriptor::Base::KEY_MODULES_NUM, std::to_string(modules_num_max));
+    descriptor.add(descriptor::Base::KEY_MASS, std::to_string(mass));
+    descriptor.add(descriptor::Base::KEY_CONDITION, std::to_string(condition_max));
+    descriptor.add(descriptor::Base::KEY_DETEORATION, std::to_string(deterioration_normal));
+    descriptor.add(descriptor::Base::KEY_FUEL, std::to_string(fuel_max_orig));
     return descriptor;
 }
 
-Descriptor generateDriveDescriptor(int race, int tech_level)
+descriptor::Base generateDriveDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
@@ -122,21 +122,21 @@ Descriptor generateDriveDescriptor(int race, int tech_level)
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DRIVE_EQUIPMENT_ID);
 
-    Descriptor descriptor;
-    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::DRIVE)));
-    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
-    descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
-    descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
-    descriptor.add(Descriptor::KEY_MASS, std::to_string(mass));
-    descriptor.add(Descriptor::KEY_CONDITION, std::to_string(condition_max));
-    descriptor.add(Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal));
-    descriptor.add(Descriptor::KEY_SPEED, std::to_string(speed));
-    descriptor.add(Descriptor::KEY_HYPER, std::to_string(hyper));
+    descriptor::Base descriptor;
+    descriptor.add(descriptor::Base::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(descriptor::Base::KEY_TYPE, std::to_string(int(descriptor::Base::Type::DRIVE)));
+    descriptor.add(descriptor::Base::KEY_RACE, std::to_string(race));
+    descriptor.add(descriptor::Base::KEY_TECH, std::to_string(tech_level));
+    descriptor.add(descriptor::Base::KEY_MODULES_NUM, std::to_string(modules_num_max));
+    descriptor.add(descriptor::Base::KEY_MASS, std::to_string(mass));
+    descriptor.add(descriptor::Base::KEY_CONDITION, std::to_string(condition_max));
+    descriptor.add(descriptor::Base::KEY_DETEORATION, std::to_string(deterioration_normal));
+    descriptor.add(descriptor::Base::KEY_SPEED, std::to_string(speed));
+    descriptor.add(descriptor::Base::KEY_HYPER, std::to_string(hyper));
     return descriptor;
 }
 
-Descriptor generateDroidDescriptor(int race, int tech_level)
+descriptor::Base generateDroidDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
@@ -154,20 +154,20 @@ Descriptor generateDroidDescriptor(int race, int tech_level)
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
     //jeti::TextureOb* texOb_item = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::DROID_EQUIPMENT_ID);
 
-    Descriptor descriptor;
-    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::DROID)));
-    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
-    descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
-    descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
-    descriptor.add(Descriptor::KEY_MASS, std::to_string(mass));
-    descriptor.add(Descriptor::KEY_CONDITION, std::to_string(condition_max));
-    descriptor.add(Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal));
-    descriptor.add(Descriptor::KEY_REPAIR, std::to_string(repair));
+    descriptor::Base descriptor;
+    descriptor.add(descriptor::Base::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(descriptor::Base::KEY_TYPE, std::to_string(int(descriptor::Base::Type::DROID)));
+    descriptor.add(descriptor::Base::KEY_RACE, std::to_string(race));
+    descriptor.add(descriptor::Base::KEY_TECH, std::to_string(tech_level));
+    descriptor.add(descriptor::Base::KEY_MODULES_NUM, std::to_string(modules_num_max));
+    descriptor.add(descriptor::Base::KEY_MASS, std::to_string(mass));
+    descriptor.add(descriptor::Base::KEY_CONDITION, std::to_string(condition_max));
+    descriptor.add(descriptor::Base::KEY_DETEORATION, std::to_string(deterioration_normal));
+    descriptor.add(descriptor::Base::KEY_REPAIR, std::to_string(repair));
     return descriptor;
 }
 
-Descriptor generateGrappleDescriptor(int race, int tech_level)
+descriptor::Base generateGrappleDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
@@ -188,23 +188,23 @@ Descriptor generateGrappleDescriptor(int race, int tech_level)
     int radius     = meti::getRandInt(EQUIPMENT::GRAPPLE::RADIUS_MIN,   EQUIPMENT::GRAPPLE::RADIUS_MAX)   * (1 + EQUIPMENT::GRAPPLE::RADIUS_TECH_RATE * (int)tech_level);
     int speed      = meti::getRandInt(EQUIPMENT::GRAPPLE::SPEED_MIN,    EQUIPMENT::GRAPPLE::SPEED_MAX)    * (1 + EQUIPMENT::GRAPPLE::SPEED_TECH_RATE * (int)tech_level);
 
-    Descriptor descriptor;
-    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::GRAPPLE)));
-    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
-    descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
-    descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
-    descriptor.add(Descriptor::KEY_MASS, std::to_string(mass));
-    descriptor.add(Descriptor::KEY_CONDITION, std::to_string(condition_max));
-    descriptor.add(Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal));
-    descriptor.add(Descriptor::KEY_STRENGTH, std::to_string(strength));
-    descriptor.add(Descriptor::KEY_RADIUS, std::to_string(radius));
-    descriptor.add(Descriptor::KEY_SPEED, std::to_string(speed));
+    descriptor::Base descriptor;
+    descriptor.add(descriptor::Base::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(descriptor::Base::KEY_TYPE, std::to_string(int(descriptor::Base::Type::GRAPPLE)));
+    descriptor.add(descriptor::Base::KEY_RACE, std::to_string(race));
+    descriptor.add(descriptor::Base::KEY_TECH, std::to_string(tech_level));
+    descriptor.add(descriptor::Base::KEY_MODULES_NUM, std::to_string(modules_num_max));
+    descriptor.add(descriptor::Base::KEY_MASS, std::to_string(mass));
+    descriptor.add(descriptor::Base::KEY_CONDITION, std::to_string(condition_max));
+    descriptor.add(descriptor::Base::KEY_DETEORATION, std::to_string(deterioration_normal));
+    descriptor.add(descriptor::Base::KEY_STRENGTH, std::to_string(strength));
+    descriptor.add(descriptor::Base::KEY_RADIUS, std::to_string(radius));
+    descriptor.add(descriptor::Base::KEY_SPEED, std::to_string(speed));
 
     return descriptor;
 }
 
-Descriptor generateScanerDescriptor(int race, int tech_level)
+descriptor::Base generateScanerDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
@@ -223,21 +223,21 @@ Descriptor generateScanerDescriptor(int race, int tech_level)
 
     int scan = meti::getRandInt(EQUIPMENT::SCANER::SCAN_MIN, EQUIPMENT::SCANER::SCAN_MAX) * (1 + EQUIPMENT::SCANER::SCAN_TECH_RATE * (int)tech_level);
 
-    Descriptor descriptor;
-    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::SCANER)));
-    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
-    descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
-    descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
-    descriptor.add(Descriptor::KEY_MASS, std::to_string(mass));
-    descriptor.add(Descriptor::KEY_CONDITION, std::to_string(condition_max));
-    descriptor.add(Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal));
-    descriptor.add(Descriptor::KEY_SCAN, std::to_string(scan));
+    descriptor::Base descriptor;
+    descriptor.add(descriptor::Base::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(descriptor::Base::KEY_TYPE, std::to_string(int(descriptor::Base::Type::SCANER)));
+    descriptor.add(descriptor::Base::KEY_RACE, std::to_string(race));
+    descriptor.add(descriptor::Base::KEY_TECH, std::to_string(tech_level));
+    descriptor.add(descriptor::Base::KEY_MODULES_NUM, std::to_string(modules_num_max));
+    descriptor.add(descriptor::Base::KEY_MASS, std::to_string(mass));
+    descriptor.add(descriptor::Base::KEY_CONDITION, std::to_string(condition_max));
+    descriptor.add(descriptor::Base::KEY_DETEORATION, std::to_string(deterioration_normal));
+    descriptor.add(descriptor::Base::KEY_SCAN, std::to_string(scan));
 
     return descriptor;
 }
 
-Descriptor generateRadarDescriptor(int race, int tech_level)
+descriptor::Base generateRadarDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
@@ -256,21 +256,21 @@ Descriptor generateRadarDescriptor(int race, int tech_level)
 
     int radius = meti::getRandInt(EQUIPMENT::RADAR::RADIUS_MIN, EQUIPMENT::RADAR::RADIUS_MAX);
 
-    Descriptor descriptor;
-    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::RADAR)));
-    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
-    descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
-    descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
-    descriptor.add(Descriptor::KEY_MASS, std::to_string(mass));
-    descriptor.add(Descriptor::KEY_CONDITION, std::to_string(condition_max));
-    descriptor.add(Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal));
-    descriptor.add(Descriptor::KEY_RADIUS, std::to_string(radius));
+    descriptor::Base descriptor;
+    descriptor.add(descriptor::Base::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(descriptor::Base::KEY_TYPE, std::to_string(int(descriptor::Base::Type::RADAR)));
+    descriptor.add(descriptor::Base::KEY_RACE, std::to_string(race));
+    descriptor.add(descriptor::Base::KEY_TECH, std::to_string(tech_level));
+    descriptor.add(descriptor::Base::KEY_MODULES_NUM, std::to_string(modules_num_max));
+    descriptor.add(descriptor::Base::KEY_MASS, std::to_string(mass));
+    descriptor.add(descriptor::Base::KEY_CONDITION, std::to_string(condition_max));
+    descriptor.add(descriptor::Base::KEY_DETEORATION, std::to_string(deterioration_normal));
+    descriptor.add(descriptor::Base::KEY_RADIUS, std::to_string(radius));
 
     return descriptor;
 }
 
-Descriptor generateProtectorDescriptor(int race, int tech_level)
+descriptor::Base generateProtectorDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
@@ -289,16 +289,16 @@ Descriptor generateProtectorDescriptor(int race, int tech_level)
 
     int protection = meti::getRandInt(EQUIPMENT::PROTECTOR::PROTECTION_MIN, EQUIPMENT::PROTECTOR::PROTECTION_MAX);
 
-    Descriptor descriptor;
-    descriptor.add(Descriptor::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
-    descriptor.add(Descriptor::KEY_TYPE, std::to_string(int(Descriptor::Type::PROTECTOR)));
-    descriptor.add(Descriptor::KEY_RACE, std::to_string(race));
-    descriptor.add(Descriptor::KEY_TECH, std::to_string(tech_level));
-    descriptor.add(Descriptor::KEY_MODULES_NUM, std::to_string(modules_num_max));
-    descriptor.add(Descriptor::KEY_MASS, std::to_string(mass));
-    descriptor.add(Descriptor::KEY_CONDITION, std::to_string(condition_max));
-    descriptor.add(Descriptor::KEY_DETEORATION, std::to_string(deterioration_normal));
-    descriptor.add(Descriptor::KEY_PROTECTION, std::to_string(protection));
+    descriptor::Base descriptor;
+    descriptor.add(descriptor::Base::KEY_ID, std::to_string(global::get().idGenerator().nextId()));
+    descriptor.add(descriptor::Base::KEY_TYPE, std::to_string(int(descriptor::Base::Type::PROTECTOR)));
+    descriptor.add(descriptor::Base::KEY_RACE, std::to_string(race));
+    descriptor.add(descriptor::Base::KEY_TECH, std::to_string(tech_level));
+    descriptor.add(descriptor::Base::KEY_MODULES_NUM, std::to_string(modules_num_max));
+    descriptor.add(descriptor::Base::KEY_MASS, std::to_string(mass));
+    descriptor.add(descriptor::Base::KEY_CONDITION, std::to_string(condition_max));
+    descriptor.add(descriptor::Base::KEY_DETEORATION, std::to_string(deterioration_normal));
+    descriptor.add(descriptor::Base::KEY_PROTECTION, std::to_string(protection));
 
     return descriptor;
 }

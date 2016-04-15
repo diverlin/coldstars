@@ -16,40 +16,42 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Descriptor.hpp"
+#include "Base.hpp"
 
 #include <sstream>
 
-std::string Descriptor::KEY_ID = "id";
-std::string Descriptor::KEY_TYPE = "type";
-std::string Descriptor::KEY_RACE = "race";
-std::string Descriptor::KEY_OWNER = "owner";
-std::string Descriptor::KEY_TARGET = "target";
-std::string Descriptor::KEY_DAMAGE = "damage";
-std::string Descriptor::KEY_RADIUS = "radius";
-std::string Descriptor::KEY_TECH = "tech";
-std::string Descriptor::KEY_MODULES_NUM = "modules";
-std::string Descriptor::KEY_MASS = "mass";
-std::string Descriptor::KEY_CONDITION = "condition";
-std::string Descriptor::KEY_DETEORATION = "deteoration";
-std::string Descriptor::KEY_FUEL = "fuel";
-std::string Descriptor::KEY_SPEED = "speed";
-std::string Descriptor::KEY_HYPER = "hyper";
-std::string Descriptor::KEY_REPAIR = "repair";
-std::string Descriptor::KEY_STRENGTH = "strength";
-std::string Descriptor::KEY_SCAN = "scan";
-std::string Descriptor::KEY_PROTECTION = "protection";
+namespace descriptor {
 
-Descriptor::Descriptor()
+std::string Base::KEY_ID = "id";
+std::string Base::KEY_TYPE = "type";
+std::string Base::KEY_RACE = "race";
+std::string Base::KEY_OWNER = "owner";
+std::string Base::KEY_TARGET = "target";
+std::string Base::KEY_DAMAGE = "damage";
+std::string Base::KEY_RADIUS = "radius";
+std::string Base::KEY_TECH = "tech";
+std::string Base::KEY_MODULES_NUM = "modules";
+std::string Base::KEY_MASS = "mass";
+std::string Base::KEY_CONDITION = "condition";
+std::string Base::KEY_DETEORATION = "deteoration";
+std::string Base::KEY_FUEL = "fuel";
+std::string Base::KEY_SPEED = "speed";
+std::string Base::KEY_HYPER = "hyper";
+std::string Base::KEY_REPAIR = "repair";
+std::string Base::KEY_STRENGTH = "strength";
+std::string Base::KEY_SCAN = "scan";
+std::string Base::KEY_PROTECTION = "protection";
+
+Base::Base()
 {
 }
 
-Descriptor::Descriptor(const std::map<std::string, std::string>& map)
+Base::Base(const std::map<std::string, std::string>& map)
     : m_map(map)
 {
 }
 
-Descriptor::Descriptor(const std::string& data)
+Base::Base(const std::string& data)
 {
     std::stringstream ss;
     ss << data;
@@ -57,8 +59,12 @@ Descriptor::Descriptor(const std::string& data)
     ia >> *this;
 }
 
+Base::~Base()
+{
+}
+
 std::string
-Descriptor::data() const
+Base::data() const
 {
     std::stringstream ss;
     boost::archive::text_oarchive oa(ss);
@@ -66,7 +72,8 @@ Descriptor::data() const
     return ss.str();
 }
 
-void Descriptor::add(const std::string& key, const std::string& val)
+void
+Base::add(const std::string& key, const std::string& val)
 {
     auto f = m_map.find(key);
     if (f == m_map.end()) {
@@ -77,127 +84,127 @@ void Descriptor::add(const std::string& key, const std::string& val)
 }
 
 id_type
-Descriptor::id() const
+Base::id() const
 {
     return get<id_type>(KEY_ID);
 }
 
 int
-Descriptor::type() const
+Base::type() const
 {
     return get<int>(KEY_TYPE);
 }
 
 int
-Descriptor::race() const
+Base::race() const
 {
     return get<int>(KEY_RACE);
 }
 
 id_type
-Descriptor::owner() const
+Base::owner() const
 {
     return get<id_type>(KEY_OWNER);
 }
 
 id_type
-Descriptor::target() const
+Base::target() const
 {
     return get<id_type>(KEY_TARGET);
 }
 
 int
-Descriptor::damage() const
+Base::damage() const
 {
     return get<int>(KEY_DAMAGE);
 }
 
 int
-Descriptor::radius() const
+Base::radius() const
 {
     return get<int>(KEY_RADIUS);
 }
 
 int
-Descriptor::tech() const
+Base::tech() const
 {
     return get<int>(KEY_TECH);
 }
 
 int
-Descriptor::modules() const
+Base::modules() const
 {
     return get<int>(KEY_MODULES_NUM);
 }
 
 int
-Descriptor::mass() const
+Base::mass() const
 {
     return get<int>(KEY_MASS);
 }
 
 int
-Descriptor::condition() const
+Base::condition() const
 {
     return get<int>(KEY_CONDITION);
 }
 
 int
-Descriptor::deteoration() const
+Base::deteoration() const
 {
     return get<int>(KEY_DETEORATION);
 }
 
 int
-Descriptor::fuel() const
+Base::fuel() const
 {
     return get<int>(KEY_FUEL);
 }
 
 int
-Descriptor::speed() const
+Base::speed() const
 {
     return get<int>(KEY_SPEED);
 }
 
 int
-Descriptor::hyper() const
+Base::hyper() const
 {
     return get<int>(KEY_HYPER);
 }
 
 int
-Descriptor::repair() const
+Base::repair() const
 {
     return get<int>(KEY_REPAIR);
 }
 
 int
-Descriptor::strength() const
+Base::strength() const
 {
     return get<int>(KEY_STRENGTH);
 }
 
 int
-Descriptor::scan() const
+Base::scan() const
 {
     return get<int>(KEY_SCAN);
 }
 
 int
-Descriptor::protection() const
+Base::protection() const
 {
     return get<int>(KEY_PROTECTION);
 }
 
 bool
-Descriptor::operator==(const Descriptor& rhs) const
+Base::operator==(const Base& rhs) const
 {
     return data() == rhs.data();
 }
 
 const std::string&
-Descriptor::get_raw(const std::string& key) const
+Base::get_raw(const std::string& key) const
 {
     auto f = m_map.find(key);
     if (f != m_map.end()) {
@@ -205,7 +212,6 @@ Descriptor::get_raw(const std::string& key) const
     }
     throw std::runtime_error("CODE ERROR: " + key + " is not found in descriptor");
 }
-    
 
-
+} // namespace descriptor
 

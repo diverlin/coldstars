@@ -13,7 +13,10 @@ endif ()
 
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
-
+#message("GTEST_MAIN_LIBRARIES=${GTEST_MAIN_LIBRARIES}")
+#message("GTEST_LIBRARIES=${GTEST_LIBRARIES}")
+    
+    
 add_executable (${PROJECT} ${${PROJECT}_SOURCE} ${${PROJECT}_HEADER})
 target_link_libraries(${PROJECT}
     ${PROJECT_CORE}

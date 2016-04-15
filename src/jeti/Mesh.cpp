@@ -145,10 +145,10 @@ void Mesh::FillPointVerticesFast(const std::vector<glm::vec3>& positions, const 
     glBufferData(GL_ARRAY_BUFFER, sizeof(data_array), data_array, GL_DYNAMIC_DRAW);
 
     // attribute pointers    
-    glVertexAttribPointer(VERTEX_POSITION_LOCATION, STRIDE_POSITION, GL_FLOAT, GL_FALSE, stride*sizeof(GLfloat), (const GLvoid*)0); 
+    glVertexAttribPointer(VERTEX_POSITION_LOCATION, STRIDE_POSITION, GL_FLOAT, GL_FALSE, stride*sizeof(GLfloat), (const GLvoid*)0);
 	glEnableVertexAttribArray(VERTEX_POSITION_LOCATION);
 
-	glVertexAttribPointer(VERTEX_NORMAL_LOCATION, STRIDE_NORMAL, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), (const GLvoid*)(STRIDE_POSITION * sizeof(GLfloat)));
+    glVertexAttribPointer(VERTEX_NORMAL_LOCATION, STRIDE_NORMAL,     GL_FLOAT, GL_FALSE, stride*sizeof(GLfloat), (const GLvoid*)(STRIDE_POSITION * sizeof(GLfloat)));
     glEnableVertexAttribArray(VERTEX_NORMAL_LOCATION);
 
     glVertexAttribPointer(VERTEX_COLOR_LOCATION,    STRIDE_COLOR,    GL_FLOAT, GL_FALSE, stride*sizeof(GLfloat), (const GLvoid*)((STRIDE_POSITION+STRIDE_NORMAL) * sizeof(GLfloat)));
@@ -230,7 +230,7 @@ void Mesh::UpdateVbo()
 
     if (m_HasColors)
     { 
-	    glVertexAttribPointer(VERTEX_COLOR_LOCATION, STRIDE_COLOR, GL_FLOAT, GL_FALSE, stride*sizeof(GLfloat), (const GLvoid*)(offset * sizeof(GLfloat)));
+        glVertexAttribPointer(VERTEX_COLOR_LOCATION, STRIDE_COLOR, GL_FLOAT, GL_FALSE, stride * sizeof(GLfloat), (const GLvoid*)(offset * sizeof(GLfloat)));
 	    glEnableVertexAttribArray(VERTEX_COLOR_LOCATION);
         offset += STRIDE_COLOR;
     }
@@ -261,4 +261,37 @@ void Mesh::Draw(GLenum primitive_type) const
 }
 
 
+// TODO
+/*
+VBO1
+GLuint points_vbo = 0;
+glGenBuffers (1, &points_vbo);
+glBindBuffer (GL_ARRAY_BUFFER, points_vbo);
+glBufferData (GL_ARRAY_BUFFER, 9 * sizeof (float), points, GL_STATIC_DRAW);
 
+VBO2
+GLuint colours_vbo = 0;
+glGenBuffers (1, &colours_vbo);
+glBindBuffer (GL_ARRAY_BUFFER, colours_vbo);
+glBufferData (GL_ARRAY_BUFFER, 9 * sizeof (float), colours, GL_STATIC_DRAW);
+
+VAO(VBO1+VBO2)
+GLuint vao = 0;
+glGenVertexArrays (1, &vao);
+glBindVertexArray (vao);
+glBindBuffer (GL_ARRAY_BUFFER, points_vbo);
+glVertexAttribPointer (0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+glBindBuffer (GL_ARRAY_BUFFER, colours_vbo);
+glVertexAttribPointer (1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+// per each draw call
+glEnableVertexAttribArray (0);
+glEnableVertexAttribArray (1);
+
+
+  glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  glUseProgram (shader_programme);
+  glBindVertexArray (vao);
+  glDrawArrays (GL_TRIANGLES, 0, 3);
+
+ */

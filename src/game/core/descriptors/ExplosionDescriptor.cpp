@@ -3,7 +3,9 @@
 
 #include <sstream>
 
-ExplosionDescriptor::ExplosionDescriptor(const id_type& starsystem_id, const glm::vec3& center, int damage, int radius)
+namespace descriptor {
+
+Explosion::Explosion(const id_type& starsystem_id, const glm::vec3& center, int damage, int radius)
     :
       starsystem_id(starsystem_id),
       center(center),
@@ -11,12 +13,12 @@ ExplosionDescriptor::ExplosionDescriptor(const id_type& starsystem_id, const glm
       radius(radius)
 {}
 
-ExplosionDescriptor::ExplosionDescriptor(const std::string& data) {
+Explosion::Explosion(const std::string& data) {
     MACRO_READ_SERIALIZED_DATA
 }
 
-std::string ExplosionDescriptor::data() const {
+std::string Explosion::data() const {
     MACRO_SAVE_SERIALIZED_DATA
 }
 
-
+} // namespace descriptor

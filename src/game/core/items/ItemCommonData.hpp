@@ -21,7 +21,9 @@
 #include <types/TechLevelTypes.hpp>
 #include <types/RaceTypes.hpp>
 
-class Descriptor;
+namespace descriptor {
+class Base;
+}
 
 struct ItemCommonData 
 {
@@ -37,4 +39,4 @@ struct ItemCommonData
     unsigned int mass = 0;
 };
 
-ItemCommonData extractCommonData(const Descriptor& descriptor);
+ItemCommonData extractCommonData(const descriptor::Base& descriptor);

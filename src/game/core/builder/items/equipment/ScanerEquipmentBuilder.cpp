@@ -52,7 +52,7 @@ ScanerEquipment* ScanerBuilder::createTemplate(id_type id) const
     return scaner_equipment;
 } 
 
-ScanerEquipment* ScanerBuilder::create(const Descriptor& descriptor) const
+ScanerEquipment* ScanerBuilder::create(const descriptor::Base& descriptor) const
 {
     ScanerEquipment* scaner_equipment = createTemplate();
     createInternals(scaner_equipment, descriptor);
@@ -60,7 +60,7 @@ ScanerEquipment* ScanerBuilder::create(const Descriptor& descriptor) const
     return scaner_equipment;
 } 
             
-void ScanerBuilder::createInternals(ScanerEquipment* scaner_equipment, const Descriptor& descriptor) const
+void ScanerBuilder::createInternals(ScanerEquipment* scaner_equipment, const descriptor::Base& descriptor) const
 {
     ItemCommonData common_data = extractCommonData(descriptor);
     

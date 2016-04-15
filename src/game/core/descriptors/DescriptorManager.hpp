@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 
 #include <map>
 #include <string>
@@ -29,11 +29,11 @@ public:
     DescriptorManager();
     ~DescriptorManager() {}
 
-    void add(const Descriptor&);
-    Descriptor getRandom(const Descriptor::Type&);
-    Descriptor get(const id_type&);
+    void add(const descriptor::Base&);
+    descriptor::Base getRandom(const descriptor::Base::Type&);
+    descriptor::Base get(const id_type&);
 
 private:
-    std::map<id_type, Descriptor> m_descriptors;
-    std::map<int, std::vector<Descriptor>> m_descriptorsTypes;
+    std::map<id_type, descriptor::Base> m_descriptors;
+    std::map<int, std::vector<descriptor::Base>> m_descriptorsTypes;
 }; 

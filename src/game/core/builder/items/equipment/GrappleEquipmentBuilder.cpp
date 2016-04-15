@@ -47,7 +47,7 @@ GrappleEquipment* GrappleBuilder::createTemplate(id_type id) const
     return grapple_equipment;
 } 
 
-GrappleEquipment* GrappleBuilder::create(const Descriptor& descriptor) const
+GrappleEquipment* GrappleBuilder::create(const descriptor::Base& descriptor) const
 {
     GrappleEquipment* grapple_equipment = createTemplate();
     createInternals(grapple_equipment, descriptor);
@@ -55,7 +55,7 @@ GrappleEquipment* GrappleBuilder::create(const Descriptor& descriptor) const
     return grapple_equipment;
 } 
 
-void GrappleBuilder::createInternals(GrappleEquipment* grapple_equipment, const Descriptor& descriptor) const
+void GrappleBuilder::createInternals(GrappleEquipment* grapple_equipment, const descriptor::Base& descriptor) const
 {
     ItemCommonData data = extractCommonData(descriptor);
 

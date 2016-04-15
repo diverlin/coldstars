@@ -49,7 +49,7 @@ DroidEquipment* DroidBuilder::createTemplate(id_type id) const
     return droid_equipment;
 } 
 
-DroidEquipment* DroidBuilder::create(const Descriptor& descriptor) const
+DroidEquipment* DroidBuilder::create(const descriptor::Base& descriptor) const
 {
     DroidEquipment* droid_equipment = createTemplate();
     createInternals(droid_equipment, descriptor);
@@ -57,7 +57,7 @@ DroidEquipment* DroidBuilder::create(const Descriptor& descriptor) const
     return droid_equipment;
 }  
             
-void DroidBuilder::createInternals(DroidEquipment* droid_equipment, const Descriptor& descriptor) const
+void DroidBuilder::createInternals(DroidEquipment* droid_equipment, const descriptor::Base& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
    

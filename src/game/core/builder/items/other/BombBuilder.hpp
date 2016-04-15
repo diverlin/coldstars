@@ -22,7 +22,10 @@
 #include <string>
 
 class Bomb;
-class Descriptor;
+
+namespace descriptor {
+class Base;
+}
 
 class BombBuilder
 {
@@ -30,10 +33,10 @@ class BombBuilder
         BombBuilder();
         ~BombBuilder();
 
-        Bomb* create(const Descriptor&) const;
+        Bomb* create(const descriptor::Base&) const;
                                      
     private:
-        void createInternals(Bomb*, const Descriptor&) const;
+        void createInternals(Bomb*, const descriptor::Base&) const;
 }; 
     
 

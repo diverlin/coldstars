@@ -25,7 +25,7 @@
 #include <spaceobjects/IncludeSpaceObjects.hpp>
 
 #include <world/starsystem.hpp>
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 
 //#include <effects/DistantNebulaEffect.hpp>
 //#include <effects/DistantStarEffect.hpp>
@@ -40,7 +40,7 @@ StarSystemBuilder::StarSystemBuilder()
 StarSystemBuilder::~StarSystemBuilder()
 {}
 
-StarSystem* StarSystemBuilder::create(const Descriptor& descriptor) const
+StarSystem* StarSystemBuilder::create(const descriptor::Base& descriptor) const
 {
     StarSystem* starsystem = new StarSystem(descriptor.id());
     assert(starsystem);
@@ -51,10 +51,10 @@ StarSystem* StarSystemBuilder::create(const Descriptor& descriptor) const
 
 StarSystem* StarSystemBuilder::create(const std::string& data) const
 {
-    return create(Descriptor(data));
+    return create(descriptor::Base(data));
 }
 
-void StarSystemBuilder::createInternals(StarSystem* starsystem, const Descriptor& starsystem_descriptor) const
+void StarSystemBuilder::createInternals(StarSystem* starsystem, const descriptor::Base& starsystem_descriptor) const
 {
 //    starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
 //    CreateStar(starsystem);

@@ -19,9 +19,9 @@
 
 #include "ItemCommonData.hpp"
 
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 
-ItemCommonData extractCommonData(const Descriptor& descriptor)
+ItemCommonData extractCommonData(const descriptor::Base& descriptor)
 {
     ItemCommonData data;
     data.race        = (TYPE::RACE)descriptor.race();

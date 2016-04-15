@@ -20,7 +20,7 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 
 class GrappleEquipment;
 
@@ -32,8 +32,8 @@ class GrappleBuilder
         ~GrappleBuilder();
 
         GrappleEquipment* createTemplate(id_type id = NONE_ID) const;
-        GrappleEquipment* create(const Descriptor&) const;
+        GrappleEquipment* create(const descriptor::Base&) const;
                                      
     private:
-        void createInternals(GrappleEquipment*, const Descriptor&) const;
+        void createInternals(GrappleEquipment*, const descriptor::Base&) const;
 }; 

@@ -42,7 +42,7 @@ BakEquipment* BakBuilder::createTemplate(id_type id) const
     return bak_equipment;
 } 
        
-BakEquipment* BakBuilder::create(const Descriptor& descriptor) const
+BakEquipment* BakBuilder::create(const descriptor::Base& descriptor) const
 {
     BakEquipment* bak_equipment = createTemplate();
     createInternals(bak_equipment, descriptor);
@@ -50,7 +50,7 @@ BakEquipment* BakBuilder::create(const Descriptor& descriptor) const
     return bak_equipment;
 }
                           
-void BakBuilder::createInternals(BakEquipment* bak_equipment, const Descriptor& descriptor) const
+void BakBuilder::createInternals(BakEquipment* bak_equipment, const descriptor::Base& descriptor) const
 {
     ItemCommonData data = extractCommonData(descriptor);
 

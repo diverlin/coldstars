@@ -21,7 +21,7 @@
 
 #include <types/TechLevelTypes.hpp>
 
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 
 class Vehicle;
 
@@ -32,7 +32,7 @@ class BaseVehicleBuilder
         BaseVehicleBuilder();
         virtual ~BaseVehicleBuilder() {}
 
-        void equip(Vehicle* vehicle, const Descriptor& descriptor) const;
+        void equip(Vehicle* vehicle, const descriptor::Base& descriptor) const;
         void equip(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const;
         void EquipModules(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const; 
         void EquipArtefacts(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const; 

@@ -31,7 +31,7 @@
 #include <builder/spaceobjects/ContainerBuilder.hpp>
 
 #include <descriptors/DescriptorManager.hpp>
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
 #include <descriptors/VehicleDescriptorGenerator.hpp>
 #include <descriptors/ContainerDescriptorGenerator.hpp>
@@ -52,7 +52,7 @@ Ship* createNewShip()
 
 Bomb* createNewBomb(int damage, int radius)
 {
-    Descriptor descriptor = generateBombDescriptor(damage, radius);
+    descriptor::Base descriptor = generateBombDescriptor(damage, radius);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
 
     Bomb* bomb = static_cast<Bomb*>(global::get().entityManager().get(descriptor.id()));
@@ -75,7 +75,7 @@ Container* createNewContainer(const id_type& child_id)
 
 StarSystem* createNewStarSystem()
 {
-    Descriptor descriptor = generateStarSystemDescriptor();
+    descriptor::Base descriptor = generateStarSystemDescriptor();
     global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
 
     StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.id()));

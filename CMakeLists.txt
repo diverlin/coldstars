@@ -21,7 +21,7 @@ set(DEPLOY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 SET(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -fPIC -rdynamic")
    
 
-set(COLDSTARS_DEPENDENCIES_ROOT "/home/yeti/mnt/workspace/coldstars/thirdparty/") #gtest1.7 manually compiled here
+set(COLDSTARS_DEPENDENCIES_ROOT "/home/yeti/mnt/workspace/dist/thirdparty_1.0.24/")
 set(CMAKE_PREFIX_PATH ${COLDSTARS_DEPENDENCIES_ROOT})
 set(SFML_ROOT ${COLDSTARS_DEPENDENCIES_ROOT})
 set(GLEW_ROOT ${COLDSTARS_DEPENDENCIES_ROOT})

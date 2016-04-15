@@ -7,10 +7,12 @@
 
 #include <glm/glm.hpp>
 
-class ExplosionDescriptor {
+namespace descriptor {
+
+class Explosion {
     public:
-        ExplosionDescriptor(const id_type& starsystem_id, const glm::vec3& center, int damage, int radius);
-        ExplosionDescriptor(const std::string& data);
+        Explosion(const id_type& starsystem_id, const glm::vec3& center, int damage, int radius);
+        Explosion(const std::string& data);
 
         id_type starsystem_id = 0;
         glm::vec3 center;
@@ -33,4 +35,4 @@ class ExplosionDescriptor {
         }
 };
 
-
+} // namespace descriptor

@@ -3,12 +3,15 @@
 
 #include <sstream>
 
-AddToStarsystemDescriptor::AddToStarsystemDescriptor(const id_type& owner, const id_type& object, const glm::vec3& position, const glm::vec3& angle)
+AddToStarsystemDescriptor::AddToStarsystemDescriptor(const id_type& owner,
+                                                     const id_type& object,
+                                                     const glm::vec3& position,
+                                                     const glm::vec3& angle)
     :
-      owner(owner),
-      object(object),
-      position(position),
-      angle(angle)
+      owner(owner)
+    , object(object)
+    , position(position)
+    , angle(angle)
 {}
 
 AddToStarsystemDescriptor::AddToStarsystemDescriptor(const std::string& data) {

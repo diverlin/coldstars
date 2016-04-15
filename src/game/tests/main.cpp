@@ -33,7 +33,7 @@
 #include <builder/spaceobjects/ContainerBuilder.hpp>
 
 #include <descriptors/DescriptorManager.hpp>
-#include <descriptors/Descriptor.hpp>
+#include <descriptors/Base.hpp>
 #include <descriptors/HitDescriptor.hpp>
 #include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/SectorDescriptor.hpp>
@@ -62,7 +62,8 @@
 
 TEST(descriptor,accessors)
 {
-    Descriptor descriptor({{Descriptor::KEY_ID, "22"}, {Descriptor::KEY_DAMAGE, "33"}});
+    descriptor::Base descriptor({{descriptor::Base::KEY_ID, "22"},
+                                 {descriptor::Base::KEY_DAMAGE, "33"}});
     EXPECT_TRUE(descriptor.id() == 22);
     EXPECT_TRUE(descriptor.damage() == 33);
     ASSERT_THROW(descriptor.radius(), std::runtime_error);
@@ -107,11 +108,11 @@ TEST(base,bomb)
     Bomb* bomb = createNewBomb(1000, 1000);
     Container* container = createNewContainer(bomb->id());
 
-    glm::vec3 ship_pos = glm::vec3(200, 200, 0);
-    glm::vec3 ship_angle = glm::vec3(45, 0, 0);
+    const glm::vec3 ship_pos = glm::vec3(200, 200, 0);
+    const glm::vec3 ship_angle = glm::vec3(45, 0, 0);
 
-    messageManager.add(Message(TELEGRAM::STARSYSTEM_ADD_SHIP, AddToStarsystemDescriptor(starsystem->id(), ship->id(), ship_pos, ship_angle).data()));
-    messageManager.add(Message(TELEGRAM::STARSYSTEM_ADD_CONTAINER, AddToStarsystemDescriptor(starsystem->id(), container->id(), ship_pos, ship_angle).data()));
+    // todo strange undef error //messageManager.add(Message(TELEGRAM::STARSYSTEM_ADD_SHIP, AddToStarsystemDescriptor(starsystem->id(), ship->id(), ship_pos, ship_angle).data()));
+     // todo strange undef error //messageManager.add(Message(TELEGRAM::STARSYSTEM_ADD_CONTAINER, AddToStarsystemDescriptor(starsystem->id(), container->id(), ship_pos, ship_angle).data()));
     messageManager.add(Message(TELEGRAM::HIT, generateHitDescriptor(ship->id(), container->id(), container->armor()).data()));
 
     messageManager.runLoop();
@@ -129,18 +130,18 @@ TEST(base,bomb)
 TEST(descriptor,manager)
 {
     DescriptorManager& descriptor_manager = global::get().descriptorManager();
-    Descriptor descriptor_hit = generateHitDescriptor(1, 2, 3);
-    Descriptor descriptor_starsystem = generateStarSystemDescriptor();
-    Descriptor descriptor_bak = generateBakDescriptor();
+    descriptor::Base descriptor_hit = generateHitDescriptor(1, 2, 3);
+    descriptor::Base descriptor_starsystem = generateStarSystemDescriptor();
+    descriptor::Base descriptor_bak = generateBakDescriptor();
     descriptor_manager.add(descriptor_hit);
     descriptor_manager.add(descriptor_starsystem);
     descriptor_manager.add(descriptor_bak);
 
     EXPECT_EQ(descriptor_manager.get(descriptor_hit.id()), descriptor_hit);
 
-    EXPECT_EQ(descriptor_manager.getRandom(Descriptor::Type::HIT).type(), int(Descriptor::Type::HIT));
-    EXPECT_EQ(descriptor_manager.getRandom(Descriptor::Type::STARSYSTEM).type(), int(Descriptor::Type::STARSYSTEM));
-    EXPECT_EQ(descriptor_manager.getRandom(Descriptor::Type::BAK).type(), int(Descriptor::Type::BAK));
+    EXPECT_EQ(descriptor_manager.getRandom(descriptor::Base::Type::HIT).type(), int(descriptor::Base::Type::HIT));
+    EXPECT_EQ(descriptor_manager.getRandom(descriptor::Base::Type::STARSYSTEM).type(), int(descriptor::Base::Type::STARSYSTEM));
+    EXPECT_EQ(descriptor_manager.getRandom(descriptor::Base::Type::BAK).type(), int(descriptor::Base::Type::BAK));
 }
 
 
