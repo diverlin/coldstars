@@ -22,20 +22,17 @@
 
 namespace descriptor {
 
-std::string Base::KEY_ID = "id";
+// const
 std::string Base::KEY_TYPE = "type";
 std::string Base::KEY_RACE = "race";
-std::string Base::KEY_OWNER = "owner";
-std::string Base::KEY_CHILD = "child";
-std::string Base::KEY_TARGET = "target";
 std::string Base::KEY_DAMAGE = "damage";
 std::string Base::KEY_RADIUS = "radius";
 std::string Base::KEY_TECH = "tech";
-std::string Base::KEY_MODULES_NUM = "modules";
+std::string Base::KEY_MODULES_NUM = "modules_num";
 std::string Base::KEY_MASS = "mass";
-std::string Base::KEY_CONDITION = "condition";
+std::string Base::KEY_CONDITION_MAX = "condition_max";
 std::string Base::KEY_DETERIORATION = "deterioration";
-std::string Base::KEY_FUEL = "fuel";
+std::string Base::KEY_FUEL_MAX = "fuel_max";
 std::string Base::KEY_SPEED = "speed";
 std::string Base::KEY_HYPER = "hyper";
 std::string Base::KEY_REPAIR = "repair";
@@ -43,23 +40,25 @@ std::string Base::KEY_STRENGTH = "strength";
 std::string Base::KEY_SCAN = "scan";
 std::string Base::KEY_PROTECTION = "protection";
 std::string Base::KEY_PRICE = "price";
+// dynamic
+std::string Base::KEY_ID = "id";
+std::string Base::KEY_OWNER = "owner";
+std::string Base::KEY_CHILD = "child";
+std::string Base::KEY_TARGET = "target";
 
 std::string keyStr(const Key& key) {
     switch(key) {
-    case Key::ID: return Base::KEY_ID; break;
+    // const
     case Key::TYPE: return Base::KEY_TYPE; break;
     case Key::RACE: return Base::KEY_RACE; break;
-    case Key::OWNER: return Base::KEY_OWNER; break;
-    case Key::CHILD: return Base::KEY_CHILD; break;
-    case Key::TARGET: return Base::KEY_TARGET; break;
     case Key::DAMAGE: return Base::KEY_DAMAGE; break;
     case Key::RADIUS: return Base::KEY_RADIUS; break;
     case Key::TECH: return Base::KEY_TECH; break;
     case Key::MODULES_NUM: return Base::KEY_MODULES_NUM; break;
     case Key::MASS: return Base::KEY_MASS; break;
-    case Key::CONDITION: return Base::KEY_CONDITION; break;
+    case Key::CONDITION_MAX: return Base::KEY_CONDITION_MAX; break;
     case Key::DETERIORATION: return Base::KEY_DETERIORATION; break;
-    case Key::FUEL: return Base::KEY_FUEL; break;
+    case Key::FUEL_MAX: return Base::KEY_FUEL_MAX; break;
     case Key::SPEED: return Base::KEY_SPEED; break;
     case Key::HYPER: return Base::KEY_HYPER; break;
     case Key::REPAIR: return Base::KEY_REPAIR; break;
@@ -67,6 +66,12 @@ std::string keyStr(const Key& key) {
     case Key::SCAN: return Base::KEY_SCAN; break;
     case Key::PROTECTION: return Base::KEY_PROTECTION; break;
     case Key::PRICE: return Base::KEY_PRICE; break;
+// dynamic
+    case Key::ID: return Base::KEY_ID; break;
+    case Key::OWNER: return Base::KEY_OWNER; break;
+    case Key::CHILD: return Base::KEY_CHILD; break;
+    case Key::TARGET: return Base::KEY_TARGET; break;
+
     default: throw std::runtime_error("ERROR: fixme: unknown descriptor key"); break;
     }
 }
@@ -179,9 +184,9 @@ Base::mass() const
 }
 
 const int_type&
-Base::condition() const
+Base::conditionMax() const
 {
-    return get(Key::CONDITION);
+    return get(Key::CONDITION_MAX);
 }
 
 const int_type&
@@ -191,9 +196,9 @@ Base::deterioration() const
 }
 
 const int_type&
-Base::fuel() const
+Base::fuelMax() const
 {
-    return get(Key::FUEL);
+    return get(Key::FUEL_MAX);
 }
 
 const int_type&

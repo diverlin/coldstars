@@ -65,18 +65,18 @@ void addItemCommonFields(descriptor::Base& descriptor,
                          int type,
                          int race,
                          int tech_level,
-                         int modules_num,
+                         int modules_num_max,
                          int mass,
-                         int condition,
+                         int condition_max,
                          int deterioration,
                          int price) {
     descriptor.add(descriptor::Key::ID, global::get().idGenerator().nextId());
     descriptor.add(descriptor::Key::TYPE, int(descriptor::Base::Type::RADAR));
     descriptor.add(descriptor::Key::RACE, race);
     descriptor.add(descriptor::Key::TECH, tech_level);
-    descriptor.add(descriptor::Key::MODULES_NUM, modules_num);
+    descriptor.add(descriptor::Key::MODULES_NUM, modules_num_max);
     descriptor.add(descriptor::Key::MASS, mass);
-    descriptor.add(descriptor::Key::CONDITION, condition);
+    descriptor.add(descriptor::Key::CONDITION_MAX, condition_max);
     descriptor.add(descriptor::Key::DETERIORATION, deterioration);
     descriptor.add(descriptor::Key::PRICE, price);
 }
@@ -108,7 +108,7 @@ descriptor::Base generateBakDescriptor(int race, int tech_level)
                         global::get().idGenerator().nextId(),
                         int(descriptor::Base::Type::BAK),
                         race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
-    descriptor.add(descriptor::Key::FUEL, fuel_max_orig);
+    descriptor.add(descriptor::Key::FUEL_MAX, fuel_max_orig);
     return descriptor;
 }
 

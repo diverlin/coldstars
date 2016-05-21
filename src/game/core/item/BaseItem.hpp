@@ -53,7 +53,7 @@ public:
 
         m_data_item = data_item;
         m_deterioration = data_item.deterioration;
-        setCondition(data_item.condition);
+        setCondition(data_item.condition_max);
     }
     void setItemSlot(ItemSlot* item_slot)  { m_item_slot = item_slot; }
     void setCondition(int condition) { m_condition = condition; }

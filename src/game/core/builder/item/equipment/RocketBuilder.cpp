@@ -82,7 +82,7 @@ void RocketBuilder::createInternals(Rocket* rocket, TYPE::TECH tech_level, TYPE:
     common_data.modules_num = meti::getRandInt(EQUIPMENT::ROCKET::MODULES_NUM_MIN, EQUIPMENT::ROCKET::MODULES_NUM_MAX);
 #endif
     common_data.mass            = meti::getRandInt(EQUIPMENT::ROCKET::MASS_MIN, EQUIPMENT::ROCKET::MASS_MAX);
-    common_data.condition   = meti::getRandInt(EQUIPMENT::ROCKET::CONDITION_MIN, EQUIPMENT::ROCKET::CONDITION_MAX);
+    common_data.condition_max   = meti::getRandInt(EQUIPMENT::ROCKET::CONDITION_MIN, EQUIPMENT::ROCKET::CONDITION_MAX);
     
     common_data.deterioration = 1;
     

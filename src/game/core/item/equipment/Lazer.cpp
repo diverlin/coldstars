@@ -81,7 +81,7 @@ void Lazer::CountPrice()
             EQUIPMENT::LAZER::MODULES_NUM_WEIGHT * modules_num_rate;
 
     float mass_rate          = (float)m_data_item.mass / EQUIPMENT::LAZER::MASS_MIN;
-    float condition_rate     = (float)m_condition / m_data_item.condition;
+    float condition_rate     = (float)m_condition / m_data_item.condition_max;
 
     m_price                    = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
