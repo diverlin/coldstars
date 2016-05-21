@@ -18,6 +18,7 @@
 
 #pragma once
 
+#include <types/IdType.hpp>
 #include <types/TechLevelTypes.hpp>
 #include <types/RaceTypes.hpp>
 
@@ -30,13 +31,16 @@ struct ItemCommonData
     ItemCommonData()
     {}
 
+    id_type id = NONE_ID; // changable
+
     TYPE::RACE race = TYPE::RACE::R0_ID;
     TYPE::TECH tech = TYPE::TECH::NONE_ID;
-    unsigned int modules_num = 0;
-    unsigned int condition = 0;
-    unsigned int deterioration = 0;
+    int modules_num = 0;
+    int condition = 0;
+    int deterioration = 0;
     float deterioration_overload_rate = 0.0f;
-    unsigned int mass = 0;
+    int mass = 0;
+    int price = 0;
 };
 
 ItemCommonData extractCommonData(const descriptor::Base& descriptor);

@@ -42,6 +42,7 @@ std::string Base::KEY_REPAIR = "repair";
 std::string Base::KEY_STRENGTH = "strength";
 std::string Base::KEY_SCAN = "scan";
 std::string Base::KEY_PROTECTION = "protection";
+std::string Base::KEY_BASE_PRICE = "base_price";
 
 std::string keyStr(const Key& key) {
     switch(key) {
@@ -65,6 +66,7 @@ std::string keyStr(const Key& key) {
     case Key::STRENGTH: return Base::KEY_STRENGTH; break;
     case Key::SCAN: return Base::KEY_SCAN; break;
     case Key::PROTECTION: return Base::KEY_PROTECTION; break;
+    case Key::BASE_PRICE: return Base::KEY_BASE_PRICE; break;
     default: throw std::runtime_error("ERROR: fixme: unknown descriptor key"); break;
     }
 }
@@ -229,6 +231,13 @@ Base::protection() const
 {
     return get(Key::PROTECTION);
 }
+
+const int_type&
+Base::base_price() const
+{
+    return get(Key::BASE_PRICE);
+}
+
 
 bool
 Base::operator==(const Base& rhs) const

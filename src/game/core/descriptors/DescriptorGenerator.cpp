@@ -72,6 +72,7 @@ descriptor::Base generateBakDescriptor(int race, int tech_level)
     int mass                   = meti::getRandInt(EQUIPMENT::BAK::MASS_MIN, EQUIPMENT::BAK::MASS_MAX);
     int condition_max          = meti::getRandInt(EQUIPMENT::BAK::CONDITION_MIN, EQUIPMENT::BAK::CONDITION_MAX);
     int deterioration_normal = 1;
+    int base_price =  meti::getRandInt(100, 1000);
     int fuel_max_orig = meti::getRandInt(EQUIPMENT::BAK::FUEL_MIN, EQUIPMENT::BAK::FUEL_MAX) * (1 + EQUIPMENT::BAK::FUEL_TECH_RATE * (int)tech_level);
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
@@ -87,6 +88,7 @@ descriptor::Base generateBakDescriptor(int race, int tech_level)
     descriptor.add(descriptor::Key::MASS, mass);
     descriptor.add(descriptor::Key::CONDITION, condition_max);
     descriptor.add(descriptor::Key::DETEORATION, deterioration_normal);
+    descriptor.add(descriptor::Key::BASE_PRICE, base_price);
     descriptor.add(descriptor::Key::FUEL, fuel_max_orig);
     return descriptor;
 }
