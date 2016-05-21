@@ -266,7 +266,7 @@ void Grapple::Save(boost::property_tree::ptree& save_ptree) const
 
     Base::SaveData(save_ptree, root);
     Base::SaveData(save_ptree, root);
-    BaseEquipment::SaveData(save_ptree, root);
+    Base::SaveData(save_ptree, root);
     Grapple::SaveData(save_ptree, root);
 }
 
@@ -275,7 +275,7 @@ void Grapple::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Base::LoadData(load_ptree);
-    BaseEquipment::LoadData(load_ptree);
+    Base::LoadData(load_ptree);
     Grapple::LoadData(load_ptree);
 }
 
@@ -284,7 +284,7 @@ void Grapple::Resolve()
 {
     Base::ResolveData();
     Base::ResolveData();
-    BaseEquipment::ResolveData();
+    Base::ResolveData();
     Grapple::ResolveData();
 }
 

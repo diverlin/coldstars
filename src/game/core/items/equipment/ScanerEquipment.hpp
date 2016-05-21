@@ -24,7 +24,7 @@
 namespace item {
 namespace equipment {
 
-class Scaner : public BaseEquipment
+class Scaner : public Base
 {
 public:
     Scaner(const id_type& id);

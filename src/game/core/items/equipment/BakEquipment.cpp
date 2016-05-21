@@ -91,7 +91,7 @@ void Bak::Save(boost::property_tree::ptree& save_ptree) const
 
     Base::SaveData(save_ptree, root);
     Base::SaveData(save_ptree, root);
-    BaseEquipment::SaveData(save_ptree, root);
+    Base::SaveData(save_ptree, root);
     Bak::SaveData(save_ptree, root);
 }
 
@@ -100,7 +100,7 @@ void Bak::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Base::LoadData(load_ptree);
-    BaseEquipment::LoadData(load_ptree);
+    Base::LoadData(load_ptree);
     Bak::LoadData(load_ptree);
 }
 
@@ -109,7 +109,7 @@ void Bak::Resolve()
 {
     Base::ResolveData();
     Base::ResolveData();
-    BaseEquipment::ResolveData();
+    Base::ResolveData();
     Bak::ResolveData();
 }
 
