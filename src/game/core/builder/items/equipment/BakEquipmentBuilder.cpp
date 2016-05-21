@@ -32,9 +32,9 @@ BakBuilder::BakBuilder()
 BakBuilder::~BakBuilder()
 {}
 
-BakEquipment* BakBuilder::createTemplate(id_type id) const
+item::equipment::BakEquipment* BakBuilder::createTemplate(id_type id) const
 {
-    BakEquipment* bak_equipment = new BakEquipment(id);
+    item::equipment::BakEquipment* bak_equipment = new item::equipment::BakEquipment(id);
     assert(bak_equipment);
 
     global::get().entityManager().reg(bak_equipment);
@@ -42,15 +42,15 @@ BakEquipment* BakBuilder::createTemplate(id_type id) const
     return bak_equipment;
 } 
        
-BakEquipment* BakBuilder::create(const descriptor::Base& descriptor) const
+item::equipment::BakEquipment* BakBuilder::create(const descriptor::Base& descriptor) const
 {
-    BakEquipment* bak_equipment = createTemplate();
+    item::equipment::BakEquipment* bak_equipment = createTemplate();
     createInternals(bak_equipment, descriptor);
     
     return bak_equipment;
 }
                           
-void BakBuilder::createInternals(BakEquipment* bak_equipment, const descriptor::Base& descriptor) const
+void BakBuilder::createInternals(item::equipment::BakEquipment* bak_equipment, const descriptor::Base& descriptor) const
 {
     ItemCommonData data = extractCommonData(descriptor);
 
