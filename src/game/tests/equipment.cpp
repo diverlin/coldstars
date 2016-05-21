@@ -28,7 +28,7 @@
 #include <descriptors/Base.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
 
-#include <builder/items/IncludeItemBuilders.hpp>
+#include <builder/item/IncludeItemBuilders.hpp>
 
 #include <item/equipment/ALL>
 

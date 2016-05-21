@@ -19,8 +19,10 @@
 
 #include <builder/dock/NatureLandBuilder.hpp>
 #include <builder/slots/ItemSlotBuilder.hpp>
-#include <builder/items/artefacts/GravityArtefactBuilder.hpp>
-#include <builder/items/artefacts/ProtectorArtefactBuilder.hpp>
+#ifdef USE_ARTEFACTS
+#include <builder/item/artefacts/GravityArtefactBuilder.hpp>
+#include <builder/item/artefacts/ProtectorArtefactBuilder.hpp>
+#endif // USE_ARTEFACTS
 #include <builder/CommonBuilderHeaders.hpp>
 
 #include <item/artefacts/GravityArtefact.hpp>

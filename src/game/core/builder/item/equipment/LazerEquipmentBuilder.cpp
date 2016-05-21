@@ -17,7 +17,7 @@
 */
 
 
-#include <builder/items/equipment/LazerEquipmentBuilder.hpp>
+#include <builder/item/equipment/LazerEquipmentBuilder.hpp>
 #include <item/equipment/Lazer.hpp>
 #include <managers/EntityManager.hpp>
 

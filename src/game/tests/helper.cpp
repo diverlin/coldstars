@@ -28,7 +28,7 @@
 
 #include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/world/StarSystemBuilder.hpp>
-#include <builder/items/other/BombBuilder.hpp>
+#include <builder/item/other/BombBuilder.hpp>
 #include <builder/spaceobjects/ContainerBuilder.hpp>
 
 #include <descriptors/DescriptorManager.hpp>

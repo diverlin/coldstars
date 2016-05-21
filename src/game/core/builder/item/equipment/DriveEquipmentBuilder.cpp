@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <builder/items/equipment/DriveEquipmentBuilder.hpp>
+#include "DriveEquipmentBuilder.hpp"
 #include <item/equipment/Drive.hpp>
 #include <managers/EntityManager.hpp>
 

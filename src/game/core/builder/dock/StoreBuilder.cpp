@@ -20,7 +20,7 @@
 #include <builder/dock/StoreBuilder.hpp>
 #include <builder/slots/ItemSlotBuilder.hpp>
 #include <builder/slots/VehicleSlotBuilder.hpp>
-#include <builder/items/IncludeItemBuilders.hpp>
+#include <builder/item/IncludeItemBuilders.hpp>
 #include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 

@@ -17,7 +17,7 @@
 */
 
 
-#include <builder/items/equipment/BakEquipmentBuilder.hpp>
+#include "BakEquipmentBuilder.hpp"
 #include <item/equipment/Bak.hpp>
 #include <managers/EntityManager.hpp>
 
