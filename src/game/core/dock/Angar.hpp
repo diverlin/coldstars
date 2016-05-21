@@ -24,7 +24,10 @@ class ItemSlot;
 class VehicleSlot; 
 class Vehicle;
 class Npc;
+namespace item {
 class BaseItem;
+} // namespace item
+
 class RocketEquipment;
 
 class Angar : public Room
@@ -42,7 +45,7 @@ class Angar : public Room
                 
                 bool AddVehicle(Vehicle*);
                 
-                bool RepairItem(Npc*, BaseItem*) const;
+                bool RepairItem(Npc*, item::BaseItem*) const;
                 bool ChargeRocketEquipment(Npc*, RocketEquipment*) const;
                                 
                 bool RepairVehicle(Vehicle*) const; 

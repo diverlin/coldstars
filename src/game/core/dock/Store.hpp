@@ -22,45 +22,48 @@
 
 #include "Room.hpp"
 class ItemSlot;
+namespace item {
 class BaseItem; 
+} // namespace item
+
 class Npc;
 class VehicleSlot;
 class Vehicle;
 
 class Store : public Room
 {
-        public:
-                Store(int);                      
-                ~Store();
-                
-                virtual void putChildrenToGarbage() const;
+public:
+    Store(int);
+    ~Store();
 
-        void AddVehicleSlot(VehicleSlot*);                  
-        void AddItemSlot(ItemSlot*);                
-                bool AddItem(BaseItem*);
-                bool AddVehicle(Vehicle*);
-                
-                ItemSlot* GetEmptyItemSlot() const;
-                VehicleSlot* GetEmptyVehicleSlot() const;
-                
-                int BuyItem(BaseItem*); 
-                void SellVehicle(Npc*, VehicleSlot*, int);
-                
-                void Save(boost::property_tree::ptree&) const;        
-        void Load(const boost::property_tree::ptree&);
-        void Resolve();
-        
-        private:             
-                std::vector<ItemSlot*> item_slot_vec;
-                std::vector<VehicleSlot*> vehicle_slot_vec;
-                                
-                void SaveData(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
-        
+    virtual void putChildrenToGarbage() const;
+
+    void AddVehicleSlot(VehicleSlot*);
+    void AddItemSlot(ItemSlot*);
+    bool AddItem(item::BaseItem*);
+    bool AddVehicle(Vehicle*);
+
+    ItemSlot* GetEmptyItemSlot() const;
+    VehicleSlot* GetEmptyVehicleSlot() const;
+
+    int BuyItem(item::BaseItem*);
+    void SellVehicle(Npc*, VehicleSlot*, int);
+
+    void Save(boost::property_tree::ptree&) const;
+    void Load(const boost::property_tree::ptree&);
+    void Resolve();
+
+private:
+    std::vector<ItemSlot*> item_slot_vec;
+    std::vector<VehicleSlot*> vehicle_slot_vec;
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
+
     friend class GuiStore;
 };
-        
+
 #endif
 
 

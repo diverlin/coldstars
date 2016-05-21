@@ -219,7 +219,7 @@ bool Vehicle::GetAllItemsFromVehicle(Vehicle* vehicle)
     return result;
 }
 
-bool Vehicle::ManageItem(BaseItem* item)
+bool Vehicle::ManageItem(item::BaseItem* item)
 {
     switch(item->typeId())
     {
@@ -236,12 +236,12 @@ bool Vehicle::ManageItem(BaseItem* item)
     return false;
 } 
 
-bool Vehicle::ManageFunctionGoodsPack(BaseItem* item)
+bool Vehicle::ManageFunctionGoodsPack(item::BaseItem* item)
 {
     return MergeIdenticalGoods(item);
 }    
 
-bool Vehicle::ManageFunctionEquipment(BaseItem* item)
+bool Vehicle::ManageFunctionEquipment(item::BaseItem* item)
 {
     if (item->parentSubTypeId() == TYPE::ENTITY::WEAPON_SLOT_ID)
     {
@@ -271,7 +271,7 @@ bool Vehicle::ManageFunctionEquipment(BaseItem* item)
 }     
 
 #ifdef USE_MODULES
-bool Vehicle::ManageFunctionModule(BaseItem* item)
+bool Vehicle::ManageFunctionModule(item::BaseItem* item)
 {
     for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
         if (m_SlotFunct_vec[i]->item()) {
@@ -285,7 +285,7 @@ bool Vehicle::ManageFunctionModule(BaseItem* item)
 #endif
 
 #ifdef EANBLE_ARTEFACTS
-bool Vehicle::ManageFunctionArtefact(BaseItem* item)
+bool Vehicle::ManageFunctionArtefact(item::BaseItem* item)
 {
     ItemSlot* artef_slot = GetEmptyArtefactSlot();
     if (artef_slot != nullptr)
@@ -357,7 +357,7 @@ bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
     return false;
 } 
 
-bool Vehicle::AddItemToCargoSlot(BaseItem* item)
+bool Vehicle::AddItemToCargoSlot(item::BaseItem* item)
 {
     IncreaseMass(item->mass());
     if (item->typeId() == TYPE::ENTITY::GOODS_ID)
@@ -377,7 +377,7 @@ bool Vehicle::AddItemToCargoSlot(BaseItem* item)
     return false;
 } 
 
-bool Vehicle::manage(BaseItem* item)
+bool Vehicle::manage(item::BaseItem* item)
 {
     if (AddItemToCargoSlot(item)) {
         ManageItem(item);
@@ -404,7 +404,7 @@ void Vehicle::SellItemsInCargo()
     }
 }
 
-bool Vehicle::SellItem(BaseItem* item)
+bool Vehicle::SellItem(item::BaseItem* item)
 {
     //float skill_rate = 1.0f + sign*0.1*npc->GetSkill().GetTrader();
     //npc->IncreaseCredits(sign*amount*skill_rate*minerals_price);
@@ -438,7 +438,7 @@ bool Vehicle::SellItem(BaseItem* item)
     }
 }
 
-bool Vehicle::BuyItem(BaseItem* item)
+bool Vehicle::BuyItem(item::BaseItem* item)
 {
     if (AddItemToCargoSlot(item) == true)
     {
@@ -450,7 +450,7 @@ bool Vehicle::BuyItem(BaseItem* item)
     return false;
 }
 
-bool Vehicle::MergeIdenticalGoods(BaseItem* item)
+bool Vehicle::MergeIdenticalGoods(item::BaseItem* item)
 {
     ItemSlot* item_slot = GetCargoSlotWithGoods(item->subTypeId());
     if (item_slot != nullptr)

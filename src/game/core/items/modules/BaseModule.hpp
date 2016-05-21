@@ -29,7 +29,7 @@ struct UnresolvedDataBaseModule {
     id_type equipment_owner_id;
 };
 
-class BaseModule : public BaseItem {
+class BaseModule : public item::BaseItem {
 public:
     BaseModule();
     virtual ~BaseModule();

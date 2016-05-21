@@ -59,7 +59,7 @@ Container* ContainerBuilder::create(const std::string& data) const
 //    return container;
 //}
 
-//Container* ContainerBuilder::create(BaseItem* item) const
+//Container* ContainerBuilder::create(item::BaseItem* item) const
 //{
 //    Container* container = createTemplate();
 //    createInternals(container, item);
@@ -135,7 +135,7 @@ void ContainerBuilder::createInternals(Container* container, const descriptor::C
     container->bindItemSlot(item_slot);
 
     if (descriptor.child() >= 0) {
-        BaseItem* item = static_cast<BaseItem*>(global::get().entityManager().get(descriptor.child()));
+        item::BaseItem* item = static_cast<item::BaseItem*>(global::get().entityManager().get(descriptor.child()));
         item_slot->insertItem(item);
     }
 }

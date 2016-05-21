@@ -135,7 +135,7 @@ void ItemSlot::fireEvent(float attack_rate, bool show_effect)
     }
 }
 
-bool ItemSlot::checkItemInsertion(BaseItem* item) const
+bool ItemSlot::checkItemInsertion(item::BaseItem* item) const
 {
     if (subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID)
     {
@@ -150,7 +150,7 @@ bool ItemSlot::checkItemInsertion(BaseItem* item) const
     return false;
 }
 
-bool ItemSlot::insertItem(BaseItem* item)
+bool ItemSlot::insertItem(item::BaseItem* item)
 {    
     if (subTypeId() == TYPE::ENTITY::GATE_SLOT_ID)
     {
@@ -379,7 +379,7 @@ bool ItemSlot::swapItem(ItemSlot* slot)
 
     if ( (m_item != nullptr) && (slot->item() != nullptr) )
     {
-        BaseItem* tmp_item = slot->item();
+        item::BaseItem* tmp_item = slot->item();
         if ( (slot->checkItemInsertion(m_item) == true) and (checkItemInsertion(tmp_item) == true) )
         {
             slot->insertItem(m_item);

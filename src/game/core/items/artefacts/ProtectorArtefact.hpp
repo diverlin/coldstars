@@ -20,7 +20,7 @@
 
 #include "../BaseItem.hpp"
 
-class ProtectorArtefact : public BaseItem
+class ProtectorArtefact : public item::BaseItem
 {
 public:
     ProtectorArtefact(int);
