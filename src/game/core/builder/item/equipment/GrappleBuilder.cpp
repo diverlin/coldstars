@@ -17,7 +17,7 @@
 */
 
 
-#include "GrappleEquipmentBuilder.hpp"
+#include "GrappleBuilder.hpp"
 #include <item/equipment/Grapple.hpp>
 #include <managers/EntityManager.hpp>
 

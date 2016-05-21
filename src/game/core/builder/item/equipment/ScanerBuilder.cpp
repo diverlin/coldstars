@@ -17,7 +17,7 @@
 */
 
 
-#include "ScanerEquipmentBuilder.hpp"
+#include "ScanerBuilder.hpp"
 #include <item/equipment/Scaner.hpp>
 #include <managers/EntityManager.hpp>
 

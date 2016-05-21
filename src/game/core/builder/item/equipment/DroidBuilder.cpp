@@ -17,7 +17,7 @@
 */
 
 
-#include "DroidEquipmentBuilder.hpp"
+#include "DroidBuilder.hpp"
 #include <item/equipment/Droid.hpp>
 #include <managers/EntityManager.hpp>
 

@@ -37,19 +37,19 @@
 #include <builder/item/artefacts/GravityArtefactBuilder.hpp>
 #include <builder/item/artefacts/ProtectorArtefactBuilder.hpp>
 
-#include <builder/item/equipment/BakEquipmentBuilder.hpp>
-#include <builder/item/equipment/DriveEquipmentBuilder.hpp>
-#include <builder/item/equipment/DroidEquipmentBuilder.hpp>
+#include <builder/item/equipment/BakBuilder.hpp>
+#include <builder/item/equipment/DriveBuilder.hpp>
+#include <builder/item/equipment/DroidBuilder.hpp>
 #ifdef USE_EXTRA_EQUIPMENT
-#include <builder/item/equipment/EnergizerEquipmentBuilder.hpp>
-#include <builder/item/equipment/FreezerEquipmentBuilder.hpp>
+#include <builder/item/equipment/EnergizerBuilder.hpp>
+#include <builder/item/equipment/FreezerBuilder.hpp>
 #endif
-#include <builder/item/equipment/GrappleEquipmentBuilder.hpp>
-#include <builder/item/equipment/ProtectorEquipmentBuilder.hpp>
-#include <builder/item/equipment/RadarEquipmentBuilder.hpp>
-#include <builder/item/equipment/ScanerEquipmentBuilder.hpp>
-#include <builder/item/equipment/RocketEquipmentBuilder.hpp>
-#include <builder/item/equipment/LazerEquipmentBuilder.hpp>
+#include <builder/item/equipment/GrappleBuilder.hpp>
+#include <builder/item/equipment/ProtectorBuilder.hpp>
+#include <builder/item/equipment/RadarBuilder.hpp>
+#include <builder/item/equipment/ScanerBuilder.hpp>
+#include <builder/item/equipment/RocketBuilder.hpp>
+#include <builder/item/equipment/LazerBuilder.hpp>
 
 #include <builder/item/modules/BakModuleBuilder.hpp>
 #include <builder/item/modules/DriveModuleBuilder.hpp>
