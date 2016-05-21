@@ -23,11 +23,11 @@
 namespace item {
 namespace equipment {
 
-class BakEquipment : public BaseEquipment
+class Bak : public BaseEquipment
 {
 public:
-    BakEquipment(const id_type& id);
-    virtual ~BakEquipment();
+    Bak(const id_type& id);
+    virtual ~Bak();
 
     void setFuelMaxOrig(int fuelMaxOrig) { m_fuelMaxOrig = fuelMaxOrig; }
     void setFuel(int fuel)               { m_fuel = fuel; }

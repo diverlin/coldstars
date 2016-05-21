@@ -229,7 +229,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::BAK_SLOT_ID) == true)
     {
-        item::equipment::BakEquipment* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
+        item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
         if (vehicle->manage(bak_equipment) == false) {
             global::get().entityManager().addToGarbage(bak_equipment);
         }

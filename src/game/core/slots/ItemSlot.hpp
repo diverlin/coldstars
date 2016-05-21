@@ -35,7 +35,7 @@ class LazerEquipment;
 class RadarEquipment; 
 namespace item {
 namespace equipment {
-class BakEquipment;
+class Bak;
 }
 }
 class EnergizerEquipment; 
@@ -101,7 +101,7 @@ public:
     LazerEquipment*     lazerEquipment()     const { return reinterpret_cast<LazerEquipment*>(m_item); }
     RadarEquipment*     radarEquipment()     const { return reinterpret_cast<RadarEquipment*>(m_item); }
     DriveEquipment*     driveEquipment()     const { return reinterpret_cast<DriveEquipment*>(m_item); }
-    item::equipment::BakEquipment*       bakEquipment()       const { return reinterpret_cast<item::equipment::BakEquipment*>(m_item); }
+    item::equipment::Bak*       bakEquipment()       const { return reinterpret_cast<item::equipment::Bak*>(m_item); }
     EnergizerEquipment* energizerEquipment() const { return reinterpret_cast<EnergizerEquipment*>(m_item); }
     ProtectorEquipment* protectorEquipment() const { return reinterpret_cast<ProtectorEquipment*>(m_item); }
     DroidEquipment*     droidEquipment()     const { return reinterpret_cast<DroidEquipment*>(m_item); }
