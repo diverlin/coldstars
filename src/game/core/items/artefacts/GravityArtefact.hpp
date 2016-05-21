@@ -16,8 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GRAVITYARTEFACT_H
-#define GRAVITYARTEFACT_H
+#pragma once
 
 #include "../BaseItem.hpp"
 
@@ -46,4 +45,4 @@ class GravityArtefact : public BaseItem
         void ResolveData();                
 };
 
-#endif
+

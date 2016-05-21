@@ -40,10 +40,11 @@ void ProtectorEquipment::updateProperties()
 {   
     protection_add  = 0;
 
-    for (unsigned int i = 0; i < modules_vec.size(); i++)
-    {
+#ifdef USE_MODULES
+    for (unsigned int i = 0; i < modules_vec.size(); i++) {
         protection_add += ((ProtectorModule*)modules_vec[i])->GetProtectionAdd();
     }
+#endif
 
     protection = protection_orig + protection_add;
 }

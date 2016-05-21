@@ -85,13 +85,15 @@ void RocketEquipment::updateProperties()
     damage_add   = 0;
     radius_add   = 0;
     
+#ifdef USE_MODULES
     for (unsigned int i = 0; i < modules_vec.size(); i++)
     {
         ammo_max_add += ((RocketModule*)modules_vec[i])->GetAmmoMaxAdd();
         damage_add   += ((RocketModule*)modules_vec[i])->GetDamageAdd();
         radius_add   += ((RocketModule*)modules_vec[i])->GetRadiusAdd();            
     }
-        
+#endif
+
     ammo_max = ammo_max_orig + ammo_max_add;
     damage   = damage_orig + damage_add;
     radius   = radius_orig + radius_add;

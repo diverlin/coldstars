@@ -83,9 +83,9 @@ TEST(equipment,droid)
     Ship* ship = createNewShip();
     DroidEquipment* droid_equipment = global::get().droidBuilder().create(generateDroidDescriptor());
 
-    EXPECT_TRUE(ship->slot_droid()->item() == nullptr);
+    EXPECT_TRUE(ship->slotDroid()->item() == nullptr);
     ship->manage(droid_equipment);
-    EXPECT_TRUE(ship->slot_droid()->item() != nullptr);
+    EXPECT_TRUE(ship->slotDroid()->item() != nullptr);
 }
 
 TEST(equipment,grapple)
@@ -93,9 +93,9 @@ TEST(equipment,grapple)
     Ship* ship = createNewShip();
     GrappleEquipment* grapple_equipment = global::get().grappleBuilder().create(generateGrappleDescriptor());
 
-    EXPECT_TRUE(ship->slot_grapple()->item() == nullptr);
+    EXPECT_TRUE(ship->slotGrapple()->item() == nullptr);
     ship->manage(grapple_equipment);
-    EXPECT_TRUE(ship->slot_grapple()->item() != nullptr);
+    EXPECT_TRUE(ship->slotGrapple()->item() != nullptr);
 }
 
 TEST(equipment,scaner)
@@ -103,9 +103,9 @@ TEST(equipment,scaner)
     Ship* ship = createNewShip();
     ScanerEquipment* scaner_equipment = global::get().scanerBuilder().create(generateScanerDescriptor());
 
-    EXPECT_TRUE(ship->slot_scaner()->item() == nullptr);
+    EXPECT_TRUE(ship->slotScaner()->item() == nullptr);
     ship->manage(scaner_equipment);
-    EXPECT_TRUE(ship->slot_scaner()->item() != nullptr);
+    EXPECT_TRUE(ship->slotScaner()->item() != nullptr);
 }
 
 TEST(equipment,radar)
@@ -113,9 +113,9 @@ TEST(equipment,radar)
     Ship* ship = createNewShip();
     RadarEquipment* radar_equipment = global::get().radarBuilder().create(generateRadarDescriptor());
 
-    EXPECT_TRUE(ship->slot_radar()->item() == nullptr);
+    EXPECT_TRUE(ship->slotRadar()->item() == nullptr);
     ship->manage(radar_equipment);
-    EXPECT_TRUE(ship->slot_radar()->item() != nullptr);
+    EXPECT_TRUE(ship->slotRadar()->item() != nullptr);
 }
 
 TEST(equipment,protector)

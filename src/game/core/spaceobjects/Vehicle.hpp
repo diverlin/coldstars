@@ -119,12 +119,12 @@ class Vehicle : public SpaceObject
 
         const WeaponComplex& GetComplexWeapon() const { return m_ComplexWeapon; }
                 
-        ItemSlot* const slot_radar()     const { return m_SlotRadar; }
-        ItemSlot* const slot_scaner()    const { return m_SlotScaner; }
-        ItemSlot* const slot_energizer() const { return m_SlotEnergizer; }
-        ItemSlot* const slot_grapple()   const { return m_SlotGrapple; }
-        ItemSlot* const slot_droid()     const { return m_SlotDroid; }
-        ItemSlot* const slot_freezer()   const { return m_SlotFreezer; }
+        ItemSlot* const slotRadar()     const { return m_SlotRadar; }
+        ItemSlot* const slotScaner()    const { return m_SlotScaner; }
+        ItemSlot* const slotEnergizer() const { return m_SlotEnergizer; }
+        ItemSlot* const slotGrapple()   const { return m_SlotGrapple; }
+        ItemSlot* const slotDroid()     const { return m_SlotDroid; }
+        ItemSlot* const slotFreezer()   const { return m_SlotFreezer; }
 
         Npc* const npc() const { return m_npc; }
         
@@ -203,10 +203,10 @@ class Vehicle : public SpaceObject
         
         bool ManageItem(BaseItem*);
         bool ManageFunctionEquipment(BaseItem*);
-#ifdef ENABLE_MODULES
+#ifdef USE_MODULES
         bool ManageFunctionModule(BaseItem*);
 #endif
-#ifdef ENABLE_ARTEFACTS
+#ifdef USE_ARTEFACTS
         bool ManageFunctionArtefact(BaseItem*);
 #endif
         bool ManageFunctionGoodsPack(BaseItem*);

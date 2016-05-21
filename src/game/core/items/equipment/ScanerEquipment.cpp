@@ -40,11 +40,12 @@ void ScanerEquipment::updateProperties()
 {
     scan_add = 0;
 
+#ifdef USE_MODULES
     for (unsigned int i = 0; i < modules_vec.size(); i++)
     {
         scan_add += ((ScanerModule*)modules_vec[i])->GetScanAdd();
     }
-
+#endif
     scan = scan_orig + scan_add;
 }
 

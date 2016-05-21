@@ -40,8 +40,10 @@
 #include <builder/items/equipment/BakEquipmentBuilder.hpp>
 #include <builder/items/equipment/DriveEquipmentBuilder.hpp>
 #include <builder/items/equipment/DroidEquipmentBuilder.hpp>
+#ifdef USE_EXTRA_EQUIPMENT
 #include <builder/items/equipment/EnergizerEquipmentBuilder.hpp>
 #include <builder/items/equipment/FreezerEquipmentBuilder.hpp>
+#endif
 #include <builder/items/equipment/GrappleEquipmentBuilder.hpp>
 #include <builder/items/equipment/ProtectorEquipmentBuilder.hpp>
 #include <builder/items/equipment/RadarEquipmentBuilder.hpp>
@@ -105,16 +107,18 @@ global::global()
     , m_shopBuilder(new ShopBuilder)
     , m_govermentBuilder(new GovermentBuilder)
 
-    #ifdef ENABLE_ARTEFACTS
+    #ifdef USE_ARTEFACTS
     , m_gravityArtefactBuilder(new GravityArtefactBuilder)
     , m_protectorArtefactBuilder(new ProtectorArtefactBuilder)
-    #endif // ENABLE_ARTEFACTS
+    #endif // USE_ARTEFACTS
 
     , m_bakBuilder(new BakBuilder)
     , m_driveBuilder(new DriveBuilder)
     , m_droidBuilder(new DroidBuilder)
+    #ifdef USE_EXTRA_EQUIPMENT
     , m_energizerBuilder(new EnergizerBuilder)
     , m_freezerBuilder(new FreezerBuilder)
+    #endif
     , m_grappleBuilder(new GrappleBuilder)
     , m_protectorBuilder(new ProtectorBuilder)
     , m_radarBuilder(new RadarBuilder)
@@ -122,7 +126,7 @@ global::global()
     , m_rocketBuilder(new RocketBuilder)
     , m_lazerBuilder(new LazerBuilder)
 
-    #ifdef ENABLE_MODULES
+    #ifdef USE_MODULES
     , m_bakModuleBuilder(new BakModuleBuilder)
     , m_driveModuleBuilder(new DriveModuleBuilder)
     , m_droidModuleBuilder(new DroidModuleBuilder)
@@ -134,7 +138,7 @@ global::global()
     , m_scanerModuleBuilder(new ScanerModuleBuilder)
     , m_rocketModuleBuilder(new RocketModuleBuilder)
     , m_lazerModuleBuilder(new LazerModuleBuilder)
-    #endif // ENABLE_MODULES
+    #endif // USE_MODULES
 
     , m_bombBuilder(new BombBuilder)
     , m_npcBuilder(new NpcBuilder)
@@ -171,10 +175,10 @@ global::~global()
     delete m_shopBuilder;
     delete m_govermentBuilder;
 
-#ifdef ENABLE_ARTEFACTS
+#ifdef USE_ARTEFACTS
     delete m_gravityArtefactBuilder;
     delete m_protectorArtefactBuilder;
-#endif // ENABLE_ARTEFACTS
+#endif // USE_ARTEFACTS
 
     delete m_bakBuilder;
     delete m_driveBuilder;
@@ -188,7 +192,7 @@ global::~global()
     delete m_rocketBuilder;
     delete m_lazerBuilder;
 
-#ifdef ENABLE_MODULES
+#ifdef USE_MODULES
     delete m_bakModuleBuilder;
     delete m_driveModuleBuilder;
     delete m_droidModuleBuilder;
@@ -200,7 +204,7 @@ global::~global()
     delete m_scanerModuleBuilder;
     delete m_rocketModuleBuilder;
     delete m_lazerModuleBuilder;
-#endif // ENABLE_MODULES
+#endif // USE_MODULES
 
     delete m_bombBuilder;
 

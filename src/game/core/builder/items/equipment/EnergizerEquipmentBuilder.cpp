@@ -79,7 +79,7 @@ void EnergizerBuilder::createInternals(EnergizerEquipment* energizer_equipment, 
     
     ItemCommonData common_data;
     common_data.tech          = tech_level;
-#ifdef ENABLE_MODULES
+#ifdef USE_MODULES
     common_data.modules_num  = meti::getRandInt(EQUIPMENT::ENERGIZER::MODULES_NUM_MIN, EQUIPMENT::ENERGIZER::MODULES_NUM_MAX);
 #endif
     common_data.mass         = meti::getRandInt(EQUIPMENT::ENERGIZER::MASS_MIN,        EQUIPMENT::ENERGIZER::MASS_MAX);

@@ -17,8 +17,7 @@
 */
 
 
-#ifndef MODULEBASE_HPP
-#define MODULEBASE_HPP
+#pragma once
 
 #include <items/BaseItem.hpp>
 
@@ -26,29 +25,26 @@
 
 class BaseEquipment;
 
-struct UnresolvedDataBaseModule
-{
+struct UnresolvedDataBaseModule {
     id_type equipment_owner_id;
 };
 
-class BaseModule : public BaseItem
-{
-    public:
-        BaseModule();
-        virtual ~BaseModule();
-        
-        void SetEquipmentOwner(BaseEquipment* equipment_owner) { this->equipment_owner = equipment_owner; }
+class BaseModule : public BaseItem {
+public:
+    BaseModule();
+    virtual ~BaseModule();
 
-    protected:         
-        BaseEquipment* equipment_owner;
-        
-        UnresolvedDataBaseModule data_unresolved_BaseModule;
-        
-        void AddCommonInfo();   
-        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();                
+    void SetEquipmentOwner(BaseEquipment* equipment_owner) { this->equipment_owner = equipment_owner; }
+
+protected:
+    BaseEquipment* equipment_owner;
+
+    UnresolvedDataBaseModule data_unresolved_BaseModule;
+
+    void AddCommonInfo();
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 };
 
-#endif

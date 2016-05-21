@@ -16,34 +16,33 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef PROTECTORARTEFACT_H
-#define PROTECTORARTEFACT_H
+#pragma once
 
 #include "../BaseItem.hpp"
 
 class ProtectorArtefact : public BaseItem
 {
-        public:
-              ProtectorArtefact(int);
-              virtual ~ProtectorArtefact();
-        
-        void SetProtection(int protection) { this->protection = protection; };
-        
-        int GetProtection() const { return protection; };
-        
-            virtual void Save(boost::property_tree::ptree&) const;
-        virtual void Load(const boost::property_tree::ptree&);
-        virtual void Resolve();
-        
-    private:  
-        int protection;
-           
-             virtual void addUniqueInfo();  
-             virtual void AddCommonInfo();   
-             
-             void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();                
+public:
+    ProtectorArtefact(int);
+    virtual ~ProtectorArtefact();
+
+    void SetProtection(int protection) { this->protection = protection; };
+
+    int GetProtection() const { return protection; };
+
+    virtual void Save(boost::property_tree::ptree&) const;
+    virtual void Load(const boost::property_tree::ptree&);
+    virtual void Resolve();
+
+private:
+    int protection;
+
+    virtual void addUniqueInfo();
+    virtual void AddCommonInfo();
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 };
 
-#endif
+

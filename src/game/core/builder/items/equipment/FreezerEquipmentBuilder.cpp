@@ -78,7 +78,7 @@ void FreezerBuilder::createInternals(FreezerEquipment* freezer_equipment, TYPE::
     
     ItemCommonData common_data;
     common_data.tech         = tech_level;
-#ifdef ENABLE_MODULES
+#ifdef USE_MODULES
     common_data.modules_num = meti::getRandInt(EQUIPMENT::FREEZER::MODULES_NUM_MIN, EQUIPMENT::FREEZER::MODULES_NUM_MAX);
 #endif
     common_data.mass            = meti::getRandInt(EQUIPMENT::FREEZER::MASS_MIN,        EQUIPMENT::FREEZER::MASS_MAX);
