@@ -1,0 +1,13 @@
+#include <item/equipment/Bak.hpp>
+#include <item/equipment/Drive.hpp>
+#include <item/equipment/Droid.hpp>
+#include <item/equipment/Grapple.hpp>
+#include <item/equipment/Lazer.hpp>
+#include <item/equipment/Protector.hpp>
+#include <item/equipment/Radar.hpp>
+#include <item/equipment/Rocket.hpp>
+#include <item/equipment/Scaner.hpp>
+#ifdef USE_EXTRA_EQUIPMENT
+#include <item/equipment/Energizer.hpp>
+#include <item/equipment/Freezer.hpp>
+#endif

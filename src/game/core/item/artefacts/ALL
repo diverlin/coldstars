@@ -1,0 +1,2 @@
+#include <item/artefacts/GravityArtefact.hpp>
+#include <item/artefacts/ProtectorArtefact.hpp>
