@@ -22,8 +22,11 @@
 #include <types/IdType.hpp>
 #include <descriptors/Base.hpp>
 
+namespace item {
+namespace equipment {
 class BakEquipment;
-
+}
+}
 
 class BakBuilder
 {
@@ -31,14 +34,14 @@ class BakBuilder
         BakBuilder();
         ~BakBuilder();
 
-        BakEquipment* createTemplate(id_type id = NONE_ID) const;
-        BakEquipment* create(const descriptor::Base&) const;
+        item::equipment::BakEquipment* createTemplate(id_type id = NONE_ID) const;
+        item::equipment::BakEquipment* create(const descriptor::Base&) const;
                                      
     private:                
         BakBuilder(const BakBuilder&) = delete;
         BakBuilder& operator=(const BakBuilder&) = delete;
 
-        void createInternals(BakEquipment*, const descriptor::Base&) const;
+        void createInternals(item::equipment::BakEquipment*, const descriptor::Base&) const;
 }; 
 
     

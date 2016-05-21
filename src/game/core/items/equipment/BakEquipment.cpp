@@ -21,6 +21,9 @@
 #include <ceti/Logger.hpp>
 #include "../../items//modules/BakModule.hpp"
 
+namespace item {
+namespace equipment {
+
 BakEquipment::BakEquipment(const id_type& id)
 {
     setId(id);
@@ -131,3 +134,5 @@ void BakEquipment::ResolveData()
     LOG(" BakEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
+} // namespace equipment
+} // namespace item

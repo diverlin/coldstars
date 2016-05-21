@@ -44,7 +44,7 @@
 TEST(equipment,bak)
 {
     const descriptor::Base& descr = generateBakDescriptor();
-    BakEquipment* bak_equipment = global::get().bakBuilder().create(descr);
+    item::equipment::BakEquipment* bak_equipment = global::get().bakBuilder().create(descr);
 
     EXPECT_EQ(descr.fuel(), bak_equipment->fuel());
     EXPECT_EQ( descr.fuel(), bak_equipment->fuelMax());
@@ -68,7 +68,7 @@ TEST(equipment,bak)
 TEST(ship_with_equipment, bak)
 {
     Ship* ship = createNewShip();
-    BakEquipment* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
+    item::equipment::BakEquipment* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
 
     EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot() != nullptr);
     EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() == nullptr);
@@ -94,7 +94,7 @@ TEST(ship_with_equipment, drive)
 TEST(ship_with_equipment, bak_and_drive)
 {
     Ship* ship = createNewShip();
-    BakEquipment* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
+    item::equipment::BakEquipment* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
     DriveEquipment* drive_equipment = global::get().driveBuilder().create(generateDriveDescriptor());
 
     EXPECT_EQ(ship->GetProperties().hyper, 0);
