@@ -43,32 +43,32 @@ ProtectorBuilder::~ProtectorBuilder()
 
 Protector* ProtectorBuilder::createTemplate(id_type id) const
 {
-    Protector* protector_equipment = new Protector(id);
-    assert(protector_equipment);
+    Protector* protector = new Protector(id);
+    assert(protector);
 
-    global::get().entityManager().reg(protector_equipment);
+    global::get().entityManager().reg(protector);
     
-    return protector_equipment;
+    return protector;
 } 
    
 Protector* ProtectorBuilder::create(const descriptor::Base& descriptor) const
 {
-    Protector* protector_equipment = createTemplate();
-    createInternals(protector_equipment, descriptor);
+    Protector* protector = createTemplate();
+    createInternals(protector, descriptor);
         
-    return protector_equipment;
+    return protector;
 } 
          
-void ProtectorBuilder::createInternals(Protector* protector_equipment, const descriptor::Base& descriptor) const
+void ProtectorBuilder::createInternals(Protector* protector, const descriptor::Base& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
 
-    protector_equipment->SetProtectionOrig(descriptor.protection());
-    protector_equipment->setParentSubTypeId(TYPE::ENTITY::PROTECTOR_SLOT_ID);
-    protector_equipment->setItemCommonData(common_data);
+    protector->SetProtectionOrig(descriptor.protection());
+    protector->setParentSubTypeId(TYPE::ENTITY::PROTECTOR_SLOT_ID);
+    protector->setItemCommonData(common_data);
             
-    protector_equipment->updateProperties();
-    protector_equipment->CountPrice();
+    protector->updateProperties();
+    protector->CountPrice();
 }
 
 } // namespace equipment

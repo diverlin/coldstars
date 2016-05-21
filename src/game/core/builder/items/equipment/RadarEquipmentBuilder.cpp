@@ -43,32 +43,32 @@ RadarBuilder::~RadarBuilder()
 
 Radar* RadarBuilder::createTemplate(id_type id) const
 {
-    Radar* radar_equipment = new Radar(id);
-    assert(radar_equipment);
+    Radar* radar = new Radar(id);
+    assert(radar);
 
-    global::get().entityManager().reg(radar_equipment);
+    global::get().entityManager().reg(radar);
     
-    return radar_equipment;
+    return radar;
 } 
   
 Radar* RadarBuilder::create(const descriptor::Base& descriptor) const
 {
-    Radar* radar_equipment = createTemplate();
-    createInternals(radar_equipment, descriptor);
+    Radar* radar = createTemplate();
+    createInternals(radar, descriptor);
         
-    return radar_equipment;
+    return radar;
 } 
         
-void RadarBuilder::createInternals(Radar* radar_equipment, const descriptor::Base& descriptor) const
+void RadarBuilder::createInternals(Radar* radar, const descriptor::Base& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
 
-    radar_equipment->SetRadiusOrig(descriptor.radius());
-    radar_equipment->setParentSubTypeId(TYPE::ENTITY::RADAR_SLOT_ID);
-    radar_equipment->setItemCommonData(common_data);
+    radar->SetRadiusOrig(descriptor.radius());
+    radar->setParentSubTypeId(TYPE::ENTITY::RADAR_SLOT_ID);
+    radar->setItemCommonData(common_data);
 
-    radar_equipment->updateProperties();
-    radar_equipment->CountPrice();
+    radar->updateProperties();
+    radar->CountPrice();
 }
 
 } // namespace equipment

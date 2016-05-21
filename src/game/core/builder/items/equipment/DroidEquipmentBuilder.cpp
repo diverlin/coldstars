@@ -45,32 +45,32 @@ DroidBuilder::~DroidBuilder()
 
 Droid* DroidBuilder::createTemplate(id_type id) const
 {
-    Droid* droid_equipment = new Droid(id);
-    assert(droid_equipment);
+    Droid* droid = new Droid(id);
+    assert(droid);
 
-    global::get().entityManager().reg(droid_equipment);
+    global::get().entityManager().reg(droid);
     
-    return droid_equipment;
+    return droid;
 } 
 
 Droid* DroidBuilder::create(const descriptor::Base& descriptor) const
 {
-    Droid* droid_equipment = createTemplate();
-    createInternals(droid_equipment, descriptor);
+    Droid* droid = createTemplate();
+    createInternals(droid, descriptor);
         
-    return droid_equipment;
+    return droid;
 }  
             
-void DroidBuilder::createInternals(Droid* droid_equipment, const descriptor::Base& descriptor) const
+void DroidBuilder::createInternals(Droid* droid, const descriptor::Base& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
    
-    droid_equipment->SetRepairOrig(descriptor.repair());
-    droid_equipment->setParentSubTypeId(TYPE::ENTITY::DROID_SLOT_ID);
-    droid_equipment->setItemCommonData(common_data);
+    droid->SetRepairOrig(descriptor.repair());
+    droid->setParentSubTypeId(TYPE::ENTITY::DROID_SLOT_ID);
+    droid->setItemCommonData(common_data);
             
-    droid_equipment->updateProperties();
-    droid_equipment->CountPrice();
+    droid->updateProperties();
+    droid->CountPrice();
 }
 
 } // namespace equipment
