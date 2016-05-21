@@ -1,0 +1,9 @@
+#include <item/modules/BakModule.hpp>
+#include <item/modules/DriveModule.hpp>
+#include <item/modules/DroidModule.hpp>
+#include <item/modules/GrappleModule.hpp>
+#include <item/modules/LazerModule.hpp>
+#include <item/modules/ProtectorModule.hpp>
+#include <item/modules/RadarModule.hpp>
+#include <item/modules/RocketModule.hpp>
+#include <item/modules/ScanerModule.hpp>
