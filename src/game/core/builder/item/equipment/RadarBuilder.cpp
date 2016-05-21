@@ -17,7 +17,7 @@
 */
 
 
-#include <builder/item/equipment/RadarEquipmentBuilder.hpp>
+#include <builder/item/equipment/RadarBuilder.hpp>
 #include <item/equipment/Radar.hpp>
 #include <managers/EntityManager.hpp>
 

@@ -17,7 +17,7 @@
 */
 
 
-#include <builder/items/equipment/FreezerEquipmentBuilder.hpp>
+#include <builder/items/equipment/FreezerBuilder.hpp>
 #include <items/equipment/FreezerEquipment.hpp>
 #include <managers/EntityManager.hpp>
 

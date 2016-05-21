@@ -21,14 +21,14 @@ if (NOT USE_EXTRA_EQUIPMENT)
     file(GLOB_RECURSE ${PROJECT}_EXTRA_EQUIPMENT_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
         item/equipment/Energizer.cpp;
         item/equipment/Freezer.cpp
-        builder/item/equipment/EnergizerEquipmentBuilder.cpp;
-        builder/item/equipment/FreezerEquipmentBuilder.cpp
+        builder/item/equipment/EnergizerBuilder.cpp;
+        builder/item/equipment/FreezerBuilder.cpp
     )
     file(GLOB_RECURSE ${PROJECT}_EXTRA_EQUIPMENT_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
         item/equipment/Energizer.hpp;
         item/equipment/Freezer.hpp;
-        builder/item/equipment/EnergizerEquipmentBuilder.hpp;
-        builder/item/equipment/FreezerEquipmentBuilder.hpp
+        builder/item/equipment/EnergizerBuilder.hpp;
+        builder/item/equipment/FreezerBuilder.hpp
     )
 
 #    message("_EXTRA_EQUIPMENT_SOURCE=${${PROJECT}_EXTRA_EQUIPMENT_SOURCE}")

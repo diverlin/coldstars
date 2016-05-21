@@ -17,8 +17,8 @@
 */
 
 
-#include "EnergizerEquipmentBuilder.hpp"
-#include <items/equipment/EnergizerEquipment.hpp>
+#include "EnergizerBuilder.hpp"
+#include <items/equipment/Energizer.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>

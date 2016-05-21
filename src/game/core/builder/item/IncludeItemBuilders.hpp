@@ -18,18 +18,18 @@
 
 #pragma once
 
-#include "equipment/BakEquipmentBuilder.hpp"
-#include "equipment/DriveEquipmentBuilder.hpp"
-#include "equipment/GrappleEquipmentBuilder.hpp"
-#include "equipment/LazerEquipmentBuilder.hpp"
-#include "equipment/ProtectorEquipmentBuilder.hpp"
-#include "equipment/RocketEquipmentBuilder.hpp"
-#include "equipment/ScanerEquipmentBuilder.hpp"
-#include "equipment/DroidEquipmentBuilder.hpp"
-#include "equipment/RadarEquipmentBuilder.hpp"
+#include "equipment/BakBuilder.hpp"
+#include "equipment/DriveBuilder.hpp"
+#include "equipment/GrappleBuilder.hpp"
+#include "equipment/LazerBuilder.hpp"
+#include "equipment/ProtectorBuilder.hpp"
+#include "equipment/RocketBuilder.hpp"
+#include "equipment/ScanerBuilder.hpp"
+#include "equipment/DroidBuilder.hpp"
+#include "equipment/RadarBuilder.hpp"
 #ifdef USE_EXTRA_EQUIPMENT
-#include "equipment/FreezerEquipmentBuilder.hpp"
-#include "equipment/EnergizerEquipmentBuilder.hpp"
+#include "equipment/FreezerBuilder.hpp"
+#include "equipment/EnergizerBuilder.hpp"
 #endif
 
 #ifdef USE_MODULES
