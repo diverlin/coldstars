@@ -27,26 +27,26 @@ class AnimationEffect2D;
 
 class BaseEquipment : public BaseItem
 {
-    public:
-        BaseEquipment();
-        virtual ~BaseEquipment();
-        
-        virtual void putChildrenToGarbage() const;
-        
-        bool InsertModule(BaseModule*);
-        
-        //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
+public:
+    BaseEquipment();
+    virtual ~BaseEquipment();
 
-    protected:
-        std::vector<BaseModule*> modules_vec;    // needs for inserted modules drawing
-        
-        jeti::AnimationEffect2D* animation_notfunctioning;
-        
-        virtual void AddCommonInfo();
-        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+    virtual void putChildrenToGarbage() const;
+
+    bool InsertModule(BaseModule*);
+
+    //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
+
+protected:
+    std::vector<BaseModule*> modules_vec;    // needs for inserted modules drawing
+
+    //jeti::AnimationEffect2D* animation_notfunctioning;
+
+    virtual void AddCommonInfo();
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 };
 
 

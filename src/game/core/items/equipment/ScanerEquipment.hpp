@@ -17,39 +17,38 @@
 */
 
 
-#ifndef SCANEREQUIPMENT_H
-#define SCANEREQUIPMENT_H
+#pragma once
 
 #include "BaseEquipment.hpp"
 
 class ScanerEquipment : public BaseEquipment
 {
-      public:
-            ScanerEquipment(const id_type& id);
-            virtual ~ScanerEquipment();
+public:
+    ScanerEquipment(const id_type& id);
+    virtual ~ScanerEquipment();
 
-                void SetScanOrig(int scan_orig)  { this->scan_orig = scan_orig; };
-        int GetScan() const { return scan; };
-           
-            virtual void updateProperties();
-               
-            void CountPrice();
-                            
-            virtual void Save(boost::property_tree::ptree&) const;
-        virtual void Load(const boost::property_tree::ptree&);
-        virtual void Resolve();
-        
-        private:
-            int scan_orig;
-            int scan_add;
-            int scan;
+    void SetScanOrig(int scan_orig)  { this->scan_orig = scan_orig; };
+    int GetScan() const { return scan; };
 
-             void virtual addUniqueInfo();
-             std::string GetScanStr();
-                
-                void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();  
+    virtual void updateProperties();
+
+    void CountPrice();
+
+    virtual void Save(boost::property_tree::ptree&) const;
+    virtual void Load(const boost::property_tree::ptree&);
+    virtual void Resolve();
+
+private:
+    int scan_orig;
+    int scan_add;
+    int scan;
+
+    void virtual addUniqueInfo();
+    std::string GetScanStr();
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 };
 
-#endif 
+

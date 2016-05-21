@@ -17,8 +17,7 @@
 */
 
 
-#ifndef DROIDEQUIPMENT_H
-#define DROIDEQUIPMENT_H
+#pragma once
 
 #include "BaseEquipment.hpp"
 
@@ -53,4 +52,4 @@ class DroidEquipment : public BaseEquipment
         void ResolveData();  
 };
 
-#endif 
+

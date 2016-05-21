@@ -159,14 +159,14 @@ void Npc::remeberAgressor(Vehicle* agressor)
 {
     for (std::set<AgressorData>::iterator it=data_agressor_set.begin(); it!=data_agressor_set.end(); ++it)
     {
-        if (it->npc_id == agressor->GetOwnerNpc()->id())
+        if (it->npc_id == agressor->npc()->id())
         {
             if (it->last_date != global::get().gameDate())
             {
                 int counter = it->counter;
                 data_agressor_set.erase(it);
                 
-                AgressorData agressor_data(agressor->GetOwnerNpc()->id(), global::get().gameDate(), ++counter);
+                AgressorData agressor_data(agressor->npc()->id(), global::get().gameDate(), ++counter);
                 data_agressor_set.insert(agressor_data);
             }
 
@@ -174,7 +174,7 @@ void Npc::remeberAgressor(Vehicle* agressor)
         }
     }
 
-    AgressorData agressor_data(agressor->GetOwnerNpc()->id(), global::get().gameDate(), 1);
+    AgressorData agressor_data(agressor->npc()->id(), global::get().gameDate(), 1);
     data_agressor_set.insert(agressor_data);
 }
 
@@ -191,7 +191,7 @@ void Npc::ScenarioFireVehicleAgressor()
     {
         for (std::set<AgressorData>::iterator it = data_agressor_set.begin(); it != data_agressor_set.end(); ++it)
         {
-            if (observation.visible_VEHICLE_pair_vec[i].object->GetOwnerNpc()->id() == it->npc_id)
+            if (observation.visible_VEHICLE_pair_vec[i].object->npc()->id() == it->npc_id)
             {
                 vehicle->GetComplexWeapon().DeactivateAllWeapons();
 
@@ -284,7 +284,7 @@ bool Npc::BuyGoods()
     TYPE::ENTITY subtype_id = (TYPE::ENTITY)meti::getRandInt((int)TYPE::ENTITY::MINERALS_ID, (int)TYPE::ENTITY::EXCLUSIVE_ID);
 
     // hard coded logic
-    int amount_to_hold      = 0.8*vehicle->GetFreeSpace();
+    int amount_to_hold      = 0.8*vehicle->free_space();
     int amount_to_buy     = GetCredits()/shop->GetPrice(subtype_id);
     int amount_available     = shop->GetAmount(subtype_id);
     

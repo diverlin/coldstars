@@ -95,9 +95,9 @@ void Ship::UpdateInSpace(int time, bool show_effect)
     if (time > 0) {
         UpdateSpecialAction();
         
-        if (GetOwnerNpc()) {
-            GetOwnerNpc()->UpdateInSpace(time, show_effect);
-            GetComplexWeapon().Fire(time, GetOwnerNpc()->GetSkills().GetAttackNormalized(), show_effect);
+        if (npc()) {
+            npc()->UpdateInSpace(time, show_effect);
+            GetComplexWeapon().Fire(time, npc()->GetSkills().GetAttackNormalized(), show_effect);
 
             updateOrientation();
 

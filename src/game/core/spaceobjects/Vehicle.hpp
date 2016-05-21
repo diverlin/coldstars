@@ -107,7 +107,7 @@ class Vehicle : public SpaceObject
         
         bool UnpackContainerItemToCargoSlot(Container*);
         
-        int GetFreeSpace() const { return m_properties.free_space; }
+        int free_space() const { return m_properties.free_space; }
         
         void BindOwnerNpc(Npc*);
                 
@@ -119,14 +119,14 @@ class Vehicle : public SpaceObject
 
         const WeaponComplex& GetComplexWeapon() const { return m_ComplexWeapon; }
                 
-        ItemSlot* const radarSlot()     const { return m_SlotRadar; }
-        ItemSlot* const scanerSlot()    const { return m_SlotScaner; }
-        ItemSlot* const energizerSlot() const { return m_SlotEnergizer; }
-        ItemSlot* const grappleSlot()   const { return m_SlotGrapple; }
-        ItemSlot* const droidSlot()     const { return m_SlotDroid; }
-        ItemSlot* const freezerSlot()   const { return m_SlotFreezer; }
+        ItemSlot* const slot_radar()     const { return m_SlotRadar; }
+        ItemSlot* const slot_scaner()    const { return m_SlotScaner; }
+        ItemSlot* const slot_energizer() const { return m_SlotEnergizer; }
+        ItemSlot* const slot_grapple()   const { return m_SlotGrapple; }
+        ItemSlot* const slot_droid()     const { return m_SlotDroid; }
+        ItemSlot* const slot_freezer()   const { return m_SlotFreezer; }
 
-        Npc* const GetOwnerNpc() const { return m_npc; }
+        Npc* const npc() const { return m_npc; }
         
         ItemSlot* const GetEmptyCargoSlot();
         GoodsPack* GetGoodsPack() const;
