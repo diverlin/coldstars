@@ -27,9 +27,11 @@ ItemCommonData extractCommonData(const descriptor::Base& descriptor)
     data.id          = descriptor.id();
     data.race        = (TYPE::RACE)descriptor.race();
     data.tech        = (TYPE::TECH)descriptor.tech();
-    data.modules_num = descriptor.modules();
+    data.modules_num = descriptor.modulesNum();
     data.mass        = descriptor.mass();
     data.condition   = descriptor.condition();
-    data.deterioration = descriptor.deteoration();
+    data.deterioration = descriptor.deterioration();
+    data.price         = descriptor.price();
+    data.descriptor_type = descriptor.type();
     return data;
 }

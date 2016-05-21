@@ -17,8 +17,9 @@
 */
 
 #include "Scaner.hpp"
-#include "../../common/constants.hpp"
-//#include <ceti/StringUtils.hpp>
+//[[deprecated("remove")]]
+#include <common/constants.hpp>
+
 #include <ceti/Logger.hpp>
 #ifdef USE_MODULES
 #include <item/modules/ScanerModule.hpp>
@@ -29,7 +30,7 @@ namespace equipment {
 
 Scaner::Scaner(const id_type& id)
     :
-      scan_orig(0)
+      m_scan_orig(0)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
@@ -43,7 +44,7 @@ Scaner::~Scaner()
 /* virtual */
 void Scaner::updateProperties()
 {
-    scan_add = 0;
+    m_scan_add = 0;
 
 #ifdef USE_MODULES
     for (unsigned int i = 0; i < modules_vec.size(); i++)
@@ -51,13 +52,13 @@ void Scaner::updateProperties()
         scan_add += ((ScanerModule*)modules_vec[i])->GetScanAdd();
     }
 #endif
-    scan = scan_orig + scan_add;
+    m_scan = m_scan_orig + m_scan_add;
 }
 
-void Scaner::CountPrice()
+void Scaner::countPrice()
 {
-    float scan_rate          = (float)scan_orig / EQUIPMENT::SCANER::SCAN_MIN;
-    float modules_num_rate   = (float)m_data_item.modules_num / EQUIPMENT::SCANER::MODULES_NUM_MAX;
+    float scan_rate          = (float)m_scan_orig / EQUIPMENT::SCANER::SCAN_MIN;
+    float modules_num_rate   = (float)modulesNum() / EQUIPMENT::SCANER::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::SCANER::SCAN_WEIGHT * scan_rate +
             EQUIPMENT::SCANER::MODULES_NUM_WEIGHT * modules_num_rate;
@@ -75,12 +76,12 @@ void Scaner::addUniqueInfo()
     //    info.addNameStr("scan:");     info.addValueStr(GetScanStr());
 }
 
-std::string Scaner::GetScanStr()
+std::string Scaner::str()
 {
-    if (scan_add == 0)
-        return std::to_string(scan_orig);
+    if (m_scan_add == 0)
+        return std::to_string(m_scan_orig);
     else
-        return std::to_string(scan_orig) + "+" + std::to_string(scan_add);
+        return std::to_string(m_scan_orig) + "+" + std::to_string(m_scan_add);
 }
 
 
@@ -116,14 +117,14 @@ void Scaner::SaveData(boost::property_tree::ptree& save_ptree, const std::string
 {
     LOG(" ScanerEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"scan_orig", scan_orig);
+    save_ptree.put(root+"scan_orig", m_scan_orig);
 }
 
 void Scaner::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" ScanerEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
-    scan_orig = load_ptree.get<int>("scan_orig");
+    m_scan_orig = load_ptree.get<int>("scan_orig");
 }                
 
 void Scaner::ResolveData()

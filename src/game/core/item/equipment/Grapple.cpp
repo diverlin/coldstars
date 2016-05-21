@@ -215,7 +215,7 @@ void Grapple::CountPrice()
     float radius_rate        = (float)radius_orig / EQUIPMENT::GRAPPLE::RADIUS_MIN;
     float speed_rate         = (float)speed_orig / EQUIPMENT::GRAPPLE::SPEED_MIN;
 
-    float modules_num_rate   = (float)m_data_item.modules_num / EQUIPMENT::GRAPPLE::MODULES_NUM_MAX;
+    float modules_num_rate   = (float)modulesNum() / EQUIPMENT::GRAPPLE::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::GRAPPLE::STRENGTH_WEIGHT * strength_rate +
             EQUIPMENT::GRAPPLE::RADIUS_WEIGHT * radius_rate +

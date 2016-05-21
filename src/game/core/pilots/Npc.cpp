@@ -100,7 +100,7 @@ void Npc::UpdateInKosmoportInStatic()
         state_machine.UpdateInStaticInDock();
 
         vehicle->ManageItemsInCargo();
-        vehicle->SellItemsInCargo();
+        vehicle->sellItemsInCargo();
         vehicle->LaunchingEvent();
     }
 
@@ -234,7 +234,7 @@ bool Npc::CheckPossibilityToScan(Vehicle* vehicle)
         return true;
     }
 
-    if (this->vehicle->GetProperties().scan > vehicle->GetProperties().protection)
+    if (this->vehicle->properties().scan > vehicle->properties().protection)
     {
         return true;
     }
@@ -284,7 +284,7 @@ bool Npc::BuyGoods()
     TYPE::ENTITY subtype_id = (TYPE::ENTITY)meti::getRandInt((int)TYPE::ENTITY::MINERALS_ID, (int)TYPE::ENTITY::EXCLUSIVE_ID);
 
     // hard coded logic
-    int amount_to_hold      = 0.8*vehicle->free_space();
+    int amount_to_hold      = 0.8*vehicle->freeSpace();
     int amount_to_buy     = GetCredits()/shop->GetPrice(subtype_id);
     int amount_available     = shop->GetAmount(subtype_id);
     

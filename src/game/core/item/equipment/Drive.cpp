@@ -55,7 +55,7 @@ void Drive::CountPrice()
 {
     float speed_rate         = (float)m_speed_orig / EQUIPMENT::DRIVE::SPEED_MIN;
     float hyper_rate         = (float)m_hyper_orig / EQUIPMENT::DRIVE::HYPER_MIN;
-    float modules_num_rate   = (float)m_data_item.modules_num / EQUIPMENT::DRIVE::MODULES_NUM_MAX;
+    float modules_num_rate   = (float)modulesNum() / EQUIPMENT::DRIVE::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::DRIVE::SPEED_WEIGHT * speed_rate +
             EQUIPMENT::DRIVE::HYPER_WEIGHT * hyper_rate +

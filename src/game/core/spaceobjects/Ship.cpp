@@ -101,7 +101,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 
             updateOrientation();
 
-            if (GetProperties().speed > 0) {
+            if (properties().speed > 0) {
                 GetComplexDrive().UpdatePosition();
             }
 

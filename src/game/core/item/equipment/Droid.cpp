@@ -70,7 +70,7 @@ void Droid::updateInStatic()
 void Droid::CountPrice()
 {
     float repair_rate        = (float)repair_orig / EQUIPMENT::DROID::REPAIR_MIN;
-    float modules_num_rate   = (float)m_data_item.modules_num / EQUIPMENT::DROID::MODULES_NUM_MAX;
+    float modules_num_rate   = (float)modulesNum() / EQUIPMENT::DROID::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::DROID::REPAIR_WEIGHT * repair_rate +
             EQUIPMENT::DROID::MODULES_NUM_WEIGHT * modules_num_rate;

@@ -38,84 +38,88 @@ struct UnresolvedDataBaseItem
     id_type item_slot_id;
 };
 
-class Base : public ceti::Orientation, public ::Base // Orientation ??
+class Base : public ::Base
 {
-    public:
-        Base();
-        virtual ~Base();
-        
-        virtual void putChildrenToGarbage() const {}
-        
-        void setParentSubTypeId(TYPE::ENTITY parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
-        void setItemCommonData(const ItemCommonData& data_item)
-        {
-            setId(data_item.id);
+public:
+    Base();
+    virtual ~Base();
 
-            m_data_item = data_item;
-            m_deterioration = data_item.deterioration;
-            setCondition(data_item.condition);
-        }
-        void setItemSlot(ItemSlot* item_slot)  { m_item_slot = item_slot; }
-        void setCondition(int condition) { m_condition = condition; }
-        
-        ItemSlot* itemSlot() const { return m_item_slot; }
-                                    
-        int mass()          const { return m_data_item.mass; }
-        int condition()     const { return m_condition; }
-        int price()         const { return m_price; }
-        int basePrice()     const { return m_data_item.price; }
+    virtual void putChildrenToGarbage() const {}
 
-        TYPE::TECH tech() const { return m_data_item.tech; }
+    void setParentSubTypeId(TYPE::ENTITY parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
+    void setItemCommonData(const ItemCommonData& data_item)
+    {
+        setId(data_item.id);
 
-        TYPE::ENTITY parentSubTypeId() const { return m_parent_subtype_id; }
-        TYPE::RACE race() const { return m_race_id; }
+        m_data_item = data_item;
+        m_deterioration = data_item.deterioration;
+        setCondition(data_item.condition);
+    }
+    void setItemSlot(ItemSlot* item_slot)  { m_item_slot = item_slot; }
+    void setCondition(int condition) { m_condition = condition; }
 
-        bool isDamaged()    const { return (m_condition < 0); }
-        bool isLocked()     const { return (m_locked_turns > 0); }
-        int isFunctioning() const { return ( !isDamaged() && !isLocked() ); }
-        
-        void useNormalDeterioration();
-        void useOverloadDeterioration();
-        
-        void damageEvent();
-        void deteriorationEvent();
-        void lockEvent(int);
-        bool repairEvent();
-        
-        virtual void updateProperties() {}
-        virtual void updateInStatic() { updateLock(); }
-        
-//        void UpdateInfo();
-        
-//        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
-//        void RenderKorpus(const jeti::Renderer&, const ceti::Box2D&);
-//        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
+    ItemSlot* itemSlot() const { return m_item_slot; }
 
-    protected:
-        TYPE::RACE m_race_id = TYPE::RACE::NONE_ID;
+    int mass()          const { return m_data_item.mass; }
+    int condition()     const { return m_condition; }
+    int price()         const { return m_price; }
+    int basePrice()     const { return m_data_item.price; }
+    int deterioration() const { return m_data_item.deterioration; }
 
-        int m_locked_turns = 0;
-        int m_condition = 0;
-        int m_price = 0;
-        int m_deterioration = 0;
+    int modulesNum() const { return m_data_item.modules_num; }
+    int descriptorType() const { return m_data_item.descriptor_type; }
 
-        TYPE::ENTITY m_parent_subtype_id = TYPE::ENTITY::NONE_ID;
-        
-        ItemCommonData m_data_item;
-        UnresolvedDataBaseItem m_data_unresolved_BaseItem;
-//        InfoTable info;
+    TYPE::TECH tech() const { return m_data_item.tech; }
 
-        void updateLock();
-        
-        virtual void AddCommonInfo()=0;
-        virtual void addUniqueInfo()=0;   
-        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const; 
-        void LoadData(const boost::property_tree::ptree&); 
-        void ResolveData();
+    TYPE::ENTITY parentSubTypeId() const { return m_parent_subtype_id; }
+    TYPE::RACE race() const { return m_race_id; }
 
-    private:
-        ItemSlot* m_item_slot = nullptr;
+    bool isDamaged()    const { return (m_condition < 0); }
+    bool isLocked()     const { return (m_locked_turns > 0); }
+    int isFunctioning() const { return ( !isDamaged() && !isLocked() ); }
+
+    void useNormalDeterioration();
+    void useOverloadDeterioration();
+
+    void damageEvent();
+    void deteriorationEvent();
+    void lockEvent(int);
+    bool repairEvent();
+
+    virtual void updateProperties() {}
+    virtual void updateInStatic() { updateLock(); }
+
+    //        void UpdateInfo();
+
+    //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true);
+    //        void RenderKorpus(const jeti::Renderer&, const ceti::Box2D&);
+    //        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
+
+protected:
+    TYPE::RACE m_race_id = TYPE::RACE::NONE_ID;
+
+    int m_locked_turns = 0;
+    int m_condition = 0;
+    int m_price = 0;
+    int m_deterioration = 0;
+
+    TYPE::ENTITY m_parent_subtype_id = TYPE::ENTITY::NONE_ID;
+
+    ItemCommonData m_data_item;
+    UnresolvedDataBaseItem m_data_unresolved_BaseItem;
+    //        InfoTable info;
+
+    void updateLock();
+
+    virtual void AddCommonInfo()=0;
+    virtual void addUniqueInfo()=0;
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
+
+private:
+    ItemSlot* m_item_slot = nullptr;
 };
 
 } // namespace item

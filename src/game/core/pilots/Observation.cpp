@@ -151,7 +151,7 @@ void Observation::FindVisibleAsteroidsInSpaceInStatic()
 
     for (unsigned int i=0; i<asteroid_vec.size(); i++) {
         float dist = meti::distance(npc_owner->GetVehicle()->center(), asteroid_vec[i]->center());
-        if (dist < npc_owner->GetVehicle()->GetProperties().radar) {
+        if (dist < npc_owner->GetVehicle()->properties().radar) {
             visible_ASTEROID_pair_vec.push_back( Pair<Asteroid*>(asteroid_vec[i], dist) );
             see.ASTEROID = true;
         }
@@ -173,11 +173,11 @@ void Observation::FindVisibleContainersInSpaceInStatic()
     for (unsigned int i=0; i<container_vec.size(); i++)
     {
         float dist = meti::distance(npc_owner->GetVehicle()->center(), container_vec[i]->center());
-        if (dist < npc_owner->GetVehicle()->GetProperties().radar)
+        if (dist < npc_owner->GetVehicle()->properties().radar)
         {
             visible_CONTAINER_pair_vec.push_back( Pair<Container*>(container_vec[i], dist) );
             int container_mass = container_vec[i]->mass();
-            if(container_mass < npc_owner->GetVehicle()->GetProperties().grab_strength)
+            if(container_mass < npc_owner->GetVehicle()->properties().grab_strength)
             {
                 visible_pickable_CONTAINER_pair_vec.push_back( Pair<Container*>(container_vec[i], dist) );
                 see.pickable_CONTAINER = true;
@@ -203,7 +203,7 @@ void Observation::FindVisibleVehiclesInSpaceInStatic()
     {
         float dist = meti::distance(npc_owner->GetVehicle()->center(), vehicle_vec[i]->center());
         //std::cout<<"dist, radius = "<<dist<<", "<<npc_owner->GetVehicle()->propetries.radius<<std::endl;
-        if (dist < npc_owner->GetVehicle()->GetProperties().radar)
+        if (dist < npc_owner->GetVehicle()->properties().radar)
         {
             visible_VEHICLE_pair_vec.push_back( Pair<Vehicle*>(vehicle_vec[i], dist) );
         }

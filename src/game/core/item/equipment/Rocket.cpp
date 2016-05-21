@@ -107,7 +107,7 @@ void Rocket::CountPrice()
     float ammo_rate     = (float)ammo_max_orig / EQUIPMENT::ROCKET::AMMO_MIN;
     float damage_rate   = (float)damage_orig / EQUIPMENT::ROCKET::DAMAGE_MIN;
     float radius_rate   = (float)radius_orig / EQUIPMENT::ROCKET::RADIUS_MIN;
-    float modules_num_rate   = (float)m_data_item.modules_num / EQUIPMENT::ROCKET::MODULES_NUM_MAX;
+    float modules_num_rate   = (float)modulesNum() / EQUIPMENT::ROCKET::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::ROCKET::AMMO_WEIGHT * ammo_rate + 
                    EQUIPMENT::ROCKET::DAMAGE_WEIGHT * damage_rate + 

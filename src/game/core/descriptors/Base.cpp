@@ -34,7 +34,7 @@ std::string Base::KEY_TECH = "tech";
 std::string Base::KEY_MODULES_NUM = "modules";
 std::string Base::KEY_MASS = "mass";
 std::string Base::KEY_CONDITION = "condition";
-std::string Base::KEY_DETEORATION = "deteoration";
+std::string Base::KEY_DETERIORATION = "deterioration";
 std::string Base::KEY_FUEL = "fuel";
 std::string Base::KEY_SPEED = "speed";
 std::string Base::KEY_HYPER = "hyper";
@@ -42,7 +42,7 @@ std::string Base::KEY_REPAIR = "repair";
 std::string Base::KEY_STRENGTH = "strength";
 std::string Base::KEY_SCAN = "scan";
 std::string Base::KEY_PROTECTION = "protection";
-std::string Base::KEY_BASE_PRICE = "base_price";
+std::string Base::KEY_PRICE = "price";
 
 std::string keyStr(const Key& key) {
     switch(key) {
@@ -58,7 +58,7 @@ std::string keyStr(const Key& key) {
     case Key::MODULES_NUM: return Base::KEY_MODULES_NUM; break;
     case Key::MASS: return Base::KEY_MASS; break;
     case Key::CONDITION: return Base::KEY_CONDITION; break;
-    case Key::DETEORATION: return Base::KEY_DETEORATION; break;
+    case Key::DETERIORATION: return Base::KEY_DETERIORATION; break;
     case Key::FUEL: return Base::KEY_FUEL; break;
     case Key::SPEED: return Base::KEY_SPEED; break;
     case Key::HYPER: return Base::KEY_HYPER; break;
@@ -66,7 +66,7 @@ std::string keyStr(const Key& key) {
     case Key::STRENGTH: return Base::KEY_STRENGTH; break;
     case Key::SCAN: return Base::KEY_SCAN; break;
     case Key::PROTECTION: return Base::KEY_PROTECTION; break;
-    case Key::BASE_PRICE: return Base::KEY_BASE_PRICE; break;
+    case Key::PRICE: return Base::KEY_PRICE; break;
     default: throw std::runtime_error("ERROR: fixme: unknown descriptor key"); break;
     }
 }
@@ -167,7 +167,7 @@ Base::tech() const
 }
 
 const int_type&
-Base::modules() const
+Base::modulesNum() const
 {
     return get(Key::MODULES_NUM);
 }
@@ -185,9 +185,9 @@ Base::condition() const
 }
 
 const int_type&
-Base::deteoration() const
+Base::deterioration() const
 {
-    return get(Key::DETEORATION);
+    return get(Key::DETERIORATION);
 }
 
 const int_type&
@@ -233,9 +233,9 @@ Base::protection() const
 }
 
 const int_type&
-Base::base_price() const
+Base::price() const
 {
-    return get(Key::BASE_PRICE);
+    return get(Key::PRICE);
 }
 
 

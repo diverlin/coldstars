@@ -124,7 +124,7 @@ void DriveComplex::DefineDistance()
         
         case NAVIGATOR_ACTION::COLLECTING_ID:
         {
-            m_TargetDistance = m_OwnerVehicle->GetProperties().grab_radius/2; 
+            m_TargetDistance = m_OwnerVehicle->properties().grab_radius/2; 
             m_TargetOffset = meti::getRandXYVec3f(m_Target->collisionRadius()/2, m_Target->collisionRadius(), m_Target->center().z);
             
             break;            
@@ -297,7 +297,7 @@ void DriveComplex::CalcPath()
     int round_counter_max = 2000;//2 + 2*M_PI/angle_step;
     int round_counter = 0;
 
-    float speed_base = m_OwnerVehicle->GetProperties().speed;
+    float speed_base = m_OwnerVehicle->properties().speed;
     
     glm::vec3 new_center(m_OwnerVehicle->center());
     glm::vec3 target_dir = glm::normalize(m_TargetPos - m_OwnerVehicle->center());

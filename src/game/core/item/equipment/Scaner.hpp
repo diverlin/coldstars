@@ -21,6 +21,8 @@
 
 #include "Base.hpp"
 
+class ScanerBuilder;
+
 namespace item {
 namespace equipment {
 
@@ -30,25 +32,29 @@ public:
     Scaner(const id_type& id);
     virtual ~Scaner();
 
-    void SetScanOrig(int scan_orig)  { this->scan_orig = scan_orig; };
-    int GetScan() const { return scan; };
+    int scan() const { return m_scan; }
 
-    virtual void updateProperties();
-
-    void CountPrice();
-
+    [[deprecated("move out")]]
     virtual void Save(boost::property_tree::ptree&) const;
     virtual void Load(const boost::property_tree::ptree&);
     virtual void Resolve();
 
 private:
-    int scan_orig;
-    int scan_add;
-    int scan;
+    void setScanOrig(int scan_orig)  { m_scan_orig = scan_orig; }
+    virtual void updateProperties();
+    void countPrice();
+
+    friend ScanerBuilder;
+
+private:
+    int m_scan_orig = 0;
+    int m_scan_add = 0;
+    int m_scan = 0;
 
     void virtual addUniqueInfo();
-    std::string GetScanStr();
+    std::string str();
 
+    [[deprecated("move out")]]
     void SaveData(boost::property_tree::ptree&, const std::string&) const;
     void LoadData(const boost::property_tree::ptree&);
     void ResolveData();
