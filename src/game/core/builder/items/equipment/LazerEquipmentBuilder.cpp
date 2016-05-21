@@ -47,23 +47,23 @@ LazerBuilder::~LazerBuilder()
 
 Lazer* LazerBuilder::createTemplate(id_type id) const
 { 
-    Lazer* lazer_equipment = new Lazer(id);
-    assert(lazer_equipment);
+    Lazer* lazer = new Lazer(id);
+    assert(lazer);
 
-    global::get().entityManager().reg(lazer_equipment);
+    global::get().entityManager().reg(lazer);
     
-    return lazer_equipment;
+    return lazer;
 } 
 
 Lazer* LazerBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {
-    Lazer* lazer_equipment = createTemplate();
-    createInternals(lazer_equipment, tech_level, race_id, damage_orig, radius_orig);
+    Lazer* lazer = createTemplate();
+    createInternals(lazer, tech_level, race_id, damage_orig, radius_orig);
 
-    return lazer_equipment;
+    return lazer;
 } 
 
-void LazerBuilder::createInternals(Lazer* lazer_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
+void LazerBuilder::createInternals(Lazer* lazer, TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -89,14 +89,14 @@ void LazerBuilder::createInternals(Lazer* lazer_equipment, TYPE::TECH tech_level
     common_data.condition   = meti::getRandInt(EQUIPMENT::LAZER::CONDITION_MIN, EQUIPMENT::LAZER::CONDITION_MAX);
     common_data.deterioration = 1;
 
-    lazer_equipment->SetDamageOrig(damage_orig);
-    lazer_equipment->SetRadiusOrig(radius_orig);
-    //alpitodorender lazer_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
-    lazer_equipment->setParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
-    lazer_equipment->setItemCommonData(common_data);
+    lazer->SetDamageOrig(damage_orig);
+    lazer->SetRadiusOrig(radius_orig);
+    //alpitodorender lazer->SetRenderData(mesh, texOb_item, texOb_item->size());
+    lazer->setParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
+    lazer->setItemCommonData(common_data);
 
-    lazer_equipment->updateProperties();
-    lazer_equipment->CountPrice();
+    lazer->updateProperties();
+    lazer->CountPrice();
 }
 
 } // namespace equipment

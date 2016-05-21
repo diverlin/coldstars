@@ -42,23 +42,23 @@ RocketBuilder::~RocketBuilder()
 
 Rocket* RocketBuilder::createTemplate(id_type id) const
 {
-    Rocket* rocket_equipment = new Rocket(id);
-    assert(rocket_equipment);
+    Rocket* rocket = new Rocket(id);
+    assert(rocket);
 
-    global::get().entityManager().reg(rocket_equipment);
+    global::get().entityManager().reg(rocket);
     
-    return rocket_equipment;
+    return rocket;
 } 
 
 Rocket* RocketBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {
-    Rocket* rocket_equipment = createTemplate();
-    createInternals(rocket_equipment, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
+    Rocket* rocket = createTemplate();
+    createInternals(rocket, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
 
-    return rocket_equipment;
+    return rocket;
 } 
 
-void RocketBuilder::createInternals(Rocket* rocket_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+void RocketBuilder::createInternals(Rocket* rocket, TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
@@ -95,17 +95,17 @@ void RocketBuilder::createInternals(Rocket* rocket_equipment, TYPE::TECH tech_le
     data_bullet.live_time     = ENTITY::ROCKET::LIFE_TIME;
     data_bullet.angular_speed = ENTITY::ROCKET::ANGULAR_SPEED;
     
-    rocket_equipment->SetAmmoMaxOrig(ammo_max_orig);
-    rocket_equipment->SetDamageOrig(damage_orig);
-    rocket_equipment->SetRadiusOrig(radius_orig);
-    rocket_equipment->SetBulletData(data_bullet);
-    rocket_equipment->SetAmmo(ammo_max_orig*0.6);
-    //alpitodorender rocket_equipment->SetRenderData(mesh, texOb_item, texOb_item->size());
-    rocket_equipment->setParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
-    rocket_equipment->setItemCommonData(common_data);
+    rocket->SetAmmoMaxOrig(ammo_max_orig);
+    rocket->SetDamageOrig(damage_orig);
+    rocket->SetRadiusOrig(radius_orig);
+    rocket->SetBulletData(data_bullet);
+    rocket->SetAmmo(ammo_max_orig*0.6);
+    //alpitodorender rocket->SetRenderData(mesh, texOb_item, texOb_item->size());
+    rocket->setParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
+    rocket->setItemCommonData(common_data);
     
-    rocket_equipment->updateProperties();
-    rocket_equipment->CountPrice();
+    rocket->updateProperties();
+    rocket->CountPrice();
 }
 
 } // namespace equipment

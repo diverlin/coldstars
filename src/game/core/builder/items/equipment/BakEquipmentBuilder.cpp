@@ -37,33 +37,33 @@ BakBuilder::~BakBuilder()
 
 item::equipment::Bak* BakBuilder::createTemplate(id_type id) const
 {
-    item::equipment::Bak* bak_equipment = new item::equipment::Bak(id);
-    assert(bak_equipment);
+    item::equipment::Bak* bak = new item::equipment::Bak(id);
+    assert(bak);
 
-    global::get().entityManager().reg(bak_equipment);
+    global::get().entityManager().reg(bak);
     
-    return bak_equipment;
+    return bak;
 } 
        
 item::equipment::Bak* BakBuilder::create(const descriptor::Base& descriptor) const
 {
-    item::equipment::Bak* bak_equipment = createTemplate();
-    createInternals(bak_equipment, descriptor);
+    item::equipment::Bak* bak = createTemplate();
+    createInternals(bak, descriptor);
     
-    return bak_equipment;
+    return bak;
 }
                           
-void BakBuilder::createInternals(item::equipment::Bak* bak_equipment, const descriptor::Base& descriptor) const
+void BakBuilder::createInternals(item::equipment::Bak* bak, const descriptor::Base& descriptor) const
 {
     ItemCommonData data = extractCommonData(descriptor);
 
-    bak_equipment->setFuelMaxOrig(descriptor.fuel());
-    bak_equipment->setFuel(descriptor.fuel());
-    bak_equipment->setParentSubTypeId(TYPE::ENTITY::BAK_SLOT_ID);
-    bak_equipment->setItemCommonData(data);
+    bak->setFuelMaxOrig(descriptor.fuel());
+    bak->setFuel(descriptor.fuel());
+    bak->setParentSubTypeId(TYPE::ENTITY::BAK_SLOT_ID);
+    bak->setItemCommonData(data);
                                     
-    bak_equipment->updateProperties();
-    bak_equipment->countPrice();
+    bak->updateProperties();
+    bak->countPrice();
 }
 
 } // namespace equipment

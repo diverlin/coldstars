@@ -42,35 +42,35 @@ GrappleBuilder::~GrappleBuilder()
 
 Grapple* GrappleBuilder::createTemplate(id_type id) const
 {
-    Grapple* grapple_equipment = new Grapple(id);
-    assert(grapple_equipment);
+    Grapple* grapple = new Grapple(id);
+    assert(grapple);
 
-    global::get().entityManager().reg(grapple_equipment);
+    global::get().entityManager().reg(grapple);
     
-    return grapple_equipment;
+    return grapple;
 } 
 
 Grapple* GrappleBuilder::create(const descriptor::Base& descriptor) const
 {
-    Grapple* grapple_equipment = createTemplate();
-    createInternals(grapple_equipment, descriptor);
+    Grapple* grapple = createTemplate();
+    createInternals(grapple, descriptor);
 
-    return grapple_equipment;
+    return grapple;
 } 
 
-void GrappleBuilder::createInternals(Grapple* grapple_equipment, const descriptor::Base& descriptor) const
+void GrappleBuilder::createInternals(Grapple* grapple, const descriptor::Base& descriptor) const
 {
     ItemCommonData data = extractCommonData(descriptor);
 
-    grapple_equipment->SetStrengthOrig(descriptor.strength());
-    grapple_equipment->SetRadiusOrig(descriptor.radius());
-    grapple_equipment->SetSpeedOrig(descriptor.speed());
+    grapple->SetStrengthOrig(descriptor.strength());
+    grapple->SetRadiusOrig(descriptor.radius());
+    grapple->SetSpeedOrig(descriptor.speed());
 
-    grapple_equipment->setParentSubTypeId(TYPE::ENTITY::GRAPPLE_SLOT_ID);
-    grapple_equipment->setItemCommonData(data);
+    grapple->setParentSubTypeId(TYPE::ENTITY::GRAPPLE_SLOT_ID);
+    grapple->setItemCommonData(data);
     
-    grapple_equipment->updateProperties();
-    grapple_equipment->CountPrice();
+    grapple->updateProperties();
+    grapple->CountPrice();
 }
 
 } // namespace equipment

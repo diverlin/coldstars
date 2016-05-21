@@ -49,32 +49,32 @@ ScanerBuilder::~ScanerBuilder()
 
 Scaner* ScanerBuilder::createTemplate(id_type id) const
 {
-    Scaner* scaner_equipment = new Scaner(id);
-    assert(scaner_equipment);
+    Scaner* scaner = new Scaner(id);
+    assert(scaner);
 
-    global::get().entityManager().reg(scaner_equipment);
+    global::get().entityManager().reg(scaner);
     
-    return scaner_equipment;
+    return scaner;
 } 
 
 Scaner* ScanerBuilder::create(const descriptor::Base& descriptor) const
 {
-    Scaner* scaner_equipment = createTemplate();
-    createInternals(scaner_equipment, descriptor);
+    Scaner* scaner = createTemplate();
+    createInternals(scaner, descriptor);
         
-    return scaner_equipment;
+    return scaner;
 } 
             
-void ScanerBuilder::createInternals(Scaner* scaner_equipment, const descriptor::Base& descriptor) const
+void ScanerBuilder::createInternals(Scaner* scaner, const descriptor::Base& descriptor) const
 {
     ItemCommonData common_data = extractCommonData(descriptor);
     
-    scaner_equipment->setScanOrig(descriptor.scan());
-    scaner_equipment->setParentSubTypeId(TYPE::ENTITY::SCANER_SLOT_ID);
-    scaner_equipment->setItemCommonData(common_data);
+    scaner->setScanOrig(descriptor.scan());
+    scaner->setParentSubTypeId(TYPE::ENTITY::SCANER_SLOT_ID);
+    scaner->setItemCommonData(common_data);
 
-    scaner_equipment->updateProperties();
-    scaner_equipment->countPrice();
+    scaner->updateProperties();
+    scaner->countPrice();
 }
 
 } // namespace equipment
