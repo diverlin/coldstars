@@ -22,8 +22,11 @@
 #include <types/IdType.hpp>
 #include <descriptors/Base.hpp>
 
+namespace item {
+namespace equipment {
 class GrappleEquipment;
-
+}
+}
 
 class GrappleBuilder
 {
@@ -31,9 +34,9 @@ class GrappleBuilder
         GrappleBuilder();
         ~GrappleBuilder();
 
-        GrappleEquipment* createTemplate(id_type id = NONE_ID) const;
-        GrappleEquipment* create(const descriptor::Base&) const;
+        item::equipment::GrappleEquipment* createTemplate(id_type id = NONE_ID) const;
+        item::equipment::GrappleEquipment* create(const descriptor::Base&) const;
                                      
     private:
-        void createInternals(GrappleEquipment*, const descriptor::Base&) const;
+        void createInternals(item::equipment::GrappleEquipment*, const descriptor::Base&) const;
 }; 

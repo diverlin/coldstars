@@ -17,13 +17,14 @@
 */
 
 
-#ifndef ROCKETEQUIPMENT_HPP
-#define ROCKETEQUIPMENT_HPP
+#pragma once
 
 #include <types/IdType.hpp>
 #include <items/equipment/BaseEquipment.hpp>
 #include <common/BulletData.hpp>
 
+namespace item {
+namespace equipment {
 
 class RocketEquipment : public BaseEquipment
 { 
@@ -81,4 +82,5 @@ class RocketEquipment : public BaseEquipment
         void ResolveData();  
 };
 
-#endif 
+} // namespace equipment
+} // namespace item

@@ -35,8 +35,10 @@
 #include <slots/ItemSlot.hpp>
 
 #include <items/equipment/RocketEquipment.hpp>
+#ifdef USE_EXTRA_EQUIPMENT
 #include <items/equipment/EnergizerEquipment.hpp>
 #include <items/equipment/FreezerEquipment.hpp>
+#endif
 #include <items/equipment/RadarEquipment.hpp>
 #include <items/equipment/BakEquipment.hpp>
 #include <items/equipment/ProtectorEquipment.hpp>
@@ -45,8 +47,10 @@
 #include <items/equipment/ScanerEquipment.hpp>
 #include <items/equipment/GrappleEquipment.hpp>
 #include <items/others/GoodsPack.hpp>
+#ifdef USE_ARTEFACTS
 #include <items/artefacts/GravityArtefact.hpp>
 #include <items/artefacts/ProtectorArtefact.hpp>
+#endif
 
 //#include <effects/Shield.hpp>
 //#include <jeti/particlesystem/DriveEffect.hpp>
@@ -153,7 +157,7 @@ bool Vehicle::isSlotExists(TYPE::ENTITY slot_subtype_id) const
         if (m_SlotTotal_vec[i]->subTypeId() == slot_subtype_id) {
             return true;
         }
-    }    
+    }
     return false;
 }
 
@@ -163,29 +167,29 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
 
     switch(slot->subTypeId())
     {
-        case TYPE::ENTITY::WEAPON_SLOT_ID:
-        {
-            float border_start = 0.2;
-            float border_end   = 0.8;
-            
-            float pos_x = meti::getRandFloat(border_start, border_end) - 0.5;
-            float pos_y = meti::getRandFloat(border_start, border_end) - 0.5;
+    case TYPE::ENTITY::WEAPON_SLOT_ID:
+    {
+        float border_start = 0.2;
+        float border_end   = 0.8;
 
-            slot->turrel()->setParentCenter(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
-            points().Add(slot->turrel()->pCenter(), slot->turrel()->pParentCenter());
-            m_ComplexWeapon.AddSlot(slot);
-            
-            break;
-        }
-        case TYPE::ENTITY::DRIVE_SLOT_ID:     { m_ComplexDrive.SetDriveSlot(slot); break; }
-        case TYPE::ENTITY::BAK_SLOT_ID:       { m_ComplexDrive.SetBakSlot(slot); break; }
-        case TYPE::ENTITY::PROTECTOR_SLOT_ID: { m_ComplexProtector.SetProtectorSlot(slot); break; }
-        case TYPE::ENTITY::RADAR_SLOT_ID:     { m_SlotRadar  = slot; break; }
-        case TYPE::ENTITY::SCANER_SLOT_ID:    { m_SlotScaner = slot; break; }
-        case TYPE::ENTITY::ENERGIZER_SLOT_ID: { m_SlotEnergizer = slot; break; }
-        case TYPE::ENTITY::GRAPPLE_SLOT_ID:   { m_SlotGrapple   = slot; break; }
-        case TYPE::ENTITY::DROID_SLOT_ID:     { m_SlotDroid     = slot; break; }
-        case TYPE::ENTITY::FREEZER_SLOT_ID:   { m_SlotFreezer   = slot; break; }
+        float pos_x = meti::getRandFloat(border_start, border_end) - 0.5;
+        float pos_y = meti::getRandFloat(border_start, border_end) - 0.5;
+
+        slot->turrel()->setParentCenter(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
+        points().Add(slot->turrel()->pCenter(), slot->turrel()->pParentCenter());
+        m_ComplexWeapon.AddSlot(slot);
+
+        break;
+    }
+    case TYPE::ENTITY::DRIVE_SLOT_ID:     { m_ComplexDrive.SetDriveSlot(slot); break; }
+    case TYPE::ENTITY::BAK_SLOT_ID:       { m_ComplexDrive.SetBakSlot(slot); break; }
+    case TYPE::ENTITY::PROTECTOR_SLOT_ID: { m_ComplexProtector.SetProtectorSlot(slot); break; }
+    case TYPE::ENTITY::RADAR_SLOT_ID:     { m_SlotRadar  = slot; break; }
+    case TYPE::ENTITY::SCANER_SLOT_ID:    { m_SlotScaner = slot; break; }
+    case TYPE::ENTITY::ENERGIZER_SLOT_ID: { m_SlotEnergizer = slot; break; }
+    case TYPE::ENTITY::GRAPPLE_SLOT_ID:   { m_SlotGrapple   = slot; break; }
+    case TYPE::ENTITY::DROID_SLOT_ID:     { m_SlotDroid     = slot; break; }
+    case TYPE::ENTITY::FREEZER_SLOT_ID:   { m_SlotFreezer   = slot; break; }
     }
 
     m_SlotTotal_vec.push_back(slot);
@@ -223,14 +227,14 @@ bool Vehicle::ManageItem(item::Base* item)
 {
     switch(item->typeId())
     {
-        case TYPE::ENTITY::EQUIPMENT_ID:    { return ManageFunctionEquipment(item); break; }
+    case TYPE::ENTITY::EQUIPMENT_ID:    { return ManageFunctionEquipment(item); break; }
 #ifdef USE_MODULES
-        case TYPE::ENTITY::MODULE_ID:       { return ManageFunctionModule(item); break; }
+    case TYPE::ENTITY::MODULE_ID:       { return ManageFunctionModule(item); break; }
 #endif
 #ifdef USE_ARTEFACTS
-        case TYPE::ENTITY::ARTEFACT_ID:     { return ManageFunctionArtefact(item); break; }
+    case TYPE::ENTITY::ARTEFACT_ID:     { return ManageFunctionArtefact(item); break; }
 #endif
-        case TYPE::ENTITY::GOODS_ID:        { return ManageFunctionGoodsPack(item); break; }
+    case TYPE::ENTITY::GOODS_ID:        { return ManageFunctionGoodsPack(item); break; }
     }
     
     return false;
@@ -279,7 +283,7 @@ bool Vehicle::ManageFunctionModule(item::BaseItem* item)
                 return ((BaseEquipment*)m_SlotFunct_vec[i]->item())->InsertModule((BaseModule*)item);
             }
         }
-    }    
+    }
     return false;
 }
 #endif
@@ -316,7 +320,7 @@ ItemSlot* const Vehicle::GetEmptyArtefactSlot() const
         if (!m_SlotArtef_vec[i]->item()) {
             return m_SlotArtef_vec[i];
         }
-    }    
+    }
     return nullptr;
 }
 
@@ -341,7 +345,7 @@ ItemSlot* const Vehicle::GetCargoSlotWithGoods(TYPE::ENTITY requested_goods_subt
                 }
             }
         }
-    }    
+    }
     return nullptr;
 }
 
@@ -412,17 +416,17 @@ bool Vehicle::SellItem(item::Base* item)
     int item_mass = item->mass();
     switch(item->typeId())
     {
-        case TYPE::ENTITY::GOODS_ID:
-        {
-            earn_money = ((Kosmoport*)m_Land)->GetShop()->BuyGoods((GoodsPack*)item);
-            break;
-        }
+    case TYPE::ENTITY::GOODS_ID:
+    {
+        earn_money = ((Kosmoport*)m_Land)->GetShop()->BuyGoods((GoodsPack*)item);
+        break;
+    }
 
-        case TYPE::ENTITY::EQUIPMENT_ID:
-        {
-            earn_money = ((Kosmoport*)m_Land)->GetStore()->BuyItem(item);
-            break;
-        }
+    case TYPE::ENTITY::EQUIPMENT_ID:
+    {
+        earn_money = ((Kosmoport*)m_Land)->GetStore()->BuyItem(item);
+        break;
+    }
     }
     
     if (earn_money > 0)
@@ -484,48 +488,48 @@ void Vehicle::UpdateSpecialAction()
 {
     switch(m_SpecialActionId)
     {
-        case VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID: { break; }
+    case VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID: { break; }
 
-        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID:
+    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID:
+    {
+        // alpitodorender if (UpdateFadeInEffect() == true)
         {
-            // alpitodorender if (UpdateFadeInEffect() == true)
-            {
-                DockingEvent();
-                m_SpecialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
-            }
-            
-            break;
+            DockingEvent();
+            m_SpecialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
         }
 
-        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:
+        break;
+    }
+
+    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:
+    {
+        // alpitodorender if (UpdateFadeOutEffect() == true)
         {
-            // alpitodorender if (UpdateFadeOutEffect() == true)
-            {
-                m_SpecialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
-            }
-            
-            break;
+            m_SpecialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
         }
 
-        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID:
-        {
-            // alpitodorender if (UpdateFadeInEffect() == true)
-            {
-                HyperJumpEvent(m_ComplexDrive.GetTarget()->starsystem());
-            }
+        break;
+    }
 
-            break;
+    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID:
+    {
+        // alpitodorender if (UpdateFadeInEffect() == true)
+        {
+            HyperJumpEvent(m_ComplexDrive.GetTarget()->starsystem());
         }
 
-        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:
-        {
-            // alpitodorender if (UpdateFadeOutEffect() == true)
-            {
-                m_SpecialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
-            }
+        break;
+    }
 
-            break;
+    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:
+    {
+        // alpitodorender if (UpdateFadeOutEffect() == true)
+        {
+            m_SpecialActionId = VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID;
         }
+
+        break;
+    }
     }
 }
 
@@ -549,35 +553,35 @@ void Vehicle::DockingEvent()
 
     switch(m_ComplexDrive.GetTarget()->typeId())
     {
-        case TYPE::ENTITY::PLANET_ID:
+    case TYPE::ENTITY::PLANET_ID:
+    {
+        Planet* planet = ((Planet*)m_ComplexDrive.GetTarget());
+        planet->GetLand()->AddVehicle(this);
+
+        break;
+    }
+
+    case TYPE::ENTITY::VEHICLE_ID:
+    {
+        switch(m_ComplexDrive.GetTarget()->subTypeId())
         {
-            Planet* planet = ((Planet*)m_ComplexDrive.GetTarget());
-            planet->GetLand()->AddVehicle(this);
+        case TYPE::ENTITY::SPACESTATION_ID:
+        {
+            SpaceStation* spacestation = ((SpaceStation*)m_ComplexDrive.GetTarget());
+            spacestation->GetLand()->AddVehicle(this);
 
             break;
         }
 
-        case TYPE::ENTITY::VEHICLE_ID:
+        case TYPE::ENTITY::SHIP_ID:
         {
-            switch(m_ComplexDrive.GetTarget()->subTypeId())
-            {
-                case TYPE::ENTITY::SPACESTATION_ID:
-                {
-                    SpaceStation* spacestation = ((SpaceStation*)m_ComplexDrive.GetTarget());
-                    spacestation->GetLand()->AddVehicle(this);
-
-                    break;
-                }
-
-                case TYPE::ENTITY::SHIP_ID:
-                {
-                    //..
-                    break;
-                }
-            }
-
+            //..
             break;
         }
+        }
+
+        break;
+    }
     }
 
     m_ComplexDrive.ResetTarget();
@@ -591,23 +595,23 @@ void Vehicle::LaunchingEvent()
     {
         switch(m_ParentVehicleSlot->GetOwner()->typeId())
         {
-            case TYPE::ENTITY::ANGAR_ID:
-            {
-                int angleInD = meti::getRandInt(0, 360);
-                glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
-                glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
-                glm::vec3 angle(0,0,angleInD);
-                starsystem()->add(this, ((SpaceObject*)m_Land->GetOwner())->center() + offset_pos3, angle, nullptr);
-                m_Land->RemoveVehicle(this);
+        case TYPE::ENTITY::ANGAR_ID:
+        {
+            int angleInD = meti::getRandInt(0, 360);
+            glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
+            glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
+            glm::vec3 angle(0,0,angleInD);
+            starsystem()->add(this, ((SpaceObject*)m_Land->GetOwner())->center() + offset_pos3, angle, nullptr);
+            m_Land->RemoveVehicle(this);
 
-                break;
-            }
-                
-            case TYPE::ENTITY::VEHICLE_ID:
-            {
-                //..
-                break;
-            }
+            break;
+        }
+
+        case TYPE::ENTITY::VEHICLE_ID:
+        {
+            //..
+            break;
+        }
         }
     }
     else
@@ -635,9 +639,9 @@ void Vehicle::remeberAgressor(Vehicle* agressor)
 float Vehicle::dissipateRate() const
 {
     float rate = m_properties.protection*0.01f;
-//    if (m_npc) {
-//        rate *= m_npc->GetSkills().GetDefenceNormalized();
-//    }
+    //    if (m_npc) {
+    //        rate *= m_npc->GetSkills().GetDefenceNormalized();
+    //    }
     return rate;
 }
 
@@ -809,7 +813,7 @@ void Vehicle::DecreaseMass(int d_mass)
 
 void Vehicle::UpdatePropertiesSpeed()
 {
-    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesSpeed");    
+    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesSpeed");
     m_properties.speed = 0;
     if (!m_ComplexDrive.GetDriveSlot())
         return;
@@ -885,25 +889,6 @@ void Vehicle::UpdatePropertiesJump()
     m_properties.hyper = std::min(m_ComplexDrive.GetDriveSlot()->driveEquipment()->hyper(), m_ComplexDrive.GetBakSlot()->bakEquipment()->fuel());
 }
 
-void Vehicle::UpdatePropertiesEnergy()
-{
-    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesEnergy");
-    
-    m_properties.energy = 0;
-    m_properties.hibernate_mode_enabled = true;
-
-    if (m_SlotEnergizer->item() != nullptr)
-    {
-        if (m_SlotEnergizer->energizerEquipment()->isFunctioning() == true)
-        {
-            m_properties.energy = m_SlotEnergizer->energizerEquipment()->GetEnergy();
-            m_properties.hibernate_mode_enabled = false;
-        }
-    }
-    
-    UpdatePropertiesProtection();
-}
-
 void Vehicle::UpdatePropertiesProtection()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesProtection");
@@ -959,6 +944,7 @@ void Vehicle::IncreaseArmor(int repair)
 
 void Vehicle::UpdatePropertiesFreeze()
 {
+#ifdef USE_EXTRA_EQUIPMENT
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesFreeze");
     
     m_properties.freeze = 0;
@@ -970,7 +956,31 @@ void Vehicle::UpdatePropertiesFreeze()
             m_properties.freeze = m_SlotFreezer->freezerEquipment()->GetFreeze();
         }
     }
+#endif
 }
+
+void Vehicle::UpdatePropertiesEnergy()
+{
+#ifdef USE_EXTRA_EQUIPMENT
+    //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesEnergy");
+
+    m_properties.energy = 0;
+    m_properties.hibernate_mode_enabled = true;
+
+    if (m_SlotEnergizer->item() != nullptr)
+    {
+        if (m_SlotEnergizer->energizerEquipment()->isFunctioning() == true)
+        {
+            m_properties.energy = m_SlotEnergizer->energizerEquipment()->GetEnergy();
+            m_properties.hibernate_mode_enabled = false;
+        }
+    }
+
+    UpdatePropertiesProtection();
+#endif
+}
+
+
 
 void Vehicle::UpdatePropertiesScan()
 {
@@ -1009,6 +1019,7 @@ void Vehicle::UpdatePropertiesGrab()
 
 void Vehicle::UpdateArtefactInfluence()
 {
+#ifdef USE_ARTEFACTS
     //LOG("Vehicle("+std::to_string(id())+")::UpdateArtefactInfluence");
     
     m_properties.artefact_gravity = 0;
@@ -1022,17 +1033,17 @@ void Vehicle::UpdateArtefactInfluence()
             {
                 switch(m_SlotArtef_vec[i]->item()->subTypeId())
                 {
-                    case TYPE::ENTITY::GRAVITY_ARTEFACT_ID:
-                    {
-                        m_properties.artefact_gravity += ((GravityArtefact*)m_SlotArtef_vec[i]->item())->GetGravity();
-                        break;
-                    }
+                case TYPE::ENTITY::GRAVITY_ARTEFACT_ID:
+                {
+                    m_properties.artefact_gravity += ((GravityArtefact*)m_SlotArtef_vec[i]->item())->GetGravity();
+                    break;
+                }
 
-                    case TYPE::ENTITY::PROTECTOR_ARTEFACT_ID:
-                    {
-                        m_properties.artefact_protection += ((ProtectorArtefact*)m_SlotArtef_vec[i]->item())->GetProtection();
-                        break;
-                    }
+                case TYPE::ENTITY::PROTECTOR_ARTEFACT_ID:
+                {
+                    m_properties.artefact_protection += ((ProtectorArtefact*)m_SlotArtef_vec[i]->item())->GetProtection();
+                    break;
+                }
                 }
             }
         }
@@ -1047,6 +1058,7 @@ void Vehicle::UpdateArtefactInfluence()
     {
         UpdatePropertiesProtection();
     }
+#endif
 }
 
 ///* virtual override final */
@@ -1204,6 +1216,7 @@ void Vehicle::LockRandomItem(int locked_turns)
 
 bool Vehicle::TryToConsumeEnergy(int energy)
 {
+#ifdef USE_EXTRA_EQUIPMENT
     //LOG("Vehicle("+std::to_string(id())+")::TryToConsumeEnergy(energy="+std::to_string(energy)+")");
     
     if (m_properties.energy > energy)
@@ -1215,10 +1228,14 @@ bool Vehicle::TryToConsumeEnergy(int energy)
     }
     
     return false;
+#else
+    return true;
+#endif
 }
 
 bool Vehicle::TryToGenerateEnergy(int energy)
 {
+#ifdef USE_EXTRA_EQUIPMENT
     //LOG("Vehicle("+std::to_string(id())+")::TryToGenerateEnergy(energy="+std::to_string(energy)+")");
     
     int energy_max = m_SlotEnergizer->energizerEquipment()->GetEnergyMax();
@@ -1245,7 +1262,11 @@ bool Vehicle::TryToGenerateEnergy(int energy)
     }
     
     return false;
+#else
+    return true;
+#endif
 }
+
 
 STATUS Vehicle::CheckGrabStatus() const
 {
@@ -1393,32 +1414,32 @@ void Vehicle::ResolveData()
 
     switch(placeTypeId())
     {
-        case TYPE::PLACE::SPACE_ID:
-        {
-            starsystem()->add(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction, parent());
-            break;
-        }
+    case TYPE::PLACE::SPACE_ID:
+    {
+        starsystem()->add(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction, parent());
+        break;
+    }
 
-        case TYPE::PLACE::KOSMOPORT_ID:
-        {
-            ((VehicleSlot*)global::get().entityManager().get(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this);
-            break;
-        }
+    case TYPE::PLACE::KOSMOPORT_ID:
+    {
+        ((VehicleSlot*)global::get().entityManager().get(data_unresolved_Vehicle.parent_vehicleslot_id ))->InsertVehicle(this);
+        break;
+    }
 
-        case TYPE::PLACE::HYPER_SPACE_ID:
-        {
-            //std::cout<<"xxx="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
-            ((StarSystem*)global::get().entityManager().get(data_unresolved_Vehicle.starsystem_hyper_id))->hyperSpace().AddVehicle(this);
-            //std::cout<<"yyy="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
-            
-            break;
-        }
+    case TYPE::PLACE::HYPER_SPACE_ID:
+    {
+        //std::cout<<"xxx="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
+        ((StarSystem*)global::get().entityManager().get(data_unresolved_Vehicle.starsystem_hyper_id))->hyperSpace().AddVehicle(this);
+        //std::cout<<"yyy="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
 
-        case TYPE::PLACE::NATURELAND_ID:
-        {
-            ((NatureLand*)global::get().entityManager().get(data_unresolved_Vehicle.land_id))->AddVehicle(this);
-            break;
-        }
+        break;
+    }
+
+    case TYPE::PLACE::NATURELAND_ID:
+    {
+        ((NatureLand*)global::get().entityManager().get(data_unresolved_Vehicle.land_id))->AddVehicle(this);
+        break;
+    }
     }
     
     m_ComplexWeapon.PrepareWeapons();
@@ -1459,12 +1480,12 @@ std::string getVehicleSpecialActionStr(VEHICLE_SPECIAL_ACTION_TYPE type_id)
 {
     switch(type_id)
     {
-        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID:     { return "INITIATE_DOCKING_ID"; break; }
-        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:    { return "INITIATE_LAUNCHING_ID"; break; }
-        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID:        { return "INITIATE_JUMPIN_ID"; break; }
-        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:        { return "INITIATE_JUMPOUT_ID"; break; }
-        case VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID:                    { return "NONE_ID"; break; }
+    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID:     { return "INITIATE_DOCKING_ID"; break; }
+    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:    { return "INITIATE_LAUNCHING_ID"; break; }
+    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID:        { return "INITIATE_JUMPIN_ID"; break; }
+    case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:        { return "INITIATE_JUMPOUT_ID"; break; }
+    case VEHICLE_SPECIAL_ACTION_TYPE::NONE_ID:                    { return "NONE_ID"; break; }
 
-        default: { return "UKNOWN id_type"; break; }
+    default: { return "UKNOWN id_type"; break; }
     }
 }

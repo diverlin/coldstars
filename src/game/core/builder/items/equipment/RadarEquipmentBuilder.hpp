@@ -23,8 +23,11 @@
 
 #include <descriptors/Base.hpp>
 
+namespace item {
+namespace equipment {
 class RadarEquipment;
-
+}
+}
 
 class RadarBuilder
 {
@@ -32,9 +35,9 @@ class RadarBuilder
         RadarBuilder();
         ~RadarBuilder();
 
-        RadarEquipment* createTemplate(id_type id = NONE_ID) const;
-        RadarEquipment* create(const descriptor::Base&) const;
+        item::equipment::RadarEquipment* createTemplate(id_type id = NONE_ID) const;
+        item::equipment::RadarEquipment* create(const descriptor::Base&) const;
                                      
     private:
-        void createInternals(RadarEquipment*, const descriptor::Base&) const;
+        void createInternals(item::equipment::RadarEquipment*, const descriptor::Base&) const;
 }; 

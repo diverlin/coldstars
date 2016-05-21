@@ -21,41 +21,46 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #include "BaseEquipment.hpp"
 
+namespace item {
+namespace equipment {
+
 class DriveEquipment : public BaseEquipment
 {
-    public:
-        DriveEquipment(const id_type& id);
-        virtual ~DriveEquipment();
+public:
+    DriveEquipment(const id_type& id);
+    virtual ~DriveEquipment();
 
-        void SetSpeedOrig(int speed_orig) { m_speed_orig = speed_orig; };
-        void SetHyperOrig(int hyper_orig) { m_hyper_orig = hyper_orig; };
+    void SetSpeedOrig(int speed_orig) { m_speed_orig = speed_orig; };
+    void SetHyperOrig(int hyper_orig) { m_hyper_orig = hyper_orig; };
 
-        int speed() const { return m_speed; };
-        int hyper() const { return m_hyper; };
+    int speed() const { return m_speed; };
+    int hyper() const { return m_hyper; };
 
-        virtual void updateProperties();
+    virtual void updateProperties();
 
-        void CountPrice();
+    void CountPrice();
 
-        virtual void Save(boost::property_tree::ptree&) const;
-        virtual void Load(const boost::property_tree::ptree&);
-        virtual void Resolve();
-        
-    private:
-        int m_speed_orig = 0;
-        int m_speed_add = 0;
-        int m_speed = 0;
+    virtual void Save(boost::property_tree::ptree&) const;
+    virtual void Load(const boost::property_tree::ptree&);
+    virtual void Resolve();
 
-        int m_hyper_orig = 0;
-        int m_hyper_add = 0;
-        int m_hyper = 0;
+private:
+    int m_speed_orig = 0;
+    int m_speed_add = 0;
+    int m_speed = 0;
 
-        void virtual addUniqueInfo();
-        std::string GetSpeedStr();
-        std::string GetHyperStr();
+    int m_hyper_orig = 0;
+    int m_hyper_add = 0;
+    int m_hyper = 0;
 
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+    void virtual addUniqueInfo();
+    std::string GetSpeedStr();
+    std::string GetHyperStr();
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 };
 
+} // namespace equipment
+} // namespace item

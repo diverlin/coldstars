@@ -29,6 +29,9 @@
 #include "../../world/starsystem.hpp"
 #include "../../parts/Turrel.hpp"
 
+namespace item {
+namespace equipment {
+
 LazerEquipment::LazerEquipment(const id_type& id)
     :
       damage_orig(0),
@@ -196,3 +199,5 @@ void LazerEquipment::ResolveData()
     LOG(" LazerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
+} // namespace equipment
+} // namespace item

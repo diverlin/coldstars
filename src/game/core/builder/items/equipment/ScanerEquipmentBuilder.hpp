@@ -23,8 +23,11 @@
 
 #include <descriptors/Base.hpp>
 
+namespace item {
+namespace equipment {
 class ScanerEquipment;
-
+}
+}
 
 class ScanerBuilder
 {
@@ -32,9 +35,9 @@ public:
     ScanerBuilder();
     ~ScanerBuilder();
 
-    ScanerEquipment* createTemplate(id_type id = NONE_ID) const;
-    ScanerEquipment* create(const descriptor::Base&) const;
+    item::equipment::ScanerEquipment* createTemplate(id_type id = NONE_ID) const;
+    item::equipment::ScanerEquipment* create(const descriptor::Base&) const;
 
 private:
-    void createInternals(ScanerEquipment*, const descriptor::Base&) const;
+    void createInternals(item::equipment::ScanerEquipment*, const descriptor::Base&) const;
 }; 

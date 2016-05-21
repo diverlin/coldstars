@@ -28,53 +28,57 @@ namespace item {
 class Base;
 } // namespace item
 
+namespace item {
+namespace equipment {
 class RocketEquipment;
+}
+}
 
 class Angar : public Room
 {
-        public: 
-                Angar(int id);
-                ~Angar();
-                
-                virtual void putChildrenToGarbage() const;
-                
-                void AddVehicleSlot(VehicleSlot*);
-                void AddItemSlot(ItemSlot*);
-                
-                void UpdateInStatic() const;
-                
-                bool AddVehicle(Vehicle*);
-                
-                bool RepairItem(Npc*, item::Base*) const;
-                bool ChargeRocketEquipment(Npc*, RocketEquipment*) const;
-                                
-                bool RepairVehicle(Vehicle*) const; 
-                bool TankUpVehicle(Vehicle*) const; 
-                
-                int GetFreeVehicleSlotTotalNum() const;
-                
-                int GetPriceFuel() const { return price_fuel; };
-                             
-                std::string GetDockVehicleStr() const;
-                                                        
-                void Save(boost::property_tree::ptree&) const;
-        void Load(const boost::property_tree::ptree&);
-        void Resolve();
-        
-        private:               
-                std::vector<VehicleSlot*> vehicle_total_slot_vec;
-                std::vector<VehicleSlot*> vehicle_military_slot_vec;
-                std::vector<VehicleSlot*> vehicle_visitors_slot_vec;
+public:
+    Angar(int id);
+    ~Angar();
 
-                std::vector<ItemSlot*> item_slot_vec;
-                                                                                
-                int price_fuel;
-                
-                void SaveData(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
-        
-        friend class GuiAngar;
+    virtual void putChildrenToGarbage() const;
+
+    void AddVehicleSlot(VehicleSlot*);
+    void AddItemSlot(ItemSlot*);
+
+    void UpdateInStatic() const;
+
+    bool AddVehicle(Vehicle*);
+
+    bool RepairItem(Npc*, item::Base*) const;
+    bool ChargeRocketEquipment(Npc*, item::equipment::RocketEquipment*) const;
+
+    bool RepairVehicle(Vehicle*) const;
+    bool TankUpVehicle(Vehicle*) const;
+
+    int GetFreeVehicleSlotTotalNum() const;
+
+    int GetPriceFuel() const { return price_fuel; };
+
+    std::string GetDockVehicleStr() const;
+
+    void Save(boost::property_tree::ptree&) const;
+    void Load(const boost::property_tree::ptree&);
+    void Resolve();
+
+private:
+    std::vector<VehicleSlot*> vehicle_total_slot_vec;
+    std::vector<VehicleSlot*> vehicle_military_slot_vec;
+    std::vector<VehicleSlot*> vehicle_visitors_slot_vec;
+
+    std::vector<ItemSlot*> item_slot_vec;
+
+    int price_fuel;
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
+
+    friend class GuiAngar;
 };
 
 #endif 

@@ -24,6 +24,9 @@
 #include "../../spaceobjects/Vehicle.hpp"
 #include "../../slots/ItemSlot.hpp"
 
+namespace item {
+namespace equipment {
+
 DroidEquipment::DroidEquipment(const id_type& id)
     :
       repair_orig(0)
@@ -139,4 +142,6 @@ void DroidEquipment::ResolveData()
     LOG(" DroidEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
+} // namespace equipment
+} // namespace item
 

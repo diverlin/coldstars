@@ -36,6 +36,8 @@
 
 #include <meti/RandUtils.hpp>
 
+using DriveEquipment = item::equipment::DriveEquipment;
+
 DriveBuilder::DriveBuilder()
 {}
 
@@ -60,7 +62,7 @@ DriveEquipment* DriveBuilder::create(const descriptor::Base& descriptor) const
     return drive_equipment;
 }        
             
-void DriveBuilder::createInternals(DriveEquipment* drive_equipment, const descriptor::Base& descriptor) const
+void DriveBuilder::createInternals(item::equipment::DriveEquipment* drive_equipment, const descriptor::Base& descriptor) const
 {     
     ItemCommonData data = extractCommonData(descriptor);
             

@@ -31,6 +31,8 @@
 
 #include <meti/RandUtils.hpp>
 
+using namespace item::equipment;
+
 RocketBuilder::RocketBuilder()
 {}
 

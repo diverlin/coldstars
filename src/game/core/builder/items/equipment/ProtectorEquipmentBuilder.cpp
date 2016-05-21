@@ -32,6 +32,8 @@
 
 #include <meti/RandUtils.hpp>
 
+using namespace item::equipment;
+
 ProtectorBuilder::ProtectorBuilder()
 {}
 

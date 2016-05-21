@@ -21,6 +21,9 @@
 
 #include "BaseEquipment.hpp"
 
+namespace item {
+namespace equipment {
+
 class ScanerEquipment : public BaseEquipment
 {
 public:
@@ -51,4 +54,6 @@ private:
     void ResolveData();
 };
 
+} // namespace equipment
+} // namespace item
 

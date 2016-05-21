@@ -22,6 +22,9 @@
 #include <ceti/Logger.hpp>
 #include "../../items//modules/DriveModule.hpp"
 
+namespace item {
+namespace equipment {
+
 DriveEquipment::DriveEquipment(const id_type& id)
 {
     setId(id);
@@ -138,6 +141,8 @@ void DriveEquipment::ResolveData()
     LOG(" DriveEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
+} // namespace equipment
+} // namespace item
 
 
 

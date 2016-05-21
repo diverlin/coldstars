@@ -35,6 +35,8 @@
 #include <descriptors/RaceDescriptors.hpp>
 #include <meti/RandUtils.hpp>
 
+using namespace item::equipment;
+
 LazerBuilder::LazerBuilder()
 {}
 

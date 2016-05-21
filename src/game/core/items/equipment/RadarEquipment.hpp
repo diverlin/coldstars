@@ -17,10 +17,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef RADAREQUIPMENT_H
-#define RADAREQUIPMENT_H
+#pragma once
 
 #include "BaseEquipment.hpp"
+
+namespace item {
+namespace equipment {
 
 class RadarEquipment : public BaseEquipment
 {
@@ -52,7 +54,9 @@ class RadarEquipment : public BaseEquipment
         void ResolveData();
 };
 
-#endif 
+} // namespace equipment
+} // namespace item
+
 
 
 
