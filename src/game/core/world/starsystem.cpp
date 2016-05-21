@@ -38,7 +38,7 @@
 //#include <jeti/Render.hpp>
 
 #include <slots/ItemSlot.hpp>
-#include <items/others/Bomb.hpp>
+#include <item/others/Bomb.hpp>
 
 #include <spaceobjects/IncludeSpaceObjects.hpp>
 

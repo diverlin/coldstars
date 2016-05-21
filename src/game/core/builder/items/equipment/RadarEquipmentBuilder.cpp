@@ -18,7 +18,7 @@
 
 
 #include <builder/items/equipment/RadarEquipmentBuilder.hpp>
-#include <items/equipment/RadarEquipment.hpp>
+#include <item/equipment/Radar.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>

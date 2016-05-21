@@ -18,7 +18,7 @@
 
 
 #include <builder/items/equipment/GrappleEquipmentBuilder.hpp>
-#include <items/equipment/GrappleEquipment.hpp>
+#include <item/equipment/Grapple.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>

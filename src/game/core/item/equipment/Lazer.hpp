@@ -18,7 +18,7 @@
 
 #pragma once
 
-#include "BaseEquipment.hpp"
+#include "Base.hpp"
 
 class SpaceObject;
 class ItemSlot;

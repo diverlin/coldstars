@@ -29,9 +29,9 @@
 #include "../slots/ItemSlot.hpp" 
 #include "../pilots/Npc.hpp"
 
-#include "../items/BaseItem.hpp"
-#include "../items/equipment/BakEquipment.hpp"
-#include "../items/equipment/RocketEquipment.hpp"
+#include <item/BaseItem.hpp>
+#include <item/equipment/Bak.hpp>
+#include <item/equipment/Rocket.hpp>
 
 Angar::Angar(int id)
     :

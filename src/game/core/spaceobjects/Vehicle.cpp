@@ -34,19 +34,19 @@
 #include <slots/VehicleSlot.hpp> 
 #include <slots/ItemSlot.hpp>
 
-#include <items/equipment/RocketEquipment.hpp>
+#include <item/equipment/Rocket.hpp>
 #ifdef USE_EXTRA_EQUIPMENT
-#include <items/equipment/EnergizerEquipment.hpp>
-#include <items/equipment/FreezerEquipment.hpp>
+#include <item/equipment/EnergizerEquipment.hpp>
+#include <item/equipment/FreezerEquipment.hpp>
 #endif
-#include <items/equipment/RadarEquipment.hpp>
-#include <items/equipment/BakEquipment.hpp>
-#include <items/equipment/ProtectorEquipment.hpp>
-#include <items/equipment/DroidEquipment.hpp>
-#include <items/equipment/DriveEquipment.hpp>
-#include <items/equipment/ScanerEquipment.hpp>
-#include <items/equipment/GrappleEquipment.hpp>
-#include <items/others/GoodsPack.hpp>
+#include <item/equipment/Radar.hpp>
+#include <item/equipment/Bak.hpp>
+#include <item/equipment/Protector.hpp>
+#include <item/equipment/Droid.hpp>
+#include <item/equipment/Drive.hpp>
+#include <item/equipment/Scaner.hpp>
+#include <item/equipment/Grapple.hpp>
+#include <item/others/GoodsPack.hpp>
 #ifdef USE_ARTEFACTS
 #include <items/artefacts/GravityArtefact.hpp>
 #include <items/artefacts/ProtectorArtefact.hpp>

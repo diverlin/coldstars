@@ -24,7 +24,7 @@
 #include <common/IdGenerator.hpp>
 
 #include <common/constants.hpp>
-#include <items/BaseItem.hpp>
+#include <item/BaseItem.hpp>
 
 descriptor::Base generateBombDescriptor(int damage, int radius)
 {

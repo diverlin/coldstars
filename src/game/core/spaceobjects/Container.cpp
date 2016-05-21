@@ -32,7 +32,7 @@
 //#include <jeti/particlesystem/ExplosionEffect.hpp>
 
 #include <slots/ItemSlot.hpp>
-#include <items/BaseItem.hpp>
+#include <item/BaseItem.hpp>
 
 
 Container::Container(int id)

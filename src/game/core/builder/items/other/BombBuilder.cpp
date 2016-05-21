@@ -17,7 +17,7 @@
 */
 
 #include "BombBuilder.hpp"
-#include <items/others/Bomb.hpp>
+#include <item/others/Bomb.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <ceti/Logger.hpp>

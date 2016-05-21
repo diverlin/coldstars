@@ -16,10 +16,12 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "BakEquipment.hpp"
+#include "Bak.hpp"
 #include "../../common/constants.hpp"
 #include <ceti/Logger.hpp>
-#include "../../items//modules/BakModule.hpp"
+#ifdef USE_MODULES
+#include <items/modules/BakModule.hpp>
+#endif
 
 namespace item {
 namespace equipment {

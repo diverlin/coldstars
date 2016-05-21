@@ -18,7 +18,7 @@
 
 
 #include "ProtectorArtefactBuilder.hpp"
-#include <items/artefacts/ProtectorArtefact.hpp>
+#include <item/artefacts/ProtectorArtefact.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>

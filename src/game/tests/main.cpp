@@ -20,7 +20,7 @@
 
 #include <common/Global.hpp>
 #include <world/starsystem.hpp>
-#include <items/others/Bomb.hpp>
+#include <item/others/Bomb.hpp>
 #include <slots/ItemSlot.hpp>
 #include <spaceobjects/Container.hpp>
 #include <spaceobjects/Ship.hpp>
@@ -50,13 +50,7 @@
 
 #include <builder/items/IncludeItemBuilders.hpp>
 
-#include <items/equipment/BakEquipment.hpp>
-#include <items/equipment/DriveEquipment.hpp>
-#include <items/equipment/DroidEquipment.hpp>
-#include <items/equipment/GrappleEquipment.hpp>
-#include <items/equipment/ScanerEquipment.hpp>
-#include <items/equipment/RadarEquipment.hpp>
-#include <items/equipment/ProtectorEquipment.hpp>
+#include <item/equipment/ALL>
 
 #include "helper.hpp"
 

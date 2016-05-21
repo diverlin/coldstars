@@ -22,7 +22,7 @@
 //#include <ceti/StringUtils.hpp>
 #include "../common/Global.hpp"
 #include "../spaceobjects/Vehicle.hpp"
-#include "../items/BaseItem.hpp"
+#include <item/BaseItem.hpp>
 #include "../slots/ItemSlot.hpp"
 #include "../slots/VehicleSlot.hpp"
 #include "../pilots/Npc.hpp"

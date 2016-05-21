@@ -24,7 +24,7 @@
 #include <common/Global.hpp>
 #include <managers/EntityManager.hpp>
 
-#include "../../items/equipment/BaseEquipment.hpp"
+#include <item/equipment/Base.hpp>
 
 BaseModule::BaseModule():
 equipment_owner(nullptr)

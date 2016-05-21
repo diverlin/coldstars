@@ -21,7 +21,7 @@
 #include <common/Global.hpp>
 #include <common/IdGenerator.hpp>
 #include <world/starsystem.hpp>
-#include <items/others/Bomb.hpp>
+#include <item/others/Bomb.hpp>
 #include <slots/ItemSlot.hpp>
 #include <spaceobjects/Container.hpp>
 #include <spaceobjects/Ship.hpp>

@@ -16,12 +16,14 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "RocketEquipment.hpp"
+#include "Rocket.hpp"
 #include "../../common/constants.hpp"
 #include <meti/RandUtils.hpp>
 //#include <ceti/StringUtils.hpp>
 #include <ceti/Logger.hpp>
-#include "../../items/modules/RocketModule.hpp"
+#ifdef USE_MODULES
+#include <item/modules/RocketModule.hpp>
+#endif
 #include <common/Global.hpp>
 #include "../../builder/spaceobjects/RocketBulletBuilder.hpp"
 #include "../../world/starsystem.hpp"

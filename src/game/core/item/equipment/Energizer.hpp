@@ -20,7 +20,7 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <items/equipment/BaseEquipment.hpp>
+#include <item/equipment/Base.hpp>
 
 
 class EnergizerEquipment : public item::equipment::Base

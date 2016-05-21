@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <items/BaseItem.hpp>
+#include <item/BaseItem.hpp>
 
 class Bomb : public item::Base
 {

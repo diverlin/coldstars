@@ -18,10 +18,10 @@
 
 #pragma once
 
-#include <items/BaseItem.hpp>
+#include <item/BaseItem.hpp>
 
 #ifdef USE_MODULES
-#include <items/modules/BaseModule.hpp>
+#include <item/modules/BaseModule.hpp>
 #endif
 
 namespace item {
