@@ -33,7 +33,7 @@
 #include "../world/galaxy.hpp"
 #include "../world/starsystem.hpp"
 
-#include "../builder/items/IncludeItemBuilders.hpp"
+#include "../builder/item/IncludeItemBuilders.hpp"
 #include "../builder/spaceobjects/IncludeSpaceObjectBuilders.hpp"
 
 #include <item/others/GoodsPack.hpp>

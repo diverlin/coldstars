@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <builder/items/equipment/RocketEquipmentBuilder.hpp>
+#include "RocketEquipmentBuilder.hpp"
 #include <item/equipment/Rocket.hpp>
 #include <managers/EntityManager.hpp>
 

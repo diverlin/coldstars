@@ -18,7 +18,7 @@
 #include <world/starsystem.hpp>
 
 #include <builder/spaceobjects/IncludeSpaceObjectBuilders.hpp>
-#include <builder/items/IncludeItemBuilders.hpp>
+#include <builder/item/IncludeItemBuilders.hpp>
 #include <builder/world/StarSystemBuilder.hpp>
 
 #include <world/starsystem.hpp>

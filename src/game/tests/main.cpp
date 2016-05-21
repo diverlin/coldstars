@@ -29,7 +29,7 @@
 #include <builder/world/GalaxyBuilder.hpp>
 #include <builder/world/SectorBuilder.hpp>
 #include <builder/world/StarSystemBuilder.hpp>
-#include <builder/items/other/BombBuilder.hpp>
+#include <builder/item/other/BombBuilder.hpp>
 #include <builder/spaceobjects/ContainerBuilder.hpp>
 
 #include <descriptors/DescriptorManager.hpp>
@@ -48,7 +48,7 @@
 
 #include <ctime>
 
-#include <builder/items/IncludeItemBuilders.hpp>
+#include <builder/item/IncludeItemBuilders.hpp>
 
 #include <item/equipment/ALL>
 

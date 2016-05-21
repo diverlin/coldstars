@@ -17,7 +17,7 @@
 */
 
 
-#include <builder/items/equipment/ProtectorEquipmentBuilder.hpp>
+#include <builder/item/equipment/ProtectorEquipmentBuilder.hpp>
 #include <item/equipment/Protector.hpp>
 #include <managers/EntityManager.hpp>
 

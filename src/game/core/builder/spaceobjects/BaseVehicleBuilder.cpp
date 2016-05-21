@@ -51,7 +51,7 @@
 #include <item/artefacts/ProtectorArtefact.hpp>
 #endif
 
-#include "../../builder/items/IncludeItemBuilders.hpp"
+#include "../../builder/item/IncludeItemBuilders.hpp"
 
 #include <common/Global.hpp>
 #include <managers/EntityManager.hpp>

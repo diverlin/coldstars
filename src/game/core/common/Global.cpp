@@ -34,34 +34,34 @@
 #include <builder/dock/ShopBuilder.hpp>
 #include <builder/dock/GovermentBuilder.hpp>
 
-#include <builder/items/artefacts/GravityArtefactBuilder.hpp>
-#include <builder/items/artefacts/ProtectorArtefactBuilder.hpp>
+#include <builder/item/artefacts/GravityArtefactBuilder.hpp>
+#include <builder/item/artefacts/ProtectorArtefactBuilder.hpp>
 
-#include <builder/items/equipment/BakEquipmentBuilder.hpp>
-#include <builder/items/equipment/DriveEquipmentBuilder.hpp>
-#include <builder/items/equipment/DroidEquipmentBuilder.hpp>
+#include <builder/item/equipment/BakEquipmentBuilder.hpp>
+#include <builder/item/equipment/DriveEquipmentBuilder.hpp>
+#include <builder/item/equipment/DroidEquipmentBuilder.hpp>
 #ifdef USE_EXTRA_EQUIPMENT
-#include <builder/items/equipment/EnergizerEquipmentBuilder.hpp>
-#include <builder/items/equipment/FreezerEquipmentBuilder.hpp>
+#include <builder/item/equipment/EnergizerEquipmentBuilder.hpp>
+#include <builder/item/equipment/FreezerEquipmentBuilder.hpp>
 #endif
-#include <builder/items/equipment/GrappleEquipmentBuilder.hpp>
-#include <builder/items/equipment/ProtectorEquipmentBuilder.hpp>
-#include <builder/items/equipment/RadarEquipmentBuilder.hpp>
-#include <builder/items/equipment/ScanerEquipmentBuilder.hpp>
-#include <builder/items/equipment/RocketEquipmentBuilder.hpp>
-#include <builder/items/equipment/LazerEquipmentBuilder.hpp>
+#include <builder/item/equipment/GrappleEquipmentBuilder.hpp>
+#include <builder/item/equipment/ProtectorEquipmentBuilder.hpp>
+#include <builder/item/equipment/RadarEquipmentBuilder.hpp>
+#include <builder/item/equipment/ScanerEquipmentBuilder.hpp>
+#include <builder/item/equipment/RocketEquipmentBuilder.hpp>
+#include <builder/item/equipment/LazerEquipmentBuilder.hpp>
 
-#include <builder/items/modules/BakModuleBuilder.hpp>
-#include <builder/items/modules/DriveModuleBuilder.hpp>
-#include <builder/items/modules/DroidModuleBuilder.hpp>
-#include <builder/items/modules/GrappleModuleBuilder.hpp>
-#include <builder/items/modules/ProtectorModuleBuilder.hpp>
-#include <builder/items/modules/RadarModuleBuilder.hpp>
-#include <builder/items/modules/ScanerModuleBuilder.hpp>
-#include <builder/items/modules/RocketModuleBuilder.hpp>
-#include <builder/items/modules/LazerModuleBuilder.hpp>
+#include <builder/item/modules/BakModuleBuilder.hpp>
+#include <builder/item/modules/DriveModuleBuilder.hpp>
+#include <builder/item/modules/DroidModuleBuilder.hpp>
+#include <builder/item/modules/GrappleModuleBuilder.hpp>
+#include <builder/item/modules/ProtectorModuleBuilder.hpp>
+#include <builder/item/modules/RadarModuleBuilder.hpp>
+#include <builder/item/modules/ScanerModuleBuilder.hpp>
+#include <builder/item/modules/RocketModuleBuilder.hpp>
+#include <builder/item/modules/LazerModuleBuilder.hpp>
 
-#include <builder/items/other/BombBuilder.hpp>
+#include <builder/item/other/BombBuilder.hpp>
 
 #include <builder/pilots/NpcBuilder.hpp>
 
