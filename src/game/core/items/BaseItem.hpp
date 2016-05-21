@@ -29,9 +29,8 @@
 
 
 class ItemSlot; 
-//namespace ceti {
-//class Box2D;
-//}
+
+namespace item {
 
 struct UnresolvedDataBaseItem
 {
@@ -39,7 +38,7 @@ struct UnresolvedDataBaseItem
     id_type item_slot_id;
 };
 
-class BaseItem : public ceti::Orientation, public Base
+class BaseItem : public ceti::Orientation, public Base // Orientation ??
 {
     public:
         BaseItem();
@@ -50,6 +49,8 @@ class BaseItem : public ceti::Orientation, public Base
         void setParentSubTypeId(TYPE::ENTITY parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
         void setItemCommonData(const ItemCommonData& data_item)
         {
+            setId(data_item.id);
+
             m_data_item = data_item;
             m_deterioration = data_item.deterioration;
             setCondition(data_item.condition);
@@ -59,11 +60,16 @@ class BaseItem : public ceti::Orientation, public Base
         
         ItemSlot* itemSlot() const { return m_item_slot; }
                                     
-        unsigned int mass()          const { return m_data_item.mass; }
-        unsigned int condition()     const { return m_condition; }
-        int price()                  const { return m_price; }
+        int mass()          const { return m_data_item.mass; }
+        int condition()     const { return m_condition; }
+        int price()         const { return m_price; }
+        int basePrice()     const { return m_data_item.price; }
+
+        TYPE::TECH tech() const { return m_data_item.tech; }
+
         TYPE::ENTITY parentSubTypeId() const { return m_parent_subtype_id; }
-        
+        TYPE::RACE race() const { return m_race_id; }
+
         bool isDamaged()    const { return (m_condition < 0); }
         bool isLocked()     const { return (m_locked_turns > 0); }
         int isFunctioning() const { return ( !isDamaged() && !isLocked() ); }
@@ -87,13 +93,12 @@ class BaseItem : public ceti::Orientation, public Base
 
     protected:
         TYPE::RACE m_race_id = TYPE::RACE::NONE_ID;
-        
+
         int m_locked_turns = 0;
         int m_condition = 0;
         int m_price = 0;
-        
         int m_deterioration = 0;
-        
+
         TYPE::ENTITY m_parent_subtype_id = TYPE::ENTITY::NONE_ID;
         
         ItemCommonData m_data_item;
@@ -113,3 +118,4 @@ class BaseItem : public ceti::Orientation, public Base
         ItemSlot* m_item_slot = nullptr;
 };
 
+} // namespace item

@@ -51,6 +51,7 @@ enum class Key: int {
     STRENGTH,
     SCAN,
     PROTECTION,
+    BASE_PRICE
 };
 
 std::string keyStr(const Key&);
@@ -69,7 +70,8 @@ public:
         GRAPPLE,
         SCANER,
         RADAR,
-        PROTECTOR
+        PROTECTOR,
+        BASE_PRICE
     };
 
     static std::string KEY_ID;
@@ -93,6 +95,7 @@ public:
     static std::string KEY_STRENGTH;
     static std::string KEY_SCAN;
     static std::string KEY_PROTECTION;
+    static std::string KEY_BASE_PRICE;
 
     Base();
     Base(const std::map<Key, int_type>&);
@@ -123,6 +126,7 @@ public:
     const int_type& strength() const;
     const int_type& scan() const;
     const int_type& protection() const;
+    const int_type& base_price() const;
 
 public: // todo make it protected
     void add(const Key& key, const int_type& value);
