@@ -27,6 +27,8 @@
 
 #include <slots/ItemSlot.hpp>
 
+namespace item {
+
 BaseItem::BaseItem()
 {}
 
@@ -190,3 +192,5 @@ void BaseItem::ResolveData()
         ((ItemSlot*)global::get().entityManager().get(m_data_unresolved_BaseItem.item_slot_id))->insertItem(this);
     }
 }
+
+} // namespace item

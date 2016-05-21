@@ -69,7 +69,7 @@ void NatureLand::AddItemSlot(ItemSlot* item_slot)
     item_slot_vec.push_back(item_slot);
 }
 
-bool NatureLand::AddItem(BaseItem* item)
+bool NatureLand::AddItem(item::BaseItem* item)
 {
     for (unsigned int i=0; i<item_slot_vec.size(); i++)
     {

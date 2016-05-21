@@ -21,7 +21,10 @@
 
 #include "Land.hpp"
 class ItemSlot;
+namespace item {
 class BaseItem;
+} // namespace item
+
 
 struct UnresolvedDataNatureLand
 {
@@ -42,7 +45,7 @@ class NatureLand : public Land
 
         void AddItemSlot(ItemSlot*);
 
-        bool AddItem(BaseItem*);
+        bool AddItem(item::BaseItem*);
         bool CanAcceptNewItem() const;
 
         virtual bool AddVehicle(Vehicle*);

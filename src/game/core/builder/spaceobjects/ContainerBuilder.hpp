@@ -29,12 +29,13 @@ namespace descriptor {
 class Container;
 } // namespace descriptor
 
-namespace jeti {
-class TextureOb;
-}
+//namespace jeti {
+//class TextureOb;
+//}
 
+namespace item {
 class BaseItem;
-
+} // namespace item
 
 class ContainerBuilder
 {
@@ -45,7 +46,7 @@ class ContainerBuilder
         Container* create(const std::string& data) const;
         Container* create(const descriptor::Container&) const;
 //        Container* create(jeti::TextureOb*, BaseItem*) const;
-//        Container* create(BaseItem*) const;
+//        Container* create(item::BaseItem*) const;
 //        Container* create(int mineral_ammount = 0) const;
                                                      
     private:

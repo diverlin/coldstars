@@ -20,29 +20,29 @@
 
 #include "../BaseItem.hpp"
 
-class GravityArtefact : public BaseItem
+class GravityArtefact : public item::BaseItem
 {
-        public:
-              GravityArtefact(int);
-              virtual ~GravityArtefact();
-        
-        void SetGravity(int gravity) { this->gravity = gravity; };
-        
-        int GetGravity() const { return gravity; };
-        
-             virtual void Save(boost::property_tree::ptree&) const;
-        virtual void Load(const boost::property_tree::ptree&);
-        virtual void Resolve();
-        
-    private:  
-        int gravity;
-           
-             virtual void addUniqueInfo();  
-             virtual void AddCommonInfo();   
-             
-             void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();                
+public:
+    GravityArtefact(int);
+    virtual ~GravityArtefact();
+
+    void SetGravity(int gravity) { this->gravity = gravity; };
+
+    int GetGravity() const { return gravity; };
+
+    virtual void Save(boost::property_tree::ptree&) const;
+    virtual void Load(const boost::property_tree::ptree&);
+    virtual void Resolve();
+
+private:
+    int gravity;
+
+    virtual void addUniqueInfo();
+    virtual void AddCommonInfo();
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 };
 
 
