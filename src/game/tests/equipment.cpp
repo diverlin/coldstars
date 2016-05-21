@@ -45,7 +45,7 @@ void commonDataItemCheck(const descriptor::Base& descr, item::Base* item)
     EXPECT_EQ(descr.mass(), item->mass());
     EXPECT_EQ(descr.condition(), item->condition());
     EXPECT_EQ(descr.price(), item->basePrice());
-    //    EXPECT_EQ(descr.parentSubTypeId(), (int)bak_equipment->parentSubTypeId());
+    //EXPECT_EQ(descr.parentSubTypeId(), (int)bak_equipment->parentSubTypeId());
 }
 
 TEST(equipment,bak)
