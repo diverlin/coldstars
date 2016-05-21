@@ -16,12 +16,15 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef LAZEREQUIPMENT_HPP
-#define LAZEREQUIPMENT_HPP
+#pragma once
 
 #include "BaseEquipment.hpp"
+
 class SpaceObject;
 class ItemSlot;
+
+namespace item {
+namespace equipment {
 
 class LazerEquipment : public BaseEquipment
 {
@@ -66,4 +69,5 @@ class LazerEquipment : public BaseEquipment
         void ResolveData();
 };
 
-#endif 
+} // namespace equipment
+} // namespace item

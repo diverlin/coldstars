@@ -17,39 +17,36 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef FREEZEREQUIPMENT_H
-#define FREEZEREQUIPMENT_H
+#pragma once
 
 #include "BaseEquipment.hpp"
 
 class FreezerEquipment : public BaseEquipment
 {  
-    public:
-        FreezerEquipment(const id_type& id);
-        virtual ~FreezerEquipment();
+public:
+    FreezerEquipment(const id_type& id);
+    virtual ~FreezerEquipment();
 
-        void SetFreezeOrig(int freeze_orig) { this->freeze_orig = freeze_orig; };
-        int GetFreeze() const { return freeze; };
+    void SetFreezeOrig(int freeze_orig) { this->freeze_orig = freeze_orig; };
+    int GetFreeze() const { return freeze; };
 
-        void CountPrice();
-        virtual void updateProperties();
+    void CountPrice();
+    virtual void updateProperties();
 
-        virtual void Save(boost::property_tree::ptree&) const;
-        virtual void Load(const boost::property_tree::ptree&);
-        virtual void Resolve();
+    virtual void Save(boost::property_tree::ptree&) const;
+    virtual void Load(const boost::property_tree::ptree&);
+    virtual void Resolve();
 
-    private:
-        int freeze_orig;
-        int freeze_add;
-        int freeze;
+private:
+    int freeze_orig;
+    int freeze_add;
+    int freeze;
 
-        void virtual addUniqueInfo();
-        std::string GetFreezeStr();
+    void virtual addUniqueInfo();
+    std::string GetFreezeStr();
 
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 };
 
-
-#endif 

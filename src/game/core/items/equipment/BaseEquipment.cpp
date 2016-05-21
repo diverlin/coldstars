@@ -28,6 +28,9 @@
 #include <common/Global.hpp>
 #include <managers/EntityManager.hpp>
 
+namespace item {
+namespace equipment {
+
 BaseEquipment::BaseEquipment()
 {
     m_race_id = TYPE::RACE::R0_ID;
@@ -143,3 +146,6 @@ void BaseEquipment::ResolveData()
 {
     LOG(" BaseEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
+
+} // namespace equipment
+} // namespace item

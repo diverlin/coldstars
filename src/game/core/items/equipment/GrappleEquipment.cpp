@@ -28,6 +28,8 @@
 #include <spaceobjects/Vehicle.hpp>
 //#include <resources/GuiTextureObCollector.hpp>
 
+namespace item {
+namespace equipment {
 
 GrappleEquipment::GrappleEquipment(const id_type& id)
     :
@@ -162,26 +164,26 @@ void GrappleEquipment::UpdateGrabScenarioProgram_inDynamic()
     }
 }
 
-void GrappleEquipment::RenderGrabTrail(const jeti::Renderer& render)
-{
-    //for (unsigned int i=0; i<target_vec.size(); i++)
-    //{
-    //float xl = target_vec[i]->center().x - item_slot->GetOwnerVehicle()->center().x;
-    //float yl = target_vec[i]->center().y - item_slot->GetOwnerVehicle()->center().y;
+//void GrappleEquipment::RenderGrabTrail(const jeti::Renderer& render)
+//{
+//    //for (unsigned int i=0; i<target_vec.size(); i++)
+//    //{
+//    //float xl = target_vec[i]->center().x - item_slot->GetOwnerVehicle()->center().x;
+//    //float yl = target_vec[i]->center().y - item_slot->GetOwnerVehicle()->center().y;
 
-    //float len = sqrt((xl*xl) + (yl*yl));
+//    //float len = sqrt((xl*xl) + (yl*yl));
 
-    //float angle_inR = atan2(yl, xl);
+//    //float angle_inR = atan2(yl, xl);
 
-    //float angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
+//    //float angle_inD = angle_inR * RADIAN_TO_DEGREE_RATE;
 
-    //drawLine(GuiTextureObCollector::Instance().grapple_trail,
-    //item_slot->GetOwnerVehicle()->center(),
-    //len,
-    //angle_inD,
-    //8);
-    //}
-}
+//    //drawLine(GuiTextureObCollector::Instance().grapple_trail,
+//    //item_slot->GetOwnerVehicle()->center(),
+//    //len,
+//    //angle_inD,
+//    //8);
+//    //}
+//}
 
 
 /* virtual */
@@ -309,3 +311,5 @@ void GrappleEquipment::ResolveData()
     LOG(" GrappleEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
+} // namespace equipment
+} // namespace item

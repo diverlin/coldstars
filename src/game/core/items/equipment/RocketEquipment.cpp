@@ -58,7 +58,8 @@ void BulletData::Load(const boost::property_tree::ptree& load_ptree)
 void BulletData::Resolve()
 {}
 
-
+namespace item {
+namespace equipment {
 
 RocketEquipment::RocketEquipment(const id_type& id)
 :
@@ -266,4 +267,6 @@ void RocketEquipment::ResolveData()
     data_bullet.Resolve();
 }
 
+} // namespace equipment
+} // namespace item
 

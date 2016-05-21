@@ -17,10 +17,10 @@
 */
 
 
-#ifndef STORE_H
-#define STORE_H
+#pragma once
 
 #include "Room.hpp"
+
 class ItemSlot;
 namespace item {
 class Base;
@@ -64,7 +64,6 @@ private:
     friend class GuiStore;
 };
 
-#endif
 
 
 

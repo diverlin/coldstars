@@ -22,6 +22,9 @@
 #include <ceti/Logger.hpp>
 #include "../../items/modules/ProtectorModule.hpp"
 
+namespace item {
+namespace equipment {
+
 ProtectorEquipment::ProtectorEquipment(const id_type& id)
     :
       protection_orig(0)
@@ -124,4 +127,6 @@ void ProtectorEquipment::ResolveData()
     LOG(" ProtectorEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
+} // namespace equipment
+} // namespace item
 

@@ -17,10 +17,12 @@
 */
 
 
-#ifndef PROTECTOREQUIPMENT_H
-#define PROTECTOREQUIPMENT_H
+#pragma once
 
 #include "BaseEquipment.hpp"
+
+namespace item {
+namespace equipment {
 
 class ProtectorEquipment  : public BaseEquipment
 {
@@ -52,4 +54,5 @@ class ProtectorEquipment  : public BaseEquipment
         void ResolveData();
 };
 
-#endif 
+} // namespace equipment
+} // namespace item

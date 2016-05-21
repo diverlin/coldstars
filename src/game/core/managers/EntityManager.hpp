@@ -19,11 +19,12 @@
 
 # pragma once
 
+#include <common/Base.hpp>
+
 #include <map>
 #include <cassert>
 #include <string>
 
-#include <common/Base.hpp>
 class Player;
 
 class EntityManager

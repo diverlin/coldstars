@@ -22,8 +22,11 @@
 #include <types/IdType.hpp>
 #include <descriptors/Base.hpp>
 
+namespace item {
+namespace equipment {
 class ProtectorEquipment;
-
+}
+}
 
 class ProtectorBuilder
 {
@@ -31,9 +34,9 @@ class ProtectorBuilder
         ProtectorBuilder();
         ~ProtectorBuilder();
 
-        ProtectorEquipment* createTemplate(id_type id = NONE_ID) const;
-        ProtectorEquipment* create(const descriptor::Base&) const;
+        item::equipment::ProtectorEquipment* createTemplate(id_type id = NONE_ID) const;
+        item::equipment::ProtectorEquipment* create(const descriptor::Base&) const;
                                      
     private:
-        void createInternals(ProtectorEquipment*, const descriptor::Base&) const;
+        void createInternals(item::equipment::ProtectorEquipment*, const descriptor::Base&) const;
 }; 

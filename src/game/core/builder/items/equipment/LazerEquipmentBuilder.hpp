@@ -23,8 +23,11 @@
 #include <types/RaceTypes.hpp>
 #include <types/TechLevelTypes.hpp>
 
+namespace item {
+namespace equipment {
 class LazerEquipment;
-
+}
+}
 
 class LazerBuilder
 {
@@ -32,9 +35,9 @@ class LazerBuilder
         LazerBuilder();
         ~LazerBuilder();
 
-        LazerEquipment* createTemplate(id_type id = NONE_ID) const;
-        LazerEquipment* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
+        item::equipment::LazerEquipment* createTemplate(id_type id = NONE_ID) const;
+        item::equipment::LazerEquipment* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
                                      
     private:
-        void createInternals(LazerEquipment*, TYPE::TECH, TYPE::RACE, int, int) const;
+        void createInternals(item::equipment::LazerEquipment*, TYPE::TECH, TYPE::RACE, int, int) const;
 }; 

@@ -24,6 +24,9 @@
 #include <items/modules/BaseModule.hpp>
 #endif
 
+namespace item {
+namespace equipment {
+
 class BaseEquipment : public item::Base
 {
 public:
@@ -49,4 +52,5 @@ protected:
     void ResolveData();
 };
 
-
+} // namespace equipment
+} // namespace item

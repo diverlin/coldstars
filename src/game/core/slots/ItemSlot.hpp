@@ -30,22 +30,25 @@ class Base;
 }
 class SpaceObject;
 
+namespace item {
+namespace equipment {
 class RocketEquipment; 
 class LazerEquipment; 
 class RadarEquipment; 
-namespace item {
-namespace equipment {
 class Bak;
-}
-}
+#ifdef USE_EXTRA_EQUIPMENT
+class FreezerEquipment;
 class EnergizerEquipment; 
+#endif
 class ProtectorEquipment; 
 class DroidEquipment; 
-class FreezerEquipment; 
 class ScanerEquipment;
 class DriveEquipment; 
 class GrappleEquipment; 
+} // namespace equipment
+} // namespace item
 
+#ifdef USE_MODULES
 class RocketModule;
 class LazerModule;
 class RadarModule; 
@@ -57,6 +60,7 @@ class FreezerModule;
 class ScanerModule;
 class DriveModule; 
 class GrappleModule; 
+#endif
 
 class Bomb; 
 class GoodsPack; 
@@ -97,18 +101,21 @@ public:
     Turrel* turrel() const { return m_turrel; }
 
     item::Base* item()                         const { return m_item; }
-    RocketEquipment*    rocketEquipment()    const { return reinterpret_cast<RocketEquipment*>(m_item); }
-    LazerEquipment*     lazerEquipment()     const { return reinterpret_cast<LazerEquipment*>(m_item); }
-    RadarEquipment*     radarEquipment()     const { return reinterpret_cast<RadarEquipment*>(m_item); }
-    DriveEquipment*     driveEquipment()     const { return reinterpret_cast<DriveEquipment*>(m_item); }
+    item::equipment::RocketEquipment*    rocketEquipment()    const { return reinterpret_cast<item::equipment::RocketEquipment*>(m_item); }
+    item::equipment::LazerEquipment*     lazerEquipment()     const { return reinterpret_cast<item::equipment::LazerEquipment*>(m_item); }
+    item::equipment::RadarEquipment*     radarEquipment()     const { return reinterpret_cast<item::equipment::RadarEquipment*>(m_item); }
+    item::equipment::DriveEquipment*     driveEquipment()     const { return reinterpret_cast<item::equipment::DriveEquipment*>(m_item); }
     item::equipment::Bak*       bakEquipment()       const { return reinterpret_cast<item::equipment::Bak*>(m_item); }
-    EnergizerEquipment* energizerEquipment() const { return reinterpret_cast<EnergizerEquipment*>(m_item); }
-    ProtectorEquipment* protectorEquipment() const { return reinterpret_cast<ProtectorEquipment*>(m_item); }
-    DroidEquipment*     droidEquipment()     const { return reinterpret_cast<DroidEquipment*>(m_item); }
-    FreezerEquipment*   freezerEquipment()   const { return reinterpret_cast<FreezerEquipment*>(m_item); }
-    ScanerEquipment*    scanerEquipment()    const { return reinterpret_cast<ScanerEquipment*>(m_item); }
-    GrappleEquipment*   grappleEquipment()   const { return reinterpret_cast<GrappleEquipment*>(m_item); }
+#ifdef USE_EXTRA_EQUIPMENT
+    item::equipment::EnergizerEquipment* energizerEquipment() const { return reinterpret_cast<item::equipment::EnergizerEquipment*>(m_item); }
+    item::equipment::FreezerEquipment*   freezerEquipment()   const { return reinterpret_cast<item::equipment::FreezerEquipment*>(m_item); }
+#endif
+    item::equipment::ProtectorEquipment* protectorEquipment() const { return reinterpret_cast<item::equipment::ProtectorEquipment*>(m_item); }
+    item::equipment::DroidEquipment*     droidEquipment()     const { return reinterpret_cast<item::equipment::DroidEquipment*>(m_item); }
+    item::equipment::ScanerEquipment*    scanerEquipment()    const { return reinterpret_cast<item::equipment::ScanerEquipment*>(m_item); }
+    item::equipment::GrappleEquipment*   grappleEquipment()   const { return reinterpret_cast<item::equipment::GrappleEquipment*>(m_item); }
 
+#ifdef USE_MODULES
     RocketModule*       rocketModule()       const { return reinterpret_cast<RocketModule*>(m_item); }
     LazerModule*        lazerModule()        const { return reinterpret_cast<LazerModule*>(m_item); }
     RadarModule*        radarModule()        const { return reinterpret_cast<RadarModule*>(m_item); }
@@ -120,7 +127,7 @@ public:
     FreezerModule*      freezerModule()      const { return reinterpret_cast<FreezerModule*>(m_item); }
     ScanerModule*       scanerModule()       const { return reinterpret_cast<ScanerModule*>(m_item); }
     GrappleModule*      grappleModule()      const { return reinterpret_cast<GrappleModule*>(m_item); }
-
+#endif
     Bomb* bomb()           const { return reinterpret_cast<Bomb*>(m_item); }
     //Artefact* GetArtefact() const { return artefact; }
     GoodsPack* goodsPack() const { return reinterpret_cast<GoodsPack*>(m_item); }

@@ -38,9 +38,9 @@ RadarBuilder::RadarBuilder()
 RadarBuilder::~RadarBuilder()
 {}
 
-RadarEquipment* RadarBuilder::createTemplate(id_type id) const
+item::equipment::RadarEquipment* RadarBuilder::createTemplate(id_type id) const
 {
-    RadarEquipment* radar_equipment = new RadarEquipment(id);
+    item::equipment::RadarEquipment* radar_equipment = new item::equipment::RadarEquipment(id);
     assert(radar_equipment);
 
     global::get().entityManager().reg(radar_equipment);
@@ -48,15 +48,15 @@ RadarEquipment* RadarBuilder::createTemplate(id_type id) const
     return radar_equipment;
 } 
   
-RadarEquipment* RadarBuilder::create(const descriptor::Base& descriptor) const
+item::equipment::RadarEquipment* RadarBuilder::create(const descriptor::Base& descriptor) const
 {
-    RadarEquipment* radar_equipment = createTemplate();
+    item::equipment::RadarEquipment* radar_equipment = createTemplate();
     createInternals(radar_equipment, descriptor);
         
     return radar_equipment;
 } 
         
-void RadarBuilder::createInternals(RadarEquipment* radar_equipment, const descriptor::Base& descriptor) const
+void RadarBuilder::createInternals(item::equipment::RadarEquipment* radar_equipment, const descriptor::Base& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
 

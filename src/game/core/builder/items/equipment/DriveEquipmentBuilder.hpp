@@ -22,8 +22,11 @@
 #include <types/IdType.hpp>
 #include <descriptors/Base.hpp>
 
+namespace item {
+namespace equipment {
 class DriveEquipment;
-
+}
+}
 
 class DriveBuilder
 {
@@ -31,11 +34,11 @@ public:
     DriveBuilder();
     ~DriveBuilder();
 
-    DriveEquipment* createTemplate(id_type id = NONE_ID) const;
-    DriveEquipment* create(const descriptor::Base&) const;
+    item::equipment::DriveEquipment* createTemplate(id_type id = NONE_ID) const;
+    item::equipment::DriveEquipment* create(const descriptor::Base&) const;
 
 private:
-    void createInternals(DriveEquipment*, const descriptor::Base&) const;
+    void createInternals(item::equipment::DriveEquipment*, const descriptor::Base&) const;
 }; 
 
 

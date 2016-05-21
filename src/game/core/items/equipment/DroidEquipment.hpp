@@ -21,35 +21,39 @@
 
 #include "BaseEquipment.hpp"
 
+namespace item {
+namespace equipment {
+
 class DroidEquipment : public BaseEquipment
 {
-       public: 
-             DroidEquipment(const id_type& id);
-             virtual ~DroidEquipment();
+public:
+    DroidEquipment(const id_type& id);
+    virtual ~DroidEquipment();
 
-        void SetRepairOrig(int repair_orig) { this->repair_orig = repair_orig; };
-        int GetRepair() const { return repair; };
+    void SetRepairOrig(int repair_orig) { this->repair_orig = repair_orig; };
+    int GetRepair() const { return repair; };
 
-              virtual void updateProperties();
-              virtual void updateInStatic();
-                
-              void CountPrice();
-              
-              virtual void Save(boost::property_tree::ptree&) const;
-        virtual void Load(const boost::property_tree::ptree&);
-        virtual void Resolve();
-        
-          private:
-              int repair_orig;
-              int repair_add;
-              int repair;
-              
-             void virtual addUniqueInfo();
-               std::string GetRepairStr();
-                
-                void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();  
+    virtual void updateProperties();
+    virtual void updateInStatic();
+
+    void CountPrice();
+
+    virtual void Save(boost::property_tree::ptree&) const;
+    virtual void Load(const boost::property_tree::ptree&);
+    virtual void Resolve();
+
+private:
+    int repair_orig;
+    int repair_add;
+    int repair;
+
+    void virtual addUniqueInfo();
+    std::string GetRepairStr();
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 };
 
-
+} // namespace equipment
+} // namespace item

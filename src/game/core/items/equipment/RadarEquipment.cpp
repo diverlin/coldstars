@@ -22,6 +22,9 @@
 #include <ceti/Logger.hpp>
 #include "../../items//modules/RadarModule.hpp"
 
+namespace item {
+namespace equipment {
+
 RadarEquipment::RadarEquipment(const id_type& id)
     :
       radius_orig(0)
@@ -126,4 +129,6 @@ void RadarEquipment::ResolveData()
     LOG(" RadarEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
+} // namespace equipment
+} // namespace item
 

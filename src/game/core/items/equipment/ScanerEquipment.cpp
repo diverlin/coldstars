@@ -22,6 +22,9 @@
 #include <ceti/Logger.hpp>
 #include "../../items/modules/ScanerModule.hpp"
 
+namespace item {
+namespace equipment {
+
 ScanerEquipment::ScanerEquipment(const id_type& id)
     :
       scan_orig(0)
@@ -126,4 +129,6 @@ void ScanerEquipment::ResolveData()
     LOG(" ScanerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
 
+} // namespace equipment
+} // namespace item
 

@@ -17,16 +17,17 @@
 */
 
 
-#ifndef GRAPPLEEQUIPMENT_HPP
-#define GRAPPLEEQUIPMENT_HPP
+#pragma once
 
-namespace jeti {
-class Renderer;
-}
+//namespace jeti {
+//class Renderer;
+//}
 
 #include "BaseEquipment.hpp"
 #include "../../spaceobjects/SpaceObject.hpp"
 
+namespace item {
+namespace equipment {
 
 class GrappleEquipment : public BaseEquipment
 {
@@ -51,7 +52,7 @@ class GrappleEquipment : public BaseEquipment
         std::string GetTarstr() const;
 
         void UpdateGrabScenarioProgram_inDynamic();
-        void RenderGrabTrail(const jeti::Renderer&);
+//        void RenderGrabTrail(const jeti::Renderer&);
         
         virtual void updateProperties();  
         
@@ -88,4 +89,5 @@ class GrappleEquipment : public BaseEquipment
         void ResolveData(); 
 };
 
-#endif 
+} // namespace equipment
+} // namespace item

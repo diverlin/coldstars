@@ -32,6 +32,7 @@
 
 #include <meti/RandUtils.hpp>
 
+using namespace item::equipment;
 
 DroidBuilder::DroidBuilder()
 {}

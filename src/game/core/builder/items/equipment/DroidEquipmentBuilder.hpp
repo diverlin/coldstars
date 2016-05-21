@@ -22,8 +22,11 @@
 #include <types/IdType.hpp>
 #include <descriptors/Base.hpp>
 
+namespace item {
+namespace equipment {
 class DroidEquipment;
-
+}
+}
 
 class DroidBuilder
 {
@@ -31,9 +34,9 @@ class DroidBuilder
         DroidBuilder();
         ~DroidBuilder();
 
-        DroidEquipment* createTemplate(id_type id = NONE_ID) const;
-        DroidEquipment* create(const descriptor::Base&) const;
+        item::equipment::DroidEquipment* createTemplate(id_type id = NONE_ID) const;
+        item::equipment::DroidEquipment* create(const descriptor::Base&) const;
                                      
     private:
-        void createInternals(DroidEquipment*, const descriptor::Base&) const;
+        void createInternals(item::equipment::DroidEquipment*, const descriptor::Base&) const;
 }; 
