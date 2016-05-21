@@ -1021,8 +1021,8 @@ void StarSystem::starSparkEvent(float radius) const
 {
     for (unsigned int i=0; i<m_vehicles.size(); i++) {
         if ( meti::distance(m_vehicles[i]->center(), star()->center()) < radius ) {
-            if (m_vehicles[i]->slot_radar()->item() != nullptr) {
-                m_vehicles[i]->slot_radar()->item()->lockEvent(2);
+            if (m_vehicles[i]->slotRadar()->item() != nullptr) {
+                m_vehicles[i]->slotRadar()->item()->lockEvent(2);
             }
         }
     }

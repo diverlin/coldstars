@@ -78,7 +78,7 @@ void LazerBuilder::createInternals(LazerEquipment* lazer_equipment, TYPE::TECH t
     
     ItemCommonData common_data;
     common_data.tech         = tech_level;
-#ifdef ENABLE_MODULES
+#ifdef USE_MODULES
     common_data.modules_num = meti::getRandInt(EQUIPMENT::LAZER::MODULES_NUM_MIN, EQUIPMENT::LAZER::MODULES_NUM_MAX);
 #endif
     common_data.mass            = meti::getRandInt(EQUIPMENT::LAZER::MASS_MIN, EQUIPMENT::LAZER::MASS_MAX);

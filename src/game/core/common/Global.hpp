@@ -37,7 +37,7 @@ class StoreBuilder;
 class ShopBuilder;
 class GovermentBuilder;
 
-#ifdef ENABLE_ARTEFACTS
+#ifdef USE_ARTEFACTS
 class GravityArtefactBuilder;
 class ProtectorArtefactBuilder;
 #endif
@@ -54,7 +54,7 @@ class ScanerBuilder;
 class RocketBuilder;
 class LazerBuilder;
 
-#ifdef ENABLE_MODULES
+#ifdef USE_MODULES
 class BakModuleBuilder;
 class DriveModuleBuilder;
 class DroidModuleBuilder;
@@ -112,10 +112,10 @@ class global
         ShopBuilder& shopBuilder() { return *m_shopBuilder; }
         GovermentBuilder& govermentBuilder() { return *m_govermentBuilder; }
 
-#ifdef ENABLE_ARTEFACTS
+#ifdef USE_ARTEFACTS
         GravityArtefactBuilder& gravityArtefactBuilder() { return *m_gravityArtefactBuilder; }
         ProtectorArtefactBuilder& protectorArtefactBuilder() { return *m_protectorArtefactBuilder; }
-#endif // ENABLE_ARTEFACTS
+#endif // USE_ARTEFACTS
 
         BakBuilder& bakBuilder() { return *m_bakBuilder; }
         DriveBuilder& driveBuilder() { return *m_driveBuilder; }
@@ -129,7 +129,7 @@ class global
         RocketBuilder& rocketBuilder() { return *m_rocketBuilder; }
         LazerBuilder& lazerBuilder() { return *m_lazerBuilder; }
 
-#ifdef ENABLE_MODULES
+#ifdef USE_MODULES
         BakModuleBuilder& bakModuleBuilder() { return *m_bakModuleBuilder; }
         DriveModuleBuilder& driveModuleBuilder() { return *m_driveModuleBuilder; }
         DroidModuleBuilder& droidModuleBuilder() { return *m_droidModuleBuilder; }
@@ -141,7 +141,7 @@ class global
         ScanerModuleBuilder& scanerModuleBuilder() { return *m_scanerModuleBuilder; }
         RocketModuleBuilder& rocketModuleBuilder() { return *m_rocketModuleBuilder; }
         LazerModuleBuilder& lazerModuleBuilder() { return *m_lazerModuleBuilder; }
-#endif // ENABLE_MODULES
+#endif // USE_MODULES
 
         BombBuilder& bombBuilder() { return *m_bombBuilder; }
 
@@ -188,10 +188,10 @@ class global
         ShopBuilder* m_shopBuilder = nullptr;
         GovermentBuilder* m_govermentBuilder = nullptr;
 
-#ifdef ENABLE_ARTEFACTS
+#ifdef USE_ARTEFACTS
         GravityArtefactBuilder* m_gravityArtefactBuilder = nullptr;
         ProtectorArtefactBuilder* m_protectorArtefactBuilder = nullptr;
-#endif // ENABLE_ARTEFACTS
+#endif // USE_ARTEFACTS
 
         BakBuilder* m_bakBuilder = nullptr;
         DriveBuilder* m_driveBuilder = nullptr;
@@ -205,7 +205,7 @@ class global
         RocketBuilder* m_rocketBuilder = nullptr;
         LazerBuilder* m_lazerBuilder = nullptr;
 
-#ifdef ENABLE_MODULES
+#ifdef USE_MODULES
         BakModuleBuilder* m_bakModuleBuilder = nullptr;
         DriveModuleBuilder* m_driveModuleBuilder = nullptr;
         DroidModuleBuilder* m_droidModuleBuilder = nullptr;
@@ -217,7 +217,7 @@ class global
         ScanerModuleBuilder* m_scanerModuleBuilder = nullptr;
         RocketModuleBuilder* m_rocketModuleBuilder = nullptr;
         LazerModuleBuilder* m_lazerModuleBuilder = nullptr;
-#endif // ENABLE_MODULES
+#endif // USE_MODULES
 
         BombBuilder* m_bombBuilder = nullptr;
 

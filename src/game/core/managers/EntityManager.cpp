@@ -245,7 +245,7 @@ void EntityManager::loadPass0(const std::string& filename)
     }
 
     //artefact
-#ifdef ENABLE_ARTEFACTS
+#ifdef USE_ARTEFACTS
     if (load_ptree.get_child_optional("gravity_artefact"))
     {
         LOG("loading gravity_artefact...");
@@ -265,8 +265,8 @@ void EntityManager::loadPass0(const std::string& filename)
             protector_artefact->Load(v.second);
         }
     }
-#endif // ENABLE_ARTEFACTS
-#ifdef ENABLE_MODULES
+#endif // USE_ARTEFACTS
+#ifdef USE_MODULES
     //module
     if (load_ptree.get_child_optional("bak_module"))
     {
@@ -357,7 +357,7 @@ void EntityManager::loadPass0(const std::string& filename)
             scaner_module->Load(v.second);
         }
     }
-#endif // ENABLE_MODULES
+#endif // USE_MODULES
 
     // equipment
     if (load_ptree.get_child_optional("bak_equipment"))
@@ -390,6 +390,7 @@ void EntityManager::loadPass0(const std::string& filename)
         }
     }
 
+#ifdef USE_EXTRA_EQUIPMENT
     if (load_ptree.get_child_optional("energizer_equipment"))
     {
         LOG("loading energizer_equipments...");
@@ -409,6 +410,7 @@ void EntityManager::loadPass0(const std::string& filename)
             freezer_equipment->Load(v.second);
         }
     }
+#endif
 
     if (load_ptree.get_child_optional("grapple_equipment"))
     {

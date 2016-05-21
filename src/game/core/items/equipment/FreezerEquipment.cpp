@@ -40,11 +40,12 @@ void FreezerEquipment::updateProperties()
 {
     freeze_add  = 0;
     
-    for (unsigned int i = 0; i < modules_vec.size(); i++)
-    {
-        freeze_add += ((FreezerModule*)modules_vec[i])->GetFreezeAdd();       
+#ifdef USE_MODULES
+    for (unsigned int i = 0; i < modules_vec.size(); i++) {
+        freeze_add += ((FreezerModule*)modules_vec[i])->GetFreezeAdd();
     }
-    
+#endif
+
     freeze = freeze_orig + freeze_add;
 }
 

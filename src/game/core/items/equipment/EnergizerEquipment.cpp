@@ -26,13 +26,13 @@
 #include "../../spaceobjects/Vehicle.hpp"
 
 EnergizerEquipment::EnergizerEquipment(const id_type& id)
-:
-energy_max_orig(0),
-energy(0),
-restoration_orig(0) 
+    :
+      energy_max_orig(0),
+      energy(0),
+      restoration_orig(0)
 {
     setId(id);
-    setTypeId(TYPE::ENTITY::EQUIPMENT_ID);           
+    setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
     setSubTypeId(TYPE::ENTITY::ENERGIZER_EQUIPMENT_ID);
 }
 
@@ -46,12 +46,14 @@ void EnergizerEquipment::updateProperties()
     energy_max_add   = 0;
     restoration_add  = 0;
     
+#ifdef USE_MODULES
     for (unsigned int i = 0; i < modules_vec.size(); i++)
     {
         energy_max_add  += ((EnergizerModule*)modules_vec[i])->GetEnergyMaxAdd();
-        restoration_add += ((EnergizerModule*)modules_vec[i])->GetRestorationAdd();        
+        restoration_add += ((EnergizerModule*)modules_vec[i])->GetRestorationAdd();
     }
-    
+#endif
+
     energy_max  = energy_max_orig  + energy_max_add;
     restoration = restoration_orig + restoration_add;
 }
@@ -64,7 +66,7 @@ void EnergizerEquipment::updateInStatic()
         if (itemSlot()->GetOwnerVehicle()->TryToGenerateEnergy(restoration)) {
             deteriorationEvent();
         }
-    }    
+    }
     updateLock();
 }
 
@@ -84,9 +86,9 @@ void EnergizerEquipment::CountPrice()
 
 void EnergizerEquipment::addUniqueInfo()
 {
-//    info.addTitleStr("ENERGYBLOCK");
-//    info.addNameStr("energy:");      info.addValueStr(GetEnergyStr());
-//    info.addNameStr("restoration:"); info.addValueStr(GetRestorationStr());
+    //    info.addTitleStr("ENERGYBLOCK");
+    //    info.addNameStr("energy:");      info.addValueStr(GetEnergyStr());
+    //    info.addNameStr("restoration:"); info.addValueStr(GetRestorationStr());
 }
 
 std::string EnergizerEquipment::GetEnergyStr()
@@ -141,13 +143,13 @@ void EnergizerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const
     save_ptree.put(root+"energy_max_orig", energy_max_orig);
     save_ptree.put(root+"restoration_orig", restoration_orig);
 }
-                
+
 void EnergizerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" EnergizerEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
     energy_max_orig = load_ptree.get<int>("energy_max_orig");
-    restoration_orig = load_ptree.get<int>("restoration_orig");        
+    restoration_orig = load_ptree.get<int>("restoration_orig");
 }                
 
 void EnergizerEquipment::ResolveData()

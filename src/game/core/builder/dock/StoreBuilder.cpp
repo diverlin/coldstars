@@ -37,8 +37,10 @@
 #include <items/equipment/RadarEquipment.hpp>
 #include <items/equipment/RocketEquipment.hpp>
 #include <items/equipment/ScanerEquipment.hpp>
+#ifdef USE_EXTRA_EQUIPMENT
 #include <items/equipment/EnergizerEquipment.hpp>
 #include <items/equipment/FreezerEquipment.hpp>
+#endif
 
 #include <common/constants.hpp>
 
@@ -138,10 +140,12 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
     for (unsigned int i=0; i<scaner_num; i++) {
         store->AddItem(global::get().scanerBuilder().create(generateScanerDescriptor()));
     }
+#ifdef USE_EXTRA_EQUIPMENT
     for (unsigned int i=0; i<freezer_num; i++) {
         store->AddItem(global::get().freezerBuilder().create());
     }
     for (unsigned int i=0; i<energyBlock_num; i++) {
         store->AddItem(global::get().energizerBuilder().create());
     }
+#endif
 }

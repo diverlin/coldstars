@@ -5,17 +5,37 @@ set(PROJECT ${PROJECT_CORE})
 file(GLOB_RECURSE ${PROJECT}_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 file(GLOB_RECURSE ${PROJECT}_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
 
-if (NOT ENABLE_MODULES)
+if (NOT USE_MODULES)
     file(GLOB_RECURSE ${PROJECT}_MODULES_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} builder/items/modules/*.cpp;items/modules/*.cpp)
     file(GLOB_RECURSE ${PROJECT}_MODULES_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} builder/items/modules/*.hpp;items/modules/*.hpp)
     list(REMOVE_ITEM ${PROJECT}_SOURCE ${${PROJECT}_MODULES_SOURCE})
     list(REMOVE_ITEM ${PROJECT}_HEADER ${${PROJECT}_MODULES_HEADER})
 endif()
-if (NOT ENABLE_ARTEFACTS)
+if (NOT USE_ARTEFACTS)
     file(GLOB_RECURSE ${PROJECT}_ARTEFACTS_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} builder/items/artefacts/*.cpp;items/artefacts/*.cpp)
     file(GLOB_RECURSE ${PROJECT}_ARTEFACTS_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} builder/items/artefacts/*.hpp;items/artefacts/*.hpp)
     list(REMOVE_ITEM ${PROJECT}_SOURCE ${${PROJECT}_ARTEFACTS_SOURCE})
     list(REMOVE_ITEM ${PROJECT}_HEADER ${${PROJECT}_ARTEFACTS_HEADER})
+endif()
+if (NOT USE_EXTRA_EQUIPMENT)
+    file(GLOB_RECURSE ${PROJECT}_EXTRA_EQUIPMENT_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+        items/equipment/EnergizerEquipment.cpp;
+        items/equipment/FreezerEquipment.cpp
+        builder/items/equipment/EnergizerEquipmentBuilder.cpp;
+        builder/items/equipment/FreezerEquipmentBuilder.cpp
+    )
+    file(GLOB_RECURSE ${PROJECT}_EXTRA_EQUIPMENT_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+        items/equipment/EnergizerEquipment.hpp;
+        items/equipment/FreezerEquipment.hpp;
+        builder/items/equipment/EnergizerEquipmentBuilder.hpp;
+        builder/items/equipment/FreezerEquipmentBuilder.hpp
+    )
+
+#    message("_EXTRA_EQUIPMENT_SOURCE=${${PROJECT}_EXTRA_EQUIPMENT_SOURCE}")
+#    message("_EXTRA_EQUIPMENT_HEADER=${${PROJECT}_EXTRA_EQUIPMENT_HEADER}")
+
+    list(REMOVE_ITEM ${PROJECT}_SOURCE ${${PROJECT}_EXTRA_EQUIPMENT_SOURCE})
+    list(REMOVE_ITEM ${PROJECT}_HEADER ${${PROJECT}_EXTRA_EQUIPMENT_HEADER})
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

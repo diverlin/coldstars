@@ -38,54 +38,58 @@ BaseEquipment::BaseEquipment()
 BaseEquipment::~BaseEquipment()
 {
     LOG("___::~BaseEquipment("+std::to_string(id())+")");
-        
+
     //delete animation_notfunctioning;
 }
 
 /* virtual */
 void BaseEquipment::putChildrenToGarbage() const
 {
+#ifdef USE_MODULES
     for (unsigned int i=0; i<modules_vec.size(); i++) {
         global::get().entityManager().addToGarbage(modules_vec[i]);
     }
+#endif
 }
-        
+
 /* virtual */
 void BaseEquipment::AddCommonInfo()
 {
-//    info.addNameStr("tech_level:");   info.addValueStr( getTechLevelStr(data_item.tech_level) );
-//    info.addNameStr("modules:");   info.addValueStr( std::to_string(data_item.modules_num_max) );
-//    info.addNameStr("race:");      info.addValueStr( getRaceStr(race_id) );
-//    info.addNameStr("deteriori:"); info.addValueStr( std::to_string(deterioration) );
-//    info.addNameStr("condition:"); info.addValueStr( std::to_string(condition) + "/" + std::to_string(data_item.condition_max) );
-//    info.addNameStr("mass:");      info.addValueStr( std::to_string(data_item.mass) );
-//    info.addNameStr("price:");     info.addValueStr( std::to_string(price) );
+    //    info.addNameStr("tech_level:");   info.addValueStr( getTechLevelStr(data_item.tech_level) );
+    //    info.addNameStr("modules:");   info.addValueStr( std::to_string(data_item.modules_num_max) );
+    //    info.addNameStr("race:");      info.addValueStr( getRaceStr(race_id) );
+    //    info.addNameStr("deteriori:"); info.addValueStr( std::to_string(deterioration) );
+    //    info.addNameStr("condition:"); info.addValueStr( std::to_string(condition) + "/" + std::to_string(data_item.condition_max) );
+    //    info.addNameStr("mass:");      info.addValueStr( std::to_string(data_item.mass) );
+    //    info.addNameStr("price:");     info.addValueStr( std::to_string(price) );
 
 }
 
+#ifdef USE_MODULES
 bool BaseEquipment::InsertModule(BaseModule* module)
 {
     if (module->parentSubTypeId() == subTypeId())
     {
         if (modules_vec.size() < m_data_item.modules_num)
+        {
+            if (module->itemSlot() != nullptr)
             {
-                if (module->itemSlot() != nullptr)
-                {
-                    module->itemSlot()->removeItem();
-                }
-                module->setItemSlot(nullptr);
-                module->SetEquipmentOwner(this);
-                   modules_vec.push_back(module);                
-                        
-                updateProperties();
-                itemSlot()->updateVehiclePropetries();
-
-                return true;
+                module->itemSlot()->removeItem();
             }
-        }
+            module->setItemSlot(nullptr);
+            module->SetEquipmentOwner(this);
+            modules_vec.push_back(module);
 
-           return false;   
+            updateProperties();
+            itemSlot()->updateVehiclePropetries();
+
+            return true;
+        }
+    }
+
+    return false;
 } 
+#endif
 
 ///* virtual */
 //void BaseEquipment::Render(const jeti::Renderer& render, const ceti::Box2D& box, const glm::vec2& gui_offset, bool draw_text)
@@ -100,7 +104,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 //                 //GUI::INSERTED_MODULE_SIZE);
 //        //drawTexturedRect(modules_vec[i]->textureOb(), module_rect, -1.0f);
 //    }
-        
+
 //    if (condition == 0)
 //    {
 //        render.DrawQuad(*GuiTextureObCollector::Instance().slot_mark_reject, box);

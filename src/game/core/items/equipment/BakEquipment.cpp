@@ -44,9 +44,11 @@ void BakEquipment::increaseFuel(int fuel)
 void BakEquipment::updateProperties()
 {
     m_fuelMaxAdd = 0;
+#ifdef USE_MODULES
     for (unsigned int i=0; i<modules_vec.size(); i++) {
         m_fuelMaxAdd += ((BakModule*)modules_vec[i])->GetFuelMaxAdd();
-    }    
+    }
+#endif
     m_fuelMax = m_fuelMaxOrig + m_fuelMaxAdd;
 }
 

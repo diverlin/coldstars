@@ -53,12 +53,14 @@ void LazerEquipment::updateProperties()
     damage_add  = 0;
     radius_add  = 0;
 
+#ifdef USE_MODULES
     for (unsigned int i = 0; i < modules_vec.size(); i++)
     {
         damage_add   += ((LazerModule*)modules_vec[i])->GetDamageAdd();
         radius_add   += ((LazerModule*)modules_vec[i])->GetRadiusAdd();
     }
-    
+#endif
+
     damage = damage_orig + damage_add;
     radius = radius_orig + radius_add;
 } 

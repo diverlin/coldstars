@@ -38,10 +38,12 @@ void DriveEquipment::updateProperties()
 {     
     m_speed_add = 0;
     m_hyper_add = 0;
+#ifdef USE_MODULES
     for (unsigned int i=0; i<modules_vec.size(); i++) {
         m_speed_add += ((DriveModule*)modules_vec[i])->GetSpeedAdd();
         m_hyper_add += ((DriveModule*)modules_vec[i])->GetHyperAdd();
     }
+#endif
     m_speed = m_speed_orig + m_speed_add;
     m_hyper = m_hyper_orig + m_hyper_add;
 }

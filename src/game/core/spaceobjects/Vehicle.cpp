@@ -224,10 +224,10 @@ bool Vehicle::ManageItem(BaseItem* item)
     switch(item->typeId())
     {
         case TYPE::ENTITY::EQUIPMENT_ID:    { return ManageFunctionEquipment(item); break; }
-#ifdef ENABLE_MODULES
+#ifdef USE_MODULES
         case TYPE::ENTITY::MODULE_ID:       { return ManageFunctionModule(item); break; }
 #endif
-#ifdef ENABLE_ARTEFACTS
+#ifdef USE_ARTEFACTS
         case TYPE::ENTITY::ARTEFACT_ID:     { return ManageFunctionArtefact(item); break; }
 #endif
         case TYPE::ENTITY::GOODS_ID:        { return ManageFunctionGoodsPack(item); break; }
@@ -270,7 +270,7 @@ bool Vehicle::ManageFunctionEquipment(BaseItem* item)
     return false;
 }     
 
-#ifdef ENABLE_MODULES
+#ifdef USE_MODULES
 bool Vehicle::ManageFunctionModule(BaseItem* item)
 {
     for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {

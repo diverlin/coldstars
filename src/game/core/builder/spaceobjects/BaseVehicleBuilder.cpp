@@ -234,7 +234,8 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
             global::get().entityManager().addToGarbage(bak_equipment);
         }
     }
-    
+
+#ifdef USE_EXTRA_EQUIPMENT
     if (vehicle->isSlotExists(TYPE::ENTITY::ENERGIZER_SLOT_ID) == true)
     {
         EnergizerEquipment* energizer_equipment = global::get().energizerBuilder().create(tech_level);
@@ -245,12 +246,13 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::FREEZER_SLOT_ID) == true)
     {
-        //FreezerEquipment* freezer_equipment = FreezerBuilder::Instance().GetNewFreezerEquipment(tech_level);
-        //if (vehicle->AddAndManageItem(freezer_equipment) == false) {
-            //global::get().entityManager().AddToGarbage(freezer_equipment);
-        //}  
+        FreezerEquipment* freezer_equipment = global::get().freezerBuilder().create(tech_level);
+        if (vehicle->manage(freezer_equipment) == false) {
+            global::get().entityManager().addToGarbage(freezer_equipment);
+        }
     }
-    
+#endif
+
     if (vehicle->isSlotExists(TYPE::ENTITY::PROTECTOR_SLOT_ID) == true)
     {
         ProtectorEquipment* protector_equipment = global::get().protectorBuilder().create(generateProtectorDescriptor());
@@ -284,7 +286,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     }
 }
 
-#ifdef ENABLE_MODULES
+#ifdef USE_MODULES
 void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, TYPE::TECH tech_level) const
 {
     for (unsigned int i=0; i<4; i++) 
@@ -311,9 +313,9 @@ void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, TYPE::TECH tech_level) c
         }
     }
 }
-#endif // ENABLE_MODULES
+#endif // USE_MODULES
 
-#ifdef ENABLE_ARTEFACTS
+#ifdef USE_ARTEFACTS
 void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, TYPE::TECH tech_level) const
 {
     for (unsigned int i=0; i<2; i++) {
@@ -330,7 +332,7 @@ void BaseVehicleBuilder::EquipArtefacts(Vehicle* vehicle, TYPE::TECH tech_level)
         vehicle->manage(global::get().protectorArtefactBuilder().create());
     }  
 }
-#endif // ENABLE_ARTEFACTS
+#endif // USE_ARTEFACTS
 
 void BaseVehicleBuilder::EquipBomb(Vehicle* vehicle, TYPE::TECH tech_level) const
 {

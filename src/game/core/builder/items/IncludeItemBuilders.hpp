@@ -27,10 +27,12 @@
 #include "equipment/ScanerEquipmentBuilder.hpp"
 #include "equipment/DroidEquipmentBuilder.hpp"
 #include "equipment/RadarEquipmentBuilder.hpp"
+#ifdef USE_EXTRA_EQUIPMENT
 #include "equipment/FreezerEquipmentBuilder.hpp"
 #include "equipment/EnergizerEquipmentBuilder.hpp"
+#endif
 
-#ifdef ENABLE_MODULES
+#ifdef USE_MODULES
 #include "modules/BakModuleBuilder.hpp"
 #include "modules/DriveModuleBuilder.hpp"
 #include "modules/GrappleModuleBuilder.hpp"
@@ -40,12 +42,12 @@
 #include "modules/ScanerModuleBuilder.hpp"
 #include "modules/DroidModuleBuilder.hpp"
 #include "modules/RadarModuleBuilder.hpp"
-#endif // ENABLE_MODULES
+#endif // USE_MODULES
 
-#ifdef ENABLE_ARTEFACTS
+#ifdef USE_ARTEFACTS
 #include "artefacts/GravityArtefactBuilder.hpp"
 #include "artefacts/ProtectorArtefactBuilder.hpp"
-#endif // ENABLE_ARTEFACTS
+#endif // USE_ARTEFACTS
 
 #include "other/BombBuilder.hpp"
 

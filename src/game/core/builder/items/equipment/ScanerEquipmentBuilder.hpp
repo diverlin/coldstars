@@ -28,13 +28,13 @@ class ScanerEquipment;
 
 class ScanerBuilder
 {
-    public:
-        ScanerBuilder();
-        ~ScanerBuilder();
+public:
+    ScanerBuilder();
+    ~ScanerBuilder();
 
-        ScanerEquipment* createTemplate(id_type id = NONE_ID) const;
-        ScanerEquipment* create(const descriptor::Base&) const;
+    ScanerEquipment* createTemplate(id_type id = NONE_ID) const;
+    ScanerEquipment* create(const descriptor::Base&) const;
 
-    private:
-        void createInternals(ScanerEquipment*, const descriptor::Base&) const;
+private:
+    void createInternals(ScanerEquipment*, const descriptor::Base&) const;
 }; 
