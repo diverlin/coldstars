@@ -25,7 +25,7 @@
 namespace item {
 namespace equipment {
 
-DriveEquipment::DriveEquipment(const id_type& id)
+Drive::Drive(const id_type& id)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
@@ -33,11 +33,11 @@ DriveEquipment::DriveEquipment(const id_type& id)
 }
 
 /* virtual */
-DriveEquipment::~DriveEquipment() 
+Drive::~Drive()
 {}
 
 /* virtual */
-void DriveEquipment::updateProperties()
+void Drive::updateProperties()
 {     
     m_speed_add = 0;
     m_hyper_add = 0;
@@ -51,7 +51,7 @@ void DriveEquipment::updateProperties()
     m_hyper = m_hyper_orig + m_hyper_add;
 }
 
-void DriveEquipment::CountPrice()
+void Drive::CountPrice()
 {
     float speed_rate         = (float)m_speed_orig / EQUIPMENT::DRIVE::SPEED_MIN;
     float hyper_rate         = (float)m_hyper_orig / EQUIPMENT::DRIVE::HYPER_MIN;
@@ -67,14 +67,14 @@ void DriveEquipment::CountPrice()
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void DriveEquipment::addUniqueInfo()
+void Drive::addUniqueInfo()
 {
     //        info.addTitleStr("DRIVE");
     //        info.addNameStr("speed:");     info.addValueStr(GetSpeedStr());
     //        info.addNameStr("hyper:");     info.addValueStr(GetHyperStr());
 }             
 
-std::string DriveEquipment::GetSpeedStr()
+std::string Drive::GetSpeedStr()
 {
     if (m_speed_add == 0)
         return std::to_string(m_speed_orig);
@@ -82,7 +82,7 @@ std::string DriveEquipment::GetSpeedStr()
         return std::to_string(m_speed_orig) + "+" + std::to_string(m_speed_add);
 }
 
-std::string DriveEquipment::GetHyperStr()
+std::string Drive::GetHyperStr()
 {
     if (m_hyper_add == 0)
         return std::to_string(m_hyper_orig);
@@ -92,35 +92,35 @@ std::string DriveEquipment::GetHyperStr()
 
 
 /*virtual*/
-void DriveEquipment::Save(boost::property_tree::ptree& save_ptree) const
+void Drive::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "drive_equipment." + std::to_string(id()) + ".";
 
     Base::SaveData(save_ptree, root);
     Base::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
-    DriveEquipment::SaveData(save_ptree, root);
+    Drive::SaveData(save_ptree, root);
 }
 
 /*virtual*/
-void DriveEquipment::Load(const boost::property_tree::ptree& load_ptree)
+void Drive::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Base::LoadData(load_ptree);
     BaseEquipment::LoadData(load_ptree);
-    DriveEquipment::LoadData(load_ptree);
+    Drive::LoadData(load_ptree);
 }
 
 /*virtual*/    
-void DriveEquipment::Resolve()
+void Drive::Resolve()
 {
     Base::ResolveData();
     Base::ResolveData();
     BaseEquipment::ResolveData();
-    DriveEquipment::ResolveData();
+    Drive::ResolveData();
 }
 
-void DriveEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Drive::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     LOG(" DriveEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
@@ -128,7 +128,7 @@ void DriveEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std
     save_ptree.put(root+"hyper_orig", m_hyper_orig);
 }
 
-void DriveEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
+void Drive::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" DriveEquipment::LoadData()  id=" + std::to_string(id()) + " START");
 
@@ -136,7 +136,7 @@ void DriveEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
     m_hyper_orig = load_ptree.get<int>("hyper_orig");
 }                
 
-void DriveEquipment::ResolveData()
+void Drive::ResolveData()
 {
     LOG(" DriveEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }

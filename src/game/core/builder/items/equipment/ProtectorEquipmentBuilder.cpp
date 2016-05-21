@@ -40,9 +40,9 @@ ProtectorBuilder::ProtectorBuilder()
 ProtectorBuilder::~ProtectorBuilder()
 {}
 
-ProtectorEquipment* ProtectorBuilder::createTemplate(id_type id) const
+Protector* ProtectorBuilder::createTemplate(id_type id) const
 {
-    ProtectorEquipment* protector_equipment = new ProtectorEquipment(id);
+    Protector* protector_equipment = new Protector(id);
     assert(protector_equipment);
 
     global::get().entityManager().reg(protector_equipment);
@@ -50,15 +50,15 @@ ProtectorEquipment* ProtectorBuilder::createTemplate(id_type id) const
     return protector_equipment;
 } 
    
-ProtectorEquipment* ProtectorBuilder::create(const descriptor::Base& descriptor) const
+Protector* ProtectorBuilder::create(const descriptor::Base& descriptor) const
 {
-    ProtectorEquipment* protector_equipment = createTemplate();
+    Protector* protector_equipment = createTemplate();
     createInternals(protector_equipment, descriptor);
         
     return protector_equipment;
 } 
          
-void ProtectorBuilder::createInternals(ProtectorEquipment* protector_equipment, const descriptor::Base& descriptor) const
+void ProtectorBuilder::createInternals(Protector* protector_equipment, const descriptor::Base& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
 

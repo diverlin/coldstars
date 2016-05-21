@@ -39,9 +39,9 @@ RocketBuilder::RocketBuilder()
 RocketBuilder::~RocketBuilder()
 {}
 
-RocketEquipment* RocketBuilder::createTemplate(id_type id) const
+Rocket* RocketBuilder::createTemplate(id_type id) const
 {
-    RocketEquipment* rocket_equipment = new RocketEquipment(id);
+    Rocket* rocket_equipment = new Rocket(id);
     assert(rocket_equipment);
 
     global::get().entityManager().reg(rocket_equipment);
@@ -49,15 +49,15 @@ RocketEquipment* RocketBuilder::createTemplate(id_type id) const
     return rocket_equipment;
 } 
 
-RocketEquipment* RocketBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+Rocket* RocketBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {
-    RocketEquipment* rocket_equipment = createTemplate();
+    Rocket* rocket_equipment = createTemplate();
     createInternals(rocket_equipment, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
 
     return rocket_equipment;
 } 
 
-void RocketBuilder::createInternals(RocketEquipment* rocket_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+void RocketBuilder::createInternals(Rocket* rocket_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));

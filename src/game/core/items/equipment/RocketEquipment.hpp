@@ -26,11 +26,11 @@
 namespace item {
 namespace equipment {
 
-class RocketEquipment : public BaseEquipment
+class Rocket : public BaseEquipment
 { 
        public:
-        RocketEquipment(const id_type& id);
-        virtual ~RocketEquipment();
+        Rocket(const id_type& id);
+        virtual ~Rocket();
         
         void SetAmmoMaxOrig(int ammo_max_orig) { this->ammo_max_orig = ammo_max_orig; }
         void SetDamageOrig(int damage_orig)    { this->damage_orig   = damage_orig; }

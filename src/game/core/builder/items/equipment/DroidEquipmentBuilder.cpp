@@ -40,9 +40,9 @@ DroidBuilder::DroidBuilder()
 DroidBuilder::~DroidBuilder()
 {}
 
-DroidEquipment* DroidBuilder::createTemplate(id_type id) const
+Droid* DroidBuilder::createTemplate(id_type id) const
 {
-    DroidEquipment* droid_equipment = new DroidEquipment(id);
+    Droid* droid_equipment = new Droid(id);
     assert(droid_equipment);
 
     global::get().entityManager().reg(droid_equipment);
@@ -50,15 +50,15 @@ DroidEquipment* DroidBuilder::createTemplate(id_type id) const
     return droid_equipment;
 } 
 
-DroidEquipment* DroidBuilder::create(const descriptor::Base& descriptor) const
+Droid* DroidBuilder::create(const descriptor::Base& descriptor) const
 {
-    DroidEquipment* droid_equipment = createTemplate();
+    Droid* droid_equipment = createTemplate();
     createInternals(droid_equipment, descriptor);
         
     return droid_equipment;
 }  
             
-void DroidBuilder::createInternals(DroidEquipment* droid_equipment, const descriptor::Base& descriptor) const
+void DroidBuilder::createInternals(Droid* droid_equipment, const descriptor::Base& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
    

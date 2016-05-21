@@ -39,9 +39,9 @@ GrappleBuilder::GrappleBuilder()
 GrappleBuilder::~GrappleBuilder()
 {}
 
-GrappleEquipment* GrappleBuilder::createTemplate(id_type id) const
+Grapple* GrappleBuilder::createTemplate(id_type id) const
 {
-    GrappleEquipment* grapple_equipment = new GrappleEquipment(id);
+    Grapple* grapple_equipment = new Grapple(id);
     assert(grapple_equipment);
 
     global::get().entityManager().reg(grapple_equipment);
@@ -49,15 +49,15 @@ GrappleEquipment* GrappleBuilder::createTemplate(id_type id) const
     return grapple_equipment;
 } 
 
-GrappleEquipment* GrappleBuilder::create(const descriptor::Base& descriptor) const
+Grapple* GrappleBuilder::create(const descriptor::Base& descriptor) const
 {
-    GrappleEquipment* grapple_equipment = createTemplate();
+    Grapple* grapple_equipment = createTemplate();
     createInternals(grapple_equipment, descriptor);
 
     return grapple_equipment;
 } 
 
-void GrappleBuilder::createInternals(GrappleEquipment* grapple_equipment, const descriptor::Base& descriptor) const
+void GrappleBuilder::createInternals(Grapple* grapple_equipment, const descriptor::Base& descriptor) const
 {
     ItemCommonData data = extractCommonData(descriptor);
 

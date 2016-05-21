@@ -43,9 +43,9 @@ LazerBuilder::LazerBuilder()
 LazerBuilder::~LazerBuilder()
 {}
 
-LazerEquipment* LazerBuilder::createTemplate(id_type id) const
+Lazer* LazerBuilder::createTemplate(id_type id) const
 { 
-    LazerEquipment* lazer_equipment = new LazerEquipment(id);
+    Lazer* lazer_equipment = new Lazer(id);
     assert(lazer_equipment);
 
     global::get().entityManager().reg(lazer_equipment);
@@ -53,15 +53,15 @@ LazerEquipment* LazerBuilder::createTemplate(id_type id) const
     return lazer_equipment;
 } 
 
-LazerEquipment* LazerBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
+Lazer* LazerBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {
-    LazerEquipment* lazer_equipment = createTemplate();
+    Lazer* lazer_equipment = createTemplate();
     createInternals(lazer_equipment, tech_level, race_id, damage_orig, radius_orig);
 
     return lazer_equipment;
 } 
 
-void LazerBuilder::createInternals(LazerEquipment* lazer_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
+void LazerBuilder::createInternals(Lazer* lazer_equipment, TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {     
     if (race_id == TYPE::RACE::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));

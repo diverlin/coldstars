@@ -95,7 +95,7 @@ bool Angar::RepairItem(Npc* npc, item::Base* item) const
     return false;
 }         
 
-bool Angar::ChargeRocketEquipment(Npc* npc, item::equipment::RocketEquipment* rocket_equipment) const
+bool Angar::ChargeRocketEquipment(Npc* npc, item::equipment::Rocket* rocket_equipment) const
 {
     int price_for_one = rocket_equipment->price() * AMMO_PRICE_RATE;
     int ammo_max = npc->GetCredits() / price_for_one;

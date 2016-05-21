@@ -25,7 +25,7 @@
 namespace item {
 namespace equipment {
 
-ProtectorEquipment::ProtectorEquipment(const id_type& id)
+Protector::Protector(const id_type& id)
     :
       protection_orig(0)
 {
@@ -35,11 +35,11 @@ ProtectorEquipment::ProtectorEquipment(const id_type& id)
 }
 
 /* virtual */
-ProtectorEquipment::~ProtectorEquipment() 
+Protector::~Protector()
 {}
 
 /* virtual */
-void ProtectorEquipment::updateProperties()
+void Protector::updateProperties()
 {   
     protection_add  = 0;
 
@@ -52,7 +52,7 @@ void ProtectorEquipment::updateProperties()
     protection = protection_orig + protection_add;
 }
 
-void ProtectorEquipment::CountPrice()
+void Protector::CountPrice()
 {
     float protection_rate    = (float)protection_orig / EQUIPMENT::PROTECTOR::PROTECTION_MIN;
     float modules_num_rate   = (float)m_data_item.modules_num / EQUIPMENT::PROTECTOR::MODULES_NUM_MAX;
@@ -66,13 +66,13 @@ void ProtectorEquipment::CountPrice()
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void ProtectorEquipment::addUniqueInfo()
+void Protector::addUniqueInfo()
 {
     //        info.addTitleStr("PROTECTOR");
     //        info.addNameStr("protection:");     info.addValueStr(GetProtectionStr());
 }
 
-std::string ProtectorEquipment::GetProtectionStr()
+std::string Protector::GetProtectionStr()
 {
     if (protection_add == 0)
         return std::to_string(protection_orig);
@@ -81,48 +81,48 @@ std::string ProtectorEquipment::GetProtectionStr()
 }
 
 /*virtual*/
-void ProtectorEquipment::Save(boost::property_tree::ptree& save_ptree) const
+void Protector::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "protector_equipment." + std::to_string(id()) + ".";
     Base::SaveData(save_ptree, root);
     Base::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
-    ProtectorEquipment::SaveData(save_ptree, root);
+    Protector::SaveData(save_ptree, root);
 }
 
 /*virtual*/
-void ProtectorEquipment::Load(const boost::property_tree::ptree& load_ptree)
+void Protector::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Base::LoadData(load_ptree);
     BaseEquipment::LoadData(load_ptree);
-    ProtectorEquipment::LoadData(load_ptree);
+    Protector::LoadData(load_ptree);
 }
 
 /*virtual*/
-void ProtectorEquipment::Resolve()
+void Protector::Resolve()
 {
     Base::ResolveData();
     Base::ResolveData();
     BaseEquipment::ResolveData();
-    ProtectorEquipment::ResolveData();
+    Protector::ResolveData();
 }
 
-void ProtectorEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Protector::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     LOG(" ProtectorEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"protection_orig", protection_orig);
 }
 
-void ProtectorEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
+void Protector::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" ProtectorEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
     protection_orig = load_ptree.get<int>("protection_orig");
 }                
 
-void ProtectorEquipment::ResolveData()
+void Protector::ResolveData()
 {
     LOG(" ProtectorEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
