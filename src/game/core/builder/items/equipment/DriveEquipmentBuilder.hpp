@@ -24,7 +24,7 @@
 
 namespace item {
 namespace equipment {
-class DriveEquipment;
+class Drive;
 }
 }
 
@@ -34,11 +34,11 @@ public:
     DriveBuilder();
     ~DriveBuilder();
 
-    item::equipment::DriveEquipment* createTemplate(id_type id = NONE_ID) const;
-    item::equipment::DriveEquipment* create(const descriptor::Base&) const;
+    item::equipment::Drive* createTemplate(id_type id = NONE_ID) const;
+    item::equipment::Drive* create(const descriptor::Base&) const;
 
 private:
-    void createInternals(item::equipment::DriveEquipment*, const descriptor::Base&) const;
+    void createInternals(item::equipment::Drive*, const descriptor::Base&) const;
 }; 
 
 

@@ -81,7 +81,7 @@ TEST(ship_with_equipment, bak)
 TEST(ship_with_equipment, drive)
 {
     Ship* ship = createNewShip();
-    item::equipment::DriveEquipment* drive_equipment = global::get().driveBuilder().create(generateDriveDescriptor());
+    item::equipment::Drive* drive_equipment = global::get().driveBuilder().create(generateDriveDescriptor());
 
     EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot() != nullptr);
     EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() == nullptr);
@@ -95,7 +95,7 @@ TEST(ship_with_equipment, bak_and_drive)
 {
     Ship* ship = createNewShip();
     item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
-    item::equipment::DriveEquipment* drive_equipment = global::get().driveBuilder().create(generateDriveDescriptor());
+    item::equipment::Drive* drive_equipment = global::get().driveBuilder().create(generateDriveDescriptor());
 
     EXPECT_EQ(ship->GetProperties().hyper, 0);
     ship->manage(bak_equipment);
@@ -106,7 +106,7 @@ TEST(ship_with_equipment, bak_and_drive)
 TEST(ship_with_equipment, droid)
 {
     Ship* ship = createNewShip();
-    item::equipment::DroidEquipment* droid_equipment = global::get().droidBuilder().create(generateDroidDescriptor());
+    item::equipment::Droid* droid_equipment = global::get().droidBuilder().create(generateDroidDescriptor());
 
     EXPECT_TRUE(ship->slotDroid()->item() == nullptr);
     ship->manage(droid_equipment);
@@ -116,7 +116,7 @@ TEST(ship_with_equipment, droid)
 TEST(ship_with_equipment, grapple)
 {
     Ship* ship = createNewShip();
-    item::equipment::GrappleEquipment* grapple_equipment = global::get().grappleBuilder().create(generateGrappleDescriptor());
+    item::equipment::Grapple* grapple_equipment = global::get().grappleBuilder().create(generateGrappleDescriptor());
 
     EXPECT_TRUE(ship->slotGrapple()->item() == nullptr);
     ship->manage(grapple_equipment);
@@ -136,7 +136,7 @@ TEST(ship_with_equipment, scaner)
 TEST(ship_with_equipment, radar)
 {
     Ship* ship = createNewShip();
-    item::equipment::RadarEquipment* radar_equipment = global::get().radarBuilder().create(generateRadarDescriptor());
+    item::equipment::Radar* radar_equipment = global::get().radarBuilder().create(generateRadarDescriptor());
 
     EXPECT_TRUE(ship->slotRadar()->item() == nullptr);
     ship->manage(radar_equipment);
@@ -146,7 +146,7 @@ TEST(ship_with_equipment, radar)
 TEST(ship_with_equipment, protector)
 {
     Ship* ship = createNewShip();
-    item::equipment::ProtectorEquipment* protector_equipment = global::get().protectorBuilder().create(generateProtectorDescriptor());
+    item::equipment::Protector* protector_equipment = global::get().protectorBuilder().create(generateProtectorDescriptor());
 
     EXPECT_TRUE(ship->GetComplexProtector().GetProtectorSlot()->item() == nullptr);
     ship->manage(protector_equipment);

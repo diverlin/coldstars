@@ -24,7 +24,7 @@
 
 namespace item {
 namespace equipment {
-class GrappleEquipment;
+class Grapple;
 }
 }
 
@@ -34,9 +34,9 @@ class GrappleBuilder
         GrappleBuilder();
         ~GrappleBuilder();
 
-        item::equipment::GrappleEquipment* createTemplate(id_type id = NONE_ID) const;
-        item::equipment::GrappleEquipment* create(const descriptor::Base&) const;
+        item::equipment::Grapple* createTemplate(id_type id = NONE_ID) const;
+        item::equipment::Grapple* create(const descriptor::Base&) const;
                                      
     private:
-        void createInternals(item::equipment::GrappleEquipment*, const descriptor::Base&) const;
+        void createInternals(item::equipment::Grapple*, const descriptor::Base&) const;
 }; 

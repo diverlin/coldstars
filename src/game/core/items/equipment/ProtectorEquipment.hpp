@@ -24,11 +24,11 @@
 namespace item {
 namespace equipment {
 
-class ProtectorEquipment  : public BaseEquipment
+class Protector  : public BaseEquipment
 {
     public:
-        ProtectorEquipment(const id_type& id);
-        virtual ~ProtectorEquipment();
+        Protector(const id_type& id);
+        virtual ~Protector();
 
         void SetProtectionOrig(int protection_orig) { this->protection_orig = protection_orig; };
         int GetProtection() const { return protection; };

@@ -26,11 +26,11 @@ class ItemSlot;
 namespace item {
 namespace equipment {
 
-class LazerEquipment : public BaseEquipment
+class Lazer : public BaseEquipment
 {
     public:
-        LazerEquipment(const id_type& id);
-        virtual ~LazerEquipment();
+        Lazer(const id_type& id);
+        virtual ~Lazer();
 
         void SetDamageOrig(int damage_orig) { this->damage_orig = damage_orig; };
         void SetRadiusOrig(int radius_orig) { this->radius_orig = radius_orig; };

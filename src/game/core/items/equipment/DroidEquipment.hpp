@@ -24,11 +24,11 @@
 namespace item {
 namespace equipment {
 
-class DroidEquipment : public BaseEquipment
+class Droid : public BaseEquipment
 {
 public:
-    DroidEquipment(const id_type& id);
-    virtual ~DroidEquipment();
+    Droid(const id_type& id);
+    virtual ~Droid();
 
     void SetRepairOrig(int repair_orig) { this->repair_orig = repair_orig; };
     int GetRepair() const { return repair; };

@@ -24,7 +24,7 @@
 
 namespace item {
 namespace equipment {
-class DroidEquipment;
+class Droid;
 }
 }
 
@@ -34,9 +34,9 @@ class DroidBuilder
         DroidBuilder();
         ~DroidBuilder();
 
-        item::equipment::DroidEquipment* createTemplate(id_type id = NONE_ID) const;
-        item::equipment::DroidEquipment* create(const descriptor::Base&) const;
+        item::equipment::Droid* createTemplate(id_type id = NONE_ID) const;
+        item::equipment::Droid* create(const descriptor::Base&) const;
                                      
     private:
-        void createInternals(item::equipment::DroidEquipment*, const descriptor::Base&) const;
+        void createInternals(item::equipment::Droid*, const descriptor::Base&) const;
 }; 

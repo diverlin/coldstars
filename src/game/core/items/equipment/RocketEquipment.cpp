@@ -61,7 +61,7 @@ void BulletData::Resolve()
 namespace item {
 namespace equipment {
 
-RocketEquipment::RocketEquipment(const id_type& id)
+Rocket::Rocket(const id_type& id)
 :
 ammo_max_orig(0),
 ammo(0),
@@ -76,11 +76,11 @@ radius_orig(0)
 }
 
 /* virtual */
-RocketEquipment::~RocketEquipment() 
+Rocket::~Rocket()
 {}
 
 /* virtual */
-void RocketEquipment::updateProperties()
+void Rocket::updateProperties()
 {
     ammo_max_add = 0;
     damage_add   = 0;
@@ -100,7 +100,7 @@ void RocketEquipment::updateProperties()
     radius   = radius_orig + radius_add;
 }
 
-void RocketEquipment::CountPrice()
+void Rocket::CountPrice()
 {
     float ammo_rate     = (float)ammo_max_orig / EQUIPMENT::ROCKET::AMMO_MIN;
     float damage_rate   = (float)damage_orig / EQUIPMENT::ROCKET::DAMAGE_MIN;
@@ -118,7 +118,7 @@ void RocketEquipment::CountPrice()
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void RocketEquipment::addUniqueInfo()
+void Rocket::addUniqueInfo()
 {
 //    info.addTitleStr("ROCKET");
     
@@ -127,7 +127,7 @@ void RocketEquipment::addUniqueInfo()
 //    info.addNameStr("radius:");    info.addValueStr(GetRadiusStr());
 }
 
-std::string RocketEquipment::GetAmmoStr()
+std::string Rocket::GetAmmoStr()
 {
     if (ammo_max_add == 0)
         return std::to_string(ammo_max_orig) + "/" + std::to_string(ammo);
@@ -135,7 +135,7 @@ std::string RocketEquipment::GetAmmoStr()
         return std::to_string(ammo_max_orig) + "+" + std::to_string(ammo_max_add) + "/" + std::to_string(ammo);
 }
 
-std::string RocketEquipment::GetDamageStr()
+std::string Rocket::GetDamageStr()
 {
     if (damage_add == 0)
         return std::to_string(damage_orig);
@@ -143,7 +143,7 @@ std::string RocketEquipment::GetDamageStr()
         return std::to_string(damage_orig) + "+" + std::to_string(damage_add);
 }
 
-std::string RocketEquipment::GetRadiusStr()
+std::string Rocket::GetRadiusStr()
 {
     if (radius_add == 0)
         return std::to_string(radius_orig);
@@ -151,7 +151,7 @@ std::string RocketEquipment::GetRadiusStr()
         return std::to_string(radius_orig) + "+" + std::to_string(radius_add);
 }
 
-void RocketEquipment::FireEvent(float attack_rate_normalized)
+void Rocket::FireEvent(float attack_rate_normalized)
 {
     int num = 0;
 
@@ -206,35 +206,35 @@ void RocketEquipment::FireEvent(float attack_rate_normalized)
 }
 
 /*virtual*/
-void RocketEquipment::Save(boost::property_tree::ptree& save_ptree) const
+void Rocket::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "rocket_equipment." + std::to_string(id()) + ".";
 
     Base::SaveData(save_ptree, root);
     Base::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
-    RocketEquipment::SaveData(save_ptree, root);
+    Rocket::SaveData(save_ptree, root);
 }
 
 /*virtual*/
-void RocketEquipment::Load(const boost::property_tree::ptree& load_ptree)
+void Rocket::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Base::LoadData(load_ptree);
     BaseEquipment::LoadData(load_ptree);
-    RocketEquipment::LoadData(load_ptree);
+    Rocket::LoadData(load_ptree);
 }
 
 /*virtual*/
-void RocketEquipment::Resolve()
+void Rocket::Resolve()
 {
     Base::ResolveData();
     Base::ResolveData();
     BaseEquipment::ResolveData();
-    RocketEquipment::ResolveData();
+    Rocket::ResolveData();
 }
 
-void RocketEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Rocket::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     LOG(" RocketEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
@@ -247,7 +247,7 @@ void RocketEquipment::SaveData(boost::property_tree::ptree& save_ptree, const st
     data_bullet.Save(save_ptree, root);
 }
                 
-void RocketEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
+void Rocket::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" RocketEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
@@ -260,7 +260,7 @@ void RocketEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
     data_bullet.Load(load_ptree.get_child("data_bullet"));
 }                
 
-void RocketEquipment::ResolveData()
+void Rocket::ResolveData()
 {
     LOG(" RocketEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
     

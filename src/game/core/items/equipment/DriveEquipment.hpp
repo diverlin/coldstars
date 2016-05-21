@@ -24,11 +24,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 namespace item {
 namespace equipment {
 
-class DriveEquipment : public BaseEquipment
+class Drive : public BaseEquipment
 {
 public:
-    DriveEquipment(const id_type& id);
-    virtual ~DriveEquipment();
+    Drive(const id_type& id);
+    virtual ~Drive();
 
     void SetSpeedOrig(int speed_orig) { m_speed_orig = speed_orig; };
     void SetHyperOrig(int hyper_orig) { m_hyper_orig = hyper_orig; };

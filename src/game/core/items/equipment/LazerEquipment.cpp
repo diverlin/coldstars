@@ -32,7 +32,7 @@
 namespace item {
 namespace equipment {
 
-LazerEquipment::LazerEquipment(const id_type& id)
+Lazer::Lazer(const id_type& id)
     :
       damage_orig(0),
       radius_orig(0)
@@ -47,11 +47,11 @@ LazerEquipment::LazerEquipment(const id_type& id)
 }
 
 /* virtual */
-LazerEquipment::~LazerEquipment() 
+Lazer::~Lazer()
 {}
 
 /* virtual */
-void LazerEquipment::updateProperties()
+void Lazer::updateProperties()
 {
     damage_add  = 0;
     radius_add  = 0;
@@ -68,7 +68,7 @@ void LazerEquipment::updateProperties()
     radius = radius_orig + radius_add;
 } 
 
-void LazerEquipment::CountPrice()
+void Lazer::CountPrice()
 {
     float damage_rate        = (float)damage_orig / EQUIPMENT::LAZER::DAMAGE_MIN;
     float radius_rate        = (float)radius_orig / EQUIPMENT::LAZER::RADIUS_MIN;
@@ -84,7 +84,7 @@ void LazerEquipment::CountPrice()
     m_price                    = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void LazerEquipment::addUniqueInfo()
+void Lazer::addUniqueInfo()
 {
 //    info.addTitleStr("LAZER");
 
@@ -92,7 +92,7 @@ void LazerEquipment::addUniqueInfo()
 //    info.addNameStr("radius:");     info.addValueStr(GetRadiusStr());
 }
 
-std::string LazerEquipment::GetDamageStr()
+std::string Lazer::GetDamageStr()
 {
     if (damage_add == 0)
         return std::to_string(damage_orig);
@@ -100,7 +100,7 @@ std::string LazerEquipment::GetDamageStr()
         return std::to_string(damage_orig) + "+" + std::to_string(damage_add);
 }
 
-std::string LazerEquipment::GetRadiusStr()
+std::string Lazer::GetRadiusStr()
 {
     if (radius_add == 0)
         return std::to_string(radius_orig);
@@ -108,7 +108,7 @@ std::string LazerEquipment::GetRadiusStr()
         return std::to_string(radius_orig) + "+" + std::to_string(radius_add);
 }
 
-void LazerEquipment::FireEvent(SpaceObject* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
+void Lazer::FireEvent(SpaceObject* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
 { 
     if (itemSlot()->GetOwnerVehicle()->TryToConsumeEnergy(damage) == true)
     {
@@ -151,34 +151,34 @@ void LazerEquipment::FireEvent(SpaceObject* target, ItemSlot* subtarget, float d
 } 
 
 /*virtual*/
-void LazerEquipment::Save(boost::property_tree::ptree& save_ptree) const
+void Lazer::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "lazer_equipment." + std::to_string(id()) + ".";
     Base::SaveData(save_ptree, root);
     Base::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
-    LazerEquipment::SaveData(save_ptree, root);
+    Lazer::SaveData(save_ptree, root);
 }
 
 /*virtual*/
-void LazerEquipment::Load(const boost::property_tree::ptree& load_ptree)
+void Lazer::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Base::LoadData(load_ptree);
     BaseEquipment::LoadData(load_ptree);
-    LazerEquipment::LoadData(load_ptree);
+    Lazer::LoadData(load_ptree);
 }
 
 /*virtual*/
-void LazerEquipment::Resolve()
+void Lazer::Resolve()
 {
     Base::ResolveData();
     Base::ResolveData();
     BaseEquipment::ResolveData();
-    LazerEquipment::ResolveData();
+    Lazer::ResolveData();
 }
 
-void LazerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Lazer::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     LOG(" LazerEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
@@ -186,7 +186,7 @@ void LazerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std
     save_ptree.put(root+"radius_orig", radius_orig);
 }
 
-void LazerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
+void Lazer::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" LazerEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
@@ -194,7 +194,7 @@ void LazerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
     radius_orig = load_ptree.get<int>("radius_orig");
 }                
 
-void LazerEquipment::ResolveData()
+void Lazer::ResolveData()
 {
     LOG(" LazerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }
