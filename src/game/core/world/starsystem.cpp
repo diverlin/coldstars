@@ -108,9 +108,8 @@ Npc* StarSystem::freeLeaderByRaceId(TYPE::RACE race_id) const
     std::vector<Npc*> tmp_npc_vec;
     for (unsigned int i=0; i<m_vehicles.size(); i++)
     {
-        if (m_vehicles[i]->GetOwnerNpc()->GetRaceId() == race_id)
-        {
-            tmp_npc_vec.push_back(m_vehicles[i]->GetOwnerNpc());
+        if (m_vehicles[i]->npc()->GetRaceId() == race_id) {
+            tmp_npc_vec.push_back(m_vehicles[i]->npc());
         }
     }
     
@@ -139,9 +138,9 @@ void StarSystem::createGroupAndShareTask(Npc* npc_leader, StarSystem* target_sta
     std::vector<Npc*> tmp_npc_vec;
     for (unsigned int i=0; i<m_vehicles.size(); i++)
     {
-        if (m_vehicles[i]->GetOwnerNpc()->GetRaceId() == npc_leader->GetRaceId())
+        if (m_vehicles[i]->npc()->GetRaceId() == npc_leader->GetRaceId())
         {
-            tmp_npc_vec.push_back(m_vehicles[i]->GetOwnerNpc());
+            tmp_npc_vec.push_back(m_vehicles[i]->npc());
         }
     }
     
@@ -388,9 +387,9 @@ Vehicle* StarSystem::GetRandomVehicleExcludingNpcRaceId(TYPE::RACE _race_id) con
     
     for (unsigned int i=0; i<m_vehicles.size(); i++)
     {
-        if (m_vehicles[i]->GetOwnerNpc() != nullptr)
+        if (m_vehicles[i]->npc() != nullptr)
         {
-            if (m_vehicles[i]->GetOwnerNpc()->GetRaceId() != _race_id)
+            if (m_vehicles[i]->npc()->GetRaceId() != _race_id)
             {
                 _vehicle_vec.push_back(m_vehicles[i]);
             }
@@ -412,9 +411,9 @@ Vehicle* StarSystem::GetRandomVehicleByNpcRaceId(TYPE::RACE _race_id) const
     
     for (unsigned int i=0; i<m_vehicles.size(); i++)
     {
-        if (m_vehicles[i]->GetOwnerNpc() != nullptr)
+        if (m_vehicles[i]->npc() != nullptr)
         {
-            if (m_vehicles[i]->GetOwnerNpc()->GetRaceId() == _race_id)
+            if (m_vehicles[i]->npc()->GetRaceId() == _race_id)
             {
                 _vehicle_vec.push_back(m_vehicles[i]);
             }
@@ -438,7 +437,7 @@ Vehicle* StarSystem::GetRandomVehicle(const std::vector<TYPE::RACE>& rVec_race_i
     {
         for (unsigned int j=0; j<m_vehicles.size(); j++)
         {
-            if (rVec_race_id[i] == m_vehicles[j]->GetOwnerNpc()->GetRaceId())
+            if (rVec_race_id[i] == m_vehicles[j]->npc()->GetRaceId())
             {
                 tmp_vehicle_vec.push_back(m_vehicles[j]);
             }
@@ -791,7 +790,7 @@ void StarSystem::UpdateInSpaceInStatic_s()
 
     for (unsigned int i=0; i<m_vehicles.size(); i++)
     {
-        m_vehicles[i]->GetOwnerNpc()->UpdateInSpaceInStatic();
+        m_vehicles[i]->npc()->UpdateInSpaceInStatic();
         if (m_vehicles[i]->subTypeId() == TYPE::ENTITY::SPACESTATION_ID)
         {
             ((SpaceStation*)m_vehicles[i])->GetLand()->UpdateInStatic();
@@ -1022,8 +1021,8 @@ void StarSystem::starSparkEvent(float radius) const
 {
     for (unsigned int i=0; i<m_vehicles.size(); i++) {
         if ( meti::distance(m_vehicles[i]->center(), star()->center()) < radius ) {
-            if (m_vehicles[i]->radarSlot()->item() != nullptr) {
-                m_vehicles[i]->radarSlot()->item()->lockEvent(2);
+            if (m_vehicles[i]->slot_radar()->item() != nullptr) {
+                m_vehicles[i]->slot_radar()->item()->lockEvent(2);
             }
         }
     }

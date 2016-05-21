@@ -23,7 +23,6 @@
 #include <types/StatusTypes.hpp>
 
 #include <slots/BaseSlot.hpp>
-//#include <jeti/PathVisual.hpp>  // !!!
 
 class Turrel; 
 class BaseItem;
@@ -75,109 +74,108 @@ struct UnresolvedDataItemSlot
 
 class ItemSlot : public BaseSlot
 {   
-    public:        
-        ItemSlot(const id_type& id, TYPE::ENTITY subtype_id);
-        virtual ~ItemSlot();                
-        
-        virtual void putChildrenToGarbage() const;
-        
-        void setTarget(SpaceObject* target, ItemSlot* subtarget = nullptr);
-        void setTurrel(Turrel* turrel) { m_turrel = turrel; }
-        
-        SpaceObject* target() const { return m_target; }
-        ItemSlot* subtarget() const { return m_subtarget; }
-        
-        int hitProbability() const { return m_hitProbability; }
-        
-        Turrel* turrel() const { return m_turrel; }
-        
-        BaseItem* item()                         const { return m_item; }
-        RocketEquipment*    rocketEquipment()    const { return (RocketEquipment*)m_item; }
-        LazerEquipment*     lazerEquipment()     const { return (LazerEquipment*)m_item; }
-        RadarEquipment*     radarEquipment()     const { return (RadarEquipment*)m_item; }
-        DriveEquipment*     driveEquipment()     const { return (DriveEquipment*)m_item; }
-        BakEquipment*       bakEquipment()       const { return (BakEquipment*)m_item; }
-        EnergizerEquipment* energizerEquipment() const { return (EnergizerEquipment*)m_item; }
-        ProtectorEquipment* protectorEquipment() const { return (ProtectorEquipment*)m_item; }
-        DroidEquipment*     droidEquipment()     const { return (DroidEquipment*)m_item; }
-        FreezerEquipment*   freezerEquipment()   const { return (FreezerEquipment*)m_item; }
-        ScanerEquipment*    scanerEquipment()    const { return (ScanerEquipment*)m_item; }
-        GrappleEquipment*   grappleEquipment()   const { return (GrappleEquipment*)m_item; }
+public:
+    ItemSlot(const id_type& id, TYPE::ENTITY subtype_id);
+    virtual ~ItemSlot();
 
-        RocketModule*       rocketModule()       const { return (RocketModule*)m_item; }
-        LazerModule*        lazerModule()        const { return (LazerModule*)m_item; }
-        RadarModule*        radarModule()        const { return (RadarModule*)m_item; }
-        DriveModule*        driveModule()        const { return (DriveModule*)m_item; }
-        BakModule*          bakModule()          const { return (BakModule*)m_item; }
-        EnergizerModule*    energizerModule()    const { return (EnergizerModule*)m_item; }
-        ProtectorModule*    protectorModule()    const { return (ProtectorModule*)m_item; }
-        DroidModule*        droidModule()        const { return (DroidModule*)m_item; }
-        FreezerModule*      freezerModule()      const { return (FreezerModule*)m_item; }
-        ScanerModule*       scanerModule()       const { return (ScanerModule*)m_item; }
-        GrappleModule*      grappleModule()      const { return (GrappleModule*)m_item; }
+    virtual void putChildrenToGarbage() const;
 
-        Bomb* bomb()           const { return (Bomb*)m_item; }
-        //Artefact* GetArtefact() const { return artefact; }
-        GoodsPack* goodsPack() const { return (GoodsPack*)m_item; }
-                              
-        bool insertItem(BaseItem*);
-        void removeItem();
-        
-        STATUS validateTarget();
-        void resetTarget();
-        bool checkAmmo() const;
-        void fireEvent(float, bool);
-        
-        void updateVehiclePropetries() const;
-        
-//        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
-//        virtual void RenderItem(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
-//        void RenderMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*) const;
-//        void RenderTargetMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*, jeti::TextureOb*) const;
-        
-        void dropItemToSpace();
-        
-        bool swapItem(ItemSlot*);
-        
-        void updateRange(jeti::TextureOb*);
-        void drawRange(const glm::vec2&);
-        
-        bool checkSubTarget(ItemSlot*) const;
-        STATUS checkTarget(SpaceObject*) const;
-        STATUS checkTargetPure(SpaceObject*) const;
-                
-        void selectEvent();
-        void deselectEvent();
-        
-        virtual void Save(boost::property_tree::ptree&) const;
-        virtual void Load(const boost::property_tree::ptree&);
-        virtual void Resolve();
-        
-        int itemRadius() const;
-        int itemDamage() const;
-                                      
-    private:                               
-        Turrel* m_turrel = nullptr;          // only for weapons slot
-        
-        BaseItem* m_item = nullptr;
-        
-        SpaceObject* m_target = nullptr;
-        ItemSlot* m_subtarget = nullptr;
-        
-        int m_hitProbability;
-//        jeti::PathVisual m_VisualPath;    // !!!
-        
-        bool checkItemInsertion(BaseItem*) const;
-        
-        bool isTargetAlive(SpaceObject*) const;
-        bool isTargetInSpace(SpaceObject*) const;
-        bool isTargetInSameStarSystem(SpaceObject*) const;
-        bool checkDistanceToTarget(SpaceObject*) const;
-        
-        UnresolvedDataItemSlot m_unresolved_ItemSlot;
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
-        
-        void log(const std::string&) const;
+    void setTarget(SpaceObject* target, ItemSlot* subtarget = nullptr);
+    void setTurrel(Turrel* turrel) { m_turrel = turrel; }
+
+    SpaceObject* target() const { return m_target; }
+    ItemSlot* subtarget() const { return m_subtarget; }
+
+    int hitProbability() const { return m_hitProbability; }
+
+    Turrel* turrel() const { return m_turrel; }
+
+    BaseItem* item()                         const { return m_item; }
+    RocketEquipment*    rocketEquipment()    const { return reinterpret_cast<RocketEquipment*>(m_item); }
+    LazerEquipment*     lazerEquipment()     const { return reinterpret_cast<LazerEquipment*>(m_item); }
+    RadarEquipment*     radarEquipment()     const { return reinterpret_cast<RadarEquipment*>(m_item); }
+    DriveEquipment*     driveEquipment()     const { return reinterpret_cast<DriveEquipment*>(m_item); }
+    BakEquipment*       bakEquipment()       const { return reinterpret_cast<BakEquipment*>(m_item); }
+    EnergizerEquipment* energizerEquipment() const { return reinterpret_cast<EnergizerEquipment*>(m_item); }
+    ProtectorEquipment* protectorEquipment() const { return reinterpret_cast<ProtectorEquipment*>(m_item); }
+    DroidEquipment*     droidEquipment()     const { return reinterpret_cast<DroidEquipment*>(m_item); }
+    FreezerEquipment*   freezerEquipment()   const { return reinterpret_cast<FreezerEquipment*>(m_item); }
+    ScanerEquipment*    scanerEquipment()    const { return reinterpret_cast<ScanerEquipment*>(m_item); }
+    GrappleEquipment*   grappleEquipment()   const { return reinterpret_cast<GrappleEquipment*>(m_item); }
+
+    RocketModule*       rocketModule()       const { return reinterpret_cast<RocketModule*>(m_item); }
+    LazerModule*        lazerModule()        const { return reinterpret_cast<LazerModule*>(m_item); }
+    RadarModule*        radarModule()        const { return reinterpret_cast<RadarModule*>(m_item); }
+    DriveModule*        driveModule()        const { return reinterpret_cast<DriveModule*>(m_item); }
+    BakModule*          bakModule()          const { return reinterpret_cast<BakModule*>(m_item); }
+    EnergizerModule*    energizerModule()    const { return reinterpret_cast<EnergizerModule*>(m_item); }
+    ProtectorModule*    protectorModule()    const { return reinterpret_cast<ProtectorModule*>(m_item); }
+    DroidModule*        droidModule()        const { return reinterpret_cast<DroidModule*>(m_item); }
+    FreezerModule*      freezerModule()      const { return reinterpret_cast<FreezerModule*>(m_item); }
+    ScanerModule*       scanerModule()       const { return reinterpret_cast<ScanerModule*>(m_item); }
+    GrappleModule*      grappleModule()      const { return reinterpret_cast<GrappleModule*>(m_item); }
+
+    Bomb* bomb()           const { return reinterpret_cast<Bomb*>(m_item); }
+    //Artefact* GetArtefact() const { return artefact; }
+    GoodsPack* goodsPack() const { return reinterpret_cast<GoodsPack*>(m_item); }
+
+    bool insertItem(BaseItem*);
+    void removeItem();
+
+    STATUS validateTarget();
+    void resetTarget();
+    bool checkAmmo() const;
+    void fireEvent(float, bool);
+
+    void updateVehiclePropetries() const;
+
+    //        virtual void Render(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
+    //        virtual void RenderItem(const jeti::Renderer&, const ceti::Box2D&, const glm::vec2&, bool draw_text = true) const;
+    //        void RenderMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*) const;
+    //        void RenderTargetMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*, jeti::TextureOb*) const;
+
+    void dropItemToSpace();
+
+    bool swapItem(ItemSlot*);
+
+    void updateRange(jeti::TextureOb*);
+    void drawRange(const glm::vec2&);
+
+    bool checkSubTarget(ItemSlot*) const;
+    STATUS checkTarget(SpaceObject*) const;
+    STATUS checkTargetPure(SpaceObject*) const;
+
+    void selectEvent();
+    void deselectEvent();
+
+    virtual void Save(boost::property_tree::ptree&) const;
+    virtual void Load(const boost::property_tree::ptree&);
+    virtual void Resolve();
+
+    int itemRadius() const;
+    int itemDamage() const;
+
+private:
+    Turrel* m_turrel = nullptr;          // only for weapons slot
+
+    BaseItem* m_item = nullptr;
+
+    SpaceObject* m_target = nullptr;
+    ItemSlot* m_subtarget = nullptr;
+
+    int m_hitProbability = 0;
+
+    bool checkItemInsertion(BaseItem*) const;
+
+    bool isTargetAlive(SpaceObject*) const;
+    bool isTargetInSpace(SpaceObject*) const;
+    bool isTargetInSameStarSystem(SpaceObject*) const;
+    bool checkDistanceToTarget(SpaceObject*) const;
+
+    UnresolvedDataItemSlot m_unresolved_ItemSlot;
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
+
+    void log(const std::string&) const;
 }; 

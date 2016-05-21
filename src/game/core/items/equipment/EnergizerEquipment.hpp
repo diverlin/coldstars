@@ -17,11 +17,10 @@
 */
 
 
-#ifndef ENERGIZEREQUIPMENT_HPP
-#define ENERGIZEREQUIPMENT_HPP
+#pragma once
 
 #include <types/IdType.hpp>
-#include <items/equipment//BaseEquipment.hpp>
+#include <items/equipment/BaseEquipment.hpp>
 
 
 class EnergizerEquipment : public BaseEquipment
@@ -50,14 +49,14 @@ class EnergizerEquipment : public BaseEquipment
         virtual void Resolve();
         
     private:
-        int energy_max_orig;
-        int energy_max_add;
-        int energy_max;
-        int energy;
+        int energy_max_orig = 0;
+        int energy_max_add = 0;
+        int energy_max = 0;
+        int energy = 0;
         
-        int restoration_orig;
-        int restoration_add;
-        int restoration;
+        int restoration_orig = 0;
+        int restoration_add = 0;
+        int restoration = 0;
         
         void virtual addUniqueInfo();
         std::string GetEnergyStr();
@@ -69,4 +68,3 @@ class EnergizerEquipment : public BaseEquipment
 };
 
 
-#endif 

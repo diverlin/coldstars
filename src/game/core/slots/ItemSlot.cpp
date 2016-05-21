@@ -131,7 +131,7 @@ void ItemSlot::fireEvent(float attack_rate, bool show_effect)
 
     if (target()->isAlive() == false)
     {
-        GetOwnerVehicle()->GetOwnerNpc()->AddExpirience(target()->givenExpirience(), show_effect);
+        GetOwnerVehicle()->npc()->AddExpirience(target()->givenExpirience(), show_effect);
     }
 }
 

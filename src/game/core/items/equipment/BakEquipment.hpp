@@ -28,7 +28,7 @@ public:
     virtual ~BakEquipment();
 
     void setFuelMaxOrig(int fuelMaxOrig) { m_fuelMaxOrig = fuelMaxOrig; }
-    void setFuel(int fuel)                 { m_fuel = fuel; }
+    void setFuel(int fuel)               { m_fuel = fuel; }
     void increaseFuel(int fuel);
     int fuelMiss() const { return (m_fuelMax - m_fuel); }
 

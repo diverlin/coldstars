@@ -83,7 +83,7 @@ Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<TYPE::RACE>& rV
     {
         for (unsigned int j=0; j<visible_VEHICLE_pair_vec.size(); j++)
         {
-            if (rVec_race_id[i] == visible_VEHICLE_pair_vec[j].object->GetOwnerNpc()->GetRaceId())
+            if (rVec_race_id[i] == visible_VEHICLE_pair_vec[j].object->npc()->GetRaceId())
             {
                 return visible_VEHICLE_pair_vec[j].object;
             }
@@ -98,7 +98,7 @@ Vehicle* Observation::GetRandVisibleVehicle(const std::vector<TYPE::RACE>& rVec_
     std::vector<Vehicle*> tmp_vehicle;
     for (unsigned int i=0; i<rVec_race_id.size(); i++) {
         for (unsigned int j=0; j<visible_VEHICLE_pair_vec.size(); j++) {
-            if (rVec_race_id[i] == visible_VEHICLE_pair_vec[j].object->GetOwnerNpc()->GetRaceId()) {
+            if (rVec_race_id[i] == visible_VEHICLE_pair_vec[j].object->npc()->GetRaceId()) {
                 tmp_vehicle.push_back(visible_VEHICLE_pair_vec[j].object);
             }
         }

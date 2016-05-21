@@ -29,9 +29,9 @@
 
 
 class ItemSlot; 
-namespace ceti {
-class Box2D;
-}
+//namespace ceti {
+//class Box2D;
+//}
 
 struct UnresolvedDataBaseItem
 {
