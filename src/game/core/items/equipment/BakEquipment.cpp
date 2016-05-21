@@ -24,7 +24,7 @@
 namespace item {
 namespace equipment {
 
-BakEquipment::BakEquipment(const id_type& id)
+Bak::Bak(const id_type& id)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
@@ -32,10 +32,10 @@ BakEquipment::BakEquipment(const id_type& id)
 }
    
 /* virtual */
-BakEquipment::~BakEquipment() 
+Bak::~Bak()
 {}
         
-void BakEquipment::increaseFuel(int fuel)
+void Bak::increaseFuel(int fuel)
 {
     m_fuel += fuel;
     if (m_fuel > m_fuelMax) {
@@ -44,7 +44,7 @@ void BakEquipment::increaseFuel(int fuel)
 }    
                                     
 /* virtual */            
-void BakEquipment::updateProperties()
+void Bak::updateProperties()
 {
     m_fuelMaxAdd = 0;
 #ifdef USE_MODULES
@@ -55,7 +55,7 @@ void BakEquipment::updateProperties()
     m_fuelMax = m_fuelMaxOrig + m_fuelMaxAdd;
 }
 
-void BakEquipment::countPrice()
+void Bak::countPrice()
 {
     float fuel_rate          = (float)m_fuelMaxOrig / EQUIPMENT::BAK::FUEL_MIN;
     float modules_num_rate   = (float)m_data_item.modules_num / EQUIPMENT::BAK::MODULES_NUM_MAX;
@@ -69,14 +69,14 @@ void BakEquipment::countPrice()
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
 
-void BakEquipment::addUniqueInfo()
+void Bak::addUniqueInfo()
 {
 //    info.addTitleStr("BAK");
 //    info.addNameStr("fuel:");      info.addValueStr( GetFuelStr() );
 }
 
 
-std::string BakEquipment::getFuelStr()
+std::string Bak::getFuelStr()
 {
      if (m_fuelMaxAdd == 0)
         return std::to_string(m_fuelMaxOrig) + "/" + std::to_string(m_fuel);
@@ -85,35 +85,35 @@ std::string BakEquipment::getFuelStr()
 }
 
 /*virtual*/
-void BakEquipment::Save(boost::property_tree::ptree& save_ptree) const
+void Bak::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "bak_equipment." + std::to_string(id()) + ".";
 
     Base::SaveData(save_ptree, root);
     Base::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
-    BakEquipment::SaveData(save_ptree, root);
+    Bak::SaveData(save_ptree, root);
 }
 
 /*virtual*/
-void BakEquipment::Load(const boost::property_tree::ptree& load_ptree)
+void Bak::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Base::LoadData(load_ptree);
     BaseEquipment::LoadData(load_ptree);
-    BakEquipment::LoadData(load_ptree);
+    Bak::LoadData(load_ptree);
 }
 
 /*virtual*/
-void BakEquipment::Resolve()
+void Bak::Resolve()
 {
     Base::ResolveData();
     Base::ResolveData();
     BaseEquipment::ResolveData();
-    BakEquipment::ResolveData();
+    Bak::ResolveData();
 }
 
-void BakEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Bak::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     LOG(" BakEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
@@ -121,7 +121,7 @@ void BakEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::
     save_ptree.put(root+"fuel", m_fuel);
 }
                 
-void BakEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
+void Bak::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" BakEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
@@ -129,7 +129,7 @@ void BakEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
     m_fuel = load_ptree.get<int>("fuel");
 }                
 
-void BakEquipment::ResolveData()
+void Bak::ResolveData()
 {
     LOG(" BakEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }

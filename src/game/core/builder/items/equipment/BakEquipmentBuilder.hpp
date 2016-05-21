@@ -24,7 +24,7 @@
 
 namespace item {
 namespace equipment {
-class BakEquipment;
+class Bak;
 }
 }
 
@@ -34,14 +34,14 @@ class BakBuilder
         BakBuilder();
         ~BakBuilder();
 
-        item::equipment::BakEquipment* createTemplate(id_type id = NONE_ID) const;
-        item::equipment::BakEquipment* create(const descriptor::Base&) const;
+        item::equipment::Bak* createTemplate(id_type id = NONE_ID) const;
+        item::equipment::Bak* create(const descriptor::Base&) const;
                                      
     private:                
         BakBuilder(const BakBuilder&) = delete;
         BakBuilder& operator=(const BakBuilder&) = delete;
 
-        void createInternals(item::equipment::BakEquipment*, const descriptor::Base&) const;
+        void createInternals(item::equipment::Bak*, const descriptor::Base&) const;
 }; 
 
     
