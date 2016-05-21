@@ -20,6 +20,9 @@
 
 #include "BaseEquipment.hpp"
 
+namespace item {
+namespace equipment {
+
 class BakEquipment : public BaseEquipment
 {
 public:
@@ -56,3 +59,5 @@ private:
     void ResolveData();
 };
 
+} // namespace equipment
+} // namespace item
