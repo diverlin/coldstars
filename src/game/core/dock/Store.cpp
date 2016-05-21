@@ -59,7 +59,7 @@ void Store::AddVehicleSlot(VehicleSlot* vehicle_slot)
     vehicle_slot_vec.push_back(vehicle_slot); 
 }; 
         
-bool Store::AddItem(item::BaseItem* item)
+bool Store::AddItem(item::Base* item)
 {
     ItemSlot* item_slot = GetEmptyItemSlot();
     if (item_slot) 
@@ -114,7 +114,7 @@ VehicleSlot* Store::GetEmptyVehicleSlot() const
         return nullptr;
 }
 
-int Store::BuyItem(item::BaseItem* item)
+int Store::BuyItem(item::Base* item)
 {
     ItemSlot* item_slot = GetEmptyItemSlot();    
     if (item_slot != nullptr)

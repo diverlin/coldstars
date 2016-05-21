@@ -24,7 +24,7 @@
 #include <items/modules/BaseModule.hpp>
 #endif
 
-class BaseEquipment : public item::BaseItem
+class BaseEquipment : public item::Base
 {
 public:
     BaseEquipment();

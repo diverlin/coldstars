@@ -219,7 +219,7 @@ bool Vehicle::GetAllItemsFromVehicle(Vehicle* vehicle)
     return result;
 }
 
-bool Vehicle::ManageItem(item::BaseItem* item)
+bool Vehicle::ManageItem(item::Base* item)
 {
     switch(item->typeId())
     {
@@ -236,12 +236,12 @@ bool Vehicle::ManageItem(item::BaseItem* item)
     return false;
 } 
 
-bool Vehicle::ManageFunctionGoodsPack(item::BaseItem* item)
+bool Vehicle::ManageFunctionGoodsPack(item::Base* item)
 {
     return MergeIdenticalGoods(item);
 }    
 
-bool Vehicle::ManageFunctionEquipment(item::BaseItem* item)
+bool Vehicle::ManageFunctionEquipment(item::Base* item)
 {
     if (item->parentSubTypeId() == TYPE::ENTITY::WEAPON_SLOT_ID)
     {
@@ -357,7 +357,7 @@ bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
     return false;
 } 
 
-bool Vehicle::AddItemToCargoSlot(item::BaseItem* item)
+bool Vehicle::AddItemToCargoSlot(item::Base* item)
 {
     IncreaseMass(item->mass());
     if (item->typeId() == TYPE::ENTITY::GOODS_ID)
@@ -377,7 +377,7 @@ bool Vehicle::AddItemToCargoSlot(item::BaseItem* item)
     return false;
 } 
 
-bool Vehicle::manage(item::BaseItem* item)
+bool Vehicle::manage(item::Base* item)
 {
     if (AddItemToCargoSlot(item)) {
         ManageItem(item);
@@ -404,7 +404,7 @@ void Vehicle::SellItemsInCargo()
     }
 }
 
-bool Vehicle::SellItem(item::BaseItem* item)
+bool Vehicle::SellItem(item::Base* item)
 {
     //float skill_rate = 1.0f + sign*0.1*npc->GetSkill().GetTrader();
     //npc->IncreaseCredits(sign*amount*skill_rate*minerals_price);
@@ -438,7 +438,7 @@ bool Vehicle::SellItem(item::BaseItem* item)
     }
 }
 
-bool Vehicle::BuyItem(item::BaseItem* item)
+bool Vehicle::BuyItem(item::Base* item)
 {
     if (AddItemToCargoSlot(item) == true)
     {
@@ -450,7 +450,7 @@ bool Vehicle::BuyItem(item::BaseItem* item)
     return false;
 }
 
-bool Vehicle::MergeIdenticalGoods(item::BaseItem* item)
+bool Vehicle::MergeIdenticalGoods(item::Base* item)
 {
     ItemSlot* item_slot = GetCargoSlotWithGoods(item->subTypeId());
     if (item_slot != nullptr)

@@ -84,7 +84,7 @@ void RadarEquipment::Save(boost::property_tree::ptree& save_ptree) const
     std::string root = "radar_equipment." + std::to_string(id()) + ".";
 
     Base::SaveData(save_ptree, root);
-    BaseItem::SaveData(save_ptree, root);
+    Base::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
     RadarEquipment::SaveData(save_ptree, root);
 }
@@ -93,7 +93,7 @@ void RadarEquipment::Save(boost::property_tree::ptree& save_ptree) const
 void RadarEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    BaseItem::LoadData(load_ptree);
+    Base::LoadData(load_ptree);
     BaseEquipment::LoadData(load_ptree);
     RadarEquipment::LoadData(load_ptree);
 }
@@ -102,7 +102,7 @@ void RadarEquipment::Load(const boost::property_tree::ptree& load_ptree)
 void RadarEquipment::Resolve()
 {
     Base::ResolveData();
-    BaseItem::ResolveData();
+    Base::ResolveData();
     BaseEquipment::ResolveData();
     RadarEquipment::ResolveData();
 }

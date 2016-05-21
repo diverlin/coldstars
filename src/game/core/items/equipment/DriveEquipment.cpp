@@ -94,7 +94,7 @@ void DriveEquipment::Save(boost::property_tree::ptree& save_ptree) const
     std::string root = "drive_equipment." + std::to_string(id()) + ".";
 
     Base::SaveData(save_ptree, root);
-    BaseItem::SaveData(save_ptree, root);
+    Base::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
     DriveEquipment::SaveData(save_ptree, root);
 }
@@ -103,7 +103,7 @@ void DriveEquipment::Save(boost::property_tree::ptree& save_ptree) const
 void DriveEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    BaseItem::LoadData(load_ptree);
+    Base::LoadData(load_ptree);
     BaseEquipment::LoadData(load_ptree);
     DriveEquipment::LoadData(load_ptree);
 }
@@ -112,7 +112,7 @@ void DriveEquipment::Load(const boost::property_tree::ptree& load_ptree)
 void DriveEquipment::Resolve()
 {
     Base::ResolveData();
-    BaseItem::ResolveData();
+    Base::ResolveData();
     BaseEquipment::ResolveData();
     DriveEquipment::ResolveData();
 }

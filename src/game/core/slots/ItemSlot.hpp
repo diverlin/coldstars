@@ -26,7 +26,7 @@
 
 class Turrel; 
 namespace item {
-class BaseItem;
+class Base;
 }
 class SpaceObject;
 
@@ -92,7 +92,7 @@ public:
 
     Turrel* turrel() const { return m_turrel; }
 
-    item::BaseItem* item()                         const { return m_item; }
+    item::Base* item()                         const { return m_item; }
     RocketEquipment*    rocketEquipment()    const { return reinterpret_cast<RocketEquipment*>(m_item); }
     LazerEquipment*     lazerEquipment()     const { return reinterpret_cast<LazerEquipment*>(m_item); }
     RadarEquipment*     radarEquipment()     const { return reinterpret_cast<RadarEquipment*>(m_item); }
@@ -121,7 +121,7 @@ public:
     //Artefact* GetArtefact() const { return artefact; }
     GoodsPack* goodsPack() const { return reinterpret_cast<GoodsPack*>(m_item); }
 
-    bool insertItem(item::BaseItem*);
+    bool insertItem(item::Base*);
     void removeItem();
 
     STATUS validateTarget();
@@ -160,14 +160,14 @@ public:
 private:
     Turrel* m_turrel = nullptr;          // only for weapons slot
 
-    item::BaseItem* m_item = nullptr;
+    item::Base* m_item = nullptr;
 
     SpaceObject* m_target = nullptr;
     ItemSlot* m_subtarget = nullptr;
 
     int m_hitProbability = 0;
 
-    bool checkItemInsertion(item::BaseItem*) const;
+    bool checkItemInsertion(item::Base*) const;
 
     bool isTargetAlive(SpaceObject*) const;
     bool isTargetInSpace(SpaceObject*) const;

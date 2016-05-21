@@ -21,7 +21,7 @@
 
 #include <items/BaseItem.hpp>
 
-class Bomb : public item::BaseItem
+class Bomb : public item::Base
 {
     public:
         Bomb(const id_type& id);

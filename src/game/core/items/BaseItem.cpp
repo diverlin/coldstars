@@ -29,16 +29,16 @@
 
 namespace item {
 
-BaseItem::BaseItem()
+Base::Base()
 {}
 
 /* virtual */
-BaseItem::~BaseItem()
+Base::~Base()
 {
     LOG("___::~BaseItem("+std::to_string(id())+")");
 }
 
-void BaseItem::lockEvent(int locked_turns)
+void Base::lockEvent(int locked_turns)
 {
     LOG("BaseItem::LockEvent");
     
@@ -53,24 +53,24 @@ void BaseItem::lockEvent(int locked_turns)
     }
 }
                 
-void BaseItem::useNormalDeterioration()
+void Base::useNormalDeterioration()
 {
     m_deterioration = m_data_item.deterioration;
 }
                                 
-void BaseItem::useOverloadDeterioration()
+void Base::useOverloadDeterioration()
 {
     m_deterioration = m_data_item.deterioration * m_data_item.deterioration_overload_rate;
 }
  
-void BaseItem::damageEvent()
+void Base::damageEvent()
 {
     LOG("BaseItem::DamageEvent");
 
     m_item_slot->updateVehiclePropetries();
 }
                 
-void BaseItem::deteriorationEvent()
+void Base::deteriorationEvent()
 {
     m_condition -= m_deterioration;
     if (m_condition <= 0)
@@ -80,7 +80,7 @@ void BaseItem::deteriorationEvent()
     }
 }         
                 
-bool BaseItem::repairEvent()
+bool Base::repairEvent()
 {
     m_condition = m_data_item.condition;
     m_item_slot->updateVehiclePropetries();
@@ -88,7 +88,7 @@ bool BaseItem::repairEvent()
     return true;
 }
 
-void BaseItem::updateLock()
+void Base::updateLock()
 {
     if (m_locked_turns > 0) {
         m_locked_turns--;
@@ -132,7 +132,7 @@ void BaseItem::updateLock()
 //    //RenderMeshLight(v, c);
 //}
 
-void BaseItem::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     LOG(" BaseItem::SaveData()  id=" + std::to_string(id()) + " START");
     
@@ -157,7 +157,7 @@ void BaseItem::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
     else               { save_ptree.put(root+"unresolved.item_slot_id", NONE_ID); }
 }
 
-void BaseItem::LoadData(const boost::property_tree::ptree& load_ptree)
+void Base::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" BaseItem::LoadData()  id=" + std::to_string(id()) + " START");
     
@@ -178,7 +178,7 @@ void BaseItem::LoadData(const boost::property_tree::ptree& load_ptree)
     m_data_unresolved_BaseItem.item_slot_id   = load_ptree.get<int>("unresolved.item_slot_id");
 }
                 
-void BaseItem::ResolveData()
+void Base::ResolveData()
 {
     LOG(" BaseItem::ResolveData()  id=" + std::to_string(id()) + " START");
     

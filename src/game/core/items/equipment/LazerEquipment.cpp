@@ -152,7 +152,7 @@ void LazerEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "lazer_equipment." + std::to_string(id()) + ".";
     Base::SaveData(save_ptree, root);
-    BaseItem::SaveData(save_ptree, root);
+    Base::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
     LazerEquipment::SaveData(save_ptree, root);
 }
@@ -161,7 +161,7 @@ void LazerEquipment::Save(boost::property_tree::ptree& save_ptree) const
 void LazerEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    BaseItem::LoadData(load_ptree);
+    Base::LoadData(load_ptree);
     BaseEquipment::LoadData(load_ptree);
     LazerEquipment::LoadData(load_ptree);
 }
@@ -170,7 +170,7 @@ void LazerEquipment::Load(const boost::property_tree::ptree& load_ptree)
 void LazerEquipment::Resolve()
 {
     Base::ResolveData();
-    BaseItem::ResolveData();
+    Base::ResolveData();
     BaseEquipment::ResolveData();
     LazerEquipment::ResolveData();
 }

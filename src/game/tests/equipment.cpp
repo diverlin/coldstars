@@ -157,7 +157,7 @@ TEST(ship_with_equipment, freespace)
 {
     Ship* ship = createNewShip();
 
-    std::vector<item::BaseItem*> items;
+    std::vector<item::Base*> items;
     items.push_back( global::get().protectorBuilder().create(generateProtectorDescriptor()) );
     items.push_back( global::get().protectorBuilder().create(generateProtectorDescriptor()) );
     items.push_back( global::get().protectorBuilder().create(generateProtectorDescriptor()) );
