@@ -34,6 +34,19 @@
 
 #include "helper.hpp"
 
+void commonDataItemCheck(const descriptor::Base& descr, item::Base* item)
+{
+    EXPECT_EQ(descr.mass(), item->mass());
+    EXPECT_EQ(descr.condition(), item->condition());
+    EXPECT_EQ(descr.price(), item->basePrice());
+    EXPECT_EQ(descr.id(), item->id());
+    EXPECT_EQ(descr.type(), (int)item->descriptorType());
+    EXPECT_EQ(descr.race(), (int)item->race());
+    EXPECT_EQ(descr.tech(), (int)item->tech());
+    EXPECT_EQ(descr.modulesNum(), (int)item->modulesNum());
+    EXPECT_EQ(descr.deterioration(), (int)item->deterioration());
+    //    EXPECT_EQ(descr.parentSubTypeId(), (int)bak_equipment->parentSubTypeId());
+}
 
 TEST(equipment,bak)
 {
@@ -41,21 +54,8 @@ TEST(equipment,bak)
     item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(descr);
 
     EXPECT_EQ(descr.fuel(), bak_equipment->fuel());
-    EXPECT_EQ( descr.fuel(), bak_equipment->fuelMax());
-
-    EXPECT_EQ(descr.mass(), bak_equipment->mass());
-    EXPECT_EQ(descr.condition(), bak_equipment->condition());
-//    EXPECT_EQ(descr.base_price(), bak_equipment->basePrice());
-    EXPECT_EQ(descr.id(), bak_equipment->id());
-//    EXPECT_EQ(descr.type(), (int)bak_equipment->typeId());
-    EXPECT_EQ(descr.race(), (int)bak_equipment->race());
-    EXPECT_EQ(descr.tech(), (int)bak_equipment->tech());
-
-
-//    EXPECT_EQ(descr.modulesNum(), (int)bak_equipment->modulesNum());
-//    EXPECT_EQ(descr.deterioration(), (int)bak_equipment->deterioration(), );
-
-//    EXPECT_EQ(descr.parentSubTypeId(), (int)bak_equipment->parentSubTypeId());
+    EXPECT_EQ(descr.fuel(), bak_equipment->fuelMax());
+    commonDataItemCheck(descr, bak_equipment);
 }
 
 
@@ -66,10 +66,10 @@ TEST(ship_with_equipment, bak)
 
     EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot() != nullptr);
     EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() == nullptr);
-    EXPECT_EQ(ship->GetProperties().hyper, 0);
+    EXPECT_EQ(ship->properties().hyper, 0);
     ship->manage(bak_equipment);
     EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() != nullptr);
-    EXPECT_EQ(ship->GetProperties().hyper, 0); // no drive is set, that's why hyper is 0
+    EXPECT_EQ(ship->properties().hyper, 0); // no drive is set, that's why hyper is 0
 }
 
 TEST(ship_with_equipment, drive)
@@ -79,10 +79,10 @@ TEST(ship_with_equipment, drive)
 
     EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot() != nullptr);
     EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() == nullptr);
-    EXPECT_EQ(ship->GetProperties().hyper, 0);
+    EXPECT_EQ(ship->properties().hyper, 0);
     ship->manage(drive_equipment);
     EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() != nullptr);
-    EXPECT_EQ(ship->GetProperties().hyper, 0); // no bak is set that's why hyper is 0
+    EXPECT_EQ(ship->properties().hyper, 0); // no bak is set that's why hyper is 0
 }
 
 TEST(ship_with_equipment, bak_and_drive)
@@ -91,10 +91,10 @@ TEST(ship_with_equipment, bak_and_drive)
     item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
     item::equipment::Drive* drive_equipment = global::get().driveBuilder().create(generateDriveDescriptor());
 
-    EXPECT_EQ(ship->GetProperties().hyper, 0);
+    EXPECT_EQ(ship->properties().hyper, 0);
     ship->manage(bak_equipment);
     ship->manage(drive_equipment);
-    EXPECT_EQ(ship->GetProperties().hyper, std::min(bak_equipment->fuel(), drive_equipment->hyper()));
+    EXPECT_EQ(ship->properties().hyper, std::min(bak_equipment->fuel(), drive_equipment->hyper()));
 }
 
 TEST(ship_with_equipment, droid)
@@ -156,7 +156,7 @@ TEST(ship_with_equipment, freespace)
     items.push_back( global::get().protectorBuilder().create(generateProtectorDescriptor()) );
     items.push_back( global::get().protectorBuilder().create(generateProtectorDescriptor()) );
 
-    EXPECT_EQ(ship->mass(), ship->free_space());
+    EXPECT_EQ(ship->mass(), ship->freeSpace());
 
     int weight_extra = 0;
     for (auto item: items) {
@@ -164,6 +164,6 @@ TEST(ship_with_equipment, freespace)
         ship->manage(item);
     }
 
-    EXPECT_EQ(ship->free_space(), ship->mass() - weight_extra);
+    EXPECT_EQ(ship->freeSpace(), ship->mass() - weight_extra);
 }
 

@@ -43,7 +43,7 @@ enum class Key: int {
     MODULES_NUM,
     MASS,
     CONDITION,
-    DETEORATION,
+    DETERIORATION,
     FUEL,
     SPEED,
     HYPER,
@@ -51,7 +51,7 @@ enum class Key: int {
     STRENGTH,
     SCAN,
     PROTECTION,
-    BASE_PRICE
+    PRICE
 };
 
 std::string keyStr(const Key&);
@@ -71,7 +71,7 @@ public:
         SCANER,
         RADAR,
         PROTECTOR,
-        BASE_PRICE
+        PRICE
     };
 
     static std::string KEY_ID;
@@ -87,7 +87,7 @@ public:
     static std::string KEY_MODULES_NUM;
     static std::string KEY_MASS;
     static std::string KEY_CONDITION;
-    static std::string KEY_DETEORATION;
+    static std::string KEY_DETERIORATION;
     static std::string KEY_FUEL;
     static std::string KEY_SPEED;
     static std::string KEY_HYPER;
@@ -95,7 +95,7 @@ public:
     static std::string KEY_STRENGTH;
     static std::string KEY_SCAN;
     static std::string KEY_PROTECTION;
-    static std::string KEY_BASE_PRICE;
+    static std::string KEY_PRICE;
 
     Base();
     Base(const std::map<Key, int_type>&);
@@ -115,10 +115,10 @@ public:
     const int_type& damage() const;
     const int_type& radius() const;
     const int_type& tech() const;
-    const int_type& modules() const;
+    const int_type& modulesNum() const;
     const int_type& mass() const;
     const int_type& condition() const;
-    const int_type& deteoration() const;
+    const int_type& deterioration() const;
     const int_type& fuel() const;
     const int_type& speed() const;
     const int_type& hyper() const;
@@ -126,7 +126,7 @@ public:
     const int_type& strength() const;
     const int_type& scan() const;
     const int_type& protection() const;
-    const int_type& base_price() const;
+    const int_type& price() const;
 
 public: // todo make it protected
     void add(const Key& key, const int_type& value);

@@ -131,13 +131,13 @@ void Vehicle::SetKorpusData(const VehicleDescriptor& data_korpus)
 
 GoodsPack* Vehicle::GetGoodsPack() const
 {
-    for(unsigned int i=0; i<m_SlotCargo_vec.size(); i++)
+    for(unsigned int i=0; i<m_cargoSlots.size(); i++)
     {
-        if (m_SlotCargo_vec[i]->item() != nullptr)
+        if (m_cargoSlots[i]->item() != nullptr)
         {
-            if (m_SlotCargo_vec[i]->item()->typeId() == TYPE::ENTITY::GOODS_ID)
+            if (m_cargoSlots[i]->item()->typeId() == TYPE::ENTITY::GOODS_ID)
             {
-                return m_SlotCargo_vec[i]->goodsPack();
+                return m_cargoSlots[i]->goodsPack();
             }
         }
     }
@@ -161,7 +161,7 @@ bool Vehicle::isSlotExists(TYPE::ENTITY slot_subtype_id) const
     return false;
 }
 
-void Vehicle::AddItemSlot(ItemSlot* slot) 
+void Vehicle::addItemSlot(ItemSlot* slot) 
 { 
     slot->SetOwner(this);
 
@@ -195,15 +195,15 @@ void Vehicle::AddItemSlot(ItemSlot* slot)
     m_SlotTotal_vec.push_back(slot);
 
     if ( (slot->subTypeId() != TYPE::ENTITY::ARTEFACT_SLOT_ID) and (slot->subTypeId() != TYPE::ENTITY::CARGO_SLOT_ID) ) {
-        m_SlotFunct_vec.push_back(slot);
+        m_equipmentSlots.push_back(slot);
     }
     
     if (slot->subTypeId() == TYPE::ENTITY::ARTEFACT_SLOT_ID) {
-        m_SlotArtef_vec.push_back(slot);
+        m_artefactSlots.push_back(slot);
     }
     
     if (slot->subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID) {
-        m_SlotCargo_vec.push_back(slot);
+        m_cargoSlots.push_back(slot);
     }
 }
 
@@ -213,7 +213,7 @@ bool Vehicle::GetAllItemsFromVehicle(Vehicle* vehicle)
     for(unsigned int i=0; i<vehicle->m_SlotTotal_vec.size(); i++) {
         if (vehicle->m_SlotTotal_vec[i]->item() != nullptr) {
             if (vehicle->m_SlotTotal_vec[i]->subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID) {
-                result = AddItemToCargoSlot(vehicle->m_SlotTotal_vec[i]->item());
+                result = addItemToCargoSlot(vehicle->m_SlotTotal_vec[i]->item());
             } else {
                 result = manage(vehicle->m_SlotTotal_vec[i]->item());
             }
@@ -223,11 +223,11 @@ bool Vehicle::GetAllItemsFromVehicle(Vehicle* vehicle)
     return result;
 }
 
-bool Vehicle::ManageItem(item::Base* item)
+bool Vehicle::manageItem(item::Base* item)
 {
     switch(item->typeId())
     {
-    case TYPE::ENTITY::EQUIPMENT_ID:    { return ManageFunctionEquipment(item); break; }
+    case TYPE::ENTITY::EQUIPMENT_ID:    { return manageFunctionEquipment(item); break; }
 #ifdef USE_MODULES
     case TYPE::ENTITY::MODULE_ID:       { return ManageFunctionModule(item); break; }
 #endif
@@ -245,7 +245,7 @@ bool Vehicle::ManageFunctionGoodsPack(item::Base* item)
     return MergeIdenticalGoods(item);
 }    
 
-bool Vehicle::ManageFunctionEquipment(item::Base* item)
+bool Vehicle::manageFunctionEquipment(item::Base* item)
 {
     if (item->parentSubTypeId() == TYPE::ENTITY::WEAPON_SLOT_ID)
     {
@@ -261,7 +261,7 @@ bool Vehicle::ManageFunctionEquipment(item::Base* item)
             }
         }
     } else {
-        ItemSlot* item_slot = GetFuctionalSlot(item->parentSubTypeId());
+        ItemSlot* item_slot = fuctionalSlot(item->parentSubTypeId());
         if (item_slot->item() == nullptr) {
             return item_slot->swapItem(item->itemSlot());
         } else {
@@ -301,24 +301,24 @@ bool Vehicle::ManageFunctionArtefact(item::BaseItem* item)
 }
 #endif
 
-ItemSlot* const Vehicle::GetFuctionalSlot(TYPE::ENTITY functional_slot_subtype_id) const
+ItemSlot* const Vehicle::fuctionalSlot(TYPE::ENTITY functional_slot_subtype_id) const
 {
-    for(unsigned int i=0; i<m_SlotFunct_vec.size(); i++)
+    for(unsigned int i=0; i<m_equipmentSlots.size(); i++)
     {
-        if (m_SlotFunct_vec[i]->subTypeId() == functional_slot_subtype_id)
+        if (m_equipmentSlots[i]->subTypeId() == functional_slot_subtype_id)
         {
-            return m_SlotFunct_vec[i];
+            return m_equipmentSlots[i];
         }
     }
     
     return nullptr;
 }
 
-ItemSlot* const Vehicle::GetEmptyArtefactSlot() const
+ItemSlot* const Vehicle::freeArtefactSlot() const
 {
-    for(unsigned int i=0; i<m_SlotArtef_vec.size(); i++) {
-        if (!m_SlotArtef_vec[i]->item()) {
-            return m_SlotArtef_vec[i];
+    for(unsigned int i=0; i<m_artefactSlots.size(); i++) {
+        if (!m_artefactSlots[i]->item()) {
+            return m_artefactSlots[i];
         }
     }
     return nullptr;
@@ -326,22 +326,22 @@ ItemSlot* const Vehicle::GetEmptyArtefactSlot() const
 
 ItemSlot* const Vehicle::GetEmptyCargoSlot()
 {
-    for (unsigned int i=0; i<m_SlotCargo_vec.size(); i++) {
-        if (!m_SlotCargo_vec[i]->item()) {
-            return m_SlotCargo_vec[i];
+    for (unsigned int i=0; i<m_cargoSlots.size(); i++) {
+        if (!m_cargoSlots[i]->item()) {
+            return m_cargoSlots[i];
         }
     }
     
     return nullptr;
 }
 
-ItemSlot* const Vehicle::GetCargoSlotWithGoods(TYPE::ENTITY requested_goods_subtype_id)
+ItemSlot* const Vehicle::cargoSlotWithGoods(TYPE::ENTITY requested_goods_subtype_id)
 {
-    for (unsigned int i=0; i<m_SlotCargo_vec.size(); i++) {
-        if (m_SlotCargo_vec[i]->item()) {
-            if (m_SlotCargo_vec[i]->item()->typeId() == TYPE::ENTITY::GOODS_ID) {
-                if (m_SlotCargo_vec[i]->item()->subTypeId() == requested_goods_subtype_id) {
-                    return m_SlotCargo_vec[i];
+    for (unsigned int i=0; i<m_cargoSlots.size(); i++) {
+        if (m_cargoSlots[i]->item()) {
+            if (m_cargoSlots[i]->item()->typeId() == TYPE::ENTITY::GOODS_ID) {
+                if (m_cargoSlots[i]->item()->subTypeId() == requested_goods_subtype_id) {
+                    return m_cargoSlots[i];
                 }
             }
         }
@@ -351,7 +351,7 @@ ItemSlot* const Vehicle::GetCargoSlotWithGoods(TYPE::ENTITY requested_goods_subt
 
 bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
 {    
-    if (AddItemToCargoSlot(container->itemSlot()->item()) == true)
+    if (addItemToCargoSlot(container->itemSlot()->item()) == true)
     {
         container->killSilently();
 
@@ -361,7 +361,7 @@ bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
     return false;
 } 
 
-bool Vehicle::AddItemToCargoSlot(item::Base* item)
+bool Vehicle::addItemToCargoSlot(item::Base* item)
 {
     IncreaseMass(item->mass());
     if (item->typeId() == TYPE::ENTITY::GOODS_ID)
@@ -383,8 +383,8 @@ bool Vehicle::AddItemToCargoSlot(item::Base* item)
 
 bool Vehicle::manage(item::Base* item)
 {
-    if (AddItemToCargoSlot(item)) {
-        ManageItem(item);
+    if (addItemToCargoSlot(item)) {
+        manageItem(item);
         return true;
     }
     return false;
@@ -392,23 +392,23 @@ bool Vehicle::manage(item::Base* item)
 
 void Vehicle::ManageItemsInCargo()
 {
-    for (unsigned int i=0; i<m_SlotCargo_vec.size(); i++) {
-        if (m_SlotCargo_vec[i]->item()) {
-            ManageItem(m_SlotCargo_vec[i]->item());
+    for (unsigned int i=0; i<m_cargoSlots.size(); i++) {
+        if (m_cargoSlots[i]->item()) {
+            manageItem(m_cargoSlots[i]->item());
         }
     }
 }
 
-void Vehicle::SellItemsInCargo()
+void Vehicle::sellItemsInCargo()
 {
-    for (unsigned int i=0; i<m_SlotCargo_vec.size(); i++) {
-        if (m_SlotCargo_vec[i]->item()) {
-            SellItem(m_SlotCargo_vec[i]->item());
+    for (unsigned int i=0; i<m_cargoSlots.size(); i++) {
+        if (m_cargoSlots[i]->item()) {
+            sellItem(m_cargoSlots[i]->item());
         }
     }
 }
 
-bool Vehicle::SellItem(item::Base* item)
+bool Vehicle::sellItem(item::Base* item)
 {
     //float skill_rate = 1.0f + sign*0.1*npc->GetSkill().GetTrader();
     //npc->IncreaseCredits(sign*amount*skill_rate*minerals_price);
@@ -442,9 +442,9 @@ bool Vehicle::SellItem(item::Base* item)
     }
 }
 
-bool Vehicle::BuyItem(item::Base* item)
+bool Vehicle::buyItem(item::Base* item)
 {
-    if (AddItemToCargoSlot(item) == true)
+    if (addItemToCargoSlot(item) == true)
     {
         m_npc->IncreaseCredits(-item->price());
 
@@ -456,7 +456,7 @@ bool Vehicle::BuyItem(item::Base* item)
 
 bool Vehicle::MergeIdenticalGoods(item::Base* item)
 {
-    ItemSlot* item_slot = GetCargoSlotWithGoods(item->subTypeId());
+    ItemSlot* item_slot = cargoSlotWithGoods(item->subTypeId());
     if (item_slot != nullptr)
     {
         item_slot->goodsPack()->Increase(item->mass());
@@ -700,9 +700,9 @@ void Vehicle::CheckNeedsInStatic()
 
     //check item damages
     m_Needs.repair_equipment = false;
-    for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
-        if (m_SlotFunct_vec[i]->item()) {
-            if (m_SlotFunct_vec[i]->item()->isDamaged()) {
+    for (unsigned int i=0; i<m_equipmentSlots.size(); i++) {
+        if (m_equipmentSlots[i]->item()) {
+            if (m_equipmentSlots[i]->item()->isDamaged()) {
                 m_Needs.repair_equipment = true;
             }
         }
@@ -710,10 +710,10 @@ void Vehicle::CheckNeedsInStatic()
 
     //check ammo
     m_Needs.get_ammo = false;
-    for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
-        if (m_SlotFunct_vec[i]->item()) {
-            if (m_SlotFunct_vec[i]->item()->subTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID) {
-                if (m_SlotFunct_vec[i]->rocketEquipment()->GetAmmo() == 0) {
+    for (unsigned int i=0; i<m_equipmentSlots.size(); i++) {
+        if (m_equipmentSlots[i]->item()) {
+            if (m_equipmentSlots[i]->item()->subTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID) {
+                if (m_equipmentSlots[i]->rocketEquipment()->GetAmmo() == 0) {
                     m_Needs.get_ammo = true;
                 }
             }
@@ -748,10 +748,10 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
 
     // repair equipment
     if ( (m_Needs.repair_equipment == true) && (result == true) ) {
-        for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
-            if (m_SlotFunct_vec[i]->item()) {
-                if (m_SlotFunct_vec[i]->item()->isDamaged() == true) {
-                    result = ((Angar*)m_ParentVehicleSlot->GetOwner())->RepairItem(m_npc, m_SlotFunct_vec[i]->item());
+        for (unsigned int i=0; i<m_equipmentSlots.size(); i++) {
+            if (m_equipmentSlots[i]->item()) {
+                if (m_equipmentSlots[i]->item()->isDamaged() == true) {
+                    result = ((Angar*)m_ParentVehicleSlot->GetOwner())->RepairItem(m_npc, m_equipmentSlots[i]->item());
                 }
             }
         }
@@ -759,10 +759,10 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
     
     // buy ammo
     if ( (m_Needs.get_ammo == true) && (result == true) ) {
-        for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
-            if (m_SlotFunct_vec[i]->item()) {
-                if (m_SlotFunct_vec[i]->item()->subTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID) {
-                    result = ((Angar*)m_ParentVehicleSlot->GetOwner())->ChargeRocketEquipment(m_npc, m_SlotFunct_vec[i]->rocketEquipment());
+        for (unsigned int i=0; i<m_equipmentSlots.size(); i++) {
+            if (m_equipmentSlots[i]->item()) {
+                if (m_equipmentSlots[i]->item()->subTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID) {
+                    result = ((Angar*)m_ParentVehicleSlot->GetOwner())->ChargeRocketEquipment(m_npc, m_equipmentSlots[i]->rocketEquipment());
                 }
             }
         }
@@ -780,15 +780,15 @@ void Vehicle::ResolveNeedsInKosmoportInStatic()
 
 void Vehicle::UpdateAllFunctionalItemsInStatic()
 {
-    for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
-        if (m_SlotFunct_vec[i]->item()) {
-            m_SlotFunct_vec[i]->item()->updateInStatic();
+    for (unsigned int i=0; i<m_equipmentSlots.size(); i++) {
+        if (m_equipmentSlots[i]->item()) {
+            m_equipmentSlots[i]->item()->updateInStatic();
         }
     }
 
-    for (unsigned int i=0; i<m_SlotArtef_vec.size(); i++) {
-        if (m_SlotArtef_vec[i]->item()) {
-            m_SlotArtef_vec[i]->item()->updateInStatic();
+    for (unsigned int i=0; i<m_artefactSlots.size(); i++) {
+        if (m_artefactSlots[i]->item()) {
+            m_artefactSlots[i]->item()->updateInStatic();
         }
     }
 }
@@ -992,7 +992,7 @@ void Vehicle::UpdatePropertiesScan()
     {
         if (m_SlotScaner->scanerEquipment()->isFunctioning() == true)
         {
-            m_properties.scan = m_SlotScaner->scanerEquipment()->GetScan();
+            m_properties.scan = m_SlotScaner->scanerEquipment()->scan();
         }
     }
 }
@@ -1199,11 +1199,11 @@ void Vehicle::LockRandomItem(int locked_turns)
 {
     std::vector<ItemSlot*> _equiped_slot_vec;
     
-    for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++)
+    for (unsigned int i=0; i<m_equipmentSlots.size(); i++)
     {
-        if (m_SlotFunct_vec[i]->item() != nullptr)
+        if (m_equipmentSlots[i]->item() != nullptr)
         {
-            _equiped_slot_vec.push_back(m_SlotFunct_vec[i]);
+            _equiped_slot_vec.push_back(m_equipmentSlots[i]);
         }
     }
     
@@ -1447,22 +1447,22 @@ void Vehicle::ResolveData()
 
 void Vehicle::TEST_DamageAndLockRandItems()
 {
-    int rand_index1 = meti::getRandInt(0, m_SlotFunct_vec.size()-1);
-    while (m_SlotFunct_vec[rand_index1]->item() == nullptr)
+    int rand_index1 = meti::getRandInt(0, m_equipmentSlots.size()-1);
+    while (m_equipmentSlots[rand_index1]->item() == nullptr)
     {
-        rand_index1 = meti::getRandInt(0, m_SlotFunct_vec.size()-1);
+        rand_index1 = meti::getRandInt(0, m_equipmentSlots.size()-1);
     }
-    m_SlotFunct_vec[rand_index1]->item()->lockEvent(3);
+    m_equipmentSlots[rand_index1]->item()->lockEvent(3);
 
-    int rand_index2 = meti::getRandInt(0, m_SlotFunct_vec.size()-1);
-    while (m_SlotFunct_vec[rand_index2]->item() == nullptr)
+    int rand_index2 = meti::getRandInt(0, m_equipmentSlots.size()-1);
+    while (m_equipmentSlots[rand_index2]->item() == nullptr)
     {
-        rand_index2 = meti::getRandInt(0, m_SlotFunct_vec.size()-1);
+        rand_index2 = meti::getRandInt(0, m_equipmentSlots.size()-1);
     }
     
-    while (m_SlotFunct_vec[rand_index2]->item()->condition() > 0)
+    while (m_equipmentSlots[rand_index2]->item()->condition() > 0)
     {
-        m_SlotFunct_vec[rand_index2]->item()->deteriorationEvent();
+        m_equipmentSlots[rand_index2]->item()->deteriorationEvent();
     }
 }
 

@@ -20,6 +20,8 @@
 
 #include "Base.hpp"
 
+class BakBuilder;
+
 namespace item {
 namespace equipment {
 
@@ -37,13 +39,15 @@ public:
     int fuel() const    { return m_fuel; }
     int fuelMax() const { return m_fuelMax; }
 
-    void updateProperties() override final;
-
-    void countPrice();
-
     virtual void Save(boost::property_tree::ptree&) const;
     virtual void Load(const boost::property_tree::ptree&);
     virtual void Resolve();
+
+private:
+    void updateProperties() override final;
+    void countPrice();
+
+    friend BakBuilder;
 
 private:
     int m_fuelMaxOrig = 0;

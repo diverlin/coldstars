@@ -41,6 +41,7 @@ struct ItemCommonData
     float deterioration_overload_rate = 0.0f;
     int mass = 0;
     int price = 0;
+    int descriptor_type = 0;
 };
 
 ItemCommonData extractCommonData(const descriptor::Base& descriptor);

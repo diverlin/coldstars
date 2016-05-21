@@ -108,7 +108,7 @@ bool Kosmoport::AddVehicle(Vehicle* vehicle)
 //* virtual */
 bool Kosmoport::RemoveVehicle(Vehicle* vehicle)
 {        
-        vehicle->GetParentVehicleSlot()->Release();
+        vehicle->parentVehicleSlot()->Release();
     return true;
 }
 

@@ -135,8 +135,8 @@ void Store::SellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
     vehicle_slot->GetVehicle()->SetLand(npc->GetVehicle()->GetLand());
     vehicle_slot->GetVehicle()->setPlaceTypeId(TYPE::PLACE::KOSMOPORT_ID);
     
-    VehicleSlot* npc_vehicle_slot = npc->GetVehicle()->GetParentVehicleSlot();
-    npc->GetVehicle()->GetParentVehicleSlot()->SwapVehicle(vehicle_slot);
+    VehicleSlot* npc_vehicle_slot = npc->GetVehicle()->parentVehicleSlot();
+    npc->GetVehicle()->parentVehicleSlot()->SwapVehicle(vehicle_slot);
     npc_vehicle_slot->GetVehicle()->BindOwnerNpc(npc);  
         
     npc->WithdrawCredits(price);      

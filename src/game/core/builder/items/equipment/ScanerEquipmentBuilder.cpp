@@ -66,10 +66,10 @@ void ScanerBuilder::createInternals(Scaner* scaner_equipment, const descriptor::
 {
     ItemCommonData common_data = extractCommonData(descriptor);
     
-    scaner_equipment->SetScanOrig(descriptor.scan());
+    scaner_equipment->setScanOrig(descriptor.scan());
     scaner_equipment->setParentSubTypeId(TYPE::ENTITY::SCANER_SLOT_ID);
     scaner_equipment->setItemCommonData(common_data);
 
     scaner_equipment->updateProperties();
-    scaner_equipment->CountPrice();
+    scaner_equipment->countPrice();
 }
