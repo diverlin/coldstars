@@ -18,7 +18,7 @@
 
 
 #include <builder/items/equipment/BakEquipmentBuilder.hpp>
-#include <items/equipment/BakEquipment.hpp>
+#include <item/equipment/Bak.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <ceti/Logger.hpp>

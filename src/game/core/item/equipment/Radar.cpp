@@ -16,11 +16,14 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "RadarEquipment.hpp"
+#include "Radar.hpp"
+#ifdef USE_MODULES
+#include <item/modules/RadarModule.hpp>
+#endif
 #include "../../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
 #include <ceti/Logger.hpp>
-#include "../../items//modules/RadarModule.hpp"
+
 
 namespace item {
 namespace equipment {

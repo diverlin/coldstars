@@ -23,8 +23,8 @@
 #include <builder/items/artefacts/ProtectorArtefactBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <items/artefacts/GravityArtefact.hpp>
-#include <items/artefacts/ProtectorArtefact.hpp>
+#include <item/artefacts/GravityArtefact.hpp>
+#include <item/artefacts/ProtectorArtefact.hpp>
 
 #include <dock/NatureLand.hpp>
 

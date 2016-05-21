@@ -18,7 +18,7 @@
 
 
 #include <builder/items/equipment/ScanerEquipmentBuilder.hpp>
-#include <items/equipment/ScanerEquipment.hpp>
+#include <item/equipment/Scaner.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>

@@ -25,7 +25,7 @@
 #include <types/TechLevelTypes.hpp>
 #include <types/RaceTypes.hpp>
 
-#include <items/ItemCommonData.hpp>
+#include <item/ItemCommonData.hpp>
 
 
 class ItemSlot; 

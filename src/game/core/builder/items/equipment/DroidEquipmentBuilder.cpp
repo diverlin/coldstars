@@ -18,7 +18,7 @@
 
 
 #include <builder/items/equipment/DroidEquipmentBuilder.hpp>
-#include <items/equipment/DroidEquipment.hpp>
+#include <item/equipment/Droid.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>

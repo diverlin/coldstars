@@ -23,7 +23,7 @@
 //class Renderer;
 //}
 
-#include "BaseEquipment.hpp"
+#include "Base.hpp"
 #include "../../spaceobjects/SpaceObject.hpp"
 
 namespace item {

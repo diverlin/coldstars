@@ -18,7 +18,7 @@
 
 
 #include <builder/items/equipment/ProtectorEquipmentBuilder.hpp>
-#include <items/equipment/ProtectorEquipment.hpp>
+#include <item/equipment/Protector.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>

@@ -16,11 +16,13 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "ScanerEquipment.hpp"
+#include "Scaner.hpp"
 #include "../../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
 #include <ceti/Logger.hpp>
-#include "../../items/modules/ScanerModule.hpp"
+#ifdef USE_MODULES
+#include <item/modules/ScanerModule.hpp>
+#endif
 
 namespace item {
 namespace equipment {

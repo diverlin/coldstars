@@ -20,7 +20,7 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <items/equipment/BaseEquipment.hpp>
+#include <item/equipment/Base.hpp>
 #include <common/BulletData.hpp>
 
 namespace item {

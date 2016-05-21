@@ -17,8 +17,10 @@
 */
 
 //#include <jeti/Render.hpp>
-#include <items/equipment/GrappleEquipment.hpp>
-#include <items/modules/GrappleModule.hpp>
+#include "Grapple.hpp"
+#ifdef USE_MODULES
+#include <item/modules/GrappleModule.hpp>
+#endif
 
 #include <common/constants.hpp>
 //#include <ceti/StringUtils.hpp>

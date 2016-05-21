@@ -18,7 +18,7 @@
 
 
 #include "GravityArtefactBuilder.hpp"
-#include <items/artefacts/GravityArtefact.hpp>
+#include <item/artefacts/GravityArtefact.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>

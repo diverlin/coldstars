@@ -24,9 +24,8 @@
 #include "../spaceobjects/Vehicle.hpp"
 
 #include "../parts/Turrel.hpp"
-#include "../items/BaseItem.hpp"
+#include <item/BaseItem.hpp>
 #include "../slots/ItemSlot.hpp"
-
 #include <meti/RandUtils.hpp>
 
 WeaponComplex::WeaponComplex(Vehicle* owner_vehicle)

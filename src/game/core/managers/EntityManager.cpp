@@ -36,7 +36,7 @@
 #include "../builder/items/IncludeItemBuilders.hpp"
 #include "../builder/spaceobjects/IncludeSpaceObjectBuilders.hpp"
 
-#include "../items/others/GoodsPack.hpp"
+#include <item/others/GoodsPack.hpp>
 
 #include "../builder/slots/ItemSlotBuilder.hpp"
 #include "../builder/slots/VehicleSlotBuilder.hpp"
@@ -59,35 +59,15 @@
 #include "../dock/Shop.hpp"
 #include "../dock/Goverment.hpp"
 
-#include "../items/equipment/BakEquipment.hpp"
-#include "../items/equipment/DriveEquipment.hpp"
-#include "../items/equipment/DroidEquipment.hpp"
-#include "../items/equipment/GrappleEquipment.hpp"
-#include "../items/equipment/LazerEquipment.hpp"
-#include "../items/equipment/ProtectorEquipment.hpp"
-#include "../items/equipment/RadarEquipment.hpp"
-#include "../items/equipment/RocketEquipment.hpp"
-#include "../items/equipment/ScanerEquipment.hpp"
-#ifdef USE_EXTRA_EQUIPMENT
-#include "../items/equipment/EnergizerEquipment.hpp"
-#include "../items/equipment/FreezerEquipment.hpp"
-#endif
+#include <item/equipment/ALL>
+
 #ifdef USE_MODULES
-#include "../items/modules/BakModule.hpp"
-#include "../items/modules/DriveModule.hpp"
-#include "../items/modules/DroidModule.hpp"
-#include "../items/modules/GrappleModule.hpp"
-#include "../items/modules/LazerModule.hpp"
-#include "../items/modules/ProtectorModule.hpp"
-#include "../items/modules/RadarModule.hpp"
-#include "../items/modules/RocketModule.hpp"
-#include "../items/modules/ScanerModule.hpp"
+#include <item/modules/ALL>
 #endif
-#include "../items/others/Bomb.hpp"
+#include <item/others/Bomb.hpp>
 
 #ifdef USE_ARTEFACTS
-#include "../items/artefacts/GravityArtefact.hpp"
-#include "../items/artefacts/ProtectorArtefact.hpp"
+#include <item/artefacts/ALL>
 #endif
 #include "../dock/Goverment.hpp"
 #include "../dock/NatureLand.hpp"

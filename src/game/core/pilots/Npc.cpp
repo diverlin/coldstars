@@ -37,7 +37,7 @@
 #include "../spaceobjects/Asteroid.hpp"
 #include "../parts/WeaponComplex.hpp"
 
-#include "../items/others/GoodsPack.hpp"
+#include <item/others/GoodsPack.hpp>
 
 #include "../dock/Shop.hpp"
 

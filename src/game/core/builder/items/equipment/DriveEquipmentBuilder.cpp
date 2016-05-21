@@ -17,7 +17,7 @@
 */
 
 #include <builder/items/equipment/DriveEquipmentBuilder.hpp>
-#include <items/equipment/DriveEquipment.hpp>
+#include <item/equipment/Drive.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>

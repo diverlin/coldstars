@@ -17,7 +17,7 @@
 */
 
 #include <builder/items/equipment/RocketEquipmentBuilder.hpp>
-#include <items/equipment/RocketEquipment.hpp>
+#include <item/equipment/Rocket.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>

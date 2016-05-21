@@ -21,31 +21,35 @@
 
 #include "../../parts/WeaponComplex.hpp"
 
-#include "../../items/equipment/BakEquipment.hpp"
-#include "../../items/equipment/DriveEquipment.hpp"
-#include "../../items/equipment/DroidEquipment.hpp"
-#include "../../items/equipment/GrappleEquipment.hpp"
-#include "../../items/equipment/LazerEquipment.hpp"
-#include "../../items/equipment/ProtectorEquipment.hpp"
-#include "../../items/equipment/RadarEquipment.hpp"
-#include "../../items/equipment/RocketEquipment.hpp"
-#include "../../items/equipment/ScanerEquipment.hpp"
-#include "../../items/equipment/EnergizerEquipment.hpp"
+#include <item/equipment/Bak.hpp>
+#include <item/equipment/Drive.hpp>
+#include <item/equipment/Droid.hpp>
+#include <item/equipment/Grapple.hpp>
+#include <item/equipment/Lazer.hpp>
+#include <item/equipment/Protector.hpp>
+#include <item/equipment/Radar.hpp>
+#include <item/equipment/Rocket.hpp>
+#include <item/equipment/Scaner.hpp>
+#include <item/equipment/Energizer.hpp>
 
-#include "../../items/modules/LazerModule.hpp"
-#include "../../items/modules/RocketModule.hpp"
-#include "../../items/modules/DriveModule.hpp"
-#include "../../items/modules/DroidModule.hpp"
-#include "../../items/modules/RadarModule.hpp"
-#include "../../items/modules/BakModule.hpp"
-#include "../../items/modules/ProtectorModule.hpp"
-#include "../../items/modules/GrappleModule.hpp"
-#include "../../items/modules/ScanerModule.hpp"
+#ifdef USE_MODULES
+#include <item/modules/LazerModule.hpp>
+#include <item/modules/RocketModule.hpp>
+#include <item/modules/DriveModule.hpp>
+#include <item/modules/DroidModule.hpp>
+#include <item/modules/RadarModule.hpp>
+#include <item/modules/BakModule.hpp>
+#include <item/modules/ProtectorModule.hpp>
+#include <item/modules/GrappleModule.hpp>
+#include <item/modules/ScanerModule.hpp>
+#endif
 
-#include "../../items/others/Bomb.hpp"
+#include <item/others/Bomb.hpp>
 
-#include "../../items/artefacts/GravityArtefact.hpp"
-#include "../../items/artefacts/ProtectorArtefact.hpp"
+#ifdef USE_ARTEFACTS
+#include <item/artefacts/GravityArtefact.hpp>
+#include <item/artefacts/ProtectorArtefact.hpp>
+#endif
 
 #include "../../builder/items/IncludeItemBuilders.hpp"
 

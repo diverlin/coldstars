@@ -28,19 +28,7 @@
 
 #include <spaceobjects/Ship.hpp>
 
-#include <items/equipment/BakEquipment.hpp>
-#include <items/equipment/DriveEquipment.hpp>
-#include <items/equipment/DroidEquipment.hpp>
-#include <items/equipment/GrappleEquipment.hpp>
-#include <items/equipment/LazerEquipment.hpp>
-#include <items/equipment/ProtectorEquipment.hpp>
-#include <items/equipment/RadarEquipment.hpp>
-#include <items/equipment/RocketEquipment.hpp>
-#include <items/equipment/ScanerEquipment.hpp>
-#ifdef USE_EXTRA_EQUIPMENT
-#include <items/equipment/EnergizerEquipment.hpp>
-#include <items/equipment/FreezerEquipment.hpp>
-#endif
+#include <item/equipment/ALL>
 
 #include <common/constants.hpp>
 

@@ -16,14 +16,16 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "LazerEquipment.hpp"
+#include "Lazer.hpp"
 
 #include <common/constants.hpp>
 #include <ceti/Logger.hpp>
 
 #include <meti/RandUtils.hpp>
 
-#include "../../items/modules/LazerModule.hpp"
+#ifdef USE_MODULES
+#include <items/modules/LazerModule.hpp>
+#endif
 #include "../../slots/ItemSlot.hpp"
 #include "../../spaceobjects/Vehicle.hpp"
 #include "../../world/starsystem.hpp"

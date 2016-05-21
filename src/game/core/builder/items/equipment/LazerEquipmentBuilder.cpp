@@ -18,7 +18,7 @@
 
 
 #include <builder/items/equipment/LazerEquipmentBuilder.hpp>
-#include <items/equipment/LazerEquipment.hpp>
+#include <item/equipment/Lazer.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <common/IdGenerator.hpp>

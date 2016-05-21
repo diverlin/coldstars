@@ -28,12 +28,12 @@
 #include "../world/starsystem.hpp"
 #include "../parts/Turrel.hpp"
 
-#include "../items/equipment/RocketEquipment.hpp"
-#include "../items/equipment/LazerEquipment.hpp"
-#include "../items/equipment/RadarEquipment.hpp"
-#include "../items/equipment/GrappleEquipment.hpp"
+#include <item/equipment/Rocket.hpp>
+#include <item/equipment/Lazer.hpp>
+#include <item/equipment/Radar.hpp>
+#include <item/equipment/Grapple.hpp>
 
-#include "../items/others/Bomb.hpp"
+#include <item/others/Bomb.hpp>
 
 #include "../dock/Store.hpp"
 #include "../dock/Angar.hpp"

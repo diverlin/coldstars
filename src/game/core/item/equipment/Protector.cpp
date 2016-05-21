@@ -16,11 +16,13 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "ProtectorEquipment.hpp"
+#include "Protector.hpp"
 #include "../../common/constants.hpp"
 //#include <ceti/StringUtils.hpp>
 #include <ceti/Logger.hpp>
-#include "../../items/modules/ProtectorModule.hpp"
+#ifdef USE_MODULES
+#include <item/modules/ProtectorModule.hpp>
+#endif
 
 namespace item {
 namespace equipment {
