@@ -112,19 +112,19 @@ global::global()
     , m_protectorArtefactBuilder(new ProtectorArtefactBuilder)
     #endif // USE_ARTEFACTS
 
-    , m_bakBuilder(new BakBuilder)
-    , m_driveBuilder(new DriveBuilder)
-    , m_droidBuilder(new DroidBuilder)
+    , m_bakBuilder(new item::equipment::BakBuilder)
+    , m_driveBuilder(new item::equipment::DriveBuilder)
+    , m_droidBuilder(new item::equipment::DroidBuilder)
     #ifdef USE_EXTRA_EQUIPMENT
-    , m_energizerBuilder(new EnergizerBuilder)
-    , m_freezerBuilder(new FreezerBuilder)
+    , m_energizerBuilder(new item::equipment::EnergizerBuilder)
+    , m_freezerBuilder(new item::equipment::FreezerBuilder)
     #endif
-    , m_grappleBuilder(new GrappleBuilder)
-    , m_protectorBuilder(new ProtectorBuilder)
-    , m_radarBuilder(new RadarBuilder)
-    , m_scanerBuilder(new ScanerBuilder)
-    , m_rocketBuilder(new RocketBuilder)
-    , m_lazerBuilder(new LazerBuilder)
+    , m_grappleBuilder(new item::equipment::GrappleBuilder)
+    , m_protectorBuilder(new item::equipment::ProtectorBuilder)
+    , m_radarBuilder(new item::equipment::RadarBuilder)
+    , m_scanerBuilder(new item::equipment::ScanerBuilder)
+    , m_rocketBuilder(new item::equipment::RocketBuilder)
+    , m_lazerBuilder(new item::equipment::LazerBuilder)
 
     #ifdef USE_MODULES
     , m_bakModuleBuilder(new BakModuleBuilder)
@@ -183,8 +183,10 @@ global::~global()
     delete m_bakBuilder;
     delete m_driveBuilder;
     delete m_droidBuilder;
+#ifdef USE_EXTRA_EQUIPMENT
     delete m_energizerBuilder;
     delete m_freezerBuilder;
+#endif // USE_EXTRA_EQUIPMENT
     delete m_grappleBuilder;
     delete m_protectorBuilder;
     delete m_radarBuilder;

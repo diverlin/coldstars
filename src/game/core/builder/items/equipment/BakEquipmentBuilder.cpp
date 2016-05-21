@@ -25,6 +25,9 @@
 
 #include <common/Global.hpp>
 
+namespace item {
+namespace equipment {
+
 BakBuilder::BakBuilder()
 {
 }
@@ -63,4 +66,6 @@ void BakBuilder::createInternals(item::equipment::Bak* bak_equipment, const desc
     bak_equipment->countPrice();
 }
 
+} // namespace equipment
+} // namespace item
 

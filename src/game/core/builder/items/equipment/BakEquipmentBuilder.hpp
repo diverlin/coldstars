@@ -24,28 +24,28 @@
 
 namespace item {
 namespace equipment {
+
 class Bak;
-}
-}
 
 class BakBuilder
 {
-    public:
-        BakBuilder();
-        ~BakBuilder();
+public:
+    BakBuilder();
+    ~BakBuilder();
 
-        item::equipment::Bak* createTemplate(id_type id = NONE_ID) const;
-        item::equipment::Bak* create(const descriptor::Base&) const;
-                                     
-    private:                
-        BakBuilder(const BakBuilder&) = delete;
-        BakBuilder& operator=(const BakBuilder&) = delete;
+    item::equipment::Bak* createTemplate(id_type id = NONE_ID) const;
+    item::equipment::Bak* create(const descriptor::Base&) const;
 
-        void createInternals(item::equipment::Bak*, const descriptor::Base&) const;
+private:
+    BakBuilder(const BakBuilder&) = delete;
+    BakBuilder& operator=(const BakBuilder&) = delete;
+
+    void createInternals(item::equipment::Bak*, const descriptor::Base&) const;
 }; 
 
-    
+} // namespace equipment
+} // namespace item
 
-        
+
 
 

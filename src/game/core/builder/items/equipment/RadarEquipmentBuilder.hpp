@@ -25,19 +25,21 @@
 
 namespace item {
 namespace equipment {
+
 class Radar;
-}
-}
 
 class RadarBuilder
 {
-    public:
-        RadarBuilder();
-        ~RadarBuilder();
+public:
+    RadarBuilder();
+    ~RadarBuilder();
 
-        item::equipment::Radar* createTemplate(id_type id = NONE_ID) const;
-        item::equipment::Radar* create(const descriptor::Base&) const;
-                                     
-    private:
-        void createInternals(item::equipment::Radar*, const descriptor::Base&) const;
+    Radar* createTemplate(id_type id = NONE_ID) const;
+    Radar* create(const descriptor::Base&) const;
+
+private:
+    void createInternals(Radar*, const descriptor::Base&) const;
 }; 
+
+} // namespace equipment
+} // namespace item

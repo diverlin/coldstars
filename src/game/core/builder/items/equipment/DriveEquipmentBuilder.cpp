@@ -36,7 +36,8 @@
 
 #include <meti/RandUtils.hpp>
 
-using DriveEquipment = item::equipment::Drive;
+namespace item {
+namespace equipment {
 
 DriveBuilder::DriveBuilder()
 {}
@@ -44,35 +45,37 @@ DriveBuilder::DriveBuilder()
 DriveBuilder::~DriveBuilder()
 {}
 
-DriveEquipment* DriveBuilder::createTemplate(id_type id) const
+Drive* DriveBuilder::createTemplate(id_type id) const
 {
-    DriveEquipment* drive_equipment = new DriveEquipment(id);
-    assert(drive_equipment);
+    Drive* drive = new Drive(id);
+    assert(drive);
 
-    global::get().entityManager().reg(drive_equipment);
+    global::get().entityManager().reg(drive);
     
-    return drive_equipment;
+    return drive;
 } 
         
-DriveEquipment* DriveBuilder::create(const descriptor::Base& descriptor) const
+Drive* DriveBuilder::create(const descriptor::Base& descriptor) const
 {
-    DriveEquipment* drive_equipment = createTemplate();
-    createInternals(drive_equipment, descriptor);
+    Drive* drive = createTemplate();
+    createInternals(drive, descriptor);
         
-    return drive_equipment;
+    return drive;
 }        
             
-void DriveBuilder::createInternals(item::equipment::Drive* drive_equipment, const descriptor::Base& descriptor) const
+void DriveBuilder::createInternals(Drive* drive, const descriptor::Base& descriptor) const
 {     
     ItemCommonData data = extractCommonData(descriptor);
             
-    drive_equipment->SetSpeedOrig(descriptor.speed());
-    drive_equipment->SetHyperOrig(descriptor.hyper());
-    drive_equipment->setParentSubTypeId(TYPE::ENTITY::DRIVE_SLOT_ID);
-    drive_equipment->setItemCommonData(data);
+    drive->SetSpeedOrig(descriptor.speed());
+    drive->SetHyperOrig(descriptor.hyper());
+    drive->setParentSubTypeId(TYPE::ENTITY::DRIVE_SLOT_ID);
+    drive->setItemCommonData(data);
     
-    drive_equipment->updateProperties();
-    drive_equipment->CountPrice();
+    drive->updateProperties();
+    drive->CountPrice();
 }
 
+} // namespace equipment
+} // namespace item
 

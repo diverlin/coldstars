@@ -24,19 +24,21 @@
 
 namespace item {
 namespace equipment {
+
 class Grapple;
-}
-}
 
 class GrappleBuilder
 {
-    public:
-        GrappleBuilder();
-        ~GrappleBuilder();
+public:
+    GrappleBuilder();
+    ~GrappleBuilder();
 
-        item::equipment::Grapple* createTemplate(id_type id = NONE_ID) const;
-        item::equipment::Grapple* create(const descriptor::Base&) const;
-                                     
-    private:
-        void createInternals(item::equipment::Grapple*, const descriptor::Base&) const;
+    Grapple* createTemplate(id_type id = NONE_ID) const;
+    Grapple* create(const descriptor::Base&) const;
+
+private:
+    void createInternals(Grapple*, const descriptor::Base&) const;
 }; 
+
+} // namespace equipment
+} // namespace item

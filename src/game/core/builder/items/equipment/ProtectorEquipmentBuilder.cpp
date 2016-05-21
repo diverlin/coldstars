@@ -32,7 +32,8 @@
 
 #include <meti/RandUtils.hpp>
 
-using namespace item::equipment;
+namespace item {
+namespace equipment {
 
 ProtectorBuilder::ProtectorBuilder()
 {}
@@ -69,3 +70,7 @@ void ProtectorBuilder::createInternals(Protector* protector_equipment, const des
     protector_equipment->updateProperties();
     protector_equipment->CountPrice();
 }
+
+} // namespace equipment
+} // namespace item
+

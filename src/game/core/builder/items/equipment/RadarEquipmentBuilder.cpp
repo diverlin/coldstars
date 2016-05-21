@@ -32,15 +32,18 @@
 
 #include <meti/RandUtils.hpp>
 
+namespace item {
+namespace equipment {
+
 RadarBuilder::RadarBuilder()
 {}
 
 RadarBuilder::~RadarBuilder()
 {}
 
-item::equipment::Radar* RadarBuilder::createTemplate(id_type id) const
+Radar* RadarBuilder::createTemplate(id_type id) const
 {
-    item::equipment::Radar* radar_equipment = new item::equipment::Radar(id);
+    Radar* radar_equipment = new Radar(id);
     assert(radar_equipment);
 
     global::get().entityManager().reg(radar_equipment);
@@ -48,15 +51,15 @@ item::equipment::Radar* RadarBuilder::createTemplate(id_type id) const
     return radar_equipment;
 } 
   
-item::equipment::Radar* RadarBuilder::create(const descriptor::Base& descriptor) const
+Radar* RadarBuilder::create(const descriptor::Base& descriptor) const
 {
-    item::equipment::Radar* radar_equipment = createTemplate();
+    Radar* radar_equipment = createTemplate();
     createInternals(radar_equipment, descriptor);
         
     return radar_equipment;
 } 
         
-void RadarBuilder::createInternals(item::equipment::Radar* radar_equipment, const descriptor::Base& descriptor) const
+void RadarBuilder::createInternals(Radar* radar_equipment, const descriptor::Base& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
 
@@ -68,4 +71,5 @@ void RadarBuilder::createInternals(item::equipment::Radar* radar_equipment, cons
     radar_equipment->CountPrice();
 }
 
-
+} // namespace equipment
+} // namespace item

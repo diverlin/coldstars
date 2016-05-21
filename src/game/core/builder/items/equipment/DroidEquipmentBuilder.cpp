@@ -32,6 +32,9 @@
 
 #include <meti/RandUtils.hpp>
 
+namespace item {
+namespace equipment {
+
 using namespace item::equipment;
 
 DroidBuilder::DroidBuilder()
@@ -70,4 +73,5 @@ void DroidBuilder::createInternals(Droid* droid_equipment, const descriptor::Bas
     droid_equipment->CountPrice();
 }
 
-
+} // namespace equipment
+} // namespace item

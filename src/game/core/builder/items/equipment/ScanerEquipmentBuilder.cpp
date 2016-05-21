@@ -36,6 +36,9 @@
 
 #include <meti/RandUtils.hpp>
 
+namespace item {
+namespace equipment {
+
 using namespace item::equipment;
 
 ScanerBuilder::ScanerBuilder()
@@ -73,3 +76,7 @@ void ScanerBuilder::createInternals(Scaner* scaner_equipment, const descriptor::
     scaner_equipment->updateProperties();
     scaner_equipment->countPrice();
 }
+
+} // namespace equipment
+} // namespace item
+

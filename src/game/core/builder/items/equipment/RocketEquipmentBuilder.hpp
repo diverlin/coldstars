@@ -25,19 +25,21 @@
 
 namespace item {
 namespace equipment {
+
 class Rocket;
-}
-}
 
 class RocketBuilder
 {
-    public:
-        RocketBuilder();
-        ~RocketBuilder();
+public:
+    RocketBuilder();
+    ~RocketBuilder();
 
-        item::equipment::Rocket* createTemplate(id_type id = NONE_ID) const;
-        item::equipment::Rocket* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
-                                     
-    private:
-        void createInternals(item::equipment::Rocket*, TYPE::TECH, TYPE::RACE, int, int, int) const;
+    Rocket* createTemplate(id_type id = NONE_ID) const;
+    Rocket* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
+
+private:
+    void createInternals(Rocket*, TYPE::TECH, TYPE::RACE, int, int, int) const;
 }; 
+
+} // namespace equipment
+} // namespace item
