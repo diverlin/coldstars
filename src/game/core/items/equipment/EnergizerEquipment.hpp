@@ -23,7 +23,7 @@
 #include <items/equipment/BaseEquipment.hpp>
 
 
-class EnergizerEquipment : public item::equipment::BaseEquipment
+class EnergizerEquipment : public item::equipment::Base
 {
     public:
         EnergizerEquipment(const id_type& id);

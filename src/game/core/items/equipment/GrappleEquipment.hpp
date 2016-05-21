@@ -29,7 +29,7 @@
 namespace item {
 namespace equipment {
 
-class Grapple : public BaseEquipment
+class Grapple : public Base
 {
 public:
     Grapple(const id_type& id);

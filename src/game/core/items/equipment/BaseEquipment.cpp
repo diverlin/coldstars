@@ -31,14 +31,14 @@
 namespace item {
 namespace equipment {
 
-BaseEquipment::BaseEquipment()
+Base::Base()
 {
     m_race_id = TYPE::RACE::R0_ID;
     //animation_notfunctioning = new jeti::AnimationEffect2D(glm::vec3(0.8, 0.8, 1.0), glm::vec3(1.2, 1.2, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0);
 }
 
 /*virtual */
-BaseEquipment::~BaseEquipment()
+Base::~Base()
 {
     LOG("___::~BaseEquipment("+std::to_string(id())+")");
 
@@ -46,7 +46,7 @@ BaseEquipment::~BaseEquipment()
 }
 
 /* virtual */
-void BaseEquipment::putChildrenToGarbage() const
+void Base::putChildrenToGarbage() const
 {
 #ifdef USE_MODULES
     for (unsigned int i=0; i<modules_vec.size(); i++) {
@@ -56,7 +56,7 @@ void BaseEquipment::putChildrenToGarbage() const
 }
 
 /* virtual */
-void BaseEquipment::AddCommonInfo()
+void Base::AddCommonInfo()
 {
     //    info.addNameStr("tech_level:");   info.addValueStr( getTechLevelStr(data_item.tech_level) );
     //    info.addNameStr("modules:");   info.addValueStr( std::to_string(data_item.modules_num_max) );
@@ -132,17 +132,17 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 //}
 
 
-void BaseEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     LOG(" BaseEquipment::SaveData()  id=" + std::to_string(id()) + " START");
 }
 
-void BaseEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
+void Base::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" BaseEquipment::LoadData()  id=" + std::to_string(id()) + " START");
 }
 
-void BaseEquipment::ResolveData()
+void Base::ResolveData()
 {
     LOG(" BaseEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }

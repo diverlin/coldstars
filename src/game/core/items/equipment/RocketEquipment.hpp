@@ -26,7 +26,7 @@
 namespace item {
 namespace equipment {
 
-class Rocket : public BaseEquipment
+class Rocket : public Base
 { 
        public:
         Rocket(const id_type& id);

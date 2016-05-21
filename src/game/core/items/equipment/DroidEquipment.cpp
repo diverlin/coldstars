@@ -101,7 +101,7 @@ void Droid::Save(boost::property_tree::ptree& save_ptree) const
 
     Base::SaveData(save_ptree, root);
     Base::SaveData(save_ptree, root);
-    BaseEquipment::SaveData(save_ptree, root);
+    Base::SaveData(save_ptree, root);
     Droid::SaveData(save_ptree, root);
 }
 
@@ -110,7 +110,7 @@ void Droid::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Base::LoadData(load_ptree);
-    BaseEquipment::LoadData(load_ptree);
+    Base::LoadData(load_ptree);
     Droid::LoadData(load_ptree);
 }
 
@@ -119,7 +119,7 @@ void Droid::Resolve()
 {
     Base::ResolveData();
     Base::ResolveData();
-    BaseEquipment::ResolveData();
+    Base::ResolveData();
     Droid::ResolveData();
 }
 

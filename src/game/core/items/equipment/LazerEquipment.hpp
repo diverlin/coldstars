@@ -26,7 +26,7 @@ class ItemSlot;
 namespace item {
 namespace equipment {
 
-class Lazer : public BaseEquipment
+class Lazer : public Base
 {
     public:
         Lazer(const id_type& id);

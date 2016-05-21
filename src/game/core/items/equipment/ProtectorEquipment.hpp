@@ -24,7 +24,7 @@
 namespace item {
 namespace equipment {
 
-class Protector  : public BaseEquipment
+class Protector  : public Base
 {
     public:
         Protector(const id_type& id);

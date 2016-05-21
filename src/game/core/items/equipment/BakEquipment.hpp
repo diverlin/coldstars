@@ -23,7 +23,7 @@
 namespace item {
 namespace equipment {
 
-class Bak : public BaseEquipment
+class Bak : public Base
 {
 public:
     Bak(const id_type& id);
