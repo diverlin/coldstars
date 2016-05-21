@@ -25,7 +25,7 @@
 namespace item {
 namespace equipment {
 
-ScanerEquipment::ScanerEquipment(const id_type& id)
+Scaner::Scaner(const id_type& id)
     :
       scan_orig(0)
 {
@@ -35,11 +35,11 @@ ScanerEquipment::ScanerEquipment(const id_type& id)
 }
 
 /* virtual */
-ScanerEquipment::~ScanerEquipment() 
+Scaner::~Scaner()
 {}
 
 /* virtual */
-void ScanerEquipment::updateProperties()
+void Scaner::updateProperties()
 {
     scan_add = 0;
 
@@ -52,7 +52,7 @@ void ScanerEquipment::updateProperties()
     scan = scan_orig + scan_add;
 }
 
-void ScanerEquipment::CountPrice()
+void Scaner::CountPrice()
 {
     float scan_rate          = (float)scan_orig / EQUIPMENT::SCANER::SCAN_MIN;
     float modules_num_rate   = (float)m_data_item.modules_num / EQUIPMENT::SCANER::MODULES_NUM_MAX;
@@ -67,13 +67,13 @@ void ScanerEquipment::CountPrice()
 }
 
 
-void ScanerEquipment::addUniqueInfo()
+void Scaner::addUniqueInfo()
 {
     //    info.addTitleStr("SCANER");
     //    info.addNameStr("scan:");     info.addValueStr(GetScanStr());
 }
 
-std::string ScanerEquipment::GetScanStr()
+std::string Scaner::GetScanStr()
 {
     if (scan_add == 0)
         return std::to_string(scan_orig);
@@ -83,48 +83,48 @@ std::string ScanerEquipment::GetScanStr()
 
 
 /*virtual*/
-void ScanerEquipment::Save(boost::property_tree::ptree& save_ptree) const
+void Scaner::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "scaner_equipment." + std::to_string(id()) + ".";
     Base::SaveData(save_ptree, root);
     Base::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
-    ScanerEquipment::SaveData(save_ptree, root);
+    Scaner::SaveData(save_ptree, root);
 }
 
 /*virtual*/
-void ScanerEquipment::Load(const boost::property_tree::ptree& load_ptree)
+void Scaner::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
     Base::LoadData(load_ptree);
     BaseEquipment::LoadData(load_ptree);
-    ScanerEquipment::LoadData(load_ptree);
+    Scaner::LoadData(load_ptree);
 }
 
 /*virtual*/
-void ScanerEquipment::Resolve()
+void Scaner::Resolve()
 {
     Base::ResolveData();
     Base::ResolveData();
     BaseEquipment::ResolveData();
-    ScanerEquipment::ResolveData();
+    Scaner::ResolveData();
 }
 
-void ScanerEquipment::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+void Scaner::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     LOG(" ScanerEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
     save_ptree.put(root+"scan_orig", scan_orig);
 }
 
-void ScanerEquipment::LoadData(const boost::property_tree::ptree& load_ptree)
+void Scaner::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" ScanerEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
     scan_orig = load_ptree.get<int>("scan_orig");
 }                
 
-void ScanerEquipment::ResolveData()
+void Scaner::ResolveData()
 {
     LOG(" ScanerEquipment::ResolveData()  id=" + std::to_string(id()) + " START");
 }

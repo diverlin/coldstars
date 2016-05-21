@@ -126,7 +126,7 @@ TEST(ship_with_equipment, grapple)
 TEST(ship_with_equipment, scaner)
 {
     Ship* ship = createNewShip();
-    item::equipment::ScanerEquipment* scaner_equipment = global::get().scanerBuilder().create(generateScanerDescriptor());
+    item::equipment::Scaner* scaner_equipment = global::get().scanerBuilder().create(generateScanerDescriptor());
 
     EXPECT_TRUE(ship->slotScaner()->item() == nullptr);
     ship->manage(scaner_equipment);

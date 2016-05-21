@@ -25,7 +25,7 @@
 
 namespace item {
 namespace equipment {
-class ScanerEquipment;
+class Scaner;
 }
 }
 
@@ -35,9 +35,9 @@ public:
     ScanerBuilder();
     ~ScanerBuilder();
 
-    item::equipment::ScanerEquipment* createTemplate(id_type id = NONE_ID) const;
-    item::equipment::ScanerEquipment* create(const descriptor::Base&) const;
+    item::equipment::Scaner* createTemplate(id_type id = NONE_ID) const;
+    item::equipment::Scaner* create(const descriptor::Base&) const;
 
 private:
-    void createInternals(item::equipment::ScanerEquipment*, const descriptor::Base&) const;
+    void createInternals(item::equipment::Scaner*, const descriptor::Base&) const;
 }; 

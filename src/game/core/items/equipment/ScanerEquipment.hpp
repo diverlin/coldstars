@@ -24,11 +24,11 @@
 namespace item {
 namespace equipment {
 
-class ScanerEquipment : public BaseEquipment
+class Scaner : public BaseEquipment
 {
 public:
-    ScanerEquipment(const id_type& id);
-    virtual ~ScanerEquipment();
+    Scaner(const id_type& id);
+    virtual ~Scaner();
 
     void SetScanOrig(int scan_orig)  { this->scan_orig = scan_orig; };
     int GetScan() const { return scan; };

@@ -42,7 +42,7 @@ class EnergizerEquipment;
 #endif
 class ProtectorEquipment; 
 class DroidEquipment; 
-class ScanerEquipment;
+class Scaner;
 class DriveEquipment; 
 class GrappleEquipment; 
 } // namespace equipment
@@ -112,7 +112,7 @@ public:
 #endif
     item::equipment::ProtectorEquipment* protectorEquipment() const { return reinterpret_cast<item::equipment::ProtectorEquipment*>(m_item); }
     item::equipment::DroidEquipment*     droidEquipment()     const { return reinterpret_cast<item::equipment::DroidEquipment*>(m_item); }
-    item::equipment::ScanerEquipment*    scanerEquipment()    const { return reinterpret_cast<item::equipment::ScanerEquipment*>(m_item); }
+    item::equipment::Scaner*    scanerEquipment()    const { return reinterpret_cast<item::equipment::Scaner*>(m_item); }
     item::equipment::GrappleEquipment*   grappleEquipment()   const { return reinterpret_cast<item::equipment::GrappleEquipment*>(m_item); }
 
 #ifdef USE_MODULES
