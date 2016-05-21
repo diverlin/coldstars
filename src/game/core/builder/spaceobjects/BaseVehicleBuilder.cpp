@@ -271,7 +271,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::SCANER_SLOT_ID) == true)
     {
-        item::equipment::ScanerEquipment* scaner_equipment = global::get().scanerBuilder().create(generateScanerDescriptor());
+        item::equipment::Scaner* scaner_equipment = global::get().scanerBuilder().create(generateScanerDescriptor());
         if (vehicle->manage(scaner_equipment) == false) {
             global::get().entityManager().addToGarbage(scaner_equipment);
         }  
