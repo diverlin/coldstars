@@ -25,19 +25,22 @@
 
 namespace item {
 namespace equipment {
+
 class Lazer;
-}
-}
 
 class LazerBuilder
 {
-    public:
-        LazerBuilder();
-        ~LazerBuilder();
+public:
+    LazerBuilder();
+    ~LazerBuilder();
 
-        item::equipment::Lazer* createTemplate(id_type id = NONE_ID) const;
-        item::equipment::Lazer* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
-                                     
-    private:
-        void createInternals(item::equipment::Lazer*, TYPE::TECH, TYPE::RACE, int, int) const;
+    Lazer* createTemplate(id_type id = NONE_ID) const;
+    Lazer* create(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
+
+private:
+    void createInternals(Lazer*, TYPE::TECH, TYPE::RACE, int, int) const;
 }; 
+
+} // namespace equipment
+} // namespace item
+

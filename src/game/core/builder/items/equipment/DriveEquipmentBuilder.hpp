@@ -24,9 +24,8 @@
 
 namespace item {
 namespace equipment {
+
 class Drive;
-}
-}
 
 class DriveBuilder
 {
@@ -41,7 +40,8 @@ private:
     void createInternals(item::equipment::Drive*, const descriptor::Base&) const;
 }; 
 
-
+} // namespace equipment
+} // namespace item
 
 
 

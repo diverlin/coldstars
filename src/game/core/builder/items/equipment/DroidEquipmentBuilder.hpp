@@ -24,19 +24,22 @@
 
 namespace item {
 namespace equipment {
+
 class Droid;
-}
-}
 
 class DroidBuilder
 {
-    public:
-        DroidBuilder();
-        ~DroidBuilder();
+public:
+    DroidBuilder();
+    ~DroidBuilder();
 
-        item::equipment::Droid* createTemplate(id_type id = NONE_ID) const;
-        item::equipment::Droid* create(const descriptor::Base&) const;
-                                     
-    private:
-        void createInternals(item::equipment::Droid*, const descriptor::Base&) const;
+    Droid* createTemplate(id_type id = NONE_ID) const;
+    Droid* create(const descriptor::Base&) const;
+
+private:
+    void createInternals(Droid*, const descriptor::Base&) const;
 }; 
+
+} // namespace equipment
+} // namespace item
+

@@ -42,17 +42,23 @@ class GravityArtefactBuilder;
 class ProtectorArtefactBuilder;
 #endif
 
+namespace item {
+namespace equipment {
 class BakBuilder;
 class DriveBuilder;
 class DroidBuilder;
+#ifdef USE_EXTRA_EQUIPMENT
 class EnergizerBuilder;
 class FreezerBuilder;
+#endif
 class GrappleBuilder;
 class ProtectorBuilder;
 class RadarBuilder;
 class ScanerBuilder;
 class RocketBuilder;
 class LazerBuilder;
+} // namespace equipment
+} // namespace item
 
 #ifdef USE_MODULES
 class BakModuleBuilder;
@@ -117,17 +123,19 @@ class global
         ProtectorArtefactBuilder& protectorArtefactBuilder() { return *m_protectorArtefactBuilder; }
 #endif // USE_ARTEFACTS
 
-        BakBuilder& bakBuilder() { return *m_bakBuilder; }
-        DriveBuilder& driveBuilder() { return *m_driveBuilder; }
-        DroidBuilder& droidBuilder() { return *m_droidBuilder; }
-        EnergizerBuilder& energizerBuilder() { return *m_energizerBuilder; }
-        FreezerBuilder& freezerBuilder() { return *m_freezerBuilder; }
-        GrappleBuilder& grappleBuilder() { return *m_grappleBuilder; }
-        ProtectorBuilder& protectorBuilder() { return *m_protectorBuilder; }
-        RadarBuilder& radarBuilder() { return *m_radarBuilder; }
-        ScanerBuilder& scanerBuilder() { return *m_scanerBuilder; }
-        RocketBuilder& rocketBuilder() { return *m_rocketBuilder; }
-        LazerBuilder& lazerBuilder() { return *m_lazerBuilder; }
+        item::equipment::BakBuilder& bakBuilder() { return *m_bakBuilder; }
+        item::equipment::DriveBuilder& driveBuilder() { return *m_driveBuilder; }
+        item::equipment::DroidBuilder& droidBuilder() { return *m_droidBuilder; }
+#ifdef USE_EXTRA_EQUIPMENT
+        item::equipment::EnergizerBuilder& energizerBuilder() { return *m_energizerBuilder; }
+        item::equipment::FreezerBuilder& freezerBuilder() { return *m_freezerBuilder; }
+#endif // USE_EXTRA_EQUIPMENT
+        item::equipment::GrappleBuilder& grappleBuilder() { return *m_grappleBuilder; }
+        item::equipment::ProtectorBuilder& protectorBuilder() { return *m_protectorBuilder; }
+        item::equipment::RadarBuilder& radarBuilder() { return *m_radarBuilder; }
+        item::equipment::ScanerBuilder& scanerBuilder() { return *m_scanerBuilder; }
+        item::equipment::RocketBuilder& rocketBuilder() { return *m_rocketBuilder; }
+        item::equipment::LazerBuilder& lazerBuilder() { return *m_lazerBuilder; }
 
 #ifdef USE_MODULES
         BakModuleBuilder& bakModuleBuilder() { return *m_bakModuleBuilder; }
@@ -193,17 +201,19 @@ class global
         ProtectorArtefactBuilder* m_protectorArtefactBuilder = nullptr;
 #endif // USE_ARTEFACTS
 
-        BakBuilder* m_bakBuilder = nullptr;
-        DriveBuilder* m_driveBuilder = nullptr;
-        DroidBuilder* m_droidBuilder = nullptr;
-        EnergizerBuilder* m_energizerBuilder = nullptr;
-        FreezerBuilder* m_freezerBuilder = nullptr;
-        GrappleBuilder* m_grappleBuilder = nullptr;
-        ProtectorBuilder* m_protectorBuilder = nullptr;
-        RadarBuilder* m_radarBuilder = nullptr;
-        ScanerBuilder* m_scanerBuilder = nullptr;
-        RocketBuilder* m_rocketBuilder = nullptr;
-        LazerBuilder* m_lazerBuilder = nullptr;
+        item::equipment::BakBuilder* m_bakBuilder = nullptr;
+        item::equipment::DriveBuilder* m_driveBuilder = nullptr;
+        item::equipment::DroidBuilder* m_droidBuilder = nullptr;
+#ifdef USE_EXTRA_EQUIPMENT
+        item::equipment::EnergizerBuilder* m_energizerBuilder = nullptr;
+        item::equipment::FreezerBuilder* m_freezerBuilder = nullptr;
+#endif // USE_EXTRA_EQUIPMENT
+        item::equipment::GrappleBuilder* m_grappleBuilder = nullptr;
+        item::equipment::ProtectorBuilder* m_protectorBuilder = nullptr;
+        item::equipment::RadarBuilder* m_radarBuilder = nullptr;
+        item::equipment::ScanerBuilder* m_scanerBuilder = nullptr;
+        item::equipment::RocketBuilder* m_rocketBuilder = nullptr;
+        item::equipment::LazerBuilder* m_lazerBuilder = nullptr;
 
 #ifdef USE_MODULES
         BakModuleBuilder* m_bakModuleBuilder = nullptr;

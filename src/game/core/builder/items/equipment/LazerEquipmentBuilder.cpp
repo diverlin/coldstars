@@ -35,7 +35,9 @@
 #include <descriptors/RaceDescriptors.hpp>
 #include <meti/RandUtils.hpp>
 
-using namespace item::equipment;
+namespace item {
+namespace equipment {
+
 
 LazerBuilder::LazerBuilder()
 {}
@@ -97,4 +99,6 @@ void LazerBuilder::createInternals(Lazer* lazer_equipment, TYPE::TECH tech_level
     lazer_equipment->CountPrice();
 }
 
+} // namespace equipment
+} // namespace item
 

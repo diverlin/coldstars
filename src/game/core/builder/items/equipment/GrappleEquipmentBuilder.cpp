@@ -31,7 +31,8 @@
 #include <descriptors/RaceDescriptors.hpp>
 #include <meti/RandUtils.hpp>
 
-using namespace item::equipment;
+namespace item {
+namespace equipment {
 
 GrappleBuilder::GrappleBuilder()
 {}
@@ -71,3 +72,6 @@ void GrappleBuilder::createInternals(Grapple* grapple_equipment, const descripto
     grapple_equipment->updateProperties();
     grapple_equipment->CountPrice();
 }
+
+} // namespace equipment
+} // namespace item
