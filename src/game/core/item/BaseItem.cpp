@@ -81,7 +81,7 @@ void Base::deteriorationEvent()
                 
 bool Base::repairEvent()
 {
-    m_condition = m_data_item.condition;
+    m_condition = m_data_item.condition_max;
     m_item_slot->updateVehiclePropetries();
     
     return true;
@@ -143,7 +143,7 @@ void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
 
     save_ptree.put(root+"data_item.tech_level",                     (int)m_data_item.tech);
     //save_ptree.put(root+"data_item.modules_num_max",                m_data_item.modules_num);
-    save_ptree.put(root+"data_item.condition_max",                  m_data_item.condition);
+    save_ptree.put(root+"data_item.condition_max",                  m_data_item.condition_max);
     save_ptree.put(root+"data_item.deterioration_normal",           m_data_item.deterioration);
     save_ptree.put(root+"data_item.deterioration_overload_rate",    m_data_item.deterioration_overload_rate);
     save_ptree.put(root+"data_item.mass",                           m_data_item.mass);
@@ -168,7 +168,7 @@ void Base::LoadData(const boost::property_tree::ptree& load_ptree)
 
     m_data_item.tech           = (TYPE::TECH)load_ptree.get<int>("data_item.tech_level");
     //m_data_item.modules_num      = load_ptree.get<int>("data_item.modules_num_max");
-    m_data_item.condition        = load_ptree.get<int>("data_item.condition_max");
+    m_data_item.condition_max        = load_ptree.get<int>("data_item.condition_max");
     m_data_item.deterioration = load_ptree.get<int>("data_item.deterioration_normal");
     m_data_item.deterioration_overload_rate = load_ptree.get<float>("data_item.deterioration_overload_rate");
     m_data_item.mass                 = load_ptree.get<int>("data_item.mass");

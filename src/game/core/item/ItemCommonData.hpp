@@ -36,7 +36,7 @@ struct ItemCommonData
     TYPE::RACE race = TYPE::RACE::R0_ID;
     TYPE::TECH tech = TYPE::TECH::NONE_ID;
     int modules_num = 0;
-    int condition = 0;
+    int condition_max = 0;
     int deterioration = 0;
     float deterioration_overload_rate = 0.0f;
     int mass = 0;

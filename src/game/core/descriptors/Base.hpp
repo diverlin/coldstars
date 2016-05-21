@@ -30,28 +30,29 @@
 namespace descriptor {
 
 enum class Key: int {
-    ID,
+    // const
     TYPE,
     RACE,
-    OWNER,
-    CHILD,
-    TARGET,
     DAMAGE,
     RADIUS,
-
     TECH,
     MODULES_NUM,
     MASS,
-    CONDITION,
+    CONDITION_MAX,
     DETERIORATION,
-    FUEL,
+    FUEL_MAX,
     SPEED,
     HYPER,
     REPAIR,
     STRENGTH,
     SCAN,
     PROTECTION,
-    PRICE
+    PRICE,
+    // dynamic
+    ID,
+    OWNER,
+    CHILD,
+    TARGET
 };
 
 std::string keyStr(const Key&);
@@ -70,25 +71,20 @@ public:
         GRAPPLE,
         SCANER,
         RADAR,
-        PROTECTOR,
-        PRICE
+        PROTECTOR
     };
 
-    static std::string KEY_ID;
+    // const
     static std::string KEY_TYPE;
-    static std::string KEY_RACE;
-    static std::string KEY_OWNER;
-    static std::string KEY_CHILD;
     static std::string KEY_TARGET;
     static std::string KEY_DAMAGE;
     static std::string KEY_RADIUS;
-
     static std::string KEY_TECH;
     static std::string KEY_MODULES_NUM;
     static std::string KEY_MASS;
-    static std::string KEY_CONDITION;
+    static std::string KEY_CONDITION_MAX;
     static std::string KEY_DETERIORATION;
-    static std::string KEY_FUEL;
+    static std::string KEY_FUEL_MAX;
     static std::string KEY_SPEED;
     static std::string KEY_HYPER;
     static std::string KEY_REPAIR;
@@ -96,6 +92,11 @@ public:
     static std::string KEY_SCAN;
     static std::string KEY_PROTECTION;
     static std::string KEY_PRICE;
+    // dynamic
+    static std::string KEY_ID;
+    static std::string KEY_RACE;
+    static std::string KEY_OWNER;
+    static std::string KEY_CHILD;
 
     Base();
     Base(const std::map<Key, int_type>&);
@@ -117,9 +118,9 @@ public:
     const int_type& tech() const;
     const int_type& modulesNum() const;
     const int_type& mass() const;
-    const int_type& condition() const;
+    const int_type& conditionMax() const;
     const int_type& deterioration() const;
-    const int_type& fuel() const;
+    const int_type& fuelMax() const;
     const int_type& speed() const;
     const int_type& hyper() const;
     const int_type& repair() const;

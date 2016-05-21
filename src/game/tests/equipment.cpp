@@ -43,7 +43,7 @@ void commonDataItemCheck(const descriptor::Base& descr, item::Base* item)
     EXPECT_EQ(descr.modulesNum(), (int)item->modulesNum());
     EXPECT_EQ(descr.deterioration(), (int)item->deterioration());
     EXPECT_EQ(descr.mass(), item->mass());
-    EXPECT_EQ(descr.condition(), item->condition());
+    EXPECT_EQ(descr.conditionMax(), item->condition());
     EXPECT_EQ(descr.price(), item->basePrice());
     //EXPECT_EQ(descr.parentSubTypeId(), (int)bak_equipment->parentSubTypeId());
 }
@@ -53,8 +53,8 @@ TEST(equipment,bak)
     const descriptor::Base& descr = generateBakDescriptor();
     item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(descr);
 
-    EXPECT_EQ(descr.fuel(), bak_equipment->fuel());
-    EXPECT_EQ(descr.fuel(), bak_equipment->fuelMax());
+    EXPECT_EQ(descr.fuelMax(), bak_equipment->fuel());
+    EXPECT_EQ(descr.fuelMax(), bak_equipment->fuelMax());
     commonDataItemCheck(descr, bak_equipment);
 }
 
