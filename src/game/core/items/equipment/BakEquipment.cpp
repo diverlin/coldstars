@@ -87,7 +87,7 @@ void BakEquipment::Save(boost::property_tree::ptree& save_ptree) const
     std::string root = "bak_equipment." + std::to_string(id()) + ".";
 
     Base::SaveData(save_ptree, root);
-    BaseItem::SaveData(save_ptree, root);
+    Base::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
     BakEquipment::SaveData(save_ptree, root);
 }
@@ -96,7 +96,7 @@ void BakEquipment::Save(boost::property_tree::ptree& save_ptree) const
 void BakEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    BaseItem::LoadData(load_ptree);
+    Base::LoadData(load_ptree);
     BaseEquipment::LoadData(load_ptree);
     BakEquipment::LoadData(load_ptree);
 }
@@ -105,7 +105,7 @@ void BakEquipment::Load(const boost::property_tree::ptree& load_ptree)
 void BakEquipment::Resolve()
 {
     Base::ResolveData();
-    BaseItem::ResolveData();
+    Base::ResolveData();
     BaseEquipment::ResolveData();
     BakEquipment::ResolveData();
 }

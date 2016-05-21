@@ -84,7 +84,7 @@ void ScanerEquipment::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "scaner_equipment." + std::to_string(id()) + ".";
     Base::SaveData(save_ptree, root);
-    BaseItem::SaveData(save_ptree, root);
+    Base::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
     ScanerEquipment::SaveData(save_ptree, root);
 }
@@ -93,7 +93,7 @@ void ScanerEquipment::Save(boost::property_tree::ptree& save_ptree) const
 void ScanerEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    BaseItem::LoadData(load_ptree);
+    Base::LoadData(load_ptree);
     BaseEquipment::LoadData(load_ptree);
     ScanerEquipment::LoadData(load_ptree);
 }
@@ -102,7 +102,7 @@ void ScanerEquipment::Load(const boost::property_tree::ptree& load_ptree)
 void ScanerEquipment::Resolve()
 {
     Base::ResolveData();
-    BaseItem::ResolveData();
+    Base::ResolveData();
     BaseEquipment::ResolveData();
     ScanerEquipment::ResolveData();
 }

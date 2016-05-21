@@ -34,7 +34,7 @@ class Container;
 //}
 
 namespace item {
-class BaseItem;
+class Base;
 } // namespace item
 
 class ContainerBuilder

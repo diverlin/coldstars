@@ -21,7 +21,7 @@
 #include <items/BaseItem.hpp>
 #include <common/constants.hpp>
 
-class GoodsPack : public item::BaseItem
+class GoodsPack : public item::Base
 {
     public:                  
         GoodsPack(int, TYPE::ENTITY);

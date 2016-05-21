@@ -84,7 +84,7 @@ void Angar::AddItemSlot(ItemSlot* item_slot)
     item_slot_vec.push_back(item_slot);
 }
 
-bool Angar::RepairItem(Npc* npc, item::BaseItem* item) const
+bool Angar::RepairItem(Npc* npc, item::Base* item) const
 {
     int price = item->price() * REPAIR_ITEM_PRICE_RATE;
     if (npc->WithdrawCredits(price) == true)

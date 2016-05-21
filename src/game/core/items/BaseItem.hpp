@@ -38,11 +38,11 @@ struct UnresolvedDataBaseItem
     id_type item_slot_id;
 };
 
-class BaseItem : public ceti::Orientation, public Base // Orientation ??
+class Base : public ceti::Orientation, public ::Base // Orientation ??
 {
     public:
-        BaseItem();
-        virtual ~BaseItem();
+        Base();
+        virtual ~Base();
         
         virtual void putChildrenToGarbage() const {}
         

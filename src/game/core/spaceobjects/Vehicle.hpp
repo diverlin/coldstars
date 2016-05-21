@@ -37,7 +37,7 @@ class Npc;
 class GoodsPack;
 class Container;
 namespace item {
-class BaseItem;
+class Base;
 }
 class BaseEquipment;
 class BaseParticleSystem;
@@ -98,14 +98,14 @@ class Vehicle : public SpaceObject
         
         bool GetAllItemsFromVehicle(Vehicle*);
         
-        bool AddItemToCargoSlot(item::BaseItem*);
-        bool manage(item::BaseItem*);
+        bool AddItemToCargoSlot(item::Base*);
+        bool manage(item::Base*);
         
         void ManageItemsInCargo();
         void SellItemsInCargo();
         
-        bool SellItem(item::BaseItem*);
-        bool BuyItem(item::BaseItem*);
+        bool SellItem(item::Base*);
+        bool BuyItem(item::Base*);
         
         bool UnpackContainerItemToCargoSlot(Container*);
         
@@ -203,15 +203,15 @@ class Vehicle : public SpaceObject
         ItemSlot* const GetEmptyArtefactSlot() const;
         ItemSlot* const GetCargoSlotWithGoods(TYPE::ENTITY);
         
-        bool ManageItem(item::BaseItem*);
-        bool ManageFunctionEquipment(item::BaseItem*);
+        bool ManageItem(item::Base*);
+        bool ManageFunctionEquipment(item::Base*);
 #ifdef USE_MODULES
         bool ManageFunctionModule(item::BaseItem*);
 #endif
 #ifdef USE_ARTEFACTS
         bool ManageFunctionArtefact(item::BaseItem*);
 #endif
-        bool ManageFunctionGoodsPack(item::BaseItem*);
+        bool ManageFunctionGoodsPack(item::Base*);
                     
 //        virtual void UpdateInfo() = 0;
         
@@ -261,7 +261,7 @@ class Vehicle : public SpaceObject
         VehicleDescriptor m_VehicleDescriptor;
                                                                                
         void DropRandomItemToSpace();   
-        bool MergeIdenticalGoods(item::BaseItem*);
+        bool MergeIdenticalGoods(item::Base*);
                  
     friend class GuiVehicle;
     friend class GuiVehicle2;                 

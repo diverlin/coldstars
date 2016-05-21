@@ -135,7 +135,7 @@ void ContainerBuilder::createInternals(Container* container, const descriptor::C
     container->bindItemSlot(item_slot);
 
     if (descriptor.child() >= 0) {
-        item::BaseItem* item = static_cast<item::BaseItem*>(global::get().entityManager().get(descriptor.child()));
+        item::Base* item = static_cast<item::Base*>(global::get().entityManager().get(descriptor.child()));
         item_slot->insertItem(item);
     }
 }

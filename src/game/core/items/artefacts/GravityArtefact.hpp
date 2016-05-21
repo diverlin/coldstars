@@ -20,7 +20,7 @@
 
 #include "../BaseItem.hpp"
 
-class GravityArtefact : public item::BaseItem
+class GravityArtefact : public item::Base
 {
 public:
     GravityArtefact(int);

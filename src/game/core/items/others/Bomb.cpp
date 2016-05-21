@@ -57,7 +57,7 @@ void Bomb::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "bomb." + std::to_string(id()) + ".";
     Base::SaveData(save_ptree, root);
-    BaseItem::SaveData(save_ptree, root);
+    Base::SaveData(save_ptree, root);
     Bomb::SaveData(save_ptree, root);
 }
 
@@ -65,7 +65,7 @@ void Bomb::Save(boost::property_tree::ptree& save_ptree) const
 void Bomb::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    BaseItem::LoadData(load_ptree);
+    Base::LoadData(load_ptree);
     LoadData(load_ptree);
 }
     
@@ -73,7 +73,7 @@ void Bomb::Load(const boost::property_tree::ptree& load_ptree)
 void Bomb::Resolve()
 {
     Base::ResolveData();
-    BaseItem::ResolveData();
+    Base::ResolveData();
     Bomb::ResolveData();
 }
 

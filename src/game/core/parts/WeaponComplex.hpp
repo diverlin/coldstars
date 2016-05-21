@@ -26,7 +26,7 @@
 class Vehicle;
 class ItemSlot;
 namespace item {
-class BaseItem;
+class Base;
 }
 class SpaceObject;
 class TextureOb;

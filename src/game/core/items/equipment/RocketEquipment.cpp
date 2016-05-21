@@ -210,7 +210,7 @@ void RocketEquipment::Save(boost::property_tree::ptree& save_ptree) const
     std::string root = "rocket_equipment." + std::to_string(id()) + ".";
 
     Base::SaveData(save_ptree, root);
-    BaseItem::SaveData(save_ptree, root);
+    Base::SaveData(save_ptree, root);
     BaseEquipment::SaveData(save_ptree, root);
     RocketEquipment::SaveData(save_ptree, root);
 }
@@ -219,7 +219,7 @@ void RocketEquipment::Save(boost::property_tree::ptree& save_ptree) const
 void RocketEquipment::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    BaseItem::LoadData(load_ptree);
+    Base::LoadData(load_ptree);
     BaseEquipment::LoadData(load_ptree);
     RocketEquipment::LoadData(load_ptree);
 }
@@ -228,7 +228,7 @@ void RocketEquipment::Load(const boost::property_tree::ptree& load_ptree)
 void RocketEquipment::Resolve()
 {
     Base::ResolveData();
-    BaseItem::ResolveData();
+    Base::ResolveData();
     BaseEquipment::ResolveData();
     RocketEquipment::ResolveData();
 }

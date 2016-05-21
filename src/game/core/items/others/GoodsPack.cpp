@@ -74,7 +74,7 @@ void GoodsPack::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "goods_pack." + std::to_string(id()) + ".";
     Base::SaveData(save_ptree, root);
-    BaseItem::SaveData(save_ptree, root);
+    Base::SaveData(save_ptree, root);
     GoodsPack::SaveData(save_ptree, root);
 }
 
@@ -82,7 +82,7 @@ void GoodsPack::Save(boost::property_tree::ptree& save_ptree) const
 void GoodsPack::Load(const boost::property_tree::ptree& load_ptree)
 {
     Base::LoadData(load_ptree);
-    BaseItem::LoadData(load_ptree);
+    Base::LoadData(load_ptree);
     GoodsPack::LoadData(load_ptree);
 }
     
@@ -90,7 +90,7 @@ void GoodsPack::Load(const boost::property_tree::ptree& load_ptree)
 void GoodsPack::Resolve()
 {
     Base::ResolveData();
-    BaseItem::ResolveData();
+    Base::ResolveData();
     GoodsPack::ResolveData();
 }
 

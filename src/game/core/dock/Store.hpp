@@ -23,7 +23,7 @@
 #include "Room.hpp"
 class ItemSlot;
 namespace item {
-class BaseItem; 
+class Base;
 } // namespace item
 
 class Npc;
@@ -40,13 +40,13 @@ public:
 
     void AddVehicleSlot(VehicleSlot*);
     void AddItemSlot(ItemSlot*);
-    bool AddItem(item::BaseItem*);
+    bool AddItem(item::Base*);
     bool AddVehicle(Vehicle*);
 
     ItemSlot* GetEmptyItemSlot() const;
     VehicleSlot* GetEmptyVehicleSlot() const;
 
-    int BuyItem(item::BaseItem*);
+    int BuyItem(item::Base*);
     void SellVehicle(Npc*, VehicleSlot*, int);
 
     void Save(boost::property_tree::ptree&) const;

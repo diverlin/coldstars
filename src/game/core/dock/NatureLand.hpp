@@ -22,7 +22,7 @@
 #include "Land.hpp"
 class ItemSlot;
 namespace item {
-class BaseItem;
+class Base;
 } // namespace item
 
 
@@ -45,7 +45,7 @@ class NatureLand : public Land
 
         void AddItemSlot(ItemSlot*);
 
-        bool AddItem(item::BaseItem*);
+        bool AddItem(item::Base*);
         bool CanAcceptNewItem() const;
 
         virtual bool AddVehicle(Vehicle*);
