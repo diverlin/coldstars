@@ -35,7 +35,7 @@ TEST(base,serialization)
     descriptor::Hit hit1(1, 2, 33);
     descriptor::Hit hit2(hit1.data());
     EXPECT_TRUE(hit2.type() == hit1.type());
-    EXPECT_TRUE(hit2.type() == int(descriptor::Base::Type::HIT));
+    EXPECT_TRUE(hit2.type() == int(descriptor::Type::HIT));
     EXPECT_TRUE(hit2.owner() == hit1.owner());
     EXPECT_TRUE(hit2.target() == hit1.target());
     EXPECT_TRUE(hit2.damage() == hit1.damage());
