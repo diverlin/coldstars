@@ -37,7 +37,7 @@
 #include <builder/spaceobjects/SatelliteBuilder.hpp>
 #include <builder/world/GalaxyBuilder.hpp>
 
-#include <spaceobjects/IncludeSpaceObjects.hpp>
+#include <spaceobjects/ALL>
 
 #include <dock/Kosmoport.hpp>
 #include <dock/NatureLand.hpp>

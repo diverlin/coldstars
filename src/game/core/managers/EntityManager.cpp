@@ -25,7 +25,7 @@
 //#include <ceti/StringUtils.hpp>
 #include <common/IdGenerator.hpp>
 
-#include "../spaceobjects/IncludeSpaceObjects.hpp"
+#include <spaceobjects/ALL>
 
 //#include "../pilots/Player.hpp"
 #include "../pilots/Npc.hpp"
@@ -33,10 +33,14 @@
 #include "../world/galaxy.hpp"
 #include "../world/starsystem.hpp"
 
-#include "../builder/item/IncludeItemBuilders.hpp"
-#include "../builder/spaceobjects/IncludeSpaceObjectBuilders.hpp"
+#include <builder/item/equipment/ALL>
+#include <builder/item/modules/ALL>
+#include <builder/item/artefacts//ALL>
+#include <builder/item/other/ALL>
 
-#include <item/others/GoodsPack.hpp>
+#include <builder/spaceobjects/ALL>
+
+#include <item/others/ALL>
 
 #include "../builder/slots/ItemSlotBuilder.hpp"
 #include "../builder/slots/VehicleSlotBuilder.hpp"

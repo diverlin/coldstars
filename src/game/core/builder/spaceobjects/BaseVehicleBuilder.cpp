@@ -24,38 +24,21 @@
 #include <descriptors/DescriptorManager.hpp>
 
 #include <item/equipment/ALL>
-//#include <item/equipment/Bak.hpp>
-//#include <item/equipment/Drive.hpp>
-//#include <item/equipment/Droid.hpp>
-//#include <item/equipment/Grapple.hpp>
-//#include <item/equipment/Lazer.hpp>
-//#include <item/equipment/Protector.hpp>
-//#include <item/equipment/Radar.hpp>
-//#include <item/equipment/Rocket.hpp>
-//#include <item/equipment/Scaner.hpp>
-//#include <item/equipment/Energizer.hpp>
 
 #ifdef USE_MODULES
 #include <item/modules/ALL>
-//#include <item/modules/LazerModule.hpp>
-//#include <item/modules/RocketModule.hpp>
-//#include <item/modules/DriveModule.hpp>
-//#include <item/modules/DroidModule.hpp>
-//#include <item/modules/RadarModule.hpp>
-//#include <item/modules/BakModule.hpp>
-//#include <item/modules/ProtectorModule.hpp>
-//#include <item/modules/GrappleModule.hpp>
-//#include <item/modules/ScanerModule.hpp>
 #endif
 
 #include <item/others/Bomb.hpp>
 
 #ifdef USE_ARTEFACTS
-#include <item/artefacts/GravityArtefact.hpp>
-#include <item/artefacts/ProtectorArtefact.hpp>
+#include <item/artefacts/ALL>
 #endif
 
-#include "../../builder/item/IncludeItemBuilders.hpp"
+#include <builder/item/equipment/ALL>
+#include <builder/item/modules/ALL>
+#include <builder/item/artefacts//ALL>
+#include <builder/item/other/ALL>
 
 #include <common/Global.hpp>
 #include <managers/EntityManager.hpp>

@@ -18,11 +18,11 @@
 
 
 #include <builder/world/StarSystemBuilder.hpp>
-#include <builder/spaceobjects/IncludeSpaceObjectBuilders.hpp>
+#include <builder/spaceobjects/ALL>
 #include <builder/pilots/NpcBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <spaceobjects/IncludeSpaceObjects.hpp>
+#include <spaceobjects/ALL>
 
 #include <world/starsystem.hpp>
 #include <descriptors/Base.hpp>

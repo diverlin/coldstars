@@ -29,7 +29,10 @@
 #include <descriptors/DescriptorGenerator.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
-#include <builder/item/IncludeItemBuilders.hpp>
+#include <builder/item/equipment/ALL>
+#include <builder/item/modules/ALL>
+#include <builder/item/artefacts//ALL>
+#include <builder/item/other/ALL>
 
 #include <item/equipment/ALL>
 
