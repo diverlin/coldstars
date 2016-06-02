@@ -28,8 +28,8 @@ const std::string fname = "data.txt";
 
 DescriptorManager::DescriptorManager()
 {
-    //generate();
-    load();
+    generate();
+    //load();
 }
 
 DescriptorManager::~DescriptorManager()
@@ -38,21 +38,27 @@ DescriptorManager::~DescriptorManager()
 void
 DescriptorManager::add(const descriptor::Base& descriptor)
 {
+    std::cout<<"add descriptor with type"<<descriptor::typeStr((descriptor::Type)descriptor.type())<<std::endl;
     const id_type id = descriptor.id();
     int type = descriptor.type();
-    const auto it = m_descriptors.find(id);
-    if (it != m_descriptors.end()) {
-        throw std::runtime_error("descriptor with that id already exist");
-    }
-    m_descriptors.insert(std::make_pair(id, descriptor));
 
-    const auto it2 = m_descriptorsTypes.find(type);
-    if (it2 != m_descriptorsTypes.end()) {
-        it2->second.push_back(descriptor);
-    } else {
-        std::vector<descriptor::Base> vector;
-        vector.push_back(descriptor);
-        m_descriptorsTypes[type] = vector;
+    {
+        const auto it = m_descriptors.find(id);
+        if (it != m_descriptors.end()) {
+            throw std::runtime_error("descriptor with that id already exist");
+        }
+        m_descriptors.insert(std::make_pair(id, descriptor));
+    }
+
+    {
+        const auto it = m_descriptorsTypes.find(type);
+        if (it != m_descriptorsTypes.end()) {
+            it->second.push_back(descriptor);
+        } else {
+            std::vector<descriptor::Base> vector;
+            vector.push_back(descriptor);
+            m_descriptorsTypes[type] = vector;
+        }
     }
 }
 
@@ -64,7 +70,7 @@ DescriptorManager::getRand(const descriptor::Type& type)
         const std::vector<descriptor::Base> descriptors = it->second;
         return meti::getRand(descriptors);
     }
-    throw std::runtime_error("descriptor type doesn't contain any descriptors");
+    throw std::runtime_error("descriptor type doesn't contain any descriptors, " + descriptor::typeStr(type));
 }
 
 descriptor::Base
@@ -135,7 +141,12 @@ void DescriptorManager::generate()
         add(DescriptorGenerator::getNewScanerDescriptor());
         add(DescriptorGenerator::getNewRadarDescriptor());
         add(DescriptorGenerator::getNewProtectorDescriptor());
+
+        add(DescriptorGenerator::getNewStarSystemDescriptor());
+        add(DescriptorGenerator::getNewBombDescriptor());
     }
+
+
 
     save();
 }

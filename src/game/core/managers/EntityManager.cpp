@@ -98,12 +98,12 @@ void EntityManager::clear()
 void EntityManager::reg(Base* entity)
 {   
     if (entity->id() == NONE_ID) {
-        //entity->setId(global::get().idGenerator().nextId());
+        // TODO fixme entity->setId(global::get().idGenerator().nextId());
     }
     LOG("EntityManager::reg " + entity->dataTypeStr() << std::endl);
 
     if (m_entities_map.find(entity->id()) != m_entities_map.end()) {
-        throw std::runtime_error("CODE ERROR: try to create two entity with simmilar id=" + std::to_string(entity->id()) + " exists " + entity->dataTypeStr());
+        throw std::runtime_error("ERROR: attempt to create two entity with simmilar id =" + std::to_string(entity->id()) + " which already exists, type = " + entity->dataTypeStr());
     }
 
     m_entities_map.insert(std::make_pair(entity->id(), entity));

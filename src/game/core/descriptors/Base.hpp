@@ -70,6 +70,7 @@ enum class Type: int {
 };
 
 std::string keyStr(const Key&);
+std::string typeStr(const Type&);
 
 class Base
 {
