@@ -53,7 +53,7 @@ Ship* createNewShip()
 
 Bomb* createNewBomb(int damage, int radius)
 {
-    descriptor::Base descriptor = global::get().descriptorManager().getRandom(descriptor::Type::BOMB);
+    descriptor::Base descriptor = global::get().descriptors().getRand(descriptor::Type::BOMB);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
 
     Bomb* bomb = static_cast<Bomb*>(global::get().entityManager().get(descriptor.id()));
@@ -76,7 +76,7 @@ Container* createNewContainer(const id_type& child_id)
 
 StarSystem* createNewStarSystem()
 {
-    descriptor::Base descriptor = global::get().descriptorManager().getRandom(descriptor::Type::STARSYSTEM);
+    descriptor::Base descriptor = global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
 
     StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.id()));

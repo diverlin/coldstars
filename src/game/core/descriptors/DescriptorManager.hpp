@@ -30,10 +30,9 @@ public:
     ~DescriptorManager();
 
     void add(const descriptor::Base&);
-    descriptor::Base getRandom(const descriptor::Type&);
+    descriptor::Base getRand(const descriptor::Type&);
     descriptor::Base get(const id_type&);
 
-    void init();
     void save();
     void load();
 
