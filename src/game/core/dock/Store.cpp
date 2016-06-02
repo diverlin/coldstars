@@ -47,21 +47,21 @@ void Store::putChildrenToGarbage() const
     }
 }
 
-void Store::AddItemSlot(ItemSlot* item_slot) 
+void Store::addItemSlot(ItemSlot* item_slot) 
 { 
     item_slot->SetOwner(this);
     item_slot_vec.push_back(item_slot); 
 };     
 
-void Store::AddVehicleSlot(VehicleSlot* vehicle_slot) 
+void Store::addVehicleSlot(VehicleSlot* vehicle_slot) 
 { 
     vehicle_slot->SetOwner(this);
     vehicle_slot_vec.push_back(vehicle_slot); 
 }; 
         
-bool Store::AddItem(item::Base* item)
+bool Store::addItem(item::Base* item)
 {
-    ItemSlot* item_slot = GetEmptyItemSlot();
+    ItemSlot* item_slot = freeItemSlot();
     if (item_slot) 
     {
         item_slot->insertItem(item);
@@ -71,9 +71,9 @@ bool Store::AddItem(item::Base* item)
     return true;
 }
 
-bool Store::AddVehicle(Vehicle* vehicle)
+bool Store::addVehicle(Vehicle* vehicle)
 {
-    VehicleSlot* vehicle_slot = GetEmptyVehicleSlot();
+    VehicleSlot* vehicle_slot = freeVehicleSlot();
     if (vehicle_slot) 
     {
         //vehicle->SetLand(GetOwnerKosmoport());        
@@ -88,7 +88,7 @@ bool Store::AddVehicle(Vehicle* vehicle)
     return true;
 }
 
-ItemSlot* Store::GetEmptyItemSlot() const
+ItemSlot* Store::freeItemSlot() const
 {
         for (unsigned int i=0; i<item_slot_vec.size(); i++)
         {
@@ -101,7 +101,7 @@ ItemSlot* Store::GetEmptyItemSlot() const
         return nullptr;
 }
 
-VehicleSlot* Store::GetEmptyVehicleSlot() const
+VehicleSlot* Store::freeVehicleSlot() const
 {
         for (unsigned int i=0; i<vehicle_slot_vec.size(); i++)
         {
@@ -114,9 +114,9 @@ VehicleSlot* Store::GetEmptyVehicleSlot() const
         return nullptr;
 }
 
-int Store::BuyItem(item::Base* item)
+int Store::buyItem(item::Base* item)
 {
-    ItemSlot* item_slot = GetEmptyItemSlot();    
+    ItemSlot* item_slot = freeItemSlot();    
     if (item_slot != nullptr)
     {
         if (item_slot->insertItem(item) == true)
@@ -128,7 +128,7 @@ int Store::BuyItem(item::Base* item)
     return 0;
 }
 
-void Store::SellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
+void Store::sellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
 {
     vehicle_slot->GetVehicle()->GetAllItemsFromVehicle(npc->GetVehicle());
     vehicle_slot->GetVehicle()->setStarSystem(npc->GetVehicle()->starsystem());

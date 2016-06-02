@@ -65,13 +65,13 @@ void StoreBuilder::createInternals(Store* store) const
     for (unsigned int i=0; i<STORE_ITEM_SLOTS_NUM; i++)
     {
         ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
-        store->AddItemSlot(item_slot);
+        store->addItemSlot(item_slot);
     }
 
     for (unsigned int i=0; i<STORE_VEHICLE_SLOTS_NUM; i++)
     {
         VehicleSlot* vehicle_slot = GetNewVehicleSlot(TYPE::ENTITY::NONE_ID);
-        store->AddVehicleSlot(vehicle_slot);
+        store->addVehicleSlot(vehicle_slot);
     }
 
     //store->SetTextureObBackground(TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STORE_BACKGROUND_ID));
@@ -99,34 +99,34 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
     unsigned int energyBlock_num = 1;
 
     for (unsigned int i=0; i<vehicle_num; i++) {
-        store->AddVehicle(global::get().shipBuilder().create(generateVehicleDescriptor()));
+        store->addVehicle(global::get().shipBuilder().create(generateVehicleDescriptor()));
     }
     for (unsigned int i=0; i<lazer_num; i++) {
-        store->AddItem(global::get().lazerBuilder().create());
+        store->addItem(global::get().lazerBuilder().create());
     }
     for (unsigned int i=0; i<rocket_num; i++) {
-        store->AddItem(global::get().rocketBuilder().create());
+        store->addItem(global::get().rocketBuilder().create());
     }
     for (unsigned int i=0; i<radar_num; i++) {
-        store->AddItem(global::get().radarBuilder().create(DescriptorGenerator::getNewRadarDescriptor()));
+        store->addItem(global::get().radarBuilder().create(DescriptorGenerator::getNewRadarDescriptor()));
     }
     for (unsigned int i=0; i<grapple_num; i++) {
-        store->AddItem(global::get().grappleBuilder().create(DescriptorGenerator::getNewGrappleDescriptor()));
+        store->addItem(global::get().grappleBuilder().create(DescriptorGenerator::getNewGrappleDescriptor()));
     }
     for (unsigned int i=0; i<drive_num; i++) {
-        store->AddItem(global::get().driveBuilder().create(DescriptorGenerator::getNewDriveDescriptor()));
+        store->addItem(global::get().driveBuilder().create(DescriptorGenerator::getNewDriveDescriptor()));
     }
     for (unsigned int i=0; i<protector_num; i++) {
-        store->AddItem(global::get().protectorBuilder().create(DescriptorGenerator::getNewProtectorDescriptor()));
+        store->addItem(global::get().protectorBuilder().create(DescriptorGenerator::getNewProtectorDescriptor()));
     }
     for (unsigned int i=0; i<bak_num; i++) {
-        store->AddItem(global::get().bakBuilder().create(DescriptorGenerator::getNewBakDescriptor()));
+        store->addItem(global::get().bakBuilder().create(DescriptorGenerator::getNewBakDescriptor()));
     }
     for (unsigned int i=0; i<droid_num; i++) {
-        store->AddItem(global::get().droidBuilder().create(DescriptorGenerator::getNewDroidDescriptor()));
+        store->addItem(global::get().droidBuilder().create(DescriptorGenerator::getNewDroidDescriptor()));
     }
     for (unsigned int i=0; i<scaner_num; i++) {
-        store->AddItem(global::get().scanerBuilder().create(DescriptorGenerator::getNewScanerDescriptor()));
+        store->addItem(global::get().scanerBuilder().create(DescriptorGenerator::getNewScanerDescriptor()));
     }
 #ifdef USE_EXTRA_EQUIPMENT
     for (unsigned int i=0; i<freezer_num; i++) {

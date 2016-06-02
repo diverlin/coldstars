@@ -424,7 +424,7 @@ bool Vehicle::sellItem(item::Base* item)
 
     case TYPE::ENTITY::EQUIPMENT_ID:
     {
-        earn_money = ((Kosmoport*)m_Land)->GetStore()->BuyItem(item);
+        earn_money = ((Kosmoport*)m_Land)->GetStore()->buyItem(item);
         break;
     }
     }
