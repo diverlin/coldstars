@@ -21,27 +21,31 @@
 
 #include "../../parts/WeaponComplex.hpp"
 
-#include <item/equipment/Bak.hpp>
-#include <item/equipment/Drive.hpp>
-#include <item/equipment/Droid.hpp>
-#include <item/equipment/Grapple.hpp>
-#include <item/equipment/Lazer.hpp>
-#include <item/equipment/Protector.hpp>
-#include <item/equipment/Radar.hpp>
-#include <item/equipment/Rocket.hpp>
-#include <item/equipment/Scaner.hpp>
-#include <item/equipment/Energizer.hpp>
+#include <descriptors/DescriptorManager.hpp>
+
+#include <item/equipment/ALL>
+//#include <item/equipment/Bak.hpp>
+//#include <item/equipment/Drive.hpp>
+//#include <item/equipment/Droid.hpp>
+//#include <item/equipment/Grapple.hpp>
+//#include <item/equipment/Lazer.hpp>
+//#include <item/equipment/Protector.hpp>
+//#include <item/equipment/Radar.hpp>
+//#include <item/equipment/Rocket.hpp>
+//#include <item/equipment/Scaner.hpp>
+//#include <item/equipment/Energizer.hpp>
 
 #ifdef USE_MODULES
-#include <item/modules/LazerModule.hpp>
-#include <item/modules/RocketModule.hpp>
-#include <item/modules/DriveModule.hpp>
-#include <item/modules/DroidModule.hpp>
-#include <item/modules/RadarModule.hpp>
-#include <item/modules/BakModule.hpp>
-#include <item/modules/ProtectorModule.hpp>
-#include <item/modules/GrappleModule.hpp>
-#include <item/modules/ScanerModule.hpp>
+#include <item/modules/ALL>
+//#include <item/modules/LazerModule.hpp>
+//#include <item/modules/RocketModule.hpp>
+//#include <item/modules/DriveModule.hpp>
+//#include <item/modules/DroidModule.hpp>
+//#include <item/modules/RadarModule.hpp>
+//#include <item/modules/BakModule.hpp>
+//#include <item/modules/ProtectorModule.hpp>
+//#include <item/modules/GrappleModule.hpp>
+//#include <item/modules/ScanerModule.hpp>
 #endif
 
 #include <item/others/Bomb.hpp>
@@ -215,25 +219,25 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
         }
     }   
     
-    if (vehicle->isSlotExists(TYPE::ENTITY::RADAR_SLOT_ID) == true)
-    {
-        item::equipment::Radar* radar_equipment = global::get().radarBuilder().create(DescriptorGenerator::getNewRadarDescriptor());
+    if (vehicle->isSlotExists(TYPE::ENTITY::RADAR_SLOT_ID)) {
+        auto descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::RADAR);
+        item::equipment::Radar* radar_equipment = global::get().radarBuilder().create(descr);
         if (vehicle->manage(radar_equipment) == false) {
             global::get().entityManager().addToGarbage(radar_equipment);
         }
     }
     
-    if (vehicle->isSlotExists(TYPE::ENTITY::DRIVE_SLOT_ID) == true)
-    {
-        item::equipment::Drive* drive_equipment = global::get().driveBuilder().create(DescriptorGenerator::getNewDriveDescriptor());
+    if (vehicle->isSlotExists(TYPE::ENTITY::DRIVE_SLOT_ID)) {
+        auto descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::DRIVE);
+        item::equipment::Drive* drive_equipment = global::get().driveBuilder().create(descr);
         if (vehicle->manage(drive_equipment) == false) {
             global::get().entityManager().addToGarbage(drive_equipment);
         }
     }
     
-    if (vehicle->isSlotExists(TYPE::ENTITY::BAK_SLOT_ID) == true)
-    {
-        item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(DescriptorGenerator::getNewBakDescriptor());
+    if (vehicle->isSlotExists(TYPE::ENTITY::BAK_SLOT_ID)) {
+        auto descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::BAK);
+        item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(descr);
         if (vehicle->manage(bak_equipment) == false) {
             global::get().entityManager().addToGarbage(bak_equipment);
         }
@@ -257,33 +261,33 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     }
 #endif
 
-    if (vehicle->isSlotExists(TYPE::ENTITY::PROTECTOR_SLOT_ID) == true)
-    {
-        item::equipment::Protector* protector_equipment = global::get().protectorBuilder().create(DescriptorGenerator::getNewProtectorDescriptor());
+    if (vehicle->isSlotExists(TYPE::ENTITY::PROTECTOR_SLOT_ID)) {
+        auto descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::PROTECTOR);
+        item::equipment::Protector* protector_equipment = global::get().protectorBuilder().create(descr);
         if (vehicle->manage(protector_equipment) == false) {
             global::get().entityManager().addToGarbage(protector_equipment);
         }  
     }
         
-    if (vehicle->isSlotExists(TYPE::ENTITY::DROID_SLOT_ID) == true)
-    {
-        item::equipment::Droid* droid_equipment = global::get().droidBuilder().create(DescriptorGenerator::getNewDroidDescriptor());
+    if (vehicle->isSlotExists(TYPE::ENTITY::DROID_SLOT_ID)) {
+        auto descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::DROID);
+        item::equipment::Droid* droid_equipment = global::get().droidBuilder().create(descr);
         if (vehicle->manage(droid_equipment) == false) {
             global::get().entityManager().addToGarbage(droid_equipment);
         }  
     }
     
-    if (vehicle->isSlotExists(TYPE::ENTITY::SCANER_SLOT_ID) == true)
-    {
-        item::equipment::Scaner* scaner_equipment = global::get().scanerBuilder().create(DescriptorGenerator::getNewScanerDescriptor());
+    if (vehicle->isSlotExists(TYPE::ENTITY::SCANER_SLOT_ID)) {
+        auto descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::SCANER);
+        item::equipment::Scaner* scaner_equipment = global::get().scanerBuilder().create(descr);
         if (vehicle->manage(scaner_equipment) == false) {
             global::get().entityManager().addToGarbage(scaner_equipment);
         }  
     }
     
-    if (vehicle->isSlotExists(TYPE::ENTITY::GRAPPLE_SLOT_ID) == true)
-    {
-        item::equipment::Grapple* grapple_equipment = global::get().grappleBuilder().create(DescriptorGenerator::getNewGrappleDescriptor());
+    if (vehicle->isSlotExists(TYPE::ENTITY::GRAPPLE_SLOT_ID)) {
+        auto descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::GRAPPLE);
+        item::equipment::Grapple* grapple_equipment = global::get().grappleBuilder().create(descr);
         if (vehicle->manage(grapple_equipment) == false) {
             global::get().entityManager().addToGarbage(grapple_equipment);
         }

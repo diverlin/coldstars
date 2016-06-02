@@ -53,7 +53,7 @@ Ship* createNewShip()
 
 Bomb* createNewBomb(int damage, int radius)
 {
-    descriptor::Base descriptor = DescriptorGenerator::getNewBombDescriptor(damage, radius);
+    descriptor::Base descriptor = global::get().descriptorManager().getRandom(descriptor::Base::Type::BOMB);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
 
     Bomb* bomb = static_cast<Bomb*>(global::get().entityManager().get(descriptor.id()));
@@ -76,29 +76,10 @@ Container* createNewContainer(const id_type& child_id)
 
 StarSystem* createNewStarSystem()
 {
-    descriptor::Base descriptor = DescriptorGenerator::getNewStarSystemDescriptor();
+    descriptor::Base descriptor = global::get().descriptorManager().getRandom(descriptor::Base::Type::STARSYSTEM);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
 
     StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.id()));
     assert(starsystem);
     return starsystem;
 }
-
-void init_equipment_descriptors()
-{
-    DescriptorManager& descriptor_manager = global::get().descriptorManager();
-
-    bool generate_new = true;
-    if (generate_new) {
-        descriptor_manager.add(DescriptorGenerator::getNewBakDescriptor());
-        descriptor_manager.add(DescriptorGenerator::getNewDriveDescriptor());
-        descriptor_manager.add(DescriptorGenerator::getNewDroidDescriptor());
-        descriptor_manager.add(DescriptorGenerator::getNewGrappleDescriptor());
-        descriptor_manager.add(DescriptorGenerator::getNewScanerDescriptor());
-        descriptor_manager.add(DescriptorGenerator::getNewRadarDescriptor());
-        descriptor_manager.add(DescriptorGenerator::getNewProtectorDescriptor());
-    } else {
-        // todo: read from file
-    }
-}
-

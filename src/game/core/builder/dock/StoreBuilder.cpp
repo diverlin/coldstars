@@ -33,7 +33,7 @@
 #include <common/constants.hpp>
 
 #include <descriptors/VehicleDescriptorGenerator.hpp>
-#include <descriptors/DescriptorGenerator.hpp>
+#include <descriptors/DescriptorManager.hpp>
 
 StoreBuilder::StoreBuilder()
 {}
@@ -108,25 +108,32 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
         store->addItem(global::get().rocketBuilder().create());
     }
     for (unsigned int i=0; i<radar_num; i++) {
-        store->addItem(global::get().radarBuilder().create(DescriptorGenerator::getNewRadarDescriptor()));
+        const auto& descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::RADAR);
+        store->addItem(global::get().radarBuilder().create(descr));
     }
     for (unsigned int i=0; i<grapple_num; i++) {
-        store->addItem(global::get().grappleBuilder().create(DescriptorGenerator::getNewGrappleDescriptor()));
+        const auto& descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::GRAPPLE);
+        store->addItem(global::get().grappleBuilder().create(descr));
     }
     for (unsigned int i=0; i<drive_num; i++) {
-        store->addItem(global::get().driveBuilder().create(DescriptorGenerator::getNewDriveDescriptor()));
+        const auto& descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::DRIVE);
+        store->addItem(global::get().driveBuilder().create(descr));
     }
     for (unsigned int i=0; i<protector_num; i++) {
-        store->addItem(global::get().protectorBuilder().create(DescriptorGenerator::getNewProtectorDescriptor()));
+        const auto& descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::PROTECTOR);
+        store->addItem(global::get().protectorBuilder().create(descr));
     }
     for (unsigned int i=0; i<bak_num; i++) {
-        store->addItem(global::get().bakBuilder().create(DescriptorGenerator::getNewBakDescriptor()));
+        const auto& descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::BAK);
+        store->addItem(global::get().bakBuilder().create(descr));
     }
     for (unsigned int i=0; i<droid_num; i++) {
-        store->addItem(global::get().droidBuilder().create(DescriptorGenerator::getNewDroidDescriptor()));
+        const auto& descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::DROID);
+        store->addItem(global::get().droidBuilder().create(descr));
     }
     for (unsigned int i=0; i<scaner_num; i++) {
-        store->addItem(global::get().scanerBuilder().create(DescriptorGenerator::getNewScanerDescriptor()));
+        const auto& descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::SCANER);
+        store->addItem(global::get().scanerBuilder().create(descr));
     }
 #ifdef USE_EXTRA_EQUIPMENT
     for (unsigned int i=0; i<freezer_num; i++) {
