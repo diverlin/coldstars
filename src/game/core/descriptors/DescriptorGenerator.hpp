@@ -21,16 +21,29 @@
 
 #include <descriptors/Base.hpp>
 
-class ItemCommonData;
+#include <common/IdGenerator.hpp>
 
-descriptor::Base generateBombDescriptor(int damage = -1, int radius = -1);
-descriptor::Base generateStarSystemDescriptor(int race = -1);
+class DescriptorManager;
 
-// items
-descriptor::Base generateBakDescriptor(int race = -1, int tech_level = -1);
-descriptor::Base generateDriveDescriptor(int race = -1, int tech_level = -1);
-descriptor::Base generateDroidDescriptor(int race = -1, int tech_level = -1);
-descriptor::Base generateGrappleDescriptor(int race = -1, int tech_level = -1);
-descriptor::Base generateScanerDescriptor(int race = -1, int tech_level = -1);
-descriptor::Base generateRadarDescriptor(int race = -1, int tech_level = -1);
-descriptor::Base generateProtectorDescriptor(int race = -1, int tech_level = -1);
+class DescriptorGenerator {
+public:
+    DescriptorGenerator();
+    ~DescriptorGenerator();
+
+private:
+    static descriptor::Base getNewBombDescriptor(int damage = -1, int radius = -1);
+    static descriptor::Base getNewStarSystemDescriptor(int race = -1);
+
+    // items
+    static descriptor::Base getNewBakDescriptor(int race = -1, int tech_level = -1);
+    static descriptor::Base getNewDriveDescriptor(int race = -1, int tech_level = -1);
+    static descriptor::Base getNewDroidDescriptor(int race = -1, int tech_level = -1);
+    static descriptor::Base getNewGrappleDescriptor(int race = -1, int tech_level = -1);
+    static descriptor::Base getNewScanerDescriptor(int race = -1, int tech_level = -1);
+    static descriptor::Base getNewRadarDescriptor(int race = -1, int tech_level = -1);
+    static descriptor::Base getNewProtectorDescriptor(int race = -1, int tech_level = -1);
+
+    static IdGenerator m_idGenerator;
+
+    friend DescriptorManager;
+};

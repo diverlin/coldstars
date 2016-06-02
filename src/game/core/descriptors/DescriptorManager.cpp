@@ -17,16 +17,30 @@
 */
 
 #include "DescriptorManager.hpp"
-
+#include <descriptors/DescriptorGenerator.hpp>
 #include <meti/RandUtils.hpp>
 
+#include <fstream>
+
+namespace {
+const std::string fname = "data.txt";
+} // namespace
 
 DescriptorManager::DescriptorManager()
-{
+{}
 
+DescriptorManager::~DescriptorManager()
+{}
+
+void
+DescriptorManager::init()
+{
+    //generate();
+    load();
 }
 
-void DescriptorManager::add(const descriptor::Base& descriptor)
+void
+DescriptorManager::add(const descriptor::Base& descriptor)
 {
     const id_type id = descriptor.id();
     int type = descriptor.type();
@@ -46,7 +60,8 @@ void DescriptorManager::add(const descriptor::Base& descriptor)
     }
 }
 
-descriptor::Base DescriptorManager::getRandom(const descriptor::Base::Type& type)
+descriptor::Base
+DescriptorManager::getRandom(const descriptor::Base::Type& type)
 {
     const auto it = m_descriptorsTypes.find(int(type));
     if (it != m_descriptorsTypes.end()) {
@@ -56,11 +71,75 @@ descriptor::Base DescriptorManager::getRandom(const descriptor::Base::Type& type
     throw std::runtime_error("descriptor type doesn't contain any descriptors");
 }
 
-descriptor::Base DescriptorManager::get(const id_type& id)
+descriptor::Base
+DescriptorManager::get(const id_type& id)
 {
     const auto it = m_descriptors.find(id);
     if (it != m_descriptors.end()) {
         return it->second;
     }
     throw std::runtime_error("descriptor id doesn't exist");
+}
+
+void
+DescriptorManager::save()
+{
+    std::fstream filestream;
+    filestream.open(fname);
+    if(filestream.is_open()) {
+        for(const auto& lists: m_descriptorsTypes) {
+            const auto& list = lists.second;
+            for(const descriptor::Base& descr: list) {
+                filestream<<descr.data()<<std::endl;
+            }
+        }
+    } else {
+        throw std::runtime_error("not able to open file="+fname);
+    }
+    filestream.close();
+}
+
+void
+DescriptorManager::load()
+{
+    clear();
+
+    std::fstream filestream;
+    std::string line;
+    filestream.open(fname);
+    if(filestream.is_open()) {
+        while(std::getline(filestream, line)) {
+            if (!line.empty()) {
+                const descriptor::Base& descr = descriptor::Base(line);
+                add(descr);
+            }
+        }
+    }
+    filestream.close();
+}
+
+void
+DescriptorManager::clear()
+{
+    m_descriptors.clear();
+    m_descriptorsTypes.clear();
+}
+
+void DescriptorManager::generate()
+{
+    int num = 20;
+
+    clear();
+
+    for(int i=0; i<num; ++i) {
+        add(DescriptorGenerator::getNewBakDescriptor());
+        add(DescriptorGenerator::getNewDriveDescriptor());
+        add(DescriptorGenerator::getNewDroidDescriptor());
+        add(DescriptorGenerator::getNewGrappleDescriptor());
+        add(DescriptorGenerator::getNewScanerDescriptor());
+        add(DescriptorGenerator::getNewRadarDescriptor());
+        add(DescriptorGenerator::getNewProtectorDescriptor());
+    }
+
+    save();
 }

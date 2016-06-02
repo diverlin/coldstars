@@ -98,156 +98,156 @@ class DescriptorManager;
 
 class global
 {
-    public:
-        static global& get();
+public:
+    static global& get();
 
-        IdGenerator& idGenerator() { return *m_idGenerator; }
-        IdGenerator& textureIdGenerator() { return *m_textureIdGenerator; }
-        God& god() { return *m_god; }
-        EntityManager& entityManager() { return *m_entityManager; }
-        MessageManager& messageManager() { return *m_messageManager; }
-        Config& config() { return *m_config; }
-        TurnTimer& turnTimer() { return *m_turnTimer; }
-        GameDate& gameDate() { return *m_gameDate; }
-        RaceDescriptors& raceDescriptors() { return *m_raceDescriptors; }
+    IdGenerator& idGenerator() { return *m_idGenerator; }
+    IdGenerator& textureIdGenerator() { return *m_textureIdGenerator; }
+    God& god() { return *m_god; }
+    EntityManager& entityManager() { return *m_entityManager; }
+    MessageManager& messageManager() { return *m_messageManager; }
+    Config& config() { return *m_config; }
+    TurnTimer& turnTimer() { return *m_turnTimer; }
+    GameDate& gameDate() { return *m_gameDate; }
+    RaceDescriptors& raceDescriptors() { return *m_raceDescriptors; }
 
-        KosmoportBuilder& kosmoportBuilder() { return *m_kosmoportBuilder; }
-        NatureLandBuilder& natureLandBuilder() { return *m_natureLandBuilder; }
-        AngarBuilder& angarBuilder() { return *m_angarBuilder; }
-        StoreBuilder& storeBuilder() { return *m_storeBuilder; }
-        ShopBuilder& shopBuilder() { return *m_shopBuilder; }
-        GovermentBuilder& govermentBuilder() { return *m_govermentBuilder; }
-
-#ifdef USE_ARTEFACTS
-        GravityArtefactBuilder& gravityArtefactBuilder() { return *m_gravityArtefactBuilder; }
-        ProtectorArtefactBuilder& protectorArtefactBuilder() { return *m_protectorArtefactBuilder; }
-#endif // USE_ARTEFACTS
-
-        item::equipment::BakBuilder& bakBuilder() { return *m_bakBuilder; }
-        item::equipment::DriveBuilder& driveBuilder() { return *m_driveBuilder; }
-        item::equipment::DroidBuilder& droidBuilder() { return *m_droidBuilder; }
-#ifdef USE_EXTRA_EQUIPMENT
-        item::equipment::EnergizerBuilder& energizerBuilder() { return *m_energizerBuilder; }
-        item::equipment::FreezerBuilder& freezerBuilder() { return *m_freezerBuilder; }
-#endif // USE_EXTRA_EQUIPMENT
-        item::equipment::GrappleBuilder& grappleBuilder() { return *m_grappleBuilder; }
-        item::equipment::ProtectorBuilder& protectorBuilder() { return *m_protectorBuilder; }
-        item::equipment::RadarBuilder& radarBuilder() { return *m_radarBuilder; }
-        item::equipment::ScanerBuilder& scanerBuilder() { return *m_scanerBuilder; }
-        item::equipment::RocketBuilder& rocketBuilder() { return *m_rocketBuilder; }
-        item::equipment::LazerBuilder& lazerBuilder() { return *m_lazerBuilder; }
-
-#ifdef USE_MODULES
-        BakModuleBuilder& bakModuleBuilder() { return *m_bakModuleBuilder; }
-        DriveModuleBuilder& driveModuleBuilder() { return *m_driveModuleBuilder; }
-        DroidModuleBuilder& droidModuleBuilder() { return *m_droidModuleBuilder; }
-        //EnergizerModuleBuilder& energizerModuleBuilder() { return *m_energizerModuleBuilder; }
-        //FreezerModuleBuilder& freezerModuleBuilder() { return *m_freezerModuleBuilder; }
-        GrappleModuleBuilder& grappleModuleBuilder() { return *m_grappleModuleBuilder; }
-        ProtectorModuleBuilder& protectorModuleBuilder() { return *m_protectorModuleBuilder; }
-        RadarModuleBuilder& radarModuleBuilder() { return *m_radarModuleBuilder; }
-        ScanerModuleBuilder& scanerModuleBuilder() { return *m_scanerModuleBuilder; }
-        RocketModuleBuilder& rocketModuleBuilder() { return *m_rocketModuleBuilder; }
-        LazerModuleBuilder& lazerModuleBuilder() { return *m_lazerModuleBuilder; }
-#endif // USE_MODULES
-
-        BombBuilder& bombBuilder() { return *m_bombBuilder; }
-
-        NpcBuilder& npcBuilder() { return *m_npcBuilder; }
-//        ItemSlotBuilder& itemSlotBuilder() { return *m_itemSlotBuilder; }
-//        VehicleSlotBuilder& vehicleSlotBuilder() { return *m_vehicleSlotBuilder; }
-
-        AsteroidBuilder& asteroidBuilder() { return *m_asteroidBuilder; }
-        BlackHoleBuilder& blackHoleBuilder() { return *m_blackHoleBuilder; }
-        ContainerBuilder& containerBuilder() { return *m_containerBuilder; }
-        PlanetBuilder& planetBuilder() { return *m_planetBuilder; }
-        StarBuilder& starBuilder() { return *m_starBuilder; }
-        RocketBulletBuilder& rocketBulletBuilder() { return *m_rocketBulletBuilder; }
-        SatelliteBuilder& satelliteBuilder() { return *m_satelliteBuilder; }
-        ShipBuilder& shipBuilder() { return *m_shipBuilder; }
-        SpaceStationBuilder& spaceStationBuilder() { return *m_spaceStationBuilder; }
-
-        GalaxyBuilder& galaxyBuilder() { return *m_galaxyBuilder; }
-        SectorBuilder& sectorBuilder() { return *m_sectorBuilder; }
-        StarSystemBuilder& starSystemBuilder() { return *m_starsystemBuilder; }
-
-        DescriptorManager& descriptorManager() { return *m_descriptorManager; }
-
-    private:
-        global();
-        global(const global&) = delete;
-        ~global();
-        global& operator=(const global&) = delete;
-
-        IdGenerator* m_idGenerator = nullptr;
-        IdGenerator* m_textureIdGenerator = nullptr;
-        God* m_god = nullptr;
-        EntityManager* m_entityManager = nullptr;
-        MessageManager* m_messageManager = nullptr;
-        Config* m_config = nullptr;
-        TurnTimer* m_turnTimer = nullptr;
-        GameDate* m_gameDate = nullptr;
-        RaceDescriptors* m_raceDescriptors = nullptr;
-
-        KosmoportBuilder* m_kosmoportBuilder = nullptr;
-        NatureLandBuilder* m_natureLandBuilder = nullptr;
-        AngarBuilder* m_angarBuilder = nullptr;
-        StoreBuilder* m_storeBuilder = nullptr;
-        ShopBuilder* m_shopBuilder = nullptr;
-        GovermentBuilder* m_govermentBuilder = nullptr;
+    KosmoportBuilder& kosmoportBuilder() { return *m_kosmoportBuilder; }
+    NatureLandBuilder& natureLandBuilder() { return *m_natureLandBuilder; }
+    AngarBuilder& angarBuilder() { return *m_angarBuilder; }
+    StoreBuilder& storeBuilder() { return *m_storeBuilder; }
+    ShopBuilder& shopBuilder() { return *m_shopBuilder; }
+    GovermentBuilder& govermentBuilder() { return *m_govermentBuilder; }
 
 #ifdef USE_ARTEFACTS
-        GravityArtefactBuilder* m_gravityArtefactBuilder = nullptr;
-        ProtectorArtefactBuilder* m_protectorArtefactBuilder = nullptr;
+    GravityArtefactBuilder& gravityArtefactBuilder() { return *m_gravityArtefactBuilder; }
+    ProtectorArtefactBuilder& protectorArtefactBuilder() { return *m_protectorArtefactBuilder; }
 #endif // USE_ARTEFACTS
 
-        item::equipment::BakBuilder* m_bakBuilder = nullptr;
-        item::equipment::DriveBuilder* m_driveBuilder = nullptr;
-        item::equipment::DroidBuilder* m_droidBuilder = nullptr;
+    item::equipment::BakBuilder& bakBuilder() { return *m_bakBuilder; }
+    item::equipment::DriveBuilder& driveBuilder() { return *m_driveBuilder; }
+    item::equipment::DroidBuilder& droidBuilder() { return *m_droidBuilder; }
 #ifdef USE_EXTRA_EQUIPMENT
-        item::equipment::EnergizerBuilder* m_energizerBuilder = nullptr;
-        item::equipment::FreezerBuilder* m_freezerBuilder = nullptr;
+    item::equipment::EnergizerBuilder& energizerBuilder() { return *m_energizerBuilder; }
+    item::equipment::FreezerBuilder& freezerBuilder() { return *m_freezerBuilder; }
 #endif // USE_EXTRA_EQUIPMENT
-        item::equipment::GrappleBuilder* m_grappleBuilder = nullptr;
-        item::equipment::ProtectorBuilder* m_protectorBuilder = nullptr;
-        item::equipment::RadarBuilder* m_radarBuilder = nullptr;
-        item::equipment::ScanerBuilder* m_scanerBuilder = nullptr;
-        item::equipment::RocketBuilder* m_rocketBuilder = nullptr;
-        item::equipment::LazerBuilder* m_lazerBuilder = nullptr;
+    item::equipment::GrappleBuilder& grappleBuilder() { return *m_grappleBuilder; }
+    item::equipment::ProtectorBuilder& protectorBuilder() { return *m_protectorBuilder; }
+    item::equipment::RadarBuilder& radarBuilder() { return *m_radarBuilder; }
+    item::equipment::ScanerBuilder& scanerBuilder() { return *m_scanerBuilder; }
+    item::equipment::RocketBuilder& rocketBuilder() { return *m_rocketBuilder; }
+    item::equipment::LazerBuilder& lazerBuilder() { return *m_lazerBuilder; }
 
 #ifdef USE_MODULES
-        BakModuleBuilder* m_bakModuleBuilder = nullptr;
-        DriveModuleBuilder* m_driveModuleBuilder = nullptr;
-        DroidModuleBuilder* m_droidModuleBuilder = nullptr;
-        //EnergizerModuleBuilder* m_energizerModuleBuilder = nullptr;
-        //FreezerModuleBuilder* m_freezerModuleBuilder = nullptr;
-        GrappleModuleBuilder* m_grappleModuleBuilder = nullptr;
-        ProtectorModuleBuilder* m_protectorModuleBuilder = nullptr;
-        RadarModuleBuilder* m_radarModuleBuilder = nullptr;
-        ScanerModuleBuilder* m_scanerModuleBuilder = nullptr;
-        RocketModuleBuilder* m_rocketModuleBuilder = nullptr;
-        LazerModuleBuilder* m_lazerModuleBuilder = nullptr;
+    BakModuleBuilder& bakModuleBuilder() { return *m_bakModuleBuilder; }
+    DriveModuleBuilder& driveModuleBuilder() { return *m_driveModuleBuilder; }
+    DroidModuleBuilder& droidModuleBuilder() { return *m_droidModuleBuilder; }
+    //EnergizerModuleBuilder& energizerModuleBuilder() { return *m_energizerModuleBuilder; }
+    //FreezerModuleBuilder& freezerModuleBuilder() { return *m_freezerModuleBuilder; }
+    GrappleModuleBuilder& grappleModuleBuilder() { return *m_grappleModuleBuilder; }
+    ProtectorModuleBuilder& protectorModuleBuilder() { return *m_protectorModuleBuilder; }
+    RadarModuleBuilder& radarModuleBuilder() { return *m_radarModuleBuilder; }
+    ScanerModuleBuilder& scanerModuleBuilder() { return *m_scanerModuleBuilder; }
+    RocketModuleBuilder& rocketModuleBuilder() { return *m_rocketModuleBuilder; }
+    LazerModuleBuilder& lazerModuleBuilder() { return *m_lazerModuleBuilder; }
 #endif // USE_MODULES
 
-        BombBuilder* m_bombBuilder = nullptr;
+    BombBuilder& bombBuilder() { return *m_bombBuilder; }
 
-        NpcBuilder* m_npcBuilder = nullptr;
-//        ItemSlotBuilder* m_itemSlotBuilder = nullptr;
-//        VehicleSlotBuilder* m_vehicleSlotBuilder = nullptr;
+    NpcBuilder& npcBuilder() { return *m_npcBuilder; }
+    //        ItemSlotBuilder& itemSlotBuilder() { return *m_itemSlotBuilder; }
+    //        VehicleSlotBuilder& vehicleSlotBuilder() { return *m_vehicleSlotBuilder; }
 
-        AsteroidBuilder* m_asteroidBuilder = nullptr;
-        BlackHoleBuilder* m_blackHoleBuilder = nullptr;
-        ContainerBuilder* m_containerBuilder = nullptr;
-        PlanetBuilder* m_planetBuilder = nullptr;
-        StarBuilder* m_starBuilder = nullptr;
-        RocketBulletBuilder* m_rocketBulletBuilder = nullptr;
-        SatelliteBuilder* m_satelliteBuilder = nullptr;
-        ShipBuilder* m_shipBuilder = nullptr;
-        SpaceStationBuilder* m_spaceStationBuilder = nullptr;
+    AsteroidBuilder& asteroidBuilder() { return *m_asteroidBuilder; }
+    BlackHoleBuilder& blackHoleBuilder() { return *m_blackHoleBuilder; }
+    ContainerBuilder& containerBuilder() { return *m_containerBuilder; }
+    PlanetBuilder& planetBuilder() { return *m_planetBuilder; }
+    StarBuilder& starBuilder() { return *m_starBuilder; }
+    RocketBulletBuilder& rocketBulletBuilder() { return *m_rocketBulletBuilder; }
+    SatelliteBuilder& satelliteBuilder() { return *m_satelliteBuilder; }
+    ShipBuilder& shipBuilder() { return *m_shipBuilder; }
+    SpaceStationBuilder& spaceStationBuilder() { return *m_spaceStationBuilder; }
 
-        GalaxyBuilder* m_galaxyBuilder = nullptr;
-        SectorBuilder* m_sectorBuilder = nullptr;
-        StarSystemBuilder* m_starsystemBuilder = nullptr;
+    GalaxyBuilder& galaxyBuilder() { return *m_galaxyBuilder; }
+    SectorBuilder& sectorBuilder() { return *m_sectorBuilder; }
+    StarSystemBuilder& starSystemBuilder() { return *m_starsystemBuilder; }
 
-        DescriptorManager* m_descriptorManager = nullptr;
+    DescriptorManager& descriptorManager() { return *m_descriptorManager; }
+
+private:
+    global();
+    global(const global&) = delete;
+    ~global();
+    global& operator=(const global&) = delete;
+
+    IdGenerator* m_idGenerator = nullptr;
+    IdGenerator* m_textureIdGenerator = nullptr;
+    God* m_god = nullptr;
+    EntityManager* m_entityManager = nullptr;
+    MessageManager* m_messageManager = nullptr;
+    Config* m_config = nullptr;
+    TurnTimer* m_turnTimer = nullptr;
+    GameDate* m_gameDate = nullptr;
+    RaceDescriptors* m_raceDescriptors = nullptr;
+
+    KosmoportBuilder* m_kosmoportBuilder = nullptr;
+    NatureLandBuilder* m_natureLandBuilder = nullptr;
+    AngarBuilder* m_angarBuilder = nullptr;
+    StoreBuilder* m_storeBuilder = nullptr;
+    ShopBuilder* m_shopBuilder = nullptr;
+    GovermentBuilder* m_govermentBuilder = nullptr;
+
+#ifdef USE_ARTEFACTS
+    GravityArtefactBuilder* m_gravityArtefactBuilder = nullptr;
+    ProtectorArtefactBuilder* m_protectorArtefactBuilder = nullptr;
+#endif // USE_ARTEFACTS
+
+    item::equipment::BakBuilder* m_bakBuilder = nullptr;
+    item::equipment::DriveBuilder* m_driveBuilder = nullptr;
+    item::equipment::DroidBuilder* m_droidBuilder = nullptr;
+#ifdef USE_EXTRA_EQUIPMENT
+    item::equipment::EnergizerBuilder* m_energizerBuilder = nullptr;
+    item::equipment::FreezerBuilder* m_freezerBuilder = nullptr;
+#endif // USE_EXTRA_EQUIPMENT
+    item::equipment::GrappleBuilder* m_grappleBuilder = nullptr;
+    item::equipment::ProtectorBuilder* m_protectorBuilder = nullptr;
+    item::equipment::RadarBuilder* m_radarBuilder = nullptr;
+    item::equipment::ScanerBuilder* m_scanerBuilder = nullptr;
+    item::equipment::RocketBuilder* m_rocketBuilder = nullptr;
+    item::equipment::LazerBuilder* m_lazerBuilder = nullptr;
+
+#ifdef USE_MODULES
+    BakModuleBuilder* m_bakModuleBuilder = nullptr;
+    DriveModuleBuilder* m_driveModuleBuilder = nullptr;
+    DroidModuleBuilder* m_droidModuleBuilder = nullptr;
+    //EnergizerModuleBuilder* m_energizerModuleBuilder = nullptr;
+    //FreezerModuleBuilder* m_freezerModuleBuilder = nullptr;
+    GrappleModuleBuilder* m_grappleModuleBuilder = nullptr;
+    ProtectorModuleBuilder* m_protectorModuleBuilder = nullptr;
+    RadarModuleBuilder* m_radarModuleBuilder = nullptr;
+    ScanerModuleBuilder* m_scanerModuleBuilder = nullptr;
+    RocketModuleBuilder* m_rocketModuleBuilder = nullptr;
+    LazerModuleBuilder* m_lazerModuleBuilder = nullptr;
+#endif // USE_MODULES
+
+    BombBuilder* m_bombBuilder = nullptr;
+
+    NpcBuilder* m_npcBuilder = nullptr;
+    //        ItemSlotBuilder* m_itemSlotBuilder = nullptr;
+    //        VehicleSlotBuilder* m_vehicleSlotBuilder = nullptr;
+
+    AsteroidBuilder* m_asteroidBuilder = nullptr;
+    BlackHoleBuilder* m_blackHoleBuilder = nullptr;
+    ContainerBuilder* m_containerBuilder = nullptr;
+    PlanetBuilder* m_planetBuilder = nullptr;
+    StarBuilder* m_starBuilder = nullptr;
+    RocketBulletBuilder* m_rocketBulletBuilder = nullptr;
+    SatelliteBuilder* m_satelliteBuilder = nullptr;
+    ShipBuilder* m_shipBuilder = nullptr;
+    SpaceStationBuilder* m_spaceStationBuilder = nullptr;
+
+    GalaxyBuilder* m_galaxyBuilder = nullptr;
+    SectorBuilder* m_sectorBuilder = nullptr;
+    StarSystemBuilder* m_starsystemBuilder = nullptr;
+
+    DescriptorManager* m_descriptorManager = nullptr;
 };

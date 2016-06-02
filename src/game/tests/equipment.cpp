@@ -27,12 +27,15 @@
 
 #include <descriptors/Base.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
+#include <descriptors/DescriptorManager.hpp>
 
 #include <builder/item/IncludeItemBuilders.hpp>
 
 #include <item/equipment/ALL>
 
 #include "helper.hpp"
+
+#include <fstream>
 
 void commonDataItemCheck(const descriptor::Base& descr, item::Base* item)
 {
@@ -50,7 +53,7 @@ void commonDataItemCheck(const descriptor::Base& descr, item::Base* item)
 
 TEST(equipment,bak)
 {
-    const descriptor::Base& descr = generateBakDescriptor();
+    const descriptor::Base& descr = DescriptorGenerator::getNewBakDescriptor();
     item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(descr);
 
     EXPECT_EQ(descr.fuelMax(), bak_equipment->fuel());
@@ -58,112 +61,142 @@ TEST(equipment,bak)
     commonDataItemCheck(descr, bak_equipment);
 }
 
-
-TEST(ship_with_equipment, bak)
+TEST(descriptor,general)
 {
-    Ship* ship = createNewShip();
-    item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
+    global::get();
+    //EXPECT_EQ(global::get().descriptorManager().size());
+//    std::string fname = "data.txt";
+//    std::fstream filestream;
+//    filestream.open(fname);
+//    if(filestream.is_open()) {
+//        for(int i=0; i<10; ++i) {
+//            const descriptor::Base& descr = DescriptorGenerator::getNewBakDescriptor();
+//            global::get().descriptorManager().add(descr);
+//            filestream<<descr.data()<<std::endl;
+//        }
+//    } else {
+//        throw std::runtime_error("not able to open file="+fname);
+//    }
+//    filestream.close();
 
-    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot() != nullptr);
-    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() == nullptr);
-    EXPECT_EQ(ship->properties().hyper, 0);
-    ship->manage(bak_equipment);
-    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() != nullptr);
-    EXPECT_EQ(ship->properties().hyper, 0); // no drive is set, that's why hyper is 0
+//    std::string line;
+//    filestream.open(fname);
+//    if(filestream.is_open()) {
+//        while(std::getline(filestream, line)) {
+//            if (!line.empty()) {
+//                const descriptor::Base& descr = descriptor::Base(line);
+//                global::get().descriptorManager().add(descr);
+//            }
+//        }
+//    }
+//    filestream.close();
 }
 
-TEST(ship_with_equipment, drive)
-{
-    Ship* ship = createNewShip();
-    item::equipment::Drive* drive_equipment = global::get().driveBuilder().create(generateDriveDescriptor());
+//TEST(ship_with_equipment, bak)
+//{
+//    Ship* ship = createNewShip();
+//    item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
 
-    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot() != nullptr);
-    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() == nullptr);
-    EXPECT_EQ(ship->properties().hyper, 0);
-    ship->manage(drive_equipment);
-    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() != nullptr);
-    EXPECT_EQ(ship->properties().hyper, 0); // no bak is set that's why hyper is 0
-}
+//    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot() != nullptr);
+//    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() == nullptr);
+//    EXPECT_EQ(ship->properties().hyper, 0);
+//    ship->manage(bak_equipment);
+//    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() != nullptr);
+//    EXPECT_EQ(ship->properties().hyper, 0); // no drive is set, that's why hyper is 0
+//}
 
-TEST(ship_with_equipment, bak_and_drive)
-{
-    Ship* ship = createNewShip();
-    item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
-    item::equipment::Drive* drive_equipment = global::get().driveBuilder().create(generateDriveDescriptor());
+//TEST(ship_with_equipment, drive)
+//{
+//    Ship* ship = createNewShip();
+//    item::equipment::Drive* drive_equipment = global::get().driveBuilder().create(DescriptorGenerator::getNewDriveDescriptor());
 
-    EXPECT_EQ(ship->properties().hyper, 0);
-    ship->manage(bak_equipment);
-    ship->manage(drive_equipment);
-    EXPECT_EQ(ship->properties().hyper, std::min(bak_equipment->fuel(), drive_equipment->hyper()));
-}
+//    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot() != nullptr);
+//    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() == nullptr);
+//    EXPECT_EQ(ship->properties().hyper, 0);
+//    ship->manage(drive_equipment);
+//    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() != nullptr);
+//    EXPECT_EQ(ship->properties().hyper, 0); // no bak is set that's why hyper is 0
+//}
 
-TEST(ship_with_equipment, droid)
-{
-    Ship* ship = createNewShip();
-    item::equipment::Droid* droid_equipment = global::get().droidBuilder().create(generateDroidDescriptor());
+//TEST(ship_with_equipment, bak_and_drive)
+//{
+//    Ship* ship = createNewShip();
+//    item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(DescriptorGenerator::getNewBakDescriptor());
+//    item::equipment::Drive* drive_equipment = global::get().driveBuilder().create(DescriptorGenerator::getNewDriveDescriptor());
 
-    EXPECT_TRUE(ship->slotDroid()->item() == nullptr);
-    ship->manage(droid_equipment);
-    EXPECT_TRUE(ship->slotDroid()->item() != nullptr);
-}
+//    EXPECT_EQ(ship->properties().hyper, 0);
+//    ship->manage(bak_equipment);
+//    ship->manage(drive_equipment);
+//    EXPECT_EQ(ship->properties().hyper, std::min(bak_equipment->fuel(), drive_equipment->hyper()));
+//}
 
-TEST(ship_with_equipment, grapple)
-{
-    Ship* ship = createNewShip();
-    item::equipment::Grapple* grapple_equipment = global::get().grappleBuilder().create(generateGrappleDescriptor());
+//TEST(ship_with_equipment, droid)
+//{
+//    Ship* ship = createNewShip();
+//    item::equipment::Droid* droid_equipment = global::get().droidBuilder().create(DescriptorGenerator::getNewDroidDescriptor());
 
-    EXPECT_TRUE(ship->slotGrapple()->item() == nullptr);
-    ship->manage(grapple_equipment);
-    EXPECT_TRUE(ship->slotGrapple()->item() != nullptr);
-}
+//    EXPECT_TRUE(ship->slotDroid()->item() == nullptr);
+//    ship->manage(droid_equipment);
+//    EXPECT_TRUE(ship->slotDroid()->item() != nullptr);
+//}
 
-TEST(ship_with_equipment, scaner)
-{
-    Ship* ship = createNewShip();
-    item::equipment::Scaner* scaner_equipment = global::get().scanerBuilder().create(generateScanerDescriptor());
+//TEST(ship_with_equipment, grapple)
+//{
+//    Ship* ship = createNewShip();
+//    item::equipment::Grapple* grapple_equipment = global::get().grappleBuilder().create(DescriptorGenerator::getNewGrappleDescriptor());
 
-    EXPECT_TRUE(ship->slotScaner()->item() == nullptr);
-    ship->manage(scaner_equipment);
-    EXPECT_TRUE(ship->slotScaner()->item() != nullptr);
-}
+//    EXPECT_TRUE(ship->slotGrapple()->item() == nullptr);
+//    ship->manage(grapple_equipment);
+//    EXPECT_TRUE(ship->slotGrapple()->item() != nullptr);
+//}
 
-TEST(ship_with_equipment, radar)
-{
-    Ship* ship = createNewShip();
-    item::equipment::Radar* radar_equipment = global::get().radarBuilder().create(generateRadarDescriptor());
+//TEST(ship_with_equipment, scaner)
+//{
+//    Ship* ship = createNewShip();
+//    item::equipment::Scaner* scaner_equipment = global::get().scanerBuilder().create(DescriptorGenerator::getNewScanerDescriptor());
 
-    EXPECT_TRUE(ship->slotRadar()->item() == nullptr);
-    ship->manage(radar_equipment);
-    EXPECT_TRUE(ship->slotRadar()->item() != nullptr);
-}
+//    EXPECT_TRUE(ship->slotScaner()->item() == nullptr);
+//    ship->manage(scaner_equipment);
+//    EXPECT_TRUE(ship->slotScaner()->item() != nullptr);
+//}
 
-TEST(ship_with_equipment, protector)
-{
-    Ship* ship = createNewShip();
-    item::equipment::Protector* protector_equipment = global::get().protectorBuilder().create(generateProtectorDescriptor());
+//TEST(ship_with_equipment, radar)
+//{
+//    Ship* ship = createNewShip();
+//    item::equipment::Radar* radar_equipment = global::get().radarBuilder().create(DescriptorGenerator::getNewRadarDescriptor());
 
-    EXPECT_TRUE(ship->GetComplexProtector().GetProtectorSlot()->item() == nullptr);
-    ship->manage(protector_equipment);
-    EXPECT_TRUE(ship->GetComplexProtector().GetProtectorSlot()->item() != nullptr);
-}
+//    EXPECT_TRUE(ship->slotRadar()->item() == nullptr);
+//    ship->manage(radar_equipment);
+//    EXPECT_TRUE(ship->slotRadar()->item() != nullptr);
+//}
 
-TEST(ship_with_equipment, freespace)
-{
-    Ship* ship = createNewShip();
+//TEST(ship_with_equipment, protector)
+//{
+//    Ship* ship = createNewShip();
+//    item::equipment::Protector* protector_equipment = global::get().protectorBuilder().create(DescriptorGenerator::getNewProtectorDescriptor());
 
-    std::vector<item::Base*> items;
-    items.push_back( global::get().protectorBuilder().create(generateProtectorDescriptor()) );
-    items.push_back( global::get().protectorBuilder().create(generateProtectorDescriptor()) );
-    items.push_back( global::get().protectorBuilder().create(generateProtectorDescriptor()) );
+//    EXPECT_TRUE(ship->GetComplexProtector().GetProtectorSlot()->item() == nullptr);
+//    ship->manage(protector_equipment);
+//    EXPECT_TRUE(ship->GetComplexProtector().GetProtectorSlot()->item() != nullptr);
+//}
 
-    EXPECT_EQ(ship->mass(), ship->freeSpace());
+//TEST(ship_with_equipment, freespace)
+//{
+//    Ship* ship = createNewShip();
 
-    int weight_extra = 0;
-    for (auto item: items) {
-        weight_extra += item->mass();
-        ship->manage(item);
-    }
+//    std::vector<item::Base*> items;
+//    items.push_back( global::get().protectorBuilder().create(DescriptorGenerator::getNewProtectorDescriptor()) );
+//    items.push_back( global::get().protectorBuilder().create(DescriptorGenerator::getNewProtectorDescriptor()) );
+//    items.push_back( global::get().protectorBuilder().create(DescriptorGenerator::getNewProtectorDescriptor()) );
 
-    EXPECT_EQ(ship->freeSpace(), ship->mass() - weight_extra);
-}
+//    EXPECT_EQ(ship->mass(), ship->freeSpace());
+
+//    int weight_extra = 0;
+//    for (auto item: items) {
+//        weight_extra += item->mass();
+//        ship->manage(item);
+//    }
+
+//    EXPECT_EQ(ship->freeSpace(), ship->mass() - weight_extra);
+//}
 

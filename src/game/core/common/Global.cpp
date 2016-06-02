@@ -157,7 +157,9 @@ global::global()
     , m_sectorBuilder(new SectorBuilder)
     , m_starsystemBuilder(new StarSystemBuilder)
     , m_descriptorManager(new DescriptorManager)
-{}
+{
+    m_descriptorManager->init();
+}
 
 global::~global()
 {

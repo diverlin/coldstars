@@ -53,7 +53,7 @@ Ship* createNewShip()
 
 Bomb* createNewBomb(int damage, int radius)
 {
-    descriptor::Base descriptor = generateBombDescriptor(damage, radius);
+    descriptor::Base descriptor = DescriptorGenerator::getNewBombDescriptor(damage, radius);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
 
     Bomb* bomb = static_cast<Bomb*>(global::get().entityManager().get(descriptor.id()));
@@ -76,7 +76,7 @@ Container* createNewContainer(const id_type& child_id)
 
 StarSystem* createNewStarSystem()
 {
-    descriptor::Base descriptor = generateStarSystemDescriptor();
+    descriptor::Base descriptor = DescriptorGenerator::getNewStarSystemDescriptor();
     global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
 
     StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.id()));
@@ -90,13 +90,13 @@ void init_equipment_descriptors()
 
     bool generate_new = true;
     if (generate_new) {
-        descriptor_manager.add(generateBakDescriptor());
-        descriptor_manager.add(generateDriveDescriptor());
-        descriptor_manager.add(generateDroidDescriptor());
-        descriptor_manager.add(generateGrappleDescriptor());
-        descriptor_manager.add(generateScanerDescriptor());
-        descriptor_manager.add(generateRadarDescriptor());
-        descriptor_manager.add(generateProtectorDescriptor());
+        descriptor_manager.add(DescriptorGenerator::getNewBakDescriptor());
+        descriptor_manager.add(DescriptorGenerator::getNewDriveDescriptor());
+        descriptor_manager.add(DescriptorGenerator::getNewDroidDescriptor());
+        descriptor_manager.add(DescriptorGenerator::getNewGrappleDescriptor());
+        descriptor_manager.add(DescriptorGenerator::getNewScanerDescriptor());
+        descriptor_manager.add(DescriptorGenerator::getNewRadarDescriptor());
+        descriptor_manager.add(DescriptorGenerator::getNewProtectorDescriptor());
     } else {
         // todo: read from file
     }
