@@ -1,2 +1,4 @@
-#include <item/artefacts/GravityArtefact.hpp>
-#include <item/artefacts/ProtectorArtefact.hpp>
+#ifdef USE_ARTEFACTS
+#include "GravityArtefact.hpp"
+#include "ProtectorArtefact.hpp"
+#endif // USE_ARTEFACTS

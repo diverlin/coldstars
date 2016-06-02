@@ -14,11 +14,16 @@
 #include <descriptors/ExplosionDescriptor.hpp>
 #include <descriptors/AddToStarsystemDescriptor.hpp>
 
-#include <spaceobjects/IncludeSpaceObjects.hpp>
+#include <spaceobjects/ALL>
 #include <world/starsystem.hpp>
 
-#include <builder/spaceobjects/IncludeSpaceObjectBuilders.hpp>
-#include <builder/item/IncludeItemBuilders.hpp>
+#include <builder/spaceobjects/ALL>
+
+#include <builder/item/equipment/ALL>
+#include <builder/item/modules/ALL>
+#include <builder/item/artefacts//ALL>
+#include <builder/item/other/ALL>
+
 #include <builder/world/StarSystemBuilder.hpp>
 
 #include <world/starsystem.hpp>
