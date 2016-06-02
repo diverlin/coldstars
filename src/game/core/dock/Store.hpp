@@ -38,16 +38,16 @@ public:
 
     virtual void putChildrenToGarbage() const;
 
-    void AddVehicleSlot(VehicleSlot*);
-    void AddItemSlot(ItemSlot*);
-    bool AddItem(item::Base*);
-    bool AddVehicle(Vehicle*);
+    void addVehicleSlot(VehicleSlot*);
+    void addItemSlot(ItemSlot*);
+    bool addItem(item::Base*);
+    bool addVehicle(Vehicle*);
 
-    ItemSlot* GetEmptyItemSlot() const;
-    VehicleSlot* GetEmptyVehicleSlot() const;
+    ItemSlot* freeItemSlot() const;
+    VehicleSlot* freeVehicleSlot() const;
 
-    int BuyItem(item::Base*);
-    void SellVehicle(Npc*, VehicleSlot*, int);
+    int buyItem(item::Base*);
+    void sellVehicle(Npc*, VehicleSlot*, int);
 
     void Save(boost::property_tree::ptree&) const;
     void Load(const boost::property_tree::ptree&);
