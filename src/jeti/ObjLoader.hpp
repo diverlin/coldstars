@@ -19,7 +19,7 @@ class ObjLoader
 { 
     public:        
         ObjLoader(const std::string&);
-        ~ObjLoader() {};
+        ~ObjLoader() {}
     
     private:
         /** The data readed directly from file */
@@ -35,4 +35,4 @@ class ObjLoader
     friend class Mesh;
 };
 
-}
+} // namespace jeti

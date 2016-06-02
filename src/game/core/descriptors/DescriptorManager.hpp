@@ -27,13 +27,22 @@ class DescriptorManager
 {
 public:
     DescriptorManager();
-    ~DescriptorManager() {}
+    ~DescriptorManager();
 
     void add(const descriptor::Base&);
     descriptor::Base getRandom(const descriptor::Base::Type&);
     descriptor::Base get(const id_type&);
 
+    void init();
+    void save();
+    void load();
+
+    int size() const { return m_descriptors.size(); }
+
 private:
     std::map<id_type, descriptor::Base> m_descriptors;
     std::map<int, std::vector<descriptor::Base>> m_descriptorsTypes;
+
+    void clear();
+    void generate();
 }; 

@@ -26,7 +26,10 @@
 #include <common/constants.hpp>
 #include <item/BaseItem.hpp>
 
-descriptor::Base generateBombDescriptor(int damage, int radius)
+IdGenerator DescriptorGenerator::m_idGenerator;
+
+descriptor::Base
+DescriptorGenerator::getNewBombDescriptor(int damage, int radius)
 {
     if (damage == -1) {
          damage = meti::getRandInt(10, 100);
@@ -36,7 +39,7 @@ descriptor::Base generateBombDescriptor(int damage, int radius)
     }
 
     descriptor::Base descriptor;
-    descriptor.add(descriptor::Key::ID, global::get().idGenerator().nextId());
+    descriptor.add(descriptor::Key::ID, m_idGenerator.nextId());
     descriptor.add(descriptor::Key::TYPE, int(descriptor::Base::Type::BOMB));
     descriptor.add(descriptor::Key::DAMAGE, damage);
     descriptor.add(descriptor::Key::RADIUS, radius);
@@ -44,14 +47,15 @@ descriptor::Base generateBombDescriptor(int damage, int radius)
     return descriptor;
 }
 
-descriptor::Base generateStarSystemDescriptor(int race)
+descriptor::Base
+DescriptorGenerator::getNewStarSystemDescriptor(int race)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
     }
 
     descriptor::Base descriptor;
-    descriptor.add(descriptor::Key::ID, global::get().idGenerator().nextId());
+    descriptor.add(descriptor::Key::ID, m_idGenerator.nextId());
     descriptor.add(descriptor::Key::TYPE, int(descriptor::Base::Type::STARSYSTEM));
     descriptor.add(descriptor::Key::RACE, race);
 
@@ -70,7 +74,7 @@ void addItemCommonFields(descriptor::Base& descriptor,
                          int condition_max,
                          int deterioration,
                          int price) {
-    descriptor.add(descriptor::Key::ID, global::get().idGenerator().nextId());
+    descriptor.add(descriptor::Key::ID, id);
     descriptor.add(descriptor::Key::TYPE, int(descriptor::Base::Type::RADAR));
     descriptor.add(descriptor::Key::RACE, race);
     descriptor.add(descriptor::Key::TECH, tech_level);
@@ -82,7 +86,8 @@ void addItemCommonFields(descriptor::Base& descriptor,
 }
 } // namespace
 
-descriptor::Base generateBakDescriptor(int race, int tech_level)
+descriptor::Base
+DescriptorGenerator::getNewBakDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
@@ -105,14 +110,15 @@ descriptor::Base generateBakDescriptor(int race, int tech_level)
 
     descriptor::Base descriptor;
     addItemCommonFields(descriptor,
-                        global::get().idGenerator().nextId(),
+                        m_idGenerator.nextId(),
                         int(descriptor::Base::Type::BAK),
                         race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
     descriptor.add(descriptor::Key::FUEL_MAX, fuel_max_orig);
     return descriptor;
 }
 
-descriptor::Base generateDriveDescriptor(int race, int tech_level)
+descriptor::Base
+DescriptorGenerator::getNewDriveDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
@@ -134,7 +140,7 @@ descriptor::Base generateDriveDescriptor(int race, int tech_level)
 
     descriptor::Base descriptor;
     addItemCommonFields(descriptor,
-                        global::get().idGenerator().nextId(),
+                        m_idGenerator.nextId(),
                         int(descriptor::Base::Type::DRIVE),
                         race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
     descriptor.add(descriptor::Key::SPEED, speed);
@@ -142,7 +148,8 @@ descriptor::Base generateDriveDescriptor(int race, int tech_level)
     return descriptor;
 }
 
-descriptor::Base generateDroidDescriptor(int race, int tech_level)
+descriptor::Base
+DescriptorGenerator::getNewDroidDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
@@ -163,14 +170,15 @@ descriptor::Base generateDroidDescriptor(int race, int tech_level)
 
     descriptor::Base descriptor;
     addItemCommonFields(descriptor,
-                        global::get().idGenerator().nextId(),
+                        m_idGenerator.nextId(),
                         int(descriptor::Base::Type::DROID),
                         race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
     descriptor.add(descriptor::Key::REPAIR, repair);
     return descriptor;
 }
 
-descriptor::Base generateGrappleDescriptor(int race, int tech_level)
+descriptor::Base
+DescriptorGenerator::getNewGrappleDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
@@ -194,7 +202,7 @@ descriptor::Base generateGrappleDescriptor(int race, int tech_level)
 
     descriptor::Base descriptor;
     addItemCommonFields(descriptor,
-                        global::get().idGenerator().nextId(),
+                        m_idGenerator.nextId(),
                         int(descriptor::Base::Type::GRAPPLE),
                         race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
     descriptor.add(descriptor::Key::STRENGTH, strength);
@@ -204,7 +212,8 @@ descriptor::Base generateGrappleDescriptor(int race, int tech_level)
     return descriptor;
 }
 
-descriptor::Base generateScanerDescriptor(int race, int tech_level)
+descriptor::Base
+DescriptorGenerator::getNewScanerDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
@@ -226,7 +235,7 @@ descriptor::Base generateScanerDescriptor(int race, int tech_level)
 
     descriptor::Base descriptor;
     addItemCommonFields(descriptor,
-                        global::get().idGenerator().nextId(),
+                        m_idGenerator.nextId(),
                         int(descriptor::Base::Type::SCANER),
                         race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
     descriptor.add(descriptor::Key::SCAN, scan);
@@ -234,7 +243,8 @@ descriptor::Base generateScanerDescriptor(int race, int tech_level)
     return descriptor;
 }
 
-descriptor::Base generateRadarDescriptor(int race, int tech_level)
+descriptor::Base
+DescriptorGenerator::getNewRadarDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
@@ -256,7 +266,7 @@ descriptor::Base generateRadarDescriptor(int race, int tech_level)
 
     descriptor::Base descriptor;
     addItemCommonFields(descriptor,
-                        global::get().idGenerator().nextId(),
+                        m_idGenerator.nextId(),
                         int(descriptor::Base::Type::RADAR),
                         race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
     descriptor.add(descriptor::Key::RADIUS, radius);
@@ -264,7 +274,8 @@ descriptor::Base generateRadarDescriptor(int race, int tech_level)
     return descriptor;
 }
 
-descriptor::Base generateProtectorDescriptor(int race, int tech_level)
+descriptor::Base
+DescriptorGenerator::getNewProtectorDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(TYPE::RACE::R0_ID);
@@ -286,7 +297,7 @@ descriptor::Base generateProtectorDescriptor(int race, int tech_level)
 
     descriptor::Base descriptor;
     addItemCommonFields(descriptor,
-                        global::get().idGenerator().nextId(),
+                        m_idGenerator.nextId(),
                         int(descriptor::Base::Type::PROTECTOR),
                         race, tech_level, modules_num_max, mass, condition_max, deterioration, price);
     descriptor.add(descriptor::Key::PROTECTION, protection);

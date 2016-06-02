@@ -15,8 +15,7 @@ ObjLoader::ObjLoader(const std::string& path)
     std::ifstream filestream;
     filestream.open(path.c_str());
  
-     if (filestream.is_open() == false)
-     {
+     if (!filestream.is_open()) {
          std::cout<<"FAULT: Not abe to open file:"<<path;
          exit(EXIT_FAILURE);
      }
