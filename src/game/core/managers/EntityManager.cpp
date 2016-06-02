@@ -98,7 +98,8 @@ void EntityManager::clear()
 void EntityManager::reg(Base* entity)
 {   
     if (entity->id() == NONE_ID) {
-        // TODO fixme entity->setId(global::get().idGenerator().nextId());
+        // TODO fixme
+        entity->setId(global::get().idGenerator().nextId());
     }
     LOG("EntityManager::reg " + entity->dataTypeStr() << std::endl);
 
