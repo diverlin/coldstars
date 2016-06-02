@@ -134,9 +134,9 @@ TEST(descriptor,manager)
 
 //    EXPECT_EQ(descriptor_manager.get(descriptor_hit.id()), descriptor_hit);
 
-//    EXPECT_EQ(descriptor_manager.getRandom(descriptor::Base::Type::HIT).type(), int(descriptor::Base::Type::HIT));
-//    EXPECT_EQ(descriptor_manager.getRandom(descriptor::Base::Type::STARSYSTEM).type(), int(descriptor::Base::Type::STARSYSTEM));
-//    EXPECT_EQ(descriptor_manager.getRandom(descriptor::Base::Type::BAK).type(), int(descriptor::Base::Type::BAK));
+//    EXPECT_EQ(descriptor_manager.getRandom(descriptor::Type::HIT).type(), int(descriptor::Type::HIT));
+//    EXPECT_EQ(descriptor_manager.getRandom(descriptor::Type::STARSYSTEM).type(), int(descriptor::Type::STARSYSTEM));
+//    EXPECT_EQ(descriptor_manager.getRandom(descriptor::Type::BAK).type(), int(descriptor::Type::BAK));
 }
 
 

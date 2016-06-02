@@ -61,7 +61,7 @@ DescriptorManager::add(const descriptor::Base& descriptor)
 }
 
 descriptor::Base
-DescriptorManager::getRandom(const descriptor::Base::Type& type)
+DescriptorManager::getRandom(const descriptor::Type& type)
 {
     const auto it = m_descriptorsTypes.find(int(type));
     if (it != m_descriptorsTypes.end()) {

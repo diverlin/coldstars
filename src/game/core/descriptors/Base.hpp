@@ -55,25 +55,25 @@ enum class Key: int {
     TARGET
 };
 
+enum class Type: int {
+    HIT,
+    CONTAINER,
+    BOMB,
+    STARSYSTEM,
+    BAK,
+    DRIVE,
+    DROID,
+    GRAPPLE,
+    SCANER,
+    RADAR,
+    PROTECTOR
+};
+
 std::string keyStr(const Key&);
 
 class Base
 {
 public:
-    enum class Type: int {
-        HIT,
-        CONTAINER,
-        BOMB,
-        STARSYSTEM,
-        BAK,
-        DRIVE,
-        DROID,
-        GRAPPLE,
-        SCANER,
-        RADAR,
-        PROTECTOR
-    };
-
     // const
     static std::string KEY_TYPE;
     static std::string KEY_TARGET;
