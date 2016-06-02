@@ -53,7 +53,7 @@ void commonDataItemCheck(const descriptor::Base& descr, item::Base* item)
 
 TEST(equipment,bak)
 {
-    const descriptor::Base& descr = global::get().descriptorManager().getRandom(descriptor::Type::BAK);
+    const descriptor::Base& descr = global::get().descriptors().getRand(descriptor::Type::BAK);
     item::equipment::Bak* bak_equipment = global::get().bakBuilder().create( descr );
 
     EXPECT_EQ(descr.fuelMax(), bak_equipment->fuel());
@@ -95,7 +95,7 @@ TEST(descriptor,general)
 TEST(ship_with_equipment, bak)
 {
     Ship* ship = createNewShip();
-    item::equipment::Bak* bak_equipment = global::get().bakBuilder().create( global::get().descriptorManager().getRandom(descriptor::Type::BAK) );
+    item::equipment::Bak* bak_equipment = global::get().bakBuilder().create( global::get().descriptors().getRand(descriptor::Type::BAK) );
 
     EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot() != nullptr);
     EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() == nullptr);
@@ -108,7 +108,7 @@ TEST(ship_with_equipment, bak)
 TEST(ship_with_equipment, drive)
 {
     Ship* ship = createNewShip();
-    item::equipment::Drive* drive_equipment = global::get().driveBuilder().create( global::get().descriptorManager().getRandom(descriptor::Type::DRIVE) );
+    item::equipment::Drive* drive_equipment = global::get().driveBuilder().create( global::get().descriptors().getRand(descriptor::Type::DRIVE) );
 
     EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot() != nullptr);
     EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() == nullptr);
@@ -121,8 +121,8 @@ TEST(ship_with_equipment, drive)
 TEST(ship_with_equipment, bak_and_drive)
 {
     Ship* ship = createNewShip();
-    item::equipment::Bak* bak_equipment = global::get().bakBuilder().create( global::get().descriptorManager().getRandom(descriptor::Type::BAK) );
-    item::equipment::Drive* drive_equipment = global::get().driveBuilder().create( global::get().descriptorManager().getRandom(descriptor::Type::DRIVE) );
+    item::equipment::Bak* bak_equipment = global::get().bakBuilder().create( global::get().descriptors().getRand(descriptor::Type::BAK) );
+    item::equipment::Drive* drive_equipment = global::get().driveBuilder().create( global::get().descriptors().getRand(descriptor::Type::DRIVE) );
 
     EXPECT_EQ(ship->properties().hyper, 0);
     ship->manage(bak_equipment);
@@ -133,7 +133,7 @@ TEST(ship_with_equipment, bak_and_drive)
 TEST(ship_with_equipment, droid)
 {
     Ship* ship = createNewShip();
-    item::equipment::Droid* droid_equipment = global::get().droidBuilder().create( global::get().descriptorManager().getRandom(descriptor::Type::DROID) );
+    item::equipment::Droid* droid_equipment = global::get().droidBuilder().create( global::get().descriptors().getRand(descriptor::Type::DROID) );
 
     EXPECT_TRUE(ship->slotDroid()->item() == nullptr);
     ship->manage(droid_equipment);
@@ -143,7 +143,7 @@ TEST(ship_with_equipment, droid)
 TEST(ship_with_equipment, grapple)
 {
     Ship* ship = createNewShip();
-    item::equipment::Grapple* grapple_equipment = global::get().grappleBuilder().create( global::get().descriptorManager().getRandom(descriptor::Type::GRAPPLE) );
+    item::equipment::Grapple* grapple_equipment = global::get().grappleBuilder().create( global::get().descriptors().getRand(descriptor::Type::GRAPPLE) );
 
     EXPECT_TRUE(ship->slotGrapple()->item() == nullptr);
     ship->manage(grapple_equipment);
@@ -153,7 +153,7 @@ TEST(ship_with_equipment, grapple)
 TEST(ship_with_equipment, scaner)
 {
     Ship* ship = createNewShip();
-    item::equipment::Scaner* scaner_equipment = global::get().scanerBuilder().create( global::get().descriptorManager().getRandom(descriptor::Type::SCANER) );
+    item::equipment::Scaner* scaner_equipment = global::get().scanerBuilder().create( global::get().descriptors().getRand(descriptor::Type::SCANER) );
 
     EXPECT_TRUE(ship->slotScaner()->item() == nullptr);
     ship->manage(scaner_equipment);
@@ -163,7 +163,7 @@ TEST(ship_with_equipment, scaner)
 TEST(ship_with_equipment, radar)
 {
     Ship* ship = createNewShip();
-    item::equipment::Radar* radar_equipment = global::get().radarBuilder().create( global::get().descriptorManager().getRandom(descriptor::Type::RADAR) );
+    item::equipment::Radar* radar_equipment = global::get().radarBuilder().create( global::get().descriptors().getRand(descriptor::Type::RADAR) );
 
     EXPECT_TRUE(ship->slotRadar()->item() == nullptr);
     ship->manage(radar_equipment);
@@ -173,7 +173,7 @@ TEST(ship_with_equipment, radar)
 TEST(ship_with_equipment, protector)
 {
     Ship* ship = createNewShip();
-    item::equipment::Protector* protector_equipment = global::get().protectorBuilder().create( global::get().descriptorManager().getRandom(descriptor::Type::PROTECTOR) );
+    item::equipment::Protector* protector_equipment = global::get().protectorBuilder().create( global::get().descriptors().getRand(descriptor::Type::PROTECTOR) );
 
     EXPECT_TRUE(ship->GetComplexProtector().GetProtectorSlot()->item() == nullptr);
     ship->manage(protector_equipment);
@@ -185,9 +185,9 @@ TEST(ship_with_equipment, freespace)
     Ship* ship = createNewShip();
 
     std::vector<item::Base*> items;
-    items.push_back( global::get().protectorBuilder().create( global::get().descriptorManager().getRandom(descriptor::Type::PROTECTOR) ) );
-    items.push_back( global::get().protectorBuilder().create( global::get().descriptorManager().getRandom(descriptor::Type::PROTECTOR) ) );
-    items.push_back( global::get().protectorBuilder().create( global::get().descriptorManager().getRandom(descriptor::Type::PROTECTOR) ) );
+    items.push_back( global::get().protectorBuilder().create( global::get().descriptors().getRand(descriptor::Type::PROTECTOR) ) );
+    items.push_back( global::get().protectorBuilder().create( global::get().descriptors().getRand(descriptor::Type::PROTECTOR) ) );
+    items.push_back( global::get().protectorBuilder().create( global::get().descriptors().getRand(descriptor::Type::PROTECTOR) ) );
 
     EXPECT_EQ(ship->mass(), ship->freeSpace());
 

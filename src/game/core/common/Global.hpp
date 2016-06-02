@@ -171,7 +171,7 @@ public:
     SectorBuilder& sectorBuilder() { return *m_sectorBuilder; }
     StarSystemBuilder& starSystemBuilder() { return *m_starsystemBuilder; }
 
-    DescriptorManager& descriptorManager() { return *m_descriptorManager; }
+    DescriptorManager& descriptors() { return *m_descriptors; }
 
 private:
     global();
@@ -249,5 +249,5 @@ private:
     SectorBuilder* m_sectorBuilder = nullptr;
     StarSystemBuilder* m_starsystemBuilder = nullptr;
 
-    DescriptorManager* m_descriptorManager = nullptr;
+    DescriptorManager* m_descriptors = nullptr;
 };

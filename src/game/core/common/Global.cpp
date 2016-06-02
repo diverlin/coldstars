@@ -156,9 +156,8 @@ global::global()
     , m_galaxyBuilder(new GalaxyBuilder)
     , m_sectorBuilder(new SectorBuilder)
     , m_starsystemBuilder(new StarSystemBuilder)
-    , m_descriptorManager(new DescriptorManager)
+    , m_descriptors(new DescriptorManager)
 {
-    m_descriptorManager->init();
 }
 
 global::~global()
