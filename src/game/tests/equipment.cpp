@@ -53,8 +53,8 @@ void commonDataItemCheck(const descriptor::Base& descr, item::Base* item)
 
 TEST(equipment,bak)
 {
-    const descriptor::Base& descr = DescriptorGenerator::getNewBakDescriptor();
-    item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(descr);
+    const descriptor::Base& descr = global::get().descriptorManager().getRandom(descriptor::Base::Type::BAK);
+    item::equipment::Bak* bak_equipment = global::get().bakBuilder().create( descr );
 
     EXPECT_EQ(descr.fuelMax(), bak_equipment->fuel());
     EXPECT_EQ(descr.fuelMax(), bak_equipment->fuelMax());
@@ -92,111 +92,111 @@ TEST(descriptor,general)
 //    filestream.close();
 }
 
-//TEST(ship_with_equipment, bak)
-//{
-//    Ship* ship = createNewShip();
-//    item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(generateBakDescriptor());
+TEST(ship_with_equipment, bak)
+{
+    Ship* ship = createNewShip();
+    item::equipment::Bak* bak_equipment = global::get().bakBuilder().create( global::get().descriptorManager().getRandom(descriptor::Base::Type::BAK) );
 
-//    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot() != nullptr);
-//    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() == nullptr);
-//    EXPECT_EQ(ship->properties().hyper, 0);
-//    ship->manage(bak_equipment);
-//    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() != nullptr);
-//    EXPECT_EQ(ship->properties().hyper, 0); // no drive is set, that's why hyper is 0
-//}
+    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot() != nullptr);
+    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() == nullptr);
+    EXPECT_EQ(ship->properties().hyper, 0);
+    ship->manage(bak_equipment);
+    EXPECT_TRUE(ship->GetComplexDrive().GetBakSlot()->item() != nullptr);
+    EXPECT_EQ(ship->properties().hyper, 0); // no drive is set, that's why hyper is 0
+}
 
-//TEST(ship_with_equipment, drive)
-//{
-//    Ship* ship = createNewShip();
-//    item::equipment::Drive* drive_equipment = global::get().driveBuilder().create(DescriptorGenerator::getNewDriveDescriptor());
+TEST(ship_with_equipment, drive)
+{
+    Ship* ship = createNewShip();
+    item::equipment::Drive* drive_equipment = global::get().driveBuilder().create( global::get().descriptorManager().getRandom(descriptor::Base::Type::DRIVE) );
 
-//    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot() != nullptr);
-//    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() == nullptr);
-//    EXPECT_EQ(ship->properties().hyper, 0);
-//    ship->manage(drive_equipment);
-//    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() != nullptr);
-//    EXPECT_EQ(ship->properties().hyper, 0); // no bak is set that's why hyper is 0
-//}
+    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot() != nullptr);
+    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() == nullptr);
+    EXPECT_EQ(ship->properties().hyper, 0);
+    ship->manage(drive_equipment);
+    EXPECT_TRUE(ship->GetComplexDrive().GetDriveSlot()->item() != nullptr);
+    EXPECT_EQ(ship->properties().hyper, 0); // no bak is set that's why hyper is 0
+}
 
-//TEST(ship_with_equipment, bak_and_drive)
-//{
-//    Ship* ship = createNewShip();
-//    item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(DescriptorGenerator::getNewBakDescriptor());
-//    item::equipment::Drive* drive_equipment = global::get().driveBuilder().create(DescriptorGenerator::getNewDriveDescriptor());
+TEST(ship_with_equipment, bak_and_drive)
+{
+    Ship* ship = createNewShip();
+    item::equipment::Bak* bak_equipment = global::get().bakBuilder().create( global::get().descriptorManager().getRandom(descriptor::Base::Type::BAK) );
+    item::equipment::Drive* drive_equipment = global::get().driveBuilder().create( global::get().descriptorManager().getRandom(descriptor::Base::Type::DRIVE) );
 
-//    EXPECT_EQ(ship->properties().hyper, 0);
-//    ship->manage(bak_equipment);
-//    ship->manage(drive_equipment);
-//    EXPECT_EQ(ship->properties().hyper, std::min(bak_equipment->fuel(), drive_equipment->hyper()));
-//}
+    EXPECT_EQ(ship->properties().hyper, 0);
+    ship->manage(bak_equipment);
+    ship->manage(drive_equipment);
+    EXPECT_EQ(ship->properties().hyper, std::min(bak_equipment->fuel(), drive_equipment->hyper()));
+}
 
-//TEST(ship_with_equipment, droid)
-//{
-//    Ship* ship = createNewShip();
-//    item::equipment::Droid* droid_equipment = global::get().droidBuilder().create(DescriptorGenerator::getNewDroidDescriptor());
+TEST(ship_with_equipment, droid)
+{
+    Ship* ship = createNewShip();
+    item::equipment::Droid* droid_equipment = global::get().droidBuilder().create( global::get().descriptorManager().getRandom(descriptor::Base::Type::DROID) );
 
-//    EXPECT_TRUE(ship->slotDroid()->item() == nullptr);
-//    ship->manage(droid_equipment);
-//    EXPECT_TRUE(ship->slotDroid()->item() != nullptr);
-//}
+    EXPECT_TRUE(ship->slotDroid()->item() == nullptr);
+    ship->manage(droid_equipment);
+    EXPECT_TRUE(ship->slotDroid()->item() != nullptr);
+}
 
-//TEST(ship_with_equipment, grapple)
-//{
-//    Ship* ship = createNewShip();
-//    item::equipment::Grapple* grapple_equipment = global::get().grappleBuilder().create(DescriptorGenerator::getNewGrappleDescriptor());
+TEST(ship_with_equipment, grapple)
+{
+    Ship* ship = createNewShip();
+    item::equipment::Grapple* grapple_equipment = global::get().grappleBuilder().create( global::get().descriptorManager().getRandom(descriptor::Base::Type::GRAPPLE) );
 
-//    EXPECT_TRUE(ship->slotGrapple()->item() == nullptr);
-//    ship->manage(grapple_equipment);
-//    EXPECT_TRUE(ship->slotGrapple()->item() != nullptr);
-//}
+    EXPECT_TRUE(ship->slotGrapple()->item() == nullptr);
+    ship->manage(grapple_equipment);
+    EXPECT_TRUE(ship->slotGrapple()->item() != nullptr);
+}
 
-//TEST(ship_with_equipment, scaner)
-//{
-//    Ship* ship = createNewShip();
-//    item::equipment::Scaner* scaner_equipment = global::get().scanerBuilder().create(DescriptorGenerator::getNewScanerDescriptor());
+TEST(ship_with_equipment, scaner)
+{
+    Ship* ship = createNewShip();
+    item::equipment::Scaner* scaner_equipment = global::get().scanerBuilder().create( global::get().descriptorManager().getRandom(descriptor::Base::Type::SCANER) );
 
-//    EXPECT_TRUE(ship->slotScaner()->item() == nullptr);
-//    ship->manage(scaner_equipment);
-//    EXPECT_TRUE(ship->slotScaner()->item() != nullptr);
-//}
+    EXPECT_TRUE(ship->slotScaner()->item() == nullptr);
+    ship->manage(scaner_equipment);
+    EXPECT_TRUE(ship->slotScaner()->item() != nullptr);
+}
 
-//TEST(ship_with_equipment, radar)
-//{
-//    Ship* ship = createNewShip();
-//    item::equipment::Radar* radar_equipment = global::get().radarBuilder().create(DescriptorGenerator::getNewRadarDescriptor());
+TEST(ship_with_equipment, radar)
+{
+    Ship* ship = createNewShip();
+    item::equipment::Radar* radar_equipment = global::get().radarBuilder().create( global::get().descriptorManager().getRandom(descriptor::Base::Type::RADAR) );
 
-//    EXPECT_TRUE(ship->slotRadar()->item() == nullptr);
-//    ship->manage(radar_equipment);
-//    EXPECT_TRUE(ship->slotRadar()->item() != nullptr);
-//}
+    EXPECT_TRUE(ship->slotRadar()->item() == nullptr);
+    ship->manage(radar_equipment);
+    EXPECT_TRUE(ship->slotRadar()->item() != nullptr);
+}
 
-//TEST(ship_with_equipment, protector)
-//{
-//    Ship* ship = createNewShip();
-//    item::equipment::Protector* protector_equipment = global::get().protectorBuilder().create(DescriptorGenerator::getNewProtectorDescriptor());
+TEST(ship_with_equipment, protector)
+{
+    Ship* ship = createNewShip();
+    item::equipment::Protector* protector_equipment = global::get().protectorBuilder().create( global::get().descriptorManager().getRandom(descriptor::Base::Type::PROTECTOR) );
 
-//    EXPECT_TRUE(ship->GetComplexProtector().GetProtectorSlot()->item() == nullptr);
-//    ship->manage(protector_equipment);
-//    EXPECT_TRUE(ship->GetComplexProtector().GetProtectorSlot()->item() != nullptr);
-//}
+    EXPECT_TRUE(ship->GetComplexProtector().GetProtectorSlot()->item() == nullptr);
+    ship->manage(protector_equipment);
+    EXPECT_TRUE(ship->GetComplexProtector().GetProtectorSlot()->item() != nullptr);
+}
 
-//TEST(ship_with_equipment, freespace)
-//{
-//    Ship* ship = createNewShip();
+TEST(ship_with_equipment, freespace)
+{
+    Ship* ship = createNewShip();
 
-//    std::vector<item::Base*> items;
-//    items.push_back( global::get().protectorBuilder().create(DescriptorGenerator::getNewProtectorDescriptor()) );
-//    items.push_back( global::get().protectorBuilder().create(DescriptorGenerator::getNewProtectorDescriptor()) );
-//    items.push_back( global::get().protectorBuilder().create(DescriptorGenerator::getNewProtectorDescriptor()) );
+    std::vector<item::Base*> items;
+    items.push_back( global::get().protectorBuilder().create( global::get().descriptorManager().getRandom(descriptor::Base::Type::PROTECTOR) ) );
+    items.push_back( global::get().protectorBuilder().create( global::get().descriptorManager().getRandom(descriptor::Base::Type::PROTECTOR) ) );
+    items.push_back( global::get().protectorBuilder().create( global::get().descriptorManager().getRandom(descriptor::Base::Type::PROTECTOR) ) );
 
-//    EXPECT_EQ(ship->mass(), ship->freeSpace());
+    EXPECT_EQ(ship->mass(), ship->freeSpace());
 
-//    int weight_extra = 0;
-//    for (auto item: items) {
-//        weight_extra += item->mass();
-//        ship->manage(item);
-//    }
+    int weight_extra = 0;
+    for (auto item: items) {
+        weight_extra += item->mass();
+        ship->manage(item);
+    }
 
-//    EXPECT_EQ(ship->freeSpace(), ship->mass() - weight_extra);
-//}
+    EXPECT_EQ(ship->freeSpace(), ship->mass() - weight_extra);
+}
 
