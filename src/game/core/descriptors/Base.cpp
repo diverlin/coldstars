@@ -76,6 +76,23 @@ std::string keyStr(const Key& key) {
     }
 }
 
+std::string typeStr(const Type& type) {
+    switch(type) {
+    case Type::HIT: return "Type::HIT"; break;
+    case Type::CONTAINER: return "Type::CONTAINER"; break;
+    case Type::BOMB: return "Type::BOMB"; break;
+    case Type::STARSYSTEM: return "Type::STARSYSTEM"; break;
+    case Type::BAK: return "Type::BAK"; break;
+    case Type::DRIVE: return "Type::DRIVE"; break;
+    case Type::DROID: return "Type::DROID"; break;
+    case Type::GRAPPLE: return "Type::GRAPPLE"; break;
+    case Type::SCANER: return "Type::SCANER"; break;
+    case Type::RADAR: return "Type::RADAR"; break;
+    case Type::PROTECTOR: return "Type::PROTECTOR"; break;
+    default: throw std::runtime_error("ERROR: fixme: unknown descriptor key"); break;
+    }
+}
+
 Base::Base()
 {
 }

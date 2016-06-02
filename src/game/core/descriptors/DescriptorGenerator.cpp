@@ -75,7 +75,7 @@ void addItemCommonFields(descriptor::Base& descriptor,
                          int deterioration,
                          int price) {
     descriptor.add(descriptor::Key::ID, id);
-    descriptor.add(descriptor::Key::TYPE, int(descriptor::Type::RADAR));
+    descriptor.add(descriptor::Key::TYPE, type);
     descriptor.add(descriptor::Key::RACE, race);
     descriptor.add(descriptor::Key::TECH, tech_level);
     descriptor.add(descriptor::Key::MODULES_NUM, modules_num_max);
