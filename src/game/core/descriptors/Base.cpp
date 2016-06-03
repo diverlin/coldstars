@@ -22,94 +22,95 @@
 
 namespace descriptor {
 
-// const
-std::string Base::KEY_STR_TYPE = "type";
-std::string Base::KEY_STR_RACE = "race";
-std::string Base::KEY_STR_DAMAGE = "damage";
-std::string Base::KEY_STR_RADIUS = "radius";
-std::string Base::KEY_STR_TECH = "tech";
-std::string Base::KEY_STR_MODULES_NUM = "modules_num";
-std::string Base::KEY_STR_MASS = "mass";
-std::string Base::KEY_STR_CONDITION_MAX = "condition_max";
-std::string Base::KEY_STR_DETERIORATION = "deterioration";
-std::string Base::KEY_STR_FUEL_MAX = "fuel_max";
-std::string Base::KEY_STR_SPEED = "speed";
-std::string Base::KEY_STR_HYPER = "hyper";
-std::string Base::KEY_STR_REPAIR = "repair";
-std::string Base::KEY_STR_STRENGTH = "strength";
-std::string Base::KEY_STR_SCAN = "scan";
-std::string Base::KEY_STR_PROTECTION = "protection";
-std::string Base::KEY_STR_PRICE = "price";
+namespace {
+const std::string KEY_STR_TYPE = "type";
+const std::string KEY_STR_RACE = "race";
+const std::string KEY_STR_DAMAGE = "damage";
+const std::string KEY_STR_RADIUS = "radius";
+const std::string KEY_STR_TECH = "tech";
+const std::string KEY_STR_MODULES_NUM = "modules_num";
+const std::string KEY_STR_MASS = "mass";
+const std::string KEY_STR_CONDITION_MAX = "condition_max";
+const std::string KEY_STR_DETERIORATION = "deterioration";
+const std::string KEY_STR_FUEL_MAX = "fuel_max";
+const std::string KEY_STR_SPEED = "speed";
+const std::string KEY_STR_HYPER = "hyper";
+const std::string KEY_STR_REPAIR = "repair";
+const std::string KEY_STR_STRENGTH = "strength";
+const std::string KEY_STR_SCAN = "scan";
+const std::string KEY_STR_PROTECTION = "protection";
+const std::string KEY_STR_PRICE = "price";
 //vehicle
-std::string Base::KEY_STR_SPACE = "space";
-std::string Base::KEY_STR_ARMOR = "armor";
-std::string Base::KEY_STR_TEMPERATURE = "temperature";
-std::string Base::KEY_STR_DRAW_TURRELS = "draw_turrels";
-std::string Base::KEY_STR_BAK_SLOT_NUM = "bak_slot_num";
-std::string Base::KEY_STR_DRIVE_SLOT_NUM = "drive_slot_num";
-std::string Base::KEY_STR_DROID_SLOT_NUM = "droid_slot_num";
+const std::string KEY_STR_SPACE = "space";
+const std::string KEY_STR_ARMOR = "armor";
+const std::string KEY_STR_TEMPERATURE = "temperature";
+const std::string KEY_STR_DRAW_TURRELS = "draw_turrels";
+const std::string KEY_STR_BAK_SLOT_NUM = "bak_slot_num";
+const std::string KEY_STR_DRIVE_SLOT_NUM = "drive_slot_num";
+const std::string KEY_STR_DROID_SLOT_NUM = "droid_slot_num";
 #ifdef USE_EXTRA_EQUIPMENT
-std::string Base::KEY_STR_ENERGIZER_SLOT_NUM = "energizer_slot_num";
-std::string Base::KEY_STR_FREEZER_SLOT_NUM = "freezer_slot_num";
+const std::string KEY_STR_ENERGIZER_SLOT_NUM = "energizer_slot_num";
+const std::string KEY_STR_FREEZER_SLOT_NUM = "freezer_slot_num";
 #endif // USE_EXTRA_EQUIPMENT
-std::string Base::KEY_STR_GRAPPLE_SLOT_NUM = "grapple_slot_num";
-std::string Base::KEY_STR_PROTECTOR_SLOT_NUM = "protector_slot_num";
-std::string Base::KEY_STR_RADAR_SLOT_NUM = "radar_slot_num";
-std::string Base::KEY_STR_SCANER_SLOT_NUM = "scaner_slot_num";
-std::string Base::KEY_STR_WEAPON_SLOT_NUM = "weapon_slot_num";
-std::string Base::KEY_STR_ARTEFACT_SLOT_NUM = "artefact_slot_num";
-std::string Base::KEY_STR_CARGO_SLOT_NUM = "cargo_slot_num";
+const std::string KEY_STR_GRAPPLE_SLOT_NUM = "grapple_slot_num";
+const std::string KEY_STR_PROTECTOR_SLOT_NUM = "protector_slot_num";
+const std::string KEY_STR_RADAR_SLOT_NUM = "radar_slot_num";
+const std::string KEY_STR_SCANER_SLOT_NUM = "scaner_slot_num";
+const std::string KEY_STR_WEAPON_SLOT_NUM = "weapon_slot_num";
+const std::string KEY_STR_ARTEFACT_SLOT_NUM = "artefact_slot_num";
+const std::string KEY_STR_CARGO_SLOT_NUM = "cargo_slot_num";
 
 // dynamic
-std::string Base::KEY_STR_ID = "id";
-std::string Base::KEY_STR_OWNER = "owner";
-std::string Base::KEY_STR_CHILD = "child";
-std::string Base::KEY_STR_TARGET = "target";
+const std::string KEY_STR_ID = "id";
+const std::string KEY_STR_OWNER = "owner";
+const std::string KEY_STR_CHILD = "child";
+const std::string KEY_STR_TARGET = "target";
+} // namespace
 
 std::string keyStr(const Key& key) {
     switch(key) {
     // const
-    case Key::TYPE: return Base::KEY_STR_TYPE; break;
-    case Key::RACE: return Base::KEY_STR_RACE; break;
-    case Key::DAMAGE: return Base::KEY_STR_DAMAGE; break;
-    case Key::RADIUS: return Base::KEY_STR_RADIUS; break;
-    case Key::TECH: return Base::KEY_STR_TECH; break;
-    case Key::MODULES_NUM: return Base::KEY_STR_MODULES_NUM; break;
-    case Key::MASS: return Base::KEY_STR_MASS; break;
-    case Key::CONDITION_MAX: return Base::KEY_STR_CONDITION_MAX; break;
-    case Key::DETERIORATION: return Base::KEY_STR_DETERIORATION; break;
-    case Key::FUEL_MAX: return Base::KEY_STR_FUEL_MAX; break;
-    case Key::SPEED: return Base::KEY_STR_SPEED; break;
-    case Key::HYPER: return Base::KEY_STR_HYPER; break;
-    case Key::REPAIR: return Base::KEY_STR_REPAIR; break;
-    case Key::STRENGTH: return Base::KEY_STR_STRENGTH; break;
-    case Key::SCAN: return Base::KEY_STR_SCAN; break;
-    case Key::PROTECTION: return Base::KEY_STR_PROTECTION; break;
-    case Key::PRICE: return Base::KEY_STR_PRICE; break;
+    case Key::TYPE: return KEY_STR_TYPE; break;
+    case Key::RACE: return KEY_STR_RACE; break;
+    case Key::DAMAGE: return KEY_STR_DAMAGE; break;
+    case Key::RADIUS: return KEY_STR_RADIUS; break;
+    case Key::TECH: return KEY_STR_TECH; break;
+    case Key::MODULES_NUM: return KEY_STR_MODULES_NUM; break;
+    case Key::MASS: return KEY_STR_MASS; break;
+    case Key::CONDITION_MAX: return KEY_STR_CONDITION_MAX; break;
+    case Key::DETERIORATION: return KEY_STR_DETERIORATION; break;
+    case Key::FUEL_MAX: return KEY_STR_FUEL_MAX; break;
+    case Key::SPEED: return KEY_STR_SPEED; break;
+    case Key::HYPER: return KEY_STR_HYPER; break;
+    case Key::REPAIR: return KEY_STR_REPAIR; break;
+    case Key::STRENGTH: return KEY_STR_STRENGTH; break;
+    case Key::SCAN: return KEY_STR_SCAN; break;
+    case Key::PROTECTION: return KEY_STR_PROTECTION; break;
+    case Key::PRICE: return KEY_STR_PRICE; break;
     // vehicle
-    case Key::SPACE: return Base::KEY_STR_SPACE; break;
-    case Key::ARMOR: return Base::KEY_STR_ARMOR; break;
-    case Key::TEMPERATURE: return Base::KEY_STR_TEMPERATURE; break;
-    case Key::DRAW_TURRELS: return Base::KEY_STR_DRAW_TURRELS; break;
-    case Key::BAK_SLOT_NUM: return Base::KEY_STR_BAK_SLOT_NUM; break;
-    case Key::DRIVE_SLOT_NUM: return Base::KEY_STR_DRIVE_SLOT_NUM; break;
-    case Key::DROID_SLOT_NUM: return Base::KEY_STR_DROID_SLOT_NUM; break;
+    case Key::SPACE: return KEY_STR_SPACE; break;
+    case Key::ARMOR: return KEY_STR_ARMOR; break;
+    case Key::TEMPERATURE: return KEY_STR_TEMPERATURE; break;
+    case Key::DRAW_TURRELS: return KEY_STR_DRAW_TURRELS; break;
+    case Key::BAK_SLOT_NUM: return KEY_STR_BAK_SLOT_NUM; break;
+    case Key::DRIVE_SLOT_NUM: return KEY_STR_DRIVE_SLOT_NUM; break;
+    case Key::DROID_SLOT_NUM: return KEY_STR_DROID_SLOT_NUM; break;
         #ifdef USE_EXTRA_EQUIPMENT
-    case Key::ENERGIZER_SLOT_NUM: return Base::KEY_STR_ENERGIZER_SLOT_NUM; break;
-    case Key::FREEZER_SLOT_NUM: return Base::KEY_STR_FREEZER_SLOT_NUM; break;
+    case Key::ENERGIZER_SLOT_NUM: return KEY_STR_ENERGIZER_SLOT_NUM; break;
+    case Key::FREEZER_SLOT_NUM: return KEY_STR_FREEZER_SLOT_NUM; break;
         #endif // USE_EXTRA_EQUIPMENT
-    case Key::GRAPPLE_SLOT_NUM: return Base::KEY_STR_GRAPPLE_SLOT_NUM; break;
-    case Key::PROTECTOR_SLOT_NUM: return Base::KEY_STR_PROTECTOR_SLOT_NUM; break;
-    case Key::RADAR_SLOT_NUM: return Base::KEY_STR_RADAR_SLOT_NUM; break;
-    case Key::SCANER_SLOT_NUM: return Base::KEY_STR_SCANER_SLOT_NUM; break;
-    case Key::WEAPON_SLOT_NUM: return Base::KEY_STR_WEAPON_SLOT_NUM; break;
-    case Key::ARTEFACT_SLOT_NUM: return Base::KEY_STR_ARTEFACT_SLOT_NUM; break;
-    case Key::CARGO_SLOT_NUM: return Base::KEY_STR_CARGO_SLOT_NUM; break;
+    case Key::GRAPPLE_SLOT_NUM: return KEY_STR_GRAPPLE_SLOT_NUM; break;
+    case Key::PROTECTOR_SLOT_NUM: return KEY_STR_PROTECTOR_SLOT_NUM; break;
+    case Key::RADAR_SLOT_NUM: return KEY_STR_RADAR_SLOT_NUM; break;
+    case Key::SCANER_SLOT_NUM: return KEY_STR_SCANER_SLOT_NUM; break;
+    case Key::WEAPON_SLOT_NUM: return KEY_STR_WEAPON_SLOT_NUM; break;
+    case Key::ARTEFACT_SLOT_NUM: return KEY_STR_ARTEFACT_SLOT_NUM; break;
+    case Key::CARGO_SLOT_NUM: return KEY_STR_CARGO_SLOT_NUM; break;
     // dynamic
-    case Key::ID: return Base::KEY_STR_ID; break;
-    case Key::OWNER: return Base::KEY_STR_OWNER; break;
-    case Key::CHILD: return Base::KEY_STR_CHILD; break;
-    case Key::TARGET: return Base::KEY_STR_TARGET; break;
+    case Key::ID: return KEY_STR_ID; break;
+    case Key::OWNER: return KEY_STR_OWNER; break;
+    case Key::CHILD: return KEY_STR_CHILD; break;
+    case Key::TARGET: return KEY_STR_TARGET; break;
 
     default: throw std::runtime_error("ERROR: fixme: unknown descriptor key"); break;
     }
