@@ -94,50 +94,6 @@ std::string typeStr(const Type&);
 class Base
 {
 public:
-    // const
-    static std::string KEY_STR_TYPE;
-    static std::string KEY_STR_TARGET;
-    static std::string KEY_STR_DAMAGE;
-    static std::string KEY_STR_RADIUS;
-    static std::string KEY_STR_TECH;
-    static std::string KEY_STR_MODULES_NUM;
-    static std::string KEY_STR_MASS;
-    static std::string KEY_STR_CONDITION_MAX;
-    static std::string KEY_STR_DETERIORATION;
-    static std::string KEY_STR_FUEL_MAX;
-    static std::string KEY_STR_SPEED;
-    static std::string KEY_STR_HYPER;
-    static std::string KEY_STR_REPAIR;
-    static std::string KEY_STR_STRENGTH;
-    static std::string KEY_STR_SCAN;
-    static std::string KEY_STR_PROTECTION;
-    static std::string KEY_STR_PRICE;
-    // vehicle
-    static std::string KEY_STR_SPACE;
-    static std::string KEY_STR_ARMOR;
-    static std::string KEY_STR_TEMPERATURE;
-    static std::string KEY_STR_DRAW_TURRELS;
-    static std::string KEY_STR_BAK_SLOT_NUM;
-    static std::string KEY_STR_DRIVE_SLOT_NUM;
-    static std::string KEY_STR_DROID_SLOT_NUM;
-#ifdef USE_EXTRA_EQUIPMENT
-    static std::string KEY_STR_ENERGIZER_SLOT_NUM;
-    static std::string KEY_STR_FREEZER_SLOT_NUM;
-#endif // USE_EXTRA_EQUIPMENT
-    static std::string KEY_STR_GRAPPLE_SLOT_NUM;
-    static std::string KEY_STR_PROTECTOR_SLOT_NUM;
-    static std::string KEY_STR_RADAR_SLOT_NUM;
-    static std::string KEY_STR_SCANER_SLOT_NUM;
-    static std::string KEY_STR_WEAPON_SLOT_NUM;
-    static std::string KEY_STR_ARTEFACT_SLOT_NUM;
-    static std::string KEY_STR_CARGO_SLOT_NUM;
-
-    // dynamic
-    static std::string KEY_STR_ID;
-    static std::string KEY_STR_RACE;
-    static std::string KEY_STR_OWNER;
-    static std::string KEY_STR_CHILD;
-
     Base();
     Base(const std::map<Key, int_type>&);
     Base(const std::string& data);
