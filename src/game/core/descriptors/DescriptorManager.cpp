@@ -134,6 +134,7 @@ void DescriptorManager::generate()
     clear();
 
     for(int i=0; i<num; ++i) {
+        // items
         add(DescriptorGenerator::getNewBakDescriptor());
         add(DescriptorGenerator::getNewDriveDescriptor());
         add(DescriptorGenerator::getNewDroidDescriptor());
@@ -141,12 +142,12 @@ void DescriptorManager::generate()
         add(DescriptorGenerator::getNewScanerDescriptor());
         add(DescriptorGenerator::getNewRadarDescriptor());
         add(DescriptorGenerator::getNewProtectorDescriptor());
-
-        add(DescriptorGenerator::getNewStarSystemDescriptor());
         add(DescriptorGenerator::getNewBombDescriptor());
+
+        // spaceobjects
+        add(DescriptorGenerator::getNewStarSystemDescriptor());
+        add(DescriptorGenerator::getNewVehicleDescriptor());
     }
-
-
 
     save();
 }

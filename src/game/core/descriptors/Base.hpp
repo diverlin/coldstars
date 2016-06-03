@@ -32,6 +32,7 @@ namespace descriptor {
 enum class Key: int {
     // const
     TYPE,
+    OBJ_TYPE,
     RACE,
     DAMAGE,
     RADIUS,
@@ -53,6 +54,7 @@ enum class Key: int {
     ARMOR,
     TEMPERATURE,
     DRAW_TURRELS,
+    SIZE,
     BAK_SLOT_NUM,
     DRIVE_SLOT_NUM,
     DROID_SLOT_NUM,
@@ -85,7 +87,8 @@ enum class Type: int {
     GRAPPLE,
     SCANER,
     RADAR,
-    PROTECTOR
+    PROTECTOR,
+    VEHICLE
 };
 
 std::string keyStr(const Key&);
@@ -94,8 +97,8 @@ std::string typeStr(const Type&);
 class Base
 {
 public:
-    Base();
-    Base(const std::map<Key, int_type>&);
+    Base(Type);
+    Base(Type, const std::map<Key, int_type>&);
     Base(const std::string& data);
     ~Base();
 
@@ -105,10 +108,8 @@ public:
 
     const int_type& id() const;
     const int_type& type() const;
+    const int_type& objType() const;
     const int_type& race() const;
-    const int_type& owner() const;
-    const int_type& child() const;
-    const int_type& target() const;
     const int_type& damage() const;
     const int_type& radius() const;
     const int_type& tech() const;
@@ -130,6 +131,7 @@ public:
     const int_type& armor() const;
     const int_type& temperature() const;
     const int_type& drawTurrels() const;
+    const int_type& size() const;
     const int_type& bakSlotNum() const;
     const int_type& driveSlotNum() const;
     const int_type& droidSlotNum() const;
@@ -144,6 +146,11 @@ public:
     const int_type& weaponSlotNum() const;
     const int_type& artefactSlotNum() const;
     const int_type& cargoSlotNum() const;
+
+    // dynamic
+    const int_type& owner() const;
+    const int_type& child() const;
+    const int_type& target() const;
 
 public: // todo make it protected
     void add(const Key& key, const int_type& value);

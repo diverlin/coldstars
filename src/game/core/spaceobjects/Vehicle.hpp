@@ -31,7 +31,7 @@
 
 #include <types/StatusTypes.hpp>
 
-class VehicleSlot; 
+class VehicleSlot;
 class Land; 
 class Npc;
 class GoodsPack;

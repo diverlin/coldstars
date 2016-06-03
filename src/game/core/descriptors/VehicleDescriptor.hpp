@@ -25,9 +25,6 @@
 #include <types/RaceTypes.hpp>
 #include <types/EntityTypes.hpp>
 
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-
 class VehicleDescriptor
 {
     public:
@@ -58,41 +55,6 @@ class VehicleDescriptor
         int slot_otsec_num = 0;
                 
     VehicleDescriptor() {}
-    VehicleDescriptor(const std::string& data);
     ~VehicleDescriptor() {}
-
-    std::string data() const;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
-        ar & id;
-        ar & race_id;
-        ar & type_id;
-        ar & size_id;
-
-        ar & space;
-        ar & armor;
-        ar & protection;
-        ar & temperature;
-        ar & price;
-
-        ar & draw_turrels;
-
-        ar & slot_bak_num;
-        ar & slot_drive_num;
-        ar & slot_droid_num;
-        ar & slot_energizer_num;
-        ar & slot_grapple_num;
-        ar & slot_protector_num;
-        ar & slot_radar_num;
-        ar & slot_scaner_num;
-        ar & slot_freezer_num;
-        ar & slot_weapon_num;
-        ar & slot_artefact_num;
-        ar & slot_otsec_num;
-    }
 };
 

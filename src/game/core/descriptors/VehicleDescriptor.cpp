@@ -18,16 +18,5 @@
 
 
 #include "VehicleDescriptor.hpp"
-#include <serialization/Serialization.hpp>
 
-#include <sstream>
 
-VehicleDescriptor::VehicleDescriptor(const std::string& data)
-{
-    MACRO_READ_SERIALIZED_DATA
-}
-
-std::string VehicleDescriptor::data() const
-{
-    MACRO_SAVE_SERIALIZED_DATA
-}

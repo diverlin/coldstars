@@ -40,16 +40,22 @@
 #include <communication/MessageManager.hpp>
 #include <managers/EntityManager.hpp>
 
+//Ship* createNewShip()
+//{
+//    auto descriptor = generateVehicleDescriptor();
+//    global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor.data()));
+
+//    Ship* ship = static_cast<Ship*>(global::get().entityManager().get(descriptor.id));
+//    assert(ship);
+//    return ship;
+//}
+
 Ship* createNewShip()
 {
-    auto descriptor = generateVehicleDescriptor();
-    global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor.data()));
-
-    Ship* ship = static_cast<Ship*>(global::get().entityManager().get(descriptor.id));
+    Ship* ship = global::get().shipBuilder().create();
     assert(ship);
     return ship;
 }
-
 
 Bomb* createNewBomb(int damage, int radius)
 {

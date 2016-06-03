@@ -22,9 +22,10 @@
 namespace descriptor {
 
 Container::Container(const id_type& id, const id_type& child_id)
+    :
+      Base(Type::CONTAINER)
 {
     add(Key::ID, id);
-    add(Key::TYPE, int(Type::CONTAINER));
     add(Key::CHILD, child_id);
 }
 

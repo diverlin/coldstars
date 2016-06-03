@@ -42,6 +42,7 @@ private:
     static descriptor::Base getNewScanerDescriptor(int race = -1, int tech_level = -1);
     static descriptor::Base getNewRadarDescriptor(int race = -1, int tech_level = -1);
     static descriptor::Base getNewProtectorDescriptor(int race = -1, int tech_level = -1);
+    static descriptor::Base getNewVehicleDescriptor();
 
     static IdGenerator m_idGenerator;
 

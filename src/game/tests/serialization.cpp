@@ -40,11 +40,6 @@ TEST(base,serialization)
     EXPECT_TRUE(hit2.target() == hit1.target());
     EXPECT_TRUE(hit2.damage() == hit1.damage());
 
-    VehicleDescriptor vehicle1;
-    vehicle1.race_id = TYPE::RACE::R7_ID;
-    VehicleDescriptor vehicle2(vehicle1.data());
-    EXPECT_TRUE(vehicle2.race_id == vehicle1.race_id);
-
 //    descriptor::Explosion explosion1(0, glm::vec3(100,200,300),0,0);
 //    descriptor::Explosion explosion2(explosion1.data());
 //    EXPECT_TRUE(explosion1.center.x == explosion2.center.x);
@@ -54,7 +49,8 @@ TEST(base,serialization)
 
 TEST(descriptor,serialization)
 {
-    descriptor::Base descriptor({{descriptor::Key::ID, 11},
+    descriptor::Base descriptor(descriptor::Type::HIT,
+                                {{descriptor::Key::ID, 11},
                                  {descriptor::Key::DAMAGE, 22},
                                  {descriptor::Key::RADIUS, 33}});
     descriptor::Base descriptor2(descriptor.data());
