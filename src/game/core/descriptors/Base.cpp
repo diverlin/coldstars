@@ -23,7 +23,9 @@
 namespace descriptor {
 
 namespace {
+const std::string KEY_STR_ID = "id";
 const std::string KEY_STR_TYPE = "type";
+const std::string KEY_STR_OBJ_TYPE = "obj_type";
 const std::string KEY_STR_RACE = "race";
 const std::string KEY_STR_DAMAGE = "damage";
 const std::string KEY_STR_RADIUS = "radius";
@@ -45,6 +47,7 @@ const std::string KEY_STR_SPACE = "space";
 const std::string KEY_STR_ARMOR = "armor";
 const std::string KEY_STR_TEMPERATURE = "temperature";
 const std::string KEY_STR_DRAW_TURRELS = "draw_turrels";
+const std::string KEY_STR_SIZE = "size";
 const std::string KEY_STR_BAK_SLOT_NUM = "bak_slot_num";
 const std::string KEY_STR_DRIVE_SLOT_NUM = "drive_slot_num";
 const std::string KEY_STR_DROID_SLOT_NUM = "droid_slot_num";
@@ -61,7 +64,6 @@ const std::string KEY_STR_ARTEFACT_SLOT_NUM = "artefact_slot_num";
 const std::string KEY_STR_CARGO_SLOT_NUM = "cargo_slot_num";
 
 // dynamic
-const std::string KEY_STR_ID = "id";
 const std::string KEY_STR_OWNER = "owner";
 const std::string KEY_STR_CHILD = "child";
 const std::string KEY_STR_TARGET = "target";
@@ -70,6 +72,8 @@ const std::string KEY_STR_TARGET = "target";
 std::string keyStr(const Key& key) {
     switch(key) {
     // const
+    case Key::ID: return KEY_STR_ID; break;
+    case Key::OBJ_TYPE: return KEY_STR_OBJ_TYPE; break;
     case Key::TYPE: return KEY_STR_TYPE; break;
     case Key::RACE: return KEY_STR_RACE; break;
     case Key::DAMAGE: return KEY_STR_DAMAGE; break;
@@ -92,6 +96,7 @@ std::string keyStr(const Key& key) {
     case Key::ARMOR: return KEY_STR_ARMOR; break;
     case Key::TEMPERATURE: return KEY_STR_TEMPERATURE; break;
     case Key::DRAW_TURRELS: return KEY_STR_DRAW_TURRELS; break;
+    case Key::SIZE: return KEY_STR_SIZE; break;
     case Key::BAK_SLOT_NUM: return KEY_STR_BAK_SLOT_NUM; break;
     case Key::DRIVE_SLOT_NUM: return KEY_STR_DRIVE_SLOT_NUM; break;
     case Key::DROID_SLOT_NUM: return KEY_STR_DROID_SLOT_NUM; break;
@@ -107,7 +112,6 @@ std::string keyStr(const Key& key) {
     case Key::ARTEFACT_SLOT_NUM: return KEY_STR_ARTEFACT_SLOT_NUM; break;
     case Key::CARGO_SLOT_NUM: return KEY_STR_CARGO_SLOT_NUM; break;
     // dynamic
-    case Key::ID: return KEY_STR_ID; break;
     case Key::OWNER: return KEY_STR_OWNER; break;
     case Key::CHILD: return KEY_STR_CHILD; break;
     case Key::TARGET: return KEY_STR_TARGET; break;
@@ -129,17 +133,20 @@ std::string typeStr(const Type& type) {
     case Type::SCANER: return "Type::SCANER"; break;
     case Type::RADAR: return "Type::RADAR"; break;
     case Type::PROTECTOR: return "Type::PROTECTOR"; break;
+    case Type::VEHICLE: return "Type::VEHICLE"; break;
     default: throw std::runtime_error("ERROR: fixme: unknown descriptor key"); break;
     }
 }
 
-Base::Base()
+Base::Base(Type type)
 {
+    add(Key::TYPE, (int)type);
 }
 
-Base::Base(const std::map<Key, int_type>& map)
+Base::Base(Type type, const std::map<Key, int_type>& map)
     : m_map(map)
 {
+    add(Key::TYPE, (int)type);
 }
 
 Base::Base(const std::string& data)
@@ -176,10 +183,8 @@ Base::add(const Key& key, const int_type& value)
 
 const int_type& Base::id() const { return get(Key::ID); }
 const int_type& Base::type() const { return get(Key::TYPE); }
+const int_type& Base::objType() const { return get(Key::OBJ_TYPE); }
 const int_type& Base::race() const { return get(Key::RACE); }
-const int_type& Base::owner() const { return get(Key::OWNER); }
-const int_type& Base::child() const { return get(Key::CHILD); }
-const int_type& Base::target() const { return get(Key::TARGET); }
 const int_type& Base::damage() const { return get(Key::DAMAGE); }
 const int_type& Base::radius() const { return get(Key::RADIUS); }
 const int_type& Base::tech() const { return get(Key::TECH); }
@@ -200,6 +205,7 @@ const int_type& Base::space() const { return get(Key::SPACE); }
 const int_type& Base::armor() const { return get(Key::ARMOR); }
 const int_type& Base::temperature() const { return get(Key::TEMPERATURE); }
 const int_type& Base::drawTurrels() const { return get(Key::DRAW_TURRELS); }
+const int_type& Base::size() const { return get(Key::SIZE); }
 const int_type& Base::bakSlotNum() const { return get(Key::BAK_SLOT_NUM); }
 const int_type& Base::driveSlotNum() const { return get(Key::DRIVE_SLOT_NUM); }
 const int_type& Base::droidSlotNum() const { return get(Key::DROID_SLOT_NUM); }
@@ -215,6 +221,10 @@ const int_type& Base::weaponSlotNum() const { return get(Key::WEAPON_SLOT_NUM); 
 const int_type& Base::artefactSlotNum() const { return get(Key::ARTEFACT_SLOT_NUM); }
 const int_type& Base::cargoSlotNum() const { return get(Key::CARGO_SLOT_NUM); }
 
+// dynamic
+const int_type& Base::owner() const { return get(Key::OWNER); }
+const int_type& Base::child() const { return get(Key::CHILD); }
+const int_type& Base::target() const { return get(Key::TARGET); }
 
 bool
 Base::operator==(const Base& rhs) const

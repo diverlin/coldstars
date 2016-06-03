@@ -104,7 +104,7 @@ void StoreBuilder::PutRandomEquipment(Store* store) const
     unsigned int energyBlock_num = 1;
 
     for (unsigned int i=0; i<vehicle_num; i++) {
-        store->addVehicle(global::get().shipBuilder().create(generateVehicleDescriptor()));
+        store->addVehicle(global::get().shipBuilder().create());
     }
     for (unsigned int i=0; i<lazer_num; i++) {
         store->addItem(global::get().lazerBuilder().create());

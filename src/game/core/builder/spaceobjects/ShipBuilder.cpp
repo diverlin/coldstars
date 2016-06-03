@@ -22,7 +22,7 @@
 #include <spaceobjects/Ship.hpp>
 
 //#include <descriptors/RaceDescriptors.hpp>
-#include <descriptors/VehicleDescriptor.hpp>
+#include <descriptors/DescriptorManager.hpp>
 
 #include <common/constants.hpp>
 //#include <math/rand.hpp>
@@ -35,21 +35,31 @@ ShipBuilder::ShipBuilder()
 ShipBuilder::~ShipBuilder()
 {}
 
-Ship* ShipBuilder::create(const VehicleDescriptor& descriptor) const
-{            
-    Ship* ship = new Ship(descriptor.id);
+Ship* ShipBuilder::create() const
+{
+    const auto& descr = global::get().descriptors().getRand(descriptor::Type::VEHICLE);
+    Ship* ship = new Ship(global::get().idGenerator().nextId());
     assert(ship);
     global::get().entityManager().reg(ship);
-    createInternals(ship, descriptor);
+    createInternals(ship, descr);
+    return ship;
+}
+
+Ship* ShipBuilder::create(const descriptor::Base& descr) const
+{            
+    Ship* ship = new Ship(global::get().idGenerator().nextId());
+    assert(ship);
+    global::get().entityManager().reg(ship);
+    createInternals(ship, descr);
     return ship;
 }
 
 Ship* ShipBuilder::create(const std::string& data) const
 {
-    return create(VehicleDescriptor(data));
+    return create(descriptor::Base(data));
 }
 
-void ShipBuilder::createInternals(Ship* ship, const VehicleDescriptor& descriptor) const
+void ShipBuilder::createInternals(Ship* ship, const descriptor::Base& descr) const
 {
     //jeti::Mesh* mesh = nullptr;
     //jeti::TextureOb* texOb = nullptr;
@@ -77,8 +87,38 @@ void ShipBuilder::createInternals(Ship* ship, const VehicleDescriptor& descripto
 //        }
 //    }
 
-    ship->setSubSubTypeId(descriptor.type_id);
-    ship->SetKorpusData(descriptor);
+    ship->setSubSubTypeId((TYPE::ENTITY)descr.type());
+
+    VehicleDescriptor vehicleDescriptor;
+    vehicleDescriptor.id = descr.id();
+    vehicleDescriptor.race_id = (TYPE::RACE)descr.race();
+    vehicleDescriptor.type_id = (TYPE::ENTITY)descr.type();
+    vehicleDescriptor.size_id = descr.size();
+
+    vehicleDescriptor.space = descr.space();
+    vehicleDescriptor.armor = descr.armor();
+    vehicleDescriptor.protection = descr.protection();
+    vehicleDescriptor.temperature = descr.temperature();
+    vehicleDescriptor.price = descr.price();
+
+    vehicleDescriptor.draw_turrels = descr.drawTurrels();
+
+    vehicleDescriptor.slot_bak_num = descr.bakSlotNum();
+    vehicleDescriptor.slot_drive_num = descr.driveSlotNum();
+    vehicleDescriptor.slot_droid_num = descr.droidSlotNum();
+#ifdef USE_EXTRA_EQUIPMENT
+    vehicleDescriptor.slot_energizer_num = descr.energizerSlotNum();
+    vehicleDescriptor.slot_freezer_num = descr.freezerSlotNum();
+#endif // USE_EXTRA_EQUIPMENT
+    vehicleDescriptor.slot_grapple_num = descr.grappleSlotNum();
+    vehicleDescriptor.slot_protector_num = descr.protectorSlotNum();
+    vehicleDescriptor.slot_radar_num = descr.radarSlotNum();
+    vehicleDescriptor.slot_scaner_num = descr.scanerSlotNum();
+    vehicleDescriptor.slot_weapon_num = descr.weaponSlotNum();
+    vehicleDescriptor.slot_artefact_num = descr.artefactSlotNum();
+    vehicleDescriptor.slot_otsec_num = descr.cargoSlotNum();
+
+    ship->SetKorpusData(vehicleDescriptor);
 
 //    float scale_comp = meti::getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
 //    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
@@ -96,7 +136,7 @@ void ShipBuilder::createInternals(Ship* ship, const VehicleDescriptor& descripto
     //alpitodorender ship->SetRenderData(mesh, texOb, scale);
 
     LifeData data_life;
-    data_life.armor      = descriptor.armor * 0.1;
+    data_life.armor      = descr.armor() * 0.1;
     data_life.dying_time = ship->collisionRadius() * 0.1;
     ship->setLifeData(data_life);
     

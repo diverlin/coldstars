@@ -21,4 +21,4 @@
 
 #include <descriptors/VehicleDescriptor.hpp>
 
-VehicleDescriptor generateVehicleDescriptor();
+//VehicleDescriptor generateVehicleDescriptor();

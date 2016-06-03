@@ -30,17 +30,18 @@ class VehicleDescriptor;
 
 class ShipBuilder : public BaseVehicleBuilder
 {
-    public:
-        ShipBuilder();
-        ~ShipBuilder();
-        
-        Ship* create(const VehicleDescriptor& descriptor) const;
-        Ship* create(const std::string& data) const;
+public:
+    ShipBuilder();
+    ~ShipBuilder();
 
-    private:
-        void createInternals(Ship* ship, const VehicleDescriptor& descriptor) const;
+    Ship* create() const;
+    Ship* create(const descriptor::Base&) const;
+    Ship* create(const std::string&) const;
+
+private:
+    void createInternals(Ship*, const descriptor::Base&) const;
 }; 
 
-        
+
 
 
