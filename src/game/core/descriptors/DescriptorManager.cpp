@@ -38,7 +38,7 @@ DescriptorManager::~DescriptorManager()
 void
 DescriptorManager::add(const descriptor::Base& descriptor)
 {
-    std::cout<<"add descriptor with type"<<descriptor::typeStr((descriptor::Type)descriptor.type())<<std::endl;
+    //std::cout<<"add descriptor with type"<<descriptor::typeStr((descriptor::Type)descriptor.type())<<std::endl;
     const id_type id = descriptor.id();
     int type = descriptor.type();
 
