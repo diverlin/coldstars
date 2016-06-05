@@ -18,13 +18,15 @@
 
 #pragma once
 
+#include <common/constants.hpp>
+
 /* this data is changed during game play, the propetries depends on many factors */
 struct VehiclePropetries
 {    
     int free_space = 0;
 
     int protection = 0;
-    int radar = 0;
+    int radar = VISIBLE_DISTANCE_WITHOUT_RADAR;
     float speed = 0;  // depends on mass and drive
 
     int energy = 0;

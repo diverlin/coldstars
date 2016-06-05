@@ -31,7 +31,7 @@ namespace equipment {
 
 Droid::Droid(const id_type& id)
     :
-      repair_orig(0)
+      m_repair_orig(0)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
@@ -45,14 +45,14 @@ Droid::~Droid()
 /* virtual */
 void Droid::updateProperties()
 {
-    repair_add = 0;
+    m_repair_add = 0;
 #ifdef USE_MODULES
     for (unsigned int i = 0; i < modules_vec.size(); i++)
     {
         repair_add += ((DroidModule*)modules_vec[i])->GetRepairAdd();
     }
 #endif
-    repair = repair_orig + repair_add;
+    m_repair = m_repair_orig + m_repair_add;
 }
 
 /* virtual */
@@ -60,7 +60,7 @@ void Droid::updateInStatic()
 {
     if (isFunctioning()) {
         if (!itemSlot()->vehicleOwner()->isArmorFull()) {
-            itemSlot()->vehicleOwner()->increaseArmor(repair);
+            itemSlot()->vehicleOwner()->increaseArmor(m_repair);
             deteriorationEvent();
         }
     }
@@ -69,7 +69,7 @@ void Droid::updateInStatic()
 
 void Droid::CountPrice()
 {
-    float repair_rate        = (float)repair_orig / EQUIPMENT::DROID::REPAIR_MIN;
+    float repair_rate        = (float)m_repair_orig / EQUIPMENT::DROID::REPAIR_MIN;
     float modules_num_rate   = (float)modulesNum() / EQUIPMENT::DROID::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::DROID::REPAIR_WEIGHT * repair_rate +
@@ -90,10 +90,10 @@ void Droid::addUniqueInfo()
 
 std::string Droid::GetRepairStr()
 {
-    if (repair_add == 0)
-        return std::to_string(repair_orig);
+    if (m_repair_add == 0)
+        return std::to_string(m_repair_orig);
     else
-        return std::to_string(repair_orig) + "+" + std::to_string(repair_add);
+        return std::to_string(m_repair_orig) + "+" + std::to_string(m_repair_add);
 }
 
 /*virtual*/
@@ -129,14 +129,14 @@ void Droid::SaveData(boost::property_tree::ptree& save_ptree, const std::string&
 {
     LOG(" DroidEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"repair_orig", repair_orig);
+    save_ptree.put(root+"repair_orig", m_repair_orig);
 }
 
 void Droid::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" DroidEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
-    repair_orig = load_ptree.get<int>("repair_orig");
+    m_repair_orig = load_ptree.get<int>("repair_orig");
 }                
 
 void Droid::ResolveData()

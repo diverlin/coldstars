@@ -30,8 +30,8 @@ public:
     Droid(const id_type& id);
     virtual ~Droid();
 
-    void SetRepairOrig(int repair_orig) { this->repair_orig = repair_orig; };
-    int GetRepair() const { return repair; };
+    void SetRepairOrig(int repair_orig) { m_repair_orig = repair_orig; }
+    int repair() const { return m_repair; }
 
     virtual void updateProperties();
     virtual void updateInStatic();
@@ -43,9 +43,9 @@ public:
     virtual void Resolve();
 
 private:
-    int repair_orig;
-    int repair_add;
-    int repair;
+    int m_repair_orig;
+    int m_repair_add;
+    int m_repair;
 
     void virtual addUniqueInfo();
     std::string GetRepairStr();

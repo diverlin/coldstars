@@ -77,17 +77,18 @@ public:
     TYPE::ENTITY parentSubTypeId() const { return m_parent_subtype_id; }
     TYPE::RACE race() const { return m_race_id; }
 
-    bool isDamaged()    const { return (m_condition < 0); }
+    bool isDamaged()    const { return (m_condition <= 0); }
     bool isLocked()     const { return (m_locked_turns > 0); }
     int isFunctioning() const { return ( !isDamaged() && !isLocked() ); }
 
     void useNormalDeterioration();
     void useOverloadDeterioration();
 
-    void damageEvent();
+    void doBreak();
     void deteriorationEvent();
-    void lockEvent(int);
-    bool repairEvent();
+    void doLock(int lock = 1);
+    void doUnlock();
+    bool doRepair();
 
     virtual void updateProperties() {}
     virtual void updateInStatic() { updateLock(); }

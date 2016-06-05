@@ -19,6 +19,7 @@
 #include <gtest/gtest.h>
 
 #include <common/Global.hpp>
+#include <common/constants.hpp>
 
 #include <slots/ItemSlot.hpp>
 #include <spaceobjects/Ship.hpp>
@@ -64,108 +65,284 @@ TEST(creation,bak)
     commonDataItemCheck(descr, bak_equipment);
 }
 
+
+// fill for rest items
+
 TEST(equipment, bak)
 {
-    Ship* ship = createNewShip();
-    item::equipment::Bak* bak_equipment = global::get().bakBuilder().getNew();
+    Ship* ship = getNewShip();
+    item::equipment::Bak* bak = global::get().bakBuilder().getNew();
 
-    EXPECT_TRUE(ship->driveComplex().GetBakSlot() != nullptr);
-    EXPECT_TRUE(ship->driveComplex().GetBakSlot()->item() == nullptr);
+    // initial
+    EXPECT_TRUE(ship->driveComplex().bakSlot() != nullptr);
+    EXPECT_TRUE(ship->driveComplex().bakSlot()->item() == nullptr);
     EXPECT_EQ(ship->properties().hyper, 0);
-    ship->manage(bak_equipment);
-    EXPECT_TRUE(ship->driveComplex().GetBakSlot()->item() != nullptr);
+
+    // insert item
+    ship->manage(bak);
+
+    // prop check
+    EXPECT_TRUE(ship->driveComplex().bakSlot()->item() != nullptr);
     EXPECT_EQ(ship->properties().hyper, 0); // no drive is set, that's why hyper is 0
 }
 
 TEST(equipment, drive)
 {
-    Ship* ship = createNewShip();
-    item::equipment::Drive* drive_equipment = global::get().driveBuilder().getNew();
+    Ship* ship = getNewShip();
+    item::equipment::Drive* drive = global::get().driveBuilder().getNew();
 
-    EXPECT_TRUE(ship->driveComplex().GetDriveSlot() != nullptr);
-    EXPECT_TRUE(ship->driveComplex().GetDriveSlot()->item() == nullptr);
+    // initial
+    EXPECT_TRUE(ship->driveComplex().driveSlot() != nullptr);
+    EXPECT_TRUE(ship->driveComplex().driveSlot()->item() == nullptr);
     EXPECT_EQ(ship->properties().hyper, 0);
-    ship->manage(drive_equipment);
-    EXPECT_TRUE(ship->driveComplex().GetDriveSlot()->item() != nullptr);
+
+    // insert item
+    ship->manage(drive);
+
+    // prop check
+    EXPECT_TRUE(ship->driveComplex().driveSlot()->item() != nullptr);
     EXPECT_EQ(ship->properties().hyper, 0); // no bak is set that's why hyper is 0
 }
 
 TEST(equipment, bak_and_drive)
 {
-    Ship* ship = createNewShip();
-    item::equipment::Bak* bak_equipment = global::get().bakBuilder().getNew();
-    item::equipment::Drive* drive_equipment = global::get().driveBuilder().getNew();
+    Ship* ship = getNewShip();
+    item::equipment::Bak* bak = global::get().bakBuilder().getNew();
+    item::equipment::Drive* drive = global::get().driveBuilder().getNew();
 
+    // initial
     EXPECT_EQ(ship->properties().hyper, 0);
-    ship->manage(bak_equipment);
-    ship->manage(drive_equipment);
-    EXPECT_EQ(ship->properties().hyper, std::min(bak_equipment->fuel(), drive_equipment->hyper()));
+
+    // insert items
+    ship->manage(bak);
+    ship->manage(drive);
+
+    // prop check
+    int hyper = std::min(bak->fuel(), drive->hyper());
+    EXPECT_EQ(ship->properties().hyper, hyper);
+
+    // lock item
+    bak->doLock();
+    EXPECT_EQ(ship->properties().hyper, 0);
+
+    // unlock item
+    bak->doUnlock();
+    EXPECT_EQ(ship->properties().hyper, hyper);
+
+    // damage
+    bak->doBreak();
+    EXPECT_EQ(ship->properties().hyper, 0);
+
+    // repair
+    bak->doRepair();
+    EXPECT_EQ(ship->properties().hyper, hyper);
+
+    // lock item
+    drive->doLock();
+    EXPECT_EQ(ship->properties().hyper, 0);
+
+    // unlock item
+    drive->doUnlock();
+    EXPECT_EQ(ship->properties().hyper, hyper);
+
+    // damage
+    drive->doBreak();
+    EXPECT_EQ(ship->properties().hyper, 0);
+
+    // repair
+    drive->doRepair();
+    EXPECT_EQ(ship->properties().hyper, hyper);
 }
 
 TEST(equipment, droid)
 {
-    Ship* ship = createNewShip();
-    item::equipment::Droid* droid_equipment = global::get().droidBuilder().getNew();
+    Ship* ship = getNewShip();
+    item::equipment::Droid* droid = global::get().droidBuilder().getNew();
 
+    // initial
     EXPECT_TRUE(ship->droidSlot()->item() == nullptr);
-    ship->manage(droid_equipment);
+    EXPECT_EQ(ship->properties().repair, 0);
+
+    // item insert
+    ship->manage(droid);
     EXPECT_TRUE(ship->droidSlot()->item() != nullptr);
+
+    // prop check
+    EXPECT_EQ(ship->properties().repair, droid->repair());
+
+    // lock item
+    droid->doLock();
+    EXPECT_EQ(ship->properties().repair, 0);
+
+    // unlock item
+    droid->doUnlock();
+    EXPECT_EQ(ship->properties().repair, droid->repair());
+
+    // damage
+    droid->doBreak();
+    EXPECT_EQ(ship->properties().repair, 0);
+
+    // repair
+    droid->doRepair();
+    EXPECT_EQ(ship->properties().repair, droid->repair());
 }
 
 TEST(equipment, grapple)
 {
-    Ship* ship = createNewShip();
-    item::equipment::Grapple* grapple_equipment = global::get().grappleBuilder().getNew();
+    Ship* ship = getNewShip();
+    item::equipment::Grapple* grapple = global::get().grappleBuilder().getNew();
 
+    // initial
     EXPECT_TRUE(ship->grappleSlot()->item() == nullptr);
-    ship->manage(grapple_equipment);
+    EXPECT_EQ(ship->properties().grab_strength, 0);
+    EXPECT_EQ(ship->properties().grab_radius, 0);
+
+    // item insert
+    ship->manage(grapple);
     EXPECT_TRUE(ship->grappleSlot()->item() != nullptr);
+
+    // prop check
+    EXPECT_EQ(ship->properties().grab_strength, grapple->strength());
+    EXPECT_EQ(ship->properties().grab_radius, grapple->radius());
+
+    // grapple item
+    grapple->doLock();
+    EXPECT_EQ(ship->properties().grab_strength, 0);
+    EXPECT_EQ(ship->properties().grab_radius, 0);
+
+    // unlock item
+    grapple->doUnlock();
+    EXPECT_EQ(ship->properties().grab_strength, grapple->strength());
+    EXPECT_EQ(ship->properties().grab_radius, grapple->radius());
+
+    // damage
+    grapple->doBreak();
+    EXPECT_EQ(ship->properties().grab_strength, 0);
+    EXPECT_EQ(ship->properties().grab_radius, 0);
+
+    // repair
+    grapple->doRepair();
+    EXPECT_EQ(ship->properties().grab_strength, grapple->strength());
+    EXPECT_EQ(ship->properties().grab_radius, grapple->radius());
 }
 
 TEST(equipment, scaner)
 {
-    Ship* ship = createNewShip();
-    item::equipment::Scaner* scaner_equipment = global::get().scanerBuilder().getNew();
+    Ship* ship = getNewShip();
+    item::equipment::Scaner* scaner = global::get().scanerBuilder().getNew();
 
+    // initial
     EXPECT_TRUE(ship->scanerSlot()->item() == nullptr);
-    ship->manage(scaner_equipment);
+    EXPECT_EQ(ship->properties().scan, 0);
+
+    // item insert
+    ship->manage(scaner);
     EXPECT_TRUE(ship->scanerSlot()->item() != nullptr);
+
+    // prop check
+    EXPECT_EQ(ship->properties().scan, scaner->scan());
+
+    // lock item
+    scaner->doLock();
+    EXPECT_EQ(ship->properties().scan, 0);
+
+    // unlock item
+    scaner->doUnlock();
+    EXPECT_EQ(ship->properties().scan, scaner->scan());
+
+    // damage
+    scaner->doBreak();
+    EXPECT_EQ(ship->properties().scan, 0);
+
+    // repair
+    scaner->doRepair();
+    EXPECT_EQ(ship->properties().scan, scaner->scan());
 }
 
 TEST(equipment, radar)
 {
-    Ship* ship = createNewShip();
-    item::equipment::Radar* radar_equipment = global::get().radarBuilder().getNew();
+    Ship* ship = getNewShip();
+    item::equipment::Radar* radar = global::get().radarBuilder().getNew();
 
+    // initial
     EXPECT_TRUE(ship->radarSlot()->item() == nullptr);
-    ship->manage(radar_equipment);
+    EXPECT_EQ(ship->properties().radar, VISIBLE_DISTANCE_WITHOUT_RADAR);
+
+    // item insert
+    ship->manage(radar);
     EXPECT_TRUE(ship->radarSlot()->item() != nullptr);
+
+    // prop check
+    EXPECT_EQ(ship->properties().radar, radar->radius());
+
+    // lock item
+    radar->doLock();
+    EXPECT_EQ(ship->properties().radar, VISIBLE_DISTANCE_WITHOUT_RADAR);
+
+    // unlock item
+    radar->doUnlock();
+    EXPECT_EQ(ship->properties().radar, radar->radius());
+
+    // damage
+    radar->doBreak();
+    EXPECT_EQ(ship->properties().radar, VISIBLE_DISTANCE_WITHOUT_RADAR);
+
+    // repair
+    radar->doRepair();
+    EXPECT_EQ(ship->properties().radar, radar->radius());
 }
 
 TEST(equipment, protector)
 {
-    Ship* ship = createNewShip();
-    item::equipment::Protector* protector_equipment = global::get().protectorBuilder().getNew();
+    Ship* ship = getNewShip();
+    item::equipment::Protector* protector = global::get().protectorBuilder().getNew();
 
-    EXPECT_TRUE(ship->protectorComplex().GetProtectorSlot()->item() == nullptr);
-    ship->manage(protector_equipment);
-    EXPECT_TRUE(ship->protectorComplex().GetProtectorSlot()->item() != nullptr);
+    // initial
+    EXPECT_TRUE(ship->protectorComplex().protectorSlot()->item() == nullptr);
+    EXPECT_EQ(ship->properties().protection, ship->vehicleDescriptor().protection);
+
+    // item insert
+    ship->manage(protector);
+    EXPECT_TRUE(ship->protectorComplex().protectorSlot()->item() != nullptr);
+
+    // prop check
+    int protection = ship->vehicleDescriptor().protection + protector->protection();
+    EXPECT_EQ(ship->properties().protection, protection);
+
+    // lock item
+    protector->doLock();
+    EXPECT_EQ(ship->properties().protection, ship->vehicleDescriptor().protection);
+
+    // unlock item
+    protector->doUnlock();
+    EXPECT_EQ(ship->properties().protection, protection);
+
+    // damage
+    protector->doBreak();
+    EXPECT_EQ(ship->properties().protection, ship->vehicleDescriptor().protection);
+
+    // repair
+    protector->doRepair();
+    EXPECT_EQ(ship->properties().protection, protection);
 }
 
 TEST(equipment, freespace)
 {
-    Ship* ship = createNewShip();
+    Ship* ship = getNewShip();
 
-    std::vector<item::equipment::Protector*> items = global::get().protectorBuilder().getNew(3);
+    // initial
     EXPECT_EQ(ship->mass(), ship->freeSpace());
 
-    int weight_extra = 0;
+    // generate and insert items
+    std::vector<item::equipment::Protector*> items = global::get().protectorBuilder().getNew(3);
+    int weight = 0;
     for (auto item: items) {
-        weight_extra += item->mass();
+        weight += item->mass();
         ship->manage(item);
     }
 
-    EXPECT_EQ(ship->freeSpace(), ship->space() - weight_extra);
-    EXPECT_EQ(weight_extra, ship->mass());
+    // check space
+    EXPECT_EQ(ship->freeSpace(), ship->space() - weight);
+    EXPECT_EQ(ship->mass(), weight);
 }
 

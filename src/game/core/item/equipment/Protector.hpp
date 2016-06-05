@@ -30,8 +30,8 @@ class Protector  : public Base
         Protector(const id_type& id);
         virtual ~Protector();
 
-        void SetProtectionOrig(int protection_orig) { this->protection_orig = protection_orig; };
-        int GetProtection() const { return protection; };
+        void SetProtectionOrig(int protection_orig) { m_protection_orig = protection_orig; }
+        int protection() const { return m_protection; }
 
         virtual void updateProperties();
 
@@ -42,9 +42,9 @@ class Protector  : public Base
         virtual void Resolve();
         
     private:
-        int protection_orig;
-        int protection_add;
-        int protection;
+        int m_protection_orig;
+        int m_protection_add;
+        int m_protection;
 
         void virtual addUniqueInfo();
         std::string GetProtectionStr();

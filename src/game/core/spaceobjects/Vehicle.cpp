@@ -726,9 +726,9 @@ void Vehicle::CheckNeedsInStatic()
 
     // check fuel
     m_needs.get_fuel = false;
-    if (m_driveComplex.GetBakSlot()) {
-        if (m_driveComplex.GetBakSlot()->item()) {
-            if (m_driveComplex.GetBakSlot()->bakEquipment()->fuel() < 0.8*m_driveComplex.GetBakSlot()->bakEquipment()->fuelMax()) {
+    if (m_driveComplex.bakSlot()) {
+        if (m_driveComplex.bakSlot()->item()) {
+            if (m_driveComplex.bakSlot()->bakEquipment()->fuel() < 0.8*m_driveComplex.bakSlot()->bakEquipment()->fuelMax()) {
                 m_needs.get_fuel = true;
             }
         }
@@ -819,14 +819,14 @@ void Vehicle::_updatePropSpeed()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesSpeed");
     m_properties.speed = 0;
-    if (!m_driveComplex.GetDriveSlot())
+    if (!m_driveComplex.driveSlot())
         return;
-    if (!m_driveComplex.GetDriveSlot()->item())
+    if (!m_driveComplex.driveSlot()->item())
         return;
-    if (!m_driveComplex.GetDriveSlot()->driveEquipment()->isFunctioning())
+    if (!m_driveComplex.driveSlot()->driveEquipment()->isFunctioning())
         return;
 
-    float actual_speed = (m_driveComplex.GetDriveSlot()->driveEquipment()->speed() - mass()*MASS_DECREASE_SPEED_RATE);
+    float actual_speed = (m_driveComplex.driveSlot()->driveEquipment()->speed() - mass()*MASS_DECREASE_SPEED_RATE);
     if (actual_speed > 0) {
         if (m_properties.artefact_gravity > 0) {
             m_properties.speed = (1.0 + m_properties.artefact_gravity/100.0)*actual_speed;
@@ -834,11 +834,11 @@ void Vehicle::_updatePropSpeed()
             m_properties.speed = actual_speed;
         }
 
-        if (m_driveComplex.GetDriveSlot()->GetSelected() == true) {
+        if (m_driveComplex.driveSlot()->GetSelected() == true) {
             m_properties.speed *= EQUIPMENT::DRIVE::OVERLOAD_RATE;
-            m_driveComplex.GetDriveSlot()->item()->useOverloadDeterioration();
+            m_driveComplex.driveSlot()->item()->useOverloadDeterioration();
         } else {
-            m_driveComplex.GetDriveSlot()->item()->useNormalDeterioration();
+            m_driveComplex.driveSlot()->item()->useNormalDeterioration();
         }
         m_driveComplex.UpdatePath();
     }
@@ -877,20 +877,20 @@ void Vehicle::_updatePropJump()
 
     m_properties.hyper = 0;
 
-    if (!m_driveComplex.GetDriveSlot())
+    if (!m_driveComplex.driveSlot())
         return;
-    if (!m_driveComplex.GetDriveSlot()->item())
+    if (!m_driveComplex.driveSlot()->item())
         return;
-    if (!m_driveComplex.GetDriveSlot()->driveEquipment()->isFunctioning())
+    if (!m_driveComplex.driveSlot()->driveEquipment()->isFunctioning())
         return;
-    if (!m_driveComplex.GetBakSlot())
+    if (!m_driveComplex.bakSlot())
         return;
-    if (!m_driveComplex.GetBakSlot()->item())
+    if (!m_driveComplex.bakSlot()->item())
         return;
-    if (!m_driveComplex.GetBakSlot()->bakEquipment()->isFunctioning())
+    if (!m_driveComplex.bakSlot()->bakEquipment()->isFunctioning())
         return;
 
-    m_properties.hyper = std::min(m_driveComplex.GetDriveSlot()->driveEquipment()->hyper(), m_driveComplex.GetBakSlot()->bakEquipment()->fuel());
+    m_properties.hyper = std::min(m_driveComplex.driveSlot()->driveEquipment()->hyper(), m_driveComplex.bakSlot()->bakEquipment()->fuel());
 }
 
 void Vehicle::_updatePropProtection()
@@ -902,11 +902,11 @@ void Vehicle::_updatePropProtection()
 
     if (m_properties.hibernate_mode_enabled == false)
     {
-        if (m_protectorComplex.GetProtectorSlot()->item() != nullptr)
+        if (m_protectorComplex.protectorSlot()->item() != nullptr)
         {
-            if (m_protectorComplex.GetProtectorSlot()->protectorEquipment()->isFunctioning() == true)
+            if (m_protectorComplex.protectorSlot()->protectorEquipment()->isFunctioning() == true)
             {
-                m_properties.protection += m_protectorComplex.GetProtectorSlot()->protectorEquipment()->GetProtection();
+                m_properties.protection += m_protectorComplex.protectorSlot()->protectorEquipment()->protection();
                 m_properties.shield_effect_enabled = true;
             }
         }
@@ -926,9 +926,8 @@ void Vehicle::_updatePropRepair()
 
     if (m_droidSlot->item() != nullptr)
     {
-        if (m_droidSlot->droidEquipment()->isFunctioning() == true)
-        {
-            m_properties.repair = m_droidSlot->droidEquipment()->GetRepair();
+        if (m_droidSlot->droidEquipment()->isFunctioning() == true) {
+            m_properties.repair = m_droidSlot->droidEquipment()->repair();
         }
     }
 }
@@ -1180,7 +1179,7 @@ int Vehicle::armorMiss() const
 
 bool Vehicle::isFuelFull() const
 {
-    if (m_driveComplex.GetBakSlot()->item() == nullptr)
+    if (m_driveComplex.bakSlot()->item() == nullptr)
     {
         return true;
     }
@@ -1196,7 +1195,7 @@ bool Vehicle::isFuelFull() const
 
 int Vehicle::fuelMiss() const
 {
-    return m_driveComplex.GetBakSlot()->bakEquipment()->fuelMiss();
+    return m_driveComplex.bakSlot()->bakEquipment()->fuelMiss();
 }
 
 void Vehicle::lockRandomItem(int locked_turns)
@@ -1214,7 +1213,7 @@ void Vehicle::lockRandomItem(int locked_turns)
     if (_equiped_slot_vec.size() > 0)
     {
         unsigned int _rand = meti::getRandInt(0, _equiped_slot_vec.size());
-        _equiped_slot_vec[_rand]->item()->lockEvent(locked_turns);
+        _equiped_slot_vec[_rand]->item()->doLock(locked_turns);
     }
 }
 
@@ -1456,7 +1455,7 @@ void Vehicle::TEST_DamageAndLockRandItems()
     {
         rand_index1 = meti::getRandInt(0, m_equipmentSlots.size()-1);
     }
-    m_equipmentSlots[rand_index1]->item()->lockEvent(3);
+    m_equipmentSlots[rand_index1]->item()->doLock(3);
 
     int rand_index2 = meti::getRandInt(0, m_equipmentSlots.size()-1);
     while (m_equipmentSlots[rand_index2]->item() == nullptr)

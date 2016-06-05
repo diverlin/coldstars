@@ -70,8 +70,8 @@ TEST(base,hit)
 {
     MessageManager& messageManager = global::get().messageManager();
 
-    Ship* ship1 = createNewShip();
-    Ship* ship2 = createNewShip();
+    Ship* ship1 = getNewShip();
+    Ship* ship2 = getNewShip();
 
     messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
     messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
@@ -86,8 +86,8 @@ TEST(base,critical_hit)
 {
     MessageManager& messageManager = global::get().messageManager();
 
-    Ship* ship1 = createNewShip();
-    Ship* ship2 = createNewShip();
+    Ship* ship1 = getNewShip();
+    Ship* ship2 = getNewShip();
 
     messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 1.1*ship2->criticalDamage()).data(), 0.4));
 
@@ -100,10 +100,10 @@ TEST(base,bomb)
 {
     MessageManager& messageManager = global::get().messageManager();
 
-    StarSystem* starsystem = createNewStarSystem();
-    Ship* ship = createNewShip();
-    Bomb* bomb = createNewBomb(1000, 1000);
-    Container* container = createNewContainer(bomb->id());
+    StarSystem* starsystem = getNewStarSystem();
+    Ship* ship = getNewShip();
+    Bomb* bomb = getNewBomb(1000, 1000);
+    Container* container = getNewContainer(bomb->id());
 
     const glm::vec3 ship_pos = glm::vec3(200, 200, 0);
     const glm::vec3 ship_angle = glm::vec3(45, 0, 0);
