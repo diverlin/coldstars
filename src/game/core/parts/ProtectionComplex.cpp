@@ -24,13 +24,13 @@
 
 ProtectionComplex::ProtectionComplex()
 {        
-    owner_vehicle = nullptr;
+    m_owner_vehicle = nullptr;
 
 //    shield_effect = new ShieldEffect();
 //    jeti::TextureOb* texOb_shield = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SHIELD_EFFECT_ID);
 //    shield_effect->SetTextureOb(texOb_shield);
 
-    protector_slot = nullptr;
+    m_protector_slot = nullptr;
 }
 
 ProtectionComplex::~ProtectionComplex() 

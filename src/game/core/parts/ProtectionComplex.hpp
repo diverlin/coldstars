@@ -27,16 +27,16 @@ class ProtectionComplex
         ProtectionComplex();
         ~ProtectionComplex();
 
-        void SetOwnerVehicle(Vehicle* owner_vehicle) { this->owner_vehicle = owner_vehicle; };
-        void SetProtectorSlot(ItemSlot* protector_slot) { this->protector_slot = protector_slot; };
+        void SetOwnerVehicle(Vehicle* owner_vehicle) { m_owner_vehicle = owner_vehicle; }
+        void SetProtectorSlot(ItemSlot* protector_slot) { m_protector_slot = protector_slot; }
 
-        ItemSlot* GetProtectorSlot()    const { return protector_slot; };
-//        ShieldEffect* GetShieldEffect() const { return shield_effect; };
+        ItemSlot* protectorSlot()    const { return m_protector_slot; }
+//        ShieldEffect* GetShieldEffect() const { return shield_effect; }
 
     private:
-        Vehicle* owner_vehicle;
+        Vehicle* m_owner_vehicle;
 
-        ItemSlot* protector_slot;
+        ItemSlot* m_protector_slot;
         //            ShieldEffect* shield_effect;
 };
 

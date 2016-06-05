@@ -25,9 +25,9 @@ class Bomb;
 class Container;
 class StarSystem;
 
-Ship* createNewShip();
-Bomb* createNewBomb(int damage, int radius);
-Container* createNewContainer(const id_type& child_id);
-StarSystem* createNewStarSystem();
+Ship* getNewShip();
+Bomb* getNewBomb(int damage, int radius);
+Container* getNewContainer(const id_type& child_id);
+StarSystem* getNewStarSystem();
 
 void init_equipment_descriptors();

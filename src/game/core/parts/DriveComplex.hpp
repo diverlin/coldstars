@@ -40,22 +40,22 @@ class DriveComplex
         DriveComplex();
         ~DriveComplex();
         
-        void SetOwnerVehicle(Vehicle* owner_vehicle)    { m_OwnerVehicle = owner_vehicle; };
-        void SetDriveEffect(jeti::DriveEffect* drive_effect)  { m_EffectDrive = drive_effect; };
+        void SetOwnerVehicle(Vehicle* owner_vehicle)    { m_ownerVehicle = owner_vehicle; }
+        void SetDriveEffect(jeti::DriveEffect* drive_effect)  { m_effectDrive = drive_effect; }
         
-        void SetDriveSlot(ItemSlot* drive_slot) { m_DriveSlot = drive_slot; };
-        void SetBakSlot(ItemSlot* bak_slot)     { m_BakSlot = bak_slot; };
+        void SetDriveSlot(ItemSlot* drive_slot) { m_driveSlot = drive_slot; }
+        void SetBakSlot(ItemSlot* bak_slot)     { m_bakSlot = bak_slot; }
         
         void SetTarget(SpaceObject*, int);       
         void SetStaticTargetCoords(const glm::vec3&);
 
-        int GetActionId() const { return m_ActionId; };
-        jeti::DriveEffect* GetDriveEffect() const { return m_EffectDrive; };
+        int GetActionId() const { return m_ActionId; }
+        jeti::DriveEffect* GetDriveEffect() const { return m_effectDrive; }
                                     
-        ItemSlot* GetDriveSlot() const { return m_DriveSlot; };
-        ItemSlot* GetBakSlot()   const { return m_BakSlot; };
+        ItemSlot* driveSlot() const { return m_driveSlot; }
+        ItemSlot* bakSlot()   const { return m_bakSlot; }
               
-        SpaceObject* GetTarget() const { return m_Target; };                
+        SpaceObject* GetTarget() const { return m_target; }
                     
         bool PathExists() const;
         
@@ -71,13 +71,13 @@ class DriveComplex
         void DrawPath(const jeti::Renderer&);
             
     private:
-        ItemSlot* m_DriveSlot;
-        ItemSlot* m_BakSlot;
+        ItemSlot* m_driveSlot = nullptr;
+        ItemSlot* m_bakSlot = nullptr;
         
-        Vehicle* m_OwnerVehicle;
-        SpaceObject* m_Target;
+        Vehicle* m_ownerVehicle = nullptr;
+        SpaceObject* m_target = nullptr;
 
-        jeti::DriveEffect* m_EffectDrive;
+        jeti::DriveEffect* m_effectDrive = nullptr;
 
         glm::vec3 m_TargetPos;
         

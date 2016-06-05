@@ -87,9 +87,8 @@ void Angar::AddItemSlot(ItemSlot* item_slot)
 bool Angar::RepairItem(Npc* npc, item::Base* item) const
 {
     int price = item->price() * REPAIR_ITEM_PRICE_RATE;
-    if (npc->WithdrawCredits(price) == true)
-    {
-        return item->repairEvent();
+    if (npc->WithdrawCredits(price) == true) {
+        return item->doRepair();
     }
 
     return false;
@@ -142,7 +141,7 @@ bool Angar::TankUpVehicle(Vehicle* vehicle) const
     else                                    { fuel = fuel_to_buy_max; }
 
     if (vehicle->npc()->WithdrawCredits(fuel*price_fuel) == true) {
-        vehicle->driveComplex().GetBakSlot()->bakEquipment()->increaseFuel(fuel);
+        vehicle->driveComplex().bakSlot()->bakEquipment()->increaseFuel(fuel);
         return true;
     }
 

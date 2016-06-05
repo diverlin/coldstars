@@ -38,7 +38,7 @@ Base::~Base()
     LOG("___::~BaseItem("+std::to_string(id())+")");
 }
 
-void Base::lockEvent(int locked_turns)
+void Base::doLock(int lock)
 {
     LOG("BaseItem::LockEvent");
     
@@ -47,10 +47,16 @@ void Base::lockEvent(int locked_turns)
         was_working = true;
     }
     
-    m_locked_turns += locked_turns;
+    m_locked_turns += lock;
     if (was_working == true) {
         m_item_slot->updateVehiclePropetries();
     }
+}
+
+void Base::doUnlock()
+{
+    m_locked_turns = 0;
+    m_item_slot->updateVehiclePropetries();
 }
                 
 void Base::useNormalDeterioration()
@@ -63,10 +69,10 @@ void Base::useOverloadDeterioration()
     m_deterioration = m_data_item.deterioration * m_data_item.deterioration_overload_rate;
 }
  
-void Base::damageEvent()
+void Base::doBreak()
 {
-    LOG("BaseItem::DamageEvent");
-
+    LOG("BaseItem::broken");
+    m_condition = 0;
     m_item_slot->updateVehiclePropetries();
 }
                 
@@ -74,12 +80,11 @@ void Base::deteriorationEvent()
 {
     m_condition -= m_deterioration;
     if (m_condition <= 0) {
-        m_condition = 0;
-        damageEvent();
+        doBreak();
     }
 }         
                 
-bool Base::repairEvent()
+bool Base::doRepair()
 {
     m_condition = m_data_item.condition_max;
     m_item_slot->updateVehiclePropetries();

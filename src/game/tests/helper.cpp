@@ -50,14 +50,14 @@
 //    return ship;
 //}
 
-Ship* createNewShip()
+Ship* getNewShip()
 {
     Ship* ship = global::get().shipBuilder().getNew();
     assert(ship);
     return ship;
 }
 
-Bomb* createNewBomb(int damage, int radius)
+Bomb* getNewBomb(int damage, int radius)
 {
     descriptor::Base descriptor = global::get().descriptors().getRand(descriptor::Type::BOMB);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
@@ -67,7 +67,7 @@ Bomb* createNewBomb(int damage, int radius)
     return bomb;
 }
 
-Container* createNewContainer(const id_type& child_id)
+Container* getNewContainer(const id_type& child_id)
 {
     auto descriptor = descriptor::Container(global::get().idGenerator().nextId(), child_id);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_CONTAINER, descriptor.data()));
@@ -80,7 +80,7 @@ Container* createNewContainer(const id_type& child_id)
     return container;
 }
 
-StarSystem* createNewStarSystem()
+StarSystem* getNewStarSystem()
 {
     descriptor::Base descriptor = global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));

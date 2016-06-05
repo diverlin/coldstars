@@ -29,7 +29,7 @@ namespace equipment {
 
 Protector::Protector(const id_type& id)
     :
-      protection_orig(0)
+      m_protection_orig(0)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
@@ -43,7 +43,7 @@ Protector::~Protector()
 /* virtual */
 void Protector::updateProperties()
 {   
-    protection_add  = 0;
+    m_protection_add  = 0;
 
 #ifdef USE_MODULES
     for (unsigned int i = 0; i < modules_vec.size(); i++) {
@@ -51,12 +51,12 @@ void Protector::updateProperties()
     }
 #endif
 
-    protection = protection_orig + protection_add;
+    m_protection = m_protection_orig + m_protection_add;
 }
 
 void Protector::CountPrice()
 {
-    float protection_rate    = (float)protection_orig / EQUIPMENT::PROTECTOR::PROTECTION_MIN;
+    float protection_rate    = (float)m_protection_orig / EQUIPMENT::PROTECTOR::PROTECTION_MIN;
     float modules_num_rate   = (float)modulesNum() / EQUIPMENT::PROTECTOR::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::PROTECTOR::PROTECTION_WEIGHT * protection_rate +
@@ -76,10 +76,10 @@ void Protector::addUniqueInfo()
 
 std::string Protector::GetProtectionStr()
 {
-    if (protection_add == 0)
-        return std::to_string(protection_orig);
+    if (m_protection_add == 0)
+        return std::to_string(m_protection_orig);
     else
-        return std::to_string(protection_orig) + "+" + std::to_string(protection_add);
+        return std::to_string(m_protection_orig) + "+" + std::to_string(m_protection_add);
 }
 
 /*virtual*/
@@ -114,14 +114,14 @@ void Protector::SaveData(boost::property_tree::ptree& save_ptree, const std::str
 {
     LOG(" ProtectorEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"protection_orig", protection_orig);
+    save_ptree.put(root+"protection_orig", m_protection_orig);
 }
 
 void Protector::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" ProtectorEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
-    protection_orig = load_ptree.get<int>("protection_orig");
+    m_protection_orig = load_ptree.get<int>("protection_orig");
 }                
 
 void Protector::ResolveData()
