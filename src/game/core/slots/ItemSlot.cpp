@@ -203,7 +203,7 @@ void ItemSlot::selectEvent()
 
     if (owner()->typeId() == TYPE::ENTITY::VEHICLE_ID) {
         switch(subTypeId()) {
-            case TYPE::ENTITY::DRIVE_SLOT_ID: { vehicleOwner()->UpdatePropertiesSpeed(); break; }
+            case TYPE::ENTITY::DRIVE_SLOT_ID: { vehicleOwner()->updatePropSpeed(); break; }
         }
     }
 }
@@ -219,7 +219,7 @@ void ItemSlot::deselectEvent()
             case TYPE::ENTITY::WEAPON_SLOT_ID:     {     resetTarget(); break; }
             case TYPE::ENTITY::DRIVE_SLOT_ID:
             {
-                vehicleOwner()->UpdatePropertiesSpeed();
+                vehicleOwner()->updatePropSpeed();
                 //GetOwnerVehicle()->UpdatePropertiesJump();
                 break;
             }
@@ -234,29 +234,29 @@ void ItemSlot::updateVehiclePropetries() const
     {
         switch(subTypeId())
         {
-            case TYPE::ENTITY::WEAPON_SLOT_ID:     { vehicleOwner()->UpdatePropertiesFire(); break; }
-            case TYPE::ENTITY::SCANER_SLOT_ID:     { vehicleOwner()->UpdatePropertiesScan(); break; }
+            case TYPE::ENTITY::WEAPON_SLOT_ID:     { vehicleOwner()->updatePropFire(); break; }
+            case TYPE::ENTITY::SCANER_SLOT_ID:     { vehicleOwner()->updatePropScan(); break; }
             case TYPE::ENTITY::BAK_SLOT_ID:         {
-                vehicleOwner()->UpdatePropertiesSpeed();
-                vehicleOwner()->UpdatePropertiesJump();
+                vehicleOwner()->updatePropSpeed();
+                vehicleOwner()->updatePropJump();
 
                 break;
             }
 
             case TYPE::ENTITY::DRIVE_SLOT_ID:       {
-                vehicleOwner()->UpdatePropertiesSpeed();
-                vehicleOwner()->UpdatePropertiesJump();
+                vehicleOwner()->updatePropSpeed();
+                vehicleOwner()->updatePropJump();
                 break;
             }
                 
-            case TYPE::ENTITY::DROID_SLOT_ID:     { vehicleOwner()->UpdatePropertiesRepair(); break; }
-            case TYPE::ENTITY::ENERGIZER_SLOT_ID: { vehicleOwner()->UpdatePropertiesEnergy(); break; }
-            case TYPE::ENTITY::FREEZER_SLOT_ID:     { vehicleOwner()->UpdatePropertiesFreeze(); break; }
-            case TYPE::ENTITY::GRAPPLE_SLOT_ID:     { vehicleOwner()->UpdatePropertiesGrab(); break; }
-            case TYPE::ENTITY::PROTECTOR_SLOT_ID: { vehicleOwner()->UpdatePropertiesProtection(); break; }
-            case TYPE::ENTITY::RADAR_SLOT_ID:     { vehicleOwner()->UpdatePropertiesRadar(); break; }
+            case TYPE::ENTITY::DROID_SLOT_ID:     { vehicleOwner()->updatePropRepair(); break; }
+            case TYPE::ENTITY::ENERGIZER_SLOT_ID: { vehicleOwner()->updatePropEnergy(); break; }
+            case TYPE::ENTITY::FREEZER_SLOT_ID:     { vehicleOwner()->updatePropFreeze(); break; }
+            case TYPE::ENTITY::GRAPPLE_SLOT_ID:     { vehicleOwner()->updatePropGrab(); break; }
+            case TYPE::ENTITY::PROTECTOR_SLOT_ID: { vehicleOwner()->updatePropProtection(); break; }
+            case TYPE::ENTITY::RADAR_SLOT_ID:     { vehicleOwner()->updatePropRadar(); break; }
 
-            case TYPE::ENTITY::ARTEFACT_SLOT_ID: { vehicleOwner()->UpdateArtefactInfluence(); break; }
+            case TYPE::ENTITY::ARTEFACT_SLOT_ID: { vehicleOwner()->updateArtefactInfluence(); break; }
         }
     }
 }
@@ -411,8 +411,7 @@ bool ItemSlot::checkSubTarget(ItemSlot* subtarget) const
     LOG(" ItemSlot("+std::to_string(id())+")::CheckSubTarget");
 #endif
     
-    if (subtarget->item() != nullptr)
-    {
+    if (subtarget->item()) {
         return true;
     }
     
@@ -426,26 +425,18 @@ STATUS ItemSlot::checkTarget(SpaceObject* target) const
     LOG(" ItemSlot("+std::to_string(id())+")::CheckTarget");
 #endif
     
-    if (isTargetAlive(target) == false)
-    {
+    if (isTargetAlive(target) == false) {
         return STATUS::TARGET_DEAD;
     }
-
-    if (isTargetInSpace(target) == false)
-    {
+    if (isTargetInSpace(target) == false) {
         return STATUS::TARGET_NOTIN_SPACE;
     }
-
-    if (isTargetInSameStarSystem(target) == false)
-    {
+    if (isTargetInSameStarSystem(target) == false) {
         return STATUS::TARGET_NOTIN_STARSYSTEM;
     }
-
-    if (checkDistanceToTarget(target) == false)
-    {
+    if (checkDistanceToTarget(target) == false) {
         return STATUS::TARGET_OUTOF_RANGE;
     }
-
     return STATUS::TARGET_OK;
 }     
 
