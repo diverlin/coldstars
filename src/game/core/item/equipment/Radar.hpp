@@ -30,8 +30,8 @@ class Radar : public Base
         Radar(const id_type& id);
         virtual ~Radar();
 
-        void SetRadiusOrig(int radius_orig)   { this->radius_orig = radius_orig; };
-        int GetRadius() const { return radius; };
+        void SetRadiusOrig(int radius_orig)   { m_radius_orig = radius_orig; }
+        int radius() const override final { return m_radius; }
 
         virtual void updateProperties();
 
@@ -42,9 +42,9 @@ class Radar : public Base
         virtual void Resolve();
 
     private:
-        int radius_orig;
-        int radius_add;
-        int radius;
+        int m_radius_orig;
+        int m_radius_add;
+        int m_radius;
 
         void virtual addUniqueInfo();
         std::string GetRadiusStr();

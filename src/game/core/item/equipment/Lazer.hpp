@@ -32,11 +32,11 @@ class Lazer : public Base
         Lazer(const id_type& id);
         virtual ~Lazer();
 
-        void SetDamageOrig(int damage_orig) { this->damage_orig = damage_orig; };
-        void SetRadiusOrig(int radius_orig) { this->radius_orig = radius_orig; };
+        void SetDamageOrig(int damage_orig) { m_damage_orig = damage_orig; }
+        void SetRadiusOrig(int radius_orig) { m_radius_orig = radius_orig; }
 
-        int GetDamage() const { return damage; };
-        int GetRadius() const { return radius; };
+        int damage() const override final { return m_damage; }
+        int radius() const override final { return m_radius; }
         
         void FireEvent(SpaceObject*, ItemSlot*, float, bool);
 
@@ -49,13 +49,13 @@ class Lazer : public Base
         virtual void Resolve();
         
     private:
-        int damage_orig;
-        int damage_add;
-        int damage;
+        int m_damage_orig;
+        int m_damage_add;
+        int m_damage;
 
-        int radius_orig;
-        int radius_add;
-        int radius;
+        int m_radius_orig;
+        int m_radius_add;
+        int m_radius;
 
         //              jeti::TextureOb* texOb_turrel;
         //              jeti::TextureOb* texOb_lazerEffect;

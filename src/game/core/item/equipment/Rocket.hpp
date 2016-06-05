@@ -32,17 +32,17 @@ class Rocket : public Base
         Rocket(const id_type& id);
         virtual ~Rocket();
         
-        void SetAmmoMaxOrig(int ammo_max_orig) { this->ammo_max_orig = ammo_max_orig; }
-        void SetDamageOrig(int damage_orig)    { this->damage_orig   = damage_orig; }
-        void SetRadiusOrig(int radius_orig)    { this->radius_orig   = radius_orig; }
-        void SetBulletData(BulletData data_bullet) { this->data_bullet = data_bullet; }
+        void SetAmmoMaxOrig(int ammo_max_orig) { m_ammo_max_orig = ammo_max_orig; }
+        void SetDamageOrig(int damage_orig)    { m_damage_orig   = damage_orig; }
+        void SetRadiusOrig(int radius_orig)    { m_radius_orig   = radius_orig; }
+        void SetBulletData(BulletData data_bullet) { data_bullet = data_bullet; }
         
-        void SetAmmo(int ammo) { this->ammo = ammo; }
+        void SetAmmo(int ammo) { m_ammo = ammo; }
         
-        int GetAmmoMax() const { return ammo_max; }
-        int GetAmmo()   const { return ammo; }
-        int GetDamage() const { return damage; }
-        int GetRadius() const { return radius; }
+        int GetAmmoMax() const { return m_ammo_max; }
+        int GetAmmo()   const { return m_ammo; }
+        int damage() const override final { return m_damage; }
+        int radius() const override final { return m_radius; }
         
         void FireEvent(float);
         
@@ -55,18 +55,18 @@ class Rocket : public Base
         virtual void Resolve();
               
     private:
-        int ammo_max_orig;
-        int ammo_max_add;
-        int ammo;
-        int ammo_max;
+        int m_ammo_max_orig;
+        int m_ammo_max_add;
+        int m_ammo;
+        int m_ammo_max;
         
-        int damage_orig;
-        int damage_add;
-        int damage;
+        int m_damage_orig;
+        int m_damage_add;
+        int m_damage;
         
-        int radius_orig;
-        int radius_add;
-        int radius;     
+        int m_radius_orig;
+        int m_radius_add;
+        int m_radius;     
         
         int fire_atOnce;
         

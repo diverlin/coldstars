@@ -30,8 +30,8 @@ class Bomb : public item::Base
         void setDamage(int damage) { this->m_damage = damage; }
         void setRadius(int radius) { this->m_radius = radius; }
 
-        int damage() const { return m_damage; }
-        int radius() const { return m_radius; }
+        int damage() const override final { return m_damage; }
+        int radius() const override final { return m_radius; }
 
         virtual void UpdateOwnerAbilities();
 

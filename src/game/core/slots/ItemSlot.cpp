@@ -103,8 +103,7 @@ void ItemSlot::resetTarget()
 
 bool ItemSlot::checkAmmo() const
 {
-    switch(item()->subTypeId())
-    {
+    switch(item()->subTypeId()) {
         case TYPE::ENTITY::LAZER_EQUIPMENT_ID:  { /*if check energy */  return true; break; }
         case TYPE::ENTITY::ROCKET_EQUIPMENT_ID: { if (rocketEquipment()->GetAmmo() > 0) return true; break; }
     }
@@ -116,34 +115,29 @@ void ItemSlot::fireEvent(float attack_rate, bool show_effect)
 {
     switch(item()->subTypeId())
     {
-        case TYPE::ENTITY::LAZER_EQUIPMENT_ID:
-        {
+        case TYPE::ENTITY::LAZER_EQUIPMENT_ID: {
             lazerEquipment()->FireEvent(target(), subtarget(), attack_rate, show_effect);
             break;
         }
 
-        case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:
-        {
+        case TYPE::ENTITY::ROCKET_EQUIPMENT_ID: {
             rocketEquipment()->FireEvent(attack_rate);
             break;
         }
     }
 
-    if (target()->isAlive() == false)
-    {
+    if (target()->isAlive() == false) {
         vehicleOwner()->npc()->AddExpirience(target()->givenExpirience(), show_effect);
     }
 }
 
 bool ItemSlot::checkItemInsertion(item::Base* item) const
 {
-    if (subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID)
-    {
+    if (subTypeId() == TYPE::ENTITY::CARGO_SLOT_ID) {
         return true;
     }
 
-    if (subTypeId() == item->parentSubTypeId())
-    {
+    if (subTypeId() == item->parentSubTypeId()) {
         return true;
     }
     
@@ -152,6 +146,7 @@ bool ItemSlot::checkItemInsertion(item::Base* item) const
 
 bool ItemSlot::insertItem(item::Base* item)
 {    
+    // make it oop
     if (subTypeId() == TYPE::ENTITY::GATE_SLOT_ID)
     {
         m_item = item;
@@ -189,6 +184,7 @@ bool ItemSlot::insertItem(item::Base* item)
 
 void ItemSlot::removeItem()
 {    
+    // make it oop
     m_item = nullptr;
     resetTarget();
 
@@ -199,17 +195,19 @@ void ItemSlot::removeItem()
 
 void ItemSlot::selectEvent()
 {
+    // make it oop
     m_selected = true;
 
     if (owner()->typeId() == TYPE::ENTITY::VEHICLE_ID) {
         switch(subTypeId()) {
-            case TYPE::ENTITY::DRIVE_SLOT_ID: { vehicleOwner()->updatePropSpeed(); break; }
+            case TYPE::ENTITY::DRIVE_SLOT_ID: { vehicleOwner()->_updatePropSpeed(); break; }
         }
     }
 }
 
 void ItemSlot::deselectEvent()
 {
+    // make it oop
     m_selected = false;
     
     if (owner()->typeId() == TYPE::ENTITY::VEHICLE_ID)
@@ -219,7 +217,7 @@ void ItemSlot::deselectEvent()
             case TYPE::ENTITY::WEAPON_SLOT_ID:     {     resetTarget(); break; }
             case TYPE::ENTITY::DRIVE_SLOT_ID:
             {
-                vehicleOwner()->updatePropSpeed();
+                vehicleOwner()->_updatePropSpeed();
                 //GetOwnerVehicle()->UpdatePropertiesJump();
                 break;
             }
@@ -230,33 +228,34 @@ void ItemSlot::deselectEvent()
 
 void ItemSlot::updateVehiclePropetries() const
 {
+    // make it oop
     if (subTypeId() != TYPE::ENTITY::CARGO_SLOT_ID)
     {
         switch(subTypeId())
         {
-            case TYPE::ENTITY::WEAPON_SLOT_ID:     { vehicleOwner()->updatePropFire(); break; }
-            case TYPE::ENTITY::SCANER_SLOT_ID:     { vehicleOwner()->updatePropScan(); break; }
+            case TYPE::ENTITY::WEAPON_SLOT_ID:     { vehicleOwner()->_updatePropFire(); break; }
+            case TYPE::ENTITY::SCANER_SLOT_ID:     { vehicleOwner()->_updatePropScan(); break; }
             case TYPE::ENTITY::BAK_SLOT_ID:         {
-                vehicleOwner()->updatePropSpeed();
-                vehicleOwner()->updatePropJump();
+                vehicleOwner()->_updatePropSpeed();
+                vehicleOwner()->_updatePropJump();
 
                 break;
             }
 
             case TYPE::ENTITY::DRIVE_SLOT_ID:       {
-                vehicleOwner()->updatePropSpeed();
-                vehicleOwner()->updatePropJump();
+                vehicleOwner()->_updatePropSpeed();
+                vehicleOwner()->_updatePropJump();
                 break;
             }
                 
-            case TYPE::ENTITY::DROID_SLOT_ID:     { vehicleOwner()->updatePropRepair(); break; }
-            case TYPE::ENTITY::ENERGIZER_SLOT_ID: { vehicleOwner()->updatePropEnergy(); break; }
-            case TYPE::ENTITY::FREEZER_SLOT_ID:     { vehicleOwner()->updatePropFreeze(); break; }
-            case TYPE::ENTITY::GRAPPLE_SLOT_ID:     { vehicleOwner()->updatePropGrab(); break; }
-            case TYPE::ENTITY::PROTECTOR_SLOT_ID: { vehicleOwner()->updatePropProtection(); break; }
-            case TYPE::ENTITY::RADAR_SLOT_ID:     { vehicleOwner()->updatePropRadar(); break; }
+            case TYPE::ENTITY::DROID_SLOT_ID:     { vehicleOwner()->_updatePropRepair(); break; }
+            case TYPE::ENTITY::ENERGIZER_SLOT_ID: { vehicleOwner()->_updatePropEnergy(); break; }
+            case TYPE::ENTITY::FREEZER_SLOT_ID:     { vehicleOwner()->_updatePropFreeze(); break; }
+            case TYPE::ENTITY::GRAPPLE_SLOT_ID:     { vehicleOwner()->_updatePropGrab(); break; }
+            case TYPE::ENTITY::PROTECTOR_SLOT_ID: { vehicleOwner()->_updatePropProtection(); break; }
+            case TYPE::ENTITY::RADAR_SLOT_ID:     { vehicleOwner()->_updatePropRadar(); break; }
 
-            case TYPE::ENTITY::ARTEFACT_SLOT_ID: { vehicleOwner()->updateArtefactInfluence(); break; }
+            case TYPE::ENTITY::ARTEFACT_SLOT_ID: { vehicleOwner()->_updateArtefactInfluence(); break; }
         }
     }
 }
@@ -288,52 +287,58 @@ void ItemSlot::updateVehiclePropetries() const
 
 int ItemSlot::itemRadius() const
 {       
-    switch(m_item->typeId())
-    {
-        case TYPE::ENTITY::EQUIPMENT_ID:
-        {
-            switch (m_item->subTypeId())
-            {
-                case TYPE::ENTITY::LAZER_EQUIPMENT_ID:   { return lazerEquipment()->GetRadius();  break; };
-                case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:  { return rocketEquipment()->GetRadius(); break; };
+//    switch(m_item->typeId())
+//    {
+//        case TYPE::ENTITY::EQUIPMENT_ID:
+//        {
+//            switch (m_item->subTypeId())
+//            {
+//                case TYPE::ENTITY::LAZER_EQUIPMENT_ID:   { return lazerEquipment()->radius();  break; };
+//                case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:  { return rocketEquipment()->radius(); break; };
 
-                case TYPE::ENTITY::GRAPPLE_EQUIPMENT_ID: { return grappleEquipment()->GetRadius(); break; };
-                case TYPE::ENTITY::RADAR_EQUIPMENT_ID:   { return radarEquipment()->GetRadius();   break; };
-            }
+//                case TYPE::ENTITY::GRAPPLE_EQUIPMENT_ID: { return grappleEquipment()->radius(); break; };
+//                case TYPE::ENTITY::RADAR_EQUIPMENT_ID:   { return radarEquipment()->radius();   break; };
+//            }
             
-            break;
-        }
+//            break;
+//        }
 
-        case TYPE::ENTITY::BOMB_ID:
-        {
-            return bomb()->radius();   break;
-        }
-    }
+//        case TYPE::ENTITY::BOMB_ID:
+//        {
+//            return bomb()->radius();   break;
+//        }
+//    }
     
+    if (item()) {
+        return item()->radius();
+    }
     return 0;
 }
 
 int ItemSlot::itemDamage() const
 {       
-    switch(m_item->typeId())
-    {
-        case TYPE::ENTITY::EQUIPMENT_ID:
-        {
-            switch (m_item->subTypeId())
-            {
-                case TYPE::ENTITY::LAZER_EQUIPMENT_ID:   { return lazerEquipment()->GetDamage();  break; };
-                case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:  { return rocketEquipment()->GetDamage(); break; };
-            }
+//    switch(m_item->typeId())
+//    {
+//        case TYPE::ENTITY::EQUIPMENT_ID:
+//        {
+//            switch (m_item->subTypeId())
+//            {
+//                case TYPE::ENTITY::LAZER_EQUIPMENT_ID:   { return lazerEquipment()->damage();  break; };
+//                case TYPE::ENTITY::ROCKET_EQUIPMENT_ID:  { return rocketEquipment()->damage(); break; };
+//            }
             
-            break;
-        }
+//            break;
+//        }
             
-        case TYPE::ENTITY::BOMB_ID:
-        {
-            return bomb()->damage();   break;
-        }
-    }
+//        case TYPE::ENTITY::BOMB_ID:
+//        {
+//            return bomb()->damage();   break;
+//        }
+//    }
     
+    if (item()) {
+        return item()->damage();
+    }
     return 0;
 }
 

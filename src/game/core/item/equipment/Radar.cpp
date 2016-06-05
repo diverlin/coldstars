@@ -30,7 +30,7 @@ namespace equipment {
 
 Radar::Radar(const id_type& id)
     :
-      radius_orig(0)
+      m_radius_orig(0)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
@@ -46,19 +46,19 @@ Radar::~Radar()
 /* virtual */
 void Radar::updateProperties()
 {
-    radius_add  = 0;
+    m_radius_add  = 0;
     
 #ifdef USE_MODULES
     for (unsigned int i=0; i<modules_vec.size(); i++) {
         radius_add += ((RadarModule*)modules_vec[i])->GetRadiusAdd();
     }
 #endif
-    radius = radius_orig + radius_add;
+    m_radius = m_radius_orig + m_radius_add;
 }
 
 void Radar::CountPrice()
 {
-    float radius_rate         = (float)radius_orig / EQUIPMENT::RADAR::RADIUS_MIN;
+    float radius_rate         = (float)m_radius_orig / EQUIPMENT::RADAR::RADIUS_MIN;
 
     float modules_num_rate    = (float)modulesNum() / EQUIPMENT::RADAR::MODULES_NUM_MAX;
 
@@ -78,10 +78,10 @@ void Radar::addUniqueInfo()
 
 std::string Radar::GetRadiusStr()
 {
-    if (radius_add == 0)
-        return std::to_string(radius_orig);
+    if (m_radius_add == 0)
+        return std::to_string(m_radius_orig);
     else
-        return std::to_string(radius_orig) + "+" + std::to_string(radius_add);
+        return std::to_string(m_radius_orig) + "+" + std::to_string(m_radius_add);
 }
 
 /*virtual*/
@@ -117,14 +117,14 @@ void Radar::SaveData(boost::property_tree::ptree& save_ptree, const std::string&
 {
     LOG(" RadarEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"radius_orig", radius_orig);
+    save_ptree.put(root+"radius_orig", m_radius_orig);
 }
 
 void Radar::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" RadarEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
-    radius_orig = load_ptree.get<int>("radius_orig");
+    m_radius_orig = load_ptree.get<int>("radius_orig");
 }                
 
 void Radar::ResolveData()
