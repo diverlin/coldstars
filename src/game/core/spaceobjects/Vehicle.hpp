@@ -113,9 +113,10 @@ public:
     [[deprecated("move to ext")]]
     bool buyItem(item::Base*);
 
-    bool UnpackContainerItemToCargoSlot(Container*);
+    bool unpackContainerItemToCargoSlot(Container*);
 
     int freeSpace() const { return m_properties.free_space; }
+    int space() const { return m_VehicleDescriptor.space; }
 
     void BindOwnerNpc(Npc*);
 

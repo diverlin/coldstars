@@ -349,7 +349,7 @@ ItemSlot* const Vehicle::cargoSlotWithGoods(TYPE::ENTITY requested_goods_subtype
     return nullptr;
 }
 
-bool Vehicle::UnpackContainerItemToCargoSlot(Container* container)
+bool Vehicle::unpackContainerItemToCargoSlot(Container* container)
 {    
     if (addItemToCargoSlot(container->itemSlot()->item()) == true)
     {

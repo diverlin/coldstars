@@ -21,6 +21,8 @@
 
 #include <types/IdType.hpp>
 
+#include <vector>
+
 namespace descriptor {
 class Base;
 } // namespace descriptor
@@ -36,12 +38,13 @@ public:
     ProtectorBuilder();
     ~ProtectorBuilder();
 
+    std::vector<Protector*> getNew(int) const;
     item::equipment::Protector* getNew() const;
     item::equipment::Protector* createTemplate(id_type id = NONE_ID) const;
     item::equipment::Protector* getNew(const descriptor::Base&) const;
 
 private:
-    void createInternals(item::equipment::Protector*, const descriptor::Base&) const;
+    void createInternals(Protector*, const descriptor::Base&) const;
 }; 
 
 } // namespace equipment
