@@ -21,16 +21,12 @@
 #include <item/equipment/Protector.hpp>
 #include <managers/EntityManager.hpp>
 
-#include <common/IdGenerator.hpp>
 #include <ceti/Logger.hpp>
-#include <math/rand.hpp>
-#include <common/constants.hpp>
 
 #include <common/Global.hpp>
 
-#include <descriptors/RaceDescriptors.hpp>
-
-#include <meti/RandUtils.hpp>
+#include <descriptors/Base.hpp>
+#include <descriptors/DescriptorManager.hpp>
 
 namespace item {
 namespace equipment {
@@ -51,13 +47,22 @@ Protector* ProtectorBuilder::createTemplate(id_type id) const
     return protector;
 } 
    
-Protector* ProtectorBuilder::create(const descriptor::Base& descriptor) const
+Protector* ProtectorBuilder::getNew() const
 {
+    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
     Protector* protector = createTemplate();
     createInternals(protector, descriptor);
         
     return protector;
 } 
+
+Protector* ProtectorBuilder::getNew(const descriptor::Base& descriptor) const
+{
+    Protector* protector = createTemplate();
+    createInternals(protector, descriptor);
+
+    return protector;
+}
          
 void ProtectorBuilder::createInternals(Protector* protector, const descriptor::Base& descriptor) const
 {     

@@ -34,9 +34,9 @@ public:
     ShipBuilder();
     ~ShipBuilder();
 
-    Ship* create() const;
-    Ship* create(const descriptor::Base&) const;
-    Ship* create(const std::string&) const;
+    Ship* getNew() const;
+    Ship* getNew(const descriptor::Base&) const;
+    Ship* getNew(const std::string&) const;
 
 private:
     void createInternals(Ship*, const descriptor::Base&) const;

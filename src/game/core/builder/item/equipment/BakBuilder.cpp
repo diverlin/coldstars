@@ -21,7 +21,10 @@
 #include <item/equipment/Bak.hpp>
 #include <managers/EntityManager.hpp>
 
-#include <ceti/Logger.hpp>
+#include <descriptors/DescriptorManager.hpp>
+#include <descriptors/Base.hpp>
+
+//#include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
 
@@ -44,8 +47,17 @@ item::equipment::Bak* BakBuilder::createTemplate(id_type id) const
     
     return bak;
 } 
+
+item::equipment::Bak* BakBuilder::getNew() const
+{
+    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::BAK);
+    item::equipment::Bak* bak = createTemplate();
+    createInternals(bak, descriptor);
+
+    return bak;
+}
        
-item::equipment::Bak* BakBuilder::create(const descriptor::Base& descriptor) const
+item::equipment::Bak* BakBuilder::getNew(const descriptor::Base& descriptor) const
 {
     item::equipment::Bak* bak = createTemplate();
     createInternals(bak, descriptor);

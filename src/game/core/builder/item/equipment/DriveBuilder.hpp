@@ -20,7 +20,10 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <descriptors/Base.hpp>
+
+namespace descriptor {
+class Base;
+} // namespace descriptor
 
 namespace item {
 namespace equipment {
@@ -33,8 +36,9 @@ public:
     DriveBuilder();
     ~DriveBuilder();
 
+    item::equipment::Drive* getNew() const;
     item::equipment::Drive* createTemplate(id_type id = NONE_ID) const;
-    item::equipment::Drive* create(const descriptor::Base&) const;
+    item::equipment::Drive* getNew(const descriptor::Base&) const;
 
 private:
     void createInternals(item::equipment::Drive*, const descriptor::Base&) const;

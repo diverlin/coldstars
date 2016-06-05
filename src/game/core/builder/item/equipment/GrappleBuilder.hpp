@@ -20,7 +20,10 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <descriptors/Base.hpp>
+
+namespace descriptor {
+class Base;
+} // namespace descriptor
 
 namespace item {
 namespace equipment {
@@ -33,8 +36,9 @@ public:
     GrappleBuilder();
     ~GrappleBuilder();
 
+    Grapple* getNew() const;
     Grapple* createTemplate(id_type id = NONE_ID) const;
-    Grapple* create(const descriptor::Base&) const;
+    Grapple* getNew(const descriptor::Base&) const;
 
 private:
     void createInternals(Grapple*, const descriptor::Base&) const;

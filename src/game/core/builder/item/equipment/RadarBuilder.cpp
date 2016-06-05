@@ -21,16 +21,12 @@
 #include <item/equipment/Radar.hpp>
 #include <managers/EntityManager.hpp>
 
-#include <common/IdGenerator.hpp>
 #include <ceti/Logger.hpp>
-#include <math/rand.hpp>
-#include <common/constants.hpp>
 
 #include <common/Global.hpp>
          
-#include <descriptors/RaceDescriptors.hpp>
-
-#include <meti/RandUtils.hpp>
+#include <descriptors/Base.hpp>
+#include <descriptors/DescriptorManager.hpp>
 
 namespace item {
 namespace equipment {
@@ -51,7 +47,16 @@ Radar* RadarBuilder::createTemplate(id_type id) const
     return radar;
 } 
   
-Radar* RadarBuilder::create(const descriptor::Base& descriptor) const
+Radar* RadarBuilder::getNew() const
+{
+    const descriptor::Base& descriptor =  global::get().descriptors().getRand(descriptor::Type::RADAR);
+    Radar* radar = createTemplate();
+    createInternals(radar, descriptor);
+
+    return radar;
+}
+
+Radar* RadarBuilder::getNew(const descriptor::Base& descriptor) const
 {
     Radar* radar = createTemplate();
     createInternals(radar, descriptor);

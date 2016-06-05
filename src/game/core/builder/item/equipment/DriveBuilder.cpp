@@ -20,21 +20,13 @@
 #include <item/equipment/Drive.hpp>
 #include <managers/EntityManager.hpp>
 
-#include <common/IdGenerator.hpp>
 #include <ceti/Logger.hpp>
-#include <meti/RandUtils.hpp>
-#include <common/constants.hpp>
 
 #include <common/Global.hpp>
-//#include <resources/TextureCollector.hpp>
-//#include <resources/MeshCollector.hpp>
 
-//#include <jeti/animations/AnimationConstantRotation.hpp>
+#include <descriptors/Base.hpp>
+#include <descriptors/DescriptorManager.hpp>
 
-#include <descriptors/RaceDescriptors.hpp>
-//#include <jeti/Mesh.hpp>
-
-#include <meti/RandUtils.hpp>
 
 namespace item {
 namespace equipment {
@@ -54,8 +46,17 @@ Drive* DriveBuilder::createTemplate(id_type id) const
     
     return drive;
 } 
-        
-Drive* DriveBuilder::create(const descriptor::Base& descriptor) const
+
+Drive* DriveBuilder::getNew() const
+{
+    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::DRIVE);
+    Drive* drive = createTemplate();
+    createInternals(drive, descriptor);
+
+    return drive;
+}
+
+Drive* DriveBuilder::getNew(const descriptor::Base& descriptor) const
 {
     Drive* drive = createTemplate();
     createInternals(drive, descriptor);

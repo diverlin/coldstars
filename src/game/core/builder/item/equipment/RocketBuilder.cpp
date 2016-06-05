@@ -27,6 +27,7 @@
 
 #include <common/Global.hpp>
 
+#include <descriptors/Base.hpp>
 #include <descriptors/RaceDescriptors.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -50,7 +51,7 @@ Rocket* RocketBuilder::createTemplate(id_type id) const
     return rocket;
 } 
 
-Rocket* RocketBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+Rocket* RocketBuilder::getNew(TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {
     Rocket* rocket = createTemplate();
     createInternals(rocket, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);

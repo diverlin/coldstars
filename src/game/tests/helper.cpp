@@ -52,7 +52,7 @@
 
 Ship* createNewShip()
 {
-    Ship* ship = global::get().shipBuilder().create();
+    Ship* ship = global::get().shipBuilder().getNew();
     assert(ship);
     return ship;
 }

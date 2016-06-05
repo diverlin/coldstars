@@ -21,15 +21,12 @@
 #include <item/equipment/Grapple.hpp>
 #include <managers/EntityManager.hpp>
 
-#include <common/IdGenerator.hpp>
 #include <ceti/Logger.hpp>
-#include <math/rand.hpp>
-#include <common/constants.hpp>
 
 #include <common/Global.hpp>
 
-#include <descriptors/RaceDescriptors.hpp>
-#include <meti/RandUtils.hpp>
+#include <descriptors/Base.hpp>
+#include <descriptors/DescriptorManager.hpp>
 
 namespace item {
 namespace equipment {
@@ -50,7 +47,16 @@ Grapple* GrappleBuilder::createTemplate(id_type id) const
     return grapple;
 } 
 
-Grapple* GrappleBuilder::create(const descriptor::Base& descriptor) const
+Grapple* GrappleBuilder::getNew() const
+{
+    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::GRAPPLE);
+    Grapple* grapple = createTemplate();
+    createInternals(grapple, descriptor);
+
+    return grapple;
+}
+
+Grapple* GrappleBuilder::getNew(const descriptor::Base& descriptor) const
 {
     Grapple* grapple = createTemplate();
     createInternals(grapple, descriptor);

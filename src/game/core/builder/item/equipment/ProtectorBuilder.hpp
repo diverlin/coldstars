@@ -20,7 +20,10 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <descriptors/Base.hpp>
+
+namespace descriptor {
+class Base;
+} // namespace descriptor
 
 namespace item {
 namespace equipment {
@@ -33,8 +36,9 @@ public:
     ProtectorBuilder();
     ~ProtectorBuilder();
 
+    item::equipment::Protector* getNew() const;
     item::equipment::Protector* createTemplate(id_type id = NONE_ID) const;
-    item::equipment::Protector* create(const descriptor::Base&) const;
+    item::equipment::Protector* getNew(const descriptor::Base&) const;
 
 private:
     void createInternals(item::equipment::Protector*, const descriptor::Base&) const;

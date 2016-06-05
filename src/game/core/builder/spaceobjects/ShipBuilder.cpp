@@ -21,13 +21,7 @@
 #include <builder/CommonBuilderHeaders.hpp>
 #include <spaceobjects/Ship.hpp>
 
-//#include <descriptors/RaceDescriptors.hpp>
 #include <descriptors/DescriptorManager.hpp>
-
-#include <common/constants.hpp>
-//#include <math/rand.hpp>
-//#include <meti/RandUtils.hpp>
-
 
 ShipBuilder::ShipBuilder()
 {}
@@ -35,7 +29,7 @@ ShipBuilder::ShipBuilder()
 ShipBuilder::~ShipBuilder()
 {}
 
-Ship* ShipBuilder::create() const
+Ship* ShipBuilder::getNew() const
 {
     const auto& descr = global::get().descriptors().getRand(descriptor::Type::VEHICLE);
     Ship* ship = new Ship(global::get().idGenerator().nextId());
@@ -45,7 +39,7 @@ Ship* ShipBuilder::create() const
     return ship;
 }
 
-Ship* ShipBuilder::create(const descriptor::Base& descr) const
+Ship* ShipBuilder::getNew(const descriptor::Base& descr) const
 {            
     Ship* ship = new Ship(global::get().idGenerator().nextId());
     assert(ship);
@@ -54,9 +48,9 @@ Ship* ShipBuilder::create(const descriptor::Base& descr) const
     return ship;
 }
 
-Ship* ShipBuilder::create(const std::string& data) const
+Ship* ShipBuilder::getNew(const std::string& data) const
 {
-    return create(descriptor::Base(data));
+    return getNew(descriptor::Base(data));
 }
 
 void ShipBuilder::createInternals(Ship* ship, const descriptor::Base& descr) const

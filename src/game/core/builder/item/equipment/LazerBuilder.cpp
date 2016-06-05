@@ -28,10 +28,7 @@
 
 #include <common/Global.hpp>
 
-//#include <resources/TextureCollector.hpp>
-//#include <resources/MeshCollector.hpp>
-//#include <jeti/TextureOb.hpp>
-
+#include <descriptors/Base.hpp>
 #include <descriptors/RaceDescriptors.hpp>
 #include <meti/RandUtils.hpp>
 
@@ -55,7 +52,7 @@ Lazer* LazerBuilder::createTemplate(id_type id) const
     return lazer;
 } 
 
-Lazer* LazerBuilder::create(TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
+Lazer* LazerBuilder::getNew(TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
 {
     Lazer* lazer = createTemplate();
     createInternals(lazer, tech_level, race_id, damage_orig, radius_orig);
