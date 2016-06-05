@@ -21,20 +21,12 @@
 #include <item/equipment/Scaner.hpp>
 #include <managers/EntityManager.hpp>
 
-#include <common/IdGenerator.hpp>
 #include <ceti/Logger.hpp>
-#include <math/rand.hpp>
-#include <common/constants.hpp>
 
 #include <common/Global.hpp>
 
-//#include <resources/TextureCollector.hpp>
-//#include <resources/MeshCollector.hpp>
-//#include <jeti/TextureOb.hpp>
-
-#include <descriptors/RaceDescriptors.hpp>
-
-#include <meti/RandUtils.hpp>
+#include <descriptors/Base.hpp>
+#include <descriptors/DescriptorManager.hpp>
 
 namespace item {
 namespace equipment {
@@ -57,7 +49,16 @@ Scaner* ScanerBuilder::createTemplate(id_type id) const
     return scaner;
 } 
 
-Scaner* ScanerBuilder::create(const descriptor::Base& descriptor) const
+Scaner* ScanerBuilder::getNew() const
+{
+    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::SCANER);
+    Scaner* scaner = createTemplate();
+    createInternals(scaner, descriptor);
+
+    return scaner;
+}
+
+Scaner* ScanerBuilder::getNew(const descriptor::Base& descriptor) const
 {
     Scaner* scaner = createTemplate();
     createInternals(scaner, descriptor);

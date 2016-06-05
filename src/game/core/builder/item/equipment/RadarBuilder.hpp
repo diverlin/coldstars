@@ -21,7 +21,9 @@
 
 #include <types/IdType.hpp>
 
-#include <descriptors/Base.hpp>
+namespace descriptor {
+class Base;
+} // namespace descriptor
 
 namespace item {
 namespace equipment {
@@ -34,8 +36,9 @@ public:
     RadarBuilder();
     ~RadarBuilder();
 
+    Radar* getNew() const;
     Radar* createTemplate(id_type id = NONE_ID) const;
-    Radar* create(const descriptor::Base&) const;
+    Radar* getNew(const descriptor::Base&) const;
 
 private:
     void createInternals(Radar*, const descriptor::Base&) const;

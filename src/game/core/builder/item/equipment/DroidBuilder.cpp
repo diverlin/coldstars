@@ -21,16 +21,12 @@
 #include <item/equipment/Droid.hpp>
 #include <managers/EntityManager.hpp>
 
-#include <common/IdGenerator.hpp>
-#include <ceti/Logger.hpp>
-#include <math/rand.hpp>
-#include <common/constants.hpp>
+//#include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
 
-#include <descriptors/RaceDescriptors.hpp>
-
-#include <meti/RandUtils.hpp>
+#include <descriptors/Base.hpp>
+#include <descriptors/DescriptorManager.hpp>
 
 namespace item {
 namespace equipment {
@@ -53,7 +49,16 @@ Droid* DroidBuilder::createTemplate(id_type id) const
     return droid;
 } 
 
-Droid* DroidBuilder::create(const descriptor::Base& descriptor) const
+Droid* DroidBuilder::getNew() const
+{
+    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::DROID);
+    Droid* droid = createTemplate();
+    createInternals(droid, descriptor);
+
+    return droid;
+}
+
+Droid* DroidBuilder::getNew(const descriptor::Base& descriptor) const
 {
     Droid* droid = createTemplate();
     createInternals(droid, descriptor);

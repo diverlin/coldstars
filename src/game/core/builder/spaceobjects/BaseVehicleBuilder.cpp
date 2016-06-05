@@ -188,14 +188,14 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
         bool rand = 0; //getRandBool();
         if (rand)
         {
-            item::equipment::Rocket* rocket_equipment = global::get().rocketBuilder().create(tech_level);
+            item::equipment::Rocket* rocket_equipment = global::get().rocketBuilder().getNew(tech_level);
             if (vehicle->manage(rocket_equipment) == false) {
                 global::get().entityManager().addToGarbage(rocket_equipment);
             }
         }
         else
         {
-            item::equipment::Lazer* lazer_equipment = global::get().lazerBuilder().create(tech_level);
+            item::equipment::Lazer* lazer_equipment = global::get().lazerBuilder().getNew(tech_level);
             if (vehicle->manage(lazer_equipment) == false) {
                 global::get().entityManager().addToGarbage(lazer_equipment);
             }
@@ -204,7 +204,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::RADAR_SLOT_ID)) {
         auto descr = global::get().descriptors().getRand(descriptor::Type::RADAR);
-        item::equipment::Radar* radar_equipment = global::get().radarBuilder().create(descr);
+        item::equipment::Radar* radar_equipment = global::get().radarBuilder().getNew(descr);
         if (vehicle->manage(radar_equipment) == false) {
             global::get().entityManager().addToGarbage(radar_equipment);
         }
@@ -212,7 +212,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::DRIVE_SLOT_ID)) {
         auto descr = global::get().descriptors().getRand(descriptor::Type::DRIVE);
-        item::equipment::Drive* drive_equipment = global::get().driveBuilder().create(descr);
+        item::equipment::Drive* drive_equipment = global::get().driveBuilder().getNew(descr);
         if (vehicle->manage(drive_equipment) == false) {
             global::get().entityManager().addToGarbage(drive_equipment);
         }
@@ -220,7 +220,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::BAK_SLOT_ID)) {
         auto descr = global::get().descriptors().getRand(descriptor::Type::BAK);
-        item::equipment::Bak* bak_equipment = global::get().bakBuilder().create(descr);
+        item::equipment::Bak* bak_equipment = global::get().bakBuilder().getNew(descr);
         if (vehicle->manage(bak_equipment) == false) {
             global::get().entityManager().addToGarbage(bak_equipment);
         }
@@ -246,7 +246,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
 
     if (vehicle->isSlotExists(TYPE::ENTITY::PROTECTOR_SLOT_ID)) {
         auto descr = global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
-        item::equipment::Protector* protector_equipment = global::get().protectorBuilder().create(descr);
+        item::equipment::Protector* protector_equipment = global::get().protectorBuilder().getNew(descr);
         if (vehicle->manage(protector_equipment) == false) {
             global::get().entityManager().addToGarbage(protector_equipment);
         }  
@@ -254,7 +254,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
         
     if (vehicle->isSlotExists(TYPE::ENTITY::DROID_SLOT_ID)) {
         auto descr = global::get().descriptors().getRand(descriptor::Type::DROID);
-        item::equipment::Droid* droid_equipment = global::get().droidBuilder().create(descr);
+        item::equipment::Droid* droid_equipment = global::get().droidBuilder().getNew(descr);
         if (vehicle->manage(droid_equipment) == false) {
             global::get().entityManager().addToGarbage(droid_equipment);
         }  
@@ -262,7 +262,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::SCANER_SLOT_ID)) {
         auto descr = global::get().descriptors().getRand(descriptor::Type::SCANER);
-        item::equipment::Scaner* scaner_equipment = global::get().scanerBuilder().create(descr);
+        item::equipment::Scaner* scaner_equipment = global::get().scanerBuilder().getNew(descr);
         if (vehicle->manage(scaner_equipment) == false) {
             global::get().entityManager().addToGarbage(scaner_equipment);
         }  
@@ -270,7 +270,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
     
     if (vehicle->isSlotExists(TYPE::ENTITY::GRAPPLE_SLOT_ID)) {
         auto descr = global::get().descriptors().getRand(descriptor::Type::GRAPPLE);
-        item::equipment::Grapple* grapple_equipment = global::get().grappleBuilder().create(descr);
+        item::equipment::Grapple* grapple_equipment = global::get().grappleBuilder().getNew(descr);
         if (vehicle->manage(grapple_equipment) == false) {
             global::get().entityManager().addToGarbage(grapple_equipment);
         }

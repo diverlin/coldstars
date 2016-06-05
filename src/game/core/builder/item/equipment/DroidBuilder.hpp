@@ -20,7 +20,10 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <descriptors/Base.hpp>
+
+namespace descriptor {
+class Base;
+} // namespace descriptor
 
 namespace item {
 namespace equipment {
@@ -33,8 +36,9 @@ public:
     DroidBuilder();
     ~DroidBuilder();
 
+    Droid* getNew() const;
     Droid* createTemplate(id_type id = NONE_ID) const;
-    Droid* create(const descriptor::Base&) const;
+    Droid* getNew(const descriptor::Base&) const;
 
 private:
     void createInternals(Droid*, const descriptor::Base&) const;

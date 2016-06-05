@@ -20,7 +20,10 @@
 #pragma once
 
 #include <types/IdType.hpp>
-#include <descriptors/Base.hpp>
+
+namespace descriptor {
+class Base;
+} // namespace descriptor
 
 namespace item {
 namespace equipment {
@@ -33,8 +36,9 @@ public:
     BakBuilder();
     ~BakBuilder();
 
+    item::equipment::Bak* getNew() const;
     item::equipment::Bak* createTemplate(id_type id = NONE_ID) const;
-    item::equipment::Bak* create(const descriptor::Base&) const;
+    item::equipment::Bak* getNew(const descriptor::Base&) const;
 
 private:
     BakBuilder(const BakBuilder&) = delete;
