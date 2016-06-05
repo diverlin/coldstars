@@ -112,7 +112,7 @@ std::string Lazer::GetRadiusStr()
 
 void Lazer::FireEvent(SpaceObject* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
 { 
-    if (itemSlot()->GetOwnerVehicle()->TryToConsumeEnergy(damage) == true)
+    if (itemSlot()->vehicleOwner()->tryConsumeEnergy(damage) == true)
     {
         if (subtarget != nullptr) // precise fire
         {

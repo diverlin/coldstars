@@ -89,7 +89,7 @@ void SatelliteBuilder::createInternals(Satellite* satellite) const
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender satellite->SetAnimationRotation(animation_rotation);
     
-    satellite->SetKorpusData(data_korpus);
+    satellite->setKorpusData(data_korpus);
     satellite->setLifeData(data_life);
     //alpitodorender satellite->SetRenderData(mesh, texOb, texOb->size());
 

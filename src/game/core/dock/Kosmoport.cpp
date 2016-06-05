@@ -96,7 +96,7 @@ bool Kosmoport::AddVehicle(Vehicle* vehicle)
     vehicle->setPlaceTypeId(TYPE::PLACE::KOSMOPORT_ID); 
     angar->AddVehicle(vehicle);  
     
-    vehicle->SetLand(this);        
+    vehicle->setLand(this);        
     if (vehicle->starsystem() == nullptr) // used if vehicle added directly after creation
     {
             vehicle->setStarSystem(owner->starsystem());

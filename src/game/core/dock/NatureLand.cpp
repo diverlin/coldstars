@@ -90,7 +90,7 @@ bool NatureLand::AddItem(item::Base* item)
 bool NatureLand::AddVehicle(Vehicle* vehicle)
 {
     vehicle->setPlaceTypeId(TYPE::PLACE::NATURELAND_ID); 
-    vehicle->SetLand(this);
+    vehicle->setLand(this);
     
     VEHICLE_vec.push_back(vehicle);
     

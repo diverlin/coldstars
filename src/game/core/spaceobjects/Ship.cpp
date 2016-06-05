@@ -90,19 +90,19 @@ void Ship::UpdateInSpace(int time, bool show_effect)
 {   
     checkDeath(show_effect);
 //    GetComplexProtector().GetShieldEffect()->Update();
-    GetComplexDrive().UpdatePosition(); // debug
+    driveComplex().UpdatePosition(); // debug
 
     if (time > 0) {
         UpdateSpecialAction();
         
         if (npc()) {
             npc()->UpdateInSpace(time, show_effect);
-            GetComplexWeapon().Fire(time, npc()->GetSkills().GetAttackNormalized(), show_effect);
+            weaponComplex().Fire(time, npc()->GetSkills().GetAttackNormalized(), show_effect);
 
             updateOrientation();
 
             if (properties().speed > 0) {
-                GetComplexDrive().UpdatePosition();
+                driveComplex().UpdatePosition();
             }
 
             UpdateGrappleMicroProgram_inDynamic();

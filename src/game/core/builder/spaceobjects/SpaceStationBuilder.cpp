@@ -113,7 +113,7 @@ void SpaceStationBuilder::createInternals(SpaceStation* spacestation) const
 
     
     spacestation->setSubSubTypeId(TYPE::ENTITY::SPACESTATION_MILITARY_ID);
-    spacestation->SetKorpusData(data_korpus);
+    spacestation->setKorpusData(data_korpus);
     spacestation->setLifeData(data_life);
 
     //alpitodorender spacestation->SetRenderData(mesh, texOb, size);

@@ -62,7 +62,7 @@ BaseVehicleBuilder::BaseVehicleBuilder()
 void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
 {     
     // WEAPON SLOTS
-    unsigned int slot_weapon_num = vehicle->GetVehicleDescriptor().slot_weapon_num;
+    unsigned int slot_weapon_num = vehicle->vehicleDescriptor().slot_weapon_num;
     for (unsigned int i=0; i<slot_weapon_num; i++)
     {
         ItemSlot* weapon_slot = GetNewItemSlot(TYPE::ENTITY::WEAPON_SLOT_ID);  
@@ -70,62 +70,62 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
         vehicle->addItemSlot(weapon_slot);
     }
         
-    if (vehicle->GetVehicleDescriptor().slot_radar_num)
+    if (vehicle->vehicleDescriptor().slot_radar_num)
     {
         ItemSlot* radar_slot = GetNewItemSlot(TYPE::ENTITY::RADAR_SLOT_ID);
         vehicle->addItemSlot(radar_slot);
     }
             
-    if (vehicle->GetVehicleDescriptor().slot_scaner_num)
+    if (vehicle->vehicleDescriptor().slot_scaner_num)
     {
         ItemSlot* scaner_slot = GetNewItemSlot(TYPE::ENTITY::SCANER_SLOT_ID); 
         vehicle->addItemSlot(scaner_slot);
     }
 
-    if (vehicle->GetVehicleDescriptor().slot_energizer_num)
+    if (vehicle->vehicleDescriptor().slot_energizer_num)
     {
         ItemSlot* energizer_slot = GetNewItemSlot(TYPE::ENTITY::ENERGIZER_SLOT_ID); 
         vehicle->addItemSlot(energizer_slot);
     }
     
-    if (vehicle->GetVehicleDescriptor().slot_grapple_num)
+    if (vehicle->vehicleDescriptor().slot_grapple_num)
     {
         ItemSlot* grapple_slot = GetNewItemSlot(TYPE::ENTITY::GRAPPLE_SLOT_ID);
         vehicle->addItemSlot(grapple_slot); 
     }
     
-    if (vehicle->GetVehicleDescriptor().slot_droid_num)
+    if (vehicle->vehicleDescriptor().slot_droid_num)
     {
         ItemSlot* droid_slot = GetNewItemSlot(TYPE::ENTITY::DROID_SLOT_ID);  
         vehicle->addItemSlot(droid_slot); 
     }
     
-    if (vehicle->GetVehicleDescriptor().slot_freezer_num)
+    if (vehicle->vehicleDescriptor().slot_freezer_num)
     {
         //ItemSlot* freezer_slot = GetNewItemSlot(TYPE::ENTITY::FREEZER_SLOT_ID);
         //vehicle->AddItemSlot(freezer_slot);           
     }
     
-    if (vehicle->GetVehicleDescriptor().slot_protector_num)
+    if (vehicle->vehicleDescriptor().slot_protector_num)
 {
         ItemSlot* protector_slot = GetNewItemSlot(TYPE::ENTITY::PROTECTOR_SLOT_ID);  
         vehicle->addItemSlot(protector_slot);         
     }
     
-    if (vehicle->GetVehicleDescriptor().slot_drive_num)
+    if (vehicle->vehicleDescriptor().slot_drive_num)
     {
         ItemSlot* drive_slot = GetNewItemSlot(TYPE::ENTITY::DRIVE_SLOT_ID); 
         vehicle->addItemSlot(drive_slot);
     }
     
-    if (vehicle->GetVehicleDescriptor().slot_bak_num)
+    if (vehicle->vehicleDescriptor().slot_bak_num)
     {
         ItemSlot* bak_slot = GetNewItemSlot(TYPE::ENTITY::BAK_SLOT_ID);  
         vehicle->addItemSlot(bak_slot);
     }
     
     //////////// ARTEFACT SLOT /////////////////////////
-    int artefact_num = vehicle->GetVehicleDescriptor().slot_artefact_num;
+    int artefact_num = vehicle->vehicleDescriptor().slot_artefact_num;
     for (int i=0; i<artefact_num; i++)
     {
         ItemSlot* artefact_slot = GetNewItemSlot(TYPE::ENTITY::ARTEFACT_SLOT_ID);
@@ -134,7 +134,7 @@ void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
     } 
 
     //////// OTSEC SLOT ////////////////////////////////
-    int otsec_num = vehicle->GetVehicleDescriptor().slot_otsec_num;
+    int otsec_num = vehicle->vehicleDescriptor().slot_otsec_num;
     for (int i=0; i<otsec_num; i++)
     {
         ItemSlot* otsec_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID); 
@@ -182,7 +182,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, const descriptor::Base& descrip
 
 void BaseVehicleBuilder::equip(Vehicle* vehicle, TYPE::TECH tech_level) const
 {
-    unsigned int weapons_num = meti::getRandInt(vehicle->GetVehicleDescriptor().slot_weapon_num/2, vehicle->GetVehicleDescriptor().slot_weapon_num);
+    unsigned int weapons_num = meti::getRandInt(vehicle->vehicleDescriptor().slot_weapon_num/2, vehicle->vehicleDescriptor().slot_weapon_num);
     for (unsigned int i=0; i<weapons_num; i++)
     {
         bool rand = 0; //getRandBool();

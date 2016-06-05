@@ -57,9 +57,9 @@ void SpaceStation::putChildrenToGarbage() const
     npc()->SetAlive(false);
     global::get().entityManager().addToGarbage(npc());
     
-    for(unsigned int i=0; i<m_SlotTotal_vec.size(); i++)
+    for(unsigned int i=0; i<m_slots.size(); i++)
     {
-        global::get().entityManager().addToGarbage(m_SlotTotal_vec[i]);
+        global::get().entityManager().addToGarbage(m_slots[i]);
     }
 }
 
@@ -75,7 +75,7 @@ void SpaceStation::UpdateInSpace(int time, bool show_effect)
     checkDeath(show_effect);
     if (time > 0)
     {
-        GetComplexWeapon().Fire(time, npc()->GetSkills().GetAttackNormalized(), show_effect);
+        weaponComplex().Fire(time, npc()->GetSkills().GetAttackNormalized(), show_effect);
     }
 }
 

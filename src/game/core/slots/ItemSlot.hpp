@@ -65,13 +65,13 @@ class GrappleModule;
 class Bomb; 
 class GoodsPack; 
 
-namespace ceti {
-class Box2D;
-}
+//namespace ceti {
+//class Box2D;
+//}
 
-namespace jeti {
-class Renderer;
-}
+//namespace jeti {
+//class Renderer;
+//}
 
 struct UnresolvedDataItemSlot
 {
