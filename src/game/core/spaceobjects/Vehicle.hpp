@@ -155,17 +155,17 @@ public:
 //protected:
     void increaseMass(int);
     void decreaseMass(int);
-    void UpdatePropertiesEnergy();
-    void UpdatePropertiesFreeze();
-    void UpdatePropertiesSpeed();
-    void UpdatePropertiesFire();
-    void UpdatePropertiesRadar();
-    void UpdatePropertiesJump();
-    void UpdatePropertiesProtection();
-    void UpdatePropertiesRepair();
-    void UpdatePropertiesScan();
-    void UpdatePropertiesGrab();
-    void UpdateArtefactInfluence();
+    void updatePropEnergy();
+    void updatePropFreeze();
+    void updatePropSpeed();
+    void updatePropFire();
+    void updatePropRadar();
+    void updatePropJump();
+    void updatePropProtection();
+    void updatePropRepair();
+    void updatePropScan();
+    void updatePropGrab();
+    void updateArtefactInfluence();
 //public:
 
     void HyperJumpEvent(StarSystem*);
