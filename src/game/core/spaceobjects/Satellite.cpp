@@ -71,7 +71,7 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
             //points.setCenter(orbit->getPosition());
         //}
         
-        GetComplexWeapon().Fire(time, npc()->GetSkills().GetAttackNormalized(), show_effect);
+        weaponComplex().Fire(time, npc()->GetSkills().GetAttackNormalized(), show_effect);
     }
 }
 

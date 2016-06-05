@@ -59,8 +59,8 @@ void Droid::updateProperties()
 void Droid::updateInStatic()
 {
     if (isFunctioning()) {
-        if (!itemSlot()->GetOwnerVehicle()->IsArmorFull()) {
-            itemSlot()->GetOwnerVehicle()->IncreaseArmor(repair);
+        if (!itemSlot()->vehicleOwner()->isArmorFull()) {
+            itemSlot()->vehicleOwner()->increaseArmor(repair);
             deteriorationEvent();
         }
     }

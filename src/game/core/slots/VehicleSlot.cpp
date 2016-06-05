@@ -119,11 +119,11 @@ void VehicleSlot::ResolveData()
 {
     LOG(" VehicleSlot("+std::to_string(id())+")::ResolveData");
 
-    switch(owner->typeId())
+    switch(owner()->typeId())
     {
         //case ENTITY::VEHICLE_ID:     { ((Vehicle*)global::get().entityManager().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
         //case ENTITY::CONTAINER_ID:     { ((Container*)global::get().entityManager().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
-        case TYPE::ENTITY::STORE_ID:           { ((Store*)owner)->addVehicleSlot(this); break; }
-        case TYPE::ENTITY::ANGAR_ID:             { ((Angar*)owner)->AddVehicleSlot(this); break; }
+        case TYPE::ENTITY::STORE_ID:           { ((Store*)owner())->addVehicleSlot(this); break; }
+        case TYPE::ENTITY::ANGAR_ID:             { ((Angar*)owner())->AddVehicleSlot(this); break; }
     }
 }

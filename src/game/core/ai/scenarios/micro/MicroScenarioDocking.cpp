@@ -36,7 +36,7 @@ MicroScenarioDocking::~MicroScenarioDocking()
 /* virtual */
 void MicroScenarioDocking::Enter(Npc* npc) const
 {    
-    npc->GetVehicle()->GetComplexDrive().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::DOCKING_ID);
+    npc->GetVehicle()->driveComplex().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::DOCKING_ID);
 
     LOG( "npc_id="+std::to_string(npc->id())+" ENTER MicroScenarioDocking");
 }
@@ -59,9 +59,9 @@ void MicroScenarioDocking::UpdateInStaticInSpace(Npc* npc) const
 /* virtual */
 void MicroScenarioDocking::UpdateInDynamicInSpace(Npc* npc) const
 {
-         if (npc->GetVehicle()->GetComplexDrive().CheckTargetEchievement() == true)
+         if (npc->GetVehicle()->driveComplex().CheckTargetEchievement() == true)
          {
-             if (npc->GetVehicle()->GetComplexDrive().GetDockingPermission() == true)
+             if (npc->GetVehicle()->driveComplex().GetDockingPermission() == true)
              {
                  if (npc->GetVehicle()->GetSpecialActionId() != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID)
                  {

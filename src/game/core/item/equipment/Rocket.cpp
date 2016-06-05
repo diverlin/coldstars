@@ -165,21 +165,21 @@ void Rocket::FireEvent(float attack_rate_normalized)
         RocketBullet* rocket_bullet = global::get().rocketBulletBuilder().create(data_bullet);
         rocket_bullet->SetDamageRate(attack_rate_normalized);
 
-        if (itemSlot()->GetOwnerVehicle()->GetVehicleDescriptor().draw_turrels == true)
+        if (itemSlot()->vehicleOwner()->vehicleDescriptor().draw_turrels == true)
         {
             start_pos = itemSlot()->turrel()->center();
             //angle_inD = item_slot->GetTurrel()->GetAngle().z;
         }
         else
         {
-            start_pos = itemSlot()->GetOwnerVehicle()->center();
+            start_pos = itemSlot()->vehicleOwner()->center();
             //angle_inD = itemSlot()->GetOwnerVehicle()->GetAngle().z;
         }  
         
-        rocket_bullet->SetOwnerId(itemSlot()->GetOwnerVehicle()->id());
+        rocket_bullet->SetOwnerId(itemSlot()->vehicleOwner()->id());
         rocket_bullet->SetTarget(itemSlot()->target());
     
-        itemSlot()->GetOwnerVehicle()->starsystem()->add(rocket_bullet, start_pos, glm::vec3(0, 0, angle_inD));
+        itemSlot()->vehicleOwner()->starsystem()->add(rocket_bullet, start_pos, glm::vec3(0, 0, angle_inD));
         num++;
     }
         

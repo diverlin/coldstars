@@ -147,7 +147,7 @@ void StarSystem::createGroupAndShareTask(Npc* npc_leader, StarSystem* target_sta
     int num = 0;
     for (unsigned int i=0; (i<tmp_npc_vec.size() and (num<num_max)); i++)
     {
-        if (tmp_npc_vec[i]->GetVehicle()->IsAbleToJumpTo(target_starsystem) == true)
+        if (tmp_npc_vec[i]->GetVehicle()->isAbleToJumpTo(target_starsystem) == true)
         {
             tmp_npc_vec[i]->CloneMacroTaskFrom(npc_leader);
             num++;
@@ -793,7 +793,7 @@ void StarSystem::UpdateInSpaceInStatic_s()
         m_vehicles[i]->npc()->UpdateInSpaceInStatic();
         if (m_vehicles[i]->subTypeId() == TYPE::ENTITY::SPACESTATION_ID)
         {
-            ((SpaceStation*)m_vehicles[i])->GetLand()->UpdateInStatic();
+            ((SpaceStation*)m_vehicles[i])->land()->UpdateInStatic();
         }
     }
 
@@ -890,7 +890,7 @@ void StarSystem::ShipManager_s(unsigned int num)
         Ship* new_pship = global::get().shipBuilder().getNew();
         global::get().shipBuilder().equip(new_pship);   // improove
 
-        new_pship->BindOwnerNpc(new_pnpc);
+        new_pship->bindNpc(new_pnpc);
 
         glm::vec2 center = meti::getRandVec2f(100, 800);
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
@@ -1021,8 +1021,8 @@ void StarSystem::starSparkEvent(float radius) const
 {
     for (unsigned int i=0; i<m_vehicles.size(); i++) {
         if ( meti::distance(m_vehicles[i]->center(), star()->center()) < radius ) {
-            if (m_vehicles[i]->slotRadar()->item() != nullptr) {
-                m_vehicles[i]->slotRadar()->item()->lockEvent(2);
+            if (m_vehicles[i]->radarSlot()->item() != nullptr) {
+                m_vehicles[i]->radarSlot()->item()->lockEvent(2);
             }
         }
     }

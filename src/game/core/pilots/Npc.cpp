@@ -99,7 +99,7 @@ void Npc::UpdateInKosmoportInStatic()
 
         state_machine.UpdateInStaticInDock();
 
-        vehicle->ManageItemsInCargo();
+        vehicle->manageItemsInCargo();
         vehicle->sellItemsInCargo();
         vehicle->LaunchingEvent();
     }
@@ -112,7 +112,7 @@ void Npc::UpdateInSpaceInStatic()
     //LOG("Npc("+std::to_string(id())+")::UpdateInSpaceInStatic START");
 
     vehicle->UpdateAllFunctionalItemsInStatic();
-    vehicle->GetComplexWeapon().PrepareWeapons();
+    vehicle->weaponComplex().PrepareWeapons();
 
     if (player == nullptr)
     {
@@ -140,7 +140,7 @@ void Npc::UpdateInSpaceInStatic()
         state_machine.UpdateInStaticInSpace();
     }
 
-    vehicle->GetComplexDrive().UpdatePath();
+    vehicle->driveComplex().UpdatePath();
 
     //LOG("Npc("+std::to_string(id())+")::UpdateInSpaceInStatic END");
 }
@@ -193,10 +193,10 @@ void Npc::ScenarioFireVehicleAgressor()
         {
             if (observation.visible_VEHICLE_pair_vec[i].object->npc()->id() == it->npc_id)
             {
-                vehicle->GetComplexWeapon().DeactivateAllWeapons();
+                vehicle->weaponComplex().DeactivateAllWeapons();
 
-                vehicle->GetComplexWeapon().ActivateAllWeapons();
-                vehicle->GetComplexWeapon().SetTarget(observation.visible_VEHICLE_pair_vec[i].object);
+                vehicle->weaponComplex().ActivateAllWeapons();
+                vehicle->weaponComplex().SetTarget(observation.visible_VEHICLE_pair_vec[i].object);
 
                 return;
             }
@@ -206,10 +206,10 @@ void Npc::ScenarioFireVehicleAgressor()
 
 void Npc::ScenarioFireAsteroid()
 {
-    vehicle->GetComplexWeapon().DeactivateAllWeapons();
+    vehicle->weaponComplex().DeactivateAllWeapons();
 
-    vehicle->GetComplexWeapon().ActivateAllWeapons();
-    vehicle->GetComplexWeapon().SetTarget(observation.visible_ASTEROID_pair_vec[0].object);
+    vehicle->weaponComplex().ActivateAllWeapons();
+    vehicle->weaponComplex().SetTarget(observation.visible_ASTEROID_pair_vec[0].object);
 }
 
 Planet* Npc::GetPlanetForDocking()
@@ -280,7 +280,7 @@ void Npc::RenderInfo(const glm::vec2& center)
 
 bool Npc::BuyGoods()
 {
-    Shop* shop = ((Kosmoport*)vehicle->GetLand())->GetShop();
+    Shop* shop = ((Kosmoport*)vehicle->land())->GetShop();
     TYPE::ENTITY subtype_id = (TYPE::ENTITY)meti::getRandInt((int)TYPE::ENTITY::MINERALS_ID, (int)TYPE::ENTITY::EXCLUSIVE_ID);
 
     // hard coded logic
@@ -360,7 +360,7 @@ void Npc::ResolveData()
 {
     ApplySkillsStrategy();
     
-    ((Vehicle*)global::get().entityManager().get(data_unresolved_npc.vehicle_id))->BindOwnerNpc(this);
+    ((Vehicle*)global::get().entityManager().get(data_unresolved_npc.vehicle_id))->bindNpc(this);
     SetAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
     skills.Resolve();

@@ -112,7 +112,7 @@ void ShipBuilder::createInternals(Ship* ship, const descriptor::Base& descr) con
     vehicleDescriptor.slot_artefact_num = descr.artefactSlotNum();
     vehicleDescriptor.slot_otsec_num = descr.cargoSlotNum();
 
-    ship->SetKorpusData(vehicleDescriptor);
+    ship->setKorpusData(vehicleDescriptor);
 
 //    float scale_comp = meti::getRandInt(ENTITY::SHIP::SCALE_MIN, ENTITY::SHIP::SCALE_MAX);
 //    glm::vec3 scale(scale_comp, scale_comp, scale_comp);

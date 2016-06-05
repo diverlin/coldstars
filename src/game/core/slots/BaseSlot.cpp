@@ -28,9 +28,9 @@
 
 BaseSlot::BaseSlot()
 :
-selected(false),
-textureOb(nullptr),
-owner(nullptr)
+m_selected(false),
+m_textureOb(nullptr),
+m_owner(nullptr)
 {}
 
 /* virtual */
@@ -43,11 +43,11 @@ void BaseSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
 {   
     LOG(" BaseSlot("+std::to_string(id())+")::SaveData");
         
-    if (owner) { save_ptree.put(root+"unresolved.owner_id", owner->id()); }
+    if (m_owner) { save_ptree.put(root+"unresolved.owner_id", m_owner->id()); }
     else       { save_ptree.put(root+"unresolved.owner_id", NONE_ID); }
     
-    save_ptree.put(root+"position.x", position.x);
-    save_ptree.put(root+"position.y", position.y);
+    save_ptree.put(root+"position.x", m_position.x);
+    save_ptree.put(root+"position.y", m_position.y);
 }
 
 void BaseSlot::LoadData(const boost::property_tree::ptree& load_ptree)
@@ -55,7 +55,7 @@ void BaseSlot::LoadData(const boost::property_tree::ptree& load_ptree)
     LOG(" BaseSlot("+std::to_string(id())+")::LoadData");
        
     unresolved_BaseSlot.owner_id = load_ptree.get<int>("unresolved.owner_id"); 
-    position = glm::vec2(load_ptree.get<int>("position.x"), load_ptree.get<int>("position.y"));
+    m_position = glm::vec2(load_ptree.get<int>("position.x"), load_ptree.get<int>("position.y"));
 
 }
 
@@ -64,7 +64,7 @@ void BaseSlot::ResolveData()
     LOG(" BaseSlot("+std::to_string(id())+")::ResolveData");
     
     if (unresolved_BaseSlot.owner_id != NONE_ID) {
-        owner = global::get().entityManager().get(unresolved_BaseSlot.owner_id);
+        m_owner = global::get().entityManager().get(unresolved_BaseSlot.owner_id);
     }
 }
 

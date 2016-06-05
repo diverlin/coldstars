@@ -114,7 +114,7 @@ void Grapple::UpdateGrabScenarioProgram_inDynamic()
 {                      
     for (std::vector<SpaceObject*>::iterator it = target_vec.begin(); it != target_vec.end(); ++it)
     {
-        Vehicle& vehicle = *itemSlot()->GetOwnerVehicle(); // shortcut
+        Vehicle& vehicle = *itemSlot()->vehicleOwner(); // shortcut
         SpaceObject& target = **it;
         
         if (itemSlot()->checkTarget(&target) == STATUS::TARGET_OK)

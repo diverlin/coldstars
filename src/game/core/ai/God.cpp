@@ -227,7 +227,7 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
         global::get().spaceStationBuilder().equip(spacestation);  // improove
 
         Npc* npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
-        spacestation->BindOwnerNpc(npc);
+        spacestation->bindNpc(npc);
 
         glm::vec2 center = meti::getRandVec2f(700, 1500);
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
@@ -240,7 +240,7 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
             global::get().satelliteBuilder().equip(satellite);                   // improove
 
             Npc* new_npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
-            satellite->BindOwnerNpc(new_npc);
+            satellite->bindNpc(new_npc);
             
             glm::vec3 center(0, 0, DEFAULT_ENTITY_ZPOS);
             glm::vec3 angle(0, 0, 0);
@@ -275,7 +275,7 @@ void God::CreateShips(StarSystem* starsystem, int ship_num, TYPE::RACE npc_race_
         global::get().shipBuilder().equip(new_ship); // improove
 
         Npc* new_npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
-        new_ship->BindOwnerNpc(new_npc);
+        new_ship->bindNpc(new_npc);
 
         glm::vec3 center = meti::getRandXYVec3f(300, 1200, DEFAULT_ENTITY_ZPOS);
         glm::vec3 angle(0, 0, meti::getRandInt(0, 360));

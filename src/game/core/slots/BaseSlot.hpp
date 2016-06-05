@@ -16,9 +16,7 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-#ifndef BASESLOT_HPP
-#define BASESLOT_HPP
+#pragma once
 
 #include <common/Base.hpp>
 #include <types/IdType.hpp>
@@ -44,33 +42,33 @@ class BaseSlot : public Base
         BaseSlot();
         virtual ~BaseSlot();
                 
-        void SetTextureOb(jeti::TextureOb* textureOb) { this->textureOb = textureOb; };
-        void SetOwner(Base* owner) { this->owner = owner; };
-        void SetPosition(const glm::vec2& position) { this->position = position; };
-        void SelectEvent() { selected = true; };
-        void DeselectEvent() { selected = false; };
+//        void SetTextureOb(jeti::TextureOb* textureOb) { m_textureOb = textureOb; }
+        void SetOwner(Base* owner) { m_owner = owner; }
+        void SetPosition(const glm::vec2& position) { m_position = position; }
+        void SelectEvent() { m_selected = true; }
+        void DeselectEvent() { m_selected = false; }
                 
-        bool GetSelected() const { return selected; };
+        bool GetSelected() const { return m_selected; }
         
-        const glm::vec2& GetPosition() const { return position; };
+        const glm::vec2& GetPosition() const { return m_position; }
         
-        Vehicle* GetOwnerVehicle() const {
-            assert(owner);
-            Vehicle* vehicle = static_cast<Vehicle*>(owner);
+        Vehicle* vehicleOwner() const {
+            assert(m_owner);
+            Vehicle* vehicle = static_cast<Vehicle*>(m_owner);
             assert(vehicle);
             return vehicle;
         }
 
-        Base* GetOwner() const { return owner; };
+        Base* owner() const { return m_owner; }
         
-    protected:        
-        bool selected;                     
+    protected:      // make private
+        bool m_selected;
         
-        jeti::TextureOb* textureOb;
+        jeti::TextureOb* m_textureOb;
                         
-        Base* owner; 
+        Base* m_owner;
         
-        glm::vec2 position;
+        glm::vec2 m_position;
      
         UnresolvedDataBaseSlot unresolved_BaseSlot;
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
@@ -78,4 +76,3 @@ class BaseSlot : public Base
         void ResolveData();
 }; 
 
-#endif

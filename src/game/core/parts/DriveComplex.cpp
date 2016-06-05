@@ -132,7 +132,7 @@ void DriveComplex::DefineDistance()
 
         case NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID:
         {
-            int weapon_radius_min = m_OwnerVehicle->GetComplexWeapon().GetRadiusMin();
+            int weapon_radius_min = m_OwnerVehicle->weaponComplex().GetRadiusMin();
             if (weapon_radius_min < 10) // in some cases case thee the bug (HACK)
             {
                 m_TargetDistance = 150;                
@@ -272,7 +272,7 @@ bool DriveComplex::GetDockingPermission()
         { 
             switch(m_Target->subTypeId())
             {
-                case TYPE::ENTITY::SPACESTATION_ID: { return ((SpaceStation*)m_Target)->GetLand()->GetPermissionToLand(); break; }
+                case TYPE::ENTITY::SPACESTATION_ID: { return ((SpaceStation*)m_Target)->land()->GetPermissionToLand(); break; }
                 //case SHIP_ID:   { return targetOb->GetVehicle()->getPermissionToLand(); break; }
             }
             break;

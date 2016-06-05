@@ -75,23 +75,23 @@ public:
     [[deprecated("move to gui")]]
     void CreateProtectionComplexTextureDependedStuff();
 
-    void SetGodMode(bool god_mode) { m_GodMode = god_mode; }
-    void SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE special_action_id) { m_SpecialActionId = special_action_id; }
-    void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { m_ParentVehicleSlot = parent_vehicleslot; }
+    void setGodMode(bool god_mode) { m_godMode = god_mode; }
+    void SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE special_action_id) { m_specialActionId = special_action_id; }
+    void SetParentVehicleSlot(VehicleSlot* parent_vehicleslot) { m_parentVehicleSlot = parent_vehicleslot; }
 
-    void SetLand(Land* land) { m_Land = land; }
+    void setLand(Land* land) { m_Land = land; }
 
-    void SetKorpusData(const VehicleDescriptor&);
+    void setKorpusData(const VehicleDescriptor&);
 
-    bool GetGodMode() const { return m_GodMode; }
-    Land* const GetLand() const { return m_Land; }
-    VEHICLE_SPECIAL_ACTION_TYPE GetSpecialActionId() const { return m_SpecialActionId; }
+    bool godMode() const { return m_godMode; }
+    Land* const land() const { return m_Land; }
+    VEHICLE_SPECIAL_ACTION_TYPE GetSpecialActionId() const { return m_specialActionId; }
 
-    VehicleSlot* const parentVehicleSlot() const { return m_ParentVehicleSlot; }
+    VehicleSlot* const parentVehicleSlot() const { return m_parentVehicleSlot; }
 
     const VehiclePropetries& properties() const { return m_properties; }
-    const VehicleNeeds& needs() const { return m_Needs; }
-    const VehicleDescriptor& GetVehicleDescriptor() const { return m_VehicleDescriptor; }
+    const VehicleNeeds& needs() const { return m_needs; }
+    const VehicleDescriptor& vehicleDescriptor() const { return m_vehicleDescriptor; }
 
     virtual int givenExpirience() const override final;
     bool isSlotExists(TYPE::ENTITY) const;
@@ -104,7 +104,7 @@ public:
     bool addItemToCargoSlot(item::Base*);
     bool manage(item::Base*);
 
-    void ManageItemsInCargo();
+    void manageItemsInCargo();
     [[deprecated("move to ext")]]
     void sellItemsInCargo();
 
@@ -116,29 +116,30 @@ public:
     bool unpackContainerItemToCargoSlot(Container*);
 
     int freeSpace() const { return m_properties.free_space; }
-    int space() const { return m_VehicleDescriptor.space; }
+    int space() const { return m_vehicleDescriptor.space; }
 
-    void BindOwnerNpc(Npc*);
+    void bindNpc(Npc*);
 
-    bool IsObjectWithinRadarRange(SpaceObject*) const;
+    bool isObjectVisible(SpaceObject*) const;
 
-    WeaponComplex& GetComplexWeapon() { return m_ComplexWeapon; }   // !!!
-    DriveComplex& GetComplexDrive()   { return m_ComplexDrive; }
-    ProtectionComplex& GetComplexProtector() { return m_ComplexProtector; }
+    WeaponComplex& weaponComplex() { return m_weaponComplex; }   // !!!
+    const WeaponComplex& weaponComplex() const { return m_weaponComplex; }
+    DriveComplex& driveComplex()   { return m_driveComplex; }
+    ProtectionComplex& protectorComplex() { return m_protectorComplex; }
 
-    const WeaponComplex& GetComplexWeapon() const { return m_ComplexWeapon; }
-
-    ItemSlot* const slotRadar()     const { return m_SlotRadar; }
-    ItemSlot* const slotScaner()    const { return m_SlotScaner; }
-    ItemSlot* const slotEnergizer() const { return m_SlotEnergizer; }
-    ItemSlot* const slotGrapple()   const { return m_SlotGrapple; }
-    ItemSlot* const slotDroid()     const { return m_SlotDroid; }
-    ItemSlot* const slotFreezer()   const { return m_SlotFreezer; }
+    ItemSlot* const radarSlot()     const { return m_radarSlot; }
+    ItemSlot* const scanerSlot()    const { return m_scanerSlot; }
+#ifdef USE_EXTRA_EQUIPMENT
+    ItemSlot* const energizerSlot() const { return m_energizerSlot; }
+    ItemSlot* const freezerSlot()   const { return m_freezerSlot; }
+#endif // USE_EXTRA_EQUIPMENT
+    ItemSlot* const grappleSlot()   const { return m_grappleSlot; }
+    ItemSlot* const droidSlot()     const { return m_droidSlot; }
 
     Npc* const npc() const { return m_npc; }
 
-    ItemSlot* const GetEmptyCargoSlot();
-    GoodsPack* GetGoodsPack() const;
+    ItemSlot* const freeCargoSlot();
+    GoodsPack* goodsPack() const;
 
     void UpdateSpecialAction();
     virtual void UpdateInSpace(int, bool) = 0;
@@ -151,8 +152,9 @@ public:
     void CheckNeedsInStatic();
     void ResolveNeedsInKosmoportInStatic();
     void UpdateAllFunctionalItemsInStatic();
-    void IncreaseMass(int);
-    void DecreaseMass(int);
+//protected:
+    void increaseMass(int);
+    void decreaseMass(int);
     void UpdatePropertiesEnergy();
     void UpdatePropertiesFreeze();
     void UpdatePropertiesSpeed();
@@ -164,6 +166,7 @@ public:
     void UpdatePropertiesScan();
     void UpdatePropertiesGrab();
     void UpdateArtefactInfluence();
+//public:
 
     void HyperJumpEvent(StarSystem*);
     void DockingEvent();
@@ -179,21 +182,20 @@ public:
     //        void RenderRadarRange();
     //        void RenderGrappleRange();
 
-    bool IsAbleToJumpTo(StarSystem*) const;
+    bool isAbleToJumpTo(StarSystem*) const;
 
-    bool IsArmorFull() const;
-    int GetArmorMiss() const;
-    void IncreaseArmor(int);
+    bool isArmorFull() const;
+    int armorMiss() const;
+    void increaseArmor(int);
+    void repairKorpus(int);
 
-    bool IsFuelFull() const;
-    int GetFuelMiss() const;
+    bool isFuelFull() const;
+    int fuelMiss() const;
 
-    void RepairKorpusOnAmount(int);
+    void lockRandomItem(int);
 
-    void LockRandomItem(int);
-
-    bool TryToConsumeEnergy(int);
-    bool TryToGenerateEnergy(int);
+    bool tryConsumeEnergy(int);
+    bool tryGenerateEnergy(int);
 
     STATUS CheckGrabStatus() const;
 
@@ -204,21 +206,21 @@ public:
     int criticalDamage() const;
 
 protected:
-    std::vector<ItemSlot*> m_SlotTotal_vec;
+    std::vector<ItemSlot*> m_slots;
 
-    ItemSlot* const fuctionalSlot(TYPE::ENTITY) const;
-    ItemSlot* const freeArtefactSlot() const;
-    ItemSlot* const cargoSlotWithGoods(TYPE::ENTITY);
+    ItemSlot* const _fuctionalSlot(TYPE::ENTITY) const;
+    ItemSlot* const _freeArtefactSlot() const;
+    ItemSlot* const _cargoSlotWithGoods(TYPE::ENTITY);
 
-    bool manageItem(item::Base*);
-    bool manageFunctionEquipment(item::Base*);
+    bool _manageItem(item::Base*);
+    bool _manageFunctionEquipment(item::Base*);
 #ifdef USE_MODULES
     bool ManageFunctionModule(item::BaseItem*);
-#endif
+#endif // USE_MODULES
 #ifdef USE_ARTEFACTS
     bool ManageFunctionArtefact(item::BaseItem*);
-#endif
-    bool ManageFunctionGoodsPack(item::Base*);
+#endif // USE_ARTEFACTS
+    bool _manageFunctionGoodsPack(item::Base*);
 
     //        virtual void UpdateInfo() = 0;
 
@@ -239,36 +241,39 @@ protected:
     void ResolveData();
 
 private:
-    bool m_GodMode;
-    VEHICLE_SPECIAL_ACTION_TYPE m_SpecialActionId;
+    bool m_godMode;
+    VEHICLE_SPECIAL_ACTION_TYPE m_specialActionId;
 
     Npc* m_npc = nullptr;
 
-    VehicleSlot* m_ParentVehicleSlot = nullptr;
+    VehicleSlot* m_parentVehicleSlot = nullptr;
 
     Land* m_Land = nullptr;
 
-    ItemSlot* m_SlotRadar = nullptr;
-    ItemSlot* m_SlotScaner = nullptr;
-    ItemSlot* m_SlotEnergizer = nullptr;
-    ItemSlot* m_SlotGrapple = nullptr;
-    ItemSlot* m_SlotDroid = nullptr;
-    ItemSlot* m_SlotFreezer = nullptr;
+    ItemSlot* m_radarSlot = nullptr;
+    ItemSlot* m_scanerSlot = nullptr;
+#ifdef USE_EXTRA_EQUIPMENT
+    ItemSlot* m_energizerSlot = nullptr;
+    ItemSlot* m_freezerSlot = nullptr;
+#endif // USE_EXTRA_EQUIPMENT
+    ItemSlot* m_grappleSlot = nullptr;
+    ItemSlot* m_droidSlot = nullptr;
+
 
     std::vector<ItemSlot*> m_equipmentSlots;
     std::vector<ItemSlot*> m_artefactSlots;
     std::vector<ItemSlot*> m_cargoSlots;
 
-    WeaponComplex     m_ComplexWeapon;
-    DriveComplex      m_ComplexDrive;
-    ProtectionComplex m_ComplexProtector;
+    WeaponComplex     m_weaponComplex;
+    DriveComplex      m_driveComplex;
+    ProtectionComplex m_protectorComplex;
 
     VehiclePropetries m_properties;
-    VehicleNeeds m_Needs;
-    VehicleDescriptor m_VehicleDescriptor;
+    VehicleNeeds m_needs;
+    VehicleDescriptor m_vehicleDescriptor;
 
-    void DropRandomItemToSpace();
-    bool MergeIdenticalGoods(item::Base*);
+    void __dropRandomItemToSpace();
+    bool __mergeIdenticalGoods(item::Base*);
 
     friend class GuiVehicle;
     friend class GuiVehicle2;
