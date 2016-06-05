@@ -35,9 +35,9 @@ namespace equipment {
 
 Grapple::Grapple(const id_type& id)
     :
-      strength_orig(0),
-      radius_orig(0),
-      speed_orig(0)
+      m_strength_orig(0),
+      m_radius_orig(0),
+      m_speed_orig(0)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
@@ -50,9 +50,9 @@ Grapple::~Grapple()
 
 bool Grapple::CheckIfTargetAlreadyExistInQueue(SpaceObject* target) const
 {
-    for (unsigned int i=0; i<target_vec.size(); i++)
+    for (unsigned int i=0; i<m_targets.size(); i++)
     {
-        if (target_vec[i]->id() == target->id())
+        if (m_targets[i]->id() == target->id())
         {
             return true;
         }
@@ -69,10 +69,10 @@ void Grapple::AddTarget(SpaceObject* target)
         return;
     }
 
-    if (free_strength > target->mass())
+    if (m_free_strength > target->mass())
     {
-        target_vec.push_back(target);
-        free_strength -= target->mass();
+        m_targets.push_back(target);
+        m_free_strength -= target->mass();
 
         //LOG("vehicle_id=" + std::to_string(item_slot->GetOwnerVehicle()->id()) + " " + getTypeStr(target->typeId()) + " id = " + std::to_string(target->id()) + " grapple->AddTarget()", 2);
     }
@@ -80,12 +80,12 @@ void Grapple::AddTarget(SpaceObject* target)
 
 void Grapple::RemoveTarget(SpaceObject* target)
 {
-    for (unsigned int i=0; i<target_vec.size(); i++)
+    for (unsigned int i=0; i<m_targets.size(); i++)
     {
-        if (target_vec[i]->id() == target->id())
+        if (m_targets[i]->id() == target->id())
         {
-            target_vec.erase(target_vec.begin()+i);
-            free_strength += target->mass();
+            m_targets.erase(m_targets.begin()+i);
+            m_free_strength += target->mass();
             
             return;
         }
@@ -94,17 +94,17 @@ void Grapple::RemoveTarget(SpaceObject* target)
 
 void Grapple::RemoveAllTargets()
 {
-    target_vec.clear();
-    free_strength = strength;
+    m_targets.clear();
+    m_free_strength = m_strength;
 }
 
 std::string Grapple::GetTarstr() const
 {
     std::string str = "";
     
-    for (unsigned int i=0; i<target_vec.size(); i++)
+    for (unsigned int i=0; i<m_targets.size(); i++)
     {
-        str += std::to_string(target_vec[i]->id()) + ", ";
+        str += std::to_string(m_targets[i]->id()) + ", ";
     }
 
     return str;
@@ -112,7 +112,7 @@ std::string Grapple::GetTarstr() const
 
 void Grapple::UpdateGrabScenarioProgram_inDynamic()
 {                      
-    for (std::vector<SpaceObject*>::iterator it = target_vec.begin(); it != target_vec.end(); ++it)
+    for (std::vector<SpaceObject*>::iterator it = m_targets.begin(); it != m_targets.end(); ++it)
     {
         Vehicle& vehicle = *itemSlot()->vehicleOwner(); // shortcut
         SpaceObject& target = **it;
@@ -122,7 +122,7 @@ void Grapple::UpdateGrabScenarioProgram_inDynamic()
             glm::vec3 impulse_dir = glm::normalize(vehicle.center() - target.center());
 
 
-            target.addImpulse(impulse_dir, 0.001* GetStrength());
+            target.addImpulse(impulse_dir, 0.001* strength());
 
             float dist = meti::distance(vehicle.center(), target.center());
             if (dist < 0.5*vehicle.collisionRadius())
@@ -134,7 +134,7 @@ void Grapple::UpdateGrabScenarioProgram_inDynamic()
                     Container* container = reinterpret_cast<Container*>(&target);
                     if (vehicle.unpackContainerItemToCargoSlot(container) == true)
                     {
-                        it = target_vec.erase(it);
+                        it = m_targets.erase(it);
                         return; // hack
                     }
                     
@@ -160,7 +160,7 @@ void Grapple::UpdateGrabScenarioProgram_inDynamic()
         {
             //LOG("vehicle_id=" + std::to_string(item_slot->GetOwnerVehicle()->id()) + " " + getTypeStr((*it)->typeId()) + " id = " + std::to_string((*it)->id()) + " grapple->RemoveTarget()", 2);
 
-            it = target_vec.erase(it);
+            it = m_targets.erase(it);
             return; // hack
         }
     }
@@ -191,9 +191,9 @@ void Grapple::UpdateGrabScenarioProgram_inDynamic()
 /* virtual */
 void Grapple::updateProperties()
 {
-    strength_add   = 0;
-    radius_add     = 0;
-    speed_add      = 0;
+    m_strength_add   = 0;
+    m_radius_add     = 0;
+    m_speed_add      = 0;
     
 #ifdef USE_MODULES
     for (unsigned int i = 0; i < modules_vec.size(); i++) {
@@ -202,18 +202,18 @@ void Grapple::updateProperties()
         speed_add      += ((GrappleModule*)modules_vec[i])->GetSpeedAdd();
     }
 #endif
-    strength   = strength_orig   + strength_add;
-    radius     = radius_orig     + radius_add;
-    speed      = speed_orig      + speed_add;
+    m_strength   = m_strength_orig   + m_strength_add;
+    m_radius     = m_radius_orig     + m_radius_add;
+    m_speed      = m_speed_orig      + m_speed_add;
     
     RemoveAllTargets();
 }
 
 void Grapple::CountPrice()
 {
-    float strength_rate      = (float)strength_orig / EQUIPMENT::GRAPPLE::STRENGTH_MIN;
-    float radius_rate        = (float)radius_orig / EQUIPMENT::GRAPPLE::RADIUS_MIN;
-    float speed_rate         = (float)speed_orig / EQUIPMENT::GRAPPLE::SPEED_MIN;
+    float strength_rate      = (float)m_strength_orig / EQUIPMENT::GRAPPLE::STRENGTH_MIN;
+    float radius_rate        = (float)m_radius_orig / EQUIPMENT::GRAPPLE::RADIUS_MIN;
+    float speed_rate         = (float)m_speed_orig / EQUIPMENT::GRAPPLE::SPEED_MIN;
 
     float modules_num_rate   = (float)modulesNum() / EQUIPMENT::GRAPPLE::MODULES_NUM_MAX;
 
@@ -239,26 +239,26 @@ void Grapple::addUniqueInfo()
 
 std::string Grapple::GetStrengthStr()
 {
-    if (strength_add == 0)
-        return std::to_string(strength_orig);
+    if (m_strength_add == 0)
+        return std::to_string(m_strength_orig);
     else
-        return std::to_string(strength_orig) + "+" + std::to_string(strength_add);
+        return std::to_string(m_strength_orig) + "+" + std::to_string(m_strength_add);
 }
 
 std::string Grapple::GetRadiusStr()
 {
-    if (radius_add == 0)
-        return std::to_string(radius_orig);
+    if (m_radius_add == 0)
+        return std::to_string(m_radius_orig);
     else
-        return std::to_string(radius_orig) + "+" + std::to_string(radius_add);
+        return std::to_string(m_radius_orig) + "+" + std::to_string(m_radius_add);
 }
 
 std::string Grapple::GetSpeedStr()
 {
-    if (speed_add == 0)
-        return std::to_string(speed_orig);
+    if (m_speed_add == 0)
+        return std::to_string(m_speed_orig);
     else
-        return std::to_string(speed_orig) + "+" + std::to_string(speed_add);
+        return std::to_string(m_speed_orig) + "+" + std::to_string(m_speed_add);
 }
 
 /*virtual*/
@@ -294,18 +294,18 @@ void Grapple::SaveData(boost::property_tree::ptree& save_ptree, const std::strin
 {
     LOG(" GrappleEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"strength_orig", strength_orig);
-    save_ptree.put(root+"radius_orig", radius_orig);
-    save_ptree.put(root+"speed_orig", speed_orig);
+    save_ptree.put(root+"strength_orig", m_strength_orig);
+    save_ptree.put(root+"radius_orig", m_radius_orig);
+    save_ptree.put(root+"speed_orig", m_speed_orig);
 }
 
 void Grapple::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" GrappleEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
-    strength_orig = load_ptree.get<int>("strength_orig");
-    radius_orig = load_ptree.get<int>("radius_orig");
-    speed_orig = load_ptree.get<int>("speed_orig");
+    m_strength_orig = load_ptree.get<int>("strength_orig");
+    m_radius_orig = load_ptree.get<int>("radius_orig");
+    m_speed_orig = load_ptree.get<int>("speed_orig");
 }                
 
 void Grapple::ResolveData()

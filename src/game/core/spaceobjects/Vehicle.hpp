@@ -152,21 +152,22 @@ public:
     void CheckNeedsInStatic();
     void ResolveNeedsInKosmoportInStatic();
     void UpdateAllFunctionalItemsInStatic();
-//protected:
-    void increaseMass(int);
-    void decreaseMass(int);
-    void updatePropEnergy();
-    void updatePropFreeze();
-    void updatePropSpeed();
-    void updatePropFire();
-    void updatePropRadar();
-    void updatePropJump();
-    void updatePropProtection();
-    void updatePropRepair();
-    void updatePropScan();
-    void updatePropGrab();
-    void updateArtefactInfluence();
-//public:
+protected:
+    void _increaseMass(int);
+    void _decreaseMass(int);
+    void _updatePropEnergy();
+    void _updatePropFreeze();
+    void _updatePropSpeed();
+    void _updatePropFire();
+    void _updatePropRadar();
+    void _updatePropJump();
+    void _updatePropProtection();
+    void _updatePropRepair();
+    void _updatePropScan();
+    void _updatePropGrab();
+    void _updateArtefactInfluence();
+    friend class ItemSlot;
+public:
 
     void HyperJumpEvent(StarSystem*);
     void DockingEvent();

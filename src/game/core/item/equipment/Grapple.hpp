@@ -35,13 +35,13 @@ public:
     Grapple(const id_type& id);
     virtual ~Grapple();
 
-    void SetStrengthOrig(int strength_orig)     { this->strength_orig   = strength_orig; }
-    void SetRadiusOrig(int radius_orig)         { this->radius_orig     = radius_orig; }
-    void SetSpeedOrig(int speed_orig)           { this->speed_orig      = speed_orig; }
+    void SetStrengthOrig(int strength_orig)     { m_strength_orig   = strength_orig; }
+    void SetRadiusOrig(int radius_orig)         { m_radius_orig     = radius_orig; }
+    void SetSpeedOrig(int speed_orig)           { m_speed_orig      = speed_orig; }
 
-    int GetStrength()   const { return strength; };
-    int GetRadius()     const { return radius; };
-    int GetSpeed()      const { return speed; };
+    int strength()   const { return m_strength; }
+    int radius()     const override final { return m_radius; }
+    int speed()      const { return m_speed; }
 
     bool CheckIfTargetAlreadyExistInQueue(SpaceObject* target) const;
     void AddTarget(SpaceObject*);
@@ -63,21 +63,21 @@ public:
     virtual void Resolve();
 
 private:
-    int strength_orig;
-    int strength_add;
-    int strength;
+    int m_strength_orig;
+    int m_strength_add;
+    int m_strength;
 
-    int radius_orig;
-    int radius_add;
-    int radius;
+    int m_radius_orig;
+    int m_radius_add;
+    int m_radius;
 
-    int speed_orig;
-    int speed_add;
-    int speed;
+    int m_speed_orig;
+    int m_speed_add;
+    int m_speed;
 
-    int free_strength;
+    int m_free_strength;
 
-    std::vector<SpaceObject*> target_vec;
+    std::vector<SpaceObject*> m_targets;
 
     void virtual addUniqueInfo();
     std::string GetStrengthStr();

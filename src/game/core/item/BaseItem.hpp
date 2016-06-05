@@ -60,6 +60,9 @@ public:
 
     ItemSlot* itemSlot() const { return m_item_slot; }
 
+    virtual int radius() const { return 0; }
+    virtual int damage() const { return 0; }
+
     int mass()          const { return m_data_item.mass; }
     int condition()     const { return m_condition; }
     int price()         const { return m_price; }

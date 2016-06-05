@@ -65,10 +65,10 @@ namespace equipment {
 
 Rocket::Rocket(const id_type& id)
 :
-ammo_max_orig(0),
-ammo(0),
-damage_orig(0),
-radius_orig(0)
+m_ammo_max_orig(0),
+m_ammo(0),
+m_damage_orig(0),
+m_radius_orig(0)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::EQUIPMENT_ID); 
@@ -84,9 +84,9 @@ Rocket::~Rocket()
 /* virtual */
 void Rocket::updateProperties()
 {
-    ammo_max_add = 0;
-    damage_add   = 0;
-    radius_add   = 0;
+    m_ammo_max_add = 0;
+    m_damage_add   = 0;
+    m_radius_add   = 0;
     
 #ifdef USE_MODULES
     for (unsigned int i = 0; i < modules_vec.size(); i++)
@@ -97,16 +97,16 @@ void Rocket::updateProperties()
     }
 #endif
 
-    ammo_max = ammo_max_orig + ammo_max_add;
-    damage   = damage_orig + damage_add;
-    radius   = radius_orig + radius_add;
+    m_ammo_max = m_ammo_max_orig + m_ammo_max_add;
+    m_damage   = m_damage_orig + m_damage_add;
+    m_radius   = m_radius_orig + m_radius_add;
 }
 
 void Rocket::CountPrice()
 {
-    float ammo_rate     = (float)ammo_max_orig / EQUIPMENT::ROCKET::AMMO_MIN;
-    float damage_rate   = (float)damage_orig / EQUIPMENT::ROCKET::DAMAGE_MIN;
-    float radius_rate   = (float)radius_orig / EQUIPMENT::ROCKET::RADIUS_MIN;
+    float ammo_rate     = (float)m_ammo_max_orig / EQUIPMENT::ROCKET::AMMO_MIN;
+    float damage_rate   = (float)m_damage_orig / EQUIPMENT::ROCKET::DAMAGE_MIN;
+    float radius_rate   = (float)m_radius_orig / EQUIPMENT::ROCKET::RADIUS_MIN;
     float modules_num_rate   = (float)modulesNum() / EQUIPMENT::ROCKET::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::ROCKET::AMMO_WEIGHT * ammo_rate + 
@@ -131,26 +131,26 @@ void Rocket::addUniqueInfo()
 
 std::string Rocket::GetAmmoStr()
 {
-    if (ammo_max_add == 0)
-        return std::to_string(ammo_max_orig) + "/" + std::to_string(ammo);
+    if (m_ammo_max_add == 0)
+        return std::to_string(m_ammo_max_orig) + "/" + std::to_string(m_ammo);
     else
-        return std::to_string(ammo_max_orig) + "+" + std::to_string(ammo_max_add) + "/" + std::to_string(ammo);
+        return std::to_string(m_ammo_max_orig) + "+" + std::to_string(m_ammo_max_add) + "/" + std::to_string(m_ammo);
 }
 
 std::string Rocket::GetDamageStr()
 {
-    if (damage_add == 0)
-        return std::to_string(damage_orig);
+    if (m_damage_add == 0)
+        return std::to_string(m_damage_orig);
     else
-        return std::to_string(damage_orig) + "+" + std::to_string(damage_add);
+        return std::to_string(m_damage_orig) + "+" + std::to_string(m_damage_add);
 }
 
 std::string Rocket::GetRadiusStr()
 {
-    if (radius_add == 0)
-        return std::to_string(radius_orig);
+    if (m_radius_add == 0)
+        return std::to_string(m_radius_orig);
     else
-        return std::to_string(radius_orig) + "+" + std::to_string(radius_add);
+        return std::to_string(m_radius_orig) + "+" + std::to_string(m_radius_add);
 }
 
 void Rocket::FireEvent(float attack_rate_normalized)
@@ -202,7 +202,7 @@ void Rocket::FireEvent(float attack_rate_normalized)
     //}        
     
     //rocketlaunch.play()
-    ammo -= num;
+    m_ammo -= num;
 
     deteriorationEvent();
 }
@@ -240,10 +240,10 @@ void Rocket::SaveData(boost::property_tree::ptree& save_ptree, const std::string
 {
     LOG(" RocketEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"ammo_max_orig", ammo_max_orig);
-    save_ptree.put(root+"ammo", ammo);
-    save_ptree.put(root+"damage_orig", damage_orig);
-    save_ptree.put(root+"radius_orig", radius_orig);
+    save_ptree.put(root+"ammo_max_orig", m_ammo_max_orig);
+    save_ptree.put(root+"ammo", m_ammo);
+    save_ptree.put(root+"damage_orig", m_damage_orig);
+    save_ptree.put(root+"radius_orig", m_radius_orig);
     save_ptree.put(root+"fire_atOnce", fire_atOnce);
     
     data_bullet.Save(save_ptree, root);
@@ -253,10 +253,10 @@ void Rocket::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" RocketEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
-    ammo_max_orig = load_ptree.get<int>("ammo_max_orig"); 
-    ammo = load_ptree.get<int>("ammo"); 
-    damage_orig = load_ptree.get<int>("damage_orig");  
-    radius_orig = load_ptree.get<int>("radius_orig");   
+    m_ammo_max_orig = load_ptree.get<int>("ammo_max_orig"); 
+    m_ammo = load_ptree.get<int>("ammo"); 
+    m_damage_orig = load_ptree.get<int>("damage_orig");  
+    m_radius_orig = load_ptree.get<int>("radius_orig");   
     fire_atOnce = load_ptree.get<int>("fire_atOnce");  
 
     data_bullet.Load(load_ptree.get_child("data_bullet"));

@@ -367,7 +367,7 @@ bool Vehicle::unpackContainerItemToCargoSlot(Container* container)
 
 bool Vehicle::addItemToCargoSlot(item::Base* item)
 {
-    increaseMass(item->mass());
+    _increaseMass(item->mass());
     if (item->typeId() == TYPE::ENTITY::GOODS_ID)
     {
         if (_manageFunctionGoodsPack(item) == true)
@@ -435,7 +435,7 @@ bool Vehicle::sellItem(item::Base* item)
     
     if (earn_money > 0)
     {
-        decreaseMass(item_mass);
+        _decreaseMass(item_mass);
         m_npc->IncreaseCredits(earn_money);
         
         return true;
@@ -660,7 +660,7 @@ void Vehicle::hit(int damage)
     if (!m_godMode) {
         if (m_properties.energy < damage) {
             m_properties.hibernate_mode_enabled = true;
-            updatePropProtection();
+            _updatePropProtection();
         }
 
         SpaceObject::hit(damage * (1.0 - dissipateRate()));
@@ -797,25 +797,25 @@ void Vehicle::UpdateAllFunctionalItemsInStatic()
     }
 }
 
-void Vehicle::increaseMass(int d_mass)
+void Vehicle::_increaseMass(int d_mass)
 {
     //LOG("Vehicle("+std::to_string(id())+")::IncreaseMass");
     
     addMass(d_mass);
     m_properties.free_space = m_vehicleDescriptor.space - mass();
-    updatePropSpeed(); // as the mass influence speed this action is necessary here
+    _updatePropSpeed(); // as the mass influence speed this action is necessary here
 }
 
-void Vehicle::decreaseMass(int d_mass)
+void Vehicle::_decreaseMass(int d_mass)
 {
     //LOG("Vehicle("+std::to_string(id())+")::DecreaseMass");
     
     addMass(-d_mass);
     m_properties.free_space = m_vehicleDescriptor.space - mass();
-    updatePropSpeed(); // as the mass influence speed this action is necessary here
+    _updatePropSpeed(); // as the mass influence speed this action is necessary here
 }
 
-void Vehicle::updatePropSpeed()
+void Vehicle::_updatePropSpeed()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesSpeed");
     m_properties.speed = 0;
@@ -844,7 +844,7 @@ void Vehicle::updatePropSpeed()
     }
 }
 
-void Vehicle::updatePropFire()
+void Vehicle::_updatePropFire()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesFire");
     
@@ -854,7 +854,7 @@ void Vehicle::updatePropFire()
     m_properties.total_radius = m_weaponComplex.GetTotalRadius();
 }
 
-void Vehicle::updatePropRadar()
+void Vehicle::_updatePropRadar()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesRadar");
     
@@ -867,11 +867,11 @@ void Vehicle::updatePropRadar()
     if (!m_radarSlot->radarEquipment()->isFunctioning())
         return;
 
-    m_properties.radar = m_radarSlot->radarEquipment()->GetRadius();
+    m_properties.radar = m_radarSlot->radarEquipment()->radius();
     m_properties.equipment_radar = true;
 }
 
-void Vehicle::updatePropJump()
+void Vehicle::_updatePropJump()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesJump");
 
@@ -893,7 +893,7 @@ void Vehicle::updatePropJump()
     m_properties.hyper = std::min(m_driveComplex.GetDriveSlot()->driveEquipment()->hyper(), m_driveComplex.GetBakSlot()->bakEquipment()->fuel());
 }
 
-void Vehicle::updatePropProtection()
+void Vehicle::_updatePropProtection()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesProtection");
     
@@ -918,7 +918,7 @@ void Vehicle::updatePropProtection()
     }
 }
 
-void Vehicle::updatePropRepair()
+void Vehicle::_updatePropRepair()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesRepair");
     
@@ -946,7 +946,7 @@ void Vehicle::increaseArmor(int repair)
     }
 }
 
-void Vehicle::updatePropFreeze()
+void Vehicle::_updatePropFreeze()
 {
 #ifdef USE_EXTRA_EQUIPMENT
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesFreeze");
@@ -963,7 +963,7 @@ void Vehicle::updatePropFreeze()
 #endif
 }
 
-void Vehicle::updatePropEnergy()
+void Vehicle::_updatePropEnergy()
 {
 #ifdef USE_EXTRA_EQUIPMENT
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesEnergy");
@@ -986,7 +986,7 @@ void Vehicle::updatePropEnergy()
 
 
 
-void Vehicle::updatePropScan()
+void Vehicle::_updatePropScan()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesScan");
     
@@ -1001,7 +1001,7 @@ void Vehicle::updatePropScan()
     }
 }
 
-void Vehicle::updatePropGrab()
+void Vehicle::_updatePropGrab()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesGrab");
 
@@ -1014,14 +1014,14 @@ void Vehicle::updatePropGrab()
         {
             if (m_grappleSlot->grappleEquipment()->isFunctioning() == true)
             {
-                m_properties.grab_strength = m_grappleSlot->grappleEquipment()->GetStrength();
-                m_properties.grab_radius = m_grappleSlot->grappleEquipment()->GetRadius();
+                m_properties.grab_strength = m_grappleSlot->grappleEquipment()->strength();
+                m_properties.grab_radius = m_grappleSlot->grappleEquipment()->radius();
             }
         }
     }
 }                  
 
-void Vehicle::updateArtefactInfluence()
+void Vehicle::_updateArtefactInfluence()
 {
 #ifdef USE_ARTEFACTS
     //LOG("Vehicle("+std::to_string(id())+")::UpdateArtefactInfluence");

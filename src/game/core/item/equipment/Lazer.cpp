@@ -36,8 +36,8 @@ namespace equipment {
 
 Lazer::Lazer(const id_type& id)
     :
-      damage_orig(0),
-      radius_orig(0)
+      m_damage_orig(0),
+      m_radius_orig(0)
 {
     setId(id);
     setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
@@ -55,25 +55,25 @@ Lazer::~Lazer()
 /* virtual */
 void Lazer::updateProperties()
 {
-    damage_add  = 0;
-    radius_add  = 0;
+    m_damage_add  = 0;
+    m_radius_add  = 0;
 
 #ifdef USE_MODULES
     for (unsigned int i = 0; i < modules_vec.size(); i++)
     {
-        damage_add   += ((LazerModule*)modules_vec[i])->GetDamageAdd();
-        radius_add   += ((LazerModule*)modules_vec[i])->GetRadiusAdd();
+        m_damage_add   += ((LazerModule*)modules_vec[i])->GetDamageAdd();
+        m_radius_add   += ((LazerModule*)modules_vec[i])->GetRadiusAdd();
     }
 #endif
 
-    damage = damage_orig + damage_add;
-    radius = radius_orig + radius_add;
+    m_damage = m_damage_orig + m_damage_add;
+    m_radius = m_radius_orig + m_radius_add;
 } 
 
 void Lazer::CountPrice()
 {
-    float damage_rate        = (float)damage_orig / EQUIPMENT::LAZER::DAMAGE_MIN;
-    float radius_rate        = (float)radius_orig / EQUIPMENT::LAZER::RADIUS_MIN;
+    float damage_rate        = (float)m_damage_orig / EQUIPMENT::LAZER::DAMAGE_MIN;
+    float radius_rate        = (float)m_radius_orig / EQUIPMENT::LAZER::RADIUS_MIN;
     float modules_num_rate   = (float)modulesNum() / EQUIPMENT::LAZER::MODULES_NUM_MAX;
 
     float effectiveness_rate = EQUIPMENT::LAZER::DAMAGE_WEIGHT * damage_rate +
@@ -96,23 +96,23 @@ void Lazer::addUniqueInfo()
 
 std::string Lazer::GetDamageStr()
 {
-    if (damage_add == 0)
-        return std::to_string(damage_orig);
+    if (m_damage_add == 0)
+        return std::to_string(m_damage_orig);
     else
-        return std::to_string(damage_orig) + "+" + std::to_string(damage_add);
+        return std::to_string(m_damage_orig) + "+" + std::to_string(m_damage_add);
 }
 
 std::string Lazer::GetRadiusStr()
 {
-    if (radius_add == 0)
-        return std::to_string(radius_orig);
+    if (m_radius_add == 0)
+        return std::to_string(m_radius_orig);
     else
-        return std::to_string(radius_orig) + "+" + std::to_string(radius_add);
+        return std::to_string(m_radius_orig) + "+" + std::to_string(m_radius_add);
 }
 
 void Lazer::FireEvent(SpaceObject* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
 { 
-    if (itemSlot()->vehicleOwner()->tryConsumeEnergy(damage) == true)
+    if (itemSlot()->vehicleOwner()->tryConsumeEnergy(m_damage) == true)
     {
         if (subtarget != nullptr) // precise fire
         {
@@ -123,7 +123,7 @@ void Lazer::FireEvent(SpaceObject* target, ItemSlot* subtarget, float damage_rat
             
         }
 
-        target->hit(damage*damage_rate);
+        target->hit(m_damage*damage_rate);
         deteriorationEvent();
 
         if (show_effect)
@@ -184,16 +184,16 @@ void Lazer::SaveData(boost::property_tree::ptree& save_ptree, const std::string&
 {
     LOG(" LazerEquipment::SaveData()  id=" + std::to_string(id()) + " START");
     
-    save_ptree.put(root+"damage_orig", damage_orig);
-    save_ptree.put(root+"radius_orig", radius_orig);
+    save_ptree.put(root+"damage_orig", m_damage_orig);
+    save_ptree.put(root+"radius_orig", m_radius_orig);
 }
 
 void Lazer::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" LazerEquipment::LoadData()  id=" + std::to_string(id()) + " START");
     
-    damage_orig = load_ptree.get<int>("damage_orig");
-    radius_orig = load_ptree.get<int>("radius_orig");
+    m_damage_orig = load_ptree.get<int>("damage_orig");
+    m_radius_orig = load_ptree.get<int>("radius_orig");
 }                
 
 void Lazer::ResolveData()
