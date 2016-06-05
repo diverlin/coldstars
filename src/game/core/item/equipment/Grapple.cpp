@@ -132,7 +132,7 @@ void Grapple::UpdateGrabScenarioProgram_inDynamic()
                 case TYPE::ENTITY::CONTAINER_ID:
                 {
                     Container* container = reinterpret_cast<Container*>(&target);
-                    if (vehicle.UnpackContainerItemToCargoSlot(container) == true)
+                    if (vehicle.unpackContainerItemToCargoSlot(container) == true)
                     {
                         it = target_vec.erase(it);
                         return; // hack

@@ -156,11 +156,7 @@ TEST(ship_with_equipment, freespace)
 {
     Ship* ship = createNewShip();
 
-    std::vector<item::Base*> items;
-    items.push_back( global::get().protectorBuilder().getNew() );
-    items.push_back( global::get().protectorBuilder().getNew() );
-    items.push_back( global::get().protectorBuilder().getNew() );
-
+    std::vector<item::equipment::Protector*> items = global::get().protectorBuilder().getNew(3);
     EXPECT_EQ(ship->mass(), ship->freeSpace());
 
     int weight_extra = 0;
@@ -169,6 +165,7 @@ TEST(ship_with_equipment, freespace)
         ship->manage(item);
     }
 
-    EXPECT_EQ(ship->freeSpace(), ship->mass() - weight_extra);
+    EXPECT_EQ(ship->freeSpace(), ship->space() - weight_extra);
+    EXPECT_EQ(weight_extra, ship->mass());
 }
 

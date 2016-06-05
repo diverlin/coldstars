@@ -37,7 +37,8 @@ ProtectorBuilder::ProtectorBuilder()
 ProtectorBuilder::~ProtectorBuilder()
 {}
 
-Protector* ProtectorBuilder::createTemplate(id_type id) const
+Protector*
+ProtectorBuilder::createTemplate(id_type id) const
 {
     Protector* protector = new Protector(id);
     assert(protector);
@@ -47,7 +48,18 @@ Protector* ProtectorBuilder::createTemplate(id_type id) const
     return protector;
 } 
    
-Protector* ProtectorBuilder::getNew() const
+std::vector<Protector*>
+ProtectorBuilder::getNew(int num) const
+{
+    std::vector<Protector*> result;
+    for (int i=0; i<num; ++i) {
+        result.push_back(getNew());
+    }
+    return result;
+}
+
+Protector*
+ProtectorBuilder::getNew() const
 {
     const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
     Protector* protector = createTemplate();
@@ -56,7 +68,8 @@ Protector* ProtectorBuilder::getNew() const
     return protector;
 } 
 
-Protector* ProtectorBuilder::getNew(const descriptor::Base& descriptor) const
+Protector*
+ProtectorBuilder::getNew(const descriptor::Base& descriptor) const
 {
     Protector* protector = createTemplate();
     createInternals(protector, descriptor);
@@ -64,7 +77,8 @@ Protector* ProtectorBuilder::getNew(const descriptor::Base& descriptor) const
     return protector;
 }
          
-void ProtectorBuilder::createInternals(Protector* protector, const descriptor::Base& descriptor) const
+void
+ProtectorBuilder::createInternals(Protector* protector, const descriptor::Base& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
 
