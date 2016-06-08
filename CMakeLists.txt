@@ -6,6 +6,7 @@ set(PROJECT coldstars)
 project (${PROJECT})
 
 set(GTEST_ROOT "/home/yeti/mnt/workspace/dist/thirdparty_1.0.25/")
+set(GLM_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/dependencies/glm-0.9.7.5/")
 
 set(CMAKE_BUILD_TYPE "Debug")
 
@@ -20,8 +21,9 @@ set(DEPLOY_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 
 #SET(COMPILE_FLAGS "-Wall -Werror -Wno-switch -std=c++11 -std=gnu++11 -pipe")
 #SET(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -Ofast -march=native")
-SET(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -O0 -fPIC -rdynamic")
-   
+#SET(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -O0 -fPIC -rdynamic")
+SET(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11 -fPIC")
+
 
 set(CMAKE_PREFIX_PATH ${COLDSTARS_DEPENDENCIES_ROOT})
 set(SFML_ROOT ${COLDSTARS_DEPENDENCIES_ROOT})

@@ -8,6 +8,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/../../macros/cma
 file(GLOB_RECURSE ${PROJECT}_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
 file(GLOB_RECURSE ${PROJECT}_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
 
+set(GLM_ROOT_DIR "../dependencies/glm-0.9.7.5/")
 find_package(GLM REQUIRED)
 include_directories(${GLM_INCLUDE_DIRS})
 add_definitions(-DGLM_FORCE_RADIANS)

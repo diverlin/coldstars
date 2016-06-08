@@ -15,6 +15,7 @@ include_directories(${OPENGL_INCLUDE_DIR})
 find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
 
+set(GLM_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../dependencies/glm-0.9.7.5/")
 find_package(GLM REQUIRED)   
 include_directories(${GLM_INCLUDE_DIRS})
 add_definitions(-DGLM_FORCE_RADIANS)

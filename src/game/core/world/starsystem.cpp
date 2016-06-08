@@ -155,56 +155,51 @@ void Starsystem::createGroupAndShareTask(Npc* npc_leader, Starsystem* target_sta
     }
 }
 
-void Starsystem::add(Vehicle* vehicle, const glm::vec3& center, const glm::vec3& angle, const SpaceObject* const parent)
+void Starsystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& center, const glm::vec3& dir)
 {
-    //LOG(" StarSystem(" + std::to_string(id()) + ")::AddVehicle(" + std::to_string(vehicle->id())+")");
-    
+    //LOG(" StarSystem(" + std::to_string(id()) + ")::__addVehicleCommon(" + std::to_string(vehicle->id())+")");
+
     for (unsigned int i=0; i<m_vehicles.size(); i++) {
         if (m_vehicles[i]->id() == vehicle->id()) {
-            //LOG("StarSystem::AddVehicle dublicated vehicle found(fix that)" + getBaseInfoStr(vehicle));
+            LOG("StarSystem::AddVehicle dublicated vehicle found(fix that)" + vehicle->dataTypeStr());
             exit(1);
         }
     }
-    
+
     vehicle->setPlaceTypeId(TYPE::PLACE::SPACE_ID);
     vehicle->setStarSystem(this);
-    
+
     vehicle->setCenter(center);
-    //vehicle->SetAngle(angle);
-    //vehicle->updateOrientation();
-    
-    // alpitodorender vehicle->SetColor(color);
-    
+    vehicle->setDirection(dir);
+    // vehicle->updateOrientation(); // remove bad logic
+
+//    alpitodorender vehicle->SetColor(color);
     m_vehicles.push_back(vehicle);
-
-    if (vehicle->subTypeId() == TYPE::ENTITY::SATELLITE_ID) {
-        ((Satellite*)vehicle)->BindParent(parent);
-    } else {
-        vehicle->setParent(parent);
-    }
 }
 
-void Starsystem::add(Ship* ship, const glm::vec3& center, const glm::vec3& angle)
+void Starsystem::add(Ship* ship, const glm::vec3& center, const glm::vec3& dir)
 {
-    ship->setPlaceTypeId(TYPE::PLACE::SPACE_ID);
-    ship->setStarSystem(this);
-
-    ship->setCenter(center);
-    //ship->SetAngle(angle);
-    //ship->updateOrientation();
-
-    // alpitodorender ship->SetColor(color);
-
-    m_vehicles.push_back(ship);
+    __addVehicleCommon(ship, center, dir);
 }
 
-void Starsystem::add(RocketBullet* rocket, const glm::vec3& center, const glm::vec3& angle)
+void Starsystem::add(Satellite* satellite, const glm::vec3& center, const glm::vec3& dir, const SpaceObject* const parent)
+{
+    __addVehicleCommon(satellite, center, dir);
+    satellite->BindParent(parent);
+}
+
+void Starsystem::add(SpaceStation* spacestation, const glm::vec3& center, const glm::vec3& dir)
+{
+    __addVehicleCommon(spacestation, center, dir);
+}
+
+void Starsystem::add(RocketBullet* rocket, const glm::vec3& center, const glm::vec3& dir)
 {
     rocket->setPlaceTypeId(TYPE::PLACE::SPACE_ID);
     rocket->setStarSystem(this);
 
     rocket->setCenter(center);
-    //rocket->SetAngle(angle);
+    rocket->setDirection(dir);
     //rocket->updateOrientation();
 
     m_bullets.push_back(rocket);

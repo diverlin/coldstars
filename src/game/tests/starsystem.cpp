@@ -43,6 +43,10 @@
 
 //#include <fstream>
 
+// ??
+#include <glm/glm.hpp>
+#include <spaceobjects/Ship.hpp>
+// ??
 
 TEST(creation, starsystem)
 {
@@ -55,5 +59,8 @@ TEST(creation, starsystem)
 
     starsystem->add(star);
     //starsystem->add(planet);
-    //starsystem->add(ship);
+
+    glm::vec3 center(0.0f);
+    glm::vec3 dir(0.0f, 1.0f, 0.0f);
+    starsystem->add(ship, center, dir);
 }

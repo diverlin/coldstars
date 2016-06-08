@@ -595,7 +595,7 @@ void Vehicle::LaunchingEvent()
 {
     //LOG("Vehicle("+std::to_string(id())+")::LaunchingEvent");
     
-    if (m_parentVehicleSlot != nullptr)
+   /* if (m_parentVehicleSlot != nullptr)
     {
         switch(m_parentVehicleSlot->owner()->typeId())
         {
@@ -629,9 +629,8 @@ void Vehicle::LaunchingEvent()
     }
 
     SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID);
-    // alpitodorender SetTransparency(0.1);
+    // alpitodorender SetTransparency(0.1);*/
 }
-//// 
 
 /* virtual */
 void Vehicle::remeberAgressor(Vehicle* agressor)
@@ -1419,7 +1418,7 @@ void Vehicle::ResolveData()
     {
     case TYPE::PLACE::SPACE_ID:
     {
-        starsystem()->add(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction, parent());
+        //starsystem()->add(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction, parent());
         break;
     }
 
