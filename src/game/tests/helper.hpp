@@ -24,7 +24,5 @@ class Bomb;
 class Container;
 class Starsystem;
 
-Bomb* getNewBomb(int damage, int radius);
 Container* getNewContainer(const id_type& child_id);
 
-void init_equipment_descriptors();

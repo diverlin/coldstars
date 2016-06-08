@@ -50,7 +50,7 @@ Starsystem* StarsystemBuilder::getNew()
 
 Starsystem* StarsystemBuilder::getNew(const descriptor::Base& descriptor)
 {
-    Starsystem* starsystem = new Starsystem(descriptor.id());
+    Starsystem* starsystem = new Starsystem;
     assert(starsystem);
     global::get().entityManager().reg(starsystem);
     __createInternals(starsystem, descriptor);

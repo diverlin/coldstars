@@ -64,7 +64,7 @@
 int Starsystem::m_counter = 0;
 
 
-Starsystem::Starsystem(int id)
+Starsystem::Starsystem(const id_type& id)
 { 
     setId(id);
     setTypeId(TYPE::ENTITY::STARSYSTEM_ID);
@@ -210,6 +210,13 @@ void Starsystem::add(RocketBullet* rocket, const glm::vec3& center, const glm::v
     m_bullets.push_back(rocket);
 }
 
+void Starsystem::add(Star* star)
+{
+    star->setStarSystem(this);
+    star->setPlaceTypeId(TYPE::PLACE::SPACE_ID);
+    m_stars.push_back(star);
+}
+
 void Starsystem::add(Planetoid* object, const SpaceObject* parent, int it)
 {
     object->BindParent(parent, it);
@@ -219,12 +226,6 @@ void Starsystem::add(Planetoid* object, const SpaceObject* parent, int it)
 
     switch(object->typeId())
     {
-        case TYPE::ENTITY::STAR_ID:
-        {
-            m_stars.push_back((Star*)object);
-            break;
-        }
-
         case TYPE::ENTITY::PLANET_ID:
         {
             m_planets.push_back((Planet*)object);

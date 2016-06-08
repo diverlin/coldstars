@@ -164,7 +164,6 @@ public:
     StarBuilder& starBuilder() { return *m_starBuilder; }
     RocketBulletBuilder& rocketBulletBuilder() { return *m_rocketBulletBuilder; }
     SatelliteBuilder& satelliteBuilder() { return *m_satelliteBuilder; }
-    //ShipBuilder& shipBuilder() { return *m_shipBuilder; }
     SpaceStationBuilder& spaceStationBuilder() { return *m_spaceStationBuilder; }
 
     GalaxyBuilder& galaxyBuilder() { return *m_galaxyBuilder; }

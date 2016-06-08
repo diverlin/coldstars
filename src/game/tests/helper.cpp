@@ -40,15 +40,6 @@
 #include <communication/MessageManager.hpp>
 #include <managers/EntityManager.hpp>
 
-Bomb* getNewBomb(int damage, int radius)
-{
-    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::BOMB);
-    global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
-
-    Bomb* bomb = global::get().entityManager().get<Bomb*>(descriptor.id());
-    return bomb;
-}
-
 Container* getNewContainer(const id_type& child_id)
 {
     auto descriptor = descriptor::Container(child_id);

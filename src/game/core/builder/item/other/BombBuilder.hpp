@@ -29,17 +29,18 @@ class Base;
 
 class BombBuilder
 {
-    public:
-        BombBuilder();
-        ~BombBuilder();
+public:
+    BombBuilder();
+    ~BombBuilder();
 
-        Bomb* create(const descriptor::Base&) const;
-                                     
-    private:
-        void createInternals(Bomb*, const descriptor::Base&) const;
+    static Bomb* getNew();
+    static Bomb* getNew(const descriptor::Base&);
+
+private:
+    static void __createInternals(Bomb*, const descriptor::Base&);
 }; 
-    
 
-        
+
+
 
 

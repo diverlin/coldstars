@@ -39,7 +39,7 @@ ContainerBuilder::~ContainerBuilder()
 
 Container* ContainerBuilder::getNew(const descriptor::Container& descriptor)
 {
-    Container* container = new Container(descriptor.id());
+    Container* container = new Container;
     assert(container);
     global::get().entityManager().reg(container);
     __createInternals(container, descriptor);
