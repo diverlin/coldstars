@@ -196,8 +196,8 @@ void EntityManager::loadPass0(const std::string& filename)
         LOG("loading stars...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("star"))
         {
-            Star* star = global::get().starBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
-            star->Load(v.second);
+            //Star* star = global::get().starBuilder().__getNewTemplate(v.second.get<unsigned long int>("data_id.id"));
+            //star->Load(v.second);
         }
     }
     
@@ -206,8 +206,8 @@ void EntityManager::loadPass0(const std::string& filename)
         LOG("loading planets...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("planet"))
         {
-            Planet* planet = global::get().planetBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
-            planet->Load(v.second);
+            //Planet* planet = global::get().planetBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
+            //planet->Load(v.second);
         }
     }
 

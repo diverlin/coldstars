@@ -24,6 +24,10 @@
 
 class Planet;
 
+namespace descriptor {
+class Base;
+}
+
 namespace ENTITY
 {
     namespace PLANET
@@ -42,13 +46,13 @@ namespace ENTITY
 
 class PlanetBuilder
 {
-    public:
-        PlanetBuilder();
-        ~PlanetBuilder();
+public:
+    PlanetBuilder();
+    ~PlanetBuilder();
 
-        Planet* createTemplate(id_type id = NONE_ID) const;
-        Planet* create(float) const;
-                                     
-    private:
-        void createInternals(Planet*, float) const;
+    static Planet* getNew(const descriptor::Base&);
+    static Planet* getNew();
+
+private:
+    static Planet* __createTemplate(id_type id = NONE_ID);
 }; 

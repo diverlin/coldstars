@@ -29,31 +29,27 @@ ShipBuilder::ShipBuilder()
 ShipBuilder::~ShipBuilder()
 {}
 
-Ship* ShipBuilder::getNew() const
+Ship* ShipBuilder::getNew()
 {
     const auto& descr = global::get().descriptors().getRand(descriptor::Type::VEHICLE);
-    Ship* ship = new Ship(global::get().idGenerator().nextId());
-    assert(ship);
-    global::get().entityManager().reg(ship);
-    createInternals(ship, descr);
-    return ship;
+    return getNew(descr);
 }
 
-Ship* ShipBuilder::getNew(const descriptor::Base& descr) const
+Ship* ShipBuilder::getNew(const descriptor::Base& descr)
 {            
     Ship* ship = new Ship(global::get().idGenerator().nextId());
     assert(ship);
     global::get().entityManager().reg(ship);
-    createInternals(ship, descr);
+    __createInternals(ship, descr);
     return ship;
 }
 
-Ship* ShipBuilder::getNew(const std::string& data) const
+Ship* ShipBuilder::getNew(const std::string& data)
 {
     return getNew(descriptor::Base(data));
 }
 
-void ShipBuilder::createInternals(Ship* ship, const descriptor::Base& descr) const
+void ShipBuilder::__createInternals(Ship* ship, const descriptor::Base& descr)
 {
     //jeti::Mesh* mesh = nullptr;
     //jeti::TextureOb* texOb = nullptr;
@@ -140,5 +136,5 @@ void ShipBuilder::createInternals(Ship* ship, const descriptor::Base& descr) con
     //AnimationConstantRotation* animation_program = new AnimationConstantRotation(glm::vec3(0.02f, 0.0f, 0.0f));
     //ship->SetRenderAnimation(animation_program);
                            
-    CreateItemSlots(ship);
+    _createItemSlots(ship);
 }

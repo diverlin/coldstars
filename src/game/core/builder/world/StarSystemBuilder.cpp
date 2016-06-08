@@ -89,10 +89,10 @@ void StarsystemBuilder::__createPlanets(Starsystem* starsystem, int planet_per_s
 {
     int orbit_radius = meti::getRandInt(2 * ENTITY::PLANET::DISTANCE_MIN, 2 * ENTITY::PLANET::DISTANCE_MAX);
     
-    for(int i=0; i<planet_per_system; i++) {
-        Planet* planet = global::get().planetBuilder().create(orbit_radius);
-        starsystem->add(planet, starsystem->star());
-        orbit_radius += meti::getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
-    }
+//    for(int i=0; i<planet_per_system; i++) {
+//        Planet* planet = global::get().planetBuilder().getNew(orbit_radius);
+//        starsystem->add(planet, starsystem->star());
+//        orbit_radius += meti::getRandInt(ENTITY::PLANET::DISTANCE_MIN, ENTITY::PLANET::DISTANCE_MAX);
+//    }
 
 }

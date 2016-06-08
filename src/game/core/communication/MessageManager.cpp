@@ -78,7 +78,7 @@ void MessageManager::process(const Message& message)
             break;
         }
         case TELEGRAM::CREATE_CONTAINER: {
-            global::get().containerBuilder().create(message.data);
+            global::get().containerBuilder().getNew(message.data);
             break;
         }
         /** STARSYSTEM ADD */

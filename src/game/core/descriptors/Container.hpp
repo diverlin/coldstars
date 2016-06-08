@@ -28,7 +28,7 @@ namespace descriptor {
 class Container : public Base
 {
 public:
-    Container(const id_type& id, const id_type& child_id);
+    Container(const id_type& child_id);
     Container(const std::string& data);
     ~Container() {}
 };

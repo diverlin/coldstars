@@ -21,8 +21,6 @@
 
 #include <descriptors/Base.hpp>
 
-#include <common/IdGenerator.hpp>
-
 class DescriptorManager;
 
 class DescriptorGenerator {
@@ -49,8 +47,6 @@ private:
     static descriptor::Base getNewRadarDescriptor(int race = -1, int tech_level = -1);
     static descriptor::Base getNewProtectorDescriptor(int race = -1, int tech_level = -1);
     static descriptor::Base getNewBombDescriptor(int damage = -1, int radius = -1);
-
-    static IdGenerator m_idGenerator;
 
     friend DescriptorManager;
 };

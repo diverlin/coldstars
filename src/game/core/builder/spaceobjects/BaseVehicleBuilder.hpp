@@ -28,16 +28,16 @@ class Vehicle;
 
 class BaseVehicleBuilder
 {
-    public:
-        BaseVehicleBuilder();
-        virtual ~BaseVehicleBuilder() {}
+public:
+    BaseVehicleBuilder();
+    virtual ~BaseVehicleBuilder() {}
 
-        void equip(Vehicle* vehicle, const descriptor::Base& descriptor) const;
-        void equip(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const;
-        void EquipModules(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const; 
-        void EquipArtefacts(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const; 
-        void EquipBomb(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const; 
-              
-    protected:
-        void CreateItemSlots(Vehicle*) const;
+    void equip(Vehicle* vehicle, const descriptor::Base& descriptor) const;
+    void equip(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const;
+    void EquipModules(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const;
+    void EquipArtefacts(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const;
+    void EquipBomb(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const;
+
+protected:
+    static void _createItemSlots(Vehicle*);
 }; 

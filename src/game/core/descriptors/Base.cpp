@@ -22,6 +22,8 @@
 
 namespace descriptor {
 
+IdGenerator Base::m_idGenerator;
+
 namespace {
 const std::string KEY_STR_ID = "id";
 const std::string KEY_STR_TYPE = "type";
@@ -144,6 +146,7 @@ std::string typeStr(const Type& type) {
 Base::Base(Type type)
 {
     add(Key::TYPE, (int)type);
+    add(Key::ID, m_idGenerator.nextId());
 }
 
 Base::Base(Type type, const std::map<Key, int_type>& map)

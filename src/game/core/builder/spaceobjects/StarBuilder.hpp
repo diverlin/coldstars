@@ -44,16 +44,12 @@ public:
     StarBuilder();
     ~StarBuilder();
 
-    Star* createTemplate(id_type id = NONE_ID) const;
-    Star* getNew() const;
-    Star* getNew(const descriptor::Base&) const;
+    static Star* getNew();
+    static Star* getNew(const descriptor::Base&);
 
 private:
-    void __createInternals(Star*) const;
+    static Star* __getNewTemplate(id_type id = NONE_ID);
 };
-
-
-
 
 
 
