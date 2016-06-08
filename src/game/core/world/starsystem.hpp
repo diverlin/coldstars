@@ -20,6 +20,9 @@
 #pragma once
 
 #include <vector>
+
+#include <types/IdType.hpp>
+
 #include <spaceobjects/SpaceObject.hpp>
 
 #include <world/HyperSpace.hpp>
@@ -112,7 +115,7 @@ class Explosion
 class Starsystem : public SpaceObject
 {
     public:
-        Starsystem(int);
+        Starsystem(const id_type& id = NONE_ID);
         ~Starsystem();
         
         virtual void putChildrenToGarbage() const;
@@ -145,6 +148,8 @@ class Starsystem : public SpaceObject
         void add(Ship* ship, const glm::vec3& center = glm::vec3(0.0f), const glm::vec3& angle = glm::vec3(0.0f));
         void add(RocketBullet*, const glm::vec3&, const glm::vec3&);
 
+        void add(Star*);
+        [[deprecated("split to types")]]
         void add(Planetoid*, const SpaceObject* parent = nullptr, int it = 0);
         void add(Container*, const glm::vec3& = glm::vec3(0.0f));
         void add(BlackHole*, const glm::vec3&);

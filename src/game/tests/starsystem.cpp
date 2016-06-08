@@ -25,9 +25,11 @@
 #include <world/starsystem.hpp>
 
 #include <builder/world/StarSystemBuilder.hpp>
+#include <builder/spaceobjects/StarBuilder.hpp>
+#include <builder/spaceobjects/PlanetBuilder.hpp>
+#include <builder/spaceobjects/ShipBuilder.hpp>
 
 #include <descriptors/Base.hpp>
-//#include <descriptors/DescriptorGenerator.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
 //#include <builder/item/equipment/ALL>
@@ -45,5 +47,13 @@
 TEST(creation, starsystem)
 {
     const descriptor::Base& descr = global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
-    Starsystem* starsystem = global::get().starsystemBuilder().getNew( descr );
+    Starsystem* starsystem = StarsystemBuilder::getNew( descr );
+
+    Star* star = StarBuilder::getNew();
+    Planet* planet = PlanetBuilder::getNew();
+    Ship* ship = ShipBuilder::getNew();
+
+    starsystem->add(star);
+    //starsystem->add(planet);
+    //starsystem->add(ship);
 }

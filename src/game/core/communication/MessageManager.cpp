@@ -74,7 +74,7 @@ void MessageManager::process(const Message& message)
             break;
         }
         case TELEGRAM::CREATE_BOMB: {
-            global::get().bombBuilder().create(message.data);
+            global::get().bombBuilder().getNew(message.data);
             break;
         }
         case TELEGRAM::CREATE_CONTAINER: {
