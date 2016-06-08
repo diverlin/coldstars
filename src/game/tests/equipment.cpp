@@ -58,11 +58,14 @@ void commonDataItemCheck(const descriptor::Base& descr, item::Base* item)
 TEST(creation,bak)
 {
     const descriptor::Base& descr = global::get().descriptors().getRand(descriptor::Type::BAK);
-    item::equipment::Bak* bak_equipment = global::get().bakBuilder().getNew( descr );
+    item::equipment::Bak* bak = global::get().bakBuilder().getNew( descr );
 
-    EXPECT_EQ(descr.fuelMax(), bak_equipment->fuel());
-    EXPECT_EQ(descr.fuelMax(), bak_equipment->fuelMax());
-    commonDataItemCheck(descr, bak_equipment);
+    EXPECT_EQ(descr.fuelMax(), bak->fuel());
+    EXPECT_EQ(descr.fuelMax(), bak->fuelMax());
+    commonDataItemCheck(descr, bak);
+
+    // clean
+    delete bak;
 }
 
 // TODO
@@ -71,7 +74,7 @@ TEST(creation,bak)
 
 TEST(equipment, bak)
 {
-    Ship* ship = getNewShip();
+    Ship* ship = ShipBuilder::getNew();
     item::equipment::Bak* bak = global::get().bakBuilder().getNew();
 
     // initial
@@ -85,11 +88,15 @@ TEST(equipment, bak)
     // prop check
     EXPECT_TRUE(ship->driveComplex().bakSlot()->item() != nullptr);
     EXPECT_EQ(ship->properties().hyper, 0); // no drive is set, that's why hyper is 0
+
+    // clean
+    delete ship;
+    delete bak;
 }
 
 TEST(equipment, drive)
 {
-    Ship* ship = getNewShip();
+    Ship* ship = ShipBuilder::getNew();
     item::equipment::Drive* drive = global::get().driveBuilder().getNew();
 
     // initial
@@ -103,11 +110,15 @@ TEST(equipment, drive)
     // prop check
     EXPECT_TRUE(ship->driveComplex().driveSlot()->item() != nullptr);
     EXPECT_EQ(ship->properties().hyper, 0); // no bak is set that's why hyper is 0
+
+    // clean
+    delete ship;
+    delete drive;
 }
 
 TEST(equipment, bak_and_drive)
 {
-    Ship* ship = getNewShip();
+    Ship* ship = ShipBuilder::getNew();
     item::equipment::Bak* bak = global::get().bakBuilder().getNew();
     item::equipment::Drive* drive = global::get().driveBuilder().getNew();
 
@@ -153,11 +164,16 @@ TEST(equipment, bak_and_drive)
     // repair
     drive->doRepair();
     EXPECT_EQ(ship->properties().hyper, hyper);
+
+    // clean
+    delete ship;
+    delete bak;
+    delete drive;
 }
 
 TEST(equipment, droid)
 {
-    Ship* ship = getNewShip();
+    Ship* ship = ShipBuilder::getNew();
     item::equipment::Droid* droid = global::get().droidBuilder().getNew();
 
     // initial
@@ -186,11 +202,15 @@ TEST(equipment, droid)
     // repair
     droid->doRepair();
     EXPECT_EQ(ship->properties().repair, droid->repair());
+
+    // clean
+    delete ship;
+    delete droid;
 }
 
 TEST(equipment, grapple)
 {
-    Ship* ship = getNewShip();
+    Ship* ship = ShipBuilder::getNew();
     item::equipment::Grapple* grapple = global::get().grappleBuilder().getNew();
 
     // initial
@@ -225,11 +245,15 @@ TEST(equipment, grapple)
     grapple->doRepair();
     EXPECT_EQ(ship->properties().grab_strength, grapple->strength());
     EXPECT_EQ(ship->properties().grab_radius, grapple->radius());
+
+    // clean
+    delete ship;
+    delete grapple;
 }
 
 TEST(equipment, scaner)
 {
-    Ship* ship = getNewShip();
+    Ship* ship = ShipBuilder::getNew();
     item::equipment::Scaner* scaner = global::get().scanerBuilder().getNew();
 
     // initial
@@ -258,11 +282,15 @@ TEST(equipment, scaner)
     // repair
     scaner->doRepair();
     EXPECT_EQ(ship->properties().scan, scaner->scan());
+
+    // clean
+    delete ship;
+    delete scaner;
 }
 
 TEST(equipment, radar)
 {
-    Ship* ship = getNewShip();
+    Ship* ship = ShipBuilder::getNew();
     item::equipment::Radar* radar = global::get().radarBuilder().getNew();
 
     // initial
@@ -291,11 +319,15 @@ TEST(equipment, radar)
     // repair
     radar->doRepair();
     EXPECT_EQ(ship->properties().radar, radar->radius());
+
+    // clean
+    delete ship;
+    delete radar;
 }
 
 TEST(equipment, protector)
 {
-    Ship* ship = getNewShip();
+    Ship* ship = ShipBuilder::getNew();
     item::equipment::Protector* protector = global::get().protectorBuilder().getNew();
 
     // initial
@@ -325,11 +357,15 @@ TEST(equipment, protector)
     // repair
     protector->doRepair();
     EXPECT_EQ(ship->properties().protection, protection);
+
+    // clean
+    delete ship;
+    delete protector;
 }
 
 TEST(equipment, freespace)
 {
-    Ship* ship = getNewShip();
+    Ship* ship = ShipBuilder::getNew();
 
     // initial
     EXPECT_EQ(ship->mass(), ship->freeSpace());
@@ -345,5 +381,11 @@ TEST(equipment, freespace)
     // check space
     EXPECT_EQ(ship->freeSpace(), ship->space() - weight);
     EXPECT_EQ(ship->mass(), weight);
+
+    // clean
+    delete ship;
+    for (auto item: items) {
+        delete item;
+    }
 }
 

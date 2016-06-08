@@ -32,11 +32,11 @@ public:
     BaseVehicleBuilder();
     virtual ~BaseVehicleBuilder() {}
 
-    void equip(Vehicle* vehicle, const descriptor::Base& descriptor) const;
-    void equip(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const;
-    void EquipModules(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const;
-    void EquipArtefacts(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const;
-    void EquipBomb(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID) const;
+    static void equip(Vehicle* vehicle, const descriptor::Base& descriptor);
+    static void equip(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID);
+    static void EquipModules(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID);
+    static void EquipArtefacts(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID);
+    static void EquipBomb(Vehicle*, TYPE::TECH tech_leve = TYPE::TECH::L0_ID);
 
 protected:
     static void _createItemSlots(Vehicle*);

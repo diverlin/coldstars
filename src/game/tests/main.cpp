@@ -70,8 +70,8 @@ TEST(base,hit)
 {
     MessageManager& messageManager = global::get().messageManager();
 
-    Ship* ship1 = getNewShip();
-    Ship* ship2 = getNewShip();
+    Ship* ship1 = ShipBuilder::getNew();
+    Ship* ship2 = ShipBuilder::getNew();
 
     messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 3).data(), 0.3));
     messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 2).data(), 0.2));
@@ -86,8 +86,8 @@ TEST(base,critical_hit)
 {
     MessageManager& messageManager = global::get().messageManager();
 
-    Ship* ship1 = getNewShip();
-    Ship* ship2 = getNewShip();
+    Ship* ship1 = ShipBuilder::getNew();
+    Ship* ship2 = ShipBuilder::getNew();
 
     messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 1.1*ship2->criticalDamage()).data(), 0.4));
 
@@ -101,7 +101,7 @@ TEST(base,bomb)
     MessageManager& messageManager = global::get().messageManager();
 
     Starsystem* starsystem = getNewStarSystem();
-    Ship* ship = getNewShip();
+    Ship* ship = ShipBuilder::getNew();
     Bomb* bomb = getNewBomb(1000, 1000);
     Container* container = getNewContainer(bomb->id());
 
