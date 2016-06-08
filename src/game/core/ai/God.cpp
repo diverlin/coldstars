@@ -271,8 +271,8 @@ void God::CreateShips(Starsystem* starsystem, int ship_num, TYPE::RACE npc_race_
         }
         // VERY UGLY LOGIC END
 
-        Ship* new_ship = global::get().shipBuilder().getNew();
-        global::get().shipBuilder().equip(new_ship); // improove
+        Ship* new_ship = ShipBuilder::getNew();
+        ShipBuilder::equip(new_ship); // improove
 
         Npc* new_npc = global::get().npcBuilder().create(npc_race_id, npc_subtype_id, npc_subsubtype_id);
         new_ship->bindNpc(new_npc);

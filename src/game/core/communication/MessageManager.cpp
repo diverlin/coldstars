@@ -70,7 +70,7 @@ void MessageManager::process(const Message& message)
             break;
         }
         case TELEGRAM::CREATE_SHIP: {
-            global::get().shipBuilder().getNew(message.data);
+            ShipBuilder::getNew(message.data);
             break;
         }
         case TELEGRAM::CREATE_BOMB: {

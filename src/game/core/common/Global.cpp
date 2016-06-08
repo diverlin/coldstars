@@ -151,7 +151,6 @@ global::global()
     , m_starBuilder(new StarBuilder)
     , m_rocketBulletBuilder(new RocketBulletBuilder)
     , m_satelliteBuilder(new SatelliteBuilder)
-    , m_shipBuilder(new ShipBuilder)
     , m_spaceStationBuilder(new SpaceStationBuilder)
     , m_galaxyBuilder(new GalaxyBuilder)
     , m_sectorBuilder(new SectorBuilder)
@@ -222,7 +221,6 @@ global::~global()
     delete m_starBuilder;
     delete m_rocketBulletBuilder;
     delete m_satelliteBuilder;
-    delete m_shipBuilder;
     delete m_spaceStationBuilder;
 
     delete m_galaxyBuilder;

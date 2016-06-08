@@ -20,12 +20,10 @@
 
 #include <types/IdType.hpp>
 
-class Ship;
 class Bomb;
 class Container;
 class Starsystem;
 
-Ship* getNewShip();
 Bomb* getNewBomb(int damage, int radius);
 Container* getNewContainer(const id_type& child_id);
 Starsystem* getNewStarSystem();

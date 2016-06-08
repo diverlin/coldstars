@@ -50,13 +50,6 @@
 //    return ship;
 //}
 
-Ship* getNewShip()
-{
-    Ship* ship = global::get().shipBuilder().getNew();
-    assert(ship);
-    return ship;
-}
-
 Bomb* getNewBomb(int damage, int radius)
 {
     descriptor::Base descriptor = global::get().descriptors().getRand(descriptor::Type::BOMB);

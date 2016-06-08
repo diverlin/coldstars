@@ -887,8 +887,8 @@ void Starsystem::ShipManager_s(unsigned int num)
         int weapons_num = 7;
 
         Npc* new_pnpc = global::get().npcBuilder().create(prace_id, psubtype_id, psubsubtype_id);
-        Ship* new_pship = global::get().shipBuilder().getNew();
-        global::get().shipBuilder().equip(new_pship);   // improove
+        Ship* new_pship = ShipBuilder::getNew();
+        ShipBuilder::equip(new_pship);   // improove
 
         new_pship->bindNpc(new_pnpc);
 
