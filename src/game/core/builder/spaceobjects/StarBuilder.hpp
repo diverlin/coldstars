@@ -26,29 +26,34 @@ class Star;
 
 namespace ENTITY
 {
-    namespace STAR
-    { 
-        const int SCALE_MIN = 200;
-        const int SCALE_MAX = 300;
-    }
+namespace STAR
+{
+//const int SCALE_MIN = 200;
+//const int SCALE_MAX = 300;
 }
+}
+
+namespace descriptor {
+class Base;
+} // namespace descriptor
 
 
 class StarBuilder
 {
-    public:
-        StarBuilder();
-        ~StarBuilder();
-        
-        Star* createTemplate(id_type id = NONE_ID) const;
-        Star* create() const;
-                                     
-    private:
-        void createInternals(Star*) const;
+public:
+    StarBuilder();
+    ~StarBuilder();
+
+    Star* createTemplate(id_type id = NONE_ID) const;
+    Star* getNew() const;
+    Star* getNew(const descriptor::Base&) const;
+
+private:
+    void __createInternals(Star*) const;
 };
 
-    
 
-        
+
+
 
 

@@ -29,7 +29,7 @@ const std::string fname = "data.txt";
 DescriptorManager::DescriptorManager()
 {
     generate();
-    //load();
+    load();
 }
 
 DescriptorManager::~DescriptorManager()
@@ -145,8 +145,14 @@ void DescriptorManager::generate()
         add(DescriptorGenerator::getNewBombDescriptor());
 
         // spaceobjects
-        add(DescriptorGenerator::getNewStarSystemDescriptor());
+        add(DescriptorGenerator::getNewStarsystemDescriptor());
         add(DescriptorGenerator::getNewVehicleDescriptor());
+        add(DescriptorGenerator::getNewStarDescriptor());
+        //add(DescriptorGenerator::getNewPlanetDescriptor());
+        //add(DescriptorGenerator::getNewAsteroidDescriptor());
+
+        // world
+        add(DescriptorGenerator::getNewStarsystemDescriptor());
     }
 
     save();

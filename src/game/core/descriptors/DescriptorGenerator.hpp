@@ -31,10 +31,16 @@ public:
     ~DescriptorGenerator();
 
 private:
-    static descriptor::Base getNewBombDescriptor(int damage = -1, int radius = -1);
-    static descriptor::Base getNewStarSystemDescriptor(int race = -1);
+    /* world */
+    static descriptor::Base getNewStarsystemDescriptor(int race = -1);
 
-    // items
+    /* spaceobjects */
+    static descriptor::Base getNewStarDescriptor();
+    static descriptor::Base getNewPlanetDescriptor();
+    static descriptor::Base getNewAsteroidDescriptor();
+    static descriptor::Base getNewVehicleDescriptor();
+
+    /* items */
     static descriptor::Base getNewBakDescriptor(int race = -1, int tech_level = -1);
     static descriptor::Base getNewDriveDescriptor(int race = -1, int tech_level = -1);
     static descriptor::Base getNewDroidDescriptor(int race = -1, int tech_level = -1);
@@ -42,7 +48,7 @@ private:
     static descriptor::Base getNewScanerDescriptor(int race = -1, int tech_level = -1);
     static descriptor::Base getNewRadarDescriptor(int race = -1, int tech_level = -1);
     static descriptor::Base getNewProtectorDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::Base getNewVehicleDescriptor();
+    static descriptor::Base getNewBombDescriptor(int damage = -1, int radius = -1);
 
     static IdGenerator m_idGenerator;
 
