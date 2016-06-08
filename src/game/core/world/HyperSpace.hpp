@@ -21,7 +21,7 @@
 
 #include <vector>
 class Vehicle;
-class StarSystem;
+class Starsystem;
 
 class HyperSpace
 {
@@ -31,7 +31,7 @@ class HyperSpace
 
         void AddVehicle(Vehicle*);
         bool IsVehicleHere(int) const;
-         void PostHyperJumpEvent(StarSystem*);
+         void PostHyperJumpEvent(Starsystem*);
          
          int GetQueueSize() const { return VEHICLE_vec.size(); };
  

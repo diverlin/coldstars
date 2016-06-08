@@ -538,7 +538,7 @@ void Vehicle::UpdateSpecialAction()
 }
 
 //// ******** dock/LAUNCHING ******** 
-void Vehicle::HyperJumpEvent(StarSystem* starsystem)
+void Vehicle::HyperJumpEvent(Starsystem* starsystem)
 {
     //LOG("Vehicle("+std::to_string(id())+")::HyperJumpEvent");
     
@@ -1142,7 +1142,7 @@ void Vehicle::_updateArtefactInfluence()
 //    }
 //}
 
-bool Vehicle::isAbleToJumpTo(StarSystem* target_starsystem) const
+bool Vehicle::isAbleToJumpTo(Starsystem* target_starsystem) const
 {
     float dist = meti::distance(starsystem()->center(), target_starsystem->center());
     if (dist < m_properties.hyper)
@@ -1432,7 +1432,7 @@ void Vehicle::ResolveData()
     case TYPE::PLACE::HYPER_SPACE_ID:
     {
         //std::cout<<"xxx="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
-        ((StarSystem*)global::get().entityManager().get(data_unresolved_Vehicle.starsystem_hyper_id))->hyperSpace().AddVehicle(this);
+        ((Starsystem*)global::get().entityManager().get(data_unresolved_Vehicle.starsystem_hyper_id))->hyperSpace().AddVehicle(this);
         //std::cout<<"yyy="<<data_unresolved_Vehicle.starsystem_hyper_id<<std::endl;
 
         break;

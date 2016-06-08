@@ -113,7 +113,7 @@ void Asteroid::ResolveData()
 {
     LOG(" Asteroid("+std::to_string(id())+")::ResolveData");
     
-    ((StarSystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it); 
+    ((Starsystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it); 
 }
 
 /* virtual override final */    

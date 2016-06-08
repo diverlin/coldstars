@@ -66,7 +66,7 @@ void MessageManager::process(const Message& message)
     switch(message.type_id) {
         /** CREATE */
         case TELEGRAM::CREATE_STARSYSTEM: {
-            global::get().starSystemBuilder().create(message.data);
+            global::get().starsystemBuilder().getNew(message.data);
             break;
         }
         case TELEGRAM::CREATE_SHIP: {
@@ -84,7 +84,7 @@ void MessageManager::process(const Message& message)
         /** STARSYSTEM ADD */
         case TELEGRAM::STARSYSTEM_ADD_SHIP: {
             AddToStarsystemDescriptor descriptor(message.data);
-            StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.owner));
+            Starsystem* starsystem = static_cast<Starsystem*>(global::get().entityManager().get(descriptor.owner));
             Ship* ship = static_cast<Ship*>(global::get().entityManager().get(descriptor.object));
             assert(starsystem);
             assert(ship);
@@ -93,7 +93,7 @@ void MessageManager::process(const Message& message)
         }
         case TELEGRAM::STARSYSTEM_ADD_CONTAINER: {
             AddToStarsystemDescriptor descriptor(message.data);
-            StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.owner));
+            Starsystem* starsystem = static_cast<Starsystem*>(global::get().entityManager().get(descriptor.owner));
             Container* container = static_cast<Container*>(global::get().entityManager().get(descriptor.object));
             assert(starsystem);
             assert(container);
@@ -110,7 +110,7 @@ void MessageManager::process(const Message& message)
         }
         case TELEGRAM::EXPLOSION: {
             descriptor::Explosion descriptor(message.data);
-            StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.starsystem_id));
+            Starsystem* starsystem = static_cast<Starsystem*>(global::get().entityManager().get(descriptor.starsystem_id));
             assert(starsystem);
             Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
             starsystem->add(explosion, descriptor.center);

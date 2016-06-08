@@ -25,7 +25,7 @@
 
 class Npc; 
 class Galaxy;
-class StarSystem;
+class Starsystem;
 class Asteroid;
 class Container;
 class Vehicle;
@@ -80,7 +80,7 @@ class Observation
         void FindEchievableStarSystems(Galaxy*);
         Container* GetClosestPickableContainer() const;
         Container* GetRandomPickableContainer() const;
-        StarSystem* GetClosestStarSystem(int) const;
+        Starsystem* GetClosestStarSystem(int) const;
         Vehicle* GetClosestVisibleVehicle(const std::vector<TYPE::RACE>&) const;
         Vehicle* GetRandVisibleVehicle(const std::vector<TYPE::RACE>&) const;
         
@@ -94,7 +94,7 @@ class Observation
     private:
         Npc* npc_owner;    
         
-        std::vector< Pair<StarSystem*> > visible_STARSYSTEM_pair_vec; 
+        std::vector< Pair<Starsystem*> > visible_STARSYSTEM_pair_vec; 
         std::vector< Pair<Container*> > visible_CONTAINER_pair_vec;                              
         std::vector< Pair<Container*> > visible_pickable_CONTAINER_pair_vec; 
         std::vector< Pair<Asteroid*> > visible_ASTEROID_pair_vec;         

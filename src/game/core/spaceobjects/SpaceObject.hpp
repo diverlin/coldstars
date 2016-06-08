@@ -24,7 +24,7 @@
 #include <struct/LifeData.hpp>
 #include <types/PlaceTypes.hpp>
 
-class StarSystem;
+class Starsystem;
 
 struct UnresolvedDataSpaceObject
 {
@@ -40,7 +40,7 @@ class SpaceObject : public ceti::Orientation, public Base
 
         void setLifeData(const LifeData& data_life) { m_dataLife = data_life; }
 
-        void setStarSystem(StarSystem* starsystem) { m_starsystem = starsystem; }
+        void setStarSystem(Starsystem* starsystem) { m_starsystem = starsystem; }
         void setPlaceTypeId(TYPE::PLACE place_type_id) { m_placeTypeId = place_type_id;  }
         void setMass(int mass) { m_mass = mass; }
                 
@@ -48,7 +48,7 @@ class SpaceObject : public ceti::Orientation, public Base
     
         void setParent(const SpaceObject* const parent) { m_parent = parent; }
 
-        StarSystem* starsystem()  const { return m_starsystem; }
+        Starsystem* starsystem()  const { return m_starsystem; }
         TYPE::PLACE placeTypeId() const { return m_placeTypeId; }
 
         virtual int givenExpirience() const { return m_expirienceToGive; }  // !!!
@@ -97,7 +97,7 @@ class SpaceObject : public ceti::Orientation, public Base
 
         glm::vec3 m_externalForce;
 
-        StarSystem* m_starsystem = nullptr;
+        Starsystem* m_starsystem = nullptr;
         TYPE::PLACE m_placeTypeId = TYPE::PLACE::NONE_ID;
 
         int m_mass = 0;

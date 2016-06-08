@@ -48,7 +48,7 @@ void Sector::putChildrenToGarbage() const
     }
 }
 
-void Sector::add(StarSystem* starsystem, const glm::vec3& center)
+void Sector::add(Starsystem* starsystem, const glm::vec3& center)
 { 
     starsystem->setSector(this);
     starsystem->setCenter(center);
@@ -56,12 +56,12 @@ void Sector::add(StarSystem* starsystem, const glm::vec3& center)
     m_starsystems.push_back(starsystem);
 }
 
-StarSystem* Sector::randomStarSystem(int condition_id)
+Starsystem* Sector::randomStarSystem(int condition_id)
 {
     if (condition_id == NONE_ID) {
         return m_starsystems[meti::getRandInt(0, m_starsystems.size()-1)];
     } else {
-        std::vector<StarSystem*> ss_vec;
+        std::vector<Starsystem*> ss_vec;
         for (unsigned int i=0; i<m_starsystems.size(); i++) {
             if (m_starsystems[i]->conditionId() == condition_id) {
                 ss_vec.push_back(m_starsystems[i]);
@@ -78,7 +78,7 @@ StarSystem* Sector::randomStarSystem(int condition_id)
 
 
 
-StarSystem* Sector::closestStarSystemTo(StarSystem* starsystem, int condition_id)
+Starsystem* Sector::closestStarSystemTo(Starsystem* starsystem, int condition_id)
 {
     float dist_min = INCREDIBLY_MAX_FLOAT;
     int index_min = -1;

@@ -169,7 +169,7 @@ protected:
     friend class ItemSlot;
 public:
 
-    void HyperJumpEvent(StarSystem*);
+    void HyperJumpEvent(Starsystem*);
     void DockingEvent();
     void LaunchingEvent();
 
@@ -183,7 +183,7 @@ public:
     //        void RenderRadarRange();
     //        void RenderGrappleRange();
 
-    bool isAbleToJumpTo(StarSystem*) const;
+    bool isAbleToJumpTo(Starsystem*) const;
 
     bool isArmorFull() const;
     int armorMiss() const;

@@ -18,9 +18,11 @@
 
 #pragma once
 
-#include <ceti/NonCopyable.hpp>
-#include <boost/property_tree/ptree.hpp>
 #include <struct/IdData.hpp>
+
+#include <ceti/NonCopyable.hpp>
+
+#include <boost/property_tree/ptree.hpp>
 
 
 class Base : private NonCopyable
@@ -39,7 +41,8 @@ class Base : private NonCopyable
         TYPE::ENTITY typeId() const { return m_data_id.type_id; }
         TYPE::ENTITY subTypeId() const { return m_data_id.subtype_id; }
         TYPE::ENTITY subSubTypeId() const { return m_data_id.subsubtype_id; }
-                    
+        int_type descriptorId() const { assert(m_descriptorId != -1); return m_descriptorId; }
+
         std::string dataTypeStr() const;
 
         virtual void Save(boost::property_tree::ptree&) const {}
@@ -56,6 +59,7 @@ class Base : private NonCopyable
         void ResolveData();
 
     private:
+        int_type m_descriptorId = -1;
         int m_mesh_id;
         int m_texture_id;
 

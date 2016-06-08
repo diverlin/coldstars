@@ -80,12 +80,12 @@ Container* getNewContainer(const id_type& child_id)
     return container;
 }
 
-StarSystem* getNewStarSystem()
+Starsystem* getNewStarSystem()
 {
     descriptor::Base descriptor = global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
 
-    StarSystem* starsystem = static_cast<StarSystem*>(global::get().entityManager().get(descriptor.id()));
+    Starsystem* starsystem = static_cast<Starsystem*>(global::get().entityManager().get(descriptor.id()));
     assert(starsystem);
     return starsystem;
 }

@@ -23,7 +23,7 @@
 #include "../common/constants.hpp"
 
 class Galaxy;
-class StarSystem;
+class Starsystem;
 class StarSystemsConditionData;
 
 struct UnresolvedDataSector
@@ -45,10 +45,10 @@ class Sector : public SpaceObject
 
         virtual void putChildrenToGarbage() const;
 
-        void add(StarSystem*, const glm::vec3&);
+        void add(Starsystem*, const glm::vec3&);
 
-        StarSystem* randomStarSystem(int condition_id = NONE_ID);
-        StarSystem* closestStarSystemTo(StarSystem*, int condition_id = NONE_ID);
+        Starsystem* randomStarSystem(int condition_id = NONE_ID);
+        Starsystem* closestStarSystemTo(Starsystem*, int condition_id = NONE_ID);
 
         void update(int);
 
@@ -64,7 +64,7 @@ class Sector : public SpaceObject
 
         UnresolvedDataSector m_data_unresolved_Sector;
 
-        std::vector<StarSystem*> m_starsystems;
+        std::vector<Starsystem*> m_starsystems;
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);

@@ -47,7 +47,7 @@ bool HyperSpace::IsVehicleHere(int id) const
     return false;
 }    
 
-void HyperSpace::PostHyperJumpEvent(StarSystem* starsystem)
+void HyperSpace::PostHyperJumpEvent(Starsystem* starsystem)
 {
     for (unsigned int i=0; i<VEHICLE_vec.size(); i++)
     {             

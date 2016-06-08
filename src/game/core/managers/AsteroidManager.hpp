@@ -20,7 +20,7 @@
 #ifndef ASTEROIDMANAGER_HPP
 #define ASTEROIDMANAGER_HPP
 
-class StarSystem;
+class Starsystem;
 
 class AsteroidManager 
 {
@@ -34,7 +34,7 @@ class AsteroidManager
         
         void Parameterize(unsigned int asteroids_num, int asteroid_delay = 0) { this->asteroid_num = asteroid_num; this->asteroid_delay = asteroid_delay; }
             
-        void Update(StarSystem*);
+        void Update(Starsystem*);
 
     private:                         
         unsigned int asteroid_num;
