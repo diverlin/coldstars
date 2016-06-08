@@ -59,7 +59,7 @@ class Orientation
 
         void updateOrientation();     //depr
 
-        void setDirection(const glm::vec3& direction)   { m_direction = glm::normalize(direction); m_isUpdated = false; }
+        void setDirection(const glm::vec3& direction)   { assert((int)direction.length() != 1); m_direction = glm::normalize(direction); m_isUpdated = false; }
         void setCollisionRadius(float collision_radius) { m_collisionRadius = collision_radius; }
 
     protected:            

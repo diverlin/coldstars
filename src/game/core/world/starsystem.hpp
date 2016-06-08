@@ -144,8 +144,9 @@ class Starsystem : public SpaceObject
         void createGroupAndShareTask(Npc*, Starsystem*, int) const;
         
         //// TRANSITION
-        void add(Vehicle*, const glm::vec3& center = glm::vec3(0.0f), const glm::vec3& angle = glm::vec3(0.0f), const SpaceObject* const parent = nullptr);
-        void add(Ship* ship, const glm::vec3& center = glm::vec3(0.0f), const glm::vec3& angle = glm::vec3(0.0f));
+        void add(Ship*, const glm::vec3& center = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
+        void add(SpaceStation*, const glm::vec3& center = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
+        void add(Satellite*, const glm::vec3& center = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f), const SpaceObject* const parent = nullptr);
         void add(RocketBullet*, const glm::vec3&, const glm::vec3&);
 
         void add(Star*);
@@ -264,6 +265,8 @@ class Starsystem : public SpaceObject
         void LoadData(const boost::property_tree::ptree&);
         void ResolveData();
         
+        void __addVehicleCommon(Vehicle*, const glm::vec3&, const glm::vec3&);
+
         friend class GuiGalaxyMap;
         friend class Observation;
         friend class Player;

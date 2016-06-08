@@ -9,6 +9,11 @@ set(PROJECT_SERVER   ${PROJECT}_server)
 set(PROJECT_CLIENT   ${PROJECT}_client)
 set(PROJECT_TESTS    ${PROJECT}_tests)
 
+set(GLM_ROOT_DIR "../../../dependencies/glm-0.9.7.5/")
+find_package(GLM REQUIRED)
+include_directories(${GLM_INCLUDE_DIRS})
+add_definitions(-DGLM_FORCE_RADIANS)
+
 if (USE_MODULES)
     add_definitions(-DUSE_MODULES)
 endif()
