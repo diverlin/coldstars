@@ -40,23 +40,12 @@
 #include <communication/MessageManager.hpp>
 #include <managers/EntityManager.hpp>
 
-//Ship* createNewShip()
-//{
-//    auto descriptor = generateVehicleDescriptor();
-//    global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor.data()));
-
-//    Ship* ship = static_cast<Ship*>(global::get().entityManager().get(descriptor.id));
-//    assert(ship);
-//    return ship;
-//}
-
 Bomb* getNewBomb(int damage, int radius)
 {
-    descriptor::Base descriptor = global::get().descriptors().getRand(descriptor::Type::BOMB);
+    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::BOMB);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_BOMB, descriptor.data()));
 
-    Bomb* bomb = static_cast<Bomb*>(global::get().entityManager().get(descriptor.id()));
-    assert(bomb);
+    Bomb* bomb = global::get().entityManager().get<Bomb*>(descriptor.id());
     return bomb;
 }
 
@@ -65,20 +54,10 @@ Container* getNewContainer(const id_type& child_id)
     auto descriptor = descriptor::Container(child_id);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_CONTAINER, descriptor.data()));
 
-    Container* container = static_cast<Container*>(global::get().entityManager().get(descriptor.id()));
-    assert(container);
+    Container* container = global::get().entityManager().get<Container*>(descriptor.id());
     assert(container->itemSlot());
     assert(container->itemSlot()->item());
     assert(container->itemSlot()->item()->id() == child_id);
     return container;
 }
 
-Starsystem* getNewStarSystem()
-{
-    descriptor::Base descriptor = global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
-    global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
-
-    Starsystem* starsystem = static_cast<Starsystem*>(global::get().entityManager().get(descriptor.id()));
-    assert(starsystem);
-    return starsystem;
-}

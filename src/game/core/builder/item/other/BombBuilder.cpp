@@ -38,7 +38,7 @@ BombBuilder::~BombBuilder()
 
 Bomb* BombBuilder::create(const descriptor::Base& descriptor) const
 {
-    Bomb* bomb = new Bomb(descriptor.id());
+    Bomb* bomb = new Bomb;
     assert(bomb);
     global::get().entityManager().reg(bomb);
     createInternals(bomb, descriptor);

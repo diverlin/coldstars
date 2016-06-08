@@ -38,6 +38,15 @@ class EntityManager
         void reg(Base*);
     
         Base* get(const id_type&) const;
+
+        template<class T>
+        T get(const id_type& id) const {
+            Base* base = get(id);
+            T der = static_cast<T>(base);
+            assert(der);
+            return der;
+        }
+
         Player* player() const;
 
         bool updateSaveRequest();
