@@ -84,34 +84,28 @@ void MessageManager::process(const Message& message)
         /** STARSYSTEM ADD */
         case TELEGRAM::STARSYSTEM_ADD_SHIP: {
             AddToStarsystemDescriptor descriptor(message.data);
-            Starsystem* starsystem = static_cast<Starsystem*>(global::get().entityManager().get(descriptor.owner));
-            Ship* ship = static_cast<Ship*>(global::get().entityManager().get(descriptor.object));
-            assert(starsystem);
-            assert(ship);
+            Starsystem* starsystem = global::get().entityManager().get<Starsystem*>(descriptor.owner);
+            Ship* ship = global::get().entityManager().get<Ship*>(descriptor.object);
             starsystem->add(ship, descriptor.position/*, descriptor.angle*/);
             break;
         }
         case TELEGRAM::STARSYSTEM_ADD_CONTAINER: {
             AddToStarsystemDescriptor descriptor(message.data);
-            Starsystem* starsystem = static_cast<Starsystem*>(global::get().entityManager().get(descriptor.owner));
-            Container* container = static_cast<Container*>(global::get().entityManager().get(descriptor.object));
-            assert(starsystem);
-            assert(container);
+            Starsystem* starsystem = global::get().entityManager().get<Starsystem*>(descriptor.owner);
+            Container* container = global::get().entityManager().get<Container*>(descriptor.object);
             starsystem->add(container, descriptor.position);
             break;
         }
         /** OTHER */
         case TELEGRAM::HIT: {
             descriptor::Base descriptor(message.data);
-            SpaceObject* ob = static_cast<SpaceObject*>(global::get().entityManager().get(descriptor.target()));
-            assert(ob);
+            SpaceObject* ob = global::get().entityManager().get<SpaceObject*>(descriptor.target());
             ob->hit(descriptor.damage());
             break;
         }
         case TELEGRAM::EXPLOSION: {
             descriptor::Explosion descriptor(message.data);
-            Starsystem* starsystem = static_cast<Starsystem*>(global::get().entityManager().get(descriptor.starsystem_id));
-            assert(starsystem);
+            Starsystem* starsystem = global::get().entityManager().get<Starsystem*>(descriptor.starsystem_id);
             Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
             starsystem->add(explosion, descriptor.center);
             break;

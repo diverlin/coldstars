@@ -25,7 +25,9 @@
 #include <spaceobjects/ALL>
 
 #include <world/starsystem.hpp>
+
 #include <descriptors/Base.hpp>
+#include <descriptors/DescriptorManager.hpp>
 
 //#include <effects/DistantNebulaEffect.hpp>
 //#include <effects/DistantStarEffect.hpp>
@@ -40,7 +42,13 @@ StarsystemBuilder::StarsystemBuilder()
 StarsystemBuilder::~StarsystemBuilder()
 {}
 
-Starsystem* StarsystemBuilder::getNew(const descriptor::Base& descriptor) const
+Starsystem* StarsystemBuilder::getNew()
+{
+    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
+    return getNew(descriptor);
+}
+
+Starsystem* StarsystemBuilder::getNew(const descriptor::Base& descriptor)
 {
     Starsystem* starsystem = new Starsystem(descriptor.id());
     assert(starsystem);
@@ -49,12 +57,12 @@ Starsystem* StarsystemBuilder::getNew(const descriptor::Base& descriptor) const
     return starsystem;
 } 
 
-Starsystem* StarsystemBuilder::getNew(const std::string& data) const
+Starsystem* StarsystemBuilder::getNew(const std::string& data)
 {
     return getNew(descriptor::Base(data));
 }
 
-void StarsystemBuilder::__createInternals(Starsystem* starsystem, const descriptor::Base& starsystem_descriptor) const
+void StarsystemBuilder::__createInternals(Starsystem* starsystem, const descriptor::Base& starsystem_descriptor)
 {
     //    starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
     //    CreateStar(starsystem);
@@ -65,7 +73,7 @@ void StarsystemBuilder::__createInternals(Starsystem* starsystem, const descript
     //    CreatePlanets(starsystem, starsystem_descriptor.planet_num);
 }
 
-void StarsystemBuilder::__createBackground(Starsystem* starsystem, int distNebula_num, int distStar_num, int color_id) const
+void StarsystemBuilder::__createBackground(Starsystem* starsystem, int distNebula_num, int distStar_num, int color_id)
 {
     for(int i=0; i<distNebula_num; i++) {
         //        DistantNebulaEffect* dn = GetNewDistantNebulaEffect();
@@ -78,14 +86,14 @@ void StarsystemBuilder::__createBackground(Starsystem* starsystem, int distNebul
     }
 }
 
-void StarsystemBuilder::__createStar(Starsystem* starsystem) const
+void StarsystemBuilder::__createStar(Starsystem* starsystem)
 {
     Star* star = global::get().starBuilder().getNew();
     starsystem->add(star);
     //alpitodorender starsystem->SetColor(star->color());
 }
 
-void StarsystemBuilder::__createPlanets(Starsystem* starsystem, int planet_per_system) const
+void StarsystemBuilder::__createPlanets(Starsystem* starsystem, int planet_per_system)
 {
     int orbit_radius = meti::getRandInt(2 * ENTITY::PLANET::DISTANCE_MIN, 2 * ENTITY::PLANET::DISTANCE_MAX);
     

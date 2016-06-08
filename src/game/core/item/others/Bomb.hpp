@@ -19,12 +19,14 @@
 
 #pragma once
 
+#include <types/IdType.hpp>
+
 #include <item/BaseItem.hpp>
 
 class Bomb : public item::Base
 {
     public:
-        Bomb(const id_type& id);
+        Bomb(const id_type& id = NONE_ID);
         virtual ~Bomb();
 
         void setDamage(int damage) { this->m_damage = damage; }

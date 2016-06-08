@@ -34,13 +34,14 @@ public:
     StarsystemBuilder();
     ~StarsystemBuilder();
 
-    Starsystem* getNew(const descriptor::Base&) const;
-    Starsystem* getNew(const std::string&) const;
+    static Starsystem* getNew();
+    static Starsystem* getNew(const descriptor::Base&);
+    static Starsystem* getNew(const std::string&);
 
 private:
-    void __createInternals(Starsystem*, const descriptor::Base&) const;
+    static void __createInternals(Starsystem*, const descriptor::Base&);
 
-    void __createBackground(Starsystem*, int, int, int) const;
-    void __createStar(Starsystem*) const;
-    void __createPlanets(Starsystem*, int) const;
+    static void __createBackground(Starsystem*, int, int, int);
+    static void __createStar(Starsystem*);
+    static void __createPlanets(Starsystem*, int);
 }; 
