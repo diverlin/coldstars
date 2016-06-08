@@ -17,10 +17,11 @@
 */
 
 #include "StarBuilder.hpp"
-#include "../CommonBuilderHeaders.hpp"
+#include <builder/CommonBuilderHeaders.hpp>
 #include "../../spaceobjects/Star.hpp"
 
 #include <common/constants.hpp>
+#include <descriptors/Base.hpp>
 
 #include <types/MeshTypes.hpp>
     
@@ -42,37 +43,42 @@ Star* StarBuilder::createTemplate(id_type id) const
     return star;
 } 
  
-Star* StarBuilder::create() const
+Star* StarBuilder::getNew() const
 {
     Star* star = createTemplate();
-    createInternals(star);
+    __createInternals(star);
         
     return star;
 } 
+
+Star* StarBuilder::getNew(const descriptor::Base& descr) const
+{
+    return getNew();
+}
           
-void StarBuilder::createInternals(Star* star) const
+void StarBuilder::__createInternals(Star* star) const
 {     
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
+//    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     
-    LifeData data_life;
-    data_life.armor = 1000000; 
+//    LifeData data_life;
+//    data_life.armor = 1000000;
     
-    PlanetDescriptor star_data;
-    star_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS); 
-    star_data.radius_A      = 50;
-    star_data.radius_B      = 50; 
-    star_data.orbit_phi_inD = 0;
-    star_data.speed         = 1.8;
+//    PlanetDescriptor star_data;
+//    star_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS);
+//    star_data.radius_A      = 50;
+//    star_data.radius_B      = 50;
+//    star_data.orbit_phi_inD = 0;
+//    star_data.speed         = 1.8;
     
-    //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
+//    //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
     
-    star->SetPlanetDescriptor(star_data);
-    star->setLifeData(data_life);
-    float scale_comp = meti::getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX);
-    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
-    //alpitodorender star->SetRenderData(mesh, texOb, scale);
+//    star->SetPlanetDescriptor(star_data);
+//    star->setLifeData(data_life);
+//    float scale_comp = 1.0; //meti::getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX);
+//    glm::vec3 scale(scale_comp, scale_comp, scale_comp);
+//    //alpitodorender star->SetRenderData(mesh, texOb, scale);
  
-    // alpitodorender star->CalcColor();
+//    // alpitodorender star->CalcColor();
 }
 
 

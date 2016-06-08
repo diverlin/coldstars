@@ -126,6 +126,9 @@ std::string typeStr(const Type& type) {
     case Type::CONTAINER: return "Type::CONTAINER"; break;
     case Type::BOMB: return "Type::BOMB"; break;
     case Type::STARSYSTEM: return "Type::STARSYSTEM"; break;
+    case Type::STAR: return "Type::STAR"; break;
+    case Type::PLANET: return "Type::PLANET"; break;
+    case Type::ASTEROID: return "Type::ASTEROID"; break;
     case Type::BAK: return "Type::BAK"; break;
     case Type::DRIVE: return "Type::DRIVE"; break;
     case Type::DROID: return "Type::DROID"; break;
@@ -239,7 +242,7 @@ Base::get(const Key& key) const
     if (f != m_map.end()) {
         return f->second;
     }
-    throw std::runtime_error("CODE ERROR: " + keyStr(key) + " is not found in descriptor");
+    throw std::runtime_error("CODE ERROR: key=[" + keyStr(key) + "] is not found in descriptor");
 }
 
 } // namespace descriptor

@@ -80,7 +80,7 @@ void StarsystemBuilder::__createBackground(Starsystem* starsystem, int distNebul
 
 void StarsystemBuilder::__createStar(Starsystem* starsystem) const
 {
-    Star* star = global::get().starBuilder().create();
+    Star* star = global::get().starBuilder().getNew();
     starsystem->add(star);
     //alpitodorender starsystem->SetColor(star->color());
 }
