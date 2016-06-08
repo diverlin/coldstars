@@ -109,11 +109,11 @@ class Explosion
         int m_radius = 0;
 };
 
-class StarSystem : public SpaceObject
+class Starsystem : public SpaceObject
 {
     public:
-        StarSystem(int);
-        ~StarSystem();
+        Starsystem(int);
+        ~Starsystem();
         
         virtual void putChildrenToGarbage() const;
 
@@ -138,7 +138,7 @@ class StarSystem : public SpaceObject
         HyperSpace& hyperSpace() { return m_hyperspace; };
         
         Npc* freeLeaderByRaceId(TYPE::RACE) const;
-        void createGroupAndShareTask(Npc*, StarSystem*, int) const;
+        void createGroupAndShareTask(Npc*, Starsystem*, int) const;
         
         //// TRANSITION
         void add(Vehicle*, const glm::vec3& center = glm::vec3(0.0f), const glm::vec3& angle = glm::vec3(0.0f), const SpaceObject* const parent = nullptr);

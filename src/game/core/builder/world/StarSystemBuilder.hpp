@@ -22,25 +22,25 @@
 
 #include <string>
 
-class StarSystem;
+class Starsystem;
 
 namespace descriptor {
 class Base;
 }
 
-class StarSystemBuilder
+class StarsystemBuilder
 {
-    public:
-        StarSystemBuilder();
-        ~StarSystemBuilder();
-        
-        StarSystem* create(const descriptor::Base&) const;
-        StarSystem* create(const std::string&) const;
+public:
+    StarsystemBuilder();
+    ~StarsystemBuilder();
 
-    private:
-        void createInternals(StarSystem*, const descriptor::Base&) const;
-        
-        void CreateBackground(StarSystem*, int, int, int) const;
-        void CreateStar(StarSystem*) const;
-        void CreatePlanets(StarSystem*, int) const;
+    Starsystem* getNew(const descriptor::Base&) const;
+    Starsystem* getNew(const std::string&) const;
+
+private:
+    void __createInternals(Starsystem*, const descriptor::Base&) const;
+
+    void __createBackground(Starsystem*, int, int, int) const;
+    void __createStar(Starsystem*) const;
+    void __createPlanets(Starsystem*, int) const;
 }; 

@@ -65,8 +65,9 @@ TEST(creation,bak)
     commonDataItemCheck(descr, bak_equipment);
 }
 
-
+// TODO
 // fill for rest items
+
 
 TEST(equipment, bak)
 {

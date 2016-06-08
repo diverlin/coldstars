@@ -63,9 +63,9 @@ Container* Observation::GetRandomPickableContainer() const
     return visible_pickable_CONTAINER_pair_vec[meti::getRandInt(0, visible_pickable_CONTAINER_pair_vec.size()-1)].object;
 }
 
-StarSystem* Observation::GetClosestStarSystem(int requested_consdition_id) const
+Starsystem* Observation::GetClosestStarSystem(int requested_consdition_id) const
 {
-    StarSystem* _target_starsystem = nullptr;
+    Starsystem* _target_starsystem = nullptr;
     for (unsigned int i=0; i<visible_STARSYSTEM_pair_vec.size(); i++) {
         if (visible_STARSYSTEM_pair_vec[i].object->conditionId() == requested_consdition_id) {
             _target_starsystem = visible_STARSYSTEM_pair_vec[i].object;

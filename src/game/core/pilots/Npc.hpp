@@ -32,7 +32,7 @@ class Vehicle;
 class Player;
 class Planet;
 class GoodsPack;
-class StarSystem;
+class Starsystem;
 
 struct UnresolvedDataNpc
 {
@@ -68,7 +68,7 @@ class Npc : public Base
         unsigned long int GetCredits()  const { return credits; }
         StateMachine& GetStateMachine() { return state_machine; }
 
-        StarSystem* starsystem() const;
+        Starsystem* starsystem() const;
 
         void IncreaseCredits(unsigned long int credits) { this->credits += credits; }
         bool WithdrawCredits(unsigned long int);
@@ -91,7 +91,7 @@ class Npc : public Base
         //// scanning
         
         Planet* GetPlanetForDocking();
-        StarSystem* GetClosestStarSystem(int);
+        Starsystem* GetClosestStarSystem(int);
         
         void RenderInfo(const glm::vec2&);
         

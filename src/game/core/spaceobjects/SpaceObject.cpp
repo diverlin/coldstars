@@ -130,6 +130,6 @@ void SpaceObject::ResolveData()
         m_parent = (SpaceObject*)global::get().entityManager().get(data_unresolved_SpaceObject.parent_id);
     }
     if (data_unresolved_SpaceObject.starsystem_id != NONE_ID) {
-        m_starsystem = (StarSystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id);
+        m_starsystem = (Starsystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id);
     }
 }

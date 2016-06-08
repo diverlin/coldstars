@@ -68,7 +68,7 @@ Npc::Npc(int id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id)
 Npc::~Npc() 
 {}  
 
-StarSystem* Npc::starsystem() const { return vehicle->starsystem(); }
+Starsystem* Npc::starsystem() const { return vehicle->starsystem(); }
 
 void Npc::CloneMacroTaskFrom(Npc* npc)
 {
@@ -217,11 +217,11 @@ Planet* Npc::GetPlanetForDocking()
     return starsystem()->GetClosestInhabitedPlanet(meti::vec2(vehicle->center()));  // improove
 }
 
-StarSystem* Npc::GetClosestStarSystem(int requested_condition_id)
+Starsystem* Npc::GetClosestStarSystem(int requested_condition_id)
 {
     observation.FindEchievableStarSystems(starsystem()->sector()->galaxy());
     
-    StarSystem* _target_starsystem = observation.GetClosestStarSystem(requested_condition_id);
+    Starsystem* _target_starsystem = observation.GetClosestStarSystem(requested_condition_id);
     return _target_starsystem;
 }
 

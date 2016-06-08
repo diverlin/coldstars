@@ -100,7 +100,7 @@ TEST(base,bomb)
 {
     MessageManager& messageManager = global::get().messageManager();
 
-    StarSystem* starsystem = getNewStarSystem();
+    Starsystem* starsystem = getNewStarSystem();
     Ship* ship = getNewShip();
     Bomb* bomb = getNewBomb(1000, 1000);
     Container* container = getNewContainer(bomb->id());

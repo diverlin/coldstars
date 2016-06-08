@@ -25,7 +25,7 @@
 #include <struct/StarSystemsConditionData.hpp>
 
 class Galaxy;
-class StarSystem;
+class Starsystem;
 class Planet;
 
 class GalaxyDescriptor;
@@ -47,8 +47,8 @@ class God
         
         void CreateLifeAtPlanet(Planet*, const StarSystemDescriptor&) const;
         
-        void CreateSpaceStations(StarSystem*, int) const;
-        void CreateShips(StarSystem*, int, TYPE::RACE race_id = TYPE::RACE::NONE_ID, TYPE::ENTITY subtype_id = TYPE::ENTITY::NONE_ID, TYPE::ENTITY subsubtype_id = TYPE::ENTITY::NONE_ID) const;
+        void CreateSpaceStations(Starsystem*, int) const;
+        void CreateShips(Starsystem*, int, TYPE::RACE race_id = TYPE::RACE::NONE_ID, TYPE::ENTITY subtype_id = TYPE::ENTITY::NONE_ID, TYPE::ENTITY subsubtype_id = TYPE::ENTITY::NONE_ID) const;
         
         void ProceedInvasion(Galaxy*) const;
 

@@ -70,7 +70,7 @@ Galaxy* God::createWorld(const GalaxyDescriptor& galaxy_descriptor)
     }
 
     bool player2space = true;
-    StarSystem* const starsystem = galaxy->GetRandomSector()->randomStarSystem();
+    Starsystem* const starsystem = galaxy->GetRandomSector()->randomStarSystem();
     if (player2space == true) {
         glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
         glm::vec3 angle(0,0,0);
@@ -101,7 +101,7 @@ void God::CreateLife(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descriptor) 
 void God::CreateInvasion(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descriptor) const
 {
     for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
-        StarSystem* starsystem = galaxy->GetRandomSector()->randomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+        Starsystem* starsystem = galaxy->GetRandomSector()->randomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
         TYPE::RACE race_id = (TYPE::RACE)meti::getRandInt((int)TYPE::RACE::R6_ID, (int)TYPE::RACE::R7_ID);
         int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
         CreateShips(starsystem, ship_num, race_id);
@@ -110,12 +110,12 @@ void God::CreateInvasion(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descript
 
 void God::ProceedInvasion(Galaxy* galaxy) const
 {
-    StarSystem* starsystem_invade_from = galaxy->GetRandomSector()->randomStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
+    Starsystem* starsystem_invade_from = galaxy->GetRandomSector()->randomStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
     if (starsystem_invade_from == nullptr) {
         return;
     }
     
-    StarSystem* starsystem_invade_to   = galaxy->GetClosestSectorTo(starsystem_invade_from->sector())->closestStarSystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+    Starsystem* starsystem_invade_to   = galaxy->GetClosestSectorTo(starsystem_invade_from->sector())->closestStarSystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
     if (starsystem_invade_to == nullptr) {
         return;
     }
@@ -211,7 +211,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescriptor& starsys
 //    }
 }
 
-void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_system) const
+void God::CreateSpaceStations(Starsystem* starsystem, int spacestation_per_system) const
 {       
     for (int i=0; i<spacestation_per_system; i++)
     {     
@@ -250,7 +250,7 @@ void God::CreateSpaceStations(StarSystem* starsystem, int spacestation_per_syste
     }        
 }
 
-void God::CreateShips(StarSystem* starsystem, int ship_num, TYPE::RACE npc_race_id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id) const
+void God::CreateShips(Starsystem* starsystem, int ship_num, TYPE::RACE npc_race_id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id) const
 {
     TYPE::ENTITY npc_subtype_id = TYPE::ENTITY::NONE_ID;
     TYPE::ENTITY npc_subsubtype_id = TYPE::ENTITY::NONE_ID;
