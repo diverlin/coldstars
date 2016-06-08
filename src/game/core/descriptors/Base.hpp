@@ -20,6 +20,8 @@
 
 #include <types/IdType.hpp>
 
+#include <common/IdGenerator.hpp>
+
 #include <boost/serialization/map.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -169,6 +171,7 @@ private:
     }
 
     std::map<Key, int_type> m_map;
+    static IdGenerator m_idGenerator;
 }; 
 
 } // namespace descriptor

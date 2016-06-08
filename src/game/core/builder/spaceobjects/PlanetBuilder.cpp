@@ -20,6 +20,9 @@
 #include "../CommonBuilderHeaders.hpp"
 #include "../../spaceobjects/Planet.hpp"
 
+#include <descriptors/Base.hpp>
+#include <descriptors/DescriptorManager.hpp>
+
 #include <common/constants.hpp>
 
 //#include <effects/Atmosphere.hpp>
@@ -36,7 +39,7 @@ PlanetBuilder::PlanetBuilder()
 PlanetBuilder::~PlanetBuilder()
 {}
 
-Planet* PlanetBuilder::createTemplate(id_type id) const
+Planet* PlanetBuilder::__createTemplate(id_type id)
 {
     Planet* planet = new Planet(id);
     assert(planet);
@@ -46,45 +49,44 @@ Planet* PlanetBuilder::createTemplate(id_type id) const
     return planet;
 } 
        
-Planet* PlanetBuilder::create(float orbit_radius) const
+Planet* PlanetBuilder::getNew()
 {
-    Planet* planet = createTemplate();
-    createInternals(planet, orbit_radius);
-    
-    return planet;
+    const auto& descr = global::get().descriptors().getRand(descriptor::Type::PLANET);
+    return getNew(descr);
 } 
      
-void PlanetBuilder::createInternals(Planet* planet, float orbit_radius) const
-{     
+Planet* PlanetBuilder::getNew(const descriptor::Base& descr)
+{
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
-      
+    //jeti::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
+
     LifeData data_life;
-    data_life.armor = 100000;
+    data_life.armor = descr.armor();
 
     PlanetDescriptor planet_data;
 
-    planet_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS); 
+    int orbit_radius = 1000; // hack
+    planet_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS);
     planet_data.radius_A      = orbit_radius;
-    planet_data.radius_B      = orbit_radius; 
+    planet_data.radius_B      = orbit_radius;
     planet_data.orbit_phi_inD = 0;
     planet_data.speed         = (float)meti::getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / (float)orbit_radius;
     planet_data.clockwise     = meti::getRandBool();
 
-    //jeti::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);
-    
+
+    Planet* planet = __createTemplate();
     planet->SetPlanetDescriptor(planet_data);
-    
     planet->setLifeData(data_life);
 
     float scale_comp = meti::getRandInt(ENTITY::PLANET::SCALE_MIN, ENTITY::PLANET::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);
     //alpitodorender planet->SetRenderData(mesh, textureOb, scale);
- 
+
     float delta_angle = 0.0001*meti::getRandInt(20, 60);
     //jeti::AnimationConstantRotation* animation_rotation = new jeti::AnimationConstantRotation(delta_angle);
     //alpitodorender planet->SetAnimationRotation(animation_rotation);
-    
-    //if (getRandBool()) 
+
+    //if (getRandBool())
     {
         //jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ATMOSPHERE_ID);
         //Atmosphere* atmosphere = new Atmosphere();
@@ -92,10 +94,10 @@ void PlanetBuilder::createInternals(Planet* planet, float orbit_radius) const
         //alpitodorender planet->AddDecoration(atmosphere);
     }
 
-   /* 
+   /*
    {
         Mesh* mesh_plane = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
-        
+
         TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::RING_ID);
         Ring* ring = new Ring();
         ring->BindData3D(mesh_plane, textureOb, 1.5f*scale);
@@ -104,8 +106,6 @@ void PlanetBuilder::createInternals(Planet* planet, float orbit_radius) const
         planet->AddDecoration(ring);
     }
     */
-    
 }
-
 
 

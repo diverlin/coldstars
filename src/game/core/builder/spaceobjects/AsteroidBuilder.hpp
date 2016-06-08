@@ -25,25 +25,25 @@ class Asteroid;
 
 namespace ENTITY
 {
-    namespace ASTEROID
-    {
-        const int SCALE_MIN = 20;
-        const int SCALE_MAX = 40;
-        
-        const int GIVEN_EXPIRIENCE = 100;
-    }
+namespace ASTEROID
+{
+const int SCALE_MIN = 20;
+const int SCALE_MAX = 40;
+
+const int GIVEN_EXPIRIENCE = 100;
+}
 }
 
 
 class AsteroidBuilder
 {
-    public:
-        AsteroidBuilder();
-        ~AsteroidBuilder();
+public:
+    AsteroidBuilder();
+    ~AsteroidBuilder();
 
-        Asteroid* createTemplate(id_type id = NONE_ID) const;
-        Asteroid* create() const;
-                                     
-    private:
-        void createInternals(Asteroid*) const;
+    Asteroid* createTemplate(id_type id = NONE_ID) const;
+    Asteroid* create() const;
+
+private:
+    void createInternals(Asteroid*) const;
 }; 

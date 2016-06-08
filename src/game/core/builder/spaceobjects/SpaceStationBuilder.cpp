@@ -128,7 +128,7 @@ void SpaceStationBuilder::createInternals(SpaceStation* spacestation) const
     spacestation->CreateDriveComplexTextureDependedStuff();
     spacestation->CreateProtectionComplexTextureDependedStuff();
     
-    CreateItemSlots(spacestation);
+    _createItemSlots(spacestation);
                 
     spacestation->BindLand(global::get().kosmoportBuilder().create());
 }

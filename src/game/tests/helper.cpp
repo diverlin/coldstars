@@ -69,7 +69,7 @@ Bomb* getNewBomb(int damage, int radius)
 
 Container* getNewContainer(const id_type& child_id)
 {
-    auto descriptor = descriptor::Container(global::get().idGenerator().nextId(), child_id);
+    auto descriptor = descriptor::Container(child_id);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_CONTAINER, descriptor.data()));
 
     Container* container = static_cast<Container*>(global::get().entityManager().get(descriptor.id()));

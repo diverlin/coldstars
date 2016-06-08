@@ -34,12 +34,12 @@ public:
     ShipBuilder();
     ~ShipBuilder();
 
-    Ship* getNew() const;
-    Ship* getNew(const descriptor::Base&) const;
-    Ship* getNew(const std::string&) const;
+    static Ship* getNew();
+    static Ship* getNew(const descriptor::Base&);
+    static Ship* getNew(const std::string&);
 
 private:
-    void createInternals(Ship*, const descriptor::Base&) const;
+    static void __createInternals(Ship*, const descriptor::Base&);
 }; 
 
 

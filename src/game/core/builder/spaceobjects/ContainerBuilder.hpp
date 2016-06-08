@@ -39,18 +39,18 @@ class Base;
 
 class ContainerBuilder
 {
-    public:
-        ContainerBuilder();
-        ~ContainerBuilder();
+public:
+    ContainerBuilder();
+    ~ContainerBuilder();
 
-        Container* create(const std::string& data) const;
-        Container* create(const descriptor::Container&) const;
-//        Container* create(jeti::TextureOb*, BaseItem*) const;
-//        Container* create(item::BaseItem*) const;
-//        Container* create(int mineral_ammount = 0) const;
-                                                     
-    private:
-        void createInternals(Container*, const descriptor::Container&) const;
-//        void createInternals(Container*, jeti::TextureOb*, BaseItem*) const;
-//        void createInternals(Container*, BaseItem*) const;
+    static Container* getNew(const std::string& data);
+    static Container* getNew(const descriptor::Container&);
+    //        Container* create(jeti::TextureOb*, BaseItem*) const;
+    //        Container* create(item::BaseItem*) const;
+    //        Container* create(int mineral_ammount = 0) const;
+
+private:
+    static void __createInternals(Container*, const descriptor::Container&);
+    //        void createInternals(Container*, jeti::TextureOb*, BaseItem*) const;
+    //        void createInternals(Container*, BaseItem*) const;
 }; 

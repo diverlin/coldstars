@@ -59,7 +59,7 @@
 BaseVehicleBuilder::BaseVehicleBuilder()
 {}
      
-void BaseVehicleBuilder::CreateItemSlots(Vehicle* vehicle) const
+void BaseVehicleBuilder::_createItemSlots(Vehicle* vehicle)
 {     
     // WEAPON SLOTS
     unsigned int slot_weapon_num = vehicle->vehicleDescriptor().slot_weapon_num;

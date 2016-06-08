@@ -37,18 +37,18 @@ ContainerBuilder::ContainerBuilder()
 ContainerBuilder::~ContainerBuilder()
 {}
 
-Container* ContainerBuilder::create(const descriptor::Container& descriptor) const
+Container* ContainerBuilder::getNew(const descriptor::Container& descriptor)
 {
     Container* container = new Container(descriptor.id());
     assert(container);
     global::get().entityManager().reg(container);
-    createInternals(container, descriptor);
+    __createInternals(container, descriptor);
     return container;
 }
 
-Container* ContainerBuilder::create(const std::string& data) const
+Container* ContainerBuilder::getNew(const std::string& data)
 {
-    return create(descriptor::Container(data));
+    return getNew(descriptor::Container(data));
 }
 
 //Container* ContainerBuilder::create(jeti::TextureOb* textureOb, BaseItem* item) const
@@ -123,7 +123,7 @@ Container* ContainerBuilder::create(const std::string& data) const
 //    container->itemSlot()->insertItem(item);
 //}
 
-void ContainerBuilder::createInternals(Container* container, const descriptor::Container& descriptor) const
+void ContainerBuilder::__createInternals(Container* container, const descriptor::Container& descriptor)
 {
     LifeData data_life;
     data_life.armor = 1;
