@@ -41,7 +41,7 @@ void Observation::FindEchievableStarSystems(Galaxy* galaxy)
     //for (unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
     //{
     //const glm::vec3& starsystem_pos = npc_owner->GetVehicle()->starsystem()->center();
-    //float dist = meti::distance(starsystem_pos, galaxy->STARSYSTEM_vec[i]->center());
+    //float dist = meti::distance(starsystem_pos, galaxy->STARSYSTEM_vec[i]->position());
     ////if (dist < npc_owner->getShip()->propetries.hyper)
     //{
     //visible_STARSYSTEM_pair_vec.push_back( Pair<StarSystem*>(galaxy->STARSYSTEM_vec[i], dist) );
@@ -150,7 +150,7 @@ void Observation::FindVisibleAsteroidsInSpaceInStatic()
     visible_ASTEROID_pair_vec.clear();
 
     for (unsigned int i=0; i<asteroid_vec.size(); i++) {
-        float dist = meti::distance(npc_owner->GetVehicle()->position(), asteroid_vec[i]->center());
+        float dist = meti::distance(npc_owner->GetVehicle()->position(), asteroid_vec[i]->position());
         if (dist < npc_owner->GetVehicle()->properties().radar) {
             visible_ASTEROID_pair_vec.push_back( Pair<Asteroid*>(asteroid_vec[i], dist) );
             see.ASTEROID = true;
@@ -172,7 +172,7 @@ void Observation::FindVisibleContainersInSpaceInStatic()
 
     for (unsigned int i=0; i<container_vec.size(); i++)
     {
-        float dist = meti::distance(npc_owner->GetVehicle()->position(), container_vec[i]->center());
+        float dist = meti::distance(npc_owner->GetVehicle()->position(), container_vec[i]->position());
         if (dist < npc_owner->GetVehicle()->properties().radar)
         {
             visible_CONTAINER_pair_vec.push_back( Pair<Container*>(container_vec[i], dist) );
@@ -201,7 +201,7 @@ void Observation::FindVisibleVehiclesInSpaceInStatic()
 
     for (unsigned int i=0; i<vehicle_vec.size(); i++)
     {
-        float dist = meti::distance(npc_owner->GetVehicle()->position(), vehicle_vec[i]->center());
+        float dist = meti::distance(npc_owner->GetVehicle()->position(), vehicle_vec[i]->position());
         //std::cout<<"dist, radius = "<<dist<<", "<<npc_owner->GetVehicle()->propetries.radius<<std::endl;
         if (dist < npc_owner->GetVehicle()->properties().radar)
         {

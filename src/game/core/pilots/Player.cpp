@@ -639,7 +639,7 @@
 //{
 //    for (unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
 //    {
-//        const glm::vec3& rocket_pos = visible_ROCKET_vec[i]->center(); // shortcut
+//        const glm::vec3& rocket_pos = visible_ROCKET_vec[i]->position(); // shortcut
 //        float object_cursor_dist = meti::distance(rocket_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, rocket_pos.z);
 //        if (object_cursor_dist < visible_ROCKET_vec[i]->collisionRadius())
 //        {
@@ -669,7 +669,7 @@
 //{
 //    for (unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
 //    {
-//        const glm::vec3& container_pos = visible_CONTAINER_vec[i]->center(); // shortcut
+//        const glm::vec3& container_pos = visible_CONTAINER_vec[i]->position(); // shortcut
 //        float object_cursor_dist = meti::distance(container_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, container_pos.z);
 //        if (object_cursor_dist < visible_CONTAINER_vec[i]->collisionRadius())
 //        {
@@ -710,7 +710,7 @@
 //{
 //    for (unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
 //    {
-//        float object_cursor_dist = meti::distance(meti::vec2(visible_SATELLITE_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+//        float object_cursor_dist = meti::distance(meti::vec2(visible_SATELLITE_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 //        if (object_cursor_dist < visible_SATELLITE_vec[i]->collisionRadius())
 //        {
 //            cursor.SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
@@ -760,7 +760,7 @@
 //{
 //    for (unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
 //    {
-//        float object_cursor_dist = meti::distance(meti::vec2(visible_ASTEROID_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+//        float object_cursor_dist = meti::distance(meti::vec2(visible_ASTEROID_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 //        if (object_cursor_dist < visible_ASTEROID_vec[i]->collisionRadius())
 //        {
 //            cursor.SetFocusedSpaceObject(visible_ASTEROID_vec[i]);
@@ -789,7 +789,7 @@
 //{
 //    for (unsigned int i=0; i<visible_SHIP_vec.size(); i++)
 //    {
-//        float object_cursor_dist = meti::distance(meti::vec2(visible_SHIP_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+//        float object_cursor_dist = meti::distance(meti::vec2(visible_SHIP_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 //        if (object_cursor_dist < visible_SHIP_vec[i]->collisionRadius())
 //        {
 //            cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);
@@ -850,7 +850,7 @@
 //{
 //    for (unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
 //    {
-//        float cursor_dist = meti::distance(meti::vec2(visible_BLACKHOLE_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+//        float cursor_dist = meti::distance(meti::vec2(visible_BLACKHOLE_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 //        if (cursor_dist < visible_BLACKHOLE_vec[i]->collisionRadius())
 //        {
 //            cursor.SetFocusedSpaceObject(visible_BLACKHOLE_vec[i]);
@@ -866,7 +866,7 @@
 //{
 //    for (unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
 //    {
-//        float object_cursor_dist = meti::distance(meti::vec2(visible_SPACESTATION_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+//        float object_cursor_dist = meti::distance(meti::vec2(visible_SPACESTATION_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 //        if (object_cursor_dist < visible_SPACESTATION_vec[i]->collisionRadius())
 //        {
 //            cursor.SetFocusedSpaceObject(visible_SPACESTATION_vec[i]);
@@ -916,7 +916,7 @@
 //{
 //    for (unsigned int i=0; i<visible_PLANET_vec.size(); i++)
 //    {
-//        float object_cursor_dist = meti::distance(meti::vec2(visible_PLANET_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+//        float object_cursor_dist = meti::distance(meti::vec2(visible_PLANET_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 //        if (object_cursor_dist < visible_PLANET_vec[i]->collisionRadius())
 //        {
 //            cursor.SetFocusedSpaceObject(visible_PLANET_vec[i]);
@@ -939,7 +939,7 @@
 //{
 //    for (unsigned int i=0; i<visible_STAR_vec.size(); i++)
 //    {
-//        float object_cursor_dist = meti::distance(visible_STAR_vec[i]->center(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+//        float object_cursor_dist = meti::distance(visible_STAR_vec[i]->position(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
 //        if (object_cursor_dist < visible_STAR_vec[i]->collisionRadius())
 //        {
 //            cursor.SetFocusedSpaceObject(visible_STAR_vec[i]);

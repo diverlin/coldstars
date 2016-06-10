@@ -563,7 +563,7 @@ float Starsystem::calcResultGravityForce(const glm::vec3& center, const glm::vec
         float dist = meti::distance(center, m_stars[i]->position());
         if (dist < 5*m_stars[i]->collisionRadius())
         {
-            glm::vec3 force_dir(m_stars[i]->center() - center);
+            glm::vec3 force_dir(m_stars[i]->position() - center);
             force_dir = glm::normalize(force_dir);
             float power1 = meti::dotUnits(force_dir, orient);
             float power2 = CONVERTER::DIST2GRAVITY.GetEquivalent(dist);
@@ -574,10 +574,10 @@ float Starsystem::calcResultGravityForce(const glm::vec3& center, const glm::vec
 
     for (unsigned int i=0; i<m_planets.size(); i++)
     {
-        float dist = meti::distance(center, m_planets[i]->center());
+        float dist = meti::distance(center, m_planets[i]->position());
         if (dist < 5*m_planets[i]->collisionRadius())
         {
-            glm::vec3 force_dir(m_planets[i]->center() - center);
+            glm::vec3 force_dir(m_planets[i]->position() - center);
             force_dir = glm::normalize(force_dir);
             float power1 = meti::dotUnits(force_dir, orient);
             float power2 = CONVERTER::DIST2GRAVITY.GetEquivalent(dist);
