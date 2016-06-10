@@ -24,6 +24,8 @@
 //#include <slots/ItemSlot.hpp>
 #include <world/starsystem.hpp>
 
+#include <spaceobjects/Vehicle.hpp>
+
 #include <builder/world/StarSystemBuilder.hpp>
 #include <builder/spaceobjects/StarBuilder.hpp>
 #include <builder/spaceobjects/PlanetBuilder.hpp>
@@ -43,15 +45,14 @@
 
 //#include <fstream>
 
-// ??
-#include <glm/glm.hpp>
-#include <spaceobjects/Ship.hpp>
-// ??
-
 TEST(creation, starsystem)
 {
     const descriptor::Base& descr = global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
     Starsystem* starsystem = StarsystemBuilder::getNew( descr );
+
+    EXPECT_EQ(starsystem->stars().size(), 0);
+    EXPECT_EQ(starsystem->planets().size(), 0);
+    EXPECT_EQ(starsystem->vehicles().size(), 0);
 
     Star* star = StarBuilder::getNew();
     Planet* planet = PlanetBuilder::getNew();
@@ -63,4 +64,11 @@ TEST(creation, starsystem)
     glm::vec3 pos(0.0f);
     glm::vec3 dir(0.0f, 1.0f, 0.0f);
     starsystem->add(ship, pos, dir);
+
+    EXPECT_EQ(starsystem->stars().size(), 1);
+    EXPECT_EQ(starsystem->planets().size(), 1);
+    EXPECT_EQ(starsystem->vehicles().size(), 1);
+
+    EXPECT_EQ(starsystem->vehicles()[0]->position(), pos);
+    EXPECT_EQ(starsystem->vehicles()[0]->direction(), dir);
 }

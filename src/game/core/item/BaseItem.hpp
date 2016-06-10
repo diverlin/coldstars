@@ -75,7 +75,7 @@ public:
     type::TECH tech() const { return m_data_item.tech; }
 
     type::ENTITY parentSubTypeId() const { return m_parent_subtype_id; }
-    type::RACE race() const { return m_race_id; }
+    type::race race() const { return m_race_id; }
 
     bool isDamaged()    const { return (m_condition <= 0); }
     bool isLocked()     const { return (m_locked_turns > 0); }
@@ -100,7 +100,7 @@ public:
     //        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
 
 protected:
-    type::RACE m_race_id = type::RACE::NONE_ID;
+    type::race m_race_id = type::race::NONE_ID;
 
     int m_locked_turns = 0;
     int m_condition = 0;

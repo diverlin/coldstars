@@ -114,6 +114,10 @@ class Explosion
 
 class Starsystem : public SpaceObject
 {
+//    using Stars = std::vector<Star*>;
+//    using Planets = std::vector<Planet*>;
+//    using Vehicles = std::vector<Vehicle*>;
+
     public:
         Starsystem(const id_type& id = NONE_ID);
         ~Starsystem();
@@ -128,8 +132,8 @@ class Starsystem : public SpaceObject
         const glm::vec4& color() const { return m_color; }
         //bool GetDetailedSimulationFlag() const { return detalied_simulation; }
         int conditionId()     const { return m_condition_id; }
-        type::RACE raceId()          const { return m_race_id; }
-        type::RACE conquerorRaceId() const { return m_conqueror_race_id; }
+        type::race raceId()          const { return m_race_id; }
+        type::race conquerorRaceId() const { return m_conqueror_race_id; }
         Star* star()          const { return m_stars[0]; }
         Sector* sector()      const { return m_sector; }
 //        unsigned int GetShockWaveEffectNum()    const { return effect_SHOCKWAVE_vec.size(); }
@@ -140,13 +144,13 @@ class Starsystem : public SpaceObject
 
         HyperSpace& hyperSpace() { return m_hyperspace; };
         
-        Npc* freeLeaderByRaceId(type::RACE) const;
+        Npc* freeLeaderByRaceId(type::race) const;
         void createGroupAndShareTask(Npc*, Starsystem*, int) const;
         
         //// TRANSITION
-        void add(Ship*, const glm::vec3& center = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
-        void add(SpaceStation*, const glm::vec3& center = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
-        void add(Satellite*, const glm::vec3& center = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f), const SpaceObject* const parent = nullptr);
+        void add(Ship*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
+        void add(SpaceStation*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f));
+        void add(Satellite*, const glm::vec3& position = glm::vec3(0.0f), const glm::vec3& dir = glm::vec3(0.0f, 1.0f, 0.0f), const SpaceObject* const parent = nullptr);
         void add(RocketBullet*, const glm::vec3&, const glm::vec3&);
 
         void add(Star*);
@@ -190,19 +194,23 @@ class Starsystem : public SpaceObject
         void Resolve();
 
         // poor
-        Planet* GetClosestInhabitedPlanet(const glm::vec2&) const;
-        Planet* GetRandomInhabitedPlanet() const;
-        Planet* GetRandomPlanet() const;
-        Vehicle* GetRandomVehicle() const;
-        Vehicle* GetRandomVehicleExcludingNpcRaceId(type::RACE) const;
-        Vehicle* GetRandomVehicleByNpcRaceId(type::RACE) const;
-        Vehicle* GetRandomVehicle(const std::vector<type::RACE>&) const;
+
+        std::vector<Planet*> planets() const { return m_planets; }
+        std::vector<Star*> stars() const { return m_stars; }
+        std::vector<Vehicle*> vehicles() const { return m_vehicles; }
+        Planet* closestInhabitedPlanet(const glm::vec2&) const;
+        Planet* randomInhabitedPlanet() const;
+        Planet* randomPlanet() const;
+        Vehicle* randomVehicle() const;
+        Vehicle* randomVehicleExcludingNpcRaceId(type::race) const;
+        Vehicle* randVehicleByNpcRaceId(type::race) const;
+        Vehicle* randomVehicle(const std::vector<type::race>&) const;
         //
     private:
         static int m_counter;
         
-        type::RACE m_race_id = type::RACE::R0_ID;
-        type::RACE m_conqueror_race_id = type::RACE::NONE_ID;
+        type::race m_race_id = type::race::R0_ID;
+        type::race m_conqueror_race_id = type::race::NONE_ID;
         
         bool m_unique_update_inDymanic_done = false;
         bool m_unique_update_inStatic_done = false;
@@ -241,25 +249,25 @@ class Starsystem : public SpaceObject
 
         UnresolvedData m_data_unresolved_StarSystem;
 
-        void LaunchingEvent() const;
+        void __launchingEvent() const;
 
-        void UpdateInSpaceInStatic_s();
-        void UpdateEntities_s(int, bool);
+        void __updateInSpaceInStatic_s();
+        void __updateEntities_s(int, bool);
 
-        void UpdateStates();
+        void __updateStates();
 
-        void DamageEventInsideCircle(const glm::vec3&, float, int, bool);
+        void __damageEventInsideCircle(const glm::vec3&, float, int, bool);
 
         void _postDeathUniqueEvent(bool);
 
-        void ShipManager_s(unsigned int);
+        void __shipManager_s(unsigned int);
         
-        void ManageUnavaliableObjects_s();
-        void ManageDeadObjects_s();
+        void __manageUnavaliableObjects_s();
+        void __manageDeadObjects_s();
 
-        void rocketCollision_s(bool);
-        void asteroidCollision_s(bool);
-        void ExternalForcesAffection_s(bool);
+        void __rocketCollision_s(bool);
+        void __asteroidCollision_s(bool);
+        void __externalForcesAffection_s(bool);
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);

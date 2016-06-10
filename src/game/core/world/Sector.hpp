@@ -38,10 +38,10 @@ class Sector : public SpaceObject
         ~Sector();
 
         void setGalaxy(Galaxy* galaxy)  { m_galaxy = galaxy; };
-        void setCenter(const glm::vec3& center) { m_center = center; };
+        void setPosition(const glm::vec3& center) { m_position = center; };
 
         Galaxy* galaxy() const  { return m_galaxy; };
-        const glm::vec3& center() const  { return m_center; };
+        const glm::vec3& position() const  { return m_position; };
 
         virtual void putChildrenToGarbage() const;
 
@@ -60,7 +60,7 @@ class Sector : public SpaceObject
 
     private:
         Galaxy* m_galaxy;
-        glm::vec3 m_center;
+        glm::vec3 m_position;
 
         UnresolvedDataSector m_data_unresolved_Sector;
 

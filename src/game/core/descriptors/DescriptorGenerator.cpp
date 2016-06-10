@@ -33,7 +33,7 @@ descriptor::Base
 DescriptorGenerator::getNewStarsystemDescriptor(int race)
 {
     if (race == -1) {
-        race = int(type::RACE::R0_ID);
+        race = int(type::race::R0_ID);
     }
 
     descriptor::Base descriptor(descriptor::Type::STARSYSTEM);
@@ -76,7 +76,7 @@ DescriptorGenerator::getNewAsteroidDescriptor()
 descriptor::Base
 DescriptorGenerator::getNewVehicleDescriptor()
 {
-    type::RACE race_id = (type::RACE)0;//meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    type::race race_id = (type::race)0;//meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     type::ENTITY type_id = type::ENTITY::WARRIOR_ID;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
@@ -166,7 +166,7 @@ descriptor::Base
 DescriptorGenerator::getNewBakDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(type::RACE::R0_ID);
+        race = int(type::race::R0_ID);
     }
     if (tech_level == -1) {
         tech_level = int(type::TECH::L0_ID);
@@ -195,7 +195,7 @@ descriptor::Base
 DescriptorGenerator::getNewDriveDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(type::RACE::R0_ID);
+        race = int(type::race::R0_ID);
     }
     if (tech_level == -1) {
         tech_level = int(type::TECH::L0_ID);
@@ -224,7 +224,7 @@ descriptor::Base
 DescriptorGenerator::getNewDroidDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(type::RACE::R0_ID);
+        race = int(type::race::R0_ID);
     }
     if (tech_level == -1) {
         tech_level = int(type::TECH::L0_ID);
@@ -251,7 +251,7 @@ descriptor::Base
 DescriptorGenerator::getNewGrappleDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(type::RACE::R0_ID);
+        race = int(type::race::R0_ID);
     }
     if (tech_level == -1) {
         tech_level = int(type::TECH::L0_ID);
@@ -284,7 +284,7 @@ descriptor::Base
 DescriptorGenerator::getNewScanerDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(type::RACE::R0_ID);
+        race = int(type::race::R0_ID);
     }
     if (tech_level == -1) {
         tech_level = int(type::TECH::L0_ID);
@@ -313,7 +313,7 @@ descriptor::Base
 DescriptorGenerator::getNewRadarDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(type::RACE::R0_ID);
+        race = int(type::race::R0_ID);
     }
     if (tech_level == -1) {
         tech_level = int(type::TECH::L0_ID);
@@ -342,7 +342,7 @@ descriptor::Base
 DescriptorGenerator::getNewProtectorDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(type::RACE::R0_ID);
+        race = int(type::race::R0_ID);
     }
     if (tech_level == -1) {
         tech_level = int(type::TECH::L0_ID);

@@ -57,7 +57,7 @@ class Kosmoport : public Land
         void Resolve();
         
     private:
-        type::RACE race_id;
+        type::race race_id;
         
         Angar*     angar;
         Store*     store;

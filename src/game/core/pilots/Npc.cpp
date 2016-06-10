@@ -46,7 +46,7 @@
 
 Npc::Npc(int id, type::ENTITY subtype_id, type::ENTITY subsubtype_id)
     :
-      race_id(type::RACE::NONE_ID),
+      race_id(type::race::NONE_ID),
       credits(1000),
       player(nullptr),
       vehicle(nullptr),
@@ -214,7 +214,7 @@ void Npc::ScenarioFireAsteroid()
 
 Planet* Npc::GetPlanetForDocking()
 {
-    return starsystem()->GetClosestInhabitedPlanet(meti::vec2(vehicle->center()));  // improove
+    return starsystem()->closestInhabitedPlanet(meti::vec2(vehicle->position()));  // improove
 }
 
 Starsystem* Npc::GetClosestStarSystem(int requested_condition_id)
@@ -339,7 +339,7 @@ void Npc::SaveData(boost::property_tree::ptree& save_ptree, const std::string& r
 void Npc::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     is_alive = load_ptree.get<bool>("is_alive");
-    race_id  = (type::RACE)load_ptree.get<int>("race_id");
+    race_id  = (type::race)load_ptree.get<int>("race_id");
     data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
     data_unresolved_npc.aiModel_id = load_ptree.get<int>("unresolved.aiModel_id");
     

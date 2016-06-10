@@ -55,9 +55,9 @@ void Planetoid::_updatePosition()
 {
     m_orbit.updatePosition();
     if (parent()) {
-        setCenter(parent()->center() + m_orbit.position());
+        setPosition(parent()->position() + m_orbit.position());
     } else {
-        setCenter(m_orbit.position());
+        setPosition(m_orbit.position());
     }
 }
 

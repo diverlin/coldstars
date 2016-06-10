@@ -52,7 +52,7 @@ Lazer* LazerBuilder::createTemplate(id_type id) const
     return lazer;
 } 
 
-Lazer* LazerBuilder::getNew(type::TECH tech_level, type::RACE race_id, int damage_orig, int radius_orig) const
+Lazer* LazerBuilder::getNew(type::TECH tech_level, type::race race_id, int damage_orig, int radius_orig) const
 {
     Lazer* lazer = createTemplate();
     createInternals(lazer, tech_level, race_id, damage_orig, radius_orig);
@@ -60,9 +60,9 @@ Lazer* LazerBuilder::getNew(type::TECH tech_level, type::RACE race_id, int damag
     return lazer;
 } 
 
-void LazerBuilder::createInternals(Lazer* lazer, type::TECH tech_level, type::RACE race_id, int damage_orig, int radius_orig) const
+void LazerBuilder::createInternals(Lazer* lazer, type::TECH tech_level, type::race race_id, int damage_orig, int radius_orig) const
 {     
-    if (race_id == type::RACE::NONE_ID) {
+    if (race_id == type::race::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(type::KIND::GOOD));
     }
     

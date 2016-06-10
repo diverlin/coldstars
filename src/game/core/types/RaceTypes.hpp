@@ -24,7 +24,7 @@
 
 namespace type
 {
-    enum class RACE : int
+    enum class race : int
     {
         NONE_ID=0, R0_ID, R1_ID, R2_ID, R3_ID, R4_ID, R6_ID, R7_ID, LAST_ID
     };
@@ -35,7 +35,7 @@ namespace type
     };
 }
 
-std::string getRaceStr(type::RACE); 
+std::string getRaceStr(type::race); 
 
 
 

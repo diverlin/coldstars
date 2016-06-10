@@ -36,22 +36,22 @@ class Orientation
         Orientation();
         virtual ~Orientation();
 
-        void setParentCenter(float x, float y, float z) { m_parentCenter = glm::vec3(x, y, z); }
-        void setParentCenter(const glm::vec3& parent_center) { m_parentCenter = parent_center; }
+        void setParentPosition(float x, float y, float z) { m_parentPosition = glm::vec3(x, y, z); }
+        void setParentPosition(const glm::vec3& parentPosition) { m_parentPosition = parentPosition; }
         
-        void setCenter(float x, float y, float z)    { m_center = glm::vec3(x, y, z); m_isUpdated = false; }
-        void setCenter(const glm::vec3& center)   { m_center = center; m_isUpdated = false; }
+        void setPosition(float x, float y, float z)    { m_position = glm::vec3(x, y, z); m_isUpdated = false; }
+        void setPosition(const glm::vec3& position)   { m_position = position; m_isUpdated = false; }
         
         void setSize(float x, float y, float z) { m_size = glm::vec3(x, y, z); m_isUpdated = false; }
         void setSize(const glm::vec3& size) { m_size = size; m_isUpdated = false; }
     
         const glm::vec3& direction() const { return m_direction; }
        
-        const glm::vec3& center() const { return m_center; }
+        const glm::vec3& position() const { return m_position; }
         const glm::vec3& size()  const { return m_size; }
         
-        glm::vec3* const pCenter() { return &m_center; }
-        const glm::vec3* const pParentCenter() { return &m_parentCenter; }
+        glm::vec3* const pPosition() { return &m_position; }
+        const glm::vec3* const pParentPosition() { return &m_parentPosition; }
                         
         ceti::Points& points()          { return m_points; }  // depr !!!
            
@@ -73,12 +73,12 @@ class Orientation
 
         float m_collisionRadius;
                 
-        glm::vec3 m_center;
+        glm::vec3 m_position;
         glm::vec3 m_size;
      
         glm::vec3 m_direction;
         
-        glm::vec3 m_parentCenter;
+        glm::vec3 m_parentPosition;
 
         ceti::Points m_points;
 };

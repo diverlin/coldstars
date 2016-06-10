@@ -60,10 +60,10 @@ void Satellite::UpdateInSpace(int time, bool show_effect)
         //if (parent != nullptr)
         //{        
             glm::vec3 new_pos;
-            new_pos.x = parent()->center().x + m_Orbit.position().x;
-            new_pos.y = parent()->center().y + m_Orbit.position().y;
-            new_pos.z = parent()->center().z;
-            setCenter(new_pos);
+            new_pos.x = parent()->position().x + m_Orbit.position().x;
+            new_pos.y = parent()->position().y + m_Orbit.position().y;
+            new_pos.z = parent()->position().z;
+            setPosition(new_pos);
             updateOrientation();
         //}
         //else

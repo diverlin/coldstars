@@ -21,20 +21,20 @@
 
 RaceDescriptors::RaceDescriptors()
 {
-    std::vector<type::RACE> races_good = {
-        type::RACE::R0_ID,
-        type::RACE::R1_ID,
-        type::RACE::R2_ID,
-        type::RACE::R3_ID,
-        type::RACE::R4_ID
+    std::vector<type::race> races_good = {
+        type::race::R0_ID,
+        type::race::R1_ID,
+        type::race::R2_ID,
+        type::race::R3_ID,
+        type::race::R4_ID
     };
 
-    std::vector<type::RACE> races_evil = {
-        type::RACE::R6_ID,
-        type::RACE::R7_ID
+    std::vector<type::race> races_evil = {
+        type::race::R6_ID,
+        type::race::R7_ID
     };
 
-    std::vector<type::RACE> races_all;
+    std::vector<type::race> races_all;
     for (auto race_id: races_good) {
         races_all.push_back(race_id);
     }
@@ -69,7 +69,7 @@ RaceDescriptors::~RaceDescriptors()
 
 }
 
-const std::vector<type::RACE>&
+const std::vector<type::race>&
 RaceDescriptors::getRaces(type::KIND kind_id) const
 {
     const auto& el = m_races.find(kind_id);
@@ -78,7 +78,7 @@ RaceDescriptors::getRaces(type::KIND kind_id) const
 }
 
 const std::vector<type::ENTITY>&
-RaceDescriptors::getSubTypes(type::RACE race_id) const
+RaceDescriptors::getSubTypes(type::race race_id) const
 {
     const auto& el = m_subtypes.find(race_id);
     assert( el != m_subtypes.end());
@@ -86,7 +86,7 @@ RaceDescriptors::getSubTypes(type::RACE race_id) const
 }
 
 bool
-RaceDescriptors::isGood(type::RACE race_id) const
+RaceDescriptors::isGood(type::race race_id) const
 {
     const auto& el = m_races.find(type::KIND::GOOD);
     assert(el != m_races.end());
