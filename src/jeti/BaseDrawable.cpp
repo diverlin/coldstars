@@ -47,7 +47,7 @@ BaseDrawable::~BaseDrawable() {
     delete m_AnimationRotation;
 }
 
-const glm::vec3& BaseDrawable::center() const { return m_Orientation->center(); }
+const glm::vec3& BaseDrawable::center() const { return m_Orientation->position(); }
 const glm::vec3& BaseDrawable::size() const { return m_Orientation->size(); }
 
 void BaseDrawable::ValidateResources() const
@@ -119,7 +119,7 @@ const glm::mat4& BaseDrawable::actualModelMatrix()
         m_AnimationRotation->Update(m_QuatAnimation, m_Mesh->GetOriginDirection());
     }
     
-    m_MatrixTranslate = glm::translate(m_Orientation->center());
+    m_MatrixTranslate = glm::translate(m_Orientation->position());
     m_MatrixRotate    = glm::toMat4(m_QuatDirection * m_QuatAnimation);
     m_MatrixScale     = glm::scale(m_Orientation->size());
 

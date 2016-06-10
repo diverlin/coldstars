@@ -77,7 +77,7 @@ Starsystem* Observation::GetClosestStarSystem(int requested_consdition_id) const
 }        
 
 
-Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<type::RACE>& rVec_race_id) const
+Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<type::race>& rVec_race_id) const
 {
     for (unsigned int i=0; i<rVec_race_id.size(); i++)
     {
@@ -93,7 +93,7 @@ Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<type::RACE>& rV
     return nullptr;
 }
 
-Vehicle* Observation::GetRandVisibleVehicle(const std::vector<type::RACE>& rVec_race_id) const
+Vehicle* Observation::GetRandVisibleVehicle(const std::vector<type::race>& rVec_race_id) const
 {
     std::vector<Vehicle*> tmp_vehicle;
     for (unsigned int i=0; i<rVec_race_id.size(); i++) {
@@ -150,7 +150,7 @@ void Observation::FindVisibleAsteroidsInSpaceInStatic()
     visible_ASTEROID_pair_vec.clear();
 
     for (unsigned int i=0; i<asteroid_vec.size(); i++) {
-        float dist = meti::distance(npc_owner->GetVehicle()->center(), asteroid_vec[i]->center());
+        float dist = meti::distance(npc_owner->GetVehicle()->position(), asteroid_vec[i]->center());
         if (dist < npc_owner->GetVehicle()->properties().radar) {
             visible_ASTEROID_pair_vec.push_back( Pair<Asteroid*>(asteroid_vec[i], dist) );
             see.ASTEROID = true;
@@ -172,7 +172,7 @@ void Observation::FindVisibleContainersInSpaceInStatic()
 
     for (unsigned int i=0; i<container_vec.size(); i++)
     {
-        float dist = meti::distance(npc_owner->GetVehicle()->center(), container_vec[i]->center());
+        float dist = meti::distance(npc_owner->GetVehicle()->position(), container_vec[i]->center());
         if (dist < npc_owner->GetVehicle()->properties().radar)
         {
             visible_CONTAINER_pair_vec.push_back( Pair<Container*>(container_vec[i], dist) );
@@ -201,7 +201,7 @@ void Observation::FindVisibleVehiclesInSpaceInStatic()
 
     for (unsigned int i=0; i<vehicle_vec.size(); i++)
     {
-        float dist = meti::distance(npc_owner->GetVehicle()->center(), vehicle_vec[i]->center());
+        float dist = meti::distance(npc_owner->GetVehicle()->position(), vehicle_vec[i]->center());
         //std::cout<<"dist, radius = "<<dist<<", "<<npc_owner->GetVehicle()->propetries.radius<<std::endl;
         if (dist < npc_owner->GetVehicle()->properties().radar)
         {

@@ -119,12 +119,12 @@ void Grapple::UpdateGrabScenarioProgram_inDynamic()
         
         if (itemSlot()->checkTarget(&target) == STATUS::TARGET_OK)
         {
-            glm::vec3 impulse_dir = glm::normalize(vehicle.center() - target.center());
+            glm::vec3 impulse_dir = glm::normalize(vehicle.position() - target.position());
 
 
             target.addImpulse(impulse_dir, 0.001* strength());
 
-            float dist = meti::distance(vehicle.center(), target.center());
+            float dist = meti::distance(vehicle.position(), target.position());
             if (dist < 0.5*vehicle.collisionRadius())
             {
                 switch(target.typeId())

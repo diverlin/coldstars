@@ -30,7 +30,7 @@ class BlackHole : public Planetoid
 
         //void BindShockWaveEffect(ShockWaveEffect* shockwave) { this->shockwave = shockwave; };
         
-        void setCenter(const glm::vec3&);
+        void setPosition(const glm::vec3&);
         
 //        ShockWaveEffect* GetShockWaveEffect() const { return shockwave; };
         

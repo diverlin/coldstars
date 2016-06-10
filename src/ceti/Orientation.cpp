@@ -55,9 +55,9 @@ void Orientation::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 {
     //LOG(" Orientation("+std::to_string(id())+")::SaveDataUniqueOrientation");
         
-    save_ptree.put(root+"data_unresolved_Orientation.center.x", m_center.x);
-    save_ptree.put(root+"data_unresolved_Orientation.center.y", m_center.y);
-    save_ptree.put(root+"data_unresolved_Orientation.center.z", m_center.z);
+    save_ptree.put(root+"data_unresolved_Orientation.center.x", m_position.x);
+    save_ptree.put(root+"data_unresolved_Orientation.center.y", m_position.y);
+    save_ptree.put(root+"data_unresolved_Orientation.center.z", m_position.z);
     
     save_ptree.put(root+"data_unresolved_Orientation.direction.x", m_direction.x);
     save_ptree.put(root+"data_unresolved_Orientation.direction.y", m_direction.y);

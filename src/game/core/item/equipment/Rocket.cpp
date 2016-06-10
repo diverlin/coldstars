@@ -167,12 +167,12 @@ void Rocket::FireEvent(float attack_rate_normalized)
 
         if (itemSlot()->vehicleOwner()->vehicleDescriptor().draw_turrels == true)
         {
-            start_pos = itemSlot()->turrel()->center();
+            start_pos = itemSlot()->turrel()->position();
             //angle_inD = item_slot->GetTurrel()->GetAngle().z;
         }
         else
         {
-            start_pos = itemSlot()->vehicleOwner()->center();
+            start_pos = itemSlot()->vehicleOwner()->position();
             //angle_inD = itemSlot()->GetOwnerVehicle()->GetAngle().z;
         }  
         

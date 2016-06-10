@@ -51,14 +51,14 @@ class Npc : public Base
         
         virtual void putChildrenToGarbage() const {};
         
-        void SetRaceId(type::RACE race_id)            { this->race_id = race_id; }
+        void SetRaceId(type::race race_id)            { this->race_id = race_id; }
         void SetAiModel(BaseAiModel* ai_model)        { this->ai_model = ai_model; }
         void SetAlive(bool is_alive)            { this->is_alive = is_alive; }
         void SetScanTarget(Vehicle* vehicle_to_scan)    { this->vehicle_to_scan = vehicle_to_scan; }
         void SetPlayer(Player* player) { this->player = player; }
         void SetVehicle(Vehicle* vehicle)         { this->vehicle = vehicle; }
 
-        type::RACE GetRaceId()            const { return race_id; }
+        type::race GetRaceId()            const { return race_id; }
 
         Player* GetPlayer() const { return player; }
         Vehicle* GetVehicle()           const { return vehicle; }
@@ -108,7 +108,7 @@ class Npc : public Base
 
     private:
         bool is_alive;
-        type::RACE race_id;
+        type::race race_id;
         unsigned long int credits;
         
         Player* player;

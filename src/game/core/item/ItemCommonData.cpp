@@ -25,7 +25,7 @@ ItemCommonData extractCommonData(const descriptor::Base& descriptor)
 {
     ItemCommonData data;
     //data.id          = descriptor.id();
-    data.race        = (type::RACE)descriptor.race();
+    data.race        = (type::race)descriptor.race();
     data.tech        = (type::TECH)descriptor.tech();
     data.modules_num = descriptor.modulesNum();
     data.mass        = descriptor.mass();

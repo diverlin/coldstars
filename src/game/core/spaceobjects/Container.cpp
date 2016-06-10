@@ -114,7 +114,7 @@ void Container::updateInSpace(int time, bool show_effect)
 {
     _checkDeath(show_effect);         
     if (time > 0) {
-        setCenter(center() + _externalForce());
+        setPosition(position() + _externalForce());
         _externalForce() *= 0.99;
     }
 }

@@ -38,7 +38,7 @@ BlackHole::~BlackHole()
     //delete shockwave;
 } 
  
-void BlackHole::setCenter(const glm::vec3& center) { setCenter(center); /*shockwave->setCenter(meti::vec2(center));*/ }
+void BlackHole::setPosition(const glm::vec3& center) { setPosition(center); /*shockwave->setCenter(meti::vec2(center));*/ }
          
 void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
@@ -46,7 +46,7 @@ void BlackHole::UpdateInSpace(int time, bool show_effect)
 
     if (time > 0)
     {
-        setCenter(center()+meti::getRandXYVec3f(1, 2, 0));
+        setPosition(position()+meti::getRandXYVec3f(1, 2, 0));
 //        shockwave->setCenter(meti::vec2(center()));
     
         _dataLife().life_time--;

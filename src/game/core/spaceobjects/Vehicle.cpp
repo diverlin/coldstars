@@ -177,8 +177,8 @@ void Vehicle::addItemSlot(ItemSlot* slot)
         float pos_x = meti::getRandFloat(border_start, border_end) - 0.5;
         float pos_y = meti::getRandFloat(border_start, border_end) - 0.5;
 
-        slot->turrel()->setParentCenter(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
-        points().Add(slot->turrel()->pCenter(), slot->turrel()->pParentCenter());
+        slot->turrel()->setParentPosition(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
+        points().Add(slot->turrel()->pPosition(), slot->turrel()->pParentPosition());
         m_weaponComplex.AddSlot(slot);
 
         break;
@@ -479,7 +479,7 @@ void Vehicle::bindNpc(Npc* owner_npc)
 
 bool Vehicle::isObjectVisible(SpaceObject* object) const
 {
-    float dist = meti::distance(center(), object->center());
+    float dist = meti::distance(position(), object->position());
     if (dist < m_properties.radar)
     {
         return true;
@@ -1143,7 +1143,7 @@ void Vehicle::_updateArtefactInfluence()
 
 bool Vehicle::isAbleToJumpTo(Starsystem* target_starsystem) const
 {
-    float dist = meti::distance(starsystem()->center(), target_starsystem->center());
+    float dist = meti::distance(starsystem()->position(), target_starsystem->position());
     if (dist < m_properties.hyper)
     {
         return true;

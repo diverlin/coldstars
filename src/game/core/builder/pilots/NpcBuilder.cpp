@@ -48,7 +48,7 @@ Npc* NpcBuilder::createTemplate(type::ENTITY subtype_id, type::ENTITY subsubtype
     return npc;
 }
 
-Npc* NpcBuilder::create(type::RACE race_id, type::ENTITY subtype_id, type::ENTITY subsubtype_id) const
+Npc* NpcBuilder::create(type::race race_id, type::ENTITY subtype_id, type::ENTITY subsubtype_id) const
 {
     Npc* npc = createTemplate(subtype_id, subsubtype_id);
     createInternals(npc, race_id, subtype_id, subsubtype_id);
@@ -56,7 +56,7 @@ Npc* NpcBuilder::create(type::RACE race_id, type::ENTITY subtype_id, type::ENTIT
     return npc;
 }
             
-void NpcBuilder::createInternals(Npc* npc, type::RACE race_id, type::ENTITY subtype_id, type::ENTITY subsubtype_id) const
+void NpcBuilder::createInternals(Npc* npc, type::race race_id, type::ENTITY subtype_id, type::ENTITY subsubtype_id) const
 {        
     //LifeData data_life;
     
@@ -70,7 +70,7 @@ void NpcBuilder::createInternals(Npc* npc, type::RACE race_id, type::ENTITY subt
     
     npc->ApplySkillsStrategy();
         
-       if ((race_id != type::RACE::R6_ID) and (race_id != type::RACE::R7_ID))
+       if ((race_id != type::race::R6_ID) and (race_id != type::race::R7_ID))
        {
         switch(subtype_id)
         {

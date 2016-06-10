@@ -79,7 +79,7 @@ Galaxy* God::createWorld(const GalaxyDescriptor& galaxy_descriptor)
         //starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
     }
 
-    CreateShips(starsystem, /*ships_num=*/20, type::RACE::R0_ID);   // fake
+    CreateShips(starsystem, /*ships_num=*/20, type::race::R0_ID);   // fake
 
     return galaxy;
 }
@@ -102,7 +102,7 @@ void God::CreateInvasion(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descript
 {
     for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
         Starsystem* starsystem = galaxy->GetRandomSector()->randomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
-        type::RACE race_id = (type::RACE)meti::getRandInt((int)type::RACE::R6_ID, (int)type::RACE::R7_ID);
+        type::race race_id = (type::race)meti::getRandInt((int)type::race::R6_ID, (int)type::race::R7_ID);
         int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
         CreateShips(starsystem, ship_num, race_id);
     }
@@ -215,7 +215,7 @@ void God::CreateSpaceStations(Starsystem* starsystem, int spacestation_per_syste
 {       
     for (int i=0; i<spacestation_per_system; i++)
     {     
-        type::RACE npc_race_id = meti::getRand(global::get().raceDescriptors().getRaces(type::KIND::GOOD));
+        type::race npc_race_id = meti::getRand(global::get().raceDescriptors().getRaces(type::KIND::GOOD));
         type::ENTITY npc_subtype_id    = type::ENTITY::WARRIOR_ID;
         type::ENTITY npc_subsubtype_id = type::ENTITY::WARRIOR_ID;
             
@@ -250,7 +250,7 @@ void God::CreateSpaceStations(Starsystem* starsystem, int spacestation_per_syste
     }        
 }
 
-void God::CreateShips(Starsystem* starsystem, int ship_num, type::RACE npc_race_id, type::ENTITY subtype_id, type::ENTITY subsubtype_id) const
+void God::CreateShips(Starsystem* starsystem, int ship_num, type::race npc_race_id, type::ENTITY subtype_id, type::ENTITY subsubtype_id) const
 {
     type::ENTITY npc_subtype_id = type::ENTITY::NONE_ID;
     type::ENTITY npc_subsubtype_id = type::ENTITY::NONE_ID;

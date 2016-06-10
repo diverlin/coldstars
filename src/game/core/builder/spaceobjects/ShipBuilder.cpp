@@ -81,7 +81,7 @@ void ShipBuilder::__createInternals(Ship* ship, const descriptor::Base& descr)
 
     VehicleDescriptor vehicleDescriptor;
     vehicleDescriptor.id = descr.id();
-    vehicleDescriptor.race_id = (type::RACE)descr.race();
+    vehicleDescriptor.race_id = (type::race)descr.race();
     vehicleDescriptor.type_id = (type::ENTITY)descr.type();
     vehicleDescriptor.size_id = descr.size();
 

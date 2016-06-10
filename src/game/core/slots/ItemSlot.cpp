@@ -482,7 +482,7 @@ bool ItemSlot::checkDistanceToTarget(SpaceObject* target) const
         return true;
     }
     
-    float dist = meti::distance(vehicleOwner()->center(), target->center());
+    float dist = meti::distance(vehicleOwner()->position(), target->position());
     if (dist < itemRadius())
     {
         return true;

@@ -27,7 +27,7 @@
 #include <descriptors/RaceDescriptors.hpp>
 #include <common/Global.hpp>
 
-type::ENTITY getRandNpcSubTypeId(type::RACE race_id, const std::vector<type::ENTITY>& subtypes)
+type::ENTITY getRandNpcSubTypeId(type::race race_id, const std::vector<type::ENTITY>& subtypes)
 {
     std::vector<type::ENTITY> allowed_subtypes;
     const std::vector<type::ENTITY>& allowed_race_subtypes =  global::get().raceDescriptors().getSubTypes(race_id);
@@ -44,7 +44,7 @@ type::ENTITY getRandNpcSubTypeId(type::RACE race_id, const std::vector<type::ENT
     return meti::getRand(allowed_subtypes);
 }
 
-type::ENTITY getRandNpcSubTypeId(type::RACE race_id)
+type::ENTITY getRandNpcSubTypeId(type::race race_id)
 {
     assert(!global::get().raceDescriptors().getSubTypes(race_id).empty());
     return meti::getRand(global::get().raceDescriptors().getSubTypes(race_id));

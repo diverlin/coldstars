@@ -51,7 +51,7 @@ void Sector::putChildrenToGarbage() const
 void Sector::add(Starsystem* starsystem, const glm::vec3& center)
 { 
     starsystem->setSector(this);
-    starsystem->setCenter(center);
+    starsystem->setPosition(center);
 
     m_starsystems.push_back(starsystem);
 }
@@ -89,7 +89,7 @@ Starsystem* Sector::closestStarSystemTo(Starsystem* starsystem, int condition_id
         {
             if ( (m_starsystems[i]->conditionId() == condition_id) or (condition_id == NONE_ID) )
             {
-                float dist = meti::distance(starsystem->center(), m_starsystems[i]->center());
+                float dist = meti::distance(starsystem->position(), m_starsystems[i]->position());
 
                 if (dist < dist_min)
                 {
