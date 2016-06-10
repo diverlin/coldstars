@@ -46,7 +46,7 @@ public:
 
     virtual void putChildrenToGarbage() const {}
 
-    void setParentSubTypeId(TYPE::ENTITY parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
+    void setParentSubTypeId(type::ENTITY parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
     void setItemCommonData(const ItemCommonData& data_item)
     {
         setId(data_item.id);
@@ -72,10 +72,10 @@ public:
     int modulesNum() const { return m_data_item.modules_num; }
     int descriptorType() const { return m_data_item.descriptor_type; }
 
-    TYPE::TECH tech() const { return m_data_item.tech; }
+    type::TECH tech() const { return m_data_item.tech; }
 
-    TYPE::ENTITY parentSubTypeId() const { return m_parent_subtype_id; }
-    TYPE::RACE race() const { return m_race_id; }
+    type::ENTITY parentSubTypeId() const { return m_parent_subtype_id; }
+    type::RACE race() const { return m_race_id; }
 
     bool isDamaged()    const { return (m_condition <= 0); }
     bool isLocked()     const { return (m_locked_turns > 0); }
@@ -100,14 +100,14 @@ public:
     //        void RenderInfo(const jeti::Renderer&, const glm::vec2&);
 
 protected:
-    TYPE::RACE m_race_id = TYPE::RACE::NONE_ID;
+    type::RACE m_race_id = type::RACE::NONE_ID;
 
     int m_locked_turns = 0;
     int m_condition = 0;
     int m_price = 0;
     int m_deterioration = 0;
 
-    TYPE::ENTITY m_parent_subtype_id = TYPE::ENTITY::NONE_ID;
+    type::ENTITY m_parent_subtype_id = type::ENTITY::NONE_ID;
 
     ItemCommonData m_data_item;
     UnresolvedDataBaseItem m_data_unresolved_BaseItem;

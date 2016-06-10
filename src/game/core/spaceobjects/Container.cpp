@@ -38,7 +38,7 @@
 Container::Container(const id_type& id)
 {
     setId(id);
-    setTypeId(TYPE::ENTITY::CONTAINER_ID);
+    setTypeId(type::ENTITY::CONTAINER_ID);
 }
 
 /* virtual */   
@@ -56,9 +56,9 @@ void Container::putChildrenToGarbage() const
 /* override final */
 void Container::hit(int damage) {
     SpaceObject::hit(damage);
-    if (dataLife().is_dying) {
+    if (_dataLife().is_dying) {
         if (m_itemSlot->item()) {
-            if (m_itemSlot->item()->subTypeId() == TYPE::ENTITY::BOMB_ID) {
+            if (m_itemSlot->item()->subTypeId() == type::ENTITY::BOMB_ID) {
                 // send explosion event
             }
         }
@@ -94,9 +94,9 @@ void Container::bindItemSlot(ItemSlot* item_slot)
 //}
  
 /* virtual override final */   
-void Container::postDeathUniqueEvent(bool show_effect)
+void Container::_postDeathUniqueEvent(bool show_effect)
 {
-    if (m_itemSlot->item()->typeId() == TYPE::ENTITY::BOMB_ID)
+    if (m_itemSlot->item()->typeId() == type::ENTITY::BOMB_ID)
     {
         starsystem()->bombExplosionEvent(this, show_effect);  
     }
@@ -112,10 +112,10 @@ void Container::postDeathUniqueEvent(bool show_effect)
 
 void Container::updateInSpace(int time, bool show_effect)
 {
-    checkDeath(show_effect);         
+    _checkDeath(show_effect);         
     if (time > 0) {
-        setCenter(center() + externalForce());
-        externalForce() *= 0.99;
+        setCenter(center() + _externalForce());
+        _externalForce() *= 0.99;
     }
 }
                

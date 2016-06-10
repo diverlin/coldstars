@@ -29,8 +29,8 @@ struct PlanetDescriptor
     float speed = 0.0;
     bool clockwise = false;
 
-    PlanetDescriptor() {}
-    ~PlanetDescriptor() {}
+//    PlanetDescriptor() {}
+//    ~PlanetDescriptor() {}
 };
 
 

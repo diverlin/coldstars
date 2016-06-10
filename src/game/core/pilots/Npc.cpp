@@ -44,9 +44,9 @@
 #include "../common/GameDate.hpp" 
 #include <types/RaceTypes.hpp> 
 
-Npc::Npc(int id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id)
+Npc::Npc(int id, type::ENTITY subtype_id, type::ENTITY subsubtype_id)
     :
-      race_id(TYPE::RACE::NONE_ID),
+      race_id(type::RACE::NONE_ID),
       credits(1000),
       player(nullptr),
       vehicle(nullptr),
@@ -56,7 +56,7 @@ Npc::Npc(int id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id)
     is_alive = true;
     
     setId(id);
-    setTypeId(TYPE::ENTITY::NPC_ID);
+    setTypeId(type::ENTITY::NPC_ID);
     setSubTypeId(subtype_id);
     setSubSubTypeId(subsubtype_id);
 
@@ -281,7 +281,7 @@ void Npc::RenderInfo(const glm::vec2& center)
 bool Npc::BuyGoods()
 {
     Shop* shop = ((Kosmoport*)vehicle->land())->GetShop();
-    TYPE::ENTITY subtype_id = (TYPE::ENTITY)meti::getRandInt((int)TYPE::ENTITY::MINERALS_ID, (int)TYPE::ENTITY::EXCLUSIVE_ID);
+    type::ENTITY subtype_id = (type::ENTITY)meti::getRandInt((int)type::ENTITY::MINERALS_ID, (int)type::ENTITY::EXCLUSIVE_ID);
 
     // hard coded logic
     int amount_to_hold      = 0.8*vehicle->freeSpace();
@@ -339,7 +339,7 @@ void Npc::SaveData(boost::property_tree::ptree& save_ptree, const std::string& r
 void Npc::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     is_alive = load_ptree.get<bool>("is_alive");
-    race_id  = (TYPE::RACE)load_ptree.get<int>("race_id");
+    race_id  = (type::RACE)load_ptree.get<int>("race_id");
     data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
     data_unresolved_npc.aiModel_id = load_ptree.get<int>("unresolved.aiModel_id");
     
@@ -365,12 +365,12 @@ void Npc::ResolveData()
 
     skills.Resolve();
     
-    if (data_unresolved_npc.macrotask.GetScenarioTypeId() != TYPE::AISCENARIO::NONE_ID)
+    if (data_unresolved_npc.macrotask.GetScenarioTypeId() != type::AISCENARIO::NONE_ID)
     {
         state_machine.SetCurrentMacroTask(data_unresolved_npc.macrotask);
     }
     
-    if (data_unresolved_npc.microtask.GetScenarioTypeId() != TYPE::AISCENARIO::NONE_ID)
+    if (data_unresolved_npc.microtask.GetScenarioTypeId() != type::AISCENARIO::NONE_ID)
     {
         state_machine.SetCurrentMicroTask(data_unresolved_npc.microtask);
     }

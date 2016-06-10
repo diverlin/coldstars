@@ -42,7 +42,7 @@ m_Land(nullptr),
 m_Population(0)
 {    
     setId(id);
-    setTypeId(TYPE::ENTITY::PLANET_ID);
+    setTypeId(type::ENTITY::PLANET_ID);
 }
 
 /* virtual */
@@ -85,7 +85,7 @@ void Planet::UpdateInSpace(int time, bool show_effect)
 {      
     if (time > 0)
     {
-        UpdatePosition();
+        _updatePosition();
     }
 }
 
@@ -107,7 +107,7 @@ void Planet::UpdateInSpaceInStatic()
 //    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( meti::str(center()) );
 //}
 
-void Planet::postDeathUniqueEvent(bool)
+void Planet::_postDeathUniqueEvent(bool)
 {}
 
 //void Planet::Render_NEW(const Renderer& render)

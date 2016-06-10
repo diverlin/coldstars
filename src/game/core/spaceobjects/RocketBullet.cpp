@@ -43,8 +43,8 @@ m_Target(nullptr),
 m_EffectDrive(nullptr) 
 {
     setId(id);
-    setTypeId(TYPE::ENTITY::BULLET_ID);
-    setSubTypeId(TYPE::ENTITY::ROCKETBULLET_ID);
+    setTypeId(type::ENTITY::BULLET_ID);
+    setSubTypeId(type::ENTITY::ROCKETBULLET_ID);
 }
 
 /* virtual */
@@ -65,7 +65,7 @@ void RocketBullet::CreateDriveComplexTextureDependedStuff()
 
 void RocketBullet::UpdateInSpace(int time, bool show_effect)
 {
-    checkDeath(show_effect);
+    _checkDeath(show_effect);
         
     if (time > 0)
     {
@@ -79,7 +79,7 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
         if (m_Target != nullptr)
         { 
             float angle; 
-            get_dPos_ToPoint(center(), m_Target->center(), m_Speed/100.0, externalForce(), angle);
+            get_dPos_ToPoint(center(), m_Target->center(), m_Speed/100.0, _externalForce(), angle);
         
             if (CheckTarget() == true)
             {
@@ -91,7 +91,7 @@ void RocketBullet::UpdateInSpace(int time, bool show_effect)
             }
         }      
 
-        setCenter(center() + externalForce());    
+        setCenter(center() + _externalForce());    
 
         m_DataBullet.live_time -= 1;
     }
@@ -101,7 +101,7 @@ bool RocketBullet::CheckTarget() const
 {
     if (m_Target->isAlive() == true)
     {
-        if (m_Target->placeTypeId() == TYPE::PLACE::SPACE_ID)
+        if (m_Target->placeTypeId() == type::place::KOSMOS)
         {
             if (m_Target->starsystem()->id() == starsystem()->id())
             {
@@ -115,8 +115,8 @@ bool RocketBullet::CheckTarget() const
 
 void RocketBullet::CollisionEvent(bool show_effect)
 {
-    dataLife().is_alive = false; 
-    dataLife().dying_time = -1;
+    _dataLife().is_alive = false; 
+    _dataLife().dying_time = -1;
 }
 
 ///* virtual override final */
@@ -147,7 +147,7 @@ void RocketBullet::hit(int damage)
 }
 
 /* virtual override final */
-void RocketBullet::postDeathUniqueEvent(bool show_effect)  
+void RocketBullet::_postDeathUniqueEvent(bool show_effect)  
 {
     if (show_effect == true)
     {

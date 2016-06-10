@@ -39,10 +39,10 @@ public:
     ~RocketBuilder();
 
     Rocket* createTemplate(id_type id = NONE_ID) const;
-    Rocket* getNew(TYPE::TECH tech_level = TYPE::TECH::NONE_ID, TYPE::RACE race_id = TYPE::RACE::NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
+    Rocket* getNew(type::TECH tech_level = type::TECH::NONE_ID, type::RACE race_id = type::RACE::NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
 
 private:
-    void createInternals(Rocket*, TYPE::TECH, TYPE::RACE, int, int, int) const;
+    void createInternals(Rocket*, type::TECH, type::RACE, int, int, int) const;
 }; 
 
 } // namespace equipment

@@ -30,7 +30,7 @@
 NatureLand::NatureLand(int id)
 {
     setId(id);
-    setTypeId(TYPE::ENTITY::NATURELAND_ID);
+    setTypeId(type::ENTITY::NATURELAND_ID);
 }
 
 /* virtual */
@@ -89,7 +89,7 @@ bool NatureLand::AddItem(item::Base* item)
 /* virtual */
 bool NatureLand::AddVehicle(Vehicle* vehicle)
 {
-    vehicle->setPlaceTypeId(TYPE::PLACE::NATURELAND_ID); 
+    vehicle->setPlaceTypeId(type::place::LAND); 
     vehicle->setLand(this);
     
     VEHICLE_vec.push_back(vehicle);

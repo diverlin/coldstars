@@ -34,7 +34,7 @@
 
 MacroScenarioStarSystemDefence::MacroScenarioStarSystemDefence() 
 {
-    type_id = TYPE::AISCENARIO::MACRO_STARSYSTEMDEFENCE_ID;
+    type_id = type::AISCENARIO::MACRO_STARSYSTEMDEFENCE_ID;
 }
 
 /*virtual*/
@@ -53,9 +53,9 @@ void MacroScenarioStarSystemDefence::UpdateInStaticInSpace(Npc* npc) const
     Starsystem* target_starsystem = npc->GetStateMachine().GetMacroTaskManager().GetTarget()->starsystem();
     if (npc->starsystem()->id() != target_starsystem->id())
     {
-        if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != TYPE::AISCENARIO::MICRO_JUMP_ID)
+        if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != type::AISCENARIO::MICRO_JUMP_ID)
         {
-            Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, target_starsystem->id());
+            Task microtask(type::AISCENARIO::MICRO_JUMP_ID, target_starsystem->id());
             npc->GetStateMachine().SetCurrentMicroTask(microtask);
             
             return;
@@ -65,18 +65,18 @@ void MacroScenarioStarSystemDefence::UpdateInStaticInSpace(Npc* npc) const
     {
         if (target_starsystem->conditionId() != ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID)
         {
-            if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != TYPE::AISCENARIO::MICRO_DESTROY_ID)
+            if (npc->GetStateMachine().GetMicroTaskManager().GetTask().GetScenarioTypeId() != type::AISCENARIO::MICRO_DESTROY_ID)
             {           
-                Vehicle* target_vehicle = npc->GetObservation().GetRandVisibleVehicle(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+                Vehicle* target_vehicle = npc->GetObservation().GetRandVisibleVehicle(global::get().raceDescriptors().getRaces(type::KIND::GOOD));
                 if (target_vehicle != nullptr) {
-                    Task microtask(TYPE::AISCENARIO::MICRO_DESTROY_ID, target_vehicle->id());
+                    Task microtask(type::AISCENARIO::MICRO_DESTROY_ID, target_vehicle->id());
                     npc->GetStateMachine().SetCurrentMicroTask(microtask);
                     
                     return;
                 }
                 else
                 {
-                    Task microtask(TYPE::AISCENARIO::MICRO_EXPLORATION_ID, NONE_ID);
+                    Task microtask(type::AISCENARIO::MICRO_EXPLORATION_ID, NONE_ID);
                     npc->GetStateMachine().SetCurrentMicroTask(microtask);
                     
                     return;

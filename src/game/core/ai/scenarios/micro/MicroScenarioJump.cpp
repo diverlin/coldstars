@@ -28,7 +28,7 @@
 
 MicroScenarioJump::MicroScenarioJump()
 {
-    type_id = TYPE::AISCENARIO::MICRO_JUMP_ID;
+    type_id = type::AISCENARIO::MICRO_JUMP_ID;
 }
 
 /* virtual */

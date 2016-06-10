@@ -31,7 +31,7 @@ class Rect; // to be removed
 class VehicleSlot : public BaseSlot
 {
     public:
-        VehicleSlot(int, TYPE::ENTITY);
+        VehicleSlot(int, type::ENTITY);
         ~VehicleSlot();    
         
         virtual void putChildrenToGarbage() const;

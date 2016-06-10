@@ -51,7 +51,7 @@ Rocket* RocketBuilder::createTemplate(id_type id) const
     return rocket;
 } 
 
-Rocket* RocketBuilder::getNew(TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+Rocket* RocketBuilder::getNew(type::TECH tech_level, type::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {
     Rocket* rocket = createTemplate();
     createInternals(rocket, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
@@ -59,14 +59,14 @@ Rocket* RocketBuilder::getNew(TYPE::TECH tech_level, TYPE::RACE race_id, int amm
     return rocket;
 } 
 
-void RocketBuilder::createInternals(Rocket* rocket, TYPE::TECH tech_level, TYPE::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+void RocketBuilder::createInternals(Rocket* rocket, type::TECH tech_level, type::RACE race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {     
-    if (race_id == TYPE::RACE::NONE_ID) {
-        race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    if (race_id == type::RACE::NONE_ID) {
+        race_id = meti::getRand(global::get().raceDescriptors().getRaces(type::KIND::GOOD));
     }
     
-    if (tech_level == TYPE::TECH::NONE_ID) {
-        tech_level = TYPE::TECH::L0_ID;
+    if (tech_level == type::TECH::NONE_ID) {
+        tech_level = type::TECH::L0_ID;
     }
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
@@ -102,7 +102,7 @@ void RocketBuilder::createInternals(Rocket* rocket, TYPE::TECH tech_level, TYPE:
     rocket->SetBulletData(data_bullet);
     rocket->SetAmmo(ammo_max_orig*0.6);
     //alpitodorender rocket->SetRenderData(mesh, texOb_item, texOb_item->size());
-    rocket->setParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
+    rocket->setParentSubTypeId(type::ENTITY::WEAPON_SLOT_ID);
     rocket->setItemCommonData(common_data);
     
     rocket->updateProperties();

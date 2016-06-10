@@ -55,7 +55,7 @@ class Star : public Planetoid
         int m_TurnSparkThreshold;
         
 //        virtual void UpdateInfo() override final;
-        virtual void postDeathUniqueEvent(bool) override final;
+        virtual void _postDeathUniqueEvent(bool) override final;
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;        
         void LoadData(const boost::property_tree::ptree&);

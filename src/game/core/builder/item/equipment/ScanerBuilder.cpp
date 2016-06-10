@@ -71,7 +71,7 @@ void ScanerBuilder::createInternals(Scaner* scaner, const descriptor::Base& desc
     ItemCommonData common_data = extractCommonData(descriptor);
     
     scaner->setScanOrig(descriptor.scan());
-    scaner->setParentSubTypeId(TYPE::ENTITY::SCANER_SLOT_ID);
+    scaner->setParentSubTypeId(type::ENTITY::SCANER_SLOT_ID);
     scaner->setItemCommonData(common_data);
 
     scaner->updateProperties();

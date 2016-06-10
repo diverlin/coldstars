@@ -129,7 +129,7 @@ void WeaponComplex::DeactivateAllWeapons()
     }
 }
 
-void WeaponComplex::ActivateWeaponsBySubTypeId(TYPE::ENTITY weapon_subtype_id)
+void WeaponComplex::ActivateWeaponsBySubTypeId(type::ENTITY weapon_subtype_id)
 {
     for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
     {
@@ -141,7 +141,7 @@ void WeaponComplex::ActivateWeaponsBySubTypeId(TYPE::ENTITY weapon_subtype_id)
 }
 
 
-void WeaponComplex::DeactivateWeaponsBySubTypeId(TYPE::ENTITY weapon_subtype_id)
+void WeaponComplex::DeactivateWeaponsBySubTypeId(type::ENTITY weapon_subtype_id)
 {
     for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
     {

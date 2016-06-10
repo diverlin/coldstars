@@ -37,7 +37,7 @@ class Asteroid : public Planetoid
         virtual void Resolve() override final;
         
     private:          
-        void postDeathUniqueEvent(bool);
+        void _postDeathUniqueEvent(bool);
 
 //        virtual void UpdateInfo() override final;
         

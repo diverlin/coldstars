@@ -55,19 +55,19 @@ void AngarBuilder::createInternals(Angar* angar) const
 { 
     for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_MILITARY_NUM; i++)
     {
-        VehicleSlot* vehicle_slot = GetNewVehicleSlot(TYPE::ENTITY::VEHICLE_MILITARY_SLOT_ID);
+        VehicleSlot* vehicle_slot = GetNewVehicleSlot(type::ENTITY::VEHICLE_MILITARY_SLOT_ID);
         angar->AddVehicleSlot(vehicle_slot);
     }
 
     for (unsigned int i=0; i<ANGAR_VEHICLE_SLOTS_FOR_VISITORS_NUM; i++)
     {
-        VehicleSlot* vehicle_slot = GetNewVehicleSlot(TYPE::ENTITY::VEHICLE_VISITORS_SLOT_ID);
+        VehicleSlot* vehicle_slot = GetNewVehicleSlot(type::ENTITY::VEHICLE_VISITORS_SLOT_ID);
         angar->AddVehicleSlot(vehicle_slot);
     }
 
     for (unsigned int i=0; i<ANGAR_ITEM_SLOTS_NUM; i++)
     {
-        ItemSlot* cargo_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
+        ItemSlot* cargo_slot = GetNewItemSlot(type::ENTITY::CARGO_SLOT_ID);
         angar->AddItemSlot(cargo_slot);
     }
     

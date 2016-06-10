@@ -63,7 +63,7 @@ void BombBuilder::__createInternals(Bomb* bomb, const descriptor::Base& descript
     //alpitodorender bomb->SetRenderData(mesh, texOb, texOb->size());
     bomb->setDamage(descriptor.damage());
     bomb->setRadius(descriptor.radius());
-    bomb->setParentSubTypeId(TYPE::ENTITY::CARGO_SLOT_ID);
+    bomb->setParentSubTypeId(type::ENTITY::CARGO_SLOT_ID);
 }
 
 //void BombBuilder::write(const std::string& fpath, Bomb* bomb)

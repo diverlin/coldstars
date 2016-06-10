@@ -32,8 +32,8 @@ Protector::Protector(const id_type& id)
       m_protection_orig(0)
 {
     setId(id);
-    setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
-    setSubTypeId(TYPE::ENTITY::PROTECTOR_EQUIPMENT_ID);
+    setTypeId(type::ENTITY::EQUIPMENT_ID);
+    setSubTypeId(type::ENTITY::PROTECTOR_EQUIPMENT_ID);
 }
 
 /* virtual */

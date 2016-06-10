@@ -33,8 +33,8 @@ struct ItemCommonData
 
     id_type id = NONE_ID; // changable
 
-    TYPE::RACE race = TYPE::RACE::R0_ID;
-    TYPE::TECH tech = TYPE::TECH::NONE_ID;
+    type::RACE race = type::RACE::R0_ID;
+    type::TECH tech = type::TECH::NONE_ID;
     int modules_num = 0;
     int condition_max = 0;
     int deterioration = 0;

@@ -24,7 +24,7 @@
 #include <vector>
 
 
-namespace TYPE
+namespace type
 {
     enum class TECH
     {
@@ -32,15 +32,15 @@ namespace TYPE
     };
 }
 
-const std::vector<TYPE::TECH> TECH_TYPES =
+const std::vector<type::TECH> TECH_TYPES =
 {
-TYPE::TECH::L0_ID,
-TYPE::TECH::L1_ID,
-TYPE::TECH::L2_ID,
-TYPE::TECH::L3_ID
+type::TECH::L0_ID,
+type::TECH::L1_ID,
+type::TECH::L2_ID,
+type::TECH::L3_ID
 };
 
-std::string getTechLevelStr(TYPE::TECH); 
+std::string getTechLevelStr(type::TECH); 
 
 #endif
 

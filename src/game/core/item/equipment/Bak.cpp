@@ -29,8 +29,8 @@ namespace equipment {
 Bak::Bak(const id_type& id)
 {
     setId(id);
-    setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
-    setSubTypeId(TYPE::ENTITY::BAK_EQUIPMENT_ID);
+    setTypeId(type::ENTITY::EQUIPMENT_ID);
+    setSubTypeId(type::ENTITY::BAK_EQUIPMENT_ID);
 }
    
 /* virtual */

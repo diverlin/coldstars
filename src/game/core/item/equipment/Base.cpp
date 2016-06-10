@@ -33,7 +33,7 @@ namespace equipment {
 
 Base::Base()
 {
-    m_race_id = TYPE::RACE::R0_ID;
+    m_race_id = type::RACE::R0_ID;
     //animation_notfunctioning = new jeti::AnimationEffect2D(glm::vec3(0.8, 0.8, 1.0), glm::vec3(1.2, 1.2, 1.0), glm::vec3(0.02, 0.02, 0.0), 0, 0, 0);
 }
 

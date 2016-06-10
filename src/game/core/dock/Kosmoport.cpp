@@ -32,14 +32,14 @@
 
 Kosmoport::Kosmoport(int id)
 :
-race_id(TYPE::RACE::R0_ID), //wrong
+race_id(type::RACE::R0_ID), //wrong
 angar(nullptr),
 store(nullptr),
 shop(nullptr),
 goverment(nullptr)    
 {
     setId(id);
-    setTypeId(TYPE::ENTITY::KOSMOPORT_ID);
+    setTypeId(type::ENTITY::KOSMOPORT_ID);
 }
 
 /* virtual */
@@ -93,7 +93,7 @@ bool Kosmoport::GetPermissionToLand() const
 /* virtual */
 bool Kosmoport::AddVehicle(Vehicle* vehicle)
 {        
-    vehicle->setPlaceTypeId(TYPE::PLACE::KOSMOPORT_ID); 
+    vehicle->setPlaceTypeId(type::place::KOSMOPORT); 
     angar->AddVehicle(vehicle);  
     
     vehicle->setLand(this);        

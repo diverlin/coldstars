@@ -24,7 +24,7 @@
 Bomb::Bomb(const id_type& id)
 { 
     setId(id);
-    setTypeId(TYPE::ENTITY::BOMB_ID);
+    setTypeId(type::ENTITY::BOMB_ID);
 }
 
 /* virtual */

@@ -96,7 +96,7 @@ class Skills
 };
 
 const int* getArrayDependingOnClassTypeId(int);
-const int* getArrayDependingOnRaceId(TYPE::RACE);
+const int* getArrayDependingOnRaceId(type::RACE);
 
 #endif
 

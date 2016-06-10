@@ -54,14 +54,14 @@ void SpaceObject::killSilently()
     m_dataLife.garbage_ready = true;
 }
 
-void SpaceObject::checkDeath(bool show_effect)
+void SpaceObject::_checkDeath(bool show_effect)
 {
     if (m_dataLife.is_dying) {
         m_dataLife.dying_time--;
         if (m_dataLife.dying_time < 0) {
             m_dataLife.is_alive = false;
             if (!m_dataLife.garbage_ready) {
-                postDeathUniqueEvent(show_effect);
+                _postDeathUniqueEvent(show_effect);
                 m_dataLife.garbage_ready = true;
             }
         }
@@ -116,7 +116,7 @@ void SpaceObject::LoadData(const boost::property_tree::ptree& load_ptree)
 
     m_mass = load_ptree.get<int>("mass");
 
-    m_placeTypeId = (TYPE::PLACE)load_ptree.get<int>("place_type_id");
+    m_placeTypeId = (type::place)load_ptree.get<int>("place_type_id");
     
     data_unresolved_SpaceObject.parent_id     = load_ptree.get<int>("data_unresolved_SpaceObject.parent_id");
     data_unresolved_SpaceObject.starsystem_id = load_ptree.get<int>("data_unresolved_SpaceObject.starsystem_id");

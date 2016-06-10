@@ -94,7 +94,7 @@ public:
     const VehicleDescriptor& vehicleDescriptor() const { return m_vehicleDescriptor; }
 
     virtual int givenExpirience() const override final;
-    bool isSlotExists(TYPE::ENTITY) const;
+    bool isSlotExists(type::ENTITY) const;
 
     void addItemSlot(ItemSlot*);
 
@@ -147,7 +147,7 @@ public:
     virtual void remeberAgressor(Vehicle*);
     void hit(int) override;
 
-    virtual void postDeathUniqueEvent(bool);
+    virtual void _postDeathUniqueEvent(bool);
 
     void CheckNeedsInStatic();
     void ResolveNeedsInKosmoportInStatic();
@@ -209,9 +209,9 @@ public:
 protected:
     std::vector<ItemSlot*> m_slots;
 
-    ItemSlot* const _fuctionalSlot(TYPE::ENTITY) const;
+    ItemSlot* const _fuctionalSlot(type::ENTITY) const;
     ItemSlot* const _freeArtefactSlot() const;
-    ItemSlot* const _cargoSlotWithGoods(TYPE::ENTITY);
+    ItemSlot* const _cargoSlotWithGoods(type::ENTITY);
 
     bool _manageItem(item::Base*);
     bool _manageFunctionEquipment(item::Base*);

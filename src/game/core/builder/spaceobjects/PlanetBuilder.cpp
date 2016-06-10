@@ -73,9 +73,8 @@ Planet* PlanetBuilder::getNew(const descriptor::Base& descr)
     planet_data.speed         = (float)meti::getRandInt(ENTITY::PLANET::SPEED_MIN, ENTITY::PLANET::SPEED_MAX) / (float)orbit_radius;
     planet_data.clockwise     = meti::getRandBool();
 
-
     Planet* planet = __createTemplate();
-    planet->SetPlanetDescriptor(planet_data);
+    planet->setPlanetDescriptor(planet_data);
     planet->setLifeData(data_life);
 
     float scale_comp = meti::getRandInt(ENTITY::PLANET::SCALE_MIN, ENTITY::PLANET::SCALE_MAX);
@@ -106,6 +105,7 @@ Planet* PlanetBuilder::getNew(const descriptor::Base& descr)
         planet->AddDecoration(ring);
     }
     */
+    return planet;
 }
 
 

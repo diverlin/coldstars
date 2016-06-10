@@ -36,12 +36,12 @@ class SpaceObject : public ceti::Orientation, public Base
 {
     public:      
         SpaceObject();
-        virtual ~SpaceObject() override;
+        ~SpaceObject() override;
 
         void setLifeData(const LifeData& data_life) { m_dataLife = data_life; }
 
         void setStarSystem(Starsystem* starsystem) { m_starsystem = starsystem; }
-        void setPlaceTypeId(TYPE::PLACE place_type_id) { m_placeTypeId = place_type_id;  }
+        void setPlaceTypeId(type::place place_type_id) { m_placeTypeId = place_type_id;  }
         void setMass(int mass) { m_mass = mass; }
                 
         void setGivenExpirience(int expirience_to_give) { m_expirienceToGive = expirience_to_give; }
@@ -49,7 +49,7 @@ class SpaceObject : public ceti::Orientation, public Base
         void setParent(const SpaceObject* const parent) { m_parent = parent; }
 
         Starsystem* starsystem()  const { return m_starsystem; }
-        TYPE::PLACE placeTypeId() const { return m_placeTypeId; }
+        type::place placeTypeId() const { return m_placeTypeId; }
 
         virtual int givenExpirience() const { return m_expirienceToGive; }  // !!!
  
@@ -74,18 +74,17 @@ class SpaceObject : public ceti::Orientation, public Base
 //        void virtual UpdateInfo() {}
                 
     protected:
-        void setMass(float mass) { m_mass = mass; }
-        void addMass(int d_mass) { m_mass += d_mass; }
+        void _addMass(int d_mass) { m_mass += d_mass; }
         
 //        InfoTable& GetInfo() { return m_Info; }
-        LifeData& dataLife() { return m_dataLife; }
-        const LifeData& dataLife() const { return m_dataLife; } // !!! remove
+        LifeData& _dataLife() { return m_dataLife; }
+        const LifeData& _dataLife() const { return m_dataLife; } // !!! remove
         
-        const glm::vec3& externalForce() const { return m_externalForce; }
-        glm::vec3& externalForce() { return m_externalForce; }     // !!! remove
+        const glm::vec3& _externalForce() const { return m_externalForce; }
+        glm::vec3& _externalForce() { return m_externalForce; }     // !!! remove
                                     
-        void checkDeath(bool);
-        virtual void postDeathUniqueEvent(bool) {}
+        void _checkDeath(bool);
+        virtual void _postDeathUniqueEvent(bool) {}
 
         UnresolvedDataSpaceObject data_unresolved_SpaceObject;
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
@@ -98,7 +97,7 @@ class SpaceObject : public ceti::Orientation, public Base
         glm::vec3 m_externalForce;
 
         Starsystem* m_starsystem = nullptr;
-        TYPE::PLACE m_placeTypeId = TYPE::PLACE::NONE_ID;
+        type::place m_placeTypeId = type::place::NONE;
 
         int m_mass = 0;
         int m_expirienceToGive = 0;

@@ -71,8 +71,8 @@ m_damage_orig(0),
 m_radius_orig(0)
 {
     setId(id);
-    setTypeId(TYPE::ENTITY::EQUIPMENT_ID); 
-    setSubTypeId(TYPE::ENTITY::ROCKET_EQUIPMENT_ID);     
+    setTypeId(type::ENTITY::EQUIPMENT_ID); 
+    setSubTypeId(type::ENTITY::ROCKET_EQUIPMENT_ID);     
 
     fire_atOnce = meti::getRandInt(1, 3);
 }

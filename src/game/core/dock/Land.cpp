@@ -49,15 +49,15 @@ void Land::ResolveData()
     Base* owner = global::get().entityManager().get(data_unresolved_Land.owner_id);
     switch(owner->typeId())
     {
-        case TYPE::ENTITY::PLANET_ID:
+        case type::ENTITY::PLANET_ID:
         {
             ((Planet*)owner)->BindLand(this);
             break;
         }
 
-        case TYPE::ENTITY::VEHICLE_ID:
+        case type::ENTITY::VEHICLE_ID:
         {
-            if (owner->subTypeId() == TYPE::ENTITY::SPACESTATION_ID)
+            if (owner->subTypeId() == type::ENTITY::SPACESTATION_ID)
             {
                 ((SpaceStation*)owner)->BindLand(this);
             }

@@ -65,7 +65,7 @@ Star* StarBuilder::getNew(const descriptor::Base& descr)
     star_data.speed         = 1.8;
 
     Star* star = __getNewTemplate();
-    star->SetPlanetDescriptor(star_data);
+    star->setPlanetDescriptor(star_data);
     star->setLifeData(data_life);
     float scale_comp = 1.0; //meti::getRandInt(ENTITY::STAR::SCALE_MIN, ENTITY::STAR::SCALE_MAX);
     glm::vec3 scale(scale_comp, scale_comp, scale_comp);

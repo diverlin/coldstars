@@ -48,7 +48,7 @@ class God
         void CreateLifeAtPlanet(Planet*, const StarSystemDescriptor&) const;
         
         void CreateSpaceStations(Starsystem*, int) const;
-        void CreateShips(Starsystem*, int, TYPE::RACE race_id = TYPE::RACE::NONE_ID, TYPE::ENTITY subtype_id = TYPE::ENTITY::NONE_ID, TYPE::ENTITY subsubtype_id = TYPE::ENTITY::NONE_ID) const;
+        void CreateShips(Starsystem*, int, type::RACE race_id = type::RACE::NONE_ID, type::ENTITY subtype_id = type::ENTITY::NONE_ID, type::ENTITY subsubtype_id = type::ENTITY::NONE_ID) const;
         
         void ProceedInvasion(Galaxy*) const;
 

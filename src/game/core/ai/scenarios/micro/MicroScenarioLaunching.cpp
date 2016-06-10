@@ -25,7 +25,7 @@
 
 MicroScenarioLaunching::MicroScenarioLaunching()
 {
-    type_id = TYPE::AISCENARIO::MICRO_LAUNCHING_ID;
+    type_id = type::AISCENARIO::MICRO_LAUNCHING_ID;
 }
 
 /* virtual */
@@ -41,7 +41,7 @@ void MicroScenarioLaunching::Enter(Npc* npc) const
 /* virtual */
 bool MicroScenarioLaunching::Validate(Npc* npc) const
 {
-    if (npc->GetVehicle()->placeTypeId() != TYPE::PLACE::SPACE_ID)
+    if (npc->GetVehicle()->placeTypeId() != type::place::KOSMOS)
     {
         return true;
     }

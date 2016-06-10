@@ -68,7 +68,7 @@ void AsteroidBuilder::createInternals(Asteroid* asteroid) const
     planet_data.speed         = 0.1;
     planet_data.clockwise     = meti::getRandBool();
     
-    asteroid->SetPlanetDescriptor(planet_data);
+    asteroid->setPlanetDescriptor(planet_data);
     asteroid->setLifeData(data_life);
 
     float scale_comp = meti::getRandInt(ENTITY::ASTEROID::SCALE_MIN, ENTITY::ASTEROID::SCALE_MAX);

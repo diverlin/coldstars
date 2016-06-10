@@ -24,7 +24,7 @@
 #include <types/EntityTypes.hpp>
 
 
-namespace TYPE
+namespace type
 { 
     enum class GUI
     {
@@ -77,10 +77,10 @@ namespace TYPE
     };
 }
 
-std::string getGuiTypeStr(TYPE::GUI);
+std::string getGuiTypeStr(type::GUI);
 
-TYPE::GUI getGuiItemSlotType(TYPE::ENTITY);
-TYPE::GUI getGuiItemSlotSelectorType(TYPE::ENTITY);
+type::GUI getGuiItemSlotType(type::ENTITY);
+type::GUI getGuiItemSlotSelectorType(type::ENTITY);
 
 #endif
 

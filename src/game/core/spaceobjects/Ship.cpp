@@ -36,8 +36,8 @@
 Ship::Ship(int id)
 {
     setId(id);
-    setTypeId(TYPE::ENTITY::VEHICLE_ID);
-    setSubTypeId(TYPE::ENTITY::SHIP_ID);
+    setTypeId(type::ENTITY::VEHICLE_ID);
+    setSubTypeId(type::ENTITY::SHIP_ID);
 }
 
 /* virtual override final */
@@ -88,7 +88,7 @@ Ship::~Ship()
 /* virtual override final */
 void Ship::UpdateInSpace(int time, bool show_effect)
 {   
-    checkDeath(show_effect);
+    _checkDeath(show_effect);
 //    GetComplexProtector().GetShieldEffect()->Update();
     driveComplex().UpdatePosition(); // debug
 
