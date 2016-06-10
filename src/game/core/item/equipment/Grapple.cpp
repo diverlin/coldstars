@@ -170,8 +170,8 @@ void Grapple::UpdateGrabScenarioProgram_inDynamic()
 //{
 //    //for (unsigned int i=0; i<target_vec.size(); i++)
 //    //{
-//    //float xl = target_vec[i]->center().x - item_slot->GetOwnerVehicle()->center().x;
-//    //float yl = target_vec[i]->center().y - item_slot->GetOwnerVehicle()->center().y;
+//    //float xl = target_vec[i]->position().x - item_slot->GetOwnerVehicle()->center().x;
+//    //float yl = target_vec[i]->position().y - item_slot->GetOwnerVehicle()->center().y;
 
 //    //float len = sqrt((xl*xl) + (yl*yl));
 
