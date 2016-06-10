@@ -22,7 +22,7 @@
         
 void Task::reset()
 {
-    m_scenario_type_id = TYPE::AISCENARIO::NONE_ID;
+    m_scenario_type_id = type::AISCENARIO::NONE_ID;
     m_target_id = NONE_ID;
     m_reward = 0;
     m_expiriance = 0;
@@ -42,7 +42,7 @@ void Task::load(const boost::property_tree::ptree& load_ptree)
     m_result     = load_ptree.get<int>("result");
     m_reward     = load_ptree.get<int>("reward");
     m_expiriance = load_ptree.get<int>("expiriance");
-    m_scenario_type_id = (TYPE::AISCENARIO)load_ptree.get<int>("scenario_type_id");    
+    m_scenario_type_id = (type::AISCENARIO)load_ptree.get<int>("scenario_type_id");    
     m_target_id = load_ptree.get<int>("target_id");
 }
 

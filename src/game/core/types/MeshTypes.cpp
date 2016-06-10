@@ -20,16 +20,16 @@
 
 #include "MeshTypes.hpp"
 
-std::string getTypeStr(TYPE::MESH type)
+std::string getTypeStr(type::MESH type)
 {
     switch(type)
     {
-        case TYPE::MESH::NONE_ID:             { return "NONE_ID"; break; }
+        case type::MESH::NONE_ID:             { return "NONE_ID"; break; }
 
-        case TYPE::MESH::PLANE_ID:            { return "PLANE_ID"; break; }
-        case TYPE::MESH::SPHERE_ID:           { return "SPHERE_ID"; break; }
-        case TYPE::MESH::SPHERE_DEFORMED_ID:  { return "SPHERE_DEFORMED_ID"; break; }
-        case TYPE::MESH::SPACESTATION_ID:     { return "SPACESTATION_ID"; break; }
+        case type::MESH::PLANE_ID:            { return "PLANE_ID"; break; }
+        case type::MESH::SPHERE_ID:           { return "SPHERE_ID"; break; }
+        case type::MESH::SPHERE_DEFORMED_ID:  { return "SPHERE_DEFORMED_ID"; break; }
+        case type::MESH::SPACESTATION_ID:     { return "SPACESTATION_ID"; break; }
 
         default: { return "UKNOWN MESH TYPE"; break; }
     }

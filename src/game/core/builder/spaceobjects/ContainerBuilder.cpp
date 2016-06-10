@@ -131,7 +131,7 @@ void ContainerBuilder::__createInternals(Container* container, const descriptor:
 
     container->setLifeData(data_life);
 
-    ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
+    ItemSlot* item_slot = GetNewItemSlot(type::ENTITY::CARGO_SLOT_ID);
     container->bindItemSlot(item_slot);
 
     if (descriptor.child() >= 0) {

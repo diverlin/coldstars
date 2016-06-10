@@ -42,7 +42,7 @@ m_SparkGrows(false),
 m_TurnSinceLastSparkCounter(0)
 { 
     setId(id);
-    setTypeId(TYPE::ENTITY::STAR_ID);
+    setTypeId(type::ENTITY::STAR_ID);
 
     m_TurnSparkThreshold = meti::getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
 }
@@ -136,7 +136,7 @@ void Star::UpdateInSpace(int time, bool show_effect)
 //}
 
 /* virtual override final */
-void Star::postDeathUniqueEvent(bool)
+void Star::_postDeathUniqueEvent(bool)
 {}
 
    

@@ -40,8 +40,8 @@ SpaceStation::SpaceStation(int id)
 m_Land(nullptr)
 {      
     setId(id);
-    setTypeId(TYPE::ENTITY::VEHICLE_ID);
-    setSubTypeId(TYPE::ENTITY::SPACESTATION_ID);
+    setTypeId(type::ENTITY::VEHICLE_ID);
+    setSubTypeId(type::ENTITY::SPACESTATION_ID);
 }
 
 /* virtual */
@@ -72,7 +72,7 @@ void SpaceStation::BindLand(Land* land)
 /* virtual override final */          
 void SpaceStation::UpdateInSpace(int time, bool show_effect)
 {
-    checkDeath(show_effect);
+    _checkDeath(show_effect);
     if (time > 0)
     {
         weaponComplex().Fire(time, npc()->GetSkills().GetAttackNormalized(), show_effect);

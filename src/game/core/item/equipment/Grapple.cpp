@@ -40,8 +40,8 @@ Grapple::Grapple(const id_type& id)
       m_speed_orig(0)
 {
     setId(id);
-    setTypeId(TYPE::ENTITY::EQUIPMENT_ID);
-    setSubTypeId(TYPE::ENTITY::GRAPPLE_EQUIPMENT_ID);
+    setTypeId(type::ENTITY::EQUIPMENT_ID);
+    setSubTypeId(type::ENTITY::GRAPPLE_EQUIPMENT_ID);
 }
 
 /* virtual */
@@ -129,7 +129,7 @@ void Grapple::UpdateGrabScenarioProgram_inDynamic()
             {
                 switch(target.typeId())
                 {
-                case TYPE::ENTITY::CONTAINER_ID:
+                case type::ENTITY::CONTAINER_ID:
                 {
                     Container* container = reinterpret_cast<Container*>(&target);
                     if (vehicle.unpackContainerItemToCargoSlot(container) == true)

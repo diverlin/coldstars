@@ -33,7 +33,7 @@ descriptor::Base
 DescriptorGenerator::getNewStarsystemDescriptor(int race)
 {
     if (race == -1) {
-        race = int(TYPE::RACE::R0_ID);
+        race = int(type::RACE::R0_ID);
     }
 
     descriptor::Base descriptor(descriptor::Type::STARSYSTEM);
@@ -76,16 +76,16 @@ DescriptorGenerator::getNewAsteroidDescriptor()
 descriptor::Base
 DescriptorGenerator::getNewVehicleDescriptor()
 {
-    TYPE::RACE race_id = (TYPE::RACE)0;//meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-    TYPE::ENTITY type_id = TYPE::ENTITY::WARRIOR_ID;
+    type::RACE race_id = (type::RACE)0;//meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    type::ENTITY type_id = type::ENTITY::WARRIOR_ID;
     int size_id = meti::getRandInt(1, 9);
     int weapons_num = size_id;
 
     float protection_rate = 1;
     float otsec_rate      = 1;
     switch (type_id) {
-        case TYPE::ENTITY::WARRIOR_ID: { protection_rate = 2; break; }
-        case TYPE::ENTITY::TRADER_ID:  { otsec_rate = 1.5; break; }
+        case type::ENTITY::WARRIOR_ID: { protection_rate = 2; break; }
+        case type::ENTITY::TRADER_ID:  { otsec_rate = 1.5; break; }
     }
 
     int space       = size_id*100 + meti::getRandInt(0, 100);
@@ -166,10 +166,10 @@ descriptor::Base
 DescriptorGenerator::getNewBakDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(TYPE::RACE::R0_ID);
+        race = int(type::RACE::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(TYPE::TECH::L0_ID);
+        tech_level = int(type::TECH::L0_ID);
     }
 
     int modules_num_max        = meti::getRandInt(EQUIPMENT::BAK::MODULES_NUM_MIN, EQUIPMENT::BAK::MODULES_NUM_MAX);
@@ -195,10 +195,10 @@ descriptor::Base
 DescriptorGenerator::getNewDriveDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(TYPE::RACE::R0_ID);
+        race = int(type::RACE::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(TYPE::TECH::L0_ID);
+        tech_level = int(type::TECH::L0_ID);
     }
 
     int modules_num_max        = meti::getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
@@ -224,10 +224,10 @@ descriptor::Base
 DescriptorGenerator::getNewDroidDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(TYPE::RACE::R0_ID);
+        race = int(type::RACE::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(TYPE::TECH::L0_ID);
+        tech_level = int(type::TECH::L0_ID);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::DROID::MODULES_NUM_MIN, EQUIPMENT::DROID::MODULES_NUM_MAX);
@@ -251,10 +251,10 @@ descriptor::Base
 DescriptorGenerator::getNewGrappleDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(TYPE::RACE::R0_ID);
+        race = int(type::RACE::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(TYPE::TECH::L0_ID);
+        tech_level = int(type::TECH::L0_ID);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);
@@ -284,10 +284,10 @@ descriptor::Base
 DescriptorGenerator::getNewScanerDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(TYPE::RACE::R0_ID);
+        race = int(type::RACE::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(TYPE::TECH::L0_ID);
+        tech_level = int(type::TECH::L0_ID);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
@@ -313,10 +313,10 @@ descriptor::Base
 DescriptorGenerator::getNewRadarDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(TYPE::RACE::R0_ID);
+        race = int(type::RACE::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(TYPE::TECH::L0_ID);
+        tech_level = int(type::TECH::L0_ID);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
@@ -342,10 +342,10 @@ descriptor::Base
 DescriptorGenerator::getNewProtectorDescriptor(int race, int tech_level)
 {
     if (race == -1) {
-        race = int(TYPE::RACE::R0_ID);
+        race = int(type::RACE::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(TYPE::TECH::L0_ID);
+        tech_level = int(type::TECH::L0_ID);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);

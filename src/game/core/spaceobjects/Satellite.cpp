@@ -30,8 +30,8 @@
 Satellite::Satellite(int id)
 {        
     setId(id);
-    setTypeId(TYPE::ENTITY::VEHICLE_ID);
-    setSubTypeId(TYPE::ENTITY::SATELLITE_ID);
+    setTypeId(type::ENTITY::VEHICLE_ID);
+    setSubTypeId(type::ENTITY::SATELLITE_ID);
     
     setMass(meti::getRandInt(ENTITY::SATELLITE::MASS_MIN, ENTITY::SATELLITE::MASS_MAX));
 }
@@ -45,23 +45,23 @@ Satellite::~Satellite()
 void Satellite::BindParent(const SpaceObject* const parent)
 {
     setParent(parent);
-    m_Orbit.CalcPath(2*1.1*parent->collisionRadius(), 1.0, meti::getRandBool());
+    m_Orbit.calcPath(2*1.1*parent->collisionRadius(), 1.0, meti::getRandBool());
 }
         
 void Satellite::UpdateInSpace(int time, bool show_effect)
 {
-    checkDeath(show_effect);
+    _checkDeath(show_effect);
 //    UpdateRenderStuff();
     if (time > 0)
     {
-        m_Orbit.UpdatePosition();
+        m_Orbit.updatePosition();
 
         //printf("sat orbit =%f,%f\n", orbit->getPosition().x, orbit->getPosition().y);
         //if (parent != nullptr)
         //{        
             glm::vec3 new_pos;
-            new_pos.x = parent()->center().x + m_Orbit.GetPosition().x;
-            new_pos.y = parent()->center().y + m_Orbit.GetPosition().y;
+            new_pos.x = parent()->center().x + m_Orbit.position().x;
+            new_pos.y = parent()->center().y + m_Orbit.position().y;
             new_pos.z = parent()->center().z;
             setCenter(new_pos);
             updateOrientation();

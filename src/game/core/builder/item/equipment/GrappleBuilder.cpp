@@ -72,7 +72,7 @@ void GrappleBuilder::createInternals(Grapple* grapple, const descriptor::Base& d
     grapple->SetRadiusOrig(descriptor.radius());
     grapple->SetSpeedOrig(descriptor.speed());
 
-    grapple->setParentSubTypeId(TYPE::ENTITY::GRAPPLE_SLOT_ID);
+    grapple->setParentSubTypeId(type::ENTITY::GRAPPLE_SLOT_ID);
     grapple->setItemCommonData(data);
     
     grapple->updateProperties();

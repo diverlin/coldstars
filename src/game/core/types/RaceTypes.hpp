@@ -22,7 +22,7 @@
 #include <string>
 
 
-namespace TYPE
+namespace type
 {
     enum class RACE : int
     {
@@ -35,7 +35,7 @@ namespace TYPE
     };
 }
 
-std::string getRaceStr(TYPE::RACE); 
+std::string getRaceStr(type::RACE); 
 
 
 

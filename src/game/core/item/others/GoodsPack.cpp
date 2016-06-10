@@ -29,10 +29,10 @@
 //#include <resources/MeshCollector.hpp>
 //#include <jeti/TextureOb.hpp>
 
-GoodsPack::GoodsPack(int id, TYPE::ENTITY subtype_id)
+GoodsPack::GoodsPack(int id, type::ENTITY subtype_id)
 {
     setId(id); 
-    setTypeId(TYPE::ENTITY::GOODS_ID);
+    setTypeId(type::ENTITY::GOODS_ID);
     setSubTypeId(subtype_id);
 }
 
@@ -110,7 +110,7 @@ void GoodsPack::ResolveData()
 }
 
 
-GoodsPack* GetNewGoodsPack(TYPE::ENTITY subtype_id, const id_type& id)
+GoodsPack* GetNewGoodsPack(type::ENTITY subtype_id, const id_type& id)
 {
 //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER_ID);

@@ -20,16 +20,16 @@
 #include "PlaceTypes.hpp"
 
 
-std::string getPlaceStr(TYPE::PLACE place_id) 
+std::string getPlaceStr(type::place place_id) 
 {
     switch(place_id)
     {
-        case TYPE::PLACE::NONE_ID:             { return "PLACE_NONE"; break; }
+        case type::place::NONE:             { return "PLACE_NONE"; break; }
         
-        case TYPE::PLACE::SPACE_ID:         { return "SPACE_ID"; break; }
-        case TYPE::PLACE::HYPER_SPACE_ID:    { return "HYPER_SPACE_ID"; break; }
-        case TYPE::PLACE::KOSMOPORT_ID:        { return "KOSMOPORT_ID"; break; }
-        case TYPE::PLACE::NATURELAND_ID:    { return "NATURELAND_ID"; break; }
+        case type::place::KOSMOS:         { return "SPACE_ID"; break; }
+        case type::place::HYPER:    { return "HYPER_SPACE_ID"; break; }
+        case type::place::KOSMOPORT:        { return "KOSMOPORT_ID"; break; }
+        case type::place::LAND:    { return "NATURELAND_ID"; break; }
 
         default: { return "PLACE_UKNOWN"; break; }    
     }

@@ -25,30 +25,30 @@
 
 class Orbit
 {
-    public:      
-        Orbit();
-        ~Orbit();
+public:
+    Orbit();
+    ~Orbit();
 
-        void SetIt(int it) { m_It = it; };
+    void setIt(int it) { m_it = it; }
 
-        int GetIt() const { return m_It; };
-        const glm::vec3& GetPosition() const { return m_Coords_vec[m_It]; };
-        const glm::vec3& GetNextTurnPosition() const; 
+    //        int position() const { return m_position; };
+    const glm::vec3& position() const { return m_coordinates[m_it]; }
+    const glm::vec3& nextTurnPosition() const;
 
-        void CalcPath(float, float, float, float, bool);
-        void CalcPath(float, float, bool);
-        
-        void UpdatePosition();
+    void calcPath(float, float, float, float, bool);
+    void calcPath(float, float, bool);
 
-//        void UpdatePathVisualisation();
-//        void DrawPath(const jeti::Renderer&);
+    void updatePosition();
 
-    private:
-//        jeti::PathVisual m_VisualOrbitPath;
-//        jeti::PathVisual m_VisualOrbitTurn;
-                
-        std::vector<glm::vec3> m_Coords_vec;
-        int m_Len;
-        int m_It; 
+    //        void UpdatePathVisualisation();
+    //        void DrawPath(const jeti::Renderer&);
+
+private:
+    //        jeti::PathVisual m_VisualOrbitPath;
+    //        jeti::PathVisual m_VisualOrbitTurn;
+
+    std::vector<glm::vec3> m_coordinates;
+    int m_length;
+    int m_it;
 };
 

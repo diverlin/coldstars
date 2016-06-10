@@ -52,7 +52,7 @@ Lazer* LazerBuilder::createTemplate(id_type id) const
     return lazer;
 } 
 
-Lazer* LazerBuilder::getNew(TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
+Lazer* LazerBuilder::getNew(type::TECH tech_level, type::RACE race_id, int damage_orig, int radius_orig) const
 {
     Lazer* lazer = createTemplate();
     createInternals(lazer, tech_level, race_id, damage_orig, radius_orig);
@@ -60,14 +60,14 @@ Lazer* LazerBuilder::getNew(TYPE::TECH tech_level, TYPE::RACE race_id, int damag
     return lazer;
 } 
 
-void LazerBuilder::createInternals(Lazer* lazer, TYPE::TECH tech_level, TYPE::RACE race_id, int damage_orig, int radius_orig) const
+void LazerBuilder::createInternals(Lazer* lazer, type::TECH tech_level, type::RACE race_id, int damage_orig, int radius_orig) const
 {     
-    if (race_id == TYPE::RACE::NONE_ID) {
-        race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
+    if (race_id == type::RACE::NONE_ID) {
+        race_id = meti::getRand(global::get().raceDescriptors().getRaces(type::KIND::GOOD));
     }
     
-    if (tech_level == TYPE::TECH::NONE_ID) {
-        tech_level = TYPE::TECH::L0_ID;
+    if (tech_level == type::TECH::NONE_ID) {
+        tech_level = type::TECH::L0_ID;
     }
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
@@ -89,7 +89,7 @@ void LazerBuilder::createInternals(Lazer* lazer, TYPE::TECH tech_level, TYPE::RA
     lazer->SetDamageOrig(damage_orig);
     lazer->SetRadiusOrig(radius_orig);
     //alpitodorender lazer->SetRenderData(mesh, texOb_item, texOb_item->size());
-    lazer->setParentSubTypeId(TYPE::ENTITY::WEAPON_SLOT_ID);
+    lazer->setParentSubTypeId(type::ENTITY::WEAPON_SLOT_ID);
     lazer->setItemCommonData(common_data);
 
     lazer->updateProperties();

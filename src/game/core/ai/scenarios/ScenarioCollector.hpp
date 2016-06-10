@@ -30,10 +30,10 @@ class ScenarioCollector
         ~ScenarioCollector();
         
         void RegisterScenario(BaseScenario*);
-        BaseScenario* GetScenario(TYPE::AISCENARIO) const;
+        BaseScenario* GetScenario(type::AISCENARIO) const;
                                                    
     private:   
-        std::map<TYPE::AISCENARIO, BaseScenario*> scenario_map;
+        std::map<type::AISCENARIO, BaseScenario*> scenario_map;
                          
         ScenarioCollector() {};
         ScenarioCollector(const ScenarioCollector&) = delete;

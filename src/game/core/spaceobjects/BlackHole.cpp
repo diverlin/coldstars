@@ -25,7 +25,7 @@
 BlackHole::BlackHole(int id)
 {        
     setId(id);
-    setTypeId(TYPE::ENTITY::BLACKHOLE_ID);
+    setTypeId(type::ENTITY::BLACKHOLE_ID);
     
     setMass(meti::getRandInt(1000, 4000));
 }
@@ -42,20 +42,20 @@ void BlackHole::setCenter(const glm::vec3& center) { setCenter(center); /*shockw
          
 void BlackHole::UpdateInSpace(int time, bool show_effect)
 {
-    checkDeath(show_effect);
+    _checkDeath(show_effect);
 
     if (time > 0)
     {
         setCenter(center()+meti::getRandXYVec3f(1, 2, 0));
 //        shockwave->setCenter(meti::vec2(center()));
     
-        dataLife().life_time--;
-        if (dataLife().life_time < 0)
+        _dataLife().life_time--;
+        if (_dataLife().life_time < 0)
         {
             //scale -= 0.1;
             //if (scale < 1.0)
             {
-                dataLife().is_alive = false;
+                _dataLife().is_alive = false;
             }
         }
     }

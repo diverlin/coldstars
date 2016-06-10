@@ -46,19 +46,19 @@ struct UnresolvedDataNpc
 class Npc : public Base
 {
     public:
-        Npc(int, TYPE::ENTITY, TYPE::ENTITY);
+        Npc(int, type::ENTITY, type::ENTITY);
         virtual ~Npc();
         
         virtual void putChildrenToGarbage() const {};
         
-        void SetRaceId(TYPE::RACE race_id)            { this->race_id = race_id; }
+        void SetRaceId(type::RACE race_id)            { this->race_id = race_id; }
         void SetAiModel(BaseAiModel* ai_model)        { this->ai_model = ai_model; }
         void SetAlive(bool is_alive)            { this->is_alive = is_alive; }
         void SetScanTarget(Vehicle* vehicle_to_scan)    { this->vehicle_to_scan = vehicle_to_scan; }
         void SetPlayer(Player* player) { this->player = player; }
         void SetVehicle(Vehicle* vehicle)         { this->vehicle = vehicle; }
 
-        TYPE::RACE GetRaceId()            const { return race_id; }
+        type::RACE GetRaceId()            const { return race_id; }
 
         Player* GetPlayer() const { return player; }
         Vehicle* GetVehicle()           const { return vehicle; }
@@ -108,7 +108,7 @@ class Npc : public Base
 
     private:
         bool is_alive;
-        TYPE::RACE race_id;
+        type::RACE race_id;
         unsigned long int credits;
         
         Player* player;

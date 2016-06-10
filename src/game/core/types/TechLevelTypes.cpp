@@ -20,16 +20,16 @@
 #include "TechLevelTypes.hpp"
 
 
-std::string getTechLevelStr(TYPE::TECH techlevel_id) 
+std::string getTechLevelStr(type::TECH techlevel_id) 
 {
     switch(techlevel_id)
     {
-        case TYPE::TECH::NONE_ID: { return "TECH_NONE"; break; }
+        case type::TECH::NONE_ID: { return "TECH_NONE"; break; }
         
-        case TYPE::TECH::L0_ID: { return "TECH0"; break; }
-        case TYPE::TECH::L1_ID: { return "TECH1"; break; }
-        case TYPE::TECH::L2_ID: { return "TECH2"; break; }
-        case TYPE::TECH::L3_ID: { return "TECH3"; break; }
+        case type::TECH::L0_ID: { return "TECH0"; break; }
+        case type::TECH::L1_ID: { return "TECH1"; break; }
+        case type::TECH::L2_ID: { return "TECH2"; break; }
+        case type::TECH::L3_ID: { return "TECH3"; break; }
         //case TYPE::TECH::L4_ID: { return "TECH4"; break; }
         //case TYPE::TECH::L5_ID: { return "TECH5"; break; }
         //case TYPE::TECH::L6_ID: { return "TECH6"; break; }

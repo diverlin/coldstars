@@ -24,30 +24,30 @@
 
 Orbit::Orbit()
 :
-m_Len(0),
-m_It(0)
+m_length(0),
+m_it(0)
 {}
 
 Orbit::~Orbit()
 {}
  
-const glm::vec3& Orbit::GetNextTurnPosition() const 
+const glm::vec3& Orbit::nextTurnPosition() const
 { 
-    if (m_It + TURN_TIME < m_Len)
+    if (m_it + TURN_TIME < m_length)
     {
-        return m_Coords_vec[m_It+TURN_TIME]; 
+        return m_coordinates[m_it+TURN_TIME];
     }
     else
     {
-        int d_orbit = m_Len-m_It;
-        return m_Coords_vec[TURN_TIME - d_orbit]; 
+        int d_orbit = m_length-m_it;
+        return m_coordinates[TURN_TIME - d_orbit];
     }
 }
 
 
-void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_phi_inD, bool clockwise)
+void Orbit::calcPath(float radius_A, float radius_B, float speed, float orbit_phi_inD, bool clockwise)
 {   
-    m_Coords_vec.clear();
+    m_coordinates.clear();
     
     float d_angleInRad = glm::radians(speed);
     if (clockwise == true) 
@@ -64,14 +64,14 @@ void Orbit::CalcPath(float radius_A, float radius_B, float speed, float orbit_ph
         new_coord.x = radius_A * cos(angleInRad) * cos(orbitPhiInRad) - radius_B * sin(angleInRad) * sin(orbitPhiInRad);
         new_coord.y = radius_A * cos(angleInRad) * sin(orbitPhiInRad) + radius_B * sin(angleInRad) * cos(orbitPhiInRad);
         new_coord.z = DEFAULT_ENTITY_ZPOS;             
-        m_Coords_vec.push_back(new_coord);
+        m_coordinates.push_back(new_coord);
     }
-    m_Len = m_Coords_vec.size();
+    m_length = m_coordinates.size();
 }    
 
-void Orbit::CalcPath(float radius, float speed, bool clockwise)
+void Orbit::calcPath(float radius, float speed, bool clockwise)
 {       
-    m_Coords_vec.clear();
+    m_coordinates.clear();
     
     float d_angleInRad  = glm::radians(speed);
     if (clockwise == true) {
@@ -83,15 +83,15 @@ void Orbit::CalcPath(float radius, float speed, bool clockwise)
         new_coord.x = radius*(cos(angleInRad) - sin(angleInRad));
         new_coord.y = radius*(cos(angleInRad) + sin(angleInRad));
         new_coord.z = DEFAULT_ENTITY_ZPOS;
-        m_Coords_vec.push_back(new_coord);
+        m_coordinates.push_back(new_coord);
     }
-    m_Len = m_Coords_vec.size();
+    m_length = m_coordinates.size();
 }    
 
-void Orbit::UpdatePosition()
+void Orbit::updatePosition()
 {   
-    if (m_It < m_Len-1) { m_It++; }
-    else                 { m_It=0; }
+    if (m_it < m_length-1) { m_it++; }
+    else                 { m_it=0; }
 }    
 
 //void Orbit::UpdatePathVisualisation()

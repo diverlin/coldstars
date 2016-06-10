@@ -42,7 +42,7 @@ class Container : public SpaceObject
 
 //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
         
-        virtual void postDeathUniqueEvent(bool) override final;
+        virtual void _postDeathUniqueEvent(bool) override final;
             
         void updateInSpace(int, bool);
 

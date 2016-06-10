@@ -38,7 +38,7 @@
 Asteroid::Asteroid(int id)
 {   
     setId(id);
-    setTypeId(TYPE::ENTITY::ASTEROID_ID);
+    setTypeId(type::ENTITY::ASTEROID_ID);
     
     setMass(meti::getRandInt(10, 30));
 }
@@ -51,19 +51,19 @@ Asteroid::~Asteroid()
 
 void Asteroid::UpdateInSpace(int time, bool show_effect)
 {    
-    checkDeath(show_effect);
+    _checkDeath(show_effect);
     if (time > 0) {
-        UpdatePosition();
+        _updatePosition();
     }         
 }
 
 void Asteroid::CollisionEvent(bool show_effect)
 {
-    dataLife().is_alive = false;
-    dataLife().dying_time = -1;
+    _dataLife().is_alive = false;
+    _dataLife().dying_time = -1;
 }
     
-void Asteroid::postDeathUniqueEvent(bool show_effect)
+void Asteroid::_postDeathUniqueEvent(bool show_effect)
 {
     int angleZ = meti::getRandInt(0, 360);
     float impulse_strength = 0.5;

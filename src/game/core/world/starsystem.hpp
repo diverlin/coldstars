@@ -128,8 +128,8 @@ class Starsystem : public SpaceObject
         const glm::vec4& color() const { return m_color; }
         //bool GetDetailedSimulationFlag() const { return detalied_simulation; }
         int conditionId()     const { return m_condition_id; }
-        TYPE::RACE raceId()          const { return m_race_id; }
-        TYPE::RACE conquerorRaceId() const { return m_conqueror_race_id; }
+        type::RACE raceId()          const { return m_race_id; }
+        type::RACE conquerorRaceId() const { return m_conqueror_race_id; }
         Star* star()          const { return m_stars[0]; }
         Sector* sector()      const { return m_sector; }
 //        unsigned int GetShockWaveEffectNum()    const { return effect_SHOCKWAVE_vec.size(); }
@@ -140,7 +140,7 @@ class Starsystem : public SpaceObject
 
         HyperSpace& hyperSpace() { return m_hyperspace; };
         
-        Npc* freeLeaderByRaceId(TYPE::RACE) const;
+        Npc* freeLeaderByRaceId(type::RACE) const;
         void createGroupAndShareTask(Npc*, Starsystem*, int) const;
         
         //// TRANSITION
@@ -150,8 +150,8 @@ class Starsystem : public SpaceObject
         void add(RocketBullet*, const glm::vec3&, const glm::vec3&);
 
         void add(Star*);
-        [[deprecated("split to types")]]
-        void add(Planetoid*, const SpaceObject* parent = nullptr, int it = 0);
+        void add(Planet*, const SpaceObject* parent = nullptr, int it = 0);
+        void add(Asteroid*, const SpaceObject* parent = nullptr, int it = 0);
         void add(Container*, const glm::vec3& = glm::vec3(0.0f));
         void add(BlackHole*, const glm::vec3&);
 
@@ -194,15 +194,15 @@ class Starsystem : public SpaceObject
         Planet* GetRandomInhabitedPlanet() const;
         Planet* GetRandomPlanet() const;
         Vehicle* GetRandomVehicle() const;
-        Vehicle* GetRandomVehicleExcludingNpcRaceId(TYPE::RACE) const;
-        Vehicle* GetRandomVehicleByNpcRaceId(TYPE::RACE) const;
-        Vehicle* GetRandomVehicle(const std::vector<TYPE::RACE>&) const;
+        Vehicle* GetRandomVehicleExcludingNpcRaceId(type::RACE) const;
+        Vehicle* GetRandomVehicleByNpcRaceId(type::RACE) const;
+        Vehicle* GetRandomVehicle(const std::vector<type::RACE>&) const;
         //
     private:
         static int m_counter;
         
-        TYPE::RACE m_race_id = TYPE::RACE::R0_ID;
-        TYPE::RACE m_conqueror_race_id = TYPE::RACE::NONE_ID;
+        type::RACE m_race_id = type::RACE::R0_ID;
+        type::RACE m_conqueror_race_id = type::RACE::NONE_ID;
         
         bool m_unique_update_inDymanic_done = false;
         bool m_unique_update_inStatic_done = false;
@@ -250,7 +250,7 @@ class Starsystem : public SpaceObject
 
         void DamageEventInsideCircle(const glm::vec3&, float, int, bool);
 
-        void postDeathUniqueEvent(bool);
+        void _postDeathUniqueEvent(bool);
 
         void ShipManager_s(unsigned int);
         

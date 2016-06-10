@@ -20,7 +20,7 @@
 
 #include <string>
 
-namespace TYPE
+namespace type
 {
     enum class MESH : int
     { 
@@ -28,5 +28,5 @@ namespace TYPE
     };
 }  
 
-std::string getTypeStr(TYPE::MESH type);
+std::string getTypeStr(type::MESH type);
 

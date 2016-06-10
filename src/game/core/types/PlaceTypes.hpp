@@ -17,21 +17,14 @@
 */
 
 
-#ifndef PLACETYPES_HPP
-#define PLACETYPES_HPP
+#pragma once
 
 #include <string>
 
+namespace type {
+enum class place {
+    NONE, KOSMOS, HYPER, KOSMOPORT, LAND
+};
+} // namespace type
 
-namespace TYPE
-{
-    enum class PLACE
-    {
-        NONE_ID, SPACE_ID, HYPER_SPACE_ID, KOSMOPORT_ID, NATURELAND_ID
-    };
-}
-
-std::string getPlaceStr(TYPE::PLACE); 
-
-#endif
-
+std::string getPlaceStr(type::place);

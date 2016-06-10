@@ -79,7 +79,7 @@ Galaxy* God::createWorld(const GalaxyDescriptor& galaxy_descriptor)
         //starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
     }
 
-    CreateShips(starsystem, /*ships_num=*/20, TYPE::RACE::R0_ID);   // fake
+    CreateShips(starsystem, /*ships_num=*/20, type::RACE::R0_ID);   // fake
 
     return galaxy;
 }
@@ -102,7 +102,7 @@ void God::CreateInvasion(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descript
 {
     for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
         Starsystem* starsystem = galaxy->GetRandomSector()->randomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
-        TYPE::RACE race_id = (TYPE::RACE)meti::getRandInt((int)TYPE::RACE::R6_ID, (int)TYPE::RACE::R7_ID);
+        type::RACE race_id = (type::RACE)meti::getRandInt((int)type::RACE::R6_ID, (int)type::RACE::R7_ID);
         int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
         CreateShips(starsystem, ship_num, race_id);
     }
@@ -121,7 +121,7 @@ void God::ProceedInvasion(Galaxy* galaxy) const
     }
     
     Npc* npc_leader = starsystem_invade_from->freeLeaderByRaceId(starsystem_invade_from->conquerorRaceId());
-    Task macrotask(TYPE::AISCENARIO::MACRO_STARSYSTEMLIBERATION_ID, starsystem_invade_to->id());
+    Task macrotask(type::AISCENARIO::MACRO_STARSYSTEMLIBERATION_ID, starsystem_invade_to->id());
     npc_leader->GetStateMachine().SetCurrentMacroTask(macrotask);
     
     int num_max= 10;
@@ -215,9 +215,9 @@ void God::CreateSpaceStations(Starsystem* starsystem, int spacestation_per_syste
 {       
     for (int i=0; i<spacestation_per_system; i++)
     {     
-        TYPE::RACE npc_race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-        TYPE::ENTITY npc_subtype_id    = TYPE::ENTITY::WARRIOR_ID;
-        TYPE::ENTITY npc_subsubtype_id = TYPE::ENTITY::WARRIOR_ID;
+        type::RACE npc_race_id = meti::getRand(global::get().raceDescriptors().getRaces(type::KIND::GOOD));
+        type::ENTITY npc_subtype_id    = type::ENTITY::WARRIOR_ID;
+        type::ENTITY npc_subsubtype_id = type::ENTITY::WARRIOR_ID;
             
         //TYPE::RACE ship_race_id = npc_race_id;         // RACES_ALL_vec[getRandInt(0, RACES_ALL_vec.size())];
         //TYPE::ENTITY ship_subtype_id = npc_subtype_id;   // SHIP_SUBTYPE_vec[getRandInt(0, SHIP_SUBTYPE_vec.size())];
@@ -250,21 +250,21 @@ void God::CreateSpaceStations(Starsystem* starsystem, int spacestation_per_syste
     }        
 }
 
-void God::CreateShips(Starsystem* starsystem, int ship_num, TYPE::RACE npc_race_id, TYPE::ENTITY subtype_id, TYPE::ENTITY subsubtype_id) const
+void God::CreateShips(Starsystem* starsystem, int ship_num, type::RACE npc_race_id, type::ENTITY subtype_id, type::ENTITY subsubtype_id) const
 {
-    TYPE::ENTITY npc_subtype_id = TYPE::ENTITY::NONE_ID;
-    TYPE::ENTITY npc_subsubtype_id = TYPE::ENTITY::NONE_ID;
+    type::ENTITY npc_subtype_id = type::ENTITY::NONE_ID;
+    type::ENTITY npc_subsubtype_id = type::ENTITY::NONE_ID;
 
     for (int i=0; i<ship_num; i++)
     {
         // VERY UGLY LOGIC START (TODO)
-        if (subtype_id == TYPE::ENTITY::NONE_ID) {
+        if (subtype_id == type::ENTITY::NONE_ID) {
             npc_subtype_id    = getRandNpcSubTypeId(npc_race_id);
         } else {
             npc_subtype_id    = subtype_id;
         }   
 
-        if (subsubtype_id == TYPE::ENTITY::NONE_ID) {
+        if (subsubtype_id == type::ENTITY::NONE_ID) {
             npc_subsubtype_id = getRandNpcSubSubTypeId(npc_subtype_id);
         } else {
             npc_subsubtype_id = subsubtype_id;

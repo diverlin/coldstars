@@ -30,38 +30,37 @@ struct UnresolvedDataPlanetoid
     int orbit_it;
 };
 
-
 class Planetoid : public SpaceObject 
 {
-    public:      
-        Planetoid();
-        virtual ~Planetoid();
-        
-        void SetPlanetDescriptor(const PlanetDescriptor& planet_descriptor) { m_PlanetDescriptor = planet_descriptor; }
-        
-        Orbit& GetOrbit() { return m_Orbit; }   // !!!
-        const Orbit& GetOrbit() const { return m_Orbit; }   
-        const PlanetDescriptor& GetPlanetDescriptor() const { return m_PlanetDescriptor; }
-        
-        void BindParent(const SpaceObject* const, int);
-        
-//        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) override final;
-        
-    protected:
-        virtual void putChildrenToGarbage() const {}
-        
-        virtual void postDeathUniqueEvent(bool);
-        void UpdatePosition();
-        
-        UnresolvedDataPlanetoid data_unresolved_Planetoid;
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
-        
-    private:
-        PlanetDescriptor m_PlanetDescriptor;
-        Orbit m_Orbit;     
-        
-        void CreateOrbit();    
+public:
+    Planetoid();
+    virtual ~Planetoid();
+
+    void setPlanetDescriptor(const PlanetDescriptor& planet_descriptor) { m_planetDescriptor = planet_descriptor; }
+
+    Orbit& orbit() { return m_orbit; }   // !!!
+    const Orbit& orbit() const { return m_orbit; }
+    const PlanetDescriptor& planetDescriptor() const { return m_planetDescriptor; }
+
+    void bindParent(const SpaceObject* const, int);
+
+    //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) override final;
+
+protected:
+    virtual void putChildrenToGarbage() const {}
+
+    virtual void _postDeathUniqueEvent(bool);
+    void _updatePosition();
+
+    UnresolvedDataPlanetoid data_unresolved_Planetoid;
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
+
+private:
+    PlanetDescriptor m_planetDescriptor;
+    Orbit m_orbit;
+
+    void __createOrbit();
 };
 

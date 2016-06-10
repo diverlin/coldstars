@@ -54,7 +54,7 @@ class Planet : public Planetoid
         
 //        virtual void UpdateInfo() override final;
         
-        void postDeathUniqueEvent(bool);
+        void _postDeathUniqueEvent(bool);
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);

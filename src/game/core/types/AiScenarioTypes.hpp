@@ -19,7 +19,7 @@
 #ifndef AISCENARIOTYPES_HPP
 #define AISCENARIOTYPES_HPP
 
-namespace TYPE
+namespace type
 {
     enum class AISCENARIO
     {

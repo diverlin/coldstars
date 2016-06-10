@@ -20,7 +20,7 @@
 
 #include <string>
 
-namespace TYPE
+namespace type
 {
     enum class TEXTURE: int
     { 
@@ -52,5 +52,5 @@ namespace TYPE
     };
 } 
 
-std::string str(TYPE::TEXTURE);
+std::string str(type::TEXTURE);
 

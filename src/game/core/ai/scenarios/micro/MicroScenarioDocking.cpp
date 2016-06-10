@@ -26,7 +26,7 @@
 
 MicroScenarioDocking::MicroScenarioDocking()
 {
-    type_id = TYPE::AISCENARIO::MICRO_DOCKING_ID;
+    type_id = type::AISCENARIO::MICRO_DOCKING_ID;
 }
 
 /* virtual */
@@ -44,7 +44,7 @@ void MicroScenarioDocking::Enter(Npc* npc) const
 /* virtual */
 bool MicroScenarioDocking::Validate(Npc* npc) const
 {
-    if (npc->GetVehicle()->placeTypeId() == TYPE::PLACE::SPACE_ID)
+    if (npc->GetVehicle()->placeTypeId() == type::place::KOSMOS)
     {
         return true;
     }

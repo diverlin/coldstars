@@ -38,7 +38,7 @@ Angar::Angar(int id)
       price_fuel(PRICE_FUEL)
 {
     setId(id);
-    setTypeId(TYPE::ENTITY::ANGAR_ID);
+    setTypeId(type::ENTITY::ANGAR_ID);
 }
 
 Angar::~Angar()
@@ -64,12 +64,12 @@ void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot)
 { 
     vehicle_slot->SetOwner(this);
 
-    if (vehicle_slot->subTypeId() == TYPE::ENTITY::VEHICLE_MILITARY_SLOT_ID)
+    if (vehicle_slot->subTypeId() == type::ENTITY::VEHICLE_MILITARY_SLOT_ID)
     {
         vehicle_military_slot_vec.push_back(vehicle_slot);
     }
 
-    if (vehicle_slot->subTypeId() == TYPE::ENTITY::VEHICLE_VISITORS_SLOT_ID)
+    if (vehicle_slot->subTypeId() == type::ENTITY::VEHICLE_VISITORS_SLOT_ID)
     {
         vehicle_visitors_slot_vec.push_back(vehicle_slot);
     }
@@ -172,7 +172,7 @@ int Angar::GetFreeVehicleSlotTotalNum() const
 
 bool Angar::AddVehicle(Vehicle* vehicle)
 {
-    if (vehicle->subSubTypeId() == TYPE::ENTITY::WARRIOR_ID) {
+    if (vehicle->subSubTypeId() == type::ENTITY::WARRIOR_ID) {
         for (unsigned int i=0; i<vehicle_military_slot_vec.size(); i++) {
             if (vehicle_military_slot_vec[i]->GetVehicle() == nullptr) {
                 vehicle_military_slot_vec[i]->InsertVehicle(vehicle);

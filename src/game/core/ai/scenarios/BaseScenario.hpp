@@ -28,10 +28,10 @@ class Npc;
 class BaseScenario
 {
     public:
-        BaseScenario():type_id(TYPE::AISCENARIO::NONE_ID) {};
+        BaseScenario():type_id(type::AISCENARIO::NONE_ID) {};
         virtual ~BaseScenario() {};
         
-        TYPE::AISCENARIO typeId() const { return type_id; };
+        type::AISCENARIO typeId() const { return type_id; };
         
         virtual void Enter(Npc*) const {};
         virtual bool Validate(Npc*) const { return true; };
@@ -44,7 +44,7 @@ class BaseScenario
         virtual std::string GetDescription(Npc*) const { return "_"; };
         
     protected:
-        TYPE::AISCENARIO type_id;
+        type::AISCENARIO type_id;
 }; 
 
 
