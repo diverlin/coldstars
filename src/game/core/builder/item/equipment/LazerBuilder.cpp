@@ -89,7 +89,7 @@ void LazerBuilder::createInternals(Lazer* lazer, type::TECH tech_level, type::ra
     lazer->SetDamageOrig(damage_orig);
     lazer->SetRadiusOrig(radius_orig);
     //alpitodorender lazer->SetRenderData(mesh, texOb_item, texOb_item->size());
-    lazer->setParentSubTypeId(type::ENTITY::WEAPON_SLOT_ID);
+    lazer->setParentSubTypeId(type::entity::WEAPON_SLOT_ID);
     lazer->setItemCommonData(common_data);
 
     lazer->updateProperties();

@@ -94,15 +94,15 @@ public:
     const VehicleDescriptor& vehicleDescriptor() const { return m_vehicleDescriptor; }
 
     virtual int givenExpirience() const override final;
-    bool isSlotExists(type::ENTITY) const;
+    bool isSlotExists(type::entity) const;
 
     void addItemSlot(ItemSlot*);
 
     [[deprecated("ship swap items in different logic")]]
-    bool GetAllItemsFromVehicle(Vehicle*);
+    bool grabItemsFromVehicle(Vehicle*);
 
     bool addItemToCargoSlot(item::Base*);
-    bool manage(item::Base*);
+    bool install(item::Base*);
 
     void manageItemsInCargo();
     [[deprecated("move to ext")]]
@@ -152,6 +152,9 @@ public:
     void CheckNeedsInStatic();
     void ResolveNeedsInKosmoportInStatic();
     void UpdateAllFunctionalItemsInStatic();
+
+    void dropItemToSpace(const type::entity&);
+
 protected:
     void _increaseMass(int);
     void _decreaseMass(int);
@@ -209,9 +212,9 @@ public:
 protected:
     std::vector<ItemSlot*> m_slots;
 
-    ItemSlot* const _fuctionalSlot(type::ENTITY) const;
+    ItemSlot* const _fuctionalSlot(type::entity) const;
     ItemSlot* const _freeArtefactSlot() const;
-    ItemSlot* const _cargoSlotWithGoods(type::ENTITY);
+    ItemSlot* const _cargoSlotWithGoods(type::entity);
 
     bool _manageItem(item::Base*);
     bool _manageFunctionEquipment(item::Base*);
@@ -273,6 +276,7 @@ private:
     VehicleNeeds m_needs;
     VehicleDescriptor m_vehicleDescriptor;
 
+    [[deprecated("use predetermentistic way")]]
     void __dropRandomItemToSpace();
     bool __mergeIdenticalGoods(item::Base*);
 

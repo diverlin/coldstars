@@ -34,8 +34,8 @@
 Shop::Shop(int id)
 {
     setId(id);
-    setTypeId(type::ENTITY::SHOP_ID);
-    setSubTypeId(type::ENTITY::SHOP_ID);    
+    setTypeId(type::entity::SHOP_ID);
+    setSubTypeId(type::entity::SHOP_ID);    
     
     minerals_amount  = meti::getRandInt(MINERALS_STARTAMOUNT_MIN, MINERALS_STARTAMOUNT_MAX);
     food_amount      = meti::getRandInt(FOOD_STARTAMOUNT_MIN, FOOD_STARTAMOUNT_MAX);
@@ -51,38 +51,38 @@ Shop::~Shop()
 {}                
 
 
-int Shop::GetAmount(type::ENTITY subtype_id) const
+int Shop::GetAmount(type::entity subtype_id) const
 {
     switch(subtype_id)
     {
-        case type::ENTITY::MINERALS_ID:     { return minerals_amount; break; }
-        case type::ENTITY::FOOD_ID:         { return food_amount; break; }
-        case type::ENTITY::MEDICINE_ID:     { return medicine_amount; break; }
-        case type::ENTITY::MILITARY_ID:     { return military_amount; break; }        
-        case type::ENTITY::DRUG_ID:        { return drug_amount; break; }
-        case type::ENTITY::EXCLUSIVE_ID:     { return exclusive_amount; break; }
+        case type::entity::MINERALS_ID:     { return minerals_amount; break; }
+        case type::entity::FOOD_ID:         { return food_amount; break; }
+        case type::entity::MEDICINE_ID:     { return medicine_amount; break; }
+        case type::entity::MILITARY_ID:     { return military_amount; break; }        
+        case type::entity::DRUG_ID:        { return drug_amount; break; }
+        case type::entity::EXCLUSIVE_ID:     { return exclusive_amount; break; }
     }
     
     return 0;
 }    
                 
-int Shop::GetPrice(type::ENTITY subtype_id) const
+int Shop::GetPrice(type::entity subtype_id) const
 {
     switch(subtype_id)
     {
-        case type::ENTITY::MINERALS_ID:     { return minerals_price; break; }
-        case type::ENTITY::FOOD_ID:         { return food_price; break; }
-        case type::ENTITY::MEDICINE_ID:     { return medicine_price; break; }
-        case type::ENTITY::MILITARY_ID:     { return military_price; break; }        
-        case type::ENTITY::DRUG_ID:            { return drug_price; break; }
-        case type::ENTITY::EXCLUSIVE_ID:     { return exclusive_price; break; }
+        case type::entity::MINERALS_ID:     { return minerals_price; break; }
+        case type::entity::FOOD_ID:         { return food_price; break; }
+        case type::entity::MEDICINE_ID:     { return medicine_price; break; }
+        case type::entity::MILITARY_ID:     { return military_price; break; }        
+        case type::entity::DRUG_ID:            { return drug_price; break; }
+        case type::entity::EXCLUSIVE_ID:     { return exclusive_price; break; }
     }
     
     return 0;
 }
 
                 
-bool Shop::SellGoods(Npc* npc, type::ENTITY subtype_id, int amount)
+bool Shop::SellGoods(Npc* npc, type::entity subtype_id, int amount)
 {    
     int sign = -1;
     int price = Deal(sign, subtype_id, amount);
@@ -107,7 +107,7 @@ bool Shop::SellGoods(Npc* npc, type::ENTITY subtype_id, int amount)
 int Shop::BuyGoods(GoodsPack* goods_pack)
 {     
     int sign = 1;    
-    int price = Deal(sign, goods_pack->subTypeId(), goods_pack->mass());    
+    int price = Deal(sign, goods_pack->subtype(), goods_pack->mass());    
     if (price > 0)
     {
         goods_pack->itemSlot()->removeItem(); 
@@ -117,12 +117,12 @@ int Shop::BuyGoods(GoodsPack* goods_pack)
     return price;
 }
        
-int Shop::Deal(int sign, type::ENTITY subtype_id, int amount)
+int Shop::Deal(int sign, type::entity subtype_id, int amount)
 {
     int money = 0;
     switch(subtype_id)
     {
-        case type::ENTITY::MINERALS_ID:
+        case type::entity::MINERALS_ID:
         {        
             minerals_amount += sign*amount;
             money = amount*minerals_price;
@@ -132,7 +132,7 @@ int Shop::Deal(int sign, type::ENTITY subtype_id, int amount)
             break;
         }
 
-        case type::ENTITY::FOOD_ID:
+        case type::entity::FOOD_ID:
         {                            
             food_amount += sign*amount;
             money = amount*food_price;
@@ -142,7 +142,7 @@ int Shop::Deal(int sign, type::ENTITY subtype_id, int amount)
             break;
         }
 
-        case type::ENTITY::MEDICINE_ID:
+        case type::entity::MEDICINE_ID:
         {                            
             medicine_amount += sign*amount;
             money = amount*medicine_price;
@@ -152,7 +152,7 @@ int Shop::Deal(int sign, type::ENTITY subtype_id, int amount)
             break;
         }            
 
-        case type::ENTITY::MILITARY_ID:
+        case type::entity::MILITARY_ID:
         {                            
             military_amount += sign*amount;
             money = amount*military_price;    
@@ -162,7 +162,7 @@ int Shop::Deal(int sign, type::ENTITY subtype_id, int amount)
             break;
         }    
 
-        case type::ENTITY::DRUG_ID:
+        case type::entity::DRUG_ID:
         {                            
             drug_amount += sign*amount;
             money = amount*drug_price;    
@@ -172,7 +172,7 @@ int Shop::Deal(int sign, type::ENTITY subtype_id, int amount)
             break;
         }    
 
-        case type::ENTITY::EXCLUSIVE_ID:
+        case type::entity::EXCLUSIVE_ID:
         {                            
             exclusive_amount += sign*amount;
             money = amount*exclusive_price;

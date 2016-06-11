@@ -25,7 +25,7 @@
 BlackHole::BlackHole(int id)
 {        
     setId(id);
-    setTypeId(type::ENTITY::BLACKHOLE_ID);
+    setTypeId(type::entity::BLACKHOLE_ID);
     
     setMass(meti::getRandInt(1000, 4000));
 }

@@ -30,7 +30,7 @@ class VehicleDescriptor
     public:
         id_type id = 0;
         type::race race_id = type::race::R0_ID;
-        type::ENTITY type_id = type::ENTITY::WARRIOR_ID;
+        type::entity type_id = type::entity::WARRIOR_ID;
         int size_id = 0;
 
         int space = 0;

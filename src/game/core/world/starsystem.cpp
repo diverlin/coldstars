@@ -67,7 +67,7 @@ int Starsystem::m_counter = 0;
 Starsystem::Starsystem(const id_type& id)
 { 
     setId(id);
-    setTypeId(type::ENTITY::STARSYSTEM_ID);
+    setTypeId(type::entity::STARSYSTEM_ID);
     
     setPlaceTypeId(type::place::KOSMOS);
     
@@ -782,12 +782,11 @@ void Starsystem::__updateInSpaceInStatic_s()
 {
     __updateStates();
 
-    for (unsigned int i=0; i<m_vehicles.size(); i++)
-    {
-        m_vehicles[i]->npc()->UpdateInSpaceInStatic();
-        if (m_vehicles[i]->subTypeId() == type::ENTITY::SPACESTATION_ID)
+    for (Vehicle* vehicle: m_vehicles) {
+        vehicle->npc()->UpdateInSpaceInStatic();
+        if (vehicle->subtype() == type::entity::SPACESTATION_ID)
         {
-            ((SpaceStation*)m_vehicles[i])->land()->UpdateInStatic();
+            ((SpaceStation*)vehicle)->land()->UpdateInStatic();
         }
     }
 
@@ -875,8 +874,8 @@ void Starsystem::__shipManager_s(unsigned int num)
             prace_id = type::race::R6_ID;
         }
         
-        type::ENTITY psubtype_id    = type::ENTITY::WARRIOR_ID;
-        type::ENTITY psubsubtype_id = type::ENTITY::WARRIOR_ID;
+        type::entity psubtype_id    = type::entity::WARRIOR_ID;
+        type::entity psubsubtype_id = type::entity::WARRIOR_ID;
         int size_id     = SIZE_4_ID;
         int weapons_num = 7;
 

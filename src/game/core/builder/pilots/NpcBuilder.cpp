@@ -38,7 +38,7 @@ NpcBuilder::NpcBuilder()
 NpcBuilder::~NpcBuilder()
 {}
 
-Npc* NpcBuilder::createTemplate(type::ENTITY subtype_id, type::ENTITY subsubtype_id, id_type id) const
+Npc* NpcBuilder::createTemplate(type::entity subtype_id, type::entity subsubtype_id, id_type id) const
 {
     Npc* npc = new Npc(id, subtype_id, subsubtype_id);
     assert(npc);
@@ -48,7 +48,7 @@ Npc* NpcBuilder::createTemplate(type::ENTITY subtype_id, type::ENTITY subsubtype
     return npc;
 }
 
-Npc* NpcBuilder::create(type::race race_id, type::ENTITY subtype_id, type::ENTITY subsubtype_id) const
+Npc* NpcBuilder::create(type::race race_id, type::entity subtype_id, type::entity subsubtype_id) const
 {
     Npc* npc = createTemplate(subtype_id, subsubtype_id);
     createInternals(npc, race_id, subtype_id, subsubtype_id);
@@ -56,7 +56,7 @@ Npc* NpcBuilder::create(type::race race_id, type::ENTITY subtype_id, type::ENTIT
     return npc;
 }
             
-void NpcBuilder::createInternals(Npc* npc, type::race race_id, type::ENTITY subtype_id, type::ENTITY subsubtype_id) const
+void NpcBuilder::createInternals(Npc* npc, type::race race_id, type::entity subtype_id, type::entity subsubtype_id) const
 {        
     //LifeData data_life;
     
@@ -74,21 +74,21 @@ void NpcBuilder::createInternals(Npc* npc, type::race race_id, type::ENTITY subt
        {
         switch(subtype_id)
         {
-            case type::ENTITY::RANGER_ID:
+            case type::entity::RANGER_ID:
                {
                    npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));            
                                
                 break;    
                }
                         
-               case type::ENTITY::WARRIOR_ID:
+               case type::entity::WARRIOR_ID:
                {
                    npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));                        
                                 
                 break;    
                }
                        
-                  case type::ENTITY::TRADER_ID: 
+                  case type::entity::TRADER_ID: 
                   {
                       npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID)); 
                       

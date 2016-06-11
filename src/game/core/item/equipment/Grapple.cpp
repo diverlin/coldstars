@@ -40,8 +40,8 @@ Grapple::Grapple(const id_type& id)
       m_speed_orig(0)
 {
     setId(id);
-    setTypeId(type::ENTITY::EQUIPMENT_ID);
-    setSubTypeId(type::ENTITY::GRAPPLE_EQUIPMENT_ID);
+    setTypeId(type::entity::EQUIPMENT_ID);
+    setSubTypeId(type::entity::GRAPPLE_EQUIPMENT_ID);
 }
 
 /* virtual */
@@ -127,9 +127,9 @@ void Grapple::UpdateGrabScenarioProgram_inDynamic()
             float dist = meti::distance(vehicle.position(), target.position());
             if (dist < 0.5*vehicle.collisionRadius())
             {
-                switch(target.typeId())
+                switch(target.type())
                 {
-                case type::ENTITY::CONTAINER_ID:
+                case type::entity::CONTAINER_ID:
                 {
                     Container* container = reinterpret_cast<Container*>(&target);
                     if (vehicle.unpackContainerItemToCargoSlot(container) == true)

@@ -46,7 +46,7 @@ public:
 
     virtual void putChildrenToGarbage() const {}
 
-    void setParentSubTypeId(type::ENTITY parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
+    void setParentSubTypeId(type::entity parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
     void setItemCommonData(const ItemCommonData& data_item)
     {
         setId(data_item.id);
@@ -74,7 +74,7 @@ public:
 
     type::TECH tech() const { return m_data_item.tech; }
 
-    type::ENTITY parentSubTypeId() const { return m_parent_subtype_id; }
+    type::entity parentSubTypeId() const { return m_parent_subtype_id; }
     type::race race() const { return m_race_id; }
 
     bool isDamaged()    const { return (m_condition <= 0); }
@@ -107,7 +107,7 @@ protected:
     int m_price = 0;
     int m_deterioration = 0;
 
-    type::ENTITY m_parent_subtype_id = type::ENTITY::NONE_ID;
+    type::entity m_parent_subtype_id = type::entity::NONE_ID;
 
     ItemCommonData m_data_item;
     UnresolvedDataBaseItem m_data_unresolved_BaseItem;

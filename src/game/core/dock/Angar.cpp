@@ -38,7 +38,7 @@ Angar::Angar(int id)
       price_fuel(PRICE_FUEL)
 {
     setId(id);
-    setTypeId(type::ENTITY::ANGAR_ID);
+    setTypeId(type::entity::ANGAR_ID);
 }
 
 Angar::~Angar()
@@ -62,14 +62,14 @@ void Angar::putChildrenToGarbage() const
 
 void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot) 
 { 
-    vehicle_slot->SetOwner(this);
+    vehicle_slot->setOwner(this);
 
-    if (vehicle_slot->subTypeId() == type::ENTITY::VEHICLE_MILITARY_SLOT_ID)
+    if (vehicle_slot->subtype() == type::entity::VEHICLE_MILITARY_SLOT_ID)
     {
         vehicle_military_slot_vec.push_back(vehicle_slot);
     }
 
-    if (vehicle_slot->subTypeId() == type::ENTITY::VEHICLE_VISITORS_SLOT_ID)
+    if (vehicle_slot->subtype() == type::entity::VEHICLE_VISITORS_SLOT_ID)
     {
         vehicle_visitors_slot_vec.push_back(vehicle_slot);
     }
@@ -80,7 +80,7 @@ void Angar::AddVehicleSlot(VehicleSlot* vehicle_slot)
 
 void Angar::AddItemSlot(ItemSlot* item_slot)
 {
-    item_slot->SetOwner(this);
+    item_slot->setOwner(this);
     item_slot_vec.push_back(item_slot);
 }
 
@@ -94,7 +94,7 @@ bool Angar::RepairItem(Npc* npc, item::Base* item) const
     return false;
 }         
 
-bool Angar::ChargeRocketEquipment(Npc* npc, item::equipment::Rocket* rocket_equipment) const
+bool Angar::chargeRocketEquipment(Npc* npc, item::equipment::Rocket* rocket_equipment) const
 {
     int price_for_one = rocket_equipment->price() * AMMO_PRICE_RATE;
     int ammo_max = npc->GetCredits() / price_for_one;
@@ -172,7 +172,7 @@ int Angar::GetFreeVehicleSlotTotalNum() const
 
 bool Angar::AddVehicle(Vehicle* vehicle)
 {
-    if (vehicle->subSubTypeId() == type::ENTITY::WARRIOR_ID) {
+    if (vehicle->subsubtype() == type::entity::WARRIOR_ID) {
         for (unsigned int i=0; i<vehicle_military_slot_vec.size(); i++) {
             if (vehicle_military_slot_vec[i]->GetVehicle() == nullptr) {
                 vehicle_military_slot_vec[i]->InsertVehicle(vehicle);

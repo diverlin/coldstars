@@ -32,7 +32,7 @@
 Store::Store(int id)
 {
     setId(id);
-    setTypeId(type::ENTITY::STORE_ID);
+    setTypeId(type::entity::STORE_ID);
 }
 
 Store::~Store()
@@ -49,13 +49,13 @@ void Store::putChildrenToGarbage() const
 
 void Store::addItemSlot(ItemSlot* item_slot) 
 { 
-    item_slot->SetOwner(this);
+    item_slot->setOwner(this);
     item_slot_vec.push_back(item_slot); 
 };     
 
 void Store::addVehicleSlot(VehicleSlot* vehicle_slot) 
 { 
-    vehicle_slot->SetOwner(this);
+    vehicle_slot->setOwner(this);
     vehicle_slot_vec.push_back(vehicle_slot); 
 }; 
         
@@ -130,7 +130,7 @@ int Store::buyItem(item::Base* item)
 
 void Store::sellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
 {
-    vehicle_slot->GetVehicle()->GetAllItemsFromVehicle(npc->GetVehicle());
+    vehicle_slot->GetVehicle()->grabItemsFromVehicle(npc->GetVehicle());
     vehicle_slot->GetVehicle()->setStarSystem(npc->GetVehicle()->starsystem());
     vehicle_slot->GetVehicle()->setLand(npc->GetVehicle()->land());
     vehicle_slot->GetVehicle()->setPlaceTypeId(type::place::KOSMOPORT);

@@ -35,7 +35,7 @@ void MacroScenarioSelfSafety::UpdateInStaticInSpace(Npc* npc) const
 {
     if (npc->starsystem()->conditionId() == ENTITY::STARSYSTEM::CONDITION::SAFE_ID)
     {
-        if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->typeId() != type::ENTITY::PLANET_ID)
+        if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->type() != type::entity::PLANET_ID)
         { 
             Task microtask(type::AISCENARIO::MICRO_DOCKING_ID, npc->GetPlanetForDocking()->id());
             npc->GetStateMachine().SetCurrentMicroTask(microtask);

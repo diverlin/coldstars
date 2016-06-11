@@ -24,8 +24,8 @@
 struct IdData  
 {
     id_type id = 0;
-    type::ENTITY type_id = type::ENTITY::NONE_ID;
-    type::ENTITY subtype_id = type::ENTITY::NONE_ID;
-    type::ENTITY subsubtype_id = type::ENTITY::NONE_ID;
+    type::entity type_id = type::entity::NONE_ID;
+    type::entity subtype_id = type::entity::NONE_ID;
+    type::entity subsubtype_id = type::entity::NONE_ID;
 };
 

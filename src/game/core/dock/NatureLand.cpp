@@ -30,7 +30,7 @@
 NatureLand::NatureLand(int id)
 {
     setId(id);
-    setTypeId(type::ENTITY::NATURELAND_ID);
+    setTypeId(type::entity::NATURELAND_ID);
 }
 
 /* virtual */
@@ -65,23 +65,19 @@ bool NatureLand::CanAcceptNewItem() const
                 
 void NatureLand::AddItemSlot(ItemSlot* item_slot)
 {
-    item_slot->SetOwner(this);
+    item_slot->setOwner(this);
     item_slot_vec.push_back(item_slot);
 }
 
 bool NatureLand::AddItem(item::Base* item)
 {
-    for (unsigned int i=0; i<item_slot_vec.size(); i++)
-    {
-        if (item_slot_vec[i]->item() == nullptr)
-        {
-            item_slot_vec[i]->insertItem(item);
-            item_slot_vec[i]->SetPosition(glm::vec2(meti::getRandInt(0, 100), meti::getRandInt(0, 100)));
-            
+    for (ItemSlot* slot: item_slot_vec) {
+        if (!slot->item()) {
+            slot->insertItem(item);
+            slot->setPosition(glm::vec2(meti::getRandInt(0, 100), meti::getRandInt(0, 100)));
             return true;
         }
-    }
-    
+    }    
     return false;
 }
 

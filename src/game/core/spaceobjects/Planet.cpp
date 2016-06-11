@@ -42,7 +42,7 @@ m_Land(nullptr),
 m_Population(0)
 {    
     setId(id);
-    setTypeId(type::ENTITY::PLANET_ID);
+    setTypeId(type::entity::PLANET_ID);
 }
 
 /* virtual */
@@ -67,7 +67,7 @@ void Planet::BindLand(Land* land)
 {
     m_Land = land;
     m_Land->SetOwner(this);
-    setSubTypeId(land->typeId());
+    setSubTypeId(land->type());
 }
 
 void Planet::AddVehicle(Vehicle* vehicle) const

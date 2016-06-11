@@ -38,7 +38,7 @@
 Container::Container(const id_type& id)
 {
     setId(id);
-    setTypeId(type::ENTITY::CONTAINER_ID);
+    setTypeId(type::entity::CONTAINER_ID);
 }
 
 /* virtual */   
@@ -58,7 +58,7 @@ void Container::hit(int damage) {
     SpaceObject::hit(damage);
     if (_dataLife().is_dying) {
         if (m_itemSlot->item()) {
-            if (m_itemSlot->item()->subTypeId() == type::ENTITY::BOMB_ID) {
+            if (m_itemSlot->item()->subtype() == type::entity::BOMB_ID) {
                 // send explosion event
             }
         }
@@ -68,7 +68,7 @@ void Container::hit(int damage) {
 void Container::bindItemSlot(ItemSlot* item_slot) 
 { 
     m_itemSlot = item_slot; 
-    m_itemSlot->SetOwner(this); 
+    m_itemSlot->setOwner(this); 
 }
 
 ///* virtual override final */
@@ -96,7 +96,7 @@ void Container::bindItemSlot(ItemSlot* item_slot)
 /* virtual override final */   
 void Container::_postDeathUniqueEvent(bool show_effect)
 {
-    if (m_itemSlot->item()->typeId() == type::ENTITY::BOMB_ID)
+    if (m_itemSlot->item()->type() == type::entity::BOMB_ID)
     {
         starsystem()->bombExplosionEvent(this, show_effect);  
     }

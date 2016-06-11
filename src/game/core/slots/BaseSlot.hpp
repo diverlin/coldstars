@@ -43,14 +43,14 @@ class BaseSlot : public Base
         virtual ~BaseSlot();
                 
 //        void SetTextureOb(jeti::TextureOb* textureOb) { m_textureOb = textureOb; }
-        void SetOwner(Base* owner) { m_owner = owner; }
-        void SetPosition(const glm::vec2& position) { m_position = position; }
-        void SelectEvent() { m_selected = true; }
-        void DeselectEvent() { m_selected = false; }
+        void setOwner(Base* owner) { m_owner = owner; }
+        void setPosition(const glm::vec2& position) { m_position = position; }
+        void selectEvent() { m_selected = true; }
+        void deselectEvent() { m_selected = false; }
                 
-        bool GetSelected() const { return m_selected; }
+        bool isSelected() const { return m_selected; }
         
-        const glm::vec2& GetPosition() const { return m_position; }
+        const glm::vec2& position() const { return m_position; }
         
         Vehicle* vehicleOwner() const {
             assert(m_owner);

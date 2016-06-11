@@ -77,12 +77,12 @@ void ShipBuilder::__createInternals(Ship* ship, const descriptor::Base& descr)
 //        }
 //    }
 
-    ship->setSubSubTypeId((type::ENTITY)descr.type());
+    ship->setSubSubTypeId((type::entity)descr.type());
 
     VehicleDescriptor vehicleDescriptor;
     vehicleDescriptor.id = descr.id();
     vehicleDescriptor.race_id = (type::race)descr.race();
-    vehicleDescriptor.type_id = (type::ENTITY)descr.type();
+    vehicleDescriptor.type_id = (type::entity)descr.type();
     vehicleDescriptor.size_id = descr.size();
 
     vehicleDescriptor.space = descr.space();

@@ -115,39 +115,33 @@ void WeaponComplex::ReloadAllWeapons()
 
 void WeaponComplex::ActivateAllWeapons()
 {
-    for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
-    {
-        slot_weapon_reloaded_vec[i]->SelectEvent();
+    for (ItemSlot* slot: slot_weapon_reloaded_vec) {
+        slot->selectEvent();
     }
 }
 
 void WeaponComplex::DeactivateAllWeapons()
 {
-    for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
-    {
-        slot_weapon_vec[i]->DeselectEvent();
+    for (ItemSlot* slot: slot_weapon_reloaded_vec) {
+        slot->deselectEvent();
     }
 }
 
-void WeaponComplex::ActivateWeaponsBySubTypeId(type::ENTITY weapon_subtype_id)
+void WeaponComplex::ActivateWeaponsBySubTypeId(type::entity weapon_subtype_id)
 {
-    for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
-    {
-        if (slot_weapon_reloaded_vec[i]->item()->subTypeId() == weapon_subtype_id)
-        {
-            slot_weapon_reloaded_vec[i]->SelectEvent();
+    for (ItemSlot* slot: slot_weapon_reloaded_vec) {
+        if (slot->item()->subtype() == weapon_subtype_id) {
+            slot->selectEvent();
         }
     }
 }
 
 
-void WeaponComplex::DeactivateWeaponsBySubTypeId(type::ENTITY weapon_subtype_id)
+void WeaponComplex::DeactivateWeaponsBySubTypeId(type::entity weapon_subtype_id)
 {
-    for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
-    {
-        if (slot_weapon_reloaded_vec[i]->item()->subTypeId() == weapon_subtype_id)
-        {
-            slot_weapon_reloaded_vec[i]->DeselectEvent();
+    for (ItemSlot* slot: slot_weapon_reloaded_vec) {
+        if (slot->item()->subtype() == weapon_subtype_id) {
+            slot->deselectEvent();
         }
     }
 }
@@ -155,14 +149,11 @@ void WeaponComplex::DeactivateWeaponsBySubTypeId(type::ENTITY weapon_subtype_id)
 
 bool WeaponComplex::IsAnyWeaponSelected() const
 {
-    for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
-    {
-        if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
-        {
+    for (ItemSlot* slot: slot_weapon_reloaded_vec) {
+        if (slot->isSelected() == true) {
             return true;
         }
-    }
-    
+    }    
     return false;
 }
 
@@ -176,7 +167,7 @@ void WeaponComplex::SetTarget(SpaceObject* target, ItemSlot* item_slot)
     for (unsigned int i=0; i<slot_weapon_vec.size(); i++)
     {
         ItemSlot& weapon_slot = *slot_weapon_vec[i]; // shortcut
-        if (weapon_slot.GetSelected() == true )
+        if (weapon_slot.isSelected() == true )
         {
             if (weapon_slot.item() != nullptr)
             {
@@ -279,12 +270,10 @@ void WeaponComplex::RenderTurrels() const
 
 void WeaponComplex::RenderWeaponsRange()
 {
-    for (unsigned int i=0; i<slot_weapon_reloaded_vec.size(); i++)
-    {
-        if (slot_weapon_reloaded_vec[i]->GetSelected() == true)
-        {
-            //slot_weapon_reloaded_vec[i]->UpdateRange(GuiTextureObCollector::Instance().dot_red);
-            //slot_weapon_reloaded_vec[i]->drawRange(meti::vec2(owner_vehicle->center()));
+    for (ItemSlot* slot: slot_weapon_reloaded_vec) {
+        if (slot->isSelected()) {
+            //slot->UpdateRange(GuiTextureObCollector::Instance().dot_red);
+            //slot->drawRange(meti::vec2(owner_vehicle->center()));
         }
     }
 }

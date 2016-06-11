@@ -33,8 +33,8 @@ Scaner::Scaner(const id_type& id)
       m_scan_orig(0)
 {
     setId(id);
-    setTypeId(type::ENTITY::EQUIPMENT_ID);
-    setSubTypeId(type::ENTITY::SCANER_EQUIPMENT_ID);
+    setTypeId(type::entity::EQUIPMENT_ID);
+    setSubTypeId(type::entity::SCANER_EQUIPMENT_ID);
 }
 
 /* virtual */

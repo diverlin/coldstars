@@ -43,8 +43,8 @@ m_Target(nullptr),
 m_EffectDrive(nullptr) 
 {
     setId(id);
-    setTypeId(type::ENTITY::BULLET_ID);
-    setSubTypeId(type::ENTITY::ROCKETBULLET_ID);
+    setTypeId(type::entity::BULLET_ID);
+    setSubTypeId(type::entity::ROCKETBULLET_ID);
 }
 
 /* virtual */

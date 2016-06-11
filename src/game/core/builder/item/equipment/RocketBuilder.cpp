@@ -102,7 +102,7 @@ void RocketBuilder::createInternals(Rocket* rocket, type::TECH tech_level, type:
     rocket->SetBulletData(data_bullet);
     rocket->SetAmmo(ammo_max_orig*0.6);
     //alpitodorender rocket->SetRenderData(mesh, texOb_item, texOb_item->size());
-    rocket->setParentSubTypeId(type::ENTITY::WEAPON_SLOT_ID);
+    rocket->setParentSubTypeId(type::entity::WEAPON_SLOT_ID);
     rocket->setItemCommonData(common_data);
     
     rocket->updateProperties();

@@ -70,7 +70,7 @@ void DriveBuilder::createInternals(Drive* drive, const descriptor::Base& descrip
             
     drive->SetSpeedOrig(descriptor.speed());
     drive->SetHyperOrig(descriptor.hyper());
-    drive->setParentSubTypeId(type::ENTITY::DRIVE_SLOT_ID);
+    drive->setParentSubTypeId(type::entity::DRIVE_SLOT_ID);
     drive->setItemCommonData(data);
     
     drive->updateProperties();

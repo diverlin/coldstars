@@ -65,38 +65,38 @@ void BaseVehicleBuilder::_createItemSlots(Vehicle* vehicle)
     unsigned int slot_weapon_num = vehicle->vehicleDescriptor().slot_weapon_num;
     for (unsigned int i=0; i<slot_weapon_num; i++)
     {
-        ItemSlot* weapon_slot = GetNewItemSlot(type::ENTITY::WEAPON_SLOT_ID);  
+        ItemSlot* weapon_slot = GetNewItemSlot(type::entity::WEAPON_SLOT_ID);  
         weapon_slot->setSubSubTypeId(SLOT_WEAPON_TYPES[i]);   
         vehicle->addItemSlot(weapon_slot);
     }
         
     if (vehicle->vehicleDescriptor().slot_radar_num)
     {
-        ItemSlot* radar_slot = GetNewItemSlot(type::ENTITY::RADAR_SLOT_ID);
+        ItemSlot* radar_slot = GetNewItemSlot(type::entity::RADAR_SLOT_ID);
         vehicle->addItemSlot(radar_slot);
     }
             
     if (vehicle->vehicleDescriptor().slot_scaner_num)
     {
-        ItemSlot* scaner_slot = GetNewItemSlot(type::ENTITY::SCANER_SLOT_ID); 
+        ItemSlot* scaner_slot = GetNewItemSlot(type::entity::SCANER_SLOT_ID); 
         vehicle->addItemSlot(scaner_slot);
     }
 
     if (vehicle->vehicleDescriptor().slot_energizer_num)
     {
-        ItemSlot* energizer_slot = GetNewItemSlot(type::ENTITY::ENERGIZER_SLOT_ID); 
+        ItemSlot* energizer_slot = GetNewItemSlot(type::entity::ENERGIZER_SLOT_ID); 
         vehicle->addItemSlot(energizer_slot);
     }
     
     if (vehicle->vehicleDescriptor().slot_grapple_num)
     {
-        ItemSlot* grapple_slot = GetNewItemSlot(type::ENTITY::GRAPPLE_SLOT_ID);
+        ItemSlot* grapple_slot = GetNewItemSlot(type::entity::GRAPPLE_SLOT_ID);
         vehicle->addItemSlot(grapple_slot); 
     }
     
     if (vehicle->vehicleDescriptor().slot_droid_num)
     {
-        ItemSlot* droid_slot = GetNewItemSlot(type::ENTITY::DROID_SLOT_ID);  
+        ItemSlot* droid_slot = GetNewItemSlot(type::entity::DROID_SLOT_ID);  
         vehicle->addItemSlot(droid_slot); 
     }
     
@@ -108,19 +108,19 @@ void BaseVehicleBuilder::_createItemSlots(Vehicle* vehicle)
     
     if (vehicle->vehicleDescriptor().slot_protector_num)
 {
-        ItemSlot* protector_slot = GetNewItemSlot(type::ENTITY::PROTECTOR_SLOT_ID);  
+        ItemSlot* protector_slot = GetNewItemSlot(type::entity::PROTECTOR_SLOT_ID);  
         vehicle->addItemSlot(protector_slot);         
     }
     
     if (vehicle->vehicleDescriptor().slot_drive_num)
     {
-        ItemSlot* drive_slot = GetNewItemSlot(type::ENTITY::DRIVE_SLOT_ID); 
+        ItemSlot* drive_slot = GetNewItemSlot(type::entity::DRIVE_SLOT_ID); 
         vehicle->addItemSlot(drive_slot);
     }
     
     if (vehicle->vehicleDescriptor().slot_bak_num)
     {
-        ItemSlot* bak_slot = GetNewItemSlot(type::ENTITY::BAK_SLOT_ID);  
+        ItemSlot* bak_slot = GetNewItemSlot(type::entity::BAK_SLOT_ID);  
         vehicle->addItemSlot(bak_slot);
     }
     
@@ -128,7 +128,7 @@ void BaseVehicleBuilder::_createItemSlots(Vehicle* vehicle)
     int artefact_num = vehicle->vehicleDescriptor().slot_artefact_num;
     for (int i=0; i<artefact_num; i++)
     {
-        ItemSlot* artefact_slot = GetNewItemSlot(type::ENTITY::ARTEFACT_SLOT_ID);
+        ItemSlot* artefact_slot = GetNewItemSlot(type::entity::ARTEFACT_SLOT_ID);
         artefact_slot->setSubSubTypeId(SLOT_ARTEFACT_TYPES[i]);  
         vehicle->addItemSlot(artefact_slot);         
     } 
@@ -137,14 +137,14 @@ void BaseVehicleBuilder::_createItemSlots(Vehicle* vehicle)
     int otsec_num = vehicle->vehicleDescriptor().slot_otsec_num;
     for (int i=0; i<otsec_num; i++)
     {
-        ItemSlot* otsec_slot = GetNewItemSlot(type::ENTITY::CARGO_SLOT_ID); 
+        ItemSlot* otsec_slot = GetNewItemSlot(type::entity::CARGO_SLOT_ID); 
         otsec_slot->setSubSubTypeId(SLOT_CARGO_TYPES[i]);   
         vehicle->addItemSlot(otsec_slot);         
     }
 
     //GATE SLOT
     {
-        ItemSlot* gate_slot = GetNewItemSlotWithoutSaveAbility(type::ENTITY::GATE_SLOT_ID); 
+        ItemSlot* gate_slot = GetNewItemSlotWithoutSaveAbility(type::entity::GATE_SLOT_ID); 
         vehicle->addItemSlot(gate_slot);
     }
 }
@@ -189,39 +189,39 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, type::TECH tech_level)
         if (rand)
         {
             item::equipment::Rocket* rocket_equipment = global::get().rocketBuilder().getNew(tech_level);
-            if (vehicle->manage(rocket_equipment) == false) {
+            if (vehicle->install(rocket_equipment) == false) {
                 global::get().entityManager().addToGarbage(rocket_equipment);
             }
         }
         else
         {
             item::equipment::Lazer* lazer_equipment = global::get().lazerBuilder().getNew(tech_level);
-            if (vehicle->manage(lazer_equipment) == false) {
+            if (vehicle->install(lazer_equipment) == false) {
                 global::get().entityManager().addToGarbage(lazer_equipment);
             }
         }
     }   
     
-    if (vehicle->isSlotExists(type::ENTITY::RADAR_SLOT_ID)) {
+    if (vehicle->isSlotExists(type::entity::RADAR_SLOT_ID)) {
         auto descr = global::get().descriptors().getRand(descriptor::Type::RADAR);
         item::equipment::Radar* radar_equipment = global::get().radarBuilder().getNew(descr);
-        if (vehicle->manage(radar_equipment) == false) {
+        if (vehicle->install(radar_equipment) == false) {
             global::get().entityManager().addToGarbage(radar_equipment);
         }
     }
     
-    if (vehicle->isSlotExists(type::ENTITY::DRIVE_SLOT_ID)) {
+    if (vehicle->isSlotExists(type::entity::DRIVE_SLOT_ID)) {
         auto descr = global::get().descriptors().getRand(descriptor::Type::DRIVE);
         item::equipment::Drive* drive_equipment = global::get().driveBuilder().getNew(descr);
-        if (vehicle->manage(drive_equipment) == false) {
+        if (vehicle->install(drive_equipment) == false) {
             global::get().entityManager().addToGarbage(drive_equipment);
         }
     }
     
-    if (vehicle->isSlotExists(type::ENTITY::BAK_SLOT_ID)) {
+    if (vehicle->isSlotExists(type::entity::BAK_SLOT_ID)) {
         auto descr = global::get().descriptors().getRand(descriptor::Type::BAK);
         item::equipment::Bak* bak_equipment = global::get().bakBuilder().getNew(descr);
-        if (vehicle->manage(bak_equipment) == false) {
+        if (vehicle->install(bak_equipment) == false) {
             global::get().entityManager().addToGarbage(bak_equipment);
         }
     }
@@ -244,34 +244,34 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, type::TECH tech_level)
     }
 #endif
 
-    if (vehicle->isSlotExists(type::ENTITY::PROTECTOR_SLOT_ID)) {
+    if (vehicle->isSlotExists(type::entity::PROTECTOR_SLOT_ID)) {
         auto descr = global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
         item::equipment::Protector* protector_equipment = global::get().protectorBuilder().getNew(descr);
-        if (vehicle->manage(protector_equipment) == false) {
+        if (vehicle->install(protector_equipment) == false) {
             global::get().entityManager().addToGarbage(protector_equipment);
         }  
     }
         
-    if (vehicle->isSlotExists(type::ENTITY::DROID_SLOT_ID)) {
+    if (vehicle->isSlotExists(type::entity::DROID_SLOT_ID)) {
         auto descr = global::get().descriptors().getRand(descriptor::Type::DROID);
         item::equipment::Droid* droid_equipment = global::get().droidBuilder().getNew(descr);
-        if (vehicle->manage(droid_equipment) == false) {
+        if (vehicle->install(droid_equipment) == false) {
             global::get().entityManager().addToGarbage(droid_equipment);
         }  
     }
     
-    if (vehicle->isSlotExists(type::ENTITY::SCANER_SLOT_ID)) {
+    if (vehicle->isSlotExists(type::entity::SCANER_SLOT_ID)) {
         auto descr = global::get().descriptors().getRand(descriptor::Type::SCANER);
         item::equipment::Scaner* scaner_equipment = global::get().scanerBuilder().getNew(descr);
-        if (vehicle->manage(scaner_equipment) == false) {
+        if (vehicle->install(scaner_equipment) == false) {
             global::get().entityManager().addToGarbage(scaner_equipment);
         }  
     }
     
-    if (vehicle->isSlotExists(type::ENTITY::GRAPPLE_SLOT_ID)) {
+    if (vehicle->isSlotExists(type::entity::GRAPPLE_SLOT_ID)) {
         auto descr = global::get().descriptors().getRand(descriptor::Type::GRAPPLE);
         item::equipment::Grapple* grapple_equipment = global::get().grappleBuilder().getNew(descr);
-        if (vehicle->manage(grapple_equipment) == false) {
+        if (vehicle->install(grapple_equipment) == false) {
             global::get().entityManager().addToGarbage(grapple_equipment);
         }
     }
