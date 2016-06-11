@@ -28,8 +28,8 @@ namespace equipment {
 Drive::Drive(const id_type& id)
 {
     setId(id);
-    setTypeId(type::ENTITY::EQUIPMENT_ID);
-    setSubTypeId(type::ENTITY::DRIVE_EQUIPMENT_ID);
+    setTypeId(type::entity::EQUIPMENT_ID);
+    setSubTypeId(type::entity::DRIVE_EQUIPMENT_ID);
 }
 
 /* virtual */

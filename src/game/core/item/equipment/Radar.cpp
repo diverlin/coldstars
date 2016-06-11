@@ -33,8 +33,8 @@ Radar::Radar(const id_type& id)
       m_radius_orig(0)
 {
     setId(id);
-    setTypeId(type::ENTITY::EQUIPMENT_ID);
-    setSubTypeId(type::ENTITY::RADAR_EQUIPMENT_ID);
+    setTypeId(type::entity::EQUIPMENT_ID);
+    setSubTypeId(type::entity::RADAR_EQUIPMENT_ID);
 }
 
 /* virtual */

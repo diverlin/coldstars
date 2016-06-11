@@ -44,7 +44,7 @@
 #include "../common/GameDate.hpp" 
 #include <types/RaceTypes.hpp> 
 
-Npc::Npc(int id, type::ENTITY subtype_id, type::ENTITY subsubtype_id)
+Npc::Npc(int id, type::entity subtype_id, type::entity subsubtype_id)
     :
       race_id(type::race::NONE_ID),
       credits(1000),
@@ -56,7 +56,7 @@ Npc::Npc(int id, type::ENTITY subtype_id, type::ENTITY subsubtype_id)
     is_alive = true;
     
     setId(id);
-    setTypeId(type::ENTITY::NPC_ID);
+    setTypeId(type::entity::NPC_ID);
     setSubTypeId(subtype_id);
     setSubSubTypeId(subsubtype_id);
 
@@ -281,7 +281,7 @@ void Npc::RenderInfo(const glm::vec2& center)
 bool Npc::BuyGoods()
 {
     Shop* shop = ((Kosmoport*)vehicle->land())->GetShop();
-    type::ENTITY subtype_id = (type::ENTITY)meti::getRandInt((int)type::ENTITY::MINERALS_ID, (int)type::ENTITY::EXCLUSIVE_ID);
+    type::entity subtype_id = (type::entity)meti::getRandInt((int)type::entity::MINERALS_ID, (int)type::entity::EXCLUSIVE_ID);
 
     // hard coded logic
     int amount_to_hold      = 0.8*vehicle->freeSpace();

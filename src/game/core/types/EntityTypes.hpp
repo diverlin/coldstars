@@ -23,7 +23,7 @@
 
 namespace type 
 {
-    enum class ENTITY
+    enum class entity
     {
         NONE_ID=0,
 
@@ -80,31 +80,31 @@ namespace type
     };
 }
  
-const std::vector<type::ENTITY> SLOT_WEAPON_TYPES = 
+const std::vector<type::entity> SLOT_WEAPON_TYPES = 
 { 
-type::ENTITY::WEAPON_SLOT1_ID, 
-type::ENTITY::WEAPON_SLOT2_ID, 
-type::ENTITY::WEAPON_SLOT3_ID, 
-type::ENTITY::WEAPON_SLOT4_ID, 
-type::ENTITY::WEAPON_SLOT5_ID, 
-type::ENTITY::WEAPON_SLOT6_ID, 
-type::ENTITY::WEAPON_SLOT7_ID, 
-type::ENTITY::WEAPON_SLOT8_ID, 
-type::ENTITY::WEAPON_SLOT9_ID
+type::entity::WEAPON_SLOT1_ID, 
+type::entity::WEAPON_SLOT2_ID, 
+type::entity::WEAPON_SLOT3_ID, 
+type::entity::WEAPON_SLOT4_ID, 
+type::entity::WEAPON_SLOT5_ID, 
+type::entity::WEAPON_SLOT6_ID, 
+type::entity::WEAPON_SLOT7_ID, 
+type::entity::WEAPON_SLOT8_ID, 
+type::entity::WEAPON_SLOT9_ID
 };
    
-const std::vector<type::ENTITY> SLOT_CARGO_TYPES = 
+const std::vector<type::entity> SLOT_CARGO_TYPES = 
 { 
-type::ENTITY::CARGO_SLOT1_ID, 
-type::ENTITY::CARGO_SLOT2_ID, 
-type::ENTITY::CARGO_SLOT3_ID, 
-type::ENTITY::CARGO_SLOT4_ID, 
-type::ENTITY::CARGO_SLOT5_ID, 
-type::ENTITY::CARGO_SLOT6_ID, 
-type::ENTITY::CARGO_SLOT7_ID, 
-type::ENTITY::CARGO_SLOT8_ID, 
-type::ENTITY::CARGO_SLOT9_ID,
-type::ENTITY::CARGO_SLOT10_ID,
+type::entity::CARGO_SLOT1_ID, 
+type::entity::CARGO_SLOT2_ID, 
+type::entity::CARGO_SLOT3_ID, 
+type::entity::CARGO_SLOT4_ID, 
+type::entity::CARGO_SLOT5_ID, 
+type::entity::CARGO_SLOT6_ID, 
+type::entity::CARGO_SLOT7_ID, 
+type::entity::CARGO_SLOT8_ID, 
+type::entity::CARGO_SLOT9_ID,
+type::entity::CARGO_SLOT10_ID,
 //TYPE::ENTITY::CARGO_SLOT11_ID,
 //TYPE::ENTITY::CARGO_SLOT12_ID,
 //TYPE::ENTITY::CARGO_SLOT13_ID,
@@ -115,43 +115,43 @@ type::ENTITY::CARGO_SLOT10_ID,
 //TYPE::ENTITY::CARGO_SLOT18_ID
 };
 
-const std::vector<type::ENTITY> SLOT_ARTEFACT_TYPES = 
+const std::vector<type::entity> SLOT_ARTEFACT_TYPES = 
 { 
-type::ENTITY::ARTEFACT_SLOT1_ID, 
-type::ENTITY::ARTEFACT_SLOT2_ID, 
-type::ENTITY::ARTEFACT_SLOT3_ID, 
-type::ENTITY::ARTEFACT_SLOT4_ID, 
+type::entity::ARTEFACT_SLOT1_ID, 
+type::entity::ARTEFACT_SLOT2_ID, 
+type::entity::ARTEFACT_SLOT3_ID, 
+type::entity::ARTEFACT_SLOT4_ID, 
 };
 
-const std::vector<type::ENTITY> EQUIPMENT_TYPES = 
+const std::vector<type::entity> EQUIPMENT_TYPES = 
 { 
-type::ENTITY::LAZER_EQUIPMENT_ID, 
-type::ENTITY::ROCKET_EQUIPMENT_ID, 
-type::ENTITY::DRIVE_EQUIPMENT_ID, 
-type::ENTITY::RADAR_EQUIPMENT_ID,
-type::ENTITY::BAK_EQUIPMENT_ID, 
-type::ENTITY::ENERGIZER_EQUIPMENT_ID, 
-type::ENTITY::PROTECTOR_EQUIPMENT_ID, 
-type::ENTITY::DROID_EQUIPMENT_ID, 
-type::ENTITY::FREEZER_EQUIPMENT_ID, 
-type::ENTITY::GRAPPLE_EQUIPMENT_ID, 
-type::ENTITY::SCANER_EQUIPMENT_ID  
+type::entity::LAZER_EQUIPMENT_ID, 
+type::entity::ROCKET_EQUIPMENT_ID, 
+type::entity::DRIVE_EQUIPMENT_ID, 
+type::entity::RADAR_EQUIPMENT_ID,
+type::entity::BAK_EQUIPMENT_ID, 
+type::entity::ENERGIZER_EQUIPMENT_ID, 
+type::entity::PROTECTOR_EQUIPMENT_ID, 
+type::entity::DROID_EQUIPMENT_ID, 
+type::entity::FREEZER_EQUIPMENT_ID, 
+type::entity::GRAPPLE_EQUIPMENT_ID, 
+type::entity::SCANER_EQUIPMENT_ID  
 };
 
-const std::vector<type::ENTITY> MODULE_TYPES = 
+const std::vector<type::entity> MODULE_TYPES = 
 { 
-type::ENTITY::LAZER_MODULE_ID,
-type::ENTITY::ROCKET_MODULE_ID, 
-type::ENTITY::DRIVE_MODULE_ID, 
-type::ENTITY::RADAR_MODULE_ID, 
-type::ENTITY::BAK_MODULE_ID, 
-type::ENTITY::ENERGIZER_MODULE_ID, 
-type::ENTITY::PROTECTOR_MODULE_ID, 
-type::ENTITY::DROID_MODULE_ID, 
-type::ENTITY::FREEZER_MODULE_ID, 
-type::ENTITY::GRAPPLE_MODULE_ID, 
-type::ENTITY::SCANER_MODULE_ID
+type::entity::LAZER_MODULE_ID,
+type::entity::ROCKET_MODULE_ID, 
+type::entity::DRIVE_MODULE_ID, 
+type::entity::RADAR_MODULE_ID, 
+type::entity::BAK_MODULE_ID, 
+type::entity::ENERGIZER_MODULE_ID, 
+type::entity::PROTECTOR_MODULE_ID, 
+type::entity::DROID_MODULE_ID, 
+type::entity::FREEZER_MODULE_ID, 
+type::entity::GRAPPLE_MODULE_ID, 
+type::entity::SCANER_MODULE_ID
 };    
 
-std::string str(type::ENTITY);
+std::string str(type::entity);
 

@@ -33,7 +33,7 @@
 #include <slots/ItemSlot.hpp>
 
 
-ItemSlot* GetNewItemSlot(type::ENTITY subtype_id, const id_type& id)
+ItemSlot* GetNewItemSlot(type::entity subtype_id, const id_type& id)
 {  
     ItemSlot* item_slot = new ItemSlot(id, subtype_id);
     assert(item_slot);
@@ -41,7 +41,7 @@ ItemSlot* GetNewItemSlot(type::ENTITY subtype_id, const id_type& id)
     //jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);
 //    item_slot->SetTextureOb(texOb_slot);
     
-    if (subtype_id == type::ENTITY::WEAPON_SLOT_ID) {
+    if (subtype_id == type::entity::WEAPON_SLOT_ID) {
         Turrel* turrel = new Turrel(item_slot);
         assert(turrel);
 //        jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
@@ -53,7 +53,7 @@ ItemSlot* GetNewItemSlot(type::ENTITY subtype_id, const id_type& id)
     return item_slot;
 }
 
-ItemSlot* GetNewItemSlotWithoutSaveAbility(type::ENTITY subtype_id)
+ItemSlot* GetNewItemSlotWithoutSaveAbility(type::entity subtype_id)
 {
     ItemSlot* item_slot = new ItemSlot(NONE_ID, subtype_id);
     assert(item_slot);

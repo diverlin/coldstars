@@ -31,13 +31,13 @@ class RaceDescriptors
         ~RaceDescriptors();
 
         const std::vector<type::race>& getRaces(type::KIND) const;
-        const std::vector<type::ENTITY>& getSubTypes(type::race) const;
+        const std::vector<type::entity>& getSubTypes(type::race) const;
 
         bool isGood(type::race) const;
 
     private:
         std::map<type::KIND, std::vector<type::race>> m_races;
-        std::map<type::race, std::vector<type::ENTITY>> m_subtypes;
+        std::map<type::race, std::vector<type::entity>> m_subtypes;
 }; 
 
 

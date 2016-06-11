@@ -36,8 +36,8 @@
 Ship::Ship(int id)
 {
     setId(id);
-    setTypeId(type::ENTITY::VEHICLE_ID);
-    setSubTypeId(type::ENTITY::SHIP_ID);
+    setTypeId(type::entity::VEHICLE_ID);
+    setSubTypeId(type::entity::SHIP_ID);
 }
 
 /* virtual override final */

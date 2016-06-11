@@ -25,6 +25,7 @@
 #include <world/starsystem.hpp>
 
 #include <spaceobjects/Vehicle.hpp>
+#include <spaceobjects/Ship.hpp>
 
 #include <builder/world/StarSystemBuilder.hpp>
 #include <builder/spaceobjects/StarBuilder.hpp>
@@ -34,12 +35,12 @@
 #include <descriptors/Base.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
-//#include <builder/item/equipment/ALL>
+#include <builder/item/equipment/ALL>
 //#include <builder/item/modules/ALL>
 //#include <builder/item/artefacts//ALL>
 //#include <builder/item/other/ALL>
 
-//#include <item/equipment/ALL>
+#include <item/equipment/ALL>
 
 //#include "helper.hpp"
 
@@ -72,3 +73,24 @@ TEST(creation, starsystem)
     EXPECT_EQ(starsystem->vehicles()[0]->position(), pos);
     EXPECT_EQ(starsystem->vehicles()[0]->direction(), dir);
 }
+
+TEST(ship, drop_item)
+{
+    Starsystem* starsystem = StarsystemBuilder::getNew();
+    Ship* ship = ShipBuilder::getNew();
+
+    item::equipment::Drive* drive = global::get().driveBuilder().getNew();
+
+    ship->install(drive);
+
+
+
+
+}
+
+
+
+
+
+
+

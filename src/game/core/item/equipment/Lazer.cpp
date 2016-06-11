@@ -40,8 +40,8 @@ Lazer::Lazer(const id_type& id)
       m_radius_orig(0)
 {
     setId(id);
-    setTypeId(type::ENTITY::EQUIPMENT_ID);
-    setSubTypeId(type::ENTITY::LAZER_EQUIPMENT_ID);
+    setTypeId(type::entity::EQUIPMENT_ID);
+    setSubTypeId(type::entity::LAZER_EQUIPMENT_ID);
 
     //TextureOb lazerEffect_texOb   = TEXTURE_MANAGER.returnLazerEffectTexObBy_RevisionID_and_ColorID(self.item_texOb.revision_id, self.item_texOb.color_id);
 //    texOb_turrel      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::TURREL_ID);

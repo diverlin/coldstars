@@ -34,8 +34,8 @@ Droid::Droid(const id_type& id)
       m_repair_orig(0)
 {
     setId(id);
-    setTypeId(type::ENTITY::EQUIPMENT_ID);
-    setSubTypeId(type::ENTITY::DROID_EQUIPMENT_ID);
+    setTypeId(type::entity::EQUIPMENT_ID);
+    setSubTypeId(type::entity::DROID_EQUIPMENT_ID);
 }
 
 /* virtual */

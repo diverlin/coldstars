@@ -50,7 +50,7 @@ public:
     bool AddVehicle(Vehicle*);
 
     bool RepairItem(Npc*, item::Base*) const;
-    bool ChargeRocketEquipment(Npc*, item::equipment::Rocket*) const;
+    bool chargeRocketEquipment(Npc*, item::equipment::Rocket*) const;
 
     bool RepairVehicle(Vehicle*) const;
     bool TankUpVehicle(Vehicle*) const;

@@ -48,17 +48,17 @@ RaceDescriptors::RaceDescriptors()
 
     for (auto race_id: races_good) {
         m_subtypes[race_id] = {
-            type::ENTITY::RANGER_ID,
-            type::ENTITY::WARRIOR_ID,
-            type::ENTITY::TRADER_ID,
-            type::ENTITY::RANGER_ID,
-            type::ENTITY::DIPLOMAT_ID
+            type::entity::RANGER_ID,
+            type::entity::WARRIOR_ID,
+            type::entity::TRADER_ID,
+            type::entity::RANGER_ID,
+            type::entity::DIPLOMAT_ID
         };
     }
 
     for (auto race_id: races_evil) {
         m_subtypes[race_id] = {
-            type::ENTITY::WARRIOR_ID
+            type::entity::WARRIOR_ID
         };
     }
 //    std::map<TYPE::RACE, std::vector<TYPE::ENTITY>> m_subtypes;
@@ -77,7 +77,7 @@ RaceDescriptors::getRaces(type::KIND kind_id) const
     return el->second;
 }
 
-const std::vector<type::ENTITY>&
+const std::vector<type::entity>&
 RaceDescriptors::getSubTypes(type::race race_id) const
 {
     const auto& el = m_subtypes.find(race_id);

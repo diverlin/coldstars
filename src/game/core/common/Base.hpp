@@ -32,15 +32,15 @@ class Base : private NonCopyable
         virtual ~Base();
 
         virtual void putChildrenToGarbage() const {}
-        void setSubSubTypeId(type::ENTITY subsubtype_id) { m_data_id.subsubtype_id = subsubtype_id; }
+        void setSubSubTypeId(type::entity subsubtype_id) { m_data_id.subsubtype_id = subsubtype_id; }
         
         void setMeshId(int mesh_id) { m_mesh_id = mesh_id; }
         void setTextureId(int texture_id) { m_texture_id = texture_id; }
 
         id_type id() const { return m_data_id.id; }
-        type::ENTITY typeId() const { return m_data_id.type_id; }
-        type::ENTITY subTypeId() const { return m_data_id.subtype_id; }
-        type::ENTITY subSubTypeId() const { return m_data_id.subsubtype_id; }
+        type::entity type() const { return m_data_id.type_id; }
+        type::entity subtype() const { return m_data_id.subtype_id; }
+        type::entity subsubtype() const { return m_data_id.subsubtype_id; }
         int_type descriptorId() const { assert(m_descriptorId != -1); return m_descriptorId; }
 
         std::string dataTypeStr() const;
@@ -51,8 +51,8 @@ class Base : private NonCopyable
         
     protected:
         void setId(id_type id)               { m_data_id.id = id; }
-        void setTypeId(type::ENTITY type_id)       { m_data_id.type_id = type_id; }
-        void setSubTypeId(type::ENTITY subtype_id) { m_data_id.subtype_id = subtype_id; }
+        void setTypeId(type::entity type_id)       { m_data_id.type_id = type_id; }
+        void setSubTypeId(type::entity subtype_id) { m_data_id.subtype_id = subtype_id; }
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);

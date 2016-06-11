@@ -83,7 +83,7 @@ ProtectorBuilder::createInternals(Protector* protector, const descriptor::Base& 
     ItemCommonData common_data = extractCommonData(descriptor);
 
     protector->SetProtectionOrig(descriptor.protection());
-    protector->setParentSubTypeId(type::ENTITY::PROTECTOR_SLOT_ID);
+    protector->setParentSubTypeId(type::entity::PROTECTOR_SLOT_ID);
     protector->setItemCommonData(common_data);
             
     protector->updateProperties();

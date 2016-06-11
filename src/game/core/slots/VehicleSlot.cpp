@@ -28,12 +28,12 @@
 
 #include <managers/EntityManager.hpp>
 
-VehicleSlot::VehicleSlot(int id, type::ENTITY subtype_id)
+VehicleSlot::VehicleSlot(int id, type::entity subtype_id)
 :
 vehicle(nullptr)
 { 
     setId(id);
-    setTypeId(type::ENTITY::VEHICLE_SLOT_ID);  
+    setTypeId(type::entity::VEHICLE_SLOT_ID);  
     setSubTypeId(subtype_id);  
 }
    
@@ -119,11 +119,11 @@ void VehicleSlot::ResolveData()
 {
     LOG(" VehicleSlot("+std::to_string(id())+")::ResolveData");
 
-    switch(owner()->typeId())
+    switch(owner()->type())
     {
         //case ENTITY::VEHICLE_ID:     { ((Vehicle*)global::get().entityManager().GetEntityById(unresolved_BaseSlot.owner_id))->AddItemSlot(this); break; }
         //case ENTITY::CONTAINER_ID:     { ((Container*)global::get().entityManager().GetEntityById(unresolved_BaseSlot.owner_id))->BindItemSlot(this); break; }
-        case type::ENTITY::STORE_ID:           { ((Store*)owner())->addVehicleSlot(this); break; }
-        case type::ENTITY::ANGAR_ID:             { ((Angar*)owner())->AddVehicleSlot(this); break; }
+        case type::entity::STORE_ID:           { ((Store*)owner())->addVehicleSlot(this); break; }
+        case type::entity::ANGAR_ID:             { ((Angar*)owner())->AddVehicleSlot(this); break; }
     }
 }

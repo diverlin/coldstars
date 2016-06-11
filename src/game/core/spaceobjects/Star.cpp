@@ -42,7 +42,7 @@ m_SparkGrows(false),
 m_TurnSinceLastSparkCounter(0)
 { 
     setId(id);
-    setTypeId(type::ENTITY::STAR_ID);
+    setTypeId(type::entity::STAR_ID);
 
     m_TurnSparkThreshold = meti::getRandInt(STARSPAK_TURN_THRESHOLD_MIN, STARSPAK_TURN_THRESHOLD_MAX);
 }

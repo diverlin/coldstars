@@ -36,9 +36,9 @@ std::string Base::dataTypeStr() const
 {
     std::string text;
     text += "id = (" + std::to_string(id());
-    text += " | " + str(typeId());
-    text += " | " + str(subTypeId());
-    text += " | " + str(subSubTypeId()) + " )";
+    text += " | " + str(type());
+    text += " | " + str(subtype());
+    text += " | " + str(subsubtype()) + " )";
     return text;
 }
 
@@ -57,9 +57,9 @@ void Base::LoadData(const boost::property_tree::ptree& load_ptree)
     LOG(" Base("+std::to_string(id())+")::LoadDataUniqueBase");
     
     m_data_id.id              = load_ptree.get<unsigned long int>("data_id.id");
-    m_data_id.type_id         = (type::ENTITY)load_ptree.get<int>("data_id.type_id");
-    m_data_id.subtype_id      = (type::ENTITY)load_ptree.get<int>("data_id.subtype_id");
-    m_data_id.subsubtype_id   = (type::ENTITY)load_ptree.get<int>("data_id.subsubtype_id");
+    m_data_id.type_id         = (type::entity)load_ptree.get<int>("data_id.type_id");
+    m_data_id.subtype_id      = (type::entity)load_ptree.get<int>("data_id.subtype_id");
+    m_data_id.subsubtype_id   = (type::entity)load_ptree.get<int>("data_id.subsubtype_id");
 }
 
 void Base::ResolveData()

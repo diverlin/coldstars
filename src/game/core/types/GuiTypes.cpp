@@ -78,58 +78,58 @@ std::string getGuiTypeStr(type::GUI type_id)
     }
 }
 
-type::GUI getGuiItemSlotType(type::ENTITY val)
+type::GUI getGuiItemSlotType(type::entity val)
 {
     switch(val)
     {
-        case type::ENTITY::CARGO_SLOT_ID:     { return type::GUI::CARGO_SLOT_ID; break; }
-        case type::ENTITY::CARGO_SLOT1_ID:    { return type::GUI::CARGO_SLOT1_ID; break; }
-        case type::ENTITY::CARGO_SLOT2_ID:    { return type::GUI::CARGO_SLOT2_ID; break; }
-        case type::ENTITY::CARGO_SLOT3_ID:    { return type::GUI::CARGO_SLOT3_ID; break; }
-        case type::ENTITY::CARGO_SLOT4_ID:    { return type::GUI::CARGO_SLOT4_ID; break; }
-        case type::ENTITY::CARGO_SLOT5_ID:    { return type::GUI::CARGO_SLOT5_ID; break; }
-        case type::ENTITY::CARGO_SLOT6_ID:    { return type::GUI::CARGO_SLOT6_ID; break; }
-        case type::ENTITY::CARGO_SLOT7_ID:    { return type::GUI::CARGO_SLOT7_ID; break; }
-        case type::ENTITY::CARGO_SLOT8_ID:    { return type::GUI::CARGO_SLOT8_ID; break; }
-        case type::ENTITY::CARGO_SLOT9_ID:    { return type::GUI::CARGO_SLOT9_ID; break; }
-        case type::ENTITY::CARGO_SLOT10_ID:   { return type::GUI::CARGO_SLOT10_ID; break; }
-        case type::ENTITY::CARGO_SLOT11_ID:   { return type::GUI::CARGO_SLOT11_ID; break; }
-        case type::ENTITY::CARGO_SLOT12_ID:   { return type::GUI::CARGO_SLOT12_ID; break; }
-        case type::ENTITY::CARGO_SLOT13_ID:   { return type::GUI::CARGO_SLOT13_ID; break; }
-        case type::ENTITY::CARGO_SLOT14_ID:   { return type::GUI::CARGO_SLOT14_ID; break; }
-        case type::ENTITY::CARGO_SLOT15_ID:   { return type::GUI::CARGO_SLOT15_ID; break; }
-        case type::ENTITY::CARGO_SLOT16_ID:   { return type::GUI::CARGO_SLOT16_ID; break; }
-        case type::ENTITY::CARGO_SLOT17_ID:   { return type::GUI::CARGO_SLOT17_ID; break; }
-        case type::ENTITY::CARGO_SLOT18_ID:   { return type::GUI::CARGO_SLOT18_ID; break; }
+        case type::entity::CARGO_SLOT_ID:     { return type::GUI::CARGO_SLOT_ID; break; }
+        case type::entity::CARGO_SLOT1_ID:    { return type::GUI::CARGO_SLOT1_ID; break; }
+        case type::entity::CARGO_SLOT2_ID:    { return type::GUI::CARGO_SLOT2_ID; break; }
+        case type::entity::CARGO_SLOT3_ID:    { return type::GUI::CARGO_SLOT3_ID; break; }
+        case type::entity::CARGO_SLOT4_ID:    { return type::GUI::CARGO_SLOT4_ID; break; }
+        case type::entity::CARGO_SLOT5_ID:    { return type::GUI::CARGO_SLOT5_ID; break; }
+        case type::entity::CARGO_SLOT6_ID:    { return type::GUI::CARGO_SLOT6_ID; break; }
+        case type::entity::CARGO_SLOT7_ID:    { return type::GUI::CARGO_SLOT7_ID; break; }
+        case type::entity::CARGO_SLOT8_ID:    { return type::GUI::CARGO_SLOT8_ID; break; }
+        case type::entity::CARGO_SLOT9_ID:    { return type::GUI::CARGO_SLOT9_ID; break; }
+        case type::entity::CARGO_SLOT10_ID:   { return type::GUI::CARGO_SLOT10_ID; break; }
+        case type::entity::CARGO_SLOT11_ID:   { return type::GUI::CARGO_SLOT11_ID; break; }
+        case type::entity::CARGO_SLOT12_ID:   { return type::GUI::CARGO_SLOT12_ID; break; }
+        case type::entity::CARGO_SLOT13_ID:   { return type::GUI::CARGO_SLOT13_ID; break; }
+        case type::entity::CARGO_SLOT14_ID:   { return type::GUI::CARGO_SLOT14_ID; break; }
+        case type::entity::CARGO_SLOT15_ID:   { return type::GUI::CARGO_SLOT15_ID; break; }
+        case type::entity::CARGO_SLOT16_ID:   { return type::GUI::CARGO_SLOT16_ID; break; }
+        case type::entity::CARGO_SLOT17_ID:   { return type::GUI::CARGO_SLOT17_ID; break; }
+        case type::entity::CARGO_SLOT18_ID:   { return type::GUI::CARGO_SLOT18_ID; break; }
 
-        case type::ENTITY::WEAPON_SLOT_ID:    { return type::GUI::WEAPON_SLOT_ID; break; }
-        case type::ENTITY::WEAPON_SLOT1_ID:   { return type::GUI::WEAPON_SLOT1_ID; break; }
-        case type::ENTITY::WEAPON_SLOT2_ID:   { return type::GUI::WEAPON_SLOT2_ID; break; }
-        case type::ENTITY::WEAPON_SLOT3_ID:   { return type::GUI::WEAPON_SLOT3_ID; break; }
-        case type::ENTITY::WEAPON_SLOT4_ID:   { return type::GUI::WEAPON_SLOT4_ID; break; }
-        case type::ENTITY::WEAPON_SLOT5_ID:   { return type::GUI::WEAPON_SLOT5_ID; break; }
-        case type::ENTITY::WEAPON_SLOT6_ID:   { return type::GUI::WEAPON_SLOT6_ID; break; }
-        case type::ENTITY::WEAPON_SLOT7_ID:   { return type::GUI::WEAPON_SLOT7_ID; break; }
-        case type::ENTITY::WEAPON_SLOT8_ID:   { return type::GUI::WEAPON_SLOT8_ID; break; }
-        case type::ENTITY::WEAPON_SLOT9_ID:   { return type::GUI::WEAPON_SLOT9_ID; break; }
+        case type::entity::WEAPON_SLOT_ID:    { return type::GUI::WEAPON_SLOT_ID; break; }
+        case type::entity::WEAPON_SLOT1_ID:   { return type::GUI::WEAPON_SLOT1_ID; break; }
+        case type::entity::WEAPON_SLOT2_ID:   { return type::GUI::WEAPON_SLOT2_ID; break; }
+        case type::entity::WEAPON_SLOT3_ID:   { return type::GUI::WEAPON_SLOT3_ID; break; }
+        case type::entity::WEAPON_SLOT4_ID:   { return type::GUI::WEAPON_SLOT4_ID; break; }
+        case type::entity::WEAPON_SLOT5_ID:   { return type::GUI::WEAPON_SLOT5_ID; break; }
+        case type::entity::WEAPON_SLOT6_ID:   { return type::GUI::WEAPON_SLOT6_ID; break; }
+        case type::entity::WEAPON_SLOT7_ID:   { return type::GUI::WEAPON_SLOT7_ID; break; }
+        case type::entity::WEAPON_SLOT8_ID:   { return type::GUI::WEAPON_SLOT8_ID; break; }
+        case type::entity::WEAPON_SLOT9_ID:   { return type::GUI::WEAPON_SLOT9_ID; break; }
 
-        case type::ENTITY::DRIVE_SLOT_ID:   { return type::GUI::DRIVE_SLOT_ID; break; }
-        case type::ENTITY::RADAR_SLOT_ID:   { return type::GUI::RADAR_SLOT_ID; break; }
-        case type::ENTITY::BAK_SLOT_ID:   { return type::GUI::BAK_SLOT_ID; break; }
-        case type::ENTITY::ENERGIZER_SLOT_ID:   { return type::GUI::ENERGIZER_SLOT_ID; break; }
-        case type::ENTITY::PROTECTOR_SLOT_ID:   { return type::GUI::PROTECTOR_SLOT_ID; break; }
-        case type::ENTITY::DROID_SLOT_ID:   { return type::GUI::DROID_SLOT_ID; break; }
-        case type::ENTITY::FREEZER_SLOT_ID:   { return type::GUI::FREEZER_SLOT_ID; break; }
-        case type::ENTITY::GRAPPLE_SLOT_ID:   { return type::GUI::GRAPPLE_SLOT_ID; break; }
-        case type::ENTITY::SCANER_SLOT_ID:   { return type::GUI::SCANER_SLOT_ID; break; }
+        case type::entity::DRIVE_SLOT_ID:   { return type::GUI::DRIVE_SLOT_ID; break; }
+        case type::entity::RADAR_SLOT_ID:   { return type::GUI::RADAR_SLOT_ID; break; }
+        case type::entity::BAK_SLOT_ID:   { return type::GUI::BAK_SLOT_ID; break; }
+        case type::entity::ENERGIZER_SLOT_ID:   { return type::GUI::ENERGIZER_SLOT_ID; break; }
+        case type::entity::PROTECTOR_SLOT_ID:   { return type::GUI::PROTECTOR_SLOT_ID; break; }
+        case type::entity::DROID_SLOT_ID:   { return type::GUI::DROID_SLOT_ID; break; }
+        case type::entity::FREEZER_SLOT_ID:   { return type::GUI::FREEZER_SLOT_ID; break; }
+        case type::entity::GRAPPLE_SLOT_ID:   { return type::GUI::GRAPPLE_SLOT_ID; break; }
+        case type::entity::SCANER_SLOT_ID:   { return type::GUI::SCANER_SLOT_ID; break; }
 
-        case type::ENTITY::ARTEFACT_SLOT_ID:   { return type::GUI::ARTEFACT_SLOT_ID; break; }
-        case type::ENTITY::ARTEFACT_SLOT1_ID:  { return type::GUI::ARTEFACT_SLOT1_ID; break; }
-        case type::ENTITY::ARTEFACT_SLOT2_ID:  { return type::GUI::ARTEFACT_SLOT2_ID; break; }
-        case type::ENTITY::ARTEFACT_SLOT3_ID:  { return type::GUI::ARTEFACT_SLOT3_ID; break; }
-        case type::ENTITY::ARTEFACT_SLOT4_ID:  { return type::GUI::ARTEFACT_SLOT4_ID; break; }
+        case type::entity::ARTEFACT_SLOT_ID:   { return type::GUI::ARTEFACT_SLOT_ID; break; }
+        case type::entity::ARTEFACT_SLOT1_ID:  { return type::GUI::ARTEFACT_SLOT1_ID; break; }
+        case type::entity::ARTEFACT_SLOT2_ID:  { return type::GUI::ARTEFACT_SLOT2_ID; break; }
+        case type::entity::ARTEFACT_SLOT3_ID:  { return type::GUI::ARTEFACT_SLOT3_ID; break; }
+        case type::entity::ARTEFACT_SLOT4_ID:  { return type::GUI::ARTEFACT_SLOT4_ID; break; }
 
-        case type::ENTITY::GATE_SLOT_ID:   { return type::GUI::GATE_SLOT_ID; break; }
+        case type::entity::GATE_SLOT_ID:   { return type::GUI::GATE_SLOT_ID; break; }
         //case TYPE::ENTITY::REPAIR_SLOT_ID:   { return TYPE::GUI::REPAIR_SLOT_ID; break; }
         //case TYPE::ENTITY::CHARGE_SLOT_ID:   { return TYPE::GUI::CHARGE_SLOT_ID; break; }
     }
@@ -137,29 +137,29 @@ type::GUI getGuiItemSlotType(type::ENTITY val)
     return type::GUI::NONE_ID;
 }
 
-type::GUI getGuiItemSlotSelectorType(type::ENTITY val)
+type::GUI getGuiItemSlotSelectorType(type::entity val)
 {
     switch(val)
     {
-        case type::ENTITY::WEAPON_SLOT1_ID:   { return type::GUI::WEAPON_SLOT1_SELECTOR_ID; break; }
-        case type::ENTITY::WEAPON_SLOT2_ID:   { return type::GUI::WEAPON_SLOT2_SELECTOR_ID; break; }
-        case type::ENTITY::WEAPON_SLOT3_ID:   { return type::GUI::WEAPON_SLOT3_SELECTOR_ID; break; }
-        case type::ENTITY::WEAPON_SLOT4_ID:   { return type::GUI::WEAPON_SLOT4_SELECTOR_ID; break; }
-        case type::ENTITY::WEAPON_SLOT5_ID:   { return type::GUI::WEAPON_SLOT5_SELECTOR_ID; break; }
-        case type::ENTITY::WEAPON_SLOT6_ID:   { return type::GUI::WEAPON_SLOT6_SELECTOR_ID; break; }
-        case type::ENTITY::WEAPON_SLOT7_ID:   { return type::GUI::WEAPON_SLOT7_SELECTOR_ID; break; }
-        case type::ENTITY::WEAPON_SLOT8_ID:   { return type::GUI::WEAPON_SLOT8_SELECTOR_ID; break; }
-        case type::ENTITY::WEAPON_SLOT9_ID:   { return type::GUI::WEAPON_SLOT9_SELECTOR_ID; break; }
+        case type::entity::WEAPON_SLOT1_ID:   { return type::GUI::WEAPON_SLOT1_SELECTOR_ID; break; }
+        case type::entity::WEAPON_SLOT2_ID:   { return type::GUI::WEAPON_SLOT2_SELECTOR_ID; break; }
+        case type::entity::WEAPON_SLOT3_ID:   { return type::GUI::WEAPON_SLOT3_SELECTOR_ID; break; }
+        case type::entity::WEAPON_SLOT4_ID:   { return type::GUI::WEAPON_SLOT4_SELECTOR_ID; break; }
+        case type::entity::WEAPON_SLOT5_ID:   { return type::GUI::WEAPON_SLOT5_SELECTOR_ID; break; }
+        case type::entity::WEAPON_SLOT6_ID:   { return type::GUI::WEAPON_SLOT6_SELECTOR_ID; break; }
+        case type::entity::WEAPON_SLOT7_ID:   { return type::GUI::WEAPON_SLOT7_SELECTOR_ID; break; }
+        case type::entity::WEAPON_SLOT8_ID:   { return type::GUI::WEAPON_SLOT8_SELECTOR_ID; break; }
+        case type::entity::WEAPON_SLOT9_ID:   { return type::GUI::WEAPON_SLOT9_SELECTOR_ID; break; }
 
-        case type::ENTITY::DRIVE_SLOT_ID:   { return type::GUI::DRIVE_SLOT_SELECTOR_ID; break; }
-        case type::ENTITY::RADAR_SLOT_ID:   { return type::GUI::RADAR_SLOT_SELECTOR_ID; break; }
-        case type::ENTITY::BAK_SLOT_ID:   { return type::GUI::BAK_SLOT_SELECTOR_ID; break; }
-        case type::ENTITY::ENERGIZER_SLOT_ID:   { return type::GUI::ENERGIZER_SLOT_SELECTOR_ID; break; }
-        case type::ENTITY::PROTECTOR_SLOT_ID:   { return type::GUI::PROTECTOR_SLOT_SELECTOR_ID; break; }
-        case type::ENTITY::DROID_SLOT_ID:   { return type::GUI::DROID_SLOT_SELECTOR_ID; break; }
-        case type::ENTITY::FREEZER_SLOT_ID:   { return type::GUI::FREEZER_SLOT_SELECTOR_ID; break; }
-        case type::ENTITY::GRAPPLE_SLOT_ID:   { return type::GUI::GRAPPLE_SLOT_SELECTOR_ID; break; }
-        case type::ENTITY::SCANER_SLOT_ID:   { return type::GUI::SCANER_SLOT_SELECTOR_ID; break; }
+        case type::entity::DRIVE_SLOT_ID:   { return type::GUI::DRIVE_SLOT_SELECTOR_ID; break; }
+        case type::entity::RADAR_SLOT_ID:   { return type::GUI::RADAR_SLOT_SELECTOR_ID; break; }
+        case type::entity::BAK_SLOT_ID:   { return type::GUI::BAK_SLOT_SELECTOR_ID; break; }
+        case type::entity::ENERGIZER_SLOT_ID:   { return type::GUI::ENERGIZER_SLOT_SELECTOR_ID; break; }
+        case type::entity::PROTECTOR_SLOT_ID:   { return type::GUI::PROTECTOR_SLOT_SELECTOR_ID; break; }
+        case type::entity::DROID_SLOT_ID:   { return type::GUI::DROID_SLOT_SELECTOR_ID; break; }
+        case type::entity::FREEZER_SLOT_ID:   { return type::GUI::FREEZER_SLOT_SELECTOR_ID; break; }
+        case type::entity::GRAPPLE_SLOT_ID:   { return type::GUI::GRAPPLE_SLOT_SELECTOR_ID; break; }
+        case type::entity::SCANER_SLOT_ID:   { return type::GUI::SCANER_SLOT_SELECTOR_ID; break; }
     }
 
     return type::GUI::NONE_ID;
