@@ -198,6 +198,8 @@ class Starsystem : public SpaceObject
         std::vector<Planet*> planets() const { return m_planets; }
         std::vector<Star*> stars() const { return m_stars; }
         std::vector<Vehicle*> vehicles() const { return m_vehicles; }
+        std::vector<Container*> containers() const { return m_containers; }
+
         Planet* closestInhabitedPlanet(const glm::vec2&) const;
         Planet* randomInhabitedPlanet() const;
         Planet* randomPlanet() const;

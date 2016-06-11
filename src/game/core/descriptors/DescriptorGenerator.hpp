@@ -37,6 +37,7 @@ private:
     static descriptor::Base getNewPlanetDescriptor();
     static descriptor::Base getNewAsteroidDescriptor();
     static descriptor::Base getNewVehicleDescriptor();
+    static descriptor::Base getNewContainerDescriptor();
 
     /* items */
     static descriptor::Base getNewBakDescriptor(int race = -1, int tech_level = -1);

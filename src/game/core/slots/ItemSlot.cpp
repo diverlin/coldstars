@@ -149,9 +149,10 @@ bool ItemSlot::insertItem(item::Base* item)
     // make it oop
     if (subtype() == type::entity::GATE_SLOT_ID)
     {
-        m_item = item;
-        dropItemToSpace();
-        return true;
+        // make a gate not be a slot
+        //m_item = item;
+        //dropItemToSpace();
+        return false;
     }
 
     if (subtype() == type::entity::CARGO_SLOT_ID)
@@ -342,22 +343,12 @@ int ItemSlot::itemDamage() const
     return 0;
 }
 
-void ItemSlot::dropItemToSpace()
+item::Base*
+ItemSlot::takeItem()
 {
-    //    jeti::TextureOb* textureOb_ = nullptr;
-
-    //    switch (m_Item->typeId())
-    //    {
-    //        case TYPE::ENTITY::BOMB_ID: { textureOb_ = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::BOMB_ID); break; }
-    //        default:                      { textureOb_ = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER_ID); break; }
-    //    }
-
-    //    Container* container = ContainerBuilder::Instance().GetNewContainer(textureOb_, m_Item);
-    //    float impulse_strength = 0.5;
-    //    glm::vec3 impulse_dir(meti::getRandXYVec3Unit());
-    //    container->addImpulse(impulse_dir, impulse_strength);
-    //    GetOwnerVehicle()->starsystem()->AddContainer(container, GetOwnerVehicle()->center());
-    //    RemoveItem();
+    item::Base* item = m_item;
+    removeItem();
+    return item;
 }
 
 bool ItemSlot::swapItem(ItemSlot* slot)

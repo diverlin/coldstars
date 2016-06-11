@@ -22,6 +22,8 @@
 
 #include <spaceobjects/Container.hpp>
 
+#include <descriptors/Base.hpp>
+#include <descriptors/DescriptorManager.hpp>
 #include <descriptors/Container.hpp>
 
 #include <slots/ItemSlot.hpp>
@@ -37,21 +39,38 @@ ContainerBuilder::ContainerBuilder()
 ContainerBuilder::~ContainerBuilder()
 {}
 
-Container* ContainerBuilder::getNew(const descriptor::Container& descriptor)
+Container*
+ContainerBuilder::getNew()
 {
-    Container* container = new Container;
-    assert(container);
-    global::get().entityManager().reg(container);
-    __createInternals(container, descriptor);
-    return container;
+    const auto& descriptor = global::get().descriptors().getRand(descriptor::Type::CONTAINER);
+    return getNew(descriptor);
 }
 
-Container* ContainerBuilder::getNew(const std::string& data)
+Container*
+ContainerBuilder::getNew(const std::string& data)
 {
     return getNew(descriptor::Container(data));
 }
 
-//Container* ContainerBuilder::create(jeti::TextureOb* textureOb, BaseItem* item) const
+Container*
+ContainerBuilder::getNew(const descriptor::Base& descriptor)
+{
+    Container* container = __getNewTemplate();
+    __createInternals(container, descriptor);
+    return container;
+}
+
+Container*
+ContainerBuilder::__getNewTemplate()
+{
+    Container* container = new Container;
+    assert(container);
+    global::get().entityManager().reg(container);
+    return container;
+}
+
+//Container*
+//ContainerBuilder::create(jeti::TextureOb* textureOb, BaseItem* item) const
 //{
 //    Container* container = createTemplate();
 //    createInternals(container, textureOb, item);
@@ -123,7 +142,8 @@ Container* ContainerBuilder::getNew(const std::string& data)
 //    container->itemSlot()->insertItem(item);
 //}
 
-void ContainerBuilder::__createInternals(Container* container, const descriptor::Container& descriptor)
+void
+ContainerBuilder::__createInternals(Container* container, const descriptor::Base& descriptor)
 {
     LifeData data_life;
     data_life.armor = 1;
@@ -134,10 +154,10 @@ void ContainerBuilder::__createInternals(Container* container, const descriptor:
     ItemSlot* item_slot = GetNewItemSlot(type::entity::CARGO_SLOT_ID);
     container->bindItemSlot(item_slot);
 
-    if (descriptor.child() >= 0) {
-        item::Base* item = static_cast<item::Base*>(global::get().entityManager().get(descriptor.child()));
-        item_slot->insertItem(item);
-    }
+//    if (descriptor.child() >= 0) {
+//        item::Base* item = static_cast<item::Base*>(global::get().entityManager().get(descriptor.child()));
+//        item_slot->insertItem(item);
+//    }
 }
 
 

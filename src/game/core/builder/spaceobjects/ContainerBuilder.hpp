@@ -26,7 +26,8 @@
 class Container;
 
 namespace descriptor {
-class Container;
+//class Container;
+class Base;
 } // namespace descriptor
 
 //namespace jeti {
@@ -43,14 +44,16 @@ public:
     ContainerBuilder();
     ~ContainerBuilder();
 
+    static Container* getNew();
     static Container* getNew(const std::string& data);
-    static Container* getNew(const descriptor::Container&);
+    static Container* getNew(const descriptor::Base&);
     //        Container* create(jeti::TextureOb*, BaseItem*) const;
     //        Container* create(item::BaseItem*) const;
     //        Container* create(int mineral_ammount = 0) const;
 
 private:
-    static void __createInternals(Container*, const descriptor::Container&);
+    static Container* __getNewTemplate();
+    static void __createInternals(Container*, const descriptor::Base&);
     //        void createInternals(Container*, jeti::TextureOb*, BaseItem*) const;
     //        void createInternals(Container*, BaseItem*) const;
 }; 

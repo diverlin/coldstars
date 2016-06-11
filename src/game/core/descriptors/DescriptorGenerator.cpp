@@ -74,6 +74,13 @@ DescriptorGenerator::getNewAsteroidDescriptor()
 }
 
 descriptor::Base
+DescriptorGenerator::getNewContainerDescriptor()
+{
+    descriptor::Base descriptor(descriptor::Type::CONTAINER);
+    return descriptor;
+}
+
+descriptor::Base
 DescriptorGenerator::getNewVehicleDescriptor()
 {
     type::race race_id = (type::race)0;//meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));

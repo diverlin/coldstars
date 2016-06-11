@@ -29,27 +29,38 @@ ShipBuilder::ShipBuilder()
 ShipBuilder::~ShipBuilder()
 {}
 
-Ship* ShipBuilder::getNew()
+Ship*
+ShipBuilder::getNew()
 {
     const auto& descr = global::get().descriptors().getRand(descriptor::Type::VEHICLE);
     return getNew(descr);
 }
 
-Ship* ShipBuilder::getNew(const descriptor::Base& descr)
+Ship*
+ShipBuilder::getNew(const descriptor::Base& descr)
 {            
-    Ship* ship = new Ship(global::get().idGenerator().nextId());
-    assert(ship);
-    global::get().entityManager().reg(ship);
+    Ship* ship = __getNewTemplate();
     __createInternals(ship, descr);
     return ship;
 }
 
-Ship* ShipBuilder::getNew(const std::string& data)
+Ship*
+ShipBuilder::getNew(const std::string& data)
 {
     return getNew(descriptor::Base(data));
 }
 
-void ShipBuilder::__createInternals(Ship* ship, const descriptor::Base& descr)
+Ship*
+ShipBuilder::__getNewTemplate()
+{
+    Ship* ship = new Ship(global::get().idGenerator().nextId());
+    assert(ship);
+    global::get().entityManager().reg(ship);
+    return ship;
+}
+
+void
+ShipBuilder::__createInternals(Ship* ship, const descriptor::Base& descr)
 {
     //jeti::Mesh* mesh = nullptr;
     //jeti::TextureOb* texOb = nullptr;

@@ -155,7 +155,7 @@ void Starsystem::createGroupAndShareTask(Npc* npc_leader, Starsystem* target_sta
     }
 }
 
-void Starsystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& center, const glm::vec3& dir)
+void Starsystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& position, const glm::vec3& dir)
 {
     //LOG(" StarSystem(" + std::to_string(id()) + ")::__addVehicleCommon(" + std::to_string(vehicle->id())+")");
 
@@ -169,7 +169,7 @@ void Starsystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& center, c
     vehicle->setPlaceTypeId(type::place::KOSMOS);
     vehicle->setStarSystem(this);
 
-    vehicle->setPosition(center);
+    vehicle->setPosition(position);
     vehicle->setDirection(dir);
     // vehicle->updateOrientation(); // remove bad logic
 
@@ -177,28 +177,28 @@ void Starsystem::__addVehicleCommon(Vehicle* vehicle, const glm::vec3& center, c
     m_vehicles.push_back(vehicle);
 }
 
-void Starsystem::add(Ship* ship, const glm::vec3& center, const glm::vec3& dir)
+void Starsystem::add(Ship* ship, const glm::vec3& position, const glm::vec3& dir)
 {
-    __addVehicleCommon(ship, center, dir);
+    __addVehicleCommon(ship, position, dir);
 }
 
-void Starsystem::add(Satellite* satellite, const glm::vec3& center, const glm::vec3& dir, const SpaceObject* const parent)
+void Starsystem::add(Satellite* satellite, const glm::vec3& position, const glm::vec3& dir, const SpaceObject* const parent)
 {
-    __addVehicleCommon(satellite, center, dir);
+    __addVehicleCommon(satellite, position, dir);
     satellite->BindParent(parent);
 }
 
-void Starsystem::add(SpaceStation* spacestation, const glm::vec3& center, const glm::vec3& dir)
+void Starsystem::add(SpaceStation* spacestation, const glm::vec3& position, const glm::vec3& dir)
 {
-    __addVehicleCommon(spacestation, center, dir);
+    __addVehicleCommon(spacestation, position, dir);
 }
 
-void Starsystem::add(RocketBullet* rocket, const glm::vec3& center, const glm::vec3& dir)
+void Starsystem::add(RocketBullet* rocket, const glm::vec3& position, const glm::vec3& dir)
 {
     rocket->setPlaceTypeId(type::place::KOSMOS);
     rocket->setStarSystem(this);
 
-    rocket->setPosition(center);
+    rocket->setPosition(position);
     rocket->setDirection(dir);
     //rocket->updateOrientation();
 

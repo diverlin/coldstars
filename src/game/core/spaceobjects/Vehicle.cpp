@@ -21,6 +21,8 @@
 #include <spaceobjects/SpaceStation.hpp>
 #include <spaceobjects/Container.hpp>
 
+#include <builder/spaceobjects/ContainerBuilder.hpp>
+
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
 #include <managers/EntityManager.hpp>
@@ -675,7 +677,7 @@ void Vehicle::_postDeathUniqueEvent(bool show_effect)
     int num_items = meti::getRandInt(0, 3);
     for (int i = 0; i<num_items; i++)
     {
-        __dropRandomItemToSpace();
+        //__dropRandomItemToSpace();
     }
     
     if (show_effect == true)
@@ -1285,27 +1287,48 @@ STATUS Vehicle::CheckGrabStatus() const
     return status;
 }
 
-void Vehicle::dropItemToSpace(const type::entity& type)
+bool Vehicle::dropItemToSpace(const type::entity& type)
 {
+    if (placeTypeId() != type::place::KOSMOS)
+        return false;
+
     for (ItemSlot* slot: m_slots) {
         if (slot->subtype() == type && slot->item()) {
-            slot->dropItemToSpace();
+            item::Base* item = slot->takeItem();
+            Container* container = __wrapItemToContainer(item);
+            //    float impulse_strength = 0.5;
+            //    glm::vec3 impulse_dir(meti::getRandXYVec3Unit());
+            //    container->addImpulse(impulse_dir, impulse_strength);
+
+            starsystem()->add(container, position());
+            return true;
         }
     }
+
+    return false;
 }
 
-void Vehicle::__dropRandomItemToSpace()
+Container*
+Vehicle::__wrapItemToContainer(item::Base* item)
 {
-    std::vector<ItemSlot*> _equiped_slot_vec;    
-    for (ItemSlot* slot: m_slots) {
-        if (slot->item()) {
-            _equiped_slot_vec.push_back(slot);
-        }
-    }    
-    if (_equiped_slot_vec.size() > 0) {
-        _equiped_slot_vec[meti::getRandInt(0, _equiped_slot_vec.size()-1)]->dropItemToSpace();
-    }
+    Container* container = ContainerBuilder::getNew();
+    container->insertItem(item);
+
+    return container;
 }
+
+//void Vehicle::__dropRandomItemToSpace()
+//{
+//    std::vector<ItemSlot*> _equiped_slot_vec;
+//    for (ItemSlot* slot: m_slots) {
+//        if (slot->item()) {
+//            _equiped_slot_vec.push_back(slot);
+//        }
+//    }
+//    if (_equiped_slot_vec.size() > 0) {
+//        _equiped_slot_vec[meti::getRandInt(0, _equiped_slot_vec.size()-1)]->dropItemToSpace();
+//    }
+//}
 
 void Vehicle::UpdateGrappleMicroProgram_inDynamic()
 {
@@ -1442,36 +1465,26 @@ void Vehicle::ResolveData()
     m_weaponComplex.PrepareWeapons();
 }
 
-void Vehicle::TEST_DamageAndLockRandItems()
-{
-    int rand_index1 = meti::getRandInt(0, m_equipmentSlots.size()-1);
-    while (m_equipmentSlots[rand_index1]->item() == nullptr)
-    {
-        rand_index1 = meti::getRandInt(0, m_equipmentSlots.size()-1);
-    }
-    m_equipmentSlots[rand_index1]->item()->doLock(3);
+//void Vehicle::TEST_DamageAndLockRandItems()
+//{
+//    int rand_index1 = meti::getRandInt(0, m_equipmentSlots.size()-1);
+//    while (m_equipmentSlots[rand_index1]->item() == nullptr)
+//    {
+//        rand_index1 = meti::getRandInt(0, m_equipmentSlots.size()-1);
+//    }
+//    m_equipmentSlots[rand_index1]->item()->doLock(3);
 
-    int rand_index2 = meti::getRandInt(0, m_equipmentSlots.size()-1);
-    while (m_equipmentSlots[rand_index2]->item() == nullptr)
-    {
-        rand_index2 = meti::getRandInt(0, m_equipmentSlots.size()-1);
-    }
+//    int rand_index2 = meti::getRandInt(0, m_equipmentSlots.size()-1);
+//    while (m_equipmentSlots[rand_index2]->item() == nullptr)
+//    {
+//        rand_index2 = meti::getRandInt(0, m_equipmentSlots.size()-1);
+//    }
     
-    while (m_equipmentSlots[rand_index2]->item()->condition() > 0)
-    {
-        m_equipmentSlots[rand_index2]->item()->deteriorationEvent();
-    }
-}
-
-void Vehicle::TEST_DropRandomItemToSpace()
-{
-    __dropRandomItemToSpace();
-}
-
-
-
-
-
+//    while (m_equipmentSlots[rand_index2]->item()->condition() > 0)
+//    {
+//        m_equipmentSlots[rand_index2]->item()->deteriorationEvent();
+//    }
+//}
 
 std::string getVehicleSpecialActionStr(VEHICLE_SPECIAL_ACTION_TYPE type_id)
 {
