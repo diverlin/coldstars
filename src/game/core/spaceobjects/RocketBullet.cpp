@@ -101,7 +101,7 @@ bool RocketBullet::CheckTarget() const
 {
     if (m_Target->isAlive() == true)
     {
-        if (m_Target->placeTypeId() == type::place::KOSMOS)
+        if (m_Target->place() == type::place::KOSMOS)
         {
             if (m_Target->starsystem()->id() == starsystem()->id())
             {

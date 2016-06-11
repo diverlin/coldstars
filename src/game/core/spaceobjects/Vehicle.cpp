@@ -177,7 +177,7 @@ void Vehicle::addItemSlot(ItemSlot* slot)
 
         slot->turrel()->setParentPosition(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
         points().Add(slot->turrel()->pPosition(), slot->turrel()->pParentPosition());
-        m_weaponComplex.AddSlot(slot);
+        m_weaponComplex.addSlot(slot);
 
         break;
     }
@@ -250,11 +250,11 @@ bool Vehicle::_manageFunctionEquipment(item::Base* item)
 {
     if (item->parentSubTypeId() == type::entity::WEAPON_SLOT_ID)
     {
-        ItemSlot* item_slot = m_weaponComplex.GetEmptyWeaponSlot();
+        ItemSlot* item_slot = m_weaponComplex.freeSlot();
         if (item_slot != nullptr) {
             return item_slot->swapItem(item->itemSlot());
         } else {
-            ItemSlot* item_slot = m_weaponComplex.GetEquipedWeakestWeaponSlot();
+            ItemSlot* item_slot = m_weaponComplex.equipedWeakestSlot();
             if (item_slot != nullptr) {
                 if (item->price() > item_slot->item()->price()) {
                     return item_slot->swapItem(item->itemSlot());
@@ -535,7 +535,7 @@ void Vehicle::HyperJumpEvent(Starsystem* starsystem)
 {
     //LOG("Vehicle("+std::to_string(id())+")::HyperJumpEvent");
     
-    m_weaponComplex.DeactivateAllWeapons();
+    m_weaponComplex.deactivateWeapons();
     
     m_specialActionId = VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID;
     starsystem->hyperSpace().AddVehicle(this);
@@ -546,7 +546,7 @@ void Vehicle::DockingEvent()
 {
     //LOG("Vehicle("+std::to_string(id())+")::DockingEvent");
 
-    m_weaponComplex.DeactivateAllWeapons();
+    m_weaponComplex.deactivateWeapons();
 
     switch(m_driveComplex.GetTarget()->type())
     {
@@ -840,10 +840,9 @@ void Vehicle::_updatePropFire()
 {
     //LOG("Vehicle("+std::to_string(id())+")::UpdatePropertiesFire");
     
-    m_weaponComplex.UpdateFireAbility();
+    m_weaponComplex.updateFireAbility();
 
-    m_properties.total_damage = m_weaponComplex.GetTotalDamage();
-    m_properties.total_radius = m_weaponComplex.GetTotalRadius();
+    m_properties.total_damage = m_weaponComplex.damage();
 }
 
 void Vehicle::_updatePropRadar()
@@ -1289,7 +1288,7 @@ STATUS Vehicle::CheckGrabStatus() const
 
 bool Vehicle::dropItemToSpace(const type::entity& type)
 {
-    if (placeTypeId() != type::place::KOSMOS)
+    if (place() != type::place::KOSMOS)
         return false;
 
     for (ItemSlot* slot: m_slots) {
@@ -1376,7 +1375,7 @@ void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::strin
     if (m_parentVehicleSlot != nullptr) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", m_parentVehicleSlot->id()); }
     else                                     { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }
 
-    if (placeTypeId() == type::place::HYPER)
+    if (place() == type::place::HYPER)
     {
         save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", m_driveComplex.GetTarget()->id());
     }
@@ -1432,7 +1431,7 @@ void Vehicle::ResolveData()
         setLand( (Land*)global::get().entityManager().get(data_unresolved_Vehicle.land_id) );
     }
 
-    switch(placeTypeId())
+    switch(place())
     {
     case type::place::KOSMOS:
     {
@@ -1462,7 +1461,7 @@ void Vehicle::ResolveData()
     }
     }
     
-    m_weaponComplex.PrepareWeapons();
+    m_weaponComplex.prepareWeapons();
 }
 
 //void Vehicle::TEST_DamageAndLockRandItems()

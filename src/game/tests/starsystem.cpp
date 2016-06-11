@@ -73,8 +73,11 @@ TEST(creation, starsystem)
     EXPECT_EQ(starsystem->planets().size(), 1);
     EXPECT_EQ(starsystem->vehicles().size(), 1);
 
-    EXPECT_EQ(starsystem->vehicles()[0]->position(), pos);
-    EXPECT_EQ(starsystem->vehicles()[0]->direction(), dir);
+    assert(starsystem->vehicles()[0]);
+    Vehicle* vehicle = starsystem->vehicles()[0];
+    EXPECT_EQ(vehicle, ship);
+    EXPECT_EQ(vehicle->position(), pos);
+    EXPECT_EQ(vehicle->direction(), dir);
 }
 
 TEST(ship, drop_item)
@@ -89,9 +92,9 @@ TEST(ship, drop_item)
     // add ship
     glm::vec3 pos(100.0f);
     glm::vec3 dir(0.0f, 1.0f, 0.0f);
-    EXPECT_EQ(ship->placeTypeId(), type::place::NONE);
+    EXPECT_EQ(ship->place(), type::place::NONE);
     starsystem->add(ship, pos, dir);
-    EXPECT_EQ(ship->placeTypeId(), type::place::KOSMOS);
+    EXPECT_EQ(ship->place(), type::place::KOSMOS);
 
     // drop item
     EXPECT_EQ(starsystem->containers().size(), 0);
@@ -100,7 +103,7 @@ TEST(ship, drop_item)
     assert(starsystem->containers()[0]);
     Container* container = starsystem->containers()[0];
     EXPECT_EQ(container->position(), pos);
-    EXPECT_EQ(container->placeTypeId(), type::place::KOSMOS);
+    EXPECT_EQ(container->place(), type::place::KOSMOS);
     EXPECT_EQ(container->itemSlot()->item(), drive);
 }
 
