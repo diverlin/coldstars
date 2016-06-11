@@ -112,7 +112,7 @@ void Npc::UpdateInSpaceInStatic()
     //LOG("Npc("+std::to_string(id())+")::UpdateInSpaceInStatic START");
 
     vehicle->UpdateAllFunctionalItemsInStatic();
-    vehicle->weaponComplex().PrepareWeapons();
+    vehicle->weaponComplex().prepareWeapons();
 
     if (player == nullptr)
     {
@@ -193,10 +193,10 @@ void Npc::ScenarioFireVehicleAgressor()
         {
             if (observation.visible_VEHICLE_pair_vec[i].object->npc()->id() == it->npc_id)
             {
-                vehicle->weaponComplex().DeactivateAllWeapons();
+                vehicle->weaponComplex().deactivateWeapons();
 
-                vehicle->weaponComplex().ActivateAllWeapons();
-                vehicle->weaponComplex().SetTarget(observation.visible_VEHICLE_pair_vec[i].object);
+                vehicle->weaponComplex().activateWeapons();
+                vehicle->weaponComplex().setTarget(observation.visible_VEHICLE_pair_vec[i].object);
 
                 return;
             }
@@ -206,10 +206,10 @@ void Npc::ScenarioFireVehicleAgressor()
 
 void Npc::ScenarioFireAsteroid()
 {
-    vehicle->weaponComplex().DeactivateAllWeapons();
+    vehicle->weaponComplex().deactivateWeapons();
 
-    vehicle->weaponComplex().ActivateAllWeapons();
-    vehicle->weaponComplex().SetTarget(observation.visible_ASTEROID_pair_vec[0].object);
+    vehicle->weaponComplex().activateWeapons();
+    vehicle->weaponComplex().setTarget(observation.visible_ASTEROID_pair_vec[0].object);
 }
 
 Planet* Npc::GetPlanetForDocking()

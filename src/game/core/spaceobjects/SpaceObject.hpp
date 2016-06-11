@@ -49,7 +49,7 @@ class SpaceObject : public ceti::Orientation, public Base
         void setParent(const SpaceObject* const parent) { m_parent = parent; }
 
         Starsystem* starsystem()  const { return m_starsystem; }
-        type::place placeTypeId() const { return m_placeTypeId; }
+        type::place place() const { return m_placeTypeId; }
 
         virtual int givenExpirience() const { return m_expirienceToGive; }  // !!!
  

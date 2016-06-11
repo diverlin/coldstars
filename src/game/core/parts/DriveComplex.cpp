@@ -132,7 +132,7 @@ void DriveComplex::DefineDistance()
 
         case NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID:
         {
-            int weapon_radius_min = m_ownerVehicle->weaponComplex().GetRadiusMin();
+            int weapon_radius_min = m_ownerVehicle->weaponComplex().radiusMin();
             if (weapon_radius_min < 10) // in some cases case thee the bug (HACK)
             {
                 m_TargetDistance = 150;                
@@ -195,7 +195,7 @@ bool DriveComplex::ValidateTarget() const
 {
     if (m_target->isAlive() == true)
     {
-        if (m_target->placeTypeId() == type::place::KOSMOS)
+        if (m_target->place() == type::place::KOSMOS)
         {
             return true;
         }

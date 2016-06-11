@@ -458,7 +458,7 @@ bool ItemSlot::isTargetAlive(SpaceObject* target) const
 
 bool ItemSlot::isTargetInSpace(SpaceObject* target) const
 {
-    return (target->placeTypeId() == type::place::KOSMOS);
+    return (target->place() == type::place::KOSMOS);
 }               
 
 bool ItemSlot::isTargetInSameStarSystem(SpaceObject* target) const

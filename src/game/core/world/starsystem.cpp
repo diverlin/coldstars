@@ -896,10 +896,8 @@ void Starsystem::__shipManager_s(unsigned int num)
 
 void Starsystem::__manageUnavaliableObjects_s()
 {               
-    for (std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it)
-    {
-        if ((*it)->placeTypeId() != type::place::KOSMOS)
-        {
+    for (std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
+        if ((*it)->place() != type::place::KOSMOS) {
             LOG("starsysten("+std::to_string(id())+ ")::RemoveVehicle(" + std::to_string((*it)->id())+")");
             it = m_vehicles.erase(it);
         }
@@ -908,46 +906,36 @@ void Starsystem::__manageUnavaliableObjects_s()
 
 void Starsystem::__manageDeadObjects_s()
 {      
-    for(std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it)
-    {
-        if ((*it)->isReadyForGarbage() == true)
-        {
+    for(std::vector<Vehicle*>::iterator it=m_vehicles.begin(); it<m_vehicles.end(); ++it) {
+        if ((*it)->isReadyForGarbage() == true) {
             global::get().entityManager().addToGarbage(*it);
             it = m_vehicles.erase(it);
         }
     }
 
-    for(std::vector<BlackHole*>::iterator it=m_blackholes.begin(); it<m_blackholes.end(); ++it)
-    {
-        if ((*it)->isReadyForGarbage() == true)
-        {
+    for(std::vector<BlackHole*>::iterator it=m_blackholes.begin(); it<m_blackholes.end(); ++it) {
+        if ((*it)->isReadyForGarbage() == true) {
             global::get().entityManager().addToGarbage(*it);
             it = m_blackholes.erase(it);
         }
     }
 
-    for(std::vector<Asteroid*>::iterator it=m_asteroids.begin(); it<m_asteroids.end(); ++it)
-    {
-        if ((*it)->isReadyForGarbage() == true)
-        {
+    for(std::vector<Asteroid*>::iterator it=m_asteroids.begin(); it<m_asteroids.end(); ++it) {
+        if ((*it)->isReadyForGarbage() == true) {
             global::get().entityManager().addToGarbage(*it);
             it = m_asteroids.erase(it);
         }
     }
 
-    for(std::vector<Container*>::iterator it=m_containers.begin(); it<m_containers.end(); ++it)
-    {
-        if ((*it)->isReadyForGarbage() == true)
-        {
+    for(std::vector<Container*>::iterator it=m_containers.begin(); it<m_containers.end(); ++it) {
+        if ((*it)->isReadyForGarbage() == true) {
             global::get().entityManager().addToGarbage(*it);
             it = m_containers.erase(it);
         }
     }
 
-    for(std::vector<RocketBullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it)
-    {
-        if ((*it)->isReadyForGarbage() == true)
-        {
+    for(std::vector<RocketBullet*>::iterator it=m_bullets.begin(); it<m_bullets.end(); ++it) {
+        if ((*it)->isReadyForGarbage() == true) {
             global::get().entityManager().addToGarbage(*it);
             it = m_bullets.erase(it);
         }
@@ -1002,8 +990,8 @@ void Starsystem::__manageDeadObjects_s()
 
 void Starsystem::bombExplosionEvent(Container* container, bool show_effect)
 {
-    float radius = ((Bomb*)container->itemSlot()->item())->radius();
-    float damage = ((Bomb*)container->itemSlot()->item())->damage();
+    float radius = container->itemSlot()->item()->radius();
+    float damage = container->itemSlot()->item()->damage();
     glm::vec3 center(container->position());
     
     //jeti::ExplosionEffect* explosion = jeti::getNewExplosionEffect(radius);

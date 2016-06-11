@@ -53,7 +53,6 @@ struct VehiclePropetries
     bool hibernate_mode_enabled = 0;
 
     int total_damage = 0;
-    int total_radius = 0;
         
     VehiclePropetries()
     {}

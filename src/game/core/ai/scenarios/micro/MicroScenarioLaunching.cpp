@@ -41,7 +41,7 @@ void MicroScenarioLaunching::Enter(Npc* npc) const
 /* virtual */
 bool MicroScenarioLaunching::Validate(Npc* npc) const
 {
-    if (npc->GetVehicle()->placeTypeId() != type::place::KOSMOS)
+    if (npc->GetVehicle()->place() != type::place::KOSMOS)
     {
         return true;
     }

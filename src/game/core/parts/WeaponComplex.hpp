@@ -17,8 +17,7 @@
 */
 
 
-#ifndef WEAPONCOMPLEX_HPP
-#define WEAPONCOMPLEX_HPP
+#pragma once
 
 #include <vector>
 #include <types/EntityTypes.hpp>
@@ -29,57 +28,56 @@ namespace item {
 class Base;
 }
 class SpaceObject;
-class TextureOb;
+//class TextureOb;
 
 
 class WeaponComplex
 {
-    public:
-        WeaponComplex(Vehicle* owner_vehicle);
-        ~WeaponComplex();
+public:
+    WeaponComplex(Vehicle* owner_vehicle);
+    ~WeaponComplex();
 
-        int GetRadiusMin() const { return radius_min; }
-        int GetTotalRadius() const { return total_radius; }
-        int GetTotalDamage() const { return total_damage; }
-       
-        bool AddSlot(ItemSlot*);
-        ItemSlot* GetEmptyWeaponSlot() const;
-        ItemSlot* GetEquipedWeakestWeaponSlot() const;
+    int radiusMin() const { return m_radiusMin; }
+    int radiusMax() const { return m_radiusMax; }
+    int damage() const { return m_damage; }
+
+    bool addSlot(ItemSlot*);
+    ItemSlot* freeSlot() const;
+    ItemSlot* equipedWeakestSlot() const;
     
-        void PrepareWeapons();
-             
-        void SetTarget(SpaceObject*, ItemSlot* item_slot = nullptr);     
-                   
-        void Fire(int, float, bool);
-        
-        void ActivateAllWeapons();
-        void DeactivateAllWeapons();
-        void ActivateWeaponsBySubTypeId(type::entity);
-        void DeactivateWeaponsBySubTypeId(type::entity);
+    void prepareWeapons();
 
-        bool IsAnyWeaponSelected() const; 
-        
-        void UpdateFireAbility();
-        
-        void RenderWeaponIcons() const;
-        void RenderWeaponsRange();
-        
-        void RenderTurrels() const;
-            
-    private:
-        int total_damage = 0;
-        int total_radius = 0;
-        int radius_min = 0;
-        
-        Vehicle* owner_vehicle = nullptr;
-        
-        int fire_delay = 0, d_fire_delay = 0;
-        std::vector<ItemSlot*> slot_weapon_vec;
-        std::vector<ItemSlot*> slot_weapon_reloaded_vec;
+    void setTarget(SpaceObject*, ItemSlot* item_slot = nullptr);
 
-        void ReloadAllWeapons();  
-        void ValidateAllWeaponsTarget();              
+    void Fire(int, float, bool);
+
+    void activateWeapons();
+    void deactivateWeapons();
+    void activateWeapons(const type::entity&);
+    void deactivateWeapons(const type::entity&);
+
+    bool isAnyWeaponSelected() const;
+
+    void updateFireAbility();
+
+//    void RenderWeaponIcons() const;
+//    void RenderWeaponsRange();
+
+//    void RenderTurrels() const;
+
+private:
+    int m_damage = 0;
+    int m_radiusMax = 0;
+    int m_radiusMin = 0;
+
+    Vehicle* owner_vehicle = nullptr;
+
+    int fire_delay = 0, d_fire_delay = 0;
+    std::vector<ItemSlot*> m_slots;
+    std::vector<ItemSlot*> m_slots_reloaded;
+
+    void __reloadAllWeapons();
+    void __validateAllWeaponsTarget();
 };
 
 
-#endif
