@@ -25,48 +25,53 @@
 
 class ItemSlot;
 
+namespace item {
+class Base;
+} // namespace item
+
 //namespace jeti {
 //class Renderer;
 //}
 
 class Container : public SpaceObject
 {
-    public:                  
-        Container(const id_type& id = NONE_ID);
-        virtual ~Container();
-        
-        void setTargetPos(const glm::vec3& target_pos, float velocity) { m_targetPos = target_pos; m_velocity = velocity; }
-        void bindItemSlot(ItemSlot*);
-        
-        ItemSlot* const itemSlot() const { return m_itemSlot; }
+public:
+    Container(const id_type& id = NONE_ID);
+    virtual ~Container();
 
-//        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
-        
-        virtual void _postDeathUniqueEvent(bool) override final;
-            
-        void updateInSpace(int, bool);
+    void setTargetPos(const glm::vec3& target_pos, float velocity) { m_targetPos = target_pos; m_velocity = velocity; }
+    void bindItemSlot(ItemSlot*);
 
-        void hit(int damage) override final;
+    ItemSlot* const itemSlot() const { return m_itemSlot; }
+    bool insertItem(item::Base*);
 
-//        void Render(const jeti::Renderer&);
-                            
-        virtual void Save(boost::property_tree::ptree&) const override final;
-        virtual void Load(const boost::property_tree::ptree&) override final;
-        virtual void Resolve() override final;
-        
-    private:
-        ItemSlot* m_itemSlot = nullptr;
-        
-        glm::vec3 m_targetPos;
-        float m_velocity = 0.0f;
+    //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
 
-//        virtual void UpdateInfo() override final;
-         
-        virtual void putChildrenToGarbage() const override final;
-                        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+    virtual void _postDeathUniqueEvent(bool) override final;
+
+    void updateInSpace(int, bool);
+
+    void hit(int damage) override final;
+
+    //        void Render(const jeti::Renderer&);
+
+    virtual void Save(boost::property_tree::ptree&) const override final;
+    virtual void Load(const boost::property_tree::ptree&) override final;
+    virtual void Resolve() override final;
+
+private:
+    ItemSlot* m_itemSlot = nullptr;
+
+    glm::vec3 m_targetPos;
+    float m_velocity = 0.0f;
+
+    //        virtual void UpdateInfo() override final;
+
+    virtual void putChildrenToGarbage() const override final;
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 };
 
 

@@ -153,7 +153,7 @@ public:
     void ResolveNeedsInKosmoportInStatic();
     void UpdateAllFunctionalItemsInStatic();
 
-    void dropItemToSpace(const type::entity&);
+    bool dropItemToSpace(const type::entity&);
 
 protected:
     void _increaseMass(int);
@@ -202,9 +202,6 @@ public:
     bool tryGenerateEnergy(int);
 
     STATUS CheckGrabStatus() const;
-
-    void TEST_DamageAndLockRandItems();
-    void TEST_DropRandomItemToSpace();
 
     float dissipateRate() const;
     int criticalDamage() const;
@@ -277,8 +274,10 @@ private:
     VehicleDescriptor m_vehicleDescriptor;
 
     [[deprecated("use predetermentistic way")]]
-    void __dropRandomItemToSpace();
+//    void __dropRandomItemToSpace();
     bool __mergeIdenticalGoods(item::Base*);
+
+    Container* __wrapItemToContainer(item::Base* item);
 
     friend class GuiVehicle;
     friend class GuiVehicle2;

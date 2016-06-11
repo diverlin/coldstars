@@ -147,7 +147,7 @@ public:
     //        void RenderMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*) const;
     //        void RenderTargetMark(const jeti::Renderer&, const ceti::Box2D&, jeti::TextureOb*, jeti::TextureOb*) const;
 
-    void dropItemToSpace();
+    item::Base* takeItem();
 
     bool swapItem(ItemSlot*);
 

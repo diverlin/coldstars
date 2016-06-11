@@ -24,8 +24,11 @@
 //#include <slots/ItemSlot.hpp>
 #include <world/starsystem.hpp>
 
+#include <slots/ItemSlot.hpp>
+
 #include <spaceobjects/Vehicle.hpp>
 #include <spaceobjects/Ship.hpp>
+#include <spaceobjects/Container.hpp>
 
 #include <builder/world/StarSystemBuilder.hpp>
 #include <builder/spaceobjects/StarBuilder.hpp>
@@ -79,13 +82,26 @@ TEST(ship, drop_item)
     Starsystem* starsystem = StarsystemBuilder::getNew();
     Ship* ship = ShipBuilder::getNew();
 
+    // equip ship
     item::equipment::Drive* drive = global::get().driveBuilder().getNew();
-
     ship->install(drive);
 
+    // add ship
+    glm::vec3 pos(100.0f);
+    glm::vec3 dir(0.0f, 1.0f, 0.0f);
+    EXPECT_EQ(ship->placeTypeId(), type::place::NONE);
+    starsystem->add(ship, pos, dir);
+    EXPECT_EQ(ship->placeTypeId(), type::place::KOSMOS);
 
-
-
+    // drop item
+    EXPECT_EQ(starsystem->containers().size(), 0);
+    EXPECT_TRUE(ship->dropItemToSpace(type::entity::DRIVE_SLOT_ID));
+    EXPECT_EQ(starsystem->containers().size(), 1);
+    assert(starsystem->containers()[0]);
+    Container* container = starsystem->containers()[0];
+    EXPECT_EQ(container->position(), pos);
+    EXPECT_EQ(container->placeTypeId(), type::place::KOSMOS);
+    EXPECT_EQ(container->itemSlot()->item(), drive);
 }
 
 

@@ -149,6 +149,7 @@ void DescriptorManager::generate()
         add(DescriptorGenerator::getNewVehicleDescriptor());
         add(DescriptorGenerator::getNewStarDescriptor());
         add(DescriptorGenerator::getNewPlanetDescriptor());
+        add(DescriptorGenerator::getNewContainerDescriptor());
         //add(DescriptorGenerator::getNewAsteroidDescriptor());
 
         // world

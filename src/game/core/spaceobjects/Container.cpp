@@ -53,6 +53,12 @@ void Container::putChildrenToGarbage() const
     global::get().entityManager().addToGarbage(m_itemSlot);
 }
 
+bool
+Container::insertItem(item::Base* item)
+{
+    return m_itemSlot->insertItem(item);
+}
+
 /* override final */
 void Container::hit(int damage) {
     SpaceObject::hit(damage);
