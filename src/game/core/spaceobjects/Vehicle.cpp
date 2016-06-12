@@ -217,66 +217,101 @@ bool Vehicle::grabItemsFromVehicle(Vehicle* vehicle)
             if (slot->subtype() == type::entity::CARGO_SLOT_ID) {
                 result = addItemToCargoSlot(slot->item());
             } else {
-                result = install(slot->item());
+                result = manage(slot->item());
             }
         }
     }    
     return result;
 }
 
-bool Vehicle::_manageItem(item::Base* item)
+bool Vehicle::_installItem(item::Base* item)
 {
-    switch(item->type())
-    {
-    case type::entity::EQUIPMENT_ID:    { return _manageFunctionEquipment(item); break; }
+    switch(item->type()) {
+    case type::entity::EQUIPMENT_ID:    { return _installEquipment(item); break; }
 #ifdef USE_MODULES
-    case TYPE::ENTITY::MODULE_ID:       { return ManageFunctionModule(item); break; }
+    case TYPE::ENTITY::MODULE_ID:       { return _installModule(item); break; }
 #endif
 #ifdef USE_ARTEFACTS
-    case TYPE::ENTITY::ARTEFACT_ID:     { return ManageFunctionArtefact(item); break; }
+    case TYPE::ENTITY::ARTEFACT_ID:     { return _installArtefact(item); break; }
 #endif
-    case type::entity::GOODS_ID:        { return _manageFunctionGoodsPack(item); break; }
+    case type::entity::GOODS_ID:        { return _installGoodsPack(item); break; } // what??
     }
-    
     return false;
 } 
 
-bool Vehicle::_manageFunctionGoodsPack(item::Base* item)
+bool Vehicle::checkManage(const type::entity& type)
+{
+    if (!isSlotExists(type)) {
+        return false;
+    }
+
+    switch(type) {
+    case type::entity::EQUIPMENT_ID:    { return _checkInstallEquipment(type); break; }
+//#ifdef USE_MODULES
+//    case TYPE::ENTITY::MODULE_ID:       { return _checkInstallModule(type); break; }
+//#endif
+//#ifdef USE_ARTEFACTS
+//    case TYPE::ENTITY::ARTEFACT_ID:     { return _checkInstallArtefact(type); break; }
+//#endif
+//    case type::entity::GOODS_ID:        { return _checkInstallGoodsPack(type); break; }
+    }
+    return false;
+}
+
+bool Vehicle::_installGoodsPack(item::Base* item)
 {
     return __mergeIdenticalGoods(item);
 }    
 
-bool Vehicle::_manageFunctionEquipment(item::Base* item)
+bool Vehicle::_installEquipment(item::Base* item)
 {
-    if (item->parentSubTypeId() == type::entity::WEAPON_SLOT_ID)
-    {
-        ItemSlot* item_slot = m_weaponComplex.freeSlot();
-        if (item_slot != nullptr) {
-            return item_slot->swapItem(item->itemSlot());
+    if (item->parentSubTypeId() == type::entity::WEAPON_SLOT_ID) {
+        ItemSlot* slot = m_weaponComplex.freeSlot();
+        if (slot) {
+            return slot->swapItem(item->slot());
         } else {
-            ItemSlot* item_slot = m_weaponComplex.equipedWeakestSlot();
-            if (item_slot != nullptr) {
-                if (item->price() > item_slot->item()->price()) {
-                    return item_slot->swapItem(item->itemSlot());
+            ItemSlot* slot = m_weaponComplex.equipedWeakestSlot();
+            if (slot) {
+                if (item->price() > slot->item()->price()) {
+                    return slot->swapItem(item->slot());
                 }
             }
         }
     } else {
-        ItemSlot* item_slot = _fuctionalSlot(item->parentSubTypeId());
-        if (item_slot->item() == nullptr) {
-            return item_slot->swapItem(item->itemSlot());
-        } else {
-            if (item->price() > item_slot->item()->price()) {
-                return item_slot->swapItem(item->itemSlot());
+        ItemSlot* slot = _functionalSlot(item->parentSubTypeId());
+        if (slot->item()) {
+            if (item->price() > slot->item()->price()) {
+                return slot->swapItem(item->slot());
             }
+        } else {
+            return slot->swapItem(item->slot());
         }
     }
     
     return false;
 }     
 
+bool Vehicle::_checkInstallEquipment(const type::entity& type)
+{
+    if (type == type::entity::WEAPON_SLOT_ID) {
+        if (m_weaponComplex.freeSlot()) {
+            return true;
+        }
+    } else {
+        if (_freeFunctionalSlot(type)) {
+            return true;
+        }
+    }
+
+    if (freeCargoSlot()) {
+        return true;
+    }
+
+    return false;
+}
+
 #ifdef USE_MODULES
-bool Vehicle::ManageFunctionModule(item::BaseItem* item)
+bool Vehicle::installModule(item::BaseItem* item)
 {
     for (unsigned int i=0; i<m_SlotFunct_vec.size(); i++) {
         if (m_SlotFunct_vec[i]->item()) {
@@ -290,11 +325,10 @@ bool Vehicle::ManageFunctionModule(item::BaseItem* item)
 #endif
 
 #ifdef EANBLE_ARTEFACTS
-bool Vehicle::ManageFunctionArtefact(item::BaseItem* item)
+bool Vehicle::installArtefact(item::BaseItem* item)
 {
     ItemSlot* artef_slot = GetEmptyArtefactSlot();
-    if (artef_slot != nullptr)
-    {
+    if (artef_slot) {
         return artef_slot->swapItem(item->itemSlot());
     }
 
@@ -302,7 +336,8 @@ bool Vehicle::ManageFunctionArtefact(item::BaseItem* item)
 }
 #endif
 
-ItemSlot* const Vehicle::_fuctionalSlot(type::entity functional_slot_subtype_id) const
+ItemSlot* const
+Vehicle::_functionalSlot(const type::entity& functional_slot_subtype_id) const
 {
     for(ItemSlot* slot: m_equipmentSlots) {
         if (slot->subtype() == functional_slot_subtype_id) {
@@ -312,7 +347,21 @@ ItemSlot* const Vehicle::_fuctionalSlot(type::entity functional_slot_subtype_id)
     return nullptr;
 }
 
-ItemSlot* const Vehicle::_freeArtefactSlot() const
+ItemSlot* const
+Vehicle::_freeFunctionalSlot(const type::entity& functional_slot_subtype_id) const
+{
+    for(ItemSlot* slot: m_equipmentSlots) {
+        if (slot->subtype() == functional_slot_subtype_id) {
+            if (slot->empty()) {
+                return slot;
+            }
+        }
+    }
+    return nullptr;
+}
+
+ItemSlot* const
+Vehicle::_freeArtefactSlot() const
 {
     for(ItemSlot* slot: m_artefactSlots) {
         if (!slot->item()) {
@@ -361,27 +410,25 @@ bool Vehicle::unpackContainerItemToCargoSlot(Container* container)
 bool Vehicle::addItemToCargoSlot(item::Base* item)
 {
     _increaseMass(item->mass());
-    if (item->type() == type::entity::GOODS_ID)
-    {
-        if (_manageFunctionGoodsPack(item) == true)
-        {
+    if (item->type() == type::entity::GOODS_ID) {
+        if (_installGoodsPack(item)) {
             return true;
         }
     }
     
-    ItemSlot* cargo_slot = freeCargoSlot();
-    if (cargo_slot != nullptr)
-    {
-        return cargo_slot->insertItem(item);
+    ItemSlot* slot = freeCargoSlot();
+    if (slot) {
+        return slot->insert(item);
     }
     
     return false;
 } 
 
-bool Vehicle::install(item::Base* item)
+bool
+Vehicle::manage(item::Base* item)
 {
     if (addItemToCargoSlot(item)) {
-        _manageItem(item);
+        _installItem(item);
         return true;
     }
     return false;
@@ -391,7 +438,7 @@ void Vehicle::manageItemsInCargo()
 {
     for (unsigned int i=0; i<m_cargoSlots.size(); i++) {
         if (m_cargoSlots[i]->item()) {
-            _manageItem(m_cargoSlots[i]->item());
+            _installItem(m_cargoSlots[i]->item());
         }
     }
 }

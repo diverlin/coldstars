@@ -27,8 +27,8 @@ class GoodsPack : public item::Base
         GoodsPack(int, type::entity);
         virtual ~GoodsPack();
         
-        void Increase(unsigned int amount) { m_data_item.mass += amount; }
-        void Decrease(unsigned int amount) { m_data_item.mass -= amount; }
+        void Increase(unsigned int amount) { m_data.mass += amount; }
+        void Decrease(unsigned int amount) { m_data.mass -= amount; }
 
         virtual void UpdateOwnerAbilities();
         

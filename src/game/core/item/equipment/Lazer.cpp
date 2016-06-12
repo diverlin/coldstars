@@ -80,8 +80,8 @@ void Lazer::CountPrice()
             EQUIPMENT::LAZER::RADIUS_WEIGHT * radius_rate +
             EQUIPMENT::LAZER::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)m_data_item.mass / EQUIPMENT::LAZER::MASS_MIN;
-    float condition_rate     = (float)m_condition / m_data_item.condition_max;
+    float mass_rate          = (float)m_data.mass / EQUIPMENT::LAZER::MASS_MIN;
+    float condition_rate     = (float)m_condition / m_data.condition_max;
 
     m_price                    = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
@@ -112,11 +112,11 @@ std::string Lazer::GetRadiusStr()
 
 void Lazer::FireEvent(SpaceObject* target, ItemSlot* subtarget, float damage_rate, bool show_effect)
 { 
-    if (itemSlot()->vehicleOwner()->tryConsumeEnergy(m_damage) == true)
+    if (slot()->vehicleOwner()->tryConsumeEnergy(m_damage) == true)
     {
         if (subtarget != nullptr) // precise fire
         {
-            if (meti::isActionShouldHappen(itemSlot()->hitProbability()) == true) {
+            if (meti::isActionShouldHappen(slot()->hitProbability()) == true) {
                 subtarget->item()->doLock(1);
             }
             damage_rate /= 3; // lower damage is used for precise fire

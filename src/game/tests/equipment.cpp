@@ -83,7 +83,7 @@ TEST(equipment, bak)
     EXPECT_EQ(ship->properties().hyper, 0);
 
     // insert item
-    ship->install(bak);
+    ship->manage(bak);
 
     // prop check
     EXPECT_TRUE(ship->driveComplex().bakSlot()->item() != nullptr);
@@ -105,7 +105,7 @@ TEST(equipment, drive)
     EXPECT_EQ(ship->properties().hyper, 0);
 
     // insert item
-    ship->install(drive);
+    ship->manage(drive);
 
     // prop check
     EXPECT_TRUE(ship->driveComplex().driveSlot()->item() != nullptr);
@@ -126,8 +126,8 @@ TEST(equipment, bak_and_drive)
     EXPECT_EQ(ship->properties().hyper, 0);
 
     // insert items
-    ship->install(bak);
-    ship->install(drive);
+    ship->manage(bak);
+    ship->manage(drive);
 
     // prop check
     int hyper = std::min(bak->fuel(), drive->hyper());
@@ -181,7 +181,7 @@ TEST(equipment, droid)
     EXPECT_EQ(ship->properties().repair, 0);
 
     // item insert
-    ship->install(droid);
+    ship->manage(droid);
     EXPECT_TRUE(ship->droidSlot()->item() != nullptr);
 
     // prop check
@@ -219,7 +219,7 @@ TEST(equipment, grapple)
     EXPECT_EQ(ship->properties().grab_radius, 0);
 
     // item insert
-    ship->install(grapple);
+    ship->manage(grapple);
     EXPECT_TRUE(ship->grappleSlot()->item() != nullptr);
 
     // prop check
@@ -261,7 +261,7 @@ TEST(equipment, scaner)
     EXPECT_EQ(ship->properties().scan, 0);
 
     // item insert
-    ship->install(scaner);
+    ship->manage(scaner);
     EXPECT_TRUE(ship->scanerSlot()->item() != nullptr);
 
     // prop check
@@ -298,7 +298,7 @@ TEST(equipment, radar)
     EXPECT_EQ(ship->properties().radar, VISIBLE_DISTANCE_WITHOUT_RADAR);
 
     // item insert
-    ship->install(radar);
+    ship->manage(radar);
     EXPECT_TRUE(ship->radarSlot()->item() != nullptr);
 
     // prop check
@@ -335,7 +335,7 @@ TEST(equipment, protector)
     EXPECT_EQ(ship->properties().protection, ship->vehicleDescriptor().protection);
 
     // item insert
-    ship->install(protector);
+    ship->manage(protector);
     EXPECT_TRUE(ship->protectorComplex().protectorSlot()->item() != nullptr);
 
     // prop check
@@ -375,7 +375,7 @@ TEST(equipment, freespace)
     int weight = 0;
     for (auto item: items) {
         weight += item->mass();
-        ship->install(item);
+        ship->manage(item);
     }
 
     // check space

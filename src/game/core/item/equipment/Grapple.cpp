@@ -114,10 +114,10 @@ void Grapple::UpdateGrabScenarioProgram_inDynamic()
 {                      
     for (std::vector<SpaceObject*>::iterator it = m_targets.begin(); it != m_targets.end(); ++it)
     {
-        Vehicle& vehicle = *itemSlot()->vehicleOwner(); // shortcut
+        Vehicle& vehicle = *slot()->vehicleOwner(); // shortcut
         SpaceObject& target = **it;
         
-        if (itemSlot()->checkTarget(&target) == STATUS::TARGET_OK)
+        if (slot()->checkTarget(&target) == STATUS::TARGET_OK)
         {
             glm::vec3 impulse_dir = glm::normalize(vehicle.position() - target.position());
 
@@ -222,8 +222,8 @@ void Grapple::CountPrice()
             EQUIPMENT::GRAPPLE::SPEED_WEIGHT * speed_rate +
             EQUIPMENT::GRAPPLE::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)m_data_item.mass / EQUIPMENT::GRAPPLE::MASS_MIN;
-    float condition_rate     = (float)m_condition / m_data_item.condition_max;
+    float mass_rate          = (float)m_data.mass / EQUIPMENT::GRAPPLE::MASS_MIN;
+    float condition_rate     = (float)m_condition / m_data.condition_max;
 
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

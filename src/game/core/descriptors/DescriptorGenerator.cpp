@@ -176,7 +176,7 @@ DescriptorGenerator::getNewBakDescriptor(int race, int tech_level)
         race = int(type::race::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(type::TECH::L0_ID);
+        tech_level = int(type::tech::LEVEL0);
     }
 
     int modules_num_max        = meti::getRandInt(EQUIPMENT::BAK::MODULES_NUM_MIN, EQUIPMENT::BAK::MODULES_NUM_MAX);
@@ -205,7 +205,7 @@ DescriptorGenerator::getNewDriveDescriptor(int race, int tech_level)
         race = int(type::race::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(type::TECH::L0_ID);
+        tech_level = int(type::tech::LEVEL0);
     }
 
     int modules_num_max        = meti::getRandInt(EQUIPMENT::DRIVE::MODULES_NUM_MIN, EQUIPMENT::DRIVE::MODULES_NUM_MAX);
@@ -234,7 +234,7 @@ DescriptorGenerator::getNewDroidDescriptor(int race, int tech_level)
         race = int(type::race::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(type::TECH::L0_ID);
+        tech_level = int(type::tech::LEVEL0);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::DROID::MODULES_NUM_MIN, EQUIPMENT::DROID::MODULES_NUM_MAX);
@@ -261,7 +261,7 @@ DescriptorGenerator::getNewGrappleDescriptor(int race, int tech_level)
         race = int(type::race::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(type::TECH::L0_ID);
+        tech_level = int(type::tech::LEVEL0);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::GRAPPLE::MODULES_NUM_MIN, EQUIPMENT::GRAPPLE::MODULES_NUM_MAX);
@@ -294,7 +294,7 @@ DescriptorGenerator::getNewScanerDescriptor(int race, int tech_level)
         race = int(type::race::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(type::TECH::L0_ID);
+        tech_level = int(type::tech::LEVEL0);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::SCANER::MODULES_NUM_MIN, EQUIPMENT::SCANER::MODULES_NUM_MAX);
@@ -323,7 +323,7 @@ DescriptorGenerator::getNewRadarDescriptor(int race, int tech_level)
         race = int(type::race::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(type::TECH::L0_ID);
+        tech_level = int(type::tech::LEVEL0);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::RADAR::MODULES_NUM_MIN, EQUIPMENT::RADAR::MODULES_NUM_MAX);
@@ -352,7 +352,7 @@ DescriptorGenerator::getNewProtectorDescriptor(int race, int tech_level)
         race = int(type::race::R0_ID);
     }
     if (tech_level == -1) {
-        tech_level = int(type::TECH::L0_ID);
+        tech_level = int(type::tech::LEVEL0);
     }
 
     int modules_num_max = meti::getRandInt(EQUIPMENT::PROTECTOR::MODULES_NUM_MIN, EQUIPMENT::PROTECTOR::MODULES_NUM_MAX);

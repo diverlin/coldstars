@@ -17,30 +17,26 @@
 */
 
 
-#ifndef TECHTYPES_HPP
-#define TECHTYPES_HPP
+#pragma once
 
 #include <string>
 #include <vector>
 
-
-namespace type
-{
-    enum class TECH
-    {
-        NONE_ID=0, L0_ID, L1_ID, L2_ID, L3_ID/*, L4_ID, L5_ID, L6_ID, L7_ID, L8_ID, L9_ID*/
-    };
+namespace type {
+enum class tech {
+    NONE=0, LEVEL0, LEVEL1, LEVEL2, LEVEL3
+};
 }
 
-const std::vector<type::TECH> TECH_TYPES =
+const std::vector<type::tech> TECH_TYPES =
 {
-type::TECH::L0_ID,
-type::TECH::L1_ID,
-type::TECH::L2_ID,
-type::TECH::L3_ID
+    type::tech::LEVEL0,
+    type::tech::LEVEL1,
+    type::tech::LEVEL2,
+    type::tech::LEVEL3
 };
 
-std::string getTechLevelStr(type::TECH); 
+std::string getTechLevelStr(type::tech); 
 
-#endif
+
 

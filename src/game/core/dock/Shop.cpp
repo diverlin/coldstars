@@ -110,7 +110,7 @@ int Shop::BuyGoods(GoodsPack* goods_pack)
     int price = Deal(sign, goods_pack->subtype(), goods_pack->mass());    
     if (price > 0)
     {
-        goods_pack->itemSlot()->removeItem(); 
+        goods_pack->slot()->removeItem(); 
         global::get().entityManager().addToGarbage(goods_pack);
     }
     

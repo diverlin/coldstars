@@ -30,10 +30,14 @@ ShipBuilder::~ShipBuilder()
 {}
 
 Ship*
-ShipBuilder::getNew()
+ShipBuilder::getNew(bool full_equiped)
 {
     const auto& descr = global::get().descriptors().getRand(descriptor::Type::VEHICLE);
-    return getNew(descr);
+    Ship* ship =  getNew(descr);
+    if (full_equiped) {
+        BaseVehicleBuilder::equip(ship);
+    }
+    return ship;
 }
 
 Ship*
@@ -147,5 +151,5 @@ ShipBuilder::__createInternals(Ship* ship, const descriptor::Base& descr)
     //AnimationConstantRotation* animation_program = new AnimationConstantRotation(glm::vec3(0.02f, 0.0f, 0.0f));
     //ship->SetRenderAnimation(animation_program);
                            
-    _createItemSlots(ship);
+    _createSlots(ship);
 }

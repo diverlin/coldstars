@@ -73,7 +73,7 @@ bool NatureLand::AddItem(item::Base* item)
 {
     for (ItemSlot* slot: item_slot_vec) {
         if (!slot->item()) {
-            slot->insertItem(item);
+            slot->insert(item);
             slot->setPosition(glm::vec2(meti::getRandInt(0, 100), meti::getRandInt(0, 100)));
             return true;
         }

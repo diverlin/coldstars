@@ -144,7 +144,7 @@ bool ItemSlot::checkItemInsertion(item::Base* item) const
     return false;
 }
 
-bool ItemSlot::insertItem(item::Base* item)
+bool ItemSlot::insert(item::Base* item)
 {    
     // make it oop
     if (subtype() == type::entity::GATE_SLOT_ID)
@@ -158,11 +158,11 @@ bool ItemSlot::insertItem(item::Base* item)
     if (subtype() == type::entity::CARGO_SLOT_ID)
     {
         m_item = item;
-        if (item->itemSlot() != nullptr)
+        if (item->slot() != nullptr)
         {
-            item->itemSlot()->removeItem();
+            item->slot()->removeItem();
         }
-        item->setItemSlot(this);
+        item->setSlot(this);
 
         return true;
     }
@@ -170,11 +170,11 @@ bool ItemSlot::insertItem(item::Base* item)
     if (subtype() == item->parentSubTypeId())
     {
         m_item = item;
-        if (item->itemSlot() != nullptr)
+        if (item->slot() != nullptr)
         {
-            item->itemSlot()->removeItem();
+            item->slot()->removeItem();
         }
-        item->setItemSlot(this);
+        item->setSlot(this);
         updateVehiclePropetries();
 
         return true;
@@ -355,13 +355,13 @@ bool ItemSlot::swapItem(ItemSlot* slot)
 {
     assert(slot);
     if ( (m_item == nullptr) && (slot->item() != nullptr) ) {
-        if (insertItem(slot->item()) == true) {
+        if (insert(slot->item()) == true) {
             return true;
         }
     }
     
     if ( (m_item != nullptr) && (slot->item() == nullptr) ) {
-        if (slot->insertItem(item()) == true) {
+        if (slot->insert(item()) == true) {
             return true;
         }
     }
@@ -369,9 +369,9 @@ bool ItemSlot::swapItem(ItemSlot* slot)
     if ( (m_item != nullptr) && (slot->item() != nullptr) ) {
         item::Base* tmp_item = slot->item();
         if ( (slot->checkItemInsertion(m_item) == true) && (checkItemInsertion(tmp_item) == true) ) {
-            slot->insertItem(m_item);
-            tmp_item->setItemSlot(nullptr);
-            insertItem(tmp_item);
+            slot->insert(m_item);
+            tmp_item->setSlot(nullptr);
+            insert(tmp_item);
 
             return true;
         }

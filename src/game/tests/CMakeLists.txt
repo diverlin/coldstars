@@ -28,3 +28,6 @@ set_target_properties(${PROJECT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
 
 # deploy
 install(TARGETS ${PROJECT} DESTINATION ${DEPLOY_DIR})
+if (NOT EXISTS ${DEPLOY_DIR}/descriptors.txt)
+    install(FILES ${CMAKE_SOURCE_DIR}/data/descriptors.txt DESTINATION ${DEPLOY_DIR})
+endif()
