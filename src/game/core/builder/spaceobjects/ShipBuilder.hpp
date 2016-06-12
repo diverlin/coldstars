@@ -34,7 +34,7 @@ public:
     ShipBuilder();
     ~ShipBuilder();
 
-    static Ship* getNew();
+    static Ship* getNew(bool full_equiped = false);
     static Ship* getNew(const descriptor::Base&);
     static Ship* getNew(const std::string&);
 

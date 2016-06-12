@@ -56,7 +56,7 @@ void Container::putChildrenToGarbage() const
 bool
 Container::insertItem(item::Base* item)
 {
-    return m_itemSlot->insertItem(item);
+    return m_itemSlot->insert(item);
 }
 
 /* override final */

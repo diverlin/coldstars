@@ -114,8 +114,8 @@ void Rocket::CountPrice()
                    EQUIPMENT::ROCKET::RADIUS_WEIGHT * radius_rate + 
                    EQUIPMENT::ROCKET::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)m_data_item.mass / EQUIPMENT::ROCKET::MASS_MIN;
-    float condition_rate     = (float)m_condition / m_data_item.condition_max;
+    float mass_rate          = (float)m_data.mass / EQUIPMENT::ROCKET::MASS_MIN;
+    float condition_rate     = (float)m_condition / m_data.condition_max;
 
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }
@@ -165,21 +165,21 @@ void Rocket::FireEvent(float attack_rate_normalized)
         RocketBullet* rocket_bullet = global::get().rocketBulletBuilder().create(data_bullet);
         rocket_bullet->SetDamageRate(attack_rate_normalized);
 
-        if (itemSlot()->vehicleOwner()->vehicleDescriptor().draw_turrels == true)
+        if (slot()->vehicleOwner()->vehicleDescriptor().draw_turrels == true)
         {
-            start_pos = itemSlot()->turrel()->position();
+            start_pos = slot()->turrel()->position();
             //angle_inD = item_slot->GetTurrel()->GetAngle().z;
         }
         else
         {
-            start_pos = itemSlot()->vehicleOwner()->position();
+            start_pos = slot()->vehicleOwner()->position();
             //angle_inD = itemSlot()->GetOwnerVehicle()->GetAngle().z;
         }  
         
-        rocket_bullet->SetOwnerId(itemSlot()->vehicleOwner()->id());
-        rocket_bullet->SetTarget(itemSlot()->target());
+        rocket_bullet->SetOwnerId(slot()->vehicleOwner()->id());
+        rocket_bullet->SetTarget(slot()->target());
     
-        itemSlot()->vehicleOwner()->starsystem()->add(rocket_bullet, start_pos, glm::vec3(0, 0, angle_inD));
+        slot()->vehicleOwner()->starsystem()->add(rocket_bullet, start_pos, glm::vec3(0, 0, angle_inD));
         num++;
     }
         

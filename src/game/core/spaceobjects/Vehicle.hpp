@@ -58,8 +58,7 @@ struct UnresolvedDataVehicle
 };
 
 
-enum class VEHICLE_SPECIAL_ACTION_TYPE
-{
+enum class VEHICLE_SPECIAL_ACTION_TYPE {
     NONE_ID=0, INITIATE_DOCKING_ID, INITIATE_LAUNCHING_ID, INITIATE_JUMPIN_ID, INITIATE_JUMPOUT_ID
 };
 
@@ -102,7 +101,8 @@ public:
     bool grabItemsFromVehicle(Vehicle*);
 
     bool addItemToCargoSlot(item::Base*);
-    bool install(item::Base*);
+    bool manage(item::Base*);
+    bool checkManage(const type::entity&);
 
     void manageItemsInCargo();
     [[deprecated("move to ext")]]
@@ -209,19 +209,19 @@ public:
 protected:
     std::vector<ItemSlot*> m_slots;
 
-    ItemSlot* const _fuctionalSlot(type::entity) const;
+    ItemSlot* const _functionalSlot(const type::entity&) const;
     ItemSlot* const _freeArtefactSlot() const;
     ItemSlot* const _cargoSlotWithGoods(type::entity);
 
-    bool _manageItem(item::Base*);
-    bool _manageFunctionEquipment(item::Base*);
+    bool _installItem(item::Base*);
+    bool _installEquipment(item::Base*);
 #ifdef USE_MODULES
-    bool ManageFunctionModule(item::BaseItem*);
+    bool installModule(item::BaseItem*);
 #endif // USE_MODULES
 #ifdef USE_ARTEFACTS
-    bool ManageFunctionArtefact(item::BaseItem*);
+    bool installArtefact(item::BaseItem*);
 #endif // USE_ARTEFACTS
-    bool _manageFunctionGoodsPack(item::Base*);
+    bool _installGoodsPack(item::Base*);
 
     //        virtual void UpdateInfo() = 0;
 
@@ -277,7 +277,9 @@ private:
 //    void __dropRandomItemToSpace();
     bool __mergeIdenticalGoods(item::Base*);
 
-    Container* __wrapItemToContainer(item::Base* item);
+    Container* __wrapItemToContainer(item::Base*);
+    bool _checkInstallEquipment(const type::entity&);
+    ItemSlot* const _freeFunctionalSlot(const type::entity&) const;
 
     friend class GuiVehicle;
     friend class GuiVehicle2;

@@ -100,7 +100,9 @@ public:
 
     Turrel* turrel() const { return m_turrel; }
 
-    item::Base* item()                         const { return m_item; }
+    item::Base* item() const { return m_item; }
+    bool empty() const { return !m_item; }
+
     item::equipment::Rocket*    rocketEquipment()    const { return reinterpret_cast<item::equipment::Rocket*>(m_item); }
     item::equipment::Lazer*     lazerEquipment()     const { return reinterpret_cast<item::equipment::Lazer*>(m_item); }
     item::equipment::Radar*     radarEquipment()     const { return reinterpret_cast<item::equipment::Radar*>(m_item); }
@@ -132,7 +134,7 @@ public:
     //Artefact* GetArtefact() const { return artefact; }
     GoodsPack* goodsPack() const { return reinterpret_cast<GoodsPack*>(m_item); }
 
-    bool insertItem(item::Base*);
+    bool insert(item::Base*);
     void removeItem();
 
     STATUS validateTarget();

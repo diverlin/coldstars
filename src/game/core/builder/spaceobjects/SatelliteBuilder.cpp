@@ -96,5 +96,5 @@ void SatelliteBuilder::createInternals(Satellite* satellite) const
     satellite->CreateDriveComplexTextureDependedStuff();
     satellite->CreateProtectionComplexTextureDependedStuff();
         
-    _createItemSlots(satellite);
+    _createSlots(satellite);
 }

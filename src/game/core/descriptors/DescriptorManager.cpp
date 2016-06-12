@@ -23,7 +23,7 @@
 #include <fstream>
 
 namespace {
-const std::string fname = "data.txt";
+const std::string fname = "descriptors.txt";
 } // namespace
 
 DescriptorManager::DescriptorManager()

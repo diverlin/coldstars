@@ -59,12 +59,12 @@ void Droid::updateProperties()
 void Droid::updateInStatic()
 {
     if (isFunctioning()) {
-        if (!itemSlot()->vehicleOwner()->isArmorFull()) {
-            itemSlot()->vehicleOwner()->increaseArmor(m_repair);
+        if (!slot()->vehicleOwner()->isArmorFull()) {
+            slot()->vehicleOwner()->increaseArmor(m_repair);
             deteriorationEvent();
         }
     }
-    updateLock();
+    _updateLock();
 }
 
 void Droid::CountPrice()
@@ -75,8 +75,8 @@ void Droid::CountPrice()
     float effectiveness_rate = EQUIPMENT::DROID::REPAIR_WEIGHT * repair_rate +
             EQUIPMENT::DROID::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)m_data_item.mass / EQUIPMENT::DROID::MASS_MIN;
-    float condition_rate     = (float)m_condition / m_data_item.condition_max;
+    float mass_rate          = (float)m_data.mass / EQUIPMENT::DROID::MASS_MIN;
+    float condition_rate     = (float)m_condition / m_data.condition_max;
 
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

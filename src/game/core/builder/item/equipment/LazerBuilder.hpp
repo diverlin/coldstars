@@ -39,10 +39,10 @@ public:
     ~LazerBuilder();
 
     Lazer* createTemplate(id_type id = NONE_ID) const;
-    Lazer* getNew(type::TECH tech_level = type::TECH::NONE_ID, type::race race_id = type::race::NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
+    Lazer* getNew(type::tech tech_level = type::tech::NONE, type::race race_id = type::race::NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
 
 private:
-    void createInternals(Lazer*, type::TECH, type::race, int, int) const;
+    void createInternals(Lazer*, type::tech, type::race, int, int) const;
 }; 
 
 } // namespace equipment

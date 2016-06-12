@@ -51,28 +51,28 @@ public:
     {
         setId(data_item.id);
 
-        m_data_item = data_item;
+        m_data = data_item;
         m_deterioration = data_item.deterioration;
         setCondition(data_item.condition_max);
     }
-    void setItemSlot(ItemSlot* item_slot)  { m_item_slot = item_slot; }
+    void setSlot(ItemSlot* slot)  { m_slot = slot; }
     void setCondition(int condition) { m_condition = condition; }
 
-    ItemSlot* itemSlot() const { return m_item_slot; }
+    ItemSlot* slot() const { return m_slot; }
 
     virtual int radius() const { return 0; }
     virtual int damage() const { return 0; }
 
-    int mass()          const { return m_data_item.mass; }
+    int mass()          const { return m_data.mass; }
     int condition()     const { return m_condition; }
     int price()         const { return m_price; }
-    int basePrice()     const { return m_data_item.price; }
-    int deterioration() const { return m_data_item.deterioration; }
+    int basePrice()     const { return m_data.price; }
+    int deterioration() const { return m_data.deterioration; }
 
-    int modulesNum() const { return m_data_item.modules_num; }
-    int descriptorType() const { return m_data_item.descriptor_type; }
+    int modulesNum() const { return m_data.modules_num; }
+    int descriptorType() const { return m_data.descriptor_type; }
 
-    type::TECH tech() const { return m_data_item.tech; }
+    type::tech tech() const { return m_data.tech; }
 
     type::entity parentSubTypeId() const { return m_parent_subtype_id; }
     type::race race() const { return m_race_id; }
@@ -91,7 +91,7 @@ public:
     bool doRepair();
 
     virtual void updateProperties() {}
-    virtual void updateInStatic() { updateLock(); }
+    virtual void updateInStatic() { _updateLock(); }
 
     //        void UpdateInfo();
 
@@ -109,11 +109,11 @@ protected:
 
     type::entity m_parent_subtype_id = type::entity::NONE_ID;
 
-    ItemCommonData m_data_item;
+    ItemCommonData m_data;
     UnresolvedDataBaseItem m_data_unresolved_BaseItem;
     //        InfoTable info;
 
-    void updateLock();
+    void _updateLock();
 
     virtual void AddCommonInfo()=0;
     virtual void addUniqueInfo()=0;
@@ -123,7 +123,7 @@ protected:
     void ResolveData();
 
 private:
-    ItemSlot* m_item_slot = nullptr;
+    ItemSlot* m_slot = nullptr;
 };
 
 } // namespace item

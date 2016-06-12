@@ -63,8 +63,8 @@ void Scaner::countPrice()
     float effectiveness_rate = EQUIPMENT::SCANER::SCAN_WEIGHT * scan_rate +
             EQUIPMENT::SCANER::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate          = (float)m_data_item.mass / EQUIPMENT::SCANER::MASS_MIN;
-    float condition_rate     = (float)m_condition / m_data_item.condition_max;
+    float mass_rate          = (float)m_data.mass / EQUIPMENT::SCANER::MASS_MIN;
+    float condition_rate     = (float)m_condition / m_data.condition_max;
 
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

@@ -49,19 +49,22 @@
 
 //#include <fstream>
 
-TEST(creation, starsystem)
+TEST(starsystem, add_objects)
 {
+    /* create opbjects */
     const descriptor::Base& descr = global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
     Starsystem* starsystem = StarsystemBuilder::getNew( descr );
-
-    EXPECT_EQ(starsystem->stars().size(), 0);
-    EXPECT_EQ(starsystem->planets().size(), 0);
-    EXPECT_EQ(starsystem->vehicles().size(), 0);
 
     Star* star = StarBuilder::getNew();
     Planet* planet = PlanetBuilder::getNew();
     Ship* ship = ShipBuilder::getNew();
 
+    /* pre-add check */
+    EXPECT_EQ(starsystem->stars().size(), 0);
+    EXPECT_EQ(starsystem->planets().size(), 0);
+    EXPECT_EQ(starsystem->vehicles().size(), 0);
+
+    /* add objects */
     starsystem->add(star);
     starsystem->add(planet);
 
@@ -69,6 +72,7 @@ TEST(creation, starsystem)
     glm::vec3 dir(0.0f, 1.0f, 0.0f);
     starsystem->add(ship, pos, dir);
 
+    /* post-add check */
     EXPECT_EQ(starsystem->stars().size(), 1);
     EXPECT_EQ(starsystem->planets().size(), 1);
     EXPECT_EQ(starsystem->vehicles().size(), 1);
@@ -80,23 +84,24 @@ TEST(creation, starsystem)
     EXPECT_EQ(vehicle->direction(), dir);
 }
 
-TEST(ship, drop_item)
+TEST(ship, drop_item_to_space)
 {
+    /* create objects */
     Starsystem* starsystem = StarsystemBuilder::getNew();
     Ship* ship = ShipBuilder::getNew();
 
-    // equip ship
+    /* equip ship */
     item::equipment::Drive* drive = global::get().driveBuilder().getNew();
-    ship->install(drive);
+    ship->manage(drive);
 
-    // add ship
+    /* add ship */
     glm::vec3 pos(100.0f);
     glm::vec3 dir(0.0f, 1.0f, 0.0f);
     EXPECT_EQ(ship->place(), type::place::NONE);
     starsystem->add(ship, pos, dir);
     EXPECT_EQ(ship->place(), type::place::KOSMOS);
 
-    // drop item
+    /* drop item to space */
     EXPECT_EQ(starsystem->containers().size(), 0);
     EXPECT_TRUE(ship->dropItemToSpace(type::entity::DRIVE_SLOT_ID));
     EXPECT_EQ(starsystem->containers().size(), 1);
@@ -107,6 +112,18 @@ TEST(ship, drop_item)
     EXPECT_EQ(container->itemSlot()->item(), drive);
 }
 
+
+TEST(ship, shoot_ship)
+{
+    /* create objects */
+    Starsystem* starsystem = StarsystemBuilder::getNew();
+//    Ship* ship1 = ShipBuilder::getNew(/*full_equiped=*/true);
+//    Ship* ship2 = ShipBuilder::getNew(/*full_equiped=*/true);
+
+//    /* add objects */
+//    starsystem->add(ship1, /*pos=*/glm::vec3(0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+//    starsystem->add(ship2, /*pos=*/glm::vec3(100.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+}
 
 
 

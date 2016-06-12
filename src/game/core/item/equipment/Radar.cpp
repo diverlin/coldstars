@@ -64,8 +64,8 @@ void Radar::CountPrice()
 
     float effectiveness_rate  = EQUIPMENT::RADAR::RADIUS_WEIGHT * radius_rate + EQUIPMENT::RADAR::MODULES_NUM_WEIGHT * modules_num_rate;
 
-    float mass_rate           = (float)m_data_item.mass / EQUIPMENT::RADAR::MASS_MIN;
-    float condition_rate      = (float)m_condition / m_data_item.condition_max;
+    float mass_rate           = (float)m_data.mass / EQUIPMENT::RADAR::MASS_MIN;
+    float condition_rate      = (float)m_condition / m_data.condition_max;
 
     m_price = (3 * effectiveness_rate - mass_rate - condition_rate) * 100;
 }

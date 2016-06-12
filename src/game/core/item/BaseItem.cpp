@@ -49,31 +49,31 @@ void Base::doLock(int lock)
     
     m_locked_turns += lock;
     if (was_working == true) {
-        m_item_slot->updateVehiclePropetries();
+        m_slot->updateVehiclePropetries();
     }
 }
 
 void Base::doUnlock()
 {
     m_locked_turns = 0;
-    m_item_slot->updateVehiclePropetries();
+    m_slot->updateVehiclePropetries();
 }
                 
 void Base::useNormalDeterioration()
 {
-    m_deterioration = m_data_item.deterioration;
+    m_deterioration = m_data.deterioration;
 }
                                 
 void Base::useOverloadDeterioration()
 {
-    m_deterioration = m_data_item.deterioration * m_data_item.deterioration_overload_rate;
+    m_deterioration = m_data.deterioration * m_data.deterioration_overload_rate;
 }
  
 void Base::doBreak()
 {
     LOG("BaseItem::broken");
     m_condition = 0;
-    m_item_slot->updateVehiclePropetries();
+    m_slot->updateVehiclePropetries();
 }
                 
 void Base::deteriorationEvent()
@@ -86,18 +86,18 @@ void Base::deteriorationEvent()
                 
 bool Base::doRepair()
 {
-    m_condition = m_data_item.condition_max;
-    m_item_slot->updateVehiclePropetries();
+    m_condition = m_data.condition_max;
+    m_slot->updateVehiclePropetries();
     
     return true;
 }
 
-void Base::updateLock()
+void Base::_updateLock()
 {
     if (m_locked_turns > 0) {
         m_locked_turns--;
         if (m_locked_turns == 0) {
-            m_item_slot->updateVehiclePropetries();
+            m_slot->updateVehiclePropetries();
         }
     }
 }     
@@ -146,18 +146,18 @@ void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
     save_ptree.put(root+"race_id", (int)m_race_id);
     save_ptree.put(root+"parent_subtype_id", (int)m_parent_subtype_id);
 
-    save_ptree.put(root+"data_item.tech_level",                     (int)m_data_item.tech);
+    save_ptree.put(root+"data_item.tech_level",                     (int)m_data.tech);
     //save_ptree.put(root+"data_item.modules_num_max",                m_data_item.modules_num);
-    save_ptree.put(root+"data_item.condition_max",                  m_data_item.condition_max);
-    save_ptree.put(root+"data_item.deterioration_normal",           m_data_item.deterioration);
-    save_ptree.put(root+"data_item.deterioration_overload_rate",    m_data_item.deterioration_overload_rate);
-    save_ptree.put(root+"data_item.mass",                           m_data_item.mass);
+    save_ptree.put(root+"data_item.condition_max",                  m_data.condition_max);
+    save_ptree.put(root+"data_item.deterioration_normal",           m_data.deterioration);
+    save_ptree.put(root+"data_item.deterioration_overload_rate",    m_data.deterioration_overload_rate);
+    save_ptree.put(root+"data_item.mass",                           m_data.mass);
 
     //alpitodorender
 //    if (HasTextureOb())     { save_ptree.put(root+"unresolved.textureOb_path", textureOb().GetData().texture_path); }
 //    else                    { save_ptree.put(root+"unresolved.textureOb_path", "none"); }
         
-    if (m_item_slot)   { save_ptree.put(root+"unresolved.item_slot_id", m_item_slot->id()); }
+    if (m_slot)   { save_ptree.put(root+"unresolved.item_slot_id", m_slot->id()); }
     else               { save_ptree.put(root+"unresolved.item_slot_id", NONE_ID); }
 }
 
@@ -171,12 +171,12 @@ void Base::LoadData(const boost::property_tree::ptree& load_ptree)
     m_race_id           = (type::race)load_ptree.get<int>("race_id");
     m_parent_subtype_id = (type::entity)load_ptree.get<int>("parent_subtype_id");
 
-    m_data_item.tech           = (type::TECH)load_ptree.get<int>("data_item.tech_level");
+    m_data.tech           = (type::tech)load_ptree.get<int>("data_item.tech_level");
     //m_data_item.modules_num      = load_ptree.get<int>("data_item.modules_num_max");
-    m_data_item.condition_max        = load_ptree.get<int>("data_item.condition_max");
-    m_data_item.deterioration = load_ptree.get<int>("data_item.deterioration_normal");
-    m_data_item.deterioration_overload_rate = load_ptree.get<float>("data_item.deterioration_overload_rate");
-    m_data_item.mass                 = load_ptree.get<int>("data_item.mass");
+    m_data.condition_max        = load_ptree.get<int>("data_item.condition_max");
+    m_data.deterioration = load_ptree.get<int>("data_item.deterioration_normal");
+    m_data.deterioration_overload_rate = load_ptree.get<float>("data_item.deterioration_overload_rate");
+    m_data.mass                 = load_ptree.get<int>("data_item.mass");
                     
     m_data_unresolved_BaseItem.textureOb_path = load_ptree.get<std::string>("unresolved.textureOb_path");
     m_data_unresolved_BaseItem.item_slot_id   = load_ptree.get<int>("unresolved.item_slot_id");
@@ -193,7 +193,7 @@ void Base::ResolveData()
         
     if(m_data_unresolved_BaseItem.item_slot_id != NONE_ID) // item_slot can be nullptr in case of inserted module
     {
-        ((ItemSlot*)global::get().entityManager().get(m_data_unresolved_BaseItem.item_slot_id))->insertItem(this);
+        ((ItemSlot*)global::get().entityManager().get(m_data_unresolved_BaseItem.item_slot_id))->insert(this);
     }
 }
 

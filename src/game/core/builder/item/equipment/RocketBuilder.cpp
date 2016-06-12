@@ -51,7 +51,7 @@ Rocket* RocketBuilder::createTemplate(id_type id) const
     return rocket;
 } 
 
-Rocket* RocketBuilder::getNew(type::TECH tech_level, type::race race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+Rocket* RocketBuilder::getNew(type::tech tech_level, type::race race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {
     Rocket* rocket = createTemplate();
     createInternals(rocket, tech_level, race_id, ammo_max_orig, damage_orig, radius_orig);
@@ -59,14 +59,14 @@ Rocket* RocketBuilder::getNew(type::TECH tech_level, type::race race_id, int amm
     return rocket;
 } 
 
-void RocketBuilder::createInternals(Rocket* rocket, type::TECH tech_level, type::race race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
+void RocketBuilder::createInternals(Rocket* rocket, type::tech tech_level, type::race race_id, int ammo_max_orig, int damage_orig, int radius_orig) const
 {     
     if (race_id == type::race::NONE_ID) {
         race_id = meti::getRand(global::get().raceDescriptors().getRaces(type::KIND::GOOD));
     }
     
-    if (tech_level == type::TECH::NONE_ID) {
-        tech_level = type::TECH::L0_ID;
+    if (tech_level == type::tech::NONE) {
+        tech_level = type::tech::LEVEL0;
     }
 
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
