@@ -43,8 +43,15 @@ ShipBuilder::getNew(bool full_equiped)
 Ship*
 ShipBuilder::getNew(const descriptor::Base& descr)
 {            
-    Ship* ship = __getNewTemplate();
-    __createInternals(ship, descr);
+    descriptor::Base descriptor(descr.data());
+    int_type id = -1;
+    if (descr.type() == (int_type)descriptor::Type::DESCRIPTOR) {
+        descriptor = global::get().descriptors().get(descr.descriptor());
+        id = descr.objId();
+    }
+
+    Ship* ship = __getNewTemplate(id);
+    __createInternals(ship, descriptor);
     return ship;
 }
 
@@ -55,9 +62,12 @@ ShipBuilder::getNew(const std::string& data)
 }
 
 Ship*
-ShipBuilder::__getNewTemplate()
+ShipBuilder::__getNewTemplate(int_type id)
 {
-    Ship* ship = new Ship(global::get().idGenerator().nextId());
+    if (id == -1) {
+        id = global::get().idGenerator().nextId();
+    }
+    Ship* ship = new Ship(id);
     assert(ship);
     global::get().entityManager().reg(ship);
     return ship;
@@ -66,6 +76,7 @@ ShipBuilder::__getNewTemplate()
 void
 ShipBuilder::__createInternals(Ship* ship, const descriptor::Base& descr)
 {
+    assert(descr.type() == (int)descriptor::Type::VEHICLE);
     //jeti::Mesh* mesh = nullptr;
     //jeti::TextureOb* texOb = nullptr;
     glm::vec3 size;

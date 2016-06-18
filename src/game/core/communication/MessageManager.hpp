@@ -17,18 +17,18 @@ class AddToStarsystemDescriptor;
 
 class MessageManager
 {
-    public:
-        MessageManager() {}
-        void add(Message&& message);
+public:
+    MessageManager() {}
+    void add(Message&& message);
 
-        void runLoop();
-        void update();
-        
-    private:
-        sf::Clock m_clock;
-        std::set<Message> m_messages_queue;
+    void runLoop();
+    void update();
 
-        double currentTime() const;
-        void process(const Message& message);
+private:
+    sf::Clock m_clock;
+    std::set<Message> m_messages_queue;
+
+    double currentTime() const;
+    void process(const Message& message);
 };
 

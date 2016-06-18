@@ -59,10 +59,10 @@
 
 TEST(descriptor,accessors)
 {
-    descriptor::Base descriptor(descriptor::Type::HIT, {{descriptor::Key::ID, 22},
-                                                        {descriptor::Key::DAMAGE, 33}});
-    EXPECT_TRUE(descriptor.id() == 22);
-    EXPECT_TRUE(descriptor.damage() == 33);
+    descriptor::Hit descriptor(22, 33, 44);
+    EXPECT_EQ(descriptor.owner(), 22);
+    EXPECT_EQ(descriptor.target(), 33);
+    EXPECT_EQ(descriptor.damage(), 44);
     ASSERT_THROW(descriptor.radius(), std::runtime_error);
 }
 

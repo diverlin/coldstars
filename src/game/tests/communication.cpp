@@ -33,6 +33,7 @@
 
 #include <descriptors/DescriptorManager.hpp>
 #include <descriptors/Base.hpp>
+#include <descriptors/Descriptor.hpp>
 #include <descriptors/Container.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
 #include <descriptors/VehicleDescriptorGenerator.hpp>
@@ -40,15 +41,22 @@
 #include <communication/MessageManager.hpp>
 #include <managers/EntityManager.hpp>
 
-//Ship* createNewShip()
-//{
-//    auto descriptor = generateVehicleDescriptor();
-//    global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor.data()));
+TEST(communication, create_ship)
+{
+    auto descriptor = global::get().descriptors().getRand(descriptor::Type::VEHICLE);
+    int_type obj_id = global::get().idGenerator().nextId();
+    descriptor::Descriptor descriptor2(descriptor.id(), obj_id);
+    global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor2.data()));
 
-//    Ship* ship = static_cast<Ship*>(global::get().entityManager().get(descriptor.id));
-//    assert(ship);
-//    return ship;
-//}
+    Ship* ship = global::get().entityManager().get<Ship*>(obj_id);
+    assert(ship);
+    EXPECT_EQ(ship->id(), obj_id);
+}
+
+TEST(communication, inject_ship)
+{
+    //EXPECT_EQ(true, false);
+}
 
 //Bomb* getNewBomb(int damage, int radius)
 //{
@@ -80,5 +88,5 @@ TEST(comm, new_starsystem)
 
 //    Starsystem* starsystem = static_cast<Starsystem*>(global::get().entityManager().get(descriptor.id()));
 //    assert(starsystem);
-    Starsystem* starsystem = global::get().entityManager().get<Starsystem*>(descriptor.id());
+    //Starsystem* starsystem = global::get().entityManager().get<Starsystem*>(descriptor.id());
 }
