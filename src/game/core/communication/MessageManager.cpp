@@ -7,8 +7,10 @@
 
 #include <types/EntityTypes.hpp> // test
 
+#include <descriptors/DescriptorManager.hpp>
 #include <descriptors/VehicleDescriptor.hpp>
 #include <descriptors/Base.hpp>
+#include <descriptors/Descriptor.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
 #include <descriptors/Container.hpp> // ??
 #include <descriptors/ExplosionDescriptor.hpp>

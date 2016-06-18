@@ -32,9 +32,9 @@
 namespace descriptor {
 
 enum class Key: int {
-    // const
     TYPE,
     OBJ_TYPE,
+    DESCRIPTOR,
     RACE,
     DAMAGE,
     RADIUS,
@@ -73,12 +73,14 @@ enum class Key: int {
     CARGO_SLOT_NUM,
     // dynamic
     ID,
+    OBJ_ID,
     OWNER,
     CHILD,
     TARGET
 };
 
 enum class Type: int {
+    DESCRIPTOR,
     HIT,
     CONTAINER,
     BOMB,
@@ -93,7 +95,10 @@ enum class Type: int {
     SCANER,
     RADAR,
     PROTECTOR,
-    VEHICLE
+    VEHICLE,
+//    SHIP,
+//    SATELLITE,
+//    STARBASE
 };
 
 std::string keyStr(const Key&);
@@ -102,8 +107,7 @@ std::string typeStr(const Type&);
 class Base
 {
 public:
-    Base(Type);
-    Base(Type, const std::map<Key, int_type>&);
+    Base(const Type&, bool generate_id = true);
     Base(const std::string& data);
     ~Base();
 
@@ -112,8 +116,10 @@ public:
     bool operator==(const Base& rhs) const;
 
     const int_type& id() const;
+    const int_type& objId() const;
     const int_type& type() const;
     const int_type& objType() const;
+    const int_type& descriptor() const;
     const int_type& race() const;
     const int_type& damage() const;
     const int_type& radius() const;
@@ -161,7 +167,8 @@ public: // todo make it protected
     void add(const Key& key, const int_type& value);
 
 private:
-    const int_type& get(const Key& key) const;
+    const int_type& __getOrDie(const Key& key) const;
+    const int_type& __get(const Key& key) const;
 
     friend class boost::serialization::access;
     template<class Archive>
@@ -172,6 +179,6 @@ private:
 
     std::map<Key, int_type> m_map;
     static IdGenerator m_idGenerator;
-}; 
+};
 
 } // namespace descriptor

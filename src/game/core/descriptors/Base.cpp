@@ -26,8 +26,10 @@ IdGenerator Base::m_idGenerator;
 
 namespace {
 const std::string KEY_STR_ID = "id";
+const std::string KEY_STR_OBJ_ID = "obj_id";
 const std::string KEY_STR_TYPE = "type";
 const std::string KEY_STR_OBJ_TYPE = "obj_type";
+const std::string KEY_STR_DESCRIPTOR = "descr";
 const std::string KEY_STR_RACE = "race";
 const std::string KEY_STR_DAMAGE = "damage";
 const std::string KEY_STR_RADIUS = "radius";
@@ -75,8 +77,10 @@ std::string keyStr(const Key& key) {
     switch(key) {
     // const
     case Key::ID: return KEY_STR_ID; break;
-    case Key::OBJ_TYPE: return KEY_STR_OBJ_TYPE; break;
+    case Key::OBJ_ID: return KEY_STR_OBJ_ID; break;
     case Key::TYPE: return KEY_STR_TYPE; break;
+    case Key::OBJ_TYPE: return KEY_STR_OBJ_TYPE; break;
+    case Key::DESCRIPTOR: return KEY_STR_DESCRIPTOR; break;
     case Key::RACE: return KEY_STR_RACE; break;
     case Key::DAMAGE: return KEY_STR_DAMAGE; break;
     case Key::RADIUS: return KEY_STR_RADIUS; break;
@@ -124,6 +128,7 @@ std::string keyStr(const Key& key) {
 
 std::string typeStr(const Type& type) {
     switch(type) {
+    case Type::DESCRIPTOR: return "Type::DESCRIPTOR"; break;
     case Type::HIT: return "Type::HIT"; break;
     case Type::CONTAINER: return "Type::CONTAINER"; break;
     case Type::BOMB: return "Type::BOMB"; break;
@@ -139,19 +144,18 @@ std::string typeStr(const Type& type) {
     case Type::RADAR: return "Type::RADAR"; break;
     case Type::PROTECTOR: return "Type::PROTECTOR"; break;
     case Type::VEHICLE: return "Type::VEHICLE"; break;
+//    case Type::SHIP: return "Type::VEHICLE"; break;
+//    case Type::SATELLITE: return "Type::SATELLITE"; break;
+//    case Type::STARBASE: return "Type::STARBASE"; break;
     default: throw std::runtime_error("ERROR: fixme: unknown descriptor key"); break;
     }
 }
 
-Base::Base(Type type)
+Base::Base(const Type& type, bool generate_id)
 {
-    add(Key::TYPE, (int)type);
-    add(Key::ID, m_idGenerator.nextId());
-}
-
-Base::Base(Type type, const std::map<Key, int_type>& map)
-    : m_map(map)
-{
+    if (generate_id) {
+        add(Key::ID, m_idGenerator.nextId());
+    }
     add(Key::TYPE, (int)type);
 }
 
@@ -183,54 +187,56 @@ Base::add(const Key& key, const int_type& value)
     if (f == m_map.end()) {
         m_map.insert(std::make_pair(key, value));
     } else {
-        throw std::runtime_error("CODE ERROR: " + keyStr(key) + " is already existed in descriptor");
+        throw std::runtime_error("CODE ERROR: attempt to add already existed key[" + keyStr(key) + "] to descriptor");
     }
 }
 
-const int_type& Base::id() const { return get(Key::ID); }
-const int_type& Base::type() const { return get(Key::TYPE); }
-const int_type& Base::objType() const { return get(Key::OBJ_TYPE); }
-const int_type& Base::race() const { return get(Key::RACE); }
-const int_type& Base::damage() const { return get(Key::DAMAGE); }
-const int_type& Base::radius() const { return get(Key::RADIUS); }
-const int_type& Base::tech() const { return get(Key::TECH); }
-const int_type& Base::modulesNum() const { return get(Key::MODULES_NUM); }
-const int_type& Base::mass() const { return get(Key::MASS); }
-const int_type& Base::conditionMax() const { return get(Key::CONDITION_MAX); }
-const int_type& Base::deterioration() const { return get(Key::DETERIORATION); }
-const int_type& Base::fuelMax() const { return get(Key::FUEL_MAX); }
-const int_type& Base::speed() const { return get(Key::SPEED); }
-const int_type& Base::hyper() const { return get(Key::HYPER); }
-const int_type& Base::repair() const { return get(Key::REPAIR); }
-const int_type& Base::strength() const { return get(Key::STRENGTH); }
-const int_type& Base::scan() const { return get(Key::SCAN); }
-const int_type& Base::protection() const { return get(Key::PROTECTION); }
-const int_type& Base::price() const { return get(Key::PRICE); }
+const int_type& Base::id() const { return __getOrDie(Key::ID); }
+const int_type& Base::objId() const { return __get(Key::OBJ_ID); }
+const int_type& Base::type() const { return __getOrDie(Key::TYPE); }
+const int_type& Base::objType() const { return __getOrDie(Key::OBJ_TYPE); }
+const int_type& Base::descriptor() const { return __getOrDie(Key::DESCRIPTOR); }
+const int_type& Base::race() const { return __getOrDie(Key::RACE); }
+const int_type& Base::damage() const { return __getOrDie(Key::DAMAGE); }
+const int_type& Base::radius() const { return __getOrDie(Key::RADIUS); }
+const int_type& Base::tech() const { return __getOrDie(Key::TECH); }
+const int_type& Base::modulesNum() const { return __getOrDie(Key::MODULES_NUM); }
+const int_type& Base::mass() const { return __getOrDie(Key::MASS); }
+const int_type& Base::conditionMax() const { return __getOrDie(Key::CONDITION_MAX); }
+const int_type& Base::deterioration() const { return __getOrDie(Key::DETERIORATION); }
+const int_type& Base::fuelMax() const { return __getOrDie(Key::FUEL_MAX); }
+const int_type& Base::speed() const { return __getOrDie(Key::SPEED); }
+const int_type& Base::hyper() const { return __getOrDie(Key::HYPER); }
+const int_type& Base::repair() const { return __getOrDie(Key::REPAIR); }
+const int_type& Base::strength() const { return __getOrDie(Key::STRENGTH); }
+const int_type& Base::scan() const { return __getOrDie(Key::SCAN); }
+const int_type& Base::protection() const { return __getOrDie(Key::PROTECTION); }
+const int_type& Base::price() const { return __getOrDie(Key::PRICE); }
 //vehicle
-const int_type& Base::space() const { return get(Key::SPACE); }
-const int_type& Base::armor() const { return get(Key::ARMOR); }
-const int_type& Base::temperature() const { return get(Key::TEMPERATURE); }
-const int_type& Base::drawTurrels() const { return get(Key::DRAW_TURRELS); }
-const int_type& Base::size() const { return get(Key::SIZE); }
-const int_type& Base::bakSlotNum() const { return get(Key::BAK_SLOT_NUM); }
-const int_type& Base::driveSlotNum() const { return get(Key::DRIVE_SLOT_NUM); }
-const int_type& Base::droidSlotNum() const { return get(Key::DROID_SLOT_NUM); }
+const int_type& Base::space() const { return __getOrDie(Key::SPACE); }
+const int_type& Base::armor() const { return __getOrDie(Key::ARMOR); }
+const int_type& Base::temperature() const { return __getOrDie(Key::TEMPERATURE); }
+const int_type& Base::drawTurrels() const { return __getOrDie(Key::DRAW_TURRELS); }
+const int_type& Base::size() const { return __getOrDie(Key::SIZE); }
+const int_type& Base::bakSlotNum() const { return __getOrDie(Key::BAK_SLOT_NUM); }
+const int_type& Base::driveSlotNum() const { return __getOrDie(Key::DRIVE_SLOT_NUM); }
+const int_type& Base::droidSlotNum() const { return __getOrDie(Key::DROID_SLOT_NUM); }
 #ifdef USE_EXTRA_EQUIPMENT
 const int_type& Base::energizerSlotNum() const { return get(Key::ENERGIZER_SLOT_NUM); }
 const int_type& Base::freezerSlotNum() const { return get(Key::FREEZER_SLOT_NUM); }
 #endif // USE_EXTRA_EQUIPMENT
-const int_type& Base::grappleSlotNum() const { return get(Key::GRAPPLE_SLOT_NUM); }
-const int_type& Base::protectorSlotNum() const { return get(Key::PROTECTOR_SLOT_NUM); }
-const int_type& Base::radarSlotNum() const { return get(Key::RADAR_SLOT_NUM); }
-const int_type& Base::scanerSlotNum() const { return get(Key::SCANER_SLOT_NUM); }
-const int_type& Base::weaponSlotNum() const { return get(Key::WEAPON_SLOT_NUM); }
-const int_type& Base::artefactSlotNum() const { return get(Key::ARTEFACT_SLOT_NUM); }
-const int_type& Base::cargoSlotNum() const { return get(Key::CARGO_SLOT_NUM); }
+const int_type& Base::grappleSlotNum() const { return __getOrDie(Key::GRAPPLE_SLOT_NUM); }
+const int_type& Base::protectorSlotNum() const { return __getOrDie(Key::PROTECTOR_SLOT_NUM); }
+const int_type& Base::radarSlotNum() const { return __getOrDie(Key::RADAR_SLOT_NUM); }
+const int_type& Base::scanerSlotNum() const { return __getOrDie(Key::SCANER_SLOT_NUM); }
+const int_type& Base::weaponSlotNum() const { return __getOrDie(Key::WEAPON_SLOT_NUM); }
+const int_type& Base::artefactSlotNum() const { return __getOrDie(Key::ARTEFACT_SLOT_NUM); }
+const int_type& Base::cargoSlotNum() const { return __getOrDie(Key::CARGO_SLOT_NUM); }
 
 // dynamic
-const int_type& Base::owner() const { return get(Key::OWNER); }
-const int_type& Base::child() const { return get(Key::CHILD); }
-const int_type& Base::target() const { return get(Key::TARGET); }
+const int_type& Base::owner() const { return __getOrDie(Key::OWNER); }
+const int_type& Base::child() const { return __getOrDie(Key::CHILD); }
+const int_type& Base::target() const { return __getOrDie(Key::TARGET); }
 
 bool
 Base::operator==(const Base& rhs) const
@@ -239,13 +245,24 @@ Base::operator==(const Base& rhs) const
 }
 
 const int_type&
-Base::get(const Key& key) const
+Base::__getOrDie(const Key& key) const
 {
     auto f = m_map.find(key);
     if (f != m_map.end()) {
         return f->second;
     }
     throw std::runtime_error("CODE ERROR: key=[" + keyStr(key) + "] is not found in descriptor");
+}
+
+const int_type&
+Base::__get(const Key& key) const
+{
+    auto f = m_map.find(key);
+    if (f != m_map.end()) {
+        return f->second;
+    }
+
+    return -1;
 }
 
 } // namespace descriptor

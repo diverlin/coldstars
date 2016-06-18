@@ -29,6 +29,7 @@ public:
     DescriptorManager();
     ~DescriptorManager();
 
+
     void add(const descriptor::Base&);
     descriptor::Base getRand(const descriptor::Type&);
     descriptor::Base get(const id_type&);

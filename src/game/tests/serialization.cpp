@@ -49,11 +49,8 @@ TEST(base,serialization)
 
 TEST(descriptor,serialization)
 {
-    descriptor::Base descriptor(descriptor::Type::HIT,
-                                {{descriptor::Key::ID, 11},
-                                 {descriptor::Key::DAMAGE, 22},
-                                 {descriptor::Key::RADIUS, 33}});
-    descriptor::Base descriptor2(descriptor.data());
+    descriptor::Hit descriptor(11, 22, 33);
+    descriptor::Hit descriptor2(descriptor.data());
     EXPECT_TRUE(descriptor == descriptor2);
 }
 

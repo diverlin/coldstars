@@ -3,8 +3,7 @@
 namespace descriptor {
 
 Hit::Hit(const id_type& owner, const id_type& target, int damage)
-    :
-      Base(Type::HIT)
+    : Base(Type::HIT)
 {
     add(Key::OWNER, owner);
     add(Key::TARGET, target);
@@ -12,8 +11,7 @@ Hit::Hit(const id_type& owner, const id_type& target, int damage)
 }
 
 Hit::Hit(const std::string& data)
-    :
-    Base(data)
+    : Base(data)
 {
 }
 
