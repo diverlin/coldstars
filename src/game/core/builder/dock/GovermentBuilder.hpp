@@ -29,7 +29,7 @@ class GovermentBuilder
         GovermentBuilder();
         ~GovermentBuilder();
         
-        Goverment* createTemplate(id_type id = NONE_ID) const;
+        Goverment* createTemplate(id_type id = NONE) const;
         Goverment* create() const;
                                                     
     private:

@@ -26,7 +26,7 @@
 class Task
 {
     public:
-        Task(type::AISCENARIO scenario_type_id = type::AISCENARIO::NONE_ID, id_type target_id = NONE_ID, int reward = 0, int expiriance = 0):
+        Task(type::AISCENARIO scenario_type_id = type::AISCENARIO::NONE_ID, id_type target_id = NONE, int reward = 0, int expiriance = 0):
         m_reward(reward),
         m_expiriance(expiriance),
         m_scenario_type_id(scenario_type_id),
@@ -48,7 +48,7 @@ class Task
         void load(const boost::property_tree::ptree&);
                 
     protected:
-        int m_result = NONE_ID;
+        int m_result = NONE;
     
         int m_reward = 0;
         int m_expiriance = 0;

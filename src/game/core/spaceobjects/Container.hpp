@@ -36,7 +36,7 @@ class Base;
 class Container : public SpaceObject
 {
 public:
-    Container(const id_type& id = NONE_ID);
+    Container(const id_type& id = NONE);
     virtual ~Container();
 
     void setTargetPos(const glm::vec3& target_pos, float velocity) { m_targetPos = target_pos; m_velocity = velocity; }

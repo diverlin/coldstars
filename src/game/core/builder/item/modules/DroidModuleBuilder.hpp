@@ -30,8 +30,8 @@ class DroidModuleBuilder
         DroidModuleBuilder();
         ~DroidModuleBuilder();
 
-        DroidModule* createTemplate(id_type id = NONE_ID) const;
-        DroidModule* create(int repair_add = NONE_ID) const;
+        DroidModule* createTemplate(id_type id = NONE) const;
+        DroidModule* create(int repair_add = NONE) const;
                                      
     private:
         void createInternals(DroidModule*, int) const;

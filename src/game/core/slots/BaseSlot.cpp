@@ -44,7 +44,7 @@ void BaseSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
     LOG(" BaseSlot("+std::to_string(id())+")::SaveData");
         
     if (m_owner) { save_ptree.put(root+"unresolved.owner_id", m_owner->id()); }
-    else       { save_ptree.put(root+"unresolved.owner_id", NONE_ID); }
+    else       { save_ptree.put(root+"unresolved.owner_id", NONE); }
     
     save_ptree.put(root+"position.x", m_position.x);
     save_ptree.put(root+"position.y", m_position.y);
@@ -63,7 +63,7 @@ void BaseSlot::ResolveData()
 {
     LOG(" BaseSlot("+std::to_string(id())+")::ResolveData");
     
-    if (unresolved_BaseSlot.owner_id != NONE_ID) {
+    if (unresolved_BaseSlot.owner_id != NONE) {
         m_owner = global::get().entityManager().get(unresolved_BaseSlot.owner_id);
     }
 }

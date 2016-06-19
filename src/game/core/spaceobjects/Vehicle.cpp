@@ -1412,15 +1412,15 @@ void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::strin
     }
     else
     {
-        save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", NONE_ID);
-        save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_action_id", NONE_ID);
+        save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", NONE);
+        save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_action_id", NONE);
     }
 
     if (m_Land != nullptr)  { save_ptree.put(root+"data_unresolved_Vehicle.land_id", m_Land->id()); }
-    else                     { save_ptree.put(root+"data_unresolved_Vehicle.land_id", NONE_ID); }
+    else                     { save_ptree.put(root+"data_unresolved_Vehicle.land_id", NONE); }
     
     if (m_parentVehicleSlot != nullptr) { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", m_parentVehicleSlot->id()); }
-    else                                     { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE_ID); }
+    else                                     { save_ptree.put(root+"data_unresolved_Vehicle.parent_vehicleslot_id", NONE); }
 
     if (place() == type::place::HYPER)
     {
@@ -1428,7 +1428,7 @@ void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::strin
     }
     else
     {
-        save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", NONE_ID);
+        save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", NONE);
     }
 }
 
@@ -1468,12 +1468,12 @@ void Vehicle::ResolveData()
     CreateDriveComplexTextureDependedStuff();
     CreateProtectionComplexTextureDependedStuff();
 
-    if (data_unresolved_Vehicle.drive_complex_target_id != NONE_ID)
+    if (data_unresolved_Vehicle.drive_complex_target_id != NONE)
     {
         m_driveComplex.SetTarget((SpaceObject*)global::get().entityManager().get(data_unresolved_Vehicle.drive_complex_target_id),  data_unresolved_Vehicle.drive_complex_action_id);
     }
 
-    if (data_unresolved_Vehicle.land_id != NONE_ID)
+    if (data_unresolved_Vehicle.land_id != NONE)
     {
         setLand( (Land*)global::get().entityManager().get(data_unresolved_Vehicle.land_id) );
     }

@@ -58,7 +58,7 @@ void Sector::add(Starsystem* starsystem, const glm::vec3& center)
 
 Starsystem* Sector::randomStarSystem(int condition_id)
 {
-    if (condition_id == NONE_ID) {
+    if (condition_id == NONE) {
         return m_starsystems[meti::getRandInt(0, m_starsystems.size()-1)];
     } else {
         std::vector<Starsystem*> ss_vec;
@@ -87,7 +87,7 @@ Starsystem* Sector::closestStarSystemTo(Starsystem* starsystem, int condition_id
     {
         if (m_starsystems[i]->id() != starsystem->id())
         {
-            if ( (m_starsystems[i]->conditionId() == condition_id) or (condition_id == NONE_ID) )
+            if ( (m_starsystems[i]->conditionId() == condition_id) or (condition_id == NONE) )
             {
                 float dist = meti::distance(starsystem->position(), m_starsystems[i]->position());
 

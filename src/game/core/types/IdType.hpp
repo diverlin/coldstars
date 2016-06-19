@@ -21,7 +21,7 @@
 typedef long long int id_type;
 typedef long long int int_type;
 
-const id_type NONE_ID = 0;
+const id_type NONE = 0;
 
 
 

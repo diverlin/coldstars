@@ -32,7 +32,7 @@ class TextureOb;
 
 struct UnresolvedDataBaseSlot
 {
-    id_type owner_id = NONE_ID;
+    id_type owner_id = NONE;
 };
 
 

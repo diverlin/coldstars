@@ -30,8 +30,8 @@ class BakModuleBuilder
         BakModuleBuilder();
         ~BakModuleBuilder();
 
-        BakModule* createTemplate(id_type id = NONE_ID) const;
-        BakModule* create(int fuel_max_add = NONE_ID) const;
+        BakModule* createTemplate(id_type id = NONE) const;
+        BakModule* create(int fuel_max_add = NONE) const;
                                      
     private:
         void createInternals(BakModule*, int) const;

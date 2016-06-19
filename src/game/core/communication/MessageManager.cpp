@@ -66,56 +66,87 @@ void MessageManager::update()
 void MessageManager::process(const Message& message)
 {
     switch(message.type_id) {
-        /** CREATE */
-        case TELEGRAM::CREATE_STARSYSTEM: {
-            global::get().starsystemBuilder().getNew(message.data);
-            break;
-        }
-        case TELEGRAM::CREATE_SHIP: {
-            ShipBuilder::getNew(message.data);
-            break;
-        }
-        case TELEGRAM::CREATE_BOMB: {
-            global::get().bombBuilder().getNew(message.data);
-            break;
-        }
-        case TELEGRAM::CREATE_CONTAINER: {
-            global::get().containerBuilder().getNew(message.data);
-            break;
-        }
-        /** STARSYSTEM ADD */
-        case TELEGRAM::STARSYSTEM_ADD_SHIP: {
-            AddToStarsystemDescriptor descriptor(message.data);
-            Starsystem* starsystem = global::get().entityManager().get<Starsystem*>(descriptor.owner);
-            Ship* ship = global::get().entityManager().get<Ship*>(descriptor.object);
-            starsystem->add(ship, descriptor.position/*, descriptor.angle*/);
-            break;
-        }
-        case TELEGRAM::STARSYSTEM_ADD_CONTAINER: {
-            AddToStarsystemDescriptor descriptor(message.data);
-            Starsystem* starsystem = global::get().entityManager().get<Starsystem*>(descriptor.owner);
-            Container* container = global::get().entityManager().get<Container*>(descriptor.object);
-            starsystem->add(container, descriptor.position);
-            break;
-        }
+    /** CREATE */
+    case TELEGRAM::CREATE_STARSYSTEM: {
+        global::get().starsystemBuilder().getNew(message.data);
+        break;
+    }
+    case TELEGRAM::CREATE_SHIP: {
+        ShipBuilder::getNew(message.data);
+        break;
+    }
+    case TELEGRAM::CREATE_BOMB: {
+        global::get().bombBuilder().getNew(message.data);
+        break;
+    }
+    case TELEGRAM::CREATE_CONTAINER: {
+        global::get().containerBuilder().getNew(message.data);
+        break;
+    }
+
+        // items
+    case TELEGRAM::CREATE_BAK: {
+        global::get().bakBuilder().getNew(message.data);
+        break;
+    }
+    case TELEGRAM::CREATE_DRIVE: {
+        global::get().driveBuilder().getNew(message.data);
+        break;
+    }
+    case TELEGRAM::CREATE_DROID: {
+        global::get().droidBuilder().getNew(message.data);
+        break;
+    }
+    case TELEGRAM::CREATE_GRAPPLE: {
+        global::get().grappleBuilder().getNew(message.data);
+        break;
+    }
+    case TELEGRAM::CREATE_SCANER: {
+        global::get().scanerBuilder().getNew(message.data);
+        break;
+    }
+    case TELEGRAM::CREATE_RADAR: {
+        global::get().radarBuilder().getNew(message.data);
+        break;
+    }
+    case TELEGRAM::CREATE_PROTECTOR: {
+        global::get().protectorBuilder().getNew(message.data);
+        break;
+    }
+
+    /** STARSYSTEM ADD */
+    case TELEGRAM::STARSYSTEM_ADD_SHIP: {
+        AddToStarsystemDescriptor descriptor(message.data);
+        Starsystem* starsystem = global::get().entityManager().get<Starsystem*>(descriptor.owner);
+        Ship* ship = global::get().entityManager().get<Ship*>(descriptor.object);
+        starsystem->add(ship, descriptor.position/*, descriptor.angle*/);
+        break;
+    }
+    case TELEGRAM::STARSYSTEM_ADD_CONTAINER: {
+        AddToStarsystemDescriptor descriptor(message.data);
+        Starsystem* starsystem = global::get().entityManager().get<Starsystem*>(descriptor.owner);
+        Container* container = global::get().entityManager().get<Container*>(descriptor.object);
+        starsystem->add(container, descriptor.position);
+        break;
+    }
         /** OTHER */
-        case TELEGRAM::HIT: {
-            descriptor::Base descriptor(message.data);
-            SpaceObject* ob = global::get().entityManager().get<SpaceObject*>(descriptor.target());
-            ob->hit(descriptor.damage());
-            break;
-        }
-        case TELEGRAM::EXPLOSION: {
-            descriptor::Explosion descriptor(message.data);
-            Starsystem* starsystem = global::get().entityManager().get<Starsystem*>(descriptor.starsystem_id);
-            Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
-            starsystem->add(explosion, descriptor.center);
-            break;
-        }
-        default:
-        {
-            break;
-        }
+    case TELEGRAM::HIT: {
+        descriptor::Base descriptor(message.data);
+        SpaceObject* ob = global::get().entityManager().get<SpaceObject*>(descriptor.target());
+        ob->hit(descriptor.damage());
+        break;
+    }
+    case TELEGRAM::EXPLOSION: {
+        descriptor::Explosion descriptor(message.data);
+        Starsystem* starsystem = global::get().entityManager().get<Starsystem*>(descriptor.starsystem_id);
+        Explosion* explosion = new Explosion(descriptor.damage, descriptor.radius);
+        starsystem->add(explosion, descriptor.center);
+        break;
+    }
+    default:
+    {
+        break;
+    }
     }
 }
 

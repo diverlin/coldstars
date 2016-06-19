@@ -35,7 +35,7 @@ void AiModelCollector::RegisterAiModel(BaseAiModel* ai_model)
           
 BaseAiModel* AiModelCollector::GetAiModel(int type_id) const
 {
-    if (type_id != NONE_ID)
+    if (type_id != NONE)
     {
         return (aimodel_map.find(type_id))->second;
     }

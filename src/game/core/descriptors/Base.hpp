@@ -88,6 +88,7 @@ enum class Type: int {
     STAR,
     PLANET,
     ASTEROID,
+    // equipment
     BAK,
     DRIVE,
     DROID,

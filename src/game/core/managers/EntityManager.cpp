@@ -97,7 +97,8 @@ void EntityManager::clear()
 
 void EntityManager::reg(Base* entity)
 {   
-    if (entity->id() == NONE_ID) {
+    assert(entity);
+    if (entity->id() == NONE) {
         // TODO fixme
         entity->setId(global::get().idGenerator().nextId());
     }
@@ -350,11 +351,11 @@ void EntityManager::loadPass0(const std::string& filename)
     if (load_ptree.get_child_optional("bak_equipment"))
     {
         LOG("loading bak_equipments...");
-        BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bak_equipment"))
-        {
-            item::equipment::Bak* bak_equipment = global::get().bakBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
-            bak_equipment->Load(v.second);
-        }
+//        BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("bak_equipment"))
+//        {
+//            item::equipment::Bak* bak_equipment = global::get().bakBuilder().__createTemplate(v.second.get<unsigned long int>("data_id.id"));
+//            bak_equipment->Load(v.second);
+//        }
     }
 
     if (load_ptree.get_child_optional("drive_equipment"))

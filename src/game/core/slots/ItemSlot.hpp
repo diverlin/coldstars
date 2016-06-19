@@ -78,8 +78,8 @@ struct UnresolvedDataItemSlot
     UnresolvedDataItemSlot()
     {}
     
-    id_type target_id = NONE_ID;
-    id_type subtarget_id = NONE_ID;
+    id_type target_id = NONE;
+    id_type subtarget_id = NONE;
 };
 
 class ItemSlot : public BaseSlot

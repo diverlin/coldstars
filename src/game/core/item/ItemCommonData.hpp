@@ -31,8 +31,6 @@ struct ItemCommonData
     ItemCommonData()
     {}
 
-    id_type id = NONE_ID; // changable
-
     type::race race = type::race::R0_ID;
     type::tech tech = type::tech::NONE;
     int modules_num = 0;

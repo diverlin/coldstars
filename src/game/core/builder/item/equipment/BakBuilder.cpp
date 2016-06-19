@@ -38,35 +38,51 @@ BakBuilder::BakBuilder()
 BakBuilder::~BakBuilder()
 {}
 
-item::equipment::Bak* BakBuilder::createTemplate(id_type id) const
-{
-    item::equipment::Bak* bak = new item::equipment::Bak(id);
-    assert(bak);
-
-    global::get().entityManager().reg(bak);
-    
-    return bak;
-} 
-
-item::equipment::Bak* BakBuilder::getNew() const
+Bak*
+BakBuilder::getNew()
 {
     const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::BAK);
-    item::equipment::Bak* bak = createTemplate();
-    createInternals(bak, descriptor);
-
-    return bak;
+    return getNew(descriptor);
 }
        
-item::equipment::Bak* BakBuilder::getNew(const descriptor::Base& descriptor) const
+Bak*
+BakBuilder::getNew(const descriptor::Base& descr)
 {
-    item::equipment::Bak* bak = createTemplate();
-    createInternals(bak, descriptor);
+    descriptor::Base descriptor(descr.data());
+    int_type id = NONE;
+    if (descr.type() == (int_type)descriptor::Type::DESCRIPTOR) {
+        descriptor = global::get().descriptors().get(descr.descriptor());
+        id = descr.objId();
+    }
+
+    Bak* bak = __createTemplate(id);
+    __createInternals(bak, descriptor);
     
     return bak;
 }
-                          
-void BakBuilder::createInternals(item::equipment::Bak* bak, const descriptor::Base& descriptor) const
+
+Bak*
+BakBuilder::getNew(const std::string& data)
 {
+    return getNew(descriptor::Base(data));
+}
+
+Bak*
+BakBuilder::__createTemplate(id_type id)
+{
+    if (id == NONE) {
+        id = global::get().idGenerator().nextId();
+    }
+    Bak* bak = new Bak(id);
+    global::get().entityManager().reg(bak);
+    return bak;
+}
+
+void
+BakBuilder::__createInternals(Bak* bak, const descriptor::Base& descriptor)
+{
+    assert(descriptor.type() == (int)descriptor::Type::BAK);
+
     ItemCommonData data = extractCommonData(descriptor);
 
     bak->setFuelMaxOrig(descriptor.fuelMax());

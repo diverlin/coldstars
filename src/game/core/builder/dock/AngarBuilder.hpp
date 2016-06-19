@@ -35,7 +35,7 @@ class AngarBuilder
         AngarBuilder();
         ~AngarBuilder();
 
-        Angar* createTemplate(id_type id = NONE_ID) const;
+        Angar* createTemplate(id_type id = NONE) const;
         Angar* create() const;
 
     private:

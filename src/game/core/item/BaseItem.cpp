@@ -158,7 +158,7 @@ void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
 //    else                    { save_ptree.put(root+"unresolved.textureOb_path", "none"); }
         
     if (m_slot)   { save_ptree.put(root+"unresolved.item_slot_id", m_slot->id()); }
-    else               { save_ptree.put(root+"unresolved.item_slot_id", NONE_ID); }
+    else               { save_ptree.put(root+"unresolved.item_slot_id", NONE); }
 }
 
 void Base::LoadData(const boost::property_tree::ptree& load_ptree)
@@ -191,7 +191,7 @@ void Base::ResolveData()
     useNormalDeterioration();
     updateProperties(); // this function must be performed before inserting to slot!!!
         
-    if(m_data_unresolved_BaseItem.item_slot_id != NONE_ID) // item_slot can be nullptr in case of inserted module
+    if(m_data_unresolved_BaseItem.item_slot_id != NONE) // item_slot can be nullptr in case of inserted module
     {
         ((ItemSlot*)global::get().entityManager().get(m_data_unresolved_BaseItem.item_slot_id))->insert(this);
     }

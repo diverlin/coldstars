@@ -30,8 +30,8 @@ class DriveModuleBuilder
         DriveModuleBuilder();
         ~DriveModuleBuilder();
 
-        DriveModule* createTemplate(id_type id = NONE_ID) const;
-        DriveModule* create(int speed_add = NONE_ID, int hyper_add = NONE_ID) const;
+        DriveModule* createTemplate(id_type id = NONE) const;
+        DriveModule* create(int speed_add = NONE, int hyper_add = NONE) const;
                                      
     private:
         void createInternals(DriveModule*, int, int) const;

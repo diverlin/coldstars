@@ -49,8 +49,6 @@ public:
     void setParentSubTypeId(type::entity parent_subtype_id) { m_parent_subtype_id = parent_subtype_id; }
     void setItemCommonData(const ItemCommonData& data_item)
     {
-        setId(data_item.id);
-
         m_data = data_item;
         m_deterioration = data_item.deterioration;
         setCondition(data_item.condition_max);
