@@ -29,7 +29,7 @@ class NatureLandBuilder
         NatureLandBuilder();
         ~NatureLandBuilder();
 
-        NatureLand* createTemplate(id_type id = NONE_ID) const;
+        NatureLand* createTemplate(id_type id = NONE) const;
         NatureLand* create() const;
                                                     
     private:

@@ -38,8 +38,8 @@ public:
     RocketBuilder();
     ~RocketBuilder();
 
-    Rocket* createTemplate(id_type id = NONE_ID) const;
-    Rocket* getNew(type::tech tech_level = type::tech::NONE, type::race race_id = type::race::NONE_ID, int ammo_max_orig = NONE_ID, int damage_orig = NONE_ID, int radius_orig = NONE_ID) const;
+    Rocket* createTemplate(id_type id = NONE) const;
+    Rocket* getNew(type::tech tech_level = type::tech::NONE, type::race race_id = type::race::NONE_ID, int ammo_max_orig = NONE, int damage_orig = NONE, int radius_orig = NONE) const;
 
 private:
     void createInternals(Rocket*, type::tech, type::race, int, int, int) const;

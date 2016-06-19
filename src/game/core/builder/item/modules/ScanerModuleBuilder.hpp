@@ -30,8 +30,8 @@ class ScanerModuleBuilder
         ScanerModuleBuilder();
         ~ScanerModuleBuilder();
 
-        ScanerModule* createTemplate(id_type id = NONE_ID) const;
-        ScanerModule* create(int scan_add = NONE_ID) const;
+        ScanerModule* createTemplate(id_type id = NONE) const;
+        ScanerModule* create(int scan_add = NONE) const;
                                      
     private:
         void createInternals(ScanerModule*, int) const;

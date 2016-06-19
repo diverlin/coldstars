@@ -170,7 +170,7 @@ void RocketBullet::SaveData(boost::property_tree::ptree& save_ptree, const std::
     save_ptree.put(root+"speed", m_Speed);
     save_ptree.put(root+"owner_id", m_OwnerId);
     if (m_Target != nullptr)     { save_ptree.put(root+"target_id", m_Target->id()); }
-    else                        { save_ptree.put(root+"target_id", NONE_ID); }
+    else                        { save_ptree.put(root+"target_id", NONE); }
     
     m_DataBullet.Save(save_ptree, root);
 }
@@ -188,7 +188,7 @@ void RocketBullet::ResolveData()
 {           
     CreateDriveComplexTextureDependedStuff();
                 
-    if (unresolved_RocketBullet_target_id != NONE_ID)
+    if (unresolved_RocketBullet_target_id != NONE)
     {
         m_Target = (SpaceObject*)global::get().entityManager().get(unresolved_RocketBullet_target_id);
     }

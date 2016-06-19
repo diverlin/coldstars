@@ -26,6 +26,8 @@
 #include <spaceobjects/Container.hpp>
 #include <spaceobjects/Ship.hpp>
 
+#include <item/equipment/ALL>
+
 #include <builder/spaceobjects/ShipBuilder.hpp>
 #include <builder/world/StarSystemBuilder.hpp>
 #include <builder/item/other/BombBuilder.hpp>
@@ -51,6 +53,18 @@ TEST(communication, create_ship)
     Ship* ship = global::get().entityManager().get<Ship*>(obj_id);
     assert(ship);
     EXPECT_EQ(ship->id(), obj_id);
+}
+
+TEST(communication, create_bak)
+{
+    auto descriptor = global::get().descriptors().getRand(descriptor::Type::BAK);
+    int_type obj_id = global::get().idGenerator().nextId();
+    descriptor::Descriptor descriptor2(descriptor.id(), obj_id);
+    global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
+
+    item::equipment::Bak* bak = global::get().entityManager().get<item::equipment::Bak*>(obj_id);
+    assert(bak);
+    EXPECT_EQ(bak->id(), obj_id);
 }
 
 TEST(communication, inject_ship)

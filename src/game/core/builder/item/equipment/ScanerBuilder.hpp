@@ -37,7 +37,7 @@ public:
     ~ScanerBuilder();
 
     Scaner* getNew() const;
-    Scaner* createTemplate(id_type id = NONE_ID) const;
+    Scaner* createTemplate(id_type id = NONE) const;
     Scaner* getNew(const descriptor::Base&) const;
 
 private:

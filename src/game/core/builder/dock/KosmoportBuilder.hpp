@@ -30,7 +30,7 @@ class KosmoportBuilder
         KosmoportBuilder();
         ~KosmoportBuilder();
 
-        Kosmoport* createTemplate(id_type id = NONE_ID) const;
+        Kosmoport* createTemplate(id_type id = NONE) const;
         Kosmoport* create() const;
                                                     
     private:

@@ -30,7 +30,7 @@ class BlackHoleBuilder
         BlackHoleBuilder();
         ~BlackHoleBuilder();
 
-        BlackHole* createTemplate(id_type id = NONE_ID) const;
+        BlackHole* createTemplate(id_type id = NONE) const;
         BlackHole* create() const;
                                      
     private:

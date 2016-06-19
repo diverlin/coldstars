@@ -95,10 +95,10 @@ void SpaceObject::SaveData(boost::property_tree::ptree& save_ptree, const std::s
 
 
     if (m_parent) save_ptree.put(root+"data_unresolved_SpaceObject.parent_id", m_parent->id());
-    else        save_ptree.put(root+"data_unresolved_SpaceObject.parent_id", NONE_ID);
+    else        save_ptree.put(root+"data_unresolved_SpaceObject.parent_id", NONE);
 
     if (m_starsystem)    save_ptree.put(root+"data_unresolved_SpaceObject.starsystem_id", m_starsystem->id());
-    else            save_ptree.put(root+"data_unresolved_SpaceObject.starsystem_id", NONE_ID);
+    else            save_ptree.put(root+"data_unresolved_SpaceObject.starsystem_id", NONE);
 
     save_ptree.put(root+"place_type_id", (int)m_placeTypeId);
 }
@@ -126,10 +126,10 @@ void SpaceObject::ResolveData()
 {
     LOG(" SpaceObject("+std::to_string(id())+")::ResolveData");
     
-    if (data_unresolved_SpaceObject.parent_id != NONE_ID) {
+    if (data_unresolved_SpaceObject.parent_id != NONE) {
         m_parent = (SpaceObject*)global::get().entityManager().get(data_unresolved_SpaceObject.parent_id);
     }
-    if (data_unresolved_SpaceObject.starsystem_id != NONE_ID) {
+    if (data_unresolved_SpaceObject.starsystem_id != NONE) {
         m_starsystem = (Starsystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id);
     }
 }

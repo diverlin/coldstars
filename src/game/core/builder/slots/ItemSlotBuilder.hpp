@@ -24,7 +24,7 @@
 
 class ItemSlot;
 
-ItemSlot* GetNewItemSlot(type::entity subtype_id, const id_type& id = NONE_ID);
+ItemSlot* GetNewItemSlot(type::entity subtype_id, const id_type& id = NONE);
 ItemSlot* GetNewItemSlotWithoutSaveAbility(type::entity subtype_id);
 
 

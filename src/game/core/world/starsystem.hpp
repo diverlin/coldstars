@@ -119,7 +119,7 @@ class Starsystem : public SpaceObject
 //    using Vehicles = std::vector<Vehicle*>;
 
     public:
-        Starsystem(const id_type& id = NONE_ID);
+        Starsystem(const id_type& id = NONE);
         ~Starsystem();
         
         virtual void putChildrenToGarbage() const;

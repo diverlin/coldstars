@@ -30,8 +30,8 @@ class RocketModuleBuilder
         RocketModuleBuilder();
         ~RocketModuleBuilder();
 
-        RocketModule* createTemplate(id_type id = NONE_ID) const;
-        RocketModule* create(int ammo_max_add = NONE_ID, int damage_add = NONE_ID, int radius_add = NONE_ID) const;
+        RocketModule* createTemplate(id_type id = NONE) const;
+        RocketModule* create(int ammo_max_add = NONE, int damage_add = NONE, int radius_add = NONE) const;
                                      
     private:
         void createInternals(RocketModule*, int, int, int) const;

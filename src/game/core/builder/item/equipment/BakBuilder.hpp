@@ -21,6 +21,8 @@
 
 #include <types/IdType.hpp>
 
+#include <string>
+
 namespace descriptor {
 class Base;
 } // namespace descriptor
@@ -36,15 +38,13 @@ public:
     BakBuilder();
     ~BakBuilder();
 
-    item::equipment::Bak* getNew() const;
-    item::equipment::Bak* createTemplate(id_type id = NONE_ID) const;
-    item::equipment::Bak* getNew(const descriptor::Base&) const;
+    static Bak* getNew();
+    static Bak* getNew(const descriptor::Base&);
+    static Bak* getNew(const std::string&);
 
 private:
-    BakBuilder(const BakBuilder&) = delete;
-    BakBuilder& operator=(const BakBuilder&) = delete;
-
-    void createInternals(item::equipment::Bak*, const descriptor::Base&) const;
+    static Bak* __createTemplate(id_type);
+    static void __createInternals(item::equipment::Bak*, const descriptor::Base&);
 }; 
 
 } // namespace equipment

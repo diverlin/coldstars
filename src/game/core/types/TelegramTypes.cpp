@@ -19,20 +19,36 @@
 
 #include "TelegramTypes.hpp"
 
-std::string str(TELEGRAM type_id)
+std::string str(const TELEGRAM& type_id)
 {
     switch (type_id) {
-        case TELEGRAM::CREATE_STARSYSTEM:  { return "TELEGRAM::CREATE_STARSYSTEM"; break; }
-        case TELEGRAM::CREATE_SHIP:  { return "TELEGRAM::CREATE_SHIP"; break; }
-        case TELEGRAM::CREATE_CONTAINER:  { return "TELEGRAM::CREATE_CONTAINER"; break; }
-        case TELEGRAM::STARSYSTEM_ADD_SHIP: { return "TELEGRAM::STARSYSTEM_ADD_SHIP"; break; }
-        case TELEGRAM::STARSYSTEM_ADD_CONTAINER: { return "TELEGRAM::STARSYSTEM_ADD_CONTAINER"; break; }
-        case TELEGRAM::INSERT:  { return "TELEGRAM::INSERT"; break; }
-        case TELEGRAM::REMOVE:  { return "TELEGRAM::REMOVE"; break; }
-        case TELEGRAM::DELETE:  { return "TELEGRAM::DELETE"; break; }
-        case TELEGRAM::HIT:     { return "TELEGRAM::HIT"; break; }
-        case TELEGRAM::EXPLOSION: { return "TELEGRAM::EXPLOSION"; break; }
-        default: return "TELEGRAM::UKNOWN"; break;
+    /** CREATE */
+    case TELEGRAM::CREATE_STARSYSTEM:  { return "TELEGRAM::CREATE_STARSYSTEM"; break; }
+    case TELEGRAM::CREATE_SHIP:  { return "TELEGRAM::CREATE_SHIP"; break; }
+    case TELEGRAM::CREATE_CONTAINER:  { return "TELEGRAM::CREATE_CONTAINER"; break; }
+
+    // items
+    case TELEGRAM::CREATE_BAK:  { return "TELEGRAM::CREATE_BAK"; break; }
+    case TELEGRAM::CREATE_DRIVE:  { return "TELEGRAM::CREATE_DRIVE"; break; }
+    case TELEGRAM::CREATE_DROID:  { return "TELEGRAM::CREATE_DROID"; break; }
+    case TELEGRAM::CREATE_GRAPPLE:  { return "TELEGRAM::CREATE_GRAPPLE"; break; }
+    case TELEGRAM::CREATE_SCANER:  { return "TELEGRAM::CREATE_SCANER"; break; }
+    case TELEGRAM::CREATE_RADAR:  { return "TELEGRAM::CREATE_RADAR"; break; }
+    case TELEGRAM::CREATE_PROTECTOR:  { return "TELEGRAM::CREATE_PROTECTOR"; break; }
+    /** */
+
+    /** TRANSITION */
+    case TELEGRAM::STARSYSTEM_ADD_SHIP: { return "TELEGRAM::STARSYSTEM_ADD_SHIP"; break; }
+    case TELEGRAM::STARSYSTEM_ADD_CONTAINER: { return "TELEGRAM::STARSYSTEM_ADD_CONTAINER"; break; }
+    case TELEGRAM::INSERT:  { return "TELEGRAM::INSERT"; break; }
+    case TELEGRAM::REMOVE:  { return "TELEGRAM::REMOVE"; break; }
+    case TELEGRAM::DELETE:  { return "TELEGRAM::DELETE"; break; }
+    /** */
+
+    case TELEGRAM::HIT:     { return "TELEGRAM::HIT"; break; }
+    case TELEGRAM::EXPLOSION: { return "TELEGRAM::EXPLOSION"; break; }
+
+    default: return "TELEGRAM::UKNOWN"; break;
     }
 }
 

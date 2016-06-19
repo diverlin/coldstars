@@ -30,8 +30,8 @@ class GrappleModuleBuilder
         GrappleModuleBuilder();
         ~GrappleModuleBuilder();
 
-        GrappleModule* createTemplate(id_type id = NONE_ID) const;
-        GrappleModule* create(int strength_add = NONE_ID, int radius_add = NONE_ID, int speed_add = NONE_ID) const;
+        GrappleModule* createTemplate(id_type id = NONE) const;
+        GrappleModule* create(int strength_add = NONE, int radius_add = NONE, int speed_add = NONE) const;
                                      
     private:
         void createInternals(GrappleModule*, int, int, int) const;

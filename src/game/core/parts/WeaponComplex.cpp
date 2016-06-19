@@ -60,7 +60,7 @@ ItemSlot* WeaponComplex::freeSlot() const
 ItemSlot* WeaponComplex::equipedWeakestSlot() const
 {
     int min_price = 0;
-    unsigned int i_min = NONE_ID;
+    unsigned int i_min = NONE;
 
     for(unsigned int i=0; i<m_slots.size(); i++)
     {
@@ -75,7 +75,7 @@ ItemSlot* WeaponComplex::equipedWeakestSlot() const
         }
     }
     
-    if (i_min != NONE_ID)
+    if (i_min != NONE)
     {
         return m_slots[i_min];
     }

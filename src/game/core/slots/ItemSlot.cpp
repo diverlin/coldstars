@@ -512,10 +512,10 @@ void ItemSlot::SaveData(boost::property_tree::ptree& save_ptree, const std::stri
     LOG(" ItemSlot("+std::to_string(id())+")::SaveData");
 
     if (m_target != nullptr)    { save_ptree.put(root+"unresolved_ItemSlot.target_id", m_target->id()); }
-    else                        { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE_ID); }
+    else                        { save_ptree.put(root+"unresolved_ItemSlot.target_id", NONE); }
 
     if (m_subtarget != nullptr) { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", m_subtarget->id()); }
-    else                        { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE_ID); }
+    else                        { save_ptree.put(root+"unresolved_ItemSlot.subtarget_id", NONE); }
 }
 
 void ItemSlot::LoadData(const boost::property_tree::ptree& load_ptree)

@@ -32,7 +32,7 @@ class RocketBulletBuilder
         RocketBulletBuilder();
         ~RocketBulletBuilder();
         
-        RocketBullet* createTemplate(id_type id = NONE_ID) const;
+        RocketBullet* createTemplate(id_type id = NONE) const;
         RocketBullet* create(const BulletData&) const;
                    
     private:

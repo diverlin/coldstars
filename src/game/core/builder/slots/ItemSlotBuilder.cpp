@@ -55,7 +55,7 @@ ItemSlot* GetNewItemSlot(type::entity subtype_id, const id_type& id)
 
 ItemSlot* GetNewItemSlotWithoutSaveAbility(type::entity subtype_id)
 {
-    ItemSlot* item_slot = new ItemSlot(NONE_ID, subtype_id);
+    ItemSlot* item_slot = new ItemSlot(NONE, subtype_id);
     assert(item_slot);
     
 //    jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);

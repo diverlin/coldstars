@@ -37,7 +37,7 @@ public:
     ~DriveBuilder();
 
     item::equipment::Drive* getNew() const;
-    item::equipment::Drive* createTemplate(id_type id = NONE_ID) const;
+    item::equipment::Drive* createTemplate(id_type id = NONE) const;
     item::equipment::Drive* getNew(const descriptor::Base&) const;
 
 private:
