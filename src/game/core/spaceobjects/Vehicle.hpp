@@ -100,7 +100,7 @@ public:
     const VehicleDescriptor& vehicleDescriptor() const { return m_vehicleDescriptor; }
 
     virtual int givenExpirience() const override final;
-    bool isSlotExists(type::entity) const;
+    bool isSlotTypePresent(type::entity) const;
 
     void addItemSlot(ItemSlot*);
 
