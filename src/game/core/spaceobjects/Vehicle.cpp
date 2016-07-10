@@ -107,11 +107,33 @@ void Vehicle::putChildrenToGarbage() const
     m_npc->SetAlive(false);
     global::get().entityManager().addToGarbage(m_npc);
     
-    for(unsigned int i=0; i<m_slots.size(); i++)
-    {
-        global::get().entityManager().addToGarbage(m_slots[i]);
+    for(ItemSlot* slot: m_slots) {
+        global::get().entityManager().addToGarbage(slot);
     }
 }
+
+// weapon complex interface
+void Vehicle::fire(int timer, float attack_rate)
+{
+    weaponComplex().fire(timer, attack_rate, false);
+}
+
+void Vehicle::setWeaponTarget(SpaceObject* object, ItemSlot* slot)
+{
+    weaponComplex().setTarget(object, slot);
+}
+
+void Vehicle::prepareWeapons()
+{
+    weaponComplex().prepareWeapons();
+}
+
+int Vehicle::guessDamage(int dist)
+{
+    return weaponComplex().guessDamage(dist);
+}
+
+//\ weapon complex interface
 
 void Vehicle::CreateDriveComplexTextureDependedStuff()
 {
@@ -151,7 +173,7 @@ int Vehicle::givenExpirience() const
     return m_npc->GetSkills().GetExpirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
 }
 
-bool Vehicle::isSlotExists(type::entity slot_subtype_id) const
+bool Vehicle::isSlotTypePresent(type::entity slot_subtype_id) const
 {
     for (ItemSlot* slot: m_slots) {
         if (slot->subtype() == slot_subtype_id) {
@@ -241,7 +263,7 @@ bool Vehicle::_installItem(item::Base* item)
 
 bool Vehicle::checkManage(const type::entity& type)
 {
-    if (!isSlotExists(type)) {
+    if (!isSlotTypePresent(type)) {
         return false;
     }
 

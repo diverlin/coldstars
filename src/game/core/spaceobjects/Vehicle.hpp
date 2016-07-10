@@ -69,6 +69,13 @@ public:
     Vehicle();
     virtual ~Vehicle();
 
+    // wepon complex interface
+    void fire(int, float);
+    void setWeaponTarget(SpaceObject* object, ItemSlot* slot = nullptr);
+    void prepareWeapons();
+    int guessDamage(int dist);
+    //\ weapon complex interface
+
     [[deprecated("move to gui")]]
     void CreateDriveComplexTextureDependedStuff();
     [[deprecated("move to gui")]]

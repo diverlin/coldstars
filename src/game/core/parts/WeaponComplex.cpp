@@ -18,15 +18,15 @@
 
 
 #include "WeaponComplex.hpp"
-#include <math/rand.hpp>
+//#include <math/rand.hpp>
 #include <ceti/Logger.hpp>
 
 #include "../spaceobjects/Vehicle.hpp"
 
-#include "../parts/Turrel.hpp"
+//#include "../parts/Turrel.hpp"
 #include <item/BaseItem.hpp>
 #include "../slots/ItemSlot.hpp"
-#include <meti/RandUtils.hpp>
+//#include <meti/RandUtils.hpp>
 
 WeaponComplex::WeaponComplex(Vehicle* owner_vehicle)
     :
@@ -46,43 +46,30 @@ bool WeaponComplex::addSlot(ItemSlot* slot)
 
 ItemSlot* WeaponComplex::freeSlot() const
 {
-    for(unsigned int i=0; i<m_slots.size(); i++)
-    {
-        if (m_slots[i]->item() == nullptr)
-        {
-            return m_slots[i];
+    for(ItemSlot* slot: m_slots) {
+        if (!slot->item()) {
+            return slot;
         }
     }
-    
+
     return nullptr;
 }
 
 ItemSlot* WeaponComplex::equipedWeakestSlot() const
 {
-    int min_price = 0;
-    unsigned int i_min = NONE;
-
-    for(unsigned int i=0; i<m_slots.size(); i++)
-    {
-        if (m_slots[i]->item() != nullptr)
-        {
-            int price = m_slots[i]->item()->price();
-            if ((min_price > price) or (min_price == 0))
-            {
-                min_price = price;
-                i_min = i;
+    int price_min = 0;
+    ItemSlot* result = nullptr;
+    for(ItemSlot* slot: m_slots) {
+        if (slot->item()) {
+            int price = slot->item()->price();
+            if ((price_min > price) || (price_min == 0)) {
+                price_min = price;
+                result = slot;
             }
         }
     }
-    
-    if (i_min != NONE)
-    {
-        return m_slots[i_min];
-    }
-    else
-    {
-        return nullptr;
-    }
+
+    return result;
 }
 
 void WeaponComplex::prepareWeapons()
@@ -95,22 +82,18 @@ void WeaponComplex::prepareWeapons()
 void WeaponComplex::__reloadAllWeapons()
 {
     m_slots_reloaded.clear();
-    for (unsigned int i=0; i<m_slots.size(); i++)
-    {
-        if (m_slots[i]->item() != nullptr)
-        {
-            if (m_slots[i]->item()->isFunctioning() == true)
-            {
-                if (m_slots[i]->checkAmmo() == true)
-                {
-                    m_slots_reloaded.push_back(m_slots[i]);
+    for (ItemSlot* slot: m_slots) {
+        if (slot->item()) {
+            if (slot->item()->isFunctioning()) {
+                if (slot->checkAmmo()) {
+                    m_slots_reloaded.push_back(slot);
                 }
             }
         }
     }
     
-    fire_delay = meti::getRandInt(7,15);
-    d_fire_delay = TURN_TIME/(m_slots_reloaded.size()+1);
+//    fire_delay = meti::getRandInt(7,15);
+//    d_fire_delay = TURN_TIME/(m_slots_reloaded.size()+1);
 }
 
 void WeaponComplex::activateWeapons()
@@ -166,7 +149,7 @@ void WeaponComplex::setTarget(SpaceObject* target, ItemSlot* item_slot)
         if (slot->isSelected()) {
             if (slot->item()) {
                 if (slot->item()->isFunctioning()) {
-                    if (slot->target() == nullptr)                     {
+                    if (!slot->target()) {
                         STATUS status = slot->checkTarget(target);
                         if (status == STATUS::TARGET_OK) {
                             slot->setTarget(target, item_slot);
@@ -180,24 +163,35 @@ void WeaponComplex::setTarget(SpaceObject* target, ItemSlot* item_slot)
     }
 }
 
-void WeaponComplex::Fire(int timer, float attack_rate, bool show_effect)
+int WeaponComplex::guessDamage(int dist)
 {
-    if (timer < TURN_TIME - fire_delay) {
+    int damage = 0;
+    for (ItemSlot* slot: m_slots_reloaded) {
+        if (slot->item()->radius() >= dist) {
+            damage += slot->item()->damage();
+        }
+    }
+    return damage;
+}
+
+void WeaponComplex::fire(int timer, float attack_rate, bool show_effect)
+{
+    //if (timer < TURN_TIME - fire_delay) {
         for (std::vector<ItemSlot*>::iterator it=m_slots_reloaded.begin(); it<m_slots_reloaded.end(); ++it) {
             ItemSlot& slot = **it; // shortcut
             if (slot.target()) {
                 if (slot.validateTarget() == STATUS::TARGET_OK) {
                     slot.fireEvent(attack_rate, show_effect);
-                    if (slot.subtarget()) {
-                        fire_delay += d_fire_delay;
-                    }
+//                    if (slot.subtarget()) {
+//                        fire_delay += d_fire_delay;
+//                    }
                 } else {
                     slot.resetTarget();
                 }
                 it = m_slots_reloaded.erase(it);
             }
         }
-    }
+    //}
 }
 
 void WeaponComplex::__validateAllWeaponsTarget()

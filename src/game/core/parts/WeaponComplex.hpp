@@ -49,7 +49,7 @@ public:
 
     void setTarget(SpaceObject*, ItemSlot* item_slot = nullptr);
 
-    void Fire(int, float, bool);
+    void fire(int, float, bool);
 
     void activateWeapons();
     void deactivateWeapons();
@@ -59,6 +59,8 @@ public:
     bool isAnyWeaponSelected() const;
 
     void updateFireAbility();
+
+    int guessDamage(int dist);
 
 //    void RenderWeaponIcons() const;
 //    void RenderWeaponsRange();
@@ -72,7 +74,7 @@ private:
 
     Vehicle* owner_vehicle = nullptr;
 
-    int fire_delay = 0, d_fire_delay = 0;
+//    int fire_delay = 0, d_fire_delay = 0;
     std::vector<ItemSlot*> m_slots;
     std::vector<ItemSlot*> m_slots_reloaded;
 

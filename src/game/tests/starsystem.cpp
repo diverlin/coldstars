@@ -117,12 +117,24 @@ TEST(ship, shoot_ship)
 {
     /* create objects */
     Starsystem* starsystem = StarsystemBuilder::getNew();
-//    Ship* ship1 = ShipBuilder::getNew(/*full_equiped=*/true);
-//    Ship* ship2 = ShipBuilder::getNew(/*full_equiped=*/true);
+    Ship* ship1 = ShipBuilder::getNew(/*full_equiped=*/true);
+    Ship* ship2 = ShipBuilder::getNew(/*full_equiped=*/true);
 
-//    /* add objects */
-//    starsystem->add(ship1, /*pos=*/glm::vec3(0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
-//    starsystem->add(ship2, /*pos=*/glm::vec3(100.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+    float distance = 100.0f;
+
+    /* add objects */
+    starsystem->add(ship1, /*pos=*/glm::vec3(0.0f), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+    starsystem->add(ship2, /*pos=*/glm::vec3(distance), /*dir=*/glm::vec3(0.0f, 1.0f, 0.0f));
+
+    ship1->prepareWeapons();
+    ship1->setWeaponTarget(ship2);
+
+    int damage = ship1->guessDamage(distance);
+    int armor_init = ship2->armor();
+    ship1->fire(/*timer=*/0, /*rate=*/1.0);
+    EXPECT_FALSE(damage == 0);
+    EXPECT_EQ(armor_init - damage, ship2->armor());
+
 }
 
 
