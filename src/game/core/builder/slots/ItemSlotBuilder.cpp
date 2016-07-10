@@ -33,7 +33,7 @@
 #include <slots/ItemSlot.hpp>
 
 
-ItemSlot* GetNewItemSlot(type::entity subtype_id, const id_type& id)
+ItemSlot* getNewItemSlot(type::entity subtype_id, const id_type& id)
 {  
     ItemSlot* item_slot = new ItemSlot(id, subtype_id);
     assert(item_slot);
@@ -53,13 +53,3 @@ ItemSlot* GetNewItemSlot(type::entity subtype_id, const id_type& id)
     return item_slot;
 }
 
-ItemSlot* GetNewItemSlotWithoutSaveAbility(type::entity subtype_id)
-{
-    ItemSlot* item_slot = new ItemSlot(NONE, subtype_id);
-    assert(item_slot);
-    
-//    jeti::TextureOb* texOb_slot = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::ITEM_SLOT_ID);
-//    item_slot->SetTextureOb(texOb_slot);
-    
-    return item_slot;
-}
