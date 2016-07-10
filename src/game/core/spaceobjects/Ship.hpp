@@ -23,25 +23,25 @@
 
 class Ship : public Vehicle
 {   
-    public:
-        Ship(int);
-        virtual ~Ship();
-        
-        virtual void UpdateInSpace(int, bool) override final;
-        
-//        virtual void UpdateInfo() override final;
-        
-//        void RenderInSpace(const jeti::Renderer&, float);
-//        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
-        
-        virtual void Save(boost::property_tree::ptree&) const override final;
-        virtual void Load(const boost::property_tree::ptree&) override final;
-        virtual void Resolve() override final;
-         
-    private:        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+public:
+    Ship(int);
+    virtual ~Ship();
+
+    virtual void UpdateInSpace(int, bool) override final;
+
+    //        virtual void UpdateInfo() override final;
+
+    //        void RenderInSpace(const jeti::Renderer&, float);
+    //        void RenderAtPlanet(const jeti::Renderer&, const glm::vec3&);
+
+    virtual void Save(boost::property_tree::ptree&) const override final;
+    virtual void Load(const boost::property_tree::ptree&) override final;
+    virtual void Resolve() override final;
+
+private:
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 };
 
 

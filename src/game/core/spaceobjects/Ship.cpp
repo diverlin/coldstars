@@ -89,7 +89,7 @@ Ship::~Ship()
 void Ship::UpdateInSpace(int time, bool show_effect)
 {   
     _checkDeath(show_effect);
-//    GetComplexProtector().GetShieldEffect()->Update();
+    //    GetComplexProtector().GetShieldEffect()->Update();
     driveComplex().UpdatePosition(); // debug
 
     if (time > 0) {
@@ -97,7 +97,7 @@ void Ship::UpdateInSpace(int time, bool show_effect)
         
         if (npc()) {
             npc()->UpdateInSpace(time, show_effect);
-            weaponComplex().Fire(time, npc()->GetSkills().GetAttackNormalized(), show_effect);
+            weaponComplex().fire(time, npc()->GetSkills().GetAttackNormalized(), show_effect);
 
             updateOrientation();
 
