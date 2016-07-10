@@ -43,10 +43,6 @@ class BaseEquipment;
 class BaseParticleSystem;
 class ShockWaveEffect;
 
-//namespace jeti {
-//class Renderer;
-//}
-
 struct UnresolvedDataVehicle
 {
     int drive_complex_target_id;
@@ -100,7 +96,7 @@ public:
     const VehicleDescriptor& vehicleDescriptor() const { return m_vehicleDescriptor; }
 
     virtual int givenExpirience() const override final;
-    bool isSlotTypePresent(type::entity) const;
+    bool isSlotTypePresent(const type::entity&) const;
 
     void addItemSlot(ItemSlot*);
 
@@ -109,7 +105,9 @@ public:
 
     bool addItemToCargoSlot(item::Base*);
     bool manage(item::Base*);
-    bool checkManage(const type::entity&);
+
+    bool isSlotFree(const type::entity&) const;
+    bool checkManage(const core::Ident&);
 
     void manageItemsInCargo();
     [[deprecated("move to ext")]]
@@ -210,7 +208,7 @@ public:
 
     STATUS CheckGrabStatus() const;
 
-    float dissipateRate() const;
+    float dissipateFilter() const;
     int criticalDamage() const;
 
 protected:
@@ -285,8 +283,8 @@ private:
     bool __mergeIdenticalGoods(item::Base*);
 
     Container* __wrapItemToContainer(item::Base*);
-    bool _checkInstallEquipment(const type::entity&);
-    ItemSlot* const _freeFunctionalSlot(const type::entity&) const;
+    bool _checkInstallEquipment(const core::Ident&);
+    ItemSlot* const _freeFunctionalSlot(const core::Ident&) const;
 
     friend class GuiVehicle;
     friend class GuiVehicle2;

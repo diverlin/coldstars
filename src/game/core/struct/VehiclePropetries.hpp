@@ -45,14 +45,15 @@ struct VehiclePropetries
     int artefact_protection = 0;
 
     // simplification
-    int avr_damage = 0;
-    int avr_fire_radius = 0;
+    int total_damage = 0;
+    int fire_radius_min = 0;
+    int fire_radius_max = 0;
 
     bool equipment_radar = 0;
     bool shield_effect_enabled = 0;
     bool hibernate_mode_enabled = 0;
 
-    int total_damage = 0;
+
         
     VehiclePropetries()
     {}

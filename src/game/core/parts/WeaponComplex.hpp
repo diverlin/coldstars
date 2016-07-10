@@ -57,6 +57,7 @@ public:
     void deactivateWeapons(const type::entity&);
 
     bool isAnyWeaponSelected() const;
+//    int itemsNum() const;
 
     void updateFireAbility();
 

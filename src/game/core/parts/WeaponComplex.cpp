@@ -18,15 +18,12 @@
 
 
 #include "WeaponComplex.hpp"
-//#include <math/rand.hpp>
 #include <ceti/Logger.hpp>
 
 #include "../spaceobjects/Vehicle.hpp"
 
-//#include "../parts/Turrel.hpp"
 #include <item/BaseItem.hpp>
 #include "../slots/ItemSlot.hpp"
-//#include <meti/RandUtils.hpp>
 
 WeaponComplex::WeaponComplex(Vehicle* owner_vehicle)
     :
@@ -138,6 +135,17 @@ bool WeaponComplex::isAnyWeaponSelected() const
     return false;
 }
 
+//int WeaponComplex::itemsNum() const
+//{
+//    int itemsNum = 0;
+//    for (ItemSlot* slot: m_slots) {
+//        if (slot->item()) {
+//            itemsNum++;
+//        }
+//    }
+//    return itemsNum;
+//}
+
 void WeaponComplex::setTarget(SpaceObject* target, ItemSlot* item_slot)
 {                 
     //if (item_slot == nullptr)   LOG("vehicle_id="+std::to_string(owner_vehicle->id())+" WeaponComplex::SetTarget type_id= " + str(target->typeId()) + " id=" + std::to_string(target->id()));
@@ -177,7 +185,8 @@ int WeaponComplex::guessDamage(int dist)
 void WeaponComplex::fire(int timer, float attack_rate, bool show_effect)
 {
     //if (timer < TURN_TIME - fire_delay) {
-        for (std::vector<ItemSlot*>::iterator it=m_slots_reloaded.begin(); it<m_slots_reloaded.end(); ++it) {
+    std::vector<ItemSlot*>::iterator it=m_slots_reloaded.begin();
+        while(it!=m_slots_reloaded.end()) {
             ItemSlot& slot = **it; // shortcut
             if (slot.target()) {
                 if (slot.validateTarget() == STATUS::TARGET_OK) {
@@ -189,6 +198,8 @@ void WeaponComplex::fire(int timer, float attack_rate, bool show_effect)
                     slot.resetTarget();
                 }
                 it = m_slots_reloaded.erase(it);
+            } else {
+                ++it;
             }
         }
     //}
@@ -214,6 +225,9 @@ void WeaponComplex::updateFireAbility()
         if (slot->item()) {
             if (slot->item()->isFunctioning()) {
                 int radius = slot->itemRadius();
+                if (m_radiusMin == 0) {
+                    m_radiusMin = radius;
+                }
                 m_radiusMin = std::min(m_radiusMin, radius);
                 m_radiusMax = std::max(m_radiusMax, radius);
                 m_damage += slot->itemDamage();

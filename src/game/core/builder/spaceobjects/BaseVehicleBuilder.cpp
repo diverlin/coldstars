@@ -172,7 +172,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, type::tech tech_level)
 {
     unsigned int weapons_num = meti::getRandInt(vehicle->vehicleDescriptor().slot_weapon_num/2, vehicle->vehicleDescriptor().slot_weapon_num);
     for (unsigned int i=0; i<weapons_num; i++) {
-        if (vehicle->checkManage(type::entity::WEAPON_SLOT_ID)) {
+        if (vehicle->isSlotFree(type::entity::WEAPON_SLOT_ID)) {
             bool rand = 0; //getRandBool();
             if (rand) {
                 vehicle->manage( global::get().rocketBuilder().getNew(tech_level) );
@@ -182,41 +182,41 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, type::tech tech_level)
         }
     }   
     
-    if (vehicle->checkManage(type::entity::RADAR_SLOT_ID)) {
+    if (vehicle->isSlotFree(type::entity::RADAR_SLOT_ID)) {
         vehicle->manage(global::get().radarBuilder().getNew());
     }
     
-    if (vehicle->checkManage(type::entity::DRIVE_SLOT_ID)) {
+    if (vehicle->isSlotFree(type::entity::DRIVE_SLOT_ID)) {
         vehicle->manage(global::get().driveBuilder().getNew());
     }
     
-    if (vehicle->checkManage(type::entity::BAK_SLOT_ID)) {
+    if (vehicle->isSlotFree(type::entity::BAK_SLOT_ID)) {
         vehicle->manage(global::get().bakBuilder().getNew());
     }
 
 #ifdef USE_EXTRA_EQUIPMENT
-    if (vehicle->checkManage(type::entity::ENERGIZER_SLOT_ID)) {
+    if (vehicle->isSlotFree(type::entity::ENERGIZER_SLOT_ID)) {
         vehicle->manage(global::get().energizerBuilder().getNew());
     }
     
-    if (vehicle->checkManage(type::entity::FREEZER_SLOT_ID)) {
+    if (vehicle->isSlotFree(type::entity::FREEZER_SLOT_ID)) {
         vehicle->manage(global::get().freezerBuilder().getNew());
     }
 #endif
 
-    if (vehicle->checkManage(type::entity::PROTECTOR_SLOT_ID)) {
+    if (vehicle->isSlotFree(type::entity::PROTECTOR_SLOT_ID)) {
         vehicle->manage(global::get().protectorBuilder().getNew());
     }
         
-    if (vehicle->checkManage(type::entity::DROID_SLOT_ID)) {
+    if (vehicle->isSlotFree(type::entity::DROID_SLOT_ID)) {
         vehicle->manage(global::get().droidBuilder().getNew());
     }
     
-    if (vehicle->checkManage(type::entity::SCANER_SLOT_ID)) {
+    if (vehicle->isSlotFree(type::entity::SCANER_SLOT_ID)) {
         vehicle->manage(global::get().scanerBuilder().getNew());
     }
     
-    if (vehicle->checkManage(type::entity::GRAPPLE_SLOT_ID)) {
+    if (vehicle->isSlotFree(type::entity::GRAPPLE_SLOT_ID)) {
         vehicle->manage(global::get().grappleBuilder().getNew());
     }
 }

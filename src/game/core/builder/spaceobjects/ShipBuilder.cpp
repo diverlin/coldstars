@@ -151,7 +151,7 @@ ShipBuilder::__createInternals(Ship* ship, const descriptor::Base& descr)
     //alpitodorender ship->SetRenderData(mesh, texOb, scale);
 
     LifeData data_life;
-    data_life.armor      = descr.armor() * 0.1;
+    data_life.armor      = descr.armor();
     data_life.dying_time = ship->collisionRadius() * 0.1;
     ship->setLifeData(data_life);
     

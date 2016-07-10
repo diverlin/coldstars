@@ -101,7 +101,7 @@ public:
     Turrel* turrel() const { return m_turrel; }
 
     item::Base* item() const { return m_item; }
-    bool empty() const { return !m_item; }
+    bool isEmpty() const { return !m_item; }
 
     item::equipment::Rocket*    rocketEquipment()    const { return reinterpret_cast<item::equipment::Rocket*>(m_item); }
     item::equipment::Lazer*     lazerEquipment()     const { return reinterpret_cast<item::equipment::Lazer*>(m_item); }

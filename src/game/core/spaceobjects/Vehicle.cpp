@@ -173,7 +173,7 @@ int Vehicle::givenExpirience() const
     return m_npc->GetSkills().GetExpirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
 }
 
-bool Vehicle::isSlotTypePresent(type::entity slot_subtype_id) const
+bool Vehicle::isSlotTypePresent(const type::entity& slot_subtype_id) const
 {
     for (ItemSlot* slot: m_slots) {
         if (slot->subtype() == slot_subtype_id) {
@@ -261,14 +261,26 @@ bool Vehicle::_installItem(item::Base* item)
     return false;
 } 
 
-bool Vehicle::checkManage(const type::entity& type)
+bool Vehicle::isSlotFree(const type::entity& subtype) const
 {
-    if (!isSlotTypePresent(type)) {
+    for (ItemSlot* slot: m_slots) {
+        if (slot->subtype() == subtype) {
+            if (slot->isEmpty()) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool Vehicle::checkManage(const core::Ident& ident)
+{
+    if (!isSlotTypePresent(ident.subtype)) {
         return false;
     }
 
-    switch(type) {
-    case type::entity::EQUIPMENT_ID:    { return _checkInstallEquipment(type); break; }
+    switch(ident.type) {
+    case type::entity::EQUIPMENT_ID:    { return _checkInstallEquipment(ident); break; }
 //#ifdef USE_MODULES
 //    case TYPE::ENTITY::MODULE_ID:       { return _checkInstallModule(type); break; }
 //#endif
@@ -313,14 +325,14 @@ bool Vehicle::_installEquipment(item::Base* item)
     return false;
 }     
 
-bool Vehicle::_checkInstallEquipment(const type::entity& type)
+bool Vehicle::_checkInstallEquipment(const core::Ident& ident)
 {
-    if (type == type::entity::WEAPON_SLOT_ID) {
+    if (ident.type == type::entity::WEAPON_SLOT_ID) {
         if (m_weaponComplex.freeSlot()) {
             return true;
         }
     } else {
-        if (_freeFunctionalSlot(type)) {
+        if (_freeFunctionalSlot(ident)) {
             return true;
         }
     }
@@ -370,11 +382,11 @@ Vehicle::_functionalSlot(const type::entity& functional_slot_subtype_id) const
 }
 
 ItemSlot* const
-Vehicle::_freeFunctionalSlot(const type::entity& functional_slot_subtype_id) const
+Vehicle::_freeFunctionalSlot(const core::Ident& ident) const
 {
     for(ItemSlot* slot: m_equipmentSlots) {
-        if (slot->subtype() == functional_slot_subtype_id) {
-            if (slot->empty()) {
+        if (slot->subtype() == ident.subtype) {
+            if (slot->isEmpty()) {
                 return slot;
             }
         }
@@ -701,42 +713,47 @@ void Vehicle::remeberAgressor(Vehicle* agressor)
 }
 
 
-float Vehicle::dissipateRate() const
+float Vehicle::dissipateFilter() const
 {
-    float rate = m_properties.protection*0.01f;
+    float rate = 1.0f - m_properties.protection*0.01f;
+    assert(rate > 0);
+    assert(rate <= 1.0f);
     //    if (m_npc) {
     //        rate *= m_npc->GetSkills().GetDefenceNormalized();
     //    }
+    //std::cout<<"---rate="<<rate<<std::endl;
     return rate;
 }
 
 int Vehicle::criticalDamage() const {
-    return armor() * (1.0 + dissipateRate()) + 2;
+    return armor() * dissipateFilter();
 }
 
 /* virtual */
 void Vehicle::hit(int damage)
 {
     LOG(std::string("Vehicle::hit id=") << std::to_string(id()) << " damage=" << std::to_string(damage));
-    if (!m_godMode) {
-        if (m_properties.energy < damage) {
-            m_properties.hibernate_mode_enabled = true;
-            _updatePropProtection();
-        }
+    if (m_godMode)
+        return;
 
-        SpaceObject::hit(damage * (1.0 - dissipateRate()));
+#ifdef USE_EXTRA_EQUIPMENT
+    if (m_properties.energy < damage) {
+        m_properties.hibernate_mode_enabled = true;
+        _updatePropProtection();
+    }
+#endif
 
-        //if (show_effect == true)
+    SpaceObject::hit(damage * dissipateFilter());
+
+    //if (show_effect == true)
+    {
+        //if (m_ComplexProtector.GetProtectorSlot()->item() != nullptr)
         {
-            //if (m_ComplexProtector.GetProtectorSlot()->item() != nullptr)
-            {
-                //m_ComplexProtector.GetShieldEffect()->SetAlpha(1.0);
-            }
-
-            //VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(center()), COLOR::COLOR4I_RED_LIGHT, collisionRadius());
-            //starsystem()->Add(text);
+            //m_ComplexProtector.GetShieldEffect()->SetAlpha(1.0);
         }
 
+        //VerticalFlowText* text = new VerticalFlowText(std::to_string(damage), 12, meti::vec2(center()), COLOR::COLOR4I_RED_LIGHT, collisionRadius());
+        //starsystem()->Add(text);
     }
 }
 
@@ -912,6 +929,8 @@ void Vehicle::_updatePropFire()
     m_weaponComplex.updateFireAbility();
 
     m_properties.total_damage = m_weaponComplex.damage();
+    m_properties.fire_radius_min = m_weaponComplex.radiusMin();
+    m_properties.fire_radius_max = m_weaponComplex.radiusMax();
 }
 
 void Vehicle::_updatePropRadar()
