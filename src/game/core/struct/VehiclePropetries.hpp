@@ -45,8 +45,8 @@ struct VehiclePropetries
     int artefact_protection = 0;
 
     // simplification
-    int average_damage = 0;
-    int average_fire_radius = 0;
+    int avr_damage = 0;
+    int avr_fire_radius = 0;
 
     bool equipment_radar = 0;
     bool shield_effect_enabled = 0;

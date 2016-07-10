@@ -71,6 +71,47 @@ TEST(creation,bak)
 // TODO
 // fill for rest items
 
+TEST(equipment, lazer)
+{
+    Ship* ship = ShipBuilder::getNew();
+    item::equipment::Lazer* lazer = global::get().lazerBuilder().getNew();
+
+    // initial
+    EXPECT_EQ(ship->properties().avr_damage, 0);
+    EXPECT_EQ(ship->properties().avr_fire_radius, 0);
+
+    // insert item
+    ship->manage(lazer);
+
+    // prop check
+    EXPECT_EQ(ship->properties().avr_damage, lazer->damage());
+    EXPECT_EQ(ship->properties().avr_fire_radius, lazer->radius());
+
+    // clean
+    delete ship;
+    delete lazer;
+}
+
+TEST(equipment, rocket)
+{
+    Ship* ship = ShipBuilder::getNew();
+    item::equipment::Rocket* rocket = global::get().rocketBuilder().getNew();
+
+    // initial
+    EXPECT_EQ(ship->properties().avr_damage, 0);
+    EXPECT_EQ(ship->properties().avr_fire_radius, 0);
+
+    // insert item
+    ship->manage(rocket);
+
+    // prop check
+    EXPECT_EQ(ship->properties().avr_damage, rocket->damage());
+    EXPECT_EQ(ship->properties().avr_fire_radius, rocket->radius());
+
+    // clean
+    delete ship;
+    delete rocket;
+}
 
 TEST(equipment, bak)
 {
