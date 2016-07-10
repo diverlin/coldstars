@@ -49,8 +49,8 @@ Bak*
 BakBuilder::getNew(const descriptor::Base& descr)
 {
     descriptor::Base descriptor(descr.data());
-    int_type id = NONE;
-    if (descr.type() == (int_type)descriptor::Type::DESCRIPTOR) {
+    id_type id = NONE;
+    if (descr.type() == (id_type)descriptor::Type::DESCRIPTOR) {
         descriptor = global::get().descriptors().get(descr.descriptor());
         id = descr.objId();
     }

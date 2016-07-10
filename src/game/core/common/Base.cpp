@@ -46,20 +46,20 @@ void Base::SaveData(boost::property_tree::ptree& save_ptree, const std::string& 
 {
     LOG(" Base("+std::to_string(id())+")::SaveDataUniqueBase");
     
-    save_ptree.put(root+"data_id.id",            m_data_id.id);
-    save_ptree.put(root+"data_id.type_id",       static_cast<int>(m_data_id.type_id));
-    save_ptree.put(root+"data_id.subtype_id",    static_cast<int>(m_data_id.subtype_id));
-    save_ptree.put(root+"data_id.subsubtype_id", static_cast<int>(m_data_id.subsubtype_id));
+//    save_ptree.put(root+"data_id.id",            m_data_id.id);
+//    save_ptree.put(root+"data_id.type_id",       static_cast<int>(m_data_id.type_id));
+//    save_ptree.put(root+"data_id.subtype_id",    static_cast<int>(m_data_id.subtype_id));
+//    save_ptree.put(root+"data_id.subsubtype_id", static_cast<int>(m_data_id.subsubtype_id));
 }
 
 void Base::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" Base("+std::to_string(id())+")::LoadDataUniqueBase");
     
-    m_data_id.id              = load_ptree.get<unsigned long int>("data_id.id");
-    m_data_id.type_id         = (type::entity)load_ptree.get<int>("data_id.type_id");
-    m_data_id.subtype_id      = (type::entity)load_ptree.get<int>("data_id.subtype_id");
-    m_data_id.subsubtype_id   = (type::entity)load_ptree.get<int>("data_id.subsubtype_id");
+//    m_data_id.id              = load_ptree.get<unsigned long int>("data_id.id");
+//    m_data_id.type_id         = (type::entity)load_ptree.get<int>("data_id.type_id");
+//    m_data_id.subtype_id      = (type::entity)load_ptree.get<int>("data_id.subtype_id");
+//    m_data_id.subsubtype_id   = (type::entity)load_ptree.get<int>("data_id.subsubtype_id");
 }
 
 void Base::ResolveData()

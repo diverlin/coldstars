@@ -44,8 +44,8 @@ Ship*
 ShipBuilder::getNew(const descriptor::Base& descr)
 {            
     descriptor::Base descriptor(descr.data());
-    int_type id = NONE;
-    if (descr.type() == (int_type)descriptor::Type::DESCRIPTOR) {
+    id_type id = NONE;
+    if (descr.type() == (id_type)descriptor::Type::DESCRIPTOR) {
         descriptor = global::get().descriptors().get(descr.descriptor());
         id = descr.objId();
     }
@@ -62,7 +62,7 @@ ShipBuilder::getNew(const std::string& data)
 }
 
 Ship*
-ShipBuilder::__getNewTemplate(int_type id)
+ShipBuilder::__getNewTemplate(id_type id)
 {
     if (id == NONE) {
         id = global::get().idGenerator().nextId();

@@ -181,7 +181,7 @@ Base::data() const
 }
 
 void
-Base::add(const Key& key, const int_type& value)
+Base::add(const Key& key, const id_type& value)
 {
     auto f = m_map.find(key);
     if (f == m_map.end()) {
@@ -191,52 +191,52 @@ Base::add(const Key& key, const int_type& value)
     }
 }
 
-const int_type& Base::id() const { return __getOrDie(Key::ID); }
-const int_type& Base::objId() const { return __get(Key::OBJ_ID); }
-const int_type& Base::type() const { return __getOrDie(Key::TYPE); }
-const int_type& Base::objType() const { return __getOrDie(Key::OBJ_TYPE); }
-const int_type& Base::descriptor() const { return __getOrDie(Key::DESCRIPTOR); }
-const int_type& Base::race() const { return __getOrDie(Key::RACE); }
-const int_type& Base::damage() const { return __getOrDie(Key::DAMAGE); }
-const int_type& Base::radius() const { return __getOrDie(Key::RADIUS); }
-const int_type& Base::tech() const { return __getOrDie(Key::TECH); }
-const int_type& Base::modulesNum() const { return __getOrDie(Key::MODULES_NUM); }
-const int_type& Base::mass() const { return __getOrDie(Key::MASS); }
-const int_type& Base::conditionMax() const { return __getOrDie(Key::CONDITION_MAX); }
-const int_type& Base::deterioration() const { return __getOrDie(Key::DETERIORATION); }
-const int_type& Base::fuelMax() const { return __getOrDie(Key::FUEL_MAX); }
-const int_type& Base::speed() const { return __getOrDie(Key::SPEED); }
-const int_type& Base::hyper() const { return __getOrDie(Key::HYPER); }
-const int_type& Base::repair() const { return __getOrDie(Key::REPAIR); }
-const int_type& Base::strength() const { return __getOrDie(Key::STRENGTH); }
-const int_type& Base::scan() const { return __getOrDie(Key::SCAN); }
-const int_type& Base::protection() const { return __getOrDie(Key::PROTECTION); }
-const int_type& Base::price() const { return __getOrDie(Key::PRICE); }
+const id_type& Base::id() const { return __getOrDie(Key::ID); }
+const id_type& Base::objId() const { return __get(Key::OBJ_ID); }
+const id_type& Base::type() const { return __getOrDie(Key::TYPE); }
+const id_type& Base::objType() const { return __getOrDie(Key::OBJ_TYPE); }
+const id_type& Base::descriptor() const { return __getOrDie(Key::DESCRIPTOR); }
+const id_type& Base::race() const { return __getOrDie(Key::RACE); }
+const id_type& Base::damage() const { return __getOrDie(Key::DAMAGE); }
+const id_type& Base::radius() const { return __getOrDie(Key::RADIUS); }
+const id_type& Base::tech() const { return __getOrDie(Key::TECH); }
+const id_type& Base::modulesNum() const { return __getOrDie(Key::MODULES_NUM); }
+const id_type& Base::mass() const { return __getOrDie(Key::MASS); }
+const id_type& Base::conditionMax() const { return __getOrDie(Key::CONDITION_MAX); }
+const id_type& Base::deterioration() const { return __getOrDie(Key::DETERIORATION); }
+const id_type& Base::fuelMax() const { return __getOrDie(Key::FUEL_MAX); }
+const id_type& Base::speed() const { return __getOrDie(Key::SPEED); }
+const id_type& Base::hyper() const { return __getOrDie(Key::HYPER); }
+const id_type& Base::repair() const { return __getOrDie(Key::REPAIR); }
+const id_type& Base::strength() const { return __getOrDie(Key::STRENGTH); }
+const id_type& Base::scan() const { return __getOrDie(Key::SCAN); }
+const id_type& Base::protection() const { return __getOrDie(Key::PROTECTION); }
+const id_type& Base::price() const { return __getOrDie(Key::PRICE); }
 //vehicle
-const int_type& Base::space() const { return __getOrDie(Key::SPACE); }
-const int_type& Base::armor() const { return __getOrDie(Key::ARMOR); }
-const int_type& Base::temperature() const { return __getOrDie(Key::TEMPERATURE); }
-const int_type& Base::drawTurrels() const { return __getOrDie(Key::DRAW_TURRELS); }
-const int_type& Base::size() const { return __getOrDie(Key::SIZE); }
-const int_type& Base::bakSlotNum() const { return __getOrDie(Key::BAK_SLOT_NUM); }
-const int_type& Base::driveSlotNum() const { return __getOrDie(Key::DRIVE_SLOT_NUM); }
-const int_type& Base::droidSlotNum() const { return __getOrDie(Key::DROID_SLOT_NUM); }
+const id_type& Base::space() const { return __getOrDie(Key::SPACE); }
+const id_type& Base::armor() const { return __getOrDie(Key::ARMOR); }
+const id_type& Base::temperature() const { return __getOrDie(Key::TEMPERATURE); }
+const id_type& Base::drawTurrels() const { return __getOrDie(Key::DRAW_TURRELS); }
+const id_type& Base::size() const { return __getOrDie(Key::SIZE); }
+const id_type& Base::bakSlotNum() const { return __getOrDie(Key::BAK_SLOT_NUM); }
+const id_type& Base::driveSlotNum() const { return __getOrDie(Key::DRIVE_SLOT_NUM); }
+const id_type& Base::droidSlotNum() const { return __getOrDie(Key::DROID_SLOT_NUM); }
 #ifdef USE_EXTRA_EQUIPMENT
-const int_type& Base::energizerSlotNum() const { return get(Key::ENERGIZER_SLOT_NUM); }
-const int_type& Base::freezerSlotNum() const { return get(Key::FREEZER_SLOT_NUM); }
+const id_type& Base::energizerSlotNum() const { return get(Key::ENERGIZER_SLOT_NUM); }
+const id_type& Base::freezerSlotNum() const { return get(Key::FREEZER_SLOT_NUM); }
 #endif // USE_EXTRA_EQUIPMENT
-const int_type& Base::grappleSlotNum() const { return __getOrDie(Key::GRAPPLE_SLOT_NUM); }
-const int_type& Base::protectorSlotNum() const { return __getOrDie(Key::PROTECTOR_SLOT_NUM); }
-const int_type& Base::radarSlotNum() const { return __getOrDie(Key::RADAR_SLOT_NUM); }
-const int_type& Base::scanerSlotNum() const { return __getOrDie(Key::SCANER_SLOT_NUM); }
-const int_type& Base::weaponSlotNum() const { return __getOrDie(Key::WEAPON_SLOT_NUM); }
-const int_type& Base::artefactSlotNum() const { return __getOrDie(Key::ARTEFACT_SLOT_NUM); }
-const int_type& Base::cargoSlotNum() const { return __getOrDie(Key::CARGO_SLOT_NUM); }
+const id_type& Base::grappleSlotNum() const { return __getOrDie(Key::GRAPPLE_SLOT_NUM); }
+const id_type& Base::protectorSlotNum() const { return __getOrDie(Key::PROTECTOR_SLOT_NUM); }
+const id_type& Base::radarSlotNum() const { return __getOrDie(Key::RADAR_SLOT_NUM); }
+const id_type& Base::scanerSlotNum() const { return __getOrDie(Key::SCANER_SLOT_NUM); }
+const id_type& Base::weaponSlotNum() const { return __getOrDie(Key::WEAPON_SLOT_NUM); }
+const id_type& Base::artefactSlotNum() const { return __getOrDie(Key::ARTEFACT_SLOT_NUM); }
+const id_type& Base::cargoSlotNum() const { return __getOrDie(Key::CARGO_SLOT_NUM); }
 
 // dynamic
-const int_type& Base::owner() const { return __getOrDie(Key::OWNER); }
-const int_type& Base::child() const { return __getOrDie(Key::CHILD); }
-const int_type& Base::target() const { return __getOrDie(Key::TARGET); }
+const id_type& Base::owner() const { return __getOrDie(Key::OWNER); }
+const id_type& Base::child() const { return __getOrDie(Key::CHILD); }
+const id_type& Base::target() const { return __getOrDie(Key::TARGET); }
 
 bool
 Base::operator==(const Base& rhs) const
@@ -244,7 +244,7 @@ Base::operator==(const Base& rhs) const
     return data() == rhs.data();
 }
 
-const int_type&
+const id_type&
 Base::__getOrDie(const Key& key) const
 {
     auto f = m_map.find(key);
@@ -254,7 +254,7 @@ Base::__getOrDie(const Key& key) const
     throw std::runtime_error("CODE ERROR: key=[" + keyStr(key) + "] is not found in descriptor");
 }
 
-const int_type&
+const id_type&
 Base::__get(const Key& key) const
 {
     auto f = m_map.find(key);

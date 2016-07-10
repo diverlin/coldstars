@@ -46,7 +46,7 @@
 TEST(communication, create_ship)
 {
     auto descriptor = global::get().descriptors().getRand(descriptor::Type::VEHICLE);
-    int_type obj_id = global::get().idGenerator().nextId();
+    id_type obj_id = global::get().idGenerator().nextId();
     descriptor::Descriptor descriptor2(descriptor.id(), obj_id);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_SHIP, descriptor2.data()));
 
@@ -58,7 +58,7 @@ TEST(communication, create_ship)
 TEST(communication, create_bak)
 {
     auto descriptor = global::get().descriptors().getRand(descriptor::Type::BAK);
-    int_type obj_id = global::get().idGenerator().nextId();
+    id_type obj_id = global::get().idGenerator().nextId();
     descriptor::Descriptor descriptor2(descriptor.id(), obj_id);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_BAK, descriptor2.data()));
 

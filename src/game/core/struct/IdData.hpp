@@ -21,11 +21,12 @@
 #include <types/IdType.hpp>
 #include <types/EntityTypes.hpp>
 
-struct IdData  
-{
-    id_type id = 0;
-    type::entity type_id = type::entity::NONE_ID;
-    type::entity subtype_id = type::entity::NONE_ID;
-    type::entity subsubtype_id = type::entity::NONE_ID;
+namespace core {
+
+struct Type {
+    type::entity type = type::entity::NONE_ID;
+    type::entity subtype = type::entity::NONE_ID;
+    type::entity subsubtype = type::entity::NONE_ID;
 };
 
+} // namespace core
