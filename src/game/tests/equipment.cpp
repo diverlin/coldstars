@@ -74,14 +74,17 @@ TEST(equipment, lazer)
     item::equipment::Lazer* lazer = global::get().lazerBuilder().getNew();
 
     // initial
-    EXPECT_EQ(ship->properties().avr_damage, 0);
-    EXPECT_EQ(ship->properties().avr_fire_radius, 0);
+    EXPECT_EQ(0, ship->properties().total_damage);
+    EXPECT_EQ(0, ship->properties().fire_radius_min);
+    EXPECT_EQ(0, ship->properties().fire_radius_max);
 
     // event: insert item
     bool ok = ship->manage(lazer);
     EXPECT_TRUE(ok);
-    EXPECT_EQ(ship->properties().avr_damage, lazer->damage());
-    EXPECT_EQ(ship->properties().avr_fire_radius, lazer->radius());
+    EXPECT_EQ(lazer, ship->weaponComplex().equipedWeakestSlot()->item());
+    EXPECT_EQ(lazer->damage(), ship->properties().total_damage);
+    EXPECT_EQ(lazer->radius(), ship->properties().fire_radius_min);
+    EXPECT_EQ(lazer->radius(), ship->properties().fire_radius_max);
 
     // clean
     delete ship;
@@ -94,14 +97,17 @@ TEST(equipment, rocket)
     item::equipment::Rocket* rocket = global::get().rocketBuilder().getNew();
 
     // initial
-    EXPECT_EQ(ship->properties().avr_damage, 0);
-    EXPECT_EQ(ship->properties().avr_fire_radius, 0);
+    EXPECT_EQ(0, ship->properties().total_damage);
+    EXPECT_EQ(0, ship->properties().fire_radius_min);
+    EXPECT_EQ(0, ship->properties().fire_radius_max);
 
     // event: insert item
     bool ok = ship->manage(rocket);
     EXPECT_TRUE(ok);
-    EXPECT_EQ(ship->properties().avr_damage, rocket->damage());
-    EXPECT_EQ(ship->properties().avr_fire_radius, rocket->radius());
+    EXPECT_EQ(rocket, ship->weaponComplex().equipedWeakestSlot()->item());
+    EXPECT_EQ(rocket->damage(), ship->properties().total_damage);
+    EXPECT_EQ(rocket->radius(), ship->properties().fire_radius_min);
+    EXPECT_EQ(rocket->radius(), ship->properties().fire_radius_max);
 
     // clean
     delete ship;
@@ -115,13 +121,13 @@ TEST(equipment, bak)
 
     // initial
     EXPECT_TRUE(ship->driveComplex().bakSlot()->item() == nullptr);
-    EXPECT_EQ(ship->properties().hyper, 0);
+    EXPECT_EQ(0, ship->properties().hyper);
 
     // event: insert item
     bool ok = ship->manage(bak);
     EXPECT_TRUE(ok);
-    EXPECT_EQ(ship->driveComplex().bakSlot()->item(), bak);
-    EXPECT_EQ(ship->properties().hyper, 0); // no drive is set, that's why hyper is 0
+    EXPECT_EQ(bak, ship->driveComplex().bakSlot()->item());
+    EXPECT_EQ(0, ship->properties().hyper); // no drive is set, that's why hyper is 0
 
     // clean
     delete ship;
@@ -135,13 +141,13 @@ TEST(equipment, drive)
 
     // initial
     EXPECT_TRUE(ship->driveComplex().driveSlot()->item() == nullptr);
-    EXPECT_EQ(ship->properties().hyper, 0);
+    EXPECT_EQ(0, ship->properties().hyper);
 
     // event: insert item
     bool ok = ship->manage(drive);
     EXPECT_TRUE(ok);
-    EXPECT_EQ(ship->driveComplex().driveSlot()->item(), drive);
-    EXPECT_EQ(ship->properties().hyper, 0); // no bak is set that's why hyper is 0
+    EXPECT_EQ(drive, ship->driveComplex().driveSlot()->item());
+    EXPECT_EQ(0, ship->properties().hyper); // no bak is set that's why hyper is 0
 
     // clean
     delete ship;
@@ -164,41 +170,41 @@ TEST(equipment, bak_and_drive)
     EXPECT_TRUE(ok1);
     EXPECT_TRUE(ok2);
     int hyper = std::min(bak->fuel(), drive->hyper());
-    EXPECT_EQ(ship->properties().hyper, hyper);
+    EXPECT_EQ(hyper, ship->properties().hyper);
 
     /// bak
     // event: lock item
     bak->doLock();
-    EXPECT_EQ(ship->properties().hyper, 0);
+    EXPECT_EQ(0, ship->properties().hyper);
 
     // event: unlock item
     bak->doUnlock();
-    EXPECT_EQ(ship->properties().hyper, hyper);
+    EXPECT_EQ(hyper, ship->properties().hyper);
 
     // event: damage item
     bak->doBreak();
-    EXPECT_EQ(ship->properties().hyper, 0);
+    EXPECT_EQ(0, ship->properties().hyper);
 
     // event: repair item
     bak->doRepair();
-    EXPECT_EQ(ship->properties().hyper, hyper);
+    EXPECT_EQ(hyper, ship->properties().hyper);
 
     /// drive
     // event: lock item
     drive->doLock();
-    EXPECT_EQ(ship->properties().hyper, 0);
+    EXPECT_EQ(0, ship->properties().hyper);
 
     // event: unlock item
     drive->doUnlock();
-    EXPECT_EQ(ship->properties().hyper, hyper);
+    EXPECT_EQ(hyper, ship->properties().hyper);
 
     // event: damage item
     drive->doBreak();
-    EXPECT_EQ(ship->properties().hyper, 0);
+    EXPECT_EQ(0, ship->properties().hyper);
 
     // event: repair item
     drive->doRepair();
-    EXPECT_EQ(ship->properties().hyper, hyper);
+    EXPECT_EQ(hyper, ship->properties().hyper);
 
     // clean
     delete ship;
@@ -213,29 +219,29 @@ TEST(equipment, droid)
 
     // initial
     EXPECT_TRUE(ship->droidSlot()->item() == nullptr);
-    EXPECT_EQ(ship->properties().repair, 0);
+    EXPECT_EQ(0, ship->properties().repair);
 
     // event: item insert
     bool ok = ship->manage(droid);
     EXPECT_TRUE(ok);
-    EXPECT_EQ(ship->droidSlot()->item(), droid);
-    EXPECT_EQ(ship->properties().repair, droid->repair());
+    EXPECT_EQ(droid, ship->droidSlot()->item());
+    EXPECT_EQ(droid->repair(), ship->properties().repair);
 
     // event: lock item
     droid->doLock();
-    EXPECT_EQ(ship->properties().repair, 0);
+    EXPECT_EQ(0, ship->properties().repair);
 
     // event: unlock item
     droid->doUnlock();
-    EXPECT_EQ(ship->properties().repair, droid->repair());
+    EXPECT_EQ(droid->repair(), ship->properties().repair);
 
     // event: damage item
     droid->doBreak();
-    EXPECT_EQ(ship->properties().repair, 0);
+    EXPECT_EQ(0, ship->properties().repair);
 
     // event: repair item
     droid->doRepair();
-    EXPECT_EQ(ship->properties().repair, droid->repair());
+    EXPECT_EQ(droid->repair(), ship->properties().repair);
 
     // clean
     delete ship;
@@ -249,35 +255,35 @@ TEST(equipment, grapple)
 
     // initial
     EXPECT_TRUE(ship->grappleSlot()->item() == nullptr);
-    EXPECT_EQ(ship->properties().grab_strength, 0);
-    EXPECT_EQ(ship->properties().grab_radius, 0);
+    EXPECT_EQ(0, ship->properties().grab_strength);
+    EXPECT_EQ(0, ship->properties().grab_radius);
 
     // event: item insert
     bool ok = ship->manage(grapple);
     EXPECT_TRUE(ok);
     EXPECT_EQ(ship->grappleSlot()->item(), grapple);
-    EXPECT_EQ(ship->properties().grab_strength, grapple->strength());
-    EXPECT_EQ(ship->properties().grab_radius, grapple->radius());
+    EXPECT_EQ(grapple->strength(), ship->properties().grab_strength);
+    EXPECT_EQ(grapple->radius(), ship->properties().grab_radius);
 
     // event: lock item
     grapple->doLock();
-    EXPECT_EQ(ship->properties().grab_strength, 0);
-    EXPECT_EQ(ship->properties().grab_radius, 0);
+    EXPECT_EQ(0, ship->properties().grab_strength);
+    EXPECT_EQ(0, ship->properties().grab_radius);
 
     // event: unlock item
     grapple->doUnlock();
-    EXPECT_EQ(ship->properties().grab_strength, grapple->strength());
-    EXPECT_EQ(ship->properties().grab_radius, grapple->radius());
+    EXPECT_EQ(grapple->strength(), ship->properties().grab_strength);
+    EXPECT_EQ(grapple->radius(), ship->properties().grab_radius);
 
     // event: damage item
     grapple->doBreak();
-    EXPECT_EQ(ship->properties().grab_strength, 0);
-    EXPECT_EQ(ship->properties().grab_radius, 0);
+    EXPECT_EQ(0, ship->properties().grab_strength);
+    EXPECT_EQ(0, ship->properties().grab_radius);
 
     // event: repair item
     grapple->doRepair();
-    EXPECT_EQ(ship->properties().grab_strength, grapple->strength());
-    EXPECT_EQ(ship->properties().grab_radius, grapple->radius());
+    EXPECT_EQ(grapple->strength(), ship->properties().grab_strength);
+    EXPECT_EQ(grapple->radius(), ship->properties().grab_radius);
 
     // clean
     delete ship;
@@ -291,29 +297,29 @@ TEST(equipment, scaner)
 
     // initial
     EXPECT_TRUE(ship->scanerSlot()->item() == nullptr);
-    EXPECT_EQ(ship->properties().scan, 0);
+    EXPECT_EQ(0, ship->properties().scan);
 
     // item insert
     bool ok = ship->manage(scaner);
     EXPECT_TRUE(ok);
     EXPECT_EQ(ship->scanerSlot()->item(), scaner);
-    EXPECT_EQ(ship->properties().scan, scaner->scan());
+    EXPECT_EQ(scaner->scan(), ship->properties().scan);
 
     // event: lock item
     scaner->doLock();
-    EXPECT_EQ(ship->properties().scan, 0);
+    EXPECT_EQ(0, ship->properties().scan);
 
     // event: unlock item
     scaner->doUnlock();
-    EXPECT_EQ(ship->properties().scan, scaner->scan());
+    EXPECT_EQ(scaner->scan(), ship->properties().scan);
 
     // event: damage item
     scaner->doBreak();
-    EXPECT_EQ(ship->properties().scan, 0);
+    EXPECT_EQ(0, ship->properties().scan);
 
     // event: repair item
     scaner->doRepair();
-    EXPECT_EQ(ship->properties().scan, scaner->scan());
+    EXPECT_EQ(scaner->scan(), ship->properties().scan);
 
     // clean
     delete ship;
@@ -327,29 +333,29 @@ TEST(equipment, radar)
 
     // initial
     EXPECT_TRUE(ship->radarSlot()->item() == nullptr);
-    EXPECT_EQ(ship->properties().radar, VISIBLE_DISTANCE_WITHOUT_RADAR);
+    EXPECT_EQ(VISIBLE_DISTANCE_WITHOUT_RADAR, ship->properties().radar);
 
     // event: item insert
     bool ok = ship->manage(radar);
     EXPECT_TRUE(ok);
-    EXPECT_EQ(ship->radarSlot()->item(), radar);
-    EXPECT_EQ(ship->properties().radar, radar->radius());
+    EXPECT_EQ(radar, ship->radarSlot()->item());
+    EXPECT_EQ(radar->radius(), ship->properties().radar);
 
     // event: lock item
     radar->doLock();
-    EXPECT_EQ(ship->properties().radar, VISIBLE_DISTANCE_WITHOUT_RADAR);
+    EXPECT_EQ(VISIBLE_DISTANCE_WITHOUT_RADAR, ship->properties().radar);
 
     // event: unlock item
     radar->doUnlock();
-    EXPECT_EQ(ship->properties().radar, radar->radius());
+    EXPECT_EQ(radar->radius(), ship->properties().radar);
 
     // event: damage item
     radar->doBreak();
-    EXPECT_EQ(ship->properties().radar, VISIBLE_DISTANCE_WITHOUT_RADAR);
+    EXPECT_EQ(VISIBLE_DISTANCE_WITHOUT_RADAR, ship->properties().radar);
 
     // event: repair item
     radar->doRepair();
-    EXPECT_EQ(ship->properties().radar, radar->radius());
+    EXPECT_EQ(radar->radius(), ship->properties().radar);
 
     // clean
     delete ship;
@@ -363,30 +369,30 @@ TEST(equipment, protector)
 
     // initial
     EXPECT_TRUE(ship->protectorComplex().protectorSlot()->item() == nullptr);
-    EXPECT_EQ(ship->properties().protection, ship->vehicleDescriptor().protection);
+    EXPECT_EQ(ship->vehicleDescriptor().protection, ship->properties().protection);
 
     // event: item insert
     bool ok = ship->manage(protector);
     EXPECT_TRUE(ok);
-    EXPECT_EQ(ship->protectorComplex().protectorSlot()->item(), protector);
+    EXPECT_EQ(protector, ship->protectorComplex().protectorSlot()->item());
     int protection = ship->vehicleDescriptor().protection + protector->protection();
-    EXPECT_EQ(ship->properties().protection, protection);
+    EXPECT_EQ(protection, ship->properties().protection);
 
     // event: lock item
     protector->doLock();
-    EXPECT_EQ(ship->properties().protection, ship->vehicleDescriptor().protection);
+    EXPECT_EQ(ship->vehicleDescriptor().protection, ship->properties().protection);
 
     // event: unlock item
     protector->doUnlock();
-    EXPECT_EQ(ship->properties().protection, protection);
+    EXPECT_EQ(protection, ship->properties().protection);
 
     // event: damage item
     protector->doBreak();
-    EXPECT_EQ(ship->properties().protection, ship->vehicleDescriptor().protection);
+    EXPECT_EQ(ship->vehicleDescriptor().protection, ship->properties().protection);
 
     // event: repair item
     protector->doRepair();
-    EXPECT_EQ(ship->properties().protection, protection);
+    EXPECT_EQ(protection, ship->properties().protection);
 
     // clean
     delete ship;
@@ -409,8 +415,8 @@ TEST(equipment, freespace)
         EXPECT_TRUE(ok);
     }
     // check space
-    EXPECT_EQ(ship->freeSpace(), ship->space() - weight);
-    EXPECT_EQ(ship->mass(), weight);
+    EXPECT_EQ(ship->space() - weight, ship->freeSpace());
+    EXPECT_EQ(weight, ship->mass());
 
     // clean
     delete ship;

@@ -36,7 +36,7 @@ class Base : private NonCopyable
         void setMeshId(int mesh_id) { m_mesh_id = mesh_id; }
         void setTextureId(int texture_id) { m_texture_id = texture_id; }
 
-        const core::Type& ident() const { return m_type; }
+        const core::Ident& ident() const { return m_type; }
         const id_type& id() const { return m_id; }
         const type::entity& type() const { return m_type.type; }
         const type::entity& subtype() const { return m_type.subtype; }
@@ -65,6 +65,6 @@ class Base : private NonCopyable
         int m_mesh_id = -1;
         int m_texture_id = -1;
 
-        core::Type m_type;
+        core::Ident m_type;
         friend class EntityManager;
 };

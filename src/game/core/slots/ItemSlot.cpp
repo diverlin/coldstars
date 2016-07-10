@@ -229,7 +229,7 @@ void ItemSlot::deselectEvent()
 
 void ItemSlot::updateVehiclePropetries() const
 {
-    // make it oop
+    // TODO: make it oop
     if (subtype() != type::entity::CARGO_SLOT_ID)
     {
         switch(subtype())
