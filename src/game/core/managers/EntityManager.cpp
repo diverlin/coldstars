@@ -484,12 +484,12 @@ void EntityManager::loadPass0(const std::string& filename)
     
     if (load_ptree.get_child_optional("item_slot"))
     {
-        LOG("loading itemslots...");
-        BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("item_slot"))
-        {
-            ItemSlot* itemslot = GetNewItemSlot((type::entity)v.second.get<int>("data_id.subtype_id"), v.second.get<unsigned long int>("data_id.id"));
-            itemslot->Load(v.second);
-        }
+//        LOG("loading itemslots...");
+//        BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("item_slot"))
+//        {
+//            ItemSlot* itemslot = getNewItemSlot((type::entity)v.second.get<int>("data_id.subtype_id"), v.second.get<unsigned long int>("data_id.id"));
+//            itemslot->Load(v.second);
+//        }
     }
     
     if (load_ptree.get_child_optional("vehicle_slot"))
@@ -499,7 +499,7 @@ void EntityManager::loadPass0(const std::string& filename)
         {
             unsigned long int id = v.second.get<unsigned long int>("data_id.id");
             type::entity subtype_id = (type::entity)v.second.get<int>("data_id.subtype_id");
-            VehicleSlot* vehicleslot = GetNewVehicleSlot(subtype_id, id);
+            VehicleSlot* vehicleslot = getNewVehicleSlot(subtype_id, id);
             vehicleslot->Load(v.second);
         }
     }
