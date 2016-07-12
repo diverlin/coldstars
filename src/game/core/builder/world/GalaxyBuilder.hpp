@@ -22,8 +22,9 @@
 #include <types/IdType.hpp>
 
 class Galaxy;
-class GalaxyDescriptor;
-
+namespace descriptor {
+class Galaxy;
+}
 
 class GalaxyBuilder
 {
@@ -32,10 +33,10 @@ class GalaxyBuilder
         ~GalaxyBuilder();
         
         Galaxy* createTemplate(id_type id = NONE) const;
-        Galaxy* create(const GalaxyDescriptor&) const;
+        Galaxy* create(const descriptor::Galaxy&) const;
                                                 
     private:       
-        void createInternals(Galaxy*, const GalaxyDescriptor&) const;
+        void __createInternals(Galaxy*, const descriptor::Galaxy&) const;
 }; 
     
 

@@ -61,12 +61,12 @@ m_DateLastUpdate(0,0,0)
 God::~God()
 {}
 
-Galaxy* God::createWorld(const GalaxyDescriptor& galaxy_descriptor)
+Galaxy* God::createWorld(const descriptor::Galaxy& descriptor)
 {
-    Galaxy* galaxy = global::get().galaxyBuilder().create(galaxy_descriptor);
-    CreateLife(galaxy, galaxy_descriptor);
-    if (galaxy_descriptor.allow_invasion == true) {
-        CreateInvasion(galaxy, galaxy_descriptor);
+    Galaxy* galaxy = global::get().galaxyBuilder().create(descriptor);
+    CreateLife(galaxy, descriptor);
+    if (descriptor.allow_invasion == true) {
+        CreateInvasion(galaxy, descriptor);
     }
 
     bool player2space = true;
@@ -84,7 +84,7 @@ Galaxy* God::createWorld(const GalaxyDescriptor& galaxy_descriptor)
     return galaxy;
 }
 
-void God::CreateLife(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descriptor) const
+void God::CreateLife(Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
 {
 //    for(unsigned int i=0; i<galaxy->m_sectors.size(); i++) {
 //        for(unsigned int j=0; j<galaxy->m_sectors[i]->m_starsystems.size(); j++) {
@@ -98,7 +98,7 @@ void God::CreateLife(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descriptor) 
 //    }
 }
 
-void God::CreateInvasion(Galaxy* galaxy, const GalaxyDescriptor& galaxy_descriptor) const
+void God::CreateInvasion(Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
 {
     for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
         Starsystem* starsystem = galaxy->GetRandomSector()->randomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
