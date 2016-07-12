@@ -18,20 +18,22 @@
 
 #pragma once
 
+#include <types/IdType.hpp>
 #include <vector>
-#include <descriptors/SectorDescriptor.hpp>
 
-struct GalaxyDescriptor
+namespace descriptor {
+
+struct Galaxy
 {
     public:
-        int sector_num = 1;
         bool allow_invasion = true;
-        std::vector<SectorDescriptor> sector_descriptors;
+        std::vector<id_type> sectors;
         
-        GalaxyDescriptor() {}
-        
-        ~GalaxyDescriptor() {}
+        Galaxy() {}
+        ~Galaxy() {}
 }; 
+
+} // namespace descriptor
 
 
     

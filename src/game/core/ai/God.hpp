@@ -28,7 +28,10 @@ class Galaxy;
 class Starsystem;
 class Planet;
 
-class GalaxyDescriptor;
+namespace descriptor {
+class Galaxy;
+}
+
 class StarSystemDescriptor;
 
 class God
@@ -37,7 +40,7 @@ class God
         God();
         ~God();
 
-        Galaxy* createWorld(const GalaxyDescriptor&);
+        Galaxy* createWorld(const descriptor::Galaxy&);
         void update(Galaxy*, const GameDate&);
 
     private:
@@ -52,8 +55,8 @@ class God
         
         void ProceedInvasion(Galaxy*) const;
 
-        void CreateLife(Galaxy*, const GalaxyDescriptor&) const;
-        void CreateInvasion(Galaxy*, const GalaxyDescriptor&) const;
+        void CreateLife(Galaxy*, const descriptor::Galaxy&) const;
+        void CreateInvasion(Galaxy*, const descriptor::Galaxy&) const;
 }; 
 
 
