@@ -713,20 +713,19 @@ void Vehicle::remeberAgressor(Vehicle* agressor)
 }
 
 
-float Vehicle::dissipateFilter() const
+float Vehicle::adjustDissipateFilter() const
 {
     float rate = 1.0f - m_properties.protection*0.01f;
-    assert(rate > 0);
-    assert(rate <= 1.0f);
     //    if (m_npc) {
     //        rate *= m_npc->GetSkills().GetDefenceNormalized();
     //    }
     //std::cout<<"---rate="<<rate<<std::endl;
+    assert(rate > 0 && rate <= 1.0f);
     return rate;
 }
 
 int Vehicle::criticalDamage() const {
-    return armor() * dissipateFilter();
+    return 2*armor();
 }
 
 /* virtual */
@@ -743,7 +742,7 @@ void Vehicle::hit(int damage)
     }
 #endif
 
-    SpaceObject::hit(damage * dissipateFilter());
+    SpaceObject::hit(damage * adjustDissipateFilter());
 
     //if (show_effect == true)
     {

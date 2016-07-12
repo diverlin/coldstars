@@ -208,7 +208,7 @@ public:
 
     STATUS CheckGrabStatus() const;
 
-    float dissipateFilter() const;
+    float adjustDissipateFilter() const;
     int criticalDamage() const;
 
 protected:
