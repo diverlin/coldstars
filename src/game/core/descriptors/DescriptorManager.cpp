@@ -163,25 +163,25 @@ void DescriptorManager::generate()
 
     for(int i=0; i<num; ++i) {
         // items
-        add(DescriptorGenerator::getNewBakDescriptor());
-        add(DescriptorGenerator::getNewDriveDescriptor());
-        add(DescriptorGenerator::getNewDroidDescriptor());
-        add(DescriptorGenerator::getNewGrappleDescriptor());
-        add(DescriptorGenerator::getNewScanerDescriptor());
-        add(DescriptorGenerator::getNewRadarDescriptor());
-        add(DescriptorGenerator::getNewProtectorDescriptor());
-        add(DescriptorGenerator::getNewBombDescriptor());
+        add(generator::getNewBakDescriptor());
+        add(generator::getNewDriveDescriptor());
+        add(generator::getNewDroidDescriptor());
+        add(generator::getNewGrappleDescriptor());
+        add(generator::getNewScanerDescriptor());
+        add(generator::getNewRadarDescriptor());
+        add(generator::getNewProtectorDescriptor());
+        add(generator::getNewBombDescriptor());
 
         // spaceobjects
-        add(DescriptorGenerator::getNewStarsystemDescriptor());
-        add(DescriptorGenerator::getNewVehicleDescriptor());
-        add(DescriptorGenerator::getNewStarDescriptor());
-        add(DescriptorGenerator::getNewPlanetDescriptor());
-        add(DescriptorGenerator::getNewContainerDescriptor());
-        //add(DescriptorGenerator::getNewAsteroidDescriptor());
+        add(generator::getNewStarsystemDescriptor());
+        add(generator::getNewVehicleDescriptor());
+        add(generator::getNewStarDescriptor());
+        add(generator::getNewPlanetDescriptor());
+        add(generator::getNewContainerDescriptor());
+        //add(generator::getNewAsteroidDescriptor());
 
         // world
-        add(DescriptorGenerator::getNewStarsystemDescriptor());
+        add(generator::getNewStarsystemDescriptor());
     }
 
     save();
