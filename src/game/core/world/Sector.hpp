@@ -47,8 +47,8 @@ class Sector : public SpaceObject
 
         void add(Starsystem*, const glm::vec3&);
 
-        Starsystem* randomStarSystem(int condition_id = NONE);
-        Starsystem* closestStarSystemTo(Starsystem*, int condition_id = NONE);
+        Starsystem* randomStarsystem(int condition_id = NONE);
+        Starsystem* closestStarsystemTo(Starsystem*, int condition_id = NONE);
 
         void update(int);
 

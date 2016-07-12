@@ -105,6 +105,21 @@ enum class Type: int {
 std::string keyStr(const Key&);
 std::string typeStr(const Type&);
 
+class BBase
+{
+public:
+    BBase() {
+        m_id = m_idGenerator.nextId();
+    }
+    ~BBase() {}
+
+    const id_type& id() const { return m_id; }
+private:
+    id_type m_id;
+
+    static IdGenerator m_idGenerator;
+};
+
 class Base
 {
 public:

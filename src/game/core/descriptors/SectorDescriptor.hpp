@@ -18,13 +18,14 @@
 
 #pragma once
 
+#include "Base.hpp"
 #include <types/IdType.hpp>
 
 #include <vector>
 
 namespace descriptor {
 
-struct Sector
+struct Sector : public BBase
 {
 public:
     std::vector<id_type> starsystems;

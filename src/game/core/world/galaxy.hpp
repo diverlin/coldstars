@@ -33,12 +33,12 @@ class Galaxy : public Base
 
         virtual void putChildrenToGarbage() const;
 
-        void Add(Sector*, const glm::vec3&);
+        void add(Sector*, const glm::vec3&);
 
-        Sector* GetRandomSector();
-        Sector* GetClosestSectorTo(Sector*);
+        Sector* randomSector();
+        Sector* closestSectorTo(Sector*);
 
-        void Update(int);
+        void update(int);
 
         void FillStarSystemsCondition(StarSystemsConditionData&) const;
 

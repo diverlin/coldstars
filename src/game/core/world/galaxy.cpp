@@ -43,7 +43,7 @@ void Galaxy::putChildrenToGarbage() const
     }
 }
 
-void Galaxy::Add(Sector* sector, const glm::vec3& center) 
+void Galaxy::add(Sector* sector, const glm::vec3& center)
 { 
     sector->setGalaxy(this);
     sector->setPosition(center);
@@ -51,32 +51,28 @@ void Galaxy::Add(Sector* sector, const glm::vec3& center)
     m_sectors.push_back(sector);
 }
 
-Sector* Galaxy::GetRandomSector()
+Sector* Galaxy::randomSector()
 {
     return meti::getRand(m_sectors);
 }
 
-Sector* Galaxy::GetClosestSectorTo(Sector* sector)
+Sector* Galaxy::closestSectorTo(Sector* toSector)
 {
     float dist_min = INCREDIBLY_MAX_FLOAT;
-    int index_min = -1;
 
-    for (unsigned int i=0; i<m_sectors.size(); i++) {
-        float dist = meti::distance(sector->position(), m_sectors[i]->position());
+    Sector* result = nullptr;
+    for (auto sector : m_sectors) {
+        float dist = meti::distance(toSector->position(), sector->position());
         if (dist < dist_min) {
             dist_min = dist;
-            index_min = i;
+            result = sector;
         }
     }
 
-    if (index_min != -1) {
-        return m_sectors[index_min];
-    }
-
-    return nullptr;
+    return result;
 }
 
-void Galaxy::Update(int time)
+void Galaxy::update(int time)
 {
     for (unsigned int i=0; i<m_sectors.size(); i++) {
         m_sectors[i]->update(time);

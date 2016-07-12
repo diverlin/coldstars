@@ -70,7 +70,7 @@ Galaxy* God::createWorld(const descriptor::Galaxy& descriptor)
     }
 
     bool player2space = true;
-    Starsystem* const starsystem = galaxy->GetRandomSector()->randomStarSystem();
+    Starsystem* const starsystem = galaxy->randomSector()->randomStarsystem();
     if (player2space == true) {
         glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
         glm::vec3 angle(0,0,0);
@@ -101,7 +101,7 @@ void God::CreateLife(Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
 void God::CreateInvasion(Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
 {
     for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
-        Starsystem* starsystem = galaxy->GetRandomSector()->randomStarSystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+        Starsystem* starsystem = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
         type::race race_id = (type::race)meti::getRandInt((int)type::race::R6_ID, (int)type::race::R7_ID);
         int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
         CreateShips(starsystem, ship_num, race_id);
@@ -110,12 +110,12 @@ void God::CreateInvasion(Galaxy* galaxy, const descriptor::Galaxy& descriptor) c
 
 void God::ProceedInvasion(Galaxy* galaxy) const
 {
-    Starsystem* starsystem_invade_from = galaxy->GetRandomSector()->randomStarSystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
+    Starsystem* starsystem_invade_from = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
     if (starsystem_invade_from == nullptr) {
         return;
     }
     
-    Starsystem* starsystem_invade_to   = galaxy->GetClosestSectorTo(starsystem_invade_from->sector())->closestStarSystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+    Starsystem* starsystem_invade_to   = galaxy->closestSectorTo(starsystem_invade_from->sector())->closestStarsystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
     if (starsystem_invade_to == nullptr) {
         return;
     }

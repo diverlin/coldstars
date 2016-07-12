@@ -19,7 +19,11 @@
 #pragma once
 
 #include <descriptors/Base.hpp>
+
+#include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/SectorDescriptor.hpp>
+
+#include <meti/RandUtils.hpp>
 
 #include <map>
 #include <string>
@@ -33,19 +37,31 @@ public:
     ~MManager() {}
 
     void add(const T& descriptor) {
-        if (!m_descriptors.contains(descriptor.id())) {
+        const auto it = m_descriptors.find(descriptor.id());
+        if (it == m_descriptors.end()) {
             m_descriptors.insert(std::make_pair(descriptor.id(), descriptor));
         }
         throw std::runtime_error("descriptor with that id already exist");
     }
 
     const T& get(const id_type& id) const {
-        if (m_descriptors.contains(id)) {
-            return m_descriptors[id];
+        if (id == -1) {
+            return getRand();
+        }
+
+        const auto it = m_descriptors.find(id);
+        if (it != m_descriptors.end()) {
+            return it->second;
         }
         throw std::runtime_error("descriptor id doesn't exist");
     }
 
+    const T& getRand() const
+    {
+        auto it = m_descriptors.begin();
+        std::advance( it, meti::getRandInt(0, m_descriptors.size()) );
+        return it->second;
+    }
 private:
     std::map<id_type, T> m_descriptors;
 };
@@ -66,8 +82,18 @@ public:
 
     int size() const { return m_descriptors.size(); }
 
+    void add(const Galaxy& galaxy) {
+        m_galaxy.add(galaxy);
+    }
+    void add(const Sector& sector) {
+        m_sector.add(sector);
+    }
+
+    const MManager<Galaxy>& galaxy() const { return m_galaxy; }
+    const MManager<Sector>& sector() const { return m_sector; }
 private:
-    MManager<Sector> sector;
+    MManager<Galaxy> m_galaxy;
+    MManager<Sector> m_sector;
 
     std::map<id_type, Base> m_descriptors;
     std::map<int, std::vector<Base>> m_descriptorsTypes;

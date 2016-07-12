@@ -58,8 +58,8 @@ void GalaxyBuilder::__createInternals(Galaxy* galaxy, const descriptor::Galaxy& 
 {     
     for(const auto& id: descriptor.sectors) {
         glm::vec3 center = meti::getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);
-//        Sector* sector = global::get().sectorBuilder().create(global::get().descriptors().getSector(id));
-//        galaxy->Add(sector, center);
+        Sector* sector = global::get().sectorBuilder().create(global::get().descriptors().sector().get(id));
+        galaxy->add(sector, center);
     }
 }
 

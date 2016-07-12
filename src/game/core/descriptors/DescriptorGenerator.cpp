@@ -20,6 +20,7 @@
 #include "DescriptorGenerator.hpp"
 #include <descriptors/Base.hpp>
 #include <descriptors/GalaxyDescriptor.hpp>
+#include <descriptors/SectorDescriptor.hpp>
 
 #include <meti/RandUtils.hpp>
 #include <common/Global.hpp>
@@ -34,8 +35,22 @@ namespace generator {
 
 /* world */
 descriptor::Galaxy
-getNewGalaxyDescriptor() {
+getNewGalaxyDescriptor(const std::vector<id_type> sectors) {
     descriptor::Galaxy descriptor;
+    int num = meti::getRandInt(2,5);
+    for(int i=0; i<num; ++i) {
+        descriptor.sectors.push_back(meti::getRand(sectors));
+    }
+    return descriptor;
+}
+
+descriptor::Sector
+getNewSectorDescriptor(const std::vector<id_type> starsystems) {
+    descriptor::Sector descriptor;
+    int num = meti::getRandInt(2,5);
+    for(int i=0; i<num; ++i) {
+        descriptor.starsystems.push_back(meti::getRand(starsystems));
+    }
     return descriptor;
 }
 

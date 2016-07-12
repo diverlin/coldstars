@@ -52,7 +52,8 @@ bool create_file(const std::string& fname)
 
 Manager::Manager()
 {
-    if (is_file_exists(descriptors_fname)) {
+    bool force_generate = true;
+    if (is_file_exists(descriptors_fname) && !force_generate) {
         load();
     } else {
         generate();
@@ -156,12 +157,12 @@ Manager::clear()
 
 void Manager::generate()
 {
-    int num = 20;
-
     create_file(descriptors_fname);
 
     clear();
 
+    int base = 1;
+    int num = base * 20;
     for(int i=0; i<num; ++i) {
         // items
         add(generator::getNewBakDescriptor());
@@ -172,7 +173,10 @@ void Manager::generate()
         add(generator::getNewRadarDescriptor());
         add(generator::getNewProtectorDescriptor());
         add(generator::getNewBombDescriptor());
+    }
 
+    num = base * 10;
+    for(int i=0; i<num; ++i) {
         // spaceobjects
         add(generator::getNewStarsystemDescriptor());
         add(generator::getNewVehicleDescriptor());
@@ -180,9 +184,22 @@ void Manager::generate()
         add(generator::getNewPlanetDescriptor());
         add(generator::getNewContainerDescriptor());
         //add(generator::getNewAsteroidDescriptor());
+    }
 
-        // world
+    // world
+    num = base * 10;
+    for(int i=0; i<num; ++i) {
         add(generator::getNewStarsystemDescriptor());
+    }
+
+    num = base * 4;
+    for(int i=0; i<num; ++i) {
+        //add(generator::getNewSectorDescriptor());
+    }
+
+    num = base * 1;
+    for(int i=0; i<num; ++i) {
+        //add(generator::getNewGalaxyDescriptor());
     }
 
     save();

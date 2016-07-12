@@ -69,7 +69,7 @@ bool Game::run() const
     while (m_isRunning) {
         turnTimer.update();
         god.update(galaxy, gameDate);
-        galaxy->Update(turnTimer.getStopTurnTimer());
+        galaxy->update(turnTimer.getStopTurnTimer());
 
         if (turnTimer.getTurnEnded() == true) {
             turnTimer.nextTurn();

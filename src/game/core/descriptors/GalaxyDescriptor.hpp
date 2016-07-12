@@ -18,12 +18,13 @@
 
 #pragma once
 
+#include "Base.hpp"
 #include <types/IdType.hpp>
 #include <vector>
 
 namespace descriptor {
 
-struct Galaxy
+struct Galaxy : public BBase
 {
     public:
         bool allow_invasion = true;

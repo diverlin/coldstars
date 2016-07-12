@@ -36,13 +36,13 @@ glm::vec3 getRandXYVec3Unit();
 
 bool isActionShouldHappen(int);
 
-template<typename TYPE> 
-TYPE getRand(const std::vector<TYPE>& vec)
+template<typename T>
+T getRand(const std::vector<T>& v)
 {
-    if (!vec.empty()) {
-        return vec[getRandInt(0, vec.size()-1)];
+    if (v.empty()) {
+        throw std::runtime_error("ERROR: std::vector is empty, not ably to get random element from it");
     }
-    throw std::runtime_error("ERROR: std::vector is empty, not ably to get random element from it");
+    return v[getRandInt(0, v.size()-1)];
 }
 
 } // namespace meti

@@ -19,17 +19,24 @@
 
 #pragma once
 
+#include <types/IdType.hpp>
+
+#include <vector>
+
 namespace descriptor {
 
-class Base;
 class Galaxy;
+class Sector;
+class Base;
 
 } // namespace descriptor
 
 namespace generator {
 
 /* world */
-descriptor::Galaxy getNewGalaxyDescriptor();
+descriptor::Galaxy getNewGalaxyDescriptor(const std::vector<id_type>& /*= std::vector<id_type>()*/);
+descriptor::Sector getNewSectorDescriptor(const std::vector<id_type>& /*= std::vector<id_type>()*/);
+
 descriptor::Base getNewStarsystemDescriptor(int race = -1);
 
 /* spaceobjects */
