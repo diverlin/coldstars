@@ -43,15 +43,15 @@ Sector* SectorBuilder::createTemplate(id_type id) const
     return sector;
 } 
 
-Sector* SectorBuilder::create(const SectorDescriptor& sector_descriptor) const
+Sector* SectorBuilder::create(const descriptor::Sector& descriptor) const
 {
     Sector* sector = createTemplate();
-    createInternals(sector, sector_descriptor);
+    createInternals(sector, descriptor);
     
     return sector;
 } 
         
-void SectorBuilder::createInternals(Sector* sector, const SectorDescriptor& sector_descriptor) const
+void SectorBuilder::createInternals(Sector* sector, const descriptor::Sector& descriptor) const
 {
 //    for(const auto& starsystem_descriptor: sector_descriptor.starsystem_descriptors)
 //    {

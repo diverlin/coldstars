@@ -22,8 +22,10 @@
 #include <types/IdType.hpp>
 
 class Sector;
-class SectorDescriptor;
 
+namespace descriptor {
+class Sector;
+} // namespace descriptor
 
 class SectorBuilder
 {
@@ -32,10 +34,10 @@ class SectorBuilder
         ~SectorBuilder();
         
         Sector* createTemplate(id_type id = NONE) const;
-        Sector* create(const SectorDescriptor&) const;
+        Sector* create(const descriptor::Sector&) const;
     
     private:
-        void createInternals(Sector*, const SectorDescriptor&) const;
+        void createInternals(Sector*, const descriptor::Sector&) const;
 }; 
 
 

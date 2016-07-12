@@ -22,6 +22,8 @@
 
 namespace descriptor {
 
+IdGenerator BBase::m_idGenerator;
+
 IdGenerator Base::m_idGenerator;
 
 namespace {
