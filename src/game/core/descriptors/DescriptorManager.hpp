@@ -19,20 +19,47 @@
 #pragma once
 
 #include <descriptors/Base.hpp>
+#include <descriptors/SectorDescriptor.hpp>
 
 #include <map>
 #include <string>
 
-class DescriptorManager
+namespace descriptor {
+
+template<typename T>
+class MManager {
+public:
+    MManager() {}
+    ~MManager() {}
+
+    void add(const T& descriptor) {
+        if (!m_descriptors.contains(descriptor.id())) {
+            m_descriptors.insert(std::make_pair(descriptor.id(), descriptor));
+        }
+        throw std::runtime_error("descriptor with that id already exist");
+    }
+
+    const T& get(const id_type& id) const {
+        if (m_descriptors.contains(id)) {
+            return m_descriptors[id];
+        }
+        throw std::runtime_error("descriptor id doesn't exist");
+    }
+
+private:
+    std::map<id_type, T> m_descriptors;
+};
+
+class Manager
 {
 public:
-    DescriptorManager();
-    ~DescriptorManager();
+    Manager();
+    ~Manager();
 
 
-    void add(const descriptor::Base&);
-    descriptor::Base getRand(const descriptor::Type&);
-    descriptor::Base get(const id_type&);
+    void add(const Base&);
+    Base getRand(const Type&);
+    Base get(const id_type&);
 
     void save();
     void load();
@@ -40,9 +67,13 @@ public:
     int size() const { return m_descriptors.size(); }
 
 private:
-    std::map<id_type, descriptor::Base> m_descriptors;
-    std::map<int, std::vector<descriptor::Base>> m_descriptorsTypes;
+    MManager<Sector> sector;
+
+    std::map<id_type, Base> m_descriptors;
+    std::map<int, std::vector<Base>> m_descriptorsTypes;
 
     void clear();
     void generate();
 }; 
+
+} // namespace descriptor

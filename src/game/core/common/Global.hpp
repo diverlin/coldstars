@@ -94,7 +94,9 @@ class GalaxyBuilder;
 class SectorBuilder;
 class StarsystemBuilder;
 
-class DescriptorManager;
+namespace descriptor {
+class Manager;
+} // namespace descriptor
 
 class global
 {
@@ -170,7 +172,7 @@ public:
     SectorBuilder& sectorBuilder() { return *m_sectorBuilder; }
     StarsystemBuilder& starsystemBuilder() { return *m_starsystemBuilder; }
 
-    DescriptorManager& descriptors() { return *m_descriptors; }
+    descriptor::Manager& descriptors() { return *m_descriptors; }
 
 private:
     global();
@@ -248,5 +250,5 @@ private:
     SectorBuilder* m_sectorBuilder = nullptr;
     StarsystemBuilder* m_starsystemBuilder = nullptr;
 
-    DescriptorManager* m_descriptors = nullptr;
+    descriptor::Manager* m_descriptors = nullptr;
 };

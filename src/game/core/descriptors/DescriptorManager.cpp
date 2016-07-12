@@ -23,7 +23,8 @@
 #include <fstream>
 
 #include <boost/filesystem.hpp>
-using namespace boost::filesystem;
+
+namespace descriptor {
 
 namespace {
 const std::string descriptors_fname = "descriptors.txt";
@@ -49,7 +50,7 @@ bool create_file(const std::string& fname)
 
 } // namespace
 
-DescriptorManager::DescriptorManager()
+Manager::Manager()
 {
     if (is_file_exists(descriptors_fname)) {
         load();
@@ -58,11 +59,11 @@ DescriptorManager::DescriptorManager()
     }
 }
 
-DescriptorManager::~DescriptorManager()
+Manager::~Manager()
 {}
 
 void
-DescriptorManager::add(const descriptor::Base& descriptor)
+Manager::add(const Base& descriptor)
 {
     //std::cout<<"add descriptor with type"<<descriptor::typeStr((descriptor::Type)descriptor.type())<<std::endl;
     const id_type id = descriptor.id();
@@ -81,26 +82,26 @@ DescriptorManager::add(const descriptor::Base& descriptor)
         if (it != m_descriptorsTypes.end()) {
             it->second.push_back(descriptor);
         } else {
-            std::vector<descriptor::Base> vector;
+            std::vector<Base> vector;
             vector.push_back(descriptor);
             m_descriptorsTypes[type] = vector;
         }
     }
 }
 
-descriptor::Base
-DescriptorManager::getRand(const descriptor::Type& type)
+Base
+Manager::getRand(const Type& type)
 {
     const auto it = m_descriptorsTypes.find(int(type));
     if (it != m_descriptorsTypes.end()) {
-        const std::vector<descriptor::Base> descriptors = it->second;
+        const std::vector<Base> descriptors = it->second;
         return meti::getRand(descriptors);
     }
-    throw std::runtime_error("descriptor type doesn't contain any descriptors, " + descriptor::typeStr(type));
+    throw std::runtime_error("descriptor type doesn't contain any descriptors, " + typeStr(type));
 }
 
-descriptor::Base
-DescriptorManager::get(const id_type& id)
+Base
+Manager::get(const id_type& id)
 {
     const auto it = m_descriptors.find(id);
     if (it != m_descriptors.end()) {
@@ -110,14 +111,14 @@ DescriptorManager::get(const id_type& id)
 }
 
 void
-DescriptorManager::save()
+Manager::save()
 {
     std::fstream filestream;
     filestream.open(descriptors_fname);
     if(filestream.is_open()) {
         for(const auto& lists: m_descriptorsTypes) {
             const auto& list = lists.second;
-            for(const descriptor::Base& descr: list) {
+            for(const Base& descr: list) {
                 filestream<<descr.data()<<std::endl;
             }
         }
@@ -128,7 +129,7 @@ DescriptorManager::save()
 }
 
 void
-DescriptorManager::load()
+Manager::load()
 {
     clear();
 
@@ -138,7 +139,7 @@ DescriptorManager::load()
     if(filestream.is_open()) {
         while(std::getline(filestream, line)) {
             if (!line.empty()) {
-                const descriptor::Base& descr = descriptor::Base(line);
+                const Base& descr = Base(line);
                 add(descr);
             }
         }
@@ -147,13 +148,13 @@ DescriptorManager::load()
 }
 
 void
-DescriptorManager::clear()
+Manager::clear()
 {
     m_descriptors.clear();
     m_descriptorsTypes.clear();
 }
 
-void DescriptorManager::generate()
+void Manager::generate()
 {
     int num = 20;
 
@@ -186,3 +187,5 @@ void DescriptorManager::generate()
 
     save();
 }
+
+} // namespace descriptor
