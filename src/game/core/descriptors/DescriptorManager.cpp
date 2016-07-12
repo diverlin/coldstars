@@ -22,14 +22,40 @@
 
 #include <fstream>
 
+#include <boost/filesystem.hpp>
+using namespace boost::filesystem;
+
 namespace {
-const std::string fname = "descriptors.txt";
+const std::string descriptors_fname = "descriptors.txt";
+
+bool is_file_exists(const std::string& fname)
+{
+    boost::filesystem::path p(fname);
+    if (!boost::filesystem::exists(p)) {
+        return false;
+    }
+    if (!boost::filesystem::is_regular_file(p)) {
+        return false;
+    }
+
+    return true;
+}
+
+bool create_file(const std::string& fname)
+{
+    std::fstream file(fname, std::ios::out | std::ios::app);
+    file.close();
+}
+
 } // namespace
 
 DescriptorManager::DescriptorManager()
 {
-    generate();
-    //load();
+    if (is_file_exists(descriptors_fname)) {
+        load();
+    } else {
+        generate();
+    }
 }
 
 DescriptorManager::~DescriptorManager()
@@ -87,7 +113,7 @@ void
 DescriptorManager::save()
 {
     std::fstream filestream;
-    filestream.open(fname);
+    filestream.open(descriptors_fname);
     if(filestream.is_open()) {
         for(const auto& lists: m_descriptorsTypes) {
             const auto& list = lists.second;
@@ -96,7 +122,7 @@ DescriptorManager::save()
             }
         }
     } else {
-        throw std::runtime_error("not able to open file="+fname);
+        throw std::runtime_error("not able to open file="+descriptors_fname);
     }
     filestream.close();
 }
@@ -108,7 +134,7 @@ DescriptorManager::load()
 
     std::fstream filestream;
     std::string line;
-    filestream.open(fname);
+    filestream.open(descriptors_fname);
     if(filestream.is_open()) {
         while(std::getline(filestream, line)) {
             if (!line.empty()) {
@@ -130,6 +156,8 @@ DescriptorManager::clear()
 void DescriptorManager::generate()
 {
     int num = 20;
+
+    create_file(descriptors_fname);
 
     clear();
 

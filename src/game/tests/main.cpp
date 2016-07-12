@@ -89,7 +89,7 @@ TEST(base,critical_hit)
     Ship* ship1 = ShipBuilder::getNew();
     Ship* ship2 = ShipBuilder::getNew();
 
-    messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), 1.1*ship2->criticalDamage()).data(), 0.4));
+    messageManager.add(Message(TELEGRAM::HIT, descriptor::Hit(ship1->id(), ship2->id(), ship2->criticalDamage()).data(), 0.4));
 
     messageManager.runLoop();
 

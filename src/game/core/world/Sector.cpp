@@ -58,6 +58,7 @@ void Sector::add(Starsystem* starsystem, const glm::vec3& center)
 
 Starsystem* Sector::randomStarSystem(int condition_id)
 {
+    assert(m_starsystems.size() != 0);
     if (condition_id == NONE) {
         return m_starsystems[meti::getRandInt(0, m_starsystems.size()-1)];
     } else {
