@@ -25,6 +25,7 @@
 #include <world/Sector.hpp>
 
 #include <descriptors/GalaxyDescriptor.hpp>
+#include <descriptors/DescriptorManager.hpp>
 
 #include <meti/RandUtils.hpp>
 
@@ -56,8 +57,8 @@ Galaxy* GalaxyBuilder::create(const descriptor::Galaxy& galaxy_descriptor) const
 void GalaxyBuilder::__createInternals(Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
 {     
     for(const auto& id: descriptor.sectors) {
-//        glm::vec3 center = meti::getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);
-//        Sector* sector = global::get().sectorBuilder().create(sector_descriptor);
+        glm::vec3 center = meti::getRandXYVec3f(0, ENTITY::GALAXY::PARSEC/2, GUI::POS_Z);
+//        Sector* sector = global::get().sectorBuilder().create(global::get().descriptors().getSector(id));
 //        galaxy->Add(sector, center);
     }
 }
