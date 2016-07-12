@@ -31,11 +31,11 @@
 
 #include <item/BaseItem.hpp>
 
-namespace generator {
+namespace descriptor {
 
 /* world */
 descriptor::Galaxy
-getNewGalaxyDescriptor(const std::vector<id_type> sectors) {
+Generator::getNewGalaxyDescriptor(const std::vector<id_type>& sectors) {
     descriptor::Galaxy descriptor;
     int num = meti::getRandInt(2,5);
     for(int i=0; i<num; ++i) {
@@ -45,7 +45,7 @@ getNewGalaxyDescriptor(const std::vector<id_type> sectors) {
 }
 
 descriptor::Sector
-getNewSectorDescriptor(const std::vector<id_type> starsystems) {
+Generator::getNewSectorDescriptor(const std::vector<id_type>& starsystems) {
     descriptor::Sector descriptor;
     int num = meti::getRandInt(2,5);
     for(int i=0; i<num; ++i) {
@@ -55,7 +55,7 @@ getNewSectorDescriptor(const std::vector<id_type> starsystems) {
 }
 
 descriptor::Base
-getNewStarsystemDescriptor(int race)
+Generator::getNewStarsystemDescriptor(int race)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -70,7 +70,7 @@ getNewStarsystemDescriptor(int race)
 /* spaceobjects */
 
 descriptor::Base
-getNewStarDescriptor()
+Generator::getNewStarDescriptor()
 {
     descriptor::Base descriptor(descriptor::Type::STAR);
     descriptor.add(descriptor::Key::ARMOR, 10000000);
@@ -81,7 +81,7 @@ getNewStarDescriptor()
 }
 
 descriptor::Base
-getNewPlanetDescriptor()
+Generator::getNewPlanetDescriptor()
 {
     descriptor::Base descriptor(descriptor::Type::PLANET);
     descriptor.add(descriptor::Key::ARMOR, 100000);
@@ -92,21 +92,21 @@ getNewPlanetDescriptor()
 }
 
 descriptor::Base
-getNewAsteroidDescriptor()
+Generator::getNewAsteroidDescriptor()
 {
     descriptor::Base descriptor(descriptor::Type::ASTEROID);
     return descriptor;
 }
 
 descriptor::Base
-getNewContainerDescriptor()
+Generator::getNewContainerDescriptor()
 {
     descriptor::Base descriptor(descriptor::Type::CONTAINER);
     return descriptor;
 }
 
 descriptor::Base
-getNewVehicleDescriptor()
+Generator::getNewVehicleDescriptor()
 {
     type::race race_id = (type::race)0;//meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
     type::entity type_id = type::entity::WARRIOR_ID;
@@ -195,7 +195,7 @@ void addItemCommonFields(descriptor::Base& descriptor,
 } // namespace
 
 descriptor::Base
-getNewBakDescriptor(int race, int tech_level)
+Generator::getNewBakDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -224,7 +224,7 @@ getNewBakDescriptor(int race, int tech_level)
 }
 
 descriptor::Base
-getNewDriveDescriptor(int race, int tech_level)
+Generator::getNewDriveDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -253,7 +253,7 @@ getNewDriveDescriptor(int race, int tech_level)
 }
 
 descriptor::Base
-getNewDroidDescriptor(int race, int tech_level)
+Generator::getNewDroidDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -280,7 +280,7 @@ getNewDroidDescriptor(int race, int tech_level)
 }
 
 descriptor::Base
-getNewGrappleDescriptor(int race, int tech_level)
+Generator::getNewGrappleDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -313,7 +313,7 @@ getNewGrappleDescriptor(int race, int tech_level)
 }
 
 descriptor::Base
-getNewScanerDescriptor(int race, int tech_level)
+Generator::getNewScanerDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -342,7 +342,7 @@ getNewScanerDescriptor(int race, int tech_level)
 }
 
 descriptor::Base
-getNewRadarDescriptor(int race, int tech_level)
+Generator::getNewRadarDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -371,7 +371,7 @@ getNewRadarDescriptor(int race, int tech_level)
 }
 
 descriptor::Base
-getNewProtectorDescriptor(int race, int tech_level)
+Generator::getNewProtectorDescriptor(int race, int tech_level)
 {
     if (race == -1) {
         race = int(type::race::R0_ID);
@@ -400,7 +400,7 @@ getNewProtectorDescriptor(int race, int tech_level)
 }
 
 descriptor::Base
-getNewBombDescriptor(int damage, int radius)
+Generator::getNewBombDescriptor(int damage, int radius)
 {
     if (damage == -1) {
          damage = meti::getRandInt(10, 100);
@@ -416,4 +416,4 @@ getNewBombDescriptor(int damage, int radius)
     return descriptor;
 }
 
-} // namespace generator
+} // namespace descriptor

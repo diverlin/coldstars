@@ -45,10 +45,6 @@ public:
     }
 
     const T& get(const id_type& id) const {
-        if (id == -1) {
-            return getRand();
-        }
-
         const auto it = m_descriptors.find(id);
         if (it != m_descriptors.end()) {
             return it->second;
@@ -56,12 +52,21 @@ public:
         throw std::runtime_error("descriptor id doesn't exist");
     }
 
-    const T& getRand() const
+    const T& random() const
     {
         auto it = m_descriptors.begin();
         std::advance( it, meti::getRandInt(0, m_descriptors.size()) );
         return it->second;
     }
+
+    std::vector<id_type> idList() const {
+        std::vector<id_type> result;
+        for (auto it: m_descriptors) {
+            result.push_back(it.first);
+        }
+        return result;
+    }
+
 private:
     std::map<id_type, T> m_descriptors;
 };
@@ -91,6 +96,7 @@ public:
 
     const MManager<Galaxy>& galaxy() const { return m_galaxy; }
     const MManager<Sector>& sector() const { return m_sector; }
+
 private:
     MManager<Galaxy> m_galaxy;
     MManager<Sector> m_sector;
@@ -98,8 +104,8 @@ private:
     std::map<id_type, Base> m_descriptors;
     std::map<int, std::vector<Base>> m_descriptorsTypes;
 
-    void clear();
-    void generate();
+    void __clear();
+    void __generate();
 }; 
 
 } // namespace descriptor
