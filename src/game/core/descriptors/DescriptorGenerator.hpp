@@ -19,35 +19,34 @@
 
 #pragma once
 
-#include <descriptors/Base.hpp>
+namespace descriptor {
 
-class DescriptorManager;
+class Base;
+class Galaxy;
 
-class DescriptorGenerator {
-public:
-    DescriptorGenerator();
-    ~DescriptorGenerator();
+} // namespace descriptor
 
-private:
-    /* world */
-    static descriptor::Base getNewStarsystemDescriptor(int race = -1);
+namespace generator {
 
-    /* spaceobjects */
-    static descriptor::Base getNewStarDescriptor();
-    static descriptor::Base getNewPlanetDescriptor();
-    static descriptor::Base getNewAsteroidDescriptor();
-    static descriptor::Base getNewVehicleDescriptor();
-    static descriptor::Base getNewContainerDescriptor();
+/* world */
+descriptor::Galaxy getNewGalaxyDescriptor();
+descriptor::Base getNewStarsystemDescriptor(int race = -1);
 
-    /* items */
-    static descriptor::Base getNewBakDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::Base getNewDriveDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::Base getNewDroidDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::Base getNewGrappleDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::Base getNewScanerDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::Base getNewRadarDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::Base getNewProtectorDescriptor(int race = -1, int tech_level = -1);
-    static descriptor::Base getNewBombDescriptor(int damage = -1, int radius = -1);
+/* spaceobjects */
+descriptor::Base getNewStarDescriptor();
+descriptor::Base getNewPlanetDescriptor();
+descriptor::Base getNewAsteroidDescriptor();
+descriptor::Base getNewVehicleDescriptor();
+descriptor::Base getNewContainerDescriptor();
 
-    friend DescriptorManager;
-};
+/* items */
+descriptor::Base getNewBakDescriptor(int race = -1, int tech_level = -1);
+descriptor::Base getNewDriveDescriptor(int race = -1, int tech_level = -1);
+descriptor::Base getNewDroidDescriptor(int race = -1, int tech_level = -1);
+descriptor::Base getNewGrappleDescriptor(int race = -1, int tech_level = -1);
+descriptor::Base getNewScanerDescriptor(int race = -1, int tech_level = -1);
+descriptor::Base getNewRadarDescriptor(int race = -1, int tech_level = -1);
+descriptor::Base getNewProtectorDescriptor(int race = -1, int tech_level = -1);
+descriptor::Base getNewBombDescriptor(int damage = -1, int radius = -1);
+
+} // namespace generator

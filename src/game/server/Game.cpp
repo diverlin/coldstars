@@ -29,12 +29,7 @@
 #include <ai/God.hpp>
 #include <world/galaxy.hpp>
 #include <descriptors/GalaxyDescriptor.hpp>
-
-descriptor::Galaxy
-getNewGalaxyDescriptor() {
-    descriptor::Galaxy descriptor;
-    return descriptor;
-}
+#include <descriptors/DescriptorGenerator.hpp>
 
 //    galaxy_descriptor.allow_invasion = false;
 //    galaxy_descriptor.sector_num = 1;
@@ -68,7 +63,7 @@ bool Game::run() const
     GameDate& gameDate   = global::get().gameDate();
 
     /// create the world
-    Galaxy* galaxy = god.createWorld(getNewGalaxyDescriptor());
+    Galaxy* galaxy = god.createWorld(generator::getNewGalaxyDescriptor());
 
     /// game loop
     while (m_isRunning) {
