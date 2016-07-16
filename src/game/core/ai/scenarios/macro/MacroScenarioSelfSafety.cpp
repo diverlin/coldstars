@@ -25,7 +25,7 @@
 
 MacroScenarioSelfSafety::MacroScenarioSelfSafety() 
 {
-    type_id = type::AISCENARIO::MACRO_SELFSAFETY_ID;
+    setTypeId(type::AISCENARIO::MACRO_SELFSAFETY_ID);
 }
 
 MacroScenarioSelfSafety::~MacroScenarioSelfSafety() 
@@ -35,10 +35,10 @@ void MacroScenarioSelfSafety::UpdateInStaticInSpace(Npc* npc) const
 {
     if (npc->starsystem()->conditionId() == ENTITY::STARSYSTEM::CONDITION::SAFE_ID)
     {
-        if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->type() != type::entity::PLANET_ID)
+        if (npc->stateMachine().macroTaskManager().target()->type() != type::entity::PLANET_ID)
         { 
-            Task microtask(type::AISCENARIO::MICRO_DOCKING_ID, npc->GetPlanetForDocking()->id());
-            npc->GetStateMachine().SetCurrentMicroTask(microtask);
+            Task microtask(type::AISCENARIO::MICRO_DOCKING_ID, npc->planetForDocking()->id());
+            npc->stateMachine().setCurrentMicroTask(microtask);
         }
     }
     else

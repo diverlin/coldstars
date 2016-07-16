@@ -23,43 +23,43 @@
 
 Skills::Skills()
 :
-attack(SKILLS::ATTACK_MIN),
-defence(SKILLS::DEFENCE_MIN),
-leader(SKILLS::LEADER_MIN),
-trader(SKILLS::TRADER_MIN),
-technic(SKILLS::TECHNIC_MIN),
-diplomat(SKILLS::DIPLOMAT_MIN),
-available_points(0),
-level(1),
-expirience(0),
-expirience_nextlevel(SKILLS::EXPIRIENCE_THRESHOLD)
+m_attack(SKILLS::ATTACK_MIN),
+m_defence(SKILLS::DEFENCE_MIN),
+m_leader(SKILLS::LEADER_MIN),
+m_trader(SKILLS::TRADER_MIN),
+m_technic(SKILLS::TECHNIC_MIN),
+m_diplomat(SKILLS::DIPLOMAT_MIN),
+m_availablePoints(0),
+m_level(1),
+m_expirience(0),
+m_nextlevelExpirience(SKILLS::EXPIRIENCE_THRESHOLD)
 {}     
 
 Skills::~Skills() 
 {}
 
-void Skills::BindStrategy(const int* strategy)
+void Skills::bindStrategy(const int* strategy)
 {
     for (int i=0; i<SKILLS_NUM; i++)
     {
-        this->strategy[i] = strategy[i]; 
+        this->m_strategy[i] = strategy[i]; 
     }
 }
 
-void Skills::AddExpirience(unsigned long int addExpirience)
+void Skills::addExpirience(unsigned long int addExpirience)
 {
-    expirience += addExpirience;
-    while(CheckLevelUp() == true) 
+    m_expirience += addExpirience;
+    while(__checkLevelUp() == true) 
     {}
 }
 
-bool Skills::CheckLevelUp()
+bool Skills::__checkLevelUp()
 {
-        if (expirience > expirience_nextlevel)
+        if (m_expirience > m_nextlevelExpirience)
     {
-        available_points += 1;
-        expirience_nextlevel *= 2;
-        level++;
+        m_availablePoints += 1;
+        m_nextlevelExpirience *= 2;
+        m_level++;
                 
                 return true;
     }
@@ -68,32 +68,32 @@ bool Skills::CheckLevelUp()
 }
 
 //######### ATTACK ###############
-bool Skills::IncrementAttack()
+bool Skills::incrementAttack()
 {
-    if (available_points > 0)
+    if (m_availablePoints > 0)
     {
-        available_points -= 1;
-        attack += 1;
+        m_availablePoints -= 1;
+        m_attack += 1;
         return true;
     }
     
     return false;
 }
 
-void Skills::DecrementAttack()
+void Skills::decrementAttack()
 {
-    available_points += 1;
-    attack -= 1;
+    m_availablePoints += 1;
+    m_attack -= 1;
 }
 
 
 //######### DEFENCE ###############
 bool Skills::IncrementDefence()
 {
-    if (available_points > 0)
+    if (m_availablePoints > 0)
     {
-        available_points -= 1;
-        defence += 1;
+        m_availablePoints -= 1;
+        m_defence += 1;
         return true;
     }
     
@@ -102,18 +102,17 @@ bool Skills::IncrementDefence()
 
 void Skills::DecrementDefence()
 {
-    available_points += 1;
-    defence -= 1;
+    m_availablePoints += 1;
+    m_defence -= 1;
 }
 
 
 //######### LEADER ###############
 bool Skills::IncrementLeader()
 {
-    if (available_points > 0)
-    {
-        available_points -= 1;
-        leader += 1;
+    if (m_availablePoints > 0) {
+        m_availablePoints -= 1;
+        m_leader += 1;
         return true;
     }
     
@@ -122,18 +121,18 @@ bool Skills::IncrementLeader()
 
 void Skills::DecrementLeader()
 {
-    available_points += 1;
-    leader -= 1;
+    m_availablePoints += 1;
+    m_leader -= 1;
 }
 
 
 //######### TRADER ###############
 bool Skills::IncrementTrader()
 {
-    if (available_points > 0)
+    if (m_availablePoints > 0)
     {
-        available_points -= 1;
-        trader += 1;
+        m_availablePoints -= 1;
+        m_trader += 1;
         return true;
     }
     
@@ -142,17 +141,17 @@ bool Skills::IncrementTrader()
 
 void Skills::DecrementTrader()
 {
-    available_points += 1;
-    trader -= 1;
+    m_availablePoints += 1;
+    m_trader -= 1;
 }
 
 //######### TECHNIC ###############
 bool Skills::IncrementTechnic()
 {
-    if (available_points > 0)
+    if (m_availablePoints > 0)
     {
-        available_points -= 1;
-        technic += 1;
+        m_availablePoints -= 1;
+        m_technic += 1;
         return true;
     }
     
@@ -161,18 +160,18 @@ bool Skills::IncrementTechnic()
 
 void Skills::DecrementTechnic()
 {
-    available_points += 1;
-    technic -= 1;
+    m_availablePoints += 1;
+    m_technic -= 1;
 }
 
 
 //######### DIMPLOMAT ###############
 bool Skills::IncrementDiplomat()
 {
-    if (available_points > 0)
+    if (m_availablePoints > 0)
     {
-        available_points -= 1;
-        diplomat += 1;
+        m_availablePoints -= 1;
+        m_diplomat += 1;
         return true;
     }
     
@@ -181,60 +180,60 @@ bool Skills::IncrementDiplomat()
 
 void Skills::DecrementDiplomat()
 {
-    available_points += 1;
-    diplomat -= 1;
+    m_availablePoints += 1;
+    m_diplomat -= 1;
 }
 
 void Skills::Save(boost::property_tree::ptree& save_ptree, const std::string& parent_root) const
 {       
     const std::string root = parent_root+"skill.";
-        save_ptree.put(root+"attack", attack);        
-        save_ptree.put(root+"defence", defence); 
-        save_ptree.put(root+"leader", leader);
-        save_ptree.put(root+"trader", trader); 
-        save_ptree.put(root+"technic", technic); 
-        save_ptree.put(root+"diplomat", diplomat); 
-        save_ptree.put(root+"available_points", available_points); 
+        save_ptree.put(root+"attack", m_attack);        
+        save_ptree.put(root+"defence", m_defence); 
+        save_ptree.put(root+"leader", m_leader);
+        save_ptree.put(root+"trader", m_trader); 
+        save_ptree.put(root+"technic", m_technic); 
+        save_ptree.put(root+"diplomat", m_diplomat); 
+        save_ptree.put(root+"available_points", m_availablePoints); 
 
-        save_ptree.put(root+"expirience", expirience); 
-        save_ptree.put(root+"expirience_nextlevel", expirience_nextlevel); 
+        save_ptree.put(root+"expirience", m_expirience); 
+        save_ptree.put(root+"expirience_nextlevel", m_nextlevelExpirience); 
 }    
 
 void Skills::Load(const boost::property_tree::ptree& load_ptree)
 {
-        attack = load_ptree.get<int>("attack"); 
-        defence = load_ptree.get<int>("defence"); 
-        leader = load_ptree.get<int>("leader"); 
-        trader = load_ptree.get<int>("trader"); 
-        technic = load_ptree.get<int>("technic"); 
-        diplomat = load_ptree.get<int>("diplomat"); 
-        available_points = load_ptree.get<int>("available_points"); 
+        m_attack = load_ptree.get<int>("attack"); 
+        m_defence = load_ptree.get<int>("defence"); 
+        m_leader = load_ptree.get<int>("leader");
+        m_trader = load_ptree.get<int>("trader"); 
+        m_technic = load_ptree.get<int>("technic"); 
+        m_diplomat = load_ptree.get<int>("diplomat"); 
+        m_availablePoints = load_ptree.get<int>("available_points"); 
         
-        expirience = load_ptree.get<int>("expirience"); 
-        expirience_nextlevel = load_ptree.get<int>("expirience_nextlevel"); 
+        m_expirience = load_ptree.get<int>("expirience"); 
+        m_nextlevelExpirience = load_ptree.get<int>("expirience_nextlevel"); 
 }
 
 void Skills::Resolve()
 {}
 
-void Skills::ManageAccordingToStrategy()
+void Skills::manageAccordingToStrategy()
 {
     float strategy_norm[SKILLS_NUM] = {1.,1.,1.,1.,1.,1.};
     for (int i=0; i<SKILLS_NUM; i++)
     {
-        strategy_norm[i] = (float)GetSkillDependingOnArrayIndex(i) / strategy[i]; 
+        strategy_norm[i] = (float)__skillDependingOnArrayIndex(i) / m_strategy[i]; 
     }
     
     int index_min = getIndexWithMinVal(strategy_norm, SKILLS_NUM);
-    ImcrementSkillDependingOnArrayIndex(index_min);
+    __incrementSkillDependingOnArrayIndex(index_min);
         
 }
 
-void Skills::ImcrementSkillDependingOnArrayIndex(int i)
+void Skills::__incrementSkillDependingOnArrayIndex(int i)
 {
         switch(i)
         {
-                case 0: { IncrementAttack();   break; }
+                case 0: { incrementAttack();   break; }
                 case 1: { IncrementDefence();  break; }
                 case 2: { IncrementLeader();   break; }
                 case 3: { IncrementTrader();   break; }
@@ -243,16 +242,16 @@ void Skills::ImcrementSkillDependingOnArrayIndex(int i)
         }
 }   
 
-int Skills::GetSkillDependingOnArrayIndex(int i)
+int Skills::__skillDependingOnArrayIndex(int i)
 {
         switch(i)
         {
-                case 0: { return attack; break; }
-                case 1: { return defence; break; }
-                case 2: { return leader; break; }
-                case 3: { return trader; break; }
-                case 4: { return technic; break; }
-                case 5: { return diplomat; break; }
+                case 0: { return m_attack; break; }
+                case 1: { return m_defence; break; }
+                case 2: { return m_leader; break; }
+                case 3: { return m_trader; break; }
+                case 4: { return m_technic; break; }
+                case 5: { return m_diplomat; break; }
         }
         
         return 0;

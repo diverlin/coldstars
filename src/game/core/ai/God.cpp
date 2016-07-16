@@ -111,18 +111,18 @@ void God::CreateInvasion(Galaxy* galaxy, const descriptor::Galaxy& descriptor) c
 void God::ProceedInvasion(Galaxy* galaxy) const
 {
     Starsystem* starsystem_invade_from = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
-    if (starsystem_invade_from == nullptr) {
+    if (!starsystem_invade_from) {
         return;
-    }
-    
-    Starsystem* starsystem_invade_to   = galaxy->closestSectorTo(starsystem_invade_from->sector())->closestStarsystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
-    if (starsystem_invade_to == nullptr) {
+    }    
+    Starsystem* starsystem_invade_to = galaxy->closestSectorTo(starsystem_invade_from->sector())->closestStarsystemTo(starsystem_invade_from, ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
+    if (!starsystem_invade_to) {
         return;
     }
     
     Npc* npc_leader = starsystem_invade_from->freeLeaderByRaceId(starsystem_invade_from->conquerorRaceId());
+    assert(npc_leader);
     Task macrotask(type::AISCENARIO::MACRO_STARSYSTEMLIBERATION_ID, starsystem_invade_to->id());
-    npc_leader->GetStateMachine().SetCurrentMacroTask(macrotask);
+    npc_leader->stateMachine().setCurrentMacroTask(macrotask);
     
     int num_max= 10;
     starsystem_invade_from->createGroupAndShareTask(npc_leader, starsystem_invade_to, num_max);

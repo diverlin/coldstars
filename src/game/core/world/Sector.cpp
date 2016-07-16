@@ -68,7 +68,9 @@ Starsystem* Sector::randomStarsystem(int condition_id)
                 ss_vec.push_back(starsystem);
             }
         }
-        result = meti::getRand(ss_vec);
+        if (ss_vec.size()) {
+            result = meti::getRand(ss_vec);
+        }
     }
 
     return result;

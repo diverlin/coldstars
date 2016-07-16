@@ -17,8 +17,7 @@
 */
 
 
-#ifndef SKILLS_HPP
-#define SKILLS_HPP
+#pragma once
 
 #include <boost/property_tree/ptree.hpp>
 #include "../common/constants.hpp"
@@ -26,78 +25,78 @@
 
 class Skills
 { 
-    public:
-        Skills();
-        ~Skills();
+public:
+    Skills();
+    ~Skills();
 
-                void BindStrategy(const int*);
-                
-        int GetAvailablePoints() const    { return available_points; };
-        int GetExpirience()  const { return expirience; };
-        int GetExpirienceNextLevel() const { return expirience_nextlevel; };
-        int GetLevel() const { return level; };
+    void bindStrategy(const int*);
 
-        float GetAttackNormalized()   const { return attack  * SKILLS::ATTACK_NORMALIZED_RATE; };   
-        float GetDefenceNormalized()  const { return defence * SKILLS::DEFENCE_NORMALIZED_RATE; }; 
-        
-        int GetAttack()   const { return attack; };   
-        int GetDefence()  const { return defence; };  
-        int GetLeader()   const { return leader; };  
-        int GetTrader()   const { return trader; };   
-        int GetTechnic()  const { return technic; };  
-        int GetDiplomat() const { return diplomat; }; 
+    int availablePoints() const    { return m_availablePoints; }
+    int expirience()  const { return m_expirience; }
+    int nextLevelExpirience() const { return m_nextlevelExpirience; }
+    int level() const { return m_level; }
 
-        void AddExpirience(unsigned long int expirience);
+    float attackNormalized()   const { return m_attack  * SKILLS::ATTACK_NORMALIZED_RATE; }
+    float defenceNormalized()  const { return m_defence * SKILLS::DEFENCE_NORMALIZED_RATE; }
 
-        bool IncrementAttack();
-        void DecrementAttack();
+    int attack()   const { return m_attack; }
+    int defence()  const { return m_defence; }
+    int leader()   const { return m_leader; }
+    int trader()   const { return m_trader; }
+    int technic()  const { return m_technic; }
+    int diplomat() const { return m_diplomat; }
 
-        bool IncrementDefence();
-        void DecrementDefence();
+    void addExpirience(unsigned long int);
 
-        bool IncrementLeader();
-        void DecrementLeader();
+    bool incrementAttack();
+    void decrementAttack();
 
-        bool IncrementTrader();
-        void DecrementTrader();
+    bool IncrementDefence();
+    void DecrementDefence();
 
-        bool IncrementTechnic();
-        void DecrementTechnic();
+    bool IncrementLeader();
+    void DecrementLeader();
 
-        bool IncrementDiplomat();
-        void DecrementDiplomat();
-                
-                void ManageAccordingToStrategy();
+    bool IncrementTrader();
+    void DecrementTrader();
 
-        void Save(boost::property_tree::ptree&, const std::string&) const;
-        void Load(const boost::property_tree::ptree&);
-        void Resolve();
-        
-    private:
-        int attack;   
-        int defence;  
-        int leader;  
-        int trader;   
-        int technic;  
-        int diplomat; 
+    bool IncrementTechnic();
+    void DecrementTechnic();
 
-        int available_points;
-        int level;
-        
-        unsigned long int expirience;
-        unsigned long int expirience_nextlevel;
-                
-        int strategy[SKILLS_NUM];
-                
-        void ImcrementSkillDependingOnArrayIndex(int);
-        int GetSkillDependingOnArrayIndex(int); 
-        
-        bool CheckLevelUp();               
+    bool IncrementDiplomat();
+    void DecrementDiplomat();
+
+    void manageAccordingToStrategy();
+
+    void Save(boost::property_tree::ptree&, const std::string&) const;
+    void Load(const boost::property_tree::ptree&);
+    void Resolve();
+
+private:
+    int m_attack = 0;
+    int m_defence = 0;
+    int m_leader = 0;
+    int m_trader = 0;
+    int m_technic = 0;
+    int m_diplomat = 0;
+
+    int m_availablePoints = 0;
+    int m_level = 0;
+
+    unsigned long int m_expirience = 0;
+    unsigned long int m_nextlevelExpirience = 0;
+
+    int m_strategy[SKILLS_NUM];
+
+    void __incrementSkillDependingOnArrayIndex(int);
+    int __skillDependingOnArrayIndex(int);
+
+    bool __checkLevelUp();
 };
 
 const int* getArrayDependingOnClassTypeId(int);
 const int* getArrayDependingOnRaceId(type::race);
 
-#endif
+
 
 

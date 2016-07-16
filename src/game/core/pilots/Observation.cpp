@@ -77,15 +77,12 @@ Starsystem* Observation::GetClosestStarSystem(int requested_consdition_id) const
 }        
 
 
-Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<type::race>& rVec_race_id) const
+Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<type::race>& races) const
 {
-    for (unsigned int i=0; i<rVec_race_id.size(); i++)
-    {
-        for (unsigned int j=0; j<visible_VEHICLE_pair_vec.size(); j++)
-        {
-            if (rVec_race_id[i] == visible_VEHICLE_pair_vec[j].object->npc()->GetRaceId())
-            {
-                return visible_VEHICLE_pair_vec[j].object;
+    for (const type::race& race: races) {
+        for (auto pair: visible_VEHICLE_pair_vec) {
+            if (race == pair.object->npc()->raceId()) {
+                return pair.object;
             }
         }
     }
@@ -93,19 +90,19 @@ Vehicle* Observation::GetClosestVisibleVehicle(const std::vector<type::race>& rV
     return nullptr;
 }
 
-Vehicle* Observation::GetRandVisibleVehicle(const std::vector<type::race>& rVec_race_id) const
+Vehicle* Observation::GetRandVisibleVehicle(const std::vector<type::race>& races) const
 {
-    std::vector<Vehicle*> tmp_vehicle;
-    for (unsigned int i=0; i<rVec_race_id.size(); i++) {
-        for (unsigned int j=0; j<visible_VEHICLE_pair_vec.size(); j++) {
-            if (rVec_race_id[i] == visible_VEHICLE_pair_vec[j].object->npc()->GetRaceId()) {
-                tmp_vehicle.push_back(visible_VEHICLE_pair_vec[j].object);
+    std::vector<Vehicle*> vehicles;
+    for (const type::race& race: races) {
+        for (auto pair: visible_VEHICLE_pair_vec) {
+            if (race == pair.object->npc()->raceId()) {
+                vehicles.push_back(pair.object);
             }
         }
     }
     
-    if (tmp_vehicle.size() > 0) {
-        return tmp_vehicle[meti::getRandInt(tmp_vehicle.size()-1)];
+    if (vehicles.size()) {
+        return meti::getRand(vehicles);
     }
 
     return nullptr;
@@ -150,8 +147,8 @@ void Observation::FindVisibleAsteroidsInSpaceInStatic()
     visible_ASTEROID_pair_vec.clear();
 
     for (unsigned int i=0; i<asteroid_vec.size(); i++) {
-        float dist = meti::distance(npc_owner->GetVehicle()->position(), asteroid_vec[i]->position());
-        if (dist < npc_owner->GetVehicle()->properties().radar) {
+        float dist = meti::distance(npc_owner->vehicle()->position(), asteroid_vec[i]->position());
+        if (dist < npc_owner->vehicle()->properties().radar) {
             visible_ASTEROID_pair_vec.push_back( Pair<Asteroid*>(asteroid_vec[i], dist) );
             see.ASTEROID = true;
         }
@@ -172,12 +169,12 @@ void Observation::FindVisibleContainersInSpaceInStatic()
 
     for (unsigned int i=0; i<container_vec.size(); i++)
     {
-        float dist = meti::distance(npc_owner->GetVehicle()->position(), container_vec[i]->position());
-        if (dist < npc_owner->GetVehicle()->properties().radar)
+        float dist = meti::distance(npc_owner->vehicle()->position(), container_vec[i]->position());
+        if (dist < npc_owner->vehicle()->properties().radar)
         {
             visible_CONTAINER_pair_vec.push_back( Pair<Container*>(container_vec[i], dist) );
             int container_mass = container_vec[i]->mass();
-            if(container_mass < npc_owner->GetVehicle()->properties().grab_strength)
+            if(container_mass < npc_owner->vehicle()->properties().grab_strength)
             {
                 visible_pickable_CONTAINER_pair_vec.push_back( Pair<Container*>(container_vec[i], dist) );
                 see.pickable_CONTAINER = true;
@@ -201,9 +198,9 @@ void Observation::FindVisibleVehiclesInSpaceInStatic()
 
     for (unsigned int i=0; i<vehicle_vec.size(); i++)
     {
-        float dist = meti::distance(npc_owner->GetVehicle()->position(), vehicle_vec[i]->position());
+        float dist = meti::distance(npc_owner->vehicle()->position(), vehicle_vec[i]->position());
         //std::cout<<"dist, radius = "<<dist<<", "<<npc_owner->GetVehicle()->propetries.radius<<std::endl;
-        if (dist < npc_owner->GetVehicle()->properties().radar)
+        if (dist < npc_owner->vehicle()->properties().radar)
         {
             visible_VEHICLE_pair_vec.push_back( Pair<Vehicle*>(vehicle_vec[i], dist) );
         }

@@ -105,51 +105,42 @@ void Starsystem::putChildrenToGarbage() const
 
 Npc* Starsystem::freeLeaderByRaceId(type::race race_id) const
 {
-    std::vector<Npc*> tmp_npc_vec;
-    for (unsigned int i=0; i<m_vehicles.size(); i++)
-    {
-        if (m_vehicles[i]->npc()->GetRaceId() == race_id) {
-            tmp_npc_vec.push_back(m_vehicles[i]->npc());
+    std::vector<Npc*> npcs;
+    for (Vehicle* vehicle: m_vehicles) {
+        if (vehicle->npc()->raceId() == race_id) {
+            npcs.push_back(vehicle->npc());
         }
     }
     
     int leader_skill_max = 0;
-    int index_max = -1;
-    for (unsigned int i=0; i<tmp_npc_vec.size(); i++)
-    {
-        int leader_skill = tmp_npc_vec[i]->GetSkills().GetLeader();
-        if (leader_skill > leader_skill_max)
-        {
+    Npc* result = nullptr;
+    for (Npc* npc: npcs) {
+        int leader_skill = npc->skills().leader();
+        if (leader_skill > leader_skill_max) {
             leader_skill_max = leader_skill;
-            index_max = i;
+            result = npc;
         }
     }
     
-    if (index_max != -1)
-    {
-        return tmp_npc_vec[index_max];
-    }
-    
-    return nullptr;
+    return result;
 }
 
 void Starsystem::createGroupAndShareTask(Npc* npc_leader, Starsystem* target_starsystem, int num_max) const
 {    
-    std::vector<Npc*> tmp_npc_vec;
-    for (unsigned int i=0; i<m_vehicles.size(); i++)
-    {
-        if (m_vehicles[i]->npc()->GetRaceId() == npc_leader->GetRaceId())
-        {
-            tmp_npc_vec.push_back(m_vehicles[i]->npc());
+    std::vector<Npc*> npcs;
+    for (Vehicle* vehicle: m_vehicles) {
+        if (vehicle->npc()->raceId() == npc_leader->raceId()) {
+            npcs.push_back(vehicle->npc());
         }
     }
     
     int num = 0;
-    for (unsigned int i=0; (i<tmp_npc_vec.size() and (num<num_max)); i++)
-    {
-        if (tmp_npc_vec[i]->GetVehicle()->isAbleToJumpTo(target_starsystem) == true)
-        {
-            tmp_npc_vec[i]->CloneMacroTaskFrom(npc_leader);
+    for (Npc* npc: npcs) {
+        if (num>num_max)
+            break;
+
+        if (npc->vehicle()->isAbleToJumpTo(target_starsystem)) {
+            npc->cloneMacroTaskFrom(npc_leader);
             num++;
         }
     }
@@ -374,76 +365,63 @@ Vehicle* Starsystem::randomVehicle() const
     return m_vehicles[meti::getRandInt(m_vehicles.size()-1)];
 }
 
-Vehicle* Starsystem::randomVehicleExcludingNpcRaceId(type::race _race_id) const
+Vehicle* Starsystem::randomVehicleExcludingNpcRaceId(type::race race_id) const
 {
-    std::vector<Vehicle*> _vehicle_vec;
-    Vehicle* requested_vehicle = nullptr;
-    
-    for (unsigned int i=0; i<m_vehicles.size(); i++)
-    {
-        if (m_vehicles[i]->npc() != nullptr)
-        {
-            if (m_vehicles[i]->npc()->GetRaceId() != _race_id)
-            {
-                _vehicle_vec.push_back(m_vehicles[i]);
+    std::vector<Vehicle*> vehicles;
+    Vehicle* result = nullptr;
+    for (Vehicle* vehicle: m_vehicles) {
+        if (vehicle->npc()) {
+            if (vehicle->npc()->raceId() != race_id) {
+                vehicles.push_back(vehicle);
             }
         }
     }
     
-    if (_vehicle_vec.size() > 0)
-    {
-        requested_vehicle = _vehicle_vec[meti::getRandInt(_vehicle_vec.size()-1)];
+    if (vehicles.size()) {
+        result = meti::getRand(vehicles);
     }
     
-    return requested_vehicle;
+    return result;
 }
 
-Vehicle* Starsystem::randVehicleByNpcRaceId(type::race _race_id) const
+Vehicle* Starsystem::randVehicleByNpcRaceId(type::race race_id) const
 {
-    std::vector<Vehicle*> _vehicle_vec;
-    Vehicle* requested_vehicle = nullptr;
+    std::vector<Vehicle*> vehicles;
+    Vehicle* result = nullptr;
     
-    for (unsigned int i=0; i<m_vehicles.size(); i++)
-    {
-        if (m_vehicles[i]->npc() != nullptr)
-        {
-            if (m_vehicles[i]->npc()->GetRaceId() == _race_id)
-            {
-                _vehicle_vec.push_back(m_vehicles[i]);
+    for (Vehicle* vehicle: m_vehicles) {
+        if (vehicle->npc()) {
+            if (vehicle->npc()->raceId() == race_id) {
+                vehicles.push_back(vehicle);
             }
         }
     }
     
-    if (_vehicle_vec.size() > 0)
-    {
-        requested_vehicle = _vehicle_vec[meti::getRandInt(_vehicle_vec.size()-1)];
+    if (vehicles.size()) {
+        result = meti::getRand(vehicles);
     }
     
-    return requested_vehicle;
+    return result;
 }
 
-Vehicle* Starsystem::randomVehicle(const std::vector<type::race>& rVec_race_id) const
+Vehicle* Starsystem::randomVehicle(const std::vector<type::race>& races) const
 {
-    std::vector<Vehicle*> tmp_vehicle_vec;
-    Vehicle* requested_vehicle = nullptr;
+    std::vector<Vehicle*> vehicles;
+    Vehicle* result = nullptr;
 
-    for (unsigned int i=0; i<rVec_race_id.size(); i++)
-    {
-        for (unsigned int j=0; j<m_vehicles.size(); j++)
-        {
-            if (rVec_race_id[i] == m_vehicles[j]->npc()->GetRaceId())
-            {
-                tmp_vehicle_vec.push_back(m_vehicles[j]);
+    for (const type::race& race: races) {
+        for (Vehicle* vehicle: m_vehicles) {
+            if (race == vehicle->npc()->raceId()) {
+                vehicles.push_back(vehicle);
             }
         }
     }
     
-    if (tmp_vehicle_vec.size() > 0)
-    {
-        requested_vehicle = tmp_vehicle_vec[meti::getRandInt(tmp_vehicle_vec.size()-1)];
+    if (vehicles.size()) {
+        result = meti::getRand(vehicles);
     }
     
-    return requested_vehicle;
+    return result;
 }
 
 
@@ -783,7 +761,7 @@ void Starsystem::__updateInSpaceInStatic_s()
     __updateStates();
 
     for (Vehicle* vehicle: m_vehicles) {
-        vehicle->npc()->UpdateInSpaceInStatic();
+        vehicle->npc()->updateInSpaceInStatic();
         if (vehicle->subtype() == type::entity::SPACESTATION_ID)
         {
             ((SpaceStation*)vehicle)->land()->UpdateInStatic();

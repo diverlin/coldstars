@@ -68,18 +68,18 @@ void initGameStuff()
 //    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
 
     /* create Macro Scenaries */
-    ScenarioCollector::Instance().RegisterScenario(new MacroScenarioGoodsTrading());
-    ScenarioCollector::Instance().RegisterScenario(new MacroScenarioStarSystemLiberation());
-    ScenarioCollector::Instance().RegisterScenario(new MacroScenarioStarSystemDefence());
-    ScenarioCollector::Instance().RegisterScenario(new MacroScenarioSelfSafety());          
+    ScenarioCollector::Instance().add(new MacroScenarioGoodsTrading());
+    ScenarioCollector::Instance().add(new MacroScenarioStarSystemLiberation());
+    ScenarioCollector::Instance().add(new MacroScenarioStarSystemDefence());
+    ScenarioCollector::Instance().add(new MacroScenarioSelfSafety());          
     
     /* create Micro Scenaries */
-    ScenarioCollector::Instance().RegisterScenario(new MicroScenarioDocking());
-    ScenarioCollector::Instance().RegisterScenario(new MicroScenarioLaunching());
-    ScenarioCollector::Instance().RegisterScenario(new MicroScenarioJump());
-    ScenarioCollector::Instance().RegisterScenario(new MicroScenarioDestroy());
-    ScenarioCollector::Instance().RegisterScenario(new MicroScenarioGrab());
-    ScenarioCollector::Instance().RegisterScenario(new MicroScenarioExploration());
+    ScenarioCollector::Instance().add(new MicroScenarioDocking());
+    ScenarioCollector::Instance().add(new MicroScenarioLaunching());
+    ScenarioCollector::Instance().add(new MicroScenarioJump());
+    ScenarioCollector::Instance().add(new MicroScenarioDestroy());
+    ScenarioCollector::Instance().add(new MicroScenarioGrab());
+    ScenarioCollector::Instance().add(new MicroScenarioExploration());
             
     /* create AI models */
     AiModelCollector::Instance().RegisterAiModel(new AiModelRanger());

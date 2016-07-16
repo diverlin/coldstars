@@ -36,107 +36,107 @@ class Starsystem;
 
 struct UnresolvedDataNpc
 {
-        int vehicle_id;
-        int aiModel_id;
+    int vehicle_id;
+    int aiModel_id;
 
-        Task macrotask;
-        Task microtask;
+    Task macrotask;
+    Task microtask;
 };
 
 class Npc : public Base
 {
-    public:
-        Npc(int, type::entity, type::entity);
-        virtual ~Npc();
-        
-        virtual void putChildrenToGarbage() const {};
-        
-        void SetRaceId(type::race race_id)            { this->race_id = race_id; }
-        void SetAiModel(BaseAiModel* ai_model)        { this->ai_model = ai_model; }
-        void SetAlive(bool is_alive)            { this->is_alive = is_alive; }
-        void SetScanTarget(Vehicle* vehicle_to_scan)    { this->vehicle_to_scan = vehicle_to_scan; }
-        void SetPlayer(Player* player) { this->player = player; }
-        void SetVehicle(Vehicle* vehicle)         { this->vehicle = vehicle; }
+public:
+    Npc(int, type::entity, type::entity);
+    virtual ~Npc();
 
-        type::race GetRaceId()            const { return race_id; }
+    virtual void putChildrenToGarbage() const {}
 
-        Player* GetPlayer() const { return player; }
-        Vehicle* GetVehicle()           const { return vehicle; }
-        Skills& GetSkills()         { return skills; }
-        Vehicle* GetScanTarget()        const { return vehicle_to_scan; }
-        Observation& GetObservation()   { return observation; }
-        unsigned long int GetCredits()  const { return credits; }
-        StateMachine& GetStateMachine() { return state_machine; }
+    void setRaceId(type::race race_id)            { m_raceId = race_id; }
+    void setAiModel(BaseAiModel* ai_model)        { m_aiModel = ai_model; }
+    void setAlive(bool is_alive)            { m_isAlive = is_alive; }
+    void setScanTarget(Vehicle* target)    { m_scanTarget = target; }
+    void setPlayer(Player* player) { m_player = player; }
+    void setVehicle(Vehicle* vehicle)         { m_vehicle = vehicle; }
 
-        Starsystem* starsystem() const;
+    type::race raceId() const { return m_raceId; }
 
-        void IncreaseCredits(unsigned long int credits) { this->credits += credits; }
-        bool WithdrawCredits(unsigned long int);
-        void AddExpirience(int, bool);
-        
-        void CloneMacroTaskFrom(Npc*);
-        
-        // AI
-        void remeberAgressor(Vehicle*);
-        void UpdateInSpace(int, bool);
-        
-        void UpdateInSpaceInStatic();
-        void UpdateInKosmoportInStatic();
-        //
-        
-        //// scanning
-        bool CheckPossibilityToScan(Vehicle*);
-        bool ScanProceeding();
-        void ResetScanTarget();
-        //// scanning
-        
-        Planet* GetPlanetForDocking();
-        Starsystem* GetClosestStarSystem(int);
-        
-        void RenderInfo(const glm::vec2&);
-        
-        //bool BuyArmorAsMuchAsPossible();
-        bool BuyGoods();
-        
-        void Save(boost::property_tree::ptree&) const;
-        void Load(const boost::property_tree::ptree&);
-        void Resolve();
-        
-        void ApplySkillsStrategy();
-        
-        std::string GetAgressorSetString() const;
+    Player* player() const { return m_player; }
+    Vehicle* vehicle() const { return m_vehicle; }
+    Skills& skills() { return m_skills; }
+    Vehicle* scanTarget() const { return m_scanTarget; }
+    Observation& observation() { return m_observation; }
+    unsigned long int credits() const { return m_credits; }
+    StateMachine& stateMachine() { return m_stateMachine; }
 
-    private:
-        bool is_alive;
-        type::race race_id;
-        unsigned long int credits;
-        
-        Player* player;
-        Vehicle* vehicle;
-        
-        Skills skills;
-        
-        BaseAiModel* ai_model;
-        StateMachine state_machine;
-        
-        //        InfoTable info;
-        
-        std::set<AgressorData, AgressorDataComparator> data_agressor_set;
-        
-        Vehicle* vehicle_to_scan;
-        
-        Observation observation;
-        
-        UnresolvedDataNpc data_unresolved_npc;
-        
-        void ScenarioFireVehicleAgressor();
-        void ScenarioFireAsteroid();
-        
-        void UpdateInfo();
-        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+    Starsystem* starsystem() const;
+
+    void increaseCredits(unsigned long int credits) { m_credits += credits; }
+    bool withdrawCredits(unsigned long int);
+    void addExpirience(int, bool);
+
+    void cloneMacroTaskFrom(Npc*);
+
+    // AI
+    void remeberAgressor(Vehicle*);
+    void updateInSpace(int, bool);
+
+    void updateInSpaceInStatic();
+    void updateInKosmoportInStatic();
+    //
+
+    //// scanning
+    bool isAbleToScan(Vehicle*);
+    bool scanProceeding();
+    void resetScanTarget();
+    //// scanning
+
+    Planet* planetForDocking();
+    Starsystem* closestStarSystem(int);
+
+    void renderInfo(const glm::vec2&);
+
+    //bool BuyArmorAsMuchAsPossible();
+    bool buyGoods();
+
+    void Save(boost::property_tree::ptree&) const;
+    void Load(const boost::property_tree::ptree&);
+    void Resolve();
+
+    void applySkillsStrategy();
+
+    std::string agressorSetString() const;
+
+private:
+    bool m_isAlive;
+    type::race m_raceId;
+    unsigned long int m_credits;
+
+    Player* m_player;
+    Vehicle* m_vehicle;
+
+    Skills m_skills;
+
+    BaseAiModel* m_aiModel;
+    StateMachine m_stateMachine;
+
+    //        InfoTable info;
+
+    std::set<AgressorData, AgressorDataComparator> m_agressorsData;
+
+    Vehicle* m_scanTarget;
+
+    Observation m_observation;
+
+    UnresolvedDataNpc data_unresolved_npc;
+
+    void __scenarioFireVehicleAgressor();
+    void __scenarioFireAsteroid();
+
+    void __updateInfo();
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 };
 
 

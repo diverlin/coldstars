@@ -29,12 +29,12 @@ class MicroScenarioLaunching : public BaseScenario
         MicroScenarioLaunching();
         virtual ~MicroScenarioLaunching();
         
-        virtual void Enter(Npc*) const;
+        virtual void enter(Npc*) const;
         virtual bool Validate(Npc*) const;
         virtual void UpdateInStaticInSpace(Npc*) const;
         virtual void UpdateInStaticInDock(Npc*) const;
         virtual void UpdateInDynamicInSpace(Npc*) const;    
-        virtual void Exit(Npc*) const;
+        virtual void exit(Npc*) const;
         
         virtual std::string GetDescription(Npc*) const;
 };

@@ -87,7 +87,7 @@ void Angar::AddItemSlot(ItemSlot* item_slot)
 bool Angar::RepairItem(Npc* npc, item::Base* item) const
 {
     int price = item->price() * REPAIR_ITEM_PRICE_RATE;
-    if (npc->WithdrawCredits(price) == true) {
+    if (npc->withdrawCredits(price) == true) {
         return item->doRepair();
     }
 
@@ -97,14 +97,14 @@ bool Angar::RepairItem(Npc* npc, item::Base* item) const
 bool Angar::chargeRocketEquipment(Npc* npc, item::equipment::Rocket* rocket_equipment) const
 {
     int price_for_one = rocket_equipment->price() * AMMO_PRICE_RATE;
-    int ammo_max = npc->GetCredits() / price_for_one;
+    int ammo_max = npc->credits() / price_for_one;
     int ammo_need = rocket_equipment->GetAmmoMax() - rocket_equipment->GetAmmo();
 
     int ammo_amount = 0;
     if (ammo_max > ammo_need) { ammo_amount = ammo_need; }
     else                      { ammo_amount = ammo_max; }
     
-    if (npc->WithdrawCredits(ammo_amount*price_for_one) == true)
+    if (npc->withdrawCredits(ammo_amount*price_for_one) == true)
     {
         rocket_equipment->SetAmmo(rocket_equipment->GetAmmo() + ammo_amount);
         return true;
@@ -116,14 +116,14 @@ bool Angar::chargeRocketEquipment(Npc* npc, item::equipment::Rocket* rocket_equi
 bool Angar::RepairVehicle(Vehicle* vehicle) const
 {        
     int price_for_one = vehicle->vehicleDescriptor().price * REPAIR_VEHICLEKORPUS_PRICE_RATE;
-    int repair_max =  vehicle->npc()->GetCredits() / price_for_one;
+    int repair_max =  vehicle->npc()->credits() / price_for_one;
     int repair_need = vehicle->vehicleDescriptor().armor - vehicle->armor();
     
     int repair_amount = 0;
     if (repair_max > repair_need) { repair_amount = repair_need; }
     else                          { repair_amount = repair_max; }
     
-    if (vehicle->npc()->WithdrawCredits(repair_amount*price_for_one) == true) {
+    if (vehicle->npc()->withdrawCredits(repair_amount*price_for_one) == true) {
         vehicle->repairKorpus(repair_amount);
         return true;
     }
@@ -133,14 +133,14 @@ bool Angar::RepairVehicle(Vehicle* vehicle) const
 
 bool Angar::TankUpVehicle(Vehicle* vehicle) const
 {
-    int fuel_to_buy_max =  vehicle->npc()->GetCredits() / price_fuel;
+    int fuel_to_buy_max =  vehicle->npc()->credits() / price_fuel;
     int fuel_to_buy_need = vehicle->fuelMiss();
     
     int fuel = 0;
     if (fuel_to_buy_max > fuel_to_buy_need) { fuel = fuel_to_buy_need; }
     else                                    { fuel = fuel_to_buy_max; }
 
-    if (vehicle->npc()->WithdrawCredits(fuel*price_fuel) == true) {
+    if (vehicle->npc()->withdrawCredits(fuel*price_fuel) == true) {
         vehicle->driveComplex().bakSlot()->bakEquipment()->increaseFuel(fuel);
         return true;
     }
@@ -150,10 +150,10 @@ bool Angar::TankUpVehicle(Vehicle* vehicle) const
 
 void Angar::UpdateInStatic() const
 {
-    for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++) {
-        if (vehicle_visitors_slot_vec[i]->GetVehicle() != nullptr)  {
-            if (vehicle_visitors_slot_vec[i]->GetVehicle()->npc() != nullptr) {
-                vehicle_visitors_slot_vec[i]->GetVehicle()->npc()->UpdateInKosmoportInStatic();
+    for (auto slot: vehicle_visitors_slot_vec) {
+        if (slot->GetVehicle() != nullptr)  {
+            if (slot->GetVehicle()->npc() != nullptr) {
+                slot->GetVehicle()->npc()->updateInKosmoportInStatic();
             }
         }
     }

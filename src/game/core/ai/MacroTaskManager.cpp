@@ -23,27 +23,25 @@
 #include <managers/EntityManager.hpp>
 
 MacroTaskManager::MacroTaskManager()
-{
-    scenario  = nullptr;
-    target = nullptr;
-}
+{}
 
 MacroTaskManager::~MacroTaskManager()
 {}
 
-void MacroTaskManager::SetTask(const Task& macrotask)
+void MacroTaskManager::setTask(const Task& macrotask)
 {
-    this->macrotask = macrotask;
-    scenario = ScenarioCollector::Instance().GetScenario(macrotask.GetScenarioTypeId());
-    if (macrotask.targetId() != NONE) {
-        target = (SpaceObject*)global::get().entityManager().get(macrotask.targetId()); // hack
+    m_macrotask = macrotask;
+    m_scenario = ScenarioCollector::Instance().get(macrotask.GetScenarioTypeId());
+    assert(m_scenario);
+    if (m_macrotask.targetId() != NONE) {
+        m_target = (SpaceObject*)global::get().entityManager().get(macrotask.targetId()); // hack
     }
 }
 
-void MacroTaskManager::Reset()
+void MacroTaskManager::__reset()
 {
-    scenario = nullptr;
-    target = nullptr;
-    macrotask.reset();
+    m_scenario = nullptr;
+    m_target = nullptr;
+    m_macrotask.reset();
 }    
 

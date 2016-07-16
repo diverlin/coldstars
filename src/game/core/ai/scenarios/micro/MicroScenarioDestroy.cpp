@@ -26,7 +26,7 @@
 
 MicroScenarioDestroy::MicroScenarioDestroy()
 {
-    type_id = type::AISCENARIO::MICRO_DESTROY_ID;
+    setTypeId(type::AISCENARIO::MICRO_DESTROY_ID);
 }
 
 /* virtual */
@@ -36,12 +36,12 @@ MicroScenarioDestroy::~MicroScenarioDestroy()
 /* virtual */    
 bool MicroScenarioDestroy::Validate(Npc* npc) const
 {    
-    if (npc->GetStateMachine().GetMicroTaskManager().GetTarget()->isAlive() == false)
+    if (npc->stateMachine().microTaskManager().target()->isAlive() == false)
     {
         return false;
     } 
     
-    if (npc->starsystem() != npc->GetStateMachine().GetMicroTaskManager().GetTarget()->starsystem())
+    if (npc->starsystem() != npc->stateMachine().microTaskManager().target()->starsystem())
     {
          return false;
     }
@@ -50,7 +50,7 @@ bool MicroScenarioDestroy::Validate(Npc* npc) const
 }
 
 /* virtual */                
-void MicroScenarioDestroy::Enter(Npc* npc) const
+void MicroScenarioDestroy::enter(Npc* npc) const
 {    
     LOG("npc_id=" + std::to_string(npc->id()) + " ENTER MicroScenarioDestroy");
 }
@@ -58,10 +58,10 @@ void MicroScenarioDestroy::Enter(Npc* npc) const
 /* virtual */
 void MicroScenarioDestroy::UpdateInStaticInSpace(Npc* npc) const
 {
-    npc->GetVehicle()->weaponComplex().activateWeapons();
-    npc->GetStateMachine().GetMicroTaskManager().GetTarget()->id();
-    npc->GetVehicle()->weaponComplex().setTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget());
-    npc->GetVehicle()->driveComplex().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID); 
+    npc->vehicle()->weaponComplex().activateWeapons();
+    npc->stateMachine().microTaskManager().target()->id();
+    npc->vehicle()->weaponComplex().setTarget(npc->stateMachine().microTaskManager().target());
+    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target(), NAVIGATOR_ACTION::KEEP_FIRE_DISTANCE_ID);
 }
 
 /* virtual */
@@ -69,7 +69,7 @@ void MicroScenarioDestroy::UpdateInDynamicInSpace(Npc* npc) const
 {}
 
 /* virtual */
-void MicroScenarioDestroy::Exit(Npc* npc) const
+void MicroScenarioDestroy::exit(Npc* npc) const
 {
     LOG("npc_id=" + std::to_string(npc->id()) + " EXIT MicroScenarioDestroy");
 }
@@ -77,5 +77,5 @@ void MicroScenarioDestroy::Exit(Npc* npc) const
 /* virtual */
 std::string MicroScenarioDestroy::GetDescription(Npc* npc) const
 {
-    return "DESTROY ob_id=" + std::to_string( npc->GetStateMachine().GetMicroTaskManager().GetTarget()->id()) ;
+    return "DESTROY ob_id=" + std::to_string( npc->stateMachine().microTaskManager().target()->id()) ;
 }

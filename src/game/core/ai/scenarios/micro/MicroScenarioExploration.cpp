@@ -25,7 +25,7 @@
 
 MicroScenarioExploration::MicroScenarioExploration()
 {
-    type_id = type::AISCENARIO::MICRO_EXPLORATION_ID;
+    setTypeId(type::AISCENARIO::MICRO_EXPLORATION_ID);
 }
 
 /* virtual */
@@ -33,7 +33,7 @@ MicroScenarioExploration::~MicroScenarioExploration()
 {}
     
 /* virtual */
-void MicroScenarioExploration::Enter(Npc* npc) const
+void MicroScenarioExploration::enter(Npc* npc) const
 {    
     LOG("npc_id=" + std::to_string(npc->id()) + " ENTER MicroScenarioExploration");
 }
@@ -41,10 +41,10 @@ void MicroScenarioExploration::Enter(Npc* npc) const
 /* virtual */
 void MicroScenarioExploration::UpdateInStaticInSpace(Npc* npc) const
 {
-    if (npc->GetVehicle()->driveComplex().PathExists() == false)
+    if (npc->vehicle()->driveComplex().PathExists() == false)
     {
-        glm::vec3 target_pos = meti::getRandXYVec3f(100, 1500, npc->GetVehicle()->position().z);
-        npc->GetVehicle()->driveComplex().SetStaticTargetCoords(target_pos);
+        glm::vec3 target_pos = meti::getRandXYVec3f(100, 1500, npc->vehicle()->position().z);
+        npc->vehicle()->driveComplex().SetStaticTargetCoords(target_pos);
     }
 }
 
@@ -53,7 +53,7 @@ void MicroScenarioExploration::UpdateInDynamicInSpace(Npc* npc) const
 {}
 
 /* virtual */
-void MicroScenarioExploration::Exit(Npc* npc) const
+void MicroScenarioExploration::exit(Npc* npc) const
 {
     LOG("npc_id=" + std::to_string(npc->id()) + " EXIT MicroScenarioExploration");
 }

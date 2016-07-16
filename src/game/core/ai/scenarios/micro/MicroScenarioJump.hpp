@@ -29,11 +29,11 @@ class MicroScenarioJump : public BaseScenario
         MicroScenarioJump();
         virtual ~MicroScenarioJump();
         
-        virtual void Enter(Npc*) const;
+        virtual void enter(Npc*) const;
         virtual bool Validation(Npc*) const;
         virtual void UpdateInStaticInSpace(Npc*) const;
         virtual void UpdateInDynamicInSpace(Npc*) const;    
-        virtual void Exit(Npc*) const;
+        virtual void exit(Npc*) const;
         
         virtual std::string GetDescription(Npc*) const;
 };

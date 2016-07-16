@@ -96,8 +96,8 @@ void Ship::UpdateInSpace(int time, bool show_effect)
         UpdateSpecialAction();
         
         if (npc()) {
-            npc()->UpdateInSpace(time, show_effect);
-            weaponComplex().fire(time, npc()->GetSkills().GetAttackNormalized(), show_effect);
+            npc()->updateInSpace(time, show_effect);
+            weaponComplex().fire(time, npc()->skills().attackNormalized(), show_effect);
 
             updateOrientation();
 

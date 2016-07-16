@@ -16,35 +16,33 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef MICROTASKMANAGER_H
-#define MICROTASKMANAGER_H
+#pragma once
 
 #include "Task.hpp"
 #include "scenarios/BaseScenario.hpp"
+
 class SpaceObject;
 
 class MicroTaskManager
 {
-    public:
-        MicroTaskManager();
-        ~MicroTaskManager();
-        
-        void SetTask(const Task&);
-        
-        SpaceObject* GetTarget() const { return target; };
-        const Task& GetTask() const { return microtask; };    
-        BaseScenario* GetScenario() const { return scenario; };
-                
-    private:
-        Task microtask;    
-        BaseScenario* scenario;
-        SpaceObject* target;
-        
-        void Reset();    
-        
+public:
+    MicroTaskManager();
+    ~MicroTaskManager();
+
+    void setTask(const Task&);
+
+    SpaceObject* target() const { return m_target; }
+    const Task& task() const { return m_microtask; }
+    BaseScenario* scenario() const { return m_scenario; }
+
+private:
+    Task m_microtask;
+    BaseScenario* m_scenario = nullptr;
+    SpaceObject* m_target = nullptr;
+
+    void __reset();
+
     friend class StateMachine;
 };
 
 
-#endif 
-     

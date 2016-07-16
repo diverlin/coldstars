@@ -26,7 +26,7 @@
 
 MicroScenarioDocking::MicroScenarioDocking()
 {
-    type_id = type::AISCENARIO::MICRO_DOCKING_ID;
+    setTypeId(type::AISCENARIO::MICRO_DOCKING_ID);
 }
 
 /* virtual */
@@ -34,9 +34,9 @@ MicroScenarioDocking::~MicroScenarioDocking()
 {}
 
 /* virtual */
-void MicroScenarioDocking::Enter(Npc* npc) const
+void MicroScenarioDocking::enter(Npc* npc) const
 {    
-    npc->GetVehicle()->driveComplex().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::DOCKING_ID);
+    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target(), NAVIGATOR_ACTION::DOCKING_ID);
 
     LOG( "npc_id="+std::to_string(npc->id())+" ENTER MicroScenarioDocking");
 }
@@ -44,7 +44,7 @@ void MicroScenarioDocking::Enter(Npc* npc) const
 /* virtual */
 bool MicroScenarioDocking::Validate(Npc* npc) const
 {
-    if (npc->GetVehicle()->place() == type::place::KOSMOS)
+    if (npc->vehicle()->place() == type::place::KOSMOS)
     {
         return true;
     }
@@ -59,13 +59,13 @@ void MicroScenarioDocking::UpdateInStaticInSpace(Npc* npc) const
 /* virtual */
 void MicroScenarioDocking::UpdateInDynamicInSpace(Npc* npc) const
 {
-         if (npc->GetVehicle()->driveComplex().CheckTargetEchievement() == true)
+         if (npc->vehicle()->driveComplex().CheckTargetEchievement() == true)
          {
-             if (npc->GetVehicle()->driveComplex().GetDockingPermission() == true)
+             if (npc->vehicle()->driveComplex().GetDockingPermission() == true)
              {
-                 if (npc->GetVehicle()->GetSpecialActionId() != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID)
+                 if (npc->vehicle()->GetSpecialActionId() != VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID)
                  {
-                     npc->GetVehicle()->SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID);
+                     npc->vehicle()->SetSpecialActionId(VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_DOCKING_ID);
                  }
              }
              else
@@ -76,7 +76,7 @@ void MicroScenarioDocking::UpdateInDynamicInSpace(Npc* npc) const
 }
 
 /* virtual */
-void MicroScenarioDocking::Exit(Npc* npc) const 
+void MicroScenarioDocking::exit(Npc* npc) const 
 {
     LOG("npc_id="+std::to_string( npc->id())+" EXIT MicroScenarioDocking");
 }
@@ -84,5 +84,5 @@ void MicroScenarioDocking::Exit(Npc* npc) const
 /* virtual */
 std::string MicroScenarioDocking::GetDescription(Npc* npc) const
 {
-    return "MicroScenarioDocking to ob_id = " + std::to_string( npc->GetStateMachine().GetMicroTaskManager().GetTarget()->id());
+    return "MicroScenarioDocking to ob_id = " + std::to_string( npc->stateMachine().microTaskManager().target()->id());
 }
