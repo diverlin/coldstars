@@ -64,7 +64,7 @@ void AsteroidBuilder::createInternals(Asteroid* asteroid) const
     planet_data.orbit_center  = glm::vec3(0, 0, DEFAULT_ENTITY_ZPOS); 
     planet_data.radius_A      = meti::getRandInt(300, 1200);
     planet_data.radius_B      = meti::getRandInt(300, 1200);
-    planet_data.orbit_phi_inD = meti::getRandInt(0, 360);
+    planet_data.orbit_phi_inD = meti::getRandInt(360);
     planet_data.speed         = 0.1;
     planet_data.clockwise     = meti::getRandBool();
     

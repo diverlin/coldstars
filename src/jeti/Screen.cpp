@@ -83,7 +83,7 @@ void Screen::DrawFps()
     
     //std::string fps_str = "FPS:" + std::to_string(fps) + " / game_speed: x" + std::to_string(global::get().config().GAME_SPEED);
     //DrawText(fps_str, 14, glm::vec2(100, GetHeight()-10));
-    if (meti::getRandInt(0, 30) == 0) std::cout<<"fps="<<fps<<std::endl;
+    if (meti::getRandInt(30) == 0) std::cout<<"fps="<<fps<<std::endl;
 }
     
     

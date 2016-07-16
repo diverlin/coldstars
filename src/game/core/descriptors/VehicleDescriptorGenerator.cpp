@@ -49,9 +49,9 @@
 //    descriptor.type_id = type_id;
 //    descriptor.size_id = size_id;
 
-//    descriptor.space       = size_id*100 + meti::getRandInt(0, 100);
+//    descriptor.space       = size_id*100 + meti::getRandInt(100);
 //    descriptor.armor       = descriptor.space;
-//    descriptor.protection  = protection_rate*meti::getRandInt(0, size_id);
+//    descriptor.protection  = protection_rate*meti::getRandInt(size_id);
 //    descriptor.temperature = 100;
 //    descriptor.price       = meti::getRandInt(200, 400)*size_id;
 

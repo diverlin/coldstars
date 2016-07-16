@@ -57,7 +57,7 @@ void SpaceStationBuilder::createInternals(SpaceStation* spacestation) const
     //jeti::TextureOb* texOb = nullptr;
     glm::vec3 size;
 
-    if (meti::getRandInt(0, 1))
+    if (meti::getRandInt(1))
     {
 //        mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //        texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::SPACESTATION_ID);
@@ -78,7 +78,7 @@ void SpaceStationBuilder::createInternals(SpaceStation* spacestation) const
     //}
     
     VehicleDescriptor data_korpus;
-    data_korpus.space       = 2500 + meti::getRandInt(0, 1000);
+    data_korpus.space       = 2500 + meti::getRandInt(1000);
     data_korpus.armor       = data_korpus.space;
     data_korpus.protection  = protection_rate;
     data_korpus.temperature = 100;

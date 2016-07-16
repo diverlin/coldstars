@@ -26,6 +26,7 @@
 namespace meti {
 
 float getRandFloat(float, float);
+int getRandInt(int);
 int getRandInt(int, int);
 int getRandSign();
 bool getRandBool();
@@ -42,7 +43,7 @@ T getRand(const std::vector<T>& v)
     if (v.empty()) {
         throw std::runtime_error("ERROR: std::vector is empty, not ably to get random element from it");
     }
-    return v[getRandInt(0, v.size()-1)];
+    return v[getRandInt(v.size()-1)];
 }
 
 } // namespace meti

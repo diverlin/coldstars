@@ -60,7 +60,7 @@ Container* Observation::GetClosestPickableContainer() const
 Container* Observation::GetRandomPickableContainer() const
 {
     assert(visible_pickable_CONTAINER_pair_vec.empty());
-    return visible_pickable_CONTAINER_pair_vec[meti::getRandInt(0, visible_pickable_CONTAINER_pair_vec.size()-1)].object;
+    return visible_pickable_CONTAINER_pair_vec[meti::getRandInt(visible_pickable_CONTAINER_pair_vec.size()-1)].object;
 }
 
 Starsystem* Observation::GetClosestStarSystem(int requested_consdition_id) const
@@ -105,7 +105,7 @@ Vehicle* Observation::GetRandVisibleVehicle(const std::vector<type::race>& rVec_
     }
     
     if (tmp_vehicle.size() > 0) {
-        return tmp_vehicle[meti::getRandInt(0, tmp_vehicle.size()-1)];
+        return tmp_vehicle[meti::getRandInt(tmp_vehicle.size()-1)];
     }
 
     return nullptr;

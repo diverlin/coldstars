@@ -44,11 +44,11 @@ StarsystemBuilder::~StarsystemBuilder()
 
 Starsystem* StarsystemBuilder::getNew()
 {
-    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
+    const descriptor::Starsystem& descriptor = global::get().descriptors().starsystem().random();
     return getNew(descriptor);
 }
 
-Starsystem* StarsystemBuilder::getNew(const descriptor::Base& descriptor)
+Starsystem* StarsystemBuilder::getNew(const descriptor::Starsystem& descriptor)
 {
     Starsystem* starsystem = new Starsystem;
     assert(starsystem);
@@ -59,10 +59,10 @@ Starsystem* StarsystemBuilder::getNew(const descriptor::Base& descriptor)
 
 Starsystem* StarsystemBuilder::getNew(const std::string& data)
 {
-    return getNew(descriptor::Base(data));
+    //return getNew(descriptor::Base(data));
 }
 
-void StarsystemBuilder::__createInternals(Starsystem* starsystem, const descriptor::Base& starsystem_descriptor)
+void StarsystemBuilder::__createInternals(Starsystem* starsystem, const descriptor::Starsystem& descriptor)
 {
     //    starsystem->asteroidManager().Parameterize(starsystem_descriptor.asteroid_num);
     //    CreateStar(starsystem);

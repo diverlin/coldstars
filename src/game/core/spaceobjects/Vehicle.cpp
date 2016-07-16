@@ -675,7 +675,7 @@ void Vehicle::LaunchingEvent()
         {
         case TYPE::ENTITY::ANGAR_ID:
         {
-            int angleInD = meti::getRandInt(0, 360);
+            int angleInD = meti::getRandInt(360);
             glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
             glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
             glm::vec3 angle(0,0,angleInD);
@@ -694,7 +694,7 @@ void Vehicle::LaunchingEvent()
     }
     else
     {
-        int angleInD = meti::getRandInt(0, 360);
+        int angleInD = meti::getRandInt(360);
         glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
         glm::vec3 offset_pos3(offset_pos.x, offset_pos.y, DEFAULT_ENTITY_ZPOS);
         glm::vec3 angle(0,0,angleInD);
@@ -759,7 +759,7 @@ void Vehicle::hit(int damage)
 /* virtual */
 void Vehicle::_postDeathUniqueEvent(bool show_effect)  
 {
-    int num_items = meti::getRandInt(0, 3);
+    int num_items = meti::getRandInt(3);
     for (int i = 0; i<num_items; i++)
     {
         //__dropRandomItemToSpace();
@@ -1290,7 +1290,7 @@ void Vehicle::lockRandomItem(int locked_turns)
     
     if (_equiped_slot_vec.size() > 0)
     {
-        unsigned int _rand = meti::getRandInt(0, _equiped_slot_vec.size());
+        unsigned int _rand = meti::getRandInt(_equiped_slot_vec.size());
         _equiped_slot_vec[_rand]->item()->doLock(locked_turns);
     }
 }
@@ -1412,7 +1412,7 @@ Vehicle::__wrapItemToContainer(item::Base* item)
 //        }
 //    }
 //    if (_equiped_slot_vec.size() > 0) {
-//        _equiped_slot_vec[meti::getRandInt(0, _equiped_slot_vec.size()-1)]->dropItemToSpace();
+//        _equiped_slot_vec[meti::getRandInt(_equiped_slot_vec.size()-1)]->dropItemToSpace();
 //    }
 //}
 
@@ -1553,17 +1553,17 @@ void Vehicle::ResolveData()
 
 //void Vehicle::TEST_DamageAndLockRandItems()
 //{
-//    int rand_index1 = meti::getRandInt(0, m_equipmentSlots.size()-1);
+//    int rand_index1 = meti::getRandInt(m_equipmentSlots.size()-1);
 //    while (m_equipmentSlots[rand_index1]->item() == nullptr)
 //    {
-//        rand_index1 = meti::getRandInt(0, m_equipmentSlots.size()-1);
+//        rand_index1 = meti::getRandInt(m_equipmentSlots.size()-1);
 //    }
 //    m_equipmentSlots[rand_index1]->item()->doLock(3);
 
-//    int rand_index2 = meti::getRandInt(0, m_equipmentSlots.size()-1);
+//    int rand_index2 = meti::getRandInt(m_equipmentSlots.size()-1);
 //    while (m_equipmentSlots[rand_index2]->item() == nullptr)
 //    {
-//        rand_index2 = meti::getRandInt(0, m_equipmentSlots.size()-1);
+//        rand_index2 = meti::getRandInt(m_equipmentSlots.size()-1);
 //    }
     
 //    while (m_equipmentSlots[rand_index2]->item()->condition() > 0)

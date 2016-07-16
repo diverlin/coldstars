@@ -19,8 +19,10 @@
 
 #include "DescriptorGenerator.hpp"
 #include <descriptors/Base.hpp>
+
 #include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/SectorDescriptor.hpp>
+#include <descriptors/StarsystemDescriptor.hpp>
 
 #include <meti/RandUtils.hpp>
 #include <common/Global.hpp>
@@ -37,7 +39,7 @@ namespace descriptor {
 descriptor::Galaxy
 Generator::getNewGalaxyDescriptor(const std::vector<id_type>& sectors) {
     descriptor::Galaxy descriptor;
-    int num = meti::getRandInt(2,5);
+    int num = meti::getRandInt(1,3);
     for(int i=0; i<num; ++i) {
         descriptor.sectors.push_back(meti::getRand(sectors));
     }
@@ -47,22 +49,23 @@ Generator::getNewGalaxyDescriptor(const std::vector<id_type>& sectors) {
 descriptor::Sector
 Generator::getNewSectorDescriptor(const std::vector<id_type>& starsystems) {
     descriptor::Sector descriptor;
-    int num = meti::getRandInt(2,5);
+    int num = meti::getRandInt(1,3);
     for(int i=0; i<num; ++i) {
         descriptor.starsystems.push_back(meti::getRand(starsystems));
     }
     return descriptor;
 }
 
-descriptor::Base
+descriptor::Starsystem
 Generator::getNewStarsystemDescriptor(int race)
 {
+    descriptor::Starsystem descriptor;
     if (race == -1) {
         race = int(type::race::R0_ID);
     }
 
-    descriptor::Base descriptor(descriptor::Type::STARSYSTEM);
-    descriptor.add(descriptor::Key::RACE, race);
+//    descriptor::Base descriptor(descriptor::Type::STARSYSTEM);
+//    descriptor.add(descriptor::Key::RACE, race);
 
     return descriptor;
 }
@@ -120,9 +123,9 @@ Generator::getNewVehicleDescriptor()
         case type::entity::TRADER_ID:  { otsec_rate = 1.5; break; }
     }
 
-    int space       = size_id*100 + meti::getRandInt(0, 100);
+    int space       = size_id*100 + meti::getRandInt(100);
     int armor       = space;
-    int protection  = protection_rate*meti::getRandInt(0, size_id);
+    int protection  = protection_rate*meti::getRandInt(size_id);
     int temperature = 100;
     int price       = meti::getRandInt(200, 400)*size_id;
 

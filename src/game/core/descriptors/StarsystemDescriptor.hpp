@@ -20,30 +20,29 @@
 
 #include "Base.hpp"
 #include <types/IdType.hpp>
+
 #include <vector>
 
 namespace descriptor {
 
-struct Galaxy : public BBase
+struct Starsystem : public BBase
 {
-    public:
-        bool allow_invasion = true;
-        std::vector<id_type> sectors;
-        
-        Galaxy() {}
-        ~Galaxy() {}
+public:
+    std::vector<id_type> stars;
+    std::vector<id_type> planets;
 
-        std::string info() const override final {
-            std::string result = "Galaxy descriptor: " + BBase::info() + _str(" sectors: ", sectors);
-            return result;
-        }
+    Starsystem() {}
+    ~Starsystem() {}
+
+    std::string info() const override final {
+        std::string result = "Starsystem descriptor: " + BBase::info() + _str(" stars: ", stars) + _str(" planets: ", planets);
+        return result;
+    }
 }; 
 
 } // namespace descriptor
 
 
-    
 
-        
 
 

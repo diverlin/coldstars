@@ -20,7 +20,10 @@
 #include "StarSystemBuilder.hpp"
 #include "../CommonBuilderHeaders.hpp"
 #include <world/Sector.hpp>
+
 #include <descriptors/SectorDescriptor.hpp>
+#include <descriptors/DescriptorManager.hpp>
+
 #include <world/starsystem.hpp>
 
 #include <common/Config.hpp>
@@ -53,13 +56,12 @@ Sector* SectorBuilder::create(const descriptor::Sector& descriptor) const
         
 void SectorBuilder::createInternals(Sector* sector, const descriptor::Sector& descriptor) const
 {
-//    for(const auto& starsystem_descriptor: sector_descriptor.starsystem_descriptors)
-//    {
-//        glm::vec3 center(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));
+    for(const auto& id: descriptor.starsystems) {
+        glm::vec3 center(meti::getRandXYVec3f(3, 8, DEFAULT_ENTITY_ZPOS));
         
-//        StarSystem* starsystem = global::get().starSystemBuilder().create(starsystem_descriptor);
-//        sector->add(starsystem, center);
-//    }
+        Starsystem* starsystem = global::get().starsystemBuilder().getNew(global::get().descriptors().starsystem().get(id));
+        sector->add(starsystem, center);
+    }
 }
 
                 

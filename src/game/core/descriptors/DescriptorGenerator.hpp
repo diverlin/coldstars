@@ -27,6 +27,7 @@ namespace descriptor {
 
 class Galaxy;
 class Sector;
+class Starsystem;
 class Base;
 
 class Generator {
@@ -34,8 +35,7 @@ private:
 /* world */
 static descriptor::Galaxy getNewGalaxyDescriptor(const std::vector<id_type>&);
 static descriptor::Sector getNewSectorDescriptor(const std::vector<id_type>&);
-
-static descriptor::Base getNewStarsystemDescriptor(int race = -1);
+static descriptor::Starsystem getNewStarsystemDescriptor(int race = -1);
 
 /* spaceobjects */
 static descriptor::Base getNewStarDescriptor();

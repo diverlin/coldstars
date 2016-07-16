@@ -22,6 +22,7 @@
 
 #include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/SectorDescriptor.hpp>
+#include <descriptors/StarsystemDescriptor.hpp>
 
 #include <meti/RandUtils.hpp>
 
@@ -37,25 +38,29 @@ public:
     ~MManager() {}
 
     void add(const T& descriptor) {
+        std::cout<<"MManager add"<<std::endl<<descriptor.info()<<std::endl;
         const auto it = m_descriptors.find(descriptor.id());
         if (it == m_descriptors.end()) {
             m_descriptors.insert(std::make_pair(descriptor.id(), descriptor));
+        } else {
+            throw std::runtime_error("descriptor with that id already exist");
         }
-        throw std::runtime_error("descriptor with that id already exist");
     }
 
     const T& get(const id_type& id) const {
+        std::cout<<"MManager get(descriptor.id="<<id<<")"<<std::endl;
         const auto it = m_descriptors.find(id);
         if (it != m_descriptors.end()) {
             return it->second;
+        } else {
+            throw std::runtime_error("descriptor id doesn't exist");
         }
-        throw std::runtime_error("descriptor id doesn't exist");
     }
 
-    const T& random() const
-    {
-        auto it = m_descriptors.begin();
-        std::advance( it, meti::getRandInt(0, m_descriptors.size()) );
+    const T& random() const {
+        id_type key = meti::getRand(idList());
+        auto it = m_descriptors.find(key);
+        assert(it != m_descriptors.end());
         return it->second;
     }
 
@@ -64,6 +69,7 @@ public:
         for (auto it: m_descriptors) {
             result.push_back(it.first);
         }
+        assert(!result.empty());
         return result;
     }
 
@@ -93,13 +99,18 @@ public:
     void add(const Sector& sector) {
         m_sector.add(sector);
     }
+    void add(const Starsystem& starsystem) {
+        m_starsystem.add(starsystem);
+    }
 
     const MManager<Galaxy>& galaxy() const { return m_galaxy; }
     const MManager<Sector>& sector() const { return m_sector; }
+    const MManager<Starsystem>& starsystem() const { return m_starsystem; }
 
 private:
     MManager<Galaxy> m_galaxy;
     MManager<Sector> m_sector;
+    MManager<Starsystem> m_starsystem;
 
     std::map<id_type, Base> m_descriptors;
     std::map<int, std::vector<Base>> m_descriptorsTypes;

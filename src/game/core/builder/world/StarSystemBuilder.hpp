@@ -25,7 +25,7 @@
 class Starsystem;
 
 namespace descriptor {
-class Base;
+class Starsystem;
 }
 
 class StarsystemBuilder
@@ -35,11 +35,11 @@ public:
     ~StarsystemBuilder();
 
     static Starsystem* getNew();
-    static Starsystem* getNew(const descriptor::Base&);
+    static Starsystem* getNew(const descriptor::Starsystem&);
     static Starsystem* getNew(const std::string&);
 
 private:
-    static void __createInternals(Starsystem*, const descriptor::Base&);
+    static void __createInternals(Starsystem*, const descriptor::Starsystem&);
 
     static void __createBackground(Starsystem*, int, int, int);
     static void __createStar(Starsystem*);

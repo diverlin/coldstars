@@ -32,6 +32,11 @@ public:
 
     Sector() {}
     ~Sector() {}
+
+    std::string info() const override final {
+        std::string result = "Sector descriptor: " + BBase::info() + _str(" starsystems:", starsystems);
+        return result;
+    }
 }; 
 
 } // namespace descriptor

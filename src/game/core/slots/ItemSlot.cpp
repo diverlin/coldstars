@@ -56,7 +56,7 @@ ItemSlot::ItemSlot(const id_type& id, type::entity subtype_id)
     setTypeId(type::entity::ITEM_SLOT_ID);
     setSubTypeId(subtype_id);
     
-    m_hitProbability = meti::getRandInt(0, 100); // (tmp) move to builder
+    m_hitProbability = meti::getRandInt(100); // (tmp) move to builder
 }
 
 /* virtual */
