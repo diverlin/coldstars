@@ -36,7 +36,7 @@ class VehicleSlot : public BaseSlot
         
         virtual void putChildrenToGarbage() const;
         
-        Vehicle* GetVehicle() const { return vehicle; };
+        Vehicle* GetVehicle() const { return vehicle; }
         void InsertVehicle(Vehicle*);
         void Release(); 
         void SwapVehicle(VehicleSlot*);
