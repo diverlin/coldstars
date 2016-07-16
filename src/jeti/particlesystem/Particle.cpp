@@ -71,7 +71,7 @@ void Particle::CalcRandomDirtyVelocity()
 void Particle::CalcRandomAccurateVelocity()
 {
     float _len   = meti::getRandInt(50, 100);
-    float _angle = glm::radians((float)meti::getRandInt(0, 360));
+    float _angle = glm::radians((float)meti::getRandInt(360));
     
     float target_x = cos(_angle) * _len;
     float target_y = sin(_angle) * _len;

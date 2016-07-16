@@ -231,7 +231,7 @@ void God::CreateSpaceStations(Starsystem* starsystem, int spacestation_per_syste
 
         glm::vec2 center = meti::getRandVec2f(700, 1500);
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
-        //glm::vec3 angle(0,0,meti::getRandInt(0, 360));
+        //glm::vec3 angle(0,0,meti::getRandInt(360));
                         
         starsystem->add(spacestation, center3/*, dir*/);
         
@@ -278,7 +278,7 @@ void God::CreateShips(Starsystem* starsystem, int ship_num, type::race npc_race_
         new_ship->bindNpc(new_npc);
 
         glm::vec3 center = meti::getRandXYVec3f(300, 1200, DEFAULT_ENTITY_ZPOS);
-//        glm::vec3 angle(0, 0, meti::getRandInt(0, 360));
+//        glm::vec3 angle(0, 0, meti::getRandInt(360));
         starsystem->add(new_ship, center);
     }
 }

@@ -54,7 +54,7 @@ void HyperSpace::PostHyperJumpEvent(Starsystem* starsystem)
 //        VEHICLE_vec[i]->driveComplex().ResetTarget();
         
 //        glm::vec3 center(meti::getRandXYVec3f(500, 900, DEFAULT_ENTITY_ZPOS)); // get correct pos
-//        glm::vec3 angle(0,0,meti::getRandInt(0, 360));
+//        glm::vec3 angle(0,0,meti::getRandInt(360));
 //        starsystem->add(VEHICLE_vec[i], center, angle, VEHICLE_vec[i]->parent());
 //    }
           

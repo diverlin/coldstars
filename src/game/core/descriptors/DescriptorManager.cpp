@@ -155,7 +155,8 @@ Manager::__clear()
     m_descriptorsTypes.clear();
 }
 
-void Manager::__generate()
+void
+Manager::__generate()
 {
     create_file(descriptors_fname);
 
@@ -178,7 +179,6 @@ void Manager::__generate()
     num = base * 10;
     for(int i=0; i<num; ++i) {
         // spaceobjects
-        add(Generator::getNewStarsystemDescriptor());
         add(Generator::getNewVehicleDescriptor());
         add(Generator::getNewStarDescriptor());
         add(Generator::getNewPlanetDescriptor());
@@ -194,12 +194,12 @@ void Manager::__generate()
 
     num = base * 4;
     for(int i=0; i<num; ++i) {
-        add(Generator::getNewSectorDescriptor(m_sector.idList()));
+        add(Generator::getNewSectorDescriptor(m_starsystem.idList()));
     }
 
     num = base * 1;
     for(int i=0; i<num; ++i) {
-        add(Generator::getNewGalaxyDescriptor(m_galaxy.idList()));
+        add(Generator::getNewGalaxyDescriptor(m_sector.idList()));
     }
 
     save();

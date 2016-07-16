@@ -114,6 +114,17 @@ public:
     ~BBase() {}
 
     const id_type& id() const { return m_id; }
+    virtual std::string info() const { return std::string("id=") + std::to_string(m_id); }
+
+protected:
+    std::string _str(const std::string& label, const std::vector<id_type>& ids) const {
+        std::string result = label;
+        for (const id_type& id: ids) {
+            result += std::to_string(id) + ",";
+        }
+        return result;
+    }
+
 private:
     id_type m_id;
 

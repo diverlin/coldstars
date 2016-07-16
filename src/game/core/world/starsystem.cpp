@@ -358,7 +358,7 @@ Planet* Starsystem::randomInhabitedPlanet() const
     
     if (tmp_planet_vec.size() >= 1)
     {
-        requested_planet = tmp_planet_vec[meti::getRandInt(0, tmp_planet_vec.size()-1)];
+        requested_planet = tmp_planet_vec[meti::getRandInt(tmp_planet_vec.size()-1)];
     }
 
     return requested_planet;
@@ -366,12 +366,12 @@ Planet* Starsystem::randomInhabitedPlanet() const
 
 Planet* Starsystem::randomPlanet() const
 {
-    return m_planets[meti::getRandInt(0, m_planets.size()-1)];
+    return m_planets[meti::getRandInt(m_planets.size()-1)];
 }
 
 Vehicle* Starsystem::randomVehicle() const
 {
-    return m_vehicles[meti::getRandInt(0, m_vehicles.size()-1)];
+    return m_vehicles[meti::getRandInt(m_vehicles.size()-1)];
 }
 
 Vehicle* Starsystem::randomVehicleExcludingNpcRaceId(type::race _race_id) const
@@ -392,7 +392,7 @@ Vehicle* Starsystem::randomVehicleExcludingNpcRaceId(type::race _race_id) const
     
     if (_vehicle_vec.size() > 0)
     {
-        requested_vehicle = _vehicle_vec[meti::getRandInt(0, _vehicle_vec.size()-1)];
+        requested_vehicle = _vehicle_vec[meti::getRandInt(_vehicle_vec.size()-1)];
     }
     
     return requested_vehicle;
@@ -416,7 +416,7 @@ Vehicle* Starsystem::randVehicleByNpcRaceId(type::race _race_id) const
     
     if (_vehicle_vec.size() > 0)
     {
-        requested_vehicle = _vehicle_vec[meti::getRandInt(0, _vehicle_vec.size()-1)];
+        requested_vehicle = _vehicle_vec[meti::getRandInt(_vehicle_vec.size()-1)];
     }
     
     return requested_vehicle;
@@ -440,7 +440,7 @@ Vehicle* Starsystem::randomVehicle(const std::vector<type::race>& rVec_race_id) 
     
     if (tmp_vehicle_vec.size() > 0)
     {
-        requested_vehicle = tmp_vehicle_vec[meti::getRandInt(0, tmp_vehicle_vec.size()-1)];
+        requested_vehicle = tmp_vehicle_vec[meti::getRandInt(tmp_vehicle_vec.size()-1)];
     }
     
     return requested_vehicle;
@@ -613,7 +613,7 @@ void Starsystem::update(int time)
         //phisics
         
         if (m_containers.size() > m_container_num_max) {
-            unsigned int index = meti::getRandInt(0, m_container_num_max-1);
+            unsigned int index = meti::getRandInt(m_container_num_max-1);
             m_containers[index]->hit(100);
         }
     } else {
@@ -887,7 +887,7 @@ void Starsystem::__shipManager_s(unsigned int num)
 
         glm::vec2 center = meti::getRandVec2f(100, 800);
         glm::vec3 center3(center.x, center.y, DEFAULT_ENTITY_ZPOS);
-        glm::vec3 angle(0,0,meti::getRandInt(0, 360));
+        glm::vec3 angle(0,0,meti::getRandInt(360));
         
         add(new_pship, center3, angle);
     }

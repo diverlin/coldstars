@@ -65,7 +65,7 @@ void Asteroid::CollisionEvent(bool show_effect)
     
 void Asteroid::_postDeathUniqueEvent(bool show_effect)
 {
-    int angleZ = meti::getRandInt(0, 360);
+    int angleZ = meti::getRandInt(360);
     float impulse_strength = 0.5;
     for (int i=0; i<3; i++) {
 //        Container* container = global::get().containerBuilder().create(4);

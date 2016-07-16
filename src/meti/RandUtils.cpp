@@ -36,6 +36,12 @@ int getRandInt(int low, int high)
     return (low != high) ? low + rand()%(high+1-low) : low;
 }
 
+int getRandInt(int arg)
+{
+    //assert(arg != 0);
+    return rand()%(arg+1);
+}
+
 int getRandSign()
 {
     return getRandInt(0,10) > 5 ? 1: -1;
