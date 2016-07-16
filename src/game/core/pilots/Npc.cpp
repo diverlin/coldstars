@@ -46,108 +46,103 @@
 
 Npc::Npc(int id, type::entity subtype_id, type::entity subsubtype_id)
     :
-      race_id(type::race::NONE_ID),
-      credits(1000),
-      player(nullptr),
-      vehicle(nullptr),
-      ai_model(nullptr),
-      vehicle_to_scan(nullptr)
+      m_raceId(type::race::NONE_ID),
+      m_credits(1000),
+      m_player(nullptr),
+      m_vehicle(nullptr),
+      m_aiModel(nullptr),
+      m_scanTarget(nullptr)
 { 
-    is_alive = true;
+    m_isAlive = true;
     
     setId(id);
     setTypeId(type::entity::NPC_ID);
     setSubTypeId(subtype_id);
     setSubSubTypeId(subsubtype_id);
 
-    observation.SetNpcOwner(this);
-    state_machine.SetNpcOwner(this);
+    m_observation.SetNpcOwner(this);
+    m_stateMachine.setNpc(this);
 }
 
 /* virtual */
 Npc::~Npc() 
 {}  
 
-Starsystem* Npc::starsystem() const { return vehicle->starsystem(); }
+Starsystem* Npc::starsystem() const { return m_vehicle->starsystem(); }
 
-void Npc::CloneMacroTaskFrom(Npc* npc)
+void Npc::cloneMacroTaskFrom(Npc* npc)
 {
-    state_machine.SetCurrentMacroTask(npc->GetStateMachine().GetMacroTaskManager().GetTask());
+    m_stateMachine.setCurrentMacroTask(npc->stateMachine().macroTaskManager().task());
 }
 
-bool Npc::WithdrawCredits(unsigned long int amount)
+bool Npc::withdrawCredits(unsigned long int amount)
 {
-    if (credits > amount) {
-        credits -= amount;
+    if (m_credits > amount) {
+        m_credits -= amount;
         return true;
     }    
     return false;
 }
 
-void Npc::UpdateInKosmoportInStatic()
+void Npc::updateInKosmoportInStatic()
 {
-    vehicle->ResolveNeedsInKosmoportInStatic();
+    m_vehicle->ResolveNeedsInKosmoportInStatic();
     
     // if all things are DONE
     //((Planet*)vehicle->GetComplexDrive()->GetTarget())->GetLand()->AddToLaunchingQueue(this); // improove by adding spacestation
-    if (player == nullptr)
+    if (m_player == nullptr)
     {
         //if (ai_model)
         //{
         //    ai_model->UpdateInStatic(this);
         //}
 
-        state_machine.UpdateInStaticInDock();
+        m_stateMachine.updateInStaticInDock();
 
-        vehicle->manageItemsInCargo();
-        vehicle->sellItemsInCargo();
-        vehicle->LaunchingEvent();
+        m_vehicle->manageItemsInCargo();
+        m_vehicle->sellItemsInCargo();
+        m_vehicle->LaunchingEvent();
     }
 
 
 }
 
-void Npc::UpdateInSpaceInStatic()
+void Npc::updateInSpaceInStatic()
 {
     //LOG("Npc("+std::to_string(id())+")::UpdateInSpaceInStatic START");
 
-    vehicle->UpdateAllFunctionalItemsInStatic();
-    vehicle->weaponComplex().prepareWeapons();
+    m_vehicle->UpdateAllFunctionalItemsInStatic();
+    m_vehicle->weaponComplex().prepareWeapons();
 
-    if (player == nullptr)
-    {
-        vehicle->CheckNeedsInStatic();
-
-        if (skills.GetAvailablePoints() > 0)
-        {
-            skills.ManageAccordingToStrategy();
+    if (!m_player) {
+        m_vehicle->CheckNeedsInStatic();
+        if (m_skills.availablePoints()) {
+            m_skills.manageAccordingToStrategy();
         }
 
-        observation.ObserveAllInSpace();
+        m_observation.ObserveAllInSpace();
 
-        if (ai_model)
-        {
-            ai_model->UpdateInStatic(this);
+//        if (ai_model) {
+//            ai_model->UpdateInStatic(this);
+//        }
+
+        __scenarioFireVehicleAgressor();
+
+        if (m_observation.see.ASTEROID) {
+            __scenarioFireAsteroid();
         }
 
-        ScenarioFireVehicleAgressor();
-
-        if (observation.see.ASTEROID == true)
-        {
-            ScenarioFireAsteroid();
-        }
-
-        state_machine.UpdateInStaticInSpace();
+        m_stateMachine.updateInStaticInSpace();
     }
 
-    vehicle->driveComplex().UpdatePath();
+    m_vehicle->driveComplex().UpdatePath();
 
     //LOG("Npc("+std::to_string(id())+")::UpdateInSpaceInStatic END");
 }
 
-void Npc::AddExpirience(int expirience, bool show_effect)
+void Npc::addExpirience(int expirience, bool show_effect)
 {
-    skills.AddExpirience(expirience);
+    m_skills.addExpirience(expirience);
     
     if (show_effect == true) {
 //        VerticalFlowText* text = new VerticalFlowText(std::to_string(expirience), 12, meti::vec2(vehicle->center()), COLOR::COLOR4I_BLUE_LIGHT, 10);
@@ -157,17 +152,17 @@ void Npc::AddExpirience(int expirience, bool show_effect)
 
 void Npc::remeberAgressor(Vehicle* agressor)
 {
-    for (std::set<AgressorData>::iterator it=data_agressor_set.begin(); it!=data_agressor_set.end(); ++it)
+    for (std::set<AgressorData>::iterator it=m_agressorsData.begin(); it!=m_agressorsData.end(); ++it)
     {
         if (it->npc_id == agressor->npc()->id())
         {
             if (it->last_date != global::get().gameDate())
             {
                 int counter = it->counter;
-                data_agressor_set.erase(it);
+                m_agressorsData.erase(it);
                 
                 AgressorData agressor_data(agressor->npc()->id(), global::get().gameDate(), ++counter);
-                data_agressor_set.insert(agressor_data);
+                m_agressorsData.insert(agressor_data);
             }
 
             return;
@@ -175,28 +170,28 @@ void Npc::remeberAgressor(Vehicle* agressor)
     }
 
     AgressorData agressor_data(agressor->npc()->id(), global::get().gameDate(), 1);
-    data_agressor_set.insert(agressor_data);
+    m_agressorsData.insert(agressor_data);
 }
 
-void Npc::UpdateInSpace(int time, bool show_effect)
+void Npc::updateInSpace(int time, bool show_effect)
 {
     if (time > 0) {
-        state_machine.UpdateInDynamicInSpace();
+        m_stateMachine.updateInDynamicInSpace();
     }
 }         
 
-void Npc::ScenarioFireVehicleAgressor()
+void Npc::__scenarioFireVehicleAgressor()
 {
-    for (unsigned int i=0; i<observation.visible_VEHICLE_pair_vec.size(); i++)
+    for (unsigned int i=0; i<m_observation.visible_VEHICLE_pair_vec.size(); i++)
     {
-        for (std::set<AgressorData>::iterator it = data_agressor_set.begin(); it != data_agressor_set.end(); ++it)
+        for (std::set<AgressorData>::iterator it = m_agressorsData.begin(); it != m_agressorsData.end(); ++it)
         {
-            if (observation.visible_VEHICLE_pair_vec[i].object->npc()->id() == it->npc_id)
+            if (m_observation.visible_VEHICLE_pair_vec[i].object->npc()->id() == it->npc_id)
             {
-                vehicle->weaponComplex().deactivateWeapons();
+                m_vehicle->weaponComplex().deactivateWeapons();
 
-                vehicle->weaponComplex().activateWeapons();
-                vehicle->weaponComplex().setTarget(observation.visible_VEHICLE_pair_vec[i].object);
+                m_vehicle->weaponComplex().activateWeapons();
+                m_vehicle->weaponComplex().setTarget(m_observation.visible_VEHICLE_pair_vec[i].object);
 
                 return;
             }
@@ -204,37 +199,37 @@ void Npc::ScenarioFireVehicleAgressor()
     }
 }
 
-void Npc::ScenarioFireAsteroid()
+void Npc::__scenarioFireAsteroid()
 {
-    vehicle->weaponComplex().deactivateWeapons();
+    m_vehicle->weaponComplex().deactivateWeapons();
 
-    vehicle->weaponComplex().activateWeapons();
-    vehicle->weaponComplex().setTarget(observation.visible_ASTEROID_pair_vec[0].object);
+    m_vehicle->weaponComplex().activateWeapons();
+    m_vehicle->weaponComplex().setTarget(m_observation.visible_ASTEROID_pair_vec[0].object);
 }
 
-Planet* Npc::GetPlanetForDocking()
+Planet* Npc::planetForDocking()
 {
-    return starsystem()->closestInhabitedPlanet(meti::vec2(vehicle->position()));  // improove
+    return starsystem()->closestInhabitedPlanet(meti::vec2(m_vehicle->position()));  // improove
 }
 
-Starsystem* Npc::GetClosestStarSystem(int requested_condition_id)
+Starsystem* Npc::closestStarSystem(int requested_condition_id)
 {
-    observation.FindEchievableStarSystems(starsystem()->sector()->galaxy());
+    m_observation.FindEchievableStarSystems(starsystem()->sector()->galaxy());
     
-    Starsystem* _target_starsystem = observation.GetClosestStarSystem(requested_condition_id);
+    Starsystem* _target_starsystem = m_observation.GetClosestStarSystem(requested_condition_id);
     return _target_starsystem;
 }
 
 
 //// *********** SCANNING ***********
-bool Npc::CheckPossibilityToScan(Vehicle* vehicle)
+bool Npc::isAbleToScan(Vehicle* vehicle)
 {
-    if (this->vehicle->id() == vehicle->id())    // selfscan is possible all time
+    if (this->m_vehicle->id() == vehicle->id())    // selfscan is possible all time
     {
         return true;
     }
 
-    if (this->vehicle->properties().scan > vehicle->properties().protection)
+    if (this->m_vehicle->properties().scan > vehicle->properties().protection)
     {
         return true;
     }
@@ -243,11 +238,11 @@ bool Npc::CheckPossibilityToScan(Vehicle* vehicle)
 }
 
 
-void Npc::ResetScanTarget() { vehicle_to_scan = nullptr; }
+void Npc::resetScanTarget() { m_scanTarget = nullptr; }
 //// *********** SCANNING ***********
 
 
-void Npc::UpdateInfo()
+void Npc::__updateInfo()
 {
 //    info.clear();
 
@@ -271,21 +266,21 @@ void Npc::UpdateInfo()
 //    }
 }
 
-void Npc::RenderInfo(const glm::vec2& center)
+void Npc::renderInfo(const glm::vec2& center)
 {
-    UpdateInfo();
+    __updateInfo();
     //drawInfoIn2Column(info.title_list, info.value_list, center);
 }
 
 
-bool Npc::BuyGoods()
+bool Npc::buyGoods()
 {
-    Shop* shop = ((Kosmoport*)vehicle->land())->GetShop();
+    Shop* shop = ((Kosmoport*)m_vehicle->land())->GetShop();
     type::entity subtype_id = (type::entity)meti::getRandInt((int)type::entity::MINERALS_ID, (int)type::entity::EXCLUSIVE_ID);
 
     // hard coded logic
-    int amount_to_hold      = 0.8*vehicle->freeSpace();
-    int amount_to_buy     = GetCredits()/shop->GetPrice(subtype_id);
+    int amount_to_hold      = 0.8*m_vehicle->freeSpace();
+    int amount_to_buy     = credits()/shop->GetPrice(subtype_id);
     int amount_available     = shop->GetAmount(subtype_id);
     
     int amount = getMin<int>(amount_to_hold, amount_to_buy, amount_available);
@@ -318,32 +313,30 @@ void Npc::Resolve()
 
 void Npc::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const    
 {
-    save_ptree.put(root+"is_alive", is_alive);
-    save_ptree.put(root+"race_id", (int)race_id);
-    save_ptree.put(root+"unresolved.vehicle_id", vehicle->id());
-    save_ptree.put(root+"unresolved.aiModel_id", ai_model->typeId());
-    skills.Save(save_ptree, root);
-    if (state_machine.GetMacroTaskManager().GetScenario() != nullptr)
-    {
+    save_ptree.put(root+"is_alive", m_isAlive);
+    save_ptree.put(root+"race_id", (int)m_raceId);
+    save_ptree.put(root+"unresolved.vehicle_id", m_vehicle->id());
+    save_ptree.put(root+"unresolved.aiModel_id", m_aiModel->typeId());
+    m_skills.Save(save_ptree, root);
+    if (m_stateMachine.macroTaskManager().scenario()) {
         const std::string child_root = root + "macrotask.";
-        state_machine.GetMacroTaskManager().GetTask().save(save_ptree, child_root);
+        m_stateMachine.macroTaskManager().task().save(save_ptree, child_root);
     }
     
-    if (state_machine.GetMicroTaskManager().GetScenario() != nullptr)
-    {
+    if (m_stateMachine.microTaskManager().scenario()) {
         const std::string child_root = root + "microtask.";
-        state_machine.GetMicroTaskManager().GetTask().save(save_ptree, child_root);
+        m_stateMachine.microTaskManager().task().save(save_ptree, child_root);
     }
 }
 
 void Npc::LoadData(const boost::property_tree::ptree& load_ptree)
 {
-    is_alive = load_ptree.get<bool>("is_alive");
-    race_id  = (type::race)load_ptree.get<int>("race_id");
+    m_isAlive = load_ptree.get<bool>("is_alive");
+    m_raceId  = (type::race)load_ptree.get<int>("race_id");
     data_unresolved_npc.vehicle_id = load_ptree.get<int>("unresolved.vehicle_id");
     data_unresolved_npc.aiModel_id = load_ptree.get<int>("unresolved.aiModel_id");
     
-    skills.Load(load_ptree.get_child("skill"));
+    m_skills.Load(load_ptree.get_child("skill"));
 
     if (load_ptree.get_child_optional("macrotask"))
     {
@@ -358,25 +351,25 @@ void Npc::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Npc::ResolveData()
 {
-    ApplySkillsStrategy();
+    applySkillsStrategy();
     
     ((Vehicle*)global::get().entityManager().get(data_unresolved_npc.vehicle_id))->bindNpc(this);
-    SetAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
+    setAiModel(AiModelCollector::Instance().GetAiModel(data_unresolved_npc.aiModel_id));
 
-    skills.Resolve();
+    m_skills.Resolve();
     
     if (data_unresolved_npc.macrotask.GetScenarioTypeId() != type::AISCENARIO::NONE_ID)
     {
-        state_machine.SetCurrentMacroTask(data_unresolved_npc.macrotask);
+        m_stateMachine.setCurrentMacroTask(data_unresolved_npc.macrotask);
     }
     
     if (data_unresolved_npc.microtask.GetScenarioTypeId() != type::AISCENARIO::NONE_ID)
     {
-        state_machine.SetCurrentMicroTask(data_unresolved_npc.microtask);
+        m_stateMachine.setCurrentMicroTask(data_unresolved_npc.microtask);
     }
 }
 
-void Npc::ApplySkillsStrategy()
+void Npc::applySkillsStrategy()
 {           /*
     TYPE::ENTITY class_type_id = data_id.subtype_id;
     if (data_id.subtype_id == TYPE::ENTITY::RANGER_ID)
@@ -396,10 +389,10 @@ void Npc::ApplySkillsStrategy()
     skills.BindStrategy(skills_strategy);     */
 }
 
-std::string Npc::GetAgressorSetString() const
+std::string Npc::agressorSetString() const
 {
     std::string str;
-    for (std::set<AgressorData>::iterator it = data_agressor_set.begin(); it != data_agressor_set.end(); ++it)
+    for (std::set<AgressorData>::iterator it = m_agressorsData.begin(); it != m_agressorsData.end(); ++it)
     {
         str += std::to_string(it->npc_id) + ":" + std::to_string(it->counter) + " ";
     }

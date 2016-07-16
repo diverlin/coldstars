@@ -32,9 +32,9 @@ AiModelConqueror::~AiModelConqueror()
 
 void AiModelConqueror::UpdateInStatic(Npc* npc) const
 {
-    if (npc->GetStateMachine().GetMacroTaskManager().GetScenario() != nullptr)
+    if (npc->stateMachine().macroTaskManager().scenario() != nullptr)
     {
-        if (npc->GetStateMachine().GetMacroTaskManager().GetScenario()->typeId() == type::AISCENARIO::MACRO_WARRIORRECRUTE_ID) 
+        if (npc->stateMachine().macroTaskManager().scenario()->typeId() == type::AISCENARIO::MACRO_WARRIORRECRUTE_ID) 
         {
             // recrute warriors able to jump into target starsystem
             // apply macroscenario invasion for each in group
@@ -45,7 +45,7 @@ void AiModelConqueror::UpdateInStatic(Npc* npc) const
     else 
     {
         Task macrotask(type::AISCENARIO::MACRO_STARSYSTEMDEFENCE_ID, npc->starsystem()->id());
-            npc->GetStateMachine().SetCurrentMacroTask(macrotask); 
+            npc->stateMachine().setCurrentMacroTask(macrotask); 
             
             return;
     }

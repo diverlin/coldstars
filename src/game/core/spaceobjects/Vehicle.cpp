@@ -104,7 +104,7 @@ Vehicle::~Vehicle()
 /* virtual override */
 void Vehicle::putChildrenToGarbage() const
 {
-    m_npc->SetAlive(false);
+    m_npc->setAlive(false);
     global::get().entityManager().addToGarbage(m_npc);
     
     for(ItemSlot* slot: m_slots) {
@@ -170,7 +170,7 @@ GoodsPack* Vehicle::goodsPack() const
 /* virtual override final */
 int Vehicle::givenExpirience() const
 {
-    return m_npc->GetSkills().GetExpirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
+    return m_npc->skills().expirience() * GIVEN_EXPIRIENCE_RATE_DEPENDING_ON_NPC_EXPIRIENCE;
 }
 
 bool Vehicle::isSlotTypePresent(const type::entity& slot_subtype_id) const
@@ -510,7 +510,7 @@ bool Vehicle::sellItem(item::Base* item)
     if (earn_money > 0)
     {
         _decreaseMass(item_mass);
-        m_npc->IncreaseCredits(earn_money);
+        m_npc->increaseCredits(earn_money);
         
         return true;
     }
@@ -524,7 +524,7 @@ bool Vehicle::buyItem(item::Base* item)
 {
     if (addItemToCargoSlot(item) == true)
     {
-        m_npc->IncreaseCredits(-item->price());
+        m_npc->increaseCredits(-item->price());
 
         return true;
     }
@@ -548,7 +548,7 @@ bool Vehicle::__mergeIdenticalGoods(item::Base* item)
 void Vehicle::bindNpc(Npc* owner_npc)
 { 
     m_npc = owner_npc;
-    m_npc->SetVehicle(this);
+    m_npc->setVehicle(this);
 } 
 
 bool Vehicle::isObjectVisible(SpaceObject* object) const
@@ -812,7 +812,7 @@ void Vehicle::CheckNeedsInStatic()
     }
 
     // check credits
-    if (m_npc->GetCredits() < 1000)    { m_needs.get_credits = true; }
+    if (m_npc->credits() < 1000)    { m_needs.get_credits = true; }
     else                                    { m_needs.get_credits = false; }
 }
 

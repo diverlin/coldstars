@@ -16,9 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-#ifndef BASESCENARIO_HPP
-#define BASESCENARIO_HPP
+#pragma once
 
 #include <string>
 #include <types/AiScenarioTypes.hpp>
@@ -27,26 +25,24 @@ class Npc;
 
 class BaseScenario
 {
-    public:
-        BaseScenario():type_id(type::AISCENARIO::NONE_ID) {};
-        virtual ~BaseScenario() {};
-        
-        type::AISCENARIO typeId() const { return type_id; };
-        
-        virtual void Enter(Npc*) const {};
-        virtual bool Validate(Npc*) const { return true; };
-        virtual void UpdateInStaticInSpace(Npc*) const {};    
-        virtual void UpdateInStaticInDock(Npc*) const {};    
-        virtual void UpdateInDynamicInSpace(Npc*) const {};    
-        virtual void UpdateInDynamicInDock(Npc*) const {};    
-        virtual void Exit(Npc*) const {};
-        
-        virtual std::string GetDescription(Npc*) const { return "_"; };
-        
-    protected:
-        type::AISCENARIO type_id;
+public:
+    BaseScenario():m_typeId(type::AISCENARIO::NONE_ID) {}
+    virtual ~BaseScenario() {}
+
+    void setTypeId(type::AISCENARIO typeId) { m_typeId = typeId; }
+    type::AISCENARIO typeId() const { return m_typeId; }
+
+    virtual void enter(Npc*) const {}
+    virtual bool Validate(Npc*) const { return true; }
+    virtual void UpdateInStaticInSpace(Npc*) const {}
+    virtual void UpdateInStaticInDock(Npc*) const {}
+    virtual void UpdateInDynamicInSpace(Npc*) const {}
+    virtual void UpdateInDynamicInDock(Npc*) const {}
+    virtual void exit(Npc*) const {}
+
+    virtual std::string GetDescription(Npc*) const { return "_"; }
+
+private:
+    type::AISCENARIO m_typeId;
 }; 
 
-
-#endif 
-     

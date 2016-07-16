@@ -23,26 +23,24 @@
 #include <managers/EntityManager.hpp>
 
 MicroTaskManager::MicroTaskManager()
-{
-    scenario = nullptr;
-    target = nullptr;
-}
+{}
 
 MicroTaskManager::~MicroTaskManager()
 {}
 
-void MicroTaskManager::SetTask(const Task& microtask)
+void MicroTaskManager::setTask(const Task& microtask)
 {
-    this->microtask = microtask;
-    scenario = ScenarioCollector::Instance().GetScenario(microtask.GetScenarioTypeId());
-    if (microtask.targetId() != NONE) {
-        target = (SpaceObject*)global::get().entityManager().get(microtask.targetId()); // hack
+    m_microtask = microtask;
+    m_scenario = ScenarioCollector::Instance().get(microtask.GetScenarioTypeId());
+    assert(m_scenario);
+    if (m_microtask.targetId() != NONE) {
+        m_target = (SpaceObject*)global::get().entityManager().get(microtask.targetId()); // hack
     }
 }
 
-void MicroTaskManager::Reset()
+void MicroTaskManager::__reset()
 {
-    scenario  = nullptr;
-    target = nullptr;
-    microtask.reset();
+    m_scenario  = nullptr;
+    m_target = nullptr;
+    m_microtask.reset();
 }    

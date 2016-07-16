@@ -130,16 +130,16 @@ int Store::buyItem(item::Base* item)
 
 void Store::sellVehicle(Npc* npc, VehicleSlot* vehicle_slot, int price)
 {
-    vehicle_slot->GetVehicle()->grabItemsFromVehicle(npc->GetVehicle());
-    vehicle_slot->GetVehicle()->setStarSystem(npc->GetVehicle()->starsystem());
-    vehicle_slot->GetVehicle()->setLand(npc->GetVehicle()->land());
+    vehicle_slot->GetVehicle()->grabItemsFromVehicle(npc->vehicle());
+    vehicle_slot->GetVehicle()->setStarSystem(npc->vehicle()->starsystem());
+    vehicle_slot->GetVehicle()->setLand(npc->vehicle()->land());
     vehicle_slot->GetVehicle()->setPlaceTypeId(type::place::KOSMOPORT);
     
-    VehicleSlot* npc_vehicle_slot = npc->GetVehicle()->parentVehicleSlot();
-    npc->GetVehicle()->parentVehicleSlot()->SwapVehicle(vehicle_slot);
+    VehicleSlot* npc_vehicle_slot = npc->vehicle()->parentVehicleSlot();
+    npc->vehicle()->parentVehicleSlot()->SwapVehicle(vehicle_slot);
     npc_vehicle_slot->GetVehicle()->bindNpc(npc);  
         
-    npc->WithdrawCredits(price);      
+    npc->withdrawCredits(price);      
 }
                 
 

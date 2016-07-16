@@ -89,12 +89,12 @@ bool Shop::SellGoods(Npc* npc, type::entity subtype_id, int amount)
     
     if (price > 0)
     {        
-        if (npc->WithdrawCredits(price) == true)
+        if (npc->withdrawCredits(price) == true)
         {
             GoodsPack* goods_pack = GetNewGoodsPack(subtype_id);
             goods_pack->Increase(amount);    
         
-            npc->GetVehicle()->addItemToCargoSlot(goods_pack);
+            npc->vehicle()->addItemToCargoSlot(goods_pack);
                 
             return true;
         }

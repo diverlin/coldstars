@@ -27,16 +27,15 @@ ScenarioCollector& ScenarioCollector::Instance()
 ScenarioCollector::~ScenarioCollector()
 {}
 
-void ScenarioCollector::RegisterScenario(BaseScenario* scenario)
+void ScenarioCollector::add(BaseScenario* scenario)
 {
-    scenario_map.insert(std::make_pair(scenario->typeId(), scenario));
+    m_scenarios.insert(std::make_pair(scenario->typeId(), scenario));
 }
           
-BaseScenario* ScenarioCollector::GetScenario(type::AISCENARIO type_id) const
+BaseScenario* ScenarioCollector::get(type::AISCENARIO type_id) const
 {
-    if (type_id != type::AISCENARIO::NONE_ID)
-    {
-        return (scenario_map.find(type_id))->second;
+    if (type_id != type::AISCENARIO::NONE_ID) {
+        return (m_scenarios.find(type_id))->second;
     }
     return nullptr;
 }

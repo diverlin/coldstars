@@ -25,7 +25,7 @@
 
 MicroScenarioLaunching::MicroScenarioLaunching()
 {
-    type_id = type::AISCENARIO::MICRO_LAUNCHING_ID;
+    setTypeId(type::AISCENARIO::MICRO_LAUNCHING_ID);
 }
 
 /* virtual */
@@ -33,7 +33,7 @@ MicroScenarioLaunching::~MicroScenarioLaunching()
 {}
         
 /* virtual */
-void MicroScenarioLaunching::Enter(Npc* npc) const
+void MicroScenarioLaunching::enter(Npc* npc) const
 {
     LOG("npc_id=" + std::to_string(npc->id()) + " ENTER MicroScenarioLaunching");
 }
@@ -41,7 +41,7 @@ void MicroScenarioLaunching::Enter(Npc* npc) const
 /* virtual */
 bool MicroScenarioLaunching::Validate(Npc* npc) const
 {
-    if (npc->GetVehicle()->place() != type::place::KOSMOS)
+    if (npc->vehicle()->place() != type::place::KOSMOS)
     {
         return true;
     }
@@ -65,7 +65,7 @@ void MicroScenarioLaunching::UpdateInStaticInDock(Npc* npc) const
 }
 
 /* virtual */
-void MicroScenarioLaunching::Exit(Npc* npc) const 
+void MicroScenarioLaunching::exit(Npc* npc) const 
 {
     LOG("npc_id=" + std::to_string(npc->id()) + " EXIT MicroScenarioLaunching");
 }

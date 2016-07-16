@@ -17,12 +17,11 @@
 */
 
 
-#ifndef MACROTASKMANAGER_H
-#define MACROTASKMANAGER_H
-
+#pragma once
 
 #include "Task.hpp"
 #include "scenarios/BaseScenario.hpp"
+
 class SpaceObject;
 
 class MacroTaskManager
@@ -31,22 +30,21 @@ class MacroTaskManager
         MacroTaskManager();
         ~MacroTaskManager();
         
-        void SetTask(const Task&);
+        void setTask(const Task&);
         
-        SpaceObject* GetTarget() const { return target; };
-        const Task& GetTask() const { return macrotask; };    
-        BaseScenario* GetScenario() const { return scenario; };                
+        SpaceObject* target() const { return m_target; }
+        const Task& task() const { return m_macrotask; }
+        BaseScenario* scenario() const { return m_scenario; }
                         
     private:
-        Task macrotask;    
-        BaseScenario* scenario;
-        SpaceObject* target;
+        Task m_macrotask;
+        BaseScenario* m_scenario = nullptr;
+        SpaceObject* m_target = nullptr;
         
-        void Reset();    
+        void __reset();
         
     friend class StateMachine;
 };
 
 
-#endif 
      

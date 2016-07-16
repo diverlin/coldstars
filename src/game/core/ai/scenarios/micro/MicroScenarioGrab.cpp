@@ -31,7 +31,7 @@
 
 MicroScenarioGrab::MicroScenarioGrab()
 {
-    type_id = type::AISCENARIO::MICRO_GRAB_ID;
+    setTypeId(type::AISCENARIO::MICRO_GRAB_ID);
 }
 
 /* virtual */
@@ -39,9 +39,9 @@ MicroScenarioGrab::~MicroScenarioGrab()
 {}
 
 /* virtual */        
-void MicroScenarioGrab::Enter(Npc* npc) const
+void MicroScenarioGrab::enter(Npc* npc) const
 {
-    npc->GetVehicle()->driveComplex().SetTarget(npc->GetStateMachine().GetMicroTaskManager().GetTarget(), NAVIGATOR_ACTION::COLLECTING_ID);
+    npc->vehicle()->driveComplex().SetTarget(npc->stateMachine().microTaskManager().target(), NAVIGATOR_ACTION::COLLECTING_ID);
     
     LOG("npc_id="+std::to_string(npc->id())+" ENTER MicroScenarioGrab");
 }
@@ -50,7 +50,7 @@ void MicroScenarioGrab::Enter(Npc* npc) const
 bool MicroScenarioGrab::Validate(Npc* npc) const
 {   
     // check equipment
-    STATUS equipment_status = npc->GetVehicle()->CheckGrabStatus();
+    STATUS equipment_status = npc->vehicle()->CheckGrabStatus();
     
     if (equipment_status != STATUS::ITEM_OK)
     {
@@ -58,8 +58,8 @@ bool MicroScenarioGrab::Validate(Npc* npc) const
     }
     
     // check target
-    SpaceObject* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();     // shortcut
-    STATUS target_status = npc->GetVehicle()->grappleSlot()->checkTargetPure(target);
+    SpaceObject* target = npc->stateMachine().microTaskManager().target();     // shortcut
+    STATUS target_status = npc->vehicle()->grappleSlot()->checkTargetPure(target);
         
     if ( (equipment_status == STATUS::ITEM_OK) and (target_status == STATUS::TARGET_OK) )
     {
@@ -72,10 +72,10 @@ bool MicroScenarioGrab::Validate(Npc* npc) const
 /* virtual */
 void MicroScenarioGrab::UpdateInStaticInSpace(Npc* npc) const
 {
-    SpaceObject* target = npc->GetStateMachine().GetMicroTaskManager().GetTarget();
-    if (npc->GetVehicle()->grappleSlot()->checkTarget(target) == STATUS::TARGET_OK)
+    SpaceObject* target = npc->stateMachine().microTaskManager().target();
+    if (npc->vehicle()->grappleSlot()->checkTarget(target) == STATUS::TARGET_OK)
     {
-        npc->GetVehicle()->grappleSlot()->grappleEquipment()->AddTarget(target);
+        npc->vehicle()->grappleSlot()->grappleEquipment()->AddTarget(target);
     }
 }
 
@@ -84,7 +84,7 @@ void MicroScenarioGrab::UpdateInDynamicInSpace(Npc* npc) const
 {}
 
 /* virtual */
-void MicroScenarioGrab::Exit(Npc* npc) const
+void MicroScenarioGrab::exit(Npc* npc) const
 {
     LOG("npc_id="+std::to_string(npc->id())+" EXIT MicroScenarioGrab");
 }
@@ -92,5 +92,5 @@ void MicroScenarioGrab::Exit(Npc* npc) const
 /* virtual */
 std::string MicroScenarioGrab::GetDescription(Npc* npc) const 
 {
-    return "MicroScenarioGrab ob_id = " + std::to_string(npc->GetStateMachine().GetMicroTaskManager().GetTarget()->id());
+    return "MicroScenarioGrab ob_id = " + std::to_string(npc->stateMachine().microTaskManager().target()->id());
 }

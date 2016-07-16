@@ -24,31 +24,31 @@
 
 class StateMachine
 {
-    public:
-        StateMachine();
-        ~StateMachine();
+public:
+    StateMachine();
+    ~StateMachine();
 
-        void SetNpcOwner(Npc* npc_owner) { this->npc_owner = npc_owner; }
-        
-        void SetCurrentMacroTask(const Task&);
-        void SetCurrentMicroTask(const Task&);
-        
-        const MacroTaskManager& GetMacroTaskManager() const { return macrotask_manager; }
-        const MicroTaskManager& GetMicroTaskManager() const { return microtask_manager; }
-                
-        void UpdateInStaticInSpace();    
-        void UpdateInStaticInDock();    
-        void UpdateInDynamicInSpace();            
-        void UpdateInDynamicInDock();    
-        
-        void ForceReset(); // was private
-        
-    private:
-        Npc* npc_owner = nullptr;
-        
-        MacroTaskManager macrotask_manager;
-        MicroTaskManager microtask_manager;
-                    
+    void setNpc(Npc* npc) { m_npc = npc; }
+
+    void setCurrentMacroTask(const Task&);
+    void setCurrentMicroTask(const Task&);
+
+    const MacroTaskManager& macroTaskManager() const { return m_macrotaskManager; }
+    const MicroTaskManager& microTaskManager() const { return m_microtaskManager; }
+
+    void updateInStaticInSpace();
+    void updateInStaticInDock();
+    void updateInDynamicInSpace();
+    void updateInDynamicInDock();
+
+    void reset(); // was private
+
+private:
+    Npc* m_npc = nullptr;
+
+    MacroTaskManager m_macrotaskManager;
+    MicroTaskManager m_microtaskManager;
+
     //friend void Player::ForceStateMachineReset() const;
 }; 
 

@@ -62,13 +62,13 @@ void NpcBuilder::createInternals(Npc* npc, type::race race_id, type::entity subt
     
     //TextureOb* texOb_face  = TextureCollector::Instance().getRandomFaceTexObWithFolloingAttributes(race_id);
         
-    npc->SetRaceId(race_id);
+    npc->setRaceId(race_id);
     //npc->SetTextureOb(texOb_face);
     //npc->setSubTypeId(subtype_id);
     //npc->setSubSubTypeId(subsubtype_id);
     //npc->setLifeData(data_life);
     
-    npc->ApplySkillsStrategy();
+    npc->applySkillsStrategy();
         
        if ((race_id != type::race::R6_ID) and (race_id != type::race::R7_ID))
        {
@@ -76,21 +76,21 @@ void NpcBuilder::createInternals(Npc* npc, type::race race_id, type::entity subt
         {
             case type::entity::RANGER_ID:
                {
-                   npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));            
+                   npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));            
                                
                 break;    
                }
                         
                case type::entity::WARRIOR_ID:
                {
-                   npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));                        
+                   npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));                        
                                 
                 break;    
                }
                        
                   case type::entity::TRADER_ID: 
                   {
-                      npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID)); 
+                      npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::TRADER_ID)); 
                       
                       break;
                   }
@@ -100,7 +100,7 @@ void NpcBuilder::createInternals(Npc* npc, type::race race_id, type::entity subt
                         
                   default: 
                   {
-                   npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));                        
+                   npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::RANGER_ID));                        
                                         
                 break;    
                }
@@ -108,12 +108,12 @@ void NpcBuilder::createInternals(Npc* npc, type::race race_id, type::entity subt
        }
        else
        {
-        npc->SetAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR_ID));
+        npc->setAiModel(AiModelCollector::Instance().GetAiModel(AIMODEL::CONQUEROR_ID));
        }
         
-    npc->GetSkills().AddExpirience(meti::getRandInt(10000, 100000));
-    while(npc->GetSkills().GetAvailablePoints() != 0)
+    npc->skills().addExpirience(meti::getRandInt(10000, 100000));
+    while(npc->skills().availablePoints() != 0)
     {
-        npc->GetSkills().ManageAccordingToStrategy();
+        npc->skills().manageAccordingToStrategy();
     }
 }
