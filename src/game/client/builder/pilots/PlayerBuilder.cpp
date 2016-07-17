@@ -42,10 +42,10 @@ PlayerBuilder& PlayerBuilder::Instance()
 PlayerBuilder::~PlayerBuilder()
 {}
 
-Player* PlayerBuilder::GetNewPlayerTemplate(INTLONGEST id) const
+Player* PlayerBuilder::GetNewPlayerTemplate(const id_type& id) const
 {
     Player* player = nullptr;
-    if (id == NONE_ID)
+    if (id == NONE)
     {
         //id = EntityIdGenerator::Instance().GetNextId();
     }
@@ -56,7 +56,7 @@ Player* PlayerBuilder::GetNewPlayerTemplate(INTLONGEST id) const
     }
     catch(std::bad_alloc)
     {
-        Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
+        //Logger::Instance().Log("EXEPTION:bad_dynamic_memory_allocation\n");
     }
         
     //global::get().entitiesManager().RegisterEntity(player);
@@ -74,12 +74,12 @@ Player* PlayerBuilder::GetNewPlayer() const
 
 void PlayerBuilder::CreateNewInternals(Player* player) const
 {    
-    TYPE::RACE prace_id         = TYPE::RACE::R0_ID;
+    type::race prace_id         = type::race::R0_ID;
     type::entity psubtype_id    = type::entity::RANGER_ID;
     type::entity psubsubtype_id = type::entity::WARRIOR_ID;
     int size_id        = SIZE_4_ID;
     int weapons_num    = 6;
-    TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::L3_ID;
+    type::tech tech = type::tech::LEVEL3;
     
 //    Npc* npc = NpcBuilder::Instance().GetNewNpc(prace_id, psubtype_id, psubsubtype_id);
 //    Ship* ship = ShipBuilder::Instance().GetNewShip(prace_id, psubtype_id, size_id, weapons_num);

@@ -112,7 +112,7 @@ int main()
 //    while (jeti::Screen::get().GetWindow().isOpen())
 //    {
 //        //std::cout<<player->GetNpc()->vehicle()->center().x<<std::endl;
-//        //std::cout<<player->GetNpc()->vehicle()->GetProperties().radar<<std::endl;
+//        //std::cout<<player->GetNpc()->vehicle()->properties().radar<<std::endl;
                 
 //        /* server code start */
 //        TurnTimer::Instance().Update();

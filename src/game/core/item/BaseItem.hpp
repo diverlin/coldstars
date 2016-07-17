@@ -72,7 +72,7 @@ public:
 
     type::tech tech() const { return m_data.tech; }
 
-    type::entity parentSubTypeId() const { return m_parent_subtype_id; }
+    type::entity parentSubtype() const { return m_parent_subtype_id; }
     type::race race() const { return m_race_id; }
 
     bool isDamaged()    const { return (m_condition <= 0); }

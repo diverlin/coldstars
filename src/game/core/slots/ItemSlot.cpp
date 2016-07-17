@@ -137,7 +137,7 @@ bool ItemSlot::checkItemInsertion(item::Base* item) const
         return true;
     }
 
-    if (subtype() == item->parentSubTypeId()) {
+    if (subtype() == item->parentSubtype()) {
         return true;
     }
     
@@ -167,7 +167,7 @@ bool ItemSlot::insert(item::Base* item)
         return true;
     }
 
-    if (subtype() == item->parentSubTypeId())
+    if (subtype() == item->parentSubtype())
     {
         m_item = item;
         if (item->slot() != nullptr)

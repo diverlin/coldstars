@@ -183,7 +183,7 @@ void GuiKosmoport::EnterGuiScanInAngar()
     glm::vec2 center_screen(screen_w/2, screen_h/2);
     
     //bool allow_full_control = m_Player->IsAbleToGetFullControlOnScanedVehicle();
-    //gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
+    //gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->scanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
     //gui_skills_shared->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
 }
 

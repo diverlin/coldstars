@@ -17,8 +17,7 @@
 */
 
 
-#ifndef GUIVEHICLE_HPP
-#define GUIVEHICLE_HPP
+#pragma once
 
 #include <gui/BaseGuiElement.hpp>
 
@@ -33,9 +32,9 @@ class GuiVehicle : public BaseGuiElement
         GuiVehicle();
         virtual ~GuiVehicle();
         
-        Vehicle* GetVehicle() const { return m_Vehicle; };
-        bool GetBlockManualExit() const { return block_manual_exit; };
-        bool GetAllowFullControl() const { return allow_full_control; };
+        Vehicle* vehicle() const { return m_Vehicle; }
+        bool GetBlockManualExit() const { return block_manual_exit; }
+        bool GetAllowFullControl() const { return allow_full_control; }
                         
         void BindVehicle(Vehicle*, const glm::vec2& offset, bool full_control_on, bool block_manual_closing = false, float scale = 1.0f);
         void UnbindVehicle();
@@ -55,4 +54,3 @@ class GuiVehicle : public BaseGuiElement
 
 
 
-#endif

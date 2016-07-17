@@ -16,8 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef GUIKOSMOPORT_H
-#define GUIKOSMOPORT_H
+#pragma once
 
 #include "BaseGuiElement.hpp"
 #include "../gui/GuiAngar.hpp"
@@ -32,63 +31,62 @@ class Slider;
 
 class GuiKosmoport : public BaseGuiElement
 {
-        public:
-               GuiKosmoport();
-               ~GuiKosmoport();
-                                
-                void SetPlayer(Player*);
-                void BindKosmoport(Kosmoport*);
-                void UnbindKosmoport();
-                
-                void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
-                void UnbindSharedGuis();                
-          
-                void EnterGuiScanInAngar();
-                void ExitGuiScan();
-                                
-                void EnterGuiStoreScreen();
-                void ExitGuiStoreScreen();
-                
-                bool GetInitDone() const { return init_done; };
-                
-                void ButtonsAction();
-                                
-                bool Update(const MouseData&);
-                void Render(const MouseData&);
-                
-                                void EnterGuiAngarScreen();
-                                
-        private:
-                bool init_done;                                                                             
-                                
-                int active_screen_id; 
-                
-                Kosmoport* kosmoport;
-                                
-              GuiAngar     gui_angar;
-                GuiStore     gui_store;
-                GuiShop            gui_shop;
-                GuiGoverment    gui_goverment;  
-              
-                GuiGalaxyMap* gui_galaxymap_shared;  
-                GuiVehicle*   gui_vehicle_scan_shared;
-                GuiSkills*    gui_skills_shared;
-                Slider*       slider_shared;
-                
+public:
+    GuiKosmoport();
+    ~GuiKosmoport();
 
-                void ExitGuiAngarScreen();
-                                
-                void EnterGuiShopScreen();
-                void ExitGuiShopScreen();
+    void SetPlayer(Player*);
+    void BindKosmoport(Kosmoport*);
+    void UnbindKosmoport();
 
-                void EnterGuiGalaxyMapScreen();
-                void ExitGuiGalaxyMapScreen();
-                
-                void EnterGuiGovermentScreen();
-                void ExitGuiGovermentScreen();
-                
-                void ExitCurrentScreen();
+    void BindSharedGuis(GuiGalaxyMap*, GuiVehicle*, GuiSkills*, Slider*);
+    void UnbindSharedGuis();
+
+    void EnterGuiScanInAngar();
+    void ExitGuiScan();
+
+    void EnterGuiStoreScreen();
+    void ExitGuiStoreScreen();
+
+    bool GetInitDone() const { return init_done; }
+
+    void ButtonsAction();
+
+    bool Update(const MouseData&);
+    void Render(const MouseData&);
+
+    void EnterGuiAngarScreen();
+
+private:
+    bool init_done;
+
+    int active_screen_id;
+
+    Kosmoport* kosmoport = nullptr;
+
+    GuiAngar gui_angar;
+    GuiStore gui_store;
+    GuiShop gui_shop;
+    GuiGoverment gui_goverment;
+
+    GuiGalaxyMap* gui_galaxymap_shared = nullptr;
+    GuiVehicle* gui_vehicle_scan_shared = nullptr;
+    GuiSkills* gui_skills_shared = nullptr;
+    Slider* slider_shared = nullptr;
+
+
+    void ExitGuiAngarScreen();
+
+    void EnterGuiShopScreen();
+    void ExitGuiShopScreen();
+
+    void EnterGuiGalaxyMapScreen();
+    void ExitGuiGalaxyMapScreen();
+
+    void EnterGuiGovermentScreen();
+    void ExitGuiGovermentScreen();
+
+    void ExitCurrentScreen();
 };
 
 
-#endif 

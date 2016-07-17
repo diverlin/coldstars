@@ -36,7 +36,7 @@ class VehicleSlot : public BaseSlot
         
         virtual void putChildrenToGarbage() const;
         
-        Vehicle* GetVehicle() const { return vehicle; }
+        Vehicle* vehicle() const { return m_vehicle; }
         void InsertVehicle(Vehicle*);
         void Release(); 
         void SwapVehicle(VehicleSlot*);
@@ -48,7 +48,7 @@ class VehicleSlot : public BaseSlot
         virtual void Resolve();
         
     private:
-        Vehicle* vehicle = nullptr;
+        Vehicle* m_vehicle = nullptr;
         
         void SaveData(boost::property_tree::ptree&, const std::string&) const;
         void LoadData(const boost::property_tree::ptree&);

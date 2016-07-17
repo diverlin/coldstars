@@ -425,7 +425,7 @@ void RenderManager::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsy
         //resizeGl(w, h); 
             
       
-        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->vehicle()->center(), world_coord, 200 /*npc->vehicle()->GetProperties().radius*/);         
+        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->vehicle()->center(), world_coord, 200 /*npc->vehicle()->properties().radius*/);         
        
         // render text
         //resizeGl(w*scale, h*scale); 
@@ -476,7 +476,7 @@ void RenderManager::renderSceneInSpace(Starsystem* starsystem, bool turn_ended, 
 //                npc->vehicle()->RenderRadarRange();
 //            }
         
-//            if ( (npc->vehicle()->GetSlotGrapple()->item() != nullptr) and (npc->vehicle()->GetSlotGrapple()->GetSelected() == true) )
+//            if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
 //            {
 //                npc->vehicle()->RenderGrappleRange();
 //            }
