@@ -29,8 +29,6 @@
 #include <managers/EntityManager.hpp>
 
 VehicleSlot::VehicleSlot(int id, type::entity subtype_id)
-:
-vehicle(nullptr)
 { 
     setId(id);
     setTypeId(type::entity::VEHICLE_SLOT_ID);  
@@ -43,15 +41,14 @@ VehicleSlot::~VehicleSlot()
 /* virtual */
 void VehicleSlot::putChildrenToGarbage() const
 {
-    if (vehicle)
-    {
-        global::get().entityManager().addToGarbage(vehicle);
+    if (m_vehicle) {
+        global::get().entityManager().addToGarbage(m_vehicle);
     } 
 }
                       
 void VehicleSlot::InsertVehicle(Vehicle* vehicle)
 {
-        this->vehicle = vehicle;
+        m_vehicle = vehicle;
 
         //vehicle->setPlaceTypeId(data_id.type_id);
         vehicle->SetParentVehicleSlot(this);
@@ -59,20 +56,20 @@ void VehicleSlot::InsertVehicle(Vehicle* vehicle)
 
 void VehicleSlot::Release()
 {
-        vehicle = nullptr;
+        m_vehicle = nullptr;
 } 
 
 void VehicleSlot::SwapVehicle(VehicleSlot* vehicle_slot)
 {
     Vehicle* tmp_vehicle = vehicle_slot->vehicle();
-    vehicle_slot->InsertVehicle(GetVehicle());
+    vehicle_slot->InsertVehicle(m_vehicle);
     InsertVehicle(tmp_vehicle);
 }
 
 void VehicleSlot::Render(const ceti::Rect& rect) const
 {
     //drawTexturedRect(textureOb, rect, -1);
-    if (vehicle != nullptr)
+    if (m_vehicle != nullptr)
     {
         glm::vec3 center(rect.center().x, rect.center().y, -2.0);
         //((Ship*)vehicle)->RenderAtPlanet(center);

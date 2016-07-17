@@ -17,15 +17,13 @@
 */
 
 
-#ifndef GUIGALAXYMAP_HPP
-#define GUIGALAXYMAP_HPP
-
+#pragma once
 #include <gui/BaseGuiElement.hpp>
 #include <gui/MouseData.hpp>
 #include <jeti/PathVisual.hpp>
 
 class Galaxy;
-class StarSystem;
+class Starsystem;
 
 namespace jeti {
 class Renderer;
@@ -53,7 +51,6 @@ class GuiGalaxyMap : public BaseGuiElement
         virtual void UpdateUnique(Player*) override final;
         virtual void RenderUnique(const jeti::Renderer&, Player*) const override final;
         
-        glm::vec3 GetAbsoluteStarSystemPosition(const StarSystem&) const;
+        glm::vec3 GetAbsoluteStarSystemPosition(const Starsystem&) const;
 };
-             
-#endif 
+

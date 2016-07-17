@@ -223,7 +223,7 @@ void GuiSpace::EnterGuiScan()
     //glm::vec2 center_screen(screen_w/2, screen_h/2);
     
     //bool allow_full_control = m_Player->IsAbleToGetFullControlOnScanedVehicle();
-    //gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
+    //gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->scanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
     //gui_skills_shared->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
             
     //GetGuiElement(type::GUI::PLAYER_VEHICLE_ID)->Hide();
@@ -339,7 +339,7 @@ void GuiSpace::RenderUnique(const jeti::Renderer&, Player* player) const
                                     
     //if (gui_vehicle_scan_shared->vehicle() != nullptr)
     //{
-        //GuiManager::Instance().RenderScanVehicle(data_mouse, player->GetNpc()->GetScanTarget());                                  
+        //GuiManager::Instance().RenderScanVehicle(data_mouse, player->GetNpc()->scanTarget());
     //}
     
     //if (gui_vehicle_target.GetVehicle() != nullptr)

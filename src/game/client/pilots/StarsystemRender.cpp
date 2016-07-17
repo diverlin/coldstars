@@ -400,7 +400,7 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* sta
         //resizeGl(w, h); 
             
       
-        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->vehicle()->center(), world_coord, 200 /*npc->vehicle()->GetProperties().radius*/);         
+        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->vehicle()->center(), world_coord, 200 /*npc->vehicle()->properties().radius*/);
        
         // render text
         //resizeGl(w*scale, h*scale); 
@@ -455,7 +455,7 @@ void StarsystemRender::RenderInSpace(Starsystem* starsystem, bool turn_ended, bo
                 //npc->vehicle()->RenderRadarRange();
             }
         
-            //if ( (npc->vehicle()->GetSlotGrapple()->item() != nullptr) and (npc->vehicle()->GetSlotGrapple()->GetSelected() == true) )
+            //if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
             {
                 //npc->vehicle()->RenderGrappleRange();
             }
@@ -513,8 +513,8 @@ void StarsystemRender::RenderAxis(const jeti::Renderer& render) const
 
 bool isObjectWithinRadarRange(jeti::BaseParticleSystem* effect, Vehicle* vehicle)
 {
-    float dist = meti::distance(vehicle->center(), effect->center());
-    if (dist < vehicle->GetProperties().radar)
+    float dist = meti::distance(vehicle->position(), effect->center());
+    if (dist < vehicle->properties().radar)
     {
         return true;
     }
@@ -569,7 +569,7 @@ bool isPointOnScreen(const glm::vec2& p)
 bool isObjectWithinRadarRange(ShockWaveEffect* effect, Vehicle* vehicle)
 {
 //    float dist = meti::distance(vehicle->center(), effect->center());
-//    if (dist < vehicle->GetProperties().radar)
+//    if (dist < vehicle->properties().radar)
 //    {
 //        return true;
 //    }
@@ -579,14 +579,14 @@ bool isObjectWithinRadarRange(ShockWaveEffect* effect, Vehicle* vehicle)
 
 bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
 {
-    float dist = meti::distance(vehicle->center(), effect->GetStartPos());
-    if (dist < vehicle->GetProperties().radar)
+    float dist = meti::distance(vehicle->position(), effect->GetStartPos());
+    if (dist < vehicle->properties().radar)
     {
         return true;
     }
     
-    dist = meti::distance(vehicle->center(), effect->GetEndPos());
-    if (dist < vehicle->GetProperties().radar)
+    dist = meti::distance(vehicle->position(), effect->GetEndPos());
+    if (dist < vehicle->properties().radar)
     {
         return true;
     }
@@ -597,7 +597,7 @@ bool isObjectWithinRadarRange(LazerTraceEffect* effect, Vehicle* vehicle)
 //bool isObjectWithinRadarRange(VerticalFlowText* effect, Vehicle* vehicle)
 //{
     //float dist = meti::distance(vehicle->center(), effect->GetPos());
-    //if (dist < vehicle->GetProperties().radar)
+    //if (dist < vehicle->properties().radar)
     //{
         //return true;
     //}

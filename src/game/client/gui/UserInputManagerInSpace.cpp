@@ -65,7 +65,7 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
         {    
             case sf::Keyboard::Escape:
             {        
-                if (player->GetNpc()->GetScanTarget() != nullptr)
+                if (player->GetNpc()->scanTarget() != nullptr)
                 {
                     //player->GetNpc()->ResetScanTarget();
                 }
@@ -131,7 +131,7 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
     
             case sf::Keyboard::C: 
             { 
-                glm::vec3 player_pos3 = player->GetNpc()->vehicle()->center();
+                glm::vec3 player_pos3 = player->GetNpc()->vehicle()->position();
                 glm::vec2 player_pos2(player_pos3.x, player_pos3.y);
                 jeti::Screen::get().InitiateScrollTo(player_pos2);
                 break; 
@@ -160,8 +160,8 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
     
             case sf::Keyboard::F1: // god mode on/off
             {    
-                std::cout<<"god_mode ="<<!player->GetNpc()->vehicle()->GetGodMode()<<std::endl;
-                player->GetNpc()->vehicle()->SetGodMode(!player->GetNpc()->vehicle()->GetGodMode());
+                std::cout<<"god_mode ="<<!player->GetNpc()->vehicle()->godMode()<<std::endl;
+                player->GetNpc()->vehicle()->setGodMode(!player->GetNpc()->vehicle()->godMode());
                 break;
             }
     

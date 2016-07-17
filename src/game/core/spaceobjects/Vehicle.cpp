@@ -299,7 +299,7 @@ bool Vehicle::_installGoodsPack(item::Base* item)
 
 bool Vehicle::_installEquipment(item::Base* item)
 {
-    if (item->parentSubTypeId() == type::entity::WEAPON_SLOT_ID) {
+    if (item->parentSubtype() == type::entity::WEAPON_SLOT_ID) {
         ItemSlot* slot = m_weaponComplex.freeSlot();
         if (slot) {
             return slot->swapItem(item->slot());
@@ -312,7 +312,7 @@ bool Vehicle::_installEquipment(item::Base* item)
             }
         }
     } else {
-        ItemSlot* slot = _functionalSlot(item->parentSubTypeId());
+        ItemSlot* slot = _functionalSlot(item->parentSubtype());
         if (slot->item()) {
             if (item->price() > slot->item()->price()) {
                 return slot->swapItem(item->slot());

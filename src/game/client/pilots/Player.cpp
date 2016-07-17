@@ -24,7 +24,7 @@
 #include <jeti/Screen.hpp>
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 #include <math/rand.hpp>
 //#include <ceti/StringUtils.hpp>
@@ -34,8 +34,8 @@
 #include <ai/Task.hpp>
 #include <ai/StateMachine.hpp>
 
-#include <item/equipment/ScanerEquipment.hpp>
-#include <item/equipment/GrappleEquipment.hpp>
+#include <item/equipment/Scaner.hpp>
+#include <item/equipment/Grapple.hpp>
 
 #include <parts/WeaponComplex.hpp>
 
@@ -86,14 +86,14 @@ Player::~Player()
 void Player::BindNpc(Npc* npc)
 {
     this->npc = npc;
-    npc->SetPlayer(this);
+    npc->setPlayer(this);
 }
 
 bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) const
 {
     if (force_full_control == false)
     {
-        if (npc->vehicle()->id() == npc->GetScanTarget()->id())
+        if (npc->vehicle()->id() == npc->scanTarget()->id())
         {
             force_full_control = true;  
             // modify full control for friend ships         
@@ -105,9 +105,9 @@ bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) cons
           
 void Player::UpdatePostTransaction()
 {
-    switch (npc->vehicle()->placeTypeId())
+    switch (npc->vehicle()->place())
     {
-        case TYPE::PLACE::KOSMOPORT_ID:
+        case type::place::KOSMOPORT_ID:
         {
             if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == false)
             {
@@ -409,7 +409,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
         //resizeGl(w, h); 
             
       
-        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->vehicle()->center(), world_coord, 200 /*npc->vehicle()->GetProperties().radius*/);
+        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->vehicle()->center(), world_coord, 200 /*npc->vehicle()->properties().radius*/);
        
         // render text
         //resizeGl(w*scale, h*scale); 
@@ -464,7 +464,7 @@ void Player::RenderInSpace(Starsystem* starsystem, bool turn_ended, bool forceDr
                 //npc->vehicle()->RenderRadarRange();
             }
         
-            if ( (npc->vehicle()->GetSlotGrapple()->item() != nullptr) and (npc->vehicle()->GetSlotGrapple()->GetSelected() == true) )
+            if ( (npc->vehicle()->grappleSlot()->item() != nullptr) && (npc->vehicle()->grappleSlot()->isSelected() == true) )
             {
                 //npc->vehicle()->RenderGrappleRange();
             }
@@ -496,7 +496,7 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_ROCKET_vec.size(); i++)
     { 
-        const glm::vec3& rocket_pos = visible_ROCKET_vec[i]->center(); // shortcut
+        const glm::vec3& rocket_pos = visible_ROCKET_vec[i]->position(); // shortcut
         float object_cursor_dist = meti::distance(rocket_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, rocket_pos.z);
         if (object_cursor_dist < visible_ROCKET_vec[i]->collisionRadius())
         { 
@@ -526,7 +526,7 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_CONTAINER_vec.size(); i++)
     { 
-        const glm::vec3& container_pos = visible_CONTAINER_vec[i]->center(); // shortcut
+        const glm::vec3& container_pos = visible_CONTAINER_vec[i]->position(); // shortcut
         float object_cursor_dist = meti::distance(container_pos, data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, container_pos.z);
         if (object_cursor_dist < visible_CONTAINER_vec[i]->collisionRadius())
         {   
@@ -539,17 +539,17 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
             
             if (data_mouse.right_click == true)
             {
-//                if (npc->vehicle()->GetProperties().grab_radius > 0)
+//                if (npc->vehicle()->properties().grab_radius > 0)
 //                {
-//                    if (npc->vehicle()->GetSlotGrapple()->CheckTarget(visible_CONTAINER_vec[i]) == STATUS::TARGET_OK)
+//                    if (npc->vehicle()->grappleSlot()->CheckTarget(visible_CONTAINER_vec[i]) == STATUS::TARGET_OK)
 //                    {
-//                        if (npc->vehicle()->GetSlotGrapple()->GetGrappleEquipment()->CheckIfTargetAlreadyExistInQueue(visible_CONTAINER_vec[i]) == false)
+//                        if (npc->vehicle()->grappleSlot()->GetGrappleEquipment()->CheckIfTargetAlreadyExistInQueue(visible_CONTAINER_vec[i]) == false)
 //                        {
-//                            npc->vehicle()->GetSlotGrapple()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
+//                            npc->vehicle()->grappleSlot()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
 //                        }
 //                        else
 //                        {
-//                            npc->vehicle()->GetSlotGrapple()->GetGrappleEquipment()->RemoveTarget(visible_CONTAINER_vec[i]);
+//                            npc->vehicle()->grappleSlot()->GetGrappleEquipment()->RemoveTarget(visible_CONTAINER_vec[i]);
 //                        }
 //                    }
 //                }
@@ -567,7 +567,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SATELLITE_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_SATELLITE_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distance(meti::vec2(visible_SATELLITE_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SATELLITE_vec[i]->collisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SATELLITE_vec[i]);
@@ -587,7 +587,7 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
             
             if (data_mouse.right_click == true)
             {
-                if ( (npc->vehicle()->GetSlotGrapple()->item() != nullptr) and (npc->vehicle()->GetSlotGrapple()->GetSelected() == true) )
+                if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
                 {
                 //if (pPLAYER->vehicle()->ableTo.GRAB == true)
                 //{
@@ -646,7 +646,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SHIP_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_SHIP_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distance(meti::vec2(visible_SHIP_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SHIP_vec[i]->collisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);    
@@ -668,13 +668,13 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
 
                 if (data_mouse.right_click == true)
                 {
-                    if ( (npc->vehicle()->GetSlotGrapple()->item() != nullptr) and (npc->vehicle()->GetSlotGrapple()->GetSelected() == true) )
+                    if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
                     {
                         //if (npc->vehicle()->ableTo.GRAB == true)
                            //{
-                               //if (npc->vehicle()->GetSlotGrapple()->CheckTarget(visible_SHIP_vec[i]) == true)
+                               //if (npc->vehicle()->grappleSlot()->CheckTarget(visible_SHIP_vec[i]) == true)
                                //{
-                                   //npc->vehicle()->GetSlotGrapple()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
+                                   //npc->vehicle()->grappleSlot()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
                                //}                    
                            //}
                     }
@@ -744,7 +744,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 
             if (data_mouse.right_click == true)
             {
-                if ( (npc->vehicle()->GetSlotGrapple()->item() != nullptr) and (npc->vehicle()->GetSlotGrapple()->GetSelected() == true) )
+                if ( (npc->vehicle()->grappleSlot()->item() != nullptr) and (npc->vehicle()->grappleSlot()->isSelected() == true) )
                 {
                     //if (pPLAYER->vehicle()->ableTo.GRAB == true)
                     //{

@@ -156,13 +156,13 @@ void GuiManager::UpdateSessionInSpace()
     assert(gui_radar);
     assert(gui_galaxymap);
                 
-    const SpaceObject* scan_target = player->GetNpc()->GetScanTarget();    
+    const SpaceObject* scan_target = player->GetNpc()->scanTarget();
       
     if (scan_target != nullptr)
     {       
         if (gui_scan_vehicle->vehicle() == nullptr)
         {               
-            if (scan_target->typeId() == type::entity::VEHICLE_ID)
+            if (scan_target->type() == type::entity::VEHICLE_ID)
             {
                 gui_scan_vehicle->BindVehicle((Vehicle*)scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
                 gui_scan_vehicle->Show();  
