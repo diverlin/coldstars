@@ -137,7 +137,7 @@ void GuiRadar::RenderUnique(const jeti::Renderer& render, Player* player) const
             }
             
             //float scale_render = Screen::Instance().GetScale();
-            //drawParticle(rect.center() + vec2(entity_vec[i]->center()*scale)/scale_render, size);            
+            //drawParticle(rect.center() + vec2(entity_vec[i]->position()*scale)/scale_render, size);
         }
     }
     //render.disable_POINTSPRITE(); 

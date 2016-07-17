@@ -593,7 +593,7 @@ void Vehicle::UpdateSpecialAction()
     {
         // alpitodorender if (UpdateFadeInEffect() == true)
         {
-            HyperJumpEvent(m_driveComplex.GetTarget()->starsystem());
+            HyperJumpEvent(m_driveComplex.target()->starsystem());
         }
 
         break;
@@ -629,11 +629,11 @@ void Vehicle::DockingEvent()
 
     m_weaponComplex.deactivateWeapons();
 
-    switch(m_driveComplex.GetTarget()->type())
+    switch(m_driveComplex.target()->type())
     {
     case type::entity::PLANET_ID:
     {
-        Planet* planet = ((Planet*)m_driveComplex.GetTarget());
+        Planet* planet = ((Planet*)m_driveComplex.target());
         planet->GetLand()->AddVehicle(this);
 
         break;
@@ -641,11 +641,11 @@ void Vehicle::DockingEvent()
 
     case type::entity::VEHICLE_ID:
     {
-        switch(m_driveComplex.GetTarget()->subtype())
+        switch(m_driveComplex.target()->subtype())
         {
         case type::entity::SPACESTATION_ID:
         {
-            SpaceStation* spacestation = ((SpaceStation*)m_driveComplex.GetTarget());
+            SpaceStation* spacestation = ((SpaceStation*)m_driveComplex.target());
             spacestation->land()->AddVehicle(this);
 
             break;
@@ -1445,9 +1445,9 @@ void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::strin
     save_ptree.put(root+"m_DataKorpus.slot_weapon_num", m_vehicleDescriptor.slot_weapon_num);
 
 
-    if (m_driveComplex.GetTarget() != nullptr)
+    if (m_driveComplex.target() != nullptr)
     {
-        save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", m_driveComplex.GetTarget()->id());
+        save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_target_id", m_driveComplex.target()->id());
         save_ptree.put(root+"data_unresolved_Vehicle.drive_complex_action_id", m_driveComplex.GetActionId());
     }
     else
@@ -1464,7 +1464,7 @@ void Vehicle::SaveData(boost::property_tree::ptree& save_ptree, const std::strin
 
     if (place() == type::place::HYPER)
     {
-        save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", m_driveComplex.GetTarget()->id());
+        save_ptree.put(root+"data_unresolved_Vehicle.starsystem_hyper_id", m_driveComplex.target()->id());
     }
     else
     {
