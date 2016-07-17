@@ -21,17 +21,18 @@
 class TurnTimer
 {
     static const int TURN_TIME = 150;
+    static const int TURN_AUTODELAY = -50;
 
 public:
     TurnTimer();
     ~TurnTimer();
 
-    bool getTurnEnded()  const { return m_turnEnded; };
-    int getStopTurnTimer() const { return m_stopTurnTimer; };
-    unsigned long int getTurnCounter() const { return m_turnCounter; };
+    bool getTurnEnded()  const { return m_turnEnded; }
+    int getStopTurnTimer() const { return m_stopTurnTimer; }
+    unsigned long int getTurnCounter() const { return m_turnCounter; }
     void nextTurn();
 
-    void update(bool auto_turn = false);
+    void update(int threshold = TURN_AUTODELAY);
     
 private:
     int m_stopTurnTimer = TURN_TIME;

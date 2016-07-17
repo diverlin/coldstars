@@ -36,27 +36,29 @@ class StarSystemDescriptor;
 
 class God
 {
-    public:
-        God();
-        ~God();
+public:
+    God();
+    ~God();
 
-        Galaxy* createWorld(const descriptor::Galaxy&);
-        void update(Galaxy*, const GameDate&);
+    void createWorld(const descriptor::Galaxy&);
+    void update();
 
-    private:
-        GameDate m_DateLastUpdate;
+private:
+    GameDate m_DateLastUpdate;
 
-        StarSystemsConditionData data_starsystems_condition;
-        
-        void CreateLifeAtPlanet(Planet*, const StarSystemDescriptor&) const;
-        
-        void CreateSpaceStations(Starsystem*, int) const;
-        void CreateShips(Starsystem*, int, type::race race_id = type::race::NONE_ID, type::entity subtype_id = type::entity::NONE_ID, type::entity subsubtype_id = type::entity::NONE_ID) const;
-        
-        void ProceedInvasion(Galaxy*) const;
+    StarSystemsConditionData data_starsystems_condition;
 
-        void CreateLife(Galaxy*, const descriptor::Galaxy&) const;
-        void CreateInvasion(Galaxy*, const descriptor::Galaxy&) const;
+    void __createLifeAtPlanet(Planet*, const StarSystemDescriptor&) const;
+
+    void __createSpaceStations(Starsystem*, int) const;
+    void __createShips(Starsystem*, int, type::race race_id = type::race::NONE_ID, type::entity subtype_id = type::entity::NONE_ID, type::entity subsubtype_id = type::entity::NONE_ID) const;
+
+    void __proceedInvasion(Galaxy*) const;
+
+    void __createLife(Galaxy*, const descriptor::Galaxy&) const;
+    void __createInvasion(Galaxy*, const descriptor::Galaxy&) const;
+
+    Galaxy* m_galaxy = nullptr;
 }; 
 
 
