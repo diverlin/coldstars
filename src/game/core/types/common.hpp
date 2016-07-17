@@ -22,6 +22,6 @@
 //#include <types/EntityTypes.hpp>
 //#include <types/GuiTypes.hpp>
      
-//TYPE::GUI getGuiItemSlotType(TYPE::ENTITY);
-//TYPE::GUI getGuiItemSlotSelectorType(TYPE::ENTITY);
+//TYPE::GUI getGuiItemSlotType(type::entity);
+//TYPE::GUI getGuiItemSlotSelectorType(type::entity);
        

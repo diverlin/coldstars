@@ -82,7 +82,7 @@ class RenderManager
         void addIfVisible(jeti::BaseParticleSystem*, const VisibilityData&);
         void addIfVisible(VerticalFlowText*, const VisibilityData&);
                  
-        void renderSceneInSpace(StarSystem*, bool, bool, bool);
+        void renderSceneInSpace(Starsystem*, bool, bool, bool);
 
     private:
         /// visible entities
@@ -102,7 +102,7 @@ class RenderManager
         std::vector<jeti::BaseParticleSystem*> m_particlesystems;
         std::vector<VerticalFlowText*>   m_texts;
     
-        void RenderInSpace_NEW(jeti::Renderer&, StarSystem*);
+        void RenderInSpace_NEW(jeti::Renderer&, Starsystem*);
         void RenderCollisionRadius(const jeti::Renderer&) const;
         void RenderAxis(const jeti::Renderer&) const;
 };

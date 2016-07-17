@@ -17,36 +17,35 @@
 */
 
 
-#ifndef DISTANTSTAREFFECT_HPP
-#define DISTANTSTAREFFECT_HPP
+#pragma once
 
-#include <effects/BaseBackGroundEffect.hpp>    
-#include <types/MyInt.hpp>
+#include <effects/BaseBackGroundEffect.hpp>
+
+#include <types/IdType.hpp>
 
 const int DISTANT_STAR_MIN = 10000;
 const int DISTANT_STAR_MAX = 10000;
 
 class DistantStarEffect : public BaseBackGroundEffect
 {   
-    public:
-        DistantStarEffect(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
-        ~DistantStarEffect();
-        
-        void Save(boost::property_tree::ptree&, const std::string&) const;        
-        void Load(const boost::property_tree::ptree&);
-        void Resolve();
-    
-    private:
-        std::vector<glm::vec3> m_Positions;
-        std::vector<glm::vec4> m_Colors;
-        std::vector<float> m_Sizes;
+public:
+    DistantStarEffect(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
+    ~DistantStarEffect();
 
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;        
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+    void Save(boost::property_tree::ptree&, const std::string&) const;
+    void Load(const boost::property_tree::ptree&);
+    void Resolve();
+    
+private:
+    std::vector<glm::vec3> m_Positions;
+    std::vector<glm::vec4> m_Colors;
+    std::vector<float> m_Sizes;
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 }; 
 
-DistantStarEffect* GetNewDistantStarEffect(int color_id = NONE_ID);
+DistantStarEffect* GetNewDistantStarEffect(int color_id = NONE);
 
 
-#endif 

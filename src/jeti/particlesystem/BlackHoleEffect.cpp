@@ -75,7 +75,7 @@
                  
 
 
-//void  getNewBlackHoleEffect(StarSystem* _starsystem, glm::vec2 _center_pos, int obSize)
+//void  getNewBlackHoleEffect(Starsystem* _starsystem, glm::vec2 _center_pos, int obSize)
 //{
     //////obSize = getRandInt(1,9); // DEBUG
     ////BlackHoleEffect* blackholeEffect;

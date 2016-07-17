@@ -187,7 +187,7 @@ void EntityManager::loadPass0(const std::string& filename)
         LOG("loading starsystems...");
         BOOST_FOREACH(boost::property_tree::ptree::value_type &v, load_ptree.get_child("starsystem"))
         {
-            //StarSystem* starsystem = global::get().starSystemBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
+            //Starsystem* starsystem = global::get().starSystemBuilder().createTemplate(v.second.get<unsigned long int>("data_id.id"));
             //starsystem->Load(v.second);
         }
     }

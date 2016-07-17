@@ -796,7 +796,7 @@ void Starsystem::findRenderVisibleEntities_c(Player* player)
 void Starsystem::findRadarVisibleEntities_c(Player* player)
 {    
 //    GuiRadar& gui_radar = *(GuiRadar*)GuiManager::Instance().GetGuiElement(TYPE::GUI::GUI_RADAR_ID);
-//    const Vehicle& vehicle = *player->GetNpc()->GetVehicle();
+//    const Vehicle& vehicle = *player->GetNpc()->vehicle();
 //    gui_radar.ResetData();
     
 //    for (unsigned int i=0; i<STAR_vec.size(); i++)        { gui_radar.Add(STAR_vec[i]); }

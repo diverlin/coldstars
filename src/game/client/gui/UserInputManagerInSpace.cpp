@@ -84,46 +84,46 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
             } 
     
             //DRIVE SLOT
-            case sf::Keyboard::F: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::DRIVE_SLOT_SELECTOR_ID); break; }    
+            case sf::Keyboard::F: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::DRIVE_SLOT_SELECTOR_ID); break; }
             
             case sf::Keyboard::N: { player->GetShow().InverseCollisionRadius(); break; }
             
             // WEAPON SLOTS
-            case sf::Keyboard::Num1: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT1_SELECTOR_ID); break; }        
-            case sf::Keyboard::Num2: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT2_SELECTOR_ID); break; }
-            case sf::Keyboard::Num3: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT3_SELECTOR_ID); break; } 
-            case sf::Keyboard::Num4: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT4_SELECTOR_ID); break; } 
-            case sf::Keyboard::Num5: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT5_SELECTOR_ID); break; }
-            case sf::Keyboard::Num6: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT6_SELECTOR_ID); break; }
-            case sf::Keyboard::Num7: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT7_SELECTOR_ID); break; }
-            case sf::Keyboard::Num8: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT8_SELECTOR_ID); break; }                
-            case sf::Keyboard::Num9: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT9_SELECTOR_ID); break; } 
+            case sf::Keyboard::Num1: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT1_SELECTOR_ID); break; }
+            case sf::Keyboard::Num2: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT2_SELECTOR_ID); break; }
+            case sf::Keyboard::Num3: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT3_SELECTOR_ID); break; }
+            case sf::Keyboard::Num4: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT4_SELECTOR_ID); break; }
+            case sf::Keyboard::Num5: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT5_SELECTOR_ID); break; }
+            case sf::Keyboard::Num6: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT6_SELECTOR_ID); break; }
+            case sf::Keyboard::Num7: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT7_SELECTOR_ID); break; }
+            case sf::Keyboard::Num8: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT8_SELECTOR_ID); break; }
+            case sf::Keyboard::Num9: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT9_SELECTOR_ID); break; }
             
             case sf::Keyboard::A:
             { 
-//                if (player->GetNpc()->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//                if (player->GetNpc()->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
 //                {
-//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT1_SELECTOR_ID);
-//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT2_SELECTOR_ID);
-//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT3_SELECTOR_ID);
-//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT4_SELECTOR_ID);
-//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT5_SELECTOR_ID);
-//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT6_SELECTOR_ID);
-//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT7_SELECTOR_ID);
-//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT8_SELECTOR_ID);
-//                    GuiManager::Instance().ResetEventOnGuiElement(TYPE::GUI::WEAPON_SLOT9_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(type::GUI::WEAPON_SLOT1_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(type::GUI::WEAPON_SLOT2_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(type::GUI::WEAPON_SLOT3_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(type::GUI::WEAPON_SLOT4_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(type::GUI::WEAPON_SLOT5_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(type::GUI::WEAPON_SLOT6_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(type::GUI::WEAPON_SLOT7_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(type::GUI::WEAPON_SLOT8_SELECTOR_ID);
+//                    GuiManager::Instance().ResetEventOnGuiElement(type::GUI::WEAPON_SLOT9_SELECTOR_ID);
 //                }
 //                else
 //                {
-//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT1_SELECTOR_ID);
-//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT2_SELECTOR_ID);
-//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT3_SELECTOR_ID);
-//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT4_SELECTOR_ID);
-//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT5_SELECTOR_ID);
-//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT6_SELECTOR_ID);
-//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT7_SELECTOR_ID);
-//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT8_SELECTOR_ID);
-//                    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::WEAPON_SLOT9_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT1_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT2_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT3_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT4_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT5_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT6_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT7_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT8_SELECTOR_ID);
+//                    GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::WEAPON_SLOT9_SELECTOR_ID);
 //                }
                 
                 break;
@@ -131,14 +131,14 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
     
             case sf::Keyboard::C: 
             { 
-                glm::vec3 player_pos3 = player->GetNpc()->GetVehicle()->center();
+                glm::vec3 player_pos3 = player->GetNpc()->vehicle()->center();
                 glm::vec2 player_pos2(player_pos3.x, player_pos3.y);
                 jeti::Screen::get().InitiateScrollTo(player_pos2);
                 break; 
             }
-            case sf::Keyboard::G: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::GRAPPLE_SLOT_SELECTOR_ID); break; }    
+            case sf::Keyboard::G: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::GRAPPLE_SLOT_SELECTOR_ID); break; }
             
-            case sf::Keyboard::M: {    GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::GALAXYMAP_ID); break; }
+            case sf::Keyboard::M: {    GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::GALAXYMAP_ID); break; }
             
             case sf::Keyboard::R: // RADAR
             {
@@ -160,8 +160,8 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
     
             case sf::Keyboard::F1: // god mode on/off
             {    
-                std::cout<<"god_mode ="<<!player->GetNpc()->GetVehicle()->GetGodMode()<<std::endl;
-                player->GetNpc()->GetVehicle()->SetGodMode(!player->GetNpc()->GetVehicle()->GetGodMode());            
+                std::cout<<"god_mode ="<<!player->GetNpc()->vehicle()->GetGodMode()<<std::endl;
+                player->GetNpc()->vehicle()->SetGodMode(!player->GetNpc()->vehicle()->GetGodMode());
                 break;
             }
     
@@ -177,7 +177,7 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
                 break;
             }
                     
-            case sf::Keyboard::F5: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::SAVE_ID); break; }
+            case sf::Keyboard::F5: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::SAVE_ID); break; }
             
             case sf::Keyboard::F6: // slow down GAME SPEED 
             {
@@ -203,7 +203,7 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
                 break;
             }
             
-            case sf::Keyboard::F9: { GuiManager::Instance().PressEventMBL_onGuiElement(TYPE::GUI::LOAD_ID); break; }        
+            case sf::Keyboard::F9: { GuiManager::Instance().PressEventMBL_onGuiElement(type::GUI::LOAD_ID); break; }
     
             case sf::Keyboard::K: { jeti::Screen::get().IncreaseScale(); break; }
             case sf::Keyboard::L: { jeti::Screen::get().DecreaseScale(); break; }

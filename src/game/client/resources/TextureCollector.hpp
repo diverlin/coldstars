@@ -35,39 +35,39 @@ class TextureOb;
 
 class TextureCollector
 {   
-    public:
-        static TextureCollector& Instance();
-        
-        void setTextureBlank(jeti::TextureOb*);
-        void add(jeti::TextureOb*, const TextureDescriptor&);
+public:
+    static TextureCollector& Instance();
 
-        jeti::TextureOb* getTextureById(int);
-        jeti::TextureOb* getTextureByTypeId(TYPE::TEXTURE);
-        jeti::TextureOb* getTextureByColorId(TYPE::TEXTURE, int);
-        jeti::TextureOb* getTextureByRaceId(TYPE::TEXTURE, TYPE::RACE);
-        jeti::TextureOb* getTextureByDescriptor(const TextureDescriptor& descriptior);
+    void setTextureBlank(jeti::TextureOb*);
+    void add(jeti::TextureOb*, const TextureDescriptor&);
 
-    private:
-        TextureCollector();
-        ~TextureCollector();
-        
-        TextureCollector(TextureCollector&) = delete;
-        TextureCollector& operator=(TextureCollector&) = delete;
+    jeti::TextureOb* getTextureById(int);
+    jeti::TextureOb* getTextureByTypeId(type::texture);
+    jeti::TextureOb* getTextureByColorId(type::texture, int);
+    jeti::TextureOb* getTextureByRaceId(type::texture, type::race);
+    jeti::TextureOb* getTextureByDescriptor(const TextureDescriptor& descriptior);
 
-        jeti::TextureOb* m_textureBlank;
+private:
+    TextureCollector();
+    ~TextureCollector();
 
-        std::map<int, std::pair<TextureDescriptor, jeti::TextureOb*>> m_idsTextures;
-        std::map<TYPE::TEXTURE, std::vector<std::pair<TextureDescriptor, jeti::TextureOb*>>> m_typesTextures;
+    TextureCollector(TextureCollector&) = delete;
+    TextureCollector& operator=(TextureCollector&) = delete;
 
-        bool isExist(jeti::TextureOb*) const;
+    jeti::TextureOb* m_textureBlank;
+
+    std::map<int, std::pair<TextureDescriptor, jeti::TextureOb*>> m_idsTextures;
+    std::map<type::texture, std::vector<std::pair<TextureDescriptor, jeti::TextureOb*>>> m_typesTextures;
+
+    bool isExist(jeti::TextureOb*) const;
     
-        jeti::TextureOb* _getTextureByClosestSizeId(const std::vector<jeti::TextureOb*>&, int);
-        jeti::TextureOb* _getTextureBySizeId(const std::vector<jeti::TextureOb*>&, int);
-        jeti::TextureOb* _tryGetTextureBySizeId(const std::vector<jeti::TextureOb*>&, int);
+    jeti::TextureOb* _getTextureByClosestSizeId(const std::vector<jeti::TextureOb*>&, int);
+    jeti::TextureOb* _getTextureBySizeId(const std::vector<jeti::TextureOb*>&, int);
+    jeti::TextureOb* _tryGetTextureBySizeId(const std::vector<jeti::TextureOb*>&, int);
 
-        void _validate(jeti::TextureOb*);
+    void _validate(jeti::TextureOb*);
 
-        bool hasId(int) const;
-        bool hasTypeId(TYPE::TEXTURE) const;
+    bool hasId(int) const;
+    bool hasTypeId(type::texture) const;
 };
 

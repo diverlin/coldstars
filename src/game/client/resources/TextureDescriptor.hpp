@@ -30,31 +30,31 @@
 
 struct TextureDescriptor
 {
-    TYPE::TEXTURE type_id;
-    TYPE::ENTITY subtype_id;   //# warrior/trader and so on
-    TYPE::RACE race_id;
-    TYPE::TECHLEVEL tech_level_id;
+    type::texture type_id;
+    type::entity subtype_id;   //# warrior/trader and so on
+    type::race race_id;
+    type::tech tech_level_id;
 
     TextureDescriptor()
     :
-    type_id(TYPE::TEXTURE::NONE_ID),
-    subtype_id(TYPE::ENTITY::NONE_ID),
-    race_id(TYPE::RACE::NONE_ID),
-    tech_level_id(TYPE::TECHLEVEL::NONE_ID)
+    type_id(type::texture::NONE_ID),
+    subtype_id(type::entity::NONE_ID),
+    race_id(type::race::NONE_ID),
+    tech_level_id(type::tech::NONE)
     {}
 
     bool operator==(const TextureDescriptor& rhs) const
     {
-        if (rhs.type_id != TYPE::TEXTURE::NONE_ID)
+        if (rhs.type_id != type::texture::NONE_ID)
             if (type_id != rhs.type_id)
                 return false;
-        if (rhs.subtype_id != TYPE::ENTITY::NONE_ID)
+        if (rhs.subtype_id != type::entity::NONE_ID)
             if (subtype_id != rhs.subtype_id)
                 return false;
-        if (rhs.race_id != TYPE::RACE::NONE_ID)
+        if (rhs.race_id != type::race::NONE_ID)
             if (race_id != rhs.race_id)
                 return false;
-        if (rhs.tech_level_id != TYPE::TECHLEVEL::NONE_ID)
+        if (rhs.tech_level_id != type::tech::NONE)
             if (tech_level_id != rhs.tech_level_id)
                 return false;
 

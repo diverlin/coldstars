@@ -27,7 +27,7 @@
 #include "TextureCollector.hpp"
 #include "GuiTextureObCollector.hpp"
 
-#include <types/MyInt.hpp>
+#include <types/IdType.hpp>
 #include <types/RaceTypes.hpp>
 #include <types/MeshTypes.hpp>
 #include <types/TechLevelTypes.hpp>
@@ -43,16 +43,16 @@ void loadGameData()
 
 void load3DModels()
 {        
-    MeshCollector::Instance().add(new jeti::Mesh(DATA_PATH+"obj/plane/plane.obj",   glm::vec3(0.0f, 0.0f, 1.0f), nullptr), MeshDescriptor(TYPE::MESH::PLANE_ID));
-    MeshCollector::Instance().add(new jeti::Mesh(DATA_PATH+"obj/sphere/sphere.obj", glm::vec3(1.0f, 0.0f, 0.0f), nullptr), MeshDescriptor(TYPE::MESH::SPHERE_ID));
-    MeshCollector::Instance().add(new jeti::Mesh(DATA_PATH+"obj/sphere_deformed/sphere_deformed.obj", glm::vec3(1.0f, 0.0f, 0.0f), nullptr), MeshDescriptor(TYPE::MESH::SPHERE_DEFORMED_ID));
+    MeshCollector::Instance().add(new jeti::Mesh(DATA_PATH+"obj/plane/plane.obj",   glm::vec3(0.0f, 0.0f, 1.0f), nullptr), MeshDescriptor(type::MESH::PLANE_ID));
+    MeshCollector::Instance().add(new jeti::Mesh(DATA_PATH+"obj/sphere/sphere.obj", glm::vec3(1.0f, 0.0f, 0.0f), nullptr), MeshDescriptor(type::MESH::SPHERE_ID));
+    MeshCollector::Instance().add(new jeti::Mesh(DATA_PATH+"obj/sphere_deformed/sphere_deformed.obj", glm::vec3(1.0f, 0.0f, 0.0f), nullptr), MeshDescriptor(type::MESH::SPHERE_DEFORMED_ID));
     
     {
     jeti::Material material_data;
     material_data.texture_path = DATA_PATH+"obj/vehicles/BabylonStation/station_texture/babylonstation.jpg";
     jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
     jeti::Mesh* mesh = new jeti::Mesh(DATA_PATH+"obj/vehicles/BabylonStation/babylon_station_mod.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);
-    MeshCollector::Instance().add(mesh, MeshDescriptor(TYPE::MESH::SPACESTATION_ID));
+    MeshCollector::Instance().add(mesh, MeshDescriptor(type::MESH::SPACESTATION_ID));
     }
 
 //    {
@@ -60,7 +60,7 @@ void load3DModels()
 //    material_data.texture_path = DATA_PATH+"obj/vehicles/Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg";
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 //    jeti::Mesh* mesh = new jeti::Mesh(DATA_PATH+"obj/vehicles/Anna_V_2.0_variations/anna_mod.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);
-//    MeshCollector::Instance().add(TYPE::MESH::SPACESTATION_ID, mesh);
+//    MeshCollector::Instance().add(type::MESH::SPACESTATION_ID, mesh);
 //    }
 
 }
@@ -85,7 +85,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::TURREL_ID;
+//    association_data.type_id = type::TEXTURE::TURREL_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -98,7 +98,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::TURREL_ID;
+//    association_data.type_id = type::TEXTURE::TURREL_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -111,7 +111,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::TURREL_ID;
+//    association_data.type_id = type::TEXTURE::TURREL_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -126,7 +126,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::ITEM_SLOT_ID;
+//    association_data.type_id = type::TEXTURE::ITEM_SLOT_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -142,22 +142,22 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::VEHICLE_SLOT_ID;
+//    association_data.type_id = type::TEXTURE::VEHICLE_SLOT_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
 //}
 
-//####################################### TYPE::TEXTURE::FACE_ID ################################
-//// TYPE::RACE::R0_ID
+//####################################### type::TEXTURE::FACE_ID ################################
+//// type::RACE::R0_ID
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"race/0000.png";
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::FACE_ID;
-//    association_data.race_id = TYPE::RACE::R0_ID;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -169,22 +169,22 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::FACE_ID;
-//    association_data.race_id = TYPE::RACE::R0_ID;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
 //}
 
-//// TYPE::RACE::R1_ID
+//// type::RACE::R1_ID
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"race/1000.png";
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::FACE_ID;
-//    association_data.race_id = TYPE::RACE::R1_ID;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -196,22 +196,22 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::FACE_ID;
-//    association_data.race_id = TYPE::RACE::R1_ID;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
 //}
 
-//// TYPE::RACE::R2_ID
+//// type::RACE::R2_ID
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"race/2000.png";
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::FACE_ID;
-//    association_data.race_id = TYPE::RACE::R2_ID;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R2_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -223,22 +223,22 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::FACE_ID;
-//    association_data.race_id = TYPE::RACE::R2_ID;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R2_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
 //}
 
-//// TYPE::RACE::R3_ID
+//// type::RACE::R3_ID
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"race/3000.png";
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::FACE_ID;
-//    association_data.race_id = TYPE::RACE::R3_ID;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R3_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -250,22 +250,22 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::FACE_ID;
-//    association_data.race_id = TYPE::RACE::R3_ID;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R3_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
 //}
 
-//// TYPE::RACE::R4_ID
+//// type::RACE::R4_ID
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"race/4000.png";
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::FACE_ID;
-//    association_data.race_id = TYPE::RACE::R4_ID;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R4_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -277,22 +277,22 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::FACE_ID;
-//    association_data.race_id = TYPE::RACE::R4_ID;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R4_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
 //}
 
-//// TYPE::RACE::R6_ID
+//// type::RACE::R6_ID
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"race/6000.png";
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::FACE_ID;
-//    association_data.race_id = TYPE::RACE::R6_ID;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R6_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -304,22 +304,22 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::FACE_ID;
-//    association_data.race_id = TYPE::RACE::R6_ID;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R6_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
 //}
 
-//// TYPE::RACE::R7_ID
+//// type::RACE::R7_ID
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"race/7000.png";
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::FACE_ID;
-//    association_data.race_id = TYPE::RACE::R7_ID;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R7_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -331,8 +331,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::FACE_ID;
-//    association_data.race_id = TYPE::RACE::R7_ID;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R7_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -347,7 +347,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::ASTEROID_ID;
+//    association_data.type_id = type::TEXTURE::ASTEROID_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -359,7 +359,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::ASTEROID_ID;
+//    association_data.type_id = type::TEXTURE::ASTEROID_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -371,7 +371,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::ASTEROID_ID;
+//    association_data.type_id = type::TEXTURE::ASTEROID_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -385,7 +385,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::MINERAL_ID;
+//    association_data.type_id = type::TEXTURE::MINERAL_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -398,7 +398,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::MINERAL_ID;
+//    association_data.type_id = type::TEXTURE::MINERAL_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -411,7 +411,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::MINERAL_ID;
+//    association_data.type_id = type::TEXTURE::MINERAL_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -424,7 +424,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::CONTAINER_ID;
+//    association_data.type_id = type::TEXTURE::CONTAINER_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -437,7 +437,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::BOMB_ID;
+//    association_data.type_id = type::TEXTURE::BOMB_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -445,7 +445,7 @@ void loadImages()
 
 
 
-//####################################### TYPE::TEXTURE::SATELLITE_ID ################################
+//####################################### type::TEXTURE::SATELLITE_ID ################################
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"satellite/sa_001.png";
@@ -456,8 +456,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::SATELLITE_ID;
-//    association_data.race_id = TYPE::RACE::R0_ID;
+//    association_data.type_id = type::TEXTURE::SATELLITE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -473,8 +473,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::SATELLITE_ID;
-//    association_data.race_id = TYPE::RACE::R0_ID;
+//    association_data.type_id = type::TEXTURE::SATELLITE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -490,8 +490,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::SATELLITE_ID;
-//    association_data.race_id = TYPE::RACE::R0_ID;
+//    association_data.type_id = type::TEXTURE::SATELLITE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -507,8 +507,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::SATELLITE_ID;
-//    association_data.race_id = TYPE::RACE::R0_ID;
+//    association_data.type_id = type::TEXTURE::SATELLITE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -524,8 +524,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::SATELLITE_ID;
-//    association_data.race_id = TYPE::RACE::R0_ID;
+//    association_data.type_id = type::TEXTURE::SATELLITE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -541,8 +541,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::SATELLITE_ID;
-//    association_data.race_id = TYPE::RACE::R0_ID;
+//    association_data.type_id = type::TEXTURE::SATELLITE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -556,7 +556,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::BLACKHOLE_ID;
+//    association_data.type_id = type::TEXTURE::BLACKHOLE_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -571,9 +571,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::RANGER_ID;
-//    association_data.race_id    = TYPE::RACE::R0_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::RANGER_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -586,9 +586,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID;
-//    association_data.race_id    = TYPE::RACE::R0_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -601,9 +601,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::PIRAT_ID;
-//    association_data.race_id    = TYPE::RACE::R0_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::PIRAT_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -616,9 +616,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::TRADER_ID;
-//    association_data.race_id    = TYPE::RACE::R0_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::TRADER_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -631,9 +631,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::DIPLOMAT_ID;
-//    association_data.race_id    = TYPE::RACE::R0_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::DIPLOMAT_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -647,9 +647,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::RANGER_ID;
-//    association_data.race_id    = TYPE::RACE::R1_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::RANGER_ID;
+//    association_data.race_id    = type::RACE::R1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -662,9 +662,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID;
-//    association_data.race_id    = TYPE::RACE::R1_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -677,9 +677,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::PIRAT_ID;
-//    association_data.race_id    = TYPE::RACE::R1_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::PIRAT_ID;
+//    association_data.race_id    = type::RACE::R1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -692,9 +692,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::TRADER_ID;
-//    association_data.race_id    = TYPE::RACE::R1_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::TRADER_ID;
+//    association_data.race_id    = type::RACE::R1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -707,9 +707,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::DIPLOMAT_ID;
-//    association_data.race_id    = TYPE::RACE::R1_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::DIPLOMAT_ID;
+//    association_data.race_id    = type::RACE::R1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -723,9 +723,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::RANGER_ID;
-//    association_data.race_id    = TYPE::RACE::R2_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::RANGER_ID;
+//    association_data.race_id    = type::RACE::R2_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -738,9 +738,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID;
-//    association_data.race_id    = TYPE::RACE::R2_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R2_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -753,9 +753,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::TRADER_ID;
-//    association_data.race_id    = TYPE::RACE::R2_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::TRADER_ID;
+//    association_data.race_id    = type::RACE::R2_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -768,9 +768,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::PIRAT_ID;
-//    association_data.race_id    = TYPE::RACE::R2_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::PIRAT_ID;
+//    association_data.race_id    = type::RACE::R2_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -783,9 +783,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::DIPLOMAT_ID;
-//    association_data.race_id    = TYPE::RACE::R2_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::DIPLOMAT_ID;
+//    association_data.race_id    = type::RACE::R2_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -799,9 +799,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::RANGER_ID;
-//    association_data.race_id    = TYPE::RACE::R3_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::RANGER_ID;
+//    association_data.race_id    = type::RACE::R3_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -814,9 +814,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID;
-//    association_data.race_id    = TYPE::RACE::R3_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R3_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -829,9 +829,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID;
-//    association_data.race_id    = TYPE::RACE::R3_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R3_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -844,9 +844,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::PIRAT_ID;
-//    association_data.race_id    = TYPE::RACE::R3_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::PIRAT_ID;
+//    association_data.race_id    = type::RACE::R3_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -859,9 +859,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::TRADER_ID;
-//    association_data.race_id    = TYPE::RACE::R3_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::TRADER_ID;
+//    association_data.race_id    = type::RACE::R3_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -874,9 +874,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::DIPLOMAT_ID;
-//    association_data.race_id    = TYPE::RACE::R3_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::DIPLOMAT_ID;
+//    association_data.race_id    = type::RACE::R3_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -890,9 +890,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID;
-//    association_data.race_id    = TYPE::RACE::R4_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R4_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -905,9 +905,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::TRADER_ID;
-//    association_data.race_id    = TYPE::RACE::R4_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::TRADER_ID;
+//    association_data.race_id    = type::RACE::R4_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -920,9 +920,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::TRADER_ID;
-//    association_data.race_id    = TYPE::RACE::R4_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::TRADER_ID;
+//    association_data.race_id    = type::RACE::R4_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -935,9 +935,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::DIPLOMAT_ID;
-//    association_data.race_id    = TYPE::RACE::R4_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::DIPLOMAT_ID;
+//    association_data.race_id    = type::RACE::R4_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -951,9 +951,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID;
-//    association_data.race_id    = TYPE::RACE::R6_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R6_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -966,9 +966,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID;
-//    association_data.race_id    = TYPE::RACE::R6_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R6_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -981,9 +981,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID;
-//    association_data.race_id    = TYPE::RACE::R6_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R6_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -992,57 +992,57 @@ void loadImages()
 
 ////{
 //    //std::vector<int> arg;
-//    //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_3.png", true, &arg) );
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_3.png", true, &arg) );
 ////}
 
 
 ////{
 //    //std::vector<int> arg;
-//    //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_5.png", true, &arg) );
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_5.png", true, &arg) );
 ////}
 
 ////{
 //    //std::vector<int> arg;
-//    //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_6.png", true, &arg) );
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_6.png", true, &arg) );
 ////}
 
 ////{
 //    //std::vector<int> arg;
-//    //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_7.png", true, &arg) );
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_7.png", true, &arg) );
 ////}
 
 ////{
 //    //std::vector<int> arg;
-//    //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_8.png", true, &arg) );
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_8.png", true, &arg) );
 ////}
 
 ////{
 //    //std::vector<int> arg;
-//    //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_9.png", true, &arg) );
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_9.png", true, &arg) );
 ////}
 
 ////{
 //    //std::vector<int> arg;
-//    //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_10.png", true, &arg) );
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_10.png", true, &arg) );
 ////}
 
 ////{
 //    //std::vector<int> arg;
-//    //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_11.png", true, &arg) );
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_11.png", true, &arg) );
 ////}
 
 ////{
 //    //std::vector<int> arg;
-//    //arg.push_back((int)TYPE::RACE::R6_ID); arg.push_back((int)TYPE::ENTITY::WARRIOR_ID); //COLOR_GOLDENROD
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(TYPE::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_12.png", true, &arg) );
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_12.png", true, &arg) );
 ////}
 
 
@@ -1055,9 +1055,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID;
-//    association_data.race_id    = TYPE::RACE::R7_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R7_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1070,15 +1070,15 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHIP_ID;
-//    association_data.subtype_id = TYPE::ENTITY::WARRIOR_ID;
-//    association_data.race_id    = TYPE::RACE::R7_ID;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R7_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
 //}
 
-////################################# TYPE::TEXTURE::STAR_ID ###############################
+////################################# type::TEXTURE::STAR_ID ###############################
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"star/s_000.jpg";
@@ -1087,7 +1087,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::STAR_ID;
+//    association_data.type_id    = type::TEXTURE::STAR_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1101,7 +1101,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::STAR_ID;
+//    association_data.type_id    = type::TEXTURE::STAR_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1115,7 +1115,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::STAR_ID;
+//    association_data.type_id    = type::TEXTURE::STAR_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1129,7 +1129,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::STAR_ID;
+//    association_data.type_id    = type::TEXTURE::STAR_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1143,8 +1143,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SPACESTATION_ID;
-//    association_data.race_id    = TYPE::RACE::R0_ID;
+//    association_data.type_id    = type::TEXTURE::SPACESTATION_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1157,8 +1157,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SPACESTATION_ID;
-//    association_data.race_id    = TYPE::RACE::R0_ID;
+//    association_data.type_id    = type::TEXTURE::SPACESTATION_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1171,8 +1171,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SPACESTATION_ID;
-//    association_data.race_id    = TYPE::RACE::R0_ID;
+//    association_data.type_id    = type::TEXTURE::SPACESTATION_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1185,8 +1185,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SPACESTATION_ID;
-//    association_data.race_id    = TYPE::RACE::R0_ID;
+//    association_data.type_id    = type::TEXTURE::SPACESTATION_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1203,7 +1203,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1218,7 +1218,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1233,7 +1233,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1248,7 +1248,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1263,7 +1263,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1278,7 +1278,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1293,7 +1293,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1308,7 +1308,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1323,7 +1323,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1338,7 +1338,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1353,7 +1353,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1368,7 +1368,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1383,7 +1383,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1398,7 +1398,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1413,7 +1413,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1428,7 +1428,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1443,7 +1443,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1458,7 +1458,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1473,7 +1473,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NEBULA_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NEBULA_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1481,14 +1481,14 @@ void loadImages()
 ////### size 2 = 512x512
 ////### size 4 = 1024x1024 or 512x1024
 
-////################################ TYPE::TEXTURE::LAND_BACKGROUND_ID ###################################
+////################################ type::TEXTURE::LAND_BACKGROUND_ID ###################################
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"bg_uninhabited/b_000.jpg";
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NATURELAND_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NATURELAND_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1500,7 +1500,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NATURELAND_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NATURELAND_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1512,7 +1512,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::NATURELAND_BACKGROUND_ID;
+//    association_data.type_id    = type::TEXTURE::NATURELAND_BACKGROUND_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1525,8 +1525,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::ANGAR_BACKGROUND_ID;
-//    association_data.race_id    = TYPE::RACE::R0_ID;
+//    association_data.type_id    = type::TEXTURE::ANGAR_BACKGROUND_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1538,8 +1538,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::STORE_BACKGROUND_ID;
-//    association_data.race_id    = TYPE::RACE::R0_ID;
+//    association_data.type_id    = type::TEXTURE::STORE_BACKGROUND_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1551,8 +1551,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::SHOP_BACKGROUND_ID;
-//    association_data.race_id    = TYPE::RACE::R0_ID;
+//    association_data.type_id    = type::TEXTURE::SHOP_BACKGROUND_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1564,8 +1564,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::GOVERMENT_BACKGROUND_ID;
-//    association_data.race_id    = TYPE::RACE::R0_ID;
+//    association_data.type_id    = type::TEXTURE::GOVERMENT_BACKGROUND_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1580,8 +1580,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::PLANET_ID;
-//    association_data.subtype_id = TYPE::ENTITY::PLANET_MIXED_ID;
+//    association_data.type_id    = type::TEXTURE::PLANET_ID;
+//    association_data.subtype_id = type::entity::PLANET_MIXED_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1594,8 +1594,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::PLANET_ID;
-//    association_data.subtype_id = TYPE::ENTITY::PLANET_WATER_ID;
+//    association_data.type_id    = type::TEXTURE::PLANET_ID;
+//    association_data.subtype_id = type::entity::PLANET_WATER_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1608,8 +1608,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::PLANET_ID;
-//    association_data.subtype_id = TYPE::ENTITY::PLANET_VULCANIC_ID;
+//    association_data.type_id    = type::TEXTURE::PLANET_ID;
+//    association_data.subtype_id = type::entity::PLANET_VULCANIC_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1623,8 +1623,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::PLANET_ID;
-//    association_data.subtype_id = TYPE::ENTITY::PLANET_ICE_ID;
+//    association_data.type_id    = type::TEXTURE::PLANET_ID;
+//    association_data.subtype_id = type::entity::PLANET_ICE_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1637,8 +1637,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::PLANET_ID;
-//    association_data.subtype_id = TYPE::ENTITY::PLANET_GAS_ID;
+//    association_data.type_id    = type::TEXTURE::PLANET_ID;
+//    association_data.subtype_id = type::entity::PLANET_GAS_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1652,7 +1652,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::ATMOSPHERE_ID;
+//    association_data.type_id    = type::TEXTURE::ATMOSPHERE_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1665,7 +1665,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::ATMOSPHERE_ID;
+//    association_data.type_id    = type::TEXTURE::ATMOSPHERE_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1679,7 +1679,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::RING_ID;
+//    association_data.type_id    = type::TEXTURE::RING_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1694,7 +1694,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::PARTICLE_EFFECT_ID;
+//    association_data.type_id    = type::TEXTURE::PARTICLE_EFFECT_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1708,7 +1708,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::PARTICLE_EFFECT_ID;
+//    association_data.type_id    = type::TEXTURE::PARTICLE_EFFECT_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1722,7 +1722,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::PARTICLE_EFFECT_ID;
+//    association_data.type_id    = type::TEXTURE::PARTICLE_EFFECT_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1736,7 +1736,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id    = TYPE::TEXTURE::PARTICLE_EFFECT_ID;
+//    association_data.type_id    = type::TEXTURE::PARTICLE_EFFECT_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1744,8 +1744,8 @@ void loadImages()
 
 ////{
 //    //std::vector<int> arg;
-//    //arg.push_back((int)TYPE::TECHLEVEL::L0_ID); arg.push_back(COLOR::BLUE_ID);
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(TYPE::TEXTURE::LAZER_EFFECT_ID, DATA_PATH+"effect/lazer/l_64_26_000.png", true, &arg, 4, 1, 10) );
+//    //arg.push_back((int)type::TECHLEVEL::L0_ID); arg.push_back(COLOR::BLUE_ID);
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::LAZER_EFFECT_ID, DATA_PATH+"effect/lazer/l_64_26_000.png", true, &arg, 4, 1, 10) );
 ////}
 
 //{
@@ -1756,8 +1756,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::LAZER_EFFECT_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::LAZER_EFFECT_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1771,8 +1771,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::LAZER_EFFECT_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::LAZER_EFFECT_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1786,8 +1786,8 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::LAZER_EFFECT_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::LAZER_EFFECT_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1801,7 +1801,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::SHIELD_EFFECT_ID;
+//    association_data.type_id        = type::TEXTURE::SHIELD_EFFECT_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1815,7 +1815,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::SHIELD_EFFECT_ID;
+//    association_data.type_id        = type::TEXTURE::SHIELD_EFFECT_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1829,7 +1829,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::SHIELD_EFFECT_ID;
+//    association_data.type_id        = type::TEXTURE::SHIELD_EFFECT_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1843,14 +1843,14 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::SHIELD_EFFECT_ID;
+//    association_data.type_id        = type::TEXTURE::SHIELD_EFFECT_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
 //}
 
 
-//// TYPE::TEXTURE::DISTANTSTAR_ID
+//// type::TEXTURE::DISTANTSTAR_ID
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"star/s1.png";
@@ -1859,7 +1859,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::DISTANTSTAR_ID;
+//    association_data.type_id        = type::TEXTURE::DISTANTSTAR_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1873,7 +1873,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::DISTANTSTAR_ID;
+//    association_data.type_id        = type::TEXTURE::DISTANTSTAR_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1887,7 +1887,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::DISTANTSTAR_ID;
+//    association_data.type_id        = type::TEXTURE::DISTANTSTAR_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1904,9 +1904,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::DRIVE_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::DRIVE_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1920,9 +1920,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::DRIVE_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID;
+//    association_data.type_id        = type::TEXTURE::DRIVE_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1936,9 +1936,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::DRIVE_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L2_ID;
+//    association_data.type_id        = type::TEXTURE::DRIVE_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L2_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1965,9 +1965,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::LAZER_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::LAZER_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1981,9 +1981,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::LAZER_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::LAZER_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -1997,9 +1997,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::LAZER_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::LAZER_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2014,9 +2014,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::LAZER_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID;
+//    association_data.type_id        = type::TEXTURE::LAZER_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2041,9 +2041,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::ROCKET_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::ROCKET_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2056,9 +2056,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::ROCKET_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID;
+//    association_data.type_id        = type::TEXTURE::ROCKET_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2071,16 +2071,16 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::ROCKET_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L2_ID;
+//    association_data.type_id        = type::TEXTURE::ROCKET_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L2_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
 //}
 
-////TEXTURE_MANAGER.manageItem( textureOb(TORPED_ITEM_TEXTURE_ID, 'data/item/torped/tl0.png', True, [ 'torpedo',       TYPE::TECHLEVEL::L0_ID, 3, 1, (int)TYPE::RACE::R0_ID, COLOR::YELLOW_ID]) )
-////TEXTURE_MANAGER.manageItem( textureOb(TORPED_ITEM_TEXTURE_ID, 'data/item/torped/tl1.png', True, [ 'torpedo',       TYPE::TECHLEVEL::L0_ID, 3, 1, (int)TYPE::RACE::R0_ID, COLOR::YELLOW_ID]) )
+////TEXTURE_MANAGER.manageItem( textureOb(TORPED_ITEM_TEXTURE_ID, 'data/item/torped/tl0.png', True, [ 'torpedo',       type::TECHLEVEL::L0_ID, 3, 1, (int)type::RACE::R0_ID, COLOR::YELLOW_ID]) )
+////TEXTURE_MANAGER.manageItem( textureOb(TORPED_ITEM_TEXTURE_ID, 'data/item/torped/tl1.png', True, [ 'torpedo',       type::TECHLEVEL::L0_ID, 3, 1, (int)type::RACE::R0_ID, COLOR::YELLOW_ID]) )
 
 //{
 //    jeti::Material material_data;
@@ -2089,7 +2089,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::ROCKET_BULLET_ID;
+//    association_data.type_id        = type::TEXTURE::ROCKET_BULLET_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2102,7 +2102,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::ROCKET_BULLET_ID;
+//    association_data.type_id        = type::TEXTURE::ROCKET_BULLET_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2110,12 +2110,12 @@ void loadImages()
 
 ////{
 //    //std::vector<int> arg;
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID, DATA_PATH+"bullet/t_0.png", true, &arg) );
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::ROCKET_BULLET_ID, DATA_PATH+"bullet/t_0.png", true, &arg) );
 ////}
 
 ////{
 //    //std::vector<int> arg;
-//    //TextureCollector::Instance().Add( new jeti::TextureOb(TYPE::TEXTURE::ROCKET_BULLET_ID, DATA_PATH+"bullet/t_1.png", true, &arg) );
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::ROCKET_BULLET_ID, DATA_PATH+"bullet/t_1.png", true, &arg) );
 ////}
 ////TEXTURE_MANAGER.manage( textureOb(TORPED_BULLET_TEXTURE_ID, 'data/bullet/t_0.png', True, []) )
 ////TEXTURE_MANAGER.manage( textureOb(TORPED_BULLET_TEXTURE_ID, 'data/bullet/t_1.png', True, []) )
@@ -2132,9 +2132,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::PROTECTOR_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2148,9 +2148,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID;
+//    association_data.type_id        = type::TEXTURE::PROTECTOR_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2164,9 +2164,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L2_ID;
+//    association_data.type_id        = type::TEXTURE::PROTECTOR_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L2_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2179,9 +2179,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::PROTECTOR_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L3_ID;
+//    association_data.type_id        = type::TEXTURE::PROTECTOR_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L3_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2197,9 +2197,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::DROID_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::DROID_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2213,9 +2213,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::DROID_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID;
+//    association_data.type_id        = type::TEXTURE::DROID_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2229,9 +2229,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::DROID_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L2_ID;
+//    association_data.type_id        = type::TEXTURE::DROID_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L2_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2248,9 +2248,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::GRAPPLE_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2264,9 +2264,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::GRAPPLE_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID;
+//    association_data.type_id        = type::TEXTURE::GRAPPLE_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2284,9 +2284,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::BAK_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::BAK_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2300,9 +2300,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::BAK_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID;
+//    association_data.type_id        = type::TEXTURE::BAK_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2319,9 +2319,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::ENERGIZER_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2335,9 +2335,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::ENERGIZER_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID;
+//    association_data.type_id        = type::TEXTURE::ENERGIZER_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2354,9 +2354,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::FREEZER_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::FREEZER_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2370,9 +2370,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::FREEZER_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID;
+//    association_data.type_id        = type::TEXTURE::FREEZER_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2392,9 +2392,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::SCANER_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::SCANER_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2410,9 +2410,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::SCANER_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID;
+//    association_data.type_id        = type::TEXTURE::SCANER_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2431,9 +2431,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::RADAR_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L0_ID;
+//    association_data.type_id        = type::TEXTURE::RADAR_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L0_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2450,9 +2450,9 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id        = TYPE::TEXTURE::RADAR_EQUIPMENT_ID;
-//    association_data.race_id        = TYPE::RACE::R0_ID;
-//    association_data.tech_level_id  = TYPE::TECHLEVEL::L1_ID;
+//    association_data.type_id        = type::TEXTURE::RADAR_EQUIPMENT_ID;
+//    association_data.race_id        = type::RACE::R0_ID;
+//    association_data.tech_level_id  = type::TECHLEVEL::L1_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);
@@ -2467,7 +2467,7 @@ void loadImages()
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 
 //    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = TYPE::TEXTURE::MODULE_ID;
+//    association_data.type_id = type::TEXTURE::MODULE_ID;
 //    textureOb->SetAssociation(association_data);
 
 //    TextureCollector::Instance().Add(textureOb);

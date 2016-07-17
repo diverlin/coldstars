@@ -33,7 +33,7 @@ Ring::~Ring()
  /* virtual override final */            
 void Ring::Render(const jeti::Renderer& render, const glm::vec3& center)
 {      
-    setCenter(center);
+    setPosition(center);
     //alpitodorender render.DrawMesh(mesh(), textureOb(), actualModelMatrix());
 }
 

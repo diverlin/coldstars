@@ -28,7 +28,7 @@
 
 class TurnTimer;
 
-class StarSystem;
+class Starsystem;
 class Star;
 class Planet;
 class BlackHole;
@@ -64,9 +64,9 @@ class Player /*: public Base*/
         Player(int);
         ~Player();
 
-        virtual void putChildrenToGarbage() const {};
+        virtual void putChildrenToGarbage() const {}
         
-        Show& GetShow() { return show; };
+        Show& GetShow() { return show; }
                               
         Npc* GetNpc() const { return npc; }
         Cursor& GetCursor() { return cursor; }
@@ -92,7 +92,7 @@ class Player /*: public Base*/
         Cursor cursor;
         
         Show show;  
-        StarSystem* starsystem;
+        Starsystem* starsystem;
         
         // VISIBLE ENTITY LIST
         std::vector<Star*>         visible_STAR_vec;
@@ -112,12 +112,12 @@ class Player /*: public Base*/
         std::vector<VerticalFlowText*>   visible_text_DAMAGE_vec;
         //  
     
-        void RenderInSpace(StarSystem*, bool, bool, bool); 
-            void RenderInSpace_NEW(jeti::Renderer&, StarSystem*);
+        void RenderInSpace(Starsystem*, bool, bool, bool);
+            void RenderInSpace_NEW(jeti::Renderer&, Starsystem*);
             void RenderCollisionRadius(const jeti::Renderer&) const;
             void RenderAxis(const jeti::Renderer&) const;
                                     
-        void SessionInSpace(StarSystem*, const TurnTimer&);
+        void SessionInSpace(Starsystem*, const TurnTimer&);
         void SessionInKosmoport();
         void SessionInNatureLand();
                     

@@ -34,8 +34,8 @@
 //#include <ai/Task.hpp>
 //#include <ai/StateMachine.hpp>
 
-//#include <items/equipment/ScanerEquipment.hpp>
-//#include <items/equipment/GrappleEquipment.hpp>
+//#include <item/equipment/ScanerEquipment.hpp>
+//#include <item/equipment/GrappleEquipment.hpp>
 
 //#include <parts/WeaponComplex.hpp>
 
@@ -121,7 +121,7 @@ void StarsystemRender::addIfVisible(jeti::BaseDrawable* ob)
 //void StarsystemRender::addIfVisible(Asteroid* asteroid)
 //{
 //    if (isObjectOnScreen(asteroid->center(), asteroid->size())) {
-////        if (isObjectWithinRange(npc->GetVehicle()->center(), asteroid->center(), radius)) {
+////        if (isObjectWithinRange(npc->vehicle()->center(), asteroid->center(), radius)) {
 //            visible_ASTEROID_vec.push_back(asteroid);
 //        }
 ////    }
@@ -130,7 +130,7 @@ void StarsystemRender::addIfVisible(jeti::BaseDrawable* ob)
 //void StarsystemRender::addIfVisible(Container* container)
 //{
 //    if (isObjectOnScreen(container->center(), container->size())) {
-////        if (isObjectWithinRange(npc->GetVehicle()->center(), container->center(), radius)) {
+////        if (isObjectWithinRange(npc->vehicle()->center(), container->center(), radius)) {
 //            visible_CONTAINER_vec.push_back(container);
 //        }
 ////    }
@@ -139,7 +139,7 @@ void StarsystemRender::addIfVisible(jeti::BaseDrawable* ob)
 //void StarsystemRender::addIfVisible(RocketBullet* rocket)
 //{
 //    if (isObjectOnScreen(rocket->center(), rocket->size())) {
-////        if (isObjectWithinRange(npc->GetVehicle()->center(), rocket->center(), radius)) {
+////        if (isObjectWithinRange(npc->vehicle()->center(), rocket->center(), radius)) {
 //            visible_ROCKET_vec.push_back(rocket);
 //        }
 ////    }
@@ -148,7 +148,7 @@ void StarsystemRender::addIfVisible(jeti::BaseDrawable* ob)
 //void StarsystemRender::addIfVisible(BlackHole* blackhole)
 //{
 //    if (isObjectOnScreen(blackhole->center(), blackhole->size())) {
-////        if (isObjectWithinRange(npc->GetVehicle()->center(), blackhole->center(), radius)) {
+////        if (isObjectWithinRange(npc->vehicle()->center(), blackhole->center(), radius)) {
 //            visible_BLACKHOLE_vec.push_back(blackhole);
 //        }
 ////    }
@@ -157,12 +157,12 @@ void StarsystemRender::addIfVisible(jeti::BaseDrawable* ob)
 //void StarsystemRender::addIfVisible(Vehicle* vehicle)
 //{
 //    //if (isObjectOnScreen(vehicle->center(), vehicle->size())) {
-//        //if (isObjectWithinRange(npc->GetVehicle()->center(), vehicle->center(), radius)) {
+//        //if (isObjectWithinRange(npc->vehicle()->center(), vehicle->center(), radius)) {
 //            switch(vehicle->subTypeId())
 //            {
-//                case TYPE::ENTITY::SHIP_ID:             {     visible_SHIP_vec.push_back((Ship*)vehicle); break; }
-//                case TYPE::ENTITY::SATELLITE_ID:        {     visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
-//                case TYPE::ENTITY::SPACESTATION_ID:     {     visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
+//                case type::entity::SHIP_ID:             {     visible_SHIP_vec.push_back((Ship*)vehicle); break; }
+//                case type::entity::SATELLITE_ID:        {     visible_SATELLITE_vec.push_back((Satellite*)vehicle); break; }
+//                case type::entity::SPACESTATION_ID:     {     visible_SPACESTATION_vec.push_back((SpaceStation*)vehicle); break; }
 //            }
 ////        }
 ////    }
@@ -171,7 +171,7 @@ void StarsystemRender::addIfVisible(jeti::BaseDrawable* ob)
 //void StarsystemRender::addIfVisible(ShockWaveEffect* effect)
 //{
 //    //if (isObjectOnScreen(effect->center(), 600)) {
-//        //if (isObjectWithinRadarRange(effect, npc->GetVehicle())) {
+//        //if (isObjectWithinRadarRange(effect, npc->vehicle())) {
 //            //visible_effect_SHOCKWAVE_vec.push_back(effect);
 //        //}
 //    //}
@@ -183,7 +183,7 @@ void StarsystemRender::addIfVisible(jeti::BaseDrawable* ob)
 //    bool r2 = isPointOnScreen(meti::vec2(effect->GetEndPos()));
 
 //    if (r1 || r2) {
-////        if (isObjectWithinRadarRange(effect, npc->GetVehicle())) {
+////        if (isObjectWithinRadarRange(effect, npc->vehicle())) {
 //            visible_effect_LAZERTRACE_vec.push_back(effect);
 //        }
 ////    }
@@ -192,7 +192,7 @@ void StarsystemRender::addIfVisible(jeti::BaseDrawable* ob)
 //void StarsystemRender::addIfVisible(jeti::BaseParticleSystem* effect)
 //{
 //    //if (isObjectOnScreen(effect->center(), 600)) {
-//        //if (isObjectWithinRadarRange(effect, npc->GetVehicle())) {
+//        //if (isObjectWithinRadarRange(effect, npc->vehicle())) {
 //            visible_effect_PARTICLESYSTEM_vec.push_back(effect);
 //        //}
 //    //}
@@ -207,7 +207,7 @@ void StarsystemRender::addIfVisible(jeti::BaseDrawable* ob)
 //    }
 //}
 
-void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
+void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
 {   
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -243,7 +243,7 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* sta
 
             // BLOOM background and star (uses many FBO)
             //resizeGl(w, h);
-            // alpitodorender render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->GetVehicle()->starsystem()->GetStar()->GetBrightThreshold());
+            // alpitodorender render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->vehicle()->starsystem()->GetStar()->GetBrightThreshold());
         }
 
         // VOLUMETRIC LIGHT to FBO1
@@ -400,7 +400,7 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* sta
         //resizeGl(w, h); 
             
       
-        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->GetVehicle()->center(), world_coord, 200 /*npc->GetVehicle()->GetProperties().radius*/);         
+        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->vehicle()->center(), world_coord, 200 /*npc->vehicle()->GetProperties().radius*/);         
        
         // render text
         //resizeGl(w*scale, h*scale); 
@@ -417,7 +417,7 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* sta
     //render.SetOrthogonalProjection(w, h); 
 }
     
-void StarsystemRender::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
+void StarsystemRender::RenderInSpace(Starsystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
     jeti::Renderer& renderer = jeti::Screen::get().GetRender();
     jeti::Camera& camera = jeti::Screen::get().GetCamera();
@@ -446,18 +446,18 @@ void StarsystemRender::RenderInSpace(StarSystem* starsystem, bool turn_ended, bo
                 //starsystem->DrawPath();
             }
             
-//            npc->GetVehicle()->GetComplexDrive().DrawPath(renderer);
-//            npc->GetVehicle()->GetComplexWeapon().RenderWeaponsRange();
-//            npc->GetVehicle()->GetComplexWeapon().RenderWeaponIcons();
+//            npc->vehicle()->GetComplexDrive().DrawPath(renderer);
+//            npc->vehicle()->GetComplexWeapon().RenderWeaponsRange();
+//            npc->vehicle()->GetComplexWeapon().RenderWeaponIcons();
         
             //if (show.GetRangeRadar() == true)
             {
-                //npc->GetVehicle()->RenderRadarRange();
+                //npc->vehicle()->RenderRadarRange();
             }
         
-            //if ( (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
+            //if ( (npc->vehicle()->GetSlotGrapple()->item() != nullptr) and (npc->vehicle()->GetSlotGrapple()->GetSelected() == true) )
             {
-                //npc->GetVehicle()->RenderGrappleRange();
+                //npc->vehicle()->RenderGrappleRange();
             }
         }
     

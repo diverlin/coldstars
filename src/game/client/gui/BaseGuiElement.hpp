@@ -36,17 +36,17 @@ class Renderer;
 class BaseGuiElement
 {
     public:
-        BaseGuiElement(TYPE::GUI type_id=TYPE::GUI::NONE_ID, TYPE::GUI subtype_id=TYPE::GUI::NONE_ID, const std::string& info="", jeti::TextureOb* textureOb=nullptr);
+        BaseGuiElement(type::GUI type_id=type::GUI::NONE_ID, type::GUI subtype_id=type::GUI::NONE_ID, const std::string& info="", jeti::TextureOb* textureOb=nullptr);
         virtual ~BaseGuiElement();
         
         void SetLabel(const std::string& label) { m_Label = label; }
         
         void SetTextureOb(jeti::TextureOb* textureOb) { m_TextureOb = textureOb; }
         
-        void setSize(glm::vec2 size) { m_Box.setSize(size); };
+        void setSize(glm::vec2 size) { m_Box.setSize(size); }
             
-        TYPE::GUI typeId() const { return m_Type_id; }
-        TYPE::GUI subTypeId() const { return m_Subtype_id; }
+        type::GUI typeId() const { return m_Type_id; }
+        type::GUI subTypeId() const { return m_Subtype_id; }
                     
         const ceti::Box2D& GetBox() const { return m_Box; }
         ceti::Box2D& GetBox() { return m_Box; } // !!!
@@ -58,7 +58,7 @@ class BaseGuiElement
         
         bool IsAnimationProgramActive() const { return (m_AnimationProgram != nullptr); }
 
-        BaseGuiElement* GetGuiElement(TYPE::GUI) const;                     
+        BaseGuiElement* GetGuiElement(type::GUI) const;
             
         BaseGuiElement* UpdateMouseInteraction(const glm::vec2&);
         
@@ -78,7 +78,7 @@ class BaseGuiElement
     protected:
         std::vector<BaseGuiElement*> m_Child_vec;
 
-        void setSubTypeId(TYPE::GUI subtype_id) { m_Subtype_id = subtype_id; }
+        void setSubTypeId(type::GUI subtype_id) { m_Subtype_id = subtype_id; }
         
         void SetBox(const ceti::Box2D& box) { m_Box = box; }
         
@@ -99,8 +99,8 @@ class BaseGuiElement
         bool GetAnimationProgramActive() const { return (m_AnimationProgram != nullptr); }
         void DeleteAnimationProgram();
         
-        void PressEventMBL_onGuiElement(TYPE::GUI, Player*);
-        void ResetStateEventOnGuiElement(TYPE::GUI);            
+        void PressEventMBL_onGuiElement(type::GUI, Player*);
+        void ResetStateEventOnGuiElement(type::GUI);
 
         void UpdateGeometry(const glm::vec2&, const glm::vec2&);    
         
@@ -111,8 +111,8 @@ class BaseGuiElement
         void RenderCommon(const jeti::Renderer&, Player*) const;
                           
     private: 
-        TYPE::GUI m_Type_id;
-        TYPE::GUI m_Subtype_id;
+        type::GUI m_Type_id;
+        type::GUI m_Subtype_id;
         
         jeti::TextureOb* m_TextureOb;
         
@@ -129,7 +129,7 @@ class BaseGuiElement
         glm::vec2 m_Offset;      
         jeti::AnimationEffect2D* m_AnimationProgram;
         
-        static std::map<TYPE::GUI, BaseGuiElement*> static_gui_element_map;
+        static std::map<type::GUI, BaseGuiElement*> static_gui_element_map;
 
         void SetOffset(const glm::vec2& offset) { m_Offset = offset; }    
         void SetOffset(float x, float y) { m_Offset.x = x; m_Offset.y = y; }

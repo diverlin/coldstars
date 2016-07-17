@@ -22,7 +22,7 @@
 
 namespace type
 {
-    enum class TEXTURE: int
+    enum class texture: int
     { 
         NONE_ID=0,
         
@@ -52,5 +52,5 @@ namespace type
     };
 } 
 
-std::string str(type::TEXTURE);
+std::string str(type::texture);
 

@@ -34,8 +34,8 @@
 #include <ai/Task.hpp>
 #include <ai/StateMachine.hpp>
 
-#include <items/equipment/ScanerEquipment.hpp>
-#include <items/equipment/GrappleEquipment.hpp>
+#include <item/equipment/ScanerEquipment.hpp>
+#include <item/equipment/GrappleEquipment.hpp>
 
 #include <parts/WeaponComplex.hpp>
 
@@ -74,7 +74,7 @@ npc(nullptr),
 starsystem(nullptr)     
 { 
 //    setId(id);
-//    setTypeId(TYPE::ENTITY::PLAYER_ID);
+//    setTypeId(type::entity::PLAYER_ID);
     
     GuiManager::Instance().SetPlayer(this);
 }
@@ -93,7 +93,7 @@ bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) cons
 {
     if (force_full_control == false)
     {
-        if (npc->GetVehicle()->id() == npc->GetScanTarget()->id())
+        if (npc->vehicle()->id() == npc->GetScanTarget()->id())
         {
             force_full_control = true;  
             // modify full control for friend ships         
@@ -105,7 +105,7 @@ bool Player::IsAbleToGetFullControlOnScanedVehicle(bool force_full_control) cons
           
 void Player::UpdatePostTransaction()
 {
-    switch (npc->GetVehicle()->placeTypeId())
+    switch (npc->vehicle()->placeTypeId())
     {
         case TYPE::PLACE::KOSMOPORT_ID:
         {
@@ -148,26 +148,26 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 {       
     if (starsystem == nullptr) //hack
     {
-        starsystem = npc->GetVehicle()->starsystem();
+        starsystem = npc->vehicle()->starsystem();
     }
     
-    if (starsystem->id() != npc->GetVehicle()->starsystem()->id())
+    if (starsystem->id() != npc->vehicle()->starsystem()->id())
     {
-        //jeti::Screen::get().InitiateScrollTo(npc->GetVehicle()->center());
-        //jeti::Screen::get().GetRect().setCenter(npc->GetVehicle()->center());
-        starsystem = npc->GetVehicle()->starsystem();
+        //jeti::Screen::get().InitiateScrollTo(npc->vehicle()->center());
+        //jeti::Screen::get().GetRect().setCenter(npc->vehicle()->center());
+        starsystem = npc->vehicle()->starsystem();
     }
     
-//    VEHICLE_SPECIAL_ACTION_TYPE action_id = npc->GetVehicle()->GetSpecialActionId();
+//    VEHICLE_SPECIAL_ACTION_TYPE action_id = npc->vehicle()->GetSpecialActionId();
 //    switch(action_id)
 //    {
         //case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPIN_ID:
         //{
-            //if (npc->GetVehicle()->placeTypeId() == ENTITY::SPACE_ID)
+            //if (npc->vehicle()->placeTypeId() == ENTITY::SPACE_ID)
             //{
                 //if (turn_timer.GetTurnEnded() == true)
                 //{
-                    //jeti::Screen::get().InitiateScrollTo(npc->GetVehicle()->center());
+                    //jeti::Screen::get().InitiateScrollTo(npc->vehicle()->center());
                 //}
             //}
             
@@ -176,7 +176,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
         
 //        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:
 //        {
-//            if (npc->GetVehicle()->placeTypeId() == TYPE::PLACE::HYPER_SPACE_ID)
+//            if (npc->vehicle()->placeTypeId() == TYPE::PLACE::HYPER_SPACE_ID)
 //            {
 //                if (turn_timer.GetTurnEnded() == true)
 //                {
@@ -189,11 +189,11 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 
 //        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:
 //        {
-//            if (npc->GetVehicle()->placeTypeId() == TYPE::PLACE::SPACE_ID)
+//            if (npc->vehicle()->placeTypeId() == TYPE::PLACE::SPACE_ID)
 //            {
 //                if (turn_timer.GetTurnEnded() == true)
 //                {
-//                    jeti::Screen::get().InitiateScrollTo(meti::vec2(npc->GetVehicle()->center()));
+//                    jeti::Screen::get().InitiateScrollTo(meti::vec2(npc->vehicle()->center()));
 //                    turn_timer.NextTurn();
 //                }
 //            }
@@ -205,7 +205,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 //        {
 //            if (turn_timer.GetTurnEnded() == true)
 //            {
-//                jeti::Screen::get().InitiateScrollTo(meti::vec2(npc->GetVehicle()->center()));
+//                jeti::Screen::get().InitiateScrollTo(meti::vec2(npc->vehicle()->center()));
 //                turn_timer.NextTurn();
 //            }
             
@@ -216,7 +216,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
     jeti::Screen::get().UpdateInSpace();
 }
              
-void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
+void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
 {   
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -252,7 +252,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
 
             // BLOOM background and star (uses many FBO)
             //resizeGl(w, h);
-            // alpitodorender render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->GetVehicle()->starsystem()->GetStar()->GetBrightThreshold());
+            // alpitodorender render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->vehicle()->starsystem()->GetStar()->GetBrightThreshold());
         }
 
         // VOLUMETRIC LIGHT to FBO1
@@ -409,7 +409,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
         //resizeGl(w, h); 
             
       
-        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->GetVehicle()->center(), world_coord, 200 /*npc->GetVehicle()->GetProperties().radius*/);         
+        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->vehicle()->center(), world_coord, 200 /*npc->vehicle()->GetProperties().radius*/);
        
         // render text
         //resizeGl(w*scale, h*scale); 
@@ -426,7 +426,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
     //render.SetOrthogonalProjection(w, h); 
 }
     
-void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
+void Player::RenderInSpace(Starsystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
     jeti::Renderer& renderer = jeti::Screen::get().GetRender();
     jeti::Camera& camera = jeti::Screen::get().GetCamera();
@@ -455,18 +455,18 @@ void Player::RenderInSpace(StarSystem* starsystem, bool turn_ended, bool forceDr
                 //starsystem->DrawPath();
             }
             
-//            npc->GetVehicle()->GetComplexDrive().DrawPath(renderer);
-//            npc->GetVehicle()->GetComplexWeapon().RenderWeaponsRange();
-//            npc->GetVehicle()->GetComplexWeapon().RenderWeaponIcons();
+//            npc->vehicle()->GetComplexDrive().DrawPath(renderer);
+//            npc->vehicle()->GetComplexWeapon().RenderWeaponsRange();
+//            npc->vehicle()->GetComplexWeapon().RenderWeaponIcons();
         
             if (show.GetRangeRadar() == true)
             {
-                //npc->GetVehicle()->RenderRadarRange();
+                //npc->vehicle()->RenderRadarRange();
             }
         
-            if ( (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
+            if ( (npc->vehicle()->GetSlotGrapple()->item() != nullptr) and (npc->vehicle()->GetSlotGrapple()->GetSelected() == true) )
             {
-                //npc->GetVehicle()->RenderGrappleRange();
+                //npc->vehicle()->RenderGrappleRange();
             }
         }
     
@@ -504,14 +504,14 @@ bool Player::MouseInteractionWithRockets(const MouseData& data_mouse)
        
 //            if (data_mouse.left_click == true)
 //            {
-//                if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
 //                {
-//                    npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_ROCKET_vec[i]);
+//                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_ROCKET_vec[i]);
 //                }
 //                else
 //                {
-//                    npc->GetVehicle()->GetComplexDrive().SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
-//                    npc->GetVehicle()->GetComplexDrive().UpdatePath();
+//                    npc->vehicle()->GetComplexDrive().SetTarget(visible_ROCKET_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
+//                    npc->vehicle()->GetComplexDrive().UpdatePath();
 //                }
 //            }
                 
@@ -534,22 +534,22 @@ bool Player::MouseInteractionWithContainers(const MouseData& data_mouse)
                             
             if (data_mouse.left_click == true)
             {                                  
-                //npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_CONTAINER_vec[i]);
+                //npc->vehicle()->GetComplexWeapon().SetTarget(visible_CONTAINER_vec[i]);
             }
             
             if (data_mouse.right_click == true)
             {
-//                if (npc->GetVehicle()->GetProperties().grab_radius > 0)
+//                if (npc->vehicle()->GetProperties().grab_radius > 0)
 //                {
-//                    if (npc->GetVehicle()->GetSlotGrapple()->CheckTarget(visible_CONTAINER_vec[i]) == STATUS::TARGET_OK)
+//                    if (npc->vehicle()->GetSlotGrapple()->CheckTarget(visible_CONTAINER_vec[i]) == STATUS::TARGET_OK)
 //                    {
-//                        if (npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->CheckIfTargetAlreadyExistInQueue(visible_CONTAINER_vec[i]) == false)
+//                        if (npc->vehicle()->GetSlotGrapple()->GetGrappleEquipment()->CheckIfTargetAlreadyExistInQueue(visible_CONTAINER_vec[i]) == false)
 //                        {
-//                            npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
+//                            npc->vehicle()->GetSlotGrapple()->GetGrappleEquipment()->AddTarget(visible_CONTAINER_vec[i]);
 //                        }
 //                        else
 //                        {
-//                            npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->RemoveTarget(visible_CONTAINER_vec[i]);
+//                            npc->vehicle()->GetSlotGrapple()->GetGrappleEquipment()->RemoveTarget(visible_CONTAINER_vec[i]);
 //                        }
 //                    }
 //                }
@@ -574,25 +574,25 @@ bool Player::MouseInteractionWithSatellites(const MouseData& data_mouse)
         
             if (data_mouse.left_click == true)
             {
-//                if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
 //                {
-//                    npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_SATELLITE_vec[i]);
+//                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_SATELLITE_vec[i]);
 //                }
 //                else
 //                {
-//                    npc->GetVehicle()->GetComplexDrive().SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
-//                    npc->GetVehicle()->GetComplexDrive().UpdatePath();
+//                    npc->vehicle()->GetComplexDrive().SetTarget(visible_SATELLITE_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);   // make it like a ai scenario (follow obj)
+//                    npc->vehicle()->GetComplexDrive().UpdatePath();
 //                }
             }
             
             if (data_mouse.right_click == true)
             {
-                if ( (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
+                if ( (npc->vehicle()->GetSlotGrapple()->item() != nullptr) and (npc->vehicle()->GetSlotGrapple()->GetSelected() == true) )
                 {
-                //if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
+                //if (pPLAYER->vehicle()->ableTo.GRAB == true)
                 //{
-                    //pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->add(visible_SATELLITE_vec[i]);
-                    //pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();                                   
+                    //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->add(visible_SATELLITE_vec[i]);
+                    //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();
                 //}
                 }
                 else
@@ -624,14 +624,14 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
         
 //            if (data_mouse.left_click == true)
 //            {
-//                if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
 //                {
-//                    npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_ASTEROID_vec[i]);
+//                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_ASTEROID_vec[i]);
 //                }
 //                else
 //                {
-//                    npc->GetVehicle()->GetComplexDrive().SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
-//                    npc->GetVehicle()->GetComplexDrive().UpdatePath();
+//                    npc->vehicle()->GetComplexDrive().SetTarget(visible_ASTEROID_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
+//                    npc->vehicle()->GetComplexDrive().UpdatePath();
 //                }
 //            }
                         
@@ -651,30 +651,30 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
         { 
             cursor.SetFocusedSpaceObject(visible_SHIP_vec[i]);    
         
-            if (npc->GetVehicle()->id() != visible_SHIP_vec[i]->id())
+            if (npc->vehicle()->id() != visible_SHIP_vec[i]->id())
             {
 //                if (data_mouse.left_click == true)
 //                {
-//                    if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//                    if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
 //                    {
-//                        npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_SHIP_vec[i]);
+//                        npc->vehicle()->GetComplexWeapon().SetTarget(visible_SHIP_vec[i]);
 //                    }
 //                    else
 //                    {
-//                        npc->GetVehicle()->GetComplexDrive().SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
-//                        npc->GetVehicle()->GetComplexDrive().UpdatePath();
+//                        npc->vehicle()->GetComplexDrive().SetTarget(visible_SHIP_vec[i], NAVIGATOR_ACTION::KEEP_MIDDLE_ID);
+//                        npc->vehicle()->GetComplexDrive().UpdatePath();
 //                    }
 //                }
 
                 if (data_mouse.right_click == true)
                 {
-                    if ( (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
+                    if ( (npc->vehicle()->GetSlotGrapple()->item() != nullptr) and (npc->vehicle()->GetSlotGrapple()->GetSelected() == true) )
                     {
-                        //if (npc->GetVehicle()->ableTo.GRAB == true)
+                        //if (npc->vehicle()->ableTo.GRAB == true)
                            //{
-                               //if (npc->GetVehicle()->GetSlotGrapple()->CheckTarget(visible_SHIP_vec[i]) == true)
+                               //if (npc->vehicle()->GetSlotGrapple()->CheckTarget(visible_SHIP_vec[i]) == true)
                                //{
-                                   //npc->GetVehicle()->GetSlotGrapple()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
+                                   //npc->vehicle()->GetSlotGrapple()->GetGrappleEquipment()->AddTarget(visible_SHIP_vec[i]);
                                //}                    
                            //}
                     }
@@ -730,26 +730,26 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
         
 //            if (data_mouse.left_click == true)
 //            {
-//                if (npc->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//                if (npc->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
 //                {
-//                    npc->GetVehicle()->GetComplexWeapon().SetTarget(visible_SPACESTATION_vec[i]);
+//                    npc->vehicle()->GetComplexWeapon().SetTarget(visible_SPACESTATION_vec[i]);
 //                }
 //                else
 //                {
 //                    Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_SPACESTATION_vec[i]->id());
 //                    npc->GetStateMachine().SetCurrentMicroTask(microtask);
-//                    npc->GetVehicle()->GetComplexDrive().UpdatePath();
+//                    npc->vehicle()->GetComplexDrive().UpdatePath();
 //                }
 //            }
 
             if (data_mouse.right_click == true)
             {
-                if ( (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
+                if ( (npc->vehicle()->GetSlotGrapple()->item() != nullptr) and (npc->vehicle()->GetSlotGrapple()->GetSelected() == true) )
                 {
-                    //if (pPLAYER->GetVehicle()->ableTo.GRAB == true)
+                    //if (pPLAYER->vehicle()->ableTo.GRAB == true)
                     //{
-                        //pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->add(visible_STARBASE_vec[i]);
-                        //pPLAYER->GetVehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();                                   
+                        //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->add(visible_STARBASE_vec[i]);
+                        //pPLAYER->vehicle()->grapple_slot.GetGrappleEquipment()->validationTargets();
                     //}
                 }
 //                else
@@ -782,7 +782,7 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
             {
                 Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_PLANET_vec[i]->id());
 //                npc->GetStateMachine().SetCurrentMicroTask(microtask);
-//                npc->GetVehicle()->GetComplexDrive().UpdatePath();
+//                npc->vehicle()->GetComplexDrive().UpdatePath();
             }   
         
             return true; 
@@ -813,11 +813,11 @@ void Player::MouseNavigation(const MouseData& data_mouse) const
     if (data_mouse.left_click == true)
     {
         ForceStateMachineReset();
-        //npc->GetVehicle()->GetComplexDrive().SetStaticTargetCoords(glm::vec3(data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, npc->GetVehicle()->center().z));
+        //npc->vehicle()->GetComplexDrive().SetStaticTargetCoords(glm::vec3(data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y, npc->vehicle()->center().z));
     }
 }
 
-void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
+void Player::SessionInSpace(Starsystem* starsystem, const TurnTimer& turn_timer)
 {    
 //    starsystem->FindRenderVisibleEntities_c(this);
 //    if (meti::getRandInt(1,5) == 1)
@@ -833,7 +833,7 @@ void Player::SessionInSpace(StarSystem* starsystem, const TurnTimer& turn_timer)
 //        BaseGuiElement* gui_element = GuiManager::Instance().GetGuiSpace().UpdateMouseInteraction(cursor.GetMouseData().pos_screencoord);
 //        if (gui_element == nullptr)
 //        {
-//            if ( (GuiManager::Instance().GetGuiVehicleScan()->GetVehicle() == nullptr) and (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr) )
+//            if ( (GuiManager::Instance().GetGuiVehicleScan()->vehicle() == nullptr) and (GuiManager::Instance().GetGuiGalaxyMap()->GetGalaxy() == nullptr) )
 //            {
 //                bool mouse_interaction = MouseInteractionWithSpaceObjectsInSpace(cursor.GetMouseData());
 //                if (mouse_interaction == false)
@@ -870,10 +870,10 @@ void Player::SessionInNatureLand()
 void Player::RunSession(const TurnTimer& turn_timer)
 {
     cursor.Reset();
-    switch(npc->GetVehicle()->placeTypeId())
+    switch(npc->vehicle()->placeTypeId())
     {
-        case TYPE::PLACE::SPACE_ID:         { SessionInSpace(npc->GetVehicle()->starsystem(), turn_timer); break; }
-        case TYPE::PLACE::HYPER_SPACE_ID:     { SessionInSpace((StarSystem*)npc->GetVehicle()->GetComplexDrive().GetTarget(), turn_timer); break; }
+        case TYPE::PLACE::SPACE_ID:         { SessionInSpace(npc->vehicle()->starsystem(), turn_timer); break; }
+        case TYPE::PLACE::HYPER_SPACE_ID:     { SessionInSpace((Starsystem*)npc->vehicle()->GetComplexDrive().GetTarget(), turn_timer); break; }
         case TYPE::PLACE::KOSMOPORT_ID:      { SessionInKosmoport(); break; }
         case TYPE::PLACE::NATURELAND_ID:      { SessionInNatureLand(); break; }
     }       
@@ -968,7 +968,7 @@ void Player::RenderAxis(const jeti::Renderer& render) const
 //void Player::ResolveData()
 //{
 //    BindNpc((Npc*)global::get().entitiesManager().GetEntityById(data_unresolved_player.npc_id));
-//    starsystem = (StarSystem*)global::get().entitiesManager().GetEntityById(data_unresolved_player.starsystem_id);
+//    starsystem = (Starsystem*)global::get().entitiesManager().GetEntityById(data_unresolved_player.starsystem_id);
 //    //jeti::Screen::get().SetBottomLeft(data_unresolved_player.screen_pos);
 //}
 

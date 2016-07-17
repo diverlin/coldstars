@@ -130,8 +130,8 @@ type::GUI getGuiItemSlotType(type::entity val)
         case type::entity::ARTEFACT_SLOT4_ID:  { return type::GUI::ARTEFACT_SLOT4_ID; break; }
 
         case type::entity::GATE_SLOT_ID:   { return type::GUI::GATE_SLOT_ID; break; }
-        //case TYPE::ENTITY::REPAIR_SLOT_ID:   { return TYPE::GUI::REPAIR_SLOT_ID; break; }
-        //case TYPE::ENTITY::CHARGE_SLOT_ID:   { return TYPE::GUI::CHARGE_SLOT_ID; break; }
+        //case type::entity::REPAIR_SLOT_ID:   { return TYPE::GUI::REPAIR_SLOT_ID; break; }
+        //case type::entity::CHARGE_SLOT_ID:   { return TYPE::GUI::CHARGE_SLOT_ID; break; }
     }
 
     return type::GUI::NONE_ID;

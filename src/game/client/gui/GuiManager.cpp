@@ -29,7 +29,7 @@
 #include <jeti/Screen.hpp>
 #include <jeti/Render.hpp>
 #include <parts/WeaponComplex.hpp>
-#include <items/BaseItem.hpp>
+#include <item/BaseItem.hpp>
 
 #include <pilots/Npc.hpp>
 #include <pilots/Player.hpp>
@@ -95,7 +95,7 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
     //if ( (interaction == true) and (gui_vehicle_scan->GetAllowFullControl() == true) )
     //{
         //interaction = gui_skills->UpdateMouseInteraction(data_mouse.pos_screencoord);
-        //gui_skills->ButtonsAction(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());
+        //gui_skills->ButtonsAction(gui_vehicle_scan->vehicle()->GetOwnerNpc()->GetSkills());
     //}
 
     //return interaction;
@@ -104,27 +104,27 @@ bool GuiManager::UpdateMouseInteractionWithScanVehicle(const MouseData& data_mou
 
 void GuiManager::RenderScanVehicle(const MouseData& data_mouse, bool show_skill) const
 {    
-    //if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
+    //if (player->GetCursor().GetItemSlot()->item() != nullptr)
     {
-        //gui_vehicle_scan->RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId());
-        //player->GetCursor().GetItemSlot()->GetItem()->Render(player->GetCursor().GetRect(), glm::vec2(0, 0));        
+        //gui_vehicle_scan->RenderVehicle(data_mouse, player->GetCursor().GetItemSlot()->item()->GetParentSubTypeId());
+        //player->GetCursor().GetItemSlot()->item()->Render(player->GetCursor().GetRect(), glm::vec2(0, 0));
     }
     //else
     {
         //gui_vehicle_scan->RenderVehicle(data_mouse);
     }
                     
-    //if ( (show_skill == true) and (gui_vehicle_scan->GetVehicle()->GetOwnerNpc() != nullptr) )
+    //if ( (show_skill == true) and (gui_vehicle_scan->vehicle()->GetOwnerNpc() != nullptr) )
     {
         //gui_skills->RenderButtons();
-        //gui_skills->RenderSkills(gui_vehicle_scan->GetVehicle()->GetOwnerNpc()->GetSkills());
+        //gui_skills->RenderSkills(gui_vehicle_scan->vehicle()->GetOwnerNpc()->GetSkills());
         //gui_skills->RenderFocusedButtonInfo(data_mouse);
     }                                        
 }
 
 void GuiManager::EnterGuiKosmoport()
 {
-    //gui_kosmoport.BindKosmoport((Kosmoport*)player->GetNpc()->GetVehicle()->GetLand());
+    //gui_kosmoport.BindKosmoport((Kosmoport*)player->GetNpc()->vehicle()->GetLand());
     //gui_kosmoport.BindSharedGuis(gui_galaxymap, gui_vehicle_scan, gui_skills, slider);
 }
         
@@ -146,10 +146,10 @@ void GuiManager::ExitGuiSpace()
              
 void GuiManager::UpdateSessionInSpace()
 {
-    GuiVehicle* gui_scan_vehicle     = (GuiVehicle*)GetGuiElement(TYPE::GUI::SCAN_VEHICLE_ID);     
-    GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)GetGuiElement(TYPE::GUI::PLAYER_VEHICLE_ID);
-    GuiRadar* gui_radar             = (GuiRadar*)GetGuiElement(TYPE::GUI::GUI_RADAR_ID);
-    GuiGalaxyMap* gui_galaxymap     = (GuiGalaxyMap*)GetGuiElement(TYPE::GUI::GALAXYMAP_ID);
+    GuiVehicle* gui_scan_vehicle     = (GuiVehicle*)GetGuiElement(type::GUI::SCAN_VEHICLE_ID);
+    GuiVehicle2* gui_player_vehicle = (GuiVehicle2*)GetGuiElement(type::GUI::PLAYER_VEHICLE_ID);
+    GuiRadar* gui_radar             = (GuiRadar*)GetGuiElement(type::GUI::GUI_RADAR_ID);
+    GuiGalaxyMap* gui_galaxymap     = (GuiGalaxyMap*)GetGuiElement(type::GUI::GALAXYMAP_ID);
 
     assert(gui_scan_vehicle);
     assert(gui_player_vehicle);
@@ -160,9 +160,9 @@ void GuiManager::UpdateSessionInSpace()
       
     if (scan_target != nullptr)
     {       
-        if (gui_scan_vehicle->GetVehicle() == nullptr)
+        if (gui_scan_vehicle->vehicle() == nullptr)
         {               
-            if (scan_target->typeId() == TYPE::ENTITY::VEHICLE_ID)
+            if (scan_target->typeId() == type::entity::VEHICLE_ID)
             {
                 gui_scan_vehicle->BindVehicle((Vehicle*)scan_target, /*offset=*/glm::vec2(0, 0), /*full_control_on*/true);
                 gui_scan_vehicle->Show();  
@@ -181,7 +181,7 @@ void GuiManager::UpdateSessionInSpace()
         gui_radar->Show();        
     }
 
-    BaseGuiElement* button = GetGuiElement(TYPE::GUI::BUTTON_GALAXYMAP_ID);
+    BaseGuiElement* button = GetGuiElement(type::GUI::BUTTON_GALAXYMAP_ID);
     if (button->GetPressed())
     {
         //player->GetNpc()->ResetScanTarget();
@@ -222,7 +222,7 @@ void GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
     //gui_kosmoport.ButtonsAction();
     
                                     
-    NatureLand* natureland = (NatureLand*)player->GetNpc()->GetVehicle()->GetLand();
+    NatureLand* natureland = (NatureLand*)player->GetNpc()->vehicle()->GetLand();
     gui_natureland.BindNatureLand(natureland);
 
     //update  
@@ -247,17 +247,17 @@ void GuiManager::RunSessionInNatureLand(const MouseData& data_mouse)
 }
 
 
-void GuiManager::PressEventMBL_onGuiElement(TYPE::GUI subtype_id)
+void GuiManager::PressEventMBL_onGuiElement(type::GUI subtype_id)
 {
     gui_space.PressEventMBL_onGuiElement(subtype_id, player); 
 }    
 
-void GuiManager::ResetEventOnGuiElement(TYPE::GUI subtype_id)
+void GuiManager::ResetEventOnGuiElement(type::GUI subtype_id)
 {
     gui_space.ResetStateEventOnGuiElement(subtype_id);
 }    
 
-BaseGuiElement* GuiManager::GetGuiElement(TYPE::GUI request_subtype_id) const
+BaseGuiElement* GuiManager::GetGuiElement(type::GUI request_subtype_id) const
 {
     return gui_space.GetGuiElement(request_subtype_id);
 }

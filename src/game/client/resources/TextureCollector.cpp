@@ -52,7 +52,7 @@ void TextureCollector::add(jeti::TextureOb* texture, const TextureDescriptor& de
         m_idsTextures.insert(std::make_pair(texture->id(), std::make_pair(descriptor, texture)));
         m_typesTextures[descriptor.type_id].push_back(std::make_pair( descriptor, texture));
     } else {
-        Logger::Instance().error("texture id=" + std::to_string(texture->id()) + "already exist");
+        //Logger::Instance().error("texture id=" + std::to_string(texture->id()) + "already exist");
     }
 }
 
@@ -77,18 +77,18 @@ jeti::TextureOb* TextureCollector::getTextureById(int id)
     return requested;
 }
 
-jeti::TextureOb* TextureCollector::getTextureByTypeId(TYPE::TEXTURE type_id)
+jeti::TextureOb* TextureCollector::getTextureByTypeId(type::texture type_id)
 {
     jeti::TextureOb* requested = nullptr;
     if (hasTypeId(type_id)) {
-        requested = meti::getRandomElement(m_typesTextures[type_id]).second;
+        requested = meti::getRand(m_typesTextures[type_id]).second;
     }
 
     _validate(requested);
     return requested;
 }
 
-jeti::TextureOb* TextureCollector::getTextureByColorId(TYPE::TEXTURE type_id, int color_id)
+jeti::TextureOb* TextureCollector::getTextureByColorId(type::texture type_id, int color_id)
 {
     jeti::TextureOb* requested = nullptr;
     if (hasTypeId(type_id)) {
@@ -104,7 +104,7 @@ jeti::TextureOb* TextureCollector::getTextureByColorId(TYPE::TEXTURE type_id, in
     return requested;
 }
 
-jeti::TextureOb* TextureCollector::getTextureByRaceId(TYPE::TEXTURE type_id, TYPE::RACE race_id)
+jeti::TextureOb* TextureCollector::getTextureByRaceId(type::texture type_id, type::race race_id)
 {
     jeti::TextureOb* requested = nullptr;
     if (hasTypeId(type_id)) {
@@ -133,7 +133,7 @@ jeti::TextureOb* TextureCollector::getTextureByDescriptor(const TextureDescripto
     }
 
     if (!ids.empty()) {
-        int id = meti::getRandomElement(ids);
+        int id = meti::getRand(ids);
         requested = getTextureById(id);
     }
 
@@ -153,17 +153,17 @@ bool TextureCollector::hasId(int id) const
     if (m_idsTextures.find(id) != m_idsTextures.end()) {
         return true;
     } else {
-        Logger::Instance().warn("TextureCollector has no id="+std::to_string(id));
+        //Logger::Instance().warn("TextureCollector has no id="+std::to_string(id));
         return false;
     }
 }
 
-bool TextureCollector::hasTypeId(TYPE::TEXTURE type_id) const
+bool TextureCollector::hasTypeId(type::texture type_id) const
 {
     if (m_typesTextures.find(type_id) != m_typesTextures.end()) {
         return true;
     } else {
-        Logger::Instance().warn("TextureCollector has no type_id="+getStr(type_id));
+        //Logger::Instance().warn("TextureCollector has no type_id="+getStr(type_id));
         return false;
     }
 }

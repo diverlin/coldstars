@@ -21,7 +21,7 @@
 #include <common/Global.hpp>
 #include <jeti/Config.hpp>
 #include <slots/ItemSlot.hpp>
-#include <items/BaseItem.hpp>
+#include <item/BaseItem.hpp>
 #include "../resources/GuiTextureObCollector.hpp"
 #include "../pilots/Player.hpp"
 #include <math/rand.hpp>
@@ -72,8 +72,8 @@ void GuiNatureLand::BindNatureLand(NatureLand* natureland)
 
     for (unsigned int i=0; i<natureland->item_slot_vec.size(); i++)
     {
-        ceti::Rect _rect(natureland->item_slot_vec[i]->GetPosition().x/100.f*(screen_w - GUI::ITEMSLOT::WIDTH_FOR_ANGAR),
-                   natureland->item_slot_vec[i]->GetPosition().y/100.f*(screen_h - GUI::ITEMSLOT::HEIGHT_FOR_ANGAR),
+        ceti::Rect _rect(natureland->item_slot_vec[i]->position().x/100.f*(screen_w - GUI::ITEMSLOT::WIDTH_FOR_ANGAR),
+                   natureland->item_slot_vec[i]->position().y/100.f*(screen_h - GUI::ITEMSLOT::HEIGHT_FOR_ANGAR),
                    GUI::ITEMSLOT::WIDTH_FOR_ANGAR, GUI::ITEMSLOT::HEIGHT_FOR_ANGAR);
         rect_itemslot_vec.push_back(GuiPair<ceti::Rect, ItemSlot*>(_rect, natureland->item_slot_vec[i]));
     }
@@ -89,7 +89,7 @@ void GuiNatureLand::ButtonsAction() const
             //{                   
                    //case GUI::BUTTON::GETLAUNCH_ID:
                    //{                          
-                           //player->GetNpc()->GetVehicle()->LaunchingEvent();
+                           //player->GetNpc()->vehicle()->LaunchingEvent();
                               //return; 
                                                                
                               //break;
@@ -103,14 +103,14 @@ bool GuiNatureLand::UpdateMouseInteractionWithEquipedItemSlots(const MouseData& 
 {
            //for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
            //{
-        //BaseItem* item = rect_itemslot_vec[i].second->GetItem();
+        //BaseItem* item = rect_itemslot_vec[i].second->item();
         //if (item != nullptr)
         //{     
                     //if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y) == true)
                     //{    
                         //if (data_mouse.left_click == true)
                             //{
-                                //m_Player->GetNpc()->GetVehicle()->AddItemToCargoSlot(item);
+                                //m_Player->GetNpc()->vehicle()->AddItemToCargoSlot(item);
                             //}
                      
                            //m_Player->GetCursor().SetFocusedObject(item);
@@ -133,7 +133,7 @@ void GuiNatureLand::RenderEquipedItemSlots() const
         //glTranslatef(GetGuiOffset().x, GetGuiOffset().y, 0);
             //for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
             //{
-                //if (rect_itemslot_vec[i].second->GetItem() != nullptr)
+                //if (rect_itemslot_vec[i].second->item() != nullptr)
                 //{
                         //rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetGuiOffset());
                 //}

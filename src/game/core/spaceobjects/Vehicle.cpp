@@ -50,8 +50,8 @@
 #include <item/equipment/Grapple.hpp>
 #include <item/others/GoodsPack.hpp>
 #ifdef USE_ARTEFACTS
-#include <items/artefacts/GravityArtefact.hpp>
-#include <items/artefacts/ProtectorArtefact.hpp>
+#include <item/artefacts/GravityArtefact.hpp>
+#include <item/artefacts/ProtectorArtefact.hpp>
 #endif
 
 //#include <effects/Shield.hpp>
@@ -209,8 +209,8 @@ void Vehicle::addItemSlot(ItemSlot* slot)
     case type::entity::RADAR_SLOT_ID:     { m_radarSlot  = slot; break; }
     case type::entity::SCANER_SLOT_ID:    { m_scanerSlot = slot; break; }
 #ifdef USE_EXTRA_EQUIPMENT
-    case TYPE::ENTITY::ENERGIZER_SLOT_ID: { m_energizerSlot = slot; break; }
-    case TYPE::ENTITY::FREEZER_SLOT_ID:   { m_freezerSlot   = slot; break; }
+    case type::entity::ENERGIZER_SLOT_ID: { m_energizerSlot = slot; break; }
+    case type::entity::FREEZER_SLOT_ID:   { m_freezerSlot   = slot; break; }
 #endif // USE_EXTRA_EQUIPMENT
     case type::entity::GRAPPLE_SLOT_ID:   { m_grappleSlot   = slot; break; }
     case type::entity::DROID_SLOT_ID:     { m_droidSlot     = slot; break; }
@@ -251,10 +251,10 @@ bool Vehicle::_installItem(item::Base* item)
     switch(item->type()) {
     case type::entity::EQUIPMENT_ID:    { return _installEquipment(item); break; }
 #ifdef USE_MODULES
-    case TYPE::ENTITY::MODULE_ID:       { return _installModule(item); break; }
+    case type::entity::MODULE_ID:       { return _installModule(item); break; }
 #endif
 #ifdef USE_ARTEFACTS
-    case TYPE::ENTITY::ARTEFACT_ID:     { return _installArtefact(item); break; }
+    case type::entity::ARTEFACT_ID:     { return _installArtefact(item); break; }
 #endif
     case type::entity::GOODS_ID:        { return _installGoodsPack(item); break; } // what??
     }
@@ -282,10 +282,10 @@ bool Vehicle::checkManage(const core::Ident& ident)
     switch(ident.type) {
     case type::entity::EQUIPMENT_ID:    { return _checkInstallEquipment(ident); break; }
 //#ifdef USE_MODULES
-//    case TYPE::ENTITY::MODULE_ID:       { return _checkInstallModule(type); break; }
+//    case type::entity::MODULE_ID:       { return _checkInstallModule(type); break; }
 //#endif
 //#ifdef USE_ARTEFACTS
-//    case TYPE::ENTITY::ARTEFACT_ID:     { return _checkInstallArtefact(type); break; }
+//    case type::entity::ARTEFACT_ID:     { return _checkInstallArtefact(type); break; }
 //#endif
 //    case type::entity::GOODS_ID:        { return _checkInstallGoodsPack(type); break; }
     }
@@ -673,7 +673,7 @@ void Vehicle::LaunchingEvent()
     {
         switch(m_parentVehicleSlot->owner()->typeId())
         {
-        case TYPE::ENTITY::ANGAR_ID:
+        case type::entity::ANGAR_ID:
         {
             int angleInD = meti::getRandInt(360);
             glm::vec2 offset_pos = meti::getRandVec2f(40, 100);
@@ -685,7 +685,7 @@ void Vehicle::LaunchingEvent()
             break;
         }
 
-        case TYPE::ENTITY::VEHICLE_ID:
+        case type::entity::VEHICLE_ID:
         {
             //..
             break;
@@ -1114,13 +1114,13 @@ void Vehicle::_updateArtefactInfluence()
             {
                 switch(m_SlotArtef_vec[i]->item()->subTypeId())
                 {
-                case TYPE::ENTITY::GRAVITY_ARTEFACT_ID:
+                case type::entity::GRAVITY_ARTEFACT_ID:
                 {
                     m_properties.artefact_gravity += ((GravityArtefact*)m_SlotArtef_vec[i]->item())->GetGravity();
                     break;
                 }
 
-                case TYPE::ENTITY::PROTECTOR_ARTEFACT_ID:
+                case type::entity::PROTECTOR_ARTEFACT_ID:
                 {
                     m_properties.artefact_protection += ((ProtectorArtefact*)m_SlotArtef_vec[i]->item())->GetProtection();
                     break;

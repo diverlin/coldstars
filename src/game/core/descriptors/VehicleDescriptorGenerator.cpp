@@ -32,15 +32,15 @@
 //VehicleDescriptor generateVehicleDescriptor()
 //{
 //    TYPE::RACE race_id = meti::getRand(global::get().raceDescriptors().getRaces(TYPE::KIND::GOOD));
-//    TYPE::ENTITY type_id = TYPE::ENTITY::WARRIOR_ID;
+//    type::entity type_id = type::entity::WARRIOR_ID;
 //    int size_id = meti::getRandInt(1, 9);
 //    int weapons_num = size_id;
 
 //    float protection_rate = 1;
 //    float otsec_rate      = 1;
 //    switch (type_id) {
-//        case TYPE::ENTITY::WARRIOR_ID: { protection_rate = 2; break; }
-//        case TYPE::ENTITY::TRADER_ID:  { otsec_rate = 1.5; break; }
+//        case type::entity::WARRIOR_ID: { protection_rate = 2; break; }
+//        case type::entity::TRADER_ID:  { otsec_rate = 1.5; break; }
 //    }
 
 //    VehicleDescriptor descriptor;

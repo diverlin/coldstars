@@ -51,12 +51,12 @@ void GoodsPack::addUniqueInfo()
 //    info.addTitleStr("GOODS");
 //    switch(subTypeId())
 //    {
-//        case TYPE::ENTITY::MINERALS_ID:     { info.addNameStr("mineral:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case TYPE::ENTITY::FOOD_ID:         { info.addNameStr("food:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case TYPE::ENTITY::MEDICINE_ID:     { info.addNameStr("medicine:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case TYPE::ENTITY::MILITARY_ID:     { info.addNameStr("military:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case TYPE::ENTITY::DRUG_ID:         { info.addNameStr("drug:"); info.addValueStr(std::to_string(data_item.mass)); break; }
-//        case TYPE::ENTITY::EXCLUSIVE_ID:     { info.addNameStr("exclusive:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case type::entity::MINERALS_ID:     { info.addNameStr("mineral:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case type::entity::FOOD_ID:         { info.addNameStr("food:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case type::entity::MEDICINE_ID:     { info.addNameStr("medicine:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case type::entity::MILITARY_ID:     { info.addNameStr("military:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case type::entity::DRUG_ID:         { info.addNameStr("drug:"); info.addValueStr(std::to_string(data_item.mass)); break; }
+//        case type::entity::EXCLUSIVE_ID:     { info.addNameStr("exclusive:"); info.addValueStr(std::to_string(data_item.mass)); break; }
         
 //        default: { info.addNameStr("UNKNOWN:"); info.addValueStr("fix the bug"); break; }
 //    }

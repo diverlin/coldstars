@@ -21,7 +21,7 @@
 #include "../resources/GuiTextureObCollector.hpp"
 #include <dock/Kosmoport.hpp>
 #include <jeti/Render.hpp>
-#include <items/BaseItem.hpp>
+#include <item/BaseItem.hpp>
 #include <slots/ItemSlot.hpp>
 //#include <ceti/StringUtils.hpp>
 #include <common/common.hpp>
@@ -34,7 +34,7 @@
          
 GuiVehicle::GuiVehicle()
 :
-BaseGuiElement(TYPE::GUI::SCAN_VEHICLE_ID, TYPE::GUI::SCAN_VEHICLE_ID),
+BaseGuiElement(type::GUI::SCAN_VEHICLE_ID, type::GUI::SCAN_VEHICLE_ID),
 m_Vehicle(nullptr)
 {   
     int weapon_slot_max   = SLOT_WEAPON_TYPES.size();
@@ -56,7 +56,7 @@ m_Vehicle(nullptr)
     
     /** EQUIPMENT SLOTS */
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::RADAR_SLOT_ID), "ENTITY::RADAR_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(type::entity::RADAR_SLOT_ID), "ENTITY::RADAR_SLOT_ID");
         
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -66,7 +66,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::SCANER_SLOT_ID), "ENTITY::SCANER_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(type::entity::SCANER_SLOT_ID), "ENTITY::SCANER_SLOT_ID");
 
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -76,7 +76,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::ENERGIZER_SLOT_ID), "ENTITY::ENERGIZER_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(type::entity::ENERGIZER_SLOT_ID), "ENTITY::ENERGIZER_SLOT_ID");
 
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -86,7 +86,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::GRAPPLE_SLOT_ID), "ENTITY::GRAPPLE_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(type::entity::GRAPPLE_SLOT_ID), "ENTITY::GRAPPLE_SLOT_ID");
 
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -96,7 +96,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::DROID_SLOT_ID), "ENTITY::DROID_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(type::entity::DROID_SLOT_ID), "ENTITY::DROID_SLOT_ID");
 
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -106,7 +106,7 @@ m_Vehicle(nullptr)
     }
 
     //{
-        //ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(TYPE::ENTITY::FREEZER_SLOT_ID), "ENTITY::FREEZER_SLOT_ID");
+        //ButtonItemSlot* button = new ButtonItemSlot(GUI::getEquivalent(type::entity::FREEZER_SLOT_ID), "ENTITY::FREEZER_SLOT_ID");
 
         //glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         //button->setSize(size);
@@ -116,7 +116,7 @@ m_Vehicle(nullptr)
     //}
                 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::PROTECTOR_SLOT_ID), "ENTITY::PROTECTOR_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(type::entity::PROTECTOR_SLOT_ID), "ENTITY::PROTECTOR_SLOT_ID");
 
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -126,7 +126,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::DRIVE_SLOT_ID), "ENTITY::DRIVE_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(type::entity::DRIVE_SLOT_ID), "ENTITY::DRIVE_SLOT_ID");
 
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -136,7 +136,7 @@ m_Vehicle(nullptr)
     }
 
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::BAK_SLOT_ID), "ENTITY::BAK_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(type::entity::BAK_SLOT_ID), "ENTITY::BAK_SLOT_ID");
 
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -175,7 +175,7 @@ m_Vehicle(nullptr)
         
     /** GATE SLOT */
     {
-        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(TYPE::ENTITY::GATE_SLOT_ID), "ENTITY::GATE_SLOT_ID");
+        ButtonItemSlot* button = new ButtonItemSlot(getGuiItemSlotType(type::entity::GATE_SLOT_ID), "ENTITY::GATE_SLOT_ID");
         
         glm::vec2 size(GUI::ITEMSLOT::WIDTH_FOR_SHIP, GUI::ITEMSLOT::HEIGHT_FOR_SHIP);
         button->setSize(size);
@@ -225,12 +225,12 @@ void GuiVehicle::CreateKorpusGui(Vehicle* vehicle, float scale)
   
 void GuiVehicle::CreateItemSlotsGeometry(Vehicle* vehicle, float scale)
 {
-    for (const auto itemslot : vehicle->m_SlotTotal_vec)
+    for (const auto itemslot : vehicle->m_slots)
     { 
-        TYPE::ENTITY request_type = itemslot->subTypeId();
-        if ((request_type == TYPE::ENTITY::WEAPON_SLOT_ID) or (request_type == TYPE::ENTITY::CARGO_SLOT_ID) or (request_type == TYPE::ENTITY::ARTEFACT_SLOT_ID))
+        type::entity request_type = itemslot->subtype();
+        if ((request_type == type::entity::WEAPON_SLOT_ID) || (request_type == type::entity::CARGO_SLOT_ID) or (request_type == type::entity::ARTEFACT_SLOT_ID))
         {
-            request_type = itemslot->subSubTypeId(); 
+            request_type = itemslot->subsubtype();
         }         
     
         BaseGuiElement* child = GetGuiElement(getGuiItemSlotType(request_type));
@@ -249,9 +249,9 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
     { 
         if (gui_itemslot_vec[i].GetBox().CheckInteraction(data_mouse.pos_screencoord) == true)
         {  
-            if ( (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr) and (m_Player->GetCursor().GetItemSlot()->GetItem() == nullptr) )
+            if ( (gui_itemslot_vec[i].GetItemSlot()->item() != nullptr) and (m_Player->GetCursor().GetItemSlot()->item() == nullptr) )
             {
-                m_Player->GetCursor().SetFocusedObject(gui_itemslot_vec[i].GetItemSlot()->GetItem());
+                m_Player->GetCursor().SetFocusedObject(gui_itemslot_vec[i].GetItemSlot()->item());
             }
                         
             if ( (data_mouse.left_click == true) and (allow_full_control == true) )
@@ -262,15 +262,15 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
                 }
                 else
                 {
-                    if (m_Player->GetCursor().GetItemSlot()->GetItem() != nullptr)
+                    if (m_Player->GetCursor().GetItemSlot()->item() != nullptr)
                     {
-                        if (m_Player->GetNpc()->GetVehicle()->placeTypeId() == ENTITY::SPACE_ID)
+                        if (m_Player->GetNpc()->vehicle()->placeTypeId() == ENTITY::SPACE_ID)
                         {
-                            m_Player->GetCursor().GetItemSlot()->DropItemToSpace(m_Player->GetNpc()->GetVehicle());
+                            m_Player->GetCursor().GetItemSlot()->DropItemToSpace(m_Player->GetNpc()->vehicle());
                         }
                         else
                         {
-                            m_Player->GetNpc()->GetVehicle()->SellItem(m_Player->GetCursor().GetItemSlot()->GetItem());
+                            m_Player->GetNpc()->vehicle()->SellItem(m_Player->GetCursor().GetItemSlot()->item());
                         }
                     }    
                 }
@@ -282,18 +282,18 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
                 {
                     case 1:
                     {
-                        if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr)
+                        if (gui_itemslot_vec[i].GetItemSlot()->item() != nullptr)
                         {
                             if (data_mouse.right_click == true)
                             {
                                 std::cout<<"DEBUG ACTION in GuiVehicle::UpdateMouseInteractionInSpace, ItemLOck testing"<<std::endl;
-                                if (gui_itemslot_vec[i].GetItemSlot()->GetItem()->GetFunctioning() == true)
+                                if (gui_itemslot_vec[i].GetItemSlot()->item()->GetFunctioning() == true)
                                 {
-                                    gui_itemslot_vec[i].GetItemSlot()->GetItem()->LockEvent(2);
+                                    gui_itemslot_vec[i].GetItemSlot()->item()->LockEvent(2);
                                 }
                                 else
                                 {
-                                    gui_itemslot_vec[i].GetItemSlot()->GetItem()->LockEvent(0);
+                                    gui_itemslot_vec[i].GetItemSlot()->item()->LockEvent(0);
                                 }
                             }
                         }
@@ -303,18 +303,18 @@ bool GuiVehicle::UpdateMouseInteraction(const MouseData& data_mouse)
                     
                     case 2:
                     {                        
-                        if (gui_itemslot_vec[i].GetItemSlot()->GetItem() != nullptr)
+                        if (gui_itemslot_vec[i].GetItemSlot()->item() != nullptr)
                         {
                             if (data_mouse.right_click == true)
                             {
                                 std::cout<<"DEBUG ACTION in GuiVehicle::UpdateMouseInteractionInSpace, Item Damage testing"<<std::endl;
-                                if (gui_itemslot_vec[i].GetItemSlot()->GetItem()->GetFunctioning() == true)
+                                if (gui_itemslot_vec[i].GetItemSlot()->item()->GetFunctioning() == true)
                                 {
-                                    gui_itemslot_vec[i].GetItemSlot()->GetItem()->SetCondition(0);
+                                    gui_itemslot_vec[i].GetItemSlot()->item()->SetCondition(0);
                                 }
                                 else
                                 {
-                                    gui_itemslot_vec[i].GetItemSlot()->GetItem()->SetCondition(1000);
+                                    gui_itemslot_vec[i].GetItemSlot()->item()->SetCondition(1000);
                                 }
                             }
                         }

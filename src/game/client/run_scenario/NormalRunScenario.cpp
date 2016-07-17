@@ -35,7 +35,7 @@
 #include <spaceobjects/Planet.hpp>
 #include <dock/Land.hpp>
 
-#include <struct/GalaxyDescriptor.hpp>
+#include <descriptors/GalaxyDescriptor.hpp>
 
 
 /* virtual */
@@ -79,16 +79,16 @@ void NormalRunScenario::Init(Player* player)
 //    }
     
 //    bool player2space = true;
-//    StarSystem* const starsystem = galaxy->GetRandomSector()->GetRandomStarSystem();
+//    Starsystem* const starsystem = galaxy->GetRandomSector()->GetRandomStarSystem();
 //    if (player2space == true)
 //    {
 //        glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
 //        glm::vec3 angle(0,0,0);
-//        starsystem->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
+//        starsystem->AddVehicle(player->GetNpc()->vehicle(), center, angle, nullptr);
 //    }
 //    else
 //    {
-//        starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
+//        starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->vehicle());
 //    }
 
 //    God::Instance().CreateShips(starsystem, /*ships_num=*/20, TYPE::RACE::R0_ID);   // fake

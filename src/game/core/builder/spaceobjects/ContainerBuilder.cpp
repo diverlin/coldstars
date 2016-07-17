@@ -89,7 +89,7 @@ ContainerBuilder::__getNewTemplate()
 //Container* ContainerBuilder::create(int mineral_ammount) const
 //{
 //    //jeti::TextureOb* textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::MINERAL_ID);
-//    GoodsPack* goods_pack = GetNewGoodsPack(TYPE::ENTITY::MINERALS_ID);
+//    GoodsPack* goods_pack = GetNewGoodsPack(type::entity::MINERALS_ID);
 //    goods_pack->Increase(mineral_ammount);
 
 //    //Container* container = GetNewContainer(textureOb, goods_pack);
@@ -114,7 +114,7 @@ ContainerBuilder::__getNewTemplate()
     
 //    container->setGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
     
-//    ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
+//    ItemSlot* item_slot = GetNewItemSlot(type::entity::CARGO_SLOT_ID);
     
 //    container->bindItemSlot(item_slot);
 //    container->itemSlot()->insertItem(item);
@@ -136,7 +136,7 @@ ContainerBuilder::__getNewTemplate()
 
 //    container->setGivenExpirience(CONTAINER_GIVEN_EXPIRIENCE);
 
-//    ItemSlot* item_slot = GetNewItemSlot(TYPE::ENTITY::CARGO_SLOT_ID);
+//    ItemSlot* item_slot = GetNewItemSlot(type::entity::CARGO_SLOT_ID);
 
 //    container->bindItemSlot(item_slot);
 //    container->itemSlot()->insertItem(item);

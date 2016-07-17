@@ -447,7 +447,7 @@ void Renderer::DrawPostEffectFogWar(GLuint texture, int w, int h, const glm::vec
 		glUniform1f(glGetUniformLocation(m_Shaders.fogwarspark, "radius"), radius/(h*scale));
 		glUniform2f(glGetUniformLocation(m_Shaders.fogwarspark, "world_coord"), world_coord.x/(w*scale), world_coord.y/(h*scale));
 	
-		glUniform1f(glGetUniformLocation(m_Shaders.fogwarspark, "dcolor"), 0.5f/*npc->GetVehicle()->starsystem()->GetStar()->GetDeltaColor()*/);
+		glUniform1f(glGetUniformLocation(m_Shaders.fogwarspark, "dcolor"), 0.5f/*npc->vehicle()->starsystem()->GetStar()->GetDeltaColor()*/);
 	
 		m_MeshQuad->Draw();
 	}

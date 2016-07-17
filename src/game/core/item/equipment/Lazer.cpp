@@ -24,7 +24,7 @@
 #include <meti/RandUtils.hpp>
 
 #ifdef USE_MODULES
-#include <items/modules/LazerModule.hpp>
+#include <item/modules/LazerModule.hpp>
 #endif
 #include "../../slots/ItemSlot.hpp"
 #include "../../spaceobjects/Vehicle.hpp"

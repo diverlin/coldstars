@@ -371,8 +371,8 @@ void Npc::ResolveData()
 
 void Npc::applySkillsStrategy()
 {           /*
-    TYPE::ENTITY class_type_id = data_id.subtype_id;
-    if (data_id.subtype_id == TYPE::ENTITY::RANGER_ID)
+    type::entity class_type_id = data_id.subtype_id;
+    if (data_id.subtype_id == type::entity::RANGER_ID)
     {
             class_type_id = data_id.subsubtype_id;
     }

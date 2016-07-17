@@ -29,7 +29,7 @@
 
 //class TurnTimer;
 
-class StarSystem;
+class Starsystem;
 class Star;
 class Planet;
 class BlackHole;
@@ -98,8 +98,8 @@ class StarsystemRender
         std::vector<VerticalFlowText*>   visible_text_DAMAGE_vec;
         //
 
-        void RenderInSpace(StarSystem*, bool, bool, bool);
-        void RenderInSpace_NEW(jeti::Renderer&, StarSystem*);
+        void RenderInSpace(Starsystem*, bool, bool, bool);
+        void RenderInSpace_NEW(jeti::Renderer&, Starsystem*);
         void RenderCollisionRadius(const jeti::Renderer&) const;
         void RenderAxis(const jeti::Renderer&) const;
 

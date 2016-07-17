@@ -19,7 +19,7 @@
              
 #include "BaseButtonItemSlot.hpp"
 #include <slots/ItemSlot.hpp>
-#include <items/BaseItem.hpp>
+#include <item/BaseItem.hpp>
 
 #include <resources/GuiTextureObCollector.hpp>
 
@@ -34,7 +34,7 @@ bool BaseButtonItemSlot::GetEquiped() const
 {
     if (m_ItemSlot != nullptr)
     {
-        if (m_ItemSlot->GetItem() != nullptr)
+        if (m_ItemSlot->item() != nullptr)
         {
             return true;
         }
@@ -47,11 +47,11 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
 {
     if (m_ItemSlot != nullptr)
     {
-        if (m_ItemSlot->subTypeId() != TYPE::ENTITY::CARGO_SLOT_ID)
+        if (m_ItemSlot->subtype() != type::entity::CARGO_SLOT_ID)
         {
-            if (m_ItemSlot->GetItem() != nullptr)
+            if (m_ItemSlot->item() != nullptr)
             {
-                if (m_ItemSlot->GetItem()->GetFunctioning() == false) 
+                if (m_ItemSlot->item()->isFunctioning() == false)
                 {
                     if (GetAnimationProgramActive() == false)
                     {
@@ -80,41 +80,41 @@ void BaseButtonItemSlot::UpdateAnimationProgram()
     }
 }
 
-void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const glm::vec2& mouse_screen_coord_pos, TYPE::GUI mark_slot_subtype_id) const
+void BaseButtonItemSlot::RenderMarkEmptySlot(const jeti::Renderer& render, const glm::vec2& mouse_screen_coord_pos, type::GUI mark_slot_subtype_id) const
 {
     if (m_ItemSlot != nullptr)
     {
         if (GetEquiped() == false) 
         {
-            TYPE::GUI buton_subtype_id = subTypeId();
-            for (TYPE::ENTITY type : SLOT_WEAPON_TYPES)
+            type::GUI buton_subtype_id = subTypeId();
+            for (type::entity type : SLOT_WEAPON_TYPES)
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = TYPE::GUI::WEAPON_SLOT_ID;
+                   buton_subtype_id = type::GUI::WEAPON_SLOT_ID;
                    break;
                 }
             }
-            for (TYPE::ENTITY type : SLOT_CARGO_TYPES)
+            for (type::entity type : SLOT_CARGO_TYPES)
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = TYPE::GUI::CARGO_SLOT_ID;
+                   buton_subtype_id = type::GUI::CARGO_SLOT_ID;
                    break;
                 }
             }
-            for (TYPE::ENTITY type : SLOT_ARTEFACT_TYPES)
+            for (type::entity type : SLOT_ARTEFACT_TYPES)
             {
                 if (buton_subtype_id == getGuiItemSlotType(type))
                 {
-                   buton_subtype_id = TYPE::GUI::ARTEFACT_SLOT_ID;
+                   buton_subtype_id = type::GUI::ARTEFACT_SLOT_ID;
                    break;
                 }
             }
                                 
-            if (buton_subtype_id != TYPE::GUI::GATE_SLOT_ID)
+            if (buton_subtype_id != type::GUI::GATE_SLOT_ID)
             {            
-                if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == TYPE::GUI::CARGO_SLOT_ID))  
+                if ((mark_slot_subtype_id == buton_subtype_id) or (buton_subtype_id == type::GUI::CARGO_SLOT_ID))
                 {
                    //m_ItemSlot->RenderMark(render, GetBox(), GuiTextureObCollector::Instance().slot_mark_accept);
                 }
@@ -134,12 +134,12 @@ void BaseButtonItemSlot::RenderMarkTarget() const
 {
     if (m_ItemSlot != nullptr)
     {
-        if (m_ItemSlot->GetItem() != nullptr)
+        if (m_ItemSlot->item() != nullptr)
         {              
             //box.SetScale(1.5, 1.5);
             //drawQuadMasked(GuiTextureObCollector::Instance().slot_mark_accept, box, GuiTextureObCollector::Instance().mask_round, 1.0-0.5);
             //drawQuad(GuiTextureObCollector::Instance().mark_target_slot, box);
-            jeti::drawColoredTextWithBackground(std::to_string(m_ItemSlot->GetHitProbability()), /*font_size=*/12, GetBox().GetMiddleTop(), glm::ivec4(255));
+            jeti::drawColoredTextWithBackground(std::to_string(m_ItemSlot->hitProbability()), /*font_size=*/12, GetBox().GetMiddleTop(), glm::ivec4(255));
         }
     }
 }

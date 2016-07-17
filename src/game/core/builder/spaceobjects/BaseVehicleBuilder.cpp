@@ -95,7 +95,7 @@ void BaseVehicleBuilder::_createSlots(Vehicle* vehicle)
     }
     
     if (vehicle->vehicleDescriptor().slot_freezer_num) {
-        //ItemSlot* freezer_slot = GetNewItemSlot(TYPE::ENTITY::FREEZER_SLOT_ID);
+        //ItemSlot* freezer_slot = GetNewItemSlot(type::entity::FREEZER_SLOT_ID);
         //vehicle->AddItemSlot(freezer_slot);           
     }
     
@@ -139,9 +139,9 @@ void BaseVehicleBuilder::_createSlots(Vehicle* vehicle)
 
 void BaseVehicleBuilder::equip(Vehicle* vehicle, const descriptor::Base& descriptor)
 {
-//    TYPE::ENTITY type = (TYPE::ENTITY)descriptor.type();
+//    type::entity type = (type::entity)descriptor.type();
 //    switch(type) {
-//    case TYPE::ENTITY::BAK_EQUIPMENT_ID:
+//    case type::entity::BAK_EQUIPMENT_ID:
 //    {
 //        BakEquipment* bak_equipment = global::get().bakBuilder().create(descriptor);
 //        if (vehicle->AddAndManageItem(bak_equipment) == false) {
@@ -149,7 +149,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, const descriptor::Base& descrip
 //        }
 //        break;
 //    }
-//    case TYPE::ENTITY::DRIVE_EQUIPMENT_ID:
+//    case type::entity::DRIVE_EQUIPMENT_ID:
 //    {
 //        DriveEquipment* bak_equipment = global::get().driveBuilder().create(descriptor);
 //        if (vehicle->AddAndManageItem(drive_equipment) == false) {
@@ -157,7 +157,7 @@ void BaseVehicleBuilder::equip(Vehicle* vehicle, const descriptor::Base& descrip
 //        }
 //        break;
 //    }
-//    case TYPE::ENTITY::DROID_EQUIPMENT_ID:
+//    case type::entity::DROID_EQUIPMENT_ID:
 //    {
 //        DriveEquipment* bak_equipment = global::get().driveBuilder().create(descriptor);
 //        if (vehicle->AddAndManageItem(drive_equipment) == false) {
@@ -230,19 +230,19 @@ void BaseVehicleBuilder::EquipModules(Vehicle* vehicle, TYPE::TECH tech_level)
             return;
         }
             
-        TYPE::ENTITY module_subtype_id = meti::getRand(MODULE_TYPES);
+        type::entity module_subtype_id = meti::getRand(MODULE_TYPES);
         switch(module_subtype_id) {
-            case TYPE::ENTITY::LAZER_MODULE_ID:       { vehicle->AddItemToCargoSlot(global::get().lazerModuleBuilder().create()); break; }
-            case TYPE::ENTITY::ROCKET_MODULE_ID:      { vehicle->AddItemToCargoSlot(global::get().rocketModuleBuilder().create()); break; }
-            case TYPE::ENTITY::DRIVE_MODULE_ID:       { vehicle->AddItemToCargoSlot(global::get().driveModuleBuilder().create()); break; }
-            case TYPE::ENTITY::RADAR_MODULE_ID:       { vehicle->AddItemToCargoSlot(global::get().radarModuleBuilder().create()); break; }
-            case TYPE::ENTITY::BAK_MODULE_ID:         { vehicle->AddItemToCargoSlot(global::get().bakModuleBuilder().create()); break; }
-            //case TYPE::ENTITY::ENERGIZER_MODULE_ID: { vehicle->AddItemToCargoSlot(global::get().energizerModuleBuilder().create()); break; }
-            case TYPE::ENTITY::PROTECTOR_MODULE_ID:   { vehicle->AddItemToCargoSlot(global::get().protectorModuleBuilder().create()); break; }
-            case TYPE::ENTITY::DROID_MODULE_ID:       { vehicle->AddItemToCargoSlot(global::get().droidModuleBuilder().create()); break; }
-            //case TYPE::ENTITY::FREEZER_MODULE_ID:   { vehicle->AddItemToCargoSlot(global::get().freezerModuleBuilder().create()); break; }
-            case TYPE::ENTITY::GRAPPLE_MODULE_ID:     { vehicle->AddItemToCargoSlot(global::get().grappleModuleBuilder().create()); break; }
-            case TYPE::ENTITY::SCANER_MODULE_ID:      { vehicle->AddItemToCargoSlot(global::get().scanerModuleBuilder().create()); break; }
+            case type::entity::LAZER_MODULE_ID:       { vehicle->AddItemToCargoSlot(global::get().lazerModuleBuilder().create()); break; }
+            case type::entity::ROCKET_MODULE_ID:      { vehicle->AddItemToCargoSlot(global::get().rocketModuleBuilder().create()); break; }
+            case type::entity::DRIVE_MODULE_ID:       { vehicle->AddItemToCargoSlot(global::get().driveModuleBuilder().create()); break; }
+            case type::entity::RADAR_MODULE_ID:       { vehicle->AddItemToCargoSlot(global::get().radarModuleBuilder().create()); break; }
+            case type::entity::BAK_MODULE_ID:         { vehicle->AddItemToCargoSlot(global::get().bakModuleBuilder().create()); break; }
+            //case type::entity::ENERGIZER_MODULE_ID: { vehicle->AddItemToCargoSlot(global::get().energizerModuleBuilder().create()); break; }
+            case type::entity::PROTECTOR_MODULE_ID:   { vehicle->AddItemToCargoSlot(global::get().protectorModuleBuilder().create()); break; }
+            case type::entity::DROID_MODULE_ID:       { vehicle->AddItemToCargoSlot(global::get().droidModuleBuilder().create()); break; }
+            //case type::entity::FREEZER_MODULE_ID:   { vehicle->AddItemToCargoSlot(global::get().freezerModuleBuilder().create()); break; }
+            case type::entity::GRAPPLE_MODULE_ID:     { vehicle->AddItemToCargoSlot(global::get().grappleModuleBuilder().create()); break; }
+            case type::entity::SCANER_MODULE_ID:      { vehicle->AddItemToCargoSlot(global::get().scanerModuleBuilder().create()); break; }
         }
     }
 }

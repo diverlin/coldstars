@@ -53,8 +53,6 @@ struct VehiclePropetries
     bool shield_effect_enabled = 0;
     bool hibernate_mode_enabled = 0;
 
-
-        
     VehiclePropetries()
     {}
 };

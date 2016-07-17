@@ -110,14 +110,14 @@ type::entity::CARGO_SLOT7_ID,
 type::entity::CARGO_SLOT8_ID, 
 type::entity::CARGO_SLOT9_ID,
 type::entity::CARGO_SLOT10_ID,
-//TYPE::ENTITY::CARGO_SLOT11_ID,
-//TYPE::ENTITY::CARGO_SLOT12_ID,
-//TYPE::ENTITY::CARGO_SLOT13_ID,
-//TYPE::ENTITY::CARGO_SLOT14_ID,
-//TYPE::ENTITY::CARGO_SLOT15_ID,
-//TYPE::ENTITY::CARGO_SLOT16_ID,
-//TYPE::ENTITY::CARGO_SLOT17_ID,
-//TYPE::ENTITY::CARGO_SLOT18_ID
+//type::entity::CARGO_SLOT11_ID,
+//type::entity::CARGO_SLOT12_ID,
+//type::entity::CARGO_SLOT13_ID,
+//type::entity::CARGO_SLOT14_ID,
+//type::entity::CARGO_SLOT15_ID,
+//type::entity::CARGO_SLOT16_ID,
+//type::entity::CARGO_SLOT17_ID,
+//type::entity::CARGO_SLOT18_ID
 };
 
 const std::vector<type::entity> SLOT_ARTEFACT_TYPES = 
