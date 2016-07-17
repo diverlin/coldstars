@@ -76,6 +76,7 @@ void StateMachine::setCurrentMacroTask(const Task& macrotask)
     }
     
     m_macrotaskManager.setTask(macrotask);
+    assert(m_macrotaskManager.scenario());
     m_macrotaskManager.scenario()->enter(m_npc);
 }
 

@@ -26,7 +26,7 @@ class Npc;
 class BaseScenario
 {
 public:
-    BaseScenario():m_typeId(type::AISCENARIO::NONE_ID) {}
+    BaseScenario() {}
     virtual ~BaseScenario() {}
 
     void setTypeId(type::AISCENARIO typeId) { m_typeId = typeId; }
@@ -43,6 +43,6 @@ public:
     virtual std::string GetDescription(Npc*) const { return "_"; }
 
 private:
-    type::AISCENARIO m_typeId;
+    type::AISCENARIO m_typeId = type::AISCENARIO::NONE_ID;
 }; 
 

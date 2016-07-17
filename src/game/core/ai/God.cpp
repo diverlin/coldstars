@@ -19,11 +19,10 @@
 
 #include <ai/God.hpp>
 
-#include <ceti/Logger.hpp>
-#include <meti/RandUtils.hpp>
 #include <common/constants.hpp>
-#include <common/GameDate.hpp>
 #include <common/Global.hpp>
+#include <common/TurnTimer.hpp>
+#include <common/GameDate.hpp>
 
 #include <world/galaxy.hpp>
 #include <world/Sector.hpp>
@@ -49,8 +48,14 @@
 #include <descriptors/RaceDescriptors.hpp>
 #include <descriptors/VehicleDescriptorGenerator.hpp>
 
-#include <meti/RandUtils.hpp>
 #include <math/rand.hpp>
+
+#include <managers/EntityManager.hpp> // garbage
+
+#include <meti/RandUtils.hpp>
+#include <meti/RandUtils.hpp>
+
+#include <ceti/Logger.hpp>
 
 
 God::God()
@@ -61,16 +66,16 @@ m_DateLastUpdate(0,0,0)
 God::~God()
 {}
 
-Galaxy* God::createWorld(const descriptor::Galaxy& descriptor)
+void God::createWorld(const descriptor::Galaxy& descriptor)
 {
-    Galaxy* galaxy = global::get().galaxyBuilder().create(descriptor);
-    CreateLife(galaxy, descriptor);
+    m_galaxy = global::get().galaxyBuilder().create(descriptor);
+    __createLife(m_galaxy, descriptor);
     if (descriptor.allow_invasion == true) {
-        CreateInvasion(galaxy, descriptor);
+        __createInvasion(m_galaxy, descriptor);
     }
 
     bool player2space = true;
-    Starsystem* const starsystem = galaxy->randomSector()->randomStarsystem();
+    Starsystem* const starsystem = m_galaxy->randomSector()->randomStarsystem();
     if (player2space == true) {
         glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
         glm::vec3 angle(0,0,0);
@@ -79,12 +84,52 @@ Galaxy* God::createWorld(const descriptor::Galaxy& descriptor)
         //starsystem->GetRandomPlanet()->GetLand()->AddVehicle(player->GetNpc()->GetVehicle());
     }
 
-    CreateShips(starsystem, /*ships_num=*/20, type::race::R0_ID);   // fake
-
-    return galaxy;
+    __createShips(starsystem, /*ships_num=*/20, type::race::R0_ID);   // fake
 }
 
-void God::CreateLife(Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
+void God::update()
+{
+    // shortcuts
+    TurnTimer& turnTimer = global::get().turnTimer();
+    GameDate& gameDate = global::get().gameDate();
+    // shortcuts
+
+    turnTimer.update(-100);
+    m_galaxy->update(turnTimer.getStopTurnTimer());
+
+    if (m_DateLastUpdate - gameDate >= GOD_REST_IN_DAYS) {
+        LOG("God::Update");
+
+        m_galaxy->analizeStarSystemsCondition(data_starsystems_condition);
+        m_DateLastUpdate = gameDate;
+
+        //__proceedInvasion(galaxy);
+
+        LOG(data_starsystems_condition.info());
+    }
+
+    if (turnTimer.getTurnEnded() == true) {
+        turnTimer.nextTurn();
+        gameDate.dayPass();
+    }
+
+    if (turnTimer.getTurnEnded() == true) {
+        global::get().entityManager().clearGarbage();
+
+        //            bool save_event = global::get().entityManager().UpdateSaveRequest();
+        //            bool load_event = global::get().entityManager().UpdateLoadRequest();
+        //            if (load_event == true) {
+        //                player = global::get().entityManager().GetPlayer();
+        //                galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();
+        //            }
+        //            if (save_event == true) {
+        //                //..
+        //            }
+    }
+
+}
+
+void God::__createLife(Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
 {
 //    for(unsigned int i=0; i<galaxy->m_sectors.size(); i++) {
 //        for(unsigned int j=0; j<galaxy->m_sectors[i]->m_starsystems.size(); j++) {
@@ -98,18 +143,21 @@ void God::CreateLife(Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
 //    }
 }
 
-void God::CreateInvasion(Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
+void God::__createInvasion(Galaxy* galaxy, const descriptor::Galaxy& descriptor) const
 {
     for (unsigned int i=0; i<INITIATE_STARSYSTEM_IVASION_NUM; i++) {
         Starsystem* starsystem = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::SAFE_ID);
         type::race race_id = (type::race)meti::getRandInt((int)type::race::R6_ID, (int)type::race::R7_ID);
         int ship_num = meti::getRandInt(ENTITY::STARSYSTEM::SHIPENEMY_INIT_MIN, ENTITY::STARSYSTEM::SHIPENEMY_INIT_MAX);
-        CreateShips(starsystem, ship_num, race_id);
+        __createShips(starsystem, ship_num, race_id);
     }
 }
 
-void God::ProceedInvasion(Galaxy* galaxy) const
+void God::__proceedInvasion(Galaxy* galaxy) const
 {
+    std::cout<<"\nWARNING: God::ProceedInvasion is skiped\n";
+    return;
+
     Starsystem* starsystem_invade_from = galaxy->randomSector()->randomStarsystem(ENTITY::STARSYSTEM::CONDITION::CAPTURED_ID);
     if (!starsystem_invade_from) {
         return;
@@ -127,23 +175,8 @@ void God::ProceedInvasion(Galaxy* galaxy) const
     int num_max= 10;
     starsystem_invade_from->createGroupAndShareTask(npc_leader, starsystem_invade_to, num_max);
 }
-
-void God::update(Galaxy* galaxy, const GameDate& date)
-{
-    if (m_DateLastUpdate - date >= GOD_REST_IN_DAYS)
-    {
-        LOG("God::Update");
-            
-        galaxy->FillStarSystemsCondition(data_starsystems_condition);
-        m_DateLastUpdate = date;
-        
-        ProceedInvasion(galaxy);
-
-        LOG(data_starsystems_condition.GetStr());
-    }
-}                
      
-void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescriptor& starsystem_descriptor) const
+void God::__createLifeAtPlanet(Planet* planet, const StarSystemDescriptor& starsystem_descriptor) const
 {            
 //    unsigned long int population = 0;
 //    meti::getRandBool() ? population = meti::getRandInt(POPULATION_MIN, POPULATION_MAX) : population = 0;
@@ -211,7 +244,7 @@ void God::CreateLifeAtPlanet(Planet* planet, const StarSystemDescriptor& starsys
 //    }
 }
 
-void God::CreateSpaceStations(Starsystem* starsystem, int spacestation_per_system) const
+void God::__createSpaceStations(Starsystem* starsystem, int spacestation_per_system) const
 {       
     for (int i=0; i<spacestation_per_system; i++)
     {     
@@ -250,7 +283,7 @@ void God::CreateSpaceStations(Starsystem* starsystem, int spacestation_per_syste
     }        
 }
 
-void God::CreateShips(Starsystem* starsystem, int ship_num, type::race npc_race_id, type::entity subtype_id, type::entity subsubtype_id) const
+void God::__createShips(Starsystem* starsystem, int ship_num, type::race npc_race_id, type::entity subtype_id, type::entity subsubtype_id) const
 {
     type::entity npc_subtype_id = type::entity::NONE_ID;
     type::entity npc_subsubtype_id = type::entity::NONE_ID;

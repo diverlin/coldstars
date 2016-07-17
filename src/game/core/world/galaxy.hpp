@@ -40,7 +40,7 @@ class Galaxy : public Base
 
         void update(int);
 
-        void FillStarSystemsCondition(StarSystemsConditionData&) const;
+        void analizeStarSystemsCondition(StarSystemsConditionData&) const;
 
         void Save(boost::property_tree::ptree&) const;
         void Load(const boost::property_tree::ptree&);

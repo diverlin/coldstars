@@ -42,12 +42,12 @@ void TurnTimer::nextTurn()
     m_turnCounter++;
 }
                         
-void TurnTimer::update(bool auto_turn)
+void TurnTimer::update(int threshold)
 {
     m_stopTurnTimer--;
 
     /////////// AUTO-TURN /////////////
-    if ( (m_stopTurnTimer < -50) && (auto_turn == true) ) {
+    if (m_stopTurnTimer < threshold) {
         LOG("*** AUTO_TURN_MODE proceed END TURN");
         nextTurn();
     }

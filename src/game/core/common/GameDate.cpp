@@ -81,5 +81,5 @@ void GameDate::dayPass()
     LOG("*** dayPass:"+str());
 }
 
-std::string GameDate::str() const { return std::to_string(m_day) + "/" + std::to_string(m_month) + "/" + std::to_string(m_year); };
+std::string GameDate::str() const { return std::to_string(m_day) + "/" + std::to_string(m_month) + "/" + std::to_string(m_year); }
 

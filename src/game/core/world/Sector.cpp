@@ -99,7 +99,7 @@ Starsystem* Sector::closestStarsystemTo(Starsystem* toStarsystem, int condition_
 
 void Sector::update(int time)
 {
-    for (auto starsystem: m_starsystems) {
+    for (Starsystem* starsystem: m_starsystems) {
         starsystem->update(time);
     }
 }

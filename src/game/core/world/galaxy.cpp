@@ -74,12 +74,12 @@ Sector* Galaxy::closestSectorTo(Sector* toSector)
 
 void Galaxy::update(int time)
 {
-    for (unsigned int i=0; i<m_sectors.size(); i++) {
-        m_sectors[i]->update(time);
+    for (Sector* sector: m_sectors) {
+        sector->update(time);
     }
 }
 
-void Galaxy::FillStarSystemsCondition(StarSystemsConditionData& data_starsystems_condition) const
+void Galaxy::analizeStarSystemsCondition(StarSystemsConditionData& data_starsystems_condition) const
 {
     //data_starsystems_condition.Reset();
     
