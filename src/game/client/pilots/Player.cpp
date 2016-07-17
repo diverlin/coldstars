@@ -107,7 +107,7 @@ void Player::UpdatePostTransaction()
 {
     switch (npc->vehicle()->place())
     {
-        case type::place::KOSMOPORT_ID:
+        case type::place::KOSMOPORT:
         {
             if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == false)
             {
@@ -122,12 +122,12 @@ void Player::UpdatePostTransaction()
             break;
         }
 
-        case TYPE::PLACE::NATURELAND_ID:
+        case type::place::LAND:
         {                       
             break;
         }
         
-        case TYPE::PLACE::SPACE_ID:
+        case type::place::KOSMOS:
         {
             if (GuiManager::Instance().GetGuiKosmoport().GetInitDone() == true)
             {
@@ -176,7 +176,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
         
 //        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_JUMPOUT_ID:
 //        {
-//            if (npc->vehicle()->placeTypeId() == TYPE::PLACE::HYPER_SPACE_ID)
+//            if (npc->vehicle()->placeTypeId() == type::place::HYPER_SPACE_ID)
 //            {
 //                if (turn_timer.GetTurnEnded() == true)
 //                {
@@ -189,7 +189,7 @@ void Player::UpdatePostTransactionEvent(TurnTimer& turn_timer)
 
 //        case VEHICLE_SPECIAL_ACTION_TYPE::INITIATE_LAUNCHING_ID:
 //        {
-//            if (npc->vehicle()->placeTypeId() == TYPE::PLACE::SPACE_ID)
+//            if (npc->vehicle()->placeTypeId() == type::place::SPACE_ID)
 //            {
 //                if (turn_timer.GetTurnEnded() == true)
 //                {
@@ -617,7 +617,7 @@ bool Player::MouseInteractionWithAsteroids(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_ASTEROID_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_ASTEROID_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distance(meti::vec2(visible_ASTEROID_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_ASTEROID_vec[i]->collisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_ASTEROID_vec[i]);        
@@ -691,7 +691,7 @@ bool Player::MouseInteractionWithShips(const MouseData& data_mouse)
             {
                 if (data_mouse.right_click == true)
                 {
-                    npc->SetScanTarget(visible_SHIP_vec[i]);
+                    npc->setScanTarget(visible_SHIP_vec[i]);
                     GuiManager::Instance().GetGuiSpace().EnterGuiScan();
                 }
             }
@@ -707,7 +707,7 @@ bool Player::MouseInteractionWithBlackHoles(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_BLACKHOLE_vec.size(); i++)
     { 
-        float cursor_dist = meti::distance(meti::vec2(visible_BLACKHOLE_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float cursor_dist = meti::distance(meti::vec2(visible_BLACKHOLE_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (cursor_dist < visible_BLACKHOLE_vec[i]->collisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_BLACKHOLE_vec[i]); 
@@ -723,7 +723,7 @@ bool Player::MouseInteractionWithSpaceStations(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_SPACESTATION_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_SPACESTATION_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distance(meti::vec2(visible_SPACESTATION_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_SPACESTATION_vec[i]->collisionRadius())
         { 
             cursor.SetFocusedSpaceObject(visible_SPACESTATION_vec[i]); 
@@ -773,14 +773,14 @@ bool Player::MouseInteractionWithPlanets(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_PLANET_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(meti::vec2(visible_PLANET_vec[i]->center()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distance(meti::vec2(visible_PLANET_vec[i]->position()), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_PLANET_vec[i]->collisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_PLANET_vec[i]); 
   
             if (data_mouse.left_click == true)
             {
-                Task microtask(TYPE::AISCENARIO::MICRO_DOCKING_ID, visible_PLANET_vec[i]->id());
+                Task microtask(type::AISCENARIO::MICRO_DOCKING_ID, visible_PLANET_vec[i]->id());
 //                npc->GetStateMachine().SetCurrentMicroTask(microtask);
 //                npc->vehicle()->GetComplexDrive().UpdatePath();
             }   
@@ -796,7 +796,7 @@ bool Player::MouseInteractionWithStars(const MouseData& data_mouse)
 {
     for (unsigned int i=0; i<visible_STAR_vec.size(); i++)
     { 
-        float object_cursor_dist = meti::distance(visible_STAR_vec[i]->center(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
+        float object_cursor_dist = meti::distance(visible_STAR_vec[i]->position(), data_mouse.pos_worldcoord.x, data_mouse.pos_worldcoord.y);
         if (object_cursor_dist < visible_STAR_vec[i]->collisionRadius())
         {   
             cursor.SetFocusedSpaceObject(visible_STAR_vec[i]); 
@@ -870,12 +870,12 @@ void Player::SessionInNatureLand()
 void Player::RunSession(const TurnTimer& turn_timer)
 {
     cursor.Reset();
-    switch(npc->vehicle()->placeTypeId())
+    switch(npc->vehicle()->place())
     {
-        case TYPE::PLACE::SPACE_ID:         { SessionInSpace(npc->vehicle()->starsystem(), turn_timer); break; }
-        case TYPE::PLACE::HYPER_SPACE_ID:     { SessionInSpace((Starsystem*)npc->vehicle()->GetComplexDrive().GetTarget(), turn_timer); break; }
-        case TYPE::PLACE::KOSMOPORT_ID:      { SessionInKosmoport(); break; }
-        case TYPE::PLACE::NATURELAND_ID:      { SessionInNatureLand(); break; }
+        case type::place::KOSMOS:         { SessionInSpace(npc->vehicle()->starsystem(), turn_timer); break; }
+        case type::place::HYPER:     { SessionInSpace((Starsystem*)npc->vehicle()->driveComplex().target(), turn_timer); break; }
+        case type::place::KOSMOPORT:      { SessionInKosmoport(); break; }
+        case type::place::LAND:      { SessionInNatureLand(); break; }
     }       
 
     cursor.Update(this);

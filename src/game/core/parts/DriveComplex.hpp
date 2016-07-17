@@ -55,7 +55,7 @@ class DriveComplex
         ItemSlot* driveSlot() const { return m_driveSlot; }
         ItemSlot* bakSlot()   const { return m_bakSlot; }
               
-        SpaceObject* GetTarget() const { return m_target; }
+        SpaceObject* target() const { return m_target; }
                     
         bool PathExists() const;
         
