@@ -20,7 +20,7 @@
 #include <dock/Store.hpp>
 #include <pilots/Player.hpp>
 #include <resources/GuiTextureObCollector.hpp>
-#include <items/BaseItem.hpp>
+#include <item/BaseItem.hpp>
 #include <slots/ItemSlot.hpp>
 #include <slots/VehicleSlot.hpp>
 #include <pilots/Npc.hpp>
@@ -86,17 +86,17 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
     /*
         for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
         {
-                if (rect_itemslot_vec[i].second->GetItem() != nullptr)
+                if (rect_itemslot_vec[i].second->item() != nullptr)
                 {
                     if (rect_itemslot_vec[i].first.CheckInteraction(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y) == true)
                     {
-                        m_Player->GetCursor().SetFocusedObject(rect_itemslot_vec[i].second->GetItem());
+                        m_Player->GetCursor().SetFocusedObject(rect_itemslot_vec[i].second->item());
 
                         if (data_mouse.left_click == true)
                         {
-                            if (m_Player->GetNpc()->GetCredits() >= rect_itemslot_vec[i].second->GetItem()->GetPrice())
+                            if (m_Player->GetNpc()->GetCredits() >= rect_itemslot_vec[i].second->item()->GetPrice())
                                 {
-                                m_Player->GetNpc()->GetVehicle()->BuyItem(rect_itemslot_vec[i].second->GetItem());
+                                m_Player->GetNpc()->vehicle()->BuyItem(rect_itemslot_vec[i].second->item());
                             }
                         }
                         return true;
@@ -106,15 +106,15 @@ bool GuiStore::UpdateMouseInteraction(const MouseData& data_mouse)
 
         for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
         {
-                if (rect_vehicleslot_vec[i].second->GetVehicle() != nullptr)
+                if (rect_vehicleslot_vec[i].second->vehicle() != nullptr)
                 {
                     if (rect_vehicleslot_vec[i].first.CheckInteraction(data_mouse.pos_screencoord.x, data_mouse.pos_screencoord.y) == true)
                     {
-                m_Player->GetCursor().SetFocusedObject(rect_vehicleslot_vec[i].second->GetVehicle());
+                m_Player->GetCursor().SetFocusedObject(rect_vehicleslot_vec[i].second->vehicle());
 
                             if (data_mouse.left_click == true)
                             {
-                                int price = rect_vehicleslot_vec[i].second->GetVehicle()->GetKorpusData().price;
+                                int price = rect_vehicleslot_vec[i].second->vehicle()->GetKorpusData().price;
                                 if (m_Player->GetNpc()->GetCredits() >= price)
                                       {
                                           store->SellVehicle(m_Player->GetNpc(), rect_vehicleslot_vec[i].second, price);
@@ -140,9 +140,9 @@ void GuiStore::RenderSlots(int credits) const
     //for (unsigned int i=0; i<rect_itemslot_vec.size(); i++)
     //{
     //rect_itemslot_vec[i].second->Render(rect_itemslot_vec[i].first, GetOffset());
-    //if (rect_itemslot_vec[i].second->GetItem() != nullptr)
+    //if (rect_itemslot_vec[i].second->item() != nullptr)
     //{
-    //if (rect_itemslot_vec[i].second->GetItem()->GetPrice() > credits)
+    //if (rect_itemslot_vec[i].second->item()->GetPrice() > credits)
     //{
     //rect_itemslot_vec[i].second->RenderMark(rect_itemslot_vec[i].first, GuiTextureObCollector::Instance().slot_mark_reject);
     //}
@@ -152,9 +152,9 @@ void GuiStore::RenderSlots(int credits) const
     //for (unsigned int i=0; i<rect_vehicleslot_vec.size(); i++)
     //{
     //rect_vehicleslot_vec[i].second->Render(rect_vehicleslot_vec[i].first);
-    //if (rect_vehicleslot_vec[i].second->GetVehicle() != nullptr)
+    //if (rect_vehicleslot_vec[i].second->vehicle() != nullptr)
     //{
-    ////if (rect_vehicleslot_vec[i].second->GetItem()->GetPrice() > credits)
+    ////if (rect_vehicleslot_vec[i].second->item()->GetPrice() > credits)
     ////{
     ////rect_vehicleslot_vec[i].second->RenderMark(rect_vehicleslot_vec[i].first, GuiTextureObCollector::Instance().slot_mark_reject);
     ////}

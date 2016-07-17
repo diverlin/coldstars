@@ -40,11 +40,11 @@ void Observation::FindEchievableStarSystems(Galaxy* galaxy)
 
     //for (unsigned int i=0; i<galaxy->STARSYSTEM_vec.size(); i++)
     //{
-    //const glm::vec3& starsystem_pos = npc_owner->GetVehicle()->starsystem()->center();
+    //const glm::vec3& starsystem_pos = npc_owner->vehicle()->starsystem()->center();
     //float dist = meti::distance(starsystem_pos, galaxy->STARSYSTEM_vec[i]->position());
     ////if (dist < npc_owner->getShip()->propetries.hyper)
     //{
-    //visible_STARSYSTEM_pair_vec.push_back( Pair<StarSystem*>(galaxy->STARSYSTEM_vec[i], dist) );
+    //visible_STARSYSTEM_pair_vec.push_back( Pair<Starsystem*>(galaxy->STARSYSTEM_vec[i], dist) );
     //}
     //}
 
@@ -199,7 +199,7 @@ void Observation::FindVisibleVehiclesInSpaceInStatic()
     for (unsigned int i=0; i<vehicle_vec.size(); i++)
     {
         float dist = meti::distance(npc_owner->vehicle()->position(), vehicle_vec[i]->position());
-        //std::cout<<"dist, radius = "<<dist<<", "<<npc_owner->GetVehicle()->propetries.radius<<std::endl;
+        //std::cout<<"dist, radius = "<<dist<<", "<<npc_owner->vehicle()->propetries.radius<<std::endl;
         if (dist < npc_owner->vehicle()->properties().radar)
         {
             visible_VEHICLE_pair_vec.push_back( Pair<Vehicle*>(vehicle_vec[i], dist) );

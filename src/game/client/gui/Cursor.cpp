@@ -30,9 +30,9 @@
 
 #include <slots/ItemSlot.hpp>
 
-#include <items/BaseItem.hpp>
+#include <item/BaseItem.hpp>
 
-#include <spaceobjects/IncludeSpaceObjects.hpp>
+#include <spaceobjects/ALL>
 
 #include <pilots/Player.hpp>
 #include <pilots/Npc.hpp>
@@ -47,7 +47,7 @@ Cursor::Cursor()
 m_FocusedSpaceObject(nullptr),
 m_FocusedGuiElement(nullptr)
 {
-    //m_ItemSlot = GetNewItemSlotWithoutSaveAbility(TYPE::ENTITY::CARGO_SLOT_ID);
+    //m_ItemSlot = GetNewItemSlotWithoutSaveAbility(type::entity::CARGO_SLOT_ID);
     
     m_Box.setSize(GUI::ITEMSLOT::WIDTH_FOR_CURSOR, GUI::ITEMSLOT::HEIGHT_FOR_CURSOR);
     
@@ -166,7 +166,7 @@ void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
         {                    
             //m_FocusedSpaceObject->RenderStuffWhenFocusedInSpace(render);
             
-            ceti::Box2D box(meti::vec2(m_FocusedSpaceObject->center()), meti::vec2(m_FocusedSpaceObject->size()));
+            ceti::Box2D box(meti::vec2(m_FocusedSpaceObject->position()), meti::vec2(m_FocusedSpaceObject->size()));
             box.SetScale(scale, scale);
             //box.SetAngle(m_FocusedSpaceObject->GetAngle().z);
             
@@ -175,7 +175,7 @@ void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
         
         if (m_FocusedGuiElement != nullptr)
         {
-            if (m_FocusedGuiElement->typeId() == TYPE::GUI::BUTTON_ITEMSLOT_ID)
+            if (m_FocusedGuiElement->typeId() == type::GUI::BUTTON_ITEMSLOT_ID)
             {
                 ceti::Box2D box(m_FocusedGuiElement->GetBox());
                 box.SetScale(scale, scale);

@@ -30,7 +30,7 @@
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
 
-#include <struct/GalaxyDescriptor.hpp>
+#include <descriptors/GalaxyDescriptor.hpp>
 #include <jeti/particlesystem/ExplosionEffect.hpp>
 
 #include <iostream>
@@ -84,9 +84,9 @@ void TestParticlesRunScenario::Init(Player* player)
 //    glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
 //    glm::vec3 angle(0,0,0);
      
-//    galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
+//    galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->vehicle(), center, angle, nullptr);
         
-//    StarSystem* starsystem = player->GetNpc()->GetVehicle()->starsystem(); // shortcut
+//    Starsystem* starsystem = player->GetNpc()->vehicle()->starsystem(); // shortcut
 //    for (int i=0; i<200; i++)
 //    {
 //        Container* container = ContainerBuilder::Instance().GetNewMineralContainer(4);
@@ -107,7 +107,7 @@ void TestParticlesRunScenario::Init(Player* player)
 /* virtual */
 void TestParticlesRunScenario::Update_inDynamic(Player* player)
 {
-//    StarSystem* starsystem = player->GetNpc()->GetVehicle()->starsystem(); // shortcut
+//    Starsystem* starsystem = player->GetNpc()->vehicle()->starsystem(); // shortcut
             
 //    if (starsystem->IsAnyActiveParticlesEffectPresent(EFFECT::EXPLOSION_ID) == false)
 //    {

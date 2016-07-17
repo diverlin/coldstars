@@ -71,14 +71,14 @@ jeti::Mesh* MeshCollector::getMesh(int id) const
     return requested;
 }
 
-jeti::Mesh* MeshCollector::getMesh(TYPE::MESH type_id) const
+jeti::Mesh* MeshCollector::getMesh(type::MESH type_id) const
 {
     jeti::Mesh* requested = nullptr;
 
     auto it = m_typesMeshes.find(type_id);
     if (it != m_typesMeshes.end()) {
         const std::vector<std::pair<MeshDescriptor, jeti::Mesh*>>& vec = it->second;
-        requested = meti::getRandomElement(vec).second;
+        requested = meti::getRand(vec).second;
     }
 
     assert(requested);

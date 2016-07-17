@@ -28,7 +28,7 @@
 #include <world/starsystem.hpp>
 #include <common/Global.hpp>
 
-#include <struct/GalaxyDescriptor.hpp>
+#include <descriptors/GalaxyDescriptor.hpp>
 #include <text/VerticalFlowText.hpp>
 
 #include <math/rand.hpp>
@@ -76,13 +76,13 @@ void TestTextRunScenario::Init(Player* player)
 //    glm::vec3 center(500, 500, DEFAULT_ENTITY_ZPOS);
 //    glm::vec3 angle(0,0,0);
      
-//    galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->GetVehicle(), center, angle, nullptr);
+//    galaxy->GetRandomSector()->GetRandomStarSystem()->AddVehicle(player->GetNpc()->vehicle(), center, angle, nullptr);
 }
 
 /* virtual */
 void TestTextRunScenario::Update_inDynamic(Player* player)
 {
-//    StarSystem* starsystem = player->GetNpc()->GetVehicle()->starsystem(); // shortcut
+//    Starsystem* starsystem = player->GetNpc()->vehicle()->starsystem(); // shortcut
             
 //    glm::ivec4 color(255, 0, 0, 255);
 //    while (starsystem->GetTextDamageNum() < 200)

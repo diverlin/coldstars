@@ -62,10 +62,10 @@ void initGameStuff()
 //    RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(TYPE::RACE::R6_ID);
 //    RaceInformationCollector::Instance().RACES_EVIL_vec.push_back(TYPE::RACE::R7_ID);
     
-//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::WARRIOR_ID);
-//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::PIRAT_ID);
-//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::TRADER_ID);
-//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(TYPE::ENTITY::DIPLOMAT_ID);
+//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(type::entity::WARRIOR_ID);
+//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(type::entity::PIRAT_ID);
+//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(type::entity::TRADER_ID);
+//    RaceInformationCollector::Instance().SUBSUBTYPE_vec.push_back(type::entity::DIPLOMAT_ID);
 
     /* create Macro Scenaries */
     ScenarioCollector::Instance().add(new MacroScenarioGoodsTrading());

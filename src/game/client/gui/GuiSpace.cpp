@@ -80,7 +80,7 @@ slider_shared(nullptr)
 
         {
             jeti::TextureOb* texOb = GuiTextureObCollector::Instance().icon_map;
-            ButtonTrigger* galaxymap_button = new ButtonTrigger(TYPE::GUI::BUTTON_GALAXYMAP_ID, "galaxy map", GuiActions::GalaxyMapGuiTransition, texOb);
+            ButtonTrigger* galaxymap_button = new ButtonTrigger(type::GUI::BUTTON_GALAXYMAP_ID, "galaxy map", GuiActions::GalaxyMapGuiTransition, texOb);
             
             glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);     
             galaxymap_button->setSize(size);        
@@ -91,7 +91,7 @@ slider_shared(nullptr)
         
         {
             jeti::TextureOb* texOb = GuiTextureObCollector::Instance().icon_plus;
-            ButtonSingle* load_button = new ButtonSingle(TYPE::GUI::LOAD_ID, "load", GuiActions::LoadEvent, texOb);    
+            ButtonSingle* load_button = new ButtonSingle(type::GUI::LOAD_ID, "load", GuiActions::LoadEvent, texOb);
             
             glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);    
             load_button->setSize(size);
@@ -102,7 +102,7 @@ slider_shared(nullptr)
         
         {
             jeti::TextureOb* texOb = GuiTextureObCollector::Instance().icon_minus;
-            ButtonSingle* save_button = new ButtonSingle(TYPE::GUI::SAVE_ID, "save", GuiActions::SaveEvent, texOb);    
+            ButtonSingle* save_button = new ButtonSingle(type::GUI::SAVE_ID, "save", GuiActions::SaveEvent, texOb);
 
             glm::vec2 size(GUI::ICON_SIZE, GUI::ICON_SIZE);    
             save_button->setSize(size);    
@@ -175,9 +175,9 @@ bool GuiSpace::UpdateMouseInteractionWithPreciseWeaponTarget(const MouseData& da
     //ItemSlot* selected_item_slot = gui_vehicle_target.GetInreactedItemSlot(data_mouse);
     //if (selected_item_slot != nullptr)
     //{
-        //if (selected_item_slot->GetItem() != nullptr)
+        //if (selected_item_slot->item() != nullptr)
         //{
-            //player->GetNpc()->GetVehicle()->GetWeaponComplex().SetTarget(selected_item_slot->GetOwnerVehicle(), selected_item_slot);
+            //player->GetNpc()->vehicle()->GetWeaponComplex().SetTarget(selected_item_slot->GetOwnerVehicle(), selected_item_slot);
             //gui_vehicle_target.Reset();
             //return true;
         //}
@@ -192,12 +192,12 @@ void GuiSpace::EnterGalaxyMap()
     Logger::Instance().Log("GuiSpace::EnterGalaxyMap", GUI_LOG_DIP);
     #endif
     
-    //if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
+    //if (gui_vehicle_scan_shared->vehicle() != nullptr)
     //{
         //ExitGuiScan();
     //}
     
-    //GetGuiElement(TYPE::GUI::GUI_RADAR_ID)->Hide();
+    //GetGuiElement(type::GUI::GUI_RADAR_ID)->Hide();
           
     //gui_galaxymap_shared->BindGalaxy(GetPlayer()->GetNpc()->starsystem()->GetSector()->GetGalaxy());
 }
@@ -208,7 +208,7 @@ void GuiSpace::ExitGalaxyMap()
     Logger::Instance().Log("GuiSpace::ExitGalaxyMap", GUI_LOG_DIP);
     #endif
     
-    //GetGuiElement(TYPE::GUI::GUI_RADAR_ID)->Show();    
+    //GetGuiElement(type::GUI::GUI_RADAR_ID)->Show();
     //gui_galaxymap_shared->UnbindGalaxy();
 }
     
@@ -226,8 +226,8 @@ void GuiSpace::EnterGuiScan()
     //gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->GetScanTarget(), center_screen + GUI_VEHICLE_INSPACE_OFFSET, allow_full_control);
     //gui_skills_shared->SetOffset(center_screen + GUI_SKILLS_INSPACE_OFFSET);
             
-    //GetGuiElement(TYPE::GUI::PLAYER_VEHICLE_ID)->Hide();        
-    //GetGuiElement(TYPE::GUI::GUI_RADAR_ID)->Hide();
+    //GetGuiElement(type::GUI::PLAYER_VEHICLE_ID)->Hide();
+    //GetGuiElement(type::GUI::GUI_RADAR_ID)->Hide();
 }
 
 void GuiSpace::ExitGuiScan()
@@ -236,7 +236,7 @@ void GuiSpace::ExitGuiScan()
     Logger::Instance().Log("GuiSpace::ExitGuiScan", GUI_LOG_DIP);
     #endif
     
-    //if (gui_vehicle_scan_shared->GetVehicle() == m_Player->GetNpc()->GetVehicle())
+    //if (gui_vehicle_scan_shared->vehicle() == m_Player->GetNpc()->vehicle())
     //{
         //gui_skills_shared->Acknowledge();
     //}
@@ -244,8 +244,8 @@ void GuiSpace::ExitGuiScan()
     
     //m_Player->GetNpc()->ResetScanTarget();
     
-    //GetGuiElement(TYPE::GUI::GUI_RADAR_ID)->Show();
-    //GetGuiElement(TYPE::GUI::PLAYER_VEHICLE_ID)->Show();    
+    //GetGuiElement(type::GUI::GUI_RADAR_ID)->Show();
+    //GetGuiElement(type::GUI::PLAYER_VEHICLE_ID)->Show();
 }
 
 void GuiSpace::ButtonsAction(Player* player) const
@@ -295,7 +295,7 @@ void GuiSpace::UpdateUnique(Player* player)
         //}
     //}
             
-    //if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
+    //if (gui_vehicle_scan_shared->vehicle() != nullptr)
     //{    
         //if (gui_element == nullptr)
         //{
@@ -337,7 +337,7 @@ void GuiSpace::RenderUnique(const jeti::Renderer&, Player* player) const
         //gui_galaxymap_shared->Render(player);    
     }
                                     
-    //if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
+    //if (gui_vehicle_scan_shared->vehicle() != nullptr)
     //{
         //GuiManager::Instance().RenderScanVehicle(data_mouse, player->GetNpc()->GetScanTarget());                                  
     //}

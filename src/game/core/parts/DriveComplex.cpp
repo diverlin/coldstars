@@ -273,7 +273,7 @@ bool DriveComplex::GetDockingPermission()
             switch(m_target->subtype())
             {
                 case type::entity::SPACESTATION_ID: { return ((SpaceStation*)m_target)->land()->GetPermissionToLand(); break; }
-                //case SHIP_ID:   { return targetOb->GetVehicle()->getPermissionToLand(); break; }
+                //case SHIP_ID:   { return targetOb->vehicle()->getPermissionToLand(); break; }
             }
             break;
         }

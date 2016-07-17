@@ -37,13 +37,13 @@ class MeshCollector
         
         void add(jeti::Mesh*, MeshDescriptor);
         jeti::Mesh* getMesh(int) const;
-        jeti::Mesh* getMesh(TYPE::MESH) const;
+        jeti::Mesh* getMesh(type::MESH) const;
 
         ~MeshCollector();
 
     private:
         std::map<int, std::pair<MeshDescriptor, jeti::Mesh*>> m_idsMeshes;
-        std::map<TYPE::MESH, std::vector<std::pair<MeshDescriptor, jeti::Mesh*>>> m_typesMeshes;
+        std::map<type::MESH, std::vector<std::pair<MeshDescriptor, jeti::Mesh*>>> m_typesMeshes;
 
         MeshCollector() = default;
 

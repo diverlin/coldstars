@@ -55,9 +55,9 @@ class GuiManager
         bool UpdateMouseInteractionWithScanVehicle(const MouseData&);             
         void RenderScanVehicle(const MouseData&, bool show_skill = true) const;  
             
-        void PressEventMBL_onGuiElement(TYPE::GUI);
-        void ResetEventOnGuiElement(TYPE::GUI);
-        BaseGuiElement* GetGuiElement(TYPE::GUI) const;
+        void PressEventMBL_onGuiElement(type::GUI);
+        void ResetEventOnGuiElement(type::GUI);
+        BaseGuiElement* GetGuiElement(type::GUI) const;
                 
     private:
         GuiManager();

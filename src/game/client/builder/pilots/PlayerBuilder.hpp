@@ -17,13 +17,11 @@
 */
 
 
-#ifndef PLAYERBUILDER_HPP
-#define PLAYERBUILDER_HPP
+#pragma once
 
-#include <types/MyInt.hpp>
+#include <types/IdType.hpp>
 
 class Player;
-
 
 class PlayerBuilder
 {
@@ -31,18 +29,18 @@ class PlayerBuilder
         static PlayerBuilder& Instance();
         ~PlayerBuilder();
 
-        Player* GetNewPlayerTemplate(INTLONGEST id = NONE_ID) const;
+        Player* GetNewPlayerTemplate(const id_type& id = NONE) const;
         Player* GetNewPlayer() const;
                                      
     private:               
-        PlayerBuilder() {};
+        PlayerBuilder() {}
         PlayerBuilder(const PlayerBuilder&) = delete;
         PlayerBuilder& operator=(const PlayerBuilder&) = delete;
                          
         void CreateNewInternals(Player*) const;        
 };  
 
-#endif 
+
     
 
         

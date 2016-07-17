@@ -20,7 +20,7 @@
 #include "../../common/constants.hpp"
 #include <ceti/Logger.hpp>
 #ifdef USE_MODULES
-#include <items/modules/BakModule.hpp>
+#include <item/modules/BakModule.hpp>
 #endif
 
 namespace item {

@@ -43,11 +43,11 @@ void MacroScenarioSelfSafety::UpdateInStaticInSpace(Npc* npc) const
     }
     else
     {
-        //if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->typeId() != TYPE::ENTITY::STARSYSTEM_ID)
+        //if (npc->GetStateMachine().GetMacroTaskManager().GetTarget()->typeId() != type::entity::STARSYSTEM_ID)
         //{
-            //if (npc->GetVehicle()->GetFailBackStarSystem() != nullptr)
+            //if (npc->vehicle()->GetFailBackStarSystem() != nullptr)
             //{
-                //Task microtask(TYPE::AISCENARIO::MICRO_JUMP_ID, npc->GetVehicle()->GetFailBackStarSystem()->id());
+                //Task microtask(type::AISCENARIO::MICRO_JUMP_ID, npc->vehicle()->GetFailBackStarSystem()->id());
                 //npc->GetStateMachine().SetCurrentMicroTask(microtask);
             //}
         //}

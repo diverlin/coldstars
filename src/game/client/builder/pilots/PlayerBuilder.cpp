@@ -28,7 +28,7 @@
 #include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 #include <common/constants.hpp>
 
@@ -75,8 +75,8 @@ Player* PlayerBuilder::GetNewPlayer() const
 void PlayerBuilder::CreateNewInternals(Player* player) const
 {    
     TYPE::RACE prace_id         = TYPE::RACE::R0_ID;
-    TYPE::ENTITY psubtype_id    = TYPE::ENTITY::RANGER_ID;
-    TYPE::ENTITY psubsubtype_id = TYPE::ENTITY::WARRIOR_ID;
+    type::entity psubtype_id    = type::entity::RANGER_ID;
+    type::entity psubsubtype_id = type::entity::WARRIOR_ID;
     int size_id        = SIZE_4_ID;
     int weapons_num    = 6;
     TYPE::TECHLEVEL tech_level = TYPE::TECHLEVEL::L3_ID;

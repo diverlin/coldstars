@@ -20,7 +20,7 @@
 #include "ButtonItemSlot.hpp"
 
 #include <slots/ItemSlot.hpp>
-#include <items/BaseItem.hpp>
+#include <item/BaseItem.hpp>
 
 #include <pilots/Player.hpp>
 #include <pilots/Npc.hpp>
@@ -40,7 +40,7 @@ void ButtonItemSlot::OnPressEventMBL(Player* player)
 /* virtual override final */
 void ButtonItemSlot::OnPressEventMBR(Player* player)
 {    
-    //player->GetNpc()->GetVehicle()->GetComplexWeapon().SetTarget(GetItemSlot()->GetOwnerVehicle(), GetItemSlot());
+    //player->GetNpc()->vehicle()->GetComplexWeapon().SetTarget(GetItemSlot()->GetOwnerVehicle(), GetItemSlot());
 }
 
 /* virtual override final */
@@ -54,12 +54,11 @@ void ButtonItemSlot::RenderUnique(const jeti::Renderer& render, Player* player) 
 {
     //GetItemSlot()->Render(render, GetBox(), glm::vec2(0,0), true);
     
-    if (player->GetCursor().GetItemSlot()->GetItem() != nullptr)
-    {
-        RenderMarkEmptySlot(render, player->GetCursor().GetMouseData().pos_screencoord, getGuiItemSlotType(player->GetCursor().GetItemSlot()->GetItem()->GetParentSubTypeId()));
+    if (player->GetCursor().GetItemSlot()->item() != nullptr) {
+        RenderMarkEmptySlot(render, player->GetCursor().GetMouseData().pos_screencoord, getGuiItemSlotType(player->GetCursor().GetItemSlot()->item()->parentSubtype()));
     }
     
-//    if (player->GetNpc()->GetVehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
+//    if (player->GetNpc()->vehicle()->GetComplexWeapon().IsAnyWeaponSelected() == true)
 //    {
 //        RenderMarkTarget();
 //    }
@@ -70,9 +69,9 @@ void ButtonItemSlot::RenderInfo(const jeti::Renderer& render) const
 {
     if (GetItemSlot() != nullptr)
     {
-        if (GetItemSlot()->GetItem() != nullptr)
+        if (GetItemSlot()->item() != nullptr)
         {
-            //GetItemSlot()->GetItem()->RenderInfo(render, GetBox().center());
+            //GetItemSlot()->item()->RenderInfo(render, GetBox().center());
         }
         else
         {

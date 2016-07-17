@@ -216,7 +216,7 @@ void RenderManager::addIfVisible(ShockWaveEffect* effect, const VisibilityData& 
 void RenderManager::addIfVisible(LazerTraceEffect* effect, const VisibilityData& data)
 {
 //    if ( (isLineOnVisibleScreenArea(effect->GetStartPos(), effect->GetEndPos()))) {
-//        if (isObjectWithinRadarRange(effect, npc->GetVehicle()))
+//        if (isObjectWithinRadarRange(effect, npc->vehicle()))
 //        {
            m_lazertraces.push_back(effect);
 //        }
@@ -226,7 +226,7 @@ void RenderManager::addIfVisible(LazerTraceEffect* effect, const VisibilityData&
 void RenderManager::addIfVisible(jeti::BaseParticleSystem* effect, const VisibilityData& data)
 {
 //    if (isRectOnVisibleScreenArea(effect->center(), 600, data.screen.worldcoord, data.screen.scale)) {
-//        if (isObjectWithinRadarRange(effect, npc->GetVehicle())) {
+//        if (isObjectWithinRadarRange(effect, npc->vehicle())) {
             m_particlesystems.push_back(effect);
 //        }
 //    }
@@ -240,7 +240,7 @@ void RenderManager::addIfVisible(VerticalFlowText* effect, const VisibilityData&
 }
 
 
-void RenderManager::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsystem)
+void RenderManager::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
 {   
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -276,7 +276,7 @@ void RenderManager::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsy
 
             // BLOOM background and star (uses many FBO)
             //resizeGl(w, h);
-            // alpitodorender render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->GetVehicle()->starsystem()->GetStar()->GetBrightThreshold());
+            // alpitodorender render.GetBloom().Proceed(render, w, h, render.GetLastFbo().GetTexture(), npc->vehicle()->starsystem()->GetStar()->GetBrightThreshold());
         }
 
         // VOLUMETRIC LIGHT to FBO1
@@ -425,7 +425,7 @@ void RenderManager::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsy
         //resizeGl(w, h); 
             
       
-        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->GetVehicle()->center(), world_coord, 200 /*npc->GetVehicle()->GetProperties().radius*/);         
+        //render.DrawPostEffectFogWar(render.GetLastFbo().GetTexture(), w, h, npc->vehicle()->center(), world_coord, 200 /*npc->vehicle()->GetProperties().radius*/);         
        
         // render text
         //resizeGl(w*scale, h*scale); 
@@ -441,7 +441,7 @@ void RenderManager::RenderInSpace_NEW(jeti::Renderer& render, StarSystem* starsy
     //render.SetOrthogonalProjection(w, h); 
 }
     
-void RenderManager::renderSceneInSpace(StarSystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
+void RenderManager::renderSceneInSpace(Starsystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
     jeti::Renderer& renderer = jeti::Screen::get().GetRender();
     jeti::Camera& camera = jeti::Screen::get().GetCamera();
@@ -467,18 +467,18 @@ void RenderManager::renderSceneInSpace(StarSystem* starsystem, bool turn_ended, 
 //                starsystem->DrawPath();
 //            }
             
-//            npc->GetVehicle()->GetComplexDrive().DrawPath(renderer);
-//            npc->GetVehicle()->GetComplexWeapon().RenderWeaponsRange();
-//            npc->GetVehicle()->GetComplexWeapon().RenderWeaponIcons();
+//            npc->vehicle()->GetComplexDrive().DrawPath(renderer);
+//            npc->vehicle()->GetComplexWeapon().RenderWeaponsRange();
+//            npc->vehicle()->GetComplexWeapon().RenderWeaponIcons();
         
 //            if (show.GetRangeRadar() == true)
 //            {
-//                npc->GetVehicle()->RenderRadarRange();
+//                npc->vehicle()->RenderRadarRange();
 //            }
         
-//            if ( (npc->GetVehicle()->GetSlotGrapple()->GetItem() != nullptr) and (npc->GetVehicle()->GetSlotGrapple()->GetSelected() == true) )
+//            if ( (npc->vehicle()->GetSlotGrapple()->item() != nullptr) and (npc->vehicle()->GetSlotGrapple()->GetSelected() == true) )
 //            {
-//                npc->GetVehicle()->RenderGrappleRange();
+//                npc->vehicle()->RenderGrappleRange();
 //            }
 //        }
     

@@ -1,9 +1,7 @@
 cmake_minimum_required (VERSION 2.8)
 
-set(PROJECT ${PROJECT_CLIENT})
-
-file(GLOB_RECURSE ${PROJECT}_SOURCE RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
-file(GLOB_RECURSE ${PROJECT}_HEADER RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp)
+file(GLOB_RECURSE ${PROJECT_CLIENT}_SRC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.cpp)
+file(GLOB_RECURSE ${PROJECT_CLIENT}_HDR RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.hpp;ALL)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../common)
@@ -14,15 +12,15 @@ else ()
     set(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
 endif ()
 
-add_executable (${PROJECT} ${${ROJECT}_SOURCE} ${${PROJECT}_HEADER})
-target_link_libraries(${PROJECT}
+add_executable (${PROJECT_CLIENT} ${${PROJECT_CLIENT}_SRC} ${${PROJECT_CLIENT}_HDR})
+target_link_libraries(${PROJECT_CLIENT}
     ${PROJECT_CORE}
     boost_system
     ${PROJECT_JETI}
     ${PROJECT_METI}
     ${PROJECT_CETI}
 )
-set_target_properties(${PROJECT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
+set_target_properties(${PROJECT_CLIENT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
 
 # deploy
 #ADD_CUSTOM_COMMAND(

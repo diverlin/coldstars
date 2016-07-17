@@ -30,7 +30,7 @@
 
 GuiRadar::GuiRadar()
 {
-    setSubTypeId(TYPE::GUI::GUI_RADAR_ID);
+    setSubTypeId(type::GUI::GUI_RADAR_ID);
     
     textureOb_background        = GuiTextureObCollector::Instance().radar_background;
     textureOb_bar               = GuiTextureObCollector::Instance().radar_bar;
@@ -87,10 +87,10 @@ void GuiRadar::AddIfWithinRadarRange(SpaceObject* object, const Vehicle& vehicle
 /* virtual override final */
 void GuiRadar::RenderUnique(const jeti::Renderer& render, Player* player) const
 {
-    float range_diameter = 2*player->GetNpc()->GetVehicle()->GetProperties().radar;
+    float range_diameter = 2*player->GetNpc()->vehicle()->properties().radar;
     ceti::Rect range_rect(0, 0, scale*range_diameter, scale*range_diameter);
     
-    range_rect.setCenter(rect.center() + meti::vec2(player->GetNpc()->GetVehicle()->center()) * scale);
+    range_rect.setCenter(rect.center() + meti::vec2(player->GetNpc()->vehicle()->position()) * scale);
     
     //drawTexturedRect(textureOb_background, rect, -2.0);
     //drawTexturedRect(textureOb_bar, rect, -2.0);
@@ -102,33 +102,33 @@ void GuiRadar::RenderUnique(const jeti::Renderer& render, Player* player) const
     {         
         for (unsigned int i=0; i<entity_vec.size(); i++)
         {
-            switch(entity_vec[i]->typeId())
+            switch(entity_vec[i]->type())
             {
-                case TYPE::ENTITY::STAR_ID:
+                case type::entity::STAR_ID:
                 {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_yellow->GetMaterial().texture);
                     size = 2*size_base;
                     break;
                 }
-                case TYPE::ENTITY::PLANET_ID:
+                case type::entity::PLANET_ID:
                 {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_blue->GetMaterial().texture);
                     size = 1.5*size_base;
                     break;                
                 }
-                case TYPE::ENTITY::ASTEROID_ID:
+                case type::entity::ASTEROID_ID:
                 {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_red->GetMaterial().texture);
                     size = 1.25*size_base;
                     break;                
                 }
-                case TYPE::ENTITY::BLACKHOLE_ID:
+                case type::entity::BLACKHOLE_ID:
                 {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_purple->GetMaterial().texture);
                     size = 1.5*size_base;
                     break;                
                 }
-                case TYPE::ENTITY::VEHICLE_ID:
+                case type::entity::VEHICLE_ID:
                 {
                     glBindTexture(GL_TEXTURE_2D, GuiTextureObCollector::Instance().dot_green->GetMaterial().texture);
                     size = 1*size_base;

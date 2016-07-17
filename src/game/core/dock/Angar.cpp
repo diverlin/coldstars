@@ -151,9 +151,9 @@ bool Angar::TankUpVehicle(Vehicle* vehicle) const
 void Angar::UpdateInStatic() const
 {
     for (auto slot: vehicle_visitors_slot_vec) {
-        if (slot->GetVehicle() != nullptr)  {
-            if (slot->GetVehicle()->npc() != nullptr) {
-                slot->GetVehicle()->npc()->updateInKosmoportInStatic();
+        if (slot->vehicle() != nullptr)  {
+            if (slot->vehicle()->npc() != nullptr) {
+                slot->vehicle()->npc()->updateInKosmoportInStatic();
             }
         }
     }
@@ -163,7 +163,7 @@ int Angar::GetFreeVehicleSlotTotalNum() const
 {
     int sum_free = 0;
     for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++) {
-        if (vehicle_visitors_slot_vec[i]->GetVehicle() == nullptr) {
+        if (vehicle_visitors_slot_vec[i]->vehicle() == nullptr) {
             sum_free++;
         }
     }
@@ -174,14 +174,14 @@ bool Angar::AddVehicle(Vehicle* vehicle)
 {
     if (vehicle->subsubtype() == type::entity::WARRIOR_ID) {
         for (unsigned int i=0; i<vehicle_military_slot_vec.size(); i++) {
-            if (vehicle_military_slot_vec[i]->GetVehicle() == nullptr) {
+            if (vehicle_military_slot_vec[i]->vehicle() == nullptr) {
                 vehicle_military_slot_vec[i]->InsertVehicle(vehicle);
                 return true;
             }
         }
     } else {
         for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++) {
-            if (vehicle_visitors_slot_vec[i]->GetVehicle() == nullptr) {
+            if (vehicle_visitors_slot_vec[i]->vehicle() == nullptr) {
                 vehicle_visitors_slot_vec[i]->InsertVehicle(vehicle);
                 return true;
             }
@@ -195,13 +195,13 @@ std::string Angar::GetDockVehicleStr() const
 {
     std::string str;
     for (unsigned int i=0; i<vehicle_military_slot_vec.size(); i++) {
-        if (vehicle_military_slot_vec[i]->GetVehicle() != nullptr) {
-            str += "_m" + std::to_string(vehicle_military_slot_vec[i]->GetVehicle()->id());
+        if (vehicle_military_slot_vec[i]->vehicle() != nullptr) {
+            str += "_m" + std::to_string(vehicle_military_slot_vec[i]->vehicle()->id());
         }
     }
     for (unsigned int i=0; i<vehicle_visitors_slot_vec.size(); i++) {
-        if (vehicle_visitors_slot_vec[i]->GetVehicle() != nullptr) {
-            str += "_v" + std::to_string(vehicle_visitors_slot_vec[i]->GetVehicle()->id());
+        if (vehicle_visitors_slot_vec[i]->vehicle() != nullptr) {
+            str += "_v" + std::to_string(vehicle_visitors_slot_vec[i]->vehicle()->id());
         }
     }
     return str;

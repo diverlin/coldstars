@@ -64,7 +64,7 @@ void VehicleSlot::Release()
 
 void VehicleSlot::SwapVehicle(VehicleSlot* vehicle_slot)
 {
-    Vehicle* tmp_vehicle = vehicle_slot->GetVehicle();
+    Vehicle* tmp_vehicle = vehicle_slot->vehicle();
     vehicle_slot->InsertVehicle(GetVehicle());
     InsertVehicle(tmp_vehicle);
 }

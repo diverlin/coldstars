@@ -51,7 +51,7 @@ ContainerDrawable::~ContainerDrawable()
 //    jeti::drawInfoIn2Column(GetInfo().title_list, GetInfo().value_list, pos);
     
 //    pos.x += 300;
-//    m_ItemSlot->GetItem()->RenderInfo(render, pos);
+//    m_ItemSlot->item()->RenderInfo(render, pos);
 //}
                
 void ContainerDrawable::Render(const jeti::Renderer& render)

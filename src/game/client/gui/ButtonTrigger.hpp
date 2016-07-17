@@ -24,9 +24,9 @@
 class ButtonTrigger : public BaseButton
 {
     public:
-        ButtonTrigger(TYPE::GUI subtype_id, const std::string& info, void (*pAction)(Player*), jeti::TextureOb* textureOb)
+        ButtonTrigger(type::GUI subtype_id, const std::string& info, void (*pAction)(Player*), jeti::TextureOb* textureOb)
         :
-        BaseButton(TYPE::GUI::BUTTON_TRIGGER_ID, subtype_id, info, pAction, textureOb) {};
+        BaseButton(type::GUI::BUTTON_TRIGGER_ID, subtype_id, info, pAction, textureOb) {};
                
         virtual ~ButtonTrigger() override final {};  
 

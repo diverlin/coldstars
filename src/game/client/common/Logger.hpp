@@ -22,25 +22,25 @@
 
 class Logger
 {
-    public:
-        static Logger& Instance();
-        ~Logger();
-        
-        void Log(const std::string&, int dip = 0);
-        void warn(const std::string&, int dip = 0);
-        void error(const std::string&);
+public:
+    static Logger& Instance();
+    ~Logger();
 
-    private:
-        Logger();
-        Logger(const Logger&) = delete;
-        Logger& operator=(const Logger&) = delete;
+    void Log(const std::string&, int dip = 0);
+    void warn(const std::string&, int dip = 0);
+    void error(const std::string&);
 
-        enum class MODE: int { NONE=0, SCREEN, FILE, SCREENFILE };
-        MODE mode;
-        
-        std::ofstream file;
-        
-        void toScreen(const std::string&, int);
-        void toFile(const std::string&, int);
+private:
+    Logger();
+    Logger(const Logger&) = delete;
+    Logger& operator=(const Logger&) = delete;
+
+    enum class MODE: int { NONE=0, SCREEN, FILE, SCREENFILE };
+    MODE mode;
+
+    std::ofstream file;
+
+    void toScreen(const std::string&, int);
+    void toFile(const std::string&, int);
 }; 
 

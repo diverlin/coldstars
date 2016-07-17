@@ -52,7 +52,7 @@ type::entity getRandNpcSubTypeId(type::race race_id)
 
 type::entity getRandNpcSubSubTypeId(type::entity subtype_id)
 {
-//    if (subtype_id == TYPE::ENTITY::RANGER_ID) {
+//    if (subtype_id == type::entity::RANGER_ID) {
 //        return meti::getRand(global::get().raceDescriptors().getSubSubTypes());
 //    } else {
         return subtype_id;

@@ -22,15 +22,15 @@
 
 struct MeshDescriptor
 {
-    TYPE::MESH type_id;
+    type::MESH type_id;
 
-    MeshDescriptor(TYPE::MESH type_id):
+    MeshDescriptor(type::MESH type_id):
     type_id(type_id)
     {}
 
     bool operator==(const MeshDescriptor& rhs) const
     {
-        if (rhs.type_id != TYPE::MESH::NONE_ID)
+        if (rhs.type_id != type::MESH::NONE_ID)
             if (type_id != rhs.type_id)
                 return false;
 

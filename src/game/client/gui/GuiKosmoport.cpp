@@ -36,7 +36,7 @@
 
 #include <dock/Kosmoport.hpp>
 #include <slots/ItemSlot.hpp>
-#include <items/BaseItem.hpp>
+#include <item/BaseItem.hpp>
 
 #include <jeti/Render.hpp>
 
@@ -193,7 +193,7 @@ void GuiKosmoport::ExitGuiScan()
     Logger::Instance().Log("GuiKosmoport::ExitGuiScan", GUI_LOG_DIP);
     #endif    
     
-        //if (gui_vehicle_scan_shared->GetVehicle() == m_Player->GetNpc()->GetVehicle())
+        //if (gui_vehicle_scan_shared->vehicle() == m_Player->GetNpc()->vehicle())
            //{
                 //gui_skills_shared->Acknowledge();
            //}
@@ -217,7 +217,7 @@ void GuiKosmoport::ExitGuiAngarScreen()
     Logger::Instance().Log("GuiKosmoport::ExitGuiAngarScreen", GUI_LOG_DIP);
     #endif    
     
-    if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
+    if (gui_vehicle_scan_shared->vehicle() != nullptr)
     {
         ExitGuiScan();
     }
@@ -236,9 +236,9 @@ void GuiKosmoport::EnterGuiStoreScreen()
     
     //gui_store.SetOffset(center_screen + GUI_STORE_OFFSET);
     
-    //m_Player->GetNpc()->SetScanTarget(m_Player->GetNpc()->GetVehicle()); //??
+    //m_Player->GetNpc()->SetScanTarget(m_Player->GetNpc()->vehicle()); //??
     //bool lock_gui_scan_vehicle = true;
-    //gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->GetVehicle(), center_screen + GUI_VEHICLE_INSTORE_OFFSET, lock_gui_scan_vehicle);
+    //gui_vehicle_scan_shared->BindVehicle(m_Player->GetNpc()->vehicle(), center_screen + GUI_VEHICLE_INSTORE_OFFSET, lock_gui_scan_vehicle);
     
     //active_screen_id = GUI::SCREEN::STORE_ID;
 }
@@ -275,7 +275,7 @@ void GuiKosmoport::EnterGuiGalaxyMapScreen()
     #endif    
     
         //active_screen_id = GUI::SCREEN::GALAXYMAP_ID;        
-        //gui_galaxymap_shared->BindGalaxy(m_Player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy());
+        //gui_galaxymap_shared->BindGalaxy(m_Player->GetNpc()->vehicle()->starsystem()->GetSector()->GetGalaxy());
 }
 
 void GuiKosmoport::ExitGuiGalaxyMapScreen()
@@ -400,7 +400,7 @@ bool GuiKosmoport::Update(const MouseData& data_mouse)
                 gui_angar.ButtonsAction();
                     if (interaction == false)
                     {
-                    if (gui_vehicle_scan_shared->GetVehicle() != nullptr) 
+                    if (gui_vehicle_scan_shared->vehicle() != nullptr)
                     { 
                         interaction = GuiManager::Instance().UpdateMouseInteractionWithScanVehicle(data_mouse);
                     }
@@ -490,7 +490,7 @@ void GuiKosmoport::Render(const MouseData& data_mouse)
             enable_BLEND();   
                     gui_angar.RenderVehicleAndItemSlots();
                     
-                if (gui_vehicle_scan_shared->GetVehicle() != nullptr)
+                if (gui_vehicle_scan_shared->vehicle() != nullptr)
                 { 
                     GuiManager::Instance().RenderScanVehicle(data_mouse, gui_vehicle_scan_shared); 
                 }

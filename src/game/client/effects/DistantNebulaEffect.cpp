@@ -83,11 +83,11 @@ void DistantNebulaEffect::ResolveData()
 
 DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
 {
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(type::MESH::PLANE_ID);
 
     jeti::TextureOb* textureOb = nullptr;
-    if (color_id == NONE_ID)     textureOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::NEBULA_BACKGROUND_ID);
-    else                         textureOb = TextureCollector::Instance().getTextureByColorId(TYPE::TEXTURE::NEBULA_BACKGROUND_ID, color_id);
+    if (color_id == NONE)     textureOb = TextureCollector::Instance().getTextureByTypeId(type::texture::NEBULA_BACKGROUND_ID);
+    else                         textureOb = TextureCollector::Instance().getTextureByColorId(type::texture::NEBULA_BACKGROUND_ID, color_id);
            
     float angle = meti::getRandInt(0, 360);
     float delta_angle = 0.0;
@@ -105,7 +105,7 @@ DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
     glm::vec3 size = textureOb->size();
     // alpitodorender dn->SetRenderData(mesh, textureOb, size*=3);
 
-    dn->setCenter(center);
+    dn->setPosition(center);
     //dn->SetAngle(angle);
     //dn->SetDeltaAngle(delta_angle);
     

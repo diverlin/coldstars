@@ -40,14 +40,14 @@
 #include "spaceobjects/Vehicle.hpp"
 
 #include <common/Global.hpp>
-#include <managers/EntitiesManager.hpp>
+#include <managers/EntityManager.hpp>
 
 #include <world/galaxy.hpp>
 #include <world/Sector.hpp>
 #include <world/starsystem.hpp>
 #include <ai/God.hpp>
 
-#include <struct/GalaxyDescriptor.hpp>
+#include <descriptors/GalaxyDescriptor.hpp>
 #include "dock/Land.hpp"
 
 #include "run_scenario/NormalRunScenario.hpp"
@@ -70,7 +70,7 @@ int main()
     
     jeti::Screen::get().InitRenderStuff();
     initGameStuff();
-    jeti::Screen::get().GetRender().SetMeshQuad(MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID));
+    jeti::Screen::get().GetRender().SetMeshQuad(MeshCollector::Instance().getMesh(type::MESH::PLANE_ID));
         
     //runMatrixPerfomanceTest();
         
@@ -87,11 +87,11 @@ int main()
     }
     run_scenario->Init(player);
     
-    Galaxy* galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();       
+    Galaxy* galaxy = player->GetNpc()->vehicle()->starsystem()->sector()->galaxy();
         
-    player->GetNpc()->GetVehicle()->SetGodMode(true);
-    //player->GetNpc()->GetVehicle()->TEST_DamageAndLockRandItems(); // test
-    //player->GetNpc()->GetVehicle()->TEST_DropRandomItemToSpace();
+    player->GetNpc()->vehicle()->setGodMode(true);
+    //player->GetNpc()->vehicle()->TEST_DamageAndLockRandItems(); // test
+    //player->GetNpc()->vehicle()->TEST_DropRandomItemToSpace();
 
     //Screen::Instance().Resize(global::get().config().SCREEN_WIDTH/1.5, global::get().config().SCREEN_HEIGHT);
     
@@ -111,8 +111,8 @@ int main()
 //    // GAME LOOP
 //    while (jeti::Screen::get().GetWindow().isOpen())
 //    {
-//        //std::cout<<player->GetNpc()->GetVehicle()->center().x<<std::endl;
-//        //std::cout<<player->GetNpc()->GetVehicle()->GetProperties().radar<<std::endl;
+//        //std::cout<<player->GetNpc()->vehicle()->center().x<<std::endl;
+//        //std::cout<<player->GetNpc()->vehicle()->GetProperties().radar<<std::endl;
                 
 //        /* server code start */
 //        TurnTimer::Instance().Update();
@@ -138,7 +138,7 @@ int main()
 //            bool load_event = global::get().entitiesManager().UpdateLoadRequest();
 //            if (load_event == true) {
 //                player = global::get().entitiesManager().GetPlayer();
-//                galaxy = player->GetNpc()->GetVehicle()->starsystem()->GetSector()->GetGalaxy();
+//                galaxy = player->GetNpc()->vehicle()->starsystem()->GetSector()->GetGalaxy();
 //            }
 //            if (save_event == true) {
 //                //..

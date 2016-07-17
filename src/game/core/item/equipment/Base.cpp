@@ -123,7 +123,7 @@ bool BaseEquipment::InsertModule(BaseModule* module)
 
 //    if (draw_text == true)
 //    {
-//        if (subTypeId() == TYPE::ENTITY::ROCKET_EQUIPMENT_ID)
+//        if (subTypeId() == type::entity::ROCKET_EQUIPMENT_ID)
 //        {
 //            glm::vec2 pos(box.center().x - box.size().x/2 + gui_offset.x, box.center().y + gui_offset.y);
 //            jeti::Screen::get().DrawText(std::to_string(((RocketEquipment*)this)->GetAmmo()) + "/" + std::to_string(((RocketEquipment*)this)->GetAmmoMax()), 12, pos);
