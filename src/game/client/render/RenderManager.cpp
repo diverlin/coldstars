@@ -42,8 +42,7 @@
 #include <effects/ShockWaveEffect.hpp>
 #include <text/VerticalFlowText.hpp>
 
-namespace
-{ // anonymus namespace
+namespace {
 
 bool isRectOnVisibleScreenArea(const glm::vec3& center, const glm::vec3& size, const glm::vec2& screen_wc, float scale)
 {
@@ -97,7 +96,7 @@ bool isPointOnVisibleScreenArea(const glm::vec2& p, const glm::vec2& screen_wc)
     return true;
 }
 
-} // anonymus namespace
+} // namespace
 
 
 RenderManager::RenderManager()
@@ -443,7 +442,7 @@ void RenderManager::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsy
     
 void RenderManager::renderSceneInSpace(Starsystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
-    jeti::Renderer& renderer = jeti::Screen::get().GetRender();
+    jeti::Renderer& renderer = jeti::Screen::get().renderer();
     jeti::Camera& camera = jeti::Screen::get().GetCamera();
     int w = jeti::Screen::get().GetWidth();
     int h = jeti::Screen::get().GetHeight();

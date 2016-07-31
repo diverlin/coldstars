@@ -20,6 +20,7 @@
 #include "Sector.hpp"
 #include <common/constants.hpp>
 #include <common/Global.hpp>
+#include <common/common.hpp>
 #include <managers/EntityManager.hpp>
 
 #include <meti/RandUtils.hpp>
@@ -34,6 +35,23 @@ Galaxy::Galaxy(int id)
 
 Galaxy::~Galaxy()
 {}
+
+bool Galaxy::operator==(const Galaxy& rhs) const {
+    bool result = isEqual(m_sectors, rhs.m_sectors);
+    return result;
+}
+
+bool Galaxy::operator!=(const Galaxy& rhs) const {
+    return *this == rhs;
+}
+
+Starsystem* Galaxy::activeStarsystem() const
+{
+    assert(m_sectors.size() != 0);
+    return m_sectors[0]->activeStarsystem();
+}
+
+
 
 /* virtual */
 void Galaxy::putChildrenToGarbage() const

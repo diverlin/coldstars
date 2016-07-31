@@ -91,6 +91,17 @@ Starsystem::~Starsystem()
     m_counter--;
 }      
 
+bool Starsystem::operator==(const Starsystem& rhs) const
+{
+    // todo: implement
+    return true;
+}
+
+bool Starsystem::operator!=(const Starsystem& rhs) const
+{
+    return !(*this == rhs);
+}
+
 /* virtual */
 void Starsystem::putChildrenToGarbage() const
 {    
@@ -658,8 +669,7 @@ void Starsystem::__rocketCollision_s(bool show_effect)
 
 void Starsystem::__asteroidCollision_s(bool show_effect)
 {
-    bool collide = false;
-    
+    bool collide = false;    
     for(unsigned int ai = 0; ai < m_asteroids.size(); ai++)
     {
         if (m_asteroids[ai]->isAlive() == true)

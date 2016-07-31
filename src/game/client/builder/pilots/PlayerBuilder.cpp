@@ -64,7 +64,7 @@ Player* PlayerBuilder::GetNewPlayerTemplate(const id_type& id) const
     return player;       
 } 
    
-Player* PlayerBuilder::GetNewPlayer() const
+Player* PlayerBuilder::createNewPlayer() const
 {
     Player* player = GetNewPlayerTemplate();
     CreateNewInternals(player);

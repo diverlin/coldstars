@@ -43,6 +43,8 @@ public:
     void createWorld(const descriptor::Galaxy&);
     void update();
 
+    Galaxy* galaxy() const { return m_galaxy; }
+
 private:
     GameDate m_DateLastUpdate;
 

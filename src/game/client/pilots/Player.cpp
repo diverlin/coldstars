@@ -428,7 +428,7 @@ void Player::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
     
 void Player::RenderInSpace(Starsystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
 {   
-    jeti::Renderer& renderer = jeti::Screen::get().GetRender();
+    jeti::Renderer& renderer = jeti::Screen::get().renderer();
     jeti::Camera& camera = jeti::Screen::get().GetCamera();
     int w = jeti::Screen::get().GetWidth();
     int h = jeti::Screen::get().GetHeight();

@@ -22,21 +22,43 @@
 
 #include <ai/God.hpp>
 
+#include <world/galaxy.hpp>
+
 #include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
-bool Game::run() const
+namespace model {
+
+World::World()
 {
-    /// shortcuts
-    God& god = global::get().god();
+    auto descriptor = global::get().descriptors().galaxy().random();
+    global::get().god().createWorld(descriptor);
+}
 
-    /// create the world
-    god.createWorld(global::get().descriptors().galaxy().random());
+World::~World()
+{
+}
 
-    /// game loop
+Starsystem* World::activeStarsystem() const {
+    return global::get().god().galaxy()->activeStarsystem();
+}
+
+bool World::operator==(const World& rhs) const {
+    // todo implement
+    return true;
+}
+
+bool World::run() const
+{
     while (m_isRunning) {
-        god.update();
+        global::get().god().update();
     }
-
     return EXIT_SUCCESS;
 }
+
+void World::update()
+{
+    global::get().god().update();
+}
+
+} // namespace model

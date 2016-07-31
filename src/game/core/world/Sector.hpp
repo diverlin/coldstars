@@ -36,12 +36,16 @@ class Sector : public SpaceObject
     public:
         Sector(int);
         ~Sector();
+        bool operator==(const Sector& rhs) const;
+        bool operator!=(const Sector& rhs) const;
 
-        void setGalaxy(Galaxy* galaxy)  { m_galaxy = galaxy; };
-        void setPosition(const glm::vec3& center) { m_position = center; };
+        Starsystem* activeStarsystem() const;
 
-        Galaxy* galaxy() const  { return m_galaxy; };
-        const glm::vec3& position() const  { return m_position; };
+        void setGalaxy(Galaxy* galaxy)  { m_galaxy = galaxy; }
+        void setPosition(const glm::vec3& center) { m_position = center; }
+
+        Galaxy* galaxy() const  { return m_galaxy; }
+        const glm::vec3& position() const  { return m_position; }
 
         virtual void putChildrenToGarbage() const;
 

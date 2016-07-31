@@ -33,7 +33,7 @@
 TEST(starsystem, add_objects)
 {
     /* create opbjects */
-    Starsystem* starsystem = StarsystemBuilder::getNew();
+    Starsystem* starsystem = StarsystemBuilder::create();
 
     Star* star = StarBuilder::getNew();
     Planet* planet = PlanetBuilder::getNew();

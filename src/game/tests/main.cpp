@@ -53,6 +53,10 @@
 #include <builder/item/artefacts//ALL>
 #include <builder/item/other/ALL>
 
+#include <world/galaxy.hpp>
+#include <world/Sector.hpp>
+#include <world/starsystem.hpp>
+
 #include <item/equipment/ALL>
 
 #include "helper.hpp"
@@ -142,4 +146,26 @@ TEST(descriptor,manager)
 //    EXPECT_EQ(descriptor_manager.getRandom(descriptor::Type::BAK).type(), int(descriptor::Type::BAK));
 }
 
+TEST(clone, galaxy)
+{
+    const auto& descriptor = global::get().descriptors().galaxy().random();
+    auto g1 = global::get().galaxyBuilder().create(descriptor);
+    auto g2 = global::get().galaxyBuilder().create(descriptor);
+    EXPECT_EQ(*g1, *g2);
+}
 
+TEST(clone, sector)
+{
+    const auto& descriptor = global::get().descriptors().sector().random();
+    auto s1 = global::get().sectorBuilder().create(descriptor);
+    auto s2 = global::get().sectorBuilder().create(descriptor);
+    EXPECT_EQ(*s1, *s2);
+}
+
+TEST(clone, starsystem)
+{
+    const auto& descriptor = global::get().descriptors().starsystem().random();
+    auto s1 = global::get().starsystemBuilder().create(descriptor);
+    auto s2 = global::get().starsystemBuilder().create(descriptor);
+    EXPECT_EQ(*s1, *s2);
+}

@@ -18,14 +18,23 @@
 
 #pragma once
 
-class Game {
+class Starsystem;
+
+namespace model {
+
+class World {
 public:
-    Game() {}
-    ~Game() {}
+    World();
+    ~World();
+    bool operator==(const World& rhs) const;
+
+    Starsystem* activeStarsystem() const;
 
     bool run() const;
+    void update();
 
 private:
-    enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
     bool m_isRunning = true;
 };
+
+} // namespace model

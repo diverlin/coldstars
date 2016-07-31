@@ -45,6 +45,7 @@
 #include <world/galaxy.hpp>
 #include <world/Sector.hpp>
 #include <world/starsystem.hpp>
+#include <Game.hpp>
 #include <ai/God.hpp>
 
 #include <descriptors/GalaxyDescriptor.hpp>
@@ -62,6 +63,10 @@
 
 enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
 
+void render(Starsystem* starsystem, glm::vec3& center) {
+
+}
+
 int main()
 {
     //runThreadTest();
@@ -70,26 +75,33 @@ int main()
     
     jeti::Screen::get().InitRenderStuff();
     initGameStuff();
-    jeti::Screen::get().GetRender().SetMeshQuad(MeshCollector::Instance().getMesh(type::MESH::PLANE_ID));
+    jeti::Screen::get().renderer().setMeshQuad(MeshCollector::Instance().get(type::MESH::PLANE_ID));
         
     //runMatrixPerfomanceTest();
         
-    Player* player = PlayerBuilder::Instance().GetNewPlayer();
+    Player* player = PlayerBuilder::Instance().createNewPlayer();
     
-    BaseRunScenario* run_scenario = nullptr;
-    RUN_SCENARIO scenario_type = RUN_SCENARIO::NORMAL_RUN;
-    switch(scenario_type) {
-        case RUN_SCENARIO::NORMAL_RUN:         { run_scenario = new NormalRunScenario(); break; }
-        case RUN_SCENARIO::TEST_PARTICLES:     { run_scenario = new TestParticlesRunScenario(); break; }    
-        case RUN_SCENARIO::TEST_TEXT:          { run_scenario = new TestTextRunScenario(); break; }
-        case RUN_SCENARIO::TEST_MANY_VAO:      { run_scenario = new TestDrawManySimpleMeshesRunScenario(); break; }
-        default:                               { std::cout<<"INVALID_RUNSCENARIO"<<std::endl; return EXIT_FAILURE; break; }    
+//    BaseRunScenario* run_scenario = nullptr;
+//    RUN_SCENARIO scenario_type = RUN_SCENARIO::NORMAL_RUN;
+//    switch(scenario_type) {
+//        case RUN_SCENARIO::NORMAL_RUN:         { run_scenario = new NormalRunScenario(); break; }
+//        case RUN_SCENARIO::TEST_PARTICLES:     { run_scenario = new TestParticlesRunScenario(); break; }
+//        case RUN_SCENARIO::TEST_TEXT:          { run_scenario = new TestTextRunScenario(); break; }
+//        case RUN_SCENARIO::TEST_MANY_VAO:      { run_scenario = new TestDrawManySimpleMeshesRunScenario(); break; }
+//        default:                               { std::cout<<"INVALID_RUNSCENARIO"<<std::endl; return EXIT_FAILURE; break; }
+//    }
+//    run_scenario->Init(player);
+    
+    model::World world;
+    while(true) {
+        world.update();
+        glm::vec3 pos(0,0,0);
+        render(world.activeStarsystem(), pos);
     }
-    run_scenario->Init(player);
-    
-    Galaxy* galaxy = player->GetNpc()->vehicle()->starsystem()->sector()->galaxy();
+
+//    Galaxy* galaxy = player->GetNpc()->vehicle()->starsystem()->sector()->galaxy();
         
-    player->GetNpc()->vehicle()->setGodMode(true);
+//    player->GetNpc()->vehicle()->setGodMode(true);
     //player->GetNpc()->vehicle()->TEST_DamageAndLockRandItems(); // test
     //player->GetNpc()->vehicle()->TEST_DropRandomItemToSpace();
 

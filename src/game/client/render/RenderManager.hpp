@@ -45,66 +45,66 @@ class VerticalFlowText;
 
 struct VisibilityData
 {
-        struct VisibilityScreenData {
-                glm::vec2 worldcoord;
-                float scale;
-        };
-        struct VisibilityObserverData {
-                glm::vec3 center;
-                float radius;
-        };
-        VisibilityScreenData screen;
-        VisibilityObserverData observer;
+    struct VisibilityScreenData {
+        glm::vec2 worldcoord;
+        float scale;
+    };
+    struct VisibilityObserverData {
+        glm::vec3 center;
+        float radius;
+    };
+    VisibilityScreenData screen;
+    VisibilityObserverData observer;
 };
 
 class RenderManager
 {
-    public:
-        RenderManager();
-        ~RenderManager();
-        
-        void clearVisibleEntities();
+public:
+    RenderManager();
+    ~RenderManager();
 
-        /// visible entities
-        void addIfVisible(StarDrawable*, const VisibilityData&);
-        void addIfVisible(PlanetDrawable*, const VisibilityData&);
-        void addIfVisible(AsteroidDrawable*, const VisibilityData&);
-        void addIfVisible(ContainerDrawable*, const VisibilityData&);
-        void addIfVisible(BulletDrawable*, const VisibilityData&);
-        void addIfVisible(BlackHoleDrawable*, const VisibilityData&);
-        void addIfVisible(ShipDrawable*, const VisibilityData&);
-        void addIfVisible(SpaceStationDrawable*, const VisibilityData&);
-        void addIfVisible(SatelliteDrawable*, const VisibilityData&);
+    void clearVisibleEntities();
 
-        /// visible effects
-        void addIfVisible(ShockWaveEffect*, const VisibilityData&);
-        void addIfVisible(LazerTraceEffect*, const VisibilityData&);
-        void addIfVisible(jeti::BaseParticleSystem*, const VisibilityData&);
-        void addIfVisible(VerticalFlowText*, const VisibilityData&);
-                 
-        void renderSceneInSpace(Starsystem*, bool, bool, bool);
+    /// visible entities
+    void addIfVisible(StarDrawable*, const VisibilityData&);
+    void addIfVisible(PlanetDrawable*, const VisibilityData&);
+    void addIfVisible(AsteroidDrawable*, const VisibilityData&);
+    void addIfVisible(ContainerDrawable*, const VisibilityData&);
+    void addIfVisible(BulletDrawable*, const VisibilityData&);
+    void addIfVisible(BlackHoleDrawable*, const VisibilityData&);
+    void addIfVisible(ShipDrawable*, const VisibilityData&);
+    void addIfVisible(SpaceStationDrawable*, const VisibilityData&);
+    void addIfVisible(SatelliteDrawable*, const VisibilityData&);
 
-    private:
-        /// visible entities
-        std::vector<StarDrawable*>         m_stars;
-        std::vector<PlanetDrawable*>       m_planets;
-        std::vector<AsteroidDrawable*>     m_asteroids;
-        std::vector<ContainerDrawable*>    m_containers;
-        std::vector<BulletDrawable*> m_bullets;
-        std::vector<BlackHoleDrawable*>    m_wormholes;
-        std::vector<ShipDrawable*>         m_ships;
-        std::vector<SatelliteDrawable*>    m_satellites;
-        std::vector<SpaceStationDrawable*> m_spacestations;
-                    
-        /// visible effects
-        std::vector<ShockWaveEffect*>    m_shockwaves;
-        std::vector<LazerTraceEffect*>   m_lazertraces;
-        std::vector<jeti::BaseParticleSystem*> m_particlesystems;
-        std::vector<VerticalFlowText*>   m_texts;
+    /// visible effects
+    void addIfVisible(ShockWaveEffect*, const VisibilityData&);
+    void addIfVisible(LazerTraceEffect*, const VisibilityData&);
+    void addIfVisible(jeti::BaseParticleSystem*, const VisibilityData&);
+    void addIfVisible(VerticalFlowText*, const VisibilityData&);
+
+    void renderSceneInSpace(Starsystem*, bool, bool, bool);
+
+private:
+    /// visible entities
+    std::vector<StarDrawable*>         m_stars;
+    std::vector<PlanetDrawable*>       m_planets;
+    std::vector<AsteroidDrawable*>     m_asteroids;
+    std::vector<ContainerDrawable*>    m_containers;
+    std::vector<BulletDrawable*>       m_bullets;
+    std::vector<BlackHoleDrawable*>    m_wormholes;
+    std::vector<ShipDrawable*>         m_ships;
+    std::vector<SatelliteDrawable*>    m_satellites;
+    std::vector<SpaceStationDrawable*> m_spacestations;
+
+    /// visible effects
+    std::vector<ShockWaveEffect*>    m_shockwaves;
+    std::vector<LazerTraceEffect*>   m_lazertraces;
+    std::vector<jeti::BaseParticleSystem*> m_particlesystems;
+    std::vector<VerticalFlowText*>   m_texts;
     
-        void RenderInSpace_NEW(jeti::Renderer&, Starsystem*);
-        void RenderCollisionRadius(const jeti::Renderer&) const;
-        void RenderAxis(const jeti::Renderer&) const;
+    void RenderInSpace_NEW(jeti::Renderer&, Starsystem*);
+    void RenderCollisionRadius(const jeti::Renderer&) const;
+    void RenderAxis(const jeti::Renderer&) const;
 };
 
 

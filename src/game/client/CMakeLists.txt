@@ -22,13 +22,15 @@ target_link_libraries(${PROJECT_CLIENT}
 )
 set_target_properties(${PROJECT_CLIENT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
 
-# deploy
-#ADD_CUSTOM_COMMAND(
-    #TARGET ${SUBPROJECT}
-    #POST_BUILD
-    #COMMAND ${CMAKE_COMMAND} -E create_symlink ${SOURCE_ROOT}/data ${DEPLOY_DIR}/data
-    #COMMAND ${CMAKE_COMMAND} -E create_symlink ${SOURCE_ROOT}/config/config.info ${DEPLOY_DIR}/config.info
-#)
+# symlinks
+add_custom_target(symlinks
+    COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/src/jeti/shaders ${CMAKE_CURRENT_BINARY_DIR}/shaders # inject to jeti
+    COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/data ${CMAKE_CURRENT_BINARY_DIR}/data
+    COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/config/config.info ${CMAKE_CURRENT_BINARY_DIR}/config.info # inject to data
+    )
 
-#install(FILES ${CMAKE_BINARY_DIR}/${SUBPROJECT} DESTINATION ${DEPLOY_DIR})
-#install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/jeti/shaders DESTINATION ${DEPLOY_DIR})
+# deploy
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_CLIENT} DESTINATION ${DEPLOY_DIR})
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/jeti/shaders DESTINATION ${DEPLOY_DIR}) # inject to jeti
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/data DESTINATION ${DEPLOY_DIR})
+install(FILES ${CMAKE_SOURCE_DIR}/config/config.info DESTINATION ${DEPLOY_DIR}) # inject to data

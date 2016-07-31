@@ -34,9 +34,9 @@ public:
     StarsystemBuilder();
     ~StarsystemBuilder();
 
-    static Starsystem* getNew();
-    static Starsystem* getNew(const descriptor::Starsystem&);
-    static Starsystem* getNew(const std::string&);
+    static Starsystem* create();
+    static Starsystem* create(const descriptor::Starsystem&);
+    static Starsystem* create(const std::string&);
 
 private:
     static void __createInternals(Starsystem*, const descriptor::Starsystem&);

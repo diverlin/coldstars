@@ -42,13 +42,13 @@ StarsystemBuilder::StarsystemBuilder()
 StarsystemBuilder::~StarsystemBuilder()
 {}
 
-Starsystem* StarsystemBuilder::getNew()
+Starsystem* StarsystemBuilder::create()
 {
     const descriptor::Starsystem& descriptor = global::get().descriptors().starsystem().random();
-    return getNew(descriptor);
+    return create(descriptor);
 }
 
-Starsystem* StarsystemBuilder::getNew(const descriptor::Starsystem& descriptor)
+Starsystem* StarsystemBuilder::create(const descriptor::Starsystem& descriptor)
 {
     Starsystem* starsystem = new Starsystem;
     assert(starsystem);
@@ -57,7 +57,7 @@ Starsystem* StarsystemBuilder::getNew(const descriptor::Starsystem& descriptor)
     return starsystem;
 } 
 
-Starsystem* StarsystemBuilder::getNew(const std::string& data)
+Starsystem* StarsystemBuilder::create(const std::string& data)
 {
     //return getNew(descriptor::Base(data));
 }

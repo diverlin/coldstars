@@ -121,7 +121,9 @@ class Starsystem : public SpaceObject
     public:
         Starsystem(const id_type& id = NONE);
         ~Starsystem();
-        
+        bool operator==(const Starsystem& rhs) const;
+        bool operator!=(const Starsystem& rhs) const;
+
         virtual void putChildrenToGarbage() const;
 
         void setContainerNumMax(int container_num_max) { m_container_num_max = container_num_max; }
