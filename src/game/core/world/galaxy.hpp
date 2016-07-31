@@ -22,6 +22,7 @@
 #include <common/Base.hpp>
 #include <glm/glm.hpp>
 
+class Starsystem;
 class Sector;
 class StarSystemsConditionData;
 
@@ -30,6 +31,10 @@ class Galaxy : public Base
     public:
         Galaxy(int);
         ~Galaxy();
+        bool operator==(const Galaxy& rhs) const;
+        bool operator!=(const Galaxy& rhs) const;
+
+        Starsystem* activeStarsystem() const;
 
         virtual void putChildrenToGarbage() const;
 

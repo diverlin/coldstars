@@ -97,8 +97,8 @@ TEST(communication, inject_ship)
 
 TEST(comm, new_starsystem)
 {
-    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
-    global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
+//    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::STARSYSTEM);
+//    global::get().messageManager().add(Message(TELEGRAM::CREATE_STARSYSTEM, descriptor.data()));
 
 //    Starsystem* starsystem = static_cast<Starsystem*>(global::get().entityManager().get(descriptor.id()));
 //    assert(starsystem);

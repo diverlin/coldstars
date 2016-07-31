@@ -71,3 +71,27 @@ int getIndexWithMinVal(const T* array, unsigned int size)
     return index_min;
 }
 
+
+//namespace core {
+
+template <typename T>
+bool isEqual(const T& v1, const T& v2)
+{
+    if (!v1.size() == v2.size())
+        return false;
+
+    auto it1 = v1.begin();
+    auto it2 = v2.begin();
+
+    while(it1 != v1.end()) {
+        if (**it1 != **it2) {
+            return false;
+        }
+        ++it1;
+        ++it2;
+    }
+
+    return true;
+}
+
+//} // namespace core

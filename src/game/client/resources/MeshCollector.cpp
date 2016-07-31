@@ -58,7 +58,7 @@ bool MeshCollector::isExist(jeti::Mesh* mesh) const
     }
 }
 
-jeti::Mesh* MeshCollector::getMesh(int id) const
+jeti::Mesh* MeshCollector::get(int id) const
 {
     jeti::Mesh* requested = nullptr;
 
@@ -71,7 +71,7 @@ jeti::Mesh* MeshCollector::getMesh(int id) const
     return requested;
 }
 
-jeti::Mesh* MeshCollector::getMesh(type::MESH type_id) const
+jeti::Mesh* MeshCollector::get(type::MESH type_id) const
 {
     jeti::Mesh* requested = nullptr;
 

@@ -83,7 +83,7 @@ void DistantNebulaEffect::ResolveData()
 
 DistantNebulaEffect* GetNewDistantNebulaEffect(int color_id)
 {
-    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(type::MESH::PLANE_ID);
+    jeti::Mesh* mesh = MeshCollector::Instance().get(type::MESH::PLANE_ID);
 
     jeti::TextureOb* textureOb = nullptr;
     if (color_id == NONE)     textureOb = TextureCollector::Instance().getTextureByTypeId(type::texture::NEBULA_BACKGROUND_ID);

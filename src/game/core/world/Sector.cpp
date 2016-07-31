@@ -22,6 +22,7 @@
 #include <managers/EntityManager.hpp>
 #include "../common/constants.hpp"
 #include "../common/Global.hpp"
+#include <common/common.hpp>
 #include <meti/RandUtils.hpp>
 //#include <ceti/StringUtils.hpp>
 //#include "../pilots/Player.hpp"
@@ -39,6 +40,24 @@ Sector::Sector(int id)
 
 Sector::~Sector()
 {}
+
+bool Sector::operator==(const Sector& rhs) const {
+    if (m_position != rhs.m_position) {
+        return false;
+    }
+
+    bool result = isEqual(m_starsystems, rhs.m_starsystems);
+    return result;
+}
+
+bool Sector::operator!=(const Sector& rhs) const {
+    return !(*this == rhs);
+}
+
+Starsystem* Sector::activeStarsystem() const {
+    assert(m_starsystems.size() != 0);
+    return m_starsystems[0];
+}
 
 /* virtual */
 void Sector::putChildrenToGarbage() const

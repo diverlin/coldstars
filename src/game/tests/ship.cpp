@@ -35,7 +35,7 @@
 TEST(ship, drop_item_to_space)
 {
     /* create objects */
-    Starsystem* starsystem = StarsystemBuilder::getNew();
+    Starsystem* starsystem = StarsystemBuilder::create();
     Ship* ship = ShipBuilder::getNew();
 
     /* equip ship */
@@ -63,7 +63,7 @@ TEST(ship, drop_item_to_space)
 TEST(ship, base_ship_shoot)
 {
     /* create objects */
-    Starsystem* starsystem = StarsystemBuilder::getNew();
+    Starsystem* starsystem = StarsystemBuilder::create();
     Ship* ship1 = ShipBuilder::getNew(/*full_equiped=*/true);
     Ship* ship2 = ShipBuilder::getNew(/*full_equiped=*/true);
 

@@ -30,7 +30,7 @@ class PlayerBuilder
         ~PlayerBuilder();
 
         Player* GetNewPlayerTemplate(const id_type& id = NONE) const;
-        Player* GetNewPlayer() const;
+        Player* createNewPlayer() const;
                                      
     private:               
         PlayerBuilder() {}

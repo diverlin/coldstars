@@ -41,7 +41,7 @@ class Screen : public SFMLWrapper
 
         //glm::vec2 GetBottomLeftScreenWC()    { return m_rect.GetBottomLeft()*scale; }
         //glm::vec2 GetTopRightScreenWC()    { return m_rect.GetTopRight()*scale; }
-        jeti::Renderer& GetRender() { return m_Render; }
+        jeti::Renderer& renderer() { return m_Render; }
         Camera& GetCamera() { return m_Camera; }
         
         void SetBottomLeftScreenWC(const glm::vec2& bl)    { m_rect.SetBottomLeft(bl); }
