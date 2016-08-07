@@ -36,7 +36,7 @@ DistantStarEffect::DistantStarEffect(const std::vector<glm::vec3>& positions, co
     }
 
     m_Mesh = new jeti::Mesh();
-    m_Mesh->FillPointVertices(m_Positions, m_Colors, m_Sizes);
+    m_Mesh->fillPointVertices(m_Positions, m_Colors, m_Sizes);
 }
 
 DistantStarEffect::~DistantStarEffect()

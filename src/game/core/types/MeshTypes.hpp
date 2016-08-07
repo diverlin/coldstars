@@ -22,11 +22,10 @@
 
 namespace type
 {
-    enum class MESH : int
-    { 
+    enum class mesh : int {
         NONE_ID=0, PLANE_ID, SPHERE_ID, SPHERE_DEFORMED_ID, SPACESTATION_ID 
     };
 }  
 
-std::string getTypeStr(type::MESH type);
+std::string getTypeStr(type::mesh type);
 

@@ -38,7 +38,7 @@ Slider::Slider()
     //subtype_id = GUI::TYPE::NONE_ID;
     
     textureOb = GuiTextureObCollector::Instance().text_background;
-    textureOb_scale = TextureCollector::Instance().getTextureByTypeId(type::texture::LAZER_EFFECT_ID);
+    textureOb_scale = TextureCollector::get().getTextureByTypeId(type::texture::LAZER_EFFECT_ID);
     
     //BaseButton* slide_button = new BaseButton(GuiTextureObCollector::Instance().dot_purple, GUI::BUTTON::SLIDE_ID, "slide");  
     //button_map.insert(std::make_pair(GUI::BUTTON::SLIDE_ID, slide_button));
@@ -63,8 +63,8 @@ void Slider::Configure(int ammount_total, int price_for_one)
     ammount_selected = 0;
     price_selected = 0;
     
-    rect.Set(0, 0, GUI::SLIDER_WIDTH, 3*GUI::ICON_SIZE);
-    rect_slide.Set(0, rect.center().y - GUI::ICON_SIZE/2, GUI::SLIDER_WIDTH, GUI::ICON_SIZE);
+    rect.set(0, 0, GUI::SLIDER_WIDTH, 3*GUI::ICON_SIZE);
+    rect_slide.set(0, rect.center().y - GUI::ICON_SIZE/2, GUI::SLIDER_WIDTH, GUI::ICON_SIZE);
     
     //GetButton(GUI::BUTTON::SLIDE_ID)->GetRect().Set(0, rect_slide.GetBottomLeft().y, GUI::ICON_SIZE, GUI::ICON_SIZE);
     //GetButton(GUI::BUTTON::ACCEPT_ID)->GetRect().Set(0, 0, 20, 20);

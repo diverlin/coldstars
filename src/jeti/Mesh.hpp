@@ -1,84 +1,71 @@
 #pragma once
 
-#include <string>
-#include <vector>
+#include <MyGl.hpp>
 
 #include <glm/glm.hpp>
 
-#include <MyGl.hpp>
+#include <string>
+#include <vector>
 
 namespace jeti {
 
 class ObjLoader;
 class TextureOb;
 
-const int VERTECIES_PER_POLYGON_NUM = 3;
-
-const int VERTEX_POSITION_LOCATION = 0;
-const int VERTEX_TEXCOORD_LOCATION = 1;
-const int VERTEX_NORMAL_LOCATION   = 2;
-const int VERTEX_COLOR_LOCATION    = 3;
-                              
-const int STRIDE_POSITION = 3;
-const int STRIDE_TEXCOORD = 2;
-const int STRIDE_NORMAL   = 3;
-const int STRIDE_COLOR    = 4;
-
 class Mesh
 { 
-    public:
-        Mesh(const std::string&, const glm::vec3&, TextureOb*);
-        Mesh();
-        ~Mesh();
+public:
+    Mesh(const std::string&, const glm::vec3&, TextureOb*);
+    Mesh();
+    ~Mesh();
 
-        int id() const { return m_Id; }
+    int id() const { return m_id; }
 
-        TextureOb* textureOb() const { return m_TextureOb; }
-        const glm::vec3& GetBoundaryBox() const { return m_BoundaryBox; }
-        const glm::vec3& GetOriginDirection() const { return m_OriginDirection; }
+    TextureOb* textureOb() const { return m_textureOb; }
+    const glm::vec3& boundaryBox() const { return m_boundaryBox; }
+    const glm::vec3& originDirection() const { return m_originDirection; }
 
-        void FillVertices(const ObjLoader&);
-        void FillPointVertices(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
-        void FillPointVerticesFast(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
-                        
-        void Draw() const;
-        void Draw(GLenum) const;
+    void fillVertices(const ObjLoader&);
+    void fillPointVertices(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
+    void fillPointVerticesFast(const std::vector<glm::vec3>&, const std::vector<glm::vec4>&, const std::vector<float>&);
+
+    void draw() const;
+    void draw(GLenum) const;
     
-    private:
-        struct Vertex
-        {
-            glm::vec3 position;
-            glm::vec2 texcoord;
-            glm::vec3 normal;
-            glm::vec4 color;
-            float size;
-        };
+private:
+    struct Vertex {
+        glm::vec3 position;
+        glm::vec2 texcoord;
+        glm::vec3 normal;
+        glm::vec4 color;
+        float size;
+    };
 
-        static int m_Id;
-        GLenum m_PrimitiveType;
-        
-        TextureOb* m_TextureOb;
-        std::vector<Vertex> m_Vertices; 
-        glm::vec3 m_BoundaryBox;
+    static int m_id; // why static??
+    GLenum m_primitiveType = GL_TRIANGLES;
 
-        glm::vec3 m_OriginDirection;
+    TextureOb* m_textureOb = nullptr;
+    std::vector<Vertex> m_vertices;
+    glm::vec3 m_boundaryBox;
+
+    glm::vec3 m_originDirection;
     
-        uint32_t m_VertexCount;
+    uint32_t m_vertexCount = 0;
 
-        GLuint m_ListId;
-        GLuint m_VaoId;        
-        GLuint m_VboId;
+    GLuint m_listId = 0;
+    GLuint m_vaoId = 0;
+    GLuint m_vboId = 0;
 
-        bool m_HasTexCoords;
-        bool m_HasNormals;
-        bool m_HasColors;
-        bool m_HasPointsSize;
+    bool m_hasTexCoords = true;
+    bool m_hasNormals = true;
+    bool m_hasColors = false;
+    bool m_hasPointsSize = false;
 
-        void UpdateVbo(); 
-                
-        void DrawVbo() const;
-        void DrawVbo(GLenum) const;
+    void __updateVbo();
+
+    void __drawVbo() const;
+    void __drawVbo(GLenum) const;
 };
 
-}
+} // namespace jeti
 

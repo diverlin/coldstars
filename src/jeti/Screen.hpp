@@ -37,7 +37,7 @@ class Screen : public SFMLWrapper
  
         const ceti::Rect& rect() const { return m_rect; }
 
-        void InitRenderStuff();
+        void init();
 
         //glm::vec2 GetBottomLeftScreenWC()    { return m_rect.GetBottomLeft()*scale; }
         //glm::vec2 GetTopRightScreenWC()    { return m_rect.GetTopRight()*scale; }
@@ -88,5 +88,5 @@ class Screen : public SFMLWrapper
         void DrawFps();
 };
 
-}
+} // namespace jeti
 

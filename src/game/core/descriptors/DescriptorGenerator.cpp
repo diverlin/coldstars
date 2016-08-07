@@ -23,6 +23,7 @@
 #include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/StarsystemDescriptor.hpp>
+#include <descriptors/StarDescriptor.hpp>
 
 #include <meti/RandUtils.hpp>
 #include <common/Global.hpp>
@@ -32,6 +33,9 @@
 #include <descriptors/RaceDescriptors.hpp>
 
 #include <item/BaseItem.hpp>
+
+//#include <resources/TextureCollector.hpp>
+//#include <resources/MeshCollector.hpp>
 
 namespace descriptor {
 
@@ -72,15 +76,15 @@ Generator::getNewStarsystemDescriptor(int race)
 
 /* spaceobjects */
 
-descriptor::Base
+descriptor::Star
 Generator::getNewStarDescriptor()
 {
-    descriptor::Base descriptor(descriptor::Type::STAR);
-    descriptor.add(descriptor::Key::ARMOR, 10000000);
-    //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
-    //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);
+    descriptor::Star d;
+    d.setArmor(10000000);
+//    d.setTexture(TextureCollector::get().getTextureByTypeId(type::TEXTURE::STAR_ID).id());
+//    d.setMesh(MeshCollector::get().get(type::mesh::SPHERE_ID).id());
 
-    return descriptor;
+    return d;
 }
 
 descriptor::Base
