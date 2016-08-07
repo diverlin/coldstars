@@ -46,7 +46,7 @@ d_scale(0.0)
 Screen::~Screen()
 {}
 
-void Screen::InitRenderStuff()
+void Screen::init()
 {
     Config config;
     int width      = config.width;
@@ -62,9 +62,9 @@ void Screen::InitRenderStuff()
     wrCreateWindowSpecific(width, height, bpp, vsync, fps_limit, title);
     
     glewInit();             
-    m_Render.Init(width, height);
+    m_Render.init(width, height);
     
-    m_rect.Set(0.0, 0.0, width, height);
+    m_rect.set(0.0, 0.0, width, height);
 }
              
 void Screen::DrawFps()
@@ -170,5 +170,5 @@ void Screen::DecreaseScale()
     } 
 }
 
-}
+} // namespace jeti
    

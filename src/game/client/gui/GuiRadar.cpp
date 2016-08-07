@@ -48,7 +48,7 @@ GuiRadar::~GuiRadar()
 
 void GuiRadar::Resize(int screen_w, int screen_h)
 {
-    rect.Set(0, 0, 250, 250);
+    rect.set(0, 0, 250, 250);
 }
          
 void GuiRadar::ResetData()
@@ -59,7 +59,7 @@ void GuiRadar::ResetData()
 /*virtual final*/ 
 void GuiRadar::UpdateUnique(Player* player)
 {        
-    screenrect.Set(rect.center() + jeti::Screen::get().GetBottomLeftScreenWC() * scale, (int)(jeti::Screen::get().GetWidth() * scale), (int)(jeti::Screen::get().GetHeight() * scale));
+    screenrect.set(rect.center() + jeti::Screen::get().GetBottomLeftScreenWC() * scale, (int)(jeti::Screen::get().GetWidth() * scale), (int)(jeti::Screen::get().GetHeight() * scale));
     const MouseData& data_mouse = player->GetCursor().GetMouseData();
     if (rect.CheckRoundInteraction(data_mouse.pos_screencoord, /*radius=*/70.0) == true)
     {

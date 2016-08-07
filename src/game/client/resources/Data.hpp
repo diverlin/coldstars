@@ -19,13 +19,15 @@
 
 #pragma once
 
-#include <string> 
+class Data {
+public:
+    Data();
+    ~Data();
 
-const std::string DATA_PATH = "data/";
-const std::string CONFIG_PATH  = "";
+private:
+    void __load3DModels();
+    void __loadImages();
+};
 
-void loadGameData();
 
-void load3DModels();
-void loadImages();
 

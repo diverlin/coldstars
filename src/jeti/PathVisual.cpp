@@ -61,7 +61,7 @@ void PathVisual::FillData(const std::vector<glm::vec3>& vec, int step, int point
         sizes.push_back(m_PointSize);
     }
 
-    m_Mesh->FillPointVertices(points, colors, sizes);
+    m_Mesh->fillPointVertices(points, colors, sizes);
 }
 
 void PathVisual::FillData(TextureOb* textureOb, int radius, int point_size)    
@@ -80,7 +80,7 @@ void PathVisual::FillData(TextureOb* textureOb, int radius, int point_size)
         sizes.push_back(m_PointSize);
     }
 
-    m_Mesh->FillPointVertices(points, colors, sizes);
+    m_Mesh->fillPointVertices(points, colors, sizes);
 }
 
 void PathVisual::FillData(TextureOb* textureOb, const glm::vec3& start_pos, const glm::vec3& target_pos, int step, int point_size)
@@ -105,7 +105,7 @@ void PathVisual::FillData(TextureOb* textureOb, const glm::vec3& start_pos, cons
         point += vstep;
     }
 
-    m_Mesh->FillPointVertices(points, colors, sizes);
+    m_Mesh->fillPointVertices(points, colors, sizes);
 }
 
 

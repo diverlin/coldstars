@@ -24,7 +24,7 @@
 
 #include <iostream>
 
-MeshCollector& MeshCollector::Instance()
+MeshCollector& MeshCollector::get()
 {
     static MeshCollector instance;
     return instance;
@@ -71,7 +71,7 @@ jeti::Mesh* MeshCollector::get(int id) const
     return requested;
 }
 
-jeti::Mesh* MeshCollector::get(type::MESH type_id) const
+jeti::Mesh* MeshCollector::get(type::mesh type_id) const
 {
     jeti::Mesh* requested = nullptr;
 

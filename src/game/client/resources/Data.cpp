@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "resources.hpp"
+#include "Data.hpp"
 #include <common/constants.hpp>
 #include <common/Config.hpp>
 //#include <jeti/ShaderLoader.hpp>
@@ -32,27 +32,35 @@
 #include <types/MeshTypes.hpp>
 #include <types/TechLevelTypes.hpp>
 
+#include <string>
 
+namespace {
+const std::string DATA_PATH = "data/";
+const std::string CONFIG_PATH  = "";
+} // namespace
 
-
-void loadGameData()
-{        
-    load3DModels();
-    loadImages();
+Data::Data()
+{
+    __load3DModels();
+    __loadImages();
 }
 
-void load3DModels()
+Data::~Data()
+{
+}
+
+void Data::__load3DModels()
 {        
-    MeshCollector::Instance().add(new jeti::Mesh(DATA_PATH+"obj/plane/plane.obj",   glm::vec3(0.0f, 0.0f, 1.0f), nullptr), MeshDescriptor(type::MESH::PLANE_ID));
-    MeshCollector::Instance().add(new jeti::Mesh(DATA_PATH+"obj/sphere/sphere.obj", glm::vec3(1.0f, 0.0f, 0.0f), nullptr), MeshDescriptor(type::MESH::SPHERE_ID));
-    MeshCollector::Instance().add(new jeti::Mesh(DATA_PATH+"obj/sphere_deformed/sphere_deformed.obj", glm::vec3(1.0f, 0.0f, 0.0f), nullptr), MeshDescriptor(type::MESH::SPHERE_DEFORMED_ID));
+    MeshCollector::get().add(new jeti::Mesh(DATA_PATH+"obj/plane/plane.obj",   glm::vec3(0.0f, 0.0f, 1.0f), nullptr), MeshDescriptor(type::mesh::PLANE_ID));
+    MeshCollector::get().add(new jeti::Mesh(DATA_PATH+"obj/sphere/sphere.obj", glm::vec3(1.0f, 0.0f, 0.0f), nullptr), MeshDescriptor(type::mesh::SPHERE_ID));
+    MeshCollector::get().add(new jeti::Mesh(DATA_PATH+"obj/sphere_deformed/sphere_deformed.obj", glm::vec3(1.0f, 0.0f, 0.0f), nullptr), MeshDescriptor(type::mesh::SPHERE_DEFORMED_ID));
     
     {
     jeti::Material material_data;
     material_data.texture_path = DATA_PATH+"obj/vehicles/BabylonStation/station_texture/babylonstation.jpg";
     jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
     jeti::Mesh* mesh = new jeti::Mesh(DATA_PATH+"obj/vehicles/BabylonStation/babylon_station_mod.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);
-    MeshCollector::Instance().add(mesh, MeshDescriptor(type::MESH::SPACESTATION_ID));
+    MeshCollector::get().add(mesh, MeshDescriptor(type::mesh::SPACESTATION_ID));
     }
 
 //    {
@@ -60,14 +68,14 @@ void load3DModels()
 //    material_data.texture_path = DATA_PATH+"obj/vehicles/Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg";
 //    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
 //    jeti::Mesh* mesh = new jeti::Mesh(DATA_PATH+"obj/vehicles/Anna_V_2.0_variations/anna_mod.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);
-//    MeshCollector::Instance().add(type::MESH::SPACESTATION_ID, mesh);
+//    MeshCollector::Instance().add(type::mesh::SPACESTATION_ID, mesh);
 //    }
 
 }
 
 
 
-void loadImages()
+void Data::__loadImages()
 {
     {
         jeti::Material material_data;
@@ -75,7 +83,7 @@ void loadImages()
         material_data.use_alpha = true;
         jeti::TextureOb* texture = new jeti::TextureOb(material_data);
 
-        TextureCollector::Instance().setTextureBlank(texture);
+        TextureCollector::get().setTextureBlank(texture);
     }
 //####################################### TURREL_TEXTURE ###################################
 //{

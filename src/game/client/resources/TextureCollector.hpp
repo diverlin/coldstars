@@ -36,12 +36,12 @@ class TextureOb;
 class TextureCollector
 {   
 public:
-    static TextureCollector& Instance();
+    static TextureCollector& get();
 
     void setTextureBlank(jeti::TextureOb*);
     void add(jeti::TextureOb*, const TextureDescriptor&);
 
-    jeti::TextureOb* getTextureById(int);
+    jeti::TextureOb* get(int);
     jeti::TextureOb* getTextureByTypeId(type::texture);
     jeti::TextureOb* getTextureByColorId(type::texture, int);
     jeti::TextureOb* getTextureByRaceId(type::texture, type::race);

@@ -114,7 +114,18 @@ public:
     ~BBase() {}
 
     const id_type& id() const { return m_id; }
-    virtual std::string info() const { return std::string("id=") + std::to_string(m_id); }
+    const id_type& texture() const { return m_texture; }
+    const id_type& mesh() const { return m_mesh; }
+
+    void setTexture(const id_type& texture) { m_texture = texture; }
+    void setMesh(const id_type& mesh) { m_mesh = mesh; }
+    virtual std::string info() const {
+        std::string result;
+        result += std::string("id=") + std::to_string(m_id);
+        result += std::string(" material=") + std::to_string(m_texture);
+        result += std::string(" geometry=") + std::to_string(m_mesh);
+        return result;
+    }
 
 protected:
     std::string _str(const std::string& label, const std::vector<id_type>& ids) const {
@@ -126,7 +137,19 @@ protected:
     }
 
 private:
-    id_type m_id;
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & m_id;
+        ar & m_texture;
+        ar & m_mesh;
+    }
+
+private:
+    id_type m_id = -1;
+    id_type m_texture = -1;
+    id_type m_mesh = -1;
 
     static IdGenerator m_idGenerator;
 };
@@ -141,6 +164,9 @@ public:
     std::string data() const;
 
     bool operator==(const Base& rhs) const;
+
+    const id_type& texture() const;
+    const id_type& mesh() const;
 
     const id_type& id() const;
     const id_type& objId() const;

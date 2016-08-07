@@ -32,25 +32,25 @@ class Mesh;
 
 class MeshCollector
 {
-    public:
-        static MeshCollector& Instance();
-        
-        void add(jeti::Mesh*, MeshDescriptor);
-        jeti::Mesh* get(int) const;
-        jeti::Mesh* get(type::MESH) const;
+public:
+    static MeshCollector& get();
 
-        ~MeshCollector();
+    void add(jeti::Mesh*, MeshDescriptor);
+    jeti::Mesh* get(int) const;
+    jeti::Mesh* get(type::mesh) const;
 
-    private:
-        std::map<int, std::pair<MeshDescriptor, jeti::Mesh*>> m_idsMeshes;
-        std::map<type::MESH, std::vector<std::pair<MeshDescriptor, jeti::Mesh*>>> m_typesMeshes;
+    ~MeshCollector();
 
-        MeshCollector() = default;
+private:
+    std::map<int, std::pair<MeshDescriptor, jeti::Mesh*>> m_idsMeshes;
+    std::map<type::mesh, std::vector<std::pair<MeshDescriptor, jeti::Mesh*>>> m_typesMeshes;
 
-        MeshCollector(const MeshCollector&) = delete;
-        MeshCollector& operator=(const MeshCollector&) = delete;
+    MeshCollector() = default;
 
-        bool isExist(jeti::Mesh* mesh) const;
+    MeshCollector(const MeshCollector&) = delete;
+    MeshCollector& operator=(const MeshCollector&) = delete;
+
+    bool isExist(jeti::Mesh* mesh) const;
 };
 
 

@@ -18,25 +18,49 @@
 
 #pragma once
 
-#include <types/MeshTypes.hpp>
+#include "Base.hpp"
+#include <types/IdType.hpp>
 
-struct MeshDescriptor
+#include <vector>
+#include <sstream>
+
+namespace descriptor {
+
+struct Star : public BBase
 {
-    type::mesh type_id;
-
-    MeshDescriptor(type::mesh type_id):
-    type_id(type_id)
-    {}
-
-    bool operator==(const MeshDescriptor& rhs) const
+public:
+    Star() {}
+    Star(const std::string& data)
     {
-        if (rhs.type_id != type::mesh::NONE_ID)
-            if (type_id != rhs.type_id)
-                return false;
-
-        return true;
+        std::stringstream ss;
+        ss << data;
+        boost::archive::text_iarchive ia(ss);
+        ia >> *this;
     }
-};
+    ~Star() {}
+
+    std::string info() const override final {
+        std::string result = "Star descriptor: " + BBase::info();
+        return result;
+    }
+
+    void setArmor(int armor) { m_armor = armor; }
+
+private:
+    int m_armor = 100000;
+
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & boost::serialization::base_object<BBase>(*this);
+        ar & m_armor;
+    }
+}; 
+
+} // namespace descriptor
+
+
 
 
 

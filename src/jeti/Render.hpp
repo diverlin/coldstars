@@ -54,7 +54,7 @@ class Renderer : public NonCopyable
         void ActivateFbo(int, int, int);
         void DeactivateFbo(int);
         
-        void Init(int, int);
+        void init(int, int);
         void setMeshQuad(Mesh* mesh) { m_MeshQuad = mesh; }
 
         void SetPerspectiveProjection(float, float);

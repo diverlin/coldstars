@@ -73,7 +73,7 @@ void BaseParticleSystem::Update()
         sizes.push_back(particle.size());
     }
 
-    m_Mesh->FillPointVerticesFast(positions, colors, sizes);
+    m_Mesh->fillPointVerticesFast(positions, colors, sizes);
 }
 
 const glm::mat4& BaseParticleSystem::actualModelMatrix()

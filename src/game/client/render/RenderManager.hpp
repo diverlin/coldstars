@@ -25,6 +25,8 @@
 class StarSystemDrawable;
 
 /// entities
+class Star;
+
 class StarDrawable;
 class PlanetDrawable;
 class AsteroidDrawable;
@@ -43,6 +45,9 @@ class BaseParticleSystem;
 }
 class VerticalFlowText;
 
+
+namespace view {
+
 struct VisibilityData
 {
     struct VisibilityScreenData {
@@ -57,16 +62,14 @@ struct VisibilityData
     VisibilityObserverData observer;
 };
 
-class RenderManager
+class Viewer
 {
 public:
-    RenderManager();
-    ~RenderManager();
-
-    void clearVisibleEntities();
+    Viewer();
+    ~Viewer();
 
     /// visible entities
-    void addIfVisible(StarDrawable*, const VisibilityData&);
+    void addIfVisible(Star*, const VisibilityData&);
     void addIfVisible(PlanetDrawable*, const VisibilityData&);
     void addIfVisible(AsteroidDrawable*, const VisibilityData&);
     void addIfVisible(ContainerDrawable*, const VisibilityData&);
@@ -102,9 +105,29 @@ private:
     std::vector<jeti::BaseParticleSystem*> m_particlesystems;
     std::vector<VerticalFlowText*>   m_texts;
     
-    void RenderInSpace_NEW(jeti::Renderer&, Starsystem*);
-    void RenderCollisionRadius(const jeti::Renderer&) const;
-    void RenderAxis(const jeti::Renderer&) const;
+    void __renderInSpace_NEW(jeti::Renderer&, Starsystem*);
+    void __renderCollisionRadius(const jeti::Renderer&) const;
+    void __renderAxis(const jeti::Renderer&) const;
+
+    /// visible entities
+    void __add(StarDrawable*);
+    void __add(PlanetDrawable*);
+    void __add(AsteroidDrawable*);
+    void __add(ContainerDrawable*);
+    void __add(BulletDrawable*);
+    void __add(BlackHoleDrawable*);
+    void __add(ShipDrawable*);
+    void __add(SpaceStationDrawable*);
+    void __add(SatelliteDrawable*);
+
+    /// visible effects
+    void __add(ShockWaveEffect*);
+    void __add(LazerTraceEffect*);
+    void __add(jeti::BaseParticleSystem*);
+    void __add(VerticalFlowText*);
+
+    void __clear();
 };
 
+} // namespace view
 

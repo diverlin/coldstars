@@ -20,6 +20,10 @@
 #include <descriptors/DescriptorGenerator.hpp>
 #include <meti/RandUtils.hpp>
 
+//#hack
+//#include <resources/Data.hpp>
+//#hack
+
 #include <fstream>
 
 #include <boost/filesystem.hpp>
@@ -158,6 +162,8 @@ Manager::__clear()
 void
 Manager::__generate()
 {
+//    Data data; // needs for descriptor (texture and mesh ids)
+
     create_file(descriptors_fname);
 
     __clear();

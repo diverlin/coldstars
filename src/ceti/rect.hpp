@@ -38,9 +38,9 @@ class Rect
         bool CheckInteraction(const glm::vec2&) const;
         bool CheckRoundInteraction(const glm::vec2&, float) const;
                             
-        void Set(float, float, float, float);
-        void Set(const glm::vec2&, float, float);
-        void Set(const Rect&);
+        void set(float, float, float, float);
+        void set(const glm::vec2&, float, float);
+        void set(const Rect&);
             
         void setCenter(const glm::vec2&);
         void setCenter(float, float);

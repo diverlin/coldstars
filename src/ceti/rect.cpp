@@ -22,22 +22,22 @@ namespace ceti {
 
 Rect::Rect()
 {
-    Set(0.0f, 0.0f, 0.0f, 0.0f);
+    set(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 Rect::Rect(float bottomLeft_x, float bottomLeft_y, float width, float height)
 {
-    Set(bottomLeft_x, bottomLeft_y, width, height);
+    set(bottomLeft_x, bottomLeft_y, width, height);
 }
 
 Rect::Rect(const glm::vec2& bottomLeft, float width, float height)
 {
-    Set(bottomLeft.x, bottomLeft.y, width, height);
+    set(bottomLeft.x, bottomLeft.y, width, height);
 }
 
 Rect::Rect(const Rect& rhs)
 {
-    Set(rhs.GetBottomLeft(), rhs.GetWidth(), rhs.GetHeight());
+    set(rhs.GetBottomLeft(), rhs.GetWidth(), rhs.GetHeight());
 }
 
 Rect::~Rect()
@@ -90,7 +90,7 @@ bool Rect::CheckRoundInteraction(const glm::vec2& p, float radius) const
     return false;
 }
 
-void Rect::Set(float bottomLeft_x, float bottomLeft_y, float width, float height)
+void Rect::set(float bottomLeft_x, float bottomLeft_y, float width, float height)
 {
     m_bottomLeft.x = bottomLeft_x;
     m_bottomLeft.y = bottomLeft_y;
@@ -102,14 +102,14 @@ void Rect::Set(float bottomLeft_x, float bottomLeft_y, float width, float height
     UpdateTopRight();
 }
 
-void Rect::Set(const glm::vec2& vbl, float width, float height)
+void Rect::set(const glm::vec2& vbl, float width, float height)
 {
-    Set(vbl.x, vbl.y, width, height);
+    set(vbl.x, vbl.y, width, height);
 }
 
-void Rect::Set(const Rect& rect)
+void Rect::set(const Rect& rect)
 {
-    Set(rect.GetBottomLeft(), rect.GetWidth(), rect.GetHeight());
+    set(rect.GetBottomLeft(), rect.GetWidth(), rect.GetHeight());
 }
 
 void Rect::setCenter(const glm::vec2& center)

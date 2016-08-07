@@ -23,6 +23,7 @@
 #include <descriptors/GalaxyDescriptor.hpp>
 #include <descriptors/SectorDescriptor.hpp>
 #include <descriptors/StarsystemDescriptor.hpp>
+#include <descriptors/StarDescriptor.hpp>
 
 #include <meti/RandUtils.hpp>
 
@@ -102,15 +103,20 @@ public:
     void add(const Starsystem& starsystem) {
         m_starsystem.add(starsystem);
     }
+    void add(const Star& star) {
+        m_star.add(star);
+    }
 
     const MManager<Galaxy>& galaxy() const { return m_galaxy; }
     const MManager<Sector>& sector() const { return m_sector; }
     const MManager<Starsystem>& starsystem() const { return m_starsystem; }
+    const MManager<Star>& star() const { return m_star; }
 
 private:
     MManager<Galaxy> m_galaxy;
     MManager<Sector> m_sector;
     MManager<Starsystem> m_starsystem;
+    MManager<Star> m_star;
 
     std::map<id_type, Base> m_descriptors;
     std::map<int, std::vector<Base>> m_descriptorsTypes;

@@ -24,7 +24,7 @@
 
 #include <ceti/Logger.hpp>
 
-TextureCollector& TextureCollector::Instance()
+TextureCollector& TextureCollector::get()
 {
     static TextureCollector instance;
     return instance;
@@ -66,7 +66,7 @@ bool TextureCollector::isExist(jeti::TextureOb* texture) const
     }
 }
 
-jeti::TextureOb* TextureCollector::getTextureById(int id)
+jeti::TextureOb* TextureCollector::get(int id)
 {
     jeti::TextureOb* requested = nullptr;
     if (hasId(id)) {
@@ -134,7 +134,7 @@ jeti::TextureOb* TextureCollector::getTextureByDescriptor(const TextureDescripto
 
     if (!ids.empty()) {
         int id = meti::getRand(ids);
-        requested = getTextureById(id);
+        requested = get(id);
     }
 
     _validate(requested);
