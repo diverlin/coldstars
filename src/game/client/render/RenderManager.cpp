@@ -141,8 +141,10 @@ void Viewer::addIfVisible(Star* star, const VisibilityData& data)
     if (isRectOnVisibleScreenArea(star->position(), star->size(), data.screen.worldcoord, data.screen.scale)) {
         const descriptor::Star& descriptor = global::get().descriptors().star().get(star->descriptorId());
         jeti::TextureOb* texOb = TextureCollector::get().get(descriptor.texture());
-        jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
+        jeti::Mesh* mesh = nullptr;
+        //jeti::Mesh* mesh = MeshCollector::get().get(descriptor.mesh());
 
+        assert(mesh);
         StarDrawable* view = new StarDrawable(texOb, mesh, star);
         __add(view);
     }
