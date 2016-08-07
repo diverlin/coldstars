@@ -19,39 +19,64 @@
 
 #pragma once
 
+#include <descriptors/MeshDescriptor.hpp>
+
+#include <math/rand.hpp>
+#include <meti/RandUtils.hpp>
+
 #include <map>
 #include <vector>
 
-#include <resources/MeshDescriptor.hpp>
-#include <types/MeshTypes.hpp>
+namespace descriptor {
 
-
-namespace jeti {
-class Mesh;
-}
-
-class MeshCollector
+template<typename T>
+class Collector
 {
 public:
-    static MeshCollector& get();
+    Collector() {}
+    ~Collector() {}
 
-    void add(jeti::Mesh*, MeshDescriptor);
-    jeti::Mesh* get(int) const;
-    jeti::Mesh* get(type::mesh) const;
+    void add(const T& ob) {
+        if (!__isExist(ob)) {
+            m_descriptorsById.insert(std::make_pair(ob->id(), ob));
+            m_descriptorsByTypes[ob.type()].push_back(std::make_pair(ob));
+        } else {
+            throw std::runtime_error("fail add, id is already exist");
+        }
+    }
 
-    ~MeshCollector();
+    const T& get(const id_type& id) const {
+        auto it = m_descriptorsById.find(id);
+        if (it != m_descriptorsById.end()) {
+            return it->second;
+        } else {
+            throw std::runtime_error("fail get, id doesn't exist");
+        }
+        assert(false);
+    }
+
+    const T& getByType(int type) const {
+        auto it = m_descriptorsByTypes.find(type);
+        if (it != m_descriptorsByTypes.end()) {
+            const std::vector<T>& v = it->second;
+            return meti::getRand(v);
+        } else {
+            throw std::runtime_error("fail get, type doesn't exist");
+        }
+        assert(false);
+    }
+
 
 private:
-    std::map<int, std::pair<MeshDescriptor, jeti::Mesh*>> m_idsMeshes;
-    std::map<type::mesh, std::vector<std::pair<MeshDescriptor, jeti::Mesh*>>> m_typesMeshes;
+    std::map<int, descriptor::Mesh> m_descriptorsById;
+    std::map<int, std::vector<descriptor::Mesh>> m_descriptorsByTypes;
 
-    MeshCollector() = default;
-
-    MeshCollector(const MeshCollector&) = delete;
-    MeshCollector& operator=(const MeshCollector&) = delete;
-
-    bool isExist(jeti::Mesh* mesh) const;
+    bool __isExist(const T& ob) const {
+        return (m_descriptorsById.find(ob->id()) != m_descriptorsById.end());
+    }
 };
+
+} // namespace descriptor
 
 
 

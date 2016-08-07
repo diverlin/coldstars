@@ -19,6 +19,9 @@
 #include "Data.hpp"
 #include <common/constants.hpp>
 #include <common/Config.hpp>
+#include <common/Global.hpp>
+#include <descriptors/DescriptorManager.hpp>
+
 //#include <jeti/ShaderLoader.hpp>
 #include <jeti/Mesh.hpp>
 //#include <jeti/Screen.hpp>
@@ -51,16 +54,17 @@ Data::~Data()
 
 void Data::__load3DModels()
 {        
-    MeshCollector::get().add(new jeti::Mesh(DATA_PATH+"obj/plane/plane.obj",   glm::vec3(0.0f, 0.0f, 1.0f), nullptr), MeshDescriptor(type::mesh::PLANE_ID));
-    MeshCollector::get().add(new jeti::Mesh(DATA_PATH+"obj/sphere/sphere.obj", glm::vec3(1.0f, 0.0f, 0.0f), nullptr), MeshDescriptor(type::mesh::SPHERE_ID));
-    MeshCollector::get().add(new jeti::Mesh(DATA_PATH+"obj/sphere_deformed/sphere_deformed.obj", glm::vec3(1.0f, 0.0f, 0.0f), nullptr), MeshDescriptor(type::mesh::SPHERE_DEFORMED_ID));
+    //DATA_PATH+"obj/
+    global::get().descriptors().add(descriptor::Mesh("plane/plane.obj", type::mesh::PLANE_ID, glm::vec3(0.0f, 0.0f, 1.0f)));
+//    MeshCollector::get().add(MeshDescriptor("sphere/sphere.obj", type::mesh::SPHERE_ID));
+//    MeshCollector::get().add(MeshDescriptor("sphere_deformed/sphere_deformed.obj", type::mesh::SPHERE_DEFORMED_ID));
     
     {
-    jeti::Material material_data;
-    material_data.texture_path = DATA_PATH+"obj/vehicles/BabylonStation/station_texture/babylonstation.jpg";
-    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
-    jeti::Mesh* mesh = new jeti::Mesh(DATA_PATH+"obj/vehicles/BabylonStation/babylon_station_mod.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);
-    MeshCollector::get().add(mesh, MeshDescriptor(type::mesh::SPACESTATION_ID));
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"obj/vehicles/BabylonStation/station_texture/babylonstation.jpg";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+//    jeti::Mesh* mesh = new jeti::Mesh(DATA_PATH+"obj/vehicles/BabylonStation/babylon_station_mod.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);
+//    MeshCollector::get().add(mesh, MeshDescriptor(type::mesh::SPACESTATION_ID));
     }
 
 //    {
