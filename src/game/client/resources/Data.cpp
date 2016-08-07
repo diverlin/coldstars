@@ -25,7 +25,7 @@
 //#include <jeti/ShaderLoader.hpp>
 #include <jeti/Mesh.hpp>
 //#include <jeti/Screen.hpp>
-#include "MeshCollector.hpp"
+#include <ceti/Collector.hpp>
 
 #include "TextureCollector.hpp"
 #include "GuiTextureObCollector.hpp"
@@ -54,8 +54,7 @@ Data::~Data()
 
 void Data::__load3DModels()
 {        
-    //DATA_PATH+"obj/
-    global::get().descriptors().add(descriptor::Mesh("plane/plane.obj", type::mesh::PLANE_ID, glm::vec3(0.0f, 0.0f, 1.0f)));
+    global::get().descriptors().add(jeti::descriptor::Mesh("plane/plane.obj", (int)type::mesh::PLANE_ID, glm::vec3(0.0f, 0.0f, 1.0f)));
 //    MeshCollector::get().add(MeshDescriptor("sphere/sphere.obj", type::mesh::SPHERE_ID));
 //    MeshCollector::get().add(MeshDescriptor("sphere_deformed/sphere_deformed.obj", type::mesh::SPHERE_DEFORMED_ID));
     

@@ -7,15 +7,20 @@
 #include <string>
 #include <vector>
 
+
+
 namespace jeti {
 
 class ObjLoader;
 class TextureOb;
+namespace descriptor {
+class Mesh;
+} // namespace descriptor
 
 class Mesh
 { 
 public:
-    Mesh(const std::string&, const glm::vec3&, TextureOb*);
+    Mesh(const descriptor::Mesh&);
     Mesh();
     ~Mesh();
 

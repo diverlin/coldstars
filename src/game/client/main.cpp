@@ -18,12 +18,13 @@
 
 #include <iostream>
 #include "resources/Data.hpp"
-#include "resources/MeshCollector.hpp"
+#include <ceti/Collector.hpp>
 
 #include "builder/world/GalaxyBuilder.hpp"
 #include "builder/pilots/PlayerBuilder.hpp"
 #include <common/Config.hpp>
 
+#include <jeti/Mesh.hpp>
 #include <jeti/Screen.hpp>
 #include <jeti/GlErrorHelper.hpp>
 
