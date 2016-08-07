@@ -18,39 +18,48 @@
 
 #pragma once
 
-#include <descriptors/Base.hpp>
-
 #include <types/IdType.hpp>
-#include <types/MeshTypes.hpp>
 
-#include <glm/glm.hpp>
+#include <common/IdGenerator.hpp>
+
+#include <boost/serialization/map.hpp>
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
 #include <string>
 
+namespace ceti {
 namespace descriptor {
 
-class Mesh : public BBase
+class Base
 {
 public:
-    Mesh(const std::string fname, const type::mesh& type, const glm::vec3& orientation = glm::vec3(1.0, 0.0, 0.0), const id_type& texture = -1):
-        m_fname(fname)
-      , m_type(type)
-      , m_orientation(orientation)
-      , m_texture(texture)
-    {}
-    ~Mesh() {}
+    Base() {
+        m_id = m_idGenerator.nextId();
+    }
+    ~Base() {}
 
-    const std::string& fname() const { return m_fname; }
-    const type::mesh& type() const { return m_type; }
-    const glm::vec3& orientation() const { return m_orientation; }
+    const id_type& id() const { return m_id; }
+
+    virtual std::string info() const {
+        std::string result;
+        result += std::string("id=") + std::to_string(m_id);
+        return result;
+    }
 
 private:
-    std::string m_fname = "";
-    glm::vec3 m_orientation = glm::vec3(1.0, 0.0, 0.0);
-    type::mesh m_type;
-    id_type m_texture = -1;
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & m_id;
+    }
+
+private:
+    id_type m_id = -1;
+
+    static IdGenerator m_idGenerator;
 };
 
 } // namespace descriptor
-
-
+} // namespace ceti

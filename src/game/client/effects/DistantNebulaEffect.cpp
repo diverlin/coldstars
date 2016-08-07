@@ -23,7 +23,8 @@
 //#include <ceti/StringUtils.hpp>
 
 #include <resources/TextureCollector.hpp>
-#include <resources/MeshCollector.hpp>
+
+#include <ceti/Collector.hpp>
 
 #include <jeti/Render.hpp>
 #include <jeti/TextureOb.hpp>

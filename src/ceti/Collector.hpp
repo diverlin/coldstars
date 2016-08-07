@@ -19,9 +19,8 @@
 
 #pragma once
 
-#include <descriptors/MeshDescriptor.hpp>
+#include <types/IdType.hpp>
 
-#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>
 
 #include <map>
@@ -36,10 +35,10 @@ public:
     Collector() {}
     ~Collector() {}
 
-    void add(const T& ob) {
+    void add(T ob) {
         if (!__isExist(ob)) {
-            m_descriptorsById.insert(std::make_pair(ob->id(), ob));
-            m_descriptorsByTypes[ob.type()].push_back(std::make_pair(ob));
+            m_descriptorsById.insert(std::make_pair(ob.id(), ob));
+            m_descriptorsByTypes[ob.type()].push_back(ob);
         } else {
             throw std::runtime_error("fail add, id is already exist");
         }
@@ -68,11 +67,11 @@ public:
 
 
 private:
-    std::map<int, descriptor::Mesh> m_descriptorsById;
-    std::map<int, std::vector<descriptor::Mesh>> m_descriptorsByTypes;
+    std::map<int, T> m_descriptorsById;
+    std::map<int, std::vector<T>> m_descriptorsByTypes;
 
     bool __isExist(const T& ob) const {
-        return (m_descriptorsById.find(ob->id()) != m_descriptorsById.end());
+        return (m_descriptorsById.find(ob.id()) != m_descriptorsById.end());
     }
 };
 

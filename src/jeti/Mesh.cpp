@@ -1,9 +1,10 @@
 #include "Mesh.hpp"
 
+#include "MeshDescriptor.hpp"
+#include "ObjLoader.hpp"
+
 #include <sstream>
 #include <fstream>
-
-#include <ObjLoader.hpp>
 
 namespace jeti {
 
@@ -23,16 +24,16 @@ const int STRIDE_COLOR    = 4;
 
 int Mesh::m_id = 0;
 
-Mesh::Mesh(const std::string& path, const glm::vec3& direction, TextureOb* textureOb)
+Mesh::Mesh(const descriptor::Mesh& descriptor)
     :
-      m_textureOb(textureOb),
-      m_originDirection(direction)
+      m_textureOb(nullptr),
+      m_originDirection(descriptor.orientation())
 {     
     m_listId = glGenLists(1);
     glGenVertexArrays(1, &m_vaoId);
     glGenBuffers(1, &m_vboId);
 
-    ObjLoader objLoader(path);
+    ObjLoader objLoader(descriptor.fname());
     
     fillVertices(objLoader);
     m_boundaryBox = objLoader.GetBoundaryBox();

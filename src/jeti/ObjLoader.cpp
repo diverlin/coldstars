@@ -1,20 +1,21 @@
 #include "ObjLoader.hpp"
 
+#include "constants.hpp"
+
+#include <ceti/Logger.hpp>
+
 #include <iostream>
 #include <sstream>
 #include <fstream>
-
 #include <cmath>
 
-#include <ceti/Logger.hpp>
-  
 namespace jeti {
 
-ObjLoader::ObjLoader(const std::string& path)
+ObjLoader::ObjLoader(const std::string& fname)
 {
+    std::string path = DATA_PATH + "/obj/" + fname;
     std::ifstream filestream;
     filestream.open(path.c_str());
- 
      if (!filestream.is_open()) {
          std::cout<<"FAULT: Not abe to open file:"<<path;
          exit(EXIT_FAILURE);

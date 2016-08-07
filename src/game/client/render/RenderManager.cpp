@@ -47,7 +47,7 @@
 #include <text/VerticalFlowText.hpp>
 
 #include <resources/TextureCollector.hpp>
-#include <resources/MeshCollector.hpp>
+#include <ceti/Collector.hpp>
 #include <common/Global.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
