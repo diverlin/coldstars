@@ -19,6 +19,7 @@ target_link_libraries(${PROJECT_CLIENT}
     ${PROJECT_JETI}
     ${PROJECT_METI}
     ${PROJECT_CETI}
+    pthread
 )
 set_target_properties(${PROJECT_CLIENT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
 
