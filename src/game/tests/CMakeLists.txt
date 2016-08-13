@@ -13,6 +13,7 @@ endif ()
 
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
+#message(FATAL_ERROR "GTEST_INCLUDE_DIRS=${GTEST_INCLUDE_DIRS}")
 #message("GTEST_MAIN_LIBRARIES=${GTEST_MAIN_LIBRARIES}")
 #message("GTEST_LIBRARIES=${GTEST_LIBRARIES}")
     

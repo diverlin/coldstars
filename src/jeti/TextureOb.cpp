@@ -20,6 +20,8 @@
 
 #include <SFML/Graphics/Image.hpp>
 
+#include <stdexcept>
+
 namespace jeti {
 
 TextureOb::TextureOb(const Material& material)

@@ -5,7 +5,7 @@ set(PROJECT coldstars)
 
 project (${PROJECT})
 
-set(GTEST_ROOT "/home/yeti/mnt/workspace/dist/thirdparty_1.0.25/")
+set(GTEST_ROOT "/workspace/dist/gtest")
 set(GLM_ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/dependencies/glm-0.9.7.5/")
 
 set(CMAKE_BUILD_TYPE "Debug")
