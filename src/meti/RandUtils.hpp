@@ -38,7 +38,7 @@ glm::vec3 getRandXYVec3Unit();
 bool isActionShouldHappen(int);
 
 template<typename T>
-T getRand(const std::vector<T>& v)
+const T& getRand(const std::vector<T>& v)
 {
     if (v.empty()) {
         throw std::runtime_error("ERROR: std::vector is empty, not ably to get random element from it");

@@ -44,7 +44,7 @@ const std::string CONFIG_PATH  = "";
 
 Data::Data()
 {
-    __load3DModels();
+    __collectMeshDescriptors();
     __loadImages();
 }
 
@@ -52,30 +52,16 @@ Data::~Data()
 {
 }
 
-void Data::__load3DModels()
+void Data::__collectMeshDescriptors()
 {        
-    global::get().descriptors().add(jeti::descriptor::Mesh("plane/plane.obj", (int)type::mesh::PLANE_ID, glm::vec3(0.0f, 0.0f, 1.0f)));
-//    MeshCollector::get().add(MeshDescriptor("sphere/sphere.obj", type::mesh::SPHERE_ID));
-//    MeshCollector::get().add(MeshDescriptor("sphere_deformed/sphere_deformed.obj", type::mesh::SPHERE_DEFORMED_ID));
+    auto& dm = global::get().descriptors();
+    dm.add(jeti::descriptor::Mesh( (int)type::mesh::PLANE_ID, "plane/plane.obj", "", glm::vec3(0.0f, 0.0f, 1.0f)) );
+    dm.add(jeti::descriptor::Mesh( (int)type::mesh::SPHERE_ID, "sphere/sphere.obj"));
+    dm.add(jeti::descriptor::Mesh( (int)type::mesh::SPHERE_DEFORMED_ID, "sphere_deformed/sphere_deformed.obj") );
     
-    {
-//    jeti::Material material_data;
-//    material_data.texture_path = DATA_PATH+"obj/vehicles/BabylonStation/station_texture/babylonstation.jpg";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
-//    jeti::Mesh* mesh = new jeti::Mesh(DATA_PATH+"obj/vehicles/BabylonStation/babylon_station_mod.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);
-//    MeshCollector::get().add(mesh, MeshDescriptor(type::mesh::SPACESTATION_ID));
-    }
-
-//    {
-//    jeti::Material material_data;
-//    material_data.texture_path = DATA_PATH+"obj/vehicles/Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
-//    jeti::Mesh* mesh = new jeti::Mesh(DATA_PATH+"obj/vehicles/Anna_V_2.0_variations/anna_mod.obj", glm::vec3(1.0f, 0.0f, 0.0f), textureOb);
-//    MeshCollector::Instance().add(type::mesh::SPACESTATION_ID, mesh);
-//    }
-
+    dm.add(jeti::descriptor::Mesh( (int)type::mesh::SPACESTATION_ID, "vehicles/BabylonStation/babylon_station_mod.obj", "vehicles/BabylonStation/station_texture/babylonstation.jpg") );
+    dm.add(jeti::descriptor::Mesh( (int)type::mesh::SPACESTATION_ID, "vehicles/Anna_V_2.0_variations/anna_mod.obj", "vehicles/Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg") );
 }
-
 
 
 void Data::__loadImages()
