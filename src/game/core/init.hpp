@@ -17,9 +17,8 @@
 */
 
 
-#ifndef INIT_HPP
-#define INIT_HPP
+#pragma once
 
 void initGameStuff();
 
-#endif
+

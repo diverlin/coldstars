@@ -36,23 +36,23 @@ namespace descriptor {
 class Mesh : public ceti::descriptor::Base
 {
 public:
-    Mesh(const std::string fname, int type, const glm::vec3& orientation = glm::vec3(1.0, 0.0, 0.0), const id_type& texture = -1):
-        m_fname(fname)
-      , m_type(type)
-      , m_orientation(orientation)
+    Mesh(int type, const std::string& model, const std::string& texture = "", const glm::vec3& orientation = glm::vec3(1.0, 0.0, 0.0)):
+        m_type(type)
+      , m_model(model)
       , m_texture(texture)
+      , m_orientation(orientation)
     {}
     ~Mesh() {}
 
-    const std::string& fname() const { return m_fname; }
+    const std::string& fname() const { return m_model; }
     int type() const { return m_type; }
     const glm::vec3& orientation() const { return m_orientation; }
 
 private:
-    std::string m_fname = "";
+    int m_type = -1;
+    std::string m_model = "";
+    std::string m_texture = "";
     glm::vec3 m_orientation = glm::vec3(1.0, 0.0, 0.0);
-    int m_type;
-    id_type m_texture = -1;
 };
 
 } // namespace descriptor
