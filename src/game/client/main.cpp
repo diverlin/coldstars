@@ -65,6 +65,7 @@
 
 #include <render/RenderManager.hpp>
 
+
 enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
 
 void render(Starsystem* starsystem, glm::vec3& center) {
@@ -73,44 +74,16 @@ void render(Starsystem* starsystem, glm::vec3& center) {
 
 }
 
-//double getGravityForce(double m1, double m2, double r) {
-//    double G = 6.67*pow(10,-11);
-//    return (G * (m1 * m2) / (r * r));
-//}
 
 int main()
 {
-//    {
-//        double m1=0;
-//        double m2=0;
-//        double r=0;
-
-//        double me = 5.97219 * pow(10,24);
-
-//        std::cout<<"Earth-Moon"<<std::endl;
-//        m1 = me;
-//        m2 = me * 0.0123;
-//        r = 384399.0 / 2.0 * 1000.0;
-//        std::cout<<"m1="<<m1<<"kg, m2="<<m2<<"kg, r="<<r<<"m"<<std::endl;
-//        std::cout<<"f="<<getGravityForce(m1, m2, r)<<std::endl;
-
-//        std::cout<<"Earth-Sun"<<std::endl;
-//        m1 = 1.98892*pow(10,30);
-//        m2 = me;
-//        r = 149598261.0 / 2.0 * 1000.0 ;
-//        std::cout<<"m1="<<m1<<"kg, m2="<<m2<<"kg, r="<<r<<"m"<<std::endl;
-//        std::cout<<"f="<<getGravityForce(m1, m2, r)<<std::endl;
-
-//        exit(0);
-//    }
-
     //runThreadTest();
     //runSinglethread();    
     //runVectorPerfomanceTest();
     
     jeti::Screen::get().init();
     Data data;
-    jeti::Mesh* mesh = new jeti::Mesh(global::get().descriptors().mesh().getByType((int)type::mesh::PLANE_ID));
+    jeti::Mesh* mesh = new jeti::Mesh(global::get().descriptors().mesh().getByType(int(type::mesh::PLANE_ID)));
     jeti::Screen::get().renderer().setMeshQuad(mesh);
         
     //runMatrixPerfomanceTest();
@@ -129,11 +102,11 @@ int main()
 //    run_scenario->Init(player);
     
     model::World world;
-    while(true) {
+    //while(true) {
         world.update();
         glm::vec3 pos(0,0,0);
         render(world.activeStarsystem(), pos);
-    }
+    //}
 
 //    Galaxy* galaxy = player->GetNpc()->vehicle()->starsystem()->sector()->galaxy();
         

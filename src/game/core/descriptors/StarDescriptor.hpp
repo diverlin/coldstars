@@ -37,7 +37,7 @@ public:
         boost::archive::text_iarchive ia(ss);
         ia >> *this;
     }
-    ~Star() {}
+    virtual ~Star() {}
 
     std::string info() const override final {
         std::string result = "Star descriptor: " + BBase::info();
