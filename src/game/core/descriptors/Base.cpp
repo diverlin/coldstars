@@ -276,7 +276,7 @@ Base::__get(const Key& key) const
 
 
 
-BaseD::BaseD(const id_type& type, bool generate_id)
+BaseD::BaseD(/*const id_type& type, bool generate_id*/)
 {
 //    if (generate_id) {
 //        add(Key::ID, m_idGenerator.nextId());
@@ -314,12 +314,21 @@ BaseD::data() const
 void
 BaseD::add(const Property& prop)
 {
-    auto f = m_keyMap.find(prop.name);
-    if (f == m_keyMap.end()) {
+    auto it_key = m_keyMap.find(prop.name);
+    auto it_id = m_valueMap.find(prop.code);
+
+    if ( (it_key == m_keyMap.end()) && (it_id == m_valueMap.end() )) {
         m_keyMap.insert(std::make_pair(prop.name, prop.code));
         m_valueMap.insert(std::make_pair(prop.code, prop.value));
     } else {
-        throw std::runtime_error("ERROR CODE: FIXME (add request): descriptor already has such key[" + prop.name + "]");
+        std::string error_msg = "";
+        if (it_key != m_keyMap.end()) {
+            error_msg = "ERROR CODE: fixme, descriptor already has such key[" + prop.name + "]";
+        }
+        else if (it_id != m_valueMap.end()) {
+            error_msg = "ERROR CODE: fixme: descriptor already has such id[" + std::to_string(prop.code) + "], but key[" + prop.name + "] is absent, which is tottaly wrong. both should be present or absent, check code";
+        }
+        throw std::runtime_error(error_msg);
     }
 }
 
@@ -346,7 +355,7 @@ std::string
 BaseD::info() const {
     std::string result("descriptor type=" + std::to_string(m_type) + "\n");
 
-    std::map<std::string, id_type>::const_iterator it = m_keyMap.begin();
+    std::map<std::string, int>::const_iterator it = m_keyMap.begin();
     while(it != m_keyMap.end()) {
         result += it->first + "=" + std::to_string(m_valueMap.find(it->second)->second) + "\n";
         ++it;
