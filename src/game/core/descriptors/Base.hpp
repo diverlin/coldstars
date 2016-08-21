@@ -320,7 +320,7 @@ public:
 
     bool operator==(const BaseD& rhs) const;
 
-    const int_type& get(const std::string& key) const;
+    const int_type& get(int) const;
     void add(const Property&);
     void add(const std::vector<Property>&);
 
@@ -331,12 +331,11 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & m_type;
-        ar & m_valueMap;
+        ar & m_map;
     }
 
     id_type m_type = -1;
-    std::map<std::string, int> m_keyMap;
-    std::map<int, int_type> m_valueMap;
+    std::map<int, int_type> m_map;
     static IdGenerator m_idGenerator;
 };
 

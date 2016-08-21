@@ -314,21 +314,11 @@ BaseD::data() const
 void
 BaseD::add(const Property& prop)
 {
-    auto it_key = m_keyMap.find(prop.name);
-    auto it_id = m_valueMap.find(prop.code);
-
-    if ( (it_key == m_keyMap.end()) && (it_id == m_valueMap.end() )) {
-        m_keyMap.insert(std::make_pair(prop.name, prop.code));
-        m_valueMap.insert(std::make_pair(prop.code, prop.value));
+    auto it = m_map.find(prop.code);
+    if ( it == m_map.end() ) {
+        m_map.insert(std::make_pair(prop.code, prop.value));
     } else {
-        std::string error_msg = "";
-        if (it_key != m_keyMap.end()) {
-            error_msg = "ERROR CODE: fixme, descriptor already has such key[" + prop.name + "]";
-        }
-        else if (it_id != m_valueMap.end()) {
-            error_msg = "ERROR CODE: fixme: descriptor already has such id[" + std::to_string(prop.code) + "], but key[" + prop.name + "] is absent, which is tottaly wrong. both should be present or absent, check code";
-        }
-        throw std::runtime_error(error_msg);
+        throw std::runtime_error("ERROR CODE: fixme, descriptor already has such prop name[" + prop.name + "]");
     }
 }
 
@@ -340,24 +330,23 @@ BaseD::add(const std::vector<Property>& props)
     }
 }
 
-const id_type&
-BaseD::get(const std::string& key) const
+const int_type&
+BaseD::get(int key) const
 {
-    auto f = m_keyMap.find(key);
-    if (f != m_keyMap.end()) {
-        const id_type id = f->second;
-        return m_valueMap.find(id)->first;
+    auto it = m_map.find(key);
+    if (it != m_map.end()) {
+        return it->second;
     }
-    throw std::runtime_error("ERROR CODE: FIXME (get request): key=[" + key + "] is not found in descriptor");
+    throw std::runtime_error("ERROR CODE: FIXME (get request): prop name=[" + IDs.at(key).name + "] is not found in descriptor");
 }
 
 std::string
 BaseD::info() const {
     std::string result("descriptor type=" + std::to_string(m_type) + "\n");
 
-    std::map<std::string, int>::const_iterator it = m_keyMap.begin();
-    while(it != m_keyMap.end()) {
-        result += it->first + "=" + std::to_string(m_valueMap.find(it->second)->second) + "\n";
+    std::map<int, int_type>::const_iterator it = m_map.begin();
+    while(it != m_map.end()) {
+        result += IDs.at(it->first).name + "=" + std::to_string(it->second) + "\n";
         ++it;
     }
     return result;
