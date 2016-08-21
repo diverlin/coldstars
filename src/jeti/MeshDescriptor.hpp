@@ -42,7 +42,7 @@ public:
       , m_texture(texture)
       , m_orientation(orientation)
     {}
-    ~Mesh() {}
+    virtual ~Mesh() {}
 
     const std::string& fname() const { return m_model; }
     int type() const { return m_type; }
@@ -53,6 +53,15 @@ private:
     std::string m_model = "";
     std::string m_texture = "";
     glm::vec3 m_orientation = glm::vec3(1.0, 0.0, 0.0);
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & boost::serialization::base_object<BBase>(*this);
+        ar & m_armor;
+    }
 };
 
 } // namespace descriptor

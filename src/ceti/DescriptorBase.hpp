@@ -37,7 +37,7 @@ public:
     Base() {
         m_id = m_idGenerator.nextId();
     }
-    ~Base() {}
+    virtual ~Base() {}
 
     const id_type& id() const { return m_id; }
 
@@ -50,8 +50,7 @@ public:
 private:
     friend class boost::serialization::access;
     template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
+    void serialize(Archive & ar, const unsigned int version) {
         ar & m_id;
     }
 

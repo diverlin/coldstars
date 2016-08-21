@@ -25,6 +25,7 @@ public:
     ~Data();
 
 private:
+    void __generate();
     void __collectMeshDescriptors();
     void __loadImages();
 };
