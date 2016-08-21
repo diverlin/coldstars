@@ -267,5 +267,92 @@ Base::__get(const Key& key) const
     return -1;
 }
 
+
+
+
+
+
+
+
+
+
+BaseD::BaseD(const id_type& type, bool generate_id)
+{
+//    if (generate_id) {
+//        add(Key::ID, m_idGenerator.nextId());
+//    }
+//    add(Key::TYPE, (int)type);
+}
+
+BaseD::BaseD(const std::string& data)
+{
+    std::stringstream ss;
+    ss << data;
+    boost::archive::text_iarchive ia(ss);
+    ia >> *this;
+}
+
+BaseD::~BaseD()
+{
+}
+
+bool
+BaseD::operator==(const BaseD& rhs) const
+{
+    return data() == rhs.data();
+}
+
+std::string
+BaseD::data() const
+{
+    std::stringstream ss;
+    boost::archive::text_oarchive oa(ss);
+    oa << *this;
+    return ss.str();
+}
+
+void
+BaseD::add(const Property& prop)
+{
+    auto f = m_keyMap.find(prop.name);
+    if (f == m_keyMap.end()) {
+        m_keyMap.insert(std::make_pair(prop.name, prop.code));
+        m_valueMap.insert(std::make_pair(prop.code, prop.value));
+    } else {
+        throw std::runtime_error("ERROR CODE: FIXME (add request): descriptor already has such key[" + prop.name + "]");
+    }
+}
+
+void
+BaseD::add(const std::vector<Property>& props)
+{
+    for(const Property& prop: props) {
+        add(prop);
+    }
+}
+
+const id_type&
+BaseD::get(const std::string& key) const
+{
+    auto f = m_keyMap.find(key);
+    if (f != m_keyMap.end()) {
+        const id_type id = f->second;
+        return m_valueMap.find(id)->first;
+    }
+    throw std::runtime_error("ERROR CODE: FIXME (get request): key=[" + key + "] is not found in descriptor");
+}
+
+std::string
+BaseD::info() const {
+    std::string result("descriptor type=" + std::to_string(m_type) + "\n");
+
+    std::map<std::string, id_type>::const_iterator it = m_keyMap.begin();
+    while(it != m_keyMap.end()) {
+        result += it->first + "=" + std::to_string(m_valueMap.find(it->second)->second) + "\n";
+        ++it;
+    }
+    return result;
+}
+
 } // namespace descriptor
 

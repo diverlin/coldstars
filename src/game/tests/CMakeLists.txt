@@ -32,3 +32,6 @@ install(TARGETS ${PROJECT} DESTINATION ${DEPLOY_DIR})
 if (NOT EXISTS ${DEPLOY_DIR}/descriptors.txt)
     install(FILES ${CMAKE_SOURCE_DIR}/data/descriptors.txt DESTINATION ${DEPLOY_DIR})
 endif()
+
+
+#--gtest_filter=descriptor.*

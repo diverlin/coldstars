@@ -54,3 +54,19 @@ TEST(descriptor,serialization)
     EXPECT_TRUE(descriptor == descriptor2);
 }
 
+
+TEST(descriptor, _new)
+{
+    using namespace descriptor;
+    Property p1("prop1", 1, 10);
+    Property p2("prop2", 2, 20);
+    Property p3("prop3", 3, 30);
+
+    BaseD descr(1);
+    descr.add({p1,p2,p3});
+
+    BaseD descr2(descr);
+    EXPECT_TRUE(descr == descr2);
+
+    //std::cout << descr.info();
+}
