@@ -41,9 +41,9 @@ TEST(descriptor,serialization)
 TEST(descriptor, base)
 {
     using namespace descriptor;
-    Property p1(Id(1, "prop1"), 10);
-    Property p2(Id(2, "prop2"), 20);
-    Property p3(Id(3, "prop3"), 30);
+    Property p1(IDs.at(ARMOR), 10);
+    Property p2(IDs.at(RADIUS), 20);
+    Property p3(IDs.at(DAMAGE), 30);
 
     BaseD descr;
     descr.add({p1,p2,p3});
@@ -51,6 +51,12 @@ TEST(descriptor, base)
     BaseD descr2(descr);
     EXPECT_TRUE(descr == descr2);
 
-    descr2.add( Property(Id(4, "prop4"), 40) );
+    EXPECT_EQ(descr.get(ARMOR), descr2.get(ARMOR));
+    EXPECT_EQ(descr.get(RADIUS), descr2.get(RADIUS));
+    EXPECT_EQ(descr.get(DAMAGE), descr2.get(DAMAGE));
+
+    descr2.add( Property(IDs.at(FUEL_MAX), 40) );
     EXPECT_FALSE(descr == descr2);
+
+    std::cout<<descr2.info();
 }
