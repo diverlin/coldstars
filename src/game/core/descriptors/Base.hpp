@@ -233,4 +233,54 @@ private:
     static IdGenerator m_idGenerator;
 };
 
+
+
+struct Id {
+    std::string name = "";
+    id_type code = 0;
+};
+
+struct Property {
+    Property(const std::string& n, const id_type& c, const id_type& v)
+        :
+          name(n)
+        , code(c)
+        , value(v)
+    {}
+    std::string name = "";
+    id_type code = 0;
+    id_type value = 0;
+};
+
+class BaseD
+{
+public:
+    BaseD(const id_type&, bool generate_id = true);
+    BaseD(const std::string& data);
+    ~BaseD();
+
+    std::string data() const;
+
+    bool operator==(const BaseD& rhs) const;
+
+    const id_type& get(const std::string& key) const;
+    void add(const Property&);
+    void add(const std::vector<Property>&);
+
+    std::string info() const;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & m_type;
+        ar & m_valueMap;
+    }
+
+    id_type m_type = -1;
+    std::map<std::string, id_type> m_keyMap;
+    std::map<id_type, id_type> m_valueMap;
+    static IdGenerator m_idGenerator;
+};
+
 } // namespace descriptor

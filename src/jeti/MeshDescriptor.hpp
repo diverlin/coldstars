@@ -54,14 +54,14 @@ private:
     std::string m_texture = "";
     glm::vec3 m_orientation = glm::vec3(1.0, 0.0, 0.0);
 
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
-        ar & boost::serialization::base_object<BBase>(*this);
-        ar & m_armor;
-    }
+//private:
+//    friend class boost::serialization::access;
+//    template<class Archive>
+//    void serialize(Archive & ar, const unsigned int version)
+//    {
+//        ar & boost::serialization::base_object<BBase>(*this);
+//        ar & m_armor;
+//    }
 };
 
 } // namespace descriptor
