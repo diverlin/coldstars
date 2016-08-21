@@ -30,23 +30,6 @@
 #include <descriptors/DescriptorGenerator.hpp>
 
 
-TEST(base,serialization)
-{
-    descriptor::Hit hit1(1, 2, 33);
-    descriptor::Hit hit2(hit1.data());
-    EXPECT_TRUE(hit2.type() == hit1.type());
-    EXPECT_TRUE(hit2.type() == int(descriptor::Type::HIT));
-    EXPECT_TRUE(hit2.owner() == hit1.owner());
-    EXPECT_TRUE(hit2.target() == hit1.target());
-    EXPECT_TRUE(hit2.damage() == hit1.damage());
-
-//    descriptor::Explosion explosion1(0, glm::vec3(100,200,300),0,0);
-//    descriptor::Explosion explosion2(explosion1.data());
-//    EXPECT_TRUE(explosion1.center.x == explosion2.center.x);
-//    EXPECT_TRUE(explosion1.center.y == explosion2.center.y);
-//    EXPECT_TRUE(explosion1.center.z == explosion2.center.z);
-}
-
 TEST(descriptor,serialization)
 {
     descriptor::Hit descriptor(11, 22, 33);
@@ -55,18 +38,19 @@ TEST(descriptor,serialization)
 }
 
 
-TEST(descriptor, _new)
+TEST(descriptor, base)
 {
     using namespace descriptor;
-    Property p1("prop1", 1, 10);
-    Property p2("prop2", 2, 20);
-    Property p3("prop3", 3, 30);
+    Property p1(Id(1, "prop1"), 10);
+    Property p2(Id(2, "prop2"), 20);
+    Property p3(Id(3, "prop3"), 30);
 
-    BaseD descr(1);
+    BaseD descr;
     descr.add({p1,p2,p3});
 
     BaseD descr2(descr);
     EXPECT_TRUE(descr == descr2);
 
-    //std::cout << descr.info();
+    descr2.add( Property(Id(4, "prop4"), 40) );
+    EXPECT_FALSE(descr == descr2);
 }
