@@ -126,7 +126,10 @@ enum Code {
     OBJ_ID,
     OWNER,
     CHILD,
-    TARGET
+    TARGET,
+
+    // string
+    IDLIST
 };
 
 enum class Type: int {
@@ -300,13 +303,25 @@ struct Id {
     std::string name = "";
 };
 
-struct Property : public Id {
-    Property(const Id& id, const int_type& v)
+class Property : public Id {
+public:
+    enum {INT, STR};
+
+    Property(const Id& id, const int_type& value)
         :
           Id(id)
-        , value(v)
+        , valueType(INT)
+        , intValue(value)
     {}
-    int_type value = 0;
+    Property(const Id& id, const std::string& value)
+        :
+          Id(id)
+        , valueType(STR)
+        , strValue(value)
+    {}
+    int valueType;
+    int_type intValue = 0;
+    std::string strValue = "";
 };
 
 class BaseD
@@ -321,6 +336,7 @@ public:
     bool operator==(const BaseD& rhs) const;
 
     const int_type& get(int) const;
+
     void add(const Property&);
     void add(const std::vector<Property>&);
 
@@ -331,12 +347,16 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
         ar & m_type;
-        ar & m_map;
+        ar & m_intValues;
+        if (!m_strValues.empty()) {
+            ar & m_strValues;
+        }
     }
 
     id_type m_type = -1;
-    std::map<int, int_type> m_map;
-    static IdGenerator m_idGenerator;
+    std::map<int, int_type> m_intValues;
+    std::map<int, std::string> m_strValues;
+    static IdGenerator m_idGenerator; // ?
 };
 
 
@@ -434,6 +454,8 @@ const std::map<int, Id> IDs = {
     , { OWNER, Id( OWNER, "owner" ) }
     , { CHILD, Id( CHILD, "child" ) }
     , { TARGET, Id( TARGET, "target" ) }
+    , { IDLIST, Id( IDLIST, "id_list" ) }
+
 };
 
 

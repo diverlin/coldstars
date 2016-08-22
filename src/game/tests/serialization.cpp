@@ -44,9 +44,10 @@ TEST(descriptor, base)
     Property p1(IDs.at(ARMOR), 10);
     Property p2(IDs.at(RADIUS), 20);
     Property p3(IDs.at(DAMAGE), 30);
+    Property p4(IDs.at(IDLIST), "5;4;3;2;1");
 
     BaseD descr;
-    descr.add({p1,p2,p3});
+    descr.add({p1,p2,p3,p4});
 
     BaseD descr2(descr);
     EXPECT_TRUE(descr == descr2);
