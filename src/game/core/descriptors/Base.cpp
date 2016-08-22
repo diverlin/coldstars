@@ -314,12 +314,21 @@ BaseD::data() const
 void
 BaseD::add(const Property& prop)
 {
-    auto it = m_map.find(prop.code);
-    if ( it == m_map.end() ) {
-        m_map.insert(std::make_pair(prop.code, prop.value));
+    if (prop.valueType == Property::INT) {
+        auto it = m_intValues.find(prop.code);
+        if ( it == m_intValues.end() ) {
+            m_intValues.insert(std::make_pair(prop.code, prop.intValue));
+            return;
+        }
     } else {
-        throw std::runtime_error("ERROR CODE: fixme, descriptor already has such prop name[" + prop.name + "]");
+        auto it = m_strValues.find(prop.code);
+        if ( it == m_strValues.end() ) {
+            m_strValues.insert(std::make_pair(prop.code, prop.strValue));
+            return;
+        }
     }
+
+    throw std::runtime_error("ERROR CODE: fixme, descriptor already has such prop name[" + prop.name + "]");
 }
 
 void
@@ -333,8 +342,8 @@ BaseD::add(const std::vector<Property>& props)
 const int_type&
 BaseD::get(int key) const
 {
-    auto it = m_map.find(key);
-    if (it != m_map.end()) {
+    auto it = m_intValues.find(key);
+    if (it != m_intValues.end()) {
         return it->second;
     }
     throw std::runtime_error("ERROR CODE: FIXME (get request): prop name=[" + IDs.at(key).name + "] is not found in descriptor");
@@ -343,11 +352,11 @@ BaseD::get(int key) const
 std::string
 BaseD::info() const {
     std::string result("descriptor type=" + std::to_string(m_type) + "\n");
-
-    std::map<int, int_type>::const_iterator it = m_map.begin();
-    while(it != m_map.end()) {
+    for(auto it = m_intValues.begin(); it != m_intValues.end(); ++it) {
         result += IDs.at(it->first).name + "=" + std::to_string(it->second) + "\n";
-        ++it;
+    }
+    for(auto it = m_strValues.begin(); it != m_strValues.end(); ++it) {
+        result += IDs.at(it->first).name + "=" + it->second + "\n";
     }
     return result;
 }
