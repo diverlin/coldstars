@@ -276,7 +276,7 @@ Base::__get(const Key& key) const
 
 
 
-BaseD::BaseD(/*const id_type& type, bool generate_id*/)
+Descriptor::Descriptor(/*const id_type& type, bool generate_id*/)
 {
 //    if (generate_id) {
 //        add(Key::ID, m_idGenerator.nextId());
@@ -284,7 +284,7 @@ BaseD::BaseD(/*const id_type& type, bool generate_id*/)
 //    add(Key::TYPE, (int)type);
 }
 
-BaseD::BaseD(const std::string& data)
+Descriptor::Descriptor(const std::string& data)
 {
     std::stringstream ss;
     ss << data;
@@ -292,18 +292,18 @@ BaseD::BaseD(const std::string& data)
     ia >> *this;
 }
 
-BaseD::~BaseD()
+Descriptor::~Descriptor()
 {
 }
 
 bool
-BaseD::operator==(const BaseD& rhs) const
+Descriptor::operator==(const Descriptor& rhs) const
 {
     return data() == rhs.data();
 }
 
 std::string
-BaseD::data() const
+Descriptor::data() const
 {
     std::stringstream ss;
     boost::archive::text_oarchive oa(ss);
@@ -312,7 +312,7 @@ BaseD::data() const
 }
 
 void
-BaseD::add(const Property& prop)
+Descriptor::add(const Property& prop)
 {
     if (prop.valueType == Property::INT) {
         auto it = m_intValues.find(prop.code);
@@ -332,7 +332,7 @@ BaseD::add(const Property& prop)
 }
 
 void
-BaseD::add(const std::vector<Property>& props)
+Descriptor::add(const std::vector<Property>& props)
 {
     for(const Property& prop: props) {
         add(prop);
@@ -340,7 +340,7 @@ BaseD::add(const std::vector<Property>& props)
 }
 
 const int_type&
-BaseD::get(int key) const
+Descriptor::get(int key) const
 {
     auto it = m_intValues.find(key);
     if (it != m_intValues.end()) {
@@ -350,7 +350,7 @@ BaseD::get(int key) const
 }
 
 std::string
-BaseD::info() const {
+Descriptor::info() const {
     std::string result("descriptor type=" + std::to_string(m_type) + "\n");
     for(auto it = m_intValues.begin(); it != m_intValues.end(); ++it) {
         result += IDs.at(it->first).name + "=" + std::to_string(it->second) + "\n";
