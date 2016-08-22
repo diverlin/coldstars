@@ -24,6 +24,94 @@ namespace ceti {
 namespace descriptor {
 
 IdGenerator Base::m_idGenerator;
+std::map<int, Property>  Base::m_ids;
+
+
+Base::Base(/*const id_type& type, bool generate_id*/)
+{
+//    if (generate_id) {
+//        add(Key::ID, m_idGenerator.nextId());
+//    }
+//    add(Key::TYPE, (int)type);
+}
+
+Base::Base(const std::string& data)
+{
+    std::stringstream ss;
+    ss << data;
+    boost::archive::text_iarchive ia(ss);
+    ia >> *this;
+}
+
+Base::~Base()
+{
+}
+
+bool
+Base::operator==(const Base& rhs) const
+{
+    return data() == rhs.data();
+}
+
+std::string
+Base::data() const
+{
+    std::stringstream ss;
+    boost::archive::text_oarchive oa(ss);
+    oa << *this;
+    return ss.str();
+}
+
+void
+Base::add(const Property& prop)
+{
+    if (prop.valueType == Property::INT) {
+        auto it = m_intValues.find(prop.code);
+        if ( it == m_intValues.end() ) {
+            m_intValues.insert(std::make_pair(prop.code, prop.intValue));
+            return;
+        }
+    } else {
+        auto it = m_strValues.find(prop.code);
+        if ( it == m_strValues.end() ) {
+            m_strValues.insert(std::make_pair(prop.code, prop.strValue));
+            return;
+        }
+    }
+
+    throw std::runtime_error("ERROR CODE: fixme, descriptor already has such prop name[" + prop.name + "]");
+}
+
+void
+Base::add(const std::vector<Property>& props)
+{
+    for(const Property& prop: props) {
+        add(prop);
+    }
+}
+
+const int_type&
+Base::get(int key) const
+{
+    auto it = m_intValues.find(key);
+    if (it != m_intValues.end()) {
+        return it->second;
+    }
+    throw std::runtime_error("ERROR CODE: FIXME (get request): prop name=[" + m_ids.at(key).name + "] is not found in descriptor");
+}
+
+std::string
+Base::info() const {
+    std::string result("descriptor type=" + std::to_string(m_type) + "\n");
+    for(auto it = m_intValues.begin(); it != m_intValues.end(); ++it) {
+        result += m_ids.at(it->first).name + "=" + std::to_string(it->second) + "\n";
+    }
+    for(auto it = m_strValues.begin(); it != m_strValues.end(); ++it) {
+        result += m_ids.at(it->first).name + "=" + it->second + "\n";
+    }
+    return result;
+}
+
 
 } // namespace descriptor
 } // namespace ceti

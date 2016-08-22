@@ -22,6 +22,8 @@
 
 #include <common/IdGenerator.hpp>
 
+#include <ceti/DescriptorBase.hpp>
+
 #include <boost/serialization/map.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -288,76 +290,6 @@ private:
 
 
 
-struct Id {
-    Id(int c, const std::string& n)
-        :
-          code(c)
-        , name(n)
-    {}
-    Id(const Id& id)
-        :
-          code(id.code)
-        , name(id.name)
-    {}
-    int code = 0;
-    std::string name = "";
-};
-
-class Property : public Id {
-public:
-    enum {INT, STR};
-
-    Property(const Id& id, const int_type& value)
-        :
-          Id(id)
-        , valueType(INT)
-        , intValue(value)
-    {}
-    Property(const Id& id, const std::string& value)
-        :
-          Id(id)
-        , valueType(STR)
-        , strValue(value)
-    {}
-    int valueType;
-    int_type intValue = 0;
-    std::string strValue = "";
-};
-
-class Base
-{
-public:
-    Base(/*const id_type&, bool generate_id = true*/);
-    Base(const std::string& data);
-    ~Base();
-
-    std::string data() const;
-
-    bool operator==(const Base& rhs) const;
-
-    const int_type& get(int) const;
-
-    void add(const Property&);
-    void add(const std::vector<Property>&);
-
-    std::string info() const;
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version) {
-        ar & m_type;
-        ar & m_intValues;
-        if (!m_strValues.empty()) {
-            ar & m_strValues;
-        }
-    }
-
-    id_type m_type = -1;
-    std::map<int, int_type> m_intValues;
-    std::map<int, std::string> m_strValues;
-    static IdGenerator m_idGenerator; // ?
-};
 
 
 
@@ -406,6 +338,8 @@ private:
 //const Id ownerId( OWNER, "owner" );
 //const Id childId( CHILD, "child" );
 //const Id targetId( TARGET, "target" );
+
+using namespace ceti::descriptor;
 
 const std::map<int, Id> IDs = {
 
