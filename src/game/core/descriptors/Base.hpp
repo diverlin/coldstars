@@ -324,16 +324,16 @@ public:
     std::string strValue = "";
 };
 
-class Descriptor
+class Base
 {
 public:
-    Descriptor(/*const id_type&, bool generate_id = true*/);
-    Descriptor(const std::string& data);
-    ~Descriptor();
+    Base(/*const id_type&, bool generate_id = true*/);
+    Base(const std::string& data);
+    ~Base();
 
     std::string data() const;
 
-    bool operator==(const Descriptor& rhs) const;
+    bool operator==(const Base& rhs) const;
 
     const int_type& get(int) const;
 
