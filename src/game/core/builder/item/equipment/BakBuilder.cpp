@@ -41,14 +41,14 @@ BakBuilder::~BakBuilder()
 Bak*
 BakBuilder::getNew()
 {
-    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::BAK);
+    const descriptor::BaseOLD& descriptor = global::get().descriptors().getRand(descriptor::Type::BAK);
     return getNew(descriptor);
 }
        
 Bak*
-BakBuilder::getNew(const descriptor::Base& descr)
+BakBuilder::getNew(const descriptor::BaseOLD& descr)
 {
-    descriptor::Base descriptor(descr.data());
+    descriptor::BaseOLD descriptor(descr.data());
     id_type id = NONE;
     if (descr.type() == (id_type)descriptor::Type::DESCRIPTOR) {
         descriptor = global::get().descriptors().get(descr.descriptor());
@@ -64,7 +64,7 @@ BakBuilder::getNew(const descriptor::Base& descr)
 Bak*
 BakBuilder::getNew(const std::string& data)
 {
-    return getNew(descriptor::Base(data));
+    return getNew(descriptor::BaseOLD(data));
 }
 
 Bak*
@@ -79,7 +79,7 @@ BakBuilder::__createTemplate(id_type id)
 }
 
 void
-BakBuilder::__createInternals(Bak* bak, const descriptor::Base& descriptor)
+BakBuilder::__createInternals(Bak* bak, const descriptor::BaseOLD& descriptor)
 {
     assert(descriptor.type() == (int)descriptor::Type::BAK);
 

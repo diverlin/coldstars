@@ -35,12 +35,12 @@ public:
     ~ShipBuilder();
 
     static Ship* getNew(bool full_equiped = false);
-    static Ship* getNew(const descriptor::Base&);
+    static Ship* getNew(const descriptor::BaseOLD&);
     static Ship* getNew(const std::string&);
 
 private:
     static Ship* __getNewTemplate(id_type);
-    static void __createInternals(Ship*, const descriptor::Base&);
+    static void __createInternals(Ship*, const descriptor::BaseOLD&);
 }; 
 
 

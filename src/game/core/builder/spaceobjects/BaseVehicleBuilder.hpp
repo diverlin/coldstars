@@ -32,7 +32,7 @@ public:
     BaseVehicleBuilder();
     virtual ~BaseVehicleBuilder() {}
 
-    static void equip(Vehicle* vehicle, const descriptor::Base& descriptor);
+    static void equip(Vehicle* vehicle, const descriptor::BaseOLD& descriptor);
     static void equip(Vehicle*, type::tech tech_leve = type::tech::LEVEL0);
     static void equipModules(Vehicle*, type::tech tech_leve = type::tech::LEVEL0);
     static void equipArtefacts(Vehicle*, type::tech tech_leve = type::tech::LEVEL0);

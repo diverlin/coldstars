@@ -25,7 +25,7 @@
 class Planet;
 
 namespace descriptor {
-class Base;
+class BaseOLD;
 }
 
 namespace ENTITY
@@ -50,7 +50,7 @@ public:
     PlanetBuilder();
     ~PlanetBuilder();
 
-    static Planet* getNew(const descriptor::Base&);
+    static Planet* getNew(const descriptor::BaseOLD&);
     static Planet* getNew();
 
 private:

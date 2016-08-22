@@ -49,14 +49,14 @@ Drive* DriveBuilder::createTemplate(id_type id) const
 
 Drive* DriveBuilder::getNew() const
 {
-    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::DRIVE);
+    const descriptor::BaseOLD& descriptor = global::get().descriptors().getRand(descriptor::Type::DRIVE);
     Drive* drive = createTemplate();
     createInternals(drive, descriptor);
 
     return drive;
 }
 
-Drive* DriveBuilder::getNew(const descriptor::Base& descriptor) const
+Drive* DriveBuilder::getNew(const descriptor::BaseOLD& descriptor) const
 {
     Drive* drive = createTemplate();
     createInternals(drive, descriptor);
@@ -64,7 +64,7 @@ Drive* DriveBuilder::getNew(const descriptor::Base& descriptor) const
     return drive;
 }        
             
-void DriveBuilder::createInternals(Drive* drive, const descriptor::Base& descriptor) const
+void DriveBuilder::createInternals(Drive* drive, const descriptor::BaseOLD& descriptor) const
 {     
     ItemCommonData data = extractCommonData(descriptor);
             

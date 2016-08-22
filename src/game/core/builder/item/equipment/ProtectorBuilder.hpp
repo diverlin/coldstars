@@ -24,7 +24,7 @@
 #include <vector>
 
 namespace descriptor {
-class Base;
+class BaseOLD;
 } // namespace descriptor
 
 namespace item {
@@ -41,10 +41,10 @@ public:
     std::vector<Protector*> getNew(int) const;
     item::equipment::Protector* getNew() const;
     item::equipment::Protector* createTemplate(id_type id = NONE) const;
-    item::equipment::Protector* getNew(const descriptor::Base&) const;
+    item::equipment::Protector* getNew(const descriptor::BaseOLD&) const;
 
 private:
-    void createInternals(Protector*, const descriptor::Base&) const;
+    void createInternals(Protector*, const descriptor::BaseOLD&) const;
 }; 
 
 } // namespace equipment

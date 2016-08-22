@@ -55,7 +55,7 @@ Planet* PlanetBuilder::getNew()
     return getNew(descr);
 } 
      
-Planet* PlanetBuilder::getNew(const descriptor::Base& descr)
+Planet* PlanetBuilder::getNew(const descriptor::BaseOLD& descr)
 {
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     //jeti::TextureOb* textureOb      = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::PLANET_ID);

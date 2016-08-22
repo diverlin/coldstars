@@ -49,14 +49,14 @@ Grapple* GrappleBuilder::createTemplate(id_type id) const
 
 Grapple* GrappleBuilder::getNew() const
 {
-    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::GRAPPLE);
+    const descriptor::BaseOLD& descriptor = global::get().descriptors().getRand(descriptor::Type::GRAPPLE);
     Grapple* grapple = createTemplate();
     createInternals(grapple, descriptor);
 
     return grapple;
 }
 
-Grapple* GrappleBuilder::getNew(const descriptor::Base& descriptor) const
+Grapple* GrappleBuilder::getNew(const descriptor::BaseOLD& descriptor) const
 {
     Grapple* grapple = createTemplate();
     createInternals(grapple, descriptor);
@@ -64,7 +64,7 @@ Grapple* GrappleBuilder::getNew(const descriptor::Base& descriptor) const
     return grapple;
 } 
 
-void GrappleBuilder::createInternals(Grapple* grapple, const descriptor::Base& descriptor) const
+void GrappleBuilder::createInternals(Grapple* grapple, const descriptor::BaseOLD& descriptor) const
 {
     ItemCommonData data = extractCommonData(descriptor);
 

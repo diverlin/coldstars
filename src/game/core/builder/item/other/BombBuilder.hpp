@@ -24,7 +24,7 @@
 class Bomb;
 
 namespace descriptor {
-class Base;
+class BaseOLD;
 }
 
 class BombBuilder
@@ -34,10 +34,10 @@ public:
     ~BombBuilder();
 
     static Bomb* getNew();
-    static Bomb* getNew(const descriptor::Base&);
+    static Bomb* getNew(const descriptor::BaseOLD&);
 
 private:
-    static void __createInternals(Bomb*, const descriptor::Base&);
+    static void __createInternals(Bomb*, const descriptor::BaseOLD&);
 }; 
 
 

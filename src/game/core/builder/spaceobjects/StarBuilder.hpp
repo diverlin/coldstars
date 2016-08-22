@@ -34,7 +34,7 @@ namespace STAR
 }
 
 namespace descriptor {
-class Base;
+class BaseOLD;
 } // namespace descriptor
 
 
@@ -45,7 +45,7 @@ public:
     ~StarBuilder();
 
     static Star* getNew();
-    static Star* getNew(const descriptor::Base&);
+    static Star* getNew(const descriptor::BaseOLD&);
 
 private:
     static Star* __getNewTemplate(id_type id = NONE);

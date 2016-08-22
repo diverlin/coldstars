@@ -49,14 +49,14 @@ Radar* RadarBuilder::createTemplate(id_type id) const
   
 Radar* RadarBuilder::getNew() const
 {
-    const descriptor::Base& descriptor =  global::get().descriptors().getRand(descriptor::Type::RADAR);
+    const descriptor::BaseOLD& descriptor =  global::get().descriptors().getRand(descriptor::Type::RADAR);
     Radar* radar = createTemplate();
     createInternals(radar, descriptor);
 
     return radar;
 }
 
-Radar* RadarBuilder::getNew(const descriptor::Base& descriptor) const
+Radar* RadarBuilder::getNew(const descriptor::BaseOLD& descriptor) const
 {
     Radar* radar = createTemplate();
     createInternals(radar, descriptor);
@@ -64,7 +64,7 @@ Radar* RadarBuilder::getNew(const descriptor::Base& descriptor) const
     return radar;
 } 
         
-void RadarBuilder::createInternals(Radar* radar, const descriptor::Base& descriptor) const
+void RadarBuilder::createInternals(Radar* radar, const descriptor::BaseOLD& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
 

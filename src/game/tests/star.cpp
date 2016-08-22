@@ -44,7 +44,7 @@
 
 TEST(creation, star)
 {
-    const descriptor::Base& descr = global::get().descriptors().getRand(descriptor::Type::STAR);
+    const descriptor::BaseOLD& descr = global::get().descriptors().getRand(descriptor::Type::STAR);
     Star* star = StarBuilder::getNew(descr);
 
     EXPECT_EQ(descr.armor(), star->armor());

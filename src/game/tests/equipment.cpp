@@ -41,7 +41,7 @@
 
 #include <fstream>
 
-void commonDataItemCheck(const descriptor::Base& descr, item::Base* item)
+void commonDataItemCheck(const descriptor::BaseOLD& descr, item::Base* item)
 {
     //EXPECT_EQ(descr.id(), item->id()); // wrong
     EXPECT_EQ(descr.type(), (int)item->descriptorType());
@@ -57,7 +57,7 @@ void commonDataItemCheck(const descriptor::Base& descr, item::Base* item)
 
 TEST(creation,bak)
 {
-    const descriptor::Base& descr = global::get().descriptors().getRand(descriptor::Type::BAK);
+    const descriptor::BaseOLD& descr = global::get().descriptors().getRand(descriptor::Type::BAK);
     item::equipment::Bak* bak = global::get().bakBuilder().getNew( descr );
 
     EXPECT_EQ(descr.fuelMax(), bak->fuel());

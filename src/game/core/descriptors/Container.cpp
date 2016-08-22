@@ -23,14 +23,14 @@ namespace descriptor {
 
 Container::Container(const id_type& child_id)
     :
-      Base(Type::CONTAINER)
+      BaseOLD(Type::CONTAINER)
 {
     add(Key::CHILD, child_id);
 }
 
 Container::Container(const std::string& data)
     :
-      Base(data)
+      BaseOLD(data)
 {
 
 }

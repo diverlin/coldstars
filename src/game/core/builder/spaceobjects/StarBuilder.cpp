@@ -49,7 +49,7 @@ Star* StarBuilder::getNew()
     return getNew(descr);
 } 
 
-Star* StarBuilder::getNew(const descriptor::Base& descr)
+Star* StarBuilder::getNew(const descriptor::BaseOLD& descr)
 {
     //jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::SPHERE_ID);
     //jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::STAR_ID);

@@ -24,7 +24,7 @@
 #include <types/TechLevelTypes.hpp>
 
 namespace descriptor {
-class Base;
+class BaseOLD;
 } // namespace descriptor
 
 namespace item {

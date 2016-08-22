@@ -21,7 +21,7 @@
 
 #include <descriptors/Base.hpp>
 
-ItemCommonData extractCommonData(const descriptor::Base& descriptor)
+ItemCommonData extractCommonData(const descriptor::BaseOLD& descriptor)
 {
     ItemCommonData data;
     //data.id          = descriptor.id();

@@ -206,16 +206,16 @@ private:
     static IdGenerator m_idGenerator;
 };
 
-class Base
+class BaseOLD
 {
 public:
-    Base(const Type&, bool generate_id = true);
-    Base(const std::string& data);
-    ~Base();
+    BaseOLD(const Type&, bool generate_id = true);
+    BaseOLD(const std::string& data);
+    ~BaseOLD();
 
     std::string data() const;
 
-    bool operator==(const Base& rhs) const;
+    bool operator==(const BaseOLD& rhs) const;
 
     const id_type& texture() const;
     const id_type& mesh() const;
