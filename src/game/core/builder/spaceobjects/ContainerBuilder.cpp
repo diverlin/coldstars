@@ -53,7 +53,7 @@ ContainerBuilder::getNew(const std::string& data)
 }
 
 Container*
-ContainerBuilder::getNew(const descriptor::Base& descriptor)
+ContainerBuilder::getNew(const descriptor::BaseOLD& descriptor)
 {
     Container* container = __getNewTemplate();
     __createInternals(container, descriptor);
@@ -143,7 +143,7 @@ ContainerBuilder::__getNewTemplate()
 //}
 
 void
-ContainerBuilder::__createInternals(Container* container, const descriptor::Base& descriptor)
+ContainerBuilder::__createInternals(Container* container, const descriptor::BaseOLD& descriptor)
 {
     LifeData data_life;
     data_life.armor = 1;

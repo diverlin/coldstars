@@ -137,7 +137,7 @@ void BaseVehicleBuilder::_createSlots(Vehicle* vehicle)
     }
 }
 
-void BaseVehicleBuilder::equip(Vehicle* vehicle, const descriptor::Base& descriptor)
+void BaseVehicleBuilder::equip(Vehicle* vehicle, const descriptor::BaseOLD& descriptor)
 {
 //    type::entity type = (type::entity)descriptor.type();
 //    switch(type) {

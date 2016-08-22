@@ -51,14 +51,14 @@ Droid* DroidBuilder::createTemplate(id_type id) const
 
 Droid* DroidBuilder::getNew() const
 {
-    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::DROID);
+    const descriptor::BaseOLD& descriptor = global::get().descriptors().getRand(descriptor::Type::DROID);
     Droid* droid = createTemplate();
     createInternals(droid, descriptor);
 
     return droid;
 }
 
-Droid* DroidBuilder::getNew(const descriptor::Base& descriptor) const
+Droid* DroidBuilder::getNew(const descriptor::BaseOLD& descriptor) const
 {
     Droid* droid = createTemplate();
     createInternals(droid, descriptor);
@@ -66,7 +66,7 @@ Droid* DroidBuilder::getNew(const descriptor::Base& descriptor) const
     return droid;
 }  
             
-void DroidBuilder::createInternals(Droid* droid, const descriptor::Base& descriptor) const
+void DroidBuilder::createInternals(Droid* droid, const descriptor::BaseOLD& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
    

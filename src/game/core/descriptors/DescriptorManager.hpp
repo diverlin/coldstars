@@ -88,9 +88,9 @@ public:
     Manager();
     ~Manager();
 
-    void add(const Base&);
-    Base getRand(const Type&);
-    Base get(const id_type&);
+    void add(const BaseOLD&);
+    BaseOLD getRand(const Type&);
+    BaseOLD get(const id_type&);
 
     void save();
     void load();
@@ -126,8 +126,8 @@ private:
     MManager<Star> m_star;
     Collector<jeti::descriptor::Mesh> m_mesh;
 
-    std::map<id_type, Base> m_descriptors;
-    std::map<int, std::vector<Base>> m_descriptorsTypes;
+    std::map<id_type, BaseOLD> m_descriptors;
+    std::map<int, std::vector<BaseOLD>> m_descriptorsTypes;
 
     void __clear();
     void __generate();

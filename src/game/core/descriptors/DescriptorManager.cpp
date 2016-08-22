@@ -68,7 +68,7 @@ Manager::~Manager()
 {}
 
 void
-Manager::add(const Base& descriptor)
+Manager::add(const BaseOLD& descriptor)
 {
     //std::cout<<"add descriptor with type"<<descriptor::typeStr((descriptor::Type)descriptor.type())<<std::endl;
     const id_type id = descriptor.id();
@@ -87,25 +87,25 @@ Manager::add(const Base& descriptor)
         if (it != m_descriptorsTypes.end()) {
             it->second.push_back(descriptor);
         } else {
-            std::vector<Base> vector;
+            std::vector<BaseOLD> vector;
             vector.push_back(descriptor);
             m_descriptorsTypes[type] = vector;
         }
     }
 }
 
-Base
+BaseOLD
 Manager::getRand(const Type& type)
 {
     const auto it = m_descriptorsTypes.find(int(type));
     if (it != m_descriptorsTypes.end()) {
-        const std::vector<Base> descriptors = it->second;
+        const std::vector<BaseOLD> descriptors = it->second;
         return meti::getRand(descriptors);
     }
     throw std::runtime_error("descriptor type doesn't contain any descriptors, " + typeStr(type));
 }
 
-Base
+BaseOLD
 Manager::get(const id_type& id)
 {
     const auto it = m_descriptors.find(id);
@@ -123,7 +123,7 @@ Manager::save()
     if(filestream.is_open()) {
         for(const auto& lists: m_descriptorsTypes) {
             const auto& list = lists.second;
-            for(const Base& descr: list) {
+            for(const BaseOLD& descr: list) {
                 filestream<<descr.data()<<std::endl;
             }
         }
@@ -144,7 +144,7 @@ Manager::load()
     if(filestream.is_open()) {
         while(std::getline(filestream, line)) {
             if (!line.empty()) {
-                const Base& descr = Base(line);
+                const BaseOLD& descr = BaseOLD(line);
                 add(descr);
             }
         }

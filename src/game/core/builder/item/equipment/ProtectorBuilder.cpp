@@ -61,7 +61,7 @@ ProtectorBuilder::getNew(int num) const
 Protector*
 ProtectorBuilder::getNew() const
 {
-    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
+    const descriptor::BaseOLD& descriptor = global::get().descriptors().getRand(descriptor::Type::PROTECTOR);
     Protector* protector = createTemplate();
     createInternals(protector, descriptor);
         
@@ -69,7 +69,7 @@ ProtectorBuilder::getNew() const
 } 
 
 Protector*
-ProtectorBuilder::getNew(const descriptor::Base& descriptor) const
+ProtectorBuilder::getNew(const descriptor::BaseOLD& descriptor) const
 {
     Protector* protector = createTemplate();
     createInternals(protector, descriptor);
@@ -78,7 +78,7 @@ ProtectorBuilder::getNew(const descriptor::Base& descriptor) const
 }
          
 void
-ProtectorBuilder::createInternals(Protector* protector, const descriptor::Base& descriptor) const
+ProtectorBuilder::createInternals(Protector* protector, const descriptor::BaseOLD& descriptor) const
 {     
     ItemCommonData common_data = extractCommonData(descriptor);
 

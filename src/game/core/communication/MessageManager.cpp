@@ -131,7 +131,7 @@ void MessageManager::process(const Message& message)
     }
         /** OTHER */
     case TELEGRAM::HIT: {
-        descriptor::Base descriptor(message.data);
+        descriptor::BaseOLD descriptor(message.data);
         SpaceObject* ob = global::get().entityManager().get<SpaceObject*>(descriptor.target());
         ob->hit(descriptor.damage());
         break;

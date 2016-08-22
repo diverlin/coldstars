@@ -25,7 +25,7 @@
 
 namespace descriptor {
 
-class Container : public Base
+class Container : public BaseOLD
 {
 public:
     Container(const id_type& child_id);

@@ -51,14 +51,14 @@ Scaner* ScanerBuilder::createTemplate(id_type id) const
 
 Scaner* ScanerBuilder::getNew() const
 {
-    const descriptor::Base& descriptor = global::get().descriptors().getRand(descriptor::Type::SCANER);
+    const descriptor::BaseOLD& descriptor = global::get().descriptors().getRand(descriptor::Type::SCANER);
     Scaner* scaner = createTemplate();
     createInternals(scaner, descriptor);
 
     return scaner;
 }
 
-Scaner* ScanerBuilder::getNew(const descriptor::Base& descriptor) const
+Scaner* ScanerBuilder::getNew(const descriptor::BaseOLD& descriptor) const
 {
     Scaner* scaner = createTemplate();
     createInternals(scaner, descriptor);
@@ -66,7 +66,7 @@ Scaner* ScanerBuilder::getNew(const descriptor::Base& descriptor) const
     return scaner;
 } 
             
-void ScanerBuilder::createInternals(Scaner* scaner, const descriptor::Base& descriptor) const
+void ScanerBuilder::createInternals(Scaner* scaner, const descriptor::BaseOLD& descriptor) const
 {
     ItemCommonData common_data = extractCommonData(descriptor);
     

@@ -29,7 +29,7 @@ class Galaxy;
 class Sector;
 class Starsystem;
 class Star;
-class Base;
+class BaseOLD;
 
 class Generator {
 private:
@@ -40,20 +40,20 @@ static descriptor::Starsystem getNewStarsystemDescriptor(int race = -1);
 
 /* spaceobjects */
 static descriptor::Star getNewStarDescriptor();
-static descriptor::Base getNewPlanetDescriptor();
-static descriptor::Base getNewAsteroidDescriptor();
-static descriptor::Base getNewVehicleDescriptor();
-static descriptor::Base getNewContainerDescriptor();
+static descriptor::BaseOLD getNewPlanetDescriptor();
+static descriptor::BaseOLD getNewAsteroidDescriptor();
+static descriptor::BaseOLD getNewVehicleDescriptor();
+static descriptor::BaseOLD getNewContainerDescriptor();
 
 /* items */
-static descriptor::Base getNewBakDescriptor(int race = -1, int tech_level = -1);
-static descriptor::Base getNewDriveDescriptor(int race = -1, int tech_level = -1);
-static descriptor::Base getNewDroidDescriptor(int race = -1, int tech_level = -1);
-static descriptor::Base getNewGrappleDescriptor(int race = -1, int tech_level = -1);
-static descriptor::Base getNewScanerDescriptor(int race = -1, int tech_level = -1);
-static descriptor::Base getNewRadarDescriptor(int race = -1, int tech_level = -1);
-static descriptor::Base getNewProtectorDescriptor(int race = -1, int tech_level = -1);
-static descriptor::Base getNewBombDescriptor(int damage = -1, int radius = -1);
+static descriptor::BaseOLD getNewBakDescriptor(int race = -1, int tech_level = -1);
+static descriptor::BaseOLD getNewDriveDescriptor(int race = -1, int tech_level = -1);
+static descriptor::BaseOLD getNewDroidDescriptor(int race = -1, int tech_level = -1);
+static descriptor::BaseOLD getNewGrappleDescriptor(int race = -1, int tech_level = -1);
+static descriptor::BaseOLD getNewScanerDescriptor(int race = -1, int tech_level = -1);
+static descriptor::BaseOLD getNewRadarDescriptor(int race = -1, int tech_level = -1);
+static descriptor::BaseOLD getNewProtectorDescriptor(int race = -1, int tech_level = -1);
+static descriptor::BaseOLD getNewBombDescriptor(int damage = -1, int radius = -1);
 
 friend class Manager;
 };

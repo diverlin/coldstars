@@ -23,7 +23,7 @@
 #include <types/RaceTypes.hpp>
 
 namespace descriptor {
-class Base;
+class BaseOLD;
 }
 
 struct ItemCommonData 
@@ -42,4 +42,4 @@ struct ItemCommonData
     int descriptor_type = 0;
 };
 
-ItemCommonData extractCommonData(const descriptor::Base& descriptor);
+ItemCommonData extractCommonData(const descriptor::BaseOLD& descriptor);

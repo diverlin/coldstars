@@ -24,7 +24,7 @@
 #include <string>
 
 namespace descriptor {
-class Base;
+class BaseOLD;
 } // namespace descriptor
 
 namespace item {
@@ -39,12 +39,12 @@ public:
     ~BakBuilder();
 
     static Bak* getNew();
-    static Bak* getNew(const descriptor::Base&);
+    static Bak* getNew(const descriptor::BaseOLD&);
     static Bak* getNew(const std::string&);
 
 private:
     static Bak* __createTemplate(id_type);
-    static void __createInternals(item::equipment::Bak*, const descriptor::Base&);
+    static void __createInternals(item::equipment::Bak*, const descriptor::BaseOLD&);
 }; 
 
 } // namespace equipment

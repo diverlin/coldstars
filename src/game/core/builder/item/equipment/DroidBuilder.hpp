@@ -22,7 +22,7 @@
 #include <types/IdType.hpp>
 
 namespace descriptor {
-class Base;
+class BaseOLD;
 } // namespace descriptor
 
 namespace item {
@@ -38,10 +38,10 @@ public:
 
     Droid* getNew() const;
     Droid* createTemplate(id_type id = NONE) const;
-    Droid* getNew(const descriptor::Base&) const;
+    Droid* getNew(const descriptor::BaseOLD&) const;
 
 private:
-    void createInternals(Droid*, const descriptor::Base&) const;
+    void createInternals(Droid*, const descriptor::BaseOLD&) const;
 }; 
 
 } // namespace equipment

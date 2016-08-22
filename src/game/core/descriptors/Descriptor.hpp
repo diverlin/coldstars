@@ -4,7 +4,7 @@
 
 namespace descriptor {
 
-class DescriptorOLD : public Base {
+class DescriptorOLD : public BaseOLD {
 public:
     DescriptorOLD(const id_type&, const id_type&);
     DescriptorOLD(const std::string& data);

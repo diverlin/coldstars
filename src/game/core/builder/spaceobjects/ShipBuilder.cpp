@@ -41,9 +41,9 @@ ShipBuilder::getNew(bool full_equiped)
 }
 
 Ship*
-ShipBuilder::getNew(const descriptor::Base& descr)
+ShipBuilder::getNew(const descriptor::BaseOLD& descr)
 {            
-    descriptor::Base descriptor(descr.data());
+    descriptor::BaseOLD descriptor(descr.data());
     id_type id = NONE;
     if (descr.type() == (id_type)descriptor::Type::DESCRIPTOR) {
         descriptor = global::get().descriptors().get(descr.descriptor());
@@ -58,7 +58,7 @@ ShipBuilder::getNew(const descriptor::Base& descr)
 Ship*
 ShipBuilder::getNew(const std::string& data)
 {
-    return getNew(descriptor::Base(data));
+    return getNew(descriptor::BaseOLD(data));
 }
 
 Ship*
@@ -73,7 +73,7 @@ ShipBuilder::__getNewTemplate(id_type id)
 }
 
 void
-ShipBuilder::__createInternals(Ship* ship, const descriptor::Base& descr)
+ShipBuilder::__createInternals(Ship* ship, const descriptor::BaseOLD& descr)
 {
     assert(descr.type() == (int)descriptor::Type::VEHICLE);
     //jeti::Mesh* mesh = nullptr;
