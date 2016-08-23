@@ -27,12 +27,14 @@ IdGenerator Base::m_idGenerator;
 std::map<int, Id> Base::m_ids;
 
 
-Base::Base(/*const id_type& type, bool generate_id*/)
+Base::Base(const int_t& type, const int_t& id)
+    :
+      m_type(type)
+    , m_id(id)
 {
-//    if (generate_id) {
-//        add(Key::ID, m_idGenerator.nextId());
-//    }
-//    add(Key::TYPE, (int)type);
+    if (id == -1) {
+        m_id = m_idGenerator.nextId();
+    }
 }
 
 Base::Base(const std::string& data)
