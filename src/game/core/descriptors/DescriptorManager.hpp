@@ -25,7 +25,7 @@
 #include <descriptors/StarsystemDescriptor.hpp>
 #include <descriptors/StarDescriptor.hpp>
 
-#include <ceti/Collector.hpp>
+#include <ceti/descriptor/Collector.hpp>
 
 #include <jeti/MeshDescriptor.hpp>
 

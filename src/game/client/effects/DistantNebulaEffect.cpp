@@ -24,8 +24,7 @@
 
 #include <resources/TextureCollector.hpp>
 
-#include <ceti/Collector.hpp>
-
+#include <ceti/descriptor/Collector.hpp>
 #include <jeti/Render.hpp>
 #include <jeti/TextureOb.hpp>
 

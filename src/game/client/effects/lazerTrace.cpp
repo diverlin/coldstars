@@ -24,7 +24,7 @@
 #include <jeti/particlesystem/BaseParticleSystem.hpp>
 
 
-#include <ceti/Collector.hpp> // remove
+#include <ceti/descriptor/Collector.hpp> // remove
 
 
 LazerTraceEffect::LazerTraceEffect(jeti::TextureOb* textureOb, const glm::vec3* const start_pos, const glm::vec3* const end_pos)
