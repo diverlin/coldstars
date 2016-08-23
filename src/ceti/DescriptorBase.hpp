@@ -71,7 +71,7 @@ public:
 class Base
 {
 public:
-    Base(/*const id_type&, bool generate_id = true*/);
+    Base(const int_t& type = -1, const int_t& id = -1);
     Base(const std::string& data);
     ~Base();
 
