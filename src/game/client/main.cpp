@@ -18,7 +18,7 @@
 
 #include <iostream>
 #include "resources/Data.hpp"
-#include <ceti/Collector.hpp>
+#include <ceti/descriptor/Collector.hpp>
 
 #include "builder/world/GalaxyBuilder.hpp"
 #include "builder/pilots/PlayerBuilder.hpp"

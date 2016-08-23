@@ -25,7 +25,7 @@
 //#include <jeti/ShaderLoader.hpp>
 #include <jeti/Mesh.hpp>
 //#include <jeti/Screen.hpp>
-#include <ceti/Collector.hpp>
+#include <ceti/descriptor/Collector.hpp>
 
 #include "TextureCollector.hpp"
 #include "GuiTextureObCollector.hpp"

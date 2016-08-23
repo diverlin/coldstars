@@ -23,7 +23,7 @@
 #include <types/IdType.hpp>
 #include <types/MeshTypes.hpp>
 
-#include <ceti/DescriptorBase.hpp>
+#include <ceti/descriptor/Base.hpp>
 
 #include <glm/glm.hpp>
 
