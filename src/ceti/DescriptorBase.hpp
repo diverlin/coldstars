@@ -51,7 +51,7 @@ class Property : public Id {
 public:
     enum {INT, STR};
 
-    Property(const Id& id, const int_type& value)
+    Property(const Id& id, const int_t& value)
         :
           Id(id)
         , valueType(INT)
@@ -64,7 +64,7 @@ public:
         , strValue(value)
     {}
     int valueType;
-    int_type intValue = 0;
+    int_t intValue = 0;
     std::string strValue = "";
 };
 
@@ -79,7 +79,10 @@ public:
 
     bool operator==(const Base& rhs) const;
 
-    const int_type& get(int) const;
+    const int_t& id() const { return m_id; }
+    const int_t& type() const { return m_type; }
+
+    const int_t& get(int) const;
 
     void add(const Property&);
     void add(const std::vector<Property>&);
@@ -90,50 +93,22 @@ private:
     friend class boost::serialization::access;
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version) {
+        ar & m_id;
         ar & m_type;
         ar & m_intValues;
-        if (!m_strValues.empty()) {
-            ar & m_strValues;
-        }
+        ar & m_strValues;
     }
 
-    id_type m_type = -1;
-    std::map<int, int_type> m_intValues;
+    int_t m_id = -1;
+    int_t m_type = -1;
+    std::map<int, int_t> m_intValues;
     std::map<int, std::string> m_strValues;
     static IdGenerator m_idGenerator; // ?
 
 public:
-    static std::map<int, Property> m_ids;
+    static std::map<int, Id> m_ids;
 };
 
-//class Base
-//{
-//public:
-//    Base() {
-//        m_id = m_idGenerator.nextId();
-//    }
-//    virtual ~Base() {}
-
-//    const id_type& id() const { return m_id; }
-
-//    virtual std::string info() const {
-//        std::string result;
-//        result += std::string("id=") + std::to_string(m_id);
-//        return result;
-//    }
-
-//private:
-//    friend class boost::serialization::access;
-//    template<class Archive>
-//    void serialize(Archive & ar, const unsigned int version) {
-//        ar & m_id;
-//    }
-
-//private:
-//    id_type m_id = -1;
-
-//    static IdGenerator m_idGenerator;
-//};
 
 } // namespace descriptor
 } // namespace ceti

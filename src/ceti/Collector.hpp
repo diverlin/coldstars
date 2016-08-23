@@ -28,6 +28,7 @@
 
 namespace descriptor {
 
+
 template<typename T>
 class Collector
 {
@@ -35,9 +36,9 @@ public:
     Collector() {}
     ~Collector() {}
 
-    void add(T ob) {
+    void add(const T& ob) {
         if (!__isExist(ob)) {
-            m_descriptorsById.insert(std::make_pair(ob.id(), ob));
+            m_descriptorsById.insert(std::make_pair( ob.id(), ob ));
             m_descriptorsByTypes[ob.type()].push_back(ob);
         } else {
             throw std::runtime_error("fail add, id is already exist");
@@ -57,8 +58,7 @@ public:
     const T& getByType(int type) const {
         auto it = m_descriptorsByTypes.find(type);
         if (it != m_descriptorsByTypes.end()) {
-            const std::vector<T>& v = it->second;
-            return meti::getRand(v);
+            return meti::getRand(it->second);
         } else {
             throw std::runtime_error("fail get, type doesn't exist");
         }

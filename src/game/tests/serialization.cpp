@@ -47,6 +47,7 @@ TEST(descriptor, base)
     Property p4(IDs.at(IDLIST), "5;4;3;2;1");
 
     Base descr;
+    descr.m_ids = descriptor::IDs;
     descr.add({p1,p2,p3,p4});
 
     Base descr2(descr);

@@ -19,7 +19,7 @@
 #pragma once
 
 typedef long long int id_type;
-typedef long long int int_type;
+typedef long long int int_t;
 
 const id_type NONE = 0;
 

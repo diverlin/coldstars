@@ -24,7 +24,7 @@ namespace ceti {
 namespace descriptor {
 
 IdGenerator Base::m_idGenerator;
-std::map<int, Property>  Base::m_ids;
+std::map<int, Id> Base::m_ids;
 
 
 Base::Base(/*const id_type& type, bool generate_id*/)
@@ -90,7 +90,7 @@ Base::add(const std::vector<Property>& props)
     }
 }
 
-const int_type&
+const int_t&
 Base::get(int key) const
 {
     auto it = m_intValues.find(key);
