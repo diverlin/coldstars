@@ -8,19 +8,22 @@
 #include <vector>
 
 
+namespace ceti {
+namespace descriptor {
+class Mesh;
+} // namespace descriptor
+} // namespace ceti
+
 
 namespace jeti {
 
 class ObjLoader;
 class TextureOb;
-namespace descriptor {
-class Mesh;
-} // namespace descriptor
 
 class Mesh
 { 
 public:
-    Mesh(const descriptor::Mesh&);
+    Mesh(const ceti::descriptor::Mesh&);
     Mesh();
     ~Mesh();
 

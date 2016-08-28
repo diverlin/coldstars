@@ -26,8 +26,7 @@
 #include <descriptors/StarDescriptor.hpp>
 
 #include <ceti/descriptor/Collector.hpp>
-
-#include <jeti/MeshDescriptor.hpp>
+#include <ceti/descriptor/MeshDescriptor.hpp>
 
 #include <meti/RandUtils.hpp>
 
@@ -109,7 +108,7 @@ public:
     void add(const Star& star) {
         m_star.add(star);
     }
-    void add(const jeti::descriptor::Mesh& mesh) {
+    void add(const Mesh& mesh) {
         m_mesh.add(mesh);
     }
 
@@ -117,14 +116,14 @@ public:
     const MManager<Sector>& sector() const { return m_sector; }
     const MManager<Starsystem>& starsystem() const { return m_starsystem; }
     const MManager<Star>& star() const { return m_star; }
-    const Collector<jeti::descriptor::Mesh>& mesh() const { return m_mesh; }
+    const Collector<Mesh>& mesh() const { return m_mesh; }
 
 private:
     MManager<Galaxy> m_galaxy;
     MManager<Sector> m_sector;
     MManager<Starsystem> m_starsystem;
     MManager<Star> m_star;
-    Collector<jeti::descriptor::Mesh> m_mesh;
+    Collector<Mesh> m_mesh;
 
     std::map<id_type, BaseOLD> m_descriptors;
     std::map<int, std::vector<BaseOLD>> m_descriptorsTypes;

@@ -16,11 +16,10 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <MeshDescriptor.hpp>
+#include "MeshDescriptor.hpp"
 
-namespace jeti {
+namespace ceti {
 namespace descriptor {
-
 
 Mesh::Mesh(int type,
            const std::string& model,
@@ -37,4 +36,4 @@ Mesh::Mesh(int type,
 Mesh::~Mesh() {}
 
 } // namespace descriptor
-} // namespace jeti
+} // namespace ceti
