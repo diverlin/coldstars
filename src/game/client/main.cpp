@@ -65,6 +65,7 @@
 
 #include <render/RenderManager.hpp>
 
+#include <types/MeshTypes.hpp>
 
 enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
 
