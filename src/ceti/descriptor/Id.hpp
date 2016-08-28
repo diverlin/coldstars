@@ -16,30 +16,29 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Base.hpp"
+#pragma once
 
+#include <string>
 
 namespace ceti {
 namespace descriptor {
 
-IdGenerator Base::m_idGenerator;
 
-
-Base::Base(const int_t& type, const int_t& id)
-    :
-      m_type(type)
-    , m_id(id)
-{
-    if (id == -1) {
-        m_id = m_idGenerator.nextId();
-    }
-}
-
-Base::~Base()
-{
-}
+struct Id {
+    Id(int c, const std::string& n)
+        :
+          code(c)
+        , name(n)
+    {}
+    Id(const Id& id)
+        :
+          code(id.code)
+        , name(id.name)
+    {}
+    int code = 0;
+    std::string name = "";
+};
 
 
 } // namespace descriptor
 } // namespace ceti
-

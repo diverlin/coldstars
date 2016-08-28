@@ -18,6 +18,7 @@
 
 #include <gtest/gtest.h>
 
+#include <ceti/descriptor/Descriptor.hpp>
 #include <descriptors/Base.hpp>
 #include <descriptors/Hit.hpp>
 #include <descriptors/GalaxyDescriptor.hpp>
