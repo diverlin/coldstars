@@ -29,7 +29,7 @@
 
 #include <string>
 
-namespace jeti {
+namespace ceti {
 namespace descriptor {
 
 class Mesh : public ceti::descriptor::Base
@@ -61,4 +61,4 @@ private:
 };
 
 } // namespace descriptor
-} // namespace jeti
+} // namespace ceti

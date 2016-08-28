@@ -1,6 +1,6 @@
 #include "Mesh.hpp"
 
-#include "MeshDescriptor.hpp"
+#include <ceti/descriptor/MeshDescriptor.hpp>
 #include "ObjLoader.hpp"
 
 #include <sstream>
@@ -24,7 +24,7 @@ const int STRIDE_COLOR    = 4;
 
 int Mesh::m_id = 0;
 
-Mesh::Mesh(const descriptor::Mesh& descriptor)
+Mesh::Mesh(const ceti::descriptor::Mesh& descriptor)
     :
       m_textureOb(nullptr),
       m_originDirection(descriptor.orientation())
