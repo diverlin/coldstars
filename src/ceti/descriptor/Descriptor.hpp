@@ -16,30 +16,52 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "Base.hpp"
+#pragma once
 
+#include "Base.hpp"
+#include "Id.hpp"
+#include "Property.hpp"
+
+#include <boost/serialization/map.hpp>
 
 namespace ceti {
 namespace descriptor {
 
-IdGenerator Base::m_idGenerator;
 
-
-Base::Base(const int_t& type, const int_t& id)
-    :
-      m_type(type)
-    , m_id(id)
+class Descriptor : public Base
 {
-    if (id == -1) {
-        m_id = m_idGenerator.nextId();
+public:
+    Descriptor(const int_t& type = -1, const int_t& id = -1);
+    Descriptor(const std::string& data);
+    ~Descriptor();
+
+    std::string data() const;
+
+    bool operator==(const Descriptor& rhs) const;
+
+    const int_t& get(int) const;
+
+    void add(const Property&);
+    void add(const std::vector<Property>&);
+
+    std::string info() const;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & boost::serialization::base_object<Base>(*this);
+        ar & m_intValues;
+        ar & m_strValues;
     }
-}
 
-Base::~Base()
-{
-}
+    std::map<int, int_t> m_intValues;
+    std::map<int, std::string> m_strValues;
+
+public:
+    static std::map<int, Id> m_ids;
+};
 
 
 } // namespace descriptor
 } // namespace ceti
-

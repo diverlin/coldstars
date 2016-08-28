@@ -22,6 +22,7 @@
 
 #include <common/IdGenerator.hpp>
 
+#include <ceti/descriptor/Id.hpp>
 #include <ceti/descriptor/Base.hpp>
 
 #include <boost/serialization/map.hpp>
