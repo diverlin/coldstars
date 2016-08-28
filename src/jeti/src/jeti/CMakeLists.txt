@@ -37,7 +37,11 @@ find_package(SFML COMPONENTS system graphics window REQUIRED)
 include_directories(${SFML_INCLUDE_DIR})
 message("${SFML_LIBRARIES}")
 
-set(include_dirs ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/..)
+set(include_dirs
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/..
+    ${CMAKE_SOURCE_DIR}/src/ceti/src # hack
+    )
 
 if (NOT COMPILE_FLAGS)
     set(COMPILE_FLAGS "-Wall -Wno-switch -std=c++11 -std=gnu++11")
@@ -45,6 +49,7 @@ endif ()
 
 add_library(${PROJECT} SHARED ${${PROJECT}_SRC} ${${PROJECT}_HDR})
 target_link_libraries(${PROJECT}
+    ${CETI_PROJECT}
     ${SFML_LIBRARIES}
     ${OPENGL_LIBRARIES}
     ${GLEW_LIBRARIES}
