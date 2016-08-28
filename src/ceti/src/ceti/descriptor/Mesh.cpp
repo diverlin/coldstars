@@ -16,7 +16,9 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include "MeshDescriptor.hpp"
+#include "Mesh.hpp"
+
+#include <sstream>
 
 namespace ceti {
 namespace descriptor {
@@ -26,14 +28,38 @@ Mesh::Mesh(int type,
            const std::string& texture,
            const glm::vec3& orientation)
     :
-      ceti::descriptor::Base(type)
+      Base(type)
     , m_model(model)
     , m_texture(texture)
     , m_orientation(orientation)
 {
 }
 
-Mesh::~Mesh() {}
+Mesh::Mesh(const std::string& data)
+{
+    std::stringstream ss;
+    ss << data;
+    boost::archive::text_iarchive ia(ss);
+    ia >> *this;
+}
+
+Mesh::~Mesh()
+{}
+
+bool
+Mesh::operator==(const Mesh& rhs) const
+{
+    return data() == rhs.data();
+}
+
+std::string
+Mesh::data() const
+{
+    std::stringstream ss;
+    boost::archive::text_oarchive oa(ss);
+    oa << *this;
+    return ss.str();
+}
 
 } // namespace descriptor
 } // namespace ceti

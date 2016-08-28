@@ -14,9 +14,6 @@ endif ()
 
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
-#message(FATAL_ERROR "GTEST_INCLUDE_DIRS=${GTEST_INCLUDE_DIRS}")
-#message("GTEST_MAIN_LIBRARIES=${GTEST_MAIN_LIBRARIES}")
-#message("GTEST_LIBRARIES=${GTEST_LIBRARIES}")
     
 include_directories(../src)
 add_executable (${PROJECT} ${${PROJECT}_SRC} ${${PROJECT}_HDR})
@@ -24,19 +21,11 @@ target_link_libraries(${PROJECT}
     ${PROJECT_METI}
     ${PROJECT_CETI}
     boost_serialization
-#    ${PROJECT_CORE}
-#    ${PROJECT_JETI}
     ${GTEST_MAIN_LIBRARIES}
     ${GTEST_LIBRARIES}
     pthread
 )
 set_target_properties(${PROJECT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
-
-# deploy
-install(TARGETS ${PROJECT} DESTINATION ${DEPLOY_DIR})
-if (NOT EXISTS ${DEPLOY_DIR}/descriptors.txt)
-    install(FILES ${CMAKE_SOURCE_DIR}/data/descriptors.txt DESTINATION ${DEPLOY_DIR})
-endif()
 
 
 #--gtest_filter=descriptor.*

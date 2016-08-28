@@ -20,7 +20,7 @@
 #include <builder/slots/VehicleSlotBuilder.hpp>
 #include <managers/EntityManager.hpp>
 
-#include <common/IdGenerator.hpp>
+#include <ceti/IdGenerator.hpp>
 
 #include <ceti/Logger.hpp>
 #include <math/rand.hpp>

@@ -26,7 +26,7 @@
 #include <descriptors/StarDescriptor.hpp>
 
 #include <ceti/descriptor/Collector.hpp>
-#include <ceti/descriptor/MeshDescriptor.hpp>
+#include <ceti/descriptor/Mesh.hpp>
 
 #include <meti/RandUtils.hpp>
 

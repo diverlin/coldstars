@@ -19,13 +19,14 @@
 
 #pragma once
 
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 
 #include <meti/RandUtils.hpp>
 
 #include <map>
 #include <vector>
 
+namespace ceti {
 namespace descriptor {
 
 
@@ -76,6 +77,6 @@ private:
 };
 
 } // namespace descriptor
-
+} // namespace ceti
 
 

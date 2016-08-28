@@ -30,7 +30,7 @@
 #include "TextureCollector.hpp"
 #include "GuiTextureObCollector.hpp"
 
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 #include <types/RaceTypes.hpp>
 #include <types/MeshTypes.hpp>
 #include <types/TechLevelTypes.hpp>

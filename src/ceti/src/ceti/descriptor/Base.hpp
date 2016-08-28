@@ -18,9 +18,9 @@
 
 #pragma once
 
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 
-#include <common/IdGenerator.hpp>
+#include <ceti/IdGenerator.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>

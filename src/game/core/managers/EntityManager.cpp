@@ -23,7 +23,7 @@
 #include "EntityManager.hpp"
 #include <ceti/Logger.hpp>
 //#include <ceti/StringUtils.hpp>
-#include <common/IdGenerator.hpp>
+#include <ceti/IdGenerator.hpp>
 
 #include <spaceobjects/ALL>
 

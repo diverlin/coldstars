@@ -21,7 +21,7 @@
 #include <common/Base.hpp>
 #include <ceti/Orientation.hpp>
 
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 #include <types/TechLevelTypes.hpp>
 #include <types/RaceTypes.hpp>
 

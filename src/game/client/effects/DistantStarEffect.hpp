@@ -21,7 +21,7 @@
 
 #include <effects/BaseBackGroundEffect.hpp>
 
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 
 const int DISTANT_STAR_MIN = 10000;
 const int DISTANT_STAR_MAX = 10000;

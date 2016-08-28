@@ -19,7 +19,7 @@
 #pragma once
 
 #include <common/GameDate.hpp>
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 
 struct AgressorData
 {

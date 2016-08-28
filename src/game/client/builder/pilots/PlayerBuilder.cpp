@@ -24,7 +24,7 @@
 
 #include <spaceobjects/Ship.hpp>
 
-#include <common/IdGenerator.hpp>
+#include <ceti/IdGenerator.hpp>
 #include <ceti/Logger.hpp>
 
 #include <common/Global.hpp>

@@ -20,7 +20,7 @@
 #pragma once
 
 #include <builder/spaceobjects/BaseVehicleBuilder.hpp>
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 
 class Satellite;
 

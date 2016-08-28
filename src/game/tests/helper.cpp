@@ -19,7 +19,7 @@
 #include <gtest/gtest.h>
 
 #include <common/Global.hpp>
-#include <common/IdGenerator.hpp>
+#include <ceti/IdGenerator.hpp>
 #include <world/starsystem.hpp>
 #include <item/others/Bomb.hpp>
 #include <slots/ItemSlot.hpp>

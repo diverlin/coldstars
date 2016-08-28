@@ -21,7 +21,7 @@
 //#include <ceti/StringUtils.hpp>
 #include <ceti/Logger.hpp>
 
-#include "../../common/IdGenerator.hpp"
+#include <ceti/IdGenerator.hpp>
 #include <common/Global.hpp>
 #include <managers/EntityManager.hpp>
 

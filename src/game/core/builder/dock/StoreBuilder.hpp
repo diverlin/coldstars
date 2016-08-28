@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 
 class Store;
 
