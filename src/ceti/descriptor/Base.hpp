@@ -68,16 +68,16 @@ public:
     std::string strValue = "";
 };
 
-class Base
+class Descriptor
 {
 public:
-    Base(const int_t& type = -1, const int_t& id = -1);
-    Base(const std::string& data);
-    ~Base();
+    Descriptor(const int_t& type = -1, const int_t& id = -1);
+    Descriptor(const std::string& data);
+    ~Descriptor();
 
     std::string data() const;
 
-    bool operator==(const Base& rhs) const;
+    bool operator==(const Descriptor& rhs) const;
 
     const int_t& id() const { return m_id; }
     const int_t& type() const { return m_type; }

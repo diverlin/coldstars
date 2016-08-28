@@ -46,11 +46,11 @@ TEST(descriptor, base)
     Property p3(IDs.at(DAMAGE), 30);
     Property p4(IDs.at(IDLIST), "5;4;3;2;1");
 
-    Base descr;
+    Descriptor descr;
     descr.m_ids = descriptor::IDs;
     descr.add({p1,p2,p3,p4});
 
-    Base descr2(descr);
+    Descriptor descr2(descr);
     EXPECT_TRUE(descr == descr2);
 
     EXPECT_EQ(descr.get(ARMOR), descr2.get(ARMOR));

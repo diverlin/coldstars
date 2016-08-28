@@ -23,11 +23,11 @@
 namespace ceti {
 namespace descriptor {
 
-IdGenerator Base::m_idGenerator;
-std::map<int, Id> Base::m_ids;
+IdGenerator Descriptor::m_idGenerator;
+std::map<int, Id> Descriptor::m_ids;
 
 
-Base::Base(const int_t& type, const int_t& id)
+Descriptor::Descriptor(const int_t& type, const int_t& id)
     :
       m_type(type)
     , m_id(id)
@@ -37,7 +37,7 @@ Base::Base(const int_t& type, const int_t& id)
     }
 }
 
-Base::Base(const std::string& data)
+Descriptor::Descriptor(const std::string& data)
 {
     std::stringstream ss;
     ss << data;
@@ -45,18 +45,18 @@ Base::Base(const std::string& data)
     ia >> *this;
 }
 
-Base::~Base()
+Descriptor::~Descriptor()
 {
 }
 
 bool
-Base::operator==(const Base& rhs) const
+Descriptor::operator==(const Descriptor& rhs) const
 {
     return data() == rhs.data();
 }
 
 std::string
-Base::data() const
+Descriptor::data() const
 {
     std::stringstream ss;
     boost::archive::text_oarchive oa(ss);
@@ -65,7 +65,7 @@ Base::data() const
 }
 
 void
-Base::add(const Property& prop)
+Descriptor::add(const Property& prop)
 {
     if (prop.valueType == Property::INT) {
         auto it = m_intValues.find(prop.code);
@@ -85,7 +85,7 @@ Base::add(const Property& prop)
 }
 
 void
-Base::add(const std::vector<Property>& props)
+Descriptor::add(const std::vector<Property>& props)
 {
     for(const Property& prop: props) {
         add(prop);
@@ -93,7 +93,7 @@ Base::add(const std::vector<Property>& props)
 }
 
 const int_t&
-Base::get(int key) const
+Descriptor::get(int key) const
 {
     auto it = m_intValues.find(key);
     if (it != m_intValues.end()) {
@@ -103,7 +103,7 @@ Base::get(int key) const
 }
 
 std::string
-Base::info() const {
+Descriptor::info() const {
     std::string result("descriptor type=" + std::to_string(m_type) + "\n");
     for(auto it = m_intValues.begin(); it != m_intValues.end(); ++it) {
         result += m_ids.at(it->first).name + "=" + std::to_string(it->second) + "\n";
