@@ -1,6 +1,6 @@
 #pragma once
 
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>

@@ -30,7 +30,7 @@
 #include <descriptors/VehicleDescriptorGenerator.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
 
-#include <ceti/descriptor/MeshDescriptor.hpp>
+#include <ceti/descriptor/Mesh.hpp>
 
 
 TEST(descriptor, mesh)

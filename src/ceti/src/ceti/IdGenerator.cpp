@@ -16,7 +16,7 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#include <common/IdGenerator.hpp>
+#include <ceti/IdGenerator.hpp>
 
 id_type IdGenerator::nextId()
 {  

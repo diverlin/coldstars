@@ -18,19 +18,18 @@
 
 #include <gtest/gtest.h>
 
-#include <ceti/descriptor/Descriptor.hpp>
-#include <descriptors/Base.hpp>
+//#include <descriptors/Base.hpp>
 #include <descriptors/Hit.hpp>
-#include <descriptors/GalaxyDescriptor.hpp>
-#include <descriptors/SectorDescriptor.hpp>
-#include <descriptors/ExplosionDescriptor.hpp>
-#include <descriptors/AddToStarsystemDescriptor.hpp>
-#include <descriptors/Container.hpp>
+//#include <descriptors/GalaxyDescriptor.hpp>
+//#include <descriptors/SectorDescriptor.hpp>
+//#include <descriptors/ExplosionDescriptor.hpp>
+//#include <descriptors/AddToStarsystemDescriptor.hpp>
+//#include <descriptors/Container.hpp>
 
-#include <descriptors/VehicleDescriptorGenerator.hpp>
-#include <descriptors/DescriptorGenerator.hpp>
+//#include <descriptors/VehicleDescriptorGenerator.hpp>
+//#include <descriptors/DescriptorGenerator.hpp>
 
-#include <ceti/descriptor/MeshDescriptor.hpp>
+
 
 
 TEST(descriptor,serialization)
@@ -38,39 +37,4 @@ TEST(descriptor,serialization)
     descriptor::Hit descriptor(11, 22, 33);
     descriptor::Hit descriptor2(descriptor.data());
     EXPECT_TRUE(descriptor == descriptor2);
-}
-
-
-TEST(descriptor, base)
-{
-    using namespace descriptor;
-    Property p1(IDs.at(ARMOR), 10);
-    Property p2(IDs.at(RADIUS), 20);
-    Property p3(IDs.at(DAMAGE), 30);
-    Property p4(IDs.at(IDLIST), "5;4;3;2;1");
-
-    Descriptor descr;
-    descr.m_ids = descriptor::IDs;
-    descr.add({p1,p2,p3,p4});
-
-    Descriptor descr2(descr);
-    EXPECT_TRUE(descr == descr2);
-
-    EXPECT_EQ(descr.get(ARMOR), descr2.get(ARMOR));
-    EXPECT_EQ(descr.get(RADIUS), descr2.get(RADIUS));
-    EXPECT_EQ(descr.get(DAMAGE), descr2.get(DAMAGE));
-
-    descr2.add( Property(IDs.at(FUEL_MAX), 40) );
-    EXPECT_FALSE(descr == descr2);
-
-    std::cout<<descr2.info();
-}
-
-TEST(descriptor, mesh)
-{
-//    using namespace jeti::descriptor;
-
-//    MeshDescriptor descr(/*type=*/1, "/path/to/model/file.obj", "/path/to/texture/file.jpg", glm::vec3(1.0f, 1.0f, 1.0f));
-//    MeshDescriptor descr2(descr);
-//    EXPECT_TRUE(descr == descr2);
 }

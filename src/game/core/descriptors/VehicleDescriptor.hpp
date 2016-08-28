@@ -21,7 +21,7 @@
 
 #include <string>
 
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 #include <types/RaceTypes.hpp>
 #include <types/EntityTypes.hpp>
 

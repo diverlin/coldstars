@@ -18,10 +18,8 @@
 
 #pragma once
 
-#include <types/IdType.hpp>
-
-#include <common/IdGenerator.hpp>
-
+#include <ceti/type/IdType.hpp>
+#include <ceti/IdGenerator.hpp>
 #include <ceti/descriptor/Id.hpp>
 #include <ceti/descriptor/Base.hpp>
 

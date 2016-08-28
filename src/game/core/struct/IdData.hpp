@@ -18,7 +18,8 @@
 
 #pragma once
 
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
+
 #include <types/EntityTypes.hpp>
 
 namespace core {

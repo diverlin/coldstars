@@ -19,7 +19,9 @@
 #pragma once
 
 #include "Base.hpp"
-#include <types/IdType.hpp>
+
+#include <ceti/type/IdType.hpp>
+
 #include <vector>
 
 namespace descriptor {

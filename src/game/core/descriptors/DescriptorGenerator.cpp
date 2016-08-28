@@ -27,7 +27,7 @@
 
 #include <meti/RandUtils.hpp>
 #include <common/Global.hpp>
-#include <common/IdGenerator.hpp>
+#include <ceti/IdGenerator.hpp>
 
 #include <common/constants.hpp>
 #include <descriptors/RaceDescriptors.hpp>

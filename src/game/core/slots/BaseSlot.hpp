@@ -19,7 +19,7 @@
 #pragma once
 
 #include <common/Base.hpp>
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 #include <glm/glm.hpp>
 
 #include <spaceobjects/Vehicle.hpp>

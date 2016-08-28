@@ -23,7 +23,7 @@
 #include <common/Config.hpp>
 #include <common/TurnTimer.hpp>
 #include <common/GameDate.hpp>
-#include <common/IdGenerator.hpp>
+#include <ceti/IdGenerator.hpp>
 #include <descriptors/RaceDescriptors.hpp>
 #include <descriptors/DescriptorManager.hpp>
 
@@ -51,6 +51,7 @@
 #include <builder/item/equipment/RocketBuilder.hpp>
 #include <builder/item/equipment/LazerBuilder.hpp>
 
+#ifdef USE_MODULES
 #include <builder/item/modules/BakModuleBuilder.hpp>
 #include <builder/item/modules/DriveModuleBuilder.hpp>
 #include <builder/item/modules/DroidModuleBuilder.hpp>
@@ -60,6 +61,7 @@
 #include <builder/item/modules/ScanerModuleBuilder.hpp>
 #include <builder/item/modules/RocketModuleBuilder.hpp>
 #include <builder/item/modules/LazerModuleBuilder.hpp>
+#endif // USE_MODULES
 
 #include <builder/item/other/BombBuilder.hpp>
 

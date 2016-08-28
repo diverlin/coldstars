@@ -17,7 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 #include "AiModelCollector.hpp"
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 
 AiModelCollector& AiModelCollector::Instance()
 {

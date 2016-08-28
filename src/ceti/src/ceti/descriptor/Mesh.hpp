@@ -20,7 +20,7 @@
 
 #include <descriptors/Base.hpp>
 
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 #include <types/MeshTypes.hpp>
 
 #include <ceti/descriptor/Base.hpp>
@@ -32,13 +32,19 @@
 namespace ceti {
 namespace descriptor {
 
-class Mesh : public ceti::descriptor::Base
+class Mesh : public Base
 {
 public:
     Mesh(int type, const std::string& model, const std::string& texture = "", const glm::vec3& orientation = glm::vec3(1.0, 0.0, 0.0));
+    Mesh(const std::string& data);
     ~Mesh();
 
-    const std::string& fname() const { return m_model; }
+    std::string data() const;
+
+    bool operator==(const Mesh& rhs) const;
+
+    const std::string& model() const { return m_model; }
+    const std::string& texture() const { return m_texture; }
     const glm::vec3& orientation() const { return m_orientation; }
 
 private:

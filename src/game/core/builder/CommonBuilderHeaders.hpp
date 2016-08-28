@@ -22,7 +22,7 @@
 
 #include <common/common.hpp>
 #include <math/rand.hpp>
-#include <common/IdGenerator.hpp>
+#include <ceti/IdGenerator.hpp>
 #include <ceti/Logger.hpp>
 
 //#include <resources/TextureCollector.hpp>

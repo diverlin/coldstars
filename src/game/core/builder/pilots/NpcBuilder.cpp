@@ -19,7 +19,7 @@
 #include <builder/pilots/NpcBuilder.hpp>
 #include <builder/CommonBuilderHeaders.hpp>
 
-#include <common/IdGenerator.hpp>
+#include <ceti/IdGenerator.hpp>
 #include <ceti/Logger.hpp>
 //#include <math/rand.hpp>
 #include <meti/RandUtils.hpp>

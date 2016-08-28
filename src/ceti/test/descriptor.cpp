@@ -19,26 +19,7 @@
 #include <gtest/gtest.h>
 
 #include <ceti/descriptor/Descriptor.hpp>
-//#include <descriptors/Base.hpp>
-//#include <descriptors/Hit.hpp>
-//#include <descriptors/GalaxyDescriptor.hpp>
-//#include <descriptors/SectorDescriptor.hpp>
-//#include <descriptors/ExplosionDescriptor.hpp>
-//#include <descriptors/AddToStarsystemDescriptor.hpp>
-//#include <descriptors/Container.hpp>
-
-//#include <descriptors/VehicleDescriptorGenerator.hpp>
-//#include <descriptors/DescriptorGenerator.hpp>
-
-#include <ceti/descriptor/MeshDescriptor.hpp>
-
-
-TEST(descriptor,serialization)
-{
-//    descriptor::Hit descriptor(11, 22, 33);
-//    descriptor::Hit descriptor2(descriptor.data());
-//    EXPECT_TRUE(descriptor == descriptor2);
-}
+#include <ceti/descriptor/Mesh.hpp>
 
 
 TEST(descriptor, base)
@@ -68,9 +49,14 @@ TEST(descriptor, base)
 
 TEST(descriptor, mesh)
 {
-//    using namespace jeti::descriptor;
+    using namespace descriptor;
+    Mesh descr(/*type=*/1, "/path/to/model/file.obj", "/path/to/texture/file.jpg", glm::vec3(1.0f, 1.0f, 1.0f));
+    Mesh descr2(descr);
+    EXPECT_TRUE(descr == descr2);
 
-//    MeshDescriptor descr(/*type=*/1, "/path/to/model/file.obj", "/path/to/texture/file.jpg", glm::vec3(1.0f, 1.0f, 1.0f));
-//    MeshDescriptor descr2(descr);
-//    EXPECT_TRUE(descr == descr2);
+    EXPECT_EQ(descr.id(), descr2.id());
+    EXPECT_EQ(descr.type(), descr2.type());
+    EXPECT_EQ(descr.model(), descr2.model());
+    EXPECT_EQ(descr.texture(), descr2.texture());
+    EXPECT_EQ(descr.orientation(), descr2.orientation());
 }

@@ -1,6 +1,6 @@
 #include "Mesh.hpp"
 
-#include <ceti/descriptor/MeshDescriptor.hpp>
+#include <ceti/descriptor/Mesh.hpp>
 #include "ObjLoader.hpp"
 
 #include <sstream>
@@ -33,7 +33,7 @@ Mesh::Mesh(const ceti::descriptor::Mesh& descriptor)
     glGenVertexArrays(1, &m_vaoId);
     glGenBuffers(1, &m_vboId);
 
-    ObjLoader objLoader(descriptor.fname());
+    ObjLoader objLoader(descriptor.model());
     
     fillVertices(objLoader);
     m_boundaryBox = objLoader.GetBoundaryBox();

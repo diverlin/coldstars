@@ -21,7 +21,7 @@
 
 #include <vector>
 
-#include <types/IdType.hpp>
+#include <ceti/type/IdType.hpp>
 
 #include <spaceobjects/SpaceObject.hpp>
 
