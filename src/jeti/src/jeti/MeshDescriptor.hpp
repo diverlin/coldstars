@@ -30,30 +30,18 @@
 #include <string>
 
 namespace jeti {
-
 namespace descriptor {
 
-class Mesh /*: public ceti::descriptor::Base*/
+class Mesh : public ceti::descriptor::Base
 {
 public:
-    Mesh(int type, const std::string& model, const std::string& texture = "", const glm::vec3& orientation = glm::vec3(1.0, 0.0, 0.0)):
-        m_type(type)
-      , m_model(model)
-      , m_texture(texture)
-      , m_orientation(orientation)
-    {
-        m_id = -1;
-    }
-    virtual ~Mesh() {}
+    Mesh(int type, const std::string& model, const std::string& texture = "", const glm::vec3& orientation = glm::vec3(1.0, 0.0, 0.0));
+    ~Mesh();
 
-    int id() const { return m_id; }
     const std::string& fname() const { return m_model; }
-    int type() const { return m_type; }
     const glm::vec3& orientation() const { return m_orientation; }
 
 private:
-    int m_id = -1;
-    int m_type = -1;
     std::string m_model = "";
     std::string m_texture = "";
     glm::vec3 m_orientation = glm::vec3(1.0, 0.0, 0.0);
@@ -63,9 +51,7 @@ private:
     template<class Archive>
     void serialize(Archive & ar, const unsigned int version)
     {
-        //ar & boost::serialization::base_object<Base>(*this);
-        ar & m_id;
-        ar & m_type;
+        ar & boost::serialization::base_object<Base>(*this);
         ar & m_model;
         ar & m_texture;
         ar & m_orientation.x;
@@ -75,5 +61,4 @@ private:
 };
 
 } // namespace descriptor
-
 } // namespace jeti

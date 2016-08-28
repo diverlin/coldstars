@@ -30,6 +30,8 @@
 #include <descriptors/VehicleDescriptorGenerator.hpp>
 #include <descriptors/DescriptorGenerator.hpp>
 
+#include <jeti/MeshDescriptor.hpp>
+
 
 TEST(descriptor,serialization)
 {
@@ -62,4 +64,13 @@ TEST(descriptor, base)
     EXPECT_FALSE(descr == descr2);
 
     std::cout<<descr2.info();
+}
+
+TEST(descriptor, mesh)
+{
+    using namespace jeti::descriptor;
+
+    MeshDescriptor descr(/*type=*/1, "/path/to/model/file.obj", "/path/to/texture/file.jpg", glm::vec3(1.0f, 1.0f, 1.0f));
+    MeshDescriptor descr2(descr);
+    EXPECT_TRUE(descr == descr2);
 }
