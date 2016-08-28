@@ -62,6 +62,7 @@ void Data::__generate()
 void Data::__collectMeshDescriptors()
 {        
     using namespace ceti::descriptor;
+
     auto& dm = global::get().descriptors();
     dm.add(Mesh( int(type::mesh::PLANE_ID), "plane/plane.obj", "", glm::vec3(0.0f, 0.0f, 1.0f)) );
     dm.add(Mesh( int(type::mesh::SPHERE_ID), "sphere/sphere.obj"));
