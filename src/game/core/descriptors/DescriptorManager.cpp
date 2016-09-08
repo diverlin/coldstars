@@ -24,40 +24,24 @@
 //#include <resources/Data.hpp>
 //#hack
 
+#include <ceti/FsUtils.hpp>
+
 #include <fstream>
 
-#include <boost/filesystem.hpp>
 
 namespace descriptor {
 
 namespace {
 const std::string descriptors_fname = "descriptors.txt";
-
-bool is_file_exists(const std::string& fname)
-{
-    boost::filesystem::path p(fname);
-    if (!boost::filesystem::exists(p)) {
-        return false;
-    }
-    if (!boost::filesystem::is_regular_file(p)) {
-        return false;
-    }
-
-    return true;
-}
-
-bool create_file(const std::string& fname)
-{
-    std::fstream file(fname, std::ios::out | std::ios::app);
-    file.close();
-}
-
 } // namespace
 
 Manager::Manager()
+    :
+      m_mesh(Collector<Mesh>("mesh_descriptors.txt"))
+    , m_texture(Collector<Texture>("texture_descriptors.txt"))
 {
-    bool force_generate = true;
-    if (is_file_exists(descriptors_fname) && !force_generate) {
+    bool regenerate = true;
+    if (ceti::filesystem::is_file_exists(descriptors_fname) && !regenerate) {
         load();
     } else {
         __generate();
@@ -164,7 +148,7 @@ Manager::__generate()
 {
 //    Data data; // needs for descriptor (texture and mesh ids)
 
-    create_file(descriptors_fname);
+    ceti::filesystem::create_file(descriptors_fname);
 
     __clear();
 

@@ -64,17 +64,26 @@ void Data::__collectMeshDescriptors()
     using namespace ceti::descriptor;
 
     auto& dm = global::get().descriptors();
-    dm.add(Mesh( int(type::mesh::PLANE_ID), "plane/plane.obj", "", glm::vec3(0.0f, 0.0f, 1.0f)) );
-    dm.add(Mesh( int(type::mesh::SPHERE_ID), "sphere/sphere.obj"));
-    dm.add(Mesh( int(type::mesh::SPHERE_DEFORMED_ID), "sphere_deformed/sphere_deformed.obj") );
+    if (!dm.mesh().loaded()) {
+        dm.add(Mesh( int(type::mesh::PLANE_ID), "plane/plane.obj", "", glm::vec3(0.0f, 0.0f, 1.0f)) );
+        dm.add(Mesh( int(type::mesh::SPHERE_ID), "sphere/sphere.obj"));
+        dm.add(Mesh( int(type::mesh::SPHERE_DEFORMED_ID), "sphere_deformed/sphere_deformed.obj") );
     
-    dm.add(Mesh( int(type::mesh::SPACESTATION_ID), "vehicles/BabylonStation/babylon_station_mod.obj", "vehicles/BabylonStation/station_texture/babylonstation.jpg") );
-    dm.add(Mesh( int(type::mesh::SPACESTATION_ID), "vehicles/Anna_V_2.0_variations/anna_mod.obj", "vehicles/Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg") );
+        dm.add(Mesh( int(type::mesh::SPACESTATION_ID), "vehicles/BabylonStation/babylon_station_mod.obj", "vehicles/BabylonStation/station_texture/babylonstation.jpg") );
+        dm.add(Mesh( int(type::mesh::SPACESTATION_ID), "vehicles/Anna_V_2.0_variations/anna_mod.obj", "vehicles/Anna_V_2.0_variations/Anna_Textures/ship_hull12.jpg") );
+
+        dm.mesh().save();
+    }
 }
 
 
 void Data::__loadImages()
 {
+    auto& dm = global::get().descriptors();
+    if (!dm.texture().loaded()) {
+     ... TODO
+    }
+
     {
         jeti::Material material_data;
         material_data.texture_path = DATA_PATH+"turrel/turrel1.png";
