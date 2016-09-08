@@ -15,7 +15,6 @@ endif ()
 add_executable (${PROJECT_CLIENT} ${${PROJECT_CLIENT}_SRC} ${${PROJECT_CLIENT}_HDR})
 target_link_libraries(${PROJECT_CLIENT}
     ${PROJECT_CORE}
-    boost_system
     ${PROJECT_JETI}
     ${PROJECT_METI}
     ${PROJECT_CETI}
@@ -25,7 +24,7 @@ set_target_properties(${PROJECT_CLIENT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS
 
 # symlinks
 add_custom_target(symlinks
-    COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/src/jeti/shaders ${CMAKE_CURRENT_BINARY_DIR}/shaders # inject to jeti
+    COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/src/jeti/src/jeti/shaders ${CMAKE_CURRENT_BINARY_DIR}/shaders # inject to jeti
     COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/data ${CMAKE_CURRENT_BINARY_DIR}/data
     COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/config/config.info ${CMAKE_CURRENT_BINARY_DIR}/config.info # inject to data
     )

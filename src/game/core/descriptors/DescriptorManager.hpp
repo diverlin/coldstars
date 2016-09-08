@@ -27,6 +27,7 @@
 
 #include <ceti/descriptor/Collector.hpp>
 #include <ceti/descriptor/Mesh.hpp>
+#include <ceti/descriptor/Texture.hpp>
 
 #include <meti/RandUtils.hpp>
 
@@ -117,6 +118,7 @@ public:
     const MManager<Starsystem>& starsystem() const { return m_starsystem; }
     const MManager<Star>& star() const { return m_star; }
     const Collector<Mesh>& mesh() const { return m_mesh; }
+    const Collector<Texture>& texture() const { return m_texture; }
 
 private:
     MManager<Galaxy> m_galaxy;
@@ -124,6 +126,7 @@ private:
     MManager<Starsystem> m_starsystem;
     MManager<Star> m_star;
     Collector<Mesh> m_mesh;
+    Collector<Texture> m_texture;
 
     std::map<id_type, BaseOLD> m_descriptors;
     std::map<int, std::vector<BaseOLD>> m_descriptorsTypes;

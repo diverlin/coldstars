@@ -21,6 +21,7 @@ endif ()
 
 add_library(${PROJECT} SHARED ${${PROJECT}_SRC} ${${PROJECT}_HDR})
 target_link_libraries(${PROJECT} ${PROJECT_METI})
+target_link_libraries(${PROJECT} boost_filesystem)
 
 set_target_properties(${PROJECT} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
 target_include_directories(${PROJECT} PUBLIC

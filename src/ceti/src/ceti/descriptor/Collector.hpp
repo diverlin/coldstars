@@ -20,11 +20,13 @@
 #pragma once
 
 #include <ceti/type/IdType.hpp>
+#include <ceti/FsUtils.hpp>
 
 #include <meti/RandUtils.hpp>
 
 #include <map>
 #include <vector>
+#include <fstream>
 
 namespace ceti {
 namespace descriptor {
@@ -34,21 +36,27 @@ template<typename T>
 class Collector
 {
 public:
-    Collector() {}
+    Collector(const std::string& fname): m_fname(fname) {
+        if (ceti::filesystem::is_file_exists(m_fname)) {
+            load();
+        }
+    }
     ~Collector() {}
+
+    bool loaded() const { return m_loaded; }
 
     void add(const T& ob) {
         if (!__isExist(ob)) {
-            m_descriptorsById.insert(std::make_pair( ob.id(), ob ));
-            m_descriptorsByTypes[ob.type()].push_back(ob);
+            m_descriptors.insert(std::make_pair( ob.id(), ob ));
+            m_descriptorsTypes[ob.type()].push_back(ob);
         } else {
             throw std::runtime_error("fail add, id is already exist");
         }
     }
 
     const T& get(const id_type& id) const {
-        auto it = m_descriptorsById.find(id);
-        if (it != m_descriptorsById.end()) {
+        auto it = m_descriptors.find(id);
+        if (it != m_descriptors.end()) {
             return it->second;
         } else {
             throw std::runtime_error("fail get, id doesn't exist");
@@ -57,8 +65,8 @@ public:
     }
 
     const T& getByType(int type) const {
-        auto it = m_descriptorsByTypes.find(type);
-        if (it != m_descriptorsByTypes.end()) {
+        auto it = m_descriptorsTypes.find(type);
+        if (it != m_descriptorsTypes.end()) {
             return meti::getRand(it->second);
         } else {
             throw std::runtime_error("fail get, type doesn't exist");
@@ -66,13 +74,58 @@ public:
         assert(false);
     }
 
+    void save() const
+    {
+        ceti::filesystem::touch_file(m_fname);
+
+        std::fstream filestream;
+        filestream.open(m_fname);
+        if(filestream.is_open()) {
+            for(const auto& lists: m_descriptorsTypes) {
+                const auto& list = lists.second;
+                for(const T& descr: list) {
+                    filestream<<descr.data()<<std::endl;
+                }
+            }
+        } else {
+            throw std::runtime_error("not able to open file="+m_fname);
+        }
+        filestream.close();
+    }
+
+    void load()
+    {
+        __clear();
+
+        std::fstream filestream;
+        std::string line;
+        filestream.open(m_fname);
+        if(filestream.is_open()) {
+            while(std::getline(filestream, line)) {
+                if (!line.empty()) {
+                    const T& descr = T(line);
+                    add(descr);
+                }
+            }
+        }
+        filestream.close();
+        m_loaded = true;
+    }
+
 
 private:
-    std::map<int, T> m_descriptorsById;
-    std::map<int, std::vector<T>> m_descriptorsByTypes;
+    bool m_loaded = false;
+    std::string m_fname;
+    std::map<int, T> m_descriptors;
+    std::map<int, std::vector<T>> m_descriptorsTypes;
 
     bool __isExist(const T& ob) const {
-        return (m_descriptorsById.find(ob.id()) != m_descriptorsById.end());
+        return (m_descriptors.find(ob.id()) != m_descriptors.end());
+    }
+
+    void __clear() {
+        m_descriptors.clear();
+        m_descriptorsTypes.clear();
     }
 };
 
