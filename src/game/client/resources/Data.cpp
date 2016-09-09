@@ -65,7 +65,7 @@ void Data::__collectMeshDescriptors()
 
     auto& dm = global::get().descriptors();
     if (!dm.mesh().loaded()) {
-        dm.add(Mesh( int(type::mesh::PLANE_ID), "plane/plane.obj", "", glm::vec3(0.0f, 0.0f, 1.0f)) );
+        dm.add(Mesh( int(type::mesh::PLANE_ID), "plane/plane.obj", "", meti::vec3(0.0f, 0.0f, 1.0f)) );
         dm.add(Mesh( int(type::mesh::SPHERE_ID), "sphere/sphere.obj"));
         dm.add(Mesh( int(type::mesh::SPHERE_DEFORMED_ID), "sphere_deformed/sphere_deformed.obj") );
     
