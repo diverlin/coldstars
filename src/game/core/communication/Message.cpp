@@ -1,5 +1,7 @@
 #include "Message.hpp"
-#include <ceti/myStr.hpp>
+
+#include <ceti/StringUtils.hpp>
+
 #include <assert.h>
 
 Message::Message(TELEGRAM type_id, const std::string& data, double delay)

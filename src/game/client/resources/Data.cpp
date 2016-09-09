@@ -83,106 +83,22 @@ void Data::__loadImages()
 
     auto& dm = global::get().descriptors();
     if (!dm.texture().loaded()) {
-        //####################################### TURREL_TEXTURE ###################################
-        dm.add(Material( int(type::texture::TURREL_ID), "turrel/turrel1.png"));
+        //############ TURREL #########
+        dm.add(Material( int(type::texture::TURREL_ID), "turrel/turrel1.png") );
+        dm.add(Material( int(type::texture::TURREL_ID), "turrel/turrel2.png") );
+        dm.add(Material( int(type::texture::TURREL_ID), "turrel/esphere-0.png") );
 
+        //############ SLOT ############
+        dm.add(Material( int(type::texture::ITEM_SLOT_ID), "other/slot.png") );
+        dm.add(Material( int(type::texture::VEHICLE_SLOT_ID), "other/H.png", Animation(3, 2, 3.0f)) );
 
-
+        //########### FACE_ID #########
+        //// type::RACE::R0_ID
+        dm.add(Material( int(type::texture::FACE_ID), "race/0000.png") );
+        dm.add(Material( int(type::texture::FACE_ID), "race/0001.png") );
     }
 
-    {
-//        jeti::Material material_data;
-//        material_data.texture_path = DATA_PATH+"turrel/turrel1.png";
-//        material_data.use_alpha = true;
-//        jeti::TextureOb* texture = new jeti::TextureOb(material_data);
 
-//        TextureCollector::get().setTextureBlank(texture);
-    }
-
-//{
-//    jeti::Material material_data;
-//    material_data.texture_path = DATA_PATH+"turrel/turrel1.png";
-//    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
-
-//    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = type::TEXTURE::TURREL_ID;
-//    textureOb->SetAssociation(association_data);
-
-//    TextureCollector::Instance().Add(textureOb);
-//}
-
-//{
-//    jeti::Material material_data;
-//    material_data.texture_path = DATA_PATH+"turrel/turrel2.png";
-//    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
-
-//    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = type::TEXTURE::TURREL_ID;
-//    textureOb->SetAssociation(association_data);
-
-//    TextureCollector::Instance().Add(textureOb);
-//}
-
-//{
-//    jeti::Material material_data;
-//    material_data.texture_path = DATA_PATH+"turrel/esphere-0.png";
-//    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
-
-//    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = type::TEXTURE::TURREL_ID;
-//    textureOb->SetAssociation(association_data);
-
-//    TextureCollector::Instance().Add(textureOb);
-//}
-
-
-//####################################### SLOT_TEXTURE ###################################
-//{
-//    jeti::Material material_data;
-//    material_data.texture_path = DATA_PATH+"other/slot.png";
-//    material_data.use_alpha = true;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
-
-//    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = type::TEXTURE::ITEM_SLOT_ID;
-//    textureOb->SetAssociation(association_data);
-
-//    TextureCollector::Instance().Add(textureOb);
-//}
-
-//{
-//    jeti::Material material_data;
-//    material_data.texture_path = DATA_PATH+"other/H.png";
-//    material_data.use_alpha = true;
-//    material_data.col_num = 3;
-//    material_data.row_num = 2;
-//    material_data.fps = 3.0;
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
-
-//    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = type::TEXTURE::VEHICLE_SLOT_ID;
-//    textureOb->SetAssociation(association_data);
-
-//    TextureCollector::Instance().Add(textureOb);
-//}
-
-//####################################### type::TEXTURE::FACE_ID ################################
-//// type::RACE::R0_ID
-//{
-//    jeti::Material material_data;
-//    material_data.texture_path = DATA_PATH+"race/0000.png";
-//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
-
-//    jeti::MaterialAssociationData association_data;
-//    association_data.type_id = type::TEXTURE::FACE_ID;
-//    association_data.race_id = type::RACE::R0_ID;
-//    textureOb->SetAssociation(association_data);
-
-//    TextureCollector::Instance().Add(textureOb);
-//}
 
 //{
 //    jeti::Material material_data;

@@ -29,11 +29,48 @@
 namespace ceti {
 namespace descriptor {
 
+class Animation {
+public:
+    Animation():
+        m_col(1)
+      , m_row(1)
+      , m_fps(1.0f)
+    {}
+
+    Animation(int col, int row, float fps):
+        m_col(col)
+      , m_row(row)
+      , m_fps(fps)
+    {}
+
+    bool animated() const { return (m_col !=1 || m_row != 1); }
+
+    int col() const { return m_col; }
+    int row() const { return m_row; }
+    float fps() const { return m_fps; }
+
+private:
+    int m_col = 1;
+    int m_row = 1;
+    float m_fps = 1.0f;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & m_col;
+        ar & m_row;
+        ar & m_fps;
+    }
+};
+
 class Material : public Base
 {
 public:
     Material(int type,
             const std::string& path,
+            const Animation& animation = Animation(),
             bool alpha = true);
 
     Material(const std::string& data);
@@ -47,6 +84,7 @@ public:
 
 private:
     std::string m_path = "";
+    Animation m_animation;
     bool m_alpha = true;
 
 private:
@@ -56,6 +94,7 @@ private:
     {
         ar & boost::serialization::base_object<Base>(*this);
         ar & m_path;
+        ar & m_animation;
         ar & m_alpha;
     }
 };

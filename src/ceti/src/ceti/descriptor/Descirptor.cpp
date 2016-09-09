@@ -18,6 +18,8 @@
 
 #include "Descriptor.hpp"
 
+#include <ceti/StringUtils.hpp>
+
 #include <sstream>
 
 namespace ceti {
@@ -82,10 +84,41 @@ Descriptor::add(const std::vector<Property>& props)
 }
 
 const int_t&
-Descriptor::get(int key) const
+Descriptor::get_i(int key) const
 {
     auto it = m_intValues.find(key);
     if (it != m_intValues.end()) {
+        return it->second;
+    }
+    throw std::runtime_error("ERROR CODE: FIXME (get request): prop name=[" + m_ids.at(key).name + "] is not found in descriptor");
+}
+
+float
+Descriptor::get_f(int key) const
+{
+    auto it = m_floatValues.find(key);
+    if (it != m_floatValues.end()) {
+        return it->second;
+    }
+    throw std::runtime_error("ERROR CODE: FIXME (get request): prop name=[" + m_ids.at(key).name + "] is not found in descriptor");
+}
+
+const std::string&
+Descriptor::get_s(int key) const
+{
+    auto it = m_strValues.find(key);
+    if (it != m_strValues.end()) {
+        return it->second;
+    }
+    throw std::runtime_error("ERROR CODE: FIXME (get request): prop name=[" + m_ids.at(key).name + "] is not found in descriptor");
+}
+
+
+const glm::vec3&
+Descriptor::get_v3(int key) const
+{
+    auto it = m_vec3Values.find(key);
+    if (it != m_vec3Values.end()) {
         return it->second;
     }
     throw std::runtime_error("ERROR CODE: FIXME (get request): prop name=[" + m_ids.at(key).name + "] is not found in descriptor");
@@ -97,8 +130,14 @@ Descriptor::info() const {
     for(auto it = m_intValues.begin(); it != m_intValues.end(); ++it) {
         result += m_ids.at(it->first).name + "=" + std::to_string(it->second) + "\n";
     }
+    for(auto it = m_floatValues.begin(); it != m_floatValues.end(); ++it) {
+        result += m_ids.at(it->first).name + "=" + std::to_string(it->second) + "\n";
+    }
     for(auto it = m_strValues.begin(); it != m_strValues.end(); ++it) {
         result += m_ids.at(it->first).name + "=" + it->second + "\n";
+    }
+    for(auto it = m_vec3Values.begin(); it != m_vec3Values.end(); ++it) {
+        result += m_ids.at(it->first).name + "= " + ceti::to_string(it->second) +"\n";
     }
     return result;
 }
