@@ -18,8 +18,9 @@
 
 #pragma once
 
-#include <ceti/type/IdType.hpp>
+#include "macro.hpp"
 
+#include <ceti/type/IdType.hpp>
 #include <ceti/IdGenerator.hpp>
 
 #include <boost/archive/text_oarchive.hpp>

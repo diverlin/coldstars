@@ -81,7 +81,8 @@ void Data::__loadImages()
 {
     auto& dm = global::get().descriptors();
     if (!dm.texture().loaded()) {
-     ... TODO
+//        dm.add(Texture( int(type::texture::), "turrel/turrel1.png"))
+//     ... TODO
     }
 
     {

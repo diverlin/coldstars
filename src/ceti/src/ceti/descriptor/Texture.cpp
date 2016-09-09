@@ -24,23 +24,17 @@ namespace ceti {
 namespace descriptor {
 
 Texture::Texture(int type,
-           const std::string& model,
-           const std::string& texture,
-           const glm::vec3& orientation)
+                 const std::string& path)
     :
       Base(type)
-    , m_model(model)
-    , m_texture(texture)
-    , m_orientation(orientation)
+    , m_path(path)
+
 {
 }
 
 Texture::Texture(const std::string& data)
 {
-    std::stringstream ss;
-    ss << data;
-    boost::archive::text_iarchive ia(ss);
-    ia >> *this;
+    MACRO_READ_SERIALIZED_DATA
 }
 
 Texture::~Texture()
@@ -55,10 +49,7 @@ Texture::operator==(const Texture& rhs) const
 std::string
 Texture::data() const
 {
-    std::stringstream ss;
-    boost::archive::text_oarchive oa(ss);
-    oa << *this;
-    return ss.str();
+    MACRO_SAVE_SERIALIZED_DATA
 }
 
 } // namespace descriptor

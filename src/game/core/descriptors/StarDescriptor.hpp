@@ -32,10 +32,7 @@ public:
     Star() {}
     Star(const std::string& data)
     {
-        std::stringstream ss;
-        ss << data;
-        boost::archive::text_iarchive ia(ss);
-        ia >> *this;
+        MACRO_READ_SERIALIZED_DATA
     }
     virtual ~Star() {}
 
