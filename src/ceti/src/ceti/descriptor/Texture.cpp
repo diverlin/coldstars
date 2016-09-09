@@ -23,31 +23,33 @@
 namespace ceti {
 namespace descriptor {
 
-Texture::Texture(int type,
-                 const std::string& path)
+Material::Material(int type,
+                 const std::string& path,
+                 bool alpha)
     :
       Base(type)
     , m_path(path)
+    , m_alpha(alpha)
 
 {
 }
 
-Texture::Texture(const std::string& data)
+Material::Material(const std::string& data)
 {
     MACRO_READ_SERIALIZED_DATA
 }
 
-Texture::~Texture()
+Material::~Material()
 {}
 
 bool
-Texture::operator==(const Texture& rhs) const
+Material::operator==(const Material& rhs) const
 {
     return data() == rhs.data();
 }
 
 std::string
-Texture::data() const
+Material::data() const
 {
     MACRO_SAVE_SERIALIZED_DATA
 }

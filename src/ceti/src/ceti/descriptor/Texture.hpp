@@ -29,23 +29,25 @@
 namespace ceti {
 namespace descriptor {
 
-class Texture : public Base
+class Material : public Base
 {
 public:
-    Texture(int type,
-            const std::string& texture = "");
+    Material(int type,
+            const std::string& path,
+            bool alpha = true);
 
-    Texture(const std::string& data);
-    ~Texture();
+    Material(const std::string& data);
+    ~Material();
 
     std::string data() const;
 
-    bool operator==(const Texture& rhs) const;
+    bool operator==(const Material& rhs) const;
 
     const std::string& path() const { return m_path; }
 
 private:
     std::string m_path = "";
+    bool m_alpha = true;
 
 private:
     friend class boost::serialization::access;
@@ -54,6 +56,7 @@ private:
     {
         ar & boost::serialization::base_object<Base>(*this);
         ar & m_path;
+        ar & m_alpha;
     }
 };
 
