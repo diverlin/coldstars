@@ -39,7 +39,7 @@ std::map<int, Id> getTestData()
         , { INT4, Id( INT4, "int4" ) }
         , { STRING1, Id( STRING1, "string1" ) }
         , { FLOAT, Id( FLOAT, "float" ) }
-        , { VEC3, Id( VEC3, "id_list" ) }
+        , { VEC3, Id( VEC3, "vec3" ) }
     };
 
     return ids;
@@ -74,12 +74,13 @@ TEST(descriptor, base)
     descr2.add( Property(ids.at(INT4), 40) );
     EXPECT_FALSE(descr == descr2);
 
-    //std::cout<<descr2.info();
+//    std::cout<<descr.info();
+//    std::cout<<descr2.info();
 }
 
 TEST(descriptor, mesh)
 {
-    Mesh descr(/*type=*/1, "/path/to/model/file.obj", "/path/to/texture/file.jpg", glm::vec3(1.0f, 1.0f, 1.0f));
+    Mesh descr(/*type=*/1, "/path/to/model/file.obj", "/path/to/texture/file.jpg", meti::vec3(1.0f, 1.0f, 1.0f));
     Mesh descr2(descr);
     EXPECT_TRUE(descr == descr2);
 

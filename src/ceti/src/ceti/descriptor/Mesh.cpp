@@ -26,7 +26,7 @@ namespace descriptor {
 Mesh::Mesh(int type,
            const std::string& model,
            const std::string& texture,
-           const glm::vec3& orientation)
+           const meti::vec3& orientation)
     :
       Base(type)
     , m_model(model)

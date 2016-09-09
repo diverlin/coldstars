@@ -22,7 +22,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-#include <glm/glm.hpp>
+#include <meti/VectorUtils.hpp>
 
 #include <string>
 
@@ -35,7 +35,7 @@ public:
     Mesh(int type,
          const std::string& model,
          const std::string& texture = "",
-         const glm::vec3& orientation = glm::vec3(1.0, 0.0, 0.0));
+         const meti::vec3& orientation = meti::vec3(1.0, 0.0, 0.0));
 
     Mesh(const std::string& data);
     ~Mesh();
@@ -51,7 +51,7 @@ public:
 private:
     std::string m_model = "";
     std::string m_texture = "";
-    glm::vec3 m_orientation = glm::vec3(1.0, 0.0, 0.0);
+    meti::vec3 m_orientation = meti::vec3(1.0, 0.0, 0.0);
 
 private:
     friend class boost::serialization::access;
@@ -61,9 +61,7 @@ private:
         ar & boost::serialization::base_object<Base>(*this);
         ar & m_model;
         ar & m_texture;
-        ar & m_orientation.x;
-        ar & m_orientation.y;
-        ar & m_orientation.z;
+        ar & m_orientation;
     }
 };
 
