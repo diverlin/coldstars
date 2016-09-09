@@ -41,40 +41,6 @@ std::string to_string(float val)
     return stream.str();
 }
 
-std::string str(long int val)
-{
-    return str((long long int)val);
-}
-
-std::string str(long long int val)
-{
-    std::ostringstream stm;
-    if (val >= 0) {
-        stm<<val;
-        return stm.str();
-    } else {
-        stm<<abs(val);
-        return "-"+stm.str();
-    }
-}
-
-std::string str(int val)
-{
-    return str((long long int)val);
-}
-
-
-std::string str(bool var)
-{
-    std::ostringstream stm;
-    if (var == true) {
-        stm << "true";
-    } else {
-        stm << "false";
-    }
-    return stm.str() ;
-}
-
 std::vector<std::string> split(const std::string& str, const std::string& delim) {
     std::vector<std::string> v;
     std::string::size_type start = 0;
