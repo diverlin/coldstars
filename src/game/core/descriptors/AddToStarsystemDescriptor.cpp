@@ -1,5 +1,6 @@
 #include "AddToStarsystemDescriptor.hpp"
-#include <serialization/Serialization.hpp>
+
+#include <ceti/descriptor/macro.hpp>
 
 #include <sstream>
 

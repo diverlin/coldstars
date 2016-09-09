@@ -163,10 +163,7 @@ BaseOLD::BaseOLD(const Type& type, bool generate_id)
 
 BaseOLD::BaseOLD(const std::string& data)
 {
-    std::stringstream ss;
-    ss << data;
-    boost::archive::text_iarchive ia(ss);
-    ia >> *this;
+    MACRO_READ_SERIALIZED_DATA
 }
 
 BaseOLD::~BaseOLD()
@@ -176,10 +173,7 @@ BaseOLD::~BaseOLD()
 std::string
 BaseOLD::data() const
 {
-    std::stringstream ss;
-    boost::archive::text_oarchive oa(ss);
-    oa << *this;
-    return ss.str();
+    MACRO_SAVE_SERIALIZED_DATA
 }
 
 void

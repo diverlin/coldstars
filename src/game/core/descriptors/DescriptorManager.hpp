@@ -112,6 +112,9 @@ public:
     void add(const Mesh& mesh) {
         m_mesh.add(mesh);
     }
+    void add(const Texture& texture) {
+        m_texture.add(texture);
+    }
 
     const MManager<Galaxy>& galaxy() const { return m_galaxy; }
     const MManager<Sector>& sector() const { return m_sector; }

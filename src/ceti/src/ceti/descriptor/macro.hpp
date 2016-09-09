@@ -18,44 +18,14 @@
 
 #pragma once
 
-#include "Base.hpp"
+#define MACRO_READ_SERIALIZED_DATA \
+    std::stringstream ss; \
+    ss << data; \
+    boost::archive::text_iarchive ia(ss); \
+    ia >> *this;
 
-#include <ceti/type/IdType.hpp>
-
-#include <glm/glm.hpp>
-
-#include <string>
-
-namespace ceti {
-namespace descriptor {
-
-class Texture : public Base
-{
-public:
-    Texture(int type,
-            const std::string& texture = "");
-
-    Texture(const std::string& data);
-    ~Texture();
-
-    std::string data() const;
-
-    bool operator==(const Texture& rhs) const;
-
-    const std::string& path() const { return m_path; }
-
-private:
-    std::string m_path = "";
-
-private:
-    friend class boost::serialization::access;
-    template<class Archive>
-    void serialize(Archive & ar, const unsigned int version)
-    {
-        ar & boost::serialization::base_object<Base>(*this);
-        ar & m_path;
-    }
-};
-
-} // namespace descriptor
-} // namespace ceti
+#define MACRO_SAVE_SERIALIZED_DATA \
+    std::stringstream ss; \
+    boost::archive::text_oarchive oa(ss); \
+    oa << *this; \
+    return ss.str();
