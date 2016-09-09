@@ -18,7 +18,7 @@
 
 #include "Base.hpp"
 #include <ceti/Logger.hpp>
-#include <ceti/myStr.hpp>
+#include <ceti/StringUtils.hpp>
 
 Base::Base()
     :

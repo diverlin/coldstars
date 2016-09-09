@@ -22,6 +22,8 @@
 
 #include <ceti/type/IdType.hpp>
 
+#include <glm/glm.hpp>
+
 #include <string>
 
 namespace ceti {
@@ -29,7 +31,7 @@ namespace descriptor {
 
 class Property : public Id {
 public:
-    enum {INT, STR};
+    enum {INT, FLOAT, STR, VEC3};
 
     Property(const Id& id, const int_t& value)
         :
@@ -45,7 +47,9 @@ public:
     {}
     int valueType;
     int_t intValue = 0;
+    int_t floatValue = 0.0f;
     std::string strValue = "";
+    glm::vec3 vec3Value = glm::vec3(0.0f);
 };
 
 } // namespace descriptor

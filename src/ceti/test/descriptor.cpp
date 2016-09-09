@@ -60,9 +60,10 @@ TEST(descriptor, base)
     Descriptor descr2(descr);
     EXPECT_TRUE(descr == descr2);
 
-    EXPECT_EQ(descr.get(ARMOR), descr2.get(ARMOR));
-    EXPECT_EQ(descr.get(RADIUS), descr2.get(RADIUS));
-    EXPECT_EQ(descr.get(DAMAGE), descr2.get(DAMAGE));
+    EXPECT_EQ(descr.get_i(ARMOR), descr2.get_i(ARMOR));
+    EXPECT_EQ(descr.get_i(RADIUS), descr2.get_i(RADIUS));
+    EXPECT_EQ(descr.get_i(DAMAGE), descr2.get_i(DAMAGE));
+    EXPECT_EQ(descr.get_s(IDLIST), descr2.get_s(IDLIST));
 
     descr2.add( Property(ids.at(SPACE), 40) );
     EXPECT_FALSE(descr == descr2);
