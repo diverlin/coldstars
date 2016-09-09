@@ -79,21 +79,26 @@ void Data::__collectMeshDescriptors()
 
 void Data::__loadImages()
 {
+    using namespace ceti::descriptor;
+
     auto& dm = global::get().descriptors();
     if (!dm.texture().loaded()) {
-//        dm.add(Texture( int(type::texture::), "turrel/turrel1.png"))
-//     ... TODO
+        //####################################### TURREL_TEXTURE ###################################
+        dm.add(Material( int(type::texture::TURREL_ID), "turrel/turrel1.png"));
+
+
+
     }
 
     {
-        jeti::Material material_data;
-        material_data.texture_path = DATA_PATH+"turrel/turrel1.png";
-        material_data.use_alpha = true;
-        jeti::TextureOb* texture = new jeti::TextureOb(material_data);
+//        jeti::Material material_data;
+//        material_data.texture_path = DATA_PATH+"turrel/turrel1.png";
+//        material_data.use_alpha = true;
+//        jeti::TextureOb* texture = new jeti::TextureOb(material_data);
 
-        TextureCollector::get().setTextureBlank(texture);
+//        TextureCollector::get().setTextureBlank(texture);
     }
-//####################################### TURREL_TEXTURE ###################################
+
 //{
 //    jeti::Material material_data;
 //    material_data.texture_path = DATA_PATH+"turrel/turrel1.png";
