@@ -22,7 +22,7 @@
 
 #include <ceti/type/IdType.hpp>
 
-#include <glm/glm.hpp>
+#include <meti/VectorUtils.hpp>
 
 #include <string>
 
@@ -39,17 +39,40 @@ public:
         , valueType(INT)
         , intValue(value)
     {}
+
+    Property(const Id& id, int value)
+        :
+          Id(id)
+        , valueType(INT)
+        , intValue(value)
+    {}
+
+    Property(const Id& id, float value)
+        :
+          Id(id)
+        , valueType(FLOAT)
+        , floatValue(value)
+    {}
+
     Property(const Id& id, const std::string& value)
         :
           Id(id)
         , valueType(STR)
         , strValue(value)
     {}
+
+    Property(const Id& id, const meti::vec3& value)
+        :
+          Id(id)
+        , valueType(VEC3)
+        , vec3Value(value)
+    {}
+
     int valueType;
     int_t intValue = 0;
-    int_t floatValue = 0.0f;
+    float floatValue = 0.0f;
     std::string strValue = "";
-    glm::vec3 vec3Value = glm::vec3(0.0f);
+    meti::vec3 vec3Value = meti::vec3(0.0f);
 };
 
 } // namespace descriptor

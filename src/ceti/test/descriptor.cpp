@@ -24,7 +24,7 @@
 #include <ceti/descriptor/Mesh.hpp>
 
 
-enum {ARMOR, RADIUS, DAMAGE, SPACE, IDLIST};
+enum { INT1, INT2, INT3, INT4, STRING1, FLOAT, VEC3 };
 
 using namespace ceti::descriptor;
 
@@ -33,11 +33,13 @@ namespace {
 std::map<int, Id> getTestData()
 {
     std::map<int, Id> ids = {
-          { ARMOR, Id( ARMOR, "armor" ) }
-        , { RADIUS, Id( RADIUS, "radius" ) }
-        , { DAMAGE, Id( DAMAGE, "damage" ) }
-        , { SPACE, Id( SPACE, "space" ) }
-        , { IDLIST, Id( IDLIST, "id_list" ) }
+          { INT1, Id( INT1, "int1" ) }
+        , { INT2, Id( INT2, "int2" ) }
+        , { INT3, Id( INT3, "int3" ) }
+        , { INT4, Id( INT4, "int4" ) }
+        , { STRING1, Id( STRING1, "string1" ) }
+        , { FLOAT, Id( FLOAT, "float" ) }
+        , { VEC3, Id( VEC3, "id_list" ) }
     };
 
     return ids;
@@ -48,27 +50,31 @@ TEST(descriptor, base)
 {
     auto ids = getTestData();
 
-    Property p1(ids.at(ARMOR), 10);
-    Property p2(ids.at(RADIUS), 20);
-    Property p3(ids.at(DAMAGE), 30);
-    Property p4(ids.at(IDLIST), "5;4;3;2;1");
+    Property p1(ids.at(INT1), 10);
+    Property p2(ids.at(INT2), 20);
+    Property p3(ids.at(INT3), 30);
+    Property p4(ids.at(FLOAT), 2.7f);
+    Property p5(ids.at(STRING1), "5;4;3;2;1");
+    Property p6(ids.at(VEC3), meti::vec3(1.0f, 2.0f, 3.0f));
 
     Descriptor descr;
     descr.m_ids = ids;
-    descr.add({p1,p2,p3,p4});
+    descr.add({p1,p2,p3,p4,p5,p6});
 
     Descriptor descr2(descr);
     EXPECT_TRUE(descr == descr2);
 
-    EXPECT_EQ(descr.get_i(ARMOR), descr2.get_i(ARMOR));
-    EXPECT_EQ(descr.get_i(RADIUS), descr2.get_i(RADIUS));
-    EXPECT_EQ(descr.get_i(DAMAGE), descr2.get_i(DAMAGE));
-    EXPECT_EQ(descr.get_s(IDLIST), descr2.get_s(IDLIST));
+    EXPECT_EQ(descr.get_i(INT1), descr2.get_i(INT1));
+    EXPECT_EQ(descr.get_i(INT2), descr2.get_i(INT2));
+    EXPECT_EQ(descr.get_i(INT3), descr2.get_i(INT3));
+    EXPECT_EQ(descr.get_f(FLOAT), descr2.get_f(FLOAT));
+    EXPECT_EQ(descr.get_s(STRING1), descr2.get_s(STRING1));
+    EXPECT_EQ(descr.get_v3(VEC3), descr2.get_v3(VEC3));
 
-    descr2.add( Property(ids.at(SPACE), 40) );
+    descr2.add( Property(ids.at(INT4), 40) );
     EXPECT_FALSE(descr == descr2);
 
-    std::cout<<descr2.info();
+    //std::cout<<descr2.info();
 }
 
 TEST(descriptor, mesh)

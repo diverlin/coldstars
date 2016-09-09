@@ -22,7 +22,7 @@
 #include "Id.hpp"
 #include "Property.hpp"
 
-#include <glm/glm.hpp>
+#include <meti/VectorUtils.hpp>
 
 #include <boost/serialization/map.hpp>
 
@@ -44,7 +44,7 @@ public:
     const int_t& get_i(int) const;
     float get_f(int) const;
     const std::string& get_s(int) const;
-    const glm::vec3& get_v3(int) const;
+    const meti::vec3& get_v3(int) const;
 
     void add(const Property&);
     void add(const std::vector<Property>&);
@@ -59,13 +59,13 @@ private:
         ar & m_intValues;
         ar & m_floatValues;
         ar & m_strValues;
-        //ar & m_vec3Values;
+        ar & m_vec3Values;
     }
 
     std::map<int, int_t> m_intValues;
     std::map<int, float> m_floatValues;
     std::map<int, std::string> m_strValues;
-    std::map<int, glm::vec3> m_vec3Values;
+    std::map<int, meti::vec3> m_vec3Values;
 
 public:
     static std::map<int, Id> m_ids;

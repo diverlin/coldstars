@@ -28,12 +28,8 @@ namespace ceti {
 
 std::string to_string(const glm::vec3&);
 std::string to_string(float);
-std::string str(long long int);
-std::string str(long int);
-std::string str(int);
-std::string str(bool);
 
-std::vector<std::string> split(const std::string& str, const std::string& delim);
+std::vector<std::string> split(const std::string& to_string, const std::string& delim);
 std::string join(const std::vector<std::string>& v, const std::string& delim);
 
 } // namespace ceti

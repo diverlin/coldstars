@@ -1,9 +1,29 @@
 #pragma once
 
+#include <boost/serialization/map.hpp>
+
 #include <glm/glm.hpp>
+
 #include <string>
 
 namespace meti {
+
+class vec3 : public glm::vec3
+{
+public:
+    vec3(float x, float y, float z):glm::vec3(x,y,z) {}
+    vec3(float val):glm::vec3(val) {}
+    vec3():glm::vec3() {}
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        ar & x;
+        ar & y;
+        ar & z;
+    }
+};
 
 float distance(const glm::vec3& center1, const glm::vec3& center2);
 float distance(const glm::vec3& center1, const glm::vec2& center2);

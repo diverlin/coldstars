@@ -58,19 +58,44 @@ Descriptor::data() const
 void
 Descriptor::add(const Property& prop)
 {
-    if (prop.valueType == Property::INT) {
+    switch(prop.valueType) {
+    case Property::INT: {
         auto it = m_intValues.find(prop.code);
         if ( it == m_intValues.end() ) {
             m_intValues.insert(std::make_pair(prop.code, prop.intValue));
             return;
         }
-    } else {
+
+        break;
+    }
+    case Property::FLOAT: {
+        auto it = m_floatValues.find(prop.code);
+        if ( it == m_floatValues.end() ) {
+            m_floatValues.insert(std::make_pair(prop.code, prop.floatValue));
+            return;
+        }
+
+        break;
+    }
+    case Property::STR: {
         auto it = m_strValues.find(prop.code);
         if ( it == m_strValues.end() ) {
             m_strValues.insert(std::make_pair(prop.code, prop.strValue));
             return;
         }
+
+        break;
     }
+    case Property::VEC3: {
+        auto it = m_vec3Values.find(prop.code);
+        if ( it == m_vec3Values.end() ) {
+            m_vec3Values.insert(std::make_pair(prop.code, prop.vec3Value));
+            return;
+        }
+
+        break;
+    }
+    } // end switch
 
     throw std::runtime_error("ERROR CODE: fixme, descriptor already has such prop name[" + prop.name + "]");
 }
@@ -114,7 +139,7 @@ Descriptor::get_s(int key) const
 }
 
 
-const glm::vec3&
+const meti::vec3&
 Descriptor::get_v3(int key) const
 {
     auto it = m_vec3Values.find(key);
