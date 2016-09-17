@@ -27,8 +27,10 @@
 #include <ceti/rect.hpp>
 
 namespace ceti {
+namespace control {
 class Orientation;
-}
+} // namespace control
+} // namespace ceti
 
 namespace jeti {
 
@@ -82,7 +84,7 @@ private:
 
     TextureOb* m_material = nullptr;
     Mesh* m_mesh = nullptr;
-    ceti::Orientation* m_orientation = nullptr;
+    ceti::control::Orientation* m_orientation = nullptr;
 
     BaseAnimationRotation* m_animationRotation = nullptr;
 

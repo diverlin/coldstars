@@ -1092,7 +1092,7 @@ void Starsystem::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Starsystem::ResolveData()
 {
-    ((Sector*)global::get().entityManager().get(m_data_unresolved_StarSystem.sector_id))->add(this, data_unresolved_Orientation.center);
+    //((Sector*)global::get().entityManager().get(m_data_unresolved_StarSystem.sector_id))->add(this, data_unresolved_Orientation.center);
 }
 
 void Starsystem::Save(boost::property_tree::ptree& save_ptree) const

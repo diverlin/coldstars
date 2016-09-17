@@ -193,7 +193,7 @@ void RocketBullet::ResolveData()
         m_Target = (SpaceObject*)global::get().entityManager().get(unresolved_RocketBullet_target_id);
     }
     
-    ((Starsystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction);
+    //((Starsystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id))->add(this, data_unresolved_Orientation.center, data_unresolved_Orientation.direction);
 }
    
    

@@ -17,13 +17,14 @@
 */
 
 #include "Orientation.hpp"
-//#include <ceti/Logger.hpp>
 
 namespace ceti {
 
-Orientation::Orientation()
+namespace control {
+
+Orientation::Orientation(model::Orientation* model)
 :
-m_isUpdated(false)
+ m_model(model)
 {
     //m_Direction       = glm::vec3(0.0f, 0.0f, 1.0f); 
 }
@@ -36,8 +37,7 @@ Orientation::~Orientation()
 
 void Orientation::updateOrientation()
 {
-    if (m_isUpdated == false)
-    {   
+    if (m_isUpdated == false) {
         //float angle_radian = m_Angle.z/RADIAN_TO_DEGREE_RATE;
         
         //m_Axis.x = cos(angle_radian);
@@ -51,36 +51,38 @@ void Orientation::updateOrientation()
             
 }        
 
-void Orientation::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
-{
-    //LOG(" Orientation("+std::to_string(id())+")::SaveDataUniqueOrientation");
+//void Orientation::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
+//{
+//    //LOG(" Orientation("+std::to_string(id())+")::SaveDataUniqueOrientation");
         
-    save_ptree.put(root+"data_unresolved_Orientation.center.x", m_position.x);
-    save_ptree.put(root+"data_unresolved_Orientation.center.y", m_position.y);
-    save_ptree.put(root+"data_unresolved_Orientation.center.z", m_position.z);
+//    save_ptree.put(root+"data_unresolved_Orientation.center.x", m_position.x);
+//    save_ptree.put(root+"data_unresolved_Orientation.center.y", m_position.y);
+//    save_ptree.put(root+"data_unresolved_Orientation.center.z", m_position.z);
     
-    save_ptree.put(root+"data_unresolved_Orientation.direction.x", m_direction.x);
-    save_ptree.put(root+"data_unresolved_Orientation.direction.y", m_direction.y);
-    save_ptree.put(root+"data_unresolved_Orientation.direction.z", m_direction.z);
+//    save_ptree.put(root+"data_unresolved_Orientation.direction.x", m_direction.x);
+//    save_ptree.put(root+"data_unresolved_Orientation.direction.y", m_direction.y);
+//    save_ptree.put(root+"data_unresolved_Orientation.direction.z", m_direction.z);
         
-}
+//}
 
-void Orientation::LoadData(const boost::property_tree::ptree& load_ptree)
-{
-    //LOG(" Orientation("+std::to_string(id())+")::LoadDataUniqueOrientation");
+//void Orientation::LoadData(const boost::property_tree::ptree& load_ptree)
+//{
+//    //LOG(" Orientation("+std::to_string(id())+")::LoadDataUniqueOrientation");
         
-    data_unresolved_Orientation.center.x = load_ptree.get<float>("data_unresolved_Orientation.center.x");
-    data_unresolved_Orientation.center.y = load_ptree.get<float>("data_unresolved_Orientation.center.y");
-    data_unresolved_Orientation.center.z = load_ptree.get<float>("data_unresolved_Orientation.center.y");
+//    data_unresolved_Orientation.center.x = load_ptree.get<float>("data_unresolved_Orientation.center.x");
+//    data_unresolved_Orientation.center.y = load_ptree.get<float>("data_unresolved_Orientation.center.y");
+//    data_unresolved_Orientation.center.z = load_ptree.get<float>("data_unresolved_Orientation.center.y");
     
-    data_unresolved_Orientation.direction.x = load_ptree.get<float>("data_unresolved_Orientation.orient.x");
-    data_unresolved_Orientation.direction.y = load_ptree.get<float>("data_unresolved_Orientation.orient.y");
-    data_unresolved_Orientation.direction.z = load_ptree.get<float>("data_unresolved_Orientation.orient.z");
-}
+//    data_unresolved_Orientation.direction.x = load_ptree.get<float>("data_unresolved_Orientation.orient.x");
+//    data_unresolved_Orientation.direction.y = load_ptree.get<float>("data_unresolved_Orientation.orient.y");
+//    data_unresolved_Orientation.direction.z = load_ptree.get<float>("data_unresolved_Orientation.orient.z");
+//}
 
-void Orientation::ResolveData()
-{
-    //LOG(" Orientation("+std::to_string(id())+")::ResolveDataUniqueOrientation");
-}
+//void Orientation::ResolveData()
+//{
+//    //LOG(" Orientation("+std::to_string(id())+")::ResolveDataUniqueOrientation");
+//}
+
+} // namespace control
 
 } // namespace ceti
