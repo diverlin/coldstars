@@ -26,8 +26,6 @@
 #include <jeti/Mesh.hpp>
 //#include <jeti/Screen.hpp>
 #include <ceti/descriptor/Collector.hpp>
-#include <ceti/FsUtils.hpp>
-#include <ceti/MdLoader.hpp>
 
 #include "TextureCollector.hpp"
 #include "GuiTextureObCollector.hpp"
@@ -67,7 +65,7 @@ void Data::__collectMeshDescriptors()
 
     auto& dm = global::get().descriptors();
     if (!dm.mesh().loaded()) {
-        dm.add(Mesh( int(type::mesh::PLANE_ID), "plane/plane.obj", "", meti::vec3(0.0f, 0.0f, 1.0f)) );
+        dm.add(Mesh( int(type::mesh::PLANE_ID), "plane/plane.obj", "", glm::vec3(0.0f, 0.0f, 1.0f)) );
         dm.add(Mesh( int(type::mesh::SPHERE_ID), "sphere/sphere.obj"));
         dm.add(Mesh( int(type::mesh::SPHERE_DEFORMED_ID), "sphere_deformed/sphere_deformed.obj") );
     
@@ -85,528 +83,1025 @@ void Data::__loadImages()
 
     auto& dm = global::get().descriptors();
     if (!dm.texture().loaded()) {
+        //####################################### TURREL_TEXTURE ###################################
+        dm.add(Material( int(type::texture::TURREL_ID), "turrel/turrel1.png"));
+        dm.add(Material( int(type::texture::TURREL_ID), "turrel/turrel2.png"));
+        dm.add(Material( int(type::texture::TURREL_ID), "turrel/esphere-0.png"));
 
-        auto result = ceti::filesystem::getFilesList("/workspace/src/coldstars/data", ".md");
-        for(const auto& filepath: result) {
-            ceti::MdLoader md(filepath);
-            std::cout<<filepath<<std::endl;
-        }
-
-//        //############ TURREL #########
-//        {
-//            Material material(int(type::texture::TURREL_ID), "turrel/turrel1.png");
-//            //material.setAnimation(Animation());
-//            //material.setAssociation(Association());
-//            dm.add(material);
-//        }
-
-//        {
-//            Material material(int(type::texture::TURREL_ID), "turrel/turrel2.png");
-//            //material.setAnimation(Animation());
-//            //material.setAssociation(Association());
-//            dm.add(material);
-//        }
-
-//        {
-//            Material material(int(type::texture::TURREL_ID), "turrel/esphere-0.png");
-//            //material.setAnimation(Animation());
-//            //material.setAssociation(Association());
-//            dm.add(material);
-//        }
-
-//        //############ SLOT ############
-//        {
-//            Material material(int(type::texture::ITEM_SLOT_ID), "other/slot.png");
-//            //material.setAnimation(Animation());
-//            //material.setAssociation(Association());
-//            dm.add(material);
-//        }
-
-//        {
-//            Material material( int(type::texture::VEHICLE_SLOT_ID), "other/H.png");
-//            material.setAnimation(Animation(3, 2, 3.0f));
-//            //material.setAssociation(Association());
-//            dm.add(material);
-//        }
-
-//        //########### FACE_ID #########
-//        //// type::RACE::R0_ID
-//        {
-//            Material material(int(type::texture::FACE_ID), "race/0000.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R0_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::FACE_ID), "race/0001.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R0_ID)));
-//            dm.add(material);
-//        }
-
-//        //// type::RACE::R1_ID
-//        {
-//            Material material(int(type::texture::FACE_ID), "race/1000.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R1_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::FACE_ID), "race/1001.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R1_ID)));
-//            dm.add(material);
-//        }
-
-//        //// type::RACE::R2_ID
-//        {
-//            Material material(int(type::texture::FACE_ID), "race/2000.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R2_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::FACE_ID), "race/2001.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R2_ID)));
-//            dm.add(material);
-//        }
-
-//        //// type::RACE::R3_ID
-//        {
-//            Material material(int(type::texture::FACE_ID), "race/3000.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R3_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::FACE_ID), "race/3001.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R3_ID)));
-//            dm.add(material);
-//        }
-
-//        //// type::RACE::R4_ID
-//        {
-//            Material material(int(type::texture::FACE_ID), "race/4000.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R4_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::FACE_ID), "race/4001.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R4_ID)));
-//            dm.add(material);
-//        }
-
-//        //// type::RACE::R6_ID
-//        {
-//            Material material(int(type::texture::FACE_ID), "race/6000.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R6_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::FACE_ID), "race/6001.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R6_ID)));
-//            dm.add(material);
-//        }
-
-//        //// type::RACE::R7_ID
-//        {
-//            Material material(int(type::texture::FACE_ID), "race/7000.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R7_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::FACE_ID), "race/7001.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R7_ID)));
-//            dm.add(material);
-//        }
-
-//        //####################################### ASTEROID_TEXTURE ################################
-//        {
-//            Material material(int(type::texture::ASTEROID_ID), "asteroid/a_000.png");
-//            //material.setAnimation(Animation());
-//            //material.setAssociation(Association());
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::ASTEROID_ID), "asteroid/a_001.png");
-//            //material.setAnimation(Animation());
-//            //material.setAssociation(Association());
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::ASTEROID_ID), "asteroid/a_002.png");
-//            //material.setAnimation(Animation());
-//            //material.setAssociation(Association());
-//            dm.add(material);
-//        }
-
-//        //####################################### MINERAL_TEXTURE ################################
-//        {
-//            Material material(int(type::texture::MINERAL_ID), "asteroid/m_000.png");
-//            //material.setAnimation(Animation());
-//            //material.setAssociation(Association());
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::MINERAL_ID), "asteroid/m_001.png");
-//            //material.setAnimation(Animation());
-//            //material.setAssociation(Association());
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::MINERAL_ID), "asteroid/m_002.png");
-//            //material.setAnimation(Animation());
-//            //material.setAssociation(Association());
-//            dm.add(material);
-//        }
-
-//        //####################################### CONTAINER_TEXTURE ################################
-//        {
-//            Material material(int(type::texture::CONTAINER_ID), "item/container.png");
-//            //material.setAnimation(Animation());
-//            //material.setAssociation(Association());
-//            dm.add(material);
-//        }
-
-//        //####################################### BOMB_TEXTURE ################################
-//        {
-//            Material material(int(type::texture::BOMB_ID), "item/bomb_item.png");
-//            //material.setAnimation(Animation());
-//            //material.setAssociation(Association());
-//            dm.add(material);
-//        }
-
-        // BLACKHOLE
-//        {
-//            Material material(int(type::texture::BLACKHOLE_ID), "blackhole/bh_00.png");
-//            //material.setAnimation(Animation());
-//            //material.setAssociation(Association());
-//            dm.add(material);
-//        }
-
-        //####################################### type::TEXTURE::SATELLITE_ID ################################
-//        {
-//            Material material(int(type::texture::SATELLITE_ID), "satellite/sa_001.png");
-//            material.setAnimation(Animation(3, 1, 6.0f));
-//            material.setAssociation(Association(int(type::race::R0_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SATELLITE_ID), "satellite/sa_002.png");
-//            material.setAnimation(Animation(4, 1, 8.0f));
-//            material.setAssociation(Association(int(type::race::R0_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SATELLITE_ID), "satellite/sa_003.png");
-//            material.setAnimation(Animation(3, 1, 6.0f));
-//            material.setAssociation(Association(int(type::race::R0_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SATELLITE_ID), "satellite/sa_004.png");
-//            material.setAnimation(Animation(4, 1, 8.0f));
-//            material.setAssociation(Association(int(type::race::R0_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SATELLITE_ID), "satellite/sa_005.png");
-//            material.setAnimation(Animation(8, 1, 16.0f));
-//            material.setAssociation(Association(int(type::race::R0_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SATELLITE_ID), "satellite/sa_006.png");
-//            material.setAnimation(Animation(8, 1, 16.0f));
-//            material.setAssociation(Association(int(type::race::R0_ID)));
-//            dm.add(material);
-//        }
-
-        ////####################################### SHIP_TEXTURE ####################################
-        ////################################ type::race::R0_ID (SCI)
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race0_ranger_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R0_ID), int(type::entity::RANGER_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race0_warrior_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R0_ID), int(type::entity::WARRIOR_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race0_pirat_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R0_ID), int(type::entity::PIRAT_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race0_traider_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R0_ID), int(type::entity::TRADER_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race0_diplomat_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R0_ID), int(type::entity::DIPLOMAT_ID)));
-//            dm.add(material);
-//        }
-
-        ////################################ type::race::R1_ID (WARR)
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race1_ranger_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R1_ID), int(type::entity::RANGER_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race1_warrior_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R1_ID), int(type::entity::WARRIOR_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race1_pirat_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R1_ID), int(type::entity::PIRAT_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race1_trader_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R1_ID), int(type::entity::TRADER_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race1_diplomat_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R1_ID), int(type::entity::DIPLOMAT_ID)));
-//            dm.add(material);
-//        }
-
-        ////################################ type::race::R2_ID (TRIEF)
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race2_ranger_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R2_ID), int(type::entity::RANGER_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race2_warrior_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R2_ID), int(type::entity::WARRIOR_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race2_pirat_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R2_ID), int(type::entity::PIRAT_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race2_trader_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R2_ID), int(type::entity::TRADER_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race2_diplomat_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R2_ID), int(type::entity::DIPLOMAT_ID)));
-//            dm.add(material);
-//        }
-
-        ////################################ type::race::R3_ID (HUMAN)
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race3_ranger_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R3_ID), int(type::entity::RANGER_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race3_warrior_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R3_ID), int(type::entity::WARRIOR_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race3_warrior_01.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R3_ID), int(type::entity::WARRIOR_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race3_pirat_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R3_ID), int(type::entity::PIRAT_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race3_trader_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R3_ID), int(type::entity::TRADER_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race3_diplomat_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R3_ID), int(type::entity::DIPLOMAT_ID)));
-//            dm.add(material);
-//        }
-
-        ////################################ type::RACE::R4_ID (BIO)
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race4_warrior_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R4_ID), int(type::entity::WARRIOR_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race4_trader_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R4_ID), int(type::entity::TRADER_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race4_trader_01.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R4_ID), int(type::entity::TRADER_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race4_diplomat_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R4_ID), int(type::entity::DIPLOMAT_ID)));
-//            dm.add(material);
-//        }
-
-        ////################################ type::RACE::R6_ID (enemy 1)
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race6_warrior_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R6_ID), int(type::entity::WARRIOR_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race6_warrior_01.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R6_ID), int(type::entity::WARRIOR_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race6_warrior_02.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R6_ID), int(type::entity::WARRIOR_ID)));
-//            dm.add(material);
-//        }
-        ////{
-        //    //std::vector<int> arg;
-        //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_3.png", true, &arg) );
-        ////}
+        //####################################### SLOT_TEXTURE ###################################
 
 
-        ////{
-        //    //std::vector<int> arg;
-        //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_5.png", true, &arg) );
-        ////}
-
-        ////{
-        //    //std::vector<int> arg;
-        //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_6.png", true, &arg) );
-        ////}
-
-        ////{
-        //    //std::vector<int> arg;
-        //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_7.png", true, &arg) );
-        ////}
-
-        ////{
-        //    //std::vector<int> arg;
-        //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_8.png", true, &arg) );
-        ////}
-
-        ////{
-        //    //std::vector<int> arg;
-        //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_9.png", true, &arg) );
-        ////}
-
-        ////{
-        //    //std::vector<int> arg;
-        //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_10.png", true, &arg) );
-        ////}
-
-        ////{
-        //    //std::vector<int> arg;
-        //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_11.png", true, &arg) );
-        ////}
-
-        ////{
-        //    //std::vector<int> arg;
-        //    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
-        //    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_12.png", true, &arg) );
-        ////}
-
-        ////################################ type::RACE::R7_ID (enemy 2)
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race7_warrior_00.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R7_ID), int(type::entity::WARRIOR_ID)));
-//            dm.add(material);
-//        }
-//        {
-//            Material material(int(type::texture::SHIP_ID), "ship/race7_warrior_01.png");
-//            //material.setAnimation(Animation());
-//            material.setAssociation(Association(int(type::race::R7_ID), int(type::entity::WARRIOR_ID)));
-//            dm.add(material);
-//        }
-
-
-        //// STARBASE_TEXTURE_ID
-        {
-            Material material(int(type::texture::SPACESTATION_ID), "ship/sb_000.png");
-            //material.setAnimation(Animation());
-            material.setAssociation(Association(int(type::race::R0_ID)));
-            dm.add(material);
-        }
-        {
-            Material material(int(type::texture::SPACESTATION_ID), "ship/sb_001.png");
-            //material.setAnimation(Animation());
-            material.setAssociation(Association(int(type::race::R0_ID)));
-            dm.add(material);
-        }
-        {
-            Material material(int(type::texture::SPACESTATION_ID), "ship/sb_002.png");
-            //material.setAnimation(Animation());
-            material.setAssociation(Association(int(type::race::R0_ID)));
-            dm.add(material);
-        }
-        {
-            Material material(int(type::texture::SPACESTATION_ID), "ship/sb_003.png");
-            //material.setAnimation(Animation());
-            material.setAssociation(Association(int(type::race::R0_ID)));
-            dm.add(material);
-        }
 
     }
+
+    {
+//        jeti::Material material_data;
+//        material_data.texture_path = DATA_PATH+"turrel/turrel1.png";
+//        material_data.use_alpha = true;
+//        jeti::TextureOb* texture = new jeti::TextureOb(material_data);
+
+//        TextureCollector::get().setTextureBlank(texture);
+    }
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"turrel/turrel1.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::TURREL_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"turrel/turrel2.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::TURREL_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"turrel/esphere-0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::TURREL_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+
+//####################################### SLOT_TEXTURE ###################################
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"other/slot.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::ITEM_SLOT_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"other/H.png";
+//    material_data.use_alpha = true;
+//    material_data.col_num = 3;
+//    material_data.row_num = 2;
+//    material_data.fps = 3.0;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::VEHICLE_SLOT_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//####################################### type::TEXTURE::FACE_ID ################################
+//// type::RACE::R0_ID
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"race/0000.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"race/0001.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//// type::RACE::R1_ID
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"race/1000.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R1_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"race/1001.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R1_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//// type::RACE::R2_ID
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"race/2000.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R2_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"race/2001.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R2_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//// type::RACE::R3_ID
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"race/3000.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R3_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"race/3001.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R3_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//// type::RACE::R4_ID
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"race/4000.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R4_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"race/4001.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R4_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//// type::RACE::R6_ID
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"race/6000.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R6_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"race/6001.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R6_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//// type::RACE::R7_ID
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"race/7000.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R7_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"race/7001.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::FACE_ID;
+//    association_data.race_id = type::RACE::R7_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+
+
+//####################################### ASTEROID_TEXTURE ################################
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"asteroid/a_000.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::ASTEROID_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"asteroid/a_001.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::ASTEROID_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"asteroid/a_002.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::ASTEROID_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//####################################### MINERAL_TEXTURE ################################
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"asteroid/m_000.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::MINERAL_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"asteroid/m_001.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::MINERAL_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"asteroid/m_002.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::MINERAL_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"item/container.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::CONTAINER_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"item/bomb_item.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::BOMB_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+
+
+//####################################### type::TEXTURE::SATELLITE_ID ################################
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"satellite/sa_001.png";
+//    material_data.use_alpha = true;
+//    material_data.col_num = 3;
+//    material_data.row_num = 1;
+//    material_data.fps = 6.0;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::SATELLITE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"satellite/sa_002.png";
+//    material_data.use_alpha = true;
+//    material_data.col_num = 4;
+//    material_data.row_num = 1;
+//    material_data.fps = 8.0;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::SATELLITE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"satellite/sa_003.png";
+//    material_data.use_alpha = true;
+//    material_data.col_num = 3;
+//    material_data.row_num = 1;
+//    material_data.fps = 6.0;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::SATELLITE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"satellite/sa_004.png";
+//    material_data.use_alpha = true;
+//    material_data.col_num = 4;
+//    material_data.row_num = 1;
+//    material_data.fps = 8.0;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::SATELLITE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"satellite/sa_005.png";
+//    material_data.use_alpha = true;
+//    material_data.col_num = 8;
+//    material_data.row_num = 1;
+//    material_data.fps = 16.0;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::SATELLITE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"satellite/sa_006.png";
+//    material_data.use_alpha = true;
+//    material_data.col_num = 8;
+//    material_data.row_num = 1;
+//    material_data.fps = 16.0;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::SATELLITE_ID;
+//    association_data.race_id = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+
+// BLACKHOLE
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"blackhole/bh_00.png";
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id = type::TEXTURE::BLACKHOLE_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//####################################### SHIP_TEXTURE ####################################
+//################################ race texnologi
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_00_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::RANGER_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_01_0_1.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_02_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::PIRAT_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_03_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::TRADER_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_04_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::DIPLOMAT_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+////################################ race voennye
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_10_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::RANGER_ID;
+//    association_data.race_id    = type::RACE::R1_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_11_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R1_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_12_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::PIRAT_ID;
+//    association_data.race_id    = type::RACE::R1_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_12_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::TRADER_ID;
+//    association_data.race_id    = type::RACE::R1_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_14_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::DIPLOMAT_ID;
+//    association_data.race_id    = type::RACE::R1_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+////################################ race zhuliki
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/race2_ranger_00.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::RANGER_ID;
+//    association_data.race_id    = type::RACE::R2_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/race2_warrior_00.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R2_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/race2_trader_00.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::TRADER_ID;
+//    association_data.race_id    = type::RACE::R2_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/race2_pirat_00.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::PIRAT_ID;
+//    association_data.race_id    = type::RACE::R2_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/race2_diplomat_00.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::DIPLOMAT_ID;
+//    association_data.race_id    = type::RACE::R2_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+////################################ race cheloveki
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_30_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::RANGER_ID;
+//    association_data.race_id    = type::RACE::R3_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_31_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R3_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_31_0_1.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R3_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_32_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::PIRAT_ID;
+//    association_data.race_id    = type::RACE::R3_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/_k_33_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::TRADER_ID;
+//    association_data.race_id    = type::RACE::R3_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/_k_34_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::DIPLOMAT_ID;
+//    association_data.race_id    = type::RACE::R3_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+////################################ race bio
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_41_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R4_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_43_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::TRADER_ID;
+//    association_data.race_id    = type::RACE::R4_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_43_0_1.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::TRADER_ID;
+//    association_data.race_id    = type::RACE::R4_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_44_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::DIPLOMAT_ID;
+//    association_data.race_id    = type::RACE::R4_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+////################################ enemy 1
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_61_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R6_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_61_0_1.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R6_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_61_0_2.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R6_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+
+////{
+//    //std::vector<int> arg;
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_3.png", true, &arg) );
+////}
+
+
+////{
+//    //std::vector<int> arg;
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_5.png", true, &arg) );
+////}
+
+////{
+//    //std::vector<int> arg;
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_6.png", true, &arg) );
+////}
+
+////{
+//    //std::vector<int> arg;
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_7.png", true, &arg) );
+////}
+
+////{
+//    //std::vector<int> arg;
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_8.png", true, &arg) );
+////}
+
+////{
+//    //std::vector<int> arg;
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_9.png", true, &arg) );
+////}
+
+////{
+//    //std::vector<int> arg;
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_10.png", true, &arg) );
+////}
+
+////{
+//    //std::vector<int> arg;
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_11.png", true, &arg) );
+////}
+
+////{
+//    //std::vector<int> arg;
+//    //arg.push_back((int)type::RACE::R6_ID); arg.push_back((int)type::entity::WARRIOR_ID); //COLOR_GOLDENROD
+//    //TextureCollector::Instance().Add( new jeti::TextureOb(type::TEXTURE::SHIP_ID, DATA_PATH+"ship/k_61_0_12.png", true, &arg) );
+////}
+
+
+
+////################################ enemy 2
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_71_0_0.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R7_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"ship/k_71_0_1e.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SHIP_ID;
+//    association_data.subtype_id = type::entity::WARRIOR_ID;
+//    association_data.race_id    = type::RACE::R7_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
 
 ////################################# type::TEXTURE::STAR_ID ###############################
 //{
@@ -664,6 +1159,64 @@ void Data::__loadImages()
 
 //    TextureCollector::Instance().Add(textureOb);
 //}
+
+//// STARBASE_TEXTURE_ID
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"starbase/sb_000.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SPACESTATION_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"starbase/sb_001.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SPACESTATION_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"starbase/sb_002.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SPACESTATION_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
+//{
+//    jeti::Material material_data;
+//    material_data.texture_path = DATA_PATH+"starbase/sb_003.png";
+//    material_data.use_alpha = true;
+//    jeti::TextureOb* textureOb = new jeti::TextureOb(material_data);
+
+//    jeti::MaterialAssociationData association_data;
+//    association_data.type_id    = type::TEXTURE::SPACESTATION_ID;
+//    association_data.race_id    = type::RACE::R0_ID;
+//    textureOb->SetAssociation(association_data);
+
+//    TextureCollector::Instance().Add(textureOb);
+//}
+
 
 ////################################## NEBULA EFFECT ################################
 //{

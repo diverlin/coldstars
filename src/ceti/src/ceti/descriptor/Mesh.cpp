@@ -29,8 +29,8 @@ Mesh::Mesh(int type,
            const meti::vec3& orientation)
     :
       Base(type)
-    , m_model(model)
-    , m_texture(texture)
+    , m_modelPath(model)
+    , m_texturePath(texture)
     , m_orientation(orientation)
 {
 }

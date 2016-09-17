@@ -38,7 +38,7 @@ public:
     Base(const int_t& type = -1, const int_t& id = -1);
     ~Base();
 
-    std::string data() const;
+//    std::string data() const;
 
     const int_t& id() const { return m_id; }
     const int_t& type() const { return m_type; }

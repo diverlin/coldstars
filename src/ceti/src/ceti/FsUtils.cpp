@@ -25,6 +25,23 @@
 namespace ceti {
 namespace filesystem {
 
+std::vector<std::string>
+getFilesList(const std::string& root, const std::string& ext) {
+    using namespace boost::filesystem;
+    std::vector<std::string> result;
+    auto files = recursive_directory_iterator(root);
+    for(const auto& p: files) {
+        if (is_regular_file(p)) {
+            if ((p.path().extension() == ext) || (ext == ".*")) {
+                result.push_back(p.path().string());
+            }
+        }
+    }
+
+    return result;
+}
+
+
 bool is_file_exists(const std::string& fname)
 {
     boost::filesystem::path p(fname);
