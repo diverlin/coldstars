@@ -35,7 +35,7 @@ AnimationWiggle::~AnimationWiggle()
 {}
 
 /* virtual override final */
-void AnimationWiggle::Update(glm::quat& quat, const glm::vec3& axis)
+void AnimationWiggle::update(glm::quat& quat, const glm::vec3& axis)
 {
     if (m_Clockwise) {
         m_Angle += GetDeltaAngle();

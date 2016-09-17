@@ -107,7 +107,7 @@ public:
     bool manage(item::Base*);
 
     bool isSlotFree(const type::entity&) const;
-    bool checkManage(const core::Ident&);
+    bool checkManage(const core::Id&);
 
     void manageItemsInCargo();
     [[deprecated("move to ext")]]
@@ -283,8 +283,8 @@ private:
     bool __mergeIdenticalGoods(item::Base*);
 
     Container* __wrapItemToContainer(item::Base*);
-    bool _checkInstallEquipment(const core::Ident&);
-    ItemSlot* const _freeFunctionalSlot(const core::Ident&) const;
+    bool _checkInstallEquipment(const core::Id&);
+    ItemSlot* const _freeFunctionalSlot(const core::Id&) const;
 
     friend class GuiVehicle;
     friend class GuiVehicle2;

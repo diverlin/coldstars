@@ -29,6 +29,10 @@
 #include <jeti/GlErrorHelper.hpp>
 
 #include "gui/UserInputManagerInSpace.hpp"
+
+#include <gui/UserInput.hpp>
+#include <gui/UserInputManagerInSpace.hpp>
+
 #include "gui/ButtonTrigger.hpp"
 #include "gui/GuiActions.hpp"
 
@@ -69,11 +73,9 @@
 
 enum class RUN_SCENARIO { NORMAL_RUN, TEST_PARTICLES, TEST_TEXT, TEST_MANY_VAO };
 
-void render(Starsystem* starsystem, glm::vec3& center) {
-    view::Viewer viewer;
+//void render(Starsystem* starsystem, glm::vec3& center) {
 
-
-}
+//}
 
 
 int main()
@@ -103,11 +105,25 @@ int main()
 //    run_scenario->Init(player);
     
     model::World world;
-    //while(true) {
+    view::SpaceViewer viewer;
+    bool runSession = true;
+    while(runSession) {
+        UserInputInSpace::get().update(player);
         world.update();
-        glm::vec3 pos(0,0,0);
-        render(world.activeStarsystem(), pos);
-    //}
+
+        // todo catch from player
+        meti::vec3 lookFrom(0,0,0);
+        meti::vec3 lookTo(0,0,0);
+        float radius(300.0f);
+        //
+
+        viewer.render(world.activeStarsystem(),
+                      lookFrom,
+                      lookTo,
+                      radius);
+
+        runSession = UserInputInSpace::get().runSession();
+    }
 
 //    Galaxy* galaxy = player->GetNpc()->vehicle()->starsystem()->sector()->galaxy();
         

@@ -29,45 +29,45 @@ Points::Points()
 Points::~Points()
 {}              
 
-void Points::Add(glm::vec3* const point, const glm::vec3* const point_orig)
+void Points::add(glm::vec3* const point, const glm::vec3* const point_orig)
 { 
-    vector_orig.push_back(point_orig);
-    vector.push_back(point);
+    m_points_orig.push_back(point_orig);
+    m_points.push_back(point);
 }
 
 void Points::addMidLeftPoint()
 {
-    midLeft_origin = glm::vec3(-0.5, 0.0, DEFAULT_ENTITY_ZPOS);
-    midLeft = glm::vec3(-0.5, 0.0, DEFAULT_ENTITY_ZPOS);
+    m_midLeft_origin = glm::vec3(-0.5, 0.0, DEFAULT_ENTITY_ZPOS);
+    m_midLeft = glm::vec3(-0.5, 0.0, DEFAULT_ENTITY_ZPOS);
 
-    vector_orig.push_back(&midLeft_origin);
-    vector.push_back(&midLeft);
+    m_points_orig.push_back(&m_midLeft_origin);
+    m_points.push_back(&m_midLeft);
 }
 
 void Points::addMidFarLeftPoint()
 {
-    midFarLeft_origin = glm::vec3(-1.0, 0.0, DEFAULT_ENTITY_ZPOS);
-    midFarLeft = glm::vec3(-1.0, 0.0, DEFAULT_ENTITY_ZPOS);
+    m_midFarLeft_origin = glm::vec3(-1.0, 0.0, DEFAULT_ENTITY_ZPOS);
+    m_midFarLeft = glm::vec3(-1.0, 0.0, DEFAULT_ENTITY_ZPOS);
 
-    vector_orig.push_back(&midFarLeft_origin);
-    vector.push_back(&midFarLeft);
+    m_points_orig.push_back(&m_midFarLeft_origin);
+    m_points.push_back(&m_midFarLeft);
 }
 
 
-void Points::Update(const glm::vec3& center, const glm::vec3& angle, const glm::vec3& scale, const glm::vec3& uOrient)
+void Points::update(const glm::vec3& center, const glm::vec3& angle, const glm::vec3& scale, const glm::vec3& uOrient)
 {
     glm::vec3 pos = center;
 
-    for (unsigned int i=0; i<vector.size(); i++)
+    for (unsigned int i=0; i<m_points.size(); i++)
     {
         ////// rotation around center
-        vector[i]->x = uOrient.x*scale.x*vector_orig[i]->x - uOrient.y*scale.y*vector_orig[i]->y;
-        vector[i]->y = uOrient.y*scale.x*vector_orig[i]->x + uOrient.x*scale.y*vector_orig[i]->y;
+        m_points[i]->x = uOrient.x*scale.x*m_points_orig[i]->x - uOrient.y*scale.y*m_points_orig[i]->y;
+        m_points[i]->y = uOrient.y*scale.x*m_points_orig[i]->x + uOrient.x*scale.y*m_points_orig[i]->y;
         ////// moving to position
-        vector[i]->x += pos.x;
-        vector[i]->y += pos.y;
+        m_points[i]->x += pos.x;
+        m_points[i]->y += pos.y;
         
-        vector[i]->z = vector_orig[i]->z;
+        m_points[i]->z = m_points_orig[i]->z;
     }
 }        
 

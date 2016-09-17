@@ -43,60 +43,63 @@ class Renderer;
 
 class BaseDrawable
 {
-    public:      
-        BaseDrawable(TextureOb*, Mesh*);
-        virtual ~BaseDrawable();
+public:
+    BaseDrawable();
+    BaseDrawable(TextureOb*, Mesh*);
+    virtual ~BaseDrawable();
 
-        void ValidateResources() const;
-        void SetAnimationRotation(BaseAnimationRotation* animation_rotation) { m_AnimationRotation = animation_rotation; }
-        void SetColor(const glm::vec4& color) { m_Color = color; }
+    void validateResources() const;
+    void setAnimationRotation(BaseAnimationRotation* animation_rotation) { m_animationRotation = animation_rotation; }
+    void setColor(const glm::vec4& color) { m_color = color; }
+    void setMaterial(TextureOb* material) { m_material = material; }
+    void setMesh(Mesh* mesh) { m_mesh = mesh; }
 
-        const glm::mat4& actualModelMatrix();
-        const glm::mat4& modelMatrix() const { return m_MatrixModel; }
-                        
-        //const glm::vec3& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
-        const Mesh& mesh() const     { return *m_Mesh; }
+    const glm::mat4& actualModelMatrix();
+    const glm::mat4& modelMatrix() const { return m_matrixModel; }
 
-        const TextureOb& textureOb() const { return *m_TextureOb; }
-        bool HasTextureOb() const { return (m_TextureOb != 0); }
-        
-        const glm::vec4& color() const { return m_Color; }
-        const glm::vec3& center() const;
-        const glm::vec3& size() const;
+    //const glm::vec3& GetBoundaryBox() const     { return m_Mesh->GetBoundaryBox(); }
+    const Mesh& mesh() const     { return *m_mesh; }
 
-        virtual bool inRect(const ceti::Rect&) { return true; }
-//        void RenderCollisionRadius(const Renderer&) const;
-//        void RenderAxis(const Renderer&) const;
-                
-    protected:
-        void SetTransparency(float alpha)  { m_Color.a = alpha; }
-                
-        bool UpdateFadeInEffect(); // depr, move to animation program
-        bool UpdateFadeOutEffect(); // depr, move to animation program
+    const TextureOb& material() const { return *m_material; }
+    bool hasMaterial() const { return (m_material != 0); }
 
-    private:
-        glm::vec4 m_Color;
-        
-        TextureOb* m_TextureOb;
-        Mesh* m_Mesh; 
-        ceti::Orientation* m_Orientation;
+    const glm::vec4& color() const { return m_color; }
+    const glm::vec3& center() const;
+    const glm::vec3& size() const;
 
-        BaseAnimationRotation* m_AnimationRotation;
-        
-        glm::mat4 m_MatrixModel;     
-        glm::mat4 m_MatrixTranslate;
-        glm::mat4 m_MatrixRotate;
-        glm::mat4 m_MatrixScale;
- 
-        glm::quat m_QuatDirection;
-        glm::quat m_QuatAnimation;        
+    virtual bool inRect(const ceti::Rect&) { return true; }
+    //        void RenderCollisionRadius(const Renderer&) const;
+    //        void RenderAxis(const Renderer&) const;
 
-        void UpdateRenderAnimation();
+protected:
+    void _setTransparency(float alpha)  { m_color.a = alpha; }
 
-//    protected:
-//        InfoTable m_Info;
-//        virtual void UpdateInfo() {};
-      virtual void RenderStuffWhenFocusedInSpace(const Renderer&) {}
+    bool _updateFadeInEffect(); // depr, move to animation program
+    bool _updateFadeOutEffect(); // depr, move to animation program
+
+private:
+    glm::vec4 m_color;
+
+    TextureOb* m_material = nullptr;
+    Mesh* m_mesh = nullptr;
+    ceti::Orientation* m_orientation = nullptr;
+
+    BaseAnimationRotation* m_animationRotation = nullptr;
+
+    glm::mat4 m_matrixModel;
+    glm::mat4 m_matrixTranslate;
+    glm::mat4 m_matrixRotate;
+    glm::mat4 m_matrixScale;
+
+    glm::quat m_quatDirection;
+    glm::quat m_quatAnimation;
+
+    void __updateRenderAnimation();
+
+    //    protected:
+    //        InfoTable m_Info;
+    //        virtual void UpdateInfo() {};
+    virtual void __renderStuffWhenFocusedInSpace(const Renderer&) {}
 };
 
 glm::mat4 getModelMatrix(const glm::vec3&, const glm::vec3&, const glm::vec3&);  // slow, mainly used for debug (draw collision radius, draw axis)

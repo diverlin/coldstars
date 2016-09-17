@@ -51,8 +51,8 @@ GuiManager::GuiManager()
 player(nullptr),
 gui_vehicle_scan(nullptr)
 {   
-    int screen_w = jeti::Screen::get().GetWidth();
-    int screen_h = jeti::Screen::get().GetHeight();
+    int screen_w = jeti::Screen::get().width();
+    int screen_h = jeti::Screen::get().height();
     
     /* shared gui */
     {

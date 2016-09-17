@@ -30,44 +30,47 @@
 
 #include <gui/GuiManager.hpp>
 
-UserInputManagerInSpace& UserInputManagerInSpace::Instance()
+UserInputInSpace& UserInputInSpace::get()
 {
-    static UserInputManagerInSpace instance;
+    static UserInputInSpace instance;
     return instance;
 }
 
-UserInputManagerInSpace::UserInputManagerInSpace()
+UserInputInSpace::UserInputInSpace()
 :
-m_NextTurnReady(false),
-m_CameraMoveAxisX(CAMERADIRECTION::NONE),
-m_CameraMoveAxisY(CAMERADIRECTION::NONE)
+m_nextTurnReady(false),
+m_cameraMoveAxisX(CAMERADIRECTION::NONE),
+m_cameraMoveAxisY(CAMERADIRECTION::NONE)
 {}
 
-UserInputManagerInSpace::~UserInputManagerInSpace()
+UserInputInSpace::~UserInputInSpace()
 {}
         
-void UserInputManagerInSpace::UpdateInSpace(Player* player)
+void UserInputInSpace::update(Player* player)
 {
-    Reset();
+    UserInput::get().update();
+
+    __reset();
     
-    ManageInputsInSpace(player);
-    ManageRealTimeInputsInSpace(player);
-    MouseButtonPressed(player);
-    ScrollCamera(player);
+    __manageInputsInSpace(player);
+    __manageRealTimeInputsInSpace(player);
+    __mouseButtonPressed(player);
+    __scrollCamera(player);
 }
 
 
-void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
+void UserInputInSpace::__manageInputsInSpace(Player* player)
 {  
-    for (const auto & key_code : UserInput::Instance().m_KeyboardCodesPressed_vec)   
+    for (const auto & key_code : UserInput::get().m_keyboardPressedCodes)   
     {
         switch (key_code) 
         {    
             case sf::Keyboard::Escape:
             {        
-                if (player->GetNpc()->scanTarget() != nullptr)
-                {
+                if (player->GetNpc()->scanTarget()) {
                     //player->GetNpc()->ResetScanTarget();
+                } else {
+                    m_runSession = false;
                 }
                 
                 break;
@@ -75,9 +78,8 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
             
             case sf::Keyboard::Space:
             {
-                if (m_NextTurnReady == false)
-                {
-                    m_NextTurnReady = true;
+                if (!m_nextTurnReady) {
+                    m_nextTurnReady = true;
                 }
     
                 break;
@@ -211,9 +213,9 @@ void UserInputManagerInSpace::ManageInputsInSpace(Player* player)
     }
 }
         
-void UserInputManagerInSpace::MouseButtonPressed(Player* player)
+void UserInputInSpace::__mouseButtonPressed(Player* player)
 {
-    for (const auto & key_code : UserInput::Instance().m_MouseCodesPressed_vec)   
+    for (const auto & key_code : UserInput::get().m_mousePressedCodes)   
     {
         switch (key_code) 
         {    
@@ -223,41 +225,41 @@ void UserInputManagerInSpace::MouseButtonPressed(Player* player)
     }
 }
  
-void UserInputManagerInSpace::Reset()
+void UserInputInSpace::__reset()
 {       
-    m_NextTurnReady = false;
+    m_nextTurnReady = false;
     
-    m_CameraMoveAxisX  = CAMERADIRECTION::NONE;
-    m_CameraMoveAxisY  = CAMERADIRECTION::NONE;
+    m_cameraMoveAxisX  = CAMERADIRECTION::NONE;
+    m_cameraMoveAxisY  = CAMERADIRECTION::NONE;
 }
                
-void UserInputManagerInSpace::ManageRealTimeInputsInSpace(Player* player)
+void UserInputInSpace::__manageRealTimeInputsInSpace(Player* player)
 { 
     //sf::Vector2i mouse_pos = sf::Mouse::getPosition(Screen::Instance().GetWindow());
        
     int mx = player->GetCursor().GetMouseData().pos_screencoord.x;
     int my = player->GetCursor().GetMouseData().pos_screencoord.y;
     
-    int screen_w = jeti::Screen::get().GetWidth();
-    int screen_h = jeti::Screen::get().GetHeight();
+    int screen_w = jeti::Screen::get().width();
+    int screen_h = jeti::Screen::get().height();
     
     //bool mouse_camera_scroll = global::get().config().GetMouseCameraScroll();
                  
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) == true)
     {                
-        m_CameraMoveAxisX = CAMERADIRECTION::LEFT;
+        m_cameraMoveAxisX = CAMERADIRECTION::LEFT;
     }           
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) == true)
     {                
-        m_CameraMoveAxisX = CAMERADIRECTION::RIGHT;
+        m_cameraMoveAxisX = CAMERADIRECTION::RIGHT;
     }   
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) == true)
     {                
-        m_CameraMoveAxisY = CAMERADIRECTION::UP;
+        m_cameraMoveAxisY = CAMERADIRECTION::UP;
     }   
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) == true)
     {                
-        m_CameraMoveAxisY = CAMERADIRECTION::DOWN;
+        m_cameraMoveAxisY = CAMERADIRECTION::DOWN;
     }   
                          
 //    if ((mouse_camera_scroll)and(mx < SCROLL_BORDER_OFFSET))
@@ -278,7 +280,7 @@ void UserInputManagerInSpace::ManageRealTimeInputsInSpace(Player* player)
 //    }
 }
 
-void UserInputManagerInSpace::ScrollCamera(Player* player)
+void UserInputInSpace::__scrollCamera(Player* player)
 {
 //    int SCROLL_VELOCITY_STEP = global::get().config().SCROLL_VELOCITY_STEP;
 

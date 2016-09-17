@@ -17,47 +17,46 @@
 */
 
 
-#ifndef UserInputManagerInSpaceINSPACE_HPP
-#define UserInputManagerInSpaceINSPACE_HPP
+#pragma once
 
-#include <SFML/Window.hpp> // !!!
 #include <glm/glm.hpp>
 #include <common/constants.hpp>
 
 class Player;
 class GuiManager;
 
-
-class UserInputManagerInSpace
+class UserInputInSpace
 {
     public:
-        static UserInputManagerInSpace& Instance();
-        ~UserInputManagerInSpace();
+        static UserInputInSpace& get();
+        ~UserInputInSpace();
         
-        bool GetNextTurnReady() const { return     m_NextTurnReady; }
-        
-        void UpdateInSpace(Player*);
+        bool nextTurnReady() const { return m_nextTurnReady; }
+        bool runSession() const { return m_runSession; }
+
+        void update(Player*);
         
     private:
-        UserInputManagerInSpace();
-        UserInputManagerInSpace(const UserInputManagerInSpace&) = delete;
-        UserInputManagerInSpace& operator=(const UserInputManagerInSpace&) = delete;
+        UserInputInSpace();
+        UserInputInSpace(const UserInputInSpace&) = delete;
+        UserInputInSpace& operator=(const UserInputInSpace&) = delete;
 
-        bool m_NextTurnReady;
-                
-        CAMERADIRECTION m_CameraMoveAxisX;
-        CAMERADIRECTION m_CameraMoveAxisY;
+        bool m_nextTurnReady = false;
+        bool m_runSession = true;
+
+        CAMERADIRECTION m_cameraMoveAxisX;
+        CAMERADIRECTION m_cameraMoveAxisY;
             
-        glm::vec2 m_ScrollAccel; 
+        glm::vec2 m_scrollAccel;
                 
-        void Reset();                    
+        void __reset();
     
-        void ManageInputsInSpace(Player*);
+        void __manageInputsInSpace(Player*);
         
-        void MouseButtonPressed(Player*);
+        void __mouseButtonPressed(Player*);
                     
-        void ManageRealTimeInputsInSpace(Player*);
-        void ScrollCamera(Player*);
+        void __manageRealTimeInputsInSpace(Player*);
+        void __scrollCamera(Player*);
 };
 
-#endif 
+

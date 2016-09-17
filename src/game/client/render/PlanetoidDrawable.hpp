@@ -22,10 +22,11 @@
 
 class PlanetoidDrawable : public jeti::BaseDrawable
 {
-    public:      
-        PlanetoidDrawable(jeti::TextureOb*, jeti::Mesh*);
-        virtual ~PlanetoidDrawable() override;
-        
-        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) override final; 
+public:
+    PlanetoidDrawable();
+    PlanetoidDrawable(jeti::TextureOb*, jeti::Mesh*);
+    virtual ~PlanetoidDrawable() override;
+
+    virtual void __renderStuffWhenFocusedInSpace(const jeti::Renderer&) override final;
 };
 

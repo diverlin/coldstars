@@ -152,8 +152,8 @@ void Cursor::UpdateMouseStuff()
     m_DataMouse.left_press  = sf::Mouse::isButtonPressed(sf::Mouse::Left);
     m_DataMouse.right_press = sf::Mouse::isButtonPressed(sf::Mouse::Right);       
 
-    sf::Vector2i mouse_pos = sf::Mouse::getPosition(jeti::Screen::get().GetWindow());
-    m_DataMouse.pos_screencoord = glm::vec2(mouse_pos.x, jeti::Screen::get().GetHeight() - mouse_pos.y);
+    sf::Vector2i mouse_pos = sf::Mouse::getPosition(jeti::Screen::get().window());
+    m_DataMouse.pos_screencoord = glm::vec2(mouse_pos.x, jeti::Screen::get().height() - mouse_pos.y);
     m_DataMouse.pos_worldcoord = m_DataMouse.pos_screencoord*jeti::Screen::get().GetScale() + jeti::Screen::get().GetBottomLeftScreenWC();
 }
 

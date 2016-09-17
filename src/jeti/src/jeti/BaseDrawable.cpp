@@ -33,29 +33,32 @@
 
 namespace jeti {
 
+BaseDrawable::BaseDrawable()
+{}
+
 BaseDrawable::BaseDrawable(TextureOb* textureOb, Mesh* mesh)
     :
-      m_TextureOb(textureOb),
-      m_Mesh(mesh),
-      m_AnimationRotation(nullptr)
+      m_material(textureOb),
+      m_mesh(mesh)
 {}
 
 /* virtual */
 BaseDrawable::~BaseDrawable() {
     //LOG("___::~Drawable("+std::to_string(id())+")");
     
-    delete m_AnimationRotation;
+    delete m_animationRotation;
 }
 
-const glm::vec3& BaseDrawable::center() const { return m_Orientation->position(); }
-const glm::vec3& BaseDrawable::size() const { return m_Orientation->size(); }
+const glm::vec3& BaseDrawable::center() const { return m_orientation->position(); }
+const glm::vec3& BaseDrawable::size() const { return m_orientation->size(); }
 
-void BaseDrawable::ValidateResources() const
+void BaseDrawable::validateResources() const
 {
-    assert(m_TextureOb);
-    if (!m_TextureOb->GetIsLoaded()) {
-        m_TextureOb->Load();
+    assert(m_material);
+    if (!m_material->isLoaded()) {
+        m_material->load();
     }
+    assert(m_mesh);
     // todo the same for mesh
 }
 
@@ -83,49 +86,50 @@ void BaseDrawable::ValidateResources() const
 //    render.DrawVector(m_Orientation->direction(), Mm, /*width*/6);
 //}
 
-void BaseDrawable::UpdateRenderAnimation()
+void BaseDrawable::__updateRenderAnimation()
 {
-    if (m_AnimationRotation != nullptr) {
+    if (m_animationRotation != nullptr) {
         //m_AnimationRotation->Update(GetAngle());
     }
 }
 
-bool BaseDrawable::UpdateFadeInEffect()
+bool BaseDrawable::_updateFadeInEffect()
 {
-    if (m_Color.a > 0.01) {
-        m_Color.a -= 0.02;
+    if (m_color.a > 0.01) {
+        m_color.a -= 0.02;
         return false;
     } else {
-        m_Color.a = 0.0;
+        m_color.a = 0.0;
         return true;
     }
 }
 
-bool BaseDrawable::UpdateFadeOutEffect()
+bool BaseDrawable::_updateFadeOutEffect()
 {
-    if (m_Color.a < 1.0) {
-        m_Color.a += 0.02;
+    if (m_color.a < 1.0) {
+        m_color.a += 0.02;
         return false;
     } else {
-        m_Color.a = 1.0;
+        m_color.a = 1.0;
         return true;
     }
 }
 
 const glm::mat4& BaseDrawable::actualModelMatrix()
 {    
-    meti::RotationBetweenVectors(m_QuatDirection, m_Mesh->originDirection(), m_Orientation->direction());
-    if (m_AnimationRotation != nullptr) {
-        m_AnimationRotation->Update(m_QuatAnimation, m_Mesh->originDirection());
+    assert(m_mesh);
+    meti::RotationBetweenVectors(m_quatDirection, m_mesh->originDirection(), m_orientation->direction());
+    if (m_animationRotation) {
+        m_animationRotation->update(m_quatAnimation, m_mesh->originDirection());
     }
     
-    m_MatrixTranslate = glm::translate(m_Orientation->position());
-    m_MatrixRotate    = glm::toMat4(m_QuatDirection * m_QuatAnimation);
-    m_MatrixScale     = glm::scale(m_Orientation->size());
+    m_matrixTranslate = glm::translate(m_orientation->position());
+    m_matrixRotate    = glm::toMat4(m_quatDirection * m_quatAnimation);
+    m_matrixScale     = glm::scale(m_orientation->size());
 
-    m_MatrixModel = m_MatrixTranslate * m_MatrixScale * m_MatrixRotate;
+    m_matrixModel = m_matrixTranslate * m_matrixScale * m_matrixRotate;
     
-    return m_MatrixModel;
+    return m_matrixModel;
 }
 
 glm::mat4 getModelMatrix(const glm::vec3& center, const glm::vec3& size, const glm::vec3& angle)

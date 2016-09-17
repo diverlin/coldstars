@@ -22,29 +22,30 @@
 #include <jeti/Screen.hpp>
 #include <iostream>
 
-UserInput& UserInput::Instance()
+UserInput& UserInput::get()
 {
     static UserInput instance;
     return instance;
 }
 
-void UserInput::Update()
+void UserInput::update()
 {    
-    m_KeyboardCodesPressed_vec.clear();
-    m_MouseCodesPressed_vec.clear();
-        
-    while (jeti::Screen::get().GetWindow().pollEvent(m_Event))
-    {
-        switch(m_Event.type)
-        {
-            case sf::Event::Closed:             { jeti::Screen::get().GetWindow().close(); break; }
-            case sf::Event::KeyPressed:         { m_KeyboardCodesPressed_vec.push_back(m_Event.key.code); break; }
+    m_keyboardPressedCodes.clear();
+    m_mousePressedCodes.clear();
+
+    while(jeti::Screen::get().window().pollEvent(m_event)) {
+        switch(m_event.type)  {
+        case sf::Event::Closed:             { jeti::Screen::get().window().close(); break; }
+        case sf::Event::KeyPressed: {
+            m_keyboardPressedCodes.push_back(m_event.key.code);
+            break;
+        }
             //case sf::Event::Resized:            { Screen::Instance().Resize(event.size.x, event.size.y); break; }
             //case sf::Event::MouseButtonPressed: { MouseButtonPressed(player); break; }
-            case sf::Event::MouseButtonPressed: { m_MouseCodesPressed_vec.push_back(m_Event.key.code); break; }
-        } 
-   }    
+        case sf::Event::MouseButtonPressed: { m_mousePressedCodes.push_back(m_event.key.code); break; }
+        }
+    }
 }
-     
 
-       
+
+

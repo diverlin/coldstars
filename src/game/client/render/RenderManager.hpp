@@ -28,7 +28,9 @@ class StarSystemDrawable;
 class Star;
 
 class StarDrawable;
-class PlanetDrawable;
+namespace view {
+class Planet;
+} // namespace view
 class AsteroidDrawable;
 class BlackHoleDrawable;
 class ShipDrawable;
@@ -52,25 +54,25 @@ struct VisibilityData
 {
     struct VisibilityScreenData {
         glm::vec2 worldcoord;
-        float scale;
+        float scale = 1.0f;
     };
     struct VisibilityObserverData {
         glm::vec3 center;
-        float radius;
+        float radius = 0.0f;
     };
     VisibilityScreenData screen;
     VisibilityObserverData observer;
 };
 
-class Viewer
+class SpaceViewer
 {
 public:
-    Viewer();
-    ~Viewer();
+    SpaceViewer();
+    ~SpaceViewer();
 
     /// visible entities
     void addIfVisible(Star*, const VisibilityData&);
-    void addIfVisible(PlanetDrawable*, const VisibilityData&);
+    void addIfVisible(view::Planet*, const VisibilityData&);
     void addIfVisible(AsteroidDrawable*, const VisibilityData&);
     void addIfVisible(ContainerDrawable*, const VisibilityData&);
     void addIfVisible(BulletDrawable*, const VisibilityData&);
@@ -85,12 +87,18 @@ public:
     void addIfVisible(jeti::BaseParticleSystem*, const VisibilityData&);
     void addIfVisible(VerticalFlowText*, const VisibilityData&);
 
-    void renderSceneInSpace(Starsystem*, bool, bool, bool);
+    void render(Starsystem*,
+                const meti::vec3& lookFrom,
+                const meti::vec3& lookTo,
+                float lookFar,
+                bool a = true,
+                bool b = true,
+                bool c = true);
 
 private:
     /// visible entities
     std::vector<StarDrawable*>         m_stars;
-    std::vector<PlanetDrawable*>       m_planets;
+    std::vector<Planet*>       m_planets;
     std::vector<AsteroidDrawable*>     m_asteroids;
     std::vector<ContainerDrawable*>    m_containers;
     std::vector<BulletDrawable*>       m_bullets;
@@ -105,13 +113,18 @@ private:
     std::vector<jeti::BaseParticleSystem*> m_particlesystems;
     std::vector<VerticalFlowText*>   m_texts;
     
-    void __renderInSpace_NEW(jeti::Renderer&, Starsystem*);
+    void __update(Starsystem* starsystem,
+                  const meti::vec3& lookFrom,
+                  const meti::vec3& lookTo,
+                  float lookFar);
+
+    void __renderInSpace_NEW(jeti::Renderer&);
     void __renderCollisionRadius(const jeti::Renderer&) const;
     void __renderAxis(const jeti::Renderer&) const;
 
     /// visible entities
     void __add(StarDrawable*);
-    void __add(PlanetDrawable*);
+    void __add(Planet*);
     void __add(AsteroidDrawable*);
     void __add(ContainerDrawable*);
     void __add(BulletDrawable*);

@@ -42,8 +42,8 @@ class TextureOb
         int GetFrameWidth() const  { return m_Material.w_slice; }
         int GetFrameHeight() const { return m_Material.h_slice; }
         
-        bool GetIsLoaded() const { return m_IsLoaded; }
-        void Load();
+        bool isLoaded() const { return m_IsLoaded; }
+        void load();
         void RemoveFromVRAM();
 
         int UpdateAnimationFrame(float);

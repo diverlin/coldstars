@@ -54,8 +54,8 @@ BaseParticleSystem::~BaseParticleSystem()
 void BaseParticleSystem::ValidateResources() const
 {
     assert(m_TextureOb);
-    if (!m_TextureOb->GetIsLoaded()) {
-        m_TextureOb->Load();
+    if (!m_TextureOb->isLoaded()) {
+        m_TextureOb->load();
     }
 }
 

@@ -24,43 +24,44 @@
 class Land;
 class Vehicle;
 
+
 class Planet : public Planetoid
 {
-    public:
-        Planet(int);
-        virtual ~Planet();        
-        
-        void BindLand(Land*);
-        void SetPopulation(unsigned long int population)  { m_Population = population; }
-        
-        unsigned long int GetPopulation() const { return m_Population; }
-        Land* const GetLand() const { return m_Land; }
-        
-        void AddVehicle(Vehicle*) const;
-        
-        void UpdateInSpace(int, bool);
-        void UpdateInSpaceInStatic();        
+public:
+    Planet(int);
+    virtual ~Planet();
 
-        virtual void Save(boost::property_tree::ptree&) const override final;
-        virtual void Load(const boost::property_tree::ptree&) override final;
-        virtual void Resolve() override final;
-        
-    private:
-        Land* m_Land; 
+    void BindLand(Land*);
+    void SetPopulation(unsigned long int population)  { m_Population = population; }
 
-        unsigned long int m_Population;
-        
-        virtual void putChildrenToGarbage() const override final;
-        
-//        virtual void UpdateInfo() override final;
-        
-        void _postDeathUniqueEvent(bool);
-        
-        void SaveData(boost::property_tree::ptree&, const std::string&) const;
-        void LoadData(const boost::property_tree::ptree&);
-        void ResolveData();
+    unsigned long int GetPopulation() const { return m_Population; }
+    Land* const GetLand() const { return m_Land; }
+
+    void AddVehicle(Vehicle*) const;
+
+    void UpdateInSpace(int, bool);
+    void UpdateInSpaceInStatic();
+
+    virtual void Save(boost::property_tree::ptree&) const override final;
+    virtual void Load(const boost::property_tree::ptree&) override final;
+    virtual void Resolve() override final;
+
+private:
+    Land* m_Land;
+
+    unsigned long int m_Population;
+
+    virtual void putChildrenToGarbage() const override final;
+
+    //        virtual void UpdateInfo() override final;
+
+    void _postDeathUniqueEvent(bool);
+
+    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+    void LoadData(const boost::property_tree::ptree&);
+    void ResolveData();
 }; 
- 
+
 
 
 
