@@ -198,7 +198,7 @@ void Vehicle::addItemSlot(ItemSlot* slot)
         float pos_y = meti::getRandFloat(border_start, border_end) - 0.5;
 
         slot->turrel()->setParentPosition(pos_x, pos_y, DEFAULT_ENTITY_ZPOS);
-        points().Add(slot->turrel()->pPosition(), slot->turrel()->pParentPosition());
+        points().add(slot->turrel()->pPosition(), slot->turrel()->pParentPosition());
         m_weaponComplex.addSlot(slot);
 
         break;
@@ -273,7 +273,7 @@ bool Vehicle::isSlotFree(const type::entity& subtype) const
     return false;
 }
 
-bool Vehicle::checkManage(const core::Ident& ident)
+bool Vehicle::checkManage(const core::Id& ident)
 {
     if (!isSlotTypePresent(ident.subtype)) {
         return false;
@@ -325,7 +325,7 @@ bool Vehicle::_installEquipment(item::Base* item)
     return false;
 }     
 
-bool Vehicle::_checkInstallEquipment(const core::Ident& ident)
+bool Vehicle::_checkInstallEquipment(const core::Id& ident)
 {
     if (ident.type == type::entity::WEAPON_SLOT_ID) {
         if (m_weaponComplex.freeSlot()) {
@@ -382,7 +382,7 @@ Vehicle::_functionalSlot(const type::entity& functional_slot_subtype_id) const
 }
 
 ItemSlot* const
-Vehicle::_freeFunctionalSlot(const core::Ident& ident) const
+Vehicle::_freeFunctionalSlot(const core::Id& ident) const
 {
     for(ItemSlot* slot: m_equipmentSlots) {
         if (slot->subtype() == ident.subtype) {

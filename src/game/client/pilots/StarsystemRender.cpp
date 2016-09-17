@@ -217,8 +217,8 @@ void StarsystemRender::RenderInSpace_NEW(jeti::Renderer& render, Starsystem* sta
     bool draw_robustSpaceObjects = true;
 
     float scale = jeti::Screen::get().GetScale();
-    int w = jeti::Screen::get().GetWidth();
-    int h = jeti::Screen::get().GetHeight();
+    int w = jeti::Screen::get().width();
+    int h = jeti::Screen::get().height();
     glm::vec2 world_coord(jeti::Screen::get().GetBottomLeft());
     
     render.ClearColorAndDepthBuffers();
@@ -421,8 +421,8 @@ void StarsystemRender::RenderInSpace(Starsystem* starsystem, bool turn_ended, bo
 {   
     jeti::Renderer& renderer = jeti::Screen::get().renderer();
     jeti::Camera& camera = jeti::Screen::get().GetCamera();
-    int w = jeti::Screen::get().GetWidth();
-    int h = jeti::Screen::get().GetHeight();
+    int w = jeti::Screen::get().width();
+    int h = jeti::Screen::get().height();
     camera.Update(w, h);
     
     renderer.ComposeViewMatrix(camera.GetViewMatrix());

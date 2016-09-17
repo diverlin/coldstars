@@ -33,7 +33,7 @@ class BaseAnimationRotation
         
         virtual ~BaseAnimationRotation() {}
 
-        virtual void Update(glm::quat&, const glm::vec3&) = 0;
+        virtual void update(glm::quat&, const glm::vec3&) = 0;
     
     protected:
         float GetDeltaAngle() const { return m_DeltaAngle; }

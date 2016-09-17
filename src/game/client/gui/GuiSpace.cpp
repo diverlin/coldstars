@@ -59,8 +59,8 @@ gui_galaxymap_shared(nullptr),
 gui_skills_shared(nullptr),
 slider_shared(nullptr)
 {       
-    int screen_w = jeti::Screen::get().GetWidth();
-    int screen_h = jeti::Screen::get().GetHeight();
+    int screen_w = jeti::Screen::get().width();
+    int screen_h = jeti::Screen::get().height();
     
     {
         glm::vec2 size(screen_w, screen_h);
@@ -268,8 +268,8 @@ void GuiSpace::RenderText(const glm::vec2& scroll_coords) const
 /* virtual override final */
 void GuiSpace::UpdateUnique(Player* player)
 { 
-    int screen_w = jeti::Screen::get().GetWidth();
-    int screen_h = jeti::Screen::get().GetHeight();
+    int screen_w = jeti::Screen::get().width();
+    int screen_h = jeti::Screen::get().height();
     ceti::Rect screen_rect(0, 0, screen_w, screen_h);
     glm::vec2 center_screen(screen_w/2, screen_h/2);
 }

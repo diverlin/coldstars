@@ -28,7 +28,7 @@ class AnimationConstantRotation : public BaseAnimationRotation
         AnimationConstantRotation(float);
         virtual ~AnimationConstantRotation();
 
-        virtual void Update(glm::quat&, const glm::vec3&);
+        virtual void update(glm::quat&, const glm::vec3&);
 
 };
 

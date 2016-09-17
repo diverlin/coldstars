@@ -50,7 +50,7 @@ TextureOb::~TextureOb()
 
 }
 
-void TextureOb::Load()
+void TextureOb::load()
 {
     loadToVRAM(m_Material.texture_path, m_Material.texture, m_Material.w, m_Material.h);
     if (m_Material.normalmap_path != "") {

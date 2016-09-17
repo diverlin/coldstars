@@ -17,8 +17,7 @@
 */
 
 
-#ifndef STAR_HPP
-#define STAR_HPP
+#pragma once
 
 #include <spaceobjects/Planetoid.hpp>
 
@@ -33,7 +32,7 @@ class Star : public Planetoid
 //        float GetBrightThreshold() const;
         float GetDeltaColor() const { return m_DeltaColor; }
         
-        void hit(int) {};
+        void hit(int) {}
         void InitiateSpark();
         
 
@@ -63,7 +62,6 @@ class Star : public Planetoid
 }; 
 
 
-#endif 
     
 
         

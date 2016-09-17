@@ -10,9 +10,9 @@ namespace jeti {
 
 SFMLWrapper::SFMLWrapper()
 {
-    text12.setFont(font);
-    text12.setCharacterSize(12);
-    text12.setColor(sf::Color(255,0,0,255));
+    m_text12.setFont(m_font);
+    m_text12.setCharacterSize(12);
+    m_text12.setColor(sf::Color(255,0,0,255));
     
     std::string fontpath = DATA_PATH+"font/font.ttf";
     //ftfont.init(fontpath.c_str(), 20);
@@ -24,33 +24,33 @@ SFMLWrapper::~SFMLWrapper()
 
 void SFMLWrapper::wrCreateWindowSpecific(int width, int height, int bpp, bool vert_sync, int fps_limit, const std::string& title)
 {    
-    this->bpp = bpp;
-    this->vert_sync = vert_sync;
+    this->m_bpp = bpp;
+    this->m_vsync = vert_sync;
     
-    window.create(sf::VideoMode(width, height, bpp), title);
-    window.setFramerateLimit(fps_limit);
-    window.setVerticalSyncEnabled(vert_sync);
+    m_window.create(sf::VideoMode(width, height, bpp), title);
+    m_window.setFramerateLimit(fps_limit);
+    m_window.setVerticalSyncEnabled(vert_sync);
 }
          
 void SFMLWrapper::wrResizeSpecific(int width, int height)
 {    
-    view.setViewport(sf::FloatRect(0, 0, width, height));
-    window.setView(view);
-    window.setSize(sf::Vector2u(width, height));
+    m_view.setViewport(sf::FloatRect(0, 0, width, height));
+    m_window.setView(m_view);
+    m_window.setSize(sf::Vector2u(width, height));
 }
         
 void SFMLWrapper::wrDrawSpecific()
 {    
-      window.display();
+      m_window.display();
 }
 
-void SFMLWrapper::DrawText(const std::string& str, int font_size, const glm::vec2& pos)
+void SFMLWrapper::drawText(const std::string& str, int font_size, const glm::vec2& pos)
 {    
     glm::ivec4 color(255, 255, 255, 255);
-    DrawText(str, font_size, pos, color);
+    drawText(str, font_size, pos, color);
 }
         
-void SFMLWrapper::DrawText(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color)
+void SFMLWrapper::drawText(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color)
 {
     //glPushMatrix();
         //glColor4ub(color.r, color.g, color.b, color.a);

@@ -14,34 +14,34 @@ class SFMLWrapper
         SFMLWrapper();
         ~SFMLWrapper();
 
-        void wrCreateWindowSpecific(int width, int height, int bpp, bool vert_sync, int fps_limit, const std::string& title);
+        void wrCreateWindowSpecific(int width, int height, int m_bpp, bool m_vsync, int fps_limit, const std::string& title);
 
-        int GetWidth() const { return window.getSize().x; };
-        int GetHeight() const { return window.getSize().y; };
+        int width() const { return m_window.getSize().x; }
+        int height() const { return m_window.getSize().y; }
 
-        sf::Font& GetFont() { return font; };
-        sf::RenderWindow& GetWindow() { return window; };
+        sf::Font& font() { return m_font; }
+        sf::RenderWindow& window() { return m_window; }
 
-        float GetElapsedTimeInSeconds() { return clock.getElapsedTime().asSeconds(); };
+        float elapsedSeconds() { return m_clock.getElapsedTime().asSeconds(); }
 
         void wrResizeSpecific(int width, int height);
 
         void wrDrawSpecific();
 
-        void DrawText(const std::string& str, int font_size, const glm::vec2& pos);
-        void DrawText(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color);
+        void drawText(const std::string& str, int font_size, const glm::vec2& pos);
+        void drawText(const std::string& str, int font_size, const glm::vec2& pos, const glm::ivec4& color);
 
     private:
-        int bpp;
-        bool vert_sync;
+        int m_bpp;
+        bool m_vsync;
 
         //freetype::font_data ftfont;
 
-        sf::Text text12;
-        sf::Clock clock;
-        sf::Font font;
-        sf::View view;
-        sf::RenderWindow window;
+        sf::Text m_text12;
+        sf::Clock m_clock;
+        sf::Font m_font;
+        sf::View m_view;
+        sf::RenderWindow m_window;
 };
 
 }

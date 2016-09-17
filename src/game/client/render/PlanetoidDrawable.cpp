@@ -23,6 +23,8 @@
 #include <ceti/Logger.hpp> 
 //#include <ceti/StringUtils.hpp>
 
+PlanetoidDrawable::PlanetoidDrawable()
+{}
 
 PlanetoidDrawable::PlanetoidDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
     :
@@ -32,13 +34,13 @@ PlanetoidDrawable::PlanetoidDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
 /* virtual override */
 PlanetoidDrawable::~PlanetoidDrawable()
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~PlanetoidDrawable("+std::to_string(id())+")");
-    #endif
+//    #if CREATEDESTROY_LOG_ENABLED == 1
+//    Logger::Instance().Log("___::~PlanetoidDrawable("+std::to_string(id())+")");
+//    #endif
 }
 
 /* virtual override final */
-void PlanetoidDrawable::RenderStuffWhenFocusedInSpace(const jeti::Renderer& render)
+void PlanetoidDrawable::__renderStuffWhenFocusedInSpace(const jeti::Renderer& render)
 {
     //m_Orbit.DrawPath(render);
 }

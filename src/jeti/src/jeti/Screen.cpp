@@ -69,7 +69,7 @@ void Screen::init()
              
 void Screen::DrawFps()
 {    
-    float now_time = GetElapsedTimeInSeconds();
+    float now_time = elapsedSeconds();
     if ((now_time - last_time) > 1.0)
     {
         fps = frames_counter;

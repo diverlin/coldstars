@@ -110,13 +110,38 @@ bool isPointOnVisibleScreenArea(const glm::vec2& p, const glm::vec2& screen_wc)
 
 namespace view {
 
-Viewer::Viewer()
-{}
+SpaceViewer::SpaceViewer()
+{
 
-Viewer::~Viewer()
+}
+
+SpaceViewer::~SpaceViewer()
 {}                                    
 
-void Viewer::__clear()
+void
+SpaceViewer::__update(Starsystem* starsystem,
+                      const meti::vec3& lookFrom,
+                      const meti::vec3& lookTo,
+                      float lookFar)
+{
+    __clear();
+
+    VisibilityData visibilityData;
+    visibilityData.screen.worldcoord.x = lookTo.x;
+    visibilityData.screen.worldcoord.y = lookTo.y;
+    visibilityData.observer.center = lookFrom;
+    visibilityData.observer.radius = lookFar;
+
+    for(auto* star: starsystem->stars()) {
+        //addIfVisible(star, visibilityData);
+    }
+
+    for(auto* planet: starsystem->planets()) {
+//        addIfVisible(new PlanetDrawable(planet), visibilityData);
+    }
+}
+
+void SpaceViewer::__clear()
 {
     // entities
     m_stars.clear();
@@ -136,7 +161,7 @@ void Viewer::__clear()
     m_texts.clear();
 }
 
-void Viewer::addIfVisible(Star* star, const VisibilityData& data)
+void SpaceViewer::addIfVisible(Star* star, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(star->position(), star->size(), data.screen.worldcoord, data.screen.scale)) {
         const descriptor::Star& descriptor = global::get().descriptors().star().get(star->descriptorId());
@@ -150,14 +175,14 @@ void Viewer::addIfVisible(Star* star, const VisibilityData& data)
     }
 }
 
-void Viewer::addIfVisible(PlanetDrawable* planet, const VisibilityData& data)
+void SpaceViewer::addIfVisible(view::Planet* planet, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(planet->center(), planet->size(), data.screen.worldcoord, data.screen.scale)) {
        __add(planet);
     }
 }
 
-void Viewer::addIfVisible(AsteroidDrawable* asteroid, const VisibilityData& data)
+void SpaceViewer::addIfVisible(AsteroidDrawable* asteroid, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(asteroid->center(), asteroid->size(), data.screen.worldcoord, data.screen.scale)) {
         if (ceti::isPointInObserverRadius(asteroid->center(), data.observer.center, data.observer.radius)) {
@@ -166,7 +191,7 @@ void Viewer::addIfVisible(AsteroidDrawable* asteroid, const VisibilityData& data
     }
 }
 
-void Viewer::addIfVisible(ContainerDrawable* container, const VisibilityData& data)
+void SpaceViewer::addIfVisible(ContainerDrawable* container, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(container->center(), container->size(), data.screen.worldcoord, data.screen.scale)) {
         if (ceti::isPointInObserverRadius(container->center(), data.observer.center, data.observer.radius)) {
@@ -175,7 +200,7 @@ void Viewer::addIfVisible(ContainerDrawable* container, const VisibilityData& da
     }
 }
 
-void Viewer::addIfVisible(BulletDrawable* bullet, const VisibilityData& data)
+void SpaceViewer::addIfVisible(BulletDrawable* bullet, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(bullet->center(), bullet->size(), data.screen.worldcoord, data.screen.scale)) {
         if (ceti::isPointInObserverRadius(bullet->center(), data.observer.center, data.observer.radius)) {
@@ -184,7 +209,7 @@ void Viewer::addIfVisible(BulletDrawable* bullet, const VisibilityData& data)
     }
 }
 
-void Viewer::addIfVisible(BlackHoleDrawable* wormhole, const VisibilityData& data)
+void SpaceViewer::addIfVisible(BlackHoleDrawable* wormhole, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(wormhole->center(), wormhole->size(), data.screen.worldcoord, data.screen.scale)) {
         if (ceti::isPointInObserverRadius(wormhole->center(), data.observer.center, data.observer.radius)) {
@@ -193,7 +218,7 @@ void Viewer::addIfVisible(BlackHoleDrawable* wormhole, const VisibilityData& dat
     }
 }
 
-void Viewer::addIfVisible(ShipDrawable* ship, const VisibilityData& data)
+void SpaceViewer::addIfVisible(ShipDrawable* ship, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(ship->center(), ship->size(), data.screen.worldcoord, data.screen.scale)) {
         if (ceti::isPointInObserverRadius(ship->center(), data.observer.center, data.observer.radius)) {
@@ -202,7 +227,7 @@ void Viewer::addIfVisible(ShipDrawable* ship, const VisibilityData& data)
     }
 }
 
-void Viewer::addIfVisible(SpaceStationDrawable* spacestation, const VisibilityData& data)
+void SpaceViewer::addIfVisible(SpaceStationDrawable* spacestation, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(spacestation->center(), spacestation->size(), data.screen.worldcoord, data.screen.scale)) {
         if (ceti::isPointInObserverRadius(spacestation->center(), data.observer.center, data.observer.radius)) {
@@ -211,7 +236,7 @@ void Viewer::addIfVisible(SpaceStationDrawable* spacestation, const VisibilityDa
     }
 }
 
-void Viewer::addIfVisible(SatelliteDrawable* satellite, const VisibilityData& data)
+void SpaceViewer::addIfVisible(SatelliteDrawable* satellite, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(satellite->center(), satellite->size(), data.screen.worldcoord, data.screen.scale)) {
         if (ceti::isPointInObserverRadius(satellite->center(), data.observer.center, data.observer.radius)) {
@@ -220,7 +245,7 @@ void Viewer::addIfVisible(SatelliteDrawable* satellite, const VisibilityData& da
     }
 }
 
-void Viewer::addIfVisible(ShockWaveEffect* effect, const VisibilityData& data)
+void SpaceViewer::addIfVisible(ShockWaveEffect* effect, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(effect->center(), glm::vec2(600.0), data.screen.worldcoord, data.screen.scale)) {
         if (ceti::isPointInObserverRadius(effect->center(), data.observer.center, data.observer.radius)) {
@@ -229,7 +254,7 @@ void Viewer::addIfVisible(ShockWaveEffect* effect, const VisibilityData& data)
     }
 }
 
-void Viewer::addIfVisible(LazerTraceEffect* effect, const VisibilityData& data)
+void SpaceViewer::addIfVisible(LazerTraceEffect* effect, const VisibilityData& data)
 {
     //    if ( (isLineOnVisibleScreenArea(effect->GetStartPos(), effect->GetEndPos()))) {
     //        if (isObjectWithinRadarRange(effect, npc->vehicle()))
@@ -239,7 +264,7 @@ void Viewer::addIfVisible(LazerTraceEffect* effect, const VisibilityData& data)
     //    }
 }
 
-void Viewer::addIfVisible(jeti::BaseParticleSystem* effect, const VisibilityData& data)
+void SpaceViewer::addIfVisible(jeti::BaseParticleSystem* effect, const VisibilityData& data)
 {
     //    if (isRectOnVisibleScreenArea(effect->center(), 600, data.screen.worldcoord, data.screen.scale)) {
     //        if (isObjectWithinRadarRange(effect, npc->vehicle())) {
@@ -248,7 +273,7 @@ void Viewer::addIfVisible(jeti::BaseParticleSystem* effect, const VisibilityData
     //    }
 }
 
-void Viewer::addIfVisible(VerticalFlowText* effect, const VisibilityData& data)
+void SpaceViewer::addIfVisible(VerticalFlowText* effect, const VisibilityData& data)
 {
     if (isPointOnVisibleScreenArea(effect->center(), data.screen.worldcoord)) {
         m_texts.push_back(effect);
@@ -256,73 +281,73 @@ void Viewer::addIfVisible(VerticalFlowText* effect, const VisibilityData& data)
 }
 
 /// visible entities
-void Viewer::__add(StarDrawable* view)
+void SpaceViewer::__add(StarDrawable* view)
 {
     m_stars.push_back(view);
 }
 
-void Viewer::__add(PlanetDrawable* view)
+void SpaceViewer::__add(Planet* view)
 {
     m_planets.push_back(view);
 }
 
-void Viewer::__add(AsteroidDrawable* view)
+void SpaceViewer::__add(AsteroidDrawable* view)
 {
     m_asteroids.push_back(view);
 }
 
-void Viewer::__add(ContainerDrawable* view)
+void SpaceViewer::__add(ContainerDrawable* view)
 {
     m_containers.push_back(view);
 }
 
-void Viewer::__add(BulletDrawable* view)
+void SpaceViewer::__add(BulletDrawable* view)
 {
     m_bullets.push_back(view);
 }
 
-void Viewer::__add(BlackHoleDrawable* view)
+void SpaceViewer::__add(BlackHoleDrawable* view)
 {
     m_wormholes.push_back(view);
 }
 
-void Viewer::__add(ShipDrawable* view)
+void SpaceViewer::__add(ShipDrawable* view)
 {
     m_ships.push_back(view);
 }
 
-void Viewer::__add(SpaceStationDrawable* view)
+void SpaceViewer::__add(SpaceStationDrawable* view)
 {
     //m_satellites.push_back(view);
 }
 
-void Viewer::__add(SatelliteDrawable* view)
+void SpaceViewer::__add(SatelliteDrawable* view)
 {
     //m_spacestations.push_back(view);
 }
 
 /// visible effects
-void Viewer::__add(ShockWaveEffect* view)
+void SpaceViewer::__add(ShockWaveEffect* view)
 {
     m_shockwaves.push_back(view);
 }
 
-void Viewer::__add(LazerTraceEffect* view)
+void SpaceViewer::__add(LazerTraceEffect* view)
 {
     m_lazertraces.push_back(view);
 }
 
-void Viewer::__add(jeti::BaseParticleSystem* view)
+void SpaceViewer::__add(jeti::BaseParticleSystem* view)
 {
     m_particlesystems.push_back(view);
 }
 
-void Viewer::__add(VerticalFlowText* view)
+void SpaceViewer::__add(VerticalFlowText* view)
 {
     m_texts.push_back(view);
 }
 
-void Viewer::__renderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
+void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
 {   
     bool draw_background    = true;
     bool draw_volumetric    = true;
@@ -332,8 +357,8 @@ void Viewer::__renderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
     bool draw_robustSpaceObjects = true;
 
     float scale = jeti::Screen::get().GetScale();
-    int w = jeti::Screen::get().GetWidth();
-    int h = jeti::Screen::get().GetHeight();
+    int w = jeti::Screen::get().width();
+    int h = jeti::Screen::get().height();
     glm::vec2 world_coord(jeti::Screen::get().GetBottomLeft());
     
     render.ClearColorAndDepthBuffers();
@@ -391,7 +416,7 @@ void Viewer::__renderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
 
                 // resizeGl(w*scale, h*scale);
                 {
-                    for(PlanetDrawable* planet: m_planets) {
+                    for(Planet* planet: m_planets) {
                         //planet->Render_NEW(render);
                     }
 
@@ -523,16 +548,24 @@ void Viewer::__renderInSpace_NEW(jeti::Renderer& render, Starsystem* starsystem)
     //render.SetOrthogonalProjection(w, h);
 }
 
-void Viewer::renderSceneInSpace(Starsystem* starsystem, bool turn_ended, bool forceDraw_orbits, bool forceDraw_path)
+void SpaceViewer::render(Starsystem* starsystem,
+                         const meti::vec3& lookFrom,
+                         const meti::vec3& lookTo,
+                         float lookFar,
+                         bool turn_ended,
+                         bool forceDraw_orbits,
+                         bool forceDraw_path)
 {   
+    __update(starsystem, lookFrom, lookTo, lookFar);
+
     jeti::Renderer& renderer = jeti::Screen::get().renderer();
     jeti::Camera& camera = jeti::Screen::get().GetCamera();
-    int w = jeti::Screen::get().GetWidth();
-    int h = jeti::Screen::get().GetHeight();
+    int w = jeti::Screen::get().width();
+    int h = jeti::Screen::get().height();
     camera.Update(w, h);
     
     renderer.ComposeViewMatrix(camera.GetViewMatrix());
-    __renderInSpace_NEW(renderer, starsystem);
+    __renderInSpace_NEW(renderer);
 
     //resizeGl(w*scale, h*scale);
     //enable_BLEND();
@@ -570,7 +603,7 @@ void Viewer::renderSceneInSpace(Starsystem* starsystem, bool turn_ended, bool fo
     //resizeGl(w, h);
 } 
 
-void Viewer::__renderCollisionRadius(const jeti::Renderer& render) const
+void SpaceViewer::__renderCollisionRadius(const jeti::Renderer& render) const
 {
     //render.enable_BLEND();
     {   //a;pitodorender
@@ -591,7 +624,7 @@ void Viewer::__renderCollisionRadius(const jeti::Renderer& render) const
     //render.disable_BLEND();
 }
 
-void Viewer::__renderAxis(const jeti::Renderer& render) const
+void SpaceViewer::__renderAxis(const jeti::Renderer& render) const
 {    
     //render.enable_DEPTH();
     //alpitodorender

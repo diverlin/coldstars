@@ -24,7 +24,7 @@
 
 namespace core {
 
-struct Ident {
+struct Id {
     type::entity type = type::entity::NONE_ID;
     type::entity subtype = type::entity::NONE_ID;
     type::entity subsubtype = type::entity::NONE_ID;

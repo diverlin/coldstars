@@ -26,19 +26,22 @@
 
 #include <jeti/Render.hpp>
 
+namespace view {
 
-PlanetDrawable::PlanetDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
+Planet::Planet(model::Planet* planet)
     :
-      PlanetoidDrawable(texture, mesh)
-{    
+      PlanetoidDrawable()
+{
+//    setTexture(planet->texture());
+//    setMesh(planet->mesh());
 }
 
 /* virtual */
-PlanetDrawable::~PlanetDrawable()
+Planet::~Planet()
 {
-    #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~PlanetDrawable("+std::to_string(id())+")");
-    #endif
+//    #if CREATEDESTROY_LOG_ENABLED == 1
+//    Logger::Instance().Log("___::~PlanetDrawable("+std::to_string(id())+")");
+//    #endif
    
 //    for (BaseDecor* decor : m_Decorations)
 //    {
@@ -70,3 +73,4 @@ PlanetDrawable::~PlanetDrawable()
 //    }
 //}
 
+} // namespace view

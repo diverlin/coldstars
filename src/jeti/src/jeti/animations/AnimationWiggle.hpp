@@ -28,7 +28,7 @@ class AnimationWiggle : public BaseAnimationRotation
         AnimationWiggle(float, float);
         virtual ~AnimationWiggle();
 
-        virtual void Update(glm::quat&, const glm::vec3&) override final;
+        virtual void update(glm::quat&, const glm::vec3&) override final;
         
     private:
         bool m_Clockwise;

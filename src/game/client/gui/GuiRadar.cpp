@@ -38,8 +38,8 @@ GuiRadar::GuiRadar()
     textureOb_range             = GuiTextureObCollector::Instance().radar_range;
         
     scale = RADAR_SCALE;
-    int screen_w = jeti::Screen::get().GetWidth();
-    int screen_h = jeti::Screen::get().GetHeight();
+    int screen_w = jeti::Screen::get().width();
+    int screen_h = jeti::Screen::get().height();
     Resize(screen_w, screen_h);
 }
 
@@ -59,7 +59,7 @@ void GuiRadar::ResetData()
 /*virtual final*/ 
 void GuiRadar::UpdateUnique(Player* player)
 {        
-    screenrect.set(rect.center() + jeti::Screen::get().GetBottomLeftScreenWC() * scale, (int)(jeti::Screen::get().GetWidth() * scale), (int)(jeti::Screen::get().GetHeight() * scale));
+    screenrect.set(rect.center() + jeti::Screen::get().GetBottomLeftScreenWC() * scale, (int)(jeti::Screen::get().width() * scale), (int)(jeti::Screen::get().height() * scale));
     const MouseData& data_mouse = player->GetCursor().GetMouseData();
     if (rect.CheckRoundInteraction(data_mouse.pos_screencoord, /*radius=*/70.0) == true)
     {

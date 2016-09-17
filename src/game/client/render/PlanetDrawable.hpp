@@ -21,16 +21,24 @@
 
 #include "PlanetoidDrawable.hpp"
 
-class PlanetDrawable : public PlanetoidDrawable
-{
-    public:
-        PlanetDrawable(jeti::TextureOb*, jeti::Mesh*);
-        virtual ~PlanetDrawable() override final;
+namespace model {
+class Planet;
+} // namespace model
 
-    private:        
-        //virtual void UpdateInfo() override final;
+namespace view {
+
+class Planet : public PlanetoidDrawable
+{
+public:
+    Planet(model::Planet*);
+    virtual ~Planet() override final;
+
+private:
+    //virtual void UpdateInfo() override final;
 }; 
- 
+
+} // namespace view
+
 
 
 

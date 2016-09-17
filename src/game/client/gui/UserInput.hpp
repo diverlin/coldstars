@@ -16,35 +16,30 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-
-#ifndef USERINPUT_HPP
-#define USERINPUT_HPP
-
+#pragma once
 
 #include <SFML/Window.hpp>
 
-class UserInputManagerInSpace;
-
+class UserInputInSpace;
 
 class UserInput
 {
-    public:
-        static UserInput& Instance();
-        ~UserInput() {};
-        
-        void Update();
-        
-    private:
-        UserInput() {};
-        UserInput(const UserInput&) = delete;
-        UserInput& operator=(const UserInput&) = delete;
-        
-        sf::Event m_Event;        
-        
-        std::vector<sf::Keyboard::Key> m_KeyboardCodesPressed_vec;
-        std::vector<sf::Keyboard::Key> m_MouseCodesPressed_vec;
+public:
+    static UserInput& get();
+    ~UserInput() {}
+
+    void update();
+
+private:
+    UserInput() {}
+    UserInput(const UserInput&) = delete;
+    UserInput& operator=(const UserInput&) = delete;
+
+    sf::Event m_event;
+
+    std::vector<sf::Keyboard::Key> m_keyboardPressedCodes;
+    std::vector<sf::Keyboard::Key> m_mousePressedCodes;
     
-    friend class UserInputManagerInSpace;
+    friend class UserInputInSpace;
 };
 
-#endif 
