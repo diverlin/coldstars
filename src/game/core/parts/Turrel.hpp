@@ -26,7 +26,7 @@ class SpaceObject;
 #include <common/constants.hpp>
 #include <ceti/Orientation.hpp>
 
-class Turrel : public ceti::Orientation
+class Turrel : public ceti::control::Orientation
 {
     public:
         Turrel(ItemSlot*);
@@ -36,12 +36,12 @@ class Turrel : public ceti::Orientation
         
         virtual void putChildrenToGarbage() const {};
         
-        virtual void Save(boost::property_tree::ptree&) const {};
-        virtual void Load(const boost::property_tree::ptree&) {};
-        virtual void Resolve() {};
+//        virtual void Save(boost::property_tree::ptree&) const {}
+//        virtual void Load(const boost::property_tree::ptree&) {}
+//        virtual void Resolve() {}
            
     private:                       
-        ItemSlot* slot;
+        ItemSlot* m_slot = nullptr;
 }; 
 
 

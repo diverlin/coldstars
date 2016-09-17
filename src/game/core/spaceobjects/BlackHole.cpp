@@ -88,7 +88,7 @@ void BlackHole::ResolveData()
 {
     //LOG(" BlackHole("+std::to_string(id())+")::ResolveData");
     
-    starsystem()->add(this, data_unresolved_Orientation.center); 
+    //starsystem()->add(this, data_unresolved_Orientation.center);
 }
  
 /*virtual*/

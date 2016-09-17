@@ -25,8 +25,10 @@
 #include <ceti/Logger.hpp>
 
 Turrel::Turrel(ItemSlot* slot)
+    :
+      ceti::control::Orientation(new ceti::model::Orientation)
 {
-        this->slot = slot;
+    m_slot = slot;
 }
 
 Turrel::~Turrel()
@@ -36,13 +38,13 @@ void Turrel::Render(float turrel_angle_inD)
 {        
     //if (slot->GetTarget() != nullptr)
     //{
-        //float _tur_xl = slot->GetTarget()->center().x - center().x;
-        //float _tur_yl = slot->GetTarget()->center().y - center().y;
+    //float _tur_xl = slot->GetTarget()->center().x - center().x;
+    //float _tur_yl = slot->GetTarget()->center().y - center().y;
 
-        //float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
-        //turrel_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
-    //}     
+    //float _tur_angle_inR = atan2(_tur_yl, _tur_xl);
+    //turrel_angle_inD = _tur_angle_inR * RADIAN_TO_DEGREE_RATE;
+    //}
 
     //drawQuad(textureOb(), center(), size(), turrel_angle_inD);
 }        
-                
+

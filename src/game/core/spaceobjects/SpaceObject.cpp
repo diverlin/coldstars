@@ -24,6 +24,8 @@
 #include <ceti/Logger.hpp>
 
 SpaceObject::SpaceObject()
+    :
+      ceti::control::Orientation(new ceti::model::Orientation)
 {}
 
 /* virtual override */

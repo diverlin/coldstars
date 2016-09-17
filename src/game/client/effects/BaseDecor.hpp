@@ -26,11 +26,13 @@ namespace jeti {
 class Renderer;
 }
 
-class BaseDecor : public ceti::Orientation, public Base
+class BaseDecor : public ceti::control::Orientation, public Base
 {
-    public:
-        BaseDecor() {}
-        ~BaseDecor() {}
-            
-        virtual void Render(const jeti::Renderer&, const glm::vec3&) = 0;
+public:
+    BaseDecor():
+    ceti::control::Orientation(new ceti::model::Orientation)
+    {}
+    ~BaseDecor() {}
+
+    virtual void Render(const jeti::Renderer&, const glm::vec3&) = 0;
 }; 
