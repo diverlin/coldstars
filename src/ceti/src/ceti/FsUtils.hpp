@@ -20,10 +20,12 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 namespace ceti {
 namespace filesystem {
 
+std::vector<std::string> getFilesList(const std::string& root, const std::string& ext = ".*");
 bool is_file_exists(const std::string& fname);
 bool create_file(const std::string& fname);
 void touch_file(const std::string& fname);

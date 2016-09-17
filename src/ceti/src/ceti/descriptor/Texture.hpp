@@ -29,6 +29,32 @@
 namespace ceti {
 namespace descriptor {
 
+class Association {
+public:
+    Association():
+        m_race(0)
+      , m_type(0)
+    {}
+
+    Association(int race, int type = 0):
+        m_race(race)
+      , m_type(type)
+    {}
+
+private:
+    int m_race = 0;
+    int m_type = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & m_race;
+        ar & m_type;
+    }
+};
+
 class Animation {
 public:
     Animation():
@@ -70,7 +96,6 @@ class Material : public Base
 public:
     Material(int type,
             const std::string& path,
-            const Animation& animation = Animation(),
             bool alpha = true);
 
     Material(const std::string& data);
@@ -82,10 +107,15 @@ public:
 
     const std::string& path() const { return m_path; }
 
+
+    void setAnimation(const Animation& animation) { m_animation = animation; }
+    void setAssociation(const Association& association) { m_association = association; }
+
 private:
     std::string m_path = "";
-    Animation m_animation;
     bool m_alpha = true;
+    Animation m_animation;
+    Association m_association;
 
 private:
     friend class boost::serialization::access;
@@ -94,8 +124,9 @@ private:
     {
         ar & boost::serialization::base_object<Base>(*this);
         ar & m_path;
-        ar & m_animation;
         ar & m_alpha;
+        ar & m_animation;
+        ar & m_association;
     }
 };
 

@@ -44,13 +44,13 @@ public:
 
     bool operator==(const Mesh& rhs) const;
 
-    const std::string& model() const { return m_model; }
-    const std::string& texture() const { return m_texture; }
+    const std::string& model() const { return m_modelPath; }
+    const std::string& texture() const { return m_texturePath; }
     const glm::vec3& orientation() const { return m_orientation; }
 
 private:
-    std::string m_model = "";
-    std::string m_texture = "";
+    std::string m_modelPath = "";
+    std::string m_texturePath = "";
     meti::vec3 m_orientation = meti::vec3(1.0, 0.0, 0.0);
 
 private:
@@ -59,8 +59,8 @@ private:
     void serialize(Archive & ar, const unsigned int version)
     {
         ar & boost::serialization::base_object<Base>(*this);
-        ar & m_model;
-        ar & m_texture;
+        ar & m_modelPath;
+        ar & m_texturePath;
         ar & m_orientation;
     }
 };

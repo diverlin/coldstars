@@ -25,14 +25,11 @@ namespace descriptor {
 
 Material::Material(int type,
                    const std::string& path,
-                   const Animation& animation,
                    bool alpha)
     :
       Base(type)
     , m_path(path)
-    , m_animation(animation)
     , m_alpha(alpha)
-
 {
 }
 

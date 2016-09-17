@@ -36,7 +36,7 @@ k_30_0_0.png << ship.png
 ##################################
 filename     << original filename 
 k_41_0_0.png << Cargo1.bmp
-k_00_0_0.png << Bship.bmp
+race0_ranger_00.png << Bship.bmp
 k_01_0_0.png << Bship.bmp
 k_44_0_0.png << Hunter1.bmp
 ##################################
