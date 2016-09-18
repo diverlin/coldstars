@@ -86,7 +86,7 @@
 
 void EntityManager::clear()
 {
-    for (std::map<int_t, Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++)
+    for (std::map<int_t, core::Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++)
     {
         //LOG("________EntityManager::Clear, delete " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
         delete iterator->second;
@@ -95,10 +95,11 @@ void EntityManager::clear()
     m_entities_map.clear();
 }
 
-void EntityManager::reg(Base* entity)
+void EntityManager::reg(core::Base* entity)
 {   
     assert(entity);
     if (entity->id() == NONE) {
+        //assert(false);
         // TODO fixme
         entity->setId(global::get().idGenerator().nextId());
     }
@@ -111,10 +112,10 @@ void EntityManager::reg(Base* entity)
     m_entities_map.insert(std::make_pair(entity->id(), entity));
 }
 
-Base* EntityManager::get(const int_t& id) const
+core::Base* EntityManager::get(const int_t& id) const
 {
     LOG(std::string("EntityManager::entity requested_id=") << std::to_string(id));
-    std::map<int_t, Base*>::const_iterator slice = m_entities_map.find(id);
+    std::map<int_t, core::Base*>::const_iterator slice = m_entities_map.find(id);
     assert(slice->second);
     LOG(std::string("type=") << slice->second->dataTypeStr() << std::endl);
     return slice->second;
@@ -122,7 +123,7 @@ Base* EntityManager::get(const int_t& id) const
 
 Player* EntityManager::player() const
 {
-    for (std::map<int_t, Base*>::const_iterator it=m_entities_map.begin(); it!=m_entities_map.end(); ++it) {
+    for (std::map<int_t, core::Base*>::const_iterator it=m_entities_map.begin(); it!=m_entities_map.end(); ++it) {
         if (it->second->type() == type::entity::PLAYER_ID) {
             return (Player*)it->second;
         }
@@ -130,7 +131,7 @@ Player* EntityManager::player() const
     return nullptr;
 }
 
-void EntityManager::removeEntity(Base* entity)
+void EntityManager::removeEntity(core::Base* entity)
 {    
     //LOG("________EntityManager::RemoveEntity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
 
@@ -146,7 +147,7 @@ void EntityManager::saveEvent(const std::string& filename)
 {
     boost::property_tree::ptree save_ptree;
     
-    for (std::map<int_t, Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
+    for (std::map<int_t, core::Base*>::iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
         //LOG("saving " + getTypeStr(iterator->second->typeId()) + "(" +std::to_string(iterator->second->typeId()) +") " + getTypeStr(iterator->second->subTypeId()) + "(" + std::to_string(iterator->second->subTypeId()) + ") id=" + std::to_string(iterator->second->id()));
         iterator->second->Save(save_ptree);
     }
@@ -635,7 +636,7 @@ void EntityManager::loadPass0(const std::string& filename)
 void EntityManager::loadPass1() const
 {
     LOG("RESOLVING DEPENDENCY START");
-    for (std::map<int_t, Base*>::const_iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
+    for (std::map<int_t, core::Base*>::const_iterator iterator = m_entities_map.begin(); iterator != m_entities_map.end(); iterator++) {
         LOG("Load() in " + iterator->second->dataTypeStr());
         iterator->second->Resolve();
     }
@@ -673,7 +674,7 @@ bool EntityManager::updateLoadRequest()
 }
 
 
-void EntityManager::addToGarbage(Base* entity)
+void EntityManager::addToGarbage(core::Base* entity)
 {
     //LOG("EntetiesManager::AddToGarbage entity " + getTypeStr(entity->typeId()) + "(" +std::to_string(entity->typeId()) +") " + getTypeStr(entity->subTypeId()) + "(" + std::to_string(entity->subTypeId()) + ") id=" + std::to_string(entity->id()));
     for (unsigned int i=0; i<m_garbage.size(); i++) {

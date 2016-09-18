@@ -34,7 +34,7 @@ struct UnresolvedDataRoom
     int owner_kosmoport_id;
 };
 
-class Room : public Base
+class Room : public core::Base
 {
         public: 
                 Room();

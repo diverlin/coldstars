@@ -38,7 +38,7 @@ struct UnresolvedDataBaseItem
     int_t item_slot_id;
 };
 
-class Base : public ::Base
+class Base : public ::core::Base
 {
 public:
     Base();

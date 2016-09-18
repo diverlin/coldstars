@@ -20,6 +20,8 @@
 #include <ceti/Logger.hpp>
 #include <ceti/StringUtils.hpp>
 
+namespace core {
+
 Base::Base()
     :
       m_mesh_id(0),
@@ -66,3 +68,5 @@ void Base::ResolveData()
 {
     LOG(" Base("+std::to_string(id())+")::ResolveDataUniqueBase");
 }
+
+} // namespace core

@@ -43,7 +43,7 @@ struct UnresolvedDataNpc
     Task microtask;
 };
 
-class Npc : public Base
+class Npc : public core::Base
 {
 public:
     Npc(int, type::entity, type::entity);

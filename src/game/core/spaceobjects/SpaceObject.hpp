@@ -32,7 +32,7 @@ struct UnresolvedDataSpaceObject
     int starsystem_id;
 }; 
 
-class SpaceObject : public ceti::control::Orientation, public Base
+class SpaceObject : public ceti::control::Orientation, public core::Base
 {
 public:
     SpaceObject();
@@ -106,3 +106,4 @@ private:
 
     friend class BaseVehicleBuilder;
 };
+
