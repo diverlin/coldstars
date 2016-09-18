@@ -38,7 +38,7 @@ public:
     RocketBuilder();
     ~RocketBuilder();
 
-    Rocket* createTemplate(id_type id = NONE) const;
+    Rocket* createTemplate(int_t id = NONE) const;
     Rocket* getNew(type::tech tech_level = type::tech::NONE, type::race race_id = type::race::NONE_ID, int ammo_max_orig = NONE, int damage_orig = NONE, int radius_orig = NONE) const;
 
 private:

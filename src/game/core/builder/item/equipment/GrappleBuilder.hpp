@@ -37,7 +37,7 @@ public:
     ~GrappleBuilder();
 
     Grapple* getNew() const;
-    Grapple* createTemplate(id_type id = NONE) const;
+    Grapple* createTemplate(int_t id = NONE) const;
     Grapple* getNew(const descriptor::BaseOLD&) const;
 
 private:

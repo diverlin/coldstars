@@ -48,7 +48,7 @@ public:
     static Star* getNew(const descriptor::BaseOLD&);
 
 private:
-    static Star* __getNewTemplate(id_type id = NONE);
+    static Star* __getNewTemplate(int_t id = NONE);
 };
 
 

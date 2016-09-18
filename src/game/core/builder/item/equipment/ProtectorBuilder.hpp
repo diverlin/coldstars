@@ -40,7 +40,7 @@ public:
 
     std::vector<Protector*> getNew(int) const;
     item::equipment::Protector* getNew() const;
-    item::equipment::Protector* createTemplate(id_type id = NONE) const;
+    item::equipment::Protector* createTemplate(int_t id = NONE) const;
     item::equipment::Protector* getNew(const descriptor::BaseOLD&) const;
 
 private:

@@ -37,7 +37,7 @@ GrappleBuilder::GrappleBuilder()
 GrappleBuilder::~GrappleBuilder()
 {}
 
-Grapple* GrappleBuilder::createTemplate(id_type id) const
+Grapple* GrappleBuilder::createTemplate(int_t id) const
 {
     Grapple* grapple = new Grapple(id);
     assert(grapple);

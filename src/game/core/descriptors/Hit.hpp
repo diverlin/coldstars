@@ -6,7 +6,7 @@ namespace descriptor {
 
 class Hit : public BaseOLD {
 public:
-    Hit(const id_type& agressor, const id_type& victim, int damage);
+    Hit(const int_t& agressor, const int_t& victim, int damage);
     Hit(const std::string& data);
 };
 

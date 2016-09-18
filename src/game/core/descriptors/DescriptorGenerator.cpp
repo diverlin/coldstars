@@ -41,7 +41,7 @@ namespace descriptor {
 
 /* world */
 descriptor::Galaxy
-Generator::getNewGalaxyDescriptor(const std::vector<id_type>& sectors) {
+Generator::getNewGalaxyDescriptor(const std::vector<int_t>& sectors) {
     descriptor::Galaxy descriptor;
     int num = meti::getRandInt(1,3);
     for(int i=0; i<num; ++i) {
@@ -51,7 +51,7 @@ Generator::getNewGalaxyDescriptor(const std::vector<id_type>& sectors) {
 }
 
 descriptor::Sector
-Generator::getNewSectorDescriptor(const std::vector<id_type>& starsystems) {
+Generator::getNewSectorDescriptor(const std::vector<int_t>& starsystems) {
     descriptor::Sector descriptor;
     int num = meti::getRandInt(1,3);
     for(int i=0; i<num; ++i) {

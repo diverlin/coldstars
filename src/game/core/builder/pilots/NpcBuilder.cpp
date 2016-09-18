@@ -38,7 +38,7 @@ NpcBuilder::NpcBuilder()
 NpcBuilder::~NpcBuilder()
 {}
 
-Npc* NpcBuilder::createTemplate(type::entity subtype_id, type::entity subsubtype_id, id_type id) const
+Npc* NpcBuilder::createTemplate(type::entity subtype_id, type::entity subsubtype_id, int_t id) const
 {
     Npc* npc = new Npc(id, subtype_id, subsubtype_id);
     assert(npc);

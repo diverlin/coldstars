@@ -39,7 +39,7 @@ public:
     static Ship* getNew(const std::string&);
 
 private:
-    static Ship* __getNewTemplate(id_type);
+    static Ship* __getNewTemplate(int_t);
     static void __createInternals(Ship*, const descriptor::BaseOLD&);
 }; 
 

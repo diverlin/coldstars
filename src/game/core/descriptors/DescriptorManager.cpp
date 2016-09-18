@@ -55,7 +55,7 @@ void
 Manager::add(const BaseOLD& descriptor)
 {
     //std::cout<<"add descriptor with type"<<descriptor::typeStr((descriptor::Type)descriptor.type())<<std::endl;
-    const id_type id = descriptor.id();
+    const int_t id = descriptor.id();
     int type = descriptor.type();
 
     {
@@ -90,7 +90,7 @@ Manager::getRand(const Type& type)
 }
 
 BaseOLD
-Manager::get(const id_type& id)
+Manager::get(const int_t& id)
 {
     const auto it = m_descriptors.find(id);
     if (it != m_descriptors.end()) {

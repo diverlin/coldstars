@@ -54,7 +54,7 @@ public:
         }
     }
 
-    const T& get(const id_type& id) const {
+    const T& get(const int_t& id) const {
         auto it = m_descriptors.find(id);
         if (it != m_descriptors.end()) {
             return it->second;

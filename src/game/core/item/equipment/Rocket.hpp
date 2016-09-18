@@ -29,7 +29,7 @@ namespace equipment {
 class Rocket : public Base
 { 
        public:
-        Rocket(const id_type& id);
+        Rocket(const int_t& id);
         virtual ~Rocket();
         
         void SetAmmoMaxOrig(int ammo_max_orig) { m_ammo_max_orig = ammo_max_orig; }

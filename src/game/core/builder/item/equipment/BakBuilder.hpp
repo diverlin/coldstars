@@ -43,7 +43,7 @@ public:
     static Bak* getNew(const std::string&);
 
 private:
-    static Bak* __createTemplate(id_type);
+    static Bak* __createTemplate(int_t);
     static void __createInternals(item::equipment::Bak*, const descriptor::BaseOLD&);
 }; 
 

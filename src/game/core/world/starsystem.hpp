@@ -119,7 +119,7 @@ class Starsystem : public SpaceObject
 //    using Vehicles = std::vector<Vehicle*>;
 
     public:
-        Starsystem(const id_type& id = NONE);
+        Starsystem(const int_t& id = NONE);
         ~Starsystem();
         bool operator==(const Starsystem& rhs) const;
         bool operator!=(const Starsystem& rhs) const;

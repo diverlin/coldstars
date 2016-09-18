@@ -33,7 +33,7 @@
 namespace item {
 namespace equipment {
 
-Grapple::Grapple(const id_type& id)
+Grapple::Grapple(const int_t& id)
     :
       m_strength_orig(0),
       m_radius_orig(0),

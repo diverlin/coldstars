@@ -39,7 +39,7 @@ PlanetBuilder::PlanetBuilder()
 PlanetBuilder::~PlanetBuilder()
 {}
 
-Planet* PlanetBuilder::__createTemplate(id_type id)
+Planet* PlanetBuilder::__createTemplate(int_t id)
 {
     Planet* planet = new Planet(id);
     assert(planet);

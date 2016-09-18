@@ -32,7 +32,7 @@ class NpcBuilder
         NpcBuilder();
         ~NpcBuilder();
         
-        Npc* createTemplate(type::entity, type::entity, id_type id = NONE) const;
+        Npc* createTemplate(type::entity, type::entity, int_t id = NONE) const;
         Npc* create(type::race, type::entity, type::entity) const;
                                        
     private:

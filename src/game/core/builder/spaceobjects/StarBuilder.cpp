@@ -35,7 +35,7 @@ StarBuilder::StarBuilder()
 StarBuilder::~StarBuilder()
 {}
 
-Star* StarBuilder::__getNewTemplate(id_type id)
+Star* StarBuilder::__getNewTemplate(int_t id)
 { 
     Star* star = new Star(id);
     assert(star);

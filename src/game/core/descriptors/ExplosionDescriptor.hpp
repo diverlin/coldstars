@@ -11,10 +11,10 @@ namespace descriptor {
 
 class Explosion {
     public:
-        Explosion(const id_type& starsystem_id, const glm::vec3& center, int damage, int radius);
+        Explosion(const int_t& starsystem_id, const glm::vec3& center, int damage, int radius);
         Explosion(const std::string& data);
 
-        id_type starsystem_id = 0;
+        int_t starsystem_id = 0;
         glm::vec3 center;
         int damage = 0;
         int radius = 0;

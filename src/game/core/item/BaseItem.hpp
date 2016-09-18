@@ -35,7 +35,7 @@ namespace item {
 struct UnresolvedDataBaseItem
 {
     std::string textureOb_path;
-    id_type item_slot_id;
+    int_t item_slot_id;
 };
 
 class Base : public ::Base

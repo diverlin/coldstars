@@ -37,7 +37,7 @@ public:
     ~DroidBuilder();
 
     Droid* getNew() const;
-    Droid* createTemplate(id_type id = NONE) const;
+    Droid* createTemplate(int_t id = NONE) const;
     Droid* getNew(const descriptor::BaseOLD&) const;
 
 private:

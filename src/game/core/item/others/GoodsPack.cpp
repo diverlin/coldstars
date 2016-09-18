@@ -110,7 +110,7 @@ void GoodsPack::ResolveData()
 }
 
 
-GoodsPack* GetNewGoodsPack(type::entity subtype_id, const id_type& id)
+GoodsPack* GetNewGoodsPack(type::entity subtype_id, const int_t& id)
 {
 //    jeti::Mesh* mesh = MeshCollector::Instance().getMesh(TYPE::MESH::PLANE_ID);
 //    jeti::TextureOb* texOb = TextureCollector::Instance().getTextureByTypeId(TYPE::TEXTURE::CONTAINER_ID);

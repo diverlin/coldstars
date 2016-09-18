@@ -43,7 +43,7 @@ class SpaceStationBuilder : public BaseVehicleBuilder
         SpaceStationBuilder();
         ~SpaceStationBuilder();
         
-        SpaceStation* createTemplate(id_type id = NONE) const;
+        SpaceStation* createTemplate(int_t id = NONE) const;
         SpaceStation* create() const;
        
     private:

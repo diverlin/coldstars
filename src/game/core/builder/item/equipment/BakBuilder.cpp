@@ -49,8 +49,8 @@ Bak*
 BakBuilder::getNew(const descriptor::BaseOLD& descr)
 {
     descriptor::BaseOLD descriptor(descr.data());
-    id_type id = NONE;
-    if (descr.type() == (id_type)descriptor::Type::DESCRIPTOR) {
+    int_t id = NONE;
+    if (descr.type() == (int_t)descriptor::Type::DESCRIPTOR) {
         descriptor = global::get().descriptors().get(descr.descriptor());
         id = descr.objId();
     }
@@ -68,7 +68,7 @@ BakBuilder::getNew(const std::string& data)
 }
 
 Bak*
-BakBuilder::__createTemplate(id_type id)
+BakBuilder::__createTemplate(int_t id)
 {
     if (id == NONE) {
         id = global::get().idGenerator().nextId();

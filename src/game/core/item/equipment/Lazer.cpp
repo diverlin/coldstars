@@ -34,7 +34,7 @@
 namespace item {
 namespace equipment {
 
-Lazer::Lazer(const id_type& id)
+Lazer::Lazer(const int_t& id)
     :
       m_damage_orig(0),
       m_radius_orig(0)

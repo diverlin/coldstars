@@ -52,7 +52,7 @@ public:
         }
     }
 
-    const T& get(const id_type& id) const {
+    const T& get(const int_t& id) const {
         std::cout<<"MManager get(descriptor.id="<<id<<")"<<std::endl;
         const auto it = m_descriptors.find(id);
         if (it != m_descriptors.end()) {
@@ -63,14 +63,14 @@ public:
     }
 
     const T& random() const {
-        id_type key = meti::getRand(idList());
+        int_t key = meti::getRand(idList());
         auto it = m_descriptors.find(key);
         assert(it != m_descriptors.end());
         return it->second;
     }
 
-    std::vector<id_type> idList() const {
-        std::vector<id_type> result;
+    std::vector<int_t> idList() const {
+        std::vector<int_t> result;
         for (auto it: m_descriptors) {
             result.push_back(it.first);
         }
@@ -79,7 +79,7 @@ public:
     }
 
 private:
-    std::map<id_type, T> m_descriptors;
+    std::map<int_t, T> m_descriptors;
 };
 
 class Manager
@@ -90,7 +90,7 @@ public:
 
     void add(const BaseOLD&);
     BaseOLD getRand(const Type&);
-    BaseOLD get(const id_type&);
+    BaseOLD get(const int_t&);
 
     void save();
     void load();
@@ -131,7 +131,7 @@ private:
     Collector<Mesh> m_mesh;
     Collector<Material> m_material;
 
-    std::map<id_type, BaseOLD> m_descriptors;
+    std::map<int_t, BaseOLD> m_descriptors;
     std::map<int, std::vector<BaseOLD>> m_descriptorsTypes;
 
     void __clear();

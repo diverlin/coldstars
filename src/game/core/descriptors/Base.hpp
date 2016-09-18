@@ -167,12 +167,12 @@ public:
     }
     ~BBase() {}
 
-    const id_type& id() const { return m_id; }
-    const id_type& texture() const { return m_texture; }
-    const id_type& mesh() const { return m_mesh; }
+    const int_t& id() const { return m_id; }
+    const int_t& texture() const { return m_texture; }
+    const int_t& mesh() const { return m_mesh; }
 
-    void setTexture(const id_type& texture) { m_texture = texture; }
-    void setMesh(const id_type& mesh) { m_mesh = mesh; }
+    void setTexture(const int_t& texture) { m_texture = texture; }
+    void setMesh(const int_t& mesh) { m_mesh = mesh; }
     virtual std::string info() const {
         std::string result;
         result += std::string("id=") + std::to_string(m_id);
@@ -182,9 +182,9 @@ public:
     }
 
 protected:
-    std::string _str(const std::string& label, const std::vector<id_type>& ids) const {
+    std::string _str(const std::string& label, const std::vector<int_t>& ids) const {
         std::string result = label;
-        for (const id_type& id: ids) {
+        for (const int_t& id: ids) {
             result += std::to_string(id) + ",";
         }
         return result;
@@ -200,9 +200,9 @@ private:
     }
 
 private:
-    id_type m_id = -1;
-    id_type m_texture = -1;
-    id_type m_mesh = -1;
+    int_t m_id = -1;
+    int_t m_texture = -1;
+    int_t m_mesh = -1;
 
     static IdGenerator m_idGenerator;
 };
@@ -218,63 +218,63 @@ public:
 
     bool operator==(const BaseOLD& rhs) const;
 
-    const id_type& texture() const;
-    const id_type& mesh() const;
+    const int_t& texture() const;
+    const int_t& mesh() const;
 
-    const id_type& id() const;
-    const id_type& objId() const;
-    const id_type& type() const;
-    const id_type& objType() const;
-    const id_type& descriptor() const;
-    const id_type& race() const;
-    const id_type& damage() const;
-    const id_type& radius() const;
-    const id_type& tech() const;
-    const id_type& modulesNum() const;
-    const id_type& mass() const;
-    const id_type& conditionMax() const;
-    const id_type& deterioration() const;
-    const id_type& fuelMax() const;
-    const id_type& speed() const;
-    const id_type& hyper() const;
-    const id_type& repair() const;
-    const id_type& strength() const;
-    const id_type& scan() const;
-    const id_type& protection() const;
-    const id_type& price() const;
+    const int_t& id() const;
+    const int_t& objId() const;
+    const int_t& type() const;
+    const int_t& objType() const;
+    const int_t& descriptor() const;
+    const int_t& race() const;
+    const int_t& damage() const;
+    const int_t& radius() const;
+    const int_t& tech() const;
+    const int_t& modulesNum() const;
+    const int_t& mass() const;
+    const int_t& conditionMax() const;
+    const int_t& deterioration() const;
+    const int_t& fuelMax() const;
+    const int_t& speed() const;
+    const int_t& hyper() const;
+    const int_t& repair() const;
+    const int_t& strength() const;
+    const int_t& scan() const;
+    const int_t& protection() const;
+    const int_t& price() const;
 
     //vehicle
-    const id_type& space() const;
-    const id_type& armor() const;
-    const id_type& temperature() const;
-    const id_type& drawTurrels() const;
-    const id_type& size() const;
-    const id_type& bakSlotNum() const;
-    const id_type& driveSlotNum() const;
-    const id_type& droidSlotNum() const;
+    const int_t& space() const;
+    const int_t& armor() const;
+    const int_t& temperature() const;
+    const int_t& drawTurrels() const;
+    const int_t& size() const;
+    const int_t& bakSlotNum() const;
+    const int_t& driveSlotNum() const;
+    const int_t& droidSlotNum() const;
 #ifdef USE_EXTRA_EQUIPMENT
     const id_type& energizerSlotNum() const;
     const id_type& freezerSlotNum() const;
 #endif
-    const id_type& grappleSlotNum() const;
-    const id_type& protectorSlotNum() const;
-    const id_type& radarSlotNum() const;
-    const id_type& scanerSlotNum() const;
-    const id_type& weaponSlotNum() const;
-    const id_type& artefactSlotNum() const;
-    const id_type& cargoSlotNum() const;
+    const int_t& grappleSlotNum() const;
+    const int_t& protectorSlotNum() const;
+    const int_t& radarSlotNum() const;
+    const int_t& scanerSlotNum() const;
+    const int_t& weaponSlotNum() const;
+    const int_t& artefactSlotNum() const;
+    const int_t& cargoSlotNum() const;
 
     // dynamic
-    const id_type& owner() const;
-    const id_type& child() const;
-    const id_type& target() const;
+    const int_t& owner() const;
+    const int_t& child() const;
+    const int_t& target() const;
 
 public: // todo make it protected
-    void add(const Key& key, const id_type& value);
+    void add(const Key& key, const int_t& value);
 
 private:
-    const id_type& __getOrDie(const Key& key) const;
-    const id_type& __get(const Key& key) const;
+    const int_t& __getOrDie(const Key& key) const;
+    const int_t& __get(const Key& key) const;
 
     friend class boost::serialization::access;
     template<class Archive>
@@ -283,7 +283,7 @@ private:
         ar & m_map;
     }
 
-    std::map<Key, id_type> m_map;
+    std::map<Key, int_t> m_map;
     static IdGenerator m_idGenerator;
 };
 

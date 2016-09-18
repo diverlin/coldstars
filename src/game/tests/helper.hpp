@@ -24,5 +24,5 @@ class Bomb;
 class Container;
 class Starsystem;
 
-Container* getNewContainer(const id_type& child_id);
+Container* getNewContainer(const int_t& child_id);
 

@@ -34,8 +34,8 @@ class BaseOLD;
 class Generator {
 private:
 /* world */
-static descriptor::Galaxy getNewGalaxyDescriptor(const std::vector<id_type>&);
-static descriptor::Sector getNewSectorDescriptor(const std::vector<id_type>&);
+static descriptor::Galaxy getNewGalaxyDescriptor(const std::vector<int_t>&);
+static descriptor::Sector getNewSectorDescriptor(const std::vector<int_t>&);
 static descriptor::Starsystem getNewStarsystemDescriptor(int race = -1);
 
 /* spaceobjects */

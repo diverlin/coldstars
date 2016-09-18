@@ -37,7 +37,7 @@ DriveBuilder::DriveBuilder()
 DriveBuilder::~DriveBuilder()
 {}
 
-Drive* DriveBuilder::createTemplate(id_type id) const
+Drive* DriveBuilder::createTemplate(int_t id) const
 {
     Drive* drive = new Drive(id);
     assert(drive);

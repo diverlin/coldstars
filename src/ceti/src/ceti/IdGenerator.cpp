@@ -18,7 +18,7 @@
 
 #include <ceti/IdGenerator.hpp>
 
-id_type IdGenerator::nextId()
+int_t IdGenerator::nextId()
 {  
 //    if (!free_ids.empty()) {
 //         unsigned long int= free_ids[free_ids.size()-1];

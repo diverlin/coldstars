@@ -23,11 +23,11 @@
 
 struct AgressorData
 {
-    id_type npc_id;
+    int_t npc_id;
     GameDate last_date;
     int counter;
     
-    AgressorData(const id_type& npc_id, const GameDate& last_date, int counter)
+    AgressorData(const int_t& npc_id, const GameDate& last_date, int counter)
         :
           npc_id(npc_id)
         , last_date(last_date)

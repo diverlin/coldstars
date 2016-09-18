@@ -54,5 +54,5 @@ public:
     static Planet* getNew();
 
 private:
-    static Planet* __createTemplate(id_type id = NONE);
+    static Planet* __createTemplate(int_t id = NONE);
 }; 

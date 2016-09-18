@@ -29,7 +29,7 @@ namespace descriptor {
 struct Sector : public BBase
 {
 public:
-    std::vector<id_type> starsystems;
+    std::vector<int_t> starsystems;
 
     Sector() {}
     ~Sector() {}

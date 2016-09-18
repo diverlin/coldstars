@@ -41,7 +41,7 @@ RocketBuilder::RocketBuilder()
 RocketBuilder::~RocketBuilder()
 {}
 
-Rocket* RocketBuilder::createTemplate(id_type id) const
+Rocket* RocketBuilder::createTemplate(int_t id) const
 {
     Rocket* rocket = new Rocket(id);
     assert(rocket);

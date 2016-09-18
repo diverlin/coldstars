@@ -37,10 +37,10 @@ class EntityManager
         
         void reg(Base*);
     
-        Base* get(const id_type&) const;
+        Base* get(const int_t&) const;
 
         template<class T>
-        T get(const id_type& id) const {
+        T get(const int_t& id) const {
             Base* base = get(id);
             T der = static_cast<T>(base);
             assert(der);
@@ -59,7 +59,7 @@ class EntityManager
         bool m_save_request = false;
         bool m_load_request = false;
         
-        std::map<id_type, Base*> m_entities_map;
+        std::map<int_t, Base*> m_entities_map;
 
         std::vector<Base*> m_garbage;
 

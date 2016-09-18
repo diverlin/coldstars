@@ -33,7 +33,7 @@
 #include <slots/ItemSlot.hpp>
 
 
-ItemSlot* getNewItemSlot(type::entity subtype_id, const id_type& id)
+ItemSlot* getNewItemSlot(type::entity subtype_id, const int_t& id)
 {  
     ItemSlot* item_slot = new ItemSlot(id, subtype_id);
     assert(item_slot);
