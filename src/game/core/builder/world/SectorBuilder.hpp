@@ -33,7 +33,7 @@ class SectorBuilder
         SectorBuilder();
         ~SectorBuilder();
         
-        Sector* createTemplate(id_type id = NONE) const;
+        Sector* createTemplate(int_t id = NONE) const;
         Sector* create(const descriptor::Sector&) const;
     
     private:

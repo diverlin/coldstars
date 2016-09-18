@@ -38,7 +38,7 @@ ProtectorBuilder::~ProtectorBuilder()
 {}
 
 Protector*
-ProtectorBuilder::createTemplate(id_type id) const
+ProtectorBuilder::createTemplate(int_t id) const
 {
     Protector* protector = new Protector(id);
     assert(protector);

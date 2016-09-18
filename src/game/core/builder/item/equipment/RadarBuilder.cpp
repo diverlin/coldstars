@@ -37,7 +37,7 @@ RadarBuilder::RadarBuilder()
 RadarBuilder::~RadarBuilder()
 {}
 
-Radar* RadarBuilder::createTemplate(id_type id) const
+Radar* RadarBuilder::createTemplate(int_t id) const
 {
     Radar* radar = new Radar(id);
     assert(radar);

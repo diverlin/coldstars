@@ -39,7 +39,7 @@ DroidBuilder::DroidBuilder()
 DroidBuilder::~DroidBuilder()
 {}
 
-Droid* DroidBuilder::createTemplate(id_type id) const
+Droid* DroidBuilder::createTemplate(int_t id) const
 {
     Droid* droid = new Droid(id);
     assert(droid);

@@ -42,7 +42,7 @@ LazerBuilder::LazerBuilder()
 LazerBuilder::~LazerBuilder()
 {}
 
-Lazer* LazerBuilder::createTemplate(id_type id) const
+Lazer* LazerBuilder::createTemplate(int_t id) const
 { 
     Lazer* lazer = new Lazer(id);
     assert(lazer);

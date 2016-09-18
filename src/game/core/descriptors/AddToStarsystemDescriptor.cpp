@@ -4,8 +4,8 @@
 
 #include <sstream>
 
-AddToStarsystemDescriptor::AddToStarsystemDescriptor(const id_type& owner,
-                                                     const id_type& object,
+AddToStarsystemDescriptor::AddToStarsystemDescriptor(const int_t& owner,
+                                                     const int_t& object,
                                                      const glm::vec3& position,
                                                      const glm::vec3& angle)
     :

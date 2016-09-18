@@ -28,7 +28,7 @@
 namespace item {
 namespace equipment {
 
-Radar::Radar(const id_type& id)
+Radar::Radar(const int_t& id)
     :
       m_radius_orig(0)
 {

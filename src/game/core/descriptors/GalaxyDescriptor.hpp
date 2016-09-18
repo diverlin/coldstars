@@ -30,7 +30,7 @@ struct Galaxy : public BBase
 {
     public:
         bool allow_invasion = true;
-        std::vector<id_type> sectors;
+        std::vector<int_t> sectors;
         
         Galaxy() {}
         ~Galaxy() {}

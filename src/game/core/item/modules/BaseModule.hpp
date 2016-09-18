@@ -26,7 +26,7 @@
 class BaseEquipment;
 
 struct UnresolvedDataBaseModule {
-    id_type equipment_owner_id;
+    int_t equipment_owner_id;
 };
 
 class BaseModule : public item::Base {

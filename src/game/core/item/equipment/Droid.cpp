@@ -29,7 +29,7 @@
 namespace item {
 namespace equipment {
 
-Droid::Droid(const id_type& id)
+Droid::Droid(const int_t& id)
     :
       m_repair_orig(0)
 {

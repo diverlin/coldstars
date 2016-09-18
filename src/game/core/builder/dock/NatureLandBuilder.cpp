@@ -41,7 +41,7 @@ NatureLandBuilder::NatureLandBuilder()
 NatureLandBuilder::~NatureLandBuilder()
 {}
 
-NatureLand* NatureLandBuilder::createTemplate(id_type id) const
+NatureLand* NatureLandBuilder::createTemplate(int_t id) const
 {
     NatureLand* natureland = new NatureLand(id);
     assert(natureland);

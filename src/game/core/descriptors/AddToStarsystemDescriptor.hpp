@@ -9,15 +9,15 @@
 
 class AddToStarsystemDescriptor {
     public:
-        AddToStarsystemDescriptor(const id_type& owner,
-                                  const id_type& object,
+        AddToStarsystemDescriptor(const int_t& owner,
+                                  const int_t& object,
                                   const glm::vec3& position = glm::vec3(0.0f),
                                   const glm::vec3& angle = glm::vec3(0.0f));
 
         AddToStarsystemDescriptor(const std::string& data);
 
-        id_type owner = 0;
-        id_type object = 0;
+        int_t owner = 0;
+        int_t object = 0;
         glm::vec3 position;
         glm::vec3 angle;
 

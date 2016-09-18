@@ -26,7 +26,7 @@
 namespace item {
 namespace equipment {
 
-Bak::Bak(const id_type& id)
+Bak::Bak(const int_t& id)
 {
     setId(id);
     setTypeId(type::entity::EQUIPMENT_ID);

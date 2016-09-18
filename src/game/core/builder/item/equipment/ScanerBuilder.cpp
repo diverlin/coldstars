@@ -39,7 +39,7 @@ ScanerBuilder::ScanerBuilder()
 ScanerBuilder::~ScanerBuilder()
 {}
 
-Scaner* ScanerBuilder::createTemplate(id_type id) const
+Scaner* ScanerBuilder::createTemplate(int_t id) const
 {
     Scaner* scaner = new Scaner(id);
     assert(scaner);

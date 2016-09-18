@@ -28,8 +28,8 @@ namespace descriptor {
 struct Starsystem : public BBase
 {
 public:
-    std::vector<id_type> stars;
-    std::vector<id_type> planets;
+    std::vector<int_t> stars;
+    std::vector<int_t> planets;
 
     Starsystem() {}
     ~Starsystem() {}

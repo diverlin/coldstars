@@ -27,7 +27,7 @@ RocketBulletBuilder::RocketBulletBuilder()
 RocketBulletBuilder::~RocketBulletBuilder()
 {}
 
-RocketBullet* RocketBulletBuilder::createTemplate(id_type id) const
+RocketBullet* RocketBulletBuilder::createTemplate(int_t id) const
 {
     RocketBullet* rocket_bullet = new RocketBullet(id);
     assert(rocket_bullet);

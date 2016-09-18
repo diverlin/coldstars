@@ -37,7 +37,7 @@ public:
     ~RadarBuilder();
 
     Radar* getNew() const;
-    Radar* createTemplate(id_type id = NONE) const;
+    Radar* createTemplate(int_t id = NONE) const;
     Radar* getNew(const descriptor::BaseOLD&) const;
 
 private:

@@ -40,7 +40,7 @@
 #include <communication/MessageManager.hpp>
 #include <managers/EntityManager.hpp>
 
-Container* getNewContainer(const id_type& child_id)
+Container* getNewContainer(const int_t& child_id)
 {
     auto descriptor = descriptor::Container(child_id);
     global::get().messageManager().add(Message(TELEGRAM::CREATE_CONTAINER, descriptor.data()));

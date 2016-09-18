@@ -64,7 +64,7 @@
 int Starsystem::m_counter = 0;
 
 
-Starsystem::Starsystem(const id_type& id)
+Starsystem::Starsystem(const int_t& id)
 { 
     setId(id);
     setTypeId(type::entity::STARSYSTEM_ID);

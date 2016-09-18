@@ -28,7 +28,7 @@ namespace equipment {
 class Bak : public Base
 {
 public:
-    Bak(const id_type& id);
+    Bak(const int_t& id);
     virtual ~Bak();
 
     void setFuelMaxOrig(int fuelMaxOrig) { m_fuelMaxOrig = fuelMaxOrig; }

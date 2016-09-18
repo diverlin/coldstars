@@ -37,11 +37,11 @@ public:
     void setTextureId(int texture_id) { m_texture_id = texture_id; }
 
     const core::Id& ident() const { return m_type; }
-    const id_type& id() const { return m_id; }
+    const int_t& id() const { return m_id; }
     const type::entity& type() const { return m_type.type; }
     const type::entity& subtype() const { return m_type.subtype; }
     const type::entity& subsubtype() const { return m_type.subsubtype; }
-    const id_type& descriptorId() const { assert(m_descriptorId != -1); return m_descriptorId; }
+    const int_t& descriptorId() const { assert(m_descriptorId != -1); return m_descriptorId; }
 
     std::string dataTypeStr() const;
 
@@ -50,7 +50,7 @@ public:
     virtual void Resolve() {}
 
 protected:
-    void setId(const id_type& id)               { m_id = id; /*assert(id != 0);*/ }
+    void setId(const int_t& id)               { m_id = id; /*assert(id != 0);*/ }
     void setTypeId(const type::entity& major)   { m_type.type = major; }
     void setSubTypeId(const type::entity& minor) { m_type.subtype = minor; }
 
@@ -59,8 +59,8 @@ protected:
     void ResolveData();
 
 private:
-    id_type m_descriptorId = -1;
-    id_type m_id = -1;
+    int_t m_descriptorId = -1;
+    int_t m_id = -1;
 
     int m_mesh_id = -1;
     int m_texture_id = -1;
