@@ -24,6 +24,12 @@
 
 #include <boost/property_tree/ptree.hpp>
 
+
+class EntityManager;
+
+
+namespace core {
+
 class Base : private NonCopyable
 {
 public:
@@ -49,8 +55,9 @@ public:
     virtual void Load(const boost::property_tree::ptree&) {}
     virtual void Resolve() {}
 
+    void setId(const int_t& id) { m_id = id; /*assert(id != 0);*/ } // MAKE PROTECTED
+
 protected:
-    void setId(const int_t& id)               { m_id = id; /*assert(id != 0);*/ }
     void setTypeId(const type::entity& major)   { m_type.type = major; }
     void setSubTypeId(const type::entity& minor) { m_type.subtype = minor; }
 
@@ -68,3 +75,5 @@ private:
     core::Id m_type;
     friend class EntityManager;
 };
+
+} // namespace core

@@ -31,7 +31,7 @@ struct UnresolvedDataLand
     int owner_id;
 };
 
-class Land : public Base
+class Land : public core::Base
 {
     public:
         Land();

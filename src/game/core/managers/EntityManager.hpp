@@ -29,48 +29,47 @@ class Player;
 
 class EntityManager
 {
-    public:
-        EntityManager() {}
+public:
+    EntityManager() {}
 
-        void saveRequest() { m_save_request = true; }
-        void loadRequest() { m_load_request = true; }
-        
-        void reg(Base*);
+    void saveRequest() { m_save_request = true; }
+    void loadRequest() { m_load_request = true; }
+
+    void reg(core::Base*);
     
-        Base* get(const int_t&) const;
+    core::Base* get(const int_t&) const;
 
-        template<class T>
-        T get(const int_t& id) const {
-            Base* base = get(id);
-            T der = static_cast<T>(base);
-            assert(der);
-            return der;
-        }
+    template<class T>
+    T get(const int_t& id) const {
+        core::Base* base = get(id);
+        T der = static_cast<T>(base);
+        assert(der);
+        return der;
+    }
 
-        Player* player() const;
+    Player* player() const;
 
-        bool updateSaveRequest();
-        bool updateLoadRequest();
-        
-        void addToGarbage(Base*);
-        void clearGarbage();
+    bool updateSaveRequest();
+    bool updateLoadRequest();
 
-    private:
-        bool m_save_request = false;
-        bool m_load_request = false;
-        
-        std::map<int_t, Base*> m_entities_map;
+    void addToGarbage(core::Base*);
+    void clearGarbage();
 
-        std::vector<Base*> m_garbage;
+private:
+    bool m_save_request = false;
+    bool m_load_request = false;
 
-        void removeEntity(Base*);
+    std::map<int_t, core::Base*> m_entities_map;
 
-        void clear();
-                
-        void saveEvent(const std::string&);
-        void loadPass0(const std::string&);
-        void loadPass1() const;
+    std::vector<core::Base*> m_garbage;
 
+    void removeEntity(core::Base*);
+
+    void clear();
+
+    void saveEvent(const std::string&);
+    void loadPass0(const std::string&);
+    void loadPass1() const;
 };
 
 

@@ -26,7 +26,7 @@ class Starsystem;
 class Sector;
 class StarSystemsConditionData;
 
-class Galaxy : public Base
+class Galaxy : public core::Base
 {
     public:
         Galaxy(int);

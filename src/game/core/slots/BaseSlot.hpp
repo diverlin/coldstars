@@ -36,7 +36,7 @@ struct UnresolvedDataBaseSlot
 };
 
 
-class BaseSlot : public Base
+class BaseSlot : public core::Base
 {   
     public:        
         BaseSlot();
