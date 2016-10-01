@@ -24,6 +24,61 @@
 #include <ceti/Logger.hpp> 
 //#include <ceti/StringUtils.hpp>
 
+namespace control {
+
+
+Planetoid::Planetoid(model::Planetoid* model)
+    :
+      SpaceObject(model)
+    , m_model_planetoid(model)
+{}
+
+/* virtual */
+Planetoid::~Planetoid()
+{
+    LOG("___::~Planetoid("+std::to_string(id())+")");
+}
+
+void Planetoid::bindParent(const SpaceObject* const parent, int it)
+{
+    //setParent(parent);
+    __createOrbit();
+    m_orbit.setIt(it);
+    _updatePosition();
+}
+
+void Planetoid::__createOrbit()
+{
+    m_orbit.calcPath(model()->planetDescriptor.radius_A,
+                     model()->planetDescriptor.radius_B,
+                     model()->planetDescriptor.speed,
+                     model()->planetDescriptor.orbit_phi_inD,
+                     model()->planetDescriptor.clockwise);
+}
+
+/* virtual */
+void Planetoid::_postDeathUniqueEvent(bool)
+{}
+
+void Planetoid::_updatePosition()
+{
+    m_orbit.updatePosition();
+    if (parent()) {
+        assert(false);
+        //setPosition(parent()->position() + m_orbit.position());
+    } else {
+        setPosition(m_orbit.position());
+    }
+}
+
+///* virtual override final */
+//void Planetoid::RenderStuffWhenFocusedInSpace(const jeti::Renderer& render)
+//{
+//    m_Orbit.DrawPath(render);
+//}
+
+} // namespace control
+
 
 Planetoid::Planetoid()
 {}

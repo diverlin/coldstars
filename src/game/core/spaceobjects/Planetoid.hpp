@@ -30,6 +30,52 @@ struct UnresolvedDataPlanetoid
     int orbit_it;
 };
 
+namespace model {
+
+class Planetoid : public SpaceObject
+{
+public:
+    PlanetDescriptor planetDescriptor;
+};
+
+} // namespace model
+
+
+namespace control {
+
+class Planetoid : public SpaceObject
+{
+public:
+    Planetoid(model::Planetoid* model);
+    virtual ~Planetoid();
+
+    void setPlanetDescriptor(const PlanetDescriptor& planet_descriptor) { model()->planetDescriptor = planet_descriptor; }
+
+    Orbit& orbit() { return m_orbit; }   // !!!
+    const Orbit& orbit() const { return m_orbit; }
+    const PlanetDescriptor& planetDescriptor() const { return model()->planetDescriptor; }
+
+    void bindParent(const SpaceObject* const, int);
+
+protected:
+    virtual void putChildrenToGarbage() const {}
+
+    virtual void _postDeathUniqueEvent(bool);
+    void _updatePosition();
+
+private:
+    model::Planetoid* m_model_planetoid = nullptr;
+    Orbit m_orbit;
+
+    model::Planetoid* model() const { return m_model_planetoid; }
+
+    void __createOrbit();
+};
+
+} // namespace control
+
+
+
 class Planetoid : public SpaceObject 
 {
 public:

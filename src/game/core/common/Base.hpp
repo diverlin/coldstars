@@ -103,17 +103,17 @@ public:
     virtual ~Base();
 
     virtual void putChildrenToGarbage() const {}
-    void setSubSubTypeId(type::entity patch) { m_model->type.subsubtype = patch; }
+    void setSubSubTypeId(type::entity patch) { model()->type.subsubtype = patch; }
 
-    void setMeshId(int mesh_id) { m_model->mesh_id = mesh_id; }
-    void setTextureId(int texture_id) { m_model->texture_id = texture_id; }
+    void setMeshId(int mesh_id) { model()->mesh_id = mesh_id; }
+    void setTextureId(int texture_id) { model()->texture_id = texture_id; }
 
-    const core::Id& ident() const { return m_model->type; }
-    const int_t& id() const { return m_model->id; }
-    const type::entity& type() const { return m_model->type.type; }
-    const type::entity& subtype() const { return m_model->type.subtype; }
-    const type::entity& subsubtype() const { return m_model->type.subsubtype; }
-    const int_t& descriptorId() const { assert(m_model->descriptorId != -1); return m_model->descriptorId; }
+    const core::Id& ident() const { return model()->type; }
+    const int_t& id() const { return model()->id; }
+    const type::entity& type() const { return model()->type.type; }
+    const type::entity& subtype() const { return model()->type.subtype; }
+    const type::entity& subsubtype() const { return model()->type.subsubtype; }
+    const int_t& descriptorId() const { assert(model()->descriptorId != -1); return model()->descriptorId; }
 
     std::string dataTypeStr() const;
 
@@ -121,18 +121,19 @@ public:
     virtual void Load(const boost::property_tree::ptree&) {}
     virtual void Resolve() {}
 
-    void setId(const int_t& id) { m_model->id = id; /*assert(id != 0);*/ } // MAKE PROTECTED
+    void setId(const int_t& id) { model()->id = id; /*assert(id != 0);*/ } // MAKE PROTECTED
 
 protected:
-    void setTypeId(const type::entity& major)   { m_model->type.type = major; }
-    void setSubTypeId(const type::entity& minor) { m_model->type.subtype = minor; }
+    void setTypeId(const type::entity& major)   { model()->type.type = major; }
+    void setSubTypeId(const type::entity& minor) { model()->type.subtype = minor; }
 
-    void SaveData(boost::property_tree::ptree&, const std::string&) const;
-    void LoadData(const boost::property_tree::ptree&);
-    void ResolveData();
+//    void SaveData(boost::property_tree::ptree&, const std::string&) const;
+//    void LoadData(const boost::property_tree::ptree&);
+//    void ResolveData();
 
 private:
-    model::Base* m_model = nullptr;
+    model::Base* m_model_base = nullptr;
+    model::Base* model() const { return m_model_base; }
     friend class EntityManager;
 };
 

@@ -27,7 +27,7 @@ class Vehicle;
 
 namespace model {
 
-class Planet {
+class Planet : public Planetoid {
 public:
     Land* land = nullptr;
     unsigned long int population = 0;
@@ -36,7 +36,7 @@ public:
 } // namespace model
 
 
-namespace controller {
+namespace control {
 
 class Planet : public Planetoid
 {
@@ -68,7 +68,7 @@ private:
     void _postDeathUniqueEvent(bool);
 };
 
-} // namespace controller
+} // namespace control
 
 class Planet : public Planetoid
 {

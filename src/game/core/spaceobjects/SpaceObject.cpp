@@ -17,11 +17,14 @@
 */
 
 #include "SpaceObject.hpp"
-#include <math/rand.hpp>
+
+
 #include <common/Global.hpp>
 #include <world/starsystem.hpp>
 #include <managers/EntityManager.hpp>
+
 #include <ceti/Logger.hpp>
+//#include <math/rand.hpp>
 
 SpaceObject::SpaceObject()
     :
@@ -136,3 +139,84 @@ void SpaceObject::ResolveData()
         m_starsystem = (Starsystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+namespace control {
+
+
+SpaceObject::SpaceObject(model::SpaceObject* model)
+    :
+      ceti::control::Orientation(model)
+    , core::control::Base(model)
+    , m_model_spaceobject(model)
+{}
+
+/* virtual override */
+SpaceObject::~SpaceObject()
+{
+    LOG("___::~SpaceObject("+std::to_string(id())+")");
+}
+
+void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)
+{
+    model()->externalForce += force_dir * strength;
+}
+
+/* virtual */
+void SpaceObject::hit(int damage)
+{
+    LOG(std::string("SpaceObject::hit id=") << std::to_string(id()) << " damage=" << std::to_string(damage));
+    model()->dataLife.armor -= damage;
+    if (model()->dataLife.armor <= 0) {
+        model()->dataLife.armor = 0;
+        model()->dataLife.is_dying = true;
+    }
+    LOG(std::string("armor=") << std::to_string(model()->dataLife.armor) << " is_dying=" << std::to_string(model()->dataLife.is_dying) << std::endl);
+}
+
+void SpaceObject::killSilently()
+{
+    model()->dataLife.is_alive = false;
+    model()->dataLife.garbage_ready = true;
+}
+
+void SpaceObject::_checkDeath(bool show_effect)
+{
+    if (model()->dataLife.is_dying) {
+        model()->dataLife.dying_time--;
+        if (model()->dataLife.dying_time < 0) {
+            model()->dataLife.is_alive = false;
+            if (!model()->dataLife.garbage_ready) {
+                _postDeathUniqueEvent(show_effect);
+                model()->dataLife.garbage_ready = true;
+            }
+        }
+    }
+}
+
+///* virtual */
+//void SpaceObject::RenderInfoInSpace(const jeti::Renderer&, const glm::vec2& scroll_coords, float scale)
+//{
+//    UpdateInfo(); // virtual
+//    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
+//    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, pos/scale);
+//}
+
+//void SpaceObject::RenderInfo(const glm::vec2& center)
+//{
+//    UpdateInfo(); // virtual
+//    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, center);
+//}
+
+} // namespace control
