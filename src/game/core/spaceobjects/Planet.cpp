@@ -55,12 +55,21 @@ void Planet::putChildrenToGarbage() const
     //global::get().entityManager().addToGarbage(m_model->land);
 }
 
+Land* Planet::land()
+{
+    if (!m_land) {
+        m_land = static_cast<Land*>(global::get().entityManager().get(model()->land));
+    }
+
+    return m_land;
+}
+
 void Planet::BindLand(Land* land)
 {
-    model()->land = land;
+    model()->land = land->id();
     assert(false);
     //model()->land->SetOwner(this);
-    setSubTypeId(model()->land->type());
+    //setSubTypeId(model()->land->type());
 }
 
 void Planet::AddVehicle(Vehicle* vehicle) const
@@ -68,9 +77,8 @@ void Planet::AddVehicle(Vehicle* vehicle) const
     if (vehicle->starsystem() == nullptr) {
         vehicle->setStarSystem(starsystem());
     }
-    
-    model()->land->AddVehicle(vehicle);
-
+        
+    m_land->AddVehicle(vehicle);
 }
 
 void Planet::UpdateInSpace(int time, bool show_effect)
@@ -82,7 +90,7 @@ void Planet::UpdateInSpace(int time, bool show_effect)
 
 void Planet::UpdateInSpaceInStatic()
 {
-    model()->land->UpdateInStatic();
+    m_land->UpdateInStatic();
 }
 
 ///* virtual override final */
