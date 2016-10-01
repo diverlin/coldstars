@@ -115,8 +115,6 @@ protected:
     virtual void _postDeathUniqueEvent(bool) {}
 };
 
-
-
 } // namespace control
 
 class SpaceObject : public ceti::control::Orientation, public core::Base

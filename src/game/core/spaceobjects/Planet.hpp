@@ -21,16 +21,17 @@
 
 #include "Planetoid.hpp"
 
+#include <type/IdType.hpp>
+
 class Land;
 class Vehicle;
-
 
 namespace model {
 
 class Planet : public Planetoid {
 public:
-    Land* land = nullptr;
-    unsigned long int population = 0;
+    int_t land = NONE;
+    int_t population = NONE;
 };
 
 } // namespace model
@@ -48,7 +49,8 @@ public:
     void SetPopulation(unsigned long int population)  { model()->population = population; }
 
     unsigned long int GetPopulation() const { return model()->population; }
-    Land* const GetLand() const { return model()->land; }
+    [[warning("check const")]]
+    Land* land();
 
     void AddVehicle(Vehicle*) const;
 
@@ -57,6 +59,7 @@ public:
 
 private:
     model::Planet* m_model_planet = nullptr;
+    Land* m_land = nullptr;
 
     model::Planet* model() const { return m_model_planet; }
 
@@ -69,6 +72,9 @@ private:
 };
 
 } // namespace control
+
+
+
 
 class Planet : public Planetoid
 {
