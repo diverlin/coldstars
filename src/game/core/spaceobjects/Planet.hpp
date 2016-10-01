@@ -52,7 +52,8 @@ public:
     [[warning("check const")]]
     Land* land();
 
-    void AddVehicle(Vehicle*) const;
+    [[warning("check const")]]
+    void AddVehicle(Vehicle*);
 
     void UpdateInSpace(int, bool);
     void UpdateInSpaceInStatic();

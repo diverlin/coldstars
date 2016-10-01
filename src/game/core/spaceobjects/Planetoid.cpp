@@ -39,6 +39,20 @@ Planetoid::~Planetoid()
     LOG("___::~Planetoid("+std::to_string(id())+")");
 }
 
+void Planetoid::setPlanetDescriptor(int_t descriptor)
+{
+    model()->descriptor = descriptor;
+    if (!m_descriptor) {
+        //m_descriptor = getDescriptor(descriptor) ... ;
+        assert(m_descriptor);
+    }
+}
+
+PlanetDescriptor* Planetoid::descriptor() const
+{
+    return m_descriptor;
+}
+
 void Planetoid::bindParent(const SpaceObject* const parent, int it)
 {
     //setParent(parent);
@@ -49,11 +63,11 @@ void Planetoid::bindParent(const SpaceObject* const parent, int it)
 
 void Planetoid::__createOrbit()
 {
-    m_orbit.calcPath(model()->planetDescriptor.radius_A,
-                     model()->planetDescriptor.radius_B,
-                     model()->planetDescriptor.speed,
-                     model()->planetDescriptor.orbit_phi_inD,
-                     model()->planetDescriptor.clockwise);
+    m_orbit.calcPath(descriptor()->radius_A,
+                     descriptor()->radius_B,
+                     descriptor()->speed,
+                     descriptor()->orbit_phi_inD,
+                     descriptor()->clockwise);
 }
 
 /* virtual */
