@@ -85,11 +85,11 @@ class Base : private NonCopyable
 public:
     core::Id type;
 
-    int_t descriptorId = -1;
-    int_t id = -1;
+    int_t descriptor = NONE;
+    int_t id = NONE;
 
-    int mesh_id = -1;
-    int texture_id = -1;
+    int_t mesh = NONE;
+    int_t material = NONE;
 };
 
 } // namespace model
@@ -105,15 +105,15 @@ public:
     virtual void putChildrenToGarbage() const {}
     void setSubSubTypeId(type::entity patch) { model()->type.subsubtype = patch; }
 
-    void setMeshId(int mesh_id) { model()->mesh_id = mesh_id; }
-    void setTextureId(int texture_id) { model()->texture_id = texture_id; }
+    void setMeshId(int mesh_id) { model()->mesh = mesh_id; }
+    void setTextureId(int texture_id) { model()->material = texture_id; }
 
     const core::Id& ident() const { return model()->type; }
     const int_t& id() const { return model()->id; }
     const type::entity& type() const { return model()->type.type; }
     const type::entity& subtype() const { return model()->type.subtype; }
     const type::entity& subsubtype() const { return model()->type.subsubtype; }
-    const int_t& descriptorId() const { assert(model()->descriptorId != -1); return model()->descriptorId; }
+    const int_t& descriptorId() const { assert(model()->descriptor != -1); return model()->descriptor; }
 
     std::string dataTypeStr() const;
 

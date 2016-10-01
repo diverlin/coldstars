@@ -20,7 +20,7 @@
 
 typedef long long int int_t;
 
-const int_t NONE = 0;
+const int_t NONE = -1;
 
 
 
