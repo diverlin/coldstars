@@ -24,7 +24,7 @@ namespace control {
 
 Orientation::Orientation(model::Orientation* model)
 :
- m_model(model)
+ m_model_orientation(model)
 {
     //m_Direction       = glm::vec3(0.0f, 0.0f, 1.0f); 
 }

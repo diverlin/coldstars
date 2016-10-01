@@ -32,6 +32,93 @@ struct UnresolvedDataSpaceObject
     int starsystem_id;
 }; 
 
+
+namespace model {
+
+class SpaceObject : public ceti::model::Orientation, public core::model::Base
+{
+public:
+    LifeData dataLife;
+
+    glm::vec3 externalForce;
+
+    Starsystem* starsystem = nullptr;
+    type::place placeTypeId = type::place::NONE;
+
+    int mass = 0;
+    int expirienceToGive = 0;
+
+    const model::SpaceObject* parent = nullptr;
+};
+
+} // namespace model
+
+namespace control {
+
+class SpaceObject : public ceti::control::Orientation, public core::control::Base
+{
+public:
+    SpaceObject(model::SpaceObject*);
+    ~SpaceObject() override;
+
+    void setLifeData(const LifeData& data_life) { model()->dataLife = data_life; }
+
+    void setStarSystem(Starsystem* starsystem) { model()->starsystem = starsystem; }
+    void setPlaceTypeId(type::place place_type_id) { model()->placeTypeId = place_type_id;  }
+    void setMass(int mass) { model()->mass = mass; }
+
+    void setGivenExpirience(int expirience_to_give) { model()->expirienceToGive = expirience_to_give; }
+
+    void setParent(const model::SpaceObject* const parent) { model()->parent = parent; }
+
+    Starsystem* starsystem()  const { return model()->starsystem; }
+    type::place place() const { return model()->placeTypeId; }
+
+    virtual int givenExpirience() const { return model()->expirienceToGive; }  // !!!
+
+    bool isAlive()           const { return model()->dataLife.is_alive; }
+    bool isDying()           const { return model()->dataLife.is_dying; }
+    bool isReadyForGarbage() const { return model()->dataLife.garbage_ready; }
+
+    int mass()  const { return model()->mass; }
+    int armor() const { return model()->dataLife.armor; }
+
+    const model::SpaceObject* parent() const { return model()->parent; }
+
+    void addImpulse(const glm::vec3&, float);
+
+    virtual void remeberAgressor(SpaceObject*) {}
+    virtual void hit(int);
+    void killSilently();
+
+    //        virtual void RenderStuffWhenFocusedInSpace(const jeti::Renderer&) {};
+    //        virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float);
+    //        void RenderInfo(const glm::vec2&);
+    //        void virtual UpdateInfo() {}
+
+protected:
+    model::SpaceObject* m_model_spaceobject = nullptr;
+    model::SpaceObject* model() const { return m_model_spaceobject; }
+
+    void _addMass(int d_mass) { model()->mass += d_mass; }
+
+    //        InfoTable& GetInfo() { return m_Info; }
+    LifeData& _dataLife() { return model()->dataLife; }
+    [[deprecated("!!! remove")]]
+    const LifeData& _dataLife() const { return model()->dataLife; }
+
+    const glm::vec3& _externalForce() const { return model()->externalForce; }
+    [[deprecated("!!! remove")]]
+    glm::vec3& _externalForce() { return model()->externalForce; }
+
+    void _checkDeath(bool);
+    virtual void _postDeathUniqueEvent(bool) {}
+};
+
+
+
+} // namespace control
+
 class SpaceObject : public ceti::control::Orientation, public core::Base
 {
 public:

@@ -38,7 +38,6 @@ public:
     ceti::Points points;
 };
 
-
 } // namespace model
 
 namespace control {
@@ -49,34 +48,39 @@ public:
     Orientation(model::Orientation* model);
     virtual ~Orientation();
 
-    void setParentPosition(float x, float y, float z) { m_model->parentPosition = glm::vec3(x, y, z); }
-    void setParentPosition(const glm::vec3& parentPosition) { m_model->parentPosition = parentPosition; }
+    void setParentPosition(float x, float y, float z) { model()->parentPosition = glm::vec3(x, y, z); }
+    void setParentPosition(const glm::vec3& parentPosition) { model()->parentPosition = parentPosition; }
 
-    void setPosition(float x, float y, float z)    { m_model->position = glm::vec3(x, y, z); m_isUpdated = false; }
-    void setPosition(const glm::vec3& position)   { m_model->position = position; m_isUpdated = false; }
+    void setPosition(float x, float y, float z)    { model()->position = glm::vec3(x, y, z); m_isUpdated = false; }
+    void setPosition(const glm::vec3& position)   { model()->position = position; m_isUpdated = false; }
 
-    void setSize(float x, float y, float z) { m_model->size = glm::vec3(x, y, z); m_isUpdated = false; }
-    void setSize(const glm::vec3& size) { m_model->size = size; m_isUpdated = false; }
+    void setSize(float x, float y, float z) { model()->size = glm::vec3(x, y, z); m_isUpdated = false; }
+    void setSize(const glm::vec3& size) { model()->size = size; m_isUpdated = false; }
 
-    const glm::vec3& direction() const { return m_model->direction; }
+    const glm::vec3& direction() const { return model()->direction; }
 
-    const glm::vec3& position() const { return m_model->position; }
-    const glm::vec3& size()  const { return m_model->size; }
+    const glm::vec3& position() const { return model()->position; }
+    const glm::vec3& size()  const { return model()->size; }
 
-    glm::vec3* pPosition() { return &m_model->position; } // depr
-    const glm::vec3* pParentPosition() { return &m_model->parentPosition; } // depr
+    [[deprecated("depr")]]
+    glm::vec3* pPosition() { return &model()->position; }
+    [[deprecated("depr")]]
+    const glm::vec3* pParentPosition() { return &model()->parentPosition; }
 
-    ceti::Points& points()          { return m_model->points; }  // depr !!!
+    [[deprecated("depr")]]
+    ceti::Points& points()          { return model()->points; }
 
-    float collisionRadius() const  { return m_model->collisionRadius; }
+    float collisionRadius() const  { return model()->collisionRadius; }
 
-    void updateOrientation();     //depr
+    [[deprecated("depr")]]
+    void updateOrientation();
 
-    void setDirection(const glm::vec3& direction)   { assert(int(direction.length()) != 1); m_model->direction = glm::normalize(direction); m_isUpdated = false; }
-    void setCollisionRadius(float collision_radius) { m_model->collisionRadius = collision_radius; }
+    void setDirection(const glm::vec3& direction)   { assert(int(direction.length()) != 1); model()->direction = glm::normalize(direction); m_isUpdated = false; }
+    void setCollisionRadius(float collision_radius) { model()->collisionRadius = collision_radius; }
 
 private:
-    model::Orientation* m_model = nullptr;
+    model::Orientation* m_model_orientation = nullptr;
+    model::Orientation* model() const { return m_model_orientation; }
 
     bool m_isUpdated = false;
 };

@@ -51,7 +51,7 @@ void Land::ResolveData()
 //    {
 //        case type::entity::PLANET_ID:
 //        {
-//            ((controller::Planet*)owner)->BindLand(this);
+//            ((control::Planet*)owner)->BindLand(this);
 //            break;
 //        }
 

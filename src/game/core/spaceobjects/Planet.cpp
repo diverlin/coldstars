@@ -35,11 +35,12 @@
 
 //#include <jeti/Render.hpp>
 
-namespace controller {
+namespace control {
 
 Planet::Planet(model::Planet* model)
     :
-m_model_planet(model)
+      Planetoid(model)
+    , m_model_planet(model)
 {    
 //    setId(id);
 //    setTypeId(type::entity::PLANET_ID);
@@ -57,7 +58,8 @@ void Planet::putChildrenToGarbage() const
 void Planet::BindLand(Land* land)
 {
     model()->land = land;
-    model()->land->SetOwner(this);
+    assert(false);
+    //model()->land->SetOwner(this);
     setSubTypeId(model()->land->type());
 }
 
@@ -99,7 +101,7 @@ void Planet::UpdateInSpaceInStatic()
 void Planet::_postDeathUniqueEvent(bool)
 {}
 
-} // namespace controller
+} // namespace control
 
 
 
