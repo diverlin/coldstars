@@ -22,18 +22,14 @@
  
 AsteroidDrawable::AsteroidDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
     :
-      PlanetoidDrawable(texture, mesh)
+      jeti::BaseDrawable(texture, mesh)
 {   
 
 }
     
 /* virtual override final */
 AsteroidDrawable::~AsteroidDrawable()
-{
-    #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~AsteroidDrawable("+std::to_string(id())+")");
-    #endif
-}
+{}
 
 /* virtual override final */
 //void AsteroidDrawable::UpdateInfo()

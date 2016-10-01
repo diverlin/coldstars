@@ -18,22 +18,20 @@
 
 #include "ContainerDrawable.hpp"
 
-ContainerDrawable::ContainerDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
+namespace view {
+
+Container::Container(jeti::TextureOb* texture, jeti::Mesh* mesh)
     :
       BaseDrawable(texture, mesh)
 {
 }
 
 /* virtual */   
-ContainerDrawable::~ContainerDrawable()
-{
-    #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~ContainerDrawable("+std::to_string(id())+")");
-    #endif
-}
+Container::~Container()
+{}
 
 /* virtual override final */
-//void ContainerDrawable::UpdateInfo()
+//void Container::UpdateInfo()
 //{
 //    GetInfo().clear();
 //    GetInfo().addTitleStr("CONTAINER");
@@ -43,7 +41,7 @@ ContainerDrawable::~ContainerDrawable()
 //}
  
 /* virtual override final */           
-//void ContainerDrawable::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
+//void Container::RenderInfoInSpace(const jeti::Renderer& render, const glm::vec2& scroll_coords, float zoom)
 //{
 //    UpdateInfo();
 //    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
@@ -53,8 +51,5 @@ ContainerDrawable::~ContainerDrawable()
 //    pos.x += 300;
 //    m_ItemSlot->item()->RenderInfo(render, pos);
 //}
-               
-void ContainerDrawable::Render(const jeti::Renderer& render)
-{ 
-    //alpitodorender render.DrawMesh(mesh(), textureOb(), actualModelMatrix());
-}
+
+} // namespace view

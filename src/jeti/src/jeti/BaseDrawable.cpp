@@ -44,9 +44,8 @@ BaseDrawable::BaseDrawable(TextureOb* textureOb, Mesh* mesh)
 
 /* virtual */
 BaseDrawable::~BaseDrawable() {
-    //LOG("___::~Drawable("+std::to_string(id())+")");
-    
     delete m_animationRotation;
+    m_animationRotation= nullptr;
 }
 
 const glm::vec3& BaseDrawable::center() const { return m_orientation->position(); }
@@ -114,6 +113,13 @@ bool BaseDrawable::_updateFadeOutEffect()
         return true;
     }
 }
+
+void BaseDrawable::render(const jeti::Renderer& render)
+{
+    render.drawMesh(mesh(), material(), actualModelMatrix());
+}
+
+//###############################
 
 const glm::mat4& BaseDrawable::actualModelMatrix()
 {    

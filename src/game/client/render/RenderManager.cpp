@@ -191,7 +191,7 @@ void SpaceViewer::addIfVisible(AsteroidDrawable* asteroid, const VisibilityData&
     }
 }
 
-void SpaceViewer::addIfVisible(ContainerDrawable* container, const VisibilityData& data)
+void SpaceViewer::addIfVisible(view::Container* container, const VisibilityData& data)
 {
     if (isRectOnVisibleScreenArea(container->center(), container->size(), data.screen.worldcoord, data.screen.scale)) {
         if (ceti::isPointInObserverRadius(container->center(), data.observer.center, data.observer.radius)) {
@@ -296,7 +296,7 @@ void SpaceViewer::__add(AsteroidDrawable* view)
     m_asteroids.push_back(view);
 }
 
-void SpaceViewer::__add(ContainerDrawable* view)
+void SpaceViewer::__add(Container* view)
 {
     m_containers.push_back(view);
 }
@@ -361,25 +361,25 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
     int h = jeti::Screen::get().height();
     glm::vec2 world_coord(jeti::Screen::get().GetBottomLeft());
     
-    render.ClearColorAndDepthBuffers();
+    render.clearColorAndDepthBuffers();
     
     //render.enable_CULLFACE();
     {
         if (draw_background)
         {
             // render background and star to FBO0
-            render.ActivateFbo(0, w, h);
+            render.activateFbo(0, w, h);
             {
-                render.SetPerspectiveProjection(w, h);
+                render.setPerspectiveProjection(w, h);
                 //starsystem->DrawBackground(render, world_coord);
-                render.SetOrthogonalProjection(w*scale, h*scale);
+                render.setOrthogonalProjection(w*scale, h*scale);
 
                 for(StarDrawable* star: m_stars)
                 {
                     //alpitodorender render.DrawMeshMultiTextured(star->mesh(), star->textureOb(), star->actualModelMatrix());
                 }
             }
-            render.DeactivateFbo(0);
+            render.deactivateFbo(0);
 
             // BLOOM background and star (uses many FBO)
             //resizeGl(w, h);
@@ -390,12 +390,12 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
         if (draw_volumetric)
         {
             //resizeGl(w, h);
-            render.ActivateFbo(1, w, h);
+            render.activateFbo(1, w, h);
             {
                 //render.DrawStarField(w/2, h/2, -world_coord.x/10000.0f, -world_coord.y/10000.0f);
-                render.DrawPostEffectVolumetricLight(world_coord, w, h);
+                render.drawPostEffectVolumetricLight(world_coord, w, h);
             }
-            render.DeactivateFbo(1);
+            render.deactivateFbo(1);
         }
 
         if (draw_something)
@@ -410,14 +410,14 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
         if (draw_spaceObjects)
         {
             // render space entites to FBO2
-            render.ActivateFbo(3, w, h);
+            render.activateFbo(3, w, h);
             {
-                render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
+                render.drawScreenQuadTextured(render.lastFbo().GetTexture(), w, h);
 
                 // resizeGl(w*scale, h*scale);
                 {
                     for(Planet* planet: m_planets) {
-                        //planet->Render_NEW(render);
+                        planet->render(render);
                     }
 
                     for(SpaceStationDrawable* spacestation: m_spacestations) {
@@ -439,8 +439,8 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
                 }
 
                 {
-                    for(ContainerDrawable* container: m_containers) {
-                        container->Render(render);
+                    for(Container* container: m_containers) {
+                        container->render(render);
                     }
 
                     for(SatelliteDrawable* satellite: m_satellites) {
@@ -457,14 +457,14 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
                 //                    RenderCollisionRadius(render);
                 //                }
             }
-            render.DeactivateFbo(3);
+            render.deactivateFbo(3);
         }
 
         if (draw_shockwave)
         {
             // SHOCKWAVE post process to Fbo3
             //resizeGl(w, h);
-            render.ActivateFbo(4, w, h);
+            render.activateFbo(4, w, h);
             {
                 float center_array[SHOCKWAVES_MAX_NUM][2];
                 float xyz_array[SHOCKWAVES_MAX_NUM][3];
@@ -494,18 +494,18 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
                     time_array[i] = m_shockwaves[j]->time();
                 }
 
-                render.DrawPostEffectShockWaves(render.GetLastFbo().GetTexture(), w, h, i, center_array, xyz_array, time_array);
+                render.drawPostEffectShockWaves(render.lastFbo().GetTexture(), w, h, i, center_array, xyz_array, time_array);
             }
-            render.DeactivateFbo(4);
+            render.deactivateFbo(4);
         }
 
         if (draw_robustSpaceObjects)
         {
             // render effects not distorted by SHOCKWAVE
-            render.ActivateFbo(5, w, h);
+            render.activateFbo(5, w, h);
             {
                 //resizeGl(w, h);
-                render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
+                render.drawScreenQuadTextured(render.lastFbo().GetTexture(), w, h);
 
                 //resizeGl(w*scale, h*scale);
                 //camera(world_coord.x, world_coord.y, CAMERA_POS_Z);
@@ -522,11 +522,11 @@ void SpaceViewer::__renderInSpace_NEW(jeti::Renderer& render)
                     //render.DrawParticles(ps.mesh(), ps.textureOb(), ps.actualModelMatrix());
                 }
             }
-            render.DeactivateFbo(5);
+            render.deactivateFbo(5);
         }
 
-        render.ClearColorAndDepthBuffers();
-        render.DrawScreenQuadTextured(render.GetLastFbo().GetTexture(), w, h);
+        render.clearColorAndDepthBuffers();
+        render.drawScreenQuadTextured(render.lastFbo().GetTexture(), w, h);
 
         // FOGWAR and STARSPARK to final scene
         //resizeGl(w, h);
@@ -564,7 +564,7 @@ void SpaceViewer::render(Starsystem* starsystem,
     int h = jeti::Screen::get().height();
     camera.Update(w, h);
     
-    renderer.ComposeViewMatrix(camera.GetViewMatrix());
+    renderer.composeViewMatrix(camera.GetViewMatrix());
     __renderInSpace_NEW(renderer);
 
     //resizeGl(w*scale, h*scale);

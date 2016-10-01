@@ -18,9 +18,9 @@
 
 #pragma once
 
-#include <render/PlanetoidDrawable.hpp>
+#include <jeti/BaseDrawable.hpp>
 
-class AsteroidDrawable : public PlanetoidDrawable
+class AsteroidDrawable : public jeti::BaseDrawable
 {
     public:
         AsteroidDrawable(jeti::TextureOb*, jeti::Mesh*);

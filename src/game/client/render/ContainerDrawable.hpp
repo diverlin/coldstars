@@ -20,16 +20,18 @@
 
 #include <jeti/BaseDrawable.hpp>
 
-class ContainerDrawable : public jeti::BaseDrawable
+namespace view {
+
+class Container : public jeti::BaseDrawable
 {
     public:                  
-        ContainerDrawable(jeti::TextureOb*, jeti::Mesh*);
-        virtual ~ContainerDrawable() final override;
+        Container(jeti::TextureOb*, jeti::Mesh*);
+        virtual ~Container() final override;
         
         //virtual void RenderInfoInSpace(const jeti::Renderer&, const glm::vec2&, float) override final;
-        void Render(const jeti::Renderer&);
         
     private:
         //virtual void UpdateInfo() override final;
 };
 
+} // namespace view

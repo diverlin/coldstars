@@ -25,6 +25,16 @@ class Land;
 class Vehicle;
 
 
+namespace model {
+
+class Planet {
+private:
+    Land* m_Land = nullptr;
+    unsigned long int m_Population = 0;
+};
+
+} // namespace model
+
 class Planet : public Planetoid
 {
 public:
