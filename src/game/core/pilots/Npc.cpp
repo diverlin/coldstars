@@ -209,7 +209,8 @@ void Npc::__scenarioFireAsteroid()
 
 Planet* Npc::planetForDocking()
 {
-    return starsystem()->closestInhabitedPlanet(meti::vec2(m_vehicle->position()));  // improove
+    assert(false);
+    //return starsystem()->closestInhabitedPlanet(meti::vec2(m_vehicle->position()));  // improove
 }
 
 Starsystem* Npc::closestStarSystem(int requested_condition_id)

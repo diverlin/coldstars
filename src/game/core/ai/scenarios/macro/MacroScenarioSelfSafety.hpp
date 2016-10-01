@@ -17,8 +17,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 
-#ifndef MACROSCENARIOSELFSAFETY_H
-#define MACROSCENARIOSELFSAFETY_H
+#pragma once
 
 #include "../BaseScenario.hpp"
 #include "../../../pilots/Npc.hpp"
@@ -33,6 +32,3 @@ class MacroScenarioSelfSafety : public BaseScenario
         virtual std::string GetDescription(Npc*) const;
 }; 
 
-
-#endif 
-     

@@ -35,63 +35,52 @@
 
 //#include <jeti/Render.hpp>
 
+namespace controller {
 
-Planet::Planet(int id)
-:
-m_Land(nullptr),
-m_Population(0)
+Planet::Planet(model::Planet* model)
+    :
+m_model_planet(model)
 {    
-    setId(id);
-    setTypeId(type::entity::PLANET_ID);
+//    setId(id);
+//    setTypeId(type::entity::PLANET_ID);
 }
 
-/* virtual */
 Planet::~Planet()
-{
-    LOG("___::~Planet("+std::to_string(id())+")");
-   
-//    for (BaseDecor* decor : m_Decorations)
-//    {
-//        delete decor;
-//    }
-//    m_Decorations.clear();
-}
+{}
 
 /* virtual override final */
 void Planet::putChildrenToGarbage() const
 {
-    global::get().entityManager().addToGarbage(m_Land);
+    //global::get().entityManager().addToGarbage(m_model->land);
 }
 
 void Planet::BindLand(Land* land)
 {
-    m_Land = land;
-    m_Land->SetOwner(this);
-    setSubTypeId(land->type());
+    model()->land = land;
+    model()->land->SetOwner(this);
+    setSubTypeId(model()->land->type());
 }
 
 void Planet::AddVehicle(Vehicle* vehicle) const
 {
-    if (vehicle->starsystem() == nullptr)
-    {
+    if (vehicle->starsystem() == nullptr) {
         vehicle->setStarSystem(starsystem());
     }
     
-    m_Land->AddVehicle(vehicle);
+    model()->land->AddVehicle(vehicle);
 
 }
 
 void Planet::UpdateInSpace(int time, bool show_effect)
 {      
-    if (time > 0)
-    {
+    if (time > 0) {
         _updatePosition();
     }
 }
 
 void Planet::UpdateInSpaceInStatic()
 {
-    m_Land->UpdateInStatic();
+    model()->land->UpdateInStatic();
 }
 
 ///* virtual override final */
@@ -110,7 +99,60 @@ void Planet::UpdateInSpaceInStatic()
 void Planet::_postDeathUniqueEvent(bool)
 {}
 
-//void Planet::Render_NEW(const Renderer& render)
+} // namespace controller
+
+
+
+
+
+Planet::Planet(int id)
+{
+    setId(id);
+    setTypeId(type::entity::PLANET_ID);
+}
+
+Planet::~Planet()
+{}
+
+void Planet::_postDeathUniqueEvent(bool)
+{}
+
+/* virtual override final */
+void Planet::putChildrenToGarbage() const
+{
+    //global::get().entityManager().addToGarbage(m_model->land);
+}
+
+void Planet::BindLand(Land* land)
+{
+    m_land = land;
+    m_land->SetOwner(this);
+    setSubTypeId(m_land->type());
+}
+
+void Planet::AddVehicle(Vehicle* vehicle) const
+{
+    if (vehicle->starsystem() == nullptr) {
+        vehicle->setStarSystem(starsystem());
+    }
+
+    m_land->AddVehicle(vehicle);
+
+}
+
+void Planet::UpdateInSpace(int time, bool show_effect)
+{
+    if (time > 0) {
+        _updatePosition();
+    }
+}
+
+void Planet::UpdateInSpaceInStatic()
+{
+    m_land->UpdateInStatic();
+}
+
+//void Planet::Render_NEW(const jeti::Renderer& render)
 //{
 //    //alpitodorender render.DrawMeshLightNormalMap(mesh(), textureOb(), actualModelMatrix());
 //    for (BaseDecor* decor : m_Decorations)
@@ -122,28 +164,28 @@ void Planet::_postDeathUniqueEvent(bool)
 void Planet::SaveData(boost::property_tree::ptree& save_ptree, const std::string& root) const
 {
     LOG(" Planet("+std::to_string(id())+")::SaveData");
-    
+
     //SaveManager::Instance().Put(root+"race_id", race_id);
-    save_ptree.put(root+"population", m_Population);
+    save_ptree.put(root+"population", m_population);
 }
 
 void Planet::LoadData(const boost::property_tree::ptree& load_ptree)
 {
     LOG(" Planet("+std::to_string(id())+")::LoadData");
-    
+
     //race_id = SaveManager::Instance().Get<int>(root+"race_id");
-    m_Population = load_ptree.get<unsigned int>("population");    
+    m_population = load_ptree.get<unsigned int>("population");
 }
 
 void Planet::ResolveData()
 {
     LOG(" Planet("+std::to_string(id())+")::ResolveData");
-    
-    ((Starsystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it); 
+
+    ((Starsystem*)global::get().entityManager().get(data_unresolved_SpaceObject.starsystem_id))->add(this, parent(), data_unresolved_Planetoid.orbit_it);
 }
 
 /* virtual override final */
-void Planet::Save(boost::property_tree::ptree& save_ptree) const        
+void Planet::Save(boost::property_tree::ptree& save_ptree) const
 {
     std::string root = "planet." + std::to_string(id())+".";
 

@@ -46,22 +46,22 @@ void Land::LoadData(const boost::property_tree::ptree& load_ptree)
 
 void Land::ResolveData()
 {
-    Base* owner = global::get().entityManager().get(data_unresolved_Land.owner_id);
-    switch(owner->type())
-    {
-        case type::entity::PLANET_ID:
-        {
-            ((Planet*)owner)->BindLand(this);
-            break;
-        }
+//    Base* owner = global::get().entityManager().get(data_unresolved_Land.owner_id);
+//    switch(owner->type())
+//    {
+//        case type::entity::PLANET_ID:
+//        {
+//            ((controller::Planet*)owner)->BindLand(this);
+//            break;
+//        }
 
-        case type::entity::VEHICLE_ID:
-        {
-            if (owner->subtype() == type::entity::SPACESTATION_ID)
-            {
-                ((SpaceStation*)owner)->BindLand(this);
-            }
-            break;
-        }
-    }
+//        case type::entity::VEHICLE_ID:
+//        {
+//            if (owner->subtype() == type::entity::SPACESTATION_ID)
+//            {
+//                ((SpaceStation*)owner)->BindLand(this);
+//            }
+//            break;
+//        }
+//    }
 }

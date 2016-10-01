@@ -16,8 +16,7 @@
         Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef MACROSCENARIOGOODSTRADING_H
-#define MACROSCENARIOGOODSTRADING_H
+#pragma once
 
 #include "../BaseScenario.hpp"
 #include "../../../pilots/Npc.hpp"
@@ -40,5 +39,4 @@ class MacroScenarioGoodsTrading : public BaseScenario
         bool IsAbleToBuyGoods(Npc*) const;
 }; 
 
-#endif 
-     
+
