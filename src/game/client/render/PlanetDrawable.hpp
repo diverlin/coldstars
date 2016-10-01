@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include "PlanetoidDrawable.hpp"
+#include <jeti/BaseDrawable.hpp>
 
 namespace model {
 class Planet;
@@ -27,11 +27,13 @@ class Planet;
 
 namespace view {
 
-class Planet : public PlanetoidDrawable
+class Planet : public jeti::BaseDrawable
 {
 public:
     Planet(model::Planet*);
     virtual ~Planet() override final;
+
+    void render(const jeti::Renderer&) override;
 
 private:
     //virtual void UpdateInfo() override final;

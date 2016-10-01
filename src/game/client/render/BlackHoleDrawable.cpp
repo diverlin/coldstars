@@ -21,7 +21,7 @@
 
 BlackHoleDrawable::BlackHoleDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh)
     :
-      PlanetoidDrawable(texture, mesh)
+      BaseDrawable(texture, mesh)
 {
 
 }

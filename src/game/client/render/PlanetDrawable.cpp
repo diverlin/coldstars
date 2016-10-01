@@ -30,7 +30,7 @@ namespace view {
 
 Planet::Planet(model::Planet* planet)
     :
-      PlanetoidDrawable()
+      jeti::BaseDrawable()
 {
 //    setTexture(planet->texture());
 //    setMesh(planet->mesh());
@@ -38,18 +38,12 @@ Planet::Planet(model::Planet* planet)
 
 /* virtual */
 Planet::~Planet()
-{
-//    #if CREATEDESTROY_LOG_ENABLED == 1
-//    Logger::Instance().Log("___::~PlanetDrawable("+std::to_string(id())+")");
-//    #endif
-   
-//    for (BaseDecor* decor : m_Decorations)
-//    {
+{  
+//    for (BaseDecor* decor : m_Decorations) {
 //        delete decor;
 //    }
 //    m_Decorations.clear();
 }
-
 
 /* virtual override final */
 //void Planet::UpdateInfo()
@@ -64,13 +58,12 @@ Planet::~Planet()
 //    GetInfo().addNameStr("pos:");         GetInfo().addValueStr( str(center()) );
 //}
 
-//void Planet::Render_NEW(const Renderer& render)
-//{
-//    //alpitodorender render.DrawMeshLightNormalMap(mesh(), textureOb(), actualModelMatrix());
-//    for (BaseDecor* decor : m_Decorations)
-//    {
+void Planet::render(const jeti::Renderer& render)
+{
+    render.drawMeshLightNormalMap(mesh(), material(), actualModelMatrix());
+//    for (BaseDecor* decor : m_Decorations) {
 //        decor->Render(render, center());
 //    }
-//}
+}
 
 } // namespace view

@@ -91,14 +91,14 @@ void BloomEffect::Pass0(const Renderer& render, int width, int height, GLuint sc
     (vec_vec_fbo[0])[0]->Activate(width, height);
 
     // render background
-    render.DrawPostEffectExtractBright(scene_texture, width, height, brightThreshold); 
+    render.drawPostEffectExtractBright(scene_texture, width, height, brightThreshold); 
     (vec_vec_fbo[0])[0]->Deactivate();
         
     int div = 2;    
     for(int fbo_num = 1; fbo_num < fbo_max_per_pass; fbo_num++)
     {
         (vec_vec_fbo[0])[fbo_num]->Activate(width, height);
-        render.DrawScreenQuadTextured((vec_vec_fbo[0])[0]->GetTexture(), width/div, height/div);
+        render.drawScreenQuadTextured((vec_vec_fbo[0])[0]->GetTexture(), width/div, height/div);
         (vec_vec_fbo[0])[fbo_num]->Deactivate();
          
         div *= 2;
@@ -113,7 +113,7 @@ void BloomEffect::RestPasses(const Renderer& render, int width, int height)
         for(int fbo_num = 0; fbo_num < fbo_max_per_pass; fbo_num++)
         {
             (vec_vec_fbo[pass_num])[fbo_num]->Activate(width, height);
-            render.DrawPostEffectBlur((vec_vec_fbo[pass_num-1])[fbo_num]->GetTexture(), width/div, height/div);
+            render.drawPostEffectBlur((vec_vec_fbo[pass_num-1])[fbo_num]->GetTexture(), width/div, height/div);
             (vec_vec_fbo[pass_num])[fbo_num]->Deactivate();
           
             div *= 2;
@@ -138,7 +138,7 @@ void BloomEffect::Combine(const Renderer& render, int width, int height, GLuint 
         }
     } 
 
-    render.DrawPostEffectCombined(textures, width, height);
+    render.drawPostEffectCombined(textures, width, height);
     //render.DrawScreenQuadCombinedDebug(textures, width, height);
 
     fbo_final.Deactivate();

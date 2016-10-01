@@ -18,11 +18,11 @@
 
 #pragma once
 
-#include <render/PlanetoidDrawable.hpp>
+#include <jeti/BaseDrawable.hpp>
 
 class Star;
 
-class StarDrawable : public PlanetoidDrawable
+class StarDrawable : public jeti::BaseDrawable
 {
     public:
         StarDrawable(jeti::TextureOb*, jeti::Mesh*, Star*);

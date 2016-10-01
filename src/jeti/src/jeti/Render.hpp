@@ -51,99 +51,99 @@ class Renderer : public NonCopyable
         Renderer();
         ~Renderer();
                         
-        void ActivateFbo(int, int, int);
-        void DeactivateFbo(int);
+        void activateFbo(int, int, int);
+        void deactivateFbo(int);
         
         void init(int, int);
-        void setMeshQuad(Mesh* mesh) { m_MeshQuad = mesh; }
+        void setMeshQuad(Mesh* mesh) { m_meshQuad = mesh; }
 
-        void SetPerspectiveProjection(float, float);
-        void SetOrthogonalProjection(float, float);
+        void setPerspectiveProjection(float, float);
+        void setOrthogonalProjection(float, float);
         
-        BloomEffect& GetBloom() { return m_Bloom; };
-        const Fbo& GetLastFbo() const { return m_Fbos[m_IndexFboLastDeactivated]; };
-        const Shaders& GetShaders() const { return m_Shaders; }
+        BloomEffect& bloom() { return m_bloom; };
+        const Fbo& lastFbo() const { return m_fbos[m_indexFboLastDeactivated]; };
+        const Shaders& shaders() const { return m_shaders; }
         
-        void ClearColorAndDepthBuffers() const
+        void clearColorAndDepthBuffers() const
         { glDepthMask(GL_TRUE); glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
                        
-        void ComposeViewMatrix(const glm::mat4&);
+        void composeViewMatrix(const glm::mat4&);
 
-        void DrawMesh                (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void DrawMeshLight           (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void DrawMeshLightNormalMap  (const Mesh&, const TextureOb&, const glm::mat4&) const;
-        void DrawMeshMultiTextured   (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void drawMesh                (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void drawMeshLight           (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void drawMeshLightNormalMap  (const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void drawMeshMultiTextured   (const Mesh&, const TextureOb&, const glm::mat4&) const;
 
-        void DrawQuad(const TextureOb&, const glm::mat4&) const;
-        void DrawQuad(const TextureOb&, const ceti::Box2D&) const;
+        void drawQuad(const TextureOb&, const glm::mat4&) const;
+        void drawQuad(const TextureOb&, const ceti::Box2D&) const;
 
-        void DrawPostEffectFogWar(GLuint, int, int, const glm::vec3&, const glm::vec2&, float) const;
-        void DrawPostEffectShockWaves(GLuint, int, int, int, float[10][2], float[10][3], float[10]) const;
-        void DrawPostEffectExtractBright(GLuint, int, int, float) const;
-        void DrawPostEffectCombined(const std::vector<GLuint>&, int, int) const; 
-        void DrawPostEffectCombinedDebug(const std::vector<GLuint>&, int, int) const; 
-        void DrawPostEffectVolumetricLight(const glm::vec2&, int, int);
-        void DrawPostEffectBlur(GLuint, int, int) const;
-        void DrawScreenQuadTextured(GLuint, int, int) const;
+        void drawPostEffectFogWar(GLuint, int, int, const glm::vec3&, const glm::vec2&, float) const;
+        void drawPostEffectShockWaves(GLuint, int, int, int, float[10][2], float[10][3], float[10]) const;
+        void drawPostEffectExtractBright(GLuint, int, int, float) const;
+        void drawPostEffectCombined(const std::vector<GLuint>&, int, int) const;
+        void drawPostEffectCombinedDebug(const std::vector<GLuint>&, int, int) const;
+        void drawPostEffectVolumetricLight(const glm::vec2&, int, int);
+        void drawPostEffectBlur(GLuint, int, int) const;
+        void drawScreenQuadTextured(GLuint, int, int) const;
                         
-        void DrawParticles(const Mesh&, const TextureOb&, const glm::mat4&) const;
+        void drawParticles(const Mesh&, const TextureOb&, const glm::mat4&) const;
         
-        void DrawAxis(const glm::mat4&, float) const;
-        void DrawVector(const glm::vec3&, const glm::vec3&, float, float) const;                                             
-        void DrawVector(const glm::vec3&, const glm::mat4&, float) const;  
+        void drawAxis(const glm::mat4&, float) const;
+        void drawVector(const glm::vec3&, const glm::vec3&, float, float) const;
+        void drawVector(const glm::vec3&, const glm::mat4&, float) const;
 
-        void DrawStarField(int, int, float, float) const;
+        void drawStarField(int, int, float, float) const;
                                                                  
     private:
-        int m_W;
-        int m_H;
+        int m_w;
+        int m_h;
 
-        Mesh* m_MeshQuad;
+        Mesh* m_meshQuad;
 
-        glm::mat4 m_ProjectionMatrix;
-        glm::mat4 m_ViewMatrix;
-        glm::mat4 m_ProjectionViewMatrix;
+        glm::mat4 m_projectionMatrix;
+        glm::mat4 m_viewMatrix;
+        glm::mat4 m_projectionViewMatrix;
         
-        Light m_Light;
+        Light m_light;
         
-        Shaders m_Shaders;
+        Shaders m_shaders;
         
-        GLuint m_ProgramLight;          
-        GLint m_ProgramLightLocation_uProjectionViewMatrix;
-        GLint m_ProgramLightLocation_uModelMatrix;
-        GLint m_ProgramLightLocation_uNormalMatrix;
-        GLint m_ProgramLightLocation_uLightPos;
-        GLint m_ProgramLightLocation_uEyePos;
-        GLint m_ProgramLightLocation_uDiffColor;
-        GLint m_ProgramLightLocation_uAmbientColor; 
-        GLint m_ProgramLightLocation_uTexture; 
+        GLuint m_programLight;
+        GLint m_programLightLocation_uProjectionViewMatrix;
+        GLint m_programLightLocation_uModelMatrix;
+        GLint m_programLightLocation_uNormalMatrix;
+        GLint m_programLightLocation_uLightPos;
+        GLint m_programLightLocation_uEyePos;
+        GLint m_programLightLocation_uDiffColor;
+        GLint m_programLightLocation_uAmbientColor;
+        GLint m_programLightLocation_uTexture;
     
-        GLuint m_ProgramBlur; 
-        mutable GLuint m_ActiveProgram; 
-        mutable int m_TransparentModeOn; 
-        mutable int m_PostEffectModeOn; 
+        GLuint m_programBlur;
+        mutable GLuint m_activeProgram;
+        mutable int m_transparentModeOn;
+        mutable int m_postEffectModeOn;
         
-        int m_FboNum;
-        Fbo m_Fbos[FBO_NUM];
+        int m_fboNum;
+        Fbo m_fbos[FBO_NUM];
  
-        int m_IndexFboLastActivated;
-        int m_IndexFboLastDeactivated;
+        int m_indexFboLastActivated;
+        int m_indexFboLastDeactivated;
 
-        BloomEffect m_Bloom;
+        BloomEffect m_bloom;
 
-        void InitPostEffects();
-        void MakeShortCuts();
+        void __initPostEffects();
+        void __makeShortCuts();
 
-        void UpdateProjectionViewMatrix();
+        void __updateProjectionViewMatrix();
 
-        void ResizePostEffects(int, int);
+        void __resizePostEffects(int, int);
         
-        void UseProgram(GLuint) const;
-        void UseTransparentMode(bool) const;
-        void UsePostEffectMode(bool) const;
+        void __useProgram(GLuint) const;
+        void __useTransparentMode(bool) const;
+        void __usePostEffectMode(bool) const;
                 
-		void enable_POINTSPRITE() const     { glEnable(GL_POINT_SPRITE); glEnable(GL_PROGRAM_POINT_SIZE); }    
-        void disable_POINTSPRITE() const    { glDisable(GL_POINT_SPRITE); glDisable(GL_PROGRAM_POINT_SIZE); }   
+        void __enable_POINTSPRITE() const     { glEnable(GL_POINT_SPRITE); glEnable(GL_PROGRAM_POINT_SIZE); }
+        void __disable_POINTSPRITE() const    { glDisable(GL_POINT_SPRITE); glDisable(GL_PROGRAM_POINT_SIZE); }
 };
 
 // TEXT

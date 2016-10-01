@@ -83,18 +83,18 @@ void BaseButton::RenderUnique(const jeti::Renderer& render, Player*) const
     
     if (HasTextureOb() == true)
     {
-        render.DrawQuad(textureOb(), GetBox());
+        render.drawQuad(textureOb(), GetBox());
     }
     
     if (m_TextureOb_additional != nullptr)
     {
-        render.DrawQuad(*m_TextureOb_additional, GetBox());
+        render.drawQuad(*m_TextureOb_additional, GetBox());
     }
     //setColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     
     if (m_TextureOb_mask)
     {
-        render.DrawQuad(*m_TextureOb_mask, GetBox());
+        render.drawQuad(*m_TextureOb_mask, GetBox());
     }
     
     if (GetLabel() != "")

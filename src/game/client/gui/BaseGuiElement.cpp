@@ -211,7 +211,7 @@ void BaseGuiElement::RenderUnique(const jeti::Renderer& render, Player* player) 
 {
     if (m_TextureOb)
     {
-        render.DrawQuad(*m_TextureOb, m_Box);
+        render.drawQuad(*m_TextureOb, m_Box);
     }
 }
 

@@ -46,6 +46,7 @@ class Renderer;
 class BaseDrawable
 {
 public:
+    [[deprecated("remove this")]]
     BaseDrawable();
     BaseDrawable(TextureOb*, Mesh*);
     virtual ~BaseDrawable();
@@ -72,6 +73,8 @@ public:
     virtual bool inRect(const ceti::Rect&) { return true; }
     //        void RenderCollisionRadius(const Renderer&) const;
     //        void RenderAxis(const Renderer&) const;
+
+    virtual void render(const jeti::Renderer& render);
 
 protected:
     void _setTransparency(float alpha)  { m_color.a = alpha; }

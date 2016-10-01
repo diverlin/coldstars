@@ -20,7 +20,7 @@
 
 StarDrawable::StarDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh, Star* star)
     :
-      PlanetoidDrawable(texture, mesh)
+      BaseDrawable(texture, mesh)
     , m_star(star)
     , m_DeltaColor(0.0)
     , m_SparkActive(false)
@@ -29,14 +29,8 @@ StarDrawable::StarDrawable(jeti::TextureOb* texture, jeti::Mesh* mesh, Star* sta
 { 
 }
   
-/* virtual override final */
 StarDrawable::~StarDrawable()
-{
-    #if CREATEDESTROY_LOG_ENABLED == 1
-    Logger::Instance().Log("___::~Star("+std::to_string(id())+")");
-    #endif    
-}
-
+{}
 
 //alpitodorender
 /*

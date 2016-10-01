@@ -170,7 +170,7 @@ void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
             box.SetScale(scale, scale);
             //box.SetAngle(m_FocusedSpaceObject->GetAngle().z);
             
-            render.DrawQuad(*GuiTextureObCollector::Instance().mark_target, box);
+            render.drawQuad(*GuiTextureObCollector::Instance().mark_target, box);
         }
         
         if (m_FocusedGuiElement != nullptr)
@@ -180,7 +180,7 @@ void Cursor::RenderFocusedObjectStuff(const jeti::Renderer& render) const
                 ceti::Box2D box(m_FocusedGuiElement->GetBox());
                 box.SetScale(scale, scale);
             
-                render.DrawQuad(*GuiTextureObCollector::Instance().mark_target, box);
+                render.drawQuad(*GuiTextureObCollector::Instance().mark_target, box);
             }
         }
     }
