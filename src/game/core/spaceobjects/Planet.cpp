@@ -61,6 +61,7 @@ Land* Planet::land()
         m_land = static_cast<Land*>(global::get().entityManager().get(model()->land));
     }
 
+    assert(m_land);
     return m_land;
 }
 
@@ -72,9 +73,9 @@ void Planet::BindLand(Land* land)
     //setSubTypeId(model()->land->type());
 }
 
-void Planet::AddVehicle(Vehicle* vehicle) const
+void Planet::AddVehicle(Vehicle* vehicle)
 {
-    if (vehicle->starsystem() == nullptr) {
+    if (!vehicle->starsystem()) {
         vehicle->setStarSystem(starsystem());
     }
         

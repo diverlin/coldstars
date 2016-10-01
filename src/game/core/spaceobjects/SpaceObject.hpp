@@ -40,15 +40,13 @@ class SpaceObject : public ceti::model::Orientation, public core::model::Base
 public:
     LifeData dataLife;
 
-    glm::vec3 externalForce;
+    int_t parent = NONE;
+    int_t starsystem = NONE;
 
-    Starsystem* starsystem = nullptr;
-    type::place placeTypeId = type::place::NONE;
+    type::place place = type::place::NONE;
 
     int mass = 0;
     int expirienceToGive = 0;
-
-    const model::SpaceObject* parent = nullptr;
 };
 
 } // namespace model
@@ -63,16 +61,17 @@ public:
 
     void setLifeData(const LifeData& data_life) { model()->dataLife = data_life; }
 
-    void setStarSystem(Starsystem* starsystem) { model()->starsystem = starsystem; }
-    void setPlaceTypeId(type::place place_type_id) { model()->placeTypeId = place_type_id;  }
+    void setStarSystem(Starsystem* starsystem);
+    void setPlaceTypeId(type::place place_type_id) { model()->place = place_type_id;  }
     void setMass(int mass) { model()->mass = mass; }
 
     void setGivenExpirience(int expirience_to_give) { model()->expirienceToGive = expirience_to_give; }
 
-    void setParent(const model::SpaceObject* const parent) { model()->parent = parent; }
+    void setParent(SpaceObject* parent);
 
-    Starsystem* starsystem()  const { return model()->starsystem; }
-    type::place place() const { return model()->placeTypeId; }
+    [[warning("check const basense")]]
+    Starsystem* starsystem();
+    type::place place() const { return model()->place; }
 
     virtual int givenExpirience() const { return model()->expirienceToGive; }  // !!!
 
@@ -83,7 +82,7 @@ public:
     int mass()  const { return model()->mass; }
     int armor() const { return model()->dataLife.armor; }
 
-    const model::SpaceObject* parent() const { return model()->parent; }
+    model::SpaceObject* parent();
 
     void addImpulse(const glm::vec3&, float);
 
@@ -97,6 +96,11 @@ public:
     //        void virtual UpdateInfo() {}
 
 protected:
+    Starsystem* m_starsystem = nullptr;
+    model::SpaceObject* m_parent = nullptr;
+
+    glm::vec3 externalForce;
+
     model::SpaceObject* m_model_spaceobject = nullptr;
     model::SpaceObject* model() const { return m_model_spaceobject; }
 
@@ -107,9 +111,9 @@ protected:
     [[deprecated("!!! remove")]]
     const LifeData& _dataLife() const { return model()->dataLife; }
 
-    const glm::vec3& _externalForce() const { return model()->externalForce; }
+    const glm::vec3& _externalForce() const { return externalForce; }
     [[deprecated("!!! remove")]]
-    glm::vec3& _externalForce() { return model()->externalForce; }
+    glm::vec3& _externalForce() { return externalForce; }
 
     void _checkDeath(bool);
     virtual void _postDeathUniqueEvent(bool) {}

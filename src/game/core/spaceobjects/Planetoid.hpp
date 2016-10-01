@@ -35,7 +35,7 @@ namespace model {
 class Planetoid : public SpaceObject
 {
 public:
-    PlanetDescriptor planetDescriptor;
+    int_t descriptor = NONE;
 };
 
 } // namespace model
@@ -49,11 +49,11 @@ public:
     Planetoid(model::Planetoid* model);
     virtual ~Planetoid();
 
-    void setPlanetDescriptor(const PlanetDescriptor& planet_descriptor) { model()->planetDescriptor = planet_descriptor; }
+    void setPlanetDescriptor(int_t descriptor);
 
     Orbit& orbit() { return m_orbit; }   // !!!
     const Orbit& orbit() const { return m_orbit; }
-    const PlanetDescriptor& planetDescriptor() const { return model()->planetDescriptor; }
+    PlanetDescriptor* descriptor() const;
 
     void bindParent(const SpaceObject* const, int);
 
@@ -66,6 +66,7 @@ protected:
 private:
     model::Planetoid* m_model_planetoid = nullptr;
     Orbit m_orbit;
+    PlanetDescriptor* m_descriptor = nullptr;
 
     model::Planetoid* model() const { return m_model_planetoid; }
 

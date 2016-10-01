@@ -26,6 +26,102 @@
 #include <ceti/Logger.hpp>
 //#include <math/rand.hpp>
 
+
+namespace control {
+
+
+SpaceObject::SpaceObject(model::SpaceObject* model)
+    :
+      ceti::control::Orientation(model)
+    , core::control::Base(model)
+    , m_model_spaceobject(model)
+{}
+
+SpaceObject::~SpaceObject()
+{}
+
+void SpaceObject::setStarSystem(Starsystem* starsystem)
+{
+    model()->starsystem = starsystem->id();
+}
+
+void SpaceObject::setParent(SpaceObject* parent)
+{
+    model()->parent = parent->id();
+}
+
+Starsystem* SpaceObject::starsystem()
+{
+    if (!m_starsystem) {
+        m_starsystem = static_cast<Starsystem*>(global::get().entityManager().get(model()->starsystem));
+        assert(m_starsystem);
+    }
+    return m_starsystem;
+}
+
+model::SpaceObject* SpaceObject::parent()
+{
+    if (!m_parent) {
+        //m_parent = static_cast<model::SpaceObject*>(global::get().entityManager().get(model()->parent));
+        assert(m_parent);
+    }
+    return m_parent;
+}
+
+void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)
+{
+    externalForce += force_dir * strength;
+}
+
+/* virtual */
+void SpaceObject::hit(int damage)
+{
+    LOG(std::string("SpaceObject::hit id=") << std::to_string(id()) << " damage=" << std::to_string(damage));
+    model()->dataLife.armor -= damage;
+    if (model()->dataLife.armor <= 0) {
+        model()->dataLife.armor = 0;
+        model()->dataLife.is_dying = true;
+    }
+    LOG(std::string("armor=") << std::to_string(model()->dataLife.armor) << " is_dying=" << std::to_string(model()->dataLife.is_dying) << std::endl);
+}
+
+void SpaceObject::killSilently()
+{
+    model()->dataLife.is_alive = false;
+    model()->dataLife.garbage_ready = true;
+}
+
+void SpaceObject::_checkDeath(bool show_effect)
+{
+    if (model()->dataLife.is_dying) {
+        model()->dataLife.dying_time--;
+        if (model()->dataLife.dying_time < 0) {
+            model()->dataLife.is_alive = false;
+            if (!model()->dataLife.garbage_ready) {
+                _postDeathUniqueEvent(show_effect);
+                model()->dataLife.garbage_ready = true;
+            }
+        }
+    }
+}
+
+///* virtual */
+//void SpaceObject::RenderInfoInSpace(const jeti::Renderer&, const glm::vec2& scroll_coords, float scale)
+//{
+//    UpdateInfo(); // virtual
+//    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
+//    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, pos/scale);
+//}
+
+//void SpaceObject::RenderInfo(const glm::vec2& center)
+//{
+//    UpdateInfo(); // virtual
+//    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, center);
+//}
+
+} // namespace control
+
+
 SpaceObject::SpaceObject()
     :
       ceti::control::Orientation(new ceti::model::Orientation)
@@ -144,79 +240,3 @@ void SpaceObject::ResolveData()
 
 
 
-
-
-
-
-
-
-
-
-namespace control {
-
-
-SpaceObject::SpaceObject(model::SpaceObject* model)
-    :
-      ceti::control::Orientation(model)
-    , core::control::Base(model)
-    , m_model_spaceobject(model)
-{}
-
-/* virtual override */
-SpaceObject::~SpaceObject()
-{
-    LOG("___::~SpaceObject("+std::to_string(id())+")");
-}
-
-void SpaceObject::addImpulse(const glm::vec3& force_dir, float strength)
-{
-    model()->externalForce += force_dir * strength;
-}
-
-/* virtual */
-void SpaceObject::hit(int damage)
-{
-    LOG(std::string("SpaceObject::hit id=") << std::to_string(id()) << " damage=" << std::to_string(damage));
-    model()->dataLife.armor -= damage;
-    if (model()->dataLife.armor <= 0) {
-        model()->dataLife.armor = 0;
-        model()->dataLife.is_dying = true;
-    }
-    LOG(std::string("armor=") << std::to_string(model()->dataLife.armor) << " is_dying=" << std::to_string(model()->dataLife.is_dying) << std::endl);
-}
-
-void SpaceObject::killSilently()
-{
-    model()->dataLife.is_alive = false;
-    model()->dataLife.garbage_ready = true;
-}
-
-void SpaceObject::_checkDeath(bool show_effect)
-{
-    if (model()->dataLife.is_dying) {
-        model()->dataLife.dying_time--;
-        if (model()->dataLife.dying_time < 0) {
-            model()->dataLife.is_alive = false;
-            if (!model()->dataLife.garbage_ready) {
-                _postDeathUniqueEvent(show_effect);
-                model()->dataLife.garbage_ready = true;
-            }
-        }
-    }
-}
-
-///* virtual */
-//void SpaceObject::RenderInfoInSpace(const jeti::Renderer&, const glm::vec2& scroll_coords, float scale)
-//{
-//    UpdateInfo(); // virtual
-//    glm::vec2 pos(center().x - scroll_coords.x, center().y - scroll_coords.y);
-//    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, pos/scale);
-//}
-
-//void SpaceObject::RenderInfo(const glm::vec2& center)
-//{
-//    UpdateInfo(); // virtual
-//    jeti::drawInfoIn2Column(m_Info.title_list, m_Info.value_list, center);
-//}
-
-} // namespace control
