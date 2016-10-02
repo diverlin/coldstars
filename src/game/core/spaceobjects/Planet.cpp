@@ -35,7 +35,7 @@
 
 //#include <jeti/Render.hpp>
 
-#include <ceti/descriptor/macro.hpp>
+#include <ceti/serialization/macro.hpp>
 
 namespace model {
 

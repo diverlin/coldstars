@@ -1,8 +1,6 @@
 #include "AddToStarsystemDescriptor.hpp"
 
-#include <ceti/descriptor/macro.hpp>
-
-#include <sstream>
+#include <ceti/serialization/macro.hpp>
 
 AddToStarsystemDescriptor::AddToStarsystemDescriptor(const int_t& owner,
                                                      const int_t& object,
