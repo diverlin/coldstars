@@ -22,7 +22,24 @@
 //#include <jeti/Render.hpp>
 
 #include <ceti/Logger.hpp> 
+#include <ceti/descriptor/macro.hpp>
 //#include <ceti/StringUtils.hpp>
+
+
+namespace model {
+
+Planetoid::Planetoid(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Planetoid::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace model
 
 namespace control {
 

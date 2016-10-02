@@ -24,7 +24,24 @@
 #include <managers/EntityManager.hpp>
 
 #include <ceti/Logger.hpp>
+#include <ceti/descriptor/macro.hpp>
 //#include <math/rand.hpp>
+
+
+namespace model {
+
+SpaceObject::SpaceObject(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+SpaceObject::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace model
 
 
 namespace control {

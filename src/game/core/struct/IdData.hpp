@@ -19,8 +19,10 @@
 #pragma once
 
 #include <ceti/type/IdType.hpp>
-
 #include <types/EntityTypes.hpp>
+
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
 
 namespace core {
 
@@ -28,6 +30,15 @@ struct Id {
     type::entity type = type::entity::NONE_ID;
     type::entity subtype = type::entity::NONE_ID;
     type::entity subsubtype = type::entity::NONE_ID;
+
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & type;
+        ar & subtype;
+        ar & subsubtype;
+    }
 };
 
 } // namespace core

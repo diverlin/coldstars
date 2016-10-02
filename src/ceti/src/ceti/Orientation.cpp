@@ -17,8 +17,24 @@
 */
 
 #include "Orientation.hpp"
+#include <ceti/descriptor/macro.hpp>
 
 namespace ceti {
+
+namespace model {
+
+Orientation::Orientation(const std::string& data)
+{
+    MACRO_READ_SERIALIZED_DATA
+}
+
+std::string
+Orientation::data() const
+{
+    MACRO_SAVE_SERIALIZED_DATA
+}
+
+} // namespace model
 
 namespace control {
 

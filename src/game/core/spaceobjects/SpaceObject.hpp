@@ -24,6 +24,10 @@
 #include <struct/LifeData.hpp>
 #include <types/PlaceTypes.hpp>
 
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+
+
 class Starsystem;
 
 struct UnresolvedDataSpaceObject
@@ -38,6 +42,11 @@ namespace model {
 class SpaceObject : public ceti::model::Orientation, public core::model::Base
 {
 public:
+    SpaceObject() = default;
+    ~SpaceObject() = default;
+    SpaceObject(const std::string& data);
+    std::string data() const;
+
     LifeData dataLife;
 
     int_t parent = NONE;
@@ -47,6 +56,21 @@ public:
 
     int mass = 0;
     int expirienceToGive = 0;
+
+private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+        ar & boost::serialization::base_object<ceti::model::Orientation>(*this);
+        ar & boost::serialization::base_object<core::model::Base>(*this);
+        ar & dataLife;
+        ar & parent;
+        ar & starsystem;
+        ar & place;
+        ar & mass;
+        ar & expirienceToGive;
+    }
 };
 
 } // namespace model
