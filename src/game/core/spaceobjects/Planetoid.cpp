@@ -22,7 +22,7 @@
 //#include <jeti/Render.hpp>
 
 #include <ceti/Logger.hpp> 
-#include <ceti/descriptor/macro.hpp>
+#include <ceti/serialization/macro.hpp>
 //#include <ceti/StringUtils.hpp>
 
 

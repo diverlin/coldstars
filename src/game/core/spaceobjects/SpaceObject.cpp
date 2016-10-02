@@ -24,7 +24,7 @@
 #include <managers/EntityManager.hpp>
 
 #include <ceti/Logger.hpp>
-#include <ceti/descriptor/macro.hpp>
+#include <ceti/serialization/macro.hpp>
 //#include <math/rand.hpp>
 
 

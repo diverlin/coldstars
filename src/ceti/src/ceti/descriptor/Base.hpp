@@ -18,8 +18,7 @@
 
 #pragma once
 
-#include "macro.hpp"
-
+#include <ceti/serialization/macro.hpp>
 #include <ceti/type/IdType.hpp>
 #include <ceti/IdGenerator.hpp>
 

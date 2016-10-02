@@ -19,7 +19,7 @@
 #include "Base.hpp"
 #include <ceti/Logger.hpp>
 #include <ceti/StringUtils.hpp>
-#include <ceti/descriptor/macro.hpp>
+#include <ceti/serialization/macro.hpp>
 
 namespace core {
 
